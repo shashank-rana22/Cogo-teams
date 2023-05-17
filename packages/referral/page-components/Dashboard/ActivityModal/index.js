@@ -1,248 +1,60 @@
-import { Modal, Pagination } from '@cogoport/components';
+import { Modal, Pagination, Placeholder } from '@cogoport/components';
 import { IcCCogoCoin } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { format, startCase, isEmpty } from '@cogoport/utils';
 
-import { ACTIVITY_STATUS } from '../../../constants';
+import { ACTIVITY_STATUS, networkEmptyState } from '../../../constants';
+import useGetReferralTransactions from '../../../hooks/useGetReferralTransactions';
 
 import styles from './styles.module.css';
 
+const func = () => {};
 function ActivityModal({
-	activityModal = false, setActivityModal = () => {},
+	activityModal = false, setActivityModal = func,
+	userDate = {},
+
 }) {
+	const {
+		transactionsData = {}, transactionsLoading = false,
+		setPagination = () => {},
+	} = useGetReferralTransactions({ userDate });
+
+	const { list = [], page, total_count, page_limit } = transactionsData;
+
 	const handleClose = () => {
 		setActivityModal(false);
 	};
 
-	const list = [
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'active',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'provisional',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'inactive',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'rewarded',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'active',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'rewarded',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'inactive',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'provisional',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'inactive',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'rewarded',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'active',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'rewarded',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'active',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'rewarded',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'inactive',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'rewarded',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'inactive',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'rewarded',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
+	const emptyCheck = isEmpty(list);
 
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'active',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'rewarded',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'inactive',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'rewarded',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-		{
-			id             : '95f836aa-0d0b-4dea-9d4c-30cf6952d852',
-			nominee_id     : 'a55eff34-33e1-47e0-a3b2-de150166492b',
-			beneficiary_id : '9ccaf8d8-4a62-4bf7-a27b-e8ca6b611ab5',
-			source         : 'kyc_verified',
-			source_id      : '6ebe30cb-6961-4b88-a055-27ae6a9ddc04',
-			reward_type    : 'cogopoint',
-			reward_id      : '35383a5d-fdb5-40d0-8d5f-97bd95c2ef59',
-			status         : 'active',
-			level          : null,
-			reward         : 20000.0,
-			reward_details : null,
-			nominee_type   : 'user',
-			state          : 'rewarded',
-			created_at     : '2023-05-15T15:26:07.772Z',
-			updated_at     : '2023-05-15T15:26:07.772Z',
-			rewarded_at    : null,
-		},
-	];
-	return (
-		<Modal
-			size="sm"
-			show={activityModal}
-			closeOnOuterClick={handleClose}
-			onClose={handleClose}
-			placement="right"
-			className={styles.modal_container}
-		>
-			<Modal.Header title="Activity Logs" />
-			<Modal.Body>
+	function LoadingState() {
+		return (
+			<>
+				<div className={styles.activity_date}>
+					<div className={styles.dot} />
+					<div className={styles.durations}>
+						<Placeholder height="12px" width="90px" margin="0px 0px 0px 5px" />
+					</div>
+				</div>
+				<div className={styles.main_card}>
+					<div
+						className={styles.loading_card}
+					/>
+				</div>
+			</>
+		);
+	}
+
+	function EmptyState() {
+		return (
+			<div className={styles.empty_state}>
+				<img src={networkEmptyState} alt="empty-state" width="120px" height="120px" />
+			</div>
+		);
+	}
+
+	function TransactionalList() {
+		return (
+			<>
 				{(list || []).map((item) => {
 					const { state = '', created_at = '', source = '', reward = 0 } = item || {};
 					return (
@@ -289,18 +101,55 @@ function ActivityModal({
 						</>
 					);
 				})}
+			</>
+		);
+	}
+
+	const componentMapping = () => {
+		if (transactionsLoading) {
+			return (
+				<>
+					{[...Array(4)].map((key) => (
+						<LoadingState key={key} />
+					))}
+				</>
+			);
+		}
+		if (!emptyCheck) {
+			return <TransactionalList />;
+		}
+		return <EmptyState />;
+	};
+
+	return (
+		<Modal
+			size="sm"
+			show={activityModal}
+			closeOnOuterClick={handleClose}
+			onClose={handleClose}
+			placement="right"
+			className={styles.modal_container}
+		>
+			<Modal.Header title="Activity Logs" />
+
+			<Modal.Body className={styles.modal_body}>
+				{componentMapping()}
 
 			</Modal.Body>
-			<Modal.Footer>
-				<Pagination
-					type="number"
-					// className={styles.pagination_container}
-					// currentPage={page || 0}
-					// totalItems={total_count || 0}
-					// pageSize={page_limit || 10}
-					// onPageChange={setListPagination}
-				/>
-			</Modal.Footer>
+			{!emptyCheck && (
+				<Modal.Footer>
+					<Pagination
+						type="number"
+						disabled={transactionsLoading}
+						className={styles.pagination_container}
+						currentPage={page || 0}
+						totalItems={total_count || 0}
+						pageSize={page_limit || 10}
+						onPageChange={setPagination}
+					/>
+				</Modal.Footer>
+			)}
+
 		</Modal>
 	);
 }

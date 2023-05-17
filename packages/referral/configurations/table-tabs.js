@@ -1,19 +1,20 @@
-const tableTabs = () => {
+const tableTabs = ({ listCountData = {} }) => {
+	const { invited = 0, user = 0, affiliate = 0 } = listCountData;
 	const tabs = [
 		{
 			name  : 'invited',
 			title : 'Invited',
-			badge : 20,
+			badge : invited,
 		},
 		{
 			name  : 'user',
 			title : 'Users',
-			badge : 20,
+			badge : user,
 		},
 		{
 			name  : 'affiliate',
 			title : 'Affiliate',
-			badge : 20,
+			badge : affiliate,
 		},
 	];
 	return { tabs };

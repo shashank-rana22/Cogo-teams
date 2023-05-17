@@ -29,9 +29,12 @@ function ListTables({
 	showPopover = {},
 	setShowPopover = func,
 	setActivityModal = func,
+	listCountData = {},
+	setUserData = func,
+
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
-	const { tabs = [] } = tableTabs();
+	const { tabs = [] } = tableTabs({ listCountData });
 
 	const { list = [], page, total_count, page_limit } = listReferals;
 
@@ -47,25 +50,28 @@ function ListTables({
 					onChange={(val) => setSearchValue(val)}
 					className={styles.input_field}
 				/>
-				<Popover
-					placement="left"
-					render={(
-						<FiltersContent
-							setFilterVisible={setFilterVisible}
-							filter={filter}
-							setFilter={setFilter}
-							getListReferrals={getListReferrals}
-							setListPagination={setListPagination}
+
+				{activeTab === 'user' && (
+					<Popover
+						placement="left"
+						render={(
+							<FiltersContent
+								setFilterVisible={setFilterVisible}
+								filter={filter}
+								setFilter={setFilter}
+								getListReferrals={getListReferrals}
+								setListPagination={setListPagination}
+							/>
+						)}
+						visible={filterVisible}
+						onClickOutside={() => setFilterVisible(false)}
+					>
+						<IcMFilter
+							className={styles.filter_icon}
+							onClick={() => setFilterVisible(!filterVisible)}
 						/>
-					)}
-					visible={filterVisible}
-					onClickOutside={() => setFilterVisible(false)}
-				>
-					<IcMFilter
-						className={styles.filter_icon}
-						onClick={() => setFilterVisible(!filterVisible)}
-					/>
-				</Popover>
+					</Popover>
+				)}
 
 			</div>
 			<div className={styles.table_container}>
@@ -91,6 +97,8 @@ function ListTables({
 										showPopover,
 										setShowPopover,
 										setActivityModal,
+										setUserData,
+										list,
 									})}
 									data={list || []}
 									loading={listLoading}

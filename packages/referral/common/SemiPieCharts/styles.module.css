@@ -8,12 +8,19 @@
 
 .view {
 	position: absolute;
-	top: 35%;
 	left: 38%;
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
 	text-align: center;
+}
+
+.empty_count {
+	top: 55%;
+}
+
+.non_empty_count {
+	top: 35%;
 }
 
 .number {
@@ -30,4 +37,22 @@
 .chart_styles {
 	width: 200px;
 	height: 200px;
+}
+
+.bar_over_flow {
+	position: relative;
+	width: 200px;
+	height: 110px;
+	margin-top: 12px;
+	overflow: hidden;
+}
+
+.bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 200px;
+	height: 200px;
+	border: 18px solid #f8f2e7;
+	border-radius: 50%;
 }

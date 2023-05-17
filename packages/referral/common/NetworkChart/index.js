@@ -14,7 +14,7 @@ function NetworkChart({
 }) {
 	const [zoom, setZoom] = useState(0.8);
 
-	const [dimensions, setdimensions] = useState();
+	const [dimensions, setDimensions] = useState();
 
 	const [translate, setTranslate] = useState({ x: 0, y: 0 });
 
@@ -85,7 +85,7 @@ function NetworkChart({
 
 		const { width, height } = refData || {};
 
-		setdimensions({
+		setDimensions({
 			width,
 			height,
 		});

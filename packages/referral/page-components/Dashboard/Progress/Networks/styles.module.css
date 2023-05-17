@@ -7,3 +7,9 @@
 	height: 200px;
 	padding-top: 10px;
 }
+
+.empty_state {
+	display: flex;
+	justify-content: center;
+	margin-top: 25px;
+}

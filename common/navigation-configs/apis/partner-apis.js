@@ -12044,35 +12044,12 @@ const partner = {
 			service_name : 'tickets',
 		},
 	],
-	referral_configuration: [
-		{
-			api          : 'list_promotions',
-			access_type  : 'private',
-			service_name : 'promotion',
-		},
-		{
-			api          : 'create_referral_configuration',
-			access_type  : 'private',
-			service_name : 'referral',
-		},
-		{
-			api          : 'get_referral_configuration',
-			access_type  : 'private',
-			service_name : 'referral',
-		},
-
-	],
 
 	referral_dashboard: [
 		{
 			api          : 'get_referrer_network_node',
 			access_type  : 'private',
 			service_name : 'referral',
-		},
-		{
-			api          : 'create_communication',
-			access_type  : 'private',
-			service_name : 'communication',
 		},
 		{
 			api          : 'get_referrer_network',
@@ -12091,6 +12068,11 @@ const partner = {
 		},
 		{
 			api          : 'list_referral_mappings',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_transactions',
 			access_type  : 'private',
 			service_name : 'referral',
 		},

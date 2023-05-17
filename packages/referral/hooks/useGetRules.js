@@ -20,7 +20,7 @@ const useGetRules = (key) => {
 
 				if (res?.data?.data !== null) setIsEdit(true);
 			} catch (error) {
-				console.log('error', error);
+				console.log(error);
 			}
 		},
 		[key, trigger],

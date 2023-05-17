@@ -2226,15 +2226,6 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.referral_dashboard,
 			},
-			{
-				key           : 'referral-configuration',
-				title         : 'Configuration',
-				href          : '/referral/configuration',
-				as            : '/referral/configuration',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.referral_configuration,
-			},
 		],
 	},
 	saas_tools: {

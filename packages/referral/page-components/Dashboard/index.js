@@ -4,6 +4,7 @@ import { useState } from 'react';
 
 import { USER_TYPES } from '../../constants';
 import useGetAdminStats from '../../hooks/useGetAdminStats';
+import useGetListCount from '../../hooks/useGetListCount';
 import useGetListReferrals from '../../hooks/useGetListReferrals';
 
 import ActivityModal from './ActivityModal';
@@ -18,7 +19,7 @@ function Dashboard() {
 	const [activeTab, setActiveTab] = useState('invited');
 	const [filter, setFilter] = useState('');
 	const [showPopover, setShowPopover] = useState({});
-	console.log('showPopover:', showPopover);
+	const [userDate, setUserData] = useState({});
 	const [activityModal, setActivityModal] = useState(false);
 
 	const {
@@ -33,6 +34,7 @@ function Dashboard() {
 		getListReferrals = () => {},
 	} = useGetListReferrals({ filter, searchValue, activeTab });
 
+	const { listCountData = {} } = useGetListCount();
 	return (
 		<>
 			<div className={styles.header}>
@@ -73,10 +75,16 @@ function Dashboard() {
 					showPopover={showPopover}
 					setShowPopover={setShowPopover}
 					setActivityModal={setActivityModal}
+					listCountData={listCountData}
+					setUserData={setUserData}
 				/>
 			</div>
 
-			<ActivityModal activityModal={activityModal} setActivityModal={setActivityModal} />
+			<ActivityModal
+				activityModal={activityModal}
+				setActivityModal={setActivityModal}
+				userDate={userDate}
+			/>
 
 		</>
 	);

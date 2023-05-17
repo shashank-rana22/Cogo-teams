@@ -24,6 +24,7 @@ function RenderForeignObjectNode({
 	} = nodeDatum || {};
 
 	const { collapsed: collapse = true } = rd3t || {};
+
 	const [collapseState, setCollapseState] = useState(true);
 
 	const topPerformer = topPerformerId === topuser;

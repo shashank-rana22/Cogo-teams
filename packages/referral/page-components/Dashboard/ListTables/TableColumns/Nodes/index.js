@@ -1,7 +1,9 @@
 import styles from './styles.module.css';
 
-function Nodes({ item = {}, type = '' }) {
-	const { immediate_child_count = 0, total_child_count = 0, cogopoints = {}	} = item;
+function Nodes({ item = {}, type = '', list = [] }) {
+	const { immediate_child_count = 0, total_child_count = 0, cogopoints = {}, direct_data = {} } = item;
+
+	const { affiliate_count = 0, active_user_count = 0, reset_user_count = 0 } = direct_data;
 
 	const {
 		network_cogopoint_earned = 0,
@@ -13,23 +15,19 @@ function Nodes({ item = {}, type = '' }) {
 	const directNode = [
 		{
 			title : 'Affiliate',
-			count : 2,
+			count : affiliate_count,
 		},
 		{
 			title : 'Active',
-			count : 2,
+			count : active_user_count,
 		},
 		{
 			title : 'Inactive',
-			count : 2,
+			count : reset_user_count,
 		},
 	];
 
 	const networkNode = [
-		{
-			title : 'Levels',
-			count : 2,
-		},
 		{
 			title : 'Nodes',
 			count : total_child_count - immediate_child_count,
@@ -72,9 +70,11 @@ function Nodes({ item = {}, type = '' }) {
 		<>
 			{(mappingData || []).map((node) => (
 				<div className={styles.node} key={node}>
-					<div className={styles.node_title}>
-						{node.title}
-					</div>
+					{list?.[0] ? (
+						<div className={styles.node_title}>
+							{node.title}
+						</div>
+					) : ''}
 					<div className={styles.node_count}>
 						{node.count}
 					</div>

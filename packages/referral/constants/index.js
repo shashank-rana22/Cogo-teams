@@ -45,3 +45,4 @@ export const ACTIVITY_STATUS = {
 
 export const listEmptyState = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
 export const cogopointImg = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg';
+export const networkEmptyState = 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg';

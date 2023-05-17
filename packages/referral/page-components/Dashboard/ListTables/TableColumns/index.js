@@ -20,6 +20,7 @@ function ShowButtons({
 	setActivityModal = func,
 	showPopover = {},
 	setShowPopover = func,
+	setUserData = func,
 }) {
 	const buttonOptions = ListButtons({
 		item,
@@ -39,15 +40,16 @@ function ShowButtons({
 						size="sm"
 						options={buttonOptions}
 						direction="vertical"
+
 					/>
 				)}
 			>
 				<div>
 					<IcMOverflowDot
-						onClick={() => setShowPopover(
-							(p) => (
-								p === item?.id ? {} : item),
-						)}
+						onClick={() => {
+							setShowPopover(item);
+							setUserData(item);
+						}}
 						className={styles.dots_icon}
 					/>
 				</div>
@@ -60,6 +62,8 @@ const TableColumns = ({
 	activeTab = '', showPopover = {},
 	setShowPopover = func,
 	setActivityModal = func,
+	setUserData = func,
+	list = [],
 }) => {
 	const columns = [
 		{
@@ -121,7 +125,7 @@ const TableColumns = ({
 			Header   : 'TYPE',
 			accessor : (item = {}) => (
 				<div className={styles.more_count}>
-					{TYPE[item?.organization_type]}
+					{TYPE[item?.organization_type?.[0]]}
 				</div>
 			),
 			conditions: ['user'],
@@ -135,15 +139,21 @@ const TableColumns = ({
 				} = item;
 				return (
 					<div className={styles.invented_by}>
-						<Tooltip content="Ashish- Cogoverse" placement="bottom">
-							<div className={styles.user_name}>{startCase(referrer_data?.name)}</div>
-						</Tooltip>
-						<div className={styles.invited_date}>
-							{format(
-								created_at,
-								'dd/MM/yy',
-							)}
-						</div>
+
+						{referrer_data?.name ? (
+							<>
+								<Tooltip content={startCase(referrer_data?.name)} placement="bottom">
+									<div className={styles.user_name}>{startCase(referrer_data?.name)}</div>
+								</Tooltip>
+								<div className={styles.invited_date}>
+									{format(
+										created_at,
+										'dd/MM/yy',
+									)}
+								</div>
+							</>
+						) : '__' }
+
 					</div>
 				);
 			},
@@ -151,9 +161,9 @@ const TableColumns = ({
 		},
 		{
 			Header   : 'DIRECT NODES',
-			accessor : (item = {}) => (
+			accessor : ({ item = {} }) => (
 				<div className={styles.node_container}>
-					{Nodes({ item, type: 'direct_node' })}
+					{Nodes({ list, item, type: 'direct_node' })}
 				</div>
 			),
 			conditions: ['user', 'affiliate'],
@@ -162,7 +172,7 @@ const TableColumns = ({
 			Header   : 'NETWORK',
 			accessor : (item = {}) => (
 				<div className={styles.node_container}>
-					{Nodes({ item, type: 'network_node' })}
+					{Nodes({ list, item, type: 'network_node' })}
 				</div>
 			),
 			conditions: ['user', 'affiliate'],
@@ -171,7 +181,7 @@ const TableColumns = ({
 			Header   : 'COGOPOINTS ALLOCATED',
 			accessor : (item = {}) => (
 				<div className={styles.node_container}>
-					{Nodes({ item, type: 'alloted_cogopoints' })}
+					{Nodes({ list, item, type: 'alloted_cogopoints' })}
 				</div>
 
 			),
@@ -181,7 +191,7 @@ const TableColumns = ({
 			Header   : 'COGOPOINTS ON HOLD',
 			accessor : (item = {}) => (
 				<div className={styles.node_container}>
-					{Nodes({ item, type: 'holded_cogopoints' })}
+					{Nodes({ list, item, type: 'holded_cogopoints' })}
 				</div>
 			),
 			conditions: ['user', 'affiliate'],
@@ -230,7 +240,7 @@ const TableColumns = ({
 		},
 		{
 			Header   : ' ',
-			accessor : (item) => (
+			accessor : (item = {}) => (
 				<div className={styles.show_details} key={item?.id}>
 					<ShowButtons
 						item={item}
@@ -238,6 +248,7 @@ const TableColumns = ({
 						showPopover={showPopover}
 						setShowPopover={setShowPopover}
 						setActivityModal={setActivityModal}
+						setUserData={setUserData}
 					/>
 				</div>
 			),

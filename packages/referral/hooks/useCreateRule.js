@@ -28,7 +28,7 @@ const useCreateRule = (apiState, setApiState, setIsEdit) => {
 			setIsEdit(true);
 			Toast.success(`Rule ${apiState} successfully`);
 		} catch (error) {
-			console.log('error', error);
+			console.log(error);
 		}
 	};
 

@@ -1,11 +1,15 @@
 const filterOptopns = [
 	{
 		label : 'IE',
-		value : 'ie',
+		value : 'importer_exporter',
 	},
 	{
 		label : 'CP',
-		value : 'cp',
+		value : 'channel_partner',
+	},
+	{
+		label : 'SP',
+		value : 'service_provider',
 	},
 
 ];

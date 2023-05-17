@@ -1,4 +1,7 @@
+import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -10,50 +13,45 @@ const ListButtons = ({
 	setActivityModal = func,
 	setShowPopover = func,
 }) => {
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 	const router = useRouter();
-	const referrer_id = '35254cf5-6b35-41fb-8178-553bf708cc44';
+
+	const { organization_data = [], referee_data = {}, immediate_child_count = 0 } = item;
+
+	const emptyOrg = isEmpty(organization_data);
+
+	const { account_type = '', tags = [], id = '' } = organization_data?.[0] || [];
+
+	const checkPartner = tags?.includes('partner');
+
+	const UserProfile = () => {
+		if (account_type === 'importer_exporter' && checkPartner) {
+			window.open(`/${partnerId}/prm/${id}`, '_blank');
+		} else if (account_type === 'importer_exporter' && !checkPartner) {
+			window.open(`/${partnerId}/details/demand/${id}`, '_blank');
+		}
+	};
+
 	const buttonOptions = [
-		// {
-		// 	children: (
-		// 		<div className={styles.label}>
-		// 			Reassign Nodes
-		// 		</div>
-		// 	),
-		// 	onClick    : () => {},
-		// 	conditions : ['invited', 'affiliate', 'employees', 'users'],
-		// },
 		{
 			children: (
-				<div className={styles.label}>
-					Show Network
-				</div>
+				<Button disabled={immediate_child_count === 0} size="sm" themeType="tertiary">
+					<div className={styles.label}>
+						Show Network
+					</div>
+				</Button>
 			),
 			onClick: () => {
-				router.push(
-					'/referral/dashboard/[referrer_id]',
-					`/referral/dashboard/${referrer_id}`,
-				);
+				if (immediate_child_count !== 0) {
+					setShowPopover({});
+					router.push(
+						'/referral/dashboard/[referrer_id]',
+						`/referral/dashboard/${referee_data?.id}`,
+					);
+				}
 			},
 			conditions: ['user', 'affiliate'],
 		},
-		// {
-		// 	children: (
-		// 		<div className={styles.label}>
-		// 			Disable
-		// 		</div>
-		// 	),
-		// 	onClick    : () => {},
-		// 	conditions : ['affiliate', 'employees'],
-		// },
-		// {
-		// 	children: (
-		// 		<div className={styles.label}>
-		// 			Enable
-		// 		</div>
-		// 	),
-		// 	onClick    : () => {},
-		// 	conditions : ['invited', 'users'],
-		// },
 		{
 			children: (
 				<div className={styles.label}>
@@ -62,27 +60,26 @@ const ListButtons = ({
 			),
 			onClick: () => {
 				setActivityModal(true);
-				setShowPopover(false);
+				setShowPopover({});
 			},
 			conditions: ['affiliate', 'user'],
+
 		},
-		// {
-		// 	children: (
-		// 		<div className={styles.label}>
-		// 			Reward Report
-		// 		</div>
-		// 	),
-		// 	onClick    : () => {},
-		// 	conditions : ['affiliate', 'employees', 'users'],
-		// },
 		{
 			children: (
-				<div className={styles.label}>
-					View Profile
-				</div>
+
+				<Button disabled={emptyOrg} size="sm" themeType="tertiary">
+					<div className={styles.label}>
+						View Profile
+					</div>
+				</Button>
 			),
-			onClick    : () => {},
-			conditions : ['affiliate', 'user'],
+			onClick: () => {
+				if (!emptyOrg) {
+					UserProfile();
+				}
+			},
+			conditions: ['user'],
 		},
 
 	];

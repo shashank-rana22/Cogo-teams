@@ -1,6 +1,6 @@
 .full_tree_wrapper {
 	position: relative;
-	height: 80vh;
+	height: 85vh;
 }
 
 .button_container {
@@ -160,7 +160,6 @@
 }
 
 .user_name {
-	font-size: 14px;
 	font-weight: 600;
 	color: #221f20;
 }
@@ -228,7 +227,6 @@
 .company_name {
 	margin-right: 8px;
 	overflow: hidden;
-	font-size: 14px;
 	font-weight: 500;
 	text-overflow: ellipsis;
 	white-space: nowrap;
