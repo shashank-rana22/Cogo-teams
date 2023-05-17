@@ -130,21 +130,19 @@ function Item({
 						</div>
 
 						<div className={styles.AddressText}>
-							{billing_address?.address
-						|| 'VOLTAS LIMITED UPBG UNIT 1, PLOT NO 2, SECTOR 8, II E PANT NAGAR, UDHAM SINGH NAGAR,'}
-
+							{billing_address?.address}
 						</div>
 					</div>
 
 					<div className={styles.GstNumber}>
 						GST Number :
-						{billing_address?.tax_number || '05AAACV2809D1ZS'}
+						{billing_address?.tax_number}
 					</div>
 
 					<div className={styles.InvoiceCurrency}>
 						Invoice Currency:
 						{' '}
-						{invoice_currency || 'INR'}
+						{invoice_currency}
 					</div>
 
 					{invoiceAmount && (

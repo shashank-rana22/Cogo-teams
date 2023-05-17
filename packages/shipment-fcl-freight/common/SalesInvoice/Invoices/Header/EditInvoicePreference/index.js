@@ -3,9 +3,9 @@ import React, { useState } from 'react';
 
 import AddInvoicingParty from '../../../../AdditionalServices/components/AddIp/AddInvoicingParty';
 
-// import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
 import ListInvoicePreferences from './ListInvoicePreferences';
 import styles from './styles.module.css';
+import useEditInvoicePref from './useEditInvoicePref';
 
 function EditInvoicePreference({
 	shipment_data = {},
@@ -27,18 +27,18 @@ function EditInvoicePreference({
 		return { ...ip, services: ipService };
 	});
 
-	// const {
-	// 	selectedParties,
-	// 	setSelectedParties,
-	// 	handleInvoicingPartyAdd,
-	// 	handleEditPreferences,
-	// 	...rest
-	// } = useEditInvoicePref({
-	// 	invoicing_parties: invoiceParties,
-	// 	shipment_data,
-	// 	setShow,
-	// 	refetch,
-	// });
+	const {
+		selectedParties,
+		setSelectedParties,
+		handleInvoicingPartyAdd,
+		handleEditPreferences,
+		...rest
+	} = useEditInvoicePref({
+		invoicing_parties: invoiceParties,
+		shipment_data,
+		setShow,
+		refetch,
+	});
 	const organizationDetails = {
 		id         : shipment_data?.importer_exporter?.id || undefined,
 		country_id : shipment_data?.importer_exporter?.country_id || undefined,
@@ -50,7 +50,7 @@ function EditInvoicePreference({
 	}
 
 	const handleClose = () => {
-		// setSelectedParties(rest?.formattedIps);
+		setSelectedParties(rest?.formattedIps);
 		setShow(false);
 		setAddInvoicingParty(false);
 	};
@@ -72,7 +72,7 @@ function EditInvoicePreference({
 					show={show}
 					onClose={() => handleClose()}
 					onOuterClick={() => handleClose()}
-					// closable={!rest?.loading}
+					closable={!rest?.loading}
 				>
 					<Modal.Header title="EDIT INVOICING PREFERENCE" />
 					<Modal.Body className={isIE ? 'ie' : ''}>
@@ -88,10 +88,10 @@ function EditInvoicePreference({
 
 							<ListInvoicePreferences
 								shipmentData={shipment_data}
-								// invoicingParties={selectedParties}
+								invoicingParties={selectedParties}
 								raw_invoicing_parties={invoiceParties}
 								isIE={isIE}
-								// {...rest}
+								{...rest}
 							/>
 
 							{addInvoicingParty ? (
@@ -108,7 +108,7 @@ function EditInvoicePreference({
 											<AddInvoicingParty
 												shipmentData={shipment_data}
 												organizationDetails={organizationDetails}
-											// updateInvoicingParty={(ip) => handleInvoicingPartyAdd(ip)}
+												updateInvoicingParty={(ip) => handleInvoicingPartyAdd(ip)}
 												primary_service={shipment_data?.shipment_type}
 												isIE={isIE}
 											/>
@@ -126,7 +126,6 @@ function EditInvoicePreference({
 						>
 							Cancel
 						</Button>
-
 						<Button
 							className=" primary md ie_submit_invoice_preference"
 						>

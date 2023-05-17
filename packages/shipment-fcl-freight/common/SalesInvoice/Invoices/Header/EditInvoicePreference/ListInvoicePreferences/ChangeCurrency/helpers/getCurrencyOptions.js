@@ -1,7 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
-import { useState } from 'react';
 
 const geo = getGeoConstants();
 
@@ -36,9 +35,7 @@ const invoiceCurrencyMappings = {
 };
 
 const getCurrencyOptions = (invoice) => {
-	const [errors, setErrors] = useState({});
-
-	const currencyOptionsOld =		invoiceCurrencyMappings?.freight_invoice_currency?.[
+	const currencyOptionsOld =	invoiceCurrencyMappings?.freight_invoice_currency?.[
 		invoice?.country_code || geo.country.code
 	] || invoiceCurrencyMappings?.freight_invoice_currency?.others;
 
@@ -47,13 +44,7 @@ const getCurrencyOptions = (invoice) => {
 		value : item,
 	}));
 
-	const onError = (err) => {
-		setErrors(err);
-	};
-
 	return {
-		errors,
-		onError,
 		currencyOptions,
 	};
 };

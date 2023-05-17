@@ -205,6 +205,19 @@
 	}
 }
 
+.invoice_status{
+	font-weight: 400;
+	font-size: 10px;
+	line-height: 16px;
+	color: #333333;
+	background: #fbe6e6;
+	border-radius: 4px;
+	width: max-content;
+	padding: 4px 7px;
+	margin-bottom: 6px;
+	white-space: nowrap;
+}
+
 .flex_container{
 	display: flex;
 	align-items: center;

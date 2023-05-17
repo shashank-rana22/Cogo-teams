@@ -24,16 +24,17 @@ function ListInvoicePreferences({
 
 	return (
 		<div className="ie_main_invoice_list">
-			{/* {(invoicingParties || []).map((invoice) => ( */}
-			<InvoiceItem
-				// invoice={invoice}
-				shipmentData={shipmentData}
-				{...rest}
-				openedService={openedService}
-				setOpenedService={setOpenedService}
-				allTakenServices={allTakenServices}
-			/>
-			{/* ))} */}
+			{(invoicingParties || []).map((invoice) => (
+				<InvoiceItem
+					key={invoice?.id}
+					invoice={invoice}
+					shipmentData={shipmentData}
+					{...rest}
+					openedService={openedService}
+					setOpenedService={setOpenedService}
+					allTakenServices={allTakenServices}
+				/>
+			))}
 		</div>
 	);
 }
