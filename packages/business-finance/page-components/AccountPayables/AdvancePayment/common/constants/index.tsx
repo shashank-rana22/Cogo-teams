@@ -1,7 +1,6 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
-	IcCCountryIndia, IcCCountryNetherland, IcCCountrySingapore,
-	IcCCountryVietnam, IcMFdollar, IcMFdong, IcMFeuro, IcMFpound, IcMFrupee, IcMFsingaporeDollar,
+	IcMFdollar, IcMFdong, IcMFeuro, IcMFpound, IcMFrupee, IcMFsingaporeDollar,
 } from '@cogoport/icons-react';
 import { ComponentType } from 'react';
 
@@ -48,31 +47,3 @@ export const CURRENCY_DATA = Object.keys(CURRENCY_DATA_MAPPING || []).map(
 		text : currency,
 	}),
 );
-
-export const ENTITY_MAPPING = [
-	{
-		entityCode : '101',
-		label      : '101 - COGO FREIGHT PVT LTD',
-		icon       : <IcCCountryIndia height={20} width={20} />,
-	},
-	{
-		entityCode : '201',
-		label      : '201 - Cogoport Netherlands',
-		icon       : <IcCCountryNetherland height={20} width={20} />,
-	},
-	{
-		entityCode : '301',
-		label      : '301 - COGOPORT PRIVATE LIMITED',
-		icon       : <IcCCountryIndia height={20} width={20} />,
-	},
-	{
-		entityCode : '401',
-		label      : '401 - Cogo Universe Pte. Ltd',
-		icon       : <IcCCountrySingapore height={20} width={20} />,
-	},
-	{
-		entityCode : '501',
-		label      : '501 - Cogoport Vietnam',
-		icon       : <IcCCountryVietnam height={20} width={20} />,
-	},
-];

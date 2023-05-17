@@ -1,9 +1,8 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMAirport, IcMTransport, IcMShip, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
-
-import { keyValue } from '../../../constants';
 
 import CardData from './CardData';
 import styles from './styles.module.css';
@@ -57,6 +56,8 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 		setIsAccordionActive(!isAccordionActive);
 	};
 
+	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
+
 	const {
 		currency:oceanCurrency = '', openInvoiceAmount:oceanOpen = '',
 		tradeType:oceanTradeType = [],
@@ -83,7 +84,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 		{
 			label        : 'Ocean',
 			amount       : oceanOpen,
-			currency     : oceanCurrency || keyValue[entityCode],
+			currency     : oceanCurrency || currency,
 			openInvoices : oceanOpen || 0,
 			tradeType    : oceanTradeType,
 			onAccount    : 'onAccountAmount',
@@ -91,7 +92,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 		},
 		{
 			label        : 'Air',
-			currency     : airCurrency || keyValue[entityCode],
+			currency     : airCurrency || currency,
 			amount       : airOpen,
 			openInvoices : airOpen || 0,
 			tradeType    : airTradeType,
@@ -100,7 +101,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 		},
 		{
 			label        : 'Surface',
-			currency     : surfaceCurrency || keyValue[entityCode],
+			currency     : surfaceCurrency || currency,
 			amount       : surfaceOpen,
 			tradeType    : surfaceTradeType,
 			openInvoices : surfaceOpen || 0,
@@ -113,18 +114,18 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 		{
 			label    : 'Ocean',
 			amount   : oceanOpen || 0,
-			currency : oceanCurrency || keyValue[entityCode],
+			currency : oceanCurrency || currency,
 			icon     : <IcMShip className={styles.icon_container} />,
 		},
 		{
 			label    : 'Air',
-			currency : airCurrency || keyValue[entityCode],
+			currency : airCurrency || currency,
 			amount   : airOpen || 0,
 			icon     : <IcMAirport className={styles.icon_container} />,
 		},
 		{
 			label    : 'Surface',
-			currency : surfaceCurrency || keyValue[entityCode],
+			currency : surfaceCurrency || currency,
 			amount   : surfaceOpen || 0,
 			icon     : <IcMTransport className={styles.icon_container} />,
 		},
@@ -167,9 +168,9 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 
 						{outstandingLoading
 
-							? [1, 2, 3].map(() => (
+							? [1, 2, 3].map((item) => (
 
-								<div className={styles.card}>
+								<div key={item} className={styles.card}>
 									<div className={styles.row}>
 										<Placeholder />
 
@@ -253,6 +254,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 
 						{getCardData.map((item) => (
 							<div
+								key={item.label}
 								className={item.label === tab.key ? styles.on_click_ocean_card : styles.ocean_card}
 								onClick={() => {
 									setTab((prev) => ({

@@ -1,7 +1,8 @@
 import { Modal, Button, Radio } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
-import { CURRENCY_DATA, ENTITY_MAPPING } from '../common/constants';
+import { CURRENCY_DATA } from '../common/constants';
 import useGetCreatePayRunType from '../hooks/useGetCreatePayRunType';
 
 import PayRunTypeModal from './PayRunTypeModal';
@@ -57,23 +58,21 @@ function PayRunModal({ show, setShow, activeEntity }:Props) {
 						Entity
 					</div>
 					<div>
-						{(ENTITY_MAPPING || []).map((item) => {
-							const { label = '', entityCode = '', icon = '' } = item || {};
+						{Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]) => {
+							const { name, icon: Icon } = value || {};
 							return (
-								<div key={entityCode}>
-									{entityCode === activeEntity
-                                && (
-	<div className={styles.entity_container}>
-		<Radio name="selected" disabled={false} checked />
-		<div className={styles.text}>
-			{label}
-		</div>
-		<div className={styles.entity_icon}>
-			{icon}
-		</div>
-
-	</div>
-                                )}
+								<div key={key}>
+									{key === activeEntity && (
+										<div className={styles.entity_container}>
+											<Radio name="selected" disabled={false} checked />
+											<div className={styles.text}>
+												{name}
+											</div>
+											<div className={styles.entity_icon}>
+												<Icon height={20} width={20} />
+											</div>
+										</div>
+									)}
 								</div>
 							);
 						})}

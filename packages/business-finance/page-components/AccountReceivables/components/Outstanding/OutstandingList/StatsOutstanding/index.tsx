@@ -1,4 +1,5 @@
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { StatsKeyMapping, StatsKeyMappingPayment } from '../../../../constants/index';
 
@@ -16,13 +17,7 @@ function StatsOutstanding({ item }) {
 		entityCode = '',
 	} = item || {};
 
-	const keyValue = {
-		101 : 'INR',
-		201 : 'EUR',
-		301 : 'INR',
-		401 : 'SGD',
-		501 : 'VND',
-	};
+	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	const invoiceContainer = [{
 		name         : 'OPEN INVOICES',
@@ -46,12 +41,13 @@ function StatsOutstanding({ item }) {
 	},
 
 	];
+
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.invoices_wrapper}>
 				{invoiceContainer.map((invoiceObject) => (
-					<div className={styles.invoices_card}>
+					<div key={invoiceObject.name} className={styles.invoices_card}>
 						<div className={styles.left_container}>
 							<div className={styles.styled_heading}>
 								{invoiceObject.name}
@@ -60,7 +56,7 @@ function StatsOutstanding({ item }) {
 							<div className={styles.amount_open}>
 								{getFormattedPrice(
 									invoiceObject.LedgerAmount?.ledgerAmount || 0,
-									invoiceObject.LedgerAmount?.ledgerCurrency || keyValue[entityCode],
+									invoiceObject.LedgerAmount?.ledgerCurrency || currency,
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -76,7 +72,7 @@ function StatsOutstanding({ item }) {
 						</div>
 						<div className={styles.right_container}>
 							{(invoiceObject.statsKey || []).map((val) => (
-								<div>
+								<div key={val.label}>
 									<div className={styles.label}>
 										{val.label}
 										<div className={styles.count}>
@@ -91,7 +87,7 @@ function StatsOutstanding({ item }) {
 										{getFormattedPrice(
 											invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount || 0,
 											invoiceObject.ageingBucket[val.valueKey]?.ledgerCurrency
-											|| keyValue[entityCode],
+											|| currency,
 											{
 												style                 : 'currency',
 												currencyDisplay       : 'code',
@@ -114,7 +110,7 @@ function StatsOutstanding({ item }) {
 					>
 						{getFormattedPrice(
 							totalOutstanding.ledgerAmount || 0,
-							totalOutstanding.ledgerCurrency || keyValue[entityCode],
+							totalOutstanding.ledgerCurrency || currency,
 							{
 								style                 : 'currency',
 								currencyDisplay       : 'code',

@@ -211,8 +211,10 @@ importers:
 
   common/globalization:
     specifiers:
+      '@cogoport/icons-react': ^1.0.72
       '@cogoport/utils': ^1.2.2
     dependencies:
+      '@cogoport/icons-react': 1.0.72
       '@cogoport/utils': 1.2.6
 
   common/navigation-configs:
@@ -2961,6 +2963,15 @@ packages:
     dependencies:
       '@cogoport/icons': 1.0.68
       react: 18.2.0
+    dev: false
+
+  /@cogoport/icons-react/1.0.72:
+    resolution: {integrity: sha512-HQEnDY/dnvUuJy0FCfwQU24UZCgfACFZz+qIau+LaTxAPTU5xjVlaP67UzoUKsssNdV+/PxvlzVlpCVzwWwmSQ==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.72
     dev: false
 
   /@cogoport/icons-react/1.0.72_react@18.2.0:

@@ -5,6 +5,7 @@
 	"main": "index.js",
 	"sideEffects": false,
 	"dependencies": {
-		"@cogoport/utils": "^1.2.2"
+		"@cogoport/utils": "^1.2.2",
+		"@cogoport/icons-react": "^1.0.72"
 	}
 }

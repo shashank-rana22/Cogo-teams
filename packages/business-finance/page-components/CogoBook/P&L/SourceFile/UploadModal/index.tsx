@@ -2,7 +2,7 @@ import { Select, Button, Modal } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import { useState } from 'react';
 
-import { optionsEntity } from '../../../Accruals/constant';
+import { getEntityOptions } from '../../../Accruals/constant';
 import useSourceFile from '../../../hooks/useSourceFile';
 import { SAMPLE_DOCUMENT_URL } from '../../constant';
 import { OptionMonth } from '../utils';
@@ -51,7 +51,7 @@ function UploadModal({ uploadModal, setUploadModal }) {
 							<Select
 								value={modalData.entity}
 								placeholder="Entity"
-								options={optionsEntity}
+								options={getEntityOptions()}
 								onChange={(val:string) => { setModalData((prev) => ({ ...prev, entity: val })); }}
 								isClearable
 								style={{ width: '200px' }}

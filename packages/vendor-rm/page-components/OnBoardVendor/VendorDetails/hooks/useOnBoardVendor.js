@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { getConstantsByCountryCode } from '@cogoport/globalization/constants/geo';
+import { getConstantsByCountryId } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails, { getCountryId } from '@cogoport/globalization/utils/getCountryDetails';
 import { useRouter } from '@cogoport/next';
@@ -177,7 +177,7 @@ function useOnBoardVendor({
 		}
 
 		if (field.name === 'company_type') {
-			const companyTypeOptions = getConstantsByCountryCode({ country_id });
+			const companyTypeOptions = getConstantsByCountryId({ country_id });
 
 			newField = {
 				...newField,

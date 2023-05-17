@@ -1,11 +1,11 @@
 import { Select, TabPanel, Tabs, Placeholder } from '@cogoport/components';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AdvancePayment from './AdvancePayment';
-import { ENTITY_MAP } from './constants';
 import Dashboard from './Dashboard';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities';
 import styles from './styles.module.css';
@@ -20,10 +20,10 @@ function AccountPayables() {
 	const [activePayables, setActivePayables] = useState<string>(query?.active_tab || 'dashboard');
 	const profile = useSelector((state) => state);
 	const { profile:{ partner } } = profile || {};
-	const { id: partnerId, business_name:businessName } = partner || {};
+	const { id: partnerId } = partner || {};
 	const { loading, entityData = [] } = useListCogoEntities();
 
-	const entity = ENTITY_MAP[businessName];
+	const entity = getEntityCode(partnerId);
 
 	const handleTabChange = (v:string) => {
 		if (['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)) {

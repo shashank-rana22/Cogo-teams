@@ -66,6 +66,7 @@ function CogoBook() {
 				>
 					{tabs.map(({ key = '', label = '' }) => (
 						<TabPanel
+							key={key}
 							name={key}
 							title={label}
 						>

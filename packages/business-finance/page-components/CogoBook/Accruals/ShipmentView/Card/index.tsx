@@ -4,7 +4,7 @@ import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
-import { optionsEntity } from '../../constant';
+import { getEntityOptions } from '../../constant';
 import { FilterInterface } from '../../interface';
 import { optionSelect, optionsMonth, optionsPills, optionsShipment, optionsYear } from '../constant';
 
@@ -73,6 +73,7 @@ function Card({
 			</div>
 			{(optionSelect || []).map((option) => (
 				<OptionSelect
+					key={option.label}
 					data={option}
 					handleSelectChange={handleSelectChange}
 				/>
@@ -204,7 +205,7 @@ function Card({
 						value={filters?.entity}
 						onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 						placeholder="Entity"
-						options={optionsEntity}
+						options={getEntityOptions()}
 						isClearable
 						style={{ width: '100px' }}
 						size="sm"

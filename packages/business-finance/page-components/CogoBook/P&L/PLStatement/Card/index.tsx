@@ -11,7 +11,7 @@ import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
-import { optionsEntity } from '../../../Accruals/constant';
+import { getEntityOptions } from '../../../Accruals/constant';
 import useSaveCustom from '../../../hooks/useSaveCustom';
 import useSaveCustomList from '../../../hooks/useSaveCustomList';
 import { OptionMonth } from '../../SourceFile/utils';
@@ -120,7 +120,7 @@ function Card({
 								value={filters?.entity}
 								onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 								placeholder="Entity"
-								options={optionsEntity}
+								options={getEntityOptions()}
 								isClearable
 								style={{ width: '150px' }}
 							/>
@@ -227,7 +227,7 @@ function Card({
 										} = JSON.parse(filtersItem) || {};
 
 										return (
-											<div className={styles.filters}>
+											<div key={cogoEntityId} className={styles.filters}>
 												<div className={styles.radio_filters}>
 													<div>
 														<Radio

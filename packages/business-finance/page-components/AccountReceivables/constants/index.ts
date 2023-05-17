@@ -258,15 +258,6 @@ export const ACCOUNT_TYPE = [
 	{ label: 'Invoice', value: 'SINV' },
 ];
 
-export const ENTITY_TYPE = [
-
-	{ label: '501 Cogoport Vietnam', value: '501' },
-	{ label: '401 Cogo Universe Pte. Ltd', value: '401' },
-	{ label: '301 Cogoport Private Limited', value: '301' },
-	{ label: '201 Cogoport Netherlands', value: '201' },
-	{ label: '101 Cogo Freight PVT Limited', value: '101' },
-];
-
 export const INVOICE_STATUS = {
 	Unpaid               : '#FEF1DF',
 	Unutilized           : '#FEF1DF',
@@ -315,11 +306,3 @@ export const SALES_FUNNEL_OPTIONS = [
 
 export const months = ['JAN', 'FEB', 'MAR',
 	'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-export const keyValue = {
-	101 : 'INR',
-	201 : 'EUR',
-	301 : 'INR',
-	401 : 'SGD',
-	501 : 'VND',
-};

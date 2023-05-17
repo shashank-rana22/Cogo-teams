@@ -1,10 +1,10 @@
 import { Select } from '@cogoport/components';
-import { getConstantsByCountryCode } from '@cogoport/globalization/constants/geo';
+import { getConstantsByCountryId } from '@cogoport/globalization/constants/geo';
 
 function SelectRegistrationType(props) {
 	const { value, countryId } = props;
 
-	const countryWiseData = getConstantsByCountryCode({ country_id: countryId });
+	const countryWiseData = getConstantsByCountryId({ country_id: countryId });
 
 	const { options } = countryWiseData || {};
 
