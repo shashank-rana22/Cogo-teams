@@ -281,6 +281,7 @@ function GenerateMawb({
 											setItem={setItem}
 											setDocCopies={setDocCopies}
 											setEditCopies={setEditCopies}
+											taskItem={taskItem}
 											download24
 										/>
 									)}
@@ -312,6 +313,7 @@ function GenerateMawb({
 											setItem={setItem}
 											setDocCopies={setDocCopies}
 											setEditCopies={setEditCopies}
+											taskItem={taskItem}
 										/>
 									)}
 								>

@@ -8,9 +8,9 @@ import styles from './styles.module.css';
 
 function SelectDocumentCopies({
 	copiesValue, copiesOnChange, setSaveDocument, handleView, setGenerate,
-	setViewDoc, download24, setEdit, setItem, setDocCopies, setEditCopies,
+	setViewDoc, download24, setEdit, setItem, setDocCopies, setEditCopies, taskItem,
 }) {
-	const { data } = useGetMultipleCopiesList();
+	const { data } = useGetMultipleCopiesList(taskItem?.id);
 
 	const OPTIONS = multipleCopies({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem });
 

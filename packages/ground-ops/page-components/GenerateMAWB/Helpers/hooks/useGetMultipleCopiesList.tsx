@@ -1,7 +1,7 @@
 import { useRequestAir } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetMultipleCopiesList = () => {
+const useGetMultipleCopiesList = (id) => {
 	const [{ data = {} }, trigger] = useRequestAir(
 		{
 			url     : '/air-coe/document-copy/list',
@@ -15,7 +15,7 @@ const useGetMultipleCopiesList = () => {
 		try {
 			await trigger({
 				params: {
-					documentId   : '35cd7dcb-5ddb-4382-807f-c312aec6909c',
+					documentId   : id,
 					documentType : 'draft_airway_bill',
 					status       : 'active',
 					pageIndex    : 0,
