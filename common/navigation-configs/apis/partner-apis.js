@@ -6001,6 +6001,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'contract',
 		},
+		{
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
 	],
 	incentives: [
 		{
@@ -11939,6 +11944,16 @@ const partner = {
 			api          : 'check_customer_checkout_quotation_conflict',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'list_servetel_agents',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_live_call',
+			access_type  : 'private',
+			service_name : 'voice_call',
 		},
 	],
 	analytics_dashboard: [
