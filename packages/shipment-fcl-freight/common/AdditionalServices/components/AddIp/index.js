@@ -10,15 +10,10 @@ function AddIp({
 	updateInvoicingParty = () => {},
 }) {
 	const organizationDetails = {
-		id         : shipmentData?.importer_exporter?.id || undefined,
-		country_id : shipmentData?.importer_exporter?.country_id || undefined,
+		id                : shipmentData?.importer_exporter?.id || undefined,
+		country_id        : shipmentData?.importer_exporter?.country_id || undefined,
+		is_tax_applicable : shipmentData?.importer_exporter?.is_tax_applicable ?? true,
 	};
-
-	if (shipmentData?.importer_exporter?.is_tax_applicable === null) {
-		organizationDetails.is_tax_applicable = true;
-	} else {
-		organizationDetails.is_tax_applicable =	shipmentData?.importer_exporter?.is_tax_applicable;
-	}
 
 	return (
 		<Modal

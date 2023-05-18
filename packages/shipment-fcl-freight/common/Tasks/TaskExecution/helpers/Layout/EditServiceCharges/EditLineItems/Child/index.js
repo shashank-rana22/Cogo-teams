@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { IcMDelete } from '@cogoport/icons-react';
 import { v4 as uuid } from 'uuid';
 
 import Item from '../../../Item';
@@ -43,7 +44,7 @@ function Child({
 				})}
 
 				<div className={styles.delete_button_container}>
-					<Button size="sm" onClick={() => remove(index, 1)}>Delete</Button>
+					<IcMDelete width={20} height={20} onClick={() => remove(index, 1)} />
 				</div>
 			</div>
 		</div>

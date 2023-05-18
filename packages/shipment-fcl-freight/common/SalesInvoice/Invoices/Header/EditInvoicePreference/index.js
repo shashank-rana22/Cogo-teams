@@ -32,14 +32,10 @@ function EditInvoicePreference({
 		BfInvoiceRefetch,
 	});
 	const organizationDetails = {
-		id         : shipment_data?.importer_exporter?.id || undefined,
-		country_id : shipment_data?.importer_exporter?.country_id || undefined,
+		id                : shipment_data?.importer_exporter?.id || undefined,
+		country_id        : shipment_data?.importer_exporter?.country_id || undefined,
+		is_tax_applicable : shipment_data?.importer_exporter?.is_tax_applicable ?? true,
 	};
-	if (shipment_data?.importer_exporter?.is_tax_applicable === null) {
-		organizationDetails.is_tax_applicable = true;
-	} else {
-		organizationDetails.is_tax_applicable =	shipment_data?.importer_exporter?.is_tax_applicable;
-	}
 
 	const handleClose = () => {
 		setSelectedParties(rest?.formattedIps);
@@ -74,6 +70,7 @@ function EditInvoicePreference({
 							>
 								+ Add Invoicing Party
 							</Button>
+
 							<ListInvoicePreferences
 								shipmentData={shipment_data}
 								invoicingParties={selectedParties}
@@ -82,6 +79,7 @@ function EditInvoicePreference({
 							/>
 						</div>
 					</Modal.Body>
+
 					<Modal.Footer>
 						<Button
 							style={{ marginRight: 16 }}
@@ -91,6 +89,7 @@ function EditInvoicePreference({
 						>
 							Cancel
 						</Button>
+
 						<Button
 							size="md"
 							onClick={handleEditPreferences}
@@ -102,19 +101,23 @@ function EditInvoicePreference({
 
 					{addInvoicingParty ? (
 						<Modal
-							size="lg"
+							size="xl"
 							themeType="secondary"
 							show={addInvoicingParty}
 							onClose={() => setAddInvoicingParty(false)}
 							onOuterClick={() => setAddInvoicingParty(false)}
 						>
 							<Modal.Header title="Add Invoicing Party" />
+
 							<Modal.Body>
 								<div className={styles.form}>
 									<AddInvoicingParty
 										shipmentData={shipment_data}
 										organizationDetails={organizationDetails}
-										updateInvoicingParty={(ip) => handleInvoicingPartyAdd(ip)}
+										updateInvoicingParty={(ip) => {
+											handleInvoicingPartyAdd(ip);
+											setAddInvoicingParty(false);
+										}}
 										primary_service={shipment_data?.shipment_type}
 									/>
 								</div>

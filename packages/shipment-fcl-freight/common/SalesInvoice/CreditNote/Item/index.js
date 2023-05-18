@@ -6,7 +6,7 @@ import {
 	IcMEdit,
 } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 
 import EditCN from '../Edit';
 import ReviewCN from '../Review';
@@ -31,6 +31,8 @@ function Item({
 	invoicesList = [],
 }) {
 	const [open, setOpen] = useState('');
+
+	const billingPartyHeightRef = useRef();
 
 	const itemStatus = item?.status;
 
@@ -61,7 +63,7 @@ function Item({
 
 	const title = (
 		<>
-			<section className={styles.billing_party}>
+			<section className={styles.billing_party} ref={billingPartyHeightRef}>
 				<h4>{item?.billing_address?.name}</h4>
 				<Tooltip
 					theme="light"
@@ -143,7 +145,7 @@ function Item({
 				role="button"
 				style={{
 					height:
-					`${document.querySelector('#__next main section.styles_billing_party__3Dosy')?.offsetHeight}px`,
+					`${billingPartyHeightRef.current?.offsetHeight}px`,
 				}}
 			>
 				<IcMArrowRotateDown className={open ? styles.rotate : null} />
