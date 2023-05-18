@@ -26,7 +26,7 @@ export default function CargoDetails({ cargo_details }) {
 				<Tooltip
 					content={(
 						<div>
-							{restCargoDetails.map((cargo_detail) => <div>{renderCargoPills(cargo_detail)}</div>)}
+							{restCargoDetails?.map((cargo_detail) => <div>{renderCargoPills(cargo_detail)}</div>)}
 						</div>
 					)}
 					className="multiple-cargo"
