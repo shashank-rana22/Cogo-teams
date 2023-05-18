@@ -9,18 +9,10 @@ const SHOW_CANCELLATION_STAKEHOLDERS = [
 	'costbooking_ops',
 ];
 
-const serviceCompletedOrCancelled = ['completed', 'cancelled'];
-
-export default function getCanCancelService({ shipment_data, user_data, state, activeStakeholder }) {
-	if (user_data?.email === 'ajeet@cogoport.com') {
-		return true;
-	}
-	if (shipment_data?.serial_id <= 120347 && !serviceCompletedOrCancelled.includes(state)) {
-		return true;
-	}
+export default function getCanCancelService({ state, activeStakeholder }) {
+	const serviceInCancellationState = serviceCancellationStates.includes(state);
 
 	const userCanCancel = SHOW_CANCELLATION_STAKEHOLDERS.includes(activeStakeholder);
-	const serviceInCancellationState = serviceCancellationStates.includes(state);
 
 	return serviceInCancellationState && userCanCancel;
 }
