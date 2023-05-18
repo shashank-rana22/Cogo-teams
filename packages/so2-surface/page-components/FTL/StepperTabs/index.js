@@ -1,5 +1,8 @@
 import { useContext } from 'react';
 import { Tabs, TabPanel } from '@cogoport/components';
+import { useContext } from 'react';
+import { v4 as uuidv4 } from 'uuid';
+
 import controlConfig from '../../../configs/CONTROLS_CONFIG.json';
 import TabContainer from '../../../configs/TAB_CONFIG';
 import DashboardContext from '../../../context/DashboardContext';

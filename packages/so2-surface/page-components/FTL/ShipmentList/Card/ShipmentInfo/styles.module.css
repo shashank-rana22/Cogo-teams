@@ -31,11 +31,9 @@
 .heading {
 	display: flex;
 	font-size: 12px;
-	font-weight: 400;
 	color: #333;
 
 	&.shipment_id {
-		font-size: 14px;
 		font-weight: 700;
 		display: flex;
 		align-items: center;
@@ -48,7 +46,6 @@
 	max-width: 250px;
 	overflow: hidden;
 	font-size: 12px;
-	font-weight: 400;
 	color: #333;
 	text-overflow: ellipsis;
 	white-space: nowrap;
