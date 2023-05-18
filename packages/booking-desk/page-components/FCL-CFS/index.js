@@ -15,7 +15,7 @@ import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments
 import Card from './Card';
 import styles from './styles.module.css';
 
-const { fcl_freight_local: tabs } = allTabs;
+const { fcl_cfs: tabs } = allTabs;
 
 export default function FCLCfsDesk({ stateProps = {} }) {
 	const { loading, data } = useListBookingDeskShipments({

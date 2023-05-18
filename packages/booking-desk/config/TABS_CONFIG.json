@@ -61,7 +61,7 @@
     "fcl_cfs": [
         {
             "name": "place_booking",
-            "title" : "Booking Placed"
+            "title" : "Place Booking"
         },
         {
             "name": "completed",
