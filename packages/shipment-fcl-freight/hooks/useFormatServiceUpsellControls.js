@@ -23,6 +23,7 @@ function useServiceUpsellControls({
 	truckTypeToggle,
 	setTruckTypeToggle = () => {},
 	upsellableService = {},
+	organization_id = '',
 }) {
 	const newServices = services.map((item) => ({
 		...item,
@@ -39,13 +40,15 @@ function useServiceUpsellControls({
 		service_details: newServices,
 	});
 
-	const defaultValues = {};
+	const defaultValues = {
+		organization_id,
+	};
 
 	rawControls.forEach((control) => {
 		defaultValues[control?.name] = service?.[control?.name] || prefilledValues?.[control?.name] || control?.value;
 	});
 
-	const { handleSubmit, watch, control, formState : { errors } } = useForm({ defaultValues });
+	const { handleSubmit, watch, control, formState : { errors } } = useForm();
 
 	const formValues = watch();
 	const { truck_body_type } = formValues;
@@ -57,7 +60,6 @@ function useServiceUpsellControls({
 	const formProps = {
 		formValues,
 		handleSubmit,
-		watch,
 		control,
 		errors,
 	};

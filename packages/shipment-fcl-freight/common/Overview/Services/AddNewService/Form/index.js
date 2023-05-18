@@ -1,7 +1,7 @@
 import { Modal } from '@cogoport/components';
-import { AsyncSelect, RadioGroupController } from '@cogoport/forms';
+import { AsyncSelectController, RadioGroupController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
@@ -30,14 +30,6 @@ function Form({
 
 	const [user, setUser] = useState(null);
 
-	const { controls, formProps } = useServiceUpsellControls({
-		service,
-		services: servicesList,
-		truckTypeToggle,
-		setTruckTypeToggle,
-		upsellableService,
-	});
-
 	const { consignee_shipper, importer_exporter, importer_exporter_id, consignee_shipper_id } = shipmentData;
 
 	const haveToAskOrgDetails = !['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder)
@@ -46,6 +38,17 @@ function Form({
 	const organization_id = activeStakeholder === 'consignee_shipper_booking_agent'
 		? consignee_shipper_id
 		: importer_exporter_id;
+
+	const { controls, formProps } = useServiceUpsellControls({
+		service,
+		services: servicesList,
+		truckTypeToggle,
+		setTruckTypeToggle,
+		upsellableService,
+		organization_id,
+	});
+
+	const formOrganizationId = formProps.formValues.organization_id;
 
 	const ORG_OPTIONS = [
 		{
@@ -97,16 +100,22 @@ function Form({
 							<RadioGroupController
 								options={ORG_OPTIONS}
 								control={formProps.control}
-								name="org"
-								rules={{ required: { value: true, message: 'Organisation is required' } }}
+								name="organization_id"
+								rules={{ required: 'Organisation is required' }}
 							/>
+
+							{
+								(formProps.errors.organization_id) ? <div> uiefyi</div> : null
+							}
 						</>
 					) : null}
 
 				{
 					step === 2 ? (
-						<AsyncSelect
+						<AsyncSelectController
 							className={styles.select}
+							control={formProps.control}
+							name="user_id"
 							asyncKey="organization_users"
 							isClearable
 							valueKey="custom_key"
@@ -116,8 +125,8 @@ function Form({
 							params={{
 								filters:
 								{
-									organization_id,
-									status: 'active',
+									organization_id : formOrganizationId,
+									status          : 'active',
 								},
 								page_limit: 30,
 							}}
@@ -125,6 +134,7 @@ function Form({
 								(op) => ({ ...op, custom_key: { user_id: op.user_id, branch_id: op.branch.id } }),
 							)}
 							onChange={setUser}
+							rules={{ required: 'User is required' }}
 						/>
 					) : null
 }

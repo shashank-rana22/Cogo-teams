@@ -18,9 +18,7 @@ function Footer({
 	user = {},
 
 }) {
-	const { watch } = formProps;
-
-	const formValues = watch();
+	const { handleSubmit } = formProps;
 
 	const { onAddService, loading } = useCreateUpsell({
 		primary_service,
@@ -50,7 +48,7 @@ function Footer({
 					<Button
 						type="submit"
 						disabled={loading}
-						onClick={() => (onAddService(formValues))}
+						onClick={handleSubmit(onAddService)}
 						style={{ marginLeft: 12 }}
 						id="shipment_form_header_submit"
 					>
