@@ -41,7 +41,6 @@ function Card({ item = {} }) {
 
 				<div className={styles.port}>
 					<PortDetails data={item} icon={iconProps} />
-
 				</div>
 
 				<div className={styles.separator} />

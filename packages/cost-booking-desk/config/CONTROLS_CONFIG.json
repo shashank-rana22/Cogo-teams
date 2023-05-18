@@ -1,8 +1,9 @@
 {
 	"shipment_types": [
 		{ "label": "FCL", "value": "fcl_freight" },
-		{ "label": "LCL", "value": "lcl_freight" },
-        { "label": "FCL CFS", "value": "fcl_cfs" }
+        { "label": "FCL CFS", "value": "fcl_cfs" },
+		{ "label": "LCL", "value": "lcl_freight" }
+       
 	],
 	"fcl_freight": [
         { "label": "Export", "value": "export", "isDateFilterVisible":true },
