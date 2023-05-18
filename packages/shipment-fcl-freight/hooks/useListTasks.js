@@ -4,8 +4,9 @@ import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 const STAKEHOLDER_MAPPINGS = {
-	booking_desk : 'service_ops',
-	lastmile_ops : 'lastmile_ops',
+	booking_desk  : 'service_ops',
+	lastmile_ops  : 'lastmile_ops',
+	document_desk : 'service_ops',
 };
 
 function useListTasks({

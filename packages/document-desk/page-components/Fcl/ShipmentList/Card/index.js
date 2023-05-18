@@ -1,4 +1,4 @@
-import { IcMFfcl, IcMFlocalCharges, IcMFcustoms } from '@cogoport/icons-react';
+import { IcMFfcl, IcMFlocalCharges, IcMFcustoms, IcMFcfs } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useContext } from 'react';
 
@@ -17,6 +17,7 @@ const iconMapping = {
 	fcl_freight       : { Icon: IcMFfcl, text: 'FCL' },
 	fcl_freight_local : { Icon: IcMFlocalCharges, text: 'FCL Local' },
 	fcl_customs       : { Icon: IcMFcustoms, text: 'FCL Customs' },
+	fcl_cfs           : { Icon: IcMFcfs, text: 'FCL CFS' },
 };
 
 export default function Card({ item = {} }) {
