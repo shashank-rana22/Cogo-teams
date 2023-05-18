@@ -151,6 +151,12 @@ const apis = [
 		feature      : 'rfq',
 		service_name : 'rfq',
 	},
+	{
+		api          : 'create_rfq_rate_card',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
 ];
 
 export default apis;

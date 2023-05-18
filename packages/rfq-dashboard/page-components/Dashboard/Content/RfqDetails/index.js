@@ -10,9 +10,11 @@ function RfqDetails(props) {
 	const [checkedItems, setCheckedItems] = useState([]);
 	const [selectAll, setSelectAll] = useState(false);
 
-	useEffect(() => {
-		setSelectAll(checkedItems.length === data.length);
-	}, [checkedItems.length]);
+	const { list = [] } = props;
+
+	// useEffect(() => {
+	// 	setSelectAll(checkedItems.length === data.length);
+	// }, [checkedItems.length]);
 
 	return (
 		<div className={styles.container}>
@@ -26,7 +28,7 @@ function RfqDetails(props) {
 			/>
 
 			<List
-				data={data}
+				data={list}
 				checkedItems={checkedItems}
 				setCheckedItems={setCheckedItems}
 				setSelectAll={setSelectAll}

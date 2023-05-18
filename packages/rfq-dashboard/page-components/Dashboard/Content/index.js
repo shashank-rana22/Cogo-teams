@@ -1,4 +1,8 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
+// import { useEffect } from 'react';
+
+import useListRfqs from '../../../hooks/useListrfqs';
 
 import RfqDetails from './RfqDetails';
 import styles from './styles.module.css';
@@ -11,6 +15,19 @@ function Content(props) {
 		{ name: 'all', title: 'All RFQ' },
 	];
 
+	const { getRfqsForApproval, data = {} } = useListRfqs();
+	console.log('data::', data);
+
+	// useEffect(() => {
+	// 	getRfqsForApproval();
+	// }, []);
+
+	const { list = [] } = data;
+
+	if (isEmpty(data)) {
+		return null;
+	}
+
 	return (
 		<div className={styles.container}>
 			<Tabs
@@ -20,7 +37,7 @@ function Content(props) {
 			>
 				{TAB_MAPPING.map(({ name, title }) => (
 					<TabPanel name={name} title={title}>
-						<RfqDetails {...props} />
+						<RfqDetails {...props} list={list} />
 					</TabPanel>
 				))}
 			</Tabs>

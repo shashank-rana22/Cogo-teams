@@ -1,6 +1,7 @@
 import { Checkbox } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMProfile } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { startCase, format } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 
 import { SERVICE_MAPPING } from '../../../../../../constants';
@@ -10,6 +11,10 @@ import styles from './styles.module.css';
 
 function Card({ item, handleCheck, checkedItems, partner_id }) {
 	const router = useRouter();
+
+	const { port_pair_count = {} } = item;
+
+	const services = Object.keys(port_pair_count);
 
 	return (
 		<div
@@ -30,22 +35,23 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 				/>
 			</div>
 			<div className={styles.basic_details}>
-				<div className={styles.org_name}>{item?.organization_business_name || '-'}</div>
+				<div className={styles.org_name}>{item?.name || '-'}</div>
 				<div className={styles.tags}>
 					<div className={styles.primary_tag}>
-						{item?.port_pairs_count}
+						{item?.total_port_pair}
 						{' '}
 						Port Pairs :
 						{' '}
-						{item?.pending_requests}
+						{item?.requested_for_approval}
 						{' '}
 						Requested for Approval
 					</div>
+					<div className={styles.primary_tag}>{startCase(item?.importer_exporter?.sub_type)}</div>
 					{item?.sub_type && <div className={styles.primary_tag}>{startCase(item?.sub_type)}</div>}
 					<div className={styles.primary_tag}>
 						Last Shipment :
 						{' '}
-						{getformattedDuration(item?.last_shipment)}
+						{getformattedDuration(item?.importer_exporter?.bookings_completed_last_date)}
 						{' '}
 						Ago
 					</div>
@@ -53,10 +59,17 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 				<div className={styles.rest_tags}>
 					<div className={styles.secondary_tag}>
 						<IcMProfile className={styles.avatar} />
-						{item?.kam_name}
+						{item?.kam?.name}
 					</div>
-					<div className={styles.secondary_tag}>Requested on : 20 Mar 2023</div>
-					<div className={styles.secondary_tag}>RFQ ID : 1124</div>
+					<div className={styles.secondary_tag}>
+						Requested on :
+						{format(item?.requested_on, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
+					</div>
+					<div className={styles.secondary_tag}>
+						RFQ ID :
+						{' '}
+						{item?.serial_id}
+					</div>
 				</div>
 			</div>
 
@@ -72,15 +85,20 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 						<div className={styles.value}>2.6 %</div>
 
 					</div>
-					<div className={styles.field}>
+					{/* <div className={styles.field}>
 						<div className={styles.label}>Avg Contract Utilization</div>
 						<div className={styles.value}>11.2 %</div>
 
+					</div> */}
+					<div className={styles.field}>
+						<div className={styles.label}>Live Contracts of Organization</div>
+						<div className={styles.value}>{item?.live_contracts}</div>
+
 					</div>
 				</div>
-				{item?.services ? (
+				{services ? (
 					<div className={styles.services}>
-						{(item?.services || []).map((val) => (
+						{(services || []).map((val) => (
 							<div className={styles.services}>
 								{SERVICE_MAPPING[val].icon}
 								<div className={styles.service_name}>{SERVICE_MAPPING[val].label}</div>

@@ -1,6 +1,6 @@
 const apis = [
 	{
-		api          : 'list_rfq',
+		api          : 'list_rfqs',
 		access_type  : 'private',
 		feature      : 'rfq',
 		service_name : 'rfq',

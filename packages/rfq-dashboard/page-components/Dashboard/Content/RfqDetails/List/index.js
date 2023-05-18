@@ -4,6 +4,7 @@ import Card from './Card';
 import styles from './styles.module.css';
 
 function List({ checkedItems, setCheckedItems, setSelectAll, data }) {
+	console.log('data incoming::', data);
 	const { profile = {} } = useSelector((state) => state);
 	const { partner } = profile;
 	const { id } = partner;
