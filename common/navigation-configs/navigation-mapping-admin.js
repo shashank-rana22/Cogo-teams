@@ -1048,8 +1048,8 @@ const navigationMappingAdmin = {
 	unified_dashboard: {
 		key           : 'unified_dashboard',
 		title         : 'Unified Dashboard',
-		href          : '/unified-dashboard',
-		as            : '/unified-dashboard',
+		href          : '/v2/unified-dashboard',
+		as            : '/v2/unified-dashboard',
 		type          : 'link',
 		icon          : IcMDashboard,
 		possible_apis : apis.unified_dashboard,
@@ -1129,10 +1129,10 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-bn_salvage',
 				title         : 'BN Salvage',
-				href          : '/bn-salvage',
-				as            : '/bn-salvage',
+				href          : '/v2/bn-salvage',
+				as            : '/v2/bn-salvage',
 				type          : 'link',
-				main_apis     : ['list_shipments'],
+				main_apis     : ['list_booking_documents'],
 				possible_apis : apis.bn_salvage,
 			},
 			{

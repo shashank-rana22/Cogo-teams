@@ -1,0 +1,30 @@
+.attendee_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 5px;
+}
+
+.common_flex {
+	display: flex;
+	align-items: center;
+}
+
+.icon_styles_attendee {
+	width: 14px;
+	height: 14px;
+	margin-left: 10px;
+}
+
+.name {
+	margin-left: 5px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.connecting_text {
+	margin-left: 10px;
+	font-size: 10px;
+	color: #f68b21;
+}
