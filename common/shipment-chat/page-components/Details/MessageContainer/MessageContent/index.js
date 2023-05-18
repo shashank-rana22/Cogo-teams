@@ -25,8 +25,10 @@ function MessageContent({ msg, user_id, handleClick = () => {} }) {
 			{(msg?.visible_to_user_ids || []).map((item) => (
 				item === user_id ? (
 
-					<div className={cl` ${styles.send_msg} ${msg?.created_by_user_id === user_id
-						? styles.right : styles.left} `}
+					<div
+						key={user_id}
+						className={cl` ${styles.send_msg} ${msg?.created_by_user_id === user_id
+							? styles.right : styles.left} `}
 					>
 						<div className={styles.details}>
 							<div style={{ display: 'flex', alignItems: 'center' }}>
@@ -73,6 +75,7 @@ function MessageContent({ msg, user_id, handleClick = () => {} }) {
 
 						{(msg?.attachment_urls || []).map((url) => (
 							<div
+								key={url}
 								role="button"
 								tabIndex={0}
 								className={styles.flex_row}

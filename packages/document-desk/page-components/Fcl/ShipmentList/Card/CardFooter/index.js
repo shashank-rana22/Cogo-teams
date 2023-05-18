@@ -22,7 +22,7 @@ export default function CardFooter({ item = {} }) {
 					<div className={styles.text}>Documents Required:</div>
 
 					{item?.documents?.map((doc) => (
-						<div className={cl`${styles.text} ${styles.heading}`}>
+						<div key={doc?.label} className={cl`${styles.text} ${styles.heading}`}>
 							{doc?.status === 'completed' ? (
 								<IcCGreenCircle height={8} width={8} />
 							) : (
@@ -37,7 +37,7 @@ export default function CardFooter({ item = {} }) {
 			{!isEmpty(item?.cutoffs) ? (
 				<div className={styles.details}>
 					{Object.keys(item?.cutoffs)?.map((dates) => (
-						<div className={cl`${styles.text} ${styles.heading}`}>
+						<div key={dates} className={cl`${styles.text} ${styles.heading}`}>
 							{startCase(dates)}
 							:
 							<div className={cl`${styles.text} ${styles.value}`}>
@@ -55,7 +55,7 @@ export default function CardFooter({ item = {} }) {
 			{!isEmpty(freeDays) ? (
 				<div className={styles.details}>
 					{freeDays.map((day) => (
-						<div className={cl`${styles.text} ${styles.heading}`}>
+						<div key={day?.key} className={cl`${styles.text} ${styles.heading}`}>
 							{startCase(day?.key)}
 							:
 							<div className={cl`${styles.text} ${styles.value}`}>{day?.value}</div>

@@ -47,8 +47,8 @@ function CardComponent({
 			return (
 				<div className={styles.place}>
 					{
-				[1, 2, 3, 4].map(() => (
-					<Placeholder className={styles.placeholder_container} />
+				[1, 2, 3, 4].map((item) => (
+					<Placeholder key={item} className={styles.placeholder_container} />
 				))
                       }
 				</div>
@@ -59,7 +59,7 @@ function CardComponent({
 			return (dailyStatsData[subActiveTab] || [{}]).map((item) => {
 				const { count, amount, duration, dashboardCurrency } = item || {};
 				return (
-					<div className={styles.item}>
+					<div key={count} className={styles.item}>
 						<div className={styles.sub_flex}>
 							<div className={styles.label_flex}>
 								<div className={styles.styled_text}>
