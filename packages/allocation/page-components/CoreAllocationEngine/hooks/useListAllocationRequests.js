@@ -56,6 +56,10 @@ const useListAllocationRequests = () => {
 	};
 
 	useEffect(() => {
+		refetch();
+	}, [authParams, refetch]);
+
+	useEffect(() => {
 		if (isEmpty(currentPageListIds)) {
 			return;
 		}
@@ -87,10 +91,6 @@ const useListAllocationRequests = () => {
 		setCheckedRowsId([]);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [params?.filters?.service_type]);
-
-	useEffect(() => {
-		refetch();
-	}, [authParams, refetch]);
 
 	const applyBulkFilter = async () => {
 		setParams({

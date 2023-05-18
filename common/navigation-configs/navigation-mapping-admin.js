@@ -1790,6 +1790,7 @@ const navigationMappingAdmin = {
 				href          : '/v2/allocation/crm-feedback-dashboard',
 				as            : '/v2/allocation/crm-feedback-dashboard',
 				possible_apis : apis.crm_feedback_dashboard,
+				main_apis     : ['get_allocation_feedbacks'],
 			},
 			{
 				key           : 'allocations-account_scoring',
