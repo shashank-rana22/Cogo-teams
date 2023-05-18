@@ -16,7 +16,7 @@
     "@cogoport/store": "workspace:0.1.0",
     "@cogoport/utils": "^1.2.6",
     "@cogoport/globalization": "^0.0.1",
-    "@cogoport/scope-select": "workspace:^0.1.0",
+    "@cogoport/scope-select": "workspace:*",
     "react": "18.2.0"
   }
 }

@@ -8,6 +8,19 @@ import FeedbacksReceived from './components/PrimaryTabs/FeedbacksReceived';
 import RequestsSent from './components/PrimaryTabs/RequestsSent';
 import styles from './styles.module.css';
 
+const TAB_PANEL_MAPPING = {
+	feedbacks_received: {
+		name      : 'feedbacks_received',
+		title     : 'Feedbacks Received',
+		Component : FeedbacksReceived,
+	},
+	relations: {
+		name      : 'requests_sent',
+		title     : 'Requests Sent',
+		Component : RequestsSent,
+	},
+};
+
 function CrmFeedback() {
 	const { profile } = useSelector((state) => state);
 
@@ -41,13 +54,17 @@ function CrmFeedback() {
 					themeType="primary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="feedbacks_received" title="Feedbacks Received">
-						<FeedbacksReceived activeTab={activeTab} setActiveTab={setActiveTab} />
-					</TabPanel>
+					{Object.values(TAB_PANEL_MAPPING).map((item) => {
+						const { name = '', title = '', Component } = item;
 
-					<TabPanel name="requests_sent" title="Requests Sent">
-						<RequestsSent activeTab={activeTab} />
-					</TabPanel>
+						if (!Component) return null;
+
+						return (
+							<TabPanel key={name} name={name} title={title}>
+								<Component activeTab={activeTab} setActiveTab={setActiveTab} />
+							</TabPanel>
+						);
+					})}
 				</Tabs>
 			</div>
 		</>
