@@ -7,7 +7,6 @@ import ExchangeRate from '../../ExchangeRate';
 
 import EditInvoicePreference from './EditInvoicePreference';
 import styles from './styles.module.css';
-import UpdateQuotation from './UpdateQuotation';
 
 function Header({
 	invoiceData = {},
@@ -79,8 +78,6 @@ function Header({
 						refetch={refetch}
 						disableAction={disableAction}
 					/>
-
-					<UpdateQuotation shipment_data={shipment_data} refetch={refetch} />
 				</div>
 			</div>
 		</div>

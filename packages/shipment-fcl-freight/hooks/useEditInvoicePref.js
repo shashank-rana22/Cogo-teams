@@ -5,9 +5,9 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import formatIps from '../../../helpers/format-ips';
-import IncoTermMapping from '../../../helpers/IncoTermMapping.json';
-import POST_REVIEWED_INVOICES from '../../../helpers/post-reviewed-sales-invoices';
+import formatIps from '../common/SalesInvoice/helpers/format-ips';
+import IncoTermMapping from '../common/SalesInvoice/helpers/IncoTermMapping.json';
+import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
 
 const exportServices = ['fcl_freight', 'lcl_freight', 'air_freight'];
 const exportServiceTypes = [

@@ -17,12 +17,12 @@ export const TableColumn = (serviceItem = {}) => {
 		{
 			label  : ServiceName,
 			render : (item) => item?.name || '-',
-			span   : 2.5,
+			span   : 2.0,
 		},
 		{
 			label  : 'Alias Name',
 			render : (item) => item?.alias || '-',
-			span   : 1.5,
+			span   : 1.0,
 		},
 		{
 			label  : 'Currency',
@@ -62,7 +62,7 @@ export const TableColumn = (serviceItem = {}) => {
 				},
 			})} (${item?.tax_percent || 0}%)`,
 
-			span: 1.5,
+			span: 1,
 		},
 		{
 			label  : 'Amt. with Tax',
@@ -76,7 +76,7 @@ export const TableColumn = (serviceItem = {}) => {
 				},
 			}),
 
-			span: 1.5,
+			span: 1,
 		},
 	];
 };

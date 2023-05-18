@@ -6,7 +6,7 @@ import getModifiedInvoicingParties from '../../../helpers/getModifiedInvoicingPa
 
 import ListInvoicePreferences from './ListInvoicePreferences';
 import styles from './styles.module.css';
-import useEditInvoicePref from './useEditInvoicePref';
+import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
 
 function EditInvoicePreference({
 	shipment_data = {},
