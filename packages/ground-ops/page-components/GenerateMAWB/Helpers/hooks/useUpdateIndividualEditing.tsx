@@ -14,7 +14,7 @@ const useUpdateIndividualEditing = ({
 		{
 			url     : '/air-coe/document-copy',
 			method  : 'PUT',
-			authKey : 'get_air_coe_document_copy_update',
+			authKey : 'update_air_coe_document_copy',
 		},
 	);
 
