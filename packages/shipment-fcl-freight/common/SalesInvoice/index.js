@@ -22,20 +22,21 @@ function SalesInvoice() {
 
 	const isIRNGenerated = !!list.find((item) => !!item.irn_number);
 
-	let salesInvoices = null;
 	if (loading) {
-		salesInvoices = (
+		return (
 			<div className={styles.loader}>
 				<Loader />
 				<Loader />
 				<Loader />
 			</div>
 		);
-	} else if (isEmpty(invoiceData) && !loading) {
-		salesInvoices = null;
-	} else {
-		(
-			salesInvoices =	(
+	}
+
+	return (
+		<main className={styles.container}>
+			<OverviewManageServices />
+
+			{!loading && !isEmpty(invoiceData) ? (
 				<Invoices
 					invoiceData={invoiceData}
 					groupedInvoices={groupedInvoices}
@@ -46,14 +47,7 @@ function SalesInvoice() {
 					isIRNGenerated={isIRNGenerated}
 					outstanding_by_reg_num={outstanding_by_reg_num}
 				/>
-			)
-		);
-	}
-
-	return (
-		<main className={styles.container}>
-			<OverviewManageServices />
-			{salesInvoices}
+			) : null}
 		</main>
 	);
 }

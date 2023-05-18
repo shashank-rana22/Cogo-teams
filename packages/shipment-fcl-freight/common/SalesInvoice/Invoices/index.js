@@ -12,13 +12,13 @@ import styles from './styles.module.css';
 function Invoices({
 	invoiceData = {},
 	groupedInvoices = {},
-	isCustomer = false,
 	refetch = () => {},
-	loading = false,
 	invoicesList = [],
-	isIRNGenerated = false,
-	outstanding_by_reg_num = {},
+	loading = false,
 	salesInvoicesRefetch = () => {},
+	outstanding_by_reg_num = {},
+	isCustomer = false,
+	isIRNGenerated = false,
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const totals = invoiceData?.invoicing_party_wise_total;
@@ -27,15 +27,12 @@ function Invoices({
 		(item) => item?.status,
 	);
 
-	let count = 0;
-	invoiceStatuses?.forEach((item) => {
-		if (['reviewed', 'approved'].includes(item)) {
-			count += 1;
-		}
-	});
+	const isAllInvoicesReviewedApproved = invoiceStatuses?.every(
+		(item) => ['reviewed', 'approved'].includes(item),
+	);
 
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
-	if (invoiceStatuses?.length === count || invoiceData?.invoice_tat_show !== true) {
+	if (isAllInvoicesReviewedApproved || invoiceData?.invoice_tat_show !== true) {
 		disableAction = true;
 	}
 
@@ -50,11 +47,13 @@ function Invoices({
 		<main className={styles.container}>
 			<Header
 				invoiceData={invoiceData}
-				isCustomer={isCustomer}
 				refetch={refetch}
 				disableAction={disableAction}
+				isCustomer={isCustomer}
 			/>
+
 			<div className={styles.line} />
+
 			<section>
 				{Object.keys(groupedInvoices || {}).map((item) => (
 					<InvoiceItem
@@ -71,6 +70,7 @@ function Invoices({
 					/>
 				))}
 			</section>
+
 			{list?.length
 				? (
 					<CreditNote
