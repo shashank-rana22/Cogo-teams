@@ -7,7 +7,7 @@ import TABS_MAPPING from '../configs/TABS_MAPPING';
 import AdvanceCourseCreation from './components/AdvanceCourseCreation';
 import CourseCategories from './components/CourseCategories';
 import CourseName from './components/CourseName';
-import Header from './Header';
+import Header from './components/Header';
 import styles from './styles.module.css';
 
 function CourseCreation() {

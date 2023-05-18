@@ -19,7 +19,6 @@ function Header() {
 			<div className={styles.header}>Course</div>
 
 			<div className={styles.button_container}>
-
 				<Button
 					type="button"
 					style={{ marginLeft: 8 }}

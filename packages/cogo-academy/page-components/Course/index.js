@@ -2,22 +2,12 @@ import { TabPanel, Tabs, Badge } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import Courses from './components/Courses';
+import Header from './components/Header';
+import ListComponent from './components/ListComponent';
 import SearchFilter from './components/SearchFilter';
-import Students from './components/Students';
-import Header from './Header';
+import useListCogoAcademyCourses from './hooks/useListCogoAcademyCourses';
+import useListCourseUserMappings from './hooks/useListCourseUserMappings';
 import styles from './styles.module.css';
-
-const TABS_MAPPING = {
-	courses: {
-		title     : 'Courses',
-		component : Courses,
-	},
-	students: {
-		title     : 'Students',
-		component : Students,
-	},
-};
 
 function Course() {
 	const { query, push } = useRouter();
@@ -25,6 +15,72 @@ function Course() {
 	const { activeTab: currentActiveTab, coursesTab } = query || {};
 
 	const [activeTab, setActiveTab] = useState(currentActiveTab || 'courses');
+	const [filters, setFilters] = useState({});
+
+	const {
+		data,
+		loading,
+		fetchList,
+		setParams,
+		params,
+		debounceQuery,
+		input,
+		setInput,
+	} = useListCogoAcademyCourses({ filters, activeTab });
+
+	const {
+		data: studentData,
+		loading: studentListLoading,
+		fetchList: studentListRefetch,
+		setParams: setstudentListParams,
+		params: studentListParams,
+		debounceQuery: studentListDebounceQuery,
+		input: studentListInput,
+		setInput: setstudentListInput,
+	} = useListCourseUserMappings({ filters, activeTab });
+
+	const componentMapping = {
+		courses: {
+			key            : 'courses',
+			title          : 'Courses',
+			component      : ListComponent,
+			componentProps : {
+				data,
+				loading,
+				fetchList,
+				setParams,
+				activeTab,
+				params,
+			},
+			filterProps: {
+				debounceQuery,
+				input,
+				setInput,
+				setParams,
+				params,
+			},
+		},
+		students: {
+			key            : 'students',
+			title          : 'Students',
+			component      : ListComponent,
+			componentProps : {
+				data      : studentData,
+				loading   : studentListLoading,
+				fetchList : studentListRefetch,
+				setParams : setstudentListParams,
+				activeTab,
+				params    : studentListParams,
+			},
+			filterProps: {
+				debounceQuery : studentListDebounceQuery,
+				input         : studentListInput,
+				setInput      : setstudentListInput,
+				setParams     : setstudentListParams,
+				params        : studentListParams,
+			},
+		},
+	};
 
 	const handleChangeTab = (val) => {
 		push(`/learning/course?activeTab=${val}`);
@@ -32,30 +88,24 @@ function Course() {
 		setActiveTab(val);
 	};
 
-	const tabPropsMapping = {
-		courses  : {},
-		students : { coursesTab },
-	};
-
 	return (
 		<div className={styles.container}>
 			<Header />
-			<div className={styles.tabs_container}>
 
+			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
 					themeType="primary"
 					onChange={handleChangeTab}
 					fullWidth
 				>
-					{Object.keys(TABS_MAPPING).map((item) => {
-						const activeComponentProps = tabPropsMapping[item];
-						const { title, component: ActiveComponent } = TABS_MAPPING[item];
+					{Object.values(componentMapping).map((tab) => {
+						const { key, title, componentProps, filterProps } = tab;
 
 						return (
 							<TabPanel
-								key={item}
-								name={item}
+								key={key}
+								name={key}
 								title={(
 									<div className={styles.tab_title}>
 										{title}
@@ -63,12 +113,15 @@ function Course() {
 									</div>
 								)}
 							>
-								<ActiveComponent {...activeComponentProps} />
+								<>
+									<SearchFilter {...filterProps} />
+
+									<ListComponent {...componentProps} />
+								</>
 							</TabPanel>
 						);
 					})}
 				</Tabs>
-				<SearchFilter />
 			</div>
 		</div>
 	);

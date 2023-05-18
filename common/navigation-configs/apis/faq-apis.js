@@ -495,6 +495,36 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'list_cogo_academy_courses',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'list_course_user_mappings',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_course_module_sequence_order',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_course_sub_module_sequence_order',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'update_chapter_sequence_order',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_cogo_academy_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'list_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',

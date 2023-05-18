@@ -1,11 +1,9 @@
 import { Button, Input, ButtonIcon, Popover } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function SearchFilter() {
-	const [value, setValue] = useState('');
+function SearchFilter({ debounceQuery, input, setInput, setParams, params }) {
 	return (
 		<div className={styles.container}>
 			<Input
@@ -18,11 +16,18 @@ function SearchFilter() {
 						themeType="primary"
 					/>
 				)}
-				value={value}
-				placeholder="Search for Course Name"
-				onChange={(e) => { setValue(e); }}
+				value={input}
+				placeholder="Search..."
+				onChange={(value) => {
+					setInput(value);
+					debounceQuery(value);
+					if (params.page !== 1) {
+						setParams((prev) => ({ ...prev, page: 1 }));
+					}
+				}}
 				className={styles.input}
 			/>
+
 			<Popover
 				placement="bottom"
 				render={() => (

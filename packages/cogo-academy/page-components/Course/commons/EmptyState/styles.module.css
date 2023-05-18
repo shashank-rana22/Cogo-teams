@@ -10,6 +10,10 @@
 .row {
 	display: flex;
 	flex-direction: row;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .column {
@@ -17,8 +21,8 @@
 }
 
 .text {
-	font-size: 16px;
 	color: #bdbdbd;
+	text-align: center;
 }
 
 .img_container {
