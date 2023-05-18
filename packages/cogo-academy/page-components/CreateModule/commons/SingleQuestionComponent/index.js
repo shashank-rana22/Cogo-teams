@@ -168,7 +168,7 @@ function SingleQuestionComponent({
 						type="string"
 						multiline
 						variant="filled"
-						placeholder="Start Typing Here..."
+						placeholder="Type your explanation here"
 						rootStyle={{
 							zIndex    : 0,
 							position  : 'relative',

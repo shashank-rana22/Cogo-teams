@@ -110,7 +110,11 @@ export default {
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		credit_controller_id      : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
-		business_heads            : [
+		vietnam_business_heads    : [
+			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal
+			'065c7e26-69f7-4ceb-8f36-1e666b89de94', // Nam Bui
+		],
+		business_heads: [
 			'7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44', // Hrishikesh Kulkarni
 			'95d62549-8ab6-4ee5-a655-9edd0ec46dac', // Purnendu Shekhar
 			'cd8dde11-678c-4467-85b2-2e2d6055bef4', // Amitabh Shankar
