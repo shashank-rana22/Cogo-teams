@@ -10,6 +10,8 @@ import { controls, selectControls } from './controls';
 import styles from './styles.module.css';
 import UploadComponent from './UploadComponent';
 
+const MAPPING = ['completion_criteria', 'completion_message', 'course_completion_rewards_details'];
+
 function CourseCompletion({ data = {}, id = '', activeTab }, ref) {
 	const {
 		control,
@@ -80,9 +82,12 @@ function CourseCompletion({ data = {}, id = '', activeTab }, ref) {
 
 			const { course_completion_unit, course_completion_value } = course_completion_duration;
 
-			setValue('completion_criteria', data.completion_criteria);
-			setValue('completion_message', data.completion_message);
-			setValue('course_completion_rewards_details', data.course_completion_rewards_details);
+			MAPPING.forEach((item) => {
+				if (data[item] && !isEmpty(data[item])) {
+					setValue(item, data[item]);
+				}
+			});
+
 			setValue('course_completion_unit', course_completion_unit);
 			setValue('course_completion_value', course_completion_value);
 		}

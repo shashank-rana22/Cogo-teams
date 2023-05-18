@@ -18,61 +18,59 @@ function ConditionSelectComponent({
 	setMultiSelectedEdit,
 	watch,
 }) {
-	const courseCriteria = watch('course_criteria');
-	const courseReward = watch('course_reward');
+	const courseCriteria = watch('completion_criteria');
+	const courseReward = watch('course_completion_rewards_details');
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.display_container}>
-				{!isEmpty(courseCriteria) 	? (
-					<div className={styles.select_row}>
-						<div className={styles.row_label}>
-							Select test from Assessment Module
-							<sup className={styles.superscipt}>*</sup>
-						</div>
+			{!isEmpty(courseCriteria) 	? (
+				<div className={styles.select_row}>
+					<div className={styles.row_label}>
+						Select test from Assessment Module
+						<sup className={styles.superscipt}>*</sup>
+					</div>
 
-						<Select
+					<Select
+						value={value}
+						onChange={onChange}
+						placeholder="Select"
+						options={options}
+					/>
+				</div>
+			) : null}
+
+			{!isEmpty(courseReward) ? (
+				<div className={styles.select_row}>
+					<div className={styles.row_label}>
+						Select Reward Template
+						<sup className={styles.superscipt}>*</sup>
+					</div>
+
+					<Button
+						onClick={() => setShow(true)}
+						style={{ background: '#FEF199', color: '#000000' }}
+						size="lg"
+						className={styles.modal_btn}
+					>
+						Select Certificate Template
+					</Button>
+
+					{show ? (
+						<ModalContent
+							onClose={onClose}
+							show={show}
+							setShow={setShow}
 							value={value}
-							onChange={onChange}
-							placeholder="Select"
 							options={options}
+							onChange={onChange}
+							multiSelectedUser={multiSelectedUser}
+							setMultiSelectedUser={setMultiSelectedUser}
+							multiSelectedEdit={multiSelectedEdit}
+							setMultiSelectedEdit={setMultiSelectedEdit}
 						/>
-					</div>
-				) : null}
-
-				{!isEmpty(courseReward) ? (
-					<div className={styles.select_row}>
-						<div className={styles.row_label}>
-							Select Reward Template
-							<sup className={styles.superscipt}>*</sup>
-						</div>
-
-						<Button
-							onClick={() => setShow(true)}
-							style={{ background: '#FEF199', color: '#000000' }}
-							size="lg"
-							className={styles.modal_btn}
-						>
-							Select Certificate Template
-						</Button>
-
-						{show ? (
-							<ModalContent
-								onClose={onClose}
-								show={show}
-								setShow={setShow}
-								value={value}
-								options={options}
-								onChange={onChange}
-								multiSelectedUser={multiSelectedUser}
-								setMultiSelectedUser={setMultiSelectedUser}
-								multiSelectedEdit={multiSelectedEdit}
-								setMultiSelectedEdit={setMultiSelectedEdit}
-							/>
-						) : null}
-					</div>
-				) : null}
-			</div>
+					) : null}
+				</div>
+			) : null}
 		</div>
 	);
 }

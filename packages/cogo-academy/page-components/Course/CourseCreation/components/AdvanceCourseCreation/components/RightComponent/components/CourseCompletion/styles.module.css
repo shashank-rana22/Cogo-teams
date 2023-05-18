@@ -61,12 +61,12 @@
 .form_group {
 	margin-bottom: 32px;
 
-	&.course_criteria {
+	&.completion_criteria {
 		width: 100%;
 		padding-right: 24px;
 	}
 
-	&.course_reward {
+	&.course_completion_rewards_details {
 		width: 100%;
 		padding-right: 24px;
 	}
@@ -78,15 +78,6 @@
 
 	&.signing_authority_user_id {
 		width: 50%;
-	}
-
-	&.course_period {
-		width: 100%;
-		padding-right: 24px;
-	}
-
-	&.course_select {
-		width: 100%;
 	}
 
 	&.course_completion_value {

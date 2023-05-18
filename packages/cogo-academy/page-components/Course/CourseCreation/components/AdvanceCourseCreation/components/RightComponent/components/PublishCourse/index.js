@@ -7,6 +7,8 @@ import { getFieldController } from '../../../../../../../commons/getFieldControl
 import controls from './controls';
 import styles from './styles.module.css';
 
+const MAPPING = ['course_categories', 'course_title', 'thumbnail_url', 'description'];
+
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
 	return rest;
@@ -21,10 +23,11 @@ function PublishCourse({ data = {}, id = '' }, ref) {
 	} = useForm();
 
 	useEffect(() => {
-		if (!isEmpty(data)) {
-			setValue('course_categories', data.course_categories);
-			setValue('course_title', data.course_title);
-		}
+		MAPPING.forEach((item) => {
+			if (data[item] && !isEmpty(data[item])) {
+				setValue(item, data[item]);
+			}
+		});
 	}, [data, setValue]);
 
 	useImperativeHandle(ref, () => ({
@@ -32,21 +35,21 @@ function PublishCourse({ data = {}, id = '' }, ref) {
 			const onSubmit = (values) => {
 				const {
 					course_categories = [],
-					course_description,
-					course_landing_img,
+					description,
+					thumbnail_url,
 					course_subtitle,
 					course_title,
 				} = values || {};
 
-				const { finalUrl = '' } = course_landing_img || {};
+				const { finalUrl = '' } = thumbnail_url || {};
 
 				return {
 					hasError : false,
 					values   : {
 						id,
-						course_landing_img: finalUrl,
+						thumbnail_url: finalUrl,
 						course_categories,
-						course_description,
+						description,
 						course_title,
 						course_subtitle,
 					},

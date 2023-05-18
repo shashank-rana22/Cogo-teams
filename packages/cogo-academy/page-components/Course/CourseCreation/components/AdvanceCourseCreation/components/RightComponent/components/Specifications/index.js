@@ -27,7 +27,7 @@ function Specifications({ data = {}, id = '', activeTab = '' }, ref) {
 
 	useEffect(() => {
 		MAPPING.forEach((item) => {
-			if (!isEmpty(data[item])) {
+			if (data[item] && !isEmpty(data[item])) {
 				setValue(item, data[item]);
 			}
 		});
