@@ -1,8 +1,11 @@
 import { IcMPlus } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import Form from './Form';
 import styles from './styles.module.css';
+
+const incoTermCannotUpsell = ['cif', 'cfr', 'fob'];
 
 function AddNewService({
 	upsellableService = {},
@@ -14,18 +17,26 @@ function AddNewService({
 	activeStakeholder = '',
 	setShowTradeHeading = () => {},
 	showTradeHeading = {},
+	userServicesData = {},
 }) {
-	const haveToUpsell = servicesList?.length === 0
-		&& upsellableService.service_type === 'fcl_freight_local_service'
-		&& primary_service?.bl_category === 'hbl';
+	const { consignee_shipper_id } = shipmentData;
+
+	const haveToUpsell = upsellableService.service_type === 'fcl_freight_local_service'
+		&& primary_service?.bl_category === 'hbl' && activeStakeholder === 'consignee_shipper_booking_agent'
+		&& !isEmpty(userServicesData?.[consignee_shipper_id]);
 
 	const [upsellModal, setUpsellModal] = useState(haveToUpsell);
 
 	/* These services cant be upselled */
-	const cancelUpsell = !upsellableService?.service_type
-	|| [cancelUpsellDestinationFor,
-		cancelUpsellOriginFor,
-		'fcl_freight_service'].includes(upsellableService?.service_type);
+	let cancelUpsell = !upsellableService?.service_type;
+
+	if (cancelUpsellOriginFor === upsellableService.service_type && upsellableService.trade_type === 'export') {
+		cancelUpsell = true;
+	}
+
+	if (cancelUpsellDestinationFor === upsellableService.service_type && upsellableService.trade_type === 'import') {
+		cancelUpsell = true;
+	}
 
 	/* Hualage is upsellable only for icd shipments */
 	let isUpsellable = true;
@@ -38,7 +49,9 @@ function AddNewService({
 	/* user can only upsell services for the location to which its org is tagged */
 	let canUpsellForTradeType = true;
 
-	if (activeStakeholder === 'booking_agent' && primary_service?.trade_type !== upsellableService?.trade_type) {
+	if (activeStakeholder === 'booking_agent' && ((primary_service?.trade_type !== upsellableService?.trade_type
+		&& incoTermCannotUpsell.includes(primary_service?.inco_term))
+	)) {
 		canUpsellForTradeType = false;
 	} else if (activeStakeholder === 'consignee_shipper_booking_agent'
 		&& primary_service?.trade_type === upsellableService?.trade_type) {

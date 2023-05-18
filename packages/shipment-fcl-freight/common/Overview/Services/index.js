@@ -3,6 +3,7 @@ import { startCase, isEmpty } from '@cogoport/utils';
 import { useContext, useState } from 'react';
 
 import { possibleServices } from '../../../configurations/possible-full-route';
+import useGetBuyers from '../../../hooks/useGetBuyers';
 
 import AddNewService from './AddNewService';
 import helperFuncs from './helpers/getHelperFuncs';
@@ -33,6 +34,8 @@ function Services() {
 
 	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
 
+	const { data = {} } = useGetBuyers({ shipment_id: shipment_data?.id });
+
 	const heading = (serviceCategory) => (
 		<div className={styles.header}>{ startCase(serviceCategory)}</div>
 	);
@@ -44,7 +47,6 @@ function Services() {
 					{serviceCategories.map((serviceCategory) => (
 						<>
 							{ !isKam
-						&& Object.keys(serviceObj[serviceCategory]).length
 								? heading(serviceCategory) : null}
 
 							{ isKam
@@ -60,24 +62,23 @@ function Services() {
 								))}
 							</div>
 
-							{isKam ? (
-								<div className={styles.upselling}>
-									{(upsellServices[serviceCategory]).map((service) => (
-										<AddNewService
-											key={`${service?.trade_type}_${service?.service_type}`}
-											upsellableService={service}
-											servicesList={servicesList}
-											shipmentData={shipment_data}
-											primary_service={primary_service}
-											cancelUpsellDestinationFor={cancelUpsellDestinationFor}
-											cancelUpsellOriginFor={cancelUpsellOriginFor}
-											activeStakeholder={activeStakeholder}
-											setShowTradeHeading={setShowTradeHeading}
-											showTradeHeading={showTradeHeading}
-										/>
-									))}
-								</div>
-							) : null}
+							<div className={styles.upselling}>
+								{(upsellServices[serviceCategory]).map((service) => (
+									<AddNewService
+										key={`${service?.trade_type}_${service?.service_type}`}
+										upsellableService={service}
+										servicesList={servicesList}
+										shipmentData={shipment_data}
+										primary_service={primary_service}
+										cancelUpsellDestinationFor={cancelUpsellDestinationFor}
+										cancelUpsellOriginFor={cancelUpsellOriginFor}
+										activeStakeholder={activeStakeholder}
+										setShowTradeHeading={setShowTradeHeading}
+										showTradeHeading={showTradeHeading}
+										userServicesData={data}
+									/>
+								))}
+							</div>
 						</>
 					))}
 				</div>

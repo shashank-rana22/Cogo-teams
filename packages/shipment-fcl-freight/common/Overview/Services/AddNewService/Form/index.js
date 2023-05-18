@@ -1,5 +1,5 @@
-import { Modal, RadioGroup } from '@cogoport/components';
-import { AsyncSelect } from '@cogoport/forms';
+import { Modal } from '@cogoport/components';
+import { AsyncSelect, RadioGroupController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -24,8 +24,6 @@ function Form({
 
 	const service = upsellableService.service_type.replace('_service', '');
 
-	const [org, setOrg] = useState('');
-
 	const { handleShipmentsClick } = useShipmentBack();
 
 	const [step, setStep] = useState(1);
@@ -42,9 +40,12 @@ function Form({
 
 	const { consignee_shipper, importer_exporter, importer_exporter_id, consignee_shipper_id } = shipmentData;
 
-	const haveToAskOrgDetails = !['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
+	const haveToAskOrgDetails = !['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder)
+	&& consignee_shipper_id;
 
-	const organization_id = activeStakeholder === 'booking_agent' ? importer_exporter_id : consignee_shipper_id;
+	const organization_id = activeStakeholder === 'consignee_shipper_booking_agent'
+		? consignee_shipper_id
+		: importer_exporter_id;
 
 	const ORG_OPTIONS = [
 		{
@@ -93,11 +94,11 @@ function Form({
 					? (
 						<>
 							<div> Choose The organisation for which you want to upsell- </div>
-							<RadioGroup
+							<RadioGroupController
 								options={ORG_OPTIONS}
-								value={org}
-								onChange={(role) => setOrg(role)}
-								className={styles.group_radio}
+								control={formProps.control}
+								name="org"
+								rules={{ required: { value: true, message: 'Organisation is required' } }}
 							/>
 						</>
 					) : null}

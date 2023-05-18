@@ -2,7 +2,6 @@ import { dynamic } from '@cogoport/next';
 import React from 'react';
 
 import userLoggedIn from '../../helpers/booking-shipper-kam-user';
-import useGetBuyers from '../../hooks/useGetBuyers';
 import useGetShipment from '../../hooks/useGetShipment';
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
@@ -21,17 +20,14 @@ function ShipmentDetails() {
 
 	const { shipment_data } = get;
 
-	const { data } = useGetBuyers({ shipment_id: shipment_data?.id });
-
-	const orgIds = Object.keys(data);
 	const { activeStakeholder } = useStakeholderCheck();
 
-	const { kamLoggedIn } = userLoggedIn({ orgIds, shipment_data, activeStakeholder });
+	const { kamLoggedIn } = userLoggedIn({ shipment_data });
 
 	switch (activeStakeholder) {
 		case 'booking_agent':
-			if (kamLoggedIn === 'importer_exporter_kam') {
-				return <Kam get={get} activeStakeholder="booking_agent" />;
+			if (kamLoggedIn === 'booking_agent') {
+				return <Kam get={get} activeStakeholder={activeStakeholder} />;
 			}
 			return <DKam get={get} activeStakeholder="consignee_shipper_booking_agent" />;
 
