@@ -26,6 +26,7 @@ import rolesAndPermissions from './config/roles-n-permission';
 import saasTools from './config/saas-tools';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import supplyDashboard from './config/supply-dashboards';
+import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
 import welcome from './config/welcome';
 
@@ -36,6 +37,7 @@ const routeConfig = {
 	...supplyDashboard,
 	...contracts,
 	...businessFinance,
+	...unifiedDashboard,
 	...vendorRM,
 	...cogoAcademy,
 	...myIncident,
