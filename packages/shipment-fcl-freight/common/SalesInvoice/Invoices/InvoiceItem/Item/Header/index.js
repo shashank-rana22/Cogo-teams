@@ -5,7 +5,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
-import React, { useState, useContext } from 'react';
+import React, { useState, useContext, useRef } from 'react';
 
 import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 
@@ -35,6 +35,8 @@ function Header({
 		user_data: profile || {},
 	}));
 	const isAuthorized = user_data.email === 'ajeet@cogoport.com';
+
+	const invoicePartyDetailsRef = useRef(null);
 
 	const {
 		invoice_total_currency,
@@ -105,7 +107,7 @@ function Header({
 			</div>
 
 			<div className={cl`${styles.flex_row} ${open ? styles.open : ''}`}>
-				<div className={styles.invoice_party_details}>
+				<div className={styles.invoice_party_details} ref={invoicePartyDetailsRef}>
 					<div className={styles.invoice_party_name}>
 						{billing_address?.name || billing_address?.business_name}
 					</div>
@@ -269,7 +271,16 @@ function Header({
 					) : null}
 				</div>
 
-				<div className={styles.icon_wrapper} role="button" tabIndex={0} onClick={() => setOpen(!open)}>
+				<div
+					className={styles.icon_wrapper}
+					role="button"
+					tabIndex={0}
+					onClick={() => setOpen(!open)}
+					style={{
+						height:
+						`${invoicePartyDetailsRef.current?.offsetHeight}px`,
+					}}
+				>
 					{open ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 				</div>
 			</div>

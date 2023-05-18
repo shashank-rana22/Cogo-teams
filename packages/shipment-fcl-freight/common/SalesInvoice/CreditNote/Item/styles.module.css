@@ -24,10 +24,9 @@
 	}
 
 	& .gst_number{
-		font-size: 12px;
+		font-size: 10px;
 		
 		span:first-child{
-			font-weight:700;
 			text-decoration: underline;
 		}
 	}
@@ -58,13 +57,13 @@
 
 	.approved{
 		text-decoration: underline;
+		cursor: pointer;
 	}
 
 	span {
 
 		&:first-child{
-			font-size: 14px;
-			font-weight: 700;
+			font-size: 12px;
 		}
 		&:last-child{
 			font-size: 10px;
@@ -118,7 +117,6 @@
 .invoice_value {
 	flex: 0 0 40%;
 	font-size: 14px;
-	font-weight: 700;
 
 	span {
 		color: #f68b21;

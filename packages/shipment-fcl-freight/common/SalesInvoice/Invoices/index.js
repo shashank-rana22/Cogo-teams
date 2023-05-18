@@ -81,6 +81,7 @@ function Invoices({
 						list={list}
 						loading={CNLoading}
 						invoiceData={invoiceData}
+						invoicesList={invoicesList}
 					/>
 				) : null}
 		</main>
