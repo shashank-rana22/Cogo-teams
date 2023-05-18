@@ -104,7 +104,7 @@ function GenerateMAWB({
 	const mawbId = item.documentId;
 	const pendingTaskId = item.id;
 
-	const [activeCategory, setActiveCategory] = useState(edit ? 'mawb' : taskItem.blCategory);
+	const [activeCategory, setActiveCategory] = useState('mawb');
 
 	const finalFields = [
 		...fields.hawb_controls,
@@ -338,6 +338,7 @@ function GenerateMAWB({
 						setActiveCategory={setActiveCategory}
 						awbNumber={item.awbNumber || item.document_number}
 						serialId={item.serialId}
+						editCopies={editCopies}
 					/>
 
 					<FormContainer
