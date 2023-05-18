@@ -79,9 +79,7 @@ function GenerateMAWB({
 
 	const [customHawbNumber, setCustomHawbNumber] = useState(false);
 
-	const editHawbNumberCondition = !customHawbNumber;
-
-	const fields = mawbControls(disableClass, editHawbNumberCondition);
+	const fields = mawbControls(disableClass, !customHawbNumber);
 
 	const { packingData, packingList } = usePackingList();
 
