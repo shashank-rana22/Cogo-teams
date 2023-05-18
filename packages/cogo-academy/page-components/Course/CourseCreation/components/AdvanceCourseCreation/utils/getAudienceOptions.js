@@ -1,8 +1,7 @@
 import { Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import WORK_SCOPES_OPTIONS
-	from '../../../../../../../../ControlCenter/ConfigurationEngine/CreateAudienceForm/utils/workScopeMappings';
+import WORK_SCOPES_OPTIONS from './workScopeMappings';
 
 // eslint-disable-next-line import/no-unresolved
 import countries from '@/data-store/constants/countries.json';

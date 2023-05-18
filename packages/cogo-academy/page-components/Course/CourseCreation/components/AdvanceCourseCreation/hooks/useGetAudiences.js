@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-import getAudienceOptions from './getAudienceOptions';
+import getAudienceOptions from '../utils/getAudienceOptions';
 
 const useGetAudiences = () => {
 	const [{ data: audienceData, loading: listAudienceLoading }, triggerAudiences] = useRequest({

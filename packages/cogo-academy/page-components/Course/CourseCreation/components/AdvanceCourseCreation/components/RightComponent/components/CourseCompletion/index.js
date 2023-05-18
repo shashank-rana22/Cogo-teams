@@ -3,13 +3,14 @@ import { isEmpty } from '@cogoport/utils';
 import { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../commons/getFieldController';
+import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
 import ConditionSelectComponent from './ConditionSelectComponent';
 import { controls, selectControls } from './controls';
 import styles from './styles.module.css';
 import UploadComponent from './UploadComponent';
 
-function CourseCompletion({ data = {}, id = '' }, ref) {
+function CourseCompletion({ data = {}, id = '', activeTab }, ref) {
 	const {
 		control,
 		formState: { errors = {} },
@@ -57,6 +58,7 @@ function CourseCompletion({ data = {}, id = '' }, ref) {
 							certificate_name,
 						},
 						completion_criteria,
+						state: CURRENT_TO_NEXT_MAPPING[activeTab],
 					},
 				};
 			};

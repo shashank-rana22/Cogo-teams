@@ -12,7 +12,7 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function PublishCourse({ data = {} }, ref) {
+function PublishCourse({ data = {}, id = '' }, ref) {
 	const {
 		control,
 		formState: { errors = {} },
@@ -27,7 +27,42 @@ function PublishCourse({ data = {} }, ref) {
 		}
 	}, [data, setValue]);
 
-	useImperativeHandle(ref, () => ({ handleSubmit }));
+	useImperativeHandle(ref, () => ({
+		handleSubmit: () => {
+			const onSubmit = (values) => {
+				const {
+					course_categories = [],
+					course_description,
+					course_landing_img,
+					course_subtitle,
+					course_title,
+				} = values || {};
+
+				const { finalUrl = '' } = course_landing_img || {};
+
+				return {
+					hasError : false,
+					values   : {
+						id,
+						course_landing_img: finalUrl,
+						course_categories,
+						course_description,
+						course_title,
+						course_subtitle,
+					},
+				};
+			};
+
+			const onError = (error) => ({ hasError: true, error });
+
+			return new Promise((resolve) => {
+				handleSubmit(
+					(values) => resolve(onSubmit(values)),
+					(error) => resolve(onError(error)),
+				)();
+			});
+		},
+	}));
 
 	return (
 		<div className={styles.container}>

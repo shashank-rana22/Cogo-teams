@@ -16,7 +16,9 @@ const useUpdateCourse = ({ setActiveTab, activeTab, getCogoAcademyCourse }) => {
 
 			await getCogoAcademyCourse();
 
-			setActiveTab(CURRENT_TO_NEXT_MAPPING[activeTab]);
+			if (activeTab !== 'publish') {
+				setActiveTab(CURRENT_TO_NEXT_MAPPING[activeTab]);
+			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

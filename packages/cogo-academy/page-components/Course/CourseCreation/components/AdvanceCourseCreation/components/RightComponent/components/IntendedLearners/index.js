@@ -3,13 +3,14 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect, forwardRef, useImperativeHandle } from 'react';
 
 import { getFieldController } from '../../../../../../../commons/getFieldController';
+import useGetAudiences from '../../../../hooks/useGetAudiences';
+import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
 import controls from './controls';
 import ExcelComponent from './ExcelComponent';
 import styles from './styles.module.css';
-import useGetAudiences from './useGetAudiences';
 
-function IntendedLearners({ id, data = {} }, ref) {
+function IntendedLearners({ id, data = {}, activeTab }, ref) {
 	const {
 		control,
 		formState: { errors = {} },
@@ -51,6 +52,7 @@ function IntendedLearners({ id, data = {} }, ref) {
 						is_mandatory:
 						(values.mandatory_audiences || []).includes(audience_id),
 					})),
+					state: CURRENT_TO_NEXT_MAPPING[activeTab],
 				},
 			});
 
