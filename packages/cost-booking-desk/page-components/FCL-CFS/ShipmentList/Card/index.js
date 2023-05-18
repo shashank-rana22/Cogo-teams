@@ -8,6 +8,11 @@ import CargoDetails from './CargoDetails';
 import PortDetails from './PortDetails';
 import styles from './styles.module.css';
 
+const iconProps = {
+	Icon : IcMCfs,
+	text : 'FCL CFS',
+};
+
 function Card({ item = {} }) {
 	const router = useRouter();
 
@@ -16,11 +21,6 @@ function Card({ item = {} }) {
 
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;
-	};
-
-	const iconProps = {
-		Icon : IcMCfs,
-		text : 'FCL CFS',
 	};
 
 	return (
@@ -52,4 +52,5 @@ function Card({ item = {} }) {
 		</div>
 	);
 }
+
 export default Card;
