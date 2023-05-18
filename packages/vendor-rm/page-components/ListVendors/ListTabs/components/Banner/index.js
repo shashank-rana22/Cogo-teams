@@ -102,7 +102,7 @@ function Banner({ data = {} }) {
 
 			<div className={styles.content}>
 				{keysToDisplay.map((item) => (
-					<div className={styles.item}>
+					<div key={item} className={styles.item}>
 						<div className={styles.label}>
 							{valuesToDisplay[item].label}
 						</div>

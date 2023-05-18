@@ -156,6 +156,7 @@ function DailySalesOutstanding({
 						{ params.quarterView === 'normalView' && params.graphView !== 'graphView' && (
 							(arrayMonths || []).map((item) => (
 								<div
+									key={item.month}
 									className={styles.price_container}
 								>
 									<div className={styles.amount}>
@@ -182,7 +183,7 @@ function DailySalesOutstanding({
 
 						{params.quarterView === 'quarterView' && params.graphView !== 'graphView' && (
 							(quaterly).map((item, index) => (
-								<div className={styles.price_container}>
+								<div key={item.quarter} className={styles.price_container}>
 									<div className={styles.amount}>
 										{getFormattedPrice(
 											item.qsoForQuarter || 0,

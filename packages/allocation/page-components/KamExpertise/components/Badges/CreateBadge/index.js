@@ -71,7 +71,7 @@ function CreateBadge(props) {
 						if (!Element) return null;
 
 						return (
-							<div className={styles.form_group}>
+							<div key={el.name} className={styles.form_group}>
 								<span className={styles.label}>{el.label}</span>
 
 								<div className={styles.input_group}>

@@ -110,6 +110,7 @@ function List({
 
 		return channelList?.map((item) => (
 			<div
+				key={item?.id}
 				className={cl` ${styles.card} ${id === item?.id ? styles.colored : ''}`}
 				role="button"
 				tabIndex={0}
@@ -132,7 +133,7 @@ function List({
 
 				{(messageContentArr || []).map((obj) => (
 					obj?.mainKey === item?.id && obj[user_id] > 0 && id !== item?.id ? (
-						<div className={styles.circle}>{obj[user_id]}</div>
+						<div key={item?.id} className={styles.circle}>{obj[user_id]}</div>
 					) : null))}
 			</div>
 		));
@@ -184,6 +185,7 @@ function List({
 			) : (
 				channelList?.map((item) => (
 					<Details
+						key={item?.id}
 						setShow={setShow}
 						subscribedUsers={item?.subscribed_user_ids}
 						id={item?.id}

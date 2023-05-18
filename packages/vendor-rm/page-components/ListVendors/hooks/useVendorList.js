@@ -42,7 +42,7 @@ const renderToolTipContent = (unique_services) => (
 			if (index === 0) {
 				return null;
 			}
-			return <div>{startCase(item)}</div>;
+			return <div key={item}>{startCase(item)}</div>;
 		})}
 	</div>
 );
@@ -143,6 +143,7 @@ const useVendorList = () => {
 						const { icon: Icon, filterType = '', style = {} } = item;
 						return (
 							<Icon
+								key={filterType}
 								fill={item[params?.sort_type] || '#000'}
 								onClick={() => setParams((pv) => ({
 									...pv,
