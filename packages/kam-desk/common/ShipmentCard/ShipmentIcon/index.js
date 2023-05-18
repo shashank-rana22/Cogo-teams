@@ -13,7 +13,6 @@ import {
 	IcCFairCustoms,
 	IcMFtrailorFull,
 	IcMFairport,
-
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 

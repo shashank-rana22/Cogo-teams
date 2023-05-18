@@ -3,7 +3,7 @@ import { startCase } from '@cogoport/utils';
 const convertToStartCase = (val) => startCase(val || '');
 
 const getContainerSize = (container_size = '') => (
-	container_size?.includes('HC') ? container_size.replace('HC', 'ft HC') : `${container_size || '--'}ft`
+	container_size?.includes('HC') ? container_size.replace('HC', 'HC ft') : `${container_size || '--'}ft`
 );
 
 const getContainerCount = (containers_count) => {

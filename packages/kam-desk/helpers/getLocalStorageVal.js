@@ -32,8 +32,6 @@ const getLocalStorageVal = () => {
 		filters.page = 1;
 	}
 
-	if (typeof page !== 'number') filters.page = 1;
-
 	return {
 		filters,
 		shipment_type,

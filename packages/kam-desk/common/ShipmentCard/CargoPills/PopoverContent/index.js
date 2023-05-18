@@ -12,7 +12,7 @@ function PopoverContent({ list = [] }) {
 				const pills = getPillsFormat(item);
 				return (
 					<div className={styles.pills_container} key={uuid()}>
-						{pills.map((pill) => <Pill key={pill}>{pill}</Pill>)}
+						{pills?.map((pill) => <Pill key={pill}>{pill || ''}</Pill>)}
 					</div>
 				);
 			})}
