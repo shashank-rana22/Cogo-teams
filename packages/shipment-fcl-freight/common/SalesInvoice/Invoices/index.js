@@ -1,4 +1,6 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import useListCreditNotes from '../../../hooks/useListCreditNotes';
 import CreditNote from '../CreditNote';
@@ -10,50 +12,48 @@ import styles from './styles.module.css';
 function Invoices({
 	invoiceData = {},
 	groupedInvoices = {},
-	isCustomer = false,
 	refetch = () => {},
-	loading = false,
 	invoicesList = [],
-	isIRNGenerated = false,
-	outstanding_by_reg_num = {},
+	loading = false,
 	salesInvoicesRefetch = () => {},
-	shipmentData = {},
+	outstanding_by_reg_num = {},
+	isCustomer = false,
+	isIRNGenerated = false,
 }) {
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	const totals = invoiceData?.invoicing_party_wise_total;
 
 	const invoiceStatuses = invoiceData?.invoicing_parties?.map(
 		(item) => item?.status,
 	);
 
-	let count = 0;
-	invoiceStatuses?.forEach((item) => {
-		if (['reviewed', 'approved'].includes(item)) {
-			count += 1;
-		}
-	});
+	const isAllInvoicesReviewedApproved = invoiceStatuses?.every(
+		(item) => ['reviewed', 'approved'].includes(item),
+	);
 
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
-	if (invoiceStatuses?.length === count || invoiceData?.invoice_tat_show !== true) {
+	if (isAllInvoicesReviewedApproved || invoiceData?.invoice_tat_show !== true) {
 		disableAction = true;
 	}
 
-	const showForOldShipments = invoiceData?.invoice_trigger_date && shipmentData?.serial_id <= 120347
+	const showForOldShipments = invoiceData?.invoice_trigger_date && shipment_data?.serial_id <= 120347
 		&& !invoiceStatuses?.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { list, refetch: CNRefetch, loading: CNLoading } = useListCreditNotes({ shipmentData });
+	const { list, refetch: CNRefetch, loading: CNLoading } = useListCreditNotes({ shipment_data });
 
 	return (
 		<main className={styles.container}>
 			<Header
 				invoiceData={invoiceData}
-				isCustomer={isCustomer}
 				refetch={refetch}
-				shipment_data={shipmentData}
 				disableAction={disableAction}
+				isCustomer={isCustomer}
 			/>
+
 			<div className={styles.line} />
+
 			<section>
 				{Object.keys(groupedInvoices || {}).map((item) => (
 					<InvoiceItem
@@ -62,7 +62,6 @@ function Invoices({
 						total={totals?.[item]}
 						refetch={refetch}
 						loading={loading}
-						shipment_data={shipmentData}
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 						isIRNGenerated={isIRNGenerated}
@@ -71,6 +70,7 @@ function Invoices({
 					/>
 				))}
 			</section>
+
 			{list?.length
 				? (
 					<CreditNote

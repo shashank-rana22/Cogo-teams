@@ -1,6 +1,4 @@
-import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
-import React, { useContext } from 'react';
 
 import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
 import useListBfSalesInvoices from '../../hooks/useListBfSalesInvoices';
@@ -13,7 +11,6 @@ import Invoices from './Invoices';
 import styles from './styles.module.css';
 
 function SalesInvoice() {
-	const { shipment_data } = useContext(ShipmentDetailContext);
 	const { list } = useListSageSalesInvoices();
 	const { salesList, refetch:salesInvoicesRefetch } = useListBfSalesInvoices();
 
@@ -25,22 +22,22 @@ function SalesInvoice() {
 
 	const isIRNGenerated = !!list.find((item) => !!item.irn_number);
 
-	let salesInvoices = null;
 	if (loading) {
-		salesInvoices = (
+		return (
 			<div className={styles.loader}>
 				<Loader />
 				<Loader />
 				<Loader />
 			</div>
 		);
-	} else if (isEmpty(invoiceData) && !loading) {
-		salesInvoices = null;
-	} else {
-		(
-			salesInvoices =	(
+	}
+
+	return (
+		<main className={styles.container}>
+			<OverviewManageServices />
+
+			{!loading && !isEmpty(invoiceData) ? (
 				<Invoices
-					shipmentData={shipment_data}
 					invoiceData={invoiceData}
 					groupedInvoices={groupedInvoices}
 					refetch={refetch}
@@ -50,14 +47,7 @@ function SalesInvoice() {
 					isIRNGenerated={isIRNGenerated}
 					outstanding_by_reg_num={outstanding_by_reg_num}
 				/>
-			)
-		);
-	}
-
-	return (
-		<main className={styles.container}>
-			<OverviewManageServices />
-			{salesInvoices}
+			) : null}
 		</main>
 	);
 }

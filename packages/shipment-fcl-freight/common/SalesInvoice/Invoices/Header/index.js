@@ -1,6 +1,7 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useSelector } from '@cogoport/store';
-import React from 'react';
+import React, { useContext } from 'react';
 
 import ExchangeRate from '../../ExchangeRate';
 
@@ -10,12 +11,13 @@ import UpdateQuotation from './UpdateQuotation';
 
 function Header({
 	invoiceData = {},
-	isCustomer = false,
 	refetch = () => {},
 	disableAction = false,
-	shipment_data = {},
+	isCustomer = false,
 }) {
 	const user_data = useSelector(({ profile }) => profile || {});
+
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const {
 		net_total_price_discounted,
@@ -24,14 +26,17 @@ function Header({
 		reviewed_invoices,
 	} = invoiceData;
 
-	const showExchangeRate = (invoicing_parties || []).some((ip) => !['liners_exchange_rate', 'eta', 'etd'].includes(
-		ip?.exchange_rate_state,
-	) && shipment_data?.serial_id < '138811') || user_data.email === 'ajeet@cogoport.com';
+	const showExchangeRate = user_data.email === 'ajeet@cogoport.com'
+		|| (invoicing_parties || []).some(
+			(ip) => !['liners_exchange_rate', 'eta', 'etd'].includes(ip?.exchange_rate_state)
+					&& shipment_data?.serial_id < '138811',
+		);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex_row}>
 				<div className={styles.total_shipment_title}>Total Shipment Value -</div>
+
 				<div className={styles.shipment_value}>
 					{formatAmount({
 						amount   : net_total_price_discounted,
@@ -44,6 +49,7 @@ function Header({
 					})}
 				</div>
 			</div>
+
 			<div className={styles.edit_invoice}>
 				{!isCustomer ? (
 					<div className={styles.reviwed_stats}>
@@ -56,6 +62,7 @@ function Header({
 						reviewed
 					</div>
 				) : null}
+
 				<div className={styles.Flex}>
 					{showExchangeRate ? (
 						<ExchangeRate
@@ -65,12 +72,14 @@ function Header({
 							disableAction={disableAction}
 						/>
 					) : null}
+
 					<EditInvoicePreference
 						shipment_data={shipment_data}
 						invoicing_parties={invoicing_parties}
 						refetch={refetch}
 						disableAction={disableAction}
 					/>
+
 					<UpdateQuotation shipment_data={shipment_data} refetch={refetch} />
 				</div>
 			</div>

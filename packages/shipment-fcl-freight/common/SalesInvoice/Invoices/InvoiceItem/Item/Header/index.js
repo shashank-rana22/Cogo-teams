@@ -1,10 +1,11 @@
 import { Button, cl, Tooltip } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 
@@ -18,7 +19,6 @@ function Header({
 	children = null,
 	invoice = {},
 	refetch = () => {},
-	shipment_data = {},
 	invoiceData = {},
 	invoicesList = [],
 	isIRNGenerated = false,
@@ -28,6 +28,8 @@ function Header({
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
 	const [status, setStatus] = useState('');
+
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { user_data } = useSelector(({ profile }) => ({
 		user_data: profile || {},
