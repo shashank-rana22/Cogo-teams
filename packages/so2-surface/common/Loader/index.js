@@ -1,5 +1,4 @@
 import { Placeholder } from '@cogoport/components';
-
 import styles from './styles.module.css';
 
 function Card() {

@@ -1,8 +1,6 @@
 import { Button, Select, Chips } from '@cogoport/components';
 import { useContext, useState } from 'react';
-
 import DashboardContext from '../../../../context/DashboardContext';
-
 import styles from './styles.module.css';
 
 function SortBy({

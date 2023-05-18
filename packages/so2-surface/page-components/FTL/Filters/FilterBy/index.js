@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function FilterBy({
 	setPopoverFilter = () => {},
 	popoverFilter = {},
-	setShowPopover = () => {},
+	setShowFilterPopover = () => {},
 }) {
 	const { filters = {}, setFilters } = useContext(DashboardContext);
 
@@ -24,7 +24,7 @@ function FilterBy({
 	const handleReset = () => {
 		setFormValue({});
 		setFilters({});
-		setShowPopover(false);
+		setShowFilterPopover(false);
 	};
 
 	return (
@@ -42,7 +42,7 @@ function FilterBy({
 					size="sm"
 					onClick={() => {
 						setFilters({ ...filters, ...popoverFilter, ...formValue });
-						setShowPopover(false);
+						setShowFilterPopover(false);
 					}}
 				>
 					<div className={styles.action_text}>Apply</div>

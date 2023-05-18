@@ -1,9 +1,7 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useContext } from 'react';
-
 import TabContainer from '../../../configs/TAB_CONFIG';
 import DashboardContext from '../../../context/DashboardContext';
-
 import styles from './styles.module.css';
 
 function DeskTabs({ tabData = {} }) {

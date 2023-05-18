@@ -1,8 +1,6 @@
 import { Checkbox } from '@cogoport/components';
 import { IcMFftl } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useContext } from 'react';
-
 import CardHeader from './CardHeader';
 import CargoPills from './CargoPills';
 import EstimatedDates from './EstimatedDates';

@@ -1,6 +1,5 @@
 import { Pagination } from '@cogoport/components';
 import { useContext } from 'react';
-
 import DashboardContext from '../../../../context/DashboardContext';
 
 function ListPagination({ data = {} }) {

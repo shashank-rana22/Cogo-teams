@@ -8,7 +8,6 @@ export default function EmptyState() {
 				<h1 className={styles.header}>No Shipments found !!</h1>
 				<h3>Looks like no results were found...</h3>
 			</div>
-
 			<img
 				src={src}
 				alt="empty_page"

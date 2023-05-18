@@ -1,8 +1,6 @@
 import { Tooltip, cl, Button } from '@cogoport/components';
 import { useContext } from 'react';
-
 import DashboardContext from '../../../../../context/DashboardContext';
-
 import styles from './styles.module.css';
 
 export default function ShipmentInfo({ item = {}, clickCard = () => {} }) {

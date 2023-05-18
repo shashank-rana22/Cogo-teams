@@ -1,12 +1,9 @@
 import { Pill } from '@cogoport/components';
-import { IcCCogoassured } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-
 import styles from './styles.module.css';
 
 export default function CardHeader({ item = {} }) {
 	const { source } = item || {};
-
 	const displaySource = source === 'direct' ? 'Sell Without Buy' : startCase(source || '');
 
 	return (

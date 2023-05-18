@@ -1,12 +1,10 @@
+import { useState, useContext, useEffect } from 'react';
 import { Button, Modal } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useContext, useEffect } from 'react';
-
 import EmptyState from '../../../common/EmptyState';
 import DashboardContext from '../../../context/DashboardContext';
 import useBulkUpdateSO2 from '../../../hooks/useBulkUpdateSO2';
-
 import Card from './Card';
 import ListPagination from './ListPagination';
 import styles from './styles.module.css';

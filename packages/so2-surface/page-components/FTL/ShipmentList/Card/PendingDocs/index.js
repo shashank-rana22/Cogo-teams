@@ -1,7 +1,6 @@
 import { cl, Button } from '@cogoport/components';
 import { IcCRedCircle } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
-
 import styles from './styles.module.css';
 
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);

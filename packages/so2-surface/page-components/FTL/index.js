@@ -8,10 +8,8 @@ import StepperTabs from './StepperTabs';
 import styles from './styles.module.css';
 
 function FTL() {
-	const { data } = useListDocumentDesk();
+	const { data, loading } = useListDocumentDesk();
 	const tabData = data?.pending_tasks_stats;
-
-	const loading = false;
 
 	return (
 		<div>
