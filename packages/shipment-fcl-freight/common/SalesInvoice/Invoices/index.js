@@ -9,6 +9,13 @@ import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
 
+const POST_REVIEWED_INVOICES = [
+	'reviewed',
+	'approved',
+	'revoked',
+	'finance_rejected',
+];
+
 function Invoices({
 	invoiceData = {},
 	groupedInvoices = {},
@@ -27,12 +34,14 @@ function Invoices({
 		(item) => item?.status,
 	);
 
-	const isAllInvoicesReviewedApproved = invoiceStatuses?.every(
-		(item) => ['reviewed', 'approved'].includes(item),
-	);
-
+	let count = 0;
+	invoiceStatuses?.forEach((item) => {
+		if (POST_REVIEWED_INVOICES.includes(item)) {
+			count += 1;
+		}
+	});
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
-	if (isAllInvoicesReviewedApproved || invoiceData?.invoice_tat_show !== true) {
+	if (invoiceStatuses?.length === count) {
 		disableAction = true;
 	}
 

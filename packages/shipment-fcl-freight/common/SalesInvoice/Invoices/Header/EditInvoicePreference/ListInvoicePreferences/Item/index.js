@@ -98,7 +98,6 @@ function Item({
 			) : null}
 			<div
 				className={cl`${styles.HeaderContainer} ${open ? styles.open : ''}`}
-				// className={open ? 'open' : ''}
 				style={{ cursor: noActionState ? 'default' : '' }}
 				onClick={!noActionState ? () => handleServiceToggle() : null}
 			>
@@ -164,15 +163,13 @@ function Item({
 			</div>
 
 			{open ? (
-				<div>
-					<SelectService
-						shipment_type={shipment_type}
-						handleServiceChange={onServiceChange}
-						invoice={invoice}
-						onClose={handleServiceToggle}
-						allTakenServices={allTakenServices}
-					/>
-				</div>
+				<SelectService
+					shipment_type={shipment_type}
+					handleServiceChange={onServiceChange}
+					invoice={invoice}
+					onClose={handleServiceToggle}
+					allTakenServices={allTakenServices}
+				/>
 			) : null}
 		</div>
 	);

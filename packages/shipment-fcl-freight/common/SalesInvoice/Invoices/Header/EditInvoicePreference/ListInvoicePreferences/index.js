@@ -23,7 +23,7 @@ function ListInvoicePreferences({
 	});
 
 	return (
-		<div className="ie_main_invoice_list">
+		<div>
 			{(invoicingParties || []).map((invoice) => (
 				<InvoiceItem
 					key={invoice?.id}

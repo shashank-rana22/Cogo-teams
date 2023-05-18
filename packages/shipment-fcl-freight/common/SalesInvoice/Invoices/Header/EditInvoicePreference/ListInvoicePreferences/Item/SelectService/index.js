@@ -1,6 +1,7 @@
 import { Button, Tooltip, CheckboxGroup, Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -14,6 +15,13 @@ const mainServices = [
 	'air_freight_service',
 ];
 
+const POST_REVIEWED_INVOICES = [
+	'reviewed',
+	'approved',
+	'revoked',
+	'finance_rejected',
+];
+
 function SelectService({
 	invoice,
 	handleServiceChange,
@@ -25,11 +33,15 @@ function SelectService({
 	const [value, onChange] = useState(selected);
 
 	const { invoice_currency, invoice_source = '' } = invoice;
-	const [invoiceCurrency, setInvoiceCurreny] = useState(invoice_currency);
+	const [invoiceCurrency, setInvoiceCurrency] = useState(invoice_currency);
 
-	const options = [];
+	let options = [];
 	allTakenServices?.forEach((service) => {
-		if (!['reviewed', 'approved', 'revoked'].includes(service?.status)) {
+		const countryCode = getCountryDetails({
+			country_id: invoice?.billing_address?.organization_country_id,
+		});
+
+		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
 			const trade_type = !mainServices.includes(service?.service_type)
 				? service?.trade_type
 				: null;
@@ -105,20 +117,22 @@ function SelectService({
 				value     : id_with_igst,
 				...service,
 			};
-			const isCountryIdOtherThanIndia =				service?.service_type === 'cargo_insurance_service'
-				&& invoice?.billing_address?.organization_country_id
-					!== GLOBAL_CONSTANTS?.country_ids.IN;
-
-			if (!isCountryIdOtherThanIndia) {
-				options.push(servicesToPush);
-			}
+			options.push(servicesToPush);
 		}
+		options = options?.filter(
+			(opt) => !(
+				opt?.service_type === 'cargo_insurance_service'
+					&& !GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
+						.cargo_insurance.countries.includes(
+							countryCode,
+						)
+			),
+		);
 	});
 
-	const handleChange = (newValue, obj) => {
+	const handleChange = (newValue) => {
 		const addedValue = newValue?.find((id) => !value?.includes(id));
-		const addedValueObj = obj?.find((objItem) => objItem?.value === addedValue);
-
+		const addedValueObj = invoice?.services?.find((objItem) => objItem?.serviceKey === addedValue);
 		if (
 			addedValueObj?.service_source === 'pass_through'
 			&& addedValueObj?.service_source !== invoice_source
@@ -133,7 +147,7 @@ function SelectService({
 		if (selected?.length) {
 			onChange(selected);
 		}
-	}, [invoice?.id]);
+	}, [invoice.id]);
 
 	return (
 		<div className={styles.Container}>
@@ -141,15 +155,12 @@ function SelectService({
 			<ChangeCurrency
 				invoice={invoice}
 				invoiceCurrency={invoiceCurrency}
-				setInvoiceCurreny={setInvoiceCurreny}
+				setInvoiceCurrency={setInvoiceCurrency}
 			/>
 
 			<CheckboxGroup
 				options={options}
 				onChange={handleChange}
-				multiple
-				className="primary lg"
-				theme="admin"
 				value={value}
 			/>
 
@@ -161,7 +172,6 @@ function SelectService({
 				>
 					Cancel
 				</Button>
-
 				<Button
 					size="sm"
 					onClick={() => handleServiceChange(invoice, {

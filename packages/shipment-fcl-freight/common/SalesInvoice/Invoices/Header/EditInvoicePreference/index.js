@@ -68,7 +68,6 @@ function EditInvoicePreference({
 
 					<Modal.Body>
 						<div className={styles.form}>
-
 							<Button
 								size="md"
 								onClick={() => setAddInvoicingParty(true)}
@@ -76,12 +75,11 @@ function EditInvoicePreference({
 							>
 								+ Add Invoicing Party
 							</Button>
-
 							<ListInvoicePreferences
 								shipmentData={shipment_data}
-								// invoicingParties={selectedParties}
+								invoicingParties={selectedParties}
 								raw_invoicing_parties={invoicingParties}
-								// {...rest}
+								{...rest}
 							/>
 						</div>
 					</Modal.Body>
@@ -93,13 +91,13 @@ function EditInvoicePreference({
 						>
 							Cancel
 						</Button>
-
 						<Button
-							className=" primary md ie_submit_invoice_preference"
+							className="md"
+							onClick={handleEditPreferences}
+							disabled={rest?.loading}
 						>
 							Submit
 						</Button>
-
 					</Modal.Footer>
 
 					{addInvoicingParty ? (
@@ -116,7 +114,7 @@ function EditInvoicePreference({
 									<AddInvoicingParty
 										shipmentData={shipment_data}
 										organizationDetails={organizationDetails}
-										// updateInvoicingParty={(ip) => handleInvoicingPartyAdd(ip)}
+										updateInvoicingParty={(ip) => handleInvoicingPartyAdd(ip)}
 										primary_service={shipment_data?.shipment_type}
 									/>
 								</div>

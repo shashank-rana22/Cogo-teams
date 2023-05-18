@@ -17,7 +17,7 @@
 	align-items: center;
 	text-align: center;
 	color: #393f70;
-	background: #ded7fc;
+	background: #C4DC91;
 	border-radius: 4px;
 	padding: 4px 6px;
 }
@@ -26,7 +26,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	border-top: 1px solid #ded7fc;
+	border-top: 1px solid #C4DC91;
 	padding-top: 18px;
 	margin-top: 10px;
 

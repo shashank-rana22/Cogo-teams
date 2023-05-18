@@ -1,25 +1,25 @@
-import { Pill } from '@cogoport/components';
+import { Chips } from '@cogoport/components';
 import React from 'react';
 
 import getCurrencyOptions from './helpers/getCurrencyOptions';
+import styles from './styles.module.css';
 
 function ChangeCurrency({
 	invoice = {},
 	invoiceCurrency = '',
-	setInvoiceCurreny = () => {},
+	setInvoiceCurrency = () => {},
 }) {
 	const { currencyOptions } = getCurrencyOptions(invoice);
 
 	return (
-		<div>
-			<div style={{ marginBottom: '12px' }} className="change-currency-pills">
-				<Pill
-					options={currencyOptions}
-					onChange={(val) => setInvoiceCurreny(val)}
-					value={invoiceCurrency}
-				/>
-			</div>
-		</div>
+		<Chips
+			className={styles.chip}
+			size="sm"
+			items={currencyOptions}
+			selectedItems={invoiceCurrency}
+			onItemChange={(val) => setInvoiceCurrency(val)}
+			style={{ width: '10px' }}
+		/>
 	);
 }
 

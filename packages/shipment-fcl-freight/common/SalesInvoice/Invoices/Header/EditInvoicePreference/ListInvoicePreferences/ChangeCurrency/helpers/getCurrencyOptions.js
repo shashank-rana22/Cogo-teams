@@ -40,8 +40,11 @@ const getCurrencyOptions = (invoice) => {
 	] || invoiceCurrencyMappings?.freight_invoice_currency?.others;
 
 	const currencyOptions = currencyOptionsOld.map((item) => ({
-		label : item,
-		value : item,
+		key      : item,
+		disabled : false,
+		children : item,
+		suffix   : null,
+		tooltip  : false,
 	}));
 
 	return {

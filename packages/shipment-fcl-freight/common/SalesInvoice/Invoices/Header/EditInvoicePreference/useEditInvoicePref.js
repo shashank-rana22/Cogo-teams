@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { isEmpty, getApiErrorString } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import formatIps from '../../../helpers/format-ips';
@@ -31,7 +31,7 @@ export const controls = (selectOptions) => [
 const geo = getGeoConstants();
 
 const isAllServicesTaken = (
-	servicesList,
+	invoicing_parties,
 	selectedParties,
 	shipment_data,
 	allServiceLineitemsCount,
@@ -47,24 +47,22 @@ const isAllServicesTaken = (
 
 	let mainServices = [];
 	if (shipment_data?.state === 'cancelled') {
-		mainServices = servicesList?.filter(
+		mainServices = invoicing_parties?.[0]?.services?.filter(
 			(service) => service?.service_type === shipmentMainService,
 		);
 	} else {
-		mainServices = servicesList?.filter(
+		mainServices = invoicing_parties?.[0]?.services?.filter(
 			(service) => service?.service_type !== 'subsidiary_service',
 		);
 	}
-
 	let isAllMainServicesTaken = true;
 	const notTaken = [];
 	mainServices.forEach((service) => {
-		if (!allServicesTaken.includes(service.id)) {
+		if (!allServicesTaken.includes(service.service_id)) {
 			isAllMainServicesTaken = false;
 			notTaken.push(service.service_type);
 		}
 	});
-
 	if (allServicesTaken.length !== allServiceLineitemsCount) {
 		isAllMainServicesTaken = false;
 	}
@@ -73,14 +71,12 @@ const isAllServicesTaken = (
 };
 
 const useEditInvoicePref = ({
-	invoicing_parties,
+	invoicing_parties = [],
 	shipment_data = {},
 	setShow = () => {},
 	refetch = () => {},
 }) => {
-	const { query } = useSelector(({ general }) => ({
-		query: general.query,
-	}));
+	// console.log(invoicing_parties?.[0]?.services, ' :invoicingParties');
 
 	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
@@ -107,21 +103,18 @@ const useEditInvoicePref = ({
 
 	const {
 		inco_term = '',
-		all_services: servicesList,
 		shipment_type,
 		importer_exporter_id,
 	} = shipment_data;
 
-	const updateExportInvoices =		IncoTermMapping[inco_term] === 'export'
+	const updateExportInvoices = IncoTermMapping[inco_term] === 'export'
 		&& exportServices.includes(shipment_type);
 
-	const [{ loading }, { trigger: updatePartyApi }] = useRequest({
-		url    : '/update_shipment_invoice_combination',
-		method : 'POST',
-	}, { manual: true });
+	const endPoint = updateExportInvoices ? '/update_shipment_export_invoice_combination'
+		: '/update_shipment_invoice_combination';
 
-	const [{ loading: updateExportShipmentPartyLoading }, { trigger: updateExportShipmentPartyApi }] = useRequest({
-		url    : '/update_shipment_export_invoice_combination',
+	const [{ loading }, trigger] = useRequest({
+		url    : endPoint,
 		method : 'POST',
 	}, { manual: true });
 
@@ -188,7 +181,7 @@ const useEditInvoicePref = ({
 						isBasicFreightInvService = itemsService;
 					}
 
-					const currentService = servicesList?.find(
+					const currentService = invoicing_parties?.services?.find(
 						(serv) => serv?.id === service?.split(':')?.[0],
 					);
 
@@ -264,7 +257,7 @@ const useEditInvoicePref = ({
 	const handleEditPreferences = async () => {
 		try {
 			const { isAllMainServicesTaken } = isAllServicesTaken(
-				servicesList,
+				invoicing_parties,
 				selectedParties,
 				shipment_data,
 				allServiceLineitemsCount,
@@ -274,12 +267,12 @@ const useEditInvoicePref = ({
 				Toast.error('You have not added all taken services');
 				return;
 			}
-
 			const filteredParties = selectedParties.filter(
 				(party) => !!party.services.length || typeof party.id === 'string',
 			);
 
 			const finalParties = [];
+
 			filteredParties.forEach((party) => {
 				const partyServices = [];
 
@@ -292,7 +285,7 @@ const useEditInvoicePref = ({
 						display_name : undefined,
 						trade_type   : undefined,
 						serviceKey   : undefined,
-						is_igst      : undefined,
+						is_igst      : null,
 					};
 
 					partyServices.push(xyz);
@@ -309,7 +302,6 @@ const useEditInvoicePref = ({
 					&& partyDetails?.services?.length
 				) {
 					if (typeof partyDetails.id === 'number') {
-						// eslint-disable-next-line no-param-reassign
 						delete partyDetails.id;
 						finalParties.push(partyDetails);
 					} else {
@@ -319,28 +311,20 @@ const useEditInvoicePref = ({
 			});
 
 			const payload = {
-				shipment_id          : query.id,
+				shipment_id          : shipment_data.id,
 				invoice_combinations : finalParties,
 				performed_by_org_id  : importer_exporter_id,
 			};
 
-			if (updateExportInvoices) {
-				await updateExportShipmentPartyApi.trigger({
-					data: payload,
-				});
-			} else {
-				await updatePartyApi.trigger({
-					data: payload,
-				});
-			}
+			await trigger({
+				data: payload,
+			});
 			Toast.success('Invoice Preference edited!');
 			refetch();
 			setShow();
 		} catch (err) {
 			console.log(err);
-			Toast.error(getApiErrorString(err?.data));
-			// refetch() and setShow() is added here as sometimes this api is getting timeout error but data is processed in backend
-			// so to prevent user to hit this api again modal need to be closed and data must be refetched this will be removed in future
+			toastApiError(err?.data);
 			refetch(); // will be removed in future
 			setShow(); // will be removed in future
 		}
@@ -351,9 +335,8 @@ const useEditInvoicePref = ({
 		setSelectedParties,
 		handleInvoicingPartyAdd,
 		handleServiceChange,
-		servicesList,
 		handleEditPreferences,
-		loading: updatePartyApi?.loading || updateExportShipmentPartyApi?.loading,
+		loading,
 		formattedIps,
 	};
 };
