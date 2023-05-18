@@ -122,12 +122,12 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 							<Overview shipmentData={shipment_data} />
 						</TabPanel>
 
-						{/* <TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
+						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 							<Tasks />
-						</TabPanel> */}
+						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
-							<Documents get={get} />
+							<Documents />
 						</TabPanel>
 
 						{/* <TabPanel name="emails" title="Emails">

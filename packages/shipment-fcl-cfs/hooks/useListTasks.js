@@ -3,10 +3,10 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-const STAKEHOLDER_MAPPINGS = {
-	booking_desk : 'service_ops',
-	lastmile_ops : 'lastmile_ops',
-};
+// const STAKEHOLDER_MAPPINGS = {
+// 	booking_desk : 'service_ops',
+// 	lastmile_ops : 'lastmile_ops',
+// };
 
 function useListTasks({
 	filters = {},
@@ -19,12 +19,13 @@ function useListTasks({
 
 	const user_id = profile?.user?.id;
 
-	const stakeholder = STAKEHOLDER_MAPPINGS[activeStakeholder] || '';
+	// const stakeholder = STAKEHOLDER_MAPPINGS[activeStakeholder] || '';
 
-	const showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
+	// const showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
+	const showTaskFilters = { [`${activeStakeholder}_id`]: user_id } || {};
 
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/list_tasks',
+		url    : 'fcl_cfs/list_tasks',
 		method : 'GET',
 		params : {
 			...defaultParams,

@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 import UploadForm from './UploadForm';
 import Wallet from './Wallet';
 
-function Documents({ get = {} }) {
+function Documents() {
 	const [showDoc, setShowDoc] = useState(null);
 	const [showApproved, setShowApproved] = useState(false);
 	const [activeToggle, setActiveToggle] = useState(false);
@@ -23,9 +23,7 @@ function Documents({ get = {} }) {
 	const [searchValue, setSearchValue] = useState('');
 
 	const { updateDocument } = useUpdateDocument({});
-	// const { shipment_data, primary_service, activeStakeholder } = useContext(ShipmentDetailContext);
-
-	const { shipment_data, primary_service, activeStakeholder } = get || {};
+	const { shipment_data, primary_service, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const {
 		loading,
@@ -69,7 +67,6 @@ function Documents({ get = {} }) {
 		} if (!activeToggle) {
 			return (
 				<CheckList
-					get={get}
 					taskList={filteredTaskList}
 					emailDocs={emailList}
 					completedDocs={completedDocs?.list}

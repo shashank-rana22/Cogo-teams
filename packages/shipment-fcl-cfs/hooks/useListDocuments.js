@@ -8,7 +8,7 @@ function useListDocuments({
 	defaultParams = {},
 }) {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/list_documents',
+		url    : 'fcl_cfs/list_documents',
 		method : 'GET',
 		params : {
 			filters: {

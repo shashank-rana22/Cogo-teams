@@ -5,7 +5,6 @@ import Card from './Card';
 import styles from './styles.module.css';
 
 function CheckList({
-	get,
 	taskList,
 	emailDocs,
 	completedDocs,
@@ -13,8 +12,7 @@ function CheckList({
 	setShowApproved,
 
 }) {
-	// const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
-	const { primary_service, shipment_data } = get || {};
+	const { primary_service, shipment_data } = useContext(ShipmentDetailContext);
 
 	return (
 		<div className={styles.wrapper}>
