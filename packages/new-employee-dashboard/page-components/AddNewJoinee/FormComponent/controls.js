@@ -15,7 +15,11 @@ const controls = [
 		placeholder : 'Enter a valid email id',
 		type        : 'text',
 		rules       : {
-			required: 'Email is required',
+			required : 'Email is required',
+			pattern  : {
+				value   : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+				message : 'Email is invalid',
+			},
 		},
 	},
 
@@ -107,7 +111,11 @@ const controls = [
 		placeholder : 'Enter email id',
 		type        : 'text',
 		rules       : {
-			required: 'Email is required',
+			required : 'Email is required',
+			pattern  : {
+				value   : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+				message : 'Email is invalid',
+			},
 		},
 	},
 
