@@ -11,18 +11,19 @@ if (typeof window !== 'undefined') {
 	RichTextEditor = require('react-rte').default;
 }
 
+const MAPPING = ['name', 'description', 'content_type', 'completion_duration_value', 'completion_duration_unit'];
+
 const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, index }) => {
 	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 
 	const { control, formState:{ errors = {} }, watch, handleSubmit, setValue } = useForm();
 
-	const additionalResourcesWatch = watch('additional_resources');
-
-	const contentTypeWatch = watch('content_type');
-
-	const uploadVideoWatch = watch('upload_video');
-
-	const uploadDocumentWatch = watch('upload_document');
+	const {
+		additional_resources: additionalResourcesWatch,
+		content_type: contentTypeWatch,
+		upload_video: uploadVideoWatch,
+		upload_document: uploadDocumentWatch,
+	} = watch();
 
 	const onSubmit = (values) => {
 		const { isNew = false } = chapterContent || {};
@@ -45,11 +46,13 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 	};
 
 	useEffect(() => {
-		const { name, description, content_type, chapter_content, chapter_attachments = [] } = chapterContent || {};
+		const { content_type, chapter_content, chapter_attachments = [] } = chapterContent || {};
 
-		setValue('name', name);
-		setValue('description', description);
-		setValue('content_type', content_type);
+		MAPPING.forEach((item) => {
+			if (chapterContent[item] && !isEmpty(chapterContent[item])) {
+				setValue(item, chapterContent[item]);
+			}
+		});
 
 		if (content_type === 'text') {
 			setEditorValue(RichTextEditor?.createValueFromString((chapter_content || ''), 'html'));

@@ -91,6 +91,34 @@ const controls = [
 		elementType : 'text',
 		placeholder : 'www.example.com',
 	},
+	{
+		label       : 'Time permitted to complete Course, in order to get Reward',
+		name        : 'group_select_1',
+		elementType : 'groupSelect',
+		subControls : [
+			{
+				label       : '',
+				name        : 'completion_duration_unit',
+				elementType : 'select',
+				placeholder : 'Select period of',
+				disabled    : true,
+				options     : [{
+					value : 'minutes',
+					label : 'Minutes',
+				}],
+				value : 'minutes',
+				rules : { required: { value: true, message: 'This is required' } },
+			},
+			{
+				label       : '',
+				name        : 'completion_duration_value',
+				elementType : 'number',
+				type        : 'number',
+				placeholder : 'Select',
+				rules       : { required: { value: true, message: 'This is required' } },
+			},
+		],
+	},
 ];
 
 export default controls;

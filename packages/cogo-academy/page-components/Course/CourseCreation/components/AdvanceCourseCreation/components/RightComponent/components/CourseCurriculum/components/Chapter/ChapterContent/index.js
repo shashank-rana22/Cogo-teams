@@ -7,7 +7,13 @@ import controls from './controls';
 import styles from './styles.module.css';
 import useHandleChapterContent from './useHandleChapterContent';
 
-function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, chapterLoading }) {
+function ChapterContent({
+	chapterContent,
+	onSaveChapter,
+	subModuleId,
+	index,
+	chapterLoading,
+}) {
 	const {
 		RichTextEditor,
 		onSubmit,
@@ -20,7 +26,12 @@ function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, cha
 		setEditorValue,
 		uploadVideoWatch,
 		uploadDocumentWatch,
-	} = useHandleChapterContent({ chapterContent, onSaveChapter, subModuleId, index });
+	} = useHandleChapterContent({
+		chapterContent,
+		onSaveChapter,
+		subModuleId,
+		index,
+	});
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
@@ -29,10 +40,58 @@ function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, cha
 					elementType,
 					label,
 					name,
+					subControls = [],
 				} = controlItem || {};
 
-				if (['additional_resources_title', 'additional_resources_link']
-					.includes(name) && !additionalResourcesWatch) {
+				if (elementType === 'groupSelect') {
+					return (
+						<div className={styles.group_select}>
+							<div className={styles.label}>
+								{label}
+								<sup className={styles.superscipt}>*</sup>
+							</div>
+
+							<div className={styles.select_group}>
+								{subControls.map((subControlItem) => {
+									const { name: subControlName, elementType: subControlType } = subControlItem || {};
+
+									const SubControlElement = getFieldController(subControlType);
+
+									return (
+										<div
+											key={name}
+											className={`${styles.form_group} ${styles[subControlName]}`}
+										>
+											<div
+												className={`${styles.input_group} ${styles[subControlName]}`}
+											>
+												<SubControlElement
+													{...subControlItem}
+													key={subControlName}
+													control={control}
+													id={`${subControlName}_input`}
+												/>
+											</div>
+
+											{errors?.[subControlName]?.message ? (
+												<div className={styles.error_message}>
+													{errors?.[subControlName]?.message}
+												</div>
+											) : null}
+										</div>
+									);
+								})}
+							</div>
+						</div>
+					);
+				}
+
+				if (
+					['additional_resources_title', 'additional_resources_link'].includes(
+						name,
+					)
+					&& !additionalResourcesWatch
+				) {
 					return null;
 				}
 
@@ -40,7 +99,10 @@ function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, cha
 					return null;
 				}
 
-				if (!['presentation', 'text'].includes(contentTypeWatch) && name === 'upload_presentation') {
+				if (
+					!['presentation', 'text'].includes(contentTypeWatch)
+					&& name === 'upload_presentation'
+				) {
 					return null;
 				}
 
@@ -52,7 +114,10 @@ function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, cha
 					return null;
 				}
 
-				if (!['presentation', 'text'].includes(contentTypeWatch) && name === 'upload_presentation') {
+				if (
+					!['presentation', 'text'].includes(contentTypeWatch)
+					&& name === 'upload_presentation'
+				) {
 					return null;
 				}
 
@@ -103,27 +168,31 @@ function ChapterContent({ chapterContent, onSaveChapter, subModuleId, index, cha
 							</div>
 						) : null}
 
-						{['upload_video', 'upload_document']
-							.includes(name) && !isEmpty(docToUse) ? (
-								<iframe
-									style={{ width: '100%', marginTop: '20px' }}
-									height="400"
-									src={name === 'upload_video'
+						{['upload_video', 'upload_document'].includes(name)
+						&& !isEmpty(docToUse) ? (
+							<iframe
+								style={{ width: '100%', marginTop: '20px' }}
+								height="400"
+								src={
+									name === 'upload_video'
 										? uploadVideoWatch.replace('/watch?v=', '/embed/')
-										: uploadDocumentWatch?.finalUrl}
-									title="YouTube video player"
-									frameBorder="0"
-									allow="accelerometer; clipboard-write;
+										: uploadDocumentWatch?.finalUrl
+								}
+								title="YouTube video player"
+								frameBorder="0"
+								allow="accelerometer; clipboard-write;
 										encrypted-media; gyroscope; picture-in-picture; web-share"
-									allowfullscreen="true"
-								/>
+								allowfullscreen="true"
+							/>
 							) : null}
 					</div>
 				);
 			})}
 
 			<div className={styles.button_container}>
-				<Button loading={chapterLoading} type="submit">Save</Button>
+				<Button loading={chapterLoading} type="submit">
+					Save
+				</Button>
 			</div>
 		</form>
 	);

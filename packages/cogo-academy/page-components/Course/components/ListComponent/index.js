@@ -4,13 +4,14 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../commons/EmptyState';
+import useDeleteCourse from '../../hooks/useDeleteCourse';
 
 import styles from './styles.module.css';
 import { studentColumns, courseColumns } from './TableColumns';
 
 const MODAL_TEXT_MAPPING = {
-	courses  : 'Test',
-	students : 'Question Set',
+	courses  : 'Course',
+	students : 'User',
 };
 
 const columnsMapping = {
@@ -30,9 +31,14 @@ function ListComponent({
 }) {
 	const router = useRouter();
 
-	const [testId, setTestId] = useState('');
-	const [questionSetId, setQuestionSetId] = useState('');
+	const [courseId, setCourseId] = useState('');
+	const [studentId, setStudentId] = useState('');
 	const [showModal, setShowModal] = useState(false);
+
+	const {
+		deleteCourse,
+		loading:deleteLoading,
+	} = useDeleteCourse({ fetchList, setShowModal });
 
 	const { page_limit: pageLimit = 0, total_count = 0, list } = data || {};
 
@@ -41,7 +47,7 @@ function ListComponent({
 			loading: false,
 			router,
 			setShowModal,
-			setTestId,
+			setCourseId,
 			sortFilter,
 			setSortFilter,
 			fetchList,
@@ -50,7 +56,7 @@ function ListComponent({
 			loading: false,
 			router,
 			setShowModal,
-			setQuestionSetId,
+			setStudentId,
 			sortFilter,
 			setSortFilter,
 		},
@@ -58,9 +64,15 @@ function ListComponent({
 
 	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab] });
 
+	const deleteFunctionMapping = {
+		courses: { function: deleteCourse, params: { id: courseId, status: 'inactive' } },
+	};
+
 	if (!loading && isEmpty(data?.list)) {
 		return <EmptyState />;
 	}
+
+	const { function: deleteApi, params: deleteApiParams } = deleteFunctionMapping[activeTab];
 
 	return (
 		<div className={styles.table_container}>
@@ -86,6 +98,7 @@ function ListComponent({
 						<Button
 							type="button"
 							themeType="secondary"
+							disabled={deleteLoading}
 							onClick={() => setShowModal(false)}
 						>
 							Cancel
@@ -94,10 +107,10 @@ function ListComponent({
 						<Button
 							type="button"
 							style={{ marginLeft: '12px' }}
-							// onClick={() => {
-							// 	deleteFunctionMapping[activeTab]();
-							// 	setShowModal(false);
-							// }}
+							loading={deleteLoading}
+							onClick={() => {
+								deleteApi({ values: deleteApiParams });
+							}}
 						>
 							Delete
 						</Button>

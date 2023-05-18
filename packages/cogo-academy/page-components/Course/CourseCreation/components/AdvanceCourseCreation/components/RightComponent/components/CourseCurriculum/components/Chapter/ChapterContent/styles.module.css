@@ -32,6 +32,17 @@
 	&.upload_file {
 		margin-top: 0;
 	}
+
+	&.completion_duration_value {
+		width: 200px;
+		margin-left: 20px;
+		margin-top: unset;
+	}
+
+	&.completion_duration_unit {
+		width: 200px;
+		margin-top: unset;
+	}
 }
 
 .error_message {
@@ -45,4 +56,16 @@
 	justify-content: flex-end;
 	margin-top: 40px;
 	margin-bottom: 20px;
+}
+
+.superscipt {
+	color: #ee3425;
+}
+
+.select_group {
+	display: flex;
+}
+
+.group_select {
+	margin-top: 32px;
 }

@@ -26,6 +26,7 @@ function Course() {
 		debounceQuery,
 		input,
 		setInput,
+		total_count:courseCount,
 	} = useListCogoAcademyCourses({ filters, activeTab });
 
 	const {
@@ -37,6 +38,7 @@ function Course() {
 		debounceQuery: studentListDebounceQuery,
 		input: studentListInput,
 		setInput: setstudentListInput,
+		total_count:studentCount,
 	} = useListCourseUserMappings({ filters, activeTab });
 
 	const componentMapping = {
@@ -44,6 +46,7 @@ function Course() {
 			key            : 'courses',
 			title          : 'Courses',
 			component      : ListComponent,
+			total_count    : courseCount,
 			componentProps : {
 				data,
 				loading,
@@ -64,6 +67,7 @@ function Course() {
 			key            : 'students',
 			title          : 'Students',
 			component      : ListComponent,
+			total_count    : studentCount,
 			componentProps : {
 				data      : studentData,
 				loading   : studentListLoading,
@@ -100,7 +104,7 @@ function Course() {
 					fullWidth
 				>
 					{Object.values(componentMapping).map((tab) => {
-						const { key, title, componentProps, filterProps } = tab;
+						const { key, title, componentProps, filterProps, total_count } = tab;
 
 						return (
 							<TabPanel
@@ -109,7 +113,15 @@ function Course() {
 								title={(
 									<div className={styles.tab_title}>
 										{title}
-										<Badge color="red" size="md" text="100" style={{ marginLeft: '6px' }} />
+
+										{total_count ? (
+											<Badge
+												color="red"
+												size="md"
+												text={total_count}
+												style={{ marginLeft: '6px' }}
+											/>
+										) : null}
 									</div>
 								)}
 							>

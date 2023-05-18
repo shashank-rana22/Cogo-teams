@@ -7,7 +7,7 @@ import { startCase, format, isEmpty } from '@cogoport/utils';
 import { StudentButtons, CourseButtons } from './ButtonComponent';
 import styles from './styles.module.css';
 
-export const studentColumns = ({ loading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter }) => [
+export const studentColumns = ({ loading, router, setShowModal, setStudentId, sortFilter, setSortFilter }) => [
 	{
 		Header   : 'Name',
 		id       : 'name',
@@ -88,7 +88,7 @@ export const studentColumns = ({ loading, router, setShowModal, setQuestionSetId
 			<StudentButtons
 				item={item}
 				router={router}
-				setQuestionSetId={setQuestionSetId}
+				setStudentId={setStudentId}
 				setShowModal={setShowModal}
 				loading={loading}
 			/>
@@ -101,7 +101,7 @@ export const courseColumns = ({
 	loading,
 	router,
 	setShowModal,
-	setTestId,
+	setCourseId,
 	sortFilter,
 	setSortFilter,
 	fetchList,
@@ -182,7 +182,7 @@ export const courseColumns = ({
 				id={id}
 				loading={loading}
 				setShowModal={setShowModal}
-				setTestId={setTestId}
+				setCourseId={setCourseId}
 				router={router}
 				fetchList={fetchList}
 			/>

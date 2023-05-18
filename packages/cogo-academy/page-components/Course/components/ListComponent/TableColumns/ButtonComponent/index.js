@@ -7,7 +7,7 @@ const handleEditCourse = ({ id, router }) => {
 	router.push(`/learning/course/create?mode=edit&id=${id}`);
 };
 
-export function StudentButtons({ item, router, setQuestionSetId, setShowModal, loading }) {
+export function StudentButtons({ item, router, setStudentId, setShowModal, loading }) {
 	return (
 		<div className={styles.container}>
 			<Tooltip
@@ -44,7 +44,7 @@ export function StudentButtons({ item, router, setQuestionSetId, setShowModal, l
 							themeType="secondary"
 							className={styles.btn}
 							onClick={() => {
-								setQuestionSetId(item.id);
+								setStudentId(item.id);
 								setShowModal(true);
 							}}
 						>
@@ -69,7 +69,7 @@ export function CourseButtons({
 	loading,
 	id,
 	setShowModal,
-	setTestId,
+	setCourseId,
 	router,
 	fetchList = () => {},
 }) {
@@ -97,7 +97,7 @@ export function CourseButtons({
 								type="button"
 								onClick={() => {
 									setShowModal(true);
-									setTestId(id);
+									setCourseId(id);
 								}}
 							>
 								<IcMDelete />

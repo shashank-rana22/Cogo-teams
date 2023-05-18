@@ -12,6 +12,8 @@ import UploadComponent from './UploadComponent';
 
 const MAPPING = ['completion_criteria', 'completion_message', 'course_completion_rewards_details'];
 
+const CERTIFICATE_MAPPING = ['certificate_name', 'signing_authority_sign_url', 'signing_authority_user_id'];
+
 function CourseCompletion({ data = {}, id = '', activeTab }, ref) {
 	const {
 		control,
@@ -78,9 +80,19 @@ function CourseCompletion({ data = {}, id = '', activeTab }, ref) {
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
-			const { course_completion_duration = {} } = data || {};
+			const { course_completion_duration = {}, course_certificates = [] } = data || {};
 
 			const { course_completion_unit, course_completion_value } = course_completion_duration;
+
+			if (!isEmpty(course_certificates)) {
+				const certificateData = course_certificates[0];
+
+				CERTIFICATE_MAPPING.forEach((item) => {
+					if (certificateData[item] && !isEmpty(certificateData[item])) {
+						setValue(item, certificateData[item]);
+					}
+				});
+			}
 
 			MAPPING.forEach((item) => {
 				if (data[item] && !isEmpty(data[item])) {

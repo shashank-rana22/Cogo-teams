@@ -52,6 +52,7 @@ function useListCogoAcademyCourses({ filters, activeTab = '' }) {
 		setInput,
 		params,
 		debounceQuery,
+		total_count: data.total_count,
 	};
 }
 

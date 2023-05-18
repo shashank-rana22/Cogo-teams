@@ -77,6 +77,7 @@ const getChapterPayload = ({
 		upload_file,
 		additional_resources_title,
 		additional_resources_link,
+		completion_duration_value = '',
 	} = values || {};
 
 	let chapter_attachments = [];
@@ -106,6 +107,7 @@ const getChapterPayload = ({
 		course_sub_module_id,
 		sequence_order             : index + 1,
 		chapter_content            : chapter_content({ values, editorValue }),
+		completion_duration_value  : Number(completion_duration_value),
 		additional_resources       : undefined,
 		additional_resources_link  : undefined,
 		additional_resources_title : undefined,

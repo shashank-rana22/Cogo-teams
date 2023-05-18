@@ -19,6 +19,7 @@ const getProps = (data = {}) => ({
 		completion_message                : data.completion_message,
 		course_completion_duration        : data.course_completion_duration,
 		course_completion_rewards_details : data.course_completion_rewards_details,
+		course_certificates               : data.course_certificates || [],
 	},
 });
 
