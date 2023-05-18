@@ -1,5 +1,7 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPortArrow } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -10,7 +12,11 @@ export default function ShipmentInfo({ item }) {
 				<b>{item?.origin_location?.display_name}</b>
 				<p>
 					ETD:&nbsp;
-					{format(item?.schedule_departure, 'dd MMM yyyy')}
+					{formatDate({
+						date       : item?.schedule_departure,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+					})}
 				</p>
 			</div>
 
@@ -20,7 +26,11 @@ export default function ShipmentInfo({ item }) {
 				<b>{item?.origin_location?.display_name}</b>
 				<p>
 					ETA:&nbsp;
-					{format(item?.schedule_arrival, 'dd MMM yyyy')}
+					{formatDate({
+						date       : item?.schedule_arrival,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						formatType : 'date',
+					})}
 				</p>
 			</div>
 

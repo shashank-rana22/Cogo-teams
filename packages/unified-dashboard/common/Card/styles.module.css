@@ -1,0 +1,111 @@
+.card_wrapper {
+	padding: 14px;
+	margin: 0 10px;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+}
+
+.card_wrapper_border {
+	padding: 14px;
+	margin: 0 10px;
+	background: #fff;
+	border-left: 5px solid #67c676;
+	border-radius: 4px;
+	box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+}
+
+.all_card {
+	flex: 1;
+}
+
+.card {
+	display: flex;
+}
+
+.revenue_col {
+	position: relative;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-right: 1px solid #e0e0e0;
+}
+
+.text_tag {
+	font-size: 20px;
+	font-weight: 600;
+	color: #333;
+}
+
+.revenue_wrapper {
+	display: flex;
+	justify-content: space-around;
+}
+
+.booking {
+	flex: 1;
+	padding: 10px 20px 10px 10px;
+}
+
+.card_wrapper_mobile {
+	padding: 14px;
+	background: #fff;
+	border-left: 5px solid;
+	border-radius: 4px;
+	box-shadow: 0 2px 15px rgb(0 0 0 / 10%);
+}
+
+.all_card_mobile {
+	flex: 1;
+}
+
+.revenue_col_mobile {
+	position: relative;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	border-right: 1px solid #e0e0e0;
+}
+
+.revenue_wrapper_mobile {
+	display: flex;
+	justify-content: space-around;
+}
+
+.booking_mobile {
+	flex: 1;
+	padding: 10px;
+}
+
+.desktop {
+	display: flex;
+	flex: 1;
+	justify-content: space-around;
+}
+
+.mobile {
+	display: none;
+}
+
+@media (max-width: 967px) {
+	.desktop {
+		display: none;
+	}
+
+	.mobile {
+		display: flex;
+		flex: 1;
+	}
+}
+@media (min-width: 968px) and (max-width: 1024px) {
+	.text_tag {
+		padding-right: 5px;
+		font-size: 18px;
+		font-weight: 600;
+		color: #333;
+	}
+}

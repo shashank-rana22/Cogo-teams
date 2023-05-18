@@ -4,7 +4,6 @@ import BookingNoteForm from '../../../../commons/BookingNoteForm';
 import EXTENDEXPIRYCONTROLS from '../../../../config/extendExpiryControls.json';
 import STEP2CONTROLS from '../../../../config/uploadBNStep2Controls.json';
 import { BNSalvageContext } from '../../../../context/BNSalvageContext';
-import getCreateBookingDocumentPayload from '../../../../helpers/getCreateBookingDocumentPayload';
 import getDefaultValues from '../../../../helpers/getDefaultValuesForExtendBN';
 import useUpdateBookingNote from '../../../../hooks/useUpdateBookingNote';
 
@@ -20,7 +19,9 @@ export default function ExtendExpiryModal({ item, successRefetch }) {
 	const { loading, updateBookingNote } = useUpdateBookingNote({ refetch: successRefetch });
 
 	const onFormSubmit = (formData) => {
-		updateBookingNote(getCreateBookingDocumentPayload(formData));
+		const url = typeof formData?.url === 'object' ? formData.url.finalUrl : formData?.url;
+
+		updateBookingNote({ ...formData, url, id: item?.id });
 	};
 
 	return (

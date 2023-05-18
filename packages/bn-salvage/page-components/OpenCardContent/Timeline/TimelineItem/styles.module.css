@@ -37,17 +37,8 @@
 	}
 }
 
-.completed {
-	filter: opacity(1);
-
-	.circle {
-		background-color: var(--color-accent-orange-2);
-		border-color: var(--color-accent-orange-2);
-	}
-
-	.connecting_line {
-		background-color: var(--color-accent-orange-2);
-	}
+.completed .connecting_line {
+	background-color: var(--color-accent-orange-2);
 }
 
 .timeline_item {
@@ -62,6 +53,15 @@
 	p {
 		margin: 0;
 		font-size: var(--font-size-sm);
+	}
+}
+
+.completed {
+	filter: opacity(1);
+
+	.circle {
+		background-color: var(--color-accent-orange-2);
+		border-color: var(--color-accent-orange-2);
 	}
 }
 

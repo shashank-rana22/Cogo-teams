@@ -1,5 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTick } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -18,7 +19,13 @@ export default function TimelineItem({ timelineItem, isNextUpcoming }) {
 			<div className={styles.connecting_line} />
 
 			<p>{timelineItem.label}</p>
-			<p>{format(timelineItem.date, 'dd MMM yyyy')}</p>
+			<p>
+				{formatDate({
+					date       : timelineItem.date,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					formatType : 'date',
+				})}
+			</p>
 		</div>
 	);
 }
