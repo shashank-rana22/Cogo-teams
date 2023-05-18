@@ -1,9 +1,9 @@
 import { Datepicker, Input, Select, Button } from '@cogoport/components';
+import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { IcMRefresh } from '@cogoport/icons-react';
 import React, { useEffect } from 'react';
 
 import Filter from '../../../../commons/Filters';
-import { CURRENCY_OPTIONS } from '../../../constants/CURRENCY_OPTIONS';
 import { recurringUploadInvoice } from '../../../Controls/recurringUploadInvoice';
 import LineItemsForm from '../../LineItemsForm';
 
@@ -60,7 +60,7 @@ function UploadInvoice({
 						value={invoiceCurrency}
 						onChange={(val:string) => setFormData({ ...formData, invoiceCurrency: val })}
 						placeholder="Currency*"
-						options={CURRENCY_OPTIONS}
+						options={getCurrencyOptions()}
 						size="sm"
 
 					/>

@@ -163,7 +163,7 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 					tickPadding    : 10,
 					tickRotation   : showData === 'month' || showData === 'lastThreeMonths' ? 0 : 36,
 					legend         : showData === 'month' ? 'Month' : 'Date',
-					legendOffset   : 36,
+					legendOffset   : 44,
 					legendPosition : 'middle',
 				}}
 				axisLeft={{

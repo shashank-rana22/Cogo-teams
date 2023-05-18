@@ -518,6 +518,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'sailing_schedule',
 		},
+		{
+			api          : 'get_sea_route',
+			access_type  : 'public',
+			service_name : 'location',
+		},
 	],
 	app_saas_air_schedules: [
 		{
@@ -2168,6 +2173,12 @@ const saas = {
 			feature     : 'import-export-documents',
 		},
 		{
+			api         : 'get_saas_trade_engine_draft',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
 			api         : 'get_saas_product_category_list',
 			access_type : 'private',
 			module      : 'product-catalogue',
@@ -2209,6 +2220,7 @@ const saas = {
 			module      : 'product-catalogue',
 			feature     : 'product-catalogue',
 		},
+
 	],
 	app_saas_cogostore: [
 		{
@@ -2318,6 +2330,13 @@ const saas = {
 		},
 		{
 			api          : 'get_cogostore_brand_details',
+			access_type  : 'private',
+			module       : 'cogo-store',
+			feature      : 'cogo-store',
+			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogopoint_user_profile',
 			access_type  : 'private',
 			module       : 'cogo-store',
 			feature      : 'cogo-store',

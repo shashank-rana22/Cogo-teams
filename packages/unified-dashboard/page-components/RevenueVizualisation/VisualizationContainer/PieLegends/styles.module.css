@@ -1,0 +1,25 @@
+.main_container {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	width: 48%;
+	padding: 4px;
+	margin: 2px;
+}
+
+.color_box {
+	width: 15px;
+	min-width: 15px;
+	height: 15px;
+	margin-right: 8px;
+	background-color: #802424;
+	border-radius: 50%;
+}
+
+.amount_text {
+	font-size: 12px;
+}

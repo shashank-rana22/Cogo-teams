@@ -110,7 +110,11 @@ export default {
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		credit_controller_id      : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
-		business_heads            : [
+		vietnam_business_heads    : [
+			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal
+			'065c7e26-69f7-4ceb-8f36-1e666b89de94', // Nam Bui
+		],
+		business_heads: [
 			'7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44', // Hrishikesh Kulkarni
 			'95d62549-8ab6-4ee5-a655-9edd0ec46dac', // Purnendu Shekhar
 			'cd8dde11-678c-4467-85b2-2e2d6055bef4', // Amitabh Shankar
@@ -137,7 +141,9 @@ export default {
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
 		],
-		sales_role: [
+		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
+		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
+		sales_role                       : [
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716',
 			'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
@@ -281,6 +287,39 @@ export default {
 			{
 				label : '18 Ton',
 				value : 'Close_body_18_ton',
+			},
+		],
+		invoice_status: [
+			{ label: 'Draft', value: 'DRAFT' },
+			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
+			{ label: 'E-INVOICE Generated', value: 'IRN_GENERATED' },
+			{ label: 'Requested', value: 'REQUESTED' },
+		],
+		freight_container_types: [
+			{
+				label : 'Standard(Dry)',
+				value : 'standard',
+			},
+			{
+				label : 'Refrigerated (Reefer)',
+				value : 'refer',
+			},
+			{
+				label : 'Open Top',
+				value : 'open_top',
+			},
+			{
+				label : 'Flat Rack',
+				value : 'flat_rack',
+			},
+			{
+				label : 'ISO Tank',
+				value : 'iso_tank',
+			},
+			{
+				label : 'Open Side (One Door Open)',
+				value : 'open_side',
 			},
 		],
 	},
