@@ -4,17 +4,11 @@ import { useContext } from 'react';
 
 import useListCreditNotes from '../../../hooks/useListCreditNotes';
 import CreditNote from '../CreditNote';
+import POST_REVIEWED_INVOICES from '../helpers/post-reviewed-sales-invoices';
 
 import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
-
-const POST_REVIEWED_INVOICES = [
-	'reviewed',
-	'approved',
-	'revoked',
-	'finance_rejected',
-];
 
 function Invoices({
 	invoiceData = {},

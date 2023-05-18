@@ -1,4 +1,4 @@
-.Container{
+.container{
 	background: #ffffff;
 	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
 	border-radius: 4px;
@@ -23,7 +23,7 @@
 	margin-bottom: 16px;
 }
 
-.HeaderContainer{
+.header_container{
 	display: flex;
 	width: 100%;
 	padding: 20px 16px;
@@ -31,14 +31,14 @@
 	cursor: pointer;
 }
 
-.IconWrapper{
+.icon_wrapper{
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	margin-right: 8px;
 }
 
-.AddressText{
+.address_text{
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
@@ -46,7 +46,7 @@
 	margin: 0;
 }
 
-.GstNumber{
+.gst_number{
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
@@ -54,7 +54,7 @@
 	margin: 0;
 }
 
-.InvoiceCurrency{
+.invoice_currency{
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
@@ -62,7 +62,7 @@
 	margin: 0;
 }
 
-.Heading{
+.heading{
 	margin: 0;
 	font-weight: 500;
 	font-size: 14px;
@@ -71,16 +71,16 @@
 	margin-right: 4px;
 }
 
-.BookingText{
+.booking_text{
 	font-weight: 500;
 	font-size: 14px;
 	line-height: 10px;
-	color: #5936f0;
+	color: #F68B21;
 	display: flex;
 	align-items: center;
 }
 
-.ServiceName{
+.service_name{
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 12px;
@@ -96,14 +96,14 @@
 	font-weight: 500 
 }
 
-.Header{
+.header{
 	width: 15%;
 	display: flex;
 	justify-content: flex-end;
 	align-items: center;
 }
 
-.InvoiceSource{
+.invoice_source{
 	background-color: #fef6df;
 	padding: 2px 16px;
 	width: fit-content;
@@ -112,7 +112,7 @@
 	border-bottom-right-radius: 8px;
 }
 
-.OverallAmount{
+.overall_amount{
 	font-size: 10px;
 	line-height: 16px;
 	color: #393f70;
@@ -131,7 +131,7 @@
 
 }
 
-.Flex{
+.flex{
 	display: flex;
 	align-items: flex-start;
 }

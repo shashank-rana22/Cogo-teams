@@ -5,6 +5,7 @@ import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import POST_REVIEWED_INVOICES from '../../../../../../helpers/post-reviewed-sales-invoices';
 import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';
@@ -13,13 +14,6 @@ const mainServices = [
 	'fcl_freight_service',
 	'lcl_freight_service',
 	'air_freight_service',
-];
-
-const POST_REVIEWED_INVOICES = [
-	'reviewed',
-	'approved',
-	'revoked',
-	'finance_rejected',
 ];
 
 function SelectService({
@@ -67,7 +61,7 @@ function SelectService({
 			});
 
 			const content = (
-				<div className={styles.ServiceDetails}>
+				<div className={styles.service_details}>
 					<div>
 						<b>Invoice Currency: </b>
 						{' '}
@@ -102,7 +96,7 @@ function SelectService({
 			const servicesToPush = {
 				label: (
 					<Tooltip content={content} placement="top" theme="light">
-						<div className={styles.ServiceName}>
+						<div className={styles.service_name}>
 							{service?.service_type === 'shipment'
 								? 'Convenience Fees'
 								: `${tradeType} ${startCase(
@@ -150,8 +144,8 @@ function SelectService({
 	}, [invoice.id]);
 
 	return (
-		<div className={styles.Container}>
-			<div className={styles.Heading}>Select service and invoice currency</div>
+		<div className={styles.container}>
+			<div className={styles.heading}>Select service and invoice currency</div>
 			<ChangeCurrency
 				invoice={invoice}
 				invoiceCurrency={invoiceCurrency}
@@ -164,16 +158,18 @@ function SelectService({
 				value={value}
 			/>
 
-			<div className={styles.Row}>
+			<div className={styles.row}>
 				<Button
 					style={{ marginRight: 16 }}
 					size="sm"
+					themeType="tertiary"
 					onClick={onClose}
 				>
 					Cancel
 				</Button>
 				<Button
 					size="sm"
+					themeType="accent"
 					onClick={() => handleServiceChange(invoice, {
 						service_ids      : value,
 						invoice_currency : invoiceCurrency,

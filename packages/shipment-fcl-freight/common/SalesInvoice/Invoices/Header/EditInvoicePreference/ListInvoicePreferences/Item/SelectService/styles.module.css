@@ -1,15 +1,8 @@
-.Container{
+.container{
 	padding: 0px 16px 20px 16px;
-	.business-checkbox-group-container {
-		flex-direction: row;
-		flex-wrap: wrap;
-	}
-	.business-checkbox-item {
-		flex-basis: 50%;
-	}
 }
 
-.ServiceName{
+.service_name{
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 12px;
@@ -22,21 +15,16 @@
 	padding: 4px 6px;
 }
 
-.Row{
+.row{
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
 	border-top: 1px solid #C4DC91;
 	padding-top: 18px;
 	margin-top: 10px;
-
-	.core-ui-button-root {
-		text-transform: capitalize;
-		width: 100px;
-	}
 }
 
-.Heading{
+.heading{
 	margin: 0;
 	font-weight: 500;
 	font-size: 14px;
@@ -45,6 +33,6 @@
 	color: #2c3e50;
 }
 
-.ServiceDetails{
+.service_details{
 	font-size: 10px;
 }

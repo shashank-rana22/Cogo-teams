@@ -16,18 +16,6 @@ const exportServiceTypes = [
 	'air_freight_service',
 ];
 
-export const controls = (selectOptions) => [
-	{
-		label    : '',
-		name     : 'services',
-		type     : 'checkbox',
-		span     : 6,
-		multiple : true,
-		rules    : { required: true },
-		options  : selectOptions,
-	},
-];
-
 const geo = getGeoConstants();
 
 const isAllServicesTaken = (
@@ -76,8 +64,6 @@ const useEditInvoicePref = ({
 	setShow = () => {},
 	refetch = () => {},
 }) => {
-	// console.log(invoicing_parties?.[0]?.services, ' :invoicingParties');
-
 	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
 		const { invoice_currency, is_igst } = p || {};
@@ -323,7 +309,6 @@ const useEditInvoicePref = ({
 			refetch();
 			setShow();
 		} catch (err) {
-			console.log(err);
 			toastApiError(err?.data);
 			refetch(); // will be removed in future
 			setShow(); // will be removed in future

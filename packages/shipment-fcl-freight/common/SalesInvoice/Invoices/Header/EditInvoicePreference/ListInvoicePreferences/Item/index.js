@@ -48,7 +48,7 @@ function Item({
 	};
 
 	const isBookingParty = billing_address?.organization_id === shipmentData?.importer_exporter_id ? (
-		<div className={styles.BookingText}> - Booking Party</div>
+		<div className={styles.booking_text}> - Booking Party</div>
 	) : null;
 
 	const renderServicesTaken = (invoice?.services || []).map((service) => {
@@ -67,7 +67,7 @@ function Item({
 		);
 
 		return service?.service_type ? (
-			<div className={styles.ServiceName}>
+			<div className={styles.service_name}>
 				{`${tradeType} ${startCase(service?.service_type)} ${
 					service?.is_igst ? '(IGST INVOICE)' : ''
 				} ${isBas && !service?.is_igst ? '(BAS)' : ''}`}
@@ -89,22 +89,22 @@ function Item({
 	});
 
 	return (
-		<div className={styles.Container}>
+		<div className={styles.container}>
 			{invoice_source === 'pass_through' ? (
-				<div className={styles.InvoiceSource}>
+				<div className={styles.invoice_source}>
 					Source -
 					{startCase(invoice_source)}
 				</div>
 			) : null}
 			<div
-				className={cl`${styles.HeaderContainer} ${open ? styles.open : ''}`}
+				className={cl`${styles.header_container} ${open ? styles.open : ''}`}
 				style={{ cursor: noActionState ? 'default' : '' }}
 				onClick={!noActionState ? () => handleServiceToggle() : null}
 			>
 				<div style={{ width: '100%' }}>
 					<div className={styles.details}>
 						<div className={styles.details_child}>
-							<div className={styles.Heading}>
+							<div className={styles.heading}>
 								{billing_address?.name || billing_address?.business_name}
 							</div>
 
@@ -119,36 +119,36 @@ function Item({
 					</div>
 
 					<div
-						className={styles.Flex}
+						className={styles.flex}
 					>
-						<div className={styles.IconWrapper}>
+						<div className={styles.icon_wrapper}>
 							<IcMHome />
 						</div>
 
-						<div className={styles.AddressText}>
+						<div className={styles.address_text}>
 							{billing_address?.address}
 						</div>
 					</div>
 
-					<div className={styles.GstNumber}>
+					<div className={styles.gst_number}>
 						GST Number :
 						{billing_address?.tax_number}
 					</div>
 
-					<div className={styles.InvoiceCurrency}>
+					<div className={styles.invoice_currency}>
 						Invoice Currency:
 						{' '}
 						{invoice_currency}
 					</div>
 
 					{invoiceAmount && (
-						<div className={styles.OverallAmount}>
+						<div className={styles.overall_amount}>
 							Invoice Amount:
 							{invoiceAmount}
 						</div>
 					)}
 					<div
-						className={styles.Flex}
+						className={styles.flex}
 						style={{ flexWrap: 'wrap' }}
 					>
 						{renderServicesTaken}
@@ -156,7 +156,7 @@ function Item({
 				</div>
 
 				{!noActionState ? (
-					<div className={styles.Header}>
+					<div className={styles.header}>
 						{open ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 					</div>
 				) : null}

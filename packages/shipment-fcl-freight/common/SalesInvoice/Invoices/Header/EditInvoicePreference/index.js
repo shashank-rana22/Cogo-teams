@@ -86,13 +86,14 @@ function EditInvoicePreference({
 					<Modal.Footer>
 						<Button
 							style={{ marginRight: 16 }}
-							className="secondary md"
+							size="md"
+							themeType="tertiary"
 							onClick={() => handleClose()}
 						>
 							Cancel
 						</Button>
 						<Button
-							className="md"
+							size="md"
 							onClick={handleEditPreferences}
 							disabled={rest?.loading}
 						>
