@@ -12,9 +12,9 @@ const useUpdateIndividualEditing = ({
 }:Props) => {
 	const [{ loading }, trigger] = useRequestAir(
 		{
-			url    : '/air-coe/document-copy/update',
-			method : 'POST',
-			// authKey : 'post_air_coe_documents_create_manifest',
+			url     : '/air-coe/document-copy/update',
+			method  : 'POST',
+			authKey : 'get_air_coe_document_copy_update',
 		},
 	);
 
