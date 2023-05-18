@@ -10084,6 +10084,21 @@ const partner = {
 			service_name : 'checkout',
 		},
 		{
+			api          : 'get_rate_properties',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'update_rate_properties',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
+			api          : 'get_cogo_assured_suggested_fcl_freight_rates',
+			access_type  : 'private',
+			service_name : 'fcl_freight_rate',
+		},
+		{
 			api          : 'get_cogo_assured_suggested_rates',
 			access_type  : 'private',
 			service_name : 'cogo_assured_rate',

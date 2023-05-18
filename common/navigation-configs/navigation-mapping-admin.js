@@ -1527,15 +1527,6 @@ const navigationMappingAdmin = {
 		icon        : IcCCogoassured,
 		options     : [
 			{
-				key           : 'cogo_assured-fcl_freight',
-				title         : 'FCL Freight',
-				href          : '/cogo-assured/fcl_freight',
-				as            : '/cogo-assured/fcl_freight',
-				type          : 'link',
-				possible_apis : apis.cogo_assured,
-				main_apis     : [],
-			},
-			{
 				key           : 'cogo_assured-fcl_freight_local',
 				title         : 'FCL Freight Local',
 				href          : '/cogo-assured/fcl_freight_local',
