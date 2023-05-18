@@ -106,7 +106,7 @@ function Item({
 					<div className={styles.details}>
 						<div className={styles.details_child}>
 							<div className={styles.Heading}>
-								{billing_address?.name || billing_address?.business_name || 'VOLTAS LIMITED'}
+								{billing_address?.name || billing_address?.business_name}
 							</div>
 
 							{isBookingParty}
