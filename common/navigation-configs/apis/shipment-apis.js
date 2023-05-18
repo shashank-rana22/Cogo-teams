@@ -1442,6 +1442,12 @@ const apis = [
 		feature      : 'revenue_desk',
 	},
 	{
+		api          : 'send_booking_preference_email',
+		access_type  : 'private',
+		service_name : 'communication',
+		feature      : 'revenue_desk',
+	},
+	{
 		api          : 'list_organization_assets',
 		access_type  : 'private',
 		service_name : 'organization',
@@ -1466,6 +1472,22 @@ const apis = [
 		api          : 'update_organization_asset',
 		access_type  : 'private',
 		service_name : 'organization',
+	},
+	{
+		api          : 'list_partner_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'generate_bluetide_hbl',
+		access_type  : 'private',
+		service_name : 'shipment',
+
+	},
+	{
+		api          : 'get_pending_task_authorization',
+		access_type  : 'private',
+		service_name : 'shipment',
 	},
 ];
 
