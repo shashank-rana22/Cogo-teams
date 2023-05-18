@@ -15,13 +15,10 @@ function InvoiceItem({
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
 }) {
-	const { total_price_discounted, total_price_currency } = total;
-	const { total_outstanding_amount, currency } = org_outstanding;
-
 	const outStanding = formatAmount({
-		amount  : total_outstanding_amount || 0,
-		currency,
-		options : {
+		amount   : org_outstanding?.total_outstanding_amount || 0,
+		currency : org_outstanding?.currency,
+		options  : {
 			style                 : 'currency',
 			currencyDisplay       : 'code',
 			maximumFractionDigits : 2,
@@ -32,21 +29,16 @@ function InvoiceItem({
 		<main className={styles.container}>
 			<div className={styles.header_container}>
 				<div className={styles.invoice_party_details}>
-					<div className={styles.invoice_party_name}>
-						{item?.name || item?.business_name}
-					</div>
+					<div className={styles.invoice_party_name}>{item?.name || item?.business_name}</div>
 					<div className={styles.label}>Invoicing Party</div>
 				</div>
 
 				<div className={styles.invoice_value_container} style={org_outstanding}>
-					<div className={styles.invoice_value_title}>
-						Invoice Value -
-					</div>
-
+					<div className={styles.invoice_value_title}>Invoice Value -</div>
 					<div className={styles.invoice_value}>
 						{formatAmount({
-							amount   : total_price_discounted,
-							currency : total_price_currency,
+							amount   : total?.total_price_discounted,
+							currency : total?.total_price_currency,
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',
@@ -58,10 +50,7 @@ function InvoiceItem({
 
 				{org_outstanding ? (
 					<div className={styles.invoice_value_container}>
-						<div className={styles.invoice_value_title}>
-							Total Outstanding -
-						</div>
-
+						<div className={styles.invoice_value_title}>Total Outstanding -</div>
 						<div className={styles.invoice_value}>{outStanding}</div>
 					</div>
 				) : null}

@@ -6,6 +6,8 @@ import CardList from '../../../../commons/CardList';
 import styles from './styles.module.css';
 import { TableColumn } from './TableColumn';
 
+const BILLED_ITEMS_CODE = ['BookingCONV', 'BookingNOST'];
+
 function InvoiceServiceWise({ item = {}, loading = false }) {
 	const {
 		service_total_discounted,
@@ -17,16 +19,25 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 		detail = {},
 	} = item || {};
 
-	const billedItemsCode = ['BookingCONV', 'BookingNOST'];
 	let showBilledText = true;
 	(line_items || []).forEach((items) => {
-		if (!billedItemsCode.includes(items?.code)) {
+		if (!BILLED_ITEMS_CODE.includes(items?.code)) {
 			showBilledText = false;
 		}
 	});
 
 	const renderBilledText = showBilledText && quotation_source === 'billed_at_actuals' ? '*will be billed at actuals'
 		: null;
+
+	const format = (amount, currency) => formatAmount({
+		amount,
+		currency,
+		options: {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 2,
+		},
+	});
 
 	return (
 		<div className={styles.container}>
@@ -41,29 +52,13 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 				<div style={{ minWidth: '12%' }}>
 					Total Tax:
 					{' '}
-					{formatAmount({
-						amount   : tax_total_discounted,
-						currency : service_total_currency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'code',
-							maximumFractionDigits : 2,
-						},
-					})}
+					{format(tax_total_discounted, service_total_currency)}
 				</div>
 
 				<div className={styles.total_tax}>
 					Total w/o Tax:
 					{' '}
-					{formatAmount({
-						amount   : total_price_discounted,
-						currency : service_total_currency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'code',
-							maximumFractionDigits : 2,
-						},
-					})}
+					{format(total_price_discounted, service_total_currency)}
 				</div>
 			</div>
 
@@ -71,15 +66,7 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 				<div className={styles.billed_text}>{renderBilledText}</div>
 				Total Amount After Tax :
 				<div className={styles.total_amount}>
-					{formatAmount({
-						amount   : service_total_discounted,
-						currency : service_total_currency,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'code',
-							maximumFractionDigits : 2,
-						},
-					})}
+					{format(service_total_discounted, service_total_currency)}
 				</div>
 			</div>
 		</div>

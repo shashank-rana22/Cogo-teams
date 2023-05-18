@@ -79,7 +79,6 @@ function Header({
 	};
 
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
-	// console.log(creditSource, ' :creditSource : ', invoice?.credit_option);
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > 120347 || isAuthorized);
@@ -114,7 +113,6 @@ function Header({
 						!== GLOBAL_CONSTANTS.country_entity_ids.VN && (
 							<div className={styles.gst}>
 								<div className={styles.label}>GST Number :</div>
-
 								<Tooltip
 									theme="light"
 									interactive
@@ -238,11 +236,7 @@ function Header({
 					{invoice?.status === 'reviewed'
 					&& shipment_data?.serial_id <= 120347 ? (
 						<Button
-							style={{
-								marginTop     : '4px',
-								textTransform : 'capitalize',
-								letterSpacing : '0px',
-							}}
+							style={{ marginTop: '4px' }}
 							size="sm"
 							onClick={() => handleClick('amendment_requested')}
 						>
@@ -252,11 +246,7 @@ function Header({
 
 					{showRequestCN ? (
 						<Button
-							style={{
-								marginTop     : '4px',
-								textTransform : 'capitalize',
-								letterSpacing : '0px',
-							}}
+							style={{ marginTop: '4px' }}
 							size="sm"
 							onClick={() => setAskNullify(true)}
 						>

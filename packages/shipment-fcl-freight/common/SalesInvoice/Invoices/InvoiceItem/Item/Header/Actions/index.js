@@ -202,7 +202,7 @@ function Actions({
 					{invoice?.status === 'amendment_requested' ? (
 						<Tooltip
 							placement="bottom"
-							theme="light-border"
+							theme="light"
 							interactive
 							content={<AmendmentReasons invoice={invoice} />}
 						>
