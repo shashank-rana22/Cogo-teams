@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+
 const repositoryControls = () => ({
 	basic: [
 		{
@@ -6,6 +8,27 @@ const repositoryControls = () => ({
 			asyncKey    : 'list_operators',
 			label       : 'Select Airline',
 			placeholder : 'Select Airline...',
+			span        : 6,
+			rules       : {
+				required: 'true',
+			},
+		},
+		{
+			name     : 'airport_id',
+			type     : 'async-select',
+			asyncKey : 'list_locations',
+			params   : {
+				filters: {
+					type       : 'airport',
+					country_id : GLOBAL_CONSTANTS.country_ids.IN,
+				},
+				page_limit : 10,
+				sort_by    : 'name',
+				sort_type  : 'asc',
+				includes   : { country: null, default_params_required: true },
+			},
+			label       : 'Select Airport',
+			placeholder : 'Select Airport...',
 			span        : 6,
 			rules       : {
 				required: true,
@@ -21,6 +44,45 @@ const repositoryControls = () => ({
 				{ value: 'platform', label: 'Platform' },
 				{ value: 'email_and_platform', label: 'E-mail/Platform' },
 			],
+			span  : 6,
+			rules : {
+				required: true,
+			},
+		},
+		{
+			name    : 'e_booking_availability',
+			type    : 'select',
+			options : [
+				{
+					label : 'Available',
+					value : 'available',
+				},
+				{
+					label : 'Not Available',
+					value : 'not_available',
+				},
+			],
+			value : 'not_available',
+			label : 'Is E Booking Available',
+			span  : 6,
+			rules : {
+				required: true,
+			},
+		},
+		{
+			name    : 'inventory_stock_availability',
+			type    : 'select',
+			options : [
+				{
+					label : 'Before Booking',
+					value : 'before_booking',
+				},
+				{
+					label : 'After Booking',
+					value : 'after_booking',
+				},
+			],
+			label : 'When is Airway Bill Procured?',
 			span  : 6,
 			rules : {
 				required: true,
@@ -45,6 +107,26 @@ const repositoryControls = () => ({
 			placeholder : 'Enter email',
 			span        : 6,
 			rules       : {
+				required: true,
+			},
+		},
+		{
+			name    : 'rate_required',
+			type    : 'select',
+			options : [
+				{
+					label : 'Yes',
+					value : 'yes',
+				},
+				{
+					label : 'No',
+					value : 'no',
+				},
+			],
+			value : 'yes',
+			label : 'Do we send Agreed Rate(Email)?',
+			span  : 6,
+			rules : {
 				required: true,
 			},
 		},
