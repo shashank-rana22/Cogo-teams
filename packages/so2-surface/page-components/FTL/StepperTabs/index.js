@@ -1,6 +1,5 @@
 import { useContext } from 'react';
 import { Tabs, TabPanel } from '@cogoport/components';
-import { useContext } from 'react';
 import { v4 as uuidv4 } from 'uuid';
 
 import controlConfig from '../../../configs/CONTROLS_CONFIG.json';
@@ -25,6 +24,7 @@ function StepperTabs() {
 		<Tabs themeType="primary" onChange={onStepperTabChange} activeTab={stepperTab}>
 			{controlConfig.stepper_tabs.map((tab) => (
 				<TabPanel
+					key={uuidv4()}
 					title={tab.label}
 					name={tab.value}
 				/>

@@ -8,8 +8,7 @@ function SortBy({
 	setShowPopover = () => {},
 }) {
 	const SORT_BY_OPTIONS = [{ value: 'created_at', label: 'Shipment Creation Date' },
-		{ value: 'task_created_at', label: 'Task Creation Date' },
-		{ value: 'task_deadline', label: 'Task Deadline Date' }];
+	];
 
 	const SORTING_ORDER = [{ key: 'asc', children: 'Ascending' }, { key: 'desc', children: 'Descending' }];
 

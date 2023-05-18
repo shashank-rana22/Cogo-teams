@@ -51,8 +51,8 @@ function FilterBy({
 
 			<div className={styles.filter_container}>
 				<AsyncSelect
-					value={formValue.service_ops2_id}
-					onChange={(e) => setFormValue((prev) => ({ ...prev, service_ops2_id: e || undefined }))}
+					value={formValue.service_ops_two_id}
+					onChange={(e) => setFormValue((prev) => ({ ...prev, service_ops_two_id: e || undefined }))}
 					placeholder="Assigned SO2"
 					asyncKey="partner_users_ids"
 					params={{
