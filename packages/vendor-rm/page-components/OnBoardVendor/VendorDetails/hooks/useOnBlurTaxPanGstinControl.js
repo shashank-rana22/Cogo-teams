@@ -12,7 +12,7 @@ const useOnBlurTaxPanGstinControl = ({
 		registrationNumber,
 		registrationType,
 	}) => {
-		if (REGISTRATION_VALIDATE_COUNTRIES.includes(countryCode)) {
+		if ((REGISTRATION_VALIDATE_COUNTRIES || []).includes(countryCode)) {
 			const { length = '' } =	registrationNumbersMapping[registrationType] || {};
 
 			const flag = registrationNumber.length === length;

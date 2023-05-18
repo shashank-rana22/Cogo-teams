@@ -80,7 +80,7 @@ function useOnBoardVendor({
 
 	useEffect(() => {
 		const subscription = watch((value, { name }) => {
-			if (name === 'registration_number' && REGISTRATION_VALIDATE_COUNTRIES.includes(countryCode)) {
+			if (name === 'registration_number' && (REGISTRATION_VALIDATE_COUNTRIES || []).includes(countryCode)) {
 				const registrationDetails = value[name];
 
 				if (isEmpty(registrationDetails)) {
@@ -147,7 +147,7 @@ function useOnBoardVendor({
 				},
 			};
 
-			if (REGISTRATION_VALIDATE_COUNTRIES.includes(countryCode)) {
+			if ((REGISTRATION_VALIDATE_COUNTRIES || []).includes(countryCode)) {
 				const {
 					registrationType: watchRegistartionType = '',
 					registrationNumber: watchRegistrationNumber = '',
@@ -163,7 +163,7 @@ function useOnBoardVendor({
 				};
 			}
 
-			if (!REGISTRATION_VALIDATE_COUNTRIES.includes(countryCode)) {
+			if (!(REGISTRATION_VALIDATE_COUNTRIES || []).includes(countryCode)) {
 				newField = {
 					...newField,
 					maxLength: 14,
