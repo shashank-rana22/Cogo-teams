@@ -307,7 +307,8 @@ function FormContainer({
 										>
 											Generate
 											{' '}
-											{activeCategory === 'mawb' ? 'Master' : 'House'}
+											{taskItem?.documentType === 'draft_house_airway_bill'
+												? 'House' : 'Master'}
 											{' '}
 											Airway Bill
 										</Button>
