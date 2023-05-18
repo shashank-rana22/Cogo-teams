@@ -9460,6 +9460,11 @@ const partner = {
 	],
 	templates: [
 		{
+			api          : 'update_communication_whatsapp_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_communication_templates',
 			access_type  : 'private',
 			service_name : 'communication',
