@@ -135,6 +135,7 @@ export default {
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
+			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -180,6 +181,7 @@ export default {
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		cogoverse_user_id     : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
+		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
 	},
 	options: {
 		registration_types: [
