@@ -288,7 +288,7 @@ function GenerateMAWB({
 	}, []);
 
 	useEffect(() => {
-		if (!viewDoc) {
+		if (!viewDoc && editCopies) {
 			setTaskItem({
 				...item,
 				...item.documentData,
@@ -299,7 +299,7 @@ function GenerateMAWB({
 			setValue('executedDate', edit && item?.documentData?.executedDate
 				? new Date(item?.documentData?.executedDate) : new Date());
 		}
-	}, [editCopies]);
+	}, [edit, editCopies]);
 
 	useEffect(() => {
 		let totalVolume:number = 0;

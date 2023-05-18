@@ -305,7 +305,11 @@ function FormContainer({
 											onClick={handleSubmit(onSubmit)}
 											themeType="accent"
 										>
-											Generate Master Airway Bill
+											Generate
+											{' '}
+											{activeCategory === 'mawb' ? 'Master' : 'House'}
+											{' '}
+											Airway Bill
 										</Button>
 									</div>
 								) : null}
