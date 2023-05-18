@@ -16,10 +16,5 @@
 .text_styles {
 	font-size: 16px;
 	font-weight: 600;
-	color: #4f4f4f;
-}
-
-.fill_circle_styles {
-	fill: none;
-	stroke: #adcd62;
+	color: #f7faef;
 }

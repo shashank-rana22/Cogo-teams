@@ -1,42 +1,35 @@
+import { SVG_SIZE, STROKE_WIDTH, RADIUS, CIRCUMFERENCE } from '../../../../constants/PROGRESS_BAR_DIMENSIONS';
+
 import styles from './styles.module.css';
 
-const RADIUS = 60;
-const CIRCUMFERENCE = 2 * Math.PI * RADIUS;
-const C_X = 80;
-const C_Y = 80;
 function PercentageDiv({ eachStat = {} }) {
 	const { label, value = 0, target } = eachStat;
 
 	const offset = CIRCUMFERENCE - (Number(value / target) || 0) * CIRCUMFERENCE;
 	return (
 		<div className={styles.container}>
-			<svg width="160" height="160" viewBox="0 0 100% 100%">
+			<svg width={SVG_SIZE} height={SVG_SIZE} viewBox={`0 0 ${SVG_SIZE} ${SVG_SIZE}`}>
 				<circle
-					cx={C_X}
-					cy={C_Y}
+					cx={SVG_SIZE / 2}
+					cy={SVG_SIZE / 2}
 					r={RADIUS}
-					fill="transparent"
-					stroke="#cccccc"
-					strokeWidth="10"
+					stroke="#e8e8e8"
+					fill="none"
+					strokeWidth={`${STROKE_WIDTH}px`}
 				/>
 				<circle
-					cx={C_X}
-					cy={C_Y}
+					className={styles.fill_circle_styles}
+					cx={SVG_SIZE / 2}
+					cy={SVG_SIZE / 2}
 					r={RADIUS}
-					fill="transparent"
-					stroke="#ff5722"
-					strokeWidth="10"
+					strokeWidth={`${STROKE_WIDTH}px`}
+					transform={`rotate(-90 ${SVG_SIZE / 2} ${SVG_SIZE / 2})`}
 					strokeDasharray={CIRCUMFERENCE}
 					strokeDashoffset={offset}
 					strokeLinecap="round"
+					strokeLinejoin="round"
 				/>
-				<text
-					x="50%"
-					y="50%"
-					dominantBaseline="middle"
-					textAnchor="middle"
-					className={styles.text_styles}
-				>
+				<text className={styles.text_styles} x="50%" y="55%" textAnchor="middle">
 					{`${value}/${target}`}
 				</text>
 			</svg>

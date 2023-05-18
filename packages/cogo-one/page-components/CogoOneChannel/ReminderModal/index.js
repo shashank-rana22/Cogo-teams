@@ -5,6 +5,7 @@ import REMINDER_TIPS from '../../../constants/REMINDER_TIPS';
 import useShipmentReminder from '../../../hooks/useShipmentReminder';
 import getShipmentReminderStats from '../../../utils/getShipmentReminderStats';
 
+import FillContainer from './FillContainer';
 import PercentageDiv from './PercentageDiv';
 import styles from './styles.module.css';
 
@@ -41,15 +42,18 @@ function ReminderModal({ firestore, agentId, getAssignedChats }) {
 		>
 			<Modal.Header title="Your Summary" />
 			<Modal.Body>
-
-				<div className={styles.agent_chats}>
-					No. of Chats Assigned :
-					<span>{shipmentData?.assignedChatsCount}</span>
+				<div className={styles.header}>
+					No. of Chats Assigned
+					<span>{shipmentData.assignedChatsCount || 0}</span>
+				</div>
+				<div className={styles.header}>
+					Shipments Booked
 				</div>
 				<div className={styles.stats_row}>
+					<FillContainer label="Today" value={shipmentData?.dayCount} />
 					{statsMapping.map((eachStat) => <PercentageDiv key={eachStat?.key} eachStat={eachStat} />)}
 				</div>
-				<div className={styles.tips_header}>
+				<div className={styles.header}>
 					Tips
 				</div>
 				<ol>
