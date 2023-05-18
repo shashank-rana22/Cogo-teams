@@ -13,8 +13,9 @@
 }
 
 .label_value_container {
-	font-size: var(--font-size-md);
 	margin-bottom: 6px;
+	font-size: var(--font-size-md);
+
 
 	.label {
 		font-weight: 600;
