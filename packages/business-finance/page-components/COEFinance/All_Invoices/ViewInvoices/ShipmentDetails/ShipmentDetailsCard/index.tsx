@@ -181,7 +181,7 @@ function ShipmentDetailsCard({
 						{!isInvoiceApproved && (
 							<div className={styles.completed}>
 								Completed
-								{showValue.length + rejected.length || 0}
+								{!isDisabled(status) ? 3 : showValue.length + rejected.length || 0}
 								/3
 							</div>
 						)}
@@ -227,7 +227,7 @@ function ShipmentDetailsCard({
 															{' '}
 															Account Number -
 															{' '}
-															<span style={{ color: '#ed3726' }}>
+															<span className={styles.bold_data}>
 																{accountNumber}
 															</span>
 														</div>
@@ -239,7 +239,7 @@ function ShipmentDetailsCard({
 															{' '}
 															IFSC -
 															{' '}
-															<span style={{ color: '#ed3726' }}>
+															<span className={styles.bold_data}>
 																{ifscCode}
 															</span>
 														</div>
@@ -484,7 +484,7 @@ function ShipmentDetailsCard({
 												{' '}
 												Account Number -
 												{' '}
-												<span style={{ color: '#ed3726' }}>
+												<span className={styles.bold_data}>
 													{accountNumber}
 												</span>
 											</div>
@@ -492,7 +492,7 @@ function ShipmentDetailsCard({
 												{' '}
 												IFSC -
 												{' '}
-												<span style={{ color: '#ed3726' }}>{ifscCode}</span>
+												<span className={styles.bold_data}>{ifscCode}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												PAN Number -
