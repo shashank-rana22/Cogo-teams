@@ -1,9 +1,8 @@
 import { startCase, isEmpty } from '@cogoport/utils';
 
 const handleDisableCond = (charge, isFclFreight, shipment_data) => {
-	const disable =		charge?.service_type === 'fcl_freight_service'
-		&& !isFclFreight
-		&& shipment_data?.serial_id > 130000;
+	const disable =	charge?.service_type === 'fcl_freight_service' && !isFclFreight
+	&& shipment_data?.serial_id > 130000;
 
 	return disable;
 };

@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function Header({
 	invoiceData = {},
-	refetch = () => {},
+	BfInvoiceRefetch = () => {},
 	disableAction = false,
 	isCustomer = false,
 }) {
@@ -65,7 +65,7 @@ function Header({
 				<div className={styles.Flex}>
 					{showExchangeRate ? (
 						<ExchangeRate
-							refetch={refetch}
+							BfInvoiceRefetch={BfInvoiceRefetch}
 							invoiceData={invoiceData}
 							shipment_data={shipment_data}
 							disableAction={disableAction}
@@ -75,7 +75,7 @@ function Header({
 					<EditInvoicePreference
 						shipment_data={shipment_data}
 						invoicing_parties={invoicing_parties}
-						refetch={refetch}
+						BfInvoiceRefetch={BfInvoiceRefetch}
 						disableAction={disableAction}
 					/>
 				</div>

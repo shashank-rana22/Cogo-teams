@@ -25,7 +25,7 @@ const CNstatusMapping = {
 function Item({
 	item = {},
 	serial_id = '',
-	refetch = () => {},
+	CNRefetch = () => {},
 	invoiceData = {},
 	loading = false,
 	invoicesList = [],
@@ -172,7 +172,7 @@ function Item({
 				<ReviewCN
 					setOpen={setOpen}
 					id={item?.id}
-					refetch={refetch}
+					CNRefetch={CNRefetch}
 				/>
 			) : null}
 
@@ -183,7 +183,7 @@ function Item({
 					CNstatusMapping={CNstatusMapping}
 					serial_id={serial_id}
 					item={item}
-					refetch={refetch}
+					CNRefetch={CNRefetch}
 					invoiceData={invoiceData}
 				/>
 			) : null}

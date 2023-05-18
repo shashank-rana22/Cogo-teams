@@ -1,17 +1,17 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
 import AddInvoicingParty from '../../../../AdditionalServices/components/AddIp/AddInvoicingParty';
 import getModifiedInvoicingParties from '../../../helpers/getModifiedInvoicingParties';
 
 import ListInvoicePreferences from './ListInvoicePreferences';
 import styles from './styles.module.css';
-import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
 
 function EditInvoicePreference({
 	shipment_data = {},
 	invoicing_parties = [],
-	refetch = () => {},
+	BfInvoiceRefetch = () => {},
 	disableAction = false,
 }) {
 	const [show, setShow] = useState(false);
@@ -29,7 +29,7 @@ function EditInvoicePreference({
 		invoicing_parties: invoicingParties,
 		shipment_data,
 		setShow,
-		refetch,
+		BfInvoiceRefetch,
 	});
 	const organizationDetails = {
 		id         : shipment_data?.importer_exporter?.id || undefined,
@@ -65,7 +65,6 @@ function EditInvoicePreference({
 					closeOnOuterClick={false}
 				>
 					<Modal.Header title="EDIT INVOICING PREFERENCE" />
-
 					<Modal.Body>
 						<div className={styles.form}>
 							<Button

@@ -54,7 +54,6 @@
 	font-size: 18px;
 	line-height: 16px;
 	white-space: nowrap;
-	/* margin-left: ${(props) => (!props.style ? '15.5%' : '2.5%')}; */
 
 	@media (max-width: 768px) {
 		font-size: 16px;

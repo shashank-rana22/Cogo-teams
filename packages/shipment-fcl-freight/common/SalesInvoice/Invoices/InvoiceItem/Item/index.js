@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function ItemHeader({
 	invoice = {},
-	refetch = () => {},
+	BfInvoiceRefetch = () => {},
 	loading = false,
 	invoiceData = {},
 	invoicesList = [],
@@ -18,7 +18,7 @@ function ItemHeader({
 		<div className={styles.container}>
 			<Header
 				invoice={invoice}
-				refetch={refetch}
+				BfInvoiceRefetch={BfInvoiceRefetch}
 				invoiceData={invoiceData}
 				invoicesList={invoicesList}
 				isIRNGenerated={isIRNGenerated}

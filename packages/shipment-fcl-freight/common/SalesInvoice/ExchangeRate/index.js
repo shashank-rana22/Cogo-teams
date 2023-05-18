@@ -6,7 +6,7 @@ import useExchangeRate from './useExchangeRate';
 
 function ExchangeRate({
 	shipment_data,
-	refetch = () => {},
+	BfInvoiceRefetch = () => {},
 	invoiceData = {},
 	disableAction = false,
 }) {
@@ -59,7 +59,7 @@ function ExchangeRate({
 						setOpen={setOpen}
 						shipment_id={shipment_data.id}
 						availableCurrencyConversions={availableCurrencyConversions}
-						refetch={refetch}
+						BfInvoiceRefetch={BfInvoiceRefetch}
 					/>
 				</Modal>
 			) : null}

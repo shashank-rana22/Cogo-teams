@@ -36,8 +36,8 @@ const useListCreditNotes = ({ shipment_data }) => {
 
 	return {
 		loading,
-		list    : apiData?.list || [],
-		refetch : getCreditNoteList,
+		list      : apiData?.list || [],
+		CNRefetch : getCreditNoteList,
 	};
 };
 export default useListCreditNotes;

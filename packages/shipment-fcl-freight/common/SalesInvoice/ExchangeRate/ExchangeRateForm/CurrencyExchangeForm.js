@@ -15,7 +15,7 @@ function CurrencyExchangeForm({
 	rateAddtionApi,
 	setOpen,
 	availableCurrencyConversions,
-	refetch = () => {},
+	BfInvoiceRefetch = () => {},
 }) {
 	const [error, setError] = useState({});
 
@@ -70,7 +70,7 @@ function CurrencyExchangeForm({
 			const res = await rateAddtionApi.trigger({ data: body });
 			if (!res?.hasError) {
 				toast.success('Rate Added Successfully!');
-				refetch();
+				BfInvoiceRefetch();
 				setOpen(false);
 			} else {
 				toast.error(res?.message);

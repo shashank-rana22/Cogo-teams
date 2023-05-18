@@ -22,7 +22,7 @@ import styles from './styles.module.css';
 
 function Actions({
 	invoice = {},
-	refetch = () => {},
+	BfInvoiceRefetch = () => {},
 	shipment_data = {},
 	invoiceData = {},
 	isIRNGenerated = false,
@@ -89,7 +89,7 @@ function Actions({
 	);
 
 	const handleRefetch = () => {
-		refetch();
+		BfInvoiceRefetch();
 		salesInvoicesRefetch();
 	};
 
@@ -301,7 +301,7 @@ function Actions({
 					show={isEditInvoice}
 					onClose={() => setIsEditInvoice(false)}
 					invoice={invoice}
-					refetch={handleRefetch}
+					BfInvoiceRefetch={handleRefetch}
 					shipment_data={shipment_data}
 				/>
 			) : null}
@@ -311,7 +311,7 @@ function Actions({
 					showReview={showReview}
 					setShowReview={setShowReview}
 					invoice={invoice}
-					refetch={handleRefetch}
+					BfInvoiceRefetch={handleRefetch}
 				/>
 			) : null}
 
@@ -320,7 +320,7 @@ function Actions({
 					isChangeCurrency={isChangeCurrency}
 					setIsChangeCurrency={setIsChangeCurrency}
 					invoice={invoice}
-					refetch={handleRefetch}
+					BfInvoiceRefetch={handleRefetch}
 				/>
 			) : null}
 
@@ -329,7 +329,7 @@ function Actions({
 					showOtpModal={showOtpModal}
 					setShowOTPModal={setShowOTPModal}
 					invoice={invoice}
-					refetch={salesInvoicesRefetch}
+					BfInvoiceRefetch={salesInvoicesRefetch}
 					shipment_data={shipment_data}
 				/>
 			) : null}
@@ -339,7 +339,7 @@ function Actions({
 					showAddRemarks={showAddRemarks}
 					setShowAddRemarks={setShowAddRemarks}
 					invoice={invoice}
-					refetch={handleRefetch}
+					BfInvoiceRefetch={handleRefetch}
 				/>
 			) : null}
 
@@ -348,7 +348,7 @@ function Actions({
 					show={sendEmail}
 					setShow={setSendEmail}
 					invoice={invoice}
-					refetch={refetch}
+					BfInvoiceRefetch={BfInvoiceRefetch}
 				/>
 			) : null}
 
@@ -357,7 +357,7 @@ function Actions({
 					show={showChangePaymentMode}
 					setShow={setShowChangePaymentMode}
 					invoice={invoice}
-					refetch={refetch}
+					BfInvoiceRefetch={BfInvoiceRefetch}
 				/>
 			) : null}
 		</div>

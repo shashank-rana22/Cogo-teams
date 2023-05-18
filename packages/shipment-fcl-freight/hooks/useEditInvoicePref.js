@@ -62,7 +62,7 @@ const useEditInvoicePref = ({
 	invoicing_parties = [],
 	shipment_data = {},
 	setShow = () => {},
-	refetch = () => {},
+	BfInvoiceRefetch = () => {},
 }) => {
 	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
@@ -306,12 +306,10 @@ const useEditInvoicePref = ({
 				data: payload,
 			});
 			Toast.success('Invoice Preference edited!');
-			refetch();
+			BfInvoiceRefetch();
 			setShow();
 		} catch (err) {
 			toastApiError(err?.data);
-			refetch(); // will be removed in future
-			setShow(); // will be removed in future
 		}
 	};
 

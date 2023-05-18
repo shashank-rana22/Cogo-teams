@@ -1,15 +1,12 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useState, useContext, useEffect } from 'react';
 
 const useExchangeRate = ({ shipment_id, invoiceCurrency }) => {
-	const [{ shipment_data }] = useContext(ShipmentDetailContext);
-
-	const { scope } = useSelector(({ general }) => ({ scope: general?.scope }));
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const [serviceCharges, setServiceCharges] = useState([]);
-	const [{ loading }, { trigger: getShipmentQuotation }] = useRequest({
+	const [{ trigger: getShipmentQuotation }] = useRequest({
 		url    : 'get_shipment_quotation',
 		method : 'GET',
 	}, { manual: true });
@@ -65,7 +62,7 @@ const useExchangeRate = ({ shipment_id, invoiceCurrency }) => {
 
 	Object.keys(allCurrenciesWithConversionFactor || {})?.forEach((currency) => {
 		if (differentCurrenciesHash[currency]) {
-			availableCurrencyConversions[currency] =				allCurrenciesWithConversionFactor[currency]
+			availableCurrencyConversions[currency] = allCurrenciesWithConversionFactor[currency]
 				* (1 + currency_conversion_delta);
 		}
 	});

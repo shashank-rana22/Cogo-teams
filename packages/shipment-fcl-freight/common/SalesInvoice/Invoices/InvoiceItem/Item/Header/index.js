@@ -18,7 +18,7 @@ const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
 function Header({
 	children = null,
 	invoice = {},
-	refetch = () => {},
+	BfInvoiceRefetch = () => {},
 	invoiceData = {},
 	invoicesList = [],
 	isIRNGenerated = false,
@@ -57,7 +57,7 @@ function Header({
 
 	const { updateInvoiceStatus } = useUpdateShipmentInvoiceStatus({
 		invoice,
-		refetch,
+		BfInvoiceRefetch,
 		status,
 	});
 
@@ -226,7 +226,7 @@ function Header({
 					{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
 						<Actions
 							invoice={invoice}
-							refetch={refetch}
+							BfInvoiceRefetch={BfInvoiceRefetch}
 							shipment_data={shipment_data}
 							invoiceData={invoiceData}
 							isIRNGenerated={isIRNGenerated}
@@ -283,7 +283,7 @@ function Header({
 				invoice={invoice}
 				refetchCN={refetchCN}
 				invoiceData={invoiceData}
-				refetch={refetch}
+				BfInvoiceRefetch={BfInvoiceRefetch}
 			/>
 		</div>
 	);

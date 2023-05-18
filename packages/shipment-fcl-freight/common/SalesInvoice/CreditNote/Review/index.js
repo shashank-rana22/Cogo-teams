@@ -8,11 +8,11 @@ import styles from './styles.module.css';
 function Review({
 	setOpen = () => {},
 	id = '',
-	refetch = () => {},
+	CNRefetch = () => {},
 }) {
 	const [value, setValue] = useState(false);
 
-	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch });
+	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch: CNRefetch });
 
 	const handleUpdate = () => {
 		apiTrigger({

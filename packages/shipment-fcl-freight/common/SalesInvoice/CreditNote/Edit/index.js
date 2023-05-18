@@ -17,7 +17,7 @@ function Edit({
 	serial_id,
 	prevData,
 	item = {},
-	refetch = () => {},
+	CNRefetch = () => {},
 	invoiceData = {},
 }) {
 	const { id, live_invoice_number, status } = item || {};
@@ -44,7 +44,7 @@ function Edit({
 		isEdit  : true,
 		invoiceData,
 		setOpen,
-		refetch,
+		refetch : CNRefetch,
 	});
 
 	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm();

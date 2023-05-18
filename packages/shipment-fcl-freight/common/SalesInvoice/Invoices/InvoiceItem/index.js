@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function InvoiceItem({
 	item = {},
 	total = {},
-	refetch = () => {},
+	BfInvoiceRefetch = () => {},
 	loading = false,
 	invoiceData = {},
 	invoicesList = [],
@@ -57,7 +57,7 @@ function InvoiceItem({
 				</div>
 
 				{org_outstanding ? (
-					<div className={styles.invoice_value_container} style={{ marginLeft: '2.5%' }}>
+					<div className={styles.invoice_value_container}>
 						<div className={styles.invoice_value_title}>
 							Total Outstanding -
 						</div>
@@ -68,12 +68,11 @@ function InvoiceItem({
 			</div>
 
 			<div className={styles.invoice_list_wrapper}>
-
 				{(item?.invoices || []).map((invoice) => (
 					<Item
 						key={invoice?.id}
 						invoice={invoice}
-						refetch={refetch}
+						BfInvoiceRefetch={BfInvoiceRefetch}
 						loading={loading}
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}

@@ -1,4 +1,3 @@
-/* eslint-disable no-param-reassign */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
@@ -30,7 +29,6 @@ const useEditLineItems = ({
 
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
-	// const [errors, setErrors] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_sell_quotations',
@@ -63,7 +61,6 @@ const useEditLineItems = ({
 				});
 			}
 		});
-
 		return defaultValues;
 	};
 
@@ -107,9 +104,9 @@ const useEditLineItems = ({
 			if (key && formValues?.[key]) {
 				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
 					...value,
-					// tax: selectedCodes[value.code]?.tax_percent || 'NA',
-					// sac_code: selectedCodes[value.code]?.sac || 'NA',
-					total: (value?.price_discounted || 0) * (value?.quantity || 0),
+					tax      : selectedCodes[value.code]?.tax_percent || 'NA',
+					sac_code : selectedCodes[value.code]?.sac || 'NA',
+					total    : (value?.price_discounted || 0) * (value?.quantity || 0),
 				}));
 			}
 		});
@@ -223,7 +220,6 @@ const useEditLineItems = ({
 						chargeCodes[chgCode.code] = chgCode;
 					},
 				);
-
 				const service = {
 					service_id   : currentService?.service_id,
 					service_type : currentService?.service_type,
@@ -237,13 +233,14 @@ const useEditLineItems = ({
 						unit             : line_item?.unit,
 					})),
 				};
+				console.log(service, " :service", payload);
 				payload.push(service);
 			});
 
 			const res = await trigger({
 				data: {
 					quotations             : payload,
-					shipment_id            : query.id,
+					shipment_id            : shipment_data?.id,
 					invoice_combination_id : invoice?.id || undefined,
 				},
 			});

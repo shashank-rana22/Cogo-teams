@@ -12,9 +12,9 @@ import styles from './styles.module.css';
 
 function SalesInvoice() {
 	const { list } = useListSageSalesInvoices();
-	const { salesList, refetch:salesInvoicesRefetch } = useListBfSalesInvoices();
+	const { salesList, refetch:BfInvoiceRefetch } = useListBfSalesInvoices();
 
-	const { data: invoiceData, groupedInvoices, refetch, loading } = useGetShipmentInvoice();
+	const { data: invoiceData, groupedInvoices, refetch: salesInvoicesRefetch, loading } = useGetShipmentInvoice();
 
 	const { outstanding_by_reg_num } = useOrgOutStanding({
 		org_reg_nums: Object.keys(groupedInvoices || {}),
@@ -40,7 +40,7 @@ function SalesInvoice() {
 				<Invoices
 					invoiceData={invoiceData}
 					groupedInvoices={groupedInvoices}
-					refetch={refetch}
+					BfInvoiceRefetch={BfInvoiceRefetch}
 					invoicesList={salesList}
 					loading={loading}
 					salesInvoicesRefetch={salesInvoicesRefetch}

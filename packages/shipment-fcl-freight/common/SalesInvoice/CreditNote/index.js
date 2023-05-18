@@ -3,7 +3,7 @@ import styles from './styles.module.css';
 
 function CreditNote({
 	list = [],
-	refetch = () => {},
+	CNRefetch = () => {},
 	invoiceData = {},
 	invoicesList = [],
 }) {
@@ -18,7 +18,7 @@ function CreditNote({
 					<Item
 						key={item?.id}
 						item={item}
-						refetch={refetch}
+						CNRefetch={CNRefetch}
 						invoicesList={invoicesList}
 						invoiceData={invoiceData}
 					/>

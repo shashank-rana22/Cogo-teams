@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useSelector } from '@cogoport/store';
 import React, { useEffect } from 'react';
 
 // import getDefaultValues from '../../../../../../Tasks/TaskExecution/utils/get-default-values';
@@ -20,40 +21,12 @@ function EditInvoice({
 	refetch = () => {},
 	shipment_data = {},
 }) {
-	// const { role_ids, isMobile } = useSelector(({ profile, general }) => ({
-	// 	role_ids : profile.partner?.user_role_ids,
-	// 	isMobile : general.isMobile,
-	// }));
-
-	// const isFclFreight =		[geo.uuid.admin_id, geo.uuid.super_admin_id].some((ele) => role_ids?.includes(ele)) && shipment_data?.shipment_type === 'fcl_freight';
-
-	// const {
-	// 	controls,
-	// 	loading,
-	// 	onCreate,
-	// 	handleSubmit,
-	// 	customValues,
-	// 	fields,
-	// 	onError,
-	// 	errors,
-	// } = useEditLineItems({
-	// 	invoice,
-	// 	onClose,
-	// 	refetch,
-	// 	isFclFreight,
-	// 	shipment_data,
-	// 	info: <Info />,
-	// });
-
-	// const disabledProps =		controls?.[0]?.service_name === 'fcl_freight_service'
-	// 	&& !isFclFreight
-	// 	&& shipment_data?.serial_id > 130000;
-
-	// const defaultVal = getDefaultValues(controls);
-	// const {
-	// 	control,
-	// 	formState: { errors },
-	// } = useForm({ defaultVal });
+	const { role_ids } = useSelector(({ profile, general }) => ({
+		role_ids : profile.partner?.user_role_ids,
+		isMobile : general.isMobile,
+	}));
+	const isFclFreight = [geo.uuid.admin_id, geo.uuid.super_admin_id]
+		.some((ele) => role_ids?.includes(ele)) && shipment_data?.shipment_type === 'fcl_freight';
 
 	const {
 		controls,
@@ -75,6 +48,10 @@ function EditInvoice({
 		info         : <Info />,
 	});
 
+	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service'
+		&& !isFclFreight
+		&& shipment_data?.serial_id > 130000;
+
 	const formValues = watch();
 
 	useEffect(() => {
@@ -93,9 +70,6 @@ function EditInvoice({
 			onClose={onClose}
 			show={show}
 			closable={false}
-			// styles={{
-			// 	dialog: { width: isMobile ? 360 : 1030 },
-			// }}
 		>
 			<Modal.Body>
 				<div className={styles.forms}>
@@ -118,12 +92,13 @@ function EditInvoice({
 					<Form
 							// data={data}
 						invoiceData={invoice}
-							// prevData={prevData}
+						prevData={defaultValues}
 						controls={controls}
 						defaultValues={defaultValues}
 						errors={errors}
 						control={control}
 						setValue={setValue}
+						disabledProps={disabledProps}
 					/>
 				</div>
 
