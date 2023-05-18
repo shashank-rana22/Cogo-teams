@@ -13,6 +13,7 @@ const getMainQuery = (userId, type, isObserver) => {
 			];
 	}
 };
+
 const getSessionQuery = (viewType, showBotMessages) => {
 	if (viewType === 'shipment_view') {
 		return where('session_type', 'in', ['bot', 'admin']);
@@ -20,6 +21,7 @@ const getSessionQuery = (viewType, showBotMessages) => {
 	return showBotMessages
 		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
 };
+
 function getFireStoreQuery({
 	userId,
 	appliedFilters,

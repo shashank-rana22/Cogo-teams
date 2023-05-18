@@ -1,5 +1,6 @@
 import { Tooltip, cl } from '@cogoport/components';
 import { IcMPortArrow, IcCFtick, IcMArrowDown } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -10,6 +11,16 @@ import styles from './styles.module.css';
 
 function TransactionalActivity({ transactional = {} }) {
 	const [viewDetails, setViewDetails] = useState('');
+	const router = useRouter();
+
+	const redirectToShipment = (shipmentId) => {
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipmentId}`;
+		window.open(
+			newUrl,
+			'_blank',
+			'noreferrer',
+		);
+	};
 
 	const handleOnClick = (uuid) => {
 		if (viewDetails && viewDetails === uuid) {
@@ -68,9 +79,13 @@ function TransactionalActivity({ transactional = {} }) {
 									className={cl`${viewCheck ? styles.open_card_details : styles.card_details}`}
 								>
 
-									<div className={styles.booking_id}>
-										SID:
-										{' '}
+									<div
+										className={styles.booking_id}
+										role="button"
+										tabIndex={0}
+										onClick={() => redirectToShipment(id)}
+									>
+										SID:&nbsp;
 										{serial_id}
 									</div>
 									<div className={styles.port_pair}>
