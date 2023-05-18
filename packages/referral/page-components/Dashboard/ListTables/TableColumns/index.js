@@ -5,7 +5,7 @@ import {
 	startCase,
 } from '@cogoport/utils';
 
-import { TYPE, STATUS_MAPPING } from '../../../../constants';
+import { TYPE, STATUS_COLOUR } from '../../../../constants';
 
 import ListButtons from './ListButtons';
 import Nodes from './Nodes';
@@ -231,8 +231,8 @@ const TableColumns = ({
 		{
 			Header   : 'STATUS',
 			accessor : (item = {}) => (
-				<div className={styles.user_name}>
-					{STATUS_MAPPING[item?.status]}
+				<div className={styles.user_status} style={{ color: STATUS_COLOUR[item?.status] }}>
+					{startCase(item?.status)}
 				</div>
 			),
 			conditions: ['invited'],

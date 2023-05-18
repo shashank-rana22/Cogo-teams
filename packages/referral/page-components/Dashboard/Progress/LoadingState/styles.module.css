@@ -81,6 +81,23 @@
 	margin-top: 20px;
 }
 
+.circle_div {
+	width: 33%;
+	padding: 10px 15px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.points_div {
+	width: 33%;
+	padding: 55px 15px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.points_last_div {
+	width: 33%;
+	padding: 55px 15px;
+}
+
 .networks_chart {
 	width: 100%;
 }

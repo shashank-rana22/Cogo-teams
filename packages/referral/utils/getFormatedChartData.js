@@ -1,14 +1,9 @@
 const getFormatedChartData = (
 	userData = {},
 	alloted = {},
-	estimated = {},
-) => {
-	const { kyc_verified:allotedKyc = 0, shipment = 0, subscription = 0 } = alloted;
 
-	const {
-		kyc_verified: estimatedKyc = 0, shipment: estimatedShipment = 0,
-		subscription: estimatedSubscription = 0,
-	} = estimated;
+) => {
+	const { kyc_verified: allotedKyc = 0, shipment = 0, subscription = 0 } = alloted;
 
 	const { affiliate = 0, invited = 0, kyc_verified = 0, signed_up = 0 } = userData;
 
@@ -26,24 +21,6 @@ const getFormatedChartData = (
 		{
 			id    : 'shipment',
 			value : shipment,
-			color : '#88CAD1',
-		},
-	];
-
-	const estimatedData = [
-		{
-			id    : 'subscription',
-			value : estimatedSubscription,
-			color : '#FCDC00',
-		},
-		{
-			id    : 'kyc',
-			value : estimatedKyc,
-			color : '#ABCD62',
-		},
-		{
-			id    : 'shipment',
-			value : estimatedShipment,
 			color : '#88CAD1',
 		},
 	];
@@ -78,7 +55,6 @@ const getFormatedChartData = (
 
 	return {
 		allottedData,
-		estimatedData,
 		usersData,
 	};
 };

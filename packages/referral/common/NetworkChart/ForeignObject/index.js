@@ -1,6 +1,9 @@
+import { Tooltip } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
+import Image from 'next/image';
 import { useState } from 'react';
 
-import { cogopointImg } from '../../../constants';
+import { COGOPOINT_IMG } from '../../../constants';
 
 import DirectNode from './DirectNode';
 import styles from './styles.module.css';
@@ -13,13 +16,14 @@ function RenderForeignObjectNode({
 	handleLinkClick = () => {},
 	handleConnections = () => {},
 	topPerformerId = '',
+	userName = '',
 }) {
 	const {
 		user_data: userData = null,
 		referral_data: referralData = {},
 		cogopoints = {},
 		organization = [],
-		referee_id: topuser = '',
+		referee_id: topUser = '',
 		__rd3t: rd3t = {},
 	} = nodeDatum || {};
 
@@ -27,7 +31,7 @@ function RenderForeignObjectNode({
 
 	const [collapseState, setCollapseState] = useState(true);
 
-	const topPerformer = topPerformerId === topuser;
+	const topPerformer = topPerformerId === topUser;
 
 	const orgCount = organization.length - 1;
 
@@ -84,11 +88,19 @@ function RenderForeignObjectNode({
 				height="60"
 			>
 				<div className={styles.root_flex}>
-					<div className={styles.root_user_text}>You</div>
+					<Tooltip content={startCase(userName)} placement="bottom">
+						<div className={styles.root_user_text}>
+							{startCase(userName)}
+							{' '}
+						</div>
+					</Tooltip>
+
 					<div className={styles.cogopoints}>
-						<img
-							src={cogopointImg}
+						<Image
+							src={COGOPOINT_IMG}
 							alt="cogopoint"
+							width={18}
+							height={18}
 							className={styles.cogopoints_img}
 						/>
 						{' '}

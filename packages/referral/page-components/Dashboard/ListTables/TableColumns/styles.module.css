@@ -15,9 +15,15 @@
 .user_name {
 	width: 130px;
 	overflow: hidden;
+	font-size: 13px;
 	color: #4f4f4f;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+}
+
+.user_status {
+	font-size: 12px;
+	font-weight: 600;
 }
 
 .organisation_div {

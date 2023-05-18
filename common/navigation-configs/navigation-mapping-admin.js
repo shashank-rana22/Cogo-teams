@@ -2254,6 +2254,7 @@ const navigationMappingAdmin = {
 		isSubNavs   : true,
 		icon        : IcMRolesIncluded,
 		module_type : 'dashboards',
+		main_apis   : [],
 		options     : [
 			{
 				key           : 'referral-dashboard',
@@ -2261,7 +2262,6 @@ const navigationMappingAdmin = {
 				href          : '/referral/dashboard',
 				as            : '/referral/dashboard',
 				type          : 'link',
-				main_apis     : [],
 				possible_apis : apis.referral_dashboard,
 			},
 		],

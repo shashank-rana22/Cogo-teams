@@ -2,7 +2,7 @@ import { Modal, Pagination, Placeholder } from '@cogoport/components';
 import { IcCCogoCoin } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
 
-import { ACTIVITY_STATUS, networkEmptyState } from '../../../constants';
+import { ACTIVITY_STATUS, NETWORK_EMPTY_STATE } from '../../../constants';
 import useGetReferralTransactions from '../../../hooks/useGetReferralTransactions';
 
 import styles from './styles.module.css';
@@ -47,7 +47,7 @@ function ActivityModal({
 	function EmptyState() {
 		return (
 			<div className={styles.empty_state}>
-				<img src={networkEmptyState} alt="empty-state" width="120px" height="120px" />
+				<img src={NETWORK_EMPTY_STATE} alt="empty-state" width="120px" height="120px" />
 			</div>
 		);
 	}

@@ -16,7 +16,7 @@ const ListButtons = ({
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 	const router = useRouter();
 
-	const { organization_data = [], referee_data = {}, immediate_child_count = 0 } = item;
+	const { organization_data = [], referee_data = {}, immediate_child_count = 0, name = '' } = item;
 
 	const emptyOrg = isEmpty(organization_data);
 
@@ -45,8 +45,8 @@ const ListButtons = ({
 				if (immediate_child_count !== 0) {
 					setShowPopover({});
 					router.push(
-						'/referral/dashboard/[referrer_id]',
-						`/referral/dashboard/${referee_data?.id}`,
+						`/referral/dashboard/[referrer_id]?user_name=${name || referee_data?.name}`,
+						`/referral/dashboard/${referee_data?.id}?user_name=${name || referee_data?.name}`,
 					);
 				}
 			},

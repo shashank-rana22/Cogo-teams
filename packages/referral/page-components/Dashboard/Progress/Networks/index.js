@@ -1,7 +1,7 @@
 import { isEmpty } from '@cogoport/utils';
 
 import NetworkLineChart from '../../../../configurations/network-line-chart';
-import { networkEmptyState } from '../../../../constants';
+import { NETWORK_EMPTY_STATE } from '../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -13,7 +13,7 @@ function Networks({ networkData = {} }) {
 
 			{emptyState ? (
 				<div className={styles.empty_state}>
-					<img src={networkEmptyState} alt="empty-state" width="120px" height="120px" />
+					<img src={NETWORK_EMPTY_STATE} alt="empty-state" width="120px" height="120px" />
 
 				</div>
 			) : (

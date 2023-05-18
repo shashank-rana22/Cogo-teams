@@ -13,36 +13,22 @@ export const USER_STATUS_COLOUR = {
 export const USER_STATUS_MAPPING = {
 	active    : 'Active',
 	inactive  : 'In-Active',
-	Affiliate : 'affiliate',
+	affiliate : 'Affiliate',
 };
 
-export const STATUS_MAPPING = {
-	invalid  : 'Referral Invalid',
-	pending  : 'Verification Pending',
-	accepted : 'Invite Accepted',
+export const STATUS_COLOUR = {
+	pending  : '#D6B300',
+	accepted : '#849E4C',
+	invalid  : ' #BF291E',
 };
-
-export const USER_TYPES = [
-	{
-		label : 'Affiliate',
-		value : 'affiliate',
-	},
-	{
-		label : 'Importer Exporter',
-		value : 'importer_exporter',
-	},
-	{
-		label : 'Channel Partner',
-		value : 'channel_partner',
-	},
-
-];
 
 export const ACTIVITY_STATUS = {
 	rewarded    : '#ABCD62',
 	provisional : '#c0392b',
 };
 
-export const listEmptyState = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
-export const cogopointImg = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg';
-export const networkEmptyState = 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg';
+export const LEVEL_DATA = ['L1', 'L10', 'L20', 'L30', 'L40', 'L50', 'L60'];
+
+export const LIST_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
+export const COGOPOINT_IMG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg';
+export const NETWORK_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg';

@@ -11,6 +11,7 @@ function NetworkChart({
 	setNodeData = () => {},
 	nodeData = {},
 	referrerNetwork,
+	userName,
 }) {
 	const [zoom, setZoom] = useState(0.8);
 
@@ -122,6 +123,7 @@ function NetworkChart({
 						handleLinkClick={handleLinkClick}
 						handleConnections={handleConnections}
 						topPerformerId={top_performer_id}
+						userName={userName}
 					/>
 				)}
 				separation={{ nonSiblings: 3, siblings: 2 }}

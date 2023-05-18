@@ -41,11 +41,18 @@ function LoadingState() {
 					</div>
 				</div>
 				<div className={styles.cogopoints_container}>
-					{[...Array(3)].map((key) => (
-						<div key={key}>
-							{pieChart()}
-						</div>
-					))}
+					<div className={styles.circle_div}>
+						{pieChart()}
+					</div>
+
+					<div className={styles.points_div}>
+						<Placeholder width="100%" height="30px" />
+					</div>
+
+					<div className={styles.points_last_div}>
+						<Placeholder width="100%" height="30px" />
+					</div>
+
 				</div>
 			</div>
 			<div className={styles.networks}>

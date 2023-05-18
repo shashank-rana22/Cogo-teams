@@ -1,5 +1,7 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 
+import { LEVEL_DATA } from '../constants';
+
 function NetworkLineChart({ networkData = {} }) {
 	const mapdata = (data) => {
 		const keys = Object.keys(data || {});
@@ -18,9 +20,7 @@ function NetworkLineChart({ networkData = {} }) {
 
 	const network = mapdata(networkData);
 
-	const levelData = ['L1', 'L10', 'L20', 'L30', 'L40', 'L50', 'L60'];
-
-	const filteredNetwork = network.filter((item) => levelData.includes(item?.x));
+	const filteredNetwork = network.filter((item) => LEVEL_DATA.includes(item?.x));
 
 	const newData = [
 		{
@@ -59,7 +59,7 @@ function NetworkLineChart({ networkData = {} }) {
 				tickPadding    : 10,
 				tickValues     : 5,
 				tickRotation   : 0,
-				legend         : 'users  >',
+				legend         : 'cogopoints',
 				legendOffset   : -45,
 				legendPosition : 'middle',
 			}}

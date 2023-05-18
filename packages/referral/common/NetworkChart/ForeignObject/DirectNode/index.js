@@ -1,9 +1,10 @@
 import { cl, Tooltip } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import Image from 'next/image';
 import React from 'react';
 
-import { USER_STATUS_MAPPING, USER_STATUS_COLOUR, cogopointImg } from '../../../../constants';
+import { USER_STATUS_MAPPING, USER_STATUS_COLOUR, COGOPOINT_IMG } from '../../../../constants';
 import TooltipContent from '../../../TooltipContent';
 import styles from '../styles.module.css';
 
@@ -48,9 +49,9 @@ function DirectNode(
 				onClick={() => handleLinkClick(nodeDatum)}
 			>
 				<div className={styles.node_header}>
-					<div className={styles.profile_container}>
+					<div className={styles.cogopoints}>
 						<div className={cl` ${styles.profile_short_name} ${topPerformer
-							? styles.active_status : styles.inactive_status} `}
+							? styles.active_status : styles.inactive_color} `}
 						>
 							<div className={styles.profile_short_name_inner_div}>
 								<div className={cl` ${styles.profile_short_name_text} ${topPerformer
@@ -64,7 +65,7 @@ function DirectNode(
 							<div className={styles.active} style={{ color: USER_STATUS_COLOUR[referralData?.status] }}>
 								{USER_STATUS_MAPPING[referralData?.status]}
 							</div>
-							<div className={styles.id}>{lastUserId}</div>
+							<div className={styles.unique_id}>{lastUserId}</div>
 						</div>
 					</div>
 				</div>
@@ -80,7 +81,7 @@ function DirectNode(
 						>
 							<div className={styles.user_company_name}>
 								<div className={`${styles.company_name} ${organization?.length > 1
-									? styles.width_100 : styles.full_width}`}
+									? styles.user_org_name : styles.full_width}`}
 								>
 									{startCase(organization?.[0] || '\u00A0')}
 								</div>
@@ -99,9 +100,11 @@ function DirectNode(
 					<div className={styles.total}>
 						Total:
 					</div>
-					<img
-						src={cogopointImg}
+					<Image
+						src={COGOPOINT_IMG}
 						alt="cogopoint"
+						width={18}
+						height={18}
 						className={styles.cogopoints_img}
 					/>
 					<div className={styles.cogopoints_count}>
@@ -114,7 +117,7 @@ function DirectNode(
 					status === 'inactive' ? styles.inactive_card : ''
 				}`}
 				role="presentation"
-				onClick={() => handleFunc()}
+				onClick={handleFunc}
 			>
 				<div className={styles.child_network}>
 					<div className={styles.user_company_name}>

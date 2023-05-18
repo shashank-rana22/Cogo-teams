@@ -15,18 +15,10 @@
 	align-items: center;
 
 	:global {
-		.ui_select_container {
-			width: 200px;
-		}
-
 		.react-datepicker__input-container {
-			width: 200px;
+			width: 220px;
 		}
 	}
-}
-
-.select_field {
-	margin-right: 10px;
 }
 
 .table_container {

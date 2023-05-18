@@ -16,30 +16,27 @@ function DetailsPieCharts({
 			<div className={styles.view}>
 				<div className={styles.count_container}>
 					<IcCCogoCoin className={styles.coin_icon} />
-					<div className={styles.number}>{totalCount}</div>
+					<div className={styles.chart_total_count}>{totalCount}</div>
 				</div>
 
 				<div className={styles.sub_text}>{title}</div>
 
 			</div>
-			{totalCount !== 0 ? (
-				<div>
-					{!isEmpty(data) && !isMilestonesEmpty && (
-						<div className={styles.chart_styles}>
-							<ResponsivePie
-								data={data}
-								innerRadius={0.85}
-								justify
-								cornerRadius={1}
-								enableArcLabels={false}
-								enableArcLinkLabels={false}
-								isInteractive={false}
-								animate
-								colors={{ datum: 'data.color' }}
-							/>
-						</div>
-					)}
+			{totalCount !== 0 && !isEmpty(data) && !isMilestonesEmpty ? (
+				<div className={styles.chart_styles}>
+					<ResponsivePie
+						data={data}
+						innerRadius={0.85}
+						justify
+						cornerRadius={1}
+						enableArcLabels={false}
+						enableArcLinkLabels={false}
+						isInteractive={false}
+						animate
+						colors={{ datum: 'data.color' }}
+					/>
 				</div>
+
 			) : (
 				<div className={styles.styled_circle} />
 			)}

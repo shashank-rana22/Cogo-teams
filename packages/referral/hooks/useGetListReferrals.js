@@ -1,10 +1,7 @@
-import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-const useGetListReferrals = ({ filter = '', searchValue = '', activeTab = '' }) => {
-	const { query = '', debounceQuery } = useDebounceQuery();
-
+const useGetListReferrals = ({ filter = '', activeTab = '' }) => {
 	const api = activeTab === 'invited' ? 'list_referral_invites' : 'list_referral_mappings';
 
 	const [{ data: listReferals, loading: listLoading }, trigger] = useRequest({
@@ -14,6 +11,10 @@ const useGetListReferrals = ({ filter = '', searchValue = '', activeTab = '' }) 
 
 	const [listPagination, setListPagination] = useState(1);
 
+	useEffect(() => {
+		setListPagination(1);
+	}, [activeTab]);
+
 	const getListReferrals = useCallback(async () => {
 		try {
 			await trigger({
@@ -22,7 +23,6 @@ const useGetListReferrals = ({ filter = '', searchValue = '', activeTab = '' }) 
 					filters : {
 						referee_type : activeTab !== 'invited' ? activeTab : undefined,
 						status       : filter || undefined,
-						q            : query || undefined,
 
 					},
 				},
@@ -30,15 +30,11 @@ const useGetListReferrals = ({ filter = '', searchValue = '', activeTab = '' }) 
 		} catch (error) {
 			console.log(error);
 		}
-	}, [trigger, listPagination, activeTab, filter, query]);
+	}, [trigger, listPagination, activeTab, filter]);
 
 	useEffect(() => {
 		getListReferrals();
 	}, [getListReferrals]);
-
-	useEffect(() => {
-		debounceQuery(searchValue);
-	}, [debounceQuery, searchValue]);
 
 	return {
 		listReferals,

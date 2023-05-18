@@ -15,7 +15,7 @@
 	transform: translate(-50%, -50%);
 }
 
-.number {
+.chart_total_count {
 	font-weight: 500;
 	color: #4f4f4f;
 }
@@ -39,7 +39,7 @@
 	width: 100px;
 	height: 100px;
 	border: 8px solid #f8f2e7;
-	border-radius: 90px;
+	border-radius: 100%;
 }
 
 .chart_styles {

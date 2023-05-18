@@ -1,11 +1,11 @@
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 const useGetReferrerNetworkNode = ({ referee_id = '' }) => {
-	const { ...profile } = useSelector((state) => state?.profile);
-
-	const user_id = profile?.user?.id;
+	const router = useRouter();
+	const { query = {} } = router;
+	const { referrer_id = '' } = query || {};
 
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_referrer_network_node',
@@ -16,14 +16,14 @@ const useGetReferrerNetworkNode = ({ referee_id = '' }) => {
 		try {
 			await trigger({
 				params: {
-					selected_node_id : referee_id,
-					referrer_id      : user_id,
+					selected_node_id: referee_id,
+					referrer_id,
 				},
 			});
 		} catch (error) {
 			console.log(error);
 		}
-	}, [referee_id, trigger, user_id]);
+	}, [referee_id, referrer_id, trigger]);
 
 	useEffect(() => {
 		referrerNetworkNode();

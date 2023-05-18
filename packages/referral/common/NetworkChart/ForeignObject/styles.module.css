@@ -39,7 +39,11 @@
 }
 
 .root_user_text {
-	font-size: 14px;
+	width: 80%;
+	overflow: hidden;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .cogopoints {
@@ -64,18 +68,13 @@
 	font-size: 13px;
 }
 
-.profile_container {
-	display: flex;
-	align-items: center;
-}
-
 .user_status {
 	display: flex;
 	flex-direction: column;
 	margin-left: 4px;
 }
 
-.id {
+.unique_id {
 	font-size: 13px;
 }
 
@@ -101,10 +100,6 @@
 
 .active_status {
 	background: linear-gradient(318.17deg, #e79600 25.36%, #ffce74 45.73%, #f5b02e 54.67%);
-}
-
-.inactive_status {
-	background: #edd7a9;
 }
 
 .profile_short_name_inner_div {
@@ -171,7 +166,7 @@
 	white-space: nowrap;
 }
 
-.width_100 {
+.user_org_name {
 	width: 100px;
 }
 

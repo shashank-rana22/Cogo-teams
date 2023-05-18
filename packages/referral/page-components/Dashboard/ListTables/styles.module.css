@@ -1,13 +1,7 @@
 .container {
+	padding-top: 8px;
 	background: #fff;
 	border-radius: 8px;
-}
-
-.filter_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 10px;
 }
 
 .filter_icon {
@@ -15,10 +9,6 @@
 	height: 20px;
 	margin-right: 5px;
 	cursor: pointer;
-}
-
-.input_field {
-	width: 95%;
 }
 
 .table_container {

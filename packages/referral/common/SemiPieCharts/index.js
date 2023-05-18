@@ -15,7 +15,7 @@ function SemiPieChart({ usersData = [] }) {
 			)}
 
 			<div className={cl`${styles.view} ${totalCount === 0 ? styles.empty_count : styles.non_empty_count}`}>
-				<div className={styles.number}>{totalCount}</div>
+				<div className={styles.total_count}>{totalCount}</div>
 				<div className={styles.sub_text}>Total Users </div>
 			</div>
 

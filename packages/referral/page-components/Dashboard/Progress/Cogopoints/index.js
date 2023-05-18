@@ -14,10 +14,10 @@ function Cogopoints({ cogopointData = {} }) {
 		network_bonus = 0,
 		referral_bonus = 0,
 		alloted = {},
-		esitimated: estimated = {},
+		estimated = 0,
 	} = cogopointData;
 
-	const { detailsPieChart } = pieChartMapping(alloted, estimated);
+	const { detailsPieChart } = pieChartMapping(alloted);
 	const { bonusPoints } = cogopointsMapping(network_bonus, referral_bonus);
 
 	return (
@@ -41,6 +41,17 @@ function Cogopoints({ cogopointData = {} }) {
 						/>
 					</div>
 				))}
+
+				<div className={styles.estimated_container}>
+					<div className={styles.view}>
+						<div className={styles.count_container}>
+							<IcCCogoCoin className={styles.coin_icon} />
+							<div className={styles.number}>{estimated}</div>
+						</div>
+
+						<div className={styles.sub_text}>Estimated</div>
+					</div>
+				</div>
 
 				<div className={styles.bonus_container}>
 					{bonusPoints.map(({ title, points }) => (

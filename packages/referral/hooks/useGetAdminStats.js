@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useGetAdminStats = ({ date = {}, userType = '' }) => {
+const useGetAdminStats = ({ date = {} }) => {
 	const { endDate = null, startDate = null } = date || {};
 
 	const [{ data: statsData, loading: statsLoading }, trigger] = useRequest({
@@ -14,7 +14,6 @@ const useGetAdminStats = ({ date = {}, userType = '' }) => {
 			await trigger({
 				params: {
 					filters: {
-						user_type  : userType || undefined,
 						start_date : startDate || undefined,
 						end_date   : endDate || undefined,
 					},
@@ -24,7 +23,7 @@ const useGetAdminStats = ({ date = {}, userType = '' }) => {
 		} catch (error) {
 			console.log(error);
 		}
-	}, [endDate, startDate, trigger, userType]);
+	}, [endDate, startDate, trigger]);
 
 	useEffect(() => {
 		getReferralStats();

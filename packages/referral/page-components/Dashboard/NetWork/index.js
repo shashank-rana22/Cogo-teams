@@ -1,6 +1,6 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import NetworkChart from '../../../common/NetworkChart';
@@ -16,7 +16,7 @@ function NetWork() {
 
 	const router = useRouter();
 	const { query = {} } = router;
-	const { referrer_id = '' } = query || {};
+	const { referrer_id = '', user_name = '' } = query || {};
 	const { data = {}, referrerNetwork = () => {}, netWorkLoader = true } = useGetNetwork({ referrer_id });
 
 	return (
@@ -27,7 +27,11 @@ function NetWork() {
 						className={styles.icon}
 						onClick={() => router.back()}
 					/>
-					<div className={styles.title}>Your Network</div>
+					<div className={styles.title}>
+						{startCase(user_name)}
+						{' '}
+						Network
+					</div>
 				</div>
 			</div>
 
@@ -39,6 +43,7 @@ function NetWork() {
 						setNodeData={setNodeData}
 						nodeData={nodeData}
 						referrerNetwork={referrerNetwork}
+						userName={user_name}
 					/>
 				</div>
 			) : (
