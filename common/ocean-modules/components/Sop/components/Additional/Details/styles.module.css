@@ -13,8 +13,8 @@
 }
 
 .label_value_container {
-	width: 49%;
 	font-size: var(--font-size-md);
+	margin-bottom: 6px;
 
 	.label {
 		font-weight: 600;
@@ -33,9 +33,6 @@
 }
 
 .addtional_data {
-	display: flex;
-	flex-wrap: wrap;
-	justify-content: space-between;
 	padding-bottom: 4px;
 	margin-bottom: 10px;
 
