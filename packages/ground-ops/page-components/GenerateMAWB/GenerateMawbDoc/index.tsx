@@ -210,7 +210,7 @@ function GenerateMawb({
 					pdf.addImage(Object.values(item)[1] === 'updated' ? `${Object.values(item)[0]}`
 						: imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {
-						pdf.addImage(footerImages[Object.keys(item)[0]], 'jpeg', 0, pdfHeight - 13, pdfWidth, 4.5);
+						pdf.addImage(footerImages[Object.keys(item)[0]], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
 					}
 
 					if (download24) {
