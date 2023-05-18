@@ -5,14 +5,13 @@ import getPanFromGst from '../../../../utils/getPanFromGst';
 
 const useOnBlurTaxPanGstinControl = ({
 	setValue = () => {},
-	REGISTRATION_VALIDATE_COUNTRIES,
-	countryCode,
+	isValidateRegistration,
 }) => {
 	const onBlurTaxPanGstinControl = ({
 		registrationNumber,
 		registrationType,
 	}) => {
-		if ((REGISTRATION_VALIDATE_COUNTRIES || []).includes(countryCode)) {
+		if (isValidateRegistration) {
 			const { length = '' } =	registrationNumbersMapping[registrationType] || {};
 
 			const flag = registrationNumber.length === length;

@@ -141,7 +141,7 @@ const GLOBAL_CONSTANTS = {
 
 			navigations: {
 				onboard_vendor: {
-					registration_validate_countries: ['IN'],
+					validate_registration: true,
 				},
 			},
 
@@ -164,7 +164,7 @@ const GLOBAL_CONSTANTS = {
 
 			navigations: {
 				onboard_vendor: {
-					registration_validate_countries: [],
+					validate_registration: false,
 				},
 			},
 		},

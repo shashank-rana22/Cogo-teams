@@ -60,7 +60,7 @@ function useOnBoardVendor({
 		accessor     : 'onboard_vendor',
 	});
 
-	const { registration_validate_countries: REGISTRATION_VALIDATE_COUNTRIES } = countrySpecificData || {};
+	const { validate_registration: isValidateRegistration = false } = countrySpecificData || {};
 
 	const countryData = getCountryDetails({ country_id });
 
@@ -74,13 +74,12 @@ function useOnBoardVendor({
 		onBlurTaxPanGstinControl,
 	} = useOnBlurTaxPanGstinControl({
 		setValue,
-		REGISTRATION_VALIDATE_COUNTRIES,
-		countryCode,
+		isValidateRegistration,
 	});
 
 	useEffect(() => {
 		const subscription = watch((value, { name }) => {
-			if (name === 'registration_number' && (REGISTRATION_VALIDATE_COUNTRIES || []).includes(countryCode)) {
+			if (name === 'registration_number' && isValidateRegistration) {
 				const registrationDetails = value[name];
 
 				if (isEmpty(registrationDetails)) {
@@ -103,7 +102,7 @@ function useOnBoardVendor({
 		});
 
 		return () => subscription.unsubscribe();
-	}, [clearErrors, trigger, watch, watchForm, countryCode, REGISTRATION_VALIDATE_COUNTRIES]);
+	}, [clearErrors, trigger, watch, watchForm, isValidateRegistration]);
 
 	const newFields = [];
 
@@ -147,7 +146,7 @@ function useOnBoardVendor({
 				},
 			};
 
-			if ((REGISTRATION_VALIDATE_COUNTRIES || []).includes(countryCode)) {
+			if (isValidateRegistration) {
 				const {
 					registrationType: watchRegistartionType = '',
 					registrationNumber: watchRegistrationNumber = '',
@@ -163,7 +162,7 @@ function useOnBoardVendor({
 				};
 			}
 
-			if (!(REGISTRATION_VALIDATE_COUNTRIES || []).includes(countryCode)) {
+			if (!isValidateRegistration) {
 				newField = {
 					...newField,
 					maxLength: 14,
