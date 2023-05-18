@@ -63,7 +63,6 @@ const TableColumns = ({
 	setShowPopover = func,
 	setActivityModal = func,
 	setUserData = func,
-	list = [],
 }) => {
 	const columns = [
 		{
@@ -161,27 +160,27 @@ const TableColumns = ({
 		},
 		{
 			Header   : 'DIRECT NODES',
-			accessor : ({ item = {} }) => (
+			accessor : (item, index) => (
 				<div className={styles.node_container}>
-					{Nodes({ list, item, type: 'direct_node' })}
+					{Nodes({ index, item, type: 'direct_node' })}
 				</div>
 			),
 			conditions: ['user', 'affiliate'],
 		},
 		{
 			Header   : 'NETWORK',
-			accessor : (item = {}) => (
+			accessor : (item, index) => (
 				<div className={styles.node_container}>
-					{Nodes({ list, item, type: 'network_node' })}
+					{Nodes({ index, item, type: 'network_node' })}
 				</div>
 			),
 			conditions: ['user', 'affiliate'],
 		},
 		{
 			Header   : 'COGOPOINTS ALLOCATED',
-			accessor : (item = {}) => (
+			accessor : (item, index) => (
 				<div className={styles.node_container}>
-					{Nodes({ list, item, type: 'alloted_cogopoints' })}
+					{Nodes({ index, item, type: 'alloted_cogopoints' })}
 				</div>
 
 			),
@@ -189,9 +188,9 @@ const TableColumns = ({
 		},
 		{
 			Header   : 'COGOPOINTS ON HOLD',
-			accessor : (item = {}) => (
+			accessor : (item, index) => (
 				<div className={styles.node_container}>
-					{Nodes({ list, item, type: 'holded_cogopoints' })}
+					{Nodes({ index, item, type: 'holded_cogopoints' })}
 				</div>
 			),
 			conditions: ['user', 'affiliate'],

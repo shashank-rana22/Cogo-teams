@@ -30,7 +30,10 @@ function FiltersContent({
 	};
 
 	return (
-		<>
+		<div className={styles.filters_container}>
+			<div className={styles.type}>
+				Type
+			</div>
 
 			<RadioGroup
 				options={filterOptopns}
@@ -47,7 +50,7 @@ function FiltersContent({
 					Apply
 				</Button>
 			</div>
-		</>
+		</div>
 	);
 }
 

@@ -98,7 +98,6 @@ function ListTables({
 										setShowPopover,
 										setActivityModal,
 										setUserData,
-										list,
 									})}
 									data={list || []}
 									loading={listLoading}

@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function Nodes({ item = {}, type = '', list = [] }) {
+function Nodes({ index = 0, item = {}, type = '' }) {
 	const { immediate_child_count = 0, total_child_count = 0, cogopoints = {}, direct_data = {} } = item;
 
 	const { affiliate_count = 0, active_user_count = 0, reset_user_count = 0 } = direct_data;
@@ -70,7 +70,7 @@ function Nodes({ item = {}, type = '', list = [] }) {
 		<>
 			{(mappingData || []).map((node) => (
 				<div className={styles.node} key={node}>
-					{list?.[0] ? (
+					{index === 0 ? (
 						<div className={styles.node_title}>
 							{node.title}
 						</div>

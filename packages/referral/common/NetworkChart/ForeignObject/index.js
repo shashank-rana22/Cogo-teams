@@ -1,9 +1,9 @@
 import { useState } from 'react';
 
 import { cogopointImg } from '../../../constants';
-import styles from '../styles.module.css';
 
 import DirectNode from './DirectNode';
+import styles from './styles.module.css';
 
 function RenderForeignObjectNode({
 	nodeDatum,

@@ -14,12 +14,11 @@ function NetWork() {
 
 	const [nodeData, setNodeData] = useState({});
 
-	const { query = {} } = useRouter();
+	const router = useRouter();
+	const { query = {} } = router;
 	const { referrer_id = '' } = query || {};
 	const { data = {}, referrerNetwork = () => {}, netWorkLoader = true } = useGetNetwork({ referrer_id });
-	console.log(' netWorkLoader11', netWorkLoader);
 
-	const router = useRouter();
 	return (
 		<>
 			<div className={styles.header}>

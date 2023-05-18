@@ -5,7 +5,7 @@ import React from 'react';
 
 import { USER_STATUS_MAPPING, USER_STATUS_COLOUR, cogopointImg } from '../../../../constants';
 import TooltipContent from '../../../TooltipContent';
-import styles from '../../styles.module.css';
+import styles from '../styles.module.css';
 
 function DirectNode(
 	nodeProps = {},
