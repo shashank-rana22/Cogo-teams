@@ -134,9 +134,11 @@ function TransactionalActivity({ transactional = {} }) {
 									</div>
 									<div className={styles.milestone_container}>
 										{(filteredMilestoneActivity || []).map((val, index) => {
-											const { milestone = '', completed_on = null } = val || {};
+											const {
+												milestone = '', completed_on = null,
+											} = val || {};
 											return (
-												<div>
+												<div key={milestone}>
 													<div className={styles.activity_date}>
 														<div className={styles.dot} />
 														<div className={styles.durations}>
