@@ -20,32 +20,21 @@
 	}
 }
 
+.scroll_container {
+	max-height: 200px;
+	overflow-y: scroll;
+}
+
 .quota_row {
 	font-size: 12px;
-}
 
-.edit_icon {
-	width: 12px;
-	margin-left: 4px;
-	cursor: pointer;
-}
-
-.input_col {
-	display: flex;
-	align-items: center;
-
-	.cta_icon {
-		cursor: pointer;
+	.quota_quantity {
+		margin-right: 10px;
 	}
 
-	:global {
-		.ui_ps_size_sm {
-			height: 25px;
-			min-height: 25px;
-		}
-
-		.ui_ps_size_sm .ui_input_number_control {
-			font-size: 12px;
-		}
+	.edit_icon {
+		width: 10px;
+		margin-left: 4px;
+		cursor: pointer;
 	}
 }

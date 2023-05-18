@@ -29,10 +29,11 @@ function EditModal({ editModal, setEditModal }) {
 
 	console.log(subInfo, 'subInfo');
 	console.log(info, 'info');
-	const { active, quotas } = subInfo || {};
+	const { active = {}, quotas = [] } = subInfo || {};
+	const { plan = {} } = active || {};
 
 	const getData = (key) => {
-		if (key === 'plan_details') return DATA?.[key];
+		if (key === 'plan_details') return plan?.display_name;
 		return (
 			<span>
 				<img src={STATUS.active} alt="active" className={styles.status_icon} />
@@ -61,7 +62,11 @@ function EditModal({ editModal, setEditModal }) {
 				<h2>Configure Plan</h2>
 				<div className={styles.flex_box}>
 					<div>
-						<div>Subscription ID: 134234</div>
+						<div>
+							Subscription ID:
+							{' '}
+							{active?.id}
+						</div>
 					</div>
 					<div className={styles.flex_box}>
 						<Button size="sm">Change Plan</Button>
@@ -85,7 +90,7 @@ function EditModal({ editModal, setEditModal }) {
 				</div>
 				<div className={styles.flex_box}>
 					<div className={styles.quota_container}>
-						<QuotaDetails setEditModal={setEditModal} />
+						<QuotaDetails setEditModal={setEditModal} quotas={quotas} />
 					</div>
 					<div className={styles.validity_container} />
 				</div>
