@@ -13,11 +13,11 @@ function QuotaDetails({ setEditModal, quotas = [] }) {
 			</div>
 			<div className={styles.scroll_container}>
 				{quotas.map((item) => 	{
-					const { id = '', service = '', left_limit = 0, addon_limit = 0 } = item;
+					const { id = '', product = {}, left_limit = 0, addon_limit = 0 } = item;
 					const quotaLeft = +left_limit + +addon_limit;
 					return (
 						<div key={id} className={cl`${styles.flex_box} ${styles.quota_row}`}>
-							<div>{startCase(service)}</div>
+							<div>{startCase(product?.product_name)}</div>
 
 							<div className={styles.quota_quantity}>
 								<span>{quotaLeft}</span>
@@ -27,7 +27,8 @@ function QuotaDetails({ setEditModal, quotas = [] }) {
 										...prev,
 										openEditFeatureModal : true,
 										editAddon            : true,
-										quotaInfo            : item,
+										editPlan             : false,
+										featureInfo          : item,
 									}))}
 								/>
 							</div>

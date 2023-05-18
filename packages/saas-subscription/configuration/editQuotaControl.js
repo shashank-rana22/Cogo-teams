@@ -14,7 +14,10 @@ const editQuotaControl = [
 	},
 	{
 		name        : 'quantity',
+		label       : 'Enter Quantity',
+		size        : 'sm',
 		type        : 'number',
+		min         : 10,
 		placeholder : 'Enter Quantity',
 		rules       : {
 			required: true,

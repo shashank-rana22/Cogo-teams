@@ -1,0 +1,83 @@
+.flex_box {
+	display: flex;
+	align-items: center;
+	padding: 16px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.title_container {
+	justify-content: space-between;
+}
+
+.title {
+	margin: 0;
+	font-weight: 600;
+}
+
+.form_container {
+	padding: 20px 26px 10px;
+}
+
+.col {
+	padding: 0 8px;
+	margin-bottom: 20px;
+
+	:global {
+		.ui_radiogroup_container {
+			padding: 0;
+		}
+
+		.ui_radio_container {
+			padding: 0 10px;
+		}
+	}
+}
+
+.label_container {
+	display: flex;
+	justify-content: space-between;
+
+	.label {
+		font-weight: 600;
+	}
+
+	.error {
+		font-size: 12px;
+		color: red;
+	}
+}
+
+.footer {
+	justify-content: flex-end;
+}
+
+.save_btn {
+	margin-left: 10px;
+}
+
+.plan_container {
+	max-height: 250px;
+	padding: 20px;
+	overflow-y: scroll;
+
+	:global {
+		.ui_radiogroup_container {
+			flex-direction: column;
+		}
+
+		.ui_radio_container {
+			margin-bottom: 10px;
+			border: 0.5px solid;
+		}
+	}
+}
+
+.cancel_container {
+	padding: 20px;
+	text-align: center;
+
+	.button_container {
+		display: flex;
+		justify-content: center;
+	}
+}

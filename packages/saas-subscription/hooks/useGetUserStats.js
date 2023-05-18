@@ -7,10 +7,12 @@ const useGetUserStats = () => {
 		url    : '/get_saas_subscription_user_stats',
 	}, { manual: true });
 
-	const refetchUserStats = async () => {
+	const refetchUserStats = async (searchTerm) => {
 		try {
 			await trigger({
-				params: '',
+				params: {
+					q: searchTerm,
+				},
 			});
 		} catch (err) {
 			console.log(err);
@@ -20,7 +22,7 @@ const useGetUserStats = () => {
 	useEffect(() => { refetchUserStats(); }, []);
 
 	return {
-		refetchUserStats, userStatsData: data,
+		refetchUserStats, userStatsData: data, statsLoading: loading,
 	};
 };
 

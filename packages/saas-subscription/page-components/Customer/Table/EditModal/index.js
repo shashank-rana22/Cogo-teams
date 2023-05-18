@@ -1,4 +1,5 @@
-import { cl, Button, Modal } from '@cogoport/components';
+import { ButtonIcon, cl, Button, Modal } from '@cogoport/components';
+import { IcMCross } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -28,9 +29,9 @@ function EditModal({ editModal, setEditModal }) {
 	const { active_subscription = {} } = info || {};
 
 	console.log(subInfo, 'subInfo');
-	console.log(info, 'info');
+
 	const { active = {}, quotas = [] } = subInfo || {};
-	const { plan = {} } = active || {};
+	const { id = '', plan = {} } = active || {};
 
 	const getData = (key) => {
 		if (key === 'plan_details') return plan?.display_name;
@@ -41,6 +42,9 @@ function EditModal({ editModal, setEditModal }) {
 			</span>
 		);
 	};
+	const closeModalHandler = () => {
+		setEditModal({ open: false });
+	};
 
 	useEffect(() => {
 		if (!isEmpty(info)) {
@@ -50,7 +54,7 @@ function EditModal({ editModal, setEditModal }) {
 	}, [info]);
 
 	return (
-		<Modal show={open} onClose={() => setEditModal({ open: false })} size="lg">
+		<Modal show={open} onClose={closeModalHandler} closeOnOuterClick={closeModalHandler} size="lg">
 			<div className={styles.container}>
 				{loading && (
 					<div className={styles.loader}>
@@ -59,21 +63,44 @@ function EditModal({ editModal, setEditModal }) {
 					</div>
 				)}
 
-				<h2>Configure Plan</h2>
+				<div className={styles.flex_box}>
+					<h2 className={styles.title}>Configure Plan</h2>
+					<ButtonIcon size="md" icon={<IcMCross />} themeType="primary" onClick={closeModalHandler} />
+				</div>
 				<div className={styles.flex_box}>
 					<div>
 						<div>
 							Subscription ID:
 							{' '}
-							{active?.id}
+							{id}
 						</div>
 					</div>
 					<div className={styles.flex_box}>
-						<Button size="sm">Change Plan</Button>
+						<Button
+							size="sm"
+							onClick={() => setEditModal((prev) => ({
+								...prev,
+								openEditFeatureModal : true,
+								editPlan             : true,
+								editAddon            : false,
+								featureInfo          : id,
+							}))}
+						>
+							Change Plan
+						</Button>
+
 						<Button
 							className={styles.cancel_btn}
 							size="sm"
 							themeType="secondary"
+							onClick={() => setEditModal((prev) => ({
+								...prev,
+								openEditFeatureModal : true,
+								editPlan             : false,
+								editAddon            : false,
+								editCancelSub        : true,
+								featureInfo          : id,
+							}))}
 						>
 							Cancel Subscription
 

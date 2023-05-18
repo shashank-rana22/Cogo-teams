@@ -15,6 +15,26 @@ const apis = {
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
 		},
+		{
+			api          : 'update_saas_quota',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'list_saas_plan_pricings',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'update_saas_subscription',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'cancel_saas_subscription',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
 	],
 	saas_subscription_plan: [],
 };

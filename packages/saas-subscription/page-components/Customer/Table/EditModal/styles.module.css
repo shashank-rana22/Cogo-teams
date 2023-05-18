@@ -32,6 +32,10 @@
 	margin-bottom: 15px;
 }
 
+.title {
+	margin: 0;
+}
+
 .cancel_btn {
 	margin-left: 12px;
 }
