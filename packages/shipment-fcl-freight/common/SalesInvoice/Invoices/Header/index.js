@@ -1,11 +1,10 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useSelector } from '@cogoport/store';
-import React, { useRef, useEffect } from 'react';
+import React from 'react';
 
 import ExchangeRate from '../../ExchangeRate';
 
 import EditInvoicePreference from './EditInvoicePreference';
-import handleTimer from './handleTimer';
 import styles from './styles.module.css';
 import UpdateQuotation from './UpdateQuotation';
 
@@ -23,25 +22,7 @@ function Header({
 		net_total_price_currency,
 		invoicing_parties,
 		reviewed_invoices,
-		invoice_trigger_date,
 	} = invoiceData;
-
-	const timerRef = useRef(null);
-	let time = null;
-
-	useEffect(() => {
-		const interval = setInterval(() => {
-			time = handleTimer(invoice_trigger_date);
-			if (time) {
-				// timerRef.current.innerText = time;
-			}
-		}, 1000);
-
-		if (!invoice_trigger_date) {
-			return () => clearInterval(interval);
-		}
-		return () => clearInterval(interval);
-	}, []);
 
 	const showExchangeRate = (invoicing_parties || []).some((ip) => !['liners_exchange_rate', 'eta', 'etd'].includes(
 		ip?.exchange_rate_state,

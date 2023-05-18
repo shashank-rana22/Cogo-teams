@@ -82,13 +82,18 @@
 
 .ServiceName{
 	font-weight: 400;
-	font-size: 12px;
+	font-size: 10px;
 	line-height: 12px;
 	color: #393f70;
 	margin: 0 6px 6px 0;
 	background: #ded7fc;
 	padding: 4px 12px;
 	border-radius: 4px;
+}
+
+.invoice_status{
+	color: #6CC077;
+	font-weight: 500 
 }
 
 .Header{

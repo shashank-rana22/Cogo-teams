@@ -1,4 +1,4 @@
-// import { Flex } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMHome,
@@ -47,7 +47,7 @@ function Item({
 		handleServiceChange(currentInvoice, value);
 	};
 
-	const isBookingParty =		billing_address?.organization_id === shipmentData?.importer_exporter_id ? (
+	const isBookingParty = billing_address?.organization_id === shipmentData?.importer_exporter_id ? (
 		<div className={styles.BookingText}> - Booking Party</div>
 	) : null;
 
@@ -62,14 +62,13 @@ function Item({
 		} else if (trade_type === 'import') {
 			tradeType = 'Destination';
 		}
-
 		const isBas = (service?.line_items || []).some(
 			(lineItem) => lineItem?.code === 'BAS',
 		);
 
-		return service?.display_name ? (
+		return service?.service_type ? (
 			<div className={styles.ServiceName}>
-				{`${tradeType} ${startCase(service?.display_name)} ${
+				{`${tradeType} ${startCase(service?.service_type)} ${
 					service?.is_igst ? '(IGST INVOICE)' : ''
 				} ${isBas && !service?.is_igst ? '(BAS)' : ''}`}
 			</div>
@@ -98,12 +97,12 @@ function Item({
 				</div>
 			) : null}
 			<div
-				className={styles.HeaderContainer}
+				className={cl`${styles.HeaderContainer} ${open ? styles.open : ''}`}
 				// className={open ? 'open' : ''}
 				style={{ cursor: noActionState ? 'default' : '' }}
 				onClick={!noActionState ? () => handleServiceToggle() : null}
 			>
-				<div style={{ width: '80%' }}>
+				<div style={{ width: '100%' }}>
 					<div className={styles.details}>
 						<div className={styles.details_child}>
 							<div className={styles.Heading}>
@@ -114,7 +113,7 @@ function Item({
 						</div>
 
 						{noActionState ? (
-							<div style={{ color: '#6CC077', fontWeight: 500 }}>
+							<div className={styles.invoice_status}>
 								{startCase(invoice?.status)}
 							</div>
 						) : null}
@@ -122,8 +121,6 @@ function Item({
 
 					<div
 						className={styles.Flex}
-						// alignItems="center"
-						// marginBottom={4}
 					>
 						<div className={styles.IconWrapper}>
 							<IcMHome />
@@ -151,11 +148,8 @@ function Item({
 							{invoiceAmount}
 						</div>
 					)}
-
 					<div
 						className={styles.Flex}
-						// alignItems="center"
-						// marginBottom={4}
 						style={{ flexWrap: 'wrap' }}
 					>
 						{renderServicesTaken}
