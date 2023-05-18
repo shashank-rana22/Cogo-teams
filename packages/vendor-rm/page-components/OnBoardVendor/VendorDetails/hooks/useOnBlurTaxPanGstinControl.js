@@ -4,15 +4,15 @@ import registrationNumbersMapping from '@cogoport/forms/utils/registrationNumber
 import getPanFromGst from '../../../../utils/getPanFromGst';
 
 const useOnBlurTaxPanGstinControl = ({
-	watchCountryId = '',
-	INDIA_COUNTRY_ID = '',
 	setValue = () => {},
+	REGISTRATION_VALIDATE_COUNTRIES,
+	countryCode,
 }) => {
 	const onBlurTaxPanGstinControl = ({
 		registrationNumber,
 		registrationType,
 	}) => {
-		if (watchCountryId === INDIA_COUNTRY_ID) {
+		if (REGISTRATION_VALIDATE_COUNTRIES.includes(countryCode)) {
 			const { length = '' } =	registrationNumbersMapping[registrationType] || {};
 
 			const flag = registrationNumber.length === length;

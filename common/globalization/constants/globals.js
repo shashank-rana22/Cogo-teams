@@ -138,6 +138,13 @@ const GLOBAL_CONSTANTS = {
 			economic_zone: {
 				label: 'SEZ',
 			},
+
+			navigations: {
+				onboard_vendor: {
+					registration_validate_countries: ['IN'],
+				},
+			},
+
 		},
 		VN: {
 			registration_number: {
@@ -153,6 +160,12 @@ const GLOBAL_CONSTANTS = {
 
 			economic_zone: {
 				label: 'Non-Tariff Zone',
+			},
+
+			navigations: {
+				onboard_vendor: {
+					registration_validate_countries: [],
+				},
 			},
 		},
 	},

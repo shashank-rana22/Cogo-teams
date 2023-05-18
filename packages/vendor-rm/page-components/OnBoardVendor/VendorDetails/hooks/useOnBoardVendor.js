@@ -3,7 +3,8 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { getConstantsByCountryId } from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import getCountryDetails, { getCountryId } from '@cogoport/globalization/utils/getCountryDetails';
+import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
+import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -53,28 +54,33 @@ function useOnBoardVendor({
 
 	const { country_id, registration_number = {} } = watchForm;
 
+	const countrySpecificData = getCountrySpecificData({
+		country_id,
+		accessorType : 'navigations',
+		accessor     : 'onboard_vendor',
+	});
+
+	const { registration_validate_countries: REGISTRATION_VALIDATE_COUNTRIES } = countrySpecificData || {};
+
+	const countryData = getCountryDetails({ country_id });
+
+	const { country_code: countryCode } = countryData || {};
+
 	const fields = useMemo(() => getControls({
 		country_id,
 	}), [country_id]);
 
-	const INDIA_COUNTRY_ID = getCountryId('IN');
-	const VIETNAM_COUNTRY_ID = getCountryId('VN');
-
 	const {
 		onBlurTaxPanGstinControl,
 	} = useOnBlurTaxPanGstinControl({
-		watchCountryId: watchForm.country_id,
-		INDIA_COUNTRY_ID,
 		setValue,
+		REGISTRATION_VALIDATE_COUNTRIES,
+		countryCode,
 	});
-
-	const countryData = getCountryDetails({ country_id: watchForm.country_id });
-
-	const { country_code: countryCode } = countryData || {};
 
 	useEffect(() => {
 		const subscription = watch((value, { name }) => {
-			if (name === 'registration_number' && value.country_id === INDIA_COUNTRY_ID) {
+			if (name === 'registration_number' && REGISTRATION_VALIDATE_COUNTRIES.includes(countryCode)) {
 				const registrationDetails = value[name];
 
 				if (isEmpty(registrationDetails)) {
@@ -97,7 +103,7 @@ function useOnBoardVendor({
 		});
 
 		return () => subscription.unsubscribe();
-	}, [clearErrors, trigger, watch, watchForm, INDIA_COUNTRY_ID]);
+	}, [clearErrors, trigger, watch, watchForm, countryCode, REGISTRATION_VALIDATE_COUNTRIES]);
 
 	const newFields = [];
 
@@ -141,7 +147,7 @@ function useOnBoardVendor({
 				},
 			};
 
-			if (watchForm.country_id === INDIA_COUNTRY_ID) {
+			if (REGISTRATION_VALIDATE_COUNTRIES.includes(countryCode)) {
 				const {
 					registrationType: watchRegistartionType = '',
 					registrationNumber: watchRegistrationNumber = '',
@@ -157,7 +163,7 @@ function useOnBoardVendor({
 				};
 			}
 
-			if (watchForm.country_id === VIETNAM_COUNTRY_ID) {
+			if (!REGISTRATION_VALIDATE_COUNTRIES.includes(countryCode)) {
 				newField = {
 					...newField,
 					maxLength: 14,

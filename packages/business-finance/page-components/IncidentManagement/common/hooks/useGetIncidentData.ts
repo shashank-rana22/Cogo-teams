@@ -17,7 +17,6 @@ const useGetIncidentData = ({ activeTab }:Tab) => {
 
 	const isSettlementExecutive = userProfile.partner.user_role_ids.includes(
 		GLOBAL_CONSTANTS.country_entity_ids.IN,
-
 	);
 
 	const [filters, setFilters] = useState<FilterProps>({
