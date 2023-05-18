@@ -11915,32 +11915,27 @@ const partner = {
 	],
 	analytics_dashboard_management: [
 		{
-			api          : 'create_analytics_permission_entry',
+			api          : 'create_analytics_dashboard',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'create_analytics_permission_roles',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'list_analytics_permission_entries',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'list_analytics_permission_roles',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
-			api          : 'list_analytics_permission_user_roles',
+			api          : 'create_analytics_dashboard_permission',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
 		{
 			api          : 'list_analytics_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboard_permissions',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_permission_user_roles',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
