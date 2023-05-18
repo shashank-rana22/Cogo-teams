@@ -1477,6 +1477,22 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'organization',
 	},
+	{
+		api          : 'list_partner_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'generate_bluetide_hbl',
+		access_type  : 'private',
+		service_name : 'shipment',
+
+	},
+	{
+		api          : 'get_pending_task_authorization',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

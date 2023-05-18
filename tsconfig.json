@@ -25,8 +25,7 @@
     "**/*.ts",
     "**/*.tsx",
     "**/*.js",
-    ".eslintrc.js"
-, "packages/shipment-fcl-freight/common/SalesInvoice/Invoices/InvoiceItem/Item/Header/OTPVerificationModal/UserInfo/styles.module.csss", "packages/shipment-fcl-freight/common/SalesInvoice/Invoices/InvoiceItem/Item/Header/CNNullify/styles.modulecss"  ],
+    ".eslintrc.js", ],
   "exclude": [
     "node_modules"
   ],
@@ -35,4 +34,3 @@
     "@typescript-eslint/no-unused-vars": "off"
   }
 }
-
