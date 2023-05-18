@@ -22,7 +22,7 @@ const DATA = {
 	status       : 'active',
 };
 
-function EditModal({ editModal, setEditModal, setEditAddonModal }) {
+function EditModal({ editModal, setEditModal }) {
 	const { loading = false, subInfo = {}, refetchSubscriptionInfo } = useGetSubscriptionInfo();
 	const { open = false, info = {} } = editModal;
 	const { active_subscription = {} } = info || {};
@@ -77,7 +77,7 @@ function EditModal({ editModal, setEditModal, setEditAddonModal }) {
 				</div>
 				<div className={cl`${styles.flex_box} ${styles.details_container}`}>
 					{Object.keys(DETAILS).map((detail) => (
-						<div className={styles.details}>
+						<div key={detail} className={styles.details}>
 							<div className={styles.detail_title}>{DETAILS?.[detail]}</div>
 							<div className={styles.detail_content}>{getData(detail)}</div>
 						</div>
@@ -85,7 +85,7 @@ function EditModal({ editModal, setEditModal, setEditAddonModal }) {
 				</div>
 				<div className={styles.flex_box}>
 					<div className={styles.quota_container}>
-						<QuotaDetails setEditAddonModal={setEditAddonModal} />
+						<QuotaDetails setEditModal={setEditModal} />
 					</div>
 					<div className={styles.validity_container} />
 				</div>

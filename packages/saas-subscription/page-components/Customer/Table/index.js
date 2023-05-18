@@ -1,10 +1,11 @@
+/* eslint-disable react/no-array-index-key */
 import { Pagination, Placeholder, cl } from '@cogoport/components';
 import { useState } from 'react';
 
 import listConfig from '../../../configuration/listConfig';
 import getValues from '../../../utils/getValues';
 
-import EditAddonModal from './EditAddonQuota';
+import EditFeatureModal from './EditFeatureModal';
 import EditModal from './EditModal';
 import itemFunction from './ItemFunctions';
 import styles from './styles.module.css';
@@ -12,11 +13,12 @@ import styles from './styles.module.css';
 function Table({ userList = {}, loading = false, setGlobalFilters }) {
 	const { list, page, page_limit, total_count } = userList || {};
 	const [editModal, setEditModal] = useState({
-		openEditModal       : false,
-		openEditAddonModal  : false,
-		openChangePlanModal : false,
+		openEditModal        : false,
+		openEditFeatureModal : false,
+		editAddon            : false,
+		editPlan             : false,
 	});
-	const [editAddonModal, setEditAddonModal] = useState({});
+
 	const functions = itemFunction({ setEditModal });
 
 	const newList = loading ? [1, 2, 3, 4, 5] : list;
@@ -29,15 +31,16 @@ function Table({ userList = {}, loading = false, setGlobalFilters }) {
 		<div className={styles.container}>
 			<div className={cl`${styles.row} ${styles.card_header}`}>
 				{listConfig.map((config) => (
-					<div className={styles.col} style={{ width: config?.width }}>
+					<div key={config.key} className={styles.col} style={{ width: config?.width }}>
 						{config.title}
 					</div>
 				))}
 			</div>
-			{(newList || []).map((item) => (
-				<div className={cl`${styles.row} ${styles.item_row}`}>
+			{(newList || []).map((item, index) => (
+				<div key={`${item?.id}_${index}`} className={cl`${styles.row} ${styles.item_row}`}>
 					{listConfig.map((config) => (
 						<div
+							key={`${config.key}_${item?.id}_${index}`}
 							className={styles.col}
 							style={{ width: config?.width }}
 						>
@@ -61,8 +64,8 @@ function Table({ userList = {}, loading = false, setGlobalFilters }) {
 				</div>
 			)}
 
-			<EditModal editModal={editModal} setEditModal={setEditModal} setEditAddonModal={setEditAddonModal} />
-			<EditAddonModal editAddonModal={editAddonModal} setEditAddonModal={setEditAddonModal} />
+			<EditModal editModal={editModal} setEditModal={setEditModal} />
+			<EditFeatureModal editModal={editModal} setEditModal={setEditModal} />
 		</div>
 	);
 }

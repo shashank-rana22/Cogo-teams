@@ -18,7 +18,7 @@ const DUMMY = [
 	},
 ];
 
-function QuotaDetails({ setEditAddonModal }) {
+function QuotaDetails({ setEditModal }) {
 	return (
 		<div className={styles.container}>
 			<div className={cl`${styles.flex_box} ${styles.card_header}`}>
@@ -26,14 +26,18 @@ function QuotaDetails({ setEditAddonModal }) {
 				<div>Quota</div>
 			</div>
 			{DUMMY.map((item) => 	(
-				<div className={cl`${styles.flex_box} ${styles.quota_row}`}>
+				<div key={item?.key} className={cl`${styles.flex_box} ${styles.quota_row}`}>
 					<div>{item?.key}</div>
 
 					<div>
 						<span>{item?.value}</span>
 						<IcMEdit
 							className={styles.edit_icon}
-							onClick={() => setEditAddonModal({ info: item, open: true })}
+							onClick={() => setEditModal((prev) => ({
+								...prev,
+								openEditFeatureModal : true,
+								editAddon            : true,
+							}))}
 						/>
 					</div>
 				</div>
