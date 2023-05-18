@@ -1442,6 +1442,12 @@ const apis = [
 		feature      : 'revenue_desk',
 	},
 	{
+		api          : 'send_booking_preference_email',
+		access_type  : 'private',
+		service_name : 'communication',
+		feature      : 'revenue_desk',
+	},
+	{
 		api          : 'list_organization_assets',
 		access_type  : 'private',
 		service_name : 'organization',
