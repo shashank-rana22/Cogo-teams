@@ -1,9 +1,25 @@
 import { Button, Input, ButtonIcon, Popover } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import { useImperativeHandle, forwardRef } from 'react';
 
+import FilterContent from './FilterContent';
 import styles from './styles.module.css';
+import useHandleSearchFilter from './useHandleSearchFilter';
 
-function SearchFilter({ debounceQuery, input, setInput, setParams, params }) {
+function SearchFilter({ debounceQuery, input, setInput, setParams, params, setFilters, filters }, ref) {
+	const {
+		showFilter,
+		setShowFilter,
+		control,
+		handleSubmit,
+		onSubmit,
+		onClickReset,
+		reset,
+	} = useHandleSearchFilter({ setFilters });
+
+	useImperativeHandle(ref, () => ({ reset }));
+
 	return (
 		<div className={styles.container}>
 			<Input
@@ -29,21 +45,30 @@ function SearchFilter({ debounceQuery, input, setInput, setParams, params }) {
 			/>
 
 			<Popover
-				placement="bottom"
-				render={() => (
-					<div />
+				placement="left"
+				caret={false}
+				onClickOutside={() => setShowFilter(false)}
+				visible={showFilter}
+				content={(
+					<FilterContent
+						control={control}
+						handleSubmit={handleSubmit}
+						setFilters={setFilters}
+						onSubmit={onSubmit}
+						onClickReset={onClickReset}
+					/>
 				)}
 			>
 				<Button
 					type="button"
 					themeType="secondary"
 					size="md"
-					onClick={() => {}}
+					onClick={() => setShowFilter(true)}
 					className={styles.filter_btn}
 				>
 					<IcMFilter style={{ marginRight: '2px' }} />
 					Filter
-					{false ? <div className={styles.filter_dot} /> : null}
+					{!isEmpty(filters) ? <div className={styles.filter_dot} /> : null}
 				</Button>
 			</Popover>
 
@@ -51,4 +76,4 @@ function SearchFilter({ debounceQuery, input, setInput, setParams, params }) {
 	);
 }
 
-export default SearchFilter;
+export default forwardRef(SearchFilter);

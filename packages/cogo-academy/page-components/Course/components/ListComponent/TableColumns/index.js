@@ -2,12 +2,18 @@ import { Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { startCase, format, isEmpty } from '@cogoport/utils';
 
-// import SortComponent from '../../SortComponent';
-
-import { StudentButtons, CourseButtons } from './ButtonComponent';
+import { StudentButtons, CourseButtons } from './components/ButtonComponent';
+import SortComponent from './components/SortComponent';
 import styles from './styles.module.css';
 
-export const studentColumns = ({ loading, router, setShowModal, setStudentId, sortFilter, setSortFilter }) => [
+export const studentColumns = ({
+	loading,
+	router,
+	setShowModal,
+	setStudentId,
+	setParams,
+	params,
+}) => [
 	{
 		Header   : 'Name',
 		id       : 'name',
@@ -73,7 +79,17 @@ export const studentColumns = ({ loading, router, setShowModal, setStudentId, so
 		),
 	},
 	{
-		Header   : 'Joined CogoAcademy',
+		Header: (
+			<div className={styles.updated_at}>
+				<div className={styles.updated_at_text}>Joined CogoAcademy</div>
+
+				<SortComponent
+					value="created_at"
+					setParams={setParams}
+					params={params}
+				/>
+			</div>
+		),
 		id       : 'number_of_tests',
 		accessor : ({ set_count = 0 }) => (
 			<section>
@@ -102,9 +118,9 @@ export const courseColumns = ({
 	router,
 	setShowModal,
 	setCourseId,
-	sortFilter,
-	setSortFilter,
 	fetchList,
+	setParams,
+	params,
 }) => ([
 	{
 		Header   : 'Status',
@@ -166,7 +182,17 @@ export const courseColumns = ({
 		},
 	},
 	{
-		Header   : 'Date Created',
+		Header: (
+			<div className={styles.updated_at}>
+				<div className={styles.updated_at_text}>Date Created</div>
+
+				<SortComponent
+					value="created_at"
+					setParams={setParams}
+					params={params}
+				/>
+			</div>
+		),
 		id       : 'date_created',
 		accessor : ({ created_at = '' }) => (
 			<div className={styles.date}>

@@ -1,23 +1,10 @@
 import { Pagination, Table, Modal, Button } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import EmptyState from '../../commons/EmptyState';
-import useDeleteCourse from '../../hooks/useDeleteCourse';
 
 import styles from './styles.module.css';
-import { studentColumns, courseColumns } from './TableColumns';
-
-const MODAL_TEXT_MAPPING = {
-	courses  : 'Course',
-	students : 'User',
-};
-
-const columnsMapping = {
-	courses  : courseColumns,
-	students : studentColumns,
-};
+import useHandleListComponent from './useHandleListComponent';
 
 function ListComponent({
 	data,
@@ -26,53 +13,27 @@ function ListComponent({
 	activeTab,
 	params,
 	fetchList,
-	sortFilter,
-	setSortFilter,
 }) {
-	const router = useRouter();
-
-	const [courseId, setCourseId] = useState('');
-	const [studentId, setStudentId] = useState('');
-	const [showModal, setShowModal] = useState(false);
-
 	const {
-		deleteCourse,
-		loading:deleteLoading,
-	} = useDeleteCourse({ fetchList, setShowModal });
+		columns,
+		showModal,
+		setShowModal,
+		MODAL_TEXT_MAPPING,
+		deleteApiParams,
+		deleteLoading,
+		deleteApi,
+	} = useHandleListComponent({
+		activeTab,
+		fetchList,
+		setParams,
+		params,
+	});
 
 	const { page_limit: pageLimit = 0, total_count = 0, list } = data || {};
-
-	const propsMapping = {
-		courses: {
-			loading: false,
-			router,
-			setShowModal,
-			setCourseId,
-			sortFilter,
-			setSortFilter,
-			fetchList,
-		},
-		students: {
-			loading: false,
-			router,
-			setShowModal,
-			setStudentId,
-			sortFilter,
-			setSortFilter,
-		},
-	};
-
-	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab] });
-
-	const deleteFunctionMapping = {
-		courses: { function: deleteCourse, params: { id: courseId, status: 'inactive' } },
-	};
 
 	if (!loading && isEmpty(data?.list)) {
 		return <EmptyState />;
 	}
-
-	const { function: deleteApi, params: deleteApiParams } = deleteFunctionMapping[activeTab];
 
 	return (
 		<div className={styles.table_container}>

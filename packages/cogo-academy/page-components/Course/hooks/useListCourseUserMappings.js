@@ -6,11 +6,6 @@ import { useEffect, useState, useCallback } from 'react';
 function useListCourseUserMappings({ filters, activeTab = '' }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
-	const [{ data = {}, loading }, trigger] = useRequest({
-		url    : '/list_course_user_mappings',
-		method : 'GET',
-	}, { manual: true });
-
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
@@ -19,6 +14,11 @@ function useListCourseUserMappings({ filters, activeTab = '' }) {
 	});
 
 	const [input, setInput] = useState('');
+
+	const [{ data = {}, loading }, trigger] = useRequest({
+		url    : '/list_course_user_mappings',
+		method : 'GET',
+	}, { manual: true });
 
 	const fetchList = useCallback(() => {
 		try {

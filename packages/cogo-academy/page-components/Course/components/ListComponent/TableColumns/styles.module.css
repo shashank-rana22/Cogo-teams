@@ -85,3 +85,12 @@
 	font-size: 12px;
 	color: #828282;
 }
+
+.updated_at {
+	display: flex;
+	align-items: center;
+}
+
+.updated_at_text {
+	margin-right: 6px;
+}

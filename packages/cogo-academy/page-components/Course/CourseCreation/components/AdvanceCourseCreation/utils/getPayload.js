@@ -26,9 +26,8 @@ const chapter_content = ({ values, editorValue }) => {
 const getModulePayload = ({ values, course_id, isNew, nodeIndex, moduleId, action_type }) => {
 	if (action_type === 'delete') {
 		return {
-			cogo_academy_course_id : course_id,
-			id                     : moduleId,
-			status                 : 'inactive',
+			id     : moduleId,
+			status : 'inactive',
 		};
 	}
 
@@ -42,9 +41,8 @@ const getModulePayload = ({ values, course_id, isNew, nodeIndex, moduleId, actio
 const getSubModulePayload = ({ values, course_id, isNew, nodeIndex, subModuleId, course_module_id, action_type }) => {
 	if (action_type === 'delete') {
 		return {
-			cogo_academy_course_id : course_id,
-			id                     : subModuleId,
-			status                 : 'inactive',
+			id     : subModuleId,
+			status : 'inactive',
 		};
 	}
 
@@ -67,7 +65,6 @@ const getChapterPayload = ({
 }) => {
 	if (action_type === 'delete') {
 		return {
-			course_sub_module_id,
 			id     : chapterId,
 			status : 'inactive',
 		};

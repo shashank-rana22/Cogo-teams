@@ -80,9 +80,9 @@ function CourseCompletion({ data = {}, id = '', activeTab }, ref) {
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
-			const { course_completion_duration = {}, course_certificates = [] } = data || {};
+			const { course_completion_duration, course_certificates = [] } = data || {};
 
-			const { course_completion_unit, course_completion_value } = course_completion_duration;
+			const { course_completion_unit, course_completion_value } = course_completion_duration || {};
 
 			if (!isEmpty(course_certificates)) {
 				const certificateData = course_certificates[0];
