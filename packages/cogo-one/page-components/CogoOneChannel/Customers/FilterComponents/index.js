@@ -73,10 +73,6 @@ function FilterComponents({
 	const handleClick = () => {
 		setAppliedFilters(filterValues);
 		setFilterVisible(false);
-		if (viewType === 'shipment_view') {
-			setShowBotMessages(formValues?.shipment_view_bot_session?.[0] === 'bot_session');
-			return;
-		}
 		if (!isomniChannelAdmin) {
 			setShowBotMessages(filterValues?.observer === 'botSession');
 		}

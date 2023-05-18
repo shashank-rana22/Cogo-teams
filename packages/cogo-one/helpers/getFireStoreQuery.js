@@ -13,6 +13,13 @@ const getMainQuery = (userId, type, isObserver) => {
 			];
 	}
 };
+const getSessionQuery = (viewType, showBotMessages) => {
+	if (viewType === 'shipment_view') {
+		return where('session_type', 'in', ['bot', 'admin']);
+	}
+	return showBotMessages
+		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
+};
 function getFireStoreQuery({
 	userId,
 	appliedFilters,
@@ -26,8 +33,7 @@ function getFireStoreQuery({
 
 	const mainQuery = getMainQuery(userId, viewType, isObserver);
 
-	const sessionTypeQuery = showBotMessages
-		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
+	const sessionTypeQuery = getSessionQuery(viewType, showBotMessages);
 
 	Object.keys(appliedFilters).forEach((item) => {
 		if (item === 'channels') {

@@ -160,6 +160,7 @@ function CogoOne() {
 							activeRoomLoading={activeRoomLoading}
 							setRaiseTicketModal={setRaiseTicketModal}
 							zippedTicketsData={zippedTicketsData}
+							viewType={viewType}
 						/>
 					)}
 				</>
