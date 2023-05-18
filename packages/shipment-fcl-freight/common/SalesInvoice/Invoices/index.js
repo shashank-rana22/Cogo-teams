@@ -53,6 +53,7 @@ function Invoices({
 				BfInvoiceRefetch={BfInvoiceRefetch}
 				disableAction={disableAction}
 				isCustomer={isCustomer}
+				salesInvoicesRefetch={salesInvoicesRefetch}
 			/>
 
 			<div className={styles.line} />

@@ -13,11 +13,18 @@ function EditInvoicePreference({
 	invoicing_parties = [],
 	BfInvoiceRefetch = () => {},
 	disableAction = false,
+	salesInvoicesRefetch = () => {},
 }) {
 	const [show, setShow] = useState(false);
 	const [addInvoicingParty, setAddInvoicingParty] = useState(false);
 
 	const invoicingParties = getModifiedInvoicingParties({ invoicing_parties });
+
+	const refetchAfterApiCall = () => {
+		salesInvoicesRefetch();
+		BfInvoiceRefetch();
+		setShow(false);
+	};
 
 	const {
 		selectedParties,
@@ -26,10 +33,9 @@ function EditInvoicePreference({
 		handleEditPreferences,
 		...rest
 	} = useEditInvoicePref({
-		invoicing_parties: invoicingParties,
+		invoicing_parties : invoicingParties,
 		shipment_data,
-		setShow,
-		BfInvoiceRefetch,
+		refetch           : refetchAfterApiCall,
 	});
 	const organizationDetails = {
 		id                : shipment_data?.importer_exporter?.id || undefined,

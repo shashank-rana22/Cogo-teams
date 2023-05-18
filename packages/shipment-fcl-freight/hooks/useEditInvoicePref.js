@@ -61,8 +61,7 @@ const isAllServicesTaken = (
 const useEditInvoicePref = ({
 	invoicing_parties = [],
 	shipment_data = {},
-	setShow = () => {},
-	BfInvoiceRefetch = () => {},
+	refetch = () => {},
 }) => {
 	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
@@ -306,8 +305,7 @@ const useEditInvoicePref = ({
 				data: payload,
 			});
 			Toast.success('Invoice Preference edited!');
-			BfInvoiceRefetch();
-			setShow();
+			refetch();
 		} catch (err) {
 			toastApiError(err?.data);
 		}

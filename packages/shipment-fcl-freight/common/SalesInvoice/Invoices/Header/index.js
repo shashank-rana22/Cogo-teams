@@ -13,6 +13,7 @@ function Header({
 	BfInvoiceRefetch = () => {},
 	disableAction = false,
 	isCustomer = false,
+	salesInvoicesRefetch = () => {},
 }) {
 	const user_data = useSelector(({ profile }) => profile || {});
 
@@ -77,6 +78,7 @@ function Header({
 						invoicing_parties={invoicing_parties}
 						BfInvoiceRefetch={BfInvoiceRefetch}
 						disableAction={disableAction}
+						salesInvoicesRefetch={salesInvoicesRefetch}
 					/>
 				</div>
 			</div>
