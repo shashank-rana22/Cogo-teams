@@ -47,13 +47,16 @@ const getColumns = ({ onClickNewJoinerColumn }) => [
 	{
 		Header   : 'PROFILE COMPLETION',
 		accessor : (item) => (
-			<div>
+			<div className={styles.profile_completion}>
 				<div className={styles.animate}>
 					<div className={styles.progress_bar} style={{ width: `${item.progress}%` }}>
 						<div className={styles.progress} />
 					</div>
 				</div>
-				shivam
+				<div>
+					{item.progress}
+					% complete
+				</div>
 			</div>
 		),
 	},
@@ -86,9 +89,9 @@ function TableView() {
 			<StyledTable
 				columns={columns}
 				data={[
-					{ id: 'qw13i4-8272ihjyvhj', progress: 10 }, { id: 'q1123kj-oouyhb2682h-aad-ad11sdq', progress: 80 },
+					{ id: 'qw13i4-8272ihjyvhj', progress: 95 }, { id: 'q1123kj-oouyhb2682h-aad-ad11sdq', progress: 80 },
 					{ id: 'w123sdfs-rf23r2ed-22-2d21', progress: 50 }, { id: '123-ewd32e2-d23d-23d2d2d', progress: 70 },
-					{ id: 'q1231ewdw-w232ws3rfrbyy-123', progress: 20 }, { id: 'qs1123-877jvvnd-ad123', progress: 20 }]}
+					{ id: 'q1231ewdw-w232ws3rfrbyy-123', progress: 28 }, { id: 'qs1123-877jvvnd-ad123', progress: 20 }]}
 				loading={false}
 			/>
 		</div>
