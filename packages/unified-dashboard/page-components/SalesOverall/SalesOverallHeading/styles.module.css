@@ -1,0 +1,47 @@
+.header {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 12px;
+}
+
+.heading_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: flex-end;
+	margin-right: 10px;
+}
+
+.heading_text {
+	display: flex;
+	margin-right: 0;
+	font-size: 22px;
+	font-weight: 600;
+	color: #333;
+}
+
+.filter_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.filter {
+	display: flex;
+}
+
+.tooltip {
+	margin: 0 5px;
+}
+
+@media (max-width: 767px) {
+	.heading_text {
+		display: flex;
+		margin-right: 0;
+		margin-bottom: 10px;
+		font-size: 20px;
+		font-weight: 600;
+		color: #333;
+	}
+}

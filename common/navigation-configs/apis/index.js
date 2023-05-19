@@ -4,7 +4,7 @@ import app_manage_rfq from './app-manage-rfq-apis';
 import app_settings from './app-settings';
 import athena_dashboard from './athena-apis';
 import bl_do from './bl-do-apis';
-import bl_do_collection_release from './bl-do-collection-release-apis';
+import bl_do_collection_release from './bl_do-collection-release-apis';
 import bn_salvage from './bn-salvage-apis';
 import booking_desk from './booking-desk-apis';
 import coe_finance from './coe-finance-apis';
@@ -20,6 +20,7 @@ import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
 import ingestion from './ingestion-apis';
+import cargo_insurance from './insurance-apis';
 import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
 import kyc from './kyc';
@@ -129,6 +130,7 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
+	cargo_insurance,
 	...saas_tools,
 	...performance_management,
 	ingestion,

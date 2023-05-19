@@ -1,3 +1,5 @@
+import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
+
 import styles from './styles.module.css';
 
 interface FormDataInterface {
@@ -133,11 +135,7 @@ export const recurringExpenseDetails = ({
 					span    : 2.2,
 					style   : { borderRadius: '4px', width: '164px' },
 					size    : 'md',
-					options : [
-						{ label: 'INR', value: 'INR' },
-						{ label: 'USD', value: 'USD' },
-						{ label: 'VND', value: 'VND' },
-						{ label: 'GBP', value: 'GBP' }],
+					options : getCurrencyOptions(),
 				},
 				{
 					name           : 'repeatEvery',
