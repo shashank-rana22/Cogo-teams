@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { getConstantsByCountryId } from '@cogoport/globalization/constants/geo';
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { merge } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -58,7 +58,7 @@ function useEditProfile({
 		}
 
 		if (newFieldItem.name === 'company_type') {
-			const companyTypeOptions = getConstantsByCountryId({ country_id });
+			const companyTypeOptions = getCountryConstants({ country_id });
 
 			newFieldItem = {
 				...newFieldItem,

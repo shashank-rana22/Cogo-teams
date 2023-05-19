@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
-import { getConstantsByCountryId } from '@cogoport/globalization/constants/geo';
+import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { isEmpty, merge } from '@cogoport/utils';
@@ -62,7 +62,7 @@ const useResubmitKyc = ({
 		}
 
 		if (object.value === 'company_type') {
-			const companyTypeOptions = getConstantsByCountryId({ country_id: formValueCountryId || vendorCountryId });
+			const companyTypeOptions = getCountryConstants({ country_id: formValueCountryId || vendorCountryId });
 
 			return { ...newcontrol, options: companyTypeOptions.options.registration_types };
 		}
