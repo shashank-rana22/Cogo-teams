@@ -79,5 +79,19 @@
             "label":"Cancelled",
             "value":"cancelled"
         }
+    ],
+    "fcl_cfs":[
+        {
+            "label":"In Progress",
+            "value":"in_progress"
+        },
+        {
+            "label":"Completed",
+            "value":"completed"
+        },
+        {
+            "label":"Cancelled",
+            "value":"cancelled"
+        }
     ]
 }
