@@ -30,9 +30,7 @@ function AddRemarks({
 		payload,
 	});
 
-	const handleSubmit = () => (isEmpty(remarkValue)
-		? Toast.error('Please add remarks!')
-		: onSubmitRemarks());
+	const handleSubmit = () => onSubmitRemarks();
 
 	return (
 		<Modal onClose={onClose} show={showAddRemarks} width={600}>
@@ -58,7 +56,7 @@ function AddRemarks({
 				<Button
 					className="primary md"
 					onClick={handleSubmit}
-					disabled={loading}
+					disabled={loading || isEmpty(remarkValue)}
 				>
 					Submit
 				</Button>
