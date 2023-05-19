@@ -8,10 +8,12 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function EditLineItems({
-	control, controls, name, cargoDetails, value: emptyValue, customValues = {},
+	control, controls, name, cargoDetails,
+	value: emptyValue, customValues = {}, showAddButtons = true, showDeleteButton = true,
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
 
+	console.log('showDeleteButton---', controls, showDeleteButton);
 	return (
 		<div className={styles.container}>
 			<CargoDetails primary_service={cargoDetails} />
@@ -30,11 +32,13 @@ function EditLineItems({
 						append={append}
 						remove={remove}
 						customValues={customValues?.formValues?.[index] || customValues?.[index]}
+						showDeleteButton={showDeleteButton}
 					/>
 				))}
 			</div>
 
-			<Button onClick={() => append(emptyValue)}>Add</Button>
+			{showAddButtons
+				? <Button onClick={() => append(emptyValue)}>+ Add Line Items</Button> : null}
 		</div>
 	);
 }

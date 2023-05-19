@@ -61,6 +61,20 @@ function Edit({
 		}
 	}, [defaultValues, watch, setValue, formValues]);
 
+	const updatedObj = {};
+
+	Object.entries(formValues).forEach(([key, value]) => {
+		if (key === 'remarks') {
+			updatedObj[key] = value;
+		} else if (key === 'uploadDocument') {
+			updatedObj[key] = value;
+		} else {
+			updatedObj[key] = value?.map((_item) => ({
+				..._item,
+				total: _item.price_discounted * _item.quantity,
+			}));
+		}
+	});
 	return (
 		<Modal
 			show
@@ -120,7 +134,7 @@ function Edit({
 							invoiceData={invoiceData}
 							prevData={prevData}
 							controls={controls}
-							defaultValues={defaultValues}
+							defaultValues={updatedObj}
 							errors={errors}
 							control={control}
 							setValue={setValue}

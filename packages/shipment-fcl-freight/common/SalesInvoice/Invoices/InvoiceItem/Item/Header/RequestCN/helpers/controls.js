@@ -76,7 +76,7 @@ const commonControls = (handleChange, charge) => [
 	},
 ];
 
-const rawControls = (handleChange, charge, isEdit) => ({
+const rawControls = (handleChange, charge) => ({
 	type             : 'edit_service_charges',
 	name             : charge?.service_id,
 	service_name     : charge?.display_name || charge?.service_type,
@@ -95,7 +95,18 @@ const rawControls = (handleChange, charge, isEdit) => ({
 			total            : '',
 		},
 	],
-	controls: [...commonControls(handleChange, charge, isEdit)],
+	controls: [
+		{
+			name    : 'is_checked',
+			type    : 'checkbox',
+			options : [
+				{
+					label : '',
+					value : 'true',
+				},
+			],
+			span: 1,
+		}, ...commonControls(handleChange, charge)],
 });
 
 const controls = [
@@ -121,10 +132,9 @@ const creditNoteControls = ({
 	handleChange = () => {},
 	setAllChargeCodes = () => {},
 	allChargeCodes = {},
-	isEdit = false,
 }) => {
 	const control = services?.map((service) => ({
-		...rawControls(handleChange, service, isEdit),
+		...rawControls(handleChange, service),
 		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
 		value           : service?.line_items?.map((item) => ({
 			is_checked       : item.is_checked,

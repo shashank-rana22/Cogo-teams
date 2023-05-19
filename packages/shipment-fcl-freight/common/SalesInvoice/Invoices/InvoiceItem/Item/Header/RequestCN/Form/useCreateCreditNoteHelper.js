@@ -1,25 +1,20 @@
 import { Toast } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
-import useUpdateShipmentCreditNote from '../../../../hooks/useUpdateShipmentCreditNote';
+import formatCreditNoteData from '../../../../../../CreditNote/helpers/format-credit-note-data';
+import creditNoteControls from '../helpers/controls';
 
-import creditNoteControls from './controls';
-import formatCreditNoteData from './format-credit-note-data';
-
-const useEditCreditNoteHelper = ({
+const useCreateCreditNoteHelper = ({
 	services,
 	invoice = {},
 	servicesIDs = [],
 	isEdit = false,
 	invoiceData = {},
-	setOpen = () => {},
-	refetch,
 }) => {
+	const [errors, setError] = useState({});
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
-
-	const { apiTrigger, loading } = useUpdateShipmentCreditNote({});
 
 	const handleChange = (obj) => {
 		if (!selectedCodes[obj.code]) {
@@ -34,7 +29,6 @@ const useEditCreditNoteHelper = ({
 		allChargeCodes,
 		isEdit,
 	});
-
 	const generateDefaultValues = ({ values }) => {
 		const defaultValues = {};
 
@@ -57,8 +51,30 @@ const useEditCreditNoteHelper = ({
 
 	const defaultValues = generateDefaultValues({ values: controls });
 
+	const { handleSubmit, control, watch, setValue, ...rest } =	useForm({ defaultValues });
+	const formValues = watch();
+
+	const onError = (err) => {
+		setError({ ...err });
+	};
+
+	const updatedObj = {};
+
+	Object.entries(formValues).forEach(([key, value]) => {
+		if (key === 'remarks') {
+			updatedObj[key] = value;
+		} else if (key === 'uploadDocument') {
+			updatedObj[key] = value;
+		} else {
+			updatedObj[key] = value?.map((item) => ({
+				...item,
+				total: item.price_discounted * item.quantity,
+			}));
+		}
+	});
+
 	const onCreate = async (data) => {
-		const { submit_data, checkError } = formatCreditNoteData({
+		const { submit_data } = formatCreditNoteData({
 			data,
 			servicesIDs,
 			invoice,
@@ -68,31 +84,21 @@ const useEditCreditNoteHelper = ({
 
 		if (submit_data?.line_items?.length === 0) {
 			Toast.error('Line Items is required');
-			return;
-		}
-
-		let isError = false;
-		Object.keys(checkError).forEach((key) => {
-			checkError[key].forEach((t) => {
-				if (!isEmpty(t)) {
-					isError = true;
-				}
-			});
-		});
-
-		if (isError === false) {
-			await apiTrigger(submit_data);
-			setOpen(false);
-			refetch();
 		}
 	};
 
 	return {
 		controls,
-		defaultValues,
+		handleSubmit,
 		onCreate,
-		loading,
+		errors,
+		setError,
+		onError,
+		control,
+		defaultValues: updatedObj,
+		rest,
+		setValue,
 	};
 };
 
-export default useEditCreditNoteHelper;
+export default useCreateCreditNoteHelper;

@@ -12,3 +12,10 @@
 .underLined_text{
 	text-decoration: underline;
 }
+
+
+.button_wrap{
+	display: flex;
+	justify-content: flex-end;
+	margin: 10px 0;
+}
