@@ -83,7 +83,7 @@ function ConfigurationCard(props) {
 								{audit_data?.updated_at
 									? formatDate({
 										date       : audit_data.updated_at,
-										dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 										formatType : 'date',
 									}) : ''}
 

@@ -100,14 +100,9 @@ const addedQuestionsColumns = ({
 						{formatDate({
 							date,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							formatType : 'date',
-						})}
-						,
-						{' '}
-						{formatDate({
-							date,
 							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
-							formatType : 'time',
+							formatType : 'date',
+							separator  : ', ',
 						})}
 					</div>
 				);

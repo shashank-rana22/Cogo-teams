@@ -37,7 +37,7 @@ function ApproveAndRejectHeader({ row }:Props) {
 						date       : updatedAt,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						formatType : 'dateTime',
-						timeFormat : GLOBAL_CONSTANTS.formats.date['hh:mm a'],
+						timeFormat : GLOBAL_CONSTANTS.formats.date['hh:mm aaa'],
 					})}
 					{' '}
 				</div>

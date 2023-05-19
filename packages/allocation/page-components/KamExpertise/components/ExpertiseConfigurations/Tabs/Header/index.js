@@ -32,7 +32,7 @@ function Header({ auditData, loading }) {
 							{loading ? <Placeholder height="20px" width="120px" />
 								: ((updated_at && (formatDate({
 									date       : updated_at,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 									formatType : 'date',
 								}))) || '')}
 						</span>

@@ -39,7 +39,7 @@ const CONFIGURATION_FILTER_TABLE_COLUMNS = [
 			<section>
 				{value?.updated_at ? formatDate({
 					date       : value.updated_at,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 					formatType : 'date',
 				}) : ''}
 

@@ -86,8 +86,10 @@ function Details({
 						{' '}
 						{formatDate({
 							date       : singleItem.updated_at,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yy hh:mm'],
-							formatType : 'date',
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'dateTime',
+							separator  : ' ',
 						})}
 					</span>
 				</div>
