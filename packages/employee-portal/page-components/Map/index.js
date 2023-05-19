@@ -38,7 +38,7 @@ function Map() {
 		>
 			<Marker position={center} icon={icon}>
 				<Popup>
-					This is a popup
+					Cogoport - Mumbai Location
 				</Popup>
 			</Marker>
 		</CogoMaps>
