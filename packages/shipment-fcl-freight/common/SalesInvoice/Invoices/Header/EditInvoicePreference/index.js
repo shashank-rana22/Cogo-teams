@@ -55,6 +55,7 @@ function EditInvoicePreference({
 				size="sm"
 				onClick={() => setShow(true)}
 				disabled={disableAction}
+				themeType="secondary"
 			>
 				Edit Invoice Preference
 			</Button>
