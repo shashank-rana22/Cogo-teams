@@ -1,47 +1,47 @@
 .container {
-  margin-top: 20px;
+	margin-top: 20px;
 }
 
 .name_and_email {
-  width: fit-content;
-  text-decoration: underline;
-  cursor: pointer;
+	width: fit-content;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .name {
-  font-weight: 900;
-  letter-spacing: 1px;
+	font-weight: 900;
+	letter-spacing: 1px;
 }
 
 .animate {
-  width: 120px;
-  background-color: #d3d3d3;
+	width: 120px;
+	background-color: #d3d3d3;
 }
 
 .progress_bar {
-  height: 4px;
+	height: 4px;
 }
 
 .progress {
-  height: 100%;
-  background-color: #4caf50;
-  animation: progress-animation 2s linear;
+	height: 100%;
+	background-color: #4caf50;
+	animation: progress-animation 2s linear;
 }
 
 @keyframes progress-animation {
-  0% {
-    width: 0%;
-  }
+	0% {
+		width: 0%;
+	}
 
-  100% {
-    width: 100%;
-  }
+	100% {
+		width: 100%;
+	}
 }
 
 .profile_completion {
-  width: fit-content;
-  display: flex;
-  flex-direction: column;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
 }
