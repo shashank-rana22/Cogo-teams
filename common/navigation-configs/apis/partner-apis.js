@@ -11108,6 +11108,24 @@ const partner = {
 			service_name : 'shipment',
 			feature      : 'detention_demurrage',
 		},
+		{
+			api          : 'list_rail_domestic_freight_rate_free_days',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'create_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'update_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
 	],
 	my_profile: [
 		{
