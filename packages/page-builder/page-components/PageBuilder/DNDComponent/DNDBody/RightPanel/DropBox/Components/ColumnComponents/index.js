@@ -62,7 +62,7 @@ function ColumnComponents({
 			setSelectedRow({ ...rowData });
 			setSelectedColumn({ ...columnData });
 			setSelectedNestedColumn({});
-			setSelectedItem({});
+			setSelectedItem({ ...columnData });
 		}
 	};
 

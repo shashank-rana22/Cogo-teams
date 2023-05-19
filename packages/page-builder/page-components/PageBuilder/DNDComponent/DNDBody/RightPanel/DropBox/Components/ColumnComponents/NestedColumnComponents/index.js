@@ -50,7 +50,7 @@ function NestedColumnComponent({
 			setSelectedRow({ ...rowData });
 			setSelectedColumn({ ...columnData });
 			setSelectedNestedColumn({ ...nestedData });
-			setSelectedItem({});
+			setSelectedItem({ ...nestedData });
 		}
 	};
 

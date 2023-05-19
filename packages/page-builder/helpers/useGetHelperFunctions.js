@@ -139,7 +139,7 @@ const useGetHelperFunctions = ({
 			setSelectedRow({ ...itemList, id, index });
 			setSelectedColumn({});
 			setSelectedNestedColumn({});
-			setSelectedItem({});
+			setSelectedItem({ ...itemList, id, index });
 		}
 	};
 

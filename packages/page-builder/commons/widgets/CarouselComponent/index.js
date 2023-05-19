@@ -82,7 +82,7 @@ function CarouselComponent({
 			setSelectedRow({ ...rowData });
 			setSelectedColumn({ ...columnData });
 			setSelectedNestedColumn({});
-			setSelectedItem({});
+			setSelectedItem({ ...columnData });
 		}
 	};
 
@@ -92,7 +92,7 @@ function CarouselComponent({
 			setSelectedRow({ ...rowData });
 			setSelectedColumn({ ...columnData });
 			setSelectedNestedColumn({ ...nestedData });
-			setSelectedItem({});
+			setSelectedItem({ ...nestedData });
 		}
 	};
 
