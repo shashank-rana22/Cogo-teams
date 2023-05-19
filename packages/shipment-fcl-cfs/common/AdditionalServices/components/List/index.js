@@ -3,8 +3,8 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
-import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
-import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
+import useListAdditionalServices from '../../../../../shipment-fcl-freight/hooks/useListAdditionalServices';
+import useUpdateShipmentAdditionalService from '../../../../../shipment-fcl-freight/hooks/useUpdateShipmentAdditionalService';
 import AddIp from '../AddIp';
 import AddRate from '../AddRate';
 import Loader from '../Loader';

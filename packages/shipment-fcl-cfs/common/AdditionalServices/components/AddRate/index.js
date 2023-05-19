@@ -2,8 +2,8 @@ import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
-import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
+import useCreateShipmentAdditionalService from '../../../../../shipment-fcl-freight/hooks/useCreateShipmentAdditionalService';
+import useUpdateShipmentAdditionalService from '../../../../../shipment-fcl-freight/hooks/useUpdateShipmentAdditionalService';
 
 import ActionsToShow from './ActionToShow';
 import BillToCustomer from './BillToCustomer';

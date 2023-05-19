@@ -3,7 +3,7 @@ import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
-import useListOrganizationInvoicingParties from '../../../../../../hooks/useListOrganizationInvoicingParties';
+import useListOrganizationInvoicingParties from '../../../../../../../shipment-fcl-freight/hooks/useListOrganizationInvoicingParties';
 import CreateNewBillingAddress from '../CreateNewBillingAddress';
 import CreateNewTradeParty from '../CreateNewTradeParty';
 

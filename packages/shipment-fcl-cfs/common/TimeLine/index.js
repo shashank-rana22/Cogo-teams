@@ -1,24 +1,22 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMEdit } from '@cogoport/icons-react';
-import { useState, useContext, useEffect } from 'react';
+// import { IcMEdit } from '@cogoport/icons-react';
+import { useContext, useEffect } from 'react';
 
-import EditSchedule from './EditSchedule';
+// import EditSchedule from './EditSchedule';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
 
-const editScheduleStates = [
-	'init',
-	'awaiting_service_provider_confirmation',
-	'confirmed_by_service_provider',
-	'containers_gated_in',
-	'vessel_departed',
-	'vessel_arrived',
-];
+// const editScheduleStates = [
+// 	'init',
+// 	'awaiting_service_provider_confirmation',
+// 	'confirmed_by_service_provider',
+// 	'cfs_cleared',
+// ];
 
 function Timeline() {
 	const {
-		shipment_data, primary_service, timelineLoading : loading, isGettingShipment,
+		shipment_data, timelineLoading : loading, isGettingShipment,
 		timelineData, getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
 
@@ -28,9 +26,9 @@ function Timeline() {
 		}
 	}, [getShipmentTimeline, shipment_data?.id]);
 
-	const [showEditSchedule, setShowEditSchedule] = useState(false);
+	// const [showEditSchedule, setShowEditSchedule] = useState(false);
 
-	const showEditScheduleIcon = editScheduleStates.includes(primary_service?.state);
+	// const showEditScheduleIcon = editScheduleStates.includes(primary_service?.state);
 
 	const filteredTimelineData = (timelineData || []).filter(
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
@@ -60,19 +58,18 @@ function Timeline() {
 							consecutivelyCompleted={consecutivelyCompleted}
 							isLast={totalItems === index + 1}
 							key={timelineItem.milestone}
-							primary_service={primary_service}
 						/>
 					);
 				})}
 			</div>
 
-			{showEditScheduleIcon ? (
+			{/* {showEditScheduleIcon ? (
 				<IcMEdit onClick={() => setShowEditSchedule((p) => !p)} className={styles.edit_icon} />
 			) : null}
 
 			{showEditSchedule ? (
 				<EditSchedule show={showEditSchedule} setShow={setShowEditSchedule} timelineData={timelineData} />
-			) : null}
+			) : null} */}
 		</div>
 	);
 }

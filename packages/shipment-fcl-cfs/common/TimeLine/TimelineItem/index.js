@@ -1,7 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMTick } from '@cogoport/icons-react';
-import { useContext } from 'react';
 
 import { getDate } from '../utils/formatters';
 
@@ -10,24 +8,8 @@ import {
 	display_milestone, completed, ellipsis, tooltip_content, label, value,
 } from './styles.module.css';
 
-export default function TimelineItem({ item, isLast = false, consecutivelyCompleted = false, primary_service }) {
+export default function TimelineItem({ item, isLast = false, consecutivelyCompleted = false }) {
 	const { milestone, is_sub, completed_on, actual_completed_on } = item || {};
-
-	console.log('item', item);
-
-	// const { primary_service } = useContext(ShipmentDetailContext) || {};
-	// const {
-	// 	schedule_departure,
-	// 	schedule_arrival,
-	// 	selected_schedule_departure,
-	// 	selected_schedule_arrival,
-	// 	cargo_arrived_at,
-	// } = primary_service || {};
-
-	// const milestoneToDisplayDate = {
-	// 	'Vessel Departed From Origin (ETD)'   : schedule_departure || selected_schedule_departure,
-	// 	'Vessel Arrived At Destination (ETA)' : cargo_arrived_at || schedule_arrival || selected_schedule_arrival,
-	// };
 
 	const displayCompletedDate = completed_on;
 

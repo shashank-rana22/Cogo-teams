@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm, useFieldArray } from '@cogoport/forms';
 import { useState } from 'react';
 
-import useCreateOrganizationAddress from '../../../../../../hooks/useCreateOrganizationAddress';
+import useCreateOrganizationAddress from '../../../../../../../shipment-fcl-freight/hooks/useCreateOrganizationAddress';
 import AddressForm from '../AddressForm';
 
 import styles from './styles.module.css';

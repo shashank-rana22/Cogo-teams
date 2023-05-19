@@ -1,10 +1,10 @@
-import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
+import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { ShipmentChat } from '@cogoport/shipment-chat';
+// import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
@@ -20,7 +20,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const services_additional_methods = ['stakeholder', 'service_objects'];
+const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
 
 function Superadmin({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -29,13 +29,19 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 
-	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
+	const handleVersionChange = useCallback(() => {
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
+		window.location.replace(newHref);
+		window.sessionStorage.setItem('prev_nav', newHref);
+	}, [router?.query?.partner_id, shipment_data?.id]);
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
 		additional_methods: services_additional_methods,
 		activeStakeholder,
 	});
+
+	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
 
 	const contextValues = useMemo(() => ({
 		...get,
@@ -92,19 +98,27 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 		<ShipmentDetailContext.Provider value={contextValues}>
 			<div>
 				<div className={styles.top_header}>
-					<ShipmentInfo get={get} />
+					<ShipmentInfo />
 
-					{/* <ShipmentChat /> */}
+					<div className={styles.toggle_chat}>
+						<Toggle
+							size="md"
+							onLabel="Old"
+							offLabel="New"
+							onChange={handleVersionChange}
+						/>
+						{/* <ShipmentChat /> */}
+					</div>
 				</div>
 
-				<CancelDetails />
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
 				<DocumentHoldDetails />
 
 				<div className={styles.header}>
-					<ShipmentHeader get={get} />
+					<ShipmentHeader />
 
-					{/* <PocSop /> */}
+					<PocSop />
 				</div>
 
 				<Timeline />
@@ -135,7 +149,6 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
 						</TabPanel>
-
 					</Tabs>
 				</div>
 			</div>

@@ -2,7 +2,7 @@ import { Button, Checkbox } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import useGetBusiness from '../../../../../../hooks/useGetBusiness';
+import useGetBusiness from '../../../../../../../shipment-fcl-freight/hooks/useGetBusiness';
 import AsyncGstListController from '../CreateNewBillingAddress/AsyncGstListController';
 
 import Form from './Form';

@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import useCreateShipmentAdditionalService from '../../../../../../hooks/useCreateShipmentAdditionalService';
+import useCreateShipmentAdditionalService from '../../../../../../../shipment-fcl-freight/hooks/useCreateShipmentAdditionalService';
 
 import styles from './styles.module.css';
 

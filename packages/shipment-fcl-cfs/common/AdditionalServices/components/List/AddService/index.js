@@ -3,7 +3,7 @@ import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import useListServiceChargeCodes from '../../../../../hooks/useListServiceChargeCodes';
+import useListServiceChargeCodes from '../../../../../../shipment-fcl-freight/hooks/useListServiceChargeCodes';
 import AddRate from '../../AddRate';
 
 import ChooseService from './ChooseService';

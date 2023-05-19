@@ -91,7 +91,14 @@ function SupplierReallocation({
 				/>
 
 				<div className={styles.form_wrapper}>
-					{controls.map((ctrl) => <FormElement {...ctrl} control={control} errors={errors} />)}
+					{controls.map((ctrl) => (
+						<FormElement
+							key={ctrl?.name}
+							{...ctrl}
+							control={control}
+							errors={errors}
+						/>
+					))}
 				</div>
 			</Modal.Body>
 

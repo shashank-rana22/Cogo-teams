@@ -45,6 +45,7 @@ function EditCancelService({ serviceData = {} }) {
 
 	const content = actionButtons.map(({ label, value, show }) => (show ? (
 		<div
+			key={value}
 			role="button"
 			tabIndex={0}
 			className={styles.action_button}
@@ -67,7 +68,7 @@ function EditCancelService({ serviceData = {} }) {
 			</Popover>
 
 			{showModal === 'supplier_reallocation'
-			&& <SupplierReallocation setShow={setShowModal} serviceData={servicesData} />}
+			&& <SupplierReallocation setShow={setShowModal} serviceData={servicesData} isAdditional />}
 
 			{showModal === 'edit_params'
 			&& <EditParams setShow={setShowModal} serviceData={serviceData} />}

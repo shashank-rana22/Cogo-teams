@@ -4,15 +4,10 @@ const controlsEditableConditions = [
 	{
 		state      : ['confirmed_by_service_provider'],
 		trade_type : ['export'],
-		bl_type    : ['rfs'],
+		// bl_type    : ['rfs'],
 	},
 	{
-		state      : ['confirmed_by_service_provider', 'containers_gated_in'],
-		trade_type : ['export'],
-		bl_type    : ['sob', 'seaway'],
-	},
-	{
-		state      : ['confirmed_by_service_provider', 'containers_gated_in', 'vessel_departed'],
+		state      : ['confirmed_by_service_provider'],
 		trade_type : ['import'],
 	},
 ];

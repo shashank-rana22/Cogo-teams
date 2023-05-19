@@ -13,13 +13,11 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 import getCanCancelShipment from './utils/getCanCancelShipment';
 
-function ShipmentHeader({ get }) {
+function ShipmentHeader() {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
-	const { isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
-
-	const { shipment_data, primary_service } = get || {};
+	const { shipment_data, primary_service, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 

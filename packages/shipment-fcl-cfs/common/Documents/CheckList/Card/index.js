@@ -39,6 +39,7 @@ function Card({
 
 			return (
 				<Content
+					key={uploadedItem?.id}
 					uploadedItem={uploadedItem}
 					receivedViaEmail={receivedViaEmail}
 					showUploadText={showUploadText}

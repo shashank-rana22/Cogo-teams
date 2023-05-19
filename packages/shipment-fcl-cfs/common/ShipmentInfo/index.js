@@ -7,9 +7,8 @@ import useShipmentBack from '../../hooks/useShipmentBack';
 
 import styles from './styles.module.css';
 
-function ShipmentInfo({ get }) {
-	const { isGettingShipment } = useContext(ShipmentDetailContext);
-	const { shipment_data } = get || {};
+function ShipmentInfo() {
+	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 
 	const { handleShipmentsClick } = useShipmentBack();
 
