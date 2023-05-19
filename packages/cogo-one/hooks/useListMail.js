@@ -1,4 +1,4 @@
-import { usePublicRequest } from '@cogoport/request';
+import { useLensRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
 import { folderOptions } from '../constants/MAIL_CONSTANT';
@@ -8,8 +8,8 @@ function useListMail({ activeSelect, senderMail }) {
 
 	const [pagination, setPagination] = useState(1);
 	const PAGE_LIMIT = 10;
-	const [{ loading }, trigger] = usePublicRequest({
-		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/list_mails`,
+	const [{ loading }, trigger] = useLensRequest({
+		url    : '/list_mails',
 		method : 'get',
 	}, { manual: true });
 
