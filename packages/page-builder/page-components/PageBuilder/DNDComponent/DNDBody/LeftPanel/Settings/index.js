@@ -21,34 +21,14 @@ const settingsMapping = {
 	divider : dividerSettings,
 };
 
-// const getSelectedComponent = (selectedRow, selectedColumn, selectedNestedColumn) => {
-// 	if (!isEmpty(selectedNestedColumn)) {
-// 		return selectedNestedColumn;
-// 	}
-// 	if (!isEmpty(selectedColumn)) {
-// 		return selectedColumn;
-// 	}
-
-// 	return selectedRow;
-// };
-
 function Settings(props) {
-	const {
-		pageConfiguration,
-		setPageConfiguration,
-		selectedItem,
-		selectedRow,
-		selectedColumn,
-		selectedNestedColumn,
-	} = props;
+	const { pageConfiguration, setPageConfiguration, selectedItem, selectedRow } = props;
 
 	const [showUploadModal, setShowUploadModal] = useState(false);
 
 	const { handleUpdateStyles } = useUpdateComponentsStyles(props);
 
 	const isRootComponent = isEmpty(selectedRow);
-
-	// const selectedComponent = getSelectedComponent(selectedRow, selectedColumn, selectedNestedColumn);
 
 	const { type = '' } = selectedItem;
 
@@ -105,7 +85,6 @@ function Settings(props) {
 						handleChange={handleUpdateStyles}
 						type="background"
 						accept=".png, .jpg, .webp, .webm, .jpeg, .svg, .gif"
-
 					/>
 				</Modal>
 			)}
