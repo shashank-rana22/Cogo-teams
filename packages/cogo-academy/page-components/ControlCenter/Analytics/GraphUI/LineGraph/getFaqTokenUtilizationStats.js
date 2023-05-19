@@ -13,7 +13,6 @@ function useGetFaqTokenUtilizationStats({ formatStartDate, formatEndDate }) {
 			filters: {
 				start_date : formatStartDate || undefined,
 				end_date   : formatEndDate || undefined,
-
 			},
 		},
 	}, { manual: false });

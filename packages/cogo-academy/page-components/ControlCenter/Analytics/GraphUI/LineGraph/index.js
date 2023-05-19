@@ -11,7 +11,6 @@ function LineGraph({ graphData, tokenData, setShowTotalCost }) {
 			<TotalSearchesGraph
 				graphData={graphData}
 				setShowTotalCost={setShowTotalCost}
-
 			/>
 		),
 	},
@@ -29,7 +28,6 @@ function LineGraph({ graphData, tokenData, setShowTotalCost }) {
 		<div className={styles.carousel_data_container}>
 			<Carousel size="md" slides={CarouselData} showArrow={false} />
 		</div>
-
 	);
 }
 
