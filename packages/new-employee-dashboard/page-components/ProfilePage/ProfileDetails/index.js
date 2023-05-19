@@ -13,23 +13,20 @@ const data = [{ title: 'PERSONAL INFORMATION', content: 'PersonalInformation' },
 function ProfileDetails() {
 	return (
 		<div className={styles.container}>
-			<div className={styles.subcontainer}>
-				{data.map((item) => (
-					<div
-						key={item.title}
-						role="presentation"
-						className={styles.accordion}
+			{data.map((item) => (
+				<div
+					key={item.title}
+					role="presentation"
+					className={styles.accordion}
+				>
+					<Accordion
+						type="text"
+						title={item.title}
 					>
-						<Accordion
-							type="text"
-							title={item.title}
-						>
-							Personal Information
-						</Accordion>
-					</div>
-				))}
-
-			</div>
+						Personal Information
+					</Accordion>
+				</div>
+			))}
 		</div>
 	);
 }

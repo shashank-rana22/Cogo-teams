@@ -19,7 +19,6 @@ function ProfilePage() {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="profile_info" title="Profile Info">
-						<div>This is local search</div>
 						<ProfileDetails />
 					</TabPanel>
 
@@ -28,7 +27,6 @@ function ProfilePage() {
 					</TabPanel>
 				</Tabs>
 			</div>
-
 		</div>
 	);
 }
