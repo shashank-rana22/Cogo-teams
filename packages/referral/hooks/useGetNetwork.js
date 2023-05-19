@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
@@ -53,7 +54,6 @@ const useGetNetwork = ({ referrer_id = '' }) => {
 
 	useEffect(() => {
 		referrerNetwork();
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {
