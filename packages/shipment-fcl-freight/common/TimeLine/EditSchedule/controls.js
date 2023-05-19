@@ -1,10 +1,10 @@
-import { getPrefillValue } from '../../utils/dateFormatter';
-import { getDate } from '../utils/formatters';
+import TIMELINE_EDITABLE from '../config/timelineEditable.json';
+import { getDate } from '../utils/getDate';
+import { getDisplayDate } from '../utils/getDisplayDate';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
-	const disabledState = ['vessel_arrived'].includes(
-		primary_service?.state,
-	);
+	const disabledState = primary_service?.state === 'vessel_arrived'
+		|| !TIMELINE_EDITABLE.primary_service.state.includes(primary_service?.state);
 
 	let deviated_departure;
 	let deviated_arrival;
@@ -12,9 +12,9 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 	(timelineData || []).forEach((data) => {
 		if (data?.actual_completed_on) {
 			if (data?.milestone === 'Vessel Departed From Origin (ETD)') {
-				deviated_departure = getDate(data.actual_completed_on);
+				deviated_departure = getDisplayDate({ date: data.actual_completed_on, formatType: 'dateTime' });
 			} else if (data?.milestone === 'Vessel Arrived At Destination (ETA)') {
-				deviated_arrival = getDate(data.actual_completed_on);
+				deviated_arrival = getDisplayDate({ date: data.actual_completed_on, formatType: 'dateTime' });
 			}
 		}
 	});
@@ -54,7 +54,7 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		finalControls[index].placeholder = 'Select Date';
 		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].showTimeSelect = true;
-		defaultValues[name] = getPrefillValue(primary_service?.[name]);
+		defaultValues[name] = getDate(primary_service?.[name]);
 	});
 
 	return { finalControls, defaultValues };
