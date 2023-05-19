@@ -123,6 +123,7 @@ export default {
 			'7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44', // Hrishikesh Kulkarni
 			'95d62549-8ab6-4ee5-a655-9edd0ec46dac', // Purnendu Shekhar
 			'cd8dde11-678c-4467-85b2-2e2d6055bef4', // Amitabh Shankar
+			'2d01b146-fd01-4887-8586-f398c929ef29', // Mohit Mogera
 		],
 		vietnam_business_heads: [
 			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal
