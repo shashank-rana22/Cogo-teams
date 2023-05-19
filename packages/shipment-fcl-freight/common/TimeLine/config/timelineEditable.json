@@ -1,0 +1,17 @@
+{
+    "primary_service": {
+        "state": [
+            "init",
+            "awaiting_service_provider_confirmation",
+            "confirmed_by_service_provider",
+            "containers_gated_in",
+            "vessel_departed",
+            "vessel_arrived"
+        ],
+        "key_present_check": ["vessel_arrived_at"]
+    },
+    "stakeholders_not_allowed": [
+        "booking_agent",
+        "consignee_shipper_booking_agent"
+    ]
+}

@@ -1,10 +1,10 @@
+import TIMELINE_EDITABLE from '../config/timelineEditable.json';
 import { getDate } from '../utils/getDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
-	const disabledState = ['vessel_arrived'].includes(
-		primary_service?.state,
-	);
+	const disabledState = !TIMELINE_EDITABLE.primary_service.state.includes(primary_service?.state)
+		|| primary_service?.state !== 'vessel_arrived';
 
 	let deviated_departure;
 	let deviated_arrival;
