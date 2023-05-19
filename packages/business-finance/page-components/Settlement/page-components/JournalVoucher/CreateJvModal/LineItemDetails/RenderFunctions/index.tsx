@@ -96,6 +96,7 @@ export const renderLineItemFunctions = {
 				asyncKey="jv_account_mode"
 				rules={{ required: !isEmpty(watch(`line_items.${index}.tradePartyId`)) }}
 				disabled={isEmpty(entity)}
+				isClearable
 				onChange={(val) => {
 					handleModeChange({
 						index,
@@ -146,6 +147,7 @@ export const renderLineItemFunctions = {
 				placeholder="Select Partner"
 				asyncKey="list_trade_parties"
 				renderLabel={(option) => renderTradeParty(option)}
+				isClearable
 				initialCall
 				params={{
 					sage_organization_id_required : true,
