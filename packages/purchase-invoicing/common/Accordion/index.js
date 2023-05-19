@@ -16,12 +16,12 @@ function Accordion({
 			<button
 				type="button"
 				className={active ? `${styles.accordion_header} ${active}` : styles.accordion_header}
-				onClick={() => {
-					setActive(!active);
-				}}
+				onClick={() => setActive(!active)}
 			>
 				<h3 className={styles.accordion_title}>{title}</h3>
+
 				{showerror ? <div className={styles.error}>Please Provide required fields</div> : null}
+
 				<div>
 					{active ? (
 						<IcMArrowRotateDown />
@@ -30,7 +30,9 @@ function Accordion({
 					)}
 				</div>
 			</button>
+
 			<div className={active ? styles.accordion_line_active : styles.accordion_line} />
+
 			{active ? (
 				<div className={`${styles.description} ${active ? styles.active : ''}`}>
 					<p className={styles.accordion_content}>
