@@ -2,6 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import Header from './Header';
+import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
 
 function ProfilePage() {
@@ -19,6 +20,7 @@ function ProfilePage() {
 				>
 					<TabPanel name="profile_info" title="Profile Info">
 						<div>This is local search</div>
+						<ProfileDetails />
 					</TabPanel>
 
 					<TabPanel name="Signed_documents" title="Signed Documents">
