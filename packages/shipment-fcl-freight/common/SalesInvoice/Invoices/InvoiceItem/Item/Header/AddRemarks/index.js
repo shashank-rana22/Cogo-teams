@@ -1,4 +1,4 @@
-import { Button, Textarea, Toast, Modal } from '@cogoport/components';
+import { Button, Textarea, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
