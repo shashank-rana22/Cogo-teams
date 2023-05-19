@@ -40,10 +40,6 @@
 	align-items: center;
 	white-space: nowrap;
 	cursor: pointer;
-
-	&.right {
-		margin-left: 40px;
-	}
 }
 
 .sample_text {

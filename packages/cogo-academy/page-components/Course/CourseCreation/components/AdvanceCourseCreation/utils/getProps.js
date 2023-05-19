@@ -14,6 +14,8 @@ const getProps = (data = {}) => ({
 	audience: {
 		course_audience_mappings : data.course_audience_mappings,
 		eligible_users           : data.eligible_users,
+		cogo_academy_sheets      : data.cogo_academy_sheets || [],
+		frequency                : data.frequency,
 	},
 	completion: {
 		completion_criteria               : data.completion_criteria,

@@ -19,6 +19,8 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse }, re
 		loading,
 	} = useHandleIntendedLearners({ activeTab, data, ref, id, getCogoAcademyCourse });
 
+	const { cogo_academy_sheets = [] } = data || {};
+
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
@@ -44,6 +46,8 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse }, re
 							controlItem={controlItem}
 							control={control}
 							errors={errors}
+							cogo_academy_sheets={cogo_academy_sheets}
+							getCogoAcademyCourse={getCogoAcademyCourse}
 						/>
 					);
 				}

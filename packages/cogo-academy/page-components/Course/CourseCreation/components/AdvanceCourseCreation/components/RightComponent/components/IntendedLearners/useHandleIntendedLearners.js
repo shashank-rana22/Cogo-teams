@@ -47,7 +47,7 @@ const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCou
 
 	useEffect(() => {
 		if (!isEmpty(data) && !listAudienceLoading) {
-			const { course_audience_mappings = [] } = data || {};
+			const { course_audience_mappings = [], cogo_academy_sheets = [] } = data || {};
 
 			const allAudienceIds = course_audience_mappings.map(
 				(item) => item.faq_audience_id,
@@ -60,6 +60,11 @@ const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCou
 			setValue('audiences', allAudienceIds);
 			setValue('mandatory_audiences', mandatoryAudienceIds);
 			setValue('mandatory_audiences_user', data.eligible_users);
+			setValue('frequency', data.frequency);
+
+			if (cogo_academy_sheets && !isEmpty(cogo_academy_sheets)) {
+				setValue('upload_excel', cogo_academy_sheets[0].resulted_file_url);
+			}
 		}
 	}, [data, setValue, listAudienceLoading]);
 
@@ -73,10 +78,13 @@ const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCou
 						id           : audience_id,
 						is_mandatory : (values.mandatory_audiences || []).includes(audience_id),
 					})),
-					...(values?.mandatory_audiences_user === 'all'
-						? { generate_sheet: false, eligible_users: 'all' }
+					...(values?.mandatory_audiences_user === 'custom'
+						? { file_url: values.upload_excel.finalUrl }
 						: {}),
-					state: CURRENT_TO_NEXT_MAPPING[activeTab],
+					state          : CURRENT_TO_NEXT_MAPPING[activeTab],
+					generate_sheet : false,
+					frequency      : values.frequency,
+					eligible_users : values?.mandatory_audiences_user,
 				},
 			});
 

@@ -1,15 +1,46 @@
 import { IcMDownload, IcMRefresh } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
+import { useMemo } from 'react';
 
-import useGetUserList from '../../../../../hooks/useGetUserList';
+import downloadFileFromUrl from '../../../../../utils/downloadFileFromUrl';
 
 import styles from './styles.module.css';
 
-function ExcelComponent({ Element, name, label, controlItem, control, errors }) {
-	const {
-		dropareaProps, draggable, multiple, placeholder, rules, accept,
-	} = controlItem || {};
+function ExcelComponent({
+	Element,
+	name,
+	label,
+	controlItem,
+	control,
+	errors,
+	cogo_academy_sheets = [],
+	getCogoAcademyCourse = () => [],
+}) {
+	const { dropareaProps, draggable, multiple, placeholder, rules, accept } = controlItem || {};
 
-	const { data: userList, getUserList } = useGetUserList();
+	const { MAPPING, sheetData } = useMemo(() => {
+		const cogoAcademySheet = cogo_academy_sheets?.[0] || {};
+
+		return {
+			sheetData : cogoAcademySheet,
+			MAPPING   : {
+				true: {
+					button_text  : 'Refresh',
+					icon         : IcMRefresh,
+					funcionToUse : getCogoAcademyCourse,
+					funcProps    : {},
+				},
+				false: {
+					button_text  : 'Download User list',
+					icon         : IcMDownload,
+					funcionToUse : downloadFileFromUrl,
+					funcProps    : { sheetData: cogoAcademySheet },
+				},
+			},
+		};
+	}, [getCogoAcademyCourse, cogo_academy_sheets]);
+
+	const { button_text, icon:IconToUse, funcionToUse, funcProps } = MAPPING[isEmpty(sheetData)];
 
 	return (
 		<div key={name} className={`${styles.excel_container} ${styles[name]}`}>
@@ -27,7 +58,7 @@ function ExcelComponent({ Element, name, label, controlItem, control, errors }) 
 						role="presentation"
 						onClick={() => window.open(
 							`https://cogoport-testing.sgp1.digitaloceanspaces.com/
-        8b3de8aeee4620f0f863c681d28e7767/test-module-sample-set.csv`,
+							06331898043d2379280ea32e6770a0f3/audience-sample-set.xlsx`,
 							'_blank',
 						)}
 					>
@@ -42,26 +73,14 @@ function ExcelComponent({ Element, name, label, controlItem, control, errors }) 
 					<div
 						className={styles.sample_div}
 						role="presentation"
-						onClick={() => window.open(
-							`https://cogoport-testing.sgp1.digitaloceanspaces.com/
-        8b3de8aeee4620f0f863c681d28e7767/test-module-sample-set.csv`,
-							'_blank',
-						)}
+						onClick={() => {
+							funcionToUse({ ...funcProps });
+						}}
 					>
-						<IcMDownload />
-						<div className={styles.sample_text}>
-							Generate & Download User list
-						</div>
+						<IconToUse />
+						<div className={styles.sample_text}>{button_text}</div>
 					</div>
 
-					<div
-						className={`${styles.sample_div} ${styles.right}`}
-						role="presentation"
-						onClick={() => { getUserList(); }}
-					>
-						<IcMRefresh />
-						<div className={styles.sample_text}>Refresh</div>
-					</div>
 				</div>
 			</div>
 
@@ -81,9 +100,7 @@ function ExcelComponent({ Element, name, label, controlItem, control, errors }) 
 			</div>
 
 			{errors?.[name]?.message ? (
-				<div className={styles.error_message}>
-					{errors?.[name]?.message}
-				</div>
+				<div className={styles.error_message}>{errors?.[name]?.message}</div>
 			) : null}
 		</div>
 	);
