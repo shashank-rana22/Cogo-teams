@@ -1490,9 +1490,9 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_fortigo_locations',
+		api          : 'list_shipment_fortigo_trip_locations',
 		access_type  : 'private',
-		service_name : 'location',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'create_shipment_fortigo_trip_detail',
