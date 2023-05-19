@@ -321,6 +321,7 @@ function Actions({
 					setIsChangeCurrency={setIsChangeCurrency}
 					invoice={invoice}
 					BfInvoiceRefetch={handleRefetch}
+					salesInvoicesRefetch={salesInvoicesRefetch}
 				/>
 			) : null}
 

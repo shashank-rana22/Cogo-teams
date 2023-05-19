@@ -5,6 +5,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function AmendmentReasons({ invoice = {} }) {
+	console.log(invoice?.amendment_requested_by, " :");
 	const date = formatDate({
 		date       : invoice?.amendment_requested_by?.date,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],

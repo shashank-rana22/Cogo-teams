@@ -1,6 +1,6 @@
-import { useRequest } from '@cogo/commons/hooks';
-import { useSelector } from '@cogo/store';
-import { toast } from '@cogoport/front/components/admin';
+import { toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
 const useTranslatePorforma = ({
 	bfInvoice,
@@ -20,9 +20,9 @@ const useTranslatePorforma = ({
 		try {
 			const response = await rejectInvoice.trigger({
 				data: {
-					proformaId: bfInvoice?.id,
-					translationRemark: formvalues?.reject_remarks || '',
-					performedBy: user_profile?.id,
+					proformaId        : bfInvoice?.id,
+					translationRemark : formvalues?.reject_remarks || '',
+					performedBy       : user_profile?.id,
 				},
 			});
 

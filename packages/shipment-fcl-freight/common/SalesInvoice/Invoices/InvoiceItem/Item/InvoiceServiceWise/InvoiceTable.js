@@ -3,15 +3,15 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
-export const TableColumn = (serviceItem = {}) => {
+export const InvoiceTable = (serviceItem = {}) => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const mainService = `${shipment_data?.shipment_type}_service`;
 
 	const ServiceName = serviceItem?.service_type === mainService
-		? startCase(serviceItem?.display_name)
-		: (serviceItem?.trade_type === 'import' && `Destination ${startCase(serviceItem?.display_name)}`)
-				|| (serviceItem?.trade_type === 'export' && `Origin ${startCase(serviceItem?.display_name)}`)
-				|| startCase(serviceItem?.display_name);
+		? startCase(serviceItem?.service_type)
+		: (serviceItem?.trade_type === 'import' && `Destination ${startCase(serviceItem?.service_type)}`)
+				|| (serviceItem?.trade_type === 'export' && `Origin ${startCase(serviceItem?.service_type)}`)
+				|| startCase(serviceItem?.service_type);
 
 	return [
 		{

@@ -18,7 +18,7 @@ function ReviewServices({
 
 	const [value, setValue] = useState(false);
 	const [showExchangeRateConfirmation, setShowExchangeRateConfirmation] = useState(changeApplicableState);
-
+	console.log(invoice, ' :invoice');
 	const refetchAfterCall = () => {
 		setShowReview(false);
 		refetch();
@@ -41,7 +41,7 @@ function ReviewServices({
 			setShow={setShowReview}
 		/>
 	) : (
-		<Modal show={showReview} closable={false}>
+		<Modal show={showReview} onClose={() => setShowReview(false)}>
 			<Modal.Header title="MARK AS REVIEWED" />
 			<Modal.Body>
 				<div className={styles.Form}>

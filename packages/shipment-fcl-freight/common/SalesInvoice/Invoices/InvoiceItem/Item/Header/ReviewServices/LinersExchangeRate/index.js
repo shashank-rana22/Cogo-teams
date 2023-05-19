@@ -12,7 +12,7 @@ function LinersExchangeRateConfirm({
 	showExchangeRateConfirmation = '',
 }) {
 	return (
-		<Modal show={showExchangeRateConfirmation} closable={false} width={800}>
+		<Modal show={showExchangeRateConfirmation} onClose={() => setShow(false)} width={800}>
 			<Modal.Header title="MARK AS REVIEWED - WARNING" />
 			<Modal.Body>
 				<div className={styles.form}>

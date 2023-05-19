@@ -3,12 +3,13 @@ import React from 'react';
 
 import CardList from '../../../../commons/CardList';
 
+import { InvoiceTable } from './InvoiceTable';
 import styles from './styles.module.css';
-import { TableColumn } from './TableColumn';
 
 const BILLED_ITEMS_CODE = ['BookingCONV', 'BookingNOST'];
 
 function InvoiceServiceWise({ item = {}, loading = false }) {
+	console.log(item, " :item");
 	const {
 		service_total_discounted,
 		service_total_currency,
@@ -43,7 +44,7 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 		<div className={styles.container}>
 			<CardList
 				loading={loading}
-				fields={TableColumn(item)}
+				fields={InvoiceTable(item)}
 				data={line_items || [{}]}
 				detail={detail}
 			/>

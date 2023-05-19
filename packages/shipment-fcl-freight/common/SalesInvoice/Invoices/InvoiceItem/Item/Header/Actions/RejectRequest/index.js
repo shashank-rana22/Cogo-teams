@@ -6,7 +6,7 @@ import React from 'react';
 import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';
 
 import controls from './controls';
-import useTranslatePorforma from './useTranslateProforma';
+import useTranslatePorforma from '../../../../../../../../hooks/useTranslateProforma';
 
 function RejectRequest({
 	bfInvoice,
