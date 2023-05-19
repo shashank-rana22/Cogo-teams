@@ -8,6 +8,7 @@ function RenderCargoPills({ detail = {} }) {
 		<div className={styles.container}>
 			{CARGO_LABELS.map((label) => {
 				const value = renderValue(label, detail);
+
 				if (detail?.[label] && value) {
 					return (
 						<div className={styles.box} key={label}>
@@ -15,10 +16,10 @@ function RenderCargoPills({ detail = {} }) {
 						</div>
 					);
 				}
-
 				return null;
 			})}
 		</div>
 	);
 }
+
 export default RenderCargoPills;
