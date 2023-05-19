@@ -11594,7 +11594,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'update_air_coe_document_copy',
+			api         : 'put_air_coe_document_copy',
 			access_type : 'private',
 		},
 		{
