@@ -64,6 +64,11 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'list_organization_trade_parties',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	consolidated_purchase_invoices: [
 		{

@@ -18,6 +18,7 @@ type Itemdata = {
 	invoiceStatus?: string
 	entityCode?: number
 	daysLeftForAutoIrnGeneration?: string
+	isFinalPosted?:boolean
 };
 interface IRNGeneration {
 	itemData?: Itemdata
@@ -42,7 +43,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 	const [visible, setVisible] = useState(false);
 
-	const { invoiceStatus = '', entityCode = '' } = itemData || {};
+	const { invoiceStatus = '', entityCode = '', isFinalPosted = false } = itemData || {};
 
 	const { partner = {} } = profile;
 
@@ -136,7 +137,9 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 								disabled={finalPostLoading}
 								onClick={() => handleFinalpost()}
 							>
-								<div className={styles.button_style}>Final Post</div>
+								<div className={styles.button_style}>
+									{isFinalPosted ? 'Information' : 'Final Post'}
+								</div>
 							</Button>
 						</div>
 					)}
@@ -215,6 +218,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						sageInvoiceData={sageInvoiceData}
 						sageInvoiceLoading={sageInvoiceLoading}
 						finalPostLoading={finalPostLoading}
+						isFinalPosted={isFinalPosted}
 					/>
 
 				</div>
@@ -222,11 +226,16 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		</div>
 	);
 
+	const rest = {
+		onClickOutside: () => setVisible(false),
+	};
+
 	return (
 		<Popover
 			placement="left"
 			render={content()}
 			visible={visible}
+			{...rest}
 		>
 
 			<IcMOverflowDot
