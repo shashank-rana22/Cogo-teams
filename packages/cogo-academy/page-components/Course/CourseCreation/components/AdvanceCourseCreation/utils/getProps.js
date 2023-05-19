@@ -12,7 +12,8 @@ const getProps = (data = {}) => ({
 		description       : data.description,
 	},
 	audience: {
-		course_audience_mappings: data.course_audience_mappings,
+		course_audience_mappings : data.course_audience_mappings,
+		eligible_users           : data.eligible_users,
 	},
 	completion: {
 		completion_criteria               : data.completion_criteria,

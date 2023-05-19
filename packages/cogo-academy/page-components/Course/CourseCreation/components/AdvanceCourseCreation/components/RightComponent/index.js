@@ -43,6 +43,7 @@ function RightComponent({ data = {}, activeTab, id, getCogoAcademyCourse, setAct
 				}}
 				id={id}
 				activeTab={activeTab}
+				getCogoAcademyCourse={getCogoAcademyCourse}
 			/>
 		</div>
 	);

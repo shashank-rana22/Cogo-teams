@@ -1,71 +1,25 @@
-import { useForm } from '@cogoport/forms';
-import { isEmpty } from '@cogoport/utils';
-import { useEffect, forwardRef, useImperativeHandle } from 'react';
+import { Button } from '@cogoport/components';
+import { forwardRef } from 'react';
 
 import { getFieldController } from '../../../../../../../commons/getFieldController';
-import useGetAudiences from '../../../../hooks/useGetAudiences';
-import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
 import controls from './controls';
 import ExcelComponent from './ExcelComponent';
 import styles from './styles.module.css';
+import useHandleIntendedLearners from './useHandleIntendedLearners';
 
-function IntendedLearners({ id, data = {}, activeTab }, ref) {
+function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse }, ref) {
 	const {
 		control,
-		formState: { errors = {} },
-		watch,
-		handleSubmit,
-		setValue,
-	} = useForm();
+		errors,
+		mandatoryAudiencesUserWatch,
+		mandatoryAudiencesOptions,
+		audiences,
+		onClickGenerate,
+		loading,
+	} = useHandleIntendedLearners({ activeTab, data, ref, id, getCogoAcademyCourse });
 
-	const mandatoryAudiencesUserWatch = watch('mandatory_audiences_user');
-
-	const { audiences = [], listAudienceLoading } = useGetAudiences();
-
-	const mandatoryAudiencesOptions = audiences.filter((item) => (watch('audiences').includes(item.value)));
-
-	useEffect(() => {
-		if (!isEmpty(data) && !listAudienceLoading) {
-			const { course_audience_mappings = [] } = data || {};
-
-			const allAudienceIds = course_audience_mappings.map((item) => item.faq_audience_id);
-
-			const mandatoryAudienceIds = course_audience_mappings
-				.filter((item) => item.is_mandatory)
-				.map((item) => item.faq_audience_id);
-
-			setValue('audiences', allAudienceIds);
-			setValue('mandatory_audiences', mandatoryAudienceIds);
-		}
-	}, [data, setValue, listAudienceLoading]);
-
-	useImperativeHandle(ref, () => ({
-		handleSubmit: () => {
-			const onSubmit = (values) => ({
-				hasError : false,
-				values   : {
-					id,
-					audiences:
-					(values.audiences || []).map((audience_id) => ({
-						id: audience_id,
-						is_mandatory:
-						(values.mandatory_audiences || []).includes(audience_id),
-					})),
-					state: CURRENT_TO_NEXT_MAPPING[activeTab],
-				},
-			});
-
-			const onError = (error) => ({ hasError: true, error });
-
-			return new Promise((resolve) => {
-				handleSubmit(
-					(values) => resolve(onSubmit(values)),
-					(error) => resolve(onError(error)),
-				)();
-			});
-		},
-	}));
+	console.log('eligible_users', data);
 
 	return (
 		<div className={styles.container}>
@@ -76,7 +30,10 @@ function IntendedLearners({ id, data = {}, activeTab }, ref) {
 
 				if (!Element) return null;
 
-				if (name === 'upload_excel' && mandatoryAudiencesUserWatch !== 'custom') {
+				if (
+					name === 'upload_excel'
+					&& mandatoryAudiencesUserWatch !== 'custom'
+				) {
 					return null;
 				}
 
@@ -94,29 +51,47 @@ function IntendedLearners({ id, data = {}, activeTab }, ref) {
 				}
 
 				return (
-					<div key={name} className={`${styles.form_group} ${styles[name]}`}>
-						<div className={styles.label}>
-							{label}
-							{rules ? <sup className={styles.superscipt}>*</sup> : null}
-						</div>
-
-						<div className={`${styles.input_group} ${styles[name]}`}>
-							<Element
-								{...controlItem}
-								key={name}
-								control={control}
-								id={`${name}_input`}
-								{...(name === 'audiences' && { options: audiences })}
-								{...(name === 'mandatory_audiences' && { options: mandatoryAudiencesOptions })}
-							/>
-						</div>
-
-						{errors?.[name]?.message ? (
-							<div className={styles.error_message}>
-								{errors?.[name]?.message}
+					<>
+						<div key={name} className={`${styles.form_group} ${styles[name]}`}>
+							<div className={styles.label}>
+								{label}
+								{rules ? <sup className={styles.superscipt}>*</sup> : null}
 							</div>
-						) : null}
-					</div>
+
+							<div className={`${styles.input_group} ${styles[name]}`}>
+								<Element
+									{...controlItem}
+									key={name}
+									control={control}
+									id={`${name}_input`}
+									{...(name === 'audiences' && { options: audiences })}
+									{...(name === 'mandatory_audiences' && {
+										options: mandatoryAudiencesOptions,
+									})}
+								/>
+							</div>
+
+							{errors?.[name]?.message ? (
+								<div className={styles.error_message}>
+									{errors?.[name]?.message}
+								</div>
+							) : null}
+						</div>
+
+						{name === 'mandatory_audiences_user'
+						&& mandatoryAudiencesUserWatch === 'custom' && data.eligible_users !== 'custom'	? (
+							<div className={styles.generate_button}>
+								<Button
+									type="button"
+									onClick={onClickGenerate}
+									loading={loading}
+									size="sm"
+								>
+									Save and Generate
+								</Button>
+							</div>
+							) : null}
+					</>
 				);
 			})}
 		</div>

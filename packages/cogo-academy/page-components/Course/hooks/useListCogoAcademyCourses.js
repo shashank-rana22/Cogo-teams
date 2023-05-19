@@ -7,8 +7,9 @@ function useListCogoAcademyCourses({ filters, activeTab = '' }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
+		page                    : 1,
+		course_details_required : true,
+		filters                 : {
 			status: 'active',
 		},
 	});

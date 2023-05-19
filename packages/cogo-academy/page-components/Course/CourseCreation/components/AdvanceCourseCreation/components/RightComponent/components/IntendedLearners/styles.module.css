@@ -35,3 +35,9 @@
 .superscipt {
 	color: #ee3425;
 }
+
+.generate_button {
+	display: flex;
+	justify-content: end;
+	margin-bottom: 32px;
+}

@@ -18,7 +18,12 @@ function Header({
 
 	const { title, text } = MAPPING[activeTab] || {};
 
-	const { loading, updateCourse } = useUpdateCourse({ getCogoAcademyCourse, setActiveTab, activeTab });
+	const { loading, updateCourse } = useUpdateCourse({
+		getCogoAcademyCourse,
+		setActiveTab,
+		activeTab,
+		changeTab: true,
+	});
 
 	const handleSubmitForm = () => {
 		childRef.current[activeTab]?.handleSubmit().then((res) => {

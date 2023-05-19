@@ -42,7 +42,7 @@ const controls = [
 	},
 	{
 		label       : 'How frequently do you want the users to take this course?',
-		name        : 'frequent',
+		name        : 'frequency',
 		type        : 'select',
 		placeholder : 'select',
 		options     : [

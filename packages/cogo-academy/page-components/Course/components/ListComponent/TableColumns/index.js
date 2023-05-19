@@ -138,7 +138,12 @@ export const courseColumns = ({
 		),
 	},
 	{
-		Header   : 'Name of Course',
+		Header: (
+			<div className={styles.text}>
+				<div>Name of</div>
+				<div>Course</div>
+			</div>
+		),
 		id       : 'course_name',
 		accessor : ({ name = '' }) => (
 			<div>
@@ -149,27 +154,75 @@ export const courseColumns = ({
 	{
 		Header   : 'Audience',
 		id       : 'audience',
-		accessor : () => (
-			<div>--</div>
-		),
-	},
-	{
-		Header   : 'Topics(+Tags)',
-		id       : 'topics',
-		accessor : ({ query_name = '' }) => {
-			const arr = query_name.split(', ');
+		accessor : ({ course_audience_mappings }) => {
+			const audienceArray = course_audience_mappings.map((item) => item.faq_audience.name);
 
-			const filteredValues = arr.filter((item) => !isEmpty(item));
-
-			const finalString = filteredValues.join(', ');
+			if (isEmpty(audienceArray)) {
+				return '--';
+			}
 
 			return (
-				<div>{finalString || '-'}</div>
+				<div className={styles.audience}>
+					{audienceArray.map((item) => (
+						<div>
+							<Pill
+								size="md"
+								color="#FEF3E9"
+								className={styles.status_pill}
+							>
+								{item}
+							</Pill>
+						</div>
+					))}
+				</div>
 			);
 		},
 	},
 	{
-		Header   : 'Completion criteria',
+		Header: (
+			<div>
+				<div>Topics</div>
+				<div className={styles.tag_text}>(+Tags)</div>
+			</div>
+		),
+		id       : 'topics',
+		accessor : ({ faq_tags = [], faq_topics = [] }) => {
+			const topicsArr = faq_topics.map((item) => startCase(item.name));
+
+			const tagsArr = faq_tags.map((item) => startCase(item.name));
+
+			const finalString = tagsArr.join(', ');
+
+			return (
+				<div>
+					{topicsArr.map((item, index) => {
+						if (index > 0) {
+							return null;
+						}
+
+						return (
+							<Pill
+								size="md"
+								color="#F7FAEF"
+								className={styles.status_pill}
+							>
+								{item}
+							</Pill>
+						);
+					})}
+					{topicsArr.length > 1 ? <Pill color="#F7FAEF">{`+${topicsArr.length - 1} More`}</Pill> : null}
+					<div className={styles.tags}>{finalString}</div>
+				</div>
+			);
+		},
+	},
+	{
+		Header: (
+			<div>
+				<div>Completion</div>
+				<div>criteria</div>
+			</div>
+		),
 		id       : 'completion_criteria',
 		accessor : ({ completion_criteria = [] }) => {
 			const filteredValues = (completion_criteria || []).map((item) => startCase(item));
@@ -184,7 +237,11 @@ export const courseColumns = ({
 	{
 		Header: (
 			<div className={styles.updated_at}>
-				<div className={styles.updated_at_text}>Date Created</div>
+				<div className={styles.updated_at_text}>
+					<div>Date</div>
+					<div>Created</div>
+
+				</div>
 
 				<SortComponent
 					value="created_at"

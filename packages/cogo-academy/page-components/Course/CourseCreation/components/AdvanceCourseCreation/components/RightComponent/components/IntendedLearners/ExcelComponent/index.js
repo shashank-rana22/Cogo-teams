@@ -1,6 +1,6 @@
 import { IcMDownload, IcMRefresh } from '@cogoport/icons-react';
 
-import useGetUserList from '../useGetUserList';
+import useGetUserList from '../../../../../hooks/useGetUserList';
 
 import styles from './styles.module.css';
 
