@@ -155,7 +155,9 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 	taggedProformas?.forEach((item) => {
 		if (item?.finance_job_number || item?.billId) {
 			formatTaggedIds.push(item?.finance_job_number || item?.billId);
-			formatRootIds.push(item.finance_job_number);
+			if (item.finance_job_number) {
+				formatRootIds.push(item.finance_job_number);
+			}
 		} else {
 			item?.root?.split(',')?.forEach((id) => {
 				formatTaggedIds.push(id);
