@@ -15,6 +15,7 @@ function Header({ filters, setFilters }) {
 		<div className={styles.head}>
 			<Tabs
 				activeTab={filters?.status}
+				themeType="primary"
 				onChange={(val) => {
 					setFilters({ ...filters, status: val });
 				}}

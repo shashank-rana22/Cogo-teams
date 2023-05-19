@@ -17,3 +17,58 @@
      display: flex;
      justify-content: flex-end;
 }
+
+
+.checkbox_controller {
+	display: flex;
+	flex-direction: row;
+   
+	padding: 0;
+
+	:global {
+		.ui_checkbox_container {
+			padding: 0 0 10px;
+               margin:8px;
+		}
+	}
+}
+
+.error_message {
+	color: var(--color-primary-error-red-2);
+}
+
+.checkbox_controller + .error_message {
+	margin-top: -10px;
+}
+
+.amount {
+	display: flex;
+	
+}
+
+.select{
+	max-width: 20%;
+	margin-right: 8px;
+
+}
+
+.input{
+	max-width: 40%;
+}
+.amountLabel{
+	font-size: 14;
+	font-weight: 500;
+	margin-bottom: 8px;
+}
+
+.label{
+	font-size: 14;
+	font-weight: 500;
+
+}
+
+.bookingLabel{
+	margin-top: 12px;
+	margin-bottom: 8px;
+}
+

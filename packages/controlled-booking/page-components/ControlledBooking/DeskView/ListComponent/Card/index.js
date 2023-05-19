@@ -20,7 +20,7 @@ function Card({ item, filters, refetchBookingList }) {
 				<div className={styles.heading}>
 
 					Serial ID #
-					  {' '}
+					{' '}
 					{item?.serial_id}
 
 					<div className={styles.content}>
@@ -94,7 +94,8 @@ function Card({ item, filters, refetchBookingList }) {
 				/>
 			</div>
 
-			{filters.status === 'pending_approval' ? (<StatusApproval filters={filters} item={item} refetchBookingList={refetchBookingList} />) : null}
+			{filters.status === 'pending_approval'
+				? (<StatusApproval filters={filters} item={item} refetchBookingList={refetchBookingList} />) : null}
 
 		</div>
 	);

@@ -1,8 +1,11 @@
-import { Textarea, Button, Modal } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import React, { useState } from 'react';
 
 import useStateUpdate from '../../../../../../hooks/useStateUpdate';
 
+import ApprovalForm from './ApprovalForm';
+import RejectionForm from './RejectionForm';
 import styles from './styles.module.css';
 
 const MAPPING = {
@@ -12,11 +15,18 @@ const MAPPING = {
 
 function StatusApproval({ item, refetchBookingList }) {
 	const [showModal, setShowModal] = useState(false);
-	const [value, onChange] = useState('');
 
-	const { updateState = () => {},loading } = useStateUpdate({ id: item?.id, refetchBookingList, setShowModal });
+	const { control, handleSubmit, formState:{ errors = {} }, watch	} = useForm();
 
-	console.log('value', value);
+	console.log('item', item);
+
+	const { updateState = () => {}, loading } = useStateUpdate({
+		id: item?.checkout_approvals?.[0]?.id,
+		refetchBookingList,
+		setShowModal,
+	});
+
+	const formValues = watch();
 
 	return (
 		<div className={styles.container}>
@@ -27,7 +37,7 @@ function StatusApproval({ item, refetchBookingList }) {
 				</Button>
 			</div>
 
-			<Button size="sm" themeType="primary" 	disbaled={loading} onClick={() => setShowModal('approved')}>
+			<Button size="sm" themeType="primary" disbaled={loading} onClick={() => setShowModal('approved')}>
 				Approve
 			</Button>
 
@@ -36,35 +46,31 @@ function StatusApproval({ item, refetchBookingList }) {
 					show={showModal}
 					placement="center"
 					closeOnOuterClick={false}
-					onClose={() => setShowModal(false)
+					onClose={() => setShowModal(false)}
 					className={styles.modal}
 				>
 					<Modal.Header title={`Are you Sure You wanna ${MAPPING[showModal]}?`} />
 
 					<Modal.Body className={styles.preview_modal_body}>
 						{showModal === 'rejected' ? (
-							<>
-								<div className={styles.rejection}>
-									Rejection Reason
-								</div>
 
-								<Textarea
-									name="rejection_reject"
-									value={value}
-									onChange={(e) => onChange(e)}
-									rows={4}
-									placeholder="Please input your Rejection Reason and we
-					             will try working to make this feature better for you."
-								/>
-							</>
+							<RejectionForm control={control} errors={errors} />
+						) : null}
+
+						{showModal === 'approved' ? (
+							<ApprovalForm control={control} errors={errors} formValues={formValues} />
 						) : null}
 
 					</Modal.Body>
 
 					<Modal.Footer>
-
 						<div className={styles.button}>
-							<Button size="sm" themeType="secondary" disbaled={loading} onClick={() => setShowModal(false)}>
+							<Button
+								size="sm"
+								themeType="secondary"
+								disbaled={loading}
+								onClick={() => setShowModal(false)}
+							>
 								cancel
 							</Button>
 						</div>
@@ -74,7 +80,7 @@ function StatusApproval({ item, refetchBookingList }) {
 							themeType="primary"
 							disbaled={loading}
 							onClick={() => {
-								updateState({ rejection_reason: value, state: showModal });
+								handleSubmit(updateState({ formValues, state: showModal }))();
 							}}
 						>
 							{MAPPING[showModal]}

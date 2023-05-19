@@ -1833,11 +1833,11 @@ const partner = {
 			service_name : 'allocation',
 		},
 		{
-			api          : 'update_controlled_checkout_service',
+			api          : 'bulk_update_controlled_checkout_service',
 			access_type  : 'private',
 			service_name : 'checkout',
 
-		}
+		},
 	],
 	supply_crm: [
 		{
@@ -12152,10 +12152,10 @@ const partner = {
 			service_name : 'checkout',
 		},
 		{
-			api:"update_controlled_checkout_state",
+			api          : 'update_checkout_approval',
 	      	access_type  : 'private',
 			service_name : 'checkout',
-	},
+		},
 
 	],
 };
