@@ -30,6 +30,7 @@ function ComparisionModal({
 	const [collectionParty, setCollectionParty] = useState({});
 	const [errors, setErrors] = useState({});
 	const [errMszs, setErrMszs] = useState({});
+
 	const contentText = (
 		<span className={styles.headingmodal}>
 			{step === 2 ? 'STEP 2a - Match and Lock Items with Live Invoice'
