@@ -1,5 +1,15 @@
 .form{
-	height: calc(100vh - 33vh);
-	overflow: auto;
-	padding: 0px 12px;
+	min-height: calc(60vh);
+	padding: 12px;
+}
+
+.modal_footer {
+	button:not(:last-of-type) {
+		margin-right: 10px;
+	}
+}
+
+.full_width_btn {
+	width: 100%;
+	margin-bottom: 20px;
 }

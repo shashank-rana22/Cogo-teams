@@ -67,30 +67,27 @@ function EditInvoicePreference({
 					closeOnOuterClick={false}
 				>
 					<Modal.Header title="EDIT INVOICING PREFERENCE" />
-					<Modal.Body>
-						<div className={styles.form}>
-							<Button
-								size="md"
-								onClick={() => setAddInvoicingParty(true)}
-								style={{ width: '100%', marginBottom: '20px' }}
-							>
-								+ Add Invoicing Party
-							</Button>
 
-							<ListInvoicePreferences
-								shipmentData={shipment_data}
-								invoicingParties={selectedParties}
-								raw_invoicing_parties={invoicingParties}
-								{...rest}
-							/>
-						</div>
+					<Modal.Body className={styles.form}>
+						<Button
+							className={styles.full_width_btn}
+							onClick={() => setAddInvoicingParty(true)}
+						>
+							+ Add Invoicing Party
+						</Button>
+
+						<ListInvoicePreferences
+							shipmentData={shipment_data}
+							invoicingParties={selectedParties}
+							raw_invoicing_parties={invoicingParties}
+							{...rest}
+						/>
 					</Modal.Body>
 
-					<Modal.Footer>
+					<Modal.Footer className={styles.modal_footer}>
 						<Button
-							style={{ marginRight: 16 }}
 							size="md"
-							themeType="tertiary"
+							themeType="secondary"
 							onClick={() => handleClose()}
 						>
 							Cancel
