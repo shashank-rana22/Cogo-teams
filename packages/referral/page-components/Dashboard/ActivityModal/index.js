@@ -1,6 +1,7 @@
 import { Modal, Pagination, Placeholder } from '@cogoport/components';
 import { IcCCogoCoin } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
+import Image from 'next/image';
 
 import { ACTIVITY_STATUS, NETWORK_EMPTY_STATE } from '../../../constants';
 import useGetReferralTransactions from '../../../hooks/useGetReferralTransactions';
@@ -17,15 +18,11 @@ function ActivityModal({
 		transactionsData = {}, transactionsLoading = false,
 		setPagination = () => {},
 	} = useGetReferralTransactions({ userDate });
-
 	const { list = [], page, total_count, page_limit } = transactionsData;
-
 	const handleClose = () => {
 		setActivityModal(false);
 	};
-
 	const emptyCheck = isEmpty(list);
-
 	function LoadingState() {
 		return (
 			<>
@@ -47,7 +44,12 @@ function ActivityModal({
 	function EmptyState() {
 		return (
 			<div className={styles.empty_state}>
-				<img src={NETWORK_EMPTY_STATE} alt="empty-state" width="120px" height="120px" />
+				<Image
+					src={NETWORK_EMPTY_STATE}
+					alt="empty-state"
+					width={120}
+					height={120}
+				/>
 			</div>
 		);
 	}
@@ -56,7 +58,7 @@ function ActivityModal({
 		return (
 			<>
 				{(list || []).map((item) => {
-					const { state = '', created_at = '', source = '', reward = 0 } = item || {};
+					const { state = '', created_at = '', source = '', reward = 0, nominee_name = '' } = item || {};
 					return (
 						<>
 							<div className={styles.activity_date}>
@@ -92,7 +94,9 @@ function ActivityModal({
 										</div>
 
 										<div className={styles.name}>
-											Nominee Name: Niraj
+											Nominee Name:
+											{' '}
+											{startCase(nominee_name)}
 										</div>
 
 									</div>
@@ -134,7 +138,6 @@ function ActivityModal({
 
 			<Modal.Body className={styles.modal_body}>
 				{componentMapping()}
-
 			</Modal.Body>
 			{!emptyCheck && (
 				<Modal.Footer>

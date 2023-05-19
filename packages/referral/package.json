@@ -1,7 +1,7 @@
 {
     "name": "@cogoport/referral",
     "version": "0.1.0",
-    "description": "Package for Cogo One",
+    "description": "Referral Dashboard",
     "private": true,
     "main": "./index.js",
     "dependencies": {

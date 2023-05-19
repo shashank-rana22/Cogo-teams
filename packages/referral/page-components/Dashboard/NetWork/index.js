@@ -1,9 +1,11 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
+import Image from 'next/image';
 import React, { useState } from 'react';
 
 import NetworkChart from '../../../common/NetworkChart';
+import { NETWORK_LOADER } from '../../../constants';
 import useGetNetwork from '../../../hooks/useGetNetwork';
 
 import styles from './styles.module.css';
@@ -15,8 +17,8 @@ function NetWork() {
 	const [nodeData, setNodeData] = useState({});
 
 	const router = useRouter();
-	const { query = {} } = router;
-	const { referrer_id = '', user_name = '' } = query || {};
+	const { query = {} } = useRouter();
+	const { referrer_id = '', user_name = '' } = query;
 	const { data = {}, referrerNetwork = () => {}, netWorkLoader = true } = useGetNetwork({ referrer_id });
 
 	return (
@@ -48,11 +50,11 @@ function NetWork() {
 				</div>
 			) : (
 				<div className={styles.loading_state}>
-					<img
+					<Image
+						src={NETWORK_LOADER}
 						alt="cogoport-loading"
-						src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif"
-						width="120px"
-						height="120px"
+						width={120}
+						height={120}
 					/>
 				</div>
 

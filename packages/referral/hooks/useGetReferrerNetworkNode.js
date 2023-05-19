@@ -3,9 +3,8 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 const useGetReferrerNetworkNode = ({ referee_id = '' }) => {
-	const router = useRouter();
-	const { query = {} } = router;
-	const { referrer_id = '' } = query || {};
+	const { query = {} } = useRouter();
+	const { referrer_id = '' } = query;
 
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_referrer_network_node',

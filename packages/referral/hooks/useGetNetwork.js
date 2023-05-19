@@ -1,27 +1,8 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState, useCallback } from 'react';
-
-function addToOrgChart(orgChart, newArr, targetid) {
-	if (orgChart.referee_id === targetid) {
-		orgChart.children.push(...newArr);
-		return;
-	}
-
-	const children = orgChart.children || [];
-	children.forEach((child) => addToOrgChart(child, newArr, targetid));
-}
-
-function addDirectChild(orgChart) {
-	orgChart.children.forEach((child) => {
-		const childData = child;
-		childData.direct_child = true;
-	});
-
-	return orgChart;
-}
+import { useEffect, useState } from 'react';
 
 const useGetNetwork = ({ referrer_id = '' }) => {
-	const [networkData, setNetworkData] = useState({});
+	const [networkData, setNetworkData] = useState();
 	const [netWorkLoader, setNetWorkLoader] = useState(true);
 
 	const [{ loading }, trigger] = useRequest({
@@ -29,7 +10,26 @@ const useGetNetwork = ({ referrer_id = '' }) => {
 		method : 'get',
 	}, { manual: true });
 
-	const referrerNetwork = useCallback(async (node_id) => {
+	function addToOrgChart(orgChart, newArr, targetid) {
+		if (orgChart.referee_id === targetid) {
+			orgChart.children.push(...newArr);
+			return;
+		}
+
+		const children = orgChart.children || [];
+		children.forEach((child) => addToOrgChart(child, newArr, targetid));
+	}
+
+	function addDirectChild(orgChart) {
+		orgChart.children.forEach((child) => {
+			const childData = child;
+			childData.direct_child = true;
+		});
+
+		return orgChart;
+	}
+
+	const referrerNetwork = async (node_id) => {
 		try {
 			const res = await trigger({
 				params: {
@@ -49,11 +49,11 @@ const useGetNetwork = ({ referrer_id = '' }) => {
 		} catch (error) {
 			setNetWorkLoader(false);
 		}
-	}, [networkData, referrer_id, trigger]);
+	};
 
 	useEffect(() => {
 		referrerNetwork();
-	}, [referrerNetwork]);
+	}, []);
 
 	return {
 		data: networkData,

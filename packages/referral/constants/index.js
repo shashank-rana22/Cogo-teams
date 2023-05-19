@@ -29,6 +29,27 @@ export const ACTIVITY_STATUS = {
 
 export const LEVEL_DATA = ['L1', 'L10', 'L20', 'L30', 'L40', 'L50', 'L60'];
 
+export const REFERRAL_TYPES = [
+	{
+		color : '#ABCD62',
+		name  : 'KYC',
+	},
+	{
+		color : '#88CAD1',
+		name  : 'Shipment',
+	},
+	{
+		color : '#FCDC00',
+		name  : 'Subscription',
+	},
+];
+
 export const LIST_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
+
 export const COGOPOINT_IMG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg';
+
 export const NETWORK_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg';
+
+export const NETWORK_LOADER = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif';
+
+export const USER_AVATAR = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp';

@@ -1,27 +1,14 @@
 import React from 'react';
 
+import { REFERRAL_TYPES } from '../../../../../constants';
+
 import styles from './styles.module.css';
 
 function ReferralTypes() {
-	const referralTypes = [
-		{
-			color : '#ABCD62',
-			name  : 'KYC',
-		},
-		{
-			color : '#88CAD1',
-			name  : 'Shipment',
-		},
-		{
-			color : '#FCDC00',
-			name  : 'Subscription',
-		},
-	];
-
 	return (
 		<div className={styles.container}>
 
-			{(referralTypes || []).map((type) => {
+			{(REFERRAL_TYPES || []).map((type) => {
 				const { color = '', name = '' } = type || {};
 				return (
 					<div className={styles.pair} key={type}>

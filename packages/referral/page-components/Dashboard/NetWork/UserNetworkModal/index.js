@@ -4,7 +4,7 @@ import { startCase, format } from '@cogoport/utils';
 import React from 'react';
 
 import TooltipContent from '../../../../common/TooltipContent';
-import { USER_STATUS_COLOUR, USER_STATUS_MAPPING } from '../../../../constants';
+import { USER_STATUS_COLOUR, USER_STATUS_MAPPING, USER_AVATAR } from '../../../../constants';
 import useGetReferrerNetworkNode from '../../../../hooks/useGetReferrerNetworkNode';
 
 import NetWorkCommission from './NetWorkCommission';
@@ -82,8 +82,8 @@ function UserNetworkModal({
 
 					<div className={styles.user_profile}>
 						<Avatar
-							src="https://www.w3schools.com/howto/img_avatar.png"
-							alt="img"
+							src={USER_AVATAR}
+							alt="user-avatar"
 							disabled={false}
 							size="50px"
 							className={styles.user_avatar}

@@ -22,7 +22,7 @@ const ListButtons = ({
 
 	const { account_type = '', tags = [], id = '' } = organization_data?.[0] || [];
 
-	const checkPartner = tags?.includes('partner');
+	const checkPartner = (tags || []).includes('partner');
 
 	const UserProfile = () => {
 		if (account_type === 'importer_exporter' && checkPartner) {
@@ -67,7 +67,6 @@ const ListButtons = ({
 		},
 		{
 			children: (
-
 				<Button disabled={emptyOrg} size="sm" themeType="tertiary">
 					<div className={styles.label}>
 						View Profile

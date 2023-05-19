@@ -1,5 +1,6 @@
 import { Tabs, TabPanel, Pagination, Table } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import Image from 'next/image';
 
 import tableTabs from '../../../configurations/table-tabs';
 import { LIST_EMPTY_STATE } from '../../../constants';
@@ -57,10 +58,11 @@ function ListTables({
 								/>
 								{isEmpty(list) && !listLoading && (
 									<figure className={styles.empty_state}>
-										<img
+										<Image
 											src={LIST_EMPTY_STATE}
-											height="320px"
 											alt="Empty State"
+											width={300}
+											height={250}
 										/>
 										<figcaption
 											className={styles.empty_state_text}
