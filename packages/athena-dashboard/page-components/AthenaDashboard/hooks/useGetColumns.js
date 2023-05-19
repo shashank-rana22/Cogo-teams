@@ -1,11 +1,11 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Tooltip } from '@cogoport/components';
-import globals from '@cogoport/globalization/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 
 const useGetColumns = ({ columnsToShow = [] }) => {
-	const { currency_code:{ INR } } = globals;
+	const { currency_code:{ INR } } = GLOBAL_CONSTANTS;
 	const columns = [
 		{
 			Header   : 'Shipment Record ID',

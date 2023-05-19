@@ -1,6 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
 import { Table, Placeholder } from '@cogoport/components';
-import globals from '@cogoport/globalization/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import Map from '../../../common/responsive-choropleth';
@@ -11,7 +11,7 @@ import useSetReport from '../hooks/useSetReport';
 import styles from './styles.module.css';
 
 function Report() {
-	const { currency_code:{ INR } } = globals;
+	const { currency_code:{ INR } } = GLOBAL_CONSTANTS;
 
 	const {
 		hsdesc,

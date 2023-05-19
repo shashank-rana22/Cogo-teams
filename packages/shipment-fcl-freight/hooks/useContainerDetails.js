@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import globals from '@cogoport/globalization/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
@@ -19,7 +19,7 @@ const getError = ({ index = 0, dateError = '' }) => {
 		errObj.message = `Date cannot be greater than ${formatDate({
 			date       : new Date(),
 			formatType : 'date',
-			dateFormat : globals.formats.date['dd MMM yyyy'],
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 		})}`;
 	}
 
