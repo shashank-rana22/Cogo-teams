@@ -10,9 +10,9 @@ const getOptions = (data = []) => (
 	}))
 );
 
-function Plan({ cancelHandler, subscriptionId = '' }) {
+function Plan({ cancelHandler, subscriptionId = '', successHandler }) {
 	const [plan, setPlan] = useState('R1');
-	const { loading, changePlanHandler, listData = [] } = useUpdatePlan({ plan, subscriptionId });
+	const { loading, changePlanHandler, listData = [] } = useUpdatePlan({ plan, subscriptionId, successHandler });
 	const options = getOptions(listData?.list);
 	return (
 		<>

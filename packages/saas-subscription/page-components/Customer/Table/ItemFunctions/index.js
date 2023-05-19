@@ -33,9 +33,8 @@ const itemFunction = ({ setEditModal }) => ({
 		);
 	},
 	renderFamily: (item) => {
-		const { organization = {} } = item || {};
-		const { account_type = '' } = organization || {};
-		return	<span>{startCase(account_type)}</span>;
+		const { partner_id = '' } = item || {};
+		return	<span>{partner_id ? 'Channel Partner' : 'Importer Exporter'}</span>;
 	},
 	renderEdit: (item) => (
 		<span>

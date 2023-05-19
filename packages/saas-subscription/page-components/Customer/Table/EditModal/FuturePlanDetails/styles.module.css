@@ -1,5 +1,22 @@
 .container {
-	padding: 16px;
+	padding: 8px 16px;
 	border: 1px solid #f8f2e7;
 	border-radius: 9px;
+}
+
+.title {
+	border-bottom: 0.5px solid #ffc04e;
+}
+
+.detail_container {
+	margin-top: 12px;
+}
+
+.date_container {
+	display: flex;
+	margin-top: 16px;
+
+	.date_title {
+		width: 30%;
+	}
 }

@@ -43,7 +43,14 @@ function Plan() {
 			<div className={styles.container}>
 				<div className={cl`${styles.row} ${styles.card_header}`}>
 					{planListConfig.map((config) => (
-						<div className={styles.col} style={{ width: config?.width }}>{config?.title}</div>
+						<div
+							key={config.key}
+							className={styles.col}
+							style={{ width: config?.width }}
+						>
+							{config?.title}
+
+						</div>
 					))}
 				</div>
 				{dummy.map((item) => (

@@ -5,9 +5,9 @@ import useUpdateQuota from '../../../../../hooks/useUpdateQuota';
 import { getFieldController } from '../../../../../utils/getFieldController';
 import styles from '../styles.module.css';
 
-function Quota({ quotaInfo = {}, cancelHandler }) {
+function Quota({ quotaInfo = {}, cancelHandler, successHandler }) {
 	const { id = '' } = quotaInfo || {};
-	const { formHook = {}, submitHandler, loading } = useUpdateQuota({ id });
+	const { formHook = {}, submitHandler, loading } = useUpdateQuota({ id, successHandler });
 	const { control, formState:{ errors }, handleSubmit } = formHook || {};
 
 	return (
@@ -41,7 +41,6 @@ function Quota({ quotaInfo = {}, cancelHandler }) {
 					loading={loading}
 				>
 					Save
-
 				</Button>
 			</div>
 		</>

@@ -3,8 +3,8 @@ import { Button } from '@cogoport/components';
 import useCancelSubscription from '../../../../../hooks/useCancelSubscription';
 import styles from '../styles.module.css';
 
-function CancelSub({ cancelHandler, subscriptionId = '' }) {
-	const { loading, cancelSubscriptionHandler } = useCancelSubscription();
+function CancelSub({ cancelHandler, subscriptionId = '', successHandler }) {
+	const { loading, cancelSubscriptionHandler } = useCancelSubscription({ successHandler });
 	return (
 		<div className={styles.cancel_container}>
 			<h3>Are you sure you want to cancel subscription?</h3>

@@ -1,7 +1,7 @@
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateQuota = ({ id = '' }) => {
+const useUpdateQuota = ({ id = '', successHandler }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/update_saas_quota',
@@ -26,6 +26,7 @@ const useUpdateQuota = ({ id = '' }) => {
 					event_name : action,
 				},
 			});
+			successHandler();
 		} catch (err) {
 			console.log(err);
 		}

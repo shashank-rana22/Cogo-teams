@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useUpdatePlan = ({ plan, subscriptionId }) => {
+const useUpdatePlan = ({ plan, subscriptionId, successHandler }) => {
 	const [{ loading, data: listData }, listTrigger] = useRequest({
 		method : 'get',
 		url    : '/list_saas_plan_pricings',
@@ -33,6 +33,7 @@ const useUpdatePlan = ({ plan, subscriptionId }) => {
 					plan_pricing_id : plan,
 				},
 			});
+			successHandler();
 		} catch (err) {
 			console.log(err);
 		}

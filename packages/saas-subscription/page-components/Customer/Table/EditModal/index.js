@@ -1,7 +1,6 @@
 import { ButtonIcon, cl, Button, Modal } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
-import { useEffect } from 'react';
+import { startCase } from '@cogoport/utils';
 
 import useGetSubscriptionInfo from '../../../../hooks/useGetSubscriptionInfo';
 import iconUrl from '../../../../utils/iconUrl.json';
@@ -13,7 +12,7 @@ import styles from './styles.module.css';
 const DETAILS_MAPPING = [
 	{
 		name  : 'plan_details',
-		key   : 'display_name',
+		key   : 'name',
 		label : 'Plan Details',
 	},
 	{
@@ -28,32 +27,21 @@ const HEADER_MAPPING = {
 };
 
 function EditModal({ editModal, setEditModal }) {
-	const { loading = false, subInfo = {}, refetchSubscriptionInfo } = useGetSubscriptionInfo();
 	const { open = false, info = {} } = editModal;
-	const { active_subscription = {}, organization = {} } = info || {};
+	const { organization = {} } = info || {};
+
+	const {
+		loading = false, subInfo = {}, editModalChangeHandler,
+		closeModalHandler,
+	} = useGetSubscriptionInfo({ setEditModal, editModal });
 
 	const { active = {}, quotas = [], future = {} } = subInfo || {};
-	const { id = '', plan = {} } = active || {};
+	const { id = '', plan = {}, pricing = {} } = active || {};
 
-	const closeModalHandler = () => {
-		setEditModal({ open: false });
+	const getDetailValue = (name) => {
+		if (name === 'plan_details') return startCase(pricing?.name);
+		return startCase(plan?.organization_type);
 	};
-
-	const editModalChangeHandler = (key, value) => {
-		setEditModal((prev) => ({
-			...prev,
-			openEditFeatureModal : true,
-			[key]                : true,
-			featureInfo          : value,
-		}));
-	};
-
-	useEffect(() => {
-		if (!isEmpty(info)) {
-			const customerSubId = active_subscription?.saas_subscription_customer_id || '';
-			refetchSubscriptionInfo(customerSubId);
-		}
-	}, [info]);
 
 	return (
 		<Modal show={open} onClose={closeModalHandler} closeOnOuterClick={closeModalHandler} size="lg">
@@ -66,7 +54,7 @@ function EditModal({ editModal, setEditModal }) {
 				)}
 
 				<div className={styles.flex_box}>
-					<h2 className={styles.title}>Configure Plan</h2>
+					<h2 className={styles.title}>Configure Subscription</h2>
 					<ButtonIcon size="md" icon={<IcMCross />} themeType="primary" onClick={closeModalHandler} />
 				</div>
 
@@ -84,7 +72,6 @@ function EditModal({ editModal, setEditModal }) {
 					</div>
 					<div className={styles.flex_box}>
 						<Button
-							size="sm"
 							onClick={() => editModalChangeHandler('editPlan', id)}
 						>
 							Change Plan
@@ -92,7 +79,6 @@ function EditModal({ editModal, setEditModal }) {
 
 						<Button
 							className={styles.cancel_btn}
-							size="sm"
 							themeType="secondary"
 							disabled={plan?.plan_name === 'starter-pack'}
 							onClick={() => editModalChangeHandler('editCancelSub', id)}
@@ -106,7 +92,7 @@ function EditModal({ editModal, setEditModal }) {
 					{DETAILS_MAPPING.map((detail) => (
 						<div key={detail} className={styles.details}>
 							<div className={styles.detail_title}>{detail.label}</div>
-							<div className={styles.detail_content}>{startCase(plan?.[detail.key])}</div>
+							<div className={styles.detail_content}>{getDetailValue(detail?.name)}</div>
 						</div>
 					))}
 				</div>

@@ -7,6 +7,14 @@ import Plan from './Plan';
 import Quota from './Quota';
 import styles from './styles.module.css';
 
+const cancelObj = {
+	openEditFeatureModal : false,
+	editAddon            : false,
+	editPlan             : false,
+	editCancelSub        : false,
+	featureInfo          : '',
+};
+
 function EditFeatureModal({ editModal, setEditModal }) {
 	const {
 		openEditFeatureModal = false,
@@ -18,11 +26,15 @@ function EditFeatureModal({ editModal, setEditModal }) {
 	const cancelHandler = () => {
 		setEditModal((prev) => ({
 			...prev,
-			openEditFeatureModal : false,
-			editAddon            : false,
-			editPlan             : false,
-			editCancelSub        : false,
-			featureInfo          : '',
+			...cancelObj,
+			apiCall: false,
+		}));
+	};
+	const successHandler = () => {
+		setEditModal((prev) => ({
+			...prev,
+			...cancelObj,
+			apiCall: true,
 		}));
 	};
 
@@ -42,10 +54,28 @@ function EditFeatureModal({ editModal, setEditModal }) {
 						<h3 className={styles.title}>{renderTitle()}</h3>
 						<ButtonIcon size="md" icon={<IcMCross />} themeType="primary" onClick={cancelHandler} />
 					</div>
-					{editAddon && <Quota quotaInfo={featureInfo} cancelHandler={cancelHandler} />}
-					{editPlan && <Plan cancelHandler={cancelHandler} subscriptionId={featureInfo} />}
+					{editAddon && (
+						<Quota
+							quotaInfo={featureInfo}
+							cancelHandler={cancelHandler}
+							successHandler={successHandler}
+						/>
+					)}
+					{editPlan && (
+						<Plan
+							cancelHandler={cancelHandler}
+							subscriptionId={featureInfo}
+							successHandler={successHandler}
+						/>
+					)}
 				</div>
-			) : <CancelSub cancelHandler={cancelHandler} subscriptionId={featureInfo} />}
+			) : (
+				<CancelSub
+					cancelHandler={cancelHandler}
+					subscriptionId={featureInfo}
+					successHandler={successHandler}
+				/>
+			)}
 		</Modal>
 	);
 }
