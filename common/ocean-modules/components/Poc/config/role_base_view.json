@@ -3,9 +3,26 @@
         "trade_parties":["collection_party"],
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
         "can_edit":["notifying_party","collection_party"],
-        "can_add_service_provider_poc":true
+        "can_add_service_provider_poc":true,
+        "add_external_import_poc":true,
+        "add_external_export_poc":true
     },
     "booking_desk_manager":{
+        "trade_parties":["collection_party"],
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
+        "can_edit":["notifying_party","collection_party"],
+        "edit_internal_poc":["service_ops1"],
+        "can_add_service_provider_poc":true,
+        "add_external_import_poc":true,
+        "add_external_export_poc":true
+    },
+    "document_desk":{
+        "trade_parties":["collection_party"],
+        "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
+        "can_edit":["notifying_party","collection_party"],
+        "can_add_service_provider_poc":true
+    },
+    "document_desk_manager":{
         "trade_parties":["collection_party"],
         "can_view":["notifying_party","invoicing_party","service_provider","pocs","collection_party"],
         "can_edit":["notifying_party","collection_party"],
@@ -18,7 +35,7 @@
         "add_internal_poc":true,
         "add_external_import_poc":true,
         "add_external_export_poc":true,
-        "edit_internal_poc":[],
+        "edit_internal_poc":["service_ops1"],
         "can_add_service_provider_poc":true
     },  
     "admin":{
