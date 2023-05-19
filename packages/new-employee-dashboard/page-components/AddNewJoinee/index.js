@@ -1,11 +1,15 @@
-import React from 'react';
+import React, { useState } from 'react';
+
+import FormComponent from './FormComponent';
+import SuccessComponent from './SucessComponent';
 
 function AddNewJoinee() {
-	return (
-		<div>
-			<div>add new joinee</div>
-		</div>
-	);
+	const [activePage, setActivePage] = useState('success');
+
+	if (activePage === 'success') {
+		return <SuccessComponent />;
+	}
+	return <FormComponent setActivePage={setActivePage} />;
 }
 
 export default AddNewJoinee;
