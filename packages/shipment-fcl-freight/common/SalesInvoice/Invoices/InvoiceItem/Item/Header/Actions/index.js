@@ -234,7 +234,7 @@ function Actions({
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive
-							placement="left"
+							placement="bottom"
 							visible={show}
 							content={content}
 							theme="light"
@@ -273,7 +273,7 @@ function Actions({
 					showReview={showReview}
 					setShowReview={setShowReview}
 					invoice={invoice}
-					BfInvoiceRefetch={handleRefetch}
+					refetch={handleRefetch}
 				/>
 			) : null}
 
@@ -282,8 +282,7 @@ function Actions({
 					isChangeCurrency={isChangeCurrency}
 					setIsChangeCurrency={setIsChangeCurrency}
 					invoice={invoice}
-					BfInvoiceRefetch={handleRefetch}
-					salesInvoicesRefetch={salesInvoicesRefetch}
+					refetch={handleRefetch}
 				/>
 			) : null}
 
@@ -292,7 +291,7 @@ function Actions({
 					showOtpModal={showOtpModal}
 					setShowOTPModal={setShowOTPModal}
 					invoice={invoice}
-					BfInvoiceRefetch={salesInvoicesRefetch}
+					refetch={handleRefetch}
 					shipment_data={shipment_data}
 				/>
 			) : null}
@@ -302,7 +301,7 @@ function Actions({
 					showAddRemarks={showAddRemarks}
 					setShowAddRemarks={setShowAddRemarks}
 					invoice={invoice}
-					BfInvoiceRefetch={handleRefetch}
+					refetch={handleRefetch}
 				/>
 			) : null}
 
@@ -311,7 +310,7 @@ function Actions({
 					show={sendEmail}
 					setShow={setSendEmail}
 					invoice={invoice}
-					BfInvoiceRefetch={BfInvoiceRefetch}
+					refetch={handleRefetch}
 				/>
 			) : null}
 
@@ -320,7 +319,7 @@ function Actions({
 					show={showChangePaymentMode}
 					setShow={setShowChangePaymentMode}
 					invoice={invoice}
-					BfInvoiceRefetch={BfInvoiceRefetch}
+					refetch={handleRefetch}
 				/>
 			) : null}
 		</div>

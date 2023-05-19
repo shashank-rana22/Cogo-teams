@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateInvoiceRemarks = ({
@@ -21,7 +21,7 @@ const useUpdateInvoiceRemarks = ({
 				refetch();
 			}
 		} catch (error) {
-			toastApiError(error?.data);
+			Toast.error(getApiError(error?.response?.data));
 		}
 	};
 	return { onSubmitRemarks, loading };

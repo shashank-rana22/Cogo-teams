@@ -10,7 +10,7 @@ function AddRemarks({
 	invoice = {},
 	refetch = () => {},
 }) {
-	const [remarkValue, setRemarkValue] = useState(invoice?.remarks || '');
+	const [remarkValue, setRemarkValue] = useState(invoice?.remarks || []);
 
 	const onClose = () => {
 		setRemarkValue(invoice?.remarks);
@@ -18,7 +18,7 @@ function AddRemarks({
 	};
 	const payload = {
 		id      : invoice?.id,
-		remarks : [remarkValue],
+		remarks : remarkValue,
 	};
 
 	const refetchAfterCall = () => {
@@ -40,7 +40,7 @@ function AddRemarks({
 					value={remarkValue}
 					size="md"
 					rows="6"
-					onChange={(e) => setRemarkValue(e)}
+					onChange={(e) => setRemarkValue([e])}
 					placeholder="Add remarks for your invoice..."
 					style={{ padding: '3px' }}
 				/>

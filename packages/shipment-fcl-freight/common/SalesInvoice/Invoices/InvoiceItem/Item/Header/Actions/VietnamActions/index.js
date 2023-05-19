@@ -253,7 +253,7 @@ function Actions({
 					{!disableAction || invoice.exchange_rate_document?.length > 0 ? (
 						<Popover
 							interactive
-							placement="left"
+							placement="bottom"
 							visible={show}
 							content={content}
 							theme="light"

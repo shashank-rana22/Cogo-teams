@@ -157,7 +157,7 @@ function Header({
 							{invoiceStatus === 'FINANCE_REJECTED' ? (
 								<Tooltip
 									theme="light"
-									placement="top"
+									placement="bottom"
 									interactive
 									content={
 										<div>{bfInvoice?.invoiceRejectionReason || '-'}</div>

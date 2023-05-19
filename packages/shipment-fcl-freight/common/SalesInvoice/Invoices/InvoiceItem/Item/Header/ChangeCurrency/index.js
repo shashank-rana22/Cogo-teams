@@ -12,8 +12,7 @@ function ChangeCurrency({
 	isChangeCurrency = false,
 	setIsChangeCurrency = () => {},
 	invoice = {},
-	BfInvoiceRefetch = () => {},
-	salesInvoicesRefetch = () => {},
+	refetch = () => {},
 }) {
 	const onClose = () => {
 		setIsChangeCurrency(false);
@@ -59,8 +58,7 @@ function ChangeCurrency({
 		if (onClose) {
 			onClose();
 		}
-		BfInvoiceRefetch();
-		salesInvoicesRefetch();
+		refetch();
 	};
 
 	const { onCreate, loading } = useUpdateCurrency({

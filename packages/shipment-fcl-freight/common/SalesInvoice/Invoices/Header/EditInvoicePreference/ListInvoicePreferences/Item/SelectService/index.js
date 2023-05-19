@@ -95,7 +95,7 @@ function SelectService({
 
 			const servicesToPush = {
 				label: (
-					<Tooltip content={content} placement="top" theme="light">
+					<Tooltip content={content} placement="bottom" theme="light">
 						<div className={styles.service_name}>
 							{service?.service_type === 'shipment'
 								? 'Convenience Fees'

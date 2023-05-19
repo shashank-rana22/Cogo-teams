@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateInvoicePaymentMode = ({
@@ -24,7 +24,7 @@ const useUpdateInvoicePaymentMode = ({
 				Toast.error(res?.err);
 			}
 		} catch (err) {
-			toastApiError(err?.data);
+			Toast.error(getApiError(err?.response?.data));
 		}
 	};
 
