@@ -1,15 +1,20 @@
 import { Pill } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import StyledTable from '../StyledTable';
 
 import styles from './styles.module.css';
 
-const columns = [
+const getColumns = ({ onClickNewJoinerColumn }) => [
 	{
 		Header   : 'NAME & EMAIL',
-		accessor : (items) => (
-			<div className={styles.name_and_email}>
+		accessor : (item) => (
+			<div
+				role="presentation"
+				className={styles.name_and_email}
+				onClick={() => onClickNewJoinerColumn(item?.id)}
+			>
 				<div className={styles.name}>Shivam Singh</div>
 				shivam.singh@cogoport.com
 			</div>
@@ -17,7 +22,7 @@ const columns = [
 	},
 	{
 		Header   : 'ROLE',
-		accessor : (items) => (
+		accessor : (item) => (
 			<div>
 				Sr. Product Manager
 			</div>
@@ -25,7 +30,7 @@ const columns = [
 	},
 	{
 		Header   : 'REPORTING MANAGER',
-		accessor : (items) => (
+		accessor : (item) => (
 			<div>
 				Ankur Varma
 			</div>
@@ -33,7 +38,7 @@ const columns = [
 	},
 	{
 		Header   : 'DATE OF JOINING',
-		accessor : (items) => (
+		accessor : (item) => (
 			<div>
 				1 June, 2023
 			</div>
@@ -41,10 +46,10 @@ const columns = [
 	},
 	{
 		Header   : 'PROFILE COMPLETION',
-		accessor : (items) => (
+		accessor : (item) => (
 			<div>
 				<div className={styles.animate}>
-					<div className={styles.progress_bar} style={{ width: `${items.progress}%` }}>
+					<div className={styles.progress_bar} style={{ width: `${item.progress}%` }}>
 						<div className={styles.progress} />
 					</div>
 				</div>
@@ -54,7 +59,7 @@ const columns = [
 	},
 	{
 		Header   : 'STATUS',
-		accessor : (items) => (
+		accessor : (item) => (
 			<div>
 				<Pill
 					size="md"
@@ -68,11 +73,23 @@ const columns = [
 ];
 
 function TableView() {
+	const router = useRouter();
+
+	const onClickNewJoinerColumn = (id) => {
+		router.push(`/new-employee-dashboard/${id}`, `/new-employee-dashboard/${id}`);
+	};
+
+	const columns = getColumns({ onClickNewJoinerColumn });
+
 	return (
 		<div className={styles.container}>
 			<StyledTable
 				columns={columns}
-				data={[{ progress: 10 }, { progress: 80 }, { progress: 50 }, { progress: 70 }, { progress: 20 }]}
+				data={[
+					{ id: 'qw13i4-8272ihjyvhj', progress: 10 }, { id: 'q1123kj-oouyhb2682h-aad-ad11sdq', progress: 80 },
+					{ id: 'w123sdfs-rf23r2ed-22-2d21', progress: 50 }, { id: '123-ewd32e2-d23d-23d2d2d', progress: 70 },
+					{ id: 'q1231ewdw-w232ws3rfrbyy-123', progress: 20 }, { id: 'qs1123-877jvvnd-ad123', progress: 20 }]}
+				loading={false}
 			/>
 		</div>
 	);
