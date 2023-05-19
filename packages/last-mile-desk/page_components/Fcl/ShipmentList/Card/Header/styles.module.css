@@ -1,0 +1,50 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+
+	:global {
+		.ui_pill_container {
+			margin-top: 0;
+			line-height: 1.8;
+		}
+
+		.ui_pill_text {
+			font-size: var(--font-size-sm);
+		}
+	}
+}
+
+.trade_type_container {
+	:global {
+		.ui_pill_container {
+			border-top-right-radius: 0;
+			border-bottom-left-radius: 0;
+		}
+	}
+}
+
+.trade_type {
+	margin-left: 0;
+}
+
+.export {
+	background-color: var(--color-primary-yellow-4);
+}
+
+.import {
+	background-color: var(--color-tertiary-blue-4);
+}
+
+.source_container {
+	:global {
+		.ui_pill_container {
+			border-top-left-radius: 0;
+			border-bottom-right-radius: 0;
+		}
+	}
+}
+
+.source {
+	margin-right: 0;
+	background-color: var(--color-secondary-3);
+}

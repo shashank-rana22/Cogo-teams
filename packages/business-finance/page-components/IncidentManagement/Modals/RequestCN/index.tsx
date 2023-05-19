@@ -1,4 +1,4 @@
-import { Tooltip, Select, Popover, Textarea, Modal, Button } from '@cogoport/components';
+import { Tooltip, Select, Popover, Textarea, Modal, Button, Pill } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMEyeopen } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
@@ -42,6 +42,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		creditNoteRemarks,
 		currency,
 		documentUrls,
+		revoked,
 	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
 
 	const { useOnAction:OnAction, loading } = useGetTdsData({
@@ -185,26 +186,38 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${toTitleCase(businessName)}`} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
-						<div className={styles.button_container_data}>
-							<Popover
-								placement="bottom"
-								visible={showPopover}
-								render={content()}
-								{...rest}
-							>
-								<Button
-									themeType="secondary"
-									onClick={() => setShowPopover(!showPopover)}
+						<div className={styles.credit}>
+							<div className={styles.button_container_data}>
+								<Popover
+									placement="bottom"
+									visible={showPopover}
+									render={content()}
+									{...rest}
 								>
-									<div className={styles.flex}>
-										CN Category
-										<div className={styles.icon_container}>
-											{showPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+									<Button
+										themeType="secondary"
+										onClick={() => setShowPopover(!showPopover)}
+									>
+										<div className={styles.flex}>
+											CN Category
+											<div className={styles.icon_container}>
+												{showPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+											</div>
 										</div>
-									</div>
-								</Button>
-							</Popover>
+									</Button>
+								</Popover>
+							</div>
+
+							{typeof (revoked) === 'boolean' && (
+								<div>
+									{revoked
+										? <Pill size="md" color="#C4DC91">Fully</Pill>
+										: <Pill size="md" color="#FEF199">Partial</Pill>}
+								</div>
+							)}
+
 						</div>
+
 						<div className={styles.flex}>
 
 							<div className={styles.value_data}>

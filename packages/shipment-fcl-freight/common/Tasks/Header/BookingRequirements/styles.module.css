@@ -24,6 +24,8 @@
 }
 
 .modal_content {
+	width: 1000px !important;
+
 	:global {
 		.ui_modal_body_container {
 			min-height: 460px;

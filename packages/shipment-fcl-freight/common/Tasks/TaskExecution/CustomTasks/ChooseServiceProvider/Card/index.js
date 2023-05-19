@@ -29,7 +29,7 @@ function Card({ item, priority, handleUpdateTask }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.row}>
-				<div className={` ${styles.priority_text} ${styles.purple}`}>
+				<div className={styles.priority_text}>
 					(
 					{priority}
 					&nbsp;
