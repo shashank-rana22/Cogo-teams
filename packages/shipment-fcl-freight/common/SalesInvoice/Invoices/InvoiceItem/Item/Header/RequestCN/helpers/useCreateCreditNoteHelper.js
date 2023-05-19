@@ -1,16 +1,20 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
+import useCreateShipmentCreditNote from '../../../../../../../../hooks/useCreateShipmentCreditNote';
 import formatCreditNoteData from '../../../../../../CreditNote/helpers/format-credit-note-data';
-import creditNoteControls from '../helpers/controls';
+
+import creditNoteControls from './controls';
 
 const useCreateCreditNoteHelper = ({
 	services,
 	invoice = {},
 	servicesIDs = [],
-	isEdit = false,
 	invoiceData = {},
+	setOpen = () => {},
+	refetchCN = () => {},
 }) => {
 	const [errors, setError] = useState({});
 	const [selectedCodes, setSelectedCodes] = useState({});
@@ -27,7 +31,6 @@ const useCreateCreditNoteHelper = ({
 		handleChange,
 		setAllChargeCodes,
 		allChargeCodes,
-		isEdit,
 	});
 	const generateDefaultValues = ({ values }) => {
 		const defaultValues = {};
@@ -73,17 +76,31 @@ const useCreateCreditNoteHelper = ({
 		}
 	});
 
+	const { apiTrigger } = useCreateShipmentCreditNote({});
 	const onCreate = async (data) => {
-		const { submit_data } = formatCreditNoteData({
+		const { submit_data, checkError } = formatCreditNoteData({
 			data,
 			servicesIDs,
 			invoice,
 			invoiceData,
-			isEdit,
 		});
 
 		if (submit_data?.line_items?.length === 0) {
 			Toast.error('Line Items is required');
+		}
+		let isError = false;
+		Object.keys(checkError).forEach((key) => {
+			checkError[key].forEach((t) => {
+				if (!isEmpty(t)) {
+					isError = true;
+				}
+			});
+		});
+
+		if (isError === false) {
+			await apiTrigger(submit_data);
+			setOpen(false);
+			refetchCN();
 		}
 	};
 

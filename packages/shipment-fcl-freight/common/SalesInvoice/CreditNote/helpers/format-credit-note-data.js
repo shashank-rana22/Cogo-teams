@@ -22,7 +22,7 @@ const formatCreditNoteData = ({
 	(Object.keys(data) || []).forEach((key) => {
 		if (servicesIDs.includes(key)) {
 			(data[key] || []).forEach((line_item) => {
-				if (line_item?.is_checked === 'true' || isEdit) {
+				if (line_item?.is_checked === true || isEdit) {
 					const serviceDetails = invoice?.services?.filter(
 						(item) => item?.service_id === key,
 					)?.[0];

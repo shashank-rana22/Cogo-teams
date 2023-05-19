@@ -13,7 +13,6 @@ function EditLineItems({
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
 
-	console.log('showDeleteButton---', controls, showDeleteButton);
 	return (
 		<div className={styles.container}>
 			<CargoDetails primary_service={cargoDetails} />
