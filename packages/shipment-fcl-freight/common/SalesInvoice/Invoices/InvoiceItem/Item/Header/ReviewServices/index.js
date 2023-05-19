@@ -18,7 +18,7 @@ function ReviewServices({
 
 	const [value, setValue] = useState(false);
 	const [showExchangeRateConfirmation, setShowExchangeRateConfirmation] = useState(changeApplicableState);
-	console.log(invoice, ' :invoice');
+
 	const refetchAfterCall = () => {
 		setShowReview(false);
 		refetch();

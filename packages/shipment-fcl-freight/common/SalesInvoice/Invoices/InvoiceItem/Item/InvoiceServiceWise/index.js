@@ -9,7 +9,6 @@ import styles from './styles.module.css';
 const BILLED_ITEMS_CODE = ['BookingCONV', 'BookingNOST'];
 
 function InvoiceServiceWise({ item = {}, loading = false }) {
-	console.log(item, " :item");
 	const {
 		service_total_discounted,
 		service_total_currency,

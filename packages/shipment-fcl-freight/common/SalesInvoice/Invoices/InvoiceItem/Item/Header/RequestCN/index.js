@@ -1,7 +1,7 @@
 import { Modal } from '@cogoport/components';
 import React from 'react';
 
-import Form from './Form';
+// import Form from './Form';
 import styles from './styles.module.css';
 
 function RequestCN({
@@ -13,10 +13,10 @@ function RequestCN({
 	invoiceData = {},
 }) {
 	return (
-		<Modal show={show} onClose={() => setShow(false)} className="primary xl">
+		<Modal show={show} onClose={() => setShow(false)}>
 			<Modal.Header title="REQUEST CREDIT NOTE" />
 			<Modal.Body>
-				<div className={styles.div} style={{ fontSize: 14 }}>
+				<div className={styles.div}>
 					<div className={styles.bold_text}>
 						SID
 						{' '}
@@ -30,13 +30,13 @@ function RequestCN({
 
 			</Modal.Body>
 
-			<Form
+			{/* <Form
 				shipment_serial_id={shipment_serial_id}
 				invoice={invoice}
 				setShow={setShow}
 				refetchCN={refetchCN}
 				invoiceData={invoiceData}
-			/>
+			/> */}
 		</Modal>
 	);
 }

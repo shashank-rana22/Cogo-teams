@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { TextAreaController, UploadController, useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useCreditNoteNullify from '../../../../../../../hooks/useCreditNoteNullify';
@@ -29,7 +30,8 @@ function CNNullify({
 		refetch   : refetchAfterApiCall,
 	});
 
-	const { handleSubmit, control, reset } = useForm();
+	const { handleSubmit, control, reset, watch } = useForm();
+	const formValues = watch();
 
 	const handleNo = () => {
 		setIsRequestCN(true);
@@ -75,12 +77,11 @@ function CNNullify({
 					</Button>
 					<Button
 						onClick={handleSubmit(onCreate)}
-						disabled={loading}
+						disabled={loading || isEmpty(formValues.remarks) || isEmpty(formValues.file)}
 						size="md"
 					>
 						Revoke Invoice
 					</Button>
-
 				</Modal.Footer>
 			</Modal>
 
