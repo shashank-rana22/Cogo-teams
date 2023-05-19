@@ -15,22 +15,13 @@ function Content({
 	shipment_data,
 	handleSave,
 	handleView,
-	primary_service,
 	receivedViaEmail,
 	showUploadText,
 	setShowDoc,
 	setShowApproved,
 	docType,
 }) {
-	console.log('uploadedItem', uploadedItem);
-	const isBlReleased = [
-		'approved',
-		'released',
-		'surrendered',
-		'delivered',
-	].includes(uploadedItem?.bl_detail_status);
-
-	const tradeType = primary_service?.trade_type;
+	const state = uploadedItem?.state === 'document_accepted';
 
 	const getUploadButton = () => {
 		if (showUploadText.length) {
@@ -112,13 +103,7 @@ function Content({
 
 				{isChecked ? (
 					<div className={styles.action_container}>
-						{(!(
-							[
-								'house_bill_of_lading',
-								'bill_of_lading',
-							].includes(uploadedItem?.document_type) && tradeType === 'export'
-						)
-						|| isBlReleased)
+						{state
 							? (
 								<>
 									<Button

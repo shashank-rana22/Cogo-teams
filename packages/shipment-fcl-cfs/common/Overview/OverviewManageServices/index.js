@@ -1,6 +1,6 @@
 import { Accordion } from '@cogoport/components';
 
-import { AdditionalServiceList } from '../../AdditionalServices';
+// import { AdditionalServiceList } from '../../AdditionalServices';
 import Services from '../Services';
 
 import styles from './styles.module.css';

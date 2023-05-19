@@ -52,7 +52,7 @@ function Services() {
 								))}
 							</div>
 
-							{!['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder)
+							{['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder)
 								&& tradeTypeBasedServiceType[primary_service?.trade_type] === serviceCategory ? (
 									<div className={styles.upselling}>
 										{(upsellServices[serviceCategory]).map((service) => (

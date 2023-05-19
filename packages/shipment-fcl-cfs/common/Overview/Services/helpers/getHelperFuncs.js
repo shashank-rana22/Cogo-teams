@@ -5,11 +5,6 @@ const checkIfServiceAlreadyPresent = (servicesObj, service) => {
 	return true;
 };
 
-// const tradeTypeBasedServiceType = {
-// 	import : 'fcl_freight_local_service_import',
-// 	export : 'fcl_freight_local_service_export',
-// };
-
 const helperFuncs = (servicesList, possibleServices) => {
 	const serviceObj = {
 		originServices      : {},
@@ -23,11 +18,8 @@ const helperFuncs = (servicesList, possibleServices) => {
 		destinationServices : [],
 	};
 
-	console.log('servicesList', servicesList);
-
 	const classifyTradeTypeBasedService = (serviceToIterate) => {
 		let isServiceAlreadyAdded = false;
-		console.log('serviceToIterate', serviceToIterate);
 
 		(servicesList || []).forEach((service) => {
 			const { service_type, trade_type } = service || {};

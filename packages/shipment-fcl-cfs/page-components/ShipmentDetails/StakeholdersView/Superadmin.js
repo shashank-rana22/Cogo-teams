@@ -1,7 +1,6 @@
 import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-import { Tracking } from '@cogoport/ocean-modules';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
@@ -26,8 +25,7 @@ const services_additional_methods = ['stakeholder', 'service_objects'];
 function Superadmin({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
 
-	// const [activeTab, setActiveTab] = useState('timeline_and_tasks');
-	const [activeTab, setActiveTab] = useState('overview');
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 
@@ -99,9 +97,9 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 					{/* <ShipmentChat /> */}
 				</div>
 
-				{/* <CancelDetails /> */}
+				<CancelDetails />
 
-				{/* <DocumentHoldDetails /> */}
+				<DocumentHoldDetails />
 
 				<div className={styles.header}>
 					<ShipmentHeader get={get} />
@@ -130,17 +128,14 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 							<Documents />
 						</TabPanel>
 
-						{/* <TabPanel name="emails" title="Emails">
+						<TabPanel name="emails" title="Emails">
 							<ShipmentMails
 								source="cogo_rpa"
 								filters={{ q: shipment_data?.serial_id }}
 								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
-						</TabPanel> */}
+						</TabPanel>
 
-						{/* <TabPanel name="tracking" title="Tracking">
-							<Tracking shipmentData={shipment_data} />
-						</TabPanel> */}
 					</Tabs>
 				</div>
 			</div>
