@@ -206,15 +206,16 @@ function GenerateMawb({
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 
-				(docCopies || []).forEach((item, i) => {
+				(docCopies || copiesValue || []).forEach((item, i) => {
 					pdf.addImage(Object.values(item)[1] === 'updated' ? `${Object.values(item)[0]}`
 						: imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 					if (!whiteout) {
-						pdf.addImage(footerImages[Object.keys(item)[0]], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
+						pdf.addImage(footerImages[Object.keys(item)[0]]
+							|| footerImages[item], 'jpeg', 0, pdfHeight - 14, pdfWidth, 4.5);
 					}
 
 					if (download24) {
-						if (includeTnC.includes(Object.keys(item)[0])) {
+						if (includeTnC.includes(Object.keys(item)[0] || item)) {
 							pdf.addPage();
 							pdf.addImage(backPage, 'jpeg', 0, 0, pdfWidth, pdfHeight);
 						} else {
