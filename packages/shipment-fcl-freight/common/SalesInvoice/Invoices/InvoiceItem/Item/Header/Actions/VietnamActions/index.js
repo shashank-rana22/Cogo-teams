@@ -5,14 +5,12 @@ import {
 	IcCError,
 	IcMEmail,
 } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';
 import AddRemarks from '../../AddRemarks';
 import ChangeCurrency from '../../ChangeCurrency';
-import EditInvoice from '../../EditInvoice';
 import OTPVerification from '../../OTPVerification';
 import ReviewServices from '../../ReviewServices';
 import AmendmentReasons from '../AmendmentReasons';
@@ -31,7 +29,6 @@ function Actions({
 	bfInvoice = {},
 }) {
 	const [show, setShow] = useState(false);
-	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
@@ -40,10 +37,6 @@ function Actions({
 	const [showOtpModal, setOTPModal] = useState(false);
 	const [rejectInvoice, setRejectInvoice] = useState(false);
 	const showForOldShipments =		shipment_data.serial_id <= 120347 && invoice.status === 'pending';
-
-	const { user_data } = useSelector(({ profile }) => ({
-		user_data: profile || {},
-	}));
 
 	let disableAction = showForOldShipments
 		? isIRNGenerated
@@ -72,11 +65,6 @@ function Actions({
 		status: 'approved',
 	});
 
-	const handleClickInvoice = () => {
-		setShow(false);
-		setIsEditInvoice(true);
-	};
-
 	const handleClickCurrency = () => {
 		setIsChangeCurrency(true);
 		setShow(false);
@@ -104,29 +92,12 @@ function Actions({
 		salesInvoicesRefetch();
 	};
 
-	// goods_transport_agency
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-		|| user_data.email === 'ajeet@cogoport.com';
-
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	const content = (
 		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
-					{editInvoicesVisiblity ? (
-						<div style={{ width: '100%' }}>
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.text}
-								onClick={handleClickInvoice}
-							>
-								Edit Invoices
-							</div>
-							<div className={styles.line} />
-						</div>
-					) : null}
 					<div>
 						<div
 							role="button"
@@ -315,16 +286,6 @@ function Actions({
 					) : null}
 				</div>
 			</div>
-
-			{(invoice.services || []).length && isEditInvoice ? (
-				<EditInvoice
-					show={isEditInvoice}
-					onClose={() => setIsEditInvoice(false)}
-					invoice={invoice}
-					refetch={handleRefetch}
-					shipment_data={shipment_data}
-				/>
-			) : null}
 
 			{showReview ? (
 				<ReviewServices

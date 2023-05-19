@@ -1,17 +1,15 @@
-import { Button, Popover, Tooltip } from '@cogoport/components';
+import { Button, Popover, Tooltip, cl } from '@cogoport/components';
 import {
 	IcMOverflowDot,
 	IcMInfo,
 	IcCError,
 	IcMEmail,
 } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AddRemarks from '../AddRemarks';
 import ChangeCurrency from '../ChangeCurrency';
-import EditInvoice from '../EditInvoice';
 import OTPVerification from '../OTPVerification';
 import ReviewServices from '../ReviewServices';
 
@@ -29,7 +27,6 @@ function Actions({
 	salesInvoicesRefetch = () => {},
 }) {
 	const [show, setShow] = useState(false);
-	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
@@ -37,8 +34,6 @@ function Actions({
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setShowOTPModal] = useState(false);
 	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
-
-	const user_data = useSelector(({ profile }) => profile || {});
 
 	let disableAction = showForOldShipments
 		? isIRNGenerated
@@ -60,11 +55,6 @@ function Actions({
 		disableMarkAsReviewed = isIRNGenerated && isInvoiceBefore20Aug2022;
 	}
 	// HARD CODING ENDS
-
-	const handleClickInvoice = () => {
-		setShow(false);
-		setIsEditInvoice(true);
-	};
 
 	const handleClickCurrency = () => {
 		setIsChangeCurrency(true);
@@ -93,30 +83,12 @@ function Actions({
 		salesInvoicesRefetch();
 	};
 
-	// goods_transport_agency
-	const editInvoicesVisiblity =	(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-		|| user_data.email === 'ajeet@cogoport.com';
-
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	const content = (
 		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
-					{editInvoicesVisiblity ? (
-						<div style={{ width: '100%' }}>
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.text}
-								onClick={handleClickInvoice}
-							>
-								Edit Invoices
-							</div>
-							<div className={styles.line} />
-						</div>
-					) : null}
-
 					<div>
 						<div
 							role="button"
@@ -231,18 +203,18 @@ function Actions({
 										{invoice.proforma_email_count || 0}
 									</div>
 
-									<div className={styles.flex_row}>
+									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
 										{' '}
 										{invoice.sales_email_count || 0}
 									</div>
-									<div className={styles.flex_row}>
-										<div className={styles.flex_row}>
+									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
+										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											UTR Number:
 											{' '}
 											{invoice?.sales_utr?.utr_number || ''}
 										</div>
-										<div className={styles.flex_row}>
+										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											Status:
 											{' '}
 											{invoice?.sales_utr?.status || ''}
@@ -295,16 +267,6 @@ function Actions({
 					) : null}
 				</div>
 			</div>
-
-			{(invoice.services || []).length && isEditInvoice ? (
-				<EditInvoice
-					show={isEditInvoice}
-					onClose={() => setIsEditInvoice(false)}
-					invoice={invoice}
-					BfInvoiceRefetch={handleRefetch}
-					shipment_data={shipment_data}
-				/>
-			) : null}
 
 			{showReview ? (
 				<ReviewServices
