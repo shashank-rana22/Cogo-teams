@@ -44,6 +44,7 @@ function AddRemarks({
 					rows="6"
 					onChange={(e) => setRemarkValue(e)}
 					placeholder="Add remarks for your invoice..."
+					style={{ padding: '3px' }}
 				/>
 			</Modal.Body>
 			<Modal.Footer>
