@@ -70,6 +70,7 @@ function Layout({
 						}
 
 						if (type === 'edit_service_charges') {
+							console.log('field', field);
 							return (
 								<div className={styles.width_100} key={field.name}>
 									<EditServiceCharges

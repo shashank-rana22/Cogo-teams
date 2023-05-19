@@ -14,6 +14,7 @@ function Child({
 	field = {},
 	remove = () => {},
 	customValues = {},
+	showDeleteButton = true,
 }) {
 	return (
 		<div className={styles.container}>
@@ -43,9 +44,12 @@ function Child({
 					);
 				})}
 
-				<div className={styles.delete_button_container}>
-					<IcMDelete width={20} height={20} onClick={() => remove(index, 1)} />
-				</div>
+				{showDeleteButton
+					? (
+						<div className={styles.delete_button_container}>
+							<IcMDelete width={20} height={20} onClick={() => remove(index, 1)} />
+						</div>
+					) : null}
 			</div>
 		</div>
 	);
