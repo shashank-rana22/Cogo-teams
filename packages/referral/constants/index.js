@@ -27,7 +27,11 @@ export const ACTIVITY_STATUS = {
 	provisional : '#c0392b',
 };
 
-export const LEVEL_DATA = ['L1', 'L10', 'L20', 'L30', 'L40', 'L50', 'L60'];
+export const FIRST_LEVEL_DATA = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7'];
+
+export const SECOUND_LEVEL_DATA = ['L1', 'L3', 'L6', 'L9', 'L12', 'L15', 'L17', 'L19'];
+
+export const THIRD_LEVEL_DATA = ['L1', 'L10', 'L20', 'L30', 'L40', 'L50', 'L60'];
 
 export const REFERRAL_TYPES = [
 	{

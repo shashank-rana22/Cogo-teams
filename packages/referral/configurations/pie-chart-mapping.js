@@ -1,4 +1,5 @@
 import getFormatedChartData from '../utils/getFormatedChartData';
+import { handleValues } from '../utils/handleValue';
 
 const pieChartMapping = (
 	alloted = {},
@@ -12,6 +13,8 @@ const pieChartMapping = (
 		return totalCount;
 	};
 
+	const totalAllotedCogoppoints = chartCount();
+
 	const {
 		allottedData = [],
 	} = getFormatedChartData(
@@ -22,7 +25,7 @@ const pieChartMapping = (
 		{
 			title       : 'Allotted',
 			data        : allottedData,
-			total_count : chartCount(),
+			total_count : handleValues(totalAllotedCogoppoints),
 		},
 
 	];

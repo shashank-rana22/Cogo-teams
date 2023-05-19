@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { handleValues } from '../../../../../utils/handleValue';
+
 import styles from './styles.module.css';
 
 function StatusDetails({ userData = {} }) {
@@ -33,7 +35,7 @@ function StatusDetails({ userData = {} }) {
 				<div className={styles.stats} key={item}>
 					<div className={styles.circle} style={{ background: `${item?.color}` }} />
 					<div className={styles.count}>
-						{item.value}
+						{handleValues(item.value)}
 					</div>
 					<div className={styles.label}>{item.label}</div>
 				</div>

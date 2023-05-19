@@ -1,6 +1,8 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { cl } from '@cogoport/components';
 
+import { handleValues } from '../../utils/handleValue';
+
 import styles from './styles.module.css';
 
 function SemiPieChart({ usersData = [] }) {
@@ -15,7 +17,7 @@ function SemiPieChart({ usersData = [] }) {
 			)}
 
 			<div className={cl`${styles.view} ${totalCount === 0 ? styles.empty_count : styles.non_empty_count}`}>
-				<div className={styles.total_count}>{totalCount}</div>
+				<div className={styles.total_count}>{handleValues(totalCount)}</div>
 				<div className={styles.sub_text}>Total Users </div>
 			</div>
 

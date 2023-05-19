@@ -2259,8 +2259,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'referral-dashboard',
 				title         : 'Dashboard',
-				href          : '/referral/dashboard',
-				as            : '/referral/dashboard',
+				href          : '/v2/referral/dashboard',
+				as            : '/v2/referral/dashboard',
 				type          : 'link',
 				possible_apis : apis.referral_dashboard,
 			},

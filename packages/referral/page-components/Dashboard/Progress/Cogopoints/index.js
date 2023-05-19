@@ -4,6 +4,7 @@ import React from 'react';
 import DetailsPieCharts from '../../../../common/DetailsPieCharts';
 import cogopointsMapping from '../../../../configurations/cogopoints-mapping';
 import pieChartMapping from '../../../../configurations/pie-chart-mapping';
+import { handleValues } from '../../../../utils/handleValue';
 
 import ReferralPercentage from './ReferralPercentage';
 import ReferralTypes from './ReferralTypes';
@@ -14,7 +15,7 @@ function Cogopoints({ cogopointData = {} }) {
 		network_bonus = 0,
 		referral_bonus = 0,
 		alloted = {},
-		estimated = 0,
+		esitimated: estimated = 0,
 	} = cogopointData;
 
 	const { detailsPieChart } = pieChartMapping(alloted);
@@ -46,7 +47,7 @@ function Cogopoints({ cogopointData = {} }) {
 					<div className={styles.view}>
 						<div className={styles.count_container}>
 							<IcCCogoCoin className={styles.coin_icon} />
-							<div className={styles.number}>{estimated}</div>
+							<div className={styles.number}>{handleValues(estimated)}</div>
 						</div>
 
 						<div className={styles.sub_text}>Estimated</div>
@@ -58,7 +59,7 @@ function Cogopoints({ cogopointData = {} }) {
 						<div className={styles.view} key={title}>
 							<div className={styles.count_container}>
 								<IcCCogoCoin className={styles.coin_icon} />
-								<div className={styles.number}>{ points}</div>
+								<div className={styles.number}>{ handleValues(points)}</div>
 							</div>
 
 							<div className={styles.sub_text}>{title}</div>

@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
 const useGetAdminStats = ({ date = {} }) => {
-	const { endDate = null, startDate = null } = date || {};
+	const { endDate, startDate } = date || {};
 
 	const [{ data: statsData, loading: statsLoading }, trigger] = useRequest({
 		url    : '/get_referral_admin_stats',

@@ -1,5 +1,4 @@
 import { SingleDateRange } from '@cogoport/components';
-import { IcMCalendar } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import useGetAdminStats from '../../hooks/useGetAdminStats';
@@ -38,10 +37,11 @@ function Dashboard() {
 					<SingleDateRange
 						placeholder="From - To"
 						dateFormat="MM/dd/yyyy"
-						suffix={(<IcMCalendar />)}
 						name="date"
+						maxDate={new Date()}
 						onChange={setDate}
 						value={date}
+						isPreviousDaysAllowed
 					/>
 				</div>
 			</div>
