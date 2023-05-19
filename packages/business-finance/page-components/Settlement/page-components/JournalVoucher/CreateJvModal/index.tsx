@@ -95,6 +95,7 @@ function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
 
 	const handleEntityChange = (val, obj) => {
 		setValue('ledCurrency', obj?.ledger_currency);
+		setValue('currency', obj?.ledger_currency);
 	};
 
 	return (
@@ -109,8 +110,10 @@ function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
 							name="entityCode"
 							asyncKey="list_cogo_entity"
 							onChange={handleEntityChange}
-							renderLabel={(item) => (`${item?.business_name} - ${item?.entity_code}`)}
+							renderLabel={(item) => (`${item?.entity_code} - ${item?.business_name}`)}
 							placeholder="Select Entity"
+							labelKey="entity_code"
+							initialCall
 							rules={{ required: true }}
 						/>
 						{errors?.entityCode ? (
@@ -127,6 +130,7 @@ function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
 							asyncKey="journal_category"
 							renderLabel={(item) => (`${item?.category} - ${item?.description}`)}
 							placeholder="JV Category"
+							initialCall
 							rules={{ required: true }}
 						/>
 						{errors?.category ? (
@@ -171,6 +175,7 @@ function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
 							name="journal"
 							asyncKey="journal_code"
 							placeholder="Select Journal"
+							initialCall
 							renderLabel={(item) => (`${item?.number} - ${item?.description}`)}
 							rules={{ required: true }}
 						/>

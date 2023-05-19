@@ -136,7 +136,6 @@
 .link {
 	padding: 8px;
 	color: var(--color-accent-orange-2);
-	text-decoration: underline;
 }
 
 .flexcol {
@@ -148,7 +147,7 @@
 .container {
 	:global {
 		.ui_popover_container {
-			width: 130px;
+			width: 140px;
 		}
 	}
 }

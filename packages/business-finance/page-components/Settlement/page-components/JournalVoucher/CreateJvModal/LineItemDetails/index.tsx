@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function LineItemDetails({
 	control,
-	watch = () => { },
+	watch = () => {},
 	entity,
 	errors,
 	getGlCode,

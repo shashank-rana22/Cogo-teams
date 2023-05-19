@@ -9,7 +9,7 @@ const useGetGlCode = () => {
 			method  : 'get',
 			authKey : 'get_payments_parent_jv_gl_code_master',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const getGlCode = useCallback(({ index, entityCode, accMode, setValue }) => {

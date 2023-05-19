@@ -384,7 +384,7 @@ function asyncJournalCode() {
 function asyncAccMode() {
 	return {
 		labelKey     : 'label',
-		valueKey     : 'value',
+		valueKey     : 'label',
 		endpoint     : 'payments/parent-jv/acc-mode',
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_acc_mode',

@@ -24,7 +24,7 @@ function useGetAsyncOptionsMicroservice({
 
 	const useRequestMicroservice = REQUEST_HOOK_MAPPING[microService] || useRequest;
 
-	const filterQuery = searchByq ? { q: query } : { filters: { q: query } };
+	const filterQuery = searchByq ? { q: query || undefined } : { filters: { q: query || undefined } };
 
 	const [{ data, loading }] = useRequestMicroservice({
 		url    : endpoint,
@@ -86,7 +86,7 @@ function useGetAsyncOptionsMicroservice({
 
 		try {
 			const res = await triggerSingle({
-				params: merge(params, { filters: { [valueKey]: value } }),
+				params: merge(params, (searchByq ? { q: value } : { filters: { [valueKey]: value } })),
 			});
 			return res?.data?.list?.[0] || res?.data?.[0] || null;
 		} catch (err) {

@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -46,25 +46,24 @@ function ColumnCard({ item, refetch }: Props) {
 	const deletePostRender = (
 		<div className={styles.flexend}>
 			{STATUS?.includes(item?.status) ? (
-				<div
+				<Button
 					className={styles.posttosage}
 					onClick={() => {
 						setShowConfirm('post');
 					}}
-					role="presentation"
+					style={{ marginBottom: '4px' }}
 				>
 					Post To Sage
-				</div>
+				</Button>
 			) : null}
-			<div
+			<Button
 				className={styles.posttosage}
 				onClick={() => {
 					setShowConfirm('delete');
 				}}
-				role="presentation"
 			>
 				Delete
-			</div>
+			</Button>
 		</div>
 	);
 

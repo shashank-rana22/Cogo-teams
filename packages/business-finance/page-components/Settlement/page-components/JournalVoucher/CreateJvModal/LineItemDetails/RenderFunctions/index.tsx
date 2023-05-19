@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Button, Popover } from '@cogoport/components';
 import { AsyncSelectController, InputController } from '@cogoport/forms';
 import { IcMDelete, IcMOverflowDot } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
@@ -10,24 +10,23 @@ import styles from './styles.module.css';
 
 const renderButtons = ({ lineitemvalue, insert, index }) => (
 	<div className={styles.flexcol}>
-		<div
+		<Button
 			className={styles.link}
-			role="presentation"
 			onClick={() => {
 				insert(index + 1, lineitemvalue);
 			}}
+			style={{ marginBottom: '4px' }}
 		>
 			Duplicate
-		</div>
-		<div
+		</Button>
+		<Button
 			className={styles.link}
-			role="presentation"
 			onClick={() => {
 				insert(index + 1, EMPTY_LINE_ITEMS);
 			}}
 		>
 			Insert
-		</div>
+		</Button>
 	</div>
 );
 
@@ -77,6 +76,8 @@ export const renderLineItemFunctions = {
 				disabled
 				asyncKey="list_cogo_entity"
 				placeholder="Select Entity"
+				labelKey="entity_code"
+				initialCall
 			/>
 			{errors?.line_items?.[index]?.entityCode ? (
 				<div className={styles.errors}>
@@ -91,8 +92,10 @@ export const renderLineItemFunctions = {
 				control={control}
 				name={`line_items.${index}.accMode`}
 				placeholder="Select Mode"
+				initialCall
 				asyncKey="jv_account_mode"
 				rules={{ required: !isEmpty(watch(`line_items.${index}.tradePartyId`)) }}
+				disabled={isEmpty(entity)}
 				onChange={(val) => {
 					handleModeChange({
 						index,
@@ -120,9 +123,10 @@ export const renderLineItemFunctions = {
 					placeholder="Select Code"
 					renderLabel={(option) => renderGlcode(option)}
 					asyncKey="jv_code_master"
+					disabled={isEmpty(entity)}
 					params={{
-						accMode,
-						entityCode: entity || undefined,
+						accMode    : accMode || undefined,
+						entityCode : entity || undefined,
 					}}
 					rules={{ required: true }}
 				/>
@@ -142,6 +146,7 @@ export const renderLineItemFunctions = {
 				placeholder="Select Partner"
 				asyncKey="list_trade_parties"
 				renderLabel={(option) => renderTradeParty(option)}
+				initialCall
 				params={{
 					sage_organization_id_required : true,
 					filters                       : {
