@@ -267,7 +267,6 @@ export const courseColumns = ({
 				setShowModal={setShowModal}
 				setCourseId={setCourseId}
 				router={router}
-				fetchList={fetchList}
 			/>
 		),
 	},

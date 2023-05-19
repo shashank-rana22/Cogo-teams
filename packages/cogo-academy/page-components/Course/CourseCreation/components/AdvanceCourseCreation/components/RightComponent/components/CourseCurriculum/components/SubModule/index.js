@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../../../../../../../commons/EmptyState';
+
 import styles from './styles.module.css';
 import SubModuleComponent from './SubModuleComponent';
 import useHandleSubModule from './useHandleSubModule';
@@ -16,6 +18,7 @@ function SubModule({
 	getCourseModuleDetails,
 	getSubModuleRefetch,
 	setGetSubModuleRefetch,
+	showButtons,
 }) {
 	const {
 		onSaveSubModule,
@@ -29,7 +32,12 @@ function SubModule({
 		module,
 		id,
 		course_module_id,
+		showButtons,
 	});
+
+	if (isEmpty(courseSubModule)) {
+		return <EmptyState emptyText="No sub modules found" />;
+	}
 
 	return (
 		<div style={{ padding: '16px' }}>
@@ -51,19 +59,22 @@ function SubModule({
 						getSubModuleRefetch={getSubModuleRefetch}
 						setGetSubModuleRefetch={setGetSubModuleRefetch}
 						courseSubModule={courseSubModule}
+						showButtons={showButtons}
 					/>
 				</div>
 			))}
 
-			<Button
-				type="button"
-				className={styles.button}
-				themeType="secondary"
-				onClick={addNewCourseSubModule}
-				disabled={isEmpty(courseSubModule) || courseSubModule[courseSubModule.length - 1].isNew}
-			>
-				+ Sub Module
-			</Button>
+			{showButtons ? (
+				<Button
+					type="button"
+					className={styles.button}
+					themeType="secondary"
+					onClick={addNewCourseSubModule}
+					disabled={isEmpty(courseSubModule) || courseSubModule[courseSubModule.length - 1].isNew}
+				>
+					+ Sub Module
+				</Button>
+			) : null}
 		</div>
 	);
 }

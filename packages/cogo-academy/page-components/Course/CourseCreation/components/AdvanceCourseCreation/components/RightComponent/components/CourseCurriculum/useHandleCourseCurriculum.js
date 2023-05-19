@@ -5,15 +5,17 @@ import useGetCourseModuleDetails from '../../../../hooks/useGetCourseModuleDetai
 import useUpdateSequenceOrder from '../../../../hooks/useUpdateSequenceOrder';
 import getSequenceOrderPayload from '../../../../utils/getSequenceOrderPayload';
 
-const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
+const useHandleCourseCurriculum = ({ courseId, activeTab, mode }) => {
 	const [finalData, setFinalData] = useState([]);
 	const [draggedNode, setDraggedNode] = useState(null);
 	const [getSubModuleRefetch, setGetSubModuleRefetch] = useState(false);
 
+	const showButtons = mode !== 'view';
+
 	const {
 		getCourseModuleDetails,
 		loading: getLoading,
-	} = useGetCourseModuleDetails({ id: courseId, setFinalData, activeTab });
+	} = useGetCourseModuleDetails({ id: courseId, setFinalData, activeTab, showButtons });
 
 	const { updateSequenceOrder } = useUpdateSequenceOrder({ getCourseModuleDetails, setGetSubModuleRefetch });
 
@@ -96,6 +98,7 @@ const useHandleCourseCurriculum = ({ courseId, activeTab }) => {
 		getCourseModuleDetails,
 		getSubModuleRefetch,
 		setGetSubModuleRefetch,
+		showButtons,
 	};
 };
 

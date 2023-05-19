@@ -13,6 +13,7 @@ function ChapterContent({
 	subModuleId,
 	index,
 	chapterLoading,
+	showButtons,
 }) {
 	const {
 		RichTextEditor,
@@ -189,11 +190,13 @@ function ChapterContent({
 				);
 			})}
 
-			<div className={styles.button_container}>
-				<Button loading={chapterLoading} type="submit">
-					Save
-				</Button>
-			</div>
+			{showButtons ? (
+				<div className={styles.button_container}>
+					<Button loading={chapterLoading} type="submit">
+						Save
+					</Button>
+				</div>
+			) : null}
 		</form>
 	);
 }

@@ -7,7 +7,7 @@ import RightComponent from './components/RightComponent';
 import useGetCogoAcademyCourse from './hooks/useGetCogoAcademyCourse';
 import styles from './styles.module.css';
 
-function AdvanceCourseCreation({ id }) {
+function AdvanceCourseCreation({ id, mode }) {
 	const [activeTab, setActiveTab] = useState('overview');
 
 	const { data, loading, getCogoAcademyCourse } = useGetCogoAcademyCourse(id);
@@ -35,7 +35,7 @@ function AdvanceCourseCreation({ id }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>
-				<LeftComponent setActiveTab={setActiveTab} activeTab={activeTab} />
+				<LeftComponent setActiveTab={setActiveTab} activeTab={activeTab} mode={mode} />
 			</div>
 
 			<div className={styles.right_section}>
@@ -45,6 +45,7 @@ function AdvanceCourseCreation({ id }) {
 					id={id}
 					getCogoAcademyCourse={getCogoAcademyCourse}
 					setActiveTab={setActiveTab}
+					mode={mode}
 				/>
 			</div>
 		</div>

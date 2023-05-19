@@ -20,7 +20,7 @@ const COMPONENT_MAPPING = {
 	publish       : PublishCourse,
 };
 
-function RightComponent({ data = {}, activeTab, id, getCogoAcademyCourse, setActiveTab }) {
+function RightComponent({ data = {}, activeTab, id, getCogoAcademyCourse, setActiveTab, mode = '' }) {
 	const childRef = useRef({});
 
 	const ActiveComponent = COMPONENT_MAPPING[activeTab] || CourseCurriculum;
@@ -34,6 +34,7 @@ function RightComponent({ data = {}, activeTab, id, getCogoAcademyCourse, setAct
 				getCogoAcademyCourse={getCogoAcademyCourse}
 				data={data}
 				setActiveTab={setActiveTab}
+				mode={mode}
 			/>
 
 			<ActiveComponent
@@ -44,6 +45,7 @@ function RightComponent({ data = {}, activeTab, id, getCogoAcademyCourse, setAct
 				id={id}
 				activeTab={activeTab}
 				getCogoAcademyCourse={getCogoAcademyCourse}
+				mode={mode}
 			/>
 		</div>
 	);

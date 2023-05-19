@@ -10,6 +10,7 @@ const useHandleSubModule = ({
 	module,
 	id,
 	course_module_id,
+	showButtons,
 }) => {
 	const { course_sub_modules = [] } = module || {};
 
@@ -47,7 +48,7 @@ const useHandleSubModule = ({
 		]);
 	};
 
-	if (isEmpty(courseSubModule)) {
+	if (isEmpty(courseSubModule) && showButtons) {
 		setCourseSubModule([
 			{
 				id                         : new Date().getTime(),

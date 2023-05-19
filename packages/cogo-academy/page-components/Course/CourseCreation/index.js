@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 function CourseCreation() {
 	const { query } = useRouter();
 
-	const { id } = query || {};
+	const { id, mode } = query || {};
 
 	const [activeStepper, setActiveStepper] = useState('course_name');
 	const [courseData, setCourseData] = useState({
@@ -47,7 +47,7 @@ function CourseCreation() {
 			<Header />
 
 			{id ? (
-				<AdvanceCourseCreation id={id} />
+				<AdvanceCourseCreation id={id} mode={mode} />
 			) : (
 				<div className={styles.container}>
 					<div className={styles.stepper_container}>

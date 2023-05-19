@@ -3,8 +3,8 @@ import { IcMEyeopen, IcMDelete, IcMOverflowDot, IcMEdit } from '@cogoport/icons-
 
 import styles from './styles.module.css';
 
-const handleEditCourse = ({ id, router }) => {
-	router.push(`/learning/course/create?mode=edit&id=${id}`);
+const handleOpenCourse = ({ id, router, view }) => {
+	router.push(`/learning/course/create?mode=${view}&id=${id}`);
 };
 
 export function StudentButtons({ item, router, setStudentId, setShowModal, loading }) {
@@ -71,7 +71,6 @@ export function CourseButtons({
 	setShowModal,
 	setCourseId,
 	router,
-	fetchList = () => {},
 }) {
 	return (
 		<div>
@@ -84,10 +83,20 @@ export function CourseButtons({
 								loading={loading}
 								themeType="primary"
 								className={styles.btn}
-								onClick={() => handleEditCourse({ id, router })}
+								onClick={() => handleOpenCourse({ id, router, view: 'edit' })}
 							>
 								<IcMEdit />
 								<div>Edit</div>
+							</Button>
+
+							<Button
+								loading={loading}
+								themeType="accent"
+								className={styles.btn}
+								onClick={() => handleOpenCourse({ id, router, view: 'view' })}
+							>
+								<IcMEyeopen />
+								<div>View</div>
 							</Button>
 
 							<Button

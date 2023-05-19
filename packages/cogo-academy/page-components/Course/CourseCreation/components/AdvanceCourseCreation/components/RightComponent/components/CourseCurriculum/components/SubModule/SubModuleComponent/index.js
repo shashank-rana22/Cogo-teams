@@ -25,6 +25,7 @@ function SubModuleComponent({
 	getSubModuleRefetch,
 	setGetSubModuleRefetch,
 	courseSubModule,
+	showButtons,
 }) {
 	const {
 		handleSubmit,
@@ -106,16 +107,18 @@ function SubModuleComponent({
 					/>
 				) : null}
 
-				<div className={`${styles.button_container} ${subModule.isNew && styles.new}`}>
-					<Button loading={subModuleLoading} type="submit" size="sm">
-						Save
-					</Button>
+				{showButtons ? (
+					<div className={`${styles.button_container} ${subModule.isNew && styles.new}`}>
+						<Button loading={subModuleLoading} type="submit" size="sm">
+							Save
+						</Button>
 
-					<IcMDelete
-						onClick={() => deleteSubModule({ length: courseSubModule.length })}
-						className={`${styles.left} ${styles.icon}`}
-					/>
-				</div>
+						<IcMDelete
+							onClick={() => deleteSubModule({ length: courseSubModule.length })}
+							className={`${styles.left} ${styles.icon}`}
+						/>
+					</div>
+				) : null}
 			</form>
 		);
 	}
@@ -127,7 +130,7 @@ function SubModuleComponent({
 				title={(
 					<div
 						key={subModule.id}
-						draggable
+						draggable={showButtons}
 						onDragStart={(event) => handleDragStart(
 							event,
 							{ ...subModule, type: 'sub_module', start_course_module_id: course_module_id },
@@ -173,6 +176,7 @@ function SubModuleComponent({
 						getCourseModuleDetails={getCourseModuleDetails}
 						getSubModuleRefetch={getSubModuleRefetch}
 						setGetSubModuleRefetch={setGetSubModuleRefetch}
+						showButtons={showButtons}
 					/>
 				)}
 			</Accordion>

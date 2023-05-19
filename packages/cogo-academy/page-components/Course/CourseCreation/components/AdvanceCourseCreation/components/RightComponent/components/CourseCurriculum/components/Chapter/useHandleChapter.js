@@ -14,6 +14,7 @@ const useHandleChapter = ({
 	getCourseModuleDetails,
 	getSubModuleRefetch,
 	setGetSubModuleRefetch,
+	showButtons,
 }) => {
 	const { id } = subModule || {};
 
@@ -45,7 +46,7 @@ const useHandleChapter = ({
 		type      : 'chapter',
 	});
 
-	if (isEmpty(subModuleChapters)) {
+	if (isEmpty(subModuleChapters) && showButtons) {
 		setSubModuleChapters([{ id: new Date().getTime(), name: '', isNew: true, course_sub_module_id: id }]);
 	}
 

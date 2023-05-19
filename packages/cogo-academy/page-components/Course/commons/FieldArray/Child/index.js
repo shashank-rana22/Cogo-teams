@@ -12,7 +12,7 @@ function Child(props) {
 		name,
 		remove,
 		showDeleteButton = true,
-		noDeleteButtonTill = 0,
+		noDeleteButtonTill = 1,
 		disabled = false,
 		error = {},
 	} = props;
@@ -25,7 +25,10 @@ function Child(props) {
 				if (!Element) return null;
 
 				return (
-					<div className={styles.list}>
+					<div
+						key={`${name}.${index}.${controlItem.name}`}
+						className={styles.list}
+					>
 						<div className={styles.label}>{controlItem.label}</div>
 
 						<Element

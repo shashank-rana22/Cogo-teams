@@ -19,8 +19,6 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse }, re
 		loading,
 	} = useHandleIntendedLearners({ activeTab, data, ref, id, getCogoAcademyCourse });
 
-	console.log('eligible_users', data);
-
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {

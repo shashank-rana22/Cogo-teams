@@ -13,6 +13,7 @@ function Header({
 	getCogoAcademyCourse,
 	data,
 	setActiveTab,
+	mode,
 }) {
 	const { name, status = 'draft' } = data || {};
 
@@ -50,19 +51,21 @@ function Header({
 					/>
 				</div>
 
-				<div className={styles.right_part}>
-					<Button
-						type="button"
-						themeType="accent"
-						className={styles.button}
-						onClick={handleSubmitForm}
-						loading={loading}
-					>
-						Next
-						{' '}
-						<IcMArrowRight width={16} height={16} />
-					</Button>
-				</div>
+				{mode !== 'view' ? (
+					<div className={styles.right_part}>
+						<Button
+							type="button"
+							themeType="accent"
+							className={styles.button}
+							onClick={handleSubmitForm}
+							loading={loading}
+						>
+							Next
+							{' '}
+							<IcMArrowRight width={16} height={16} />
+						</Button>
+					</div>
+				) : null}
 			</div>
 
 			<div className={styles.bottom_container}>

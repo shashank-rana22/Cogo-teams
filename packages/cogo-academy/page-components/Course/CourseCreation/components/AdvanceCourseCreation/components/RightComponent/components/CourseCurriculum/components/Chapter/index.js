@@ -1,6 +1,8 @@
 import { Pill, Accordion, Button } from '@cogoport/components';
 import { IcMDelete, IcMDrag } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../../../../../../../commons/EmptyState';
 import LoadingState from '../../../../../../../../../commons/LoadingState';
 
 import ChapterContent from './ChapterContent';
@@ -16,6 +18,7 @@ function Chapter({
 	getCourseModuleDetails,
 	getSubModuleRefetch,
 	setGetSubModuleRefetch,
+	showButtons,
 }) {
 	const {
 		chapterLoading,
@@ -32,10 +35,15 @@ function Chapter({
 		getCourseModuleDetails,
 		getSubModuleRefetch,
 		setGetSubModuleRefetch,
+		showButtons,
 	});
 
 	if (getCourseSubModuleLoading || deleteLoading) {
 		return <LoadingState rowsCount={2} />;
+	}
+
+	if (isEmpty(subModuleChapters)) {
+		return <EmptyState emptyText="No chapters found" />;
 	}
 
 	return (
@@ -47,7 +55,7 @@ function Chapter({
 						title={(
 							<div
 								key={child.id}
-								draggable
+								draggable={showButtons}
 								onDragStart={(event) => handleDragStart(
 									event,
 									{
@@ -78,10 +86,12 @@ function Chapter({
 									<b className={styles.name}>{child.name}</b>
 								</div>
 
-								<IcMDelete
-									onClick={(e) => deleteChapter({ e, child, length: subModuleChapters.length })}
-									className={`${styles.left} ${styles.icon}`}
-								/>
+								{showButtons ? (
+									<IcMDelete
+										onClick={(e) => deleteChapter({ e, child, length: subModuleChapters.length })}
+										className={`${styles.left} ${styles.icon}`}
+									/>
+								) : null}
 
 								<Pill
 									style={{ marginLeft: '16px' }}
@@ -100,20 +110,23 @@ function Chapter({
 							index={index}
 							chapterLoading={chapterLoading}
 							getCourseSubModuleLoading={getCourseSubModuleLoading}
+							showButtons={showButtons}
 						/>
 					</Accordion>
 				</div>
 			))}
 
-			<Button
-				type="button"
-				className={styles.button}
-				themeType="secondary"
-				onClick={addNewChapter}
-				disabled={subModuleChapters[subModuleChapters.length - 1].isNew}
-			>
-				+ Chapter
-			</Button>
+			{showButtons ? (
+				<Button
+					type="button"
+					className={styles.button}
+					themeType="secondary"
+					onClick={addNewChapter}
+					disabled={subModuleChapters[subModuleChapters.length - 1].isNew}
+				>
+					+ Chapter
+				</Button>
+			) : null}
 		</div>
 	);
 }

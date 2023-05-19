@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-const useGetCourseModuleDetails = ({ id, setFinalData, activeTab }) => {
+const useGetCourseModuleDetails = ({ id, setFinalData, activeTab, showButtons }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_course_details',
 		method : 'get',
@@ -17,8 +17,8 @@ const useGetCourseModuleDetails = ({ id, setFinalData, activeTab }) => {
 
 			const { data } = res || {};
 
-			if (isEmpty(data)) {
-				setFinalData([{ id: new Date().getTime(), name: '', children: [], isNew: true }]);
+			if (showButtons && (!data || isEmpty(data))) {
+				setFinalData([{ id: new Date().getTime(), name: '', course_sub_modules: [], isNew: true }]);
 			} else {
 				setFinalData(data);
 			}
@@ -27,7 +27,7 @@ const useGetCourseModuleDetails = ({ id, setFinalData, activeTab }) => {
 				Toast.error(getApiErrorString(error.response?.data));
 			}
 		}
-	}, [id, setFinalData, trigger]);
+	}, [id, setFinalData, showButtons, trigger]);
 
 	useEffect(() => {
 		if (activeTab === 'curriculum') {
