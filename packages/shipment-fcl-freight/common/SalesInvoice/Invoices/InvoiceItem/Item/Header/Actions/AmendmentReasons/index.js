@@ -26,7 +26,7 @@ function AmendmentReasons({ invoice = {} }) {
 		<div className={styles.popover_container}>
 			<div className={styles.flex_row}>
 				{details.map((item) => (
-					<div key={item?.value}>
+					<div key={item?.value} className={styles.container}>
 						<div className={styles.title}>{item?.label}</div>
 						<div className={styles.value}>{item?.value}</div>
 					</div>

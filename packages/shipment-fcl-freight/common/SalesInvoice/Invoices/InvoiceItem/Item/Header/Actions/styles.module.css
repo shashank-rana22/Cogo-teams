@@ -130,10 +130,14 @@
 
 .actions_wrap{
 	display: flex;
-	align-items: center;
+	align-items: flex-start;
 
 	&.icons {
 		margin-right: 16px;
+		align-items: center;
+	}
+	&.actions_wrap_icons{
+		display: flex;
 		align-items: center;
 	}
 }

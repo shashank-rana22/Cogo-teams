@@ -185,7 +185,7 @@ function Actions({
 					) : null}
 				</div>
 
-				<div className={styles.actions_wrap}>
+				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 					<div className={styles.email_wrapper}>
 						<IcMEmail
 							style={{ cursor: 'pointer', color: '#F68B21' }}

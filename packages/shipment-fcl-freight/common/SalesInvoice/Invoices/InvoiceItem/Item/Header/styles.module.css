@@ -50,7 +50,7 @@
 
 .invoice_party_name{
 	font-weight: 600;
-	font-size: 14px;
+	font-size: 12px;
 	margin: 5px 0;
 	color: #333333;
 
@@ -233,6 +233,7 @@
 	color: #393f70;
 	font-size: 10px;
 	margin-right: 6px;
+	border-radius: 0 0 4px 0;
 }
 
 .payment_mode_status{

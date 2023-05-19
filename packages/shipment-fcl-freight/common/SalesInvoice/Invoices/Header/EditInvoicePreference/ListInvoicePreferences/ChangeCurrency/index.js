@@ -18,7 +18,7 @@ function ChangeCurrency({
 			items={currencyOptions}
 			selectedItems={invoiceCurrency}
 			onItemChange={(val) => setInvoiceCurrency(val)}
-			style={{ width: '10px' }}
+			style={{ marginLeft: '20px' }}
 		/>
 	);
 }

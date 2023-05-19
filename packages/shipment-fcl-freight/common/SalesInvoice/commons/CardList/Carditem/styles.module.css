@@ -2,7 +2,6 @@
 .title_black{
 	font-weight: normal;
 	font-size: 12px;
-	line-height: 20px;
 	text-align: center;
 	display: inline-block;
 	max-width: 100%;
@@ -16,7 +15,7 @@
 .row {
 	display: flex !important;
 	justify-content: space-between !important;
-    padding: 12px 20px;
+    padding: 12px;
 
 	&:hover {
 		background-color: #f9f9f9;
@@ -25,4 +24,5 @@
 
 .column {
     max-width: 16.6667%;
+	font-size: 12px;
 }

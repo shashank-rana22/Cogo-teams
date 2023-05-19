@@ -1,7 +1,8 @@
-.Ccntainer{
+.container{
 	background: #fff;
 	margin-bottom: 22px;
-	padding-top: 20px;
+	border-radius: 4px;
+	border: 1px solid #e0e0e0;
 
 	.card-body-row {
 		margin-left: 0px !important;
@@ -44,16 +45,16 @@
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
-	background: #f9f9f9;
+	background: #E5E5E5;
 	padding: 12px 28px;
 	border-radius: 0 0 4px 4px;
 }
 
 .total_amount{
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 14px;
 	line-height: 16px;
-	color: #4f4f4f;
+	color: #F68B21;
 	margin-left: 16px;
 }
 
@@ -61,9 +62,9 @@
 	display: flex;
 	justify-content: flex-end;
 	color: #4f4f4f;
+	font-weight: 600;
 	font-size: 12px;
-	font-weight: 500;
-	padding: 4px 30px;
+	padding: 8px 30px;
 	white-space: nowrap;
 	border-top: 1px solid #e0e0e0;
 	align-items: center;

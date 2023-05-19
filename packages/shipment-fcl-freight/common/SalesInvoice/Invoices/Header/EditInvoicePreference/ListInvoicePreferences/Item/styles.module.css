@@ -17,7 +17,7 @@
 
 	.open {
 		margin-bottom: 24px;
-		border-bottom: 1px solid #C4DC91;
+		border-bottom: 1px solid #ACDADF;
 		padding-bottom: 20px;
 	}
 	margin-bottom: 16px;
@@ -42,15 +42,16 @@
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
-	color: #a8acce;
+	color: #828282;
 	margin: 0;
+	letter-spacing: 0.02em;
 }
 
 .gst_number{
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
-	color: #393f70;
+	color: #221F20;
 	margin: 0;
 }
 
@@ -58,13 +59,13 @@
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 16px;
-	color: #393f70;
+	color: #221F20;
 	margin: 0;
 }
 
 .heading{
 	margin: 0;
-	font-weight: 500;
+	font-weight: 600;
 	font-size: 14px;
 	line-height: 16px;
 	color: #333333;
@@ -84,7 +85,7 @@
 	font-weight: 400;
 	font-size: 10px;
 	line-height: 12px;
-	color: #393f70;
+	color: #221F20;
 	margin: 0 6px 6px 0;
 	background: #C4DC91;
 	padding: 4px 12px;
@@ -107,7 +108,7 @@
 	background-color: #fef6df;
 	padding: 2px 16px;
 	width: fit-content;
-	color: #393f70;
+	color: #221F20;
 	font-size: 12px;
 	border-bottom-right-radius: 8px;
 }
@@ -115,7 +116,7 @@
 .overall_amount{
 	font-size: 10px;
 	line-height: 16px;
-	color: #393f70;
+	color: #221F20;
 	margin-bottom: 4px;
 }
 
@@ -127,7 +128,7 @@
 .details_child{
 	display: flex;
 	align-items: center;
-	margin-bottom: 10px;
+	margin-bottom: 6px;
 
 }
 

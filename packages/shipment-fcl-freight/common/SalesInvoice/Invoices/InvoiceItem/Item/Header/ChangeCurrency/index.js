@@ -84,7 +84,7 @@ function ChangeCurrency({
 					placeholder="Select Currency"
 					options={currencyOptions}
 					size="md"
-					style={{ width: '250px' }}
+					style={{ width: '200px', marginTop: '10px' }}
 				/>
 			</Modal.Body>
 			<Modal.Footer>

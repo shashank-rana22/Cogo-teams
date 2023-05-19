@@ -67,12 +67,14 @@ function EditInvoicePreference({
 				>
 					<Modal.Header title="EDIT INVOICING PREFERENCE" />
 					<Modal.Body className={styles.form}>
-						<Button
+						<div
 							className={styles.full_width_btn}
 							onClick={() => setAddInvoicingParty(true)}
+							tabIndex={0}
+							role="button"
 						>
 							+ Add Invoicing Party
-						</Button>
+						</div>
 						<ListInvoicePreferences
 							shipmentData={shipment_data}
 							invoicingParties={selectedParties}
