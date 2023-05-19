@@ -20,7 +20,6 @@
 		stroke-dashoffset: 0;
 	}
 }
-
 @keyframes dash {
 	0% {
 		stroke-dashoffset: 1000;
@@ -30,7 +29,6 @@
 		stroke-dashoffset: 0;
 	}
 }
-
 @keyframes dash-check {
 	0% {
 		stroke-dashoffset: -100;
@@ -40,7 +38,6 @@
 		stroke-dashoffset: 900;
 	}
 }
-
 @keyframes dash-check {
 	0% {
 		stroke-dashoffset: -100;
