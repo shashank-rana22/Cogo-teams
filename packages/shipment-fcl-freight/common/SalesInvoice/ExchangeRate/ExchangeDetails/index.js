@@ -29,7 +29,7 @@ function ExchangeDetails({
 	);
 
 	return (
-		<Container>
+		<div>
 			{currencyConversions?.length > 1 ? (
 				<Popover
 					theme="light"
@@ -43,7 +43,7 @@ function ExchangeDetails({
 					<Button>{children}</Button>
 				</Popover>
 			) : null}
-		</Container>
+		</div>
 	);
 }
 

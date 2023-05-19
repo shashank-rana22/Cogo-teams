@@ -28,12 +28,7 @@ function ExchangeRate({
 		(item) => ['reviewed', 'approved', 'revoked'].includes(item?.status),
 	);
 
-	let disableBtn = disableAction || disableStateInvoices;
-
-	if (
-		shipment_data?.shipment_type === 'ltl_freight'
-		&& shipment_data?.all_services?.[0]?.payment_term === 'prepaid'
-	) disableBtn = true;
+	const disableBtn = disableAction || disableStateInvoices;
 
 	return (
 		<div>

@@ -20,7 +20,7 @@ function SendInvoiceEmail({
 	return (
 		<Modal show={show} onClose={() => setShow(false)}>
 			<Modal.Header title="Send Invoice Email" />
-			<Modal.Body><div className={styles.Text}>Are you sure, you want to send invoice email?</div></Modal.Body>
+			<Modal.Body><div className={styles.text}>Are you sure, you want to send invoice email?</div></Modal.Body>
 			<Modal.Footer>
 				<Button
 					className="secondary"

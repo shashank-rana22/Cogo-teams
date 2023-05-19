@@ -26,7 +26,7 @@ function EditInvoice({
 		isMobile : general.isMobile,
 	}));
 	const isFclFreight = [geo.uuid.admin_id, geo.uuid.super_admin_id]
-		.some((ele) => role_ids?.includes(ele)) && shipment_data?.shipment_type === 'fcl_freight';
+		.some((ele) => role_ids?.includes(ele));
 
 	const {
 		controls,

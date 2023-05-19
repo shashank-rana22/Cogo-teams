@@ -44,7 +44,7 @@ function Invoices({
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { list, CNRefetch, loading: CNLoading } = useListCreditNotes({ shipment_data });
+	const { list, CNRefetch, loading: CNLoading } = useListCreditNotes();
 
 	return (
 		<main className={styles.container}>

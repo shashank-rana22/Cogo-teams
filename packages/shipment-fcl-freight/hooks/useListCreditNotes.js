@@ -1,8 +1,10 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useContext, useCallback, useState } from 'react';
 
-const useListCreditNotes = ({ shipment_data }) => {
+const useListCreditNotes = () => {
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [apiData, setApiData] = useState({});
 
 	const { id: shipment_id = '' } = shipment_data || {};

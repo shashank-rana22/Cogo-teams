@@ -1,21 +1,22 @@
-import React from 'react';
-import getField from '@cogo/business-modules/form/components';
-import { useFormCogo } from '@cogoport/front/hooks';
+// import getField from '@cogo/business-modules/form/components';
+import { useForm } from '@cogoport/front/hooks';
 import { IcMPlus } from '@cogoport/icons-react';
+import React from 'react';
+
 import styles from './styles.module.css';
 
 const CheckBox = getField('checkbox');
 
 const controls = [
 	{
-		name: 'isApplicable',
-		type: 'checkbox',
-		className: 'primary md',
-		options: [{ label: 'Not Applicable', value: true }],
+		name      : 'isApplicable',
+		type      : 'checkbox',
+		className : 'primary md',
+		options   : [{ label: 'Not Applicable', value: true }],
 	},
 ];
 
-const ServiceItem = () => {
+function ServiceItem() {
 	const { fields } = useFormCogo(controls || []);
 
 	return (
@@ -36,6 +37,6 @@ const ServiceItem = () => {
 			</div>
 		</div>
 	);
-};
+}
 
 export default ServiceItem;
