@@ -3,8 +3,8 @@ import { getDate } from '../utils/getDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
-	const disabledState = !TIMELINE_EDITABLE.primary_service.state.includes(primary_service?.state)
-		|| primary_service?.state !== 'vessel_arrived';
+	const disabledState = primary_service?.state === 'vessel_arrived'
+		|| !TIMELINE_EDITABLE.primary_service.state.includes(primary_service?.state);
 
 	let deviated_departure;
 	let deviated_arrival;
