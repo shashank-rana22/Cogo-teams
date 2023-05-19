@@ -53,3 +53,11 @@
 	align-items: center;
 	margin-bottom: 10px;
 }
+
+.origin{
+	margin-right: 50px;
+}
+
+.destination{
+	margin-left: 50px;
+}

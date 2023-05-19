@@ -51,7 +51,7 @@ function ApprovalForm({ errors, control, formValues }) {
 								rules={{ required: 'This field is required' }}
 							/>
 						</div>
-						{errors.rejection_category
+						{errors?.amount
 							? <div className={styles.error_message}>{errors.ids.message}</div> : null}
 					</div>
 				</>

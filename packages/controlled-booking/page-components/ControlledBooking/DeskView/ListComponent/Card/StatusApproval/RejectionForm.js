@@ -23,7 +23,7 @@ function RejectionForm({ control, errors }) {
 					className={styles.checkbox_controller}
 					rules={{ required: 'This field is required' }}
 				/>
-				{errors.rejection_category ? <div className={styles.error_message}>{errors.ids.message}</div> : null}
+				{errors?.rejection_category ? <div className={styles.error_message}>{errors.ids.message}</div> : null}
 			</div>
 
 			<div style={{ marginBottom: 8 }}>Rejection Reason</div>
@@ -36,7 +36,7 @@ function RejectionForm({ control, errors }) {
 					placeholder="Please input your Rejection Reason."
 					rules={{ required: 'This field is required' }}
 				/>
-				{errors.rejection_category ? <div className={styles.error_message}>{errors.ids.message}</div> : null}
+				{errors?.rejection_category ? <div className={styles.error_message}>{errors.ids.message}</div> : null}
 			</div>
 		</>
 	);

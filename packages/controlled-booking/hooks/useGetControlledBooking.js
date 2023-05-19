@@ -19,11 +19,10 @@ const useGetControlledBooking = () => {
 			trigger({
 				params: {
 					filters: {
-						primary_service: 'fcl_freight',
-
-						// booking_status  : 'pending',
-						// sort_by         : status === 'approved' ? 'updated_at' : undefined,
-						q: q || undefined,
+						primary_service : 'fcl_freight',
+						booking_status  : status,
+						sort_by         : status === 'approved' ? 'updated_at' : undefined,
+						q               : q || undefined,
 					},
 					approval_data_required: true,
 

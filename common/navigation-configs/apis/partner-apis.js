@@ -1838,6 +1838,12 @@ const partner = {
 			service_name : 'checkout',
 
 		},
+		{
+			api          : 'update_checkout_approval',
+			access_type  : 'private',
+			service_name : 'checkout',
+
+		},
 	],
 	supply_crm: [
 		{

@@ -37,7 +37,7 @@ function PortPair({ portPair, service_type }) {
 			</div>
 
 			<div className={styles.upper_body}>
-				<div>
+				<div className={styles.origin}>
 					<div className={styles.code}>{`(${originCode})`}</div>
 					<div className={styles.name}>
 						<Tooltip content={originName}>
@@ -49,7 +49,7 @@ function PortPair({ portPair, service_type }) {
 				<div>
 					<IcMPortArrow />
 				</div>
-				<div>
+				<div className={styles.destination}>
 					<div className={styles.code}>{`(${destinationCode})`}</div>
 
 					<div className={styles.name}>
