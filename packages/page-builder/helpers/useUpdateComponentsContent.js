@@ -12,8 +12,8 @@ const useUpdateComponentsContent = ({
 	type,
 	modeType,
 }) => {
-	const handleUpdateContent = (value, rowDetails) => {
-		if (value && modeType === 'edit') {
+	const handleUpdateContent = (value, rowDetails, contentKey = 'content') => {
+		if (modeType === 'edit') {
 			const { id } = rowDetails || {};
 
 			const { id: selectedRowId } = selectedRow || {};
@@ -36,12 +36,12 @@ const useUpdateComponentsContent = ({
 				if (Object.keys(selectedNestedColumn).length > 0 && nestedColumnId === selectedChildId) {
 					const selectedChildrenId = data.layouts[selectedComponentIndex].component.children.findIndex((item) => item.id === selectedColumnId);
 					const nestedSelectedChildrenId = data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children.findIndex((item) => item.id === selectedChildId);
-					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children[nestedSelectedChildrenId].component.content = value;
+					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.children[nestedSelectedChildrenId].component[contentKey] = value;
 				} else if (Object.keys(selectedColumn).length > 0 && columnId === selectedColumnId && Object.keys(selectedNestedColumn).length === 0) {
 					const selectedChildrenId = data.layouts[selectedComponentIndex].component.children.findIndex((item) => item.id === selectedChildId);
-					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component.content = value;
+					data.layouts[selectedComponentIndex].component.children[selectedChildrenId].component[contentKey] = value;
 				} else if (Object.keys(selectedColumn).length === 0 && Object.keys(selectedNestedColumn).length === 0) {
-					data.layouts[selectedComponentIndex].component.content = value;
+					data.layouts[selectedComponentIndex].component[contentKey] = value;
 				}
 			}
 

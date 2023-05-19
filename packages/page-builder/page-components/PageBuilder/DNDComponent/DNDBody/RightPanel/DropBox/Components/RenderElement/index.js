@@ -60,6 +60,12 @@ function RenderElement({
 			setPageConfiguration,
 			rowData,
 			modeType,
+			selectedRow,
+			selectedColumn,
+			selectedNestedColumn,
+			selectedItem,
+			columnData,
+			nestedColumData,
 		},
 
 		video: {
