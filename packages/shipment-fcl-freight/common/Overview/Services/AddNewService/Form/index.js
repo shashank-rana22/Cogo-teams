@@ -121,7 +121,6 @@ function Form({
 							valueKey="custom_key"
 							initialCall={false}
 							placeholder="Select Organization User"
-							value={user}
 							params={{
 								filters:
 								{
@@ -133,7 +132,6 @@ function Form({
 							getModifiedOptions={(option) => option?.options?.map(
 								(op) => ({ ...op, custom_key: { user_id: op.user_id, branch_id: op.branch.id } }),
 							)}
-							onChange={setUser}
 							rules={{ required: 'User is required' }}
 						/>
 					) : null
@@ -151,7 +149,7 @@ function Form({
 					step={step}
 					setStep={setStep}
 					organization_id={formOrganizationId}
-					user={user}
+					user={formProps.formValues?.user_id}
 				/>
 			</Modal.Footer>
 		</Modal>
