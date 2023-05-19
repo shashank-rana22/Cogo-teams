@@ -53,6 +53,7 @@ const useGetNetwork = ({ referrer_id = '' }) => {
 
 	useEffect(() => {
 		referrerNetwork();
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	return {
