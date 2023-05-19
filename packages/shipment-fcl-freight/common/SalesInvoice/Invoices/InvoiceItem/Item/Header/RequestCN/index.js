@@ -1,8 +1,9 @@
 import { Modal, Button } from '@cogoport/components';
-import React from 'react';
+import React, { useEffect, useState } from 'react';
 
-// import Form from './Form';
-import Form from './Form';
+import Layout from '../../../../../../Tasks/TaskExecution/helpers/Layout';
+
+import useCreateCreditNoteHelper from './helpers/useCreateCreditNoteHelper';
 import styles from './styles.module.css';
 
 function RequestCN({
@@ -13,6 +14,34 @@ function RequestCN({
 	refetchCN = () => {},
 	invoiceData = {},
 }) {
+	const [servicesIDs, setServicesIDs] = useState([]);
+
+	const services = invoice?.services || [];
+
+	useEffect(() => {
+		const servicesID = [];
+		invoice?.services?.forEach((service) => {
+			servicesID.push(service?.service_id);
+		});
+
+		setServicesIDs(servicesID);
+	}, [invoice?.services]);
+
+	const {
+		controls,
+		errors,
+		control,
+		defaultValues,
+		handleSubmit,
+		onCreate,
+	} = useCreateCreditNoteHelper({
+		setShow,
+		services,
+		invoice,
+		servicesIDs,
+		refetchCN,
+		invoiceData,
+	});
 	return (
 		<Modal show={show} onClose={() => setShow(false)} size="xl">
 			<Modal.Header title="REQUEST CREDIT NOTE" />
@@ -28,12 +57,11 @@ function RequestCN({
 						<div className={styles.underLined_text}>{invoice?.live_invoice_number}</div>
 					</div>
 				</div>
-				<Form
-					shipment_serial_id={shipment_serial_id}
-					invoice={invoice}
-					setShow={setShow}
-					refetchCN={refetchCN}
-					invoiceData={invoiceData}
+				<Layout
+					control={control}
+					fields={controls}
+					errors={errors}
+					customValues={defaultValues}
 				/>
 
 			</Modal.Body>
@@ -42,6 +70,7 @@ function RequestCN({
 					<Button themeType="secondary">Cancel </Button>
 					<Button
 						type="button"
+						onClick={handleSubmit(onCreate)}
 					>
 						Request
 					</Button>
