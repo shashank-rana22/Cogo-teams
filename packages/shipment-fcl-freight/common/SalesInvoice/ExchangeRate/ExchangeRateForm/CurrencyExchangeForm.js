@@ -130,7 +130,8 @@ function CurrencyExchangeForm({
 				<Button
 					onClick={() => setOpen(false)}
 					disabled={rateAddtionApi?.loading}
-					className="secondary md"
+					size="md"
+					themeType="tertiary"
 				>
 					Cancel
 				</Button>

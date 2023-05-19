@@ -90,7 +90,7 @@ function ChangeCurrency({
 			<Modal.Footer>
 				<Button
 					size="md"
-					themeType="primary"
+					themeType="tertiary"
 					onClick={() => setIsChangeCurrency(false)}
 					disabled={loading}
 				>

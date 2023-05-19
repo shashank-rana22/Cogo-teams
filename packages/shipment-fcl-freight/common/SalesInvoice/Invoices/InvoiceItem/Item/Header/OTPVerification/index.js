@@ -107,6 +107,7 @@ function OTPVerification({
 					<Modal.Footer>
 						<Button
 							size="md"
+							themeType="tertiary"
 							onClick={() => setShowOTPModal(false)}
 						>
 							Cancel

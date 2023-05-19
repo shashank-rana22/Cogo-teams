@@ -47,7 +47,7 @@ function AddRemarks({
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
-					className="secondary md"
+					themeType="tertiary"
 					onClick={onClose}
 					style={{ marginRight: '20px' }}
 				>

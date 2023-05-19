@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, cl } from '@cogoport/components';
 import React from 'react';
 
 import useSendInvoiceEmail from '../../../../../../../../hooks/useSendInvoiceEmail';
@@ -19,11 +19,13 @@ function SendInvoiceEmail({
 
 	return (
 		<Modal show={show} onClose={() => setShow(false)}>
-			<Modal.Header title="Send Invoice Email" />
-			<Modal.Body><div className={styles.text}>Are you sure, you want to send invoice email?</div></Modal.Body>
+			<Modal.Body className={styles.body}>
+				<div className={cl`${styles.text} ${styles.bold}`}>Are you sure, you want to send invoice email?</div>
+				<div className={styles.text}>You cannot undo this step so please do it carefully.</div>
+			</Modal.Body>
 			<Modal.Footer>
 				<Button
-					className="secondary"
+					themeType="tertiary"
 					onClick={() => setShow(false)}
 					disabled={loading}
 					style={{ marginRight: '20px' }}

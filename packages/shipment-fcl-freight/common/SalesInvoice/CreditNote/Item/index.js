@@ -160,13 +160,15 @@ function Item({
 					{title}
 				</div>
 				{open === 'line_items' ? (
-					(item?.services || []).map((_item) => (
-						<LineItems
-							key={_item?.service_id}
-							item={_item}
-							loading={loading}
-						/>
-					))
+					<div className={styles.line_items_container}>
+						{(item?.services || []).map((_item) => (
+							<LineItems
+								key={_item?.service_id}
+								item={_item}
+								loading={loading}
+							/>
+						))}
+					</div>
 				) : null}
 			</main>
 

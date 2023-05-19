@@ -1,6 +1,15 @@
 .text{
 	font-weight: 500;
 	font-size: 14px;
+	text-align: center;
+
+	&.bold{
+		font-weight: 600;
+	}
+}
+
+.body{
+	padding: 50px;
 	margin-bottom: 20px;
-	text-align: start;
+	border: none !important;
 }

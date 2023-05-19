@@ -86,7 +86,7 @@ function EditInvoicePreference({
 					<Modal.Footer className={styles.modal_footer}>
 						<Button
 							size="md"
-							themeType="secondary"
+							themeType="tertiary"
 							onClick={() => handleClose()}
 						>
 							Cancel
