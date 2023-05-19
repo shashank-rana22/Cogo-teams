@@ -1,10 +1,26 @@
+.container {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+
 .options {
-  height: 16%;
-  width: 16%;
-  position: absolute;
-  background-color: orange;
-  top: 40vh;
-  left: 20vh;
+  width: 18vw;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  height: 18vh;
   text-align: center;
-  padding-top: 50px;
+  cursor: pointer;
+  background-color: orange;
+  margin-right: 12px;
+  margin-bottom: 12px;
+}
+
+.components {
+  display: flex;
+  flex-direction: row;
+  justify-content: center;
+  flex-wrap: wrap;
+  margin-top: 16px;
 }
