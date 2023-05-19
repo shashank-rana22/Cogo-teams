@@ -15,8 +15,6 @@ const data = [{ title: 'PERSONAL INFORMATION', content: PersonalInformation },
 function NewHireInformation({ setInformationPage }) {
 	const [moreDetails, setMoreDetails] = useState(false);
 
-	console.log(moreDetails, 'hi');
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
