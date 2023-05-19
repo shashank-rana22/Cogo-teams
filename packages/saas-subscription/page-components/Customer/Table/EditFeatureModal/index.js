@@ -18,8 +18,8 @@ function EditFeatureModal({ editModal, setEditModal }) {
 	const cancelHandler = () => {
 		setEditModal((prev) => ({
 			...prev,
-			editAddon            : false,
 			openEditFeatureModal : false,
+			editAddon            : false,
 			editPlan             : false,
 			editCancelSub        : false,
 			featureInfo          : '',

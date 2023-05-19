@@ -4,7 +4,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function QuotaDetails({ setEditModal, quotas = [] }) {
+function QuotaDetails({ editModalChangeHandler, quotas = [] }) {
 	return (
 		<div className={styles.container}>
 			<div className={cl`${styles.flex_box} ${styles.card_header}`}>
@@ -23,13 +23,7 @@ function QuotaDetails({ setEditModal, quotas = [] }) {
 								<span>{quotaLeft}</span>
 								<IcMEdit
 									className={styles.edit_icon}
-									onClick={() => setEditModal((prev) => ({
-										...prev,
-										openEditFeatureModal : true,
-										editAddon            : true,
-										editPlan             : false,
-										featureInfo          : item,
-									}))}
+									onClick={() => editModalChangeHandler('editAddon', item)}
 								/>
 							</div>
 						</div>

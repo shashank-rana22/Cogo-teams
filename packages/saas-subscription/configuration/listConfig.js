@@ -23,14 +23,14 @@ const listConfig = [
 		key        : 'end_date',
 		title      : 'End Date',
 		renderFunc : 'renderEndDate',
-		width      : '19%',
+		width      : '12%',
 
 	},
 	{
-		key        : 'status',
-		title      : 'Status',
-		renderFunc : 'renderStatus',
-		width      : '12%',
+		key        : 'family',
+		title      : 'Family',
+		renderFunc : 'renderFamily',
+		width      : '19%',
 
 	},
 	{

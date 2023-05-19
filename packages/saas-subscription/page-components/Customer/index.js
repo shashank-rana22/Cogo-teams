@@ -23,7 +23,11 @@ function CustomerSubscription() {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.container}>
-				<FilterContainer setGlobalFilters={setGlobalFilters} refetchUserStats={refetchUserStats} />
+				<FilterContainer
+					setGlobalFilters={setGlobalFilters}
+					refetchUserStats={refetchUserStats}
+					refectUserList={refectUserList}
+				/>
 				<ArrowStepper
 					items={items}
 					stepperData={userStatsData}

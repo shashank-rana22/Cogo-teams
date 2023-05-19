@@ -6,44 +6,46 @@ import { useEffect } from 'react';
 import useGetSubscriptionInfo from '../../../../hooks/useGetSubscriptionInfo';
 import iconUrl from '../../../../utils/iconUrl.json';
 
+import FuturePlanDetails from './FuturePlanDetails';
 import QuotaDetails from './QuotaDetails';
 import styles from './styles.module.css';
 
-const DETAILS = {
-	plan_details : 'Plan Details',
-	status       : 'Status',
-};
-
-const STATUS = {
-	active: iconUrl.active,
-};
-
-const DATA = {
-	plan_details : 'Standard Plan',
-	status       : 'active',
+const DETAILS_MAPPING = [
+	{
+		name  : 'plan_details',
+		key   : 'display_name',
+		label : 'Plan Details',
+	},
+	{
+		name  : 'account_type',
+		key   : 'organization_type',
+		label : 'Family',
+	},
+];
+const HEADER_MAPPING = {
+	serial_id     : 'Serial Id',
+	business_name : 'Business Name',
 };
 
 function EditModal({ editModal, setEditModal }) {
 	const { loading = false, subInfo = {}, refetchSubscriptionInfo } = useGetSubscriptionInfo();
 	const { open = false, info = {} } = editModal;
-	const { active_subscription = {} } = info || {};
+	const { active_subscription = {}, organization = {} } = info || {};
 
-	console.log(subInfo, 'subInfo');
-
-	const { active = {}, quotas = [] } = subInfo || {};
+	const { active = {}, quotas = [], future = {} } = subInfo || {};
 	const { id = '', plan = {} } = active || {};
 
-	const getData = (key) => {
-		if (key === 'plan_details') return plan?.display_name;
-		return (
-			<span>
-				<img src={STATUS.active} alt="active" className={styles.status_icon} />
-				{startCase(DATA?.[key])}
-			</span>
-		);
-	};
 	const closeModalHandler = () => {
 		setEditModal({ open: false });
+	};
+
+	const editModalChangeHandler = (key, value) => {
+		setEditModal((prev) => ({
+			...prev,
+			openEditFeatureModal : true,
+			[key]                : true,
+			featureInfo          : value,
+		}));
 	};
 
 	useEffect(() => {
@@ -67,24 +69,23 @@ function EditModal({ editModal, setEditModal }) {
 					<h2 className={styles.title}>Configure Plan</h2>
 					<ButtonIcon size="md" icon={<IcMCross />} themeType="primary" onClick={closeModalHandler} />
 				</div>
+
 				<div className={styles.flex_box}>
 					<div>
-						<div>
-							Subscription ID:
-							{' '}
-							{id}
-						</div>
+						{Object.keys(HEADER_MAPPING).map((ele) => (
+							<div key={ele}>
+								<span className={styles.header_title}>
+									{HEADER_MAPPING?.[ele]}
+									:
+								</span>
+								<span className={styles.header_value}>{organization?.[ele]}</span>
+							</div>
+						))}
 					</div>
 					<div className={styles.flex_box}>
 						<Button
 							size="sm"
-							onClick={() => setEditModal((prev) => ({
-								...prev,
-								openEditFeatureModal : true,
-								editPlan             : true,
-								editAddon            : false,
-								featureInfo          : id,
-							}))}
+							onClick={() => editModalChangeHandler('editPlan', id)}
 						>
 							Change Plan
 						</Button>
@@ -93,33 +94,30 @@ function EditModal({ editModal, setEditModal }) {
 							className={styles.cancel_btn}
 							size="sm"
 							themeType="secondary"
-							onClick={() => setEditModal((prev) => ({
-								...prev,
-								openEditFeatureModal : true,
-								editPlan             : false,
-								editAddon            : false,
-								editCancelSub        : true,
-								featureInfo          : id,
-							}))}
+							disabled={plan?.plan_name === 'starter-pack'}
+							onClick={() => editModalChangeHandler('editCancelSub', id)}
 						>
 							Cancel Subscription
-
 						</Button>
 					</div>
 				</div>
+
 				<div className={cl`${styles.flex_box} ${styles.details_container}`}>
-					{Object.keys(DETAILS).map((detail) => (
+					{DETAILS_MAPPING.map((detail) => (
 						<div key={detail} className={styles.details}>
-							<div className={styles.detail_title}>{DETAILS?.[detail]}</div>
-							<div className={styles.detail_content}>{getData(detail)}</div>
+							<div className={styles.detail_title}>{detail.label}</div>
+							<div className={styles.detail_content}>{startCase(plan?.[detail.key])}</div>
 						</div>
 					))}
 				</div>
-				<div className={styles.flex_box}>
+
+				<div className={cl`${styles.flex_box} ${styles.feature_container}`}>
 					<div className={styles.quota_container}>
-						<QuotaDetails setEditModal={setEditModal} quotas={quotas} />
+						<QuotaDetails editModalChangeHandler={editModalChangeHandler} quotas={quotas} />
 					</div>
-					<div className={styles.validity_container} />
+					<div className={styles.validity_container}>
+						<FuturePlanDetails future={future} />
+					</div>
 				</div>
 			</div>
 

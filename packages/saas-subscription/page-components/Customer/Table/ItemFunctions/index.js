@@ -1,39 +1,41 @@
-import { Legend } from '@cogoport/components';
 import { IcMEdit } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
-const statusColor = {
-	active: '#ABCD62',
-
+const COLOR_MAPPING = {
+	partner  : 'yellow',
+	importer : 'blue',
 };
 
 const itemFunction = ({ setEditModal }) => ({
-	renderId: (item) => (
-		<span>{item?.organization?.serial_id}</span>
-	),
-
-	renderCompanyName: (item) => (
-		<span>{item?.organization?.business_name}</span>
-	),
-
-	renderPlan: (item) => (
-		<span>{item?.active_subscription?.plan?.display_name}</span>
-	),
+	renderId: (item) => {
+		const { organization = {} } = item || {};
+		const { serial_id = '' } = organization || {};
+		return <span>{serial_id}</span>;
+	},
+	renderCompanyName: (item) => {
+		const { organization = {} } = item || {};
+		const { business_name = '' } = organization || {};
+		return <span>{business_name}</span>;
+	},
+	renderPlan: (item) => {
+		const { active_subscription = {} } = item || {};
+		const { plan = {} } = active_subscription || {};
+		const { display_name = '' } = plan || {};
+		return <span>{display_name}</span>;
+	},
 	renderEndDate: (item) => {
-		const data = item?.active_subscription?.end_date;
+		const { active_subscription = {} } = item || {};
+		const { end_date = '' } = active_subscription || {};
 		return (
 			<span>
-				{data ? format(data, 'dd-MM-yyy') : '--' }
+				{end_date ? format(end_date, 'dd-MM-yyy') : '--' }
 			</span>
 		);
 	},
-	renderStatus: (item) => {
-		const status = item?.active_subscription?.status;
-		const modifiedStatus = startCase(status);
-		const itm = [{ label: modifiedStatus, color: statusColor?.[status], key: modifiedStatus }];
-		return (
-			<Legend hasBackground={false} direction="horizontal" items={itm} size="md" />
-		);
+	renderFamily: (item) => {
+		const { organization = {} } = item || {};
+		const { account_type = '' } = organization || {};
+		return	<span>{startCase(account_type)}</span>;
 	},
 	renderEdit: (item) => (
 		<span>
@@ -41,7 +43,6 @@ const itemFunction = ({ setEditModal }) => ({
 				style={{ cursor: 'pointer' }}
 				onClick={() => setEditModal(() => ({ info: item, open: true }))}
 			/>
-
 		</span>
 	),
 });

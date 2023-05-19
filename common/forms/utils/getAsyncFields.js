@@ -357,6 +357,18 @@ function asyncListServetelAgents() {
 	};
 }
 
+function asyncPlanPricingList() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_plan_pricings',
+		initialCall : true,
+		params      : {
+			filters: { is_active: true },
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -386,4 +398,5 @@ export {
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
 	asyncListServetelAgents,
+	asyncPlanPricingList,
 };

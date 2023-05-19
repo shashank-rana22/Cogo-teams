@@ -65,6 +65,21 @@
 	}
 }
 
-.quota_container {
-	width: 45%;
+.feature_container {
+	align-items: flex-start;
+
+	.quota_container,
+	.validity_container {
+		width: 45%;
+	}
+}
+
+.header_title {
+	font-weight: 300;
+	color: #615858;
+}
+
+.header_value {
+	margin-left: 6px;
+	font-weight: 600;
 }
