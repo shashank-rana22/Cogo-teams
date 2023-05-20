@@ -2243,6 +2243,22 @@ const navigationMappingAdmin = {
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
 	},
+	chakravyuh: {
+		key         : 'chakravyuh',
+		title       : 'Chakravyuh',
+		isSubNavs   : true,
+		module_type : 'crm',
+		options     : [
+			{
+				key           : 'chakravyuh-trends',
+				title         : 'Pricing Trends',
+				href          : '/v2/pricing/trends',
+				as            : '/v2/pricing/trends',
+				possible_apis : apis.pricing_trends,
+			},
+		],
+
+	},
 };
 
 export default navigationMappingAdmin;
