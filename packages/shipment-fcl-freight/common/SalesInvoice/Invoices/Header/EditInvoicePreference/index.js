@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
-import React, { useState } from 'react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import React, { useState, useContext } from 'react';
 
 import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
 import AddInvoicingParty from '../../../../AdditionalServices/components/AddIp/AddInvoicingParty';
@@ -9,12 +10,13 @@ import ListInvoicePreferences from './ListInvoicePreferences';
 import styles from './styles.module.css';
 
 function EditInvoicePreference({
-	shipment_data = {},
 	invoicing_parties = [],
 	BfInvoiceRefetch = () => {},
 	disableAction = false,
 	salesInvoicesRefetch = () => {},
 }) {
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
 	const [show, setShow] = useState(false);
 	const [addInvoicingParty, setAddInvoicingParty] = useState(false);
 

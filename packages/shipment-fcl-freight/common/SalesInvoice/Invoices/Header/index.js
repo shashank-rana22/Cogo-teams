@@ -1,9 +1,5 @@
-import { ShipmentDetailContext } from '@cogoport/context';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { useSelector } from '@cogoport/store';
-import React, { useContext } from 'react';
-
-import ExchangeRate from '../../ExchangeRate';
+import React from 'react';
 
 import EditInvoicePreference from './EditInvoicePreference';
 import styles from './styles.module.css';
@@ -15,22 +11,12 @@ function Header({
 	isCustomer = false,
 	salesInvoicesRefetch = () => {},
 }) {
-	const user_data = useSelector(({ profile }) => profile || {});
-
-	const { shipment_data } = useContext(ShipmentDetailContext);
-
 	const {
 		net_total_price_discounted,
 		net_total_price_currency,
 		invoicing_parties,
 		reviewed_invoices,
 	} = invoiceData;
-
-	const showExchangeRate = user_data.email === 'ajeet@cogoport.com'
-		|| (invoicing_parties || []).some(
-			(ip) => !['liners_exchange_rate', 'eta', 'etd'].includes(ip?.exchange_rate_state)
-					&& shipment_data?.serial_id < '138811',
-		);
 
 	return (
 		<div className={styles.container}>
@@ -63,18 +49,8 @@ function Header({
 					</div>
 				) : null}
 
-				<div className={styles.Flex}>
-					{showExchangeRate ? (
-						<ExchangeRate
-							BfInvoiceRefetch={BfInvoiceRefetch}
-							invoiceData={invoiceData}
-							shipment_data={shipment_data}
-							disableAction={disableAction}
-						/>
-					) : null}
-
+				<div className={styles.button_div}>
 					<EditInvoicePreference
-						shipment_data={shipment_data}
 						invoicing_parties={invoicing_parties}
 						BfInvoiceRefetch={BfInvoiceRefetch}
 						disableAction={disableAction}
