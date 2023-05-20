@@ -1,6 +1,6 @@
 import { Modal, Button, Toast, RadioGroup } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import useGetOrgUsersData from '../../../../../../../hooks/useGetOrgUsersData';
 import useSendInvoiceOtp from '../../../../../../../hooks/useSendInvoiceOtp';
@@ -18,7 +18,6 @@ function OTPVerification({
 	invoice = {},
 	refetch = () => {},
 }) {
-	const [userList, setUserList] = useState([]);
 	const [otpValue, setOTPValue] = useState('');
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [selectedUser, setSelectedUser] = useState('');
@@ -40,13 +39,14 @@ function OTPVerification({
 		invoice,
 		refetch: refetchAfterVerifydOtpApiCall,
 	});
+
 	const { sendOtpForInvoiceApproval } = useSendInvoiceOtp({
 		invoice_id : invoice?.id,
 		user_id    : selectedUser?.split('_')?.[0],
 		refetch    : refetchAfterSendOtpApiCall,
 	});
 
-	const userLists = orgData?.list?.filter((obj) => obj?.mobile_verified);
+	const userList = orgData?.list?.filter((obj) => obj?.mobile_verified);
 
 	const organizationOptions = userList?.map((obj) => ({
 		label: (
@@ -64,14 +64,11 @@ function OTPVerification({
 		value: `${obj.user_id}_${obj.name}`,
 	}));
 
-	useEffect(() => {
-		setUserList(userLists);
-	}, [userLists]);
-
 	const handleClick = async () => {
 		if (isEmpty(selectedUser)) Toast.error('Please select any user');
 		else {
-			await sendOtpForInvoiceApproval();
+			// await sendOtpForInvoiceApproval();
+			setModalIsOpen(true);
 		}
 	};
 	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[1]} registered mobile number`;

@@ -33,7 +33,7 @@ function ReviewServices({
 		});
 	};
 
-	return !showExchangeRateConfirmation ? (
+	return showExchangeRateConfirmation ? (
 		<LinersExchangeRateConfirm
 			invoice={invoice}
 			setShowExchangeRateConfirmation={setShowExchangeRateConfirmation}

@@ -1,5 +1,6 @@
-// import { useKey } from '@cogoport/hooks';
-import { useState, useEffect, useImperativeHandle, useRef } from 'react';
+import { useState, useEffect, useImperativeHandle, useRef, useCallback } from 'react';
+
+import useKey from '../../../../../../../../../hooks/useKey';
 
 import useOtpInputEvents from './useOtpInputEvents';
 
@@ -16,8 +17,7 @@ const getInitialOtpValues = (otpLength) => {
 const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 	const [values, setValues] = useState(getInitialOtpValues(otpLength));
 
-	// const isBackSpacePressed = useKey('Backspace');
-	const isBackSpacePressed = true;
+	const isBackSpacePressed = useKey('Backspace');
 
 	const otpContainerRef = useRef(null);
 	const otpInputElementsRef = useRef([]);
@@ -43,14 +43,14 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 		}
 
 		onChange(isAllOtpInputValuePresent ? value : '');
-	}, [JSON.stringify(values)]);
+	}, [onChange, otpLength, values]);
 
 	useEffect(() => {
 		otpInputElementsRef.current.forEach((element) => {
 			element.setAttribute('maxlength', 1);
 			element.setAttribute('inputmode', 'numeric');
 		});
-	}, [JSON.stringify(values)]);
+	}, [values]);
 
 	const handleChange = (index) => (event) => {
 		setValues((previousState) => ({
@@ -66,15 +66,15 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 		nextOtpInputElement?.focus();
 	};
 
-	const resetOtp = () => {
+	const resetOtp = useCallback(() => {
 		setValues(getInitialOtpValues(otpLength));
-	};
+	}, [otpLength]);
 
 	const imperativeHandles = () => ({
 		resetOtp,
 	});
 
-	useImperativeHandle(ref, imperativeHandles, []);
+	useImperativeHandle(ref, imperativeHandles, [resetOtp]);
 
 	return {
 		values,

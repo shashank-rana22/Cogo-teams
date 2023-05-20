@@ -2,16 +2,6 @@
 	display: flex;
 	justify-content: space-between;
 	width: 100%;
-
-	.core-ui-button-root {
-		text-transform: capitalize;
-	}
-
-	.core-ui-tooltip-root {
-		display: flex;
-		justify-content: center;
-		align-items: center;
-	}
 }
 
 .icon_more_wrapper{
@@ -49,10 +39,6 @@
 	align-items: center;
 	min-width: 64px;
 
-	.download-invoice {
-		border-top: 1px solid #e0e0e0;
-	}
-
 	@media (max-width: 768px) {
 		display: none;
 	}
@@ -77,11 +63,6 @@
 	flex-direction: column;
 	justify-content: center;
 	margin-right: 10px;
-
-	.reviewed {
-		background: #e6fbe9;
-		color: #393f70;
-	}
 }
 
 .line{

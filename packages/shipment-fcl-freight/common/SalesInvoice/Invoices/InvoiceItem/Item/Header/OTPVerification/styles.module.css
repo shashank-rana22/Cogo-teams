@@ -27,6 +27,9 @@
 		.ui_radio_label{
 			width: 100%;
 		}
+		.ui_radiogroup_container{
+			flex-direction: column;
+		}
 	}
 }
 
