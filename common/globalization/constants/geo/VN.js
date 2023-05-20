@@ -354,4 +354,26 @@ export default {
 			},
 		},
 	},
+	others: {
+		registration_number: {
+			label      : 'VAT',
+			pattern    : /^[0-3]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+			max_length : 15,
+		},
+
+		pan_number: {
+			label   : 'PAN',
+			pattern : undefined,
+		},
+
+		economic_zone: {
+			label: 'Non-Tariff Zone',
+		},
+
+		navigations: {
+			onboard_vendor: {
+				validate_registration: false,
+			},
+		},
+	},
 };

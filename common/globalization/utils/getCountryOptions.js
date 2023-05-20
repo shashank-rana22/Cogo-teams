@@ -1,5 +1,7 @@
 import getGeoConstants from '../constants/geo';
 
+import getCountryDetails from './getCountryDetails';
+
 // eslint-disable-next-line import/no-unresolved
 import countries from '@/data-store/constants/countries.json';
 
@@ -10,7 +12,7 @@ const getCountryOptions = () => {
 
 	const { code } = country || {};
 
-	const defaultOption = countries.find((item) => item.country_code === code);
+	const defaultOption = getCountryDetails({ country_code: code });
 
 	const { name, id } = defaultOption || {};
 

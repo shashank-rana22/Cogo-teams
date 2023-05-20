@@ -7,8 +7,19 @@ const countriesHash = countries.reduce(
 	{},
 );
 
-export const getCountryId = (countryCode = '') => countries.find(({ country_code }) => country_code === countryCode)?.id;
+const countrieCodeHash = countries.reduce(
+	(pv, acc) => ({ ...pv, [acc.country_code]: acc }),
+	{},
+);
 
-const getCountryDetails = ({ country_id }) => countriesHash[country_id] || {};
+const getCountryDetails = ({ country_id, country_code }) => {
+	const countryDetails = countriesHash[country_id] || countrieCodeHash[country_code] || {};
+
+	if (country_id && country_code) {
+		return countryDetails.country_code === country_code ? countryDetails : {};
+	}
+
+	return countryDetails;
+};
 
 export default getCountryDetails;

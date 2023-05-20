@@ -1,9 +1,15 @@
 import { getByKey } from '@cogoport/utils';
 
-import GLOBAL_CONSTANTS from '../../constants/globals';
+import IN from '../../constants/geo/IN';
+import VN from '../../constants/geo/VN';
 import getCountryDetails from '../getCountryDetails';
 
-const getDetails = ({
+const COUNTRY_SPECIFIC_DATA = {
+	IN : IN.others,
+	VN : VN.others,
+};
+
+const getCountrySpecificData = ({
 	country_id,
 	accessor = '',
 	accessorType = '',
@@ -17,11 +23,11 @@ const getDetails = ({
 
 	let defaultCountryCode = countryCode;
 
-	if (!(countryCode in GLOBAL_CONSTANTS.country_specific_data)) {
+	if (!(countryCode in COUNTRY_SPECIFIC_DATA)) {
 		defaultCountryCode = isDefaultData ? 'IN' : '';
 	}
 
-	const data = GLOBAL_CONSTANTS.country_specific_data[defaultCountryCode] || {};
+	const data = COUNTRY_SPECIFIC_DATA[defaultCountryCode] || {};
 
 	return getByKey(data[accessorType], accessor) || null;
 };
@@ -34,7 +40,7 @@ function CountrySpecificData({
 }) {
 	return (
 		<>
-			{getDetails({
+			{getCountrySpecificData({
 				country_id,
 				accessor,
 				accessorType,
@@ -43,17 +49,5 @@ function CountrySpecificData({
 		</>
 	);
 }
-
-const getCountrySpecificData = ({
-	country_id,
-	accessor = '',
-	accessorType = '',
-	isDefaultData,
-}) => getDetails({
-	country_id,
-	accessor,
-	accessorType,
-	isDefaultData,
-});
 
 export { getCountrySpecificData, CountrySpecificData };

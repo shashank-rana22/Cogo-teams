@@ -395,4 +395,27 @@ export default {
 			},
 		},
 	},
+	others: {
+		registration_number: {
+			label: 'GST',
+			pattern:
+					/\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
+			max_length: 15,
+		},
+
+		pan_number: {
+			label   : 'PAN',
+			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+		},
+
+		economic_zone: {
+			label: 'SEZ',
+		},
+
+		navigations: {
+			onboard_vendor: {
+				validate_registration: true,
+			},
+		},
+	},
 };
