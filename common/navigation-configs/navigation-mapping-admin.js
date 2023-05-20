@@ -1773,19 +1773,14 @@ const navigationMappingAdmin = {
 		isSubNavs   : true,
 		icon        : IcMUserAllocations,
 		module_type : 'dashboards',
-		main_apis   : [
-			'get_allocation_configurations',
-			'get_allocation_relations',
-			'get_allocation_requests',
-			'get_allocation_quotas',
-		],
-		options: [
+		options     : [
 			{
 				key           : 'allocations-core_engine',
 				title         : 'Core Engine',
 				href          : '/v2/allocation/core-engine',
 				as            : '/v2/allocation/core-engine',
 				possible_apis : apis.allocation_engine,
+				main_apis     : ['get_allocation_requests'],
 			},
 			{
 				key           : 'allocations-kam_expertise',
@@ -1800,6 +1795,7 @@ const navigationMappingAdmin = {
 				href          : '/v2/allocation/crm-feedback-dashboard',
 				as            : '/v2/allocation/crm-feedback-dashboard',
 				possible_apis : apis.crm_feedback_dashboard,
+				main_apis     : ['get_allocation_feedbacks'],
 			},
 			{
 				key           : 'allocations-account_scoring',
@@ -2273,6 +2269,22 @@ const navigationMappingAdmin = {
 				possible_apis : apis.saas_subscription_plan,
 			},
 		],
+	},
+	chakravyuh: {
+		key         : 'chakravyuh',
+		title       : 'Chakravyuh',
+		isSubNavs   : true,
+		module_type : 'crm',
+		options     : [
+			{
+				key           : 'chakravyuh-trends',
+				title         : 'Pricing Trends',
+				href          : '/v2/pricing/trends',
+				as            : '/v2/pricing/trends',
+				possible_apis : apis.pricing_trends,
+			},
+		],
+
 	},
 };
 

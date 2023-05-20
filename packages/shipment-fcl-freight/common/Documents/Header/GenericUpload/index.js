@@ -9,8 +9,9 @@ import getCreateDocumentParams from './getCreateDocumentParams';
 
 const SUPPLIER_STAKEHOLDERS = [
 	'booking_desk',
-	'document_desk',
 	'booking_desk_manager',
+	'document_desk',
+	'document_desk_manager',
 	'costbooking_ops',
 	'costbooking_manager',
 	'lastmile_ops',

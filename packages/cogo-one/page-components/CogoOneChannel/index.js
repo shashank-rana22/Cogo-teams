@@ -23,6 +23,7 @@ import Customers from './Customers';
 import DialCallModal from './DialCallModal';
 import EmptyChatPage from './EmptyChatPage';
 import ProfileDetails from './ProfileDetails';
+import ReminderModal from './ReminderModal';
 import styles from './styles.module.css';
 
 function CogoOne() {
@@ -111,6 +112,7 @@ function CogoOne() {
 		updateLeaduser,
 		handleScroll,
 		activeRoomLoading,
+		getAssignedChats,
 	} = useListChats({
 		firestore,
 		userId,
@@ -279,6 +281,7 @@ function CogoOne() {
 					refetchTickets={refetchTickets}
 				/>
 			)}
+			<ReminderModal firestore={firestore} agentId={userId} getAssignedChats={getAssignedChats} />
 		</>
 	);
 }
