@@ -98,6 +98,27 @@
         ],
         "possible_filters":["importer_exporter_id","pending_invoice","source","tags"]
     },
+    "fcl_cfs":{
+        "tabs":[
+            {
+                "label":"Confirm Booking",
+                "value":"mark_confirmed"
+            },
+            {
+                "label":"In Progress",
+                "value":"mark_completed"
+            },
+            {
+                "label":"Completed",
+                "value":"completed"
+            },
+            {
+                "label":"Cancelled",
+                "value":"cancelled"
+            }
+        ],
+        "possible_filters":["importer_exporter_id","pending_invoice","source","tags"]
+    },
     "fcl_local":{
         "tabs":[
             {
