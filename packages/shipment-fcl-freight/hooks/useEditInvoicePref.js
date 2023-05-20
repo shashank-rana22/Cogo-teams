@@ -9,7 +9,6 @@ import formatIps from '../common/SalesInvoice/helpers/format-ips';
 import IncoTermMapping from '../common/SalesInvoice/helpers/IncoTermMapping.json';
 import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
 
-const exportServices = ['fcl_freight', 'lcl_freight', 'air_freight'];
 const exportServiceTypes = [
 	'fcl_freight_service',
 	'lcl_freight_service',
@@ -35,26 +34,28 @@ const isAllServicesTaken = (
 
 	let mainServices = [];
 	if (shipment_data?.state === 'cancelled') {
-		mainServices = invoicing_parties?.[0]?.services?.filter(
+		mainServices = invoicing_parties?.filter(
 			(service) => service?.service_type === shipmentMainService,
 		);
 	} else {
-		mainServices = invoicing_parties?.[0]?.services?.filter(
+		mainServices = invoicing_parties?.filter(
 			(service) => service?.service_type !== 'subsidiary_service',
 		);
 	}
+
 	let isAllMainServicesTaken = true;
 	const notTaken = [];
+
 	mainServices.forEach((service) => {
 		if (!allServicesTaken.includes(service.service_id)) {
 			isAllMainServicesTaken = false;
 			notTaken.push(service.service_type);
 		}
 	});
+
 	if (allServicesTaken.length !== allServiceLineitemsCount) {
 		isAllMainServicesTaken = false;
 	}
-
 	return { isAllMainServicesTaken, notTaken };
 };
 
@@ -88,12 +89,10 @@ const useEditInvoicePref = ({
 
 	const {
 		inco_term = '',
-		shipment_type,
 		importer_exporter_id,
 	} = shipment_data;
 
-	const updateExportInvoices = IncoTermMapping[inco_term] === 'export'
-		&& exportServices.includes(shipment_type);
+	const updateExportInvoices = IncoTermMapping[inco_term] === 'export';
 
 	const endPoint = updateExportInvoices ? '/update_shipment_export_invoice_combination'
 		: '/update_shipment_invoice_combination';
