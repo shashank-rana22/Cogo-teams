@@ -123,11 +123,12 @@ function SupplierDetails({
 		if (isEmpty(historyData)) {
 			return <div>First Time</div>;
 		}
+
 		return (
 			<>
 				<div className={styles.details}>LAST 10 SID Details</div>
 				{historyData.map((item:any) => (
-					<div>
+					<div key={item}>
 						{' '}
 						SID -
 						{' '}
