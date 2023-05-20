@@ -1,5 +1,6 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
+import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { CSSProperties } from 'react';
 
@@ -9,6 +10,7 @@ import RenderIRNGenerated from '../commons/RenderIRNGenerated';
 import RibbonRender from '../commons/RibbonRender';
 import { getDocumentNumber, getDocumentUrl } from '../Utils/getDocumentNumber';
 
+import ShipmentView from './ShipmentView';
 import SortHeaderInvoice from './SortHeaderInvoice';
 import styles from './styles.module.css';
 
@@ -49,6 +51,8 @@ interface InvoiceTable {
 	invoiceFilters?: object,
 	setinvoiceFilters?: (p:object) => void,
 }
+const MIN_NAME_STRING = 0;
+const MAX_NAME_STRING = 12;
 
 const completedColumn = ({
 	refetch,
@@ -70,7 +74,7 @@ const completedColumn = ({
 		accessor : (row) => (
 			showName
 			&& (
-				(getByKey(row, 'organizationName') as string).length > 10 ? (
+				(getByKey(row, 'organizationName') as string).length > MAX_NAME_STRING ? (
 					<Tooltip
 						interactive
 						placement="top"
@@ -78,8 +82,8 @@ const completedColumn = ({
 					>
 						<text className={styles.cursor}>
 							{`${(getByKey(row, 'organizationName') as string).substring(
-								0,
-								10,
+								MIN_NAME_STRING,
+								MAX_NAME_STRING,
 							)}...`}
 						</text>
 					</Tooltip>
@@ -130,7 +134,9 @@ const completedColumn = ({
 						)}
 					<div>
 						<Pill size="sm" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
-							{startCase(getByKey(row, 'invoiceType') as string)}
+
+							{row?.eInvoicePdfUrl ? 'E INVOICE' : startCase(getByKey(row, 'invoiceType') as string)}
+
 						</Pill>
 					</div>
 				</div>
@@ -142,60 +148,7 @@ const completedColumn = ({
 	{
 		Header   : 'SID',
 		accessor : (row) => (
-			<div className={styles.field_pair}>
-
-				{(getByKey(row, 'sidNo') as string).length > 10 ? (
-					<Tooltip
-						interactive
-						placement="top"
-						content={<div className={styles.tool_tip}>{getByKey(row, 'sidNo') as string}</div>}
-					>
-						<text className={styles.sid}>
-							{`${(getByKey(row, 'sidNo') as string).substring(
-								0,
-								10,
-							)}...`}
-						</text>
-					</Tooltip>
-				)
-					: (
-						<div className={styles.sid}>
-							{getByKey(row, 'sidNo') as string}
-						</div>
-					)}
-
-				{startCase(getByKey(row, 'serviceType') as string).length > 10 ? (
-					<Tooltip
-						interactive
-						placement="top"
-						content={(
-							<div className={styles.tool_tip}>
-								{startCase(getByKey(row, 'serviceType') as string)}
-							</div>
-						)}
-					>
-						<text className={styles.cursor}>
-							{`${startCase(getByKey(row, 'serviceType') as string).substring(
-								0,
-								10,
-							)}...`}
-						</text>
-					</Tooltip>
-				)
-					: (
-						<div className={styles.cursor}>
-							{startCase(getByKey(row, 'serviceType') as string)}
-						</div>
-					)}
-			</div>
-		),
-	},
-	{
-		Header   : 'Entity',
-		accessor : (row) => (
-			<div style={{ width: '30px' }}>
-				{getByKey(row, 'entityCode') as string}
-			</div>
+			<ShipmentView row={row} />
 		),
 	},
 	{
@@ -343,7 +296,7 @@ const completedColumn = ({
 	},
 
 	{
-		Header   : 'OverDue Days',
+		Header   : 'Overdue',
 		accessor : (row) => (
 			<div>
 				{getByKey(row, 'overDueDays') as number}
@@ -361,39 +314,83 @@ const completedColumn = ({
 					'--color': invoiceStatus[(getByKey(row, 'invoiceStatus') as string)],
 				} as CSSProperties}
 			>
+				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
+					<div>
+						{(startCase(getByKey(row, 'invoiceStatus') as string)).length > 10 ? (
+							<Tooltip
+								interactive
+								placement="top"
+								content={(
+									<div
+										className={styles.tool_tip}
+									>
+										{row?.eInvoicePdfUrl
+											? 'E INVOICE GENERATED'
+											: startCase(getByKey(row, 'invoiceStatus') as string)}
 
-				{(startCase(getByKey(row, 'invoiceStatus') as string)).length > 10 ? (
-					<Tooltip
-						interactive
-						placement="top"
-						content={(
-							<div
-								className={styles.tool_tip}
+									</div>
+								)}
 							>
-								{startCase(getByKey(row, 'invoiceStatus') as string)}
-							</div>
-						)}
-					>
-						<text className={styles.style_text}>
-							{`${startCase(getByKey(row, 'invoiceStatus') as string).substring(
-								0,
-								10,
-							)}...`}
-						</text>
-					</Tooltip>
-				)
-					: (
-						<div className={styles.style_text}>
-							{startCase(getByKey(row, 'invoiceStatus') as string)}
-						</div>
-					)}
+								<text className={styles.style_text}>
+									{row?.eInvoicePdfUrl
+										? `${'E INVOICE GENERATED'.substring(
+											0,
+											10,
+										)}...`
+										: `${startCase(getByKey(row, 'invoiceStatus') as string).substring(
+											0,
+											10,
+										)}...`}
+
+								</text>
+							</Tooltip>
+						)
+							: (
+								<div className={styles.style_text}>
+									{startCase(getByKey(row, 'invoiceStatus') as string)}
+								</div>
+							)}
+					</div>
+				)}
 			</div>
 
 		),
 	},
 
 	{
-		Header   : <div>Actions</div>,
+		Header:
+	<div className={styles.action_div}>
+		<span>
+			Actions
+		</span>
+		{' '}
+		<Tooltip
+			placement="top"
+			content={(
+				<div>
+					<div className={styles.div_flex}>
+						<IcMProvision
+							height={24}
+							width={24}
+							color="#F68B21"
+						/>
+						<span className={styles.margin_span}>
+							Remarks
+						</span>
+					</div>
+					<div className={styles.div_flex}>
+						<IcMOverview width={24} height={24} color="#F68B21" />
+						<span className={styles.margin_span}>
+							Invoice TimeLine
+						</span>
+					</div>
+				</div>
+
+			)}
+		>
+			<IcMInfo className={styles.icon_style} />
+		</Tooltip>
+	</div>,
 		id       : 'remarks',
 		accessor : (row) => (
 			<div style={{ display: 'flex', alignItems: 'center' }}>

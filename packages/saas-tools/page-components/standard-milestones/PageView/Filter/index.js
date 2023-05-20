@@ -8,10 +8,10 @@ import styles from './styles.module.css';
 function Filter({ hookSetters = () => {}, filters }) {
 	const setValueRef = useRef();
 	setValueRef.current = (name, e) => {
-		hookSetters.setFilters((prev) => ({ ...prev, [name]: e }));
+		hookSetters.setFilters((prev) => ({ ...prev, [name]: e, page: 1 }));
 	};
 	const setValue = useCallback((name, e) => {
-		hookSetters.setFilters((prev) => ({ ...prev, [name]: e }));
+		hookSetters.setFilters((prev) => ({ ...prev, [name]: e, page: 1 }));
 	}, [hookSetters]);
 
 	const [inputValue, setInputValue] = useState('');
