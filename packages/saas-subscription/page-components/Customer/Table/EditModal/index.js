@@ -36,11 +36,11 @@ function EditModal({ editModal, setEditModal }) {
 	} = useGetSubscriptionInfo({ setEditModal, editModal });
 
 	const { active = {}, quotas = [], future = {} } = subInfo || {};
-	const { id = '', plan = {}, pricing = {} } = active || {};
+	const { id = '', plan = {}, pricing = {}, product_family = {} } = active || {};
 
 	const getDetailValue = (name) => {
 		if (name === 'plan_details') return startCase(pricing?.name);
-		return startCase(plan?.organization_type);
+		return startCase(product_family?.product_family_name);
 	};
 
 	return (

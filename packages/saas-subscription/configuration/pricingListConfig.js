@@ -10,21 +10,18 @@ const pricingListConfig = [
 		width : '22%',
 	},
 	{
-		key   : 'price',
-		title : 'Price',
-		width : '22%',
+		key        : 'price',
+		title      : 'Price',
+		width      : '22%',
+		renderFunc : 'renderPrice',
 	},
 	{
-		key   : 'discount',
-		title : 'Plan Discount',
-		width : '22%',
+		key        : 'discount',
+		title      : 'Plan Discount',
+		width      : '22%',
+		renderFunc : 'renderDiscount',
 	},
-	{
-		key        : 'edit',
-		title      : '',
-		width      : '5%',
-		renderFunc : 'renderEdit',
-	},
+
 ];
 
 export default pricingListConfig;

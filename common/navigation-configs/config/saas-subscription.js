@@ -5,7 +5,7 @@ const saasSubscription = {
 	'/[partner_id]/saas-subscription/plan': {
 		navigation: 'saas_subscription-plan',
 	},
-	'/[partner_id]/saas-subscription/plan/[sub_id]': {
+	'/[partner_id]/saas-subscription/plan/[plan_id]': {
 		navigation : 'saas_subscription-plan',
 		isMainNav  : false,
 	},

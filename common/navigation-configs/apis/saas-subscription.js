@@ -46,7 +46,23 @@ const apis = {
 			access_type  : 'private',
 		},
 	],
-	saas_subscription_plan: [],
+	saas_subscription_plan: [
+		{
+			api          : 'list_saas_plans',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'get_saas_plan_details',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'update_saas_plan_pricing',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+	],
 };
 
 export default apis;

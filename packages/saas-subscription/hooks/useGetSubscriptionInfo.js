@@ -11,9 +11,9 @@ const useGetSubscriptionInfo = ({ editModal = {}, setEditModal }) => {
 		url    : '/get_saas_subscription_profile',
 	}, { manual: true });
 
-	const refetchSubscriptionInfo = async (saas_subscription_customer_id) => {
+	const refetchSubscriptionInfo = (saas_subscription_customer_id) => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					saas_subscription_customer_id,
 				},
@@ -23,14 +23,10 @@ const useGetSubscriptionInfo = ({ editModal = {}, setEditModal }) => {
 		}
 	};
 
-	const getSubInfo = () => {
-		const customerSubId = active_subscription?.saas_subscription_customer_id || '';
-		refetchSubscriptionInfo(customerSubId);
-	};
-
 	useEffect(() => {
 		if (!isEmpty(info) || apiCall) {
-			getSubInfo();
+			const customerSubId = active_subscription?.saas_subscription_customer_id || '';
+			refetchSubscriptionInfo(customerSubId);
 		}
 	}, [info, apiCall]);
 

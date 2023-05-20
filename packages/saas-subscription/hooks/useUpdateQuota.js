@@ -18,12 +18,12 @@ const useUpdateQuota = ({ id = '', successHandler }) => {
 		const { action, is_addon, quantity } = data || {};
 		try {
 			await trigger({
-				params: {
+				data: {
 					id,
-					limit      : quantity,
+					limit       : quantity,
 					is_addon,
-					action,
-					event_name : action,
+					action_name : action,
+					event_name  : action,
 				},
 			});
 			successHandler();

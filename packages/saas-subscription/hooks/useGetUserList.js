@@ -11,10 +11,10 @@ const useGetUserList = () => {
 		url    : '/list_saas_subscription_customers',
 	}, { manual: true });
 
-	const refectUserList = async () => {
+	const refectUserList = () => {
 		const { page, customer_segment, search } = globalFilters;
 		try {
-			await trigger({
+			trigger({
 				params: {
 					service_object_required : true,
 					filters                 : { customer_segment, q: search },
@@ -25,7 +25,7 @@ const useGetUserList = () => {
 			console.log(err);
 		}
 	};
-	console.log(globalFilters, 'globalFilters');
+
 	useEffect(() => {
 		refectUserList();
 	}, [globalFilters]);

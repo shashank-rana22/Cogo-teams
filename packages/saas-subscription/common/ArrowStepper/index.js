@@ -13,6 +13,7 @@ function ArrowStepper({
 		<div className={styles.stepper_container}>
 			{items.map((item) => (
 				<div
+					key={item.key}
 					className={cl`${styles.container} ${customer_segment === item.key ? styles.active : ''}`}
 					onClick={() => setGlobalFilters((prev) => ({
 						...prev,
