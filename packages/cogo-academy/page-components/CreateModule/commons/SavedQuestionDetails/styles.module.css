@@ -13,18 +13,35 @@
 				color: #000;
 				background-color: rgb(255 255 255 / 80%);
 			}
+
+			& .ui_table_head_cell:nth-of-type(1) {
+				padding: 12px 28px;
+			}
+
+			& .ui_table_body_cell:nth-of-type(7) {
+				padding: 12px 28px;
+			}
 		}
 
 		.ui_table_body_container {
 			background-color: #fff;
 
 			.ui_table_body_row {
+				cursor: pointer;
 				border-radius: 8px;
 
 				.ui_table_body_cell {
 					padding: 12px;
 					font-size: 14px;
 					color: #221f20;
+				}
+
+				& .ui_table_body_cell:nth-of-type(1) {
+					padding: 12px 28px;
+				}
+
+				& .ui_table_body_cell:nth-of-type(7) {
+					padding: 12px 28px;
 				}
 			}
 		}

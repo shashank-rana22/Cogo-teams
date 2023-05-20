@@ -4,9 +4,10 @@
 }
 
 .shipment_content_container {
+	position: relative;
 	font-size: 12px;
 	background: #fff;
-	border: 1px solid transparent;
+	border-bottom: 1px solid transparent;
 	border-radius: 8px;
 	box-shadow: 0 0 4px rgb(0 0 0 / 25%);
 }
@@ -68,8 +69,48 @@
 .bucket_title {
 	color: #000;
 	text-decoration: underline;
+	cursor: pointer;
 
 	&:hover {
 		color: #f68b21;
 	}
+}
+
+.top_bar {
+	display: flex;
+	justify-content: space-between;
+}
+
+.export {
+	padding: 2px 6px;
+	margin-right: auto;
+	font-size: 10px;
+	background-color: #fef199;
+	border-radius: 8px 0;
+}
+
+.import {
+	padding: 2px 6px;
+	margin-right: auto;
+	font-size: 10px;
+	background-color: #cfeaed;
+	border-radius: 8px 0;
+}
+
+.status {
+	position: absolute;
+	right: 0;
+	width: fit-content;
+	padding: 2px 6px;
+	margin-left: auto;
+	font-size: 10px;
+	white-space: nowrap;
+	background: #fef199;
+	border-radius: 0 8px;
+}
+
+.tabs_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }

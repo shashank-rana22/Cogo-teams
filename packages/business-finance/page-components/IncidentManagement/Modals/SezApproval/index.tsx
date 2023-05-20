@@ -133,16 +133,6 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 						<Modal.Footer>
 							<div className={styles.button}>
 								<Button
-									size="md"
-									style={{ marginRight: '8px' }}
-									disabled={isDisabled}
-									onClick={() => {
-										OnAction({ inputValues, status: 'APPROVED' });
-									}}
-								>
-									Approve
-								</Button>
-								<Button
 									themeType="secondary"
 									size="md"
 									style={{ marginRight: '8px' }}
@@ -152,6 +142,16 @@ function SezApproval({ sezRequest, organization, id, refetch = () => {}, isEdita
 									}}
 								>
 									Reject
+								</Button>
+								<Button
+									size="md"
+									style={{ marginRight: '8px' }}
+									disabled={isDisabled}
+									onClick={() => {
+										OnAction({ inputValues, status: 'APPROVED' });
+									}}
+								>
+									Approve
 								</Button>
 							</div>
 						</Modal.Footer>

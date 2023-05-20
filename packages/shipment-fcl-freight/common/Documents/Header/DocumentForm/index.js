@@ -34,8 +34,27 @@ function DocumentForm({
 			break;
 
 		case 'booking_desk':
-		case 'document_desk':
 		case 'booking_desk_manager':
+		case 'document_desk':
+		case 'document_desk_manager':
+			params = {
+				shipment_id       : shipment_data?.id,
+				organization_ids  : [uploaded_by_org_id],
+				org_account_types : ['service_provider'],
+				actions           : ['create'],
+			};
+			break;
+		case 'costbooking_ops':
+		case 'costbooking_manager':
+			params = {
+				shipment_id       : shipment_data?.id,
+				organization_ids  : [uploaded_by_org_id],
+				org_account_types : ['service_provider'],
+				actions           : ['create'],
+			};
+			break;
+		case 'lastmile_ops':
+		case 'lastmile_ops_manager':
 			params = {
 				shipment_id       : shipment_data?.id,
 				organization_ids  : [uploaded_by_org_id],

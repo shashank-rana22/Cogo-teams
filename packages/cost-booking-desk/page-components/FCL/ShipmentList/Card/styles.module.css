@@ -1,0 +1,75 @@
+.card {
+	cursor: pointer;
+	background: var(--color-secondary-5);
+	border-radius: 4px;
+	box-shadow: 0 0 6px 2px rgb(68 68 68 / 20%);
+
+	&:not(:last-of-type) {
+		margin-bottom: 14px;
+	}
+
+	&:hover {
+		box-shadow: 0 0 6px 2px rgb(133 110 249 / 20%);
+	}
+}
+
+.shipment_info {
+	width: 20%;
+}
+
+.line_item {
+	width: 20%;
+	margin: auto 20px;
+}
+
+.port {
+	width: 45%;
+}
+
+.cargo {
+	width: 25%;
+}
+
+.card_body {
+	display: flex;
+	align-items: center;
+	padding-bottom: 10px;
+
+	.separator {
+		align-self: stretch;
+		width: 1px;
+		background: var(--color-secondary-greyscale-5);
+	}
+}
+
+.footer {
+	right: 0;
+	bottom: 0;
+	display: flex;
+	justify-content: flex-end;
+	padding: 0 2px 2px 0;
+	font-size: var(--font-size-sm);
+	font-weight: 600;
+}
+
+.animate_card {
+	background: linear-gradient(90deg, #fff, #fae7e7, #fff);
+	background-size: 400% 400%;
+	animation: background-anim 5s ease-in-out infinite alternate;
+
+	@keyframes background-anim {
+		from {
+			background-position: 100% 0;
+		}
+
+		to {
+			background-position: 0 0;
+		}
+	}
+}
+
+.gate_in_cutoff {
+	font-size: var(--font-size-sm);
+	font-weight: 600;
+	text-align: right;
+}

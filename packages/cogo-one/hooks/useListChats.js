@@ -317,6 +317,15 @@ const useListChats = ({
 		}
 	};
 
+	const getAssignedChats = useCallback(async () => {
+		const assignedChatsQuery = query(
+			omniChannelCollection,
+			where('session_type', '==', 'admin'),
+			where('support_agent_id', '==', userId),
+		);
+		const getAssignedChatsQuery = await getDocs(assignedChatsQuery);
+		return getAssignedChatsQuery.size || 0;
+	}, [omniChannelCollection, userId]);
 	return {
 		chatsData: {
 			messagesList     : sortedUnpinnedList || [],
@@ -334,6 +343,7 @@ const useListChats = ({
 		setFirstMount,
 		handleScroll,
 		activeRoomLoading,
+		getAssignedChats,
 	};
 };
 

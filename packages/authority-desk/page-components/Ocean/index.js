@@ -53,7 +53,10 @@ function Ocean() {
 			<Tabs
 				activeTab={tabsState.activeTab}
 				themeType="primary"
-				onChange={(val) => setTabsState({ ...tabsState, activeTab: val })}
+				onChange={(val) => {
+					setTabsState({ ...tabsState, activeTab: val });
+					setFilters({ ...filters, page: 1 });
+				}}
 				className={styles.tab_panel}
 				fullWidth
 			>
@@ -72,16 +75,20 @@ function Ocean() {
 				<div className={styles.service_tabs}>
 					{Object.keys(services).map((item) => (
 						<ClickableDiv
-							onClick={() => setTabsState({ ...tabsState, service: item })}
-							className={cl`${tabsState.service === item ? styles.active : ''} ${styles.service_tab}`}
+							key={item}
+							onClick={() => {
+								setTabsState({ ...tabsState, service: item });
+								setFilters({ ...filters, page: 1 });
+							}}
+							className={cl`${tabsState.service === item ? styles.active : ''}
+							${styles.service_tab}`}
 						>
 							{services[item]}
 						</ClickableDiv>
 					))}
 				</div>
 
-				<div>
-
+				<div className={styles.right_content}>
 					<div className={styles.version}>
 						<Toggle
 							size="md"
@@ -96,41 +103,39 @@ function Ocean() {
 
 			</div>
 
-			{
-				loading ? (
-					<div className={styles.loading_buckets}>
-						{ buckets.map(() => <Placeholder className={styles.loader} />) }
-					</div>
-				)
-					: (
-						<div className={styles.list_filters}>
-							<div className={styles.buckets}>
-								{buckets.map((item) => (
+			<div className={styles.list_filters}>
+				<div className={styles.buckets}>
+					{buckets.map((item) => (
 
-									<ClickableDiv
-										className={cl`${tabsState.bucket === item?.name ? styles.active : ''} 
+						loading ? <Placeholder key={item} className={styles.loader} /> : 	(
+							<ClickableDiv
+								key={item}
+								className={cl`${tabsState.bucket === item?.name ? styles.active : ''} 
 								${styles.bucket} `}
-										onClick={() => setTabsState({
-											...tabsState,
-											bucket            : item?.name,
-											subApprovedBucket : item?.name === 'approved' ? 'approved' : '',
-										})}
-									>
-										{item.title}
-										{' '}
-										<span className={`cl${tabsState.bucket === item ? styles.active : ''} 
+								onClick={() => {
+									setTabsState({
+										...tabsState,
+										bucket            : item?.name,
+										subApprovedBucket : item?.name === 'approved' ? 'approved' : '',
+									});
+									setFilters({ ...filters, page: 1 });
+								}}
+							>
+								{item.title}
+								{' '}
+								<span className={`cl${tabsState.bucket === item ? styles.active : ''} 
 										${styles.count}`}
-										>
-											{item.count || 0}
-										</span>
-									</ClickableDiv>
-								))}
-							</div>
+								>
+									{item.count || 0}
+								</span>
+							</ClickableDiv>
+						)
 
-							<Filters filters={filters} setFilters={setFilters} />
-						</div>
-					)
-			}
+					))}
+				</div>
+
+				<Filters filters={filters} setFilters={setFilters} />
+			</div>
 
 			<List
 				data={data}

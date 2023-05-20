@@ -12,6 +12,7 @@ import BlDetails from './BlDetails';
 import CustodyShipments from './CustodyShipments';
 import Invoices from './Invoices';
 import Organizations from './Organizations';
+import PocSop from './PocSop';
 import ReleaseCard from './ReleaseCard';
 import styles from './styles.module.css';
 
@@ -29,7 +30,7 @@ function ShipmentAudit({
 		shipments : <CustodyShipments item={item} />,
 	};
 
-	const { bucket = 'eligible', service } = tabsState;
+	const { bucket = 'eligible', service, activeTab = 'bl' } = tabsState;
 
 	const { freight_service = {}, local_service = {} } = item;
 
@@ -66,9 +67,12 @@ function ShipmentAudit({
 				{'>'}
 &nbsp;
 			</div>
-			<div className={styles.bucket_title}>
+			<ClickableDiv
+				className={styles.bucket_title}
+				onClick={() => closeModal()}
+			>
 				{startCase(bucket)}
-			</div>
+			</ClickableDiv>
 		</div>
 
 	);
@@ -86,6 +90,17 @@ function ShipmentAudit({
 				/>
 				<Modal.Body className={styles.modal_body_content}>
 					<div className={styles.shipment_content_container}>
+						<div className={styles.top_bar}>
+							<div className={styles[item?.trade_type]}>
+								{startCase(item?.trade_type)}
+							</div>
+
+							<div className={styles.status}>
+					&nbsp; Status: &nbsp;
+								{startCase(freight_service?.state)}
+							</div>
+
+						</div>
 						<div className={styles.shipment_details}>
 							<ShipmentBreif item={item} service={service} redirectable />
 
@@ -99,29 +114,42 @@ function ShipmentAudit({
 						</div>
 					</div>
 
-					<div className={styles.tabs}>
-						{Object.keys(tabs).map((tab) => (
-							<ClickableDiv
-								className={cl`${styles.tab} ${
-									tab === additionalTab
-										? styles.active
-										: ''
-								}`}
-								onClick={() => setAdditionalTab(tab)}
-							>
-								{tabs[tab]}
-							</ClickableDiv>
-						))}
+					<div className={styles.tabs_header}>
+
+						<div className={styles.tabs}>
+							{Object.keys(tabs).map((tab) => (
+								<ClickableDiv
+									key={tab}
+									className={cl`${styles.tab} ${
+										tab === additionalTab
+											? styles.active
+											: ''
+									}`}
+									onClick={() => setAdditionalTab(tab)}
+								>
+									{tabs[tab]}
+								</ClickableDiv>
+							))}
+						</div>
+						<PocSop shipment_data={item} primary_service={primary_service} role={role} />
 					</div>
 
 					<div className={styles.more_info}>
 						{moreInfoComponentMapping[additionalTab]}
+
 					</div>
+
 				</Modal.Body>
 
 				{role === 'credit_control' && isApprovalAllowed ? (
 					<Modal.Footer className={styles.modal_footer_content}>
-						<ReleaseCard data={item} bucket={bucket} refetch={refetch} setShowModal={setShowModal} />
+						<ReleaseCard
+							data={item}
+							bucket={bucket}
+							refetch={refetch}
+							setShowModal={setShowModal}
+							activeTab={activeTab}
+						/>
 					</Modal.Footer>
 				) : null}
 			</Modal>

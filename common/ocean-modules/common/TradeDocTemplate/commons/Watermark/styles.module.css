@@ -1,0 +1,22 @@
+.container {
+	position: absolute;
+	top: calc(50% - 50px);
+	left: calc(50% - 100px);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 200px;
+	height: 100px;
+}
+
+.text {
+	z-index: 1;
+	font-size: 80px;
+	font-weight: bold;
+	color: rgb(0 0 0 / 10%);
+	text-align: center;
+	text-transform: uppercase;
+	letter-spacing: 4px;
+	user-select: none;
+	transform: rotate3d(0, 0, 1, -45deg);
+}

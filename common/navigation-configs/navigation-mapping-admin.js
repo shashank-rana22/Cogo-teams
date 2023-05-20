@@ -55,6 +55,7 @@ import {
 	IcMFaq,
 	IcMActivePlans,
 	IcMExportfile,
+	IcMAirSchedules,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -1047,8 +1048,8 @@ const navigationMappingAdmin = {
 	unified_dashboard: {
 		key           : 'unified_dashboard',
 		title         : 'Unified Dashboard',
-		href          : '/unified-dashboard',
-		as            : '/unified-dashboard',
+		href          : '/v2/unified-dashboard',
+		as            : '/v2/unified-dashboard',
 		type          : 'link',
 		icon          : IcMDashboard,
 		possible_apis : apis.unified_dashboard,
@@ -1128,10 +1129,10 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-bn_salvage',
 				title         : 'BN Salvage',
-				href          : '/bn-salvage',
-				as            : '/bn-salvage',
+				href          : '/v2/bn-salvage',
+				as            : '/v2/bn-salvage',
 				type          : 'link',
-				main_apis     : ['list_shipments'],
+				main_apis     : ['list_booking_documents'],
 				possible_apis : apis.bn_salvage,
 			},
 			{
@@ -1157,8 +1158,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-booking_note_desk',
 				title         : 'Booking Desk',
-				href          : '/booking-desk',
-				as            : '/booking-desk',
+				href          : '/v2/booking-desk',
+				as            : '/v2/booking-desk',
 				type          : 'link',
 				main_apis     : ['list_booking_desk_shipments'],
 				possible_apis : [...apis.shipment, ...apis.booking_desk],
@@ -1340,8 +1341,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-bl_do_collection_release',
 				title         : 'BL/DO Collection - Release',
-				href          : '/bl_do-collection-release',
-				as            : '/bl_do-collection-release',
+				href          : '/v2/bl_do-collection-release',
+				as            : '/v2/bl_do-collection-release',
 				type          : 'link',
 				main_apis     : ['list_shipment_document_collections'],
 				possible_apis : [...apis.bl_do_collection_release, ...apis.shipment],
@@ -1372,7 +1373,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/last-mile',
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
-				possible_apis : [...apis.document_desk, ...apis.cogolens],
+				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
 		],
 	},
@@ -2208,6 +2209,16 @@ const navigationMappingAdmin = {
 				icon          : IcMDataPipeline,
 			},
 		],
+	},
+	air_repository: {
+		key           : 'air_repository',
+		title         : 'Air Repository',
+		icon          : IcMAirSchedules,
+		href          : '/v2/air-repository',
+		as            : '/v2/air-repository',
+		type          : 'link',
+		possible_apis : apis.air_repository,
+		module_type   : 'dashboards',
 	},
 	saas_tools: {
 		key       : 'saas_tools',

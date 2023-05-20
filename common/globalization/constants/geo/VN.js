@@ -85,6 +85,11 @@ export default {
 			'eab24509-187e-42b4-ae51-b77c74d82ad9', // Overseas CP KAM
 			'a5c83696-0248-4846-a558-1a054360f130', // Overseas CP KAM Manager
 			'650e1fe4-2e34-43c1-abfe-ce0a443aa4a6', // Prod_KAM Trasnport Sales
+			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
+			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
+			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
+			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse KAM
+			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // Cogoverse Shipment Specialist
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -110,15 +115,22 @@ export default {
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
 		credit_controller_id      : 'b2af88f9-84e4-44fd-92f8-12f74c55e5ae',
-		business_heads            : [
+		vietnam_business_heads    : [
+			'7f6f97fd-c17b-4760-a09f-d70b6ad963e8', // Rishi Agarwal
+			'065c7e26-69f7-4ceb-8f36-1e666b89de94', // Nam Bui
+		],
+		business_heads: [
 			'7c6c1fe7-4a4d-4f3a-b432-b05ffdec3b44', // Hrishikesh Kulkarni
 			'95d62549-8ab6-4ee5-a655-9edd0ec46dac', // Purnendu Shekhar
 			'cd8dde11-678c-4467-85b2-2e2d6055bef4', // Amitabh Shankar
+			'2d01b146-fd01-4887-8586-f398c929ef29', // Mohit Mogera
 		],
-		prod_kam_cp           : 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
-		prod_es_sales         : 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
-		entity_manager_id     : '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
-		service_ops1_role_ids : [
+		lastmile_ops_id         : 'b808aabb-2245-4369-aaa7-6ebd2d5de20b',
+		lastmile_ops_manager_id : '3965f742-f4e5-420a-911c-f3657be05028',
+		prod_kam_cp         				: 'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
+		prod_es_sales        			: 'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
+		entity_manager_id     		: '9d1d10dd-06c0-489d-92f8-272c6a40e9bb',
+		service_ops1_role_ids  	: [
 			'348bc262-64c3-4667-a23c-908ceca80233', // SO1 + Revenue Desk
 			'5b5ee698-ec53-47fe-9584-737c9a174f8c', // Prod_SO1
 			'f0af57b0-34eb-46e8-86a6-38abafcfc072', // SO1
@@ -128,6 +140,7 @@ export default {
 		service_ops2_role_id: [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
+			'8b04b2b9-baa1-4913-bf4c-b11effecef0b', // SO2 Executive
 		],
 		service_ops3_role_ids: [
 			'60869bd4-5f18-4400-a003-411eb49dcd4a', // Prod_COE_Finance_Executive
@@ -135,7 +148,9 @@ export default {
 			'2644ceb0-ebd4-4c51-af71-45067f27d78b', // Finance Controller Head
 			'ede05be5-8e8b-4f5a-8954-ae1b53c3cdc3', // Account Receivable Executive
 		],
-		sales_role: [
+		costbooking_ops_role_ids         : '281d52f4-096f-4c92-a629-57719c716ac6',
+		costbooking_ops_manager_role_ids : '219e184e-b080-4c83-837d-eb4b26a42e45',
+		sales_role                       : [
 			'c71dd2db-9c8d-4d0c-84c6-beece1b3af42',
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716',
 			'e0e2f83b-9e5b-41a3-948e-ab1ec9b0f3ad',
@@ -168,6 +183,7 @@ export default {
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
 	},
 	options: {
 		registration_types: [
@@ -279,6 +295,39 @@ export default {
 			{
 				label : '18 Ton',
 				value : 'Close_body_18_ton',
+			},
+		],
+		invoice_status: [
+			{ label: 'Draft', value: 'DRAFT' },
+			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
+			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
+			{ label: 'E-INVOICE Generated', value: 'IRN_GENERATED' },
+			{ label: 'Requested', value: 'REQUESTED' },
+		],
+		freight_container_types: [
+			{
+				label : 'Standard(Dry)',
+				value : 'standard',
+			},
+			{
+				label : 'Refrigerated (Reefer)',
+				value : 'refer',
+			},
+			{
+				label : 'Open Top',
+				value : 'open_top',
+			},
+			{
+				label : 'Flat Rack',
+				value : 'flat_rack',
+			},
+			{
+				label : 'ISO Tank',
+				value : 'iso_tank',
+			},
+			{
+				label : 'Open Side (One Door Open)',
+				value : 'open_side',
 			},
 		],
 	},
