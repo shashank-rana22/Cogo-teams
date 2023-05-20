@@ -11715,7 +11715,7 @@ const partner = {
 	cogo_one: [
 
 		{
-			api          : 'create_customer_feedback',
+			api          : 'create_agent_feedback',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

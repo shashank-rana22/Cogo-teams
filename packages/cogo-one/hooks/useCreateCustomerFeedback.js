@@ -7,7 +7,7 @@ const useCreateCustomerFeedback = ({ setShowFeedback = () => {} }) => {
 	const { profile, general } = useSelector((state) => state);
 	const { spot_search_ids } = general?.query || {};
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_customer_feedback',
+		url    : '/create_agent_feedback',
 		method : 'post',
 	}, { manual: true });
 
