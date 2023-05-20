@@ -106,7 +106,6 @@
 	display: flex;
 	align-items: center;
 }
-<<<<<<< HEAD
 .document{
 	display: flex;
 	margin-bottom: 8px;
@@ -114,9 +113,7 @@
 .button {
 margin-left: 10px;
 }
-=======
 
 .bold_data {
 	font-weight: 600;
 }
->>>>>>> 9785b76c2ba2ed7ec95c39da05f8705d68fa217a
