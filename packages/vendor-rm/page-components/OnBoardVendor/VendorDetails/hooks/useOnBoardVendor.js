@@ -56,8 +56,9 @@ function useOnBoardVendor({
 
 	const countrySpecificData = getCountrySpecificData({
 		country_id,
-		accessorType : 'navigations',
-		accessor     : 'onboard_vendor',
+		accessorType  : 'navigations',
+		accessor      : 'onboard_vendor',
+		isDefaultData : false,
 	});
 
 	const { validate_registration: isValidateRegistration = false } = countrySpecificData || {};
