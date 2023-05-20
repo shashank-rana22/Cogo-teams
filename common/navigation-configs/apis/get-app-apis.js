@@ -65,6 +65,8 @@ const app_apis = {
 	saas_trader_eligibility_check   : apis.app_saas_trader_eligibilty_check,
 	saas_order_history              : apis.app_saas_order_history,
 	export_factoting                : apis.export_factoring,
+	saas_cogostore                  : apis.app_saas_cogostore,
 	saas_import_export_doc          : apis.app_saas_import_export_doc,
+	saas_import_export_controls     : apis.app_saas_import_export_controls,
 };
 export default app_apis;

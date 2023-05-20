@@ -1,12 +1,15 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Pill } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
+import AdvanceSecurityDeposit from '../Modals/AdvanceSecurityDeposit';
+import AdvanceSecurityDepositRefund from '../Modals/AdvanceSecurityDepositRefund';
 import BankDetails from '../Modals/BankDetails';
 import ConcorModal from '../Modals/ConcorModal';
 import ICJVModal from '../Modals/ICJV_Modal';
 import JvModal from '../Modals/JvModal';
 import RequestCN from '../Modals/RequestCN';
 import SettlementModal from '../Modals/SettlementModal';
+import SezApproval from '../Modals/SezApproval';
 import TDSModal from '../Modals/TDSModal';
 import { TooltipInterface } from '../utils/interface';
 import { toTitleCase } from '../utils/titleCase';
@@ -43,7 +46,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				<Tooltip
 					interactive
 					content={(list || [{}]).map((item:TooltipInterface) => (
-						<div className={styles.trade_party_name}>
+						<div className={styles.trade_party_name} key={item?.id}>
 							<div>{toTitleCase(item?.div || '-')}</div>
 						</div>
 					))}
@@ -97,12 +100,29 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 		accessor : 'type',
 		id       : 'request_type',
 		Cell     : ({ row: { original } }) => {
-			const { type: requestType = '' } = original || {};
+			const { type: requestType = '', data } = original || {};
+
+			const { creditNoteRequest } = data || {};
+
+			const { revoked } = creditNoteRequest || {};
 			return (
-				<span>
-					{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
-						: toTitleCase(requestType.replace(/_/g, ' ') || '-')}
-				</span>
+				<div className={styles.credit}>
+					<span>
+						{ requestType === 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL' ? <span>ICJV Approval </span>
+							: toTitleCase(requestType.replace(/_/g, ' ') || '-')}
+
+					</span>
+					<span>
+						{typeof (revoked) === 'boolean' && (
+							<div>
+								{revoked
+									? <Pill size="md" color="#C4DC91">Fully</Pill>
+									: <Pill size="md" color="#FEF199">Partial</Pill>}
+							</div>
+						)}
+					</span>
+				</div>
+
 			);
 		},
 	},
@@ -148,6 +168,9 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				journalVoucherRequest,
 				interCompanyJournalVoucherRequest,
 				concorPdaApprovalRequest,
+				sezRequest,
+				advanceSecurityDeposit,
+				advanceSecurityDepositRefund,
 			} = data || {};
 
 			const { type, id } = row || {};
@@ -181,8 +204,8 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 					)}
 					{type === 'ISSUE_CREDIT_NOTE' && (
 						<RequestCN row={row} refetch={getIncidentData} id={id} />
-					)}
 
+					)}
 					{type === 'CONSOLIDATED_CREDIT_NOTE' && (
 						<RequestCN row={row} refetch={getIncidentData} id={id} />
 					)}
@@ -216,6 +239,32 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 							/>
 						)
 					}
+					{
+						type === 'SEZ_APPROVAL' && (
+							<SezApproval
+								sezRequest={sezRequest}
+								organization={organization}
+								id={id}
+								refetch={getIncidentData}
+							/>
+						)
+					}
+					{type === 'ADVANCE_SECURITY_DEPOSIT' && (
+						<AdvanceSecurityDeposit
+							advanceSecurityDeposit={advanceSecurityDeposit}
+							id={id}
+							row={row}
+							refetch={getIncidentData}
+						/>
+					)}
+					{type === 'ADVANCE_SECURITY_DEPOSIT_REFUND' && (
+						<AdvanceSecurityDepositRefund
+							advanceSecurityDepositRefund={advanceSecurityDepositRefund}
+							id={id}
+							row={row}
+							refetch={getIncidentData}
+						/>
+					)}
 
 				</>
 			);

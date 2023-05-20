@@ -1,4 +1,9 @@
-export const INVOICE_LIST_FILTERS = [
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+
+const geo = getGeoConstants();
+
+export const INVOICE_FILTER = () => [
 	{
 		name        : 'migrated',
 		placeholder : 'Migration',
@@ -19,10 +24,9 @@ export const INVOICE_LIST_FILTERS = [
 		caret       : true,
 		isClearable : true,
 		options     : [
-
 			{ value: 'paid', label: 'Paid' },
 			{ value: 'unpaid', label: 'Unpaid' },
-			{ value: 'partiallyPaid', label: 'Partially paid' },
+			{ value: 'partial_paid', label: 'Partially paid' },
 
 		],
 	},
@@ -33,25 +37,16 @@ export const INVOICE_LIST_FILTERS = [
 		type        : 'select',
 		caret       : true,
 		isClearable : true,
-		options     : [
-			{ label: 'Draft', value: 'DRAFT' },
-			{ label: 'Finance Accepted', value: 'FINANCE_ACCEPTED' },
-			{ label: 'Irn Generated', value: 'IRN_GENERATED' },
-			{ label: 'Irn Failed', value: 'IRN_FAILED' },
-			{ label: 'Irn Cancelled', value: 'IRN_CANCELLED' },
-			{ label: 'Posted to Sage', value: 'POSTED' },
-			{ label: 'Post to Sage Failed', value: 'FAILED' },
-			{ label: 'Requested', value: 'REQUESTED' },
-		],
+		options     : geo.options.invoice_status,
+
 	},
 ];
 
-export const INVOICE_MORE_FILTERS = [
+export const INVOICE_MORE_FILTERS = () => [
 	{
 		label       : 'Services',
 		name        : 'services',
 		type        : 'multiSelect',
-		size        : 'sm',
 		isClearable : true,
 		placeholder : 'Shipment Type',
 		options     : [
@@ -68,6 +63,8 @@ export const INVOICE_MORE_FILTERS = [
 			{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 			{ value: 'rail_domestic_freight', label: 'Rail Domestic' },
 		],
+		span: 6,
+
 	},
 	{
 		label                 : 'Invoice Date',
@@ -75,7 +72,8 @@ export const INVOICE_MORE_FILTERS = [
 		type                  : 'singleDateRange',
 		placeholder           : 'Invoice Date',
 		isPreviousDaysAllowed : true,
-		span                  : 3.5,
+		span                  : 4.5,
+		style                 : { width: '200px' },
 	},
 	{
 
@@ -84,7 +82,28 @@ export const INVOICE_MORE_FILTERS = [
 		type                  : 'singleDateRange',
 		placeholder           : 'Due Date',
 		isPreviousDaysAllowed : true,
-		span                  : 3.5,
+		span                  : 6,
+		style                 : { width: '200px' },
+	},
+	{
+		label       : 'Currency',
+		name        : 'currency',
+		type        : 'select',
+		placeholder : 'Currency',
+		isClearable : true,
+		options     : [
+			GLOBAL_CONSTANTS.currency_code.USD,
+			GLOBAL_CONSTANTS.currency_code.INR,
+			GLOBAL_CONSTANTS.currency_code.EUR,
+			GLOBAL_CONSTANTS.currency_code.GBP,
+			GLOBAL_CONSTANTS.currency_code.CAD,
+			GLOBAL_CONSTANTS.currency_code.SGD,
+			GLOBAL_CONSTANTS.currency_code.VND,
+		].map((currencyCode) => ({
+			label : currencyCode,
+			value : currencyCode,
+		})),
+
 	},
 
 ];

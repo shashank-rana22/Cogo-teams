@@ -42,6 +42,7 @@ interface SellerBankDetailInterface {
 	bankName?: string;
 	accountNumber?: string;
 	ifscCode?: string;
+	beneficiaryName?: string;
 }
 
 interface BillInterface {
@@ -66,6 +67,9 @@ interface JobInterface {
 
 interface BillAdditionalObjectInterface {
 	collectionPartyId: string;
+	shipmentType?: string;
+	reasonForCN? : string;
+	outstandingDocument? : string;
 }
 export interface DataInterface {
 	job?: JobInterface;

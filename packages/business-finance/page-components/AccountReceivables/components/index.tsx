@@ -7,8 +7,11 @@ import React, { useState } from 'react';
 import useListCogoEntity from '../hooks/useListCogoEntity';
 
 import Dashboard from './Dashboard';
+import Invoice from './Invoice';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
+
+const REDIRECT_TABS = ['defaulters', 'manageBpr'];
 
 function AccountReceivables() {
 	const { push, query } = useRouter();
@@ -22,7 +25,7 @@ function AccountReceivables() {
 	const { id: partnerId } = partner || {};
 
 	const handleChange = (val:string) => {
-		if (['invoices', 'defaulters', 'manageBpr'].includes(val)) {
+		if (REDIRECT_TABS.includes(val)) {
 			window.location.href = `/${partnerId}/business-finance/account-receivables/${val}`;
 			return;
 		}
@@ -34,7 +37,7 @@ function AccountReceivables() {
 	};
 
 	const EntityOptions = EntityData.map((entityData) => ({
-		label : `${entityData.entity_code}-${upperCase(entityData.business_name)}`,
+		label : `${upperCase(entityData.business_name)} (${entityData.entity_code})`,
 		value : entityData.entity_code,
 	}));
 
@@ -55,7 +58,7 @@ function AccountReceivables() {
 							<Select
 								name="business_name"
 								onChange={(entityVal: string) => setEntityCode(entityVal)}
-								value={EntityOptions[2]?.value}
+								value={entityCode}
 								options={EntityOptions}
 								placeholder="Select Entity Code"
 								size="sm"
@@ -75,7 +78,7 @@ function AccountReceivables() {
 						<Dashboard entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="invoices" title="Invoices">
-						--
+						<Invoice entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="Outstanding">
 						<Outstanding entityCode={entityCode} />

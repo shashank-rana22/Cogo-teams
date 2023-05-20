@@ -1,86 +1,73 @@
 .container {
-	min-height: fit-content;
-	max-height: 250px;
-	overflow-y: auto;
-	border-radius: 4px;
-
-	&.cancelled {
-		border: 1px solid #333;
-	}
-
-	&.completed {
-		border: 1px solid #ded7fc;
-	}
-
-	&.confirmed_by_service_provider {
-		border: 1px solid #ded7fc;
-	}
-
-	&.confirmed_by_importer_exporter {
-		border: 1px solid #ded7fc;
-	}
-
-	@media (max-width: 768px) {
-		width: 100%;
-	}
+	padding: 12px 24px;
+	border-top: 1px solid #f68b21;
 }
 
-.heading {
-	font-size: 14px;
-	font-weight: 500;
-	line-height: 20px;
-	color: #363e6e;
-
-	&.cancelled {
-		color: #bdbdbd;
-	}
+.container.confirmed_by_service_provider {
+	border-top: 1px solid #abcd62;
 }
 
-.container_heading {
-	padding: 12px 16px 10px 20px;
-	background: #fef6df;
-	border-radius: 4px;
+.container.confirmed_by_importer_exporter {
+	border-top: 1px solid #abcd62;
 }
 
-.cancelled {
-	background: #f2f2f2;
+.container.completed {
+	border-top: 1px solid #abcd62;
 }
 
-.completed {
-	background: #f6f5fe;
+.container.cancelled {
+	border-top: 1px solid #b0b0b0;
 }
 
-.confirmed_by_service_provider {
-	background: #f6f5fe;
-}
-
-.confirmed_by_importer_exporter {
-	background: #f6f5fe;
-}
-
-.expander {
+.remaining_keys {
 	display: flex;
-	justify-content: space-between;
-	padding: 4px;
-	margin: 10px;
-	font-size: 14px;
-	font-weight: 500;
-	color: #363e6e;
+	flex-wrap: wrap;
+}
+
+.multiservice {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+.mainservice_tabs {
+	width: fit-content;
+	padding: 6px 12px;
+	margin-right: 12px;
+	font-family: Poppins, sans-serif;
+	font-size: 12px;
+	font-weight: 600;
 	cursor: pointer;
-	background: #fef6df;
-	border-radius: 4px;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 }
 
-.card {
-	display: "flex";
-	flex-direction: "column";
+.mainservice_tabs.active {
+	color: #ee3425;
+	background-color: #fdebe9;
 }
 
-.card_details {
-	padding: 4px;
+.mainservice_tabs.active.confirmed_by_importer_exporter {
+	color: #768d44;
+	background-color: #f5faeb;
 }
 
-.card_sub_details {
-	padding: 4px;
-	font-size: 10px;
+.mainservice_tabs.active.confirmed_by_service_provider {
+	color: #768d44;
+	background-color: #f5faeb;
+}
+
+.mainservice_tabs.active.completed {
+	color: #768d44;
+	background-color: #f5faeb;
+}
+
+.multiservices_heading {
+	display: flex;
+	align-items: center;
+}
+
+.free_days {
+	display: flex;
+	flex-wrap: wrap;
 }

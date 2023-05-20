@@ -2,12 +2,15 @@ import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
+import { getAuth, signInWithCustomToken } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
 import React, { useState, useEffect } from 'react';
 
+import RaiseTicket from '../../common/RaiseTicket';
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
 import { hasPermission } from '../../constants/IDS_CONSTANTS';
+import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
 import useListAssignedChatTags from '../../hooks/useListAssignedChatTags';
@@ -20,6 +23,7 @@ import Customers from './Customers';
 import DialCallModal from './DialCallModal';
 import EmptyChatPage from './EmptyChatPage';
 import ProfileDetails from './ProfileDetails';
+import ReminderModal from './ReminderModal';
 import styles from './styles.module.css';
 
 function CogoOne() {
@@ -48,17 +52,15 @@ function CogoOne() {
 		subject : '',
 		body    : '',
 	});
-
+	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [agentDetails, setAgentDetails] = useState(false);
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
-	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
 
-	const firestore = getFirestore(app);
-
-	const { userRoleIds, userId, emailAddress } = useSelector(({ profile }) => ({
+	const { userRoleIds, userId, token, emailAddress } = useSelector(({ profile, general }) => ({
 		userRoleIds  : profile.partner?.user_role_ids || [],
 		userId       : profile?.user?.id,
+		token        : general.firestoreToken,
 		emailAddress : profile?.user?.email,
 	}));
 
@@ -68,6 +70,19 @@ function CogoOne() {
 		loading:statusLoading,
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
+
+	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
+
+	useEffect(() => {
+		if (process.env.NODE_ENV === 'production') {
+			const auth = getAuth();
+			signInWithCustomToken(auth, token).catch((error) => {
+				console.log(error.message);
+			});
+		}
+	}, [token]);
+
+	const firestore = getFirestore(app);
 
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const mailProps = {
@@ -93,10 +108,11 @@ function CogoOne() {
 		loading,
 		setActiveCard,
 		activeCardId,
-		firstLoading,
+		setFirstMount,
 		updateLeaduser,
 		handleScroll,
 		activeRoomLoading,
+		getAssignedChats,
 	} = useListChats({
 		firestore,
 		userId,
@@ -105,6 +121,13 @@ function CogoOne() {
 		searchValue,
 	});
 
+	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
+		activeMessageCard,
+		activeVoiceCard,
+		activeTab,
+		setRaiseTicketModal,
+		agentId: userId,
+	});
 	const renderComponent = () => {
 		if ((activeTab === 'message' && !isEmpty(activeMessageCard))
 			|| (activeTab === 'voice' && !isEmpty(activeVoiceCard))
@@ -121,7 +144,9 @@ function CogoOne() {
 						isomniChannelAdmin={isomniChannelAdmin}
 						mailProps={mailProps}
 						setActiveMessage={setActiveMessage}
+						setRaiseTicketModal={setRaiseTicketModal}
 					/>
+
 					{activeTab !== 'mail' && (
 						<ProfileDetails
 							activeMessageCard={activeMessageCard}
@@ -132,6 +157,8 @@ function CogoOne() {
 							setActiveMessage={setActiveMessage}
 							setModalType={setModalType}
 							activeRoomLoading={activeRoomLoading}
+							setRaiseTicketModal={setRaiseTicketModal}
+							zippedTicketsData={zippedTicketsData}
 						/>
 					)}
 				</>
@@ -145,18 +172,14 @@ function CogoOne() {
 	};
 
 	useEffect(() => {
-		if (!firstLoading) {
-			setActiveVoiceCard({});
-			setActiveCard({});
-			setActiveMail({});
-		}
-	}, [activeTab, firstLoading, setActiveCard, showBotMessages]);
-
-	useEffect(() => {
+		setActiveVoiceCard({});
+		setActiveCard({});
+		setActiveMail({});
+		setFirstMount(true);
 		if (isomniChannelAdmin) {
 			setAppliedFilters({});
 		}
-	}, [setAppliedFilters, isomniChannelAdmin, showBotMessages]);
+	}, [activeTab, setActiveCard, showBotMessages, setFirstMount, setAppliedFilters, isomniChannelAdmin]);
 
 	useEffect(() => {
 		setToggleStatus(status === 'active');
@@ -210,7 +233,6 @@ function CogoOne() {
 					mailProps={mailProps}
 					firestore={firestore}
 				/>
-
 				<div className={styles.chat_details_continer}>
 					{renderComponent()}
 				</div>
@@ -252,6 +274,14 @@ function CogoOne() {
 					setAgentDetails={setAgentDetails}
 				/>
 			)}
+			{raiseTicketModal?.state && (
+				<RaiseTicket
+					setRaiseTicketModal={setRaiseTicketModal}
+					raiseTicketModal={raiseTicketModal}
+					refetchTickets={refetchTickets}
+				/>
+			)}
+			<ReminderModal firestore={firestore} agentId={userId} getAssignedChats={getAssignedChats} />
 		</>
 	);
 }

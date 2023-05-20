@@ -44,7 +44,9 @@ function ShipmentDetailsCard({
 	const [rejected, setRejected] = useState([]);
 	const [showLineItem, setShowLineItem] = useState(false);
 	const [showRejected, setShowRejected] = useState({});
-	const { lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill } = data || {};
+	const {
+		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject,
+	} = data || {};
 	const {
 		entityCode = '',
 		organizationName: organizationNameBuyer = '',
@@ -57,6 +59,7 @@ function ShipmentDetailsCard({
 		bankName = '',
 		accountNumber = '',
 		ifscCode = '',
+		beneficiaryName = '',
 	} = sellerBankDetail || {};
 
 	const {
@@ -67,6 +70,13 @@ function ShipmentDetailsCard({
 		billType = '',
 		isProforma,
 	} = bill || {};
+
+	const {
+		shipmentType = '',
+		reasonForCN = '',
+		outstandingDocument = '',
+	} = billAdditionalObject || {};
+
 	const [DetailsCard, setDetailsCard] = useState([
 		{
 			id    : 1,
@@ -124,6 +134,9 @@ function ShipmentDetailsCard({
 		}));
 	};
 
+	const viewDocument = (document) => {
+		window.open(document);
+	};
 	const onClose = () => {
 		if (Object.keys(showRejected).includes('1')) {
 			setRemarksVal({ ...remarksVal, collectionPartyRemark: '' });
@@ -180,7 +193,7 @@ function ShipmentDetailsCard({
 						{!isInvoiceApproved && (
 							<div className={styles.completed}>
 								Completed
-								{showValue.length + rejected.length || 0}
+								{!isDisabled(status) ? 3 : showValue.length + rejected.length || 0}
 								/3
 							</div>
 						)}
@@ -226,7 +239,7 @@ function ShipmentDetailsCard({
 															{' '}
 															Account Number -
 															{' '}
-															<span style={{ color: '#ed3726' }}>
+															<span className={styles.bold_data}>
 																{accountNumber}
 															</span>
 														</div>
@@ -238,7 +251,7 @@ function ShipmentDetailsCard({
 															{' '}
 															IFSC -
 															{' '}
-															<span style={{ color: '#ed3726' }}>
+															<span className={styles.bold_data}>
 																{ifscCode}
 															</span>
 														</div>
@@ -463,9 +476,15 @@ function ShipmentDetailsCard({
 
 										<div className={styles.billing_party_container}>
 											<div className={styles.margin_bottom}>
-												Name -
+												Collection Party Name -
 												{' '}
 												<span>{organizationName}</span>
+											</div>
+											<div className={styles.margin_bottom}>
+												{' '}
+												Beneficiary Name-
+												{' '}
+												<span>{beneficiaryName}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												{' '}
@@ -477,7 +496,7 @@ function ShipmentDetailsCard({
 												{' '}
 												Account Number -
 												{' '}
-												<span style={{ color: '#ed3726' }}>
+												<span className={styles.bold_data}>
 													{accountNumber}
 												</span>
 											</div>
@@ -485,7 +504,7 @@ function ShipmentDetailsCard({
 												{' '}
 												IFSC -
 												{' '}
-												<span style={{ color: '#ed3726' }}>{ifscCode}</span>
+												<span className={styles.bold_data}>{ifscCode}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												PAN Number -
@@ -688,6 +707,31 @@ function ShipmentDetailsCard({
 												{' '}
 												<span>{placeOfSupply}</span>
 											</div>
+											{shipmentType === 'ftl_freight' && outstandingDocument
+											&& (
+												<div className={styles.document}>
+													Outstanding Document -
+													{' '}
+													<Button
+														className={styles.button}
+														onClick={() => {
+															viewDocument(outstandingDocument);
+														}}
+													>
+														View
+
+													</Button>
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
+											&& billType === 'CREDIT_NOTE' && reasonForCN
+											&& (
+												<div className={styles.margin_bottom}>
+													Reason For CN -
+													{' '}
+													<span>{reasonForCN}</span>
+												</div>
+											)}
 										</div>
 									</div>
 								)}

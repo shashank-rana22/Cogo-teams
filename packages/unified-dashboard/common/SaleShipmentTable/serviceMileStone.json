@@ -1,0 +1,270 @@
+{
+	"fcl_freight": {
+		"name": "state",
+		"label": "Milestone",
+		"type": "pills",
+		"service_type": "fcl_freight",
+		"options": [
+			{
+				"label": "Awaiting service provider confirmation",
+				"value": "awaiting_service_provider_confirmation"
+			},
+			{
+				"label": "Confirmed by service provider",
+				"value": "confirmed_by_service_provider"
+			},
+			{
+				"label": "Containers gated in",
+				"value": "containers_gated_in"
+			},
+			{
+				"label": "Vessel departed",
+				"value": "vessel_departed"
+			},
+			{
+				"label": "Vessel arrived",
+				"value": "vessel_arrived"
+			},
+			{
+				"label": "Containers gated out",
+				"value": "containers_gated_out"
+			},
+			{
+				"label": "No Filter",
+				"value": null
+			}
+		]
+	},
+	"lcl_freight": {
+		"name": "state",
+		"label": "Milestone",
+		"type": "pills",
+		"service_type": "lcl_freight",
+		"options": [
+			{
+				"label": "Awaiting service provider confirmation",
+				"value": "awaiting_service_provider_confirmation"
+			},
+			{
+				"label": "Confirmed by service provider",
+				"value": "confirmed_by_service_provider"
+			},
+			{
+				"label": "Cargo carted in",
+				"value": "cargo_carted_in"
+			},
+			{
+				"label": "Cargo Stuffed",
+				"value": "cargo_stuffed"
+			},
+			{
+				"label": "Vessel departed",
+				"value": "vessel_departed"
+			},
+			{
+				"label": "Vessel arrived",
+				"value": "vessel_arrived"
+			},
+			{
+				"label": "Cargo handed over",
+				"value": "cargo_handed_over"
+			},
+			{
+				"label": "No Filter",
+				"value": null
+			}
+		]
+	},
+	"air_freight": {
+		"name": "state",
+		"label": "Milestone",
+		"type": "pills",
+		"service_type": "air_freight",
+		"options": [
+			{
+				"label": "Awaiting service provider confirmation",
+				"value": "awaiting_service_provider_confirmation"
+			},
+			{
+				"label": "Confirmed by service provider",
+				"value": "confirmed_by_service_provider"
+			},
+			{
+				"label": "Cargo handed over at origin",
+				"value": "cargo_handed_over_at_origin"
+			},
+			{
+				"label": "Flight departed",
+				"value": "flight_departed"
+			},
+			{
+				"label": "Flight arrived",
+				"value": "flight_arrived"
+			},
+			{
+				"label": "Cargo handed over at destination",
+				"value": "cargo_handed_over_at_destination"
+			},
+			{
+				"label": "No Filter",
+				"value": null
+			}
+		]
+	},
+	"ftl_freight": {
+		"name": "state",
+		"label": "Milestone",
+		"type": "pills",
+		"service_type": "ftl_freight",
+		"options": [
+			{
+				"label": "Awaiting service provider confirmation",
+				"value": "awaiting_service_provider_confirmation"
+			},
+			{
+				"label": "Confirmed by service provider",
+				"value": "confirmed_by_service_provider"
+			},
+			{
+				"label": "Cargo picked up",
+				"value": "cargo_picked_up"
+			},
+			{
+				"label": "Cargo dropped",
+				"value": "cargo_dropped"
+			},
+			{
+				"label": "No Filter",
+				"value": null
+			}
+		]
+	},
+	"ltl_freight": {
+		"name": "state",
+		"label": "Milestone",
+		"type": "pills",
+		"service_type": "ltl_freight",
+		"options": [
+			{
+				"label": "Awaiting service provider confirmation",
+				"value": "awaiting_service_provider_confirmation"
+			},
+			{
+				"label": "Confirmed by service provider",
+				"value": "confirmed_by_service_provider"
+			},
+			{
+				"label": "Cargo picked up",
+				"value": "cargo_picked_up"
+			},
+			{
+				"label": "Cargo dropped",
+				"value": "cargo_dropped"
+			},
+			{
+				"label": "No Filter",
+				"value": null
+			}
+		]
+	},
+	"haulage_freight": {
+		"name": "state",
+		"label": "Milestone",
+		"type": "pills",
+		"service_type": "haulage_freight",
+		"options": [
+			{
+				"label": "Awaiting service provider confirmation",
+				"value": "awaiting_service_provider_confirmation"
+			},
+			{
+				"label": "Confirmed by service provider",
+				"value": "confirmed_by_service_provider"
+			},
+			{
+				"label": "Container departed",
+				"value": "container_departed"
+			},
+			{
+				"label": "Container arrived",
+				"value": "container_arrived"
+			},
+			{
+				"label": "No Filter",
+				"value": null
+			}
+		]
+	},
+	"fcl_customs": {
+		"name": "state",
+		"label": "Milestone",
+		"type": "pills",
+		"service_type": "fcl_customs",
+		"options": [
+			{
+				"label": "Awaiting service provider confirmation",
+				"value": "awaiting_service_provider_confirmation"
+			},
+			{
+				"label": "Confirmed by service provider",
+				"value": "confirmed_by_service_provider"
+			},
+			{
+				"label": "Customs cleared",
+				"value": "customs_cleared"
+			},
+			{
+				"label": "No Filter",
+				"value": null
+			}
+		]
+	},
+	"lcl_customs": {
+		"name": "state",
+		"label": "Milestone",
+		"type": "pills",
+		"service_type": "lcl_customs",
+		"options": [
+			{
+				"label": "Awaiting service provider confirmation",
+				"value": "awaiting_service_provider_confirmation"
+			},
+			{
+				"label": "Confirmed by service provider",
+				"value": "confirmed_by_service_provider"
+			},
+			{
+				"label": "Customs cleared",
+				"value": "customs_cleared"
+			},
+			{
+				"label": "No Filter",
+				"value": null
+			}
+		]
+	},
+	"air_customs": {
+		"name": "state",
+		"label": "Milestone",
+		"type": "pills",
+		"service_type": "air_customs",
+		"options": [
+			{
+				"label": "Awaiting service provider confirmation",
+				"value": "awaiting_service_provider_confirmation"
+			},
+			{
+				"label": "Confirmed by service provider",
+				"value": "confirmed_by_service_provider"
+			},
+			{
+				"label": "Customs cleared",
+				"value": "customs_cleared"
+			},
+			{
+				"label": "No Filter",
+				"value": null
+			}
+		]
+	}
+}

@@ -27,6 +27,13 @@ function QuestionsComponent({ test_id }) {
 	const { page_limit = 0, total_count = 0, list: questionsList = [] } = data || {};
 
 	useEffect(() => {
+		setParams((prev) => ({
+			...prev,
+			page: 1,
+		}));
+	}, [activeTab, setParams]);
+
+	useEffect(() => {
 		refetch();
 	}, [params, refetch]);
 

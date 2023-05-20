@@ -55,17 +55,6 @@ const navigationMappingSeller = {
 				possible_apis : app_apis.saas_trade_partner,
 				module_type   : 'dashboards',
 			},
-			{
-				key           : 'saas_premium_services-import_export_docs',
-				title         : 'Import/Export Documents',
-				type          : 'link',
-				icon          : 'nav-trade-payment',
-				href          : '/saas/premium-services/import-export-doc',
-				as            : '/saas/premium-services/import-export-doc',
-				main_apis     : [],
-				possible_apis : app_apis.saas_import_export_doc,
-				module_type   : 'dashboards',
-			},
 		],
 	},
 	saas_premium_services: {
@@ -107,6 +96,16 @@ const navigationMappingSeller = {
 				as            : '/saas/premium-services/import-export-doc',
 				main_apis     : [],
 				possible_apis : app_apis.saas_import_export_doc,
+			},
+			{
+				key           : 'saas_premium_services-import_export_controls',
+				title         : 'Import/Export Controls',
+				type          : 'link',
+				icon          : 'nav-trade-payment',
+				href          : '/saas/premium-services/import-export-controls',
+				as            : '/saas/premium-services/import-export-controls',
+				main_apis     : [],
+				possible_apis : app_apis.saas_import_export_controls,
 			},
 			{
 				key           : 'saas_premium_services-order_history',
@@ -456,7 +455,7 @@ const navigationMappingSeller = {
 		icon      : 'nav-container-tracking',
 		type      : 'link',
 		isSubNavs : true,
-		showInNav : false,
+		showInNav : true,
 		options   : [
 			{
 				key           : 'saas_tracking-map_dashboard',
@@ -587,12 +586,25 @@ const navigationMappingSeller = {
 		possible_apis : app_apis.app_pricing,
 		module_type   : 'dashboards',
 	},
+
+	saas_cogostore: {
+		key           : 'saas_cogostore',
+		title         : 'cogo store',
+		href          : '/saas/cogo-store',
+		as            : '/saas/cogo-store',
+		type          : 'link',
+		line          : true,
+		showInNav     : true,
+		icon          : 'nav-payments',
+		main_apis     : [],
+		possible_apis : app_apis.saas_cogostore,
+	},
+
 	saas_cogopoint: {
 		key           : 'saas_cogopoint',
 		title         : 'Cogopoints',
 		href          : '/saas/cogopoint',
 		as            : '/saas/cogopoint',
-		// type          : 'link',
 		line          : true,
 		showInNav     : false,
 		icon          : 'nav-payments',

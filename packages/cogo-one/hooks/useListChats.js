@@ -26,7 +26,7 @@ const useListChats = ({
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
 
 	const {
-		query: { assigned_chat = '' },
+		query: { assigned_chat = '', channel_type:queryChannelType = '' },
 	} = useRouter();
 
 	const snapshotListener = useRef(null);
@@ -34,7 +34,7 @@ const useListChats = ({
 	const unreadCountSnapshotListner = useRef(null);
 	const activeRoomSnapshotListner = useRef(null);
 
-	const [firstLoading, setFirstLoading] = useState(true);
+	const [firstMount, setFirstMount] = useState(false);
 
 	const [activeCard, setActiveCard] = useState({
 		activeCardId   : '',
@@ -69,11 +69,10 @@ const useListChats = ({
 	}, [debounceQuery, searchValue]);
 
 	useEffect(() => {
-		if (assigned_chat) {
-			setActiveCard({ activeCardId: assigned_chat, activeCardData: {} });
+		if (assigned_chat && queryChannelType && firstMount) {
+			setActiveCard({ activeCardId: assigned_chat, activeCardData: { channel_type: queryChannelType } });
 		}
-		setFirstLoading(false);
-	}, [assigned_chat]);
+	}, [assigned_chat, firstMount, queryChannelType]);
 
 	const dataFormatter = (list) => {
 		let resultList = {};
@@ -312,6 +311,15 @@ const useListChats = ({
 		}
 	};
 
+	const getAssignedChats = useCallback(async () => {
+		const assignedChatsQuery = query(
+			omniChannelCollection,
+			where('session_type', '==', 'admin'),
+			where('support_agent_id', '==', userId),
+		);
+		const getAssignedChatsQuery = await getDocs(assignedChatsQuery);
+		return getAssignedChatsQuery.size || 0;
+	}, [omniChannelCollection, userId]);
 	return {
 		chatsData: {
 			messagesList     : sortedUnpinnedList || [],
@@ -326,9 +334,10 @@ const useListChats = ({
 		activeCardId,
 		setActiveCard,
 		updateLeaduser,
-		firstLoading,
+		setFirstMount,
 		handleScroll,
 		activeRoomLoading,
+		getAssignedChats,
 	};
 };
 

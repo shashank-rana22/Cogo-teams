@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 
 import COMPONENT_MAPPING from '../../../constants/COMPONENT_MAPPING';
 import useCheckChannelPartner from '../../../hooks/useCheckChannelPartner';
+import useCheckCustomerCheckoutQuotationConflict from '../../../hooks/useCheckCustomerCheckoutQuotationConflict';
 import useListOmnichannelDocuments from '../../../hooks/useListOmnichannelDocuments';
 import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 
@@ -17,6 +18,8 @@ function ProfileDetails({
 	setModalType = () => {},
 	setActiveMessage = () => {},
 	activeRoomLoading,
+	setRaiseTicketModal = () => {},
+	zippedTicketsData = {},
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
@@ -45,6 +48,11 @@ function ProfileDetails({
 		activeSelect,
 		type: 'count',
 	});
+
+	const { quotationSentData = {} } = useCheckCustomerCheckoutQuotationConflict(
+		{ orgId },
+	);
+	const quotationEmailSentAt = quotationSentData?.quotation_email_sent_at;
 
 	useEffect(() => {
 		setShowMore(false);
@@ -76,6 +84,9 @@ function ProfileDetails({
 						setActiveSelect={setActiveSelect}
 						showMore={showMore}
 						setShowMore={setShowMore}
+						setRaiseTicketModal={setRaiseTicketModal}
+						zippedTicketsData={zippedTicketsData}
+						quotationSentData={quotationEmailSentAt}
 					/>
 				)}
 			</div>
@@ -90,6 +101,8 @@ function ProfileDetails({
 				activeMessageCard={activeMessageCard}
 				activeVoiceCard={activeVoiceCard}
 				activeTab={activeTab}
+				quotationEmailSentAt={quotationEmailSentAt}
+				orgId={orgId}
 			/>
 		</div>
 	);

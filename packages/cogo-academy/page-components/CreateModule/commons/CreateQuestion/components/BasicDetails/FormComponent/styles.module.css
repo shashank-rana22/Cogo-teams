@@ -114,3 +114,8 @@
 	bottom: 12px;
 	width: fit-content;
 }
+
+.save_btn {
+	float: right;
+	margin-top: 16px;
+}

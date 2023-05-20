@@ -21,10 +21,10 @@ function Dashboard({ statsData }) {
 	const [reportModal, setReportModal] = useState(false);
 	const { So2statsData } = useServiceOpsStats(filters);
 	const { jobStatsData } = useJobStats(filters);
-	const { INITIATED = '', FINANCE_ACCEPTED = '', COE_REJECTED = '', FINANCE_REJECTED = '' } = statsData || {};
+	const { LOCKED = '', FINANCE_ACCEPTED = '', COE_REJECTED = '', FINANCE_REJECTED = '' } = statsData || {};
 
 	const Status = [
-		{ id: 1, label: 'Pending', value: INITIATED || '-' },
+		{ id: 1, label: 'Pending', value: LOCKED || '-' },
 		{ id: 2, label: 'Approved', value: FINANCE_ACCEPTED || '-' },
 		{ id: 3, label: 'Rejected', value: COE_REJECTED || '-' },
 		{ id: 4, label: 'Finance Rejected', value: FINANCE_REJECTED || '-' },
@@ -34,7 +34,7 @@ function Dashboard({ statsData }) {
 		<>
 			<div className={styles.card_flex}>
 				{Status.map((item) => (
-					<div className={styles.card}>
+					<div key={item.id} className={styles.card}>
 						<div className={styles.card_label}>{item?.label}</div>
 						<div className={styles.border} />
 						<div className={styles.card_value}>{item?.value}</div>

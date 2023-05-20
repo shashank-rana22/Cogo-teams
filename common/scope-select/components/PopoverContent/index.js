@@ -36,6 +36,9 @@ export default function PopoverContent({
 
 	useEffect(() => {
 		setValue('viewType', (viewTypes[selectedScope] || [])[0]);
+		if (selectedScope === 'self') {
+			setValue('selected_agent_id', '');
+		}
 	}, [selectedScope, viewTypes, setValue]);
 
 	const isScopesPresent = scopes.length > 0;
@@ -96,7 +99,7 @@ export default function PopoverContent({
 				</>
 			) : null }
 
-			{showChooseAgent ? (
+			{showChooseAgent && selectedScope !== 'self' ? (
 				<>
 					<p className={styles.field_label}>Choose Agent</p>
 					<AsyncSelectController
@@ -105,6 +108,7 @@ export default function PopoverContent({
 						size={size}
 						asyncKey="partner_users"
 						isClearable
+						valueKey="user_id"
 					/>
 				</>
 			) : null }

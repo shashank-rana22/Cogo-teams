@@ -216,6 +216,15 @@ function asyncAllotBanks() {
 		},
 	};
 }
+function asyncShippingLines() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'id',
+		endpoint     : 'get_saas_container_shipping_lines',
+		initialCall  : false,
+		microService : 'saas_traceability',
+	};
+}
 
 function asyncFieldsExpertiseConfigurations() {
 	return {
@@ -285,6 +294,69 @@ function asyncListCogoEntity() {
 	};
 }
 
+function asyncAccountEngagementScoringEvents() {
+	return {
+		labelKey     : 'name',
+		valueKey     : 'name',
+		endpoint     : '/engagement_scoring_event_names',
+		authkey      : 'get_allocation_engagement_scoring_event_names',
+		microService : 'allocation',
+		initialCall  : true,
+	};
+}
+
+function asyncFieldsTicketTypes() {
+	return {
+		labelKey     : 'TicketType',
+		valueKey     : 'TicketType',
+		endpoint     : 'default_types',
+		authkey      : 'get_tickets_default_types',
+		microService : 'tickets',
+		initialCall  : true,
+		qFilterKey   : 'QFilter',
+		listKey      : 'items',
+	};
+}
+
+function asyncListHsCodes() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_hs_codes',
+		initialCall : false,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListCurrency() {
+	return {
+		labelKey    : 'iso_code',
+		valueKey    : 'iso_code',
+		endpoint    : 'list_exchange_rate_currencies',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+function asyncListServetelAgents() {
+	return {
+		labelKey    : 'mobile_number',
+		valueKey    : 'id',
+		endpoint    : 'list_servetel_agents',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -302,10 +374,16 @@ export {
 	asyncFieldsListAgents,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncShippingLines,
 	asyncFieldsExpertiseConfigurations,
 	asyncFieldsExpertiseBadgeName,
 	asyncKamExpertiseRuleOptions,
 	asyncKamExpertiseGroupOptions,
 	listVendors,
 	asyncListCogoEntity,
+	asyncListHsCodes,
+	asyncListCurrency,
+	asyncAccountEngagementScoringEvents,
+	asyncFieldsTicketTypes,
+	asyncListServetelAgents,
 };

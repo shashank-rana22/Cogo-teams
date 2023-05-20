@@ -11,36 +11,54 @@ const MAPPING = {
 	create : 'added',
 };
 
+const TYPE_MAPPING = {
+	single_correct : 'StandAlone',
+	multi_correct  : 'StandAlone',
+	subjective     : 'Subjective',
+};
+
+const PAYLOAD_TYPE_MAPPING = {
+	single_correct : 'stand_alone',
+	multi_correct  : 'stand_alone',
+	subjective     : 'subjective',
+};
+
 function useUpdateStandAloneTestQuestion({
 	questionSetId,
 	getTestQuestionTest,
 	setEditDetails,
 	setAllKeysSaved,
 	reset = () => {},
+	subjectiveEditorValue = {},
 	setQuestionToDelete = () => {},
 	listSetQuestions,
 	editDetails,
 	editorValue = {},
+	uploadable,
+	setQuestionDetails = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/update_stand_alone_test_question',
+		url    : '/update_non_case_study_test_question',
 	}, { manual: true });
 
 	const updateStandAloneTestQuestion = async ({
 		values,
 		action,
 		testQuestionId,
+		question_type = 'single_correct',
 	}) => {
 		try {
 			const { hasError, ...payload } = getPayload({
 				values,
-				type: 'stand_alone',
+				type: PAYLOAD_TYPE_MAPPING[question_type],
 				questionSetId,
 				action,
+				subjectiveEditorValue,
 				testQuestionId,
 				editDetails,
 				editorValue,
+				uploadable,
 			});
 
 			if (!isEmpty(hasError)) {
@@ -54,7 +72,7 @@ function useUpdateStandAloneTestQuestion({
 				data: payload,
 			});
 
-			Toast.success(`StandAlone Question has been ${MAPPING[action]} successfully`);
+			Toast.success(`${TYPE_MAPPING[question_type]} Question has been ${MAPPING[action]} successfully`);
 
 			listSetQuestions({
 				questionSetId,
@@ -66,6 +84,7 @@ function useUpdateStandAloneTestQuestion({
 			setAllKeysSaved(true);
 			setEditDetails({});
 			setQuestionToDelete({});
+			setQuestionDetails({});
 			reset();
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
