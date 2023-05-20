@@ -64,7 +64,7 @@ function Item({
 	const title = (
 		<>
 			<section className={styles.billing_party} ref={billingPartyHeightRef}>
-				<h4>{item?.billing_address?.name}</h4>
+				<h5>{item?.billing_address?.name}</h5>
 				<Tooltip
 					theme="light"
 					interactive

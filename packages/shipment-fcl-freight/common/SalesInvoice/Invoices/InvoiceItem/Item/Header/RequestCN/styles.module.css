@@ -18,4 +18,8 @@
 	display: flex;
 	justify-content: flex-end;
 	margin: 10px 0;
+
+	& > button:first-child{
+		margin-right: 12px;
+	}
 }

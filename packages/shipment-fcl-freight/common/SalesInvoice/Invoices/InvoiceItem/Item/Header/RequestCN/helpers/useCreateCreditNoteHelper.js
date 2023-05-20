@@ -16,7 +16,6 @@ const useCreateCreditNoteHelper = ({
 	setOpen = () => {},
 	refetchCN = () => {},
 }) => {
-	const [errors, setError] = useState({});
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 
@@ -54,12 +53,8 @@ const useCreateCreditNoteHelper = ({
 
 	const defaultValues = generateDefaultValues({ values: controls });
 
-	const { handleSubmit, control, watch, setValue, ...rest } =	useForm({ defaultValues });
+	const { handleSubmit, control, watch, setValue, formState:{ errors = {} }, ...rest } =	useForm({ defaultValues });
 	const formValues = watch();
-
-	const onError = (err) => {
-		setError({ ...err });
-	};
 
 	const updatedObj = {};
 
@@ -77,6 +72,7 @@ const useCreateCreditNoteHelper = ({
 	});
 
 	const { apiTrigger } = useCreateShipmentCreditNote({});
+
 	const onCreate = async (data) => {
 		const { submit_data, checkError } = formatCreditNoteData({
 			data,
@@ -109,8 +105,6 @@ const useCreateCreditNoteHelper = ({
 		handleSubmit,
 		onCreate,
 		errors,
-		setError,
-		onError,
 		control,
 		defaultValues: updatedObj,
 		rest,
