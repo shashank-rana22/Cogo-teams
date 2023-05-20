@@ -11713,7 +11713,6 @@ const partner = {
 		},
 	],
 	cogo_one: [
-
 		{
 			api          : 'create_agent_feedback',
 			access_type  : 'private',
