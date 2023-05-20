@@ -90,6 +90,9 @@ export default {
 			'650e1fe4-2e34-43c1-abfe-ce0a443aa4a6', // Prod_KAM Trasnport Sales
 			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse KAM
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // Shipment Specialist
+			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
+			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
+			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		shipping_line_supply_agents      : [
