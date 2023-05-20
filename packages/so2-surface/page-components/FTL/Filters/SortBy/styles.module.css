@@ -31,8 +31,8 @@
 }
 
 .filter_container {
+	width: "100%";
 	padding: 16px;
-	width: '100%';
 }
 
 .filter_heading {
@@ -69,6 +69,7 @@
 		}
 	}
 }
-.input_div{
+
+.input_div {
 	display: flex;
 }

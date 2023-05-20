@@ -1,11 +1,10 @@
-.box{
-	background: #f2f2f2;
-	border-radius: 4px;
-	margin-bottom: 4px;
-	margin-right: 4px;
-	padding: 2px 6px;
+.box {
 	display: inline-block;
+	padding: 2px 6px;
+	margin-right: 4px;
+	margin-bottom: 4px;
 	font-size: 10px;
 	line-height: 12px;
+	background: #f2f2f2;
+	border-radius: 4px;
 }
-

@@ -1,8 +1,8 @@
 .container {
-	display: flex; 
+	display: flex;
 	flex-direction: column;
 	align-items: flex-start;
-	 justify-content: space-between; 
+	justify-content: space-between;
 	width: 100%;
 	padding: 6px 20px 0;
 }
@@ -34,10 +34,10 @@
 	color: #333;
 
 	&.shipment_id {
-		font-weight: 700;
 		display: flex;
 		align-items: center;
-		color: #C26D1A;
+		font-weight: 700;
+		color: #c26d1a;
 	}
 }
 

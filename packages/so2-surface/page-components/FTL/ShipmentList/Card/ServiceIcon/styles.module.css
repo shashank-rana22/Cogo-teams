@@ -16,7 +16,8 @@
 	letter-spacing: 0;
 	white-space: nowrap;
 }
-.ftl{
+
+.ftl {
 	svg path {
 		fill: var(--color-primary-error-red-2);
 	}
