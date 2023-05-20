@@ -52,6 +52,11 @@
 	color: #4f4f4f;
 }
 
+.user_type {
+	font-size: 13px;
+	font-weight: 600px;
+}
+
 .single_org {
 	padding: 4px;
 	margin-top: 5px;

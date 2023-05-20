@@ -123,7 +123,7 @@ const TableColumns = ({
 		{
 			Header   : 'TYPE',
 			accessor : (item = {}) => (
-				<div className={styles.more_count}>
+				<div className={styles.user_type}>
 					{TYPE[item?.organization_type?.[0]]}
 				</div>
 			),

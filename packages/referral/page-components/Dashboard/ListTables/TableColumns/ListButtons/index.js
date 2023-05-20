@@ -67,7 +67,7 @@ const ListButtons = ({
 		},
 		{
 			children: (
-				<Button disabled={emptyOrg} size="sm" themeType="tertiary">
+				<Button disabled={emptyOrg || account_type === 'service_provider'} size="sm" themeType="tertiary">
 					<div className={styles.label}>
 						View Profile
 					</div>
