@@ -5,9 +5,8 @@ import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 const geo = getGeoConstants();
 
 const getCountryCode = (id) => {
-	const details = getCountryDetails({
-		country_id: id,
-	});
+	const details = getCountryDetails({ country_id: id	});
+
 	return details.country_code;
 };
 
@@ -47,9 +46,7 @@ const getCurrencyOptions = (invoice) => {
 		tooltip  : false,
 	}));
 
-	return {
-		currencyOptions,
-	};
+	return { currencyOptions };
 };
 
 export default getCurrencyOptions;

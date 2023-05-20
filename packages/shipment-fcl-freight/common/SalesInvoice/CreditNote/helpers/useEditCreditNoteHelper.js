@@ -19,7 +19,7 @@ const useEditCreditNoteHelper = ({
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 
-	const { apiTrigger, loading } = useUpdateShipmentCreditNote({});
+	const { apiTrigger = () => {}, loading } = useUpdateShipmentCreditNote({});
 
 	const handleChange = (obj) => {
 		if (!selectedCodes[obj.code]) {
@@ -35,16 +35,16 @@ const useEditCreditNoteHelper = ({
 		isEdit,
 	});
 
-	const generateDefaultValues = ({ values }) => {
+	const generateDefaultValues = ({ values = [] }) => {
 		const defaultValues = {};
 
-		values.forEach((control) => {
-			if (control.type === 'edit_service_charges') {
-				defaultValues[control.name] = control.value.map((value) => {
+		values?.forEach((control) => {
+			if (control?.type === 'edit_service_charges') {
+				defaultValues[control?.name] = control?.value?.map((value) => {
 					const fieldValue = {};
 
-					control.controls.forEach((subControl) => {
-						fieldValue[subControl.name] = value[subControl.name] || '';
+					control?.controls?.forEach((subControl) => {
+						fieldValue[subControl?.name] = value[subControl?.name] || '';
 					});
 
 					return fieldValue;
@@ -58,7 +58,7 @@ const useEditCreditNoteHelper = ({
 	const defaultValues = generateDefaultValues({ values: controls });
 
 	const onCreate = async (data) => {
-		const { submit_data, checkError } = formatCreditNoteData({
+		const { submit_data = {}, checkError = {} } = formatCreditNoteData({
 			data,
 			servicesIDs,
 			invoice,
@@ -72,8 +72,9 @@ const useEditCreditNoteHelper = ({
 		}
 
 		let isError = false;
+
 		Object.keys(checkError).forEach((key) => {
-			checkError[key].forEach((t) => {
+			checkError[key]?.forEach((t) => {
 				if (!isEmpty(t)) {
 					isError = true;
 				}
@@ -82,6 +83,7 @@ const useEditCreditNoteHelper = ({
 
 		if (isError === false) {
 			await apiTrigger(submit_data);
+
 			setOpen(false);
 			refetch();
 		}
