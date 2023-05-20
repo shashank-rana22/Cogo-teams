@@ -1,3 +1,5 @@
+import CONSTANTS from '../../../configurations/contants.json';
+
 const editParamsStakeholders = {
 	booking_agent: {
 		idToMatch: 'importer_exporter_id',
@@ -34,7 +36,7 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return false;
 	}
 
-	if (user_data?.email === 'ajeet@cogoport.com') {
+	if (user_data?.email === CONSTANTS.ajeet_email) {
 		return true;
 	}
 

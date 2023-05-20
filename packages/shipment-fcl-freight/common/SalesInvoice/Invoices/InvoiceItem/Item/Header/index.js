@@ -7,6 +7,7 @@ import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState, useContext, useRef } from 'react';
 
+import CONSTANTS from '../../../../../../configurations/contants.json';
 import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 
 import Actions from './Actions';
@@ -35,10 +36,8 @@ function Header({
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const { user_data } = useSelector(({ profile }) => ({
-		user_data: profile || {},
-	}));
-	const isAuthorized = user_data.email === 'ajeet@cogoport.com';
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
+	const isAuthorized = user_data.email === CONSTANTS.ajeet_email;
 
 	const invoicePartyDetailsRef = useRef(null);
 

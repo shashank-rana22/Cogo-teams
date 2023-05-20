@@ -1,3 +1,5 @@
+import CONSTANTS from '../../../configurations/contants.json';
+
 const shipmentCancellationStates = [
 	'shipment_received',
 	'confirmed_by_importer_exporter',
@@ -20,7 +22,7 @@ export default function getCanCancelShipment({ shipment_data, user_data, activeS
 
 	const isStakeholderAllowed = shipmentCancelStakeholders.includes(activeStakeholder);
 
-	const allowedEmail = user_data?.email === 'ajeet@cogoport.com';
+	const allowedEmail = user_data?.email === CONSTANTS.ajeet_email;
 
 	return isShipmentInCancellationState && (isStakeholderAllowed || allowedEmail);
 }
