@@ -8,12 +8,12 @@ const GetDashBoardTabs = () => {
 		headers : {
 			authorization: `Bearer ${process.env.NEXT_PUBLIC_CMS_TOKEN}`,
 		},
-	});
+	}, { manual: true });
 
 	const getFileContent = useCallback(
-		async () => {
+		() => {
 			try {
-				await trigger();
+				trigger();
 			} catch (error) {
 				console.log(error, 'error');
 			}
