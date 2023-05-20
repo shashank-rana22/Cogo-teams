@@ -5,15 +5,6 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	.core-ui-tag-root {
-		margin-right: 12px;
-	}
-	.change-currency-pills {
-		.core-ui-tag-root {
-			border: 1px solid #ded7fc;
-			margin-right: 0px;
-		}
-	}
 
 	.open {
 		margin-bottom: 24px;

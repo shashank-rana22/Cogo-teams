@@ -15,7 +15,6 @@ import OTPVerification from '../../OTPVerification';
 import ReviewServices from '../../ReviewServices';
 import AmendmentReasons from '../AmendmentReasons';
 import ChangePaymentMode from '../ChangePaymentMode';
-import RejectRequest from '../RejectRequest';
 import SendInvoiceEmail from '../SendInvoiceEmail';
 import styles from '../styles.module.css';
 
@@ -35,7 +34,6 @@ function Actions({
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setOTPModal] = useState(false);
-	const [rejectInvoice, setRejectInvoice] = useState(false);
 	const showForOldShipments =		shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
 	let disableAction = showForOldShipments
@@ -183,12 +181,6 @@ function Actions({
 									disabled={loading}
 								>
 									Approve
-								</Button>
-								<Button
-									className="secondary sm"
-									onClick={() => setRejectInvoice(true)}
-								>
-									Reject
 								</Button>
 							</div>
 					)}
@@ -339,16 +331,6 @@ function Actions({
 					setShow={setShowChangePaymentMode}
 					invoice={invoice}
 					refetch={refetch}
-				/>
-			) : null}
-
-			{rejectInvoice ? (
-				<RejectRequest
-					rejectInvoice={rejectInvoice}
-					setRejectInvoice={setRejectInvoice}
-					invoice={invoice}
-					bfInvoice={bfInvoice}
-					refetch={handleRefetch}
 				/>
 			) : null}
 		</div>
