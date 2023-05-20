@@ -28,8 +28,6 @@ function Form({
 
 	const [step, setStep] = useState(1);
 
-	const [user, setUser] = useState(null);
-
 	const { consignee_shipper, importer_exporter, importer_exporter_id, consignee_shipper_id } = shipmentData;
 
 	const haveToAskOrgDetails = !['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder)
@@ -103,10 +101,6 @@ function Form({
 								name="organization_id"
 								rules={{ required: 'Organisation is required' }}
 							/>
-
-							{
-								(formProps.errors.organization_id) ? <div> uiefyi</div> : null
-							}
 						</>
 					) : null}
 
