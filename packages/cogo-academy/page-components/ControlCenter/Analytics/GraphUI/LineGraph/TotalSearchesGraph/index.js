@@ -1,5 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useEffect } from 'react';
 
 function TotalSearchesGraph({ graphData, setShowTotalCost }) {
@@ -14,6 +15,23 @@ function TotalSearchesGraph({ graphData, setShowTotalCost }) {
 			},
 		},
 	};
+
+	const formatDateValue = (value) => {
+		const date = formatDate({
+			date       : value,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+			formatType : 'date',
+		});
+
+		const time = formatDate({
+			date       : value,
+			timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+			formatType : 'time',
+		});
+
+		return `${date}, ${time}`;
+	};
+
 	return (
 		<ResponsiveLine
 			style={{ height: '50px' }}
@@ -46,8 +64,9 @@ function TotalSearchesGraph({ graphData, setShowTotalCost }) {
 				legendOffset   : 36,
 				legendPosition : 'middle',
 				format(value) {
-					return format(value, 'dd/MM, HH:mm');
+					return formatDateValue(value);
 				},
+
 			}}
 			axisLeft={{
 				orient         : 'left',

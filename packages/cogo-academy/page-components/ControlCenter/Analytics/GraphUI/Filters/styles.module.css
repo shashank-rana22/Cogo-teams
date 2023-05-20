@@ -60,6 +60,14 @@
 }
 
 .total {
+	display: flex;
 	font-weight: 600;
 	color: #ed3829;
+}
+
+.tooltip_wrapper {
+	align-items: center;
+	justify-content: center;
+	padding-top: 2px;
+	padding-left: 4px;
 }
