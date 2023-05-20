@@ -25,7 +25,7 @@ const iconMapping = {
 	fcl_freight           : { icon: IcMFfcl, fill: '#ee3425', text: 'FCL' },
 	fcl_customs           : { icon: IcMFcustoms, fill: '#ee3425', text: 'FCL Customs' },
 	fcl_local             : { icon: IcMFlocalCharges, fill: '#ee3425', text: 'FCL Local' },
-	fcl_cfs               : { icon: IcMFcfs, fill: '#ee3425', text: 'FCL CFS' },
+	fcl_cfs               : { icon: IcMFcfs, fill: '#ee3425', text: 'FCL Cfs' },
 	lcl_freight           : { icon: IcMFlcl, fill: '#ee3425', text: 'LCL' },
 	lcl_customs           : { icon: IcCFlclCustoms, fill: '#ee3425', text: 'LCL Customs' },
 	air_freight           : { icon: IcMAir, fill: '#ee3425', text: 'AIR' },
