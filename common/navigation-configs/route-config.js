@@ -16,6 +16,7 @@ import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
+import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import myIncident from './config/my-incident';
@@ -57,6 +58,7 @@ const routeConfig = {
 	...lastMileDesk,
 	...welcome,
 	...athenaDashboard,
+	...kamDesk,
 	...airRepository,
 	...documentDesk,
 	...ingestion,

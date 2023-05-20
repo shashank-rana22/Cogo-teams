@@ -9484,6 +9484,11 @@ const partner = {
 	],
 	templates: [
 		{
+			api          : 'update_communication_whatsapp_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_communication_templates',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -11127,6 +11132,24 @@ const partner = {
 			service_name : 'shipment',
 			feature      : 'detention_demurrage',
 		},
+		{
+			api          : 'list_rail_domestic_freight_rate_free_days',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'create_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'update_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
 	],
 	my_profile: [
 		{
@@ -11714,6 +11737,11 @@ const partner = {
 		},
 	],
 	cogo_one: [
+		{
+			api          : 'list_checkouts',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 		{
 			api          : 'get_user',
 			access_type  : 'private',

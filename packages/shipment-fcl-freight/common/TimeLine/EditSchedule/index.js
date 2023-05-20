@@ -16,17 +16,17 @@ function FormItem({ finalControl = {}, control, errors = {} }) {
 		<div className={styles.form_item}>
 			<div className={`${styles.label} ${required ? styles.required : ''}`}>
 				{label}
-
-				{errorMessage ? (
-					<span className={styles.error_message}>
-						{errorMessage}
-					</span>
-				) : null}
 			</div>
 
 			{lowerlabel ? <div className={styles.lower_label}>{lowerlabel}</div> : null}
 
 			<DatepickerController name={name} control={control} {...rest} />
+
+			{errorMessage ? (
+				<span className={styles.error_message}>
+					{errorMessage}
+				</span>
+			) : null}
 		</div>
 	);
 }
@@ -42,6 +42,7 @@ export default function EditSchedule({ setShow = () => {}, timelineData = [] }) 
 	} = useEditServiceSchedule({ setShow, timelineData });
 
 	const closeModal = () => setShow(false);
+
 	return (
 		<Modal
 			size="md"
@@ -57,6 +58,7 @@ export default function EditSchedule({ setShow = () => {}, timelineData = [] }) 
 				<form className={styles.form_container}>
 					{finalControls?.map((finalControl) => (
 						<FormItem
+							key={finalControl.name}
 							finalControl={finalControl}
 							control={control}
 							errors={errors}
