@@ -6,7 +6,7 @@
 	background: var(--color-service-land);
 	border: 2px solid #fff;
 	border-radius: 50%;
-	box-shadow: 0 0 2px #333333cc;
+	box-shadow: 0 0 2px #333c;
 	transition: all 0.25s cubic-bezier(0.175, 0.885, 0.32, 1.2);
 	animation: border-pulse 2s infinite;
 

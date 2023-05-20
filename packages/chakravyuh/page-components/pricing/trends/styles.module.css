@@ -1,49 +1,50 @@
 .container {
+	display: block;
 }
 
 .heading {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 20px;
-    line-height: 150%;
-    color: #221F20;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	color: #221f20;
 }
 
 .sidepanel {
-    background: #FFFFFF;
-    border-radius: 6px;
-    width: 30vw;
-    margin-right: 16px;
-    padding: 16px;
-    max-height: 72vh;
+	width: 30vw;
+	max-height: 72vh;
+	padding: 16px;
+	margin-right: 16px;
+	background: #fff;
+	border-radius: 6px;
 }
 
 .side_list {
-    overflow: auto;
-    max-height: 65vh;
+	max-height: 65vh;
+	overflow: auto;
 }
 
 .row {
-    display: flex;
+	display: flex;
 }
 
 .filters {
-    background: #FFFFFF;
-    border-radius: 6px;
-    padding: 12px 4px;
-    margin-bottom: 16px;
+	padding: 12px 4px;
+	margin-bottom: 16px;
+	background: #fff;
+	border-radius: 6px;
 }
 
 .filtersheading {
-    font-style: normal;
-    font-weight: 600;
-    font-size: 14px;
-    line-height: 150%;
-    display: flex;
-    align-items: center;
-    color: #4F4F4F;
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 150%;
+	color: #4f4f4f;
 }
 
 .view {
-    position: relative
+	position: relative;
 }

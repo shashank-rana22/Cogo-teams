@@ -1,9 +1,9 @@
 .container {
-    background: #F9F9F9;
-    border-radius: 6px 6px 0px 0px;
-    position: absolute;
-    bottom: 0px;
-    z-index: 1000;
-    width: 100%;
-    height: 300px;
+	position: absolute;
+	bottom: 0;
+	z-index: 1000;
+	width: 100%;
+	height: 300px;
+	background: #f9f9f9;
+	border-radius: 6px 6px 0 0;
 }
