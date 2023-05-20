@@ -4,7 +4,7 @@ import { startCase } from '@cogoport/utils';
 export const tableColumn = ({ serviceItem = {}, shipment_data = {} }) => {
 	const mainService = `${shipment_data?.shipment_type}_service`;
 
-	const ServiceName =		serviceItem?.service_type === mainService
+	const ServiceName =	serviceItem?.service_type === mainService
 		? startCase(serviceItem?.service_type)
 		: (serviceItem?.trade_type === 'import'
 					&& `Destination ${startCase(serviceItem?.service_type)}`)
