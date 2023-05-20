@@ -1,6 +1,4 @@
-import { Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import { v4 as uuid } from 'uuid';
 
 import Item from '../../../Item';
 
@@ -26,7 +24,11 @@ function Child({
 
 					if (control_item?.type === 'static') {
 						return (
-							<div key={uuid()} style={{ width: `${flex}%` }} className={styles.static_container}>
+							<div
+								key={`${name}.${index}.${control_item?.name}`}
+								style={{ width: `${flex}%` }}
+								className={styles.static_container}
+							>
 								{render ? render(customValues) : customValues?.[control_item?.name]}
 							</div>
 						);
