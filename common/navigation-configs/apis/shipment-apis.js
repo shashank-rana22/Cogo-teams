@@ -1504,6 +1504,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'get_maruti_tracking_details',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
 ];
 
 export default apis;
