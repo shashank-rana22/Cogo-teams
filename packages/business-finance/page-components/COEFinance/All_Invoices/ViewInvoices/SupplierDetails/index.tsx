@@ -33,11 +33,16 @@ interface SellerDetail {
 interface DocumentData {
 	list: Array<object>;
 }
+interface BillAdditionalObject {
+	shipmentType?: string;
+}
 
 interface DataProps {
 	sellerDetail?: SellerDetail;
 	serviceProviderCategory?: string;
 	serviceProviderDocuments: DocumentData;
+	billAdditionalObject? : BillAdditionalObject;
+
 }
 
 interface PaymentsData {
@@ -64,6 +69,7 @@ function SupplierDetails({
 		sellerDetail,
 		serviceProviderCategory = '',
 		serviceProviderDocuments,
+		billAdditionalObject,
 	} = data || {};
 	const { payables, receivables, payablesCurrency, receivablesCurrency } = paymentsData || {};
 
@@ -135,7 +141,9 @@ function SupplierDetails({
 
 	return (
 		<div className={styles.container}>
-			<h3>Supplier Details</h3>
+			{billAdditionalObject?.shipmentType === 'ftl_freight'
+				? <h3>Collection Party Details</h3>
+				: <h3>Supplier Details</h3> }
 
 			<div className={styles.small_hr} />
 
