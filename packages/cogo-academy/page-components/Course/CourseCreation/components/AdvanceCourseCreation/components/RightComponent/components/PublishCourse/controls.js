@@ -5,11 +5,10 @@ const controls = [
 		type        : 'groupSelect',
 		subControls : [
 			{
-				label   : 'Confirm Course Title',
-				name    : 'course_title',
-				type    : 'text',
-				options : [],
-				rules   : { required: { value: true, message: 'This is required' } },
+				label : 'Confirm Course Title',
+				name  : 'course_title',
+				type  : 'text',
+				rules : { required: { value: true, message: 'This is required' } },
 			},
 			{
 				label    : 'Confirm Course Categories',
@@ -19,6 +18,48 @@ const controls = [
 				multiple : true,
 				options  : [],
 				rules    : { required: { value: true, message: 'This is required' } },
+			},
+		],
+	},
+	{
+		label       : '',
+		name        : 'group_select_2',
+		type        : 'groupSelect',
+		subControls : [
+			{
+				label       : 'Select Instructor',
+				name        : 'instructor_ids',
+				type        : 'asyncSelect',
+				placeholder : 'Select Instructor from list',
+				asyncKey    : 'partner_users',
+				multiple    : true,
+				params      : {
+					filters: {
+						partner_entity_types : ['cogoport'],
+						status               : 'active',
+					},
+					rm_mappings_data_required    : false,
+					pagination_data_required     : false,
+					partner_data_required        : false,
+					add_service_objects_required : false,
+				},
+				rules: { required: { value: true, message: 'This is required' } },
+			},
+			{
+				label   : 'Select difficulty level',
+				name    : 'difficulty_level',
+				type    : 'select',
+				options : [{
+					value : 'beginner',
+					label : 'Beginner',
+				}, {
+					value : 'intermediate',
+					label : 'Intermediate',
+				}, {
+					value : 'advanced',
+					label : 'Advanced',
+				}],
+				rules: { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},

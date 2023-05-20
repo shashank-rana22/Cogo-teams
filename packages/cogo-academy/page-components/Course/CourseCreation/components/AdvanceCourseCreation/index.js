@@ -35,7 +35,12 @@ function AdvanceCourseCreation({ id, mode }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>
-				<LeftComponent setActiveTab={setActiveTab} activeTab={activeTab} mode={mode} />
+				<LeftComponent
+					setActiveTab={setActiveTab}
+					activeTab={activeTab}
+					getCogoAcademyCourse={getCogoAcademyCourse}
+					id={id}
+				/>
 			</div>
 
 			<div className={styles.right_section}>

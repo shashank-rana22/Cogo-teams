@@ -102,7 +102,7 @@ export const certificateControls = [
 					rm_mappings_data_required    : false,
 					pagination_data_required     : false,
 					partner_data_required        : false,
-					add_service_objects_required : true,
+					add_service_objects_required : false,
 				},
 				rules: { required: { value: true, message: 'This is required' } },
 			},

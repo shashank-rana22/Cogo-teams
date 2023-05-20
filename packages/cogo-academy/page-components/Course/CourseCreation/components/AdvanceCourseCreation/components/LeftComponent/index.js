@@ -1,10 +1,25 @@
 import { Accordion } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import useUpdateCourse from '../../hooks/useUpdateCourse';
+
 import MAPPING from './MAPPING';
 import styles from './styles.module.css';
 
-function LeftComponent({ activeTab, setActiveTab }) {
+function LeftComponent({ activeTab, setActiveTab, getCogoAcademyCourse, id }) {
+	const { loading, updateCourse } = useUpdateCourse({
+		getCogoAcademyCourse,
+		setActiveTab,
+		activeTab,
+		changeTab: true,
+	});
+
+	const handleChangeActiveTab = ({ value }) => {
+		if (!loading) {
+			updateCourse({ values: { id, state: value } });
+		}
+	};
+
 	return (
 		<div className={styles.container}>
 			{MAPPING.map((item, index) => {
@@ -15,7 +30,7 @@ function LeftComponent({ activeTab, setActiveTab }) {
 						<div
 							key={key}
 							role="presentation"
-							onClick={() => setActiveTab(key)}
+							onClick={() => handleChangeActiveTab({ value: key })}
 							className={`${styles.ind_container} ${activeTab === key && styles.active_tab}`}
 						>
 							<div className={styles.number}>
@@ -49,7 +64,7 @@ function LeftComponent({ activeTab, setActiveTab }) {
 									<div
 										key={childKey}
 										role="presentation"
-										onClick={() => setActiveTab(childKey)}
+										onClick={() => handleChangeActiveTab({ value: childKey })}
 										className={`${styles.child_container}
                                          ${activeTab === childKey && styles.active}`}
 									>

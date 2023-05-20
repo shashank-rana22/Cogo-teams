@@ -16,6 +16,15 @@
 	&.course_categories {
 		width: 34%;
 	}
+
+	&.instructor_ids {
+		width: 50%;
+	}
+
+	&.difficulty_level {
+		width: 50%;
+		margin-left: 12px;
+	}
 }
 
 .error_message {

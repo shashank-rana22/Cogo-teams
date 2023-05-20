@@ -26,12 +26,48 @@ function Header({
 		changeTab: true,
 	});
 
-	const handleSubmitForm = () => {
+	const handleSubmitForm = ({ buttonType = 'save', values: payloadValues }) => {
 		childRef.current[activeTab]?.handleSubmit().then((res) => {
 			if (!res.hasError) {
-				updateCourse({ activeTab, values: res.values, id });
+				updateCourse({
+					values            : buttonType === 'publish' ? payloadValues : res.values,
+					isRefetchRequired : true,
+					buttonType,
+				});
 			}
 		});
+	};
+
+	const BUTTON_MAPPING = {
+		publish: [
+			{
+				buttonText      : 'Save',
+				themeType       : 'primary',
+				onClickFunction : handleSubmitForm,
+				funcProps       : {},
+			},
+			{
+				buttonText      : 'Publish',
+				themeType       : 'accent',
+				onClickFunction : handleSubmitForm,
+				funcProps       : {
+					buttonType : 'publish',
+					values     : {
+						id,
+						state: 'published',
+					},
+				},
+			},
+		],
+		others: [
+			{
+				buttonText      : 'Next',
+				icon            : IcMArrowRight,
+				themeType       : 'accent',
+				onClickFunction : handleSubmitForm,
+				funcProps       : {},
+			},
+		],
 	};
 
 	return (
@@ -53,17 +89,29 @@ function Header({
 
 				{mode !== 'view' ? (
 					<div className={styles.right_part}>
-						<Button
-							type="button"
-							themeType="accent"
-							className={styles.button}
-							onClick={handleSubmitForm}
-							loading={loading}
-						>
-							Next
-							{' '}
-							<IcMArrowRight width={16} height={16} />
-						</Button>
+						{(BUTTON_MAPPING[activeTab] || BUTTON_MAPPING.others).map((buttonControls) => {
+							const {
+								buttonText,
+								icon: IconToUse,
+								themeType,
+								onClickFunction,
+								funcProps = {},
+							} = buttonControls || {};
+
+							return (
+								<Button
+									type="button"
+									themeType={themeType}
+									className={styles.button}
+									onClick={() => onClickFunction({ ...funcProps })}
+									loading={loading}
+								>
+									{buttonText}
+									{' '}
+									{IconToUse ? <IconToUse width={16} height={16} /> : null}
+								</Button>
+							);
+						})}
 					</div>
 				) : null}
 			</div>

@@ -34,11 +34,8 @@ function PublishCourse({ data = {}, id = '' }, ref) {
 		handleSubmit: () => {
 			const onSubmit = (values) => {
 				const {
-					course_categories = [],
-					description,
 					thumbnail_url,
-					course_subtitle,
-					course_title,
+					...restValues
 				} = values || {};
 
 				const { finalUrl = '' } = thumbnail_url || {};
@@ -48,10 +45,7 @@ function PublishCourse({ data = {}, id = '' }, ref) {
 					values   : {
 						id,
 						thumbnail_url: finalUrl,
-						course_categories,
-						description,
-						course_title,
-						course_subtitle,
+						...restValues,
 					},
 				};
 			};
