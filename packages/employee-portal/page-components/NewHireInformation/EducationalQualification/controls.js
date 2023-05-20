@@ -36,7 +36,7 @@ const controls = [
 	{
 		name        : 'phone_number',
 		label       : 'Phone Number',
-		type        : 'mobilenumber',
+		type        : 'phonenumber',
 		placeholder : 'Mobile',
 		rules       : { required: 'This is required' },
 	},
@@ -56,7 +56,7 @@ const controls = [
 	{
 		name        : 'emergency_num',
 		label       : 'Emergency Contact Number',
-		type        : 'mobilenumber',
+		type        : 'number',
 		placeholder : 'Emergency Contact Number',
 		rules       : { required: 'This is required' },
 	},
