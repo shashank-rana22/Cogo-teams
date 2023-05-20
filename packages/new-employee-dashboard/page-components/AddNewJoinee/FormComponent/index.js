@@ -1,9 +1,10 @@
 import { Button } from '@cogoport/components';
 import {
-	InputController, SelectController, MobileNumberController, useForm, SingleDateRangeController,
+	InputController, SelectController, MobileNumberController, useForm, DatepickerController,
 } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useHarbourRequest } from '@cogoport/request';
 import React from 'react';
 
 import controls from './controls';
@@ -12,13 +13,13 @@ import styles from './styles.module.css';
 const CONTROLS_MAPPING = {
 	text            : InputController,
 	mobileNumber    : MobileNumberController,
-	SingleDateRange : SingleDateRangeController,
+	SingleDateRange : DatepickerController,
 	select          : SelectController,
 };
 
-const PERSONAL_DETAILS_MAPPING = ['name', 'email', 'mobile_number'];
+const PERSONAL_DETAILS_MAPPING = ['name', 'personal_email', 'mobile_number'];
 
-const EMPLOYEE_DETAILS_MAPPING = ['employee_id', 'role', 'date_of_joining', 'location', 'reporting_manager'];
+const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining', 'location', 'reporting_manager'];
 
 const HR_DETAILS_MAPPING = ['hr_name', 'hr_email'];
 
@@ -45,14 +46,34 @@ const SECTION_MAPPING = [
 function FormComponent({ setActivePage }) {
 	const router = useRouter();
 
+	const [{ loading, data }, trigger] = useHarbourRequest({
+		method : 'post',
+		url    : '/create_employee_detail',
+	}, { manual: true });
+
 	const onClickBackIcon = () => {
 		router.back();
 	};
 
 	const { control, handleSubmit, formState: { errors } } = useForm();
 
-	const onClickSaveDetails = (values) => {
-		setActivePage('success');
+	const onClickSaveDetails = async (values) => {
+		try {
+			const payload = {
+				...values,
+				performed_by_type   : 'agent',
+				performed_by_id     : '961cc7d4-53f0-4319-96e9-2a90217bdc4e',
+				address             : '',
+				date_of_birth       : new Date(),
+				gender              : 'female',
+				mobile_number       : values?.mobile_number?.number,
+				mobile_country_code : values?.mobile_number?.country_code,
+			};
+			await trigger({ data: payload });
+			setActivePage('success');
+		} catch (error) {
+			console.log('error :: ', error);
+		}
 	};
 
 	const renderFields = ({ show }) => (Object.keys(controls) || []).map((controlItem) => {
@@ -122,7 +143,7 @@ function FormComponent({ setActivePage }) {
 						<Button
 							themeType="primary"
 							onClick={handleSubmit(onClickSaveDetails)}
-							// disabled={loading}
+							loading={loading}
 						>
 							Save Details
 						</Button>

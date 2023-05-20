@@ -10,7 +10,7 @@ const controls = [
 	},
 
 	{
-		name        : 'email',
+		name        : 'personal_email',
 		label       : 'Employee Email ID',
 		placeholder : 'Enter a valid email id',
 		type        : 'text',
@@ -35,7 +35,7 @@ const controls = [
 	},
 
 	{
-		name        : 'employee_id',
+		name        : 'employee_code',
 		type        : 'text',
 		label       : 'Employee ID',
 		placeholder : 'Employee Id',
@@ -45,7 +45,7 @@ const controls = [
 	},
 
 	{
-		name        : 'role',
+		name        : 'designation',
 		type        : 'select',
 		label       : 'Role',
 		placeholder : 'Role',

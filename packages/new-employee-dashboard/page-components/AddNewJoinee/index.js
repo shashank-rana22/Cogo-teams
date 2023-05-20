@@ -9,6 +9,7 @@ function AddNewJoinee() {
 	if (activePage === 'success') {
 		return <SuccessComponent />;
 	}
+
 	return <FormComponent setActivePage={setActivePage} />;
 }
 

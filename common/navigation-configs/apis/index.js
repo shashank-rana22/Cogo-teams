@@ -19,6 +19,7 @@ import enquiry_supply from './enquiry-supply-apis';
 import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
+import hrms from './hrms-apis';
 import ingestion from './ingestion-apis';
 import cargo_insurance from './insurance-apis';
 import kam_desk from './kam-desk-apis';
@@ -136,6 +137,7 @@ const apis = {
 	ingestion,
 	booking_desk,
 	poc,
+	...hrms,
 	...athena_dashboard,
 };
 
