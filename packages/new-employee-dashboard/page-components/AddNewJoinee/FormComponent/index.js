@@ -46,7 +46,7 @@ const SECTION_MAPPING = [
 function FormComponent({ setActivePage }) {
 	const router = useRouter();
 
-	const [{ loading, data }, trigger] = useHarbourRequest({
+	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/create_employee_detail',
 	}, { manual: true });
@@ -129,26 +129,13 @@ function FormComponent({ setActivePage }) {
 				))}
 
 				<div className={styles.button_container}>
-					<div className={styles.cancel}>
-						<Button
-							themeType="secondary"
-							// onClick={onClose}
-							// disabled={loading}
-						>
-							Cancel
-						</Button>
-
-					</div>
-					<div>
-						<Button
-							themeType="primary"
-							onClick={handleSubmit(onClickSaveDetails)}
-							loading={loading}
-						>
-							Save Details
-						</Button>
-
-					</div>
+					<Button
+						themeType="primary"
+						onClick={handleSubmit(onClickSaveDetails)}
+						loading={loading}
+					>
+						Save Details
+					</Button>
 				</div>
 			</div>
 
