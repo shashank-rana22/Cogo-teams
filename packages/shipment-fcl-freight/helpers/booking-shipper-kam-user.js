@@ -3,7 +3,7 @@ const kamTypes = ['booking_agent', 'destination_booking_agent', 'origin_booking_
 const userLoggedIn = ({ shipment_data = {} }) => {
 	const { stakeholders = [] } = shipment_data || {};
 
-	let kamLoggedIn = false;
+	let kamLoggedIn = null;
 
 	stakeholders.forEach((item) => {
 		if (kamTypes.includes(item?.stakeholder_type)) {
