@@ -1,5 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useEffect } from 'react';
 
 function TokenAnalysisGraph({ graphData, setShowTotalCost }) {
@@ -13,6 +14,22 @@ function TokenAnalysisGraph({ graphData, setShowTotalCost }) {
 				fontSize: 13,
 			},
 		},
+	};
+
+	const formatDateValue = (value) => {
+		const date = formatDate({
+			date       : value,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+			formatType : 'date',
+		});
+
+		const time = formatDate({
+			date       : value,
+			timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+			formatType : 'time',
+		});
+
+		return `${date}, ${time}`;
 	};
 	return (
 		<ResponsiveLine
@@ -45,7 +62,7 @@ function TokenAnalysisGraph({ graphData, setShowTotalCost }) {
 				legendOffset   : 36,
 				legendPosition : 'middle',
 				format(value) {
-					return format(value, 'dd/MM, HH:mm');
+					return formatDateValue(value);
 				},
 			}}
 			axisLeft={{
