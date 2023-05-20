@@ -84,8 +84,8 @@
 
 .updated_at {
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 }
 
 .updated_at_text {
@@ -94,12 +94,12 @@
 
 .tags {
 	font-size: 12px;
-	color: #221F20;
+	color: #221f20;
 }
 
 .audience {
 	max-height: 50px;
-    overflow: scroll;
+	overflow: scroll;
 
 	:global {
 		.ui_pill_text {
@@ -111,8 +111,8 @@
 }
 
 .tag_text {
-	font-weight: 400;
 	font-size: 12px;
+	font-weight: 400;
 }
 
 .text {

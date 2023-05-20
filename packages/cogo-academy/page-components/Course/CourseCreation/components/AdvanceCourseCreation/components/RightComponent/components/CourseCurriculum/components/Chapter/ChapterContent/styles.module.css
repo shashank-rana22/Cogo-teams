@@ -1,7 +1,7 @@
 .container {
 	padding: 0 40px;
-	background-color: #fff;
 	margin-bottom: 32px;
+	background-color: #fff;
 
 	:global {
 		.ui_toggle_container {
@@ -36,8 +36,8 @@
 
 	&.completion_duration_value {
 		width: 200px;
-		margin-left: 20px;
 		margin-top: unset;
+		margin-left: 20px;
 	}
 
 	&.completion_duration_unit {
