@@ -25,10 +25,7 @@ function List({ isSeller = false }) {
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(8);
 
-	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
-		shipment_data,
-		pageLimit,
-	});
+	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({ payload: {} });
 
 	const handleRefetch = () => {
 		refetchServices();

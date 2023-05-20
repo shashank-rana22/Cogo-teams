@@ -4,22 +4,21 @@ import { useRequest } from '@cogoport/request';
 
 const useUpdateInvoiceRemarks = ({
 	refetch = () => {},
-	payload = {},
+	successMessage = 'Your remarks have been added successfully',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'fcl_freight/update_invoice_remarks',
 		method : 'POST',
 	}, { manual: true });
 
-	const onSubmitRemarks = async () => {
+	const onSubmitRemarks = async (payload) => {
 		try {
-			const res = await trigger({
+			await trigger({
 				data: payload,
 			});
-			if (!res.hasError) {
-				Toast.success('Your remarks have been added successfully');
-				refetch();
-			}
+
+			Toast.success(successMessage);
+			refetch();
 		} catch (error) {
 			Toast.error(getApiError(error?.response?.data));
 		}

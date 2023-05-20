@@ -37,7 +37,6 @@ function ChangePaymentMode({
 	};
 
 	const { changePaymentMode, loading } = useUpdateInvoicePaymentMode({
-		payload,
 		refetch: refetchAfterCall,
 	});
 	return (
@@ -59,7 +58,7 @@ function ChangePaymentMode({
 				)}
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={changePaymentMode} disabled={loading || !check}>
+				<Button onClick={() => changePaymentMode(payload)} disabled={loading || !check}>
 					Update
 				</Button>
 			</Modal.Footer>

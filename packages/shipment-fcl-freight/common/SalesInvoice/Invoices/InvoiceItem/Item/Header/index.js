@@ -57,10 +57,22 @@ function Header({
 		window.open(invoiceLink);
 	};
 
+	const refetchAferApiCall = () => {
+		BfInvoiceRefetch();
+	};
+
+	let successMessage = 'Status updated successfully!';
+	if (status === 'reviewed') {
+		successMessage = 'Invoice sent for approval to customer!';
+	} else if (status === 'approved') {
+		successMessage = 'Invoice approved!';
+	}
+
 	const { updateInvoiceStatus } = useUpdateShipmentInvoiceStatus({
 		invoice,
-		BfInvoiceRefetch,
+		refetch: refetchAferApiCall,
 		status,
+		successMessage,
 	});
 
 	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= 120347 && invoice?.status === 'reviewed'

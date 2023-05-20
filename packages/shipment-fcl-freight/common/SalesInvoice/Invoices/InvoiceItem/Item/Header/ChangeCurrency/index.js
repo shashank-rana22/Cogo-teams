@@ -62,7 +62,6 @@ function ChangeCurrency({
 	};
 
 	const { onCreate, loading } = useUpdateCurrency({
-		payload,
 		refetch  : refetchAfterCall,
 		currency : invoice?.invoice_currency,
 	});
@@ -98,7 +97,7 @@ function ChangeCurrency({
 					size="md"
 					themeType="primary"
 					style={{ marginLeft: '16px' }}
-					onClick={onCreate}
+					onClick={() => onCreate(payload)}
 					disabled={loading}
 				>
 					Confirm

@@ -34,9 +34,15 @@ function OTPVerification({
 		refetch();
 	};
 
+	const payload = {
+		mobile_otp : otpValue,
+		invoice_id : invoice?.id,
+	};
+
 	const { onClickSubmitOtp, verifyInvoiceLoader } = useVerifyInvoiceOtp({
 		otpValue,
 		invoice,
+		payload,
 		refetch: refetchAfterVerifydOtpApiCall,
 	});
 

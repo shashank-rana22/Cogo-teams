@@ -9,7 +9,7 @@ const useUpdateInvoiceStatus = ({
 	const [{ loading }, trigger] = useRequest({
 		url    : 'fcl_freight/update_invoice_status',
 		method : 'POST',
-	});
+	}, { manual: true });
 
 	const apiTrigger = async (val) => {
 		try {

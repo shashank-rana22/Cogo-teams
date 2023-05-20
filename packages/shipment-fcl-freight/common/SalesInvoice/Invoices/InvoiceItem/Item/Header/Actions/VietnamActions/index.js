@@ -57,10 +57,13 @@ function Actions({
 	}
 	// HARD CODING ENDS
 
+	const refetchAfterCall = () => {
+		setShowReview(false);
+		refetch();
+	};
+
 	const { updateInvoiceStatus, loading } = useUpdateInvoiceStatus({
-		invoice,
-		refetch,
-		status: 'approved',
+		refetch: refetchAfterCall,
 	});
 
 	const handleClickCurrency = () => {

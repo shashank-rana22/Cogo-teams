@@ -30,8 +30,6 @@ function AddRemarks({
 		payload,
 	});
 
-	const handleSubmit = () => onSubmitRemarks();
-
 	return (
 		<Modal onClose={onClose} show={showAddRemarks} width={600}>
 			<Modal.Header title="Invoice Remarks" />
@@ -55,7 +53,7 @@ function AddRemarks({
 				</Button>
 				<Button
 					className="primary md"
-					onClick={handleSubmit}
+					onClick={() => onSubmitRemarks(payload)}
 					disabled={loading || isEmpty(remarkValue)}
 				>
 					Submit
