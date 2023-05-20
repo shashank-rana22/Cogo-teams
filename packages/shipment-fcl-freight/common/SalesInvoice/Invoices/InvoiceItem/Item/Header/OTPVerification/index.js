@@ -34,22 +34,18 @@ function OTPVerification({
 		refetch();
 	};
 
-	const payload = {
+	const payloadForVerification = {
 		mobile_otp : otpValue,
 		invoice_id : invoice?.id,
 	};
 
 	const { onClickSubmitOtp, verifyInvoiceLoader } = useVerifyInvoiceOtp({
-		otpValue,
-		invoice,
-		payload,
-		refetch: refetchAfterVerifydOtpApiCall,
+		payload : payloadForVerification,
+		refetch : refetchAfterVerifydOtpApiCall,
 	});
 
 	const { sendOtpForInvoiceApproval } = useSendInvoiceOtp({
-		invoice_id : invoice?.id,
-		user_id    : selectedUser?.split('_')?.[0],
-		refetch    : refetchAfterSendOtpApiCall,
+		refetch: refetchAfterSendOtpApiCall,
 	});
 
 	const userList = orgData?.list?.filter((obj) => obj?.mobile_verified);
@@ -73,7 +69,11 @@ function OTPVerification({
 	const handleClick = async () => {
 		if (isEmpty(selectedUser)) Toast.error('Please select any user');
 		else {
-			// await sendOtpForInvoiceApproval();
+			const payload = {
+				invoice_id : invoice?.id,
+				user_id    : selectedUser?.split('_')?.[0],
+			};
+			await sendOtpForInvoiceApproval(payload);
 			setModalIsOpen(true);
 		}
 	};

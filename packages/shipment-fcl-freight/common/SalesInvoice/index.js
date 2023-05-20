@@ -34,7 +34,7 @@ function SalesInvoice() {
 
 	return (
 		<main className={styles.container}>
-			<OverviewManageServices />
+			<OverviewManageServices isOpen={false} />
 
 			{!loading && !isEmpty(invoiceData) ? (
 				<Invoices

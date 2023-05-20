@@ -3,8 +3,6 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const useSendInvoiceEmail = ({
-	setShow = () => {},
-	invoice = {},
 	refetch = () => {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -12,16 +10,13 @@ const useSendInvoiceEmail = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const handleSend = async () => {
+	const handleSend = async (payload) => {
 		try {
-			const payload = { id: invoice?.id };
-
 			const res = await trigger({
 				data: payload,
 			});
 			if (!res?.hasError) {
 				Toast.success('Email Send successfully');
-				setShow(false);
 				refetch();
 			}
 		} catch (err) {

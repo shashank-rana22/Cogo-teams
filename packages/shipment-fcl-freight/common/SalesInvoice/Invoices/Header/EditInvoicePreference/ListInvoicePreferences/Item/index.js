@@ -11,11 +11,12 @@ import React from 'react';
 import SelectService from './SelectService';
 import styles from './styles.module.css';
 
-const mainServices = [
+const MAIN_SERVICES = [
 	'fcl_freight_service',
 	'lcl_freight_service',
 	'air_freight_service',
 ];
+const ACTION_STATE = ['reviewed', 'approved', 'revoked'];
 
 function Item({
 	invoice = {},
@@ -52,7 +53,7 @@ function Item({
 	) : null;
 
 	const renderServicesTaken = (invoice?.services || []).map((service) => {
-		const trade_type = !mainServices.includes(service?.service_type)
+		const trade_type = !MAIN_SERVICES.includes(service?.service_type)
 			? service?.trade_type
 			: null;
 
@@ -75,7 +76,7 @@ function Item({
 		) : null;
 	});
 
-	const noActionState = ['reviewed', 'approved', 'revoked'].includes(
+	const noActionState = ACTION_STATE.includes(
 		invoice?.status,
 	);
 

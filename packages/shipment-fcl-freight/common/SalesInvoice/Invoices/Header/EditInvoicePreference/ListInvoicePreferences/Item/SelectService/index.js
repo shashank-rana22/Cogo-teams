@@ -10,7 +10,7 @@ import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';
 
-const mainServices = [
+const MAIN_SERVICES = [
 	'fcl_freight_service',
 	'lcl_freight_service',
 	'air_freight_service',
@@ -35,7 +35,7 @@ function SelectService({
 		const countryCode = getCountryDetails({ country_id: invoice?.billing_address?.organization_country_id });
 
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
-			const trade_type = !mainServices.includes(service?.service_type) ? service?.trade_type : null;
+			const trade_type = !MAIN_SERVICES.includes(service?.service_type) ? service?.trade_type : null;
 
 			let tradeType = '';
 

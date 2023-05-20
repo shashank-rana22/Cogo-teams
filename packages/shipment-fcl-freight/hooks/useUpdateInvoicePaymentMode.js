@@ -4,6 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const useUpdateInvoicePaymentMode = ({
 	refetch = () => {},
+	successMessage = 'Payment mode Updated',
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/update_invoice_payment_mode',
@@ -15,7 +16,7 @@ const useUpdateInvoicePaymentMode = ({
 			await trigger({
 				data: payload,
 			});
-			Toast.success('Payment mode Updated');
+			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
 			Toast.error(getApiError(err?.response?.data));

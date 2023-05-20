@@ -11,10 +11,14 @@ function SendInvoiceEmail({
 	invoice = {},
 	refetch = () => {},
 }) {
+	const payload = { id: invoice?.id };
+
+	const refetchAfterApiCall = () => {
+		refetch();
+		setShow(false);
+	};
 	const { handleSend, loading } = useSendInvoiceEmail({
-		setShow,
-		invoice,
-		refetch,
+		refetch: refetchAfterApiCall,
 	});
 
 	return (
@@ -33,7 +37,7 @@ function SendInvoiceEmail({
 					Cancel
 				</Button>
 
-				<Button onClick={handleSend} disabled={loading}>
+				<Button onClick={() => handleSend(payload)} disabled={loading}>
 					Send Email
 				</Button>
 			</Modal.Footer>
