@@ -1,0 +1,53 @@
+.container {
+    background: #F8F2E7;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-bottom: 6px;
+}
+
+.port_name {
+    font-weight: bold;
+    font-size: 12px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #333333;
+    margin: 0px;
+}
+
+.price_point {
+    font-weight: 500;
+    font-size: 12px;
+    line-height: 18px;
+    display: flex;
+    align-items: center;
+    letter-spacing: 0.02em;
+    color: #333333;
+    margin: 0px;
+    margin-right: 10px;
+    flex-basis: 31%;
+}
+
+.row_top {
+    display: flex;
+    align-items: center;
+    margin-bottom: 8px;
+    justify-content: space-between;
+}
+
+.row {
+    display: flex;
+    align-items: center;
+}
+
+.line {
+    width: 1px;
+    height: 14px;
+    background: #EDD7A9;
+    margin: 0px 10px;
+}
+.strong {
+    font-weight: bold;
+    margin-left: 4px;
+}

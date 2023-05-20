@@ -1,0 +1,41 @@
+.container {
+
+}
+
+
+.row {
+    display: flex;
+}
+
+.filters {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 6px;
+    margin-bottom: 16px;
+}
+
+.filtersheading {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    color: #4F4F4F;
+}
+
+
+.select {
+	width: 200px;
+    margin-right: 16px;
+	/* padding: 2px 46px 2px 2px; */
+}
+
+.label {
+    font-weight: 400;
+    font-size: 12px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    color: #4F4F4F;
+}

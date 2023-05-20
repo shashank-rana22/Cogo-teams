@@ -1,0 +1,49 @@
+.container {
+}
+
+.heading {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 20px;
+    line-height: 150%;
+    color: #221F20;
+}
+
+.sidepanel {
+    background: #FFFFFF;
+    border-radius: 6px;
+    width: 30vw;
+    margin-right: 16px;
+    padding: 16px;
+    max-height: 72vh;
+}
+
+.side_list {
+    overflow: auto;
+    max-height: 65vh;
+}
+
+.row {
+    display: flex;
+}
+
+.filters {
+    background: #FFFFFF;
+    border-radius: 6px;
+    padding: 12px 4px;
+    margin-bottom: 16px;
+}
+
+.filtersheading {
+    font-style: normal;
+    font-weight: 600;
+    font-size: 14px;
+    line-height: 150%;
+    display: flex;
+    align-items: center;
+    color: #4F4F4F;
+}
+
+.view {
+    position: relative
+}
