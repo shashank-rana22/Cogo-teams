@@ -18,12 +18,11 @@ function StatusApproval({ item, refetchBookingList }) {
 
 	const { control, handleSubmit, formState:{ errors = {} }, watch	} = useForm();
 
-	console.log('item', item);
-
 	const { updateState = () => {}, loading } = useStateUpdate({
 		id: item?.checkout_approvals?.[0]?.id,
 		refetchBookingList,
 		setShowModal,
+		showModal,
 	});
 
 	const formValues = watch();
@@ -49,11 +48,10 @@ function StatusApproval({ item, refetchBookingList }) {
 					onClose={() => setShowModal(false)}
 					className={styles.modal}
 				>
-					<Modal.Header title={`Are you Sure You wanna ${MAPPING[showModal]}?`} />
+					<Modal.Header title={`Are you sure you want to ${MAPPING[showModal]}?`} />
 
 					<Modal.Body className={styles.preview_modal_body}>
 						{showModal === 'rejected' ? (
-
 							<RejectionForm control={control} errors={errors} />
 						) : null}
 
@@ -79,9 +77,7 @@ function StatusApproval({ item, refetchBookingList }) {
 							size="sm"
 							themeType="primary"
 							disbaled={loading}
-							onClick={() => {
-								handleSubmit(updateState({ formValues, state: showModal }))();
-							}}
+							onClick={handleSubmit(updateState)}
 						>
 							{MAPPING[showModal]}
 						</Button>

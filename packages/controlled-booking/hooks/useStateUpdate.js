@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -23,16 +22,17 @@ const getPayload = ({ state, formValues }) => {
 			},
 		};
 	}
+	return null;
 };
 
-const useStateUpdate = ({ id, refetchBookingList, setShowModal }) => {
+const useStateUpdate = ({ id, refetchBookingList, setShowModal, showModal }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_checkout_approval',
 		method : 'post',
 	}, { manual: true });
 
-	const updateState = useCallback(async ({ state, formValues }) => {
-		const payload = getPayload({ state, formValues });
+	const updateState = useCallback(async (formValues) => {
+		const payload = getPayload({ state: showModal, formValues });
 		try {
 			await	trigger({
 				data: {
@@ -43,11 +43,11 @@ const useStateUpdate = ({ id, refetchBookingList, setShowModal }) => {
 			});
 			setShowModal(false);
 			refetchBookingList();
-			Toast.success(`${state} successfully`);
+			Toast.success(`${showModal} successfully`);
 		} catch (err) {
 			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
-	}, [id, refetchBookingList, setShowModal, trigger]);
+	}, [id, refetchBookingList, setShowModal, showModal, trigger]);
 
 	return {
 		loading,

@@ -1,4 +1,6 @@
-import { CheckboxGroupController, ChipsController, InputController, RadioGroupController, SelectController, TextAreaController } from '@cogoport/forms';
+import {
+	ChipsController, InputController, RadioGroupController, SelectController,
+} from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -15,17 +17,19 @@ function ApprovalForm({ errors, control, formValues }) {
 					mutiple={false}
 					options={[{
 						label: 'Required', value: 'required',
-					}, {
+					},
+					{
 						label: 'Not Required', value: 'not_requried',
 					},
 					]}
 					className={styles.checkbox_controller}
 					rules={{ required: 'This field is required' }}
 				/>
-				{errors.advance_payment ? <div className={styles.error_message}>{errors.ids.message}</div> : null}
+				{errors?.advance_payment
+					? <div className={styles.error_message}>{errors?.advance_payment?.message}</div> : null}
 			</div>
 
-			{formValues.advance_payment === 'required' ? (
+			{formValues?.advance_payment === 'required' ? (
 				<>
 
 					<div className={styles.amountLabel}> Amount </div>
@@ -51,9 +55,10 @@ function ApprovalForm({ errors, control, formValues }) {
 								rules={{ required: 'This field is required' }}
 							/>
 						</div>
-						{errors?.amount
-							? <div className={styles.error_message}>{errors.ids.message}</div> : null}
+
 					</div>
+					{errors?.amount
+						? <div className={styles.error_message}>{errors?.amount_currency?.message}</div> : null}
 				</>
 			) : null}
 
@@ -70,8 +75,9 @@ function ApprovalForm({ errors, control, formValues }) {
 				]}
 				rules={{ required: 'Required' }}
 				multiple={false}
-
 			/>
+			{errors?.booking_placed_on
+				? <div className={styles.error_message}>{errors?.booking_placed_on?.message}</div> : null}
 
 		</>
 	);
