@@ -4,7 +4,7 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import SupplierReallocation from '../../../../../../shipment-fcl-freight/common/SupplierReallocation';
+import SupplierReallocation from '../../../../SupplierReallocation';
 import CancelAdditionalService from '../../CancelAdditionalService';
 
 import styles from './styles.module.css';

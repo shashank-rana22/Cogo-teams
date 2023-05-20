@@ -2,7 +2,7 @@ import { Stepper } from '@cogoport/components';
 import { useForm, useFieldArray } from '@cogoport/forms';
 import { useState } from 'react';
 
-import useCreateOrganizationTradeParty from '../../../../../../../shipment-fcl-freight/hooks/useCreateOrganizationTradeParty';
+import useCreateOrganizationTradeParty from '../../../../../../hooks/useCreateOrganizationTradeParty';
 import AddressForm from '../AddressForm';
 
 import CompanyDetails from './CompanyDetails';

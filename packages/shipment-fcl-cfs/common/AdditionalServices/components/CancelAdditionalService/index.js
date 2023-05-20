@@ -1,7 +1,7 @@
 import { Textarea, Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useUpdateShipmentAdditionalService from '../../../../../shipment-fcl-freight/hooks/useUpdateShipmentAdditionalService';
+import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 
 import styles from './styles.module.css';
 
