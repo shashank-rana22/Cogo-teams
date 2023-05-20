@@ -15,7 +15,7 @@ const useGetVendorDetails = (allParams = {}) => {
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/payments/outstanding/account-payables-for-org',
+			url     : 'payments/outstanding/account-payables-for-org',
 			method  : 'get',
 			authKey : 'get_payments_outstanding_account_payables_for_org',
 		},
