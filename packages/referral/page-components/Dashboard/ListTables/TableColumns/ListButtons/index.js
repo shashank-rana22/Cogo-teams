@@ -15,15 +15,10 @@ const ListButtons = ({
 }) => {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 	const router = useRouter();
-
 	const { organization_data = [], referee_data = {}, immediate_child_count = 0, name = '' } = item;
-
 	const emptyOrg = isEmpty(organization_data);
-
 	const { account_type = '', tags = [], id = '' } = organization_data?.[0] || [];
-
 	const checkPartner = (tags || []).includes('partner');
-
 	const UserProfile = () => {
 		if (account_type === 'importer_exporter' && checkPartner) {
 			window.open(`/${partnerId}/prm/${id}`, '_blank');
