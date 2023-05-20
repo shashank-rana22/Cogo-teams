@@ -22,11 +22,7 @@ function Edit({
 }) {
 	const { id, live_invoice_number, status } = item || {};
 
-	const { data, loading } = useGetShipmentCreditNote({
-		defaultParams: {
-			id,
-		},
-	});
+	const { data, loading } = useGetShipmentCreditNote({ defaultParams: { id } });
 
 	const services = data?.services || [];
 
@@ -118,6 +114,7 @@ function Edit({
 								{data?.requested_by?.name}
 							</span>
 						</div>
+
 						<div>
 							<b>Date</b>
 							<span>
@@ -130,6 +127,7 @@ function Edit({
 								})}
 							</span>
 						</div>
+
 						<Form
 							data={data}
 							invoiceData={invoiceData}
