@@ -117,7 +117,7 @@
                 "value":"cancelled"
             }
         ],
-        "possible_filters":["importer_exporter_id","source","tags"]
+        "possible_filters":["importer_exporter_id","source"]
     },
     "fcl_local":{
         "tabs":[
