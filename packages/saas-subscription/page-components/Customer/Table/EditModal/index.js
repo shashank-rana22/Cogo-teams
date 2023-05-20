@@ -1,7 +1,9 @@
 import { ButtonIcon, cl, Button, Modal } from '@cogoport/components';
 import { IcMCross } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
+import { DETAILS_MAPPING, HEADER_MAPPING } from '../../../../constant/editModalConstant';
 import useGetSubscriptionInfo from '../../../../hooks/useGetSubscriptionInfo';
 import iconUrl from '../../../../utils/iconUrl.json';
 
@@ -9,21 +11,9 @@ import FuturePlanDetails from './FuturePlanDetails';
 import QuotaDetails from './QuotaDetails';
 import styles from './styles.module.css';
 
-const DETAILS_MAPPING = [
-	{
-		name  : 'plan_details',
-		key   : 'name',
-		label : 'Plan Details',
-	},
-	{
-		name  : 'account_type',
-		key   : 'organization_type',
-		label : 'Family',
-	},
-];
-const HEADER_MAPPING = {
-	serial_id     : 'Serial Id',
-	business_name : 'Business Name',
+const GetDetailValue = ({ name, pricing = {}, product_family = {} }) => {
+	if (name === 'plan_details') return startCase(pricing?.name);
+	return startCase(product_family?.product_family_name);
 };
 
 function EditModal({ editModal, setEditModal }) {
@@ -38,18 +28,13 @@ function EditModal({ editModal, setEditModal }) {
 	const { active = {}, quotas = [], future = {} } = subInfo || {};
 	const { id = '', plan = {}, pricing = {}, product_family = {} } = active || {};
 
-	const getDetailValue = (name) => {
-		if (name === 'plan_details') return startCase(pricing?.name);
-		return startCase(product_family?.product_family_name);
-	};
-
 	return (
 		<Modal show={open} onClose={closeModalHandler} closeOnOuterClick={closeModalHandler} size="lg">
 			<div className={styles.container}>
 				{loading && (
 					<div className={styles.loader}>
 						<div className={styles.overlay} />
-						<img className={styles.cogoloader} src={iconUrl.loading} alt="loading" />
+						<Image className={styles.cogoloader} src={iconUrl.loading} alt="loading" />
 					</div>
 				)}
 
@@ -73,6 +58,7 @@ function EditModal({ editModal, setEditModal }) {
 					<div className={styles.flex_box}>
 						<Button
 							onClick={() => editModalChangeHandler('editPlan', id)}
+							type="submit"
 						>
 							Change Plan
 						</Button>
@@ -82,6 +68,7 @@ function EditModal({ editModal, setEditModal }) {
 							themeType="secondary"
 							disabled={plan?.plan_name === 'starter-pack'}
 							onClick={() => editModalChangeHandler('editCancelSub', id)}
+							type="submit"
 						>
 							Cancel Subscription
 						</Button>
@@ -92,7 +79,9 @@ function EditModal({ editModal, setEditModal }) {
 					{DETAILS_MAPPING.map((detail) => (
 						<div key={detail} className={styles.details}>
 							<div className={styles.detail_title}>{detail.label}</div>
-							<div className={styles.detail_content}>{getDetailValue(detail?.name)}</div>
+							<div className={styles.detail_content}>
+								<GetDetailValue name={detail?.name} pricing={pricing} product_family={product_family} />
+							</div>
 						</div>
 					))}
 				</div>

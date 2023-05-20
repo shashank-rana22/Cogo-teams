@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 
-const useCancelSubscription = ({ successHandler }) => {
+const useCancelSubscription = ({ modalChangeHandler }) => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : '/cancel_saas_subscription',
@@ -13,7 +13,7 @@ const useCancelSubscription = ({ successHandler }) => {
 					subscription_id: id,
 				},
 			});
-			successHandler();
+			modalChangeHandler(true);
 		} catch (err) {
 			console.log(err);
 		}

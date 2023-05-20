@@ -1,10 +1,5 @@
 import { IcMEdit } from '@cogoport/icons-react';
-import { format, startCase } from '@cogoport/utils';
-
-const COLOR_MAPPING = {
-	partner  : 'yellow',
-	importer : 'blue',
-};
+import { format } from '@cogoport/utils';
 
 const itemFunction = ({ setEditModal }) => ({
 	renderId: (item) => {

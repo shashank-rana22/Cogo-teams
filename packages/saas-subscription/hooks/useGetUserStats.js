@@ -7,9 +7,9 @@ const useGetUserStats = () => {
 		url    : '/get_saas_subscription_user_stats',
 	}, { manual: true });
 
-	const refetchUserStats = async (searchTerm) => {
+	const refetchUserStats = (searchTerm) => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					q: searchTerm,
 				},
@@ -22,7 +22,8 @@ const useGetUserStats = () => {
 	useEffect(() => { refetchUserStats(); }, []);
 
 	return {
-		refetchUserStats, userStatsData: data, statsLoading: loading,
+		refetchUserStats, userStatsData: data, statsLoading: loading
+		,
 	};
 };
 

@@ -5,24 +5,33 @@ import useUpdatePlan from '../../../../../hooks/useUpdatePlan';
 import styles from '../styles.module.css';
 
 const getOptions = (data = []) => (
-	(data || [])?.map((ele) => ({
+	(data || []).map((ele) => ({
 		value: ele?.id, label: ele?.name,
 	}))
 );
 
-function Plan({ cancelHandler, subscriptionId = '', successHandler }) {
-	const [plan, setPlan] = useState('R1');
-	const { loading, changePlanHandler, listData = [] } = useUpdatePlan({ plan, subscriptionId, successHandler });
-	const options = getOptions(listData?.list);
+function Plan({ subscriptionId = '', modalChangeHandler }) {
+	const [plan, setPlan] = useState('');
+	const { loading, changePlanHandler, listData = {} } = useUpdatePlan({ plan, subscriptionId, modalChangeHandler });
+	const { list = [] } = listData || {};
+	const options = getOptions(list);
 	return (
 		<>
 			<div className={styles.plan_container}>
 				<RadioGroup options={options} onChange={setPlan} value={plan} />
 			</div>
 			<div className={cl`${styles.flex_box} ${styles.footer}`}>
-				<Button themeType="secondary" loading={loading} onClick={cancelHandler}>Cancel</Button>
+				<Button
+					themeType="secondary"
+					type="submit"
+					loading={loading}
+					onClick={modalChangeHandler}
+				>
+					Cancel
+				</Button>
 				<Button
 					themeType="accent"
+					type="submit"
 					className={styles.save_btn}
 					loading={loading}
 					onClick={changePlanHandler}

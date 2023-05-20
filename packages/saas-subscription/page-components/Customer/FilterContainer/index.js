@@ -7,9 +7,9 @@ import AssignPlanModal from './AssignPlanModal';
 import styles from './styles.module.css';
 
 function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList }) {
+	const { debounceQuery, query } = useDebounceQuery();
 	const [searchTerm, setSearchTerm] = useState();
 	const [openPlanModal, setOpenPlanModal] = useState(false);
-	const { debounceQuery, query } = useDebounceQuery();
 
 	useEffect(() => {
 		if (query !== null) {

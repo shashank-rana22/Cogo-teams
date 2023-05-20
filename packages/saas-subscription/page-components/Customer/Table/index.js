@@ -1,4 +1,3 @@
-/* eslint-disable react/no-array-index-key */
 import { Pagination, Placeholder, cl } from '@cogoport/components';
 import { useState } from 'react';
 
@@ -36,11 +35,11 @@ function Table({ userList = {}, loading = false, setGlobalFilters }) {
 					</div>
 				))}
 			</div>
-			{(newList || []).map((item, index) => (
-				<div key={`${item?.id}_${index}`} className={cl`${styles.row} ${styles.item_row}`}>
+			{(newList || []).map((item) => (
+				<div key={`${item?.id}`} className={cl`${styles.row} ${styles.item_row}`}>
 					{listConfig.map((config) => (
 						<div
-							key={`${config.key}_${item?.id}_${index}`}
+							key={`${config.key}_${item?.id}`}
 							className={styles.col}
 							style={{ width: config?.width }}
 						>

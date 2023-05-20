@@ -15,6 +15,11 @@ const cancelObj = {
 	featureInfo          : '',
 };
 
+const RenderTitle = ({ editAddon, product_name = '' }) => {
+	if (editAddon) return startCase(product_name);
+	return 'Change Plan';
+};
+
 function EditFeatureModal({ editModal, setEditModal }) {
 	const {
 		openEditFeatureModal = false,
@@ -22,58 +27,47 @@ function EditFeatureModal({ editModal, setEditModal }) {
 		editPlan = false, editCancelSub = false, featureInfo = {},
 	} = editModal;
 	const { product = {} } = featureInfo || {};
+	const { product_name = '' } = product || {};
 
-	const cancelHandler = () => {
+	const modalChangeHandler = (value = false) => {
 		setEditModal((prev) => ({
 			...prev,
 			...cancelObj,
-			apiCall: false,
-		}));
-	};
-	const successHandler = () => {
-		setEditModal((prev) => ({
-			...prev,
-			...cancelObj,
-			apiCall: true,
+			apiCall: value,
 		}));
 	};
 
-	const renderTitle = () => {
-		if (editAddon) return startCase(product?.product_name);
-		return 'Change Plan';
-	};
 	return (
 		<Modal
 			show={openEditFeatureModal}
-			closeOnOuterClick={cancelHandler}
-			onClose={cancelHandler}
+			closeOnOuterClick={modalChangeHandler}
+			onClose={modalChangeHandler}
 		>
 			{!editCancelSub ? (
 				<div>
 					<div className={`${styles.flex_box} ${styles.title_container}`}>
-						<h3 className={styles.title}>{renderTitle()}</h3>
-						<ButtonIcon size="md" icon={<IcMCross />} themeType="primary" onClick={cancelHandler} />
+						<h3 className={styles.title}>
+							<RenderTitle editAddon={editAddon} product_name={product_name} />
+						</h3>
+						<ButtonIcon size="md" icon={<IcMCross />} themeType="primary" onClick={modalChangeHandler} />
 					</div>
 					{editAddon && (
 						<Quota
 							quotaInfo={featureInfo}
-							cancelHandler={cancelHandler}
-							successHandler={successHandler}
+							modalChangeHandler={modalChangeHandler}
 						/>
 					)}
 					{editPlan && (
 						<Plan
-							cancelHandler={cancelHandler}
+							modalChangeHandler={modalChangeHandler}
 							subscriptionId={featureInfo}
-							successHandler={successHandler}
 						/>
 					)}
 				</div>
 			) : (
 				<CancelSub
-					cancelHandler={cancelHandler}
+					modalChangeHandler={modalChangeHandler}
 					subscriptionId={featureInfo}
-					successHandler={successHandler}
 				/>
 			)}
 		</Modal>

@@ -1,7 +1,9 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useUpdatePlan = ({ plan, subscriptionId, successHandler }) => {
+const PLAN_LIST_PAGE_LIMIT = 50;
+
+const useUpdatePlan = ({ plan, subscriptionId, modalChangeHandler }) => {
 	const [{ loading, data: listData }, listTrigger] = useRequest({
 		method : 'get',
 		url    : '/list_saas_plan_pricings',
@@ -12,12 +14,12 @@ const useUpdatePlan = ({ plan, subscriptionId, successHandler }) => {
 		url    : '/update_saas_subscription',
 	}, { manual: true });
 
-	const getPlanList = async () => {
+	const getPlanList = () => {
 		try {
-			await listTrigger({
+			listTrigger({
 				params: {
 					filters    : { is_active: true, plan_type: 'P' },
-					page_limit : 50,
+					page_limit : PLAN_LIST_PAGE_LIMIT,
 				},
 			});
 		} catch (err) {
@@ -33,7 +35,7 @@ const useUpdatePlan = ({ plan, subscriptionId, successHandler }) => {
 					plan_pricing_id : plan,
 				},
 			});
-			successHandler();
+			modalChangeHandler(true);
 		} catch (err) {
 			console.log(err);
 		}
