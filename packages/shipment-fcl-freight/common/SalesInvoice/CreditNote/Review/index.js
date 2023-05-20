@@ -12,13 +12,11 @@ function Review({
 }) {
 	const [value, setValue] = useState(false);
 
-	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch: CNRefetch });
+	const { loading, apiTrigger = () => {} } = useUpdateShipmentCreditNote({ refetch: CNRefetch });
 
 	const handleUpdate = () => {
-		apiTrigger({
-			id,
-			status: value ? 'reviewed' : undefined,
-		});
+		apiTrigger({ id, status: value ? 'reviewed' : undefined });
+
 		setOpen(false);
 	};
 	return (
@@ -28,8 +26,8 @@ function Review({
 			className={styles.custom_modal}
 		>
 			<Modal.Header title="MARK AS REVIEWED" />
-			<Modal.Body>
 
+			<Modal.Body>
 				<form className={styles.form}>
 					<Checkbox
 						checked={value}
@@ -41,6 +39,7 @@ function Review({
 					</div>
 				</form>
 			</Modal.Body>
+
 			<Modal.Footer>
 				<div className={styles.button_wrapper}>
 					<Button

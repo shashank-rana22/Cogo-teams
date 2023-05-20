@@ -30,26 +30,22 @@ function SelectService({
 	const [invoiceCurrency, setInvoiceCurrency] = useState(invoice_currency);
 
 	let options = [];
+
 	allTakenServices?.forEach((service) => {
-		const countryCode = getCountryDetails({
-			country_id: invoice?.billing_address?.organization_country_id,
-		});
+		const countryCode = getCountryDetails({ country_id: invoice?.billing_address?.organization_country_id });
 
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
-			const trade_type = !mainServices.includes(service?.service_type)
-				? service?.trade_type
-				: null;
+			const trade_type = !mainServices.includes(service?.service_type) ? service?.trade_type : null;
 
 			let tradeType = '';
+
 			if (trade_type === 'export') {
 				tradeType = 'Origin';
 			} else if (trade_type === 'import') {
 				tradeType = 'Destination';
 			}
 
-			const isBas = (service?.line_items || []).some(
-				(lineItem) => lineItem?.code === 'BAS',
-			);
+			const isBas = (service?.line_items || []).some((lineItem) => lineItem?.code === 'BAS');
 
 			const invoiceAmount = formatAmount({
 				amount   : service?.service_total_discounted || 0,
@@ -111,8 +107,10 @@ function SelectService({
 				value     : id_with_igst,
 				...service,
 			};
+
 			options.push(servicesToPush);
 		}
+
 		options = options?.filter(
 			(opt) => !(
 				opt?.service_type === 'cargo_insurance_service'
@@ -126,11 +124,10 @@ function SelectService({
 
 	const handleChange = (newValue) => {
 		const addedValue = newValue?.find((id) => !value?.includes(id));
+
 		const addedValueObj = invoice?.services?.find((objItem) => objItem?.serviceKey === addedValue);
-		if (
-			addedValueObj?.service_source === 'pass_through'
-			&& addedValueObj?.service_source !== invoice_source
-		) {
+
+		if (addedValueObj?.service_source === 'pass_through' && addedValueObj?.service_source !== invoice_source) {
 			Toast.error("Service from different sources can't be merged!");
 		} else {
 			onChange(newValue);
@@ -146,6 +143,7 @@ function SelectService({
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Select service and invoice currency</div>
+
 			<ChangeCurrency
 				invoice={invoice}
 				invoiceCurrency={invoiceCurrency}
@@ -167,6 +165,7 @@ function SelectService({
 				>
 					Cancel
 				</Button>
+
 				<Button
 					size="sm"
 					themeType="accent"

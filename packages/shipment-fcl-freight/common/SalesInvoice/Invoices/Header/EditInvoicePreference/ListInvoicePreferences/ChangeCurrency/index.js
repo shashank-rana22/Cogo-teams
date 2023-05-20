@@ -9,7 +9,7 @@ function ChangeCurrency({
 	invoiceCurrency = '',
 	setInvoiceCurrency = () => {},
 }) {
-	const { currencyOptions } = getCurrencyOptions(invoice);
+	const { currencyOptions = [] } = getCurrencyOptions(invoice);
 
 	return (
 		<Chips

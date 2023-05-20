@@ -125,25 +125,23 @@ const creditNoteControls = ({
 }) => {
 	const control = services?.map((service) => ({
 		...rawControls(handleChange, service, isEdit),
-		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
+		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...(vals || {}) }),
 		value           : service?.line_items?.map((item) => ({
-			is_checked       : item.is_checked,
-			code             : item.code,
-			sac_code         : item.hsn_code || 'NA',
-			currency         : item.currency,
+			is_checked       : item?.is_checked,
+			code             : item?.code,
+			sac_code         : item?.hsn_code || 'NA',
+			currency         : item?.currency,
 			price_discounted : item?.price_discounted || 0,
 			quantity         : item?.quantity || 0,
 			exchange_rate    : item?.exchange_rate || 1,
 			tax_percent      : item?.tax_percent || 0,
-			unit             : item.unit,
+			unit             : item?.unit,
 			total            : item?.tax_total_price_discounted || 0,
 			name             : item?.name,
 		})),
 	}));
 
-	control.push(...controls);
-
-	return control;
+	return control.push(...controls);
 };
 
 export default creditNoteControls;

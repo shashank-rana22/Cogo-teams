@@ -65,6 +65,7 @@ function Item({
 		<>
 			<section className={styles.billing_party} ref={billingPartyHeightRef}>
 				<h5>{item?.billing_address?.name}</h5>
+
 				<Tooltip
 					theme="light"
 					interactive
@@ -80,6 +81,7 @@ function Item({
 					</span>
 				</Tooltip>
 			</section>
+
 			<section className={styles.details}>
 				<div className={styles.number}>
 					<span
@@ -87,10 +89,11 @@ function Item({
 						className={item?.status === 'approved' ? styles.approved : undefined}
 					>
 						{item?.cn_number}
-
 					</span>
+
 					<span>{item?.live_invoice_number}</span>
 				</div>
+
 				<div className={styles.invoice_value}>
 					Invoice Value - &nbsp;
 					<span>
@@ -105,15 +108,18 @@ function Item({
 						})}
 					</span>
 				</div>
+
 				<div className={styles.invoice_status_and_action}>
 					<div className={styles.status}>
 						<div className={`${styles[CNstatusMapping[itemStatus]]} ${styles.status_text}`}>
 							{startCase(CNstatusMapping[itemStatus])}
 						</div>
+
 						{itemStatus === 'rejected' ? (
 							<IcCError width={16} height={16} />
 						) : null}
 					</div>
+
 					{itemStatus === 'pending' ? (
 						<div>
 							<Button
@@ -138,15 +144,13 @@ function Item({
 				) : null}
 
 			</section>
+
 			<section
 				className={styles.rotate_icon}
 				onClick={() => setOpen(open !== 'line_items' ? 'line_items' : false)}
 				tabIndex={0}
 				role="button"
-				style={{
-					height:
-					`${billingPartyHeightRef.current?.offsetHeight}px`,
-				}}
+				style={{ height: `${billingPartyHeightRef.current?.offsetHeight}px` }}
 			>
 				<IcMArrowRotateDown className={open ? styles.rotate : null} />
 			</section>
@@ -159,6 +163,7 @@ function Item({
 				<div className={styles.header}>
 					{title}
 				</div>
+
 				{open === 'line_items' ? (
 					<div className={styles.line_items_container}>
 						{(item?.services || []).map((_item) => (
