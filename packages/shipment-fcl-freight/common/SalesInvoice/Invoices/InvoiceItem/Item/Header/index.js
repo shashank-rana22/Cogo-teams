@@ -15,6 +15,11 @@ import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
 
+const API_SUCCESS_MESSAGE = {
+	reviewed : 'Invoice sent for approval to customer!',
+	approved : 'Invoice approved!,',
+};
+
 function Header({
 	children = null,
 	invoice = {},
@@ -27,7 +32,6 @@ function Header({
 }) {
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
-	const [status, setStatus] = useState('');
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -61,19 +65,7 @@ function Header({
 		BfInvoiceRefetch();
 	};
 
-	let successMessage = 'Status updated successfully!';
-	if (status === 'reviewed') {
-		successMessage = 'Invoice sent for approval to customer!';
-	} else if (status === 'approved') {
-		successMessage = 'Invoice approved!';
-	}
-
-	const { updateInvoiceStatus } = useUpdateShipmentInvoiceStatus({
-		invoice,
-		refetch: refetchAferApiCall,
-		status,
-		successMessage,
-	});
+	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
 
 	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= 120347 && invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
@@ -88,8 +80,13 @@ function Header({
 	}
 
 	const handleClick = (type) => {
-		setStatus(type);
-		updateInvoiceStatus();
+		updateInvoiceStatus({
+			payload: {
+				id     : invoice?.id,
+				status : type,
+			},
+			message: API_SUCCESS_MESSAGE[type],
+		});
 	};
 
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
