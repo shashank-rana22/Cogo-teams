@@ -1,6 +1,7 @@
 import { Accordion } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import LoadingState from '../../../../../commons/LoadingState';
 import useUpdateCourse from '../../hooks/useUpdateCourse';
 
 import MAPPING from './MAPPING';
@@ -19,6 +20,10 @@ function LeftComponent({ activeTab, setActiveTab, getCogoAcademyCourse, id }) {
 			updateCourse({ values: { id, state: value } });
 		}
 	};
+
+	if (loading) {
+		return <LoadingState rowsCount={4} small />;
+	}
 
 	return (
 		<div className={styles.container}>
