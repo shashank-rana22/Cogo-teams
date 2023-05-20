@@ -19,7 +19,7 @@ const ListButtons = ({
 	const emptyOrg = isEmpty(organization_data);
 	const { account_type = '', tags = [], id = '' } = organization_data?.[0] || [];
 	const checkPartner = (tags || []).includes('partner');
-	const UserProfile = () => {
+	const userProfile = () => {
 		if (account_type === 'importer_exporter' && checkPartner) {
 			window.open(`/${partnerId}/prm/${id}`, '_blank');
 		} else if (account_type === 'importer_exporter' && !checkPartner) {
@@ -70,7 +70,7 @@ const ListButtons = ({
 			),
 			onClick: () => {
 				if (!emptyOrg) {
-					UserProfile();
+					userProfile();
 				}
 			},
 			conditions: ['user'],
