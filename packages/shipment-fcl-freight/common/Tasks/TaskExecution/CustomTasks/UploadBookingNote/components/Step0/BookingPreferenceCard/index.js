@@ -80,9 +80,9 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 					{!isEmpty(remarks) && (
 						<div>
 							<b>Supply Remarks</b>
-							{' '}
+							&nbsp;
 							:
-							{' '}
+							&nbsp;
 							{remarks}
 						</div>
 					)}
@@ -91,9 +91,9 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 						!isEmpty(supplier_contract_no) && (
 							<div>
 								<b>Supplier Contract No.</b>
-								{' '}
+								&nbsp;
 								:
-								{' '}
+								&nbsp;
 								{supplier_contract_no}
 							</div>
 						)

@@ -5,14 +5,9 @@ import Layout from '../../../../Tasks/TaskExecution/helpers/Layout';
 function Form({
 	prevData = {}, controls = [], defaultValues = {}, setValue = () => {}, control = () => {}, errors = {},
 }) {
-	const docUrls = useMemo(() => {
-		const urls = [];
-		prevData?.document_urls?.forEach((doc) => {
-			const file = { name: doc, url: doc };
-			urls.push(file);
-		});
-		return urls;
-	}, [prevData?.document_urls]);
+	const docUrls = useMemo(() => prevData?.document_urls?.map((doc) => ({
+		name: doc, url: doc,
+	})), [prevData?.document_urls]);
 
 	useEffect(() => {
 		setValue('remarks', prevData?.remarks);

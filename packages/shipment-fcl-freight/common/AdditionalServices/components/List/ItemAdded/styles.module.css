@@ -95,7 +95,7 @@
 .button_text {
 	padding: 4px;
 	font-size: 12px;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 	text-align: center;
 	cursor: pointer;
 }

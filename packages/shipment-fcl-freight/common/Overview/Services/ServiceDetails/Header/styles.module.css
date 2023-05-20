@@ -2,7 +2,7 @@
 	align-items: center;
 	margin-bottom: 12px;
 	background-color: #fef3e9;
-	border: 1px solid #f68b21;
+	border: 1px solid var(--color-accent-orange-2);
 	border-radius: 4px;
 }
 
@@ -33,11 +33,11 @@
 
 .service_details {
 	width: 25%;
-	border-right: 2px solid #f68b21;
+	border-right: 2px solid var(--color-accent-orange-2);
 }
 
 .cancelled.service_details {
-	border-right: 2px solid #828282;
+	border-right: 2px solid var(--color-secondary-greyscale-3);
 }
 
 .completed.service_details {

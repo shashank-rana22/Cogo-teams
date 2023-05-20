@@ -50,7 +50,7 @@
 	margin: 0 0 4px;
 	font-size: 10px;
 	font-weight: 500;
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 }
 
 .country {
@@ -58,7 +58,7 @@
 	overflow: hidden;
 	font-size: 10px;
 	font-weight: 400;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }

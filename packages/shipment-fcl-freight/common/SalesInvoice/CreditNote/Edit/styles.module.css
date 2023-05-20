@@ -18,7 +18,7 @@
 	}
 
 	&.rejected {
-		background-color: #fef199;
+		background-color: var(--color-primary-yellow-4);
 	}
 
 	&.draft {
@@ -26,7 +26,7 @@
 	}
 
 	&.requested {
-		background-color: #fef199;
+		background-color: var(--color-primary-yellow-4);
 	}
 }
 

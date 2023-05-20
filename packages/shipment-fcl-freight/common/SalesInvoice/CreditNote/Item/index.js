@@ -1,4 +1,4 @@
-import { Loader, Button, Tooltip } from '@cogoport/components';
+import { Loader, Button, Tooltip, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowRotateDown,
@@ -25,7 +25,7 @@ const CN_STATUS_MAPPING = {
 function Item({
 	item = {},
 	serial_id = '',
-	cNRefetch = () => {},
+	cnRefetch = () => {},
 	invoiceData = {},
 	loading = false,
 	invoicesList = [],
@@ -41,7 +41,7 @@ function Item({
 		document_urls : item?.document_urls || [],
 	};
 
-	const bfInvoice = invoicesList.filter((ele) => ele?.proformaNumber === item?.cn_number) || [];
+	const bfInvoice = invoicesList.filter((ele) => ele?.proformaNumber === item?.cn_number);
 
 	const handleDownload = () => {
 		const cnLink = bfInvoice[0].invoicePdfUrl
@@ -70,7 +70,7 @@ function Item({
 					theme="light"
 					interactive
 					content={(
-						<div style={{ fontSize: '10px' }}>
+						<div className={styles.billing_address}>
 							{item?.billing_address?.address}
 						</div>
 					)}
@@ -111,7 +111,7 @@ function Item({
 
 				<div className={styles.invoice_status_and_action}>
 					<div className={styles.status}>
-						<div className={`${styles[CN_STATUS_MAPPING[itemStatus]]} ${styles.status_text}`}>
+						<div className={cl`${styles[CN_STATUS_MAPPING[itemStatus]]} ${styles.status_text}`}>
 							{startCase(CN_STATUS_MAPPING[itemStatus])}
 						</div>
 
@@ -181,7 +181,7 @@ function Item({
 				<ReviewCN
 					setOpen={setOpen}
 					id={item?.id}
-					cNRefetch={cNRefetch}
+					cnRefetch={cnRefetch}
 				/>
 			) : null}
 
@@ -192,7 +192,7 @@ function Item({
 					CN_STATUS_MAPPING={CN_STATUS_MAPPING}
 					serial_id={serial_id}
 					item={item}
-					cNRefetch={cNRefetch}
+					cnRefetch={cnRefetch}
 					invoiceData={invoiceData}
 				/>
 			) : null}

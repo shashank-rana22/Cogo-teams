@@ -10,7 +10,7 @@ const getCountryCode = (id) => {
 	return details.country_code;
 };
 
-const invoiceCurrencyMappings = {
+const INVOICE_CURRENCY_MAPPINGS = {
 	freight_invoice_currency: {
 		[getCountryCode(GLOBAL_CONSTANTS.country_ids.IN)]: [
 			GLOBAL_CONSTANTS.currency_code.INR,
@@ -34,9 +34,9 @@ const invoiceCurrencyMappings = {
 };
 
 const getCurrencyOptions = (invoice) => {
-	const currencyOptionsOld =	invoiceCurrencyMappings?.freight_invoice_currency?.[
+	const currencyOptionsOld =	INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.[
 		invoice?.country_code || geo.country.code
-	] || invoiceCurrencyMappings?.freight_invoice_currency?.others;
+	] || INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.others;
 
 	const currencyOptions = currencyOptionsOld.map((item) => ({
 		key      : item,

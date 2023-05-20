@@ -15,7 +15,7 @@
 	margin: 0;
 	font-size: 10px;
 	font-weight: 400;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 }
 
 .reasons {

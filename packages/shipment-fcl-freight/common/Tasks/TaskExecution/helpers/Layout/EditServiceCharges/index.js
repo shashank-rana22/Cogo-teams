@@ -22,10 +22,10 @@ function EditServiceCharges(props) {
 	const options = (data?.list || [])
 		.filter((item) => item?.code?.includes(q) || item?.name?.includes(q) || (item?.code)?.includes(upperCase(q)))
 		.map((item) => ({
-			value : item.code,
+			value : item?.code,
 			label : (
 				<div className={styles.label}>
-					<div>{`${item?.code} - ${item?.name || ''}`}</div>
+					<div>{`${item?.code || ''} - ${item?.name || ''}`}</div>
 
 					<div>{item?.sac_code}</div>
 				</div>

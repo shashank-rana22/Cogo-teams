@@ -1,4 +1,4 @@
-import { Modal, Button, Loader } from '@cogoport/components';
+import { Modal, Button, Loader, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -12,12 +12,12 @@ import Form from './Form';
 import styles from './styles.module.css';
 
 function Edit({
-	setOpen,
+	setOpen = () => {},
 	CN_STATUS_MAPPING,
 	serial_id,
-	prevData,
+	prevData = {},
 	item = {},
-	cNRefetch = () => {},
+	cnRefetch = () => {},
 	invoiceData = {},
 }) {
 	const { id, live_invoice_number, status } = item || {};
@@ -40,7 +40,7 @@ function Edit({
 		isEdit  : true,
 		invoiceData,
 		setOpen,
-		refetch : cNRefetch,
+		refetch : cnRefetch,
 	});
 
 	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm();
@@ -60,15 +60,17 @@ function Edit({
 	const updatedObj = {};
 
 	Object.entries(formValues).forEach(([key, value]) => {
-		if (key === 'remarks') {
-			updatedObj[key] = value;
-		} else if (key === 'uploadDocument') {
-			updatedObj[key] = value;
-		} else {
-			updatedObj[key] = value?.map((_item) => ({
-				..._item,
-				total: _item.price_discounted * _item.quantity,
-			}));
+		switch (key) {
+			case 'remarks':
+			case 'uploadDocument':
+				updatedObj[key] = value;
+				break;
+			default:
+				updatedObj[key] = value?.map((_item) => ({
+					..._item,
+					total: _item.price_discounted * _item.quantity,
+				}));
+				break;
 		}
 	});
 
@@ -82,7 +84,7 @@ function Edit({
 			<Modal.Header title={(
 				<header className={styles.heading}>
 					EDIT CREDIT NOTE
-					<div className={`${styles[CN_STATUS_MAPPING[status]]} ${styles.status_text}`}>
+					<div className={cl`${styles[CN_STATUS_MAPPING[status]]} ${styles.status_text}`}>
 						{status === 'rejected' ? <div>!</div> : null}
 						{startCase(CN_STATUS_MAPPING[status])}
 					</div>

@@ -1,4 +1,4 @@
-import { Placeholder } from '@cogoport/components';
+import { cl, Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import getValue from '../../../utils/getValue';
@@ -23,7 +23,7 @@ function Item({
 				borderBottom : isLast ? 'none' : null,
 				borderRadius : isLast ? '0px 0px 4px 4px' : null,
 			}}
-			className={`${item.expired ? 'expired' : ''} card-body-row ${
+			className={cl`${item.expired ? 'expired' : ''} card-body-row ${
 				item.isDuplicates ? 'duplicate' : ''
 			}`}
 		>

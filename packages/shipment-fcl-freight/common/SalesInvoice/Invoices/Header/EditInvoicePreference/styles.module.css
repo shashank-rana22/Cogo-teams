@@ -14,10 +14,10 @@
 	padding: 8px 0;
 	margin-bottom: 20px;
 	font-weight: 600;
-	color: #88cad1;
+	color: var(--color-tertiary-blue-2);
 	text-align: center;
 	cursor: pointer;
-	border: 1px dashed #88cad1;
+	border: 1px dashed var(--color-tertiary-blue-2);
 	border-radius: 4px;
 
 	&:hover {

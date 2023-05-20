@@ -71,7 +71,7 @@ function TaskForm({
 
 				<div className={styles.info}>
 					Other valid date formats:
-					{' '}
+					&nbsp;
 					{validDateFormats}
 				</div>
 			</div>

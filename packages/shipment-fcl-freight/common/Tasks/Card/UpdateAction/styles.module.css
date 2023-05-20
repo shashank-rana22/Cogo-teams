@@ -19,7 +19,7 @@
 .task_action {
 	font-size: 10px;
 	line-height: 16px;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 	text-align: center;
 	cursor: pointer;
 

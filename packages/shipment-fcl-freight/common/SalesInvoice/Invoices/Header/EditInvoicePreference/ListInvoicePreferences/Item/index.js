@@ -138,7 +138,7 @@ function Item({
 
 					<div className={styles.invoice_currency}>
 						Invoice Currency:
-						{' '}
+						&nbsp;
 						{invoice_currency}
 					</div>
 

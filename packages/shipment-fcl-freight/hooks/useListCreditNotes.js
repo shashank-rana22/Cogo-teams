@@ -39,7 +39,7 @@ const useListCreditNotes = () => {
 	return {
 		loading,
 		list      : apiData?.list || [],
-		CNRefetch : getCreditNoteList,
+		cnRefetch : getCreditNoteList,
 	};
 };
 export default useListCreditNotes;

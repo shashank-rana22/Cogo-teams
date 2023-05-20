@@ -19,5 +19,5 @@
 
 .line {
 	width: 100%;
-	border-top: 1px solid #f68b21;
+	border-top: 1px solid var(--color-accent-orange-2);
 }

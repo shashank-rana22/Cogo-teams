@@ -57,7 +57,7 @@ const useEditCreditNoteHelper = ({
 
 	const defaultValues = generateDefaultValues({ values: controls });
 
-	const onCreate = async (data) => {
+	const onCreate = (data) => {
 		const { submit_data = {}, checkError = {} } = formatCreditNoteData({
 			data,
 			servicesIDs,
@@ -82,7 +82,7 @@ const useEditCreditNoteHelper = ({
 		});
 
 		if (isError === false) {
-			await apiTrigger(submit_data);
+			apiTrigger(submit_data);
 
 			setOpen(false);
 			refetch();

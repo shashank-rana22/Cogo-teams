@@ -24,7 +24,7 @@ const API_SUCCESS_MESSAGE = {
 function Header({
 	children = null,
 	invoice = {},
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 	invoiceData = {},
 	invoicesList = [],
 	isIRNGenerated = false,
@@ -61,7 +61,7 @@ function Header({
 	};
 
 	const refetchAferApiCall = () => {
-		BfInvoiceRefetch();
+		bfInvoiceRefetch();
 	};
 
 	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
@@ -99,7 +99,7 @@ function Header({
 				{invoice?.source === 'pass_through' ? (
 					<div className={styles.invoice_source}>
 						Source -
-						{' '}
+						&nbsp;
 						{startCase(invoice?.source)}
 					</div>
 				) : null}
@@ -107,7 +107,7 @@ function Header({
 				{invoice?.exchange_rate_state ? (
 					<div className={styles.invoice_source}>
 						Applicable State -
-						{' '}
+						&nbsp;
 						{startCase(invoice?.exchange_rate_state)}
 					</div>
 				) : null}
@@ -234,7 +234,7 @@ function Header({
 					{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
 						<Actions
 							invoice={invoice}
-							BfInvoiceRefetch={BfInvoiceRefetch}
+							bfInvoiceRefetch={bfInvoiceRefetch}
 							shipment_data={shipment_data}
 							invoiceData={invoiceData}
 							isIRNGenerated={isIRNGenerated}
@@ -292,7 +292,7 @@ function Header({
 				invoice={invoice}
 				refetchCN={refetchCN}
 				invoiceData={invoiceData}
-				BfInvoiceRefetch={BfInvoiceRefetch}
+				bfInvoiceRefetch={bfInvoiceRefetch}
 			/>
 		</div>
 	);

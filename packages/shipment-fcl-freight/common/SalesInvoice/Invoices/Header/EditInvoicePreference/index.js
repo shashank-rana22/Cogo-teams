@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 
 function EditInvoicePreference({
 	invoicing_parties = [],
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 	disableAction = false,
 	salesInvoicesRefetch = () => {},
 }) {
@@ -24,7 +24,7 @@ function EditInvoicePreference({
 
 	const refetchAfterApiCall = () => {
 		salesInvoicesRefetch();
-		BfInvoiceRefetch();
+		bfInvoiceRefetch();
 		setShow(false);
 	};
 

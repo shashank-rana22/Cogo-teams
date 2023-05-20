@@ -1,6 +1,6 @@
 .container {
 	padding: 12px 24px;
-	border-top: 1px solid #f68b21;
+	border-top: 1px solid var(--color-accent-orange-2);
 }
 
 .container.confirmed_by_service_provider {

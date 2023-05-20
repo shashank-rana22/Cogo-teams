@@ -47,7 +47,7 @@
 	.bl-count {
 		margin: 0 8px;
 		font-weight: 400;
-		color: #828282;
+		color: var(--color-secondary-greyscale-3);
 
 		@media (max-width: 768px) {
 			font-size: 10;
@@ -64,11 +64,11 @@
 
 	:global {
 		.ui_accordion_container {
-			background: #f3fafa !important;
+			background-color: var(--color-tertiary-blue-5) !important;
 		}
 
 		.ui_accordion_header {
-			background: #f3fafa !important;
+			background-color: var(--color-tertiary-blue-5) !important;
 		}
 	}
 }

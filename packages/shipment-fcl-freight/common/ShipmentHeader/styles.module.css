@@ -48,7 +48,7 @@
 	overflow: hidden;
 	font-size: 10px;
 	font-weight: 500;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 	text-align: start;
 	text-overflow: ellipsis;
 	white-space: nowrap;

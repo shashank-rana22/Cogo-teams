@@ -23,6 +23,6 @@
 }
 
 .more_details_popover_text {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	cursor: pointer;
 }

@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function Header({
 	invoiceData = {},
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 	disableAction = false,
 	isCustomer = false,
 	salesInvoicesRefetch = () => {},
@@ -40,11 +40,11 @@ function Header({
 				{!isCustomer ? (
 					<div className={styles.reviwed_stats}>
 						{reviewed_invoices}
-						{' '}
+						&nbsp;
 						of
-						{' '}
+						&nbsp;
 						{invoicing_parties?.length}
-						{' '}
+						&nbsp;
 						reviewed
 					</div>
 				) : null}
@@ -52,7 +52,7 @@ function Header({
 				<div className={styles.button_div}>
 					<EditInvoicePreference
 						invoicing_parties={invoicing_parties}
-						BfInvoiceRefetch={BfInvoiceRefetch}
+						bfInvoiceRefetch={bfInvoiceRefetch}
 						disableAction={disableAction}
 						salesInvoicesRefetch={salesInvoicesRefetch}
 					/>

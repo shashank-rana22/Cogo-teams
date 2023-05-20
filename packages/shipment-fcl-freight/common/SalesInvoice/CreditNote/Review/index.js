@@ -8,11 +8,11 @@ import styles from './styles.module.css';
 function Review({
 	setOpen = () => {},
 	id = '',
-	cNRefetch = () => {},
+	cnRefetch = () => {},
 }) {
 	const [value, setValue] = useState(false);
 
-	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch: cNRefetch });
+	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch: cnRefetch });
 
 	const handleUpdate = () => {
 		apiTrigger({ id, status: value ? 'reviewed' : undefined });

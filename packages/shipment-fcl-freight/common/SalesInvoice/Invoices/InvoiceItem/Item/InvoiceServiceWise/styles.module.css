@@ -3,38 +3,6 @@
 	background: #fff;
 	border: 1px solid #e0e0e0;
 	border-radius: 4px;
-
-	.card-body-row {
-		padding: 12px 20px;
-		margin-right: 0 !important;
-		margin-left: 0 !important;
-		cursor: default !important;
-
-		:hover {
-			background: none;
-		}
-	}
-
-	.card-list-root {
-		border: none;
-	}
-
-	.card-list-header-root {
-		background: #fff;
-		border-bottom: 2px solid #e0e0e0;
-		border-radius: 4px 4px 0 0;
-	}
-
-	.card-list-header-title {
-		font-size: 14px;
-		font-weight: 500;
-		color: #333;
-	}
-
-	.card-body-col {
-		font-size: 12px;
-		font-weight: 400;
-	}
 }
 
 .total_container {
@@ -55,7 +23,7 @@
 	font-size: 14px;
 	font-weight: 600;
 	line-height: 16px;
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 }
 
 .totals {
