@@ -21,9 +21,9 @@ function AddNewService({
 }) {
 	const { consignee_shipper_id } = shipmentData;
 
-	const haveToUpsell = upsellableService.service_type === 'fcl_freight_local_service'
+	const haveToUpsell = shipmentData?.end_to_end_shipment?.is_possible ? false : (upsellableService.service_type === 'fcl_freight_local_service'
 		&& primary_service?.bl_category === 'hbl' && activeStakeholder === 'consignee_shipper_booking_agent'
-		&& !isEmpty(userServicesData?.[consignee_shipper_id]);
+		&& !isEmpty(userServicesData?.[consignee_shipper_id]));
 
 	const [upsellModal, setUpsellModal] = useState(haveToUpsell);
 
@@ -47,7 +47,7 @@ function AddNewService({
 	}
 
 	/* user can only upsell services for the location to which its org is tagged */
-	let canUpsellForTradeType = true;
+	let canUpsellForTradeType = !shipmentData?.end_to_end_shipment?.is_possible;
 
 	if (activeStakeholder === 'booking_agent' && ((primary_service?.trade_type !== upsellableService?.trade_type
 		&& incoTermCannotUpsell.includes(primary_service?.inco_term))
