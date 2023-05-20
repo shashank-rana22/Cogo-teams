@@ -1,27 +1,7 @@
 import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
-import { startCase } from '@cogoport/utils';
 
-const mainServices = [
-	'fcl_freight_service',
-	'lcl_freight_service',
-	'air_freight_service',
-];
-
-const handleServiceType = (charge) => {
-	const serviceType = charge?.display_name || charge?.service_type;
-
-	if (!mainServices.includes(charge?.service_type)) {
-		if (charge?.trade_type === 'export') {
-			return `Origin ${startCase(serviceType)}`;
-		}
-		if (charge?.trade_type === 'import') {
-			return `Destination ${startCase(serviceType)}`;
-		}
-	}
-
-	return startCase(serviceType);
-};
+import { handleServiceType } from './handleServiceType';
 
 const commonControls = (handleChange, charge) => [
 	{
@@ -76,7 +56,7 @@ const commonControls = (handleChange, charge) => [
 	},
 ];
 
-const rawControls = (handleChange, charge, isEdit) => ({
+const rawControls = (handleChange, charge) => ({
 	type             : 'edit_service_charges',
 	name             : charge?.service_id,
 	service_name     : charge?.display_name || charge?.service_type,
@@ -95,7 +75,7 @@ const rawControls = (handleChange, charge, isEdit) => ({
 			total            : '',
 		},
 	],
-	controls: [...commonControls(handleChange, charge, isEdit)],
+	controls: [...commonControls(handleChange, charge)],
 });
 
 const controls = [
@@ -121,11 +101,10 @@ const creditNoteControls = ({
 	handleChange = () => {},
 	setAllChargeCodes = () => {},
 	allChargeCodes = {},
-	isEdit = false,
 }) => {
 	const control = services?.map((service) => ({
-		...rawControls(handleChange, service, isEdit),
-		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...(vals || {}) }),
+		...rawControls(handleChange, service),
+		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
 		value           : service?.line_items?.map((item) => ({
 			is_checked       : item?.is_checked,
 			code             : item?.code,

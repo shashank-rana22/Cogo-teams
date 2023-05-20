@@ -13,11 +13,11 @@ import styles from './styles.module.css';
 
 function Edit({
 	setOpen,
-	CNstatusMapping,
+	CN_STATUS_MAPPING,
 	serial_id,
 	prevData,
 	item = {},
-	CNRefetch = () => {},
+	cNRefetch = () => {},
 	invoiceData = {},
 }) {
 	const { id, live_invoice_number, status } = item || {};
@@ -40,7 +40,7 @@ function Edit({
 		isEdit  : true,
 		invoiceData,
 		setOpen,
-		refetch : CNRefetch,
+		refetch : cNRefetch,
 	});
 
 	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm();
@@ -77,13 +77,14 @@ function Edit({
 			show
 			onClose={() => setOpen(false)}
 			size="xl"
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title={(
 				<header className={styles.heading}>
 					EDIT CREDIT NOTE
-					<div className={`${styles[CNstatusMapping[status]]} ${styles.status_text}`}>
+					<div className={`${styles[CN_STATUS_MAPPING[status]]} ${styles.status_text}`}>
 						{status === 'rejected' ? <div>!</div> : null}
-						{startCase(CNstatusMapping[status])}
+						{startCase(CN_STATUS_MAPPING[status])}
 					</div>
 				</header>
 			)}
@@ -96,12 +97,9 @@ function Edit({
 					</div>
 				) : (
 					<>
-						<div style={{ fontSize: 14 }}>
+						<div className={styles.title}>
 							<b>
-								SID
-								{serial_id}
-						&nbsp;- Invoice number -
-						&nbsp;
+								{`SID ${serial_id} - Invoice number -`}
 								<u>{live_invoice_number}</u>
 							</b>
 						</div>
@@ -109,9 +107,7 @@ function Edit({
 						<div>
 							<b>Requested By</b>
 							<span>
-								&nbsp;
-								-
-								{data?.requested_by?.name}
+								{` - ${data?.requested_by?.name}`}
 							</span>
 						</div>
 

@@ -4,17 +4,15 @@ import { startCase } from '@cogoport/utils';
 export const tableColumn = ({ serviceItem = {}, shipment_data = {} }) => {
 	const mainService = `${shipment_data?.shipment_type}_service`;
 
-	const ServiceName =	serviceItem?.service_type === mainService
+	const serviceName =	serviceItem?.service_type === mainService
 		? startCase(serviceItem?.service_type)
-		: (serviceItem?.trade_type === 'import'
-					&& `Destination ${startCase(serviceItem?.service_type)}`)
-				|| (serviceItem?.trade_type === 'export'
-					&& `Origin ${startCase(serviceItem?.service_type)}`)
+		: (serviceItem?.trade_type === 'import' && `Destination ${startCase(serviceItem?.service_type)}`)
+				|| (serviceItem?.trade_type === 'export' && `Origin ${startCase(serviceItem?.service_type)}`)
 				|| startCase(serviceItem?.service_type);
 
 	return [
 		{
-			label  : ServiceName,
+			label  : serviceName,
 			render : (item) => item?.name || '-',
 			span   : 2,
 		},

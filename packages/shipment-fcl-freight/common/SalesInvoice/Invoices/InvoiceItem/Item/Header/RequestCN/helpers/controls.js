@@ -1,27 +1,7 @@
 import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
-import { startCase } from '@cogoport/utils';
 
-const mainServices = [
-	'fcl_freight_service',
-	'lcl_freight_service',
-	'air_freight_service',
-];
-
-const handleServiceType = (charge) => {
-	const serviceType = charge?.display_name || charge?.service_type;
-
-	if (!mainServices.includes(charge?.service_type)) {
-		if (charge?.trade_type === 'export') {
-			return `Origin ${startCase(serviceType)}`;
-		}
-		if (charge?.trade_type === 'import') {
-			return `Destination ${startCase(serviceType)}`;
-		}
-	}
-
-	return startCase(serviceType);
-};
+import { handleServiceType } from '../../../../../../CreditNote/helpers/handleServiceType';
 
 const commonControls = (handleChange, charge) => [
 	{

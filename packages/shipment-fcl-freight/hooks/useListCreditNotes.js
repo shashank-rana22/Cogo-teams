@@ -14,6 +14,7 @@ const useListCreditNotes = () => {
 		params : {
 			filters: {
 				shipment_id,
+				is_active: true,
 			},
 			additional_methods: ['credit_note'],
 		},

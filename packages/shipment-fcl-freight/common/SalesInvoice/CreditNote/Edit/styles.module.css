@@ -1,41 +1,49 @@
-.heading{
+.heading {
 	display: flex;
 	align-items: center;
 	font-weight: 700;
 
-	& .status_text{
-		background-color: #fef1df;
+	& .status_text {
 		width: 90px;
-		font-size: 10px;
-		text-align: center;
-		border-radius: 4px;
 		padding: 2px;
 		margin-left: 22px;
+		font-size: var(--font-size-sm);
+		text-align: center;
+		background-color: #fef1df;
+		border-radius: 4px;
 	}
 
 	&.approved {
-		background-color: #DDEBC0;
+		background-color: var(--color-tertiary-success-green-4);
 	}
+
 	&.rejected {
-		background-color: #FEF199;
+		background-color: #fef199;
 	}
+
 	&.draft {
-		background-color: #DDEBC0;
+		background-color: var(--color-tertiary-success-green-4);
 	}
+
 	&.requested {
-		background-color: #FEF199;
+		background-color: #fef199;
 	}
 }
+
+.title {
+	font-size: var(--font-size-md);
+}
+
 .button_wrapper {
 	display: flex;
 	align-items: center;
 
-	& > button:first-child{
+	& > button:first-child {
 		margin-right: 12px;
 	}
 }
 
-.loader_wrapper{
+.loader_wrapper {
 	display: flex;
 	flex-direction: column;
 	align-items: center;

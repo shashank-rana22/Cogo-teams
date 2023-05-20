@@ -1,7 +1,7 @@
-.chip{
-    :global{
-        .ui_chip_container{
-            min-width: 60px;
-        }
-    }
+.chip {
+	:global {
+		.ui_chip_container {
+			min-width: 60px;
+		}
+	}
 }

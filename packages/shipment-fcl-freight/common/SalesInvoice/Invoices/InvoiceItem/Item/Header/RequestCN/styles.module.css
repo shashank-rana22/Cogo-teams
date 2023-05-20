@@ -1,25 +1,24 @@
-.bold_text{
+.bold_text {
 	font-weight: 500;
 	color: #393f70;
 }
 
-.div{
+.div {
+	margin: 5px 0;
 	font-size: 14px;
 	color: #393f70;
-	margin: 5px 0;
 }
 
-.underLined_text{
+.underLined_text {
 	text-decoration: underline;
 }
 
-
-.button_wrap{
+.button_wrap {
 	display: flex;
 	justify-content: flex-end;
 	margin: 10px 0;
 
-	& > button:first-child{
+	& > button:first-child {
 		margin-right: 12px;
 	}
 }

@@ -1,45 +1,48 @@
-.container{
+.container {
 	display: flex;
 	align-items: center;
 	width: 100%;
 }
 
-.user_name{
-	white-space: nowrap;
+.user_name {
+	width: 60%;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	width: 60%;
+	white-space: nowrap;
 }
 
-.no_data{
+.no_data {
 	font-size: 16px;
 	font-weight: 500;
 }
 
-.body{
-	:global{
-		.ui_radio_container{
+.body {
+	:global {
+		.ui_radio_container {
 			width: 100%;
 		}
-		.ui_modal_body_container{
+
+		.ui_modal_body_container {
 			height: 300px;
 		}
-		.ui_radio_label{
+
+		.ui_radio_label {
 			width: 100%;
 		}
-		.ui_radiogroup_container{
+
+		.ui_radiogroup_container {
 			flex-direction: column;
 		}
 	}
 }
 
-.otp_modal{
-	:global{
-		.ui_modal_body_container{
-			height: 140px;
+.otp_modal {
+	:global {
+		.ui_modal_body_container {
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			height: 140px;
 		}
 	}
 }

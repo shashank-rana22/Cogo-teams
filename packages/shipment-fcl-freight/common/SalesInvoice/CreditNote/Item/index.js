@@ -14,7 +14,7 @@ import ReviewCN from '../Review';
 import LineItems from './LineItems';
 import styles from './styles.module.css';
 
-const CNstatusMapping = {
+const CN_STATUS_MAPPING = {
 	pending          : 'draft',
 	reviewed         : 'requested',
 	approved         : 'approved',
@@ -25,7 +25,7 @@ const CNstatusMapping = {
 function Item({
 	item = {},
 	serial_id = '',
-	CNRefetch = () => {},
+	cNRefetch = () => {},
 	invoiceData = {},
 	loading = false,
 	invoicesList = [],
@@ -111,8 +111,8 @@ function Item({
 
 				<div className={styles.invoice_status_and_action}>
 					<div className={styles.status}>
-						<div className={`${styles[CNstatusMapping[itemStatus]]} ${styles.status_text}`}>
-							{startCase(CNstatusMapping[itemStatus])}
+						<div className={`${styles[CN_STATUS_MAPPING[itemStatus]]} ${styles.status_text}`}>
+							{startCase(CN_STATUS_MAPPING[itemStatus])}
 						</div>
 
 						{itemStatus === 'rejected' ? (
@@ -181,7 +181,7 @@ function Item({
 				<ReviewCN
 					setOpen={setOpen}
 					id={item?.id}
-					CNRefetch={CNRefetch}
+					cNRefetch={cNRefetch}
 				/>
 			) : null}
 
@@ -189,10 +189,10 @@ function Item({
 				<EditCN
 					setOpen={setOpen}
 					prevData={prevData}
-					CNstatusMapping={CNstatusMapping}
+					CN_STATUS_MAPPING={CN_STATUS_MAPPING}
 					serial_id={serial_id}
 					item={item}
-					CNRefetch={CNRefetch}
+					cNRefetch={cNRefetch}
 					invoiceData={invoiceData}
 				/>
 			) : null}

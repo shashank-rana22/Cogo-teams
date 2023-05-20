@@ -1,13 +1,13 @@
-.container{
-	background: #fff;
+.container {
 	margin-bottom: 22px;
-	border-radius: 4px;
+	background: #fff;
 	border: 1px solid #e0e0e0;
+	border-radius: 4px;
 
 	.card-body-row {
-		margin-left: 0px !important;
-		margin-right: 0px !important;
 		padding: 12px 20px;
+		margin-right: 0 !important;
+		margin-left: 0 !important;
 		cursor: default !important;
 
 		:hover {
@@ -20,15 +20,15 @@
 	}
 
 	.card-list-header-root {
-		background: #ffffff;
-		border-radius: 4px 4px 0 0;
+		background: #fff;
 		border-bottom: 2px solid #e0e0e0;
+		border-radius: 4px 4px 0 0;
 	}
 
 	.card-list-header-title {
-		color: #333333;
 		font-size: 14px;
 		font-weight: 500;
+		color: #333;
 	}
 
 	.card-body-col {
@@ -37,37 +37,37 @@
 	}
 }
 
-.total_container{
-	font-weight: 600;
-	font-size: 14px;
-	line-height: 16px;
-	color: #4f4f4f;
+.total_container {
 	display: flex;
 	justify-content: flex-end;
 	width: 100%;
-	background: #E5E5E5;
 	padding: 12px 28px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 16px;
+	color: #4f4f4f;
+	background: #e5e5e5;
 	border-radius: 0 0 4px 4px;
 }
 
-.total_amount{
-	font-weight: 600;
-	font-size: 14px;
-	line-height: 16px;
-	color: #F68B21;
+.total_amount {
 	margin-left: 16px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 16px;
+	color: #f68b21;
 }
 
-.totals{
+.totals {
 	display: flex;
+	align-items: center;
 	justify-content: flex-end;
-	color: #4f4f4f;
-	font-weight: 600;
-	font-size: 12px;
 	padding: 8px 30px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #4f4f4f;
 	white-space: nowrap;
 	border-top: 1px solid #e0e0e0;
-	align-items: center;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -75,20 +75,20 @@
 	}
 }
 
-.total_tax{
-	margin-left: 16px;
+.total_tax {
 	min-width: 12%;
+	margin-left: 16px;
 
 	@media (max-width: 768px) {
-		margin-left: 0px;
+		margin-left: 0;
 	}
 }
 
-.billed_text{
-	margin: 0;
+.billed_text {
 	padding-right: 24px;
-	font-weight: 400;
+	margin: 0;
 	font-size: 14px;
+	font-weight: 400;
 	line-height: 16px;
 	color: #cb6464;
 }
