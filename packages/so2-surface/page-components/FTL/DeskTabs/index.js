@@ -4,6 +4,7 @@ import { v4 as uuidv4 } from 'uuid';
 
 import TabContainer from '../../../configs/TAB_CONFIG';
 import DashboardContext from '../../../context/DashboardContext';
+
 import styles from './styles.module.css';
 
 function DeskTabs({ tabData = {} }) {

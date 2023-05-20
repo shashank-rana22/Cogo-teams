@@ -1,7 +1,9 @@
-import React from 'react';
 import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow } from '@cogoport/icons-react';
+import React from 'react';
+
 import ServiceIcon from '../ServiceIcon';
+
 import styles from './styles.module.css';
 
 const handleLocationDetails = (location) => (

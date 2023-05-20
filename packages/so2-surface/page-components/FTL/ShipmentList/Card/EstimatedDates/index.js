@@ -1,6 +1,7 @@
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
+
 import styles from './styles.module.css';
 
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);

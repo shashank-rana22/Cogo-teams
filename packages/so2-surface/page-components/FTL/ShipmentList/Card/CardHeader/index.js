@@ -1,5 +1,6 @@
 import { Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+
 import styles from './styles.module.css';
 
 export default function CardHeader({ item = {} }) {
