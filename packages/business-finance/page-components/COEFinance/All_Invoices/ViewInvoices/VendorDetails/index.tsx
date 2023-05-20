@@ -74,12 +74,12 @@ function VendorDetail({
 							<Tooltip
 								content={(
 									<div style={{ fontSize: '10px' }}>
-										{serviceProviderDetail?.organizationName}
+										{serviceProviderDetail?.organizationName || ''}
 									</div>
 								)}
 							>
 								<div className={styles.organization_name}>
-									{serviceProviderDetail?.organizationName}
+									{serviceProviderDetail?.organizationName || ''}
 								</div>
 							</Tooltip>
 						) : (

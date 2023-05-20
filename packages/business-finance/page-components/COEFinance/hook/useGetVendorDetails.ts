@@ -19,7 +19,7 @@ const useGetVendorDetails = (allParams = {}) => {
 			method  : 'get',
 			authKey : 'get_payments_outstanding_account_payables_for_org',
 		},
-		{ autoCancel: false },
+		{ manual: true },
 	);
 
 	useEffect(() => {

@@ -134,7 +134,7 @@ function ShipmentDetailsCard({
 		}));
 	};
 
-	const viewDocument = (document: string) => {
+	const viewDocument = (document) => {
 		window.open(document);
 	};
 	const onClose = () => {
