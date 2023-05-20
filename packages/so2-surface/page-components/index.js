@@ -1,7 +1,9 @@
-import { useState, useCallback, useMemo } from 'react';
 import { useRouter } from 'next/router';
+import { useState, useCallback, useMemo } from 'react';
+
 import DashboardContext from '../context/DashboardContext';
 import getLocalStorageVal from '../helpers/getLocalStorageVal';
+
 import FTL from './FTL';
 
 export default function SO2Surface() {
