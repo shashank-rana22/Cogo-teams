@@ -76,14 +76,16 @@ function UnifiedDashboard() {
 				</TabPanel>
 
 				{(file_data || []).map((item = {}) => {
-					if ((item.user_id || []).includes(profile.id)) {
+					if ((item.user_id || []).includes(id)) {
 						return (
 							<TabPanel
 								key={uuidv4()}
 								name={item.urlKey}
 								title={item.title}
 							>
-								<iframe title={item.title} src={item.metabaseUrl} width="100%" height="700px" />
+								<div className={styles.iframe_container}>
+									<iframe title={item.title} src={item.metabaseUrl} width="100%" height="700px" />
+								</div>
 							</TabPanel>
 						);
 					}
@@ -98,7 +100,9 @@ function UnifiedDashboard() {
 								name={item.urlKey}
 								title={item.title}
 							>
-								<iframe title={item.title} src={item.metabaseUrl} width="100%" height="700px" />
+								<div className={styles.iframe_container}>
+									<iframe title={item.title} src={item.metabaseUrl} width="100%" height="700px" />
+								</div>
 							</TabPanel>
 						);
 					}
@@ -106,7 +110,6 @@ function UnifiedDashboard() {
 				})}
 			</Tabs>
 		</div>
-
 	);
 }
 
