@@ -5,7 +5,7 @@ function LoadingState({ fields = [], isLast = false }) {
 	const stylesCol = { padding: '0px 4px' };
 
 	return (
-		<div style={{ borderBottom: isLast ? 'none' : '1px solid #e0e0e0' }}>
+		<div style={{ borderBottom: isLast ? 'none' : '1px solid var(--color-secondary-greyscale-5)' }}>
 			{fields.map((singleItem) => {
 				if (singleItem?.show === false) {
 					return null;

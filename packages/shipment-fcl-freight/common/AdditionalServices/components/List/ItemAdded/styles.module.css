@@ -19,7 +19,7 @@
 	font-size: 10px;
 	font-weight: 400;
 	line-height: 16px;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 }
 
 .price {
@@ -28,7 +28,7 @@
 	font-size: 10px;
 	font-weight: 400;
 	line-height: 16px;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
@@ -63,7 +63,7 @@
 .cancelled_by_supplier,
 .cancelled_by_customer {
 	color: #fff;
-	background-color: #4f4f4f;
+	background-color: var(--color-secondary-greyscale-1);
 }
 
 .disputed {

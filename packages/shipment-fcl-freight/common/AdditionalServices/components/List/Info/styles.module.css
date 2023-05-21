@@ -43,7 +43,7 @@
 	&.cancelled_by_supplier,
 	&.cancelled_by_customer {
 		color: #fff;
-		background-color: #4f4f4f;
+		background-color: var(--color-secondary-greyscale-1);
 	}
 
 	&.disputed {

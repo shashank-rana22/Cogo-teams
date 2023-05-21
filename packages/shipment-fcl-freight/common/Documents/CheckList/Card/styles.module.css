@@ -22,7 +22,7 @@
 	margin-right: 10px;
 	font-size: 10px;
 	white-space: nowrap;
-	background: #f2f4f7;
+	background-color: #f2f4f7;
 	border-radius: 12px;
 }
 
@@ -31,17 +31,17 @@
 	padding: 4px 12px;
 	margin-right: 10px;
 	font-size: 10px;
-	background: #f2f4f7;
+	background-color: #f2f4f7;
 	border-radius: 12px;
 
 	&.accepted {
 		color: #027a48;
-		background: #ecfdf3;
+		background-color: #ecfdf3;
 	}
 
 	&.pending {
 		color: #c4320a;
-		background: #fff6ed;
+		background-color: #fff6ed;
 	}
 }
 
@@ -49,7 +49,7 @@
 	display: flex;
 
 	.ui_pill_container {
-		background: #f2f4f7;
+		background-color: #f2f4f7;
 		background-color: #f2f4f7;
 		border-radius: 16px;
 	}

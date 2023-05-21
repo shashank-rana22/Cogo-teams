@@ -3,7 +3,7 @@
 	align-items: center;
 	font-size: 12px;
 	font-weight: 600;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 
 	.link {
 		cursor: pointer;

@@ -7,7 +7,7 @@
 	:global {
 		.ui_accordion_content {
 			background-color: #fff !important;
-			border-top: 1px solid #e0e0e0 !important;
+			border-top: 1px solid var(--color-secondary-greyscale-5) !important;
 			border-radius: initial;
 		}
 	}
@@ -18,8 +18,8 @@
 	padding-left: 15px;
 	font-size: 16px;
 	font-weight: 600;
-	color: #4f4f4f;
-	background: #fff;
+	color: var(--color-secondary-greyscale-1);
+	background-color: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 10 rgb(0 0 0 / 20%);
 }
@@ -41,7 +41,7 @@
 	font-size: 16px;
 	font-weight: 600;
 	line-height: 19px;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 	white-space: nowrap;
 
 	.bl-count {

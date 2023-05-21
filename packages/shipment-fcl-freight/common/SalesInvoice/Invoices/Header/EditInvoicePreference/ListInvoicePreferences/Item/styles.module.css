@@ -3,7 +3,7 @@
 	flex-direction: column;
 	justify-content: center;
 	margin-bottom: 16px;
-	background: #fff;
+	background-color: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 
@@ -79,7 +79,7 @@
 	font-weight: 400;
 	line-height: 12px;
 	color: #221f20;
-	background: #c4dc91;
+	background-color: #c4dc91;
 	border-radius: 4px;
 }
 

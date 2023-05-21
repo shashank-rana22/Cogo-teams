@@ -55,13 +55,13 @@
 .service_name {
 	font-size: 12px;
 	font-weight: 600;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 }
 
 .service_provider {
 	font-size: 10px;
 	font-weight: 500;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 }
 
 .state {
@@ -85,7 +85,7 @@
 	font-size: 12px;
 	cursor: pointer;
 	background-color: #fff;
-	border: 1px solid #e0e0e0;
+	border: 1px solid var(--color-secondary-greyscale-5);
 	border-radius: 6px;
 }
 

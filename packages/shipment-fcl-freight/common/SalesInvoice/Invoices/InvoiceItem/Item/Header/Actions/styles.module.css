@@ -21,7 +21,7 @@
 	line-height: 16px;
 	color: #333;
 	white-space: nowrap;
-	background: #fbe6e6;
+	background-color: #fbe6e6;
 	border-radius: 4px;
 }
 
@@ -66,19 +66,19 @@
 
 	.reviewed {
 		color: #393f70;
-		background: #e6fbe9;
+		background-color: #e6fbe9;
 	}
 }
 
 .line {
 	width: 100%;
-	border-top: 1px solid #e0e0e0;
+	border-top: 1px solid var(--color-secondary-greyscale-5);
 }
 
 .remark_container {
 	width: 100%;
 	padding: 8px;
-	background: #fff;
+	background-color: #fff;
 	border-radius: 4px;
 }
 
@@ -143,6 +143,6 @@
 	justify-content: center;
 	padding: 2px 10px;
 	font-size: 10px;
-	background: #fcedbf;
+	background-color: #fcedbf;
 	border-radius: 4px;
 }
