@@ -51,7 +51,16 @@ const useGetPortTrends = ({ trend }) => {
 		data  : [],
 	};
 
-	const list = data?.list || [];
+	const listOld = data?.list || [];
+
+	const total_pages = data?.total;
+
+	const list = [];
+
+	for (let i = listOld.length - 1; i >= 0;) {
+		list.push(listOld[i]);
+		i -= 1;
+	}
 
 	list.forEach((item) => {
 		average.data.push({
@@ -77,7 +86,7 @@ const useGetPortTrends = ({ trend }) => {
 		actual.data.push({
 			// x : i,
 			x : `${format(item.created_at, 'dd MMM hh:mm')}`,
-			y : item?.actual_line_item?.price,
+			y : item?.actual_line_item?.price || -1,
 		});
 	});
 
@@ -92,11 +101,14 @@ const useGetPortTrends = ({ trend }) => {
 	useEffect(() => {
 		getData();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [trend?.id]);
+	}, [trend?.id, page]);
 	return {
 		loading,
 		trendData,
 		setPage,
+		list,
+		page,
+		total_pages,
 	};
 };
 
