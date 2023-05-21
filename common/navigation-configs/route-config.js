@@ -5,6 +5,7 @@ import authorityDesk from './config/authority-desk';
 import blDoCollectionRelease from './config/bl_do-collection-release';
 import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
+import chakravyuh from './config/chakravyuh';
 import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
@@ -57,6 +58,7 @@ const routeConfig = {
 	...ingestion,
 	...blDoCollectionRelease,
 	...saasTools,
+	...chakravyuh,
 };
 
 export default routeConfig;
