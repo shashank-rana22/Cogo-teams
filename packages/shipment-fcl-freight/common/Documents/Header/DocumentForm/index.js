@@ -34,8 +34,9 @@ function DocumentForm({
 			break;
 
 		case 'booking_desk':
-		case 'document_desk':
 		case 'booking_desk_manager':
+		case 'document_desk':
+		case 'document_desk_manager':
 			params = {
 				shipment_id       : shipment_data?.id,
 				organization_ids  : [uploaded_by_org_id],

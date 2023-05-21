@@ -1,0 +1,92 @@
+.summary_card {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	overflow: hidden;
+	border: 1px solid #e0e0e0;
+	box-shadow: none;
+}
+
+.summary_p {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 0 25px 0 30px;
+}
+
+.via_enquiry {
+	background: #f7f7f7;
+}
+
+.amount_data {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.count_data {
+	width: 45%;
+	padding-left: 10px;
+}
+
+.quotation_count {
+	padding-bottom: 10px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.vertical_col {
+	display: flex;
+	align-items: center;
+	padding-left: 0;
+	background: #e0e0e0;
+}
+
+.vertical_text {
+	padding-top: 0;
+	writing-mode: vertical-rl;
+	transform: rotate(180deg);
+}
+
+.booking_total {
+	width: 100%;
+	padding: 16px 0;
+	font-size: 24px;
+	font-weight: 500;
+	text-align: center;
+}
+
+.booking_value {
+	width: 100%;
+	padding: 8px 0 12.8px;
+	font-size: 11px;
+	text-align: center;
+	border-top: 1px solid #f2f2f2;
+}
+
+.booking_details {
+	display: flex;
+	flex-direction: column;
+}
+
+.repeat_container {
+	display: flex;
+	justify-content: space-between;
+	text-align-last: left !important;
+}
+
+.stat {
+	width: 100%;
+	padding: 0 8px;
+	color: #828282;
+}
+
+.container {
+	display: flex;
+}
+
+.booking_col {
+	display: flex;
+	flex-direction: column;
+}

@@ -4574,6 +4574,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'contract',
 		},
+		{
+			api          : 'list_saas_rail_domestic_freight_invoice_details',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
 	],
 	discount: [
 		{
@@ -6000,6 +6005,11 @@ const partner = {
 			api          : 'get_contract_service_details',
 			access_type  : 'private',
 			service_name : 'contract',
+		},
+		{
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
 		},
 	],
 	incentives: [
@@ -9455,6 +9465,11 @@ const partner = {
 	],
 	templates: [
 		{
+			api          : 'update_communication_whatsapp_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_communication_templates',
 			access_type  : 'private',
 			service_name : 'communication',
@@ -11098,6 +11113,24 @@ const partner = {
 			service_name : 'shipment',
 			feature      : 'detention_demurrage',
 		},
+		{
+			api          : 'list_rail_domestic_freight_rate_free_days',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'create_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'update_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
 	],
 	my_profile: [
 		{
@@ -11686,6 +11719,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'list_checkouts',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
 			api          : 'get_user',
 			access_type  : 'private',
 			service_name : 'user',
@@ -11939,6 +11977,16 @@ const partner = {
 			api          : 'check_customer_checkout_quotation_conflict',
 			access_type  : 'private',
 			service_name : 'checkout',
+		},
+		{
+			api          : 'list_servetel_agents',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_live_call',
+			access_type  : 'private',
+			service_name : 'voice_call',
 		},
 	],
 	analytics_dashboard: [

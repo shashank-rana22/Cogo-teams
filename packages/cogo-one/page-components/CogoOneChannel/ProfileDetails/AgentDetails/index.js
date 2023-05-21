@@ -28,12 +28,6 @@ function AgentDetails({
 	setShowMore = () => {},
 }) {
 	const {
-		user_details = null,
-		user_type, id = '',
-		channel_type = '',
-	} = activeMessageCard || {};
-
-	const {
 		user_id,
 		lead_user_id,
 		email,
@@ -41,6 +35,8 @@ function AgentDetails({
 		mobile_no,
 		organization_id,
 		sender,
+		channel_type = '',
+		user_type, id = '',
 	} = formattedMessageData || {};
 
 	const [showAddNumber, setShowAddNumber] = useState(false);
@@ -50,8 +46,6 @@ function AgentDetails({
 		number       : '',
 	});
 	const [showError, setShowError] = useState(false);
-
-	const emptyState = isEmpty(user_details) && activeTab === 'message';
 
 	const {
 		user_data = {},
@@ -230,7 +224,6 @@ function AgentDetails({
 					orgId={orgId}
 					userId={userId}
 					userName={name}
-					emptyState={emptyState}
 					activeTab={activeTab}
 					setModalType={setModalType}
 				/>

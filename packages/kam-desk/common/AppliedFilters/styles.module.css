@@ -1,0 +1,42 @@
+.container {
+	margin: 6px 0 0;
+
+	:global {
+		.ui_pill_container {
+			padding: 0;
+			font-size: var(--font-size-md);
+			background-color: var(--color-tertiary-blue-5);
+			border-radius: 6px;
+		}
+	}
+}
+
+.pill_content {
+	display: flex;
+}
+
+.pill_text {
+	padding: 6px 10px;
+}
+
+.pill_cross {
+	background-color: var(--color-tertiary-blue-4);
+	border-top-right-radius: 6px;
+	border-bottom-right-radius: 6px;
+
+	:global {
+		.ui_button_container {
+			height: 100%;
+
+			&:hover {
+				background-color: var(--color-tertiary-blue-3);
+				border-top-left-radius: 0;
+				border-bottom-left-radius: 0;
+			}
+		}
+	}
+}
+
+.filters_container {
+	display: flex;
+}

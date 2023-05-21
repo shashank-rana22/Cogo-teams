@@ -2354,6 +2354,136 @@ const saas = {
 			service_name : 'organization',
 		},
 	],
+	app_saas_import_export_controls: [
+		{
+			api          : 'saas_get_user_quota_usage',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api         : 'post_saas_payment_cancel_order',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_bill_status',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'post_saas_trade_engine_controls_draft',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_trade_engine_draft',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_trade_engine_service_rates',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'post_saas_payment',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_trade_engine',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'post_saas_trade_engine',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'post_saas_trade_engine_hs_engine',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_trade_engine_verify_six_digit',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_product_category_list',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_product_list',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_section',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_heading',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_search',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_countries',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+	],
 
 };
 export default saas;

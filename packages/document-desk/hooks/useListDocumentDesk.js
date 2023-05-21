@@ -19,7 +19,7 @@ const useListDocumentDesk = () => {
 
 	const [apiData, setApiData] = useState({});
 
-	const prefix = ['fcl_customs', 'fcl_local']?.includes(stepperTab) ? stepperTab : 'fcl_freight';
+	const prefix = ['fcl_customs', 'fcl_local', 'fcl_cfs']?.includes(stepperTab) ? stepperTab : 'fcl_freight';
 
 	const additional_methods = getDocumentDeskAdditionalMethods({ documentDeskContextValues });
 

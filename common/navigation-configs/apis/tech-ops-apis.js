@@ -267,6 +267,19 @@ const apis = [
 		feature      : 'tech_ops',
 		service_name : 'shipment',
 	},
+	{
+
+		api          : 'list_rail_domestic_freight_rate_free_day_requests',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'delete_rail_domestic_freight_rate_free_day_request',
+		access_type  : 'private',
+		feature      : 'tech_ops',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

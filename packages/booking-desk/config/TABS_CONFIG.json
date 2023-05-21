@@ -57,5 +57,19 @@
             "name": "cancelled",
             "title" : "Cancelled"
         }
+    ],
+    "fcl_cfs": [
+        {
+            "name": "place_booking",
+            "title" : "Place Booking"
+        },
+        {
+            "name": "completed",
+            "title" : "Completed"
+        },
+        {
+            "name": "cancelled",
+            "title" : "Cancelled"
+        }
     ]
 }
