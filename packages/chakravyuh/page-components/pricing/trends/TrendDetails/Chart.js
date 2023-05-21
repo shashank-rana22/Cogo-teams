@@ -4,7 +4,7 @@ function TrendsChart({ data }) {
 	return (
 		<ResponsiveLine
 			data={data}
-			margin={{ top: 30, right: 100, bottom: 50, left: 60 }}
+			margin={{ top: 30, right: 100, bottom: 100, left: 60 }}
 			xScale={{ type: 'point' }}
 			yScale={{
 				type    : 'linear',
@@ -20,8 +20,8 @@ function TrendsChart({ data }) {
 			axisBottom={{
 				tickSize       : 5,
 				tickPadding    : 5,
-				tickRotation   : 0,
-				legend         : 'Date',
+				tickRotation   : 90,
+				legend         : '',
 				legendOffset   : 36,
 				legendPosition : 'middle',
 			}}
