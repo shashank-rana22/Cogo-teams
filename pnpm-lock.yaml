@@ -231,13 +231,11 @@ importers:
   common/map-components:
     specifiers:
       '@cogoport/icons-react': ^1.0.61
-      '@cogoport/map-components': workspace:0.0.1
       '@cogoport/maps': ^1.0.2
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
     dependencies:
       '@cogoport/icons-react': 1.0.68_react@18.2.0
-      '@cogoport/map-components': 'link:'
       '@cogoport/maps': 1.0.3_y3d6pejfqbkazdfzmaewia2nra
       '@cogoport/utils': 1.2.10
       react: 18.2.0
