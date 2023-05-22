@@ -12,7 +12,7 @@ function Item({
 }) {
 	return (
 		<div className={styles.row}>
-			{fields.map((singleItem) => {
+			{fields?.map((singleItem) => {
 				if (singleItem?.show === false) {
 					return null;
 				}

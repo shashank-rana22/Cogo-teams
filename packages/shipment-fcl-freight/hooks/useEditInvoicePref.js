@@ -148,7 +148,7 @@ const useEditInvoicePref = ({
 				newSelectParties.push(updateParty);
 			});
 
-			let isBasicFreightInvService = [];
+			let isBasicFreightInvService = {};
 			newSelectParties[currentInvoiceIndex].services = newServices?.map(
 				(service) => {
 					const itemsService = allServiceLineitems.find(

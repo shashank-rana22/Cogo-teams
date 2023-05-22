@@ -124,12 +124,12 @@ function Item({
 						</div>
 					</div>
 
-					<div className={styles.gst_number}>
+					<div className={styles.billing_info}>
 						GST Number :
 						{billing_address?.tax_number}
 					</div>
 
-					<div className={styles.invoice_currency}>
+					<div className={styles.billing_info}>
 						Invoice Currency:
 						&nbsp;
 						{invoice_currency}

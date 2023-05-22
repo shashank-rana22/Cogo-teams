@@ -28,6 +28,8 @@ function EditInvoicePreference({
 		setShow(false);
 	};
 
+	const { importer_exporter_id, country_id, is_tax_applicable } = shipment_data;
+
 	const {
 		selectedParties = [],
 		setSelectedParties = () => {},
@@ -39,10 +41,11 @@ function EditInvoicePreference({
 		shipment_data,
 		refetch           : refetchAfterApiCall,
 	});
+
 	const organizationDetails = {
-		id                : shipment_data?.importer_exporter?.id || undefined,
-		country_id        : shipment_data?.importer_exporter?.country_id || undefined,
-		is_tax_applicable : shipment_data?.importer_exporter?.is_tax_applicable ?? true,
+		id                : importer_exporter_id || undefined,
+		country_id        : country_id || undefined,
+		is_tax_applicable : is_tax_applicable ?? true,
 	};
 
 	const handleClose = () => {

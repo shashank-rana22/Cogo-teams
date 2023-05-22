@@ -30,18 +30,18 @@ function Invoices({
 	);
 
 	let count = 0;
-	invoiceStatuses?.forEach((item) => {
+	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
 			count += 1;
 		}
 	});
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
-	if (invoiceStatuses?.length === count) {
+	if (invoiceStatuses.length === count) {
 		disableAction = true;
 	}
 
 	const showForOldShipments = invoiceData?.invoice_trigger_date && shipment_data?.serial_id <= 120347
-		&& !invoiceStatuses?.some((ele) => ['reviewed', 'approved'].includes(ele));
+		&& !invoiceStatuses.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;
 
