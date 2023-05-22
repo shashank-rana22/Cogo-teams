@@ -40,7 +40,13 @@ function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList })
 					onChange={setSearchTerm}
 					className={styles.input_box}
 				/>
-				<Button themeType="accent" onClick={() => setOpenPlanModal((prev) => !prev)}>Assign Plan</Button>
+				<Button
+					themeType="accent"
+					type="submit"
+					onClick={() => setOpenPlanModal((prev) => !prev)}
+				>
+					Assign Plan
+				</Button>
 			</div>
 
 			{openPlanModal && (
