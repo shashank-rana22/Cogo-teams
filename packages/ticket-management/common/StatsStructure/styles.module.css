@@ -1,0 +1,24 @@
+.container {
+	width: 13%;
+	padding: 15px;
+	margin-right: 10px;
+	background: #fff;
+	border-radius: 6px;
+}
+
+.container:last-child {
+	margin-right: 0;
+}
+
+.stats_count {
+	padding-top: 5px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.stats_label {
+	padding-top: 5px;
+	font-size: 10px;
+	color: #4f4f4f;
+}
