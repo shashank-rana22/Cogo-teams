@@ -288,4 +288,4 @@ export const ICON_MAPPING = {
 	missed   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
 };
 
-export const PARSING_REGEX = /'/g;
+export const STRING_TO_ARRAY_REGEX = /'/g;

@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-import { PARSING_REGEX } from '../constants';
+import { STRING_TO_ARRAY_REGEX } from '../constants';
 
 const useCreateCustomerFeedback = ({ setShowFeedback = () => {} }) => {
 	const { agent_id, query } = useSelector(({ profile, general }) => ({
@@ -13,7 +13,7 @@ const useCreateCustomerFeedback = ({ setShowFeedback = () => {} }) => {
 
 	const { spot_search_ids = '' } = query || {};
 
-	const parsedIds = JSON.parse(spot_search_ids?.replace(PARSING_REGEX, '"'));
+	const parsedIds = JSON.parse(spot_search_ids?.replace(STRING_TO_ARRAY_REGEX, '"'));
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_agent_feedback',
