@@ -11,10 +11,11 @@ function Header({ detail }) {
 		<div className={styles.container}>
 			<div className={styles.profile}>
 				<Avatar
-					src={passport_size_photo_url || null}
+					src={passport_size_photo_url}
 					alt="img"
 					disabled={false}
 					size="160px"
+					personName={name}
 				/>
 				<div>
 					<div className={styles.name}>{name}</div>
