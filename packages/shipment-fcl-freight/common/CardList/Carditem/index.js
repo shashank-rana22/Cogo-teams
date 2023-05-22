@@ -23,8 +23,8 @@ function Item({
 				borderBottom : isLast ? 'none' : null,
 				borderRadius : isLast ? '0px 0px 4px 4px' : null,
 			}}
-			className={cl`${item.expired ? 'expired' : ''} card-body-row ${
-				item.isDuplicates ? 'duplicate' : ''
+			className={cl`${item.expired ? styles.expired : ''} ${
+				item.isDuplicates ? styles.duplicate : ''
 			}`}
 		>
 			{fields.map((singleItem) => {
@@ -36,7 +36,6 @@ function Item({
 					<div
 						style={singleItem.hasStyle ? singleItem.styles : stylesCol}
 						key={singleItem?.key}
-						className="card-body-col"
 					>
 						{loading ? <Placeholder width="100%" height="20px" /> : null}
 						{!isTotalRow ? (
@@ -50,7 +49,7 @@ function Item({
 						)}
 
 						{!loading && !singleItem.render ? (
-							<div className={` ${styles.title_black} card-list-item-value`}>
+							<div className={styles.title_black}>
 								{getValue(item, singleItem, false, {}) || '-'}
 							</div>
 						) : null}

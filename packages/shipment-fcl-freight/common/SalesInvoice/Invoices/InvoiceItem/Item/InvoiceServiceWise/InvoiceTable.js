@@ -1,24 +1,23 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
+
+import getServiceNameforTableColumn from '../../../../helpers/getServiceNameforTableColumn';
 
 export const InvoiceTable = (serviceItem = {}) => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
-	const mainService = `${shipment_data?.shipment_type}_service`;
 
 	const currencyLocale = GLOBAL_CONSTANTS.currency_locale.INR;
 
-	const ServiceName = serviceItem?.service_type === mainService
-		? startCase(serviceItem?.service_type)
-		: (serviceItem?.trade_type === 'import' && `Destination ${startCase(serviceItem?.service_type)}`)
-				|| (serviceItem?.trade_type === 'export' && `Origin ${startCase(serviceItem?.service_type)}`)
-				|| startCase(serviceItem?.service_type);
+	const main_service = `${shipment_data?.shipment_type}_service`;
+	const trade_type = serviceItem?.trade_type;
+
+	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, main_service, trade_type);
 
 	return [
 		{
-			label  : ServiceName,
+			label  : serviceName,
 			render : (item) => item?.name || '-',
 			span   : 2.0,
 		},

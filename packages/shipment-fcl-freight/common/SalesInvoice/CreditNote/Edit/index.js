@@ -1,9 +1,10 @@
 import { Modal, Button, Loader, cl } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import React, { useEffect, useContext } from 'react';
 
 import useGetShipmentCreditNote from '../../../../hooks/useGetShipmentCreditNote';
 import useEditCreditNoteHelper from '../helpers/useEditCreditNoteHelper';
@@ -13,13 +14,18 @@ import styles from './styles.module.css';
 
 function Edit({
 	setOpen = () => {},
+<<<<<<< Updated upstream
 	CN_STATUS_MAPPING = {},
 	serial_id = '',
+=======
+	CN_STATUS_MAPPING,
+>>>>>>> Stashed changes
 	prevData = {},
 	item = {},
 	cnRefetch = () => {},
 	invoiceData = {},
 }) {
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	const { id, live_invoice_number, status } = item || {};
 
 	const { data, loading } = useGetShipmentCreditNote({ defaultParams: { id } });
@@ -101,7 +107,7 @@ function Edit({
 					<>
 						<div className={styles.title}>
 							<b>
-								{`SID ${serial_id} - Invoice number -`}
+								{`SID ${shipment_data?.serial_id} - Invoice number -`}
 								<u>{live_invoice_number}</u>
 							</b>
 						</div>

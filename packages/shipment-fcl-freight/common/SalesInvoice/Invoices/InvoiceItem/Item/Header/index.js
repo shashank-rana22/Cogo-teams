@@ -288,7 +288,6 @@ function Header({
 			<CNNullify
 				askNullify={askNullify}
 				setAskNullify={setAskNullify}
-				shipment_serial_id={shipment_data?.serial_id}
 				invoice={invoice}
 				refetchCN={refetchCN}
 				invoiceData={invoiceData}
