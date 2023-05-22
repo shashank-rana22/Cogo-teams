@@ -3,7 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import { POST_REVIEWED_INVOICES } from '../../../../../../helpers/post-reviewed-sales-invoices.json';
 import ChangeCurrency from '../../ChangeCurrency';
@@ -21,7 +21,7 @@ function SelectService({
 	allTakenServices = [],
 }) {
 	const { services = [], invoice_currency, invoice_source = '' } = invoice;
-	const selected = services?.map((service) => service?.serviceKey);
+	const selected = useMemo(() => services?.map((service) => service?.serviceKey || ''), [services]);
 
 	const [value, onChange] = useState(selected);
 	const [invoiceCurrency, setInvoiceCurrency] = useState(invoice_currency);
