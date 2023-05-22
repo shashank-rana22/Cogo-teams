@@ -2,15 +2,20 @@ import { Accordion } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import BankDetails from './BankDetails';
+import EducationalQualification from './EducationalQualification';
+import EmploymentHistory from './EmploymentHistory';
+import IdentificationDocuments from './IdentificationDocuments';
 import PersonalInformation from './PersonalInformation';
+import Resume from './Resume';
 import styles from './styles.module.css';
 
 const data = [{ title: 'PERSONAL INFORMATION', content: PersonalInformation },
-	{ title: 'EDUCATIONAL QUALIFICATION', content: 'Personal Information' },
-	{ title: 'EMPLOYMENT HISTORY', content: 'Personal Information' },
-	{ title: 'IDENTIFICATION DOCUMENTS', content: 'Personal Information' },
-	{ title: 'RESUME', content: 'Personal Information' },
-	{ title: 'BANK DETAILS', content: 'Personal Information' }];
+	{ title: 'EDUCATIONAL QUALIFICATION', content: EducationalQualification },
+	{ title: 'EMPLOYMENT HISTORY', content: EmploymentHistory },
+	{ title: 'IDENTIFICATION DOCUMENTS', content: IdentificationDocuments },
+	{ title: 'RESUME', content: Resume },
+	{ title: 'BANK DETAILS', content: BankDetails }];
 
 function NewHireInformation({ setInformationPage }) {
 	const [moreDetails, setMoreDetails] = useState(false);

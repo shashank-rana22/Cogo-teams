@@ -11,7 +11,14 @@ const consolidated_invoices = {
 			service_name : 'harbour',
 		},
 	],
-	employee_portal: [],
+
+	employee_portal: [
+		{
+			api          : 'get_employee_details',
+			access_type  : 'public',
+			service_name : 'harbour',
+		},
+	],
 };
 
 export default consolidated_invoices;

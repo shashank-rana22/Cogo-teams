@@ -2,14 +2,11 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import getElementController from '../../../configs/getElementController';
-import useGetEmployeeDetails from '../../../hooks/useGetEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function PersonalInformation() {
-	const { getEmployeesDetails, data } = useGetEmployeeDetails();
-
+function EmploymentHistory() {
 	const { handleSubmit, control, formState: { errors } } = useForm();
 
 	return (
@@ -54,4 +51,4 @@ function PersonalInformation() {
 	);
 }
 
-export default PersonalInformation;
+export default EmploymentHistory;
