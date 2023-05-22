@@ -248,7 +248,7 @@ function Actions({
 								</div>
 							)}
 						>
-							<div className={styles.info_icon}>
+							<div className={styles.icon_div}>
 								<IcMInfo />
 							</div>
 						</Tooltip>

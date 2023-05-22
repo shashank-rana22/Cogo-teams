@@ -10,7 +10,7 @@
 	.open {
 		padding-bottom: 20px;
 		margin-bottom: 24px;
-		border-bottom: 1px solid #acdadf;
+		border-bottom: 1px solid var(--color-tertiary-blue-3);
 	}
 }
 
@@ -33,7 +33,7 @@
 	margin: 0;
 	font-size: var(--font-size-sm);
 	line-height: 16px;
-	color: #221f20;
+	color: var(--color-secondary-greyscale-2);
 
 	&.address_text {
 		letter-spacing: 0.02em;
@@ -46,7 +46,7 @@
 	font-size: var(--font-size-lg);
 	font-weight: 600;
 	line-height: 16px;
-	color: #333;
+	color: var(--color-secondary-greyscale-2);
 }
 
 .booking_text {
@@ -63,8 +63,8 @@
 	margin: 0 6px 6px 0;
 	font-size: var(--font-size-sm);
 	line-height: 12px;
-	color: #221f20;
-	background-color: #c4dc91;
+	color: var(--color-secondary-greyscale-2);
+	background-color: var(--color-tertiary-success-green-3);
 	border-radius: 4px;
 }
 
@@ -84,7 +84,7 @@
 	width: fit-content;
 	padding: 2px 16px;
 	font-size: var(--font-size-md);
-	color: #221f20;
+	color: var(--color-secondary-greyscale-2);
 	background-color: #fef6df;
 	border-bottom-right-radius: 8px;
 }
@@ -93,7 +93,7 @@
 	margin-bottom: 4px;
 	font-size: var(--font-size-sm);
 	line-height: 16px;
-	color: #221f20;
+	color:  var(--color-secondary-5);
 }
 
 .details {

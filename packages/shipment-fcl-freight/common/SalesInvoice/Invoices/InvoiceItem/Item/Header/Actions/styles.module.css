@@ -18,7 +18,7 @@
 	margin-bottom: 6px;
 	font-size: var(--font-size-sm);
 	line-height: 16px;
-	color: #333;
+	color: var(--color-secondary-greyscale-2);
 	white-space: nowrap;
 	background-color: #fbe6e6;
 	border-radius: 4px;
@@ -84,7 +84,7 @@
 	margin: 0;
 	font-size: var(--font-size-sm);
 	font-weight: 600;
-	color: #333;
+	color: var(--color-secondary-greyscale-2);
 }
 
 .value {
@@ -99,6 +99,7 @@
 
 	svg {
 		cursor: pointer;
+		color: var(--color-accent-orange-2)
 	}
 }
 
@@ -148,14 +149,9 @@
 	border-radius: 4px;
 }
 
-.info_icon {
-	margin: 4px 0 0 10px;
-	cursor: pointer;
-}
-
 .tooltip_child {
 	font-size: var(--font-size-sm);
-	color: #333;
+	color: var(--color-secondary-greyscale-2);
 }
 
 .empty_div {
@@ -165,4 +161,9 @@
 .flex_row_div{
 	font-size: 10px;
 	color: #333333;
+}
+
+.icon_div{
+	margin: 4px 0 0 10px;
+	cursor: pointer;
 }

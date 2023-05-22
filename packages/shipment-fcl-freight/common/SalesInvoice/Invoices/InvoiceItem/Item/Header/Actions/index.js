@@ -19,6 +19,8 @@ const AmendmentReasons = dynamic(() => import('./AmendmentReasons'), { ssr: fals
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
 const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
 
+const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
+
 function Actions({
 	invoice = {},
 	bfInvoiceRefetch = () => {},
@@ -156,7 +158,7 @@ function Actions({
 							</div>
 						) : null}
 
-						{!['reviewed', 'approved', 'revoked'].includes(invoice.status) ? (
+						{!INVOICE_STATUS.includes(invoice.status) ? (
 							<Button
 								size="sm"
 								onClick={() => setShowReview(true)}
@@ -191,7 +193,6 @@ function Actions({
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 					<div className={styles.email_wrapper}>
 						<IcMEmail
-							style={{ cursor: 'pointer', color: 'var(--color-accent-orange-2)' }}
 							onClick={() => setSendEmail(true)}
 						/>
 
@@ -227,7 +228,7 @@ function Actions({
 							)}
 							theme="light"
 						>
-							<div style={{ margin: '4px 0 0 10px', cursor: 'pointer' }}>
+							<div className={styles.icon_div}>
 								<IcMInfo />
 							</div>
 						</Tooltip>
@@ -254,7 +255,7 @@ function Actions({
 						</Popover>
 						)
 						: (
-							<div style={{ width: '34px' }} />
+							<div className={styles.empty_div} />
 						)}
 
 					{!isEmpty(invoice.remarks) ? (

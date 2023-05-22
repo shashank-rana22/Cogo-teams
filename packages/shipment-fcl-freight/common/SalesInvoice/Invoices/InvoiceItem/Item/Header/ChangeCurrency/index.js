@@ -1,11 +1,10 @@
 import { Button, Modal, Select } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateCurrency from '../../../../../../../hooks/useUpdateCurrency';
+import INVOICE_CURRENCY_MAPPINGS from '../../../../../helpers/invoiceCurrencyMapping';
 
 import styles from './styles.module.css';
 
@@ -21,24 +20,6 @@ function ChangeCurrency({
 	const [value, setValue] = useState('');
 
 	const geo = getGeoConstants();
-	const currency = GLOBAL_CONSTANTS.currency_code;
-	const country = GLOBAL_CONSTANTS.country_ids;
-
-	const country_code = (id) => {
-		const details = getCountryDetails({
-			country_id: id,
-		});
-		return details.country_code;
-	};
-
-	const INVOICE_CURRENCY_MAPPINGS = {
-		freight_invoice_currency: {
-			[country_code(country.IN)] : [currency.INR, currency.USD],
-			[country_code(country.GB)] : [currency.GBP, currency.EUR, currency.USD],
-			[country_code(country.VN)] : [currency.USD, currency.VND],
-			others                     : [currency.USD, currency.EUR, currency.INR],
-		},
-	};
 
 	const currencyOptionsOld =	INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.[
 		invoice?.country_code || geo.country.currency.code
