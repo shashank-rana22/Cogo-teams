@@ -64,6 +64,7 @@ function EditInvoicePreference({
 			>
 				Edit Invoice Preference
 			</Button>
+
 			{show ? (
 				<Modal
 					show
@@ -72,6 +73,7 @@ function EditInvoicePreference({
 					closeOnOuterClick={false}
 				>
 					<Modal.Header title="EDIT INVOICING PREFERENCE" />
+
 					<Modal.Body className={styles.form}>
 						<div
 							className={styles.full_width_btn}
@@ -81,6 +83,7 @@ function EditInvoicePreference({
 						>
 							+ Add Invoicing Party
 						</div>
+
 						<ListInvoicePreferences
 							shipmentData={shipment_data}
 							invoicingParties={selectedParties}
@@ -88,6 +91,7 @@ function EditInvoicePreference({
 							{...rest}
 						/>
 					</Modal.Body>
+
 					<Modal.Footer className={styles.modal_footer}>
 						<Button
 							size="md"
@@ -96,6 +100,7 @@ function EditInvoicePreference({
 						>
 							Cancel
 						</Button>
+
 						<Button
 							size="md"
 							onClick={handleEditPreferences}
@@ -104,6 +109,7 @@ function EditInvoicePreference({
 							Submit
 						</Button>
 					</Modal.Footer>
+
 					{addInvoicingParty ? (
 						<Modal
 							size="xl"
@@ -113,6 +119,7 @@ function EditInvoicePreference({
 							onOuterClick={() => setAddInvoicingParty(false)}
 						>
 							<Modal.Header title="Add Invoicing Party" />
+
 							<Modal.Body>
 								<div className={styles.form}>
 									<AddInvoicingParty
