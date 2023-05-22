@@ -192,12 +192,19 @@ export const renderLineItemFunctions = {
 					name={`line_items.${index}.amount`}
 					control={control}
 					placeholder="Amount"
-					rules={{ required: true }}
+					rules={{
+						validate: (val: number) => {
+							if (val <= 0) {
+								return 'Must greater than 0';
+							}
+							return null;
+						},
+					}}
 					type="number"
 				/>
 				{errors?.line_items?.[index]?.amount ? (
 					<div className={styles.errors}>
-						* Required
+						{errors?.line_items?.[index]?.amount?.message}
 					</div>
 				) : null}
 			</div>
