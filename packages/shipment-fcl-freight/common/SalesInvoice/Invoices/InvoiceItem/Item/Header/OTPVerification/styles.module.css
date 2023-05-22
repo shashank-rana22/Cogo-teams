@@ -50,3 +50,9 @@
 .loader_div{
 	margin: 16px
 }
+
+.modal_footer {
+	> button:not(:last-of-type){
+		margin-right: 16px;
+	}
+}
