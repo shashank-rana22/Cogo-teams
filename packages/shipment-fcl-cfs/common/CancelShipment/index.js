@@ -30,7 +30,7 @@ export default function CancelShipment({ setShow }) {
 	useEffect(() => {
 		getReasons({
 			filters: {
-				shipment_type    : 'fcl_freight',
+				shipment_type    : 'fcl_cfs',
 				stakeholder_type : [activeStakeholder in STAKEHOLDER_MAPPING
 					? STAKEHOLDER_MAPPING[activeStakeholder]
 					: activeStakeholder],

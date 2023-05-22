@@ -4,7 +4,6 @@ const controlsEditableConditions = [
 	{
 		state      : ['confirmed_by_service_provider'],
 		trade_type : ['export'],
-		// bl_type    : ['rfs'],
 	},
 	{
 		state      : ['confirmed_by_service_provider'],
