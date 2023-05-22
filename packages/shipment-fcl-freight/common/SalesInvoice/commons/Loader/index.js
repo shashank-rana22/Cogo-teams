@@ -3,15 +3,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const CustomStyles = { width: '200px', height: '40px', borderRadius: '2px' };
-
 function Loader() {
 	return (
 		<div className={styles.container}>
-			<Placeholder style={CustomStyles} />
-			<Placeholder style={CustomStyles} />
-			<Placeholder style={CustomStyles} />
-			<Placeholder style={CustomStyles} />
+			<Placeholder className={styles.custom_styles} />
+			<Placeholder className={styles.custom_styles} />
+			<Placeholder className={styles.custom_styles} />
+			<Placeholder className={styles.custom_styles} />
 		</div>
 	);
 }

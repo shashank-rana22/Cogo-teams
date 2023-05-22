@@ -5,7 +5,7 @@ import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
-import POST_REVIEWED_INVOICES from '../../../../../../helpers/post-reviewed-sales-invoices';
+import { POST_REVIEWED_INVOICES } from '../../../../../../helpers/post-reviewed-sales-invoices.json';
 import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';
@@ -80,17 +80,18 @@ function SelectService({
 
 			const id_with_igst = service?.serviceKey;
 
+			const serviceName = service?.service_name || service?.service_type;
+
+			const serviceType = service?.service_type === 'shipment'
+				? 'Convenience Fees'
+				: `${tradeType} ${startCase(serviceName)} ${service?.is_igst ? '(IGST)' : ''} ${isBas
+					&& !service?.is_igst ? '(BAS)' : ''}`;
+
 			const servicesToPush = {
 				label: (
 					<Tooltip content={content} placement="bottom" theme="light">
 						<div className={styles.service_name}>
-							{service?.service_type === 'shipment'
-								? 'Convenience Fees'
-								: `${tradeType} ${startCase(
-									service?.service_name || service?.service_type,
-								)} ${service?.is_igst ? '(IGST)' : ''} ${
-									isBas && !service?.is_igst ? '(BAS)' : ''
-								}`}
+							{serviceType}
 						</div>
 					</Tooltip>
 				),

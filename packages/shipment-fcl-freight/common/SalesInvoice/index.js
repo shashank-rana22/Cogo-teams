@@ -1,4 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
+import { v4 as uuid } from 'uuid';
 
 import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
 import useListSageSalesInvoices from '../../hooks/useListSageSalesInvoices';
@@ -12,15 +13,19 @@ function SalesInvoice() {
 	const { list } = useListSageSalesInvoices();
 	const { data: invoiceData, groupedInvoices, refetch: salesInvoicesRefetch, loading } = useGetShipmentInvoice();
 
-	const isIRNGenerated = !!list.find((item) => !!item?.irn_number);
+	const isIRNGenerated = !!list?.find((item) => !!item?.irn_number);
 
 	if (loading) {
 		return (
-			<div className={styles.loader}>
-				<Loader />
-				<Loader />
-				<Loader />
-			</div>
+			<>
+				{Array(3).fill().map(() => (
+					<div key={uuid()} className={styles.loader}>
+						<Loader />
+						<Loader />
+						<Loader />
+					</div>
+				))}
+			</>
 		);
 	}
 

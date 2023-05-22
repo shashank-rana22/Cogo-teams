@@ -10,17 +10,13 @@ function ListInvoicePreferences({
 }) {
 	const [openedService, setOpenedService] = useState(null);
 
-	const allTakenServices = [];
-	(raw_invoicing_parties || []).forEach((ip) => {
-		const serviceWithCurrency = (ip.services || []).map((item) => ({
-			...item,
-			currency       : ip?.invoice_currency,
-			service_source : ip?.source,
-			is_igst        : ip?.is_igst,
-			status         : ip?.status,
-		}));
-		allTakenServices.push(...(serviceWithCurrency || []));
-	});
+	const allTakenServices = (raw_invoicing_parties || []).map((ip) => ip?.services?.map((item) => ({
+		...item,
+		currency       : ip?.invoice_currency,
+		service_source : ip?.source,
+		is_igst        : ip?.is_igst,
+		status         : ip?.status,
+	}))).flat();
 
 	return (
 		<div>

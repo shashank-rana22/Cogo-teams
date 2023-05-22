@@ -29,10 +29,10 @@ function EditInvoicePreference({
 	};
 
 	const {
-		selectedParties,
-		setSelectedParties,
-		handleInvoicingPartyAdd,
-		handleEditPreferences,
+		selectedParties = [],
+		setSelectedParties = () => {},
+		handleInvoicingPartyAdd = () => {},
+		handleEditPreferences = () => {},
 		...rest
 	} = useEditInvoicePref({
 		invoicing_parties : invoicingParties,
