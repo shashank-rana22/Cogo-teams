@@ -1,13 +1,26 @@
-import { Placeholder, cl } from '@cogoport/components';
+import { Button, Placeholder, cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function PlanFeature({ title, list = [], configs, loading = false }) {
+const getValue = ({ feature, config }) => {
+	if (feature?.[config?.key]) return startCase(feature?.[config?.key]);
+	return '--';
+};
+
+function PlanFeature({ title, list = [], configs, loading = false, setFeatureModal }) {
+	const updateList = loading ? [1, 2, 3, 4] : list;
 	return (
 		<div className={styles.container}>
-			<div className={styles.flex_box}>
+			<div className={cl`${styles.flex_box} ${styles.header_container}`}>
 				<h3>{title}</h3>
+				<Button
+					type="button"
+					themeType="secondary"
+					onClick={() => setFeatureModal({ openModal: true })}
+				>
+					Add More
+				</Button>
 			</div>
 			<div>
 				<div className={cl`${styles.card_header} ${styles.flex_box}`}>
@@ -17,11 +30,11 @@ function PlanFeature({ title, list = [], configs, loading = false }) {
 						</div>
 					))}
 				</div>
-				{(list || [])?.map((feature) => (
+				{(updateList || [])?.map((feature) => (
 					<div key={feature?.display_name} className={cl`${styles.flex_box} ${styles.item_row}`}>
 						{configs.map((config) => (
 							<div key={config.key} className={styles.col} style={{ width: config.width }}>
-								{loading ? <Placeholder /> : startCase(feature?.[config?.key])}
+								{loading ? <Placeholder /> : getValue({ feature, config })}
 							</div>
 						))}
 					</div>

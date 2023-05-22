@@ -12,6 +12,11 @@
 	}
 }
 
+.header_container{
+	justify-content: space-between;
+	padding: 5px 8px 10px;
+}
+
 .card_header {
 	font-weight: 600;
 	color: #f68b21;

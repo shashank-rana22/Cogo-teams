@@ -1,3 +1,4 @@
+import { Placeholder } from '@cogoport/components';
 import { useState } from 'react';
 
 import getValues from '../../../../utils/getValues';
@@ -5,7 +6,7 @@ import getValues from '../../../../utils/getValues';
 import itemFunction from './itemFunction';
 import styles from './styles.module.css';
 
-const Item = ({ configs, item }) => {
+const Item = ({ configs, item = [], loading = false }) => {
 	const [isEditPrice, setIsEditPrice] = useState(false);
 	const itmFn = itemFunction({ isEditPrice, setIsEditPrice });
 	return (
@@ -15,7 +16,7 @@ const Item = ({ configs, item }) => {
 				className={styles.col}
 				style={{ width: config?.width }}
 			>
-				{getValues({ itemData: item, config, itemFunction: itmFn })}
+				{loading ? <Placeholder /> : getValues({ itemData: item, config, itemFunction: itmFn })}
 			</div>
 		))
 	);

@@ -5,7 +5,8 @@ import pricingListConfig from '../../../configuration/pricingListConfig';
 import Item from './Item';
 import styles from './styles.module.css';
 
-function Pricing({ pricing = [] }) {
+function Pricing({ pricing = [], loading = false }) {
+	const updatePricing = loading ? [1, 2, 3, 4] : pricing;
 	return (
 		<div className={styles.container}>
 			<h3>Pricing</h3>
@@ -14,9 +15,9 @@ function Pricing({ pricing = [] }) {
 					<div key={config.key} className={styles.col} style={{ width: config?.width }}>{config?.title}</div>
 				))}
 			</div>
-			{(pricing || [])?.map((item) => (
+			{(updatePricing || [])?.map((item) => (
 				<div key={item?.id} className={cl`${styles.flex_box} ${styles.item_row}`}>
-					<Item configs={pricingListConfig} item={item} />
+					<Item configs={pricingListConfig} item={item} loading={loading} />
 				</div>
 			))}
 		</div>

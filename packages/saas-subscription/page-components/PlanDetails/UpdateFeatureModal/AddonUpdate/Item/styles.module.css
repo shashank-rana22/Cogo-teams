@@ -1,0 +1,22 @@
+.col{
+    padding:  0 8px;
+}
+.icon_container{
+	padding: 6px;
+	margin-left: 10px;
+	border-radius: 5px;
+	cursor: pointer;
+	background: #fff4f2;
+}
+
+.delete_icon {
+    vertical-align: bottom;
+}
+
+.error{
+	:global{
+		.ui_input_container{
+			border: 1px solid red;
+		}
+	}
+}

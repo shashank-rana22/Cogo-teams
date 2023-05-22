@@ -14,3 +14,15 @@
 		width: 46%;
 	}
 }
+
+.header{
+	display: flex;
+
+	.back_icon{
+		border: 0.5px solid #333;
+		padding: 3px;
+		border-radius: 50%;
+		margin: 4px 10px 0 0;
+		cursor: pointer;
+	}
+}
