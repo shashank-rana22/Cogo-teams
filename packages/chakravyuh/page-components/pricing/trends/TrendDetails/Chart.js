@@ -1,80 +1,61 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import { format } from '@cogoport/utils';
 
-function LineGraph({ graphData }) {
-	const theme = {
-		legends: {
-			text: {
-				fontSize: 13,
-			},
-		},
-	};
+function TrendsChart({ data }) {
 	return (
 		<ResponsiveLine
-			data={graphData}
-			theme={theme}
-			margin={{
-				right  : 10,
-				top    : 50,
-				bottom : 50,
-				left   : 60,
-			}}
+			data={data}
+			margin={{ top: 30, right: 100, bottom: 100, left: 60 }}
 			xScale={{ type: 'point' }}
 			yScale={{
 				type    : 'linear',
 				min     : 'auto',
 				max     : 'auto',
-				stacked : false,
+				stacked : true,
 				reverse : false,
 			}}
-			colors={{ datum: 'color' }}
-			curve="monotoneX"
-			yFormat=" >-.2f"
+			colors={{ scheme: 'dark2' }}
+			yFormat=" >-.4f"
 			axisTop={null}
 			axisRight={null}
 			axisBottom={{
-				orient         : 'bottom',
 				tickSize       : 5,
 				tickPadding    : 5,
-				tickRotation   : 30,
+				tickRotation   : 90,
+				legend         : '',
 				legendOffset   : 36,
 				legendPosition : 'middle',
-				format(value) {
-					return format(value, 'dd/MM, HH:mm');
-				},
 			}}
 			axisLeft={{
-				orient         : 'left',
 				tickSize       : 5,
 				tickPadding    : 5,
 				tickRotation   : 0,
-				legend         : 'count',
-				legendOffset   : -40,
+				legend         : 'Amount In USD',
+				legendOffset   : -50,
 				legendPosition : 'middle',
 			}}
-			pointSize={6}
-			pointColor="white"
+			pointSize={10}
+			pointColor={{ theme: 'background' }}
 			pointBorderWidth={2}
 			pointBorderColor={{ from: 'serieColor' }}
-			pointLabelYOffset={-14}
+			pointLabelYOffset={-12}
 			useMesh
+			enableSlices="x"
 			legends={[
 				{
-					anchor            : 'upper-left',
-					direction         : 'row',
+					anchor            : 'bottom-right',
+					direction         : 'column',
 					justify           : false,
-					translateX        : -6,
+					translateX        : 100,
 					translateY        : 0,
-					itemsSpacing      : 40,
+					itemsSpacing      : 0,
 					itemDirection     : 'left-to-right',
-					itemWidth         : 120,
-					itemHeight        : -40,
+					itemWidth         : 80,
+					itemHeight        : 20,
 					itemOpacity       : 0.75,
 					symbolSize        : 12,
 					symbolShape       : 'circle',
 					symbolBorderColor : 'rgba(0, 0, 0, .5)',
-
-					effects: [
+					effects           : [
 						{
 							on    : 'hover',
 							style : {
@@ -89,4 +70,4 @@ function LineGraph({ graphData }) {
 	);
 }
 
-export default LineGraph;
+export default TrendsChart;
