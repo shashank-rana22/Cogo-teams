@@ -8,7 +8,7 @@ import {
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
-import EditCN from '../Edit';
+import Edit from '../Edit';
 import ReviewCN from '../Review';
 
 import LineItems from './LineItems';
@@ -183,7 +183,7 @@ function Item({
 			) : null}
 
 			{open === 'edit' ? (
-				<EditCN
+				<Edit
 					setOpen={setOpen}
 					prevData={prevData}
 					CN_STATUS_MAPPING={CN_STATUS_MAPPING}
