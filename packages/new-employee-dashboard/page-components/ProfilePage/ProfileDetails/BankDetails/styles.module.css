@@ -1,0 +1,9 @@
+.label{
+    color:#828282
+}
+
+.top_bar{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between ;
+}

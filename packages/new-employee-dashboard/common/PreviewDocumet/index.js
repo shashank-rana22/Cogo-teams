@@ -1,7 +1,7 @@
 import FullView from './FullView';
 import styles from './styles.module.css';
 
-function PreviewDocumet() {
+function PreviewDocumet({ document_header }) {
 	const
 		data = 'https://cogoport-production.sgp1.digitaloceanspaces.com/799b3a3617e7553b143d5c9d85c11154/GST%20Registration%20certificate..pdf';
 
@@ -28,7 +28,7 @@ function PreviewDocumet() {
 				<FullView
 					containerStyle={{
 						position : 'absolute',
-						bottom   : 0,
+						bottom   : 8,
 						left     : 16,
 						right    : 16,
 					}}

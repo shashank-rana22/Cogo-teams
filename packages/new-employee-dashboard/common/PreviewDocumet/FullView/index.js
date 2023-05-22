@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -19,15 +20,12 @@ function FullView({ url, containerStyle = {} }) {
 				onClick={() => openDocument()}
 				style={{
 					borderRadius: 4,
+
 				}}
 			>
-				<div>
+				<div style={{ display: 'flex', alignItems: 'center' }}>
 					Preview
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/view-icon.svg"
-						alt="preview"
-						style={{ marginLeft: '4px', width: '15px' }}
-					/>
+					<IcMEyeopen style={{ marginLeft: 4 }} fill="#fff" />
 				</div>
 			</Button>
 		</div>
