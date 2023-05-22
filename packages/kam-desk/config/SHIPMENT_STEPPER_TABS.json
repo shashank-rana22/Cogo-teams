@@ -9,6 +9,10 @@
       "label": "Import"
     },
     {
+      "value": "fcl_cfs",
+      "label": "CFS"
+    },
+    {
       "value": "fcl_customs",
       "label": "Customs"
     },

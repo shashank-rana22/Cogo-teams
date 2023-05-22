@@ -49,17 +49,6 @@
 		background-color: #f7cdcd;
 	}
 
-	&.rejected {
-		background-color: #f7cdcd;
-	}
-
-	&.draft {
-		background-color: #eee;
-	}
-
-	&.booking_placed {
-		background-color: rgb(230 251 233);
-	}
 }
 
 .value {
