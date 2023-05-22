@@ -10084,12 +10084,12 @@ const partner = {
 			service_name : 'checkout',
 		},
 		{
-			api          : 'get_rate_properties',
+			api          : 'get_fcl_freight_rate_properties',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
 		{
-			api          : 'update_rate_properties',
+			api          : 'update_fcl_freight_rate_properties',
 			access_type  : 'private',
 			service_name : 'fcl_freight_rate',
 		},
