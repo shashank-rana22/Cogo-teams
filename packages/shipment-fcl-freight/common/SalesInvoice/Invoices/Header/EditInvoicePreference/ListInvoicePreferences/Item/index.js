@@ -111,7 +111,7 @@ function Item({
 					</div>
 
 					<div className={styles.billing_info}>
-						GST Number :
+						GST Number:&nbsp;
 						{billing_address?.tax_number}
 					</div>
 
@@ -124,6 +124,7 @@ function Item({
 					{invoicing_party_total_discounted ? (
 						<div className={styles.overall_amount}>
 							Invoice Amount:
+							&nbsp;
 							{formatAmount({
 								amount   : invoicing_party_total_discounted,
 								currency : invoice_total_currency,
