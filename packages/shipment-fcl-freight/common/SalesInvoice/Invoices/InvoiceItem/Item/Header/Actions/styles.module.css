@@ -97,7 +97,7 @@
 	display: flex;
 	align-items: center;
 
-	svg{
+	svg {
 		cursor: pointer;
 	}
 }
@@ -148,16 +148,16 @@
 	border-radius: 4px;
 }
 
-.info_icon{
+.info_icon {
 	margin: 4px 0 0 10px;
 	cursor: pointer;
 }
 
-.tooltip_child{
+.tooltip_child {
 	font-size: var(--font-size-sm);
-	color: #333333;
+	color: #333;
 }
 
-.empty_div{
+.empty_div {
 	width: 34px;
 }

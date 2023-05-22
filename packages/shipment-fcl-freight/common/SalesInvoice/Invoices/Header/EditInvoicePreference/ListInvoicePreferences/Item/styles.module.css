@@ -35,7 +35,7 @@
 	line-height: 16px;
 	color: #221f20;
 
-	&.address_text{
+	&.address_text {
 		letter-spacing: 0.02em;
 	}
 }
@@ -112,6 +112,6 @@
 	align-items: flex-start;
 }
 
-.info_div{
-	width: 100%
+.info_div {
+	width: 100%;
 }
