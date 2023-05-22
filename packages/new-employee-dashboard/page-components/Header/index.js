@@ -1,10 +1,10 @@
-import { Button } from '@cogoport/components';
+import { Button, Input } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ search, setSearch }) {
 	const router = useRouter();
 
 	const onClickAddNewJoinee = () => {
@@ -16,7 +16,16 @@ function Header() {
 		<div className={styles.container}>
 			<div className={styles.title}>New Employee Dashboard</div>
 
-			<Button type="button" onClick={onClickAddNewJoinee}>Add new joinee</Button>
+			<div className={styles.button_container}>
+				<Input
+					value={search}
+					onChange={setSearch}
+					size="md"
+					style={{ marginRight: '8px', width: 300, height: 40 }}
+				/>
+
+				<Button type="button" size="lg" onClick={onClickAddNewJoinee}>Add new joinee</Button>
+			</div>
 		</div>
 	);
 }
