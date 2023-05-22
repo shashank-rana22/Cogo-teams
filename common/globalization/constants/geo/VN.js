@@ -86,11 +86,13 @@ export default {
 			'eab24509-187e-42b4-ae51-b77c74d82ad9', // Overseas CP KAM
 			'a5c83696-0248-4846-a558-1a054360f130', // Overseas CP KAM Manager
 			'650e1fe4-2e34-43c1-abfe-ce0a443aa4a6', // Prod_KAM Trasnport Sales
+			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse KAM
+			'6bd7a08c-974c-4dd0-b163-d4c31e794fba', // Vietnam KAM
+			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // Shipment Specialist
+			'1d75bd83-710c-4b63-b1a6-f0eb7f16c25a', // Vietnam KAM
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
-			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse KAM
-			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // Cogoverse Shipment Specialist
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
