@@ -10,22 +10,24 @@ import {
 	DatepickerController,
 	UploadController,
 	MobileNumberController,
+	CreatableMultiSelectController,
 } from '@cogoport/forms';
 
 const ELEMENT_MAPPING = {
-	'async-select' : AsyncSelectController,
-	select         : SelectController,
-	input          : InputController,
-	'date-picker'  : DateRangePickerController,
-	chips          : ChipsController,
-	radioGroup     : RadioGroupController,
-	textarea       : TextAreaController,
-	'multi-select' : MultiselectController,
-	number         : InputController,
-	'date-select'  : DatepickerController,
-	fileUpload     : UploadController,
-	email          : InputController,
-	mobilenumber   : MobileNumberController,
+	'async-select'    : AsyncSelectController,
+	select            : SelectController,
+	input             : InputController,
+	'date-picker'     : DateRangePickerController,
+	chips             : ChipsController,
+	radioGroup        : RadioGroupController,
+	textarea          : TextAreaController,
+	'multi-select'    : MultiselectController,
+	number            : InputController,
+	'date-select'     : DatepickerController,
+	fileUpload        : UploadController,
+	email             : InputController,
+	mobilenumber      : MobileNumberController,
+	createmultiselect : CreatableMultiSelectController,
 };
 
 function getElementController(type) {

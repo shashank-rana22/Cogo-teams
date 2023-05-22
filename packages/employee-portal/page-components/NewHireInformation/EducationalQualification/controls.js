@@ -11,7 +11,7 @@ const getControls = [{
 		{
 			name        : 'description',
 			label       : 'Description',
-			type        : 'input',
+			type        : 'textarea',
 			placeholder : 'Description',
 		},
 		{
