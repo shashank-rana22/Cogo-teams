@@ -25,11 +25,7 @@ function Item({
 	allTakenServices = [],
 }) {
 	const { shipment_type = '' } = shipmentData;
-	const {
-		billing_address,
-		invoice_currency = '',
-		invoice_source = '',
-	} = invoice || {};
+	const { billing_address, invoice_currency = '', invoice_source = '' } = invoice || {};
 
 	const open = openedService && openedService?.id === invoice?.id;
 
@@ -69,9 +65,7 @@ function Item({
 		) : null;
 	});
 
-	const noActionState = ACTION_STATE.includes(
-		invoice?.status,
-	);
+	const noActionState = ACTION_STATE.includes(invoice?.status);
 
 	const invoiceAmount = formatAmount({
 		amount   : invoice?.invoicing_party_total_discounted || 0,
@@ -90,6 +84,7 @@ function Item({
 					{startCase(invoice_source)}
 				</div>
 			) : null}
+
 			<div
 				className={cl`${styles.header_container} ${open ? styles.open : ''}`}
 				style={{ cursor: noActionState ? 'default' : '' }}
@@ -112,9 +107,7 @@ function Item({
 						) : null}
 					</div>
 
-					<div
-						className={styles.flex}
-					>
+					<div className={styles.flex}>
 						<div className={styles.icon_wrapper}>
 							<IcMHome />
 						</div>
@@ -141,6 +134,7 @@ function Item({
 							{invoiceAmount}
 						</div>
 					) : null}
+
 					<div
 						className={styles.flex}
 						style={{ flexWrap: 'wrap' }}
