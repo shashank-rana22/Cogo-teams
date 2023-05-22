@@ -4,8 +4,15 @@ import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useCreateCustomerFeedback = ({ setShowFeedback = () => {} }) => {
-	const { profile, general } = useSelector((state) => state);
-	const { spot_search_ids } = general?.query || {};
+	const { agent_id, query } = useSelector(({ profile, general }) => ({
+		agent_id : profile.user.id,
+		query    : general.query,
+	}));
+
+	const { spot_search_ids = '' } = query || {};
+
+	const parsedIds = JSON.parse(spot_search_ids?.replace(/'/g, '"'));
+
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_agent_feedback',
 		method : 'post',
@@ -15,10 +22,10 @@ const useCreateCustomerFeedback = ({ setShowFeedback = () => {} }) => {
 		try {
 			await trigger({
 				data: {
-					agent_id         : profile?.user?.id,
+					agent_id,
 					rating           : starRating,
 					feedback_message : feedbackMessage,
-					spot_search_ids,
+					spot_search_ids  : parsedIds,
 
 				},
 			});
