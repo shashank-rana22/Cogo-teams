@@ -100,7 +100,7 @@ const creditNoteControls = ({
 }) => {
 	const control = services?.map((service) => ({
 		...rawControls(service),
-		value           : service?.line_items?.map((item) => ({
+		value: service?.line_items?.map((item) => ({
 			is_checked       : item?.is_checked,
 			code             : item?.code,
 			sac_code         : item?.hsn_code || 'NA',
