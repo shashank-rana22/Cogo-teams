@@ -16,7 +16,7 @@ const exportServiceTypes = [
 const geo = getGeoConstants();
 
 const isAllServicesTaken = (
-	invoicing_parties,
+	servicesList,
 	selectedParties,
 	shipment_data,
 	allServiceLineitemsCount,
@@ -32,11 +32,11 @@ const isAllServicesTaken = (
 
 	let mainServices = [];
 	if (shipment_data?.state === 'cancelled') {
-		mainServices = invoicing_parties?.filter(
+		mainServices = servicesList?.filter(
 			(service) => service?.service_type === shipmentMainService,
 		);
 	} else {
-		mainServices = invoicing_parties?.filter(
+		mainServices = servicesList?.filter(
 			(service) => service?.service_type !== 'subsidiary_service',
 		);
 	}
@@ -58,6 +58,7 @@ const isAllServicesTaken = (
 };
 
 const useEditInvoicePref = ({
+	servicesList,
 	invoicing_parties = [],
 	shipment_data = {},
 	refetch = () => {},
@@ -236,7 +237,7 @@ const useEditInvoicePref = ({
 	const handleEditPreferences = async () => {
 		try {
 			const { isAllMainServicesTaken } = isAllServicesTaken(
-				invoicing_parties,
+				servicesList,
 				selectedParties,
 				shipment_data,
 				allServiceLineitemsCount,

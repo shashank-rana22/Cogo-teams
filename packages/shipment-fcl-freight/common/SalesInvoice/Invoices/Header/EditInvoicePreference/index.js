@@ -15,7 +15,7 @@ function EditInvoicePreference({
 	disableAction = false,
 	salesInvoicesRefetch = () => {},
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
 	const [show, setShow] = useState(false);
 	const [addInvoicingParty, setAddInvoicingParty] = useState(false);
@@ -37,6 +37,7 @@ function EditInvoicePreference({
 		handleEditPreferences = () => {},
 		...rest
 	} = useEditInvoicePref({
+		servicesList,
 		invoicing_parties : invoicingParties,
 		shipment_data,
 		refetch           : refetchAfterApiCall,
