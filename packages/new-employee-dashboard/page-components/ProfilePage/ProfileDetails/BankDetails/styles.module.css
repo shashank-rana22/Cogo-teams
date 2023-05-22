@@ -1,9 +1,23 @@
+.container{
+    padding: 10px;
+}
+
 .label{
-    color:#828282
+    color:#828282;
+    padding-bottom: 4px;
 }
 
 .top_bar{
     display: flex;
     flex-wrap: wrap;
     justify-content: space-between ;
+}
+
+.cancelled_cheque{
+    padding-top: 14px;
+}
+
+.value{
+    font-weight: 600;
+    font-size: 13;
 }
