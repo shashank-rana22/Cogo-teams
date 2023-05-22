@@ -12,7 +12,11 @@ const getOptions = (data = []) => (
 
 function Plan({ subscriptionId = '', modalChangeHandler }) {
 	const [plan, setPlan] = useState('');
-	const { loading, changePlanHandler, listData = {} } = useUpdatePlan({ plan, subscriptionId, modalChangeHandler });
+	const {
+		loading = false,
+		changePlanHandler, listData = {},
+	} = useUpdatePlan({ plan, subscriptionId, modalChangeHandler });
+
 	const { list = [] } = listData || {};
 	const options = getOptions(list);
 	return (

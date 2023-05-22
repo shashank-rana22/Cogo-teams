@@ -7,21 +7,24 @@ import useUpdatePricing from '../../../../../hooks/useUpdatePricing';
 
 import styles from './styles.module.css';
 
-function EditPrice({ isEditPrice, setIsEditPrice, item = {} }) {
-	const { id: pricingId } = item || {};
-	const [inputValue, setInputValue] = useState(item?.price);
-	const { loading, submitHandler } = useUpdatePricing({ id: pricingId, setIsEditPrice });
+function EditPrice({ isEditPrice = false, setIsEditPrice, item = {} }) {
+	const { id: pricingId, price } = item || {};
+
+	const [inputValue, setInputValue] = useState(price);
+
+	const { loading = false, submitHandler } = useUpdatePricing({ id: pricingId, setIsEditPrice });
 
 	if (isEditPrice) {
 		return (
 			<div className={styles.input_box_container}>
 				<Input
+					size="sm"
 					className={styles.input_box}
 					disabled={loading}
-					size="sm"
 					value={inputValue}
 					onChange={setInputValue}
 				/>
+
 				<IcMTick
 					className={styles.icon}
 					width={20}
@@ -39,6 +42,7 @@ function EditPrice({ isEditPrice, setIsEditPrice, item = {} }) {
 			</div>
 		);
 	}
+
 	return (
 		<>
 			<span>
