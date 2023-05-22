@@ -1,7 +1,10 @@
 import { useForm } from '@cogoport/forms';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 const useHandleSearchFilter = ({ setFilters }) => {
+	const router = useRouter();
+
 	const [showFilter, setShowFilter] = useState(false);
 
 	const { control, handleSubmit, reset } = useForm();
@@ -29,6 +32,13 @@ const useHandleSearchFilter = ({ setFilters }) => {
 		reset();
 	};
 
+	const onClickCreate = () => {
+		router.push(
+			'/learning/course/create',
+			'/learning/course/create',
+		);
+	};
+
 	return {
 		showFilter,
 		setShowFilter,
@@ -37,6 +47,7 @@ const useHandleSearchFilter = ({ setFilters }) => {
 		onSubmit,
 		onClickReset,
 		reset,
+		onClickCreate,
 	};
 };
 

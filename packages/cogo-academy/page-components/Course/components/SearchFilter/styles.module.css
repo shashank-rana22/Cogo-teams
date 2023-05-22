@@ -27,3 +27,11 @@
 	background-color: #ee3425;
 	border-radius: 50%;
 }
+
+.right_container {
+	display: flex;
+}
+
+.button_container {
+	margin-right: 20px;
+}

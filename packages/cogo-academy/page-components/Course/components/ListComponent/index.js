@@ -37,7 +37,6 @@ function ListComponent({
 
 	return (
 		<div className={styles.table_container}>
-
 			<Table
 				className={styles.table_container}
 				data={list || []}

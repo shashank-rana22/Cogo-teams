@@ -16,6 +16,7 @@ function SearchFilter({ debounceQuery, input, setInput, setParams, params, setFi
 		onSubmit,
 		onClickReset,
 		reset,
+		onClickCreate,
 	} = useHandleSearchFilter({ setFilters });
 
 	useImperativeHandle(ref, () => ({ reset }));
@@ -44,34 +45,45 @@ function SearchFilter({ debounceQuery, input, setInput, setParams, params, setFi
 				className={styles.input}
 			/>
 
-			<Popover
-				placement="left"
-				caret={false}
-				onClickOutside={() => setShowFilter(false)}
-				visible={showFilter}
-				content={(
-					<FilterContent
-						control={control}
-						handleSubmit={handleSubmit}
-						setFilters={setFilters}
-						onSubmit={onSubmit}
-						onClickReset={onClickReset}
-					/>
-				)}
-			>
-				<Button
-					type="button"
-					themeType="secondary"
-					size="md"
-					onClick={() => setShowFilter(true)}
-					className={styles.filter_btn}
-				>
-					<IcMFilter style={{ marginRight: '2px' }} />
-					Filter
-					{!isEmpty(filters) ? <div className={styles.filter_dot} /> : null}
-				</Button>
-			</Popover>
+			<div className={styles.right_container}>
+				<div className={styles.button_container}>
+					<Button
+						type="button"
+						themeType="primary"
+						onClick={onClickCreate}
+					>
+						Create Course
+					</Button>
+				</div>
 
+				<Popover
+					placement="left"
+					caret={false}
+					onClickOutside={() => setShowFilter(false)}
+					visible={showFilter}
+					content={(
+						<FilterContent
+							control={control}
+							handleSubmit={handleSubmit}
+							setFilters={setFilters}
+							onSubmit={onSubmit}
+							onClickReset={onClickReset}
+						/>
+					)}
+				>
+					<Button
+						type="button"
+						themeType="secondary"
+						size="md"
+						onClick={() => setShowFilter(true)}
+						className={styles.filter_btn}
+					>
+						<IcMFilter style={{ marginRight: '2px' }} />
+						Filter
+						{!isEmpty(filters) ? <div className={styles.filter_dot} /> : null}
+					</Button>
+				</Popover>
+			</div>
 		</div>
 	);
 }

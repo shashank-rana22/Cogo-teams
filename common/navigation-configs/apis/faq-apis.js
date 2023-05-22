@@ -428,7 +428,7 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 	],
-	courses: [
+	create_course: [
 		{
 			api          : 'create_course_category',
 			access_type  : 'private',

@@ -138,12 +138,7 @@ export const courseColumns = ({
 		),
 	},
 	{
-		Header: (
-			<div className={styles.text}>
-				<div>Name of</div>
-				<div>Course</div>
-			</div>
-		),
+		Header   : 'Name of Course',
 		id       : 'course_name',
 		accessor : ({ name = '' }) => (
 			<div>

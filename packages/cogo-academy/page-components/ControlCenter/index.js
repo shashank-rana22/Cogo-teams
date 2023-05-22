@@ -2,6 +2,7 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
+import Course from '../Course';
 import HomePage from '../CreateModule/components/HomePage';
 
 import Header from './Header';
@@ -16,12 +17,16 @@ const TABS_MAPPING = {
 		title     : 'Test Module',
 		component : HomePage,
 	},
+	course_module: {
+		title     : 'Course Module',
+		component : Course,
+	},
 };
 
 function ControlCenter() {
 	const { query, push } = useRouter();
 
-	const { activeTab: currentActiveTab, testModuleTab } = query || {};
+	const { activeTab: currentActiveTab, testModuleTab, courseActiveTab } = query || {};
 
 	const [activeTab, setActiveTab] = useState(currentActiveTab || 'manage_faq');
 
@@ -32,8 +37,9 @@ function ControlCenter() {
 	};
 
 	const tabPropsMapping = {
-		manage_faq  : {},
-		test_module : { testModuleTab },
+		manage_faq    : {},
+		test_module   : { testModuleTab },
+		course_module : { courseActiveTab },
 	};
 
 	return (

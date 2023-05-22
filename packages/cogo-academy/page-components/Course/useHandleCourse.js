@@ -4,12 +4,10 @@ import { useState } from 'react';
 import useListCogoAcademyCourses from './hooks/useListCogoAcademyCourses';
 import useListCourseUserMappings from './hooks/useListCourseUserMappings';
 
-const useHandleCourse = ({ ref }) => {
-	const { query, push } = useRouter();
+const useHandleCourse = ({ ref, courseActiveTab }) => {
+	const { push } = useRouter();
 
-	const { activeTab: currentActiveTab, coursesTab } = query || {};
-
-	const [activeTab, setActiveTab] = useState(currentActiveTab || 'courses');
+	const [activeTab, setActiveTab] = useState(courseActiveTab || 'courses');
 	const [filters, setFilters] = useState({});
 
 	const {
@@ -84,7 +82,7 @@ const useHandleCourse = ({ ref }) => {
 	};
 
 	const handleChangeTab = (val) => {
-		push(`/learning/course?activeTab=${val}`);
+		push(`/learning?activeTab=course_module&courseActiveTab=${val}`);
 
 		ref.current.reset();
 		setFilters({});
@@ -93,7 +91,6 @@ const useHandleCourse = ({ ref }) => {
 
 	return {
 		handleChangeTab,
-		coursesTab,
 		componentMapping,
 		activeTab,
 		setFilters,
