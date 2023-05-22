@@ -81,8 +81,8 @@ function GenerateMawb({
 	const filteredData = { ...formData };
 
 	const {
-		id, serialId = '', documentId: docId, documentType, awbNumber, state, documentState,
-		document_number: documentNumber, serviceId, blDetailId, shipment_id: shipId, shipmentId, serviceProviderId,
+		id, serialId = '', documentId: docId, documentType, awbNumber, state, documentState, blDetailId,
+		document_number: documentNumber, serviceId, shipment_id: pendingShipmentId, shipmentId, serviceProviderId,
 	} = taskItem;
 
 	const { handleUpload } = useGetMediaUrl();
@@ -136,7 +136,7 @@ function GenerateMawb({
 		const { file } = getFileObject(newImage, 'mawb.pdf');
 		const res = await handleUpload('mawb.pdf', file);
 		const payload = {
-			shipment_id         : shipmentId || shipId,
+			shipment_id         : shipmentId || pendingShipmentId,
 			uploaded_by_org_id  : serviceProviderId,
 			performed_by_org_id : serviceProviderId,
 			document_type       : activeCategory === 'mawb' ? 'draft_airway_bill' : 'draft_house_airway_bill',
@@ -364,9 +364,7 @@ function GenerateMawb({
 					background : '#fff',
 				}}
 			>
-				{(viewDoc && documentState !== 'document_accepted')
-				&& <Watermark text="draft" rotateAngle="315deg" />}
-				{(!viewDoc && editCopies === null)
+				{((viewDoc && documentState !== 'document_accepted') || (!viewDoc && editCopies === null))
 				&& <Watermark text="draft" rotateAngle="315deg" />}
 
 				<div style={{ position: 'relative' }}>

@@ -291,7 +291,7 @@ function GenerateMAWB({
 		if (!viewDoc && editCopies) {
 			setTaskItem({
 				...item,
-				...item.documentData,
+				...item?.documentData,
 			});
 			finalFields.forEach((c) => {
 				setValue(c.name, item?.documentData?.[c.name]);
