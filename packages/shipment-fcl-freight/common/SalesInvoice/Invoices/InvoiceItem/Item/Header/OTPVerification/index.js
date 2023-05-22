@@ -1,4 +1,4 @@
-import { Modal, Button, Toast, RadioGroup } from '@cogoport/components';
+import { Modal, Button, RadioGroup } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -63,8 +63,7 @@ function OTPVerification({
 	}));
 
 	const handleClick = async () => {
-		if (isEmpty(selectedUser)) Toast.error('Please select any user');
-		else {
+		if (!isEmpty(selectedUser)) {
 			const payload = {
 				invoice_id : invoice?.id,
 				user_id    : selectedUser?.split('_')?.[0],
@@ -114,7 +113,7 @@ function OTPVerification({
 							size="md"
 							style={{ marginLeft: '16px' }}
 							onClick={handleClick}
-							disabled={userList?.length === 0}
+							disabled={userList?.length === 0 || isEmpty(selectedUser)}
 						>
 							Send
 						</Button>

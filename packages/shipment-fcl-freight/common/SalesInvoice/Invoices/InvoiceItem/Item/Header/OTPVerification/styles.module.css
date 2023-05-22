@@ -44,5 +44,8 @@
 			justify-content: center;
 			height: 140px;
 		}
+		.ui_input_control{
+			text-align: center;
+		}
 	}
 }
