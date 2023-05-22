@@ -3,7 +3,12 @@ import React, { useEffect, useMemo } from 'react';
 import Layout from '../../../../Tasks/TaskExecution/helpers/Layout';
 
 function Form({
-	prevData = {}, controls = [], defaultValues = {}, setValue = () => {}, control = () => {}, errors = {},
+	prevData = {},
+	controls = [],
+	defaultValues = {},
+	setValue = () => {},
+	control = () => {},
+	errors = {},
 }) {
 	const docUrls = useMemo(() => prevData?.document_urls?.map((doc) => ({
 		name: doc, url: doc,

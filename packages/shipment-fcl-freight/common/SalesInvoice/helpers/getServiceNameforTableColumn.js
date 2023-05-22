@@ -1,7 +1,7 @@
 import { startCase } from '@cogoport/utils';
 
-export default function getServiceNameforTableColumn(service_type, main_service, trade_type = '') {
-	if (service_type === main_service) return startCase(service_type);
+export default function getServiceNameforTableColumn(service_type, trade_type = '') {
+	if (service_type === 'fcl_freight_service') return startCase(service_type);
 	switch (trade_type) {
 		case 'import':
 			return `Destination ${startCase(service_type)}`;

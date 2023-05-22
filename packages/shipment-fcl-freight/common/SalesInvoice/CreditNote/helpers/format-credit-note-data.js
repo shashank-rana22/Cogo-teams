@@ -26,7 +26,7 @@ const formatCreditNoteData = ({
 		if (servicesIDs?.includes(key)) {
 			(data[key] || []).forEach((line_item) => {
 				if (line_item?.is_checked === true || isEdit) {
-					const serviceDetails = invoice?.services?.filter((item) => item?.service_id === key)?.[0];
+					const serviceDetails = invoice?.services?.filter((item) => item?.id === key)?.[0];
 
 					const initialData = initialLineItems
 						?.filter((li) => li?.code === line_item?.code)
@@ -65,7 +65,7 @@ const formatCreditNoteData = ({
 						code         : line_item?.code,
 						price        : line_item?.price_discounted,
 						quantity     : line_item?.quantity,
-						service_id   : serviceDetails?.service_id,
+						service_id   : serviceDetails?.id,
 						service_type : serviceDetails?.service_type,
 					};
 

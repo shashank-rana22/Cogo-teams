@@ -3,12 +3,11 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getServiceNameforTableColumn from '../../../helpers/getServiceNameforTableColumn';
 
-export const tableColumn = ({ serviceItem = {}, shipment_data = {} }) => {
-	const main_service = `${shipment_data?.shipment_type}_service`;
+export const tableColumn = ({ serviceItem = {} }) => {
 	const trade_type = serviceItem?.trade_type;
 	const currencyLocale = GLOBAL_CONSTANTS.currency_locale.INR;
 
-	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, main_service, trade_type);
+	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, trade_type);
 
 	return [
 		{

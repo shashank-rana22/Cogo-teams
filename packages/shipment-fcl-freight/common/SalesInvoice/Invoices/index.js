@@ -2,8 +2,8 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
+import useGetCreditNotes from '../../../hooks/useGetCreditNotes';
 import useListBfSalesInvoices from '../../../hooks/useListBfSalesInvoices';
-import useListCreditNotes from '../../../hooks/useListCreditNotes';
 import useOrgOutStanding from '../../../hooks/useOrgOutStanding';
 import CreditNote from '../CreditNote';
 import { POST_REVIEWED_INVOICES } from '../helpers/post-reviewed-sales-invoices.json';
@@ -45,7 +45,7 @@ function Invoices({
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { list, cnRefetch, loading: cNLoading } = useListCreditNotes({});
+	const { list, cnRefetch, loading: cNLoading } = useGetCreditNotes({});
 
 	return (
 		<main className={styles.container}>
