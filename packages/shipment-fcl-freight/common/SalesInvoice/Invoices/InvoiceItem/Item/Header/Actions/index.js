@@ -36,10 +36,12 @@ function Actions({
 	const [showOtpModal, setShowOTPModal] = useState(false);
 	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
+	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
+	|| isEmpty(invoiceData.invoice_trigger_date);
+
 	let disableAction = showForOldShipments
 		? isIRNGenerated
-		: ['reviewed', 'approved'].includes(invoice.status)
-		|| isEmpty(invoiceData.invoice_trigger_date);
+		: disableActionCondition;
 
 	if (invoice.status === 'amendment_requested') {
 		disableAction = false;
@@ -49,7 +51,7 @@ function Actions({
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[0];
 
-	const isInvoiceBefore20Aug2022 =		firstChar !== '1' || invoice_serial_id.length < 8;
+	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < 8;
 
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {

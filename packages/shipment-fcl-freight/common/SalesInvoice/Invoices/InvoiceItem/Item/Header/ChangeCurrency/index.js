@@ -2,6 +2,7 @@ import { Button, Modal, Select } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateCurrency from '../../../../../../../hooks/useUpdateCurrency';
@@ -98,7 +99,7 @@ function ChangeCurrency({
 					themeType="primary"
 					style={{ marginLeft: '16px' }}
 					onClick={() => onCreate(payload)}
-					disabled={loading}
+					disabled={loading || isEmpty(value)}
 				>
 					Confirm
 				</Button>
