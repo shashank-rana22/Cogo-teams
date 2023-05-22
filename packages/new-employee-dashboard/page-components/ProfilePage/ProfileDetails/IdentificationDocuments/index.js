@@ -1,11 +1,9 @@
+import PreviewDocumet from '../../../../common/PreviewDocumet';
+
 import styles from './styles.module.css';
 
 function IdentificationDocuments() {
-	return (
-		<div className={styles.container}>
-			Identification Documents
-		</div>
-	);
+	return <PreviewDocumet />;
 }
 
 export default IdentificationDocuments;

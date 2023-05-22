@@ -1,11 +1,14 @@
 import { Avatar, Button } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 const src = 'https://images.pexels.com/photos/220453/pexels-photo-220453.jpeg?auto=compress&cs=tinysrgb&w=800';
 
-function Header() {
+function Header({ detail }) {
+	const { name, employee_code, designation, passport_size_photo_url } = detail || {};
+	console.log('detail', detail);
 	return (
 		<div className={styles.container}>
 			<div className={styles.profile}>
@@ -16,9 +19,13 @@ function Header() {
 					size="160px"
 				/>
 				<div>
-					<div className={styles.name}>Shivam Singh</div>
-					<div className={styles.role}>Sr. Software Engineer</div>
-					<div className={styles.emp_code}>Employee Code: COGO-0833</div>
+					<div className={styles.name}>{name}</div>
+					<div className={styles.role}>{startCase(designation)}</div>
+					<div className={styles.emp_code}>
+						Employee Code:
+						{' '}
+						{employee_code}
+					</div>
 				</div>
 			</div>
 

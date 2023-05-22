@@ -4,13 +4,17 @@ import React, { useState } from 'react';
 import Header from './Header';
 import ProfileDetails from './ProfileDetails';
 import styles from './styles.module.css';
+import useProfileDetails from './useProfileDetails';
 
 function ProfilePage() {
 	const [activeTab, setActiveTab] = useState('profile_info');
+	const { data:profileData = {}, loading = false } = useProfileDetails();
+
+	const { detail = {} } = profileData || {};
 
 	return (
 		<div className={styles.container}>
-			<Header />
+			<Header detail={detail} />
 
 			<div className={styles.tab_container}>
 				<Tabs
@@ -19,7 +23,7 @@ function ProfilePage() {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="profile_info" title="Profile Info">
-						<ProfileDetails />
+						<ProfileDetails profileData={profileData} loading={loading} />
 					</TabPanel>
 
 					<TabPanel name="Signed_documents" title="Signed Documents">
