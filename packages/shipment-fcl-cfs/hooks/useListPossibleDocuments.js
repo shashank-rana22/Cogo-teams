@@ -6,7 +6,7 @@ const useListPossibelDocuments = ({ defaultParams = {} }) => {
 	const [apiData, setApiData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/get_possible_documents',
+		url    : 'fcl_cfs/get_possible_documents',
 		method : 'GET',
 		params : {
 			...defaultParams,

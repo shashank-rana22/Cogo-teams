@@ -8,7 +8,7 @@ const useListBillOfLadings = ({ shipment_data = {} }) => {
 	const { id: shipment_id = '' } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/list_bill_of_ladings',
+		url    : 'fcl_cfs/list_bill_of_ladings',
 		params : {
 			filters: {
 				shipment_id,
