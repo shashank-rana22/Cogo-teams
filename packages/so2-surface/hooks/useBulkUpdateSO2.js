@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -27,7 +28,7 @@ const useBulkUpdateSO2 = () => {
 			Toast.success('SO2 Updated Successfully');
 			setCheckedRows(new Set());
 		} catch (err) {
-			Toast.error('Something Went Wrong');
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
 

@@ -5,15 +5,12 @@ import DashboardContext from '../../../../context/DashboardContext';
 
 import styles from './styles.module.css';
 
+const SORT_BY_OPTIONS = [{ value: 'created_at', label: 'Shipment Creation Date' }];
+const SORTING_ORDER = [{ key: 'asc', children: 'Ascending' }, { key: 'desc', children: 'Descending' }];
 function SortBy({
 	popoverFilter = {},
 	setShowPopover = () => {},
 }) {
-	const SORT_BY_OPTIONS = [{ value: 'created_at', label: 'Shipment Creation Date' },
-	];
-
-	const SORTING_ORDER = [{ key: 'asc', children: 'Ascending' }, { key: 'desc', children: 'Descending' }];
-
 	const [order, setOrder] = useState('asc');
 	const { filters = {}, setFilters } = useContext(DashboardContext);
 

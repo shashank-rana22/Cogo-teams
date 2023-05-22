@@ -10,10 +10,10 @@ import PendingDocs from './PendingDocs';
 import ShipmentInfo from './ShipmentInfo';
 import styles from './styles.module.css';
 
-const iconMapping = {
+const ICON_MAPPING = {
 	ftl_freight: { Icon: IcMFftl, text: 'FTL' },
 };
-
+const INVOICE_TYPES = ['purchase_invoice', 'proforma_invoice'];
 export default function Card({
 	item = {}, checkedRows = {}, setCheckedRows = () => {},
 	activeTab,
@@ -27,17 +27,17 @@ export default function Card({
 		window.location.href = newUrl;
 	};
 
-	const iconProps = iconMapping[item?.shipment_type];
+	const iconProps = ICON_MAPPING[item?.shipment_type];
 
 	return (
 		<div
 			role="button"
 			tabIndex={0}
-			className={`${['purchase_invoice', 'proforma_invoice'].includes(activeTab)
+			className={`${INVOICE_TYPES.includes(activeTab)
 				? styles.shipment_card : styles.card}`}
 		>
 
-			{['purchase_invoice', 'proforma_invoice'].includes(activeTab) ? <CardHeader item={item} /> : null}
+			{INVOICE_TYPES.includes(activeTab) ? <CardHeader item={item} /> : null}
 			<div className={styles.card_body}>
 				<Checkbox
 					label=""
@@ -56,7 +56,7 @@ export default function Card({
 
 				<div className={styles.separator} />
 
-				{['purchase_invoice', 'proforma_invoice'].includes(activeTab)
+				{INVOICE_TYPES.includes(activeTab)
 					? (
 						<div className={styles.location_container}>
 							<LocationDetails data={item} icon={iconProps} />
@@ -75,7 +75,7 @@ export default function Card({
 				</div>
 
 			</div>
-			{!['purchase_invoice', 'proforma_invoice'].includes(activeTab)
+			{!INVOICE_TYPES.includes(activeTab)
 				? (item?.pending_tasks.map((task) => (
 					<PendingDocs item={task} key={task.id} clickCard={clickCard} />
 				))) : null}
