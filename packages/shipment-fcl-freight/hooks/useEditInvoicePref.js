@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import formatIps from '../common/SalesInvoice/helpers/format-ips';
-import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
+import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices.json';
 import incoTermMapping from '../configurations/inco-term-mapping.json';
 
 const exportServiceTypes = [

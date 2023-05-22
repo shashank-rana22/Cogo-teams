@@ -19,7 +19,7 @@ const useCreditNoteNullify = ({
 				data: {
 					invoice_combination_id : invoiceId,
 					remarks                : [remarks],
-					document_urls          : [file?.finalUrl ? file?.finalUrl : undefined],
+					document_urls          : file?.finalUrl ? [file?.finalUrl] : undefined,
 				},
 			});
 			Toast.success(successMessage);

@@ -27,9 +27,8 @@ function AddRemarks({
 		onClose();
 		refetch();
 	};
-	const { onSubmitRemarks, loading } = useUpdateInvoiceRemarks({
+	const { onSubmitRemarks = () => {}, loading } = useUpdateInvoiceRemarks({
 		refetch: refetchAfterCall,
-		payload,
 	});
 
 	return (

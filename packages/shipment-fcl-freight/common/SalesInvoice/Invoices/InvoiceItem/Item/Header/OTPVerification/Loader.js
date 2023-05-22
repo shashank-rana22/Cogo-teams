@@ -4,15 +4,14 @@ import React from 'react';
 function Loader() {
 	return (
 		<div>
-			<div style={{ margin: '16px' }}>
-				<Placeholder width="200px" margin="16px" />
-				<Placeholder width="250px" margin="16px" />
-			</div>
-
-			<div style={{ margin: '16px' }}>
-				<Placeholder width="200px" margin="16px" />
-				<Placeholder width="250px" margin="16px" />
-			</div>
+			{Array(2).fill().map(() => (
+				<div style={{ margin: '16px' }} key="e">
+					{' '}
+					{Array(2).fill().map((j, idx) => (
+						<Placeholder width={idx === 1 ? '250px' : '200'} margin="16px" key="d" />))}
+					{' '}
+				</div>
+			))}
 		</div>
 	);
 }
