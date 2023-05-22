@@ -6,8 +6,8 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import formatIps from '../common/SalesInvoice/helpers/format-ips';
-import IncoTermMapping from '../common/SalesInvoice/helpers/IncoTermMapping.json';
 import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
+import incoTermMapping from '../configurations/inco-term-mapping.json';
 
 const exportServiceTypes = [
 	'fcl_freight_service',
@@ -90,7 +90,7 @@ const useEditInvoicePref = ({
 		importer_exporter_id,
 	} = shipment_data;
 
-	const updateExportInvoices = IncoTermMapping[inco_term] === 'export';
+	const updateExportInvoices = incoTermMapping[inco_term] === 'export';
 
 	const endPoint = updateExportInvoices ? '/update_shipment_export_invoice_combination'
 		: '/update_shipment_invoice_combination';
