@@ -43,6 +43,7 @@ function Footer({
 				? (
 					<Button
 						onClick={() => setStep(2)}
+						disabled={loading}
 						className={styles.button_wrapper}
 					>
 						Next

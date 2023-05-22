@@ -15,7 +15,7 @@ const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent'];
 
 function Form({
 	upsellableService = {},
-	servicesList,
+	servicesList = [],
 	shipmentData = {},
 	primary_service,
 	closeModal = () => {},
@@ -30,7 +30,12 @@ function Form({
 
 	const [step, setStep] = useState(1);
 
-	const { consignee_shipper, importer_exporter, importer_exporter_id, consignee_shipper_id } = shipmentData;
+	const {
+		consignee_shipper = {},
+		importer_exporter = {},
+		importer_exporter_id = '',
+		consignee_shipper_id = '',
+	} = shipmentData;
 
 	const haveToAskOrgDetails = !KAM_AGENTS.includes(activeStakeholder) && consignee_shipper_id;
 

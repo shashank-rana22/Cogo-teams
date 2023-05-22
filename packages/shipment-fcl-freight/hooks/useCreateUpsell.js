@@ -10,7 +10,6 @@ const useCreateUpsell = ({
 	shipmentData = {},
 	organization_id = '',
 	user = {},
-
 }) => {
 	const router = useRouter();
 
