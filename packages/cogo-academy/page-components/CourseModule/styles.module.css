@@ -1,3 +1,9 @@
 .container {
-    background-color: #fff;
+    padding: 0px 20px;
+}
+
+.main_heading {
+    margin: 40px 0px;
+    font-weight: 700;
+    font-size: 20px;
 }
