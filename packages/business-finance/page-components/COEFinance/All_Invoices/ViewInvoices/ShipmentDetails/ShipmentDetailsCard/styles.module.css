@@ -107,6 +107,15 @@
 	align-items: center;
 }
 
+.document {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.button {
+	margin-left: 10px;
+}
+
 .bold_data {
 	font-weight: 600;
 }

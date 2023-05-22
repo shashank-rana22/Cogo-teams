@@ -4574,6 +4574,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'contract',
 		},
+		{
+			api          : 'list_saas_rail_domestic_freight_invoice_details',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
 	],
 	discount: [
 		{
@@ -11113,6 +11118,24 @@ const partner = {
 			service_name : 'shipment',
 			feature      : 'detention_demurrage',
 		},
+		{
+			api          : 'list_rail_domestic_freight_rate_free_days',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'create_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'update_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
 	],
 	my_profile: [
 		{
@@ -11700,6 +11723,11 @@ const partner = {
 		},
 	],
 	cogo_one: [
+		{
+			api          : 'list_checkouts',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 		{
 			api          : 'get_user',
 			access_type  : 'private',
