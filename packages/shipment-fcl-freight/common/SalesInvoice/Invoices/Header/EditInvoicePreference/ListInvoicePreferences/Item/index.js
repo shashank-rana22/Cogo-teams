@@ -23,9 +23,17 @@ function Item({
 	allTakenServices = [],
 }) {
 	const { shipment_type = '' } = shipmentData;
-	const { billing_address, invoice_currency = '', invoice_source = '' } = invoice || {};
+	const {
+		billing_address,
+		invoice_currency = '', invoice_source = '',
+		invoicing_party_total_discounted = '',
+		invoice_total_currency = '',
+		services = [],
+		status = '',
+		id = '',
+	} = invoice || {};
 
-	const open = openedService && openedService?.id === invoice?.id;
+	const open = openedService && openedService?.id === id;
 
 	const handleServiceToggle = () => {
 		setOpenedService(open ? null : invoice);
@@ -40,7 +48,7 @@ function Item({
 		<div className={styles.booking_text}> - Booking Party</div>
 	) : null;
 
-	const renderServicesTaken = (invoice?.services || []).map((service) => {
+	const renderServicesTaken = (services || []).map((service) => {
 		const trade_type = MAIN_SERVICES !== service?.service_type
 			? service?.trade_type
 			: null;
@@ -59,16 +67,7 @@ function Item({
 		) : null;
 	});
 
-	const noActionState = ACTION_STATE.includes(invoice?.status);
-
-	const invoiceAmount = formatAmount({
-		amount   : invoice?.invoicing_party_total_discounted || 0,
-		currency : invoice?.invoice_total_currency,
-		options  : {
-			style           : 'currency',
-			currencyDisplay : 'code',
-		},
-	});
+	const noActionState = ACTION_STATE.includes(status);
 
 	return (
 		<div className={styles.container}>
@@ -96,7 +95,7 @@ function Item({
 
 						{noActionState ? (
 							<div className={styles.invoice_status}>
-								{startCase(invoice?.status)}
+								{startCase(status)}
 							</div>
 						) : null}
 					</div>
@@ -122,10 +121,17 @@ function Item({
 						{invoice_currency}
 					</div>
 
-					{invoiceAmount ? (
+					{invoicing_party_total_discounted ? (
 						<div className={styles.overall_amount}>
 							Invoice Amount:
-							{invoiceAmount}
+							{formatAmount({
+								amount   : invoicing_party_total_discounted,
+								currency : invoice_total_currency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
 					) : null}
 
