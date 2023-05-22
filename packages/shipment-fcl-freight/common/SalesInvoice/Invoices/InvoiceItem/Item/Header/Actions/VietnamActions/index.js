@@ -97,6 +97,30 @@ function Actions({
 		salesInvoicesRefetch();
 	};
 
+	const underTranslation = () => ((invoice?.status === 'reviewed'
+		&& (!bfInvoice?.systemGeneratedProforma
+			|| !bfInvoice?.proformaPdfUrl))
+	|| (invoice?.status === 'approved'
+		&& !bfInvoice?.systemGeneratedInvoice) ? (
+			<div className={styles.pill}>Under Translation</div>
+		) : null);
+
+	const approveButton = () => (
+		invoice?.status === 'reviewed'
+						&& bfInvoice?.systemGeneratedProforma
+						&& bfInvoice?.proformaPdfUrl && (
+							<div className={styles.review_invoice}>
+								<Button
+									size="sm"
+									onClick={updateInvoiceStatus}
+									disabled={loading}
+								>
+									Approve
+								</Button>
+							</div>
+		)
+	);
+
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	const content = (
@@ -171,26 +195,8 @@ function Actions({
 							</Button>
 						) : null}
 					</div>
-					{(invoice?.status === 'reviewed'
-						&& (!bfInvoice?.systemGeneratedProforma
-							|| !bfInvoice?.proformaPdfUrl))
-					|| (invoice?.status === 'approved'
-						&& !bfInvoice?.systemGeneratedInvoice) ? (
-							<div className={styles.pill}>Under Translation</div>
-						) : null}
-					{invoice?.status === 'reviewed'
-						&& bfInvoice?.systemGeneratedProforma
-						&& bfInvoice?.proformaPdfUrl && (
-							<div className={styles.review_invoice}>
-								<Button
-									size="sm"
-									onClick={updateInvoiceStatus}
-									disabled={loading}
-								>
-									Approve
-								</Button>
-							</div>
-					)}
+					{underTranslation}
+					{approveButton}
 					{invoice?.status === 'amendment_requested' ? (
 						<Tooltip
 							placement="bottom"
