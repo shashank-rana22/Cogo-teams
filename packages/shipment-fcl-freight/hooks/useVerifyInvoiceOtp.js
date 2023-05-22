@@ -3,7 +3,6 @@ import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useVerifyInvoiceOtp = ({
-	payload = {},
 	refetch = () => {},
 	successMessage = 'OTP verified successfully!',
 }) => {
@@ -12,7 +11,7 @@ const useVerifyInvoiceOtp = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const onClickSubmitOtp = async () => {
+	const onClickSubmitOtp = async (payload) => {
 		try {
 			await trigger({
 				data: payload,

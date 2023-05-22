@@ -30,14 +30,8 @@ function OTPVerification({
 		refetch();
 	};
 
-	const payloadForVerification = {
-		mobile_otp : otpValue,
-		invoice_id : invoice?.id,
-	};
-
 	const { onClickSubmitOtp, verifyInvoiceLoader } = useVerifyInvoiceOtp({
-		payload : payloadForVerification,
-		refetch : refetchAfterVerifydOtpApiCall,
+		refetch: refetchAfterVerifydOtpApiCall,
 	});
 
 	const { sendOtpForInvoiceApproval } = useSendInvoiceOtp({
@@ -98,20 +92,22 @@ function OTPVerification({
 					onClose={() => setShowOTPModal(false)}
 				>
 					<Modal.Header title="Select user to send OTP" />
+
 					<Modal.Body className={styles.body}>
 						{userListInfo}
 					</Modal.Body>
-					<Modal.Footer>
+
+					<Modal.Footer className={styles.modal_footer}>
 						<Button
 							size="md"
-							themeType="tertiary"
+							themeType="secondary"
 							onClick={() => setShowOTPModal(false)}
 						>
 							Cancel
 						</Button>
+
 						<Button
 							size="md"
-							style={{ marginLeft: '16px' }}
 							onClick={handleClick}
 							disabled={userList?.length === 0 || isEmpty(selectedUser)}
 						>
@@ -128,6 +124,7 @@ function OTPVerification({
 					className={styles.otp_modal}
 				>
 					<Modal.Header title={title} />
+
 					<Modal.Body>
 						<div className={styles.Container}>
 							<OtpInput
@@ -140,17 +137,21 @@ function OTPVerification({
 							/>
 						</div>
 					</Modal.Body>
-					<Modal.Footer>
+
+					<Modal.Footer className={styles.modal_footer}>
 						<Button
 							size="md"
 							disabled={verifyInvoiceLoader}
-							onClick={() => onClickSubmitOtp()}
+							onClick={() => onClickSubmitOtp({
+								mobile_otp : otpValue,
+								invoice_id : invoice?.id,
+							})}
 						>
 							SUBMIT
 						</Button>
+
 						<Button
 							size="md"
-							style={{ marginLeft: '16px' }}
 							onClick={() => sendOtpForInvoiceApproval()}
 						>
 							Resend OTP
