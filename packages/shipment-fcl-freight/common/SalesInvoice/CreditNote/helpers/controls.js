@@ -120,7 +120,9 @@ const creditNoteControls = ({
 		})),
 	}));
 
-	return control.push(...controls);
+	control.push(...controls);
+
+	return control;
 };
 
 export default creditNoteControls;
