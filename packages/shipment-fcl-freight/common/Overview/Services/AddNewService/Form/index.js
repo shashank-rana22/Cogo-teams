@@ -46,7 +46,9 @@ function Form({
 		organization_id,
 	});
 
-	const formOrganizationId = formProps.formValues.organization_id;
+	const { errors, formValues } = formProps;
+
+	const formOrganizationId = formValues.organization_id;
 
 	const ORG_OPTIONS = [
 		{
@@ -130,6 +132,8 @@ function Form({
 						/>
 					) : null
 }
+
+				{errors?.user_id ? <div className={styles.error}>{errors?.user_id?.message}</div> : null}
 
 			</Modal.Body>
 			<Modal.Footer>
