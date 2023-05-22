@@ -32,6 +32,10 @@ const controls = [
 		type        : 'select',
 		placeholder : 'Select Gender',
 		rules       : { required: 'This is required' },
+		options     : [
+			{ label: 'Male', value: 'male' },
+			{ label: 'Female', value: 'female' },
+		],
 	},
 	{
 		name        : 'phone_number',

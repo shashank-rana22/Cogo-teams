@@ -1,7 +1,18 @@
+.list {
+  display: flex;
+  align-items: center;
+  border-bottom: 1px solid #f8f2e7;
+}
+
+.control {
+  margin: 4px;
+}
+
 .container {
   display: flex;
   flex-direction: row;
   flex-wrap: wrap;
+  justify-content: space-around;
   width: 100%;
   border-radius: 6px;
 }
@@ -41,3 +52,13 @@
   margin-left: 85vw;
 }
 
+.remove {
+  margin-top: 20px;
+}
+
+.whole_container {
+	border: 1px solid rgb(227, 227, 227);
+	border-radius: 10px;
+	margin-bottom: 20px;
+	padding: 20px;
+}

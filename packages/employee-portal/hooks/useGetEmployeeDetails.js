@@ -6,16 +6,14 @@ import { useEffect, useCallback } from 'react';
 function useGetEmployeeDetails() {
 	const [{ loading = false, data = {} }, trigger] = useRequest({
 		method : 'get',
-		url    : 'list_employee_details',
+		url    : 'get_employee_details',
 	}, { manual: false });
 
 	const getEmployeeDetails = useCallback(() => {
 		try {
 			trigger({
 				params: {
-					filters: {
-						id: '85cdcf6b-bd52-4fea-b136-12e377c48ecc',
-					},
+					id: '85cdcf6b-bd52-4fea-b136-12e377c48ecc',
 				},
 			});
 		} catch (err) {

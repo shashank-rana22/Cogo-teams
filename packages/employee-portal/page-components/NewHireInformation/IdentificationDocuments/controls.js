@@ -17,8 +17,8 @@ const controls = [
 		type  : 'fileUpload',
 	},
 	{
-		name  : 'resume',
-		label : 'Upload Resume',
+		name  : 'driving_license',
+		label : 'Upload Your Driving License',
 		type  : 'fileUpload',
 	},
 
