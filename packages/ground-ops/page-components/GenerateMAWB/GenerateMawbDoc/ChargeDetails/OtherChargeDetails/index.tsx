@@ -253,7 +253,7 @@ function OtherChargeDetails({
 							`}
 					>
 						<p style={{ fontSize: 18 }}>
-							{awbType === 'mawb' ? awbNumber : hawbNumber}
+							{awbType === 'mawb' ? awbNumber || documentNo : hawbNumber}
 						</p>
 					</div>
 				</div>
