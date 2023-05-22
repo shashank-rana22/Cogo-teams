@@ -22,7 +22,7 @@ function CNNullify({
 		refetchCN();
 	};
 	const {
-		onCreate,
+		onCreate = () => {},
 		loading,
 	} = useCreditNoteNullify({
 		invoiceId : invoice?.id,

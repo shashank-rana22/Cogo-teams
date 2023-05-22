@@ -4,6 +4,8 @@ import React, { useState } from 'react';
 
 import useUpdateInvoiceRemarks from '../../../../../../../hooks/useUpdateInvoiceRemarks';
 
+import styles from './styles.module.css';
+
 function AddRemarks({
 	showAddRemarks = false,
 	setShowAddRemarks = () => {},
@@ -40,14 +42,14 @@ function AddRemarks({
 					rows="6"
 					onChange={(e) => setRemarkValue([e])}
 					placeholder="Add remarks for your invoice..."
-					style={{ padding: '3px' }}
+					className={styles.text_area}
 				/>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
 					themeType="tertiary"
 					onClick={onClose}
-					style={{ marginRight: '20px' }}
+					className={styles.button_div}
 				>
 					Cancel
 				</Button>
