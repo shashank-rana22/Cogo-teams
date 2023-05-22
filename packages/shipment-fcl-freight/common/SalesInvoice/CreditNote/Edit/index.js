@@ -14,12 +14,7 @@ import styles from './styles.module.css';
 
 function Edit({
 	setOpen = () => {},
-<<<<<<< Updated upstream
-	CN_STATUS_MAPPING = {},
-	serial_id = '',
-=======
 	CN_STATUS_MAPPING,
->>>>>>> Stashed changes
 	prevData = {},
 	item = {},
 	cnRefetch = () => {},
