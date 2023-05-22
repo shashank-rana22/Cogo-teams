@@ -133,7 +133,7 @@ function Form({
 					) : null
 }
 
-				{errors?.user_id ? <div className={styles.error}>{errors?.user_id?.message}</div> : null}
+				{!isEmpty(errors?.user_id) ? <div className={styles.error}>{errors?.user_id?.message}</div> : null}
 
 			</Modal.Body>
 			<Modal.Footer>
