@@ -1,9 +1,9 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const PLAN_LIST_PAGE_LIMIT = 50;
 
-const useUpdatePlan = ({ plan, subscriptionId, modalChangeHandler }) => {
+const useUpdatePlan = ({ planId, subscriptionId, modalChangeHandler }) => {
 	const [{ loading, data: listData }, listTrigger] = useRequest({
 		method : 'get',
 		url    : '/list_saas_plan_pricings',
@@ -14,7 +14,7 @@ const useUpdatePlan = ({ plan, subscriptionId, modalChangeHandler }) => {
 		url    : '/update_saas_subscription',
 	}, { manual: true });
 
-	const getPlanList = () => {
+	const getPlanList = useCallback(() => {
 		try {
 			listTrigger({
 				params: {
@@ -25,25 +25,25 @@ const useUpdatePlan = ({ plan, subscriptionId, modalChangeHandler }) => {
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [listTrigger]);
 
-	const changePlanHandler = async () => {
+	const changePlanHandler = useCallback(async () => {
 		try {
 			await postTrigger({
 				data: {
 					id              : subscriptionId,
-					plan_pricing_id : plan,
+					plan_pricing_id : planId,
 				},
 			});
 			modalChangeHandler(true);
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [modalChangeHandler, planId, postTrigger, subscriptionId]);
 
 	useEffect(() => {
 		getPlanList();
-	}, []);
+	}, [getPlanList]);
 
 	return {
 		loading: loading || postLoading, changePlanHandler, listData,

@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useCancelSubscription = ({ modalChangeHandler }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -6,7 +7,7 @@ const useCancelSubscription = ({ modalChangeHandler }) => {
 		url    : '/cancel_saas_subscription',
 	}, { manual: true });
 
-	const cancelSubscriptionHandler = async (id = '') => {
+	const cancelSubscriptionHandler = useCallback(async (id = '') => {
 		try {
 			await trigger({
 				data: {
@@ -17,7 +18,7 @@ const useCancelSubscription = ({ modalChangeHandler }) => {
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [modalChangeHandler, trigger]);
 
 	return {
 		loading, cancelSubscriptionHandler,

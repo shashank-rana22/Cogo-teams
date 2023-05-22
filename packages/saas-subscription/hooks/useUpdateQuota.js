@@ -1,5 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useUpdateQuota = ({ id = '', modalChangeHandler }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -14,7 +15,7 @@ const useUpdateQuota = ({ id = '', modalChangeHandler }) => {
 		},
 	});
 
-	const submitHandler = async (data) => {
+	const submitHandler = useCallback(async (data) => {
 		const { action, is_addon, quantity } = data || {};
 		try {
 			await trigger({
@@ -30,7 +31,7 @@ const useUpdateQuota = ({ id = '', modalChangeHandler }) => {
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [id, modalChangeHandler, trigger]);
 
 	return {
 		formHook, loading, submitHandler,

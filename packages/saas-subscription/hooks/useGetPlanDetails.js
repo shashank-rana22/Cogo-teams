@@ -1,6 +1,6 @@
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetPlanDetails = () => {
 	const { query } = useRouter();
@@ -11,7 +11,7 @@ const useGetPlanDetails = () => {
 		url    : '/get_saas_plan_details',
 	});
 
-	const refetchPlanDetails = async () => {
+	const refetchPlanDetails = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
@@ -21,11 +21,11 @@ const useGetPlanDetails = () => {
 		} catch (error) {
 			console.log(error);
 		}
-	};
+	}, [plan_id, trigger]);
 
 	useEffect(() => {
 		refetchPlanDetails();
-	}, []);
+	}, [refetchPlanDetails]);
 
 	return {
 		planDetails: data,

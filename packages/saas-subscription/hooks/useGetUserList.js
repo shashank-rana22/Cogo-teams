@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useGetUserList = () => {
 	const [globalFilters, setGlobalFilters] = useState({
@@ -11,7 +11,7 @@ const useGetUserList = () => {
 		url    : '/list_saas_subscription_customers',
 	}, { manual: true });
 
-	const refectUserList = async () => {
+	const refectUserList = useCallback(async () => {
 		const { page, customer_segment, search } = globalFilters;
 		try {
 			await trigger({
@@ -24,11 +24,11 @@ const useGetUserList = () => {
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [globalFilters, trigger]);
 
 	useEffect(() => {
 		refectUserList();
-	}, [globalFilters]);
+	}, [globalFilters, refectUserList]);
 
 	return {
 		userList: data, loading, refectUserList, globalFilters, setGlobalFilters,

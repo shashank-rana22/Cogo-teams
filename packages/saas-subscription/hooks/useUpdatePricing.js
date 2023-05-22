@@ -1,4 +1,5 @@
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useUpdatePricing = ({ id, setIsEditPrice }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -6,7 +7,7 @@ const useUpdatePricing = ({ id, setIsEditPrice }) => {
 		url    : '/update_saas_plan_pricing',
 	}, { manual: true });
 
-	const submitHandler = async (price) => {
+	const submitHandler = useCallback(async (price) => {
 		try {
 			await trigger({
 				data: {
@@ -18,7 +19,7 @@ const useUpdatePricing = ({ id, setIsEditPrice }) => {
 		} catch (err) {
 			console.log(err);
 		}
-	};
+	}, [id, setIsEditPrice, trigger]);
 
 	return {
 		loading, submitHandler,

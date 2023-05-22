@@ -11,18 +11,18 @@ const getOptions = (data = []) => (
 );
 
 function Plan({ subscriptionId = '', modalChangeHandler }) {
-	const [plan, setPlan] = useState('');
+	const [planId, setPlanId] = useState('');
 	const {
 		loading = false,
 		changePlanHandler, listData = {},
-	} = useUpdatePlan({ plan, subscriptionId, modalChangeHandler });
+	} = useUpdatePlan({ planId, subscriptionId, modalChangeHandler });
 
 	const { list = [] } = listData || {};
 	const options = getOptions(list);
 	return (
 		<>
 			<div className={styles.plan_container}>
-				<RadioGroup options={options} onChange={setPlan} value={plan} />
+				<RadioGroup options={options} onChange={setPlanId} value={planId} />
 			</div>
 			<div className={cl`${styles.flex_box} ${styles.footer}`}>
 				<Button
