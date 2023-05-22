@@ -1,2 +1,2 @@
 // eslint-disable-next-line import/no-unresolved
-export { default } from '@cogoport/cogo-academy/page-components/Course/CourseCreation';
+export { default } from '@cogoport/cogo-academy/page-components/CreateCourse/CourseCreation';

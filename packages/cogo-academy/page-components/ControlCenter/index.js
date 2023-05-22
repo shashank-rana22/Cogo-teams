@@ -2,7 +2,7 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import Course from '../Course';
+import CreateCourse from '../CreateCourse';
 import HomePage from '../CreateModule/components/HomePage';
 
 import Header from './Header';
@@ -19,7 +19,7 @@ const TABS_MAPPING = {
 	},
 	course_module: {
 		title     : 'Course Module',
-		component : Course,
+		component : CreateCourse,
 	},
 };
 

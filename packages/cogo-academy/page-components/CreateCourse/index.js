@@ -6,7 +6,7 @@ import SearchFilter from './components/SearchFilter';
 import styles from './styles.module.css';
 import useHandleCourse from './useHandleCourse';
 
-function Course({ courseActiveTab }) {
+function CreateCourse({ courseActiveTab }) {
 	const ref = useRef(null);
 
 	const {
@@ -58,4 +58,4 @@ function Course({ courseActiveTab }) {
 	);
 }
 
-export default Course;
+export default CreateCourse;
