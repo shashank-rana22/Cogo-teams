@@ -1,0 +1,43 @@
+.type{
+    font-weight: 600;
+   
+}
+
+.container{
+    max-height: 70vh;
+    overflow-y: scroll;
+	scroll-behavior: smooth;
+}
+
+.per_container{
+    border:1px solid #ffea9a;
+    padding:16px;
+    width:65%;
+    border-radius: 6px;
+	
+    margin-bottom:22px;
+    margin-right:26px;
+    margin-left:26px;
+   
+}
+
+.label_value_container{
+    padding-right: 20px;
+    padding-bottom: 16px;
+
+}
+
+.top_bar{
+    display: flex;
+    flex-wrap: wrap;
+    /* padding-bottom: 16px; */
+}
+
+.label{
+    color:#828282
+}
+
+.value{
+    font-weight: 600;
+    font-size: 13;
+}

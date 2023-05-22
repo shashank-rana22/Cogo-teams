@@ -5,6 +5,11 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'harbour',
 		},
+		{
+			api          : 'list_employee_details',
+			access_type  : 'private',
+			service_name : 'harbour',
+		},
 	],
 	employee_portal: [],
 };

@@ -89,7 +89,10 @@ function TableView() {
 			<StyledTable
 				columns={columns}
 				data={[
-					{ id: 'qw13i4-8272ihjyvhj', progress: 95 }, { id: 'q1123kj-oouyhb2682h-aad-ad11sdq', progress: 80 },
+					{
+						id       : '85cdcf6b-bd52-4fea-b136-12e377c48ecc',
+						progress : 95,
+					}, { id: 'q1123kj-oouyhb2682h-aad-ad11sdq', progress: 80 },
 					{ id: 'w123sdfs-rf23r2ed-22-2d21', progress: 50 }, { id: '123-ewd32e2-d23d-23d2d2d', progress: 70 },
 					{ id: 'q1231ewdw-w232ws3rfrbyy-123', progress: 28 }, { id: 'qs1123-877jvvnd-ad123', progress: 20 }]}
 				loading={false}
