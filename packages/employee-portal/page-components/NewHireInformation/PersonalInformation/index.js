@@ -7,6 +7,11 @@ import useGetEmployeeDetails from '../../../hooks/useGetEmployeeDetails';
 import controls from './controls';
 import styles from './styles.module.css';
 
+const removeTypeField = (controlItem) => {
+	const { type, ...rest } = controlItem;
+	return rest;
+};
+
 function PersonalInformation() {
 	const { getEmployeesDetails, data } = useGetEmployeeDetails();
 
@@ -28,8 +33,10 @@ function PersonalInformation() {
 
 							<div className={styles.control}>
 								<Element
+									{...(type === 'fileUpload'
+										? removeTypeField(controlItem) : { ...controlItem })}
 									control={control}
-									{...controlItem}
+									key={controlName}
 									className={styles[`element_${controlName}`]}
 								/>
 
