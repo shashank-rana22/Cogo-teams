@@ -38,7 +38,7 @@ const getControls = [{
 		{
 			name        : 'skills',
 			label       : 'Skills',
-			type        : 'input',
+			type        : 'createmultiselect',
 			placeholder : 'Skills',
 			rules       : { required: 'This is required' },
 		},
