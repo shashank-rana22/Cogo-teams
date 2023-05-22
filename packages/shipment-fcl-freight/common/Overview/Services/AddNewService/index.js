@@ -5,7 +5,7 @@ import React, { useState, useEffect } from 'react';
 import Form from './Form';
 import styles from './styles.module.css';
 
-const incoTermCannotUpsell = ['cif', 'cfr', 'fob'];
+const INCO_TERM_CANNOT_UPSELL = ['cif', 'cfr', 'fob'];
 
 function AddNewService({
 	upsellableService = {},
@@ -52,7 +52,7 @@ function AddNewService({
 
 	if (shipmentData?.end_to_end_shipment?.is_possible) {
 		if (activeStakeholder === 'booking_agent' && ((primary_service?.trade_type !== upsellableService?.trade_type
-			&& incoTermCannotUpsell.includes(primary_service?.inco_term))
+			&& INCO_TERM_CANNOT_UPSELL.includes(primary_service?.inco_term))
 		)) {
 			canUpsellForTradeType = false;
 		} else if (activeStakeholder === 'consignee_shipper_booking_agent'

@@ -15,10 +15,10 @@ const CostBookingDesk = dynamic(() => import('./StakeholdersView/CostBookingDesk
 const LastMileDesk = dynamic(() => import('./StakeholdersView/LastMileDesk'), { ssr: false });
 const DocumentDesk = dynamic(() => import('./StakeholdersView/DocumentDesk'), { ssr: false });
 
-const shipment_additional_methods = ['main_service', 'documents', 'end_to_end_shipment'];
+const SHIPMENT_ADDITIONAL_METHODS = ['main_service', 'documents', 'end_to_end_shipment'];
 
 function ShipmentDetails() {
-	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
+	const { get } = useGetShipment({ additional_methods: SHIPMENT_ADDITIONAL_METHODS });
 
 	const { shipment_data } = get;
 
