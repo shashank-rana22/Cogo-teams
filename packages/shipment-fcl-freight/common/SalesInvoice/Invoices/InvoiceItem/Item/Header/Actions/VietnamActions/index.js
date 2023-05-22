@@ -210,34 +210,34 @@ function Actions({
 						<Tooltip
 							interactive
 							placement="bottom"
+							theme="light"
 							content={(
 								<div style={{ fontSize: '10px', color: '#333333' }}>
 									<div className={styles.flex_row}>
 										Proforma email sent :
-										{' '}
+										&nbsp;
 										{invoice.proforma_email_count || 0}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
-										{' '}
+										&nbsp;
 										{invoice.sales_email_count || 0}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											UTR Number:
-											{' '}
+											&nbsp;
 											{invoice?.sales_utr?.utr_number || ''}
 										</div>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											Status:
-											{' '}
+											&nbsp;
 											{invoice?.sales_utr?.status || ''}
 										</div>
 									</div>
 								</div>
 							)}
-							theme="light"
 						>
 							<div style={{ margin: '4px 0 0 10px', cursor: 'pointer' }}>
 								<IcMInfo />

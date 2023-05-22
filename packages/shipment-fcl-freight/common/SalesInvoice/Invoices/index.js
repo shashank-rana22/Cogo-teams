@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 function Invoices({
 	invoiceData = {},
 	groupedInvoices = {},
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 	invoicesList = [],
 	loading = false,
 	salesInvoicesRefetch = () => {},
@@ -44,13 +44,13 @@ function Invoices({
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { list, CNRefetch, loading: CNLoading } = useListCreditNotes();
+	const { list, cnRefetch, loading: cNLoading } = useListCreditNotes({});
 
 	return (
 		<main className={styles.container}>
 			<Header
 				invoiceData={invoiceData}
-				BfInvoiceRefetch={BfInvoiceRefetch}
+				bfInvoiceRefetch={bfInvoiceRefetch}
 				disableAction={disableAction}
 				isCustomer={isCustomer}
 				salesInvoicesRefetch={salesInvoicesRefetch}
@@ -64,14 +64,14 @@ function Invoices({
 						key={item}
 						item={groupedInvoices[item]}
 						total={totals?.[item]}
-						BfInvoiceRefetch={BfInvoiceRefetch}
+						bfInvoiceRefetch={bfInvoiceRefetch}
 						loading={loading}
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 						isIRNGenerated={isIRNGenerated}
 						org_outstanding={outstanding_by_reg_num[item]}
 						salesInvoicesRefetch={salesInvoicesRefetch}
-						refetchCN={CNRefetch}
+						refetchCN={cnRefetch}
 					/>
 				))}
 			</section>
@@ -79,9 +79,9 @@ function Invoices({
 			{list?.length
 				? (
 					<CreditNote
-						CNRefetch={CNRefetch}
+						cnRefetch={cnRefetch}
 						list={list}
-						loading={CNLoading}
+						loading={cNLoading}
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 					/>

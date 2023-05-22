@@ -3,7 +3,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useContext, useEffect, useCallback, useState } from 'react';
 
-const useListAdditionalServices = ({ payload = {} }) => {
+const useListAdditionalServices = ({ payload = {} } = {}) => {
 	const [apiData, setApiData] = useState({});
 	const { shipment_data } = useContext(ShipmentDetailContext);
 

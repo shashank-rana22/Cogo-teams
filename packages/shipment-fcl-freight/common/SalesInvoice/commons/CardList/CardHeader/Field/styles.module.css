@@ -1,11 +1,11 @@
-.card_title{
-	font-weight: 600;
+.card_title {
 	font-size: 12px;
+	font-weight: 600;
 	line-height: 16px;
-	color: #000000;
+	color: #000;
 
 	&.icon {
-		width: 100%;
 		justify-content: center;
+		width: 100%;
 	}
 }

@@ -1,23 +1,23 @@
-.Heading{
-	font-weight: 500;
+.Heading {
+	margin: 14px 0 38px;
 	font-size: 18px;
+	font-weight: 500;
 	line-height: 15px;
 	color: #393f70;
-	margin: 14px 0 38px 0;
 }
 
-.Line{
-	border-bottom: 1px solid #ded7fc;
+.Line {
 	margin-bottom: 28px;
+	border-bottom: 1px solid #ded7fc;
 }
 
-.ButtonContainer{
+.ButtonContainer {
 	display: flex;
-	width: 100%;
-	justify-content: flex-end;
 	align-items: center;
-	border-top: 1px solid #bdaff9;
+	justify-content: flex-end;
+	width: 100%;
 	padding-top: 18px;
+	border-top: 1px solid #bdaff9;
 
 	.reviewed {
 		&.core-ui-button-root {
@@ -26,12 +26,12 @@
 	}
 
 	.core-ui-button-root {
-		text-transform: capitalize;
 		width: 100px;
+		text-transform: capitalize;
 	}
 }
 
-.Form{
-	overflow: auto;
+.Form {
 	height: 59vh;
+	overflow: auto;
 }

@@ -1,4 +1,4 @@
-import { Modal, Button, Loader } from '@cogoport/components';
+import { Modal, Button, Loader, cl } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -12,12 +12,12 @@ import Form from './Form';
 import styles from './styles.module.css';
 
 function Edit({
-	setOpen,
-	CNstatusMapping,
+	setOpen = () => {},
+	CN_STATUS_MAPPING,
 	serial_id,
-	prevData,
+	prevData = {},
 	item = {},
-	CNRefetch = () => {},
+	cnRefetch = () => {},
 	invoiceData = {},
 }) {
 	const { id, live_invoice_number, status } = item || {};
@@ -40,7 +40,7 @@ function Edit({
 		isEdit  : true,
 		invoiceData,
 		setOpen,
-		refetch : CNRefetch,
+		refetch : cnRefetch,
 	});
 
 	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm();
@@ -60,15 +60,17 @@ function Edit({
 	const updatedObj = {};
 
 	Object.entries(formValues).forEach(([key, value]) => {
-		if (key === 'remarks') {
-			updatedObj[key] = value;
-		} else if (key === 'uploadDocument') {
-			updatedObj[key] = value;
-		} else {
-			updatedObj[key] = value?.map((_item) => ({
-				..._item,
-				total: _item.price_discounted * _item.quantity,
-			}));
+		switch (key) {
+			case 'remarks':
+			case 'uploadDocument':
+				updatedObj[key] = value;
+				break;
+			default:
+				updatedObj[key] = value?.map((_item) => ({
+					..._item,
+					total: _item.price_discounted * _item.quantity,
+				}));
+				break;
 		}
 	});
 
@@ -77,13 +79,14 @@ function Edit({
 			show
 			onClose={() => setOpen(false)}
 			size="xl"
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title={(
 				<header className={styles.heading}>
 					EDIT CREDIT NOTE
-					<div className={`${styles[CNstatusMapping[status]]} ${styles.status_text}`}>
+					<div className={cl`${styles[CN_STATUS_MAPPING[status]]} ${styles.status_text}`}>
 						{status === 'rejected' ? <div>!</div> : null}
-						{startCase(CNstatusMapping[status])}
+						{startCase(CN_STATUS_MAPPING[status])}
 					</div>
 				</header>
 			)}
@@ -96,12 +99,9 @@ function Edit({
 					</div>
 				) : (
 					<>
-						<div style={{ fontSize: 14 }}>
+						<div className={styles.title}>
 							<b>
-								SID
-								{serial_id}
-						&nbsp;- Invoice number -
-						&nbsp;
+								{`SID ${serial_id} - Invoice number -`}
 								<u>{live_invoice_number}</u>
 							</b>
 						</div>
@@ -109,9 +109,7 @@ function Edit({
 						<div>
 							<b>Requested By</b>
 							<span>
-								&nbsp;
-								-
-								{data?.requested_by?.name}
+								{` - ${data?.requested_by?.name}`}
 							</span>
 						</div>
 

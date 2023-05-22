@@ -3,7 +3,7 @@
 	padding: 16;
 	margin-bottom: 16;
 	background-color: #fff;
-	border: 1px #e0e0e0 solid;
+	border: 1px var(--color-secondary-greyscale-5) solid;
 	border-radius: 8;
 }
 
@@ -20,7 +20,7 @@
 	padding: 16;
 	margin-bottom: 16;
 	background-color: "#FFF";
-	border: 1px #e0e0e0 solid;
+	border: 1px var(--color-secondary-greyscale-5) solid;
 	border-radius: 8;
 }
 

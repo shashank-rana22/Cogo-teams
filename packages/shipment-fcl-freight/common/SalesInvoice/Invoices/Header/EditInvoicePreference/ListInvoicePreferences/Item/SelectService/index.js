@@ -17,16 +17,15 @@ const MAIN_SERVICES = [
 ];
 
 function SelectService({
-	invoice,
-	handleServiceChange,
-	onClose,
-	allTakenServices,
+	invoice = {},
+	handleServiceChange = () => {},
+	onClose = () => {},
+	allTakenServices = [],
 }) {
-	const selected = invoice.services?.map((service) => service?.serviceKey);
+	const { services = [], invoice_currency, invoice_source = '' } = invoice;
+	const selected = services?.map((service) => service?.serviceKey);
 
 	const [value, onChange] = useState(selected);
-
-	const { invoice_currency, invoice_source = '' } = invoice;
 	const [invoiceCurrency, setInvoiceCurrency] = useState(invoice_currency);
 
 	let options = [];
@@ -37,13 +36,7 @@ function SelectService({
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
 			const trade_type = !MAIN_SERVICES.includes(service?.service_type) ? service?.trade_type : null;
 
-			let tradeType = '';
-
-			if (trade_type === 'export') {
-				tradeType = 'Origin';
-			} else if (trade_type === 'import') {
-				tradeType = 'Destination';
-			}
+			const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
 
 			const isBas = (service?.line_items || []).some((lineItem) => lineItem?.code === 'BAS');
 
@@ -60,7 +53,7 @@ function SelectService({
 				<div className={styles.service_details}>
 					<div>
 						<b>Invoice Currency: </b>
-						{' '}
+						&nbsp;
 						<span>{service?.currency}</span>
 					</div>
 
@@ -138,7 +131,7 @@ function SelectService({
 		if (selected?.length) {
 			onChange(selected);
 		}
-	}, [invoice.id]);
+	}, [invoice.id, selected]);
 
 	return (
 		<div className={styles.container}>

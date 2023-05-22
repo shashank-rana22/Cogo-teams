@@ -30,7 +30,7 @@ function ChangeCurrency({
 		return details.country_code;
 	};
 
-	const invoiceCurrencyMappings = {
+	const INVOICE_CURRENCY_MAPPINGS = {
 		freight_invoice_currency: {
 			[country_code(country.IN)] : [currency.INR, currency.USD],
 			[country_code(country.GB)] : [currency.GBP, currency.EUR, currency.USD],
@@ -39,9 +39,9 @@ function ChangeCurrency({
 		},
 	};
 
-	const currencyOptionsOld =	invoiceCurrencyMappings?.freight_invoice_currency?.[
+	const currencyOptionsOld =	INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.[
 		invoice?.country_code || geo.country.currency.code
-	] || invoiceCurrencyMappings?.freight_invoice_currency?.others;
+	] || INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.others;
 
 	const currencyOptions = currencyOptionsOld.map((item) => ({
 		label : item,

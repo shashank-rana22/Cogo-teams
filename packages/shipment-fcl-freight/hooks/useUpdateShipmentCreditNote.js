@@ -9,7 +9,7 @@ const useUpdateShipmentCreditNote = ({
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_credit_note',
 		method : 'POST',
-	});
+	}, { manual: true });
 
 	const apiTrigger = async (val) => {
 		try {

@@ -1,8 +1,8 @@
-.main{
+.main {
 	border-radius: 4px;
 
-    &.creditNote{
-        border: 1px solid #e0e0e0;
-        margin: 20px;
-    }
+	&.creditNote {
+		margin: 20px;
+		border: 1px solid var(--color-secondary-greyscale-5);
+	}
 }

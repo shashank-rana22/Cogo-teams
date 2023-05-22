@@ -1,20 +1,22 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
-import AddIp from '../AddIp';
-import AddRate from '../AddRate';
 import Loader from '../Loader';
 
-import AddService from './AddService';
 import Info from './Info';
 import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
+
+const AddIp = dynamic(() => import('../AddIp'), { ssr: false });
+const AddRate = dynamic(() => import('../AddRate'), { ssr: false });
+const AddService = dynamic(() => import('./AddService'), { ssr: false });
 
 function List({ isSeller = false }) {
 	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(
@@ -25,7 +27,7 @@ function List({ isSeller = false }) {
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(8);
 
-	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({ payload: {} });
+	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices();
 
 	const handleRefetch = () => {
 		refetchServices();

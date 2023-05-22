@@ -59,15 +59,17 @@ const useCreateCreditNoteHelper = ({
 	const updatedObj = {};
 
 	Object.entries(formValues).forEach(([key, value]) => {
-		if (key === 'remarks') {
-			updatedObj[key] = value;
-		} else if (key === 'uploadDocument') {
-			updatedObj[key] = value;
-		} else {
-			updatedObj[key] = value?.map((item) => ({
-				...item,
-				total: item.price_discounted * item.quantity,
-			}));
+		switch (key) {
+			case 'remarks':
+			case 'uploadDocument':
+				updatedObj[key] = value;
+				break;
+			default:
+				updatedObj[key] = value?.map((_item) => ({
+					..._item,
+					total: _item.price_discounted * _item.quantity,
+				}));
+				break;
 		}
 	});
 

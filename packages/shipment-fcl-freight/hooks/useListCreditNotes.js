@@ -14,6 +14,7 @@ const useListCreditNotes = () => {
 		params : {
 			filters: {
 				shipment_id,
+				is_active: true,
 			},
 			additional_methods: ['credit_note'],
 		},
@@ -38,7 +39,7 @@ const useListCreditNotes = () => {
 	return {
 		loading,
 		list      : apiData?.list || [],
-		CNRefetch : getCreditNoteList,
+		cnRefetch : getCreditNoteList,
 	};
 };
 export default useListCreditNotes;

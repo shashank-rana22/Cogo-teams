@@ -54,7 +54,7 @@ function Form({
 					) : null}
 
 					{startCase(upsellableService.trade_type)}
-					{' '}
+					&nbsp;
 					{startCase(service)}
 				</div>
 			)}

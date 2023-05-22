@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 function SalesInvoice() {
 	const { list } = useListSageSalesInvoices();
-	const { salesList, refetch:BfInvoiceRefetch } = useListBfSalesInvoices();
+	const { salesList, refetch: bfInvoiceRefetch } = useListBfSalesInvoices();
 
 	const { data: invoiceData, groupedInvoices, refetch: salesInvoicesRefetch, loading } = useGetShipmentInvoice();
 
@@ -20,7 +20,7 @@ function SalesInvoice() {
 		org_reg_nums: Object.keys(groupedInvoices || {}),
 	});
 
-	const isIRNGenerated = !!list.find((item) => !!item.irn_number);
+	const isIRNGenerated = !!list.find((item) => !!item?.irn_number);
 
 	if (loading) {
 		return (
@@ -40,7 +40,7 @@ function SalesInvoice() {
 				<Invoices
 					invoiceData={invoiceData}
 					groupedInvoices={groupedInvoices}
-					BfInvoiceRefetch={BfInvoiceRefetch}
+					bfInvoiceRefetch={bfInvoiceRefetch}
 					invoicesList={salesList}
 					loading={loading}
 					salesInvoicesRefetch={salesInvoicesRefetch}

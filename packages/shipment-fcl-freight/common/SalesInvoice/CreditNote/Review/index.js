@@ -8,11 +8,11 @@ import styles from './styles.module.css';
 function Review({
 	setOpen = () => {},
 	id = '',
-	CNRefetch = () => {},
+	cnRefetch = () => {},
 }) {
 	const [value, setValue] = useState(false);
 
-	const { loading, apiTrigger = () => {} } = useUpdateShipmentCreditNote({ refetch: CNRefetch });
+	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch: cnRefetch });
 
 	const handleUpdate = () => {
 		apiTrigger({ id, status: value ? 'reviewed' : undefined });
@@ -24,6 +24,7 @@ function Review({
 			show
 			onClose={() => setOpen(false)}
 			className={styles.custom_modal}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title="MARK AS REVIEWED" />
 

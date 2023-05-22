@@ -18,7 +18,7 @@
 	margin: 0;
 	cursor: pointer;
 	background-color: #fff;
-	border-bottom: 1px solid #e0e0e0;
+	border-bottom: 1px solid var(--color-secondary-greyscale-5);
 	border-radius: 0;
 	outline: none;
 	transition: 0.3s;
@@ -51,14 +51,14 @@
 }
 
 .expired {
-	background: #fbe6e6;
+	background-color: #fbe6e6;
 }
 
 .label {
 	width: max-content;
 	font-size: 8px;
 	line-height: 12px;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 	text-transform: capitalize;
 
 	@media (min-width: 768px) {

@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function InvoiceItem({
 	item = {},
 	total = {},
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 	loading = false,
 	invoiceData = {},
 	invoicesList = [],
@@ -61,7 +61,7 @@ function InvoiceItem({
 					<Item
 						key={invoice?.id}
 						invoice={invoice}
-						BfInvoiceRefetch={BfInvoiceRefetch}
+						bfInvoiceRefetch={bfInvoiceRefetch}
 						loading={loading}
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}

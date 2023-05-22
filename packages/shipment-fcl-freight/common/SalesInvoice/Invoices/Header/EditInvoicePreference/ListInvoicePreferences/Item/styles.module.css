@@ -1,129 +1,128 @@
-.container{
-	background: #ffffff;
-	box-shadow: 0px 0px 10px rgba(0, 0, 0, 0.15);
-	border-radius: 4px;
+.container {
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
+	margin-bottom: 16px;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 10px rgb(0 0 0 / 15%);
 
 	.open {
-		margin-bottom: 24px;
-		border-bottom: 1px solid #ACDADF;
 		padding-bottom: 20px;
+		margin-bottom: 24px;
+		border-bottom: 1px solid #acdadf;
 	}
-	margin-bottom: 16px;
 }
 
-.header_container{
+.header_container {
 	display: flex;
+	align-items: center;
 	width: 100%;
 	padding: 20px 16px;
-	align-items: center;
 	cursor: pointer;
 }
 
-.icon_wrapper{
+.icon_wrapper {
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 	margin-right: 8px;
 }
 
-.address_text{
-	font-weight: 400;
-	font-size: 10px;
-	line-height: 16px;
-	color: #828282;
+.address_text {
 	margin: 0;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 16px;
+	color: var(--color-secondary-greyscale-3);
 	letter-spacing: 0.02em;
 }
 
-.gst_number{
-	font-weight: 400;
-	font-size: 10px;
-	line-height: 16px;
-	color: #221F20;
+.gst_number {
 	margin: 0;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 16px;
+	color: #221f20;
 }
 
-.invoice_currency{
-	font-weight: 400;
-	font-size: 10px;
-	line-height: 16px;
-	color: #221F20;
+.invoice_currency {
 	margin: 0;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 16px;
+	color: #221f20;
 }
 
-.heading{
+.heading {
 	margin: 0;
-	font-weight: 600;
-	font-size: 14px;
-	line-height: 16px;
-	color: #333333;
 	margin-right: 4px;
+	font-size: 14px;
+	font-weight: 600;
+	line-height: 16px;
+	color: #333;
 }
 
-.booking_text{
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 10px;
-	color: #F68B21;
+.booking_text {
 	display: flex;
 	align-items: center;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 10px;
+	color: var(--color-accent-orange-2);
 }
 
-.service_name{
-	font-weight: 400;
-	font-size: 10px;
-	line-height: 12px;
-	color: #221F20;
-	margin: 0 6px 6px 0;
-	background: #C4DC91;
+.service_name {
 	padding: 4px 12px;
+	margin: 0 6px 6px 0;
+	font-size: 10px;
+	font-weight: 400;
+	line-height: 12px;
+	color: #221f20;
+	background-color: #c4dc91;
 	border-radius: 4px;
 }
 
-.invoice_status{
-	color: #6CC077;
-	font-weight: 500 
+.invoice_status {
+	font-weight: 500;
+	color: #6cc077;
 }
 
-.header{
-	width: 15%;
+.header {
 	display: flex;
-	justify-content: flex-end;
 	align-items: center;
+	justify-content: flex-end;
+	width: 15%;
 }
 
-.invoice_source{
-	background-color: #fef6df;
-	padding: 2px 16px;
+.invoice_source {
 	width: fit-content;
-	color: #221F20;
+	padding: 2px 16px;
 	font-size: 12px;
+	color: #221f20;
+	background-color: #fef6df;
 	border-bottom-right-radius: 8px;
 }
 
-.overall_amount{
+.overall_amount {
+	margin-bottom: 4px;
 	font-size: 10px;
 	line-height: 16px;
-	color: #221F20;
-	margin-bottom: 4px;
+	color: #221f20;
 }
 
-.details{
+.details {
 	display: flex;
 	justify-content: space-between;
 }
 
-.details_child{
+.details_child {
 	display: flex;
 	align-items: center;
 	margin-bottom: 6px;
-
 }
 
-.flex{
+.flex {
 	display: flex;
 	align-items: flex-start;
 }

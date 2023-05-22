@@ -1,10 +1,10 @@
-.container{
+.container {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	width: 100%;
 	justify-content: space-between;
-	padding: 20px 20px 0 20px;
+	width: 100%;
+	padding: 20px 20px 0;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -12,14 +12,14 @@
 	}
 }
 
-.trigger_time{
+.trigger_time {
 	margin: 0;
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 16px;
-	text-align: center;
-	color: #cb6464;
 	margin-right: 16px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #cb6464;
+	text-align: center;
 	white-space: nowrap;
 
 	@media (max-width: 768px) {
@@ -27,30 +27,30 @@
 	}
 }
 
-.total_shipment_title{
+.total_shipment_title {
 	margin: 0;
-	font-weight: 500;
 	font-size: 14px;
+	font-weight: 500;
 	line-height: 16px;
+	color: #333;
 	text-transform: capitalize;
-	color: #333333;
 }
 
-.shipment_value{
-	font-weight: 500;
-	font-size: 14px;
-	line-height: 16px;
-	text-transform: capitalize;
-	color: #F68B21;
+.shipment_value {
 	margin-left: 4px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	color: var(--color-accent-orange-2);
+	text-transform: capitalize;
 }
 
-.reviwed_stats{
-	font-weight: 500;
+.reviwed_stats {
+	margin: 0;
 	font-size: 14px;
+	font-weight: 500;
 	line-height: 16px;
 	color: #393f70;
-	margin: 0;
 	white-space: nowrap;
 
 	@media (max-width: 768px) {
@@ -58,24 +58,26 @@
 	}
 }
 
-.edit_invoice{
+.edit_invoice {
 	display: flex;
 	align-items: center;
-	width: 30%;
 	justify-content: space-between;
+	width: 30%;
+
 	@media (max-width: 768px) {
 		display: none;
 	}
 }
 
-.flex_row{
+.flex_row {
 	display: flex;
 	align-items: center;
 	width: 25%;
 
 	&.total {
 		flex: 1;
-		margin: 0px 12px;
+		margin: 0 12px;
+
 		@media (max-width: 768px) {
 			margin: 0;
 		}
@@ -84,16 +86,18 @@
 	&.triggered {
 		display: none;
 	}
+
 	@media (max-width: 1260px) {
 		width: 38%;
 	}
-
 	@media (max-width: 768px) {
 		width: 100%;
 	}
+
 	&.inactive {
 		display: none;
 	}
+
 	&.active {
 		@media (max-width: 768px) {
 			align-items: flex-start;
@@ -101,6 +105,6 @@
 	}
 }
 
-.button_div{
+.button_div {
 	display: flex;
 }

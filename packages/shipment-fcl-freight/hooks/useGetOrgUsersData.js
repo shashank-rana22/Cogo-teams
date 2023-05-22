@@ -14,16 +14,12 @@ const useGetOrgUsersData = ({ invoice }) => {
 		},
 	}, { manual: true });
 
-	const getTradeData = useCallback(() => {
-		(
-			async () => {
-				try {
-					await trigger();
-				} catch (err) {
-					toastApiError(err);
-				}
-			}
-		)();
+	const getTradeData = useCallback(async () => {
+		try {
+			await trigger();
+		} catch (err) {
+			toastApiError(err);
+		}
 	}, [trigger]);
 
 	useEffect(() => {

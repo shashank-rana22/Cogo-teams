@@ -13,13 +13,13 @@ function CNNullify({
 	invoice,
 	refetchCN = () => {},
 	invoiceData,
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 }) {
 	const [isRequestCN, setIsRequestCN] = useState(false);
 
 	const refetchAfterApiCall = () => {
 		setAskNullify(false);
-		BfInvoiceRefetch();
+		bfInvoiceRefetch();
 		refetchCN();
 	};
 	const {

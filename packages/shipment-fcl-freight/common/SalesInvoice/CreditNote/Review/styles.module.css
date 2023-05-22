@@ -1,23 +1,23 @@
 .button_wrapper {
-    display: flex;
-    justify-content: center;
+	display: flex;
+	justify-content: center;
 
-    & > button{
-        margin-right: 12px;
-    }
+	& > button {
+		margin-right: 12px;
+	}
 }
 
-.form{
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
+.form {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
 }
 
 .custom_modal {
-    :global{
-        .ui_modal_body_container{
-            height: 200px;
-        }
-    }
+	:global {
+		.ui_modal_body_container {
+			height: 200px;
+		}
+	}
 }

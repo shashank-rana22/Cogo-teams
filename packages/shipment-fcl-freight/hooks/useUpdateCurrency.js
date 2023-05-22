@@ -25,7 +25,7 @@ const useUpdateCurrency = ({ refetch, currency }) => {
 			Toast.success('Invoice Currency Updated');
 			refetch();
 		} catch (err) {
-			toastApiError(err?.data);
+			toastApiError(err);
 		}
 	};
 

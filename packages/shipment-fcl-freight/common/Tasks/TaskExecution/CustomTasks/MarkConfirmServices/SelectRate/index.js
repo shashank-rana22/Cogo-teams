@@ -38,7 +38,7 @@ function SelectRate({
 				{loading ? (
 					<div className={styles.loader}>
 						<Loader />
-						{' '}
+						&nbsp;
 						Loading Task...
 					</div>
 				) : null}

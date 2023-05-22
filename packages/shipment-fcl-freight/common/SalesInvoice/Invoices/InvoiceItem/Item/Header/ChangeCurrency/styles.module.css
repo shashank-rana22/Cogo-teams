@@ -1,15 +1,18 @@
-.form{
-	:global{
+.form {
+	:global {
 		.ui_modal_body_container {
 			height: 160px;
 		}
-		.ui_select_input_placeholder{
+
+		.ui_select_input_placeholder {
 			font-size: 12px;
 		}
-		.ui_select_input_control{
+
+		.ui_select_input_control {
 			font-size: 12px !important;
 		}
-		.ui_select_option_item{
+
+		.ui_select_option_item {
 			font-size: 12px !important;
 		}
 	}

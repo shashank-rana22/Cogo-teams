@@ -1,4 +1,4 @@
-import { Loader, Button, Tooltip } from '@cogoport/components';
+import { Loader, Button, Tooltip, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowRotateDown,
@@ -14,7 +14,7 @@ import ReviewCN from '../Review';
 import LineItems from './LineItems';
 import styles from './styles.module.css';
 
-const CNstatusMapping = {
+const CN_STATUS_MAPPING = {
 	pending          : 'draft',
 	reviewed         : 'requested',
 	approved         : 'approved',
@@ -25,7 +25,7 @@ const CNstatusMapping = {
 function Item({
 	item = {},
 	serial_id = '',
-	CNRefetch = () => {},
+	cnRefetch = () => {},
 	invoiceData = {},
 	loading = false,
 	invoicesList = [],
@@ -41,7 +41,7 @@ function Item({
 		document_urls : item?.document_urls || [],
 	};
 
-	const bfInvoice = invoicesList.filter((ele) => ele?.proformaNumber === item?.cn_number) || [];
+	const bfInvoice = invoicesList.filter((ele) => ele?.proformaNumber === item?.cn_number);
 
 	const handleDownload = () => {
 		const cnLink = bfInvoice[0].invoicePdfUrl
@@ -70,7 +70,7 @@ function Item({
 					theme="light"
 					interactive
 					content={(
-						<div style={{ fontSize: '10px' }}>
+						<div className={styles.billing_address}>
 							{item?.billing_address?.address}
 						</div>
 					)}
@@ -111,8 +111,8 @@ function Item({
 
 				<div className={styles.invoice_status_and_action}>
 					<div className={styles.status}>
-						<div className={`${styles[CNstatusMapping[itemStatus]]} ${styles.status_text}`}>
-							{startCase(CNstatusMapping[itemStatus])}
+						<div className={cl`${styles[CN_STATUS_MAPPING[itemStatus]]} ${styles.status_text}`}>
+							{startCase(CN_STATUS_MAPPING[itemStatus])}
 						</div>
 
 						{itemStatus === 'rejected' ? (
@@ -181,7 +181,7 @@ function Item({
 				<ReviewCN
 					setOpen={setOpen}
 					id={item?.id}
-					CNRefetch={CNRefetch}
+					cnRefetch={cnRefetch}
 				/>
 			) : null}
 
@@ -189,10 +189,10 @@ function Item({
 				<EditCN
 					setOpen={setOpen}
 					prevData={prevData}
-					CNstatusMapping={CNstatusMapping}
+					CN_STATUS_MAPPING={CN_STATUS_MAPPING}
 					serial_id={serial_id}
 					item={item}
-					CNRefetch={CNRefetch}
+					cnRefetch={cnRefetch}
 					invoiceData={invoiceData}
 				/>
 			) : null}

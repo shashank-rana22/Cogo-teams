@@ -7,6 +7,7 @@ import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState, useContext, useRef } from 'react';
 
+import CONSTANTS from '../../../../../../configurations/contants.json';
 import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 
 import Actions from './Actions';
@@ -15,10 +16,15 @@ import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
 
+const API_SUCCESS_MESSAGE = {
+	reviewed : 'Invoice sent for approval to customer!',
+	approved : 'Invoice approved!,',
+};
+
 function Header({
 	children = null,
 	invoice = {},
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 	invoiceData = {},
 	invoicesList = [],
 	isIRNGenerated = false,
@@ -27,14 +33,11 @@ function Header({
 }) {
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
-	const [status, setStatus] = useState('');
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const { user_data } = useSelector(({ profile }) => ({
-		user_data: profile || {},
-	}));
-	const isAuthorized = user_data.email === 'ajeet@cogoport.com';
+	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
+	const isAuthorized = user_data.email === CONSTANTS.ajeet_email;
 
 	const invoicePartyDetailsRef = useRef(null);
 
@@ -58,22 +61,10 @@ function Header({
 	};
 
 	const refetchAferApiCall = () => {
-		BfInvoiceRefetch();
+		bfInvoiceRefetch();
 	};
 
-	let successMessage = 'Status updated successfully!';
-	if (status === 'reviewed') {
-		successMessage = 'Invoice sent for approval to customer!';
-	} else if (status === 'approved') {
-		successMessage = 'Invoice approved!';
-	}
-
-	const { updateInvoiceStatus } = useUpdateShipmentInvoiceStatus({
-		invoice,
-		refetch: refetchAferApiCall,
-		status,
-		successMessage,
-	});
+	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
 
 	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= 120347 && invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
@@ -88,8 +79,13 @@ function Header({
 	}
 
 	const handleClick = (type) => {
-		setStatus(type);
-		updateInvoiceStatus();
+		updateInvoiceStatus({
+			payload: {
+				id     : invoice?.id,
+				status : type,
+			},
+			message: API_SUCCESS_MESSAGE[type],
+		});
 	};
 
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
@@ -103,7 +99,7 @@ function Header({
 				{invoice?.source === 'pass_through' ? (
 					<div className={styles.invoice_source}>
 						Source -
-						{' '}
+						&nbsp;
 						{startCase(invoice?.source)}
 					</div>
 				) : null}
@@ -111,7 +107,7 @@ function Header({
 				{invoice?.exchange_rate_state ? (
 					<div className={styles.invoice_source}>
 						Applicable State -
-						{' '}
+						&nbsp;
 						{startCase(invoice?.exchange_rate_state)}
 					</div>
 				) : null}
@@ -238,7 +234,7 @@ function Header({
 					{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
 						<Actions
 							invoice={invoice}
-							BfInvoiceRefetch={BfInvoiceRefetch}
+							bfInvoiceRefetch={bfInvoiceRefetch}
 							shipment_data={shipment_data}
 							invoiceData={invoiceData}
 							isIRNGenerated={isIRNGenerated}
@@ -296,7 +292,7 @@ function Header({
 				invoice={invoice}
 				refetchCN={refetchCN}
 				invoiceData={invoiceData}
-				BfInvoiceRefetch={BfInvoiceRefetch}
+				bfInvoiceRefetch={bfInvoiceRefetch}
 			/>
 		</div>
 	);

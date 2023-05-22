@@ -12,14 +12,14 @@
 }
 
 .expired {
-	background: #fbe6e6;
+	background-color: #fbe6e6;
 }
 
 .label {
 	width: max-content;
 	font-size: 8px;
 	line-height: 12px;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 	text-transform: capitalize;
 
 	@media (min-width: 768px) {
@@ -42,23 +42,23 @@
 	color: #000;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	background: #fcedbf;
+	background-color: #fcedbf;
 	border-radius: 4px;
 
 	&.expired {
-		background: #f7cdcd;
+		background-color: #f7cdcd;
 	}
 
 	&.rejected {
-		background: #f7cdcd;
+		background-color: #f7cdcd;
 	}
 
 	&.draft {
-		background: #eee;
+		background-color: #eee;
 	}
 
 	&.booking_placed {
-		background: rgb(230 251 233);
+		background-color: rgb(230 251 233);
 	}
 }
 
@@ -75,8 +75,8 @@
 	width: 300px;
 	padding: 12px 16px;
 	margin-bottom: 24px;
-	background: white;
-	border: 1px solid #e0e0e0;
+	background-color: fff;
+	border: 1px solid var(--color-secondary-greyscale-5);
 	border-radius: 10px;
 }
 

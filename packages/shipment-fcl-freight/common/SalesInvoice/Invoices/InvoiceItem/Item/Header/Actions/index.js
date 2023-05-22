@@ -20,7 +20,7 @@ import styles from './styles.module.css';
 
 function Actions({
 	invoice = {},
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 	shipment_data = {},
 	invoiceData = {},
 	isIRNGenerated = false,
@@ -79,7 +79,7 @@ function Actions({
 	);
 
 	const handleRefetch = () => {
-		BfInvoiceRefetch();
+		bfInvoiceRefetch();
 		salesInvoicesRefetch();
 	};
 
@@ -188,7 +188,7 @@ function Actions({
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 					<div className={styles.email_wrapper}>
 						<IcMEmail
-							style={{ cursor: 'pointer', color: '#F68B21' }}
+							style={{ cursor: 'pointer', color: 'var(--color-accent-orange-2)' }}
 							onClick={() => setSendEmail(true)}
 						/>
 
@@ -199,24 +199,24 @@ function Actions({
 								<div style={{ fontSize: '10px', color: '#333333' }}>
 									<div className={styles.flex_row}>
 										Proforma email sent :
-										{' '}
+										&nbsp;
 										{invoice.proforma_email_count || 0}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
-										{' '}
+										&nbsp;
 										{invoice.sales_email_count || 0}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											UTR Number:
-											{' '}
+											&nbsp;
 											{invoice?.sales_utr?.utr_number || ''}
 										</div>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											Status:
-											{' '}
+											&nbsp;
 											{invoice?.sales_utr?.status || ''}
 										</div>
 									</div>

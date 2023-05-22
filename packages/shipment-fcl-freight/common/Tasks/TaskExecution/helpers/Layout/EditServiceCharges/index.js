@@ -9,9 +9,7 @@ import styles from './styles.module.css';
 
 function EditServiceCharges(props) {
 	const { shipment_data = {}, primary_service = {} } = useContext(ShipmentDetailContext);
-	const {
-		controls, service_name = '', customValues = {},
-	} = props;
+	const { controls, service_name = '', customValues = {} } = props || {};
 
 	const [q, setQ] = useState('');
 
@@ -24,22 +22,12 @@ function EditServiceCharges(props) {
 	const options = (data?.list || [])
 		.filter((item) => item?.code?.includes(q) || item?.name?.includes(q) || (item?.code)?.includes(upperCase(q)))
 		.map((item) => ({
-			value : item.code,
+			value : item?.code,
 			label : (
-				<div
-					className={styles.label}
-				>
-					<div>
-						{item?.code}
-						&nbsp;
-						-
-						&nbsp;
-						{item?.name || ''}
-					</div>
+				<div className={styles.label}>
+					<div>{`${item?.code || ''} - ${item?.name || ''}`}</div>
 
-					<div>
-						{item?.sac_code}
-					</div>
+					<div>{item?.sac_code}</div>
 				</div>
 			),
 			...item,

@@ -3,10 +3,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentInvoiceStatus = ({
-	invoice = {},
 	refetch = () => {},
-	status = '',
-	changeApplicableState = false,
 	successMessage = 'Status updated successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -14,20 +11,12 @@ const useUpdateShipmentInvoiceStatus = ({
 		method : 'POST',
 	});
 
-	const updateInvoiceStatus = async () => {
+	const updateInvoiceStatus = async ({ payload, message = '' }) => {
 		try {
-			const res = await trigger({
-				data: {
-					id                : invoice?.id,
-					status,
-					liners_ex_applied : changeApplicableState ? false : undefined,
-				},
-			});
+			await trigger({ data: payload });
 
-			if (!res.hasError) {
-				Toast.success(successMessage);
-				refetch();
-			}
+			Toast.success(message || successMessage);
+			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}

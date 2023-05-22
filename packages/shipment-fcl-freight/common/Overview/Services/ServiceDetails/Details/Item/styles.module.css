@@ -3,7 +3,7 @@
 	font-size: 12px;
 	font-weight: 400;
 	line-height: 20px;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 	white-space: nowrap;
 }
 

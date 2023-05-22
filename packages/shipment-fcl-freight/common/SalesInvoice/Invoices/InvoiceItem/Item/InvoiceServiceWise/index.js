@@ -51,13 +51,13 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 			<div className={styles.totals}>
 				<div style={{ minWidth: '12%' }}>
 					Total Tax:
-					{' '}
+					&nbsp;
 					{format(tax_total_discounted, service_total_currency)}
 				</div>
 
 				<div className={styles.total_tax}>
 					Total w/o Tax:
-					{' '}
+					&nbsp;
 					{format(total_price_discounted, service_total_currency)}
 				</div>
 			</div>
