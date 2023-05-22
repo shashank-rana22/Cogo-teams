@@ -1505,6 +1505,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'list_saas_rail_domestic_freight_container_details',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
 		api          : 'get_maruti_tracking_details',
 		access_type  : 'private',
 		service_name : 'saas_traceability',

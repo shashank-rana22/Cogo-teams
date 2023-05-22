@@ -67,6 +67,9 @@ interface JobInterface {
 
 interface BillAdditionalObjectInterface {
 	collectionPartyId: string;
+	shipmentType?: string;
+	reasonForCN? : string;
+	outstandingDocument? : string;
 }
 export interface DataInterface {
 	job?: JobInterface;
