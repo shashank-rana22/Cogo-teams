@@ -1,17 +1,18 @@
 import { cl } from '@cogoport/components';
 
+import { ARROW_STEPPER } from '../../constant/stepperConstant';
+
 import styles from './styles.module.css';
 
 function ArrowStepper({
-	items,
-	stepperData,
+	stepperData = {},
 	setGlobalFilters,
 	globalFilters = {},
 }) {
 	const { customer_segment } = globalFilters || {};
 	return (
 		<div className={styles.stepper_container}>
-			{items.map((item) => (
+			{ARROW_STEPPER.map((item) => (
 				<div
 					key={item.key}
 					className={cl`${styles.container} ${customer_segment === item.key ? styles.active : ''}`}

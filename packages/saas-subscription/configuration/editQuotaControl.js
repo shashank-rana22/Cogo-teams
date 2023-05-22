@@ -17,10 +17,13 @@ const editQuotaControl = [
 		label       : 'Enter Quantity',
 		size        : 'sm',
 		type        : 'number',
-		min         : 10,
 		placeholder : 'Enter Quantity',
 		rules       : {
-			required: true,
+			required : true,
+			min      : {
+				value   : -1,
+				message : 'Should be greater than -1',
+			},
 		},
 	},
 	{
@@ -28,8 +31,8 @@ const editQuotaControl = [
 		label   : 'Is addon',
 		type    : 'radioGroup',
 		options : [
-			{ label: 'True', value: 'true' },
-			{ label: 'False', value: 'false' },
+			{ label: 'True', value: true },
+			{ label: 'False', value: false },
 		],
 		rules: {
 			required: true,

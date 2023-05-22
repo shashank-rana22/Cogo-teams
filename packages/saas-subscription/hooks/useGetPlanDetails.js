@@ -1,11 +1,11 @@
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect } from 'react';
 
 const useGetPlanDetails = () => {
 	const { query } = useRouter();
 	const { plan_id = '' } = query || {};
-	console.log(query, 'plan_id');
+
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_saas_plan_details',

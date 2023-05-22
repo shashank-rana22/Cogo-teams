@@ -34,7 +34,13 @@ function EditModal({ editModal, setEditModal }) {
 				{loading && (
 					<div className={styles.loader}>
 						<div className={styles.overlay} />
-						<Image className={styles.cogoloader} src={iconUrl.loading} alt="loading" />
+						<Image
+							width={100}
+							height={100}
+							className={styles.cogoloader}
+							src={iconUrl.loading}
+							alt="loading"
+						/>
 					</div>
 				)}
 
@@ -76,11 +82,11 @@ function EditModal({ editModal, setEditModal }) {
 				</div>
 
 				<div className={cl`${styles.flex_box} ${styles.details_container}`}>
-					{DETAILS_MAPPING.map((detail) => (
+					{Object.keys(DETAILS_MAPPING).map((detail) => (
 						<div key={detail} className={styles.details}>
-							<div className={styles.detail_title}>{detail.label}</div>
+							<div className={styles.detail_title}>{DETAILS_MAPPING[detail]}</div>
 							<div className={styles.detail_content}>
-								<GetDetailValue name={detail?.name} pricing={pricing} product_family={product_family} />
+								<GetDetailValue name={detail} pricing={pricing} product_family={product_family} />
 							</div>
 						</div>
 					))}

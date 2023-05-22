@@ -32,11 +32,7 @@ const planListConfig = [
 
 const getPlanDetailsConfig = ({ isPlanDetail = false }) => {
 	if (!isPlanDetail) return planListConfig;
-
-	const familyIndex = planListConfig.findIndex((ele) => ele.key === 'family');
-
-	if (familyIndex >= 0)planListConfig.splice(familyIndex, 1);
-	return planListConfig;
+	return planListConfig.filter((planList) => planList.key !== 'family');
 };
 
 export default planListConfig;
