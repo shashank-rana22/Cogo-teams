@@ -1,0 +1,20 @@
+{
+    "name": "@cogoport/ticket-management",
+    "version": "0.1.1",
+    "description": "Package for Ticket Management",
+    "private": true,
+    "main": "./index.js",
+    "dependencies": {
+      "@cogoport/components": "^1.0.359",
+      "@cogoport/constants": "workspace:^0.1.0",
+      "@cogoport/icons-react": "^1.0.68",
+      "@cogoport/next": "workspace:0.1.0",
+      "@cogoport/request": "workspace:0.1.0",
+      "@cogoport/store": "workspace:0.1.0",
+      "@cogoport/globalization": "workspace:^0.0.1",
+      "@cogoport/utils": "^1.2.6",
+      "react": "18.2.0",
+      "stylelint": "^14.16.1"
+    }
+  }
+  
