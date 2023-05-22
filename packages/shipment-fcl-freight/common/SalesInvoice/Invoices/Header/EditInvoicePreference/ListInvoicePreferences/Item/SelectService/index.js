@@ -12,8 +12,6 @@ import styles from './styles.module.css';
 
 const MAIN_SERVICES = [
 	'fcl_freight_service',
-	'lcl_freight_service',
-	'air_freight_service',
 ];
 
 function SelectService({
@@ -71,12 +69,12 @@ function SelectService({
 						</div>
 					) : null}
 
-					{invoiceAmount && (
+					{invoiceAmount ? (
 						<div>
 							<b>Invoice Amount: </b>
 							<span>{invoiceAmount}</span>
 						</div>
-					)}
+					) : null}
 				</div>
 			);
 
@@ -151,7 +149,7 @@ function SelectService({
 
 			<div className={styles.row}>
 				<Button
-					style={{ marginRight: 16 }}
+					className={styles.buttton_div}
 					size="sm"
 					themeType="tertiary"
 					onClick={onClose}

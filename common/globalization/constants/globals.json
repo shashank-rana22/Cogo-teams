@@ -8,6 +8,18 @@
 		"VN": "177fcbad-8ef7-4324-871c-6c31745f4411",
 		"GB": "222d4b9d-56a8-4580-b761-a71c653263fb"
 	},
+	"service_supported_countries": {
+		"navigation": {
+			"saas_cogo_insurance": {
+				"countries": ["IN"]
+			}
+		},
+		"feature_supported_service": {
+			"cargo_insurance": {
+				"countries": ["IN"]
+			}
+		}
+	},
 	"currency_code": {
 		"INR": "INR",
 		"USD": "USD",

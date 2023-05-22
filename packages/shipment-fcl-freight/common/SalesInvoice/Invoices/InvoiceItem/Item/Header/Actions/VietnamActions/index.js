@@ -5,18 +5,20 @@ import {
 	IcCError,
 	IcMEmail,
 } from '@cogoport/icons-react';
+import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';
-import AddRemarks from '../../AddRemarks';
-import ChangeCurrency from '../../ChangeCurrency';
-import OTPVerification from '../../OTPVerification';
-import ReviewServices from '../../ReviewServices';
-import AmendmentReasons from '../AmendmentReasons';
-import ChangePaymentMode from '../ChangePaymentMode';
-import SendInvoiceEmail from '../SendInvoiceEmail';
 import styles from '../styles.module.css';
+
+const AddRemarks = dynamic(() => import('../../AddRemarks'), { ssr: false });
+const ChangeCurrency = dynamic(() => import('../../ChangeCurrency'), { ssr: false });
+const OTPVerification = dynamic(() => import('../../OTPVerification'), { ssr: false });
+const ReviewServices = dynamic(() => import('../../ReviewServices'), { ssr: false });
+const AmendmentReasons = dynamic(() => import('../AmendmentReasons'), { ssr: false });
+const ChangePaymentMode = dynamic(() => import('../ChangePaymentMode'), { ssr: false });
+const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: false });
 
 function Actions({
 	invoice = {},
@@ -34,7 +36,7 @@ function Actions({
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setOTPModal] = useState(false);
-	const showForOldShipments =		shipment_data.serial_id <= 120347 && invoice.status === 'pending';
+	const showForOldShipments =	shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
 	let disableAction = showForOldShipments
 		? isIRNGenerated
@@ -49,7 +51,7 @@ function Actions({
 	const invoice_serial_id = invoice.serial_id.toString() || '';
 	const firstChar = invoice_serial_id[0];
 
-	const isInvoiceBefore20Aug2022 =		firstChar !== '1' || invoice_serial_id.length < 8;
+	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < 8;
 
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {
@@ -62,7 +64,7 @@ function Actions({
 		refetch();
 	};
 
-	const { updateInvoiceStatus, loading } = useUpdateInvoiceStatus({
+	const { updateInvoiceStatus = () => {}, loading } = useUpdateInvoiceStatus({
 		refetch: refetchAfterCall,
 	});
 
@@ -81,7 +83,7 @@ function Actions({
 		setShowChangePaymentMode(true);
 	};
 
-	const remarkRender = () => (
+	const remarkRender = (
 		<div className={styles.remark_container}>
 			<div className={styles.title}>Invoice Remarks</div>
 			<div className={styles.value}>{invoice.remarks}</div>
@@ -203,7 +205,6 @@ function Actions({
 				<div className={styles.actions_wrap}>
 					<div className={styles.email_wrapper}>
 						<IcMEmail
-							style={{ cursor: 'pointer' }}
 							onClick={() => setSendEmail(true)}
 						/>
 
@@ -212,7 +213,7 @@ function Actions({
 							placement="bottom"
 							theme="light"
 							content={(
-								<div style={{ fontSize: '10px', color: '#333333' }}>
+								<div className={styles.tooltip_child}>
 									<div className={styles.flex_row}>
 										Proforma email sent :
 										&nbsp;
@@ -239,7 +240,7 @@ function Actions({
 								</div>
 							)}
 						>
-							<div style={{ margin: '4px 0 0 10px', cursor: 'pointer' }}>
+							<div className={styles.info_icon}>
 								<IcMInfo />
 							</div>
 						</Tooltip>
@@ -264,7 +265,7 @@ function Actions({
 							</div>
 						</Popover>
 					) : (
-						<div style={{ width: '34px' }} />
+						<div className={styles.empty_div} />
 					)}
 
 					{!isEmpty(invoice.remarks) ? (
@@ -272,7 +273,7 @@ function Actions({
 							placement="bottom"
 							theme="light-border"
 							interactive
-							content={remarkRender()}
+							content={remarkRender}
 						>
 							<div className={styles.icon_more_wrapper}>
 								<IcMInfo fill="yellow" />

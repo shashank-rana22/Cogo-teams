@@ -5,19 +5,21 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function AmendmentReasons({ invoice = {} }) {
+	const { amendment_requested_by = {}, amendment_detail = {} } = invoice;
+
 	const date = formatDate({
-		date       : invoice?.amendment_requested_by?.date,
+		date       : amendment_requested_by?.date,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 		formatType : 'date',
 	});
 	const time = formatDate({
-		date       : invoice?.amendment_requested_by?.date,
+		date       : amendment_requested_by?.date,
 		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm aaa'],
 		formatType : 'time',
 	});
 
 	const details = [
-		{ label: 'Name', value: invoice?.amendment_requested_by?.name },
+		{ label: 'Name', value: amendment_requested_by?.name },
 		{ label: 'Date', value: date || '-' },
 		{ label: 'Time', value: time || '-' },
 	];
@@ -28,6 +30,7 @@ function AmendmentReasons({ invoice = {} }) {
 				{details.map((item) => (
 					<div key={item?.value} className={styles.container}>
 						<div className={styles.title}>{item?.label}</div>
+
 						<div className={styles.value}>{item?.value}</div>
 					</div>
 				))}
@@ -37,9 +40,9 @@ function AmendmentReasons({ invoice = {} }) {
 				<div className={styles.title}>Amendment Reason</div>
 
 				<div className={styles.value}>
-					{invoice?.amendment_detail?.amendment_reason}
+					{amendment_detail?.amendment_reason}
 					{' - '}
-					{invoice?.amendment_detail?.amendment_subreason}
+					{amendment_detail?.amendment_subreason}
 				</div>
 			</div>
 		</div>

@@ -5,18 +5,19 @@ import {
 	IcCError,
 	IcMEmail,
 } from '@cogoport/icons-react';
+import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import AddRemarks from '../AddRemarks';
-import ChangeCurrency from '../ChangeCurrency';
-import OTPVerification from '../OTPVerification';
-import ReviewServices from '../ReviewServices';
-
-import AmendmentReasons from './AmendmentReasons';
-import ChangePaymentMode from './ChangePaymentMode';
-import SendInvoiceEmail from './SendInvoiceEmail';
 import styles from './styles.module.css';
+
+const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
+const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
+const OTPVerification = dynamic(() => import('../OTPVerification'), { ssr: false });
+const ReviewServices = dynamic(() => import('../ReviewServices'), { ssr: false });
+const AmendmentReasons = dynamic(() => import('./AmendmentReasons'), { ssr: false });
+const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
+const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
 
 function Actions({
 	invoice = {},

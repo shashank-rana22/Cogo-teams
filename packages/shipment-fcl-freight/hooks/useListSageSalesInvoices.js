@@ -14,7 +14,7 @@ const useListSageSalesInvoices = () => {
 			url    : '/list_sage_invoices_v2',
 			method : 'GET',
 		},
-		{ autoCancel: false },
+		{ manual: true },
 	);
 
 	const listApi = useCallback(async () => {

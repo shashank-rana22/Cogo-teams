@@ -11,8 +11,6 @@ import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed
 
 const exportServiceTypes = [
 	'fcl_freight_service',
-	'lcl_freight_service',
-	'air_freight_service',
 ];
 
 const geo = getGeoConstants();
@@ -106,18 +104,18 @@ const useEditInvoicePref = ({
 		const newParty = {
 			id              : selectedParties.length,
 			billing_address : {
-				tax_number                  : ba.tax_number,
-				organization_trade_party_id : ba.organization_trade_party_id,
-				registration_number         : ba.registration_number,
-				poc                         : ba.poc,
-				pincode                     : ba.pincode,
-				organization_id             : ba.organization_id,
-				organization_country_id     : ba.organization_country_id,
-				name                        : ba.name,
-				is_sez                      : ba.is_sez,
+				tax_number                  : ba?.tax_number,
+				organization_trade_party_id : ba?.organization_trade_party_id,
+				registration_number         : ba?.registration_number,
+				poc                         : ba?.poc,
+				pincode                     : ba?.pincode,
+				organization_id             : ba?.organization_id,
+				organization_country_id     : ba?.organization_country_id,
+				name                        : ba?.name,
+				is_sez                      : ba?.is_sez,
 				tax_mechanism               : ba?.tax_mechanism,
-				business_name               : ba.business_name,
-				address                     : ba.address,
+				business_name               : ba?.business_name,
+				address                     : ba?.address,
 				trade_party_type            : ba?.trade_party_type,
 			},
 			invoice_currency : geo.country.currency.code,
@@ -170,10 +168,7 @@ const useEditInvoicePref = ({
 					);
 
 					let serviceType = currentService?.service_type;
-					if (
-						currentService?.service_type
-						&& currentService?.service_type === 'trailer_freight_service'
-					) {
+					if (currentService?.service_type === 'trailer_freight_service') {
 						serviceType = 'haulage_freight_service';
 					}
 					if (isEmpty(currentService?.service_type)) {

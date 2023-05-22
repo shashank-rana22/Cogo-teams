@@ -96,6 +96,10 @@
 .email_wrapper {
 	display: flex;
 	align-items: center;
+
+	svg{
+		cursor: pointer;
+	}
 }
 
 .flex_row {
@@ -142,4 +146,18 @@
 	font-size: 10px;
 	background-color: #fcedbf;
 	border-radius: 4px;
+}
+
+.info_icon{
+	margin: 4px 0 0 10px;
+	cursor: pointer;
+}
+
+.tooltip_child{
+	font-size: 10px;
+	color: #333333;
+}
+
+.empty_div{
+	width: 34px;
 }

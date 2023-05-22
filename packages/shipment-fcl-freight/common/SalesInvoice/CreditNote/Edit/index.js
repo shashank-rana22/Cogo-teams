@@ -13,8 +13,8 @@ import styles from './styles.module.css';
 
 function Edit({
 	setOpen = () => {},
-	CN_STATUS_MAPPING,
-	serial_id,
+	CN_STATUS_MAPPING = {},
+	serial_id = '',
 	prevData = {},
 	item = {},
 	cnRefetch = () => {},

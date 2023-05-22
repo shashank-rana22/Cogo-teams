@@ -9,10 +9,12 @@ const useSendInvoiceEmail = ({
 		method : 'POST',
 	}, { manual: true });
 
-	const handleSend = async (payload) => {
+	const handleSend = async ({ id }) => {
 		try {
 			await trigger({
-				data: payload,
+				data: {
+					id,
+				},
 			});
 			refetch();
 		} catch (err) {

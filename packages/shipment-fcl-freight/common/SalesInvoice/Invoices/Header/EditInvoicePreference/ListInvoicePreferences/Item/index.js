@@ -13,18 +13,16 @@ import styles from './styles.module.css';
 
 const MAIN_SERVICES = [
 	'fcl_freight_service',
-	'lcl_freight_service',
-	'air_freight_service',
 ];
 const ACTION_STATE = ['reviewed', 'approved', 'revoked'];
 
 function Item({
 	invoice = {},
 	shipmentData = {},
-	handleServiceChange,
-	openedService,
-	setOpenedService,
-	allTakenServices,
+	handleServiceChange = () => {},
+	openedService = null,
+	setOpenedService = () => {},
+	allTakenServices = [],
 }) {
 	const { shipment_type = '' } = shipmentData;
 	const {
@@ -57,12 +55,7 @@ function Item({
 			? service?.trade_type
 			: null;
 
-		let tradeType = '';
-		if (trade_type === 'export') {
-			tradeType = 'Origin';
-		} else if (trade_type === 'import') {
-			tradeType = 'Destination';
-		}
+		const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
 		const isBas = (service?.line_items || []).some(
 			(lineItem) => lineItem?.code === 'BAS',
 		);
@@ -102,7 +95,7 @@ function Item({
 				style={{ cursor: noActionState ? 'default' : '' }}
 				onClick={!noActionState ? () => handleServiceToggle() : null}
 			>
-				<div style={{ width: '100%' }}>
+				<div className={styles.info_div}>
 					<div className={styles.details}>
 						<div className={styles.details_child}>
 							<div className={styles.heading}>
@@ -142,12 +135,12 @@ function Item({
 						{invoice_currency}
 					</div>
 
-					{invoiceAmount && (
+					{invoiceAmount ? (
 						<div className={styles.overall_amount}>
 							Invoice Amount:
 							{invoiceAmount}
 						</div>
-					)}
+					) : null}
 					<div
 						className={styles.flex}
 						style={{ flexWrap: 'wrap' }}
