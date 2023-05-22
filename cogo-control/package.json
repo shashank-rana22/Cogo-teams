@@ -52,6 +52,7 @@
     "@cogoport/authority-desk" : "workspace:0.1.0",
     "@cogoport/last-mile-desk" : "workspace:0.1.0",
     "@cogoport/bl_do-collection-release" : "workspace:0.1.0",
+    "@cogoport/so2-surface": "workspace:0.1.0",
     "@cogoport/scope-select" : "workspace:0.1.0",
     "@cogoport/utils": "^1.2.6",
     "@cogoport/chakravyuh": "workspace:0.1.0",
@@ -64,8 +65,8 @@
     "react-redux": "^8.0.5",
     "typescript": "^4.9.5",
     "@cogoport/saas-tools":"workspace:0.1.0",
-    "@cogoport/saas-subscription":"workspace:0.1.0"
-
+    "@cogoport/saas-subscription":"workspace:0.1.0",
+    "@cogoport/referral": "workspace:0.1.0"
   },
   "browserslist": [
     "defaults"

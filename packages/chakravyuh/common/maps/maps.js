@@ -5,7 +5,7 @@ import { useState, useEffect } from 'react';
 const LAYER = [
 	{
 		name        : 'Cogo Maps',
-		url         : `${process.env.NEXT_PUBLIC_MAPS_BASE_URL}/cogo-tiles/{z}/{x}/{y}.png`,
+		url         : `${process.env.NEXT_PUBLIC_MAPS_BASE_URL}/{z}/{x}/{y}.png`,
 		attribution : '',
 	},
 ];
