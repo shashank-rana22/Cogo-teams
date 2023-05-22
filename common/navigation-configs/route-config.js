@@ -6,6 +6,7 @@ import blDoCollectionRelease from './config/bl_do-collection-release';
 import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
+import chakravyuh from './config/chakravyuh';
 import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
@@ -16,6 +17,7 @@ import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
 import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
+import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import myIncident from './config/my-incident';
@@ -56,11 +58,13 @@ const routeConfig = {
 	...lastMileDesk,
 	...welcome,
 	...athenaDashboard,
+	...kamDesk,
 	...airRepository,
 	...documentDesk,
 	...ingestion,
 	...blDoCollectionRelease,
 	...saasTools,
+	...chakravyuh,
 };
 
 export default routeConfig;

@@ -1489,6 +1489,26 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_shipment_fortigo_trip_locations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_fortigo_trip_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_fortigo_trip_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_saas_rail_domestic_freight_container_details',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
 ];
 
 export default apis;
