@@ -11,12 +11,14 @@ import Footer from '../Footer';
 
 import styles from './styles.module.css';
 
+const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent'];
+
 function Form({
-	upsellableService,
+	upsellableService = {},
 	servicesList,
-	shipmentData,
+	shipmentData = {},
 	primary_service,
-	closeModal,
+	closeModal = () => {},
 	haveToUpsell,
 	activeStakeholder = '',
 }) {
@@ -24,14 +26,13 @@ function Form({
 
 	const service = upsellableService.service_type.replace('_service', '');
 
-	const { handleShipmentsClick } = useShipmentBack();
+	const { handleShipmentsClick = () => {} } = useShipmentBack();
 
 	const [step, setStep] = useState(1);
 
 	const { consignee_shipper, importer_exporter, importer_exporter_id, consignee_shipper_id } = shipmentData;
 
-	const haveToAskOrgDetails = !['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder)
-	&& consignee_shipper_id;
+	const haveToAskOrgDetails = !KAM_AGENTS.includes(activeStakeholder) && consignee_shipper_id;
 
 	const organization_id = activeStakeholder === 'consignee_shipper_booking_agent'
 		? consignee_shipper_id
@@ -48,9 +49,9 @@ function Form({
 
 	const { errors, formValues } = formProps;
 
-	const formOrganizationId = formValues.organization_id;
+	const formOrganizationId = formValues?.organization_id;
 
-	const ORG_OPTIONS = [
+	const orgOptions = [
 		{
 			label : consignee_shipper?.business_name,
 			value : consignee_shipper_id,
@@ -60,6 +61,10 @@ function Form({
 			value : importer_exporter_id,
 		},
 	];
+
+	const getModifiedOptions = (option) => option?.options?.map(
+		(op) => ({ ...op, custom_key: { user_id: op.user_id, branch_id: op.branch.id } }),
+	);
 
 	return (
 		<Modal
@@ -82,23 +87,31 @@ function Form({
 						</div>
 					) : null}
 
-					{startCase(upsellableService.trade_type)}
+					{startCase(upsellableService?.trade_type)}
 					{' '}
 					{startCase(service)}
 				</div>
 			)}
 			/>
+
 			<Modal.Body>
 				{ controls?.length === 0 && step === 1
-					? <div> Are you sure you want to upsell this service?</div> : null }
-				{ controls?.length !== 0 && step === 1 ? <Layout controls={controls} formProps={formProps} /> : null}
+					? (
+						<>
+							<div> Are you sure you want to upsell this service?</div>
+
+							<Layout controls={controls} formProps={formProps} />
+						</>
+					)
+					: null }
 
 				{ step === 2 && haveToAskOrgDetails
 					? (
 						<>
 							<div> Choose The organisation for which you want to upsell- </div>
+
 							<RadioGroupController
-								options={ORG_OPTIONS}
+								options={orgOptions}
 								control={formProps.control}
 								name="organization_id"
 								rules={{ required: 'Organisation is required' }}
@@ -118,24 +131,23 @@ function Form({
 							initialCall={false}
 							placeholder="Select Organization User"
 							params={{
-								filters:
-								{
+								filters: {
 									organization_id : formOrganizationId,
 									status          : 'active',
 								},
 								page_limit: 30,
 							}}
-							getModifiedOptions={(option) => option?.options?.map(
-								(op) => ({ ...op, custom_key: { user_id: op.user_id, branch_id: op.branch.id } }),
-							)}
+							getModifiedOptions={getModifiedOptions}
 							rules={{ required: 'User is required' }}
 						/>
 					) : null
 }
 
-				{!isEmpty(errors?.user_id) ? <div className={styles.error}>{errors?.user_id?.message}</div> : null}
-
+				{!isEmpty(errors?.user_id)
+					? <div className={styles.error}>{errors?.user_id?.message}</div>
+					: null}
 			</Modal.Body>
+
 			<Modal.Footer>
 				<Footer
 					onClose={closeModal}
@@ -147,7 +159,7 @@ function Form({
 					step={step}
 					setStep={setStep}
 					organization_id={formOrganizationId}
-					user={formProps.formValues?.user_id}
+					user={formValues?.user_id}
 				/>
 			</Modal.Footer>
 		</Modal>
