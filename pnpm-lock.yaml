@@ -53,6 +53,7 @@ importers:
       '@cogoport/bn-salvage': workspace:0.1.0
       '@cogoport/booking-desk': workspace:0.1.0
       '@cogoport/business-finance': workspace:0.1.0
+      '@cogoport/chakravyuh': workspace:0.1.0
       '@cogoport/cogo-academy': workspace:0.1.0
       '@cogoport/cogo-one': workspace:0.1.1
       '@cogoport/cogo-verse-analytics': workspace:0.1.0
@@ -108,6 +109,7 @@ importers:
       '@cogoport/bn-salvage': link:../packages/bn-salvage
       '@cogoport/booking-desk': link:../packages/booking-desk
       '@cogoport/business-finance': link:../packages/business-finance
+      '@cogoport/chakravyuh': link:../packages/chakravyuh
       '@cogoport/cogo-academy': link:../packages/cogo-academy
       '@cogoport/cogo-one': link:../packages/cogo-one
       '@cogoport/cogo-verse-analytics': link:../packages/cogo-verse-analytics
@@ -152,6 +154,9 @@ importers:
       react-dom: 18.2.0_react@18.2.0
       react-redux: 8.0.5_zula6vjvt3wdocc4mwcxqa6nzi
       typescript: 4.9.5
+
+  common/constants:
+    specifiers: {}
 
   common/context:
     specifiers:
@@ -220,6 +225,18 @@ importers:
     dependencies:
       '@cogoport/icons-react': 1.0.73
       '@cogoport/utils': 1.2.6
+
+  common/map-components:
+    specifiers:
+      '@cogoport/icons-react': ^1.0.61
+      '@cogoport/maps': ^1.0.2
+      '@cogoport/utils': ^1.2.2
+      react: 18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.68_react@18.2.0
+      '@cogoport/maps': 1.0.3_y3d6pejfqbkazdfzmaewia2nra
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
 
   common/navigation-configs:
     specifiers:
@@ -462,6 +479,7 @@ importers:
       '@cogoport/navigation-configs': workspace:0.1.0
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
+      '@cogoport/scope-select': workspace:*
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
@@ -474,6 +492,7 @@ importers:
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
+      '@cogoport/scope-select': link:../../common/scope-select
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.6
       react: 18.2.0
@@ -656,6 +675,36 @@ importers:
     devDependencies:
       '@types/file-saver': 2.0.5
       '@types/react': 18.0.28
+
+  packages/chakravyuh:
+    specifiers:
+      '@cogoport/charts': ^1.0.1
+      '@cogoport/components': ^1.0.366
+      '@cogoport/constants': workspace:0.1.0
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.58
+      '@cogoport/map-components': workspace:0.0.1
+      '@cogoport/maps': ^1.0.2
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.6
+      react: 18.2.0
+      react-hook-form: ^7.43.3
+    dependencies:
+      '@cogoport/charts': 1.0.2_react@18.2.0
+      '@cogoport/components': 1.0.410_y3d6pejfqbkazdfzmaewia2nra
+      '@cogoport/constants': link:../../common/constants
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.68_react@18.2.0
+      '@cogoport/map-components': link:../../common/map-components
+      '@cogoport/maps': 1.0.3_y3d6pejfqbkazdfzmaewia2nra
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      react: 18.2.0
+      react-hook-form: 7.43.7_react@18.2.0
 
   packages/cogo-academy:
     specifiers:
@@ -3213,6 +3262,19 @@ packages:
       react-dom: ^18.2.0
     dependencies:
       '@cogoport/icons-react': 1.0.65_react@18.2.0
+      leaflet: 1.9.3
+      react: 18.2.0
+      react-leaflet: 4.2.1_leaflet@1.9.3+react@18.2.0
+    dev: false
+
+  /@cogoport/maps/1.0.3_y3d6pejfqbkazdfzmaewia2nra:
+    resolution: {integrity: sha512-nWNhGesbEQNqBGy1KO9O85eU04zcVaIVvuHXcq7CKa+pij74yU3BKB4PTBvoSrbLHAgIctxe8KOQVzBVgTLl/w==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.68_react@18.2.0
       leaflet: 1.9.3
       react: 18.2.0
       react-leaflet: 4.2.1_leaflet@1.9.3+react@18.2.0
@@ -6975,7 +7037,7 @@ packages:
   /d3-time-format/3.0.0:
     resolution: {integrity: sha512-UXJh6EKsHBTjopVqZBhFysQcoXSv/5yLONZvkQ5Kk3qbwiUYkdX17Xa1PT6U1ZWXGGfB1ey5L8dKMlFq2DO0Ag==}
     dependencies:
-      d3-time: 1.1.0
+      d3-time: 2.1.1
     dev: false
 
   /d3-time-format/4.1.0:
