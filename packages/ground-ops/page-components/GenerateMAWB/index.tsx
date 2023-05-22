@@ -97,7 +97,7 @@ function GenerateMAWB({
 
 	const [taskItem, setTaskItem] = useState({
 		...item,
-		...item.documentData,
+		...item?.documentData,
 	});
 
 	const category = item.blCategory;
