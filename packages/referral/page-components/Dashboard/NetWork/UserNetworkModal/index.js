@@ -4,6 +4,7 @@ import { startCase, format } from '@cogoport/utils';
 import React from 'react';
 
 import TooltipContent from '../../../../common/TooltipContent';
+import userProfile from '../../../../configurations/user-profile';
 import { USER_STATUS_COLOUR, USER_STATUS_MAPPING, USER_AVATAR } from '../../../../constants';
 import useGetReferrerNetworkNode from '../../../../hooks/useGetReferrerNetworkNode';
 
@@ -34,39 +35,24 @@ function UserNetworkModal({
 		created_at = '',
 		email = '',
 		mobile_number_eformat = '',
-		referral_cogopoint_earned = 0,
-		referral_cogopoint_estimated = 0,
-		network_cogopoint_earned = 0,
-		network_cogopoint_estimated = 0,
+		referral_cogopoint_earned: referralCogopointEarned = 0,
+		referral_cogopoint_estimated: referralCogopointEstimated = 0,
+		network_cogopoint_earned: networkCogopointEarned = 0,
+		network_cogopoint_estimated: networkCogopointEstimated = 0,
 		total_child_count = 0,
 		organization = [],
 	} = data?.data || {};
 
+	const { userReferralData, networkReferralData } = userProfile({
+		referralCogopointEarned,
+		referralCogopointEstimated,
+		networkCogopointEarned,
+		networkCogopointEstimated,
+	});
+
 	const lastUserId = id.slice(-6).toUpperCase();
 
 	const orgCount = organization.length - 1;
-
-	const userReferralData = [
-		{
-			label : 'Earned',
-			value : referral_cogopoint_earned,
-		},
-		{
-			label : 'Estimated',
-			value : referral_cogopoint_estimated,
-		},
-	];
-
-	const networkReferralData = [
-		{
-			label : 'Earned',
-			value : network_cogopoint_earned,
-		},
-		{
-			label : 'Estimated',
-			value : network_cogopoint_estimated,
-		},
-	];
 
 	return (
 

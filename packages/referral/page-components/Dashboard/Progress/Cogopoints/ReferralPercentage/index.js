@@ -7,9 +7,9 @@ function ReferralPercentage({ data = {} }) {
 		<div className={styles.container}>
 
 			{(data || []).map((type) => {
-				const { color = '', value = '' } = type || {};
+				const { color = '', value = '', id = '' } = type || {};
 				return (
-					<div className={styles.pair} key={type}>
+					<div className={styles.pair} key={id}>
 						<div className={styles.circle} style={{ background: `${color}` }} />
 						<div className={styles.name}>
 							{value}

@@ -11,7 +11,7 @@ function ReferralTypes() {
 			{(REFERRAL_TYPES || []).map((type) => {
 				const { color = '', name = '' } = type || {};
 				return (
-					<div className={styles.pair} key={type}>
+					<div className={styles.pair} key={name}>
 						<div className={styles.circle} style={{ background: `${color}` }} />
 						<div className={styles.name}>
 							{name}

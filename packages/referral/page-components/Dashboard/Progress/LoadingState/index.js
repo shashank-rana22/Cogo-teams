@@ -24,8 +24,8 @@ function LoadingState() {
 						{pieChart()}
 					</div>
 					<div className={styles.chart_status}>
-						{[...Array(6)].map((key) => (
-							<Placeholder className={styles.status} key={key} />
+						{[...Array(6)].map((itm) => (
+							<Placeholder className={styles.status} key={itm} />
 						))}
 
 					</div>
@@ -58,8 +58,8 @@ function LoadingState() {
 			<div className={styles.networks}>
 				<div className={styles.title}>NETWORKS</div>
 				<div className={styles.networks_chart}>
-					{[...Array(6)].map((key) => (
-						<Placeholder className={styles.networks_skeleton} key={key} />
+					{[...Array(6)].map((itm) => (
+						<Placeholder className={styles.networks_skeleton} key={itm} />
 					))}
 
 				</div>

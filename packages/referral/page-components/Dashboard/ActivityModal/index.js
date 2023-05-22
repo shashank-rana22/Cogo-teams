@@ -58,9 +58,12 @@ function ActivityModal({
 		return (
 			<>
 				{(list || []).map((item) => {
-					const { state = '', created_at = '', source = '', reward = 0, nominee_name = '' } = item || {};
+					const {
+						id = '',
+						state = '', created_at = '', source = '', reward = 0, nominee_name = '',
+					} = item || {};
 					return (
-						<>
+						<div key={id}>
 							<div className={styles.activity_date}>
 								<div className={styles.dot} />
 								<div className={styles.durations}>
@@ -102,7 +105,7 @@ function ActivityModal({
 									</div>
 								</div>
 							</div>
-						</>
+						</div>
 					);
 				})}
 			</>
@@ -113,8 +116,8 @@ function ActivityModal({
 		if (transactionsLoading) {
 			return (
 				<>
-					{[...Array(4)].map((key) => (
-						<LoadingState key={key} />
+					{[...Array(4)].map((itm) => (
+						<LoadingState key={itm} />
 					))}
 				</>
 			);

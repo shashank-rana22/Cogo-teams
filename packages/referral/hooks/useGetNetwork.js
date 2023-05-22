@@ -46,10 +46,10 @@ const useGetNetwork = ({ referrer_id = '' }) => {
 				const directChildData = addDirectChild(res?.data?.data);
 				setNetworkData(directChildData);
 			}
-			setNetWorkLoader(false);
 		} catch (error) {
-			setNetWorkLoader(false);
+			console.log(error);
 		}
+		setNetWorkLoader(false);
 	};
 
 	useEffect(() => {

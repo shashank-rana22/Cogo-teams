@@ -32,7 +32,7 @@ function StatusDetails({ userData = {} }) {
 	return (
 		<div className={styles.container}>
 			{(usersCount || []).map((item) => (
-				<div className={styles.stats} key={item}>
+				<div className={styles.stats} key={item.label}>
 					<div className={styles.circle} style={{ background: `${item?.color}` }} />
 					<div className={styles.count}>
 						{handleValues(item.value)}
