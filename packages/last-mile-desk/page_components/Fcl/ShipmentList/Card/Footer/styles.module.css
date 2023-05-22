@@ -1,0 +1,23 @@
+.container {
+    display: flex;
+    justify-content: space-between;
+    background: rgba(237, 55, 38, 0.1);
+    font-size: 12px;
+}
+
+.details {
+    display: flex;
+    justify-content: space-between;
+    width: 60%;
+    margin: 8px;
+}
+
+.text {
+    font-size: 12px;
+}
+
+.deadline {
+    display: flex;
+    justify-content: flex-end;
+    margin: 12px;
+}

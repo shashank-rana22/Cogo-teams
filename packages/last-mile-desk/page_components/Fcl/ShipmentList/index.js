@@ -25,7 +25,7 @@ function ShipmentList({ loading, data = {} }) {
 					<div>
 						<Pagination />
 
-						{(list || [])?.map((item) => <Card item={item} />)}
+						{(list || [])?.map((item) => <Card key={item?.id} item={item} />)}
 
 						<Pagination />
 					</div>

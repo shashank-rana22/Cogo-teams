@@ -1,0 +1,77 @@
+.container {
+    display: flex;
+    align-items: flex-start;
+}
+
+.left_nav_bar {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 15%;
+    background: #FDFBF6;;
+    border-radius: 6px;
+    margin: 12px;
+}
+
+.options {
+    padding: 8px;
+    color: #221F20
+}
+
+.active {
+    color: #EE3425;
+    padding: 8px;
+    font-weight: 600;
+}
+
+.body{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.heading {
+    font-weight: 600;
+    font-size: 16px;
+}
+
+.content {
+    display: flex;
+    align-items: center;
+    width: 100%;
+}
+
+.details {
+    display: flex;
+    align-items: center;
+    width: 50%;
+    color: #333333;
+    margin: 12px;
+}
+
+.booking_note {
+    display: flex;
+    align-items: center;
+    width: 40%;
+}
+
+.bn_number {
+    margin: 4px;
+    color: #F68B21;
+
+}
+
+.label {
+    color: #333333;
+    opacity: 0.7;
+}
+
+.bttn_wrap {
+    display: flex;
+    justify-content: flex-end;
+    width: 45%;
+}
+
+.shipment_timeline {
+    margin: 12px;
+}

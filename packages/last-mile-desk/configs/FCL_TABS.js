@@ -3,6 +3,8 @@ import { addDays } from '@cogoport/utils';
 const TODAY = new Date();
 
 const FCL_TABS = [
+	'confirmed_by_service_provider',
+	'container_gated_in',
 	'vessel_departed',
 	'vessel_arrived',
 	'container_gated_out',
