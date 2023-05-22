@@ -56,7 +56,7 @@ const commonControls = (handleChange, charge) => [
 	},
 ];
 
-const rawControls = (handleChange, charge) => ({
+const rawControls = (charge) => ({
 	type             : 'edit_service_charges',
 	name             : charge?.service_id,
 	service_name     : charge?.display_name || charge?.service_type,
@@ -86,7 +86,7 @@ const rawControls = (handleChange, charge) => ({
 				},
 			],
 			span: 1,
-		}, ...commonControls(handleChange, charge)],
+		}, ...commonControls(charge)],
 });
 
 const controls = [
@@ -103,19 +103,16 @@ const controls = [
 		name  : 'uploadDocument',
 		span  : 12,
 		type  : 'file',
+		multiple: true,
 		rules : { required: 'This field is required' },
 	},
 ];
 
 const creditNoteControls = ({
 	services = [],
-	handleChange = () => {},
-	setAllChargeCodes = () => {},
-	allChargeCodes = {},
 }) => {
 	const control = services?.map((service) => ({
-		...rawControls(handleChange, service),
-		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
+		...rawControls(service),
 		value           : service?.line_items?.map((item) => ({
 			is_checked       : item.is_checked,
 			code             : item.code,

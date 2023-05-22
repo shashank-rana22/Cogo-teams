@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import useCreateShipmentCreditNote from '../../../../../../../../hooks/useCreateShipmentCreditNote';
 import formatCreditNoteData from '../../../../../../CreditNote/helpers/format-credit-note-data';
@@ -16,20 +15,8 @@ const useCreateCreditNoteHelper = ({
 	setOpen = () => {},
 	refetchCN = () => {},
 }) => {
-	const [selectedCodes, setSelectedCodes] = useState({});
-	const [allChargeCodes, setAllChargeCodes] = useState({});
-
-	const handleChange = (obj) => {
-		if (!selectedCodes[obj.code]) {
-			setSelectedCodes({ ...selectedCodes, [obj.code]: obj });
-		}
-	};
-
 	const controls = creditNoteControls({
 		services,
-		handleChange,
-		setAllChargeCodes,
-		allChargeCodes,
 	});
 	const generateDefaultValues = ({ values }) => {
 		const defaultValues = {};

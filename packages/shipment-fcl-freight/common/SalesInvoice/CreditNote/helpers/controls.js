@@ -3,13 +3,12 @@ import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/conve
 
 import { handleServiceType } from './handleServiceType';
 
-const commonControls = (handleChange, charge) => [
+const commonControls = (charge) => [
 	{
 		label    : handleServiceType(charge),
 		type     : 'select',
 		name     : 'code',
 		span     : 3,
-		handleChange,
 		disabled : true,
 		rules    : { required: 'Required' },
 	},
@@ -56,7 +55,7 @@ const commonControls = (handleChange, charge) => [
 	},
 ];
 
-const rawControls = (handleChange, charge) => ({
+const rawControls = (charge) => ({
 	type             : 'edit_service_charges',
 	name             : charge?.service_id,
 	service_name     : charge?.display_name || charge?.service_type,
@@ -75,7 +74,7 @@ const rawControls = (handleChange, charge) => ({
 			total            : '',
 		},
 	],
-	controls: [...commonControls(handleChange, charge)],
+	controls: [...commonControls(charge)],
 });
 
 const controls = [
@@ -98,13 +97,9 @@ const controls = [
 
 const creditNoteControls = ({
 	services = [],
-	handleChange = () => {},
-	setAllChargeCodes = () => {},
-	allChargeCodes = {},
 }) => {
 	const control = services?.map((service) => ({
-		...rawControls(handleChange, service),
-		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
+		...rawControls(service),
 		value           : service?.line_items?.map((item) => ({
 			is_checked       : item?.is_checked,
 			code             : item?.code,
