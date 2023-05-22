@@ -11,6 +11,7 @@ const consolidated_invoices = {
 			service_name : 'harbour',
 		},
 	],
+
 	employee_portal: [
 		{
 			api          : 'get_employee_details',
