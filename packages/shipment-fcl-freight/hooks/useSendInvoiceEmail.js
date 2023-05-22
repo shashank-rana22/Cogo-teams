@@ -4,6 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const useSendInvoiceEmail = ({
 	refetch = () => {},
+	successMessage = 'Email Send Successfully',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/send_invoice_email',
@@ -17,7 +18,7 @@ const useSendInvoiceEmail = ({
 					id,
 				},
 			});
-			Toast.success('Email Send Successfully');
+			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
 			Toast.error(getApiError(err?.response?.data));
