@@ -35,7 +35,7 @@ function Dashboard() {
 			<div className={styles.title}>RFQ Dashboard</div>
 
 			<div className={styles.container}>
-				<Filters formProps={formProps} />
+				{/* <Filters formProps={formProps} /> */}
 
 				<Content
 					filterStore={filterStore}
