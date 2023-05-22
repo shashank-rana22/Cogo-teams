@@ -8806,6 +8806,30 @@ const partner = {
 			service_name : 'shipment',
 		},
 	],
+	so2_surface: [
+		{
+			api          : 'bulk_update_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+
+		{
+			api          : 'list_surface_so2_dashboard_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+	],
 
 	campaigns: [
 		{
