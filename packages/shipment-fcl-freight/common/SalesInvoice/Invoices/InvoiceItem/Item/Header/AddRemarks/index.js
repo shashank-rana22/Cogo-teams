@@ -18,6 +18,7 @@ function AddRemarks({
 		setRemarkValue(invoice?.remarks);
 		setShowAddRemarks(false);
 	};
+
 	const payload = {
 		id      : invoice?.id,
 		remarks : remarkValue,
@@ -27,6 +28,7 @@ function AddRemarks({
 		onClose();
 		refetch();
 	};
+
 	const { onSubmitRemarks = () => {}, loading } = useUpdateInvoiceRemarks({
 		refetch: refetchAfterCall,
 	});
@@ -34,6 +36,7 @@ function AddRemarks({
 	return (
 		<Modal onClose={onClose} show={showAddRemarks} width={600}>
 			<Modal.Header title="Invoice Remarks" />
+
 			<Modal.Body>
 				<Textarea
 					value={remarkValue}
@@ -44,6 +47,7 @@ function AddRemarks({
 					className={styles.text_area}
 				/>
 			</Modal.Body>
+
 			<Modal.Footer>
 				<Button
 					themeType="tertiary"
@@ -52,6 +56,7 @@ function AddRemarks({
 				>
 					Cancel
 				</Button>
+
 				<Button
 					className="primary md"
 					onClick={() => onSubmitRemarks(payload)}
