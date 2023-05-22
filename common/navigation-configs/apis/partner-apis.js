@@ -11756,6 +11756,11 @@ const partner = {
 	],
 	cogo_one: [
 		{
+			api          : 'create_agent_feedback',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
 			api          : 'list_checkouts',
 			access_type  : 'private',
 			service_name : 'checkout',
