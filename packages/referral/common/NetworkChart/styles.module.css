@@ -1,0 +1,32 @@
+.full_tree_wrapper {
+	position: relative;
+	height: 85vh;
+}
+
+.button_container {
+	position: absolute;
+	bottom: 0;
+	left: 40px;
+	box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+}
+
+.zoom_buttons {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+	padding: 5px 10px;
+	font-size: 20px;
+	cursor: pointer;
+	background-color: #fff;
+	border: solid 1px #e7e7e7;
+}
+
+.restore {
+	width: 15px;
+	height: 25px;
+}
+
+.custom_link {
+	stroke: #abcd62 !important;
+}

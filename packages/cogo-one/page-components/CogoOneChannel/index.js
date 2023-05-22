@@ -22,7 +22,9 @@ import Conversations from './Conversations';
 import Customers from './Customers';
 import DialCallModal from './DialCallModal';
 import EmptyChatPage from './EmptyChatPage';
+import FeedbackModal from './FeedbackModal';
 import ProfileDetails from './ProfileDetails';
+import ReminderModal from './ReminderModal';
 import styles from './styles.module.css';
 
 function CogoOne() {
@@ -53,6 +55,7 @@ function CogoOne() {
 	});
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [agentDetails, setAgentDetails] = useState(false);
+	const [showFeedback, setShowFeedback] = useState(false);
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 
@@ -111,12 +114,14 @@ function CogoOne() {
 		updateLeaduser,
 		handleScroll,
 		activeRoomLoading,
+		getAssignedChats,
 	} = useListChats({
 		firestore,
 		userId,
 		isomniChannelAdmin,
 		showBotMessages,
 		searchValue,
+		setShowFeedback,
 	});
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
@@ -272,6 +277,14 @@ function CogoOne() {
 					setAgentDetails={setAgentDetails}
 				/>
 			)}
+			{
+				showFeedback && (
+					<FeedbackModal
+						showFeedback={showFeedback}
+						setShowFeedback={setShowFeedback}
+					/>
+				)
+			}
 			{raiseTicketModal?.state && (
 				<RaiseTicket
 					setRaiseTicketModal={setRaiseTicketModal}
@@ -279,6 +292,7 @@ function CogoOne() {
 					refetchTickets={refetchTickets}
 				/>
 			)}
+			<ReminderModal firestore={firestore} agentId={userId} getAssignedChats={getAssignedChats} />
 		</>
 	);
 }
