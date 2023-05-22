@@ -1,0 +1,15 @@
+.pdf{
+    margin-right: 7px;
+	background: #f9f9f9;
+	border: 1px solid #bdbdbd;
+	box-sizing: border-box;
+	border-radius: 8px;
+	width:fit-content;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+    position: relative;
+	overflow: hidden;
+
+}
+

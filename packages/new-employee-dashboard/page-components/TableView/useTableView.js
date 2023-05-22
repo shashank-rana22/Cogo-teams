@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 import getColumns from './getColumns';
 
-const useTableView = () => {
+const useTableView = ({ search }) => {
 	const router = useRouter();
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
@@ -16,18 +16,22 @@ const useTableView = () => {
 		async () => {
 			try {
 				await trigger({
-					params: {},
+					params: {
+						filters: {
+							q: search,
+						},
+					},
 				});
 			} catch (error) {
 				console.log('error :: ', error);
 			}
 		},
-		[trigger],
+		[search, trigger],
 	);
 
 	useEffect(() => {
 		fetch();
-	}, [fetch]);
+	}, [fetch, search]);
 
 	const onClickNewJoinerColumn = (id) => {
 		router.push(`/new-employee-dashboard/${id}`, `/new-employee-dashboard/${id}`);

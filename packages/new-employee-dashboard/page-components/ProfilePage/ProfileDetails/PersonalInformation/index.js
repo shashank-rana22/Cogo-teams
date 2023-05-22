@@ -1,16 +1,13 @@
 import styles from './styles.module.css';
 
-function PersonalInformation({ profileData }) {
-	console.log('data......', profileData);
-
+function PersonalInformation({ detail }) {
 	const {
 		name,
 		gender,
 		personal_email,
 		mobile_country_code,
-		passport_size_photo_url,
 		mobile_number,
-	} = profileData?.[0] || {};
+	} = detail || {};
 
 	return (
 		<div className={styles.container}>

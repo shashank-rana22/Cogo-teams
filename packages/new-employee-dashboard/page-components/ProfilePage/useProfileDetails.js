@@ -5,18 +5,14 @@ const useProfileDetails = () => {
 
 	const [{ loading, data }] = useHarbourRequest({
 		method : 'GET',
-		url    : '/list_employee_details',
+		url    : '/get_employee_details',
 		params : {
-			filters: {
-				id,
-			},
+			id,
 			document_data_required: true,
 		},
 	}, { manual: false });
 
-	const { list } = data || {};
-
-	return { data: list, loading };
+	return { data, loading };
 };
 
 export default useProfileDetails;
