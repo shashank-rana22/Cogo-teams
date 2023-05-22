@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 
 function useCreateEmployeeBankDetails() {
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/create_employee_bank_details',
 		method : 'POST',
 	}, { manual: true });
@@ -15,8 +15,9 @@ function useCreateEmployeeBankDetails() {
 					ifsc_code           : data?.ifsc_code,
 					account_holder_name : data?.account_holder_name,
 					bank_name           : data?.bank_name,
-					branch_name         : data?.branch_name,
-					bank_account_number : data?.bank_account_number,
+					bank_branch_name    : data?.branch_name,
+					account_number      : data?.bank_account_number,
+					cancelled_check_url : data?.cancelled_check_url,
 				},
 			});
 		} catch (err) {

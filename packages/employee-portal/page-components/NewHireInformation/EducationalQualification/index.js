@@ -9,6 +9,10 @@ import styles from './styles.module.css';
 function EducationalQualification() {
 	const { handleSubmit, control } = useForm();
 
+	const onSubmit = (values) => {
+		console.log('values :: ', values);
+	};
+
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.container}>
@@ -41,7 +45,7 @@ function EducationalQualification() {
 				type="button"
 				className={styles.button}
 				onClick={
-						handleSubmit()
+						handleSubmit(onSubmit)
 					}
 			>
 				Save

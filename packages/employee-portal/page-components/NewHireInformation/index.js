@@ -1,6 +1,6 @@
 import { Accordion } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React from 'react';
 
 import BankDetails from './BankDetails';
 import EducationalQualification from './EducationalQualification';
@@ -10,16 +10,16 @@ import PersonalInformation from './PersonalInformation';
 import Resume from './Resume';
 import styles from './styles.module.css';
 
-const data = [{ title: 'PERSONAL INFORMATION', content: PersonalInformation },
+const data = [
+	{ title: 'PERSONAL INFORMATION', content: PersonalInformation },
 	{ title: 'EDUCATIONAL QUALIFICATION', content: EducationalQualification },
 	{ title: 'EMPLOYMENT HISTORY', content: EmploymentHistory },
 	{ title: 'IDENTIFICATION DOCUMENTS', content: IdentificationDocuments },
 	{ title: 'RESUME', content: Resume },
-	{ title: 'BANK DETAILS', content: BankDetails }];
+	{ title: 'BANK DETAILS', content: BankDetails },
+];
 
 function NewHireInformation({ setInformationPage }) {
-	const [moreDetails, setMoreDetails] = useState(false);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -41,8 +41,7 @@ function NewHireInformation({ setInformationPage }) {
 						<div
 							key={item.title}
 							role="presentation"
-							onClick={() => setMoreDetails((prev) => !prev)}
-							className={moreDetails ? styles.accordion : styles.accordion_close}
+							className={styles.accordion}
 						>
 							<Accordion
 								type="text"
