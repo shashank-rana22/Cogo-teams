@@ -286,3 +286,5 @@ export const ICON_MAPPING = {
 	outgoing : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
 	missed   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
 };
+
+export const STRING_TO_ARRAY_REGEX = /'/g;
