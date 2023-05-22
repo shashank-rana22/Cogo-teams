@@ -47,6 +47,7 @@ function NewHireInformation({ setInformationPage }) {
 							<Accordion
 								type="text"
 								title={item.title}
+								style={{ maxHeight: '60vh' }}
 							>
 								<Component />
 							</Accordion>

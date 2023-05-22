@@ -1,42 +1,41 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import getElementController from '../../../configs/getElementController';
+import FieldArray from '../../../commons/FieldArray';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
 function EducationalQualification() {
-	const { handleSubmit, control, formState: { errors } } = useForm();
+	const { handleSubmit, control } = useForm();
 
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.container}>
 				{controls?.map((controlItem) => {
-					const { type, label, name: controlName } = controlItem || {};
-					const Element = getElementController(type);
+					const { type, name: controlName } = controlItem || {};
 
+					if (type === 'fieldArray') {
+						return (
+							<FieldArray
+								Array
+								name="education_qualifications"
+								control={control}
+								controls={controlItem?.controls}
+								key={controlName}
+
+							/>
+
+						);
+					}
 					return (
-						<div key={controlName} className={styles.control_container}>
-							<div className={styles.label}>
-								{label}
-								<sup className={styles.sup}>*</sup>
-							</div>
-
-							<div className={styles.control}>
-								<Element
-									control={control}
-									{...controlItem}
-									className={styles[`element_${controlName}`]}
-								/>
-
-								{errors[controlName]?.message
-									? <div className={styles.error_msg}>{errors[controlName]?.message}</div> : null}
-							</div>
+						<div key={controlItem}>
+							EducationalQualification
 						</div>
 					);
 				})}
 			</div>
+
 			<Button
 				size="md"
 				type="button"

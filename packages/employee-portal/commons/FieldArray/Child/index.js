@@ -1,23 +1,20 @@
-import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { IcMDelete } from '@cogoport/icons-react';
+import React from 'react';
 
 import getElementController from '../../../configs/getElementController';
-import useGetEmployeeDetails from '../../../hooks/useGetEmployeeDetails';
 
-import controls from './controls';
 import styles from './styles.module.css';
 
-const removeTypeField = (controlItem) => {
-	const { type, ...rest } = controlItem;
-	return rest;
-};
+function Child(props) {
+	const { formState: { errors } } = useForm();
 
-function PersonalInformation() {
-	const { getEmployeesDetails, data } = useGetEmployeeDetails();
-
-	const { handleSubmit, control, formState: { errors } } = useForm();
+	const {
+		controls, control, index, remove = () => {},
+	} = props;
 
 	return (
+
 		<div className={styles.whole_container}>
 			<div className={styles.container}>
 				{controls?.map((controlItem) => {
@@ -33,10 +30,8 @@ function PersonalInformation() {
 
 							<div className={styles.control}>
 								<Element
-									{...(type === 'fileUpload'
-										? removeTypeField(controlItem) : { ...controlItem })}
 									control={control}
-									key={controlName}
+									{...controlItem}
 									className={styles[`element_${controlName}`]}
 								/>
 
@@ -47,18 +42,16 @@ function PersonalInformation() {
 					);
 				})}
 			</div>
-			<Button
-				size="md"
-				type="button"
-				className={styles.button}
-				onClick={
-						handleSubmit()
-					}
-			>
-				Save
-			</Button>
+
+			<IcMDelete
+				className={styles.remove}
+				onClick={() => remove(index, 1)}
+				style={{ cursor: 'pointer' }}
+			/>
+
 		</div>
+
 	);
 }
 
-export default PersonalInformation;
+export default Child;

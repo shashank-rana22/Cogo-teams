@@ -1,72 +1,48 @@
-const controls = [
-	{
-		name        : 'first_name',
-		label       : 'First Name',
-		type        : 'input',
-		placeholder : 'First Name',
-		rules       : { required: 'This is required' },
-	},
-	{
-		name        : 'middle_name',
-		label       : 'Middle Name',
-		type        : 'input',
-		placeholder : 'Middle Name',
-	},
-	{
-		name        : 'last_name',
-		label       : 'Last Name',
-		type        : 'input',
-		placeholder : 'Last Name',
-		rules       : { required: 'This is required' },
-	},
-	{
-		name        : 'dob',
-		label       : 'Date of Birth',
-		type        : 'date-select',
-		placeholder : 'DD/MM/YYYY',
-		rules       : { required: 'This is required' },
-	},
-	{
-		name        : 'gender',
-		label       : 'Gender',
-		type        : 'select',
-		placeholder : 'Select Gender',
-		rules       : { required: 'This is required' },
-	},
-	{
-		name        : 'phone_number',
-		label       : 'Phone Number',
-		type        : 'phonenumber',
-		placeholder : 'Mobile',
-		rules       : { required: 'This is required' },
-	},
-	{
-		name        : 'personal_email',
-		label       : 'Personal Email Id',
-		type        : 'email',
-		placeholder : 'Email',
-		rules       : { required: 'This is required' },
-	},
-	{
-		name  : 'photo',
-		label : 'Passport Size Photograph',
-		type  : 'fileUpload',
-		rules : { required: 'This is required' },
-	},
-	{
-		name        : 'emergency_num',
-		label       : 'Emergency Contact Number',
-		type        : 'number',
-		placeholder : 'Emergency Contact Number',
-		rules       : { required: 'This is required' },
-	},
-	{
-		name        : 'address',
-		label       : 'Address',
-		type        : 'input',
-		placeholder : 'Address',
-		rules       : { required: 'This is required' },
-	},
-];
+const getControls = [{
+	name     : 'employment_history',
+	type     : 'fieldArray',
+	controls : [
+		{
+			name        : 'company_name',
+			label       : 'Company Name',
+			type        : 'input',
+			placeholder : 'Company Name',
+			rules       : { required: 'This is required' },
+		},
+		{
+			name        : 'description',
+			label       : 'Description',
+			type        : 'textarea',
+			placeholder : 'Description',
+		},
+		{
+			name        : 'started_at',
+			label       : 'Start Date',
+			type        : 'date-select',
+			placeholder : 'DD/MM/YYYY',
+			rules       : { required: 'This is required' },
+			style       : {
+				width: '70%',
+			},
+		},
+		{
+			name        : 'ended_at',
+			label       : 'End Date',
+			type        : 'date-select',
+			placeholder : 'DD/MM/YYYY',
+			rules       : { required: 'This is required' },
+			style       : {
+				width: '70%',
+			},
+		},
+		{
+			name        : 'skills',
+			label       : 'Skills',
+			type        : 'createmultiselect',
+			placeholder : 'Skills',
+			rules       : { required: 'This is required' },
+		},
+	],
+}];
 
-export default controls;
+export default getControls;
