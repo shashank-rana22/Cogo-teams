@@ -64,7 +64,8 @@
     "react-dom": "18.2.0",
     "react-redux": "^8.0.5",
     "typescript": "^4.9.5",
-    "@cogoport/saas-tools":"workspace:0.1.0"
+    "@cogoport/saas-tools":"workspace:0.1.0",
+    "@cogoport/referral": "workspace:0.1.0"
   },
   "browserslist": [
     "defaults"

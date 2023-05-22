@@ -53,6 +53,7 @@ import {
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
 	IcMFaq,
+	IcMRolesIncluded,
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
@@ -2251,6 +2252,24 @@ const navigationMappingAdmin = {
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
+	},
+	referral: {
+		key         : 'referral',
+		title       : 'Referral',
+		isSubNavs   : true,
+		icon        : IcMRolesIncluded,
+		module_type : 'dashboards',
+		main_apis   : [],
+		options     : [
+			{
+				key           : 'referral-dashboard',
+				title         : 'Dashboard',
+				href          : '/v2/referral/dashboard',
+				as            : '/v2/referral/dashboard',
+				type          : 'link',
+				possible_apis : apis.referral_dashboard,
+			},
+		],
 	},
 	chakravyuh: {
 		key         : 'chakravyuh',

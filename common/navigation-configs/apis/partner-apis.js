@@ -12207,6 +12207,39 @@ const partner = {
 			service_name : 'tickets',
 		},
 	],
+
+	referral_dashboard: [
+		{
+			api          : 'get_referrer_network_node',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referrer_network',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_invites',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_admin_stats',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_mappings',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_transactions',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
 	air_repository: [
 		{
 			api          : 'list_shipment_service_ops_repository',
