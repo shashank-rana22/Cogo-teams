@@ -17,6 +17,7 @@ const useSendInvoiceEmail = ({
 					id,
 				},
 			});
+			Toast.success('Email Send Successfully');
 			refetch();
 		} catch (err) {
 			Toast.error(getApiError(err?.response?.data));
