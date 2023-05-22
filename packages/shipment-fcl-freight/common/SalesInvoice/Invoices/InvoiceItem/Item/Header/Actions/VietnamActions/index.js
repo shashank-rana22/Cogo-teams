@@ -108,7 +108,7 @@ function Actions({
 	const approveButton = () => (
 		invoice?.status === 'reviewed'
 						&& bfInvoice?.systemGeneratedProforma
-						&& bfInvoice?.proformaPdfUrl && (
+						&& bfInvoice?.proformaPdfUrl ? (
 							<div className={styles.review_invoice}>
 								<Button
 									size="sm"
@@ -118,7 +118,7 @@ function Actions({
 									Approve
 								</Button>
 							</div>
-		)
+			) : null
 	);
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
