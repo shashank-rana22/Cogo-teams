@@ -53,7 +53,10 @@ function Ocean() {
 			<Tabs
 				activeTab={tabsState.activeTab}
 				themeType="primary"
-				onChange={(val) => setTabsState({ ...tabsState, activeTab: val })}
+				onChange={(val) => {
+					setTabsState({ ...tabsState, activeTab: val });
+					setFilters({ ...filters, page: 1 });
+				}}
 				className={styles.tab_panel}
 				fullWidth
 			>
@@ -72,8 +75,13 @@ function Ocean() {
 				<div className={styles.service_tabs}>
 					{Object.keys(services).map((item) => (
 						<ClickableDiv
-							onClick={() => setTabsState({ ...tabsState, service: item })}
-							className={cl`${tabsState.service === item ? styles.active : ''} ${styles.service_tab}`}
+							key={item}
+							onClick={() => {
+								setTabsState({ ...tabsState, service: item });
+								setFilters({ ...filters, page: 1 });
+							}}
+							className={cl`${tabsState.service === item ? styles.active : ''}
+							${styles.service_tab}`}
 						>
 							{services[item]}
 						</ClickableDiv>
@@ -99,15 +107,19 @@ function Ocean() {
 				<div className={styles.buckets}>
 					{buckets.map((item) => (
 
-						loading ? <Placeholder className={styles.loader} /> : 	(
+						loading ? <Placeholder key={item} className={styles.loader} /> : 	(
 							<ClickableDiv
+								key={item}
 								className={cl`${tabsState.bucket === item?.name ? styles.active : ''} 
 								${styles.bucket} `}
-								onClick={() => setTabsState({
-									...tabsState,
-									bucket            : item?.name,
-									subApprovedBucket : item?.name === 'approved' ? 'approved' : '',
-								})}
+								onClick={() => {
+									setTabsState({
+										...tabsState,
+										bucket            : item?.name,
+										subApprovedBucket : item?.name === 'approved' ? 'approved' : '',
+									});
+									setFilters({ ...filters, page: 1 });
+								}}
 							>
 								{item.title}
 								{' '}

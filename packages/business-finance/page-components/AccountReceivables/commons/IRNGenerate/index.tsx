@@ -9,6 +9,7 @@ import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
 import useGetRefresh from '../../hooks/useGetRefresh';
 import useUploadeInvoice from '../../hooks/useUploadInvoice';
 
+import FinalPostModal from './FinalPostModal';
 import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
 
@@ -17,6 +18,7 @@ type Itemdata = {
 	invoiceStatus?: string
 	entityCode?: number
 	daysLeftForAutoIrnGeneration?: string
+	isFinalPosted?:boolean
 };
 interface IRNGeneration {
 	itemData?: Itemdata
@@ -36,7 +38,12 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const [uploadInvoice, setUploadInvoice] = useState(false);
 	const [openReject, setOpenReject] = useState(false);
 	const [textValue, setTextValue] = useState('');
-	const { invoiceStatus = '', entityCode = '' } = itemData || {};
+
+	const [finalPostToSageModal, setFinalPostToSageModal] = useState(false);
+
+	const [visible, setVisible] = useState(false);
+
+	const { invoiceStatus = '', entityCode = '', isFinalPosted = false } = itemData || {};
 
 	const { partner = {} } = profile;
 
@@ -50,7 +57,10 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		refetch,
 	});
 
-	const { generateIrn, loading, finalPostFromSage, finalPostLoading } = useGetIrnGeneration({
+	const {
+		generateIrn, loading, finalPostFromSage, finalPostLoading, getSageInvoiceData, sageInvoiceData,
+		sageInvoiceLoading,
+	} = useGetIrnGeneration({
 		id,
 		refetch,
 	});
@@ -76,6 +86,12 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const { labels } = CogoportEntity[entityCode] || {};
 
 	const { irn_label: IrnLabel } = labels || {};
+
+	const handleFinalpost = () => {
+		setFinalPostToSageModal(true);
+		getSageInvoiceData();
+		setVisible(!visible);
+	};
 
 	const content = () => (
 		<div>
@@ -119,9 +135,11 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							<Button
 								size="sm"
 								disabled={finalPostLoading}
-								onClick={() => finalPostFromSage()}
+								onClick={() => handleFinalpost()}
 							>
-								<div className={styles.button_style}>Final Post</div>
+								<div className={styles.button_style}>
+									{isFinalPosted ? 'Information' : 'Final Post'}
+								</div>
 							</Button>
 						</div>
 					)}
@@ -193,21 +211,38 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						</div>
 					)}
 
+					<FinalPostModal
+						finalPostToSageModal={finalPostToSageModal}
+						setFinalPostToSageModal={setFinalPostToSageModal}
+						finalPostFromSage={finalPostFromSage}
+						sageInvoiceData={sageInvoiceData}
+						sageInvoiceLoading={sageInvoiceLoading}
+						finalPostLoading={finalPostLoading}
+						isFinalPosted={isFinalPosted}
+					/>
+
 				</div>
 			)}
 		</div>
 	);
 
+	const rest = {
+		onClickOutside: () => setVisible(false),
+	};
+
 	return (
 		<Popover
 			placement="left"
 			render={content()}
+			visible={visible}
+			{...rest}
 		>
 
 			<IcMOverflowDot
 				style={{ cursor: 'pointer' }}
 				width="16px"
 				height="16px"
+				onClick={() => setVisible(!visible)}
 			/>
 
 		</Popover>

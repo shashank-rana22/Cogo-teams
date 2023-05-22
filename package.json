@@ -14,7 +14,7 @@
   "scripts": {
     "deploy": "pnpm run prod:build && (cd cogo-control && pm2 start pm2.config.js)",
     "prod:build": "pnpm run pre-build && pnpm run build",
-    "build": "NODE_ENV=production turbo run build",
+    "build": "NODE_ENV=production NODE_OPTIONS=\"--max-old-space-size=6144\" turbo run build",
     "pre-build": "NODE_ENV=production node scripts/build-pages && node scripts/pre-build",
     "dev": "node scripts/build-pages && node scripts/pre-build && turbo run dev",
     "start": "turbo run start",
