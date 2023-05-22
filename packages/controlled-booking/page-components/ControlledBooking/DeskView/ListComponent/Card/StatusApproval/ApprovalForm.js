@@ -69,13 +69,18 @@ function ApprovalForm({ errors, control, formValues }) {
 				name="booking_placed_on"
 				type="chips"
 				options={[
-					{ value: 'ff', label: 'FF' },
+					{ value: 'ff', label: 'Freight Forwarder' },
 					{ value: 'nvocc', label: 'NVOCC' },
-					{ value: 'sl', label: 'SL' },
+					{ value: 'sl', label: 'Shipping Line' },
 				]}
 				rules={{ required: 'Required' }}
 				multiple={false}
 			/>
+			{formValues?.booking_placed_on === 'nvocc' ? (
+				<div style={{ fontSize: 10, marginTop: 4 }}>
+					*NVOCC: non-vessel operating common carrier
+				</div>
+			) : null}
 			{errors?.booking_placed_on
 				? <div className={styles.error_message}>{errors?.booking_placed_on?.message}</div> : null}
 

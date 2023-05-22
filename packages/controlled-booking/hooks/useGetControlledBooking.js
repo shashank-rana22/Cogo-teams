@@ -38,6 +38,8 @@ const useGetControlledBooking = () => {
 		listControlledBooking();
 	}, [listControlledBooking, filters]);
 
+	console.log('data', data);
+
 	return {
 		data,
 		loading,

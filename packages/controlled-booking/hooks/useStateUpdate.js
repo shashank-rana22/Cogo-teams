@@ -10,14 +10,14 @@ const getPayload = ({ state, formValues }) => {
 			explanation_checks : formValues?.rejection_category,
 		};
 	}
+
 	if (state === 'approved') {
 		return {
 			booking_status       : 'approved',
-			// explanation          : formValues?.rejection_reason,
 			explanation_checks   : [formValues?.booking_placed_on],
 			advance_payment_info : {
 				is_required     : formValues?.advance_payment === 'required',
-				amount          : formValues?.advance_payment === 'required' ? formValues?.amount : undefined,
+				amount          : formValues?.advance_payment === 'required' ? Number(formValues?.amount) : undefined,
 				amount_currency : formValues?.advance_payment === 'required' ? formValues?.amount_currency : undefined,
 			},
 		};

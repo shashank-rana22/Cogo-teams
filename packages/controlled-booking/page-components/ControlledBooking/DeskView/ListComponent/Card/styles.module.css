@@ -6,16 +6,18 @@
 .card {
 	display: flex;
 	flex-direction: column;
-	gap: 12px;
+	gap: 4px;
 	padding: 16px;
 	margin: 8px;
 	background-color: #ffff;
+	position: relative;
 }
 
 .header {
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
+	
 }
 
 .heading {
@@ -27,6 +29,8 @@
 	font-weight: 600;
 	line-height: 24px;
 	color: #000;
+	
+	
 }
 
 .trade {
@@ -109,6 +113,7 @@
 
 .business_name {
 	display: flex;
+	align-items: center;
 	margin: 2px 0;
 	font-weight: 500;
 }
@@ -116,6 +121,7 @@
 .org_name {
 	margin-left: 4px;
 	font-weight: 600;
+	margin-right: 4px;
 }
 
 .content {
@@ -137,4 +143,27 @@
 	display: flex;
 	flex-direction: column;
 
+}
+
+.timer{
+	margin: 0;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	text-align: center;
+	color: #cb6464;
+	display: flex;
+	white-space: nowrap;
+	align-items: center;
+
+}
+
+.source{
+	position: absolute;
+	top:0;
+	left:0;
+    padding:4px 8px  4px 8px;
+    background-color: #acdade;
+    border-radius: 0 0 8px 0 ;
+    font-size: 10;
 }

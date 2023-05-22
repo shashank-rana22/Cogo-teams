@@ -1723,6 +1723,14 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.cogo_fx,
 			},
+			{
+				key           : 'transaction_setting-controlled_booking',
+				title         : 'Controlled Booking Desk',
+				icon          : IcMBookingDesk,
+				href          : '/v2/controlled-booking',
+				as            : '/v2/controlled-booking',
+				possible_apis : apis.controlled_booking,
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -2247,16 +2255,6 @@ const navigationMappingAdmin = {
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
-	},
-	controlled_booking: {
-		key           : 'controlled_booking',
-		title         : 'Controlled Booking Desk',
-		icon          : IcMBookingDesk,
-		href          : '/v2/controlled-booking',
-		as            : '/v2/controlled-booking',
-		possible_apis : apis.controlled_booking,
-		module_type   : 'dashboards',
-		isSubNavs     : false,
 	},
 };
 

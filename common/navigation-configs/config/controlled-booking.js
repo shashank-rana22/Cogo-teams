@@ -1,6 +1,6 @@
 const controlledBooking = {
 	'/[partner_id]/controlled-booking': {
-		navigation: 'controlled_booking',
+		navigation: 'transaction_setting-controlled_booking',
 	},
 };
 
