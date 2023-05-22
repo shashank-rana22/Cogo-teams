@@ -6,6 +6,11 @@ import getElementController from '../../../configs/getElementController';
 import controls from './controls';
 import styles from './styles.module.css';
 
+const removeTypeField = (controlItem) => {
+	const { type, ...rest } = controlItem;
+	return rest;
+};
+
 function Resume() {
 	const { handleSubmit, control, formState: { errors } } = useForm();
 
@@ -25,8 +30,10 @@ function Resume() {
 
 							<div className={styles.control}>
 								<Element
+									{...(type === 'fileUpload'
+										? removeTypeField(controlItem) : { ...controlItem })}
+									key={controlName}
 									control={control}
-									{...controlItem}
 									className={styles[`element_${controlName}`]}
 								/>
 

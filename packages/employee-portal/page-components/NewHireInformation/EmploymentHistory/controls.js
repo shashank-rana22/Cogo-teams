@@ -12,7 +12,7 @@ const getControls = [{
 		{
 			name        : 'description',
 			label       : 'Description',
-			type        : 'input',
+			type        : 'textarea',
 			placeholder : 'Description',
 		},
 		{
@@ -38,7 +38,7 @@ const getControls = [{
 		{
 			name        : 'skills',
 			label       : 'Skills',
-			type        : 'input',
+			type        : 'createmultiselect',
 			placeholder : 'Skills',
 			rules       : { required: 'This is required' },
 		},

@@ -5,8 +5,8 @@ import StyledTable from '../StyledTable';
 import styles from './styles.module.css';
 import useTableView from './useTableView';
 
-function TableView() {
-	const { columns, loading, list } = useTableView();
+function TableView({ search }) {
+	const { columns, loading, list } = useTableView({ search });
 
 	return (
 		<div className={styles.container}>

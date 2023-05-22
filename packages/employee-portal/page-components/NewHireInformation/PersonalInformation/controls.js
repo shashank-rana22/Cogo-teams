@@ -20,11 +20,12 @@ const controls = [
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'dob',
-		label       : 'Date of Birth',
-		type        : 'date-select',
-		placeholder : 'DD/MM/YYYY',
-		rules       : { required: 'This is required' },
+		name                  : 'dob',
+		label                 : 'Date of Birth',
+		type                  : 'date-select',
+		placeholder           : 'DD/MM/YYYY',
+		isPreviousDaysAllowed : true,
+		rules                 : { required: 'This is required' },
 	},
 	{
 		name        : 'gender',
