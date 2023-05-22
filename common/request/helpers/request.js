@@ -75,7 +75,9 @@ request.interceptors.request.use((oldConfig) => {
 	return {
 		...newConfig,
 		headers: {
-			authorizationscope: 'partner', authorization: `Bearer: ${token}`, authorizationparameters,
+			authorizationscope      : 'partner',
+			authorization           : `Bearer: ${token}`,
+			authorizationparameters : 'business_finance-settlement:allowed',
 		},
 	};
 });

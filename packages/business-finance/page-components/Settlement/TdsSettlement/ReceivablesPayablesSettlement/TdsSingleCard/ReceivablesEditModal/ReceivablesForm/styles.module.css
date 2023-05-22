@@ -6,8 +6,8 @@
 	margin-top: 8px;
 
 	& > div {
-		flex: 0 0 10%;
-		margin: 50px 0;
+		flex: 0 0 45%;
+		margin: 4px 0;
 	}
 }
 

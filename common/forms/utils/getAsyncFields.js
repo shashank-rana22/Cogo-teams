@@ -356,6 +356,20 @@ function asyncListServetelAgents() {
 		},
 	};
 }
+function asyncTradePartydetails() {
+	return {
+		valueKey    : 'id',
+		labelKey    : 'legal_business_name',
+		endpoint    : 'list_organization_trade_party_details',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			pagination_data_required: false,
+		},
+	};
+}
 
 export {
 	asyncFieldsLocations,
@@ -386,4 +400,5 @@ export {
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
 	asyncListServetelAgents,
+	asyncTradePartydetails,
 };

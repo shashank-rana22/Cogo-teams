@@ -820,8 +820,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-settlement',
 				title         : 'Settlement',
-				href          : '/business-finance/settlement/[active_tab]',
-				as            : '/business-finance/settlement/ap-ar-settlement',
+				href          : '/v2/business-finance/settlement/[active_tab]',
+				as            : '/v2/business-finance/settlement/ap-ar-settlement',
 				type          : 'link',
 				main_apis     : ['list_organizations'],
 				possible_apis : apis.settlement,

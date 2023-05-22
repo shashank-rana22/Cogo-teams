@@ -8509,6 +8509,8 @@ const partner = {
 			api          : 'list_organization_trade_party_details',
 			access_type  : 'private',
 			service_name : 'organization',
+			module       : 'tds-settlement',
+			feature      : 'tds-settlement',
 		},
 		{
 			api          : 'list_organization_users',
