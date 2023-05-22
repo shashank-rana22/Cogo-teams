@@ -7,6 +7,7 @@ import bl_do from './bl-do-apis';
 import bl_do_collection_release from './bl_do-collection-release-apis';
 import bn_salvage from './bn-salvage-apis';
 import booking_desk from './booking-desk-apis';
+import chakravyuh from './chakravyuh-apis';
 import coe_finance from './coe-finance-apis';
 import cogoLens from './cogo-lens';
 import common_apis from './common-apis';
@@ -139,6 +140,7 @@ const apis = {
 	poc,
 	...athena_dashboard,
 	sales_invoice,
+	...chakravyuh,
 };
 
 export default apis;
