@@ -1,7 +1,7 @@
 .title_black {
 	display: inline-block;
 	max-width: 100%;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: normal;
 	color: #000;
 	text-align: center;
@@ -23,5 +23,5 @@
 
 .column {
 	max-width: 16.6667%;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }

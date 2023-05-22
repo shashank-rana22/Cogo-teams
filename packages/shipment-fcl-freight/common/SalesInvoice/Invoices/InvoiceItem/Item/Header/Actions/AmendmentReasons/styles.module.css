@@ -6,14 +6,14 @@
 }
 
 .title {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 600;
 	color: #333;
 }
 
 .value {
 	margin: 0;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: var(--color-secondary-greyscale-3);
 }
 

@@ -1,7 +1,7 @@
 .title_black {
 	display: inline-block;
 	max-width: 100%;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: normal;
 	line-height: 20px;
 	color: #000;

@@ -9,7 +9,7 @@
 }
 
 .po_number {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 400;
 	color: #979797;
 	white-space: nowrap;
@@ -33,7 +33,7 @@
 	width: fit-content;
 	max-width: 100px;
 	overflow: hidden;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
@@ -46,7 +46,7 @@
 	width: fit-content;
 	max-width: 500px;
 	overflow: hidden;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 500;
 	color: var(--color-secondary-greyscale-3);
 	text-align: start;

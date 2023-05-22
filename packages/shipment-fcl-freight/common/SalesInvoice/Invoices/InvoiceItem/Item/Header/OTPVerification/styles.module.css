@@ -12,7 +12,7 @@
 }
 
 .no_data {
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 500;
 }
 

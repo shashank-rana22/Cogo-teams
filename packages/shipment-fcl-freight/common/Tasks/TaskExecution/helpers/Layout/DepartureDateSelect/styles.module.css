@@ -17,7 +17,7 @@
 
 .label {
 	margin: 16px 0 8px 10px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	line-height: 24px;
 	color: _grey.primary_text;
 }
@@ -30,7 +30,7 @@
 
 .info {
 	padding: 10px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-style: italic;
 	font-weight: normal;
 	font-stretch: normal;
@@ -43,7 +43,7 @@
 	padding: 5px 11px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	line-height: 14px;
 	color: #000;
 	cursor: pointer;
@@ -57,7 +57,7 @@
 	padding: 5px 11px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	line-height: 14px;
 	color: #000;
 	cursor: pointer;

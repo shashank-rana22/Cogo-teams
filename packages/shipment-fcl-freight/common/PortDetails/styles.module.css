@@ -24,7 +24,7 @@
 .value {
 	width: 100%;
 	overflow: hidden;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 700;
 	color: #333;
 	text-overflow: ellipsis;
@@ -48,7 +48,7 @@
 
 .code {
 	margin: 0 0 4px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 500;
 	color: var(--color-accent-orange-2);
 }
@@ -56,7 +56,7 @@
 .country {
 	margin: 0;
 	overflow: hidden;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 400;
 	color: var(--color-secondary-greyscale-3);
 	text-overflow: ellipsis;
@@ -66,7 +66,7 @@
 .service_name {
 	margin: 0;
 	margin-top: 4px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 400;
 	color: #5936f0;
 }
@@ -80,7 +80,7 @@
 
 .icd {
 	margin: 4px 0;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 700;
 }
 
@@ -89,7 +89,7 @@
 	flex-direction: column;
 	align-items: center;
 	justify-content: center;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 700;
 	color: #ee3426;
 	letter-spacing: 0;

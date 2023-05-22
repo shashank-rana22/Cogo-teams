@@ -16,7 +16,7 @@
 .bl_overview_card {
 	height: auto;
 	padding-left: 15px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 600;
 	color: var(--color-secondary-greyscale-1);
 	background-color: #fff;
@@ -38,7 +38,7 @@
 	display: flex;
 	align-items: center;
 	width: 100%;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 600;
 	line-height: 19px;
 	color: var(--color-secondary-greyscale-1);

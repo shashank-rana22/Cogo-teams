@@ -5,14 +5,14 @@
 }
 
 .sub_heading {
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 600;
 	color: var(--color-secondary-greyscale-1);
 }
 
 .sub_detail {
 	margin-left: 8px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 400;
 	color: #393f70;
 }

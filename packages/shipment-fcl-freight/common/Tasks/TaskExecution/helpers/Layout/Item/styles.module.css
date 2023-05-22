@@ -42,20 +42,20 @@
 			}
 
 			input::placeholder {
-				font-size: 14px;
+				font-size: var(--font-size-lg);
 				font-weight: 400;
 				color: #bdbdbd;
 			}
 		}
 
 		.ui_select_input_placeholder {
-			font-size: 14px;
+			font-size: var(--font-size-lg);
 			font-weight: 400;
 			color: #bdbdbd;
 		}
 
 		.ui_input_control::placeholder {
-			font-size: 14px;
+			font-size: var(--font-size-lg);
 			font-weight: 400;
 			color: #bdbdbd;
 		}
@@ -81,13 +81,13 @@
 		}
 
 		.ui_upload_droparea_heading {
-			font-size: 14px;
+			font-size: var(--font-size-lg);
 			font-weight: 400;
 			color: #bdbdbd;
 		}
 
 		.ui_upload_droparea_subheading {
-			font-size: 12px;
+			font-size: var(--font-size-md);
 			font-weight: 400;
 			color: #bdbdbd;
 		}

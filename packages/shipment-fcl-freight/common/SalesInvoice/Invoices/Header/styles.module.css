@@ -14,7 +14,7 @@
 .trigger_time {
 	margin: 0;
 	margin-right: 16px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 	line-height: 16px;
 	color: #cb6464;
@@ -28,7 +28,7 @@
 
 .total_shipment_title {
 	margin: 0;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 	line-height: 16px;
 	color: #333;
@@ -37,7 +37,7 @@
 
 .shipment_value {
 	margin-left: 4px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 	line-height: 16px;
 	color: var(--color-accent-orange-2);
@@ -46,7 +46,7 @@
 
 .reviwed_stats {
 	margin: 0;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 	line-height: 16px;
 	color: #393f70;

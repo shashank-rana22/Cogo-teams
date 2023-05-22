@@ -6,7 +6,7 @@
 
 .confirm_label {
 	width: 80%;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 	color: #393f70;
 	cursor: pointer;

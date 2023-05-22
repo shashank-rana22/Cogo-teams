@@ -17,13 +17,12 @@ function List({
 		<main className={cl`${styles.main} ${creditNote ? styles.creditNote : ''}`}>
 			<Header fields={fields} showCode={showCode} detail={detail} />
 
-			{(data || []).map((item, i) => (
+			{(data || []).map((item) => (
 				<CardItem
 					key={item}
 					item={item}
 					loading={loading}
 					fields={fields}
-					isLast={data?.length === i + 1}
 				/>
 			))}
 		</main>

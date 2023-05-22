@@ -23,6 +23,6 @@
 .text {
 	padding: 0 4px;
 	margin-right: 8px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	color: var(--color-secondary-greyscale-3);
 }

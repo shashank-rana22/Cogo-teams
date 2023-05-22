@@ -23,7 +23,7 @@
 
 .gst_number {
 	margin-left: 5px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 500;
 	color: #333;
 	text-decoration: underline;
@@ -31,12 +31,12 @@
 	cursor: pointer;
 
 	@media (max-width: 768px) {
-		font-size: 12px;
+		font-size: var(--font-size-md);
 	}
 }
 
 .label {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 500;
 	line-height: 16px;
 	color: #333;
@@ -44,19 +44,19 @@
 	white-space: nowrap;
 
 	@media (max-width: 768px) {
-		font-size: 12px;
+		font-size: var(--font-size-md);
 	}
 }
 
 .invoice_party_name {
 	margin: 5px 0;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: #333;
 
 	@media (max-width: 768px) {
 		width: max-content;
-		font-size: 12px;
+		font-size: var(--font-size-md);
 	}
 }
 
@@ -64,8 +64,8 @@
 	display: flex;
 	align-items: center;
 	width: 46%;
-	font-size: 16px;
-	font-size: 14px;
+	font-size: var(--font-size-xl);
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 	text-transform: capitalize;
 }
@@ -75,7 +75,7 @@
 
 	@media (max-width: 768px) {
 		width: 90px;
-		font-size: 12px;
+		font-size: var(--font-size-md);
 	}
 }
 
@@ -84,7 +84,7 @@
 	color: var(--color-accent-orange-2);
 
 	@media (max-width: 768px) {
-		font-size: 12px;
+		font-size: var(--font-size-md);
 	}
 }
 
@@ -103,7 +103,7 @@
 }
 
 .so_number {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	color: #000;
 
@@ -139,7 +139,7 @@
 .payment_method {
 	width: fit-content;
 	padding: 4px 12px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: #333;
 	text-align: center;
 	text-transform: capitalize;
@@ -189,7 +189,7 @@
 	width: fit-content;
 	padding: 4px 7px;
 	margin-bottom: 6px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	line-height: 16px;
 	color: #333;
 	white-space: nowrap;
@@ -209,7 +209,7 @@
 	width: max-content;
 	padding: 4px 7px;
 	margin-bottom: 6px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	line-height: 16px;
 	color: #333;
 	white-space: nowrap;
@@ -229,7 +229,7 @@
 	width: fit-content;
 	padding: 2px 16px;
 	margin-right: 6px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: #393f70;
 	background-color: #fef6df;
 	border-radius: 0 0 4px;
@@ -256,6 +256,6 @@
 
 .status_container {
 	margin-top: 2px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: #333;
 }
