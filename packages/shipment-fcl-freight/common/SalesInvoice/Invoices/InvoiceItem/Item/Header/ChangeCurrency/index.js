@@ -71,7 +71,7 @@ function ChangeCurrency({
 		<Modal
 			className={styles.form}
 			show={isChangeCurrency}
-			onClose={onClose}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title="CHANGE CURRENCY" />
 			<Modal.Body>
@@ -82,7 +82,7 @@ function ChangeCurrency({
 					placeholder="Select Currency"
 					options={currencyOptions}
 					size="md"
-					style={{ width: '200px', marginTop: '10px' }}
+					className={styles.select_div}
 				/>
 			</Modal.Body>
 			<Modal.Footer>

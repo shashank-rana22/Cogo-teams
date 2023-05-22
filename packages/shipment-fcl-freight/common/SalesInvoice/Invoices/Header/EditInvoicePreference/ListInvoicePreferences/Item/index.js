@@ -131,7 +131,6 @@ function Item({
 
 					<div
 						className={styles.flex}
-						style={{ flexWrap: 'wrap' }}
 					>
 						{renderServicesTaken}
 					</div>

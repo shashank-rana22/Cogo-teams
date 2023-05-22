@@ -50,6 +50,7 @@ function CNNullify({
 				className="primary md"
 				show={askNullify}
 				onClose={handleOnClose}
+				closeOnOuterClick={false}
 			>
 				<Modal.Header title="Do you want to revoke this invoice ?" />
 				<Modal.Body>

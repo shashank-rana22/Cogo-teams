@@ -19,11 +19,6 @@ function AddRemarks({
 		setShowAddRemarks(false);
 	};
 
-	const payload = {
-		id      : invoice?.id,
-		remarks : remarkValue,
-	};
-
 	const refetchAfterCall = () => {
 		onClose();
 		refetch();
@@ -59,7 +54,10 @@ function AddRemarks({
 
 				<Button
 					className="primary md"
-					onClick={() => onSubmitRemarks(payload)}
+					onClick={() => onSubmitRemarks({
+						id      : invoice?.id,
+						remarks : remarkValue,
+					})}
 					disabled={loading || isEmpty(remarkValue)}
 				>
 					Submit

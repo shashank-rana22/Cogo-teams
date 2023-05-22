@@ -24,8 +24,7 @@
 }
 
 .heading {
-	margin: 0;
-	margin-bottom: 20px;
+	margin: 0 20px 0;
 	font-size: var(--font-size-lg);
 	font-weight: 600;
 	line-height: 17px;
