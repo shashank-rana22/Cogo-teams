@@ -2,6 +2,7 @@ import { Button, Checkbox, Popover, Tooltip, Badge } from '@cogoport/components'
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useAllocationRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { format, isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
@@ -9,6 +10,7 @@ import Actions from '../components/AllocationRequests/List/Actions';
 import styles from '../components/AllocationRequests/List/styles.module.css';
 
 const useListAllocationRequests = () => {
+	const { profile: { authParams } } = useSelector((state) => state);
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');
@@ -52,6 +54,10 @@ const useListAllocationRequests = () => {
 			setSelectAll(isRowsChecked);
 		}
 	};
+
+	useEffect(() => {
+		refetch();
+	}, [authParams, refetch]);
 
 	useEffect(() => {
 		if (isEmpty(currentPageListIds)) {
