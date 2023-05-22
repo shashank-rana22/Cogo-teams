@@ -57,7 +57,6 @@ export default function EditSchedule({ setShow = () => {}, timelineData = [] }) 
 				<form className={styles.form_container}>
 					{finalControls?.map((finalControl) => (
 						<FormItem
-							key={finalControl?.name}
 							finalControl={finalControl}
 							control={control}
 							errors={errors}

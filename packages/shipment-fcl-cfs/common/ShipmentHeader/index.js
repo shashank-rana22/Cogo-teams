@@ -21,7 +21,7 @@ function ShipmentHeader() {
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 
-	const { po_number, importer_exporter = {} } = shipment_data || {};
+	const { po_number, importer_exporter = {}, consignee_shipper = {} } = shipment_data || {};
 
 	if (isGettingShipment) {
 		return <Loader />;
@@ -39,12 +39,17 @@ function ShipmentHeader() {
 					interactive
 					content={(
 						<div className={styles.tooltip}>
-							{importer_exporter?.business_name}
+							{activeStakeholder !== 'consignee_shipper_booking_agent'
+								? importer_exporter?.business_name
+								: consignee_shipper?.business_name}
 						</div>
 					)}
 				>
 					<div className={styles.business_name}>
-						{importer_exporter?.business_name}
+
+						{activeStakeholder !== 'consignee_shipper_booking_agent'
+							? importer_exporter?.business_name
+							: consignee_shipper?.business_name}
 					</div>
 				</Tooltip>
 

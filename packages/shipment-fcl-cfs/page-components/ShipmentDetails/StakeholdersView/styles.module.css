@@ -70,7 +70,7 @@
 	margin-top: 16px;
 }
 
-/* .toggle_chat {
+.toggle_chat {
 	display: flex;
 
 	:global {
@@ -78,4 +78,4 @@
 			margin-right: 62px;
 		}
 	}
-} */
+}

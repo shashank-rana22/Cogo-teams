@@ -5,9 +5,15 @@ export default function getServiceCancelPayload({
 }) {
 	let cancellation_services = [];
 
-	if (service_type === 'fcl_cfs_service') {
+	if (service_type === 'fcl_freight_service') {
 		cancellation_services = (servicesList || []).filter(
 			(item) => item?.service_type === service_type,
+		);
+	} else if (service_type === 'haulage_freight_service') {
+		cancellation_services = (servicesList || []).filter(
+			(item) => ['trailer_freight_service', 'haulage_freight_service'].includes(
+				item?.service_type,
+			) && item?.trade_type === trade_type,
 		);
 	} else {
 		cancellation_services = (servicesList || []).filter(

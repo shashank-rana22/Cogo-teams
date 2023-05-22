@@ -11,6 +11,9 @@ const keysToShow = [
 	'containers_count',
 	'container_type',
 	'commodity',
+	'inco_term',
+	'bl_type',
+	'bls_count',
 	'cargo_weight_per_container',
 ];
 
@@ -41,7 +44,7 @@ export default forwardRef(({ service }, ref) => {
 			{keysToShow.map((key) => {
 				const { name, label, ...rest } = controls.find((item) => item.name === key) || {};
 				return (
-					<div className={styles.form_element} key={name}>
+					<div className={styles.form_element}>
 						{name ? (
 							<>
 								<div className={styles.label}>
