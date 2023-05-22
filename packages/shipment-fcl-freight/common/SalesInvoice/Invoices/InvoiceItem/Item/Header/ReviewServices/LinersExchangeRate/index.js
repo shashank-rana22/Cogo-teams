@@ -12,7 +12,7 @@ function LinersExchangeRateConfirm({
 	showExchangeRateConfirmation = '',
 }) {
 	return (
-		<Modal show={showExchangeRateConfirmation} onClose={() => setShow(false)} width={800}>
+		<Modal show={showExchangeRateConfirmation} onClose={() => setShow(false)} width={800} closeOnOuterClick={false}>
 			<Modal.Header title="MARK AS REVIEWED - WARNING" />
 			<Modal.Body>
 				<div className={styles.form}>
@@ -47,8 +47,8 @@ function LinersExchangeRateConfirm({
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
-					className="secondary md"
-					style={{ marginRight: 12 }}
+					size="md"
+					className={styles.btn_div}
 					onClick={() => setShow(false)}
 				>
 					Close

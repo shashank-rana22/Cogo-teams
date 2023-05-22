@@ -161,3 +161,8 @@
 .empty_div {
 	width: 34px;
 }
+
+.flex_row_div{
+	font-size: 10px;
+	color: #333333;
+}

@@ -1,37 +1,8 @@
-.Heading {
-	margin: 14px 0 38px;
-	font-size: 18px;
-	font-weight: 500;
-	line-height: 15px;
-	color: #393f70;
-}
-
-.Line {
-	margin-bottom: 28px;
-	border-bottom: 1px solid #ded7fc;
-}
-
-.ButtonContainer {
-	display: flex;
-	align-items: center;
-	justify-content: flex-end;
-	width: 100%;
-	padding-top: 18px;
-	border-top: 1px solid #bdaff9;
-
-	.reviewed {
-		&.core-ui-button-root {
-			padding: 9px 16px;
-		}
-	}
-
-	.core-ui-button-root {
-		width: 100px;
-		text-transform: capitalize;
-	}
-}
-
-.Form {
+.form {
 	height: 59vh;
 	overflow: auto;
+}
+
+.btn_div{
+	margin-right: 12px;
 }

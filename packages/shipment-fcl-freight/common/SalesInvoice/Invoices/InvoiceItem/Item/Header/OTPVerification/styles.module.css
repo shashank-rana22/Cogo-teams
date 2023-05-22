@@ -18,16 +18,12 @@
 
 .body {
 	:global {
-		.ui_radio_container {
+		.ui_radio_container, .ui_radio_label {
 			width: 100%;
 		}
 
 		.ui_modal_body_container {
 			height: 300px;
-		}
-
-		.ui_radio_label {
-			width: 100%;
 		}
 
 		.ui_radiogroup_container {
@@ -49,4 +45,8 @@
 			text-align: center;
 		}
 	}
+}
+
+.loader_div{
+	margin: 16px
 }

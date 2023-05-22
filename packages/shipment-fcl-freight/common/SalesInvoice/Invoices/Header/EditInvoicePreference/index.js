@@ -28,7 +28,7 @@ function EditInvoicePreference({
 		setShow(false);
 	};
 
-	const { importer_exporter_id, country_id, is_tax_applicable } = shipment_data;
+	const { importer_exporter_id, country_id, is_tax_applicable } = shipment_data || {};
 
 	const {
 		selectedParties = [],

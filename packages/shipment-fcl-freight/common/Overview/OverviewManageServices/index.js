@@ -5,7 +5,7 @@ import Services from '../Services';
 
 import styles from './styles.module.css';
 
-function OverviewManageServices(isOpen) {
+function OverviewManageServices({ isOpen = true }) {
 	return (
 		<Accordion title={<div className={styles.title}>Manage Services</div>} isOpen={isOpen}>
 			<Services />

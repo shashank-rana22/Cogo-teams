@@ -199,7 +199,7 @@ function Actions({
 							interactive
 							placement="bottom"
 							content={(
-								<div style={{ fontSize: '10px', color: '#333333' }}>
+								<div className={styles.flex_row_div}>
 									<div className={styles.flex_row}>
 										Proforma email sent :
 										&nbsp;

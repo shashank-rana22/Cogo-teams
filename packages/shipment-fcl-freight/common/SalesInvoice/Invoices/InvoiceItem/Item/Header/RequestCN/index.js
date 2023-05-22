@@ -17,14 +17,8 @@ function RequestCN({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [servicesIDs, setServicesIDs] = useState([]);
 
-	const services = invoice?.services || [];
-
 	useEffect(() => {
-		const servicesID = [];
-		invoice?.services?.forEach((service) => {
-			servicesID.push(service?.service_id);
-		});
-
+		const servicesID = invoice?.services?.map((service) => (service?.service_id)) || [];
 		setServicesIDs(servicesID);
 	}, [invoice?.services]);
 
@@ -37,14 +31,14 @@ function RequestCN({
 		onCreate,
 	} = useCreateCreditNoteHelper({
 		setShow,
-		services,
+		services: invoice?.services,
 		invoice,
 		servicesIDs,
 		refetchCN,
 		invoiceData,
 	});
 	return (
-		<Modal show={show} onClose={() => setShow(false)} size="xl">
+		<Modal show={show} onClose={() => setShow(false)} size="xl" closeOnOuterClick={false}>
 			<Modal.Header title="REQUEST CREDIT NOTE" />
 			<Modal.Body>
 				<div className={styles.div}>
@@ -72,7 +66,6 @@ function RequestCN({
 					</Button>
 				</div>
 			</Modal.Footer>
-
 		</Modal>
 	);
 }

@@ -58,7 +58,6 @@ function Edit({
 			isEdit  : true,
 		});
 
-		console.log({ data });
 		if (submit_data?.line_items?.length === 0) {
 			Toast.error('Line Items is required');
 			return;

@@ -41,17 +41,17 @@ function ReviewServices({
 			setShow={setShowReview}
 		/>
 	) : (
-		<Modal show={showReview} onClose={() => setShowReview(false)}>
+		<Modal show={showReview} onClose={() => setShowReview(false)} closeOnOuterClick={false}>
 			<Modal.Header title="MARK AS REVIEWED" />
 			<Modal.Body>
-				<div className={styles.Form}>
+				<div className={styles.form}>
 					<Confirmation value={value} setValue={setValue} />
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
 				<Button
-					className="secondary md"
-					style={{ marginRight: 12 }}
+					size="md"
+					className={styles.btn_div}
 					onClick={() => setShowReview(false)}
 				>
 					Close

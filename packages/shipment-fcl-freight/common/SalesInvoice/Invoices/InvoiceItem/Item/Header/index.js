@@ -21,6 +21,8 @@ const API_SUCCESS_MESSAGE = {
 	approved : 'Invoice approved!,',
 };
 
+const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
+
 function Header({
 	children = null,
 	invoice = {},
@@ -52,7 +54,7 @@ function Header({
 		(item) => item?.proformaNumber === live_invoice_number,
 	)?.[0];
 
-	const showCN = ['POSTED', 'FAILED', 'IRN_GENERATED'].includes(
+	const showCN = BF_INVOICE_STATUS.includes(
 		bfInvoice?.status,
 	);
 
@@ -120,16 +122,14 @@ function Header({
 					</div>
 
 					{shipment_data?.entity_id
-						!== GLOBAL_CONSTANTS.country_entity_ids.VN && (
+						!== GLOBAL_CONSTANTS.country_entity_ids.VN ? (
 							<div className={styles.gst}>
 								<div className={styles.label}>GST Number :</div>
 								<Tooltip
 									theme="light"
 									interactive
 									content={(
-										<div
-											style={{ fontSize: '10px', textTransform: 'capitalize' }}
-										>
+										<div className={styles.tooltip_div}>
 											{billing_address?.address}
 										</div>
 									)}
@@ -141,7 +141,7 @@ function Header({
 									</div>
 								</Tooltip>
 							</div>
-					)}
+						) : null}
 				</div>
 
 				<div className={styles.invoice_info}>

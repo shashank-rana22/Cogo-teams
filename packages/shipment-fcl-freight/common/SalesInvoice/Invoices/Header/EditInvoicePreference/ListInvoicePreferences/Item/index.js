@@ -11,9 +11,7 @@ import React from 'react';
 import SelectService from './SelectService';
 import styles from './styles.module.css';
 
-const MAIN_SERVICES = [
-	'fcl_freight_service',
-];
+const MAIN_SERVICES = 'fcl_freight_service';
 const ACTION_STATE = ['reviewed', 'approved', 'revoked'];
 
 function Item({
@@ -30,11 +28,7 @@ function Item({
 	const open = openedService && openedService?.id === invoice?.id;
 
 	const handleServiceToggle = () => {
-		if (open) {
-			setOpenedService(null);
-		} else {
-			setOpenedService(invoice);
-		}
+		setOpenedService(open ? null : invoice);
 	};
 
 	const onServiceChange = (currentInvoice, value) => {
@@ -47,7 +41,7 @@ function Item({
 	) : null;
 
 	const renderServicesTaken = (invoice?.services || []).map((service) => {
-		const trade_type = !MAIN_SERVICES.includes(service?.service_type)
+		const trade_type = MAIN_SERVICES !== service?.service_type
 			? service?.trade_type
 			: null;
 
