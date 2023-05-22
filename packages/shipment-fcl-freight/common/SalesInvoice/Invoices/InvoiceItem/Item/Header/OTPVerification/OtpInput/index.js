@@ -34,6 +34,7 @@ function OtpInput(props, ref) {
 							otpInputElementsRef.current[index] = element;
 						}}
 						placeholder="0"
+						className={styles.input}
 					/>
 				</div>
 			))}

@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
@@ -18,7 +19,7 @@ const useSendInvoiceEmail = ({
 			});
 			refetch();
 		} catch (err) {
-			getApiError(err?.data?.invoice);
+			Toast.error(getApiError(err?.response?.data));
 		}
 	};
 

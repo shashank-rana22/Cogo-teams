@@ -70,7 +70,6 @@ function OTPVerification({
 				user_id    : selectedUser?.split('_')?.[0],
 			};
 			await sendOtpForInvoiceApproval(payload);
-			setModalIsOpen(true);
 		}
 	};
 	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[1]} registered mobile number`;
