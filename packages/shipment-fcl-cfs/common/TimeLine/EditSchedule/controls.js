@@ -20,12 +20,6 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 	});
 
 	const finalControls = [
-		{ name: 'bn_expiry', label: 'BN expiry date' },
-		{ name: 'tr_cutoff', label: 'TR cutoff date' },
-		{ name: 'vgm_cutoff', label: 'VGM cutoff date' },
-		{ name: 'si_cutoff', label: 'SI cutoff date' },
-		{ name: 'gate_in_cutoff', label: 'Gate-in cutoff date' },
-		{ name: 'document_cutoff', label: 'Document cutoff date' },
 		{
 			name       : 'schedule_departure',
 			label      : 'Actual time of departure',

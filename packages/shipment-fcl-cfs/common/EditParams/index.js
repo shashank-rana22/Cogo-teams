@@ -66,6 +66,7 @@ export default function EditParams({ setShow, serviceData }) {
 			<Modal.Body>
 				{servicesToShow.map((service, i) => (
 					<ParameterDetails
+						key={service?.id}
 						service={service}
 						ref={(r) => { formRefs.current[i] = r; }}
 					/>
