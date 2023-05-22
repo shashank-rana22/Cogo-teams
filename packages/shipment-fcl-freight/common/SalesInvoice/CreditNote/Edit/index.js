@@ -43,7 +43,7 @@ function Edit({
 		refetch : cnRefetch,
 	});
 
-	const { handleSubmit, control, setValue, watch, formState: { errors = {} }} = useForm();
+	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm();
 
 	const formValues = watch();
 

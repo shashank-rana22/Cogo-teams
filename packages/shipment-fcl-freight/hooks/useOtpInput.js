@@ -1,8 +1,8 @@
 import { useState, useEffect, useImperativeHandle, useRef, useCallback } from 'react';
 
-import useKey from '../../../../../../../../../hooks/useKey';
-
-import useOtpInputEvents from './useOtpInputEvents';
+import useKey from './useKey';
+import useOtpInputEvents from
+	'./useOtpInputEvents';
 
 const getInitialOtpValues = (otpLength) => {
 	const hash = {};

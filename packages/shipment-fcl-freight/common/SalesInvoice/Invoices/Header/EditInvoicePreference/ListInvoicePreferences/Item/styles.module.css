@@ -29,26 +29,15 @@
 	margin-right: 8px;
 }
 
-.address_text {
-	margin: 0;
-	font-size: var(--font-size-sm);
-	line-height: 16px;
-	color: var(--color-secondary-greyscale-3);
-	letter-spacing: 0.02em;
-}
-
-.gst_number {
+.billing_info {
 	margin: 0;
 	font-size: var(--font-size-sm);
 	line-height: 16px;
 	color: #221f20;
-}
 
-.invoice_currency {
-	margin: 0;
-	font-size: var(--font-size-sm);
-	line-height: 16px;
-	color: #221f20;
+	&.address_text{
+		letter-spacing: 0.02em;
+	}
 }
 
 .heading {
