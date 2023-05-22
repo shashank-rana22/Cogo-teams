@@ -1,5 +1,6 @@
 import { Modal, Button } from '@cogoport/components';
-import React, { useEffect, useState } from 'react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import React, { useEffect, useState, useContext } from 'react';
 
 import Layout from '../../../../../../Tasks/TaskExecution/helpers/Layout';
 
@@ -9,11 +10,11 @@ import styles from './styles.module.css';
 function RequestCN({
 	show = false,
 	setShow = () => {},
-	shipment_serial_id = '',
 	invoice = {},
 	refetchCN = () => {},
 	invoiceData = {},
 }) {
+	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [servicesIDs, setServicesIDs] = useState([]);
 
 	const services = invoice?.services || [];
@@ -48,12 +49,7 @@ function RequestCN({
 			<Modal.Body>
 				<div className={styles.div}>
 					<div className={styles.bold_text}>
-						SID
-						&nbsp;
-						{shipment_serial_id}
-						&nbsp;
-						- Invoice number -
-						&nbsp;
+						{`SID ${shipment_data?.serial_id} - Invoice number -`}
 						<div className={styles.underLined_text}>{invoice?.live_invoice_number}</div>
 					</div>
 				</div>

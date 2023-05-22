@@ -24,7 +24,6 @@ const CN_STATUS_MAPPING = {
 
 function Item({
 	item = {},
-	serial_id = '',
 	cnRefetch = () => {},
 	invoiceData = {},
 	loading = false,
@@ -53,11 +52,9 @@ function Item({
 
 	if (loading) {
 		return (
-			<>
+			<div className={styles.loader_wrapper}>
 				<Loader />
-				<Loader />
-				<Loader />
-			</>
+			</div>
 		);
 	}
 
@@ -190,7 +187,6 @@ function Item({
 					setOpen={setOpen}
 					prevData={prevData}
 					CN_STATUS_MAPPING={CN_STATUS_MAPPING}
-					serial_id={serial_id}
 					item={item}
 					cnRefetch={cnRefetch}
 					invoiceData={invoiceData}

@@ -18,7 +18,7 @@ function CardHeader({ fields = [], showCode = false, detail = {} }) {
 						return null;
 					}
 
-					return <Field field={field} showCode={showCode} />;
+					return <Field key={field.label} field={field} showCode={showCode} />;
 				})}
 			</div>
 		</div>

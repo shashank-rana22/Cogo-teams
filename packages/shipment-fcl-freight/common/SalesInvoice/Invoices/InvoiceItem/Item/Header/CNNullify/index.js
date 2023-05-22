@@ -9,7 +9,6 @@ import RequestCN from '../RequestCN';
 function CNNullify({
 	askNullify,
 	setAskNullify = () => {},
-	shipment_serial_id,
 	invoice,
 	refetchCN = () => {},
 	invoiceData,
@@ -87,7 +86,6 @@ function CNNullify({
 
 			{isRequestCN ? (
 				<RequestCN
-					shipment_serial_id={shipment_serial_id}
 					invoice={invoice}
 					show={isRequestCN}
 					setShow={setIsRequestCN}
