@@ -27,6 +27,7 @@ import referral from './config/referral';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasTools from './config/saas-tools';
 import shipmentFclFreight from './config/shipment-fcl-freight';
+import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
@@ -66,6 +67,7 @@ const routeConfig = {
 	...ingestion,
 	...blDoCollectionRelease,
 	...saasTools,
+	...so2Surface,
 	...chakravyuh,
 };
 

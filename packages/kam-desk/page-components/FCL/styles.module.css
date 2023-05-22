@@ -12,4 +12,5 @@
 
 .tabs_container {
 	margin-top: 12px;
+	overflow: auto;
 }

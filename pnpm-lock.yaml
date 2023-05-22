@@ -84,6 +84,7 @@ importers:
       '@cogoport/shipment-chat': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/shipment-mails': workspace:0.1.0
+      '@cogoport/so2-surface': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/supply-dashboards': workspace:0.1.0
       '@cogoport/translate': workspace:0.1.0
@@ -141,6 +142,7 @@ importers:
       '@cogoport/shipment-chat': link:../common/shipment-chat
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/shipment-mails': link:../common/shipment-mails
+      '@cogoport/so2-surface': link:../packages/so2-surface
       '@cogoport/store': link:../common/store
       '@cogoport/supply-dashboards': link:../packages/supply-dashboards
       '@cogoport/translate': link:../packages/Translation
@@ -1179,6 +1181,36 @@ importers:
       prop-types: 15.8.1
       react: 18.2.0
       react-hook-form: 7.43.9_react@18.2.0
+      uuid: 9.0.0
+
+  packages/so2-surface:
+    specifiers:
+      '@cogoport/components': ^1.0.322
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/icons-react': ^1.0.51
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.2
+      file-saver: ^2.0.5
+      html-to-image: ^1.11.11
+      html2canvas: ^1.4.1
+      jspdf: ^2.5.1
+      react: 18.2.0
+      uuid: ^9.0.0
+    dependencies:
+      '@cogoport/components': 1.0.418_gbfbxfylkmejm6nw6z2454h4va
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/icons-react': 1.0.73_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      file-saver: 2.0.5
+      html-to-image: 1.11.11
+      html2canvas: 1.4.1
+      jspdf: 2.5.1
+      react: 18.2.0
       uuid: 9.0.0
 
   packages/supply-dashboards:
