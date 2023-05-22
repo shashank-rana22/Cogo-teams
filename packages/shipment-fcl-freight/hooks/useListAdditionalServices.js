@@ -11,6 +11,7 @@ const useListAdditionalServices = ({ payload = {} } = {}) => {
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'fcl_freight/list_additional_services',
+		method : 'GET',
 		params : {
 			performed_by_org_id : importer_exporter_id,
 			filters             : {

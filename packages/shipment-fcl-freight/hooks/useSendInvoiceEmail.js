@@ -1,3 +1,4 @@
+import { getApiError } from '@cogoport/forms';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
@@ -18,7 +19,7 @@ const useSendInvoiceEmail = ({
 			});
 			refetch();
 		} catch (err) {
-			toastApiError(err?.data?.invoice);
+			getApiError(err?.data?.invoice);
 		}
 	};
 

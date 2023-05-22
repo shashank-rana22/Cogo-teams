@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 import Header from './Header';
 import InvoiceServiceWise from './InvoiceServiceWise';
@@ -30,7 +31,7 @@ function ItemHeader({
 						<InvoiceServiceWise
 							item={item}
 							loading={loading}
-							key={item}
+							key={uuid()}
 						/>
 					))}
 				</div>

@@ -1,8 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
 export const tableColumn = ({ serviceItem = {}, shipment_data = {} }) => {
 	const mainService = `${shipment_data?.shipment_type}_service`;
+	const currencyLocale = GLOBAL_CONSTANTS.currency_locale.INR;
 
 	let serviceName = '';
 
@@ -33,7 +35,7 @@ export const tableColumn = ({ serviceItem = {}, shipment_data = {} }) => {
 		},
 		{
 			label  : 'Rate',
-			render : (item) => Number(item?.price_discounted || 0).toLocaleString('en-IN') || 0,
+			render : (item) => Number(item?.price_discounted || 0).toLocaleString(currencyLocale) || 0,
 			span   : 1,
 		},
 		{
@@ -43,13 +45,13 @@ export const tableColumn = ({ serviceItem = {}, shipment_data = {} }) => {
 		},
 		{
 			label  : 'Discount',
-			render : (item) => Number(item?.discount_price || 0).toLocaleString('en-IN') || 'NA',
+			render : (item) => Number(item?.discount_price || 0).toLocaleString(currencyLocale) || 'NA',
 			span   : 1,
 		},
 
 		{
 			label  : 'Exc. Rate',
-			render : (item) => Number(item?.exchange_rate || 0).toLocaleString('en-IN') || 'NA',
+			render : (item) => Number(item?.exchange_rate || 0).toLocaleString(currencyLocale) || 'NA',
 			span   : 1,
 		},
 		{

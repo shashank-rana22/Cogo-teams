@@ -11,6 +11,7 @@ const useListCreditNotes = () => {
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'fcl_freight/list_credit_notes',
+		method : 'GET',
 		params : {
 			filters: {
 				shipment_id,

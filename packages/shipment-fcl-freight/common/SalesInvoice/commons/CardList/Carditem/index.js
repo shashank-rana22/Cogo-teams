@@ -11,9 +11,7 @@ function Item({
 	loading = false,
 }) {
 	return (
-		<div
-			className={styles.row}
-		>
+		<div className={styles.row}>
 			{fields.map((singleItem) => {
 				if (singleItem?.show === false) {
 					return null;
