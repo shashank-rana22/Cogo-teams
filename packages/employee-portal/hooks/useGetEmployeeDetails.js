@@ -1,25 +1,25 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-function useGetEmployeeDetails() {
-	const [{ loading = false, data = {} }, trigger] = useRequest({
-		method : 'get',
+function useGetEmployeeDetails({ id = '' }) {
+	const [{ loading = false, data = {} }, trigger] = useHarbourRequest({
+		method : 'GET',
 		url    : 'get_employee_details',
-	}, { manual: false });
+	}, { manual: true });
 
 	const getEmployeeDetails = useCallback(() => {
 		try {
 			trigger({
 				params: {
-					id: '85cdcf6b-bd52-4fea-b136-12e377c48ecc',
+					id: id || '85cdcf6b-bd52-4fea-b136-12e377c48ecc',
 				},
 			});
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}
-	}, [trigger]);
+	}, [id, trigger]);
 
 	useEffect(() => {
 		getEmployeeDetails();

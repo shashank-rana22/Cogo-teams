@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import getElementController from '../../../configs/getElementController';
 import useGetEmployeeDetails from '../../../hooks/useGetEmployeeDetails';
@@ -12,15 +13,42 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function PersonalInformation() {
-	const { getEmployeesDetails, data } = useGetEmployeeDetails();
+function PersonalInformation({ id = '' }) {
+	const {
+		loading,
+		data,
+		getEmployeeDetails,
+	} = useGetEmployeeDetails({ id });
 
-	const { handleSubmit, control, formState: { errors } } = useForm();
+	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
+
+	const controlsvalue = controls({ data });
+
+	useEffect(() => {
+		const mapping = {
+			mobile_number: {
+				number       : data?.detail?.mobile_number,
+				country_code : data?.detail?.mobile_country_code || +91,
+			},
+		};
+
+		controlsvalue.forEach((item) => {
+			if (item?.name === 'mobile_number') {
+				setValue(
+					`${item.name}`,
+					mapping[item.name]
+					|| data?.detail?.[item.name],
+				);
+			} else {
+				setValue(item.name, data?.detail?.[item?.name]);
+			}
+		});
+	}, [controlsvalue, data?.detail, setValue]);
 
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.container}>
-				{controls?.map((controlItem) => {
+				{controlsvalue?.map((controlItem) => {
 					const { type, label, name: controlName } = controlItem || {};
 					const Element = getElementController(type);
 
@@ -38,6 +66,7 @@ function PersonalInformation() {
 									control={control}
 									key={controlName}
 									className={styles[`element_${controlName}`]}
+
 								/>
 
 								{errors[controlName]?.message

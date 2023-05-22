@@ -9,6 +9,10 @@ import styles from './styles.module.css';
 function EmploymentHistory() {
 	const { handleSubmit, control } = useForm();
 
+	const onSubmit = (values) => {
+		console.log('values :: ', values);
+	};
+
 	return (
 		<>
 			<div className={styles.container}>
@@ -24,7 +28,6 @@ function EmploymentHistory() {
 								controls={controlItem?.controls}
 								key={controlName}
 							/>
-
 						);
 					}
 					return (
@@ -39,9 +42,7 @@ function EmploymentHistory() {
 				size="md"
 				type="button"
 				className={styles.button}
-				onClick={
-						handleSubmit()
-					}
+				onClick={handleSubmit(onSubmit)}
 			>
 				Save
 			</Button>

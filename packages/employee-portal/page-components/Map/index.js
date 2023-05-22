@@ -33,6 +33,7 @@ function Map() {
 			center={center}
 			style={{ height: '700px', width: '100%' }}
 			zoom={4}
+			maxZoom={15}
 			baseLayer={baseLayer}
 			setMap={setMap}
 		>

@@ -32,13 +32,11 @@
   background-color: #fff;
   border: 0.5px solid gold;
   transition: height 1s ease-out;
-}
 
-.accordion_close {
-  max-height: 80vh;
-  margin-bottom: 20px !important;
-  overflow-y: scroll;
-  background-color: #fff;
-  border: 0.5px solid gold;
-  transition: height 1s ease-in-out;
+  :global {
+    .ui_accordion_header {
+      position: sticky;
+      top: 0;
+    }
+  }
 }
