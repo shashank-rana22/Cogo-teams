@@ -1,4 +1,6 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
@@ -29,7 +31,7 @@ const useUpdateQuota = ({ id = '', modalChangeHandler }) => {
 			});
 			modalChangeHandler(true);
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data));
 		}
 	}, [id, modalChangeHandler, trigger]);
 

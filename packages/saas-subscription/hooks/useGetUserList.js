@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
@@ -22,7 +24,7 @@ const useGetUserList = () => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data));
 		}
 	}, [globalFilters, trigger]);
 

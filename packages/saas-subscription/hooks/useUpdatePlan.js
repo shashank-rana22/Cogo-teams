@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
@@ -23,7 +25,7 @@ const useUpdatePlan = ({ planId, subscriptionId, modalChangeHandler }) => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data));
 		}
 	}, [listTrigger]);
 
@@ -37,7 +39,7 @@ const useUpdatePlan = ({ planId, subscriptionId, modalChangeHandler }) => {
 			});
 			modalChangeHandler(true);
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data));
 		}
 	}, [modalChangeHandler, planId, postTrigger, subscriptionId]);
 

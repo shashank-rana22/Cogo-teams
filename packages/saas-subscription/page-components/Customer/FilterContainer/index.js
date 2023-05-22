@@ -20,13 +20,13 @@ function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList })
 			}));
 			refetchUserStats(query);
 		}
-	}, [query]);
+	}, [query, refetchUserStats, setGlobalFilters]);
 
 	useEffect(() => {
 		if (searchTerm !== null) {
 			debounceQuery(searchTerm);
 		}
-	}, [searchTerm]);
+	}, [debounceQuery, searchTerm]);
 
 	return (
 		<div className={styles.container}>
