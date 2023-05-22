@@ -38,10 +38,12 @@ function Actions({
 	const [showOtpModal, setOTPModal] = useState(false);
 	const showForOldShipments =	shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
+	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
+	|| isEmpty(invoiceData.invoice_trigger_date);
+
 	let disableAction = showForOldShipments
 		? isIRNGenerated
-		: ['reviewed', 'approved'].includes(invoice.status)
-		|| isEmpty(invoiceData.invoice_trigger_date);
+		: disableActionCondition;
 
 	if (invoice.status === 'amendment_requested') {
 		disableAction = false;

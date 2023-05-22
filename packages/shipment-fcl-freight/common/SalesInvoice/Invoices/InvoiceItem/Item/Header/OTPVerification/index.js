@@ -24,10 +24,6 @@ function OTPVerification({
 
 	const { loading, orgData } = useGetOrgUsersData({ invoice });
 
-	const refetchAfterSendOtpApiCall = () => {
-		setModalIsOpen(true);
-	};
-
 	const refetchAfterVerifydOtpApiCall = () => {
 		setModalIsOpen(false);
 		setShowOTPModal(false);
@@ -45,7 +41,7 @@ function OTPVerification({
 	});
 
 	const { sendOtpForInvoiceApproval } = useSendInvoiceOtp({
-		refetch: refetchAfterSendOtpApiCall,
+		refetch: () => setModalIsOpen(true),
 	});
 
 	const userList = orgData?.list?.filter((obj) => obj?.mobile_verified);

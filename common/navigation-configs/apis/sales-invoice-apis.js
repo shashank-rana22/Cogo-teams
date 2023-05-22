@@ -29,6 +29,16 @@ const apis = [
 		service_name : 'bookings',
 		feature      : 'sales_invoice',
 	},
+	{
+		api          : 'get_credit_note',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'list_credit_notes',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
 ];
 
 export default apis;

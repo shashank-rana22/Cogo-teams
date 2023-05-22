@@ -42,7 +42,7 @@ const useOtpInputEvents = ({
 		}
 
 		event.preventDefault();
-	});
+	}, [otpInputElementsRef]);
 
 	const validateInputPasteEvent = useCallback((event) => {
 		event.preventDefault();
@@ -77,7 +77,7 @@ const useOtpInputEvents = ({
 		} catch (error) {
 			Toast.info('Copy-Paste not working');
 		}
-	});
+	}, [otpInputElementsRef, otpLength, setOtp]);
 
 	const validateInputs = useCallback((event) => {
 		if (event.type === 'keydown') {
@@ -87,7 +87,7 @@ const useOtpInputEvents = ({
 		if (event.type === 'paste') {
 			validateInputPasteEvent(event);
 		}
-	}, []);
+	}, [validateInputKeydownEvent, validateInputPasteEvent]);
 
 	useEffect(() => {
 		const events = ['keydown', 'paste'];
@@ -100,7 +100,7 @@ const useOtpInputEvents = ({
 				otpContainerRef.current?.removeEventListener(eventType, validateInputs);
 			});
 		};
-	}, []);
+	}, [otpContainerRef, validateInputs]);
 };
 
 export default useOtpInputEvents;
