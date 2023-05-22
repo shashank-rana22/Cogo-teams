@@ -49,10 +49,6 @@
 		background-color: #f7cdcd;
 	}
 
-	&.rejected {
-		background-color: #f7cdcd;
-	}
-
 	&.draft {
 		background-color: #eee;
 	}

@@ -32,7 +32,6 @@
 	justify-content: center;
 	width: 20px;
 	height: 20px;
-	background-color: #5936f0;
 	background-color: var(--color-accent-orange-2);
 	border-radius: 50%;
 }
