@@ -1,13 +1,16 @@
-import { Modal, Button, Loader, cl } from '@cogoport/components';
+import { Modal, Button, cl, Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { startCase } from '@cogoport/utils';
-import React, { useEffect, useContext } from 'react';
+import { isEmpty, startCase } from '@cogoport/utils';
+import React, { useContext } from 'react';
 
-import useGetShipmentCreditNote from '../../../../hooks/useGetShipmentCreditNote';
-import editCreditNoteHelper from '../helpers/editCreditNoteHelper';
+import useUpdateShipmentCreditNote from '../../../../hooks/useUpdateShipmentCreditNote';
+import generateDefaultValues from '../../helpers/generateDefaultValuesOfCreditNote';
+import updateFormValueOfCreditNote from '../../helpers/updateFormValuesOfCreditNote';
+import creditNoteControls from '../helpers/controls';
+import formatCreditNoteData from '../helpers/format-credit-note-data';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -21,58 +24,60 @@ function Edit({
 	invoiceData = {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
-	const { id, live_invoice_number, status } = item || {};
+	const { live_invoice_number, status } = item || {};
 
-	const { data, loading } = useGetShipmentCreditNote({ defaultParams: { id } });
+	const services = item?.services || [];
 
-	const services = data?.services || [];
+	const servicesIDs = services?.map((_item) => _item?.id);
 
-	const servicesIDs = services?.map((_item) => _item?.service_id);
-
-	const {
-		controls,
-		defaultValues,
-		onCreate,
-		loading: updateLoading,
-	} = editCreditNoteHelper({
+	const controls = creditNoteControls({
 		services,
-		invoice : data,
-		servicesIDs,
-		invoiceData,
-		setOpen,
-		refetch : cnRefetch,
 	});
 
-	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm();
+	const defaultValues = generateDefaultValues({ values: controls });
+
+	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm({ defaultValues });
 
 	const formValues = watch();
 
-	useEffect(() => {
-		if (defaultValues) {
-			Object.keys(defaultValues).forEach((fieldName) => {
-				if (!formValues[fieldName]) {
-					setValue(fieldName, defaultValues[fieldName]);
+	const updatedObj = updateFormValueOfCreditNote({ formValues });
+
+	const afterRefetch = () => {
+		cnRefetch();
+		setOpen(false);
+	};
+
+	const { apiTrigger = () => {}, loading } = useUpdateShipmentCreditNote({ refetch: afterRefetch });
+
+	const onCreate = (data) => {
+		const { submit_data = {}, checkError = {} } = formatCreditNoteData({
+			data,
+			servicesIDs,
+			invoice : item,
+			invoiceData,
+			isEdit  : true,
+		});
+
+		console.log({ data });
+		if (submit_data?.line_items?.length === 0) {
+			Toast.error('Line Items is required');
+			return;
+		}
+
+		let isError = false;
+
+		Object.keys(checkError).forEach((key) => {
+			checkError[key]?.forEach((t) => {
+				if (!isEmpty(t)) {
+					isError = true;
 				}
 			});
-		}
-	}, [defaultValues, watch, setValue, formValues]);
+		});
 
-	const updatedObj = {};
-
-	Object.entries(formValues).forEach(([key, value]) => {
-		switch (key) {
-			case 'remarks':
-			case 'uploadDocument':
-				updatedObj[key] = value;
-				break;
-			default:
-				updatedObj[key] = value?.map((_item) => ({
-					..._item,
-					total: _item.price_discounted * _item.quantity,
-				}));
-				break;
+		if (isError === false) {
+			apiTrigger(submit_data);
 		}
-	});
+	};
 
 	return (
 		<Modal
@@ -93,60 +98,50 @@ function Edit({
 			/>
 
 			<Modal.Body>
-				{loading ? (
-					<div className={styles.loader_wrapper}>
-						<Loader />
-					</div>
-				) : (
-					<>
-						<div className={styles.title}>
-							<b>
-								{`SID ${shipment_data?.serial_id} - Invoice number -`}
-								<u>{live_invoice_number}</u>
-							</b>
-						</div>
+				<div className={styles.title}>
+					<b>
+						{`SID ${shipment_data?.serial_id} - Invoice number -`}
+						<u>{live_invoice_number}</u>
+					</b>
+				</div>
 
-						<div>
-							<b>Requested By</b>
-							<span>
-								{` - ${data?.requested_by?.name}`}
-							</span>
-						</div>
+				<div>
+					<b>Requested By</b>
+					<span>
+						{` - ${item?.requested_by?.name}`}
+					</span>
+				</div>
 
-						<div>
-							<b>Date</b>
-							<span>
-								&nbsp;
-								-
-								{formatDate({
-									date       : data?.created_at,
-									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-									formatType : 'date',
-								})}
-							</span>
-						</div>
+				<div>
+					<b>Date</b>
+					<span>
+						&nbsp;
+						-
+						{formatDate({
+							date       : item?.created_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
+						})}
+					</span>
+				</div>
 
-						<Form
-							data={data}
-							invoiceData={invoiceData}
-							prevData={prevData}
-							controls={controls}
-							defaultValues={updatedObj}
-							errors={errors}
-							control={control}
-							setValue={setValue}
-						/>
-					</>
-				)}
+				<Form
+					prevData={prevData}
+					controls={controls}
+					defaultValues={updatedObj}
+					errors={errors}
+					control={control}
+					setValue={setValue}
+				/>
 			</Modal.Body>
 
 			<Modal.Footer>
 				<div className={styles.button_wrapper}>
-					<Button themeType="tertiary" onClick={() => setOpen(false)} disabled={updateLoading}>
+					<Button themeType="tertiary" onClick={() => setOpen(false)} disabled={loading}>
 						Cancel
 					</Button>
 
-					<Button onClick={handleSubmit(onCreate)} disabled={updateLoading}>
+					<Button onClick={handleSubmit(onCreate)} disabled={loading}>
 						Re-Apply
 					</Button>
 				</div>

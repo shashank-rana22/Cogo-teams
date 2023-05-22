@@ -6,7 +6,7 @@ import useOtpInput from '../../../../../../../../hooks/useOtpInput';
 import styles from './styles.module.css';
 
 function OtpInput(props, ref) {
-	const { otpLength = 0, inputSize = 'md', onChange = () => {} } = props;
+	const { otpLength = 0, inputSize = 'md', onChange = () => {} } = props || {};
 
 	const {
 		values = {},

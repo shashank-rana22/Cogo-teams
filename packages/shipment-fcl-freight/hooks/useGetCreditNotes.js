@@ -3,21 +3,18 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useContext, useCallback, useState } from 'react';
 
-const useListCreditNotes = () => {
+const useGetCreditNotes = () => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [apiData, setApiData] = useState({});
 
 	const { id: shipment_id = '' } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/list_credit_notes',
+		url    : 'fcl_freight/get_credit_notes',
 		method : 'GET',
 		params : {
-			filters: {
-				shipment_id,
-				is_active: true,
-			},
-			additional_methods: ['credit_note'],
+			shipment_id,
+			additional_methods: ['services'],
 		},
 	}, { manual: true });
 
@@ -39,8 +36,8 @@ const useListCreditNotes = () => {
 
 	return {
 		loading,
-		list      : apiData?.list || [],
+		list      : apiData?.data || [],
 		cnRefetch : getCreditNoteList,
 	};
 };
-export default useListCreditNotes;
+export default useGetCreditNotes;

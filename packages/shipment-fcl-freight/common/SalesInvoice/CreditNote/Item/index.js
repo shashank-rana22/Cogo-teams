@@ -43,9 +43,9 @@ function Item({
 	const bfInvoice = invoicesList.filter((ele) => ele?.proformaNumber === item?.cn_number);
 
 	const handleDownload = () => {
-		const cnLink = bfInvoice[0].invoicePdfUrl
-			? bfInvoice[0].invoicePdfUrl
-			: bfInvoice[0].proformaPdfUrl;
+		const cnLink = bfInvoice[0]?.invoicePdfUrl
+			? bfInvoice[0]?.invoicePdfUrl
+			: bfInvoice[0]?.proformaPdfUrl;
 
 		window.open(cnLink);
 	};

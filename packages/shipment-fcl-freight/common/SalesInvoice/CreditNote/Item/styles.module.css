@@ -1,5 +1,5 @@
 .main {
-	background-color: #fff;
+	background-color: var(--color-secondary-5);
 	border: none;
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(44 62 80 / 20%);
@@ -109,7 +109,8 @@
 		border-radius: 4px;
 	}
 
-	& .approved {
+	& .approved,
+	& .draft {
 		background-color: var(--color-tertiary-success-green-4);
 	}
 
@@ -117,14 +118,7 @@
 		background-color: var(--color-primary-error-red-4);
 	}
 
-	& .draft {
-		background-color: var(--color-tertiary-success-green-4);
-	}
-
-	& .requested {
-		background-color: var(--color-primary-yellow-4);
-	}
-
+	& .requested,
 	& .finance_rejected {
 		background-color: var(--color-primary-yellow-4);
 	}

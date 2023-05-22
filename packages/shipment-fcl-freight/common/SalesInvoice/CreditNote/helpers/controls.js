@@ -3,9 +3,9 @@ import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/conve
 
 import { handleServiceType } from './handleServiceType';
 
-const commonControls = (charge) => [
+const commonControls = (service) => [
 	{
-		label    : handleServiceType(charge),
+		label    : handleServiceType(service),
 		type     : 'select',
 		name     : 'code',
 		span     : 3,
@@ -55,10 +55,10 @@ const commonControls = (charge) => [
 	},
 ];
 
-const rawControls = (charge) => ({
+const rawControls = (service) => ({
 	type             : 'edit_service_charges',
-	name             : charge?.service_id,
-	service_name     : charge?.display_name || charge?.service_type,
+	name             : service?.id,
+	service_name     : service?.display_name || service?.service_type,
 	showHeader       : true,
 	showAddButtons   : false,
 	showDeleteButton : false,
@@ -74,7 +74,7 @@ const rawControls = (charge) => ({
 			total            : '',
 		},
 	],
-	controls: [...commonControls(charge)],
+	controls: [...commonControls(service)],
 });
 
 const controls = [

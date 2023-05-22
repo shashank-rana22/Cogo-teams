@@ -4,6 +4,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import useCreateShipmentCreditNote from '../../../../../../../../hooks/useCreateShipmentCreditNote';
 import formatCreditNoteData from '../../../../../../CreditNote/helpers/format-credit-note-data';
+import generateDefaultValues from '../../../../../../helpers/generateDefaultValuesOfCreditNote';
+import updateFormValueOfCreditNote from '../../../../../../helpers/updateFormValuesOfCreditNote';
 
 import creditNoteControls from './controls';
 
@@ -18,47 +20,13 @@ const useCreateCreditNoteHelper = ({
 	const controls = creditNoteControls({
 		services,
 	});
-	const generateDefaultValues = ({ values }) => {
-		const defaultValues = {};
-
-		values.forEach((control) => {
-			if (control.type === 'edit_service_charges') {
-				defaultValues[control.name] = control.value.map((value) => {
-					const fieldValue = {};
-
-					control.controls.forEach((subControl) => {
-						fieldValue[subControl.name] = value[subControl.name] || '';
-					});
-
-					return fieldValue;
-				});
-			}
-		});
-
-		return defaultValues;
-	};
 
 	const defaultValues = generateDefaultValues({ values: controls });
 
 	const { handleSubmit, control, watch, setValue, formState:{ errors = {} }, ...rest } =	useForm({ defaultValues });
 	const formValues = watch();
 
-	const updatedObj = {};
-
-	Object.entries(formValues).forEach(([key, value]) => {
-		switch (key) {
-			case 'remarks':
-			case 'uploadDocument':
-				updatedObj[key] = value;
-				break;
-			default:
-				updatedObj[key] = value?.map((_item) => ({
-					..._item,
-					total: _item.price_discounted * _item.quantity,
-				}));
-				break;
-		}
-	});
+	const updatedObj = updateFormValueOfCreditNote({ formValues });
 
 	const { apiTrigger } = useCreateShipmentCreditNote({});
 

@@ -1,19 +1,14 @@
-import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { useContext } from 'react';
 
 import getServiceNameforTableColumn from '../../../../helpers/getServiceNameforTableColumn';
 
 export const InvoiceTable = (serviceItem = {}) => {
-	const { shipment_data } = useContext(ShipmentDetailContext);
-
 	const currencyLocale = GLOBAL_CONSTANTS.currency_locale.INR;
 
-	const main_service = `${shipment_data?.shipment_type}_service`;
 	const trade_type = serviceItem?.trade_type;
 
-	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, main_service, trade_type);
+	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, trade_type);
 
 	return [
 		{
