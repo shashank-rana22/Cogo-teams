@@ -9,6 +9,7 @@ function PlanFeature({ title, list = [], configs, loading = false }) {
 			<div className={styles.flex_box}>
 				<h3>{title}</h3>
 			</div>
+
 			<div>
 				<div className={cl`${styles.card_header} ${styles.flex_box}`}>
 					{configs.map((config) => (
@@ -17,6 +18,7 @@ function PlanFeature({ title, list = [], configs, loading = false }) {
 						</div>
 					))}
 				</div>
+
 				{(list || [])?.map((feature) => (
 					<div key={feature?.display_name} className={cl`${styles.flex_box} ${styles.item_row}`}>
 						{configs.map((config) => (
@@ -26,6 +28,7 @@ function PlanFeature({ title, list = [], configs, loading = false }) {
 						))}
 					</div>
 				))}
+
 			</div>
 		</div>
 	);

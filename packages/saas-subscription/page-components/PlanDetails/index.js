@@ -14,19 +14,24 @@ function PlanDetails() {
 	const { plan = {}, pricing = [], plan_features = [] } = planDetails || {};
 	const { metadata = {} } = plan || {};
 	const { addons = [] } = metadata || {};
+
 	return (
 		<div className={styles.container}>
 			<h2>Select Plan</h2>
+
 			<div className={styles.cell}>
 				<Header plan={plan} />
 			</div>
+
 			<div className={styles.cell}>
 				<Pricing pricing={pricing} />
 			</div>
+
 			<div className={styles.flex_box}>
 				<div className={cl`${styles.cell} ${styles.feature}`}>
 					<PlanFeature title="Add-ons" list={addons} configs={addonConfig} loading={loading} />
 				</div>
+
 				<div className={cl`${styles.cell} ${styles.feature}`}>
 					<PlanFeature
 						title="Plan Feature"

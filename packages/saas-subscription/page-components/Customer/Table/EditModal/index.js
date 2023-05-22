@@ -61,6 +61,7 @@ function EditModal({ editModal, setEditModal }) {
 							</div>
 						))}
 					</div>
+
 					<div className={styles.flex_box}>
 						<Button
 							onClick={() => editModalChangeHandler('editPlan', id)}
@@ -85,6 +86,7 @@ function EditModal({ editModal, setEditModal }) {
 					{Object.keys(DETAILS_MAPPING).map((detail) => (
 						<div key={detail} className={styles.details}>
 							<div className={styles.detail_title}>{DETAILS_MAPPING[detail]}</div>
+
 							<div className={styles.detail_content}>
 								<GetDetailValue name={detail} pricing={pricing} product_family={product_family} />
 							</div>
@@ -96,6 +98,7 @@ function EditModal({ editModal, setEditModal }) {
 					<div className={styles.quota_container}>
 						<QuotaDetails editModalChangeHandler={editModalChangeHandler} quotas={quotas} />
 					</div>
+
 					<div className={styles.validity_container}>
 						<FuturePlanDetails future={future} />
 					</div>

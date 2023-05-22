@@ -12,7 +12,7 @@ const cancelObj = {
 	editAddon            : false,
 	editPlan             : false,
 	editCancelSub        : false,
-	featureInfo          : '',
+	featureInfo          : {},
 };
 
 const RenderTitle = ({ editAddon, product_name = '' }) => {

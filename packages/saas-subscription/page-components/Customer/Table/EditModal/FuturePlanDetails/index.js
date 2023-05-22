@@ -1,19 +1,11 @@
-import { Tags } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function FuturePlanDetails({ future = {} }) {
-	const { id = '', start_date = '', pricing = {} } = future || {};
+	const { start_date = '', pricing = {} } = future || {};
 	const { name = '' } = pricing || {};
-
-	const option = [
-		{
-			key      : id,
-			children : name,
-			color    : 'orange',
-		},
-	];
 
 	return (
 		<div className={styles.container}>
@@ -21,7 +13,7 @@ function FuturePlanDetails({ future = {} }) {
 			{!isEmpty(future)
 				? (
 					<div className={styles.detail_container}>
-						<Tags items={option} />
+						<Pill color="orange">{name}</Pill>
 						<div className={styles.date_container}>
 							<div className={styles.date_title}>Start Date:</div>
 							<div className={styles.date_title}>{format(start_date, 'dd-MM-yyyy')}</div>

@@ -11,11 +11,11 @@ const useGetSubscriptionInfo = ({ editModal = {}, setEditModal }) => {
 		url    : '/get_saas_subscription_profile',
 	}, { manual: true });
 
-	const refetchSubscriptionInfo = (saas_subscription_customer_id) => {
+	const refetchSubscriptionInfo = (id) => {
 		try {
 			trigger({
 				params: {
-					saas_subscription_customer_id,
+					saas_subscription_customer_id: id,
 				},
 			});
 		} catch (err) {
