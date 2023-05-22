@@ -11,7 +11,7 @@ function FeedbackModal({ showFeedback = false, setShowFeedback = () => {} }) {
 
 	const {
 		createCustomerFeedback = () => {},
-		customerFeedbackLoading,
+		customerFeedbackLoading = false,
 	} = useCreateCustomerFeedback({ setShowFeedback });
 
 	const handleSubmit = () => {
@@ -27,29 +27,26 @@ function FeedbackModal({ showFeedback = false, setShowFeedback = () => {} }) {
 		>
 			<Modal.Header title="Quotation Feedback" />
 			<Modal.Body className={styles.modal_body}>
-				<div>
-					<div className={styles.rating}>
-						<div className={styles.rating_text}>
-							Customer Experience
-						</div>
-						<RatingComponent
-							type="star"
-							totalStars={5}
-							value={starRating}
-							onChange={setStarRating}
-						/>
-
+				<div className={styles.rating}>
+					<div className={styles.rating_text}>
+						Customer Experience
 					</div>
-					<div className={styles.feed_message}>
-						<Textarea
-							name="a5"
-							size="lg"
-							placeholder="Feedback Message"
-							rows={6}
-							value={feedbackMessage}
-							onChange={setFeedbackMessage}
-						/>
-					</div>
+					<RatingComponent
+						type="star"
+						totalStars={5}
+						value={starRating}
+						onChange={setStarRating}
+					/>
+				</div>
+				<div className={styles.feed_message}>
+					<Textarea
+						name="a5"
+						size="lg"
+						placeholder="Feedback Message"
+						rows={6}
+						value={feedbackMessage}
+						onChange={setFeedbackMessage}
+					/>
 				</div>
 
 			</Modal.Body>
@@ -61,7 +58,6 @@ function FeedbackModal({ showFeedback = false, setShowFeedback = () => {} }) {
 					onClick={handleSubmit}
 				>
 					Submit
-
 				</Button>
 			</Modal.Footer>
 		</Modal>
