@@ -1,38 +1,29 @@
 import { Toast } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
 
 import useUpdateShipmentCreditNote from '../../../../hooks/useUpdateShipmentCreditNote';
 
 import creditNoteControls from './controls';
 import formatCreditNoteData from './format-credit-note-data';
 
-const useEditCreditNoteHelper = ({
+const editCreditNoteHelper = ({
 	services,
 	invoice = {},
 	servicesIDs = [],
-	isEdit = false,
 	invoiceData = {},
 	setOpen = () => {},
 	refetch,
 }) => {
-	const [selectedCodes, setSelectedCodes] = useState({});
-	const [allChargeCodes, setAllChargeCodes] = useState({});
 
-	const { apiTrigger = () => {}, loading } = useUpdateShipmentCreditNote({});
+	const afterRefetch = () => {
+		refetch();
+		setOpen(false)
+	}
 
-	const handleChange = (obj) => {
-		if (!selectedCodes[obj.code]) {
-			setSelectedCodes({ ...selectedCodes, [obj.code]: obj });
-		}
-	};
+	const { apiTrigger = () => {}, loading } = useUpdateShipmentCreditNote({refetch: afterRefetch});
 
 	const controls = creditNoteControls({
 		services,
-		handleChange,
-		setAllChargeCodes,
-		allChargeCodes,
-		isEdit,
 	});
 
 	const generateDefaultValues = ({ values = [] }) => {
@@ -83,9 +74,6 @@ const useEditCreditNoteHelper = ({
 
 		if (isError === false) {
 			apiTrigger(submit_data);
-
-			setOpen(false);
-			refetch();
 		}
 	};
 
@@ -97,4 +85,4 @@ const useEditCreditNoteHelper = ({
 	};
 };
 
-export default useEditCreditNoteHelper;
+export default editCreditNoteHelper;

@@ -7,7 +7,7 @@ import { startCase } from '@cogoport/utils';
 import React, { useEffect, useContext } from 'react';
 
 import useGetShipmentCreditNote from '../../../../hooks/useGetShipmentCreditNote';
-import useEditCreditNoteHelper from '../helpers/useEditCreditNoteHelper';
+import editCreditNoteHelper from '../helpers/editCreditNoteHelper';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -34,17 +34,16 @@ function Edit({
 		defaultValues,
 		onCreate,
 		loading: updateLoading,
-	} = useEditCreditNoteHelper({
+	} = editCreditNoteHelper({
 		services,
 		invoice : data,
 		servicesIDs,
-		isEdit  : true,
 		invoiceData,
 		setOpen,
 		refetch : cnRefetch,
 	});
 
-	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm();
+	const { handleSubmit, control, setValue, watch, formState: { errors = {} }} = useForm();
 
 	const formValues = watch();
 
