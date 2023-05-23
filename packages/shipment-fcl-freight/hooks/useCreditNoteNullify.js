@@ -25,7 +25,7 @@ const useCreditNoteNullify = ({
 			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
-			Toast.error(getApiError(err?.data));
+			Toast.error(getApiError(err?.response?.data));
 		}
 	};
 	return {

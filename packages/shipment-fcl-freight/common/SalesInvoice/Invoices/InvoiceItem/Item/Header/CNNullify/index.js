@@ -18,10 +18,14 @@ function CNNullify({
 }) {
 	const [isRequestCN, setIsRequestCN] = useState(false);
 
+	const { handleSubmit, control, reset, watch } = useForm();
+	const formValues = watch();
+
 	const refetchAfterApiCall = () => {
 		setAskNullify(false);
 		bfInvoiceRefetch();
 		refetchCN();
+		reset();
 	};
 	const {
 		onCreate = () => {},
@@ -30,9 +34,6 @@ function CNNullify({
 		invoiceId : invoice?.id,
 		refetch   : refetchAfterApiCall,
 	});
-
-	const { handleSubmit, control, reset, watch } = useForm();
-	const formValues = watch();
 
 	const handleNo = () => {
 		setIsRequestCN(true);
