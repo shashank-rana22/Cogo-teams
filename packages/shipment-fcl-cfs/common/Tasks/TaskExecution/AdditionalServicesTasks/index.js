@@ -1,10 +1,10 @@
 import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import AddRate from '@cogoport/shipment-fcl-cfs/common/AdditionalServices/components/AddRate/AddRate';
+import getStaus from '@cogoport/shipment-fcl-cfs/common/AdditionalServices/components/List/ItemAdded/get_status';
 import React, { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
-import AddRate from '../../../../../shipment-fcl-freight/common/AdditionalServices/components/AddRate';
-import getStaus from '../../../../../shipment-fcl-freight/common/AdditionalServices/components/List/ItemAdded/get_status';
 
 function AdditionsServicesTasks({
 	task = {},

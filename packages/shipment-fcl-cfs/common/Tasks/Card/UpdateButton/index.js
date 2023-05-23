@@ -47,7 +47,7 @@ function UpdateButton({
 
 	if (
 		rpaSupportedTasks.includes(task?.task)
-		&& (task?.task !== 'upload_si' || shipment_type === 'fcl_freight')
+		&& (task?.task !== 'upload_si' || shipment_type === 'fcl_cfs')
 	) {
 		return (
 			<div className={styles.container}>
