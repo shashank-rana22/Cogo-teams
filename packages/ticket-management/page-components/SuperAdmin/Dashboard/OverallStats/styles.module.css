@@ -1,0 +1,82 @@
+.container {
+	display: flex;
+}
+
+.tile {
+	flex: 1;
+	padding: 8px 16px;
+	margin-top: 12px;
+	margin-right: 12px;
+	background-color: #fff;
+	border-radius: 4px;
+}
+
+.total_graph {
+	flex: 2;
+}
+
+.count {
+	font-size: 16px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.label {
+	font-size: 10px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
+
+.graph {
+	width: 80px;
+	height: 80px;
+}
+
+.total {
+	display: flex;
+}
+
+.dot {
+	width: 8px;
+	height: 8px;
+	margin-right: 4px;
+	background-color: aqua;
+	border-radius: 50%;
+}
+
+.legends {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 75%;
+}
+
+.legend {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+	width: 50%;
+}
+
+.margin_bottom {
+	margin-bottom: 8px;
+}
+
+.legend_count {
+	display: flex;
+	align-items: center;
+}
+
+.stats_count {
+	min-width: 35px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #221f20;
+	text-align: right;
+}
+
+.stats_label {
+	font-size: 10px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
