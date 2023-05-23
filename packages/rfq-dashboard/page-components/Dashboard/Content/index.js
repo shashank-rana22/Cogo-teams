@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Pagination, Tabs, TabPanel } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 // import { useEffect } from 'react';
 
@@ -15,7 +15,7 @@ function Content(props) {
 		{ name: 'all', title: 'All RFQ' },
 	];
 
-	const { getRfqsForApproval, data = {} } = useListRfqs();
+	const { getRfqsForApproval, data = {}, page, setPage } = useListRfqs();
 	console.log('data::', data);
 
 	// useEffect(() => {
@@ -41,6 +41,15 @@ function Content(props) {
 					</TabPanel>
 				))}
 			</Tabs>
+			<div className={styles.pagination_container}>
+				<Pagination
+					className="md"
+					totalItems={data?.total_count || 0}
+					currentPage={page || 1}
+					pageSize={data?.page_limit}
+					onPageChange={setPage}
+				/>
+			</div>
 
 		</div>
 	);

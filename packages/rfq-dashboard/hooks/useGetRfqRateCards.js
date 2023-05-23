@@ -1,26 +1,20 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
 
-const useListRfqs = () => {
-	const [page, setPage] = useState(1);
-
+const useGetRfqRateCards = ({ rfq_id = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'list_rfqs',
+		url    : 'list_rfq_rate_cards',
 		method : 'GET',
 		params : {
-			port_pair_data_required         : 'true',
-			rate_card_user_details_required : 'true',
-			filters                         : {
+			filters: {
 				state: 'requested_for_approval',
-
+				rfq_id,
 			},
-			page,
 		},
 	}, { manual: false });
 
-	const getRfqsForApproval = async () => {
+	const getRfqsRateCards = async () => {
 		try {
 			await trigger();
 		} catch (error) {
@@ -31,12 +25,10 @@ const useListRfqs = () => {
 	};
 
 	return {
-		getRfqsForApproval,
+		getRfqsRateCards,
 		data,
 		loading,
-		setPage,
-		page,
 	};
 };
 
-export default useListRfqs;
+export default useGetRfqRateCards;
