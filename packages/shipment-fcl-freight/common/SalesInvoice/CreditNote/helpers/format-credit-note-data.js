@@ -26,7 +26,8 @@ const formatCreditNoteData = ({
 		if (servicesIDs?.includes(key)) {
 			(data[key] || []).forEach((line_item) => {
 				if (line_item?.is_checked === true || isEdit) {
-					const serviceDetails = invoice?.services?.filter((item) => item?.id === key)?.[0];
+					const serviceDetails = invoice?.services
+						?.filter((item) => (item?.id || item?.service_id) === key)?.[0];
 
 					const initialData = initialLineItems
 						?.filter((li) => li?.code === line_item?.code)
@@ -65,7 +66,7 @@ const formatCreditNoteData = ({
 						code         : line_item?.code,
 						price        : line_item?.price_discounted,
 						quantity     : line_item?.quantity,
-						service_id   : serviceDetails?.id,
+						service_id   : serviceDetails?.id || serviceDetails?.service_id,
 						service_type : serviceDetails?.service_type,
 					};
 
@@ -85,7 +86,9 @@ const formatCreditNoteData = ({
 		remarks                : data?.remarks ? [data?.remarks] : undefined,
 		invoice_combination_id : invoice?.id,
 		shipment_id            : invoice?.shipment_id,
-		document_urls          : [data?.uploadDocument?.finalUrl],
+		document_urls          : data?.uploadDocument
+			? data?.uploadDocument?.map((item) => item?.finalUrl)
+			: undefined,
 	};
 
 	return { submit_data, checkError };

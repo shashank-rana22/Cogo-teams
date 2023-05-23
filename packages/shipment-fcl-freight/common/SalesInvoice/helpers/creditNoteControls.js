@@ -1,7 +1,7 @@
 import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 
-import { handleServiceType } from '../../../../../../CreditNote/helpers/handleServiceType';
+import { handleServiceType } from '../CreditNote/helpers/handleServiceType';
 
 const commonControls = (handleChange, charge) => [
 	{
@@ -56,37 +56,56 @@ const commonControls = (handleChange, charge) => [
 	},
 ];
 
-const rawControls = (charge) => ({
+const rawControls = (charge, isEdit) => ({
 	type             : 'edit_service_charges',
-	name             : charge?.service_id,
+	name             : charge?.service_id || charge?.id,
 	service_name     : charge?.display_name || charge?.service_type,
 	showHeader       : true,
 	showAddButtons   : false,
 	showDeleteButton : false,
-	value            : [
-		{
-			code             : '',
-			sac_code         : '',
-			currency         : '',
-			price_discounted : '',
-			quantity         : '',
-			exchange_rate    : '',
-			tax              : '',
-			total            : '',
-		},
-	],
-	controls: [
-		{
-			name    : 'is_checked',
-			type    : 'checkbox',
-			options : [
-				{
-					label : '',
-					value : 'true',
-				},
-			],
-			span: 1,
-		}, ...commonControls(charge)],
+	value            : !isEdit
+		? [
+			{
+				is_checked       : '',
+				code             : '',
+				sac_code         : '',
+				currency         : '',
+				price_discounted : '',
+				quantity         : '',
+				exchange_rate    : '',
+				tax              : '',
+				total            : '',
+			},
+		]
+		: [
+			{
+				code             : '',
+				sac_code         : '',
+				currency         : '',
+				price_discounted : '',
+				quantity         : '',
+				exchange_rate    : '',
+				tax              : '',
+				total            : '',
+			},
+		],
+	controls: !isEdit
+		? [
+			{
+				name    : 'is_checked',
+				type    : 'checkbox',
+				options : [
+					{
+						label : '',
+						value : 'true',
+					},
+				],
+				themeType : 'primary lg',
+				span      : 1,
+			},
+			...commonControls(charge, isEdit),
+		]
+		: [...commonControls(charge, isEdit)],
 });
 
 const controls = [
@@ -99,38 +118,37 @@ const controls = [
 		rules       : { required: 'Remarks is required' },
 	},
 	{
-		label : 'Upload File',
-		name  : 'uploadDocument',
-		span  : 12,
-		type  : 'file',
-		multiple: true,
-		rules : { required: 'This field is required' },
+		label    : 'Upload File',
+		name     : 'uploadDocument',
+		span     : 12,
+		type     : 'file',
+		multiple : true,
+		rules    : { required: 'This field is required' },
 	},
 ];
 
 const creditNoteControls = ({
 	services = [],
+	isEdit = false,
 }) => {
 	const control = services?.map((service) => ({
-		...rawControls(service),
-		value           : service?.line_items?.map((item) => ({
-			is_checked       : item.is_checked,
-			code             : item.code,
-			sac_code         : item.hsn_code || 'NA',
-			currency         : item.currency,
+		...rawControls(service, isEdit),
+		value: service?.line_items?.map((item) => ({
+			is_checked       : item?.is_checked,
+			code             : item?.code,
+			sac_code         : item?.hsn_code || 'NA',
+			currency         : item?.currency,
 			price_discounted : item?.price_discounted || 0,
 			quantity         : item?.quantity || 0,
 			exchange_rate    : item?.exchange_rate || 1,
 			tax_percent      : item?.tax_percent || 0,
-			unit             : item.unit,
+			unit             : item?.unit,
 			total            : item?.tax_total_price_discounted || 0,
 			name             : item?.name,
 		})),
 	}));
 
 	control.push(...controls);
-
 	return control;
 };
-
 export default creditNoteControls;
