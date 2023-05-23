@@ -1,9 +1,10 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import ComponentsMapping from './DefaultView/ComponentsMapping'; 
 
 function LclFreight() {
 	return (
 		<ShipmentDetailContext.Provider>
-			<div>Detail</div>
+			<ComponentsMapping />
 		</ShipmentDetailContext.Provider>
 	);
 }
