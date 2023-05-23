@@ -37,12 +37,15 @@ export default {
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
 	uuid: {
-		tech_super_admin_id         : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
-		super_admin_id              : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
-		admin_id                    : 'ebafce31-75ef-4865-9060-775574e9606f',
-		parent_entity_id            : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
-		cogo_demo_account_shipper   : ['302bdc56-e807-4c71-a27c-92f83640f140'],
-		spot_booking_shipping_lines : [
+		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
+		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
+		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
+		parent_entity_id                 : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
+		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
+		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
+		cogo_demo_account_shipper        : ['302bdc56-e807-4c71-a27c-92f83640f140'],
+		spot_booking_shipping_lines      : [
 			'c3649537-0c4b-4614-b313-98540cffcf40',
 			'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
 			'fb1aa2f1-d136-4f26-ad8f-2e1545cc772a',

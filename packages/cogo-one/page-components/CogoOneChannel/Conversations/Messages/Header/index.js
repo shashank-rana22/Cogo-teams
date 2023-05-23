@@ -36,6 +36,7 @@ function Header({
 	updateUserRoom = () => {},
 	requestForAssignChat = () => {},
 	requestAssignLoading = false,
+	canMessageOnBotSession = false,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
@@ -130,6 +131,18 @@ function Header({
 
 	const renderRightButton = () => {
 		const hasAnyRequests = !!agent_id;
+		if (canMessageOnBotSession) {
+			return (
+				<Button
+					themeType="secondary"
+					size="md"
+					disabled
+					className={styles.styled_button}
+				>
+					Assign
+				</Button>
+			);
+		}
 		if (!showBotMessages) {
 			return (
 				<Button
@@ -261,7 +274,7 @@ function Header({
 				<Button
 					themeType="primary"
 					size="sm"
-					disabled={!hasPermissionToEdit}
+					disabled={!hasPermissionToEdit || canMessageOnBotSession}
 					onClick={() => setOpenModal({
 						type : 'mark_as_closed',
 						data : {

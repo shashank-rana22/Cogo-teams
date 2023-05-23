@@ -1,4 +1,3 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -10,6 +9,7 @@ import React, { useState, useEffect } from 'react';
 import RaiseTicket from '../../common/RaiseTicket';
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
+import getViewType from '../../helpers/getViewType';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
@@ -32,8 +32,6 @@ function CogoOne() {
 		agentStatus = {},
 		fetchworkPrefernce = () => {},
 	} = useAgentWorkPrefernce();
-
-	const geo = getGeoConstants();
 
 	const { status = '' } = agentStatus || {};
 
@@ -62,12 +60,6 @@ function CogoOne() {
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 
-	const omniChannelAdminIds = [
-		geo.uuid.super_admin_id,
-		geo.uuid.tech_super_admin_id,
-		geo.uuid.cogoverse_admin,
-	];
-
 	const { userRoleIds, userId, token, emailAddress } = useSelector(({ profile, general }) => ({
 		userRoleIds  : profile.partner?.user_role_ids || [],
 		userId       : profile?.user?.id,
@@ -75,8 +67,9 @@ function CogoOne() {
 		emailAddress : profile?.user?.email,
 	}));
 
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => omniChannelAdminIds.includes(eachRole)) || false;
+	const viewType = getViewType(userRoleIds);
 
+	const isomniChannelAdmin = viewType === 'admin_view';
 	const {
 		loading:statusLoading,
 		updateUserStatus = () => {},
@@ -130,6 +123,7 @@ function CogoOne() {
 		isomniChannelAdmin,
 		showBotMessages,
 		searchValue,
+		viewType,
 		setShowFeedback,
 	});
 
@@ -157,6 +151,7 @@ function CogoOne() {
 						mailProps={mailProps}
 						setActiveMessage={setActiveMessage}
 						setRaiseTicketModal={setRaiseTicketModal}
+						viewType={viewType}
 					/>
 
 					{activeTab !== 'mail' && (
@@ -171,6 +166,7 @@ function CogoOne() {
 							activeRoomLoading={activeRoomLoading}
 							setRaiseTicketModal={setRaiseTicketModal}
 							zippedTicketsData={zippedTicketsData}
+							viewType={viewType}
 						/>
 					)}
 				</>
@@ -210,6 +206,7 @@ function CogoOne() {
 			<div className={styles.layout_container}>
 				<Customers
 					isomniChannelAdmin={isomniChannelAdmin}
+					viewType={viewType}
 					setActiveMessage={setActiveMessage}
 					activeMessageCard={activeMessageCard}
 					setActiveVoiceCard={setActiveVoiceCard}
