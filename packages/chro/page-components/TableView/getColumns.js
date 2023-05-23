@@ -44,7 +44,7 @@ const getColumns = (setCtcBreakup) => [
 		),
 	},
 	{
-		Header   : 'CTC offered',
+		Header   : 'CTC OFFERED',
 		accessor : (item) => (
 			<div>
 				Rs. 1000000LPA (fixed) + Rs. 150000LPA (variable)
@@ -52,7 +52,7 @@ const getColumns = (setCtcBreakup) => [
 		),
 	},
 	{
-		Header   : 'Full CTC Breakup',
+		Header   : 'FULL CTC BREAKUP',
 		accessor : (item) => (
 			<div>
 				<Button
