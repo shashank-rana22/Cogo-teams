@@ -40,6 +40,7 @@ interface Props {
 	item?: NestedObj;
 	edit?: boolean;
 	setEdit?: Function;
+	setItem?: Function;
 	setGenerate?:Function;
 }
 
@@ -49,9 +50,11 @@ function GenerateMAWB({
 	item = {},
 	edit,
 	setEdit = () => {},
+	setItem = () => {},
 	setGenerate = () => {},
 }:Props) {
 	const [back, setBack] = useState(false);
+	const [editCopies, setEditCopies] = useState(null);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
 	const {
@@ -77,9 +80,9 @@ function GenerateMAWB({
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
 	const [activeKey, setActiveKey] = useState('basic');
 
-	const editHawbNumberCondition = !activeHawb.isNew;
+	const [customHawbNumber, setCustomHawbNumber] = useState(false);
 
-	const fields = mawbControls(disableClass, editHawbNumberCondition);
+	const fields = mawbControls(disableClass, !customHawbNumber);
 
 	const { packingData, packingList } = usePackingList();
 
@@ -94,14 +97,14 @@ function GenerateMAWB({
 
 	const [taskItem, setTaskItem] = useState({
 		...item,
-		...item.documentData,
+		...item?.documentData,
 	});
 
 	const category = item.blCategory;
 	const mawbId = item.documentId;
 	const pendingTaskId = item.id;
 
-	const [activeCategory, setActiveCategory] = useState(edit ? 'mawb' : taskItem.blCategory);
+	const [activeCategory, setActiveCategory] = useState('mawb');
 
 	const finalFields = [
 		...fields.hawb_controls,
@@ -116,6 +119,16 @@ function GenerateMAWB({
 	) || 0.0).toFixed(2)));
 
 	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(item.shipmentId);
+
+	let cogoSeriesNumber:Array<number> = [];
+
+	hawbDetails?.forEach((itm) => {
+		if (String(itm?.documentNo)?.includes('COGO')) {
+			cogoSeriesNumber.push(Number((itm?.documentNo || '').slice(5)));
+		}
+	});
+
+	cogoSeriesNumber = cogoSeriesNumber.sort((a, b) => a - b);
 
 	useEffect(() => {
 		if (activeCategory === 'hawb') {
@@ -149,9 +162,10 @@ function GenerateMAWB({
 	}, [activeHawb, activeCategory]);
 
 	useEffect(() => {
-		if (category === 'mawb') {
+		if (category === 'mawb' || category === undefined) {
 			return;
 		}
+
 		if (hawbSuccess) {
 			setTaskItem({
 				...taskItem,
@@ -187,8 +201,30 @@ function GenerateMAWB({
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 		setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 		setValue('amountOfInsurance', 'NIL');
-		setValue('accountingInformation', 'FREIGHT PREPAID');
+		setValue('accountingInformation', taskItem?.accountingInformation || 'FREIGHT PREPAID');
 	}, [hawbSuccess, activeHawb, category, activeCategory]);
+
+	useEffect(() => {
+		if (!customHawbNumber && activeHawb.isNew) {
+			setValue('document_number', activeHawb.documentNo);
+			setHawbDetails((prev) => (
+				prev.map((hawbItem) => (hawbItem.id === activeHawb.id
+					? {
+						...hawbItem,
+						documentNo: activeHawb.documentNo ? activeHawb.documentNo
+							: `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`,
+					}
+					: hawbItem))
+			));
+		} else if (customHawbNumber && activeHawb.isNew) {
+			setValue('document_number', '');
+			setHawbDetails((prev) => (
+				prev.map((hawbItem) => (hawbItem.id === activeHawb.id
+					? { ...hawbItem, documentNo: null }
+					: hawbItem))
+			));
+		}
+	}, [activeHawb, customHawbNumber]);
 
 	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);
@@ -257,6 +293,7 @@ function GenerateMAWB({
 		finalFields.forEach((c) => {
 			setValue(c.name, taskItem[c.name]);
 		});
+
 		if (!viewDoc) {
 			listAirport();
 			listOperator();
@@ -278,9 +315,23 @@ function GenerateMAWB({
 			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 			setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 			setValue('amountOfInsurance', 'NIL');
-			setValue('accountingInformation', 'FREIGHT PREPAID');
+			setValue('accountingInformation', taskItem?.accountingInformation || 'FREIGHT PREPAID');
 		}
 	}, []);
+
+	useEffect(() => {
+		if (!viewDoc && editCopies) {
+			setTaskItem({
+				...item,
+				...item?.documentData,
+			});
+			finalFields.forEach((c) => {
+				setValue(c.name, item?.documentData?.[c.name]);
+			});
+			setValue('executedDate', edit && item?.documentData?.executedDate
+				? new Date(item?.documentData?.executedDate) : new Date());
+		}
+	}, [edit, editCopies]);
 
 	useEffect(() => {
 		let totalVolume:number = 0;
@@ -317,8 +368,9 @@ function GenerateMAWB({
 						category={category}
 						activeCategory={activeCategory}
 						setActiveCategory={setActiveCategory}
-						awbNumber={item.awbNumber}
+						awbNumber={item.awbNumber || item.document_number}
 						serialId={item.serialId}
+						editCopies={editCopies}
 					/>
 
 					<FormContainer
@@ -344,6 +396,8 @@ function GenerateMAWB({
 						setActiveKey={setActiveKey}
 						taskItem={taskItem}
 						formValues={formValues}
+						setCustomHawbNumber={setCustomHawbNumber}
+						cogoSeriesNumber={cogoSeriesNumber}
 					/>
 				</>
 			)}
@@ -372,6 +426,10 @@ function GenerateMAWB({
 							activeHawb={activeHawb}
 							pendingTaskId={pendingTaskId}
 							category={category}
+							setViewDoc={setViewDoc}
+							setItem={setItem}
+							editCopies={editCopies}
+							setEditCopies={setEditCopies}
 						/>
 					</Modal>
 				)}
