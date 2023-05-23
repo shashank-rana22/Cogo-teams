@@ -66,10 +66,10 @@ function ChangeCurrency({
 					className={styles.select_div}
 				/>
 			</Modal.Body>
-			<Modal.Footer>
+			<Modal.Footer className={styles.button_div}>
 				<Button
 					size="md"
-					themeType="tertiary"
+					themeType="secondary"
 					onClick={() => setIsChangeCurrency(false)}
 					disabled={loading}
 				>
@@ -78,7 +78,6 @@ function ChangeCurrency({
 				<Button
 					size="md"
 					themeType="primary"
-					style={{ marginLeft: '16px' }}
 					onClick={() => onCreate(payload)}
 					disabled={loading || isEmpty(value)}
 				>

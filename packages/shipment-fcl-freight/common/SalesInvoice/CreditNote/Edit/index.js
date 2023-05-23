@@ -136,7 +136,7 @@ function Edit({
 
 			<Modal.Footer>
 				<div className={styles.button_wrapper}>
-					<Button themeType="tertiary" onClick={() => setOpen(false)} disabled={loading}>
+					<Button themeType="secondary" onClick={() => setOpen(false)} disabled={loading}>
 						Cancel
 					</Button>
 

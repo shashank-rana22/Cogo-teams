@@ -14,6 +14,8 @@
 	border: none !important;
 }
 
-.button_div {
-	margin-right: 20px;
+.button_div{
+	> button:not(:last-of-type) {
+		margin-right: 16px;
+	}
 }

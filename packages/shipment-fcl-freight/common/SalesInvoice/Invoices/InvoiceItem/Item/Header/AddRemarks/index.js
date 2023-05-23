@@ -43,9 +43,9 @@ function AddRemarks({
 				/>
 			</Modal.Body>
 
-			<Modal.Footer>
+			<Modal.Footer className={styles.button_div}>
 				<Button
-					themeType="tertiary"
+					themeType="secondary"
 					onClick={onClose}
 					className={styles.button_div}
 				>

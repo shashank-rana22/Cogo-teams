@@ -148,9 +148,8 @@ function SelectService({
 
 			<div className={styles.row}>
 				<Button
-					className={styles.buttton_div}
 					size="sm"
-					themeType="tertiary"
+					themeType="secondary"
 					onClick={onClose}
 				>
 					Cancel

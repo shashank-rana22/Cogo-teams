@@ -27,10 +27,9 @@ function SendInvoiceEmail({
 				<div className={styles.text}>You cannot undo this step so please do it carefully.</div>
 			</Modal.Body>
 
-			<Modal.Footer>
+			<Modal.Footer className={styles.button_div}>
 				<Button
-					className={styles.button_div}
-					themeType="tertiary"
+					themeType="secondary"
 					onClick={() => setShow(false)}
 					disabled={loading}
 				>
