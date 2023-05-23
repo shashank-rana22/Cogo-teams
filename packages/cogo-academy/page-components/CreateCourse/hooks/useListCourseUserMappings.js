@@ -16,7 +16,7 @@ function useListCourseUserMappings({ filters, activeTab = '' }) {
 	const [input, setInput] = useState('');
 
 	const [{ data = {}, loading }, trigger] = useRequest({
-		url    : '/list_course_user_mappings',
+		url    : '/list_user_courses',
 		method : 'GET',
 	}, { manual: true });
 

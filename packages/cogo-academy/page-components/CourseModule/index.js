@@ -1,6 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
+import CourseCard from './components/CourseCard';
 import Header from './components/Header';
 import CourseDetailCard from './CourseDetailCard.js';
 import useListCourseUserMappings from './hooks/useListCourseUserMappings';
@@ -8,7 +9,6 @@ import styles from './styles.module.css';
 
 function CourseModule() {
 	const [activeTab, setActiveTab] = useState('ongoing');
-	const [filters, setFilters] = useState({});
 
 	const tabs = [{
 		name  : 'ongoing',
@@ -24,7 +24,7 @@ function CourseModule() {
 		title : 'Saved',
 	}];
 
-	const { data, loading } = useListCourseUserMappings({ filters, activeTab });
+	const { data, loading } = useListCourseUserMappings({ activeTab });
 
 	const { list = [] } = data || {};
 
@@ -40,10 +40,11 @@ function CourseModule() {
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-
 					{tabs.map(({ name, title }) => (
-						<TabPanel name={name} title={title}>
-							<div>This is suggested</div>
+						<TabPanel key={name} name={name} title={title}>
+							{list.map((item) => (
+								<CourseCard key={item.id} data={item} />
+							))}
 						</TabPanel>
 					))}
 

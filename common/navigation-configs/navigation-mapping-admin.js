@@ -2093,7 +2093,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/learning/course',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.courses,
+				possible_apis : apis.course_module,
 			},
 		],
 		module_type: 'crm',
