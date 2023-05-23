@@ -1,10 +1,15 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
-function useCreateEmployeeBankDetails() {
+function useCreateEmployeeBankDetails({ bank_details }) {
+	const api = isEmpty(bank_details) ? '/create_employee_bank_details' : '/update_employee_bank_details';
+
+	const { id :bankDetailId = '' } = bank_details || {};
+
 	const [{ loading }, trigger] = useHarbourRequest({
-		url    : '/create_employee_bank_details',
+		url    : api,
 		method : 'POST',
 	}, { manual: true });
 
@@ -12,6 +17,7 @@ function useCreateEmployeeBankDetails() {
 		try {
 			await trigger({
 				data: {
+					id                  : bankDetailId || undefined,
 					ifsc_code           : data?.ifsc_code,
 					account_holder_name : data?.account_holder_name,
 					bank_name           : data?.bank_name,
