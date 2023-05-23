@@ -4,8 +4,8 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useContext, useState } from 'react';
 
+import CargoDetails from '../../commons/CargoDetails';
 import CancelShipment from '../CancelShipment';
-import CargoDetails from '../CargoDetails';
 import PortDetails from '../PortDetails';
 
 import AddPoNumber from './AddPoNumber';
@@ -17,17 +17,17 @@ function ShipmentHeader() {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
-	const { shipment_data, primary_service, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 
-	const { po_number, importer_exporter = {}, consignee_shipper = {} } = shipment_data || {};
+	const { po_number, importer_exporter = {} } = shipment_data || {};
 
 	if (isGettingShipment) {
 		return <Loader />;
 	}
 
-	const showCancelShipmentIcon = getCanCancelShipment({ shipment_data, user_data, activeStakeholder });
+	const showCancelShipmentIcon = getCanCancelShipment({ shipment_data, user_data, stakeholderConfig });
 
 	return (
 		<div className={styles.container}>
@@ -37,20 +37,9 @@ function ShipmentHeader() {
 					placement="bottom"
 					maxWidth="none"
 					interactive
-					content={(
-						<div className={styles.tooltip}>
-							{activeStakeholder !== 'consignee_shipper_booking_agent'
-								? importer_exporter?.business_name
-								: consignee_shipper?.business_name}
-						</div>
-					)}
+					content={(<div className={styles.tooltip}>{importer_exporter?.business_name}</div>)}
 				>
-					<div className={styles.business_name}>
-
-						{activeStakeholder !== 'consignee_shipper_booking_agent'
-							? importer_exporter?.business_name
-							: consignee_shipper?.business_name}
-					</div>
+					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
 				</Tooltip>
 
 				{po_number ? (

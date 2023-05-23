@@ -34,6 +34,7 @@ function AddPoNumber({
 			className={styles.custom_modal}
 		>
 			<Modal.Header title="Add PO Number" />
+
 			<Modal.Body>
 				<Input
 					size="sm"
@@ -42,6 +43,7 @@ function AddPoNumber({
 					onChange={setPoNumber}
 				/>
 			</Modal.Body>
+
 			<Modal.Footer>
 				<Button
 					themeType="secondary"
@@ -52,7 +54,7 @@ function AddPoNumber({
 				</Button>
 
 				<Button
-					disabled={loading}
+					disabled={loading || !poNumber}
 					onClick={onCreate}
 				>
 					Submit

@@ -22,5 +22,11 @@
     },
     "tracking":{
         "tab_title":"Tracking"
+    },
+    "cancel_shipment": {
+        "can_cancel": true,
+        "list_reasons": {
+            "stakeholder_type": ["superadmin"]
+        }
     }
 }
