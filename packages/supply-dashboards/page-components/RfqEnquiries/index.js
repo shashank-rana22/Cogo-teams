@@ -2,7 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useSelector } from '@cogoport/store';
 
-import TabPanelMapping from './configurations/tab-panel-mapping';
+import tabPanelMapping from './configurations/tab-panel-mapping';
 
 function RfqEnquiriesView() {
 	const partnerId = useSelector((state) => state?.profile?.partner?.id);
@@ -27,11 +27,17 @@ function RfqEnquiriesView() {
 	return (
 		<div>
 			<Tabs fullWidth activeTab={activeTab} onChange={(tab) => { handleTabChange(tab); }}>
-				{(TabPanelMapping || []).map(({
+				{(tabPanelMapping || []).map(({
 					name, title,
 					component,
-				}) => tabs.includes(name)
-							&& <TabPanel key={title} name={name} title={title}>{component}</TabPanel>)}
+				}) => {
+					if (tabs.includes(name)) {
+						return <TabPanel key={title} name={name} title={title}>{component}</TabPanel>;
+					}
+
+					return null;
+				})}
+
 			</Tabs>
 		</div>
 	);

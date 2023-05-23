@@ -11,8 +11,6 @@ import useSetReport from '../hooks/useSetReport';
 import styles from './styles.module.css';
 
 function Report() {
-	const { currency_code:{ INR } } = GLOBAL_CONSTANTS;
-
 	const {
 		hsdesc,
 		share,
@@ -130,7 +128,7 @@ function Report() {
 								<div>
 									Rs.
 									{' '}
-									{formatAmount({ amount: item.total, currency: INR })}
+									{formatAmount({ amount: item.total, currency: GLOBAL_CONSTANTS.currency_code.INR })}
 									{' '}
 									(
 									{item.percent_share.toFixed(2)}

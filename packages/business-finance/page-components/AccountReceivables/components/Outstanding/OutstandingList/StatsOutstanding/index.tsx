@@ -1,5 +1,5 @@
-import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import { StatsKeyMapping, StatsKeyMappingPayment } from '../../../../constants/index';
 
@@ -54,15 +54,15 @@ function StatsOutstanding({ item }) {
 								{' '}
 							</div>
 							<div className={styles.amount_open}>
-								{getFormattedPrice(
-									invoiceObject.LedgerAmount?.ledgerAmount || 0,
-									invoiceObject.LedgerAmount?.ledgerCurrency || currency,
-									{
+								{formatAmount({
+									amount   : invoiceObject.LedgerAmount?.ledgerAmount || 0,
+									currency : invoiceObject.LedgerAmount?.ledgerCurrency || currency,
+									options  : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
 										maximumFractionDigits : 0,
 									},
-								)}
+								})}
 								<div className={styles.count}>
 									(
 									{invoiceObject.LedgerAmount?.ledgerCount}
@@ -84,16 +84,16 @@ function StatsOutstanding({ item }) {
 									<div
 										className={styles.amount}
 									>
-										{getFormattedPrice(
-											invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount || 0,
-											invoiceObject.ageingBucket[val.valueKey]?.ledgerCurrency
-											|| currency,
-											{
+										{formatAmount({
+											amount   : invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount || 0,
+											currency : invoiceObject.ageingBucket[val.valueKey]?.ledgerCurrency
+																	|| currency,
+											options: {
 												style                 : 'currency',
 												currencyDisplay       : 'code',
 												maximumFractionDigits : 0,
 											},
-										)}
+										})}
 									</div>
 								</div>
 							))}
@@ -108,15 +108,15 @@ function StatsOutstanding({ item }) {
 					<div
 						className={styles.amount}
 					>
-						{getFormattedPrice(
-							totalOutstanding.ledgerAmount || 0,
-							totalOutstanding.ledgerCurrency || currency,
-							{
+						{formatAmount({
+							amount   : totalOutstanding.ledgerAmount || 0,
+							currency : totalOutstanding.ledgerCurrency || currency,
+							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',
 								maximumFractionDigits : 0,
 							},
-						)}
+						})}
 					</div>
 				</div>
 			</div>

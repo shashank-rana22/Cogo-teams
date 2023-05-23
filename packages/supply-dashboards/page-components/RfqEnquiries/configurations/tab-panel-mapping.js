@@ -1,6 +1,6 @@
 import RfqEnquiries from '../Content';
 
-const TabPanelMapping = [
+const tabPanelMapping = [
 	{
 		name      : 'live_bookings',
 		title     : 'Live Bookings',
@@ -38,4 +38,4 @@ const TabPanelMapping = [
 	},
 ];
 
-export default TabPanelMapping;
+export default tabPanelMapping;
