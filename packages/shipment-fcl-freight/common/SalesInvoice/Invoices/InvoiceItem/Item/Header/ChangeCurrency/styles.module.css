@@ -4,19 +4,20 @@
 			height: 160px;
 		}
 
-		.ui_select_input_placeholder, .ui_select_input_control, .ui_select_option_item {
+		.ui_select_input_placeholder,
+		.ui_select_input_control,
+		.ui_select_option_item {
 			font-size: var(--font-size-md) !important;
 		}
 	}
 }
 
-
-.select_div{
+.select_div {
 	width: 200px;
 	margin-top: 10px;
 }
 
-.button_div{
+.button_div {
 	> button:not(:last-of-type) {
 		margin-right: 16px;
 	}

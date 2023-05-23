@@ -98,8 +98,8 @@
 	align-items: center;
 
 	svg {
+		color: var(--color-accent-orange-2);
 		cursor: pointer;
-		color: var(--color-accent-orange-2)
 	}
 }
 
@@ -158,12 +158,12 @@
 	width: 34px;
 }
 
-.flex_row_div{
+.flex_row_div {
 	font-size: 10px;
-	color: #333333;
+	color: #333;
 }
 
-.icon_div{
+.icon_div {
 	margin: 4px 0 0 10px;
 	cursor: pointer;
 }

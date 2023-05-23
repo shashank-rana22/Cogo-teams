@@ -37,8 +37,8 @@
 }
 
 .address_text {
-	letter-spacing: 0.02em;
 	font-size: var(--font-size-md);
+	letter-spacing: 0.02em;
 }
 
 .heading {
@@ -110,8 +110,8 @@
 
 .flex {
 	display: flex;
-	align-items: center;
 	flex-wrap: wrap;
+	align-items: center;
 }
 
 .info_div {

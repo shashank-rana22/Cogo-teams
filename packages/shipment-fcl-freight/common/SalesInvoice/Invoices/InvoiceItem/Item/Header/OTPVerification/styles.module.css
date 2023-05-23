@@ -18,7 +18,8 @@
 
 .body {
 	:global {
-		.ui_radio_container, .ui_radio_label {
+		.ui_radio_container,
+		.ui_radio_label {
 			width: 100%;
 		}
 
@@ -47,12 +48,12 @@
 	}
 }
 
-.loader_div{
-	margin: 16px
+.loader_div {
+	margin: 16px;
 }
 
 .modal_footer {
-	> button:not(:last-of-type){
+	> button:not(:last-of-type) {
 		margin-right: 16px;
 	}
 }

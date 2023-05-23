@@ -80,7 +80,7 @@
 	margin-bottom: 24px;
 }
 
-.btn_div{
+.btn_div {
 	> button:not(:last-of-type) {
 		margin-right: 16px;
 	}
