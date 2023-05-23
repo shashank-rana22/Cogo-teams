@@ -42,6 +42,7 @@ function MessageList(messageProps) {
 		firestore,
 		viewType = '',
 		flashMessagesList = [],
+		flashMessagesLoading = false,
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
@@ -59,6 +60,21 @@ function MessageList(messageProps) {
 			setSelectedAutoAssign((p) => ({ ...p, [id]: item }));
 		}
 	};
+	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
+	const isFlashMessagesEmpty = isEmpty(flashMessagesList) || false;
+
+	const getListHeightStyles = () => {
+		if (showBotMessages && isomniChannelAdmin && isFlashMessagesEmpty) {
+			return 'bot_list_container_empty_flash';
+		}
+		if (showBotMessages && isomniChannelAdmin) {
+			return 'bot_list_container';
+		}
+		if (isFlashMessagesEmpty) {
+			return 'list_container_empty_flash';
+		}
+		return 'list_container_height';
+	};
 
 	const {
 		bulkAssignChat = () => {},
@@ -75,7 +91,7 @@ function MessageList(messageProps) {
 	}, [showBotMessages, appliedFilters]);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
-	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
+
 	return (
 		<>
 			<FlashUserChats
@@ -84,7 +100,7 @@ function MessageList(messageProps) {
 				userId={userId}
 				setActiveMessage={setActiveMessage}
 				firestore={firestore}
-				messagesLoading={messagesLoading}
+				flashMessagesLoading={flashMessagesLoading}
 			/>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
@@ -149,7 +165,7 @@ function MessageList(messageProps) {
 					)}
 					<div
 						className={cl`${styles.list_container} 
-						${(showBotMessages && isomniChannelAdmin) ? styles.bot_list_container : ''}`}
+						${styles[getListHeightStyles()]}`}
 						onScroll={handleScroll}
 					>
 						{!isPinnedChatEmpty && (

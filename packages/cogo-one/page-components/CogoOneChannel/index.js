@@ -116,6 +116,7 @@ function CogoOne() {
 		handleScroll,
 		activeRoomLoading,
 		getAssignedChats,
+		flashMessagesLoading,
 	} = useListChats({
 		firestore,
 		userId,
@@ -240,6 +241,7 @@ function CogoOne() {
 					tagOptions={tagOptions}
 					mailProps={mailProps}
 					firestore={firestore}
+					flashMessagesLoading={flashMessagesLoading}
 				/>
 				<div className={styles.chat_details_continer}>
 					{renderComponent()}

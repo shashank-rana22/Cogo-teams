@@ -47,6 +47,7 @@ function Customers({
 	mailProps = {},
 	firestore,
 	viewType = '',
+	flashMessagesLoading,
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
@@ -105,6 +106,7 @@ function Customers({
 		firestore,
 		viewType,
 		flashMessagesList,
+		flashMessagesLoading,
 	};
 
 	const voiceProps = {

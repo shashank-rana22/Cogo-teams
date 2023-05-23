@@ -96,13 +96,25 @@
 }
 
 .list_container {
-	height: calc(100% - 220px);
 	overflow-x: hidden;
 	overflow-y: auto;
+	transition: height 0.5s ease;
+}
+
+.list_container_height {
+	height: calc(100% - 260px);
+}
+
+.list_container_empty_flash {
+	height: calc(100% - 150px);
 }
 
 .bot_list_container {
-	height: calc(100% - 280px);
+	height: calc(100% - 310px);
+}
+
+.bot_list_container_empty_flash {
+	height: calc(100% - 200px);
 }
 
 .list_container::-webkit-scrollbar {

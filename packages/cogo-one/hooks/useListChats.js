@@ -44,8 +44,10 @@ const useListChats = ({
 	});
 
 	const [loading, setLoading] = useState(false);
+	const [flashMessagesLoading, setFlashMessagesLoading] = useState(false);
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
+	const [flashMessagesData, setFlashMessagesData] = useState({});
 
 	const [listData, setListData] = useState({
 		messagesListData     : {},
@@ -53,7 +55,6 @@ const useListChats = ({
 		lastMessageTimeStamp : Date.now(),
 		isLastPage           : false,
 		pinnedMessagesData   : {},
-		flashMessagesData    : {},
 	});
 
 	const { status = '', observer = '', chat_tags = '' } = appliedFilters || {};
@@ -125,9 +126,9 @@ const useListChats = ({
 	), [searchQuery]);
 
 	const mountFlashChats = useCallback(() => {
+		setFlashMessagesLoading(true);
 		snapshotCleaner({ ref: flashSalesSnapShotListener });
-		setListData((p) => ({ ...p, flashMessagesData: {} }));
-
+		setFlashMessagesData({});
 		try {
 			const newChatsQuery = query(
 				omniChannelCollection,
@@ -139,15 +140,15 @@ const useListChats = ({
 				newChatsQuery,
 				(querySnapshot) => {
 					const { resultList } = dataFormatter(querySnapshot);
-					setListData((p) => ({
-						...p,
-						flashMessagesData: { ...resultList },
-					}));
+					setFlashMessagesData(resultList);
+					setFlashMessagesLoading(false);
 				},
 
 			);
 		} catch (error) {
 			console.log('error', error);
+		} finally {
+			setFlashMessagesLoading(false);
 		}
 		return () => {
 			snapshotCleaner({ ref: pinSnapshotListener });
@@ -355,7 +356,6 @@ const useListChats = ({
 			// console.log(error);
 		}
 	};
-	const { flashMessagesData = {} } = listData || {};
 
 	const sortedFlashMessages = Object.keys(flashMessagesData || {})
 		.sort((a, b) => Number(b.updated_at || 0) - Number(a.updated_at || 0))
@@ -390,6 +390,7 @@ const useListChats = ({
 		handleScroll,
 		activeRoomLoading,
 		getAssignedChats,
+		flashMessagesLoading,
 	};
 };
 

@@ -1,34 +1,10 @@
 import { Carousel } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
-import MessageCardData from '../MessageCardData';
+import useClaimChat from '../../../../../hooks/useClaimChat';
 
+import getCarouselData from './getCarouselData';
 import styles from './styles.module.css';
-
-const getCarouselData = ({
-	flashMessagesList,
-	activeCardId,
-	userId,
-	setActiveMessage,
-	firestore,
-}) => flashMessagesList.map(
-	(eachRoom) => ({
-		key    : eachRoom?.id,
-		render : () => (
-			<div className={styles.flash_message_wrapper}>
-				<MessageCardData
-					item={eachRoom}
-					activeCardId={activeCardId}
-					userId={userId}
-					setActiveMessage={setActiveMessage}
-					firestore={firestore}
-					autoAssignChats
-					showPin={false}
-					source="flash_messages"
-				/>
-			</div>
-		),
-	}),
-);
 
 function FlashUserChats({
 	flashMessagesList,
@@ -36,30 +12,38 @@ function FlashUserChats({
 	userId,
 	setActiveMessage,
 	firestore,
-	messagesLoading,
+	flashMessagesLoading,
 }) {
-	const r = getCarouselData({
+	const { claimChat, claimLoading = false } = useClaimChat({ userId });
+
+	const carouselData = getCarouselData({
 		flashMessagesList,
 		activeCardId,
 		userId,
 		setActiveMessage,
 		firestore,
+		claimChat,
+		claimLoading,
 	});
 
+	const isCarouselEmpty = isEmpty(carouselData);
+
 	return (
-		<div className={styles.flash_messages_div}>
-			{!messagesLoading && (
+		<div className={styles.flash_messages_div} style={{ '--height': isCarouselEmpty ? '0' : '16%' }}>
+			{!flashMessagesLoading && !isCarouselEmpty && (
 				<Carousel
 					id="flash_messages"
 					size="sm"
-					slides={r}
+					key={carouselData}
+					slides={carouselData}
 					className={styles.carousel_styled}
-					autoScroll
+					autoScroll={!claimLoading}
+					showArrow={!claimLoading}
 					showDots={false}
 					itemsToScroll={1}
 					itemsToShow={1}
 					isInfinite
-					timeInterval={3000}
+					timeInterval={50000}
 				/>
 			)}
 		</div>
