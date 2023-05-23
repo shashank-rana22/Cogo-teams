@@ -3,56 +3,39 @@ import React, { useState } from 'react';
 
 import InvoicingParties from './InvoicingParties';
 
-const COMPONENTS_MAPPING = {
-	invoice_to_self: {
-		label     : 'Invoice to Self',
-		component : InvoicingParties,
+const BOOKING_OPTIONS = [
+	{
+		label : 'Invoice to Self',
+		value : 'self',
 	},
-	invoice_to_trade_partner: {
-		label     : 'Invoice to Trade Partner',
-		component : InvoicingParties,
+	{
+		label : 'Invoice to Trade Partner',
+		value : 'paying_party',
 	},
-};
-
-const RADIO_GROUP_OPTIONS = Object.entries(COMPONENTS_MAPPING).map(
-	([key, value]) => ({ label: value.label, value: key }),
-);
+];
 
 function AddInvoicingParty({
 	organizationDetails = {},
 	primary_service,
 	updateInvoicingParty = () => {},
 }) {
-	const [activeComponentKey, setActiveComponentKey] = useState(() => RADIO_GROUP_OPTIONS[0].value);
-
-	const componentProps = {
-		invoice_to_self: {
-			organization : organizationDetails,
-			primary_service,
-			updateInvoicingParty,
-			bookingType  : 'self',
-		},
-		invoice_to_trade_partner: {
-			organization : organizationDetails,
-			primary_service,
-			updateInvoicingParty,
-			bookingType  : 'paying_party',
-		},
-	};
-
-	const ActiveComponent = COMPONENTS_MAPPING[activeComponentKey].component;
-	const activeComponentProps = componentProps[activeComponentKey];
+	const [activeComponentKey, setActiveComponentKey] = useState(BOOKING_OPTIONS[0].value);
 
 	return (
 		<div>
 			<RadioGroup
-				options={RADIO_GROUP_OPTIONS}
+				options={BOOKING_OPTIONS}
 				value={activeComponentKey}
 				onChange={setActiveComponentKey}
 				style={{ justifyContent: 'space-around' }}
 			/>
-
-			<ActiveComponent key={activeComponentKey} {...activeComponentProps} />
+			<InvoicingParties
+				organization={organizationDetails}
+				primary_service={primary_service}
+				updateInvoicingParty={updateInvoicingParty}
+				bookingType={activeComponentKey}
+				key={activeComponentKey}
+			/>
 		</div>
 	);
 }

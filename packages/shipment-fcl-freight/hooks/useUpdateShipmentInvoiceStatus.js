@@ -3,41 +3,22 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateShipmentInvoiceStatus = ({
-	invoice = {},
-	setShowReview = () => {},
 	refetch = () => {},
-	status = '',
-	changeApplicableState = false,
+	successMessage = 'Status updated successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_invoice_status',
 		method : 'POST',
 	});
 
-	let successMsz = 'Status updated successfully!';
-	if (status === 'reviewed') {
-		successMsz = 'Invoice sent for approval to customer!';
-	} else if (status === 'approved') {
-		successMsz = 'Invoice approved!';
-	}
-
-	const updateInvoiceStatus = async () => {
+	const updateInvoiceStatus = async ({ payload, message = '' }) => {
 		try {
-			const res = await trigger({
-				data: {
-					id                : invoice?.id,
-					status,
-					liners_ex_applied : changeApplicableState ? false : undefined,
-				},
-			});
+			await trigger({ data: payload });
 
-			if (!res.hasError) {
-				Toast.success(successMsz);
-				setShowReview(false);
-				refetch();
-			}
+			Toast.success(message || successMessage);
+			refetch();
 		} catch (err) {
-			toastApiError(err?.data);
+			toastApiError(err);
 		}
 	};
 

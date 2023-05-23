@@ -33,7 +33,7 @@
 
 .poc_sop_text {
 	margin: auto;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 600;
 	color: #373f6f;
 }
@@ -65,7 +65,7 @@
 	justify-content: center;
 	width: 26px;
 	height: 70px;
-	background: #ee3425;
+	background-color: #ee3425;
 	border-radius: 10px 0 0 10px;
 }
 

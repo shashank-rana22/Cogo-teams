@@ -9,7 +9,7 @@ function ChangeCurrency({
 	invoiceCurrency = '',
 	setInvoiceCurrency = () => {},
 }) {
-	const { currencyOptions } = getCurrencyOptions(invoice);
+	const { currencyOptions = [] } = getCurrencyOptions(invoice);
 
 	return (
 		<Chips
@@ -18,7 +18,6 @@ function ChangeCurrency({
 			items={currencyOptions}
 			selectedItems={invoiceCurrency}
 			onItemChange={(val) => setInvoiceCurrency(val)}
-			style={{ width: '10px' }}
 		/>
 	);
 }

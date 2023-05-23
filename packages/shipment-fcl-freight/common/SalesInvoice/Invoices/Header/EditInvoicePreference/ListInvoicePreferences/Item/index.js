@@ -11,35 +11,32 @@ import React from 'react';
 import SelectService from './SelectService';
 import styles from './styles.module.css';
 
-const mainServices = [
-	'fcl_freight_service',
-	'lcl_freight_service',
-	'air_freight_service',
-];
+const MAIN_SERVICES = 'fcl_freight_service';
+const ACTION_STATE = ['reviewed', 'approved', 'revoked'];
 
 function Item({
 	invoice = {},
 	shipmentData = {},
-	handleServiceChange,
-	openedService,
-	setOpenedService,
-	allTakenServices,
+	handleServiceChange = () => {},
+	openedService = null,
+	setOpenedService = () => {},
+	allTakenServices = [],
 }) {
 	const { shipment_type = '' } = shipmentData;
 	const {
 		billing_address,
-		invoice_currency = '',
-		invoice_source = '',
+		invoice_currency = '', invoice_source = '',
+		invoicing_party_total_discounted = '',
+		invoice_total_currency = '',
+		services = [],
+		status = '',
+		id = '',
 	} = invoice || {};
 
-	const open = openedService && openedService?.id === invoice?.id;
+	const open = openedService && openedService?.id === id;
 
 	const handleServiceToggle = () => {
-		if (open) {
-			setOpenedService(null);
-		} else {
-			setOpenedService(invoice);
-		}
+		setOpenedService(open ? null : invoice);
 	};
 
 	const onServiceChange = (currentInvoice, value) => {
@@ -51,17 +48,12 @@ function Item({
 		<div className={styles.booking_text}> - Booking Party</div>
 	) : null;
 
-	const renderServicesTaken = (invoice?.services || []).map((service) => {
-		const trade_type = !mainServices.includes(service?.service_type)
+	const renderServicesTaken = (services || []).map((service) => {
+		const trade_type = MAIN_SERVICES !== service?.service_type
 			? service?.trade_type
 			: null;
 
-		let tradeType = '';
-		if (trade_type === 'export') {
-			tradeType = 'Origin';
-		} else if (trade_type === 'import') {
-			tradeType = 'Destination';
-		}
+		const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
 		const isBas = (service?.line_items || []).some(
 			(lineItem) => lineItem?.code === 'BAS',
 		);
@@ -75,18 +67,7 @@ function Item({
 		) : null;
 	});
 
-	const noActionState = ['reviewed', 'approved', 'revoked'].includes(
-		invoice?.status,
-	);
-
-	const invoiceAmount = formatAmount({
-		amount   : invoice?.invoicing_party_total_discounted || 0,
-		currency : invoice?.invoice_total_currency,
-		options  : {
-			style           : 'currency',
-			currencyDisplay : 'code',
-		},
-	});
+	const noActionState = ACTION_STATE.includes(status);
 
 	return (
 		<div className={styles.container}>
@@ -96,12 +77,13 @@ function Item({
 					{startCase(invoice_source)}
 				</div>
 			) : null}
+
 			<div
 				className={cl`${styles.header_container} ${open ? styles.open : ''}`}
 				style={{ cursor: noActionState ? 'default' : '' }}
 				onClick={!noActionState ? () => handleServiceToggle() : null}
 			>
-				<div style={{ width: '100%' }}>
+				<div className={styles.info_div}>
 					<div className={styles.details}>
 						<div className={styles.details_child}>
 							<div className={styles.heading}>
@@ -113,14 +95,12 @@ function Item({
 
 						{noActionState ? (
 							<div className={styles.invoice_status}>
-								{startCase(invoice?.status)}
+								{startCase(status)}
 							</div>
 						) : null}
 					</div>
 
-					<div
-						className={styles.flex}
-					>
+					<div className={styles.flex}>
 						<div className={styles.icon_wrapper}>
 							<IcMHome />
 						</div>
@@ -130,26 +110,34 @@ function Item({
 						</div>
 					</div>
 
-					<div className={styles.gst_number}>
-						GST Number :
+					<div className={styles.billing_info}>
+						GST Number:&nbsp;
 						{billing_address?.tax_number}
 					</div>
 
-					<div className={styles.invoice_currency}>
+					<div className={styles.billing_info}>
 						Invoice Currency:
-						{' '}
+						&nbsp;
 						{invoice_currency}
 					</div>
 
-					{invoiceAmount && (
+					{invoicing_party_total_discounted ? (
 						<div className={styles.overall_amount}>
 							Invoice Amount:
-							{invoiceAmount}
+							&nbsp;
+							{formatAmount({
+								amount   : invoicing_party_total_discounted,
+								currency : invoice_total_currency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</div>
-					)}
+					) : null}
+
 					<div
 						className={styles.flex}
-						style={{ flexWrap: 'wrap' }}
 					>
 						{renderServicesTaken}
 					</div>

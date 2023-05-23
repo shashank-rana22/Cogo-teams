@@ -7,14 +7,14 @@
 
 .action {
 	padding: 12px 24px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 400;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 	border-bottom: none;
 
 	&:hover {
 		cursor: pointer;
-		background: #f2f2f291;
+		background-color: #f2f2f291;
 	}
 }
 

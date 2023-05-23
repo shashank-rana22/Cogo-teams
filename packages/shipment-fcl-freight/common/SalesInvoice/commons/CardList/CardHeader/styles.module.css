@@ -1,19 +1,18 @@
-.container{
-	background-color: #f9f9f9;
-	border-radius: 4px;
-	border-bottom: 1px solid #e0e0e0;
+.container {
+	border-bottom: 1px solid var(--color-secondary-greyscale-5);
 
 	@media (max-width: 768px) {
 		display: none;
 	}
 }
 
-.cargo{
+.cargo {
 	margin: 6px 0 0 8px;
 }
-.row{
+
+.row {
 	display: flex;
-	justify-content: space-between;
 	align-items: flex-start;
+	justify-content: space-between;
 	padding: 8px 16px;
 }

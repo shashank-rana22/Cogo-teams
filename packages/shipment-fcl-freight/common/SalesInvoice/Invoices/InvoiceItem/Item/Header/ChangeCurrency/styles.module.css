@@ -1,7 +1,24 @@
-.form{
-	:global{
+.form {
+	:global {
 		.ui_modal_body_container {
 			height: 160px;
 		}
+
+		.ui_select_input_placeholder,
+		.ui_select_input_control,
+		.ui_select_option_item {
+			font-size: var(--font-size-md) !important;
+		}
+	}
+}
+
+.select_div {
+	width: 200px;
+	margin-top: 10px;
+}
+
+.button_div {
+	> button:not(:last-of-type) {
+		margin-right: 16px;
 	}
 }

@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal, Button, cl } from '@cogoport/components';
 import React from 'react';
 
 import useSendInvoiceEmail from '../../../../../../../../hooks/useSendInvoiceEmail';
@@ -11,27 +11,32 @@ function SendInvoiceEmail({
 	invoice = {},
 	refetch = () => {},
 }) {
-	const { handleSend, loading } = useSendInvoiceEmail({
-		setShow,
-		invoice,
-		refetch,
+	const refetchAfterApiCall = () => {
+		refetch();
+		setShow(false);
+	};
+	const { handleSend = () => {}, loading } = useSendInvoiceEmail({
+		refetch: refetchAfterApiCall,
 	});
 
 	return (
-		<Modal show={show} onClose={() => setShow(false)}>
-			<Modal.Header title="Send Invoice Email" />
-			<Modal.Body><div className={styles.text}>Are you sure, you want to send invoice email?</div></Modal.Body>
-			<Modal.Footer>
+		<Modal show={show} onClose={() => setShow(false)} closeOnOuterClick={false}>
+			<Modal.Body className={styles.body}>
+				<div className={cl`${styles.text} ${styles.bold}`}>Are you sure, you want to send invoice email?</div>
+
+				<div className={styles.text}>You cannot undo this step so please do it carefully.</div>
+			</Modal.Body>
+
+			<Modal.Footer className={styles.button_div}>
 				<Button
-					className="secondary"
+					themeType="secondary"
 					onClick={() => setShow(false)}
 					disabled={loading}
-					style={{ marginRight: '20px' }}
 				>
 					Cancel
 				</Button>
 
-				<Button onClick={handleSend} disabled={loading}>
+				<Button onClick={() => handleSend({ id: invoice?.id })} disabled={loading}>
 					Send Email
 				</Button>
 			</Modal.Footer>

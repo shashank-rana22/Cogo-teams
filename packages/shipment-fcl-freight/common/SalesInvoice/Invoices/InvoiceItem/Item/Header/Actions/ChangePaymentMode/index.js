@@ -16,18 +16,10 @@ function ChangePaymentMode({
 		credit : { label: 'Cash', value: 'cash' },
 		cash   : { label: 'Deferred Payment', value: 'credit' },
 	};
-	const options = [
-		{ label: 'Cash', value: 'cash' },
-		{ label: 'Deferred Payment', value: 'credit' },
-	];
 
-	const paymentMode = invoice?.payment_mode
-		? optionsToShow[invoice?.payment_mode]?.value
-		: value;
+	const options = [optionsToShow.cash, optionsToShow.credit];
 
-	const handleChange = () => {
-		setCheck(!check);
-	};
+	const paymentMode = invoice?.payment_mode ? optionsToShow[invoice?.payment_mode]?.value : value;
 
 	const payload = { id: invoice?.id, payment_mode: paymentMode };
 
@@ -36,19 +28,18 @@ function ChangePaymentMode({
 		refetch();
 	};
 
-	const { changePaymentMode, loading } = useUpdateInvoicePaymentMode({
-		payload,
-		refetch: refetchAfterCall,
-	});
+	const { changePaymentMode = () => {}, loading } = useUpdateInvoicePaymentMode({ refetch: refetchAfterCall });
+
 	return (
 		<Modal show={show} onClose={() => setShow(false)}>
 			<Modal.Header title="Change Payment Mode" />
+
 			<Modal.Body>
 				{invoice?.payment_mode ? (
 					<Radio
 						label={optionsToShow[invoice?.payment_mode]?.label}
 						checked={check}
-						onChange={handleChange}
+						onChange={() => setCheck(!check)}
 					/>
 				) : (
 					<RadioGroup
@@ -58,8 +49,9 @@ function ChangePaymentMode({
 					/>
 				)}
 			</Modal.Body>
+
 			<Modal.Footer>
-				<Button onClick={changePaymentMode} disabled={loading || !check}>
+				<Button onClick={() => changePaymentMode(payload)} disabled={loading || !check}>
 					Update
 				</Button>
 			</Modal.Footer>

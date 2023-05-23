@@ -1,33 +1,31 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useCreditNoteNullify = ({
 	invoiceId = '',
 	refetch = () => {},
+	successMessage = 'Credit Note Nullified Successfully',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'create_shipment_revoked_invoice',
+		url    : '/create_shipment_revoked_invoice',
 		method : 'POST',
 	}, { manual: true });
 
 	const onCreate = async (data) => {
-		const { remarks, file } = data;
+		const { remarks, file } = data || {};
 		try {
-			const res = await trigger({
+			await trigger({
 				data: {
 					invoice_combination_id : invoiceId,
 					remarks                : [remarks],
-					document_urls          : [file?.finalUrl ? file?.finalUrl : undefined],
+					document_urls          : file?.finalUrl ? [file?.finalUrl] : undefined,
 				},
 			});
-
-			if (!res.hasError) {
-				Toast.success('Credit Note Nullified Successfully');
-				refetch();
-			}
+			Toast.success(successMessage);
+			refetch();
 		} catch (err) {
-			toastApiError(err?.data);
+			Toast.error(getApiError(err?.response?.data));
 		}
 	};
 	return {

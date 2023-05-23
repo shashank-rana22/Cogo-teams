@@ -30,7 +30,7 @@
 	& > select,
 	input {
 		height: 38px;
-		font-size: 16px;
+		font-size: var(--font-size-xl);
 	}
 
 	:global {
@@ -44,6 +44,6 @@
 }
 
 .errors {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	color: red;
 }

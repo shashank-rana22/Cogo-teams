@@ -36,6 +36,7 @@ function GroundOps() {
 					item={item}
 					edit={edit}
 					setEdit={setEdit}
+					setItem={setItem}
 					setGenerate={setGenerate}
 				/>
 			)}

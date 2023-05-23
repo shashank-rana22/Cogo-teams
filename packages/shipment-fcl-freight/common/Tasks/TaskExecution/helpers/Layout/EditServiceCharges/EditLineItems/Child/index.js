@@ -1,6 +1,4 @@
-import { Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
-import { v4 as uuid } from 'uuid';
 
 import Item from '../../../Item';
 
@@ -14,6 +12,7 @@ function Child({
 	field = {},
 	remove = () => {},
 	customValues = {},
+	showDeleteButton = true,
 }) {
 	return (
 		<div className={styles.container}>
@@ -25,7 +24,11 @@ function Child({
 
 					if (control_item?.type === 'static') {
 						return (
-							<div key={uuid()} style={{ width: `${flex}%` }} className={styles.static_container}>
+							<div
+								key={`${name}.${index}.${control_item?.name}`}
+								style={{ width: `${flex}%` }}
+								className={styles.static_container}
+							>
 								{render ? render(customValues) : customValues?.[control_item?.name]}
 							</div>
 						);
@@ -43,9 +46,12 @@ function Child({
 					);
 				})}
 
-				<div className={styles.delete_button_container}>
-					<IcMDelete width={20} height={20} onClick={() => remove(index, 1)} />
-				</div>
+				{showDeleteButton
+					? (
+						<div className={styles.delete_button_container}>
+							<IcMDelete width={20} height={20} onClick={() => remove(index, 1)} />
+						</div>
+					) : null}
 			</div>
 		</div>
 	);

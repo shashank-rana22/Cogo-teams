@@ -1,18 +1,18 @@
-.container{
-	margin-bottom: 24px;
+.container {
 	display: flex;
 	align-items: flex-start;
+	margin-bottom: 24px;
 }
 
-.confirm_label{
+.confirm_label {
+	width: 80%;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
-	font-size: 14px;
 	color: #393f70;
 	cursor: pointer;
-	width: 80%;
 }
 
-.check_box_wrapper{
+.check_box_wrapper {
 	width: 5%;
 	margin: 6px 20px 0 0;
 }

@@ -1,23 +1,21 @@
-import React, { useEffect, useMemo } from 'react';
+import React, { useEffect } from 'react';
 
 import Layout from '../../../../Tasks/TaskExecution/helpers/Layout';
 
 function Form({
-	prevData, controls, defaultValues, setValue, control, errors,
+	prevData = {},
+	controls = [],
+	defaultValues = {},
+	setValue = () => { },
+	control = () => { },
+	errors = {},
 }) {
-	const docUrls = useMemo(() => {
-		const urls = [];
-		prevData?.document_urls?.forEach((doc) => {
-			const file = { name: doc, url: doc };
-			urls.push(file);
-		});
-		return urls;
-	}, [prevData?.document_urls]);
+	const { remarks, document_urls } = prevData || {};
 
 	useEffect(() => {
-		setValue('remarks', prevData?.remarks);
-		setValue('uploadDocument', docUrls);
-	}, [setValue, prevData?.remarks, docUrls]);
+		setValue('remarks', remarks);
+		setValue('uploadDocument', document_urls);
+	}, [setValue, remarks, document_urls]);
 
 	return (
 		<Layout

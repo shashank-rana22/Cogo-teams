@@ -173,16 +173,6 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
-		api          : 'get_credit_note',
-		access_type  : 'private',
-		service_name : 'bookings',
-	},
-	{
-		api          : 'list_credit_notes',
-		access_type  : 'private',
-		service_name : 'bookings',
-	},
-	{
 		api          : 'get_shipment_timeline',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1498,6 +1488,31 @@ const apis = [
 		api          : 'get_pending_task_authorization',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_fortigo_trip_locations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_fortigo_trip_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_fortigo_trip_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_saas_rail_domestic_freight_container_details',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_maruti_tracking_details',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
 	},
 ];
 

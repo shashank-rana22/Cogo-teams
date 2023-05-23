@@ -1,42 +1,59 @@
-.container{
+.container {
 	display: flex;
 	align-items: center;
 	width: 100%;
 }
 
-.user_name{
-	white-space: nowrap;
+.user_name {
+	width: 60%;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	width: 60%;
+	white-space: nowrap;
 }
 
-.no_data{
-	font-size: 16px;
+.no_data {
+	font-size: var(--font-size-xl);
 	font-weight: 500;
 }
 
-.body{
-	:global{
-		.ui_radio_container{
+.body {
+	:global {
+		.ui_radio_container,
+		.ui_radio_label {
 			width: 100%;
 		}
-		.ui_modal_body_container{
+
+		.ui_modal_body_container {
 			height: 300px;
 		}
-		.ui_radio_label{
-			width: 100%;
+
+		.ui_radiogroup_container {
+			flex-direction: column;
 		}
 	}
 }
 
-.otp_modal{
-	:global{
-		.ui_modal_body_container{
-			height: 140px;
+.otp_modal {
+	:global {
+		.ui_modal_body_container {
 			display: flex;
 			align-items: center;
 			justify-content: center;
+			height: 140px;
 		}
+
+		.ui_input_control {
+			text-align: center;
+		}
+	}
+}
+
+.loader_div {
+	margin: 16px;
+}
+
+.modal_footer {
+	> button:not(:last-of-type) {
+		margin-right: 16px;
 	}
 }

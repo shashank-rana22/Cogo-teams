@@ -6,20 +6,15 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import formatIps from '../common/SalesInvoice/helpers/format-ips';
-import IncoTermMapping from '../common/SalesInvoice/helpers/IncoTermMapping.json';
 import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
+import incoTermMapping from '../configurations/inco-term-mapping.json';
 
-const exportServices = ['fcl_freight', 'lcl_freight', 'air_freight'];
-const exportServiceTypes = [
-	'fcl_freight_service',
-	'lcl_freight_service',
-	'air_freight_service',
-];
+const exportServiceTypes = 'fcl_freight_service';
 
 const geo = getGeoConstants();
 
 const isAllServicesTaken = (
-	invoicing_parties,
+	servicesList,
 	selectedParties,
 	shipment_data,
 	allServiceLineitemsCount,
@@ -35,30 +30,33 @@ const isAllServicesTaken = (
 
 	let mainServices = [];
 	if (shipment_data?.state === 'cancelled') {
-		mainServices = invoicing_parties?.[0]?.services?.filter(
+		mainServices = servicesList?.filter(
 			(service) => service?.service_type === shipmentMainService,
 		);
 	} else {
-		mainServices = invoicing_parties?.[0]?.services?.filter(
+		mainServices = servicesList?.filter(
 			(service) => service?.service_type !== 'subsidiary_service',
 		);
 	}
+
 	let isAllMainServicesTaken = true;
 	const notTaken = [];
+
 	mainServices.forEach((service) => {
-		if (!allServicesTaken.includes(service.service_id)) {
+		if (!allServicesTaken.includes(service.id)) {
 			isAllMainServicesTaken = false;
 			notTaken.push(service.service_type);
 		}
 	});
+
 	if (allServicesTaken.length !== allServiceLineitemsCount) {
 		isAllMainServicesTaken = false;
 	}
-
 	return { isAllMainServicesTaken, notTaken };
 };
 
 const useEditInvoicePref = ({
+	servicesList,
 	invoicing_parties = [],
 	shipment_data = {},
 	refetch = () => {},
@@ -88,12 +86,10 @@ const useEditInvoicePref = ({
 
 	const {
 		inco_term = '',
-		shipment_type,
 		importer_exporter_id,
 	} = shipment_data;
 
-	const updateExportInvoices = IncoTermMapping[inco_term] === 'export'
-		&& exportServices.includes(shipment_type);
+	const updateExportInvoices = incoTermMapping[inco_term] === 'export';
 
 	const endPoint = updateExportInvoices ? '/update_shipment_export_invoice_combination'
 		: '/update_shipment_invoice_combination';
@@ -107,18 +103,18 @@ const useEditInvoicePref = ({
 		const newParty = {
 			id              : selectedParties.length,
 			billing_address : {
-				tax_number                  : ba.tax_number,
-				organization_trade_party_id : ba.organization_trade_party_id,
-				registration_number         : ba.registration_number,
-				poc                         : ba.poc,
-				pincode                     : ba.pincode,
-				organization_id             : ba.organization_id,
-				organization_country_id     : ba.organization_country_id,
-				name                        : ba.name,
-				is_sez                      : ba.is_sez,
+				tax_number                  : ba?.tax_number,
+				organization_trade_party_id : ba?.organization_trade_party_id,
+				registration_number         : ba?.registration_number,
+				poc                         : ba?.poc,
+				pincode                     : ba?.pincode,
+				organization_id             : ba?.organization_id,
+				organization_country_id     : ba?.organization_country_id,
+				name                        : ba?.name,
+				is_sez                      : ba?.is_sez,
 				tax_mechanism               : ba?.tax_mechanism,
-				business_name               : ba.business_name,
-				address                     : ba.address,
+				business_name               : ba?.business_name,
+				address                     : ba?.address,
 				trade_party_type            : ba?.trade_party_type,
 			},
 			invoice_currency : geo.country.currency.code,
@@ -151,7 +147,7 @@ const useEditInvoicePref = ({
 				newSelectParties.push(updateParty);
 			});
 
-			let isBasicFreightInvService = [];
+			let isBasicFreightInvService = {};
 			newSelectParties[currentInvoiceIndex].services = newServices?.map(
 				(service) => {
 					const itemsService = allServiceLineitems.find(
@@ -171,10 +167,7 @@ const useEditInvoicePref = ({
 					);
 
 					let serviceType = currentService?.service_type;
-					if (
-						currentService?.service_type
-						&& currentService?.service_type === 'trailer_freight_service'
-					) {
+					if (currentService?.service_type === 'trailer_freight_service') {
 						serviceType = 'haulage_freight_service';
 					}
 					if (isEmpty(currentService?.service_type)) {
@@ -218,9 +211,7 @@ const useEditInvoicePref = ({
 				(finalNewSelectParties || []).forEach((party) => {
 					const BFLineItem = (party?.services || []).some(
 						(service) => service.serviceKey === isBasicFreightInvService.serviceKey
-							&& exportServiceTypes.includes(
-								isBasicFreightInvService.service_type,
-							),
+							&& exportServiceTypes === isBasicFreightInvService.service_type,
 					);
 
 					if (party?.services?.length > 1 && BFLineItem) {
@@ -242,7 +233,7 @@ const useEditInvoicePref = ({
 	const handleEditPreferences = async () => {
 		try {
 			const { isAllMainServicesTaken } = isAllServicesTaken(
-				invoicing_parties,
+				servicesList,
 				selectedParties,
 				shipment_data,
 				allServiceLineitemsCount,

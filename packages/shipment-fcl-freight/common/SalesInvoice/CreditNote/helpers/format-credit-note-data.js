@@ -1,46 +1,45 @@
 const formatCreditNoteData = ({
-	data,
-	servicesIDs,
-	invoice,
-	invoiceData,
+	data = {},
+	servicesIDs = [],
+	invoice = {},
+	invoiceData = {},
 	isEdit,
 }) => {
 	const initialLineItems = [];
+
 	invoiceData?.invoicing_parties?.forEach((party) => {
 		party?.services?.forEach((service) => {
 			service?.line_items?.forEach((item) => {
-				const obj = { ...item };
+				const obj = { ...(item || {}) };
 				obj.service_id = service?.service_id;
+
 				initialLineItems.push(obj);
 			});
 		});
 	});
 
 	const lineItemArray = [];
+
 	let checkError = {};
 
 	(Object.keys(data) || []).forEach((key) => {
-		if (servicesIDs.includes(key)) {
+		if (servicesIDs?.includes(key)) {
 			(data[key] || []).forEach((line_item) => {
-				if (line_item?.is_checked === 'true' || isEdit) {
-					const serviceDetails = invoice?.services?.filter(
-						(item) => item?.service_id === key,
-					)?.[0];
+				if (line_item?.is_checked === true || isEdit) {
+					const serviceDetails = invoice?.services
+						?.filter((item) => (item?.id || item?.service_id) === key)?.[0];
 
 					const initialData = initialLineItems
 						?.filter((li) => li?.code === line_item?.code)
 						?.find((lineitem) => lineitem.service_id === key);
 
-					const initialPrice = initialData?.price_discounted;
-					const initialQuantity = initialData?.quantity;
+					const { price_discounted:initialPrice, quantity:initialQuantity } = initialData || {};
 
-					if (
-						line_item?.price_discounted > initialPrice
-						|| line_item?.quantity > initialQuantity
-					) {
+					if (line_item?.price_discounted > initialPrice || line_item?.quantity > initialQuantity) {
 						const arr = checkError[key] ? checkError[key] : [];
 
 						let errs = {};
+
 						if (line_item?.price_discounted > initialPrice) {
 							errs = {
 								price_discounted: {
@@ -49,6 +48,7 @@ const formatCreditNoteData = ({
 								},
 							};
 						}
+
 						if (line_item?.quantity > initialQuantity) {
 							errs = {
 								...errs,
@@ -59,27 +59,22 @@ const formatCreditNoteData = ({
 							};
 						}
 
-						checkError = {
-							...checkError,
-							[key]: [...arr, { ...errs }],
-						};
+						checkError = { ...checkError, [key]: [...arr, { ...errs }] };
 					}
 
 					const newLineItem = {
-						code         : line_item.code,
-						price        : line_item.price_discounted,
-						quantity     : line_item.quantity,
-						service_id   : serviceDetails?.service_id,
+						code         : line_item?.code,
+						price        : line_item?.price_discounted,
+						quantity     : line_item?.quantity,
+						service_id   : serviceDetails?.id || serviceDetails?.service_id,
 						service_type : serviceDetails?.service_type,
 					};
+
 					lineItemArray.push(newLineItem);
 				} else {
 					const arr = checkError[key] ? checkError[key] : [];
 
-					checkError = {
-						...checkError,
-						[key]: [...arr, null],
-					};
+					checkError = { ...checkError, [key]: [...arr, null] };
 				}
 			});
 		}
@@ -91,7 +86,9 @@ const formatCreditNoteData = ({
 		remarks                : data?.remarks ? [data?.remarks] : undefined,
 		invoice_combination_id : invoice?.id,
 		shipment_id            : invoice?.shipment_id,
-		document_urls          : [data?.uploadDocument.finalUrl],
+		document_urls          : data?.uploadDocument
+			? data?.uploadDocument?.map((item) => item?.finalUrl)
+			: undefined,
 	};
 
 	return { submit_data, checkError };

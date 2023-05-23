@@ -1,7 +1,7 @@
 .card_title {
 	display: flex;
 	align-items: center;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	line-height: 30px;
 	color: #000;

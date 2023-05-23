@@ -1,30 +1,25 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateInvoicePaymentMode = ({
 	refetch = () => {},
-	payload = {},
+	successMessage = 'Payment mode Updated',
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/update_invoice_payment_mode',
 		method : 'POST',
 	}, { manual: true });
 
-	const changePaymentMode = async () => {
+	const changePaymentMode = async (payload) => {
 		try {
-			const res = await trigger({
+			await trigger({
 				data: payload,
 			});
-
-			if (!res?.hasError) {
-				Toast.success('Payment mode Updated');
-				refetch();
-			} else {
-				Toast.error(res?.err);
-			}
+			Toast.success(successMessage);
+			refetch();
 		} catch (err) {
-			toastApiError(err?.data);
+			Toast.error(getApiError(err?.response?.data));
 		}
 	};
 

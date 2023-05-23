@@ -1,22 +1,20 @@
-
-.title_black{
-	font-weight: normal;
-	font-size: 12px;
-	line-height: 20px;
-	text-align: center;
+.title_black {
 	display: inline-block;
 	max-width: 100%;
-	color: #000000;
+	font-size: var(--font-size-md);
+	font-weight: normal;
+	color: #000;
+	text-align: center;
+	text-align: left;
 	word-break: break-word;
 	word-wrap: break-word;
-	text-align: left;
 	background-color: red;
 }
 
 .row {
 	display: flex !important;
 	justify-content: space-between !important;
-    padding: 12px 20px;
+	padding: 12px;
 
 	&:hover {
 		background-color: #f9f9f9;
@@ -24,5 +22,6 @@
 }
 
 .column {
-    max-width: 16.6667%;
+	max-width: 16.6667%;
+	font-size: var(--font-size-md);
 }

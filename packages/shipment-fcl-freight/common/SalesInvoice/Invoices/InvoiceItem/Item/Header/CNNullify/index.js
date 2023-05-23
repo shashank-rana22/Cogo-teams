@@ -1,35 +1,39 @@
 import { Button, Modal } from '@cogoport/components';
 import { TextAreaController, UploadController, useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useCreditNoteNullify from '../../../../../../../hooks/useCreditNoteNullify';
 import RequestCN from '../RequestCN';
 
+import styles from './styles.module.css';
+
 function CNNullify({
 	askNullify,
 	setAskNullify = () => {},
-	shipment_serial_id,
 	invoice,
 	refetchCN = () => {},
 	invoiceData,
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 }) {
 	const [isRequestCN, setIsRequestCN] = useState(false);
 
+	const { handleSubmit, control, reset, watch } = useForm();
+	const formValues = watch();
+
 	const refetchAfterApiCall = () => {
 		setAskNullify(false);
-		BfInvoiceRefetch();
+		bfInvoiceRefetch();
 		refetchCN();
+		reset();
 	};
 	const {
-		onCreate,
+		onCreate = () => {},
 		loading,
 	} = useCreditNoteNullify({
 		invoiceId : invoice?.id,
 		refetch   : refetchAfterApiCall,
 	});
-
-	const { handleSubmit, control, reset } = useForm();
 
 	const handleNo = () => {
 		setIsRequestCN(true);
@@ -47,6 +51,7 @@ function CNNullify({
 				className="primary md"
 				show={askNullify}
 				onClose={handleOnClose}
+				closeOnOuterClick={false}
 			>
 				<Modal.Header title="Do you want to revoke this invoice ?" />
 				<Modal.Body>
@@ -67,26 +72,22 @@ function CNNullify({
 					<Button
 						size="md"
 						onClick={handleNo}
-						style={{
-							marginRight: '10px',
-						}}
+						className={styles.button_div}
 					>
 						Create Partial CN
 					</Button>
 					<Button
 						onClick={handleSubmit(onCreate)}
-						disabled={loading}
+						disabled={loading || isEmpty(formValues.remarks) || isEmpty(formValues.file)}
 						size="md"
 					>
 						Revoke Invoice
 					</Button>
-
 				</Modal.Footer>
 			</Modal>
 
 			{isRequestCN ? (
 				<RequestCN
-					shipment_serial_id={shipment_serial_id}
 					invoice={invoice}
 					show={isRequestCN}
 					setShow={setIsRequestCN}

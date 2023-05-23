@@ -1,15 +1,26 @@
-.form{
+.form {
 	min-height: calc(60vh);
 	padding: 12px;
 }
 
 .modal_footer {
 	button:not(:last-of-type) {
-		margin-right: 10px;
+		margin-right: 16px;
 	}
 }
 
 .full_width_btn {
 	width: 100%;
+	padding: 8px 0;
 	margin-bottom: 20px;
+	font-weight: 600;
+	color: var(--color-tertiary-blue-2);
+	text-align: center;
+	cursor: pointer;
+	border: 1px dashed var(--color-tertiary-blue-2);
+	border-radius: 4px;
+
+	&:hover {
+		box-shadow: rgb(57 63 112 / 25%) 0 8px 16px;
+	}
 }

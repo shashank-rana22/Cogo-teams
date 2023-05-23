@@ -15,11 +15,11 @@
 	justify-content: center;
 	width: 20px;
 	height: 20px;
-	background: #dfe1ef;
+	background-color: #dfe1ef;
 	border-radius: 50%;
 
 	> svg {
-		font-size: 16px;
+		font-size: var(--font-size-xl);
 		color: #fff;
 	}
 }
@@ -32,8 +32,7 @@
 	justify-content: center;
 	width: 20px;
 	height: 20px;
-	background: #5936f0;
-	background: var(--color-accent-orange-2);
+	background-color: var(--color-accent-orange-2);
 	border-radius: 50%;
 }
 

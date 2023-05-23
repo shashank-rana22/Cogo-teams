@@ -1,10 +1,10 @@
 import { Button, Modal, Select } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateCurrency from '../../../../../../../hooks/useUpdateCurrency';
+import INVOICE_CURRENCY_MAPPINGS from '../../../../../helpers/invoiceCurrencyMapping';
 
 import styles from './styles.module.css';
 
@@ -12,8 +12,7 @@ function ChangeCurrency({
 	isChangeCurrency = false,
 	setIsChangeCurrency = () => {},
 	invoice = {},
-	BfInvoiceRefetch = () => {},
-	salesInvoicesRefetch = () => {},
+	refetch = () => {},
 }) {
 	const onClose = () => {
 		setIsChangeCurrency(false);
@@ -21,28 +20,10 @@ function ChangeCurrency({
 	const [value, setValue] = useState('');
 
 	const geo = getGeoConstants();
-	const currency = GLOBAL_CONSTANTS.currency_code;
-	const country = GLOBAL_CONSTANTS.country_ids;
 
-	const country_code = (id) => {
-		const details = getCountryDetails({
-			country_id: id,
-		});
-		return details.country_code;
-	};
-
-	const invoiceCurrencyMappings = {
-		freight_invoice_currency: {
-			[country_code(country.IN)] : [currency.INR, currency.USD],
-			[country_code(country.GB)] : [currency.GBP, currency.EUR, currency.USD],
-			[country_code(country.VN)] : [currency.USD, currency.VND],
-			others                     : [currency.USD, currency.EUR, currency.INR],
-		},
-	};
-
-	const currencyOptionsOld =	invoiceCurrencyMappings?.freight_invoice_currency?.[
+	const currencyOptionsOld =	INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.[
 		invoice?.country_code || geo.country.currency.code
-	] || invoiceCurrencyMappings?.freight_invoice_currency?.others;
+	] || INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.others;
 
 	const currencyOptions = currencyOptionsOld.map((item) => ({
 		label : item,
@@ -59,12 +40,10 @@ function ChangeCurrency({
 		if (onClose) {
 			onClose();
 		}
-		BfInvoiceRefetch();
-		salesInvoicesRefetch();
+		refetch();
 	};
 
 	const { onCreate, loading } = useUpdateCurrency({
-		payload,
 		refetch  : refetchAfterCall,
 		currency : invoice?.invoice_currency,
 	});
@@ -73,7 +52,7 @@ function ChangeCurrency({
 		<Modal
 			className={styles.form}
 			show={isChangeCurrency}
-			onClose={onClose}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title="CHANGE CURRENCY" />
 			<Modal.Body>
@@ -84,13 +63,13 @@ function ChangeCurrency({
 					placeholder="Select Currency"
 					options={currencyOptions}
 					size="md"
-					style={{ width: '250px' }}
+					className={styles.select_div}
 				/>
 			</Modal.Body>
-			<Modal.Footer>
+			<Modal.Footer className={styles.button_div}>
 				<Button
 					size="md"
-					themeType="primary"
+					themeType="secondary"
 					onClick={() => setIsChangeCurrency(false)}
 					disabled={loading}
 				>
@@ -99,9 +78,8 @@ function ChangeCurrency({
 				<Button
 					size="md"
 					themeType="primary"
-					style={{ marginLeft: '16px' }}
-					onClick={onCreate}
-					disabled={loading}
+					onClick={() => onCreate(payload)}
+					disabled={loading || isEmpty(value)}
 				>
 					Confirm
 				</Button>

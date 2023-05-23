@@ -1,27 +1,26 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateInvoiceRemarks = ({
 	refetch = () => {},
-	payload = {},
+	successMessage = 'Your remarks have been added successfully',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'fcl_freight/update_invoice_remarks',
 		method : 'POST',
 	}, { manual: true });
 
-	const onSubmitRemarks = async () => {
+	const onSubmitRemarks = async (payload) => {
 		try {
-			const res = await trigger({
+			await trigger({
 				data: payload,
 			});
-			if (!res.hasError) {
-				Toast.success('Your remarks have been added successfully');
-				refetch();
-			}
+
+			Toast.success(successMessage);
+			refetch();
 		} catch (error) {
-			toastApiError(error?.data);
+			Toast.error(getApiError(error?.response?.data));
 		}
 	};
 	return { onSubmitRemarks, loading };

@@ -46,6 +46,7 @@ function Customers({
 	tagOptions = [],
 	mailProps = {},
 	firestore,
+	viewType = '',
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
@@ -101,6 +102,7 @@ function Customers({
 		userId,
 		sortedPinnedChatList,
 		firestore,
+		viewType,
 	};
 
 	const voiceProps = {

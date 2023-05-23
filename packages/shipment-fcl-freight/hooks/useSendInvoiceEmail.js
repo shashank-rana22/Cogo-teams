@@ -1,31 +1,27 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useSendInvoiceEmail = ({
-	setShow = () => {},
-	invoice = {},
 	refetch = () => {},
+	successMessage = 'Email Send Successfully',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/send_invoice_email',
 		method : 'POST',
 	}, { manual: true });
 
-	const handleSend = async () => {
+	const handleSend = async ({ id }) => {
 		try {
-			const payload = { id: invoice?.id };
-
-			const res = await trigger({
-				data: payload,
+			await trigger({
+				data: {
+					id,
+				},
 			});
-			if (!res?.hasError) {
-				Toast.success('Email Send successfully');
-				setShow(false);
-				refetch();
-			}
+			Toast.success(successMessage);
+			refetch();
 		} catch (err) {
-			toastApiError(err?.data?.invoice);
+			Toast.error(getApiError(err?.response?.data));
 		}
 	};
 

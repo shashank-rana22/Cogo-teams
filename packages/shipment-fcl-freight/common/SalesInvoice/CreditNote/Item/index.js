@@ -1,4 +1,4 @@
-import { Loader, Button, Tooltip } from '@cogoport/components';
+import { Loader, Button, Tooltip, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowRotateDown,
@@ -8,13 +8,13 @@ import {
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
-import EditCN from '../Edit';
+import Edit from '../Edit';
 import ReviewCN from '../Review';
 
 import LineItems from './LineItems';
 import styles from './styles.module.css';
 
-const CNstatusMapping = {
+const CN_STATUS_MAPPING = {
 	pending          : 'draft',
 	reviewed         : 'requested',
 	approved         : 'approved',
@@ -24,8 +24,7 @@ const CNstatusMapping = {
 
 function Item({
 	item = {},
-	serial_id = '',
-	CNRefetch = () => {},
+	cnRefetch = () => {},
 	invoiceData = {},
 	loading = false,
 	invoicesList = [],
@@ -41,35 +40,34 @@ function Item({
 		document_urls : item?.document_urls || [],
 	};
 
-	const bfInvoice = invoicesList.filter((ele) => ele?.proformaNumber === item?.cn_number) || [];
+	const bfInvoice = invoicesList.filter((ele) => ele?.proformaNumber === item?.cn_number);
 
 	const handleDownload = () => {
-		const cnLink = bfInvoice[0].invoicePdfUrl
-			? bfInvoice[0].invoicePdfUrl
-			: bfInvoice[0].proformaPdfUrl;
+		const cnLink = bfInvoice[0]?.invoicePdfUrl
+			? bfInvoice[0]?.invoicePdfUrl
+			: bfInvoice[0]?.proformaPdfUrl;
 
 		window.open(cnLink);
 	};
 
 	if (loading) {
 		return (
-			<>
+			<div className={styles.loader_wrapper}>
 				<Loader />
-				<Loader />
-				<Loader />
-			</>
+			</div>
 		);
 	}
 
 	const title = (
 		<>
 			<section className={styles.billing_party} ref={billingPartyHeightRef}>
-				<h4>{item?.billing_address?.name}</h4>
+				<h5>{item?.billing_address?.name}</h5>
+
 				<Tooltip
 					theme="light"
-					interactive
+					placement="bottom"
 					content={(
-						<div style={{ fontSize: '10px' }}>
+						<div className={styles.billing_address}>
 							{item?.billing_address?.address}
 						</div>
 					)}
@@ -80,6 +78,7 @@ function Item({
 					</span>
 				</Tooltip>
 			</section>
+
 			<section className={styles.details}>
 				<div className={styles.number}>
 					<span
@@ -87,10 +86,11 @@ function Item({
 						className={item?.status === 'approved' ? styles.approved : undefined}
 					>
 						{item?.cn_number}
-
 					</span>
+
 					<span>{item?.live_invoice_number}</span>
 				</div>
+
 				<div className={styles.invoice_value}>
 					Invoice Value - &nbsp;
 					<span>
@@ -105,15 +105,18 @@ function Item({
 						})}
 					</span>
 				</div>
+
 				<div className={styles.invoice_status_and_action}>
 					<div className={styles.status}>
-						<div className={`${styles[CNstatusMapping[itemStatus]]} ${styles.status_text}`}>
-							{startCase(CNstatusMapping[itemStatus])}
+						<div className={cl`${styles[CN_STATUS_MAPPING[itemStatus]]} ${styles.status_text}`}>
+							{startCase(CN_STATUS_MAPPING[itemStatus])}
 						</div>
+
 						{itemStatus === 'rejected' ? (
 							<IcCError width={16} height={16} />
 						) : null}
 					</div>
+
 					{itemStatus === 'pending' ? (
 						<div>
 							<Button
@@ -138,15 +141,13 @@ function Item({
 				) : null}
 
 			</section>
+
 			<section
 				className={styles.rotate_icon}
 				onClick={() => setOpen(open !== 'line_items' ? 'line_items' : false)}
 				tabIndex={0}
 				role="button"
-				style={{
-					height:
-					`${billingPartyHeightRef.current?.offsetHeight}px`,
-				}}
+				style={{ height: `${billingPartyHeightRef.current?.offsetHeight}px` }}
 			>
 				<IcMArrowRotateDown className={open ? styles.rotate : null} />
 			</section>
@@ -159,14 +160,17 @@ function Item({
 				<div className={styles.header}>
 					{title}
 				</div>
+
 				{open === 'line_items' ? (
-					(item?.services || []).map((_item) => (
-						<LineItems
-							key={_item?.service_id}
-							item={_item}
-							loading={loading}
-						/>
-					))
+					<div className={styles.line_items_container}>
+						{(item?.services || []).map((_item) => (
+							<LineItems
+								key={_item?.service_id}
+								item={_item}
+								loading={loading}
+							/>
+						))}
+					</div>
 				) : null}
 			</main>
 
@@ -174,18 +178,17 @@ function Item({
 				<ReviewCN
 					setOpen={setOpen}
 					id={item?.id}
-					CNRefetch={CNRefetch}
+					cnRefetch={cnRefetch}
 				/>
 			) : null}
 
 			{open === 'edit' ? (
-				<EditCN
+				<Edit
 					setOpen={setOpen}
 					prevData={prevData}
-					CNstatusMapping={CNstatusMapping}
-					serial_id={serial_id}
+					CN_STATUS_MAPPING={CN_STATUS_MAPPING}
 					item={item}
-					CNRefetch={CNRefetch}
+					cnRefetch={cnRefetch}
 					invoiceData={invoiceData}
 				/>
 			) : null}

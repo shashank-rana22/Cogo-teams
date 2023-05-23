@@ -14,12 +14,12 @@
 }
 
 .left_content {
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 600;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 
 	@media (max-width: 768px) {
-		font-size: 12px;
+		font-size: var(--font-size-md);
 	}
 }
 
@@ -31,7 +31,7 @@
 .toggle_container {
 	display: flex;
 	margin-left: 22px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	color: #000;
 	text-align: center;
 }
@@ -40,7 +40,7 @@
 	display: flex;
 	align-items: center;
 	padding: 4px 12px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: #f97d01;
 	background-color: #fef3e9;
@@ -59,7 +59,7 @@
 }
 
 .booking_req_button_text {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	color: red;
 	text-decoration: underline;
 }

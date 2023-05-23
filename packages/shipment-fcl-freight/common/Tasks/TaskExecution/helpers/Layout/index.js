@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import FieldArray from './ChildFormat';
 import EditServiceCharges from './EditServiceCharges';
@@ -42,16 +42,21 @@ function Layout({
 		totalFields.push(rowWiseFields);
 	}
 
+	const keysForRows = useMemo(
+		() => Array(totalFields.length).fill(null).map(() => Math.random()),
+		[totalFields.length],
+	);
+
 	return (
 		<div className={styles.layout}>
-			{totalFields.map((rowFields) => (
-				<div className={cl`${styles.row} form_layout_row`} key={rowFields}>
+			{totalFields.map((rowFields, i) => (
+				<div className={cl`${styles.row} form_layout_row`} key={keysForRows[i]}>
 					{rowFields.map((field) => {
-						const { type, heading = '' } = field || {};
+						const { type, heading = '', name = '' } = field || {};
 
 						if (type === 'fieldArray') {
 							return (
-								<div className={styles.width_100} key={field.name}>
+								<div className={styles.width_100} key={name}>
 									{heading ? (
 										<div className={styles.heading}>
 											{heading}
@@ -60,7 +65,7 @@ function Layout({
 
 									<FieldArray
 										{...field}
-										error={errors?.[field?.name]}
+										error={errors?.[name]}
 										control={control}
 										showElements={showElements}
 										formValues={formValues}
@@ -71,10 +76,10 @@ function Layout({
 
 						if (type === 'edit_service_charges') {
 							return (
-								<div className={styles.width_100} key={field.name}>
+								<div className={styles.width_100} key={name}>
 									<EditServiceCharges
 										control={control}
-										customValues={customValues?.[field?.name]}
+										customValues={customValues?.[name]}
 										{...field}
 									/>
 								</div>
@@ -83,9 +88,9 @@ function Layout({
 
 						return (
 							<Item
-								key={field.name}
+								key={name}
 								control={control}
-								error={errors?.[field?.name]}
+								error={errors?.[name]}
 								formValues={formValues}
 								{...field}
 							/>

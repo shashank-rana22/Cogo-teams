@@ -12,7 +12,7 @@
 
 	:global {
 		.ui_input_container.ui_ps_size_sm .ui_input_control {
-			font-size: 12px;
+			font-size: var(--font-size-md);
 		}
 	}
 }
@@ -45,11 +45,11 @@
 	display: flex;
 	flex-direction: column;
 	align-self: center;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }
 
 .info {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	opacity: 0.58;
 
 	&.other-dates {

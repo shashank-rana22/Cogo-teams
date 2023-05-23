@@ -1,38 +1,37 @@
-.heading{
-	font-weight: 500;
-	font-size: 18px;
-	color: #393f70;
+.heading {
 	margin: 14px 0 32px 8px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #393f70;
 
 	&.sub_heading {
+		width: fit-content;
+		margin: 14px 0 28px 12px;
+		font-size: var(--font-size-lg);
 		font-weight: 500;
-		font-size: 14px;
 		color: #383f70;
 		border-bottom: 1px solid #383f70;
-		width: fit-content;
-		margin: 14px 0px 28px 12px;
 	}
 }
 
-.form{
+.form {
 	height: 49vh;
 }
 
-.confirm_label{
-	margin-left: 8px;
-	font-weight: 500;
-	font-size: 14px;
-	color: #393f70;
+.confirm_label {
 	width: 80%;
+	margin-left: 8px;
+	font-size: var(--font-size-lg);
+	font-weight: 500;
+	color: #393f70;
 }
 
-.title{
-	font-weight: 400;
-	font-size: 14px;
-	text-transform: capitalize;
-	color: #393f70;
-	margin-bottom: 12px;
+.title {
 	width: 5%;
+	margin-bottom: 12px;
+	font-size: var(--font-size-lg);
+	color: #393f70;
+	text-transform: capitalize;
 	white-space: nowrap;
 
 	&.value {
@@ -41,7 +40,7 @@
 	}
 }
 
-.flex{
+.flex {
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -52,31 +51,37 @@
 
 	&.row {
 		flex-direction: row;
-		margin-bottom: 0px;
+		margin-bottom: 0;
 	}
 }
 
-.line{
-	border-top: 2px solid #cbd1f8;
-	margin-right: 24px;
-	width: 32px;
+.line {
 	position: relative;
+	width: 32px;
+	margin-right: 24px;
 	margin-bottom: 12px;
+	border-top: 2px solid #cbd1f8;
 
 	&.arrow::after {
-		content: '';
 		position: absolute;
-		right: 0;
 		top: -6px;
+		right: 0;
 		width: 10px;
 		height: 10px;
+		content: "";
 		border: 2px solid red;
 		border-color: transparent #cbd1f8 #cbd1f8 transparent;
 		transform: rotateZ(-40deg) skew(15deg, 15deg);
 	}
 }
 
-.message{
+.message {
 	display: flex;
 	margin-bottom: 24px;
+}
+
+.btn_div {
+	> button:not(:last-of-type) {
+		margin-right: 16px;
+	}
 }

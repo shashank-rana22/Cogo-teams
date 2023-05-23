@@ -1,20 +1,17 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { startCase } from '@cogoport/utils';
 
-export const tableColumn = ({ serviceItem = {}, shipment_data = {} }) => {
-	const mainService = `${shipment_data?.shipment_type}_service`;
+import getServiceNameforTableColumn from '../../../helpers/getServiceNameforTableColumn';
 
-	const ServiceName =		serviceItem?.service_type === mainService
-		? startCase(serviceItem?.service_type)
-		: (serviceItem?.trade_type === 'import'
-					&& `Destination ${startCase(serviceItem?.service_type)}`)
-				|| (serviceItem?.trade_type === 'export'
-					&& `Origin ${startCase(serviceItem?.service_type)}`)
-				|| startCase(serviceItem?.service_type);
+export const tableColumn = ({ serviceItem = {} }) => {
+	const trade_type = serviceItem?.trade_type;
+	const currencyLocale = GLOBAL_CONSTANTS.currency_locale.INR;
+
+	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, trade_type);
 
 	return [
 		{
-			label  : ServiceName,
+			label  : serviceName,
 			render : (item) => item?.name || '-',
 			span   : 2,
 		},
@@ -25,7 +22,7 @@ export const tableColumn = ({ serviceItem = {}, shipment_data = {} }) => {
 		},
 		{
 			label  : 'Rate',
-			render : (item) => Number(item?.price_discounted || 0).toLocaleString('en-IN') || 0,
+			render : (item) => Number(item?.price_discounted || 0).toLocaleString(currencyLocale) || 0,
 			span   : 1,
 		},
 		{
@@ -35,13 +32,13 @@ export const tableColumn = ({ serviceItem = {}, shipment_data = {} }) => {
 		},
 		{
 			label  : 'Discount',
-			render : (item) => Number(item?.discount_price || 0).toLocaleString('en-IN') || 'NA',
+			render : (item) => Number(item?.discount_price || 0).toLocaleString(currencyLocale) || 'NA',
 			span   : 1,
 		},
 
 		{
 			label  : 'Exc. Rate',
-			render : (item) => Number(item?.exchange_rate || 0).toLocaleString('en-IN') || 'NA',
+			render : (item) => Number(item?.exchange_rate || 0).toLocaleString(currencyLocale) || 'NA',
 			span   : 1,
 		},
 		{

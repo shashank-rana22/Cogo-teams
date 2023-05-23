@@ -1,4 +1,5 @@
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 import Header from './Header';
 import InvoiceServiceWise from './InvoiceServiceWise';
@@ -6,7 +7,7 @@ import styles from './styles.module.css';
 
 function ItemHeader({
 	invoice = {},
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 	loading = false,
 	invoiceData = {},
 	invoicesList = [],
@@ -18,7 +19,7 @@ function ItemHeader({
 		<div className={styles.container}>
 			<Header
 				invoice={invoice}
-				BfInvoiceRefetch={BfInvoiceRefetch}
+				bfInvoiceRefetch={bfInvoiceRefetch}
 				invoiceData={invoiceData}
 				invoicesList={invoicesList}
 				isIRNGenerated={isIRNGenerated}
@@ -30,7 +31,7 @@ function ItemHeader({
 						<InvoiceServiceWise
 							item={item}
 							loading={loading}
-							key={item}
+							key={uuid()}
 						/>
 					))}
 				</div>

@@ -8,8 +8,17 @@ import styles from './styles.module.css';
 
 const BILLED_ITEMS_CODE = ['BookingCONV', 'BookingNOST'];
 
+const format = (amount, currency) => formatAmount({
+	amount,
+	currency,
+	options: {
+		style                 : 'currency',
+		currencyDisplay       : 'code',
+		maximumFractionDigits : 2,
+	},
+});
+
 function InvoiceServiceWise({ item = {}, loading = false }) {
-	console.log(item, " :item");
 	const {
 		service_total_discounted,
 		service_total_currency,
@@ -20,25 +29,11 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 		detail = {},
 	} = item || {};
 
-	let showBilledText = true;
-	(line_items || []).forEach((items) => {
-		if (!BILLED_ITEMS_CODE.includes(items?.code)) {
-			showBilledText = false;
-		}
-	});
+	const showBilledText = (items) => !!BILLED_ITEMS_CODE.includes(items?.code);
+	line_items.every(showBilledText);
 
 	const renderBilledText = showBilledText && quotation_source === 'billed_at_actuals' ? '*will be billed at actuals'
 		: null;
-
-	const format = (amount, currency) => formatAmount({
-		amount,
-		currency,
-		options: {
-			style                 : 'currency',
-			currencyDisplay       : 'code',
-			maximumFractionDigits : 2,
-		},
-	});
 
 	return (
 		<div className={styles.container}>
@@ -50,15 +45,15 @@ function InvoiceServiceWise({ item = {}, loading = false }) {
 			/>
 
 			<div className={styles.totals}>
-				<div style={{ minWidth: '12%' }}>
+				<div className={styles.tax_info}>
 					Total Tax:
-					{' '}
+					&nbsp;
 					{format(tax_total_discounted, service_total_currency)}
 				</div>
 
 				<div className={styles.total_tax}>
 					Total w/o Tax:
-					{' '}
+					&nbsp;
 					{format(total_price_discounted, service_total_currency)}
 				</div>
 			</div>

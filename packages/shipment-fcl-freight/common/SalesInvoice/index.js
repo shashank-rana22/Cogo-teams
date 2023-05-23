@@ -1,9 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
+import { v4 as uuid } from 'uuid';
 
 import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
-import useListBfSalesInvoices from '../../hooks/useListBfSalesInvoices';
 import useListSageSalesInvoices from '../../hooks/useListSageSalesInvoices';
-import useOrgOutStanding from '../../hooks/useOrgOutStanding';
 import OverviewManageServices from '../Overview/OverviewManageServices';
 
 import Loader from './commons/Loader';
@@ -12,40 +11,35 @@ import styles from './styles.module.css';
 
 function SalesInvoice() {
 	const { list } = useListSageSalesInvoices();
-	const { salesList, refetch:BfInvoiceRefetch } = useListBfSalesInvoices();
-
 	const { data: invoiceData, groupedInvoices, refetch: salesInvoicesRefetch, loading } = useGetShipmentInvoice();
 
-	const { outstanding_by_reg_num } = useOrgOutStanding({
-		org_reg_nums: Object.keys(groupedInvoices || {}),
-	});
-
-	const isIRNGenerated = !!list.find((item) => !!item.irn_number);
+	const isIRNGenerated = !!list?.find((item) => !!item?.irn_number);
 
 	if (loading) {
 		return (
-			<div className={styles.loader}>
-				<Loader />
-				<Loader />
-				<Loader />
-			</div>
+			<>
+				{Array(3).fill().map(() => (
+					<div key={uuid()} className={styles.loader}>
+						<Loader />
+						<Loader />
+						<Loader />
+					</div>
+				))}
+			</>
 		);
 	}
 
 	return (
 		<main className={styles.container}>
-			<OverviewManageServices />
+			<OverviewManageServices isOpen={false} />
 
 			{!loading && !isEmpty(invoiceData) ? (
 				<Invoices
 					invoiceData={invoiceData}
 					groupedInvoices={groupedInvoices}
-					BfInvoiceRefetch={BfInvoiceRefetch}
-					invoicesList={salesList}
 					loading={loading}
 					salesInvoicesRefetch={salesInvoicesRefetch}
 					isIRNGenerated={isIRNGenerated}
-					outstanding_by_reg_num={outstanding_by_reg_num}
 				/>
 			) : null}
 		</main>

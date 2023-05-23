@@ -1,8 +1,9 @@
-.chip{
-    margin-bottom: 12px;
-    :global{
-        .ui_chip_container{
-            min-width: 60px;
-        }
-    }
+.chip {
+	margin-left: 20px;
+
+	:global {
+		.ui_chip_container {
+			min-width: 60px;
+		}
+	}
 }

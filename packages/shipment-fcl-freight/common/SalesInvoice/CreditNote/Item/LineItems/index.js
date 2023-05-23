@@ -17,6 +17,7 @@ function LineItems({ item = {}, loading = false }) {
 				data={line_items}
 				detail={detail}
 				loading={loading}
+				creditNote
 			/>
 		</div>
 	);

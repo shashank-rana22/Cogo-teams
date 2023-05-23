@@ -5,16 +5,16 @@ import { useEffect, useCallback } from 'react';
 
 const useListSageSalesInvoices = () => {
 	const router = useRouter();
-	const { shipment_id } = router.query;
+	const { shipment_id } = router?.query || {};
 	const [
 		{ loading, data },
 		trigger,
 	] = useRequest(
 		{
-			url    : 'list_sage_invoices_v2',
-			method : 'get',
+			url    : '/list_sage_invoices_v2',
+			method : 'GET',
 		},
-		{ autoCancel: false },
+		{ manual: true },
 	);
 
 	const listApi = useCallback(async () => {

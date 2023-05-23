@@ -1,35 +1,35 @@
-import { Button, Popover, Tooltip } from '@cogoport/components';
+import { Button, Popover, Tooltip, cl } from '@cogoport/components';
 import {
 	IcMOverflowDot,
 	IcMInfo,
 	IcCError,
 	IcMEmail,
 } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
+import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import AddRemarks from '../AddRemarks';
-import ChangeCurrency from '../ChangeCurrency';
-import EditInvoice from '../EditInvoice';
-import OTPVerification from '../OTPVerification';
-import ReviewServices from '../ReviewServices';
-
-import AmendmentReasons from './AmendmentReasons';
-import ChangePaymentMode from './ChangePaymentMode';
-import SendInvoiceEmail from './SendInvoiceEmail';
 import styles from './styles.module.css';
+
+const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
+const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
+const OTPVerification = dynamic(() => import('../OTPVerification'), { ssr: false });
+const ReviewServices = dynamic(() => import('../ReviewServices'), { ssr: false });
+const AmendmentReasons = dynamic(() => import('./AmendmentReasons'), { ssr: false });
+const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
+const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
+
+const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 
 function Actions({
 	invoice = {},
-	BfInvoiceRefetch = () => {},
+	bfInvoiceRefetch = () => {},
 	shipment_data = {},
 	invoiceData = {},
 	isIRNGenerated = false,
 	salesInvoicesRefetch = () => {},
 }) {
 	const [show, setShow] = useState(false);
-	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
@@ -38,12 +38,12 @@ function Actions({
 	const [showOtpModal, setShowOTPModal] = useState(false);
 	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
-	const user_data = useSelector(({ profile }) => profile || {});
+	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
+	|| isEmpty(invoiceData.invoice_trigger_date);
 
 	let disableAction = showForOldShipments
 		? isIRNGenerated
-		: ['reviewed', 'approved'].includes(invoice.status)
-		|| isEmpty(invoiceData.invoice_trigger_date);
+		: disableActionCondition;
 
 	if (invoice.status === 'amendment_requested') {
 		disableAction = false;
@@ -53,18 +53,13 @@ function Actions({
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[0];
 
-	const isInvoiceBefore20Aug2022 =		firstChar !== '1' || invoice_serial_id.length < 8;
+	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < 8;
 
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {
 		disableMarkAsReviewed = isIRNGenerated && isInvoiceBefore20Aug2022;
 	}
 	// HARD CODING ENDS
-
-	const handleClickInvoice = () => {
-		setShow(false);
-		setIsEditInvoice(true);
-	};
 
 	const handleClickCurrency = () => {
 		setIsChangeCurrency(true);
@@ -89,13 +84,9 @@ function Actions({
 	);
 
 	const handleRefetch = () => {
-		BfInvoiceRefetch();
+		bfInvoiceRefetch();
 		salesInvoicesRefetch();
 	};
-
-	// goods_transport_agency
-	const editInvoicesVisiblity =	(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-		|| user_data.email === 'ajeet@cogoport.com';
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
@@ -103,20 +94,6 @@ function Actions({
 		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
-					{editInvoicesVisiblity ? (
-						<div style={{ width: '100%' }}>
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.text}
-								onClick={handleClickInvoice}
-							>
-								Edit Invoices
-							</div>
-							<div className={styles.line} />
-						</div>
-					) : null}
-
 					<div>
 						<div
 							role="button"
@@ -181,7 +158,7 @@ function Actions({
 							</div>
 						) : null}
 
-						{!['reviewed', 'approved', 'revoked'].includes(invoice.status) ? (
+						{!INVOICE_STATUS.includes(invoice.status) ? (
 							<Button
 								size="sm"
 								onClick={() => setShowReview(true)}
@@ -203,7 +180,6 @@ function Actions({
 						<Tooltip
 							placement="bottom"
 							theme="light"
-							interactive
 							content={<AmendmentReasons invoice={invoice} />}
 						>
 							<div className={styles.icon_info_wrapper}>
@@ -213,38 +189,36 @@ function Actions({
 					) : null}
 				</div>
 
-				<div className={styles.actions_wrap}>
+				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 					<div className={styles.email_wrapper}>
 						<IcMEmail
-							style={{ cursor: 'pointer', color: '#F68B21' }}
 							onClick={() => setSendEmail(true)}
 						/>
 
 						<Tooltip
-							interactive
 							placement="bottom"
 							content={(
-								<div style={{ fontSize: '10px', color: '#333333' }}>
+								<div className={styles.flex_row_div}>
 									<div className={styles.flex_row}>
 										Proforma email sent :
-										{' '}
+										&nbsp;
 										{invoice.proforma_email_count || 0}
 									</div>
 
-									<div className={styles.flex_row}>
+									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
-										{' '}
+										&nbsp;
 										{invoice.sales_email_count || 0}
 									</div>
-									<div className={styles.flex_row}>
-										<div className={styles.flex_row}>
+									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
+										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											UTR Number:
-											{' '}
+											&nbsp;
 											{invoice?.sales_utr?.utr_number || ''}
 										</div>
-										<div className={styles.flex_row}>
+										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											Status:
-											{' '}
+											&nbsp;
 											{invoice?.sales_utr?.status || ''}
 										</div>
 									</div>
@@ -252,7 +226,7 @@ function Actions({
 							)}
 							theme="light"
 						>
-							<div style={{ margin: '4px 0 0 10px', cursor: 'pointer' }}>
+							<div className={styles.icon_div}>
 								<IcMInfo />
 							</div>
 						</Tooltip>
@@ -262,7 +236,7 @@ function Actions({
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive
-							placement="left"
+							placement="bottom"
 							visible={show}
 							content={content}
 							theme="light"
@@ -279,13 +253,12 @@ function Actions({
 						</Popover>
 						)
 						: (
-							<div style={{ width: '34px' }} />
+							<div className={styles.empty_div} />
 						)}
 
 					{!isEmpty(invoice.remarks) ? (
 						<Tooltip
 							placement="bottom"
-							interactive
 							content={remarkRender()}
 						>
 							<div className={styles.icon_more_wrapper}>
@@ -296,22 +269,12 @@ function Actions({
 				</div>
 			</div>
 
-			{(invoice.services || []).length && isEditInvoice ? (
-				<EditInvoice
-					show={isEditInvoice}
-					onClose={() => setIsEditInvoice(false)}
-					invoice={invoice}
-					BfInvoiceRefetch={handleRefetch}
-					shipment_data={shipment_data}
-				/>
-			) : null}
-
 			{showReview ? (
 				<ReviewServices
 					showReview={showReview}
 					setShowReview={setShowReview}
 					invoice={invoice}
-					BfInvoiceRefetch={handleRefetch}
+					refetch={handleRefetch}
 				/>
 			) : null}
 
@@ -320,8 +283,7 @@ function Actions({
 					isChangeCurrency={isChangeCurrency}
 					setIsChangeCurrency={setIsChangeCurrency}
 					invoice={invoice}
-					BfInvoiceRefetch={handleRefetch}
-					salesInvoicesRefetch={salesInvoicesRefetch}
+					refetch={handleRefetch}
 				/>
 			) : null}
 
@@ -330,7 +292,7 @@ function Actions({
 					showOtpModal={showOtpModal}
 					setShowOTPModal={setShowOTPModal}
 					invoice={invoice}
-					BfInvoiceRefetch={salesInvoicesRefetch}
+					refetch={handleRefetch}
 					shipment_data={shipment_data}
 				/>
 			) : null}
@@ -340,7 +302,7 @@ function Actions({
 					showAddRemarks={showAddRemarks}
 					setShowAddRemarks={setShowAddRemarks}
 					invoice={invoice}
-					BfInvoiceRefetch={handleRefetch}
+					refetch={handleRefetch}
 				/>
 			) : null}
 
@@ -349,7 +311,7 @@ function Actions({
 					show={sendEmail}
 					setShow={setSendEmail}
 					invoice={invoice}
-					BfInvoiceRefetch={BfInvoiceRefetch}
+					refetch={handleRefetch}
 				/>
 			) : null}
 
@@ -358,7 +320,7 @@ function Actions({
 					show={showChangePaymentMode}
 					setShow={setShowChangePaymentMode}
 					invoice={invoice}
-					BfInvoiceRefetch={BfInvoiceRefetch}
+					refetch={handleRefetch}
 				/>
 			) : null}
 		</div>

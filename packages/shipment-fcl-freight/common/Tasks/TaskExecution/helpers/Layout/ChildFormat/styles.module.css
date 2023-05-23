@@ -44,13 +44,13 @@
 
 	:global {
 		.ui_select_input_placeholder {
-			font-size: 14px;
+			font-size: var(--font-size-lg);
 			font-weight: 400;
 			color: #bdbdbd;
 		}
 
 		.ui_input_control::placeholder {
-			font-size: 14px;
+			font-size: var(--font-size-lg);
 			font-weight: 400;
 			color: #bdbdbd;
 		}

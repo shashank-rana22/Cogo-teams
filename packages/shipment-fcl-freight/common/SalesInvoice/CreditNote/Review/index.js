@@ -8,28 +8,30 @@ import styles from './styles.module.css';
 function Review({
 	setOpen = () => {},
 	id = '',
-	CNRefetch = () => {},
+	cnRefetch = () => {},
 }) {
 	const [value, setValue] = useState(false);
 
-	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch: CNRefetch });
+	const afterRefetch = () => {
+		cnRefetch();
+		setOpen(false);
+	};
+
+	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch: afterRefetch });
 
 	const handleUpdate = () => {
-		apiTrigger({
-			id,
-			status: value ? 'reviewed' : undefined,
-		});
-		setOpen(false);
+		apiTrigger({ id, status: value ? 'reviewed' : undefined });
 	};
 	return (
 		<Modal
 			show
 			onClose={() => setOpen(false)}
 			className={styles.custom_modal}
+			closeOnOuterClick={false}
 		>
 			<Modal.Header title="MARK AS REVIEWED" />
-			<Modal.Body>
 
+			<Modal.Body>
 				<form className={styles.form}>
 					<Checkbox
 						checked={value}
@@ -41,6 +43,7 @@ function Review({
 					</div>
 				</form>
 			</Modal.Body>
+
 			<Modal.Footer>
 				<div className={styles.button_wrapper}>
 					<Button

@@ -1,11 +1,12 @@
 import { Input } from '@cogoport/components';
 import React, { memo, forwardRef } from 'react';
 
-import useOtpInput from './hooks/useOtpInput';
+import useOtpInput from '../../../../../../../../hooks/useOtpInput';
+
 import styles from './styles.module.css';
 
 function OtpInput(props, ref) {
-	const { otpLength = 0, inputSize = 'md', onChange = () => {} } = props;
+	const { otpLength = 0, inputSize = 'md', onChange = () => {} } = props || {};
 
 	const {
 		values = {},
@@ -33,6 +34,7 @@ function OtpInput(props, ref) {
 							otpInputElementsRef.current[index] = element;
 						}}
 						placeholder="0"
+						className={styles.input}
 					/>
 				</div>
 			))}

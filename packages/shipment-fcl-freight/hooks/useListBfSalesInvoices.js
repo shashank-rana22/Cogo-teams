@@ -12,7 +12,7 @@ const useListBfSalesInvoices = () => {
 	] = useRequestBf(
 		{
 			url     : '/sales/invoice/shipment/list',
-			method  : 'get',
+			method  : 'GET',
 			authKey : 'get_sales_invoice_shipment_list',
 		},
 		{ autoCancel: false },

@@ -1,38 +1,29 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 
 const useVerifyInvoiceOtp = ({
-	otpValue = '',
-	invoice = {},
 	refetch = () => {},
+	successMessage = 'OTP verified successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/verify_invoice_approval_otp',
 		method : 'POST',
 	}, { manual: true });
 
-	const onClickSubmitOtp = async () => {
+	const onClickSubmitOtp = async (payload) => {
 		try {
-			const payload = {
-				mobile_otp : otpValue,
-				invoice_id : invoice?.id,
-			};
-
-			const res = await trigger({
+			await trigger({
 				data: payload,
 			});
-			if (!res?.hasError) {
-				Toast.success('OTP verified successfully!');
-				refetch();
-			}
+			Toast.success(successMessage);
+			refetch();
 		} catch (err) {
-			toastApiError(err?.data?.mobile_otp);
+			Toast.error(getApiError(err?.response?.data));
 		}
 	};
 
 	return {
-		otpValue,
 		verifyInvoiceLoader: loading,
 		onClickSubmitOtp,
 	};

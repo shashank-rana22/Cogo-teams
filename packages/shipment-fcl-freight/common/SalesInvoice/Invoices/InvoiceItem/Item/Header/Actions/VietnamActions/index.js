@@ -5,21 +5,20 @@ import {
 	IcCError,
 	IcMEmail,
 } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
+import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';
-import AddRemarks from '../../AddRemarks';
-import ChangeCurrency from '../../ChangeCurrency';
-import EditInvoice from '../../EditInvoice';
-import OTPVerification from '../../OTPVerification';
-import ReviewServices from '../../ReviewServices';
-import AmendmentReasons from '../AmendmentReasons';
-import ChangePaymentMode from '../ChangePaymentMode';
-import RejectRequest from '../RejectRequest';
-import SendInvoiceEmail from '../SendInvoiceEmail';
 import styles from '../styles.module.css';
+
+const AddRemarks = dynamic(() => import('../../AddRemarks'), { ssr: false });
+const ChangeCurrency = dynamic(() => import('../../ChangeCurrency'), { ssr: false });
+const OTPVerification = dynamic(() => import('../../OTPVerification'), { ssr: false });
+const ReviewServices = dynamic(() => import('../../ReviewServices'), { ssr: false });
+const AmendmentReasons = dynamic(() => import('../AmendmentReasons'), { ssr: false });
+const ChangePaymentMode = dynamic(() => import('../ChangePaymentMode'), { ssr: false });
+const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: false });
 
 function Actions({
 	invoice = {},
@@ -31,24 +30,20 @@ function Actions({
 	bfInvoice = {},
 }) {
 	const [show, setShow] = useState(false);
-	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setOTPModal] = useState(false);
-	const [rejectInvoice, setRejectInvoice] = useState(false);
-	const showForOldShipments =		shipment_data.serial_id <= 120347 && invoice.status === 'pending';
+	const showForOldShipments =	shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
-	const { user_data } = useSelector(({ profile }) => ({
-		user_data: profile || {},
-	}));
+	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
+	|| isEmpty(invoiceData.invoice_trigger_date);
 
 	let disableAction = showForOldShipments
 		? isIRNGenerated
-		: ['reviewed', 'approved'].includes(invoice.status)
-		|| isEmpty(invoiceData.invoice_trigger_date);
+		: disableActionCondition;
 
 	if (invoice.status === 'amendment_requested') {
 		disableAction = false;
@@ -58,7 +53,7 @@ function Actions({
 	const invoice_serial_id = invoice.serial_id.toString() || '';
 	const firstChar = invoice_serial_id[0];
 
-	const isInvoiceBefore20Aug2022 =		firstChar !== '1' || invoice_serial_id.length < 8;
+	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < 8;
 
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {
@@ -66,16 +61,14 @@ function Actions({
 	}
 	// HARD CODING ENDS
 
-	const { updateInvoiceStatus, loading } = useUpdateInvoiceStatus({
-		invoice,
-		refetch,
-		status: 'approved',
-	});
-
-	const handleClickInvoice = () => {
-		setShow(false);
-		setIsEditInvoice(true);
+	const refetchAfterCall = () => {
+		setShowReview(false);
+		refetch();
 	};
+
+	const { updateInvoiceStatus = () => {}, loading } = useUpdateInvoiceStatus({
+		refetch: refetchAfterCall,
+	});
 
 	const handleClickCurrency = () => {
 		setIsChangeCurrency(true);
@@ -92,7 +85,7 @@ function Actions({
 		setShowChangePaymentMode(true);
 	};
 
-	const remarkRender = () => (
+	const remarkRender = (
 		<div className={styles.remark_container}>
 			<div className={styles.title}>Invoice Remarks</div>
 			<div className={styles.value}>{invoice.remarks}</div>
@@ -104,9 +97,29 @@ function Actions({
 		salesInvoicesRefetch();
 	};
 
-	// goods_transport_agency
-	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-		|| user_data.email === 'ajeet@cogoport.com';
+	const underTranslation = () => ((invoice?.status === 'reviewed'
+		&& (!bfInvoice?.systemGeneratedProforma
+			|| !bfInvoice?.proformaPdfUrl))
+	|| (invoice?.status === 'approved'
+		&& !bfInvoice?.systemGeneratedInvoice) ? (
+			<div className={styles.pill}>Under Translation</div>
+		) : null);
+
+	const approveButton = () => (
+		invoice?.status === 'reviewed'
+						&& bfInvoice?.systemGeneratedProforma
+						&& bfInvoice?.proformaPdfUrl ? (
+							<div className={styles.review_invoice}>
+								<Button
+									size="sm"
+									onClick={updateInvoiceStatus}
+									disabled={loading}
+								>
+									Approve
+								</Button>
+							</div>
+			) : null
+	);
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
@@ -114,19 +127,6 @@ function Actions({
 		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
-					{editInvoicesVisiblity ? (
-						<div style={{ width: '100%' }}>
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.text}
-								onClick={handleClickInvoice}
-							>
-								Edit Invoices
-							</div>
-							<div className={styles.line} />
-						</div>
-					) : null}
 					<div>
 						<div
 							role="button"
@@ -195,37 +195,12 @@ function Actions({
 							</Button>
 						) : null}
 					</div>
-					{(invoice?.status === 'reviewed'
-						&& (!bfInvoice?.systemGeneratedProforma
-							|| !bfInvoice?.proformaPdfUrl))
-					|| (invoice?.status === 'approved'
-						&& !bfInvoice?.systemGeneratedInvoice) ? (
-							<div className={styles.pill}>Under Translation</div>
-						) : null}
-					{invoice?.status === 'reviewed'
-						&& bfInvoice?.systemGeneratedProforma
-						&& bfInvoice?.proformaPdfUrl && (
-							<div className={styles.review_invoice}>
-								<Button
-									size="sm"
-									onClick={updateInvoiceStatus}
-									disabled={loading}
-								>
-									Approve
-								</Button>
-								<Button
-									className="secondary sm"
-									onClick={() => setRejectInvoice(true)}
-								>
-									Reject
-								</Button>
-							</div>
-					)}
+					{underTranslation}
+					{approveButton}
 					{invoice?.status === 'amendment_requested' ? (
 						<Tooltip
 							placement="bottom"
 							theme="light-border"
-							interactive
 							content={<AmendmentReasons invoice={invoice} />}
 						>
 							<div className={styles.icon_info_wrapper}>
@@ -237,43 +212,41 @@ function Actions({
 				<div className={styles.actions_wrap}>
 					<div className={styles.email_wrapper}>
 						<IcMEmail
-							style={{ cursor: 'pointer' }}
 							onClick={() => setSendEmail(true)}
 						/>
 
 						<Tooltip
-							interactive
 							placement="bottom"
+							theme="light"
 							content={(
-								<div style={{ fontSize: '10px', color: '#333333' }}>
+								<div className={styles.tooltip_child}>
 									<div className={styles.flex_row}>
 										Proforma email sent :
-										{' '}
+										&nbsp;
 										{invoice.proforma_email_count || 0}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
-										{' '}
+										&nbsp;
 										{invoice.sales_email_count || 0}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											UTR Number:
-											{' '}
+											&nbsp;
 											{invoice?.sales_utr?.utr_number || ''}
 										</div>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											Status:
-											{' '}
+											&nbsp;
 											{invoice?.sales_utr?.status || ''}
 										</div>
 									</div>
 								</div>
 							)}
-							theme="light"
 						>
-							<div style={{ margin: '4px 0 0 10px', cursor: 'pointer' }}>
+							<div className={styles.icon_div}>
 								<IcMInfo />
 							</div>
 						</Tooltip>
@@ -282,7 +255,7 @@ function Actions({
 					{!disableAction || invoice.exchange_rate_document?.length > 0 ? (
 						<Popover
 							interactive
-							placement="left"
+							placement="bottom"
 							visible={show}
 							content={content}
 							theme="light"
@@ -298,15 +271,14 @@ function Actions({
 							</div>
 						</Popover>
 					) : (
-						<div style={{ width: '34px' }} />
+						<div className={styles.empty_div} />
 					)}
 
 					{!isEmpty(invoice.remarks) ? (
 						<Tooltip
 							placement="bottom"
 							theme="light-border"
-							interactive
-							content={remarkRender()}
+							content={remarkRender}
 						>
 							<div className={styles.icon_more_wrapper}>
 								<IcMInfo fill="yellow" />
@@ -315,16 +287,6 @@ function Actions({
 					) : null}
 				</div>
 			</div>
-
-			{(invoice.services || []).length && isEditInvoice ? (
-				<EditInvoice
-					show={isEditInvoice}
-					onClose={() => setIsEditInvoice(false)}
-					invoice={invoice}
-					refetch={handleRefetch}
-					shipment_data={shipment_data}
-				/>
-			) : null}
 
 			{showReview ? (
 				<ReviewServices
@@ -378,16 +340,6 @@ function Actions({
 					setShow={setShowChangePaymentMode}
 					invoice={invoice}
 					refetch={refetch}
-				/>
-			) : null}
-
-			{rejectInvoice ? (
-				<RejectRequest
-					rejectInvoice={rejectInvoice}
-					setRejectInvoice={setRejectInvoice}
-					invoice={invoice}
-					bfInvoice={bfInvoice}
-					refetch={handleRefetch}
 				/>
 			) : null}
 		</div>

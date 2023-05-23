@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useForm, useFieldArray } from '@cogoport/forms';
 import { useState } from 'react';
 
 import useCreateOrganizationAddress from '../../../../../../hooks/useCreateOrganizationAddress';
@@ -15,26 +14,13 @@ function CreateNewBillingAddress({
 }) {
 	const [isAddressRegisteredUnderGst, setIsAddressRegisteredUnderGst] = useState(false);
 	const [gstNumber, setGstNumber] = useState('');
-	const {
-		id = '',
-	} = organizationDetails;
+
+	const { id = '' } = organizationDetails;
 
 	const {
 		registrationNumber = '',
 		tradePartyId = '',
 	} = invoiceToTradePartyDetails;
-
-	const {
-		handleSubmit,
-		control,
-		register,
-		setValue,
-		formState: { errors },
-	} = useForm({
-		defaultValues: {
-			poc_details: [{ name: '', email: '', mobile_country_code: '', mobile_number: '' }],
-		},
-	});
 
 	const afterCreateBillingAddress = () => {
 		refetch();
@@ -64,13 +50,7 @@ function CreateNewBillingAddress({
 	return (
 		<div className={styles.container}>
 			<AddressForm
-				control={control}
-				useFieldArray={useFieldArray}
-				register={register}
-				handleSubmit={handleSubmit}
 				refetch={refetch}
-				errors={errors}
-				setValue={setValue}
 				onSubmit={onSubmit}
 				gstNumber={gstNumber}
 				setGstNumber={setGstNumber}

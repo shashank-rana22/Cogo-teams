@@ -1,33 +1,14 @@
-import { startCase } from '@cogoport/utils';
+import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 
-const mainServices = [
-	'fcl_freight_service',
-	'lcl_freight_service',
-	'air_freight_service',
-];
+import { handleServiceType } from './handleServiceType';
 
-const handleServiceType = (charge) => {
-	const serviceType = charge?.display_name || charge?.service_type;
-
-	if (!mainServices.includes(charge?.service_type)) {
-		if (charge?.trade_type === 'export') {
-			return `Origin ${startCase(serviceType)}`;
-		}
-		if (charge?.trade_type === 'import') {
-			return `Destination ${startCase(serviceType)}`;
-		}
-	}
-
-	return startCase(serviceType);
-};
-
-const commonControls = (handleChange, charge) => [
+const commonControls = (service) => [
 	{
-		label    : handleServiceType(charge),
+		label    : handleServiceType(service),
 		type     : 'select',
 		name     : 'code',
 		span     : 3,
-		handleChange,
 		disabled : true,
 		rules    : { required: 'Required' },
 	},
@@ -35,7 +16,7 @@ const commonControls = (handleChange, charge) => [
 		label    : 'Unit',
 		type     : 'select',
 		name     : 'unit',
-		options  : [],
+		options  : convertObjectMappingToArray(FCL_UNITS),
 		disabled : true,
 		span     : 2,
 	},
@@ -45,7 +26,7 @@ const commonControls = (handleChange, charge) => [
 		type           : 'select',
 		showOptional   : false,
 		className      : 'size-sm',
-		optionsListKey : 'currencies',
+		optionsListKey : 'exchange-rate-currencies',
 		placeholder    : 'Select Currency',
 		disabled       : true,
 		rules          : { required: 'currency is required' },
@@ -74,12 +55,12 @@ const commonControls = (handleChange, charge) => [
 	},
 ];
 
-const rawControls = (handleChange, charge, isEdit) => ({
+const rawControls = (service) => ({
 	type             : 'edit_service_charges',
-	name             : charge?.service_id,
-	service_name     : charge?.display_name || charge?.service_type,
+	name             : service?.id,
+	service_name     : service?.display_name || service?.service_type,
 	showHeader       : true,
-	showButtons      : false,
+	showAddButtons   : false,
 	showDeleteButton : false,
 	value            : [
 		{
@@ -93,7 +74,7 @@ const rawControls = (handleChange, charge, isEdit) => ({
 			total            : '',
 		},
 	],
-	controls: [...commonControls(handleChange, charge, isEdit)],
+	controls: [...commonControls(service)],
 });
 
 const controls = [
@@ -116,24 +97,19 @@ const controls = [
 
 const creditNoteControls = ({
 	services = [],
-	handleChange = () => {},
-	setAllChargeCodes = () => {},
-	allChargeCodes = {},
-	isEdit = false,
 }) => {
 	const control = services?.map((service) => ({
-		...rawControls(handleChange, service, isEdit),
-		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
-		value           : service?.line_items?.map((item) => ({
-			is_checked       : item.is_checked,
-			code             : item.code,
-			sac_code         : item.hsn_code || 'NA',
-			currency         : item.currency,
+		...rawControls(service),
+		value: service?.line_items?.map((item) => ({
+			is_checked       : item?.is_checked,
+			code             : item?.code,
+			sac_code         : item?.hsn_code || 'NA',
+			currency         : item?.currency,
 			price_discounted : item?.price_discounted || 0,
 			quantity         : item?.quantity || 0,
 			exchange_rate    : item?.exchange_rate || 1,
 			tax_percent      : item?.tax_percent || 0,
-			unit             : item.unit,
+			unit             : item?.unit,
 			total            : item?.tax_total_price_discounted || 0,
 			name             : item?.name,
 		})),

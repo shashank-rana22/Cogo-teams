@@ -1,6 +1,6 @@
-import { Modal, Button, Toast, RadioGroup } from '@cogoport/components';
+import { Modal, Button, RadioGroup } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import useGetOrgUsersData from '../../../../../../../hooks/useGetOrgUsersData';
 import useSendInvoiceOtp from '../../../../../../../hooks/useSendInvoiceOtp';
@@ -18,16 +18,11 @@ function OTPVerification({
 	invoice = {},
 	refetch = () => {},
 }) {
-	const [userList, setUserList] = useState([]);
 	const [otpValue, setOTPValue] = useState('');
 	const [modalIsOpen, setModalIsOpen] = useState(false);
 	const [selectedUser, setSelectedUser] = useState('');
 
 	const { loading, orgData } = useGetOrgUsersData({ invoice });
-
-	const refetchAfterSendOtpApiCall = () => {
-		setModalIsOpen(true);
-	};
 
 	const refetchAfterVerifydOtpApiCall = () => {
 		setModalIsOpen(false);
@@ -36,17 +31,14 @@ function OTPVerification({
 	};
 
 	const { onClickSubmitOtp, verifyInvoiceLoader } = useVerifyInvoiceOtp({
-		otpValue,
-		invoice,
 		refetch: refetchAfterVerifydOtpApiCall,
 	});
+
 	const { sendOtpForInvoiceApproval } = useSendInvoiceOtp({
-		invoice_id : invoice?.id,
-		user_id    : selectedUser?.split('_')?.[0],
-		refetch    : refetchAfterSendOtpApiCall,
+		refetch: () => setModalIsOpen(true),
 	});
 
-	const userLists = orgData?.list?.filter((obj) => obj?.mobile_verified);
+	const userList = orgData?.list?.filter((obj) => obj?.mobile_verified);
 
 	const organizationOptions = userList?.map((obj) => ({
 		label: (
@@ -64,14 +56,13 @@ function OTPVerification({
 		value: `${obj.user_id}_${obj.name}`,
 	}));
 
-	useEffect(() => {
-		setUserList(userLists);
-	}, [userLists]);
-
 	const handleClick = async () => {
-		if (isEmpty(selectedUser)) Toast.error('Please select any user');
-		else {
-			await sendOtpForInvoiceApproval();
+		if (!isEmpty(selectedUser)) {
+			const payload = {
+				invoice_id : invoice?.id,
+				user_id    : selectedUser?.split('_')?.[0],
+			};
+			await sendOtpForInvoiceApproval(payload);
 		}
 	};
 	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[1]} registered mobile number`;
@@ -101,21 +92,24 @@ function OTPVerification({
 					onClose={() => setShowOTPModal(false)}
 				>
 					<Modal.Header title="Select user to send OTP" />
+
 					<Modal.Body className={styles.body}>
 						{userListInfo}
 					</Modal.Body>
-					<Modal.Footer>
+
+					<Modal.Footer className={styles.modal_footer}>
 						<Button
 							size="md"
+							themeType="secondary"
 							onClick={() => setShowOTPModal(false)}
 						>
 							Cancel
 						</Button>
+
 						<Button
 							size="md"
-							style={{ marginLeft: '16px' }}
 							onClick={handleClick}
-							disabled={userList?.length === 0}
+							disabled={userList?.length === 0 || isEmpty(selectedUser)}
 						>
 							Send
 						</Button>
@@ -130,6 +124,7 @@ function OTPVerification({
 					className={styles.otp_modal}
 				>
 					<Modal.Header title={title} />
+
 					<Modal.Body>
 						<div className={styles.Container}>
 							<OtpInput
@@ -142,17 +137,21 @@ function OTPVerification({
 							/>
 						</div>
 					</Modal.Body>
-					<Modal.Footer>
+
+					<Modal.Footer className={styles.modal_footer}>
 						<Button
 							size="md"
-							disabled={verifyInvoiceLoader}
-							onClick={() => onClickSubmitOtp()}
+							disabled={verifyInvoiceLoader || isEmpty(otpValue)}
+							onClick={() => onClickSubmitOtp({
+								mobile_otp : otpValue,
+								invoice_id : invoice?.id,
+							})}
 						>
 							SUBMIT
 						</Button>
+
 						<Button
 							size="md"
-							style={{ marginLeft: '16px' }}
 							onClick={() => sendOtpForInvoiceApproval()}
 						>
 							Resend OTP

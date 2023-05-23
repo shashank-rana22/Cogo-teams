@@ -232,9 +232,8 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api          : 'list_kam_desk_surface_shipments',
-		access_type  : 'private',
-		service_name : 'shipment',
+		api         : 'list_kam_desk_surface_shipments',
+		access_type : 'private',
 	},
 	{
 		api          : 'update_shipment_currency_conversion',
