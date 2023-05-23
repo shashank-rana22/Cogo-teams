@@ -108,6 +108,11 @@ const GLOBAL_CONSTANTS = {
 	cogoport_entities: ENTITY_MAPPING,
 
 	months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+
+	image_url: {
+		general_icon   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg',
+		eclamation_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg',
+	},
 };
 
 export default GLOBAL_CONSTANTS;

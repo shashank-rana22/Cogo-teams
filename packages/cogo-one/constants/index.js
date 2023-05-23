@@ -265,10 +265,6 @@ export const MAIL_REPLY_TYPE = [
 ];
 export const PAGE_LIMIT = 50;
 
-export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg';
-
-export const ECLAMATION_SVG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg';
-
 export const FILTER_KEYS_MAPPING = {
 	requested  : { Statuses: 'reject_requested,resolve_requested' },
 	unresolved : { Status: 'unresolved' },
