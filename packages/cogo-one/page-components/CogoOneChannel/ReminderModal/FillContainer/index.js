@@ -12,10 +12,10 @@ function FillContainer({ label = '', value = 0 }) {
 					r={RADIUS}
 					fill="#DDEBC0"
 				/>
-				<text className={styles.text_styles} x="50%" y="55%" textAnchor="middle">
-					{value}
-				</text>
 			</svg>
+			<div className={styles.text_styles}>
+				{value}
+			</div>
 			<div className={styles.label_text}>{label}</div>
 		</div>
 	);
