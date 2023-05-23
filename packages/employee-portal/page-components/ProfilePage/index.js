@@ -32,7 +32,7 @@ function ProfilePage() {
 
 	return (
 		<div className={styles.container}>
-			<p>Hello, Welcome to Cogoport!</p>
+			<p>Meanwhile, get started with</p>
 			<div className={styles.components}>
 				<div
 					role="presentation"
