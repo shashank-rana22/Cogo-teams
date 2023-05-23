@@ -26,10 +26,7 @@ function CreateNewTradeParty({
 
 	const afterCreateTradeParty = () => {
 		setShowComponent('view_billing_addresses');
-		if (fetchOrganizationTradeParties) {
-			setShowComponent('view_billing_addresses');
-			fetchOrganizationTradeParties();
-		}
+		fetchOrganizationTradeParties();
 	};
 
 	const { apiTrigger } = useCreateOrganizationTradeParty({
