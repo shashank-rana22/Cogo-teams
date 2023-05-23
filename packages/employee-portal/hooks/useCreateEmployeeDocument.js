@@ -8,16 +8,19 @@ function useCreateEmployeeDocument({ component }) {
 		method : 'POST',
 	}, { manual: true });
 
-	const createEmployeeDocument = async ({ id, payload }) => {
+	const createEmployeeDocument = async ({ id, newDoc }) => {
 		try {
+			const payload = {
+				documents          : [...newDoc],
+				employee_detail_id : id,
+				performed_by_id    : '5674cb',
+				performed_by_type  : '2314fb',
+			};
+
+			console.log('payload::', newDoc);
+
 			await trigger({
-				data: {
-					employee_detail_id : id,
-					status             : data?.status || 'active',
-					performed_by_id    : '5674cb',
-					performed_by_type  : '2314fb',
-					...payload,
-				},
+				data: payload,
 			});
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');

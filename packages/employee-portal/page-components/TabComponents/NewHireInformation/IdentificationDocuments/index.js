@@ -25,7 +25,24 @@ function IdentificationDocuments() {
 	const id = info?.detail?.id;
 
 	const onSubmit = (values) => {
-		createEmployeeDocument({ data: values, id });
+		const doc = component.map((item) => {
+			const docNumber = `${item}_number`;
+
+			if (!values?.[item]?.finalUrl || !values?.[docNumber]) {
+				return null;
+			}
+
+			return {
+				document_type   : item,
+				document_number : values?.[docNumber] || undefined,
+				document_url    : values?.[item]?.finalUrl || undefined,
+				status          : 'active',
+			};
+		});
+
+		const newDoc = doc.filter((i) => i !== null);
+
+		createEmployeeDocument({ data: values, id, newDoc });
 	};
 
 	return (

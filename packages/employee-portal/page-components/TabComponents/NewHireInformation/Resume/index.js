@@ -25,6 +25,7 @@ function Resume() {
 	const id = info?.detail?.id;
 
 	const onSubmit = (values) => {
+		console.log(values, 'values::resume');
 		createEmployeeDocument({ data: values, id });
 	};
 	return (
