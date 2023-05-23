@@ -40,6 +40,7 @@ interface Props {
 	item?: NestedObj;
 	edit?: boolean;
 	setEdit?: Function;
+	setItem?: Function;
 	setGenerate?:Function;
 }
 
@@ -49,9 +50,11 @@ function GenerateMAWB({
 	item = {},
 	edit,
 	setEdit = () => {},
+	setItem = () => {},
 	setGenerate = () => {},
 }:Props) {
 	const [back, setBack] = useState(false);
+	const [editCopies, setEditCopies] = useState(null);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
 	const {
@@ -94,14 +97,14 @@ function GenerateMAWB({
 
 	const [taskItem, setTaskItem] = useState({
 		...item,
-		...item.documentData,
+		...item?.documentData,
 	});
 
 	const category = item.blCategory;
 	const mawbId = item.documentId;
 	const pendingTaskId = item.id;
 
-	const [activeCategory, setActiveCategory] = useState(edit ? 'mawb' : taskItem.blCategory);
+	const [activeCategory, setActiveCategory] = useState('mawb');
 
 	const finalFields = [
 		...fields.hawb_controls,
@@ -149,9 +152,10 @@ function GenerateMAWB({
 	}, [activeHawb, activeCategory]);
 
 	useEffect(() => {
-		if (category === 'mawb') {
+		if (category === 'mawb' || category === undefined) {
 			return;
 		}
+
 		if (hawbSuccess) {
 			setTaskItem({
 				...taskItem,
@@ -257,6 +261,7 @@ function GenerateMAWB({
 		finalFields.forEach((c) => {
 			setValue(c.name, taskItem[c.name]);
 		});
+
 		if (!viewDoc) {
 			listAirport();
 			listOperator();
@@ -281,6 +286,20 @@ function GenerateMAWB({
 			setValue('accountingInformation', 'FREIGHT PREPAID');
 		}
 	}, []);
+
+	useEffect(() => {
+		if (!viewDoc && editCopies) {
+			setTaskItem({
+				...item,
+				...item?.documentData,
+			});
+			finalFields.forEach((c) => {
+				setValue(c.name, item?.documentData?.[c.name]);
+			});
+			setValue('executedDate', edit && item?.documentData?.executedDate
+				? new Date(item?.documentData?.executedDate) : new Date());
+		}
+	}, [edit, editCopies]);
 
 	useEffect(() => {
 		let totalVolume:number = 0;
@@ -317,8 +336,9 @@ function GenerateMAWB({
 						category={category}
 						activeCategory={activeCategory}
 						setActiveCategory={setActiveCategory}
-						awbNumber={item.awbNumber}
+						awbNumber={item.awbNumber || item.document_number}
 						serialId={item.serialId}
+						editCopies={editCopies}
 					/>
 
 					<FormContainer
@@ -372,6 +392,10 @@ function GenerateMAWB({
 							activeHawb={activeHawb}
 							pendingTaskId={pendingTaskId}
 							category={category}
+							setViewDoc={setViewDoc}
+							setItem={setItem}
+							editCopies={editCopies}
+							setEditCopies={setEditCopies}
 						/>
 					</Modal>
 				)}

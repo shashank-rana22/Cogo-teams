@@ -1442,6 +1442,12 @@ const apis = [
 		feature      : 'revenue_desk',
 	},
 	{
+		api          : 'send_booking_preference_email',
+		access_type  : 'private',
+		service_name : 'communication',
+		feature      : 'revenue_desk',
+	},
+	{
 		api          : 'list_organization_assets',
 		access_type  : 'private',
 		service_name : 'organization',
@@ -1482,6 +1488,31 @@ const apis = [
 		api          : 'get_pending_task_authorization',
 		access_type  : 'private',
 		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_fortigo_trip_locations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_fortigo_trip_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_fortigo_trip_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_saas_rail_domestic_freight_container_details',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_maruti_tracking_details',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
 	},
 ];
 
