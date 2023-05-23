@@ -7,7 +7,6 @@ import React, { useState } from 'react';
 
 import BarChart from '../../../commons/BarChart';
 import DashboardLoader from '../../../commons/DashboardLoader';
-import { months } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -62,17 +61,17 @@ function DailySalesOutstanding({
 	let currentMonth1; let currentMonth2; let currentMonth3;
 
 	if (d.getMonth() >= 2) {
-		currentMonth1 = months[d.getMonth()];
-		currentMonth2 = months[d.getMonth() - 1];
-		currentMonth3 = months[d.getMonth() - 2];
+		currentMonth1 = GLOBAL_CONSTANTS.months[d.getMonth()];
+		currentMonth2 = GLOBAL_CONSTANTS.months[d.getMonth() - 1];
+		currentMonth3 = GLOBAL_CONSTANTS.months[d.getMonth() - 2];
 
 		newArray = [currentMonth3, currentMonth2, currentMonth1];
 	} else if (d.getMonth() === 1) {
-		currentMonth1 = months[d.getMonth()];
-		currentMonth2 = months[d.getMonth() - 1];
+		currentMonth1 = GLOBAL_CONSTANTS.months[d.getMonth()];
+		currentMonth2 = GLOBAL_CONSTANTS.months[d.getMonth() - 1];
 		newArray = [currentMonth2, currentMonth1];
 	} else {
-		currentMonth1 = months[d.getMonth()];
+		currentMonth1 = GLOBAL_CONSTANTS.months[d.getMonth()];
 		newArray = [currentMonth1];
 	}
 

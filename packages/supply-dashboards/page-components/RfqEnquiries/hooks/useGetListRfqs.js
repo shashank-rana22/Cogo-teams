@@ -1,12 +1,10 @@
-import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 import useGetFiniteList from './useGetFiniteList';
 
 const useGetListRfqs = () => {
-	const geo = getGeoConstants();
-
 	const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
 
 	const [{ loading: apiLoading }, trigger] = useRequest({
@@ -19,9 +17,8 @@ const useGetListRfqs = () => {
 		user_profile: profile,
 	}));
 
-	const fullAccessIds = [geo.uuid.super_admin_id, geo.uuid.admin_id];
-
-	const isFullAccess = user_profile.partner.user_role_ids.filter((id) => fullAccessIds.includes(id)).length;
+	const isFullAccess = user_profile.partner.user_role_ids
+		.filter((id) => GLOBAL_CONSTANTS.uuid.rfq_admin_ids.includes(id)).length;
 
 	const listAPi = (restFilters, currentPage) => {
 		const { rates_status, ...filters } = restFilters;

@@ -27,14 +27,16 @@ export const monthData = {
 };
 
 export const getEntityOptions = () => {
-	const ENTITY_OPTIONS = [];
+	const filteredEntity = Object.entries(GLOBAL_CONSTANTS.cogoport_entities).filter(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		([_, value]) => value.feature_supported.includes('cogo_books'),
+	);
 
-	Object.entries(GLOBAL_CONSTANTS.cogoport_entities).map(([key, value]: any) => (
-		value.feature_supported.includes('cogo_books')
-			&& ENTITY_OPTIONS.push({
-				label : Number(key),
-				value : Number(key),
-			})
+	const ENTITY_OPTIONS = (filteredEntity || []).map(([key]: any) => (
+		{
+			label : Number(key),
+			value : Number(key),
+		}
 	));
 
 	return ENTITY_OPTIONS;

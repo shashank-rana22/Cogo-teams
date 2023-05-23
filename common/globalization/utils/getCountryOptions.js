@@ -16,15 +16,21 @@ const getCountryOptions = () => {
 
 	const { name, id } = defaultOption || {};
 
-	const countryOptions = [{
-		label : name,
-		value : id,
-	}];
+	const countryOptions = [
+		{
+			label : name,
+			value : id,
+		},
+	];
 
-	countries.filter((item) => item.country_code !== code).forEach((item) => {
-		const option = { label: item.name, value: item.id };
-
-		countryOptions.push(option);
+	countries.forEach((item) => {
+		if (item.country_code !== code) {
+			const option = {
+				label : item.name,
+				value : item.id,
+			};
+			countryOptions.push(option);
+		}
 	});
 
 	return countryOptions;

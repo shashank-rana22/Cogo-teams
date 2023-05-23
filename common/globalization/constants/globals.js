@@ -90,6 +90,10 @@ const GLOBAL_CONSTANTS = {
 		},
 		third_party_enrichment_agencies_role_ids : ['38d20d88-e987-4b65-a9ad-c41dd134845b'],
 		paramount_org_id                         : '1e4b9f43-4863-4e29-a944-8e9e8780e514',
+		rfq_admin_ids                            : [
+			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
+			'ebafce31-75ef-4865-9060-775574e9606f',
+		],
 	},
 	view_key_mappings: {
 		sales_team_members_view          : 'sales_agent_id',
@@ -102,6 +106,8 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	cogoport_entities: ENTITY_MAPPING,
+
+	months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
 };
 
 export default GLOBAL_CONSTANTS;

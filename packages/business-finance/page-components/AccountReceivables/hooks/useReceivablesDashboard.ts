@@ -1,7 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
-
-import { months } from '../constants';
 
 const useReceivablesDashboard = (entityCode: string) => {
 	const [filterValue, setFilterValue] = useState({
@@ -12,7 +11,7 @@ const useReceivablesDashboard = (entityCode: string) => {
 	const { serviceType = '', companyType = '' } = filterValue || {};
 
 	const d = new Date();
-	const currentMonth = months[d.getMonth()];
+	const currentMonth = GLOBAL_CONSTANTS.months[d.getMonth()];
 
 	const [salesFunnelMonth, setSalesFunnelMonth] = useState(currentMonth);
 

@@ -189,8 +189,15 @@ export default {
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
 		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
-		cogoverse_user_id     : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
 		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
+		cogo_one_admin_ids    : [
+			'381b9d1d-e005-4cc0-9844-a5f1636e71b1',
+			'84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
+		],
+		cogo_one_shipment_agent_ids: [
+			'1b1c5648-ddf4-4472-b177-c11a53a505aa',
+		],
 	},
 	options: {
 		registration_types: [
