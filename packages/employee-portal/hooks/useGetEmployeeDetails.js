@@ -8,7 +8,7 @@ function useGetEmployeeDetails({ id = '' }) {
 		method : 'GET',
 		url    : 'get_employee_details',
 	}, { manual: true });
-	console.log(data, 'data in hooks ');
+
 	const getEmployeeDetails = useCallback(() => {
 		try {
 			trigger({

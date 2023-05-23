@@ -8,9 +8,7 @@ function useCreateEmployeeBankDetails() {
 		method : 'POST',
 	}, { manual: true });
 
-	const createEmployeeBankDetails = async ({ data }) => {
-		console.log('data :: ', data);
-
+	const createEmployeeBankDetails = async ({ data, id }) => {
 		try {
 			await trigger({
 				data: {
@@ -20,6 +18,10 @@ function useCreateEmployeeBankDetails() {
 					bank_branch_name    : data?.branch_name,
 					account_number      : data?.bank_account_number,
 					cancelled_check_url : data?.cancelled_cheque?.finalUrl,
+					status              : data?.status || 'active',
+					employee_detail_id  : id,
+					performed_by_id     : '85ab',
+					performed_by_type   : '65cv',
 				},
 			});
 		} catch (err) {
