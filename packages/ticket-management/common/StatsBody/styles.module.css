@@ -4,6 +4,7 @@
 	margin-right: 10px;
 	background: #fff;
 	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
 .container:last-child {

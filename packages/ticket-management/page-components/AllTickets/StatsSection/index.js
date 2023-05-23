@@ -1,4 +1,4 @@
-import StatsStructure from '../../../common/StatsStructure';
+import StatsBody from '../../../common/StatsBody';
 import { statsIconsAndData } from '../../../configurations/stats-data';
 
 import styles from './styles.module.css';
@@ -9,7 +9,7 @@ function StatsSection() {
 			{statsIconsAndData.map((item) => {
 				const { label, count, icon, key } = item;
 				return (
-					<StatsStructure label={label} count={count} icon={icon} key={key} />
+					<StatsBody label={label} count={count} icon={icon} key={key} />
 				);
 			})}
 		</div>

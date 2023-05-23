@@ -1,0 +1,20 @@
+.tickets_section_part {
+	display: flex;
+	flex-direction: column;
+	width: 30%;
+	height: 515px;
+	margin-right: 15px;
+	background: #fdfbf6;
+	border-radius: 6px;
+}
+
+.tickets_section_part:last-child {
+	margin-right: 0;
+}
+
+.status_heading {
+	padding: 15px 15px 0;
+	font-size: 16px;
+	font-weight: 500;
+	color: #221f20;
+}

@@ -10,14 +10,14 @@ export const statsIconsAndData = [
 
 	},
 	{
-		icon  : <IcMClock fill="#ABB0DE" width="22px" height="22px" />,
+		icon  : <IcMClock fill="#ABB0DE" width="18px" height="18px" />,
 		count : '400 s',
 		label : 'Avg First Response Time',
 		key   : 'two',
 
 	},
 	{
-		icon  : <IcMFtick fill="#ABB0DE" width="22px" height="22px" />,
+		icon  : <IcMFtick fill="#ABB0DE" width="25px" height="25px" />,
 		count : '400 s',
 		label : 'Avg Resolution Time',
 		key   : 'three',

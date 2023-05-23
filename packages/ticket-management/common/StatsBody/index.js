@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function StatsStructure({ label, count, icon }) {
+function StatsBody({ label, count, icon }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.stats_icon}>{icon}</div>
@@ -10,4 +10,4 @@ function StatsStructure({ label, count, icon }) {
 	);
 }
 
-export default StatsStructure;
+export default StatsBody;

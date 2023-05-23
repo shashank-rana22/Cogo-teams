@@ -5,9 +5,9 @@ import styles from './styles.module.css';
 
 function SearchType() {
 	return (
-		<div>
+		<div className={styles.search_container}>
 			<Input
-				size="xl"
+				size="sm"
 				prefix={(
 					<IcMSearchlight
 						width={16}
