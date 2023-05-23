@@ -27,8 +27,8 @@ const useGetPlanList = () => {
 		}
 	}, [globalFilters, trigger]);
 
-	const pageChangeHandler = (v) => {
-		setGlobalFilters((prev) => ({ ...prev, page: v }));
+	const pageChangeHandler = (page) => {
+		setGlobalFilters((prev) => ({ ...prev, page }));
 	};
 
 	useEffect(() => {

@@ -37,7 +37,6 @@ const useGetSubscriptionInfo = ({ editModal = {}, setEditModal }) => {
 
 	useEffect(() => {
 		if (apiCall) {
-			console.log(apiCall, 'apiCall');
 			refetchSubscriptionInfo(customerSubId);
 		}
 	}, [apiCall, customerSubId, refetchSubscriptionInfo]);
