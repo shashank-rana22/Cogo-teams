@@ -1,8 +1,8 @@
 .header {
-  display: flex;
-  align-items: center;
-  margin-top: 10px;
-  margin-bottom: 16px;
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	margin-bottom: 16px;
 }
 
 .title {

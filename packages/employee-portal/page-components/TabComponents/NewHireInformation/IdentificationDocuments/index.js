@@ -54,17 +54,17 @@ function IdentificationDocuments() {
 								{errors[controlName]?.message
 									? <div className={styles.error_msg}>{errors[controlName]?.message}</div> : null}
 							</div>
-							<Button
-								size="md"
-								type="button"
-								className={styles.button}
-								onClick={handleSubmit(onSubmit)}
-							>
-								Save
-							</Button>
 						</div>
 					);
 				})}
+				<Button
+					size="md"
+					type="button"
+					className={styles.button}
+					onClick={handleSubmit(onSubmit)}
+				>
+					Save
+				</Button>
 			</div>
 		</div>
 	);
