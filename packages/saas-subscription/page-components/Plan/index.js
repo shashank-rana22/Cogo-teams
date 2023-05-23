@@ -1,4 +1,4 @@
-import { Pagination, Placeholder, cl, Button } from '@cogoport/components';
+import { Pagination, Placeholder, cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
 import planListConfig from '../../configuration/planListConfig';
