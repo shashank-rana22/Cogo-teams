@@ -1,3 +1,13 @@
-.ui_tabs_container {
-    width: 20px;
+.title { 
+    height: 24px;
+
+    :global {
+        .ui_tabs_list_title{
+            padding: 8px 0px;
+        }
+    }
+}
+
+.container {
+    width: 80px;
 }

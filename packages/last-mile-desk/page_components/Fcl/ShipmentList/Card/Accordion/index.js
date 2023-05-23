@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -10,18 +9,13 @@ import styles from './styles.module.css';
 
 const optionsMapping = [
 	{
-		title : 'Cutoff Details',
-		name  : 'cutoff_details',
-	},
-	{
 		title : 'Cutoff Tracking',
 		name  : 'cutoff_tracking',
 	},
 ];
 
 function Accordion() {
-	const [nav, setNav] = useState('cutoff_details');
-	const [edit, setEdit] = useState(false);
+	const [nav, setNav] = useState('cutoff_tracking');
 
 	return (
 		<div className={styles.container}>
@@ -57,28 +51,10 @@ function Accordion() {
 						</div>
 					</div>
 
-					{nav === 'cutoff_details' ? (
-						<div className={styles.bttn_wrap}>
-							<div style={{ marginRight: '8px' }}>
-								<Button
-									type="button"
-									themeType="secondary"
-									size="sm"
-									onClick={() => setEdit(!edit)}
-								>
-									{edit ? 'Cancel' : 'Edit Dates'}
-								</Button>
-							</div>
-
-							<Button type="button" themeType="accent" size="sm">
-								{edit ? 'Update' : 'Mark as Verified'}
-							</Button>
-						</div>
-					) : null}
 				</div>
 
 				<div className={styles.shipment_timeline}>
-					<ShipmentTimeline edit={edit} nav={nav} />
+					<ShipmentTimeline nav={nav} />
 				</div>
 			</div>
 		</div>

@@ -56,13 +56,13 @@ const timelineData = [
 	},
 ];
 
-function ShipmentTimeline({ edit = false, nav }) {
+function ShipmentTimeline() {
 	return (
 		<div className={styles.container}>
 			{timelineData.map((item, index) => {
 				const isLast = timelineData.length === (index + 1);
 
-				return <TimelineItem key={uuid()} item={item} isLast={isLast} edit={edit} nav={nav} />;
+				return <TimelineItem key={uuid()} item={item} isLast={isLast} />;
 			})}
 		</div>
 	);
