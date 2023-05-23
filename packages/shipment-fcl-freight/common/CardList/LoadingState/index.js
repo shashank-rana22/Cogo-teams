@@ -1,12 +1,14 @@
-import { Placeholder } from '@cogoport/components';
+import { Placeholder, cl } from '@cogoport/components';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
+
+import styles from './styles.module.css';
 
 function LoadingState({ fields = [], isLast = false }) {
 	const stylesCol = { padding: '0px 4px' };
 
 	return (
-		<div style={{ borderBottom: isLast ? 'none' : '1px solid var(--color-secondary-greyscale-5)' }}>
+		<div className={cl`${isLast ? '' : styles.container}`}>
 			{fields.map((singleItem) => {
 				if (singleItem?.show === false) {
 					return null;

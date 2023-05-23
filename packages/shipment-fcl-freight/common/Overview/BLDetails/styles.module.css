@@ -63,11 +63,7 @@
 	padding: 20px 5px 10px;
 
 	:global {
-		.ui_accordion_container {
-			background-color: var(--color-tertiary-blue-5) !important;
-		}
-
-		.ui_accordion_header {
+		.ui_accordion_container, .ui_accordion_header {
 			background-color: var(--color-tertiary-blue-5) !important;
 		}
 	}
