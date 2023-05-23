@@ -1,11 +1,11 @@
 import { ButtonIcon, cl, Button, Modal } from '@cogoport/components';
+import globals from '@cogoport/globalization/constants/globals.json';
 import { IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
 import { DETAILS_MAPPING, HEADER_MAPPING } from '../../../../constant/editModalConstant';
 import useGetSubscriptionInfo from '../../../../hooks/useGetSubscriptionInfo';
-import iconUrl from '../../../../utils/iconUrl.json';
 
 import FuturePlanDetails from './FuturePlanDetails';
 import QuotaDetails from './QuotaDetails';
@@ -15,6 +15,7 @@ const GetDetailValue = ({ name, pricing = {}, product_family = {} }) => {
 	if (name === 'plan_details') return startCase(pricing?.name);
 	return startCase(product_family?.product_family_name);
 };
+const { iconUrl } = globals;
 
 function EditModal({ editModal, setEditModal }) {
 	const { open = false, info = {} } = editModal;
