@@ -8,11 +8,11 @@ import styles from './styles.module.css';
 
 function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList }) {
 	const { debounceQuery, query } = useDebounceQuery();
-	const [searchTerm, setSearchTerm] = useState();
+	const [searchTerm, setSearchTerm] = useState('');
 	const [openPlanModal, setOpenPlanModal] = useState(false);
 
 	useEffect(() => {
-		if (query !== null) {
+		if (query !== null && query !== undefined) {
 			setGlobalFilters((prev) => ({
 				...prev,
 				page   : 1,
@@ -23,7 +23,7 @@ function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList })
 	}, [query, refetchUserStats, setGlobalFilters]);
 
 	useEffect(() => {
-		if (searchTerm !== null) {
+		if (searchTerm !== null && searchTerm !== undefined) {
 			debounceQuery(searchTerm);
 		}
 	}, [debounceQuery, searchTerm]);

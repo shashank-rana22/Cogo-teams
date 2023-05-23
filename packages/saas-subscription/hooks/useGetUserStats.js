@@ -21,7 +21,9 @@ const useGetUserStats = () => {
 		}
 	}, [trigger]);
 
-	useEffect(() => { refetchUserStats(); }, [refetchUserStats]);
+	useEffect(() => {
+		refetchUserStats();
+	}, [refetchUserStats]);
 
 	return {
 		refetchUserStats, userStatsData: data, statsLoading: loading,
