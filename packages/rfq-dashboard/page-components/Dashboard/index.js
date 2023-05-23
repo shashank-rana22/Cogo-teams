@@ -2,7 +2,7 @@ import { useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
 import Content from './Content';
-import Filters from './Filters';
+// import Filters from './Filters';
 import styles from './styles.module.css';
 
 function Dashboard() {
