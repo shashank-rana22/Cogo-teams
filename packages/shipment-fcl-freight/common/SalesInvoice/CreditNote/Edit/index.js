@@ -146,15 +146,11 @@ function Edit({
 
 			<Modal.Footer>
 				<div className={styles.button_wrapper}>
-<<<<<<< Updated upstream
-					<Button themeType="secondary" onClick={() => setOpen(false)} disabled={loading}>
-=======
 					<Button
 						themeType="secondary"
 						onClick={() => setOpen(false)}
 						disabled={loading}
 					>
->>>>>>> Stashed changes
 						Cancel
 					</Button>
 

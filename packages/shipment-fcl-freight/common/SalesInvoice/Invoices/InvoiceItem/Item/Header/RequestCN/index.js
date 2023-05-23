@@ -23,30 +23,15 @@ function RequestCN({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [servicesIDs, setServicesIDs] = useState([]);
 
-	useEffect(() => {
-		const servicesID = invoice?.services?.map((service) => (service?.service_id)) || [];
-		setServicesIDs(servicesID);
-	}, [invoice?.services]);
+	const { services } = invoice;
 
-<<<<<<< Updated upstream
-	const {
-		controls,
-		errors,
-		control,
-		defaultValues,
-		handleSubmit,
-		onCreate,
-	} = useCreateCreditNoteHelper({
-		setShow,
-		services: invoice?.services,
-		invoice,
-		servicesIDs,
-		refetchCN,
-		invoiceData,
-=======
+	useEffect(() => {
+		const servicesID = services?.map((service) => (service?.service_id)) || [];
+		setServicesIDs(servicesID);
+	}, [services]);
+
 	const controls = creditNoteControls({
 		services,
->>>>>>> Stashed changes
 	});
 
 	const defaultValues = generateDefaultValues({ values: controls });
