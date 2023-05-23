@@ -9,6 +9,8 @@ function useGetEmployeeDetails({ id = '' }) {
 		url    : 'get_employee_details',
 	}, { manual: true });
 
+	console.log(data, 'getempdetails');
+
 	const getEmployeeDetails = useCallback(() => {
 		try {
 			trigger({

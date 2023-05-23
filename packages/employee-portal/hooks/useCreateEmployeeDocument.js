@@ -8,16 +8,15 @@ function useCreateEmployeeDocument({ component }) {
 		method : 'POST',
 	}, { manual: true });
 
-	const createEmployeeDocument = async ({ data, id }) => {
+	const createEmployeeDocument = async ({ id, payload }) => {
 		try {
 			await trigger({
 				data: {
 					employee_detail_id : id,
-					document_type      : component,
-					document_url       : data[component]?.finalUrl,
 					status             : data?.status || 'active',
 					performed_by_id    : '5674cb',
 					performed_by_type  : '2314fb',
+					...payload,
 				},
 			});
 		} catch (err) {

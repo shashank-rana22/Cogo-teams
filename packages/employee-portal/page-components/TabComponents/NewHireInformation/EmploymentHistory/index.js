@@ -2,6 +2,8 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import FieldArray from '../../../../commons/FieldArray';
+import useCreateEmployeeDetails from '../../../../hooks/useCreateEmployeeDetails';
+import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -9,8 +11,15 @@ import styles from './styles.module.css';
 function EmploymentHistory() {
 	const { handleSubmit, control } = useForm();
 
+	const { createEmployeeDetails } = useCreateEmployeeDetails();
+
+	const { data: info } = useGetEmployeeDetails({});
+
+	const id = info?.detail?.id;
+
 	const onSubmit = (values) => {
-		console.log('values :: ', values);
+		createEmployeeDetails({ data: values, id });
+		console.log('values :: emphistory ', values);
 	};
 
 	return (

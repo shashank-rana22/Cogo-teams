@@ -58,7 +58,7 @@ const getControls = [{
 			},
 		},
 		{
-			name        : 'score_mode',
+			name        : 'score',
 			label       : 'Enter Score',
 			type        : 'number',
 			placeholder : 'Enter your score',

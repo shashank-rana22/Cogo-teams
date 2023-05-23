@@ -3,6 +3,8 @@ import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
+import useCreateEmployeeDetails from '../../../../hooks/useCreateEmployeeDetails';
+import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -12,16 +14,27 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function PersonalInformation({ data }) {
+function PersonalInformation({ data:content }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
-	const controlsvalue = controls({ data });
+	const controlsvalue = controls({ content });
+
+	const { createEmployeeDetails } = useCreateEmployeeDetails();
+
+	const { data: info } = useGetEmployeeDetails({});
+
+	const id = info?.detail?.id;
+
+	const onSubmit = (values) => {
+		createEmployeeDetails({ data: values, id });
+		console.log('values :: emphistory ', values);
+	};
 
 	useEffect(() => {
 		const mapping = {
 			mobile_number: {
-				number       : data?.detail?.mobile_number,
-				country_code : data?.detail?.mobile_country_code || +91,
+				number       : content?.detail?.mobile_number,
+				country_code : content?.detail?.mobile_country_code || +91,
 			},
 		};
 
@@ -30,13 +43,13 @@ function PersonalInformation({ data }) {
 				setValue(
 					`${item.name}`,
 					mapping[item.name]
-					|| data?.detail?.[item.name],
+					|| content?.detail?.[item.name],
 				);
 			} else {
-				setValue(item.name, data?.detail?.[item?.name]);
+				setValue(item.name, content?.detail?.[item?.name]);
 			}
 		});
-	}, [controlsvalue, data?.detail, setValue]);
+	}, [controlsvalue, content?.detail, setValue]);
 
 	return (
 		<div className={styles.whole_container}>
