@@ -80,9 +80,9 @@ function GenerateMAWB({
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
 	const [activeKey, setActiveKey] = useState('basic');
 
-	const editHawbNumberCondition = !activeHawb.isNew;
+	const [customHawbNumber, setCustomHawbNumber] = useState(false);
 
-	const fields = mawbControls(disableClass, editHawbNumberCondition);
+	const fields = mawbControls(disableClass, !customHawbNumber);
 
 	const { packingData, packingList } = usePackingList();
 
@@ -119,6 +119,16 @@ function GenerateMAWB({
 	) || 0.0).toFixed(2)));
 
 	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(item.shipmentId);
+
+	let cogoSeriesNumber:Array<number> = [];
+
+	hawbDetails?.forEach((itm) => {
+		if (String(itm?.documentNo)?.includes('COGO')) {
+			cogoSeriesNumber.push(Number((itm?.documentNo || '').slice(5)));
+		}
+	});
+
+	cogoSeriesNumber = cogoSeriesNumber.sort((a, b) => a - b);
 
 	useEffect(() => {
 		if (activeCategory === 'hawb') {
@@ -191,8 +201,30 @@ function GenerateMAWB({
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 		setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 		setValue('amountOfInsurance', 'NIL');
-		setValue('accountingInformation', 'FREIGHT PREPAID');
+		setValue('accountingInformation', taskItem?.accountingInformation || 'FREIGHT PREPAID');
 	}, [hawbSuccess, activeHawb, category, activeCategory]);
+
+	useEffect(() => {
+		if (!customHawbNumber && activeHawb.isNew) {
+			setValue('document_number', activeHawb.documentNo);
+			setHawbDetails((prev) => (
+				prev.map((hawbItem) => (hawbItem.id === activeHawb.id
+					? {
+						...hawbItem,
+						documentNo: activeHawb.documentNo ? activeHawb.documentNo
+							: `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`,
+					}
+					: hawbItem))
+			));
+		} else if (customHawbNumber && activeHawb.isNew) {
+			setValue('document_number', '');
+			setHawbDetails((prev) => (
+				prev.map((hawbItem) => (hawbItem.id === activeHawb.id
+					? { ...hawbItem, documentNo: null }
+					: hawbItem))
+			));
+		}
+	}, [activeHawb, customHawbNumber]);
 
 	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);
@@ -283,7 +315,7 @@ function GenerateMAWB({
 			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 			setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 			setValue('amountOfInsurance', 'NIL');
-			setValue('accountingInformation', 'FREIGHT PREPAID');
+			setValue('accountingInformation', taskItem?.accountingInformation || 'FREIGHT PREPAID');
 		}
 	}, []);
 
@@ -364,6 +396,8 @@ function GenerateMAWB({
 						setActiveKey={setActiveKey}
 						taskItem={taskItem}
 						formValues={formValues}
+						setCustomHawbNumber={setCustomHawbNumber}
+						cogoSeriesNumber={cogoSeriesNumber}
 					/>
 				</>
 			)}
