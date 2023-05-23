@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 
 import getElementController from '../../../../configs/getElementController';
 import useCreateEmployeeBankDetails from '../../../../hooks/useCreateEmployeeBankDetails';
+import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -10,7 +11,11 @@ import styles from './styles.module.css';
 function BankDetails() {
 	const { handleSubmit, control, formState: { errors } } = useForm();
 
-	const { loading, createEmployeeBankDetails } = useCreateEmployeeBankDetails();
+	const { createEmployeeBankDetails } = useCreateEmployeeBankDetails();
+
+	const { data: info } = useGetEmployeeDetails({});
+
+	const id = info?.detail?.id;
 
 	const removeTypeField = (controlItem) => {
 		const { type, ...rest } = controlItem;
@@ -18,7 +23,7 @@ function BankDetails() {
 	};
 
 	const onSubmit = (values) => {
-		createEmployeeBankDetails({ data: values });
+		createEmployeeBankDetails({ data: values, id });
 	};
 
 	return (

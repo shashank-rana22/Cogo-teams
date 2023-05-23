@@ -2,6 +2,8 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import getElementController from '../../../../configs/getElementController';
+import useCreateEmployeeDocument from '../../../../hooks/useCreateEmployeeDocument';
+import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -14,6 +16,17 @@ const removeTypeField = (controlItem) => {
 function Resume() {
 	const { handleSubmit, control, formState: { errors } } = useForm();
 
+	const component = 'resume';
+
+	const { createEmployeeDocument } = useCreateEmployeeDocument({ component });
+
+	const { data: info } = useGetEmployeeDetails({});
+
+	const id = info?.detail?.id;
+
+	const onSubmit = (values) => {
+		createEmployeeDocument({ data: values, id });
+	};
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.container}>
@@ -49,7 +62,7 @@ function Resume() {
 				type="button"
 				className={styles.button}
 				onClick={
-						handleSubmit()
+						handleSubmit(onSubmit)
 					}
 			>
 				Save

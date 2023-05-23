@@ -1,10 +1,10 @@
-import { Avatar, Button } from '@cogoport/components';
+import { Avatar, Button, Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ detail }) {
+function Header({ detail, loading }) {
 	const { name, employee_code, designation, passport_size_photo_url } = detail || {};
 
 	return (
@@ -18,12 +18,21 @@ function Header({ detail }) {
 					personName={name}
 				/>
 				<div>
-					<div className={styles.name}>{name}</div>
-					<div className={styles.role}>{startCase(designation)}</div>
+					<div
+						className={styles.name}
+					>
+						{!loading ? name : <Placeholder height="32px" width="240px" margin="0px 0px 12px 0px" />}
+					</div>
+					<div className={styles.role}>
+						{!loading
+							? startCase(designation)
+							: <Placeholder height="20px" width="240px" />}
+					</div>
 					<div className={styles.emp_code}>
-						Employee Code:
-						{' '}
-						{employee_code}
+						<div style={{ marginRight: 2 }}>Employee Code: </div>
+						{!loading
+							? employee_code
+							: <Placeholder height="20px" width="80px" /> }
 					</div>
 				</div>
 			</div>
@@ -31,7 +40,7 @@ function Header({ detail }) {
 			<div className={styles.button_container}>
 				<Button type="button" themeType="secondary">Action Button</Button>
 				<Button type="button" themeType="secondary" style={{ marginLeft: 12 }}>Action Button</Button>
-				<Button type="button" style={{ marginLeft: 12 }}>Action Button</Button>
+				<Button type="button" style={{ marginLeft: 12 }}>Reject Candidate</Button>
 			</div>
 		</div>
 	);

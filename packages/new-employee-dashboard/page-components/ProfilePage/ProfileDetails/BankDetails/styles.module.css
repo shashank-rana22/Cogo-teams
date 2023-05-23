@@ -1,23 +1,23 @@
-.container{
-    padding: 10px;
+.container {
+	padding: 10px;
 }
 
-.label{
-    color:#828282;
-    padding-bottom: 4px;
+.label {
+	padding-bottom: 4px;
+	color: #828282;
 }
 
-.top_bar{
-    display: flex;
-    flex-wrap: wrap;
-    justify-content: space-between ;
+.top_bar {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
 }
 
-.cancelled_cheque{
-    padding-top: 14px;
+.cancelled_cheque {
+	padding-top: 14px;
 }
 
-.value{
-    font-weight: 600;
-    font-size: 13;
+.value {
+	font-size: 13;
+	font-weight: 600;
 }
