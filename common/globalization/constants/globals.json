@@ -152,7 +152,7 @@
 			}
 		}
 	},
-	"iconUrl": {
+	"image_url": {
 		"loading": "https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg"
 	}
 }

@@ -15,7 +15,7 @@ const GetDetailValue = ({ name, pricing = {}, product_family = {} }) => {
 	if (name === 'plan_details') return startCase(pricing?.name);
 	return startCase(product_family?.product_family_name);
 };
-const { iconUrl } = globals;
+const { image_url } = globals;
 
 function EditModal({ editModal, setEditModal }) {
 	const { open = false, info = {} } = editModal;
@@ -39,7 +39,7 @@ function EditModal({ editModal, setEditModal }) {
 							width={100}
 							height={100}
 							className={styles.cogoloader}
-							src={iconUrl.loading}
+							src={image_url.loading}
 							alt="loading"
 						/>
 					</div>
