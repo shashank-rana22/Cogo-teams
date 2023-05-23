@@ -45,16 +45,16 @@ function LinersExchangeRateConfirm({
 					))}
 				</div>
 			</Modal.Body>
-			<Modal.Footer>
+			<Modal.Footer className={styles.btn_div}>
 				<Button
 					size="md"
-					className={styles.btn_div}
+					themeType="secondary"
 					onClick={() => setShow(false)}
 				>
 					Close
 				</Button>
 				<Button
-					className="primary md reviewed"
+					size="md"
 					onClick={() => setShowExchangeRateConfirmation(false)}
 				>
 					Proceed

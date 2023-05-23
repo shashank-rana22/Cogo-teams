@@ -2,8 +2,8 @@
 	display: flex;
 	justify-content: center;
 
-	& > button {
-		margin-right: 12px;
+	> button:not(:last-of-type) {
+		margin-right: 16px;
 	}
 }
 

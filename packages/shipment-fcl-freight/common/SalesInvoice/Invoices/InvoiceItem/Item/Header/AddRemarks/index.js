@@ -53,7 +53,7 @@ function AddRemarks({
 				</Button>
 
 				<Button
-					className="primary md"
+					size="md"
 					onClick={() => onSubmitRemarks({
 						id      : invoice?.id,
 						remarks : remarkValue,

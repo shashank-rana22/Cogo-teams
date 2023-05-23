@@ -48,10 +48,10 @@ function ReviewServices({
 					<Confirmation value={value} setValue={setValue} />
 				</div>
 			</Modal.Body>
-			<Modal.Footer>
+			<Modal.Footer className={styles.btn_div}>
 				<Button
 					size="md"
-					className={styles.btn_div}
+					themeType="secondary"
 					onClick={() => setShowReview(false)}
 				>
 					Close
