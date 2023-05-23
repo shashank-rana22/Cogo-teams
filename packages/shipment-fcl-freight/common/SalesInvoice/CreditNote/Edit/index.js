@@ -7,20 +7,20 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
 import useUpdateShipmentCreditNote from '../../../../hooks/useUpdateShipmentCreditNote';
+import creditNoteControls from '../../helpers/creditNoteControls';
 import generateDefaultValues from '../../helpers/generateDefaultValuesOfCreditNote';
 import updateFormValueOfCreditNote from '../../helpers/updateFormValuesOfCreditNote';
-import creditNoteControls from '../helpers/controls';
 import formatCreditNoteData from '../helpers/format-credit-note-data';
 
 import Form from './Form';
 import styles from './styles.module.css';
 
 function Edit({
-	setOpen = () => {},
+	setOpen = () => { },
 	CN_STATUS_MAPPING,
 	prevData = {},
 	item = {},
-	cnRefetch = () => {},
+	cnRefetch = () => { },
 	invoiceData = {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
@@ -32,11 +32,18 @@ function Edit({
 
 	const controls = creditNoteControls({
 		services,
+		isEdit: true,
 	});
 
-	const defaultValues = generateDefaultValues({ values: controls });
+	const defaultValues = generateDefaultValues({ values: controls, prevData });
 
-	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm({ defaultValues });
+	const {
+		handleSubmit,
+		control,
+		setValue,
+		watch,
+		formState: { errors = {} },
+	} = useForm({ defaultValues });
 
 	const formValues = watch();
 
@@ -47,7 +54,9 @@ function Edit({
 		setOpen(false);
 	};
 
-	const { apiTrigger = () => {}, loading } = useUpdateShipmentCreditNote({ refetch: afterRefetch });
+	const { apiTrigger = () => { }, loading } = useUpdateShipmentCreditNote({
+		refetch: afterRefetch,
+	});
 
 	const onCreate = (data) => {
 		const { submit_data = {}, checkError = {} } = formatCreditNoteData({
@@ -85,15 +94,19 @@ function Edit({
 			size="xl"
 			closeOnOuterClick={false}
 		>
-			<Modal.Header title={(
-				<header className={styles.heading}>
-					EDIT CREDIT NOTE
-					<div className={cl`${styles[CN_STATUS_MAPPING[status]]} ${styles.status_text}`}>
-						{status === 'rejected' ? <div>!</div> : null}
-						{startCase(CN_STATUS_MAPPING[status])}
-					</div>
-				</header>
-			)}
+			<Modal.Header
+				title={(
+					<header className={styles.heading}>
+						EDIT CREDIT NOTE
+						<div
+							className={cl`${styles[CN_STATUS_MAPPING[status]]} ${styles.status_text
+							}`}
+						>
+							{status === 'rejected' ? <div>!</div> : null}
+							{startCase(CN_STATUS_MAPPING[status])}
+						</div>
+					</header>
+				)}
 			/>
 
 			<Modal.Body>
@@ -106,16 +119,13 @@ function Edit({
 
 				<div>
 					<b>Requested By</b>
-					<span>
-						{` - ${item?.requested_by?.name}`}
-					</span>
+					<span>{` - ${item?.requested_by?.name}`}</span>
 				</div>
 
 				<div>
 					<b>Date</b>
 					<span>
-						&nbsp;
-						-
+						&nbsp; -
 						{formatDate({
 							date       : item?.created_at,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
@@ -136,7 +146,11 @@ function Edit({
 
 			<Modal.Footer>
 				<div className={styles.button_wrapper}>
-					<Button themeType="secondary" onClick={() => setOpen(false)} disabled={loading}>
+					<Button
+						themeType="secondary"
+						onClick={() => setOpen(false)}
+						disabled={loading}
+					>
 						Cancel
 					</Button>
 
