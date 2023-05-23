@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const getColumns = () => [
+const getColumns = (setCtcBreakup) => [
 	{
 		Header   : 'NAME & EMAIL',
 		accessor : (item) => (
@@ -55,7 +55,12 @@ const getColumns = () => [
 		Header   : 'Full CTC Breakup',
 		accessor : (item) => (
 			<div>
-				<Button themeType="tertiary" style={{ textDecoration: 'underline' }}>
+				<Button
+					type="button"
+					themeType="tertiary"
+					style={{ textDecoration: 'underline' }}
+					onClick={() => setCtcBreakup(item?.id)}
+				>
 					View
 				</Button>
 			</div>
