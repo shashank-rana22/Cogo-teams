@@ -8,25 +8,25 @@ import styles from './styles.module.css';
 function OverallStats() {
 	const PieData = [
 		{
-			id       : 'Open',
+			id       : 'open',
 			label    : 'Open',
 			value    : 25,
 			isMargin : true,
 		},
 		{
-			id       : 'Escalated',
+			id       : 'escalated',
 			label    : 'Escalated',
 			value    : 30,
 			isMargin : true,
 
 		},
 		{
-			id    : 'Pending',
+			id    : 'pending',
 			label : 'Pending',
 			value : 25,
 		},
 		{
-			id    : 'Closed',
+			id    : 'closed',
 			label : 'Closed',
 			value : 20,
 		},
@@ -60,11 +60,15 @@ function OverallStats() {
 							)}
 						/>
 					</div>
+					<div className={styles.graph_total}>
+						<span className={styles.graph_label}>No. of Tickets</span>
+						<span className={styles.graph_count}>8.4k</span>
+					</div>
 					<div className={styles.legends}>
-						{(PieData || []).map(({ label, isMargin }) => (
-							<div className={cl`${styles.legend} ${isMargin ? styles.margin_bottom : ''}`} key={label}>
+						{(PieData || []).map(({ id, label, isMargin }) => (
+							<div className={cl`${styles.legend} ${isMargin ? styles.margin_bottom : ''}`} key={id}>
 								<div className={styles.legend_count}>
-									<div className={styles.dot} />
+									<div className={cl`${styles.dot} ${styles[id]}`} />
 									<span className={styles.stats_count}>2000</span>
 								</div>
 								<div className={styles.stats_label}>{label}</div>

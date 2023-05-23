@@ -7,7 +7,7 @@
 	padding: 8px 16px;
 	margin-right: 12px;
 	background-color: #fff;
-	border-radius: 4px;
+	border-radius: 6px;
 }
 
 .tile:last-child {
@@ -36,7 +36,31 @@
 }
 
 .total {
+	position: relative;
 	display: flex;
+}
+
+.graph_total {
+	position: absolute;
+	top: 16px;
+	left: 24px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.graph_label {
+	width: 30px;
+	font-size: 10px;
+	font-weight: 400;
+	color: #828282;
+}
+
+.graph_count {
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
 }
 
 .dot {
@@ -45,6 +69,22 @@
 	margin-right: 4px;
 	background-color: aqua;
 	border-radius: 50%;
+}
+
+.open {
+	background-color: #f8aea8;
+}
+
+.escalated {
+	background-color: #fcdc00;
+}
+
+.pending {
+	background-color: #e0e0e0;
+}
+
+.closed {
+	background-color: #ced1ed;
 }
 
 .legends {
@@ -57,7 +97,6 @@
 .legend {
 	display: flex;
 	flex-direction: column;
-	align-items: flex-end;
 	width: 50%;
 }
 
@@ -68,6 +107,7 @@
 .legend_count {
 	display: flex;
 	align-items: center;
+	margin-left: 36px;
 }
 
 .stats_count {
@@ -79,6 +119,7 @@
 }
 
 .stats_label {
+	margin-left: 54px;
 	font-size: 10px;
 	font-weight: 400;
 	color: #4f4f4f;
