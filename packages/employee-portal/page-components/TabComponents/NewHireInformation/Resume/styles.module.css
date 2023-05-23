@@ -1,43 +1,43 @@
 .container {
-  display: flex;
-  flex-direction: row;
-  flex-wrap: wrap;
-  justify-content: space-around;
-  width: 100%;
-  border-radius: 6px;
+	display: flex;
+	flex-direction: row;
+	flex-wrap: wrap;
+	justify-content: space-around;
+	width: 100%;
+	border-radius: 6px;
 }
 
 .sup {
-  color: #cb6464;
+	color: #cb6464;
 }
 
 .control_container {
-  display: flex;
-  flex: 33.33%;
-  flex-direction: column;
-  flex-wrap: wrap;
-  margin-top: 20px;
+	display: flex;
+	flex: 33.33%;
+	flex-direction: column;
+	flex-wrap: wrap;
+	margin-top: 20px;
 }
 
 .control {
-  width: 90%;
+	width: 90%;
 }
 
 .label {
-  margin-bottom: 10px;
-  font-size: 16px;
-  font-weight: 600;
-  color: #6fa5ab;
+	margin-bottom: 10px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
 }
 
 .error_msg {
-  margin: 0;
-  font-size: 12px;
-  font-weight: 500;
-  color: #cb6464;
+	margin: 0;
+	font-size: 12px;
+	font-weight: 500;
+	color: #cb6464;
 }
 
 .button {
-  margin-top: 10px;
-  margin-left: 75vw;
+	margin-top: 10px;
+	margin-left: 75vw;
 }
