@@ -31,7 +31,7 @@ function FormItem({ finalControl = {}, control, errors = {} }) {
 	);
 }
 
-export default function EditSchedule({ setShow = () => {}, timelineData = [] }) {
+export default function EditSchedule({ setShow = () => {} }) {
 	const {
 		loading,
 		updateData,
@@ -39,7 +39,7 @@ export default function EditSchedule({ setShow = () => {}, timelineData = [] }) 
 		formSubmit,
 		errors,
 		control,
-	} = useEditServiceSchedule({ setShow, timelineData });
+	} = useEditServiceSchedule({ setShow });
 
 	const closeModal = () => setShow(false);
 

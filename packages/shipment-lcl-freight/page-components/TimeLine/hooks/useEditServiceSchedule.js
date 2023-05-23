@@ -8,20 +8,17 @@ import { useState, useEffect, useContext } from 'react';
 import controls from '../EditSchedule/controls';
 import { getDate } from '../utils/getDate';
 
-export default function useEditServiceSchedule({
-	setShow = () => {},
-	timelineData = [],
-}) {
+export default function useEditServiceSchedule({ setShow = () => {} }) {
 	const { servicesList, primary_service, refetch: shipmentRefetch = () => {} } = useContext(ShipmentDetailContext);
 
 	const [departureDate, setDepartureDate] = useState(getDate(primary_service?.schedule_departure));
 
 	const [{ loading }, updateShipmentService] = useRequest({
-		url    : 'update_shipment_service',
+		url    : '/update_shipment_service',
 		method : 'POST',
 	}, { manual: true });
 
-	const { finalControls, defaultValues } = controls({ primary_service, departureDate, timelineData });
+	const { finalControls, defaultValues } = controls({ primary_service, departureDate });
 
 	const { handleSubmit: formSubmit, formState: { errors }, watch, reset, control } = useForm({ defaultValues });
 

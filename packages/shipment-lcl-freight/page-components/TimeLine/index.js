@@ -68,10 +68,7 @@ function Timeline() {
 			) : null}
 
 			{showEditSchedule ? (
-				<EditSchedule
-					setShow={setShowEditSchedule}
-					timelineData={timelineData}
-				/>
+				<EditSchedule setShow={setShowEditSchedule} />
 			) : null}
 		</div>
 	);
