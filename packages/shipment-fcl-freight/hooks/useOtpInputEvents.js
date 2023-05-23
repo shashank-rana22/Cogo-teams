@@ -91,13 +91,14 @@ const useOtpInputEvents = ({
 
 	useEffect(() => {
 		const events = ['keydown', 'paste'];
+		const currentRef = otpContainerRef.current;
 		events.forEach((eventType) => {
-			otpContainerRef.current?.addEventListener(eventType, validateInputs);
+			currentRef?.addEventListener(eventType, validateInputs);
 		});
 
 		return () => {
 			events.forEach((eventType) => {
-				otpContainerRef.current?.removeEventListener(eventType, validateInputs);
+				currentRef?.removeEventListener(eventType, validateInputs);
 			});
 		};
 	}, [otpContainerRef, validateInputs]);

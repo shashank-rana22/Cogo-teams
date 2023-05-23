@@ -1,5 +1,6 @@
 import { Loader } from '@cogoport/components';
 import React, { useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import useListShipmentBookingConfirmationPreferences
 	from '../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
@@ -44,6 +45,7 @@ function SelectRate({
 				) : null}
 				{(data?.list || []).map((item) => (
 					<Card
+						key={uuid()}
 						item={item}
 						priority={item.priority}
 						setStep={setStep}

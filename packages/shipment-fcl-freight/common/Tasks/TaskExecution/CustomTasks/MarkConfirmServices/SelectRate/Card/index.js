@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
+import { v4 as uuid } from 'uuid';
 
 import useUpdateShipmentBookingConfirmationPreferences
 	from '../../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
@@ -68,7 +69,7 @@ function Card({
 
 			<div className={styles.body}>
 				{(dataArr || []).map((dataObj) => (
-					<div className={styles.space_between}>
+					<div key={uuid()} className={styles.space_between}>
 						<div>
 							<div className={styles.heading}>Supplier Name</div>
 

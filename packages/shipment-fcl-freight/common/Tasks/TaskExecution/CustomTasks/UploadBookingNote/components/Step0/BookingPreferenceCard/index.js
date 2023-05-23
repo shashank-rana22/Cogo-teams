@@ -1,6 +1,7 @@
 import { Button, cl } from '@cogoport/components';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
+import { v4 as uuid } from 'uuid';
 
 import getPreferenceBuyPrice from '../../../helpers/getPreferenceBuyPrice';
 
@@ -61,11 +62,10 @@ function BookingPreferenceCard({ item, step0_data = {} }) {
 
 			<div>
 				{(dataArray || []).map((obj) => (
-					<div className={cl`${styles.sub_container} ${styles.justify_space_between}`}>
+					<div key={uuid()} className={cl`${styles.sub_container} ${styles.justify_space_between}`}>
 						{labelValueMapping(obj).map((eachObj) => (
-							<div>
+							<div key={uuid()}>
 								<div className={styles.label}>{eachObj?.label}</div>
-
 								<div className={styles.value}>{eachObj?.value}</div>
 							</div>
 						))}
