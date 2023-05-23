@@ -1,6 +1,7 @@
 {
-    "features":["shipment_info", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails", "tracking"],    
+    "features":["shipment_info", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails", "tracking"],  
     "shipment_info":{},
+    "default_tab":"tasks",
     "overview":{
         "tab_title":"Overview"
     },

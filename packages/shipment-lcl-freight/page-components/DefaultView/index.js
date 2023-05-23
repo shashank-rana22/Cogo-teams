@@ -17,7 +17,12 @@ const COMPONENT_MAPPING = {
 };
 
 function DefaultView() {
-	const { shipment_data = {}, stakeholder_config = {} } = useContext(ShipmentDetailContext) || {};
+	const {
+		shipment_data = {},
+		stakeholder_config = {},
+		activeTab,
+		setActiveTab = () => {},
+	} = useContext(ShipmentDetailContext) || {};
 
 	const { features = [] } = stakeholder_config || {};
 	const tabs = Object.keys(COMPONENT_MAPPING).filter((t) => features.includes(t));
@@ -39,7 +44,12 @@ function DefaultView() {
 
 			{conditionMapping.poc_sop ? <div><PocSop /></div> : null}
 
-			<Tabs>
+			<Tabs
+				fullWidth
+				themeType="secondary"
+				activeTab={activeTab}
+				onChange={setActiveTab}
+			>
 				{tabs.map((t) => (
 					<TabPanel name={t} key={t} title={stakeholder_config[t]?.tab_title}>
 						{COMPONENT_MAPPING[t]}
