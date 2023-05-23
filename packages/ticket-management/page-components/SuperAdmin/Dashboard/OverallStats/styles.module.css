@@ -5,10 +5,13 @@
 .tile {
 	flex: 1;
 	padding: 8px 16px;
-	margin-top: 12px;
 	margin-right: 12px;
 	background-color: #fff;
 	border-radius: 4px;
+}
+
+.tile:last-child {
+	margin-right: 0;
 }
 
 .total_graph {
