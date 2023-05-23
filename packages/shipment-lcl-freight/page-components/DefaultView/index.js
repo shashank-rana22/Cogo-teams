@@ -1,15 +1,16 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
-import { useContext } from 'react';
+import { ShipmentChat } from '@cogoport/shipment-chat';
+import { useContext, useState } from 'react';
+
+import PocSop from '../PocSop';
+import ShipmentInfo from '../ShipmentInfo';
+import TimeLine from '../TimeLine';
 
 import styles from './styles.module.css';
 
-const TimeLine = dynamic(() => import('../TimeLine'), { ssr: false });
-const ShipmentInfo = dynamic(() => import('../ShipmentInfo'), { ssr: false });
 const CancelDetails = dynamic(() => import('../CancelDetails'), { ssr: false });
-const ShipmentChat = dynamic(() => import('@cogoport/shipment-chat/page-components'), { ssr: false });
-const PocSop = dynamic(() => import('../PocSop'), { ssr: false });
 
 const TAB_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
@@ -20,12 +21,11 @@ const TAB_MAPPING = {
 };
 
 function DefaultView() {
-	const {
-		shipment_data = {},
-		stakeholderConfig = {},
-	} = useContext(ShipmentDetailContext) || {};
+	const { shipment_data = {}, stakeholderConfig = {} } = useContext(ShipmentDetailContext) || {};
 
-	const { features = [] } = stakeholderConfig || {};
+	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
+	const [activeTab, setActiveTab] = useState(default_tab);
+
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
 	const conditionMapping = {
@@ -38,7 +38,7 @@ function DefaultView() {
 	return (
 		<div>
 			<div className={styles.top_header}>
-				{conditionMapping.shipment_info ? <ShipmentInfo /> : null}
+				<ShipmentInfo />
 
 				<div className={styles.toggle_chat}>
 					{/* <Toggle
@@ -63,7 +63,8 @@ function DefaultView() {
 				<Tabs
 					fullWidth
 					themeType="secondary"
-					defaultActiveTab={stakeholderConfig.defaultTab}
+					activeTab={activeTab}
+					onChange={setActiveTab}
 				>
 					{tabs.map((t) => (
 						<TabPanel name={t} key={t} title={stakeholderConfig[t]?.tab_title}>
