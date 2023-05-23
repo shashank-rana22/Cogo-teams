@@ -2,7 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import ReceivablesFrom from '../ReceivablesForm';
+import ReceivablesPayablesFrom from '../ReceivablesPayablesForm';
 
 import styles from './styles.module.css';
 
@@ -57,7 +57,7 @@ function ReceivavlesEditModal({
 						</span>
 					</div>
 				</div>
-				<ReceivablesFrom
+				<ReceivablesPayablesFrom
 					control={control}
 					errors={errors}
 					TypeKey="AR"

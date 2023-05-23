@@ -5,7 +5,7 @@ import tdsCollectionFilters from '../../../../configurations/tds-settlement/tds-
 
 import styles from './styles.module.css';
 
-function ReceivablesFrom({
+function ReceivablesPayablesFrom({
 	control,
 	errors,
 	TypeKey,
@@ -58,4 +58,4 @@ function ReceivablesFrom({
 	);
 }
 
-export default ReceivablesFrom;
+export default ReceivablesPayablesFrom;

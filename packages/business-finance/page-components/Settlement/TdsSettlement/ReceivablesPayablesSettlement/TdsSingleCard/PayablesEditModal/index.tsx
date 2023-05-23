@@ -2,7 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import ReceivablesFrom from '../ReceivablesForm';
+import ReceivablesPayablesFrom from '../ReceivablesPayablesForm';
 
 function PayablesEditModal({
 	show,
@@ -31,7 +31,7 @@ function PayablesEditModal({
 		>
 			<Modal.Header title="TDS Edit" />
 			<Modal.Body>
-				<ReceivablesFrom
+				<ReceivablesPayablesFrom
 					control={control}
 					errors={errors}
 					TypeKey="AP"
