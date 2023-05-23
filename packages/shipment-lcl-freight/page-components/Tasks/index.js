@@ -1,5 +1,11 @@
+import Header from './Header';
+
 function Tasks() {
-	return <div>Tasks</div>;
+	return (
+		<div>
+			<Header />
+		</div>
+	);
 }
 
 export default Tasks;
