@@ -1,29 +1,23 @@
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-// import formatDate from '@cogoport/globalization/utils/formatDate';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
-// import {
-// 	actionButtonKeys,
-// 	statusLabelTransformation,
-// } from '../../../configurations/key-mapping';
-// import getTicketStatus from '../../../utils/getTicketStatus';
+import { statusLabelTransformation } from '../../../configurations/key-mapping';
+import { actionButtonKeys, getTicketStatus } from '../../../constants';
 
 import styles from './styles.module.css';
 
-function TicketStructureBody() {
-	// const {
-	// 	ID = '',
-	// 	Status = '',
-	// 	Description = '',
-	// 	CreatedAt = '',
-	// 	TicketActivity = {},
-	// 	Type = '',
-	// 	Activitycount = 0,
-	// } = item;
+function TicketStructureBody({ data }) {
+	const {
+		ID = '',
+		Status = '',
+		Description = '',
+		CreatedAt = '',
+		TicketActivity = {},
+		Type = '',
+		ActivityCount = 0,
+	} = data;
 
-	// const { t } = useTranslation(['common']);
-
-	// const { color: textColor, label = '' } =		statusLabel[getTicketStatus(Status)] || {};
-
+	const { color: textColor, label } =	statusLabelTransformation[getTicketStatus(Status)] || {};
 	// const handleTicketClick = (e) => {
 	// 	e.stopPropagation();
 	// 	updateTicketActivity(actionButton[Status]?.name, ID);
@@ -53,56 +47,52 @@ function TicketStructureBody() {
 				<div className={styles.subcontainer_header}>
 					<div className={styles.ticket_id}>
 						#
-						{/* {ID} */}
-						222222
+						{ID}
 					</div>
 					{/* {listType !== 'create' && ( */}
 					<div
 						role="presentation"
 						className={styles.reopen_resolve}
+						// onClick={(e) => handleTicketClick(e)}
+
 					>
-						{/* {actionButton[Status]?.label || ''} */}
-						reopen
+						{actionButtonKeys[Status]?.label || ''}
 					</div>
 
 				</div>
 				<div className={styles.category_ticket_activity}>
-					{/* {Type || Description.substring(0, 100)} */}
-					Hello, I am calling to take confirmation of my shipment de...
+					{Type || Description.substring(0, 100)}
 				</div>
 			</div>
 			<div className={styles.subcontainer_two}>
 				<div className={styles.subcontainer_header}>
 					<div
 						className={styles.ticket_status}
-						// style={{
-						// 	color: textColor || '#F68B21',
-						// }}
+						style={{
+							color: textColor || '#ABCD62',
+						}}
 					>
-						{/* {label} */}
-						Open
+						{label}
 					</div>
 					<div className={styles.ticket_date_time}>
-						{/* {formatDate({
+						{formatDate({
 							date       : CreatedAt,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/mm/yyyy'],
 							separator  : ', ',
 							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 							formatType : 'dateTime',
-						})} */}
-						12/2/23   11:19
+						})}
 					</div>
 				</div>
 				<div className={styles.ticket_reason_box}>
 					<div className={styles.description}>
-						{/* {(TicketActivity?.Description || Description).substring(0, 100)} */}
-						This issue occurred...
+						{(TicketActivity?.Description || Description).substring(0, 100)}
 					</div>
-					{/* {Activitycount ? ( */}
-					<div className={styles.messages_nos}>
-						{/* {Activitycount} */}
-						2
-					</div>
+					{ActivityCount ? (
+						<div className={styles.activity_count}>
+							{ActivityCount}
+						</div>
+					) : null}
 
 				</div>
 			</div>

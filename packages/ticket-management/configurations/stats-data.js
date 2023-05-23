@@ -25,7 +25,7 @@ export const statsIconsAndData = [
 	},
 	{
 		icon  : <IcMTicket fill="#F8AEA8" width="22px" height="22px" />,
-		count : '400 s',
+		count : '400',
 		label : 'Escalated Tickets',
 		key   : 'four',
 

@@ -13,7 +13,7 @@ function TicketStructureLoader({ listType = '' }) {
 					<div className={styles.subcontainer_one}>
 						<div className={styles.subcontainer_header}>
 							<Placeholder
-								width="100px"
+								width="90px"
 								height="18px"
 								className={styles.loading_skeleton}
 							/>
@@ -25,7 +25,7 @@ function TicketStructureLoader({ listType = '' }) {
 						</div>
 						<div className={styles.description}>
 							<Placeholder
-								width="230px"
+								width="220px"
 								height="18px"
 								className={styles.loading_skeleton}
 							/>
@@ -34,20 +34,20 @@ function TicketStructureLoader({ listType = '' }) {
 					<div className={styles.subcontainer_two}>
 						<div className={styles.subcontainer_header}>
 							<Placeholder
-								width="100px"
+								width="90px"
 								height="18px"
 								className={styles.loading_skeleton}
 							/>
 							<div className={styles.ticket_date_time}>
 								<div className={styles.ticket_date}>
 									<Placeholder
-										width="45px"
+										width="35px"
 										height="18px"
 										className={styles.loading_skeleton}
 									/>
 								</div>
 								<Placeholder
-									width="45px"
+									width="35px"
 									height="18px"
 									className={styles.loading_skeleton}
 								/>
@@ -55,7 +55,7 @@ function TicketStructureLoader({ listType = '' }) {
 						</div>
 						<div className={styles.ticket_reason_box}>
 							<Placeholder
-								width="230px"
+								width="220px"
 								height="18px"
 								className={styles.loading_skeleton}
 							/>

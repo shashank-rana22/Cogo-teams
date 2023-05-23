@@ -4,15 +4,12 @@
 // import useUpdateTicketActivity from '../../hooks/useUpdateTicketActivity';
 import styles from './styles.module.css';
 import TicketStructureBody from './TicketStructureBody';
-// import TicketStructureLoader from './TicketStructureLoader';
+import TicketStructureLoader from './TicketStructureLoader';
 // import EmptyStateTicketStructure from './EmptyStateTicketStructure';
 
-function TicketStructure() {
+function TicketStructure({ data, handleScroll, loading }) {
 	// const {
-	// 	ticketData,
 	// 	refreshTickets,
-	// 	listLoading,
-	// 	handleScroll = () => {},
 	// 	setModalData,
 	// 	listType = '',
 	// } = props;
@@ -35,16 +32,21 @@ function TicketStructure() {
 			// 	listType === 'create' ? styles.raised_box : styles.ticket_box
 			// }`}
 			className={styles.ticket_box}
-			// onScroll={(e) => handleScroll(
-			// 	e.target.clientHeight,
-			// 	e.target.scrollTop,
-			// 	e.target.scrollHeight,
-			// )}
+			onScroll={(e) => handleScroll(
+				e.target.clientHeight,
+				e.target.scrollTop,
+				e.target.scrollHeight,
+			)}
 		>
+			{
+				data.map((item) => (
+					<TicketStructureBody data={item} key={item.id} />
+				))
+			}
 
-			<TicketStructureBody />
-
-			{/* {listLoading && <TicketStructureLoader listType={listType} />} */}
+			{loading && (
+				<TicketStructureLoader />
+			)}
 		</div>
 	);
 }

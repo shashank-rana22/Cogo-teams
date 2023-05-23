@@ -5,6 +5,7 @@
     "private": true,
     "main": "./index.js",
     "dependencies": {
+      "@cogoport/forms": "workspace:0.1.0",
       "@cogoport/components": "^1.0.359",
       "@cogoport/constants": "workspace:^0.1.0",
       "@cogoport/icons-react": "^1.0.68",
