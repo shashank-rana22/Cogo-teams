@@ -5,20 +5,15 @@ import styles from './styles.module.css';
 
 function Confirmation({ value = false, setValue = () => {} }) {
 	return (
-		<div className={styles.container}>
-			<div className={styles.check_box_wrapper}>
-				<Checkbox
-					value={value}
-					onChange={() => setValue(!value)}
-				/>
-			</div>
+		<div
+			role="button"
+			tabIndex={0}
+			className={styles.container}
+			onClick={() => setValue(!value)}
+		>
+			<Checkbox checked={value} />
 
-			<div
-				role="button"
-				tabIndex={0}
-				className={styles.confirm_label}
-				onClick={() => setValue(!value)}
-			>
+			<div className={styles.confirm_label}>
 				I have verified the invoice and ensured that all the services taken &
 				charges incurred during the shipment have been billed to the customer
 			</div>
