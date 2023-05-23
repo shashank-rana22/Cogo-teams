@@ -1,0 +1,73 @@
+.filter_data {
+  display: flex;
+  align-items: center;
+  padding: 0px 12px;
+  justify-content: space-between;
+  :global {
+    .ui_select_display_container {
+      height: 32px !important;
+      .ui_select_input_control {
+        width: 120px;
+      }
+    }
+    .ui_select_input_placeholder {
+      color: #bdbdbd;
+    }
+  }
+}
+.filter_amount_collection {
+  display: flex;
+  align-items: center;
+  :global {
+    .react-datepicker__input-container {
+      input {
+        height: 32px;
+        width: 170px;
+      }
+    }
+  }
+}
+.icon_color {
+  color: #f68b21;
+  height: 15px;
+  width: 15px;
+}
+.content_filter {
+  width: 200px;
+  align-items: center;
+  padding: 8px 0px;
+  display: flex;
+  flex-direction: column;
+  :global {
+    .ui_select_display_container {
+      .ui_select_input_control {
+        width: 145px;
+      }
+    }
+  }
+}
+.more_filter_div {
+  font-weight: 600;
+}
+.icon_div {
+  margin: 4px;
+  display: flex;
+}
+.container {
+  background: #ffff;
+}
+.filter_search_more_filters {
+  display: flex;
+  align-items: center;
+  gap: 20px;
+}
+.filter_search {
+  width: 400px;
+  margin: 18px 0px 18px 0px;
+}
+.clear_filters {
+  color: #f68b21;
+  text-decoration: underline;
+  margin-left: 8px;
+  cursor: pointer;
+}

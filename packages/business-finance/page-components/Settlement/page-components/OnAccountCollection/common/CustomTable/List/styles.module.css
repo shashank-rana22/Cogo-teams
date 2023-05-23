@@ -1,0 +1,10 @@
+.list {
+  background-color: var(--color-secondary-5);
+}
+
+.column {
+  padding: 16px;
+  margin: 12px 4px;
+  border-bottom: 1px solid #f8f2e7;
+  position: relative;
+}

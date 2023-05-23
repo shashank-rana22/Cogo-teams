@@ -1,0 +1,40 @@
+.header {
+  display: flex;
+  padding: 16px 4px;
+  border-bottom: 2px solid var(--color-accent-orange-2);
+}
+
+.customer_name {
+  flex: 1.6;
+  padding-left: 14px;
+}
+
+.customer_id {
+  flex: 0.9;
+}
+.doc_value {
+  flex: 1;
+}
+.entity {
+  flex: 0.6;
+}
+
+.cogo_bank {
+  flex: 1;
+}
+
+.amount {
+  flex: 0.8;
+}
+
+.upload {
+  flex: 1.4;
+}
+
+.utr {
+  flex: 0.8;
+}
+
+.status {
+  flex: 1.4;
+}

@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import JournalVoucher from './page-components/JournalVoucher';
+import OnAccountCollection from './page-components/OnAccountCollection';
 import styles from './styles.module.css';
 
 function Settlement() {
@@ -44,7 +45,7 @@ function Settlement() {
 				</TabPanel>
 
 				<TabPanel name="on-account-collection" title="On Account Collection">
-					-
+					<OnAccountCollection />
 				</TabPanel>
 
 				<TabPanel name="journal-voucher" title="Journal Voucher">

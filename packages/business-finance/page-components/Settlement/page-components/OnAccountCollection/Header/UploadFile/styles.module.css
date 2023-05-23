@@ -1,0 +1,19 @@
+.mode_selection {
+  padding: 0px 24px 16px 16px;
+  display: flex;
+  justify-content: space-between;
+  width: 100%;
+  align-items: center;
+}
+.upload_data {
+  padding: 0px 24px 16px 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+.button_wrapper {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  gap: 8px;
+}

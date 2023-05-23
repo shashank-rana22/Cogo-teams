@@ -1,0 +1,99 @@
+.uploaded {
+  background: #fef1df;
+}
+.deleted {
+  background: #ffc8b4;
+}
+.posted {
+  background: #cdf7d4;
+}
+.ap_ribbon {
+  --f: 5px; /* control the folded part */
+  --r: 9px; /* control the ribbon shape */
+  --t: -7px; /* the top offset */
+
+  position: absolute;
+  top: 0px;
+  right: -21px;
+  padding: 0 20px var(--f) calc(14px + var(--r));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--f)),
+    calc(100% - var(--f)) 100%,
+    calc(100% - var(--f)) calc(100% - var(--f)),
+    0 calc(100% - var(--f)),
+    var(--r) calc(50% - var(--f) / 2)
+  );
+  font-size: 10px;
+  background: #dfd9c8;
+  box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+}
+.simple_ribbon {
+  --f: 5px; /* control the folded part */
+  --r: 9px; /* control the ribbon shape */
+  --t: -7px; /* the top offset */
+
+  position: absolute;
+  top: 0px;
+  right: -21px;
+  padding: 0 20px var(--f) calc(14px + var(--r));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--f)),
+    calc(100% - var(--f)) 100%,
+    calc(100% - var(--f)) calc(100% - var(--f)),
+    0 calc(100% - var(--f)),
+    var(--r) calc(50% - var(--f) / 2)
+  );
+  font-size: 10px;
+  background: #d5ddd6;
+  box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+}
+
+.doc_type_ribbon {
+  --f: 5px; /* control the folded part */
+  --r: 9px; /* control the ribbon shape */
+  --t: -7px; /* the top offset */
+
+  position: absolute;
+  top: 20px;
+  right: -21px;
+  padding: 0 20px var(--f) calc(14px + var(--r));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--f)),
+    calc(100% - var(--f)) 100%,
+    calc(100% - var(--f)) calc(100% - var(--f)),
+    0 calc(100% - var(--f)),
+    var(--r) calc(50% - var(--f) / 2)
+  );
+  background: #dfd9c8;
+  box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+  font-size: 10px;
+}
+
+.tds_ribbon {
+  --f: 5px; /* control the folded part */
+  --r: 9px; /* control the ribbon shape */
+  --t: -7px; /* the top offset */
+
+  position: absolute;
+  top: 20px;
+  right: -21px;
+  padding: 0 20px var(--f) calc(14px + var(--r));
+  clip-path: polygon(
+    0 0,
+    100% 0,
+    100% calc(100% - var(--f)),
+    calc(100% - var(--f)) 100%,
+    calc(100% - var(--f)) calc(100% - var(--f)),
+    0 calc(100% - var(--f)),
+    var(--r) calc(50% - var(--f) / 2)
+  );
+  background: #ffccbc;
+  box-shadow: 0 calc(-1 * var(--f)) 0 inset #0005;
+  font-size: 10px;
+}
