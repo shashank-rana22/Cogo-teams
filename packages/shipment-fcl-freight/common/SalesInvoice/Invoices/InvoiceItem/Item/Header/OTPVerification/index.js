@@ -141,7 +141,7 @@ function OTPVerification({
 					<Modal.Footer className={styles.modal_footer}>
 						<Button
 							size="md"
-							disabled={verifyInvoiceLoader}
+							disabled={verifyInvoiceLoader || isEmpty(otpValue)}
 							onClick={() => onClickSubmitOtp({
 								mobile_otp : otpValue,
 								invoice_id : invoice?.id,
