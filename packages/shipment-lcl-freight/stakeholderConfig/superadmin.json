@@ -1,4 +1,19 @@
 {
     "features":["shipment_info", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails", "tracking"],    
-    "shipment_info":{}
+    "shipment_info":{},
+    "overview":{
+        "tab_title":"Overview"
+    },
+    "tasks":{
+        "tab_title":"Timeline and Tasks"
+    },
+    "documents":{
+        "tab_title":"Documents"
+    },
+    "emails":{
+        "tab_title":"Emails"
+    },
+    "tracking":{
+        "tab_title":"Tracking"
+    }
 }
