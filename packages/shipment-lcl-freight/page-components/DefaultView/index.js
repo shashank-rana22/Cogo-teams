@@ -5,6 +5,7 @@ import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useContext, useState } from 'react';
 
 import PocSop from '../PocSop';
+import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
 import TimeLine from '../TimeLine';
 
@@ -29,10 +30,11 @@ function DefaultView() {
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
 	const conditionMapping = {
-		shipment_info : !!features.includes('shipment_info'),
-		cancelDetail  : !!(features.includes('cancel_details') && shipment_data.state === 'cancelled'),
-		poc_sop       : !!(features.includes('poc') || features.includes('sop')),
-		chat          : !!features.includes('chat'),
+		shipment_info   : !!features.includes('shipment_info'),
+		cancelDetail    : !!(features.includes('cancel_details') && shipment_data.state === 'cancelled'),
+		poc_sop         : !!(features.includes('poc') || features.includes('sop')),
+		chat            : !!features.includes('chat'),
+		shipment_header : !!features.includes('shipment_header'),
 	};
 
 	return (
@@ -54,6 +56,8 @@ function DefaultView() {
 			{conditionMapping.cancelDetail ? <CancelDetails /> : null}
 
 			<div className={styles.header}>
+				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
+
 				{conditionMapping.poc_sop ? <PocSop /> : null}
 			</div>
 
