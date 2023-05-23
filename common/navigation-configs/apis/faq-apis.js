@@ -500,7 +500,7 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'list_course_user_mappings',
+			api          : 'list_user_courses',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
