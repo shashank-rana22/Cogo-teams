@@ -2,15 +2,13 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
 import { useContext } from 'react';
+
 import styles from './styles.module.css';
-const TimeLine = dynamic(() => import('../TimeLine'), { ssr: false });
-
-
 
 const ShipmentInfo = dynamic(() => import('../ShipmentInfo'), { ssr: false });
 const CancelDetails = dynamic(() => import('../CancelDetails'), { ssr: false });
+const TimeLine = dynamic(() => import('../TimeLine'), { ssr: false });
 const ShipmentChat = dynamic(() => import('@cogoport/shipment-chat/page-components'), { ssr: false });
-const PocSop = dynamic(() => import('../PocSop'), { ssr: false });
 
 const COMPONENT_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
@@ -20,15 +18,10 @@ const COMPONENT_MAPPING = {
 	tracking  : dynamic(() => import('@cogoport/ocean-modules/components/Tracking'), { ssr: false }),
 };
 
-function DefaultView() {
-	const {
-		shipment_data = {},
-		stakeholderConfig = {},
-		activeTab,
-		setActiveTab = () => {},
-	} = useContext(ShipmentDetailContext) || {};
+function ComponentsMapping({ stakeholderConfig = {} }) {
+	const { shipment_data } = useContext(ShipmentDetailContext) || {};
 
-	const { features = [] } = stakeholderConfig || {};
+	const { features = [] } = stakeholderConfig;
 	const tabs = Object.keys(COMPONENT_MAPPING).filter((t) => features.includes(t));
 
 	const conditionMapping = {
@@ -56,12 +49,6 @@ function DefaultView() {
 
 			{conditionMapping.cancelDetail ? <CancelDetails /> : null}
 
-			<div className={styles.header}>
-
-
-					<PocSop />
-			</div>
-
 			{conditionMapping.chat ? <TimeLine /> : null}
 
 			<div className={styles.container}>
@@ -73,20 +60,8 @@ function DefaultView() {
 					))}
 				</Tabs>
 			</div>
-
-			<Tabs
-				fullWidth
-				themeType="secondary"
-				defaultActiveTab={stakeholderConfig.defaultTab}
-			>
-				{tabs.map((t) => (
-					<TabPanel name={t} key={t} title={stakeholderConfig[t]?.tab_title}>
-						{COMPONENT_MAPPING[t]}
-					</TabPanel>
-				))}
-			</Tabs>
 		</div>
 	);
 }
 
-export default DefaultView;
+export default ComponentsMapping;

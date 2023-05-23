@@ -1,28 +1,28 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import useGetActiveStakeholder from '../hooks/useGetActiveStakeholder';
 import useGetShipment from '../hooks/useGetShipment';
-import stakeholderConfig from '../stakeholderConfig';
+import useListShipmentServices from '../hooks/useListShipmentServices';
+import getStakeholderConfig from '../stakeholderConfig';
 
 import DefaultView from './DefaultView';
 
 function LclFreight() {
 	const activeStakeholder = useGetActiveStakeholder();
-	const stakeholder_config = stakeholderConfig({ stakeholder: activeStakeholder });
+	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
 
-	const [activeTab, setActiveTab] = useState(stakeholder_config?.default_tab || 'tasks');
-	const { data, loading, apiTrigger } = useGetShipment();
+	const { get } = useGetShipment();
+	const { servicesGet = {} }  = useListShipmentServices();
 
 	const contextValues = useMemo(() => ({
-		shipment_data    : data,
-		shipment_loading : loading,
-		stakeholder_config,
+		...get,
+		...servicesGet,
+		stakeholderConfig,
 		activeStakeholder,
-		shipment_refetch : apiTrigger,
-		activeTab,
-		setActiveTab,
-	}), [data, loading, stakeholder_config, activeStakeholder, apiTrigger, activeTab, setActiveTab]);
+	}), [get, servicesGet, stakeholderConfig, activeStakeholder]);
+
+	console.log({contextValues})
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>

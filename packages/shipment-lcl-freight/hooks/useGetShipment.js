@@ -1,40 +1,43 @@
-import { useRouter } from '@cogoport/next';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import dummyData from '../DummyData/shipment_data.json';
 import { useRequest } from '@cogoport/request';
-import { useCallback, useEffect, useState } from 'react';
+import { useRouter } from '@cogoport/next';
+import { useCallback, useEffect } from 'react';
 
-const useGetShipment = () => {
-	const [data, setData] = useState({});
 
+export default function useGetShipment() {
 	const router = useRouter();
-	const { shipment_id:id } = router.query;
+	const { shipment_id } = router.query || {};
+	const isGettingShipment = false;
 
-	const [{ loading }, trigger] = useRequest({
-		url          : 'get_shipment',
-		params       : { id },
-		service_name : 'shipment',
-	}, { manual: true });
 
-	const apiTrigger = useCallback(() => {
-		(async () => {
-			try {
-				const res = await trigger();
-				setData(res?.data || {});
-			} catch (err) {
-				toastApiError(err);
-			}
-		})();
-	}, [trigger]);
+	// const [{ loading: isGettingShipment, data }, trigger] = useRequest({
+	// 	url    : '/get_shipment',
+	// 	method : 'GET',
+	// }, {manual: true});
 
-	useEffect(() => {
-		apiTrigger();
-	}, [apiTrigger]);
+	// const getShipment = useCallback(async () => {
+	// 	await trigger({
+	// 		params: {
+	// 			id: shipment_id
+	// 		}
+	// 	});
+	//   }, [trigger, shipment_id])
+	
+	// useEffect(() => {
+	// 	getShipment();
+	// }, [getShipment])
+
+	const getShipment = () => {}
 
 	return {
-		loading,
-		data,
-		apiTrigger,
+		get: {
+			isGettingShipment,
+			refetch               : getShipment,
+			documents             : dummyData?.documents,
+			primary_service       : dummyData?.primary_service_detail,
+			shipment_data         : dummyData?.summary,
+			document_delay_status : dummyData?.document_delay_status,
+			booking_note_details : dummyData?.booking_note_details,
+		},
 	};
 };
-
-export default useGetShipment;
