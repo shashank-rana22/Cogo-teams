@@ -4,6 +4,7 @@ import { dynamic } from '@cogoport/next';
 const ShipmentInfo = dynamic(() => import('../ShipmentInfo'), { ssr: false });
 const CancelDetails = dynamic(() => import('../CancelDetails'), { ssr: false });
 const ShipmentChat = dynamic(() => import('@cogoport/shipment-chat/page-components'), { ssr: false });
+const PocSop = dynamic(() => import('../PocSop'), { ssr: false });
 
 const COMPONENT_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
@@ -31,6 +32,8 @@ function ComponentsMapping({ stakeholderConfig = {}, shipment_data = {} }) {
 			{conditionMapping.cancelDetail ? <div><CancelDetails /></div> : null}
 
 			{conditionMapping.chat ? <div><ShipmentChat /></div> : null}
+
+			{conditionMapping.poc_sop ? <div><PocSop /></div> : null}
 
 			<Tabs>
 				{tabs.map((t) => (

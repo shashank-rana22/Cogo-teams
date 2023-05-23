@@ -12,10 +12,11 @@ import { card, card_body, separator, critical_card } from './styles.module.css';
 export default function Card({ item = {}, couldBeCardsCritical = false }) {
 	const router = useRouter();
 	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+		// const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
 
-		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
+		// window.sessionStorage.setItem('prev_nav', newUrl);
+		// window.location.href = newUrl;
+		router.push('/booking/lcl/[shipment_id]', `/booking/lcl/${item.id}`);
 	};
 
 	return (
