@@ -49,7 +49,12 @@ function EditFeatureModal({ editModal, setEditModal }) {
 						<h3 className={styles.title}>
 							<RenderTitle editAddon={editAddon} product_name={product_name} />
 						</h3>
-						<ButtonIcon size="md" icon={<IcMCross />} themeType="primary" onClick={modalChangeHandler} />
+						<ButtonIcon
+							size="md"
+							icon={<IcMCross />}
+							themeType="primary"
+							onClick={() => modalChangeHandler(false)}
+						/>
 					</div>
 					{editAddon && (
 						<Quota

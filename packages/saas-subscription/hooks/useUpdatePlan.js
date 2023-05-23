@@ -16,9 +16,9 @@ const useUpdatePlan = ({ planId, subscriptionId, modalChangeHandler }) => {
 		url    : '/update_saas_subscription',
 	}, { manual: true });
 
-	const getPlanList = useCallback(() => {
+	const getPlanList = useCallback(async () => {
 		try {
-			listTrigger({
+			await listTrigger({
 				params: {
 					filters    : { is_active: true, plan_type: 'P' },
 					page_limit : PLAN_LIST_PAGE_LIMIT,

@@ -10,7 +10,7 @@ import Pricing from './Pricing';
 import styles from './styles.module.css';
 
 function PlanDetails() {
-	const { loading, planDetails } = useGetPlanDetails();
+	const { loading = false, planDetails = {} } = useGetPlanDetails();
 	const { plan = {}, pricing = [], plan_features = [] } = planDetails || {};
 	const { metadata = {} } = plan || {};
 	const { addons = [] } = metadata || {};

@@ -2,11 +2,15 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useMemo } from 'react';
 
 const useGetSubscriptionInfo = ({ editModal = {}, setEditModal }) => {
 	const { info = {}, apiCall = false } = editModal || {};
 	const { active_subscription = {} } = info || {};
+
+	const customerSubId = useMemo(() => (
+		active_subscription?.saas_subscription_customer_id || ''
+	), [active_subscription]);
 
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
@@ -26,11 +30,17 @@ const useGetSubscriptionInfo = ({ editModal = {}, setEditModal }) => {
 	}, [trigger]);
 
 	useEffect(() => {
-		if (!isEmpty(info) || apiCall) {
-			const customerSubId = active_subscription?.saas_subscription_customer_id || '';
+		if (!isEmpty(info)) {
 			refetchSubscriptionInfo(customerSubId);
 		}
-	}, [info, apiCall, active_subscription, refetchSubscriptionInfo]);
+	}, [info, refetchSubscriptionInfo, customerSubId]);
+
+	useEffect(() => {
+		if (apiCall) {
+			console.log(apiCall, 'apiCall');
+			refetchSubscriptionInfo(customerSubId);
+		}
+	}, [apiCall, customerSubId, refetchSubscriptionInfo]);
 
 	const editModalChangeHandler = (key, value) => {
 		setEditModal((prev) => ({

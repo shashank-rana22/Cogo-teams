@@ -36,7 +36,7 @@ function Quota({ quotaInfo = {}, modalChangeHandler }) {
 				<Button
 					themeType="secondary"
 					type="submit"
-					onClick={modalChangeHandler}
+					onClick={() => modalChangeHandler(false)}
 					loading={loading}
 				>
 					Cancel

@@ -13,7 +13,7 @@ const useUpdateQuota = ({ id = '', modalChangeHandler }) => {
 	const formHook = useForm({
 		defaultValues: {
 			action   : 'credit',
-			is_addon : false,
+			is_addon : 'false',
 		},
 	});
 

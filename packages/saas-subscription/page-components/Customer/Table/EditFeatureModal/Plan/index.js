@@ -19,6 +19,7 @@ function Plan({ subscriptionId = '', modalChangeHandler }) {
 
 	const { list = [] } = listData || {};
 	const options = getOptions(list);
+
 	return (
 		<>
 			<div className={styles.plan_container}>
@@ -29,7 +30,7 @@ function Plan({ subscriptionId = '', modalChangeHandler }) {
 					themeType="secondary"
 					type="submit"
 					loading={loading}
-					onClick={modalChangeHandler}
+					onClick={() => modalChangeHandler(false)}
 				>
 					Cancel
 				</Button>
