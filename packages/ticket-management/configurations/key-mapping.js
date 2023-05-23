@@ -5,7 +5,7 @@ export const statusLabelTransformation = {
 	},
 	closed: {
 		label : 'Closed',
-		color : '##BDBDBD',
+		color : '#BDBDBD',
 	},
 	rejected: {
 		label : 'Rejected!!',
