@@ -25,6 +25,7 @@
     "@cogoport/components": "^1.0.359",
     "@cogoport/contracts": "workspace:0.1.0",
     "@cogoport/core": "workspace:0.1.0",
+    "@cogoport/chro": "workspace:0.1.0",
     "@cogoport/performance-management": "workspace:1.0.0",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/icons-react": "^1.0.58",

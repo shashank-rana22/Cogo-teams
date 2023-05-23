@@ -56,6 +56,7 @@ import {
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
+	IcMFsoppoc,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -2268,6 +2269,17 @@ const navigationMappingAdmin = {
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
+	},
+	chro: {
+		key           : 'chro',
+		title         : 'CHRO',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : [''],
+		href          : '/v2/chro',
+		as            : '/v2/chro',
+		possible_apis : apis.chro,
+		icon          : IcMFsoppoc,
 	},
 };
 

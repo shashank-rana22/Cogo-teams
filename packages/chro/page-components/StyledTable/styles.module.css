@@ -1,0 +1,59 @@
+.container {
+	width: 100%;
+
+	:global {
+		table {
+			padding: 0;
+		}
+
+		background-color: transparent;
+		border-radius: 10px;
+
+		.ui_table_head_cell {
+			padding: 10px;
+			background-color: #deebed;
+		}
+
+		.ui_table_body_cell {
+			flex-wrap: wrap;
+			padding: 12px 8px;
+			background: #fff;
+			background-color: #fff;
+		}
+
+		.ui_table_body_row {
+			position: relative;
+		}
+
+		.ui_table_body_cell:first-child {
+			border-radius: 6px 0 0 6px;
+		}
+
+		.ui_table_body_cell:last-child {
+			border-radius: 0 6px 6px 0;
+		}
+
+		.ui_table_head_cell:first-child {
+			border-radius: 6px 0 0 6px;
+		}
+
+		.ui_table_head_cell:last-child {
+			border-radius: 0 6px 6px 0;
+		}
+	}
+
+	@media (max-width: 1010px) {
+		overflow-x: scroll;
+		scroll-behavior: smooth;
+
+		:global {
+			.ui_table_body_cell {
+				min-width: 150px;
+			}
+
+			.ui_table_body_cell:last-child {
+				min-width: 50px;
+			}
+		}
+	}
+}
