@@ -103,7 +103,6 @@ function Form({
 				{ controls?.length === 0 && step === 1
 					? (
 						<div> Are you sure you want to upsell this service?</div>
-
 					)
 					: null }
 				{ controls?.length !== 0 && step === 1
