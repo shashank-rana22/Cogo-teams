@@ -5,10 +5,11 @@
 		}
 
 		.ui_select_input_placeholder, .ui_select_input_control, .ui_select_option_item {
-			font-size: var(--font-size-md);
+			font-size: var(--font-size-md) !important;
 		}
 	}
 }
+
 
 .select_div{
 	width: 200px;
