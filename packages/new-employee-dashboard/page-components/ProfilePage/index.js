@@ -14,7 +14,7 @@ function ProfilePage() {
 
 	return (
 		<div className={styles.container}>
-			<Header detail={detail} />
+			<Header detail={detail} loading={loading} />
 
 			<div className={styles.tab_container}>
 				<Tabs
