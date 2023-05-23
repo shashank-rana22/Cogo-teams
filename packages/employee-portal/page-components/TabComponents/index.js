@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { IcMArrowNext } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import AdditionalDocuments from './AdditionalDocuments';
 import CogoAcademy from './CogoAcademy';
@@ -10,9 +11,7 @@ import OfferLetter from './OfferLetter';
 import SignYourDocuments from './SignYourDocuments';
 import styles from './styles.module.css';
 
-function TabComponents({ data }) {
-	const [informationPage, setInformationPage] = useState('');
-
+function TabComponents({ data, informationPage, setInformationPage }) {
 	const component_mapping = {
 		new_hire_information : NewHireInformation,
 		offer_letter         : OfferLetter,
@@ -24,6 +23,16 @@ function TabComponents({ data }) {
 		maps                 : Maps,
 	};
 
+	const MAPPING = {
+		new_hire_information : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
+		company_policies     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
+		offer_letter         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
+		sign_your_docs       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
+		day_1                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
+		maps                 : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
+
+	};
+
 	if (informationPage) {
 		const PageComponent = component_mapping[informationPage];
 		return <PageComponent setInformationPage={setInformationPage} data={data} />;
@@ -31,64 +40,34 @@ function TabComponents({ data }) {
 
 	return (
 		<div className={styles.container}>
-			<p>Meanwhile, get started with</p>
-			<div className={styles.components}>
-				<div
-					role="presentation"
-					className={styles.options}
-					onClick={() => setInformationPage('new_hire_information')}
-				>
-					NEW HIRE INFORMATION
-				</div>
-				<div
-					role="presentation"
-					className={styles.options}
-					onClick={() => setInformationPage('offer_letter')}
-				>
-					OFFER LETTER
-				</div>
-				<div
-					role="presentation"
-					className={styles.options}
-					onClick={() => setInformationPage('additional_docs')}
-				>
-					ADDITIONAL DOCUMENTS
-				</div>
-				<div
-					role="presentation"
-					className={styles.options}
-					onClick={() => setInformationPage('sign_your_docs')}
-				>
-					SIGN YOUR DOCUMENTS
-				</div>
-				<div
-					role="presentation"
-					className={styles.options}
-					onClick={() => setInformationPage('company_policies')}
-				>
-					COMPANY POLICIES
-				</div>
-				<div
-					role="presentation"
-					className={styles.options}
-					onClick={() => setInformationPage('day_1')}
-				>
-					DAY 1
-				</div>
-				<div
-					role="presentation"
-					className={styles.options}
-					onClick={() => setInformationPage('cogo_academy')}
-				>
-					COGOACADEMY
-				</div>
-				<div
-					role="presentation"
-					className={styles.options}
-					onClick={() => setInformationPage('maps')}
-				>
-					MAPS
-				</div>
+			<div className={styles.header}>Meanwhile, get started with</div>
+			<div style={{ display: 'flex', flexWrap: 'wrap' }}>
+				{
+				(Object.keys(MAPPING)).map((item) => (
+					<div
+						key={item}
+						role="presentation"
+						className={styles.options}
+						onClick={() => setInformationPage(item)}
+					>
+						<div>
+							<img
+								src={MAPPING[item]}
+								alt="address icon"
+								width="60"
+								height="60"
+							/>
+							<div className={styles.card_header}>{startCase(item)}</div>
+						</div>
+
+						<div className={styles.arrow_wrapper}>
+							<IcMArrowNext width={20} height={20} />
+
+						</div>
+
+					</div>
+				))
+			}
 			</div>
 
 		</div>

@@ -5,16 +5,16 @@
 }
 
 .options {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 18vw;
-  height: 18vh;
-  margin-right: 12px;
-  margin-bottom: 12px;
-  text-align: center;
+  width: 12vw;
+  padding:24px 24px 10px 24px;
+  border-radius: 8px;
   cursor: pointer;
-  background-color: orange;
+  background-color: #FCDC00;
+  margin-right: 20px;
+  margin-bottom: 20px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
 }
 
 .components {
@@ -23,4 +23,25 @@
   flex-wrap: wrap;
   justify-content: center;
   margin-top: 16px;
+}
+
+.header{
+  font-weight: 800;
+  padding-bottom: 10px;
+}
+
+.card_header{
+  width:100px;
+  padding-top: 22px;
+}
+
+.arrow_wrapper{
+  display:flex;
+  justify-content: flex-end;
+  padding-top: 30px;
+}
+
+.icon_container {
+  display:flex;
+  align-items: flex-end;
 }

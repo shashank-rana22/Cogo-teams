@@ -1,4 +1,4 @@
-import { IcMProfile, IcCFtick, IcMDocument } from '@cogoport/icons-react';
+import { IcMProfile, IcCFtick, IcMDocument, IcMFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -33,12 +33,13 @@ function StepperComponent() {
 			<div className={styles.flex_wrapper}>
 				{ MAPPING.map((elemet) => {
 					const { name, is_added, icon:Icon, sub_title } = elemet || {};
+					const TickIcon = is_added ? IcCFtick : IcMFtick;
 
 					return (
 						<div key={name} className={styles.flex_wrapper} style={{ opacity: is_added ? 1 : 0.5 }}>
 							<div className={styles.single_card}>
 								<div className={styles.tick_icon}>
-									<IcCFtick width={24} height={24} />
+									<TickIcon width={24} height={24} />
 
 								</div>
 								<div className={styles.icon_wrapper}>
