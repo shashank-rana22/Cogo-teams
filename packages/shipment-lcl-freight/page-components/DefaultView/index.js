@@ -3,10 +3,8 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
 import { useContext } from 'react';
 import styles from './styles.module.css';
+
 const TimeLine = dynamic(() => import('../TimeLine'), { ssr: false });
-
-
-
 const ShipmentInfo = dynamic(() => import('../ShipmentInfo'), { ssr: false });
 const CancelDetails = dynamic(() => import('../CancelDetails'), { ssr: false });
 const ShipmentChat = dynamic(() => import('@cogoport/shipment-chat/page-components'), { ssr: false });
@@ -24,8 +22,6 @@ function DefaultView() {
 	const {
 		shipment_data = {},
 		stakeholderConfig = {},
-		activeTab,
-		setActiveTab = () => {},
 	} = useContext(ShipmentDetailContext) || {};
 
 	const { features = [] } = stakeholderConfig || {};
@@ -58,21 +54,12 @@ function DefaultView() {
 
 			<div className={styles.header}>
 
-
-					<PocSop />
+				{conditionMapping.poc_sop ? <PocSop /> : null}
 			</div>
 
 			{conditionMapping.chat ? <TimeLine /> : null}
 
 			<div className={styles.container}>
-				<Tabs>
-					{tabs.map((t) => (
-						<TabPanel name={t} key={t} title={stakeholderConfig[t]?.tab_title}>
-							{COMPONENT_MAPPING[t]}
-						</TabPanel>
-					))}
-				</Tabs>
-			</div>
 
 			<Tabs
 				fullWidth
@@ -85,6 +72,8 @@ function DefaultView() {
 					</TabPanel>
 				))}
 			</Tabs>
+			</div>
+
 		</div>
 	);
 }
