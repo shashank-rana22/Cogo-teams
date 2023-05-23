@@ -1,0 +1,20 @@
+.title {
+	margin-left: 16px;
+	font-weight: 600;
+	color: #828282;
+}
+
+.chart_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.chart {
+	width: 55%;
+	height: 120px;
+}
+
+.chart_status {
+	width: 45%;
+}

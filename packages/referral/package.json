@@ -1,0 +1,21 @@
+{
+    "name": "@cogoport/referral",
+    "version": "0.1.0",
+    "description": "Referral Dashboard",
+    "private": true,
+    "main": "./index.js",
+    "dependencies": {
+        "@cogoport/charts": "^1.0.1",
+        "@cogoport/components": "^1.0.403",
+        "@cogoport/constants": "workspace:^0.1.0",
+        "@cogoport/forms": "workspace:0.1.0",
+        "@cogoport/globalization": "workspace:*",
+        "@cogoport/icons-react": "^1.0.58",
+        "@cogoport/next": "workspace:0.1.0",
+        "@cogoport/request": "workspace:0.1.0",
+        "@cogoport/store": "workspace:0.1.0",
+        "@cogoport/utils": "^1.2.6",
+        "react": "18.2.0",
+        "react-d3-tree": "^3.5.2"
+    }
+}
