@@ -2,8 +2,6 @@ import { Accordion } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React from 'react';
 
-import useGetEmployeeDetails from '../../../hooks/useGetEmployeeDetails';
-
 import BankDetails from './BankDetails';
 import EducationalQualification from './EducationalQualification';
 import EmploymentHistory from './EmploymentHistory';
