@@ -5,7 +5,7 @@ const getProps = (data = {}) => ({
 		tags              : (data.faq_tags || []).map((item) => item.id) || [],
 		course_objectives : (data.course_objectives || []).map((objective) => ({ objective })) || [],
 	},
-	publish: {
+	pre_publish: {
 		course_title      : data.name,
 		course_categories : (data.course_categories || []).map((category) => category.id),
 		thumbnail_url     : data.thumbnail_url,

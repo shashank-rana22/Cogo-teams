@@ -21,7 +21,7 @@ const useUpdateCourse = ({ setActiveTab, activeTab, getCogoAcademyCourse, change
 				await getCogoAcademyCourse();
 			}
 
-			if (activeTab !== 'publish' && changeTab) {
+			if (activeTab !== 'pre_publish' && changeTab) {
 				setActiveTab(CURRENT_TO_NEXT_MAPPING[activeTab]);
 			}
 

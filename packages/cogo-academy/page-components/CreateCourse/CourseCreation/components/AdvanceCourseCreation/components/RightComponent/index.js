@@ -17,7 +17,7 @@ const COMPONENT_MAPPING = {
 	audience      : IntendedLearners,
 	curriculum    : CourseCurriculum,
 	completion    : CourseCompletion,
-	publish       : PublishCourse,
+	pre_publish   : PublishCourse,
 };
 
 function RightComponent({ data = {}, activeTab, id, getCogoAcademyCourse, setActiveTab, mode = '' }) {

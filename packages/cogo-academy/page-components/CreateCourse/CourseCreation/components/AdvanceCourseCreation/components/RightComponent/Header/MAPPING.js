@@ -26,7 +26,7 @@ const MAPPING = {
 		text  : `This space is for you to feed the completion criteria, 
         reward and time allowed to complete the course for your learners. `,
 	},
-	publish: {
+	pre_publish: {
 		title : 'Publish Course',
 		text  : `You may use this section to feed details before publishing to let the users know about the course. 
         This will help demonstrate why someone would want to enrol in your course.`,
