@@ -1,3 +1,3 @@
-export { default as AllTickets } from './page-components/AllTickets';
+export { default as MyTickets } from './page-components/MyTickets';
 
 export { default as SuperAdmin } from './page-components/SuperAdmin';

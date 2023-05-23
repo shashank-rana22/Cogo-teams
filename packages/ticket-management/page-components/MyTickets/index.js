@@ -4,7 +4,7 @@ import FilterTicketsSection from './FilterTicketsSection';
 import StatsSection from './StatsSection';
 import styles from './styles.module.css';
 
-function AllTickets() {
+function MyTickets() {
 	return (
 		<div className={styles.main_container}>
 			<Header />
@@ -14,4 +14,4 @@ function AllTickets() {
 	);
 }
 
-export default AllTickets;
+export default MyTickets;
