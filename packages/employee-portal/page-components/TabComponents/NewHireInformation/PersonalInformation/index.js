@@ -27,7 +27,6 @@ function PersonalInformation({ data:content }) {
 
 	const onSubmit = (values) => {
 		createEmployeeDetails({ data: values, id });
-		console.log('values :: emphistory ', values);
 	};
 
 	useEffect(() => {
@@ -87,7 +86,7 @@ function PersonalInformation({ data:content }) {
 				type="button"
 				className={styles.button}
 				onClick={
-						handleSubmit()
+						handleSubmit(onSubmit)
 					}
 			>
 				Save
