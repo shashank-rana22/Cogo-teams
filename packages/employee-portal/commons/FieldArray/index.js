@@ -6,13 +6,23 @@ import Child from './Child';
 
 function FieldArray(props) {
 	const {
-		name, control, controls,
+		name,
+		control,
+		controls,
+		error,
+		showElements,
+		buttonText,
+		showButtons = true,
+		disabled = false,
+		...rest
 	} = props;
 
-	const { fields, append, remove } = useFieldArray({ control, name });
+	const { fields, append, remove } = useFieldArray({
+		control,
+		name,
+	});
 
 	const childEmptyValues = {};
-
 	controls.forEach((controlItem) => {
 		childEmptyValues[controlItem.name] = '';
 	});
@@ -22,30 +32,33 @@ function FieldArray(props) {
 	}
 
 	return (
-		<>
+		<div>
 			{fields.map((field, index) => (
 				<Child
+					{...rest}
 					key={field.id}
-					fields={field}
+					field={field}
 					index={index}
-					name={name}
-					remove={remove}
 					control={control}
 					controls={controls}
+					name={name}
+					remove={remove}
+					error={error?.[index]}
+					showElements={showElements?.[index]}
+					disabled={disabled}
 				/>
 			))}
 
-			<Button
-				themeType="accent"
-				onClick={() => append(childEmptyValues)}
-				style={{ marginTop: '8px', width: '70px' }}
-			>
-				{' '}
-				+ Add
-			</Button>
-
-		</>
-
+			{showButtons && !disabled ? (
+				<Button
+					themeType="secondary"
+					onClick={() => append(childEmptyValues)}
+					style={{ margin: '16px 0px' }}
+				>
+					+ Add
+				</Button>
+			) : null}
+		</div>
 	);
 }
 
