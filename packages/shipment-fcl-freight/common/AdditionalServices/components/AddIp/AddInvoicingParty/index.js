@@ -34,6 +34,7 @@ function AddInvoicingParty({
 				primary_service={primary_service}
 				updateInvoicingParty={updateInvoicingParty}
 				bookingType={activeComponentKey}
+				key={activeComponentKey}
 			/>
 		</div>
 	);

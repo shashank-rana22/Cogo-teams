@@ -1,4 +1,4 @@
-import { Modal, Button, RadioGroup } from '@cogoport/components';
+import { Modal, Button, RadioGroup, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -6,7 +6,6 @@ import useGetOrgUsersData from '../../../../../../../hooks/useGetOrgUsersData';
 import useSendInvoiceOtp from '../../../../../../../hooks/useSendInvoiceOtp';
 import useVerifyInvoiceOtp from '../../../../../../../hooks/useVerifyInvoiceOtp';
 
-import Loader from './Loader';
 import OtpInput from './OtpInput';
 import styles from './styles.module.css';
 
@@ -69,7 +68,11 @@ function OTPVerification({
 
 	let userListInfo = null;
 	if (loading) {
-		userListInfo = <Loader />;
+		userListInfo = 		(
+			<div className={styles.loader_wrapper}>
+				<Loader />
+			</div>
+		);
 	} else if (userList?.length === 0 && !loading) {
 		userListInfo = <div className={styles.no_data}>No verified user exists!</div>;
 	} else {
