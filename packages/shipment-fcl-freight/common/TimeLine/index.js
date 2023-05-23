@@ -3,23 +3,15 @@ import { IcMEdit } from '@cogoport/icons-react';
 import { useState, useContext, useEffect } from 'react';
 
 import EditSchedule from './EditSchedule';
+import { canEditSchedule } from './helpers/canEditSchedule';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
 
-const editScheduleStates = [
-	'init',
-	'awaiting_service_provider_confirmation',
-	'confirmed_by_service_provider',
-	'containers_gated_in',
-	'vessel_departed',
-	'vessel_arrived',
-];
-
 function Timeline() {
 	const {
 		shipment_data, primary_service, timelineLoading : loading, isGettingShipment,
-		timelineData, getShipmentTimeline,
+		timelineData, getShipmentTimeline, activeStakeholder,
 	} = useContext(ShipmentDetailContext);
 
 	useEffect(() => {
@@ -30,7 +22,7 @@ function Timeline() {
 
 	const [showEditSchedule, setShowEditSchedule] = useState(false);
 
-	const showEditScheduleIcon = editScheduleStates.includes(primary_service?.state);
+	const showEditScheduleIcon = canEditSchedule({ primary_service, activeStakeholder });
 
 	const filteredTimelineData = (timelineData || []).filter(
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
@@ -70,7 +62,10 @@ function Timeline() {
 			) : null}
 
 			{showEditSchedule ? (
-				<EditSchedule show={showEditSchedule} setShow={setShowEditSchedule} timelineData={timelineData} />
+				<EditSchedule
+					setShow={setShowEditSchedule}
+					timelineData={timelineData}
+				/>
 			) : null}
 		</div>
 	);

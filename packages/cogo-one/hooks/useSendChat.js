@@ -61,7 +61,7 @@ const useSendChat = ({
 		}
 	};
 
-	const sentQuickSuggestions = async (val, scrollToBottom) => {
+	const sentQuickSuggestions = async (scrollToBottom, val) => {
 		await sendUserMessage({
 			formattedData,
 			channel_type,

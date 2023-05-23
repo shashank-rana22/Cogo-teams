@@ -1,0 +1,21 @@
+{
+	"name": "@cogoport/so2-surface",
+	"version": "0.1.0",
+	"description": "Package for Operators",
+	"private": true,
+	"dependencies": {
+		"@cogoport/components": "^1.0.322",
+		"@cogoport/forms": "workspace:0.1.0",
+		"@cogoport/icons-react": "^1.0.51",
+		"@cogoport/next": "workspace:0.1.0",
+		"@cogoport/request": "workspace:0.1.0",
+		"@cogoport/store": "workspace:0.1.0",
+		"@cogoport/utils": "^1.2.2",
+		"html-to-image": "^1.11.11",
+		"html2canvas": "^1.4.1",
+		"file-saver": "^2.0.5",
+		"jspdf": "^2.5.1",
+		"react": "18.2.0",
+		"uuid": "^9.0.0"
+	}
+}

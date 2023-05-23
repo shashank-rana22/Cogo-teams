@@ -57,7 +57,7 @@ function SentDiv({
 
 					{!isEmpty(btns) && (
 						<div className={styles.btns_container}>
-							{(btns || []).map((eachbtn) => <div className={styles.btn}>{eachbtn}</div>)}
+							{(btns || []).map((eachbtn) => <div key={eachbtn} className={styles.btn}>{eachbtn}</div>)}
 						</div>
 					) }
 					{!isEmpty(list) && (

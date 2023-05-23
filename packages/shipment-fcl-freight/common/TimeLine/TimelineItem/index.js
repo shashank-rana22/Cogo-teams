@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMTick } from '@cogoport/icons-react';
 import { useContext } from 'react';
 
-import { getDate } from '../utils/formatters';
+import { getDisplayDate } from '../utils/getDisplayDate';
 
 import {
 	container, connecting_line, circle, small, big, deviated,
@@ -43,14 +43,18 @@ export default function TimelineItem({ item, isLast = false, consecutivelyComple
 			{displayCompletedDate ? (
 				<>
 					<div className={label}>Completed On</div>
-					<div className={value}>{getDate(displayCompletedDate)}</div>
+					<div className={value}>
+						{getDisplayDate({ date: displayCompletedDate, formatType: 'dateTime' })}
+					</div>
 				</>
 			) : null}
 
 			{actual_completed_on ? (
 				<>
 					<div className={`${label} ${deviated}`}>Actual Completed On</div>
-					<div className={value}>{getDate(actual_completed_on)}</div>
+					<div className={value}>
+						{getDisplayDate({ date: actual_completed_on, formatType: 'dateTime' })}
+					</div>
 				</>
 			) : null}
 		</div>
@@ -69,7 +73,7 @@ export default function TimelineItem({ item, isLast = false, consecutivelyComple
 			{!is_sub || isLast ? (
 				<div className={display_milestone}>
 					<div className={ellipsis}>{milestone}</div>
-					<div className={ellipsis}>{getDate(displayCompletedDate, 'dd MMM yyyy')}</div>
+					<div className={ellipsis}>{getDisplayDate({ date: displayCompletedDate })}</div>
 				</div>
 			) : null}
 		</div>
