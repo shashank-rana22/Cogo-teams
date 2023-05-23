@@ -26,7 +26,7 @@ const getCreateTradePartnerParams = (values) => {
 			alternate_mobile_number       : alternate_mobile_number?.number,
 		}),
 		...(ORG_ID_REQUIRED.includes(companyType) && { organization_id: organization_id || importer_exporter_id }),
-		...(companyType === 'historical' ? { pincode } : {}),
+		...(companyType === 'historical' && pincode ? { pincode } : {}),
 		...restValues,
 	};
 
