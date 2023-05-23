@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Carousel, Tabs, TabPanel } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -37,6 +37,17 @@ function CourseModule() {
 		return <LoadingState rowsCount={7} />;
 	}
 
+	const CAROUSELDATA = list.map((item, index) => ({
+		key    : index,
+		render : () => (
+			<CourseCard
+				key={item.id}
+				data={item}
+				buttonContent={BUTTON_CONTENT__MAPPING[activeTab]}
+			/>
+		),
+	}));
+
 	return (
 		<div className={styles.container}>
 			<Header setShowCoursesModal={setShowCoursesModal} />
@@ -51,13 +62,16 @@ function CourseModule() {
 				>
 					{TABS_MAPPING.map(({ name, title }) => (
 						<TabPanel key={name} name={name} title={title}>
-							{list.map((item) => (
-								<CourseCard
-									key={item.id}
-									data={item}
-									buttonContent={BUTTON_CONTENT__MAPPING[activeTab]}
+							<div className={styles.carousel_container}>
+								<Carousel
+									size="md"
+									slides={CAROUSELDATA}
+									itemsToShow={4}
+									itemsToScroll={4}
+									showDots={false}
+									showArrow
 								/>
-							))}
+							</div>
 						</TabPanel>
 					))}
 				</Tabs>

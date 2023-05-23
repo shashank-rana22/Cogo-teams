@@ -8,3 +8,23 @@
 	font-size: 20px;
 	font-weight: 700;
 }
+
+.carousel_container {
+    margin: 24px 0px;
+    
+    :global {
+		.ui_carousel_arrow {
+			margin-left: -36px;
+			fill: #221f20;
+		}
+
+		.ui_carousel_next {
+			margin-right: -16px;
+			background: none;
+		}
+
+		.ui_carousel_prev {
+			background: none;
+		}
+	}
+}
