@@ -1836,13 +1836,16 @@ const partner = {
 			api          : 'bulk_update_controlled_checkout_service',
 			access_type  : 'private',
 			service_name : 'checkout',
-
 		},
 		{
 			api          : 'update_checkout_approval',
 			access_type  : 'private',
 			service_name : 'checkout',
-
+		},
+		{
+			api          : 'send_checkout_for_approval',
+			access_type  : 'private',
+			service_name : 'checkout',
 		},
 	],
 	supply_crm: [
