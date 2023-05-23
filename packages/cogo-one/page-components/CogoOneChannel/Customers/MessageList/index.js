@@ -14,6 +14,7 @@ import LoadingState from '../LoadingState';
 import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import AutoAssignComponent from './AutoAssignComponent';
+import FlashUserChats from './FlashUserChats';
 import MessageCardData from './MessageCardData';
 import styles from './styles.module.css';
 
@@ -40,7 +41,9 @@ function MessageList(messageProps) {
 		sortedPinnedChatList = [],
 		firestore,
 		viewType = '',
+		flashMessagesList = [],
 	} = messageProps;
+
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
@@ -75,6 +78,15 @@ function MessageList(messageProps) {
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	return (
 		<>
+			{!messagesLoading && (
+				<FlashUserChats
+					flashMessagesList={flashMessagesList}
+					activeCardId={activeCardId}
+					userId={userId}
+					setActiveMessage={setActiveMessage}
+					firestore={firestore}
+				/>
+			) }
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
 					<Input

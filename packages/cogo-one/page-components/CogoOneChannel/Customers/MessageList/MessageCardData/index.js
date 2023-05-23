@@ -19,6 +19,8 @@ function MessageCardData({
 	firestore,
 	autoAssignChats = true,
 	handleCheckedChats = () => {},
+	showPin = true,
+	source = '',
 }) {
 	const {
 		user_name = '',
@@ -148,18 +150,20 @@ function MessageCardData({
 						/>
 					</div>
 				)}
-				<div className={styles.pinned_div}>
-					{pinnedTime[userId] > 0
-						? (
-							<IcCPin
-								onClick={(e) => updatePinnedChats(e, 'unpin')}
-							/>
-						) : (
-							<IcMPin
-								onClick={(e) => updatePinnedChats(e, 'pin')}
-							/>
-						)}
-				</div>
+				{showPin && (
+					<div className={styles.pinned_div}>
+						{pinnedTime[userId] > 0
+							? (
+								<IcCPin
+									onClick={(e) => updatePinnedChats(e, 'unpin')}
+								/>
+							) : (
+								<IcMPin
+									onClick={(e) => updatePinnedChats(e, 'pin')}
+								/>
+							)}
+					</div>
+				)}
 
 			</div>
 		</div>

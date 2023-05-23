@@ -96,13 +96,13 @@
 }
 
 .list_container {
-	height: calc(100% - 150px);
+	height: calc(100% - 220px);
 	overflow-x: hidden;
 	overflow-y: auto;
 }
 
 .bot_list_container {
-	height: calc(100% - 200px);
+	height: calc(100% - 280px);
 }
 
 .list_container::-webkit-scrollbar {

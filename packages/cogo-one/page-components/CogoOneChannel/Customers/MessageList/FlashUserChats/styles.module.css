@@ -1,0 +1,28 @@
+.flash_messages_div {
+	width: 97%;
+	padding: 10px;
+	margin-bottom: 10px;
+	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	border-radius: 6px;
+	animation: gradient 0.5s ease infinite;
+
+	@keyframes gradient {
+		0% {
+			background-position: 0% 50%;
+		}
+
+		50% {
+			background-position: 100% 50%;
+		}
+
+		100% {
+			background-position: 0% 50%;
+		}
+	}
+}
+
+.carousel_styled {
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: rgb(100 100 111 / 20%) 0 7px 29px 0;
+}
