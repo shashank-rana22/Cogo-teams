@@ -29,10 +29,10 @@ function PercentageDiv({ eachStat = {} }) {
 					strokeLinecap="round"
 					strokeLinejoin="round"
 				/>
-				<text className={styles.text_styles} x="50%" y="55%" textAnchor="middle">
-					{`${value}/${target}`}
-				</text>
 			</svg>
+			<div className={styles.text_styles}>
+				{`${value}/${target}`}
+			</div>
 			<div className={styles.label_text}>{label}</div>
 		</div>
 	);
