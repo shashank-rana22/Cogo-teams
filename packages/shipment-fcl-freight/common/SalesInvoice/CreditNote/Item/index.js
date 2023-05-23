@@ -65,7 +65,7 @@ function Item({
 
 				<Tooltip
 					theme="light"
-					interactive
+					placement="bottom"
 					content={(
 						<div className={styles.billing_address}>
 							{item?.billing_address?.address}

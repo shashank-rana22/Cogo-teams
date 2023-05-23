@@ -180,7 +180,6 @@ function Actions({
 						<Tooltip
 							placement="bottom"
 							theme="light"
-							interactive
 							content={<AmendmentReasons invoice={invoice} />}
 						>
 							<div className={styles.icon_info_wrapper}>
@@ -197,7 +196,6 @@ function Actions({
 						/>
 
 						<Tooltip
-							interactive
 							placement="bottom"
 							content={(
 								<div className={styles.flex_row_div}>
@@ -261,7 +259,6 @@ function Actions({
 					{!isEmpty(invoice.remarks) ? (
 						<Tooltip
 							placement="bottom"
-							interactive
 							content={remarkRender()}
 						>
 							<div className={styles.icon_more_wrapper}>

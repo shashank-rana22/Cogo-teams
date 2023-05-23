@@ -127,7 +127,7 @@ function Header({
 								<div className={styles.label}>GST Number :</div>
 								<Tooltip
 									theme="light"
-									interactive
+									placement="bottom"
 									content={(
 										<div className={styles.tooltip_div}>
 											{billing_address?.address}
@@ -166,7 +166,6 @@ function Header({
 								<Tooltip
 									theme="light"
 									placement="bottom"
-									interactive
 									content={
 										<div>{bfInvoice?.invoiceRejectionReason || '-'}</div>
 									}

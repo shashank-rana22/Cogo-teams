@@ -201,7 +201,6 @@ function Actions({
 						<Tooltip
 							placement="bottom"
 							theme="light-border"
-							interactive
 							content={<AmendmentReasons invoice={invoice} />}
 						>
 							<div className={styles.icon_info_wrapper}>
@@ -217,7 +216,6 @@ function Actions({
 						/>
 
 						<Tooltip
-							interactive
 							placement="bottom"
 							theme="light"
 							content={(
@@ -280,7 +278,6 @@ function Actions({
 						<Tooltip
 							placement="bottom"
 							theme="light-border"
-							interactive
 							content={remarkRender}
 						>
 							<div className={styles.icon_more_wrapper}>
