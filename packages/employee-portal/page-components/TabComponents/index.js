@@ -1,17 +1,16 @@
 import { useState } from 'react';
 
-import AdditionalDocuments from '../AdditionalDocuments';
-import CogoAcademy from '../CogoAcademy';
-import CompanyPolicies from '../CompanyPolicies';
-import Day1 from '../Day1';
-import Maps from '../Maps';
-import NewHireInformation from '../NewHireInformation';
-import OfferLetter from '../OfferLetter';
-import SignYourDocuments from '../SignYourDocuments';
-
+import AdditionalDocuments from './AdditionalDocuments';
+import CogoAcademy from './CogoAcademy';
+import CompanyPolicies from './CompanyPolicies';
+import Day1 from './Day1';
+import Maps from './Maps';
+import NewHireInformation from './NewHireInformation';
+import OfferLetter from './OfferLetter';
+import SignYourDocuments from './SignYourDocuments';
 import styles from './styles.module.css';
 
-function ProfilePage() {
+function TabComponents({ data }) {
 	const [informationPage, setInformationPage] = useState('');
 
 	const component_mapping = {
@@ -27,7 +26,7 @@ function ProfilePage() {
 
 	if (informationPage) {
 		const PageComponent = component_mapping[informationPage];
-		return <PageComponent setInformationPage={setInformationPage} />;
+		return <PageComponent setInformationPage={setInformationPage} data={data} />;
 	}
 
 	return (
@@ -96,4 +95,4 @@ function ProfilePage() {
 	);
 }
 
-export default ProfilePage;
+export default TabComponents;

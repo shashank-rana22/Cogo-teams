@@ -1,7 +1,11 @@
+import useGetEmployeeDetails from '../../hooks/useGetEmployeeDetails';
+import TabComponents from '../TabComponents';
+
 function Dashboard() {
+	const { data } = useGetEmployeeDetails({});
 	return (
 		<div>
-			Welcome
+			<TabComponents data={data} />
 		</div>
 	);
 }

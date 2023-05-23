@@ -1,12 +1,12 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import FieldArray from '../../../commons/FieldArray';
+import FieldArray from '../../../../commons/FieldArray';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function EducationalQualification() {
+function EmploymentHistory() {
 	const { handleSubmit, control } = useForm();
 
 	const onSubmit = (values) => {
@@ -14,7 +14,7 @@ function EducationalQualification() {
 	};
 
 	return (
-		<div className={styles.whole_container}>
+		<>
 			<div className={styles.container}>
 				{controls?.map((controlItem) => {
 					const { type, name: controlName } = controlItem || {};
@@ -23,18 +23,16 @@ function EducationalQualification() {
 						return (
 							<FieldArray
 								Array
-								name="education_qualifications"
+								name="employment_history"
 								control={control}
 								controls={controlItem?.controls}
 								key={controlName}
-
 							/>
-
 						);
 					}
 					return (
 						<div key={controlItem}>
-							EducationalQualification
+							EmploymentHistory
 						</div>
 					);
 				})}
@@ -44,14 +42,12 @@ function EducationalQualification() {
 				size="md"
 				type="button"
 				className={styles.button}
-				onClick={
-						handleSubmit(onSubmit)
-					}
+				onClick={handleSubmit(onSubmit)}
 			>
 				Save
 			</Button>
-		</div>
+		</>
 	);
 }
 
-export default EducationalQualification;
+export default EmploymentHistory;

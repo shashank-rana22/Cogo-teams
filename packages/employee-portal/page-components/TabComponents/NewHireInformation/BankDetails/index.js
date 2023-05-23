@@ -1,18 +1,25 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import getElementController from '../../../configs/getElementController';
+import getElementController from '../../../../configs/getElementController';
+import useCreateEmployeeBankDetails from '../../../../hooks/useCreateEmployeeBankDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-const removeTypeField = (controlItem) => {
-	const { type, ...rest } = controlItem;
-	return rest;
-};
-
 function BankDetails() {
 	const { handleSubmit, control, formState: { errors } } = useForm();
+
+	const { loading, createEmployeeBankDetails } = useCreateEmployeeBankDetails();
+
+	const removeTypeField = (controlItem) => {
+		const { type, ...rest } = controlItem;
+		return rest;
+	};
+
+	const onSubmit = (values) => {
+		createEmployeeBankDetails({ data: values });
+	};
 
 	return (
 		<div className={styles.whole_container}>
@@ -49,7 +56,7 @@ function BankDetails() {
 				type="button"
 				className={styles.button}
 				onClick={
-						handleSubmit()
+						handleSubmit(onSubmit)
 					}
 			>
 				Save

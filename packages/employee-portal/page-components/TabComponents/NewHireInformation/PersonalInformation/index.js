@@ -2,8 +2,7 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
-import getElementController from '../../../configs/getElementController';
-import useGetEmployeeDetails from '../../../hooks/useGetEmployeeDetails';
+import getElementController from '../../../../configs/getElementController';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -13,13 +12,7 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function PersonalInformation({ id = '' }) {
-	const {
-		loading,
-		data,
-		getEmployeeDetails,
-	} = useGetEmployeeDetails({ id });
-
+function PersonalInformation({ data }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
 	const controlsvalue = controls({ data });
