@@ -8,6 +8,7 @@ import LoadingState from '../../commons/LoadingState';
 import CourseCard from './components/CourseCard';
 import CoursesModal from './components/CoursesModal';
 import Header from './components/Header';
+import BUTTON_CONTENT__MAPPING from './configs/BUTTON_CONTENT_MAPPING';
 import TABS_MAPPING from './configs/TABS_MAPPING';
 import useListCourseUserMappings from './hooks/useListCourseUserMappings';
 import styles from './styles.module.css';
@@ -51,7 +52,11 @@ function CourseModule() {
 					{TABS_MAPPING.map(({ name, title }) => (
 						<TabPanel key={name} name={name} title={title}>
 							{list.map((item) => (
-								<CourseCard key={item.id} data={item} />
+								<CourseCard
+									key={item.id}
+									data={item}
+									buttonContent={BUTTON_CONTENT__MAPPING[activeTab]}
+								/>
 							))}
 						</TabPanel>
 					))}
