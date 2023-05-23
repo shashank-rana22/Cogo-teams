@@ -1,19 +1,34 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import LoadingState from '../../commons/LoadingState';
 
 import CourseCard from './components/CourseCard';
+import CoursesModal from './components/CoursesModal';
 import Header from './components/Header';
 import TABS_MAPPING from './configs/TABS_MAPPING';
-import CourseDetailCard from './CourseDetailCard.js';
 import useListCourseUserMappings from './hooks/useListCourseUserMappings';
 import styles from './styles.module.css';
 
 function CourseModule() {
-	const [activeTab, setActiveTab] = useState('ongoing');
+	const { user:{ id: user_id } } = useSelector((state) => state.profile);
 
-	const { data, loading } = useListCourseUserMappings({ activeTab });
+	const [activeTab, setActiveTab] = useState('ongoing');
+	const [showCoursesModal, setShowCoursesModal] = useState(false);
+	const [input, setInput] = useState('');
+	const [params, setParams] = useState({
+		page    : 1,
+		filters : {
+			status: 'active',
+			user_id,
+		},
+	});
+
+	const { query, debounceQuery } = useDebounceQuery();
+
+	const { data, loading } = useListCourseUserMappings({ activeTab, params, query });
 
 	const { list = [] } = data || {};
 
@@ -23,7 +38,7 @@ function CourseModule() {
 
 	return (
 		<div className={styles.container}>
-			<Header />
+			<Header setShowCoursesModal={setShowCoursesModal} />
 
 			<div className={styles.main_heading}>My Courses</div>
 
@@ -40,11 +55,15 @@ function CourseModule() {
 							))}
 						</TabPanel>
 					))}
-
 				</Tabs>
 			</div>
 
-			<CourseDetailCard />
+			{showCoursesModal ? (
+				<CoursesModal
+					showCoursesModal={showCoursesModal}
+					setShowCoursesModal={setShowCoursesModal}
+				/>
+			) : null}
 		</div>
 	);
 }

@@ -1,0 +1,17 @@
+.preview_modal_body {
+	display: flex;
+	padding: 0 16px;
+	padding-bottom: 16px;
+	border: unset !important;
+}
+
+.left_component {
+	width: 30%;
+	padding: 0 12px;
+	border-right: 2px solid #fff8c7;
+}
+
+.right_component {
+	width: 70%;
+	margin: 0 12px;
+}

@@ -3,13 +3,17 @@ import { IcMArrowDown, IcMSearchlight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ setShowCoursesModal }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_container}>
 				<div className={styles.title}>Cogo Courses</div>
 
-				<Button size="lg" type="button">
+				<Button
+					size="lg"
+					type="button"
+					onClick={() => setShowCoursesModal(true)}
+				>
 					Courses
 					{' '}
 					<IcMArrowDown style={{ marginLeft: '8px' }} />

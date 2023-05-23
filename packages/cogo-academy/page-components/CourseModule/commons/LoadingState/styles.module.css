@@ -1,0 +1,38 @@
+.card_container {
+	padding: 10px 12px;
+	margin-top: 10px;
+	background: rgb(255 255 255 / 70%);
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
+}
+
+.card {
+	padding: 8px;
+	cursor: pointer;
+}
+
+.user_information {
+	display: flex;
+	justify-content: space-between;
+}
+
+.user_details {
+	display: flex;
+	flex-direction: column;
+	margin-left: 10px;
+}
+
+.avatar_container {
+	display: flex;
+}
+
+.list_container {
+	padding-top: unset;
+	overflow-y: auto;
+}
+
+.user_activity {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-end;
+}
