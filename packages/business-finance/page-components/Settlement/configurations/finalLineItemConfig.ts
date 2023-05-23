@@ -11,12 +11,12 @@ export const lineItemConfig = [
 	},
 	{
 		label : 'Controller',
-		span  : 3,
+		span  : 2,
 		key   : 'controller',
 	},
 	{
 		label : 'GL Code',
-		span  : 2,
+		span  : 3,
 		key   : 'gl_code',
 	},
 	{

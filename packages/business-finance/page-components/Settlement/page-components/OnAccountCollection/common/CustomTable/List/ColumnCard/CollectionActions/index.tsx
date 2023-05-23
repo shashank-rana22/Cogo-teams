@@ -76,7 +76,7 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 	});
 
 	const closePopover = () => {
-		setSelectedId('');
+		setSelectedId(undefined);
 		setShow(true);
 	};
 

@@ -9,13 +9,12 @@
 
 .fieldstyle {
 	padding: 12px 16px;
-	font-size: var(--font-size-sm);
-	font-weight: 800;
+	font-size: var(--font-size-md);
+	font-weight: 600;
 }
 
 .tablecolumn {
 	display: flex;
-	align-items: center;
 	margin-top: 12px;
 }
 

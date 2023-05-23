@@ -1,11 +1,13 @@
-export const EMPTY_LINE_ITEMS = {
+export const EMPTY_LINE_ITEMS = ({
 	entityCode   : '',
 	accMode      : '',
 	glCode       : '',
 	tradePartyId : '',
-	type         : 'credit',
-	amount       : 0,
-};
+	type         : 'CREDIT',
+	amount       : '',
+
+});
+
 export const AR_FILE_URL =	'https://cogoport-production.sgp1.digitaloceanspaces.com'
 + '/f9d559fd0f5f48f69a1b2d05ecd0cda9/Sample-AR-BulkUpload.xlsx';
 export const AP_FILE_URL =	'https://cogoport-production.sgp1.digitaloceanspaces.com'

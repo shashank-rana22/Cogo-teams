@@ -14,7 +14,6 @@ export const containerIncludingTasks = [
 	'mark_vessel_arrived_at_origin',
 	'mark_container_gated_in',
 	'mark_container_dropped',
-	'mark_container_gated_out',
 	'mark_offloaded',
 	'update_container_offloaded_at',
 	'mark_sailing_status',

@@ -10,6 +10,7 @@ export const jvFilters = [
 		multiple    : false,
 		size        : 'md',
 		isClearable : true,
+		initialCall : true,
 		asyncKey    : 'journal_category',
 		valueKey    : 'category',
 		renderLabel : (option, key) => (

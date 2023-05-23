@@ -343,16 +343,13 @@ function asyncListCurrency() {
 		},
 	};
 }
-
-function asyncJvList() {
+function asyncListServetelAgents() {
 	return {
-		labelKey     : 'category',
-		valueKey     : 'id',
-		endpoint     : 'payments/parent-jv/jv-category',
-		initialCall  : true,
-		authkey      : 'get_payments_parent_jv_jv_category',
-		microService : 'business_finance',
-		params       : {
+		labelKey    : 'mobile_number',
+		valueKey    : 'id',
+		endpoint    : 'list_servetel_agents',
+		initialCall : true,
+		params      : {
 			filters: {
 				status: 'active',
 			},
@@ -360,14 +357,27 @@ function asyncJvList() {
 	};
 }
 
+function asyncJvList() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'payments/parent-jv/jv-category',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_jv_category',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
 function asyncJournalCode() {
 	return {
 		labelKey     : 'description',
-		valueKey     : 'id',
+		valueKey     : 'number',
 		endpoint     : 'payments/parent-jv/journal-code',
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_journal_code',
 		microService : 'business_finance',
+		searchByq    : true,
 	};
 }
 
@@ -379,17 +389,19 @@ function asyncAccMode() {
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_acc_mode',
 		microService : 'business_finance',
+		searchByq    : true,
 	};
 }
 
 function asyncCodeMaster() {
 	return {
-		labelKey     : 'description',
+		labelKey     : 'accountCode',
 		valueKey     : 'accountCode',
 		endpoint     : 'payments/parent-jv/gl-code-master',
 		initialCall  : true,
 		authkey      : 'get_payments_parent_jv_gl_code_master',
 		microService : 'business_finance',
+		searchByq    : true,
 	};
 }
 
@@ -399,6 +411,12 @@ function asyncListOrgTradeParties() {
 		valueKey    : 'id',
 		endpoint    : 'list_organization_trade_party_details',
 		initialCall : true,
+		params      : {
+			sage_organization_id_required : true,
+			filters                       : {
+				status: 'active',
+			},
+		},
 	};
 }
 
@@ -435,4 +453,5 @@ export {
 	asyncAccMode,
 	asyncCodeMaster,
 	asyncListOrgTradeParties,
+	asyncListServetelAgents,
 };

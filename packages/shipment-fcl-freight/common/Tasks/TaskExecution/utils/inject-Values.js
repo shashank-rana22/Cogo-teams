@@ -69,6 +69,18 @@ const injectValues = (
 					? controls[index]?.value : [{ url: selectedMail?.formatted?.[0]?.url }];
 			}
 		});
+	} else if (task?.task === 'mark_container_gated_out') {
+		const containerDetails = getApisData?.list_shipment_container_details || [];
+
+		(controls || []).forEach((control, index) => {
+			if (control.name === 'containers_gated_out') {
+				controls[index].value = containerDetails.map((i) => ({
+					container_number : i?.container_number,
+					id               : i?.id,
+					gated_out_at     : '',
+				}));
+			}
+		});
 	}
 
 	const validationAddedControls = injectCustomFormValidations(controls);

@@ -2,8 +2,6 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { Controller } from '@cogoport/forms';
 import React from 'react';
 
-import styles from './styles.module.css';
-
 function TabController(props) {
 	const {
 		name, control, rules, value, ...rest
@@ -17,17 +15,15 @@ function TabController(props) {
 			defaultValue={value}
 			rules={rules}
 			render={({ field: { onChange, value: newValue } }) => (
-				<div className={styles.tabcontainer}>
-					<Tabs
-						{...rest}
-						activeTab={newValue}
-						themeType="primary"
-						onChange={onChange}
-					>
-						<TabPanel name="debit" title="Debit" />
-						<TabPanel name="credit" title="Credit" />
-					</Tabs>
-				</div>
+				<Tabs
+					{...rest}
+					activeTab={newValue}
+					themeType="tertiary"
+					onChange={onChange}
+				>
+					<TabPanel name="CREDIT" title="Credit" />
+					<TabPanel name="DEBIT" title="Debit" />
+				</Tabs>
 
 			)}
 		/>

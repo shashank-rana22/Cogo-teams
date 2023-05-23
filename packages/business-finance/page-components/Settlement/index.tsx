@@ -10,22 +10,24 @@ import styles from './styles.module.css';
 function Settlement() {
 	const { query } = useRouter();
 
-	const [activeTab, setActiveTab] = useState(query?.active_tab || 'vendors');
+	const [activeTab, setActiveTab] = useState(query?.active_tab);
 	const { push } = useRouter();
 
 	const handleChange = (tab: any) => {
-		setActiveTab(tab);
-		push(
-			'/business-finance/settlement/[active_tab]',
-			`/business-finance/settlement/${tab}`,
-		);
+		if (tab === 'JournalVoucher') {
+			setActiveTab(tab);
+			push(
+				'/business-finance/settlement/[active_tab]',
+				`/business-finance/settlement/${tab}`,
+			);
+		} else {
+			window.location.href = `/${query.partner_id}/business-finance/settlement/${tab}`;
+		}
 	};
 
 	return (
-
 		<div>
 			<div className={styles.main_heading}>Settlement</div>
-
 			<Tabs
 				activeTab={activeTab}
 				fullWidth
@@ -35,11 +37,9 @@ function Settlement() {
 				<TabPanel name="ap-ar-settlement" title="AR/AP Settlement">
 					-
 				</TabPanel>
-
 				<TabPanel name="tds-settlement" title="TDS Settlement">
 					-
 				</TabPanel>
-
 				<TabPanel name="history" title="History">
 					-
 				</TabPanel>
@@ -47,8 +47,7 @@ function Settlement() {
 				<TabPanel name="on-account-collection" title="On Account Collection">
 					<OnAccountCollection />
 				</TabPanel>
-
-				<TabPanel name="journal-voucher" title="Journal Voucher">
+				<TabPanel name="JournalVoucher" title="Journal Voucher">
 					<JournalVoucher />
 				</TabPanel>
 			</Tabs>

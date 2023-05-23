@@ -17,17 +17,20 @@ function useGetAsyncOptionsMicroservice({
 	params = {},
 	authkey = '',
 	microService = '',
+	searchByq,
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
 	const [storeoptions, setstoreoptions] = useState([]);
 
 	const useRequestMicroservice = REQUEST_HOOK_MAPPING[microService] || useRequest;
 
+	const filterQuery = searchByq ? { q: query || undefined } : { filters: { q: query || undefined } };
+
 	const [{ data, loading }] = useRequestMicroservice({
 		url    : endpoint,
 		method : 'GET',
 		authkey,
-		params : merge(params, { filters: { q: query } }),
+		params : merge(params, filterQuery),
 	}, { manual: !(initialCall || query) });
 	const options = data?.list || data || [];
 
@@ -83,7 +86,7 @@ function useGetAsyncOptionsMicroservice({
 
 		try {
 			const res = await triggerSingle({
-				params: merge(params, { filters: { [valueKey]: value } }),
+				params: merge(params, (searchByq ? { q: value } : { filters: { [valueKey]: value } })),
 			});
 			return res?.data?.list?.[0] || res?.data?.[0] || null;
 		} catch (err) {
