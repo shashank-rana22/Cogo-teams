@@ -11930,6 +11930,11 @@ const partner = {
 			service_name : 'analytics_permissions',
 		},
 		{
+			api          : 'delete_analytics_dashboard_entry',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
 			api          : 'list_analytics_dashboards',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
