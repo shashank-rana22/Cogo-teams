@@ -2,20 +2,27 @@ import IconComponent from '../../IconComponent';
 
 import styles from './styles.module.css';
 
-function CaseQuestion({ item, from, caseToShow }) {
-	const { test_case_study_questions = [] } = item || {};
+function CaseQuestion({ item, from, caseToShow, setQuestionToShow, setCaseToShow }) {
+	const { test_case_study_questions = [], id = '' } = item || {};
 
 	return (
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
 				<div
+					role="presentation"
+					onClick={() => setQuestionToShow(id)}
 					className={`${styles.question_text} ${(from === 'tooltip') ? styles.question_text_content : null}`}
 				>
 					{item?.question_text}
 				</div>
 
 				{from !== 'tooltip' ? (
-					<div style={{ marginLeft: '8px' }} className={styles.bold}>
+					<div
+						role="presentation"
+						onClick={() => setCaseToShow(item.id === caseToShow ? '' : item.id)}
+						style={{ marginLeft: '8px' }}
+						className={styles.bold}
+					>
 						{`+${test_case_study_questions.length} More`}
 						{' '}
 						<IconComponent

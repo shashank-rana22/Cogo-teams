@@ -1,5 +1,6 @@
 import TABS_CONFIG from '../config/TABS_CONFIG.json';
 import FCL from '../config/tabSpecificPayload/FCL.json';
+import FCL_CFS from '../config/tabSpecificPayload/FCL_CFS.json';
 import FCL_Local from '../config/tabSpecificPayload/FCL_LOCAL.json';
 import LCL from '../config/tabSpecificPayload/LCL.json';
 
@@ -17,6 +18,7 @@ const shipmentSpecificPayload = {
 	fcl_freight       : FCL,
 	fcl_freight_local : FCL_Local,
 	lcl_freight       : LCL,
+	fcl_cfs           : FCL_CFS,
 };
 
 const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;

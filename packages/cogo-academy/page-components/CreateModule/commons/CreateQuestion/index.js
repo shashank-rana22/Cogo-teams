@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
+import { forwardRef } from 'react';
 
 import BasicDetails from './components/BasicDetails';
 import QuestionForm from './components/QuestionForm';
@@ -18,7 +19,7 @@ function CreateQuestion({
 	topic,
 	mode,
 	listSetQuestions,
-}) {
+}, ref) {
 	const {
 		isNewQuestion,
 		setValue,
@@ -54,7 +55,7 @@ function CreateQuestion({
 	});
 
 	return (
-		<form key={questionTypeWatch} onSubmit={handleSubmit(onSubmit)} className={styles.container}>
+		<form ref={ref} key={questionTypeWatch} onSubmit={handleSubmit(onSubmit)} className={styles.container}>
 			<div className={styles.question_label}>{`Question ${index + 1}`}</div>
 
 			<div className={styles.form_component}>
@@ -134,4 +135,4 @@ function CreateQuestion({
 	);
 }
 
-export default CreateQuestion;
+export default forwardRef(CreateQuestion);

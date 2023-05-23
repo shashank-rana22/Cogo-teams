@@ -9,7 +9,7 @@
         "@cogoport/components": "^1.0.395",
         "@cogoport/globalization": "workspace:*",
         "@cogoport/constants": "workspace:0.1.0",
-        "@cogoport/icons-react": "^1.0.58",
+        "@cogoport/icons-react": "^1.0.73",
         "@cogoport/request": "workspace:0.1.0",
         "@cogoport/utils": "^1.2.6",
         "react": "18.2.0",

@@ -22,11 +22,12 @@ const useListChats = ({
 	isomniChannelAdmin,
 	showBotMessages = false,
 	searchValue = '',
+	setShowFeedback = () => {},
 }) => {
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
 
 	const {
-		query: { assigned_chat = '', channel_type:queryChannelType = '' },
+		query: { assigned_chat = '', channel_type:queryChannelType = '', type = '' },
 	} = useRouter();
 
 	const snapshotListener = useRef(null);
@@ -93,6 +94,11 @@ const useListChats = ({
 		};
 	};
 
+	useEffect(() => {
+		if (type === 'openFeedbackModal') {
+			setShowFeedback(true);
+		}
+	}, [setShowFeedback, type]);
 	const omniChannelCollection = useMemo(
 		() => collectionGroup(firestore, 'rooms'),
 		[firestore],
@@ -311,6 +317,15 @@ const useListChats = ({
 		}
 	};
 
+	const getAssignedChats = useCallback(async () => {
+		const assignedChatsQuery = query(
+			omniChannelCollection,
+			where('session_type', '==', 'admin'),
+			where('support_agent_id', '==', userId),
+		);
+		const getAssignedChatsQuery = await getDocs(assignedChatsQuery);
+		return getAssignedChatsQuery.size || 0;
+	}, [omniChannelCollection, userId]);
 	return {
 		chatsData: {
 			messagesList     : sortedUnpinnedList || [],
@@ -328,6 +343,7 @@ const useListChats = ({
 		setFirstMount,
 		handleScroll,
 		activeRoomLoading,
+		getAssignedChats,
 	};
 };
 

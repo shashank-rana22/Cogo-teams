@@ -133,6 +133,11 @@ const business_finance = {
 			service_name : 'shipment',
 		},
 		{
+			api         : 'get_payments_outstanding_account_payables_for_org',
+			access_type : 'private',
+			feature     : 'coeFinance',
+		},
+		{
 			api         : 'get_payments_accounts_org_stats_for_coe_finance',
 			access_type : 'private',
 			feature     : 'coeFinance',

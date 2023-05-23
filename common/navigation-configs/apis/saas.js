@@ -518,6 +518,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'sailing_schedule',
 		},
+		{
+			api          : 'get_sea_route',
+			access_type  : 'public',
+			service_name : 'location',
+		},
 	],
 	app_saas_air_schedules: [
 		{
@@ -1580,10 +1585,9 @@ const saas = {
 			service_name : 'organization',
 		},
 		{
-			api         : 'list_address_for_insurance',
-			access_type : 'private',
-			module      : 'insurance',
-			feature     : 'insurance',
+			api          : 'list_address_for_insurance',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 		{
 			api         : 'get_saas_faq',
@@ -1831,6 +1835,11 @@ const saas = {
 			feature     : 'dutiesTaxes',
 		},
 		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_exchange_rate',
 			access_type  : 'private',
 			module       : 'dutiesTaxes',
@@ -1991,13 +2000,7 @@ const saas = {
 			access_type : 'private',
 		},
 		{
-			api          : 'list_organization_billing_addresses',
-			access_type  : 'private',
-			service_name : 'organization',
-
-		},
-		{
-			api          : 'list_organization_addresses',
+			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
 
@@ -2078,7 +2081,7 @@ const saas = {
 	],
 	app_saas_import_export_doc: [
 		{
-			api          : 'list_organization_billing_addresses',
+			api          : 'list_organizations',
 			access_type  : 'private',
 			service_name : 'organization',
 
@@ -2088,11 +2091,6 @@ const saas = {
 			access_type : 'private',
 			module      : 'import-export-documents',
 			feature     : 'import-export-documents',
-		},
-		{
-			api          : 'list_organization_addresses',
-			access_type  : 'private',
-			service_name : 'organization',
 		},
 		{
 			api          : 'create_organization_address',
@@ -2175,6 +2173,12 @@ const saas = {
 			feature     : 'import-export-documents',
 		},
 		{
+			api         : 'get_saas_trade_engine_draft',
+			access_type : 'private',
+			module      : 'import-export-documents',
+			feature     : 'import-export-documents',
+		},
+		{
 			api         : 'get_saas_product_category_list',
 			access_type : 'private',
 			module      : 'product-catalogue',
@@ -2216,6 +2220,7 @@ const saas = {
 			module      : 'product-catalogue',
 			feature     : 'product-catalogue',
 		},
+
 	],
 	app_saas_cogostore: [
 		{
@@ -2329,6 +2334,143 @@ const saas = {
 			module       : 'cogo-store',
 			feature      : 'cogo-store',
 			service_name : 'cogopoint',
+		},
+		{
+			api          : 'get_cogopoint_user_profile',
+			access_type  : 'private',
+			module       : 'cogo-store',
+			feature      : 'cogo-store',
+			service_name : 'cogopoint',
+		},
+	],
+	app_saas_import_export_controls: [
+		{
+			api          : 'saas_get_user_quota_usage',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_billing_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api         : 'post_saas_payment_cancel_order',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_bill_status',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'post_saas_trade_engine_controls_draft',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_trade_engine_draft',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_bill_product_codes',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_trade_engine_service_rates',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'post_saas_payment',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_trade_engine',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'post_saas_trade_engine',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'post_saas_trade_engine_hs_engine',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_trade_engine_verify_six_digit',
+			access_type : 'private',
+			module      : 'import-export-controls',
+			feature     : 'import-export-controls',
+		},
+		{
+			api         : 'get_saas_product_category_list',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_product_list',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_section',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_heading',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_search',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
+		},
+		{
+			api         : 'get_saas_hs_code_countries',
+			access_type : 'private',
+			module      : 'product-catalogue',
+			feature     : 'product-catalogue',
 		},
 	],
 

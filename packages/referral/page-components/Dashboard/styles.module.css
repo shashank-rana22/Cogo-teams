@@ -1,0 +1,39 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title {
+	font-size: 20px;
+	font-weight: 600;
+	background: #111 -webkit-linear-gradient(left, #111, #ff2431) no-repeat 0 0 / 40px;
+	background-clip: text;
+	animation: sweep 2.5s ease-in infinite;
+	-webkit-text-fill-color: rgb(0 0 0 / 20%);
+}
+
+@keyframes sweep {
+	0% {
+		background-position: 0 0;
+	}
+
+	100% {
+		background-position: 100% 100%;
+	}
+}
+
+.main_filters {
+	display: flex;
+	align-items: center;
+
+	:global {
+		.react-datepicker__input-container {
+			width: 220px;
+		}
+	}
+}
+
+.table_container {
+	margin-top: 20px;
+}
