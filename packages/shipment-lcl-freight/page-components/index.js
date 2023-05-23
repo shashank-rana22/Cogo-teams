@@ -12,17 +12,15 @@ function LclFreight() {
 	const activeStakeholder = useGetActiveStakeholder();
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
 
-	const { get } = useGetShipment();
-	const { servicesGet = {} }  = useListShipmentServices();
+	const shipment = useGetShipment();
+	const services = useListShipmentServices();
 
 	const contextValues = useMemo(() => ({
-		...get,
-		...servicesGet,
+		...shipment,
+		...services,
 		stakeholderConfig,
 		activeStakeholder,
-	}), [get, servicesGet, stakeholderConfig, activeStakeholder]);
-
-	console.log({contextValues})
+	}), [shipment, services, stakeholderConfig, activeStakeholder]);
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>

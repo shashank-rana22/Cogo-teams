@@ -2,6 +2,7 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
 import { useContext } from 'react';
+
 import styles from './styles.module.css';
 
 const TimeLine = dynamic(() => import('../TimeLine'), { ssr: false });
@@ -10,7 +11,7 @@ const CancelDetails = dynamic(() => import('../CancelDetails'), { ssr: false });
 const ShipmentChat = dynamic(() => import('@cogoport/shipment-chat/page-components'), { ssr: false });
 const PocSop = dynamic(() => import('../PocSop'), { ssr: false });
 
-const COMPONENT_MAPPING = {
+const TAB_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
 	tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
@@ -25,7 +26,7 @@ function DefaultView() {
 	} = useContext(ShipmentDetailContext) || {};
 
 	const { features = [] } = stakeholderConfig || {};
-	const tabs = Object.keys(COMPONENT_MAPPING).filter((t) => features.includes(t));
+	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
 	const conditionMapping = {
 		shipment_info : !!features.includes('shipment_info'),
@@ -53,25 +54,23 @@ function DefaultView() {
 			{conditionMapping.cancelDetail ? <CancelDetails /> : null}
 
 			<div className={styles.header}>
-
 				{conditionMapping.poc_sop ? <PocSop /> : null}
 			</div>
 
 			{conditionMapping.chat ? <TimeLine /> : null}
 
 			<div className={styles.container}>
-
-			<Tabs
-				fullWidth
-				themeType="secondary"
-				defaultActiveTab={stakeholderConfig.defaultTab}
-			>
-				{tabs.map((t) => (
-					<TabPanel name={t} key={t} title={stakeholderConfig[t]?.tab_title}>
-						{COMPONENT_MAPPING[t]}
-					</TabPanel>
-				))}
-			</Tabs>
+				<Tabs
+					fullWidth
+					themeType="secondary"
+					defaultActiveTab={stakeholderConfig.defaultTab}
+				>
+					{tabs.map((t) => (
+						<TabPanel name={t} key={t} title={stakeholderConfig[t]?.tab_title}>
+							{TAB_MAPPING[t]}
+						</TabPanel>
+					))}
+				</Tabs>
 			</div>
 
 		</div>
