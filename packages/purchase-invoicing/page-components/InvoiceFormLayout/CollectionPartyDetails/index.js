@@ -64,6 +64,8 @@ function CollectionPartyDetails({
 
 	const bankOptions = JSON.stringify(collectionPartyBankOptions || []);
 
+	const stringifycollectionPartyAddresses = JSON.stringify(collectionPartyAddresses || []);
+
 	useEffect(() => {
 		setValue('collection_party_bank_details', purchaseInvoiceValues?.collection_party_bank_details);
 	}, [bankOptions, setValue, purchaseInvoiceValues]);
@@ -74,6 +76,13 @@ function CollectionPartyDetails({
 			setValue('collection_party_bank_details', parseOptions?.[0]?.data?.bank_account_number);
 		}
 	}, [bankOptions, setValue]);
+
+	useEffect(() => {
+		const parseOptions = JSON.parse(stringifycollectionPartyAddresses || []);
+		if (parseOptions?.length === 1) {
+			setValue('collection_party_address', parseOptions?.[0].tax_number);
+		}
+	}, [stringifycollectionPartyAddresses, setValue]);
 
 	const handleModifiedOptions = ({ options }) => options.map((option) => ({
 		...option,
@@ -136,7 +145,11 @@ function CollectionPartyDetails({
 			setCollectionParty(obj);
 			setValue('collection_party', v);
 		}
-		setValue('collection_party_address', '');
+		if (collectionPartyAddresses?.length === 1) {
+			setValue('collection_party_address', collectionPartyAddresses?.[0].tax_number);
+		} else {
+			setValue('collection_party_address', '');
+		}
 		if (collectionPartyBankOptions?.length === 1) {
 			setValue('collection_party_bank_details', collectionPartyBankOptions?.[0]?.data?.bank_account_number);
 		} else {
@@ -159,7 +172,7 @@ function CollectionPartyDetails({
 
 	const collectionPartyBankDetails = [
 		{
-			label : 'BankDetails :',
+			label : 'BankDetails:',
 			value : `${collectionPartyBank?.data?.bank_name || '-'} / ${collectionPartyBank?.data?.branch_name || '-'}`,
 		},
 		{
