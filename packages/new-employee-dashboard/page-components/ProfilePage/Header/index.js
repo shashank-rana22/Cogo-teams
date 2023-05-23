@@ -29,10 +29,10 @@ function Header({ detail, loading }) {
 							: <Placeholder height="20px" width="240px" />}
 					</div>
 					<div className={styles.emp_code}>
-						<div>Employee Code: </div>
+						<div style={{ marginRight: 2 }}>Employee Code: </div>
 						{!loading
 							? employee_code
-							: <Placeholder height="20px" width="80px" margin="0px 0px 0px 8px" /> }
+							: <Placeholder height="20px" width="80px" /> }
 					</div>
 				</div>
 			</div>
