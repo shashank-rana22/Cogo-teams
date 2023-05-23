@@ -323,7 +323,12 @@ function FormContainer({
 											onClick={handleSubmit(onSubmit)}
 											themeType="accent"
 										>
-											Generate Master Airway Bill
+											Generate
+											{' '}
+											{taskItem?.documentType === 'draft_house_airway_bill'
+												? 'House' : 'Master'}
+											{' '}
+											Airway Bill
 										</Button>
 									</div>
 								) : null}
