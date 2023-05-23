@@ -9,9 +9,5 @@
             "vessel_arrived"
         ],
         "key_present_check": ["vessel_arrived_at"]
-    },
-    "stakeholders_not_allowed": [
-        "booking_agent",
-        "consignee_shipper_booking_agent"
-    ]
+    }
 }

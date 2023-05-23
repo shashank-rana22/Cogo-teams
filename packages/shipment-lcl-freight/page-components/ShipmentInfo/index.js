@@ -7,14 +7,22 @@ import useShipmentBack from '../../hooks/useShipmentBack';
 
 import styles from './styles.module.css';
 
+const ShipmentTypeMapping = {
+	consol : 'Consol',
+	coload : 'Coload',
+};
+
 function ShipmentInfo() {
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
+	const { source = '', serial_id = '', is_cogo_assured = false } = shipment_data || {};
 
 	const { handleShipmentsClick } = useShipmentBack();
 
-	const sourceText = shipment_data?.source === 'direct'
+	const sourceText = source === 'direct'
 		? 'Sell Without Buy'
-		: startCase(shipment_data?.source);
+		: startCase(source);
+
+	const shipmentType = ShipmentTypeMapping[source] || 'Shipment';
 
 	return (
 		<div className={styles.container}>
@@ -24,13 +32,13 @@ function ShipmentInfo() {
 					className={styles.inactive}
 					label={isGettingShipment
 						? <Placeholder width={100} />
-						: `Shipment ID  #${shipment_data?.serial_id}`}
+						: `${shipmentType} ID  #${serial_id}`}
 				/>
 			</Breadcrumb>
 
-			{shipment_data?.source ? <Pill size="sm" color="blue" className={styles.pill}>{sourceText}</Pill> : null}
+			{source ? <Pill size="sm" color="blue" className={styles.pill}>{sourceText}</Pill> : null}
 
-			{shipment_data?.is_cogo_assured ? (
+			{is_cogo_assured ? (
 				<img
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg"
 					alt="cogo-assured"

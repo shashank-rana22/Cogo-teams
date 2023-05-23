@@ -2,7 +2,7 @@
     "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails", "tracking"],  
     "shipment_info":{},
     "timeline": {
-        "can_edit": true
+        "can_edit": false
     },
     "default_tab":"tasks",
     "overview":{

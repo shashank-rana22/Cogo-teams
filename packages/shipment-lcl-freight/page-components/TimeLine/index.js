@@ -1,6 +1,7 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useState, useContext, useEffect } from 'react';
+
 import useGetServiceTimeline from '../../hooks/useGetTimeLine';
 
 import EditSchedule from './EditSchedule';
@@ -10,9 +11,14 @@ import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
 
 function Timeline() {
-	const { shipment_data, primary_service, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data,
+		primary_service,
+		isGettingShipment,
+		stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
 
-	const { timelineLoading: loading, timelineData, getShipmentTimeline  } = useGetServiceTimeline();
+	const { timelineLoading: loading, timelineData, getShipmentTimeline } = useGetServiceTimeline();
 
 	useEffect(() => {
 		if (shipment_data?.id) {
@@ -22,7 +28,7 @@ function Timeline() {
 
 	const [showEditSchedule, setShowEditSchedule] = useState(false);
 
-	const showEditScheduleIcon = canEditSchedule({ primary_service, activeStakeholder });
+	const showEditScheduleIcon = canEditSchedule({ primary_service, stakeholderConfig });
 
 	const filteredTimelineData = (timelineData || []).filter(
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),

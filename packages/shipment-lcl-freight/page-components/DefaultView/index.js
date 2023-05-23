@@ -12,6 +12,7 @@ import TimeLine from '../TimeLine';
 import styles from './styles.module.css';
 
 const CancelDetails = dynamic(() => import('../CancelDetails'), { ssr: false });
+const DocumentHoldDetails = dynamic(() => import('../DocumentHoldDetails'), { ssr: false });
 
 const TAB_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
@@ -30,11 +31,13 @@ function DefaultView() {
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
 	const conditionMapping = {
-		shipment_info   : !!features.includes('shipment_info'),
-		cancelDetail    : !!(features.includes('cancel_details') && shipment_data.state === 'cancelled'),
-		poc_sop         : !!(features.includes('poc') || features.includes('sop')),
-		chat            : !!features.includes('chat'),
-		shipment_header : !!features.includes('shipment_header'),
+		shipment_info       : !!features.includes('shipment_info'),
+		shipment_header     : !!features.includes('shipment_header'),
+		poc_sop             : !!(features.includes('poc') || features.includes('sop')),
+		chat                : !!features.includes('chat'),
+		cancelDetails       : !!(features.includes('cancel_details') && shipment_data?.state === 'cancelled'),
+		documentHoldDetails : !!features.includes('document_hold_details'),
+		timeline            : !!features.includes('timeline'),
 	};
 
 	return (
@@ -53,7 +56,9 @@ function DefaultView() {
 				</div>
 			</div>
 
-			{conditionMapping.cancelDetail ? <CancelDetails /> : null}
+			{conditionMapping.cancelDetails ? <CancelDetails /> : null}
+
+			{conditionMapping.documentHoldDetails ? <DocumentHoldDetails /> : null}
 
 			<div className={styles.header}>
 				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
@@ -61,7 +66,7 @@ function DefaultView() {
 				{conditionMapping.poc_sop ? <PocSop /> : null}
 			</div>
 
-			{conditionMapping.chat ? <TimeLine /> : null}
+			{conditionMapping.timeline ? <TimeLine /> : null}
 
 			<div className={styles.container}>
 				<Tabs
@@ -72,7 +77,7 @@ function DefaultView() {
 				>
 					{tabs.map((t) => (
 						<TabPanel name={t} key={t} title={stakeholderConfig[t]?.tab_title}>
-							{TAB_MAPPING[t]}
+							{TAB_MAPPING[t]()}
 						</TabPanel>
 					))}
 				</Tabs>
