@@ -1,0 +1,20 @@
+.header {
+	display: flex;
+	align-items: center;
+	max-height: 40px;
+	padding: 8px 20px;
+	margin-top: 20px;
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #fff;
+	background: #333;
+	border-radius: 8px;
+}
+
+.col {
+	display: flex;
+	flex: var(--span);
+	padding: 4px;
+	font-size: 12px;
+}

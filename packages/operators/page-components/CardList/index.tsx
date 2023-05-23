@@ -42,6 +42,7 @@ function CardList({
 
 	const handleRender = () => (finalList || [1, 2, 3, 4, 5]).map((singleitem) => (
 		<CardItem
+			key={singleitem.id}
 			singleitem={singleitem}
 			fields={fields}
 			functions={functions}

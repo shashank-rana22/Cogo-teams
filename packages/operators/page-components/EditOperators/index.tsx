@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function EditOperators({
 	item,
+	edit,
 	setEdit,
 	refetch,
 	setPage,
@@ -40,11 +41,13 @@ function EditOperators({
 	});
 
 	useEffect(() => {
-		fields.forEach((c) => {
-			setValue(c.name, item[c.name]);
-		});
-		setValue('is_nvocc', String(item.is_nvocc));
-		setValue('logo_url', String(item.logo_url));
+		if (edit) {
+			fields.forEach((c) => {
+				setValue(c.name, item[c.name]);
+			});
+			setValue('is_nvocc', String(item.is_nvocc));
+			setValue('logo_url', String(item.logo_url));
+		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [item, fields]);
 

@@ -1,6 +1,6 @@
 import React from 'react';
 
-import styles from '../styles.module.css';
+import styles from './styles.module.css';
 
 export interface Props {
 	fields: any[];
@@ -15,6 +15,7 @@ function Header({
 				<div
 					className={`${styles.col} ${field.className || ''}`}
 					style={{ '--span': field.span || 1 } as React.CSSProperties}
+					key={field.key}
 				>
 					{ field.label }
 				</div>

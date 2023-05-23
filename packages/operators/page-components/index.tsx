@@ -92,6 +92,7 @@ function Operators() {
 			>
 				<EditOperators
 					item={item}
+					edit={edit}
 					setEdit={setEdit}
 					refetch={getLocationData}
 					setPage={setPage}

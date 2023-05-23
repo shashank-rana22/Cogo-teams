@@ -1,23 +1,39 @@
-import React, { ReactNode } from 'react';
+import React, { useState, useEffect, ReactNode } from 'react';
 
 import { FieldType, FunctionObjects } from '../Interfaces/index';
-import styles from '../styles.module.css';
 
 import getValue from './getValue';
+import styles from './styles.module.css';
 
 export interface Props {
 	fields: FieldType[];
 	singleitem?: any;
 	functions?: FunctionObjects;
-	isMobile?: boolean;
 }
 
 function CardItem({
 	fields,
 	singleitem,
 	functions = {},
-	isMobile = false,
 }:Props) {
+	const [isMobile, setIsMobile] = useState(false);
+
+	useEffect(() => {
+		const handleResize = () => {
+			if (window.innerWidth < 768) {
+				setIsMobile(true);
+			} else {
+				setIsMobile(false);
+			}
+		};
+
+		handleResize();
+		window.addEventListener('resize', handleResize);
+
+		return () => {
+			window.removeEventListener('resize', handleResize);
+		};
+	}, []);
 	return (
 		<section className={styles.list_container}>
 			<div
@@ -36,6 +52,7 @@ function CardItem({
 								'--span': (field.span || 1),
 								...itemStyle,
 							} as React.CSSProperties}
+							key={field.key}
 						>
 							{isMobile && (
 								<div className={styles.tablelabel}>{field.label}</div>
