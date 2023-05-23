@@ -1,6 +1,9 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
+import AllTickets from './AllTickets';
+import Configurations from './Configurations';
+import Dashboard from './Dashboard';
 import styles from './styles.module.css';
 
 function SuperAdmin() {
@@ -20,19 +23,19 @@ function SuperAdmin() {
 					name="dashboard"
 					title="Dashboard"
 				>
-					<div>Dashboard</div>
+					<Dashboard />
 				</TabPanel>
 				<TabPanel
 					name="all_tickets"
 					title="All Tickets"
 				>
-					<div>All Tickets</div>
+					<AllTickets />
 				</TabPanel>
 				<TabPanel
 					name="configurations"
 					title="Configurations"
 				>
-					<div>configurations</div>
+					<Configurations />
 				</TabPanel>
 
 			</Tabs>
