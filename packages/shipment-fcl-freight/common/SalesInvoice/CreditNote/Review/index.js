@@ -12,12 +12,15 @@ function Review({
 }) {
 	const [value, setValue] = useState(false);
 
-	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch: cnRefetch });
+	const afterRefetch = () => {
+		cnRefetch();
+		setOpen(false);
+	};
+
+	const { loading, apiTrigger } = useUpdateShipmentCreditNote({ refetch: afterRefetch });
 
 	const handleUpdate = () => {
 		apiTrigger({ id, status: value ? 'reviewed' : undefined });
-
-		setOpen(false);
 	};
 	return (
 		<Modal
