@@ -5,7 +5,7 @@ import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect, useMemo } from 'react';
 
-import { POST_REVIEWED_INVOICES } from '../../../../../../helpers/post-reviewed-sales-invoices.json';
+import POST_REVIEWED_INVOICES from '../../../../../../helpers/post-reviewed-sales-invoices';
 import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';

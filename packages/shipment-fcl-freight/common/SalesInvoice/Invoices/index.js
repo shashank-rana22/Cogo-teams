@@ -6,7 +6,7 @@ import useGetCreditNotes from '../../../hooks/useGetCreditNotes';
 import useListBfSalesInvoices from '../../../hooks/useListBfSalesInvoices';
 import useOrgOutStanding from '../../../hooks/useOrgOutStanding';
 import CreditNote from '../CreditNote';
-import { POST_REVIEWED_INVOICES } from '../helpers/post-reviewed-sales-invoices.json';
+import POST_REVIEWED_INVOICES from '../helpers/post-reviewed-sales-invoices';
 
 import Header from './Header';
 import InvoiceItem from './InvoiceItem';

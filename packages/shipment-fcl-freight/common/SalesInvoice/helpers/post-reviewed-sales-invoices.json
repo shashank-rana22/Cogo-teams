@@ -1,8 +1,0 @@
-{
-	"POST_REVIEWED_INVOICES" : [
-		"reviewed",
-		"approved",
-		"revoked",
-		"finance_rejected"
-	]
-}
