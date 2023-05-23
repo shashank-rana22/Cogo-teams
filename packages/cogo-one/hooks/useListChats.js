@@ -22,6 +22,7 @@ const useListChats = ({
 	isomniChannelAdmin,
 	showBotMessages = false,
 	searchValue = '',
+	viewType = '',
 	setShowFeedback = () => {},
 }) => {
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
@@ -110,8 +111,9 @@ const useListChats = ({
 			userId,
 			appliedFilters,
 			showBotMessages,
+			viewType,
 		}),
-		[appliedFilters, isomniChannelAdmin, showBotMessages, userId],
+		[appliedFilters, isomniChannelAdmin, showBotMessages, userId, viewType],
 	);
 
 	const queryForSearch = useMemo(() => (
@@ -260,8 +262,10 @@ const useListChats = ({
 	}, [firestore, activeCardId, activeChannelType]);
 
 	useEffect(() => {
-		mountPinnedSnapShot();
-	}, [mountPinnedSnapShot]);
+		if (viewType !== 'shipment_view') {
+			mountPinnedSnapShot();
+		}
+	}, [mountPinnedSnapShot, viewType]);
 
 	useEffect(() => {
 		mountSnapShot();

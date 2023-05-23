@@ -9486,6 +9486,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'segmentation',
 		},
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	templates: [
 		{
