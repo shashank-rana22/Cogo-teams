@@ -127,100 +127,99 @@ function Customers({
 	};
 
 	return (
-		<>
-			<div className={styles.container}>
-				<div className={styles.filters_container}>
-					<div className={styles.logo}>
-						<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg" alt="" />
-						<div className={styles.title}>
-							CogoOne
-						</div>
+		<div className={styles.container}>
+			<div className={styles.filters_container}>
+				<div className={styles.logo}>
+					<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-one-logo.svg" alt="" />
+					<div className={styles.title}>
+						CogoOne
 					</div>
-					{!isomniChannelAdmin ? (
-						<div className={styles.styled_toggle}>
-							<Toggle
-								name="online"
-								size="md"
-								showOnOff
-								onChange={() => onChangeToggle()}
-								checked={toggleStatus}
-								loading={statusLoading}
-							/>
-
-						</div>
-					) : (
-						<div className={styles.bot_messages}>
-							<div>Bot Messages</div>
-							<Toggle
-								name="online"
-								size="sm"
-								onChange={() => setShowBotMessages((p) => !p)}
-								checked={showBotMessages}
-							/>
-						</div>
-					)}
 				</div>
-				<div className={styles.tabs}>
-					<Tabs
-						activeTab={activeTab}
-						fullWidth
-						themeType="secondary"
-						onChange={setActiveTab}
-					>
-						<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
-						<TabPanel name="voice" title="Voice" />
-						<TabPanel name="mail" title="Mail" />
-					</Tabs>
-				</div>
-				{Component && (
-					<Component key={activeTab} {...(componentProps[activeTab] || {})} />
+				{!isomniChannelAdmin ? (
+					<div className={styles.styled_toggle}>
+						<Toggle
+							name="online"
+							size="md"
+							showOnOff
+							onChange={() => onChangeToggle()}
+							checked={toggleStatus}
+							loading={statusLoading}
+						/>
+
+					</div>
+				) : (
+					<div className={styles.bot_messages}>
+						<div>Bot Messages</div>
+						<Toggle
+							name="online"
+							size="sm"
+							onChange={() => setShowBotMessages((p) => !p)}
+							checked={showBotMessages}
+						/>
+					</div>
 				)}
+			</div>
+			<div className={styles.tabs}>
+				<Tabs
+					activeTab={activeTab}
+					fullWidth
+					themeType="secondary"
+					onChange={setActiveTab}
+				>
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
+					<TabPanel name="voice" title="Voice" />
+					<TabPanel name="mail" title="Mail" />
+				</Tabs>
+			</div>
+			{Component && (
+				<Component key={activeTab} {...(componentProps[activeTab] || {})} />
+			)}
 
-				{openModal && (
-					<InactiveModal
-						fetchworkPrefernce={fetchworkPrefernce}
-						setOpenModal={setOpenModal}
-						loading={statusLoading}
-						updateUserStatus={updateUserStatus}
-					/>
-				)}
-				<div className={styles.wrapper}>
-					<input
-						id="plus_checkbox"
-						type="checkbox"
-						className={styles.checkbox}
-						checked={isChecked}
-					/>
-					<div htmlFor="plus_checkbox" className={styles.plus_circle}>
-						<div className={styles.wheel_box}>
-							<IcMPlus onClick={handleOpenOptions} fill="#ffffff" width={35} height={35} />
-							<div className={styles.wheel}>
-								<div className={`${styles.action} ${styles.call_icon}`}>
-									<img
-										onClick={() => setShowDialModal(true)}
-										src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/call_light.svg"
-										alt="call icon"
-										role="presentation"
-									/>
-								</div>
-								<div className={`${styles.action} ${styles.whatsapp_icon}`}>
-									<img
-										onClick={() => setModalType({ type: 'whatsapp_new_message_modal', data: {} })}
-										src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg"
-										alt="whatsapp icon"
-										role="presentation"
-									/>
+			{openModal && (
+				<InactiveModal
+					fetchworkPrefernce={fetchworkPrefernce}
+					setOpenModal={setOpenModal}
+					loading={statusLoading}
+					updateUserStatus={updateUserStatus}
 
-								</div>
+				/>
+			)}
+			<div className={styles.wrapper}>
+				<input
+					id="plus_checkbox"
+					type="checkbox"
+					className={styles.checkbox}
+					checked={isChecked}
+				/>
+				<div htmlFor="plus_checkbox" className={styles.plus_circle}>
+					<div className={styles.wheel_box}>
+						<IcMPlus onClick={handleOpenOptions} fill="#ffffff" width={35} height={35} />
+						<div className={styles.wheel}>
+							<div className={`${styles.action} ${styles.call_icon}`}>
+								<img
+									onClick={() => setShowDialModal(true)}
+									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/call_light.svg"
+									alt="call icon"
+									role="presentation"
+								/>
+							</div>
+							<div className={`${styles.action} ${styles.whatsapp_icon}`}>
+								<img
+									onClick={() => setModalType({ type: 'whatsapp_new_message_modal', data: {} })}
+									src="https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/wapp_light.svg"
+									alt="whatsapp icon"
+									role="presentation"
+								/>
 
-								<div className={`${styles.action} ${styles.mail_icon}`}>
-									<img
-										onClick={() => setButtonType('send_mail')}
-										src="https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg"
-										alt="gmail icon"
-										role="presentation"
-									/>
-								</div>
+							</div>
+
+							<div className={`${styles.action} ${styles.mail_icon}`}>
+								<img
+									onClick={() => setButtonType('send_mail')}
+									src="https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/email_icon_blue_2.svg"
+									alt="gmail icon"
+									role="presentation"
+								/>
 							</div>
 						</div>
 					</div>
@@ -244,7 +243,7 @@ function Customers({
 					replyLoading={replyLoading}
 				/>
 			)}
-		</>
+		</div>
 	);
 }
 
