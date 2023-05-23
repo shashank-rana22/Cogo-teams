@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import RaiseTicket from '../../common/RaiseTicket';
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
-import { hasPermission } from '../../constants/IDS_CONSTANTS';
+import getViewType from '../../helpers/getViewType';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
@@ -66,8 +66,9 @@ function CogoOne() {
 		emailAddress : profile?.user?.email,
 	}));
 
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
+	const viewType = getViewType(userRoleIds);
 
+	const isomniChannelAdmin = viewType === 'admin_view';
 	const {
 		loading:statusLoading,
 		updateUserStatus = () => {},
@@ -121,6 +122,7 @@ function CogoOne() {
 		isomniChannelAdmin,
 		showBotMessages,
 		searchValue,
+		viewType,
 		setShowFeedback,
 	});
 
@@ -148,6 +150,7 @@ function CogoOne() {
 						mailProps={mailProps}
 						setActiveMessage={setActiveMessage}
 						setRaiseTicketModal={setRaiseTicketModal}
+						viewType={viewType}
 					/>
 
 					{activeTab !== 'mail' && (
@@ -162,6 +165,7 @@ function CogoOne() {
 							activeRoomLoading={activeRoomLoading}
 							setRaiseTicketModal={setRaiseTicketModal}
 							zippedTicketsData={zippedTicketsData}
+							viewType={viewType}
 						/>
 					)}
 				</>
@@ -201,6 +205,7 @@ function CogoOne() {
 			<div className={styles.layout_container}>
 				<Customers
 					isomniChannelAdmin={isomniChannelAdmin}
+					viewType={viewType}
 					setActiveMessage={setActiveMessage}
 					activeMessageCard={activeMessageCard}
 					setActiveVoiceCard={setActiveVoiceCard}
