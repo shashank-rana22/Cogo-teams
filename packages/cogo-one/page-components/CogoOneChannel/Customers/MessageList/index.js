@@ -78,15 +78,14 @@ function MessageList(messageProps) {
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	return (
 		<>
-			{!messagesLoading && (
-				<FlashUserChats
-					flashMessagesList={flashMessagesList}
-					activeCardId={activeCardId}
-					userId={userId}
-					setActiveMessage={setActiveMessage}
-					firestore={firestore}
-				/>
-			) }
+			<FlashUserChats
+				flashMessagesList={flashMessagesList}
+				activeCardId={activeCardId}
+				userId={userId}
+				setActiveMessage={setActiveMessage}
+				firestore={firestore}
+				messagesLoading={messagesLoading}
+			/>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
 					<Input

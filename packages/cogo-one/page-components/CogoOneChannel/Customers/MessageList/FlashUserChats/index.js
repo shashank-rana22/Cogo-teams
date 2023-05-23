@@ -14,16 +14,18 @@ const getCarouselData = ({
 	(eachRoom) => ({
 		key    : eachRoom?.id,
 		render : () => (
-			<MessageCardData
-				item={eachRoom}
-				activeCardId={activeCardId}
-				userId={userId}
-				setActiveMessage={setActiveMessage}
-				firestore={firestore}
-				autoAssignChats
-				showPin={false}
-				source="flash_messages"
-			/>
+			<div className={styles.flash_message_wrapper}>
+				<MessageCardData
+					item={eachRoom}
+					activeCardId={activeCardId}
+					userId={userId}
+					setActiveMessage={setActiveMessage}
+					firestore={firestore}
+					autoAssignChats
+					showPin={false}
+					source="flash_messages"
+				/>
+			</div>
 		),
 	}),
 );
@@ -34,26 +36,32 @@ function FlashUserChats({
 	userId,
 	setActiveMessage,
 	firestore,
+	messagesLoading,
 }) {
+	const r = getCarouselData({
+		flashMessagesList,
+		activeCardId,
+		userId,
+		setActiveMessage,
+		firestore,
+	});
+
 	return (
 		<div className={styles.flash_messages_div}>
-			<Carousel
-				size="sm"
-				slides={getCarouselData({
-					flashMessagesList,
-					activeCardId,
-					userId,
-					setActiveMessage,
-					firestore,
-				})}
-				className={styles.carousel_styled}
-				autoScroll
-				showDots={false}
-				itemsToScroll={1}
-				itemsToShow={1}
-				isInfinite
-				timeInterval={3000}
-			/>
+			{!messagesLoading && (
+				<Carousel
+					id="flash_messages"
+					size="sm"
+					slides={r}
+					className={styles.carousel_styled}
+					autoScroll
+					showDots={false}
+					itemsToScroll={1}
+					itemsToShow={1}
+					isInfinite
+					timeInterval={3000}
+				/>
+			)}
 		</div>
 	);
 }
