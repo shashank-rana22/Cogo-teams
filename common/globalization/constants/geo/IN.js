@@ -38,12 +38,15 @@ export default {
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
 	uuid: {
-		super_admin_id              : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
-		admin_id                    : 'ebafce31-75ef-4865-9060-775574e9606f',
-		tech_super_admin_id         : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
-		parent_entity_id            : '6fd98605-9d5d-479d-9fac-cf905d292b88',
-		cogo_demo_account_shipper   : ['302bdc56-e807-4c71-a27c-92f83640f140'],
-		spot_booking_shipping_lines : [
+		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
+		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
+		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
+		parent_entity_id                 : '6fd98605-9d5d-479d-9fac-cf905d292b88',
+		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
+		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
+		cogo_demo_account_shipper        : ['302bdc56-e807-4c71-a27c-92f83640f140'],
+		spot_booking_shipping_lines      : [
 			'c3649537-0c4b-4614-b313-98540cffcf40',
 			'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
 			'fb1aa2f1-d136-4f26-ad8f-2e1545cc772a',
@@ -88,11 +91,11 @@ export default {
 			'eab24509-187e-42b4-ae51-b77c74d82ad9', // Overseas CP KAM
 			'a5c83696-0248-4846-a558-1a054360f130', // Overseas CP KAM Manager
 			'650e1fe4-2e34-43c1-abfe-ce0a443aa4a6', // Prod_KAM Trasnport Sales
+			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse KAM
+			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // Shipment Specialist
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
-			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse KAM
-			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // Cogoverse Shipment Specialist
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		shipping_line_supply_agents      : [

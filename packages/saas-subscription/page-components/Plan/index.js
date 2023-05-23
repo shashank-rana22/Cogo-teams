@@ -1,4 +1,4 @@
-import { Pagination, Placeholder, cl, Button } from '@cogoport/components';
+import { Pagination, Placeholder, cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
 import planListConfig from '../../configuration/planListConfig';
@@ -12,7 +12,7 @@ function Plan() {
 	const { push } = useRouter();
 
 	const { loading = false, planList = {}, pageChangeHandler } = useGetPlanList();
-	const { list, page, page_limit, total_count } = planList || {};
+	const { list = [], page = 0, page_limit = 0, total_count = 0 } = planList || {};
 	const newList = loading ? [1, 2, 3, 4, 5] : list;
 
 	const redirectHandler = (id) => {
@@ -23,9 +23,9 @@ function Plan() {
 		<div className={styles.main_container}>
 			<div className={styles.flex_box}>
 				<h2>Plans</h2>
-				<Button themeType="accent">Add </Button>
 			</div>
 			<div className={styles.container}>
+
 				<div className={cl`${styles.row} ${styles.card_header}`}>
 					{planListConfig.map((config) => (
 						<div
@@ -34,10 +34,10 @@ function Plan() {
 							style={{ width: config?.width }}
 						>
 							{config?.title}
-
 						</div>
 					))}
 				</div>
+
 				{(newList || []).map((item) => (
 					<div
 						key={item?.id}
@@ -58,6 +58,7 @@ function Plan() {
 						))}
 					</div>
 				))}
+
 				{!loading && (
 					<div className={styles.pagination_container}>
 						<Pagination

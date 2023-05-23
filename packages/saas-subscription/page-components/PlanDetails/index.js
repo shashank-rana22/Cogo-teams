@@ -21,18 +21,22 @@ function PlanDetails() {
 	const { plan = {}, pricing = [], plan_features = [] } = planDetails || {};
 	const { metadata = {} } = plan || {};
 	const { addons = [] } = metadata || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<IcMArrowBack className={styles.back_icon} width={23} height={23} onClick={back} />
 				<h2>Select Plan</h2>
 			</div>
+
 			<div className={styles.cell}>
 				<Header plan={plan} loading={loading} />
 			</div>
+
 			<div className={styles.cell}>
 				<Pricing pricing={pricing} loading={loading} />
 			</div>
+
 			<div className={styles.flex_box}>
 				<div className={cl`${styles.cell} ${styles.feature}`}>
 					<PlanFeature
@@ -44,6 +48,7 @@ function PlanDetails() {
 
 					/>
 				</div>
+
 				<div className={cl`${styles.cell} ${styles.feature}`}>
 					<PlanFeature
 						title="Plan Feature"

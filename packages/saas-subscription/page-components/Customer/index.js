@@ -1,5 +1,4 @@
 import ArrowStepper from '../../common/ArrowStepper';
-import { ARROW_STEPPER } from '../../constant/stepperConstant';
 import useGetUserList from '../../hooks/useGetUserList';
 import useGetUserStats from '../../hooks/useGetUserStats';
 
@@ -8,9 +7,9 @@ import styles from './styles.module.css';
 import Table from './Table';
 
 function CustomerSubscription() {
-	const { userStatsData, refetchUserStats } = useGetUserStats();
+	const { userStatsData = {}, refetchUserStats } = useGetUserStats();
 	const {
-		userList, loading,
+		userList = {}, loading = false,
 		globalFilters, refectUserList, setGlobalFilters,
 	} =	useGetUserList();
 
@@ -23,7 +22,6 @@ function CustomerSubscription() {
 					refectUserList={refectUserList}
 				/>
 				<ArrowStepper
-					items={ARROW_STEPPER}
 					stepperData={userStatsData}
 					globalFilters={globalFilters}
 					setGlobalFilters={setGlobalFilters}

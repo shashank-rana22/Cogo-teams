@@ -7,12 +7,14 @@ import styles from './styles.module.css';
 function QuotaDetails({ editModalChangeHandler, quotas = [] }) {
 	return (
 		<div className={styles.container}>
+
 			<div className={cl`${styles.flex_box} ${styles.card_header}`}>
 				<div>Products</div>
 				<div>Quota</div>
 			</div>
+
 			<div className={styles.scroll_container}>
-				{quotas.map((item) => 	{
+				{(quotas || []).map((item) => 	{
 					const { id = '', product = {}, left_limit = 0, addon_limit = 0 } = item;
 					const quotaLeft = +left_limit + +addon_limit;
 					return (
@@ -26,6 +28,7 @@ function QuotaDetails({ editModalChangeHandler, quotas = [] }) {
 									onClick={() => editModalChangeHandler('editAddon', item)}
 								/>
 							</div>
+
 						</div>
 					);
 				})}

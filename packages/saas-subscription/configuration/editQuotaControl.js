@@ -17,10 +17,13 @@ const editQuotaControl = [
 		label       : 'Enter Quantity',
 		size        : 'sm',
 		type        : 'number',
-		min         : 10,
 		placeholder : 'Enter Quantity',
 		rules       : {
-			required: true,
+			required : true,
+			min      : {
+				value   : -1,
+				message : 'Should be greater than -1',
+			},
 		},
 	},
 	{

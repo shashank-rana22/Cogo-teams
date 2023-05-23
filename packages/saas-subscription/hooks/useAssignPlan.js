@@ -1,4 +1,6 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useAssignPlan = ({ setOpenPlanModal, refectUserList }) => {
@@ -28,7 +30,7 @@ const useAssignPlan = ({ setOpenPlanModal, refectUserList }) => {
 			refectUserList();
 			closeModal();
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data));
 		}
 	};
 

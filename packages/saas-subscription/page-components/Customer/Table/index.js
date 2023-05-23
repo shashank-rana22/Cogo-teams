@@ -10,7 +10,7 @@ import itemFunction from './ItemFunctions';
 import styles from './styles.module.css';
 
 function Table({ userList = {}, loading = false, setGlobalFilters }) {
-	const { list, page, page_limit, total_count } = userList || {};
+	const { list = [], page = 0, page_limit = 0, total_count = 0 } = userList || {};
 	const [editModal, setEditModal] = useState({
 		openEditModal        : false,
 		openEditFeatureModal : false,
@@ -36,7 +36,7 @@ function Table({ userList = {}, loading = false, setGlobalFilters }) {
 				))}
 			</div>
 			{(newList || []).map((item) => (
-				<div key={`${item?.id}`} className={cl`${styles.row} ${styles.item_row}`}>
+				<div key={`${item?.id || item}`} className={cl`${styles.row} ${styles.item_row}`}>
 					{listConfig.map((config) => (
 						<div
 							key={`${config.key}_${item?.id}`}

@@ -1,5 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useUpdateQuota = ({ id = '', modalChangeHandler }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -14,7 +17,7 @@ const useUpdateQuota = ({ id = '', modalChangeHandler }) => {
 		},
 	});
 
-	const submitHandler = async (data) => {
+	const submitHandler = useCallback(async (data) => {
 		const { action, is_addon, quantity } = data || {};
 		try {
 			await trigger({
@@ -28,9 +31,9 @@ const useUpdateQuota = ({ id = '', modalChangeHandler }) => {
 			});
 			modalChangeHandler(true);
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data));
 		}
-	};
+	}, [id, modalChangeHandler, trigger]);
 
 	return {
 		formHook, loading, submitHandler,

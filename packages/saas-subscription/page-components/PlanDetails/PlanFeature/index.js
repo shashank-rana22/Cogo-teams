@@ -22,6 +22,7 @@ function PlanFeature({ title, list = [], configs, loading = false, setFeatureMod
 					Add More
 				</Button>
 			</div>
+
 			<div>
 				<div className={cl`${styles.card_header} ${styles.flex_box}`}>
 					{configs.map((config) => (
@@ -39,6 +40,7 @@ function PlanFeature({ title, list = [], configs, loading = false, setFeatureMod
 						))}
 					</div>
 				))}
+
 			</div>
 		</div>
 	);

@@ -4,7 +4,7 @@ import useCancelSubscription from '../../../../../hooks/useCancelSubscription';
 import styles from '../styles.module.css';
 
 function CancelSub({ subscriptionId = '', modalChangeHandler }) {
-	const { loading, cancelSubscriptionHandler } = useCancelSubscription({ modalChangeHandler });
+	const { loading = false, cancelSubscriptionHandler } = useCancelSubscription({ modalChangeHandler });
 	return (
 		<div className={styles.cancel_container}>
 			<h3>Are you sure you want to cancel subscription?</h3>
@@ -14,7 +14,7 @@ function CancelSub({ subscriptionId = '', modalChangeHandler }) {
 					type="submit"
 					size="sm"
 					loading={loading}
-					onClick={modalChangeHandler}
+					onClick={() => modalChangeHandler(false)}
 				>
 					No
 				</Button>
