@@ -290,6 +290,10 @@ function GenerateMAWB({
 	}, [airportList]);
 
 	useEffect(() => {
+		setValue('accountingInformation', formValues.paymentTerm === 'prepaid' ? 'FREIGHT PREPAID' : 'FREIGHT COLLECT');
+	}, [formValues.paymentTerm]);
+
+	useEffect(() => {
 		finalFields.forEach((c) => {
 			setValue(c.name, taskItem[c.name]);
 		});
