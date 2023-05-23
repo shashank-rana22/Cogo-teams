@@ -1,9 +1,13 @@
 import { useAllocationRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo, useState, useEffect, useCallback } from 'react';
 
 const useFeedbackTableData = ({ organizationId = '', type = '', route = '' }) => {
+	const { profile: { authParams = '' } } = useSelector((state) => state);
+
 	const [selectAll, setSelectAll] = useState(false);
+
 	const [checkedRowsId, setCheckedRowsId] = useState([]);
 
 	const [filters, setFilters] = useState({});
@@ -18,7 +22,7 @@ const useFeedbackTableData = ({ organizationId = '', type = '', route = '' }) =>
 		},
 	});
 
-	const [{ data = [], loading = false }] = useAllocationRequest({
+	const [{ data, loading }, refetch] = useAllocationRequest({
 		url     : '/feedbacks',
 		method  : 'get',
 		authkey : 'get_allocation_feedbacks',
@@ -60,6 +64,10 @@ const useFeedbackTableData = ({ organizationId = '', type = '', route = '' }) =>
 			setSelectAll(isRowsChecked);
 		}
 	}, [currentPageListIds, selectAll]);
+
+	useEffect(() => {
+		refetch();
+	}, [authParams, refetch]);
 
 	useEffect(() => {
 		if (isEmpty(currentPageListIds)) {

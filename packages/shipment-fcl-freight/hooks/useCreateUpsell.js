@@ -1,10 +1,16 @@
 import { useRouter } from '@cogoport/next';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 import formatPayload from '../helpers/service-upsell-payload';
-import toastApiError from '../utils/toastApiError';
 
-const useCreateUpsell = ({ service = {}, primary_service = {}, shipmentData = {} }) => {
+const useCreateUpsell = ({
+	service = {},
+	primary_service = {},
+	shipmentData = {},
+	organization_id = '',
+	user = {},
+}) => {
 	const router = useRouter();
 
 	const [{ loading }, trigger] = useRequest({
@@ -18,6 +24,8 @@ const useCreateUpsell = ({ service = {}, primary_service = {}, shipmentData = {}
 			primary_service,
 			shipmentData,
 			formValues: values,
+			organization_id,
+			user,
 		});
 
 		try {

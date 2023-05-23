@@ -10,14 +10,18 @@ interface NestedObj {
 interface Props {
 	formData?: NestedObj;
 	whiteout?:boolean;
-	activeCategory?: string;
+	taskItem?: NestedObj;
 }
 
-function ShipmentDetails({ formData = {}, whiteout = false, activeCategory = '' }:Props) {
+function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
 		tempColor = 'transparent';
 	}
+	const { documentType = '' } = taskItem || {};
+
+	const docType = documentType === 'draft_house_airway_bill' ? 'hawb' : 'mawb';
+
 	return (
 		<div className={styles.container} style={{ pointerEvents: 'none' }}>
 			<div className={styles.flex}>
@@ -82,7 +86,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, activeCategory = '' 
 								`}
 									style={{ fontSize: 14 }}
 								>
-									{activeCategory !== 'hawb' && formData.iataCode}
+									{docType !== 'hawb' && formData.iataCode}
 								</div>
 							</p>
 						</div>

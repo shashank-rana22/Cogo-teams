@@ -1,72 +1,18 @@
-.feed_div {
-	display: flex;
-}
-
-.feed_content {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-}
-
 .feed_title {
 	font-size: 16px;
 	font-weight: 700;
 	color: #4f4f4f;
 }
 
-.feed_head {
+.label {
 	margin: 6px 0;
 	font-size: 12px;
-}
-
-.pill_div {
-	display: flex;
-	flex-wrap: wrap;
-	width: 100%;
-}
-
-.pills {
-	display: flex;
-	padding: 2px 5px;
-	margin: 0 8px 5px 0;
-	cursor: pointer;
-	border: 1px solid #e0e0e0;
-	border-radius: 4px;
-
-	&:hover {
-		background: #cfeaed;
-		border: 1px solid #acdadf;
-	}
-}
-
-.active_pill {
-	background: #cfeaed;
-	border: 1px solid #acdadf;
-	border-radius: 4px;
-}
-
-.feed_text_area {
-	display: flex;
-	flex-direction: column;
-	width: 100%;
-	margin: 6px 0;
-
-	:global {
-		.ui_input_container {
-			height: 120px !important;
-		}
-
-		.ui_input_container.ui_ps_size_md .ui_input_control {
-			font-family: Poppins, sans-serif;
-			font-size: 12px !important;
-		}
-	}
+	color: #000;
 }
 
 .button_container {
 	display: flex;
 	justify-content: flex-end;
-	margin-top: 8px;
 }
 
 .styled_ui_modal_dialog {
@@ -81,7 +27,13 @@
 }
 
 .error_message {
-	margin-top: 4px;
-	font-size: 12px;
+	min-height: 15px;
+	font-size: 10px;
+	font-weight: 600;
 	color: #ee3425;
+}
+
+.styled_chips {
+	display: flex;
+	flex-wrap: wrap;
 }

@@ -1,25 +1,20 @@
-import { Button, CheckboxGroup, Checkbox } from '@cogoport/components';
-import React from 'react';
+import { Button, Checkbox } from '@cogoport/components';
+import React, { useEffect } from 'react';
 
+import CheckboxGroup from '../../../Air/commons/CheckboxGroup';
+import useGetMultipleCopiesList from '../../Helpers/hooks/useGetMultipleCopiesList';
+
+import multipleCopies from './multipleCopies';
 import styles from './styles.module.css';
 
-const options = [
-	{ name: 'original_3', value: 'original_3', label: 'Original 3 (For Shipper)' },
-	{ name: 'original_2', value: 'original_2', label: 'Original 2 (For Consignee)' },
-	{ name: 'original_1', value: 'original_1', label: 'Original 1 (For issuing Carrier)' },
-	{ name: 'copy_9', value: 'copy_9', label: 'Copy 9 (For Agent)' },
-	{ name: 'copy_4', value: 'copy_4', label: 'Copy 4 (Delivery Receipt)' },
-	{ name: 'copy_5', value: 'copy_5', label: 'Copy 5 (For Airport of Destination)' },
-	{ name: 'copy_6', value: 'copy_6', label: 'Copy 6 (For Third Carrier)' },
-	{ name: 'copy_7', value: 'copy_7', label: 'Copy 7 (For Second Carrier)' },
-	{ name: 'copy_8', value: 'copy_8', label: 'Copy 8 (For First Carrier)' },
-	{ name: 'copy_10', value: 'copy_10', label: 'Copy 10 (Extra Copies for Carrier)' },
-	{ name: 'copy_11', value: 'copy_11', label: 'Copy 11 (Extra Copies for Carrier)' },
-	{ name: 'copy_12', value: 'copy_12', label: 'Copy 12 ( For Customs)' },
+function SelectDocumentCopies({
+	copiesValue, copiesOnChange, setSaveDocument, handleView, setGenerate,
+	setViewDoc, download24, setEdit, setItem, setDocCopies, setEditCopies, taskItem,
+}) {
+	const { data } = useGetMultipleCopiesList(taskItem);
 
-];
+	const OPTIONS = multipleCopies({ data, setEditCopies, setGenerate, setViewDoc, setEdit, setItem });
 
-function SelectDocumentCopies({ copiesValue, copiesOnChange, setSaveDocument, handleView, download24 }) {
 	const onChangeTableHeaderCheckbox = (event) => {
 		copiesOnChange(event.currentTarget.checked ? [
 			'original_3',
@@ -35,6 +30,21 @@ function SelectDocumentCopies({ copiesValue, copiesOnChange, setSaveDocument, ha
 			'copy_11',
 			'copy_12'] : []);
 	};
+
+	useEffect(() => {
+		setDocCopies(null);
+		(copiesValue || []).forEach((copy) => {
+			(data || []).forEach((item) => {
+				if (copy === item?.copyType) {
+					setDocCopies((prev) => (
+						prev ? [...prev, { [copy]: item?.documentUrl, copyStatus: item?.copyStatus }]
+							: [{ [copy]: item?.documentUrl, copyStatus: item?.copyStatus }]
+					));
+				}
+			});
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [copiesValue]);
 
 	const getSelectAllCheckbox = () => {
 		const isAllRowsChecked = (copiesValue || []).length === 12;
@@ -55,7 +65,7 @@ function SelectDocumentCopies({ copiesValue, copiesOnChange, setSaveDocument, ha
 			<div style={{ display: 'flex', flexDirection: 'column' }}>
 				{getSelectAllCheckbox()}
 				<CheckboxGroup
-					options={options}
+					options={OPTIONS}
 					onChange={copiesOnChange}
 					value={copiesValue}
 				/>

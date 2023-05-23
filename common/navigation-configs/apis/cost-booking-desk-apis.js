@@ -30,6 +30,11 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'get_timeline',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'create_shipment_document',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -289,6 +294,11 @@ const apis = [
 	},
 	{
 		api          : 'update_shipment_buy_quotations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_additional_service',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

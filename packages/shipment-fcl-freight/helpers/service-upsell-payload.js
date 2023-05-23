@@ -1,5 +1,8 @@
-const formatDataForSingleService = ({ rawParams }) => {
-	const { trade_type, search_type, primary_service, formValues } = rawParams;
+const formatDataForSingleService = ({ rawParams = {} }) => {
+	const {
+		trade_type = '', search_type = '',
+		primary_service = {}, formValues = {},
+	} = rawParams || {};
 
 	if (search_type === 'fcl_cfs') {
 		if (trade_type === 'export') {
@@ -69,6 +72,7 @@ const formatDataForSingleService = ({ rawParams }) => {
 				destination_location_id : primary_service?.origin_port?.id,
 				trade_type,
 				transport_mode          : 'rail',
+				haulage_type            : 'carrier',
 			};
 		} return {
 			destination_location_id : primary_service?.destination_main_port?.id,
@@ -97,17 +101,20 @@ const formatPayload = ({
 	service = {},
 	shipmentData = {},
 	primary_service,
+	organization_id = '',
+	user = {},
 }) => {
-	const search_type = service?.service_type.replace('_service', '');
+	const search_type = service?.service_type?.replace('_service', '');
 
-	const { trade_type } = service;
+	const { trade_type = '' } = service || {};
 
 	const rawParams = {
 		trade_type,
 		search_type,
 		primary_service,
 		formValues,
-
+		organization_id,
+		user,
 	};
 
 	const newPayload = {
@@ -118,6 +125,12 @@ const formatPayload = ({
 	newPayload[`${search_type}_services_attributes`] = formatDataForSingleService({
 		rawParams,
 	});
+
+	newPayload.buyer = {
+		importer_exporter_id        : organization_id,
+		importer_exporter_branch_id : user?.branch_id,
+		user_id                     : user?.user_id,
+	};
 
 	return {
 		payload: newPayload,

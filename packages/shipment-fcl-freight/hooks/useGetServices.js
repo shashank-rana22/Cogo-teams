@@ -1,38 +1,44 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
-import toastApiError from '../utils/toastApiError';
-
-function useGetServices({ shipment_id, additional_methods = [] }) {
-	const [{ loading : servicesLoading, data }, trigger] = useRequest({
+function useGetServices({ shipment_data = {}, additional_methods = [] }) {
+	const [{ loading : servicesLoading }, trigger] = useRequest({
 		url    : 'fcl_freight/get_services',
 		method : 'GET',
 	}, { manual: true });
 
-	const listServices = useCallback(() => {
-		(async () => {
+	const [servicesData, setServicesData] = useState([]);
+
+	const { id = '' } = shipment_data;
+
+	const listServices = useCallback(
+		async () => {
 			try {
-				await trigger({
+				const res = await trigger({
 					params: {
-						shipment_id,
+						shipment_id: id,
 						additional_methods,
 					},
 				});
+
+				setServicesData(res?.data?.summary);
 			} catch (err) {
 				toastApiError(err);
 			}
-		})();
-	}, [trigger, shipment_id, additional_methods]);
+		},
+		[trigger, id, additional_methods],
+	);
 
 	useEffect(() => {
-		if (shipment_id) listServices();
-	}, [listServices, shipment_id]);
+		if (id) listServices();
+	}, [listServices, id]);
 
 	return {
 		servicesGet: {
 			servicesLoading,
 			refetchServices : listServices,
-			servicesList    : data?.summary || [],
+			servicesList    : servicesData,
 		},
 
 	};

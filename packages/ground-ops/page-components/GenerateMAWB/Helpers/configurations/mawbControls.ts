@@ -1,6 +1,16 @@
 import currencies from '../currencies';
 
-const mawbControls = (disableClass) => ({
+const mawbControls = (disableClass, editHawbNumberCondition) => ({
+	hawb_controls: [
+		{
+			name        : 'document_number',
+			label       : 'Document Number',
+			type        : 'text',
+			span        : 5,
+			placeholder : 'Document Number',
+			disabled    : editHawbNumberCondition,
+		},
+	],
 	basic: [
 		{
 			name         : 'shipperName',
@@ -391,14 +401,16 @@ const mawbControls = (disableClass) => ({
 			name               : 'carrierOtherCharges',
 			label              : 'Due Carrier Charges',
 			className          : 'primary lg',
-			span               : 5,
+			span               : 7,
 			type               : 'fieldArray',
 			showButtons        : true,
 			noDeleteButtonTill : 1,
 			value              : [
 				{
-					code  : '',
-					price : '',
+					code       : '',
+					chargeType : '',
+					chargeUnit : '',
+					price      : '',
 				},
 			],
 			controls: [
@@ -406,17 +418,35 @@ const mawbControls = (disableClass) => ({
 					name        : 'code',
 					type        : 'text',
 					className   : 'primary lg',
-					span        : 5,
+					span        : 2,
 					placeholder : 'Enter Code',
 					rules       : {
 						required: 'Code is Required',
 					},
 				},
 				{
+					name        : 'chargeType',
+					type        : 'select',
+					className   : 'primary lg',
+					span        : 3,
+					placeholder : 'Enter Charge Type',
+					options     : [
+						{ value: 'chargeable_wt', label: 'Chargeable Weight' },
+						{ value: 'gross_wt', label: 'Gross Weight' },
+					],
+				},
+				{
+					name        : 'chargeUnit',
+					type        : 'text',
+					className   : 'primary lg',
+					span        : 2,
+					placeholder : 'Enter Charge Unit',
+				},
+				{
 					name        : 'price',
 					placeholder : 'Enter Price',
 					type        : 'text',
-					span        : 5,
+					span        : 2,
 					className   : 'primary lg',
 					rules       : {
 						required: 'Price is Required',

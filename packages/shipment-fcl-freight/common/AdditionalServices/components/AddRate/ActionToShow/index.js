@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
-import React from 'react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import React, { useContext } from 'react';
 
 import styles from './styles.module.css';
 
@@ -10,15 +11,17 @@ function ActionsToShow({
 	handleSubmit,
 	setSecondStep,
 	setAddSellPrice = () => {},
-	updateResponse,
+	updateResponse = {},
 	loading,
 	onCancel = () => {},
 }) {
+	const { activeStakeholder } = useContext(ShipmentDetailContext);
+
 	const {
 		handleShipperConfirm,
-		handleShipperSideCancel,
-		handleBuyPriceReRequest,
 		requestRateFromTechops,
+		handleBuyPriceReRequest,
+		handleShipperSideCancel,
 	} = updateResponse;
 
 	if (status?.status === 'customer_confirmation_pending') {
@@ -27,12 +30,12 @@ function ActionsToShow({
 				<Button
 					onClick={() => setSecondStep(true)}
 					disabled={loading}
-					themeType="primary"
+					themeType="secondary"
 				>
 					Request Changes
 				</Button>
 
-				<Button disabled={loading} onClick={handleSubmit(handleShipperConfirm)}>
+				<Button disabled={loading} onClick={handleShipperConfirm}>
 					Accept Service
 				</Button>
 			</div>
@@ -40,14 +43,14 @@ function ActionsToShow({
 	}
 
 	if (
-		status?.status === 'amendment_requested_by_importer_exporter'
+		status?.status === 'amendment_requested_by_importer_exporter' && activeStakeholder === 'booking_agent'
 	) {
 		return (
 			<div className={styles.button_container}>
 				<Button
 					onClick={handleShipperSideCancel}
 					disabled={loading}
-					themeType="primary"
+					themeType="secondary"
 				>
 					Cancel Service
 				</Button>
@@ -70,8 +73,8 @@ function ActionsToShow({
 		);
 	}
 
-	if (
-		status?.status === 'cancelled_by_supplier'
+	if (status?.status === 'cancelled_by_supplier'
+		&& ['booking_desk_manager', 'booking_desk'].includes(activeStakeholder)
 	) {
 		return (
 			<div className={styles.button_container}>
@@ -80,7 +83,7 @@ function ActionsToShow({
 						onCancel();
 					}}
 					disabled={loading}
-					themeType="primary"
+					themeType="secondary"
 				>
 					Cancel
 				</Button>
@@ -106,7 +109,7 @@ function ActionsToShow({
 					setAddRate(false);
 					setAddSellPrice(false);
 				}}
-				themeType="primary"
+				themeType="secondary"
 				disabled={loading}
 			>
 				Cancel

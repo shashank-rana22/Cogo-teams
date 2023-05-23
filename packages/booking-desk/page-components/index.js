@@ -3,12 +3,11 @@ import { useState, useEffect } from 'react';
 
 import getValidatedStoredValues from '../utils/getValidatedStoredValues';
 
-import styles from './styles.module.css';
-
 const ResolveBookingDesk = {
 	fcl_freight       : dynamic(() => import('./FCL'), { ssr: false }),
 	fcl_freight_local : dynamic(() => import('./FCL-Local'), { ssr: false }),
 	lcl_freight       : dynamic(() => import('./LCL'), { ssr: false }),
+	fcl_cfs           : dynamic(() => import('./FCL-CFS'), { ssr: false }),
 };
 
 export default function BookingDesk() {
@@ -16,7 +15,13 @@ export default function BookingDesk() {
 	const [activeTab, setActiveTab] = useState(null);
 	const [scopeFilters, setScopeFilters] = useState(null);
 
-	const stateProps = { activeTab, setActiveTab, filters, setFilters, scopeFilters };
+	const stateProps = {
+		activeTab,
+		setActiveTab,
+		filters,
+		setFilters,
+		scopeFilters,
+	};
 
 	useEffect(() => {
 		const defaultValues = getValidatedStoredValues();
@@ -26,15 +31,14 @@ export default function BookingDesk() {
 		setScopeFilters(defaultValues.scopeFilters);
 	}, []);
 
-	const RenderDesk = filters?.shipment_type in ResolveBookingDesk ? ResolveBookingDesk[filters.shipment_type] : null;
+	const RenderDesk = filters?.shipment_type in ResolveBookingDesk
+		? ResolveBookingDesk[filters.shipment_type]
+		: null;
 
 	if (RenderDesk) {
 		return (
-			<div
-				key={filters.shipment_type}
-				className={styles.component_enter_active}
-			>
-				<RenderDesk stateProps={stateProps} className={styles.component_exit_active} />
+			<div key={filters.shipment_type}>
+				<RenderDesk stateProps={stateProps} />
 			</div>
 		);
 	}

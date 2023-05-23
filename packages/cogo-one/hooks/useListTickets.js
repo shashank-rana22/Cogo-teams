@@ -8,7 +8,7 @@ const useListTickets = ({ UserID = '', activeTab = '', fetchTicketsStats }) => {
 	const [{ loading, data }, trigger] = useTicketsRequest({
 		url     : '/list',
 		method  : 'get',
-		authkey : 'list_tickets',
+		authkey : 'get_tickets_list',
 	}, { manual: true });
 
 	const [pagination, setPagination] = useState(1);
