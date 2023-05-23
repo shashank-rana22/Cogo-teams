@@ -2,23 +2,12 @@
 
 import styles from './styles.module.css';
 
-const data = [
-	{
-		valueText: '20 Ft',
-	},
-	{
-		valueText: '1 Container',
-	},
-	{
-		valueText: 'Standard',
-	},
-	{
-		valueText: 'General',
-	},
-	{
-		valueText: '18 MT',
-	},
-];
+const COMMODITY_UNITS_MAPPING = {
+	cargo_weight_per_container : 'MT',
+	container_size             : 'FT',
+	containers_count           : 'Containers',
+
+};
 
 // function ToolTipContent() {
 // 	return (
@@ -30,11 +19,24 @@ const data = [
 // 	);
 // }
 
-function CommodityMapping() {
+function CommodityMapping({ commodity_array }) {
+	console.log('commodity_array::', commodity_array);
 	return (
 		<div className={styles.container}>
-			{data.map((itm = '') => (
-				<div className={styles.tag}>{itm?.valueText}</div>
+			{/* {data.map((item = '') => (
+				<div className={styles.tag}>{item?.valueText}</div>
+			))} */}
+
+			{commodity_array.map((item = {}) => (
+				<div className={styles.tag}>
+					{Object.keys(item).map((key) => (
+						<span key={key}>
+							{item[key]}
+							{' '}
+							{COMMODITY_UNITS_MAPPING[key]}
+						</span>
+					))}
+				</div>
 			))}
 
 			{/* {data.length > 5 && (

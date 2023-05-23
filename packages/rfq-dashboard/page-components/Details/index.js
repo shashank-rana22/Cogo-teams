@@ -23,7 +23,11 @@ function Details() {
 	// 	getRfqsRateCards();
 	// });
 
-	const { list = [] } = data;
+	const { list: list_object = {} } = data;
+
+	console.log('data::', data);
+
+	console.log('list::', list_object);
 
 	return (
 		<div className={styles.container}>
@@ -33,7 +37,7 @@ function Details() {
 				<Graph loading={loading} />
 			</div>
 			<div className={styles.rfq_list}>
-				<Services loading={loading} rate_card_list={list} />
+				<Services loading={loading} rate_card_list_object={list_object} />
 			</div>
 		</div>
 	);

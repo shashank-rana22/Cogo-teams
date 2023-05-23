@@ -11,18 +11,11 @@
 .header {
 	display: flex;
 	align-items: center;
-	justify-content: space-between;
+	justify-content: flex-end;
 	padding: 15px;
 	margin-right: 5px;
 	border-bottom: 1px solid #e0e0e0;
 	border-radius: 6px 6px 0 0;
-
-	:global {
-		/* stylelint-disable-next-line selector-class-pattern */
-		.ui_checkbox_container {
-			padding: 0;
-		}
-	}
 }
 
 .approve_remaining_complete_shipment_section {
@@ -39,7 +32,7 @@
 
 .lists_heading_section {
 	display: flex;
-	margin-bottom: -6px;
+	margin-top: 8px;
 }
 
 .lists_heading_part {

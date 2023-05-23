@@ -2,7 +2,13 @@ import { getFormattedAmount } from '../../../../../common/helpers/getFormattedSu
 
 import styles from './styles.module.css';
 
-function PriceFreightCtr() {
+function PriceFreightCtr({
+	freight_price_currency = 'INR',
+	freight_price_discounted = '',
+	total_price_discounted = '',
+	total_price_currency = 'INR',
+}) {
+	console.log('total_price_discounted::::', total_price_discounted);
 	// const {
 	// 	total_price_discounted,
 	// 	total_price_currency,
@@ -20,12 +26,12 @@ function PriceFreightCtr() {
 	const data = [
 		{
 			label  : 'Price / Ctr',
-			amount : '140000',
+			amount : `${total_price_currency} ${total_price_discounted}`,
 
 		},
 		{
 			label  : 'Freight / Ctr',
-			amount : '140000',
+			amount : `${freight_price_currency} ${freight_price_discounted}`,
 		},
 	];
 	return (
