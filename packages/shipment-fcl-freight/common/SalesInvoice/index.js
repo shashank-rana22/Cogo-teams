@@ -1,11 +1,10 @@
+import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import { v4 as uuid } from 'uuid';
 
 import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
 import useListSageSalesInvoices from '../../hooks/useListSageSalesInvoices';
 import OverviewManageServices from '../Overview/OverviewManageServices';
 
-import Loader from './commons/Loader';
 import Invoices from './Invoices';
 import styles from './styles.module.css';
 
@@ -17,15 +16,9 @@ function SalesInvoice() {
 
 	if (loading) {
 		return (
-			<>
-				{Array(3).fill().map(() => (
-					<div key={uuid()} className={styles.loader}>
-						<Loader />
-						<Loader />
-						<Loader />
-					</div>
-				))}
-			</>
+			<div className={styles.loader}>
+				<Loader />
+			</div>
 		);
 	}
 
