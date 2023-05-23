@@ -2,10 +2,11 @@
 	display: flex;
 	flex-direction: column;
 	width: 30%;
-	height: 515px;
+	height: 530px;
 	margin-right: 15px;
 	background: #fdfbf6;
 	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
 .tickets_section_part:last-child {
