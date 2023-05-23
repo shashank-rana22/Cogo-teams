@@ -1,6 +1,8 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetPlanDetails = () => {
 	const { query } = useRouter();
@@ -11,21 +13,21 @@ const useGetPlanDetails = () => {
 		url    : '/get_saas_plan_details',
 	});
 
-	const refetchPlanDetails = async () => {
+	const refetchPlanDetails = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
 					id: plan_id,
 				},
 			});
-		} catch (error) {
-			console.log(error);
+		} catch (err) {
+			Toast.error(getApiErrorString(err.response?.data));
 		}
-	};
+	}, [plan_id, trigger]);
 
 	useEffect(() => {
 		refetchPlanDetails();
-	}, []);
+	}, [refetchPlanDetails]);
 
 	return {
 		planDetails: data,

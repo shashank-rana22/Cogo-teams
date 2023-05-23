@@ -1,5 +1,7 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
 const useGetPlanList = () => {
 	const [globalFilters, setGlobalFilters] = useState({
@@ -11,7 +13,7 @@ const useGetPlanList = () => {
 		url    : '/list_saas_plans',
 	}, { manual: true });
 
-	const refetchPlanList = async () => {
+	const refetchPlanList = useCallback(async () => {
 		const { page = 1 } = globalFilters;
 		try {
 			await trigger({
@@ -21,9 +23,9 @@ const useGetPlanList = () => {
 				},
 			});
 		} catch (err) {
-			console.log(err, 'ererer');
+			Toast.error(getApiErrorString(err.response?.data));
 		}
-	};
+	}, [globalFilters, trigger]);
 
 	const pageChangeHandler = (v) => {
 		setGlobalFilters((prev) => ({ ...prev, page: v }));
@@ -31,7 +33,7 @@ const useGetPlanList = () => {
 
 	useEffect(() => {
 		refetchPlanList();
-	}, [globalFilters]);
+	}, [globalFilters, refetchPlanList]);
 
 	return {
 		planList: data, loading, setGlobalFilters, pageChangeHandler,

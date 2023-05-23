@@ -14,7 +14,7 @@ function CancelSub({ subscriptionId = '', modalChangeHandler }) {
 					type="submit"
 					size="sm"
 					loading={loading}
-					onClick={modalChangeHandler}
+					onClick={() => modalChangeHandler(false)}
 				>
 					No
 				</Button>

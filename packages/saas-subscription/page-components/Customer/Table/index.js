@@ -36,7 +36,7 @@ function Table({ userList = {}, loading = false, setGlobalFilters }) {
 				))}
 			</div>
 			{(newList || []).map((item) => (
-				<div key={`${item?.id}`} className={cl`${styles.row} ${styles.item_row}`}>
+				<div key={`${item?.id || item}`} className={cl`${styles.row} ${styles.item_row}`}>
 					{listConfig.map((config) => (
 						<div
 							key={`${config.key}_${item?.id}`}

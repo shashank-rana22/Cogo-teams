@@ -1,4 +1,7 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useCancelSubscription = ({ modalChangeHandler }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -6,7 +9,7 @@ const useCancelSubscription = ({ modalChangeHandler }) => {
 		url    : '/cancel_saas_subscription',
 	}, { manual: true });
 
-	const cancelSubscriptionHandler = async (id = '') => {
+	const cancelSubscriptionHandler = useCallback(async (id = '') => {
 		try {
 			await trigger({
 				data: {
@@ -15,9 +18,9 @@ const useCancelSubscription = ({ modalChangeHandler }) => {
 			});
 			modalChangeHandler(true);
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data));
 		}
-	};
+	}, [modalChangeHandler, trigger]);
 
 	return {
 		loading, cancelSubscriptionHandler,

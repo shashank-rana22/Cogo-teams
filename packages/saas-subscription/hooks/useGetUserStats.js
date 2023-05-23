@@ -1,5 +1,7 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const useGetUserStats = () => {
 	const [{ loading, data }, trigger] = useRequest({
@@ -7,7 +9,7 @@ const useGetUserStats = () => {
 		url    : '/get_saas_subscription_user_stats',
 	}, { manual: true });
 
-	const refetchUserStats = async (searchTerm) => {
+	const refetchUserStats = useCallback(async (searchTerm) => {
 		try {
 			await trigger({
 				params: {
@@ -15,11 +17,13 @@ const useGetUserStats = () => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiErrorString(err.response?.data));
 		}
-	};
+	}, [trigger]);
 
-	useEffect(() => { refetchUserStats(); }, []);
+	useEffect(() => {
+		refetchUserStats();
+	}, [refetchUserStats]);
 
 	return {
 		refetchUserStats, userStatsData: data, statsLoading: loading,

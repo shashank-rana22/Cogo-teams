@@ -31,8 +31,8 @@ const editQuotaControl = [
 		label   : 'Is addon',
 		type    : 'radioGroup',
 		options : [
-			{ label: 'True', value: true },
-			{ label: 'False', value: false },
+			{ label: 'True', value: 'true' },
+			{ label: 'False', value: 'false' },
 		],
 		rules: {
 			required: true,
