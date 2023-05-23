@@ -1,6 +1,7 @@
 import { Button, Loader } from '@cogoport/components';
+import { Layout } from '@cogoport/ocean-modules';
+import { useMemo } from 'react';
 
-import Layout from '../../../../helpers/Layout';
 import getStep0Controls from '../../helpers/getStep0Controls';
 
 import BookingPreferenceCard from './BookingPreferenceCard';
@@ -24,12 +25,16 @@ function Step0({ data = {}, onCancel = () => {}, setStep }) {
 		}
 		return 'NORMAL BOOKING';
 	};
+	const keysForPreference = useMemo(
+		() => Array(listBookingPreferences.length).fill(null).map(() => Math.random()),
+		[listBookingPreferences.length],
+	);
 
 	return (
 		<div>
 			<div>
-				{bookingPreferenceLoading ? <div><Loader /></div> : listBookingPreferences?.map((item) => (
-					<BookingPreferenceCard item={item} step0_data={data} />
+				{bookingPreferenceLoading ? <div><Loader /></div> : listBookingPreferences?.map((item, i) => (
+					<BookingPreferenceCard item={item} step0_data={data} key={keysForPreference[i]} />
 				))}
 			</div>
 
@@ -45,6 +50,7 @@ function Step0({ data = {}, onCancel = () => {}, setStep }) {
 						fields={getStep0Controls}
 						control={control}
 						errors={errors}
+						shipment_id={shipment_data?.id}
 					/>
 				</div>
 			</div>

@@ -1,7 +1,7 @@
 import { Modal } from '@cogoport/components';
 import { AsyncSelectController, RadioGroupController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import Layout from '@cogoport/ocean-modules/components/Layout';
+import { Layout } from '@cogoport/ocean-modules';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -52,7 +52,7 @@ function Form({
 		organization_id,
 	});
 
-	const { errors, formValues } = formProps;
+	const { errors, formValues, control } = formProps;
 
 	const formOrganizationId = formValues?.organization_id;
 
@@ -102,11 +102,18 @@ function Form({
 			<Modal.Body>
 				{ controls?.length === 0 && step === 1
 					? (
-						<>
-							<div> Are you sure you want to upsell this service?</div>
+						<div> Are you sure you want to upsell this service?</div>
 
-							<Layout controls={controls} formProps={formProps} />
-						</>
+					)
+					: null }
+				{ controls?.length !== 0 && step === 1
+					? (
+						<Layout
+							control={control}
+							formValues={formValues}
+							errors={errors}
+							fields={controls}
+						/>
 					)
 					: null }
 

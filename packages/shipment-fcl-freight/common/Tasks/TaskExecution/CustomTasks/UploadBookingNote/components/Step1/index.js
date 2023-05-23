@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
+import { Layout } from '@cogoport/ocean-modules';
 
-import Layout from '../../../../helpers/Layout';
 import getStep1Controls from '../../helpers/getStep1Controls';
 
 import styles from './styles.module.css';

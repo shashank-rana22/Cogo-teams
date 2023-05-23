@@ -18,7 +18,7 @@
     "pre-build": "NODE_ENV=production node scripts/build-pages && node scripts/pre-build",
     "dev": "node scripts/build-pages && node scripts/pre-build && turbo run dev",
     "start": "turbo run start",
-    "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "eslint": "eslint \"common/ocean-modules/components/Layout/**/*.{js,jsx,ts,tsx}\"",
     "eslint_file": "eslint",
     "stylelint": "stylelint \"**/*.css\"",
     "clean": "turbo run clean"

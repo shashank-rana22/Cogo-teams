@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import Layout from '@cogoport/ocean-modules/components/Layout';
+import { Layout } from '@cogoport/ocean-modules';
 
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';

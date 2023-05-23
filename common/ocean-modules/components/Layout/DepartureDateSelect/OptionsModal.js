@@ -1,6 +1,6 @@
 import { Modal, Button, Chips } from '@cogoport/components';
 import { isSameDay } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useMemo } from 'react';
 
 import createOptions from './createOptions';
 import styles from './styles.module.css';
@@ -24,6 +24,11 @@ function ModalContent({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(datePair)]);
 
+	const keysForFields = useMemo(
+		() => Array(allOptions.length).fill(null).map(() => Math.random()),
+		[allOptions.length],
+	);
+
 	return (
 		<Modal show={show} onClose={onClose} fullscreen={isMobile} width="60%" styles={{ marginLeft: '4px' }}>
 			<div style={{ padding: '10px' }}>
@@ -37,6 +42,7 @@ function ModalContent({
 
 						return (
 							<div
+								key={keysForFields[i]}
 								role="presentation"
 								className={weekValues.length > 0 ? styles.item_active : styles.item_inactive}
 								onClick={() => setCurrentWeek(i)}

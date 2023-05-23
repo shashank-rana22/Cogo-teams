@@ -1,5 +1,5 @@
 import { IcMDelete } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
@@ -42,6 +42,11 @@ function Child({
 	if (rowWiseFields.length) {
 		totalFields.push(rowWiseFields);
 	}
+
+	const keysForFields = useMemo(
+		() => Array(totalFields.length).fill(null).map(() => Math.random()),
+		[totalFields.length],
+	);
 
 	if (formValues?.documents?.[0]?.url?.fileName === ''
 	|| formValues?.documents_commercial_invoice?.[0]?.url?.fileName === ''
@@ -87,8 +92,8 @@ function Child({
 				&nbsp;
 				{index + 1}
 			</h3>
-			{totalFields.map((rowFields) => (
-				<div className={styles.row}>
+			{totalFields.map((rowFields, i) => (
+				<div className={styles.row} key={keysForFields[i]}>
 					{rowFields.map((controlItem) => {
 						const newControl = getNewControls(controlItem);
 
@@ -110,7 +115,7 @@ function Child({
 						const flex = ((controlItem?.span || 12) / 12) * 100;
 						if (!Element || !show) return null;
 						return (
-							<div className={styles.element} style={{ width: `${flex}%` }}>
+							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
 								<h4 className={styles.label}>
 									{controlItem?.label}
 								</h4>

@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import Layout from '@cogoport/ocean-modules/components/Layout';
+import { Layout } from '@cogoport/ocean-modules';
 
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
@@ -39,7 +39,6 @@ function ExecuteStep({
 		showElements,
 		primary_service,
 	});
-	console.log('form values', fields);
 
 	return (
 		<div className={styles.container}>
