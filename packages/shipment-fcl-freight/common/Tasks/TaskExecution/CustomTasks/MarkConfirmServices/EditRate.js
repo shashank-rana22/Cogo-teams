@@ -65,7 +65,7 @@ function EditRate({
 					<Loader themeType="primary" className={styles.loader_icon} />
 				</div>
 			) : (
-				<Step3 data={editQuote} />
+				<Step3 data={editQuote} shipment_id={task?.shipment_id} />
 			)}
 		</div>
 	);

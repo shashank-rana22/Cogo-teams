@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
+import Layout from '@cogoport/ocean-modules/components/Layout';
 
-import Layout from './helpers/Layout';
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
 import styles from './styles.module.css';
@@ -49,6 +49,7 @@ function ExecuteStep({
 					errors={errors}
 					showElements={showElements}
 					formValues={watch()}
+					shipment_id={task?.shipment_id}
 				/>
 			</div>
 

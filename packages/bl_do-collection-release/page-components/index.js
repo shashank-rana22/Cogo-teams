@@ -33,6 +33,14 @@ export default function BLDoCollectionDesk() {
 	const profile = useSelector((state) => state.profile || {});
 	const Desk = deskMapping[stateProps.shipment_type];
 
+	const handleTabChange = (val) => {
+		if (val === 'bl') {
+			setStateProps({ ...stateProps, activeTab: val, page: 1, trade_type: 'export' });
+		} else {
+			setStateProps({ ...stateProps, activeTab: val, page: 1, trade_type: 'import' });
+		}
+	};
+
 	const renderFilters =		(
 		<div className={styles.filters_tabs}>
 			{
@@ -57,7 +65,7 @@ export default function BLDoCollectionDesk() {
 			<Tabs
 				activeTab={stateProps.activeTab}
 				themeType="secondary"
-				onChange={(val) => setStateProps({ ...stateProps, activeTab: val, page: 1 })}
+				onChange={handleTabChange}
 				fullWidth
 			>
 				<TabPanel

@@ -1,11 +1,10 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-
-import Layout from '../../../../helpers/Layout';
+import Layout from '@cogoport/ocean-modules/components/Layout';
 
 import styles from './styles.module.css';
 
-function Step3({ data, setStep }) {
+function Step3({ data, setStep, shipment_id }) {
 	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
 
 	const formProps = useForm({ defaultValues });
@@ -45,6 +44,7 @@ function Step3({ data, setStep }) {
 				fields={finalControls}
 				errors={errors}
 				customValues={customValues}
+				shipment_id={shipment_id}
 			/>
 
 			<div className={styles.button_container}>

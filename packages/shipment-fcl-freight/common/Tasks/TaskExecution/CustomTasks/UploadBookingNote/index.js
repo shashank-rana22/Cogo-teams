@@ -94,6 +94,7 @@ function UploadBookingNote({
 					<Step3
 						data={step3_data}
 						setStep={setStep}
+						shipment_id={task?.shipment_id}
 					/>
 				) : null
 			}

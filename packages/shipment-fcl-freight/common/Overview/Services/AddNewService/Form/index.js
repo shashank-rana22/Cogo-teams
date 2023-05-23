@@ -1,11 +1,11 @@
 import { Modal } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import Layout from '@cogoport/ocean-modules/components/Layout';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
 import useShipmentBack from '../../../../../hooks/useShipmentBack';
-import Layout from '../../../../Layout';
 import Footer from '../Footer';
 
 import styles from './styles.module.css';
@@ -62,7 +62,14 @@ function Form({
 			<Modal.Body>
 				{ controls?.length === 0
 					? <div> Are you sure you want to upsell this service?</div>
-					: <Layout controls={controls} formProps={formProps} />}
+					: (
+						<Layout
+							fields={controls}
+							control={formProps.control}
+							formValues={formProps.formValues}
+							errors={formProps.errors}
+						/>
+					)}
 			</Modal.Body>
 			<Modal.Footer>
 				<Footer
