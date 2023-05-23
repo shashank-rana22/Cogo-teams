@@ -2,6 +2,8 @@ import { Accordion } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React from 'react';
 
+import useGetEmployeeDetails from '../../../hooks/useGetEmployeeDetails';
+
 import BankDetails from './BankDetails';
 import EducationalQualification from './EducationalQualification';
 import EmploymentHistory from './EmploymentHistory';
@@ -10,7 +12,7 @@ import PersonalInformation from './PersonalInformation';
 import Resume from './Resume';
 import styles from './styles.module.css';
 
-const data = [
+const content_mapping = [
 	{ title: 'PERSONAL INFORMATION', content: PersonalInformation },
 	{ title: 'EDUCATIONAL QUALIFICATION', content: EducationalQualification },
 	{ title: 'EMPLOYMENT HISTORY', content: EmploymentHistory },
@@ -19,7 +21,7 @@ const data = [
 	{ title: 'BANK DETAILS', content: BankDetails },
 ];
 
-function NewHireInformation({ setInformationPage }) {
+function NewHireInformation({ setInformationPage, id, data }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -34,7 +36,7 @@ function NewHireInformation({ setInformationPage }) {
 			</div>
 			<div className={styles.subcontainer}>
 
-				{data.map((item) => {
+				{content_mapping.map((item) => {
 					const { content: Component } = item;
 
 					return (
@@ -48,7 +50,7 @@ function NewHireInformation({ setInformationPage }) {
 								title={item.title}
 								style={{ maxHeight: '60vh' }}
 							>
-								<Component />
+								<Component id={id} data={data} />
 							</Accordion>
 						</div>
 					);

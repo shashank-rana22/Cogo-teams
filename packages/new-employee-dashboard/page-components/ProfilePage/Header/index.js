@@ -31,7 +31,7 @@ function Header({ detail }) {
 			<div className={styles.button_container}>
 				<Button type="button" themeType="secondary">Action Button</Button>
 				<Button type="button" themeType="secondary" style={{ marginLeft: 12 }}>Action Button</Button>
-				<Button type="button" style={{ marginLeft: 12 }}>Action Button</Button>
+				<Button type="button" style={{ marginLeft: 12 }}>Reject Candidate</Button>
 			</div>
 		</div>
 	);

@@ -8,12 +8,12 @@ function useGetEmployeeDetails({ id = '' }) {
 		method : 'GET',
 		url    : 'get_employee_details',
 	}, { manual: true });
-
+	console.log(data, 'data in hooks ');
 	const getEmployeeDetails = useCallback(() => {
 		try {
 			trigger({
 				params: {
-					id: id || '85cdcf6b-bd52-4fea-b136-12e377c48ecc',
+					id: '85cdcf6b-bd52-4fea-b136-12e377c48ecc' || id,
 				},
 			});
 		} catch (err) {

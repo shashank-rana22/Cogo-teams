@@ -12,15 +12,19 @@ const consolidated_invoices = {
 		},
 		{
 			api          : 'get_employee_details',
-			access_type  : 'public',
+			access_type  : 'private',
 			service_name : 'harbour',
 		},
 	],
-
 	employee_portal: [
 		{
 			api          : 'get_employee_details',
-			access_type  : 'public',
+			access_type  : 'private',
+			service_name : 'harbour',
+		},
+		{
+			api          : 'create_employee_bank_details',
+			access_type  : 'private',
 			service_name : 'harbour',
 		},
 	],

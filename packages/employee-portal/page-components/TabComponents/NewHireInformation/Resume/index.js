@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
-import getElementController from '../../../configs/getElementController';
+import getElementController from '../../../../configs/getElementController';
 
 import controls from './controls';
 import styles from './styles.module.css';
