@@ -11,12 +11,9 @@ import styles from './styles.module.css';
 const geo = getGeoConstants();
 
 function TdsSingleCard({
-	setGlobalFilters,
 	globalFilters,
 	active,
 	data = {},
-	// approveTds,
-	// loading = false,
 	editTdsLoading,
 	approveTds,
 }) {
@@ -32,23 +29,6 @@ function TdsSingleCard({
 		tdsStyle = {},
 	} = data || {};
 
-	const powerControls = (newControls) => newControls.map((control) => {
-		if (control.name === 'id') {
-			return {
-				...control,
-				params: {
-					filters: {
-						organization_trade_party_detail_id : (globalFilters || {}).orgId,
-						trade_party_type                   : ['self'],
-						organization_account_type          : [
-							active === 'AP' ? 'service_provider' : 'importer_exporter',
-						],
-					},
-				},
-			};
-		}
-		return { ...control };
-	});
 	return (
 		<div className={styles.card}>
 			<div>
@@ -93,7 +73,7 @@ function TdsSingleCard({
 					TDS %
 				</div>
 				<div className={styles.tds_percentage}>
-					{tdsStyle?.rate || ' '}
+					{tdsStyle?.rate || '0'}
 					%
 					<IcMEdit onClick={onClick} />
 				</div>
@@ -101,19 +81,18 @@ function TdsSingleCard({
 					<ReceivavlesEditModal
 						show={show}
 						setShow={setShow}
-						globalFilters={globalFilters}
-						setGlobalFilters={setGlobalFilters}
 						editTdsLoading={editTdsLoading}
 						approveTds={approveTds}
+						globalFilters={globalFilters}
+						tdsStyle={tdsStyle}
 					/>
 				) : (
 					<PayablesEditModal
 						show={show}
 						setShow={setShow}
-						globalFilters={globalFilters}
-						setGlobalFilters={setGlobalFilters}
 						editTdsLoading={editTdsLoading}
 						approveTds={approveTds}
+						globalFilters={globalFilters}
 					/>
 				)}
 			</div>

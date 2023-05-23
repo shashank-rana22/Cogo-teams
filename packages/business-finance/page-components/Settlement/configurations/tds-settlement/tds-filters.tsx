@@ -8,6 +8,7 @@ export const CreateTdsFilters = [
 		initialCall : true,
 		valueKey    : 'id',
 		span        : 4.5,
+		style       : { width: '300px' },
 
 	},
 

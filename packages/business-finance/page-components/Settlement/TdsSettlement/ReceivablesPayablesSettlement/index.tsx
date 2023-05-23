@@ -19,12 +19,13 @@ function ReceivablesPayablesSettlement({
 	const {
 		searchValue,
 		setSearchValue,
-		loading,
-		summData,
+		summData = {},
 		data,
 		tdsDocumentsLoading,
 		editTdsLoading,
 		approveTds,
+		setSummData,
+		setApiTdsData,
 	} = useTdsSettlement({
 		active,
 		globalFilters,
@@ -34,6 +35,13 @@ function ReceivablesPayablesSettlement({
 	const column = receivablesPayablesColumn();
 	const { list, pageNo = 0, totalRecords = 0 } = data || {};
 
+	const clearFilters = () => {
+		setGlobalFilters({});
+		setApiTdsData({});
+		setSummData({});
+	};
+
+	const showClearBtn = Object.keys(globalFilters).length > 1;
 	return (
 		<div>
 			<div className={styles.main_div}>
@@ -42,14 +50,14 @@ function ReceivablesPayablesSettlement({
 						controls={CreateTdsFilters}
 						filters={globalFilters}
 						setFilters={setGlobalFilters}
-						// showClearBtn={showClearBtn}
-						// clearFilters={clearFilters}
+						showClearBtn={showClearBtn}
+						clearFilters={clearFilters}
 					/>
 				</div>
 				<div className={styles.div_search}>
 					<Input
 						name="q"
-						size="sm"
+						size="md"
 						value={searchValue}
 						onChange={(e: any) => setSearchValue(e)}
 						placeholder="Search By Document Number"
@@ -61,14 +69,16 @@ function ReceivablesPayablesSettlement({
 					/>
 				</div>
 			</div>
-			<TdsSingleCard
-				setGlobalFilters={setGlobalFilters}
-				globalFilters={globalFilters}
-				active={active}
-				data={summData}
-				editTdsLoading={editTdsLoading}
-				approveTds={approveTds}
-			/>
+
+			{Object.keys(summData).length > 0 && (
+				<TdsSingleCard
+					globalFilters={globalFilters}
+					active={active}
+					data={summData}
+					editTdsLoading={editTdsLoading}
+					approveTds={approveTds}
+				/>
+			)}
 			<div>
 				<StyledTable
 					data={list || []}
@@ -82,9 +92,9 @@ function ReceivablesPayablesSettlement({
 						currentPage={pageNo}
 						totalItems={totalRecords}
 						pageSize={10}
-						// onPageChange={(pageValue: number) => {
-						// 	setFilters((p) => ({ ...p, pageIndex: pageValue }));
-						// }}
+						onPageChange={(pageValue: number) => {
+							setGlobalFilters((p) => ({ ...p, pageIndex: pageValue }));
+						}}
 
 					/>
 				</div>

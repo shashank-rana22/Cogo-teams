@@ -4,7 +4,6 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf, useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
 const useTdsSettlement = ({
@@ -12,7 +11,7 @@ const useTdsSettlement = ({
 	globalFilters,
 	setGlobalFilters,
 }) => {
-	const { date = {}, ...rest } = globalFilters;
+	const { date = {}, pageIndex, ...rest } = globalFilters;
 	const [searchValue, setSearchValue] = useState<string>('');
 	const [apiTdsData, setApiTdsData] = useState({});
 	const [summData, setSummData] = useState({});
@@ -74,16 +73,16 @@ const useTdsSettlement = ({
 							formatType : 'dateTime',
 							separator  : ' ',
 						}),
-						query: query || undefined,
+						query : query || undefined,
+						page  : pageIndex,
 					},
 				});
 				setApiTdsData(response.data);
 			} catch (err) {
 				setApiTdsData({});
-				// Toast.error(err.data.message);
 			}
 		})();
-	}, [active, trigger, rest, date, query]);
+	}, [active, trigger, rest, date, query, pageIndex]);
 
 	const getSummary = useCallback(() => {
 		(async () => {
@@ -115,11 +114,8 @@ const useTdsSettlement = ({
 						query: query || undefined,
 					},
 				});
-
-				// Toast.success('tds added successfully');
 			} catch (err) {
 				setSummData({});
-				// Toast.error(err.data.message);
 			}
 		})();
 	}, [active, getOrgSummary, rest, date, query]);
@@ -133,11 +129,10 @@ const useTdsSettlement = ({
 			refetch();
 			getSummary();
 		}
-	}, [active, JSON.stringify(query), JSON.stringify(rest?.orgId), JSON.stringify(getSummary), JSON.stringify(refetch)]);
+	}, [active, JSON.stringify(query), JSON.stringify(rest?.orgId),
+		JSON.stringify(getSummary), JSON.stringify(refetch), pageIndex, JSON.stringify(date)]);
 
 	const approveTds = async (value, setShow, reset) => {
-		console.log(value, 'values');
-
 		try {
 			const response = await approveTDsApi({
 				data: {
@@ -166,9 +161,6 @@ const useTdsSettlement = ({
 		setSummData,
 		editTdsLoading,
 		approveTds,
-
-		// loading,
-		// tdsLoading : createTdsLoading,
 		tdsDocumentsLoading,
 	};
 };

@@ -9,12 +9,16 @@
 		flex: 0 0 45%;
 		margin: 4px 0;
 	}
+
+	::placeholder {
+		font-size: 12px;
+	}
 }
 
 .label {
 	margin: 8px 0;
-	font-weight: 900;
-	line-height: 14px;
+	font-weight: 500;
+	line-height: 12px;
 	letter-spacing: 0.02em;
 }
 

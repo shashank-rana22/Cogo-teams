@@ -2,16 +2,17 @@ import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import ReceivablesFrom from './ReceivablesForm';
+import ReceivablesFrom from '../ReceivablesForm';
+
 import styles from './styles.module.css';
 
 function ReceivavlesEditModal({
 	show,
 	setShow,
-	globalFilters,
-	setGlobalFilters,
 	editTdsLoading,
 	approveTds,
+	globalFilters,
+	tdsStyle,
 }) {
 	const onOuterClick = () => {
 		setShow(false);
@@ -21,9 +22,12 @@ function ReceivavlesEditModal({
 		control,
 		formState: { errors },
 		reset,
+		getValues,
 	} = useForm();
-	const onSubmit = (values) => {
-		approveTds(values, setShow, reset);
+
+	const onSubmit = () => {
+		const data = getValues();
+		approveTds(data, setShow, reset);
 	};
 
 	return (
@@ -42,24 +46,50 @@ function ReceivavlesEditModal({
 					<div className={styles.text}>
 						Current TDS Style :
 						{' '}
-						<span className={styles.values}>Gross</span>
+						<span className={styles.values}>{tdsStyle?.style}</span>
 					</div>
 					<div className={styles.text}>
 						Current TDS Rate :
 						{' '}
-						<span className={styles.values}>2%</span>
+						<span className={styles.values}>
+							{tdsStyle?.rate}
+							%
+						</span>
 					</div>
 				</div>
 				<ReceivablesFrom
-					handleSubmit={handleSubmit}
-					onSubmit={onSubmit}
 					control={control}
 					errors={errors}
-					setShow={setShow}
-					reset={reset}
-					editTdsLoading={editTdsLoading}
+					TypeKey="AR"
+					globalFilters={globalFilters}
 				/>
 			</Modal.Body>
+
+			<Modal.Footer>
+				<div style={{ display: 'flex' }}>
+					<Button
+						size="md"
+						themeType="secondary"
+						style={{ marginRight: '10px' }}
+						onClick={() => {
+							setShow(false);
+							reset();
+						}}
+					>
+						Cancel
+					</Button>
+					<Button
+						type="submit"
+						size="md"
+						disabled={editTdsLoading}
+						onClick={
+							handleSubmit(onSubmit)
+}
+					>
+						Send For Approval
+					</Button>
+				</div>
+			</Modal.Footer>
 
 		</Modal>
 	);

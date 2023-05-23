@@ -2,51 +2,67 @@ import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
-import PayablesFrom from './PayablesForm';
+import ReceivablesFrom from '../ReceivablesForm';
 
 function PayablesEditModal({
 	show,
 	setShow,
-	globalFilters,
-	setGlobalFilters,
 	editTdsLoading,
 	approveTds,
+	globalFilters,
 }) {
-	const onOuterClick = () => {
-		setShow(false);
-	};
 	const {
 		handleSubmit,
 		control,
 		formState: { errors },
 		reset,
+		getValues,
 	} = useForm();
-	const onSubmit = (values) => {
-		approveTds(values, setShow, reset);
+	const onSubmit = () => {
+		const data = getValues();
+		approveTds(data, setShow, reset);
 	};
 
 	return (
 		<Modal
 			show={show}
 			onClose={() => setShow(false)}
-			onOuterClick={() => {
-				onOuterClick();
-				// reset();
-			}}
 			size="md"
 		>
 			<Modal.Header title="TDS Edit" />
 			<Modal.Body>
-				<PayablesFrom
-					handleSubmit={handleSubmit}
-					onSubmit={onSubmit}
+				<ReceivablesFrom
 					control={control}
 					errors={errors}
-					setShow={setShow}
-					reset={reset}
-					editTdsLoading={editTdsLoading}
+					TypeKey="AP"
+					globalFilters={globalFilters}
 				/>
 			</Modal.Body>
+			<Modal.Footer>
+				<div style={{ display: 'flex' }}>
+					<Button
+						size="md"
+						themeType="secondary"
+						style={{ marginRight: '10px' }}
+						onClick={() => {
+							setShow(false);
+							reset();
+						}}
+					>
+						Cancel
+					</Button>
+					<Button
+						type="submit"
+						size="md"
+						disabled={editTdsLoading}
+						onClick={
+							handleSubmit(onSubmit)
+}
+					>
+						Send For Approval
+					</Button>
+				</div>
+			</Modal.Footer>
 		</Modal>
 	);
 }
