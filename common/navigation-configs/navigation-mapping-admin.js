@@ -53,6 +53,7 @@ import {
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
 	IcMFaq,
+	IcMRolesIncluded,
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
@@ -1048,8 +1049,8 @@ const navigationMappingAdmin = {
 	unified_dashboard: {
 		key           : 'unified_dashboard',
 		title         : 'Unified Dashboard',
-		href          : '/unified-dashboard',
-		as            : '/unified-dashboard',
+		href          : '/v2/unified-dashboard',
+		as            : '/v2/unified-dashboard',
 		type          : 'link',
 		icon          : IcMDashboard,
 		possible_apis : apis.unified_dashboard,
@@ -1129,10 +1130,10 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-bn_salvage',
 				title         : 'BN Salvage',
-				href          : '/bn-salvage',
-				as            : '/bn-salvage',
+				href          : '/v2/bn-salvage',
+				as            : '/v2/bn-salvage',
 				type          : 'link',
-				main_apis     : ['list_shipments'],
+				main_apis     : ['list_booking_documents'],
 				possible_apis : apis.bn_salvage,
 			},
 			{
@@ -1374,6 +1375,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
+			},
+			{
+				key           : 'coe-so2_surface',
+				title         : 'SO2 Dashboard',
+				href          : '/v2/so2-surface',
+				as            : '/v2/so2-surface',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.so2_surface,
 			},
 		],
 	},
@@ -1773,19 +1783,14 @@ const navigationMappingAdmin = {
 		isSubNavs   : true,
 		icon        : IcMUserAllocations,
 		module_type : 'dashboards',
-		main_apis   : [
-			'get_allocation_configurations',
-			'get_allocation_relations',
-			'get_allocation_requests',
-			'get_allocation_quotas',
-		],
-		options: [
+		options     : [
 			{
 				key           : 'allocations-core_engine',
 				title         : 'Core Engine',
 				href          : '/v2/allocation/core-engine',
 				as            : '/v2/allocation/core-engine',
 				possible_apis : apis.allocation_engine,
+				main_apis     : ['get_allocation_requests'],
 			},
 			{
 				key           : 'allocations-kam_expertise',
@@ -1800,6 +1805,7 @@ const navigationMappingAdmin = {
 				href          : '/v2/allocation/crm-feedback-dashboard',
 				as            : '/v2/allocation/crm-feedback-dashboard',
 				possible_apis : apis.crm_feedback_dashboard,
+				main_apis     : ['get_allocation_feedbacks'],
 			},
 			{
 				key           : 'allocations-account_scoring',
@@ -2246,6 +2252,40 @@ const navigationMappingAdmin = {
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
+	},
+	referral: {
+		key         : 'referral',
+		title       : 'Referral',
+		isSubNavs   : true,
+		icon        : IcMRolesIncluded,
+		module_type : 'dashboards',
+		main_apis   : [],
+		options     : [
+			{
+				key           : 'referral-dashboard',
+				title         : 'Dashboard',
+				href          : '/v2/referral/dashboard',
+				as            : '/v2/referral/dashboard',
+				type          : 'link',
+				possible_apis : apis.referral_dashboard,
+			},
+		],
+	},
+	chakravyuh: {
+		key         : 'chakravyuh',
+		title       : 'Chakravyuh',
+		isSubNavs   : true,
+		module_type : 'crm',
+		options     : [
+			{
+				key           : 'chakravyuh-trends',
+				title         : 'Pricing Trends',
+				href          : '/v2/pricing/trends',
+				as            : '/v2/pricing/trends',
+				possible_apis : apis.pricing_trends,
+			},
+		],
+
 	},
 };
 

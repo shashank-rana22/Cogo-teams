@@ -108,3 +108,9 @@
 	background: #fef199;
 	border-radius: 0 8px;
 }
+
+.tabs_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}

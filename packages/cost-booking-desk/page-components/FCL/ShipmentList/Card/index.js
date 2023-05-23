@@ -83,7 +83,7 @@ function Card({ item = {} }) {
 				<div className={styles.separator} />
 
 				<div className={styles.cargo}>
-					{item?.shipment_type === 'fcl_freight_local'
+					{['fcl_freight_local', 'fcl_customs']?.includes(item?.shipment_type)
 						? <CargoDetailsLocal item={item} />
 						: <CargoDetails cargo_details={item?.cargo_details || []} item={item} />}
 				</div>
