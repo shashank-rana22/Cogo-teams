@@ -62,11 +62,18 @@ function CollectionPartyDetails({
 		}
 	});
 
-	const bankOptions = JSON.stringify(collectionPartyBankOptions);
+	const bankOptions = JSON.stringify(collectionPartyBankOptions || []);
 
 	useEffect(() => {
 		setValue('collection_party_bank_details', purchaseInvoiceValues?.collection_party_bank_details);
 	}, [bankOptions, setValue, purchaseInvoiceValues]);
+
+	useEffect(() => {
+		const parseOptions = JSON.parse(bankOptions || []);
+		if (parseOptions?.length === 1) {
+			setValue('collection_party_bank_details', parseOptions?.[0]?.data?.bank_account_number);
+		}
+	}, [bankOptions, setValue]);
 
 	const handleModifiedOptions = ({ options }) => options.map((option) => ({
 		...option,
@@ -130,7 +137,11 @@ function CollectionPartyDetails({
 			setValue('collection_party', v);
 		}
 		setValue('collection_party_address', '');
-		setValue('collection_party_bank_details', '');
+		if (collectionPartyBankOptions?.length === 1) {
+			setValue('collection_party_bank_details', collectionPartyBankOptions?.[0]?.data?.bank_account_number);
+		} else {
+			setValue('collection_party_bank_details', '');
+		}
 	};
 
 	const renderLabel = (bank) => (
@@ -161,11 +172,11 @@ function CollectionPartyDetails({
 		},
 		{
 			label : 'PAN Number :',
-			value : `${collectionParty?.registration_number}`,
+			value : `${collectionParty?.registration_number || '-'}`,
 		},
 		{
 			label : 'GST Number :',
-			value : `${collectionPartyAddress?.tax_number}`,
+			value : `${collectionPartyAddress?.tax_number || '-'}`,
 		},
 	];
 
@@ -184,6 +195,7 @@ function CollectionPartyDetails({
 						handleChange={(v, obj) => { handleCollectionParty(v, obj); }}
 						value={collectionParty.registration_number || purchaseInvoiceValues?.collection_party}
 						params={PARAMS}
+						initialCall
 						rules={{ required: true }}
 					/>
 					{errors?.collection_party ? (

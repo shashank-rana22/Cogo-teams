@@ -1,7 +1,7 @@
 import { Placeholder } from '@cogoport/components';
 import { SelectController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import AccordianView from '../../../common/Accordianview';
 
@@ -36,8 +36,17 @@ function BillingPartyDetails({
 	}));
 
 	const bilingAddressGst = watch('billing_party_address');
+	const billingparty = watch('billing_party');
 	const address = billingParty?.addresses?.find((billingaddress) => (billingaddress.gst_number
 		=== (bilingAddressGst || purchaseInvoiceValues?.billing_party_address)));
+	const billingOptionsStringifiy = JSON.stringify(billingPartyaAdresses || []);
+
+	useEffect(() => {
+		const parseOptions = JSON.parse(billingOptionsStringifiy || '[]');
+		if (parseOptions?.length === 1) {
+			setValue('billing_party_address', parseOptions?.[0]?.gst_number);
+		}
+	}, [billingparty, setValue, billingOptionsStringifiy]);
 
 	return (
 		<AccordianView title="Billing Party Details" fullwidth showerror={errMszs?.billingPartyErr} open={open}>

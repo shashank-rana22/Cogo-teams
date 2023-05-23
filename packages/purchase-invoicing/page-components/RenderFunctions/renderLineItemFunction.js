@@ -66,6 +66,7 @@ export const renderLineItemFunctions = {
 				placeholder="Enter"
 				asyncKey="search_products_v2"
 				getModifiedOptions={handleModifiedOptions}
+				initialCall
 				params={{
 					organization_id         : extradata?.organization_id,
 					organization_billing_id : extradata?.organization_billing_id,

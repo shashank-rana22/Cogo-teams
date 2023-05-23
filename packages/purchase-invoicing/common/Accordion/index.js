@@ -24,9 +24,9 @@ function Accordion({
 
 				<div>
 					{active ? (
-						<IcMArrowRotateDown />
-					) : (
 						<IcMArrowRotateUp />
+					) : (
+						<IcMArrowRotateDown />
 					)}
 				</div>
 			</button>

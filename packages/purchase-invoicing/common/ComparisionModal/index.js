@@ -40,6 +40,7 @@ function ComparisionModal({
 
 	const closeModal = () => {
 		setOpenComparision(false);
+		setStep(1);
 		setErrMszs({});
 	};
 
