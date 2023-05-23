@@ -1,0 +1,10 @@
+.label {
+	font-size: 12px;
+	color: #4f4f4f;
+	transition: 0.3s ease-in-out;
+
+	&:hover {
+		transition: 0.3s ease-in-out;
+		transform: scale(1.1);
+	}
+}

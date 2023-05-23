@@ -53,6 +53,7 @@ import {
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
 	IcMFaq,
+	IcMRolesIncluded,
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
@@ -1375,6 +1376,15 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
+			{
+				key           : 'coe-so2_surface',
+				title         : 'SO2 Dashboard',
+				href          : '/v2/so2-surface',
+				as            : '/v2/so2-surface',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.so2_surface,
+			},
 		],
 	},
 	terms_and_conditions: {
@@ -2242,6 +2252,24 @@ const navigationMappingAdmin = {
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
+	},
+	referral: {
+		key         : 'referral',
+		title       : 'Referral',
+		isSubNavs   : true,
+		icon        : IcMRolesIncluded,
+		module_type : 'dashboards',
+		main_apis   : [],
+		options     : [
+			{
+				key           : 'referral-dashboard',
+				title         : 'Dashboard',
+				href          : '/v2/referral/dashboard',
+				as            : '/v2/referral/dashboard',
+				type          : 'link',
+				possible_apis : apis.referral_dashboard,
+			},
+		],
 	},
 	chakravyuh: {
 		key         : 'chakravyuh',

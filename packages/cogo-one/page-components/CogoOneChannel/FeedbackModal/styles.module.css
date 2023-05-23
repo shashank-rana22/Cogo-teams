@@ -1,0 +1,48 @@
+.search {
+	width: 30%;
+	margin-bottom: 10px;
+}
+
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.modal_body {
+	height: 464px;
+}
+
+.empty_state {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 100%;
+	font-size: 16px;
+	text-align: center;
+}
+
+.rating {
+	display: flex;
+	align-items: center;
+
+	:global {
+		svg {
+			width: 40px;
+			height: 40px;
+
+			path {
+				fill: #ffce75;
+			}
+		}
+	}
+}
+
+.rating_text {
+	margin-right: 10px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.feed_message {
+	margin-top: 20px;
+}
