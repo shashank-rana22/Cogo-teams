@@ -8,7 +8,7 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Layout({
-	control, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
+	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
 }) {
 	const totalFields = [];
 

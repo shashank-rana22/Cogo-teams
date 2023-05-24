@@ -8,17 +8,17 @@ import getAsyncFields from '../Item/getAsyncKeys';
 import styles from './styles.module.css';
 
 function Child({
-	controls,
-	control,
-	index,
-	name,
-	remove,
+	controls = [],
+	control = {},
+	index = '',
+	name = '',
+	remove = '',
 	showDeleteButton = true,
 	noDeleteButtonTill = 0,
-	field,
+	field = {},
 	disabled,
-	error,
-	formValues,
+	error = {},
+	formValues = {},
 }) {
 	let rowWiseFields = [];
 	const totalFields = [];
@@ -88,7 +88,7 @@ function Child({
 	return (
 		<div className={styles.fieldarray} key={field.id}>
 			<h3 className={styles.heading}>
-				Document
+				{name.toUpperCase()}
 				&nbsp;
 				{index + 1}
 			</h3>
