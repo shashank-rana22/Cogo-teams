@@ -10,8 +10,11 @@ import getCancelShipmentPayload from './getCancelShipmentPayload';
 import styles from './styles.module.css';
 
 const STAKEHOLDER_MAPPING = {
-	booking_desk         : 'service_ops1',
-	booking_desk_manager : 'service_ops1',
+	booking_desk          : 'service_ops1',
+	booking_desk_manager  : 'service_ops1',
+	document_desk         : 'service_ops2',
+	document_desk_manager : 'service_ops2',
+	so1_so2_ops           : ['service_ops1', 'service_ops2', 'lastmile_ops'],
 };
 
 export default function CancelShipment({ setShow }) {
