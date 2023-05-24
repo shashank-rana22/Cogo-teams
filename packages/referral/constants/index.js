@@ -57,3 +57,42 @@ export const NETWORK_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_partne
 export const NETWORK_LOADER = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif';
 
 export const USER_AVATAR = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp';
+
+export const USER_OPTIONS = [
+	{
+		label : 'CP',
+		value : 'cp',
+	},
+	{
+		label : 'IE',
+		value : 'ie',
+	},
+	{
+		label : 'Affilate',
+		value : 'affilate',
+	},
+];
+
+export const TABS_OPTIONS = [
+	{
+		label : 'Invited',
+		name  : 'invited',
+		badge : 3,
+	},
+	{
+		label : 'Signed Up',
+		name  : 'signed_up',
+		badge : 3,
+	},
+	{
+		label : 'Have KYC Registered Orgs',
+		name  : 'kyc_registered',
+		badge : 3,
+	},
+	{
+		label : 'Affiliates',
+		name  : 'affiliates',
+		badge : 3,
+	},
+
+];

@@ -8,6 +8,10 @@ const referral = {
 		layoutType : 'no_header',
 		navigation : 'referral-dashboard',
 	},
+	'/[partner_id]/referral/analytics/[analytics_id]': {
+		layoutType : 'no_header',
+		navigation : 'referral-analytics',
+	},
 
 };
 

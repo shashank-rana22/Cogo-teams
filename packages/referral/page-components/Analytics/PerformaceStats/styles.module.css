@@ -1,0 +1,38 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+
+	:global {
+		.ui_tab_container {
+			justify-content: space-between !important;
+		}
+	}
+}
+
+.left_container {
+	display: flex;
+	align-items: center;
+	width: 83%;
+}
+
+.tabs_container {
+	display: flex;
+	border-radius: 6px 0 6px 6px;
+
+	:global {
+		.ui_tab_container {
+			padding: 16px !important;
+		}
+	}
+}
+
+.graph_div {
+	display: flex;
+	width: 650px;
+	height: 200px;
+	margin-right: 16px;
+	background: #fff;
+	border-radius: 0 6px 6px 0;
+}

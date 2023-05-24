@@ -1,0 +1,13 @@
+.tooltip_content {
+	width: fit-content;
+}
+
+.user_name {
+	font-size: 13px;
+	font-weight: 700;
+}
+
+.node_container {
+	display: flex;
+	align-items: center;
+}

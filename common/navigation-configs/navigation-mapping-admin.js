@@ -2269,6 +2269,14 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				possible_apis : apis.referral_dashboard,
 			},
+			{
+				key           : 'referral-analytics',
+				title         : 'Analytics',
+				href          : '/v2/referral/analytics',
+				as            : '/v2/referral/analytics',
+				type          : 'link',
+				possible_apis : apis.referral_dashboard,
+			},
 		],
 	},
 	chakravyuh: {
