@@ -191,12 +191,12 @@ export default {
 		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
 		cogo_one_admin_ids    : [
-			'381b9d1d-e005-4cc0-9844-a5f1636e71b1',
-			'84dcd923-89cb-4bc6-baf7-7f23d93d6951',
-			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
+			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
+			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
+			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
 		],
 		cogo_one_shipment_agent_ids: [
-			'1b1c5648-ddf4-4472-b177-c11a53a505aa',
+			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
 		],
 	},
 	options: {

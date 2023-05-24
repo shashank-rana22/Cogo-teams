@@ -1,8 +1,12 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-const geo = getGeoConstants();
+const getViewTypeMapping = () => {
+	const geo = getGeoConstants();
 
-export const VIEW_MAPPING = {
-	admin_view    : geo.uuid.cogo_one_admin_ids,
-	shipment_view : geo.uuid.cogo_one_shipment_agent_ids,
+	return {
+		admin_view    : geo.uuid.cogo_one_admin_ids,
+		shipment_view : geo.uuid.cogo_one_shipment_agent_ids,
+	};
 };
+
+export default getViewTypeMapping;
