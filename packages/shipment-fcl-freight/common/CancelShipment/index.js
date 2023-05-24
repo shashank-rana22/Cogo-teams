@@ -30,7 +30,7 @@ export default function CancelShipment({ setShow }) {
 	const { shipment_data, activeStakeholder } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
 
-	let	stakeholder_type = useMemo(() => [activeStakeholder], [activeStakeholder]);
+	let stakeholder_type = useMemo(() => [activeStakeholder], [activeStakeholder]);
 
 	if (activeStakeholder in STAKEHOLDER_MAPPING) {
 		if (Array.isArray(STAKEHOLDER_MAPPING[activeStakeholder])) {
