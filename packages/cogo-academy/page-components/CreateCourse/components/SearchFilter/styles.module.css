@@ -33,5 +33,6 @@
 }
 
 .button_container {
+	display: flex;
 	margin-right: 20px;
 }

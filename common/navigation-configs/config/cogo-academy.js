@@ -53,6 +53,9 @@ const cogoAcademy = {
 	'/[partner_id]/learning/course/create': {
 		navigation: 'cogo_academy-course',
 	},
+	'/[partner_id]/learning/course/create-question': {
+		navigation: 'cogo_academy-course',
+	},
 };
 
 module.exports = cogoAcademy;
