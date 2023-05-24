@@ -1,7 +1,6 @@
 import { cl } from '@cogoport/components';
-import { IcMCross, IcMListView, IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
-import { format, isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
+import { format } from '@cogoport/utils';
 
 import { LOGO_URL } from '../../constants';
 import MessageBody from '../MessageBody';
