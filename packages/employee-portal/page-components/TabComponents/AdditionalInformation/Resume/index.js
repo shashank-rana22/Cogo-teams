@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 import useCreateEmployeeDocument from '../../../../hooks/useCreateEmployeeDocument';
@@ -14,7 +15,7 @@ const removeTypeField = (controlItem) => {
 };
 
 function Resume() {
-	const { handleSubmit, control, formState: { errors } } = useForm();
+	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
 	const component = 'resume';
 
@@ -23,6 +24,13 @@ function Resume() {
 	const { data: info } = useGetEmployeeDetails({});
 
 	const id = info?.detail?.id;
+
+	const { documents = [] } = info || {};
+	const resumeDoc = (documents || []).find((element) => (element?.document_type === 'resume'));
+
+	useEffect(() => {
+		setValue('resume', resumeDoc?.document_url);
+	}, [resumeDoc?.document_url, setValue]);
 
 	const onSubmit = (values) => {
 		const newDoc = [{

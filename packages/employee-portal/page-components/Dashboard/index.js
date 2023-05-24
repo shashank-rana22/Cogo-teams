@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function Dashboard() {
 	const [informationPage, setInformationPage] = useState('');
 
-	const { data } = useGetEmployeeDetails({});
+	const { data, getEmployeeDetails } = useGetEmployeeDetails({});
 	const { detail } = data || {};
 	const { name } = detail || {};
 
@@ -29,6 +29,7 @@ function Dashboard() {
 				data={data}
 				informationPage={informationPage}
 				setInformationPage={setInformationPage}
+				getEmployeeDetails={getEmployeeDetails}
 			/>
 		</div>
 	);

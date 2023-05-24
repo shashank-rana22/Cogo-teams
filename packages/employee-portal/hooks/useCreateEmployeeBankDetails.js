@@ -6,7 +6,7 @@ import { isEmpty } from '@cogoport/utils';
 function useCreateEmployeeBankDetails({ bank_details }) {
 	const api = isEmpty(bank_details) ? '/create_employee_bank_details' : '/update_employee_bank_details';
 
-	const { id :bankDetailId = '' } = bank_details || {};
+	const { id :bankDetailId = '' } = bank_details?.[0] || {};
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : api,

@@ -1,6 +1,8 @@
 import styles from './styles.module.css';
 
-function PersonalInformation({ detail }) {
+function PersonalInformation({ profileData }) {
+	const { detail } = profileData || {};
+
 	const {
 		name,
 		gender,
