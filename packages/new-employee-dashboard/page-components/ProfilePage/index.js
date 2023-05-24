@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import Header from './Header';
 import ProfileDetails from './ProfileDetails';
+import SignedDocuments from './SignedDocuments';
 import styles from './styles.module.css';
 import useProfileDetails from './useProfileDetails';
 
@@ -27,7 +28,7 @@ function ProfilePage() {
 					</TabPanel>
 
 					<TabPanel name="Signed_documents" title="Signed Documents">
-						<div>This is suggested</div>
+						<SignedDocuments profileData={profileData} loading={loading} />
 					</TabPanel>
 				</Tabs>
 			</div>

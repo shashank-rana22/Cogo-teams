@@ -10,12 +10,11 @@ import styles from './styles.module.css';
 
 function EducationalQualification() {
 	const { handleSubmit, control } = useForm();
-
-	const { createEmployeeDetails } = useCreateEmployeeDetails();
-
 	const { data: info } = useGetEmployeeDetails({});
 
 	const id = info?.detail?.id;
+
+	const { createEmployeeDetails } = useCreateEmployeeDetails({ id });
 
 	const onSubmit = (values) => {
 		createEmployeeDetails({ data: values, id });

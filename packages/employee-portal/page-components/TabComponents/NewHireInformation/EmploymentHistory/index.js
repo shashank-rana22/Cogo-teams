@@ -11,16 +11,10 @@ import styles from './styles.module.css';
 function EmploymentHistory() {
 	const { handleSubmit, control } = useForm();
 
-	const { createEmployeeDetails } = useCreateEmployeeDetails();
-
 	const { data: info } = useGetEmployeeDetails({});
 
 	const id = info?.detail?.id;
-
-	const onSubmit = (values) => {
-		createEmployeeDetails({ data: values, id });
-		console.log('values :: emphistory ', values);
-	};
+	const { createEmployeeDetails } = useCreateEmployeeDetails({ id });
 
 	return (
 		<>
@@ -51,7 +45,7 @@ function EmploymentHistory() {
 				size="md"
 				type="button"
 				className={styles.button}
-				onClick={handleSubmit(onSubmit)}
+				onClick={handleSubmit(createEmployeeDetails)}
 			>
 				Save
 			</Button>
