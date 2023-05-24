@@ -7,6 +7,7 @@ const SHOW_CANCELLATION_STAKEHOLDERS = [
 	'document_desk',
 	'document_desk_manager',
 	'costbooking_ops',
+	'so1_so2_ops',
 ];
 
 export default function getCanCancelService({ state, activeStakeholder }) {
