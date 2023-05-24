@@ -23,10 +23,9 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 
 	const id = info?.detail?.id;
 
-	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id });
+	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
 	const onSubmit = (values) => {
-		console.log(values, 'values');
 		updateEmployeeDetails({ data: values, formType: 'personal_info' });
 	};
 
