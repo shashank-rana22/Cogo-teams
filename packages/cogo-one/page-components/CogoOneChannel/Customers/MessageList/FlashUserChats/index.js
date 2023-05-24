@@ -1,5 +1,4 @@
 import { Carousel } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 
 import useClaimChat from '../../../../../hooks/useClaimChat';
 
@@ -13,10 +12,12 @@ function FlashUserChats({
 	setActiveMessage,
 	firestore,
 	flashMessagesLoading,
+	showCarousel,
+	setShowCarousel,
 }) {
-	const { claimChat, claimLoading = false } = useClaimChat({ userId });
+	const { claimChat, claimLoading = false } = useClaimChat({ userId, setShowCarousel, firestore });
 
-	const carouselData = getCarouselData({
+	const carouselData = showCarousel ? getCarouselData({
 		flashMessagesList,
 		activeCardId,
 		userId,
@@ -24,13 +25,11 @@ function FlashUserChats({
 		firestore,
 		claimChat,
 		claimLoading,
-	});
-
-	const isCarouselEmpty = isEmpty(carouselData);
+	}) : [];
 
 	return (
-		<div className={styles.flash_messages_div} style={{ '--height': isCarouselEmpty ? '0' : '16%' }}>
-			{!flashMessagesLoading && !isCarouselEmpty && (
+		<div className={styles.flash_messages_div} style={{ '--height': !showCarousel ? '0' : '16%' }}>
+			{!flashMessagesLoading && showCarousel && (
 				<Carousel
 					id="flash_messages"
 					size="sm"

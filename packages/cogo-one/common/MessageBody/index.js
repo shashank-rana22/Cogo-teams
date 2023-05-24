@@ -5,6 +5,7 @@ import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
 import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
 
 import CustomFileDiv from './CustomFileDiv';
+import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
 
 function MessageBody({ response = {}, message_type = 'text' }) {
@@ -104,12 +105,22 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 					<div className={styles.contact_name}>
 						{formatted_name}
 					</div>
-					{(phones || []).map(({ phone = '' }) => <div className={styles.mobile_no}>{phone}</div>)}
+					{(phones || []).map(({ phone = '' }) => (
+						<div
+							key={phone}
+							className={styles.mobile_no}
+						>
+							{phone}
+						</div>
+					))}
 				</div>
 			</div>
 		);
 	}
 
+	if (message_type === 'order') {
+		return <OrderDisplay message={message} />;
+	}
 	return <ShowMessage />;
 }
 

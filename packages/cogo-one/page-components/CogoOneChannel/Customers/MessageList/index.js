@@ -48,7 +48,7 @@ function MessageList(messageProps) {
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
-
+	const [showCarousel, setShowCarousel] = useState(false);
 	const handleCheckedChats = (item, id) => {
 		if (id in selectedAutoAssign) {
 			setSelectedAutoAssign((p) => {
@@ -63,14 +63,18 @@ function MessageList(messageProps) {
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	const isFlashMessagesEmpty = isEmpty(flashMessagesList) || false;
 
+	useEffect(() => {
+		setShowCarousel(!isFlashMessagesEmpty);
+	}, [isFlashMessagesEmpty]);
+
 	const getListHeightStyles = () => {
-		if (showBotMessages && isomniChannelAdmin && isFlashMessagesEmpty) {
+		if (showBotMessages && isomniChannelAdmin && !showCarousel) {
 			return 'bot_list_container_empty_flash';
 		}
 		if (showBotMessages && isomniChannelAdmin) {
 			return 'bot_list_container';
 		}
-		if (isFlashMessagesEmpty) {
+		if (!showCarousel) {
 			return 'list_container_empty_flash';
 		}
 		return 'list_container_height';
@@ -101,6 +105,8 @@ function MessageList(messageProps) {
 				setActiveMessage={setActiveMessage}
 				firestore={firestore}
 				flashMessagesLoading={flashMessagesLoading}
+				showCarousel={showCarousel}
+				setShowCarousel={setShowCarousel}
 			/>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>

@@ -1,8 +1,39 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import {
+	updateDoc,
+	doc,
+	collectionGroup,
+	query,
+	where,
+	orderBy,
+	getDocs,
+} from 'firebase/firestore';
 
-function useClaimChat({ userId }) {
+import { FIRESTORE_PATH } from '../configurations/firebase-config';
+
+const updateCLaimKey = async ({ id, channel_type, firestore, value }) => {
+	const userDocument = doc(
+		firestore,
+		`${FIRESTORE_PATH[channel_type]}/${id}`,
+	);
+	await updateDoc(userDocument, { can_claim_chat: value });
+};
+
+const toggleCarouselState = async (firestore, setShowCarousel) => {
+	const omniChannelCollection = collectionGroup(firestore, 'rooms');
+	const newChatsQuery = query(
+		omniChannelCollection,
+		where('session_type', '==', 'bot'),
+		where('can_claim_chat', '==', true),
+		orderBy('updated_at', 'desc'),
+	);
+	const getFlashMessages = await getDocs(newChatsQuery);
+	setShowCarousel(!!getFlashMessages?.size);
+};
+
+function useClaimChat({ userId, setShowCarousel, firestore }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/assign_chat',
 		method : 'post',
@@ -11,6 +42,9 @@ function useClaimChat({ userId }) {
 	const claimChat = async (payload) => {
 		const { user_id, lead_user_id, organization_id, mobile_no, sender = null, channel_type, id } = payload || {};
 		try {
+			setShowCarousel(false);
+			await updateCLaimKey({ id, channel_type, firestore, value: false });
+			Toast.info('Request processing. You will be notified when it\'s completed.');
 			await trigger({
 				data: {
 					channel                 : channel_type,
@@ -23,8 +57,14 @@ function useClaimChat({ userId }) {
 					agent_id                : userId,
 				},
 			});
+			Toast.success('Claim successful! The chat has been assigned to you.');
+			setTimeout(() => {
+				toggleCarouselState(firestore, setShowCarousel);
+			}, 10000);
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			await updateCLaimKey({ id, channel_type, firestore, value: true });
+			setShowCarousel(true);
+			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
 		}
 	};
 	return {
