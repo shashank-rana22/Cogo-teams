@@ -25,8 +25,13 @@ function Resume() {
 	const id = info?.detail?.id;
 
 	const onSubmit = (values) => {
-		console.log(values, 'values::resume');
-		createEmployeeDocument({ data: values, id });
+		const newDoc = [{
+			document_type : 'resume',
+			document_url  : values?.resume?.finalUrl || undefined,
+			status        : 'active',
+		}];
+
+		createEmployeeDocument({ data: values, id, newDoc });
 	};
 	return (
 		<div className={styles.whole_container}>
