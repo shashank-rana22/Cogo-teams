@@ -2,14 +2,13 @@ import { Accordion } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React from 'react';
 
-import EducationalQualification from '../AdditionalInformation/EducationalQualification';
-
+import IdentificationDocuments from './IdentificationDocuments';
 import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
 
 const content_mapping = [
 	{ title: 'PERSONAL INFORMATION', content: PersonalInformation },
-	{ title: 'EDUCATIONAL QUALIFICATION', content: EducationalQualification },
+	{ title: 'IDENTIFICATION DOCUMENTS', content: IdentificationDocuments },
 
 ];
 

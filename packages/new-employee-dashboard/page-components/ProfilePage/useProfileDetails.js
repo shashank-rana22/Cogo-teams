@@ -1,7 +1,7 @@
 import { useHarbourRequest } from '@cogoport/request';
 
 const useProfileDetails = () => {
-	const id = 'ebaac56c-5cbd-4269-8546-5396363cad4c';
+	const id = '85cdcf6b-bd52-4fea-b136-12e377c48ecc';
 
 	const [{ loading, data }] = useHarbourRequest({
 		method : 'GET',

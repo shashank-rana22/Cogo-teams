@@ -1,8 +1,7 @@
 import { Accordion } from '@cogoport/components';
 
-import IdentificationDocuments from '../ProfileDetails/IdentificationDocuments';
-
 import BankDetails from './BankDetails';
+import EducationalQualifications from './EducationalQualifications';
 import EmploymentHistory from './EmploymentHistory';
 import Resume from './Resume';
 import styles from './styles.module.css';
@@ -10,7 +9,7 @@ import styles from './styles.module.css';
 function AdditionalDetails({ profileData }) {
 	const data = [
 		{ title: 'EMPLOYMENT HISTORY', content: EmploymentHistory },
-		{ title: 'IDENTIFICATION DOCUMENTS', content: IdentificationDocuments },
+		{ title: 'EDUCATIONAL QUALIFICATION', content: EducationalQualifications },
 		{ title: 'RESUME', content: Resume },
 		{ title: 'BANK DETAILS', content: BankDetails }];
 

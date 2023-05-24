@@ -1,16 +1,15 @@
 import { Accordion } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
-import IdentificationDocuments from '../NewHireInformation/IdentificationDocuments';
-
 import BankDetails from './BankDetails';
+import EducationalQualification from './EducationalQualification';
 import EmploymentHistory from './EmploymentHistory';
 import Resume from './Resume';
 import styles from './styles.module.css';
 
 const content_mapping = [
 	{ title: 'EMPLOYMENT HISTORY', content: EmploymentHistory },
-	{ title: 'IDENTIFICATION DOCUMENTS', content: IdentificationDocuments },
+	{ title: 'EDUCATIONAL QUALIFICATION', content: EducationalQualification },
 	{ title: 'RESUME', content: Resume },
 	{ title: 'BANK DETAILS', content: BankDetails },
 ];
