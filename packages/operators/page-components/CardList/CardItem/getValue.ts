@@ -29,7 +29,7 @@ const getValue = (itemData:any, itemField:FieldType, functions:FunctionObjects, 
 			val = ACTIONS[itemField.func as keyof typeof ACTIONS](val as string);
 		}
 	}
-	return val === null || val === undefined ? null : val;
+	return val || '-';
 };
 
 export default getValue;

@@ -69,13 +69,11 @@ function CardList({
 					initialLoad={false}
 					loadMore={loadMore}
 					hasMore={page < Math.ceil(totalCount / 10)}
-					loader={
-                        !loading ? (
-	<div className={styles.loading_style}>
-		<Loader />
-	</div>
-                        ) : null
-                    }
+					loader={!loading ? (
+						<div className={styles.loading_style}>
+							<Loader />
+						</div>
+					) : null}
 					useWindow={false}
 					threshold={600}
 				>
