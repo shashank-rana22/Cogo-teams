@@ -33,7 +33,6 @@ function EducationalQualification() {
 								control={control}
 								controls={controlItem?.controls}
 								key={controlName}
-
 							/>
 
 						);
