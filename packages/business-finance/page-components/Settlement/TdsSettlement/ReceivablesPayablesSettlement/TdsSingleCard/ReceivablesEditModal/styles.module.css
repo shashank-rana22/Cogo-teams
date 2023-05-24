@@ -1,0 +1,25 @@
+.header {
+	font-size: 18px;
+	font-weight: 600;
+	line-height: 27px;
+}
+
+.main {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	margin-top: 20px;
+	border: 1px solid #f68b21;
+	border-radius: 8px;
+}
+
+.text {
+	font-size: 12px;
+	font-weight: 600;
+	line-height: 20px;
+	letter-spacing: 0.02em;
+}
+
+.values {
+	color: #f68b21;
+}

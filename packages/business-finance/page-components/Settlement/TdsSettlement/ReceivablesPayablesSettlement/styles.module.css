@@ -1,0 +1,20 @@
+.main_div {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.div_style {
+	width: 60%;
+}
+
+.div_search {
+	display: flex;
+	justify-content: space-between;
+	width: 35%;
+}
+
+/* .edit_icon_style = styled(IcMEdit)`
+	margin: -5px 8px;
+	cursor: pointer;
+`; */
