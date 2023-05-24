@@ -19,7 +19,7 @@ const labels = [
 	'payment_term',
 ];
 
-function RenderCargoPills({ detail }) {
+function RenderCargoPills({ detail = {} }) {
 	return (
 		<>
 			{labels.map((label) => {

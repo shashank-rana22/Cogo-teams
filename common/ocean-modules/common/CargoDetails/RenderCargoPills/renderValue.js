@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || {};
+	const keysForPackages = Array(packages.length).fill(null).map(() => Math.random());
 
 	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
 
@@ -31,12 +32,12 @@ export const renderValue = (label, detail) => {
 					theme="light"
 					content={(
 						<div style={{ fontSize: '10px' }}>
-							{(packages || []).map((item) => {
+							{(packages || []).map((item, i) => {
 								const values = item
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div>{values}</div>;
+								return <div key={keysForPackages[i]}>{values}</div>;
 							})}
 						</div>
 					)}
@@ -71,20 +72,24 @@ export const renderValue = (label, detail) => {
 		</div>
 	);
 
-	const formatCertificate = (certificates) => (
-		<div className={styles.certificate_container}>
-			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer">
-					Click to view certificate
+	const formatCertificate = (certificates) => {
+		const keys = Array(certificates.length).fill(null).map(() => Math.random());
+
+		return (
+			<div className={styles.certificate_container}>
+				{(certificates || []).map((item, i) => (
+					<a href={item} target="_blank" rel="noreferrer" key={keys[i]}>
+						Click to view certificate
+						&nbsp;
+						{i + 1}
 					&nbsp;
-					{key + 1}
-					&nbsp;
-					<IcMOpenlink />
-					<br />
-				</a>
-			))}
-		</div>
-	);
+						<IcMOpenlink />
+						<br />
+					</a>
+				))}
+			</div>
+		);
+	};
 
 	switch (label) {
 		case 'container_size':

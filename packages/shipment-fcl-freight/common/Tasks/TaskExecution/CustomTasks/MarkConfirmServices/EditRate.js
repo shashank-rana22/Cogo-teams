@@ -1,7 +1,7 @@
 import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import FormLayout from '@cogoport/ocean-modules';
 
-import FormLayout from '../../helpers/Layout';
 import getDefaultValues from '../../utils/get-default-values';
 import Step3 from '../UploadBookingNote/components/Step3';
 import useGetStep3Data from '../UploadBookingNote/helpers/useGetStep3Data';
