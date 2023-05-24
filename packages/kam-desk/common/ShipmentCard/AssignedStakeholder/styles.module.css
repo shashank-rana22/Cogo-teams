@@ -4,3 +4,16 @@
 	font-weight: 600;
 	color: var(--color-secondary-greyscale-3);
 }
+
+.container {
+	display: flex;
+}
+
+
+.additional_stakeholder {
+	padding: 2px 4px;
+	margin-left: 4px;
+	font-size: 10px;
+	background-color: aliceblue;
+	border-radius: 2px;
+}
