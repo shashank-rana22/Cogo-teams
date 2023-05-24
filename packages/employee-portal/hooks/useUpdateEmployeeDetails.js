@@ -35,18 +35,24 @@ function useUpdateEmployeeDetails({ id }) {
 				hiring_manager_email : data?.hiring_manager_email,
 			};
 		} else if (formType === 'educational_qualification') {
-			console.log(data?.education_qualifications, 'qualify');
 			payload = {
-				employee_education_details: data?.education_qualifications,
+				employee_education_details: data?.education_qualifications.map((item) => ({
+					...item,
+					started_at : String(item.started_at),
+					ended_at   : String(item.ended_at),
+				})),
 			};
 		} else {
 			payload = {
-				employee_experience_details: data?.employment_history,
+				employee_experience_details: data?.employment_history.map((item) => ({
+					...item,
+					started_at : String(item.started_at),
+					ended_at   : String(item.ended_at),
+				})),
 			};
 		}
 
 		try {
-			console.log(data, 'data');
 			await trigger({
 				data: {
 					id,

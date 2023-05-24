@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import FieldArray from '../../../../commons/FieldArray';
 import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
@@ -9,7 +10,7 @@ import controls from './controls';
 import styles from './styles.module.css';
 
 function EducationalQualification() {
-	const { handleSubmit, control } = useForm();
+	const { handleSubmit, control, setValue } = useForm();
 	const { data: info } = useGetEmployeeDetails({});
 
 	const id = info?.detail?.id;
@@ -17,9 +18,16 @@ function EducationalQualification() {
 	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id });
 
 	const onSubmit = (values) => {
-		console.log(values, 'eduqual');
 		updateEmployeeDetails({ data: values, formType: 'educational_qualification' });
 	};
+
+	useEffect(() => {
+		setValue('education_qualifications', info?.detail?.employee_education_details.map((item) => ({
+			...item,
+			started_at : new Date(item.started_at),
+			ended_at   : new Date(item.ended_at),
+		})));
+	}, [info, setValue]);
 
 	return (
 		<div className={styles.whole_container}>
