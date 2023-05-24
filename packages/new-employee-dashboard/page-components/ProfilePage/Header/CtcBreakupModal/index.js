@@ -43,12 +43,20 @@ export default function CtcBreakupModal({
       <Modal.Footer>
         <div className={styles.popover_container}>
           <Popover
-            // className={styles.popover}
             placement="top"
             trigger="click"
             caret={false}
             visible={visible}
-            render={<SubmitSection setVisible={setVisible} formProps={formProps}/>}
+            render={
+              <SubmitSection
+                initialQuestion={initialQuestion}
+                ctcStructure={ctcStructure}
+                setVisible={setVisible}
+                formProps={formProps}
+                setShowCtcBreakupModal={setShowCtcBreakupModal}
+                setInitialQuestion={setInitialQuestion}
+              />
+            }
           >
             <Button onClick={onCheck}>Submit</Button>
           </Popover>
