@@ -19,15 +19,11 @@ function PersonalInformation({ data:content }) {
 
 	const controlsvalue = controls({ content });
 
-	const { createEmployeeDetails } = useCreateEmployeeDetails();
-
 	const { data: info } = useGetEmployeeDetails({});
 
 	const id = info?.detail?.id;
 
-	const onSubmit = (values) => {
-		createEmployeeDetails({ data: values, id });
-	};
+	const { createEmployeeDetails } = useCreateEmployeeDetails({ id });
 
 	useEffect(() => {
 		const mapping = {
@@ -86,7 +82,7 @@ function PersonalInformation({ data:content }) {
 				type="button"
 				className={styles.button}
 				onClick={
-						handleSubmit(onSubmit)
+						handleSubmit(createEmployeeDetails)
 					}
 			>
 				Save

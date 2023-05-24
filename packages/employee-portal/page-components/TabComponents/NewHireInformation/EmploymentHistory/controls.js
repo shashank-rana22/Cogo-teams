@@ -16,22 +16,24 @@ const getControls = [{
 			placeholder : 'Description',
 		},
 		{
-			name        : 'started_at',
-			label       : 'Start Date',
-			type        : 'date-select',
-			placeholder : 'DD/MM/YYYY',
-			rules       : { required: 'This is required' },
-			style       : {
+			name                  : 'started_at',
+			label                 : 'Start Date',
+			type                  : 'date-select',
+			placeholder           : 'DD/MM/YYYY',
+			isPreviousDaysAllowed : true,
+			rules                 : { required: 'This is required' },
+			style                 : {
 				width: '70%',
 			},
 		},
 		{
-			name        : 'ended_at',
-			label       : 'End Date',
-			type        : 'date-select',
-			placeholder : 'DD/MM/YYYY',
-			rules       : { required: 'This is required' },
-			style       : {
+			name                  : 'ended_at',
+			label                 : 'End Date',
+			type                  : 'date-select',
+			placeholder           : 'DD/MM/YYYY',
+			isPreviousDaysAllowed : true,
+			rules                 : { required: 'This is required' },
+			style                 : {
 				width: '70%',
 			},
 		},

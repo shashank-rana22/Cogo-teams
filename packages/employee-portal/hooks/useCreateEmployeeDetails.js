@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-function useCreateEmployeeDetails() {
+function useCreateEmployeeDetails({ id }) {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/create_employee_detail',
 		method : 'POST',
@@ -12,10 +12,12 @@ function useCreateEmployeeDetails() {
 		try {
 			await trigger({
 				data: {
-					employee_detail_id : data?.id,
-					document_type      : data?.document_type,
+					employee_detail_id : id,
 					document_url       : data?.document_url,
 					status             : data?.status || 'active',
+					performed_by_id    : '5674cb',
+					performed_by_type  : '2314fb',
+
 				},
 			});
 		} catch (err) {
