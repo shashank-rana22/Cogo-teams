@@ -9,16 +9,14 @@ function useCreateEmployeeDocument({ component }) {
 	}, { manual: true });
 
 	const createEmployeeDocument = async ({ id, newDoc }) => {
+		const payload = {
+			documents          : [...newDoc],
+			employee_detail_id : id,
+			performed_by_id    : '5674cb',
+			performed_by_type  : '2314fb',
+		};
+
 		try {
-			const payload = {
-				documents          : [...newDoc],
-				employee_detail_id : id,
-				performed_by_id    : '5674cb',
-				performed_by_type  : '2314fb',
-			};
-
-			console.log('payload::', newDoc);
-
 			await trigger({
 				data: payload,
 			});
