@@ -6,7 +6,7 @@ function useCreateEmployeeDetails({ id }) {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/create_employee_detail',
 		method : 'POST',
-	}, { manual: false });
+	}, { manual: true });
 
 	const createEmployeeDetails = async ({ data }) => {
 		try {

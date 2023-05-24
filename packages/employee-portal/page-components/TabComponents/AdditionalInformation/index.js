@@ -1,23 +1,21 @@
 import { Accordion } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import React from 'react';
 
-import BankDetails from '../AdditionalInformation/BankDetails';
-import EducationalQualification from '../AdditionalInformation/EducationalQualification';
-import EmploymentHistory from '../AdditionalInformation/EmploymentHistory';
-import Resume from '../AdditionalInformation/Resume';
+import IdentificationDocuments from '../NewHireInformation/IdentificationDocuments';
 
-import IdentificationDocuments from './IdentificationDocuments';
-import PersonalInformation from './PersonalInformation';
+import BankDetails from './BankDetails';
+import EmploymentHistory from './EmploymentHistory';
+import Resume from './Resume';
 import styles from './styles.module.css';
 
 const content_mapping = [
-	{ title: 'PERSONAL INFORMATION', content: PersonalInformation },
-	{ title: 'EDUCATIONAL QUALIFICATION', content: EducationalQualification },
-
+	{ title: 'EMPLOYMENT HISTORY', content: EmploymentHistory },
+	{ title: 'IDENTIFICATION DOCUMENTS', content: IdentificationDocuments },
+	{ title: 'RESUME', content: Resume },
+	{ title: 'BANK DETAILS', content: BankDetails },
 ];
 
-function NewHireInformation({ setInformationPage, id, data }) {
+function AdditionalInformation({ setInformationPage, data }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -28,7 +26,7 @@ function NewHireInformation({ setInformationPage, id, data }) {
 					height={20}
 					onClick={() => setInformationPage('')}
 				/>
-				<div className={styles.title}>NEW HIRE INFORMATION</div>
+				<div className={styles.title}>Additional Information</div>
 			</div>
 			<div className={styles.subcontainer}>
 
@@ -46,7 +44,7 @@ function NewHireInformation({ setInformationPage, id, data }) {
 								title={item.title}
 								animate
 							>
-								<Component id={id} data={data} />
+								<Component data={data} />
 							</Accordion>
 						</div>
 					);
@@ -57,4 +55,4 @@ function NewHireInformation({ setInformationPage, id, data }) {
 	);
 }
 
-export default NewHireInformation;
+export default AdditionalInformation;
