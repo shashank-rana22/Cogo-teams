@@ -290,7 +290,12 @@ function GenerateMAWB({
 	}, [airportList]);
 
 	useEffect(() => {
-		setValue('accountingInformation', formValues.paymentTerm === 'prepaid' ? 'FREIGHT PREPAID' : 'FREIGHT COLLECT');
+		if (!viewDoc && !edit) {
+			setValue(
+				'accountingInformation',
+				formValues.paymentTerm === 'prepaid' ? 'FREIGHT PREPAID' : 'FREIGHT COLLECT',
+			);
+		}
 	}, [formValues.paymentTerm]);
 
 	useEffect(() => {
