@@ -1,0 +1,15 @@
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.header_text {
+	margin-left: 8px;
+	font-size: 28px;
+	font-weight: 600;
+}
+
+.view_type {
+	position: relative;
+}

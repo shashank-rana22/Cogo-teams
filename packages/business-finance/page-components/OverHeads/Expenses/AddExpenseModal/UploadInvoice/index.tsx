@@ -1,8 +1,9 @@
 import { Datepicker, Input, Select, Button } from '@cogoport/components';
+import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
+import { IcMRefresh } from '@cogoport/icons-react';
 import React, { useEffect } from 'react';
 
 import Filter from '../../../../commons/Filters';
-import { CURRENCY_OPTIONS } from '../../../constants/CURRENCY_OPTIONS';
 import { recurringUploadInvoice } from '../../../Controls/recurringUploadInvoice';
 import LineItemsForm from '../../LineItemsForm';
 
@@ -32,14 +33,14 @@ function UploadInvoice({
 }:Props) {
 	const {
 		uploadedInvoice:uploadUrl, invoiceCurrency,
-		invoiceNumber, invoiceDate, uploadedInvoice, lineItemsList,
+		invoiceNumber, invoiceDate, lineItemsList = [],
 	} = formData || {};
 
 	const isLineItemPresent = lineItemsList?.[0]?.payable_amount;
 
 	useEffect(() => {
 		// validations to ensure data is filled before going to next page
-		if (invoiceCurrency && invoiceNumber && invoiceDate && uploadedInvoice && isLineItemPresent) {
+		if (invoiceCurrency && invoiceNumber && invoiceDate && uploadUrl && isLineItemPresent) {
 			setIsFormValidated(true);
 		} else {
 			setIsFormValidated(false);
@@ -47,7 +48,7 @@ function UploadInvoice({
 	}, [invoiceCurrency,
 		invoiceNumber,
 		invoiceDate,
-		uploadedInvoice,
+		uploadUrl,
 		isLineItemPresent,
 		setIsFormValidated]);
 
@@ -59,7 +60,7 @@ function UploadInvoice({
 						value={invoiceCurrency}
 						onChange={(val:string) => setFormData({ ...formData, invoiceCurrency: val })}
 						placeholder="Currency*"
-						options={CURRENCY_OPTIONS}
+						options={getCurrencyOptions()}
 						size="sm"
 
 					/>
@@ -95,31 +96,52 @@ function UploadInvoice({
 			<div className={styles.container}>
 				<div className={styles.upload_invoice}>
 					{!isUploadConfirm ? (
-						<>
-							<Filter
-								controls={recurringUploadInvoice()}
-								filters={formData}
-								setFilters={setFormData}
-							/>
-							{uploadUrl &&	(
-								<div className={styles.confirm}>
-									<Button
-										onClick={() => setIsUploadConfirm(true)}
-									>
-										Confirm
-									</Button>
-									<div>&nbsp;(Please Confirm to view the uploaded invoice)</div>
+						<div>
+							{!uploadUrl ? (
+								<Filter
+									controls={recurringUploadInvoice()}
+									filters={formData}
+									setFilters={setFormData}
+								/>
+							) : (
+								<div style={{ margin: '8px' }}>
+									<object
+										data={uploadUrl}
+										type="application/pdf"
+										height="450px"
+										width="100%"
+										aria-label="Document"
+									/>
+									<div className={styles.confirm}>
+										<Button
+											onClick={() => {
+												setFormData((p) => ({ ...p, uploadedInvoice: null }));
+												setIsUploadConfirm(false);
+											}}
+											style={{ marginRight: '20px' }}
+											themeType="secondary"
+										>
+											Reset
+											&nbsp;
+											<IcMRefresh />
+										</Button>
+										<Button
+											onClick={() => setIsUploadConfirm(true)}
+										>
+											Confirm
+										</Button>
+									</div>
 								</div>
 							)}
-						</>
+						</div>
 					)
 						: (
 							<div>
-								<div style={{ margin: '4px 20px 8px 20px' }}>
+								<div style={{ margin: '8px' }}>
 									<object
-										data={uploadedInvoice}
+										data={uploadUrl}
 										type="application/pdf"
-										height="400px"
+										height="500px"
 										width="100%"
 										aria-label="Document"
 									/>

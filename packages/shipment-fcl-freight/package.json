@@ -15,12 +15,15 @@
     "@cogoport/next": "workspace:^0.1.0",
     "@cogoport/ocean-modules": "workspace:^0.1.0",
     "@cogoport/request": "workspace:^0.1.0",
+    "@cogoport/scope-select": "workspace:^0.1.0",
     "@cogoport/shipment-chat": "workspace:^0.1.0",
     "@cogoport/shipment-mails": "workspace:^0.1.0",
     "@cogoport/store": "workspace:^0.1.0",
     "@cogoport/utils": "^1.2.6",
     "file-saver": "^2.0.5",
     "prop-types": "^15.8.1",
-    "react": "18.2.0"
+    "react": "18.2.0",
+    "react-hook-form": "^7.43.3",
+    "uuid": "^9.0.0"
   }
 }

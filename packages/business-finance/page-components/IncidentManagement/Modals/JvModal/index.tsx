@@ -125,6 +125,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
 									}}
@@ -136,6 +137,7 @@ function JvModal({ journalVoucherRequest, id, refetch, isEditable = true, row })
 									size="md"
 									style={{ marginRight: '8px' }}
 									disabled={!(remark.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');
 									}}

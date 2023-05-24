@@ -57,7 +57,7 @@ function StatsOutstanding({ item }) {
 								{invoiceObject.name}
 								{' '}
 							</div>
-							<div className={styles.amount} style={{ fontWeight: 500, fontSize: '12px' }}>
+							<div className={styles.amount_open}>
 								{getFormattedPrice(
 									invoiceObject.LedgerAmount?.ledgerAmount || 0,
 									invoiceObject.LedgerAmount?.ledgerCurrency || keyValue[entityCode],
@@ -87,11 +87,6 @@ function StatsOutstanding({ item }) {
 									</div>
 									<div
 										className={styles.amount}
-										style={{
-											color      : val.textColor,
-											fontWeight : 500,
-											fontSize   : '12px',
-										}}
 									>
 										{getFormattedPrice(
 											invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount || 0,
@@ -116,11 +111,6 @@ function StatsOutstanding({ item }) {
 					<div className={styles.label}>Total Outstanding</div>
 					<div
 						className={styles.amount}
-						style={{
-							color      : '#cb6464',
-							fontWeight : 500,
-							fontSize   : '12px',
-						}}
 					>
 						{getFormattedPrice(
 							totalOutstanding.ledgerAmount || 0,

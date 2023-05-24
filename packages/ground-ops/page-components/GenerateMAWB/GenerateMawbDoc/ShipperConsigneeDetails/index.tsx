@@ -13,11 +13,12 @@ interface Props {
 	activeCategory?: string;
 	edit?: boolean | string;
 	viewDoc?: boolean;
+	activeHawb?: NestedObj;
 }
 
 function ShipperConsigneeDetails({
 	formData = {}, taskItem = {}, whiteout = false,
-	activeCategory = '', edit, viewDoc = false,
+	activeCategory = '', edit, viewDoc = false, activeHawb = {},
 }:Props) {
 	let tempColor = '#333';
 	if (whiteout) {
@@ -25,6 +26,8 @@ function ShipperConsigneeDetails({
 	}
 
 	const { awbNumber = '', document_number:documentNo = '', documentType = '' } = taskItem;
+
+	const hawbNumber = activeHawb.isNew && !viewDoc ? formData?.document_number || '' : documentNo;
 
 	const docType = documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
 	const awbType = edit || viewDoc ? docType : activeCategory;
@@ -50,7 +53,7 @@ function ShipperConsigneeDetails({
 						style={{ '--temp-color': tempColor } as React.CSSProperties}
 					>
 						<p style={{ fontSize: 18 }}>
-							{awbNumber.substring(0, 3)}
+							{awbNumber ? awbNumber.substring(0, 3) : documentNo.substring(0, 3)}
 						</p>
 					</div>
 					<div
@@ -70,7 +73,7 @@ function ShipperConsigneeDetails({
 					`}
 					>
 						<p style={{ fontSize: 18 }}>
-							{awbNumber.substring(4, 13)}
+							{awbNumber ? awbNumber.substring(4, 13) : documentNo.substring(4, 13)}
 						</p>
 					</div>
 				</div>
@@ -80,7 +83,7 @@ function ShipperConsigneeDetails({
 					${styles.mawb_bill_number} 
 				`}
 				>
-					<p style={{ fontSize: 18 }}>{awbType === 'mawb' ? awbNumber : documentNo}</p>
+					<p style={{ fontSize: 18 }}>{awbType === 'mawb' ? awbNumber || documentNo : hawbNumber}</p>
 				</div>
 			</div>
 			<div className={styles.flex} style={{ minHeight: 140 }}>

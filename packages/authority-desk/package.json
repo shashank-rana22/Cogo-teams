@@ -1,0 +1,19 @@
+{
+  "name": "@cogoport/authority-desk",
+  "version": "0.1.0",
+  "description": "Package for Document Control of every service",
+  "main": "index.js",
+  "dependencies": {
+    "@cogoport/components": "^1.0.410",
+    "@cogoport/forms": "workspace:^0.1.0",
+    "@cogoport/globalization": "workspace:^0.0.1",
+    "@cogoport/icons-react": "^1.0.68",
+    "@cogoport/next": "workspace:^0.1.0",
+    "@cogoport/ocean-modules": "workspace:^0.1.0",
+    "@cogoport/request": "workspace:^0.1.0",
+    "@cogoport/scope-select": "workspace:^0.1.0",
+    "@cogoport/store": "workspace:^0.1.0",
+    "@cogoport/utils": "^1.2.10",
+    "react": "18.2.0"
+  }
+}

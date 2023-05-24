@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useCreateShipmentOperatingInstruction = ({
 	procedure_id = '',
@@ -17,13 +17,13 @@ const useCreateShipmentOperatingInstruction = ({
 
 	const apiTrigger = async (val) => {
 		try {
-			const res = await trigger({ params: { procedure_id, shipment_id, organization_id, ...val } });
+			const res = await trigger({ data: { procedure_id, shipment_id, organization_id, ...val } });
 			if (!res.hasError) {
 				Toast.success(successMessage);
 				refetch();
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 

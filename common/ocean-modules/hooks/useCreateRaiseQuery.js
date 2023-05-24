@@ -1,9 +1,8 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 function useCreateRaiseQuery({
 	handleRaisedQuery = () => {},
@@ -38,7 +37,7 @@ function useCreateRaiseQuery({
 					handleRaisedQuery();
 				}
 			} catch (e) {
-				Toast.error(getApiErrorString(e));
+				toastApiError(e);
 			}
 		})();
 	}, [queryType, remarks, userId, shipmentId, trigger, handleRaisedQuery]);

@@ -123,11 +123,9 @@ function RevenueBifurcation({
 			[key]: !previousActions[key],
 		}));
 	};
-	const getStatus = (key) => {
-		if (!OceanSum || !AirSum || !SurfaceSum || !RailSum ||	!OceanSumValue
-			|| !SurfaceSumValue
-			|| !RailSumValue
-			|| !AirSumValue) {
+	const getStatus = (key = '') => {
+		if (!OceanSum || !AirSum || !SurfaceSum || !RailSum
+			|| !OceanSumValue || !SurfaceSumValue || !RailSumValue || !AirSumValue) {
 			return Toast.error('All Values Are Equal To Total ');
 		}
 		return setEdit((previousActions) => ({

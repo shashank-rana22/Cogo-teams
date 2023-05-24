@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+import LoadingState from '../../../commons/LoadingState';
+
 import Courses from './Courses';
 import LastTestResults from './LastTestResults';
 import Overview from './Overview';
@@ -13,7 +15,7 @@ function LeftSection() {
 		user: profile.user,
 	}));
 
-	const [{ data }] = useRequest({
+	const [{ data, loading }] = useRequest({
 		method : 'GET',
 		url    : '/get_user_performance',
 		params : {
@@ -25,15 +27,23 @@ function LeftSection() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.user_name}>
-				Hi,
-				{' '}
-				{name}
-			</div>
+			{!loading ? (
+				<>
+					<div className={styles.user_name}>
+						Hi,
+						{' '}
+						{name}
+					</div>
 
-			<LastTestResults data={usePerformanceData} />
+					<LastTestResults data={usePerformanceData} />
 
-			<Overview data={usePerformanceData} />
+					<Overview data={usePerformanceData} />
+				</>
+			) : (
+				<div style={{ marginBottom: '44px' }}>
+					<LoadingState rowsCount={2} />
+				</div>
+			)}
 
 			<Courses />
 		</div>

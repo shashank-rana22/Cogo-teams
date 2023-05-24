@@ -23,23 +23,6 @@
 	}
 }
 
-.name {
-	max-width: 410px;
-	overflow: hidden;
-	font-size: 16px;
-	line-height: 24px;
-	color: #4f4f4f;
-	text-align: left;
-	text-overflow: ellipsis;
-	white-space: nowrap;
-}
-
-.phone_number {
-	font-size: 12px;
-	color: #828282;
-	text-align: left;
-}
-
 .tags {
 	padding: 5px;
 	margin: 0 5px;
@@ -79,20 +62,6 @@
 	margin-right: 30px;
 }
 
-.disabled_button {
-	:global {
-		.ui_button_container {
-			&:hover {
-				border: none !important;
-			}
-
-			&:disabled {
-				border: none !important;
-			}
-		}
-	}
-}
-
 .button_container {
 	display: flex;
 	flex-direction: column;
@@ -118,9 +87,14 @@
 	width: 30px;
 	height: 27px;
 	margin-left: 6px;
-	cursor: pointer;
 	border: 1px solid #e0e0e0;
 	border-radius: 6px;
+}
+
+.profile_icon {
+	width: 15px;
+	height: 15px;
+	fill: #221f20;
 }
 
 .update_icon {
@@ -133,5 +107,5 @@
 }
 
 .disable_icon {
-	cursor: not-allowed;
+	cursor: not-allowed !important;
 }

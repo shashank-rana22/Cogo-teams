@@ -2,10 +2,10 @@ import GraphUI from './GraphUI';
 import Header from './Header';
 import Tabbase from './Tabbase';
 
-function Analytics({ setSwitchDashboard = () => {} }) {
+function Analytics() {
 	return (
 		<>
-			<Header setSwitchDashboard={setSwitchDashboard} />
+			<Header />
 			<GraphUI />
 			<Tabbase />
 		</>

@@ -1,0 +1,152 @@
+.message_content {
+	height: fit-content;
+	margin: 10px 3px;
+	overflow: hidden;
+	background: #f9f9f9;
+	border-radius: 6px;
+	box-shadow: 0 0 4px 0 #627fac33;
+}
+
+.closed_message_content {
+	background: #f2f2f2;
+}
+
+.ticket_details {
+	width: 100%;
+	padding: 10px;
+	background: #fff;
+}
+
+.ticket_status {
+	display: flex;
+	justify-content: space-between;
+	font-size: 12px;
+	color: #828282;
+}
+
+.ticket_details_close {
+	background: #e0e0e0;
+}
+
+.details_div {
+	padding: 8px 12px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #36c;
+	text-decoration: underline;
+	cursor: pointer;
+	background-color: #fffce6;
+	border-radius: 6px;
+}
+
+.closed_details {
+	color: #828282;
+	background-color: #f9f9f9;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.activity {
+	display: flex;
+}
+
+.not_authorized_styles {
+	padding: 3px 8px 0 0;
+	font-size: 12px;
+	font-weight: 600;
+	color: #828282;
+}
+
+.icon_styles {
+	margin: 5px;
+	cursor: pointer;
+	fill: #828282;
+}
+
+.ticket_priority {
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 600;
+	color: #828282;
+}
+
+.no_message {
+	background-color: #f9f9f9;
+}
+
+.type_styles {
+	width: 100%;
+	padding: 5px 0;
+	font-size: 13px;
+	font-weight: 600;
+	color: #4f4f4f;
+	text-align: left;
+}
+
+.priority_dot {
+	font-size: 10px;
+	font-weight: 600;
+	color: var(--background-color);
+}
+
+.description {
+	padding: 10px 15px;
+	color: #000;
+	text-align: left;
+	word-break: break-word;
+	border: 1px solid #b0b0b0;
+	border-radius: 4px;
+}
+
+.img_styles {
+	height: 15px;
+	margin-right: 4px;
+}
+
+.closure_authoriser {
+	display: flex;
+	justify-content: flex-start;
+	margin-top: 10px;
+}
+
+.reviewer_name {
+	margin-left: 5px;
+	font-size: 12px;
+}
+
+.specific_user_icon {
+	margin-top: 2px;
+}
+
+.header_value {
+	margin-top: 10px;
+	font-size: 12px;
+	font-weight: 600;
+	word-break: break-word;
+
+	>span {
+		margin-left: 5px;
+		font-weight: normal;
+	}
+}
+
+.message_container {
+	margin: 0 10px;
+	overflow: hidden;
+}
+
+.desc_container {
+	margin: 15px 15px 10px;
+	font-size: 12px;
+}
+
+.desc_title {
+	margin-bottom: 6px;
+	font-style: italic;
+	color: #828282;
+}

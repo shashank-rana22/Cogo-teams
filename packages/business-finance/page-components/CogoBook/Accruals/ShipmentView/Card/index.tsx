@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
+import { optionsEntity } from '../../constant';
 import { FilterInterface } from '../../interface';
 import { optionSelect, optionsMonth, optionsPills, optionsShipment, optionsYear } from '../constant';
 
@@ -20,16 +21,19 @@ interface CardInterface {
 	setShowBtn: React.Dispatch<React.SetStateAction<boolean>>
 	setCheckedRows: React.Dispatch<React.SetStateAction<{}>>
 	setPayload: React.Dispatch<React.SetStateAction<any[]>>
+	isApplyEnable?:boolean
 }
 
 function Card({
 	refetch, filters, setFilters, shipmentLoading, setViewSelected,
-	setShowBtn, setCheckedRows, setPayload,
+	setShowBtn, setCheckedRows, setPayload, isApplyEnable,
 }:CardInterface) {
 	const [selectFilter, setSelectFilter] = useState(false);
 
 	const [moreFilter, setMoreFilter] = useState(false);
 	const [profitNumber, setProfitNumber] = useState('');
+
+	const { jobState, range, profitPercent } = filters || {};
 
 	const handleSelectChange = (val:string) => {
 		setFilters((prev) => ({ ...prev, service: val }));
@@ -85,7 +89,7 @@ function Card({
 			filters={filters}
 		/>
 	);
-	const rest = { onClickOutside: () => { setSelectFilter(false); } };
+	const rest = { onClickOutside: () => { setSelectFilter(false); setMoreFilter(false); } };
 
 	const onSubmit = () => {
 		setPayload([]);
@@ -93,7 +97,9 @@ function Card({
 		setFilters((prev) => ({ ...prev, page: 1 }));
 		setViewSelected(false);
 
-		if (filters.page === 1) refetch();
+		if (filters.page === 1) {
+			refetch();
+		}
 	};
 	const monthYear = [filters?.year, filters?.month];
 	const isDateRangeEnabled =	monthYear[0]?.length > 0 && typeof monthYear[1] === 'string';
@@ -102,11 +108,17 @@ function Card({
 
 	return (
 		<div className={styles.container}>
-			<div>
+			<div style={{ marginRight: '20px' }}>
 				<div className={styles.period}>
-					Choose Period
+					Period
 					<Tooltip
-						content="Please select the accounting month"
+						content={(
+							<div className={styles.font_size_tooltip}>
+								Please select the
+								<br />
+								accounting month
+							</div>
+						)}
 						placement="top"
 					>
 						<div className={styles.info_icon_container}>
@@ -124,7 +136,8 @@ function Card({
 						placeholder="Year"
 						options={optionsYear()}
 						isClearable
-						style={{ width: '120px' }}
+						style={{ width: '110px' }}
+						size="sm"
 					/>
 					<Select
 						value={filters?.month}
@@ -133,14 +146,21 @@ function Card({
 						options={optionsMonth}
 						isClearable
 						style={{ width: '150px' }}
+						size="sm"
 					/>
 				</div>
 			</div>
-			<div>
+			<div style={{ marginRight: '20px' }}>
 				<div className={styles.period}>
-					Choose ETA/ETD
+					Transaction Date
 					<Tooltip
-						content="Select Shipment range to be accounted"
+						content={(
+							<div style={{ fontSize: '12px' }}>
+								Select Shipment range to
+								<br />
+								be accounted
+							</div>
+						)}
 						placement="top"
 					>
 						<div className={styles.info_icon_container}>
@@ -149,7 +169,7 @@ function Card({
 					</Tooltip>
 				</div>
 				<div className={styles.hr} />
-				<div className={isDateRangeEnabled ? styles.date_range : styles.date_range_not}>
+				<div className={styles.date_range}>
 					<SingleDateRange
 						placeholder="Date"
 						maxDate={maxDate}
@@ -160,6 +180,7 @@ function Card({
 						disable={!isDateRangeEnabled}
 						onChange={(val:any) => { setFilters((prev) => ({ ...prev, date: val })); }}
 						value={filters?.date}
+						style={{ width: '184px' }}
 					/>
 				</div>
 
@@ -167,9 +188,9 @@ function Card({
 
 			<div>
 				<div className={styles.period}>
-					Choose Filters
+					Filters
 					<Tooltip
-						content="Please select filters accordingly"
+						content={<div className={styles.fon_tooltip}> Please select filters accordingly</div>}
 						placement="top"
 					>
 						<div className={styles.info_icon_container}>
@@ -179,6 +200,16 @@ function Card({
 				</div>
 				<div className={styles.hr_filter} />
 				<div className={styles.select_container}>
+					<Select
+						value={filters?.entity}
+						onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
+						placeholder="Entity"
+						options={optionsEntity}
+						isClearable
+						style={{ width: '100px' }}
+						size="sm"
+					/>
+
 					<Popover
 						placement="bottom"
 						caret={false}
@@ -206,8 +237,10 @@ function Card({
 						placeholder="Shipment Type"
 						options={optionsShipment}
 						isClearable
-						style={{ width: '200px' }}
+						style={{ width: '176px' }}
+						size="sm"
 					/>
+
 				</div>
 			</div>
 			<div className={styles.more_filter}>
@@ -215,20 +248,21 @@ function Card({
 					placement="bottom"
 					render={contentMoreFilter()}
 					visible={moreFilter}
+					{...rest}
 				>
 					<Button
 						onClick={() => { setMoreFilter(!moreFilter); }}
-						size="lg"
+						size="md"
 						themeType="secondary"
 					>
 						+ More Filters
-
+						{ jobState || range || profitPercent ? <div className={styles.dot} /> : null}
 					</Button>
 				</Popover>
 				<Button
-					size="lg"
+					size="md"
 					onClick={() => { onSubmit(); }}
-					disabled={!filters.year && !filters.month}
+					disabled={!isApplyEnable}
 					loading={shipmentLoading}
 				>
 					Apply

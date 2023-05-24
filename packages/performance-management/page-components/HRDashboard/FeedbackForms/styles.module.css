@@ -6,7 +6,8 @@
 
 .go_back_container {
 	display: flex;
-	justify-content: flex-start;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .redirect_container {

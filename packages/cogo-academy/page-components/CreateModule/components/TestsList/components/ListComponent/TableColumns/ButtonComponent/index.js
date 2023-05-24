@@ -1,5 +1,8 @@
 import { Button, Tooltip } from '@cogoport/components';
 import { IcMEyeopen, IcMDelete, IcMOverflowDot, IcMEdit } from '@cogoport/icons-react';
+import { useState } from 'react';
+
+import ExtendValidityModal from '../ExtendValidityModal';
 
 import styles from './styles.module.css';
 
@@ -75,53 +78,90 @@ export function QuestionSetButtons({ item, router, setQuestionSetId, setShowModa
 	);
 }
 
-export function TestSetButtons({ current_status, loading, id, setShowModal, setTestId, router }) {
-	return (
-		(current_status === 'upcoming' || current_status === 'draft') ? (
-			<div role="presentation">
-				<div
-					style={{
-						width  : 'fit-content',
-						cursor : 'default',
-					}}
-				>
-					<Tooltip
-						className={styles.tooltip_pad}
-						content={(
-							<div className={styles.options}>
-								<Button
-									loading={loading}
-									themeType="primary"
-									className={styles.btn}
-									onClick={() => handleEditTest({ id, router })}
-								>
-									<IcMEdit />
-									<div>Edit</div>
-								</Button>
+export function TestSetButtons({
+	current_status,
+	loading,
+	id,
+	setShowModal,
+	setTestId,
+	router,
+	validity_end = '',
+	validity_start = '',
+	fetchList = () => {},
+}) {
+	const [showExtendValidityModal, setShowExtendValidityModal] = useState(false);
 
+	return (
+		<div>
+			<div className={styles.container}>
+				<Tooltip
+					className={styles.tooltip_pad}
+					content={(
+						<div className={styles.options}>
+							{['upcoming', 'draft'].includes(current_status) ? (
+								<>
+									<Button
+										loading={loading}
+										themeType="primary"
+										className={styles.btn}
+										onClick={() => handleEditTest({ id, router })}
+									>
+										<IcMEdit />
+										<div>Edit</div>
+									</Button>
+
+									<Button
+										loading={loading}
+										themeType="secondary"
+										className={styles.btn}
+										type="button"
+										onClick={() => {
+											setShowModal(true);
+											setTestId(id);
+										}}
+									>
+										<IcMDelete />
+										<div>Delete</div>
+									</Button>
+								</>
+							) : null}
+
+							{current_status !== 'draft' ?	(
 								<Button
 									loading={loading}
 									themeType="secondary"
 									className={styles.btn}
 									type="button"
 									onClick={() => {
-										setShowModal(true);
-										setTestId(id);
+										setShowExtendValidityModal(true);
 									}}
 								>
-									<IcMDelete />
-									<div>Delete</div>
+									<IcMEdit />
+									<div>Extend Validity</div>
 								</Button>
-							</div>
-						)}
-						trigger="click"
-						placement="left"
-						interactive="true"
-					>
-						<IcMOverflowDot style={{ cursor: 'pointer' }} />
-					</Tooltip>
-				</div>
+							) : null }
+
+						</div>
+					)}
+					trigger="click"
+					placement="left"
+					interactive="true"
+				>
+					<IcMOverflowDot style={{ cursor: 'pointer' }} />
+				</Tooltip>
 			</div>
-		) : null
+
+			{showExtendValidityModal ? (
+				<ExtendValidityModal
+					showExtendValidityModal={showExtendValidityModal}
+					setShowExtendValidityModal={setShowExtendValidityModal}
+					validity_end={validity_end}
+					validity_start={validity_start}
+					setShowModal={setShowModal}
+					id={id}
+					fetchList={fetchList}
+				/>
+			) : null}
+		</div>
 	);
 }

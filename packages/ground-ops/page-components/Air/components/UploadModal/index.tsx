@@ -50,7 +50,7 @@ function UploadModal({ showUpload, setShowUpload, listAPI, edit, setEdit }) {
 			id                  : showUpload?.documentId,
 			service_id          : showUpload?.serviceId,
 			service_type        : 'air_freight_service',
-			pending_task_id     : showUpload?.id,
+			pending_task_id     : edit === 'edit' ? undefined : showUpload?.id,
 			state               : showUpload?.type === 'FinalAwb' ? undefined : 'document_accepted',
 			document_url        : finalUrl,
 			data                : {

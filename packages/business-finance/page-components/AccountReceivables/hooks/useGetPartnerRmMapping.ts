@@ -1,4 +1,3 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -21,7 +20,7 @@ const useGetPartnerRmMapping = () => {
 				},
 			});
 		} catch (err) {
-			Toast.error(err?.error?.message);
+			console.log(err?.message);
 		}
 	};
 

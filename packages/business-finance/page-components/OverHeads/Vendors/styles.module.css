@@ -26,6 +26,7 @@
 .search {
 	width: 341px;
 	padding: 0 4px;
+	margin-top: 2px;
 
 	svg {
 		margin: 2px;

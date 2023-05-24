@@ -15,17 +15,22 @@
 }
 
 .header_particular {
-	width: 50%;
+	width: 41%;
 	padding: 18px 24px;
 	font-weight: 600;
 	color: #f68b21;
 	border-right: 1px solid #acdadf;
 }
 
+.info_icon_container {
+	padding: 2px 0 0 4px;
+}
+
 .header_ocean {
 	display: flex;
-	justify-content: center;
-	padding: 18px 24px;
+	flex-direction: column;
+	align-items: flex-end;
+	padding: 18px;
 	font-weight: 600;
 	color: #f68b21;
 	border-right: 1px solid #acdadf;
@@ -63,9 +68,16 @@
 }
 
 .first_particular {
-	width: 50%;
-	padding: 18px 24px;
+	display: flex;
+	flex-direction: column;
+	width: 41%;
+	padding: 18px;
 	border-right: 1px solid #acdadf;
+}
+
+.row_vis_data {
+	margin-left: 8px;
+	color: #000000ad;
 }
 
 .first_ocean {
@@ -73,7 +85,7 @@
 	flex-direction: column;
 	align-items: flex-end;
 	width: 10%;
-	padding: 18px 36px;
+	padding: 18px;
 	border-right: 1px solid #acdadf;
 }
 

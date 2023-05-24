@@ -15,6 +15,9 @@ const useListAudiences = () => {
 		params : {
 			page_limit               : 100000,
 			pagination_data_required : false,
+			filters                  : {
+				status: 'active',
+			},
 		},
 	}, { manual: false });
 

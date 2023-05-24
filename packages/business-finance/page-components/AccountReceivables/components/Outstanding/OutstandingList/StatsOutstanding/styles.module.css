@@ -71,9 +71,20 @@
 	font-weight: 600;
 }
 
+.amount_open {
+	display: flex;
+	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	word-break: break-all;
+}
+
 .amount {
 	display: flex;
 	margin-top: 2px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #cb6464;
 	word-break: break-all;
 }
 

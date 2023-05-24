@@ -1,0 +1,57 @@
+.container {
+	height: 100%;
+	margin-top: 10px;
+	overflow-y: auto;
+}
+
+.container::-webkit-scrollbar {
+	display: none;
+}
+
+.main_card {
+	padding: 8px;
+	margin: -5px 0 -5px 5px;
+	border-left: 1px solid #bdbdbd;
+}
+
+.main_card:last-child {
+	border-left: none;
+}
+
+.activity_date {
+	display: flex;
+	align-items: center;
+}
+
+.dot {
+	width: 10px;
+	height: 10px;
+	background: #bdbdbd;
+	border-radius: 50%;
+}
+
+.durations {
+	margin-left: 5px;
+	font-size: 10px;
+	color: #828282;
+}
+
+.card {
+	padding: 8px 6px;
+	margin: 5px 10px;
+	background: #fff;
+	border-left: 2px solid #6fa5ab;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+}
+
+.title {
+	font-size: 14px;
+	font-weight: 500;
+}
+
+.user_avatar {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: -10px;
+}

@@ -10,6 +10,8 @@ const useSavedQuestionDetails = ({
 	setEditDetails,
 	listSetQuestions,
 	editDetails,
+	setQuestionDetails,
+	setQuestionToShow,
 }) => {
 	const [questionToDelete, setQuestionToDelete] = useState({});
 
@@ -21,6 +23,7 @@ const useSavedQuestionDetails = ({
 		setQuestionToDelete,
 		listSetQuestions,
 		editDetails,
+		setQuestionDetails,
 	});
 
 	const {
@@ -33,11 +36,13 @@ const useSavedQuestionDetails = ({
 		questionSetId,
 		setQuestionToDelete,
 		listSetQuestions,
+		setQuestionDetails,
 	});
 
 	const handleEditQuestion = ({ item }) => {
 		setAllKeysSaved(false);
 		setEditDetails(item);
+		setQuestionDetails({});
 	};
 
 	const handleDeleteQuestion = ({ item }) => {
@@ -47,6 +52,7 @@ const useSavedQuestionDetails = ({
 			updateStandAloneTestQuestion({
 				testQuestionId : id,
 				action         : 'delete',
+				question_type,
 			});
 		} else {
 			updateCaseStudy({
@@ -56,6 +62,11 @@ const useSavedQuestionDetails = ({
 		}
 	};
 
+	const onCloseModal = () => {
+		setQuestionDetails({});
+		setQuestionToShow('');
+	};
+
 	return {
 		handleEditQuestion,
 		handleDeleteQuestion,
@@ -63,6 +74,7 @@ const useSavedQuestionDetails = ({
 		questionToDelete,
 		setQuestionToDelete,
 		caseStudyLoading,
+		onCloseModal,
 	};
 };
 

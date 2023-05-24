@@ -14,6 +14,7 @@ import React, { useState } from 'react';
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
+import isDisabled from '../../../../utils/isDisabled';
 
 import LineItemCard from './lineItemCard/index';
 import styles from './styles.module.css';
@@ -43,7 +44,9 @@ function ShipmentDetailsCard({
 	const [rejected, setRejected] = useState([]);
 	const [showLineItem, setShowLineItem] = useState(false);
 	const [showRejected, setShowRejected] = useState({});
-	const { lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill } = data || {};
+	const {
+		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject,
+	} = data || {};
 	const {
 		entityCode = '',
 		organizationName: organizationNameBuyer = '',
@@ -51,12 +54,14 @@ function ShipmentDetailsCard({
 		registrationNumber: registrationNumberBuyer = '',
 		taxNumber: taxNumberBuyer = '',
 	} = buyerDetail || {};
-	const { organizationName = '', taxNumber = '' } = sellerDetail || {};
+	const { organizationName = '', taxNumber = '', registrationNumber = '' } = sellerDetail || {};
 	const {
 		bankName = '',
 		accountNumber = '',
 		ifscCode = '',
+		beneficiaryName = '',
 	} = sellerBankDetail || {};
+
 	const {
 		billNumber = '',
 		billDate,
@@ -65,6 +70,13 @@ function ShipmentDetailsCard({
 		billType = '',
 		isProforma,
 	} = bill || {};
+
+	const {
+		shipmentType = '',
+		reasonForCN = '',
+		outstandingDocument = '',
+	} = billAdditionalObject || {};
+
 	const [DetailsCard, setDetailsCard] = useState([
 		{
 			id    : 1,
@@ -122,6 +134,9 @@ function ShipmentDetailsCard({
 		}));
 	};
 
+	const viewDocument = (document) => {
+		window.open(document);
+	};
 	const onClose = () => {
 		if (Object.keys(showRejected).includes('1')) {
 			setRemarksVal({ ...remarksVal, collectionPartyRemark: '' });
@@ -178,7 +193,7 @@ function ShipmentDetailsCard({
 						{!isInvoiceApproved && (
 							<div className={styles.completed}>
 								Completed
-								{showValue.length + rejected.length || 0}
+								{!isDisabled(status) ? 3 : showValue.length + rejected.length || 0}
 								/3
 							</div>
 						)}
@@ -224,7 +239,7 @@ function ShipmentDetailsCard({
 															{' '}
 															Account Number -
 															{' '}
-															<span style={{ color: '#ed3726' }}>
+															<span className={styles.bold_data}>
 																{accountNumber}
 															</span>
 														</div>
@@ -236,7 +251,7 @@ function ShipmentDetailsCard({
 															{' '}
 															IFSC -
 															{' '}
-															<span style={{ color: '#ed3726' }}>
+															<span className={styles.bold_data}>
 																{ifscCode}
 															</span>
 														</div>
@@ -247,7 +262,7 @@ function ShipmentDetailsCard({
 														<div className={styles.margin_bottom}>
 															PAN Number -
 															{' '}
-															<span>{(taxNumber || '').slice(2, 12)}</span>
+															<span>{(registrationNumber || '')}</span>
 														</div>
 													</div>
 
@@ -432,7 +447,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -442,7 +457,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -461,9 +476,15 @@ function ShipmentDetailsCard({
 
 										<div className={styles.billing_party_container}>
 											<div className={styles.margin_bottom}>
-												Name -
+												Collection Party Name -
 												{' '}
 												<span>{organizationName}</span>
+											</div>
+											<div className={styles.margin_bottom}>
+												{' '}
+												Beneficiary Name-
+												{' '}
+												<span>{beneficiaryName}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												{' '}
@@ -475,7 +496,7 @@ function ShipmentDetailsCard({
 												{' '}
 												Account Number -
 												{' '}
-												<span style={{ color: '#ed3726' }}>
+												<span className={styles.bold_data}>
 													{accountNumber}
 												</span>
 											</div>
@@ -483,12 +504,12 @@ function ShipmentDetailsCard({
 												{' '}
 												IFSC -
 												{' '}
-												<span style={{ color: '#ed3726' }}>{ifscCode}</span>
+												<span className={styles.bold_data}>{ifscCode}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												PAN Number -
 												{' '}
-												<span>{(taxNumber || '').slice(2, 12)}</span>
+												<span>{(registrationNumber || '')}</span>
 											</div>
 											<div className={styles.margin_bottom}>
 												GST Number -
@@ -538,7 +559,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -548,7 +569,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -636,7 +657,7 @@ function ShipmentDetailsCard({
 													) : (
 														<div className={styles.button_container}>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																onClick={() => {
@@ -646,7 +667,7 @@ function ShipmentDetailsCard({
 																Approve
 															</Button>
 															<Button
-																disabled={status !== 'LOCKED'}
+																disabled={!isDisabled(status)}
 																size="md"
 																themeType="secondary"
 																style={{ border: '1px solid #ed3726' }}
@@ -686,6 +707,31 @@ function ShipmentDetailsCard({
 												{' '}
 												<span>{placeOfSupply}</span>
 											</div>
+											{shipmentType === 'ftl_freight' && outstandingDocument
+											&& (
+												<div className={styles.document}>
+													Outstanding Document -
+													{' '}
+													<Button
+														className={styles.button}
+														onClick={() => {
+															viewDocument(outstandingDocument);
+														}}
+													>
+														View
+
+													</Button>
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
+											&& billType === 'CREDIT_NOTE' && reasonForCN
+											&& (
+												<div className={styles.margin_bottom}>
+													Reason For CN -
+													{' '}
+													<span>{reasonForCN}</span>
+												</div>
+											)}
 										</div>
 									</div>
 								)}

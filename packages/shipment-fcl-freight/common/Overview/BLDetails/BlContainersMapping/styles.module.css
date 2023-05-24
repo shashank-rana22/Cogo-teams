@@ -39,3 +39,16 @@
 		margin-right: 8px;
 	}
 }
+
+.custom_modal {
+	:global {
+		.ui_modal_body_container {
+			height: 400px;
+			max-height: 400px;
+		}
+
+		.ui_button_container:not(:first-of-type) {
+			margin-left: 10px;
+		}
+	}
+}

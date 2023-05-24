@@ -7,18 +7,12 @@
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 15px;
-	color: #393f70;
+	color: #4f4f4f;
 }
 
 .render_container {
 	display: flex;
 	margin: 12px;
-}
-
-.button_container {
-	display: flex;
-	justify-content: flex-end;
-	margin-top: 32px;
 }
 
 .button_container > button:first-child {
@@ -28,6 +22,7 @@
 .container_num {
 	display: flex;
 	align-items: center;
+	width: 150px;
 	margin-right: 32px;
 }
 
@@ -39,4 +34,12 @@
 	display: flex;
 	justify-content: center;
 	padding-bottom: 20px;
+}
+
+.custom_modal {
+	:global {
+		.ui_button_container:not(:first-of-type) {
+			margin-left: 10px;
+		}
+	}
 }

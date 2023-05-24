@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -19,8 +20,8 @@ const PAGE_MAPPING = {
 	},
 };
 
-const SAMPLE_DOCUMENT_URL = 'https://cogoport-production.sgp1.digitaloceanspaces.com'
-								+ '/5905c74c7bbf7e71b9e8e00a2af45fbc/sample_faq_upload_sheet.csv';
+const SAMPLE_DOCUMENT_URL = `https://cogoport-production.sgp1.digitaloceanspaces.com/
+									69f22ad557310d6d2488d4ac332fafd3/bulk_upload_faq_sample.csv`;
 
 const useBulkCreateQuestionAnswerSet = () => {
 	const { general:{ query : { type } } } = useSelector((state) => (state));
@@ -49,10 +50,10 @@ const useBulkCreateQuestionAnswerSet = () => {
 
 	const bulkCreateQuestionAnswerSet = async (val) => {
 		try {
-			const { upload_question } = val || {};
+			const { finalUrl } = val?.upload_question || {};
 
 			const payload = {
-				file_url: upload_question,
+				file_url: finalUrl,
 			};
 
 			await trigger({ data: payload });
@@ -61,7 +62,7 @@ const useBulkCreateQuestionAnswerSet = () => {
 			router.back();
 		} catch (error) {
 			if (error?.message || error?.error?.message) {
-				Toast(error?.message || error?.error?.message);
+				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 			}
 		}
 	};

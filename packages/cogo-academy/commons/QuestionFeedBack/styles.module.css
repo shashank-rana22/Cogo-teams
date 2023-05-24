@@ -37,3 +37,10 @@
 .pills_container {
 	padding-bottom: 14px;
 }
+
+.spinner {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 80vh;
+}

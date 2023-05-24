@@ -1,26 +1,22 @@
-import { Input, SingleDateRange, Select, Toggle } from '@cogoport/components';
+import { Input, Select, Toggle } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useArchive from '../../hooks/useArchive';
-import { serviceTypeOptions } from '../constant';
+import { optionsEntity, serviceTypeOptions } from '../constant';
 
-import { ARCHIVE_DECLARED, ARCHIVE_MONTH_ACCRUED, ARCHIVE_MONTH_BOOKED } from './configuration';
+import { ARCHIVE_DECLARED, ARCHIVE_MONTH_BOOKED } from './configuration';
 import Freeze from './Freeze';
 import MonthInfo from './MonthInfo';
 import styles from './styles.module.css';
 
 function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateAction<boolean>> }) {
 	const [toggleValue, setToggleValue] = useState('declared');
-	const [isBookedActive, setIsBookActive] = useState(true);
-	let ARCHIVE_MONTH_CONFIG;
 
-	if (isBookedActive) {
-		ARCHIVE_MONTH_CONFIG = ARCHIVE_MONTH_BOOKED;
-	} else {
-		ARCHIVE_MONTH_CONFIG = ARCHIVE_MONTH_ACCRUED;
-	}
+	const [showSub, setShowSub] = useState(false);
+
 	const {
 		apiData,
 		drillData,
@@ -38,9 +34,52 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 
 	const { totalRecords, list } = apiData || {};
 
-	const { list:drillDataList, totalRecords:TotalRecords } = drillData || {};
+	const { list:drillDataList, totalRecords:drillTotalRecords } = drillData || {};
 
 	const { page } = globalFilters || {};
+
+	const subComponent = (itemData) => {
+		const {
+			sellQuotation = '', buyQuotation = '', quotationProfit = '',
+			quotationMargin = '', bookingType = '', buyQuotationCurrency = '',
+			sellQuotationCurrency = '',
+		} = itemData || {};
+
+		return (
+			<div className={styles.sub_comp}>
+				<div className={styles.quo}>
+					Quotation
+					<div className={styles.quo_border} />
+				</div>
+
+				<div>
+					Purchase :
+					{' '}
+					{getFormattedPrice(buyQuotation, buyQuotationCurrency) || '-'}
+				</div>
+				<div>
+					Sales :
+					{' '}
+					{getFormattedPrice(sellQuotation, sellQuotationCurrency) || '-' }
+				</div>
+				<div>
+					Margin :
+					{' '}
+					{getFormattedPrice(quotationProfit, sellQuotationCurrency) || '-' }
+					{' '}
+					(
+					{quotationMargin || '0'}
+					%)
+				</div>
+				<div>
+					Shipment Type :
+					{' '}
+					{' '}
+					<span className={styles.span_val}>{bookingType || '-'}</span>
+				</div>
+			</div>
+		);
+	};
 
 	return (
 		<div>
@@ -54,33 +93,12 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 					/>
 					<div className={styles.button_container}>
 						<div
-							className={isBookedActive ? styles.selected : styles.button_tab}
-							onClick={() => {
-								setGlobalFilters((p) => ({
-									...p,
-									archivedStatus: 'BOOKED',
-								}));
-								getDrillDownArchive(monthData);
-								setIsBookActive(true);
-							}}
+							onClick={() => { setShowSub(!showSub); }}
+							className={styles.hide_data}
 							role="presentation"
 						>
-							Booked
-						</div>
+							{showSub ? 'Hide All Quotations' : 'View All Quotations'}
 
-						<div
-							className={!isBookedActive ? styles.selected : styles.button_tab}
-							onClick={() => {
-								setGlobalFilters((p) => ({
-									...p,
-									archivedStatus: 'ACCRUED',
-								}));
-								getDrillDownArchive(monthData);
-								setIsBookActive(false);
-							}}
-							role="presentation"
-						>
-							Accrued
 						</div>
 					</div>
 				</>
@@ -115,28 +133,55 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 								placeholder="Service Type"
 								options={serviceTypeOptions}
 								isClearable
-								style={{ width: '200px' }}
+								style={{ width: '144px' }}
+								size="sm"
+							/>
+						</div>
+						<div className={styles.div_select}>
+							<Select
+								value={globalFilters?.archivedStatus}
+								size="sm"
+								onChange={(val:string) => {
+									setGlobalFilters((prev) => ({ ...prev, archivedStatus: val }));
+								}}
+								placeholder="Archived Status"
+								options={[
+									{ label: 'Booked', value: 'BOOKED' },
+									{ label: 'Accrued', value: 'ACCRUED' }]}
+								isClearable
+								style={{ width: '164px' }}
+							/>
+						</div>
+						<div className={styles.div_select}>
+							<Select
+								value={globalFilters?.entity}
+								size="sm"
+								onChange={(val:string) => {
+									setGlobalFilters((prev) => ({ ...prev, entity: val }));
+								}}
+								placeholder="Entity"
+								options={optionsEntity}
+								isClearable
+								style={{ width: '100px' }}
 							/>
 						</div>
 						{particularMonth && (
-							<div className={styles.div_select}>
-								<SingleDateRange
-									placeholder="Date"
-									dateFormat="MM/dd/yyyy"
-									name="date"
-									onChange={(val:any) => { setGlobalFilters((prev) => ({ ...prev, date: val })); }}
-									value={globalFilters?.date}
-								/>
+							<div className={styles.total_count}>
+								<div>
+									Total Shipments:&nbsp;
+									<span className={styles.total_count_num}>{drillTotalRecords || 0}</span>
+								</div>
 							</div>
 						)}
 					</div>
 					{particularMonth ? (
 						<div className={styles.search_container}>
 							<Input
+								size="sm"
 								value={globalFilters?.search}
 								onChange={(val) => { setGlobalFilters((prev) => ({ ...prev, search: val })); }}
 								placeholder="Search by SID"
-								suffix={<IcMSearchlight height="20px" width="20px" style={{ marginRight: '8px' }} />}
+								suffix={<IcMSearchlight height="15px" width="15px" style={{ marginRight: '8px' }} />}
 							/>
 						</div>
 					) : (
@@ -150,10 +195,10 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 							<div className={styles.table_container}>
 								<StyledTable
 									page={page}
-									total={totalRecords || TotalRecords}
+									total={particularMonth ? drillTotalRecords : totalRecords}
 									pageSize={10}
 									data={particularMonth ? drillDataList : list}
-									columns={particularMonth ? ARCHIVE_MONTH_CONFIG : ARCHIVE_DECLARED(
+									columns={particularMonth ? ARCHIVE_MONTH_BOOKED : ARCHIVE_DECLARED(
 										setMonthData,
 										particularMonth,
 										setParticularMonth,
@@ -161,6 +206,9 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 										setShowTab,
 									)}
 									loading={loading}
+									renderRowSubComponent={particularMonth && subComponent}
+									selectType="multiple"
+									showAllNestedOptions={particularMonth && showSub}
 									setFilters={setGlobalFilters}
 									filters={globalFilters}
 								/>

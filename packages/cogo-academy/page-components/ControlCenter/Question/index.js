@@ -10,6 +10,7 @@ import Spinner from '../../../commons/Spinner';
 import CreateUserForm from '../ConfigurationEngine/CreateAudienceForm';
 import CreateForm from '../ConfigurationEngine/CreateComponent';
 
+import Aliases from './Aliases';
 import BodyTextEditor from './BodyTextEditor';
 import useCreateNewTagOrTopic from './hooks/useCreateTagOrTopic';
 import useGetQuestion from './hooks/useGetQuestion';
@@ -18,8 +19,9 @@ import styles from './styles.module.css';
 import useCreateQuestions from './useCreateQuestions';
 
 const style = {
-	width   : '100%',
-	padding : 12,
+	width     : '100%',
+	padding   : '0 12px 12px 12px',
+	marginTop : '8px',
 };
 
 const userFormStyle = {
@@ -62,6 +64,8 @@ function CreateFAQ() {
 		listTagsLoading,
 		listAudienceLoading,
 		apiLoading,
+		showAlias,
+		setShowAlias,
 	} = useCreateQuestions({ data, setEditorError });
 
 	const {
@@ -86,9 +90,11 @@ function CreateFAQ() {
 		faq_tags,
 		faq_topics,
 		answers,
-		faq_audiences,
 		id,
+		question_aliases = [],
 	} = data || {};
+
+	const { faq_audiences } = answers?.[0] || [];
 
 	useEffect(() => {
 		if (query?.id) {
@@ -102,26 +108,18 @@ function CreateFAQ() {
 	const answer = answers?.[0]?.answer;
 
 	useEffect(() => {
-		if (!loading) {
+		if (!loading && !isEmpty(data)) {
 			setQuestionValue('question_abstract', question_abstract);
 			setQuestionValue('tag_ids', filterTags);
 			setQuestionValue('topic_ids', filterTopics);
 			setQuestionValue('audience_ids', filterAudiences);
 			setEditorValue(RichTextEditor?.createValueFromString((answer || ''), 'html'));
+			setShowAlias(question_aliases);
 		}
-	}, [listTopicsLoading,
-		listTagsLoading,
-		listAudienceLoading,
-		loading,
-		setQuestionValue,
-		question_abstract,
-		filterTags,
-		filterTopics,
-		filterAudiences,
-		setEditorValue,
-		RichTextEditor,
-		answer,
-	]);
+	}, [listTopicsLoading, listTagsLoading, listAudienceLoading,
+		loading, setQuestionValue, question_abstract, filterTags,
+		filterTopics, filterAudiences, setEditorValue, RichTextEditor,
+		answer, setShowAlias, question_aliases, data]);
 
 	useEffect(() => {
 		if (questionPreview !== 'preview') {
@@ -140,6 +138,8 @@ function CreateFAQ() {
 		setQuestionPreview('preview');
 		router.back();
 	};
+
+	const filteredAliases = (showAlias || []).filter((ele) => ele?.status !== 'inactive');
 
 	if (questionPreview === 'preview' && editorValue.toString('html') !== '') {
 		return (
@@ -179,25 +179,57 @@ function CreateFAQ() {
 				</div>
 
 				<form className={styles.form_container} onSubmit={handleSubmit(onSubmit)}>
+
 					<div className={styles.input_container}>
 						<div className={styles.input_label}>
 							Question
 						</div>
 
-						<InputController
-							control={control}
-							name="question_abstract"
-							type="input"
-							placeholder="Create a question."
-							key={question_abstract}
-							rules={{ required: 'Question is required.' }}
-						/>
+						<div className={styles.question_alias}>
+							<div style={{ width: isEmpty(filteredAliases) ? '88%' : '100%' }}>
 
-						{errors?.question_abstract && (
-							<span className={styles.errors}>
-								{errors.question_abstract.message}
-							</span>
-						)}
+								<InputController
+									control={control}
+									name="question_abstract"
+									type="input"
+									placeholder="Create a question."
+									key={question_abstract}
+									rules={{ required: 'Question is required.' }}
+								/>
+
+								{errors?.question_abstract && (
+									<span className={styles.errors}>
+										{errors.question_abstract.message}
+									</span>
+								)}
+
+							</div>
+
+							{ isEmpty(filteredAliases) && (
+								<div
+									className={styles.alias}
+									role="presentation"
+									onClick={() => setShowAlias(
+										[...showAlias, { id: (showAlias || []).length, question_abstract: '' }],
+									)}
+								>
+									Add Alias
+								</div>
+							)}
+
+						</div>
+						{
+							!isEmpty(filteredAliases) && (filteredAliases || [])
+								.map((alias) => (
+									<Aliases
+										showAlias={showAlias}
+										setShowAlias={setShowAlias}
+										key={alias?.id}
+										alias={alias}
+										filteredAliases={filteredAliases}
+									/>
+								))
+							}
 
 					</div>
 
@@ -443,7 +475,11 @@ function CreateFAQ() {
 			</div>
 
 			<div className={styles.feedback_container}>
-				<QuestionFeedBack id={id} source="create" />
+				<QuestionFeedBack
+					id={id}
+					source="create"
+					fetchQuestion={fetchQuestion}
+				/>
 			</div>
 
 		</div>

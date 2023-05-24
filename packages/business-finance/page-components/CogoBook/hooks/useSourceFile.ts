@@ -46,7 +46,10 @@ const useSourceFile = ({ modalData, uploader, setUploadModal }) => {
 				setUploadModal(false);
 			}
 		} catch (error) {
-			Toast.error(error?.response?.data?.message);
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
+			Toast.error('Something Went Wrong');
 		}
 	};
 

@@ -1,0 +1,9 @@
+.multiselect {
+	margin-top: 4px;
+}
+
+.header {
+	display: flex;
+	justify-content: space-between;
+	width: 70%;
+}

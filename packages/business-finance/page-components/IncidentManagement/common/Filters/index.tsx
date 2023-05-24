@@ -52,7 +52,7 @@ function Filters({
 					...filters,
 					search: value || undefined,
 				})}
-				size="sm"
+				size="md"
 				placeholder="Search by Invoice/Proforma Number "
 			/>
 		</section>

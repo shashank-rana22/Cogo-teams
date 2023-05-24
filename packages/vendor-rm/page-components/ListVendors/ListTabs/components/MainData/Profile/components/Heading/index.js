@@ -33,7 +33,7 @@ function Heading({
 		errors,
 		onSubmit,
 		editProfileLoading,
-	} = useEditProfile({ vendor_details, refetchVendorInfo, setShowEditProfileModal });
+	} = useEditProfile({ vendor_details, refetchVendorInfo, setShowEditProfileModal, showEditProfileModal });
 
 	const {
 		newControls,

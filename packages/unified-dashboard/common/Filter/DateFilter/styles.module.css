@@ -1,0 +1,30 @@
+.date_filter_wrap {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 260px;
+	height: 40px;
+	padding: 8px 6px;
+	font-size: 10px;
+	cursor: pointer;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 4px;
+}
+
+.date_filter_wrap :hover {
+	box-shadow: 0 2px 45px rgb(56 59 68 / 10%);
+}
+
+.pill {
+	padding: 2px 5px;
+	font-size: 10px;
+	color: #333;
+	background: #f2f2f2;
+	border-radius: 2px;
+}
+
+.border_right {
+	height: 18px;
+	border-right: 1px solid #e0e0e0;
+}

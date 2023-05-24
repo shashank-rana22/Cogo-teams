@@ -1,0 +1,120 @@
+.card {
+	padding: 16px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.main_div {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	margin: 12px 0 0 20px;
+	margin-bottom: -54px;
+}
+
+.responsive_bar_chart {
+	min-width: 35%;
+	height: 420px;
+	margin-left: 40px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.responsive_line_chart {
+	min-width: 35%;
+	height: 330px;
+	margin-top: 50px;
+	margin-left: 40px;
+	background: #fff;
+	border-radius: 8px;
+}
+
+.bar_chart_loader {
+	position: relative;
+	top: 150px;
+	display: flex;
+	justify-content: center;
+}
+
+.line_chart_loader {
+	position: relative;
+	top: 100px;
+	display: flex;
+	justify-content: center;
+}
+
+.years_styles {
+	margin-top: 150px;
+	margin-left: 20px;
+}
+
+.text_filters_gap {
+	display: flex;
+	margin-bottom: -54px;
+}
+
+.text_style {
+	margin: 12px 0 0 16px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #333;
+}
+
+.icon {
+	position: relative;
+	z-index: 10;
+	margin: 19px 0 0 5px;
+	cursor: pointer;
+}
+
+.border {
+	width: 70px;
+	height: 2px;
+	margin: 4px 0 0 2px;
+	background: #ed3726;
+	border-radius: 4px;
+}
+
+.data_styles {
+	padding: 6px;
+	font-size: 12px;
+	cursor: pointer;
+}
+
+.borders {
+	width: 100px;
+	height: 2px;
+	margin: 4px 0 0 2px;
+	cursor: pointer;
+	background: #edd7a9;
+	border-radius: 4px;
+}
+
+.year_bottom_border {
+	width: 100px;
+	height: 1px;
+	margin: 4px 0 0 2px;
+	cursor: pointer;
+	background: #edd7a9;
+	border-radius: 4px;
+}
+
+.text_styles {
+	font-size: 12px;
+	font-weight: 500;
+	line-height: 150%;
+}
+
+.toggle_div {
+	z-index: 10;
+	display: flex;
+	gap: 8px;
+	margin-right: 50px;
+}
+
+.input_div {
+	position: relative;
+	z-index: 10;
+	width: 140px;
+}

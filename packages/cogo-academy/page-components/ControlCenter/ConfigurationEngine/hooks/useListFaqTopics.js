@@ -1,6 +1,8 @@
+import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 function useListFaqTopics({ searchTopicsInput = '' }) {
 	const [topicCurrentPage, setTopicCurrentPage] = useState(1);
@@ -14,27 +16,27 @@ function useListFaqTopics({ searchTopicsInput = '' }) {
 
 	useEffect(() => {
 		debounceQuery(searchTopicsInput);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [searchTopicsInput]);
+	}, [debounceQuery, searchTopicsInput]);
 
-	const fetchFaqTopic = async () => {
+	const fetchFaqTopic = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
-					page                 : topicCurrentPage,
-					page_limit           : 5,
+					page                 : !query ? topicCurrentPage : 1,
+					page_limit           : 10,
 					is_admin_view        : true,
 					author_data_required : true,
 					filters              : { q: query, status: activeTopic },
 				},
 			});
 		} catch (err) {
-			// console.log(err);
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
-	};
+	}, [activeTopic, query, topicCurrentPage, trigger]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => { fetchFaqTopic(); }, [activeTopic, topicCurrentPage, query]);
+	useEffect(() => {
+		fetchFaqTopic();
+	}, [activeTopic, topicCurrentPage, query, fetchFaqTopic]);
 
 	return {
 		fetchFaqTopic,

@@ -21,6 +21,7 @@ function FilterPopover({ filters, setFilters, activeTab }) {
 			caret={false}
 			placement="bottom"
 			onClickOutside={() => setShowFilter(false)}
+			visible={showFilter}
 			render={(
 				<FilterContent
 					onClickReset={onClickReset}

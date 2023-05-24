@@ -45,26 +45,27 @@ function CreateExpenseForm({
 		<div>
 			{active === 'Expense Details'
 			&& (
-				<ExpenseDetailsForm
-					formData={formData}
-					setFormData={setFormData}
-					createExpenseType={createExpenseType}
-					categoryOptions={categoryOptions}
-					setCategoryOptions={setCategoryOptions}
-					subCategoryOptions={subCategoryOptions}
-					setSubCategoryOptions={setSubCategoryOptions}
-					branchOptions={branchOptions}
-					setBranchOptions={setBranchOptions}
-					entityOptions={entityOptions}
-					setEntityOptions={setEntityOptions}
-					setIsFormValidated={setIsFormValidated}
-				/>
+				<div style={{ marginTop: '40px' }}>
+					<ExpenseDetailsForm
+						formData={formData}
+						setFormData={setFormData}
+						createExpenseType={createExpenseType}
+						categoryOptions={categoryOptions}
+						setCategoryOptions={setCategoryOptions}
+						subCategoryOptions={subCategoryOptions}
+						setSubCategoryOptions={setSubCategoryOptions}
+						branchOptions={branchOptions}
+						setBranchOptions={setBranchOptions}
+						entityOptions={entityOptions}
+						setEntityOptions={setEntityOptions}
+						setIsFormValidated={setIsFormValidated}
+					/>
+				</div>
 			)}
 			{active === 'Upload Invoice' && createExpenseType === 'nonRecurring' && (
 				<UploadInvoiceForm
 					formData={formData}
 					setFormData={setFormData}
-					createExpenseType={createExpenseType}
 					isUploadConfirm={isUploadConfirm}
 					setIsUploadConfirm={setIsUploadConfirm}
 					taxOptions={taxOptions}

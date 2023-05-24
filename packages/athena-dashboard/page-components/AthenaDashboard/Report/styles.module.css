@@ -1,0 +1,75 @@
+.report_heading {
+	font-size: 30px;
+}
+
+.hscode_table {
+	margin-top: 48px;
+	overflow-x: scroll;
+	background-color: white;
+	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.individual_stats {
+	text-align: center;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.stats_panel {
+	height: 500px;
+	overflow-y: scroll;
+	background-color: white;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.country_share {
+	display: flex;
+	margin-top: 24px;
+	background-color: white;
+	border: 1px solid beige;
+	border-radius: 10px;
+	box-shadow: 10px 5px 5px rgb(239 233 233);
+
+	@media (max-width: 768px) {
+		display: block;
+	}
+}
+
+.trending_over_time {
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.value_of_goods {
+	margin-top: 8px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.global_supplier_table {
+	margin-top: 28px;
+	overflow-x: scroll;
+	background-color: white;
+	box-shadow: 0 0 4px rgb(0 0 0 / 15%);
+}
+
+.top_global_suppliers {
+	margin-top: 48px;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+.map_panel {
+	width: 80%;
+	height: 500px;
+}
+
+.responsive_line {
+	height: 400px;
+	box-shadow: 10px 5px 5px rgb(239 233 233);
+}

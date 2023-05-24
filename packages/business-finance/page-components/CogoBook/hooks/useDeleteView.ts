@@ -20,7 +20,7 @@ const useDeleteView = () => {
 	const refetch = useCallback(async () => {
 		try {
 			const res = await salaryTrigger({
-				params: {
+				data: {
 					sourceFileId: query?.sourceFileId,
 				},
 			});

@@ -33,7 +33,7 @@
 		margin-top: 12px;
 	}
 
-	& > div:not(:last-of-type) {
+	& > div {
 		flex: 0 0 45%;
 		margin: 4px 0;
 	}
@@ -77,4 +77,19 @@
 .sez_container {
 	display: flex;
 	align-items: center;
+}
+
+.section {
+	min-height: 220px;
+}
+
+.is_sez {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
+.errors {
+	font-size: 12px;
+	color: red;
 }

@@ -10,11 +10,13 @@ import { format, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import SelectAccrual from '../../../../commons/SelectAccrual';
+import { optionsEntity } from '../../../Accruals/constant';
 import useSaveCustom from '../../../hooks/useSaveCustom';
 import useSaveCustomList from '../../../hooks/useSaveCustomList';
 import { OptionMonth } from '../../SourceFile/utils';
 import { entityMapping, optionsCheck, optionsPeriod, optionsPills, optionsRadio } from '../constant';
 
+import ModalMonth from './ModalMonth';
 import styles from './styles.module.css';
 
 function Card({
@@ -28,15 +30,15 @@ function Card({
 	setSelect,
 	setShowReport,
 	setFiltersData,
+	reportTriggerLoading,
 }) {
 	const [modal, setModal] = useState(false);
 	const [customModal, setCustomModal] = useState(false);
-	const [deleteData, setDeleteData] = useState([]);
 	const { refetch, saveLoading } = useSaveCustom({ filters });
 	const {
 		refetch:refetchSave, saveData, loading, LoadingDelete,
 		refetchDelete,
-	} = useSaveCustomList({ deleteData, setCustomModal });
+	} = useSaveCustomList({ setCustomModal });
 
 	const content = () => (
 		<div className={styles.content_container}>
@@ -50,7 +52,6 @@ function Card({
 			/>
 		</div>
 	);
-	console.log(filters?.rowCheck, 'rowCheck');
 
 	const handleClick = () => {
 		fetchRatioApi(setShowReport);
@@ -90,8 +91,7 @@ function Card({
 	};
 
 	const handleDelete = (item) => {
-		setDeleteData(item);
-		refetchDelete();
+		refetchDelete(item);
 	};
 
 	return (
@@ -101,7 +101,7 @@ function Card({
 					<div className={styles.period}>
 						Selection Criteria
 						<Tooltip
-							content="Please select the accounting month"
+							content={<div className={styles.tool}>Please select the accounting month</div>}
 							placement="top"
 						>
 							<div className={styles.info_icon_container}>
@@ -119,12 +119,7 @@ function Card({
 								value={filters?.entity}
 								onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 								placeholder="Entity"
-								options={[
-									{ label: 'Entity 201', value: '201' },
-									{ label: 'Entity 301', value: '301' },
-									{ label: 'Entity 401', value: '401' },
-									{ label: 'Entity 501', value: '501' },
-								]}
+								options={optionsEntity}
 								isClearable
 								style={{ width: '150px' }}
 							/>
@@ -133,8 +128,8 @@ function Card({
 						<div>
 							<div className={styles.bold_font_data}>Month*</div>
 							<Select
-								value={filters?.month}
-								onChange={(val:string) => { setFilters((prev) => ({ ...prev, month: val })); }}
+								value={filters?.date}
+								onChange={(val:string) => { setFilters((prev) => ({ ...prev, date: val })); }}
 								placeholder="Month"
 								options={OptionMonth()}
 								disabled={filters?.category}
@@ -319,7 +314,8 @@ function Card({
 						</Button>
 						<Button
 							onClick={() => { handleClick(); }}
-							disabled={!filters?.entity && !filters?.month}
+							disabled={!(filters?.entity && (filters?.date || filters?.category))}
+							loading={reportTriggerLoading}
 						>
 							Run Report
 						</Button>
@@ -346,55 +342,7 @@ function Card({
 
 				{modal && (
 
-					<Modal
-						show={modal}
-						onClose={() => {
-							setModal(false);
-						}}
-					>
-						<Modal.Header title="Comparison Mode" />
-						<div className={styles.modal_data}>
-							<Modal.Body>
-								<div className={styles.flex_data}>
-									<div>
-										<Select
-											value={filters?.monthFrom}
-											onChange={(val:string) => {
-												setFilters((prev) => ({
-													...prev,
-													monthFrom: val,
-												}));
-											}}
-											placeholder="Month"
-											options={OptionMonth()}
-											isClearable
-											style={{ width: '200px' }}
-										/>
-									</div>
-									<div>
-										<Select
-											value={filters?.monthTo}
-											onChange={(val:string) => {
-												setFilters((prev) => ({ ...prev, monthTo: val }));
-											}}
-											placeholder="Month"
-											options={OptionMonth()}
-											isClearable
-											style={{ width: '200px' }}
-										/>
-									</div>
-								</div>
-
-							</Modal.Body>
-						</div>
-
-						<Modal.Footer>
-							<div className={styles.button_flex_data}>
-								<Button onClick={() => { setModal(false); }}>Confirm</Button>
-
-							</div>
-						</Modal.Footer>
-					</Modal>
+					<ModalMonth modal={modal} setModal={setModal} filters={filters} setFilters={setFilters} />
 
 				)}
 

@@ -5,32 +5,32 @@ import { useEffect, useCallback, useRef } from 'react';
 
 import useGetScopeOptions from './useGetScopeOptions';
 
-export default function useScope({ defaultValues, closePopover }) {
+export default function useScope({ defaultValues = {}, closePopover = () => {}, apisToConsider = [] }) {
 	const { profile } = useSelector((store) => store);
 	const dispatch = useDispatch();
 
 	const { authParams, selected_agent_id: selectedAgentId, ...restProfile } = profile || {};
 
-	const { scopeData, navigation, pathname } = useGetScopeOptions({ defaultValues });
+	const { scopeData, navigation, pathname } = useGetScopeOptions({ defaultValues, apisToConsider });
 
-	const { defaultScope, defaultView, defaultAgentId } = scopeData;
 	const [, scope, viewType = ''] = (authParams || '').split(':');
 
-	const initialValues = useRef({ pathname, scope, restProfile });
+	const initialValues = useRef({ pathname, scope });
 
 	const handleApply = useCallback((data) => {
 		const { scope: newScope, viewType: newViewType, selected_agent_id } = data || {};
-		let newAuthParams = `${navigation}:${newScope}`;
+		if (newScope) {
+			let newAuthParams = `${navigation}:${newScope}`;
 
-		if (newViewType) { newAuthParams += `:${newViewType}`; }
+			if (newViewType) { newAuthParams += `:${newViewType}`; }
 
-		dispatch(setProfileState({
-			...restProfile,
-			authParams: newAuthParams,
-			selected_agent_id,
-		}));
-
-		closePopover();
+			dispatch(setProfileState({
+				...restProfile,
+				authParams: newAuthParams,
+				selected_agent_id,
+			}));
+			closePopover();
+		}
 	}, [dispatch, navigation, closePopover, restProfile]);
 
 	const resetProfile = useCallback(() => {
@@ -43,14 +43,16 @@ export default function useScope({ defaultValues, closePopover }) {
 
 	useEffect(() => {
 		if (!initialValues.current.scope && pathname === initialValues.current.pathname) {
+			const { defaultScope, defaultView, defaultAgentId } = scopeData || {};
 			initialValues.current.scope = defaultScope;
+
 			handleApply({
 				scope             : defaultScope,
 				viewType          : defaultView,
 				selected_agent_id : defaultAgentId,
 			});
 		}
-	}, [defaultScope, defaultView, defaultAgentId, handleApply, pathname]);
+	}, [scopeData, handleApply, pathname]);
 
 	useEffect(() => Router.events.on('routeChangeStart', resetProfile), [resetProfile]);
 

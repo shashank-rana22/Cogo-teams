@@ -1,0 +1,43 @@
+.filters {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-top: 16px;
+
+	:global(.ui_select_display_container) {
+		width: 160px;
+	}
+}
+
+.stats_section {
+	display: flex;
+	margin-top: 16px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
+}
+
+.table_section {
+	margin-top: 16px;
+	background: #faf5ec;
+	border-radius: 8px;
+}
+
+.list_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 16px;
+
+	.list_title {
+		margin: 0;
+		font-size: 18px;
+		font-weight: 700;
+	}
+
+	.list_actions {
+		display: flex;
+		align-items: center;
+	}
+}

@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState } from 'react';
 
-import { formatDate } from '../../../commons/utils/formatDate';
+import getPayload from '../utils/getPayload';
 
 interface AddressInterface {
 	pincode?:number | string,
@@ -52,6 +52,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		registration_number:registrationNumberTradeParty,
 		tds_deduction_rate:tdsTradeParty,
 		organization_trade_party_detail_id:tradePartyMappingIdFromTradeParty,
+		is_tax_applicable:isTaxApplicable,
 	} = tradeParty || {};
 
 	const {
@@ -61,34 +62,6 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 	} = tradePartyCountry || {};
 
 	const branchId = JSON.parse(formData?.branch || '{}')?.branchId;
-
-	const lineItemsData = lineItemsList?.map((lineItem:any) => {
-		if (lineItem?.tax) {
-			const { code, serviceName, productCode } = JSON.parse(lineItem?.tax) || {};
-
-			return ({
-				unit                : '',
-				price               : lineItem?.amount_before_tax,
-				name                : lineItem?.itemName,
-				code,
-				serviceName,
-				quantity            : '1',
-				priceInBillCurrency : invoiceCurrency,
-				discount            : 0,
-				productCode,
-				taxPercent          : JSON.parse(lineItem?.tax || '{}')?.taxPercent,
-				exchangeRate        : 1,
-				currencyCode        : invoiceCurrency,
-				lineItemAdditional  : {
-					taxPercent : JSON.parse(lineItem?.tax || '{}')?.taxPercent,
-					totalPrice : '',
-					tdsAmount  : lineItem?.tds,
-				},
-				createdBy: profile?.user?.id,
-			});
-		}
-		return null;
-	});
 
 	const { name: branchName } = JSON.parse(branch || '{}') || {};
 
@@ -129,7 +102,7 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		cogo_entity_id: vendorCogoEntityId,
 		kyc_status:kycStatus,
 		registration_type:registrationType,
-		id:vendorId,
+		id:idFromVendor,
 		bank_details:bankDetails = [],
 		pincode,
 		city_name:cityName,
@@ -151,128 +124,60 @@ const useCreateExpense = ({ formData, setShowModal, getList }) => {
 		{ manual: true },
 	);
 
-	const payload = {
-		// expenseConfigurationId : 'example', only in case of recurring
-		request: {
-			job: {
-				jobSource   : 'OVERHEAD',
-				jobType     : 'EXPENSE',
-				referenceId : '',
-				jobDetails  : {
-					vendorDetails: {
-						organizationId       : vendorID,
-						organizationName     : vendorName,
-						organizationSerialId : vendorSerialId,
-					},
-				},
-			},
-			billDetails: {
-				jobSource           : 'OVERHEAD',
-				jobType             : 'EXPENSE',
-				performedByUserType : 'AGENT',
-				serviceProviderType : 'vendor',
-				createdBy           : profile?.user?.id,
-				bill                : {
-					billDate           : formatDate(invoiceDate, 'yyyy-MM-dd hh:mm:ss', {}, false),
-					remarks            : '',
-					ledgerExchangeRate : null,
-					billType           : 'EXPENSE',
-					isProforma         : false,
-					proformaId         : '',
-					isTaxable          : true,
-					placeOfSupply      : branchName,
-					billCurrency       : invoiceCurrency,
-					creditDays         : 0,
-					exchangeRate       : null,
-					ledgerCurrency,
-					billDocumentUrl    : uploadedInvoice,
-					billNumber         : invoiceNumber,
-				},
-				sellerDetail: { // tradeParty
-					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
-					entityCode           : entityCodeTradeParty,
-					entityCodeId         : entityIdTradeParty,
-					organizationId       : orgIdTradeParty,
-					organizationSerialId : sidTradeParty,
-					isTaxApplicable      : true,
-					isSez                : false,
-					organizationName     : nameTradeParty,
-					pincode,
-					address              : cityName,
-					cityName,
-					supplyAgent          : nameTradeParty,
-					zone                 : 'EAST',
-					countryName          : countryNameTradeParty,
-					countryCode          : countryCodeTradeParty,
-					countryId            : countryIdTradeParty,
-					registrationNumber   : registrationType === 'pan' ? registrationNumberTradeParty : null,
-					taxNumber            : registrationType === 'tax' ? registrationNumberTradeParty : null,
-					tdsRate              : tdsTradeParty || 1,
-					bankDetail           : {
-						bankName,
-						beneficiaryName: bankName,
-						ifscCode,
-						accountNumber,
-						bankId,
-						collectionPartyId,
-					},
-				},
-				buyerDetails: { // cogo entity
-					entityCode,
-					organizationId          : id,
-					organizationSerialId    : serialId,
-					isSez                   : false,
-					organizationName        : businessName,
-					businessName,
-					pincode                 : addressData?.pincode,
-					address                 : addressData?.address,
-					entityCodeId            : id,
-					cityName                : addressData?.cityName,
-					countryName             : addressData?.countryName,
-					countryCode             : addressData?.countryCode,
-					countryId               : addressData?.countryId,
-					registrationNumber,
-					taxNumber               : addressData?.taxNumber,
-					corporateIdentityNumber : cin,
-					tdsRate                 : 0,
-				},
-				serviceProviderDetail: { // vendor
-					tradePartyMappingId  : tradePartyMappingIdFromTradeParty,
-					entityCode,
-					entityCodeId         : vendorCogoEntityId,
-					organizationId       : vendorId,
-					organizationSerialId : vendorSid,
-					isSez                : false,
-					organizationName     : vendorBusinessName,
-					businessName         : vendorBusinessName,
-					pincode,
-					address              : cityName,
-					cityName,
-					countryName          : countryNameTradeParty,
-					countryCode          : countryCodeTradeParty,
-					countryId            : vendorCountryId,
-					registrationNumber   : vendorRegistrationNumber,
-					taxNumber            : vendorRegistrationNumber,
-					tdsRate              : tdsTradeParty || 1,
-				},
-				lineItems: lineItemsData,
-			},
-			createdBy           : profile?.user?.id,
-			performedByUserType : 'AGENT',
-		},
-		category       : expenseCategory?.toUpperCase(),
-		subCategory    : expenseSubCategory?.toUpperCase(),
-		approvedByUser : {
-			userEmail : stakeholderEmail,
-			userId    : stakeholderId,
-			userName  : stakeholderName,
-		},
-		expenseType : 'NON_RECURRING',
-		branchId    : addressData?.branchId,
-		kycStatus   : kycStatus?.toUpperCase(),
-		pan         : vendorRegistrationNumber,
-		createdBy   : profile?.user?.id,
-	};
+	const payload = getPayload({
+		vendorID,
+		vendorName,
+		vendorSerialId,
+		profile,
+		invoiceDate,
+		branchName,
+		invoiceCurrency,
+		ledgerCurrency,
+		uploadedInvoice,
+		invoiceNumber,
+		tradePartyMappingIdFromTradeParty,
+		entityCodeTradeParty,
+		entityIdTradeParty,
+		orgIdTradeParty,
+		sidTradeParty,
+		isTaxApplicable,
+		nameTradeParty,
+		pincode,
+		cityName,
+		countryNameTradeParty,
+		countryCodeTradeParty,
+		countryIdTradeParty,
+		registrationType,
+		registrationNumberTradeParty,
+		tdsTradeParty,
+		bankName,
+		ifscCode,
+		accountNumber,
+		bankId,
+		collectionPartyId,
+		entityCode,
+		id,
+		serialId,
+		businessName,
+		addressData,
+		registrationNumber,
+		cin,
+		vendorCogoEntityId,
+		idFromVendor,
+		vendorSid,
+		vendorBusinessName,
+		vendorCountryId,
+		vendorRegistrationNumber,
+		expenseCategory,
+		expenseSubCategory,
+		stakeholderEmail,
+		stakeholderId,
+		stakeholderName,
+		kycStatus,
+		lineItemsList,
+		expenseType            : 'NON_RECURRING',
+		expenseConfigurationId : null,
+	});
 
 	const submitData = async () => {
 		try {

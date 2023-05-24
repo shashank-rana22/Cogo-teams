@@ -10,8 +10,9 @@ function JobStats({ jobData }) {
 			{(jobData || [{}]).map((item) => {
 				const { income, expense, count, state } = item || {};
 				const profit = ((income - expense) / income) * 100;
+				const calcWidth = 100 / (jobData || [{}]).length;
 				return (
-					<div className={styles.item}>
+					<div className={styles.item} style={{ width: `${calcWidth}%` }}>
 
 						<div className={styles.sub_flex}>
 							<div className={styles.label}>

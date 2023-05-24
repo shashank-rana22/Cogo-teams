@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
+import { getConstantsByCountryCode } from '@cogoport/globalization/constants/geo';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { isEmpty, merge } from '@cogoport/utils';
@@ -23,7 +24,10 @@ const useResubmitKyc = ({
 		formState: { errors: errors_kyc },
 		handleSubmit: handleSubmitKyc,
 		getValues,
+		watch,
 	} = useForm();
+
+	const formValueCountryId = watch('country_id');
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'resubmit_vendor_kyc',
@@ -38,7 +42,7 @@ const useResubmitKyc = ({
 		params: { filters: { type: ['country'] } },
 	}));
 
-	const { kyc_rejection_feedbacks = [] } = vendor_details;
+	const { kyc_rejection_feedbacks = [], country_id: vendorCountryId } = vendor_details;
 
 	let newControls = (kyc_rejection_feedbacks || []).map((item) => {
 		const object = VENDOR_FIELDS_MAPPING.find((getItem) => getItem.key === item) || {};
@@ -53,6 +57,12 @@ const useResubmitKyc = ({
 
 		if (object.value === 'country_id') {
 			return { ...newcontrol, ...countryOptions };
+		}
+
+		if (object.value === 'company_type') {
+			const companyTypeOptions = getConstantsByCountryCode({ country_id: formValueCountryId || vendorCountryId });
+
+			return { ...newcontrol, options: companyTypeOptions.options.registration_types };
 		}
 
 		return newcontrol;

@@ -4,9 +4,10 @@
 	color: #221f20;
 }
 
-.back_container {
+.container {
 	display: flex;
 	align-items: center;
+	margin-bottom: 32px;
 }
 
 .header_container {

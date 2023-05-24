@@ -1,13 +1,12 @@
-import { SelectController, useForm } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import feedbackDataColumns from '../../constants/feedback-data-columns';
 import useListUserFeedbacks from '../../hooks/useListUserFeedbacks';
-import getMonthControls from '../../utils/monthControls';
 import useGetColumns from '../Columns';
+import Filters from '../Filters';
 import PerformanceChart from '../PerformanceChart';
 import UserTableData from '../UserTableData';
 
@@ -19,49 +18,33 @@ function UserStats({ source = '' }) {
 
 	const {
 		general: {
-			query: { user_id = '', path = '' },
+			query: { user_id = '' },
 		},
 	} = useSelector((state) => state);
 
-	const userId = user_id;
+	const [userId, setUserId] = useState(user_id);
 
 	const handleClick = () => {
-		router.push(`${path}`);
+		router.back();
 	};
-
-	const formProps =	useForm();
-	const { watch: watchDateFilter, control } = formProps;
 
 	const {
 		feedbackData = {}, loading, params, setParams,
 		setPage,
 	} = useListUserFeedbacks({
 		userId,
-		rating_required: 'yes',
+		rating_required: source === 'user_dashboard' ? undefined : 'yes',
 	});
 
 	const { list = [], pagination_data = {} } = feedbackData;
 
 	const { total_count = '' } = pagination_data;
 
-	const monthControls = getMonthControls(params.Year, params.Month);
-
-	const monthFilter = watchDateFilter('month');
-	const yearFilter = watchDateFilter('year');
-	const ratingFilter = watchDateFilter('rating');
-
-	useEffect(() => setParams((pv) => ({
-		...pv,
-		Month  : monthFilter || undefined,
-		Year   : yearFilter || undefined,
-		Rating : ratingFilter || undefined,
-		Page   : 1,
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	})), [monthFilter, yearFilter, ratingFilter]);
-
 	const columnsToShow = feedbackDataColumns.userStats;
 
 	const columns = useGetColumns({ columnsToShow });
+
+	useEffect(() => { if (user_id) { setUserId(user_id); } }, [user_id]);
 
 	return (
 		<div className={styles.container}>
@@ -87,27 +70,13 @@ function UserStats({ source = '' }) {
 
 				<div className={styles.user_profile}><UserProfile userId={userId} /></div>
 
-				<div className={styles.header_filters}>
-					<div className={styles.filter_container}>
+				<div className={styles.filter_container}>
+					<Filters source="user_dashboard" params={params} setParams={setParams} />
 
-						{monthControls.map((cntrl) => (
-							<div
-								className={styles.month_container}
-								key={cntrl.name}
-							>
-								<SelectController
-									{...cntrl}
-									control={control}
-									formProps={formProps}
-								/>
-							</div>
-						))}
-
-					</div>
 				</div>
 
 				<div className={styles.performance_chart}>
-					<PerformanceChart userId={userId} />
+					<PerformanceChart userId={userId} params={params} />
 				</div>
 
 				<div className={styles.list_header}>

@@ -1,61 +1,66 @@
-import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
-import React, { useMemo } from 'react';
+import React from 'react';
 
-import useGetServices from '../../hooks/useGetServices';
+import userLoggedIn from '../../helpers/booking-shipper-kam-user';
 import useGetShipment from '../../hooks/useGetShipment';
-import useGetTimeLine from '../../hooks/useGetTimeline';
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 
-const Kam = dynamic(() => import('./StakeholdersView/Kam'), { ssr: false });
+import styles from './styles.module.css';
+
 const Superadmin = dynamic(() => import('./StakeholdersView/Superadmin'), { ssr: false });
+const DKam = dynamic(() => import('./StakeholdersView/ConsigneeShipperBookingAgent'), { ssr: false });
+const Kam = dynamic(() => import('./StakeholdersView/BookingAgent'), { ssr: false });
+const BookingDesk = dynamic(() => import('./StakeholdersView/BookingDesk'), { ssr: false });
+const CostBookingDesk = dynamic(() => import('./StakeholdersView/CostBookingDesk'), { ssr: false });
+const LastMileDesk = dynamic(() => import('./StakeholdersView/LastMileDesk'), { ssr: false });
+const DocumentDesk = dynamic(() => import('./StakeholdersView/DocumentDesk'), { ssr: false });
+
+const SHIPMENT_ADDITIONAL_METHODS = ['main_service', 'documents', 'end_to_end_shipment'];
 
 function ShipmentDetails() {
-	const shipment_additional_methods = useMemo(() => ['main_service',
-		'documents', 'bl_container_mappings'], []);
+	const { get } = useGetShipment({ additional_methods: SHIPMENT_ADDITIONAL_METHODS });
 
-	const { get } = useGetShipment({ additional_methods: shipment_additional_methods });
 	const { shipment_data } = get;
 
-	const services_additional_methods = useMemo(() => [
-		'booking_requirement',
-		'stakeholder',
-		'service_objects'], []);
-
-	const { servicesGet } = useGetServices({
-		shipment_id        : shipment_data?.id,
-		additional_methods : services_additional_methods,
-	});
-
-	const { getTimeline } = useGetTimeLine({ shipment_data });
 	const { activeStakeholder } = useStakeholderCheck();
 
-	const contextValues = useMemo(() => ({
-		...get,
-		...servicesGet,
-		...getTimeline,
-		activeStakeholder,
-	}), [get, servicesGet, getTimeline, activeStakeholder]);
+	const { kamLoggedIn } = userLoggedIn({ shipment_data });
 
-	const importStakeholderView = () => {
-		switch (activeStakeholder) {
-			case 'KAM':
-				return <Kam />;
+	switch (activeStakeholder) {
+		case 'booking_agent':
+			if (kamLoggedIn === 'booking_agent') {
+				return <Kam get={get} activeStakeholder={activeStakeholder} />;
+			}
+			return <DKam get={get} activeStakeholder="consignee_shipper_booking_agent" />;
 
-			case 'Superadmin':
-			case 'Admin':
-			case 'TechSuperadmin':
-				return <Superadmin />;
-			default:
-				return null;
-		}
-	};
+		case 'booking_desk':
+		case 'booking_desk_manager':
+			return <BookingDesk get={get} activeStakeholder={activeStakeholder} />;
 
-	return (
-		<ShipmentDetailContext.Provider value={contextValues}>
-			{importStakeholderView()}
-		</ShipmentDetailContext.Provider>
-	);
+		case 'costbooking_ops':
+		case 'costbooking_manager':
+			return <CostBookingDesk get={get} activeStakeholder={activeStakeholder} />;
+
+		case 'lastmile_ops':
+		case 'lastmile_ops_manager':
+			return <LastMileDesk get={get} activeStakeholder={activeStakeholder} />;
+
+		case 'document_desk':
+		case 'document_desk_manager':
+			return <DocumentDesk get={get} activeStakeholder={activeStakeholder} />;
+
+		case 'admin':
+		case 'superadmin':
+		case 'credit_control':
+		case 'prod_process_owner':
+			return <Superadmin get={get} activeStakeholder={activeStakeholder} />;
+		default:
+			return (
+				<h1 className={styles.not_allowed}>
+					You are not allowed to visit this page!
+				</h1>
+			);
+	}
 }
 
 export default ShipmentDetails;

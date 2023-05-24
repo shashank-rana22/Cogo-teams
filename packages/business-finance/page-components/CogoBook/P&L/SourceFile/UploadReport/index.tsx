@@ -166,7 +166,7 @@ function UploadReport() {
 	+ Number(value[2] || salaryValue[2] || fclImportValue)
 	+ Number(value[3] || salaryValue[3] || lclExportValue)
 	+ Number(value[4] || salaryValue[4] || lclImportValue)
-	+ Number(value[0] || salaryValue[0] || totalValue));
+	+ Number(value[5] || salaryValue[5] || oceanCustomValue));
 
 	const AirSumValue = Number(valueAir[0] || salaryValueAir[0] || totalAirValue)
 	===	(Number(valueAir[1] || salaryValueAir[1] || airExportValue)

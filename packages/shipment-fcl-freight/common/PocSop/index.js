@@ -7,7 +7,12 @@ import { useState, useContext } from 'react';
 import styles from './styles.module.css';
 
 function SopAndPoc() {
-	const { shipment_data, servicesList, primary_service } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data,
+		servicesList,
+		primary_service,
+		activeStakeholder,
+	} = useContext(ShipmentDetailContext);
 
 	const [activeTab, setActiveTab] = useState('poc');
 	const [show, setShow] = useState(false);
@@ -34,7 +39,7 @@ function SopAndPoc() {
 			{show
 				&& (
 					<Modal
-						show={show}
+						show
 						placement="top-right"
 						size="md"
 						scroll={false}
@@ -62,7 +67,11 @@ function SopAndPoc() {
 							>
 								<TabPanel name="poc" title="POC">
 									<div style={{ height: '80vh', overflow: 'scroll' }}>
-										<Poc shipment_data={shipment_data} servicesList={servicesList} />
+										<Poc
+											shipment_data={shipment_data}
+											servicesList={servicesList}
+											activeStakeholder={activeStakeholder}
+										/>
 									</div>
 								</TabPanel>
 								<TabPanel name="sop" title="SOP">

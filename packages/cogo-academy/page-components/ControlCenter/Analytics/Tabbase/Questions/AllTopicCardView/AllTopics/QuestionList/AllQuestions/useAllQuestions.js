@@ -1,6 +1,6 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -44,16 +44,15 @@ const useAllQuestions = ({ listdata = [], sortType, setSortType }) => {
 			questions: (
 				<div className={styles.question}>
 					<Tooltip content={question_abstract} placement="right">
-						<div>{truncate(question_abstract)}</div>
+						<div>{truncate(question_abstract || '')}</div>
 					</Tooltip>
 				</div>
 			),
-			tags: (faq_tags?.length > 0 ? (
+			tags: (!isEmpty(faq_tags || []) ? (
 				<div className={styles.tags}>
-					{(faq_tags || []).map((tag) => {
-						const { display_name } = tag || {};
-						return <Pill size="sm" color="green">{startCase(display_name)}</Pill>;
-					})}
+					{(faq_tags || []).map(({ display_name }) => (
+						<Pill size="sm" color="green">{startCase(display_name || '')}</Pill>
+					))}
 				</div>
 			) : '-'),
 			views: (

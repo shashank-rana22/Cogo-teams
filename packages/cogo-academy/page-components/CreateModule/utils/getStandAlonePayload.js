@@ -2,7 +2,14 @@ import { isEmpty } from '@cogoport/utils';
 
 import checkErrors from './checkErrors';
 
-const getStandAlonePayload = ({ values, action, testQuestionId, questionSetId, editDetails = {} }) => {
+const getStandAlonePayload = ({
+	values,
+	action,
+	testQuestionId,
+	questionSetId,
+	editDetails = {},
+	editorValue = {},
+}) => {
 	const { question = [], topic } = values || {};
 
 	const {
@@ -10,8 +17,11 @@ const getStandAlonePayload = ({ values, action, testQuestionId, questionSetId, e
 		difficulty_level,
 		question_text,
 		options = [],
-		explanation,
 	} = question?.[0] || {};
+
+	if (action === 'delete') {
+		return { id: testQuestionId, status: 'inactive' };
+	}
 
 	const hasError = [];
 
@@ -21,7 +31,7 @@ const getStandAlonePayload = ({ values, action, testQuestionId, questionSetId, e
 		hasError.push(checkError);
 	}
 
-	if (!isEmpty(hasError) && action !== 'delete') {
+	if (!isEmpty(hasError)) {
 		return { hasError };
 	}
 
@@ -45,7 +55,7 @@ const getStandAlonePayload = ({ values, action, testQuestionId, questionSetId, e
 		topic,
 		difficulty_level,
 		question_text,
-		explanation: [explanation],
+		...(!isEmpty(editorValue) ? { explanation: [editorValue?.question_0_explanation.toString('html')] } : {}),
 		answers,
 	};
 };

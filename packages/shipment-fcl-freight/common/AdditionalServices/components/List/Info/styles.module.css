@@ -47,7 +47,7 @@
 	}
 
 	&.disputed {
-		color: ##393f70;
+		color: #393f70;
 		background-color: #f7cdcd;
 	}
 }

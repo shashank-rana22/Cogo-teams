@@ -35,3 +35,17 @@
 		margin-left: 6px;
 	}
 }
+
+.badge_details {
+	flex: 1;
+	width: 48.5%;
+	padding: 8px;
+	margin: 6px;
+	background-color: #fff;
+	border-radius: 12px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin: 6px 0;
+	}
+}

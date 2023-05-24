@@ -7,7 +7,7 @@ import { TableProps } from '../common/interface';
 import styles from './style.module.css';
 
 function StyledTable({
-	id, className, columns, data, pageSize, page, total, setFilters, filters, loading, ...rest
+	id, className, columns, data, pageSize, page, total, setFilters, filters, loading, showPagination = true, ...rest
 }: TableProps) {
 	return (
 		<div className={styles.table}>
@@ -22,15 +22,17 @@ function StyledTable({
 
 			{data.length === 0 && <EmptyState />}
 
-			<div className={styles.pagination_container}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={total}
-					pageSize={pageSize}
-					onPageChange={(val:number) => setFilters({ ...filters, page: val })}
-				/>
-			</div>
+			{showPagination && (
+				<div className={styles.pagination_container}>
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={total}
+						pageSize={pageSize}
+						onPageChange={(val:number) => setFilters({ ...filters, page: val })}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

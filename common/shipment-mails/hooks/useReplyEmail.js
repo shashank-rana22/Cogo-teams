@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useLensRequest } from '@cogoport/request';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 /**
  * Single utility hook to Reply mails from Cogo RPA
  */
@@ -22,7 +22,7 @@ const useReplyEmail = ({ refetch = () => {} }) => {
 			Toast.success('Email Sent');
 			refetch();
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 

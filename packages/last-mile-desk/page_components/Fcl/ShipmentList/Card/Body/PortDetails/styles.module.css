@@ -1,0 +1,48 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.port_detail {
+	width: 45%;
+}
+
+.port {
+	width: 100%;
+}
+
+.port_icon {
+	width: 10%;
+}
+
+.port_code {
+	font-size: var(--font-size-sm);
+	color: var(--color-accent-orange-2);
+}
+
+.port_name_container {
+	width: fit-content;
+
+	:global {
+		.tippy-box {
+			min-height: 30px;
+			padding: 4px 6px;
+			font-size: var(--font-size-md);
+		}
+	}
+}
+
+.port_name {
+	width: max-content;
+	max-width: 170px;
+	overflow: hidden;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.est_time {
+	font-size: var(--font-size-sm);
+}

@@ -1,4 +1,4 @@
-import { SelectController, CheckboxGroupController, RadioGroupController } from '@cogoport/forms';
+import { SelectController, CheckboxGroupController, RadioGroupController, InputController } from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -12,6 +12,8 @@ function getElementController(type = '') {
 			return CheckboxGroupController;
 		case 'select':
 			return SelectController;
+		case 'input':
+			return InputController;
 		default:
 			return null;
 	}
@@ -19,13 +21,13 @@ function getElementController(type = '') {
 
 function Item(props) {
 	const {
-		type,
+		controllerType = '',
 		control,
 		label,
 		error = {},
 	} = props || {};
 
-	const Element = getElementController(type);
+	const Element = getElementController(controllerType);
 
 	return (
 		<div className={styles.element}>

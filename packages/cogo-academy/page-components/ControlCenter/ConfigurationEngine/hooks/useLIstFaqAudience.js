@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -20,13 +21,13 @@ function useLIstFaqAudience({ searchAudienceInput = '' }) {
 		try {
 			await trigger({
 				params: {
-					page       : audienceCurrentPage,
-					page_limit : 5,
+					page       : !query ? audienceCurrentPage : '1',
+					page_limit : 10,
 					filters    : { q: query, status: activeAudience },
 				},
 			});
 		} catch (err) {
-			Toast?.error(err?.message);
+			if (err.response?.data) { Toast.error(getApiErrorString(err.response?.data)); }
 		}
 	}, [activeAudience, audienceCurrentPage, query, trigger]);
 

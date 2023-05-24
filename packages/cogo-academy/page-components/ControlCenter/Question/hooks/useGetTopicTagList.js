@@ -9,17 +9,17 @@ import WORK_SCOPES_OPTIONS from '../../ConfigurationEngine/CreateAudienceForm/ut
 import countries from '@/data-store/constants/countries.json';
 
 const useGetTopicTagList = () => {
-	const [{ data: topicsData, loading:listTopicsLoading }, triggerTopics] = useRequest({
+	const [{ data: topicsData, loading: listTopicsLoading }, triggerTopics] = useRequest({
 		method : 'get',
 		url    : '/list_faq_topics',
 	}, { manual: true });
 
-	const [{ data: tagsData, loading:listTagsLoading }, triggerTags] = useRequest({
+	const [{ data: tagsData, loading: listTagsLoading }, triggerTags] = useRequest({
 		method : 'get',
 		url    : '/list_faq_tags',
 	}, { manual: true });
 
-	const [{ data: audienceData, loading:listAudienceLoading }, triggerAudiences] = useRequest({
+	const [{ data: audienceData, loading: listAudienceLoading }, triggerAudiences] = useRequest({
 		method : 'get',
 		url    : '/list_faq_audiences',
 	}, { manual: true });
@@ -31,6 +31,9 @@ const useGetTopicTagList = () => {
 					page_limit               : 100000,
 					pagination_data_required : false,
 					is_admin_view            : true,
+					filters                  : {
+						status: 'active',
+					},
 				},
 			});
 		} catch (error) {
@@ -44,6 +47,9 @@ const useGetTopicTagList = () => {
 				params: {
 					page_limit               : 100000,
 					pagination_data_required : false,
+					filters                  : {
+						status: 'active',
+					},
 				},
 			});
 		} catch (error) {
@@ -57,6 +63,9 @@ const useGetTopicTagList = () => {
 				params: {
 					page_limit               : 100000,
 					pagination_data_required : false,
+					filters                  : {
+						status: 'active',
+					},
 				},
 			});
 		} catch (error) {
@@ -65,7 +74,7 @@ const useGetTopicTagList = () => {
 	}, [triggerAudiences]);
 
 	const { list: topicList = [] } = topicsData || {};
-	const { list : tagList = [] } = tagsData || {};
+	const { list: tagList = [] } = tagsData || {};
 	const { list: audienceList = [] } = audienceData || {};
 
 	const topicOptions = [];

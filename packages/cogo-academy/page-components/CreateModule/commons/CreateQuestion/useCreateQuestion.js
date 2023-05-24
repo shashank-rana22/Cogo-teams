@@ -6,6 +6,12 @@ import useCreateTestQuestion from '../../hooks/useCreateTestQuestion';
 import useUpdateCaseStudy from '../../hooks/useUpdateCaseStudy';
 import useUpdateStandAloneTestQuestion from '../../hooks/useUpdateStandAloneTestQuestion';
 
+let RichTextEditor;
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
+
 const useCreateQuestion = ({
 	item,
 	setSavedQuestionDetails,
@@ -18,6 +24,14 @@ const useCreateQuestion = ({
 	listSetQuestions,
 }) => {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
+	const [uploadable, setUploadable] = useState(false);
+	const [editorValue, setEditorValue] = useState(
+		questionTypeWatch === 'stand_alone'
+			? { question_0_explanation: RichTextEditor.createEmptyValue() }
+			: { case_questions_0_explanation: RichTextEditor.createEmptyValue() },
+	);
+
+	const [subjectiveEditorValue, setSubjectiveEditorValue] = useState(RichTextEditor.createEmptyValue());
 
 	const { isNew: isNewQuestion = false, id } = item || {};
 
@@ -29,6 +43,8 @@ const useCreateQuestion = ({
 		test_case_study_questions = [],
 		test_question_answers = [],
 		explanation = [],
+		character_limit = '',
+		allow_file_upload,
 	} = editDetails || {};
 
 	const {
@@ -43,16 +59,24 @@ const useCreateQuestion = ({
 		getTestQuestionTest,
 		questionSetId,
 		listSetQuestions,
+		editorValue,
+		subjectiveEditorValue,
+		setSubjectiveEditorValue,
+		uploadable,
+		setUploadable,
 	});
 
-	const { updateStandAloneTestQuestion } = useUpdateStandAloneTestQuestion({
+	const { updateStandAloneTestQuestion, loading: updateStandAloneLoading } = useUpdateStandAloneTestQuestion({
 		questionSetId,
 		getTestQuestionTest,
 		setEditDetails,
 		setAllKeysSaved,
 		reset,
+		subjectiveEditorValue,
 		listSetQuestions,
 		editDetails,
+		editorValue,
+		uploadable,
 	});
 
 	const {
@@ -73,6 +97,7 @@ const useCreateQuestion = ({
 				values,
 				action         : 'update',
 				testQuestionId : editDetailsId,
+				question_type,
 			});
 		} else {
 			createTestQuestion({ values, editDetails });
@@ -101,6 +126,7 @@ const useCreateQuestion = ({
 			action         : 'delete',
 			reset,
 			testQuestionId : editDetailsId,
+			question_type,
 		});
 	};
 
@@ -114,7 +140,13 @@ const useCreateQuestion = ({
 
 	useEffect(() => {
 		setQuestionTypeWatch(watchQuestionType);
-	}, [watchQuestionType]);
+
+		if (isEmpty(editDetails)) {
+			setEditorValue(watchQuestionType === 'stand_alone'
+				? { question_0_explanation: RichTextEditor.createEmptyValue() }
+				: { case_questions_0_explanation: RichTextEditor.createEmptyValue() });
+		}
+	}, [editDetails, watchQuestionType]);
 
 	useEffect(() => {
 		if (isEmpty(editDetails)) {
@@ -138,7 +170,13 @@ const useCreateQuestion = ({
 
 				setValue(`${childKey}.question_type`, indQuestionType);
 				setValue(`${childKey}.question_text`, indQuestionText);
-				setValue(`${childKey}.explanation`, indExplanation?.[0]);
+
+				setEditorValue((prev) => ({
+					...prev,
+					[`case_questions_${index}_explanation`]: isEmpty(indExplanation)
+						? RichTextEditor.createEmptyValue()
+						: RichTextEditor?.createValueFromString((indExplanation?.[0] || ''), 'html'),
+				}));
 
 				indTestQuestionAnswers.forEach((answer, answerIndex) => {
 					const { answer_text, is_correct } = answer || {};
@@ -149,6 +187,16 @@ const useCreateQuestion = ({
 					setValue(`${subChildKey}.is_correct`, is_correct ? 'true' : 'false');
 				});
 			});
+		} else if (question_type === 'subjective') {
+			setValue('question_type', question_type);
+			setValue('subjective.0.question_text', question_text);
+			setValue('subjective.0.difficulty_level', difficulty_level);
+			setValue('subjective.0.character_limit', character_limit);
+			setUploadable(allow_file_upload);
+
+			setSubjectiveEditorValue(isEmpty(test_question_answers)
+				? RichTextEditor.createEmptyValue()
+				: RichTextEditor?.createValueFromString((test_question_answers?.[0]?.answer_text || ''), 'html'));
 		} else {
 			const childKey = 'question.0';
 
@@ -156,7 +204,13 @@ const useCreateQuestion = ({
 			setValue(`${childKey}.question_type`, question_type);
 			setValue(`${childKey}.difficulty_level`, difficulty_level);
 			setValue(`${childKey}.question_text`, question_text);
-			setValue(`${childKey}.explanation`, explanation?.[0]);
+
+			setEditorValue((prev) => ({
+				...prev,
+				question_0_explanation: isEmpty(explanation)
+					? RichTextEditor.createEmptyValue()
+					: RichTextEditor?.createValueFromString((explanation?.[0] || ''), 'html'),
+			}));
 
 			test_question_answers.forEach((answer, index) => {
 				const { answer_text, is_correct } = answer || {};
@@ -175,6 +229,8 @@ const useCreateQuestion = ({
 		setValue,
 		test_case_study_questions,
 		test_question_answers,
+		character_limit,
+		allow_file_upload,
 	]);
 
 	return {
@@ -187,6 +243,13 @@ const useCreateQuestion = ({
 		deleteQuestion,
 		updateCaseStudyLoading,
 		onSubmit,
+		editorValue,
+		setEditorValue,
+		updateStandAloneLoading,
+		subjectiveEditorValue,
+		setSubjectiveEditorValue,
+		uploadable,
+		setUploadable,
 		...restFormProps,
 	};
 };

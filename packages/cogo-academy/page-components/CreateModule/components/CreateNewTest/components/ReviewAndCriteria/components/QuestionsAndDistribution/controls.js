@@ -17,6 +17,15 @@ const getControls = (id, val) => [
 			validate : (value) => ((value > val || value < 0) ? 'Invalid' : true),
 		},
 	},
+	{
+		name        : `${id}s`,
+		type        : 'number',
+		placeholder : 'Subjective',
+		rules       : {
+			required : { value: true, message: 'This is required' },
+			validate : (value) => ((value > val || value < 0) ? 'Invalid' : true),
+		},
+	},
 
 ];
 

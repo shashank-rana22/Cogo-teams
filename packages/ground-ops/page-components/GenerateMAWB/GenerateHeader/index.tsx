@@ -13,7 +13,9 @@ const tabs = [
 	},
 ];
 
-function GenerateHeader({ setGenerate, setEdit, category, activeCategory, setActiveCategory, awbNumber }) {
+function GenerateHeader({
+	setGenerate, setEdit, category, activeCategory, setActiveCategory, awbNumber, serialId, editCopies,
+}) {
 	return (
 		<div>
 			<div className={styles.top_flex}>
@@ -33,13 +35,29 @@ function GenerateHeader({ setGenerate, setEdit, category, activeCategory, setAct
 						<Breadcrumb.Item label="Add Export Details" />
 					</Breadcrumb>
 				</div>
-				<div>
-					<span className={styles.awb_style}>AWB Number :</span>
-					{awbNumber}
-				</div>
+				<table>
+					<tr>
+						<td className={styles.awb_style}>AWB Number</td>
+						<td>
+							:
+							{' '}
+							{awbNumber}
+						</td>
+
+					</tr>
+					<tr>
+						<td className={styles.awb_style}>Serial ID</td>
+						<td>
+							:
+							{' '}
+							{serialId}
+						</td>
+
+					</tr>
+				</table>
 
 			</div>
-			{category === 'hawb' && (
+			{(category === 'hawb' && !editCopies) && (
 				<div className={styles.flex}>
 					{tabs.map((tab) => (
 						<div

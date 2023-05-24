@@ -11,6 +11,7 @@ import formatPayload from './utils/formatPayload';
 
 function CreateNewTradeParty({
 	orgResponse = {},
+	showComponent,
 	setShowComponent = () => {},
 	fetchOrganizationTradeParties = () => {},
 }) {
@@ -51,6 +52,7 @@ function CreateNewTradeParty({
 			orgResponse,
 			isAddressRegisteredUnderGst,
 			setFilledDetails,
+			gstNumber,
 		});
 
 		apiTrigger(payload);
@@ -79,6 +81,7 @@ function CreateNewTradeParty({
 				register={register}
 				companyDetails={filledDetails}
 				setCurrentStep={setCurrentStep}
+				showComponent={showComponent}
 				onSubmit={onSubmit}
 				gstNumber={gstNumber}
 				setGstNumber={setGstNumber}

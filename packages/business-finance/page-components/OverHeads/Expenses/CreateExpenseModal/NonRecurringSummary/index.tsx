@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../commons/utils/formatDate';
+import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 import useGetStakeholders from '../../hooks/useGetStakeholders';
 import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
@@ -34,7 +35,7 @@ interface Data {
 	stakeholderName?:string,
 	invoiceCurrency?:string,
 	vendorID?:number | string,
-	payableAmount?:number | string,
+	payableAmount?:number,
 }
 
 interface Props {
@@ -62,6 +63,9 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 
 	const { stakeholdersData, loading:stakeholderLoading } = useGetStakeholders(expenseCategory);
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
+
+	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
+	const filename = splitArray[splitArray.length - 1];
 
 	useEffect(() => {
 		if (stakeholdersData) {
@@ -113,9 +117,7 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 		{
 			title : 'Payable Amount',
 			value : <div>
-{invoiceCurrency}
-{' '}
-{payableAmount || '-'}
+                {getFormattedPrice(payableAmount, invoiceCurrency) || '-'}
            </div>,
 		},
 		{
@@ -162,7 +164,7 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 							target="_blank"
 							rel="noreferrer"
 						>
-							{showOverflowingNumber(uploadedInvoice, 20)}
+							{showOverflowingNumber(filename, 20)}
 						</a>
 					)
 					: '-'}

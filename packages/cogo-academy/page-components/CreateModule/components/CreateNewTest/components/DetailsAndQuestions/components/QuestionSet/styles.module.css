@@ -102,3 +102,15 @@
 	text-overflow: ellipsis;
 	white-space: nowrap;
 }
+
+.sorting {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 6px;
+}
+
+.sub_sorting {
+	flex-shrink: 0;
+	margin-right: 6px;
+}

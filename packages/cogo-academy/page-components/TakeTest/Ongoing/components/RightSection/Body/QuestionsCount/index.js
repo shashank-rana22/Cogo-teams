@@ -1,4 +1,7 @@
 import { useSelector } from '@cogoport/store';
+import { useContext } from 'react';
+
+import { QuestionStatsContext } from '../../../QuestionStatsContext';
 
 import styles from './styles.module.css';
 
@@ -9,14 +12,7 @@ const STATS_MAPPING = {
 	not_viewed        : '#FDFBF6',
 };
 
-function QuestionsCount({
-	data = {},
-	setCurrentQuestion,
-	fetchQuestions,
-	total_question_count,
-	user_appearance = [],
-	setSubQuestion,
-}) {
+function QuestionsCount() {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -24,6 +20,16 @@ function QuestionsCount({
 		query : general.query,
 		user  : profile.user,
 	}));
+
+	const {
+		total_question_count,
+		user_appearance = [],
+		setSubQuestion,
+		data = {},
+		setCurrentQuestion,
+		currentQuestion,
+		fetchQuestions,
+	} = useContext(QuestionStatsContext);
 
 	const handleChangeQuestion = ({ index }) => {
 		if (index === 0 || data?.data?.[index - 1].answer_state !== 'not_viewed') {
@@ -53,7 +59,7 @@ function QuestionsCount({
 							cursor          : `${(index === 0 || question?.answer_state !== 'not_viewed')
 								? 'pointer' : 'not-allowed'}`,
 						}}
-						className={styles.question_count}
+						className={`${styles.question_count} ${Number(currentQuestion) === index + 1 && styles.active}`}
 					>
 						{index + 1}
 					</div>
@@ -64,7 +70,8 @@ function QuestionsCount({
 				<div
 					role="presentation"
 					style={{ backgroundColor: '#FDFBF6', cursor: 'not-allowed' }}
-					className={styles.question_count}
+					className={`${styles.question_count} ${Number(currentQuestion) - user_appearance.length
+						=== index + 1 && styles.active}`}
 				>
 					{user_appearance.length + index + 1}
 				</div>

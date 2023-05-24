@@ -22,14 +22,14 @@ interface CardComponentProps {
 	loading?: boolean,
 	filters?: SubFilterInterface,
 	filterValue?: object
+	entityCode?: string
 }
 
 function CardComponent({
 	subActiveTab, dailyStatsData, toggleData, loading,
-	filters, filterValue,
+	filters, filterValue, entityCode,
 }: CardComponentProps) {
-	const { data, loading:loadingData } = useGetGraph({ filters, filterValue, subActiveTab });
-
+	const { data, loading: loadingData } = useGetGraph({ filters, filterValue, subActiveTab, entityCode, toggleData });
 	const getData = () => {
 		const getFormat = (duration) => {
 			if (filters.month) 			{
@@ -54,6 +54,7 @@ function CardComponent({
 				</div>
 			);
 		}
+
 		if (dailyStatsData) {
 			return (dailyStatsData[subActiveTab] || [{}]).map((item) => {
 				const { count, amount, duration, dashboardCurrency } = item || {};
@@ -111,7 +112,11 @@ function CardComponent({
 		<div className={styles.flex}>
 			{toggleData ? (
 				<div className={styles.chart}>
-					<ResponsiveChart data={BarData(subActiveTab, data)} loadingData={loadingData} />
+					<ResponsiveChart
+						data={BarData(subActiveTab, data)}
+						loadingData={loadingData}
+						entityCode={entityCode}
+					/>
 				</div>
 			) : getData()}
 

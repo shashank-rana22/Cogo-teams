@@ -7,6 +7,7 @@ import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPI
 import useAssignChat from '../../../../hooks/useAssignChat';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
+import useRequestAssignChat from '../../../../hooks/useRequestAssignChat';
 import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
 import useUpdateAssignedChat from '../../../../hooks/useUpdateAssignedChat';
@@ -23,20 +24,23 @@ function Messages({
 	suggestions = [],
 	userId = '',
 	isomniChannelAdmin = false,
+	setActiveMessage = () => {},
+	setRaiseTicketModal = () => {},
+	viewType = '',
 }) {
 	const [headertags, setheaderTags] = useState();
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
+	const [disableButton, setDisableButton] = useState('');
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
-	const closeModal = () => setOpenModal({ type: null, data: {} });
-
+	const closeModal = () => {
+		setOpenModal({ type: null, data: {} });
+		setDisableButton('');
+	};
 	let activeChatCollection;
-
-	const [disableButton, setDisableButton] = useState('');
-
 	const {
 		id = '',
 		channel_type = '',
@@ -52,7 +56,10 @@ function Messages({
 
 	const showBotMessages = session_type === 'bot';
 
-	const hasPermissionToEdit = !showBotMessages && (userId === support_agent_id || isomniChannelAdmin);
+	const canMessageOnBotSession = showBotMessages && ['shipment_view'].includes(viewType);
+
+	const hasPermissionToEdit = canMessageOnBotSession || (!showBotMessages && (userId === support_agent_id
+		|| ['admin_view', 'shipment_view'].includes(viewType)));
 
 	const filteredSpectators = (spectators_data || []).filter(
 		({ agent_id: spectatorId }) => spectatorId !== support_agent_id,
@@ -87,6 +94,7 @@ function Messages({
 		activeMessageCard,
 		formattedData,
 		setDisableButton,
+		canMessageOnBotSession,
 	});
 
 	const {
@@ -107,6 +115,21 @@ function Messages({
 		updateRoomLoading,
 		updateUserRoom,
 	} = useUpdateUserRoom();
+	const {
+		requestForAssignChat,
+		requestAssignLoading,
+	} = useRequestAssignChat();
+
+	const changeSessionAndMessage = (type = '') => {
+		const callbackFunc = type === 'quick_message' ? sentQuickSuggestions : sendChatMessage;
+		if (!canMessageOnBotSession) {
+			return callbackFunc;
+		}
+		return (scrollToBottom, val) => assignChat(
+			{ agent_id: userId, is_allowed_to_chat: true },
+			() => callbackFunc(scrollToBottom, val),
+		);
+	};
 
 	const {
 		comp: ActiveModalComp = null,
@@ -140,16 +163,20 @@ function Messages({
 					disableButton={disableButton}
 					updateRoomLoading={updateRoomLoading}
 					updateUserRoom={updateUserRoom}
+					requestForAssignChat={requestForAssignChat}
+					requestAssignLoading={requestAssignLoading}
+					canMessageOnBotSession={canMessageOnBotSession}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
+						formattedData={formattedData}
 						messagesData={messagesData}
 						uploading={uploading}
 						draftMessage={draftMessages?.[id]}
 						draftUploadedFile={draftUploadedFiles?.[id]}
 						setDraftMessages={setDraftMessages}
 						setDraftUploadedFiles={setDraftUploadedFiles}
-						sendChatMessage={sendChatMessage}
+						sendChatMessage={changeSessionAndMessage('chat_message')}
 						getNextData={getNextData}
 						firstLoadingMessages={firstLoadingMessages}
 						lastPage={lastPage}
@@ -157,13 +184,17 @@ function Messages({
 						activeMessageCard={activeMessageCard}
 						suggestions={suggestions}
 						setUploading={setUploading}
-						sentQuickSuggestions={sentQuickSuggestions}
+						sentQuickSuggestions={changeSessionAndMessage('quick_message')}
 						hasPermissionToEdit={hasPermissionToEdit}
 						loadingPrevMessages={loadingPrevMessages}
 						sendCommunicationTemplate={sendCommunicationTemplate}
 						communicationLoading={communicationLoading}
 						closeModal={closeModal}
-						messageLoading={messageLoading}
+						messageLoading={canMessageOnBotSession ? (messageLoading || assignLoading) : messageLoading}
+						setActiveMessage={setActiveMessage}
+						setRaiseTicketModal={setRaiseTicketModal}
+						canMessageOnBotSession={canMessageOnBotSession}
+						changeSessionAndMessage={changeSessionAndMessage}
 					/>
 				</div>
 			</div>

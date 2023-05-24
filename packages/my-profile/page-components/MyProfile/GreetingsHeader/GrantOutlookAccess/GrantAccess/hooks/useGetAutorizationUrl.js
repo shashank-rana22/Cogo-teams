@@ -1,13 +1,13 @@
-import { usePublicRequest } from '@cogoport/request';
+import { useLensRequest } from '@cogoport/request';
 
 /**
  * Single utility hook to get authorization Url
  */
 
 const useGetAutorizationUrl = () => {
-	const [authorizationUrlApi, triggerAuthorizationUrl] = usePublicRequest(
+	const [authorizationUrlApi, triggerAuthorizationUrl] = useLensRequest(
 		{
-			url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/outlook_authorization_url`,
+			url    : '/outlook_authorization_url',
 			method : 'GET',
 		},
 		{ manual: true },

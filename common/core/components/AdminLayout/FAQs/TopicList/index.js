@@ -1,32 +1,26 @@
-import { Pagination, Tooltip } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
-import React, { useEffect } from 'react';
+import { Tabs, TabPanel } from '@cogoport/components';
+import React, { useEffect, useState } from 'react';
 
-import History from '../History';
-import QuestionList from '../QuestionList';
+import Announcements from '../../Announcements';
+import QuestionListComponent from '../../QuestionListComponent';
 import Header from '../QuestionList/Header';
 
-import HeaderText from './Header';
-import IconMapping from './iconMapping';
-import Loader from './Loader';
-import NotificationBar from './NotificationBar';
 import styles from './styles.module.css';
 import useTopicList from './useTopicList';
 
-const generalIcon = (
-	<img
-		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg"
-		alt="logo cogoport"
-		className={styles.general_icon}
-	/>
-);
-
 function TopicList({
-	faqNotificationApiLoading,
-	fetchFaqNotification,
-	faqNotificationData,
-	refetch,
+	faqNotificationApiLoading = false,
+	fetchFaqNotification = () => {},
+	faqNotificationData = {},
+	refetch = () => {},
+	from = 'cogo_assist',
+	setShow = () => {},
+	announcementProps = {},
+	selectedAnnouncement = '',
 }) {
+	const [activeTab, setActiveTab] = useState('faq');
+	const [input, setInput] = useState('');
+
 	const {
 		search,
 		setSearch,
@@ -45,142 +39,92 @@ function TopicList({
 		setShowNotificationContent,
 	} = useTopicList();
 
+	const {
+		announcementModalData = {},
+		setAnnouncementModalData = () => {},
+		searchAnnouncement = '',
+		setSearchAnnouncement = () => {},
+		setParams = () => {},
+	} = announcementProps;
+
+	const announcementHeaderProps = {
+		announcementModalData,
+		setAnnouncementModalData,
+		setShow,
+		searchAnnouncement,
+		setSearchAnnouncement,
+	};
+
 	useEffect(() => {
 		fetchFaqNotification();
 	}, [fetchFaqNotification, showNotificationContent]);
 
-	const render = () => {
-		if (topic) {
-			return (
-				<QuestionList
-					question={question}
-					setQuestion={setQuestion}
-					topic={topic}
-					setTopic={setTopic}
-				/>
-			);
-		}
+	useEffect(() => {
+		if (from === 'test_module') return;
 
-		if (showHistory) {
-			return (
-				<History
-					question={question}
-					setQuestion={setQuestion}
-					setShowHistory={setShowHistory}
-					setSearch={setSearch}
-				/>
-			);
-		}
+		setAnnouncementModalData({});
+		setSearch('');
+		setSearchAnnouncement('');
+		setInput('');
 
-		const renderIcon = ({ item }) => {
-			const { name = '' } = item || {};
-
-			let includesKey = '';
-			Object.keys(IconMapping).forEach((key) => {
-				if (name.includes(key)) {
-					includesKey = key;
-				}
+		if (activeTab === 'faq') {
+			setParams({
+				page    : 1,
+				filters : {
+					q                 : '',
+					toggle            : false,
+					announcement_type : '',
+				},
 			});
-
-			const DisplayIcon = IconMapping[includesKey]?.icon || generalIcon;
-
-			return <div className={styles.icon}>{DisplayIcon}</div>;
-		};
-
-		return (
-			<div className={styles.container}>
-				<NotificationBar
-					faqNotificationData={faqNotificationData}
-					question={question}
-					setQuestion={setQuestion}
-					showNotificationContent={showNotificationContent}
-					setShowNotificationContent={setShowNotificationContent}
-					faqNotificationApiLoading={faqNotificationApiLoading}
-					fetchFaqNotification={fetchFaqNotification}
-				/>
-
-				{
-					!showNotificationContent
-					&& (
-						<div>
-
-							<div>
-								<HeaderText setShowHistory={setShowHistory} />
-							</div>
-
-							<div className={styles.display_topics}>
-								{(list || []).map((item) => (
-									<div
-										role="presentation"
-										onClick={() => setTopic(item)}
-										className={styles.square_div}
-									>
-										<div className={styles.icon_grid}>
-											{renderIcon({ item })}
-
-											<div className={styles.display_name_and_topic}>
-												<Tooltip
-													theme="light"
-													content={startCase(item?.display_name)}
-													placement="bottom"
-													animation="shift-away"
-												>
-													<div className={styles.display_name}>
-														{startCase(item?.display_name)}
-													</div>
-												</Tooltip>
-												<div className={styles.question_count}>
-													{item?.question_count}
-													{' '}
-													Questions
-												</div>
-											</div>
-										</div>
-									</div>
-								))}
-							</div>
-
-							{paginationData?.total_count > 20
-							&& (
-								<div className={styles.pagination_container}>
-									<Pagination
-										totalItems={paginationData?.total_count || 0}
-										currentPage={page || 1}
-										pageSize={paginationData?.page_limit}
-										onPageChange={setPage}
-									/>
-								</div>
-							)}
-						</div>
-					)
-
-				}
-			</div>
-
-		);
-	};
-
-	const renderQuestionList = () => {
-		if (search) {
-			return (
-				<QuestionList
-					search={search}
-					question={question}
-					setQuestion={setQuestion}
-				/>
-			);
 		}
+	}, [activeTab, from, setAnnouncementModalData, setParams, setSearch, setSearchAnnouncement]);
 
-		if (loading) return <Loader />;
-
-		return render();
-	};
+	const TABS_MAPPING = [
+		{
+			name      : 'faq',
+			title     : 'FAQs',
+			component : QuestionListComponent,
+			props     : {
+				question,
+				setQuestion,
+				loading,
+				search,
+				faqNotificationApiLoading,
+				paginationData,
+				page,
+				setPage,
+				list,
+				from,
+				faqNotificationData,
+				topic,
+				setTopic,
+				showHistory,
+				setSearch,
+				fetchFaqNotification,
+				showNotificationContent,
+				setShowNotificationContent,
+				setShowHistory,
+				setInput,
+			},
+		},
+		{
+			name      : 'announcements',
+			title     : 'Announcements',
+			component : Announcements,
+			props     : {
+				announcementProps,
+				selectedAnnouncement,
+			},
+		},
+	];
 
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${(showHistory || from === 'test_module') && styles.hide_tabs}`}>
 			<Header
+				activeTab={activeTab}
 				search={search}
 				setSearch={setSearch}
+				announcementHeaderProps={announcementHeaderProps}
 				topic={topic}
 				setTopic={setTopic}
 				question={question}
@@ -191,9 +135,28 @@ function TopicList({
 				showNotificationContent={showNotificationContent}
 				fetchFaqNotification={fetchFaqNotification}
 				refetch={refetch}
+				from={from}
+				setInput={setInput}
+				input={input}
 			/>
 
-			{renderQuestionList()}
+			<Tabs
+				activeTab={activeTab}
+				onChange={setActiveTab}
+				fullWidth
+				className={styles.tab_hide}
+				themeType="main_tabs"
+			>
+				{TABS_MAPPING.map((tabItem) => {
+					const { name, title, component: Component, props } = tabItem;
+
+					return (
+						<TabPanel key={name} name={name} title={title}>
+							<Component {...props} />
+						</TabPanel>
+					);
+				})}
+			</Tabs>
 		</div>
 	);
 }

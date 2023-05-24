@@ -46,6 +46,19 @@ const addedQuestionsColumns = ({
 			),
 		},
 		{
+			Header   : 'QUESTION TYPE',
+			accessor : (items) => (
+
+				<Pill
+					size="sm"
+					color={items?.is_parent ? 'green' : 'yellow'}
+				>
+					{items?.is_parent ? 'Parent' : 'Alias'}
+				</Pill>
+
+			),
+		},
+		{
 			Header   : 'TOPICS',
 			accessor : (items) => (!isEmpty(items?.faq_topics || []) ? (
 				<div className={styles.topics}>
@@ -91,12 +104,10 @@ const addedQuestionsColumns = ({
 						})}
 						,
 						{' '}
-
 						{formatDate({
 							date,
 							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
 							formatType : 'time',
-
 						})}
 					</div>
 				);
@@ -104,55 +115,58 @@ const addedQuestionsColumns = ({
 		},
 		{
 			Header   : 'ACTIONS',
-			accessor : (items) => (
-				<div className={styles.button_container}>
-					{!['inactive', 'draft'].includes(activeList)
-						? (
-							<Button
-								type="button"
-								themeType="primary"
-								size="sm"
-								style={{ marginRight: 8 }}
-								onClick={() => onClickViewButton(items?.id)}
-							>
-								VIEW
-							</Button>
-						)
-						: null}
-					<Button
-						type="button"
-						themeType="secondary"
-						size="sm"
-						style={{ marginRight: 8 }}
-						onClick={() => onClickEditButton(items?.id)}
-					>
-						EDIT
-					</Button>
-					{activeList !== 'inactive' ? (
-						<Popover
-							content={(
-								<PopOverContent
-									source="question"
-									onCLickYesButton={() => deactivateQuestion(items.id)}
-									onClickNoButton={() => onClickNoButton(items)}
-								/>
-							)}
-							visible={showPopOver === items?.id}
+			accessor : (items) => {
+				const { parent_question_id, id } = items || {};
+
+				return (
+					<div className={styles.button_container}>
+						{!['inactive', 'draft'].includes(activeList)
+							? (
+								<Button
+									type="button"
+									themeType="primary"
+									size="sm"
+									style={{ marginRight: 8 }}
+									onClick={() => onClickViewButton(parent_question_id || id)}
+								>
+									VIEW
+								</Button>
+							)
+							: null}
+						<Button
+							type="button"
+							themeType="secondary"
+							size="sm"
+							style={{ marginRight: 8 }}
+							onClick={() => onClickEditButton(parent_question_id || id)}
 						>
-							<IcMDelete
-								height={20}
-								width={20}
-								style={{ cursor: 'pointer' }}
-								onClick={
-								() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))
-}
-							/>
-						</Popover>
+							EDIT
+						</Button>
 
-					) : null}
+						{activeList !== 'inactive' && (
+							<Popover
+								content={(
+									<PopOverContent
+										source="question"
+										onCLickYesButton={() => deactivateQuestion(items.id)}
+										onClickNoButton={() => onClickNoButton(items)}
+									/>
+								)}
+								visible={showPopOver === items?.id}
+							>
+								<IcMDelete
+									height={20}
+									width={20}
+									style={{ cursor: 'pointer' }}
+									onClick={() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))}
+								/>
+							</Popover>
 
-				</div>
-			),
+						)}
+
+					</div>
+				);
+			},
 		},
 	];
 };
@@ -186,8 +200,7 @@ const requestedQuestionsColumns = ({
 					formatType : 'date',
 				})}
 			</div>
-		)
-		,
+		),
 	},
 	{
 		Header   : 'ACTIONS',
@@ -212,19 +225,14 @@ const requestedQuestionsColumns = ({
 
 					)}
 					visible={showPopOver === items?.id}
-
 				>
 					<IcMDelete
 						height={20}
 						width={20}
 						style={{ cursor: 'pointer' }}
-						onClick={
-							() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))
-}
-
+						onClick={() => setShowPopOver(() => (showPopOver === items?.id ? null : items?.id))}
 					/>
 				</Popover>
-
 			</div>
 		),
 	},
@@ -273,22 +281,19 @@ const useQuestionList = () => {
 						q                    : query || undefined,
 						is_feedback_positive : activeList === 'feedbacks' ? false : undefined,
 					},
-					page,
+					page                   : !query ? page : 1,
 					is_admin_view          : true,
 					sort_by                : SORT_MODE,
 					sort_type              : SORT_TYPE,
 					faq_tags_data_required : ['published', 'draft']
 						.includes(FILTER_MAPPING[activeList].state),
-
 					faq_topics_data_required: ['published', 'draft', 'feedbacks']
 						.includes(FILTER_MAPPING[activeList].state),
-
 					author_data_required              : FILTER_MAPPING[activeList].state === 'requested',
 					requested_question_count_required : true,
 					faq_feedback_count_required       : true,
 					answers_data_required             : undefined,
 					last_updated_feedback_required    : activeList === 'feedbacks',
-
 				},
 			});
 		} catch (err) {
@@ -308,7 +313,6 @@ const useQuestionList = () => {
 						id,
 						status: 'inactive',
 					},
-
 				},
 			);
 			getQuestionsList();

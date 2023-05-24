@@ -1,0 +1,44 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 6px;
+
+	* {
+		font-size: var(--font-size-md);
+	}
+
+	:global {
+		.ui_input_container {
+			width: 140px;
+			height: initial !important;
+
+			.ui_input_control {
+				font-size: var(--font-size-md);
+			}
+		}
+	}
+
+	.icon_wrapper::before {
+		position: relative;
+		top: -6px;
+		display: inline-block;
+		width: 8px;
+		height: 8px;
+		content: "";
+		background-color: var(--color-primary-error-red-2);
+		border-radius: 50%;
+	}
+}
+
+.open_filters {
+	display: flex;
+	gap: 10px;
+	align-items: stretch;
+	max-height: 28px;
+
+	:global {
+		.ui_button_container {
+			height: 100%;
+		}
+	}
+}

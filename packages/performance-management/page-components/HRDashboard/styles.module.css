@@ -1,69 +1,17 @@
-.stats_container {
-	display: flex;
-
-	@media (max-width: 768px) {
-		flex-direction: column;
-	}
+.header {
+	font-size: 28px;
+	font-weight: 600;
 }
 
 .question_button_container {
 	display: flex;
+	flex-wrap: wrap;
 	justify-content: flex-start;
+	margin: 8px 0;
 }
 
-.redirect_container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-	cursor: pointer;
-
-	p {
-		margin: 0;
-		font-size: 18px;
-		font-weight: 700;
-	}
-}
-
-.table_section {
+.tabs {
 	margin-top: 16px;
-	background: #faf5ec;
-	border-radius: 8px;
-}
-
-.list_header {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding: 16px 0 0;
-	margin-top: 16px;
-
-	.list_title {
-		margin: 0;
-		font-size: 18px;
-		font-weight: 700;
-	}
-
-	.list_actions {
-		display: flex;
-		align-items: center;
-	}
-}
-
-.info_container {
-	display: flex;
-	align-items: center;
-	justify-content: center;
-}
-
-.top_container {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	margin: 16px 0;
-}
-
-.filter_container {
-	margin-right: 14px;
 }
 
 .filters {
@@ -76,6 +24,10 @@
 	align-items: center;
 	justify-content: space-between;
 	margin: 4px 0;
+
+	@media (max-width: 768px) {
+		display: block;
+	}
 }
 
 .upload_modal {

@@ -9,7 +9,7 @@ import OutstandingList from './OutstandingList';
 import OrgLoader from './OutstandingList/OrgLoaders';
 import styles from './styles.module.css';
 
-function Outstanding() {
+function Outstanding({ entityCode }) {
 	const [formFilters, setFormFilters] = useState({
 		kamId              : '',
 		salesAgentId       : '',
@@ -26,10 +26,10 @@ function Outstanding() {
 		setOrderBy,
 		setQueryKey,
 		queryKey,
-	} = useGetOrgOutstanding({ formFilters });
+	} = useGetOrgOutstanding({ formFilters, entityCode });
 
 	const { page, pageLimit } = outStandingFilters || {};
-	const { totalRecords, list } = outStandingData || [];
+	const { totalRecords, list = [] } = outStandingData || {};
 
 	const handleChange = (val:string) => {
 		setoutStandingFilters({ ...outStandingFilters, search: val });
@@ -73,9 +73,9 @@ function Outstanding() {
 			) : (
 				<>
 					{list?.map((item) => (
-						<OutstandingList item={item} outStandingFilters={outStandingFilters} />
+						<OutstandingList item={item} entityCode={entityCode} />
 					))}
-					{list?.length === 0 && <EmptyState />}
+					{list?.length === 0 && <div className={styles.empty_state}><EmptyState /></div>}
 					{list?.length > 0 && (
 						<div className={styles.pagination_container}>
 							<Pagination

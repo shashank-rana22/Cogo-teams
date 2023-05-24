@@ -1,4 +1,3 @@
-/* eslint-disable no-undef, max-len */
 import { Avatar, Pill, Placeholder, Toast } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
@@ -10,6 +9,7 @@ import useGetUser from '../../../../hooks/useGetUser';
 import hideDetails from '../../../../utils/hideDetails';
 
 import ConversationContainer from './ConversationContainer';
+import ExecutiveSummary from './ExecutiveSummary';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
@@ -21,8 +21,12 @@ function AgentDetails({
 	customerId = '',
 	updateLeaduser = () => {},
 	setModalType = () => {},
+	setActiveMessage = () => {},
+	activeRoomLoading,
+	activeSelect,
+	setActiveSelect = () => {},
+	setShowMore = () => {},
 }) {
-	const { user_details = null, user_type, id = '' } = activeMessageCard || {};
 	const {
 		user_id,
 		lead_user_id,
@@ -31,6 +35,8 @@ function AgentDetails({
 		mobile_no,
 		organization_id,
 		sender,
+		channel_type = '',
+		user_type, id = '',
 	} = formattedMessageData || {};
 
 	const [showAddNumber, setShowAddNumber] = useState(false);
@@ -40,8 +46,6 @@ function AgentDetails({
 		number       : '',
 	});
 	const [showError, setShowError] = useState(false);
-
-	const emptyState = isEmpty(user_details) && activeTab === 'message';
 
 	const {
 		user_data = {},
@@ -102,27 +106,36 @@ function AgentDetails({
 	};
 
 	const handleClick = () => {
-		navigator.clipboard.writeText(`https://admin.cogoport.com/v2/6fd98605-9d5d-479d-9fac-cf905d292b88/cogo-one/omni-channel?assigned_chat=${id}`);
+		const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[0];
+		navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
 		Toast.success('Copied!!!');
 	};
 
-	return (isEmpty(userId) && isEmpty(leadUserId) && isEmpty(mobile_no)) ? (
-		<>
-			<div className={styles.title}>Profile</div>
-			<EmptyState
-				type="profile"
-				user_type={user_type}
-				leadLoading={leadLoading}
-				handleSubmit={handleSubmit}
-				showAddNumber={showAddNumber}
-				setProfilevalue={setProfilevalue}
-				setShowAddNumber={setShowAddNumber}
-				profileValue={profileValue}
-				showError={showError}
-				setShowError={setShowError}
-			/>
-		</>
-	) : (
+	const handleSummary = () => {
+		setShowMore(true);
+		setActiveSelect('user_activity');
+	};
+	if (!userId && !leadUserId && !mobile_no) {
+		return (
+			<>
+				<div className={styles.title}>Profile</div>
+				<EmptyState
+					type="profile"
+					user_type={user_type}
+					leadLoading={leadLoading}
+					handleSubmit={handleSubmit}
+					showAddNumber={showAddNumber}
+					setProfilevalue={setProfilevalue}
+					setShowAddNumber={setShowAddNumber}
+					profileValue={profileValue}
+					showError={showError}
+					setShowError={setShowError}
+				/>
+			</>
+		);
+	}
+
+	return (
 		<>
 			<div className={styles.top_div}>
 				<div className={styles.title}>Profile</div>
@@ -201,7 +214,7 @@ function AgentDetails({
 			)}
 			{loading ? (
 				<Placeholder
-					height="13px"
+					height="50px"
 					width="220px"
 					margin="0px 0px 0px 0px"
 				/>
@@ -211,7 +224,6 @@ function AgentDetails({
 					orgId={orgId}
 					userId={userId}
 					userName={name}
-					emptyState={emptyState}
 					activeTab={activeTab}
 					setModalType={setModalType}
 				/>
@@ -224,9 +236,23 @@ function AgentDetails({
 						noData={!leadUserId && !userId}
 						loading={loading}
 						activeCardData={DATA_MAPPING[activeTab] || {}}
+						activeMessageCard={activeMessageCard}
+						setActiveMessage={setActiveMessage}
+						leadLoading={leadLoading}
+						activeRoomLoading={activeRoomLoading}
 					/>
 				</>
 			)}
+
+			<ExecutiveSummary
+				handleSummary={handleSummary}
+				mobile_no={mobile_no}
+				sender={sender}
+				user_id={user_id}
+				lead_user_id={lead_user_id}
+				channel_type={channel_type}
+				activeSelect={activeSelect}
+			/>
 		</>
 	);
 }

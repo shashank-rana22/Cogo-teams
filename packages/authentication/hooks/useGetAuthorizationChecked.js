@@ -18,7 +18,7 @@ const UNAUTHENTICATED_PATHS = [
 	'/verify-auto-sign-up-email/[id]',
 ];
 
-const useGetAuthorizationChecked = () => {
+const useGetAuthorizationChecked = ({ firestoreToken }) => {
 	const [sessionInitialized, setSessionInitialized] = useState(false);
 	const dispatch = useDispatch();
 
@@ -31,7 +31,7 @@ const useGetAuthorizationChecked = () => {
 	const isUnauthenticatedPath = UNAUTHENTICATED_PATHS.includes(route);
 	const isProfilePresent = Object.keys(profile).length !== 0;
 
-	dispatch(setGeneralState({ pathname, query, locale, locales }));
+	dispatch(setGeneralState({ pathname, query, locale, locales, firestoreToken }));
 
 	useEffect(() => {
 		(async () => {

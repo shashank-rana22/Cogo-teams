@@ -1,10 +1,15 @@
 import { useIrisRequest } from '@cogoport/request';
 import { useState } from 'react';
 
+import getDefaultFeedbackMonth from '../utils/getDefaultYearMonth';
+
 const useGetMonthStats = () => {
+	const { feedbackMonth, feedbackYear } = getDefaultFeedbackMonth();
 	const [params, setParams] = useState({
 		Page      : 1,
 		PageLimit : 20,
+		Year      : feedbackYear,
+		Month     : feedbackMonth,
 	});
 
 	const [{ data = {}, loading = false }] = useIrisRequest({

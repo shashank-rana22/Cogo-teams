@@ -3,6 +3,8 @@ import { getFormattedPrice } from '@cogoport/forms';
 import { IcMArrowRotateUp, IcMAirport, IcMTransport, IcMShip, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
+import { keyValue } from '../../../constants';
+
 import CardData from './CardData';
 import styles from './styles.module.css';
 
@@ -35,12 +37,12 @@ interface OutsatndingProps {
 
 interface ServiceCardProps {
 	outstandingData?: OutsatndingProps,
-	outstandingLoading?: boolean
+	outstandingLoading?: boolean,
+	entityCode?: string,
 }
 
-function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) {
+function ServiceCard({ outstandingData, outstandingLoading, entityCode }: ServiceCardProps) {
 	const {
-		overallStats = {},
 		outstandingServiceWise = {},
 	} = outstandingData || {};
 
@@ -81,29 +83,50 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 		{
 			label        : 'Ocean',
 			amount       : oceanOpen,
-			currency     : oceanCurrency,
-			openInvoices : oceanOpen,
+			currency     : oceanCurrency || keyValue[entityCode],
+			openInvoices : oceanOpen || 0,
 			tradeType    : oceanTradeType,
 			onAccount    : 'onAccountAmount',
 			icon         : <IcMShip style={{ width: '24px', height: '24px' }} />,
 		},
 		{
 			label        : 'Air',
-			currency     : airCurrency,
+			currency     : airCurrency || keyValue[entityCode],
 			amount       : airOpen,
-			openInvoices : airOpen,
+			openInvoices : airOpen || 0,
 			tradeType    : airTradeType,
 			onAccount    : 'onAccountAmount',
 			icon         : <IcMAirport style={{ width: '24px', height: '24px' }} />,
 		},
 		{
 			label        : 'Surface',
-			currency     : surfaceCurrency,
+			currency     : surfaceCurrency || keyValue[entityCode],
 			amount       : surfaceOpen,
 			tradeType    : surfaceTradeType,
-			openInvoices : surfaceOpen,
+			openInvoices : surfaceOpen || 0,
 			onAccount    : 'onAccountAmount',
 			icon         : <IcMTransport style={{ width: '24px', height: '24px' }} />,
+		},
+	];
+
+	const serviceCard = [
+		{
+			label    : 'Ocean',
+			amount   : oceanOpen || 0,
+			currency : oceanCurrency || keyValue[entityCode],
+			icon     : <IcMShip className={styles.icon_container} />,
+		},
+		{
+			label    : 'Air',
+			currency : airCurrency || keyValue[entityCode],
+			amount   : airOpen || 0,
+			icon     : <IcMAirport className={styles.icon_container} />,
+		},
+		{
+			label    : 'Surface',
+			currency : surfaceCurrency || keyValue[entityCode],
+			amount   : surfaceOpen || 0,
+			icon     : <IcMTransport className={styles.icon_container} />,
 		},
 	];
 
@@ -157,147 +180,55 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 
 							: (
 								<>
-									<div
-										className={styles.sub_ocean_container}
-									>
+									{serviceCard.map((item) => (
+										<div
+											className={styles.sub_ocean_container}
+											key={item.label}
+										>
 
-										<IcMShip className={styles.icon_container} />
+											<IcMShip className={styles.icon_container} />
 
-										<div className={styles.ocean_text}>
-											Ocean
-										</div>
-										<div className={styles.amount_currency}>
-											<div className={styles.account_receivables_open_line}>
-												<div>
-													{oceanCurrency || overallStats?.dashboardCurrency}
-												</div>
+											<div className={styles.ocean_text}>
+												{item.label}
+											</div>
+											<div className={styles.amount_currency}>
+												<div className={styles.account_receivables_open_line}>
+													<div>
+														{item.currency}
+													</div>
 
-												<div
-													className={styles.account_receivables_amount}
-												>
-													<Tooltip content={(
-														<div>
-															{getFormattedPrice(
-																oceanOpen,
-																oceanCurrency,
-															)}
-														</div>
-													)}
+													<div
+														className={styles.account_receivables_amount}
 													>
-														<div className={styles.wrapper}>
-															{getFormattedPrice(
-																oceanOpen || 0,
-																oceanCurrency || overallStats?.dashboardCurrency,
-																{
-																	notation              : 'compact',
-																	compactDisplay        : 'short',
-																	maximumFractionDigits : 2,
-																	style                 : 'decimal',
-																},
-															)}
-														</div>
+														<Tooltip content={(
+															<div>
+																{getFormattedPrice(
+																	item.amount,
+																	item.currency,
+																)}
+															</div>
+														)}
+														>
+															<div className={styles.wrapper}>
+																{getFormattedPrice(
+																	item.amount,
+																	item.currency,
+																	{
+																		notation              : 'compact',
+																		compactDisplay        : 'short',
+																		maximumFractionDigits : 2,
+																		style                 : 'decimal',
+																	},
+																)}
+															</div>
 
-													</Tooltip>
+														</Tooltip>
 
+													</div>
 												</div>
 											</div>
 										</div>
-									</div>
-
-									<div
-										className={styles.air_container}
-									>
-
-										<IcMAirport className={styles.icon_container} />
-
-										<div className={styles.ocean_text}>
-											Air
-										</div>
-
-										<div className={styles.amount_currency}>
-											<div className={styles.account_receivables_open_line}>
-												<div>
-													{air?.currency || overallStats?.dashboardCurrency}
-												</div>
-
-												<div
-													className={styles.account_receivables_amount}
-												>
-													<Tooltip content={(
-														<div>
-															{getFormattedPrice(
-																airOpen,
-																airCurrency,
-															)}
-														</div>
-													)}
-													>
-														<div className={styles.wrapper}>
-															{getFormattedPrice(
-																airOpen || 0,
-																airCurrency || overallStats?.dashboardCurrency,
-																{
-																	notation              : 'compact',
-																	compactDisplay        : 'short',
-																	maximumFractionDigits : 2,
-																	style                 : 'decimal',
-																},
-															)}
-														</div>
-
-													</Tooltip>
-
-												</div>
-											</div>
-										</div>
-
-									</div>
-
-									<div
-										className={styles.air_container}
-									>
-										<IcMTransport className={styles.icon_container} />
-										<div className={styles.ocean_text}>
-											Surface
-										</div>
-
-										<div className={styles.amount_currency}>
-											<div className={styles.account_receivables_open_line}>
-												<div>
-													{surface?.currency || overallStats?.dashboardCurrency}
-												</div>
-
-												<div
-													className={styles.account_receivables_amount}
-												>
-													<Tooltip content={(
-														<div>
-															{getFormattedPrice(
-																surfaceOpen,
-																surfaceCurrency,
-															)}
-														</div>
-													)}
-													>
-														<div className={styles.wrapper}>
-															{getFormattedPrice(
-																surfaceOpen || 0,
-																surfaceCurrency || overallStats?.dashboardCurrency,
-																{
-																	notation              : 'compact',
-																	compactDisplay        : 'short',
-																	maximumFractionDigits : 2,
-																	style                 : 'decimal',
-																},
-															)}
-														</div>
-
-													</Tooltip>
-
-												</div>
-											</div>
-										</div>
-									</div>
+									))}
 								</>
 							)}
 
@@ -350,8 +281,8 @@ function ServiceCard({ outstandingData, outstandingLoading }: ServiceCardProps) 
 								<div>
 									<div className={styles.styled_ocean_text}>
 										{getFormattedPrice(
-											item?.openInvoices || 0,
-											item?.currency || overallStats?.dashboardCurrency,
+											item?.openInvoices,
+											item?.currency,
 											{
 												notation              : 'compact',
 												compactDisplay        : 'short',

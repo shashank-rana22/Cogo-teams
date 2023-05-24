@@ -5,16 +5,34 @@
 }
 
 .header {
+	display: flex;
+	align-items: center;
 	padding: 0 16px;
 	font-size: 20px;
 	font-weight: 600;
+}
 
-	span {
+.form_header {
+	display: flex;
+	align-items: flex-end;
+	font-size: 20px;
+	font-weight: 600;
+
+	.dep {
+		margin-left: 4px;
 		font-size: 18px;
 	}
 
 	.role {
+		min-width: 30px;
+		padding: 2px;
+		margin-left: 4px;
 		font-size: 16px;
+		text-align: center;
+		cursor: no-drop;
+		background: #fef199;
+		border-radius: 4px;
+		opacity: 0.4;
 	}
 }
 

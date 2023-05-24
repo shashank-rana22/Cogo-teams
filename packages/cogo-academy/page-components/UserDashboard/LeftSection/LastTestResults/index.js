@@ -12,9 +12,7 @@ import TopicWisePercentile from './TopicWisePercentile';
 function LastTestResults(props) {
 	const { data: stats_data = {}, loading } = props;
 
-	const { topic_wise_percentile, question_stats, status, test_id } = stats_data || {};
-
-	const hasPassed = status === 'passed';
+	const { topic_wise_percentile, question_stats, test_id } = stats_data || {};
 
 	if (loading) {
 		return <LoadingState rowsCount={2} />;
@@ -29,7 +27,7 @@ function LastTestResults(props) {
 			<TestResultMessage stats_data={stats_data} />
 
 			<div className={styles.stats}>
-				<Percentile stats_data={stats_data} hasPassed={hasPassed} />
+				<Percentile stats_data={stats_data} />
 
 				<TopicWisePercentile topic_wise_percentile={topic_wise_percentile} />
 

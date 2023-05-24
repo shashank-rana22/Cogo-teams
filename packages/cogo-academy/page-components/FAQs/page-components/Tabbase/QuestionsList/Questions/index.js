@@ -8,7 +8,8 @@ function Questions({ questions = {}, topicId = '' }) {
 	const router = useRouter();
 
 	const toggle = () => {
-		const href = `/learning/faq/answer?id=${questions?.id}&topicId=${topicId}`;
+		const showTopicId = topicId ? `&topicId=${topicId}` : '';
+		const href = `/learning/faq/answer?id=${questions?.id}${showTopicId}`;
 		router.push(href, href);
 	};
 

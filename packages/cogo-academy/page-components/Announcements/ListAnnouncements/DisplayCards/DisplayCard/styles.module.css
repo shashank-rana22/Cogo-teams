@@ -1,13 +1,14 @@
 .container {
 	margin: 10px 0 20px;
 	background-color: #fff;
-	border: 2px solid #dad9d8;
+	border: 1px solid #dad9d8;
 	border-radius: 5px;
 }
 
 .upperrow {
 	display: flex;
 	width: 100%;
+	padding: 10px 0;
 
 	@media (max-width: 885px) {
 		flex-direction: column;
@@ -58,20 +59,25 @@
 
 .label {
 	margin-bottom: 5px;
-	font-size: 15px;
-	font-weight: 500;
+	font-size: 16px;
+	font-weight: 600;
+
+	@media (min-width: 870px) {
+		display: none;
+	}
 }
 
 .value {
 	display: block;
 	width: 100%;
 	overflow: hidden;
+	font-size: 14px;
 	font-weight: 500;
-	color: #4f4f4f;
+	color: #000;
 	text-align: center;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	opacity: 0.9;
+	opacity: 0.8;
 }
 
 .tooltip {

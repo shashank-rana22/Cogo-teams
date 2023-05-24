@@ -82,7 +82,7 @@ const useListEnrichment = () => {
 
 			filters: {
 				...prev.filters,
-				status: activeTab === 'requests_sent' ? 'responded' : 'requested',
+				status: activeTab === 'requests_sent' ? 'responded' : 'active',
 			},
 		}));
 	}, [activeTab]);
@@ -97,7 +97,19 @@ const useListEnrichment = () => {
 		{
 			id       : 'id',
 			Header   : 'SERIAL ID',
-			accessor : ({ serial_id = '' }) => (
+			accessor : ({ organization, lead_organization }) => (
+				<section>
+					<Pill>
+						#
+						{lead_organization?.serial_id || organization?.serial_id}
+					</Pill>
+				</section>
+			),
+		},
+		{
+			id       : 'file_id',
+			Header   : 'SERIAL ID',
+			accessor : ({ serial_id }) => (
 				<section>
 					<Pill>
 						#

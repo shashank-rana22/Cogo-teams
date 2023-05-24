@@ -8,7 +8,7 @@
   "types": "dist/types/index.d.ts",
   "dependencies": {
     "@cogoport/charts": "^1.0.1",
-    "@cogoport/components": "^1.0.359",
+    "@cogoport/components": "^1.0.399",
     "@cogoport/forms": "workspace:0.1.0",
     "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/icons-react": "^1.0.65",

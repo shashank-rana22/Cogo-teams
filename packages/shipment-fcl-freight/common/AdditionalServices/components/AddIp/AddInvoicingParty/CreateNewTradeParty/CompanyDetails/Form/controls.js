@@ -1,30 +1,9 @@
 import PATTERNS from '@cogoport/constants/patterns';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 
+const geo = getGeoConstants();
 const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_ids;
-
-const countryOptions = [
-	{
-		label : 'Private Limited Company',
-		value : 'private_limited',
-	},
-	{
-		label : 'Public Limited Company',
-		value : 'public_limited',
-	},
-	{
-		label : 'Partnership',
-		value : 'partnership',
-	},
-	{
-		label : 'Proprietorship',
-		value : 'proprietorship',
-	},
-	{
-		label : 'Limited Liability Partnership',
-		value : 'limited_liability_partnership',
-	},
-];
 
 const controls = ({ watch }) => {
 	const watchCountryId = watch('country_id');
@@ -67,7 +46,7 @@ const controls = ({ watch }) => {
 			label       : 'Type of Company',
 			type        : 'select',
 			placeholder : 'Select Type of Company',
-			options     : countryOptions,
+			options     : geo.options.registration_types,
 			rules       : { required: 'Type of Company is required' },
 		},
 		{

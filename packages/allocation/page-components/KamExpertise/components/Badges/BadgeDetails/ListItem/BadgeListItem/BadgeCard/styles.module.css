@@ -1,0 +1,69 @@
+.badge_card_left {
+	width: 30%;
+	padding-right: 8px;
+	border-right: 1px solid #e0e0e0;
+}
+
+.badge_card_right {
+	width: 30%;
+	padding-right: 16px;
+}
+
+.badge_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.header_score {
+	display: flex;
+
+	@media (max-width: 576px) {
+		display: block;
+	}
+}
+
+.score {
+	padding-left: 4px;
+	font-weight: 600;
+
+	@media (max-width: 576px) {
+		padding: 0;
+	}
+}
+
+.badge_icon {
+	align-self: center;
+	width: 100px;
+	height: auto;
+	padding: 10px 0 0 10px;
+
+	@media (max-width: 768px) {
+		width: auto;
+	}
+}
+
+.badge_icon img {
+	width: 100%;
+}
+
+.modal_class {
+	:global(.ui_modal_body_container) {
+		padding: 16px 0;
+	}
+}
+
+.modal_body {
+	min-height: 500px;
+}
+
+.svg_container {
+	margin-left: 4px;
+	cursor: pointer;
+}
+
+.badge_update {
+	padding: 8px;
+	margin: 8px;
+}

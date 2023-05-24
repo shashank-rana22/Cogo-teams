@@ -1,0 +1,40 @@
+.text {
+	&.thin {
+		font-weight: 300;
+		opacity: 0.58;
+	}
+
+	&.bold {
+		font-weight: 500;
+	}
+
+	&.service-provider {
+		max-width: 270px;
+		overflow: hidden;
+		text-overflow: ellipsis;
+		text-transform: capitalize;
+		white-space: nowrap;
+	}
+}
+
+.status {
+	padding: 4px 6px;
+	font-weight: 500;
+	border-radius: 4px;
+
+	&.released {
+		background: #dfe8ff;
+	}
+
+	&.delivered,
+	&.surrendered {
+		background: #d3f6d7;
+	}
+}
+
+.link {
+	display: flex;
+	align-items: center;
+	color: #393f70;
+	text-decoration: none;
+}

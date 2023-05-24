@@ -109,7 +109,13 @@ function QuestionsItem({
 							theme="light"
 							placement="bottom-end"
 							animation="shift-away"
-							content="This will remove the question from this form.."
+							content={(
+								<div
+									style={{ wordBreak: 'break-word' }}
+								>
+									This will remove the question from this form..
+								</div>
+							)}
 						>
 							<ButtonIcon themeType="primary" icon={<IcMDelete />} onClick={() => undoAdd(item)} />
 						</Tooltip>

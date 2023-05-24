@@ -4,7 +4,6 @@ import { useState } from 'react';
 
 import HomePage from '../CreateModule/components/HomePage';
 
-import Analytics from './Analytics';
 import Header from './Header';
 import QuestionsList from './QuestionsList';
 
@@ -25,7 +24,6 @@ function ControlCenter() {
 	const { activeTab: currentActiveTab, testModuleTab } = query || {};
 
 	const [activeTab, setActiveTab] = useState(currentActiveTab || 'manage_faq');
-	const [switchDashboard, setSwitchDashboard] = useState(true);
 
 	const handleChangeTab = (val) => {
 		push(`/learning?activeTab=${val}`);
@@ -38,13 +36,9 @@ function ControlCenter() {
 		test_module : { testModuleTab },
 	};
 
-	if (!switchDashboard) {
-		return <Analytics setSwitchDashboard={setSwitchDashboard} />;
-	}
-
 	return (
 		<div>
-			<Header setSwitchDashboard={setSwitchDashboard} activeTab={activeTab} />
+			<Header />
 
 			<Tabs
 				activeTab={activeTab}

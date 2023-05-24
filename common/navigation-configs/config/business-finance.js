@@ -29,8 +29,8 @@ const businessFinance = {
 		navigation : 'business_finance-reports',
 		isMainNav  : true,
 	},
-	'/[partner_id]/business-finance/cfo-dashboard/[activeTab]': {
-		navigation : 'business_finance-cfo_dashboard',
+	'/[partner_id]/business-finance/finance-dashboard/[activeTab]': {
+		navigation : 'business_finance-finance_dashboard',
 		isMainNav  : true,
 	},
 	'/[partner_id]/business-finance/cogo-book/[active_tab]': {
@@ -45,9 +45,18 @@ const businessFinance = {
 	'/[partner_id]/business-finance/cogo-book/[active_tab]/[view]/view-data': {
 		navigation: 'business_finance-cogo_book',
 	},
+	'/[partner_id]/business-finance/cogo-book/selected_invoice': {
+		navigation: 'business_finance-cogo_book',
+	},
 	'/[partner_id]/business-finance/account-payables/[active_tab]': {
 		navigation : 'business_finance-account_payables',
 		isMainNav  : true,
+	},
+	'/[partner_id]/business-finance/account-payables/[active_tab]/advance-payment': {
+		navigation: 'business_finance-account_payables',
+	},
+	'/[partner_id]/business-finance/account-payables/[active_tab]/create-new-payrun': {
+		navigation: 'business_finance-account_payables',
 	},
 	'/[partner_id]/business-finance/overheads': {
 		navigation : 'business_finance-overheads',

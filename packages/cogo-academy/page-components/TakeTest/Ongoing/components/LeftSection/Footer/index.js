@@ -7,7 +7,11 @@ function Footer({
 	currentQuestion,
 	total_question,
 	fetchQuestions,
+	subjectiveAnswer,
+	setSubjectiveAnswer,
 	loading: getLoading,
+	uploadValue,
+	setUploadValue,
 	...restProps
 }) {
 	const {
@@ -18,6 +22,10 @@ function Footer({
 		currentQuestion,
 		total_question,
 		fetchQuestions,
+		subjectiveAnswer,
+		setSubjectiveAnswer,
+		uploadValue,
+		setUploadValue,
 		...restProps,
 	});
 
@@ -44,10 +52,9 @@ function Footer({
 
 				<Button
 					loading={loading || getLoading}
-					disabled={currentQuestion > total_question}
 					onClick={() => handleUpdate({ type: 'save_and_next' })}
 				>
-					{currentQuestion === total_question ? <>Save</> : <>Save & Next</>}
+					{Number(currentQuestion) === total_question ? <>Save</> : <>Save & Next</>}
 				</Button>
 			</div>
 		</div>

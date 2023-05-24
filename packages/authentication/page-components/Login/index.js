@@ -2,7 +2,6 @@ import { FluidContainer, Button } from '@cogoport/components';
 import { useForm, InputController } from '@cogoport/forms';
 import { IcCMicrosoft, IcMEyeopen, IcMEyeclose } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { useTranslation } from 'next-i18next';
 import React, { useState } from 'react';
 
 import useFormLoginwithMS from '../../hooks/useFormLoginwithMS';
@@ -12,7 +11,6 @@ import styles from './styles.module.css';
 
 function Login() {
 	const router = useRouter();
-	const { t } = useTranslation(['login']);
 
 	const { onSubmit = () => {}, loading = false, source = '' } = useLoginAuthenticate();
 	const { onLogin = () => {}, socialLoginLoading = false } = useFormLoginwithMS();
@@ -35,7 +33,7 @@ function Login() {
 					className={styles.logo}
 				/>
 				<div className={styles.input_label}>
-					{t('login:title')}
+					Please provide your email and password to login
 				</div>
 				<form className={styles.form_container} onSubmit={handleSubmit((data, e) => onSubmit(data, e))}>
 					<div className={styles.input_container}>

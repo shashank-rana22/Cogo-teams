@@ -1,4 +1,3 @@
-import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -6,45 +5,44 @@ import styles from './styles.module.css';
 const STATS_MAPPING = {
 	answered: {
 		key   : 'answered',
-		title : 'answered',
-	},
-	viewed: {
-		key   : 'viewed',
-		title : 'viewed',
+		title : 'Answered',
 	},
 	marked_for_review: {
 		key   : 'marked_for_review',
-		title : 'marked_for_review',
+		title : 'Marked for review',
+	},
+	visited: {
+		key   : 'visited',
+		title : 'Visited',
 	},
 	not_visited: {
-		key   : 'not_viewed',
-		title : 'not_viewed',
+		key   : 'not_visited',
+		title : 'Not Visited',
 	},
 };
 
 function StatsDisplay({ data = [], total_question_count }) {
-	let total_count = 0;
-
 	return (
 		<div className={styles.stats_and_time}>
 			{Object.values(STATS_MAPPING).map((stats_data) => {
 				const { title, key } = stats_data;
 
-				const count = title === 'not_viewed'
-					? total_question_count - total_count
-					: data?.filter((item) => item.answer_state === title).length;
-
-				total_count += Number(count);
+				const DATA_MAPPING = {
+					answered          : data.filter((item) => item.answer_state === key).length,
+					marked_for_review : data.filter((item) => item.answer_state === key).length,
+					visited           : data.length,
+					not_visited       : total_question_count - data.length,
+				};
 
 				return (
 					<div key={key} className={styles.content}>
 						<div className={styles.label}>
-							{startCase(title)}
+							{title}
 							{' '}
 							:
 						</div>
 						<div className={styles.value}>
-							{count}
+							{DATA_MAPPING[key]}
 							/
 							{total_question_count}
 						</div>

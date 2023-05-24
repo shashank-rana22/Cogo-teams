@@ -36,6 +36,7 @@ function SubmitForm({
 	};
 
 	let isFormSubmittable = true;
+	const currentDesignation = bulkDesignations.length > 1 ? '...' : designation;
 
 	questionActionList.checked.forEach((que) => {
 		if (que.weightage <= 0 && isFormSubmittable) {
@@ -46,14 +47,18 @@ function SubmitForm({
 	return (
 		<div className={styles.submit_form_container}>
 			<div className={styles.header}>
-				Create Form :
-				{' '}
-				<span>
-					{startCase(department)}
-					{' > '}
-				</span>
+				<div className={styles.form_header}>
+					Create Form :
+					{' '}
+					<div className={styles.dep}>
+						{startCase(department || '---')}
+						{' > '}
+					</div>
 
-				<span className={styles.role}>{startCase(designation)}</span>
+					<div className={styles.role}>
+						{currentDesignation}
+					</div>
+				</div>
 			</div>
 
 			<div className={styles.question_container}>

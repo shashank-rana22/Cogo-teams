@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -12,23 +13,20 @@ const FEEDBACK_MAPPING_ISLIKED = {
 };
 
 const useCreateFeedback = ({ question }) => {
-	const {
-		profile: { partner = '' },
-	} = useSelector((state) => state);
+	const { partner = '' }	 = useSelector((state) => state?.profile || {});
+	const [show, setShow] = useState(false);
+	const [load, setload] = useState(true);
+	const [isLiked, setIsLiked] = useState();
 
 	const { handleSubmit, control, watch, formState: { errors } } = useForm();
 
 	const watchQuestionCheckbox = watch('question_checkbox');
 	const watchAnswerCheckbox = watch('answer_checkbox');
+	const watchRemark = watch('remark');
 
-	const [show, setShow] = useState(false);
-	const [load, setload] = useState(true);
-
-	const { data: answerData, loading, fetch } = useAnswer({ question });
+	const { data: answerData, loading, fetch } = useAnswer({ question, setIsLiked, FEEDBACK_MAPPING_ISLIKED });
 
 	const { id, is_positive } = answerData?.answers?.[0]?.faq_feedbacks?.[0] || {};
-
-	const [isLiked, setIsLiked] = useState(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 
 	const apiName = id ? '/update_faq_feedback' : '/create_faq_feedback';
 
@@ -66,7 +64,8 @@ const useCreateFeedback = ({ question }) => {
 
 			fetch();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -85,7 +84,8 @@ const useCreateFeedback = ({ question }) => {
 
 			fetch();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -109,7 +109,7 @@ const useCreateFeedback = ({ question }) => {
 		setload(false);
 		setIsLiked('disliked');
 
-		let remark = values?.remark;
+		let remark = values?.remark ? values.remark : '';
 
 		if (values?.answer_checkbox) {
 			remark = `Answer not satisfactory. ${remark}`;
@@ -128,13 +128,8 @@ const useCreateFeedback = ({ question }) => {
 		};
 		if (is_positive) {
 			payload = {
+				...payload,
 				id,
-				faq_answer_id               : answerData?.answers[0]?.id,
-				is_positive                 : false,
-				remark,
-				status                      : 'active',
-				suggested_question_abstract : watchQuestionCheckbox ? values?.question : undefined,
-				suggested_answer            : watchAnswerCheckbox ? values?.answer : undefined,
 			};
 		}
 
@@ -146,7 +141,8 @@ const useCreateFeedback = ({ question }) => {
 			setShow(false);
 			fetch();
 		} catch (error) {
-			Toast.error(error?.message);
+			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+
 			setIsLiked(FEEDBACK_MAPPING_ISLIKED[is_positive] || '');
 		}
 	};
@@ -169,6 +165,7 @@ const useCreateFeedback = ({ question }) => {
 		setIsLiked,
 		watchAnswerCheckbox,
 		watchQuestionCheckbox,
+		watchRemark,
 		is_positive,
 		FEEDBACK_MAPPING_ISLIKED,
 

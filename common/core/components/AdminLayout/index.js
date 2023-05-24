@@ -3,7 +3,7 @@ import getSideBarConfigs from '@cogoport/navigation-configs/side-bar';
 import { useSelector } from '@cogoport/store';
 import React, { useState } from 'react';
 
-import AnnouncementOnRefresh from './AnnouncementOnRefresh';
+import AnnouncementModal from './Announcements/AnnouncementModal';
 import Navbar from './Navbar';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
@@ -26,11 +26,8 @@ function AdminLayout({
 	const {
 		user: { id: user_id = '' },
 		partner: { id: partner_id = '', partner_user_id = '' },
-		voice_call = {},
+		is_in_voice_call:inCall = false, voice_call_recipient_data = {},
 	} = user_data;
-
-	const { inCall = false } = voice_call || {};
-
 	const {
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys, setAnnouncements });
@@ -71,8 +68,14 @@ function AdminLayout({
 					inCall={inCall}
 				/>
 			) : null}
-			<VoiceCall />
-			<AnnouncementOnRefresh data={announcements} />
+			<VoiceCall
+				voice_call_recipient_data={{
+					...(voice_call_recipient_data || {}),
+					loggedInAgentId: user_id,
+				}}
+				inCall={inCall}
+			/>
+			<AnnouncementModal data={announcements} />
 		</div>
 	);
 }

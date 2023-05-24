@@ -1,12 +1,24 @@
 import React from 'react';
 
 import CardComponent from './CardComponent';
+import SalesComponent from './SalesComponent';
 import styles from './styles.module.css';
+
+interface TabDataProps {
+	toggleData?: boolean,
+	loading?: boolean,
+	dailyStatsData?: object,
+	subActiveTab?: string,
+	setSubActiveTab?: (p: string) => void,
+	filters?: object,
+	filterValue?: object
+	entityCode?: string
+}
 
 const tabs = [
 	{
 		key   : 'SALES_INVOICE',
-		label : 'Sales Invoice',
+		label : 'Revenue',
 	},
 	{
 		key   : 'CREDIT_NOTE',
@@ -18,20 +30,47 @@ const tabs = [
 	},
 ];
 
-interface TabDataProps {
-	toggleData?: boolean,
-	loading?: boolean,
-	dailyStatsData?: object,
-	subActiveTab?: string,
-	setSubActiveTab?: (p: string) => void,
-	filters?: object,
-	filterValue?: object
-}
+const tabsKeyComponentMapping = {
+	SALES_INVOICE    : SalesComponent,
+	CREDIT_NOTE      : CardComponent,
+	SHIPMENT_CREATED : CardComponent,
+};
 
 function TabData({
 	toggleData, loading, dailyStatsData, subActiveTab, setSubActiveTab,
-	filters, filterValue,
+	filters, filterValue, entityCode,
 } : TabDataProps) {
+	const tabComponentProps = {
+		SALES_INVOICE: {
+			subActiveTab,
+			dailyStatsData,
+			toggleData,
+			loading,
+			filters,
+			filterValue,
+			entityCode,
+		},
+		CREDIT_NOTE: {
+			subActiveTab,
+			dailyStatsData,
+			toggleData,
+			loading,
+			filters,
+			filterValue,
+			entityCode,
+		},
+		SHIPMENT_CREATED: {
+			subActiveTab,
+			dailyStatsData,
+			toggleData,
+			loading,
+			filters,
+			filterValue,
+			entityCode,
+		},
+	};
+	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
+
 	const onChange = (view:string) => {
 		setSubActiveTab(view);
 	};
@@ -63,14 +102,8 @@ function TabData({
 				</div>
 
 			</div>
-			<CardComponent
-				subActiveTab={subActiveTab}
-				dailyStatsData={dailyStatsData}
-				toggleData={toggleData}
-				loading={loading}
-				filters={filters}
-				filterValue={filterValue}
-			/>
+
+			{ActiveTabComponent && <ActiveTabComponent key={subActiveTab} {...tabComponentProps[subActiveTab]} />}
 		</div>
 	);
 }

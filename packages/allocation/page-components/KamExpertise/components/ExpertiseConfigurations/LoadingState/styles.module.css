@@ -1,0 +1,36 @@
+.container {
+	padding: 16px;
+	margin: 16px 0;
+	background-color: #fff;
+	border-radius: 8px;
+}
+
+.card_header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.cards {
+	display: flex;
+	flex-wrap: wrap;
+	justify-content: space-between;
+}
+
+.card_container {
+	flex-basis: 24%;
+	padding: 16px;
+	border-radius: 8px;
+	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
+
+	@media (max-width: 576px) {
+		flex-basis: 100%;
+		margin-bottom: 12px;
+	}
+}
+
+.bottom_container {
+	display: flex;
+	justify-content: space-between;
+}

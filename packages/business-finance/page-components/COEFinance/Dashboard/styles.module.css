@@ -65,14 +65,13 @@
 }
 
 .card_label {
-	padding-right: 60px;
-	padding-left: 36px;
+	padding: 0 60px 0 36px;
 	font-size: 14px;
 	font-weight: 500;
 }
 
 .card_value {
-	padding-left: 14px;
+	padding: 0 14px 0 28px;
 	font-size: 30px;
 	font-weight: 600;
 }
@@ -204,4 +203,19 @@
 .table_data {
 	height: 45vh;
 	overflow: scroll;
+
+	:global {
+		.ui_table_head_container {
+			position: sticky;
+			top: 0;
+			z-index: 1;
+			background: #ffff;
+
+			.ui_table_head_row {
+				.ui_table_head_cell:first-child {
+					padding-left: 12px;
+				}
+			}
+		}
+	}
 }

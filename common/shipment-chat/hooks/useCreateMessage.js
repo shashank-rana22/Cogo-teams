@@ -1,7 +1,6 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getApiErrorString from '../utils/getApiErrorString';
+import toastApiError from '../utils/toastApiError';
 
 const useCreateMessage = ({ payload, refetch }) => {
 	const [{ loading }, trigger] = useRequest({
@@ -21,7 +20,7 @@ const useCreateMessage = ({ payload, refetch }) => {
 				refetch();
 			}
 		} catch (err) {
-			Toast.error(getApiErrorString(err) || 'Unable to send message, Please try again later!');
+			toastApiError(err);
 		}
 	};
 

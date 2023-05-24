@@ -1,4 +1,4 @@
-import { Tooltip, Select, Popover, Textarea, Modal, Button } from '@cogoport/components';
+import { Tooltip, Select, Popover, Textarea, Modal, Button, Pill } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMEyeopen } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
@@ -6,9 +6,13 @@ import { useEffect, useState } from 'react';
 import useGetTdsData from '../../apisModal/useGetTdsData';
 import ApproveAndReject from '../../common/ApproveAndRejectData';
 import ViewButton from '../../common/ViewButton';
+import StyledTable from '../../StyledTable';
 import { toTitleCase } from '../../utils/titleCase';
 
-import { CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS, REVENUE_OPTIONS } from './credit-note-config';
+import {
+	CATEGORY_OPTIONS, NON_REVENUE_DATA, NON_REVENUE_OPTIONS,
+	requestCreditNoteColumns, REVENUE_OPTIONS,
+} from './credit-note-config';
 import styles from './style.module.css';
 
 function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
@@ -19,7 +23,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		remarks  : null,
 	});
 
-	const [shoPopover, setShowPopover] = useState(false);
+	const [showPopover, setShowPopover] = useState(false);
 	const [remarks, setRemarks] = useState('');
 	const { data = {}, type } = row || {};
 	const isConsolidated = type === 'CONSOLIDATED_CREDIT_NOTE';
@@ -30,6 +34,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		subTotal,
 		taxAmount,
 		grandTotal,
+		lineItems,
 		creditNoteNumber,
 		invoiceId,
 		remark,
@@ -37,6 +42,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		creditNoteRemarks,
 		currency,
 		documentUrls,
+		revoked,
 	} = creditNoteRequest || consolidatedCreditNoteRequest || {};
 
 	const { useOnAction:OnAction, loading } = useGetTdsData({
@@ -55,6 +61,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 	|| creditNoteType === 'REVENUE_IMPACTING';
 	const NonRevenueImpacting =	CNCategoryValues?.CNType === 'NON_REVENUE_IMPACTING'
 	|| creditNoteType === 'NON_REVENUE_IMPACTING';
+
+	const { referenceId = '' } = row || {};
 
 	const content = () => (
 		<div className={styles.container}>
@@ -160,6 +168,8 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 		});
 	}, [CNCategoryValues?.CNValues, CNCategoryValues?.CNType]);
 
+	const rest = { onClickOutside: () => { setShowPopover(false); } };
+
 	return (
 		<div>
 			<div>
@@ -176,6 +186,38 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 					<Modal.Header title={`Request Credit Note - ${creditNoteNumber} - ${toTitleCase(businessName)}`} />
 					<Modal.Body>
 						{!isEditable && <ApproveAndReject row={row} />}
+						<div className={styles.credit}>
+							<div className={styles.button_container_data}>
+								<Popover
+									placement="bottom"
+									visible={showPopover}
+									render={content()}
+									{...rest}
+								>
+									<Button
+										themeType="secondary"
+										onClick={() => setShowPopover(!showPopover)}
+									>
+										<div className={styles.flex}>
+											CN Category
+											<div className={styles.icon_container}>
+												{showPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+											</div>
+										</div>
+									</Button>
+								</Popover>
+							</div>
+
+							{typeof (revoked) === 'boolean' && (
+								<div>
+									{revoked
+										? <Pill size="md" color="#C4DC91">Fully</Pill>
+										: <Pill size="md" color="#FEF199">Partial</Pill>}
+								</div>
+							)}
+
+						</div>
+
 						<div className={styles.flex}>
 
 							<div className={styles.value_data}>
@@ -185,6 +227,14 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 								<div className={styles.date_value}>
 									#
 									{jobNumber || '-'}
+								</div>
+							</div>
+							<div className={styles.value_data}>
+								<div className={styles.label_value}>
+									Incident ID
+								</div>
+								<div className={styles.date_value}>
+									{referenceId || '-'}
 								</div>
 							</div>
 
@@ -206,19 +256,19 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 
 							<div className={styles.value_data}>
 								<div className={styles.label_value}>
-									TaxAmount
+									SubTotal
 								</div>
 								<div className={styles.date_value}>
-									{getFormattedPrice(taxAmount, currency) || '-'}
+									{getFormattedPrice(subTotal, currency) || '-'}
 								</div>
 							</div>
 
 							<div className={styles.value_data}>
 								<div className={styles.label_value}>
-									SubTotal
+									TaxAmount
 								</div>
 								<div className={styles.date_value}>
-									{getFormattedPrice(subTotal, currency) || '-'}
+									{getFormattedPrice(taxAmount, currency) || '-'}
 								</div>
 							</div>
 
@@ -230,23 +280,6 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									{getFormattedPrice(grandTotal, currency) || '-'}
 								</div>
 							</div>
-							<Popover
-								placement="bottom"
-								visible={shoPopover}
-								render={content()}
-							>
-								<Button
-									themeType="secondary"
-									onClick={() => setShowPopover(!shoPopover)}
-								>
-									<div className={styles.flex}>
-										CN Category
-										<div className={styles.icon_container}>
-											{shoPopover ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-										</div>
-									</div>
-								</Button>
-							</Popover>
 
 						</div>
 
@@ -278,6 +311,15 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 							)))}
 
 						</div>
+						{lineItems?.length > 0 ? (
+							<div className={styles.list_container}>
+								<StyledTable
+									columns={requestCreditNoteColumns()}
+									showPagination={false}
+									data={lineItems}
+								/>
+							</div>
+						) : <div className={styles.line_item_empty}> No LineItems Available </div>}
 						{isEditable && (
 							<>
 								<div className={styles.remarks}>Remarks*</div>
@@ -301,6 +343,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
 									disabled={!(remarks.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
 									}}
@@ -312,6 +355,7 @@ function RequestCN({ id, refetch, row, isEditable = true, status = '' }) {
 									size="md"
 									style={{ marginRight: '8px' }}
 									disabled={!(remarks.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');
 									}}

@@ -7,8 +7,15 @@ import Card from '../Card';
 import Detail from './Detail';
 import styles from './styles.module.css';
 
-function ServiceProvider({ tradePartnersData = {}, setAddPoc = () => {}, serviceProviders = {} }) {
+function ServiceProvider({
+	tradePartnersData = {},
+	setAddPoc = () => {},
+	serviceProviders = {},
+	rolesPermission = {},
+}) {
 	const [show, setShow] = useState({});
+	const addPocPermission = !!rolesPermission?.can_add_service_provider_poc;
+
 	const { service_provider_details:{ poc_data = [] } = {} } = tradePartnersData;
 
 	const serviceProvidersLength = Object.keys(serviceProviders)?.length;
@@ -20,15 +27,14 @@ function ServiceProvider({ tradePartnersData = {}, setAddPoc = () => {}, service
 					<div className={styles.service_provider_name}>{serviceProviders[sp_key]}</div>
 					<div className={styles.row}>
 
-						<div>
-							<Button
-								themeType="linkUi"
-								onClick={() => { setShow({ ...show, [sp_key]: !show[sp_key] }); }}
-							>
-								{show[sp_key] ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-							</Button>
-						</div>
-						<div>
+						<Button
+							themeType="linkUi"
+							onClick={() => { setShow({ ...show, [sp_key]: !show[sp_key] }); }}
+						>
+							{show[sp_key] ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+						</Button>
+
+						{addPocPermission ?	(
 							<Button
 								size="sm"
 								onClick={() => setAddPoc({
@@ -41,7 +47,7 @@ function ServiceProvider({ tradePartnersData = {}, setAddPoc = () => {}, service
 							>
 								+ ADD POC
 							</Button>
-						</div>
+						) : null}
 
 					</div>
 				</div>

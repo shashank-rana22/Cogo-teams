@@ -39,9 +39,7 @@ function FeedbackForms({
 		feedbackYear,
 	});
 
-	const { form_questions = [], form_id = '', form_responses = [], feedback_data = {} } = formData;
-
-	// const questionsToShow = action === 'show' || !feedback_id ? form_responses : form_questions;
+	const { form_id = '' } = formData;
 
 	const [rating, setRating] = useState({});
 	const [comment, setComment] = useState('');
@@ -62,18 +60,20 @@ function FeedbackForms({
 	const newOptions = Array(5).fill('').map((_, index) => ({
 		label : '',
 		value : (index + 1).toString(),
-		...(action === 'show' ? { disabled: true } : {}),
+		...(action === 'show' && { disabled: true }),
 	}));
 
-	const resignedOptions = [{
-		label : 'Yes',
-		value : '2',
-		...(action === 'show' ? { disabled: true } : {}),
-	}, {
-		label : 'No',
-		value : '1',
-		...(action === 'show' ? { disabled: true } : {}),
-	}];
+	const resignedOptions = [
+		{
+			label : 'Yes',
+			value : '2',
+			...(action === 'show' && { disabled: true }),
+		}, {
+			label : 'No',
+			value : '1',
+			...(action === 'show' && { disabled: true }),
+		},
+	];
 
 	const performanceClass = {};
 
@@ -83,7 +83,7 @@ function FeedbackForms({
 				placement="top"
 				theme="light"
 				animation="shift-away"
-				content={<div>{startCase(key)}</div>}
+				content={<div style={{ wordBreak: 'break-word' }}>{startCase(key || '-')}</div>}
 			>
 				{performanceIcons[key]}
 			</Tooltip>
@@ -94,6 +94,8 @@ function FeedbackForms({
 
 	useEffect(() => {
 		if (!isEmpty(formData)) {
+			const { form_questions = [], form_responses = [], feedback_data = {} } = formData;
+
 			const questions = !isEmpty(form_responses) ? form_responses : form_questions;
 
 			if (!isEmpty(form_responses)) {
@@ -110,7 +112,6 @@ function FeedbackForms({
 			}
 			setQuestionsToShow(questions);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [formData]);
 
 	if (questionsLoading) {
@@ -141,7 +142,7 @@ function FeedbackForms({
 
 					<div className={styles.rating_classes}>
 						{Object.keys(performanceClass).map((key) => (
-							<div className={styles.class}>
+							<div className={styles.performance_class} key={key}>
 								{performanceClass[key]}
 							</div>
 						))}
@@ -153,48 +154,6 @@ function FeedbackForms({
 			{(questionsToShow || []).map((key) => {
 				const { id, question, description = '' } = key || {};
 
-				if (showForm === 'resigned') {
-					return (
-						<div
-							className={styles.controls}
-							key={id || question}
-						>
-							<div className={styles.question_rating}>
-								<div className={styles.side_heading}>
-									<div className={styles.question_container}>{startCase(question)}</div>
-
-									{!!description && (
-										<Tooltip
-											placement="top"
-											theme="light"
-											animation="shift-away"
-											content={<div>{description}</div>}
-										>
-											<IcMInfo
-												fill="#393f70"
-												width={16}
-												height={16}
-											/>
-										</Tooltip>
-									)}
-
-								</div>
-								<div className={styles.radio_group}>
-									<RadioGroup
-										options={resignedOptions}
-										value={rating[id]?.rating}
-										onChange={(val) => {
-											if (action !== 'show') {
-												setRating({ ...rating, [id]: { ...(rating[id]), rating: val } });
-											}
-										}}
-									/>
-								</div>
-							</div>
-						</div>
-					);
-				}
-
 				return (
 					<div
 						className={styles.controls}
@@ -202,14 +161,14 @@ function FeedbackForms({
 					>
 						<div className={styles.question_rating}>
 							<div className={styles.side_heading}>
-								<div className={styles.question_container}>{startCase(question)}</div>
+								<div className={styles.question_container}>{startCase(question || '---')}</div>
 
 								{!!description && (
 									<Tooltip
 										placement="top"
 										theme="light"
 										animation="shift-away"
-										content={<div>{description}</div>}
+										content={<div style={{ wordBreak: 'break-word' }}>{description}</div>}
 									>
 										<IcMInfo
 											fill="#393f70"
@@ -222,7 +181,7 @@ function FeedbackForms({
 
 							<div className={styles.radio_group}>
 								<RadioGroup
-									options={newOptions}
+									options={showForm === 'resigned' ? resignedOptions : newOptions}
 									value={rating[id]?.rating}
 									onChange={(val) => {
 										if (action !== 'show') {
@@ -233,18 +192,20 @@ function FeedbackForms({
 							</div>
 						</div>
 
-						<div className={styles.question_feedback}>
-							<Textarea
-								value={rating[id]?.feedback}
-								disabled={action === 'show'}
-								onChange={(val) => {
-									setRating({ ...rating, [id]: { ...(rating[id]), feedback: val } });
-								}}
-								placeholder={action === 'show' && isEmpty(rating[id].feedback)
-									? 'No Feedback Provided' : 'Convey the reason for feedback...'}
-								style={{ height: '60px' }}
-							/>
-						</div>
+						{showForm !== 'resigned' && (
+							<div className={styles.question_feedback}>
+								<Textarea
+									value={rating[id]?.feedback}
+									disabled={action === 'show'}
+									onChange={(val) => {
+										setRating({ ...rating, [id]: { ...(rating[id]), feedback: val } });
+									}}
+									placeholder={action === 'show' && isEmpty(rating[id].feedback)
+										? 'No Feedback Provided' : 'Convey the reason for feedback...'}
+									style={{ height: '60px' }}
+								/>
+							</div>
+						)}
 					</div>
 				);
 			})}

@@ -11,7 +11,9 @@ function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 	const { data = {}, loading } = useGetTestResultQuestion({ test_id, question_id });
 
 	const { answers = [], question_data = {} } = data || {};
-	const { question = '' } = question_data || {};
+	const { question = '', explanation } = question_data || {};
+
+	const explanationHtmlString = explanation?.[0];
 
 	if (loading) {
 		return (
@@ -32,25 +34,34 @@ function QuestionCard({ question_id = '', test_id = '', index = 0 }) {
 	}
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.card_header}>
-				<div className={styles.question_heading}>
-					<div className={styles.question_number}>
-						Q
-						{index + 1}
-					</div>
+		<div className={styles.main_container}>
+			<div className={styles.container}>
+				<div className={styles.card_header}>
+					<div className={styles.question_heading}>
+						<div className={styles.question_number}>
+							Q
+							{index + 1}
+						</div>
 
-					<div className={styles.display_question}>
-						<div className={styles.question_text}>{question}</div>
+						<div className={styles.display_question}>
+							<div className={styles.question_text}>{question}</div>
+						</div>
 					</div>
+				</div>
+
+				<div className={styles.answers_container}>
+					{answers.map((item) => (<GetAnswerItem answer={item} key={item.answer_id} />))}
 				</div>
 			</div>
 
-			<div className={styles.answers_container}>
-				{answers.map((item) => (<GetAnswerItem answer={item} key={item.answer_id} />))}
-			</div>
+			{explanationHtmlString ? (
+				<div className={styles.explanation}>
+					<b>Explanation:</b>
+					{' '}
+					<div dangerouslySetInnerHTML={{ __html: explanationHtmlString }} />
+				</div>
+			) : null}
 		</div>
-
 	);
 }
 

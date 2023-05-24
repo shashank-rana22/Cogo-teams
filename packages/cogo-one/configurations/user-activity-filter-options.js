@@ -19,8 +19,8 @@ function filterOptions() {
 			value : 'facebook',
 		},
 		{
-			label : 'Instagram',
-			value : 'instagram',
+			label : 'Telegram',
+			value : 'telegram',
 		},
 		{
 			label : 'Mail',

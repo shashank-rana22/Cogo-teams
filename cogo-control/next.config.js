@@ -7,9 +7,6 @@ const withBundleAnalyzer = require('@next/bundle-analyzer')({
 	enabled: process.env.ANALYZE === 'true',
 });
 
-// eslint-disable-next-line import/extensions
-const { i18n } = require('./next-i18next.config.js');
-
 const isProd = process.env.NODE_ENV === 'production';
 
 // eslint-disable-next-line
@@ -34,7 +31,6 @@ module.exports = withBundleAnalyzer({
 	swcMinify         : true,
 	basePath          : '/v2',
 	transpilePackages : modulesToTranspile,
-	i18n,
 	images            : {
 		remotePatterns: [
 			{
@@ -47,8 +43,23 @@ module.exports = withBundleAnalyzer({
 			},
 		],
 	},
-	webpack: (config) => {
+	webpack: (config, { isServer }) => {
 		const newConfig = { ...config };
+
+		newConfig.resolve.fallback = {
+			...newConfig.resolve.fallback,
+			request  : false,
+			encoding : false,
+			...(isServer
+				? {}
+				: {
+					fs            : false,
+					child_process : false,
+					net           : false,
+					tls           : false,
+				}),
+		};
+
 		newConfig.module.rules.push({
 			test : /\.svg$/i,
 			use  : [{ loader: '@svgr/webpack' }],

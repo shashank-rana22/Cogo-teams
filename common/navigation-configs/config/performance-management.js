@@ -1,4 +1,8 @@
 const performanceManagement = {
+	'/[partner_id]/performance-management/employee-directory': {
+		layoutType : 'no_header',
+		navigation : 'performance_management-employee_directory',
+	},
 	'/[partner_id]/performance-management/user-dashboard': {
 		layoutType : 'no_header',
 		navigation : 'performance_management-user_dashboard',

@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
@@ -32,7 +33,7 @@ function useListFaqQuestions({
 							q            : query || undefined,
 							state        : 'published',
 							status       : 'active',
-
+							is_parent    : true,
 						},
 						sort_by                  : 'view_count',
 						sort_type                : sortType,
@@ -46,7 +47,7 @@ function useListFaqQuestions({
 					},
 				});
 			} catch (error) {
-				Toast.error(error?.message);
+				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 			}
 		},
 		[page, query, sortType, topicId, trigger],

@@ -1,10 +1,8 @@
-import { Toast } from '@cogoport/components';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-import getApiErrorString from '../utils/getApiErrorString';
-
-const useListServiceChargeCodes = ({ shipmentId }) => {
+const useListServiceChargeCodes = ({ shipmentId = '' }) => {
 	const [apiData, setApiData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
@@ -16,10 +14,12 @@ const useListServiceChargeCodes = ({ shipmentId }) => {
 	const getListChargeCodes = useCallback(async () => {
 		try {
 			const res = await trigger();
+
 			setApiData(res.data || {});
 		} catch (err) {
 			setApiData({});
-			Toast.error(getApiErrorString(err));
+
+			toastApiError(err);
 		}
 	}, [trigger]);
 

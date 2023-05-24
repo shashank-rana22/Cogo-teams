@@ -14,9 +14,9 @@ function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
 						theme="light"
 						placement="top-start"
 						animation="shift-away"
-						content={question}
+						content={<div style={{ wordBreak: 'break-word' }}>{question}</div>}
 					>
-						<div className={styles.question}>{startCase(question)}</div>
+						<div className={styles.question}>{startCase(question || '---')}</div>
 					</Tooltip>
 				</div>
 
@@ -25,7 +25,7 @@ function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
 						theme="light"
 						placement="bottom-start"
 						animation="shift-away"
-						content={description}
+						content={<div style={{ wordBreak: 'break-word' }}>{description}</div>}
 					>
 						<div className={styles.remark}>{description}</div>
 					</Tooltip>
@@ -34,7 +34,7 @@ function QuestionsBox({ question_detail = {}, questionStatus = '' }) {
 
 			{questionStatus !== 'add_weightage' && (
 				<div className={styles.question_tags}>
-					{(tags || []).map((tag) => <Pill color="#d9eafd">{tag}</Pill>)}
+					{(tags || []).map((tag) => <Pill color="#d9eafd" key={tag}>{tag}</Pill>)}
 				</div>
 			)}
 		</div>

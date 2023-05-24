@@ -38,7 +38,9 @@ const useList = ({ filters }:FilterInterface) => {
 				},
 			});
 		} catch (error) {
-			Toast.error(error?.response?.data?.message);
+			if (error?.response?.data?.message) {
+				Toast.error(error?.response?.data?.message);
+			}
 		}
 	}, [filters?.entity, filters?.month, filters?.query, listTrigger]);
 

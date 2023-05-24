@@ -22,7 +22,7 @@ function QnAItem({ data = {}, index = 0, user_name = '' }) {
 				<div className={styles.explanation}>
 					<b>Explanation:</b>
 					{' '}
-					{question_data.explanation?.[0]}
+					<div dangerouslySetInnerHTML={{ __html: question_data.explanation?.[0] }} />
 				</div>
 			) : null}
 		</div>

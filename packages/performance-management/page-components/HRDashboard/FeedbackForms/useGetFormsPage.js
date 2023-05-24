@@ -32,9 +32,7 @@ const useGetFormsPage = () => {
 			setOpenCreateForm(true);
 			setFormStage(newFormStage);
 		}
-
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [designation]);
+	}, [department, designation]);
 
 	return {
 		formId,

@@ -25,6 +25,7 @@
 .hawb_container {
 	position: relative;
 	padding: 20px;
+	margin: 0 8px;
 	text-align: center;
 	background: #fff;
 	border-bottom-right-radius: 5px;

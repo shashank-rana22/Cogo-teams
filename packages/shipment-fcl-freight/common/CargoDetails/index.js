@@ -4,7 +4,7 @@ import MultiServiceDetailsPopover from './MultiServiceDetailsPopover';
 import RenderCargoPills from './RenderCargoPills';
 import styles from './styles.module.css';
 
-function CargoDetails({ primary_service }) {
+function CargoDetails({ primary_service = {} }) {
 	return (
 		<div className={cl`${styles.container} ${styles.shipment_cargo_details_root}`}>
 			{primary_service?.cargo_details?.length > 1 ? (

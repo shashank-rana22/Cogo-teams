@@ -1,9 +1,9 @@
 import { Button, Loader } from '@cogoport/components';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
 
 import useListOrganizationInvoicingParties from '../../../../../../hooks/useListOrganizationInvoicingParties';
-import EmptyState from '../../../../../EmptyState';
 import CreateNewBillingAddress from '../CreateNewBillingAddress';
 import CreateNewTradeParty from '../CreateNewTradeParty';
 
@@ -216,6 +216,7 @@ function InvoicingParties({
 				<CreateNewTradeParty
 					orgResponse={organization}
 					setShowComponent={setShowComponent}
+					showComponent={showComponent}
 					tradePartyType={tradePartyType}
 					fetchOrganizationTradeParties={refetch}
 				/>

@@ -1,0 +1,20 @@
+.reassign_modal {
+	display: flex;
+	flex-direction: column;
+}
+
+.name_input {
+	align-self: center;
+
+	:global {
+		.ui_select_display_container {
+			width: 200px;
+		}
+	}
+}
+
+.button_container {
+	display: flex;
+	align-self: center;
+	margin-top: 16px;
+}

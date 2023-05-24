@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useState, useCallback, useMemo } from 'react';
@@ -32,7 +33,7 @@ const useListFaqSearchHistory = () => {
 		try {
 			trigger(params);
 		} catch (e) {
-			Toast.error(e?.message);
+			if (e.response?.data) { Toast.error(getApiErrorString(e.response?.data)); }
 		}
 	}, [params, trigger]);
 

@@ -1,0 +1,12 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.description {
+	img {
+		max-width: 98%;
+		height: 100%;
+	}
+}

@@ -1,14 +1,11 @@
-.container {
+.custom_modal {
 	:global {
+		.ui_button_container:not(:first-of-type) {
+			margin-left: 10px;
+		}
+
 		.ui_text_area_container {
-			height: 100px !important;
-			border-radius: 4px !important;
+			height: 100px;
 		}
 	}
-}
-
-.button_container {
-	display: flex;
-	justify-content: flex-end;
-	margin: 12px 0 0;
 }

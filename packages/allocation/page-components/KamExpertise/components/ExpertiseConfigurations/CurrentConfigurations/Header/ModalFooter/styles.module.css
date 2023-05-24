@@ -1,0 +1,16 @@
+.modal_footer {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.footer_button {
+	display: flex;
+	margin-left: auto;
+}
+
+.button {
+	margin-left: 12px;
+	background-color: white;
+}

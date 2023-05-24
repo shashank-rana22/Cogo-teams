@@ -1,9 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
-
-import getApiErrorString from '../utils/getApiErrorString';
 
 const geo = getGeoConstants();
 
@@ -11,6 +10,7 @@ const useUpdateShipmentAdditionalService = ({
 	item = {},
 	refetch = () => {},
 	showIp = false,
+	task = {},
 }) => {
 	const [remarks, setRemarks] = useState(null);
 
@@ -24,23 +24,26 @@ const useUpdateShipmentAdditionalService = ({
 			await trigger({
 				data: {
 					...data,
-					pending_task_id: showIp ? undefined : item?.pending_task_id,
+					pending_task_id: showIp ? undefined : task?.id,
 				},
 			});
 
 			Toast.success('Service Updated successfully');
+
 			setRemarks(null);
+
 			refetch();
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 
 	const handleShipperConfirm = () => {
 		const payload = {
-			id    : item.serviceListItem.id,
+			id    : item?.id,
 			state : 'accepted_by_importer_exporter',
 		};
+
 		handleSubmit(payload);
 	};
 
@@ -49,43 +52,46 @@ const useUpdateShipmentAdditionalService = ({
 			Toast.error('Please provide revison remarks');
 			return;
 		}
+
 		const payload = {
-			id      : item.serviceListItem.id,
+			id      : item.id,
 			state   : 'amendment_requested_by_importer_exporter',
 			remarks : [remarks],
 		};
+
 		handleSubmit(payload);
 	};
 
 	const handleBuyPriceReRequest = () => {
 		const payload = {
-			id    : item.serviceListItem.id,
+			id    : item.id,
 			state : 'requested_for_service_provider',
 		};
+
 		handleSubmit(payload);
 	};
 
 	const handleShipperSideCancel = () => {
-		if (!remarks) {
-			Toast.error('Please provide cancellation remarks');
-		}
+		if (!remarks) Toast.error('Please provide cancellation remarks');
+
 		const payload = {
-			id      : item.serviceListItem.id,
+			id      : item.id,
 			state   : 'cancelled',
 			remarks : [remarks],
 		};
+
 		handleSubmit(payload);
 	};
 
 	const handleSupplierCancel = () => {
-		if (!remarks) {
-			Toast.error('Please provide cancellation remarks');
-		}
+		if (!remarks) Toast.error('Please provide cancellation remarks');
+
 		const payload = {
-			id      : item.serviceListItem.id,
+			id      : item.id,
 			state   : 'cancelled_by_supplier',
 			remarks : [remarks],
 		};
+
 		handleSubmit(payload);
 	};
 
@@ -94,6 +100,7 @@ const useUpdateShipmentAdditionalService = ({
 			id                 : item.serviceListItem.id,
 			invoice_preference : {},
 		};
+
 		handleSubmit(payload);
 	};
 
@@ -103,6 +110,7 @@ const useUpdateShipmentAdditionalService = ({
 			is_rate_available : false,
 			state             : 'requested_for_importer_exporter',
 		};
+
 		handleSubmit(payload);
 	};
 
@@ -149,12 +157,12 @@ const useUpdateShipmentAdditionalService = ({
 					value === 'not_bill' ? 'accepted_by_importer_exporter' : undefined,
 				id: item.serviceListItem.id,
 			};
+
 			await handleSubmit(payload);
-			if (onComplete) {
-				onComplete();
-			}
+
+			if (onComplete) onComplete();
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
 		}
 	};
 
@@ -162,7 +170,15 @@ const useUpdateShipmentAdditionalService = ({
 		try {
 			await handleSubmit(payload);
 		} catch (err) {
-			Toast.error(getApiErrorString(err));
+			toastApiError(err);
+		}
+	};
+
+	const handleAddSellPrice = async (payload) => {
+		try {
+			await handleSubmit(payload);
+		} catch (err) {
+			toastApiError(err);
 		}
 	};
 
@@ -177,6 +193,7 @@ const useUpdateShipmentAdditionalService = ({
 		handleInvoicingParty,
 		updateBillingInfo,
 		cancelAdditionalService,
+		handleAddSellPrice,
 		remarks,
 		setRemarks,
 		loading,

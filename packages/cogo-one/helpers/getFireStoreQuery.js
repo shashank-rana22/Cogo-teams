@@ -1,26 +1,41 @@
 import { orderBy, where } from 'firebase/firestore';
 
+const getMainQuery = (userId, type, isObserver) => {
+	switch (type) {
+		case 'admin_view':
+			return [];
+		case 'shipment_view':
+			return [where('booking_agent_ids', 'array-contains', userId)];
+		default:
+			return [
+				!isObserver
+					? where('support_agent_id', '==', userId) : where('spectators_ids', 'array-contains', userId),
+			];
+	}
+};
+
+const getSessionQuery = (viewType, showBotMessages) => {
+	if (viewType === 'shipment_view') {
+		return where('session_type', 'in', ['bot', 'admin']);
+	}
+	return showBotMessages
+		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
+};
+
 function getFireStoreQuery({
 	userId,
 	appliedFilters,
 	isomniChannelAdmin = false,
 	showBotMessages = false,
+	viewType,
 }) {
 	let queryFilters = [];
-	let mainQuery = [];
 
 	const isObserver = ['adminSession', 'botSession'].includes(appliedFilters?.observer) || false;
 
-	if (isomniChannelAdmin) {
-		mainQuery = [];
-	} else {
-		mainQuery = [
-			!isObserver ? where('support_agent_id', '==', userId) : where('spectators_ids', 'array-contains', userId),
-		];
-	}
+	const mainQuery = getMainQuery(userId, viewType, isObserver);
 
-	const sessionTypeQuery = showBotMessages
-		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
+	const sessionTypeQuery = getSessionQuery(viewType, showBotMessages);
 
 	Object.keys(appliedFilters).forEach((item) => {
 		if (item === 'channels') {
@@ -28,12 +43,25 @@ function getFireStoreQuery({
 				...queryFilters,
 				where('channel_type', 'in', appliedFilters[item]),
 			];
-		} else if (item === 'status' && appliedFilters[item] === 'unread') {
-			queryFilters = [
-				...queryFilters,
-				where('new_message_count', '>', 0),
-				orderBy('new_message_count', 'desc'),
-			];
+		} else if (item === 'status') {
+			if (appliedFilters[item] === 'unread') {
+				queryFilters = [
+					...queryFilters,
+					where('has_admin_unread_messages', '==', true),
+				];
+			} else if (appliedFilters[item] === 'seen_by_user') {
+				const currentTime = new Date();
+				currentTime.setMinutes(currentTime.getMinutes() - 15);
+				const epochTimestamp = currentTime.getTime();
+
+				queryFilters = [
+					...queryFilters,
+					where('last_message_document.conversation_type', '==', 'received'),
+					where('last_message_document.message_type', '==', 'text'),
+					where('last_message_document.created_at', '<=', epochTimestamp),
+					orderBy('last_message_document.created_at', 'desc'),
+				];
+			}
 		} else if (item === 'escalation') {
 			queryFilters = [
 				...queryFilters,
@@ -53,14 +81,24 @@ function getFireStoreQuery({
 			];
 		} else if (
 			(
-				(item === 'observer' && appliedFilters[item] === 'chat_tags')
+				(item === 'observer' && !showBotMessages && appliedFilters[item] === 'chat_tags')
 				|| 	(isomniChannelAdmin && item === 'chat_tags')
 			)
-			&& 	!showBotMessages
+
 		) {
 			queryFilters = [
 				...queryFilters,
 				where('chat_tags', 'array-contains', appliedFilters?.chat_tags),
+			];
+		} else if (item === 'shipment_filters' && appliedFilters[item]?.includes('likely_to_book_shipment')) {
+			queryFilters = [
+				...queryFilters,
+				where('is_likely_to_book_shipment', '==', true),
+			];
+		} else if (item === 'mobile_no') {
+			queryFilters = [
+				...queryFilters,
+				where('mobile_no', '==', appliedFilters?.mobile_no),
 			];
 		}
 	});

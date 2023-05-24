@@ -1,5 +1,6 @@
 import React from 'react';
 
+import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import styles from '../styles.module.css';
 
 function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterTax, payableAmount, totalTds }) {
@@ -21,7 +22,7 @@ function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterT
 				</div>
 			</div>
 			<div className={styles.flex}>
-				<div className={`${styles.col} ${styles.total}`} style={{ width: '42%' }}>
+				<div className={`${styles.col} ${styles.total}`} style={{ width: '36%' }}>
 					<span>
 						Total amount before tax
 					</span>
@@ -29,7 +30,7 @@ function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterT
 						{ getValue(totalAmountBeforeTax)}
 					</span>
 				</div>
-				<div className={`${styles.col}`} style={{ width: '16%' }}>
+				<div className={`${styles.col}`} style={{ width: '14%' }}>
 					Tax
 					<span>
 						{ getValue(totalTax)}
@@ -42,11 +43,11 @@ function TotalColumn({ append, totalAmountBeforeTax, totalTax, totalAmountAfterT
 						{ getValue(totalAmountAfterTax)}
 					</span>
 				</div>
-				<div className={`${styles.col}`} style={{ width: '20%' }}>
+				<div className={`${styles.col}`} style={{ width: '10%' }}>
 					TDS
-					<span>{totalTds}</span>
+					<span>{totalTds ? showOverflowingNumber(totalTds, 4) : null}</span>
 				</div>
-				<div className={`${styles.col}`} style={{ width: '24%' }}>
+				<div className={`${styles.col}`} style={{ width: '10%' }}>
 					Payable
 					<span>{ getValue(payableAmount)}</span>
 				</div>

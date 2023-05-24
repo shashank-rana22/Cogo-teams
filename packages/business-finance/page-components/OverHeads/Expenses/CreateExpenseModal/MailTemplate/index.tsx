@@ -27,7 +27,7 @@ interface Props {
 function MailTemplate({ mailData, setShowModal, getList, getRecurringList, createExpenseType }:Props) {
 	const { uploadedInvoice, vendorName = '-', expenseCategory = '-', stakeholderEmail } = mailData || {};
 
-	const splitArray = (String(uploadedInvoice) || '').split('/') || [];
+	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
 	const filename = splitArray[splitArray.length - 1];
 
 	const { submitData, loading } = useCreateExpense({

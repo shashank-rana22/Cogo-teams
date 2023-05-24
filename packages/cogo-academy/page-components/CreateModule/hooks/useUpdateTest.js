@@ -3,6 +3,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
+const QUESTION_TYPE_MAPPING = {
+	q : 'stand_alone',
+	c : 'case_study',
+	s : 'subjective',
+};
+
 function useUpdateTest() {
 	const router = useRouter();
 
@@ -17,7 +23,7 @@ function useUpdateTest() {
 				const { test_duration, cut_off_percentage, maximum_attempts, name, test_validity, guidelines } = values;
 
 				const testDetailsObj = {
-					test_duration,
+					test_duration  : test_duration.toString(),
 					cut_off_percentage,
 					maximum_attempts,
 					name,
@@ -38,9 +44,10 @@ function useUpdateTest() {
 						].includes(key),
 					)
 					.map(([key, value]) => {
-						const question_type = key.slice(-1) === 'q' ? 'stand_alone' : 'case_study';
+						const question_type = QUESTION_TYPE_MAPPING[key.slice(key.length - 1)];
 
 						const distribution_count = Number(value);
+
 						const test_question_set_id = key.substring(0, key.length - 1);
 
 						return {
@@ -69,7 +76,6 @@ function useUpdateTest() {
 						id                    : test_id,
 						status                : 'inactive',
 						set_wise_distribution : [],
-
 					},
 				});
 

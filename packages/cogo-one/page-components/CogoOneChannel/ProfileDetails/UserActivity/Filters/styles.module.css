@@ -8,6 +8,10 @@
 	}
 }
 
+.summary_container {
+	width: 200px;
+}
+
 .header {
 	display: flex;
 	align-items: center;
@@ -55,4 +59,8 @@
 
 .refresh_icon {
 	margin: 5px 10px 0 0;
+}
+
+.date_picker {
+	padding-top: 10px;
 }

@@ -1,18 +1,21 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
 const useGetFaqNotifications = () => {
 	const [{ data, loading: faqNotificationApiLoading }, trigger] = useRequest({
 		method : 'get',
-		url    : 'get_faq_notification',
+		url    : '/cogo_academy/get_faq_notification',
 	}, { manual: false });
 
 	const fetchFaqNotification = useCallback(async () => {
 		try {
 			await trigger();
-		} catch (e) {
-			Toast.error(e?.message);
+		} catch (error) {
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data));
+			}
 		}
 	}, [trigger]);
 

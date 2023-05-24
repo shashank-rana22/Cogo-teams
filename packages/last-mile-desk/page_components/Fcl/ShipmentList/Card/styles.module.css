@@ -1,0 +1,23 @@
+.container {
+	margin: 14px 0;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 0 1px 6px rgb(169 188 218 / 65%);
+}
+
+.animate_card {
+	background: linear-gradient(90deg, #fff, #fae7e7, #fff);
+	background-size: 400% 400%;
+	animation: background-anim 5s ease-in-out infinite alternate;
+
+	@keyframes background-anim {
+		from {
+			background-position: 100% 0;
+		}
+
+		to {
+			background-position: 0 0;
+		}
+	}
+}

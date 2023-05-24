@@ -1,0 +1,77 @@
+.container {
+	flex: 1;
+	width: 100%;
+	height: 100%;
+	padding: 12px;
+	background: #fff;
+	opacity: 1;
+
+	:global {
+		.flex_column {
+			display: flex;
+			flex-direction: column;
+		}
+
+		.flex_row {
+			display: flex;
+		}
+
+		.manifest_heading {
+			padding: 2px 8px;
+			margin: auto;
+			border: 0.5px solid #333;
+		}
+
+		.shipper {
+			flex: 0.5;
+			margin-top: 40px;
+			font-size: 13px;
+			font-weight: 600;
+			line-height: 1.6;
+		}
+
+		.shipper_head {
+			text-decoration: underline;
+		}
+
+		.consignee {
+			flex: 0.5;
+			margin-top: 40px;
+		}
+
+		.font_style {
+			font-size: 12px;
+			font-weight: 600;
+			line-height: 1.6;
+		}
+
+		.data_font_style {
+			font-size: 11px;
+			white-space: pre-wrap;
+		}
+
+		.consignee_head {
+			text-decoration: underline;
+		}
+
+		.extra_space {
+			flex: 0.5;
+		}
+
+		table {
+			width: 100%;
+			margin-top: 40px;
+			border-collapse: collapse;
+		}
+
+		td {
+			padding: 4px 12px;
+			border: 1px solid #333;
+		}
+
+		th {
+			padding: 4px 12px;
+			border: 1px solid #333;
+		}
+	}
+}

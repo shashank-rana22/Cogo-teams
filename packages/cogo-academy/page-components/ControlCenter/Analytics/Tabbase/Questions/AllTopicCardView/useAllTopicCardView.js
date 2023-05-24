@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { addHours, addMinutes } from '@cogoport/utils';
@@ -46,7 +47,7 @@ function useAllTopicCardView({ date = '' }) {
 					},
 				});
 			} catch (error) {
-				Toast.error(error?.message);
+				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 			}
 		},
 		[formatStartDate, formatEndDate, page, trigger],

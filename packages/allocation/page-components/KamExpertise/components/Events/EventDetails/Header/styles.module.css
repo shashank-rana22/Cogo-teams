@@ -1,0 +1,50 @@
+.header_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-bottom: 16px;
+
+	@media (max-width: 768px) {
+		justify-content: space-between;
+		width: 100%;
+	}
+}
+
+.filter_container {
+	display: flex;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+		width: 60%;
+	}
+}
+
+.dropdown {
+	width: 400px;
+	margin-right: 16px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+		margin-bottom: 4px;
+	}
+}
+
+.search_bar {
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.all_events {
+	margin-bottom: 16px;
+	font-size: 24px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.add_button {
+	@media (max-width: 768px) {
+		width: 30%;
+		margin: 0;
+	}
+}

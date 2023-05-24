@@ -3,7 +3,22 @@ import { routeConfig } from '@cogoport/navigation-configs';
 import getNavData from './get-nav-data';
 
 const getAuthParam = (permissions_navigations, pathname) => {
-	const navigation = routeConfig?.[pathname]?.navigation || '';
+	let navigation = routeConfig?.[pathname]?.navigation || '';
+
+	const permissionNavigationKeys = Object.keys(permissions_navigations || {});
+
+	if (permissionNavigationKeys?.length && !permissionNavigationKeys?.includes(navigation)) {
+		const alternatekeys = routeConfig?.[pathname]?.alternateNavigation || [];
+		let find = false;
+
+		alternatekeys?.forEach((key) => {
+			if (permissionNavigationKeys?.includes(key) && !find) {
+				find = true;
+				navigation = key;
+			}
+		});
+	}
+
 	const navigationData = getNavData(navigation);
 	const userNavigationPermissions = permissions_navigations?.[navigation];
 	let defaultScope = null;

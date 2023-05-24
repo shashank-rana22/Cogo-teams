@@ -26,7 +26,7 @@ const useGetIncidentMangement = ({ activeTab, payload }:ItemProps) => {
 			method  : 'get',
 			authKey : 'get_incident_management_incident_list',
 		},
-		{ manual: true },
+		{ manual: true, autoCancel: false },
 	);
 
 	const { user: { id:userId = '' } } = UserData;

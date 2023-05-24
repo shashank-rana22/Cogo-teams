@@ -12,7 +12,13 @@ const firestoreChatbotPath = '/customer_chat/platform_chat/rooms';
 
 const firestoreWhatsappPath = '/customer_chat/whatsapp/rooms';
 
+const firestoreTelegramPath = '/customer_chat/telegram/rooms';
+
+const fireStoreShipmentReminderPath = '/customer_chat/shipment_reminder/agents';
+
 export const FIRESTORE_PATH = {
-	whatsapp      : firestoreWhatsappPath,
-	platform_chat : firestoreChatbotPath,
+	whatsapp          : firestoreWhatsappPath,
+	platform_chat     : firestoreChatbotPath,
+	telegram          : firestoreTelegramPath,
+	shipment_reminder : fireStoreShipmentReminderPath,
 };

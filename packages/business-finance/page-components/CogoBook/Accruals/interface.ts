@@ -16,6 +16,8 @@ export interface FilterInterface {
 	sortBy?:string
 	page?:number,
 	sortType?:string
+	entity?:string
+	milestone?:string,
 }
 
 export interface ColumnInterface {

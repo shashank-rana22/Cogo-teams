@@ -1,10 +1,12 @@
-import { Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
+import quotes from './utils/quotes';
 
 function Loader({ topic = {} }) {
+	const [extract] = useState(quotes[Math.floor(Math.random() * quotes.length)]);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.topic_heading}>
@@ -13,35 +15,16 @@ function Loader({ topic = {} }) {
 				{startCase(topic.display_name) || 'Search Result'}
 			</div>
 
-			<div className={styles.list}>
-				{[...Array(6)].map(() => (
-					<div>
-						<div
-							className={styles.question}
-							style={{ cursor: 'not-allowed' }}
-						>
-							<div className={styles.skeleton_container}>
-								<Placeholder
-									width="90%"
-									height="20px"
-									style={{ borderRadius: 4 }}
-								/>
-							</div>
-
-							<div className={styles.skeleton_wrapper}>
-								{[...Array(3)].map(() => (
-									<Placeholder
-										width="60px"
-										height="16px"
-										margin="4px 12px 0 0"
-										style={{ borderRadius: 6 }}
-									/>
-								))}
-							</div>
-						</div>
-					</div>
-				))}
+			<div className={styles.loop_wrapper}>
+				<div className={styles.mountain} />
+				<div className={styles.hill} />
+				<div className={styles.tree} />
+				<div className={styles.rock} />
+				<div className={styles.truck} />
 			</div>
+			<p className={styles.line}>
+				{extract}
+			</p>
 		</div>
 	);
 }

@@ -2,7 +2,6 @@ import { Select, Input, Pagination } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { GenericObject } from '../../../../commons/Interfaces';
 import StyledTable from '../../../../commons/styledTable';
 import SettlementList from '../../../../configs/Settlement_table';
 import { ACCOUNT_TYPE } from '../../../../constants';
@@ -14,13 +13,10 @@ import styles from './styles.module.css';
 
 interface Props {
 	organizationId: string,
-	outStandingFilters?: GenericObject,
-
+	entityCode?: string
 }
 
-function SettlementTable({ organizationId, outStandingFilters }: Props) {
-	const { entityCode = '' } = outStandingFilters || {};
-
+function SettlementTable({ organizationId, entityCode }: Props) {
 	const {
 		singleData,
 		getHistoryChild,

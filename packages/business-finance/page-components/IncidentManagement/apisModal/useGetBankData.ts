@@ -18,6 +18,7 @@ interface BankInterface {
 	bankHolderName?:string
 	remark?:string
 	ifscCode?:string
+	swiftCode?:string
 	id?:string
 }
 interface HookInterface {
@@ -57,6 +58,7 @@ const useGetBankData = ({
 		branchName,
 		documentUrls,
 		ifscCode,
+		swiftCode,
 		remark,
 		id,
 	} = bankData || {};
@@ -73,7 +75,7 @@ const useGetBankData = ({
 							isBankNameValid      : value.radioName === 'true',
 							isAccountNumberValid : value.radioNumber === 'true',
 							isBranchNameValid    : value.radioBranchName === 'true',
-							isIfscCodeValid      : value.radioIFSC === 'true',
+							isIfscCodeValid      : ifscCode ? value.radioIFSC === 'true' : false,
 							methodOfVerification : value.radioMethod,
 							accountNumber,
 							bankHolderName,
@@ -82,6 +84,8 @@ const useGetBankData = ({
 							documentUrls,
 							id,
 							ifscCode,
+							swiftCode,
+							isSwiftCodeValid     : swiftCode ? value.radioIFSC === 'true' : false,
 							remark,
 						},
 					},

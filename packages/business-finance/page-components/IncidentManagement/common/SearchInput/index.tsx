@@ -23,7 +23,7 @@ function SearchInput({
 		<section className={styles.container}>
 			<Input
 				suffix={(
-					<div style={{ margin: '4px', display: 'flex' }}>
+					<div className={styles.suffix}>
 						<IcMSearchlight height={15} width={15} />
 					</div>
 				)}

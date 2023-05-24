@@ -33,7 +33,7 @@ function useListFaqStats() {
 						created_at_less_than    : formatEndDate || undefined,
 						state                   : 'published',
 						status                  : 'active',
-
+						is_parent               : true,
 					},
 					page_limit                          : 1000 || undefined,
 					most_viewed_questions_data_required : true,

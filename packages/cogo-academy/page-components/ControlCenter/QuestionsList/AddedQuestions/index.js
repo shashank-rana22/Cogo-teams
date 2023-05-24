@@ -91,9 +91,8 @@ function AddedQuestions(props) {
 
 		return (
 			<>
-				<div>
-					<StyledTable columns={columns} data={data} loading={questionListLoading} />
-				</div>
+
+				<StyledTable columns={columns} data={data} loading={questionListLoading} />
 
 				<div>
 					{paginationData?.total_count > 10

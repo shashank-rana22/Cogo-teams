@@ -32,15 +32,21 @@ interface InvoiceFilterProps {
 	status?: string,
 	invoiceStatus?: string,
 	services?: string[],
+	currency?: string
 }
 
-const useGetOutstandingCard = (organizationId: string, entityCode: number) => {
+const useGetOutstandingCard = (organizationId: string, entityCode: string) => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	const [invoiceFilters, setinvoiceFilters] = useState<InvoiceFilterProps>({
 		page      : 1,
 		pageLimit : 10,
 		orgId     : organizationId,
+	});
+
+	const [sort, setSort] = useState({
+		sortType : 'desc',
+		sortBy   : 'invoiceDate',
 	});
 
 	const { userData } = useSelector(({ profile }) => ({
@@ -70,7 +76,7 @@ const useGetOutstandingCard = (organizationId: string, entityCode: number) => {
 
 	const {
 		page, pageLimit, migrated, status, invoiceStatus,
-		services, search, dueDate, invoiceDate, orgId,
+		services, search, dueDate, invoiceDate, orgId, currency,
 	} = invoiceFilters || {};
 
 	const dueDateStart = dueDate && format(dueDate?.startDate, 'yyyy-MM-dd', {}, false);
@@ -95,19 +101,28 @@ const useGetOutstandingCard = (organizationId: string, entityCode: number) => {
 					services      : services || undefined,
 					query         : query !== '' ? query : undefined,
 					role          : userData.id,
-					orgId,
+					orgId         : orgId || undefined,
 					dueDateStart,
 					dueDateEnd,
 					invoiceDateStart,
 					invoiceDateEnd,
-					entityCode,
+					cogoEntity    : entityCode || undefined,
+					currency      : currency || undefined,
+					sortBy        : sort.sortBy || undefined,
+					sortType      : sort.sortType || undefined,
 				},
+
 			});
+
+			if (sort.sortBy === 'grandTotal' && currency === undefined) {
+				Toast.warn('Please apply currency filter to sort invoice amount accurately');
+			}
 		} catch (e) {
 			if (e?.error?.message) { Toast.error(e?.error?.message || 'Failed'); }
 		}
-	}, [dueDateEnd, dueDateStart, invoiceDateEnd, invoiceDateStart,
-		invoiceStatus, listApi, migrated, orgId, page, pageLimit, query, services, status, userData.id, entityCode]);
+	}, [listApi, page, pageLimit, migrated, status, invoiceStatus, services,
+		query, userData.id, orgId, dueDateStart, dueDateEnd, invoiceDateStart,
+		invoiceDateEnd, entityCode, currency, sort.sortBy, sort.sortType]);
 
 	const sendReport = async () => {
 		try {
@@ -149,6 +164,7 @@ const useGetOutstandingCard = (organizationId: string, entityCode: number) => {
 			migrated      : undefined,
 			invoiceDate   : undefined,
 			dueDate       : undefined,
+			currency      : undefined,
 		}));
 	};
 
@@ -161,6 +177,8 @@ const useGetOutstandingCard = (organizationId: string, entityCode: number) => {
 		clearInvoiceFilters,
 		sendReport,
 		apiState,
+		sort,
+		setSort,
 	};
 };
 

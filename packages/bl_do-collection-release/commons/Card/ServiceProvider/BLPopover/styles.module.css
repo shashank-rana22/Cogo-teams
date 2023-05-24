@@ -1,0 +1,40 @@
+.container {
+	width: fit-content;
+
+	&.main {
+		position: relative;
+		z-index: 2;
+		margin: -5px -9px;
+		overflow: auto;
+		border-radius: 4px;
+	}
+
+	&.header {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 16px;
+		background: #fef6df;
+	}
+
+	&.card {
+		display: flex;
+		justify-content: space-between;
+		padding: 10px 8px;
+		border-bottom: 1px solid #e0e0e0;
+	}
+
+	&.card:last-of-type {
+		border-bottom: none;
+	}
+}
+
+.text {
+	&.bl_number {
+		font-weight: 500;
+		color: #da9a3b;
+	}
+
+	&.title {
+		margin-right: 8px;
+	}
+}

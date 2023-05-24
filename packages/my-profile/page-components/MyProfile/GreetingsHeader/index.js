@@ -1,8 +1,9 @@
-import { Button, Modal, Avatar, Tooltip } from '@cogoport/components';
+import { Placeholder, Button, Modal, Avatar, Tooltip } from '@cogoport/components';
 import { UploadController } from '@cogoport/forms';
 import { IcMDelete, IcCCamera, IcMEdit } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
+import BadgeGotList from './BadgeGotList';
 import PersonDetails from './PersonalDetails';
 import EditPersonalDetails from './PersonalDetails/EditPersonalDetails';
 import useEditPersonalDetails from './PersonalDetails/EditPersonalDetails/useEditPersonalDetails';
@@ -10,6 +11,8 @@ import styles from './styles.module.css';
 import useUpdatePartnerUser from './useUpdatePartnerUser';
 
 function Greetings({
+	badgeListLoading = false,
+	userBadges,
 	detailsData,
 	setRefetch = () => {},
 	partner_user_id = '',
@@ -38,6 +41,12 @@ function Greetings({
 		loading,
 		onClickCancel,
 	} = useUpdatePartnerUser({ picture, partner_user_id, setRefetch, detailsData });
+
+	const { badges_got : badgesGot = [], grouped_badges_got : groupedBadgesGot = {} } = userBadges || {};
+
+	const { badge_configuration = [] } = groupedBadgesGot || {};
+
+	const mastery_element = badge_configuration.filter((item) => item.status === 'profile')?.[0] || {};
 
 	const { name: locationName = '' } = lowest_geo_location || {};
 
@@ -83,6 +92,30 @@ function Greetings({
 						className="icon"
 					/>
 				</div>
+
+				{ badgeListLoading && (
+					<div className={styles.preview_badge}>
+						<Placeholder type="circle" radius="48px" />
+					</div>
+				)}
+
+				{ !isEmpty(mastery_element) && !badgeListLoading
+				&& (
+					<div className={styles.preview_badge}>
+						<img
+							src={mastery_element.image_url}
+							alt="current badge"
+							height="40px"
+						/>
+					</div>
+				)}
+			</div>
+
+			<div className={styles.badges}>
+				<BadgeGotList
+					badgesGot={badgesGot}
+					badgeListLoading={badgeListLoading}
+				/>
 			</div>
 
 			<div>
@@ -96,7 +129,6 @@ function Greetings({
 
 						</div>
 					</Tooltip>
-
 					,
 					{' '}
 					<div className={styles.location_name}>{locationName}</div>

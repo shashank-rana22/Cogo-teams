@@ -14,10 +14,26 @@
 .percentile {
 	display: flex;
 	flex-direction: column;
-	align-items: center;
-	justify-content: center;
+	align-items: left;
 	width: fit-content;
 	margin: 0 12px 12px 0;
+}
+
+.percentile_01 {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: fit-content;
+	margin: 0 12px 12px 0;
+}
+
+.Tooltip_row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.Tooltip_percentage {
+	margin-left: 8px;
 }
 
 .topicwise_stats {
@@ -35,4 +51,14 @@
 .percentage {
 	font-weight: 600;
 	color: #849e4c;
+}
+
+.tooltip_row {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 8px;
+}
+
+.tooltip_percentage {
+	margin-left: 12px;
 }

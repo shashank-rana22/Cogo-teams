@@ -98,21 +98,24 @@ function Attachements({ externalAttachements }) {
 					</div>
 				))}
 			</div>
+
 			{showPreview ? (
 				<Modal
+					size="lg"
+					placement="top"
 					show={showPreview}
+					closeOnOuterClick={false}
 					onClose={() => setShowPreview(null)}
-					className="primary lg"
-					onOuterClick={() => setShowPreview(null)}
-					closable={false}
 				>
-					<object
-						height="700px"
-						width="800px"
-						aria-label="Doc Preview"
-						data={`data:${externalAttachements[0].contentType};base64,
+					<Modal.Body>
+						<object
+							height="700px"
+							width="800px"
+							aria-label="Doc Preview"
+							data={`data:${externalAttachements[0].contentType};base64,
 						${externalAttachements[0].contentBytes}`}
-					/>
+						/>
+					</Modal.Body>
 				</Modal>
 			) : null}
 		</div>

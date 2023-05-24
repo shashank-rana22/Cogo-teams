@@ -1,5 +1,5 @@
 export const STATUS_MAPPING = {
-	requested: {
+	active: {
 		status      : 'Request Created',
 		color       : 'blue',
 		buttonLabel : 'Deactivate Request',
@@ -12,11 +12,6 @@ export const STATUS_MAPPING = {
 	inactive: {
 		status      : 'Deactivated',
 		color       : 'red',
-		buttonLabel : null,
-	},
-	active: {
-		status      : 'Active',
-		color       : 'blue',
 		buttonLabel : null,
 	},
 };

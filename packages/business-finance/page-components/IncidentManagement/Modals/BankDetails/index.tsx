@@ -28,6 +28,7 @@ function BankDetails({
 		branchName,
 		documentUrls,
 		ifscCode,
+		swiftCode,
 		isAccountNumberValid,
 		isBankNameValid,
 		isBranchNameValid,
@@ -162,11 +163,14 @@ function BankDetails({
 								</div>
 							</div>
 
-							<div className={styles.simple_name}>IFSC Code</div>
+							<div className={styles.simple_name}>
+								{ifscCode
+									? 'IFSC Code' : 'Swift Code'}
+							</div>
 
 							<div className={styles.flex}>
 								<div className={styles.font_name}>
-									{ifscCode || '-'}
+									{ifscCode ? ifscCode || '-' : swiftCode || ''}
 								</div>
 								<div>
 									<RadioGroup
@@ -237,6 +241,7 @@ function BankDetails({
 									themeType="secondary"
 									style={{ marginRight: '8px' }}
 									disabled={!(value?.text.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('REJECTED');
 									}}
@@ -249,6 +254,7 @@ function BankDetails({
 									style={{ marginRight: '8px' }}
 									disabled={Object.values(value).includes('false')
 									|| !(value?.text.length) || loading}
+									loading={loading}
 									onClick={() => {
 										OnAction('APPROVED');
 									}}

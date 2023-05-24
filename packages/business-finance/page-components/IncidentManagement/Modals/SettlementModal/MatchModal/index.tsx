@@ -168,6 +168,7 @@ function MatchModal({
 						themeType="secondary"
 						style={{ marginRight: '8px' }}
 						disabled={!(value?.remarks.length) || loading}
+						loading={loading}
 						onClick={() => {
 							onApprove('reject');
 						}}
@@ -179,6 +180,7 @@ function MatchModal({
 						size="md"
 						style={{ marginRight: '8px' }}
 						disabled={!(value?.remarks.length) || loading}
+						loading={loading}
 						onClick={() => {
 							onApprove('settle');
 						}}

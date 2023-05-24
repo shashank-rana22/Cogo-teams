@@ -1,0 +1,26 @@
+.deadline_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 8px;
+}
+
+.time {
+	display: flex;
+	align-items: center;
+
+	:global(.ui_datepicker_container) {
+		width: 200px;
+	}
+}
+
+.current_deadline {
+	display: flex;
+	flex-direction: column;
+	margin-left: 8px;
+	font-weight: 500;
+}
+
+.button_container {
+	display: flex;
+}

@@ -1,84 +1,110 @@
-import { Input, Select } from '@cogoport/components';
-import { useDebounceQuery, SelectController, useForm } from '@cogoport/forms';
-import { startCase } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useDebounceQuery, useForm } from '@cogoport/forms';
+import { isEmpty, startCase } from '@cogoport/utils';
+import { useEffect } from 'react';
 
-import getDepartmentControls from '../../hooks/useGetDepartmentControls';
+import filtersSourceMapping from '../../constants/filters-source-mapping';
 import useGetControls from '../../utils/filterControls';
-import getMonthControls from '../../utils/monthControls';
+import { getElementController } from '../../utils/getElementController';
 
 import styles from './styles.module.css';
 
 function Filters({ params = {}, setParams = () => {}, source = '' }) {
-	const { Department = '', Designation = '' } = params;
-	const [managerName, setManagerName] = useState('');
-
 	const { query = '', debounceQuery } = useDebounceQuery();
 
-	const departmentDesignationControls = getDepartmentControls({ Department, Designation });
+	const filterProps = params;
 
-	const managerControls = useGetControls({ name: 'manager_name' });
-	const monthControls = getMonthControls(params.Year, params.Month);
+	const { left:leftFilters = [], right:rightFilters = [] } = filtersSourceMapping[source];
 
-	const { watch, control } = useForm();
-	const department = watch('department');
-	const designation = watch('designation');
+	const filterControls = useGetControls(
+		{
+			leftFilters,
+			rightFilters,
+			filterProps,
+		},
+	);
 
-	const setFilter = (val, type) => {
-		setParams({ ...params, [type]: val, Page: 1 });
-	};
+	const { watch, control } = useForm({
+		defaultValues: {
+			Year  : params.Year,
+			Month : params.Month,
+		},
+	});
+
+	const {
+		Department = '', Designation = '',
+		ManagerID = '', Year = '', Month = '', date_range = {},
+		Q = '', CsvType = '', FeedbackStatus = '',
+	} = watch();
 
 	useEffect(() => {
-		setParams({
-			...params,
-			Q           : query || undefined,
-			Department  : department || undefined,
-			Designation : designation || undefined,
-			Page        : 1,
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [query, department, designation]);
+		setParams((previousParams) => ({
+			...previousParams,
+			Q              : query || undefined,
+			Department     : Department || undefined,
+			Designation    : Designation || undefined,
+			FeedbackStatus : FeedbackStatus || undefined,
+			Year           : Year || undefined,
+			Month          : Month || undefined,
+			ManagerID      : ManagerID || undefined,
+			StartDate      : date_range?.startDate || undefined,
+			EndDate        : date_range?.endDate || undefined,
+			CsvType        : CsvType || undefined,
+			Page           : 1,
+		}));
+	}, [query, setParams, Month, Department, Designation, Year, ManagerID, CsvType, FeedbackStatus,
+		date_range?.startDate, date_range?.endDate]);
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	useEffect(() => debounceQuery(managerName), [managerName]);
+	useEffect(() => {
+		debounceQuery(Q);
+	}, [debounceQuery, Q]);
 
 	return (
+		<div className={styles.filters_container}>
+			<div className={styles.left_container}>
+				{filterControls.left.map((cntrl) => {
+					if (isEmpty(cntrl)) { return null; }
+					const Element = getElementController(cntrl.type);
 
-		<div className={styles.department_select}>
-			{departmentDesignationControls.map((cntrl) => (
-				<SelectController
-					{...cntrl}
-					control={control}
-					style={{ marginRight: '8px' }}
-					key={cntrl.name}
-				/>
-			))}
+					const value = startCase(cntrl.name);
 
-			{source === 'hr_dashboard' && (
-				<Input
-					{...managerControls}
-					onChange={setManagerName}
-					style={{ marginRight: '8px' }}
-				/>
-			)}
-
-			{monthControls.map((cntrl) => {
-				const value = startCase(cntrl.name);
-				if (['year', 'month'].includes(cntrl.name)) {
 					return (
-						<Select
-							{...cntrl}
-							key={cntrl.name}
-							value={params[value]}
-							onChange={(val) => setFilter(val, value)}
-							placeholder={`Select ${value}`}
-							style={{ marginRight: '8px' }}
-							options={cntrl.options}
-						/>
+						<div className={styles.flex_container}>
+							{cntrl.label}
+							<Element
+								{...cntrl}
+								control={control}
+								key={cntrl.name}
+								id={`${cntrl}_id`}
+								value={params[value]}
+								style={{ marginRight: '8px' }}
+							/>
+						</div>
 					);
-				}
-				return null;
-			})}
+				})}
+			</div>
+
+			<div className={styles.right_container}>
+				{filterControls.right.map((cntrl) => {
+					if (isEmpty(cntrl)) { return null; }
+					const Element = getElementController(cntrl.type);
+
+					const value = startCase(cntrl.name);
+
+					return (
+						<div className={styles.flex_container}>
+							<div style={{ marginLeft: '8px' }}>{cntrl.label}</div>
+							<Element
+								{...cntrl}
+								control={control}
+								key={cntrl.name}
+								id={`${cntrl}_id`}
+								value={params[value]}
+								style={{ marginLeft: '8px' }}
+							/>
+						</div>
+					);
+				})}
+			</div>
 		</div>
 	);
 }

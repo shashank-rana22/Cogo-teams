@@ -1,0 +1,38 @@
+.modal {
+	@media (max-width: 768px) {
+		max-height: fit-content !important;
+	}
+}
+
+.modal_header_container {
+	position: relative;
+}
+
+.type_tag {
+	position: sticky;
+	top: 0;
+	left: 0;
+	z-index: 100;
+	width: fit-content;
+	padding: 6px 16px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #000;
+	text-align: center;
+	text-transform: uppercase;
+	background: #fde74d;
+	border-radius: 0 0 10px;
+}
+
+.title {
+	padding: 16px 0 0 16px;
+	font-weight: 600;
+}
+
+.preview_modal_body {
+	max-height: 70vh !important;
+
+	@media (max-width: 768px) {
+		max-height: 80vh !important;
+	}
+}

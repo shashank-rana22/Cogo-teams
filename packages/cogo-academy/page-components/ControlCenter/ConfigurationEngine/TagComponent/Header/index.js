@@ -29,8 +29,6 @@ function Header(
 	return (
 		<div className={styles.container}>
 
-			<div className={styles.tag}>Tags</div>
-
 			<div className={styles.header_container}>
 
 				<div className={styles.flex_items}>
@@ -40,13 +38,9 @@ function Header(
 							themeType="tertiary"
 							onChange={setActiveTag}
 						>
-							<TabPanel name="active" title="Active">
-								{/* <div>Active</div> */}
-							</TabPanel>
+							<TabPanel name="active" title="Active" />
 
-							<TabPanel name="inactive" title="Inactive">
-								{/* <div>Inactive</div> */}
-							</TabPanel>
+							<TabPanel name="inactive" title="Inactive" />
 
 						</Tabs>
 					</div>

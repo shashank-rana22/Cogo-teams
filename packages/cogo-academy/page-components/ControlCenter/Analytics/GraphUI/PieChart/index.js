@@ -5,12 +5,13 @@ import SearchRequestedPieChart from './SearchRequestedPieChart';
 import styles from './styles.module.css';
 import ViewCountPieChart from './ViewCountPieChart';
 
-function PieChart({ pie_data, pie_outer_data, view_count_data }) {
+function PieChart({ pie_data, pie_outer_data, view_count_data, total_searches }) {
 	const CarouselData = [{
 		key    : 'combined_pie_chart',
 		render : () => (
 			<CombinedPieChart
 				pie_data={pie_data}
+				total_searches={total_searches}
 			/>
 		),
 	},
@@ -34,7 +35,7 @@ function PieChart({ pie_data, pie_outer_data, view_count_data }) {
 
 	return (
 		<div className={styles.carousel_data_container}>
-			<Carousel size="md" slides={CarouselData} />
+			<Carousel size="md" slides={CarouselData} showArrow={false} />
 		</div>
 
 	);

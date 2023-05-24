@@ -1,6 +1,6 @@
-import { Pill, Button, Placeholder } from '@cogoport/components';
+import { Pill, Button, Placeholder, Tooltip } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
-import { IcMArrowBack, IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMDelete, IcMPlusInCircle, IcMDocument } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import DurationAndValidity from './components/DurationAndValidity';
@@ -12,7 +12,14 @@ import useHandleReviewAndCriteria from './useHandleReviewAndCriteria';
 function ReviewAndCriteria(props) {
 	const { loading, data, test_id } = props;
 
-	const { name = '', set_data = [], cogo_entity_object = {}, eligible_users = '', guidelines = [] } = data || {};
+	const {
+		name = '',
+		set_data = [],
+		cogo_entity_object = {},
+		eligible_users = '',
+		guidelines = [],
+		test_sheet = {},
+	} = data || {};
 
 	const {
 		checkError,
@@ -31,6 +38,12 @@ function ReviewAndCriteria(props) {
 		setShowModal,
 		setValue,
 	} = useHandleReviewAndCriteria({ guidelines });
+
+	const openInNewTab = (url) => {
+		window.open(url, '_blank', 'noopener,noreferrer');
+	};
+
+	const file_name = test_sheet?.file_url?.split('/').pop();
 
 	return (
 		<div className={styles.container}>
@@ -75,6 +88,26 @@ function ReviewAndCriteria(props) {
 							</Pill>
 						</div>
 					</div>
+
+					{test_sheet?.file_url && (
+						<div className={styles.list_user_tooltip}>
+							<Tooltip content={file_name} placement="top" maxWidth={300}>
+								<div className={styles.list_user_container}>
+									List Upload
+									<div className={styles.list_div}>
+										<IcMDocument />
+										<div
+											role="presentation"
+											className={styles.list_text}
+											onClick={() => openInNewTab(test_sheet?.file_url)}
+										>
+											{file_name}
+										</div>
+									</div>
+								</div>
+							</Tooltip>
+						</div>
+					)}
 				</div>
 			)}
 

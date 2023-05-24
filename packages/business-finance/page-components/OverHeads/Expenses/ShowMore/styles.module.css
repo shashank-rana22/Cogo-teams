@@ -29,8 +29,8 @@
 }
 
 .section {
-	width: 100px;
-	margin: 10px 36px 10px 16px;
+	width: 180px;
+	margin: 10px 26px 10px 6px;
 }
 
 .element {
@@ -41,19 +41,22 @@
 .more_data_container {
 	width: 100%;
 	max-height: 472px;
+	overflow: hidden;
 	background: white;
 	border-top: 1px solid #edd7a9;
-	transition: max-height 0.3s ease;
+	transition: max-height 0.6s ease-in-out;
 }
 
 .more_data_container_close {
 	width: 0;
 	max-height: 0;
+	transition: max-height 0.1s ease-in-out;
 }
 
 .list_container {
 	max-height: 442px;
 	overflow: scroll;
+	font-size: 14px;
 }
 
 .link {

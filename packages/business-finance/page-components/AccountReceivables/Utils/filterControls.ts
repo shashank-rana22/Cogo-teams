@@ -1,5 +1,3 @@
-import { subtractDays } from '@cogoport/utils';
-
 function generateArrayOfYears() {
 	const currentYear = new Date().getFullYear();
 	const newArray = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
@@ -8,20 +6,31 @@ function generateArrayOfYears() {
 
 const optionsVal = () => generateArrayOfYears().map((item) => ({ value: item.toString(), label: item.toString() }));
 
-export const filterControls = (toggleData) => {
+interface DisabledConfigProps {
+	date?: boolean,
+	month?: boolean,
+	year?: boolean
+}
+
+interface ObjectProps {
+	date?: Date,
+	month?: string,
+	year?: string
+}
+
+export const filterControls = (toggleData: boolean, disabledConfig: DisabledConfigProps, filters: ObjectProps) => {
 	const today = new Date();
 
-	const newStartDate = subtractDays(today, 1);
 	return [
 		{
 			name                  : 'date',
 			placeholder           : 'Select Date',
 			type                  : 'datepicker',
-			caret                 : true,
 			isPreviousDaysAllowed : true,
-			isClearable           : true,
-			maxDate               : newStartDate,
-			span                  : 3.3,
+			maxDate               : today,
+			span                  : toggleData ? 12 : 3.3,
+			disable               : toggleData ? false : disabledConfig.date,
+			value                 : filters.date,
 		},
 		{
 			name        : 'month',
@@ -43,7 +52,8 @@ export const filterControls = (toggleData) => {
 				{ value: 'NOV', label: 'November' },
 				{ value: 'DEC', label: 'December' },
 			],
-			disabled: toggleData,
+			disabled : disabledConfig.month || toggleData,
+			show     : !toggleData,
 		},
 		{
 			name        : 'year',
@@ -52,8 +62,8 @@ export const filterControls = (toggleData) => {
 			caret       : true,
 			isClearable : true,
 			options     : optionsVal(),
-			disabled    : toggleData,
-
+			disabled    : disabledConfig.year || toggleData,
+			show        : !toggleData,
 		},
 	];
 };

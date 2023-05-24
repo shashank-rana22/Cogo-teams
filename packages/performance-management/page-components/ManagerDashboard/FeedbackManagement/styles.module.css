@@ -15,21 +15,10 @@
 	font-weight: 600;
 }
 
-.header {
+.filters {
 	display: flex;
 	align-items: center;
-	justify-content: flex-start;
 	margin-top: 16px;
-}
-
-.header_filters {
-	display: flex;
-	align-items: center;
-
-	:global(.ui_select_display_container) {
-		width: 160px;
-		height: 38px;
-	}
 }
 
 .filter_container {

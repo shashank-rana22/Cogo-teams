@@ -9,8 +9,7 @@ const useDownloadCsvFeedbacks = ({ params = {} }) => {
 	const getUserListCsv = async () => {
 		const response = await trigger({ params });
 
-		// eslint-disable-next-line no-undef
-		window.open(response?.data, '_blank');
+		if (response.data?.url) { window.open(response.data.url, '_blank'); }
 	};
 
 	return {

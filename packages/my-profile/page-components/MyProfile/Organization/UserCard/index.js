@@ -1,40 +1,23 @@
 import { Popover } from '@cogoport/components';
 import { IcMCall, IcMEmail, IcMTick } from '@cogoport/icons-react';
-import React from 'react';
+import { useRef } from 'react';
 
 import styles from './styles.module.css';
 
-const getColor = () => {
-	const colorArr = ['#DCE1D8', '#FCE4BF', '#CFDAE8', '#DED7FC', '#E1DEEC'];
+const colorArr = ['#DCE1D8', '#FCE4BF', '#CFDAE8', '#DED7FC', '#E1DEEC'];
 
-	const index = Math.floor(Math.random() * (colorArr.length + 1));
-	const color = colorArr[index];
-	return color;
+const getInitials = (name = '') => {
+	if (!name) {
+		return '';
+	}
+
+	const full_name = name.split(' ');
+	const initials = full_name.map((char) => char.charAt(0).toUpperCase());
+	return initials.length > 2 ? initials.splice(0, 2) : initials;
 };
 
-function UserCard({
-	user_data = {},
-	type = '',
-	params = {},
-	setParams = () => {},
-}) {
-	const getInitials = (name = '') => {
-		if (!name) {
-			return '';
-		}
-
-		const full_name = name.split(' ');
-		const initials = full_name.map((char) => char.charAt(0).toUpperCase());
-		return initials.length > 2 ? initials.splice(0, 2) : initials;
-	};
-
-	const handleClickOnUserCard = () => {
-		if (type !== 'active') {
-			setParams({ ...params, user_id: user_data?.id });
-		}
-	};
-
-	const renderUserDetails = () => (
+function UserDetails({ user_data }) {
+	return (
 		<>
 			{user_data.block_access ? <div className={styles.blocked_user_tag}>Blocked</div> : null}
 
@@ -47,11 +30,13 @@ function UserCard({
 
 				<div className={styles.flex_div}>
 					<IcMEmail style={{ marginRight: 6 }} />
+
 					<div className={styles.value_text}>{user_data?.email || '-'}</div>
 				</div>
 
 				<div className={styles.flex_div}>
 					<IcMCall style={{ marginRight: 6 }} />
+
 					<div className={styles.value_text}>
 						{user_data?.mobile_number
 							? `${user_data?.mobile_country_code} ${user_data?.mobile_number}`
@@ -59,21 +44,34 @@ function UserCard({
 					</div>
 				</div>
 			</div>
-
 		</>
 	);
+}
+
+function UserCard({
+	user_data = {},
+	type = '',
+	params = {},
+	setParams = () => {},
+}) {
+	const handleClickOnUserCard = () => {
+		if (type !== 'active') {
+			setParams({ ...params, user_id: user_data?.id });
+		}
+	};
+
+	const profileRef = useRef({ backgroundColor: colorArr[Math.floor(Math.random() * (colorArr.length + 1))] });
 
 	return (
 		<div className={styles.main_container}>
 			<Popover
 				placement="right"
-				content={renderUserDetails()}
+				content={<UserDetails user_data={user_data} />}
 				trigger="mouseenter"
 				theme="light"
 				interactive
 				animation="shift-away"
 			>
-
 				<div
 					className={styles.card_container}
 					id={type}
@@ -93,7 +91,8 @@ function UserCard({
 						<div
 							className={styles.avatar}
 							style={{
-								background: `${user_data?.block_access ? '#ffe3e3' : getColor()}`,
+								background: `${user_data?.block_access ? '#ffe3e3'
+									: profileRef?.current?.backgroundColor}`,
 							}}
 						>
 							<div className={styles.avatar_text}>{getInitials(user_data?.name)}</div>

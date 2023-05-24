@@ -32,10 +32,9 @@ export default function useListBookingDeskShipments({ stateProps, prefix }) {
 			} else {
 				setData(res.data || {});
 			}
-		} catch (e) {
-			Toast.error(
-				e?.response?.data?.message || e.message || 'Something went wrong !!',
-			);
+		} catch (err) {
+			const message = err?.response?.data?.message || err?.message || 'Something went wrong !!';
+			if (message !== 'canceled') { Toast.error(message); }
 			setData(emptyData);
 		}
 	}, [filters, setFilters, activeTab, trigger, selected_agent_id]);

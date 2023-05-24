@@ -25,6 +25,10 @@ const SUB_FUNCTION_MAPPING = {
 			value : 'cp_portfolio',
 		},
 		{
+			label : 'Customer Operations',
+			value : 'customer_operations',
+		},
+		{
 			label : 'All',
 			value : 'all',
 		},

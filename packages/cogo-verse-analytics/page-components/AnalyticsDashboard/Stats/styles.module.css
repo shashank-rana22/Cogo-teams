@@ -37,6 +37,7 @@
 	flex-direction: row;
 	justify-content: space-between;
 	height: 225px;
+	margin-bottom: 10px;
 	background: #f9f5ec;
 }
 
@@ -256,9 +257,9 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: space-between;
-	height: 225px;
+	height: 280px;
 	padding: 8px;
-	margin: 12px 0;
+	margin: 4px 0;
 	background: #fff;
 	border-radius: 8px;
 	box-shadow: 0 1px 3px rgb(16 24 40 / 10%), 0 1px 2px rgb(16 24 40 / 6%);
@@ -267,8 +268,6 @@
 .chart_heading {
 	display: flex;
 	justify-content: space-between;
-
-	/* padding: 10px 0px 0px 15px; */
 }
 
 .chart_heading_content {
@@ -279,7 +278,8 @@
 }
 
 .the_chart {
-	height: 170px;
+	height: 200px;
+	padding-top: 10px;
 }
 
 .chart_empty {
@@ -297,28 +297,38 @@
 }
 
 .legend_field {
-	display: flex;
 	align-items: center;
 	padding-right: 25px;
 }
 
 .legend_icon_1 {
-	width: 35px;
+	width: 45px;
 	height: 1px;
-	margin: 5px;
-	border-bottom: solid 2px #5a4a99;
+	margin: 5px 0;
+	border-bottom: solid 2px #bf291e;
 }
 
 .legend_icon_2 {
-	width: 35px;
+	width: 45px;
 	height: 1px;
-	margin: 5px;
-	border-bottom: solid 2px #c5c5c5;
+	margin: 5px 0;
+	border-bottom: solid 2px #d6b300;
+}
+
+.legend_icon_3 {
+	width: 45px;
+	height: 1px;
+	margin: 5px 0;
+	border-bottom: solid 2px #6fa5ab;
 }
 
 .legend_content {
-	padding-left: 10px;
-	font-size: 12px;
+	font-size: 10px;
 	font-weight: 400;
 	color: #a2a3a5;
+}
+
+.legend {
+	display: flex;
+	margin-top: 12px;
 }

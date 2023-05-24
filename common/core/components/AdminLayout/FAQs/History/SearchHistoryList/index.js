@@ -12,6 +12,7 @@ function SearchHistoryList({
 	searchHistoryListLoading,
 	setSearch,
 	fetchFaqSearchHistory,
+	setInput,
 }) {
 	const { onClickClearHistory = () => {} } = useUpdateFaqSearchHistory({
 		setShowHistory,
@@ -76,7 +77,7 @@ function SearchHistoryList({
 							<div
 								className={styles.question_time_container}
 								role="presentation"
-								onClick={() => setSearch(question)}
+								onClick={() => { setSearch(question); setInput(question); }}
 							>
 								<div className={styles.question_wrapper}>{question}</div>
 								<div className={styles.time_wrapper}>{time}</div>

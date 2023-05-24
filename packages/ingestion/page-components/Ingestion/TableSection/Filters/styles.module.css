@@ -1,0 +1,72 @@
+.filter_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin-top: 12px;
+}
+
+.search {
+	width: 24%;
+
+	@media (max-width: 768px) {
+		width: 20%;
+	}
+}
+
+.filter {
+	display: flex;
+	width: 70%;
+
+	@media (max-width: 768px) {
+		width: 80%;
+	}
+}
+
+.form_group {
+	display: flex;
+	align-items: center;
+
+	@media (max-width: 768px) {
+		width: 24%;
+		margin-right: 4px;
+
+		:global {
+			.ui_select_display_container {
+				min-width: 134px;
+			}
+		}
+	}
+
+	:global {
+		.ui_select_input_placeholder {
+			color: #bdbdbd;
+		}
+	}
+}
+
+.form_group:not(:first-child) { margin: 12px 0; }
+
+.field_controller {
+	width: 200px;
+	margin-right: 4px;
+
+	@media (max-width: 768px) {
+		width: 120px;
+		margin-right: 0;
+	}
+}
+
+.field_controller_scope {
+	width: 200px;
+
+	@media (max-width: 768px) {
+		width: 180px;
+		margin: 0 4px 0 16px;
+	}
+}
+
+.refresh {
+	width: 100px;
+	margin: 0 4px;
+}

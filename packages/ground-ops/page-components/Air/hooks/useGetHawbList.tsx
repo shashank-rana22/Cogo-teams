@@ -18,6 +18,7 @@ const useGetHawbList = (shipmentId) => {
 				documentState       : ['document_accepted', 'document_uploaded', 'document_amendment_requested'],
 				documentType        : ['draft_house_airway_bill'],
 				task                : ['approve_draft_house_airway_bill', 'amend_draft_house_airway_bill'],
+				status              : ['pending', 'completed'],
 				isDocDataRequired   : true,
 				shipmentId,
 				pageSize            : 100,

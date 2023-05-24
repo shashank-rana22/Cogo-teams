@@ -1,4 +1,4 @@
-const PASSWORD_PATTERN =	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm;
+import validatePassword from '../PasswordValidator/utils/validatePassword';
 
 const updatePasswordControls = () => [
 	{
@@ -10,10 +10,10 @@ const updatePasswordControls = () => [
 		placeholder : 'Enter password',
 		rules       : {
 			required : true,
-			pattern  : {
-				value   : PASSWORD_PATTERN,
-				message : 'Password is invalid',
-			},
+			validate : (value) => validatePassword({
+				value,
+				errorMessage: 'Password is invalid',
+			}),
 		},
 	},
 ];
