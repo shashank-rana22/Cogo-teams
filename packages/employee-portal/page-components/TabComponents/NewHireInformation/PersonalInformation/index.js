@@ -32,7 +32,6 @@ function PersonalInformation({ data:content }) {
 				country_code : content?.detail?.mobile_country_code || +91,
 			},
 		};
-
 		controlsvalue.forEach((item) => {
 			if (item?.name === 'mobile_number') {
 				setValue(
@@ -40,6 +39,8 @@ function PersonalInformation({ data:content }) {
 					mapping[item.name]
 					|| content?.detail?.[item.name],
 				);
+			} else if (item?.name === 'date_of_birth_') {
+				setValue(item.name, new Date(content?.detail?.date_of_birth));
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}

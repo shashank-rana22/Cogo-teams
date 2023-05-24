@@ -10,12 +10,6 @@ const getControls = [{
 			rules       : { required: 'This is required' },
 		},
 		{
-			name        : 'description',
-			label       : 'Description',
-			type        : 'textarea',
-			placeholder : 'Description',
-		},
-		{
 			name                  : 'started_at',
 			label                 : 'Start Date',
 			type                  : 'date-select',
@@ -36,6 +30,12 @@ const getControls = [{
 			style                 : {
 				width: '70%',
 			},
+		},
+		{
+			name        : 'description',
+			label       : 'Description',
+			type        : 'textarea',
+			placeholder : 'Description',
 		},
 		{
 			name        : 'skills',

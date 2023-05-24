@@ -46,7 +46,7 @@ function NewHireInformation({ setInformationPage, id, data }) {
 							<Accordion
 								type="text"
 								title={item.title}
-								style={{ maxHeight: '60vh' }}
+								animate
 							>
 								<Component id={id} data={data} />
 							</Accordion>

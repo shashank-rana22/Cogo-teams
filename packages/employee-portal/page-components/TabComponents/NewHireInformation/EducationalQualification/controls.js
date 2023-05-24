@@ -9,12 +9,6 @@ const getControls = [{
 			placeholder : 'Institution Name',
 		},
 		{
-			name        : 'description',
-			label       : 'Description',
-			type        : 'textarea',
-			placeholder : 'Description',
-		},
-		{
 			name                  : 'started_at',
 			label                 : 'Start Date',
 			type                  : 'date-select',
@@ -66,7 +60,17 @@ const getControls = [{
 			style       : {
 				width: '60%',
 			},
-		}],
+		},
+		{
+			name        : 'description',
+			label       : 'Description',
+			type        : 'textarea',
+			placeholder : 'Description',
+			style       : {
+				width: '75%',
+			},
+		},
+	],
 
 }];
 
