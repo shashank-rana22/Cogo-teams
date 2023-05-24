@@ -1,0 +1,99 @@
+.div_container{
+    background: #FFFFFF;
+    box-shadow: 0px 0px 4px rgba(0, 0, 0, 0.25);
+    border-radius: 8px;
+    padding: 16px;
+   
+}
+.shipment_id_text{
+    font-weight: 500;
+    font-size: 16px;
+    display: flex;
+    align-items: center; 
+    text-decoration-line: underline;
+    color: #333333;
+}
+.vr{
+    background: #BDBDBD;
+    width: 1px;
+    height: 50px;
+}
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+.origin_text{
+    font-weight: 500;
+    font-size: 12px;
+    display: flex;
+    align-items: center; 
+    text-decoration-line: underline;
+    color: #333333;
+}
+.origin_bottom{
+    font-weight: 600;
+    font-size: 12px;
+    display: flex;
+    align-items: center; 
+    text-decoration-line: underline;
+    color: #333333;
+}
+.sub_container{
+    display: flex;
+    flex-direction: column;
+}
+.hr{
+    background:#F68B21;
+    height: 1px;
+    width: 100%;
+    margin-top: 16px;
+}
+.not_picked{
+    background: #F8AEA8;
+    border-radius: 6px;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    padding: 0px 4px 0px 4px;
+    font-size: 12px;
+    font-weight: 300;
+}
+.potential_text{
+    font-weight: 400;
+    font-size: 10px;
+    display: flex;
+    padding: 4px;
+    color: #EE3425;
+}
+.commodity_text{
+    background: #C4DC91;
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    padding: 0px 4px 0px 4px;
+    font-size: 12px;
+    font-weight: 300;
+    margin-bottom: 14px;
+    margin-top: 14px;
+    margin-right: 12px;
+}
+
+.footer {
+	width: 100%;
+	height: 25px;
+    margin-top: -20px;
+	cursor: pointer;
+	background: #fffaeb;
+	border-radius: 0 0 4px 4px;
+	box-shadow: 0 2px 2px rgb(0 0 0 / 25%);
+}
+
+.footer_text {
+	padding: 4px;
+	font-size: 12px;
+	font-weight: 600;
+    color: #333333;
+	text-align: center;
+	text-decoration-line: underline;
+}

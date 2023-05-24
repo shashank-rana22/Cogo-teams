@@ -1375,6 +1375,15 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
+			{
+				key           : 'coe-risk-management',
+				title         : 'Risk Management',
+				href          : '/v2/risk-management',
+				as            : '/v2/risk-management',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : [],
+			},
 		],
 	},
 	terms_and_conditions: {
