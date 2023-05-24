@@ -1,18 +1,21 @@
 const addonConfig = [
 	{
-		key   : 'product_name_slug',
-		title : 'Display Name',
-		width : '40%',
+		key        : 'product_name',
+		title      : 'Display Name',
+		renderFunc : 'renderName',
+		width      : '40%',
 	},
 	{
-		key   : 'unit_count',
-		title : 'Count',
-		width : '30%',
+		key        : 'unit_count',
+		title      : 'Count',
+		renderFunc : 'renderNumber',
+		width      : '30%',
 	},
 	{
-		key   : 'discount_percent',
-		title : 'Discount (in%)',
-		width : '30%',
+		key        : 'discount_percent',
+		title      : 'Discount (in%)',
+		renderFunc : 'renderNumber',
+		width      : '30%',
 
 	},
 ];

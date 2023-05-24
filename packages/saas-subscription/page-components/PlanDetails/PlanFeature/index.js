@@ -1,12 +1,9 @@
 import { Button, Placeholder, cl } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+
+import getValues from '../../../utils/getValues';
+import itemFunctions from '../../../utils/itemFunctions';
 
 import styles from './styles.module.css';
-
-const getValue = ({ feature, config }) => {
-	if (feature?.[config?.key]) return startCase(feature?.[config?.key]);
-	return '--';
-};
 
 function PlanFeature({ title, list = [], configs, loading = false, setFeatureModal }) {
 	const updateList = loading ? [1, 2, 3, 4] : list;
@@ -17,7 +14,7 @@ function PlanFeature({ title, list = [], configs, loading = false, setFeatureMod
 				<Button
 					type="button"
 					themeType="secondary"
-					onClick={() => setFeatureModal({ openModal: true })}
+					onClick={() => setFeatureModal({ openModal: true, info: list })}
 				>
 					Add More
 				</Button>
@@ -35,7 +32,7 @@ function PlanFeature({ title, list = [], configs, loading = false, setFeatureMod
 					<div key={feature?.display_name} className={cl`${styles.flex_box} ${styles.item_row}`}>
 						{configs.map((config) => (
 							<div key={config.key} className={styles.col} style={{ width: config.width }}>
-								{loading ? <Placeholder /> : getValue({ feature, config })}
+								{loading ? <Placeholder /> : getValues({ itemData: feature, config, itemFunctions })}
 							</div>
 						))}
 					</div>

@@ -3,8 +3,9 @@ const updateAddonControl = 	[{
 	type     : 'fieldArray',
 	controls : [
 		{
-			name        : 'addonName',
-			type        : 'text',
+			name        : 'product_id',
+			type        : 'asyncSelect',
+			asyncKey    : 'addon_list',
 			placeholder : 'Enter Name',
 			size        : 'sm',
 			width       : '30%',
@@ -21,8 +22,8 @@ const updateAddonControl = 	[{
 			rules       : {
 				required : true,
 				min      : {
-					value   : 0,
-					message : 'Should be greater than or equal to 0',
+					value   : -1,
+					message : 'Should be greater than or equal to -1',
 				},
 			},
 		},

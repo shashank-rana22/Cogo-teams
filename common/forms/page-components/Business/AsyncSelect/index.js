@@ -25,6 +25,7 @@ import {
 	asyncAccountEngagementScoringEvents,
 	asyncPlanPricingList,
 	asyncFieldsPartnerUsersIds,
+	asyncQuotaList,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -68,6 +69,7 @@ const keyAsyncFieldsParamsMapping = {
 	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
 	plan_pricing_list             : asyncPlanPricingList,
 	partner_users_ids             : asyncFieldsPartnerUsersIds,
+	addon_list                    : asyncQuotaList,
 };
 
 function AsyncSelect(props) {

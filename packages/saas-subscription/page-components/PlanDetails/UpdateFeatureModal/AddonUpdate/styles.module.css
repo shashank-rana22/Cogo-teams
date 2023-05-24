@@ -12,8 +12,7 @@
         }
     }
     &.footer{
-    justify-content: flex-end;
-
+        justify-content: flex-end;
     }
 }
 
@@ -24,6 +23,11 @@
 .table{
     border-radius: 5px;
     border: 1px solid #F8F2E7;
+
+    .scroll_container{
+        max-height: 300px;
+        overflow-y: scroll;
+    }
 }
 
 
@@ -43,7 +47,7 @@
 	background-color: #fffaee;
 	border-bottom: 1px solid #ffead4;
 
-    .product_name_slug, .unit_count, .discount_percent{
+    .product_name, .unit_count, .discount_percent{
         width: 30%;   
     }
 }
@@ -51,4 +55,8 @@
 
 .col {
 	padding: 0 8px;
+}
+
+.canceBtn{
+    margin-right: 10px;
 }

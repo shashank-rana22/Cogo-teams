@@ -18,9 +18,20 @@ function PlanDetails() {
 	const [featureModal, setFeatureModal] = useState({});
 
 	const { loading = false, planDetails } = useGetPlanDetails();
-	const { plan = {}, pricing = [], plan_features = [] } = planDetails || {};
-	const { metadata = {} } = plan || {};
-	const { addons = [] } = metadata || {};
+	const { plan = {}, pricing = [], plan_features = [], add_ons } = planDetails || {};
+
+	const featureMapping = [
+		{
+			title  : 'Add-ons',
+			list   : add_ons || [],
+			config : addonConfig,
+		},
+		{
+			title  : 'Plan Feature',
+			list   : plan_features || [],
+			config : planFeatureConfig,
+		},
+	];
 
 	return (
 		<div className={styles.container}>
@@ -38,26 +49,17 @@ function PlanDetails() {
 			</div>
 
 			<div className={styles.flex_box}>
-				<div className={cl`${styles.cell} ${styles.feature}`}>
-					<PlanFeature
-						title="Add-ons"
-						list={addons}
-						configs={addonConfig}
-						loading={loading}
-						setFeatureModal={setFeatureModal}
-
-					/>
-				</div>
-
-				<div className={cl`${styles.cell} ${styles.feature}`}>
-					<PlanFeature
-						title="Plan Feature"
-						list={plan_features}
-						configs={planFeatureConfig}
-						loading={loading}
-						setFeatureModal={setFeatureModal}
-					/>
-				</div>
+				{featureMapping.map((feature) => (
+					<div key={feature.title} className={cl`${styles.cell} ${styles.feature}`}>
+						<PlanFeature
+							title={feature.title}
+							list={feature?.list}
+							configs={feature?.config}
+							loading={loading}
+							setFeatureModal={setFeatureModal}
+						/>
+					</div>
+				))}
 			</div>
 			<UpdateFeatureModal featureModal={featureModal} setFeatureModal={setFeatureModal} />
 		</div>

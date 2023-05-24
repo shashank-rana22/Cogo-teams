@@ -8,19 +8,14 @@ import updateAddonControl from '../../../../configuration/updateAddonControl';
 import Item from './Item';
 import styles from './styles.module.css';
 
-function AddonUpdate({ modalCloseHandler }) {
+function AddonUpdate({ modalCloseHandler, defaultValue }) {
 	const {
 		control,
 		handleSubmit,
+		getValues,
 		formState: { errors },
 	} = useForm({
-		defaultValues: {
-			updateAddon: [{
-				addonName : 'as',
-				count     : 10,
-				discount  : 10,
-			}],
-		},
+		defaultValues: defaultValue,
 	});
 
 	const { fields, remove, append } = useFieldArray({
@@ -30,9 +25,9 @@ function AddonUpdate({ modalCloseHandler }) {
 
 	const appendHandler = () => {
 		append({
-			addonName : '',
-			count     : '',
-			discount  : '',
+			product_id : '',
+			count      : '',
+			discount   : '',
 		});
 	};
 
@@ -58,24 +53,35 @@ function AddonUpdate({ modalCloseHandler }) {
 							</div>
 						))}
 					</div>
-					{(fields || []).map((field, index) => (
-						<div key={field?.id} className={cl`${styles.flex_box} ${styles.item_row}`}>
-							<Item
-								info={field}
-								control={control}
-								controls={updateAddonControl[0].controls}
-								remove={remove}
-								errors={errors}
-								fields={fields}
-								index={index}
-							/>
-						</div>
-					))}
+					<div className={styles.scroll_container}>
+						{(fields || []).map((field, index) => (
+							<div key={field?.id} className={cl`${styles.flex_box} ${styles.item_row}`}>
+								<Item
+									info={field}
+									control={control}
+									controls={updateAddonControl[0].controls}
+									remove={remove}
+									errors={errors}
+									fields={fields}
+									index={index}
+									getValues={getValues}
+								/>
+							</div>
+						))}
+					</div>
+
 					<Button themeType="linkUi" onClick={appendHandler}>Add</Button>
 				</div>
 			</div>
 			<div className={cl`${styles.container} ${styles.footer}`}>
-				<Button type="submit" themeType="secondary" onClick={modalCloseHandler}>Cancel</Button>
+				<Button
+					type="submit"
+					themeType="secondary"
+					className={styles.canceBtn}
+					onClick={modalCloseHandler}
+				>
+					Cancel
+				</Button>
 				<Button type="submit" themeType="accent" onClick={handleSubmit(submitHandler)}>Save</Button>
 			</div>
 		</>

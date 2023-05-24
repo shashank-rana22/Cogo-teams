@@ -382,6 +382,18 @@ function asyncPlanPricingList() {
 	};
 }
 
+function asyncQuotaList() {
+	return {
+		labelKey    : 'product_name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_products',
+		initialCall : true,
+		// params      : {
+
+		// },
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -413,4 +425,5 @@ export {
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
 	asyncPlanPricingList,
+	asyncQuotaList,
 };
