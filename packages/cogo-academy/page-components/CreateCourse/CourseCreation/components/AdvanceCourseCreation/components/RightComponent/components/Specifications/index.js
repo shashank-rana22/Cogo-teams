@@ -2,8 +2,8 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, forwardRef, useImperativeHandle, useEffect } from 'react';
 
-import FieldArray from '../../../../../../../commons/FieldArray';
-import { getFieldController } from '../../../../../../../commons/getFieldController';
+import FieldArray from '../../../../../../../../../commons/FieldArray';
+import { getFieldController } from '../../../../../../../../../commons/getFieldController';
 import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
 import ModalComponent from './components/ModalComponent';

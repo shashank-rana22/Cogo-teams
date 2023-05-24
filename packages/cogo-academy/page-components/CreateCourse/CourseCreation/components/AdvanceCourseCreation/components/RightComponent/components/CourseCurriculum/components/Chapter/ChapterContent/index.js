@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
+import { getFieldController } from '../../../../../../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import styles from './styles.module.css';

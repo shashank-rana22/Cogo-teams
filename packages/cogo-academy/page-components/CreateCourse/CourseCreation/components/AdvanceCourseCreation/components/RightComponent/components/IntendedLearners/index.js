@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { forwardRef } from 'react';
 
-import { getFieldController } from '../../../../../../../commons/getFieldController';
+import { getFieldController } from '../../../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import ExcelComponent from './ExcelComponent';

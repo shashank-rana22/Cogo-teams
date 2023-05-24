@@ -2,7 +2,7 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
 
-import { getFieldController } from '../../../../../../../commons/getFieldController';
+import { getFieldController } from '../../../../../../../../../commons/getFieldController';
 import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
 import ConditionSelectComponent from './ConditionSelectComponent';

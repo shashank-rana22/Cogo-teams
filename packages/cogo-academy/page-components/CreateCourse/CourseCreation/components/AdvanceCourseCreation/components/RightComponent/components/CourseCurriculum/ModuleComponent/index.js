@@ -1,8 +1,8 @@
 import { Accordion, Pill, Button } from '@cogoport/components';
 import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
 
+import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
 import LoadingState from '../../../../../../../../../../commons/LoadingState';
-import { getFieldController } from '../../../../../../../../commons/getFieldController';
 import SubModule from '../components/SubModule';
 
 import controls from './controls';

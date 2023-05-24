@@ -2,7 +2,7 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { forwardRef, useImperativeHandle, useEffect } from 'react';
 
-import { getFieldController } from '../../../../../../../commons/getFieldController';
+import { getFieldController } from '../../../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import styles from './styles.module.css';
