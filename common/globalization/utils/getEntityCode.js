@@ -1,12 +1,15 @@
 import GLOBAL_CONSTANTS from '../constants/globals';
 
 const getEntityCode = (entityId = '') => {
-	const entity = Object.values(GLOBAL_CONSTANTS.cogoport_entities).find(
-		(value) => value.id === entityId,
-	);
+	let entityCode = '';
 
-	return entity ? Object.keys(GLOBAL_CONSTANTS.cogoport_entities)
-		.find((key) => GLOBAL_CONSTANTS.cogoport_entities[key] === entity) : '';
+	Object.entries(GLOBAL_CONSTANTS.cogoport_entities).forEach(([key, value]) => {
+		if (value.id === entityId) {
+			entityCode = key;
+		}
+	});
+
+	return entityCode;
 };
 
 export default getEntityCode;
