@@ -1,6 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import CompanyPolicyDetails from '../CompanyPolicyDetails';
 import Header from '../Header';
 import TableView from '../TableView';
 
@@ -28,8 +29,7 @@ function Dashboard() {
 					</TabPanel>
 
 					<TabPanel name="company_policy" title="Company Policy">
-						<div>Company Policy</div>
-
+						<CompanyPolicyDetails />
 					</TabPanel>
 				</Tabs>
 			</div>
