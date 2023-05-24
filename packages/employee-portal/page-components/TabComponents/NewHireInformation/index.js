@@ -2,12 +2,8 @@ import { Accordion } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import React from 'react';
 
-import BankDetails from '../AdditionalInformation/BankDetails';
 import EducationalQualification from '../AdditionalInformation/EducationalQualification';
-import EmploymentHistory from '../AdditionalInformation/EmploymentHistory';
-import Resume from '../AdditionalInformation/Resume';
 
-import IdentificationDocuments from './IdentificationDocuments';
 import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
 

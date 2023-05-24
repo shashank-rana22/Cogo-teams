@@ -2,8 +2,10 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function EducationalQualifications() {
-	// const { employee_education_details = [{ name: 'eee' }] } = profileData || {};
+function EducationalQualifications({ profileData }) {
+	// const {  detail } = profileData || {};
+	// const {  employee_education_details = [] } = detail || {};
+
 	const employee_education_details = [{
 		name        : 'JNV Dgg',
 		type        : 'High School',

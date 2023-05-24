@@ -1,16 +1,18 @@
 import { Accordion } from '@cogoport/components';
-import React from 'react';
 
-import EducationalQualifications from '../AdditionalDetails/EducationalQualifications';
+import IdentificationDocuments from '../ProfileDetails/IdentificationDocuments';
 
-import PersonalInformation from './PersonalInformation';
+import BankDetails from './BankDetails';
+import EmploymentHistory from './EmploymentHistory';
+import Resume from './Resume';
 import styles from './styles.module.css';
 
-function ProfileDetails({ profileData }) {
+function AdditionalDetails({ profileData }) {
 	const data = [
-		{ title: 'PERSONAL INFORMATION', content: PersonalInformation },
-		{ title: 'EDUCATIONAL QUALIFICATION', content: EducationalQualifications },
-	];
+		{ title: 'EMPLOYMENT HISTORY', content: EmploymentHistory },
+		{ title: 'IDENTIFICATION DOCUMENTS', content: IdentificationDocuments },
+		{ title: 'RESUME', content: Resume },
+		{ title: 'BANK DETAILS', content: BankDetails }];
 
 	return (
 		<div className={styles.container}>
@@ -39,4 +41,4 @@ function ProfileDetails({ profileData }) {
 	);
 }
 
-export default ProfileDetails;
+export default AdditionalDetails;
