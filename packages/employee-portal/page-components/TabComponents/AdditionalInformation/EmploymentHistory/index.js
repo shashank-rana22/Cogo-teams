@@ -9,7 +9,7 @@ import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails
 import controls from './controls';
 import styles from './styles.module.css';
 
-function EmploymentHistory({ data: content }) {
+function EmploymentHistory() {
 	const { handleSubmit, control, setValue } = useForm();
 
 	const { data: info } = useGetEmployeeDetails({});
@@ -19,22 +19,21 @@ function EmploymentHistory({ data: content }) {
 	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id });
 
 	const onSubmit = (values) => {
-		console.log(values, 'eduqual');
 		updateEmployeeDetails({ data: values, formType: 'employment_history' });
 	};
 
-	const controlsvalue = controls({ content });
-
 	useEffect(() => {
-		controlsvalue.forEach((item) => {
-			setValue(item.name, content?.detail?.[item?.name]);
-		});
-	}, [controlsvalue, content?.detail, setValue]);
+		setValue('employment_history', info?.detail?.employee_experience_details.map((item) => ({
+			...item,
+			started_at : new Date(item.started_at),
+			ended_at   : new Date(item.ended_at),
+		})));
+	}, [info, setValue]);
 
 	return (
 		<>
 			<div className={styles.container}>
-				{controlsvalue?.map((controlItem) => {
+				{controls?.map((controlItem) => {
 					const { type, name: controlName } = controlItem || {};
 
 					if (type === 'fieldArray') {

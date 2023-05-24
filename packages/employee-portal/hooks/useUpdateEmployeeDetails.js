@@ -42,13 +42,20 @@ function useUpdateEmployeeDetails({ id, getEmployeeDetails }) {
 				}],
 			};
 		} else if (formType === 'educational_qualification') {
-			console.log(data?.education_qualifications, 'qualify');
 			payload = {
-				employee_education_details: data?.education_qualifications,
+				employee_education_details: data?.education_qualifications.map((item) => ({
+					...item,
+					started_at : String(item.started_at),
+					ended_at   : String(item.ended_at),
+				})),
 			};
 		} else {
 			payload = {
-				employee_experience_details: data?.employment_history,
+				employee_experience_details: data?.employment_history.map((item) => ({
+					...item,
+					started_at : String(item.started_at),
+					ended_at   : String(item.ended_at),
+				})),
 			};
 		}
 

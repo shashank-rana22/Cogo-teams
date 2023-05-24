@@ -1,4 +1,4 @@
-const getControls = () => [{
+const getControls = [{
 	name     : 'employment_history',
 	type     : 'fieldArray',
 	controls : [

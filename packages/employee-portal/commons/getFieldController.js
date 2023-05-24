@@ -11,6 +11,7 @@ import {
 	TextAreaController,
 	MobileNumberController,
 	CreatableMultiSelectController,
+	CreatableSelectController,
 } from '@cogoport/forms';
 
 const controlTypeControllerMapping = {
@@ -28,6 +29,8 @@ const controlTypeControllerMapping = {
 	email             : InputController,
 	mobilenumber      : MobileNumberController,
 	createmultiselect : CreatableMultiSelectController,
+	createselect      : CreatableSelectController,
+
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;
