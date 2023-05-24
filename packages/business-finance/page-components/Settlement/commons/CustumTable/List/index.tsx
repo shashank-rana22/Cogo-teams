@@ -23,7 +23,7 @@ interface Props {
 function List({ list = [], refetch }:Props) {
 	return (
 		<div className={styles.list}>
-			{list?.map((item) => (<ColumnCard key={item?.id} item={item} refetch={refetch} />))}
+			{(list || []).map((item) => (<ColumnCard key={item?.id} item={item} refetch={refetch} />))}
 		</div>
 	);
 }

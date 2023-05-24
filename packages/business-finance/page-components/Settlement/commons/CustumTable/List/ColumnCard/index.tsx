@@ -47,7 +47,7 @@ function ColumnCard({ item, refetch }: Props) {
 		<div className={styles.flexend}>
 			{STATUS?.includes(item?.status) ? (
 				<Button
-					className={styles.posttosage}
+					className={styles.post_to_sage}
 					onClick={() => {
 						setShowConfirm('post');
 					}}
@@ -57,7 +57,7 @@ function ColumnCard({ item, refetch }: Props) {
 				</Button>
 			) : null}
 			<Button
-				className={styles.posttosage}
+				className={styles.post_to_sage}
 				onClick={() => {
 					setShowConfirm('delete');
 				}}
