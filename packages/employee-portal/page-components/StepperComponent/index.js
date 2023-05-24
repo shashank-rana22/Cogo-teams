@@ -70,9 +70,7 @@ function StepperComponent() {
 									</div>
 								)
 							}
-
 						</div>
-
 					);
 				})}
 			</div>

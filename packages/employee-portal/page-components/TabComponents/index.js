@@ -63,9 +63,7 @@ function TabComponents({ data, informationPage, setInformationPage }) {
 
 						<div className={styles.arrow_wrapper}>
 							<IcMArrowNext width={20} height={20} />
-
 						</div>
-
 					</div>
 				))
 			}
