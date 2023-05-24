@@ -20,10 +20,11 @@ function ProfileDetails({
 	activeRoomLoading,
 	setRaiseTicketModal = () => {},
 	zippedTicketsData = {},
+	viewType = '',
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
-	const [activeSelect, setActiveSelect] = useState('profile');
+	const [activeSelect, setActiveSelect] = useState(viewType === 'shipment_view' ? 'user_activity' : 'profile');
 	const [showMore, setShowMore] = useState(false);
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 	const formattedMessageData = getActiveCardDetails(activeMessageCard) || {};
