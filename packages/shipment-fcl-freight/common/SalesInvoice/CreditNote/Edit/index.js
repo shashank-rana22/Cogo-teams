@@ -86,6 +86,10 @@ function Edit({
 			apiTrigger(submit_data);
 		}
 	};
+<<<<<<< Updated upstream
+=======
+	console.log(updatedObj, " :updatedObj");
+>>>>>>> Stashed changes
 
 	return (
 		<Modal

@@ -1,0 +1,47 @@
+export const ExchangeRateType = styled.div`
+	font-size: 18px;
+	font-weight: 500;
+	line-height: 20px;
+	margin-left: 5px;
+	margin-top: 6px;
+	margin-bottom: 40px;
+	color: #393f70;
+`;
+
+export const ExchangeRateForm = styled.div`
+	border-radius: 10px;
+`;
+
+export const Heading = styled.div`
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 16px;
+	color: #4f4f4f;
+	margin-bottom: 18px;
+`;
+
+export const Buttons = styled.div`
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 30px;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+		width: 100px;
+	}
+`;
+
+export const LinkToRate = styled.div`
+	display: flex;
+	font-weight: bold;
+	font-size: 12px;
+	line-height: 16px;
+	color: #4f4f4f;
+	margin-bottom: 15px;
+`;
+
+export const Form = styled.div`
+	overflow: auto;
+	height: 67.5vh;
+`;
