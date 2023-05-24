@@ -73,7 +73,7 @@ export const renderValue = (label, detail) => {
 
 	const formatCertificate = (certificates) => (
 		<div className={styles.certificate_container}>
-			{(certificates || []).map((item) => (
+			{(certificates || []).map((item, i) => (
 				<a href={item} target="_blank" rel="noreferrer" key={item}>
 					Click to view certificate
 					&nbsp;
