@@ -15,7 +15,7 @@
   cursor: pointer;
   background-color: #fcdc00;
   border-radius: 8px;
-  transition: transform 0.1s;
+  transition: transform 0.2s;
 
   &:hover {
     transform: scale(1.1);
