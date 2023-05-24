@@ -15,7 +15,8 @@
         "is_task_assigned":false
     },
     "documents":{
-        "tab_title":"Documents"
+        "tab_title":"Documents",
+        "default_wallet":"trade_documents"
     },
     "emails":{
         "tab_title":"Emails"
