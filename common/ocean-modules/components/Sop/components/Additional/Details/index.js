@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty, startCase, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -36,11 +36,15 @@ function Details({
 				: (
 					<div className={styles.addtional_container}>
 						{data.map((item) => {
-							const { sop_detail : { category, remarks, document = [] } } = item || {};
+							const { sop_detail : { category, remarks, document = [] }, created_at, id } = item || {};
 							return (
-								<div className={styles.addtional_data}>
+								<div className={styles.addtional_data} key={id}>
 									<LabelValue label="Category" value={startCase(category)} />
 									<LabelValue label="Comment" value={remarks} />
+									<LabelValue
+										label="Commented On"
+										value={format(created_at, 'dd MMM yyyy HH:mm:ss')}
+									/>
 
 									<LabelValue
 										label="Document"

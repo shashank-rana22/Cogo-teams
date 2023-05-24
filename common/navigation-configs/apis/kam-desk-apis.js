@@ -232,9 +232,8 @@ const apis = [
 		access_type : 'private',
 	},
 	{
-		api          : 'list_kam_desk_surface_shipments',
-		access_type  : 'private',
-		service_name : 'shipment',
+		api         : 'list_kam_desk_surface_shipments',
+		access_type : 'private',
 	},
 	{
 		api          : 'update_shipment_currency_conversion',
@@ -656,6 +655,16 @@ const apis = [
 	},
 	{
 		api          : 'list_shipment_cancellation_reasons',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_partner_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'get_pending_task_authorization',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},

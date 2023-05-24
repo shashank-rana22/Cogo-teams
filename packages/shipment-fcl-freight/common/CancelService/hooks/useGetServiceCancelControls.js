@@ -6,7 +6,13 @@ import useUpdateShipmentService from '../../../hooks/useUpdateShipmentService';
 import getCancelControls from '../utils/get-cancel-controls';
 import getServiceCancelPayload from '../utils/getServiceCancelPayload';
 
-const SUPPLIER_STAKEHOLDERS = ['booking_desk', 'document_desk', 'supply_agent', 'booking_desk_manager'];
+const SUPPLIER_STAKEHOLDERS = [
+	'booking_desk',
+	'document_desk',
+	'document_desk_manager',
+	'supply_agent',
+	'booking_desk_manager',
+];
 
 export default function useGetServiceCancelControls({
 	trade_type = '',

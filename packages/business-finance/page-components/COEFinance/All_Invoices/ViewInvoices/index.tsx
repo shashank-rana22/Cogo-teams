@@ -8,6 +8,7 @@ import InvoiceDetails from './InvoiceDetails/index';
 import ShipmentDetails from './ShipmentDetails/index';
 import SupplierDetails from './SupplierDetails/index';
 import Tagging from './Taggings';
+import VendorDetail from './VendorDetails';
 
 function ViewInvoices() {
 	const { query } = useRouter();
@@ -41,6 +42,14 @@ function ViewInvoices() {
 				status={status}
 			/>
 			<Tagging billId={billId} setRemarksVal={setRemarksVal} status={status} />
+
+			{fullResponse?.billAdditionalObject?.shipmentType === 'ftl_freight'
+			&& (
+				<VendorDetail
+					data={fullResponse}
+				/>
+			)}
+
 			<SupplierDetails
 				data={fullResponse}
 				paymentsData={paymentsData}
