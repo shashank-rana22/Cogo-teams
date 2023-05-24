@@ -22,6 +22,7 @@ function Header({ search, setSearch }) {
 					onChange={setSearch}
 					size="md"
 					style={{ marginRight: '8px', width: 300, height: 40 }}
+					placeholder="Search via Name or Email"
 				/>
 
 				<Button type="button" size="lg" onClick={onClickAddNewJoinee}>Add new joinee</Button>

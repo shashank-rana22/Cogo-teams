@@ -1,15 +1,13 @@
-.pdf{
-    margin-right: 7px;
+.pdf {
+	position: relative;
+	box-sizing: border-box;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+	margin-right: 7px;
+	overflow: hidden;
 	background: #f9f9f9;
 	border: 1px solid #bdbdbd;
-	box-sizing: border-box;
 	border-radius: 8px;
-	width:fit-content;
-	display: flex;
-	justify-content: center;
-	align-items: center;
-    position: relative;
-	overflow: hidden;
-
 }
-

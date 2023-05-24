@@ -1,57 +1,69 @@
-import { useForm } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
-import React from 'react';
 
-import getElementController from '../../../configs/getElementController';
+import { getFieldController } from '../../getFieldController';
 
 import styles from './styles.module.css';
 
 function Child(props) {
-	const { formState: { errors } } = useForm();
-
 	const {
-		controls, control, index, remove = () => {},
+		controls,
+		control,
+		index,
+		name,
+		remove,
+		showDeleteButton = true,
+		noDeleteButtonTill = 0,
+		disabled = false,
+		error = {},
 	} = props;
 
 	return (
-
 		<div className={styles.whole_container}>
 			<div className={styles.container}>
-				{controls?.map((controlItem) => {
-					const { type, label, name: controlName } = controlItem || {};
-					const Element = getElementController(type);
+				{controls.map((controlItem) => {
+					const Element = getFieldController(controlItem.type);
+
+					if (!Element) return null;
 
 					return (
-						<div key={controlName} className={styles.control_container}>
+						<div key={`${name}.${index}.${controlItem.name}`} className={styles.control_container}>
 							<div className={styles.label}>
-								{label}
+								{controlItem.label}
 								<sup className={styles.sup}>*</sup>
 							</div>
 
 							<div className={styles.control}>
 								<Element
+									key={`${name}.${index}.${controlItem.name}`}
 									control={control}
+									id={`create_form_${controlItem.name}_field`}
 									{...controlItem}
-									className={styles[`element_${controlName}`]}
+									name={`${name}.${index}.${controlItem.name}`}
+									className={styles[`element_${controlItem.name}`]}
 								/>
 
-								{errors[controlName]?.message
-									? <div className={styles.error_msg}>{errors[controlName]?.message}</div> : null}
+								<div className={styles.error_message}>
+									{error?.[controlItem?.name]?.message}
+								</div>
 							</div>
 						</div>
 					);
 				})}
+
+				{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
+					<IcMDelete
+						className={`form-fieldArray-${name}-remove`}
+						onClick={() => remove(index, 1)}
+						style={{
+							height    : '20px',
+							width     : '20px',
+							marginTop : '24px',
+							cursor    : 'pointer',
+						}}
+					/>
+				) : null}
 			</div>
-
-			<IcMDelete
-				className={styles.remove}
-				onClick={() => remove(index, 1)}
-				style={{ cursor: 'pointer' }}
-			/>
-
 		</div>
-
 	);
 }
-
 export default Child;

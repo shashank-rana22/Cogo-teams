@@ -2,21 +2,23 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-function useCreateEmployeeDocument() {
+function useCreateEmployeeDocument({ component }) {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/create_employee_document',
 		method : 'POST',
 	}, { manual: true });
 
-	const createEmployeeDocument = async ({ data }) => {
+	const createEmployeeDocument = async ({ id, newDoc }) => {
+		const payload = {
+			documents          : [...newDoc],
+			employee_detail_id : id,
+			performed_by_id    : '5674cb',
+			performed_by_type  : '2314fb',
+		};
+
 		try {
 			await trigger({
-				data: {
-					employee_detail_id : data?.id,
-					document_type      : data?.document_type,
-					document_url       : data?.document_url,
-					status             : data?.status || 'active',
-				},
+				data: payload,
 			});
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');

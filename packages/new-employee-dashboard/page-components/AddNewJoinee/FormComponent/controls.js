@@ -8,7 +8,6 @@ const controls = [
 			required: 'name is required',
 		},
 	},
-
 	{
 		name        : 'personal_email',
 		label       : 'Employee Email ID',
@@ -22,7 +21,6 @@ const controls = [
 			},
 		},
 	},
-
 	{
 		name        : 'mobile_number',
 		label       : 'Contact Details',
@@ -33,7 +31,6 @@ const controls = [
 			required: 'Mobile Number is required',
 		},
 	},
-
 	{
 		name        : 'employee_code',
 		type        : 'text',
@@ -43,7 +40,6 @@ const controls = [
 			required: 'Employee Code is required',
 		},
 	},
-
 	{
 		name        : 'designation',
 		type        : 'select',
@@ -57,7 +53,6 @@ const controls = [
 			required: 'Role is required',
 		},
 	},
-
 	{
 		name                  : 'date_of_joining',
 		label                 : 'Date of joining',
@@ -66,7 +61,6 @@ const controls = [
 		isPreviousDaysAllowed : true,
 		isClearable           : true,
 	},
-
 	{
 		name        : 'location',
 		type        : 'select',
@@ -80,7 +74,6 @@ const controls = [
 			required: 'Location is required',
 		},
 	},
-
 	{
 		name        : 'reporting_manager',
 		type        : 'select',
@@ -94,7 +87,6 @@ const controls = [
 			required: 'Reporting Manager is required',
 		},
 	},
-
 	{
 		name        : 'hr_name',
 		type        : 'text',
@@ -104,7 +96,6 @@ const controls = [
 			required: 'name is required',
 		},
 	},
-
 	{
 		name        : 'hr_email',
 		label       : 'HR Email ID',
@@ -118,7 +109,6 @@ const controls = [
 			},
 		},
 	},
-
 ];
 
 export default controls;

@@ -6,6 +6,7 @@ import styles from "./styles.module.css";
 
 function Header({
   detail,
+  loading,
   setShowCtcBreakupModal,
   setCtcStructure = () => {},
   ctcStructure = {},
@@ -24,9 +25,32 @@ function Header({
           personName={name}
         />
         <div>
-          <div className={styles.name}>{name}</div>
-          <div className={styles.role}>{startCase(designation)}</div>
-          <div className={styles.emp_code}>Employee Code: {employee_code}</div>
+          <div className={styles.name}>
+            {!loading ? (
+              name
+            ) : (
+              <Placeholder
+                height="32px"
+                width="240px"
+                margin="0px 0px 12px 0px"
+              />
+            )}
+          </div>
+          <div className={styles.role}>
+            {!loading ? (
+              startCase(designation)
+            ) : (
+              <Placeholder height="20px" width="240px" />
+            )}
+          </div>
+          <div className={styles.emp_code}>
+            <div style={{ marginRight: 2 }}>Employee Code: </div>
+            {!loading ? (
+              employee_code
+            ) : (
+              <Placeholder height="20px" width="80px" />
+            )}
+          </div>
         </div>
       </div>
 

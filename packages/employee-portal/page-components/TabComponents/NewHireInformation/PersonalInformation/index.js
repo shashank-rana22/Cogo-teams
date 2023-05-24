@@ -3,6 +3,8 @@ import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
+import useCreateEmployeeDetails from '../../../../hooks/useCreateEmployeeDetails';
+import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -12,31 +14,38 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function PersonalInformation({ data }) {
+function PersonalInformation({ data:content }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
-	const controlsvalue = controls({ data });
+	const controlsvalue = controls({ content });
+
+	const { data: info } = useGetEmployeeDetails({});
+
+	const id = info?.detail?.id;
+
+	const { createEmployeeDetails } = useCreateEmployeeDetails({ id });
 
 	useEffect(() => {
 		const mapping = {
 			mobile_number: {
-				number       : data?.detail?.mobile_number,
-				country_code : data?.detail?.mobile_country_code || +91,
+				number       : content?.detail?.mobile_number,
+				country_code : content?.detail?.mobile_country_code || +91,
 			},
 		};
-
 		controlsvalue.forEach((item) => {
 			if (item?.name === 'mobile_number') {
 				setValue(
 					`${item.name}`,
 					mapping[item.name]
-					|| data?.detail?.[item.name],
+					|| content?.detail?.[item.name],
 				);
+			} else if (item?.name === 'date_of_birth_') {
+				setValue(item.name, new Date(content?.detail?.date_of_birth));
 			} else {
-				setValue(item.name, data?.detail?.[item?.name]);
+				setValue(item.name, content?.detail?.[item?.name]);
 			}
 		});
-	}, [controlsvalue, data?.detail, setValue]);
+	}, [controlsvalue, content?.detail, setValue]);
 
 	return (
 		<div className={styles.whole_container}>
@@ -74,7 +83,7 @@ function PersonalInformation({ data }) {
 				type="button"
 				className={styles.button}
 				onClick={
-						handleSubmit()
+						handleSubmit(createEmployeeDetails)
 					}
 			>
 				Save
