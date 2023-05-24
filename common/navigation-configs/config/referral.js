@@ -8,7 +8,11 @@ const referral = {
 		layoutType : 'no_header',
 		navigation : 'referral-dashboard',
 	},
-
+	'/[partner_id]/referral/simulation': {
+		layoutType : 'no_header',
+		navigation : 'referral-dashboard',
+		isMainNav  : true,
+	},
 };
 
 module.exports = referral;
