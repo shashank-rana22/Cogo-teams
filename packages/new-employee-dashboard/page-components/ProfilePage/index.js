@@ -26,7 +26,7 @@ function ProfilePage() {
   const [showCtcBreakupModal, setShowCtcBreakupModal] = useState(false);
 	return (
 		<div className={styles.container}>
-			<Header detail={detail} />
+			<Header detail={detail} setShowCtcBreakupModal={setShowCtcBreakupModal} />
 
 			<div className={styles.tab_container}>
 				<Tabs
