@@ -9,6 +9,7 @@ import {
 	CountrySelectController,
 	UploadController,
 	CheckboxGroupController,
+	ToggleController,
 } from '@cogoport/forms';
 
 import DepartureDateSelectController from './DepartureDateSelect/index';
@@ -31,6 +32,7 @@ const getElementController = (type = 'text') => {
 			return UploadController;
 
 		case 'pills':
+		case 'chips':
 			return ChipsController;
 
 		case 'date_picker':
@@ -51,6 +53,9 @@ const getElementController = (type = 'text') => {
 
 		case 'country_select':
 			return CountrySelectController;
+
+		case 'toggle':
+			return ToggleController;
 
 		default:
 			return InputController;
