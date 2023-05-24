@@ -6,7 +6,6 @@ import styles from './styles.module.css';
 
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || {};
-	const keysForPackages = Array(packages.length).fill(null).map(() => Math.random());
 
 	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
 
@@ -37,7 +36,7 @@ export const renderValue = (label, detail) => {
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div key={keysForPackages[i]}>{values}</div>;
+								return <div key={values}>{values}</div>;
 							})}
 						</div>
 					)}
@@ -73,12 +72,10 @@ export const renderValue = (label, detail) => {
 	);
 
 	const formatCertificate = (certificates) => {
-		const keys = Array(certificates.length).fill(null).map(() => Math.random());
-
 		return (
 			<div className={styles.certificate_container}>
 				{(certificates || []).map((item, i) => (
-					<a href={item} target="_blank" rel="noreferrer" key={keys[i]}>
+					<a href={item} target="_blank" rel="noreferrer" key={item}>
 						Click to view certificate
 						&nbsp;
 						{i + 1}

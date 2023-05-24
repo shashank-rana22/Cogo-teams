@@ -8,7 +8,7 @@ const useListRateChargeCodes = ({ defaultParams = {}, defaultFilters = {} }) => 
 	const [filters, setFilters] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'list_rate_charge_codes',
+		url    : '/list_rate_charge_codes',
 		method : 'GET',
 		params : {
 			...defaultParams,

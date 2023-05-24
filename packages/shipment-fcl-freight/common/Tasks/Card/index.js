@@ -26,7 +26,7 @@ function Card({
 						task={task}
 						handleClick={handleClick}
 						handleChange={handleChange}
-						hideButton={selectedTaskId.length}
+						hideButton={task.status==='completed' || selectedTaskId.length}
 					/>
 				)}
 

@@ -109,7 +109,6 @@ function Form({
 					? (
 						<Layout
 							control={control}
-							formValues={formValues}
 							errors={errors}
 							fields={controls}
 						/>

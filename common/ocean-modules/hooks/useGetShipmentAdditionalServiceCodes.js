@@ -8,7 +8,7 @@ const useGetShipmentAdditionalServiceCodes = ({ shipment_id = '', defaultFilters
 	const [filters, setFilters] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'get_shipment_additional_service_codes',
+		url    : '/get_shipment_additional_service_codes',
 		method : 'GET',
 		params : {
 			filters: { shipment_id, ...defaultFilters, ...filters },
