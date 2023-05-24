@@ -9,6 +9,8 @@ import {
 	where,
 	orderBy,
 	getDocs,
+	collection,
+	limit,
 } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -33,6 +35,18 @@ const toggleCarouselState = async (firestore, setShowCarousel) => {
 	setShowCarousel(!!getFlashMessages?.size);
 };
 
+const getTimeoutConstant = async (firestore) => {
+	const constantCollection = collection(firestore, FIRESTORE_PATH.cogoone_constants);
+
+	const constantsQuery = query(constantCollection, limit(1));
+	const cogoOneConstants = await getDocs(constantsQuery);
+
+	const cogoOneConstantsDocs = cogoOneConstants?.docs?.[0];
+	const { flash_messages_timeout = 0 } = cogoOneConstantsDocs.data() || {};
+
+	return flash_messages_timeout;
+};
+
 function useClaimChat({ userId, setShowCarousel, firestore }) {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/assign_chat',
@@ -44,7 +58,6 @@ function useClaimChat({ userId, setShowCarousel, firestore }) {
 		try {
 			setShowCarousel(false);
 			await updateCLaimKey({ id, channel_type, firestore, value: false });
-			Toast.info('Request processing. You will be notified when it\'s completed.');
 			await trigger({
 				data: {
 					channel                 : channel_type,
@@ -58,9 +71,10 @@ function useClaimChat({ userId, setShowCarousel, firestore }) {
 				},
 			});
 			Toast.success('Claim successful! The chat has been assigned to you.');
+			const timeoutValue = await getTimeoutConstant(firestore);
 			setTimeout(() => {
 				toggleCarouselState(firestore, setShowCarousel);
-			}, 10000);
+			}, (timeoutValue || 10000));
 		} catch (error) {
 			await updateCLaimKey({ id, channel_type, firestore, value: true });
 			setShowCarousel(true);
