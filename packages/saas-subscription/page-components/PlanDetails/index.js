@@ -17,16 +17,18 @@ function PlanDetails() {
 	const { back } = useRouter();
 	const [featureModal, setFeatureModal] = useState({});
 
-	const { loading = false, planDetails } = useGetPlanDetails();
+	const { loading = false, planDetails } = useGetPlanDetails({ featureModal });
 	const { plan = {}, pricing = [], plan_features = [], add_ons } = planDetails || {};
 
 	const featureMapping = [
 		{
+			name   : 'addon',
 			title  : 'Add-ons',
 			list   : add_ons || [],
 			config : addonConfig,
 		},
 		{
+			name   : 'planFeature',
 			title  : 'Plan Feature',
 			list   : plan_features || [],
 			config : planFeatureConfig,
@@ -50,8 +52,9 @@ function PlanDetails() {
 
 			<div className={styles.flex_box}>
 				{featureMapping.map((feature) => (
-					<div key={feature.title} className={cl`${styles.cell} ${styles.feature}`}>
+					<div key={feature.name} className={cl`${styles.cell} ${styles.feature}`}>
 						<PlanFeature
+							name={feature.name}
 							title={feature.title}
 							list={feature?.list}
 							configs={feature?.config}
@@ -61,7 +64,7 @@ function PlanDetails() {
 					</div>
 				))}
 			</div>
-			<UpdateFeatureModal featureModal={featureModal} setFeatureModal={setFeatureModal} />
+			<UpdateFeatureModal featureModal={featureModal} setFeatureModal={setFeatureModal} planId={plan?.id} />
 		</div>
 	);
 }

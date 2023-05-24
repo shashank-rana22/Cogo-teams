@@ -5,7 +5,7 @@ import itemFunctions from '../../../utils/itemFunctions';
 
 import styles from './styles.module.css';
 
-function PlanFeature({ title, list = [], configs, loading = false, setFeatureModal }) {
+function PlanFeature({ title, list = [], configs, loading = false, setFeatureModal, name }) {
 	const updateList = loading ? [1, 2, 3, 4] : list;
 	return (
 		<div className={styles.container}>
@@ -14,7 +14,7 @@ function PlanFeature({ title, list = [], configs, loading = false, setFeatureMod
 				<Button
 					type="button"
 					themeType="secondary"
-					onClick={() => setFeatureModal({ openModal: true, info: list })}
+					onClick={() => setFeatureModal((prev) => ({ ...prev, name, openModal: true, info: list }))}
 				>
 					Add More
 				</Button>

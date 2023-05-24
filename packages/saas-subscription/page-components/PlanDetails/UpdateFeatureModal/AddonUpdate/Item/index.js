@@ -31,7 +31,6 @@ function Item({
 							control={control}
 							value={info[field?.name]}
 							name={`updateAddon.${index}.${field?.name}`}
-							// key={`updateAddon.${index}.${field?.name}`}
 							key={getKey(field?.name)}
 						/>
 					</div>

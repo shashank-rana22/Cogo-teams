@@ -67,6 +67,16 @@ const apis = {
 			service_name : 'saas_subscriptions_v2',
 			access_type  : 'private',
 		},
+		{
+			api          : 'update_saas_product_plan_mapping',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
+		{
+			api          : 'update_saas_plan_details',
+			service_name : 'saas_subscriptions_v2',
+			access_type  : 'private',
+		},
 	],
 };
 

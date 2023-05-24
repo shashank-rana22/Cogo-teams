@@ -1,28 +1,25 @@
 import { Modal } from '@cogoport/components';
 
+import useUpdatePlanFeature from '../../../hooks/useUpdatePlanFeature';
+
 import AddonUpdate from './AddonUpdate';
 
-const createDrafultValue = (list) => {
-	const defaultValue = list.map((item) => ({
-		product_id : item?.saas_product_id,
-		count      : item?.unit_count,
-		discount   : item?.discount_percent,
-	}));
-	return ({
-		updateAddon: defaultValue,
-	});
-};
+function UpdateFeatureModal({ featureModal, setFeatureModal, planId = '' }) {
+	const { openModal = false, info = [], name } = featureModal;
 
-function UpdateFeatureModal({ featureModal, setFeatureModal }) {
-	const { openModal = false, info = [] } = featureModal;
-	const modalCloseHandler = () => {
-		setFeatureModal({ openModal: false });
-	};
-	const defaultValue = createDrafultValue(info);
+	const { loading, getFeatureMapping, modalCloseHandler } = useUpdatePlanFeature({ planId, setFeatureModal });
+
+	const feature = getFeatureMapping(info, name);
 
 	return (
 		<Modal show={openModal} onClose={modalCloseHandler}>
-			{openModal && <AddonUpdate modalCloseHandler={modalCloseHandler} info={info} defaultValue={defaultValue} />}
+			{openModal && (
+				<AddonUpdate
+					modalCloseHandler={modalCloseHandler}
+					featureInfo={feature?.[name]}
+					loading={loading}
+				/>
+			)}
 		</Modal>
 	);
 }

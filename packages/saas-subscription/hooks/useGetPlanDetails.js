@@ -4,14 +4,14 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetPlanDetails = () => {
+const useGetPlanDetails = ({ featureModal }) => {
 	const { query } = useRouter();
 	const { plan_id = '' } = query || {};
-
+	const { apiCall = false } = featureModal;
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_saas_plan_details',
-	});
+	}, { manual: true });
 
 	const refetchPlanDetails = useCallback(async () => {
 		try {
@@ -28,6 +28,10 @@ const useGetPlanDetails = () => {
 	useEffect(() => {
 		refetchPlanDetails();
 	}, [refetchPlanDetails]);
+
+	useEffect(() => {
+		if (apiCall) { refetchPlanDetails(); }
+	}, [refetchPlanDetails, apiCall]);
 
 	return {
 		planDetails: data,

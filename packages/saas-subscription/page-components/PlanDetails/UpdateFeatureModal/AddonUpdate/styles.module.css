@@ -47,8 +47,12 @@
 	background-color: #fffaee;
 	border-bottom: 1px solid #ffead4;
 
-    .product_name, .unit_count, .discount_percent{
-        width: 30%;   
+    .product_name{
+        width: 40%;
+    }
+
+    .unit_count, .discount_percent{
+        width: 25%;   
     }
 }
 
@@ -59,4 +63,8 @@
 
 .canceBtn{
     margin-right: 10px;
+}
+
+.add_btn_container{
+    border-top: 1px solid #ffead4;
 }

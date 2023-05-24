@@ -2,13 +2,12 @@ import { cl, Button, ButtonIcon } from '@cogoport/components';
 import { useForm, useFieldArray } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
 
-import addonConfig from '../../../../configuration/addonConfig';
-import updateAddonControl from '../../../../configuration/updateAddonControl';
-
 import Item from './Item';
 import styles from './styles.module.css';
 
-function AddonUpdate({ modalCloseHandler, defaultValue }) {
+function AddonUpdate({ modalCloseHandler, featureInfo, loading = false }) {
+	const { configs, formControls, defaultValue = {}, appendValue, name, submitHandler, title } = featureInfo;
+
 	const {
 		control,
 		handleSubmit,
@@ -19,34 +18,32 @@ function AddonUpdate({ modalCloseHandler, defaultValue }) {
 	});
 
 	const { fields, remove, append } = useFieldArray({
-		name: 'updateAddon',
+		name,
 		control,
 	});
 
 	const appendHandler = () => {
-		append({
-			product_id : '',
-			count      : '',
-			discount   : '',
-		});
-	};
-
-	const submitHandler = (data) => {
-		console.log(data, 'data');
+		append(appendValue);
 	};
 
 	return (
 		<>
 			<div className={cl`${styles.container} ${styles.header}`}>
-				<h3>Add More Add-ons</h3>
-				<ButtonIcon size="md" icon={<IcMCross />} themeType="primary" onClick={modalCloseHandler} />
+				<h3>{title}</h3>
+				<ButtonIcon
+					size="md"
+					icon={<IcMCross />}
+					themeType="primary"
+					onClick={() => modalCloseHandler(false)}
+				/>
 			</div>
 			<div className={styles.content_body}>
 				<div className={styles.table}>
 					<div className={cl`${styles.card_header} ${styles.flex_box}`}>
-						{addonConfig.map((config) => (
+						{configs.map((config) => (
 							<div
 								key={config?.key}
+								style={{ width: name === 'updatePlanFeature' ? config?.width : '' }}
 								className={cl`${styles.col} ${styles?.[config.key]}`}
 							>
 								{config?.title}
@@ -59,7 +56,7 @@ function AddonUpdate({ modalCloseHandler, defaultValue }) {
 								<Item
 									info={field}
 									control={control}
-									controls={updateAddonControl[0].controls}
+									controls={formControls[0].controls}
 									remove={remove}
 									errors={errors}
 									fields={fields}
@@ -69,8 +66,9 @@ function AddonUpdate({ modalCloseHandler, defaultValue }) {
 							</div>
 						))}
 					</div>
-
-					<Button themeType="linkUi" onClick={appendHandler}>Add</Button>
+					<div className={styles.add_btn_container}>
+						<Button themeType="link" onClick={appendHandler}>Add</Button>
+					</div>
 				</div>
 			</div>
 			<div className={cl`${styles.container} ${styles.footer}`}>
@@ -78,11 +76,19 @@ function AddonUpdate({ modalCloseHandler, defaultValue }) {
 					type="submit"
 					themeType="secondary"
 					className={styles.canceBtn}
-					onClick={modalCloseHandler}
+					onClick={() => modalCloseHandler(false)}
+					disabled={loading}
 				>
 					Cancel
 				</Button>
-				<Button type="submit" themeType="accent" onClick={handleSubmit(submitHandler)}>Save</Button>
+				<Button
+					type="submit"
+					themeType="accent"
+					onClick={handleSubmit(submitHandler)}
+					loading={loading}
+				>
+					Save
+				</Button>
 			</div>
 		</>
 	);

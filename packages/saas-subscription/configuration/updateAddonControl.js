@@ -8,7 +8,7 @@ const updateAddonControl = 	[{
 			asyncKey    : 'addon_list',
 			placeholder : 'Enter Name',
 			size        : 'sm',
-			width       : '30%',
+			width       : '40%',
 			rules       : {
 				required: true,
 			},
@@ -18,7 +18,7 @@ const updateAddonControl = 	[{
 			type        : 'number',
 			placeholder : 'Enter count',
 			size        : 'sm',
-			width       : '30%',
+			width       : '25%',
 			rules       : {
 				required : true,
 				min      : {
@@ -32,9 +32,10 @@ const updateAddonControl = 	[{
 			type        : 'number',
 			placeholder : 'Enter Discount',
 			size        : 'sm',
-			width       : '30%',
+			width       : '25%',
 			rules       : {
-				min: {
+				required : true,
+				min      : {
 					value   : 0,
 					message : 'Should be greater than or equal to 0',
 				},
@@ -42,4 +43,11 @@ const updateAddonControl = 	[{
 		},
 	],
 }];
+
+const addonDefaultValue = {
+	product_id : '',
+	count      : 0,
+	discount   : 0,
+};
 export default updateAddonControl;
+export { addonDefaultValue };
