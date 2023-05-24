@@ -668,3 +668,12 @@ export const MILESTONE_OPTIONS = [
 	{ label: 'Cargo Dropped', value: 'cargo_dropped' },
 	{ label: 'Flight Departed', value: 'flight_departed' },
 ];
+
+export const CHANNEL_OPTIONS = [{
+	label : 'Review Channel',
+	value : 'Review Channel',
+
+}, {
+	label : 'Audit Channel',
+	value : 'Audit Channel',
+}];
