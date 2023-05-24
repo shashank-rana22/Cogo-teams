@@ -2,7 +2,9 @@ import PreviewDocumet from '../../../../common/PreviewDocumet';
 
 import styles from './styles.module.css';
 
-function BankDetails({ bank_details }) {
+function BankDetails({ profileData }) {
+	// const { bank_details } = profileData || {};
+
 	const bankDetails = {
 		ifsc_code           : 'ACHDGE1234',
 		account_holder_name : 'Prachi Dewangan',

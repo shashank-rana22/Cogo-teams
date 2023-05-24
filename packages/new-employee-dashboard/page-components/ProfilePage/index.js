@@ -1,6 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import AdditionalDetails from './AdditionalDetails';
 import Header from './Header';
 import ProfileDetails from './ProfileDetails';
 import SignedDocuments from './SignedDocuments';
@@ -25,6 +26,10 @@ function ProfilePage() {
 				>
 					<TabPanel name="profile_info" title="Profile Info">
 						<ProfileDetails profileData={profileData} loading={loading} />
+					</TabPanel>
+
+					<TabPanel name="additional_info" title="Additional Info">
+						<AdditionalDetails profileData={profileData} loading={loading} />
 					</TabPanel>
 
 					<TabPanel name="Signed_documents" title="Signed Documents">
