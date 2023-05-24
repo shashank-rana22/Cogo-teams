@@ -17,6 +17,12 @@ const MAPPING = [
 		sub_title : 'Signed',
 	},
 	{
+		name      : 'additional_info',
+		icon      : IcMDocument,
+		is_added  : false,
+		sub_title : 'Added',
+	},
+	{
 		name      : 'documents',
 		icon      : IcMDocument,
 		is_added  : false,
@@ -31,8 +37,8 @@ function StepperComponent() {
 				Your progress so far -
 			</div>
 			<div className={styles.flex_wrapper}>
-				{ MAPPING.map((elemet) => {
-					const { name, is_added, icon:Icon, sub_title } = elemet || {};
+				{ MAPPING.map((element) => {
+					const { name, is_added, icon:Icon, sub_title } = element || {};
 					const TickIcon = is_added ? IcCFtick : IcMFtick;
 
 					return (
@@ -40,21 +46,21 @@ function StepperComponent() {
 							<div className={styles.single_card}>
 								<div className={styles.tick_icon}>
 									<TickIcon width={24} height={24} />
-
 								</div>
+
 								<div className={styles.icon_wrapper}>
 									<Icon width={22} height={22} />
-
 								</div>
+
 								<div>
 									<div className={styles.text_wrapper}>
 										{startCase(name)}
 									</div>
+
 									<div className={styles.text_wrapper}>
 										{sub_title}
 									</div>
 								</div>
-
 							</div>
 							{
 								name !== 'documents' && (
