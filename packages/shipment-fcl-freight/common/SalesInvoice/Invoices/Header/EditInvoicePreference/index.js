@@ -11,14 +11,8 @@ import styles from './styles.module.css';
 
 function EditInvoicePreference({
 	invoicing_parties = [],
-<<<<<<< Updated upstream
-	bfInvoiceRefetch = () => {},
-	disableAction = false,
-	salesInvoicesRefetch = () => {},
-=======
 	disableAction = false,
 	refetch = () => {},
->>>>>>> Stashed changes
 }) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
@@ -28,12 +22,7 @@ function EditInvoicePreference({
 	const invoicingParties = getModifiedInvoicingParties({ invoicing_parties });
 
 	const refetchAfterApiCall = () => {
-<<<<<<< Updated upstream
-		salesInvoicesRefetch();
-		bfInvoiceRefetch();
-=======
 		refetch();
->>>>>>> Stashed changes
 		setShow(false);
 	};
 

@@ -1,9 +1,3 @@
-<<<<<<< Updated upstream
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React from 'react';
-
-import EditInvoicePreference from './EditInvoicePreference';
-=======
 import { ShipmentDetailContext } from '@cogoport/context';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useSelector, useContext } from '@cogoport/store';
@@ -11,7 +5,6 @@ import React from 'react';
 
 import EditInvoicePreference from './EditInvoicePreference';
 import ExchangeRate from './ExchangeRate';
->>>>>>> Stashed changes
 import styles from './styles.module.css';
 
 function Header({
@@ -27,8 +20,6 @@ function Header({
 		invoicing_parties,
 		reviewed_invoices,
 	} = invoiceData;
-<<<<<<< Updated upstream
-=======
 	const user_data = useSelector(({ profile }) => profile || {});
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -38,7 +29,6 @@ function Header({
 		bfInvoiceRefetch();
 		salesInvoicesRefetch();
 	};
->>>>>>> Stashed changes
 
 	return (
 		<div className={styles.container}>
@@ -72,13 +62,6 @@ function Header({
 				) : null}
 
 				<div className={styles.button_div}>
-<<<<<<< Updated upstream
-					<EditInvoicePreference
-						invoicing_parties={invoicing_parties}
-						bfInvoiceRefetch={bfInvoiceRefetch}
-						disableAction={disableAction}
-						salesInvoicesRefetch={salesInvoicesRefetch}
-=======
 					{/* {showExchangeRate ? ( */}
 					<ExchangeRate
 						shipment_id={shipment_data.id}
@@ -93,7 +76,6 @@ function Header({
 						invoicing_parties={invoicing_parties}
 						disableAction={disableAction}
 						refetch={refetch}
->>>>>>> Stashed changes
 					/>
 				</div>
 			</div>
