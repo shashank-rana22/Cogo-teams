@@ -38,6 +38,11 @@ const consolidated_invoices = {
 			service_name : 'harbour',
 		},
 		{
+			api          : 'update_employee_detail',
+			access_type  : 'private',
+			service_name : 'harbour',
+		},
+		{
 			api          : 'update_employee_bank_details',
 			access_type  : 'private',
 			service_name : 'harbour',

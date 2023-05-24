@@ -3,7 +3,7 @@ const getControls = [{
 	type     : 'fieldArray',
 	controls : [
 		{
-			name        : 'institution_name',
+			name        : 'school_name',
 			label       : 'Institution Name',
 			type        : 'input',
 			placeholder : 'Institution Name',

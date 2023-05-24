@@ -2,8 +2,8 @@ import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
 import FieldArray from '../../../../commons/FieldArray';
-import useCreateEmployeeDetails from '../../../../hooks/useCreateEmployeeDetails';
 import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
+import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -14,10 +14,11 @@ function EducationalQualification() {
 
 	const id = info?.detail?.id;
 
-	const { createEmployeeDetails } = useCreateEmployeeDetails({ id });
+	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id });
 
 	const onSubmit = (values) => {
-		createEmployeeDetails({ data: values, id });
+		console.log(values, 'eduqual');
+		updateEmployeeDetails({ data: values, formType: 'educational_qualification' });
 	};
 
 	return (
@@ -49,9 +50,7 @@ function EducationalQualification() {
 				size="md"
 				type="button"
 				className={styles.button}
-				onClick={
-						handleSubmit(onSubmit)
-					}
+				onClick={handleSubmit(onSubmit)}
 			>
 				Save
 			</Button>
