@@ -193,7 +193,7 @@ export default {
 			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
 			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
 		],
-		so1_so2_role_id: '0285645b-0d06-42a2-9968-67d544626300',
+		so1_so2_role_id: '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
 
 	},
 	options: {
