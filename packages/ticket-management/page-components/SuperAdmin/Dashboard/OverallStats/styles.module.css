@@ -68,7 +68,6 @@
 	width: 8px;
 	height: 8px;
 	margin-right: 4px;
-	background-color: aqua;
 	border-radius: 50%;
 }
 
@@ -116,11 +115,10 @@
 	font-size: 12px;
 	font-weight: bold;
 	color: #221f20;
-	text-align: right;
 }
 
 .stats_label {
-	margin-left: 54px;
+	margin-left: 48px;
 	font-size: 10px;
 	font-weight: 400;
 	color: #4f4f4f;

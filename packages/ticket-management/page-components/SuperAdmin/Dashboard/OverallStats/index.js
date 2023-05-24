@@ -65,16 +65,15 @@ function OverallStats() {
 						<span className={styles.graph_count}>8.4k</span>
 					</div>
 					<div className={styles.legends}>
-						{(PieData || []).map(({ id, label, isMargin }) => (
+						{(PieData || []).map(({ id, label, value, isMargin }) => (
 							<div className={cl`${styles.legend} ${isMargin ? styles.margin_bottom : ''}`} key={id}>
 								<div className={styles.legend_count}>
 									<div className={cl`${styles.dot} ${styles[id]}`} />
-									<span className={styles.stats_count}>2000</span>
+									<span className={styles.stats_count}>{value}</span>
 								</div>
 								<div className={styles.stats_label}>{label}</div>
 							</div>
 						))}
-
 					</div>
 				</div>
 			</div>
