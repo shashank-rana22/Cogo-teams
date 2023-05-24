@@ -11,7 +11,7 @@ import OfferLetter from './OfferLetter';
 import SignYourDocuments from './SignYourDocuments';
 import styles from './styles.module.css';
 
-function TabComponents({ data, informationPage, setInformationPage }) {
+function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails }) {
 	const component_mapping = {
 		new_hire_information   : NewHireInformation,
 		offer_letter           : OfferLetter,
@@ -36,7 +36,13 @@ function TabComponents({ data, informationPage, setInformationPage }) {
 
 	if (informationPage) {
 		const PageComponent = component_mapping[informationPage];
-		return <PageComponent setInformationPage={setInformationPage} data={data} />;
+		return (
+			<PageComponent
+				setInformationPage={setInformationPage}
+				data={data}
+				getEmployeeDetails={getEmployeeDetails}
+			/>
+		);
 	}
 
 	return (

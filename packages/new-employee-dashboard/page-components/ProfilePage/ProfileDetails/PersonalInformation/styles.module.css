@@ -1,8 +1,22 @@
 .flex_wrapper {
-	display: flex;
 	padding-bottom: 8px;
+	min-width:250px;
+	padding-right: 14px;
 }
 
-/* .label{
-font-weight: 600;
-} */
+.value {
+	font-size: 13;
+	font-weight: 600;
+}
+
+.label {
+	padding-bottom: 4px;
+	color: #828282;
+	padding-top: 20px;
+}
+
+
+.container{
+	display: flex;
+	flex-wrap: wrap;
+}

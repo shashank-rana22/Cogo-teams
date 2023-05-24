@@ -3,8 +3,8 @@ import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
-import useCreateEmployeeDetails from '../../../../hooks/useCreateEmployeeDetails';
 import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
+import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -14,7 +14,7 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function PersonalInformation({ data:content }) {
+function PersonalInformation({ data:content, getEmployeeDetails }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
 	const controlsvalue = controls({ content });
@@ -23,7 +23,11 @@ function PersonalInformation({ data:content }) {
 
 	const id = info?.detail?.id;
 
-	const { createEmployeeDetails } = useCreateEmployeeDetails({ id });
+	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
+
+	const onSubmit = (values) => {
+		updateEmployeeDetails({ data: values, formType: 'personal_info' });
+	};
 
 	useEffect(() => {
 		const mapping = {
@@ -39,8 +43,10 @@ function PersonalInformation({ data:content }) {
 					mapping[item.name]
 					|| content?.detail?.[item.name],
 				);
-			} else if (item?.name === 'date_of_birth_') {
-				setValue(item.name, new Date(content?.detail?.date_of_birth));
+			} else if (item?.name === 'date_of_birth'
+				|| item?.name === 'date_of_joining'
+				|| item?.name === 'updated_at' || item?.name === 'created_at') {
+				setValue(item.name, new Date(content?.detail?.[item?.name]));
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}
@@ -83,7 +89,7 @@ function PersonalInformation({ data:content }) {
 				type="button"
 				className={styles.button}
 				onClick={
-						handleSubmit(createEmployeeDetails)
+					handleSubmit(onSubmit)
 					}
 			>
 				Save

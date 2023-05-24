@@ -12,7 +12,7 @@ const content_mapping = [
 
 ];
 
-function NewHireInformation({ setInformationPage, id, data }) {
+function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -39,9 +39,9 @@ function NewHireInformation({ setInformationPage, id, data }) {
 							<Accordion
 								type="text"
 								title={item.title}
-								animate
+								animate={false}
 							>
-								<Component id={id} data={data} />
+								<Component id={id} data={data} getEmployeeDetails={getEmployeeDetails} />
 							</Accordion>
 						</div>
 					);

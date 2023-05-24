@@ -1,20 +1,34 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import FieldArray from '../../../../commons/FieldArray';
-import useCreateEmployeeDetails from '../../../../hooks/useCreateEmployeeDetails';
 import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
+import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
 function EmploymentHistory() {
-	const { handleSubmit, control } = useForm();
+	const { handleSubmit, control, setValue } = useForm();
 
 	const { data: info } = useGetEmployeeDetails({});
 
 	const id = info?.detail?.id;
-	const { createEmployeeDetails } = useCreateEmployeeDetails({ id });
+
+	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id });
+
+	const onSubmit = (values) => {
+		updateEmployeeDetails({ data: values, formType: 'employment_history' });
+	};
+
+	useEffect(() => {
+		setValue('employment_history', info?.detail?.employee_experience_details.map((item) => ({
+			...item,
+			started_at : new Date(item.started_at),
+			ended_at   : new Date(item.ended_at),
+		})));
+	}, [info, setValue]);
 
 	return (
 		<>
@@ -45,7 +59,7 @@ function EmploymentHistory() {
 				size="md"
 				type="button"
 				className={styles.button}
-				onClick={handleSubmit(createEmployeeDetails)}
+				onClick={handleSubmit(onSubmit)}
 			>
 				Save
 			</Button>
