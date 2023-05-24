@@ -100,7 +100,7 @@ function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
 
 	return (
 		<Modal size="xl" show={show} onClose={onClose} placement="center">
-			<Modal.Header title="Create JV Modal" />
+			<Modal.Header title="Create JV" />
 			<Modal.Body className={styles.modal_data}>
 				<div className={styles.flex}>
 					<div className={`${styles.selectcontainer} ${styles.marginright}`}>
