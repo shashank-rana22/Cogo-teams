@@ -20,6 +20,7 @@ const useGetControlledBooking = () => {
 				params: {
 					filters: {
 						primary_service : 'fcl_freight',
+						checkout_type   : 'controlled_checkout',
 						booking_status  : status,
 						sort_by         : status === 'approved' ? 'updated_at' : undefined,
 						q               : q || undefined,
