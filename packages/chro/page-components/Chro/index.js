@@ -1,10 +1,12 @@
-import StyledTable from "../StyledTable";
-import Header from "./Header";
+import StyledTable from '../StyledTable';
+
+import Header from './Header';
+
 function Chro() {
 	return (
 		<div>
 			<Header />
-            
+
 		</div>
 	);
 }
