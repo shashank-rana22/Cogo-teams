@@ -13,6 +13,7 @@ const useGetPlanList = () => {
 		url    : '/list_saas_plans',
 	}, { manual: true });
 
+	// getting cancel error by removing async awawit
 	const refetchPlanList = useCallback(async () => {
 		const { page = 1 } = globalFilters;
 		try {
