@@ -21,6 +21,8 @@ function UploadModal({ uploadModal, setUploadModal }) {
 		sourceFileUploadLoading,
 	} =	 useSourceFile({ modalData, uploader, setUploadModal });
 
+	const entityOptions = getEntityOptions() as any;
+
 	const onClickViewSampleFile = () => {
 		window.open(
 			SAMPLE_DOCUMENT_URL,
@@ -51,7 +53,7 @@ function UploadModal({ uploadModal, setUploadModal }) {
 							<Select
 								value={modalData.entity}
 								placeholder="Entity"
-								options={getEntityOptions()}
+								options={entityOptions}
 								onChange={(val:string) => { setModalData((prev) => ({ ...prev, entity: val })); }}
 								isClearable
 								style={{ width: '200px' }}

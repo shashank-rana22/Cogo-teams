@@ -29,7 +29,7 @@ export const monthData = {
 export const getEntityOptions = () => {
 	const filteredEntity = Object.entries(GLOBAL_CONSTANTS.cogoport_entities).filter(
 		// eslint-disable-next-line @typescript-eslint/no-unused-vars
-		([_, value]) => value.feature_supported.includes('cogo_books'),
+		([_, value]: any) => value.feature_supported.includes('cogo_books'),
 	);
 
 	const ENTITY_OPTIONS = (filteredEntity || []).map(([key]: any) => (

@@ -20,6 +20,8 @@ function SourceFile() {
 
 	const { ListData, refetch, ListDataLoading } = useList({ filters });
 
+	const entityOptions = getEntityOptions() as any;
+
 	useEffect(() => { refetch(); }, [refetch]);
 
 	const getCardData = (ListData || [{}]).map((item) => {
@@ -72,7 +74,7 @@ function SourceFile() {
 							value={filters?.entity}
 							onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 							placeholder="Entity"
-							options={getEntityOptions()}
+							options={entityOptions}
 							isClearable
 							style={{ width: '150px' }}
 						/>

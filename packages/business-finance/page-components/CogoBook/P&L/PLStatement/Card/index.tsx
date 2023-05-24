@@ -41,6 +41,8 @@ function Card({
 		refetchDelete,
 	} = useSaveCustomList({ setCustomModal });
 
+	const entityOptions = getEntityOptions() as any;
+
 	const content = () => (
 		<div className={styles.content_container}>
 			<div>Rows</div>
@@ -120,7 +122,7 @@ function Card({
 								value={filters?.entity}
 								onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 								placeholder="Entity"
-								options={getEntityOptions()}
+								options={entityOptions}
 								isClearable
 								style={{ width: '150px' }}
 							/>

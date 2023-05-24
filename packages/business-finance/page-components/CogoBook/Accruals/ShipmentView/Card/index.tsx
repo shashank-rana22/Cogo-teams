@@ -40,6 +40,8 @@ function Card({
 		setSelectFilter(false);
 	};
 
+	const entityOptions = getEntityOptions() as any;
+
 	useEffect(() => {
 		let count = 0;
 		Object.values(filters).forEach((e) => {
@@ -205,7 +207,7 @@ function Card({
 						value={filters?.entity}
 						onChange={(val:string) => { setFilters((prev) => ({ ...prev, entity: val })); }}
 						placeholder="Entity"
-						options={getEntityOptions()}
+						options={entityOptions}
 						isClearable
 						style={{ width: '100px' }}
 						size="sm"

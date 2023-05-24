@@ -38,6 +38,8 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 
 	const { page } = globalFilters || {};
 
+	const entityOptions = getEntityOptions() as any;
+
 	const subComponent = (itemData) => {
 		const {
 			sellQuotation = '', buyQuotation = '', quotationProfit = '',
@@ -160,7 +162,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 									setGlobalFilters((prev) => ({ ...prev, entity: val }));
 								}}
 								placeholder="Entity"
-								options={getEntityOptions()}
+								options={entityOptions}
 								isClearable
 								style={{ width: '100px' }}
 							/>
