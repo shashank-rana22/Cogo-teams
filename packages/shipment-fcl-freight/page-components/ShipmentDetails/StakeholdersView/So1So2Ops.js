@@ -23,7 +23,7 @@ import styles from './styles.module.css';
 
 const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
 
-function Superadmin({ get = {}, activeStakeholder = '' }) {
+function So1So2Ops({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
 
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
@@ -161,4 +161,4 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 	);
 }
 
-export default Superadmin;
+export default So1So2Ops;
