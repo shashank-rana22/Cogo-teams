@@ -1,5 +1,4 @@
-import React from 'react';
-import { Controller } from '@cogoport/forms'
+import { Controller } from '@cogoport/forms';
 
 import DepartureDateSelect from './DepartureDateSelect';
 

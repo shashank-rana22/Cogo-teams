@@ -31,7 +31,7 @@ export const renderValue = (label, detail) => {
 					theme="light"
 					content={(
 						<div style={{ fontSize: '10px' }}>
-							{(packages || []).map((item, i) => {
+							{(packages || []).map((item) => {
 								const values = item
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
@@ -71,22 +71,20 @@ export const renderValue = (label, detail) => {
 		</div>
 	);
 
-	const formatCertificate = (certificates) => {
-		return (
-			<div className={styles.certificate_container}>
-				{(certificates || []).map((item, i) => (
-					<a href={item} target="_blank" rel="noreferrer" key={item}>
-						Click to view certificate
-						&nbsp;
-						{i + 1}
+	const formatCertificate = (certificates) => (
+		<div className={styles.certificate_container}>
+			{(certificates || []).map((item) => (
+				<a href={item} target="_blank" rel="noreferrer" key={item}>
+					Click to view certificate
 					&nbsp;
-						<IcMOpenlink />
-						<br />
-					</a>
-				))}
-			</div>
-		);
-	};
+					{i + 1}
+				&nbsp;
+					<IcMOpenlink />
+					<br />
+				</a>
+			))}
+		</div>
+	);
 
 	switch (label) {
 		case 'container_size':
