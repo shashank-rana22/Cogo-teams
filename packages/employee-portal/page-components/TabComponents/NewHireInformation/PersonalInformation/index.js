@@ -14,7 +14,7 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function PersonalInformation({ data:content }) {
+function PersonalInformation({ data:content, getEmployeeDetails }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
 	const controlsvalue = controls({ content });
@@ -23,7 +23,7 @@ function PersonalInformation({ data:content }) {
 
 	const id = info?.detail?.id;
 
-	const { createEmployeeDetails } = useCreateEmployeeDetails({ id });
+	const { createEmployeeDetails } = useCreateEmployeeDetails({ id, getEmployeeDetails });
 
 	useEffect(() => {
 		const mapping = {

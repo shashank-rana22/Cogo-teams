@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-function useCreateEmployeeDetails({ id }) {
+function useCreateEmployeeDetails({ id, getEmployeeDetails }) {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/create_employee_detail',
 		method : 'POST',
@@ -20,6 +20,7 @@ function useCreateEmployeeDetails({ id }) {
 
 				},
 			});
+			getEmployeeDetails();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}

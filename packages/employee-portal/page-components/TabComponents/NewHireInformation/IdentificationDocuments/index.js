@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 import useCreateEmployeeDocument from '../../../../hooks/useCreateEmployeeDocument';
@@ -13,19 +14,37 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function IdentificationDocuments() {
-	const { handleSubmit, control, formState: { errors } } = useForm();
+function IdentificationDocuments({ data, getEmployeeDetails }) {
+	const { documents = [] } = data || {};
 
-	const component = ['aadhaar_card', 'driving_license', 'pan_card', 'passport'];
+	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
-	const { createEmployeeDocument } = useCreateEmployeeDocument({ component });
+	const { createEmployeeDocument } = useCreateEmployeeDocument({ documents, getEmployeeDetails });
 
 	const { data: info } = useGetEmployeeDetails({});
 
 	const id = info?.detail?.id;
 
+	const aadhaar_card = (documents || []).find((element) => (element.document_type === 'aadhaar_card'));
+	const pan_card = (documents || []).find((element) => (element.document_type === 'pan_card'));
+	const driving_license = (documents || []).find((element) => (element.document_type === 'driving_license'));
+	const passport = (documents || []).find((element) => (element.document_type === 'passport'));
+
+	const component = { aadhaar_card, driving_license, pan_card, passport };
+
+	useEffect(() => {
+		setValue('aadhaar_card', aadhaar_card?.document_url);
+		setValue('pan_card', pan_card?.document_url);
+		setValue('driving_license', driving_license?.document_url);
+		setValue('passport', passport?.document_url);
+		setValue('aadhaar_card_number', aadhaar_card?.document_number);
+		setValue('pan_card_number', pan_card?.document_number);
+		setValue('passport_number', passport?.document_number);
+		setValue('driving_license_number', driving_license?.document_number);
+	}, [documents, aadhaar_card, driving_license, pan_card, passport, setValue]);
+
 	const onSubmit = (values) => {
-		const doc = component.map((item) => {
+		const doc = Object.keys(component).map((item) => {
 			const docNumber = `${item}_number`;
 
 			if (!values?.[item]?.finalUrl || !values?.[docNumber]) {
@@ -34,6 +53,7 @@ function IdentificationDocuments() {
 
 			return {
 				document_type   : item,
+				id              : component[item]?.id,
 				document_number : values?.[docNumber] || undefined,
 				document_url    : values?.[item]?.finalUrl || undefined,
 				status          : 'active',
