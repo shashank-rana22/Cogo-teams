@@ -15,6 +15,12 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'harbour',
 		},
+		{
+			api          : 'create_employee_offer_letter',
+			access_type  : 'private',
+			service_name : 'harbour',
+		},
+
 	],
 	employee_portal: [
 		{

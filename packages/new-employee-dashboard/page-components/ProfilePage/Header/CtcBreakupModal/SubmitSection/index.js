@@ -1,16 +1,30 @@
 import React from "react";
 import { Button } from "@cogoport/components";
 import styles from "./styles.module.css";
+import usePostCreateEmployeeOfferLetter from "../../usePostCreateEmployeeOfferLetter";
 
-export default function SubmitSection({ setVisible = () => {}, formProps }) {
-  const onSubmit = () => {
-    console.log("okok");
+export default function SubmitSection({
+  initialQuestion = "",
+  ctcStructure = {},
+  setVisible = () => {},
+  formProps,
+  setShowCtcBreakupModal = () => {},
+  setInitialQuestion = () => {},
+}) {
+  const { handleSubmit, reset } = formProps;
+
+  const { loading, onFinalSubmit } = usePostCreateEmployeeOfferLetter();
+  const onSubmit = (values) => {
+    onFinalSubmit(values, ctcStructure, initialQuestion);
+
+    setVisible(false);
+    // setShowCtcBreakupModal(false);
+    setInitialQuestion("");
   };
   const onClose = () => {
     setVisible(false);
   };
 
-  const { handleSubmit } = formProps;
   return (
     <div className={styles.popover_inner}>
       <h4>Are you sure?</h4>
@@ -27,6 +41,7 @@ export default function SubmitSection({ setVisible = () => {}, formProps }) {
           className={styles.button_submit}
           themeType="primary"
           onClick={handleSubmit(onSubmit)}
+          loading={loading}
         >
           Yes
         </Button>
