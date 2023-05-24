@@ -6,7 +6,7 @@ import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogo
 import { startCase, format } from '@cogoport/utils';
 import { useContext } from 'react';
 
-import CargoDetails from '../../../CargoDetails';
+import CargoDetails from '../../../../commons/CargoDetails';
 
 import formatDeadlineDate from './formatDeadlineDate';
 import styles from './styles.module.css';
