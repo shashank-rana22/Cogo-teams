@@ -1,38 +1,38 @@
 .header {
-	padding-bottom: 10px;
-	font-weight: 800;
+  margin-bottom: 16px;
+  font-weight: 800;
 }
 
 .single_card {
-	position: relative;
-	display: flex;
-	align-items: center;
-	width: 240px;
-	padding: 20px 20px 20px 40px;
-	background-color: #fff;
-	border-radius: 8px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  width: 240px;
+  padding: 20px 20px 20px 40px;
+  background-color: #fff;
+  border-radius: 8px;
 }
 
 .icon_wrapper {
-	padding-right: 28px;
+  padding-right: 28px;
 }
 
 .tick_icon {
-	position: absolute;
-	top: 6px;
-	right: 8px;
+  position: absolute;
+  top: 6px;
+  right: 8px;
 }
 
 .text_wrapper {
-	font-size: 14px;
-	font-weight: 700;
+  font-size: 14px;
+  font-weight: 700;
 }
 
 .container {
-	margin-bottom: 38px;
+  margin-bottom: 38px;
 }
 
 .flex_wrapper {
-	display: flex;
-	align-items: center;
+  display: flex;
+  align-items: center;
 }
