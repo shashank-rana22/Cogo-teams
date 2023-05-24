@@ -13,6 +13,8 @@ export interface UploadFileInterface {
 	isEdit?:boolean
 	selectedItem?:object
 	itemData?:object
+	control?:object
+	watch?:Function
 }
 
 export type FormState = { errors : object };

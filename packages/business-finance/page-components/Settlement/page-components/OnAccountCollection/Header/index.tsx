@@ -3,11 +3,12 @@ import { useState } from 'react';
 
 import { ModalInterface } from '../interface';
 
+import DownloadFileFormat from './DownloadFileFormat';
 import ManualEntry from './ManualEntry';
 import styles from './styles.module.css';
 import UploadFile from './UploadFile';
 
-function Header({ refetch, loading }) {
+function Header({ refetch, loading, control, watch }) {
 	const [showModal, setShowModal] = useState<ModalInterface>({
 		upload_file     : false,
 		manual_entry    : false,
@@ -78,6 +79,14 @@ function Header({ refetch, loading }) {
 
 				</Button>
 			</div>
+			{showModal.download_format && (
+				<DownloadFileFormat
+					showModal={showModal}
+					setShowModal={setShowModal}
+					control={control}
+					watch={watch}
+				/>
+			)}
 		</div>
 	);
 }

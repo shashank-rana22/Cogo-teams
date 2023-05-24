@@ -3,7 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 interface GlobalInterface {
 	page?:number
@@ -22,13 +22,12 @@ const MAX_FILTERS_LENGTH = 3;
 
 const useAccountCollection = ({ sort = {}, entityType, currencyType }) => {
 	const [globalFilters, setGlobalFilters] = useState<GlobalInterface>({
-		page      : 1,
-		pageLimit : 10,
-		accMode   : 'AR',
+		page    : 1,
+		accMode : 'AR',
 	});
 	const { query, debounceQuery } = useDebounceQuery();
 
-	const { search, date, ...rest } = globalFilters;
+	const { search, date, paymentDocumentStatus, docType, accMode, page } = globalFilters;
 
 	const [{ data, loading }, listApiTrigger] = useRequestBf(
 		{
@@ -41,29 +40,33 @@ const useAccountCollection = ({ sort = {}, entityType, currencyType }) => {
 
 	const api = listApiTrigger;
 
-	const refetch = async () => {
+	const refetch = useCallback(async () => {
 		try {
 			await api({
 				params: {
-					...(rest || {}),
+					docType               : docType || undefined,
+					paymentDocumentStatus : paymentDocumentStatus || undefined,
+					page                  : page || undefined,
+					accMode               : accMode || undefined,
+					pageLimit             : 10,
 					startDate:
-						date
-						&& formatDate({
+					date?.startDate
+						? formatDate({
 							date       : date?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
 							formatType : 'dateTime',
 							separator  : ' ',
-						}),
+						}) : undefined,
 					endDate:
-						date
-						&& formatDate({
+					date?.endDate
+						? formatDate({
 							date       : date?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
 							formatType : 'dateTime',
 							separator  : ' ',
-						}),
+						}) : undefined,
 					query        : query || undefined,
 					entityType   : entityType || undefined,
 					currencyType : currencyType || undefined,
@@ -73,7 +76,8 @@ const useAccountCollection = ({ sort = {}, entityType, currencyType }) => {
 		} catch (error) {
 			Toast.error('Someting went wrong, we are working on it!');
 		}
-	};
+	}, [accMode, api, currencyType, date?.endDate,
+		date?.startDate, docType, entityType, page, paymentDocumentStatus, query, sort]);
 	const clearFilters = () => {
 		if (Object.keys(globalFilters).length > MAX_FILTERS_LENGTH) {
 			setGlobalFilters({
@@ -88,7 +92,7 @@ const useAccountCollection = ({ sort = {}, entityType, currencyType }) => {
 
 	useEffect(() => {
 		refetch();
-	}, [JSON.stringify(rest), query, date, sort, entityType, currencyType]);
+	}, [query, date, sort, entityType, currencyType, paymentDocumentStatus, docType, refetch]);
 
 	useEffect(() => {
 		debounceQuery(search);

@@ -14,7 +14,7 @@ function Settlement() {
 	const { push } = useRouter();
 
 	const handleChange = (tab: any) => {
-		if (tab === 'JournalVoucher') {
+		if (tab === 'JournalVoucher' && tab === 'on-account-collection') {
 			setActiveTab(tab);
 			push(
 				'/business-finance/settlement/[active_tab]',

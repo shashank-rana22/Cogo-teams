@@ -5,6 +5,7 @@ import { useState } from 'react';
 import useCollectionActions from '../../../../../../../hooks/useCollectionActions';
 import ManualEntry from '../../../../../Header/ManualEntry';
 
+import ModalFinalPost from './ModalFinalPost';
 import styles from './styles.module.css';
 
 interface PermissionInterface {
@@ -257,14 +258,26 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 					onClose={() => {
 						setModalFinalPost(false);
 					}}
+					size="xl"
 				>
-					{/* <ModalFinalPost
+					<Modal.Header title="Final Post To SAGE" />
+					<ModalFinalPost
 						getFinalDetails={getFinalDetails}
-						finalPostFromSageLoading={finalPostFromSageLoading}
-						handleFinalPostFromSage={handleFinalPostFromSage}
-						platformPaymentInfo={platformPaymentInfo}
-						paymentDocumentStatus={paymentDocumentStatus}
-					/> */}
+					/>
+					<Modal.Footer>
+						{paymentDocumentStatus !== 'FINAL_POSTED' ? (
+
+							<Button
+								disabled={finalPostFromSageLoading}
+								onClick={handleFinalPostFromSage}
+								type="button"
+							>
+								Post Payment To SAGE
+							</Button>
+
+						) : null}
+
+					</Modal.Footer>
 				</Modal>
 			)}
 

@@ -1,5 +1,5 @@
 import { Button, Input, Popover, Tooltip } from '@cogoport/components';
-import { AsyncSelectController, useForm } from '@cogoport/forms';
+import { AsyncSelectController, SelectController, useForm } from '@cogoport/forms';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { IcMRefresh, IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
@@ -18,7 +18,7 @@ const searchPlaceholder = 'Search by Customer Name / UTR No /Doc. Value';
 
 function OnAccountCollection() {
 	const [sort, setSort] = useState({});
-	const { control, watch } = useForm();
+	const { control, watch, formState: { errors = {} } } = useForm();
 	const entityType = watch('entityCode');
 	const currencyType = watch('currency');
 	const {
@@ -39,12 +39,19 @@ function OnAccountCollection() {
 
 	const content = () => (
 		<div className={styles.content_filter}>
-			<AsyncSelectController
+			<SelectController
 				control={control}
 				name="currency"
 				options={getCurrencyOptions()}
 				placeholder="Select Currency"
+				rules={{ required: true }}
+				isClearable
 			/>
+			{errors?.currency ? (
+				<div className={styles.errors}>
+					* Required
+				</div>
+			) : null}
 			<Filter
 				controls={MORE_FILTERS_AMOUNT_COLLECTION}
 				filters={globalFilters}
@@ -55,7 +62,7 @@ function OnAccountCollection() {
 
 	return (
 		<div>
-			<Header refetch={clearFilters} loading={loading} />
+			<Header refetch={clearFilters} loading={loading} control={control} watch={watch} />
 
 			<div className={styles.container}>
 				<div className={styles.filter_data}>
@@ -64,8 +71,18 @@ function OnAccountCollection() {
 							control={control}
 							name="entityCode"
 							asyncKey="list_cogo_entity"
-							placeholder="Entity"
+							renderLabel={(item) => (`${item?.entity_code} - ${item?.business_name}`)}
+							placeholder="Select Entity"
+							labelKey="entity_code"
+							initialCall
+							rules={{ required: true }}
+							isClearable
 						/>
+						{errors?.entityCode ? (
+							<div className={styles.errors}>
+								* Required
+							</div>
+						) : null}
 						<Filter
 							controls={amountCollectionFilters({
 								accMode,
