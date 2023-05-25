@@ -420,16 +420,26 @@ function asyncCodeMaster() {
 
 function asyncListOrgTradeParties() {
 	return {
-		labelKey    : 'legal_business_name',
-		valueKey    : 'id',
-		endpoint    : 'list_organization_trade_party_details',
-		initialCall : true,
-		params      : {
-			sage_organization_id_required : true,
-			filters                       : {
+		labelKey: 'legal_business_name',
+		valueKey: 'id',
+		endpoint: 'list_organization_trade_party_details',
+		initialCall: true,
+		params: {
+			sage_organization_id_required: true,
+			filters: {
 				status: 'active',
 			},
 		},
+	}
+
+function asyncAllocationRequestRejectionType() {
+	return {
+		labelKey     : 'reason',
+		valueKey     : 'reason',
+		endpoint     : '/request_rejection_reasons',
+		authkey      : 'get_allocation_request_rejection_reasons',
+		microService : 'allocation',
+		initialCall  : true,
 	};
 }
 
@@ -468,4 +478,5 @@ export {
 	asyncListOrgTradeParties,
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
+	asyncAllocationRequestRejectionType,
 };

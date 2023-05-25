@@ -29,6 +29,7 @@ import {
 	asyncCodeMaster,
 	asyncListOrgTradeParties,
 	asyncFieldsPartnerUsersIds,
+	asyncAllocationRequestRejectionType,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -76,6 +77,7 @@ const keyAsyncFieldsParamsMapping = {
 	jv_code_master                : asyncCodeMaster,
 	list_trade_parties            : asyncListOrgTradeParties,
 	partner_users_ids             : asyncFieldsPartnerUsersIds,
+	allocation_rejection_type     : asyncAllocationRequestRejectionType,
 };
 
 function AsyncSelect(props) {

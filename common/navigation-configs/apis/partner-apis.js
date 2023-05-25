@@ -9572,6 +9572,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'list_sms_sender_mappings',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	cogopoints: [
 		{
