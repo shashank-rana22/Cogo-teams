@@ -10,6 +10,7 @@ import {
 	getDocs,
 	collection,
 	limit,
+	getDoc,
 } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -19,7 +20,11 @@ const updateClaimKey = async ({ id, channel_type, firestore, value }) => {
 		firestore,
 		`${FIRESTORE_PATH[channel_type]}/${id}`,
 	);
-	await updateDoc(userDocument, { can_claim_chat: value });
+	const userDocData = await getDoc(userDocument);
+	const { session_type = '' } = userDocData.data() || {};
+	if (session_type === 'bot') {
+		await updateDoc(userDocument, { can_claim_chat: value });
+	}
 };
 
 const toggleCarouselState = async ({ firestore, setShowCarousel }) => {
@@ -55,6 +60,8 @@ function useClaimChat({ userId, setShowCarousel, firestore }) {
 	const claimChat = async (payload) => {
 		const { user_id, lead_user_id, organization_id, mobile_no, sender = null, channel_type, id } = payload || {};
 		try {
+			setShowCarousel(false);
+			await updateClaimKey({ id, channel_type, firestore, value: false });
 			await trigger({
 				data: {
 					channel                 : channel_type,
@@ -69,14 +76,13 @@ function useClaimChat({ userId, setShowCarousel, firestore }) {
 				},
 			});
 			Toast.success('Claim successful! The chat has been assigned to you.');
-			setShowCarousel(false);
-			await updateClaimKey({ id, channel_type, firestore, value: false });
 			const timeoutValue = await getTimeoutConstant(firestore);
 			setTimeout(() => {
 				toggleCarouselState({ firestore, setShowCarousel });
 			}, (timeoutValue || 10000));
 		} catch (error) {
-			Toast.error('something went wrong.');
+			Toast.error('something went wrong');
+			await updateClaimKey({ id, channel_type, firestore, value: true });
 			toggleCarouselState({ firestore, setShowCarousel });
 		}
 	};
