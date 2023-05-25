@@ -30,6 +30,7 @@ function useCreateEmployeeBankDetails({ bank_details }) {
 					performed_by_type   : '65cv',
 				},
 			});
+			Toast.success('Bank Details have been saved successfully!');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}

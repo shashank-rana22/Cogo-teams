@@ -1,29 +1,38 @@
+import { Button } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
+
 import PreviewDocumet from '../../../../common/PreviewDocumet';
 
 import styles from './styles.module.css';
 
-function IdentificationDocuments() {
+function IdentificationDocuments({ profileData }) {
+	const { documents } = profileData || {};
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.card_wrapper}>
-				<div className={styles.header}>Adhar Card</div>
-				<PreviewDocumet document_header="Adhar Card" preview='true'/>
-			</div>
+			{
+				(documents || []).map((doc) => {
+					const { document_type, document_url, id } = doc || {};
+					return (
+						<div className={styles.card_wrapper} key={id}>
+							<div className={styles.header}>{startCase(document_type)}</div>
+							<PreviewDocumet document_header={startCase(document_type)} document_url={document_url} preview='true/>
+							<div className={styles.button_container}>
+								<Button>
+									Reject
+								</Button>
+								<div className={styles.approve_btn}>
+									<Button>
+										Approve
+									</Button>
+								</div>
 
-			<div className={styles.card_wrapper}>
-				<div className={styles.header}>Pan Card</div>
-				<PreviewDocumet document_header="Pan Card" preview='true'/>
-			</div>
+							</div>
+						</div>
+					);
+				})
+			}
 
-			<div className={styles.card_wrapper}>
-				<div className={styles.header}>Passport</div>
-				<PreviewDocumet document_header="Passport" preview='true' />
-			</div>
-
-			<div className={styles.card_wrapper}>
-				<div className={styles.header}>Driving Licence</div>
-				<PreviewDocumet document_header="driving licence" preview='true'/>
-			</div>
 		</div>
 
 	);

@@ -22,8 +22,8 @@ function PersonalInformation({ profileData }) {
 	${emergency_contact_details?.[0]?.mobile_number}`;
 
 	const formatdate = ({ date }) => formatDate({
-		date       : date?.receivedDateTime,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+		date,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
 		formatType : 'date',
 	});
 

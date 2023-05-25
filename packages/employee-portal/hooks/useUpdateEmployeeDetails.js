@@ -6,7 +6,7 @@ function useUpdateEmployeeDetails({ id, getEmployeeDetails }) {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/update_employee_detail',
 		method : 'POST',
-	}, { manual: false });
+	}, { manual: true });
 
 	const updateEmployeeDetails = async ({ data, formType }) => {
 		// const {
@@ -37,8 +37,8 @@ function useUpdateEmployeeDetails({ id, getEmployeeDetails }) {
 				hiring_manager_email      : data?.hiring_manager_email,
 				cogoport_email            : data?.cogoport_email,
 				emergency_contact_details : [{
-					mobile_number       : data?.emergency_num?.number,
-					mobile_country_code : data?.emergency_num?.country_code,
+					mobile_number       : data?.emergency_contact_details?.number,
+					mobile_country_code : data?.emergency_contact_details?.country_code,
 				}],
 			};
 		} else if (formType === 'educational_qualification') {
@@ -71,6 +71,7 @@ function useUpdateEmployeeDetails({ id, getEmployeeDetails }) {
 				},
 			});
 			getEmployeeDetails();
+			Toast.success('Details have been saved successfully!');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}

@@ -31,6 +31,10 @@ function EducationalQualification() {
 
 	return (
 		<div className={styles.whole_container}>
+			<div className={styles.introductory_text}>
+				Tell us about your educational history, starting with your highest level of education and including any
+				ongoing studies.
+			</div>
 			<div className={styles.container}>
 				{controls?.map((controlItem) => {
 					const { type, name: controlName } = controlItem || {};

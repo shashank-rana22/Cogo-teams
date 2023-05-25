@@ -13,7 +13,7 @@
 
 .control_container {
 	display: flex;
-	flex: 50%;
+	flex: 25%;
 	flex-direction: column;
 	flex-wrap: wrap;
 	margin-top: 20px;
