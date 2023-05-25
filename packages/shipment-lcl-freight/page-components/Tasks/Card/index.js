@@ -15,7 +15,6 @@ function Card({
 
 	return (
 		<div className={styles.container}>
-
 			<TaskDetails task={task} isTaskOpen={isTaskOpen} />
 
 			<div className={styles.action}>

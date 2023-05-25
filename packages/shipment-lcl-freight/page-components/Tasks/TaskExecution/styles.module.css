@@ -10,9 +10,10 @@
 .button_container {
 	display: flex;
 	justify-content: flex-end;
+	padding-bottom: 8px;
 
 	:global {
-		.ui_button_container:first-child {
+		.ui_button_container {
 			margin-right: 8px;
 		}
 	}

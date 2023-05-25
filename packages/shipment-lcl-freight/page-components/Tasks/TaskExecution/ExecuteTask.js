@@ -3,6 +3,7 @@ import { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 // import useTaskRpa from '../../../hooks/useTaskRpa';
+// import useTaskRpa from '../../../hooks/useTaskRpa';
 
 import {
 	UploadCargoArrival,
@@ -17,8 +18,7 @@ function ExecuteTask({
 	onCancel = () => {},
 	taskListRefetch = () => {},
 	selectedMail = [],
-	// setSelectedMail = () => {}
-	refetch = () => {},
+	// setSelectedMail = () => {},
 	services = [],
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
@@ -75,7 +75,7 @@ function ExecuteTask({
 					...(primary_service || {}),
 					importer_exporter_id: shipment_data?.importer_exporter?.id,
 				}}
-				refetch={refetch}
+				refetch={taskListRefetch}
 				clearTask={onCancel}
 				services={services}
 			/>

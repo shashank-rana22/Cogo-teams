@@ -18,15 +18,14 @@ function TradeDocuments({
 	searchDocsVal,
 	handleDocClick = () => {},
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
-	const { importer_exporter_id = '', id = '' } = shipment_data;
+	const { importer_exporter_id = '' } = shipment_data;
 	const { data, loading } = useListTradeDocuments({
 		defaultFilters: {
 			q               : searchDocsVal || undefined,
 			status          : 'accepted',
 			organization_id : importer_exporter_id,
-			shipment_id     : id,
 		},
 	});
 
@@ -40,52 +39,53 @@ function TradeDocuments({
 			return <EmptyState />;
 		}
 
-		return (
-			<>
-				{(data?.list || []).map((doc) => (
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.single_doc}
-						onClick={() => handleDocClick(doc)}
-					>
+		return (data?.list || []).map((doc) => (
+			<div
+				role="button"
+				tabIndex={0}
+				className={styles.single_doc}
+				onClick={() => handleDocClick(doc)}
+				key={doc?.id}
+			>
 
-						{doc.type === 'pdf' ? (
-							<IcMPdf style={{ fontSize: '32px', color: '#221F20' }} />
-						) : (
-							<IcMImage style={{ fontSize: '32px', color: '#221F20' }} />
-						)}
-						<div className={styles.main}>
-							<div className={styles.heading} style={{ fontSize: '14px' }}>
-								{startCase(doc.document_type)}
-							</div>
-							<div className={styles.upload_info}>
-								{`Uploaded On ${format(
-									doc?.updated_at,
-									'dd MMM yyyy',
-								)}`}
-							</div>
-						</div>
-						<div className={styles.button_wrapper}>
-							<Button
-								style={{ color: '#F68B21' }}
-								themeType="link"
-								onClick={(e) => handleView(e, doc?.image_url)}
-							>
-								View
-							</Button>
-							<Button
-								style={{ color: '#F68B21' }}
-								themeType="link"
-								onClick={(e) => handleSave(e, doc?.image_url)}
-							>
-								Download
-							</Button>
-						</div>
+				{doc.type === 'pdf' ? (
+					<IcMPdf style={{ fontSize: '32px', color: '#221F20' }} />
+				) : (
+					<IcMImage style={{ fontSize: '32px', color: '#221F20' }} />
+				)}
+
+				<div className={styles.main}>
+					<div className={styles.heading} style={{ fontSize: '14px' }}>
+						{startCase(doc.document_type)}
 					</div>
-				))}
-			</>
-		);
+
+					<div className={styles.upload_info}>
+						{`Uploaded On ${format(
+							doc?.updated_at,
+							'dd MMM yyyy',
+						)}`}
+					</div>
+				</div>
+
+				<div className={styles.button_wrapper}>
+					<Button
+						style={{ color: '#F68B21' }}
+						themeType="link"
+						onClick={(e) => handleView(e, doc?.image_url)}
+					>
+						View
+					</Button>
+
+					<Button
+						style={{ color: '#F68B21' }}
+						themeType="link"
+						onClick={(e) => handleSave(e, doc?.image_url)}
+					>
+						Download
+					</Button>
+				</div>
+			</div>
+		));
 	};
 
 	return (

@@ -40,7 +40,7 @@ function ExecuteStep({
 	const formValues = watch();
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.task_container}>
 			<div className={styles.form}>
 				<Layout
 					fields={fields}

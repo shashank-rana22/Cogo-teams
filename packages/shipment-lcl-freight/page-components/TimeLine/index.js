@@ -1,6 +1,7 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useState, useContext, useEffect } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import useGetServiceTimeline from '../../hooks/useGetTimeLine';
 
@@ -46,7 +47,7 @@ function Timeline() {
 		return (
 			<div className={styles.container}>
 				<div className={styles.list_container}>
-					<Loader />
+					<Loader key={uuid()} />
 				</div>
 			</div>
 		);
@@ -62,7 +63,7 @@ function Timeline() {
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
 							isLast={totalItems === index + 1}
-							key={timelineItem.milestone}
+							key={timelineItem.completed_on || timelineItem.milestone}
 						/>
 					);
 				})}

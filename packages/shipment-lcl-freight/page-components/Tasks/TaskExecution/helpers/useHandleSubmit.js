@@ -120,6 +120,8 @@ function useHandleSubmit({
 					} else {
 						Toast.success('Task completed Successfully !');
 					}
+
+					refetch();
 					onCancel();
 				}
 

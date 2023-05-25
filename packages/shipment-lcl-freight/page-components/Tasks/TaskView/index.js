@@ -5,6 +5,7 @@ import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import useTask from '../../../hooks/useTask';
 import Card from '../Card';
 import Header from '../Header';
+import LoadingState from '../LoadingState';
 import TaskExecution from '../TaskExecution';
 
 import styles from './styles.module.css';
@@ -38,50 +39,51 @@ function TaskView() {
 				setShowMyTasks={setShowMyTasks}
 			/>
 
-			{tasksList?.length === 0 ? <EmptyState width={500} height={300} />
-				: (
-					<>
-						{selectedTaskId ? (
-							<Button
-								className={styles.see_all_tasks}
-								onClick={() => setSelectedTaskId(null)}
-								themeType="link"
-								size="md"
-							>
-								<IcMArrowBack width={50} />
-								<div style={{ width: 200 }}>See All Tasks</div>
-							</Button>
-						) : null}
+			{loading ? <LoadingState /> : null}
 
-						{!selectedTaskId ? (tasksList || []).map((task) => (
+			{tasksList?.length === 0 && !loading ? <EmptyState /> : null}
+
+			{tasksList?.length > 0 && !loading ? (
+				<>
+					{selectedTaskId ? (
+						<Button
+							className={styles.see_all_tasks}
+							onClick={() => setSelectedTaskId(null)}
+							themeType="link"
+							size="md"
+						>
+							<IcMArrowBack width={50} />
+
+							<div style={{ width: 200 }}>See All Tasks</div>
+						</Button>
+					) : (tasksList || []).map((task) => (
+						<Card
+							key={task?.id}
+							task={task}
+							handleClick={handleClick}
+						/>
+					)) }
+
+					{selectedTaskId ? (
+						<>
 							<Card
-								key={task?.id}
-								task={task}
+								task={tasksList?.find((task) => task.id === selectedTaskId)}
 								handleClick={handleClick}
+								isTaskOpen
 								loading={loading}
 							/>
-						)) : null}
 
-						{selectedTaskId ? (
-							<>
-								<Card
-									task={tasksList?.find((task) => task.id === selectedTaskId)}
-									handleClick={handleClick}
-									isTaskOpen
-									loading={loading}
-								/>
-
-								<TaskExecution
-									task={tasksList?.find((task) => task.id === selectedTaskId)}
-									onCancel={() => setSelectedTaskId(null)}
-									taskListRefetch={taskListRefetch}
-									selectedMail={selectedMail}
-									setSelectedMail={setSelectedMail}
-								/>
-							</>
-						) : null }
-					</>
-				) }
+							<TaskExecution
+								task={tasksList?.find((task) => task.id === selectedTaskId)}
+								onCancel={() => setSelectedTaskId(null)}
+								taskListRefetch={taskListRefetch}
+								selectedMail={selectedMail}
+								setSelectedMail={setSelectedMail}
+							/>
+						</>
+					) : null }
+				</>
+			) : null}
 		</div>
 	);
 }

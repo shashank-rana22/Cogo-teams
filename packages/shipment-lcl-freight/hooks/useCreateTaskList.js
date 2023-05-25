@@ -5,6 +5,7 @@ import getShipmentTradeType from '../helpers/getShipmentTradeType';
 
 import useGetShipmentProcess from './useGetShipmentProcess';
 import useListShipmentDocuments from './useListShipmentDocuments';
+import useListShipmentOrganizations from './useListShipmentOrganizations';
 import useListShipmentPendingTasks from './useListShipmentPendingTasks';
 
 const TASKS = ['upload_document', 'approve_document', 'amend_document'];
@@ -17,6 +18,7 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 	const { id:shipment_id = '', shipment_type = '' } = shipment_data || {};
 
 	const { data:processData, loading:processLoading } = useGetShipmentProcess({});
+	const { data:orgData } = useListShipmentOrganizations({ defaultParams: { shipment_id } });
 
 	const {
 		data:documentData,
@@ -127,13 +129,7 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 		taskConfigsForAllShipmentTasks,
 	]);
 
-	const documentOrg = {};
-
-	documentData?.list?.forEach((i) => {
-		if (i?.uploaded_by_org) { documentOrg[i.uploaded_by_org.business_name] = i.uploaded_by_org.id; }
-	});
-
-	const sourceOptions = Object.keys(documentOrg).map((key) => ({ label: key, value: documentOrg[key] }));
+	const sourceOptions = orgData?.list?.map((item) => ({ label: item?.business_name, value: item?.id })) || [];
 
 	return {
 		filters,

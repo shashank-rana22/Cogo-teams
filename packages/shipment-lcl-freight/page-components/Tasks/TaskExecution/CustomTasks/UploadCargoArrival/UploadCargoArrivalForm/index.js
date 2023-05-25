@@ -1,6 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
 import { TradeDocTemplate } from '@cogoport/ocean-modules';
-import { forwardRef } from 'react';
 
 import useUploadCargoArrivalForm from '../../../../../../hooks/useUploadCargoArrivalForm';
 
@@ -111,4 +110,4 @@ function UploadCargoArrivalForm({
 	);
 }
 
-export default forwardRef(UploadCargoArrivalForm);
+export default UploadCargoArrivalForm;
