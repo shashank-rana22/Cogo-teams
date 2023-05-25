@@ -1,6 +1,8 @@
+import ModuleNavigation from './components/ModuleNavigation';
+
 function CourseConsumption() {
 	return (
-		<h1>hello this is madhesh</h1>
+		<ModuleNavigation />
 	);
 }
 
