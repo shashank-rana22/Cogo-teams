@@ -1,9 +1,10 @@
 import { cl, Tooltip, Checkbox } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCPin, IcMPin, IcMShip } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../../common/UserAvatar';
-import { PLATFORM_MAPPING, ECLAMATION_SVG } from '../../../../../constants';
+import { PLATFORM_MAPPING } from '../../../../../constants';
 import updatePin from '../../../../../helpers/updatePin';
 import dateTimeConverter from '../../../../../utils/dateTimeConverter';
 import formatLastMessage from '../../../../../utils/formatLastMessage';
@@ -142,7 +143,7 @@ function MessageCardData({
 				{isImportant && (
 					<div className={styles.important_icon}>
 						<img
-							src={ECLAMATION_SVG}
+							src={GLOBAL_CONSTANTS.image_url.eclamation_svg}
 							alt="important"
 							width="10px"
 						/>

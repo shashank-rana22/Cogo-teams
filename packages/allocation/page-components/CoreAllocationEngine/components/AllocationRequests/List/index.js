@@ -2,6 +2,8 @@ import { Table, Button, Modal, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../common/EmptyState';
+import Form from '../../../../../common/Form';
+import controls from '../../../configurations/get-reject-request-controls';
 import STATUS_MAPPING from '../../../constants/requests-status-mapping';
 import useUpdateRequestStatus from '../../../hooks/useUpdateAllocationRequest';
 
@@ -17,12 +19,16 @@ function List(props) {
 		requestStatusItem,
 		setRequestStatusItem,
 	} = props;
+
 	const { list, page = 0, page_limit: pageLimit = 0, total_count = 0 } = data || {};
 
 	const {
 		onStatusUpdate,
 		loadingUpdate,
+		formProps,
 	} = useUpdateRequestStatus({ fetchList, setRequestStatusItem, requestStatusItem });
+
+	const { handleSubmit } = formProps;
 
 	if (isEmpty(list) && !loading) {
 		return (
@@ -73,30 +79,43 @@ function List(props) {
 					onOuterClick={onCloseModal}
 					placement="top"
 				>
+
 					<div>
 						<Modal.Header
 							title="Update Status"
 						/>
 
 						<Modal.Body>
-							Are you sure you want to
-							{' '}
-							{STATUS_MAPPING[requestStatusItem.status].label || 'update'}
-							{' '}
-							this request ?
+							{requestStatusItem.status === 'rejected' ? (
+
+								<div className={styles.rejection_container}>
+									Please provide rejection details
+									<Form formProps={formProps} controls={controls} />
+								</div>
+							) : (
+								<div>
+									Are you sure you want to
+									{' '}
+									{STATUS_MAPPING[requestStatusItem.status].label || 'update'}
+									{' '}
+									this request ?
+								</div>
+							)}
+
 						</Modal.Body>
 
 						<Modal.Footer>
 							<Button
 								size="md"
 								themeType="primary"
-								onClick={onStatusUpdate}
+								onClick={handleSubmit(onStatusUpdate)}
 								loading={loadingUpdate}
 							>
 								Yes, I do
 							</Button>
 						</Modal.Footer>
 					</div>
+
 				</Modal>
 			) : null}
 		</div>
