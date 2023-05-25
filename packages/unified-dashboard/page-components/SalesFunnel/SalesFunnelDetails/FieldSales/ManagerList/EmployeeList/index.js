@@ -9,7 +9,7 @@ function EmployeeList({ data = {}, currency, filters }) {
 				<Employee
 					val={{
 						user_name  : 'Self',
-						manager_id : data.manager_id,
+						agent_id  : data.agent_id,
 						...data.self,
 					}}
 					currency={currency}
