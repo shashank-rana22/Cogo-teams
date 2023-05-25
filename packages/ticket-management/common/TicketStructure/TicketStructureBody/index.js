@@ -6,7 +6,12 @@ import { actionButtonKeys, getTicketStatus } from '../../../constants';
 
 import styles from './styles.module.css';
 
-function TicketStructureBody({ data }) {
+function TicketStructureBody({
+	data,
+	// updateTicketActivity = () => {},
+	setModalData = () => {},
+	// listType,
+}) {
 	const {
 		ID = '',
 		Status = '',
@@ -20,27 +25,27 @@ function TicketStructureBody({ data }) {
 	const { color: textColor, label } =	statusLabelTransformation[getTicketStatus(Status)] || {};
 	// const handleTicketClick = (e) => {
 	// 	e.stopPropagation();
-	// 	updateTicketActivity(actionButton[Status]?.name, ID);
+	// 	updateTicketActivity(actionButtonKeys[Status]?.name, ID);
 	// };
 
-	// const handleTicket = () => {
-	// 	if (listType === 'create') {
-	// 		const currentUrl = window.location.href;
-	// 		const newUrl = `${currentUrl
-	// 			.split('?')?.[0]
-	// 			.replace(/\/$/, '')}?ticketId=${ID}`;
-	// 		window.open(newUrl, '_blank', 'noreferrer');
-	// 	}
-	// 	setModalData({
-	// 		type     : 'ticket_details',
-	// 		ticketId : ID,
-	// 	});
-	// };
+	const handleTicket = () => {
+		// if (listType === 'create') {
+		const currentUrl = window.location.href;
+		const newUrl = `${currentUrl
+			.split('?')?.[0]
+			.replace(/\/$/, '')}?ticketId=${ID}`;
+		window.open(newUrl, '_blank', 'noreferrer');
+		// }
+		setModalData({
+			type     : 'ticket_details',
+			ticketId : ID,
+		});
+	};
 
 	return (
 		<div
-			// onClick={handleTicket}
-			// role="presentation"
+			onClick={handleTicket}
+			role="presentation"
 			className={styles.ticket_container}
 		>
 			<div className={styles.subcontainer_one}>
@@ -51,7 +56,7 @@ function TicketStructureBody({ data }) {
 					</div>
 					{/* {listType !== 'create' && ( */}
 					<div
-						role="presentation"
+						// role="presentation"
 						className={styles.reopen_resolve}
 						// onClick={(e) => handleTicketClick(e)}
 

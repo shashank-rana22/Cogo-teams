@@ -24,12 +24,14 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 		try {
 			const response = await trigger({
 				params: {
-					Status  : status,
-					UserID  : profile?.id,
+					Status     : status,
+					UserID     : profile?.id,
 					// size    : listType === 'create' ? 2 : 10,
-					size    : 10,
-					page    : pageIndex - 1,
-					QFilter : searchQuery || undefined,
+					// PerformedByID : profile?.id,
+					DisplayAll : true,
+					size       : 10,
+					page       : pageIndex - 1,
+					QFilter    : searchQuery || undefined,
 				},
 			});
 
@@ -39,7 +41,11 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 					if (prev) {
 						return {
 							...prev,
-							[key]: [...prev[key], ...response.data.items],
+							[key]: {
+								list: [...(prev[key].list),
+									...response.data.items],
+								total: response.data.total,
+							},
 						};
 					}
 					return {};
@@ -59,7 +65,7 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 	useEffect(() => {
 		setTicketList((prev) => ({
 			...prev,
-			[key]: [],
+			[key]: { list: [], total: 0 },
 		}));
 		fetchTickets(1);
 	}, [fetchTickets, key, searchQuery, setTicketList]);
