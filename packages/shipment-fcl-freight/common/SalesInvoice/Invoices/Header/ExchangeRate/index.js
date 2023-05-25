@@ -1,9 +1,9 @@
-import { Modal, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import CurrencyExchangeForm from './ExchangeRateForm/CurrencyExchangeForm';
+import Helper from './helper';
 import styles from './styles.module.css';
-// import useGetShipmentQuotation from './useGetShipmentQuotation';
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 
@@ -13,16 +13,18 @@ function ExchangeRate({
 	refetch = () => {},
 	invoiceData = {},
 	disableAction = false,
+	currencyConversionData = {},
+	quotationData = {},
 }) {
 	const [open, setOpen] = useState(false);
 
 	const invoiceCurrency = invoiceData?.invoicing_parties?.[0]?.invoice_currency;
 
-	// const {
-	// 	rateAddtionApi,
-	// 	differentCurrenciesHash,
-	// 	availableCurrencyConversions,
-	// } = useGetShipmentQuotation({ shipment_id, invoiceCurrency });
+	const {
+		rateAddtionApi,
+		differentCurrenciesHash,
+		availableCurrencyConversions,
+	} = Helper({ quotationData, currencyConversionData, invoiceCurrency });
 
 	// if (Object.keys(differentCurrenciesHash || {}).length === 0) {
 	// 	return null;
@@ -46,11 +48,11 @@ function ExchangeRate({
 			{open ? (
 				<CurrencyExchangeForm
 					invoiceCurrency={invoiceCurrency}
-						// differentCurrenciesHash={differentCurrenciesHash}
-						// rateAddtionApi={rateAddtionApi}
+					differentCurrenciesHash={differentCurrenciesHash}
+					rateAddtionApi={rateAddtionApi}
 					setOpen={setOpen}
 					shipment_id={shipment_id}
-						// availableCurrencyConversions={availableCurrencyConversions}
+					availableCurrencyConversions={availableCurrencyConversions}
 					refetch={refetch}
 					open={open}
 				/>

@@ -3,8 +3,10 @@ export const getCurrencyControls = ({
 	differentCurrenciesHash,
 	availableCurrencyConversions,
 }) => {
+	// Object.keys(differentCurrenciesHash || {}).map((currency, i) => console.log(currency, i));
+	// console.log(differentCurrenciesHash, ' :differentCurrenciesHash');
 	const controls = Object.keys(differentCurrenciesHash || {}).map(
-		(currency) => ({
+		(currency, i) => ({
 			name             : `currency_control_${currency}`,
 			type             : 'fieldArray',
 			showButtons      : false,
@@ -16,40 +18,33 @@ export const getCurrencyControls = ({
 					exchange_rate : availableCurrencyConversions[currency],
 				},
 			],
-			className : 'primary sg',
-			controls  : [
+			controls: [
 				{
 					name        : 'from_currency',
 					label       : 'From',
-					type        : 'text',
-					placeholder : currency,
-					span        : 4,
+					placeholder : 'Currency',
+					value       : `${currency}${i}`,
 					disabled    : true,
-					className   : 'primary sg',
+					size        : 'sm',
 				},
 				{
 					name        : 'to_currency',
 					label       : 'To',
-					type        : 'text',
 					placeholder : 'Currency',
-					caret       : true,
-					span        : 4,
 					value       : invoiceCurrency,
 					disabled    : true,
-					className   : 'primary sg',
+					size        : 'sm',
 				},
 				{
 					name        : 'exchange_rate',
 					label       : 'Exchange rate',
-					type        : 'number',
 					placeholder : 'Enter rate',
-					watch       : true,
-					span        : 4,
-					className   : 'primary sg',
+					size        : 'sm',
 				},
 			],
 		}),
 	);
+	// console.log(controls, ' :controls');
 
 	return controls;
 };

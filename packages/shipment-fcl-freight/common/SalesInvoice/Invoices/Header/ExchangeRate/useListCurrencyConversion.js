@@ -29,7 +29,7 @@ const useListCurrencyConversion = () => {
 
 	return {
 		getCurrencyConversion,
-		data,
+		currencyConversionData: data?.list,
 	};
 };
 

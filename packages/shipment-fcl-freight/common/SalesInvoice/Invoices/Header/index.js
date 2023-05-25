@@ -5,6 +5,8 @@ import React, { useContext } from 'react';
 
 import EditInvoicePreference from './EditInvoicePreference';
 import ExchangeRate from './ExchangeRate';
+import useGetShipmentQuotation from './ExchangeRate/useGetShipmentQuotation';
+import useListCurrencyConversion from './ExchangeRate/useListCurrencyConversion';
 import styles from './styles.module.css';
 
 function Header({
@@ -22,6 +24,12 @@ function Header({
 	} = invoiceData;
 	const user_data = useSelector(({ profile }) => profile || {});
 	const { shipment_data } = useContext(ShipmentDetailContext) || {};
+
+	const { currencyConversionData } = useListCurrencyConversion();
+	const { quotationData } = useGetShipmentQuotation({
+		invoiceCurrency:
+		invoiceData?.invoicing_parties?.[0]?.invoice_currency,
+	});
 
 	const showExchangeRate = user_data.email === 'ajeet@cogoport.com';
 
@@ -69,6 +77,8 @@ function Header({
 						invoiceData={invoiceData}
 						shipment_data={shipment_data}
 						disableAction={disableAction}
+						quotationData={quotationData}
+						currencyConversionData={currencyConversionData}
 					/>
 					{/* ) : null} */}
 

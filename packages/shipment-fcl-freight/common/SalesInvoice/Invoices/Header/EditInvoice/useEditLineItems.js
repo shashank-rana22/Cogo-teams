@@ -232,7 +232,6 @@ const useEditLineItems = ({
 						unit             : line_item?.unit,
 					})),
 				};
-				console.log(values?.[key], 'kjhjkhhjjh');
 				payload.push(service);
 			});
 

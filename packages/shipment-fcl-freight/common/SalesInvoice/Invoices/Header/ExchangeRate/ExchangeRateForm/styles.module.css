@@ -41,13 +41,11 @@
 	height: 67.5vh;
 }
 
-.body{
+.form_container{
 	display: flex;
-	padding: 30px;
+	padding: 10px;
 }
 
-.label{
-	display: flex;
-	flex-direction: column;
+.form{
 	margin-right: 16px;
 }

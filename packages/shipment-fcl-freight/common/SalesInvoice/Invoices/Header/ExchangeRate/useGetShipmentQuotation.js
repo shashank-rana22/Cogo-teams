@@ -1,34 +1,34 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useContext, useState } from 'react';
+import { useEffect, useCallback, useContext } from 'react';
 
 const useGetShipmentQuotation = () => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
-	const [serviceCharges, setServiceCharges] = useState([]);
 
 	const [{ data }, trigger] = useRequest({
 		url    : '/get_shipment_quotation',
 		method : 'GET',
 	});
 
-	useEffect(() => {
+	const getQuotation = useCallback(() => {
 		(async () => {
 			try {
-				const res = await trigger({
+				await trigger({
 					params: { shipment_id: shipment_data.id },
 				});
-				if (!res.hasError) {
-					setServiceCharges(res?.data?.service_charges);
-				}
 			} catch (err) {
-				console.log(err);
+				toastApiError(err);
 			}
 		})();
-	}, [shipment_data.id, trigger]);
+	}, [shipment_data?.id, trigger]);
+
+	useEffect(() => {
+		getQuotation();
+	}, [getQuotation]);
 
 	return {
-		data,
-		serviceCharges,
+		quotationData: data,
 	};
 };
 
