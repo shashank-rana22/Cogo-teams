@@ -3,7 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useCallback } from 'react';
 
-import { hasPermission } from '../constants/IDS_CONSTANTS';
+import { cogoOneAdmins } from '../constants/IDS_CONSTANTS';
 
 function useListTemplate() {
 	const [{ loading }, trigger] = useRequest({
@@ -15,7 +15,7 @@ function useListTemplate() {
 		userRoleIds : profile.partner?.user_role_ids || [],
 		userId      : profile?.user?.id,
 	}));
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
+	const isomniChannelAdmin = userRoleIds?.some((eachRole) => cogoOneAdmins.includes(eachRole)) || false;
 	const [qfilter, setQfilter] = useState('');
 	const [pagination, setPagination] = useState(1);
 	const [infiniteList, setInfiniteList] = useState({

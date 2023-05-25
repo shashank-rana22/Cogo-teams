@@ -22,11 +22,13 @@ const useListChats = ({
 	isomniChannelAdmin,
 	showBotMessages = false,
 	searchValue = '',
+	viewType = '',
+	setShowFeedback = () => {},
 }) => {
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
 
 	const {
-		query: { assigned_chat = '', channel_type:queryChannelType = '' },
+		query: { assigned_chat = '', channel_type:queryChannelType = '', type = '' },
 	} = useRouter();
 
 	const snapshotListener = useRef(null);
@@ -93,6 +95,11 @@ const useListChats = ({
 		};
 	};
 
+	useEffect(() => {
+		if (type === 'openFeedbackModal') {
+			setShowFeedback(true);
+		}
+	}, [setShowFeedback, type]);
 	const omniChannelCollection = useMemo(
 		() => collectionGroup(firestore, 'rooms'),
 		[firestore],
@@ -104,8 +111,9 @@ const useListChats = ({
 			userId,
 			appliedFilters,
 			showBotMessages,
+			viewType,
 		}),
-		[appliedFilters, isomniChannelAdmin, showBotMessages, userId],
+		[appliedFilters, isomniChannelAdmin, showBotMessages, userId, viewType],
 	);
 
 	const queryForSearch = useMemo(() => (
@@ -254,8 +262,10 @@ const useListChats = ({
 	}, [firestore, activeCardId, activeChannelType]);
 
 	useEffect(() => {
-		mountPinnedSnapShot();
-	}, [mountPinnedSnapShot]);
+		if (viewType !== 'shipment_view') {
+			mountPinnedSnapShot();
+		}
+	}, [mountPinnedSnapShot, viewType]);
 
 	useEffect(() => {
 		mountSnapShot();

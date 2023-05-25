@@ -132,6 +132,7 @@ function FilterStats({ filters, hookSetters }) {
 			<div className={styles.service}>
 				{options.map(({ label, value }) => (
 					<button
+						key={value}
 						className={value === service_type ? styles.tag_active : styles.tag_primary}
 						onClick={() => handleOnClick(value)}
 					>

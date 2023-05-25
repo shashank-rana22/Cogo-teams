@@ -8806,6 +8806,30 @@ const partner = {
 			service_name : 'shipment',
 		},
 	],
+	so2_surface: [
+		{
+			api          : 'bulk_update_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+
+		{
+			api          : 'list_surface_so2_dashboard_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+	],
 
 	campaigns: [
 		{
@@ -9462,6 +9486,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'segmentation',
 		},
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	templates: [
 		{
@@ -9526,6 +9555,16 @@ const partner = {
 		},
 		{
 			api          : 'create_communication_template_suggestions',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_platform_config_constants',
+			access_type  : 'private',
+			service_name : 'platform_config',
+		},
+		{
+			api          : 'update_meta_catalog',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
@@ -11613,6 +11652,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_air_coe_document_copy_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_document_copy',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_locations',
 			access_type  : 'private',
 			service_name : 'location',
@@ -11675,6 +11722,11 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'generate_variance_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'create_shipment_air_freight_consolidated_invoice',
 			access_type  : 'private',
 			service_name : 'shipment',
@@ -11718,6 +11770,11 @@ const partner = {
 		},
 	],
 	cogo_one: [
+		{
+			api          : 'create_agent_feedback',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 		{
 			api          : 'list_checkouts',
 			access_type  : 'private',
@@ -12168,6 +12225,39 @@ const partner = {
 			api          : 'delete_tickets_default_type',
 			access_type  : 'private',
 			service_name : 'tickets',
+		},
+	],
+
+	referral_dashboard: [
+		{
+			api          : 'get_referrer_network_node',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referrer_network',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_invites',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_admin_stats',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_mappings',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_transactions',
+			access_type  : 'private',
+			service_name : 'referral',
 		},
 	],
 	air_repository: [
