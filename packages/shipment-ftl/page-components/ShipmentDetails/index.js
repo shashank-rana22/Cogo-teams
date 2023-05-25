@@ -9,8 +9,10 @@ import React, { useMemo, useState, useEffect } from 'react';
 
 import ShipmentHeader from '../../common/ShipmentHeader';
 import Timeline from '../../common/TimeLine';
+import Overview from '../../common/Overview'
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
+import useServiceList from '../../hooks/useServiceList';
 
 import styles from './styles.module.css';
 
@@ -22,6 +24,7 @@ function ShipmentDetails() {
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
+	const { servicesGet = {} } = useServiceList();
 
 	// const handleVersionChange = useCallback(() => {
 	// 	const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
@@ -32,7 +35,8 @@ function ShipmentDetails() {
 	const contextValues = useMemo(() => ({
 		...get,
 		...getTimeline,
-	}), [get, getTimeline]);
+		...servicesGet,
+	}), [get, servicesGet, getTimeline]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
@@ -114,7 +118,7 @@ function ShipmentDetails() {
 						onChange={setActiveTab}
 					>
 						<TabPanel name="overview" title="Overview">
-							{/* <Overview shipmentData={shipment_data} /> */}
+							<Overview shipmentData={shipment_data} />
 						</TabPanel>
 
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
