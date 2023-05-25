@@ -9,15 +9,15 @@ function Overview({ shipmentData = {} }) {
 	return (
 		<div className={styles.container}>
 			<OverviewManageServices />
-			<BLDetails />
+			{/* <BLDetails /> */}
 			<div className={styles.extra_details}>
-				{shipmentData?.is_cogo_assured ? (
+				{/* {shipmentData?.is_cogo_assured ? (
 					<Assured shipmentData={shipmentData} />
 				) : null}
 
 				{shipmentData?.terms_and_conditions?.length ? (
 					<TermsAndConditions shipmentData={shipmentData} />
-				) : null}
+				) : null} */}
 			</div>
 		</div>
 	);

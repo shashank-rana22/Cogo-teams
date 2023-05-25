@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-import useCreateUpsell from '../../../../../hooks/useCreateUpsell';
+// import useCreateUpsell from '../../../../../hooks/useCreateUpsell';
 
 import styles from './styles.module.css';
 
@@ -20,26 +20,26 @@ function Footer({
 }) {
 	const { handleSubmit = () => {} } = formProps;
 
-	const { onAddService = () => {}, loading } = useCreateUpsell({
-		primary_service,
-		service,
-		shipmentData,
-		organization_id,
-		user,
-	});
+	// const { onAddService = () => {}, loading } = useCreateUpsell({
+	// 	primary_service,
+	// 	service,
+	// 	shipmentData,
+	// 	organization_id,
+	// 	user,
+	// });
 
 	return (
 		<div className={styles.container}>
-			<Button
+			{/* <Button
 				onClick={onClose}
 				disabled={loading || haveToUpsell}
 				themeType="secondary"
 				id="shipment_form_header_cancel"
 			>
 				Cancel
-			</Button>
+			</Button> */}
 
-			{step === 1
+			{/* {step === 1
 				? (
 					<Button
 						onClick={() => setStep(2)}
@@ -58,7 +58,7 @@ function Footer({
 					>
 						{loading ? 'Adding Service...' : 'Submit'}
 					</Button>
-				)}
+				)} */}
 
 		</div>
 	);

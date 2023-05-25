@@ -17,16 +17,8 @@ function AddNewService({
 	activeStakeholder = '',
 	setShowTradeHeading = () => {},
 	showTradeHeading = {},
-	userServicesData = {},
 }) {
-	const { consignee_shipper_id = '' } = shipmentData;
-
-	const haveToUpsell = !shipmentData?.end_to_end_shipment?.is_possible
-		? false : (upsellableService.service_type === 'fcl_freight_local_service'
-		&& primary_service?.bl_category === 'hbl' && activeStakeholder === 'consignee_shipper_booking_agent'
-		&& isEmpty(userServicesData?.[consignee_shipper_id]));
-
-	const [upsellModal, setUpsellModal] = useState(haveToUpsell);
+	const [upsellModal, setUpsellModal] = useState(false);
 
 	/* These services cant be upselled */
 	let cancelUpsell = !upsellableService?.service_type;
@@ -101,7 +93,6 @@ function AddNewService({
 					shipmentData={shipmentData}
 					upsellableService={upsellableService}
 					primary_service={primary_service}
-					haveToUpsell={haveToUpsell}
 					activeStakeholder={activeStakeholder}
 				/>
 			) : null}

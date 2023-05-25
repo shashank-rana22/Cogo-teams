@@ -19,7 +19,6 @@ function Form({
 	shipmentData = {},
 	primary_service,
 	closeModal = () => {},
-	haveToUpsell,
 	activeStakeholder = '',
 }) {
 	const [truckTypeToggle, setTruckTypeToggle] = useState(false);

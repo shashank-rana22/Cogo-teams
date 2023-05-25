@@ -1,16 +1,15 @@
 import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-// import { Tracking } from '@cogoport/ocean-modules';
 // import { ShipmentChat } from '@cogoport/shipment-chat';
-// import { ShipmentMails } from '@cogoport/shipment-mails';
+import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 // import CancelDetails from '../../common/CancelDetails';
 // import DocumentHoldDetails from '../../common/DocumentHoldDetails';
 import Documents from '../../common/Documents';
-// import Overview from '../../common/Overview';
+import Overview from '../../common/Overview';
 import PocSop from '../../common/PocSop';
 import ShipmentHeader from '../../common/ShipmentHeader';
 // import Tasks from '../../common/Tasks';
@@ -40,11 +39,10 @@ function DefaultView({ activeStakeholder = '' }) {
 	// 	window.sessionStorage.setItem('prev_nav', newHref);
 	// }, [router?.query?.partner_id, shipment_data?.id]);
 
-	// const { servicesGet = {} } = useGetServices({
-	// 	shipment_data,
-	// 	additional_methods: services_additional_methods,
-	// 	activeStakeholder,
-	// });
+	const { servicesGet = {} } = useGetServices({
+		shipment_data,
+		additional_methods: services_additional_methods,
+	});
 
 	// const { getTimeline = {} } = useGetTimeLine({ shipment_data });
 
@@ -136,7 +134,7 @@ function DefaultView({ activeStakeholder = '' }) {
 						onChange={setActiveTab}
 					>
 						<TabPanel name="overview" title="Overview">
-							{/* <Overview shipmentData={shipment_data} /> */}
+							<Overview shipmentData={shipment_data} />
 						</TabPanel>
 
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
@@ -148,15 +146,11 @@ function DefaultView({ activeStakeholder = '' }) {
 						</TabPanel>
 
 						<TabPanel name="emails" title="Emails">
-							{/* <ShipmentMails
+							<ShipmentMails
 								source="cogo_rpa"
 								filters={{ q: shipment_data?.serial_id }}
 								pre_subject_text={`${shipment_data?.serial_id}`}
-							/> */}
-						</TabPanel>
-
-						<TabPanel name="tracking" title="Tracking">
-							{/* <Tracking shipmentData={shipment_data} /> */}
+							/>
 						</TabPanel>
 					</Tabs>
 				</div>
