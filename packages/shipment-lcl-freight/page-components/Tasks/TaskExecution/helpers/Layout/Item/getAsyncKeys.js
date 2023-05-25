@@ -69,6 +69,23 @@ const getAsyncFields = (key) => {
 				},
 			},
 		},
+		list_locations: {
+			valueKey      : 'id',
+			lableKey      : 'name',
+			asyncKey      : 'list_locations',
+			defaultParams : {
+				filters: {
+					status: 'active',
+				},
+				page_limit : 20,
+				sort_by    : 'name',
+				sort_type  : 'asc',
+				includes   : {
+					country                 : true,
+					default_params_required : true,
+				},
+			},
+		},
 		locations_v2: {
 			valueKey      : 'id',
 			lableKey      : 'name',

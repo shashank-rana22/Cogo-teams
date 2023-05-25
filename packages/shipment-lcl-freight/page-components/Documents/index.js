@@ -2,29 +2,30 @@ import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { React, useState, useContext } from 'react';
 
-import getShipmentTradeType from '../../helpers/getShipmentTradeType';
+import useCreateOrganizationDocument from '../../hooks/useCreateOrganizationDocument';
+import useCreateTaskList from '../../hooks/useCreateTaskList';
 import useListRpaMails from '../../hooks/useListRpaMails';
 
 import Approve from './Approve';
+import CheckList from './CheckList';
 import Header from './Header';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
+import UploadForm from './UploadForm';
+import Wallet from './Wallet';
 // import useCreateTaskList from '../../hooks/useCreateTaskList';
 // import useGetShipmentMails from '../../hooks/useListRpaMails';
 // import useUpdateDocument from '../../hooks/useUpdateDocument';
 
 // import Approve from './Approve';
-// import CheckList from './CheckList';
-// import LoadingState from './LoadingState';
 
 // import UploadForm from './UploadForm';
-// import Wallet from './Wallet';
 
 function Documents() {
 	const {
 		shipment_data, activeStakeholder,
 		stakeholderConfig:{ documents = {} } = {},
-	} = useContext(ShipmentDetailContext);
+	} = 	useContext(ShipmentDetailContext);
 
 	const [showDoc, setShowDoc] = useState(null);
 	const [showApproved, setShowApproved] = useState(false);
@@ -33,29 +34,32 @@ function Documents() {
 	const [addToWallet, setAddToWallet] = useState(true);
 	const [searchValue, setSearchValue] = useState('');
 
-	// const { updateDocument } = useUpdateDocument({});
+	const { apiTrigger:createDocumentTrigger } = useCreateOrganizationDocument({});
 
-	// const {
-	// 	loading,
-	// 	taskList,
-	// 	completedDocs,
-	// 	docTypes,
-	// 	filters,
-	// 	setFilters,
-	// 	refetch,
-	// } = useCreateTaskList({ shipment_data, primary_service });
+	const {
+		loading,
+		taskList,
+		completedDocs,
+		docTypes,
+		filters,
+		setFilters,
+		refetch,
+		sourceOptions,
+	} = useCreateTaskList({ shipment_data });
+
+	useCreateTaskList({ shipment_data });
 
 	const { emailList = [] } = useListRpaMails({
 		params: {
-			cogo_shipment_id: shipment_data?.id,
-			// entity_type      : docTypes,
+			cogo_shipment_id : shipment_data?.id,
+			entity_type      : docTypes,
 		},
 
 	});
 
 	const handleApprove = async () => {
 		setShowDoc(showApproved);
-		setShowApproved(null);
+
 		if (addToWallet) {
 			const values = {
 				name            : showApproved?.file_name || showApproved?.document_url,
@@ -63,30 +67,32 @@ function Documents() {
 				image_url       : showApproved?.document_url,
 				organization_id : showApproved?.organization_id,
 			};
-			// await updateDocument(values);
+			await createDocumentTrigger(values);
 		}
+
+		setShowApproved(null);
 	};
 
-	// const filteredTaskList = taskList?.filter((item) => item?.label?.toLowerCase().includes(searchValue)
-	// || item?.document_type?.toLowerCase().includes(searchValue));
+	const filteredTaskList = taskList?.filter((item) => item?.label?.toLowerCase().includes(searchValue)
+	|| item?.document_type?.toLowerCase().includes(searchValue));
 
 	const renderContent = () => {
-		// if (loading) {
-		// 	return <LoadingState />;
-		// }
+		if (loading) {
+			return <LoadingState />;
+		}
 
-		// if (!activeToggle) {
-		// 	return (
-		// 		<CheckList
-		// 			taskList={filteredTaskList}
-		// 			emailDocs={emailList}
-		// 			completedDocs={completedDocs?.list}
-		// 			setShowDoc={setShowDoc}
-		// 			setShowApproved={setShowApproved}
-		// 		/>
-		// 	);
-		// }
-		// return <Wallet activeWallet={activeWallet} />;
+		if (!activeToggle) {
+			return (
+				<CheckList
+					taskList={filteredTaskList}
+					emailDocs={emailList}
+					completedDocs={completedDocs?.list}
+					setShowDoc={setShowDoc}
+					setShowApproved={setShowApproved}
+				/>
+			);
+		}
+		return <Wallet activeWallet={activeWallet} />;
 	};
 
 	return (
@@ -95,17 +101,18 @@ function Documents() {
 				activeToggle={activeToggle}
 				setActiveToggle={setActiveToggle}
 				shipment_data={shipment_data}
-				// data={completedDocs?.organizations}
-				// filters={filters}
-				// setFilters={setFilters}
+				sourceOptions={sourceOptions}
+				filters={filters}
+				setFilters={setFilters}
 				setSearchValue={setSearchValue}
 				searchValue={searchValue}
 				activeWallet={activeWallet}
 				setActiveWallet={setActiveWallet}
 				activeStakeholder={activeStakeholder}
-				// refetch={refetch}
+				refetch={refetch}
 			/>
-			{/* <Modal
+
+			<Modal
 				className={styles.modal_container}
 				show={showDoc}
 				size="lg"
@@ -120,7 +127,7 @@ function Documents() {
 					activeWallet={activeWallet}
 					setActiveWallet={setActiveWallet}
 				/>
-			</Modal> */}
+			</Modal>
 
 			{renderContent()}
 

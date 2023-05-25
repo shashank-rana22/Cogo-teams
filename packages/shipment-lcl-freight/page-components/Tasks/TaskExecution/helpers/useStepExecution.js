@@ -5,7 +5,6 @@ import { useContext } from 'react';
 import getDefaultValues from '../utils/get-default-values';
 import injectForm from '../utils/inject-form';
 import injectValues from '../utils/inject-Values';
-// import populateControls from '../utils/populate-controls';
 
 function useStepExecution({
 	task = {},
@@ -13,17 +12,19 @@ function useStepExecution({
 	getApisData = {},
 	selectedMail = {},
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const populatedControls = stepConfig.controls;
 
-	const valueInjectedControls = injectValues(
+	const valueInjectedControls = injectValues({
 		selectedMail,
 		populatedControls,
 		task,
 		getApisData,
 		stepConfig,
-	);
+		shipment_data,
+		primary_service,
+	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);
 

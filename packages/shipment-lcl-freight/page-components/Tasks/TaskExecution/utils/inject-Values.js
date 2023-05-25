@@ -1,13 +1,14 @@
 import injectCustomFormValidations from './inject-custom-form-validations';
 
-const injectValues = (
+const injectValues = ({
 	selectedMail,
 	populatedControls,
 	task,
 	getApisData,
 	shipment_data,
 	stepConfig,
-) => {
+	primary_service,
+}) => {
 	const controls = populatedControls || [];
 
 	if (!controls?.length) return controls;
@@ -62,23 +63,37 @@ const injectValues = (
 					}));
 			}
 		});
+	} else if (task?.task === 'upload_carting_order') {
+		for (let index = 0; index < controls.length; index += 1) {
+			if (controls[index].name === 'schedule_arrival') {
+				controls[index].value =	new Date(shipment_data?.schedule_arrival
+					|| shipment_data?.selected_schedule_arrival);
+			}
+			if (controls[index].name === 'schedule_departure') {
+				controls[index].value =	new Date(shipment_data?.schedule_departure
+					|| shipment_data?.selected_schedule_departure);
+			}
+			if (controls[index].name === 'movement_details') {
+				controls[index].value = [
+					{
+						from_port_id     : primary_service?.origin_port_id,
+						to_port_id       : primary_service?.destination_port_id,
+						schedule_arrival : new Date(shipment_data?.schedule_arrival
+							|| primary_service?.selected_schedule_arrival),
+						schedule_departure: new Date(shipment_data?.schedule_departure
+							|| primary_service?.selected_schedule_departure),
+						vessel       : '',
+						voyage       : '',
+						service_type : 'lcl_freight_service',
+					},
+				];
+			}
+		}
 	} else if (task?.task_type === 'upload_document') {
 		(controls || []).forEach((control, index) => {
 			if (control.type === 'fieldArray') {
 				controls[index].value = controls[index]?.value?.length
 					? controls[index]?.value : [{ url: selectedMail?.formatted?.[0]?.url }];
-			}
-		});
-	} else if (task?.task === 'mark_container_gated_out') {
-		const containerDetails = getApisData?.list_shipment_container_details || [];
-
-		(controls || []).forEach((control, index) => {
-			if (control.name === 'containers_gated_out') {
-				controls[index].value = containerDetails.map((i) => ({
-					container_number : i?.container_number,
-					id               : i?.id,
-					gated_out_at     : '',
-				}));
 			}
 		});
 	}

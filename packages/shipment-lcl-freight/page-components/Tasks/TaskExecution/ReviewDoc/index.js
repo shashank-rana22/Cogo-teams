@@ -4,8 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-// import useListDocuments from '../../../../hooks/useListDocuments';
-// import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
+import useListShipmentDocuments from '../../../../hooks/useListShipmentDocuments';
+import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
 
 import styles from './styles.module.css';
 
@@ -21,30 +21,30 @@ function ReviewDoc({
 		refetch();
 	};
 
-	// const { list = {}, loading = true } = useListDocuments({
-	// 	defaultFilters: {
-	// 		shipment_id: task.shipment_id, id: task.task_field_id,
-	// 	},
-	// 	defaultParams: {
-	// 		performed_by_org_id: task.organization_id,
-	// 	},
-	// });
+	const { data = {}, loading = true } = useListShipmentDocuments({
+		defaultFilters: {
+			shipment_id: task.shipment_id, id: task.task_field_id,
+		},
+		defaultParams: {
+			performed_by_org_id: task.organization_id,
+		},
+	});
 
-	const docData = {};
+	let docData = {};
 	let params = {};
 
-	// if (!loading && list.list?.length) {
-	// 	docData = list.list[0] || {};
-	// 	params = {
-	// 		id                  : docData.id,
-	// 		pending_task_id     : task.id,
-	// 		document_type       : docData.document_type,
-	// 		performed_by_org_id : task.organization_id,
-	// 	};
-	// }
-	// const { updateDocument } = useUpdateShipmentDocuments(
-	// 	{ refetch: newRefetch },
-	// );
+	if (!loading && data.list?.length) {
+		docData = data.list[0] || {};
+		params = {
+			id                  : docData.id,
+			pending_task_id     : task.id,
+			document_type       : docData.document_type,
+			performed_by_org_id : task.organization_id,
+		};
+	}
+	const { updateDocument } = useUpdateShipmentDocuments(
+		{ refetch: newRefetch },
+	);
 
 	const handleApprove = async () => {
 		params = {
@@ -52,7 +52,7 @@ function ReviewDoc({
 			state: 'document_accepted',
 		};
 
-		// await updateDocument(params);
+		await updateDocument(params);
 	};
 
 	const handleAmmend = () => {
@@ -69,24 +69,24 @@ function ReviewDoc({
 				state   : 'document_amendment_requested',
 				remarks : [remarkValue],
 			};
-			// await updateDocument(params);
+			await updateDocument(params);
 		} else {
 			params = {
 				...params,
 				state: 'document_accepted',
 			};
-			// await updateDocument(params);
+			await updateDocument(params);
 		}
 	};
 
-	// if (loading) {
-	// 	return (
-	// 		<div>
-	// 			<Loader />
-	// 			Loading Document...
-	// 		</div>
-	// 	);
-	// }
+	if (loading) {
+		return (
+			<div>
+				<Loader />
+				Loading Document...
+			</div>
+		);
+	}
 
 	const getfileUrl = (url) => {
 		if (url?.includes('finalUrl')) {
@@ -161,14 +161,14 @@ function ReviewDoc({
 					<Button
 						onClick={handleAmmend}
 						themeType="secondary"
-						// disabled={loading}
+						disabled={loading}
 					>
 						Amend
 					</Button>
 
 					<Button
 						onClick={handleApprove}
-						// disabled={loading}
+						disabled={loading}
 					>
 						Approve
 					</Button>
@@ -178,13 +178,13 @@ function ReviewDoc({
 					<Button
 						onClick={onClose}
 						themeType="secondary"
-						// disabled={loading}
+						disabled={loading}
 					>
 						Cancel
 					</Button>
 					<Button
 						onClick={handleSubmit}
-						// disabled={loading}
+						disabled={loading}
 					>
 						Submit
 					</Button>

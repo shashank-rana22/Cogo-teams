@@ -28,10 +28,8 @@ function Item(props) {
 
 	let newProps = { ...props };
 
-	const isAsyncSelect = ['select', 'creatable-select'].includes(type)
+	const isAsyncSelect = ['select', 'creatable-select', 'location-select'].includes(type)
 		&& Object.keys(props).includes('optionsListKey');
-
-	console.log({ isAsyncSelect }, props?.optionsListKey);
 
 	if (isAsyncSelect) {
 		const asyncKey = props?.optionsListKey;
@@ -49,7 +47,6 @@ function Item(props) {
 			type   : 'async-select',
 		};
 	}
-	if (newProps.type === 'file') return null;
 
 	const Element = getElementController(newProps.type);
 

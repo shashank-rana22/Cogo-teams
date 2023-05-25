@@ -2,16 +2,11 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
-import useTaskRpa from '../../../hooks/useTaskRpa';
+// import useTaskRpa from '../../../hooks/useTaskRpa';
 
 import {
-	UploadBookingNote,
 	UploadCargoArrival,
-	UploadContainerDetails,
 	MarkConfirmServices,
-	NominationTask,
-	GenerateFreightCertificate,
-	ChooseServiceProvider,
 	UploadDraftBL,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
@@ -22,13 +17,12 @@ function ExecuteTask({
 	onCancel = () => {},
 	taskListRefetch = () => {},
 	selectedMail = [],
-	setSelectedMail = () => {},
+	// setSelectedMail = () => {}
 	refetch = () => {},
 	services = [],
 }) {
-	console.log('ds');
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
-	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
+	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
 	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 

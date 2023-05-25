@@ -2,7 +2,8 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const useListShipmentPendingTasks = ({ defaultParams = {}, defaultFilters = {}, filters = {} }) => {
+const useListShipmentPendingTasks = ({ defaultParams = {}, defaultFilters = {} }) => {
+	const [filters, setFilters] = useState({});
 	const [data, setData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
@@ -36,7 +37,8 @@ const useListShipmentPendingTasks = ({ defaultParams = {}, defaultFilters = {}, 
 		loading,
 		apiTrigger,
 		data,
-
+		setFilters,
+		filters,
 	};
 };
 
