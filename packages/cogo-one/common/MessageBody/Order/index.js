@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 function Order({ message }) {
 	const orderList = JSON.parse(message) || [];
 	const { image_url } = orderList?.[0] || {};
-
+	const orderCount = orderList.length || 0;
 	return (
 		<div className={styles.order_container}>
 			<img
@@ -20,7 +20,7 @@ function Order({ message }) {
 					className={styles.order_icon}
 				/>
 				<div className={styles.items}>
-					{`${orderList.length || 0} Items`}
+					{orderCount > 1 ? `${orderCount} Items` : `${orderCount} Item`}
 				</div>
 			</div>
 		</div>
