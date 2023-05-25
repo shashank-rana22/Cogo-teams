@@ -1,6 +1,6 @@
 import { IcMArrowRight, IcMDownload } from '@cogoport/icons-react';
 
-const BUTTON_CONTENT__MAPPING = {
+const BUTTON_CONTENT_MAPPING = {
 	ongoing: {
 		secondaryBtnText : 'Curriculum',
 		primaryBtnText   : 'Continue Learning',
@@ -19,4 +19,4 @@ const BUTTON_CONTENT__MAPPING = {
 	saved: {},
 };
 
-export default BUTTON_CONTENT__MAPPING;
+export default BUTTON_CONTENT_MAPPING;
