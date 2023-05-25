@@ -45,8 +45,10 @@ function BillingPartyDetails({
 		const parseOptions = JSON.parse(billingOptionsStringifiy || '[]');
 		if (parseOptions?.length === 1) {
 			setValue('billing_party_address', parseOptions?.[0]?.gst_number);
+		} else {
+			setValue('billing_party_address', (purchaseInvoiceValues.billing_party_address || ''));
 		}
-	}, [billingparty, setValue, billingOptionsStringifiy]);
+	}, [billingparty, setValue, billingOptionsStringifiy, purchaseInvoiceValues.billing_party_address]);
 
 	return (
 		<AccordianView title="Billing Party Details" fullwidth showerror={errMszs?.billingPartyErr} open={open}>
@@ -63,7 +65,6 @@ function BillingPartyDetails({
 									options={billingPartiesExcept101}
 									onChange={(_, obj) => {
 										setBillingParty(obj);
-										setValue('billing_party_address', '');
 									}}
 									rules={{ required: true }}
 									value={purchaseInvoiceValues?.billing_party}

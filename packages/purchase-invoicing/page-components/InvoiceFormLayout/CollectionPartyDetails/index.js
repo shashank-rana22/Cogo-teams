@@ -226,7 +226,6 @@ function CollectionPartyDetails({
 							placeholder="Enter Collection Party Address"
 							options={collectionPartyAddresses}
 							rules={{ required: true }}
-							value={purchaseInvoiceValues?.collection_party_address}
 						/>
 						{errors?.collection_party_address ? (
 							<div className={styles.errors}>
