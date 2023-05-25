@@ -4,7 +4,8 @@ import styles from './styles.module.css';
 
 const eachOrder = (item) => {
 	const {
-		product_retailer_id = '', quantity, item_price, currency, name, description, image_url,
+		product_retailer_id = '',
+		quantity = '', item_price = 0, currency = '', name = '', description = '', image_url = '',
 	} = item || {};
 	return (
 		<div className={styles.list_item} key={product_retailer_id}>

@@ -63,10 +63,6 @@ function MessageList(messageProps) {
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	const isFlashMessagesEmpty = isEmpty(flashMessagesList) || false;
 
-	useEffect(() => {
-		setShowCarousel(!isFlashMessagesEmpty);
-	}, [isFlashMessagesEmpty]);
-
 	const getListHeightStyles = () => {
 		if (showBotMessages && isomniChannelAdmin && !showCarousel) {
 			return 'bot_list_container_empty_flash';
@@ -79,6 +75,10 @@ function MessageList(messageProps) {
 		}
 		return 'list_container_height';
 	};
+
+	useEffect(() => {
+		setShowCarousel(!isFlashMessagesEmpty);
+	}, [isFlashMessagesEmpty]);
 
 	const {
 		bulkAssignChat = () => {},

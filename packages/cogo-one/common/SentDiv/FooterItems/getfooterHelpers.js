@@ -16,9 +16,9 @@ export const ELEMENT_MAPPING = {
 		);
 	},
 	products: (item) => {
-		const { name = '', description = '', image_url = '', price = 0, currency = '' } = item || {};
+		const { name = '', description = '', image_url = '', price = 0, currency = '', id = '' } = item || {};
 		return (
-			<div className={styles.catalog_flex}>
+			<div className={styles.catalog_flex} key={id}>
 				<img src={image_url} alt={name} className={styles.img_styles} />
 				<div className={styles.catalog_info}>
 					<div className={styles.catalog_name}>{name}</div>

@@ -12,7 +12,6 @@ import getActiveCardDetails from '../../../../../utils/getActiveCardDetails';
 
 import styles from './styles.module.css';
 
-const INITIALIZE_FUNC = () => {};
 function MessageCardData({
 	item = {},
 	activeCardId = '',
@@ -22,7 +21,7 @@ function MessageCardData({
 	autoAssignChats = true,
 	handleCheckedChats = () => {},
 	source = '',
-	claimChat = INITIALIZE_FUNC,
+	claimChat = () => {},
 	claimLoading = false,
 }) {
 	const formattedData = getActiveCardDetails(item) || {};
@@ -156,7 +155,7 @@ function MessageCardData({
 						/>
 					</div>
 				)}
-				{!isFlashMessages && (
+				{!isFlashMessages ? (
 					<div className={styles.pinned_div}>
 						{pinnedTime[userId] > 0
 							? (
@@ -169,8 +168,7 @@ function MessageCardData({
 								/>
 							)}
 					</div>
-				)}
-				{isFlashMessages && (
+				) : (
 					<Button
 						size="xs"
 						themeType="primary"

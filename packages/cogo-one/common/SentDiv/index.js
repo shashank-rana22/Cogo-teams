@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { IcMTick, IcMDoubleTick, IcMCross, IcMListView } from '@cogoport/icons-react';
+import { IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
 import { LOGO_URL } from '../../constants';
