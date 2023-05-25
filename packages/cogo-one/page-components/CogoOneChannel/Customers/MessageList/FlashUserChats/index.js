@@ -36,13 +36,11 @@ function FlashUserChats({
 					key={carouselData}
 					slides={carouselData}
 					className={styles.carousel_styled}
-					autoScroll={!claimLoading}
 					showArrow={!claimLoading}
 					showDots={false}
 					itemsToScroll={1}
 					itemsToShow={1}
 					isInfinite
-					timeInterval={1000000}
 				/>
 			)}
 		</div>

@@ -19,7 +19,7 @@
 
 .receive_message_container {
 	width: fit-content;
-	max-width: 320px;
+	max-width: 57%;
 	padding: 0 0 12px 8px;
 	margin-top: 10px;
 	font-size: 14px;

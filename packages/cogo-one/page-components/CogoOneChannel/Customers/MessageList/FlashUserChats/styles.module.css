@@ -3,13 +3,17 @@
 	height: var(--height);
 	margin-bottom: 10px;
 	overflow: hidden;
-	background: linear-gradient(-45deg, #ee7752, #e73c7e, #23a6d5, #23d5ab);
+	background: linear-gradient(-45deg, #ee3425, #f8aea8, #fde74d);
 	border-radius: 6px;
 	transition: height 0.5s ease;
 }
 
 .carousel_styled {
 	height: 100%;
+
+	svg {
+		fill: #f9f9f9;
+	}
 
 	:global {
 		.ui_carousel_prev,
