@@ -1,9 +1,9 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 import { ACCOUNT_TYPE_MAPPING } from '../constants';
-import { PARAMOUNT_ORG_ID } from '../constants/IDS_CONSTANTS';
 
 import useListPartners from './useListPartners';
 
@@ -53,7 +53,7 @@ const useCheckChannelPartner = ({ orgId = null, activeCardId = null, activeTab:a
 		isChannelPartner = false;
 	}
 
-	const ORGID = orgId || PARAMOUNT_ORG_ID;
+	const ORGID = orgId || GLOBAL_CONSTANTS.uuid.paramount_org_id;
 
 	let ORG_PAGE_URL = '';
 
