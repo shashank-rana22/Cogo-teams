@@ -49,3 +49,7 @@
 	margin-right: 4px;
 	margin-top: 8px;
 }
+
+.course_wrapper{
+	display: flex;
+}

@@ -76,7 +76,7 @@ function EducationalQualifications({ profileData }) {
 					<div className={styles.label}>
 						Courses
 					</div>
-					<div className={styles.value}>
+					<div className={styles.course_wrapper}>
 						{renderCources({ Courses })}
 					</div>
 				</div>

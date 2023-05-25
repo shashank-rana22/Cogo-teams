@@ -7,6 +7,8 @@ import RejectPopoverContent from '../RejectPopoverContent';
 
 import styles from './styles.module.css';
 
+const IDENTIFICATION_DOCUMENT_EXCLUSION_LIST = ['resume'];
+
 function IdentificationDocuments({ profileData, getEmployeeDetails }) {
 	const { documents } = profileData || {};
 
@@ -22,6 +24,9 @@ function IdentificationDocuments({ profileData, getEmployeeDetails }) {
 			{
 				(documents || []).map((doc) => {
 					const { document_type, document_url, id, status } = doc || {};
+					if (IDENTIFICATION_DOCUMENT_EXCLUSION_LIST.includes(document_type)) {
+						return null;
+					}
 					return (
 						<div className={styles.card_wrapper} key={id}>
 							<div className={styles.tick_content}>
