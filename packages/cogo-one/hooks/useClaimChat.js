@@ -11,6 +11,7 @@ import {
 	getDocs,
 	collection,
 	limit,
+	getDoc,
 } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -20,7 +21,11 @@ const updateClaimKey = async ({ id, channel_type, firestore, value }) => {
 		firestore,
 		`${FIRESTORE_PATH[channel_type]}/${id}`,
 	);
-	await updateDoc(userDocument, { can_claim_chat: value });
+
+	const userDocData = await getDoc(userDocument);
+	const { session_type = '' } = userDocData.data() || {};
+
+	await updateDoc(userDocument, { can_claim_chat: value ? session_type === 'bot' : value });
 };
 
 const toggleCarouselState = async (firestore, setShowCarousel) => {
@@ -77,9 +82,9 @@ function useClaimChat({ userId, setShowCarousel, firestore }) {
 				toggleCarouselState(firestore, setShowCarousel);
 			}, (timeoutValue || 10000));
 		} catch (error) {
-			await updateClaimKey({ id, channel_type, firestore, value: true });
-			setShowCarousel(true);
 			Toast.error(getApiErrorString(error?.response?.data) || 'something went wrong');
+			await updateClaimKey({ id, channel_type, firestore, value: true });
+			toggleCarouselState(firestore, setShowCarousel);
 		}
 	};
 	return {

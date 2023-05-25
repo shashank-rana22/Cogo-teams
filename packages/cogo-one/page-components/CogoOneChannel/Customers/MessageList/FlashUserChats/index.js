@@ -42,7 +42,7 @@ function FlashUserChats({
 					itemsToScroll={1}
 					itemsToShow={1}
 					isInfinite
-					timeInterval={50000}
+					timeInterval={1000000}
 				/>
 			)}
 		</div>

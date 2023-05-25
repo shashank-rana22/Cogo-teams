@@ -118,9 +118,6 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 		);
 	}
 
-	if (message_type === 'order') {
-		return <OrderDisplay message={message} />;
-	}
 	return <ShowMessage />;
 }
 
