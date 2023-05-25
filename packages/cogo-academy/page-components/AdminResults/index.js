@@ -84,7 +84,8 @@ function AdminResults() {
 				</Tabs>
 			) : null}
 
-			{status === 'published' || activeAttempt === 'attempt_1' ? <TestResults test_id={test_id} /> : null}
+			{status === 'published' || activeAttempt === 'attempt_1'
+				? <TestResults test_id={test_id} activeAttempt={activeAttempt} /> : null}
 
 			<InfoBanner
 				loading={loading}

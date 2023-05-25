@@ -10,8 +10,14 @@ import Header from './Header';
 import PercentagePassed from './PercentagePassed';
 import styles from './styles.module.css';
 
-function TestResults({ test_id = '' }) {
-	const { loading, stats_data, basic_info_data, toggleState, header_data } = useGetTestPerformace({ test_id });
+function TestResults({ test_id = '', activeAttempt }) {
+	const {
+		loading,
+		stats_data,
+		basic_info_data,
+		toggleState,
+		header_data,
+	} =		useGetTestPerformace({ test_id, activeAttempt });
 
 	const { questions, retest } = useGetTest({ id: test_id });
 
