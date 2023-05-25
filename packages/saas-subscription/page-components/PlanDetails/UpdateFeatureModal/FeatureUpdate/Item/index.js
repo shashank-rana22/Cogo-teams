@@ -5,15 +5,16 @@ import { getFieldController } from '../../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
+const getKey = ({ name, index, getValues }) => {
+	if (name === 'addonName') {
+		return getValues(`updateAddon[${index}]`);
+	}
+	return name;
+};
+
 function Item({
 	info, controls, control, remove, errors, index, fields = [], getValues,
 }) {
-	const getKey = (name) => {
-		if (name === 'addonName') {
-			return getValues(`updateAddon[${index}]`);
-		}
-		return name;
-	};
 	return (
 		<>
 			{controls.map((field) => {
@@ -31,7 +32,7 @@ function Item({
 							control={control}
 							value={info[field?.name]}
 							name={`updateAddon.${index}.${field?.name}`}
-							key={getKey(field?.name)}
+							key={getKey({ name: field?.name, index, getValues })}
 						/>
 					</div>
 				);

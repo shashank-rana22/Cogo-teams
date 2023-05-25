@@ -388,9 +388,6 @@ function asyncQuotaList() {
 		valueKey    : 'id',
 		endpoint    : 'list_saas_products',
 		initialCall : true,
-		// params      : {
-
-		// },
 	};
 }
 

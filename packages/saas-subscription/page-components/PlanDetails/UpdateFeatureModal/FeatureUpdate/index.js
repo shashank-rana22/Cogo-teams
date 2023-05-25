@@ -5,8 +5,8 @@ import { IcMCross } from '@cogoport/icons-react';
 import Item from './Item';
 import styles from './styles.module.css';
 
-function AddonUpdate({ modalCloseHandler, featureInfo, loading = false }) {
-	const { configs, formControls, defaultValue = {}, appendValue, name, submitHandler, title } = featureInfo;
+function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submitHandler }) {
+	const { configs, formControls, defaultValue = {}, appendValue, name, title } = featureInfo;
 
 	const {
 		control,
@@ -93,4 +93,4 @@ function AddonUpdate({ modalCloseHandler, featureInfo, loading = false }) {
 		</>
 	);
 }
-export default AddonUpdate;
+export default FeatureUpdate;

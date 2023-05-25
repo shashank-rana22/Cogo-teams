@@ -3,8 +3,7 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
-import addonConfig from '../../configuration/addonConfig';
-import planFeatureConfig from '../../configuration/planFeatureConfig';
+import { getFeatureMapping } from '../../constant/featureMapping';
 import useGetPlanDetails from '../../hooks/useGetPlanDetails';
 
 import Header from './Header';
@@ -18,22 +17,9 @@ function PlanDetails() {
 	const [featureModal, setFeatureModal] = useState({});
 
 	const { loading = false, planDetails } = useGetPlanDetails({ featureModal });
-	const { plan = {}, pricing = [], plan_features = [], add_ons } = planDetails || {};
+	const { plan = {}, pricing = [], plan_features = [], add_ons = [] } = planDetails || {};
 
-	const featureMapping = [
-		{
-			name   : 'addon',
-			title  : 'Add-ons',
-			list   : add_ons || [],
-			config : addonConfig,
-		},
-		{
-			name   : 'planFeature',
-			title  : 'Plan Feature',
-			list   : plan_features || [],
-			config : planFeatureConfig,
-		},
-	];
+	const featureMapping = getFeatureMapping({ add_ons, plan_features });
 
 	return (
 		<div className={styles.container}>
