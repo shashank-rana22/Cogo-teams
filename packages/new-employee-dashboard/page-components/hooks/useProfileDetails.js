@@ -1,4 +1,6 @@
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect } from 'react';
 
@@ -109,17 +111,29 @@ const useProfileDetails = () => {
 
 	const id = '85cdcf6b-bd52-4fea-b136-12e377c48ecc';
 
-	const [{ loading, data }] = useHarbourRequest(
+	const params = {
+		id,
+		document_data_required: true,
+	};
+
+	const [{ loading, data }, trigger] = useHarbourRequest(
 		{
 			method : 'GET',
 			url    : '/get_employee_details',
-			params : {
-				id,
-				document_data_required: true,
-			},
+			params,
 		},
 		{ manual: false },
 	);
+
+	const getEmployeeDetails = () => {
+		try {
+			trigger({
+				params,
+			});
+		} catch (err) {
+			Toast.error(getApiErrorString(err.response?.data));
+		}
+	};
 
 	return {
 		data,
@@ -129,6 +143,7 @@ const useProfileDetails = () => {
 		initialQuestion,
 		setInitialQuestion,
 		formProps,
+		getEmployeeDetails,
 	};
 };
 

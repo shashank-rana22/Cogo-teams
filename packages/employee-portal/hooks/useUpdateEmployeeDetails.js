@@ -2,40 +2,26 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-function useUpdateEmployeeDetails({ id, getEmployeeDetails }) {
+function useUpdateEmployeeDetails({ id, getEmployeeDetails = () => {} }) {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/update_employee_detail',
 		method : 'POST',
 	}, { manual: true });
 
 	const updateEmployeeDetails = async ({ data, formType }) => {
-		// const {
-		// 	mobile_number,
-		// 	mobile_country_code,
-		// 	date_of_joining,
-		// 	passport_size_photo_url,
-		// 	status,
-		// 	date_of_birth,	...rest
-		// } = data || {};
-
 		let payload = {};
 
 		if (formType === 'personal_info') {
 			payload = {
-				gender                    : data?.gender,
-				address                   : data?.address,
+				...data,
 				passport_size_photo_url   : data?.passport_size_photo_url?.finalUrl,
 				status                    : data?.status || 'active',
 				mobile_number             : data?.mobile_number?.number,
 				mobile_country_code       : data?.mobile_number?.country_code,
-				name                      : data?.name,
 				date_of_joining           : String(data?.date_of_joining),
 				date_of_birth             : String(data?.date_of_birth),
 				updated_at                : String(data?.updated_at),
 				created_at                : String(data?.created_at),
-				hiring_manager            : data?.hiring_manager,
-				hiring_manager_email      : data?.hiring_manager_email,
-				cogoport_email            : data?.cogoport_email,
 				emergency_contact_details : [{
 					mobile_number       : data?.emergency_contact_details?.number,
 					mobile_country_code : data?.emergency_contact_details?.country_code,
@@ -73,6 +59,7 @@ function useUpdateEmployeeDetails({ id, getEmployeeDetails }) {
 			getEmployeeDetails();
 			Toast.success('Details have been saved successfully!');
 		} catch (err) {
+			console.log('err', err);
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
 	};

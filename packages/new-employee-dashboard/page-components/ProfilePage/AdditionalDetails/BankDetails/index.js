@@ -31,7 +31,7 @@ function BankDetails({ profileData }) {
 				<div className={styles.label}>
 					Cancelled Cheque
 				</div>
-				<PreviewDocumet document_url={bank_details?.[0]?.cancelled_check_url} />
+				<PreviewDocumet document_url={bank_details?.[0]?.cancelled_check_url} preview />
 			</div>
 
 		</div>
