@@ -96,7 +96,7 @@ const controls = () => ([
 		// rules : { required: 'This is required' },
 	},
 	{
-		name        : 'emergency_num',
+		name        : 'emergency_contact_details',
 		label       : 'Emergency Contact Number',
 		type        : 'mobilenumber',
 		placeholder : 'Number',

@@ -6,7 +6,7 @@ function useUpdateEmployeeDetails({ id, getEmployeeDetails }) {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/update_employee_detail',
 		method : 'POST',
-	}, { manual: false });
+	}, { manual: true });
 
 	const updateEmployeeDetails = async ({ data, formType }) => {
 		// const {
@@ -71,6 +71,7 @@ function useUpdateEmployeeDetails({ id, getEmployeeDetails }) {
 				},
 			});
 			getEmployeeDetails();
+			Toast.success('Details have been saved successfully!');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
