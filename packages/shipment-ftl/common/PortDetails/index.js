@@ -1,5 +1,5 @@
 import { cl, Tooltip } from '@cogoport/components';
-import { IcMPortArrow, IcCFfcl } from '@cogoport/icons-react';
+import { IcMPortArrow, IcCFftl } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -7,10 +7,10 @@ import styles from './styles.module.css';
 
 function PortDetails({ data = {}, primary_service = {} }) {
 	const {
-		origin_main_port = {},
-		destination_main_port = {},
+		origin_location = {},
 		origin_port = {},
-		destination_port = {},
+		destination_drop = {},
+		destination_location = {},
 	} = primary_service;
 
 	if (isEmpty(data)) {
@@ -24,10 +24,6 @@ function PortDetails({ data = {}, primary_service = {} }) {
 					(
 					{location?.port_code || location?.postal_code}
 					)
-				</div>
-
-				<div className={`${styles.country}`}>
-					{location?.country?.name}
 				</div>
 			</div>
 
@@ -51,7 +47,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 	const renderLocation = () => (
 		<>
 			<div className={styles.flex_row_origin}>
-				{handleLocationDetails(origin_port, origin_main_port)}
+				{handleLocationDetails(origin_location, origin_port)}
 			</div>
 
 			<div className={styles.icon_wrapper}>
@@ -59,7 +55,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 			</div>
 
 			<div className={styles.flex_row_destination}>
-				{handleLocationDetails(destination_port, destination_main_port)}
+				{handleLocationDetails(destination_location, destination_drop)}
 			</div>
 		</>
 	);
@@ -67,8 +63,8 @@ function PortDetails({ data = {}, primary_service = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.icons_and_service}>
-				<IcCFfcl />
-				<span>FCL</span>
+				<IcCFftl />
+				<span>FTL</span>
 			</div>
 			{renderLocation()}
 		</div>

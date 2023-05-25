@@ -40,11 +40,9 @@ function useGetShipment() {
 
 		get: {
 			isGettingShipment,
-			refetch               : getShipment,
-			documents             : data?.documents,
-			primary_service       : data?.primary_service,
-			shipment_data         : data?.summary,
-			document_delay_status : data?.document_delay_status,
+			refetch         : getShipment,
+			primary_service : data?.primary_service_detail,
+			shipment_data   : data?.summary,
 			getShipmentStatusCode,
 		},
 	};

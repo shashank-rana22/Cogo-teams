@@ -9,14 +9,19 @@ const labels = [
 	'container_type',
 	'commodity',
 	'inco_term',
+	'trucks_count',
 	'trade_type',
 	'packages',
 	'volume',
+	'weight',
 	'haulage_type',
 	'transport_mode',
 	'cargo_weight_per_container',
 	'destination_cargo_handling_type',
+	'truck_type',
 	'payment_term',
+	'truck_types',
+	'trip_type',
 ];
 
 function RenderCargoPills({ detail }) {
