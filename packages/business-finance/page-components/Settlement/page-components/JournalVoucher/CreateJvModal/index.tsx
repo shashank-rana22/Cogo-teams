@@ -48,7 +48,6 @@ function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
 		to_cur   : toCurrency,
 		setValue,
 	});
-	
 
 	useEffect(() => {
 		if (formValues?.currency) {
