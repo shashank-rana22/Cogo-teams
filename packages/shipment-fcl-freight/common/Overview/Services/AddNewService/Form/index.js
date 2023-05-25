@@ -102,11 +102,13 @@ function Form({
 			<Modal.Body>
 				{ controls?.length === 0 && step === 1
 					? (
-						<>
-							<div> Are you sure you want to upsell this service?</div>
+						<div> Are you sure you want to upsell this service?</div>
+					)
+					: null }
 
-							<Layout controls={controls} formProps={formProps} />
-						</>
+				{ controls?.length !== 0 && step === 1
+					? (
+						<Layout controls={controls} formProps={formProps} />
 					)
 					: null }
 

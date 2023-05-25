@@ -38,6 +38,12 @@ function EditInternalPoc({ setAddPoc = () => {}, addPoc, shipment_id, stakeholde
 		...asyncFieldsPartnerUsers(),
 		valueKey    : 'user_id',
 		initialCall : false,
+		labelKey    : 'query_name',
+		params      : {
+			filters: {
+				partner_entity_types: ['cogoport'],
+			},
+		},
 	});
 
 	useEffect(() => {
