@@ -39,7 +39,11 @@ function IdentificationDocuments({ profileData, getEmployeeDetails }) {
 
 							</div>
 
-							<PreviewDocumet document_header={startCase(document_type)} document_url={document_url} />
+							<PreviewDocumet
+								document_header={startCase(document_type)}
+								document_url={document_url}
+								preview="true"
+							/>
 
 							{
 							!['rejected', 'approved'].includes(status) ? (

@@ -5,7 +5,7 @@ import { IcMDocument, IcMEyeopen } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const getColumns = ({ onClickViewDocument }) => [
+const getColumns = ({ onClickViewDocument,setShowModal = () => {} }) => [
 	{
 		Header   : 'DOCUMENT TYPE',
 		accessor : (item) => (
@@ -44,7 +44,7 @@ const getColumns = ({ onClickViewDocument }) => [
 		accessor : (item) => (
 			<div>
 				{item?.status === 'pending'
-					? <Button size="sm">Review &amp; Approve</Button>
+					? <Button onClick={() => setShowModal(true)} size="sm">Review &amp; Approve</Button>
 					: <div>{item?.status || 'Approved'}</div>}
 			</div>
 		),

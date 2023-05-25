@@ -16,13 +16,13 @@ function usePostCreateEmployeeOfferLetter() {
     { manual: true }
   );
 
-  const onFinalSubmit = async (joiningBonus, salaryDetails, c) => {
+  const onFinalSubmit = async (joiningBonus, salaryDetails, ctc, id) => {
     try {
-      const combinedObject = { ...joiningBonus, ...salaryDetails, init: c };
+      const combinedObject = { ...joiningBonus, ...salaryDetails, init: ctc };
       console.log("combinedObject", combinedObject);
 
       const payload = {
-        employee_detail_id: "ebaac56c-5cbd-4269-8546-5396363cad4c",
+        employee_detail_id: id,
         performed_by_id: "20",
         performed_by_type: "ok",
         metadata: combinedObject,

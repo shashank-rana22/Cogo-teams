@@ -60,6 +60,7 @@ function ProfilePage() {
 
 			{showCtcBreakupModal && (
 				<CtcBreakupModal
+					detail={detail}
 					showCtcBreakupModal={showCtcBreakupModal}
 					setShowCtcBreakupModal={setShowCtcBreakupModal}
 					ctcStructure={ctcStructure}
