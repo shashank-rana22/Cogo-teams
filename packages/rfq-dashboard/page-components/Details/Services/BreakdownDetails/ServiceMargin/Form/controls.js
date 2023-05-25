@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 
-const getMarginControls = (lineItem = {}, nameKey = '') => [
+const getMarginControls = (nameKey = '') => [
 	{
 		name             : nameKey,
 		type             : 'fieldArray',

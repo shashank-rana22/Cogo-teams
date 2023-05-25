@@ -30,7 +30,7 @@ function Form({
 
 	const { currency } = lineItem;
 
-	const marginControls = getMarginControls(lineItem, nameKey);
+	const marginControls = getMarginControls(nameKey);
 	const { control, watch } = useForm({
 		defaultValues: {
 			[nameKey]: [{
