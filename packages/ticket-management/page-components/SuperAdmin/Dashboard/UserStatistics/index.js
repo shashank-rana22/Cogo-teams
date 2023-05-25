@@ -27,7 +27,7 @@ function UserStatistics() {
 
 	return (
 		<div className={styles.container}>
-			<Widget data={data} />
+			<Widget label="Users (based on issues)" data={data} />
 			<Widget label="Top Categories" data={data} />
 			<Widget label="Top Agents" subLabel="Performance Rating" data={data} />
 		</div>

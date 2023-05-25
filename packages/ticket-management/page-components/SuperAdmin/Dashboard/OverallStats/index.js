@@ -38,7 +38,6 @@ function OverallStats() {
 				<div className={styles.total}>
 					<div className={styles.graph}>
 						<ResponsivePie
-					// loading={loading}
 							data={PieData}
 							innerRadius={0.85}
 							enableArcLinkLabels={false}
@@ -78,7 +77,7 @@ function OverallStats() {
 				</div>
 			</div>
 			{(statsIconsAndData || []).map(({ key, icon, label, count }, index) => {
-				if (index > 4) return null;
+				if (index > 5) return null;
 				return (
 					<div className={styles.tile} key={key}>
 						<div>{icon}</div>
