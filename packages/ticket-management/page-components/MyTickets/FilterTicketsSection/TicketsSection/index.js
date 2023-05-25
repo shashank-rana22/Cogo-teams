@@ -5,7 +5,7 @@ import useListTickets from '../../../../hooks/useListTickets';
 import styles from './styles.module.css';
 import TicketsSectionPart from './TicketSectionPart';
 
-function TicketsSection({ searchText, setModalData = () => {} }) {
+function TicketsSection({ searchParams, setModalData = () => {} }) {
 	const mapping = {
 		Open      : 'unresolved',
 		Pending   : 'pending',
@@ -26,7 +26,7 @@ function TicketsSection({ searchText, setModalData = () => {} }) {
 		listLoading:openTicketsLoading,
 		handleScroll:handleOpenTicketScroll, refreshTickets:openRefreshTickets,
 	} =	useListTickets(
-		searchText,
+		searchParams,
 		mapping.Open,
 		setTicketList,
 		'Open',
@@ -35,7 +35,7 @@ function TicketsSection({ searchText, setModalData = () => {} }) {
 		listLoading:pendingTicketsLoading,
 		handleScroll:handlePendingTicketScroll, refreshTickets:pendingRefreshTickets,
 	} =	useListTickets(
-		searchText,
+		searchParams,
 		mapping.Pending,
 		setTicketList,
 		'Pending',
@@ -44,7 +44,7 @@ function TicketsSection({ searchText, setModalData = () => {} }) {
 		listLoading:escalatedTicketsLoading,
 		handleScroll:handleEscalatedTicketScroll, refreshTickets:escalatedRefreshTickets,
 	} =	useListTickets(
-		searchText,
+		searchParams,
 		mapping.Escalated,
 		setTicketList,
 		'Escalated',
@@ -53,7 +53,7 @@ function TicketsSection({ searchText, setModalData = () => {} }) {
 		listLoading:closedTicketsLoading,
 		handleScroll:handleClosedTicketScroll, refreshTickets:closedRefreshTickets,
 	} =	useListTickets(
-		searchText,
+		searchParams,
 		mapping.Closed,
 		setTicketList,
 		'Closed',

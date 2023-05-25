@@ -17,14 +17,14 @@ export const actionButtonKeys = ({
 		label : 'Resolve',
 		name  : 'resolve',
 	},
-	pending: {
-		label : 'Resolve',
-		name  : 'resolve',
-	},
-	escalated: {
-		label : 'Resolve',
-		name  : 'resolve',
-	},
+	// pending: {
+	// 	label : 'Resolve',
+	// 	name  : 'resolve',
+	// },
+	// escalated: {
+	// 	label : 'Resolve',
+	// 	name  : 'resolve',
+	// },
 	closed: {
 		label : 'Reopen',
 		name  : 'reopen',

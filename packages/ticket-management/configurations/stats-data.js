@@ -4,57 +4,49 @@ export const statsIconsAndData = [
 
 	{
 		icon  : <IcMTicket fill="#ABB0DE" width="22px" height="22px" />,
-		count : '4,000',
 		label : 'No. of Tickets',
-		key   : 'one',
+		key   : 'total_tickets',
 
 	},
 	{
 		icon  : <IcMClock fill="#ABB0DE" width="18px" height="18px" />,
-		count : '400 s',
 		label : 'Avg First Response Time',
-		key   : 'two',
+		key   : 'average_response_time',
 
 	},
 	{
 		icon  : <IcMFtick fill="#ABB0DE" width="25px" height="25px" />,
-		count : '400 s',
 		label : 'Avg Resolution Time',
-		key   : 'three',
+		key   : 'average_resolution_time',
 
 	},
 	{
 		icon  : <IcMTicket fill="#F8AEA8" width="22px" height="22px" />,
-		count : '400',
 		label : 'Escalated Tickets',
-		key   : 'four',
+		key   : 'escalated',
 
 	},
 	{
 		icon  : <IcMTicket fill="#D6B300" width="22px" height="22px" />,
-		count : '2000',
 		label : 'Reopened Tickets',
-		key   : 'five',
+		key   : 'reopened',
 
 	},
 	{
 		icon  : <IcMVeryHappy fill="#ABB0DE" width="22px" height="22px" />,
-		count : '240',
 		label : 'Happy customers',
-		key   : 'six',
+		key   : 'satisfied_customer',
 
 	},
 	{
 		icon  : <IcMAverage fill="#ABB0DE" width="22px" height="22px" />,
-		count : '2000',
 		label : 'Neutral customers',
-		key   : 'seven',
+		key   : 'netural_customer',
 
 	},
 	{
 		icon  : <IcMVerySad fill="#ABB0DE" width="22px" height="22px" />,
-		count : '2000',
 		label : 'Angry customers',
-		key   : 'eight',
+		key   : 'dissatisfied_customer',
 	},
 ];

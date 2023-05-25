@@ -4,7 +4,8 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 
 function SearchType(props) {
-	const { searchText, setSearchText } = props;
+	const { searchParams, setSearchParams } = props;
+
 	return (
 		<div className={styles.search_container}>
 			<Input
@@ -17,8 +18,11 @@ function SearchType(props) {
 					/>
 				)}
 				placeholder="Search here..."
-				value={searchText}
-				onChange={setSearchText}
+				value={searchParams.text}
+				onChange={(val) => setSearchParams((prev) => ({
+					...prev,
+					text: val,
+				}))}
 			/>
 		</div>
 	);

@@ -2,14 +2,13 @@ import { Toast } from '@cogoport/components';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+// import useListTickets from './useListTickets';
+
 const useUpdateTicketActivity = ({
 	refreshTickets = () => {},
 }) => {
-	// const { loading, trigger } = useTicketsRequest('post', false, 'cogocare', {
-	// 	authKey: 'post_tickets_activity',
-	// })('/activity');
-
-	const { loading, trigger } = useTicketsRequest({
+	// const { fetchTickets } = useListTickets();
+	const [{ loading }, trigger] = useTicketsRequest({
 		url     : '/activity',
 		method  : 'post',
 		authkey : 'post_tickets_activity',
@@ -26,7 +25,7 @@ const useUpdateTicketActivity = ({
 			const res = await trigger({
 				data: {
 					UserType      : 'ticket_user',
-					PerformedByID : profile?.id,
+					PerformedByID : profile?.user?.id,
 					Type,
 					TicketID      : [Number(ID)],
 					Status        : StatusChange,
@@ -36,6 +35,7 @@ const useUpdateTicketActivity = ({
 			refreshTickets();
 			// refetchTicket();
 		} catch (e) {
+			console.log(e, 'e');
 			Toast.error(e?.response?.data || 'something went wrong');
 		}
 	};

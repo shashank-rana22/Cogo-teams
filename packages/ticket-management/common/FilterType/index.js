@@ -6,7 +6,7 @@ function FilterType(props) {
 	return (
 		<div className={styles.filter_container}>
 			<SearchType {...props} />
-			<CategoryType />
+			<CategoryType {...props} />
 		</div>
 	);
 }

@@ -30,7 +30,8 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 					DisplayAll : true,
 					size       : 10,
 					page       : pageIndex - 1,
-					QFilter    : searchQuery || undefined,
+					QFilter    : searchQuery.text || undefined,
+					Type       : searchQuery.category,
 				},
 			});
 

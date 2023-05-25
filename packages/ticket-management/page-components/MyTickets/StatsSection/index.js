@@ -1,15 +1,28 @@
+import { pascalCase } from '@cogoport/utils';
+
 import StatsBody from '../../../common/StatsBody';
 import { statsIconsAndData } from '../../../configurations/stats-data';
+import useGetTicketStats from '../../../hooks/useGetTicketStats';
 
 import styles from './styles.module.css';
 
 function StatsSection() {
+	const { statsData } = useGetTicketStats();
+	console.log('statsData:', statsData);
 	return (
 		<div className={styles.stats_section_container}>
 			{statsIconsAndData.map((item) => {
-				const { label, count, icon, key } = item;
+				const { label, icon, key } = item;
+
+				const formattedKey = pascalCase(key);
 				return (
-					<StatsBody label={label} count={count} icon={icon} key={key} />
+					<StatsBody
+						label={label}
+						formattedKey={key}
+						count={statsData?.[formattedKey]}
+						icon={icon}
+						key={label}
+					/>
 				);
 			})}
 		</div>
