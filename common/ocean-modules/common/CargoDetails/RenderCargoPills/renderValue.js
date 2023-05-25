@@ -194,7 +194,7 @@ export const renderValue = (label, detail) => {
 			return formatDate({
 				date       : detail?.schedule_departure || detail?.selected_schedule_departure,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-				formatType : 'dateTime',
+				formatType : 'date',
 				separator  : ' | ',
 			});
 		case 'schedule_arrival':
