@@ -1,4 +1,4 @@
-// import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
 
@@ -22,7 +22,7 @@ function useGetTimeLine({ shipment_data = {} }) {
 		} catch (e) {
 			setData([]);
 
-			// toastApiError(e);
+			toastApiError(e);
 		}
 	}), [shipment_id, trigger]);
 
