@@ -1,32 +1,32 @@
 export const lineItemConfig = [
 	{
 		label : '',
-		span  : 1,
+		span  : 0.5,
 		key   : 'duplicate',
 	},
 	{
 		label : 'Entity',
-		span  : 3,
+		span  : 1.5,
 		key   : 'entity',
 	},
 	{
 		label : 'Controller',
-		span  : 2,
+		span  : 1.5,
 		key   : 'controller',
 	},
 	{
 		label : 'GL Code',
-		span  : 3,
+		span  : 2,
 		key   : 'gl_code',
 	},
 	{
 		label : 'Business Partner',
-		span  : 3,
+		span  : 2,
 		key   : 'business_partner',
 	},
 	{
 		label : 'Type',
-		span  : 3,
+		span  : 2,
 		key   : 'type',
 	},
 	{
@@ -36,7 +36,7 @@ export const lineItemConfig = [
 	},
 	{
 		label : '',
-		span  : 1,
+		span  : 0.5,
 		key   : 'delete',
 	},
 ];
