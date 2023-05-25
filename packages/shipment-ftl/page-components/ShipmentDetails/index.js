@@ -9,6 +9,7 @@ import React, { useMemo, useState, useEffect } from 'react';
 
 import ShipmentHeader from '../../common/ShipmentHeader';
 import Timeline from '../../common/TimeLine';
+import Tasks from '../../common/Tasks'
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
 
@@ -117,8 +118,8 @@ function ShipmentDetails() {
 							{/* <Overview shipmentData={shipment_data} /> */}
 						</TabPanel>
 
-						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-							{/* <Tasks /> */}
+						<TabPanel name="tasks" title="Tasks">
+							<Tasks />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">

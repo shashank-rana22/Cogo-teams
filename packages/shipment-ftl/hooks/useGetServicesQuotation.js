@@ -1,22 +1,15 @@
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useState, useCallback } from 'react';
 
-const useListBookingPreferences = ({ defaultFilters = {}, shipment_id = '' }) => {
+const useGetServicesQuotation = ({ defaultParams = {} }) => {
 	const [apiData, setApiData] = useState({});
-	const [filters, setFilters] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/list_shipment_booking_confirmation_preferences',
+		url    : '/get_shipment_services_quotation',
 		method : 'GET',
-		params : {
-			filters: {
-				shipment_id,
-				...defaultFilters,
-				...filters,
-			},
-		},
-	}, { manual: true });
+		params : defaultParams,
+	});
 
 	const apiTrigger = useCallback(async () => {
 		try {
@@ -32,14 +25,13 @@ const useListBookingPreferences = ({ defaultFilters = {}, shipment_id = '' }) =>
 
 	useEffect(() => {
 		apiTrigger();
-	}, [shipment_id, apiTrigger]);
+	}, [apiTrigger]);
 
 	return {
-		loading,
 		apiTrigger,
 		data: apiData,
-		filters,
-		setFilters,
+		loading,
 	};
 };
-export default useListBookingPreferences;
+
+export default useGetServicesQuotation;

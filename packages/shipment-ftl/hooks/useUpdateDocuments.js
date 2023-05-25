@@ -1,11 +1,11 @@
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-function useUpdateShipmentDocuments({
+function useUpdateDocuments({
 	refetch = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'update_shipment_document',
+		url    : '/update_shipment_document',
 		method : 'POST',
 	}, { manual: true });
 
@@ -27,4 +27,4 @@ function useUpdateShipmentDocuments({
 	};
 }
 
-export default useUpdateShipmentDocuments;
+export default useUpdateDocuments;

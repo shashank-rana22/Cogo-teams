@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 
+import { Layout } from '@cogoport/surface-modules';
 import useListDocuments from '../../../../hooks/useListDocuments';
-import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
-import FormLayout from '../helpers/Layout';
+import useUpdateDocuments from '../../../../hooks/useUpdateDocuments';
 import getDefaultValues from '../utils/get-default-values';
 
 import controls from './controls';
@@ -28,7 +28,7 @@ function UploadAmendDoc({
 		refetch();
 	};
 
-	const { updateDocument } = useUpdateShipmentDocuments({ refetch: newRefetch });
+	const { updateDocument } = useUpdateDocuments({ refetch: newRefetch });
 
 	const allControls = controls(task) || [];
 	const details = list.list?.[0] || {};
@@ -81,7 +81,7 @@ function UploadAmendDoc({
 				</div>
 			</div>
 
-			<FormLayout control={control} fields={allControls} errors={errors} />
+			<Layout control={control} fields={allControls} errors={errors} />
 			<div className={styles.button_wrap}>
 				<Button
 					onClick={handleSubmit(handleSubmitFinal)}

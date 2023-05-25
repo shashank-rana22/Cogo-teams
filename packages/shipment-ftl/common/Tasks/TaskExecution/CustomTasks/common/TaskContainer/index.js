@@ -2,8 +2,6 @@ import { Loader } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import taskDisplayNames from '../../../../../../configurations/display-name-mappings';
-import incoTermMapping from '../../../../../../configurations/inco-term-mapping.json';
 
 import styles from './styles.module.css';
 
@@ -16,8 +14,7 @@ function TaskContainer({
 }) {
 	const trade_type = incoTermMapping[shipment_data?.inco_term] || '';
 
-	const taskName = taskDisplayNames(trade_type)[pendingTask?.task]?.display_name
-		|| startCase(pendingTask?.task || '');
+	const taskName = startCase(pendingTask?.task || '');
 
 	return (
 		<div className={styles.container}>

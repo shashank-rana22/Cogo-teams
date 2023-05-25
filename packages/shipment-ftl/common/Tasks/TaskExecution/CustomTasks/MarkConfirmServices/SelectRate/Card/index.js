@@ -3,8 +3,8 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
-import useUpdateShipmentBookingConfirmationPreferences
-	from '../../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
+import useUpdateBookingPreferences
+	from '../../../../../../../hooks/useUpdateBookingPreferences';
 
 import styles from './styles.module.css';
 
@@ -38,7 +38,7 @@ function Card({
 }) {
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
 
-	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({});
+	const { apiTrigger, loading } = useUpdateBookingPreferences({});
 
 	const handleProceed = async () => {
 		await apiTrigger(item);

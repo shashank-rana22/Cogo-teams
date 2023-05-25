@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
-import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipmentServicesQuotation';
-import useUpdateShipmentBuyQuotations from '../../../../../../hooks/useUpdateShipmentBuyQuotations';
-import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
+import useGetServicesQuotation from '../../../../../../hooks/useGetServicesQuotation';
+import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotations';
+import useUpdateTask from '../../../../../../hooks/useUpdateTask';
 
 import checkLineItemsSum from './checkLineItemSum';
 import getStep3Controls from './getStep3Controls';
@@ -39,16 +39,16 @@ const useGetStep3Data = ({
 		}
 	});
 
-	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({
+	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetServicesQuotation({
 		defaultParams: {
 			shipment_id             : shipment_data?.id,
 			service_ids,
 			service_detail_required : true,
 		},
 	});
-	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateShipmentBuyQuotations({});
+	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({});
 
-	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({
+	const { apiTrigger:updateTask } = useUpdateTask({
 		refetch: () => {
 			onCancel();
 			taskListRefetch();

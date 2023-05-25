@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 
-import CargoDetails from '../../../common/CargoDetails';
+// import CargoDetails from '../../../common/CargoDetails';
 
 import Child from './Child';
 import Header from './Header';
@@ -14,7 +14,7 @@ function EditLineItems({
 
 	return (
 		<div className={styles.container}>
-			<CargoDetails primary_service={cargoDetails} />
+			{/* <CargoDetails primary_service={cargoDetails} /> */}
 
 			<Header controls={controls} />
 

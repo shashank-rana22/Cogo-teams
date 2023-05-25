@@ -1,4 +1,4 @@
-import AdditionsServicesTasks from './AdditionalServicesTasks';
+// import AdditionsServicesTasks from './AdditionalServicesTasks';
 import ExecuteTask from './ExecuteTask';
 import ReviewDoc from './ReviewDoc';
 import UploadAmendDoc from './UploadAmendDoc';
@@ -30,21 +30,21 @@ function TaskExecution({
 		);
 	}
 
-	if (
-		['add_quote_additional_service',
-			'approve_quote_additional_service',
-			'approve_amended_quote',
-			'amend_quote_additional_service',
-		].includes(task?.task_type)
-	) {
-		return (
-			<AdditionsServicesTasks
-				onCancel={onCancel}
-				task={task}
-				refetch={taskListRefetch}
-			/>
-		);
-	}
+	// if (
+	// 	['add_quote_additional_service',
+	// 		'approve_quote_additional_service',
+	// 		'approve_amended_quote',
+	// 		'amend_quote_additional_service',
+	// 	].includes(task?.task_type)
+	// ) {
+	// 	return (
+	// 		<AdditionsServicesTasks
+	// 			onCancel={onCancel}
+	// 			task={task}
+	// 			refetch={taskListRefetch}
+	// 		/>
+	// 	);
+	// }
 
 	return (
 		<ExecuteTask

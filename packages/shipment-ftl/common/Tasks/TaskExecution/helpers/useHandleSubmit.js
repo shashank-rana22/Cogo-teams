@@ -91,15 +91,12 @@ function useHandleSubmit({
 		}
 
 		try {
-			const skipUpdateTask = finalConfig?.end_point === 'send_nomination_notification'
-				&& task?.task === 'mark_confirmed';
-
 			const res = await trigger({
 				data: finalPayload,
 			});
 
 			if (!res.hasError) {
-				if (finalConfig.end_point && !skipUpdateTask) {
+				if (finalConfig.end_point) {
 					await triggerTask({
 						data: isLastStep
 							? { id: task?.id }
@@ -112,11 +109,7 @@ function useHandleSubmit({
 				}
 
 				if (isLastStep) {
-					if (skipUpdateTask && res?.data?.message) {
-						Toast.info('Notification sent to agent');
-					} else {
-						Toast.success('Task completed Successfully !');
-					}
+					Toast.success('Task completed Successfully !');
 					onCancel();
 				}
 
