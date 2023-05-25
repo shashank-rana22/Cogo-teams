@@ -1,34 +1,34 @@
-// import { useSelector } from '@cogoport/store';
-// import React, { useState } from 'react';
+import { useSelector } from '@cogoport/store';
+import React, { useState } from 'react';
 
 import Header from '../../common/Header';
 
 import FilterTicketsSection from './FilterTicketsSection';
-// import Modals from './Modals';
+import Modals from './Modals';
 import StatsSection from './StatsSection';
 
 // import styles from './styles.module.css';
 
-// function getDefaultValues(query) {
-// 	const { showticketslist = false, ticketId = '' } = query;
+function getDefaultValues(query) {
+	const { showticketslist = false, ticketId = '' } = query;
 
-// 	if (showticketslist) {
-// 		return { type: 'tickets_list' };
-// 	}
+	if (showticketslist) {
+		return { type: 'tickets_list' };
+	}
 
-// 	if (ticketId) {
-// 		return { type: 'ticket_details', ticketId };
-// 	}
+	if (ticketId) {
+		return { type: 'ticket_details', ticketId };
+	}
 
-// 	return null;
-// }
+	return null;
+}
 
 function MyTickets() {
-	// const { query } = useSelector(({ profile, general }) => ({
-	// 	agent : profile.partner?.entity_manager,
-	// 	query : general?.query,
-	// }));
-	// const [modalData, setModalData] = useState(getDefaultValues(query));
+	const { query } = useSelector(({ profile, general }) => ({
+		agent : profile.partner?.entity_manager,
+		query : general?.query,
+	}));
+	const [modalData, setModalData] = useState(getDefaultValues(query));
 
 	return (
 		<>
@@ -37,7 +37,7 @@ function MyTickets() {
 				<StatsSection />
 				<FilterTicketsSection />
 			</div>
-			{/* <Modals modalData={modalData} setModalData={setModalData} /> */}
+			<Modals modalData={modalData} setModalData={setModalData} />
 		</>
 	);
 }

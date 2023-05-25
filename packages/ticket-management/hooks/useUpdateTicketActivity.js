@@ -4,7 +4,6 @@ import { useSelector } from '@cogoport/store';
 
 const useUpdateTicketActivity = ({
 	refreshTickets = () => {},
-	refetchTicket = () => {},
 }) => {
 	// const { loading, trigger } = useTicketsRequest('post', false, 'cogocare', {
 	// 	authKey: 'post_tickets_activity',
@@ -35,7 +34,7 @@ const useUpdateTicketActivity = ({
 			});
 			Toast.success(res?.data || 'Ticket Status Updated Successfully!');
 			refreshTickets();
-			refetchTicket();
+			// refetchTicket();
 		} catch (e) {
 			Toast.error(e?.response?.data || 'something went wrong');
 		}
