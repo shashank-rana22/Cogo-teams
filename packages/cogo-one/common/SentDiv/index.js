@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
+import { IcMTick, IcMDoubleTick, IcMCross, IcMListView } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 
 import { LOGO_URL } from '../../constants';
@@ -28,7 +28,7 @@ function SentDiv({
 			<div className={styles.message_div}>
 				<div className={styles.name}>
 					Replied by
-					{' '}
+					&nbsp;
 					{send_by || (session_type === 'admin' ? 'kam' : 'bot')}
 					,
 					<span className={styles.time_stamp}>{date}</span>

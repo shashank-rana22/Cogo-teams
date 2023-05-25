@@ -1,11 +1,15 @@
 .list_order {
 	width: 100%;
+	margin-top: 3px;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 2px 3px 0 #627fac33;
 }
 
 .list_item {
 	display: flex;
 	align-items: flex-start;
-	padding: 10px 0;
+	padding: 10px;
 	border-bottom: 1px solid #e0e0e0;
 
 	&:last-child {

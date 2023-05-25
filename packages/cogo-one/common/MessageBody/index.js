@@ -5,7 +5,7 @@ import MESSAGE_MAPPING from '../../constants/MESSAGE_MAPPING';
 import whatsappTextFormatting from '../../helpers/whatsappTextFormatting';
 
 import CustomFileDiv from './CustomFileDiv';
-import OrderDisplay from './OrderDisplay';
+import Order from './Order';
 import styles from './styles.module.css';
 
 function MessageBody({ response = {}, message_type = 'text' }) {
@@ -116,6 +116,10 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 				</div>
 			</div>
 		);
+	}
+
+	if (message_type === 'order') {
+		return <Order message={message} />;
 	}
 
 	return <ShowMessage />;

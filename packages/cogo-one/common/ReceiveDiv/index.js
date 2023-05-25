@@ -1,10 +1,13 @@
 import { cl, Tooltip } from '@cogoport/components';
-import { IcMOverflowDot } from '@cogoport/icons-react';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMOverflowDot, IcMCross } from '@cogoport/icons-react';
 import { format, isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import MessageBody from '../MessageBody';
 import RepliedMessage from '../RepliedMessage';
 
+import OrderDisplay from './OrderDisplay';
 import styles from './styles.module.css';
 
 function ReceiveDiv({
@@ -13,12 +16,13 @@ function ReceiveDiv({
 	ticketPopoverContent = () => {},
 	user_name = '',
 }) {
+	const [showOrder, setShowOrder] = useState(false);
 	const {
 		message_type = 'text',
 		created_at = '',
 		response = {},
 	} = eachMessage;
-	const { reply_metadata = {} } = response || {};
+	const { reply_metadata = {}, message = '' } = response || {};
 
 	const date = created_at && format(new Date(created_at), 'dd MMM YYYY, HH:mm');
 	const hasRepliedMessage = !isEmpty(reply_metadata);
@@ -48,6 +52,35 @@ function ReceiveDiv({
 					/>
 				</div>
 			</div>
+			{message_type === 'order' && (
+				<div
+					className={styles.order_container}
+				>
+					<div
+						role="button"
+						tabIndex={0}
+						className={styles.list_button}
+						onClick={() => setShowOrder((p) => !p)}
+					>
+						{showOrder ? (
+							<span className={styles.btn_container}>
+								<IcMCross className={styles.btn_icon} />
+								Hide
+							</span>
+						) : (
+							<span className={styles.btn_container}>
+								<img
+									className={styles.btn_icon}
+									src={GLOBAL_CONSTANTS.image_url.cart_png}
+									alt="order"
+								/>
+								Order
+							</span>
+						)}
+					</div>
+					{showOrder && <OrderDisplay message={message} />}
+				</div>
+			)}
 		</div>
 	);
 }
