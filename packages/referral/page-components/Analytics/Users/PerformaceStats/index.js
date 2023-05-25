@@ -2,8 +2,8 @@ import { ResponsiveLine } from '@cogoport/charts/line';
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useState } from 'react';
 
-import { data } from '../../../configurations/dummyData';
-import { TABS_OPTIONS } from '../../../constants';
+import { data } from '../../../../configurations/dummyData';
+import { TABS_OPTIONS } from '../../../../constants';
 import NetworkStats from '../NetworkStats';
 
 import styles from './styles.module.css';

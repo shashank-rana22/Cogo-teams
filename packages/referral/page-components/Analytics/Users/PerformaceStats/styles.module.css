@@ -23,7 +23,7 @@
 
 	:global {
 		.ui_tab_container {
-			padding: 16px !important;
+			padding: 15px !important;
 		}
 	}
 }
@@ -31,7 +31,7 @@
 .graph_div {
 	display: flex;
 	width: 650px;
-	height: 200px;
+	height: 204px;
 	margin-right: 16px;
 	background: #fff;
 	border-radius: 0 6px 6px 0;

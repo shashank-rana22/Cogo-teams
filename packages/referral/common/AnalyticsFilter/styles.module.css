@@ -18,3 +18,24 @@
 	margin-left: 6px;
 	cursor: pointer;
 }
+
+.content {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+}
+
+.wrapper {
+	margin-bottom: 8px;
+}
+
+.label {
+	font-size: 14px;
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+}

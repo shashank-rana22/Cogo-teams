@@ -10,6 +10,8 @@
 }
 
 .title {
+	display: flex;
+	align-self: flex-start;
 	font-size: 12px;
 	font-weight: 600;
 	color: #828282;
@@ -17,6 +19,6 @@
 
 .graph_div {
 	display: flex;
-	max-width: 350px;
-	height: 180px;
+	width: 388px;
+	height: 195px;
 }

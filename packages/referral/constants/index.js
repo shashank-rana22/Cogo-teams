@@ -96,3 +96,49 @@ export const TABS_OPTIONS = [
 	},
 
 ];
+
+export const BUSINESS_TAB_OPTIONS = [
+	{
+		label : 'Signed Up',
+		name  : 'signed_up',
+		badge : 3,
+	},
+	{
+		label : 'KYC Verified',
+		name  : 'kyc_verified',
+		badge : 3,
+	},
+	{
+		label : 'Shipment',
+		name  : 'shipment',
+		badge : 3,
+	},
+	{
+		label : 'Subscription',
+		name  : 'subscription',
+		badge : 3,
+	},
+];
+
+export const BUSINESS_REWARDS_OPTIONS = [
+	{
+		label : 'Total',
+		name  : 'total',
+		badge : 3,
+	},
+	{
+		label : 'KYC',
+		name  : 'kyc',
+		badge : 3,
+	},
+	{
+		label : 'Shipment',
+		name  : 'shipment',
+		badge : 3,
+	},
+	{
+		label : 'Subscription',
+		name  : 'subscription',
+		badge : 3,
+	},
+];

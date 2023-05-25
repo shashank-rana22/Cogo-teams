@@ -3,10 +3,11 @@ import { useState } from 'react';
 
 import { USER_OPTIONS } from '../../constants';
 
-import NetworkList from './NetworkList';
-import PerformanceStats from './PerformaceStats';
+import BusinessPerformance from './Business';
+
+// import PerformanceStats from './PerformaceStats';
 import styles from './styles.module.css';
-import UserList from './UsersList';
+import UserPerformance from './Users';
 
 function ReferralAnalytics() {
 	const [filterOptions, setFilterOptioins] = useState({
@@ -47,20 +48,15 @@ function ReferralAnalytics() {
 				>
 					<TabPanel name="user_performance" title="User Performance">
 						<div className={styles.label}>Users that are</div>
-						<PerformanceStats />
+						<UserPerformance />
 					</TabPanel>
 
 					<TabPanel name="business_performance" title="Business Performance">
-						<div className={styles.label}>Business that are</div>
-						<PerformanceStats />
+						<BusinessPerformance />
 					</TabPanel>
 				</Tabs>
 			</div>
 
-			<div className={styles.list_div}>
-				<NetworkList />
-				<UserList />
-			</div>
 		</div>
 	);
 }

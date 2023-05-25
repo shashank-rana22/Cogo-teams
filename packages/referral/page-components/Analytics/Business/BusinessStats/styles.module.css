@@ -1,0 +1,7 @@
+.graph_div {
+	display: flex;
+	width: 1025px;
+	height: 204px;
+	background: #fff;
+	border-radius: 0 6px 6px 0;
+}

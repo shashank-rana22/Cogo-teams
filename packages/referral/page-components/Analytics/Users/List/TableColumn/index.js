@@ -1,12 +1,23 @@
-import { Tooltip } from '@cogoport/components';
+import { ButtonGroup, Popover, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
+import ListButtons from '../../../../../utils/renderButtonData';
+
+// import ListButtons from '../../../../../utils/renderButtonData';
 import NodeColumns from '../NodeColumns';
 
 import styles from './styles.module.css';
 
-function TableColumns({ listType = '' }) {
+// const buttonOptioins = (item) => (
+// 	<ButtonGroup
+// 		size="sm"
+// 		options={<ListButtons item={item} />}
+// 		direction="vertical"
+// 	/>
+// );
+
+function TableColumns({ listType = '', showOptions = {}, setShowOptions = () => {} }) {
 	const columns = [
 		{
 			Header   : 'NETWORK NAME',
@@ -92,10 +103,15 @@ function TableColumns({ listType = '' }) {
 			Header   : ' ',
 			accessor : (item = {}) => (
 				<div className={styles.show_details} key={item?.id}>
-					<IcMOverflowDot />
-					{/* <ShowButtons
-						item={item}
-					/> */}
+					<Popover
+						// visible={item?.id === showOptions?.id}
+						onClickOutside={() => setShowOptions({})}
+						placement="left"
+						// render="hello"
+						render={<ListButtons item={item} />}
+					>
+						<IcMOverflowDot className={styles.dot_icon} onClick={() => setShowOptions(item)} />
+					</Popover>
 				</div>
 			),
 			conditions: ['network', 'users'],

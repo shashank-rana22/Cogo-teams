@@ -31,13 +31,6 @@
 	margin-bottom: 22px;
 }
 
-.list_div {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	width: 100%;
-}
-
 .right_div {
 	display: flex;
 	align-items: center;

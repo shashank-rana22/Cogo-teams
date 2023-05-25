@@ -1,6 +1,6 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 
-import { data } from '../../../configurations/dummyData';
+import { data } from '../../../../configurations/dummyData';
 
 import styles from './styles.module.css';
 
@@ -11,7 +11,7 @@ function NetworkStats() {
 			<div className={styles.graph_div}>
 				<ResponsiveLine
 					data={data}
-					margin={{ top: 12, right: 0, bottom: 55, left: 50 }}
+					margin={{ top: 12, right: 20, bottom: 55, left: 50 }}
 					xScale={{ type: 'point' }}
 					yScale={{
 						type    : 'linear',

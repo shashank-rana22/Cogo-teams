@@ -1,8 +1,6 @@
 import styles from './styles.module.css';
 
 function NodeColumns({ index = 0, item = {}, type = '' }) {
-	console.log('item:', item);
-
 	const { direct = 0, indirect = 0 } = item;
 	const { direct: expecteCogopoint = 0, indirect: inexpectedCogopoints = 0 } = item;
 	const subTitleOptions = [

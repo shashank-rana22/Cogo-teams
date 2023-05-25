@@ -1,6 +1,6 @@
 import { Table } from '@cogoport/components';
 
-import AnalyticsFilter from '../../../common/AnalyticsFilter';
+import AnalyticsFilter from '../../../../common/AnalyticsFilter';
 import TableColumns from '../List/TableColumn';
 
 import styles from './styles.module.css';
