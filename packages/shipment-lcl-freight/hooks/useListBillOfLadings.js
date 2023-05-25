@@ -8,12 +8,13 @@ const useListBillOfLadings = ({ shipment_data = {} }) => {
 	const { id: shipment_id = '' } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/list_bill_of_ladings',
+		url    : '/list_shipment_bl_details',
 		params : {
 			filters: {
 				shipment_id,
 			},
-			additional_methods: ['cargo_details'],
+			container_details_required : false,
+			page_limit                 : 100,
 		},
 	}, { manual: true });
 
