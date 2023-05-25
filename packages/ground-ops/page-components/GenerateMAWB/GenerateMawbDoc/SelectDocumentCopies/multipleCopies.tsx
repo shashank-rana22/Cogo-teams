@@ -29,11 +29,7 @@ const multipleCopies = ({ data, setEditCopies, setGenerate, setViewDoc, setEdit,
 	const OPTIONS = [
 		{ name: 'original_3', value: 'original_3', label: checkboxLabel('Original 3 (For Shipper)', 'original_3') },
 		{ name: 'original_2', value: 'original_2', label: checkboxLabel('Original 2 (For Consignee)', 'original_2') },
-		{
-			name  : 'original_1',
-			value : 'original_1',
-			label : checkboxLabel('Original 1 (For issuing Carrier)', 'original_1'),
-		},
+		{ name: 'original_1', value: 'original_1', label: 'Original 1 (For issuing Carrier)' },
 		{ name: 'copy_9', value: 'copy_9', label: checkboxLabel('Copy 9 (For Agent)', 'copy_9') },
 		{ name: 'copy_4', value: 'copy_4', label: checkboxLabel('Copy 4 (Delivery Receipt)', 'copy_4') },
 		{ name: 'copy_5', value: 'copy_5', label: checkboxLabel('Copy 5 (For Airport of Destination)', 'copy_5') },
