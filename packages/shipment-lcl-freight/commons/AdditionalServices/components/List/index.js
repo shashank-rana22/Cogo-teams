@@ -79,30 +79,28 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
-			{totalCount > 8
-				? (
-					<div className={styles.show_more}>
-						{pageLimit > 8
-							? 	(
-								<Button
-									size="md"
-									themeType="link"
-									onClick={() => setPageLimit(8)}
-								>
-									Show Less
-								</Button>
-							) : (
-								<Button
-									size="md"
-									themeType="link"
-									onClick={() => setPageLimit(16)}
-								>
-									Show More
-								</Button>
-							)}
-					</div>
-				)
-				: null}
+			{totalCount > 8 ? (
+				<div className={styles.show_more}>
+					{pageLimit > 8
+						? 	(
+							<Button
+								size="md"
+								themeType="link"
+								onClick={() => setPageLimit(8)}
+							>
+								Show Less
+							</Button>
+						) : (
+							<Button
+								size="md"
+								themeType="link"
+								onClick={() => setPageLimit(100)}
+							>
+								Show More
+							</Button>
+						)}
+				</div>
+			) : null}
 
 			{additionalServiceList?.length ? (
 				<div className={styles.info_container}>
