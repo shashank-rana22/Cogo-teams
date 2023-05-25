@@ -1,5 +1,5 @@
 import { useRouter } from '@cogoport/next';
-// import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
@@ -25,7 +25,7 @@ function useGetShipment() {
 
 				setGetShipmentStatusCode(res?.status);
 			} catch (err) {
-				// toastApiError(err);
+				toastApiError(err);
 
 				setGetShipmentStatusCode(err?.response?.data?.status_code || err?.response?.status);
 			}
