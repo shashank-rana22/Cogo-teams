@@ -20,6 +20,16 @@ function MessageCardData({
 	autoAssignChats = true,
 	handleCheckedChats = () => {},
 }) {
+	if (item?.id === 'CqOvd0ZUnfeRBO7YLB3I'){
+		console.log("autoAssignChats:", autoAssignChats)
+		console.log("firestore:", firestore)
+		console.log("setActiveMessage:", setActiveMessage)
+		console.log("userId:", userId)
+		console.log("activeCardId:", activeCardId)
+		console.log("item:", item)
+		console.log("handleCheckedChats:", handleCheckedChats)
+	}
+
 	const {
 		user_name = '',
 		organization_name = '',
@@ -83,9 +93,9 @@ function MessageCardData({
 				<div className={styles.card}>
 					<div className={styles.user_information}>
 						<div className={styles.avatar_container}>
-							<UserAvatar
+							{/* <UserAvatar
 								type={channel_type}
-							/>
+							/> */}
 							<div className={styles.user_details}>
 								<Tooltip
 									content={startCase(search_user_name) || 'User'}

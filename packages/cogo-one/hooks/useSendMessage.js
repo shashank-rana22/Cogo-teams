@@ -11,6 +11,7 @@ const useSendMessage = ({ channel_type = '', activeChatCollection }) => {
 		whatsapp      : '/create_communication',
 		platform_chat : '/create_communication_platform_chat',
 		telegram      : '/create_communication',
+		zalo          : '/create_communication',
 	};
 	const {
 		user:{ id },

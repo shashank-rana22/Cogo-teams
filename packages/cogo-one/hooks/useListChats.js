@@ -280,6 +280,7 @@ const useListChats = ({
 	}, [mountActiveRoomSnapShot]);
 
 	const setActiveMessage = async (val) => {
+		console.log("val:", val)
 		const { channel_type, id } = val || {};
 		if (channel_type && id) {
 			try {
