@@ -3,8 +3,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function TicketStructureLoader({ listType = '' }) {
-	const ticketStructureLoaderItems = listType === 'create' ? [...Array(2)].fill() : [...Array(4)].fill();
+function TicketStructureLoader() {
+	const ticketStructureLoaderItems = [...Array(4)].fill();
 
 	return (
 		<div className={styles.tickets_container}>

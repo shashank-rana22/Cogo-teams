@@ -26,7 +26,6 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 				params: {
 					Status     : status,
 					UserID     : profile?.id,
-					// size    : listType === 'create' ? 2 : 10,
 					// PerformedByID : profile?.id,
 					DisplayAll : true,
 					size       : 10,

@@ -1,4 +1,3 @@
-import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
 import useUpdateTicketActivity from '../../hooks/useUpdateTicketActivity';
@@ -14,13 +13,7 @@ function TicketStructure({
 	loading = false,
 	refreshTickets = () => {},
 	setModalData = () => {},
-	listType = '',
 }) {
-	// const {
-	// 	refreshTickets,
-	// 	setModalData,
-	// 	listType = '',
-	// } = props;
 	const { updateTicketActivity } = useUpdateTicketActivity({
 		refreshTickets,
 	});
@@ -29,47 +22,32 @@ function TicketStructure({
 		return (
 			<EmptyStateTicketStructure
 				setModalData={setModalData}
-				listType={listType}
 			/>
 		);
 	}
 
 	return (
 		<div
-			className={cl`${
-				listType === 'create' ? styles.raised_box : styles.ticket_box
-			}`}
+			className={styles.ticket_box}
 			onScroll={(e) => handleScroll(
 				e.target.clientHeight,
 				e.target.scrollTop,
 				e.target.scrollHeight,
 			)}
 		>
-			{/* {
-				data.map((item) => (
+			{
+				data.map((item = {}) => (
 					<TicketStructureBody
 						data={item}
 						key={item.id}
 						updateTicketActivity={updateTicketActivity}
-						setModalData={setModalData}
 
 					/>
 				))
-			} */}
-
-			{!(listType === 'create' && loading)
-				&& data.map((item = {}) => (
-					<TicketStructureBody
-						data={item}
-						key={item.id}
-						updateTicketActivity={updateTicketActivity}
-						setModalData={setModalData}
-						listType={listType}
-					/>
-				))}
+			}
 
 			{loading && (
-				<TicketStructureLoader listType={listType} />
+				<TicketStructureLoader />
 			)}
 		</div>
 	);

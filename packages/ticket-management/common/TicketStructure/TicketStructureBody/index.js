@@ -9,8 +9,6 @@ import styles from './styles.module.css';
 function TicketStructureBody({
 	data,
 	updateTicketActivity = () => {},
-	setModalData = () => {},
-	listType,
 }) {
 	const {
 		ID = '',
@@ -28,24 +26,8 @@ function TicketStructureBody({
 		updateTicketActivity(actionButtonKeys[Status]?.name, ID);
 	};
 
-	const handleTicket = () => {
-		if (listType === 'create') {
-			const currentUrl = window.location.href;
-			const newUrl = `${currentUrl
-				.split('?')?.[0]
-				.replace(/\/$/, '')}?ticketId=${ID}`;
-			window.open(newUrl, '_blank', 'noreferrer');
-		}
-		setModalData({
-			type     : 'ticket_details',
-			ticketId : ID,
-		});
-	};
-
 	return (
 		<div
-			onClick={handleTicket}
-			role="presentation"
 			className={styles.ticket_container}
 		>
 			<div className={styles.subcontainer_one}>
@@ -54,7 +36,6 @@ function TicketStructureBody({
 						#
 						{ID}
 					</div>
-					{/* {listType !== 'create' && ( */}
 					<div
 						role="presentation"
 						className={styles.reopen_resolve}
@@ -62,8 +43,6 @@ function TicketStructureBody({
 					>
 						{actionButtonKeys[Status]?.label || ''}
 					</div>
-					{/* )} */}
-
 				</div>
 				<div className={styles.category_ticket_activity}>
 					{Type || Description.substring(0, 100)}
