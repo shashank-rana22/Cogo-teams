@@ -1,0 +1,76 @@
+.form_container {
+	margin-bottom: 10px;
+}
+
+.form_action {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.field_array_container {
+	margin: 4px 0;
+
+	&:not(:first-child) {
+		border-top: 1px solid black;
+	}
+}
+
+.form_item_container {
+	margin: 6px 0;
+}
+
+.row {
+	display: flex;
+	justify-content: space-between;
+}
+
+.row > div {
+	width: 49%;
+}
+
+.contact_form_item {
+	display: flex;
+	justify-content: space-between;
+	margin: 6px 0;
+}
+
+.country_code {
+	width: 28%;
+}
+
+.contact_number {
+	width: 70%;
+}
+
+.cancel {
+	margin-right: 8px;
+}
+
+.delete_content {
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	color: red;
+}
+
+.add_container {
+	display: flex;
+	justify-content: center;
+}
+
+.add_content {
+	display: flex;
+	align-items: center;
+	font-size: 16px;
+	color: black;
+}
+
+.errors {
+	font-size: 12px;
+	color: red;
+}
+
+.form_label {
+	font-size: 12px;
+	font-weight: 600;
+}
