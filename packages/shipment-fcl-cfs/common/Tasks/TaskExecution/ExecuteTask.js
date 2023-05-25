@@ -13,15 +13,6 @@ import {
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
-// const excludeServices = [
-// 	'fcl_freight_service',
-// 	'haulage_freight_service',
-// ];
-
-const excludeServices = [
-	'fcl_cfs_service',
-];
-
 function ExecuteTask({
 	task = {}, onCancel = () => {}, taskListRefetch = () => {},
 	selectedMail = [],
@@ -49,9 +40,7 @@ function ExecuteTask({
 
 	if (
 		task?.service_type
-		&& task?.task === 'mark_confirmed'
-		&& (!excludeServices.includes(task?.service_type))
-	) {
+		&& task?.task === 'mark_confirmed') {
 		return (
 			<MarkConfirmServices
 				task={task}

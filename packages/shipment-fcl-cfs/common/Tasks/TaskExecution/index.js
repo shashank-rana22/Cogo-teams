@@ -20,7 +20,7 @@ function TaskExecution({
 		);
 	}
 
-	if (task?.task_type === 'amend_document' && task?.task !== 'amend_draft_house_bill_of_lading') {
+	if (task?.task_type === 'amend_document') {
 		return (
 			<UploadAmendDoc
 				task={task}
