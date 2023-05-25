@@ -5,8 +5,8 @@ import { useSelector } from '@cogoport/store';
 import React, { useContext, useState } from 'react';
 
 import CargoDetails from '../../commons/CargoDetails';
+import PortDetails from '../../commons/PortDetails';
 import CancelShipment from '../CancelShipment';
-import PortDetails from '../PortDetails';
 
 import AddPoNumber from './AddPoNumber';
 import Loader from './Loader';
