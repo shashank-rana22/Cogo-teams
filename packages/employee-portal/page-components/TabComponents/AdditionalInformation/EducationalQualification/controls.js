@@ -18,7 +18,10 @@ const getControls = [{
 				{ label: 'MCA', value: 'MCA' },
 				{ label: 'Diploma', value: 'Diploma' },
 			],
-			placeholder: 'Degree',
+			placeholder : 'Degree',
+			style       : {
+				width: '60%',
+			},
 		},
 		{
 			name        : 'school_name',
