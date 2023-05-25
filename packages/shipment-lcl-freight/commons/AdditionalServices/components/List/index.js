@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
-import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
+import useListShipmentAdditionalServices from '../../../../hooks/useListShipmentAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 import AddIp from '../AddIp';
 import AddRate from '../AddRate';
@@ -25,7 +25,7 @@ function List({ isSeller = false }) {
 	const [showModal, setShowModal] = useState(false);
 	const [pageLimit, setPageLimit] = useState(8);
 
-	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
+	const { list: additionalServiceList, refetch, loading, totalCount } = useListShipmentAdditionalServices({
 		shipment_data,
 		pageLimit,
 	});

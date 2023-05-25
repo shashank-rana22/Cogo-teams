@@ -33,7 +33,7 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 	const showEditParamsKey = serviceData?.show_edit_params;
 
 	const isControlsEditable = controlsEditableConditions.some(
-		(conditions) => getShowCondition(shipment_data, conditions),
+		(conditions) => getShowCondition({ trade_type: shipment_data?.trade_type, ...serviceData }, conditions),
 	);
 
 	return userCanEdit && showEditParamsKey && isControlsEditable;

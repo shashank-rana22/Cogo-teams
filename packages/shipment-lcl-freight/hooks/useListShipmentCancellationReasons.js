@@ -1,30 +1,39 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useState, useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 
-export default function useListShipmentCancellationReasons() {
-	const [apiData, setApiData] = useState({});
-
-	const [{ loading }, trigger] = useRequest({
-		url    : '/list_shipment_cancellation_reasons',
-		method : 'GET',
+export default function useListShipmentCancellationReasons({
+	defaultFilters = {},
+	defaultParams = {},
+	initialCall = true,
+}) {
+	const [{ loading, data }, trigger] = useRequest({
+		url          : '/list_shipment_cancellation_reasons',
+		method       : 'GET',
+		service_name : 'shipment',
+		params       : {
+			filters: {
+				...defaultFilters,
+			},
+			...defaultParams,
+		},
 	}, { manual: true });
 
-	const getReasons = useCallback(async (payload) => {
+	const getReasons = useCallback(async () => {
 		try {
-			const res = await trigger({ params: payload });
-
-			setApiData(res?.data || {});
+			await trigger();
 		} catch (err) {
-			setApiData([]);
-
 			toastApiError(err);
 		}
 	}, [trigger]);
 
+	useEffect(() => {
+		if (initialCall) getReasons();
+	}, [initialCall, getReasons]);
+
 	return {
 		getReasons,
-		reasons        : apiData?.options || [],
+		reasons        : data?.options || [],
 		reasonsLoading : loading,
 	};
 }

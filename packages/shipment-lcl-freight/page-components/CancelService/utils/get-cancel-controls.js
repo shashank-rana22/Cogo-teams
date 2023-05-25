@@ -2,7 +2,7 @@ import getCancelReasons from './get-cancel-reasons';
 
 export default function getCancelControls({
 	selectedReason,
-	isSeller,
+	isSeller = false,
 }) {
 	const type = isSeller ? 'service_supplier' : 'service_shipper';
 

@@ -7,8 +7,9 @@ export default function useUpdateShipmentBookingParamter({
 	successMessage = 'Booking params have been changed. Please check the quotation.',
 }) {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_booking_parameter',
-		method : 'POST',
+		url          : '/update_shipment_booking_parameter',
+		method       : 'POST',
+		service_name : 'shipment',
 	});
 
 	const apiTrigger = async (payload) => {

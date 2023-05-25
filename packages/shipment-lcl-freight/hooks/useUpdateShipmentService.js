@@ -7,8 +7,9 @@ const useUpdateShipmentService = ({
 	successMessage = 'Successfully Updated',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_service',
-		method : 'POST',
+		url          : '/update_shipment_service',
+		method       : 'POST',
+		service_name : 'shipment',
 	});
 
 	const apiTrigger = async (payload) => {

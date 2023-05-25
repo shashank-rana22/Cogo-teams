@@ -1,13 +1,15 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-import dummyData from '../DummyData/shipment_data.json';
+// import dummyData from '../DummyData/shipment_data.json';
 
 export default function useGetShipment({ defaultParams = {}, defaultFilters = {}, initialCall = true }) {
 	const [{ loading: isGettingShipment, data }, trigger] = useRequest({
-		url    : '/get_shipment',
-		method : 'GET',
-		params : {
+		url          : '/get_shipment',
+		method       : 'GET',
+		service_name : 'shipment',
+		params       : {
 			filters: {
 				...defaultFilters,
 			},
@@ -16,7 +18,11 @@ export default function useGetShipment({ defaultParams = {}, defaultFilters = {}
 	}, { manual: true });
 
 	const getShipment = useCallback(async () => {
-		await trigger();
+		try {
+			await trigger();
+		} catch (err) {
+			toastApiError(err);
+		}
 	}, [trigger]);
 
 	useEffect(() => {
@@ -26,11 +32,11 @@ export default function useGetShipment({ defaultParams = {}, defaultFilters = {}
 	return {
 		isGettingShipment,
 		refetch               : getShipment,
-		documents             : dummyData?.documents,
-		primary_service       : dummyData?.primary_service_detail,
-		shipment_data         : dummyData?.summary,
-		document_delay_status : dummyData?.document_delay_status,
-		booking_note_details  : dummyData?.booking_note_details,
+		// documents             : dummyData?.documents,
+		primary_service       : data?.primary_service_detail,
+		shipment_data         : data?.summary,
+		document_delay_status : data?.document_delay_status,
+		// booking_note_details  : dummyData?.booking_note_details,
 		data,
 	};
 }

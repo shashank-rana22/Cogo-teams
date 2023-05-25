@@ -18,7 +18,12 @@ function Timeline() {
 		stakeholderConfig,
 	} = useContext(ShipmentDetailContext);
 
-	const { timelineLoading: loading, timelineData, getShipmentTimeline } = useGetServiceTimeline();
+	const { timelineLoading: loading, timelineData, getShipmentTimeline } = useGetServiceTimeline({
+		defaultParams: {
+			shipment_id: shipment_data?.id,
+		},
+		initialCall: false,
+	});
 
 	useEffect(() => {
 		if (shipment_data?.id) {

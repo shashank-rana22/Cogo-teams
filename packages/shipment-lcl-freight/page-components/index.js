@@ -16,8 +16,18 @@ function LclFreight() {
 	const activeStakeholder = useGetActiveStakeholder();
 	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
 
-	const shipment = useGetShipment({ defaultFilters: { id: shipment_id } });
-	const services = useListShipmentServices({});
+	const shipment = useGetShipment({ defaultParams: { id: shipment_id } });
+	const services = useListShipmentServices({
+		defaultFilters: {
+			shipment_id,
+			status: ['active', 'pending', 'inactive'],
+		},
+		defaultParams: {
+			service_stakeholder_required : true,
+			can_edit_booking_params      : true,
+			page_limit                   : 100,
+		},
+	});
 
 	const contextValues = useMemo(() => ({
 		...shipment,

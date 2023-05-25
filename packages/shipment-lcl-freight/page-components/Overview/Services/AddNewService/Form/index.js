@@ -1,6 +1,6 @@
 import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { AsyncSelectController, RadioGroupController } from '@cogoport/forms';
+import { AsyncSelectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
@@ -12,14 +12,12 @@ import Footer from '../Footer';
 
 import styles from './styles.module.css';
 
-const KAM_AGENTS = ['booking_agent', 'consignee_shipper_booking_agent'];
-
 function Form({
 	upsellableService = {},
 	closeModal = () => {},
-	haveToUpsell,
+	haveToUpsell = false,
 }) {
-	const { shipment_data, primary_service, activeStakeholder, servicesList } = useContext(ShipmentDetailContext);
+	const { shipment_data, primary_service, servicesList } = useContext(ShipmentDetailContext);
 	const [truckTypeToggle, setTruckTypeToggle] = useState(false);
 
 	const service = upsellableService.service_type.replace('_service', '');
@@ -29,17 +27,10 @@ function Form({
 	const [step, setStep] = useState(1);
 
 	const {
-		consignee_shipper = {},
-		importer_exporter = {},
 		importer_exporter_id = '',
-		consignee_shipper_id = '',
 	} = shipment_data;
 
-	const haveToAskOrgDetails = !KAM_AGENTS.includes(activeStakeholder) && consignee_shipper_id;
-
-	const organization_id = activeStakeholder === 'consignee_shipper_booking_agent'
-		? consignee_shipper_id
-		: importer_exporter_id;
+	const organization_id = importer_exporter_id;
 
 	const { controls, formProps } = useServiceUpsellControls({
 		service,
@@ -53,17 +44,6 @@ function Form({
 	const { errors, formValues, control } = formProps;
 
 	const formOrganizationId = formValues?.organization_id;
-
-	const orgOptions = [
-		{
-			label : consignee_shipper?.business_name,
-			value : consignee_shipper_id,
-		},
-		{
-			label : importer_exporter?.business_name,
-			value : importer_exporter_id,
-		},
-	];
 
 	const getModifiedOptions = (option) => option?.options?.map(
 		(op) => ({ ...op, custom_key: { user_id: op.user_id, branch_id: op.branch.id } }),
@@ -106,20 +86,6 @@ function Form({
 						{controls?.length !== 0 ? <Layout fields={controls} errors={errors} control={control} /> : null}
 					</>
 				) : null }
-
-				{ step === 2 && haveToAskOrgDetails
-					? (
-						<>
-							<div> Choose The organisation for which you want to upsell- </div>
-
-							<RadioGroupController
-								options={orgOptions}
-								control={control}
-								name="organization_id"
-								rules={{ required: 'Organisation is required' }}
-							/>
-						</>
-					) : null}
 
 				{step === 2 ? (
 					<AsyncSelectController

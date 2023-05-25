@@ -1,10 +1,8 @@
-import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
-import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
+import useUpdateShipmentService from '../../../hooks/useUpdateShipmentService';
 import controls from '../EditSchedule/controls';
 import { getDate } from '../utils/getDate';
 
@@ -13,10 +11,13 @@ export default function useEditServiceSchedule({ setShow = () => {} }) {
 
 	const [departureDate, setDepartureDate] = useState(getDate(primary_service?.schedule_departure));
 
-	const [{ loading }, updateShipmentService] = useRequest({
-		url    : '/update_shipment_service',
-		method : 'POST',
-	}, { manual: true });
+	const { apiTrigger: updateShipmentService, loading } = useUpdateShipmentService({
+		successMessage : 'Booking Note Updated Successfully !',
+		refetch        : () => {
+			setShow(false);
+			shipmentRefetch();
+		},
+	});
 
 	const { finalControls, defaultValues } = controls({ primary_service, departureDate });
 
@@ -43,7 +44,7 @@ export default function useEditServiceSchedule({ setShow = () => {} }) {
 		}
 	}, [formValues, departureDate, reset, finalControls]);
 
-	const updateData = async (values) => {
+	const updateData = (values) => {
 		const mainServiceIds = (servicesList || [])
 			?.filter((item) => item?.service_type === primary_service?.service_type)
 			?.map((service) => service?.id);
@@ -57,15 +58,7 @@ export default function useEditServiceSchedule({ setShow = () => {} }) {
 			service_type: primary_service?.service_type,
 		};
 
-		try {
-			await updateShipmentService({ data: payloadForUpdateShipment });
-
-			Toast.success('Booking Note Updated Successfully !');
-			setShow(false);
-			shipmentRefetch();
-		} catch (err) {
-			toastApiError(err);
-		}
+		updateShipmentService(payloadForUpdateShipment);
 	};
 
 	return {

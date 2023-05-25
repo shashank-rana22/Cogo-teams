@@ -1,7 +1,7 @@
 import { Loader, Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { InputController, RadioGroupController, useForm } from '@cogoport/forms';
-import { useContext, useEffect } from 'react';
+import { useContext } from 'react';
 
 import useListShipmentCancellationReasons from '../../hooks/useListShipmentCancellationReasons';
 import useUpdateShipment from '../../hooks/useUpdateShipment';
@@ -12,8 +12,6 @@ import styles from './styles.module.css';
 export default function CancelShipment({ setShow }) {
 	const closeModal = () => setShow(false);
 
-	const { reasonsLoading, reasons = [], getReasons } = useListShipmentCancellationReasons();
-
 	const { loading: updateShipmentLoading, updateShipment } = useUpdateShipment({
 		refetch        : closeModal,
 		successMessage : 'Shipment has been cancelled!!',
@@ -22,17 +20,17 @@ export default function CancelShipment({ setShow }) {
 	const { shipment_data, stakeholderConfig = {}, activeStakeholder } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
 
-	useEffect(() => {
-		getReasons({
-			filters: {
-				shipment_type    : 'lcl_freight',
-				stakeholder_type : stakeholderConfig?.cancel_shipment?.list_reasons?.stakeholder_type
-				|| [activeStakeholder],
-			},
+	const { reasonsLoading, reasons = [] } = useListShipmentCancellationReasons({
+		defaultFilters: {
+			shipment_type    : 'lcl_freight',
+			stakeholder_type : stakeholderConfig?.cancel_shipment?.list_reasons?.stakeholder_type
+			|| [activeStakeholder],
+		},
+		defaultParams: {
 			shipment_id          : id,
 			options_key_required : true,
-		});
-	}, [id, activeStakeholder, stakeholderConfig, getReasons]);
+		},
+	});
 
 	const { control, formState: { errors }, handleSubmit } = useForm();
 

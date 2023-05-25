@@ -2,8 +2,6 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useContext, useState, useMemo } from 'react';
 
-import useGetBuyers from '../../../hooks/useGetBuyers';
-
 import AddNewService from './AddNewService';
 import helperFuncs from './helpers/getHelperFuncs';
 import Loader from './Loader';
@@ -16,14 +14,11 @@ function Services() {
 		servicesList,
 		servicesLoading,
 		activeStakeholder,
-		shipment_data,
 	} = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } = useMemo(() => helperFuncs(servicesList), [servicesList]);
 
 	const serviceCategories = Object.keys(serviceObj);
-
-	const { data: userServicesData = {} } = useGetBuyers({ shipment_id: shipment_data?.id });
 
 	const [showTradeHeading, setShowTradeHeading] = useState({
 		origin      : !isEmpty(serviceObj.originServices),
@@ -66,7 +61,6 @@ function Services() {
 										serviceObj={serviceObj}
 										setShowTradeHeading={setShowTradeHeading}
 										showTradeHeading={showTradeHeading}
-										userServicesData={userServicesData}
 									/>
 								))}
 							</div>
