@@ -65,6 +65,9 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 
 	return (
 		<div className={styles.whole_container}>
+			<div className={styles.introductory_text}>
+				Please update your details here !
+			</div>
 			<div className={styles.container}>
 				{controlsvalue?.map((controlItem) => {
 					const { type, label, name: controlName } = controlItem || {};

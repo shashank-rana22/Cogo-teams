@@ -67,6 +67,9 @@ function IdentificationDocuments({ data, getEmployeeDetails }) {
 
 	return (
 		<div className={styles.whole_container}>
+			<div className={styles.introductory_text}>
+				Please upload the identification documents and enter the corresponding details !
+			</div>
 			<div className={styles.container}>
 				{controls?.map((controlItem) => {
 					const { type, label, name: controlName } = controlItem || {};
