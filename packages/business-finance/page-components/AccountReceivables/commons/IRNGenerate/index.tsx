@@ -180,49 +180,49 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 				</div>
 			)}
 			{openReject && (
-					<Modal
-						show={openReject}
-						onClose={() => {
-							setOpenReject(false);
-						}}
-					>
+				<Modal
+					show={openReject}
+					onClose={() => {
+						setOpenReject(false);
+					}}
+				>
 
-						<Modal.Header title="Remarks*" />
-						<Modal.Body>
+					<Modal.Header title="Remarks*" />
+					<Modal.Body>
 
-							<Textarea
-								size="md"
-								value={textValue}
-								onChange={onChange}
-								style={{ height: '100px' }}
-							/>
+						<Textarea
+							size="md"
+							value={textValue}
+							onChange={onChange}
+							style={{ height: '100px' }}
+						/>
 
-						</Modal.Body>
-						<Modal.Footer>
-							<div className={styles.button_val}>
-								<div className={styles.style_cancel}>
-									<Button
-										className="secondary sm"
-										onClick={() => {
-											setOpenReject(false);
-										}}
-									>
-										Cancel
-									</Button>
-								</div>
+					</Modal.Body>
+					<Modal.Footer>
+						<div className={styles.button_val}>
+							<div className={styles.style_cancel}>
 								<Button
-									className="primary sm"
-									disabled={!textValue || loadingReject}
+									className="secondary sm"
 									onClick={() => {
-										financeReject();
+										setOpenReject(false);
 									}}
 								>
-									Reject
+									Cancel
 								</Button>
 							</div>
-						</Modal.Footer>
-					</Modal>
-				)}
+							<Button
+								className="primary sm"
+								disabled={!textValue || loadingReject}
+								onClick={() => {
+									financeReject();
+								}}
+							>
+								Reject
+							</Button>
+						</div>
+					</Modal.Footer>
+				</Modal>
+			)}
 		</div>
 	);
 
