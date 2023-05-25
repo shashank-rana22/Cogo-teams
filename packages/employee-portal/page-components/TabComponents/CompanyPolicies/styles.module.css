@@ -19,4 +19,16 @@
 .container {
 	display: flex;
 	flex-direction: column;
+
+}
+
+.flex_wrapper{
+	display: flex;
+}
+
+.header_wrapper{
+	font-weight: 700;
+	display: flex;
+	justify-content: center;
+	padding-bottom: 4px;
 }

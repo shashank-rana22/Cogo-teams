@@ -1,8 +1,13 @@
 import { IcMArrowBack } from '@cogoport/icons-react';
 
+import PreviewDocumet from '../../../commons/PreviewDocumet';
+
 import styles from './styles.module.css';
+import useCompanyPolicyDetails from './useGetCompanyPolicyDetails';
 
 function CompanyPolicies({ setInformationPage }) {
+	const { list } = useCompanyPolicyDetails();
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -15,7 +20,26 @@ function CompanyPolicies({ setInformationPage }) {
 				/>
 				<div className={styles.title}>COMPANY POLICIES</div>
 			</div>
-			<div> Company Policies!</div>
+
+			<div className={styles.flex_wrapper}>
+				{
+				(list || []).map((element) => {
+					const { document_url, id, name } = element || {};
+
+					return (
+						<div key={id} style={{ padding: '10px' }}>
+							<div className={styles.header_wrapper}>
+								{name}
+							</div>
+
+							<PreviewDocumet document_url={document_url} preview />
+
+						</div>
+					);
+				})
+			}
+			</div>
+
 		</div>
 	);
 }
