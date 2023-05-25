@@ -5,13 +5,13 @@ import FilterType from '../../../common/FilterType';
 import styles from './styles.module.css';
 import TicketsSection from './TicketsSection';
 
-function FilterTicketsSection({ setModalData = () => {} }) {
+function FilterTicketsSection() {
 	const [searchParams, setSearchParams] = useState({ text: '', category: '' });
 
 	return (
 		<div className={styles.filter_tickets_container}>
 			<FilterType setSearchParams={setSearchParams} searchParams={searchParams} />
-			<TicketsSection searchParams={searchParams} setModalData={setModalData} />
+			<TicketsSection searchParams={searchParams} />
 		</div>
 	);
 }

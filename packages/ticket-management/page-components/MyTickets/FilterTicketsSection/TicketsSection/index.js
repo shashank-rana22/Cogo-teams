@@ -5,7 +5,7 @@ import useListTickets from '../../../../hooks/useListTickets';
 import styles from './styles.module.css';
 import TicketsSectionPart from './TicketSectionPart';
 
-function TicketsSection({ searchParams, setModalData = () => {} }) {
+function TicketsSection({ searchParams }) {
 	const mapping = {
 		Open      : 'unresolved',
 		Pending   : 'pending',
@@ -24,7 +24,8 @@ function TicketsSection({ searchParams, setModalData = () => {} }) {
 
 	const {
 		listLoading:openTicketsLoading,
-		handleScroll:handleOpenTicketScroll, refreshTickets:openRefreshTickets,
+		handleScroll:handleOpenTicketScroll,
+		refreshTickets:openRefreshTickets,
 	} =	useListTickets(
 		searchParams,
 		mapping.Open,
@@ -33,7 +34,8 @@ function TicketsSection({ searchParams, setModalData = () => {} }) {
 	);
 	const {
 		listLoading:pendingTicketsLoading,
-		handleScroll:handlePendingTicketScroll, refreshTickets:pendingRefreshTickets,
+		handleScroll:handlePendingTicketScroll,
+		refreshTickets:pendingRefreshTickets,
 	} =	useListTickets(
 		searchParams,
 		mapping.Pending,
@@ -42,7 +44,8 @@ function TicketsSection({ searchParams, setModalData = () => {} }) {
 	);
 	const {
 		listLoading:escalatedTicketsLoading,
-		handleScroll:handleEscalatedTicketScroll, refreshTickets:escalatedRefreshTickets,
+		handleScroll:handleEscalatedTicketScroll,
+		refreshTickets:escalatedRefreshTickets,
 	} =	useListTickets(
 		searchParams,
 		mapping.Escalated,
@@ -51,13 +54,21 @@ function TicketsSection({ searchParams, setModalData = () => {} }) {
 	);
 	const {
 		listLoading:closedTicketsLoading,
-		handleScroll:handleClosedTicketScroll, refreshTickets:closedRefreshTickets,
+		handleScroll:handleClosedTicketScroll,
+		refreshTickets:closedRefreshTickets,
 	} =	useListTickets(
 		searchParams,
 		mapping.Closed,
 		setTicketList,
 		'Closed',
 	);
+
+	const refreshAll = () => {
+		openRefreshTickets();
+		pendingRefreshTickets();
+		escalatedRefreshTickets();
+		closedRefreshTickets();
+	};
 
 	return (
 		<div className={styles.tickets_section}>
@@ -66,32 +77,28 @@ function TicketsSection({ searchParams, setModalData = () => {} }) {
 				data={ticketList.Open}
 				loading={openTicketsLoading}
 				handleScroll={handleOpenTicketScroll}
-				refreshTickets={openRefreshTickets}
-				setModalData={setModalData}
+				refreshTickets={refreshAll}
 			/>
 			<TicketsSectionPart
 				label="Pending"
 				data={ticketList.Pending}
 				loading={pendingTicketsLoading}
 				handleScroll={handlePendingTicketScroll}
-				refreshTickets={pendingRefreshTickets}
-				setModalData={setModalData}
+				refreshTickets={refreshAll}
 			/>
 			<TicketsSectionPart
 				label="Escalated"
 				data={ticketList.Escalated}
 				loading={escalatedTicketsLoading}
 				handleScroll={handleEscalatedTicketScroll}
-				refreshTickets={escalatedRefreshTickets}
-				setModalData={setModalData}
+				refreshTickets={refreshAll}
 			/>
 			<TicketsSectionPart
 				label="Closed"
 				data={ticketList.Closed}
 				loading={closedTicketsLoading}
 				handleScroll={handleClosedTicketScroll}
-				refreshTickets={closedRefreshTickets}
-				setModalData={setModalData}
+				refreshTickets={refreshAll}
 			/>
 		</div>
 	);

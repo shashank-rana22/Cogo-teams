@@ -1,6 +1,6 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useTicketsRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
+// import { useSelector } from '@cogoport/store';
 import {
 	useEffect,
 	useState,
@@ -8,7 +8,7 @@ import {
 } from 'react';
 
 const useListTickets = (searchValue, status, setTicketList, key) => {
-	const { profile } = useSelector((state) => state);
+	// const { profile } = useSelector((state) => state);
 	const [pagination, setPagination] = useState(1);
 	// const [listData, setListData] = useState([]); ***
 
@@ -25,7 +25,7 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 			const response = await trigger({
 				params: {
 					Status     : status,
-					UserID     : profile?.id,
+					// UserID     : profile?.id,
 					// PerformedByID : profile?.id,
 					DisplayAll : true,
 					size       : 10,
@@ -55,10 +55,13 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [key, profile?.id, searchQuery, setTicketList, status, trigger]);
+	}, [key, searchQuery, setTicketList, status, trigger]);
 
 	const refreshTickets = () => {
-		// setListData([]); ***
+		setTicketList((prev) => ({
+			...prev,
+			[key]: { list: [], total: 0 },
+		}));
 		fetchTickets(1);
 	};
 

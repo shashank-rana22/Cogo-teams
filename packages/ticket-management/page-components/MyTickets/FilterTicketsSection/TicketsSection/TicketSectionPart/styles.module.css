@@ -14,8 +14,16 @@
 }
 
 .status_heading {
+	display: flex;
+	align-items: center;
 	padding: 15px 15px 0;
 	font-size: 16px;
 	font-weight: 500;
 	color: #221f20;
+}
+
+.tickets_count_label {
+	padding-left: 5px;
+	font-size: 14px;
+	color: #828282;
 }
