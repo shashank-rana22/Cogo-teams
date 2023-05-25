@@ -5,9 +5,10 @@ import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import ShipmentHeader from '../../common/ShipmentHeader';
+import PocSop from '../../common/PocSop';
 import Timeline from '../../common/TimeLine';
 import Tasks from '../../common/Tasks'
 import Overview from '../../common/Overview'
@@ -27,11 +28,11 @@ function ShipmentDetails() {
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
 	const { servicesGet = {} } = useServiceList();
 
-	// const handleVersionChange = useCallback(() => {
-	// 	const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
-	// 	window.location.replace(newHref);
-	// 	window.sessionStorage.setItem('prev_nav', newHref);
-	// }, [router?.query?.partner_id, shipment_data?.id]);
+	const handleVersionChange = useCallback(() => {
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
+		window.location.replace(newHref);
+		window.sessionStorage.setItem('prev_nav', newHref);
+	}, [router?.query?.partner_id, shipment_data?.id]);
 
 	const contextValues = useMemo(() => ({
 		...get,
@@ -93,7 +94,7 @@ function ShipmentDetails() {
 							size="md"
 							onLabel="Old"
 							offLabel="New"
-							// onChange={handleVersionChange}
+							onChange={handleVersionChange}
 						/>
 						<ShipmentChat />
 					</div>
@@ -106,7 +107,7 @@ function ShipmentDetails() {
 				<div className={styles.header}>
 					<ShipmentHeader />
 
-					{/* <PocSop /> */}
+					<PocSop />
 				</div>
 
 				<Timeline />

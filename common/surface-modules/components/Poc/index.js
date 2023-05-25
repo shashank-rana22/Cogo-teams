@@ -24,7 +24,7 @@ function Poc({ shipment_data = {}, servicesList = [], activeStakeholder = '' }) 
 	const [addPoc, setAddPoc] = useState(null);
 
 	const rolesPermission = roleBasedView[activeStakeholder] || {};
-	const rolesViewPermission = rolesPermission.can_view || [];
+	const rolesViewPermission = rolesPermission.can_view || ['pocs', 'notifying_party', 'invoicing_party', 'service_provider'];
 
 	const {
 		data,
