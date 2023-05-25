@@ -37,8 +37,8 @@ function useUpdateEmployeeDetails({ id, getEmployeeDetails }) {
 				hiring_manager_email      : data?.hiring_manager_email,
 				cogoport_email            : data?.cogoport_email,
 				emergency_contact_details : [{
-					mobile_number       : data?.emergency_num?.number,
-					mobile_country_code : data?.emergency_num?.country_code,
+					mobile_number       : data?.emergency_contact_details?.number,
+					mobile_country_code : data?.emergency_contact_details?.country_code,
 				}],
 			};
 		} else if (formType === 'educational_qualification') {
