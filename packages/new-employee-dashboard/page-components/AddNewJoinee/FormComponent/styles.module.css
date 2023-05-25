@@ -26,9 +26,8 @@
 }
 
 .single_field {
-	width: 50%;
-	padding-right: 30px;
-	margin-right: 30px;
+	width: 30%;
+	margin: 12px 32px 0 8px;
 }
 
 .seperator {
@@ -50,8 +49,14 @@
 
 .hr_details_container {
 	display: flex;
-	width: 70%;
+	width: 100%;
 	border-bottom: none;
+}
+
+.employement_details_container{
+	display: flex;
+	width: 100%;
+	flex-wrap: wrap;
 }
 
 .button_container {

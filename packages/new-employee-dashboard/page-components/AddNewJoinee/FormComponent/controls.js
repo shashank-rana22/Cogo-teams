@@ -74,16 +74,22 @@ const controls = [
 			required: 'Location is required',
 		},
 	},
+
 	{
-		name        : 'reporting_manager',
-		type        : 'select',
-		label       : 'Reporting Manager',
-		placeholder : 'Select Reporting Manager',
-		options     : [
-			{ value: 'khushal', label: 'Khushal' },
-			{ value: 'shivam', label: 'Shivam' },
-		],
-		rules: {
+		name        : 'hiring_manager',
+		type        : 'text',
+		label       : 'Hiring Manager',
+		placeholder : 'Hiring Manager',
+		rules       : {
+			required: 'Reporting Manager is required',
+		},
+	},
+	{
+		name        : 'hiring_manager_email',
+		type        : 'text',
+		label       : 'Hiring Manager email',
+		placeholder : 'Hiring manager email',
+		rules       : {
 			required: 'Reporting Manager is required',
 		},
 	},

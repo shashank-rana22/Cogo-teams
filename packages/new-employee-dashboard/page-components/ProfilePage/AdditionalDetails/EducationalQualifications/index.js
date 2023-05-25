@@ -1,79 +1,66 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function EducationalQualifications({ profileData }) {
-	// const {  detail } = profileData || {};
-	// const {  employee_education_details = [] } = detail || {};
+	const { detail } = profileData || {};
+	const { employee_education_details = [] } = detail || {};
 
-	const employee_education_details = [{
-		name        : 'JNV Dgg',
-		type        : 'High School',
-		description : 'edewdcfer qdfeqfre edeferf',
-		started_at  : 'april 2018',
-		ended_at    : 'april 2020',
-		score_type  : 'percentage',
-		score       : '90',
-		courses     : 'course 1 -  jecnedjcnjdndjenv edjcnedfj eanej',
+	const formatdate = ({ date }) => formatDate({
+		date,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['MMM, yyyy'],
+		formatType : 'date',
+	});
 
-	}, {
-		name        : 'JNV Dgg',
-		type        : 'High School',
-		description : 'edewdcfer qdfeqfre edeferf',
-		started_at  : 'april 2018',
-		ended_at    : 'april 2020',
-		score_type  : 'percentage',
-		score       : '90',
-		courses     : 'course 1 -  jecnedjcnjdndjenv edjcnedfj eanej',
-
-	},
-	{
-		name        : 'JNV Dgg',
-		type        : 'High School',
-		description : 'edewdcfer qdfeqfre edeferf',
-		started_at  : 'april 2018',
-		ended_at    : 'april 2020',
-		score_type  : 'percentage',
-		score       : '90',
-		courses     : 'course 1 -  jecnedjcnjdndjenv edjcnedfj eanej',
-
-	}];
+	const renderCources = ({ Courses }) => (Courses || []).map((course) => (
+		<div key={course} className={styles.course}>
+			{course}
+		</div>
+	));
 
 	const educationDetails = () => (employee_education_details || []).map((element) => {
 		const {
-			name, type, description, started_at, ended_at, courses, score, score_type,
+			Courses = [], description = '', started_at, ended_at, school_name, score, score_mode, type,
 		} = element || {};
 
 		return (
-			<div key={`{${name}_${type}}`} className={styles.per_container}>
+			<div key={`{${school_name}_${type}}`} className={styles.per_container}>
+
+				<div className={styles.header}>
+					{type}
+				</div>
+
 				<div className={styles.top_bar}>
 					<div className={styles.label_value_container}>
 						<div className={styles.label}>
 							Name of the Institution
 						</div>
 						<div className={styles.value}>
-							{name}
+							{startCase(school_name)}
+							<span style={{ paddingLeft: 8 }}>
+								(
+								{formatdate({ date: started_at }) }
+								-
+								{formatdate({ date: ended_at })}
+								)
+							</span>
+
 						</div>
 					</div>
 
 					<div className={styles.label_value_container}>
 						<div className={styles.label}>
-							Start Date
+							Score
 						</div>
 						<div className={styles.value}>
-							{startCase(started_at)}
+							{score}
+							{' '}
+							{(score_mode).toUpperCase()}
 						</div>
 					</div>
 
-					<div className={styles.label_value_container}>
-						<div className={styles.label}>
-							End Date
-						</div>
-						<div className={styles.value}>
-
-							{startCase(ended_at)}
-						</div>
-					</div>
 				</div>
 
 				<div className={styles.label_value_container}>
@@ -90,8 +77,7 @@ function EducationalQualifications({ profileData }) {
 						Courses
 					</div>
 					<div className={styles.value}>
-
-						{courses}
+						{renderCources({ Courses })}
 					</div>
 				</div>
 

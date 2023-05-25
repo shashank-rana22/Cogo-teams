@@ -15,3 +15,20 @@
 .card_wrapper {
 	padding-right: 16px;
 }
+
+.button_container{
+	display: flex;
+	padding-top: 12px;
+	justify-content: center;
+	
+}
+
+.approve_btn{
+	padding-left: 12px;
+
+	:global{
+		.ui_button_container{
+			background-color: green;
+		}
+	}
+}

@@ -19,7 +19,8 @@ const CONTROLS_MAPPING = {
 
 const PERSONAL_DETAILS_MAPPING = ['name', 'personal_email', 'mobile_number'];
 
-const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining', 'location', 'reporting_manager'];
+const EMPLOYEE_DETAILS_MAPPING = ['employee_code',
+	'designation', 'date_of_joining', 'location', 'hiring_manager', 'hiring_manager_email'];
 
 const HR_DETAILS_MAPPING = ['hr_name', 'hr_email'];
 
@@ -32,7 +33,7 @@ const SECTION_MAPPING = [
 
 	{
 		header         : 'Employment Details',
-		containerStyle : styles.personal_details_container,
+		containerStyle : styles.employement_details_container,
 		fields         : EMPLOYEE_DETAILS_MAPPING,
 	},
 
@@ -68,6 +69,7 @@ function FormComponent({ setActivePage }) {
 				gender              : 'female',
 				mobile_number       : values?.mobile_number?.number,
 				mobile_country_code : values?.mobile_number?.country_code,
+
 			};
 			await trigger({ data: payload });
 			setActivePage('success');
@@ -88,6 +90,7 @@ function FormComponent({ setActivePage }) {
 				<div className={styles.label}>
 					{label}
 				</div>
+
 				<div className={styles.controller_wrapper}>
 					<DynamicController
 						{...controls[controlItem]}
@@ -96,14 +99,12 @@ function FormComponent({ setActivePage }) {
 					/>
 				</div>
 
-				{errors[name]
-						&& (
-							<div className={styles.error_message}>
-								{' '}
-								{errors[name]?.message}
-							</div>
-						)}
-
+				{errors[name] ? (
+					<div className={styles.error_message}>
+						{' '}
+						{errors[name]?.message}
+					</div>
+				) : null}
 			</div>
 		);
 	});
