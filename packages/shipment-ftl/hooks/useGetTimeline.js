@@ -7,7 +7,7 @@ function useGetTimeLine({ shipment_data = {} }) {
 	const { id: shipment_id } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
-		url          : 'get_timeline',
+		url          : 'get_service_timeline',
 		service_name : 'shipment',
 		method       : 'GET',
 	}, { manual: true });

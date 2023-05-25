@@ -7,6 +7,7 @@ import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
 import ShipmentHeader from '../../common/ShipmentHeader';
+import Timeline from '../../common/TimeLine';
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
 
@@ -102,7 +103,7 @@ function ShipmentDetails() {
 					{/* <PocSop /> */}
 				</div>
 
-				{/* <Timeline /> */}
+				<Timeline />
 
 				<div className={styles.container}>
 					<Tabs
