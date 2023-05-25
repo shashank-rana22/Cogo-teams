@@ -83,6 +83,7 @@ importers:
       '@cogoport/scope-select': workspace:0.1.0
       '@cogoport/shipment-chat': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
+      '@cogoport/shipment-ftl': workspace:0.1.0
       '@cogoport/shipment-mails': workspace:0.1.0
       '@cogoport/so2-surface': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
@@ -141,6 +142,7 @@ importers:
       '@cogoport/scope-select': link:../common/scope-select
       '@cogoport/shipment-chat': link:../common/shipment-chat
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
+      '@cogoport/shipment-ftl': link:../packages/shipment-ftl
       '@cogoport/shipment-mails': link:../common/shipment-mails
       '@cogoport/so2-surface': link:../packages/so2-surface
       '@cogoport/store': link:../common/store
@@ -1182,6 +1184,12 @@ importers:
       react: 18.2.0
       react-hook-form: 7.43.9_react@18.2.0
       uuid: 9.0.0
+
+  packages/shipment-ftl:
+    specifiers:
+      react: 18.2.0
+    dependencies:
+      react: 18.2.0
 
   packages/so2-surface:
     specifiers:
