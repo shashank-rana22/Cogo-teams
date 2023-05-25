@@ -26,5 +26,16 @@
         "list_reasons": {
             "stakeholder_type": ["superadmin"]
         }
+    },
+    "edit_supplier": true,
+    "cancel_service": true,
+    "edit_params": {
+        "can_edit": true
+    },
+    "additional_services": {
+        "action_buttons": {
+            "reallocate": false,
+            "review_comments": false
+        }
     }
 }

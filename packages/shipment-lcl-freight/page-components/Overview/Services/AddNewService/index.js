@@ -25,7 +25,7 @@ function AddNewService({
 	const haveToUpsell = !shipment_data?.end_to_end_shipment?.is_possible
 		? false : (upsellableService.service_type === 'fcl_freight_local_service'
 		&& primary_service?.bl_category === 'hbl' && activeStakeholder === 'consignee_shipper_booking_agent'
-		&& !isEmpty(userServicesData?.[consignee_shipper_id]));
+		&& isEmpty(userServicesData?.[consignee_shipper_id]));
 
 	const [upsellModal, setUpsellModal] = useState(haveToUpsell);
 

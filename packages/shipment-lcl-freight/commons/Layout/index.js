@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import FieldArray from './ChildFormat';
@@ -5,44 +6,79 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Layout({
-	formProps, controls, showElements = {},
+	control, fields, showElements = {}, errors, formValues,
 }) {
-	const { errors, register, control } = formProps;
+	const totalFields = [];
+
+	let rowWiseFields = [];
+	let span = 0;
+
+	(fields || []).forEach((field) => {
+		const { [field?.name]: showItem = true } = showElements;
+		if (showItem) {
+			span += field?.span || 12;
+			if (span === 12) {
+				span = 0;
+
+				rowWiseFields.push(field);
+				totalFields.push(rowWiseFields);
+
+				rowWiseFields = [];
+			} else if (span > 12) {
+				span = 0;
+
+				totalFields.push(rowWiseFields);
+				rowWiseFields = [];
+
+				rowWiseFields.push(field);
+			} else {
+				rowWiseFields.push(field);
+			}
+		}
+	});
+
+	if (rowWiseFields.length) {
+		totalFields.push(rowWiseFields);
+	}
 
 	return (
 		<div className={styles.layout}>
-			{controls.map((controlField) => {
-				const { type, heading = '' } = controlField;
-				const show = (!(control.name in showElements) || showElements[controlField.name]);
-				if (type === 'fieldArray' && show) {
-					return (
-						<div style={{ width: '100%' }}>
-							<div className={styles.heading}>
-								{heading}
-							</div>
+			{totalFields.map((rowFields) => (
+				<div className={cl`${styles.row} form_layout_row`}>
+					{rowFields.map((field) => {
+						const { type, heading = '' } = field || {};
 
-							<FieldArray
-								{...controlField}
-								error={errors[controlField.name]}
+						if (type === 'fieldArray') {
+							return (
+								<div className={styles.width_100}>
+									{heading ? (
+										<div className={styles.heading}>
+											{heading}
+										</div>
+									) : null}
+
+									<FieldArray
+										{...field}
+										error={errors?.[field?.name]}
+										control={control}
+										showElements={showElements}
+										formValues={formValues}
+									/>
+								</div>
+							);
+						}
+
+						return (
+							<Item
 								control={control}
-								register={register}
-								showElements={showElements}
+								error={errors?.[field?.name]}
+								formValues={formValues}
+								{...field}
 							/>
-
-						</div>
-					);
-				}
-
-				return show
-					? (
-						<Item
-							control={control}
-							error={{}}
-							{...controlField}
-						/>
-					)
-					: null;
-			})}
+						);
+					})}
+				</div>
+			))}
 		</div>
 	);
 }

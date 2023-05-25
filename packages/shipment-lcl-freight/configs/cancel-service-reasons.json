@@ -1,38 +1,37 @@
 {
 	"service_shipper": {
 		"Got a better offer": {
+			"subreasons": [],
 			"free_text": {
 				"required": true,
 				"mandatory": false,
 				"label": "Could you share with us the cost difference? (We'll try to get a better rate next time)"
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
-				"ftl_freight_service",
-				"fcl_cfs_service"
+				"lcl_freight_service",
+				"lcl_freight_local_service",
+				"lcl_customs_service",
+				"ltl_freight_service",
+				"ftl_freight_service"
 			]
 		},
 		"Have not received a confirmation for this service yet": {
+			"subreasons": [],
 			"free_text": {
 				"required": true,
 				"mandatory": false,
 				"label": "How can we help you better?"
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
-				"ftl_freight_service",
-				"fcl_cfs_service"
+				"lcl_freight_service",
+				"lcl_freight_local_service",
+				"lcl_customs_service",
+				"ltl_freight_service",
+				"ftl_freight_service"
 			]
 		},
 		"Want to change trailer/truck type": {
+			"subreasons": [],
 			"free_text": {
 				"required": true,
 				"mandatory": false,
@@ -41,35 +40,34 @@
 			"condition": {
 				"type": "service_name",
 				"values": [
-					"trailer_freight_service",
+					"ltl_freight_service",
 					"ftl_freight_service"
 				]
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
+				"lcl_freight_service",
+				"lcl_freight_local_service",
+				"ltl_freight_service",
 				"ftl_freight_service"
 			]
 		},
 		"I have changed by mind": {
+			"subreasons": [],
 			"free_text": {
 				"required": true,
 				"mandatory": false,
 				"label": "How can we help you better?"
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
-				"ftl_freight_service",
-				"fcl_cfs_service"
+				"lcl_freight_service",
+				"lcl_freight_local_service",
+				"lcl_customs_service",
+				"ltl_freight_service",
+				"ftl_freight_service"
 			]
 		},
 		"Want to change pickup/drop address": {
+			"subreasons": [],
 			"free_text": {
 				"required": true,
 				"mandatory": false,
@@ -78,61 +76,54 @@
 			"condition": {
 				"type": "service_name",
 				"values": [
-					"trailer_freight_service",
+					"ltl_freight_service",
 					"ftl_freight_service"
 				]
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
+				"lcl_freight_service",
+				"lcl_freight_local_service",
+				"ltl_freight_service",
 				"ftl_freight_service"
 			]
 		},
 		"Other issues": {
+			"subreasons": [],
 			"free_text": {
 				"required": true,
 				"mandatory": false,
 				"label": "How can we help you better?"
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
-				"ftl_freight_service",
-				"fcl_cfs_service"
+				"lcl_freight_service",
+				"lcl_freight_local_service",
+				"lcl_customs_service",
+				"ltl_freight_service",
+				"ftl_freight_service"
 			]
 		}
 	},
 	"service_supplier": {
 		"Customer unreachable": {
+			"subreasons": [],
 			"free_text": {
 				"required": false
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
-				"ftl_freight_service",
-				"fcl_cfs_service"
+				"lcl_freight_service",
+				"lcl_freight_local_service",
+				"lcl_customs_service",
+				"ltl_freight_service",
+				"ftl_freight_service"
 			]
 		},
 		"Customer did not pick the containers": {
+			"subreasons": [],
 			"free_text": {
 				"required": false
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
-				"fcl_cfs_service"
+				"lcl_freight_local_service"
 			]
 		},
 		"Space unavailable": {
@@ -144,8 +135,7 @@
 				"required": false
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_freight_local_service"
+				"lcl_freight_local_service"
 			]
 		},
 		"Inventory issue at the yard(s)": {
@@ -158,22 +148,20 @@
 				"required": false
 			},
 			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"
-			]				
+				"lcl_freight_local_service"
+			]
 		},
 		"Quote has expired": {
+			"subreasons": [],
 			"free_text": {
 				"required": false
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
-				"ftl_freight_service",
-				"fcl_cfs_service"
+				"lcl_freight_service",
+				"lcl_freight_local_service",
+				"lcl_customs_service",
+				"ltl_freight_service",
+				"ftl_freight_service"
 			]
 		},
 		"Finance issues": {
@@ -185,13 +173,11 @@
 				"subreasons": ["Working capital Issue"]
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
-				"ftl_freight_service",
-				"fcl_cfs_service"
+				"lcl_freight_service",
+				"lcl_freight_local_service",
+				"lcl_customs_service",
+				"ltl_freight_service",
+				"ftl_freight_service"
 			]
 		},
 		"Transportation unavailable on the selected date": {
@@ -202,7 +188,7 @@
 				"label": "Tell us what went wrong?"
 			},
 			"applicable_to": [
-				"trailer_freight_service",
+				"ltl_freight_service",
 				"ftl_freight_service"
 			]
 		},
@@ -217,10 +203,9 @@
 				"label": "Tell us what went wrong?"
 			},
 			"applicable_to": [
-				"fcl_customs_service",
-				"trailer_freight_service",
-				"ftl_freight_service",
-				"fcl_cfs_service"
+				"lcl_customs_service",
+				"ltl_freight_service",
+				"ftl_freight_service"
 			]
 		},
 		"Shipping line rejected the service": {
@@ -234,20 +219,19 @@
 				"label": "Tell us what went wrong?"
 			},
 			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"			
+				"lcl_freight_local_service"
 			]
 		},
 		"Sailing cancelled by the line": {
+			"subreasons": [],
 			"free_text": {
 				"required": true,
 				"mandatory": true,
 				"label": "Tell us what went wrong?"
 			},
 			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"
-			]			
+				"lcl_freight_local_service"
+			]
 		},
 		"BL type is not issued by the line": {
 			"subreasons": ["Seaway Original", "RFS Original"],
@@ -257,9 +241,8 @@
 				"label": "Tell us what went wrong?"
 			},
 			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"
-			]				
+				"lcl_freight_local_service"
+			]
 		}
 	}
 }

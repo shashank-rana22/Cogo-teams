@@ -6,14 +6,6 @@ import useUpdateShipmentService from '../../../hooks/useUpdateShipmentService';
 import getCancelControls from '../utils/get-cancel-controls';
 import getServiceCancelPayload from '../utils/getServiceCancelPayload';
 
-const SUPPLIER_STAKEHOLDERS = [
-	'booking_desk',
-	'document_desk',
-	'document_desk_manager',
-	'supply_agent',
-	'booking_desk_manager',
-];
-
 export default function useGetServiceCancelControls({
 	trade_type = '',
 	closeModal = () => {},
@@ -21,13 +13,13 @@ export default function useGetServiceCancelControls({
 }) {
 	const [selectedReason, setSelectedReason] = useState(null);
 
-	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(ShipmentDetailContext);
+	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(ShipmentDetailContext);
 	const refetchFuncs = () => {
 		closeModal();
 		refetchServices();
 	};
 
-	const controls = getCancelControls({ selectedReason, isSeller: SUPPLIER_STAKEHOLDERS.includes(activeStakeholder) });
+	const controls = getCancelControls({ selectedReason, isSeller: !!stakeholderConfig.is_seller });
 
 	const { control, watch, formState: { errors }, handleSubmit, setValue } = useForm();
 

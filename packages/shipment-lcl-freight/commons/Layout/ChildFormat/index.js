@@ -8,26 +8,21 @@ import styles from './styles.module.css';
 function FieldArray({
 	name,
 	control,
-	controls,
 	showElements,
+	controls,
 	buttonText,
 	showButtons = true,
 	disabled = false,
-	register,
 	value,
 	error,
+	formValues,
 	...rest
 }) {
-	const { fields, append, remove } = useFieldArray({
-		control,
-		name,
-	});
-
-	const childEmptyValues = { };
+	const { fields, append, remove } = useFieldArray({ control, name });
 
 	return (
 		<div className={styles.child}>
-			{(fields || []).map((field, index) => (
+			{fields.map((field, index) => (
 				<Child
 					{...rest}
 					key={field.id}
@@ -39,24 +34,26 @@ function FieldArray({
 					remove={remove}
 					showElements={showElements?.[index]}
 					disabled={disabled}
-					register={register}
 					error={error?.[index]}
+					formValues={formValues}
 				/>
 			))}
-			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-				{showButtons && !disabled ? (
+
+			{showButtons && !disabled ? (
+				<div className={styles.add_button_container}>
 					<Button
-						style={{ margin: '4px' }}
 						size="sm"
-						themeType="link"
-						onClick={() => append(childEmptyValues)}
+						themeType="tertiary"
+						onClick={() => append()}
 					>
-						+
-						&nbsp;
-						{buttonText}
+						<div className={styles.add_button_text}>
+							+&nbsp;
+							{buttonText || 'Add'}
+						</div>
 					</Button>
-				) : null}
-			</div>
+
+				</div>
+			) : null}
 
 		</div>
 	);

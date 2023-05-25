@@ -50,7 +50,7 @@ function Form({
 		organization_id,
 	});
 
-	const { errors, formValues } = formProps;
+	const { errors, formValues, control } = formProps;
 
 	const formOrganizationId = formValues?.organization_id;
 
@@ -73,6 +73,7 @@ function Form({
 		<Modal
 			show
 			onClose={closeModal}
+			size="lg"
 			showCloseIcon={!haveToUpsell}
 			closeOnOuterClick={false}
 			className={styles.custom_modal}
@@ -98,15 +99,13 @@ function Form({
 			/>
 
 			<Modal.Body>
-				{ controls?.length === 0 && step === 1
-					? (
-						<>
-							<div> Are you sure you want to upsell this service?</div>
+				{step === 1 ? (
+					<>
+						<div> Are you sure you want to upsell this service?</div>
 
-							<Layout controls={controls} formProps={formProps} />
-						</>
-					)
-					: null }
+						{controls?.length !== 0 ? <Layout fields={controls} errors={errors} control={control} /> : null}
+					</>
+				) : null }
 
 				{ step === 2 && haveToAskOrgDetails
 					? (
@@ -115,36 +114,34 @@ function Form({
 
 							<RadioGroupController
 								options={orgOptions}
-								control={formProps.control}
+								control={control}
 								name="organization_id"
 								rules={{ required: 'Organisation is required' }}
 							/>
 						</>
 					) : null}
 
-				{
-					step === 2 ? (
-						<AsyncSelectController
-							className={styles.select}
-							control={formProps.control}
-							name="user_id"
-							asyncKey="organization_users"
-							isClearable
-							valueKey="custom_key"
-							initialCall={false}
-							placeholder="Select Organization User"
-							params={{
-								filters: {
-									organization_id : formOrganizationId,
-									status          : 'active',
-								},
-								page_limit: 30,
-							}}
-							getModifiedOptions={getModifiedOptions}
-							rules={{ required: 'User is required' }}
-						/>
-					) : null
-}
+				{step === 2 ? (
+					<AsyncSelectController
+						className={styles.select}
+						control={control}
+						name="user_id"
+						asyncKey="organization_users"
+						isClearable
+						valueKey="custom_key"
+						initialCall={false}
+						placeholder="Select Organization User"
+						params={{
+							filters: {
+								organization_id : formOrganizationId,
+								status          : 'active',
+							},
+							page_limit: 30,
+						}}
+						getModifiedOptions={getModifiedOptions}
+						rules={{ required: 'User is required' }}
+					/>
+				) : null}
 
 				{!isEmpty(errors?.user_id)
 					? <div className={styles.error}>{errors?.user_id?.message}</div>

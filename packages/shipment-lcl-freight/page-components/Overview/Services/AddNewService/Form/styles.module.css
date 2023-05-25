@@ -3,6 +3,10 @@
 		.ui_modal_body_container {
 			min-height: 200px;
 		}
+
+		.pills_overflow {
+			flex-wrap: wrap;
+		}
 	}
 }
 

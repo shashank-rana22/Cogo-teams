@@ -4,11 +4,14 @@ import TermsAndConditions from '@cogoport/ocean-modules/components/TermsAndCondi
 import { useContext } from 'react';
 
 import BLDetails from './BLDetails';
+import ChildrenShipments from './ChildrenShipments';
 import OverviewManageServices from './OverviewManageServices';
 import styles from './styles.module.css';
 
 function Overview() {
 	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { id, source } = shipment_data || {};
+
 	return (
 		<div className={styles.container}>
 			<OverviewManageServices />
@@ -24,6 +27,10 @@ function Overview() {
 					<TermsAndConditions shipmentData={shipment_data} />
 				) : null}
 			</div>
+
+			{source === 'consol' ? (
+				<ChildrenShipments parentShipmentId={id} />
+			) : null}
 		</div>
 	);
 }

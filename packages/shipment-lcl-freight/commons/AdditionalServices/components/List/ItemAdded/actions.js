@@ -9,9 +9,11 @@ const actions = ({
 	addRate,
 	setShowModal = () => {},
 	setItem = () => {},
-	activeStakeholder = '',
+	stakeholderConfig = {},
 }) => {
 	const isSameItem = serviceListItem.id === addRate?.item?.id;
+
+	const actionButtonsConfig = stakeholderConfig?.additional_services?.action_buttons || {};
 
 	const onClickSetItem = () => setItem({ serviceListItem, status });
 
@@ -44,8 +46,7 @@ const actions = ({
 		);
 	}
 
-	if (status.status === 'cancelled_by_supplier'
-		&& ['booking_desk', 'booking_desk_manager'].includes(activeStakeholder)) {
+	if (status.status === 'cancelled_by_supplier' && !!actionButtonsConfig.reallocate) {
 		return (
 			<Button
 				themeType="secondary"
@@ -58,7 +59,7 @@ const actions = ({
 	}
 
 	if (
-		status.status === 'amendment_requested_by_importer_exporter' && activeStakeholder === 'booking_agent'
+		status.status === 'amendment_requested_by_importer_exporter' && !!actionButtonsConfig.review_comments
 	) {
 		return (
 			<Button

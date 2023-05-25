@@ -7,18 +7,17 @@ import getControls from '../utils/getControls';
 import styles from './styles.module.css';
 
 const keysToShow = [
-	'container_size',
-	'containers_count',
-	'container_type',
-	'commodity',
-	'inco_term',
-	'bl_type',
-	'bls_count',
-	'cargo_weight_per_container',
+	{ title: 'Commodity', key: 'commodity' },
+	{ title: 'Inco Term', key: 'inco_term' },
+	{ title: 'Packages Count', key: 'packages_count' },
+	{ title: 'Total Volume(cbm)', key: 'volume' },
+	{ title: 'Total Weight(kgs)', key: 'weight' },
+	{ title: 'BL Type', key: 'bl_type' },
+	{ title: 'BLs Count', key: 'bls_count' },
 ];
 
-function renderValue(label, value) {
-	switch (label) {
+function renderValue(key, value) {
+	switch (key) {
 		case 'container_size': { return value.includes('HC') ? value.replace('HC', 'ft HC') : `${value}ft`; }
 		default: return startCase(value);
 	}
@@ -41,10 +40,10 @@ export default forwardRef(({ service }, ref) => {
 
 	return (
 		<div>
-			{keysToShow.map((key) => {
+			{keysToShow.map(({ key, title }) => {
 				const { name, label, ...rest } = controls.find((item) => item.name === key) || {};
 				return (
-					<div className={styles.form_element}>
+					<div key={key} className={styles.form_element}>
 						{name ? (
 							<>
 								<div className={styles.label}>
@@ -61,7 +60,7 @@ export default forwardRef(({ service }, ref) => {
 							</>
 						) : (
 							<>
-								<div className={styles.label}>{startCase(key)}</div>
+								<div className={styles.label}>{title}</div>
 								<div className={styles.value}>{renderValue(key, service?.[key])}</div>
 							</>
 						)}

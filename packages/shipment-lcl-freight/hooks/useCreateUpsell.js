@@ -27,18 +27,18 @@ const useCreateUpsell = ({
 			organization_id,
 			user,
 		});
+		console.log(payload);
+		// try {
+		// 	const res = await trigger({ data: { ...payload } });
+		// 	if (!res.hasError) {
+		// 		let newHref = `${window.location.origin}/${router?.query?.partner_id}/book/`;
+		// 		newHref += `${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}`;
 
-		try {
-			const res = await trigger({ data: { ...payload } });
-			if (!res.hasError) {
-				let newHref = `${window.location.origin}/${router?.query?.partner_id}/book/`;
-				newHref += `${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}`;
-
-				window.location.href = newHref;
-			}
-		} catch (err) {
-			toastApiError(err);
-		}
+		// 		window.location.href = newHref;
+		// 	}
+		// } catch (err) {
+		// 	toastApiError(err);
+		// }
 	};
 
 	return {

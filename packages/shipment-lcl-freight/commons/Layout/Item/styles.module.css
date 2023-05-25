@@ -7,7 +7,26 @@
 	height: 100%;
 }
 
+.label {
+	margin-bottom: 6px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.heading {
+	margin-bottom: 6px;
+	font-size: var(--font-size-lg);
+	font-weight: 700;
+}
+
+.errors {
+	font-size: var(--font-size-md);
+	color: var(--color-primary-error-red-2);
+}
+
 .element {
+	padding: 4px;
+
 	:global {
 		.react-datepicker__input-container {
 			width: 100%;
@@ -56,6 +75,11 @@
 			}
 		}
 
+		/* stylelint-disable-next-line selector-id-pattern */
+		#booking_rate_procurement_proof {
+			height: unset;
+		}
+
 		.ui_upload_droparea_heading {
 			font-size: 14px;
 			font-weight: 400;
@@ -66,10 +90,6 @@
 			font-size: 12px;
 			font-weight: 400;
 			color: #bdbdbd;
-		}
-
-		.ui_chips_container {
-			flex-wrap: wrap;
 		}
 	}
 }

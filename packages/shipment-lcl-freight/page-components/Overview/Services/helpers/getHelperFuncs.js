@@ -6,8 +6,8 @@ const tradeTypeBasedServiceType = {
 };
 
 const targetKeyMapping = {
-	import : 'originServices',
-	export : 'destinationServices',
+	import : 'destinationServices',
+	export : 'originServices',
 };
 
 const checkIfServiceAlreadyPresent = (servicesObj, service) => {

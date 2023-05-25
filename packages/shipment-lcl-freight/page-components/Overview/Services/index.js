@@ -28,7 +28,7 @@ function Services() {
 	const [showTradeHeading, setShowTradeHeading] = useState({
 		origin      : !isEmpty(serviceObj.originServices),
 		destination : !isEmpty(serviceObj.destinationServices),
-		main        : !isEmpty(serviceObj.mainServices),
+		main        : true,
 	});
 
 	const isKam = ['booking_agent'].includes(activeStakeholder);

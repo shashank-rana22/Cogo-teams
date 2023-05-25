@@ -3,13 +3,13 @@ import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { merge } from '@cogoport/utils';
 
+const geo = getGeoConstants();
+
 const useGetControls = ({ truckTypeToggle }) => {
 	const locationAsyncOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		initialCall : false,
 		params      : { filters: { type: ['pincode'] } },
 	}));
-
-	const geo = getGeoConstants();
 
 	const serviceWiseControls = {
 		ftl_freight: [
@@ -18,14 +18,13 @@ const useGetControls = ({ truckTypeToggle }) => {
 				name        : 'location_id',
 				placeholder : 'Search via pincode',
 				type        : 'select',
-				caret       : true,
-				className   : 'primary sm',
 				span        : 12,
 				rules       : { required: 'This is required' },
 				...locationAsyncOptions,
 			},
 			{
 				name     : 'truck_body_type',
+				label    : 'Truck Body Type',
 				offLabel : 'Closed Body',
 				onLabel  : 'Open Body',
 				type     : 'toggle',
@@ -33,20 +32,23 @@ const useGetControls = ({ truckTypeToggle }) => {
 			},
 			{
 				name      : 'truck_type',
-				type      : 'chips',
+				label     : 'Truck Type',
+				type      : 'pills',
 				options   : truckTypeToggle ? geo.options.open_truck : geo.options.closed_truck,
-				className : 'primary sm',
+				className : 'pills_overflow',
 				span      : 12,
-				lg        : 12,
 			},
 			{
-				name      : 'trucks_count',
-				label     : 'Number of Trucks',
-				type      : 'number',
-				prefix    : 'Truck',
-				span      : 12,
-				className : 'primary sm',
-				min       : 1,
+				name   : 'trucks_count',
+				label  : 'Number of Trucks',
+				type   : 'number',
+				prefix : 'Truck',
+				span   : 12,
+				rules  : {
+					required   : 'Trucks are required',
+					min        : 1,
+					setValueAs : (v) => parseInt(v, 10),
+				},
 			},
 		],
 		lcl_customs : [],
@@ -72,7 +74,9 @@ const useGetControls = ({ truckTypeToggle }) => {
 				value       : [
 					{
 						packing_type   : 'pallet',
-						dimensions     : { length: 1, width: 1, height: 1 },
+						length         : 1,
+						width          : 1,
+						height         : 1,
 						packages_count : 1,
 					},
 				],
@@ -82,77 +86,68 @@ const useGetControls = ({ truckTypeToggle }) => {
 						name        : 'packing_type',
 						placeholder : 'Select',
 						type        : 'select',
-						style       : {
-							control: {
-								fontSize   : '12px',
-								lineHeight : '14px',
-								color      : 'black',
-								minHeight  : '24px',
-								height     : '24px',
-							},
-							indicatorsContainer: { display: 'none' },
-						},
 						showMessage : false,
 						options     : [
 							{ label: 'Pallet', value: 'pallet' },
 							{ label: 'Box', value: 'box' },
 						],
-						rules : { required: 'Required' },
-						xs    : 3,
-						lg    : 3,
-						span  : 3,
+						rules: { required: 'Packing Type is Required' },
 					},
 					{
-						name          : 'dimensions',
-						label         : 'Dimensions',
-						type          : 'input-group',
-						className     : 'small-input medium-input',
-						subLabel      : 'CM',
-						xs            : 6,
-						lg            : 6,
-						span          : 4,
-						showMessage   : false,
-						inputControls : [
-							{
-								name        : 'length',
-								type        : 'number',
-								placeholder : 'L',
-							},
-							{
-								name        : 'width',
-								type        : 'number',
-								span        : 4,
-								placeholder : 'W',
-							},
-							{
-								name        : 'height',
-								type        : 'number',
-								placeholder : 'H',
-							},
-						],
-						rules: { required: 'Required' },
+						name        : 'length',
+						label       : 'Length(CM)',
+						type        : 'number',
+						placeholder : 'L',
+						span        : 2,
+						rules       : {
+							required : 'Length is required',
+							min      : 1,
+						},
+					},
+					{
+						name        : 'width',
+						label       : 'Width(CM)',
+						type        : 'number',
+						placeholder : 'W',
+						span        : 2,
+						rules       : {
+							required : 'Width is required',
+							min      : 1,
+						},
+					},
+					{
+						name        : 'height',
+						label       : 'Height(CM)',
+						type        : 'number',
+						placeholder : 'H',
+						span        : 2,
+						rules       : {
+							required : 'Height is required',
+							min      : 1,
+						},
 					},
 					{
 						label       : 'Package Weight',
 						name        : 'package_weight',
 						placeholder : 'Enter package weight',
 						type        : 'number',
-						span        : 4,
-						rules       : { required: 'Required' },
+						span        : 6,
+						rules       : {
+							required : 'Package weight is required',
+							min      : 0.0001,
+						},
 					},
 					{
-						label         : 'Count',
-						name          : 'packages_count',
-						placeholder   : '(min 1, max 400)',
-						type          : 'number',
-						span          : 12,
-						isShowStepper : false,
-						max           : 400,
-						min           : 1,
-						xs            : 2,
-						lg            : 2,
-						showMessage   : false,
-						rules         : { min: 1 },
+						label       : 'Count',
+						name        : 'packages_count',
+						placeholder : '(min 1, max 400)',
+						type        : 'number',
+						span        : 12,
+						rules       : {
+							min      : 1,
+							max      : 400,
+							required : 'Count is required',
+						},
 					},
 					{
 						label   : 'Handling Type',
