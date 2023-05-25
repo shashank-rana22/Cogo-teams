@@ -3,8 +3,9 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
+import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
 import ShipmentHeader from '../../common/ShipmentHeader';
 import Timeline from '../../common/TimeLine';
@@ -133,7 +134,7 @@ function ShipmentDetails() {
 						</TabPanel>
 
 						<TabPanel name="tracking" title="Tracking">
-							{/* <Tracking shipmentData={shipment_data} /> */}
+							<Tracking shipmentData={shipment_data} />
 						</TabPanel>
 					</Tabs>
 				</div>
