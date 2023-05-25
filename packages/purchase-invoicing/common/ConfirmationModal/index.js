@@ -6,7 +6,8 @@ import styles from './styles.module.css';
 
 function ConfirmationModal({
 	setConfirmation = () => {},
-	handleFinalSubmit = () => {},
+	handleFinalSubmit = () => { },
+	loading = false,
 }) {
 	return (
 		<div>
@@ -30,13 +31,14 @@ function ConfirmationModal({
 
 				<Modal.Footer>
 					<div className={styles.flex}>
-						<Button themeType="secondary" onClick={() => setConfirmation(null)}>
+						<Button themeType="secondary" disabled={loading} onClick={() => setConfirmation(null)}>
 							Cancel
 						</Button>
 
 						<Button
 							className={styles.button}
 							onClick={handleFinalSubmit}
+							disabled={loading}
 						>
 							Proceed
 						</Button>

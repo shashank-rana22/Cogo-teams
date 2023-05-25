@@ -138,6 +138,7 @@ function Step1({
 						size="md"
 						themeType="secondary"
 						className={styles.marginright}
+						disabled={loading}
 						onClick={() => {
 							setUploadInvoiceUrl(null);
 							closeModal();
@@ -161,6 +162,7 @@ function Step1({
 				<ConfirmationModal
 					setConfirmation={setConfirmation}
 					handleFinalSubmit={handleFinalSave}
+					loading={loading}
 				/>
 			) : null}
 		</div>

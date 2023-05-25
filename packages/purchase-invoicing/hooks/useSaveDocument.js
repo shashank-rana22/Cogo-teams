@@ -3,23 +3,14 @@ import { get, isEmpty } from '@cogoport/utils';
 
 import toastApiError from '../utils/toastApiError';
 
-/**
- * @typedef  {Object} 	[props]
- * @property {Object} 	[orgResponse]
- * @property {string} 	[tradePartyId]
- * @property {function} [getOrganizationDocuments]
- * @property {Object} 	[data]
- * @property {function}	[onCloseModal]
- */
-
 const useSaveDocument = ({
-	orgResponse,
-	tradePartyId,
-	getOrganizationDocuments,
-	data,
-	onCloseModal,
-	getTradePartnerList,
-	source,
+	orgResponse = {},
+	tradePartyId = '',
+	getOrganizationDocuments = () => {},
+	data = {},
+	onCloseModal = () => {},
+	getTradePartnerList = () => {},
+	source = '',
 }) => {
 	const {
 		id: organizationId,

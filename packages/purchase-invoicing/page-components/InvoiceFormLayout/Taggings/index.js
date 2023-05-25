@@ -8,9 +8,9 @@ import useGetTaggingBills from '../../../hooks/useGetMappings';
 import styles from './styles.module.css';
 
 const TAGGING_TABS = [
-	{ label: 'split', value: 'split', heading: 'Select a proforma you want to split ' },
-	{ label: 'merge', value: 'merge', heading: 'Select More then one proforma you want to Merge' },
-	{ label: 'normal', value: 'normal', heading: 'Select a proforma you want to Tag ' },
+	{ label: 'split', value: 'split', heading: 'Select a proforma you want to split' },
+	{ label: 'merge', value: 'merge', heading: 'Select More than one proforma you want to Merge' },
+	{ label: 'normal', value: 'normal', heading: 'Select a proforma you want to Tag' },
 ];
 
 function Taggings({
@@ -33,7 +33,7 @@ function Taggings({
 			return;
 		}
 		if (activeTab === 'merge' && selectedProforma?.length < 2) {
-			Toast.error('Please select Morethan one proforma to proceed');
+			Toast.error('Please select More Than one proforma to proceed');
 			return;
 		}
 		setShowTaggings(false);
