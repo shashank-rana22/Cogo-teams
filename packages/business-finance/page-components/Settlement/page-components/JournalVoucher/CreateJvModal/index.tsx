@@ -48,14 +48,15 @@ function CreateJvModal({ show, onClose = () => {}, setShow, refetch }:Props) {
 		to_cur   : toCurrency,
 		setValue,
 	});
-
-	const { getGlCode } = useGetGlCode();
+	
 
 	useEffect(() => {
 		if (formValues?.currency) {
 			getExchangeRate();
 		}
 	}, [formValues?.currency, getExchangeRate]);
+
+	const { getGlCode } = useGetGlCode();
 
 	useEffect(() => {
 		if (entity) {
