@@ -5,3 +5,10 @@
 .button_container {
 	display: flex;
 }
+
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+}

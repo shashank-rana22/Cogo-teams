@@ -12,6 +12,7 @@ export default function CtcBreakupModal({
   initialQuestion,
   setInitialQuestion,
   formProps,
+  detail
 }) {
   const [visible, setVisible] = useState(false);
 
@@ -49,6 +50,7 @@ export default function CtcBreakupModal({
             visible={visible}
             render={
               <SubmitSection
+              detail={detail}
                 initialQuestion={initialQuestion}
                 ctcStructure={ctcStructure}
                 setVisible={setVisible}

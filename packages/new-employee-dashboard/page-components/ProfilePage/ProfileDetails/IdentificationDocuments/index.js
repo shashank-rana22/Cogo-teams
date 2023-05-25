@@ -16,7 +16,7 @@ function IdentificationDocuments({ profileData }) {
 					return (
 						<div className={styles.card_wrapper} key={id}>
 							<div className={styles.header}>{startCase(document_type)}</div>
-							<PreviewDocumet document_header={startCase(document_type)} document_url={document_url} />
+							<PreviewDocumet document_header={startCase(document_type)} document_url={document_url} preview='true'/>
 							<div className={styles.button_container}>
 								<Button>
 									Reject
