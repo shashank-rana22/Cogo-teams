@@ -3,14 +3,8 @@ const getControls = [{
 	type     : 'fieldArray',
 	controls : [
 		{
-			name        : 'school_name',
-			label       : 'Institution Name',
-			type        : 'input',
-			placeholder : 'Institution Name',
-		},
-		{
 			name    : 'type',
-			label   : 'Degree Type',
+			label   : 'Education Level',
 			type    : 'createselect',
 			options : [{ label: '10th', value: '10th' },
 				{ label: '12th', value: '12th' },
@@ -25,6 +19,12 @@ const getControls = [{
 				{ label: 'Diploma', value: 'Diploma' },
 			],
 			placeholder: 'Degree',
+		},
+		{
+			name        : 'school_name',
+			label       : 'School Name',
+			type        : 'input',
+			placeholder : 'Institution Name',
 		},
 		{
 			name                  : 'started_at',
@@ -49,13 +49,6 @@ const getControls = [{
 			},
 		},
 		{
-			name        : 'Courses',
-			label       : 'Courses',
-			type        : 'createmultiselect',
-			placeholder : 'Enter Courses',
-			rules       : { required: 'This is required' },
-		},
-		{
 			name        : 'score_mode',
 			label       : 'CGPA/Percentage',
 			type        : 'select',
@@ -66,7 +59,8 @@ const getControls = [{
 				{ label: 'Percentage', value: 'percentage' },
 			],
 			style: {
-				width: '50%',
+				width      : '50%',
+				marginLeft : '10px',
 			},
 		},
 		{
@@ -80,13 +74,17 @@ const getControls = [{
 			},
 		},
 		{
+			name        : 'Courses',
+			label       : 'Courses',
+			type        : 'createmultiselect',
+			placeholder : 'Enter Courses',
+			rules       : { required: 'This is required' },
+		},
+		{
 			name        : 'description',
 			label       : 'Description',
 			type        : 'textarea',
 			placeholder : 'Description',
-			style       : {
-				width: '75%',
-			},
 		},
 	],
 
