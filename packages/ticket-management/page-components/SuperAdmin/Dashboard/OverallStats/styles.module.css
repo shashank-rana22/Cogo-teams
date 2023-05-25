@@ -15,7 +15,10 @@
 }
 
 .total_graph {
+	position: relative;
+	display: flex;
 	flex: 2.25;
+	justify-content: space-between;
 }
 
 .count {
@@ -36,15 +39,10 @@
 	height: 80px;
 }
 
-.total {
-	position: relative;
-	display: flex;
-}
-
 .graph_total {
 	position: absolute;
-	top: 16px;
-	left: 24px;
+	top: 24px;
+	left: 40px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;
@@ -75,16 +73,37 @@
 	background-color: #f8aea8;
 }
 
-.escalated {
-	background-color: #fcdc00;
-}
-
-.pending {
+.closed {
 	background-color: #e0e0e0;
 }
 
-.closed {
-	background-color: #ced1ed;
+.escalated {
+	background-color: #7278ad;
+}
+
+.pending {
+	background-color: #fcdc00;
+}
+
+.reopened {
+	background-color: #2ac85f;
+}
+
+.pie_tooltip {
+	display: flex;
+	align-items: center;
+	width: max-content;
+	padding: 2px 4px;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 2px 2px 8px #4d4d4d;
+}
+
+.tooltip_dot {
+	width: 12px;
+	height: 12px;
+	margin-right: 8px;
+	border-radius: 2px;
 }
 
 .legends {
@@ -97,7 +116,7 @@
 .legend {
 	display: flex;
 	flex-direction: column;
-	width: 50%;
+	width: 33%;
 }
 
 .margin_bottom {
@@ -107,7 +126,7 @@
 .legend_count {
 	display: flex;
 	align-items: center;
-	margin-left: 36px;
+	margin-left: 26px;
 }
 
 .stats_count {
@@ -118,7 +137,7 @@
 }
 
 .stats_label {
-	margin-left: 48px;
+	margin-left: 38px;
 	font-size: 10px;
 	font-weight: 400;
 	color: #4f4f4f;
