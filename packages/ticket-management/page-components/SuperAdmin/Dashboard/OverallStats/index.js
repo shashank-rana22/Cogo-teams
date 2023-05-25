@@ -1,7 +1,7 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index';
 import { cl } from '@cogoport/components';
 
-import { statsIconsAndData } from '../../../../configurations/stats-data';
+import { statsIconsAndData } from '../../../../configurations/dashboard-stats';
 
 import styles from './styles.module.css';
 
@@ -76,16 +76,13 @@ function OverallStats() {
 					</div>
 				</div>
 			</div>
-			{(statsIconsAndData || []).map(({ key, icon, label, count }, index) => {
-				if (index > 5) return null;
-				return (
-					<div className={styles.tile} key={key}>
-						<div>{icon}</div>
-						<div className={styles.count}>{count}</div>
-						<div className={styles.label}>{label}</div>
-					</div>
-				);
-			})}
+			{(statsIconsAndData || []).map(({ key, icon, label, count }) => (
+				<div className={styles.tile} key={key}>
+					<div>{icon}</div>
+					<div className={styles.count}>{count}</div>
+					<div className={styles.label}>{label}</div>
+				</div>
+			))}
 		</div>
 
 	);
