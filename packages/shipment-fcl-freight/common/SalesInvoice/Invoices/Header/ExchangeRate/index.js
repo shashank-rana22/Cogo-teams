@@ -1,4 +1,4 @@
-import { Modal } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import CurrencyExchangeForm from './ExchangeRateForm/CurrencyExchangeForm';
@@ -33,32 +33,27 @@ function ExchangeRate({
 
 	return (
 		<div>
-			<div
-				disabled={disableBtn}
+			<Button
+				size="sm"
 				onClick={() => setOpen(true)}
+				disabled={disableAction}
+				themeType="secondary"
 				className={styles.ModifyButton}
-				role="button"
-				tabIndex={0}
 			>
 				Exchange Rate
-			</div>
+			</Button>
 
 			{open ? (
-				<Modal
-					show={open}
-					onClose={() => setOpen(false)}
-					size="md"
-				>
-					<CurrencyExchangeForm
-						invoiceCurrency={invoiceCurrency}
+				<CurrencyExchangeForm
+					invoiceCurrency={invoiceCurrency}
 						// differentCurrenciesHash={differentCurrenciesHash}
 						// rateAddtionApi={rateAddtionApi}
-						setOpen={setOpen}
-						shipment_id={shipment_id}
+					setOpen={setOpen}
+					shipment_id={shipment_id}
 						// availableCurrencyConversions={availableCurrencyConversions}
-						refetch={refetch}
-					/>
-				</Modal>
+					refetch={refetch}
+					open={open}
+				/>
 			) : null}
 		</div>
 	);

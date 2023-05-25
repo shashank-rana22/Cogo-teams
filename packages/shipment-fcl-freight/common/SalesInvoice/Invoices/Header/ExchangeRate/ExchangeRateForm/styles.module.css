@@ -1,4 +1,4 @@
-export const ExchangeRateType = styled.div`
+.ExchangeRateType{
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 20px;
@@ -6,42 +6,48 @@ export const ExchangeRateType = styled.div`
 	margin-top: 6px;
 	margin-bottom: 40px;
 	color: #393f70;
-`;
+}
 
-export const ExchangeRateForm = styled.div`
+.ExchangeRateForm{
 	border-radius: 10px;
-`;
+}
 
-export const Heading = styled.div`
+.Heading{
 	font-weight: bold;
 	font-size: 12px;
 	line-height: 16px;
 	color: #4f4f4f;
 	margin-bottom: 18px;
-`;
+}
 
-export const Buttons = styled.div`
+.Buttons{
 	width: 100%;
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 30px;
+}
 
-	.core-ui-button-root {
-		text-transform: capitalize;
-		width: 100px;
-	}
-`;
-
-export const LinkToRate = styled.div`
+.LinkToRate{
 	display: flex;
 	font-weight: bold;
 	font-size: 12px;
 	line-height: 16px;
 	color: #4f4f4f;
 	margin-bottom: 15px;
-`;
+}
 
-export const Form = styled.div`
+.Form{
 	overflow: auto;
 	height: 67.5vh;
-`;
+}
+
+.body{
+	display: flex;
+	padding: 30px;
+}
+
+.label{
+	display: flex;
+	flex-direction: column;
+	margin-right: 16px;
+}

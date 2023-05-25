@@ -1,9 +1,10 @@
-import { Button, toast } from '@cogoport/components';
+import { Button, toast, Modal, Input } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useForm } from '@cogoport/forms';
+import { useForm, SelectController, InputController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext, useEffect } from 'react';
 
+import Layout from '../../../../../Layout';
 // import Layout from '../../../../commons/Layout';
 
 import { getCurrencyControls } from './getCurrencyControls';
@@ -16,6 +17,7 @@ function CurrencyExchangeForm({
 	setOpen,
 	availableCurrencyConversions,
 	refetch = () => {},
+	open = false,
 }) {
 	const [error, setError] = useState({});
 
@@ -38,10 +40,10 @@ function CurrencyExchangeForm({
 		setError: setErrorForm,
 		formState: { errors },
 		clearErrors,
+		control,
 	} = useForm(controls);
 
-	const [contextValues] = useContext(ShipmentDetailContext);
-	const { shipment_data } = contextValues || {};
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const handleFormSubmit = async (value) => {
 		const exchangeCurrencyHash = {};
@@ -116,17 +118,59 @@ function CurrencyExchangeForm({
 		});
 	}, [JSON.stringify(modifiedConversions)]);
 
+	const controlTypeMapping = {
+		select : SelectController,
+		text   : InputController,
+		number : InputController,
+	};
+
+	function FormElement({ name, label, type, show, ...rest }) {
+		const Element = controlTypeMapping[type];
+
+		return Element && show ? (
+			<div>
+				<div className={styles.label}>{label}</div>
+
+				<Element name={name} type={type} {...rest} />
+
+				{errors[name] ? <div className={styles.errors}>{errors[name].message}</div> : null}
+			</div>
+		) : null;
+	}
+console.log(differentCurrenciesHash, " :differentCurrenciesHash");
 	return (
-		<ExchangeRateForm>
-			<Form>
-				<ExchangeRateType>Modify Exchange Rate</ExchangeRateType>
-
-				<div style={{ display: 'flex', flexDirection: 'column' }}>
-					{/* <Layout controls={controls} fields={fields} errors={error} /> */}
+		<Modal
+			show={open}
+			onClose={() => setOpen(false)}
+			size="lg"
+		>
+			<Modal.Header title="Modify Exchange Rate" />
+			<Modal.Body className={styles.body}>
+				{/* <div className={styles.label}>
+					<div>From</div>
+					<Input name="A3" size="md" placeholder="A3" disabled />
 				</div>
-			</Form>
-
-			<Buttons>
+				<div className={styles.label}>
+					<div>To</div>
+					<Input name="A3" size="md" placeholder="A3" disabled />
+				</div>
+				<div className={styles.label}>
+					<div>Exchange rate</div>
+					<Input name="A3" size="md" placeholder="A3" />
+				</div> */}
+				{/* <Layout controls={controls} formProps={formProps} /> */}
+				<form className={styles.form_container}>
+					{controls.map((item) => (
+						<FormElement
+							key={item.name}
+							control={control}
+							errors={errors}
+							{...item}
+						/>
+					))}
+				</form>
+			</Modal.Body>
+			<Modal.Footer>
 				<Button
 					onClick={() => setOpen(false)}
 					disabled={rateAddtionApi?.loading}
@@ -143,8 +187,9 @@ function CurrencyExchangeForm({
 				>
 					Add rate
 				</Button>
-			</Buttons>
-		</ExchangeRateForm>
+
+			</Modal.Footer>
+		</Modal>
 	);
 }
 

@@ -1,7 +1,7 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { useSelector, useContext } from '@cogoport/store';
-import React from 'react';
+import { useSelector } from '@cogoport/store';
+import React, { useContext } from 'react';
 
 import EditInvoicePreference from './EditInvoicePreference';
 import ExchangeRate from './ExchangeRate';
@@ -21,7 +21,7 @@ function Header({
 		reviewed_invoices,
 	} = invoiceData;
 	const user_data = useSelector(({ profile }) => profile || {});
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data } = useContext(ShipmentDetailContext) || {};
 
 	const showExchangeRate = user_data.email === 'ajeet@cogoport.com';
 
