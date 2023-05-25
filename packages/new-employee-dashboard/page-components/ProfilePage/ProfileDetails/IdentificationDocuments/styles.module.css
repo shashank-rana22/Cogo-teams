@@ -23,6 +23,20 @@
 	
 }
 
+.tick_content{
+	display: flex;
+	align-items: center;
+}
+
+.verified_text{
+	font-size: 12px;
+	/* background-color: #c4dc91; */
+	padding:2px 6px;
+	border-radius: 6px;
+}
+
+
+
 .approve_btn{
 	padding-left: 12px;
 
