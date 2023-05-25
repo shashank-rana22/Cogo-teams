@@ -1218,15 +1218,23 @@ importers:
       '@cogoport/components': ^1.0.421
       '@cogoport/context': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.75
+      '@cogoport/next': workspace:^0.1.0
+      '@cogoport/request': workspace:^0.1.0
       '@cogoport/shipment-chat': workspace:^0.1.0
       '@cogoport/shipment-mails': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.10
       react: 18.2.0
     dependencies:
       '@cogoport/components': 1.0.421_guhuyhrafl7yprlcl7n6dekiki
       '@cogoport/context': link:../../common/context
       '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
       '@cogoport/shipment-chat': link:../../common/shipment-chat
       '@cogoport/shipment-mails': link:../../common/shipment-mails
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
       react: 18.2.0
 
   packages/so2-surface:
