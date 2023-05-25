@@ -370,6 +370,17 @@ function asyncListServetelAgents() {
 	};
 }
 
+function asyncAllocationRequestRejectionType() {
+	return {
+		labelKey     : 'reason',
+		valueKey     : 'reason',
+		endpoint     : '/request_rejection_reasons',
+		authkey      : 'get_allocation_request_rejection_reasons',
+		microService : 'allocation',
+		initialCall  : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -400,4 +411,5 @@ export {
 	asyncFieldsTicketTypes,
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
+	asyncAllocationRequestRejectionType,
 };

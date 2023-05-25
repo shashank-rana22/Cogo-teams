@@ -24,6 +24,7 @@ import {
 	asyncListCurrency,
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsPartnerUsersIds,
+	asyncAllocationRequestRejectionType,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -66,6 +67,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_exchange_rate_currencies : asyncListCurrency,
 	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
 	partner_users_ids             : asyncFieldsPartnerUsersIds,
+	allocation_rejection_type     : asyncAllocationRequestRejectionType,
 };
 
 function AsyncSelect(props) {
