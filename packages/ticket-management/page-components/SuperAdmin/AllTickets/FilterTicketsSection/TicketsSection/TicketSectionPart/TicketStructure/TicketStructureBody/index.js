@@ -1,8 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import { statusLabelTransformation } from '../../../../configurations/key-mapping';
-import { actionButtonKeys, getTicketStatus } from '../../../../constants';
+import { statusLabelTransformation } from '../../../../../../../../configurations/key-mapping';
+import { actionButtonKeys, getTicketStatus } from '../../../../../../../../constants';
 
 import styles from './styles.module.css';
 
