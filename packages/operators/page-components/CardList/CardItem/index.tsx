@@ -1,13 +1,13 @@
 import React, { useState, useEffect, ReactNode } from 'react';
 
-import { FieldType, FunctionObjects } from '../Interfaces/index';
+import { FieldType, FunctionObjects, NestedObj } from '../Interfaces/index';
 
 import getValue from './getValue';
 import styles from './styles.module.css';
 
 export interface Props {
 	fields: FieldType[];
-	singleitem?: any;
+	singleitem?: NestedObj;
 	functions?: FunctionObjects;
 }
 

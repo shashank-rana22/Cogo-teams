@@ -10,6 +10,10 @@ import EditOperators from './EditOperators';
 import Header from './Header';
 import styles from './styles.module.css';
 
+interface NestedObj {
+	[key: string]: string;
+}
+
 function Operators() {
 	const [show, setShow] = useState(false);
 	const [edit, setEdit] = useState(false);
@@ -29,7 +33,7 @@ function Operators() {
 	} = useGetListData();
 
 	const functions = {
-		handleLogo: (singleItem:any) => (
+		handleLogo: (singleItem:NestedObj) => (
 			<div className={styles.title_black}>
 				{singleItem?.logo_url ? (
 					<img className={styles.image} alt="logo" src={singleItem.logo_url} />
@@ -38,7 +42,7 @@ function Operators() {
 				)}
 			</div>
 		),
-		handleStatus: (singleItem:any) => (
+		handleStatus: (singleItem:NestedObj) => (
 			<div className={styles.title_black}>
 				{singleItem?.status === 'active' ? (
 					<div className={styles.event} style={{ backgroundColor: '#d2ffe4' }}>{singleItem?.status}</div>
@@ -49,7 +53,7 @@ function Operators() {
 				)}
 			</div>
 		),
-		handleEdit: (singleItem:any) => (
+		handleEdit: (singleItem:NestedObj) => (
 			<Button
 				className={styles.edit}
 				onClick={() => {

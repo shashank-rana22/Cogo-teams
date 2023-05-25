@@ -2,8 +2,10 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+import { FieldType } from '../Interfaces/index';
+
 export interface Props {
-	fields: any[];
+	fields: FieldType[];
 }
 
 function Header({

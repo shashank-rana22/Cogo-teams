@@ -6,17 +6,18 @@ import InfiniteScroll from 'react-infinite-scroller';
 import Header from './CardHeader';
 import CardItem from './CardItem';
 import EmptyState from './EmptyState';
-import { FunctionObjects, FieldType, DataType } from './Interfaces';
+import { FunctionObjects, NestedObj,FieldType, DataType } from './Interfaces';
 import styles from './styles.module.css';
+
 
 interface Props {
 	fields: FieldType[];
 	data: DataType;
 	loading?: boolean;
 	page?: number;
-	setPage?: any;
-	finalList?: any;
-	setFinalList?: any;
+	setPage?: React.FC;
+	finalList?: Array<object>;
+	setFinalList?: React.FC;
 	functions?: FunctionObjects;
 }
 
@@ -31,6 +32,9 @@ function CardList({
 	functions,
 } :Props) {
 	const { list = [], total_count:totalCount = 0 } = data;
+
+	console.log("finalList",finalList);
+	
 
 	const loadMore = useCallback(() => {
 		setTimeout(() => {
