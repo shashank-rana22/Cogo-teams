@@ -1151,7 +1151,6 @@ importers:
       file-saver: ^2.0.5
       prop-types: ^15.8.1
       react: 18.2.0
-      react-hook-form: ^7.43.3
       uuid: ^9.0.0
     dependencies:
       '@cogoport/components': 1.0.413_bykzbvvitan6xtqocjq62ilw64
@@ -1172,7 +1171,6 @@ importers:
       file-saver: 2.0.5
       prop-types: 15.8.1
       react: 18.2.0
-      react-hook-form: 7.43.9_react@18.2.0
       uuid: 9.0.0
 
   packages/so2-surface:
