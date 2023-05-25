@@ -82,6 +82,7 @@ importers:
       '@cogoport/saas-tools': workspace:0.1.0
       '@cogoport/scope-select': workspace:0.1.0
       '@cogoport/shipment-chat': workspace:0.1.0
+      '@cogoport/shipment-fcl-custom': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/shipment-mails': workspace:0.1.0
       '@cogoport/so2-surface': workspace:0.1.0
@@ -140,6 +141,7 @@ importers:
       '@cogoport/saas-tools': link:../packages/saas-tools
       '@cogoport/scope-select': link:../common/scope-select
       '@cogoport/shipment-chat': link:../common/shipment-chat
+      '@cogoport/shipment-fcl-custom': link:../packages/shipment-fcl-custom
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/shipment-mails': link:../common/shipment-mails
       '@cogoport/so2-surface': link:../packages/so2-surface
@@ -1135,6 +1137,12 @@ importers:
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
+      react: 18.2.0
+
+  packages/shipment-fcl-custom:
+    specifiers:
+      react: 18.2.0
+    dependencies:
       react: 18.2.0
 
   packages/shipment-fcl-freight:

@@ -26,6 +26,7 @@ import performanceManagement from './config/performance-management';
 import referral from './config/referral';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasTools from './config/saas-tools';
+import shipmentFclCustom from './config/shipment-fcl-custom';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
@@ -69,6 +70,7 @@ const routeConfig = {
 	...saasTools,
 	...so2Surface,
 	...chakravyuh,
+	...shipmentFclCustom,
 };
 
 export default routeConfig;
