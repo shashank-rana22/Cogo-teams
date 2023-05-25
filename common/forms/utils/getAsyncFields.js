@@ -11,7 +11,20 @@ function asyncFieldsLocations2() {
 		},
 	};
 }
-
+function asyncFieldsPartnerUsersIds() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'user_id',
+		endpoint    : 'list_partner_users',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
 function asyncFieldsLocations() {
 	return {
 		valueKey    : 'id',
@@ -453,5 +466,6 @@ export {
 	asyncAccMode,
 	asyncCodeMaster,
 	asyncListOrgTradeParties,
+	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
 };

@@ -25,6 +25,11 @@
 			cursor: pointer;
 		}
 	}
+
+	th td:first-child {
+		text-decoration: none;
+		cursor: initial;
+	}
 }
 
 .loader {

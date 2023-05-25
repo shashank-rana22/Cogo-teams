@@ -28,6 +28,7 @@ import {
 	asyncAccMode,
 	asyncCodeMaster,
 	asyncListOrgTradeParties,
+	asyncFieldsPartnerUsersIds,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -74,6 +75,7 @@ const keyAsyncFieldsParamsMapping = {
 	jv_account_mode               : asyncAccMode,
 	jv_code_master                : asyncCodeMaster,
 	list_trade_parties            : asyncListOrgTradeParties,
+	partner_users_ids             : asyncFieldsPartnerUsersIds,
 };
 
 function AsyncSelect(props) {
