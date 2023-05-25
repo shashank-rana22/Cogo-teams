@@ -1,7 +1,7 @@
 .flex_wrapper {
-	padding-bottom: 8px;
-	min-width:250px;
+	min-width: 250px;
 	padding-right: 14px;
+	padding-bottom: 8px;
 }
 
 .value {
@@ -10,13 +10,12 @@
 }
 
 .label {
+	padding-top: 20px;
 	padding-bottom: 4px;
 	color: #828282;
-	padding-top: 20px;
 }
 
-
-.container{
+.container {
 	display: flex;
 	flex-wrap: wrap;
 }

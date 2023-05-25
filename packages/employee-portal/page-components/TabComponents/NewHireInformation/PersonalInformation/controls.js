@@ -19,6 +19,31 @@ const controls = () => ([
 	// 	placeholder : 'Last Name',
 	// },
 	{
+		name        : 'gender',
+		label       : 'Gender',
+		type        : 'select',
+		placeholder : 'Select Gender',
+		rules       : { required: 'This is required' },
+		options     : [
+			{ label: 'Male', value: 'male' },
+			{ label: 'Female', value: 'female' },
+		],
+	},
+	{
+		name        : 'employee_code',
+		label       : 'Employee Code',
+		type        : 'input',
+		placeholder : 'Employee Code',
+		rules       : { required: 'This is required' },
+	},
+	{
+		name        : 'designation',
+		label       : 'Employee Designation',
+		type        : 'input',
+		placeholder : 'Employee Designation',
+		rules       : { required: 'This is required' },
+	},
+	{
 		name                  : 'date_of_birth',
 		label                 : 'Date of Birth',
 		type                  : 'date-select',
@@ -51,31 +76,6 @@ const controls = () => ([
 		rules                 : { required: 'This is required' },
 	},
 	{
-		name        : 'employee_code',
-		label       : 'Employee Code',
-		type        : 'input',
-		placeholder : 'Employee Code',
-		rules       : { required: 'This is required' },
-	},
-	{
-		name        : 'designation',
-		label       : 'Employee Designation',
-		type        : 'input',
-		placeholder : 'Employee Designation',
-		rules       : { required: 'This is required' },
-	},
-	{
-		name        : 'gender',
-		label       : 'Gender',
-		type        : 'select',
-		placeholder : 'Select Gender',
-		rules       : { required: 'This is required' },
-		options     : [
-			{ label: 'Male', value: 'male' },
-			{ label: 'Female', value: 'female' },
-		],
-	},
-	{
 		name        : 'mobile_number',
 		label       : 'Phone Number',
 		type        : 'mobilenumber',
@@ -99,7 +99,7 @@ const controls = () => ([
 		name        : 'emergency_num',
 		label       : 'Emergency Contact Number',
 		type        : 'mobilenumber',
-		placeholder : 'Emergency Contact Number',
+		placeholder : 'Number',
 		// rules       : { required: 'This is required' },
 	},
 	{
@@ -107,6 +107,9 @@ const controls = () => ([
 		label       : 'Address',
 		type        : 'textarea',
 		placeholder : 'Address',
+		style       : {
+			height: '200%',
+		},
 		// rules       : { required: 'This is required' },
 	},
 	{

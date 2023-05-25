@@ -15,6 +15,7 @@ function Maps({ setInformationPage }) {
 	const formProps = useForm();
 
 	const { control } = formProps;
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -59,6 +60,7 @@ function Maps({ setInformationPage }) {
 				<br />
 				Kondivita, MIDC, Andheri East, Mumbai - 400069 Maharashtra, India
 			</div>
+
 			<Map />
 		</div>
 	);
