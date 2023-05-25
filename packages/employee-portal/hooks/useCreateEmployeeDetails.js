@@ -17,7 +17,6 @@ function useCreateEmployeeDetails({ id, getEmployeeDetails }) {
 					status             : data?.status || 'active',
 					performed_by_id    : '5674cb',
 					performed_by_type  : '2314fb',
-
 				},
 			});
 			getEmployeeDetails();

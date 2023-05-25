@@ -17,7 +17,7 @@ const getColumns = ({ onClickViewDocument }) => [
 		accessor : (item) => (
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<IcMDocument width={14} height={14} />
-				<div style={{ margin: '0 4px' }}>{item?.file_url?.document_name || 'Aadhar Card'}</div>
+				<div style={{ margin: '0 4px' }}>{item?.file_url?.document_name || 'policy_name'}</div>
 				<IcMEyeopen
 					width={14}
 					height={14}

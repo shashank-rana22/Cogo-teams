@@ -33,6 +33,9 @@ function EmploymentHistory() {
 	return (
 		<>
 			<div className={styles.container}>
+				<div className={styles.introductory_text}>
+					Tell us about your work experience, starting with the most recent.
+				</div>
 				{controls?.map((controlItem) => {
 					const { type, name: controlName } = controlItem || {};
 

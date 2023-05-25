@@ -43,6 +43,9 @@ function Resume() {
 	};
 	return (
 		<div className={styles.whole_container}>
+			<div className={styles.introductory_text}>
+				Please upload your resume here !
+			</div>
 			<div className={styles.container}>
 				{controls?.map((controlItem) => {
 					const { type, label, name: controlName } = controlItem || {};

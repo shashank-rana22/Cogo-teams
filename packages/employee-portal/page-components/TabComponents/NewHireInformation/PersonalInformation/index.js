@@ -35,6 +35,12 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 				number       : content?.detail?.mobile_number,
 				country_code : content?.detail?.mobile_country_code || +91,
 			},
+			emergency_contact_details: {
+				mobile_number: {
+					number       : content?.detail?.emergency_contact_details?.[0].mobile_number,
+					country_code : content?.detail?.emergency_contact_details?.[0].mobile_country_code || +91,
+				},
+			},
 		};
 		controlsvalue.forEach((item) => {
 			if (item?.name === 'mobile_number') {
@@ -47,6 +53,12 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 				|| item?.name === 'date_of_joining'
 				|| item?.name === 'updated_at' || item?.name === 'created_at') {
 				setValue(item.name, new Date(content?.detail?.[item?.name]));
+			} else if (item?.name === 'emergency_contact_details') {
+				setValue(
+					`${item.name}`,
+					mapping[item.name].mobile_number
+					|| content?.detail?.[item.name],
+				);
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}
@@ -55,6 +67,9 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 
 	return (
 		<div className={styles.whole_container}>
+			<div className={styles.introductory_text}>
+				Please update your details here !
+			</div>
 			<div className={styles.container}>
 				{controlsvalue?.map((controlItem) => {
 					const { type, label, name: controlName } = controlItem || {};
