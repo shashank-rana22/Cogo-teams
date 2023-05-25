@@ -8,6 +8,7 @@ export default function SubmitSection({
   ctcStructure = {},
   setVisible = () => {},
   formProps,
+  detail,
   setShowCtcBreakupModal = () => {},
   setInitialQuestion = () => {},
 }) {
@@ -15,7 +16,8 @@ export default function SubmitSection({
 
   const { loading, onFinalSubmit } = usePostCreateEmployeeOfferLetter();
   const onSubmit = (values) => {
-    onFinalSubmit(values, ctcStructure, initialQuestion);
+    onFinalSubmit(values, ctcStructure, initialQuestion, detail?.id);
+    console.log("detail?.id", detail?.id);
 
     setVisible(false);
     // setShowCtcBreakupModal(false);
