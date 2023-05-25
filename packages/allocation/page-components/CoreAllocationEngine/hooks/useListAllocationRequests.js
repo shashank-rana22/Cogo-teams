@@ -10,7 +10,7 @@ import Actions from '../components/AllocationRequests/List/Actions';
 import styles from '../components/AllocationRequests/List/styles.module.css';
 
 const useListAllocationRequests = () => {
-	const { profile: { authParams } } = useSelector((state) => state);
+	const { profile: { authParams, partner = {} } } = useSelector((state) => state);
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');
@@ -178,16 +178,27 @@ const useListAllocationRequests = () => {
 		{
 			key      : 'organization',
 			Header   : 'Organization',
-			accessor : ({ service }) => (
-				<Tooltip content={(
-					<div className={styles.tooltip_text}>
-						{service.business_name || null}
-					</div>
-				)}
-				>
-					<div className={styles.business_name}>{service?.business_name || '___'}</div>
-				</Tooltip>
-			),
+			accessor : ({ service }) => {
+				const { service_type: toggleValue } = params.filters || {};
+
+				const pathname = toggleValue === 'organizations'
+					? `/${partner.id}/details/demand/${service.id}` : `/${partner.id}/prm/${service.id}`;
+
+				return (
+					<Tooltip content={(
+						<div className={styles.tooltip_text}>
+							{service.business_name || null}
+						</div>
+					)}
+					>
+						<a href={pathname} target="_blank" rel="noopener noreferrer">
+							<div className={styles.business_name}>
+								{service?.business_name || '___'}
+							</div>
+						</a>
+					</Tooltip>
+				);
+			},
 		},
 		{
 			key      : 'service_user',
