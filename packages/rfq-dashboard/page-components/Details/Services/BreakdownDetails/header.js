@@ -1,5 +1,3 @@
-import React from 'react';
-
 import getWidth from '../../../../utils/getWidth';
 
 import styles from './styles.module.css';
@@ -7,14 +5,14 @@ import styles from './styles.module.css';
 function Header() {
 	return (
 		<>
-			<div style={styles.note}>
+			<div className={styles.note}>
 				Please note that reducing the total margin by more than
 				<span>INR 8000</span>
 				{' '}
 				will require an approval.
 			</div>
 			<div className={styles.row}>
-				<div className={styles.col} style={{ width: getWidth(2.5) }}>SERVICE</div>
+				<div className={styles.col} style={{ width: getWidth(2.45) }}>SERVICE</div>
 				<div className={styles.col} style={{ width: getWidth(2) }}>BUY PRICE</div>
 				<div className={styles.col} style={{ width: getWidth(1.5) }}>MARGIN TYPE</div>
 				<div className={styles.col} style={{ width: getWidth(2) }}>CURRENCY</div>

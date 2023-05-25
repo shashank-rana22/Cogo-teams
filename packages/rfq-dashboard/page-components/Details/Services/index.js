@@ -15,7 +15,7 @@ const TITLE_MAPPING = {
 	requested_for_approval : 'Remaining Port Pairs',
 };
 
-function Services({ loading, rate_card_list_object = {} }) {
+function Services({ loading, rate_card_list_object = {}, refetchRateCards }) {
 	const [selected, setSelected] = useState([]);
 
 	const [checkAll, setCheckAll] = useState(false);
@@ -101,6 +101,7 @@ function Services({ loading, rate_card_list_object = {} }) {
 								// changeSelection={changeSelection}
 									loading={loading}
 									title={key}
+									refetchRateCards={refetchRateCards}
 								/>
 							</div>
 				  ))}

@@ -7,6 +7,7 @@ import ServiceStats from '../../../../common/ServiceStats';
 import { priceBreakupChildData } from '../../../../configurations/price-breakup-card-child-data';
 import { PromisedConAndContract } from '../../../../configurations/service-stats-data';
 import useGetRfqRateCardDetails from '../../../../hooks/useGetRfqRateCardDetails';
+import useUpdateRfqRateMargin from '../../../../hooks/useUpdateRfqRateMargin';
 import BreakdownDetails from '../BreakdownDetails';
 
 import CommodityMapping from './CommodityMapping';
@@ -20,9 +21,9 @@ const COMMODITY_MAPPING = ['cargo_weight_per_container', 'commodity',
 	'container_size', 'container_type', 'containers_count'];
 
 function PortsCard(props) {
-	const { data = {}, loading } = props;
+	const { data = {}, loading, refetchRateCards } = props;
 
-	const [showPrice, setShowPrice] = useState(false);
+	const [showPrice, setShowPrice] = useState({});
 
 	const {
 		detail = {}, freight_price_currency = '', freight_price_discounted = '',
@@ -41,29 +42,47 @@ function PortsCard(props) {
 
 	COMMODITY_MAPPING.map((commodity) => commodity_array.push({ [commodity]: detail[commodity] }));
 
-	const [editedMargins, setEditedMargins] = useState({});
-
-	const currency_conversion = {};
-
 	const {
 		getRfqRateCardDetails, rfq_card_loading,
 		rate_card_details_data,
-	} = useGetRfqRateCardDetails({ rfq_rate_card_id: showPrice.rfq_rate_card_id });
+	} = useGetRfqRateCardDetails();
 
 	useEffect(() => {
-		if (isEmpty(showPrice)) {
-			getRfqRateCardDetails();
+		if (!isEmpty(showPrice)) {
+			getRfqRateCardDetails({ rfq_rate_card_id: showPrice?.rfq_rate_card_id });
 		}
-	}, [showPrice]);
+	}, [getRfqRateCardDetails, showPrice]);
 
-	console.log('rate_card_details_data::', rate_card_details_data);
+	const { rate = {}, detail: rate_card_details = {}, currency_conversion = {} } = rate_card_details_data || {};
 
-	// const {
-	// 	data = {}, origin_port = [],
-	// 	destination_port = [], changeSelection = () => {}, selected = [], isClickable = true, source = '', loading,
-	// } = props;
+	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
 
-	// const {}
+	console.log('details respone::', rate_card_details_data);
+
+	const [editedMargins, setEditedMargins] = useState({});
+
+	// console.log('rate::', ?.rate, 'currency', convenience_line_item?.currency);
+
+	const [convenienceDetails, setConvenienceDetails] = useState({
+		convenience_rate: {
+			price    : convenience_line_item?.price,
+			currency : convenience_line_item?.currency,
+			unit     : convenience_line_item?.unit,
+		},
+	});
+
+	console.log('convenienceDetails::', convenienceDetails);
+
+	const primary_service_id = rate_card_details?.primary_service_id;
+	const primaryService = {
+		...(rate_card_details?.service_details?.[primary_service_id] || {}),
+		rate: rate?.service_rates?.[primary_service_id] || {},
+	};
+
+	const { updateMargin } = useUpdateRfqRateMargin({
+		rate,
+		rate_card_details,
+	});
 
 	const prefilledValues = [];
 	priceBreakupChildData?.forEach((item) => {
@@ -127,24 +146,25 @@ function PortsCard(props) {
 						{showPrice ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 					</button>
 				</div>
-				{showPrice && (
-					<PriceBreakupCard
-						priceBreakupChildData={priceBreakupChildData}
-						prefilledValues={prefilledValues}
-						showPrice={showPrice}
-						loading={loading}
+				{!isEmpty(showPrice) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && (
+				// <PriceBreakupCard
+				// 	priceBreakupChildData={priceBreakupChildData}
+				// 	prefilledValues={prefilledValues}
+				// 	showPrice={showPrice}
+				// 	loading={loading}
+				// />
+
+					<BreakdownDetails
+						rate={rate}
+						detail={rate_card_details}
+						conversions={currency_conversion}
+						editedMargins={editedMargins}
+						setEditedMargins={setEditedMargins}
+						primaryService={primaryService}
+						convenienceDetails={convenienceDetails}
+						setConvenienceDetails={setConvenienceDetails}
 					/>
 
-				// <BreakdownDetails
-				// 	editedMargins={editedMargins}
-				// 	setEditedMargins={setEditedMargins}
-				// 	conversions={currency_conversion}
-				// 	detail={details}
-				// 	rate={rate}
-				// 	primaryService={primaryService}
-				// 	convenienceDetails={convenienceDetails}
-				// 	setConvenienceDetails={setConvenienceDetails}
-				// />
 				)}
 			</div>
 		</div>

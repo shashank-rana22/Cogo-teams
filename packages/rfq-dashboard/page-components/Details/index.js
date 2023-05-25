@@ -1,4 +1,5 @@
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 import useGetRfqRateCards from '../../hooks/useGetRfqRateCards';
@@ -37,7 +38,7 @@ function Details() {
 				<Graph loading={loading} />
 			</div>
 			<div className={styles.rfq_list}>
-				<Services loading={loading} rate_card_list_object={list_object} />
+				<Services loading={loading} rate_card_list_object={list_object} refetchRateCards={getRfqsRateCards} />
 			</div>
 		</div>
 	);

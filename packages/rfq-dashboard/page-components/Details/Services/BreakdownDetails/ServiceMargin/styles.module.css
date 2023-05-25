@@ -1,6 +1,7 @@
 .row{
 	align-items: center;
 	padding: 10px 0px;
+	display: flex;
 }
 
 .container{
