@@ -1,8 +1,11 @@
+import FilterTicketsSection from './FilterTicketsSection';
 import styles from './styles.module.css';
 
 function AllTickets() {
 	return (
-		<div className={styles.title}>AllTickets</div>
+		<div className={styles.title}>
+			<FilterTicketsSection />
+		</div>
 
 	);
 }
