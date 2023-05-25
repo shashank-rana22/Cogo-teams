@@ -8,13 +8,13 @@ function Widget({ label = 'Top Users', subLabel = 'No of issues', data }) {
 				<div className={styles.title}>{subLabel}</div>
 			</div>
 			<div className={styles.list}>
-				{(data || []).map(({ agent_name, org_name, count }) => (
-					<div className={styles.card} key={agent_name}>
+				{(data || []).map(({ UserId, Name, OrganizationName, Tickets }) => (
+					<div className={styles.card} key={UserId}>
 						<div className={styles.agent_details}>
-							<div className={styles.agent_name}>{agent_name}</div>
-							<div className={styles.agent_org}>{org_name}</div>
+							<div className={styles.agent_name}>{Name}</div>
+							<div className={styles.agent_org}>{OrganizationName}</div>
 						</div>
-						<div className={styles.count}>{count}</div>
+						<div className={styles.count}>{Tickets}</div>
 					</div>
 				))}
 			</div>
