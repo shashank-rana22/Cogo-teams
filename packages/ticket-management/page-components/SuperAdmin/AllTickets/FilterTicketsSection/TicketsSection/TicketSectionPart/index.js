@@ -1,6 +1,5 @@
-import TicketStructure from '../../../../../common/TicketStructure';
-
 import styles from './styles.module.css';
+import TicketStructure from './TicketStructure';
 
 function TicketsSectionPart({
 	label, data, handleScroll, loading, refreshTickets,

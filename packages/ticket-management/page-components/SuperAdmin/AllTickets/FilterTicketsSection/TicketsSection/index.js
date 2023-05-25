@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import useListTickets from '../../../../hooks/useListTickets';
+import useListTickets from '../../../../../hooks/useListTickets';
 
 import styles from './styles.module.css';
 import TicketsSectionPart from './TicketSectionPart';

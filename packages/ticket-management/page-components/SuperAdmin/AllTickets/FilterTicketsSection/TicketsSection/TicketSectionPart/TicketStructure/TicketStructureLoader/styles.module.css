@@ -1,0 +1,51 @@
+.tickets_container {
+	margin-top: 20px;
+}
+
+.container {
+	display: flex;
+	flex-direction: column;
+	margin: 0 15px 20px;
+	border: 1px solid #d3d3d3;
+	border-radius: 6px;
+}
+
+.subcontainer_one {
+	padding: 10px;
+}
+
+.subcontainer_header {
+	display: flex;
+	justify-content: space-between;
+}
+
+.description {
+	padding: 6px 0;
+}
+
+.subcontainer_two {
+	padding: 10px;
+}
+
+.ticket_date_time {
+	display: flex;
+	padding: 0 10px 0 0;
+}
+
+.ticket_date {
+	padding: 0 8px 0 0;
+}
+
+.ticket_reason_box {
+	display: flex;
+	justify-content: space-between;
+	padding: 6px 0 0;
+}
+
+.messages_nos {
+	padding: 3px 9px;
+}
+
+.loading_skeleton {
+	border-radius: 4px;
+}
