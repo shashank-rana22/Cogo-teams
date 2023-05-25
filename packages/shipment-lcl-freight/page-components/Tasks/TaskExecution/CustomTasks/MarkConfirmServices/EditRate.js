@@ -1,7 +1,7 @@
 import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import FormLayout from '@cogoport/ocean-modules';
 
-import FormLayout from '../../helpers/Layout';
 import getDefaultValues from '../../utils/get-default-values';
 
 import getControls from './helper/getControls';

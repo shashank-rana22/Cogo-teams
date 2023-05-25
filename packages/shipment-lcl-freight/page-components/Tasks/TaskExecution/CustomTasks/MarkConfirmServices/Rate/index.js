@@ -1,7 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-
-import Layout from '../../../helpers/Layout';
+import Layout from '@cogoport/ocean-modules';
 
 import styles from './styles.module.css';
 

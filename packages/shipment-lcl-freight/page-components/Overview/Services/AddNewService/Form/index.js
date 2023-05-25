@@ -2,10 +2,10 @@ import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { AsyncSelectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import Layout from '@cogoport/ocean-modules';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
-import Layout from '../../../../../commons/Layout';
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
 import useShipmentBack from '../../../../../hooks/useShipmentBack';
 import Footer from '../Footer';
