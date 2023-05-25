@@ -1215,8 +1215,18 @@ importers:
 
   packages/shipment-ftl:
     specifiers:
+      '@cogoport/components': ^1.0.421
+      '@cogoport/context': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.75
+      '@cogoport/shipment-chat': workspace:^0.1.0
+      '@cogoport/shipment-mails': workspace:^0.1.0
       react: 18.2.0
     dependencies:
+      '@cogoport/components': 1.0.421_guhuyhrafl7yprlcl7n6dekiki
+      '@cogoport/context': link:../../common/context
+      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/shipment-chat': link:../../common/shipment-chat
+      '@cogoport/shipment-mails': link:../../common/shipment-mails
       react: 18.2.0
 
   packages/so2-surface:
@@ -2910,6 +2920,40 @@ packages:
       - sass
     dev: false
 
+  /@cogoport/components/1.0.421_guhuyhrafl7yprlcl7n6dekiki:
+    resolution: {integrity: sha512-JiYJrtvaiWgSQx4fa1+I/CPU0+uUAQ/8m2dU5fUJ7KZLLSr9rDjmcKWNoPYVdyjnCcoEuSnPkmyauWwLYwaFhA==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@tippyjs/react': 4.2.6_react@18.2.0
+      '@types/quill': 2.0.10
+      '@types/react-rte': 0.16.5
+      axios: 1.4.0
+      axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0_kzhlcyde2l6xjiirkbg7jzhosa
+      react-hook-form: 7.43.9_react@18.2.0
+      react-quill: 2.0.0_react@18.2.0
+      react-rte: 0.16.5_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
   /@cogoport/eslint-config/1.1.0_eslint@8.40.0:
     resolution: {integrity: sha512-Nor3Hc4gRnMuKjbCM547z5FRxWaHV0a4a82Fkx9H7T8GWf+A1xw4r710BMsd/VxQ8SquSC1O+cjo8LePIXBjcg==}
     peerDependencies:
@@ -2967,12 +3011,26 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@cogoport/icons-react/1.0.75_react@18.2.0:
+    resolution: {integrity: sha512-Dpkl04lwmUy0XBX8FDLzG7Iv4owcPLHlsULg+AXATZv0cz000u28e8aiLCxZl1+rscxLrcEoCrP6gfAKPqikhA==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.75
+      react: 18.2.0
+    dev: false
+
   /@cogoport/icons/1.0.71:
     resolution: {integrity: sha512-81PnkTVxPz+gsGmoBc3bh5cW5RNhAeu3lEL1ZHhyfl1ZgvQNqqlsORKNDmHdE0CVPQKoRj2XEfYsxIN6snAnhw==}
     dev: false
 
   /@cogoport/icons/1.0.73:
     resolution: {integrity: sha512-R6cLIHkkIkIb0DqbcfrkKto/PTKkvfx2F0PFKlh3Ohlx+VilH/sZGM9rIpqmuC9+RPjF9JtbcDjLyj7dIbwLMg==}
+    dev: false
+
+  /@cogoport/icons/1.0.75:
+    resolution: {integrity: sha512-8fNQj+Ia62usyWh4kOwaPVrifWLGB1C5TbGvXBXYgfKeY1Fe8VPUp9nTrfYt8ucQmRMXDbC1OeG7REjAXYGapw==}
     dev: false
 
   /@cogoport/maps/1.0.3_bykzbvvitan6xtqocjq62ilw64:
@@ -7136,7 +7194,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -7147,7 +7205,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -7158,7 +7216,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -7170,7 +7228,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -7181,7 +7239,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -7193,7 +7251,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       immutable: 3.8.2
     dev: false
 
