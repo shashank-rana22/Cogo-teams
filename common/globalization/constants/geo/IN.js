@@ -198,6 +198,8 @@ export default {
 		cogo_one_shipment_agent_ids: [
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
 		],
+		so1_so2_role_id: '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+
 	},
 	options: {
 		registration_types: [
