@@ -2,6 +2,18 @@
 	display: flex;
 	gap: 25px;
 	padding-top: 10px;
+
+	.green{
+		color: green
+	}
+
+	.red{
+		color: red;
+	}
+
+	.black{
+		color: #333;
+	}
 }
 
 .service_stats_ports_section {
@@ -17,6 +29,13 @@
 .revenyue_profitability_utilization_value {
 	font-size: 18px;
 	font-weight: 600;
+}
+
+.stats_value{
+	display: flex;
+	color: #221F20;
+	font-weight: 600;
+	font-size: 12px;
 }
 
 .revenue {

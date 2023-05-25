@@ -1,4 +1,6 @@
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { Button } from '@cogoport/components';
+import 	formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useRouter } from '@cogoport/next';
 
 import { convertCurrencyValue, displayTotal } from '../../../../utils/dynamicValues';
 import getBreakdown from '../../../../utils/getBreakdown';
@@ -18,8 +20,14 @@ function BreakdownDetails({
 	primaryService = {},
 	convenienceDetails = {},
 	setConvenienceDetails = () => {},
+	updateMargin,
+	rfq_rate_card_id = '',
+	refetchRateCards,
+	setShowPrice,
 }) {
-	const convenience_line_item =		rate?.booking_charges?.convenience_rate?.line_items[0];
+	const { query } = useRouter();
+	const { rfq_id = '' } = query;
+	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
 
 	const rateDetails = getBreakdown(rate);
 	rateDetails.splice(0, 1);
@@ -38,6 +46,16 @@ function BreakdownDetails({
 		rate?.total_price_currency,
 		conversions,
 	);
+
+	const save_card_margins = () => {
+		updateMargin({
+			editedMargins,
+			convenienceDetails,
+			rfq_rate_card_id,
+		});
+		setShowPrice({});
+		refetchRateCards({ rfq_id });
+	};
 
 	return (
 		<div className={styles.container}>
@@ -136,6 +154,40 @@ function BreakdownDetails({
 						})}
 					</div>
 				</div>
+			</div>
+			<div className={styles.info_footer}>
+				<div className={styles.info_title}>
+					<div className={styles.footer_title}>
+						Projected Revenue:
+					</div>
+					<div className={styles.title_value}>
+						$18,000
+					</div>
+				</div>
+				<div className={styles.info_title}>
+					<div className={styles.footer_title}>
+						Projected Profitability :
+					</div>
+					<div className={styles.title_value}>
+						2.6%
+					</div>
+				</div>
+				<div className={styles.info_title}>
+					<div className={styles.footer_title}>
+						Price / Ctr :
+					</div>
+					<div className={styles.title_value}>
+						$18,000
+					</div>
+				</div>
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={save_card_margins}
+				>
+					Save Changes
+
+				</Button>
 			</div>
 		</div>
 	);

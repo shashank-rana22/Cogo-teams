@@ -1,4 +1,3 @@
-import { Checkbox } from '@cogoport/components';
 import { IcMFcl, IcMPortArrow, IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -27,7 +26,7 @@ function PortsCard(props) {
 
 	const {
 		detail = {}, freight_price_currency = '', freight_price_discounted = '',
-		total_price_discounted = '', id = '',
+		total_price_discounted = '', id = '', stats = {},
 	} = data;
 
 	console.log('data::', data);
@@ -125,7 +124,7 @@ function PortsCard(props) {
 									<CommodityMapping commodity_array={commodity_array} />
 								</div>
 								<div className={styles.service_stats}>
-									<ServiceStats data={PromisedConAndContract} source="ports-card" />
+									<ServiceStats data={stats} source="ports-card" />
 								</div>
 								<div className={styles.price_fright_ctr_section}>
 									<PriceFreightCtr
@@ -153,7 +152,6 @@ function PortsCard(props) {
 				// 	showPrice={showPrice}
 				// 	loading={loading}
 				// />
-
 					<BreakdownDetails
 						rate={rate}
 						detail={rate_card_details}
@@ -163,8 +161,11 @@ function PortsCard(props) {
 						primaryService={primaryService}
 						convenienceDetails={convenienceDetails}
 						setConvenienceDetails={setConvenienceDetails}
+						updateMargin={updateMargin}
+						rfq_rate_card_id={id}
+						refetchRateCards={refetchRateCards}
+						setShowPrice={setShowPrice}
 					/>
-
 				)}
 			</div>
 		</div>

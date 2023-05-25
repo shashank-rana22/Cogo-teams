@@ -13,16 +13,16 @@ import styles from './styles.module.css';
 function Details() {
 	// const loading = false;
 	const { query } = useRouter();
-	const { rfq_id = '' } = query;
+	const { rfq_id = '' } = query || {};
 
 	// const loading = false;
 	// const data = {};
 
-	const { getRfqsRateCards, data = {}, loading } = useGetRfqRateCards({ rfq_id });
+	const { getRfqsRateCards, data = {}, loading } = useGetRfqRateCards();
 
-	// useEffect(() => {
-	// 	getRfqsRateCards();
-	// });
+	useEffect(() => {
+		getRfqsRateCards({ rfq_id });
+	}, [getRfqsRateCards, rfq_id]);
 
 	const { list: list_object = {} } = data;
 

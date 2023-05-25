@@ -17,6 +17,12 @@ const apis = [
 		feature      : 'rfq',
 		service_name : 'rfq',
 	},
+	{
+		api          : 'update_rfq_rate_card_margin',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
 ];
 
 export default apis;

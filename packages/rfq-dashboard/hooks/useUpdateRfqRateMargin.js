@@ -14,11 +14,6 @@ const useUpdateRfqRateMargin = ({
 	rate,
 	details,
 }) => {
-	// const { scope } = useSelector(({ general, profile }) => ({
-	// 	scope      : general.scope,
-	// 	partner_id : profile.partner.id,
-	// }));
-
 	const endpoint = '/update_rfq_rate_card_margin';
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -26,15 +21,13 @@ const useUpdateRfqRateMargin = ({
 		method : 'POST',
 	}, { manual: false });
 
-	// const { trigger } = useRequest('post', false, scope)(endpoint);
-
-	const updateRfqRateMargin = async (item) => {
+	const updateRfqRateMargin = async ({ editBody, rfq_rate_card_id }) => {
 		try {
 			const response = await trigger({
 				data: {
-					margins          : item?.margins,
-					rfq_rate_card_id : item?.rfq_rate_card_id,
-					card_state       : 'modified_and_sent',
+					margins    : editBody?.margins,
+					rfq_rate_card_id,
+					card_state : 'modified_and_sent',
 				},
 			});
 			if (response?.status === 200) {
@@ -45,7 +38,7 @@ const useUpdateRfqRateMargin = ({
 		}
 	};
 
-	const updateMargin = async ({ editedMargins, convenienceDetails }) => {
+	const updateMargin = async ({ editedMargins, convenienceDetails, rfq_rate_card_id = '' }) => {
 		const updatedMargins = transformMargins({
 			values   : editedMargins,
 			services : rate?.service_rates,
@@ -71,7 +64,7 @@ const useUpdateRfqRateMargin = ({
 			margins          : final_margins,
 		};
 
-		updateRfqRateMargin(editBody);
+		updateRfqRateMargin({ editBody, rfq_rate_card_id });
 	};
 
 	return {
