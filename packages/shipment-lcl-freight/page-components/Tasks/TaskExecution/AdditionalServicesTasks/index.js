@@ -16,13 +16,8 @@ function AdditionsServicesTasks({
 	const [addRate, setAddRate] = useState(null);
 
 	const { list = [], loading = true } = useListShipmentAdditionalServices({
-		defaultParams: {
-			performed_by_org_id: shipment_data?.importer_exporter_id,
-		},
-		defaultFilters: {
-			shipment_id : shipment_data.id,
-			id          : task.task_field_id,
-		},
+		shipment_data,
+		filters: { id: task.task_field_id },
 	});
 
 	const serviceListItem = list[0] || {};
