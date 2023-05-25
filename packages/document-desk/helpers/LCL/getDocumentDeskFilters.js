@@ -1,15 +1,11 @@
-import cfsMapping from '../configs/FCL/FCL_TABS/CFS_TABS';
-import customsMapping from '../configs/FCL/FCL_TABS/CUSTOMS_TABS';
-import exportMapping from '../configs/FCL/FCL_TABS/EXPORT_TABS';
-import importMapping from '../configs/FCL/FCL_TABS/IMPORT_TABS';
-import localMapping from '../configs/FCL/FCL_TABS/LOCAL_TABS';
+import customsMapping from '../../configs/LCL/LCL_TABS/CUSTOMS_TABS';
+import exportMapping from '../../configs/LCL/LCL_TABS/EXPORT_TABS';
+import importMapping from '../../configs/LCL/LCL_TABS/IMPORT_TABS';
 
 const mapping = {
-	fcl_customs : customsMapping,
+	lcl_customs : customsMapping,
 	export      : exportMapping,
 	import      : importMapping,
-	fcl_local   : localMapping,
-	fcl_cfs     : cfsMapping,
 };
 
 const keyMapping = {
@@ -39,6 +35,7 @@ const getDocumentDeskFilters = ({ documentDeskContextValues, filters }) => {
 
 	if (['import', 'export'].includes(stepperTab)) finalFilters.trade_type = stepperTab;
 
+	console.log(finalFilters, 'finalFilters');
 	return finalFilters;
 };
 

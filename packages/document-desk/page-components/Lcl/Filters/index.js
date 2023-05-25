@@ -3,7 +3,7 @@ import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import ScopeSelect from '@cogoport/scope-select';
 import { useState, useContext } from 'react';
 
-import tabsConfig from '../../../configs/FCL/TAB_CONFIG.json';
+import tabsConfig from '../../../configs/LCL/TAB_CONFIG.json';
 import DocumentDeskContext from '../../../context/DocumentDeskContext';
 
 import FilterBy from './FilterBy';

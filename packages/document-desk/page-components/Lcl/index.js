@@ -1,6 +1,6 @@
 import Header from '../../common/Header';
 import Loader from '../../common/Loader';
-import useListDocumentDesk from '../../hooks/useListDocumentDesk';
+import useLclListDocumentDesk from '../../hooks/useLclListDocumentDesk';
 
 import AppliedFilters from './AppliedFilters';
 import DeskTabs from './DeskTabs';
@@ -9,8 +9,8 @@ import ShipmentList from './ShipmentList';
 import StepperTabs from './StepperTabs';
 import styles from './styles.module.css';
 
-function Fcl() {
-	const { data, loading } = useListDocumentDesk();
+function Lcl() {
+	const { data, loading } = useLclListDocumentDesk();
 
 	return (
 		<div>
@@ -41,4 +41,4 @@ function Fcl() {
 	);
 }
 
-export default Fcl;
+export default Lcl;

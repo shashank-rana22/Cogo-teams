@@ -4,10 +4,9 @@ import { useSelector } from '@cogoport/store';
 import { useContext, useState, useEffect, useCallback, useRef } from 'react';
 
 import DocumentDeskContext from '../context/DocumentDeskContext';
-import getDocumentDeskAdditionalMethods from '../helpers/getDocumentDeskAdditionalMethods';
-import getDocumentDeskFilters from '../helpers/getDocumentDeskFilters';
+import getDocumentDeskFilters from '../helpers/LCL/getDocumentDeskFilters';
 
-const useListDocumentDesk = () => {
+const useLclListDocumentDesk = () => {
 	const documentDeskContextValues = useContext(DocumentDeskContext);
 
 	const { filters, setFilters, activeTab, stepperTab, shipmentType } = documentDeskContextValues || {};
@@ -19,22 +18,17 @@ const useListDocumentDesk = () => {
 
 	const [apiData, setApiData] = useState({});
 
-	const prefix = ['fcl_customs', 'fcl_local', 'fcl_cfs']?.includes(stepperTab) ? stepperTab : 'fcl_freight';
-
-	const additional_methods = getDocumentDeskAdditionalMethods({ documentDeskContextValues });
-
 	const [{ loading }, trigger] = useRequest({
-		url    : `${prefix}/list_document_desk_shipments`,
+		url    : 'list_shipments',
 		params : {
 			filters: {
 				...getDocumentDeskFilters({ filters: restFilters, documentDeskContextValues }),
 				...(selected_agent_id ? { stakeholder_id: selected_agent_id } : {}),
+				shipment_type: stepperTab === 'lcl_customs' ? 'lcl_customs' : 'lcl_freight',
 			},
-			additional_methods,
+
 			page,
-			page_limit : 10,
-			sort_by    : 'serial_id',
-			sort_type  : 'desc',
+			page_limit: 10,
 		},
 	}, { manual: true });
 
@@ -83,4 +77,5 @@ const useListDocumentDesk = () => {
 		apiTrigger,
 	};
 };
-export default useListDocumentDesk;
+
+export default useLclListDocumentDesk;

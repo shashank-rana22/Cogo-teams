@@ -1,8 +1,8 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useContext } from 'react';
 
-import controlConfig from '../../../configs/FCL/CONTROLS_CONFIG.json';
-import tabsConfig from '../../../configs/FCL/TAB_CONFIG.json';
+import controlConfig from '../../../configs/LCL/CONTROLS_CONFIG.json';
+import tabsConfig from '../../../configs/LCL/TAB_CONFIG.json';
 import DocumentDeskContext from '../../../context/DocumentDeskContext';
 
 function StepperTabs() {

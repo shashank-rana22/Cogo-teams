@@ -1,7 +1,7 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useContext } from 'react';
 
-import tabsConfig from '../../../configs/FCL/TAB_CONFIG.json';
+import tabsConfig from '../../../configs/LCL/TAB_CONFIG.json';
 import DocumentDeskContext from '../../../context/DocumentDeskContext';
 
 import styles from './styles.module.css';
