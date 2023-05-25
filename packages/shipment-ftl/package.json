@@ -4,6 +4,11 @@
   "description": "Package for Shipment Ftl Service",
   "main": "index.js",
   "dependencies": {
+    "@cogoport/components": "^1.0.421",
+    "@cogoport/context": "workspace:^0.1.0",
+    "@cogoport/icons-react": "^1.0.75",
+    "@cogoport/shipment-chat": "workspace:^0.1.0",
+    "@cogoport/shipment-mails": "workspace:^0.1.0",
     "react": "18.2.0"
   }
 }
