@@ -79,20 +79,31 @@
 	align-items: center;
 }
 
-.happy_customers {
+.satisfied {
 	background-color: #fef199;
 }
 
-.neutral_customers {
+.neutral {
 	background-color: #cfeaed;
 }
 
-.angry_customers {
+.unsatisfied {
 	background-color: #fdebe9;
 }
 
 .pie_tooltip {
-	padding: 4px;
+	display: flex;
+	align-items: center;
+	width: max-content;
+	padding: 2px 4px;
 	background-color: #fff;
 	border-radius: 4px;
+	box-shadow: 2px 2px 8px #4d4d4d;
+}
+
+.tooltip_dot {
+	width: 12px;
+	height: 12px;
+	margin-right: 8px;
+	border-radius: 2px;
 }

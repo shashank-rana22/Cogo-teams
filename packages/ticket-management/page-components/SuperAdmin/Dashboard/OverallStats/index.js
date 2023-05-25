@@ -60,7 +60,7 @@ function OverallStats({ data, ticketCount }) {
 			{(statsIconsAndData || []).map(({ key, icon, label }) => (
 				<div className={styles.tile} key={key}>
 					<div>{icon}</div>
-					<div className={styles.count}>{data?.[key] || 0}</div>
+					<div className={styles.count}>{(Number(data?.[key]) || 0).toFixed(2)}</div>
 					<div className={styles.label}>{label}</div>
 				</div>
 			))}

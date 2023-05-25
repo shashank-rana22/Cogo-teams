@@ -3,31 +3,18 @@ import { cl } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
-function FeedbackGraph() {
-	const PieData = [
-		{
-			id    : 'happy_customers',
-			label : 'Happy Customers',
-			value : 20,
-		},
-		{
-			id    : 'neutral_customers',
-			label : 'Escalated Customers',
-			value : 10,
-
-		},
-		{
-			id    : 'angry_customers',
-			label : 'Angry Customers',
-			value : 70,
-		},
-	];
+function FeedbackGraph({ customerSatisfactionStats }) {
+	const pieData = Object.keys(customerSatisfactionStats || {}).map((key) => ({
+		id    : key.toLocaleLowerCase(),
+		label : key,
+		value : customerSatisfactionStats[key] || 0,
+	})).filter((item) => item.label !== 'TotalFeedback');
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.graph}>
 				<ResponsivePie
-					data={PieData}
+					data={pieData}
 					innerRadius={0.8}
 					enableArcLinkLabels={false}
 					enableArcLabels={false}
@@ -37,15 +24,19 @@ function FeedbackGraph() {
 					endAngle={90}
 					margin={{ top: 0, right: 0, bottom: 0, left: 0 }}
 					tooltip={({
-						datum: { label = '', value = '' },
+						datum: { id = '', label = '', value = '' },
 					}) => (
 						<div className={styles.pie_tooltip}>
-							<strong>
+							<div className={cl`${styles.tooltip_dot} ${styles[id]}`} />
+
+							<div>
 								{label}
 								:
 								{' '}
 								{value}
-							</strong>
+								{' '}
+								customers
+							</div>
 						</div>
 					)}
 				/>
@@ -56,13 +47,17 @@ function FeedbackGraph() {
 			</div>
 
 			<div className={styles.legends}>
-				{(PieData || []).map(({ id, label, value }) => (
+				{(pieData || []).map(({ id, label, value }) => (
 					<div className={styles.legend} key={id}>
 						<div className={styles.legend_count}>
 							<div className={cl`${styles.dot} ${styles[id]}`} />
 							<span className={styles.stats_count}>{value}</span>
 						</div>
-						<div className={styles.stats_label}>{label}</div>
+						<div className={styles.stats_label}>
+							{label}
+							{' '}
+							customers
+						</div>
 					</div>
 				))}
 			</div>
