@@ -215,6 +215,16 @@ const navigationMappingShipper = {
 				possible_apis : app_apis.saas_schedules,
 			},
 			{
+				key           : 'saas_tools-air_ocean_tracking_v2',
+				title         : 'Air Ocean Tracking',
+				href          : '/saas/tools/air-ocean-tracking',
+				as            : '/saas/tools/air-ocean-tracking',
+				type          : 'link',
+				icon          : 'nav-ocean-schedules',
+				main_apis     : [],
+				possible_apis : [...app_apis.saas_tracking, ...app_apis.saas_air_tracking],
+			},
+			{
 				key       : 'saas_tools-freight_rate_trend',
 				title     : 'Freight Rate Trend',
 				href      : '/saas/freight-rate-trend',
