@@ -25,7 +25,7 @@ const formatDataForDocuments = (rawValues, taskData) => {
 				|| taskData?.document_type
 				|| 'authority_letter_custom';
 
-			formatObj.document_url = documentObj?.url?.finalurl || documentObj?.url;
+			formatObj.document_url = documentObj?.url?.finalUrl || documentObj?.url;
 
 			formatObj.file_name = documentObj?.url?.fileName;
 
@@ -33,7 +33,7 @@ const formatDataForDocuments = (rawValues, taskData) => {
 				if (!Object.keys(formatObj).includes(key)) {
 					formatObj.data = {
 						...(formatObj.data || {}),
-						[key]: key === 'url' ? documentObj?.[key]?.url : documentObj?.[key],
+						[key]: key === 'url' ? documentObj?.[key]?.finalUrl : documentObj?.[key],
 					};
 				}
 			});

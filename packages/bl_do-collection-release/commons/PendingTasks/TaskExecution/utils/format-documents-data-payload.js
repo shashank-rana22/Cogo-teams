@@ -17,7 +17,7 @@ const formatDataForDocuments = (rawValues, taskData) => {
 				if (!Object.keys(formatObj).includes(key)) {
 					formatObj.data = {
 						...(formatObj.data || {}),
-						[key]: key === 'url' ? documentObj?.[key]?.url : documentObj?.[key],
+						[key]: key === 'url' ? documentObj?.[key]?.finalUrl : documentObj?.[key],
 					};
 				}
 			});
