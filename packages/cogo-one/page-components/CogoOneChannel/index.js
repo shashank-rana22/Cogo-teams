@@ -53,6 +53,7 @@ function CogoOne() {
 		subject : '',
 		body    : '',
 	});
+
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [agentDetails, setAgentDetails] = useState(false);
 	const [showFeedback, setShowFeedback] = useState(false);
