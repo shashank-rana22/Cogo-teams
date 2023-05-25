@@ -1,21 +1,11 @@
-import { ButtonGroup, Popover, Tooltip } from '@cogoport/components';
+import { Popover, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import ListButtons from '../../../../../utils/renderButtonData';
-
-// import ListButtons from '../../../../../utils/renderButtonData';
 import NodeColumns from '../NodeColumns';
 
 import styles from './styles.module.css';
-
-// const buttonOptioins = (item) => (
-// 	<ButtonGroup
-// 		size="sm"
-// 		options={<ListButtons item={item} />}
-// 		direction="vertical"
-// 	/>
-// );
 
 function TableColumns({ listType = '', showOptions = {}, setShowOptions = () => {} }) {
 	const columns = [
@@ -104,7 +94,6 @@ function TableColumns({ listType = '', showOptions = {}, setShowOptions = () => 
 			accessor : (item = {}) => (
 				<div className={styles.show_details} key={item?.id}>
 					<Popover
-						// visible={item?.id === showOptions?.id}
 						onClickOutside={() => setShowOptions({})}
 						placement="left"
 						// render="hello"
