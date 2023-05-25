@@ -1,19 +1,12 @@
 import { Button } from '@cogoport/components';
-import { useState } from 'react';
+import React from 'react';
 
 import BodyTextEditor from './BodyTextEditor';
 import styles from './styles.module.css';
-
-let RichTextEditor;
-
-if (typeof window !== 'undefined') {
-	// eslint-disable-next-line global-require, import/no-unresolved
-	RichTextEditor = require('react-rte').default;
-}
+import useDay1Download from './useDay1Download';
 
 function Day1Download() {
-	const [editorError, setEditorError] = useState(false);
-	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
+	const { editorError, setEditorError, editorValue, setEditorValue, onClickUpdate } = useDay1Download();
 
 	return (
 		<div className={styles.container}>
@@ -39,7 +32,7 @@ function Day1Download() {
 				run faster and achieve big milestones.
 			</div>
 
-			<div className={styles.text_editor_header}>Update Day 1 Download</div>
+			<div className={styles.text_editor_header}>Provide Day 1 Download</div>
 
 			<div className={styles.text_editor}>
 				<BodyTextEditor
@@ -55,9 +48,8 @@ function Day1Download() {
 			)}
 
 			<div className={styles.button_wrapper}>
-				<Button>Update</Button>
+				<Button onClick={onClickUpdate}>Update</Button>
 			</div>
-
 		</div>
 	);
 }
