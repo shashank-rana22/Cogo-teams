@@ -1,6 +1,6 @@
 import dummyData from '../DummyData/list_shipment_services.json';
 
-export default function useListShipmentServices() {
+const useListShipmentServices = ({ defaultParams = {}, defaultFilters = {} }) => {
 	const servicesLoading = false;
 	const listServices = () => {};
 
@@ -9,4 +9,6 @@ export default function useListShipmentServices() {
 		refetchServices : listServices,
 		servicesList    : dummyData?.list,
 	};
-}
+};
+
+export default useListShipmentServices;

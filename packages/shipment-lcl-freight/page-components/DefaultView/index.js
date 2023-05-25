@@ -19,7 +19,6 @@ const TAB_MAPPING = {
 	tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
-	tracking  : dynamic(() => import('@cogoport/ocean-modules/components/Tracking'), { ssr: false }),
 };
 
 function DefaultView() {
