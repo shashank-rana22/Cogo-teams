@@ -1,4 +1,3 @@
-// import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -6,8 +5,6 @@ import getColumns from './getColumns';
 
 const useCompanyPolicyDetails = () => {
 	const [showModal, setShowModal] = useState(false);
-
-	// const router = useRouter();
 
 	const [{ loading = false }, trigger] = useHarbourRequest({
 		method : 'post',

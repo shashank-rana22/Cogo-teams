@@ -18,7 +18,7 @@ const useTableView = ({ search }) => {
 				await trigger({
 					params: {
 						filters: {
-							q: search,
+							q: search || undefined,
 						},
 					},
 				});
