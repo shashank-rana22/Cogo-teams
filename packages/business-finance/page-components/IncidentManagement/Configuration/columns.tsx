@@ -1,6 +1,8 @@
 import { Tooltip, Pill } from '@cogoport/components';
 import { format, startCase } from '@cogoport/utils';
 
+import AdvanceSecurityDeposit from '../Modals/AdvanceSecurityDeposit';
+import AdvanceSecurityDepositRefund from '../Modals/AdvanceSecurityDepositRefund';
 import BankDetails from '../Modals/BankDetails';
 import ICJVModal from '../Modals/ICJV_Modal';
 import JvModal from '../Modals/JvModal';
@@ -43,7 +45,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				<Tooltip
 					interactive
 					content={(list || [{}]).map((item:TooltipInterface) => (
-						<div className={styles.trade_party_name}>
+						<div className={styles.trade_party_name} key={item?.id}>
 							<div>{toTitleCase(item?.div || '-')}</div>
 						</div>
 					))}
@@ -196,6 +198,8 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				journalVoucherRequest,
 				interCompanyJournalVoucherRequest,
 				sezRequest,
+				advanceSecurityDeposit,
+				advanceSecurityDepositRefund,
 			} = row.data || {};
 
 			const { type: requestType, id, remark, status } = row || {};
@@ -278,6 +282,24 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 							organization={organization}
 							isEditable={false}
 							remark={remark}
+						/>
+					)}
+					{requestType === 'ADVANCE_SECURITY_DEPOSIT' && (
+						<AdvanceSecurityDeposit
+							advanceSecurityDeposit={advanceSecurityDeposit}
+							id={id}
+							isEditable={false}
+							row={row}
+							refetch={getIncidentData}
+						/>
+					)}
+					{requestType === 'ADVANCE_SECURITY_DEPOSIT_REFUND' && (
+						<AdvanceSecurityDepositRefund
+							advanceSecurityDepositRefund={advanceSecurityDepositRefund}
+							id={id}
+							isEditable={false}
+							row={row}
+							refetch={getIncidentData}
 						/>
 					)}
 

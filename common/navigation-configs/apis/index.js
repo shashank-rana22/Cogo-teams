@@ -7,6 +7,7 @@ import bl_do from './bl-do-apis';
 import bl_do_collection_release from './bl_do-collection-release-apis';
 import bn_salvage from './bn-salvage-apis';
 import booking_desk from './booking-desk-apis';
+import chakravyuh from './chakravyuh-apis';
 import coe_finance from './coe-finance-apis';
 import cogoLens from './cogo-lens';
 import common_apis from './common-apis';
@@ -20,6 +21,7 @@ import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
 import ingestion from './ingestion-apis';
+import cargo_insurance from './insurance-apis';
 import kam_desk from './kam-desk-apis';
 import kam_payments_dashboard from './kam-payments-dashboard-apis';
 import kyc from './kyc';
@@ -129,12 +131,14 @@ const apis = {
 	login_apis,
 	enrichment,
 	...faq,
+	cargo_insurance,
 	...saas_tools,
 	...performance_management,
 	ingestion,
 	booking_desk,
 	poc,
 	...athena_dashboard,
+	...chakravyuh,
 };
 
 export default apis;

@@ -1,0 +1,7 @@
+.user_data {
+	overflow: hidden;
+	font-size: 14px;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

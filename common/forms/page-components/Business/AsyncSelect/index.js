@@ -26,6 +26,7 @@ import {
 	asyncListCurrency,
 	asyncAccountEngagementScoringEvents,
 	asyncShipmentContainerDetails,
+	asyncFieldsPartnerUsersIds,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -70,6 +71,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_exchange_rate_currencies   : asyncListCurrency,
 	engagement_scoring_events       : asyncAccountEngagementScoringEvents,
 	shipment_container_details      : asyncShipmentContainerDetails,
+	partner_users_ids               : asyncFieldsPartnerUsersIds,
 };
 
 function AsyncSelect(props) {

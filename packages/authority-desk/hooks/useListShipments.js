@@ -23,14 +23,15 @@ function useListShipments({ item = {}, filters = {} }) {
 						importer_exporter_id : item?.importer_exporter_id,
 					},
 					invoice_value_required : true,
-					page                   : filters.page,
+					page                   : filters?.page,
+					page_limit             : 10,
 				},
 			});
 			setData(res.data);
 		} catch (err) {
 			toastApiError(err);
 		}
-	}, [trigger, item?.importer_exporter_id, filters]);
+	}, [trigger, item?.importer_exporter_id, filters?.page]);
 
 	useEffect(() => {
 		listShipments();

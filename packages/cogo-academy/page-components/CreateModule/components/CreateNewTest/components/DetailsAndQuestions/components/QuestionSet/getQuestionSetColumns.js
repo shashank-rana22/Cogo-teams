@@ -2,6 +2,8 @@ import { Checkbox, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { startCase, format } from '@cogoport/utils';
 
+import SortComponent from '../../../../../../commons/SortComponent';
+
 import styles from './styles.module.css';
 
 const handleChange = ({ event, id, setIdArray }) => {
@@ -20,7 +22,7 @@ const handleChange = ({ event, id, setIdArray }) => {
 	});
 };
 
-const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
+const getQuestionSetColumns = ({ idArray, setIdArray, sortFilter, setSortFilter }) => ([
 	{
 		Header   : '',
 		id       : 'select_question_set',
@@ -109,17 +111,24 @@ const getQuestionSetColumns = ({ idArray, setIdArray }) => ([
 		),
 	},
 	{
-		Header   : 'LAST UPDATED',
+		Header: (
+			<div className={styles.sorting}>
+				<div className={styles.sub_sorting}>LAST UPDATED</div>
+				<SortComponent
+					value="updated_at"
+					sortFilter={sortFilter}
+					setSortFilter={setSortFilter}
+				/>
+			</div>),
 		id       : 'last_updated',
 		accessor : ({ updated_at = '' }) => (
 			<section>
-				<span className={styles.questionsettime}>
-					{format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
-				</span>
-				{' '}
-				<span className={styles.questionsettime}>
-					{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
-				</span>
+				{format(
+					updated_at,
+					`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
+				     ${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}
+				`,
+				)}
 			</section>
 		),
 	},

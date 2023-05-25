@@ -11,7 +11,20 @@ function asyncFieldsLocations2() {
 		},
 	};
 }
-
+function asyncFieldsPartnerUsersIds() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'user_id',
+		endpoint    : 'list_partner_users',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
 function asyncFieldsLocations() {
 	return {
 		valueKey    : 'id',
@@ -371,6 +384,19 @@ function asyncListCurrency() {
 		},
 	};
 }
+function asyncListServetelAgents() {
+	return {
+		labelKey    : 'mobile_number',
+		valueKey    : 'id',
+		endpoint    : 'list_servetel_agents',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
 
 export {
 	asyncFieldsLocations,
@@ -403,4 +429,6 @@ export {
 	asyncOrganizationTradeParties,
 	asyncSearchProducts,
 	asyncShipmentContainerDetails,
+	asyncFieldsPartnerUsersIds,
+	asyncListServetelAgents,
 };

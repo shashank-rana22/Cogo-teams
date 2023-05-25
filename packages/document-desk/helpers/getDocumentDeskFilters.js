@@ -1,3 +1,4 @@
+import cfsMapping from '../configs/FCL_TABS/CFS_TABS';
 import customsMapping from '../configs/FCL_TABS/CUSTOMS_TABS';
 import exportMapping from '../configs/FCL_TABS/EXPORT_TABS';
 import importMapping from '../configs/FCL_TABS/IMPORT_TABS';
@@ -8,6 +9,7 @@ const mapping = {
 	export      : exportMapping,
 	import      : importMapping,
 	fcl_local   : localMapping,
+	fcl_cfs     : cfsMapping,
 };
 
 const keyMapping = {

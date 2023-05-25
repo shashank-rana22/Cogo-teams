@@ -3,6 +3,7 @@ import React from 'react';
 import { FilterProps } from '../common/interface';
 
 export interface TooltipInterface {
+	id?:string
 	div?:string
 	tradePartyName?:string
 }

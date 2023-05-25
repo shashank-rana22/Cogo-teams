@@ -7,6 +7,8 @@ function DeleteModal({
 	questionToDelete,
 	setQuestionToDelete,
 	handleDeleteQuestion,
+	loading,
+	caseStudyLoading,
 }) {
 	return (
 		<Modal
@@ -24,6 +26,7 @@ function DeleteModal({
 						type="button"
 						themeType="secondary"
 						onClick={() => setQuestionToDelete({})}
+						disabled={caseStudyLoading || loading}
 					>
 						Cancel
 					</Button>
@@ -32,6 +35,7 @@ function DeleteModal({
 						type="button"
 						style={{ marginLeft: '8px' }}
 						onClick={() => { handleDeleteQuestion({ item: questionToDelete }); }}
+						loading={caseStudyLoading || loading}
 					>
 						Delete
 					</Button>

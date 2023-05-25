@@ -4,6 +4,7 @@ const classNames = {
 	FCL         : 'fcl',
 	'FCL Local' : 'fcl_local',
 	LCL         : 'lcl',
+	'FCL CFS'   : 'fcl_cfs',
 };
 
 export default function ServiceIcon({ Icon, text }) {
