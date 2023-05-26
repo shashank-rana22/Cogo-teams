@@ -1,6 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { startCase, isEmpty } from '@cogoport/utils';
-import { useContext, useState } from 'react';
+import { startCase } from '@cogoport/utils';
+import { useContext } from 'react';
 
 import { possibleServices } from '../../../configurations/possible-full-route';
 
@@ -25,13 +25,11 @@ function Services() {
 	const serviceCategories = Object.keys(serviceObj);
 	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
 
-	const [showTradeHeading, setShowTradeHeading] = useState({
-		origin      : !isEmpty(serviceObj.originServices),
-		destination : !isEmpty(serviceObj.destinationServices),
+	const showTradeHeading = {
+		origin      : primary_service?.trade_type === 'export',
+		destination : primary_service?.trade_type === 'import',
 		main        : true,
-	});
-
-	const isKam = ['booking_agent', 'consignee_shipper_booking_agent'].includes(activeStakeholder);
+	};
 
 	const heading = (serviceCategory) => (
 		<div className={styles.header}>{ startCase(serviceCategory)}</div>
@@ -43,11 +41,7 @@ function Services() {
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<>
-							{ !isKam
-								? heading(serviceCategory) : null}
-
-							{ isKam
-							&& showTradeHeading[`${serviceCategory.split('Services')[0]}`]
+							{ showTradeHeading[`${serviceCategory.split('Services')[0]}`]
 								? heading(serviceCategory) : null}
 
 							<div className={styles.trade_services}>
@@ -70,8 +64,6 @@ function Services() {
 										cancelUpsellDestinationFor={cancelUpsellDestinationFor}
 										cancelUpsellOriginFor={cancelUpsellOriginFor}
 										activeStakeholder={activeStakeholder}
-										setShowTradeHeading={setShowTradeHeading}
-										showTradeHeading={showTradeHeading}
 									/>
 								))}
 							</div>

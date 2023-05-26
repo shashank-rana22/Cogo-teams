@@ -1178,6 +1178,7 @@ importers:
   packages/shipment-fcl-freight-local:
     specifiers:
       '@cogoport/components': ^1.0.421
+      '@cogoport/constants': workspace:^0.1.0
       '@cogoport/context': workspace:^0.1.0
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/globalization': workspace:^0.0.1
@@ -1196,6 +1197,7 @@ importers:
       side-bar: link:@cogoport/navigation-configs/side-bar
     dependencies:
       '@cogoport/components': 1.0.421_guhuyhrafl7yprlcl7n6dekiki
+      '@cogoport/constants': link:../../common/constants
       '@cogoport/context': link:../../common/context
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization

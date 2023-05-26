@@ -1,11 +1,8 @@
 import { IcMPlus } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState } from 'react';
 
 import Form from './Form';
 import styles from './styles.module.css';
-
-const INCO_TERM_CANNOT_UPSELL = ['cif', 'cfr', 'fob'];
 
 function AddNewService({
 	upsellableService = {},
@@ -15,8 +12,6 @@ function AddNewService({
 	cancelUpsellOriginFor = '',
 	cancelUpsellDestinationFor = '',
 	activeStakeholder = '',
-	setShowTradeHeading = () => {},
-	showTradeHeading = {},
 }) {
 	const [upsellModal, setUpsellModal] = useState(false);
 
@@ -40,36 +35,13 @@ function AddNewService({
 	}
 
 	/* user can only upsell services for the location to which its org is tagged */
-	let canUpsellForTradeType = true;
-
-	if (shipmentData?.end_to_end_shipment?.is_possible) {
-		if (activeStakeholder === 'booking_agent' && ((primary_service?.trade_type !== upsellableService?.trade_type
-			&& INCO_TERM_CANNOT_UPSELL.includes(primary_service?.inco_term))
-		)) {
-			canUpsellForTradeType = false;
-		} else if (activeStakeholder === 'consignee_shipper_booking_agent'
-			&& primary_service?.trade_type === upsellableService?.trade_type) {
-			canUpsellForTradeType = false;
-		}
-	}
+	const canUpsellForTradeType = upsellableService.trade_type === primary_service?.trade_type;
 
 	const closeModal = () => {
 		setUpsellModal(!upsellModal);
 	};
 
 	const showAddServiceBox = !cancelUpsell && isUpsellable && canUpsellForTradeType;
-
-	const { origin, destination, main } = showTradeHeading;
-
-	useEffect(() => {
-		if (showAddServiceBox) {
-			setShowTradeHeading({
-				origin      : origin || upsellableService.trade_type === 'export',
-				destination : destination || upsellableService.trade_type === 'import',
-				main,
-			});
-		}
-	}, [showAddServiceBox, upsellableService.trade_type, setShowTradeHeading, origin, destination, main]);
 
 	return (
 		<>

@@ -1,12 +1,12 @@
 import { Modal } from '@cogoport/components';
 import { AsyncSelectController, RadioGroupController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import Layout from '@cogoport/ocean-modules';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
 import useShipmentBack from '../../../../../hooks/useShipmentBack';
-import Layout from '../../../../Layout';
 import Footer from '../Footer';
 
 import styles from './styles.module.css';

@@ -6,18 +6,18 @@ import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
-// import CancelDetails from '../../common/CancelDetails';
+import CancelDetails from '../../common/CancelDetails';
 // import DocumentHoldDetails from '../../common/DocumentHoldDetails';
 import Documents from '../../common/Documents';
 import Overview from '../../common/Overview';
 import PocSop from '../../common/PocSop';
 import ShipmentHeader from '../../common/ShipmentHeader';
-// import Tasks from '../../common/Tasks';
 import ShipmentInfo from '../../common/ShipmentInfo';
-// import Timeline from '../../common/TimeLine';
+import Tasks from '../../common/Tasks';
+import Timeline from '../../common/TimeLine';
 import useGetServices from '../../hooks/useGetServices';
 import useGetShipment from '../../hooks/useGetShipment';
-// import useGetTimeLine from '../../hooks/useGetTimeline';
+import useGetTimeLine from '../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
@@ -44,14 +44,14 @@ function DefaultView({ activeStakeholder = '' }) {
 		additional_methods: services_additional_methods,
 	});
 
-	// const { getTimeline = {} } = useGetTimeLine({ shipment_data });
+	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
 
 	const contextValues = useMemo(() => ({
 		...get,
-		// ...servicesGet,
-		// ...getTimeline,
+		...servicesGet,
+		...getTimeline,
 		activeStakeholder,
-	}), [get, activeStakeholder]);
+	}), [get, activeStakeholder, servicesGet, getTimeline]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
@@ -114,7 +114,7 @@ function DefaultView({ activeStakeholder = '' }) {
 					</div>
 				</div>
 
-				{/* {shipment_data?.state === 'cancelled' ? <CancelDetails /> : null} */}
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
 				{/* <DocumentHoldDetails /> */}
 
@@ -124,7 +124,7 @@ function DefaultView({ activeStakeholder = '' }) {
 					<PocSop />
 				</div>
 
-				{/* <Timeline /> */}
+				<Timeline />
 
 				<div className={styles.container}>
 					<Tabs
@@ -138,7 +138,7 @@ function DefaultView({ activeStakeholder = '' }) {
 						</TabPanel>
 
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-							{/* <Tasks /> */}
+							<Tasks />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">

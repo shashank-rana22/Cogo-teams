@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-// import TaskCard from '../../../Tasks/TaskExecution';
+import TaskCard from '../../../Tasks/TaskExecution';
 
 import styles from './styles.module.css';
 
@@ -18,12 +18,12 @@ function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
 
 	return (
 		<div className={styles.container}>
-			{/* <TaskCard
+			<TaskCard
 				task={pendingItem}
 				onCancel={() => handleClick(pendingItem)}
 				taskListRefetch={refetch}
 				type="modal"
-			/> */}
+			/>
 		</div>
 
 	);
