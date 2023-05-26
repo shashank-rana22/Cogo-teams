@@ -74,7 +74,7 @@ function ReceiveDiv({
 									src={GLOBAL_CONSTANTS.image_url.cart_png}
 									alt="order"
 								/>
-								Order
+								View Order Items
 							</span>
 						)}
 					</div>
