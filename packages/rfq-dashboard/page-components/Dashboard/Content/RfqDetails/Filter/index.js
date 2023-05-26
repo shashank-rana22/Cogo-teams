@@ -7,11 +7,8 @@ import styles from './styles.module.css';
 
 function Filter({ data, filterStore, setFilterStore, checkedItems, selectAll, setCheckedItems, setSelectAll }) {
 	const handleSelectAll = () => {
-		console.log('nanda', selectAll);
 		setSelectAll(!selectAll);
-		console.log('nanda1', selectAll);
 		setCheckedItems(!selectAll ? data : []);
-		console.log('checked', checkedItems, selectAll);
 	};
 	const { bulkUpdateRfqState } = useBulkUpdateRfqState();
 	const handleApproveRfq = () => {

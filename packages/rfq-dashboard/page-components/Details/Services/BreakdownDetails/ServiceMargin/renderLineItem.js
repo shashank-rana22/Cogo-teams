@@ -59,7 +59,7 @@ function RenderLineItem({
 			/>
 		</div>
 	);
-
+	console.log(buy_price, 'buy price');
 	return (
 		<div className={styles.row}>
 			<div className={styles.col} style={{ width: getWidth(2.5) }}>{lineItem?.name}</div>

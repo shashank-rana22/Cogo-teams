@@ -36,6 +36,10 @@ function ServiceMargin({
 }) {
 	const service_details = detail?.service_details?.[item?.id];
 
+	console.log('inside');
+
+	console.log('item?.line_items ::', item?.line_items);
+
 	const totalDisplayString = formatAmount({
 		amount   : totalDisplay,
 		currency : item.total_price_currency,

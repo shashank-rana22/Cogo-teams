@@ -12,22 +12,18 @@ import styles from './styles.module.css';
 function Details() {
 	// const loading = false;
 	const { query } = useRouter();
-	const { rfq_id = '' } = query;
+	const { rfq_id = '' } = query || {};
 
 	// const loading = false;
 	// const data = {};
 
 	const { getRfqsRateCards, data = {}, loading } = useGetRfqRateCards({ rfq_id });
 
-	// useEffect(() => {
-	// 	getRfqsRateCards();
-	// });
+	useEffect(() => {
+		getRfqsRateCards();
+	}, [getRfqsRateCards, rfq_id]);
 
 	const { list: list_object = {} } = data;
-
-	console.log('data::', data);
-
-	console.log('list::', list_object);
 
 	return (
 		<div className={styles.container}>
@@ -37,7 +33,7 @@ function Details() {
 				<Graph loading={loading} />
 			</div>
 			<div className={styles.rfq_list}>
-				<Services loading={loading} rate_card_list_object={list_object} />
+				<Services loading={loading} rate_card_list_object={list_object} refetchRateCards={getRfqsRateCards} />
 			</div>
 		</div>
 	);

@@ -5,15 +5,15 @@ import { getFormattedAmount } from '../helpers/getFormattedSum';
 
 import styles from './styles.module.css';
 
-function ServiceStats({ data = [], type = '', source = '' }) {
+function ServiceStats({ data = {}, type = '', source = '' }) {
 	const renderItem = (value, item) => {
 		if (item === 'promised_consolidated_revenue') {
 			return getFormattedAmount(value, 'INR');
 		}
-		if (item === 'promised_consolidated_profitability') {
-			return `${Math.round(value)}%`;
+		if (item === 'promised_consolidate_profitability') {
+			return `${value}%`;
 		}
-		return getFormattedAmount(value, 'INR');
+		return getFormattedAmount(item.value, 'INR');
 	};
 
 	return (
@@ -21,9 +21,9 @@ function ServiceStats({ data = [], type = '', source = '' }) {
         ${(source
 			=== 'ports-card') ? styles.service_stats_ports_section : ''}`}
 		>
-			{Object.keys(data).map((item) => (
+			{Object.keys(data || {}).map((item) => (
 				<div className={cl`${type === 'preview-stats' ? styles.individual_section : ''}`}>
-					<div className={styles.revenyue_profitability_utilization_name}>{startCase(item)}</div>
+					<div className={styles.revenyue_profitability_utilization_name}>{item}</div>
 					<div className={`
                         ${styles.revenyue_profitability_utilization_value} 
                         ${styles[item.color]}`}

@@ -1,5 +1,4 @@
 import { useSelector } from '@cogoport/store';
-import { useEffect } from 'react';
 
 import Card from './Card';
 import styles from './styles.module.css';

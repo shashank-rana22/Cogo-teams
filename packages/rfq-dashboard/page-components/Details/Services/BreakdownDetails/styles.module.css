@@ -85,3 +85,25 @@
 		font-weight: 500;
 	}
 }
+
+.info_footer{
+	margin-top: 12px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+}
+
+.info_title{
+	display: flex;
+	padding: 8px;
+}
+
+.footer_title{
+	color: #828282;
+}
+
+.title_value{
+	color: #221F20;
+	font-weight: 600;
+	font-size: 14px;
+}
