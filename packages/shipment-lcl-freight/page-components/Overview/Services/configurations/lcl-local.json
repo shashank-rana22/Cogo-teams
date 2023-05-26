@@ -63,7 +63,7 @@
 			"key": "bls_count"
 		},
 		{
-			"label": "BL Type :",
+			"label": "BL Type",
 			"key": "bl_type"
 		},
 		{

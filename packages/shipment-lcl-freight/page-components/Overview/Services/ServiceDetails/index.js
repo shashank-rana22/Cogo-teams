@@ -13,7 +13,7 @@ function ServiceDetails({ servicesData = [] }) {
 		<div className={cl`${styles[servicesData?.[0]?.state]} ${styles.main_container}`}>
 			<Header serviceData={servicesData} showDetails={showDetails} setShowDetails={setShowDetails} />
 
-			{showDetails ? <Details serviceData={servicesData} /> : null}
+			{showDetails ? <Details serviceData={servicesData?.[0]} /> : null}
 		</div>
 	);
 }
