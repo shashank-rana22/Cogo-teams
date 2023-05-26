@@ -8,16 +8,12 @@ const useListOrganizationInvoicingParties = ({ params = {} }) => {
 		method : 'GET',
 	});
 
-	const getInvoicingParties = useCallback(() => {
-		(async () => {
-			try {
-				await trigger({
-					params,
-				});
-			} catch (err) {
-				toastApiError(err);
-			}
-		})();
+	const getInvoicingParties = useCallback(async () => {
+		try {
+			await trigger({ params });
+		} catch (err) {
+			toastApiError(err);
+		}
 	}, [trigger, params]);
 
 	useEffect(() => {

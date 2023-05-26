@@ -18,7 +18,7 @@ function ChooseService({
 	filters,
 	setShowPrice = () => { },
 	refetch = () => { },
-	setShowChargeCodes = () => {},
+	closeModal = () => {},
 	serviceCountTotal,
 }) {
 	const tagDisplay = (item) => (
@@ -38,7 +38,7 @@ function ChooseService({
 			isSeller={isSeller}
 			refetch={refetch}
 			setShowPrice={setShowPrice}
-			setShowChargeCodes={setShowChargeCodes}
+			closeModal={closeModal}
 		/>
 	);
 

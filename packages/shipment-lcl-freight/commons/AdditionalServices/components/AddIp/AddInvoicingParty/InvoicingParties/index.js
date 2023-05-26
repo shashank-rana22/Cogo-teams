@@ -44,7 +44,7 @@ function InvoicingParties({
 		other_addresses_data_required   : true,
 	}), [organizationId, bookingType]);
 
-	const { data, loading, refetch } = useListOrganizationInvoicingParties({ params, bookingType });
+	const { data, loading, refetch } = useListOrganizationInvoicingParties({ params });
 
 	const invoicingPartiesList = useMemo(() => (data || {}).list || [], [data]);
 
@@ -176,23 +176,6 @@ function InvoicingParties({
 		));
 	};
 
-	const renderAdditionalItems = () => {
-		if (bookingType === 'self' || showComponent !== 'view_billing_addresses') {
-			return null;
-		}
-
-		return (
-			<div className={styles.trade_party_header}>
-				<Button
-					onClick={() => setShowComponent('create_trade_party')}
-					style={{ marginLeft: 16 }}
-				>
-					Add New Trade Party
-				</Button>
-			</div>
-		);
-	};
-
 	const renderMainComponent = () => {
 		if (showComponent === 'view_billing_addresses') {
 			return renderList();
@@ -229,7 +212,17 @@ function InvoicingParties({
 
 	return (
 		<>
-			{renderAdditionalItems()}
+			{bookingType === 'self' || showComponent !== 'view_billing_addresses' ? null : (
+				<div className={styles.trade_party_header}>
+					<Button
+						onClick={() => setShowComponent('create_trade_party')}
+						style={{ marginLeft: 16 }}
+					>
+						Add New Trade Party
+					</Button>
+				</div>
+			)}
+
 			{renderMainComponent()}
 		</>
 	);

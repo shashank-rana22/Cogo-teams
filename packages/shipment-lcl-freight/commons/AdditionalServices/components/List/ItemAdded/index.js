@@ -40,9 +40,9 @@ function Item({
 
 	const closeModal = () => setShowModal(null);
 
-	const openModal = (key) => {
+	const openModal = (modalKey) => {
 		setShowPopver(false);
-		setShowModal(key);
+		setShowModal(modalKey);
 	};
 
 	return (
@@ -78,6 +78,7 @@ function Item({
 						visible={showPopover}
 						placement="right"
 						render="right"
+						onClickOutside={() => setShowPopver(false)}
 						content={(
 							<>
 								{ACTION_BUTTONS.map(({ label, value, show = false }) => (show ? (
@@ -94,12 +95,10 @@ function Item({
 							</>
 						)}
 					>
-						<div>
-							<IcMOverflowDot
-								style={{ width: '10px', height: '10px', cursor: 'pointer' }}
-								onClick={() => setShowPopver(!showPopover)}
-							/>
-						</div>
+						<IcMOverflowDot
+							className={styles.three_dots}
+							onClick={() => setShowPopver(!showPopover)}
+						/>
 					</Popover>
 				) : null}
 			</div>

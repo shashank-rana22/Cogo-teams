@@ -7,7 +7,7 @@ const useCreateShipmentAdditionalService = ({
 	successMessage = 'Successfully Created',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'create_shipment_additional_service',
+		url    : '/create_shipment_additional_service',
 		method : 'POST',
 	}, { manual: true });
 

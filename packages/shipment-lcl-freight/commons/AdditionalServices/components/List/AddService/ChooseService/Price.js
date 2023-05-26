@@ -10,11 +10,11 @@ function Price({
 	isSeller,
 	setAddRate,
 	refetch = () => {},
-	setShowChargeCodes = () => {},
+	closeModal = () => {},
 	setShowPrice,
 }) {
 	const afterRequestRate = () => {
-		setShowChargeCodes(false);
+		closeModal();
 		refetch();
 	};
 

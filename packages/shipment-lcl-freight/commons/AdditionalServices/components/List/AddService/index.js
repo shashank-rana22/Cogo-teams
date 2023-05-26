@@ -15,7 +15,7 @@ function AddService({
 	services,
 	isSeller,
 	refetch = () => {},
-	setShowChargeCodes = () => {},
+	closeModal = () => {},
 }) {
 	const [showAddRate, setAddRate] = useState(null);
 	const [showPrice, setShowPrice] = useState(null);
@@ -55,7 +55,7 @@ function AddService({
 		<Modal
 			size="xl"
 			show
-			onClose={() => setShowChargeCodes(false)}
+			onClose={closeModal}
 			className={styles.modal_container}
 			closeOnOuterClick={false}
 		>
@@ -74,7 +74,7 @@ function AddService({
 							serviceCountTotal={finalList?.length}
 							services={services}
 							refetch={refetch}
-							setShowChargeCodes={setShowChargeCodes}
+							closeModal={closeModal}
 						/>
 					) : null}
 
@@ -83,7 +83,7 @@ function AddService({
 							isSeller={isSeller}
 							item={showAddRate}
 							setAddRate={setAddRate}
-							setShowChargeCodes={setShowChargeCodes}
+							closeModal={closeModal}
 							refetch={refetch}
 							filters={filters}
 							source="overview"

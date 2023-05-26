@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function AddIp({
 	shipmentData = {},
-	setShowIp = () => {},
+	closeModal = () => {},
 	updateInvoicingParty = () => {},
 }) {
 	const { importer_exporter: { id, country_id, is_tax_applicable } = {} } = shipmentData;
@@ -21,7 +21,7 @@ function AddIp({
 			size="xl"
 			show
 			className={styles.ip_modal_container}
-			onClose={() => setShowIp(false)}
+			onClose={closeModal}
 			closeOnOuterClick={false}
 		>
 			<Modal.Header title="ADD INVOICING PARTY" />
@@ -34,7 +34,7 @@ function AddIp({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button onClick={() => setShowIp(false)}>Close</Button>
+				<Button onClick={closeModal}>Close</Button>
 			</Modal.Footer>
 		</Modal>
 	);

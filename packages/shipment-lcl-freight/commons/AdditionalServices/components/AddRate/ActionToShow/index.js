@@ -10,7 +10,7 @@ function ActionsToShow({
 	onAddRate,
 	handleSubmit,
 	setSecondStep,
-	setAddSellPrice = () => {},
+	closeModal = () => {},
 	updateResponse = {},
 	loading,
 	onCancel = () => {},
@@ -103,7 +103,7 @@ function ActionsToShow({
 				onClick={() => {
 					onCancel();
 					setAddRate(false);
-					setAddSellPrice(false);
+					closeModal();
 				}}
 				themeType="secondary"
 				disabled={loading}

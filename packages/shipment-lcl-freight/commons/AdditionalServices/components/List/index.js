@@ -35,8 +35,10 @@ function List({ isSeller = false }) {
 		refetch();
 	};
 
+	const closeModal = () => setShowModal(false);
+
 	const refetchForUpdateSubService = () => {
-		setShowModal(false);
+		closeModal();
 		refetch();
 	};
 
@@ -61,13 +63,11 @@ function List({ isSeller = false }) {
 								key={serviceListItem?.id}
 								item={serviceListItem}
 								status={status}
-								showIp={showModal === 'ip'}
 								actionButton={actions({
 									status,
 									serviceListItem,
 									setShowModal,
 									setItem,
-									shipment_data,
 									stakeholderConfig,
 								})}
 								refetch={handleRefetch}
@@ -111,6 +111,7 @@ function List({ isSeller = false }) {
 					<Info />
 				</div>
 			) : null}
+
 			<div className={styles.not_added}>
 				<Button
 					onClick={() => setShowModal('charge_code')}
@@ -121,48 +122,45 @@ function List({ isSeller = false }) {
 				</Button>
 			</div>
 
-			{showModal === 'add_sell_price'
-				&& (
-					<Modal
-						size="lg"
-						show
-						onClose={() => setShowModal(false)}
-						closeOnOuterClick={false}
-						showCloseIcon={!updateResponse.loading}
-					>
-						<Modal.Header title="Add Sell Price" />
-						<Modal.Body>
-							<AddRate
-								item={item?.serviceListItem}
-								status={item?.status}
-								setAddSellPrice={setShowModal}
-								updateResponse={updateResponse}
-								source="add_sell_price"
-							/>
-						</Modal.Body>
-					</Modal>
-				)}
+			{showModal === 'add_sell_price' && (
+				<Modal
+					size="lg"
+					show
+					onClose={closeModal}
+					closeOnOuterClick={false}
+					showCloseIcon={!updateResponse.loading}
+				>
+					<Modal.Header title="Add Sell Price" />
+					<Modal.Body>
+						<AddRate
+							item={item?.serviceListItem}
+							status={item?.status}
+							closeModal={closeModal}
+							updateResponse={updateResponse}
+							source="add_sell_price"
+						/>
+					</Modal.Body>
+				</Modal>
+			)}
 
-			{showModal === 'ip'
-				&& (
-					<AddIp
-						shipmentData={shipment_data}
-						setShowIp={setShowModal}
-						updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
-					/>
-				)}
+			{showModal === 'ip' && (
+				<AddIp
+					shipmentData={shipment_data}
+					closeModal={closeModal}
+					updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
+				/>
+			)}
 
-			{showModal === 'charge_code'
-				&& (
-					<AddService
-						shipmentId={shipment_data?.id}
-						services={servicesList}
-						isSeller={isSeller}
-						refetch={refetch}
-						setItem={setItem}
-						setShowChargeCodes={setShowModal}
-					/>
-				)}
+			{showModal === 'charge_code' && (
+				<AddService
+					shipmentId={shipment_data?.id}
+					services={servicesList}
+					isSeller={isSeller}
+					refetch={refetch}
+					setItem={setItem}
+					closeModal={closeModal}
+				/>
+			)}
 
 		</div>
 	);
