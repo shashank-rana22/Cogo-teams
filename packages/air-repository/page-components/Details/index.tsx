@@ -33,7 +33,7 @@ function Details({
 			singleItem?.airline?.business_name
 		),
 		handleAirport: (singleItem) => (
-			singleItem?.airport?.name
+			singleItem?.airport?.display_name
 		),
 		handleMode: (singleItem) => (
 			<Badge
