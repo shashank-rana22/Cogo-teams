@@ -2,24 +2,24 @@ import { useRequest } from '@cogoport/request';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useEffect, useCallback } from 'react';
 
-function useListDocuments({
+function useGetPendingTasks({
 	filters = {},
 	defaultFilters = {},
 	defaultParams = {},
 }) {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/list_shipment_documents',
+		url    : 'list_shipment_pending_tasks',
 		method : 'GET',
 		params : {
 			filters: {
-				...filters,
 				...defaultFilters,
+				...filters,
 			},
 			...defaultParams,
 		},
 	}, { manual: true });
 
-	const listDocuments = useCallback(() => {
+	const getTasks = useCallback(() => {
 		(async () => {
 			try {
 				await trigger();
@@ -30,14 +30,14 @@ function useListDocuments({
 	}, [trigger]);
 
 	useEffect(() => {
-		listDocuments();
-	}, [listDocuments]);
+		getTasks();
+	}, [getTasks]);
 
 	return {
 		loading,
-		refetch : listDocuments,
-		list    : data || [],
+		refetch : getTasks,
+		data    : data?.list,
 	};
 }
 
-export default useListDocuments;
+export default useGetPendingTasks;
