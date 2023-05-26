@@ -10,7 +10,7 @@ import Actions from '../components/AllocationRequests/List/Actions';
 import styles from '../components/AllocationRequests/List/styles.module.css';
 
 const useListAllocationRequests = () => {
-	const { profile: { authParams, partner = {} } } = useSelector((state) => state);
+	const { profile: { authParams } } = useSelector((state) => state);
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
 	const [searchValue, setSearchValue] = useState('');
@@ -179,11 +179,11 @@ const useListAllocationRequests = () => {
 		{
 			key      : 'organization',
 			Header   : 'Organization',
-			accessor : ({ service }) => {
+			accessor : ({ service, partner }) => {
 				const { service_type: toggleValue } = params.filters || {};
 
 				const pathname = toggleValue === 'organization'
-					? `/${partner.id}/details/demand/${service.id}` : `/${partner.id}/prm/${service.id}`;
+					? `/${partner?.id}/details/demand/${service.id}` : `/${partner?.id}/prm/${service.id}`;
 
 				return (
 					<Tooltip content={(
