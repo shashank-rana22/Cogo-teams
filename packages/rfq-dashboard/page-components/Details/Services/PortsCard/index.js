@@ -126,12 +126,6 @@ function PortsCard(props) {
 					</button>
 				</div>
 				{!isEmpty(showPrice) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && (
-				// <PriceBreakupCard
-				// 	priceBreakupChildData={priceBreakupChildData}
-				// 	prefilledValues={prefilledValues}
-				// 	showPrice={showPrice}
-				// 	loading={loading}
-				// />
 					<BreakdownDetails
 						rate={rate}
 						detail={rate_card_details}
