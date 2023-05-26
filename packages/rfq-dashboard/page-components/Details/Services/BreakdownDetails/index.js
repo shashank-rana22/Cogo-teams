@@ -113,7 +113,10 @@ function BreakdownDetails({
 					</div>
 
 					<div className={styles.convenience_container}>
-						<div className={styles.col} style={{ width: getWidth(4.6) }}>Convenience Rate</div>
+						<div className={styles.col} style={{ width: getWidth(4.6), paddingLeft: '0px' }}>
+							Convenience Rate
+
+						</div>
 						<div className={styles.col} style={{ width: getWidth(5.7) }}>
 							<Convenience
 								onChange={handleConvenienceFeeChange}
@@ -121,7 +124,7 @@ function BreakdownDetails({
 								convenience_line_item={convenience_line_item}
 							/>
 						</div>
-						<div className={styles.col} style={{ width: getWidth(1.7) }}>
+						<div className={styles.col} style={{ width: getWidth(2.1) }}>
 							{formatAmount({
 								amount:
 									(convenienceDetails?.convenience_rate?.price || 0)
@@ -161,7 +164,15 @@ function BreakdownDetails({
 						Projected Revenue:
 					</div>
 					<div className={styles.title_value}>
-						$18,000
+						{formatAmount({
+							amount   : total + convenience_fee,
+							currency : rate?.total_price_currency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 0,
+							},
+						})}
 					</div>
 				</div>
 				<div className={styles.info_title}>
@@ -172,14 +183,14 @@ function BreakdownDetails({
 						2.6%
 					</div>
 				</div>
-				<div className={styles.info_title}>
+				{/* <div className={styles.info_title}>
 					<div className={styles.footer_title}>
 						Price / Ctr :
 					</div>
 					<div className={styles.title_value}>
 						$18,000
 					</div>
-				</div>
+				</div> */}
 				<Button
 					size="md"
 					themeType="secondary"

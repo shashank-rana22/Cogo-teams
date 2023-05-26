@@ -27,7 +27,7 @@ const useListRfqs = ({ filterStore, id = '' }) => {
 				sub_type                : organizationSize,
 				service_type            : serviceType,
 				status,
-				sort_by                 : sortBy,
+				low_to_high             : sortBy === 'profitability_low',
 				id,
 			},
 			page,

@@ -32,8 +32,8 @@ const controls = [
 				value : 'sme',
 			},
 			{
-				label : 'Unknown',
-				value : 'unknown',
+				label : 'ChannelPartner',
+				value : 'channel_partner',
 			},
 			{
 				label : 'Mid Size',

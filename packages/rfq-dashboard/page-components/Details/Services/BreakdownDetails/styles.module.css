@@ -2,20 +2,25 @@
     display: flex;
     flex-wrap: wrap;
     align-items: center;
-	padding: 10px 0px;
+	padding: 22px 0px;
+	border-bottom: 1px solid #E0E0E0;
 }
 
 .col{
     padding: 0 8px;
+	
 }
 
+.header{
+	font-weight: 600;
+}
 
 .container{
     display: flex;
 	flex-direction: column;
 	width: 100%;
 	padding: 20px;
-
+	background-color: #f9f9f9;
 	&:last-child {
 		border-bottom: unset;
 	} 
@@ -31,7 +36,7 @@
 .service_title{
 	font-weight: 500;
 	font-size: 14px;
-	color: #81c0af;
+	color: #849E4C;
 	text-overflow: ellipsis;
 	white-space: nowrap;
 	overflow: hidden;
@@ -40,7 +45,8 @@
 
 .service_total_amount{
 	width: 14%;
-	color: #81c0af;
+	color: #849E4C;
+	;
 	margin-top: 15px 0 0 12px;
 }
 
@@ -59,6 +65,7 @@
 	margin-top: 15px;
 	display: flex;
 	justify-content: space-between;
+	margin-right: 32px;
 }
 
 .divider{
@@ -68,7 +75,7 @@
 
 .table_footer{
 	display: flex;
-	padding: 15px 20px 15px 28px;
+	padding: 15px 84px 15px 0px;
 	justify-content: space-between;
 	background: #f9f9f9;
 	border-top: 1px solid #e0e0e0;

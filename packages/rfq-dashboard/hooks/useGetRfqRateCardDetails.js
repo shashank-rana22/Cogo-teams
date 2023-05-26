@@ -10,7 +10,6 @@ const useGetRfqRateCardDetails = () => {
 	}, { manual: true });
 
 	const getRfqRateCardDetails = useCallback(async ({ rfq_rate_card_id = '' }) => {
-		console.log('rfq_rate_card_id', rfq_rate_card_id);
 		try {
 			await trigger({
 				params: {

@@ -12,7 +12,9 @@ function ServiceTotalAmountContainer({ item, totalDisplayString, fclLocalEmpty }
 	if (item?.total_price_discounted) {
 		return (
 			<div className={styles.service_total_amount}>
-				{totalDisplayString}
+				Total :
+
+				{` ${totalDisplayString}`}
 			</div>
 		);
 	}
@@ -35,10 +37,6 @@ function ServiceMargin({
 	setEditedMargins = () => {},
 }) {
 	const service_details = detail?.service_details?.[item?.id];
-
-	console.log('inside');
-
-	console.log('item?.line_items ::', item?.line_items);
 
 	const totalDisplayString = formatAmount({
 		amount   : totalDisplay,
