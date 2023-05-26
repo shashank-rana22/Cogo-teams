@@ -12,21 +12,21 @@ function TicketStructureBody({
 	updateTicketActivity = () => {},
 }) {
 	const {
-		ID = '',
-		Status = '',
-		Description = '',
-		CreatedAt = '',
-		TicketActivity = {},
-		Type = '',
-		ActivityCount = 0,
-		TicketReviewerID = '',
+		ID: id = '',
+		Status: status = '',
+		Description: description = '',
+		CreatedAt: createdAt = '',
+		TicketActivity: ticketActivity = {},
+		Type: type = '',
+		Activitycount: activityCount = 0,
+		TicketReviewerID :ticketReviewerId = '',
 	} = data;
 
 	const { profile } = useSelector((state) => state);
-	const { color: textColor, label } =	statusLabelTransformation[getTicketStatus(Status)] || {};
+	const { color: textColor, label } =	statusLabelTransformation[getTicketStatus(status)] || {};
 	const handleTicketClick = (e) => {
 		e.stopPropagation();
-		updateTicketActivity(actionButtonKeys[Status]?.name, ID);
+		updateTicketActivity(actionButtonKeys[status]?.name, id);
 	};
 
 	return (
@@ -37,21 +37,21 @@ function TicketStructureBody({
 				<div className={styles.subcontainer_header}>
 					<div className={styles.ticket_id}>
 						#
-						{ID}
+						{id}
 					</div>
 
-					{(profile?.user?.id === TicketReviewerID) && (
+					{(profile?.user?.id === ticketReviewerId) && (
 						<div
 							role="presentation"
 							className={styles.reopen_resolve}
 							onClick={(e) => handleTicketClick(e)}
 						>
-							{actionButtonKeys[Status]?.label || ''}
+							{actionButtonKeys[status]?.label || ''}
 						</div>
 					)}
 				</div>
 				<div className={styles.category_ticket_activity}>
-					{Type || Description.substring(0, 100)}
+					{type || description.substring(0, 100)}
 				</div>
 			</div>
 			<div className={styles.subcontainer_two}>
@@ -66,7 +66,7 @@ function TicketStructureBody({
 					</div>
 					<div className={styles.ticket_date_time}>
 						{formatDate({
-							date       : CreatedAt,
+							date       : createdAt,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/mm/yyyy'],
 							separator  : ', ',
 							timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
@@ -76,11 +76,11 @@ function TicketStructureBody({
 				</div>
 				<div className={styles.ticket_reason_box}>
 					<div className={styles.description}>
-						{(TicketActivity?.Description || Description).substring(0, 100)}
+						{(ticketActivity?.description || description).substring(0, 100)}
 					</div>
-					{ActivityCount ? (
+					{activityCount ? (
 						<div className={styles.activity_count}>
-							{ActivityCount}
+							{activityCount}
 						</div>
 					) : null}
 

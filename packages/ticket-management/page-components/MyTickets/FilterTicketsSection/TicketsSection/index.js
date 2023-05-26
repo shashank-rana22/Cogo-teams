@@ -5,7 +5,7 @@ import TicketsSectionPart from './TicketSectionPart';
 
 function TicketsSection(props) {
 	const mapping = {
-		Open      : 'unresolved',
+		Open      : 'open',
 		Pending   : 'pending',
 		Escalated : 'escalated',
 		Closed    : 'closed',

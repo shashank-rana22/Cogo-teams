@@ -1,5 +1,6 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useTicketsRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import {
 	useEffect,
 	useState,
@@ -9,7 +10,6 @@ import {
 const useListTickets = (searchValue, status, key, refreshList, setRefreshList) => {
 	const [pagination, setPagination] = useState(1);
 	const [ticketList, setTicketList] = useState({ list: [], total: 0 });
-	// const [listData, setListData] = useState([]); ***
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
@@ -19,22 +19,22 @@ const useListTickets = (searchValue, status, key, refreshList, setRefreshList) =
 		authkey : 'get_tickets_list',
 	}, { manual: true });
 
+	const { profile } = useSelector((state) => state);
+
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {
 			const response = await trigger({
 				params: {
-					Status  : status,
-					// UserID     : profile?.id,
-					// PerformedByID : profile?.id,
-					// DisplayAll : true,
-					size    : 10,
-					page    : pageIndex - 1,
-					QFilter : searchQuery.text || undefined,
-					Type    : searchQuery.category,
+					Status        : status,
+					DisplayAll    : true,
+					PerformedByID : profile?.user?.id,
+					size          : 10,
+					page          : pageIndex - 1,
+					QFilter       : searchQuery.text || undefined,
+					Type          : searchQuery.category,
 				},
 			});
 
-			// setListData((prev) => [...prev, ...(response?.data?.items || [])]); ***
 			if (response?.data?.items) {
 				setTicketList((prev) => {
 					if (prev) {
@@ -51,12 +51,7 @@ const useListTickets = (searchValue, status, key, refreshList, setRefreshList) =
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [searchQuery, setTicketList, status, trigger]);
-
-	// const refreshTickets = () => {
-	// 	setTicketList({ list: [], total: 0 });
-	// 	fetchTickets(1);
-	// };
+	}, [profile?.user?.id, searchQuery.category, searchQuery.text, status, trigger]);
 
 	useEffect(() => {
 		setTicketList({ list: [], total: 0 });
@@ -83,7 +78,6 @@ const useListTickets = (searchValue, status, key, refreshList, setRefreshList) =
 		listLoading: loading,
 		fetchTickets,
 		handleScroll,
-		// refreshTickets,
 	};
 };
 

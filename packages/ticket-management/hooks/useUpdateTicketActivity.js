@@ -2,12 +2,9 @@ import { Toast } from '@cogoport/components';
 import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-// import useListTickets from './useListTickets';
-
 const useUpdateTicketActivity = ({
 	refreshTickets = () => {},
 }) => {
-	// const { fetchTickets } = useListTickets();
 	const [{ loading }, trigger] = useTicketsRequest({
 		url     : '/activity',
 		method  : 'post',
@@ -26,7 +23,6 @@ const useUpdateTicketActivity = ({
 				data: {
 					UserType      : 'ticket_user',
 					PerformedByID : profile?.user?.id,
-					// if PerformedByID ===TicketReviewerID  then only show reopen and resolve button
 					Type,
 					TicketID      : [Number(ID)],
 					Status        : StatusChange,
@@ -34,9 +30,7 @@ const useUpdateTicketActivity = ({
 			});
 			Toast.success(res?.data || 'Ticket Status Updated Successfully!');
 			refreshTickets();
-			// refetchTicket();
 		} catch (e) {
-			console.log(e, 'e');
 			Toast.error(e?.response?.data || 'something went wrong');
 		}
 	};
