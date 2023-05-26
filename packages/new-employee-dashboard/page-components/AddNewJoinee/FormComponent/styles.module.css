@@ -53,10 +53,10 @@
 	border-bottom: none;
 }
 
-.employement_details_container{
+.employement_details_container {
 	display: flex;
-	width: 100%;
 	flex-wrap: wrap;
+	width: 100%;
 }
 
 .button_container {

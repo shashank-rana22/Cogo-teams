@@ -57,7 +57,7 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 				setValue(
 					`${item.name}`,
 					mapping[item.name].mobile_number
-					|| content?.detail?.[item.name],
+					|| content?.detail?.[item.name].mobile_number,
 				);
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);

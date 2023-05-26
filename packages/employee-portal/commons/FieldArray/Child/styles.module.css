@@ -69,7 +69,9 @@
 }
 
 .whole_container {
-	padding: 20px;
+	padding-top: 4px;
+	padding-bottom: 16px;
+	padding-left: 16px;
 	margin-bottom: 20px;
 	border: 1px solid rgb(227 227 227);
 	border-radius: 10px;
