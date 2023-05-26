@@ -9,9 +9,15 @@ import CancelAdditionalService from '../../CancelAdditionalService';
 
 import styles from './styles.module.css';
 
-const serviceCancelAllowedBy = [
+const SERVICE_CANCEL_STATE = [
 	'requested_by_importer_exporter',
 	'amendment_requested_by_importer_exporter',
+	'quoted_by_service_provider',
+];
+
+const ACTION_BUTTONS = [
+	{ label: 'Edit', value: 'supplier_reallocation' },
+	{ label: 'Cancel', value: 'cancel_service' },
 ];
 
 function Item({
@@ -22,18 +28,22 @@ function Item({
 	services = [],
 	isSeller,
 }) {
-	const [show, setShow] = useState(false);
-	const [showCancel, setShowCancel] = useState(false);
-	const [showEdit, setShowEdit] = useState(false);
+	const [showPopover, setShowPopver] = useState(false);
+	const [showModal, setShowModal] = useState(null);
 
-	const showCancelInfo = serviceCancelAllowedBy.includes(item?.state)
-	|| (item?.state === 'quoted_by_service_provider');
-
-	const showEditBtn = status?.status === 'approved';
+	ACTION_BUTTONS[0].show = status?.status === 'approved';
+	ACTION_BUTTONS[1].show = SERVICE_CANCEL_STATE.includes(item?.state);
 
 	const serviceData = services?.filter((service) => service?.service_type === item?.name);
 
 	const price = isSeller ? item?.buy_price : item?.price;
+
+	const closeModal = () => setShowModal(null);
+
+	const openModal = (key) => {
+		setShowPopver(false);
+		setShowModal(key);
+	};
 
 	return (
 		<div className={cl`${styles.container} ${styles.additional_service_item_container}`}>
@@ -63,47 +73,31 @@ function Item({
 					) : null}
 				</div>
 
-				{showCancelInfo || showEditBtn ? (
+				{ACTION_BUTTONS.some((btn) => btn.show) ? (
 					<Popover
-						show={show}
+						visible={showPopover}
 						placement="right"
 						render="right"
 						content={(
-							<div>
-								{showCancelInfo ? (
+							<>
+								{ACTION_BUTTONS.map(({ label, value, show = false }) => (show ? (
 									<div
+										key={value}
 										className={styles.button_text}
-										onClick={() => {
-											setShow(false);
-											setShowCancel(true);
-										}}
+										onClick={() => openModal(value)}
 										role="button"
 										tabIndex={0}
 									>
-										Cancel
+										{label}
 									</div>
-								) : null}
-
-								{showEditBtn ? (
-									<div
-										className={styles.button_text}
-										onClick={() => {
-											setShow(false);
-											setShowEdit(true);
-										}}
-										role="button"
-										tabIndex={0}
-									>
-										Edit
-									</div>
-								) : null}
-							</div>
+								) : null))}
+							</>
 						)}
 					>
 						<div>
 							<IcMOverflowDot
 								style={{ width: '10px', height: '10px', cursor: 'pointer' }}
-								onClick={() => setShow(!show)}
+								onClick={() => setShowPopver(!showPopover)}
 							/>
 						</div>
 					</Popover>
@@ -117,18 +111,17 @@ function Item({
 				{actionButton}
 			</div>
 
-			{showCancel ? (
+			{showModal === 'cancel_service' ? (
 				<CancelAdditionalService
 					id={item?.id}
-					showCancel={showCancel}
-					setShowCancel={setShowCancel}
+					closeModal={closeModal}
 					refetch={refetch}
 				/>
 			) : null}
 
-			{showEdit ? (
+			{showModal === 'supplier_reallocation' ? (
 				<SupplierReallocation
-					setShow={setShowEdit}
+					closeModal={closeModal}
 					serviceData={serviceData}
 					isAdditional
 				/>

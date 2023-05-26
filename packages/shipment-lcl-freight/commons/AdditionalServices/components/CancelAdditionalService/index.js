@@ -7,8 +7,7 @@ import styles from './styles.module.css';
 
 function CancelAdditionalService({
 	id = '',
-	showCancel = false,
-	setShowCancel = () => {},
+	closeModal = () => {},
 	refetch = () => {},
 }) {
 	const [remarkValues, setRemarkValues] = useState('');
@@ -24,10 +23,10 @@ function CancelAdditionalService({
 		cancelAdditionalService(payload);
 	};
 
-	return showCancel ? (
+	return (
 		<Modal
 			show
-			onClose={() => setShowCancel(false)}
+			onClose={closeModal}
 			showCloseIcon={!loading}
 			closeOnOuterClick={false}
 			className={styles.custom_modal}
@@ -46,7 +45,7 @@ function CancelAdditionalService({
 			<Modal.Footer>
 				<Button
 					themeType="secondary"
-					onClick={() => setShowCancel(false)}
+					onClick={closeModal}
 					disabled={loading}
 				>
 					Cancel
@@ -57,7 +56,7 @@ function CancelAdditionalService({
 				</Button>
 			</Modal.Footer>
 		</Modal>
-	) : null;
+	);
 }
 
 export default CancelAdditionalService;

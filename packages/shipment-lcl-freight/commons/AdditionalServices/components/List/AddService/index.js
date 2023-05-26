@@ -11,7 +11,7 @@ import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
 function AddService({
-	shipmentId,
+	shipmentId: shipment_id,
 	services,
 	isSeller,
 	refetch = () => {},
@@ -24,16 +24,14 @@ function AddService({
 		service_type : undefined,
 	});
 
-	const { list, loading } = useListServiceChargeCodes({
-		shipmentId,
-	});
+	const { list, loading } = useListServiceChargeCodes({ defaultFilters: { shipment_id } });
 
 	let finalList = (list || []).map((item) => ({
 		...item,
-		shipment_id : shipmentId,
+		shipment_id,
 		services,
 		isSeller,
-		name        : `${item.code} ${startCase(item.name)}`,
+		name: `${item.code} ${startCase(item.name)}`,
 	}));
 
 	if (filters.name) {
@@ -42,10 +40,10 @@ function AddService({
 
 	if (filters.service_type) {
 		finalList = finalList.filter((item) => {
-			if (filters?.service_type?.includes('?')) {
-				return item.service_type === filters?.service_type?.split('?')?.[0];
+			if (filters.service_type?.includes('?')) {
+				return item.service_type === filters.service_type?.split('?')?.[0];
 			}
-			return item.service_type === filters?.service_type;
+			return item.service_type === filters.service_type;
 		});
 	}
 
@@ -97,7 +95,6 @@ function AddService({
 							showPrice={showPrice}
 							setAddRate={setAddRate}
 							setShowPrice={setShowPrice}
-
 						/>
 					) : null}
 				</div>

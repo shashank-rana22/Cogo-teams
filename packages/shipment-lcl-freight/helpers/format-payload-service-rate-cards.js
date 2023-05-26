@@ -5,13 +5,11 @@ export const formatPayloadForSubsidiaryServiceRateCards = ({ code, service_type 
 		(service) => service?.service_type === service_type,
 	);
 
-	const date = new Date();
-
 	const payload = {
 		code,
 		service_type         : serviceType,
 		validity_end         : addedService?.schedule_arrival,
-		validity_start       : date,
+		validity_start       : new Date(),
 		location_id          : addedService?.location?.id,
 		importer_exporter_id : addedService?.importer_exporter?.id,
 		origin_location_id   : addedService?.origin_port_id || addedService?.origin_port?.id

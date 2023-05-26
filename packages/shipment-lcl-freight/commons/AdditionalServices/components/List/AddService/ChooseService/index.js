@@ -66,7 +66,7 @@ function ChooseService({
 					<Placeholder height="50px" width="100%" />
 				</div>
 			) : (
-				<ServicesList fields={fields} data={list} loading={loading} />
+				<ServicesList fields={fields} data={list} />
 			)}
 		</div>
 	);

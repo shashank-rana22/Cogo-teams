@@ -1,34 +1,25 @@
-import { cl, Placeholder } from '@cogoport/components';
+import { cl } from '@cogoport/components';
 import React from 'react';
 
 import getValue from '../../../../../../../../utils/getValue';
 
 import styles from './styles.module.css';
 
-function Item({ item, fields, handleClick, loading = false }) {
+function Item({ item, fields }) {
 	const stylesCol = { padding: '0 4px' };
 
 	return (
-		<div
-			onClick={handleClick}
-			tabIndex="0"
-			className={cl` ${item.expired ? styles.expired : ''} ${styles.row}`}
-			onKeyDown={(e) => {
-				if (e.key === 'Enter') {
-					handleClick();
-				}
-			}}
-			role="button"
-		>
+		<div className={cl`${item.expired ? styles.expired : ''} ${styles.row}`}>
 			{fields.map((singleItem) => (
 				<div
-					style={singleItem.hasStyle ? singleItem.styles : stylesCol}
 					key={singleItem?.key}
+					style={singleItem.hasStyle ? singleItem.styles : stylesCol}
 				>
-					{loading && <Placeholder width="100%" height="20px" />}
 					<div className={styles.label}>{singleItem.label}</div>
-					{singleItem.render && !loading ? singleItem.render(item) : null}
-					{!loading && !singleItem.render ? (
+
+					{singleItem.render ? singleItem.render(item) : null}
+
+					{!singleItem.render ? (
 						<div className={styles.title_black}>
 							{getValue(item, singleItem, false, {}) || '-'}
 						</div>

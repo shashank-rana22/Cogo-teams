@@ -1,37 +1,33 @@
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useState } from 'react';
+import { useEffect, useCallback } from 'react';
 
-const useListServiceChargeCodes = ({ shipmentId = '' }) => {
-	const [apiData, setApiData] = useState({});
-
-	const [{ loading }, trigger] = useRequest({
+const useListServiceChargeCodes = ({ defaultFilters = {}, defaultParams = {}, initialCall = true }) => {
+	const [{ loading, data }, trigger] = useRequest({
 		url    : '/get_shipment_additional_service_codes',
 		method : 'GET',
-		params : { filters: { shipment_id: shipmentId } },
+		params : {
+			filters: { ...defaultFilters },
+			...defaultParams,
+		},
 	});
 
 	const getListChargeCodes = useCallback(async () => {
 		try {
-			const res = await trigger();
-
-			setApiData(res.data || {});
+			await trigger();
 		} catch (err) {
-			setApiData({});
-
 			toastApiError(err);
 		}
 	}, [trigger]);
 
 	useEffect(() => {
-		getListChargeCodes();
-	}, [getListChargeCodes, shipmentId]);
+		if (initialCall) getListChargeCodes();
+	}, [getListChargeCodes, initialCall]);
 
 	return {
 		loading,
-		list    : apiData?.list || [],
+		list    : data?.list || [],
 		refetch : getListChargeCodes,
-		apiList : apiData,
 	};
 };
 export default useListServiceChargeCodes;

@@ -28,7 +28,7 @@ function FormElement(props) {
 
 function SupplierReallocation({
 	serviceData = [],
-	setShow = () => {},
+	closeModal = () => {},
 	isAdditional = false,
 }) {
 	const { shipment_data, refetch, refetchServices, primary_service = {} } = useContext(ShipmentDetailContext);
@@ -53,7 +53,7 @@ function SupplierReallocation({
 	const afterUpdateRefetch = () => {
 		refetch();
 		refetchServices();
-		setShow(false);
+		closeModal();
 	};
 
 	const {
@@ -72,8 +72,6 @@ function SupplierReallocation({
 		};
 		apiTrigger(payload);
 	};
-
-	const closeModal = () => setShow(false);
 
 	return (
 		<Modal

@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-import { useEffect, useMemo } from 'react';
+import { useEffect } from 'react';
 
 import useGetSubsidiaryServiceRateCards from '../../../../../../hooks/useGetSubsidiaryServiceRateCards';
 import CardList from '../../../../../CardList';
@@ -13,9 +13,9 @@ function ViewPrice({ showPrice, setShowPrice }) {
 		item: showPrice?.item,
 	});
 
-	const line_items = useMemo(() => [], []);
-
 	useEffect(() => {
+		const line_items = [];
+
 		(async () => {
 			apiData?.list?.forEach((items) => {
 				items?.validities.forEach((validity) => {
@@ -30,7 +30,7 @@ function ViewPrice({ showPrice, setShowPrice }) {
 			});
 			setShowPrice((p) => ({ ...p, line_items }));
 		})();
-	}, [loading, setShowPrice, apiData?.list, line_items]);
+	}, [setShowPrice, apiData?.list]);
 
 	const field = fields(showPrice?.item);
 	return (
@@ -40,7 +40,7 @@ function ViewPrice({ showPrice, setShowPrice }) {
 			) : (
 				<CardList
 					fields={field}
-					apiData={showPrice?.line_items || []}
+					data={showPrice?.line_items || []}
 					loading={loading}
 					showPagination={false}
 					numberOfLoader={3}
