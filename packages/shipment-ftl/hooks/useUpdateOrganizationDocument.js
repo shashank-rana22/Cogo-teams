@@ -19,7 +19,6 @@ const useUpdateOrganizationDocument = ({ refetch, defaultParams = {} }) => {
 			});
 
 			if (!res.hasError) Toast.success('Document Deleted Successfully');
-
 			refetch();
 		} catch (err) {
 			toastApiError(err);

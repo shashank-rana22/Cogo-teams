@@ -1,5 +1,5 @@
-// import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useEffect, useCallback } from 'react';
 
 const useGetBusiness = ({ gstNumber = '' }) => {
@@ -20,7 +20,7 @@ const useGetBusiness = ({ gstNumber = '' }) => {
 					},
 				});
 			} catch (err) {
-				// toastApiError(err);
+				toastApiError(err);
 			}
 		})();
 	}, [trigger, gstNumber]);

@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
 const useUpdateShipmentPendingTask = ({
 	successMessage = 'Task Updated Successfully!',
@@ -14,11 +14,8 @@ const useUpdateShipmentPendingTask = ({
 	const apiTrigger = async (val) => {
 		try {
 			const res = await trigger({ data: val });
-
 			Toast.success(successMessage);
-
 			refetch();
-
 			return res;
 		} catch (err) {
 			toastApiError(err);

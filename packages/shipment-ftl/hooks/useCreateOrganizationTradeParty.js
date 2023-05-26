@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
-// import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
 const useCreateOrganizationTradeParty = ({
 	successMessage = 'Successfully Created',
@@ -21,7 +21,7 @@ const useCreateOrganizationTradeParty = ({
 				refetch();
 			}
 		} catch (err) {
-			// toastApiError(err);
+			toastApiError(err);
 		}
 	};
 

@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
 const useUpdateBookingPreferences = ({
 	refetch = () => {},
@@ -14,9 +14,7 @@ const useUpdateBookingPreferences = ({
 	const apiTrigger = async (val) => {
 		try {
 			await trigger({ data: val });
-
 			Toast.success(successMessage);
-
 			refetch();
 		} catch (err) {
 			toastApiError(err);

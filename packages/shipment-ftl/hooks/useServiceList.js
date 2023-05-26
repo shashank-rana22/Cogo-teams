@@ -1,5 +1,6 @@
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useState, useEffect, useCallback } from 'react';
 
 const useServiceList = () => {
@@ -29,7 +30,7 @@ const useServiceList = () => {
 
 			setServicesData(res?.data?.list);
 		} catch (e) {
-			// toastApiError(e);
+			toastApiError(e);
 		}
 	}), [shipment_id, trigger]);
 

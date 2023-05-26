@@ -1,5 +1,5 @@
-import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
 function useUpdateDocuments({
 	refetch = () => {},
@@ -12,7 +12,6 @@ function useUpdateDocuments({
 	const updateDocument = async (val) => {
 		try {
 			const res = await trigger({ data: val });
-
 			if (!res?.hasError) {
 				refetch();
 			}
