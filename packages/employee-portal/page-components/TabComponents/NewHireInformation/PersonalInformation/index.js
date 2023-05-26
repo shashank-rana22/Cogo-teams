@@ -37,8 +37,8 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 			},
 			emergency_contact_details: {
 				mobile_number: {
-					number       : content?.detail?.emergency_contact_details?.[0].mobile_number,
-					country_code : content?.detail?.emergency_contact_details?.[0].mobile_country_code || +91,
+					number       : content?.detail?.emergency_contact_details?.[0]?.mobile_number,
+					country_code : content?.detail?.emergency_contact_details?.[0]?.mobile_country_code || +91,
 				},
 			},
 		};

@@ -13,7 +13,7 @@ function useGetEmployeeDetails({ id = '' }) {
 		try {
 			trigger({
 				params: {
-					id: '85cdcf6b-bd52-4fea-b136-12e377c48ecc' || id,
+					id: 'be4fc4d9-220c-4853-bcba-b6d8e2c9b837' || id,
 				},
 			});
 		} catch (err) {
