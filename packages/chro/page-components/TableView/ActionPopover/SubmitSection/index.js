@@ -5,6 +5,7 @@ import styles from './styles.module.css';
 
 export default function SubmitSection({
 	setVisible = () => {},
+	onFinalSubmit = () => {},
 }) {
 	const [finalReview, setFinalReview] = useState('');
 
@@ -43,6 +44,7 @@ export default function SubmitSection({
 				<Button
 					className={styles.button_submit}
 					themeType="primary"
+					onClick={() => onFinalSubmit('rejected')}
 				>
 					Confirm
 				</Button>

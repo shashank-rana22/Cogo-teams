@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 // import useUpdateOfferLetter from "./useUpdateOfferLetter";
 
 // const { loading = false } = useUpdateOfferLetter();
-const getColumns = ({ setCtcBreakup, ctcBreakup }) => [
+const getColumns = ({ setCtcBreakup, ctcBreakup, onFinalSubmit = () => {} }) => [
 	{
 		Header   : 'NAME & EMAIL',
 		accessor : (item) => (
@@ -69,7 +69,7 @@ const getColumns = ({ setCtcBreakup, ctcBreakup }) => [
 			<div className={styles.button_container}>
 				<ActionPopover ctcBreakup={ctcBreakup} />
 				<Button
-					onClick={() => {}}
+					onClick={() => { onFinalSubmit('approved'); }}
 					themeType="primary"
 					style={{ marginLeft: 8 }}
 				>

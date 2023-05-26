@@ -13,15 +13,14 @@ import useUpdateOfferLetter from './useUpdateOfferLetter';
 function TableView({ search }) {
 	const [ctcBreakup, setCtcBreakup] = useState();
 
-	const {} = useUpdateOfferLetter();
-
-	const columns = getColumns({ setCtcBreakup, ctcBreakup });
-
 	const { data = {}, onPageChange } = useGetTableView();
 
 	const { list = [], page, page_limit, total_count } = data;
 
-	const { metadata = {} } = ctcBreakup || {};
+	const { metadata = {}, id } = ctcBreakup || {};
+	const { onFinalSubmit = () => {} } = useUpdateOfferLetter(id);
+	const columns = getColumns({ setCtcBreakup, ctcBreakup, onFinalSubmit });
+
 	return (
 		<div className={styles.table_container}>
 			<StyledTable columns={columns} data={list} />
@@ -49,9 +48,9 @@ function TableView({ search }) {
 				</Modal.Body>
 				<Modal.Footer>
 					<div className={styles.button_container}>
-						<ActionPopover ctcBreakup={ctcBreakup} />
+						<ActionPopover ctcBreakup={ctcBreakup} onFinalSubmit={onFinalSubmit} />
 						<Button
-							onClick={() => {}}
+							onClick={() => { onFinalSubmit('approved'); }}
 							themeType="primary"
 							style={{ marginLeft: 8 }}
 						>

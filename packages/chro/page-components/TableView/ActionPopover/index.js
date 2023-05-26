@@ -6,6 +6,7 @@ import SubmitSection from './SubmitSection';
 
 export default function ActionPopover({
 	ctcBreakup,
+	onFinalSubmit = () => {},
 }) {
 	const [visible, setVisible] = useState(false);
 	console.log('ctcBreakup', ctcBreakup);
@@ -24,6 +25,7 @@ export default function ActionPopover({
 				render={(
 					<SubmitSection
 						setVisible={setVisible}
+						onFinalSubmit={onFinalSubmit}
 					/>
 				)}
 			>

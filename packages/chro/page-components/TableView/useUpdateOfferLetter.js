@@ -1,15 +1,15 @@
 // import { useForm } from '@cogoport/forms';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
-function useUpdateOfferLetter() {
+function useUpdateOfferLetter(id = '') {
 	const [params, setParams] = useState({});
 	const userId = useSelector((s) => s?.profile?.user?.id);
 
 	const [finalReview, setFinalReview] = useState('');
 
-	const [{ data, loading }, refetch] = useRequest(
+	const [{ data, loading }, trigger] = useHarbourRequest(
 		{
 			method : 'post',
 			url    : '/update_employee_offer_letter',
@@ -20,19 +20,16 @@ function useUpdateOfferLetter() {
 
 	// const formProps = useForm();
 
-	const onFinalSubmit = async () => {
+	const onFinalSubmit = async (status) => {
 		try {
-			  const combinedObject = { ...joiningBonus, ...salaryDetails, init: c };
-			  console.log('combinedObject', combinedObject);
-
 			const payload = {
-				id                : '',
+				id,
 				performed_by_id   : 'user_id',
 				performed_by_type : 'agent',
-				metadata          : combinedObject,
 				strip             : false,
-				status            : 'active',
-				rejectionReason,
+				status,
+				rejectionReason   : '',
+				document_url      : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/7ec8639af765db36130fb7c72dce73c1/offerlettersample.pdf',
 			};
 
 			await trigger({
@@ -54,7 +51,6 @@ function useUpdateOfferLetter() {
 		// formProps,
 		params,
 		setParams,
-		refetch,
 		onFinalSubmit,
 		// finalReview,
 		// setFinalReview,
