@@ -7,11 +7,12 @@ import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
-import ShipmentHeader from '../../common/ShipmentHeader';
+import Documents from '../../common/Documents';
+import Overview from '../../common/Overview';
 import PocSop from '../../common/PocSop';
+import ShipmentHeader from '../../common/ShipmentHeader';
+import Tasks from '../../common/Tasks';
 import Timeline from '../../common/TimeLine';
-import Tasks from '../../common/Tasks'
-import Overview from '../../common/Overview'
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
 import useServiceList from '../../hooks/useServiceList';
@@ -128,7 +129,7 @@ function ShipmentDetails() {
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
-							{/* <Documents /> */}
+							<Documents />
 						</TabPanel>
 
 						<TabPanel name="emails" title="Emails">

@@ -27,11 +27,8 @@ const useUpdateShipmentAdditionalService = ({
 					pending_task_id: showIp ? undefined : task?.id,
 				},
 			});
-
 			Toast.success('Service Updated successfully');
-
 			setRemarks(null);
-
 			refetch();
 		} catch (err) {
 			toastApiError(err);
