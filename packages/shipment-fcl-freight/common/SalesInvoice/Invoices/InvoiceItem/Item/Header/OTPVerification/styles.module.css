@@ -57,3 +57,10 @@
 		margin-right: 16px;
 	}
 }
+
+.loader_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50px;
+}
