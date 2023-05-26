@@ -31,3 +31,9 @@
 	padding: 16px;
 	font-size: var(--font-size-xl);
 }
+
+.modal_footer {
+	> button:not(:last-of-type) {
+		margin-right: 10px;
+	}
+}
