@@ -1,0 +1,20 @@
+.filter_container{
+    margin-top: 20px;
+    display: flex;
+    align-items: center;
+}
+
+.filter_popover{
+    width: 424px;
+}
+
+.filter_section{
+    display:flex;
+    justify-content: space-between;
+    margin:8px;
+}
+
+.close_popover{
+    display: flex;
+    flex-direction: row-reverse;
+}
