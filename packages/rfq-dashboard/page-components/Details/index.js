@@ -1,4 +1,5 @@
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 import useGetRfqRateCards from '../../hooks/useGetRfqRateCards';

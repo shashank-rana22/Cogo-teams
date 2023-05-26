@@ -5,15 +5,15 @@ import { getFormattedAmount } from '../helpers/getFormattedSum';
 
 import styles from './styles.module.css';
 
-function ServiceStats({ data = {}, type = '', source = '' }) {
-	const renderItem = (value, item) => {
-		if (item === 'promised_consolidated_revenue') {
-			return getFormattedAmount(value, 'INR');
+function ServiceStats({ data = [], type = '', source = '' }) {
+	const renderItem = (item) => {
+		if (item.key === 'revenue') {
+			return getFormattedAmount(item.value, 'INR');
 		}
-		if (item === 'promised_consolidate_profitability') {
-			return `${value}%`;
+		if (item.key === 'profitability' || item.key === 'utilization') {
+			return `${item.value}%`;
 		}
-		return getFormattedAmount(item.value, 'INR');
+		return null;
 	};
 
 	return (
@@ -29,7 +29,7 @@ function ServiceStats({ data = {}, type = '', source = '' }) {
                         ${styles[item.color]}`}
 					>
 						{/* {item.key === 'revenue' ? item.value : `${item.value} %`} */}
-						{renderItem(data[item], item)}
+						{renderItem(item)}
 					</div>
 				</div>
 			))}
