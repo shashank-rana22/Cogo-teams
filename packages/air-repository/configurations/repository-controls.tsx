@@ -1,5 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 const repositoryControls = () => ({
 	basic: [
 		{
@@ -75,9 +73,10 @@ const repositoryControls = () => ({
 			},
 		},
 		{
-			name    : 'inventory_stock_availability',
-			type    : 'select',
-			options : [
+			name        : 'inventory_stock_availability',
+			type        : 'select',
+			placeholder : 'Select...',
+			options     : [
 				{
 					label : 'Before Booking',
 					value : 'before_booking',
