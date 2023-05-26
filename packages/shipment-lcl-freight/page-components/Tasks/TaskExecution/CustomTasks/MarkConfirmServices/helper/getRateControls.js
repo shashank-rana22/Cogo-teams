@@ -1,4 +1,4 @@
-import LCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import LCL_UNITS from '@cogoport/ocean-modules/contants/LCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase } from '@cogoport/utils';
 
