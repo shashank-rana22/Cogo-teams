@@ -9,7 +9,7 @@ import {
 	// UploadCargoArrival,
 	UploadContainerDetails,
 	MarkConfirmServices,
-	UploadDraftBL,
+	CustomerInvoiceDetails,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -24,7 +24,7 @@ function ExecuteTask({
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
-	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const { servicesList, shipment_data, primary_service, getShipmentTimeline } = useContext(ShipmentDetailContext);
 
 	const {
 		steps = [],
@@ -40,6 +40,18 @@ function ExecuteTask({
 	if (loading) {
 		return <div>Loading...</div>;
 	}
+	if (task.task === 'update_customer_invoice_details') {
+		return (
+			<CustomerInvoiceDetails
+				onCancel={onCancel}
+				servicesList={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				refetch={taskListRefetch}
+				getShipmentTimeline={getShipmentTimeline}
+			/>
+		);
+	}
 
 	if (
 		task.service_type
@@ -53,19 +65,6 @@ function ExecuteTask({
 				primaryService={primary_service}
 				shipment_data={shipment_data}
 				servicesList={servicesList}
-			/>
-		);
-	}
-
-	if (
-		task.task === 'upload_draft_bill_of_lading' && primary_service?.trade_type === 'export'
-	) {
-		return (
-			<UploadDraftBL
-				task={task}
-				shipmentData={shipment_data}
-				primaryService={primary_service}
-				selectedMail={selectedMail}
 			/>
 		);
 	}

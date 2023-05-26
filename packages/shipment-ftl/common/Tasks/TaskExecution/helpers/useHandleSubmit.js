@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { startCase } from '@cogoport/utils';
 import { useContext, useState } from 'react';
 
@@ -13,8 +13,6 @@ import getRpaMappings from '../utils/get-rpa-mappings';
 const shipmentRefetchTasks = [
 	'confirm_booking',
 	'mark_confirmed',
-	'upload_draft_bill_of_lading',
-	'update_airway_bill_number',
 ];
 
 function useHandleSubmit({
@@ -117,7 +115,7 @@ function useHandleSubmit({
 				try {
 					const rpaMappings = getRpaMappings(task, shipment_data, rawValues);
 					if (rpaMappings) {
-						await submitShipmentMapping(rpaMappings);
+						// await submitShipmentMapping(rpaMappings);
 					}
 				} catch (err) {
 					toastApiError(err);

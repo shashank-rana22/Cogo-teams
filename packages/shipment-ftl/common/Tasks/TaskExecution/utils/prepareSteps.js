@@ -151,25 +151,6 @@ const evaluateObject = (control, task, shipment_data) => {
 const evaluateCondition = (step, primaryService, task) => {
 	let showStep = true;
 
-	if (task?.task === 'upload_bill_of_lading') {
-		const bl_category = primaryService?.bl_category?.toLowerCase() || 'hbl';
-
-		if (
-			bl_category === 'mbl'
-			&& step?.name === 'house_bill_of_lading'
-			&& primaryService?.service_type !== 'lcl_freight_service'
-		) {
-			showStep = false;
-		}
-	}
-
-	if (task?.task === 'upload_draft_bill_of_lading') {
-		const bl_category = primaryService?.bl_category?.toLowerCase() || 'mbl';
-
-		if (bl_category === 'mbl' && step?.name === 'hbl') {
-			showStep = false;
-		}
-	}
 	return showStep;
 };
 
