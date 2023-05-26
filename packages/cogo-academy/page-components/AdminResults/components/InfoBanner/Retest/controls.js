@@ -24,7 +24,12 @@ const getControls = ({ control, formvalues }) => {
 			show      : formvalues.users_list === 'custom',
 			className : 'channels_field_controller',
 			multiple  : true,
-			options   : [
+			style     : {
+				display    : 'flex',
+				flexShrink : 1,
+				marginLeft : '0px',
+			},
+			options: [
 				{
 					label:
 	<>
@@ -100,6 +105,9 @@ const getControls = ({ control, formvalues }) => {
 			type           : 'date-picker',
 			showTimeSelect : true,
 			rules          : { required: 'This is required' },
+			style          : {
+				paddingTop: '6px',
+			},
 		},
 	];
 	return controls;

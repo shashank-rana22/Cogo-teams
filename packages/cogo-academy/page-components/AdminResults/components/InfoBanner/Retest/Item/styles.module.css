@@ -1,10 +1,45 @@
 .element {
-	:global(.ui_checkbox_group_container) {
-		display: flex;
-		flex-direction: column;
-	}
+  :global {
+    .ui_checkbox_group_container {
+      display: flex;
+      flex-direction: column;
+      padding: 0px !important;
+    }
+
+    .ui_checkbox_style {
+      width: 28px;
+    }
+    .ui_checkbox_container {
+      padding: 6px;
+    }
+    .ui_checkbox_label {
+      margin-left: 0px;
+    }
+
+    .ui_AAj92 {
+      padding: 2px !important;
+      margin-bottom: 4px;
+    }
+
+    .ui_radio_container {
+      padding: 6px;
+    }
+    .ui_radio_label {
+      padding-right: 30px;
+    }
+
+    .ui_checkbox_normal {
+      margin-left: 0px;
+    }
+  }
 }
 
 .sup {
-	color: #f00;
+  color: #f00;
+}
+
+.filters_types {
+  display: flex;
+  flex-shrink: 1;
+  margin-bottom: 8px;
 }
