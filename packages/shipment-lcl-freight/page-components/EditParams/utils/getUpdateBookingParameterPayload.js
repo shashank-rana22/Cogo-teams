@@ -1,9 +1,8 @@
 const dependentServicesArray = [
-	'fcl_freight_local_service',
-	'haulage_freight_service',
-	'trailer_freight_service',
-	'fcl_customs_service',
-	'fcl_cfs_service',
+	'lcl_freight_local_service',
+	'lcl_customs_service',
+	'ftl_freight_service',
+	'ltl_freight_service',
 ];
 
 export default function getUpdateBookingParameterPaylaod({ formValues, shipment_data, serviceData, servicesList }) {

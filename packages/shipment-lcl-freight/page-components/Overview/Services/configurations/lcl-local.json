@@ -1,8 +1,8 @@
 {
-	"name": "trailer_freight_service",
+	"name": "lcl_freight_local_service",
 	"routeInfo": {
 		"origin_pickup": "origin_location",
-		"origin_port": "origin_port",
+		"origin_port": "port",
 		"origin_main_port": "origin_main_port",
 		"destination_main_port": "destination_main_port",
 		"destination_port": "destination_port",
@@ -10,26 +10,28 @@
 	},
 	"possibleFullRoute": [
 		{
-			"service_types": ["trailer_freight_service"],
-			"display": "Trailer Freight",
-			"origin": "origin_location",
-			"destination": "destination_location",
-			"iconType": "land",
-			"type": "truck"
+			"service_types": ["lcl_freight_local_service"],
+			"display": "LCL Local",
+			"origin": "origin_main_port",
+			"alternateOrigin": "origin_port",
+			"destination": "destination_main_port",
+			"alternateDestination": "destination_port",
+			"iconType": "ship",
+			"type": "sea"
 		}
 	],
 	"details": [
 		{
-			"label": "Containers Count",
-			"key": "containers_count"
+			"label": "Packages",
+			"key": "packages_count"
 		},
 		{
-			"label": "Container Size",
-			"key": "container_size"
+			"label": "Volume",
+			"key": "volume"
 		},
 		{
-			"label": "Container Type",
-			"key": "container_type"
+			"label": "Weight",
+			"key": "weight"
 		},
 		{
 			"label": "Commodity",
@@ -37,18 +39,13 @@
 			"type": "commodity"
 		},
 		{
-			"label": "Cargo Description",
-			"key": "commodity_description"
+			"label": "No of Stop",
+			"key": "number_of_stops",
+			"type": "stops"
 		},
 		{
-			"key": "cargo_weight_per_container",
-			"label": "Cargo Weight/Cont.",
-			"type": "cargo"
-		},
-		{
-			"label": "Stuffing date",
-			"key": "stuffing_at",
-			"type": "date"
+			"label": "BL Category",
+			"key": "bl_category"
 		},
 		{
 			"label": "Origin Cargo handling type",
@@ -62,14 +59,20 @@
 			"type": "destination_cargo_handling_type"
 		},
 		{
-			"label": "Pickup date'",
-			"key": "pickup_date",
-			"type": "date"
+			"label": "BL count",
+			"key": "bls_count"
 		},
 		{
-			"label": "Delivery date'",
-			"key": "delivery_date",
-			"type": "date"
+			"label": "BL Type :",
+			"key": "bl_type"
+		},
+		{
+			"label": "Dest. Storage Free Days",
+			"key": "free_days_destination_storage"
+		},
+		{
+			"label": "Origin Storage Free Days",
+			"key": "free_days_origin_storage"
 		},
 		{
 			"key": "refer_humidity",

@@ -1,6 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMEdit } from '@cogoport/icons-react';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useMemo } from 'react';
 
 import EditSchedule from './EditSchedule';
 import { canEditSchedule } from './helpers/canEditSchedule';
@@ -33,6 +33,8 @@ function Timeline() {
 	);
 
 	const totalItems = (filteredTimelineData || []).length;
+	const mapKeys = useMemo(() => Array(totalItems).fill(null).map(() => Math.random()), [totalItems]);
+
 	let consecutivelyCompleted = true;
 
 	if (loading) {
@@ -52,7 +54,7 @@ function Timeline() {
 					consecutivelyCompleted = consecutivelyCompleted && timelineItem.completed_on;
 					return (
 						<TimelineItem
-							key={timelineItem?.milestone}
+							key={mapKeys[index]}
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
 							isLast={totalItems === index + 1}

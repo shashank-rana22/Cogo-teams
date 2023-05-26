@@ -1,7 +1,7 @@
 {
-	"name": "fcl_cfs_service",
+	"name": "lcl_customs_service",
 	"routeInfo": {
-		"origin_pickup": "origin_location",
+		"origin_pickup": "location",
 		"origin_port": "port",
 		"origin_main_port": "origin_main_port",
 		"destination_main_port": "destination_main_port",
@@ -10,8 +10,8 @@
 	},
 	"possibleFullRoute": [
 		{
-			"service_types": ["fcl_cfs_service"],
-			"display": "FCL CFS",
+			"service_types": ["lcl_customs_service"],
+			"display": "LCL Customs",
 			"origin": "port",
 			"iconType": "customs",
 			"type": "customs"
@@ -19,51 +19,22 @@
 	],
 	"details": [
 		{
-			"label": "Containers Count",
-			"key": "containers_count"
-		},
-		{
-			"label": "Container Size",
-			"key": "container_size"
-		},
-		{
-			"label": "Container Type",
-			"key": "container_type"
-		},
-		{
 			"label": "Commodity",
-			"key": "commodity",
-			"type": "commodity"
+			"key": "commodity"
 		},
 		{
-			"label": "AD Code",
-			"key": "ad_code"
+			"label": "Packages",
+			"key": "packages_count"
 		},
 		{
-			"key": "cargo_weight_per_container",
-			"label": "Cargo Weight/Cont.",
-			"type": "cargo"
-		},
-		{
-			"label": "Cargo handling Type",
-			"key": "cargo_handling_type"
-		},
-		{
-			"label": "Origin Cargo handling type",
-			"key": "origin_cargo_handling_type",
-			"type": "origin_cargo_handling_type"
-		},
-		{
-			"label": "Destination Cargo handling type",
-			"key": "destination_cargo_handling_type",
-			"type": "destination_cargo_handling_type"
+			"label": "Trade type",
+			"key": "trade_type"
 		},
 		{
 			"label": "Stuffing at",
 			"key": "stuffing_at",
 			"type": "date",
 			"isShowKey":true
-
 		},
 		{
 			"key": "refer_humidity",

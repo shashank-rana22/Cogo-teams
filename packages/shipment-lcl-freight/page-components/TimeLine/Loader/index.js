@@ -1,5 +1,4 @@
 import { Placeholder } from '@cogoport/components';
-import { v4 as uuid } from 'uuid';
 
 import { container, big_circle, small_circle } from './styles.module.css';
 
@@ -13,8 +12,8 @@ export default function Loader() {
 			<Placeholder className={big_circle} />
 			{Array(16).fill(null).map(() => (
 				<>
-					<Placeholder height="2px" style={{ flex: 1 }} key={uuid()} />
-					<Placeholder className={rendomBoolean() ? big_circle : small_circle} key={uuid()} />
+					<Placeholder height="2px" style={{ flex: 1 }} />
+					<Placeholder className={rendomBoolean() ? big_circle : small_circle} />
 				</>
 			))}
 		</div>
