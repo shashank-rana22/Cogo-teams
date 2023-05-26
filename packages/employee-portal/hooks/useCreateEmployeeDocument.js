@@ -24,6 +24,7 @@ function useCreateEmployeeDocument({ documents, getEmployeeDetails }) {
 				data: payload,
 			});
 			getEmployeeDetails();
+			Toast.success('Details and Documents have been saved successfully!');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}

@@ -1,5 +1,6 @@
-import { Accordion } from '@cogoport/components';
+import { Accordion, Pill } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import BankDetails from './BankDetails';
 import EducationalQualification from './EducationalQualification';
@@ -7,14 +8,30 @@ import EmploymentHistory from './EmploymentHistory';
 import Resume from './Resume';
 import styles from './styles.module.css';
 
-const content_mapping = [
-	{ title: 'EMPLOYMENT HISTORY', content: EmploymentHistory },
-	{ title: 'EDUCATIONAL QUALIFICATION', content: EducationalQualification },
-	{ title: 'RESUME', content: Resume },
-	{ title: 'BANK DETAILS', content: BankDetails },
-];
-
 function AdditionalInformation({ setInformationPage, data }) {
+	const content_mapping = [
+		{
+			title   : 'EMPLOYMENT HISTORY',
+			content : EmploymentHistory,
+			key     : 'data?.detail?.employee_experience_details',
+		},
+		{
+			title   : 'EDUCATIONAL QUALIFICATION',
+			content : EducationalQualification,
+			key     : 'data?.detail?.employee_education_details',
+		},
+		{
+			title   : 'RESUME',
+			content : Resume,
+			key     : 'documents',
+		},
+		{
+			title   : 'BANK DETAILS',
+			content : BankDetails,
+			key     : 'bank_details',
+		},
+	];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -30,7 +47,14 @@ function AdditionalInformation({ setInformationPage, data }) {
 			<div className={styles.subcontainer}>
 
 				{content_mapping.map((item) => {
-					const { content: Component } = item;
+					const { content: Component, key } = item;
+
+					const getStatus = () => {
+						if (isEmpty(data[key])) {
+							return false;
+						}
+						return true;
+					};
 
 					return (
 						<div
@@ -40,7 +64,15 @@ function AdditionalInformation({ setInformationPage, data }) {
 						>
 							<Accordion
 								type="text"
-								title={item.title}
+								title={(
+									<div className={styles.status}>
+										<div className={styles.accordion_title}>{item.title}</div>
+										<Pill color="green">
+											{getStatus()
+												? 'Completed' : 'Pending'}
+										</Pill>
+									</div>
+								)}
 								animate
 							>
 								<Component data={data} />
