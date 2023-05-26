@@ -2,22 +2,24 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useBulkUpdateRfqState = () => {
+const useUpdateRfqState = () => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/bulk_update_rfq_state',
+		url    : '/update_rfq_state',
 		method : 'POST',
 	}, { manual: true });
 
-	const bulkUpdateRfqState = async ({ payload }) => {
+	const updateRfqState = async ({ rfq_id = '', setShow }) => {
 		try {
 			const response = await trigger({
 				data: {
-					rfq_ids : payload,
-					state   : 'requested_for_approval',
+					rfq_id,
+					state: 'approved',
 				},
 			});
+
 			if (response.status === 200) {
-				Toast.success('Approved the RFQS');
+				Toast.success('Approved the RFQ');
+				setShow(false);
 			}
 		} catch (error) {
 			if (error?.response) {
@@ -27,9 +29,9 @@ const useBulkUpdateRfqState = () => {
 	};
 
 	return {
-		bulkUpdateRfqState,
+		updateRfqState,
 		loading,
 	};
 };
 
-export default useBulkUpdateRfqState;
+export default useUpdateRfqState;
