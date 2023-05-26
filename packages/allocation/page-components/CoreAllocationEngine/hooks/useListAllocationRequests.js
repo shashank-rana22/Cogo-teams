@@ -25,12 +25,13 @@ const useListAllocationRequests = () => {
 	};
 
 	const [params, setParams] = useState({
-		sort_by       : 'created_at',
-		sort_type     : 'desc',
-		page_limit    : 10,
-		page          : 1,
-		data_required : true,
-		filters       : {
+		sort_by                        : 'created_at',
+		sort_type                      : 'desc',
+		page_limit                     : 10,
+		page                           : 1,
+		data_required                  : true,
+		organization_sub_type_required : true,
+		filters                        : {
 			status       : 'pending',
 			service_type : 'organization',
 			q            : searchQuery || undefined,
@@ -224,7 +225,7 @@ const useListAllocationRequests = () => {
 			Header   : 'Previous Agent',
 			accessor : ({ old_stakeholder }) => (
 				<div className={styles.value_container}>
-					{old_stakeholder?.name || '___'}
+					<div>{old_stakeholder?.name || '___'}</div>
 					<div className={styles.email_id}>{old_stakeholder?.email || '___'}</div>
 				</div>
 			),
