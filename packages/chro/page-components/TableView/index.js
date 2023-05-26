@@ -1,22 +1,27 @@
-import { Modal, Button,Pagination } from '@cogoport/components';
+import { Modal, Button, Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import StyledTable from '../StyledTable';
-import useGetTableView from './useGetTableView'
+
+import CtcBreakup from './CtcBreakup';
 import getColumns from './getColumns';
 import styles from './styles.module.css';
+import useGetTableView from './useGetTableView';
+import useUpdateOfferLetter from './useUpdateOfferLetter';
 
 function TableView({ search }) {
 	const [ctcBreakup, setCtcBreakup] = useState();
 
-	const columns = getColumns(setCtcBreakup);
+	const {} = useUpdateOfferLetter();
 
-	const {data = {},onPageChange} = useGetTableView()
-	console.log('data',data)
+	const columns = getColumns({ setCtcBreakup, ctcBreakup });
 
-	const{ list = [],page, page_limit, total_count} = data
+	const { data = {}, onPageChange } = useGetTableView();
+	console.log('search', search);
 
-	const {metadata = {}} = ctcBreakup || {}
+	const { list = [], page, page_limit, total_count } = data;
+
+	const { metadata = {} } = ctcBreakup || {};
 	return (
 		<div className={styles.table_container}>
 			<StyledTable columns={columns} data={list} />
@@ -39,12 +44,8 @@ function TableView({ search }) {
 			>
 				<Modal.Header title="Are you sure?" />
 				<Modal.Body>
-				{metadata?.init}
-					et consectetur adipisicing elit. Quis, assumenda. Hic ipsam doloremque assumenda et soluta expedita
-					consequuntur, voluptates tenetur rem obcaecati sapiente aliquam animi voluptas. Pariatur eaque aut s
-					Lorem ipsum, dolor sit amet consectetur adipisicing elit. Quis, assumenda. Hic ipsam doloremque assu
-					et soluta expedita consequuntur, voluptates tenetur rem obcaecati sapiente aliquam animi voluptas.
-					Pariatur eaque aut sunt?
+					{metadata?.init}
+					<CtcBreakup metadata={metadata} />
 				</Modal.Body>
 				<Modal.Footer>
 					<Button onClick={() => setCtcBreakup('')}>OK</Button>

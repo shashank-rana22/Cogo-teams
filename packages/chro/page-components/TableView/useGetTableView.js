@@ -2,12 +2,9 @@ import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-
 function useGetTableView() {
-
-
 	const [params, setParams] = useState({
-		
+
 	});
 
 	const [{ data, loading }, refetch] = useRequest({
@@ -15,7 +12,6 @@ function useGetTableView() {
 		url    : '/list_employee_offer_letters',
 		params,
 	}, { manual: false });
-
 
 	const formProps = useForm();
 

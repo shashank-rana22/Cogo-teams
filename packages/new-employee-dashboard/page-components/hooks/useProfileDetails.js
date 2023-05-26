@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import {
@@ -10,6 +11,9 @@ import {
 } from '../../utils/ctc-modal-controls';
 
 const useProfileDetails = () => {
+	const { query } = useSelector((state) => state.general);
+	const { profile_id } = query || {};
+
 	const [ctcStructure, setCtcStructure] = useState({
 		basic                : { heading: 'basic', yearlyValue: 0, monthlyValue: 0 },
 		hra                  : { heading: 'hra', yearlyValue: 0, monthlyValue: 0 },
@@ -109,11 +113,9 @@ const useProfileDetails = () => {
 		}
 	}, [initialQuestion]);
 
-	const id = '85cdcf6b-bd52-4fea-b136-12e377c48ecc';
-
 	const params = {
-		id,
-		document_data_required: true,
+		id                     : profile_id,
+		document_data_required : true,
 	};
 
 	const [{ loading, data }, trigger] = useHarbourRequest(
