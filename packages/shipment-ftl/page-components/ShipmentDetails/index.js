@@ -10,6 +10,7 @@ import React, { useMemo, useState, useEffect, useCallback } from 'react';
 import Documents from '../../common/Documents';
 import Overview from '../../common/Overview';
 import PocSop from '../../common/PocSop';
+import SalesInvoice from '../../common/SalesInvoice';
 import ShipmentHeader from '../../common/ShipmentHeader';
 import Tasks from '../../common/Tasks';
 import Timeline from '../../common/TimeLine';
@@ -126,6 +127,10 @@ function ShipmentDetails() {
 
 						<TabPanel name="tasks" title="Tasks">
 							<Tasks />
+						</TabPanel>
+
+						<TabPanel name="invoice_and_quotation" title="Sales Invoice">
+							<SalesInvoice />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
