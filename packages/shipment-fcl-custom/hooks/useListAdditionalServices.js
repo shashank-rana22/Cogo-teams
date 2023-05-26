@@ -8,7 +8,7 @@ const useListAdditionalServices = ({ shipment_data = {}, pageLimit = 8, filters 
 	const { id:shipment_id = '' } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_local/list_additional_services',
+		url    : 'fcl_customs/list_additional_services',
 		params : {
 			filters: {
 				shipment_id,

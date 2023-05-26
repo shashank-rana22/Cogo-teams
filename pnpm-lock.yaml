@@ -1143,25 +1143,33 @@ importers:
     specifiers:
       '@cogoport/components': ^1.0.422
       '@cogoport/context': workspace:^0.1.0
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.75
+      '@cogoport/navigation-configs': workspace:^0.1.0
+      '@cogoport/next': workspace:^0.1.0
       '@cogoport/ocean-modules': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
+      '@cogoport/shipment-mails': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.10
-      components: link:@cogoport/@cogoport/components
       react: 18.2.0
-      utils: link:@cogoport/@cogoport/utils
       "utils\n": |
         link:@cogoport/utils
     dependencies:
       '@cogoport/components': 1.0.422_guhuyhrafl7yprlcl7n6dekiki
       '@cogoport/context': link:../../common/context
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/navigation-configs': link:../../common/navigation-configs
+      '@cogoport/next': link:../../common/next
       '@cogoport/ocean-modules': link:../../common/ocean-modules
       '@cogoport/request': link:../../common/request
+      '@cogoport/shipment-mails': link:../../common/shipment-mails
+      '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
-      components: link:@cogoport/@cogoport/components
       react: 18.2.0
-      utils: link:@cogoport/@cogoport/utils
       "utils\n": |
         link:@cogoport/utils
 

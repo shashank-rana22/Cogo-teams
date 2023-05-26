@@ -4,7 +4,7 @@ import { useEffect, useCallback, useState } from 'react';
 
 function useGetServices({ shipment_data = {}, additional_methods = [] }) {
 	const [{ loading : servicesLoading }, trigger] = useRequest({
-		url    : 'fcl_local/get_services',
+		url    : 'fcl_customs/get_services',
 		method : 'GET',
 	}, { manual: true });
 

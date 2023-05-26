@@ -9,7 +9,7 @@ function useGetShipment({ additional_methods = [] }) {
 	const { shipment_id } = router.query;
 
 	const [{ loading : isGettingShipment, data }, trigger] = useRequest({
-		url    : 'fcl_local/get_shipment',
+		url    : 'fcl_customs/get_shipment',
 		method : 'GET',
 	}, { manual: true });
 

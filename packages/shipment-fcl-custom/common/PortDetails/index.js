@@ -1,24 +1,14 @@
 import { cl, Tooltip } from '@cogoport/components';
-import { IcMPortArrow, IcCFclLocals } from '@cogoport/icons-react';
-import { format, isEmpty } from '@cogoport/utils';
+import { IcMCustoms } from '@cogoport/icons-react';
 import React from 'react';
-
-import { getOceanLocationInfo } from '../../helpers/getOceanLocaltionInfo';
 
 import styles from './styles.module.css';
 
 function PortDetails({ primary_service = {} }) {
 	const {
 
-		schedule_arrival = '',
-		schedule_departure = '',
-		trade_type = '',
+		port = {},
 	} = primary_service;
-
-	const { origin_port, destination_port } = getOceanLocationInfo(
-		primary_service,
-		trade_type,
-	);
 
 	const handleLocationDetails = (location) => (
 		<>
@@ -52,45 +42,17 @@ function PortDetails({ primary_service = {} }) {
 
 	const renderLocation = () => (
 
-		<>
-			<div className={styles.flex_row_origin}>
-				{handleLocationDetails(origin_port)}
-				{ schedule_departure ? (
-					<div className={styles.date}>
-						ETD: &nbsp;
-						{format(schedule_departure, 'dd MMM yyyy', null, true)}
-					</div>
-				) : null}
+		<div className={styles.flex_row_origin}>
+			{handleLocationDetails(port)}
 
-			</div>
-
-			{ !isEmpty(destination_port) ? (
-				<>
-					<div className={styles.icon_wrapper}>
-						<IcMPortArrow className="core_ui_icon" />
-					</div>
-
-					<div className={styles.flex_row_destination}>
-						{handleLocationDetails(destination_port)}
-						{ schedule_arrival ? (
-							<div className={styles.date}>
-								ETA: &nbsp;
-								{format(schedule_arrival, 'dd MMM yyyy', null, true)}
-							</div>
-						) : null}
-					</div>
-				</>
-			)
-				: null }
-
-		</>
+		</div>
 	);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.icons_and_service}>
-				<IcCFclLocals />
-				<span>FCL Locals</span>
+				<IcMCustoms />
+				<span>FCL Customs</span>
 			</div>
 			{renderLocation()}
 		</div>

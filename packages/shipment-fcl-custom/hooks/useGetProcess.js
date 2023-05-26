@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 function useGetShipmentProcess({ defaultParams = {} }) {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_local/get_process',
+		url    : 'fcl_customs/get_process',
 		method : 'GET',
 		params : {
 			...defaultParams,

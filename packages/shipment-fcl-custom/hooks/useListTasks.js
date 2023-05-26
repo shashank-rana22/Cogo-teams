@@ -26,7 +26,7 @@ function useListTasks({
 	const showTaskFilters = stakeholder ? { [`${stakeholder}_id`]: user_id } : {};
 
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_local/list_tasks',
+		url    : 'fcl_customs/list_tasks',
 		method : 'GET',
 		params : {
 			...defaultParams,

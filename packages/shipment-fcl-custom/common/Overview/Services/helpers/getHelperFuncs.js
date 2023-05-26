@@ -17,22 +17,12 @@ const helperFuncs = (servicesList, possibleServices) => {
 		destinationServices : {},
 	};
 
-	const upsellServices = {
-		originServices      : [],
-		mainServices        : [],
-		destinationServices : [],
-	};
-
 	const classifyTradeTypeBasedService = (serviceToIterate) => {
-		let isServiceAlreadyAdded = false;
-
 		(servicesList || []).forEach((service) => {
 			const { service_type, trade_type } = service || {};
 			if (service_type === serviceToIterate.service_type
 				&& ((serviceToIterate.trade_type === trade_type)
 				|| (service_type === 'fcl_freight_service'))) {
-				isServiceAlreadyAdded = true;
-
 				if (trade_type === 'export' && !serviceToIterate.is_main) {
 					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.originServices, service);
 
@@ -91,22 +81,6 @@ const helperFuncs = (servicesList, possibleServices) => {
 				}
 			}
 		});
-
-		if (!isServiceAlreadyAdded) {
-			if (serviceToIterate.trade_type === 'export' && !serviceToIterate?.is_main) {
-				(upsellServices.originServices).push({
-					...serviceToIterate,
-				});
-			} else if (serviceToIterate.trade_type === 'import' && !serviceToIterate?.is_main) {
-				(upsellServices.destinationServices).push({
-					...serviceToIterate,
-				});
-			} else {
-				(upsellServices.mainServices).push({
-					...serviceToIterate,
-				});
-			}
-		}
 	};
 
 	possibleServices.forEach((service) => {
@@ -115,7 +89,6 @@ const helperFuncs = (servicesList, possibleServices) => {
 
 	return {
 		serviceObj,
-		upsellServices,
 	};
 };
 
