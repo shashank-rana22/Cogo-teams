@@ -11,24 +11,25 @@ import styles from './styles.module.css';
 function AdditionalInformation({ setInformationPage, data }) {
 	const content_mapping = [
 		{
-			title   : 'EMPLOYMENT HISTORY',
-			content : EmploymentHistory,
-			key     : 'data?.detail?.employee_experience_details',
+			title     : 'EMPLOYMENT HISTORY',
+			content   : EmploymentHistory,
+			isPending : isEmpty(data?.detail?.employee_experience_details),
 		},
 		{
-			title   : 'EDUCATIONAL QUALIFICATION',
-			content : EducationalQualification,
-			key     : 'data?.detail?.employee_education_details',
+			title     : 'EDUCATIONAL QUALIFICATION',
+			content   : EducationalQualification,
+			isPending : isEmpty(data?.detail?.employee_education_details),
 		},
 		{
-			title   : 'RESUME',
-			content : Resume,
-			key     : 'documents',
+			title     : 'RESUME',
+			content   : Resume,
+			isPending : isEmpty(data?.documents),
 		},
 		{
-			title   : 'BANK DETAILS',
-			content : BankDetails,
-			key     : 'bank_details',
+			title     : 'BANK DETAILS',
+			content   : BankDetails,
+			key       : 'bank_details',
+			isPending : isEmpty(data?.bank_details),
 		},
 	];
 
@@ -47,10 +48,10 @@ function AdditionalInformation({ setInformationPage, data }) {
 			<div className={styles.subcontainer}>
 
 				{content_mapping.map((item) => {
-					const { content: Component, key } = item;
+					const { content: Component, isPending } = item;
 
 					const getStatus = () => {
-						if (isEmpty(data[key])) {
+						if (data[isPending]) {
 							return false;
 						}
 						return true;

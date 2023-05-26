@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Pill } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
@@ -12,6 +12,18 @@ import styles from './styles.module.css';
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
 	return rest;
+};
+
+const COLOR_MAPPING = {
+	approved : 'green',
+	rejected : 'red',
+	active   : 'orange',
+};
+
+const MAPPING = {
+	approved : 'Approved',
+	rejected : 'Rejected',
+	active   : 'Waiting for Approval',
 };
 
 function IdentificationDocuments({ data, getEmployeeDetails }) {
@@ -43,6 +55,16 @@ function IdentificationDocuments({ data, getEmployeeDetails }) {
 		setValue('driving_license_number', driving_license?.document_number);
 	}, [documents, aadhaar_card, driving_license, pan_card, passport, setValue]);
 
+	const finalControls = controls.map((singleControl) => {
+		const { verification_key } = singleControl;
+
+		if (component?.[verification_key]?.status === 'approved') {
+			return { ...singleControl, disabled: true, status: component?.[verification_key]?.status || '' };
+		}
+
+		return { ...singleControl, status: component?.[verification_key]?.status || '' };
+	});
+
 	const onSubmit = (values) => {
 		const doc = Object.keys(component).map((item) => {
 			const docNumber = `${item}_number`;
@@ -71,15 +93,29 @@ function IdentificationDocuments({ data, getEmployeeDetails }) {
 				Please upload the identification documents and enter the corresponding details !
 			</div>
 			<div className={styles.container}>
-				{controls?.map((controlItem) => {
-					const { type, label, name: controlName } = controlItem || {};
+				{finalControls?.map((controlItem) => {
+					const { type, label, name: controlName, status = '' } = controlItem || {};
 					const Element = getElementController(type);
 
 					return (
 						<div key={controlName} className={styles.control_container}>
 							<div className={styles.label}>
 								{label}
-								<sup className={styles.sup}>*</sup>
+
+								{status ? (
+									<Pill size="md" color={COLOR_MAPPING[status] || 'green'}>
+										{MAPPING[status]}
+									</Pill>
+								) : null}
+
+								{[
+									'aadhaar_card_number',
+									'aadhaar_card',
+									'pan_card_number',
+									'pan_card',
+								].includes(controlName) && status !== 'approved' ? (
+									<sup className={styles.sup}>*</sup>
+									) : null}
 							</div>
 
 							<div className={styles.control}>
