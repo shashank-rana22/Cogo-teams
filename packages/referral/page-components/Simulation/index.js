@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { NETWORK_EMPTY_STATE } from '../../constants';
+import useGetSimulation from '../../hooks/useGetSimulation';
 
 import MyResponsiveScatterPlot from './DiameterGraph';
 import styles from './styles.module.css';
@@ -12,7 +13,7 @@ const loading = false;
 const emptyState = false;
 
 function LevelPayouts({ data }) {
-	const levelData = data?.item?.data?.dummyLevel;
+	const levelData = data?.item?.data?.levelsData;
 	const checkLevelEmptyState = isEmpty(levelData);
 
 	if (checkLevelEmptyState) {
@@ -35,7 +36,7 @@ function LevelPayouts({ data }) {
 						className={styles.payouts}
 						key={item}
 					>
-						<div className={cl`${styles.single_payouts} ${styles.network_level}`}>{item.level}</div>
+						<div className={cl`${styles.single_payouts} ${styles.network_level}`}>{item.levels}</div>
 						<div className={cl`${styles.single_payouts} ${styles.payouts_level}`}>{item.payouts}</div>
 					</div>
 				))}
@@ -121,6 +122,10 @@ function SimulationGraphs() {
 
 function Simulation() {
 	const [activeTab, setActiveTab] = useState('shipment');
+
+	const { data = {} } = useGetSimulation({ activeTab });
+	console.log('data:', data);
+
 	return (
 		<Tabs
 			activeTab={activeTab}

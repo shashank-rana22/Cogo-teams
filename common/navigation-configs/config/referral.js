@@ -10,7 +10,7 @@ const referral = {
 	},
 	'/[partner_id]/referral/simulation': {
 		layoutType : 'no_header',
-		navigation : 'referral-dashboard',
+		navigation : 'referral-simulation',
 		isMainNav  : true,
 	},
 };

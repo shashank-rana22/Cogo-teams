@@ -12260,6 +12260,13 @@ const partner = {
 			service_name : 'referral',
 		},
 	],
+	referral_simulation: [
+		{
+			api          : 'get_referral_simulation',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
 	air_repository: [
 		{
 			api          : 'list_shipment_service_ops_repository',
