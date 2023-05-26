@@ -35,7 +35,7 @@ function Quota({ quotaInfo = {}, modalChangeHandler }) {
 			<div className={cl`${styles.flex_box} ${styles.footer}`}>
 				<Button
 					themeType="secondary"
-					type="submit"
+					type="button"
 					onClick={() => modalChangeHandler(false)}
 					loading={loading}
 				>
@@ -43,7 +43,7 @@ function Quota({ quotaInfo = {}, modalChangeHandler }) {
 				</Button>
 				<Button
 					themeType="accent"
-					type="submit"
+					type="button"
 					className={styles.save_btn}
 					onClick={handleSubmit(submitHandler)}
 					loading={loading}

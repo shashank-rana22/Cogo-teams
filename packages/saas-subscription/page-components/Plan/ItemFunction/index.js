@@ -1,5 +1,6 @@
 import { Pill } from '@cogoport/components';
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 const STATUS_MAPPING = {
 	true  : { label: 'Active', color: 'green' },
@@ -17,7 +18,14 @@ const itemFunction = {
 		return <span>{product_family?.product_family_name}</span>;
 	},
 	renderDate: (item, config) => (
-		<span>{format(item?.[config.key], 'dd-MM-yyy')}</span>
+		<span>
+			{formatDate({
+				date       : item?.[config.key],
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+				formatType : 'date',
+			})}
+
+		</span>
 	),
 	renderExtraDetails: (item) => {
 		const isActive = item?.is_active;

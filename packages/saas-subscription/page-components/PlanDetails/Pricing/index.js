@@ -6,7 +6,7 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Pricing({ pricing = [], loading = false }) {
-	const updatePricing = loading ? [1, 2, 3, 4] : pricing;
+	const updatePricing = loading ? [...Array(4).keys()] : pricing;
 	return (
 		<div className={styles.container}>
 			<h3>Pricing</h3>

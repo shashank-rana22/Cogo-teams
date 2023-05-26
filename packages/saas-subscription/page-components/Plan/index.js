@@ -13,7 +13,7 @@ function Plan() {
 
 	const { loading = false, planList = {}, pageChangeHandler } = useGetPlanList();
 	const { list = [], page = 0, page_limit = 0, total_count = 0 } = planList || {};
-	const newList = loading ? [1, 2, 3, 4, 5] : list;
+	const newList = loading ? [...Array(5).keys()] : list;
 
 	const redirectHandler = (id) => {
 		push('/saas-subscription/plan/[plan_id]', `/saas-subscription/plan/${id}`);

@@ -1,4 +1,4 @@
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 const itemFunctions = {
 	renderName: (item, config) => (
@@ -6,9 +6,6 @@ const itemFunctions = {
 	),
 	renderNumber: (item, config) => (
 		<span>{item?.[config?.key] || '--'}</span>
-	),
-	renderDate: (item, config) => (
-		<span>{format(item?.[config.key], 'dd-MM-yyy')}</span>
 	),
 };
 

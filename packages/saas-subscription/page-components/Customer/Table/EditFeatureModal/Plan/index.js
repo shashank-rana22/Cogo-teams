@@ -28,7 +28,7 @@ function Plan({ subscriptionId = '', modalChangeHandler }) {
 			<div className={cl`${styles.flex_box} ${styles.footer}`}>
 				<Button
 					themeType="secondary"
-					type="submit"
+					type="button"
 					loading={loading}
 					onClick={() => modalChangeHandler(false)}
 				>
@@ -36,7 +36,7 @@ function Plan({ subscriptionId = '', modalChangeHandler }) {
 				</Button>
 				<Button
 					themeType="accent"
-					type="submit"
+					type="button"
 					className={styles.save_btn}
 					loading={loading}
 					onClick={changePlanHandler}

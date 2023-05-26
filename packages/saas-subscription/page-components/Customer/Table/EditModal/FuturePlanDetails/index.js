@@ -1,5 +1,7 @@
 import { Pill } from '@cogoport/components';
-import { format, isEmpty } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -16,7 +18,14 @@ function FuturePlanDetails({ future = {} }) {
 						<Pill color="orange">{name}</Pill>
 						<div className={styles.date_container}>
 							<div className={styles.date_title}>Start Date:</div>
-							<div className={styles.date_title}>{format(start_date, 'dd-MM-yyyy')}</div>
+							<div className={styles.date_title}>
+								{formatDate({
+									data       : start_date,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+									formatType : 'date',
+								})}
+
+							</div>
 						</div>
 					</div>
 				)

@@ -1,5 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 
 const itemFunction = ({ setEditModal }) => ({
 	renderId: (item) => {
@@ -23,7 +24,11 @@ const itemFunction = ({ setEditModal }) => ({
 		const { end_date = '' } = active_subscription || {};
 		return (
 			<span>
-				{end_date ? format(end_date, 'dd-MM-yyy') : '--' }
+				{end_date ? formatDate({
+					data       : end_date,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+					formatType : 'date',
+				}) : '--'}
 			</span>
 		);
 	},

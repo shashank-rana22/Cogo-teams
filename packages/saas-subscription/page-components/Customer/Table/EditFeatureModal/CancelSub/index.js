@@ -11,7 +11,7 @@ function CancelSub({ subscriptionId = '', modalChangeHandler }) {
 			<div className={styles.button_container}>
 				<Button
 					themeType="secondary"
-					type="submit"
+					type="button"
 					size="sm"
 					loading={loading}
 					onClick={() => modalChangeHandler(false)}
@@ -20,7 +20,7 @@ function CancelSub({ subscriptionId = '', modalChangeHandler }) {
 				</Button>
 				<Button
 					themeType="accent"
-					type="submit"
+					type="button"
 					size="sm"
 					className={styles.save_btn}
 					onClick={() => cancelSubscriptionHandler(subscriptionId)}

@@ -11,7 +11,8 @@ const useGetPlanDetails = ({ featureModal }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : '/get_saas_plan_details',
-	}, { manual: true });
+		params : { id: plan_id },
+	}, { manual: false });
 
 	// getting cancel error by removing async await
 	const refetchPlanDetails = useCallback(async () => {
@@ -20,15 +21,11 @@ const useGetPlanDetails = ({ featureModal }) => {
 				params: {
 					id: plan_id,
 				},
-			});
+			}); g;
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}
 	}, [plan_id, trigger]);
-
-	useEffect(() => {
-		refetchPlanDetails();
-	}, [refetchPlanDetails]);
 
 	useEffect(() => {
 		if (apiCall) { refetchPlanDetails(); }

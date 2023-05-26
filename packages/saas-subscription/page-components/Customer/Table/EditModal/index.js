@@ -11,11 +11,10 @@ import FuturePlanDetails from './FuturePlanDetails';
 import QuotaDetails from './QuotaDetails';
 import styles from './styles.module.css';
 
-const GetDetailValue = ({ name, pricing = {}, product_family = {} }) => {
+const getDetailValue = ({ name, pricing = {}, product_family = {} }) => {
 	if (name === 'plan_details') return startCase(pricing?.name);
 	return startCase(product_family?.product_family_name);
 };
-const { image_url } = GLOBAL_CONSTANTS;
 
 function EditModal({ editModal, setEditModal }) {
 	const { open = false, info = {} } = editModal;
@@ -39,7 +38,7 @@ function EditModal({ editModal, setEditModal }) {
 							width={100}
 							height={100}
 							className={styles.cogoloader}
-							src={image_url.loading}
+							src={GLOBAL_CONSTANTS.image_url.saas_subscription_loading}
 							alt="loading"
 						/>
 					</div>
@@ -66,7 +65,7 @@ function EditModal({ editModal, setEditModal }) {
 					<div className={styles.flex_box}>
 						<Button
 							onClick={() => editModalChangeHandler('editPlan', id)}
-							type="submit"
+							type="button"
 						>
 							Change Plan
 						</Button>
@@ -76,7 +75,7 @@ function EditModal({ editModal, setEditModal }) {
 							themeType="secondary"
 							disabled={plan?.plan_name === 'starter-pack'}
 							onClick={() => editModalChangeHandler('editCancelSub', id)}
-							type="submit"
+							type="button"
 						>
 							Cancel Subscription
 						</Button>
@@ -89,7 +88,7 @@ function EditModal({ editModal, setEditModal }) {
 							<div className={styles.detail_title}>{DETAILS_MAPPING[detail]}</div>
 
 							<div className={styles.detail_content}>
-								<GetDetailValue name={detail} pricing={pricing} product_family={product_family} />
+								{getDetailValue({ name: detail, pricing, product_family })}
 							</div>
 						</div>
 					))}

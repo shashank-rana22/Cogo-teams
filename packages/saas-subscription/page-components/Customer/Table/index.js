@@ -20,7 +20,7 @@ function Table({ userList = {}, loading = false, setGlobalFilters }) {
 
 	const functions = itemFunction({ setEditModal });
 
-	const newList = loading ? [1, 2, 3, 4, 5] : list;
+	const newList = loading ? [...Array(5).keys()] : list;
 
 	const pageChangeHandler = (v) => {
 		setGlobalFilters((prev) => ({ ...prev, page: v }));

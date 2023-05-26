@@ -6,7 +6,7 @@ import itemFunctions from '../../../utils/itemFunctions';
 import styles from './styles.module.css';
 
 function PlanFeature({ title, list = [], configs, loading = false, setFeatureModal, name }) {
-	const updateList = loading ? [1, 2, 3, 4] : list;
+	const updateList = loading ? [...Array(4).keys()] : list;
 	return (
 		<div className={styles.container}>
 			<div className={cl`${styles.flex_box} ${styles.header_container}`}>
