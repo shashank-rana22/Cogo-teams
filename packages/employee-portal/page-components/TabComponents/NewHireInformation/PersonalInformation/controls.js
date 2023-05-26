@@ -104,9 +104,8 @@ const controls = () => ([
 		type        : 'textarea',
 		placeholder : 'Address',
 		style       : {
-			height: '200%',
+			height: '150%',
 		},
-		rules: { required: 'This is required' },
 	},
 	{
 		name        : 'cogoport_email',
