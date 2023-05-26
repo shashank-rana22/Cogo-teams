@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function ConfirmationModal({
 	setConfirmation = () => {},
-	handleFinalSubmit = () => { },
+	handleFinalSubmit = () => {},
 	loading = false,
 }) {
 	return (
