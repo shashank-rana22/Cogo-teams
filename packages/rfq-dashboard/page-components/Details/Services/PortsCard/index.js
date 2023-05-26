@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 
 import ServiceStats from '../../../../common/ServiceStats';
 import { priceBreakupChildData } from '../../../../configurations/price-breakup-card-child-data';
-import { PromisedConAndContract } from '../../../../configurations/service-stats-data';
 import useGetRfqRateCardDetails from '../../../../hooks/useGetRfqRateCardDetails';
 import useUpdateRfqRateMargin from '../../../../hooks/useUpdateRfqRateMargin';
 import BreakdownDetails from '../BreakdownDetails';
@@ -12,7 +11,6 @@ import BreakdownDetails from '../BreakdownDetails';
 import CommodityMapping from './CommodityMapping';
 import LoaderPortsCard from './LoaderPortsCard';
 import LocationDetails from './LocationDetails';
-import PriceBreakupCard from './PriceBreakupCard';
 import PriceFreightCtr from './PriceFrieghtCtr';
 import styles from './styles.module.css';
 
