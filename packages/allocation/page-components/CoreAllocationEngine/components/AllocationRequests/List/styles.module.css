@@ -57,6 +57,14 @@
     color: #888fd1;
 }
 
+.role_name {
+    color: var(--color-tertiary-lavendar-2);
+}
+
+.sub_type {
+    min-width: 100px;
+}
+
 .created_date {
     display: flex;
     font-size: 12px;
@@ -97,5 +105,5 @@
 }
 
 .rejection_container {
-	height: 160px;
+    height: 160px;
 }
