@@ -80,6 +80,7 @@ function useHandleSubmit({
 			finalPayload = extraApiPayload(
 				rawValues,
 				finalConfig?.end_point,
+				task,
 			);
 
 			finalPayload = {

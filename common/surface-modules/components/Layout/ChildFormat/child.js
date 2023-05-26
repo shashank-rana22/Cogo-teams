@@ -1,5 +1,6 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
+import { startCase } from '@cogoport/utils';
 
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
@@ -88,7 +89,7 @@ function Child({
 	return (
 		<div className={styles.fieldarray} key={field.id}>
 			<h3 className={styles.heading}>
-				{name.toUpperCase()}
+				{startCase(name || 'document')}
 				&nbsp;
 				{index + 1}
 			</h3>

@@ -2,9 +2,13 @@
 	padding: 0px 15px 15px 15px;
 };
 
-.button_div {
+.button_container {
 	display: flex;
-	flex-direction: row;
 	justify-content: flex-end;
-	margin-top: 20px;
-};
+
+	:global {
+		.ui_button_container:first-child {
+			margin-right: 8px;
+		}
+	}
+}

@@ -14,7 +14,6 @@ import getImporterExporter from './utils/getImporterExporter';
 function CustomerInvoiceDetails(props) {
 	const { shipment_data, onCancel, task, refetch, servicesList = [], getShipmentTimeline = () => {} } = props;
 
-	console.log('shipment data', shipment_data, servicesList);
 	const importerExporterName = shipment_data?.importer_exporter?.business_name;
 
 	const importExporterNameMapped = getImporterExporter[importerExporterName] || '';
@@ -22,7 +21,6 @@ function CustomerInvoiceDetails(props) {
 	const fields = customTaskControls[importExporterNameMapped] || [];
 
 	const defaultValues = getDefaultValues(fields);
-	console.log('values', fields, defaultValues);
 
 	const {
 		control,
@@ -55,7 +53,7 @@ function CustomerInvoiceDetails(props) {
 			id     : task?.id,
 			status : 'completed',
 		};
-		if(importExporterNameMapped.length){
+		if (importExporterNameMapped.length) {
 			await handleBulkUpdate(finalValues);
 		}
 		await apiTrigger(taskData);
@@ -68,7 +66,7 @@ function CustomerInvoiceDetails(props) {
 				fields={fields}
 				errors={errors}
 			/>
-			<div className={styles.button_div}>
+			<div className={styles.button_container}>
 				<Button
 					onClick={() => onCancel()}
 					className="secondary lg"
