@@ -113,7 +113,7 @@ function IdentificationDocuments({ data, getEmployeeDetails }) {
 									'aadhaar_card',
 									'pan_card_number',
 									'pan_card',
-								].includes(controlName) ? (
+								].includes(controlName) && status !== 'approved' ? (
 									<sup className={styles.sup}>*</sup>
 									) : null}
 							</div>
