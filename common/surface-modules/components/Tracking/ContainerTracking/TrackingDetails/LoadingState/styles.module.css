@@ -1,0 +1,34 @@
+.Main{
+	display: flex;
+	flex-direction: column;
+	color: #393f70;
+	gap: 12px;
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 16px;
+	letter-spacing: 0.04em;
+}
+
+.Gap{
+	display: flex;
+	flex-direction: column;
+	gap: 2px;
+}
+
+
+.Heading{
+	font-weight: 500;
+	font-size: 14px;
+	line-height: 18px;
+	color: #393f70;
+}
+
+.SingleItem{
+	display: flex;
+	align-items: center;
+	position: relative;
+	height: 100px;
+	gap: 10px;
+	margin: 0 30px;
+	padding-bottom: 10px;
+}

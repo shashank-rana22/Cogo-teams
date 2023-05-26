@@ -1,10 +1,10 @@
 import React from 'react';
+import ContainerTracking from './ContainerTracking';
 
-function Tracking() {
+function Tracking({shipmentData}) {
+	console.log('shipmentData',shipmentData);
 	return (
-		<div>
-			Hello world
-		</div>
+		<ContainerTracking shipmentData={shipmentData}></ContainerTracking>
 	);
 }
 

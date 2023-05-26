@@ -1,37 +1,50 @@
+import {useEffect} from 'react';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
-
 import toastApiError from '../utils/toastApiError';
 
 const useGetSaasContainerSubscription = ({
-	shipmentId = '',
+	serialId,
+	truckNumber,
 }) => {
+	const payload = { serial_id: serialId, truck_number: truckNumber };
+
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'get_saas_container_subscription',
+		url    : 'get_saas_ftl_tracking_detail',
 		method : 'GET',
 	}, { manual: true });
 
-	const getSaasContainerSubscription = useCallback(() => {
-		(async () => {
-			try {
-				await trigger({
-					params: {
-						shipment_id: shipmentId,
-					},
-				});
-			} catch (error) {
-				toastApiError(error);
-			}
-		})();
-	}, [shipmentId, trigger]);
+	const listShipments = async () => {
+		try {
+			await trigger({
+				params: {
+					...payload,
+				},
+			});
+		} catch (error) {
+			toastApiError(error)
+		}
+	};
+	let apiData;
+
+	const trackerData = data ?? {};
+		const trackingContainersData = [
+			{
+				tracking_data: trackerData?.data,
+			},
+		];
+		apiData = {
+			...trackerData,
+			data: trackingContainersData,
+		};
 
 	useEffect(() => {
-		getSaasContainerSubscription();
-	}, [getSaasContainerSubscription]);
+		listShipments();
+	}, []);
 
 	return {
 		loading,
-		data,
+		data: apiData,
+		listShipments,
 	};
 };
 
