@@ -16,6 +16,8 @@ function Form({
 		setValue('uploadDocument', docUrls);
 	}, []);
 
+	console.log(controls, ' :controls');
+
 	return (
 		<Layout
 			control={control}

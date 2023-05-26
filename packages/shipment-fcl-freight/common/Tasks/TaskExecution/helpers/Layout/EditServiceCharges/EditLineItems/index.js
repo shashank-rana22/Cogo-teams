@@ -12,7 +12,7 @@ function EditLineItems({
 	value: emptyValue, customValues = {}, showAddButtons = true, showDeleteButton = true,
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
-
+	console.log({ controls, customValues, emptyValue });
 	return (
 		<div className={styles.container}>
 			<CargoDetails primary_service={cargoDetails} />

@@ -48,7 +48,7 @@ function EditInvoice({
 		info         : <Info />,
 	});
 
-	const updateFormValueOfCreditNote = ({ formValues }) => {
+	const updateFormValue = ({ formValues }) => {
 		const updatedObj = {};
 		Object.entries(formValues).forEach(([key, value]) => {
 			switch (key) {
@@ -72,7 +72,7 @@ function EditInvoice({
 		&& shipment_data?.serial_id > 130000;
 
 	const formValues = watch();
-	const updatedObj = updateFormValueOfCreditNote({ formValues });
+	const updatedObj = updateFormValue({ formValues });
 
 	useEffect(() => {
 		if (defaultValues) {

@@ -1,3 +1,5 @@
+import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 const handleDisableCond = (charge, isFclFreight, shipment_data) => {
@@ -14,15 +16,14 @@ const rawControls = (
 	isFclFreight,
 	shipment_data,
 	index,
-	isAuthorised,
 	trade_mapping = {},
 ) => ({
 	type               : 'edit_service_charges',
 	name               : `${charge?.service_id}:${index}`,
 	service_name       : charge?.service_type,
 	showHeader         : true,
-	showButtons        : isAuthorised,
-	noDeleteButtonTill : !isAuthorised ? charge?.line_items?.length : 0,
+	showButtons        : true,
+	noDeleteButtonTill : charge?.line_items?.length ?? 0,
 	buttonText         : 'Add Line Item',
 	value              : [
 		{
@@ -52,8 +53,7 @@ const rawControls = (
 			handleChange,
 			placeholder : 'select line item',
 			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data)
-				|| !isAuthorised,
+				handleDisableCond(charge, isFclFreight, shipment_data),
 			rules: { required: 'Required' },
 		},
 		{
@@ -77,24 +77,19 @@ const rawControls = (
 			type        : 'select',
 			name        : 'unit',
 			placeholder : 'select...',
-			options     : [],
-			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data)
-				|| !isAuthorised,
-			span: 1.5,
+			span        : 1.5,
 		},
 		{
 			name           : 'currency',
 			label          : 'Currency',
 			type           : 'select',
 			showOptional   : false,
-			optionsListKey : 'currencies',
+			optionsListKey : 'exchange-rate-currencies',
 			placeholder    : 'Select Currency',
 			rules          : { required: 'currency is required' },
 			span           : 1.5,
 			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data)
-				|| !isAuthorised,
+				handleDisableCond(charge, isFclFreight, shipment_data),
 		},
 		{
 			label       : 'Price',
@@ -116,8 +111,7 @@ const rawControls = (
 			rules       : { required: 'Required', min: 1 },
 			span        : 1,
 			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data)
-				|| !isAuthorised,
+				handleDisableCond(charge, isFclFreight, shipment_data),
 		},
 		{
 			label  : 'Amount (Tax Excl.)',

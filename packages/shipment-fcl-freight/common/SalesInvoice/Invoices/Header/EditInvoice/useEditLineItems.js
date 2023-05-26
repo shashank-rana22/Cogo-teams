@@ -1,14 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import rawControls from './rawControls';
-
-const admin_email_ids = ['vinod.talapa@cogoport.com'];
 
 const trade_mapping = {
 	import : 'Destination',
@@ -23,18 +20,12 @@ const useEditLineItems = ({
 	info,
 }) => {
 	const services = invoice.services || [];
-	const { user_data } = useSelector(({ general, profile }) => ({
-		user_data : profile,
-		scope     : general.scope,
-	}));
-
-	const isAuthorised = admin_email_ids.includes(user_data?.email);
 
 	const [selectedCodes, setSelectedCodes] = useState({});
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_invoice_line_items',
+		url    : 'fcl_freight/update_invoice_line_items',
 		method : 'POST',
 	}, { manual: true });
 
@@ -72,7 +63,6 @@ const useEditLineItems = ({
 			shipment_data,
 			index,
 			trade_mapping,
-			isAuthorised,
 		),
 		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
 		value           : (service?.line_items || []).map((item) => ({
@@ -114,13 +104,14 @@ const useEditLineItems = ({
 	};
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	// Object.keys(fields).forEach((key) => {
-	// 	customValues[key] = {
-	// 		formValues : newFormValues[key],
-	// 		label      : labels[key],
-	// 		id         : key,
-	// 	};
-	// });
+	const labels = {};
+	Object.keys(controls?.[0]).forEach((key) => {
+		customValues[key] = {
+			formValues : newFormValues[key],
+			label      : labels[key],
+			id         : key,
+		};
+	});
 
 	controls.forEach((ctrl) => {
 		if (ctrl?.controls) {
@@ -132,80 +123,21 @@ const useEditLineItems = ({
 						(allChargeCodes[ctrl?.service_name] || []).forEach((chgCode) => {
 							chargeCodes[chgCode?.code] = chgCode;
 						});
+						const updatedChildCtrl = { ...childCtrl, options: unitOptions };
 						unitOptions[i] = (
 							chargeCodes[item?.code]?.units || ['per_container']
 						).map((unit) => ({
 							label : startCase(unit),
 							value : unit,
 						}));
+						Object.assign(childCtrl, updatedChildCtrl);
 					});
-					childCtrl.options = unitOptions;
 				}
 			});
 		}
 	});
 
-	const validateForPriceChanges = (values) => {
-		if (isAuthorised) {
-			const newErrors = {};
-			Object.keys(values).forEach((key) => {
-				const customErrors = {};
-				const lineItems = services.find(
-					(ele) => ele.service_id === key.split(':')?.[0],
-				)?.line_items;
-
-				const formValsToChecked = values[key]?.filter(
-					(ele) => ele?.id?.length > 0,
-				);
-
-				formValsToChecked?.forEach((val, idx) => {
-					const originalValue = lineItems[idx];
-					const errorItem = {};
-
-					if (originalValue.code !== val.code) {
-						errorItem.code = {
-							message: 'Code Cannot Be Changed',
-						};
-					}
-					if (originalValue.price_discounted > val.price_discounted) {
-						errorItem.price_discounted = {
-							message: `Price cannot be less than ${originalValue.price_discounted}`,
-						};
-					}
-					if (originalValue.currency !== val.currency) {
-						errorItem.currency = {
-							message: `Currency Should be ${originalValue.currency}`,
-						};
-					}
-
-					if (originalValue.quantity !== val.quantity) {
-						errorItem.quantity = {
-							message: 'Quantity cannot be changed',
-						};
-					}
-
-					if (!isEmpty(errorItem)) {
-						customErrors[idx] = errorItem;
-					}
-				});
-
-				if (!isEmpty(customErrors)) {
-					newErrors[key] = customErrors;
-				}
-			});
-
-			// setErrors({ ...newErrors });
-			return !(Object.keys(newErrors).length > 0);
-		}
-		return true;
-	};
-
 	const onCreate = async (values) => {
-		const isValid = validateForPriceChanges(values);
-
-		if (!isValid) {
-			return;
-		}
 		try {
 			const payload = [];
 
