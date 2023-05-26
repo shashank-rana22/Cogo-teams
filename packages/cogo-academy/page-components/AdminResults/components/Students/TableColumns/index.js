@@ -157,10 +157,12 @@ const getAppearedColumns = ({
 	{
 		Header   : '',
 		id       : 'see_more',
-		accessor : ({ user = {}, test_id = '', is_evaluated = false }) => (
+		accessor : ({ user = {}, test_id = '', is_evaluated = false, activeAttempt }) => (
 			<div
 				role="presentation"
-				onClick={() => handleRedirectToDashboard({ router, user, test_id, is_evaluated, status })}
+				onClick={
+					() => handleRedirectToDashboard({ router, user, test_id, is_evaluated, status, activeAttempt })
+}
 				className={styles.see_more}
 			>
 				See More

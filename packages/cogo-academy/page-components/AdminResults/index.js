@@ -107,7 +107,6 @@ function AdminResults() {
 				>
 					{Object.values(COMPONENT_MAPPING).map((tab) => {
 						const { key, title, component : ContainerComponent = null } = tab;
-
 						const componentProps = COMPONENT_PROPS_MAPPING[key];
 
 						if (!ContainerComponent) return null;

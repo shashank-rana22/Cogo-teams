@@ -5,6 +5,8 @@ import styles from './style.module.css';
 function PercentagePassed({ stats_data }) {
 	const { pass_percentage = '', class_average } = stats_data || {};
 
+	console.log(stats_data);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.circle}>

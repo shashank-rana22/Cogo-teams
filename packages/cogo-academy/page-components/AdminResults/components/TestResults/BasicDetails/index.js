@@ -2,7 +2,7 @@ import { IcMTimer, IcMActivePlans } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function BasicDetails({ basic_info_data, questions }) {
+function BasicDetails({ basic_info_data, questions, stats_data }) {
 	const content_mapping_left = {
 		topics_covered: {
 			label : 'Topics Covered',
@@ -23,6 +23,32 @@ function BasicDetails({ basic_info_data, questions }) {
 		{basic_info_data.time_taken || ' '}
 		<div className={styles.minutes}> minutes </div>
 	</div>,
+
+		},
+	};
+
+	const content_mapping_middle = {
+		Passpercent: {
+			label: 'Pass %',
+			renderData:
+	<div className={styles.values}>
+		<div className={styles.current}>
+			{' '}
+			{stats_data.current_pass_percentage || 0}
+		</div>
+		<div style={{
+			fontWeight  : '400',
+			color       : '#828282',
+			marginTop   : '20px',
+			paddingLeft : '10px',
+		}}
+		>
+			{' '}
+			Cumulative of Both the Tests
+
+		</div>
+	</div>
+			,
 
 		},
 	};
@@ -125,6 +151,30 @@ function BasicDetails({ basic_info_data, questions }) {
 						);
 					})
 				}
+			</div>
+			<div className={styles.current_pass}>
+				<div style={{ flexWrap: 'wrap' }}>
+					{
+					Object.keys(content_mapping_middle).map((itemKey) => {
+						const { label, icon = '', renderData } = content_mapping_middle[itemKey] || {};
+
+						return (
+							<div className={styles.general} key={itemKey} style={{ minWidth: '150px' }}>
+								<div className={styles.svg}>{icon}</div>
+								<div className={styles.text_matter}>
+									<div className={styles.text_header}>
+										{label}
+									</div>
+									<div className={styles.text_part}>
+										{renderData}
+									</div>
+								</div>
+
+							</div>
+						);
+					})
+				}
+				</div>
 			</div>
 		</div>
 	);
