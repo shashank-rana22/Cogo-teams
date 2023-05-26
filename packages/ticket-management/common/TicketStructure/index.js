@@ -12,6 +12,7 @@ function TicketStructure({
 	handleScroll = () => {},
 	loading = false,
 	refreshTickets = () => {},
+	label,
 }) {
 	const { updateTicketActivity } = useUpdateTicketActivity({
 		refreshTickets,
@@ -19,7 +20,7 @@ function TicketStructure({
 
 	if (isEmpty(data) && !loading) {
 		return (
-			<EmptyStateTicketStructure />
+			<EmptyStateTicketStructure label={label} />
 		);
 	}
 

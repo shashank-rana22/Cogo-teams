@@ -3,16 +3,14 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function EmptyStateTicketStructure({
-	emptyText = 'No Tickets Raised',
-}) {
+function EmptyStateTicketStructure({ label }) {
 	return (
 		<div
 			className={styles.container}
 
 		>
 			<IcMTicket className={styles.icm_tag} />
-			<div className={styles.ticket_label}>{emptyText}</div>
+			<div className={styles.ticket_label}>{`No ${label} Tickets Raised`}</div>
 		</div>
 	);
 }

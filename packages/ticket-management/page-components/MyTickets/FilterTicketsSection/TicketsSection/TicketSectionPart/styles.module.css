@@ -2,8 +2,8 @@
 	display: flex;
 	flex-direction: column;
 	width: 30%;
-	height: 530px;
-	margin-right: 15px;
+	height: 515px;
+	margin: 0 15px 15px 0;
 	background: #fdfbf6;
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);

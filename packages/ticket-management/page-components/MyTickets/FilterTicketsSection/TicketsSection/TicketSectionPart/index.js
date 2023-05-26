@@ -3,7 +3,7 @@ import TicketStructure from '../../../../../common/TicketStructure';
 import styles from './styles.module.css';
 
 function TicketsSectionPart({ label, data, handleScroll, loading, refreshTickets }) {
-	const { list, total } = data;
+	const { list, total = 0 } = data;
 
 	// const {
 	// 	listLoading:closedTicketsLoading,
@@ -26,6 +26,7 @@ function TicketsSectionPart({ label, data, handleScroll, loading, refreshTickets
 				handleScroll={handleScroll}
 				loading={loading}
 				refreshTickets={refreshTickets}
+				label={label}
 			/>
 		</div>
 	);

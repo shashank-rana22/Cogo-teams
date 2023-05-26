@@ -8,7 +8,6 @@ import styles from './styles.module.css';
 
 function StatsSection() {
 	const { statsData } = useGetTicketStats();
-	console.log('statsData:', statsData);
 	return (
 		<div className={styles.stats_section_container}>
 			{statsIconsAndData.map((item) => {

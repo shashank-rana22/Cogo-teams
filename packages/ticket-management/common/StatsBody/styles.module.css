@@ -11,6 +11,12 @@
 	margin-right: 0;
 }
 
+.container:nth-child(2) {
+	.stats_icon {
+		padding-top: 4px;
+	}
+}
+
 .stats_count {
 	padding-top: 5px;
 	font-size: 16px;

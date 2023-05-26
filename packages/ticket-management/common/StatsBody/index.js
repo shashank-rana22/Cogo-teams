@@ -1,6 +1,6 @@
 import styles from './styles.module.css';
 
-function StatsBody({ label, count, icon, formattedKey }) {
+function StatsBody({ label, count = 0, icon, formattedKey }) {
 	const formatedCount = formattedKey.includes('time') ? `${Number(count).toFixed(0)} s` : count;
 
 	return (
