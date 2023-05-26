@@ -1,5 +1,6 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index';
 import { cl } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
@@ -41,7 +42,17 @@ function FeedbackGraph({ customerSatisfactionStats }) {
 					)}
 				/>
 				<div className={styles.graph_total}>
-					<span className={styles.graph_count}>{customerSatisfactionStats?.TotalFeedback || 0}</span>
+					<span className={styles.graph_count}>
+						{formatAmount({
+							amount  : customerSatisfactionStats?.TotalFeedback || 0,
+							options : {
+								style                 : 'decimal',
+								notation              : 'compact',
+								maximumFractionDigits : 2,
+							},
+						})}
+
+					</span>
 					<span className={styles.graph_label}>Total No. of Customers</span>
 				</div>
 			</div>

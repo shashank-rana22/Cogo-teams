@@ -1,5 +1,6 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index';
 import { cl } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import { statsIconsAndData } from '../../../../configurations/dashboard-stats';
 
@@ -42,8 +43,19 @@ function OverallStats({ data, ticketCount }) {
 					/>
 				</div>
 				<div className={styles.graph_total}>
-					<span className={styles.graph_label}>No. of Tickets</span>
-					<span className={styles.graph_count}>{ticketCount?.TotalTicket || 0}</span>
+					<span className={styles.graph_label}>
+						No. of Tickets
+					</span>
+					<span className={styles.graph_count}>
+						{formatAmount({
+							amount  : ticketCount?.TotalTicket || 0,
+							options : {
+								style                 : 'decimal',
+								notation              : 'compact',
+								maximumFractionDigits : 2,
+							},
+						})}
+					</span>
 				</div>
 				<div className={styles.legends}>
 					{(pieData || []).map(({ id, label, value, isMargin }) => (
