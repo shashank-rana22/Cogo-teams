@@ -4,11 +4,12 @@ import { useEffect, useState, useMemo } from 'react';
 import useGetPendingTasks from './useGetPendingTask';
 import useGetProcess from './useGetProcess';
 import useGetListDocuments from './useListDocuments';
+import useListOrganization from './useListOrganization';
 
 const docTasks = ['upload_document', 'approve_document', 'amend_document'];
 
 const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
-	const [filters, setFilters] = useState();
+	const [filters, setFilters] = useState({ uploaded_by_org_id: '', service_type: '' });
 	const [taskList, setTaskList] = useState([]);
 	const [docTypes, setDocTypes] = useState([]);
 
@@ -26,6 +27,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 		list : uploadedShipmentDocuments,
 		refetch,
 	} = useGetListDocuments({
+		filters,
 		defaultFilters : { shipment_id },
 		defaultParams  : {
 			created_by_user_details_required : true,
@@ -33,6 +35,8 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 			page_limit                       : 50,
 		},
 	});
+
+	const { data : organizationData } = useListOrganization({ defaultParams: { shipment_id } });
 
 	const { data : pendingTasks, loading : tasksLoading } = useGetPendingTasks({
 		defaultFilters: {
@@ -131,6 +135,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 		docTypes,
 		loading       : tasksLoading || documentsLoading || taskConfigLoading,
 		refetch,
+		organizationData,
 	};
 };
 

@@ -11,7 +11,7 @@ import CheckList from './CheckList';
 import HeaderComponent from './Header';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
-// import UploadForm from './UploadForm';
+import UploadForm from './UploadForm';
 import Wallet from './Wallet';
 
 function Documents() {
@@ -33,6 +33,7 @@ function Documents() {
 		filters,
 		setFilters,
 		refetch,
+		organizationData,
 	} = useCreateTaskList({ shipment_data, primary_service });
 
 	const emailPayload = {
@@ -84,7 +85,7 @@ function Documents() {
 				activeToggle={activeToggle}
 				setActiveToggle={setActiveToggle}
 				shipment_data={shipment_data}
-				data={completedDocs?.organizations}
+				data={organizationData}
 				filters={filters}
 				setFilters={setFilters}
 				setSearchValue={setSearchValue}
@@ -102,13 +103,13 @@ function Documents() {
 				placement="top"
 				closeOnOuterClick={false}
 			>
-				{/* <UploadForm
+				<UploadForm
 					showDoc={showDoc}
 					setShowDoc={setShowDoc}
 					refetch={refetch}
 					activeWallet={activeWallet}
 					setActiveWallet={setActiveWallet}
-				/> */}
+				/>
 			</Modal>
 
 			{renderContent()}
