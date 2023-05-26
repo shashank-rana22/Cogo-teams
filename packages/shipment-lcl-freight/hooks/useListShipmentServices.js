@@ -1,4 +1,3 @@
-// import dummyData from '../DummyData/list_shipment_services.json';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';

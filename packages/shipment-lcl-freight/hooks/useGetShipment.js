@@ -2,8 +2,6 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-// import dummyData from '../DummyData/shipment_data.json';
-
 export default function useGetShipment({ defaultParams = {}, defaultFilters = {}, initialCall = true }) {
 	const [{ loading: isGettingShipment, data }, trigger] = useRequest({
 		url          : '/get_shipment',

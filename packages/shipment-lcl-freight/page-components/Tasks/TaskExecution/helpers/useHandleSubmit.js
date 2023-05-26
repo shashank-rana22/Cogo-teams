@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 import { useContext, useState } from 'react';
 
-// import useUpdateShipmentCogoid from '../../../../hooks/useUpdateShipmentCogoid';
+import useUpdateShipmentCogoid from '../../../../hooks/useUpdateShipmentCogoid';
 import extraApiPayload from '../utils/extra-api-payload';
 import formatRawValues from '../utils/format-raw-payload';
 import formatForPayload from '../utils/fromat-payload';
@@ -15,7 +15,6 @@ const shipmentRefetchTasks = [
 	'confirm_booking',
 	'mark_confirmed',
 	'upload_draft_bill_of_lading',
-	'update_airway_bill_number',
 ];
 
 function useHandleSubmit({
@@ -47,7 +46,7 @@ function useHandleSubmit({
 		method : 'POST',
 	}, { manual: true });
 
-	// const { submitShipmentMapping } = useUpdateShipmentCogoid();
+	const { submitShipmentMapping } = useUpdateShipmentCogoid();
 
 	let dataFromApi = {};
 
@@ -129,7 +128,7 @@ function useHandleSubmit({
 				try {
 					const rpaMappings = getRpaMappings(task, shipment_data, rawValues);
 					if (rpaMappings) {
-						// await submitShipmentMapping(rpaMappings);
+						await submitShipmentMapping(rpaMappings);
 					}
 				} catch (err) {
 					toastApiError(err);

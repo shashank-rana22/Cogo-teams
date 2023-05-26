@@ -1,4 +1,5 @@
 const formatDataForDocuments = (rawValues, taskData) => {
+	console.log({ rawValues, taskData });
 	let modifiedRawValues = {};
 
 	if (taskData?.task === 'upload_commercial_invoice_and_packing_list') {
@@ -25,9 +26,9 @@ const formatDataForDocuments = (rawValues, taskData) => {
 				|| taskData?.document_type
 				|| 'authority_letter_custom';
 
-			formatObj.document_url = documentObj?.url?.url || documentObj?.url;
+			formatObj.document_url = documentObj?.url?.finalUrl || documentObj?.url;
 
-			formatObj.file_name = documentObj?.url?.name;
+			formatObj.file_name = documentObj?.url?.fileName;
 
 			Object.keys(documentObj || {}).forEach((key) => {
 				if (!Object.keys(formatObj).includes(key)) {

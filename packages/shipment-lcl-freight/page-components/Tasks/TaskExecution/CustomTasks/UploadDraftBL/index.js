@@ -71,14 +71,14 @@ function UploadDraftBL({
 		}
 	};
 
-	// useEffect(() => {
-	// 	setcanUseSwitch(
-	// 		(shipmentDocsLength || 0) <= 0 && (tradeDocsLength || 0) <= 0,
-	// 	);
-	// 	setIsAllHblUploaded(
-	// 		tradeDocsLength >= blCount || shipmentDocsLength >= blCount,
-	// 	);
-	// }, [tradeDocsLength, shipmentDocsLength, blCount]);
+	useEffect(() => {
+		setcanUseSwitch(
+			(shipmentDocsLength || 0) <= 0 && (tradeDocsLength || 0) <= 0,
+		);
+		setIsAllHblUploaded(
+			tradeDocsLength >= blCount || shipmentDocsLength >= blCount,
+		);
+	}, [tradeDocsLength, shipmentDocsLength, blCount]);
 
 	const {
 		createHBL,
@@ -125,9 +125,9 @@ function UploadDraftBL({
 		setShowSwitchGenerate(!showSwitchGenerate);
 	};
 
-	// useEffect(() => {
-	// 	setShowSwitchGenerate(!showUploadView);
-	// }, [showUploadView]);
+	useEffect(() => {
+		setShowSwitchGenerate(!showUploadView);
+	}, [showUploadView]);
 
 	return (
 		<TaskContainer

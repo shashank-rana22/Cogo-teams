@@ -1,5 +1,6 @@
 import { saveAs } from 'file-saver';
 import React from 'react';
+import { v4 as uuid } from 'uuid';
 
 import Content from './Content';
 
@@ -36,6 +37,7 @@ const Card = ({
 			const isChecked = uploadedItem?.document_type === docType;
 			const receivedViaEmail = !isChecked && uploadedItem?.entity_type === docType;
 			const showUploadText = item?.pendingItem ? 'Upload' : '';
+			console.log({ uploadedItem });
 
 			return (
 				<Content
@@ -53,6 +55,7 @@ const Card = ({
 					primary_service={primary_service}
 					setShowDoc={setShowDoc}
 					setShowApproved={setShowApproved}
+					key={uploadedItem?.id || uuid()}
 				/>
 			);
 		});

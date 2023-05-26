@@ -2,7 +2,7 @@ import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { AsyncSelectController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import Layout from '@cogoport/ocean-modules';
+import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 

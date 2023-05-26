@@ -63,7 +63,7 @@ function Timeline() {
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
 							isLast={totalItems === index + 1}
-							key={timelineItem.completed_on || timelineItem.milestone}
+							key={uuid()}
 						/>
 					);
 				})}

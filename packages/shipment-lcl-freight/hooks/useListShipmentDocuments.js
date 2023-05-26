@@ -43,4 +43,3 @@ const useListShipmentDocuments = ({ defaultFilters = {}, defaultParams = {} }) =
 };
 
 export default useListShipmentDocuments;
-// todo

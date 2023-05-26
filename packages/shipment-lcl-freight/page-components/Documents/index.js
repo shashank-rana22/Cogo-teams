@@ -13,13 +13,6 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 import UploadForm from './UploadForm';
 import Wallet from './Wallet';
-// import useCreateTaskList from '../../hooks/useCreateTaskList';
-// import useGetShipmentMails from '../../hooks/useListRpaMails';
-// import useUpdateDocument from '../../hooks/useUpdateDocument';
-
-// import Approve from './Approve';
-
-// import UploadForm from './UploadForm';
 
 function Documents() {
 	const {

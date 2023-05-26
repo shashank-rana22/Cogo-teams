@@ -1,6 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import FormLayout from '@cogoport/ocean-modules';
+import { Layout } from '@cogoport/ocean-modules';
 
 import getDefaultValues from '../../utils/get-default-values';
 
@@ -51,7 +51,7 @@ function EditRate({
 		<div className={styles.container}>
 			<div className={styles.heading}>Quotation Update and Reallocation</div>
 			<div className={styles.service_provider}>
-				<FormLayout
+				<Layout
 					fields={requiredControls}
 					control={control}
 					errors={errors}

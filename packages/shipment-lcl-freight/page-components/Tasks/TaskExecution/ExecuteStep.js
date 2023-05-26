@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import Layout from '@cogoport/ocean-modules';
+import { Layout } from '@cogoport/ocean-modules';
 
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
@@ -60,7 +60,11 @@ function ExecuteStep({
 					CANCEL
 				</Button>
 
-				<Button themeType="primary" disabled={isLoading} onClick={handleSubmit(onSubmit)}>
+				<Button
+					themeType="primary"
+					disabled={isLoading}
+					onClick={handleSubmit(onSubmit)}
+				>
 					{isLastStep ? 'SUBMIT' : 'NEXT'}
 				</Button>
 			</div>
