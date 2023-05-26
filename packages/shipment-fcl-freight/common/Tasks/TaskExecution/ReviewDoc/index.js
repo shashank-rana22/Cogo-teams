@@ -1,4 +1,4 @@
-import { Loader, Button, Toast } from '@cogoport/components';
+import { Loader, Button, Toast, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
@@ -147,7 +147,7 @@ function ReviewDoc({
 			{approvalState?.ammend ? (
 				<div className={styles.remark}>
 					<div className={styles.sub_heading}>Please specify the reason for this </div>
-					<textarea
+					<Textarea
 						className="remark_text"
 						value={remarkValue}
 						onChange={(e) => setRemarkValue(e?.target?.value)}

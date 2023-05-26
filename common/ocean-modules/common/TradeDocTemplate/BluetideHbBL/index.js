@@ -4,22 +4,17 @@ import React, { useState, forwardRef, useImperativeHandle, useEffect } from 'rea
 import Annexure from './Annexure';
 import Frontside from './Frontside';
 import styles from './styles.module.css';
+import useDefaultValues from './useDefaultValues';
 
 function BluetideHBL({ mode = 'read', initialValues = {}, watermark = null }, ref) {
 	const [addAnnexure, setaddAnnexure] = useState(false);
 	const containerCountMoreThan1 = (initialValues?.containers || []).length > 1;
 
-	const { control, handleSubmit, setValue } = useForm({
-		defaultValues: {
-			containers: [{
-				container_number    : '',
-				marks_and_number    : '',
-				package_description : '',
-				gross_weight        : '',
-				measurement         : '',
-			}],
-		},
-	});
+	const { customDefaultValues } = useDefaultValues(initialValues);
+
+	const defaultValues = { ...customDefaultValues, ...initialValues?.containers?.[0] };
+
+	const { control, handleSubmit } = useForm({ defaultValues });
 
 	useImperativeHandle(ref, () => ({ submit: handleSubmit }));
 
@@ -36,14 +31,12 @@ function BluetideHBL({ mode = 'read', initialValues = {}, watermark = null }, re
 				control={control}
 				initialValues={initialValues}
 				watermark={watermark}
-				setValue={setValue}
 			/>
-
 			{addAnnexure && (
 				<>
 					<div className={styles.page_break} />
 					<Annexure
-						initialValues={initialValues}
+						initialValues={customDefaultValues}
 						mode={mode}
 						control={control}
 						watermark={watermark}

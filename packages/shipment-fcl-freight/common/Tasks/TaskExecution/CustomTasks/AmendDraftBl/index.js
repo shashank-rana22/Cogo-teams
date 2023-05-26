@@ -1,4 +1,4 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
 import useGenerateBluetideHbl from '../../../../../hooks/useGenerateBluetideHbl';
@@ -46,8 +46,13 @@ function AmendDraftBl({
 		},
 	});
 
-	const { apiTrigger } = useGenerateBluetideHbl({});
-	const { updateDocument } = useUpdateShipmentDocuments({ });
+	const afterRefetch = () => {
+		refetch();
+		clearTask();
+		taskListRefetch();
+	};
+	const { apiTrigger } = useGenerateBluetideHbl({ refetch: afterRefetch });
+	const { updateDocument } = useUpdateShipmentDocuments({ refetch: afterRefetch });
 
 	useEffect(() => {
 		setisHBLUploaded(tradeDocList?.list?.length > 0);
@@ -72,14 +77,7 @@ function AmendDraftBl({
 				},
 				pending_task_id: task?.id,
 			};
-			try {
-				await apiTrigger(body);
-				Toast.success('Successfully updated');
-				refetch();
-				clearTask();
-			} catch {
-				Toast.error('There was an issue updating the document');
-			}
+			await apiTrigger(body);
 		} else if (hblUploadData) {
 			const body = {
 				id              : uploadedDocs?.list?.[0]?.id,
@@ -92,21 +90,14 @@ function AmendDraftBl({
 				performed_by_org_id : task?.organization_id,
 				shipment_id         : task?.shipment_id,
 			};
-			try {
-				await updateDocument(body);
-				Toast.success('Successfully updated');
-				refetch();
-				clearTask();
-			} catch {
-				Toast.error('There was an issue updating the document');
-			}
+			await updateDocument(body);
 		}
 	};
 
 	const handleSaveHBL = (values) => {
 		if (values) {
 			const data = values;
-			data.bl_number = hblData?.data?.bl_number;
+			data.bl_number = hblData?.bl_number;
 			setHblData(data);
 		}
 	};

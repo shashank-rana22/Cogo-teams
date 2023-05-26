@@ -1,9 +1,13 @@
 import { Button, Modal } from '@cogoport/components';
 import { TradeDocTemplate } from '@cogoport/ocean-modules';
+import { omit } from '@cogoport/utils';
 import { forwardRef, useRef, useState } from 'react';
 
 import Form from './Form/index.js';
 import styles from './styles.module.css';
+
+const EXCLUDED_KEYS = ['container_number',
+	'marks_and_number', 'package_description', 'gross_weight', 'measurement'];
 
 function HBLCreate({
 	onSave = () => {},
@@ -18,7 +22,20 @@ function HBLCreate({
 	const ref = useRef();
 	const templateInitialValues = { ...hblData };
 	const handleSave = () => {
-		ref.current.submit().then(onSave);
+		ref?.current?.submit((data) => {
+			const containerDetails = {
+				container_number    : data.container_number,
+				marks_and_number    : data.marks_and_number,
+				package_description : data.package_description,
+				gross_weight        : data.gross_weight,
+				measurement         : data.measurement,
+			};
+			data.containers.push(containerDetails);
+
+			const finalData = omit(data, EXCLUDED_KEYS);
+
+			onSave(finalData);
+		})();
 		setShow(false);
 	};
 
@@ -65,6 +82,7 @@ function HBLCreate({
 									documentType="bluetide_hbl"
 									mode="write"
 									initialValues={templateInitialValues}
+									ref={ref}
 								/>
 							</Modal.Body>
 						</Modal>

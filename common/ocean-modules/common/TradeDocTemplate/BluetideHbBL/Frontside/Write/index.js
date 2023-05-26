@@ -11,15 +11,8 @@ function Write({
 	setaddAnnexure = () => {},
 	addAnnexure = false,
 	isReadonly = false,
-	initialValues = {},
 	watermark = null,
-	setValue = () => {},
 }) {
-	const { port_of_loading, port_of_discharge, consigner } = initialValues;
-
-	setValue('consigner', consigner);
-
-	console.log('initialValues', initialValues);
 	return (
 		<main className={styles.main}>
 			{watermark
@@ -32,7 +25,6 @@ function Write({
 							<TextAreaController
 								name="consigner"
 								control={control}
-								defaultValue={consigner}
 								rows={3}
 								style={{ margin: 0 }}
 							/>
@@ -68,7 +60,6 @@ function Write({
 								<TextAreaController
 									name="port_of_loading"
 									control={control}
-									defaultValue={port_of_loading}
 									rows={2}
 								/>
 							</div>
@@ -79,7 +70,6 @@ function Write({
 								<TextAreaController
 									name="port_of_discharge"
 									control={control}
-									defaultValue={port_of_discharge}
 								/>
 							</div>
 							<div className={styles['section_one_child_1-location_element']}>
