@@ -6,10 +6,11 @@ import { useState, useCallback } from 'react';
 const useListRfqs = ({ filterStore, id = '' }) => {
 	const {
 		endDate, highProfitability,
-		lowProfitability, organizationSize, search, serviceType, startDate, status, sortBy,
+		lowProfitability, organizationSize, search, serviceType, startDate, status, sortBy, activeTab,
 
 	} = filterStore || {};
 	const [page, setPage] = useState(1);
+	console.log('active', activeTab);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_rfqs',
@@ -18,7 +19,7 @@ const useListRfqs = ({ filterStore, id = '' }) => {
 			port_pair_data_required         : 'true',
 			rate_card_user_details_required : 'true',
 			filters                         : {
-				state                   : 'requested_for_approval',
+				state                   : activeTab === 'approval' ? 'requested_for_approval' : undefined,
 				q                       : search,
 				created_at_greater_than : startDate,
 				created_at_less_than    : endDate,
@@ -26,7 +27,7 @@ const useListRfqs = ({ filterStore, id = '' }) => {
 				low_profitability       : lowProfitability,
 				sub_type                : organizationSize,
 				service_type            : serviceType,
-				status,
+				status                  : activeTab === 'all' ? 'live' : undefined,
 				low_to_high             : sortBy === 'profitability_low',
 				id,
 			},

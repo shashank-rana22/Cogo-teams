@@ -2,6 +2,7 @@ import { Pagination, Tabs, TabPanel } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
+import EmptyState from '../../../common/EmptyState/EmptyState';
 import useListRfqs from '../../../hooks/useListrfqs';
 
 import RfqDetails from './RfqDetails';
@@ -15,7 +16,7 @@ function Content(props) {
 		{ name: 'all', title: 'All RFQ' },
 	];
 
-	const { getRfqsForApproval, data = {}, page, setPage } = useListRfqs({ filterStore });
+	const { getRfqsForApproval, data = {}, page, setPage, loading } = useListRfqs({ filterStore });
 
 	useEffect(() => {
 		getRfqsForApproval();
@@ -23,9 +24,6 @@ function Content(props) {
 
 	const { list = [] } = data;
 
-	if (isEmpty(data)) {
-		return null;
-	}
 	return (
 		<div>
 			<div className={styles.container}>
@@ -36,7 +34,7 @@ function Content(props) {
 				>
 					{TAB_MAPPING.map(({ name, title }) => (
 						<TabPanel name={name} title={title}>
-							<RfqDetails {...props} list={list} />
+							<RfqDetails {...props} list={list} loading={loading} />
 						</TabPanel>
 					))}
 				</Tabs>
