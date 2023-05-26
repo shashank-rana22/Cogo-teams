@@ -29,10 +29,6 @@ function PortsCard(props) {
 		total_price_discounted = '', id = '', stats = {},
 	} = data;
 
-	console.log('data::', data);
-
-	console.log('freight_price_currency::', freight_price_currency);
-
 	const {
 		origin_port = {}, destination_port = {},
 	} = detail;
@@ -56,11 +52,7 @@ function PortsCard(props) {
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
 
-	console.log('details respone::', rate_card_details_data);
-
 	const [editedMargins, setEditedMargins] = useState({});
-
-	// console.log('rate::', ?.rate, 'currency', convenience_line_item?.currency);
 
 	const [convenienceDetails, setConvenienceDetails] = useState({
 		convenience_rate: {
@@ -96,16 +88,6 @@ function PortsCard(props) {
 
 	return (
 		<div className={styles.main_container}>
-			{/* {
-				isClickable	? (
-					<Checkbox
-						value="a3"
-						checked={selected.find((item) => item.id === data.id)}
-						onChange={(e) => changeSelection(data, e.target.checked)}
-						disabled={loading}
-					/>
-				) : <div className={styles.empty_space} />
-			} */}
 			<div className={styles.port_container}>
 				<div className={styles.container}>
 					{loading ? <LoaderPortsCard />
