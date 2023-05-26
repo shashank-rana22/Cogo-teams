@@ -1,8 +1,6 @@
 import { Pagination, Tabs, TabPanel } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-import EmptyState from '../../../common/EmptyState/EmptyState';
 import useListRfqs from '../../../hooks/useListrfqs';
 
 import RfqDetails from './RfqDetails';
@@ -34,7 +32,12 @@ function Content(props) {
 				>
 					{TAB_MAPPING.map(({ name, title }) => (
 						<TabPanel name={name} title={title}>
-							<RfqDetails {...props} list={list} loading={loading} />
+							<RfqDetails
+								{...props}
+								list={list}
+								loading={loading}
+								getRfqsForApproval={getRfqsForApproval}
+							/>
 						</TabPanel>
 					))}
 				</Tabs>
