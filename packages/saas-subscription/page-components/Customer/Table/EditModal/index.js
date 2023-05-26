@@ -1,5 +1,5 @@
 import { ButtonIcon, cl, Button, Modal } from '@cogoport/components';
-import globals from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCross } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
@@ -15,7 +15,7 @@ const GetDetailValue = ({ name, pricing = {}, product_family = {} }) => {
 	if (name === 'plan_details') return startCase(pricing?.name);
 	return startCase(product_family?.product_family_name);
 };
-const { image_url } = globals;
+const { image_url } = GLOBAL_CONSTANTS;
 
 function EditModal({ editModal, setEditModal }) {
 	const { open = false, info = {} } = editModal;

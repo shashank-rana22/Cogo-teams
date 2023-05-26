@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useAllocationRequest } from '@cogoport/request';
 
@@ -11,10 +12,15 @@ const useUpdateRequestStatus = (props) => {
 		authkey : 'post_allocation_request_status',
 	}, { manual: true });
 
-	const onStatusUpdate = async () => {
+	const formProps = useForm();
+
+	const onStatusUpdate = async (formValues) => {
+		const { rejection_reasons } = formValues || {};
+
 		try {
 			const payload = {
 				...requestStatusItem,
+				rejection_reasons: rejection_reasons.length !== 0 ? rejection_reasons : undefined,
 			};
 
 			await trigger({
@@ -36,6 +42,7 @@ const useUpdateRequestStatus = (props) => {
 		loadingUpdate: loading,
 		requestStatusItem,
 		setRequestStatusItem,
+		formProps,
 	};
 };
 

@@ -8526,6 +8526,10 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
+		{
 			api         : 'post_payments_journal_voucher_post_to_sage',
 			access_type : 'private',
 			module      : 'settlement',
@@ -9555,6 +9559,21 @@ const partner = {
 		},
 		{
 			api          : 'create_communication_template_suggestions',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_platform_config_constants',
+			access_type  : 'private',
+			service_name : 'platform_config',
+		},
+		{
+			api          : 'update_meta_catalog',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_sms_sender_mappings',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

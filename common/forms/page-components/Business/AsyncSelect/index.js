@@ -23,9 +23,15 @@ import {
 	asyncListHsCodes,
 	asyncListCurrency,
 	asyncAccountEngagementScoringEvents,
+	asyncJvList,
+	asyncJournalCode,
+	asyncAccMode,
+	asyncCodeMaster,
+	asyncListOrgTradeParties,
 	asyncPlanPricingList,
 	asyncFieldsPartnerUsersIds,
 	asyncQuotaList,
+	asyncAllocationRequestRejectionType,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -70,6 +76,12 @@ const keyAsyncFieldsParamsMapping = {
 	plan_pricing_list             : asyncPlanPricingList,
 	partner_users_ids             : asyncFieldsPartnerUsersIds,
 	addon_list                    : asyncQuotaList,
+	journal_category              : asyncJvList,
+	journal_code                  : asyncJournalCode,
+	jv_account_mode               : asyncAccMode,
+	jv_code_master                : asyncCodeMaster,
+	list_trade_parties            : asyncListOrgTradeParties,
+	allocation_rejection_type     : asyncAllocationRequestRejectionType,
 };
 
 function AsyncSelect(props) {
