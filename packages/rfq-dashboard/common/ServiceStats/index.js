@@ -1,17 +1,36 @@
 import { cl } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
-
-import { getFormattedAmount } from '../helpers/getFormattedSum';
 
 import styles from './styles.module.css';
 
+const STATS_MAPPING = {
+	promised_revenue: {
+		key   : 'promised_revenue',
+		label : 'Promised Revenue',
+	},
+	promised_profitability: {
+		key   : 'promised_profitability',
+		label : 'Promised Profitability',
+	},
+	utilization: {
+		key   : 'utilization',
+		label : 'Utilization',
+	},
+};
+
 function ServiceStats({ data = [], type = '', source = '' }) {
 	const renderItem = (item) => {
-		if (item.key === 'revenue') {
-			return getFormattedAmount(item.value, 'INR');
+		if (item.key === 'promised_revenue') {
+			return `${data?.[item.key]?.promised_revenue_currency} ${data?.[item.key]}`;
 		}
-		if (item.key === 'profitability' || item.key === 'utilization') {
-			return `${item.value}%`;
+		if (item.key === 'promised_profitability' || item.key === 'utilization') {
+			return typeof data?.[item?.key] === 'number' ? (
+				<span
+					className={cl`${data?.[item?.key] > 0 ? styles.green : styles.red}
+					${data?.[item?.key] === 0 ? styles.black : ''}`}
+				>
+					{`${data?.[item?.key]}%`}
+				</span>
+			) : '-';
 		}
 		return null;
 	};
@@ -21,16 +40,10 @@ function ServiceStats({ data = [], type = '', source = '' }) {
         ${(source
 			=== 'ports-card') ? styles.service_stats_ports_section : ''}`}
 		>
-			{Object.keys(data || {}).map((item) => (
-				<div className={cl`${type === 'preview-stats' ? styles.individual_section : ''}`}>
-					<div className={styles.revenyue_profitability_utilization_name}>{item}</div>
-					<div className={`
-                        ${styles.revenyue_profitability_utilization_value} 
-                        ${styles[item.color]}`}
-					>
-						{/* {item.key === 'revenue' ? item.value : `${item.value} %`} */}
-						{renderItem(item)}
-					</div>
+			{Object.keys(STATS_MAPPING).map((key) => (
+				<div>
+					<div className={styles.revenyue_profitability_utilization_name}>{STATS_MAPPING[key].label}</div>
+					<div className={styles.stats_value}>{renderItem(STATS_MAPPING[key])}</div>
 				</div>
 			))}
 		</div>
