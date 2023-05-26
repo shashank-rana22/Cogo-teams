@@ -6,7 +6,7 @@ export const getCurrencyControls = ({
 	// Object.keys(differentCurrenciesHash || {}).map((currency, i) => console.log(currency, i));
 	// console.log(differentCurrenciesHash, ' :differentCurrenciesHash');
 	const controls = Object.keys(differentCurrenciesHash || {}).map(
-		(currency, i) => ({
+		(currency) => ({
 			name             : `currency_control_${currency}`,
 			type             : 'fieldArray',
 			showButtons      : false,
@@ -23,7 +23,8 @@ export const getCurrencyControls = ({
 					name        : 'from_currency',
 					label       : 'From',
 					placeholder : 'Currency',
-					value       : `${currency}${i}`,
+					type        : 'text',
+					value       : currency,
 					disabled    : true,
 					size        : 'sm',
 				},
@@ -31,6 +32,7 @@ export const getCurrencyControls = ({
 					name        : 'to_currency',
 					label       : 'To',
 					placeholder : 'Currency',
+					type        : 'text',
 					value       : invoiceCurrency,
 					disabled    : true,
 					size        : 'sm',
@@ -39,12 +41,19 @@ export const getCurrencyControls = ({
 					name        : 'exchange_rate',
 					label       : 'Exchange rate',
 					placeholder : 'Enter rate',
+					type        : 'number',
 					size        : 'sm',
+					rules       : {
+						required : 'Exchange Rate is required',
+						min      : 0.000001,
+					},
 				},
 			],
 		}),
 	);
-	// console.log(controls, ' :controls');
-
-	return controls;
+	const defaultValues = {};
+	controls.forEach((ctrl) => {
+		defaultValues[ctrl.name] = ctrl.value;
+	});
+	return { controls, defaultValues };
 };

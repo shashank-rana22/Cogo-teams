@@ -1,14 +1,17 @@
-import useUpdateCurrencyConversion from './useUpdateCurrencyConversion';
+import useGetShipmentQuotation from '../../../../../hooks/useGetShipmentQuotation';
+import useListCurrencyConversion from '../../../../../hooks/useListCurrencyConversion';
+import useUpdateCurrencyConversion from '../../../../../hooks/useUpdateCurrencyConversion';
 
-const Helper = ({ currencyConversionData = {}, quotationData = {}, invoiceCurrency = '' }) => {
-	const { rateAddtionApi } = useUpdateCurrencyConversion();
+const Helper = ({ invoiceCurrency = '', refetch = () => {}, setOpen = () => {} }) => {
+	const { currencyConversionData } = useListCurrencyConversion();
+	const { quotationData } = useGetShipmentQuotation({ invoiceCurrency });
+	const { handleFormSubmit, loading } = useUpdateCurrencyConversion({ refetch, setOpen });
 
 	const differentCurrenciesHash = {};
 	const obj = {};
 	const availableCurrencyConversions = {};
-	console.log({ quotationData, currencyConversionData });
 
-	(quotationData?.serviceCharges || []).forEach((service) => {
+	(quotationData?.service_charges || []).forEach((service) => {
 		(service?.line_items || [])?.forEach((line_item) => {
 			if (
 				!obj[line_item?.currency]
@@ -48,9 +51,10 @@ const Helper = ({ currencyConversionData = {}, quotationData = {}, invoiceCurren
 	});
 
 	return {
-		rateAddtionApi,
+		handleFormSubmit,
 		differentCurrenciesHash,
 		availableCurrencyConversions,
+		loading,
 	};
 };
 

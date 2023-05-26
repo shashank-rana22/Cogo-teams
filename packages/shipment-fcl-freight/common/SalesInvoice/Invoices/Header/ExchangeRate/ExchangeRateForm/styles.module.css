@@ -1,51 +1,42 @@
-.ExchangeRateType{
+.ExchangeRateType {
+	margin-top: 6px;
+	margin-bottom: 40px;
+	margin-left: 5px;
 	font-size: 18px;
 	font-weight: 500;
 	line-height: 20px;
-	margin-left: 5px;
-	margin-top: 6px;
-	margin-bottom: 40px;
 	color: #393f70;
 }
 
-.ExchangeRateForm{
+.ExchangeRateForm {
 	border-radius: 10px;
 }
 
-.Heading{
-	font-weight: bold;
+.Heading {
+	margin-bottom: 18px;
 	font-size: 12px;
+	font-weight: bold;
 	line-height: 16px;
 	color: #4f4f4f;
-	margin-bottom: 18px;
 }
 
-.Buttons{
-	width: 100%;
+.Buttons {
 	display: flex;
 	justify-content: flex-end;
+	width: 100%;
 	margin-top: 30px;
 }
 
-.LinkToRate{
+.LinkToRate {
 	display: flex;
-	font-weight: bold;
+	margin-bottom: 15px;
 	font-size: 12px;
+	font-weight: bold;
 	line-height: 16px;
 	color: #4f4f4f;
-	margin-bottom: 15px;
 }
 
-.Form{
-	overflow: auto;
+.Form {
 	height: 67.5vh;
-}
-
-.form_container{
-	display: flex;
-	padding: 10px;
-}
-
-.form{
-	margin-right: 16px;
+	overflow: auto;
 }

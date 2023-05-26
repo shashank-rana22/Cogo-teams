@@ -34,7 +34,7 @@ const useEditLineItems = ({
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_sell_quotations',
+		url    : '/update_invoice_line_items',
 		method : 'POST',
 	}, { manual: true });
 

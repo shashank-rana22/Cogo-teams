@@ -125,14 +125,15 @@ function EditInvoice({
 
 			<Modal.Footer>
 				<Button
-					className="secondary md"
+					size="md"
+					themeType="secondary"
 					onClick={onClose}
 				>
 					Cancel
 				</Button>
 
 				<Button
-					className="primary md"
+					size="md"
 					onClick={handleSubmit(onCreate)}
 					style={{ marginLeft: '16px' }}
 				>
