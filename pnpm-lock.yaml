@@ -1141,9 +1141,17 @@ importers:
 
   packages/shipment-fcl-custom:
     specifiers:
+      '@cogoport/context': workspace:^0.1.0
+      '@cogoport/icons-react': ^1.0.75
+      components: link:@cogoport/@cogoport/components
       react: 18.2.0
+      utils: link:@cogoport/@cogoport/utils
     dependencies:
+      '@cogoport/context': link:../../common/context
+      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      components: link:@cogoport/@cogoport/components
       react: 18.2.0
+      utils: link:@cogoport/@cogoport/utils
 
   packages/shipment-fcl-freight:
     specifiers:
@@ -2939,12 +2947,26 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@cogoport/icons-react/1.0.75_react@18.2.0:
+    resolution: {integrity: sha512-Dpkl04lwmUy0XBX8FDLzG7Iv4owcPLHlsULg+AXATZv0cz000u28e8aiLCxZl1+rscxLrcEoCrP6gfAKPqikhA==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.75
+      react: 18.2.0
+    dev: false
+
   /@cogoport/icons/1.0.71:
     resolution: {integrity: sha512-81PnkTVxPz+gsGmoBc3bh5cW5RNhAeu3lEL1ZHhyfl1ZgvQNqqlsORKNDmHdE0CVPQKoRj2XEfYsxIN6snAnhw==}
     dev: false
 
   /@cogoport/icons/1.0.73:
     resolution: {integrity: sha512-R6cLIHkkIkIb0DqbcfrkKto/PTKkvfx2F0PFKlh3Ohlx+VilH/sZGM9rIpqmuC9+RPjF9JtbcDjLyj7dIbwLMg==}
+    dev: false
+
+  /@cogoport/icons/1.0.75:
+    resolution: {integrity: sha512-8fNQj+Ia62usyWh4kOwaPVrifWLGB1C5TbGvXBXYgfKeY1Fe8VPUp9nTrfYt8ucQmRMXDbC1OeG7REjAXYGapw==}
     dev: false
 
   /@cogoport/maps/1.0.3_bykzbvvitan6xtqocjq62ilw64:

@@ -4,6 +4,10 @@
   "description": "Package for Shipment Fcl Custom Service",
   "main": "index.js",
   "dependencies": {
-    "react": "18.2.0"
+    "@cogoport/context": "workspace:^0.1.0",
+    "@cogoport/icons-react": "^1.0.75",
+    "components": "link:@cogoport/@cogoport/components",
+    "react": "18.2.0",
+    "utils": "link:@cogoport/@cogoport/utils"
   }
 }
