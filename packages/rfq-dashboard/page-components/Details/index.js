@@ -1,5 +1,4 @@
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 import useGetRfqRateCards from '../../hooks/useGetRfqRateCards';
@@ -11,12 +10,8 @@ import Services from './Services';
 import styles from './styles.module.css';
 
 function Details() {
-	// const loading = false;
 	const { query } = useRouter();
 	const { rfq_id = '' } = query || {};
-
-	// const loading = false;
-	// const data = {};
 
 	const { getRfqsRateCards, data = {}, loading } = useGetRfqRateCards({ rfq_id });
 

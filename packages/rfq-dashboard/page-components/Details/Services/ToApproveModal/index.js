@@ -1,66 +1,49 @@
 import { Modal, Button } from '@cogoport/components';
 
-import ServiceStats from '../../../../common/ServiceStats';
-import { AvgPromisedConAndContract } from '../../../../configurations/service-stats-data';
-import PortsCard from '../PortsCard';
+import useUpdateRfqState from '../../../../hooks/useUpdateRfqState';
 
 import styles from './styles.module.css';
 
-function ToApproveModal({ show, setShow = () => {}, selected, changeSelection = () => {}, isClickable = true }) {
+function ToApproveModal({ show, setShow = () => {}, rfq_id = '' }) {
+	const { updateRfqState, loading } = useUpdateRfqState();
+
+	const approve_rfq = () => {
+		updateRfqState({ rfq_id, setShow });
+	};
+
+	if (!show) {
+		return null;
+	}
 	return (
 		<Modal
-			size="xl"
+			size="md"
 			show={show}
 			onClose={() => setShow(false)}
 			className={styles.modal_container}
 		>
-			<Modal.Header
-				title={(
-					<div className={styles.modal_header}>
-						<div className={styles.preview_ports_nos_section}>
-							<span className={styles.text_preview}>Preview</span>
-							<span className={styles.port_numbers}>
-								(
-								{selected.length}
-								{' '}
-								Port Pairs)
-							</span>
-
-						</div>
-						<ServiceStats data={AvgPromisedConAndContract} type="preview-stats" />
-					</div>
-				)}
-			/>
+			<Modal.Header title="Approve RFQ?" />
 			<Modal.Body className={styles.modal_body}>
-				<div className={styles.ports_card}>
-					{
-						(selected || []).map((item) => (
-							<div>
-								<PortsCard
-									{...item}
-									data={item}
-									selected={selected}
-									changeSelection={changeSelection}
-									isClickable={isClickable}
-									source="modal"
-								/>
-							</div>
-						))
-					}
+				<div>
+					Are you sure you want to approve this RFQ?
 				</div>
+				<div className={styles.margin_value}>
+					Margin Modified in 4/8 ports?
+				</div>
+
 			</Modal.Body>
 
 			<Modal.Footer>
 				<div className={styles.buttons_container}>
 					<Button
 						size="md"
-						themeType="tertiary"
+						themeType="secondary"
 						onClick={() => setShow(false)}
+						disabled={loading}
 					>
-						Cancel
+						No
 					</Button>
-					<Button size="md" themeType="accent">
-						Approve
+					<Button size="md" themeType="accent" onClick={approve_rfq} loading={false}>
+						Yes
 					</Button>
 				</div>
 			</Modal.Footer>
