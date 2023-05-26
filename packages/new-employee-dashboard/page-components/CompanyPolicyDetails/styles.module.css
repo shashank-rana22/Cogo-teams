@@ -5,11 +5,11 @@
 .button_container {
 	display: flex;
 	justify-content: flex-end;
-	margin: 8px 0 16px;
+	margin: 8px 0 0px;
 }
 
 .title {
-	margin: 12px 0 4px;
+	margin: 4px 0 6px;
 	font-weight: 600;
 }
 

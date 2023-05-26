@@ -40,9 +40,11 @@ function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
 	};
 
 	useEffect(() => {
-		setValue('company_policy_name', showModal?.name);
-		setValue('company_policy_document', showModal?.document_url);
-	}, [showModal]);
+		if (!isEmpty(showModal)) {
+			setValue('company_policy_name', showModal?.name);
+			setValue('company_policy_document', showModal?.document_url);
+		}
+	}, [setValue, showModal]);
 
 	return (
 		<form>
