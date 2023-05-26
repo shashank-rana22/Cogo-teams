@@ -1,13 +1,20 @@
 export const getTicketStatus = (val) => {
 	if (
-		['unresolved', 'reject_requested', 'resolve_requested'].includes(
+		['pending', 'reject_requested', 'resolve_requested'].includes(
 			val,
 		)
 	) {
-		return 'open';
+		return 'pending';
 	}
-	if (val === 'overdue') {
+	if (
+		['closed', 'rejected', 'overdue'].includes(
+			val,
+		)
+	) {
 		return 'closed';
+	}
+	if (val === 'unresolved') {
+		return 'open';
 	}
 	return val;
 };

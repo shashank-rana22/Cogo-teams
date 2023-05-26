@@ -6,6 +6,10 @@
 	box-shadow: 0 0 8px rgb(98 127 172 / 20%);
 }
 
+.ticket_container:nth-child(1) {
+	margin-top: 2px;
+}
+
 .subcontainer_one {
 	padding: 10px;
 	background: #f9f9f9;

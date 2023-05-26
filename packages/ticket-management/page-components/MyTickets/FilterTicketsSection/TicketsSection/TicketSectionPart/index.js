@@ -1,20 +1,30 @@
 import TicketStructure from '../../../../../common/TicketStructure';
+import useListTickets from '../../../../../hooks/useListTickets';
 
 import styles from './styles.module.css';
 
-function TicketsSectionPart({ label, data, handleScroll, loading, refreshTickets }) {
-	const { list, total = 0 } = data;
-
-	// const {
-	// 	listLoading:closedTicketsLoading,
-	// 	handleScroll:handleClosedTicketScroll,
-	// 	refreshTickets:closedRefreshTickets,
-	// } =	useListTickets(
-	// 	searchParams,
-	// 	mapping.Closed,
-	// 	setTicketList,
-	// 	Type:label,
-	// );
+function TicketsSectionPart({ label, status, searchParams, refreshList, setRefreshList }) {
+	const {
+		ticketList,
+		listLoading,
+		handleScroll,
+	} =	useListTickets(
+		searchParams,
+		status,
+		label,
+		refreshList,
+		setRefreshList,
+	);
+	const refreshTickets = () => {
+		setRefreshList((prev) => {
+			const newState = {};
+			Object.keys(prev).forEach((key) => {
+				newState[key] = true;
+			});
+			return newState;
+		});
+	};
+	const { list, total = 0 } = ticketList;
 	return (
 		<div className={styles.tickets_section_part}>
 			<div className={styles.status_heading}>
@@ -24,7 +34,7 @@ function TicketsSectionPart({ label, data, handleScroll, loading, refreshTickets
 			<TicketStructure
 				data={list}
 				handleScroll={handleScroll}
-				loading={loading}
+				loading={listLoading}
 				refreshTickets={refreshTickets}
 				label={label}
 			/>

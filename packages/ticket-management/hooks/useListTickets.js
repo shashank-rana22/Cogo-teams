@@ -1,15 +1,14 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useTicketsRequest } from '@cogoport/request';
-// import { useSelector } from '@cogoport/store';
 import {
 	useEffect,
 	useState,
 	useCallback,
 } from 'react';
 
-const useListTickets = (searchValue, status, setTicketList, key) => {
-	// const { profile } = useSelector((state) => state);
+const useListTickets = (searchValue, status, key, refreshList, setRefreshList) => {
 	const [pagination, setPagination] = useState(1);
+	const [ticketList, setTicketList] = useState({ list: [], total: 0 });
 	// const [listData, setListData] = useState([]); ***
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
@@ -24,14 +23,14 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 		try {
 			const response = await trigger({
 				params: {
-					Status     : status,
+					Status  : status,
 					// UserID     : profile?.id,
 					// PerformedByID : profile?.id,
-					DisplayAll : true,
-					size       : 10,
-					page       : pageIndex - 1,
-					QFilter    : searchQuery.text || undefined,
-					Type       : searchQuery.category,
+					// DisplayAll : true,
+					size    : 10,
+					page    : pageIndex - 1,
+					QFilter : searchQuery.text || undefined,
+					Type    : searchQuery.category,
 				},
 			});
 
@@ -40,12 +39,9 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 				setTicketList((prev) => {
 					if (prev) {
 						return {
-							...prev,
-							[key]: {
-								list: [...(prev[key].list),
-									...response.data.items],
-								total: response.data.total,
-							},
+							list: [...(prev.list),
+								...response.data.items],
+							total: response.data.total,
 						};
 					}
 					return {};
@@ -55,23 +51,20 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [key, searchQuery, setTicketList, status, trigger]);
+	}, [searchQuery, setTicketList, status, trigger]);
 
-	const refreshTickets = () => {
-		setTicketList((prev) => ({
-			...prev,
-			[key]: { list: [], total: 0 },
-		}));
-		fetchTickets(1);
-	};
+	// const refreshTickets = () => {
+	// 	setTicketList({ list: [], total: 0 });
+	// 	fetchTickets(1);
+	// };
 
 	useEffect(() => {
-		setTicketList((prev) => ({
-			...prev,
-			[key]: { list: [], total: 0 },
-		}));
+		setTicketList({ list: [], total: 0 });
 		fetchTickets(1);
-	}, [fetchTickets, key, searchQuery, setTicketList]);
+		if (refreshList[key]) {
+			setRefreshList((prev) => ({ ...prev, [key]: false }));
+		}
+	}, [fetchTickets, searchQuery, setTicketList, key, refreshList, setRefreshList]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
@@ -86,10 +79,11 @@ const useListTickets = (searchValue, status, setTicketList, key) => {
 	};
 
 	return {
+		ticketList,
 		listLoading: loading,
 		fetchTickets,
 		handleScroll,
-		refreshTickets,
+		// refreshTickets,
 	};
 };
 

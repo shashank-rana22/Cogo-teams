@@ -7,7 +7,7 @@ import useGetTicketStats from '../../../hooks/useGetTicketStats';
 import styles from './styles.module.css';
 
 function StatsSection() {
-	const { statsData } = useGetTicketStats();
+	const { statsData, loading } = useGetTicketStats();
 	return (
 		<div className={styles.stats_section_container}>
 			{statsIconsAndData.map((item) => {
@@ -21,6 +21,7 @@ function StatsSection() {
 						count={statsData?.[formattedKey]}
 						icon={icon}
 						key={label}
+						statsLoading={loading}
 					/>
 				);
 			})}
