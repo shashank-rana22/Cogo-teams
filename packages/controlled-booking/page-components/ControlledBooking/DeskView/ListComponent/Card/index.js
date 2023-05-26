@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMTimer } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
-import React, { useEffect, useRef } from 'react';
+import React, { useEffect, useRef, useState } from 'react';
 
 import ContainerDetails from './ContainerDetails';
 import PortPair from './PortPair';
@@ -50,6 +50,7 @@ function Card({ item, filters, refetchBookingList }) {
 
 	const hasExpired = new Date()?.getTime() >= new Date(item?.validity_end || '').getTime();
 
+	const [showDetails, setShowDetails] = useState(false);
 	useEffect(() => {
 		if (!hasExpired) {
 			const interval = setInterval(() => {
@@ -220,6 +221,12 @@ function Card({ item, filters, refetchBookingList }) {
 				? (<StatusApproval filters={filters} item={item} refetchBookingList={refetchBookingList} />) : null}
 
 			{/* </div> */}
+
+			<div role="presentation" onClick={() => setShowDetails(!showDetails)}>
+				Take Action
+			</div>
+
+			{showDetails ? 'lol' : null}
 
 		</div>
 	);

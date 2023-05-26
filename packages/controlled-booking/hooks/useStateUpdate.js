@@ -14,7 +14,7 @@ const getPayload = ({ state, formValues }) => {
 	if (state === 'approved') {
 		return {
 			booking_status       : 'approved',
-			explanation_checks   : [formValues?.booking_placed_on],
+			explanation_checks   : formValues?.booking_placed_on,
 			advance_payment_info : {
 				is_required     : formValues?.advance_payment === 'required',
 				amount          : formValues?.advance_payment === 'required' ? Number(formValues?.amount) : undefined,

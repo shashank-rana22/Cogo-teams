@@ -74,7 +74,7 @@ function ApprovalForm({ errors, control, formValues }) {
 					{ value: 'sl', label: 'Shipping Line' },
 				]}
 				rules={{ required: 'Required' }}
-				multiple={false}
+				multiple
 			/>
 			{formValues?.booking_placed_on === 'nvocc' ? (
 				<div style={{ fontSize: 10, marginTop: 4 }}>

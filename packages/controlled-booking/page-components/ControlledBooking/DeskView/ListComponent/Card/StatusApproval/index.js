@@ -56,7 +56,7 @@ function StatusApproval({ item, refetchBookingList }) {
 						) : null}
 
 						{showModal === 'approved' ? (
-							<ApprovalForm control={control} errors={errors} formValues={formValues} />
+							<ApprovalForm item={item} control={control} errors={errors} formValues={formValues} />
 						) : null}
 
 					</Modal.Body>
