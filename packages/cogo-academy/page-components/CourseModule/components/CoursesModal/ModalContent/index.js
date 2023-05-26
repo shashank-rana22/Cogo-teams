@@ -9,10 +9,8 @@ import RightComponent from './components/RightComponent';
 import styles from './styles.module.css';
 import useListCourseUserMappings from './useListCourseUserMappings';
 
-function ModalContent({ finalCourseCategories, loading }) {
+function ModalContent({ finalCourseCategories, loading, currentCategory, setCurrentCategory }) {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
-
-	const [currentCategory, setCurrentCategory] = useState('all_courses');
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {

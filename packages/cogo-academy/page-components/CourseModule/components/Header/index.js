@@ -1,9 +1,14 @@
 import { Input, Button } from '@cogoport/components';
 import { IcMArrowDown, IcMSearchlight } from '@cogoport/icons-react';
+import { useState } from 'react';
+
+import CoursesModal from '../CoursesModal';
 
 import styles from './styles.module.css';
 
-function Header({ setShowCoursesModal }) {
+function Header({ loading, courseCategories, currentCategory, setCurrentCategory }) {
+	const [showCoursesModal, setShowCoursesModal] = useState(false);
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_container}>
@@ -24,6 +29,17 @@ function Header({ setShowCoursesModal }) {
 				placeholder="Search by Course, Category, Topic or Tags"
 				suffix={<IcMSearchlight style={{ marginRight: '12px' }} />}
 			/>
+
+			{showCoursesModal ? (
+				<CoursesModal
+					loading={loading}
+					courseCategories={courseCategories}
+					showCoursesModal={showCoursesModal}
+					setShowCoursesModal={setShowCoursesModal}
+					currentCategory={currentCategory}
+					setCurrentCategory={setCurrentCategory}
+				/>
+			) : null}
 		</div>
 	);
 }

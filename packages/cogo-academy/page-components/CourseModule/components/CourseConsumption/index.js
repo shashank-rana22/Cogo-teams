@@ -1,11 +1,10 @@
 import { IcMStarfull } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
+import ModuleNavigation from './components/ModuleNavigation';
 import useGetCogoAcademyCourse from './hooks/useGetCogoAcademyCourse';
 import useGetCourseDetails from './hooks/useGetCourseDetails';
 import styles from './styles.module.css';
-
-import ModuleNavigation from './components/ModuleNavigation';
 
 function CourseConsumption() {
 	const router = useRouter();
@@ -23,7 +22,8 @@ function CourseConsumption() {
 	} = useGetCogoAcademyCourse({ id: course_id });
 
 	return (
-		<h1>hello this is madhesh</h1>
+
+		<ModuleNavigation data={finalData} />
 	);
 }
 

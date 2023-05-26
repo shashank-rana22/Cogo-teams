@@ -21,14 +21,14 @@ function CategoryCard({ item }) {
 					}
 
 					return (
-						<Pill size="md" color="#F7FAEF" className={styles.status_pill}>
+						<Pill size="md" color="#EBEBEB" className={styles.status_pill}>
 							{topic}
 						</Pill>
 					);
 				})}
 
 				{topicsArr.length > 2 ? (
-					<Pill color="#F7FAEF">{`+${topicsArr.length - 1} More`}</Pill>
+					<Pill color="#EBEBEB">{`+${topicsArr.length - 1} More`}</Pill>
 				) : null}
 			</div>
 		</div>

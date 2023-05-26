@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useCallback, useState, useEffect } from 'react';
 
 const useGetCourseDetails = ({ id }) => {
-	const [finalData, setFinalData] = useState({});
+	const [finalData, setFinalData] = useState([]);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/get_course_details',

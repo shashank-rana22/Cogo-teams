@@ -1,58 +1,54 @@
 import { Accordion } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+
+import SubModuleContent from '../SubModuleContent';
 
 import styles from './styles.module.css';
 
-function ModuleNavigation() {
-	// const { user:{ id: user_id } } = useSelector((state) => state.profile);
-
-	// const [currentCategory, setCurrentCategory] = useState('all_courses');
-	// const [params, setParams] = useState({
-	// 	page    : 1,
-	// 	filters : {
-	// 		status: 'active',
-	// 		user_id,
-	// 	},
-	// });
-
-	// const {
-	// 	data,
-	// 	loading: listLoading,
-	// 	fetchList,
-	// } = useListCourseUserMappings({ activeTab: currentCategory, params });
-
-	// if (loading) {
-	// 	return (
-	// 		<div style={{ margin: '20px' }}>
-	// 			{/* <LoadingState rowsCount={3} /> */}
-	// 		</div>
-	// 	);
-	// }
-
+function ModuleNavigation({ data = [] }) {
 	return (
 		<div className={styles.container}>
-			<Accordion
-				type="text"
-				title="Lorem ipsum dolor
-            sit amet, consectetur adipiscing elit. Sed"
-				className={styles.module_accordion}
-			>
-				<Accordion type="text" title="Text Accordion" className={styles.submodule_accordion}>
-					Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-					condimentum, nisl eget aliquam tincidunt, nunc nisl aliquam
+			{data?.map((module, index) => (
+				<Accordion
+					key={module.id}
+					type="text"
+					className={styles.module_accordion}
+					title={(
+						<div className={styles.flex}>
+							<div className={styles.number}>
+								<div className={styles.index}>{index + 1}</div>
+							</div>
+							<div className={styles.name}>{module.name}</div>
+						</div>
+					)}
+				>
+					<div>
+						{module?.course_sub_modules?.map((subModule, subIndex) => (
+							<Accordion
+								key={subModule.id}
+								type="text"
+								className={styles.submodule_accordion}
+								title={(
+									<div className={styles.flex}>
+										<div className={styles.number}>
+											<div className={styles.index}>
+												{index + 1}
+												.
+												{subIndex + 1}
+											</div>
+										</div>
+										<div className={styles.name}>{subModule.name}</div>
+									</div>
+								)}
+							>
+								<SubModuleContent id={subModule.id} />
+							</Accordion>
+						))}
+
+					</div>
+
 				</Accordion>
-			</Accordion>
 
-			<Accordion type="text" title="Text Accordion" className={styles.module_accordion}>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-				condimentum, nisl eget aliquam tincidunt, nunc nisl aliquam
-			</Accordion>
-
-			<Accordion type="text" title="Text Accordion" className={styles.module_accordion}>
-				Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed
-				condimentum, nisl eget aliquam tincidunt, nunc nisl aliquam
-			</Accordion>
+			))}
 		</div>
 	);
 }

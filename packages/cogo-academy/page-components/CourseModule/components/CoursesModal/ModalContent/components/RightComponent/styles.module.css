@@ -1,4 +1,22 @@
 .container {
 	display: flex;
 	flex-wrap: wrap;
+	justify-content: space-around;
+}
+
+.see_all{
+	background: rgba(253, 235, 233, 0.3);
+	box-shadow: 0 3px 3px rgb(238 52 37 / 15%);
+	border-radius: 6px;
+	width: 30%;
+	height: 100px;
+	padding: 8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	cursor: pointer;
+}
+
+.see_all > div{
+	text-decoration: underline;
 }

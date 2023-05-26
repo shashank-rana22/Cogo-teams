@@ -29,15 +29,6 @@
 	}
 }
 
-.btn_container, .sort_by{
-	display: flex;
-	align-items: center;
-}
-
-.sort_by{
-	margin-left: 20px;
-}
-
 .header{
 	display: flex;
 	justify-content: space-between;

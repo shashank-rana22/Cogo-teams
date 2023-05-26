@@ -1,15 +1,11 @@
 import { Modal } from '@cogoport/components';
 
-import useListCourseCategory from '../../hooks/useListCourseCategory';
-
 import ModalContent from './ModalContent';
 
-function CoursesModal({ showCoursesModal, setShowCoursesModal }) {
-	const {
-		finalCourseCategories = [],
-		loading,
-	} = useListCourseCategory();
-
+function CoursesModal({
+	loading, courseCategories, showCoursesModal,
+	setShowCoursesModal, currentCategory, setCurrentCategory,
+}) {
 	return (
 		<Modal
 			show={showCoursesModal}
@@ -18,7 +14,12 @@ function CoursesModal({ showCoursesModal, setShowCoursesModal }) {
 			onClose={() => setShowCoursesModal(false)}
 		>
 			<Modal.Header title="Courses" />
-			<ModalContent finalCourseCategories={finalCourseCategories} loading={loading} />
+			<ModalContent
+				finalCourseCategories={courseCategories}
+				loading={loading}
+				currentCategory={currentCategory}
+				setCurrentCategory={setCurrentCategory}
+			/>
 		</Modal>
 	);
 }
