@@ -31,7 +31,7 @@ const getColumns = ({ onClickNewJoinerColumn }) => [
 		Header   : 'REPORTING MANAGER',
 		accessor : (item) => (
 			<div>
-				{item?.reporting_manager || '-'}
+				{item?.hiring_manager || '-'}
 			</div>
 		),
 	},

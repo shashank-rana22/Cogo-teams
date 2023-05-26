@@ -1,11 +1,12 @@
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
-import { useEffect, useCallback } from 'react';
+import { useEffect, useCallback, useState } from 'react';
 
 import getColumns from './getColumns';
 
 const useTableView = ({ search }) => {
 	const router = useRouter();
+	const [activeTab, setActiveTab] = useState('active');
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'get',
@@ -18,7 +19,8 @@ const useTableView = ({ search }) => {
 				await trigger({
 					params: {
 						filters: {
-							q: search || undefined,
+							q      : search || undefined,
+							status : activeTab,
 						},
 					},
 				});
@@ -26,7 +28,7 @@ const useTableView = ({ search }) => {
 				console.log('error :: ', error);
 			}
 		},
-		[search, trigger],
+		[activeTab, search, trigger],
 	);
 
 	useEffect(() => {
@@ -43,6 +45,8 @@ const useTableView = ({ search }) => {
 		columns,
 		loading,
 		list: data?.list || [],
+		setActiveTab,
+		activeTab,
 	};
 };
 
