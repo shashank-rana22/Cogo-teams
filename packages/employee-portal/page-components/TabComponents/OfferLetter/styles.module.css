@@ -20,3 +20,9 @@
 	display: flex;
 	flex-direction: column;
 }
+
+.button_container{
+	display: flex;
+	justify-content: center;
+	padding-bottom:12px;
+}

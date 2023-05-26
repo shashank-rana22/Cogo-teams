@@ -17,7 +17,8 @@ function useGetEmployeeDetails({ id = '' }) {
 		try {
 			trigger({
 				params: {
-					user_id: userId,
+					user_id               : userId,
+					offer_letter_required : true,
 				},
 			});
 		} catch (err) {
