@@ -1,12 +1,12 @@
 import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import EmptyTicket from '../../../../../../../common/EmptyTicket';
+import TicketStructureLoader from '../../../../../../../common/TicketStructureLoader';
 import useUpdateTicketActivity from '../../../../../../../hooks/useUpdateTicketActivity';
 
-import EmptyStateTicketStructure from './EmptyStateTicketStructure';
 import styles from './styles.module.css';
 import TicketStructureBody from './TicketStructureBody';
-import TicketStructureLoader from './TicketStructureLoader';
 
 function TicketStructure({
 	data = [],
@@ -16,18 +16,13 @@ function TicketStructure({
 	setModalData = () => {},
 	listType = '',
 }) {
-	// const {
-	// 	refreshTickets,
-	// 	setModalData,
-	// 	listType = '',
-	// } = props;
 	const { updateTicketActivity } = useUpdateTicketActivity({
 		refreshTickets,
 	});
 
 	if (isEmpty(data) && !loading) {
 		return (
-			<EmptyStateTicketStructure
+			<EmptyTicket
 				setModalData={setModalData}
 				listType={listType}
 			/>
