@@ -17,7 +17,6 @@ function TableView({ search }) {
 	const columns = getColumns({ setCtcBreakup, ctcBreakup });
 
 	const { data = {}, onPageChange } = useGetTableView();
-	console.log('search', search);
 
 	const { list = [], page, page_limit, total_count } = data;
 
