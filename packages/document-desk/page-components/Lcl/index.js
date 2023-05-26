@@ -2,7 +2,6 @@ import Header from '../../common/Header';
 import Loader from '../../common/Loader';
 import useLclListDocumentDesk from '../../hooks/useLclListDocumentDesk';
 
-import AppliedFilters from './AppliedFilters';
 import DeskTabs from './DeskTabs';
 import Filters from './Filters';
 import ShipmentList from './ShipmentList';
@@ -14,15 +13,13 @@ function Lcl() {
 
 	return (
 		<div>
-			<div>
+			<div className={styles.header}>
 				<Header />
 
 				<div className={styles.filters}>
 					<Filters />
 				</div>
 			</div>
-
-			<AppliedFilters />
 
 			<StepperTabs />
 

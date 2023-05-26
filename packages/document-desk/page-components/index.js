@@ -51,7 +51,6 @@ export default function DocumentDesk() {
 
 	const RenderDesk = shipmentType in ResolveDocumentDesk ? ResolveDocumentDesk[shipmentType] : null;
 
-	console.log(shipmentType, 'shipmentType 3333');
 	return (
 		<DocumentDeskContext.Provider value={contextValues}>
 			{shipmentType ? <RenderDesk /> : null}
