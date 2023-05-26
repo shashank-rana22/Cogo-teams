@@ -1,7 +1,7 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useRef, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
@@ -25,7 +25,7 @@ const useGetTradeParty = ({
 			try {
 				if (
 					(shipment_id || query?.id)
-					&& geo.uuid.fortigo_network_ids.includes(shipment_data?.importer_exporter_id)
+					&& geo.uuid.fortigo_network_ids?.includes(shipment_data?.importer_exporter_id)
 					&& shipment_data?.shipment_type === 'ftl_freight'
 				) {
 					getList();

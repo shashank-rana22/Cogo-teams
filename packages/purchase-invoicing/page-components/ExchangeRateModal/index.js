@@ -1,6 +1,6 @@
 import { Button, Modal, Checkbox, Placeholder } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMAttach, IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
