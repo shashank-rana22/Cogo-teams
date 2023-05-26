@@ -10,12 +10,7 @@ function getTotalMarginSum({ editedMargins = {}, currency_conversion, rate }) {
 		combinedLineItems = [...combinedLineItems, ...itm];
 	});
 
-	console.log('currency_conversion::', currency_conversion);
-
-	console.log('rate::', rate);
-
 	combinedLineItems.forEach((itm) => {
-		console.log('item::', itm);
 		totalAmount += convertCurrencyValue(
 			itm?.value,
 			itm?.currency,

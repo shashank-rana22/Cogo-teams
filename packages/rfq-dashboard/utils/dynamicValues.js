@@ -16,10 +16,10 @@ export const convertCurrencyValue = (
 		return value;
 	}
 	if (base_currency === fromCurrency) {
-		return (value / currencies?.[toCurrency]) * fxFees;
+		return (value / (currencies?.[toCurrency] || 1)) * fxFees;
 	}
 	const inBase = value * (currencies?.[fromCurrency] || 0);
-	return (inBase / currencies?.[toCurrency]) * fxFees;
+	return (inBase / (currencies?.[toCurrency] || 1)) * fxFees;
 };
 
 export const displayTotal = (
@@ -35,8 +35,8 @@ export const displayTotal = (
 			Total += convertCurrencyValue(
 				line_item?.total_buy_price === 0
 					? line_item?.total_price_discounted
-					: line_item?.total_price_discounted
-							+ Number(line_item?.credit_amount * line_item?.quantity || 0),
+					: (line_item?.total_price_discounted || 0)
+							+ Number((line_item?.credit_amount || 0) * (line_item?.quantity || 0) || 0),
 				line_item?.currency,
 				toCurrency,
 				conversions,

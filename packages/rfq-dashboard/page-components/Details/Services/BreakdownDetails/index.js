@@ -42,27 +42,16 @@ function BreakdownDetails({
 	};
 	let total = 0;
 
-	console.log('conversions::', conversions);
-
-	console.log('editedMargins::', editedMargins);
-
-	console.log('currency_conversion::', conversions);
-
-	console.log('rate::', rate);
-
-	const { total_margin_by_kam, totalAmount } = getTotalMarginSum({
+	const { totalAmount } = getTotalMarginSum({
 		editedMargins,
-		conversions,
+		currency_conversion: conversions,
 		rate,
 	});
 
-	console.log('margin::', totalAmount, total_margin_by_kam);
-
 	useEffect(() => {
 		const calculate = (totalAmount / (total - totalAmount)) * 100;
-		console.log('calculate::', calculate);
-		// const formattedCalculate = calculate.toFixed(2);
-		setProfitability(+calculate);
+		const formattedCalculate = calculate.toFixed(2);
+		setProfitability(+formattedCalculate);
 	}, [total, totalAmount]);
 
 	const convenience_fee = convertCurrencyValue(
