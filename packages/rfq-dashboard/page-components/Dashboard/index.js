@@ -2,7 +2,7 @@ import { useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
 import Content from './Content';
-// import Filters from './Filters';
+import Filters from './Filters';
 import styles from './styles.module.css';
 
 function Dashboard() {
@@ -10,7 +10,7 @@ function Dashboard() {
 	const formProps = useForm();
 
 	const { watch } = formProps;
-	const { end_date, organization_size, status, search, service_type, start_date } = watch();
+	const { end_date, organization_size, status, search, service_type, start_date, profitability } = watch();
 
 	const [filterStore, setFilterStore] = useState({
 		activeTab,
@@ -18,6 +18,7 @@ function Dashboard() {
 	});
 
 	useEffect(() => {
+		const [lowProfitability, highProfitability] = profitability || [];
 		setFilterStore((prev) => ({
 			...prev,
 			activeTab,
@@ -27,16 +28,18 @@ function Dashboard() {
 			serviceType      : service_type,
 			endDate          : end_date,
 			startDate        : start_date,
+			lowProfitability,
+			highProfitability,
 		}));
-	}, [search, organization_size, status, service_type, start_date, end_date, activeTab, filterStore.sortBy]);
+	}, [search, organization_size, status, service_type, start_date, end_date,
+		activeTab, filterStore.sortBy, profitability]);
 
 	return (
 		<div>
 			<div className={styles.title}>RFQ Dashboard</div>
 
 			<div className={styles.container}>
-				{/* <Filters formProps={formProps} /> */}
-
+				<Filters formProps={formProps} />
 				<Content
 					filterStore={filterStore}
 					setFilterStore={setFilterStore}

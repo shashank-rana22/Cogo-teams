@@ -1,6 +1,6 @@
 import { Pagination, Tabs, TabPanel } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-// import { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import useListRfqs from '../../../hooks/useListrfqs';
 
@@ -8,26 +8,24 @@ import RfqDetails from './RfqDetails';
 import styles from './styles.module.css';
 
 function Content(props) {
-	const { activeTab, setActiveTab } = props;
+	const { activeTab, setActiveTab, filterStore } = props;
 
 	const TAB_MAPPING = [
 		{ name: 'approval', title: 'Approval' },
 		{ name: 'all', title: 'All RFQ' },
 	];
 
-	const { getRfqsForApproval, data = {}, page, setPage } = useListRfqs();
-	console.log('data::', data);
+	const { getRfqsForApproval, data = {}, page, setPage } = useListRfqs({ filterStore });
 
-	// useEffect(() => {
-	// 	getRfqsForApproval();
-	// }, []);
+	useEffect(() => {
+		getRfqsForApproval();
+	}, [getRfqsForApproval, filterStore]);
 
 	const { list = [] } = data;
 
 	if (isEmpty(data)) {
 		return null;
 	}
-
 	return (
 		<div className={styles.container}>
 			<Tabs

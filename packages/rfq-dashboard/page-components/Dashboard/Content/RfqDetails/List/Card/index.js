@@ -10,6 +10,7 @@ import { getformattedDuration } from '../../../../../../utils/getFormattedDurati
 import styles from './styles.module.css';
 
 function Card({ item, handleCheck, checkedItems, partner_id }) {
+	const { stats } = item;
 	const router = useRouter();
 
 	const { port_pair_count = {} } = item;
@@ -77,12 +78,15 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 				<div className={styles.figures}>
 					<div className={styles.field}>
 						<div className={styles.label}>Promised Con Revenue</div>
-						<div className={styles.value}>$1,40,000</div>
+						<div className={styles.value}>{Math.round(stats.promised_consolidated_revenue)}</div>
 
 					</div>
 					<div className={styles.field}>
 						<div className={styles.label}>Promised Con Profitability</div>
-						<div className={styles.value}>2.6 %</div>
+						<div className={styles.value}>
+							{Math.round(stats.promised_consolidated_profitability)}
+							%
+						</div>
 
 					</div>
 					{/* <div className={styles.field}>

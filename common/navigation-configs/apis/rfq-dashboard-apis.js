@@ -17,6 +17,13 @@ const apis = [
 		feature      : 'rfq',
 		service_name : 'rfq',
 	},
+	{
+		api          : 'bulk_update_rfq_state',
+		access_type  : 'private',
+		feature      : 'rfq',
+		service_name : 'rfq',
+	},
+
 ];
 
 export default apis;

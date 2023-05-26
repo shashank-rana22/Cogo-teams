@@ -1,16 +1,15 @@
 import { useSelector } from '@cogoport/store';
+import { useEffect } from 'react';
 
 import Card from './Card';
 import styles from './styles.module.css';
 
-function List({ checkedItems, setCheckedItems, setSelectAll, data }) {
-	console.log('data incoming::', data);
+function List({ checkedItems, setCheckedItems, setSelectAll, data, selectAll }) {
 	const { profile = {} } = useSelector((state) => state);
 	const { partner } = profile;
 	const { id } = partner;
 	const handleCheck = (event) => {
 		const { value, checked } = event.target;
-
 		if (checked) {
 			setCheckedItems((prevState) => [
 				...prevState,
@@ -21,7 +20,6 @@ function List({ checkedItems, setCheckedItems, setSelectAll, data }) {
 			setSelectAll(false);
 		}
 	};
-
 	return (
 		<div className={styles.container}>
 			{(data || []).map((item) => (
@@ -31,6 +29,7 @@ function List({ checkedItems, setCheckedItems, setSelectAll, data }) {
 					item={item}
 					checkedItems={checkedItems}
 					partner_id={id}
+					selectAll={selectAll}
 				/>
 			))}
 		</div>

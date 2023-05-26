@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 
-import { data } from '../../../../configurations/list-dummy-data';
+// import { data } from '../../../../configurations/list-dummy-data';
 
 import Filter from './Filter';
 import List from './List';
@@ -12,15 +12,15 @@ function RfqDetails(props) {
 
 	const { list = [] } = props;
 
-	// useEffect(() => {
-	// 	setSelectAll(checkedItems.length === data.length);
-	// }, [checkedItems.length]);
+	useEffect(() => {
+		setSelectAll(checkedItems.length === list.length);
+	}, [list.length, checkedItems.length]);
 
 	return (
 		<div className={styles.container}>
 			<Filter
 				{...props}
-				data={data}
+				data={list}
 				selectAll={selectAll}
 				checkedItems={checkedItems}
 				setSelectAll={setSelectAll}
@@ -32,6 +32,7 @@ function RfqDetails(props) {
 				checkedItems={checkedItems}
 				setCheckedItems={setCheckedItems}
 				setSelectAll={setSelectAll}
+				selectAll={selectAll}
 			/>
 		</div>
 	);

@@ -35,6 +35,10 @@ const controls = [
 				label : 'Unknown',
 				value : 'unknown',
 			},
+			{
+				label : 'Mid Size',
+				value : 'mid_size',
+			},
 		],
 	},
 	{

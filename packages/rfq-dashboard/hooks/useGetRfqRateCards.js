@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useGetRfqRateCards = ({ rfq_id = '' }) => {
 	const [{ loading, data }, trigger] = useRequest({
@@ -15,7 +16,7 @@ const useGetRfqRateCards = ({ rfq_id = '' }) => {
 		},
 	}, { manual: false });
 
-	const getRfqsRateCards = async () => {
+	const getRfqsRateCards = useCallback(async () => {
 		try {
 			await trigger();
 		} catch (error) {
@@ -23,7 +24,7 @@ const useGetRfqRateCards = ({ rfq_id = '' }) => {
 				Toast.error(getApiErrorString(error?.response?.data));
 			}
 		}
-	};
+	}, [trigger]);
 
 	return {
 		getRfqsRateCards,

@@ -1,13 +1,22 @@
 import { Checkbox, Button, Select } from '@cogoport/components';
 
 import { SORT_OPTIONS } from '../../../../../constants';
+import useBulkUpdateRfqState from '../../../../../hooks/useBulkUpdateRfqState';
 
 import styles from './styles.module.css';
 
 function Filter({ data, filterStore, setFilterStore, checkedItems, selectAll, setCheckedItems, setSelectAll }) {
 	const handleSelectAll = () => {
+		console.log('nanda', selectAll);
 		setSelectAll(!selectAll);
-		setCheckedItems(selectAll ? [] : data);
+		console.log('nanda1', selectAll);
+		setCheckedItems(!selectAll ? data : []);
+		console.log('checked', checkedItems, selectAll);
+	};
+	const { bulkUpdateRfqState } = useBulkUpdateRfqState();
+	const handleApproveRfq = () => {
+		const payload = checkedItems.map((item) => item.id);
+		bulkUpdateRfqState({ payload });
 	};
 
 	return (
@@ -18,7 +27,7 @@ function Filter({ data, filterStore, setFilterStore, checkedItems, selectAll, se
 					checked={selectAll}
 					onChange={handleSelectAll}
 				/>
-				<Button>
+				<Button onClick={handleApproveRfq}>
 					Approve Selected (
 					{checkedItems.length}
 					)

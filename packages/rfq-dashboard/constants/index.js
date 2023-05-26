@@ -10,8 +10,6 @@ const SORT_OPTIONS = [
 	{ label: 'Newest Arrival', value: 'newest' },
 	{ label: 'Profitability (High to Low)', value: 'profitability_high' },
 	{ label: 'Profitability (Low to High)', value: 'profitability_low' },
-	{ label: 'Port Pair request (High to Low)', value: 'request_high' },
-	{ label: 'Port Pair request (Low to High)', value: 'request_low' },
 ];
 
 const SVG_PROPS = {
