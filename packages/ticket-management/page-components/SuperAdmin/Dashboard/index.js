@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 import UserStatistics from './UserStatistics';
 
 function Dashboard() {
-	const { data } = useGetDashboard();
+	const { data, loading } = useGetDashboard();
 
 	const {
 		CustomerSatisfactionStats, TicketCount, TopCategory,
@@ -19,8 +19,13 @@ function Dashboard() {
 				ticketCount={TicketCount}
 				data={data}
 			/>
-			<UserStatistics topCustomer={TopCustomer} topCategory={TopCategory} topAgents={TopAgents} />
-			<Graph customerSatisfactionStats={CustomerSatisfactionStats} />
+			<UserStatistics
+				topCustomer={TopCustomer}
+				topCategory={TopCategory}
+				topAgents={TopAgents}
+				loading={loading}
+			/>
+			<Graph customerSatisfactionStats={CustomerSatisfactionStats} loading={loading} />
 		</div>
 	);
 }

@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 function Graph({ customerSatisfactionStats }) {
 	return (
 		<div className={styles.container}>
-			<FeedbackGraph customerSatisfactionStats={customerSatisfactionStats} />
+			<FeedbackGraph customerSatisfactionStats={customerSatisfactionStats} loading />
 		</div>
 
 	);
