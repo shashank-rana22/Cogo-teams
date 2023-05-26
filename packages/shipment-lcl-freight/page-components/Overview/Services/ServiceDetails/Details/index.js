@@ -19,17 +19,17 @@ const SERVICE_INITIAL_KEYS = [
 function Details({ serviceData = {} }) {
 	const { service_type, state } = serviceData || {};
 
-	const { service_items_key, remainingServiceData, serviceInitialDetail } = useMemo(() => {
+	const [service_items_key, remainingServiceData, serviceInitialDetail] = useMemo(() => {
 		const items_key = getConfigs(service_type).details || {};
 
 		const remainingData = omit(serviceData, SERVICE_INITIAL_KEYS);
 
 		const initialDetail = {};
 		SERVICE_INITIAL_KEYS.forEach((key) => {
-			serviceInitialDetail[key] = serviceData?.[key];
+			initialDetail[key] = serviceData?.[key];
 		});
 
-		return { items_key, remainingData, initialDetail };
+		return [items_key, remainingData, initialDetail];
 	}, [serviceData, service_type]);
 
 	return (
