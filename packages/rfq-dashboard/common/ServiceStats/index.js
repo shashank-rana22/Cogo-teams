@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
@@ -20,7 +21,15 @@ const STATS_MAPPING = {
 function ServiceStats({ data = [], type = '', source = '' }) {
 	const renderItem = (item) => {
 		if (item.key === 'promised_revenue') {
-			return `${data?.[item.key]?.promised_revenue_currency} ${data?.[item.key]}`;
+			return formatAmount({
+				amount   : data?.[item.key],
+				currency : data?.[item.key]?.promised_revenue_currency,
+				options  : {
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 0,
+				},
+			});
 		}
 		if (item.key === 'promised_profitability' || item.key === 'utilization') {
 			return typeof data?.[item?.key] === 'number' ? (

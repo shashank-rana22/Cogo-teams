@@ -18,7 +18,7 @@ const useUpdateRfqRateMargin = ({
 	const [{ loading, data }, trigger] = useRequest({
 		url    : endpoint,
 		method : 'POST',
-	}, { manual: false });
+	}, { manual: true });
 
 	const updateRfqRateMargin = async ({ editBody, rfq_rate_card_id }) => {
 		try {

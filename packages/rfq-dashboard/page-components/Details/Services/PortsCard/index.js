@@ -4,7 +4,6 @@ import { useState, useEffect } from 'react';
 
 import ServiceStats from '../../../../common/ServiceStats';
 import { priceBreakupChildData } from '../../../../configurations/price-breakup-card-child-data';
-import { PromisedConAndContract } from '../../../../configurations/service-stats-data';
 import useGetRfqRateCardDetails from '../../../../hooks/useGetRfqRateCardDetails';
 import useUpdateRfqRateMargin from '../../../../hooks/useUpdateRfqRateMargin';
 import BreakdownDetails from '../BreakdownDetails';
@@ -12,7 +11,6 @@ import BreakdownDetails from '../BreakdownDetails';
 import CommodityMapping from './CommodityMapping';
 import LoaderPortsCard from './LoaderPortsCard';
 import LocationDetails from './LocationDetails';
-import PriceBreakupCard from './PriceBreakupCard';
 import PriceFreightCtr from './PriceFrieghtCtr';
 import styles from './styles.module.css';
 
@@ -28,10 +26,6 @@ function PortsCard(props) {
 		detail = {}, freight_price_currency = '', freight_price_discounted = '',
 		total_price_discounted = '', id = '', stats = {},
 	} = data;
-
-	console.log('data::', data);
-
-	console.log('freight_price_currency::', freight_price_currency);
 
 	const {
 		origin_port = {}, destination_port = {},
@@ -56,11 +50,7 @@ function PortsCard(props) {
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
 
-	console.log('details respone::', rate_card_details_data);
-
 	const [editedMargins, setEditedMargins] = useState({});
-
-	// console.log('rate::', ?.rate, 'currency', convenience_line_item?.currency);
 
 	const [convenienceDetails, setConvenienceDetails] = useState({
 		convenience_rate: {
@@ -96,16 +86,6 @@ function PortsCard(props) {
 
 	return (
 		<div className={styles.main_container}>
-			{/* {
-				isClickable	? (
-					<Checkbox
-						value="a3"
-						checked={selected.find((item) => item.id === data.id)}
-						onChange={(e) => changeSelection(data, e.target.checked)}
-						disabled={loading}
-					/>
-				) : <div className={styles.empty_space} />
-			} */}
 			<div className={styles.port_container}>
 				<div className={styles.container}>
 					{loading ? <LoaderPortsCard />
@@ -146,12 +126,6 @@ function PortsCard(props) {
 					</button>
 				</div>
 				{!isEmpty(showPrice) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && (
-				// <PriceBreakupCard
-				// 	priceBreakupChildData={priceBreakupChildData}
-				// 	prefilledValues={prefilledValues}
-				// 	showPrice={showPrice}
-				// 	loading={loading}
-				// />
 					<BreakdownDetails
 						rate={rate}
 						detail={rate_card_details}
