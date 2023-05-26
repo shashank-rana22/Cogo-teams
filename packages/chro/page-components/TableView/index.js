@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import StyledTable from '../StyledTable';
 
+import ActionPopover from './ActionPopover';
 import CtcBreakup from './CtcBreakup';
 import getColumns from './getColumns';
 import styles from './styles.module.css';
@@ -47,7 +48,16 @@ function TableView({ search }) {
 					<CtcBreakup metadata={metadata} />
 				</Modal.Body>
 				<Modal.Footer>
-					<Button onClick={() => setCtcBreakup('')}>OK</Button>
+					<div className={styles.button_container}>
+						<ActionPopover ctcBreakup={ctcBreakup} />
+						<Button
+							onClick={() => {}}
+							themeType="primary"
+							style={{ marginLeft: 8 }}
+						>
+							Approve
+						</Button>
+					</div>
 				</Modal.Footer>
 			</Modal>
 		</div>
