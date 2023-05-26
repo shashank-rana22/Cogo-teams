@@ -42,7 +42,7 @@ function FilterContainer({ setGlobalFilters, refetchUserStats, refectUserList })
 				/>
 				<Button
 					themeType="accent"
-					type="submit"
+					type="button"
 					onClick={() => setOpenPlanModal((prev) => !prev)}
 				>
 					Assign Plan

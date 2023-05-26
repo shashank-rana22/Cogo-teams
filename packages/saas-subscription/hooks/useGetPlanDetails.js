@@ -21,7 +21,7 @@ const useGetPlanDetails = ({ featureModal }) => {
 				params: {
 					id: plan_id,
 				},
-			}); g;
+			});
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}

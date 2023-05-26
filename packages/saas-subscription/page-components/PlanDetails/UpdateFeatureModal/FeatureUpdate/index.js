@@ -67,13 +67,13 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 						))}
 					</div>
 					<div className={styles.add_btn_container}>
-						<Button themeType="link" onClick={appendHandler}>Add</Button>
+						<Button type="button" themeType="link" onClick={appendHandler}>Add</Button>
 					</div>
 				</div>
 			</div>
 			<div className={cl`${styles.container} ${styles.footer}`}>
 				<Button
-					type="submit"
+					type="button"
 					themeType="secondary"
 					className={styles.canceBtn}
 					onClick={() => modalCloseHandler(false)}
@@ -82,7 +82,7 @@ function FeatureUpdate({ modalCloseHandler, featureInfo, loading = false, submit
 					Cancel
 				</Button>
 				<Button
-					type="submit"
+					type="button"
 					themeType="accent"
 					onClick={handleSubmit(submitHandler)}
 					loading={loading}

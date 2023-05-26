@@ -42,7 +42,7 @@ function AssignPlanModal({ openPlanModal, setOpenPlanModal, refectUserList }) {
 				<Button themeType="secondary" type="submit" onClick={closeModal} disabled={loading}>Cancel</Button>
 				<Button
 					themeType="accent"
-					type="submit"
+					type="button"
 					className={styles.submit_btn}
 					onClick={handleSubmit(submitHandler)}
 					loading={loading}
