@@ -4471,6 +4471,11 @@ const partner = {
 			service_name : 'unified_dashboard',
 			feature      : 'live_booking',
 		},
+		{
+			api          : 'get_weight_slabs_for_airline',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
 	],
 	operations_dashboard: [
 		{
