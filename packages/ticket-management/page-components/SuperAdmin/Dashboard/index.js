@@ -1,9 +1,10 @@
 import useGetDashboard from '../../../hooks/useGetDashboard';
 
-import Graph from './Graph';
+import FeedbackGraph from './FeedbackGraph';
 import OverallStats from './OverallStats';
 import styles from './styles.module.css';
 import UserStatistics from './UserStatistics';
+import Widget from './UserStatistics/Widget';
 
 function Dashboard() {
 	const { data, loading } = useGetDashboard();
@@ -19,13 +20,23 @@ function Dashboard() {
 				ticketCount={TicketCount}
 				data={data}
 			/>
-			<UserStatistics
-				topCustomer={TopCustomer}
-				topCategory={TopCategory}
-				topAgents={TopAgents}
-				loading={loading}
-			/>
-			<Graph customerSatisfactionStats={CustomerSatisfactionStats} loading={loading} />
+			<div className={styles.body}>
+				<div className={styles.agents}>
+					<UserStatistics
+						topCustomer={TopCustomer}
+						topCategory={TopCategory}
+						topAgents={TopAgents}
+						loading={loading}
+					/>
+
+					<FeedbackGraph customerSatisfactionStats={CustomerSatisfactionStats} loading />
+				</div>
+				<div className={styles.category}>
+					<Widget label="Users (based on issues)" data={TopCustomer} type="Users" loading={loading} />
+					<Widget label="Top Categories" data={TopCategory} type="Categories" loading={loading} />
+
+				</div>
+			</div>
 		</div>
 	);
 }
