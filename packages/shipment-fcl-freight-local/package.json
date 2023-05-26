@@ -18,8 +18,6 @@
         "@cogoport/shipment-mails": "workspace:^0.1.0",
         "@cogoport/store": "workspace:^0.1.0",
         "@cogoport/utils": "^1.2.10",
-        "next\n": "link:@cogoport/next\n",
-        "react": "18.2.0",
-        "side-bar": "link:@cogoport/navigation-configs/side-bar"
+        "react": "18.2.0"
     }
 }
