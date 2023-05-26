@@ -9,7 +9,8 @@ function Dashboard() {
 	const { data } = useGetDashboard();
 
 	const {
-		CustomerSatisfactionStats, TicketCount, TopCategory, TopCustomer,
+		CustomerSatisfactionStats, TicketCount, TopCategory,
+		TopCustomer, TopAgents,
 	} = data || {};
 
 	return (
@@ -18,7 +19,7 @@ function Dashboard() {
 				ticketCount={TicketCount}
 				data={data}
 			/>
-			<UserStatistics topCustomer={TopCustomer} topCategory={TopCategory} />
+			<UserStatistics topCustomer={TopCustomer} topCategory={TopCategory} topAgents={TopAgents} />
 			<Graph customerSatisfactionStats={CustomerSatisfactionStats} />
 		</div>
 	);

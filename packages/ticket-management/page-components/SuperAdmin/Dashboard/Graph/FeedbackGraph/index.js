@@ -41,7 +41,7 @@ function FeedbackGraph({ customerSatisfactionStats }) {
 					)}
 				/>
 				<div className={styles.graph_total}>
-					<span className={styles.graph_count}>8.4k</span>
+					<span className={styles.graph_count}>{customerSatisfactionStats?.TotalFeedback || 0}</span>
 					<span className={styles.graph_label}>Total No. of Customers</span>
 				</div>
 			</div>
