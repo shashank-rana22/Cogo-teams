@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const repositoryControls = () => ({
 	basic: [
@@ -8,9 +8,15 @@ const repositoryControls = () => ({
 			asyncKey    : 'list_operators',
 			label       : 'Select Airline',
 			placeholder : 'Select Airline...',
-			span        : 6,
-			rules       : {
-				required: 'true',
+			params      : {
+				filters    : { operator_type: 'airline', status: 'active' },
+				page_limit : 10,
+				sort_by    : 'short_name',
+				sort_type  : 'asc',
+			},
+			span  : 6,
+			rules : {
+				required: true,
 			},
 		},
 		{
@@ -19,8 +25,7 @@ const repositoryControls = () => ({
 			asyncKey : 'list_locations',
 			params   : {
 				filters: {
-					type       : 'airport',
-					country_id : GLOBAL_CONSTANTS.country_ids.IN,
+					type: 'airport',
 				},
 				page_limit : 10,
 				sort_by    : 'name',
@@ -124,7 +129,7 @@ const repositoryControls = () => ({
 				},
 			],
 			value : 'yes',
-			label : 'Do we send Agreed Rate(Email)?',
+			label : 'Do we send Agreed Rate in Email for this Airline?',
 			span  : 6,
 			rules : {
 				required: true,
