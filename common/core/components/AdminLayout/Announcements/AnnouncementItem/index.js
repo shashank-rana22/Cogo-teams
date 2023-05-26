@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';

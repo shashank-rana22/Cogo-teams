@@ -7,7 +7,7 @@ export function canEditSchedule({ primary_service, activeStakeholder }) {
 	const keyPresenceCheck = TIMELINE_EDITABLE.primary_service.key_present_check
 		.every((key) => !!primary_service?.[key]);
 
-	const userNotAllowedCheck = TIMELINE_EDITABLE.stakeholders_not_allowed.includes(activeStakeholder);
+	const userNotAllowedCheck = !TIMELINE_EDITABLE.stakeholders_not_allowed.includes(activeStakeholder);
 
 	return userNotAllowedCheck && (stateCheck || keyPresenceCheck);
 }

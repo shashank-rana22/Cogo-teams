@@ -1,0 +1,73 @@
+.details {
+	margin-top: 16px;
+}
+
+.flex {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.table {
+	padding: 16px;
+	background-color: var(--color-tertiary-beige-5);
+	border: 1px solid var(--color-tertiary-beige-2);
+}
+
+.col {
+	display: flex;
+	padding: 16px 4px;
+	font-size: var(--font-size-md);
+	border-bottom: 1px solid var(--color-tertiary-beige-2);
+}
+
+.businesss {
+	flex: 1.6;
+	width: calc(1.6*(100 / 12));
+}
+
+.entity {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.jvmode {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.type {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.glcode {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.legamount {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.amount {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.islast {
+	border: none;
+}
+
+.credit {
+	color: var(--color-tertiary-success-green-1);
+}
+
+.debit {
+	color: var(--color-primary-error-red-2);
+}
+
+.line {
+	margin-bottom: 16px;
+	border-top: 2px solid var(--color-tertiary-beige-2);
+}

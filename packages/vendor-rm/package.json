@@ -8,7 +8,6 @@
   "dependencies": {
     "@cogoport/components": "^1.0.316",
     "@cogoport/forms": "workspace:*",
-    "@cogoport/constants": "workspace:^0.1.0",
 		"@cogoport/globalization": "workspace:*",
     "@cogoport/icons-react": "^1.0.57",
     "@cogoport/navigation-configs": "workspace:0.1.0",
