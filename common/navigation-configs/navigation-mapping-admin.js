@@ -88,8 +88,8 @@ const navigationMappingAdmin = {
 	employee_portal: {
 		key           : 'employee_portal',
 		title         : 'Profile Details',
-		href          : '/employee-portal',
-		as            : '/employee-portal',
+		href          : '/v2/employee-portal',
+		as            : '/v2/employee-portal',
 		type          : 'link',
 		icon          : IcMProfile,
 		main_apis     : [],
