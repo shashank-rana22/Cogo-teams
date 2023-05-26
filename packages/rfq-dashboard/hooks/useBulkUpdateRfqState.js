@@ -8,15 +8,16 @@ const useBulkUpdateRfqState = () => {
 		method : 'POST',
 	}, { manual: true });
 
-	const bulkUpdateRfqState = async ({ payload }) => {
+	const bulkUpdateRfqState = async ({ payload, getRfqsForApproval }) => {
 		try {
 			const response = await trigger({
 				data: {
 					rfq_ids : payload,
-					state   : 'requested_for_approval',
+					state   : 'approved',
 				},
 			});
 			if (response.status === 200) {
+				await getRfqsForApproval();
 				Toast.success('Approved the RFQS');
 			}
 		} catch (error) {

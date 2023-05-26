@@ -14,15 +14,15 @@ function RfqDetails(props) {
 	const [checkedItems, setCheckedItems] = useState([]);
 	const [selectAll, setSelectAll] = useState(false);
 
-	const { list = [], loading } = props;
-	console.log('loading', loading);
+	const { list = [], loading, getRfqsForApproval } = props;
 
 	useEffect(() => {
 		setSelectAll(checkedItems.length === list.length);
 	}, [list.length, checkedItems.length]);
 	if (!loading && isEmpty(list)) {
 		return (
-			<div className={styles.container}>
+			<div className={styles.emptycontainer}>
+
 				<Filter
 					{...props}
 					data={list}
@@ -30,14 +30,19 @@ function RfqDetails(props) {
 					checkedItems={checkedItems}
 					setSelectAll={setSelectAll}
 					setCheckedItems={setCheckedItems}
+					getRfqsForApproval={getRfqsForApproval}
 				/>
-				<EmptyState
-					height="250px"
-					width="400px"
-					flexDirection="column"
-					emptyText="Data Not Found"
-					textSize="20px"
-				/>
+
+				<div>
+					<EmptyState
+						height="250px"
+						width="400px"
+						flexDirection="column"
+						alignItems="center"
+						emptyText="Data Not Found"
+						textSize="20px"
+					/>
+				</div>
 			</div>
 		);
 	}
@@ -51,6 +56,7 @@ function RfqDetails(props) {
 				checkedItems={checkedItems}
 				setSelectAll={setSelectAll}
 				setCheckedItems={setCheckedItems}
+
 			/>
 
 			{loading ? <ListLoading /> : (
@@ -60,6 +66,7 @@ function RfqDetails(props) {
 					setCheckedItems={setCheckedItems}
 					setSelectAll={setSelectAll}
 					selectAll={selectAll}
+
 				/>
 			)}
 		</div>
