@@ -44,6 +44,6 @@
 	font-weight: 500;
 }
 
-/* .ports_section {
-	margin-top: 20px;
-} */
+.ports_section {
+	z-index: 0;
+}

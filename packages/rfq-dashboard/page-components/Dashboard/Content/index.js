@@ -27,18 +27,21 @@ function Content(props) {
 		return null;
 	}
 	return (
-		<div className={styles.container}>
-			<Tabs
-				activeTab={activeTab}
-				themeType="primary"
-				onChange={setActiveTab}
-			>
-				{TAB_MAPPING.map(({ name, title }) => (
-					<TabPanel name={name} title={title}>
-						<RfqDetails {...props} list={list} />
-					</TabPanel>
-				))}
-			</Tabs>
+		<div>
+			<div className={styles.container}>
+				<Tabs
+					activeTab={activeTab}
+					themeType="primary"
+					onChange={setActiveTab}
+				>
+					{TAB_MAPPING.map(({ name, title }) => (
+						<TabPanel name={name} title={title}>
+							<RfqDetails {...props} list={list} />
+						</TabPanel>
+					))}
+				</Tabs>
+
+			</div>
 			<div className={styles.pagination_container}>
 				<Pagination
 					className="md"
@@ -46,9 +49,9 @@ function Content(props) {
 					currentPage={page || 1}
 					pageSize={data?.page_limit}
 					onPageChange={setPage}
+					type="table"
 				/>
 			</div>
-
 		</div>
 	);
 }

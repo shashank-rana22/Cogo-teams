@@ -8,4 +8,8 @@
 .tag {
 	font-size: 12px;
 	color: #333333;
+	background-color: #f2f2f2;
+	border-radius: 4px;
+	padding: 4px;
+	font-size: 10px;
 }
