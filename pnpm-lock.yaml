@@ -1141,17 +1141,29 @@ importers:
 
   packages/shipment-fcl-custom:
     specifiers:
+      '@cogoport/components': ^1.0.422
       '@cogoport/context': workspace:^0.1.0
       '@cogoport/icons-react': ^1.0.75
+      '@cogoport/ocean-modules': workspace:^0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.10
       components: link:@cogoport/@cogoport/components
       react: 18.2.0
       utils: link:@cogoport/@cogoport/utils
+      "utils\n": |
+        link:@cogoport/utils
     dependencies:
+      '@cogoport/components': 1.0.422_guhuyhrafl7yprlcl7n6dekiki
       '@cogoport/context': link:../../common/context
       '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/ocean-modules': link:../../common/ocean-modules
+      '@cogoport/request': link:../../common/request
+      '@cogoport/utils': 1.2.10
       components: link:@cogoport/@cogoport/components
       react: 18.2.0
       utils: link:@cogoport/@cogoport/utils
+      "utils\n": |
+        link:@cogoport/utils
 
   packages/shipment-fcl-freight:
     specifiers:
@@ -2864,6 +2876,40 @@ packages:
       react-dom: ^18.2.0
     dependencies:
       '@cogoport/icons-react': 1.0.73_react@18.2.0
+      '@tippyjs/react': 4.2.6_react@18.2.0
+      '@types/quill': 2.0.10
+      '@types/react-rte': 0.16.5
+      axios: 1.4.0
+      axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0_kzhlcyde2l6xjiirkbg7jzhosa
+      react-hook-form: 7.43.9_react@18.2.0
+      react-quill: 2.0.0_react@18.2.0
+      react-rte: 0.16.5_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components/1.0.422_guhuyhrafl7yprlcl7n6dekiki:
+    resolution: {integrity: sha512-61tFznMxsFkRWJntMeFwc8Czgi444zRvzyh5ZLVNoafW5uXTS5yOZjLkbjj5WiP7IGJJM6OdeZRbYWY2a/umtA==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.75_react@18.2.0
       '@tippyjs/react': 4.2.6_react@18.2.0
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5
@@ -7130,7 +7176,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -7141,7 +7187,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -7152,7 +7198,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-utils: 1.4.1_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -7164,7 +7210,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
     dev: false
@@ -7175,7 +7221,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       draft-js-import-element: 1.4.0_qnm4pu3vwlglikbjqrpcmxoiem
       immutable: 3.8.2
       synthetic-dom: 1.4.0
@@ -7187,7 +7233,7 @@ packages:
       draft-js: '>=0.10.0'
       immutable: 3.x.x
     dependencies:
-      draft-js: 0.11.7_biqbaboplfbrettd7655fr4n2y
+      draft-js: 0.11.7_react@18.2.0
       immutable: 3.8.2
     dev: false
 
