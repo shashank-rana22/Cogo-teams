@@ -4,6 +4,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipmentServicesQuotation';
 import useUpdateShipmentBuyQuotations from '../../../../../../hooks/useUpdateShipmentBuyQuotations';
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
+import useUpdateShipmentService from '../../../../../../hooks/useUpdateShipmentService';
 
 import checkLineItemsSum from './checkLineItemSum';
 import getRateControls from './getRateControls';
@@ -12,6 +13,23 @@ const TRADE_MAPPING = {
 	import    : 'Destination',
 	export    : 'Origin',
 	undefined : '',
+};
+
+const getServicePayload = ({ servicesList, formValues, task }) => {
+	const payload = [];
+	['lcl_freight_service', 'lcl_freight_local_service'].forEach((key) => {
+		const service = servicesList.find((j) => j.service_type === key);
+
+		payload.push({
+			data                : { service_provider_id: formValues?.[`${key}_service_provider_id`] },
+			ids                 : [service?.id],
+			service_type        : key,
+			performed_by_org_id : task?.organization_id,
+			shipment_id         : task?.shipment_id,
+		});
+	});
+
+	return payload;
 };
 
 const useGetRateData = ({
@@ -50,6 +68,7 @@ const useGetRateData = ({
 		},
 	});
 
+	const { apiTrigger:updateService } = useUpdateShipmentService({ });
 	const service_charges = servicesQuotation?.service_charges || [];
 
 	const service_charges_with_trade = (service_charges || []).map((charge) => {
@@ -78,8 +97,8 @@ const useGetRateData = ({
 		service_charge,
 		shipment_data,
 		handleChange,
-
 	}));
+
 	const defaultValues = {};
 
 	service_charges.forEach((service_charge) => {
@@ -94,9 +113,13 @@ const useGetRateData = ({
 	});
 
 	const onSubmit = async (values) => {
+		const {
+			lcl_freight_service_service_provider_id, lcl_freight_local_service_service_provider_id,
+			...restValues
+		} = values || {};
 		const quotations = [];
 
-		Object.keys(values).forEach((key) => {
+		Object.keys(restValues || {}).forEach((key) => {
 			const items = values[key];
 
 			const newQuote = {
@@ -118,6 +141,12 @@ const useGetRateData = ({
 
 		const checkSum = checkLineItemsSum(quotations);
 
+		const servicePayload = getServicePayload({
+			task,
+			servicesList,
+			formValues: { lcl_freight_service_service_provider_id, lcl_freight_local_service_service_provider_id },
+		});
+
 		if (!checkSum.check) {
 			Toast.error(checkSum.message.join(','));
 		} else {
@@ -125,7 +154,15 @@ const useGetRateData = ({
 				const res = await updateBuyQuotationTrigger({ quotations });
 
 				if (res?.status === 200) {
-					await updateTask({ id: task?.id });
+					const lclRes = await updateService(servicePayload?.[0]);
+
+					if (lclRes?.status === 200) {
+						const localRes = await updateService(servicePayload?.[0]);
+
+						if (localRes?.status === 200) {
+							await updateTask({ id: task?.id });
+						}
+					}
 				}
 			} catch (err) {
 				toastApiError(err);

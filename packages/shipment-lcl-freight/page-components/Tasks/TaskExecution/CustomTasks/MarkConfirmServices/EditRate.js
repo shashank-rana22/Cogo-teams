@@ -25,10 +25,8 @@ function EditRate({
 		taskListRefetch: refetch,
 	});
 
-	const subsidiaryService = (servicesList || []).find(
-		(service) => service.service_type === 'subsidiary_service'
-			&& service.id === task?.service_id,
-	);
+	const subsidiaryService = (servicesList || []).find((service) => service.service_type === 'subsidiary_service'
+		&& service.id === task?.service_id);
 
 	const requiredRawControls = getControls({
 		service_type: task?.service_type,
@@ -43,28 +41,34 @@ function EditRate({
 
 	const defaultValues = getDefaultValues(requiredControls);
 
-	const formProps = useForm({ defaultValues });
-
-	const { control, formState: { errors }, handleSubmit } = formProps || {};
+	const { control, formState: { errors }, handleSubmit } = useForm({ defaultValues });
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Quotation Update and Reallocation</div>
 
-			<div className={styles.service_provider}>
+			{/* <div className={styles.service_provider}>
 				<Layout
 					fields={requiredControls}
 					control={control}
 					errors={errors}
 				/>
-			</div>
+			</div> */}
 
 			{editQuote.serviceQuotationLoading ? (
 				<div className={styles.loading_container}>
 					Loading Task....
 					<Loader themeType="primary" className={styles.loader_icon} />
 				</div>
-			) : (<Rate data={editQuote} serviceProviderSubmit={handleSubmit} />)}
+			) : (
+				<Rate
+					data={editQuote}
+					serviceProviderSubmit={handleSubmit}
+					servicesList={servicesList}
+					task={task}
+					formattedRate={formattedRate}
+				/>
+			)}
 		</div>
 	);
 }

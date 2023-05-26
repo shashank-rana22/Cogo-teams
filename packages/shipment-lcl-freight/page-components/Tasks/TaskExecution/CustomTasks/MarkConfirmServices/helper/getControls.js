@@ -1,5 +1,5 @@
 const service_provider = {
-	name           : 'service_provider_id',
+	name           : 'lcl_freight_service_service_provider_id',
 	type           : 'select',
 	label          : 'Service Provider',
 	span           : 6,
@@ -9,7 +9,7 @@ const service_provider = {
 };
 
 const service_provider_local = {
-	name           : 'service_provider_id',
+	name           : 'lcl_freight_local_service_service_provider_id',
 	type           : 'select',
 	span           : 6,
 	label          : 'Service Provider (Lcl Local)',
