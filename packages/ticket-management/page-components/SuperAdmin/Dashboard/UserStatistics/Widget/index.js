@@ -29,10 +29,27 @@ function CategoriesCard({ data }) {
 	);
 }
 
+function PerformanceCard({ data }) {
+	return (
+		<div className={styles.list}>
+			{(data || []).map(({ AgentName, PerformanceRating }) => (
+				<div className={styles.card} key={PerformanceRating}>
+					<div className={styles.type}>{AgentName}</div>
+					<div className={styles.count}>
+						{PerformanceRating.toFixed(2)}
+						%
+					</div>
+				</div>
+			))}
+		</div>
+	);
+}
+
 function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type }) {
 	const cardComponentMapping = {
-		Users      : <UserCard data={data} />,
-		Categories : <CategoriesCard data={data} />,
+		Users       : <UserCard data={data} />,
+		Categories  : <CategoriesCard data={data} />,
+		Performance : <PerformanceCard data={data} />,
 	};
 
 	const CardComponent = cardComponentMapping[type];
@@ -43,7 +60,7 @@ function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type }) 
 				<div className={styles.title}>{label}</div>
 				<div className={styles.title}>{subLabel}</div>
 			</div>
-			{CardComponent}
+			{CardComponent || null}
 		</div>
 
 	);
