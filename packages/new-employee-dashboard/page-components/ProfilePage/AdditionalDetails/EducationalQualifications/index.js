@@ -22,7 +22,7 @@ function EducationalQualifications({ profileData }) {
 
 	const educationDetails = () => (employee_education_details || []).map((element) => {
 		const {
-			Courses = [], description = '', started_at, ended_at, school_name, score, score_mode, type,
+			Courses = [], description = '', started_at, ended_at, school_name, score, score_type, type,
 		} = element || {};
 
 		return (
@@ -57,7 +57,7 @@ function EducationalQualifications({ profileData }) {
 						<div className={styles.value}>
 							{score}
 							{' '}
-							{(score_mode).toUpperCase()}
+							{(score_type).toUpperCase()}
 						</div>
 					</div>
 
