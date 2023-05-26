@@ -39,7 +39,7 @@ function AssignPlanModal({ openPlanModal, setOpenPlanModal, refectUserList }) {
 				})}
 			</Modal.Body>
 			<Modal.Footer>
-				<Button themeType="secondary" type="submit" onClick={closeModal} disabled={loading}>Cancel</Button>
+				<Button themeType="secondary" type="button" onClick={closeModal} disabled={loading}>Cancel</Button>
 				<Button
 					themeType="accent"
 					type="button"
