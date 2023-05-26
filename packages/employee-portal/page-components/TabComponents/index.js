@@ -34,6 +34,8 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 
 	};
 
+	const { status } = data?.offer_letter || {};
+
 	if (informationPage) {
 		const PageComponent = component_mapping[informationPage];
 		return (
@@ -44,6 +46,14 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 			/>
 		);
 	}
+
+	// const onCLickTiles = ({ item }) => {
+	// 	console.log('status',status);
+	// 	if (status !== 'approved') {
+	// 		return null;
+	// 	}
+	// 	setInformationPage(item);
+	// };
 
 	return (
 		<div className={styles.container}>

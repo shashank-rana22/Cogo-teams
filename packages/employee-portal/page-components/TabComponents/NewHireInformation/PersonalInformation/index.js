@@ -29,6 +29,8 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 		updateEmployeeDetails({ data: values, formType: 'personal_info' });
 	};
 
+	console.log('content?.detail', content);
+
 	useEffect(() => {
 		const mapping = {
 			mobile_number: {
@@ -56,7 +58,7 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 			} else if (item?.name === 'emergency_contact_details') {
 				setValue(
 					`${item.name}`,
-					mapping[item.name].mobile_number
+					mapping[item.name]?.mobile_number
 					|| content?.detail?.[item.name].mobile_number,
 				);
 			} else {
