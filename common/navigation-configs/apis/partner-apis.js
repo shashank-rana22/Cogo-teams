@@ -850,11 +850,6 @@ const partner = {
 			service_name : 'user',
 		},
 		{
-			api          : 'update_user',
-			access_type  : 'private',
-			service_name : 'user',
-		},
-		{
 			api          : 'list_partner_user_expertises',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -943,6 +938,11 @@ const partner = {
 			api          : 'update_partner_user',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'bulk_update_partner_user_expertise_status',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	user_allocation: [
