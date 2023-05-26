@@ -8,6 +8,7 @@ function Card({
 	handleClick = () => {},
 	selectedTaskId = '',
 	isTaskOpen = false,
+	refetch = () => {},
 }) {
 	const handleChange = (newMails) => {
 		handleClick(task, newMails);
@@ -32,6 +33,7 @@ function Card({
 				<UpdateAction
 					task={task}
 					hideThreeDots={task.status === 'completed'}
+					refetch={refetch}
 				/>
 			</div>
 		</div>

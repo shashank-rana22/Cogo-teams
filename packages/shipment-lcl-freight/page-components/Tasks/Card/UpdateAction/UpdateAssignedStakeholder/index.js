@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { RadioGroupController, useForm } from '@cogoport/forms';
 
-// import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
+import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
 
 import styles from './styles.module.css';
 
@@ -13,12 +13,12 @@ function UpdateAssignedStakeholder({
 }) {
 	const { control, handleSubmit } = useForm();
 
-	// const { apiTrigger, loading } = useUpdateShipmentPendingTask({
-	// 	refetch: () => {
-	// 		refetch();
-	// 		setShowAdmin(false);
-	// 	},
-	// });
+	const { apiTrigger, loading } = useUpdateShipmentPendingTask({
+		refetch: () => {
+			refetch();
+			setShowAdmin(false);
+		},
+	});
 
 	const onCreate = ({ assigned_stakeholder }) => {
 		const payload = {
@@ -26,7 +26,7 @@ function UpdateAssignedStakeholder({
 			status : 'pending',
 			assigned_stakeholder,
 		};
-		// apiTrigger(payload);
+		apiTrigger(payload);
 	};
 
 	return (
@@ -55,7 +55,7 @@ function UpdateAssignedStakeholder({
 				</div>
 			</Modal.Body>
 			<Modal.Footer>
-				{/* <Button
+				<Button
 					style={{ marginRight: '12px' }}
 					onClick={() => setShowAdmin(false)}
 					disabled={loading}
@@ -66,7 +66,7 @@ function UpdateAssignedStakeholder({
 
 				<Button disabled={loading} onClick={handleSubmit(onCreate)}>
 					{loading ? 'Submiting...' : 'Submit'}
-				</Button> */}
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);

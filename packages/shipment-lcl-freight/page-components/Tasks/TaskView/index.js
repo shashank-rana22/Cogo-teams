@@ -61,6 +61,7 @@ function TaskView() {
 							key={task?.id}
 							task={task}
 							handleClick={handleClick}
+							refetch={taskListRefetch}
 						/>
 					)) }
 

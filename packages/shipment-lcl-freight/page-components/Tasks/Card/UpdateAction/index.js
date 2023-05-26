@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 import UnableToDoTask from './UnableToDoTask';
 import UpdateAssignedStakeholder from './UpdateAssignedStakeholder';
 
-function UpdateAction({ task = {}, hideThreeDots = false }) {
+function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {} }) {
 	const [showAction, setShowAction] = useState(false);
 	const [showUnableTo, setShowUnableTo] = useState(false);
 	const [showAdmin, setShowAdmin] = useState(false);
@@ -106,12 +106,14 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 				setShowUnableTo={setShowUnableTo}
 				showUnableTo={showUnableTo}
 				task={task}
+				refetch={refetch}
 			/>
 
 			<UpdateAssignedStakeholder
 				setShowAdmin={setShowAdmin}
 				showAdmin={showAdmin}
 				task={task}
+				refetch={refetch}
 			/>
 		</div>
 	);

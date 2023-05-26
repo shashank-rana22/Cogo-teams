@@ -2,22 +2,24 @@ import { Button, Modal } from '@cogoport/components';
 import { TextAreaController, useForm } from '@cogoport/forms';
 import React from 'react';
 
-// import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
+import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
 
 function UnableToDoTask({
 	setShowUnableTo = () => {},
 	showUnableTo = false,
 	task = {},
+	refetch = () => {},
 }) {
 	const { control, handleSubmit, reset } = useForm();
 
-	// const { apiTrigger, loading } = useUpdateShipmentPendingTask({
-	// 	refetch: () => {
-	// 		setShowUnableTo(false);
-	// 		reset();
-	// 	},
-	// 	successMessage: 'Request Submitted Successfully',
-	// });
+	const { apiTrigger, loading } = useUpdateShipmentPendingTask({
+		refetch: () => {
+			setShowUnableTo(false);
+			reset();
+			refetch();
+		},
+		successMessage: 'Request Submitted Successfully',
+	});
 
 	const onCreate = ({ remark }) => {
 		const payload = {
@@ -26,7 +28,7 @@ function UnableToDoTask({
 			status  : 'pending',
 		};
 
-		// apiTrigger(payload);
+		apiTrigger(payload);
 	};
 
 	return (
@@ -47,7 +49,7 @@ function UnableToDoTask({
 			</Modal.Body>
 
 			<Modal.Footer>
-				{/* <Button
+				<Button
 					className="secondary md"
 					style={{ marginRight: '12px' }}
 					onClick={() => {
@@ -61,7 +63,7 @@ function UnableToDoTask({
 
 				<Button disabled={loading} onClick={handleSubmit(onCreate)}>
 					{loading ? 'Submiting...' : 'Submit'}
-				</Button> */}
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);
