@@ -2,8 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
-// import useTaskRpa from '../../../hooks/useTaskRpa';
-// import useTaskRpa from '../../../hooks/useTaskRpa';
+import LoadingState from '../LoadingState';
 
 import {
 	UploadCargoArrival,
@@ -36,10 +35,10 @@ function ExecuteTask({
 	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - 1] : {};
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return <div><LoadingState /></div>;
 	}
 
-	if (task?.task === 'mark_confirmed') {
+	if (task?.task === 'mark_confirmed' && 	task?.service_type) {
 		return (
 			<MarkConfirmServices
 				task={task}

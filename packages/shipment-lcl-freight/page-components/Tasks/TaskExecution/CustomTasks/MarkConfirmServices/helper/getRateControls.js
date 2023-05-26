@@ -1,4 +1,4 @@
-import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import LCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase } from '@cogoport/utils';
 
@@ -58,7 +58,7 @@ const getRateControls = ({ service_charge, shipment_data, handleChange }) => {
 				label   : 'Unit',
 				type    : 'select',
 				name    : 'unit',
-				options : convertObjectMappingToArray(FCL_UNITS),
+				options : convertObjectMappingToArray(LCL_UNITS),
 				size    : 'sm',
 				span    : 2,
 			},

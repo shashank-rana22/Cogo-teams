@@ -15,19 +15,14 @@ const TRADE_MAPPING = {
 };
 
 const useGetRateData = ({
-	servicesList = [], shipment_data, onCancel, task,
-	taskListRefetch = () => {}, primary_service,
+	servicesList = [], shipment_data = {},
+	onCancel = () => {}, task = {}, taskListRefetch = () => {},
 }) => {
-	const { trade_type } = primary_service || {};
-
 	const service_ids = [];
 	let notMainService = false;
 
 	(servicesList || []).forEach((serviceObj) => {
-		if (serviceObj.service_type === 'fcl_freight_service'
-			|| (serviceObj.service_type === 'fcl_freight_local_service'
-			&& trade_type === 'import' && serviceObj.trade_type === 'export')
-		) {
+		if (['lcl_freight_service', 'lcl_freight_local_service'].includes(serviceObj.service_type)) {
 			notMainService = true;
 			service_ids.push(serviceObj.id);
 		}

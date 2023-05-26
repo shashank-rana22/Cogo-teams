@@ -166,9 +166,7 @@ const evaluateCondition = (step, primaryService, task) => {
 	if (task?.task === 'upload_draft_bill_of_lading') {
 		const bl_category = primaryService?.bl_category?.toLowerCase() || 'mbl';
 
-		if (bl_category === 'mbl' && step?.name === 'hbl') {
-			showStep = false;
-		}
+		if (bl_category === 'mbl' && step?.name === 'hbl') showStep = false;
 	}
 	return showStep;
 };

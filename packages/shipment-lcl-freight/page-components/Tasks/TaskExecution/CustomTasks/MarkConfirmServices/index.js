@@ -29,11 +29,13 @@ function MarkServiceConfirmed({
 	}
 
 	const formattedRate = formatRate(
-		selectedCard,
-		shipment_data,
-		task.service_type,
-		primary_service,
-		servicesList,
+		{
+			selectedCard,
+			shipment_data,
+			service_type_prop: task.service_type,
+			primary_service,
+			servicesList,
+		},
 	);
 
 	return (

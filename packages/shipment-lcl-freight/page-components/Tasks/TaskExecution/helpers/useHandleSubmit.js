@@ -11,11 +11,7 @@ import formatRawValues from '../utils/format-raw-payload';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
 
-const shipmentRefetchTasks = [
-	'confirm_booking',
-	'mark_confirmed',
-	'upload_draft_bill_of_lading',
-];
+const REFETCH_SHIPMENT = ['confirm_booking', 'mark_confirmed', 'upload_draft_bill_of_lading'];
 
 function useHandleSubmit({
 	finalConfig = {},
@@ -30,10 +26,8 @@ function useHandleSubmit({
 	const [isLoading, setIsLoading] = useState();
 
 	const {
-		shipment_data,
-		primary_service,
-		getShipment,
-		getShipmentTimeline,
+		shipment_data = {}, primary_service = {},
+		getShipment = () => {}, getShipmentTimeline = () => {},
 	} = useContext(ShipmentDetailContext);
 
 	const [{ loading }, trigger] = useRequest({
@@ -96,9 +90,7 @@ function useHandleSubmit({
 			const skipUpdateTask = finalConfig?.end_point === 'send_nomination_notification'
 				&& task?.task === 'mark_confirmed';
 
-			const res = await trigger({
-				data: finalPayload,
-			});
+			const res = await trigger({ data: finalPayload });
 
 			if (!res.hasError) {
 				if (finalConfig.end_point && !skipUpdateTask) {
@@ -139,7 +131,7 @@ function useHandleSubmit({
 
 				getShipmentTimeline();
 
-				if (shipmentRefetchTasks.includes(task?.task)) {
+				if (REFETCH_SHIPMENT.includes(task?.task)) {
 					getShipment();
 				}
 			} else {

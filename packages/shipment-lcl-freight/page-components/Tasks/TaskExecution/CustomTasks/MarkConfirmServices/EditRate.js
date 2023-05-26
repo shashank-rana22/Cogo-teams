@@ -18,11 +18,11 @@ function EditRate({
 	formattedRate = {},
 }) {
 	const editQuote = useGetRateData({
-		servicesList    : servicesList.filter((item) => item.id === task.service_id),
+		servicesList,
 		shipment_data,
 		onCancel,
 		task,
-		taskListRefetch : refetch,
+		taskListRefetch: refetch,
 	});
 
 	const subsidiaryService = (servicesList || []).find(
@@ -45,11 +45,12 @@ function EditRate({
 
 	const formProps = useForm({ defaultValues });
 
-	const { control, formState: { errors } } = formProps || {};
+	const { control, formState: { errors }, handleSubmit } = formProps || {};
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Quotation Update and Reallocation</div>
+
 			<div className={styles.service_provider}>
 				<Layout
 					fields={requiredControls}
@@ -63,7 +64,7 @@ function EditRate({
 					Loading Task....
 					<Loader themeType="primary" className={styles.loader_icon} />
 				</div>
-			) : (<Rate data={editQuote} />)}
+			) : (<Rate data={editQuote} serviceProviderSubmit={handleSubmit} />)}
 		</div>
 	);
 }

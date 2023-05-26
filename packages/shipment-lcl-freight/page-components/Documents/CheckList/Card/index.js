@@ -37,7 +37,6 @@ const Card = ({
 			const isChecked = uploadedItem?.document_type === docType;
 			const receivedViaEmail = !isChecked && uploadedItem?.entity_type === docType;
 			const showUploadText = item?.pendingItem ? 'Upload' : '';
-			console.log({ uploadedItem });
 
 			return (
 				<Content

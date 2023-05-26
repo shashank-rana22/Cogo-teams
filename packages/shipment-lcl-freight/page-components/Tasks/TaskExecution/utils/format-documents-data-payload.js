@@ -1,5 +1,4 @@
 const formatDataForDocuments = (rawValues, taskData) => {
-	console.log({ rawValues, taskData });
 	let modifiedRawValues = {};
 
 	if (taskData?.task === 'upload_commercial_invoice_and_packing_list') {

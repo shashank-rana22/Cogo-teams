@@ -22,8 +22,7 @@ const injectValues = ({
 			},
 		];
 	} else if (
-		task?.task === 'upload_bill_of_lading'
-		&& shipment_data?.nomination_type !== 'agent'
+		task?.task === 'upload_bill_of_lading' && shipment_data?.nomination_type !== 'agent'
 	) {
 		(controls || []).forEach((control, index) => {
 			if (control?.type === 'fieldArray') {

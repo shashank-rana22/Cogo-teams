@@ -44,10 +44,7 @@ function UpdateButton({
 
 	const disableTask = disabledStakeholders.includes(task?.assigned_stakeholder);
 
-	if (
-		rpaSupportedTasks.includes(task.task)
-		&& (task.task !== 'upload_si')
-	) {
+	if (rpaSupportedTasks.includes(task.task)) {
 		return (
 			<div className={styles.container}>
 				<RPASearch

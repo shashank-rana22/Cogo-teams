@@ -1,9 +1,9 @@
 const SERVICES = ['ftl_freight_service', 'ltl_freight_service', 'lcl_customs_service'];
 
-const formatRates = (selectedRate, shipment_data, service_type_prop, primaryService) => {
+const formatRates = ({ selectedRate, primaryService }) => {
 	if (!selectedRate) return {};
 
-	const service_type = service_type_prop || 'lcl_freight_service';
+	const service_type = 'lcl_freight_service';
 
 	if (SERVICES.includes(service_type) && selectedRate.source === 'flash_booking') {
 		const { data = [] } = selectedRate || {};
