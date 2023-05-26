@@ -84,7 +84,7 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 					<div className={styles.field}>
 						<div className={styles.label}>Promised Con Profitability</div>
 						<div className={styles.value}>
-							{Math.round(stats.promised_consolidated_profitability)}
+							{Math.round(stats.promised_consolidated_profitability).toFixed(2)}
 							%
 						</div>
 

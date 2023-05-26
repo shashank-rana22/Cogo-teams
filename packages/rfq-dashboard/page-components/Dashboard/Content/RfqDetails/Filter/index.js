@@ -5,7 +5,10 @@ import useBulkUpdateRfqState from '../../../../../hooks/useBulkUpdateRfqState';
 
 import styles from './styles.module.css';
 
-function Filter({ data, filterStore, setFilterStore, checkedItems, selectAll, setCheckedItems, setSelectAll }) {
+function Filter({
+	data, filterStore, setFilterStore, checkedItems,
+	selectAll, setCheckedItems, setSelectAll, getRfqsForApproval,
+}) {
 	const handleSelectAll = () => {
 		setSelectAll(!selectAll);
 		setCheckedItems(!selectAll ? data : []);
@@ -13,7 +16,7 @@ function Filter({ data, filterStore, setFilterStore, checkedItems, selectAll, se
 	const { bulkUpdateRfqState } = useBulkUpdateRfqState();
 	const handleApproveRfq = () => {
 		const payload = checkedItems.map((item) => item.id);
-		bulkUpdateRfqState({ payload });
+		bulkUpdateRfqState({ payload, getRfqsForApproval });
 	};
 
 	return (

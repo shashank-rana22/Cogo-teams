@@ -91,7 +91,12 @@ function Form({
 						<div>
 							{label}
 						</div>
-						<Element control={control} {...controItem} />
+						<Element
+							control={control}
+							{...controItem}
+							width="133px"
+							height=" 32px"
+						/>
 					</>
 				);
 			})}

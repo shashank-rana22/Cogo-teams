@@ -43,6 +43,9 @@
 	font-weight: 500;
 }
 
+.ports_section {
+	z-index: 0;
+}
 .cards{
 	overflow-y: scroll;
 }

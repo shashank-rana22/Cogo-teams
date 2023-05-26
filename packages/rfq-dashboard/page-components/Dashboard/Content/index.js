@@ -1,5 +1,4 @@
 import { Pagination, Tabs, TabPanel } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import useListRfqs from '../../../hooks/useListrfqs';
@@ -15,7 +14,7 @@ function Content(props) {
 		{ name: 'all', title: 'All RFQ' },
 	];
 
-	const { getRfqsForApproval, data = {}, page, setPage } = useListRfqs({ filterStore });
+	const { getRfqsForApproval, data = {}, page, setPage, loading } = useListRfqs({ filterStore });
 
 	useEffect(() => {
 		getRfqsForApproval();
@@ -23,22 +22,27 @@ function Content(props) {
 
 	const { list = [] } = data;
 
-	if (isEmpty(data)) {
-		return null;
-	}
 	return (
-		<div className={styles.container}>
-			<Tabs
-				activeTab={activeTab}
-				themeType="primary"
-				onChange={setActiveTab}
-			>
-				{TAB_MAPPING.map(({ name, title }) => (
-					<TabPanel name={name} title={title}>
-						<RfqDetails {...props} list={list} />
-					</TabPanel>
-				))}
-			</Tabs>
+		<div>
+			<div className={styles.container}>
+				<Tabs
+					activeTab={activeTab}
+					themeType="primary"
+					onChange={setActiveTab}
+				>
+					{TAB_MAPPING.map(({ name, title }) => (
+						<TabPanel name={name} title={title}>
+							<RfqDetails
+								{...props}
+								list={list}
+								loading={loading}
+								getRfqsForApproval={getRfqsForApproval}
+							/>
+						</TabPanel>
+					))}
+				</Tabs>
+
+			</div>
 			<div className={styles.pagination_container}>
 				<Pagination
 					className="md"
@@ -46,9 +50,9 @@ function Content(props) {
 					currentPage={page || 1}
 					pageSize={data?.page_limit}
 					onPageChange={setPage}
+					type="table"
 				/>
 			</div>
-
 		</div>
 	);
 }

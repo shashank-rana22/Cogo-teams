@@ -1,3 +1,11 @@
 .container {
 	margin-top: 12px;
+	width:950px;
+	
+}
+.emptycontainer {
+	margin-top: 12px;
+	width:950px;
+	height:600px;
+	background-color: white;
 }
