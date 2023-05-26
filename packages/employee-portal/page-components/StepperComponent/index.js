@@ -3,34 +3,35 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const MAPPING = [
-	{
-		name      : 'profile_details',
-		icon      : IcMProfile,
-		is_added  : true,
-		sub_title : 'Added',
-	},
-	{
-		name      : 'offer_letter',
-		icon      : IcMDocument,
-		is_added  : false,
-		sub_title : 'Signed',
-	},
-	{
-		name      : 'additional_info',
-		icon      : IcMDocument,
-		is_added  : false,
-		sub_title : 'Added',
-	},
-	{
-		name      : 'documents',
-		icon      : IcMDocument,
-		is_added  : false,
-		sub_title : 'Signed',
-	},
-];
-
-function StepperComponent() {
+function StepperComponent({ data }) {
+	const { offer_letter } = data || {};
+	const { status = '' } = offer_letter || {};
+	const MAPPING = [
+		{
+			name      : 'profile_details',
+			icon      : IcMProfile,
+			is_added  : true,
+			sub_title : 'Added',
+		},
+		{
+			name      : 'offer_letter',
+			icon      : IcMDocument,
+			is_added  : status === 'accepted',
+			sub_title : 'Signed',
+		},
+		{
+			name      : 'additional_info',
+			icon      : IcMDocument,
+			is_added  : false,
+			sub_title : 'Added',
+		},
+		{
+			name      : 'documents',
+			icon      : IcMDocument,
+			is_added  : false,
+			sub_title : 'Signed',
+		},
+	];
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>

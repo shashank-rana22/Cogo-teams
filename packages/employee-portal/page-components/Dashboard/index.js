@@ -20,7 +20,7 @@ function Dashboard() {
 				!informationPage && (
 					<div>
 						<HeaderComponent name={name} />
-						<StepperComponent informationPage={informationPage} />
+						<StepperComponent informationPage={informationPage} data={data} />
 					</div>
 				)
 			}
