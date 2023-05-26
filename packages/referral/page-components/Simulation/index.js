@@ -59,12 +59,13 @@ function LevelPayouts({ data }) {
 	);
 }
 
-function ReturnComponent({ type = '', singleData, setSingleData }) {
+function ReturnComponent({ type = '', singleData = {}, setSingleData = () => {}, simulationData = {} }) {
 	const renderCom = {
 		level   : <LevelPayouts data={singleData} />,
 		revenue : <MyResponsiveScatterPlot
 			singleData={singleData}
 			setSingleData={setSingleData}
+			simulationData={simulationData}
 		/>,
 
 	};
@@ -97,14 +98,17 @@ function ReturnComponent({ type = '', singleData, setSingleData }) {
 	return renderCom[type];
 }
 
-function SimulationGraphs() {
-	const [singleData, setSingleData] = useState({});
-
+function SimulationGraphs({ simulationData = {}, singleData = {}, setSingleData = () => {} }) {
 	return (
 		<div className={styles.conatiner}>
 			<div className={styles.revenue_graph}>
 				<div className={styles.diameter_header}>Revenue and % of Incentive chart</div>
-				<ReturnComponent type="revenue" setSingleData={setSingleData} singleData={singleData} />
+				<ReturnComponent
+					type="revenue"
+					setSingleData={setSingleData}
+					singleData={singleData}
+					simulationData={simulationData}
+				/>
 			</div>
 			<div className={styles.level_graph}>
 				<div className={styles.levels_header}>
@@ -114,7 +118,12 @@ function SimulationGraphs() {
 						</div>
 					))}
 				</div>
-				<ReturnComponent type="level" setSingleData={setSingleData} singleData={singleData} />
+				<ReturnComponent
+					type="level"
+					setSingleData={setSingleData}
+					singleData={singleData}
+					simulationData={simulationData}
+				/>
 			</div>
 		</div>
 	);
@@ -122,9 +131,9 @@ function SimulationGraphs() {
 
 function Simulation() {
 	const [activeTab, setActiveTab] = useState('shipment');
-
-	const { data = {} } = useGetSimulation({ activeTab });
-	console.log('data:', data);
+	const [singleData, setSingleData] = useState({});
+	const { data = {} } = useGetSimulation({ activeTab, singleData });
+	const simulationData = data?.data;
 
 	return (
 		<Tabs
@@ -137,14 +146,22 @@ function Simulation() {
 				title="Shipment"
 			>
 
-				<SimulationGraphs />
+				<SimulationGraphs
+					singleData={singleData}
+					setSingleData={setSingleData}
+					simulationData={simulationData}
+				/>
 			</TabPanel>
 
 			<TabPanel
 				name="subscription"
 				title="Subscription"
 			>
-				<SimulationGraphs />
+				<SimulationGraphs
+					singleData={singleData}
+					setSingleData={setSingleData}
+					simulationData={simulationData}
+				/>
 			</TabPanel>
 		</Tabs>
 
