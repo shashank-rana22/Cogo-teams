@@ -39,6 +39,7 @@ function MessageList(messageProps) {
 		userId,
 		sortedPinnedChatList = [],
 		firestore,
+		viewType = '',
 	} = messageProps;
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
@@ -98,6 +99,7 @@ function MessageList(messageProps) {
 									showBotMessages={showBotMessages}
 									isomniChannelAdmin={isomniChannelAdmin}
 									tagOptions={tagOptions}
+									viewType={viewType}
 								/>
 							)
 						)}
@@ -154,6 +156,7 @@ function MessageList(messageProps) {
 									<div className={styles.pinned_chats_div}>
 										{(sortedPinnedChatList || []).map((item) => (
 											<MessageCardData
+												key={item?.id}
 												item={item}
 												activeCardId={activeCardId}
 												userId={userId}
@@ -171,6 +174,7 @@ function MessageList(messageProps) {
 						<div className={styles.recent_text}>Recent</div>
 						{(messagesList || []).map((item) => (
 							<MessageCardData
+								key={item?.id}
 								item={item}
 								activeCardId={activeCardId}
 								userId={userId}
