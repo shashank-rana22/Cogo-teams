@@ -1,7 +1,7 @@
 import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { Layout } from '@cogoport/ocean-modules';
 
-import FormLayout from '../../helpers/Layout';
 import getDefaultValues from '../../utils/get-default-values';
 import Step3 from '../UploadBookingNote/components/Step3';
 import useGetStep3Data from '../UploadBookingNote/helpers/useGetStep3Data';
@@ -53,7 +53,7 @@ function EditRate({
 		<div className={styles.container}>
 			<div className={styles.heading}>Quotation Update and Reallocation</div>
 			<div className={styles.service_provider}>
-				<FormLayout
+				<Layout
 					fields={requiredControls}
 					control={control}
 					errors={errors}
@@ -65,7 +65,7 @@ function EditRate({
 					<Loader themeType="primary" className={styles.loader_icon} />
 				</div>
 			) : (
-				<Step3 data={editQuote} />
+				<Step3 data={editQuote} shipment_id={task?.shipment_id} />
 			)}
 		</div>
 	);

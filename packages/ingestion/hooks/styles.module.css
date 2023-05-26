@@ -58,7 +58,7 @@
 
 .stage {
 	display: flex;
-	justify-content: start;
+	justify-content: flex-start;
 	width: 120px;
 }
 

@@ -13,7 +13,7 @@ function AsyncSelectController(props) {
 			name={name}
 			rules={rules}
 			defaultValue={value}
-			render={({ field: { onChange, value:newValue } }) => (
+			render={({ field: { onChange, value: newValue } }) => (
 				<AsyncSelect
 					{...rest}
 					onChange={(val, obj) => {
@@ -26,7 +26,7 @@ function AsyncSelectController(props) {
 							onChange(val, obj);
 						}
 					}}
-					value={newValue}
+					value={rest?.finalvalue || newValue}
 				/>
 			)}
 		/>

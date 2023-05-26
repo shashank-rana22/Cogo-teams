@@ -187,8 +187,18 @@ export default {
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
-		so_2_manager	      : '1665784f-6e58-4299-8a33-4b7487f61188',
-		so1_so2_role_id       : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
+		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
+		cogo_one_admin_ids    : [
+			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
+			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
+			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
+		],
+		cogo_one_shipment_agent_ids: [
+			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
+		],
+		so1_so2_role_id: '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
 
 	},
 	options: {
@@ -343,7 +353,12 @@ export default {
 				value : 'closed_body_32ft_triple_axle_HQ_20_21_ton',
 			},
 		],
-
+		tax_types: [
+			{
+				label : 'PAN',
+				value : 'pan',
+			},
+		],
 		invoice_status: [
 			{ label: 'Draft', value: 'DRAFT' },
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
@@ -381,5 +396,43 @@ export default {
 				value : 'open_side',
 			},
 		],
+	},
+	navigations: {
+		supply_dashboard: {
+			rfq_enquiries: {
+				tabs: [
+					'live_bookings',
+					'trade_enquiry',
+					'disliked_rates',
+					'rate_density',
+					'manage_forecast',
+					'rfq_enquiries',
+					'rates_sheets',
+				],
+			},
+		},
+	},
+	others: {
+		registration_number: {
+			label: 'GST',
+			pattern:
+					/\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
+			max_length: 15,
+		},
+
+		pan_number: {
+			label   : 'PAN',
+			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+		},
+
+		economic_zone: {
+			label: 'SEZ',
+		},
+
+		navigations: {
+			onboard_vendor: {
+				validate_registration: true,
+			},
+		},
 	},
 };
