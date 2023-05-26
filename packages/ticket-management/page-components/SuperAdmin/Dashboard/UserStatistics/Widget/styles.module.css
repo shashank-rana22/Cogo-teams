@@ -40,6 +40,10 @@
 	border-bottom: 1px solid #e0e0e0;
 }
 
+.card:last-child {
+	border-bottom: none;
+}
+
 .count {
 	font-size: 14px;
 	font-weight: 500;
@@ -54,4 +58,8 @@
 	font-size: 10px;
 	font-weight: 400;
 	color: #828282;
+}
+
+.type {
+	width: 85%;
 }
