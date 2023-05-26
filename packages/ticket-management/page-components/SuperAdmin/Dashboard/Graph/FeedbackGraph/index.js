@@ -62,7 +62,7 @@ function FeedbackGraph({ customerSatisfactionStats }) {
 					<div className={styles.legend} key={id}>
 						<div className={styles.legend_count}>
 							<div className={cl`${styles.dot} ${styles[id]}`} />
-							<span className={styles.stats_count}>{value}</span>
+							<span className={styles.stats_count}>{value || 0}</span>
 						</div>
 						<div className={styles.stats_label}>
 							{label}
