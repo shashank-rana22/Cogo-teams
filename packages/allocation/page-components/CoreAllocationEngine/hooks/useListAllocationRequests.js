@@ -182,7 +182,7 @@ const useListAllocationRequests = () => {
 			accessor : ({ service }) => {
 				const { service_type: toggleValue } = params.filters || {};
 
-				const pathname = toggleValue === 'organizations'
+				const pathname = toggleValue === 'organization'
 					? `/${partner.id}/details/demand/${service.id}` : `/${partner.id}/prm/${service.id}`;
 
 				return (
