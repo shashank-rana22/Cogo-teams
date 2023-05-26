@@ -43,25 +43,29 @@ function OverallStats({ data, ticketCount }) {
 				</div>
 				<div className={styles.graph_total}>
 					<span className={styles.graph_label}>No. of Tickets</span>
-					<span className={styles.graph_count}>8.4k</span>
+					<span className={styles.graph_count}>{ticketCount?.TotalTicket || 0}</span>
 				</div>
 				<div className={styles.legends}>
 					{(pieData || []).map(({ id, label, value, isMargin }) => (
 						<div className={cl`${styles.legend} ${isMargin ? styles.margin_bottom : ''}`} key={id}>
 							<div className={styles.legend_count}>
 								<div className={cl`${styles.dot} ${styles[id]}`} />
-								<span className={styles.stats_count}>{value}</span>
+								<span className={styles.stats_count}>{value || 0}</span>
 							</div>
-							<div className={styles.stats_label}>{label}</div>
+							<div className={styles.stats_label}>{label || ''}</div>
 						</div>
 					))}
 				</div>
 			</div>
-			{(statsIconsAndData || []).map(({ key, icon, label }) => (
+			{(statsIconsAndData || []).map(({ key, icon, label, suffix }) => (
 				<div className={styles.tile} key={key}>
 					<div>{icon}</div>
-					<div className={styles.count}>{(Number(data?.[key]) || 0).toFixed(2)}</div>
-					<div className={styles.label}>{label}</div>
+					<div className={styles.count}>
+						{(Number(data?.[key]) || 0).toFixed(2)}
+						{' '}
+						{suffix}
+					</div>
+					<div className={styles.label}>{label || ''}</div>
 				</div>
 			))}
 		</div>
