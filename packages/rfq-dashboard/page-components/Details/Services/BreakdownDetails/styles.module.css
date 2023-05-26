@@ -112,5 +112,16 @@
 .title_value{
 	color: #221F20;
 	font-weight: 600;
-	font-size: 14px;
+}
+
+.green{
+	color: #849E4C
+}
+
+.red{
+	color: red;
+}
+
+.black{
+	color: #333;
 }

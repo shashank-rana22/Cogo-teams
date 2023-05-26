@@ -1,9 +1,11 @@
-import { Button } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import 	formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
+import { useEffect, useState } from 'react';
 
 import { convertCurrencyValue, displayTotal } from '../../../../utils/dynamicValues';
 import getBreakdown from '../../../../utils/getBreakdown';
+import getTotalMarginSum from '../../../../utils/getTotalMarginSum';
 import getWidth from '../../../../utils/getWidth';
 
 import Convenience from './Convenience';
@@ -27,6 +29,8 @@ function BreakdownDetails({
 }) {
 	const { query } = useRouter();
 	const { rfq_id = '' } = query;
+
+	const [profitability, setProfitability] = useState(0);
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
 
 	const rateDetails = getBreakdown(rate);
@@ -36,8 +40,30 @@ function BreakdownDetails({
 	const handleConvenienceFeeChange = (v) => {
 		setConvenienceDetails(v);
 	};
-
 	let total = 0;
+
+	console.log('conversions::', conversions);
+
+	console.log('editedMargins::', editedMargins);
+
+	console.log('currency_conversion::', conversions);
+
+	console.log('rate::', rate);
+
+	const { total_margin_by_kam, totalAmount } = getTotalMarginSum({
+		editedMargins,
+		conversions,
+		rate,
+	});
+
+	console.log('margin::', totalAmount, total_margin_by_kam);
+
+	useEffect(() => {
+		const calculate = (totalAmount / (total - totalAmount)) * 100;
+		console.log('calculate::', calculate);
+		// const formattedCalculate = calculate.toFixed(2);
+		setProfitability(+calculate);
+	}, [total, totalAmount]);
 
 	const convenience_fee = convertCurrencyValue(
 		(convenienceDetails?.convenience_rate?.price || 0)
@@ -179,18 +205,15 @@ function BreakdownDetails({
 					<div className={styles.footer_title}>
 						Projected Profitability :
 					</div>
-					<div className={styles.title_value}>
-						2.6%
+					<div
+						className={cl`${styles.title_value} ${profitability > 0 ? styles.green : styles.red}
+					${profitability === 0 ? styles.black : ''}`}
+					>
+						{profitability}
+						{' '}
+						%
 					</div>
 				</div>
-				{/* <div className={styles.info_title}>
-					<div className={styles.footer_title}>
-						Price / Ctr :
-					</div>
-					<div className={styles.title_value}>
-						$18,000
-					</div>
-				</div> */}
 				<Button
 					size="md"
 					themeType="secondary"
