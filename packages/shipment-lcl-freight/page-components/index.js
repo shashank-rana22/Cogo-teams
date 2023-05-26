@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 
 import useGetActiveStakeholder from '../hooks/useGetActiveStakeholder';
 import useGetShipment from '../hooks/useGetShipment';
+import useGetServiceTimeline from '../hooks/useGetTimeLine';
 import useListShipmentServices from '../hooks/useListShipmentServices';
 import getStakeholderConfig from '../stakeholderConfig';
 
@@ -28,13 +29,18 @@ function LclFreight() {
 			page_limit                   : 100,
 		},
 	});
+	const timeline = useGetServiceTimeline({
+		defaultParams : { shipment_id: shipment?.shipment_data?.id },
+		initialCall   : false,
+	});
 
 	const contextValues = useMemo(() => ({
 		...shipment,
 		...services,
+		...timeline,
 		stakeholderConfig,
 		activeStakeholder,
-	}), [shipment, services, stakeholderConfig, activeStakeholder]);
+	}), [shipment, services, stakeholderConfig, activeStakeholder, timeline]);
 
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>

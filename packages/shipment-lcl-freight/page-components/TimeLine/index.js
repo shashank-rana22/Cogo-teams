@@ -1,9 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useState, useContext, useEffect } from 'react';
-import { v4 as uuid } from 'uuid';
-
-import useGetServiceTimeline from '../../hooks/useGetTimeLine';
 
 import EditSchedule from './EditSchedule';
 import { canEditSchedule } from './helpers/canEditSchedule';
@@ -15,16 +12,11 @@ function Timeline() {
 	const {
 		shipment_data,
 		primary_service,
-		isGettingShipment,
 		stakeholderConfig,
+		timelineData,
+		timelineLoading: loading,
+		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
-
-	const { timelineLoading: loading, timelineData, getShipmentTimeline } = useGetServiceTimeline({
-		defaultParams: {
-			shipment_id: shipment_data?.id,
-		},
-		initialCall: false,
-	});
 
 	useEffect(() => {
 		if (shipment_data?.id) {
@@ -40,14 +32,14 @@ function Timeline() {
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
 	);
 
-	const totalItems = (timelineData || []).length;
+	const totalItems = (filteredTimelineData || []).length;
 	let consecutivelyCompleted = true;
 
-	if (isGettingShipment || loading) {
+	if (loading) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.list_container}>
-					<Loader key={uuid()} />
+					<Loader />
 				</div>
 			</div>
 		);
@@ -60,10 +52,10 @@ function Timeline() {
 					consecutivelyCompleted = consecutivelyCompleted && timelineItem.completed_on;
 					return (
 						<TimelineItem
+							key={timelineItem?.milestone}
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
 							isLast={totalItems === index + 1}
-							key={uuid()}
 						/>
 					);
 				})}
