@@ -9,8 +9,16 @@ import styles from './styles.module.css';
 
 function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }) {
 	const content_mapping = [
-		{ title: 'PERSONAL INFORMATION', content: PersonalInformation, key: 'detail' },
-		{ title: 'IDENTIFICATION DOCUMENTS', content: IdentificationDocuments, key: 'documents' },
+		{
+			title     : 'PERSONAL INFORMATION',
+			content   : PersonalInformation,
+			isPending : isEmpty(data?.detail),
+		},
+		{
+			title     : 'IDENTIFICATION DOCUMENTS',
+			content   : IdentificationDocuments,
+			isPending : isEmpty(data?.documents),
+		},
 
 	];
 
@@ -29,10 +37,10 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 			<div className={styles.subcontainer}>
 
 				{content_mapping.map((item) => {
-					const { content: Component, key } = item;
+					const { content: Component, isPending } = item;
 
 					const getStatus = () => {
-						if (isEmpty(data[key])) {
+						if (data[isPending]) {
 							return false;
 						}
 						return true;
