@@ -13,6 +13,7 @@ const useGetPlanDetails = ({ featureModal }) => {
 		url    : '/get_saas_plan_details',
 	}, { manual: true });
 
+	// getting cancel error by removing async await
 	const refetchPlanDetails = useCallback(async () => {
 		try {
 			await trigger({

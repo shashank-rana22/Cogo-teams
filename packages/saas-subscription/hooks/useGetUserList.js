@@ -13,6 +13,7 @@ const useGetUserList = () => {
 		url    : '/list_saas_subscription_customers',
 	}, { manual: true });
 
+	// getting cancel error by removing async await
 	const refectUserList = useCallback(async () => {
 		const { page, customer_segment, search } = globalFilters;
 		try {

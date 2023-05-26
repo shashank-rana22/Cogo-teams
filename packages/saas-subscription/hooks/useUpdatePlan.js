@@ -16,6 +16,7 @@ const useUpdatePlan = ({ planId, subscriptionId, modalChangeHandler }) => {
 		url    : '/update_saas_subscription',
 	}, { manual: true });
 
+	// getting cancel error by removing async await
 	const getPlanList = useCallback(async () => {
 		try {
 			await listTrigger({

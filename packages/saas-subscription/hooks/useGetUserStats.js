@@ -9,6 +9,7 @@ const useGetUserStats = () => {
 		url    : '/get_saas_subscription_user_stats',
 	}, { manual: true });
 
+	// getting cancel error by removing async await
 	const refetchUserStats = useCallback(async (searchTerm) => {
 		try {
 			await trigger({
