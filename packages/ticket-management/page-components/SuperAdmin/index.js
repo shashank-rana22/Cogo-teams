@@ -1,7 +1,6 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useState } from 'react';
 
-import AllTickets from './AllTickets';
 import Dashboard from './Dashboard';
 import styles from './styles.module.css';
 
@@ -23,12 +22,6 @@ function SuperAdmin() {
 					title="Dashboard"
 				>
 					<Dashboard />
-				</TabPanel>
-				<TabPanel
-					name="all_tickets"
-					title="All Tickets"
-				>
-					<AllTickets />
 				</TabPanel>
 			</Tabs>
 		</>

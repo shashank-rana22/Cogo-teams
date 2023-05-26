@@ -1,7 +1,8 @@
+import { cl } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyTicket from '../../../../../common/EmptyTicket';
-import UserCardLoader from '../../../../../common/UserCardLoader';
+import EmptyTicket from '../../../../common/EmptyTicket';
+import UserCardLoader from '../../../../common/UserCardLoader';
 
 import styles from './styles.module.css';
 
@@ -61,7 +62,7 @@ function PerformanceCard({ data, loading }) {
 	);
 }
 
-function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type, loading }) {
+function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type, loading, isMargin }) {
 	const cardComponentMapping = {
 		Users       : <UserCard data={data} loading={loading} />,
 		Categories  : <CategoriesCard data={data} loading={loading} />,
@@ -71,7 +72,9 @@ function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type, lo
 	const CardComponent = cardComponentMapping[type];
 
 	return (
-		<div className={styles.container}>
+		<div
+			className={cl`${styles.container} ${styles[isMargin ? 'is_margin' : '']}`}
+		>
 			<div className={styles.header}>
 				<div className={styles.title}>{label}</div>
 				<div className={styles.title}>{subLabel}</div>

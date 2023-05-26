@@ -2,7 +2,7 @@ import { ResponsivePie } from '@cogoport/charts/pie/index';
 import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import { statsIconsAndData } from '../../../../configurations/dashboard-stats';
+import { statsMapping } from '../../../../configurations/stats-mapping';
 
 import styles from './styles.module.css';
 
@@ -69,7 +69,7 @@ function OverallStats({ data, ticketCount }) {
 					))}
 				</div>
 			</div>
-			{(statsIconsAndData || []).map(({ key, icon, label, suffix }) => (
+			{(statsMapping || []).map(({ key, icon, label, suffix }) => (
 				<div className={styles.tile} key={key}>
 					<div>{icon}</div>
 					<div className={styles.count}>
