@@ -12,7 +12,6 @@ const controls = () => ([
 		label       : 'Gender',
 		type        : 'select',
 		placeholder : 'Select Gender',
-		disabled    : true,
 		rules       : { required: 'This is required' },
 		options     : [
 			{ label: 'Male', value: 'male' },
@@ -82,6 +81,7 @@ const controls = () => ([
 		name        : 'personal_email',
 		label       : 'Personal Email Id',
 		type        : 'email',
+		disabled    : true,
 		placeholder : 'Email',
 		rules       : { required: 'This is required' },
 	},
@@ -112,7 +112,6 @@ const controls = () => ([
 		label       : 'Cogoport Email',
 		type        : 'email',
 		placeholder : 'Cogoport Email Id',
-		disabled    : true,
 		rules       : { required: 'This is required' },
 	},
 	{

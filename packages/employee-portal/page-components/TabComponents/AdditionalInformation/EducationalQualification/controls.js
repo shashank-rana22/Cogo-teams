@@ -52,7 +52,7 @@ const getControls = [{
 			},
 		},
 		{
-			name        : 'score_mode',
+			name        : 'score_type',
 			label       : 'CGPA/Percentage',
 			type        : 'select',
 			placeholder : 'Select Mode',

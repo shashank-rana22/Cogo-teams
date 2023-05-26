@@ -1,9 +1,13 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
 function useGetEmployeeDetails({ id = '' }) {
+	const { user } = useSelector((state) => state?.profile);
+	const { id:userId } = user || {};
+
 	const [{ loading = false, data = {} }, trigger] = useHarbourRequest({
 		method : 'GET',
 		url    : 'get_employee_details',
@@ -13,13 +17,13 @@ function useGetEmployeeDetails({ id = '' }) {
 		try {
 			trigger({
 				params: {
-					id: 'be4fc4d9-220c-4853-bcba-b6d8e2c9b837' || id,
+					user_id: userId,
 				},
 			});
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}
-	}, [id, trigger]);
+	}, [trigger, userId]);
 
 	useEffect(() => {
 		getEmployeeDetails();
