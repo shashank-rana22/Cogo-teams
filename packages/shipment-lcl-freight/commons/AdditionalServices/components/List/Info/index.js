@@ -8,8 +8,8 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Info() {
-	const items = Object.values(STATUS_ITEMS || {}).map((item) => (
-		<Item {...item} />
+	const items = Object.entries(STATUS_ITEMS || {}).map(([key, item]) => (
+		<Item key={key} {...item} />
 	));
 
 	return (

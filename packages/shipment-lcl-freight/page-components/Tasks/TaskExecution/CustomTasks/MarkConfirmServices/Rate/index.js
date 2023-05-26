@@ -7,7 +7,7 @@ import getControls from '../helper/getControls';
 
 import styles from './styles.module.css';
 
-function Rate({ data, setStep, servicesList = [], task = {}, formattedRate = {} }) {
+function Rate({ data, setStep = () => {}, servicesList = [], task = {}, formattedRate = {} }) {
 	const subsidiaryService = (servicesList || []).find((service) => service.service_type === 'subsidiary_service'
 		&& service.id === task?.service_id);
 

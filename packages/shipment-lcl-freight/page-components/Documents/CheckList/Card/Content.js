@@ -22,7 +22,6 @@ function Content({
 	setShowApproved,
 	docType,
 }) {
-	console.log({ uploadedItem });
 	const isBlReleased = [
 		'approved',
 		'released',

@@ -47,8 +47,9 @@ function Details({ serviceData = [] }) {
 
 			{Object.keys(serviceInitialKeys).length > 1 ?	(
 				<div className={cl`${styles.multiservices_heading} ${styles[state]}`}>
-					{(Object.keys(serviceInitialKeys)).map((key) => (
+					{(Object.entries(serviceInitialKeys)).map(([objKey, key]) => (
 						<div
+							key={objKey}
 							className={`${styles.mainservice_tabs} 
 							${multiServiceType === key ? styles.active : null} 
 							${styles[state]}`}
@@ -67,19 +68,34 @@ function Details({ serviceData = [] }) {
 					serviceInitialKeys[multiServiceType],
 					element?.key,
 				) ? (
-					<Item state={state} label={element} detail={serviceInitialKeys[multiServiceType]} />
+					<Item
+						key={element?.key}
+						state={state}
+						label={element}
+						detail={serviceInitialKeys[multiServiceType]}
+					/>
 					) : null))}
 			</div>
 
 			<div className={styles.remaining_keys}>
 				{(service_items_key || {}).map((element) => (getByKey(remainingServiceData, element.key) ? (
-					<Item state={state} label={element} detail={remainingServiceData} />
+					<Item
+						key={element?.key}
+						state={state}
+						label={element}
+						detail={remainingServiceData}
+					/>
 				) : null))}
 			</div>
 
 			<div className={styles.free_days}>
 				{(service_items_key || {}).map((element) => (getByKey(freeDays, element.key) ? (
-					<Item state={state} label={element} detail={freeDays} />
+					<Item
+						key={element?.key}
+						state={state}
+						label={element}
+						detail={freeDays}
+					/>
 				) : null))}
 			</div>
 		</div>

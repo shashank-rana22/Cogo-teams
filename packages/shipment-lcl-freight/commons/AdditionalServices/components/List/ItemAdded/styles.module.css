@@ -118,9 +118,9 @@
 }
 
 .three_dots {
-	cursor: pointer;
 	width: 0.8em;
 	height: 0.8em;
+	cursor: pointer;
 }
 
 .action_button {
