@@ -1,6 +1,7 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTick, IcMDoubleTick } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 
 import { LOGO_URL } from '../../constants';
 import MessageBody from '../MessageBody';
@@ -21,7 +22,13 @@ function SentDiv({
 		message_status = '',
 	} = eachMessage;
 
-	const date = format(new Date(created_at), 'dd MMM YYYY, HH:mm');
+	const date = created_at && formatDate({
+		date       : new Date(created_at),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+		formatType : 'dateTime',
+		separator  : ' ',
+	});
 	const adminStyles = !!(send_by || session_type === 'admin') || false;
 	return (
 		<div className={styles.container}>
@@ -31,7 +38,7 @@ function SentDiv({
 					&nbsp;
 					{send_by || (session_type === 'admin' ? 'kam' : 'bot')}
 					,
-					<span className={styles.time_stamp}>{date}</span>
+					<span className={styles.time_stamp}>{date || ''}</span>
 				</div>
 
 				<div className={styles.styled_div}>

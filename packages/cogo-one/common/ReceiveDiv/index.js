@@ -1,7 +1,8 @@
 import { cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot, IcMCross } from '@cogoport/icons-react';
-import { format, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import MessageBody from '../MessageBody';
@@ -24,13 +25,20 @@ function ReceiveDiv({
 	} = eachMessage;
 	const { reply_metadata = {}, message = '' } = response || {};
 
-	const date = created_at && format(new Date(created_at), 'dd MMM YYYY, HH:mm');
+	const date = created_at && formatDate({
+		date       : new Date(created_at),
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+		formatType : 'dateTime',
+		separator  : ' ',
+	});
+
 	const hasRepliedMessage = !isEmpty(reply_metadata);
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.time_stamp}>
-				{date && date}
+				{date || ''}
 			</div>
 			<div className={cl`${message_type === 'contacts' ? '' : styles.receive_message_container} 
 			${hasRepliedMessage ? styles.replied_messages : ''}`}
