@@ -12,12 +12,18 @@ function Write({
 	addAnnexure = false,
 	isReadonly = false,
 	initialValues = {},
+	watermark = null,
+	setValue = () => {},
 }) {
 	const { port_of_loading, port_of_discharge, consigner } = initialValues;
 
+	setValue('consigner', consigner);
+
+	console.log('initialValues', initialValues);
 	return (
 		<main className={styles.main}>
-			<Watermark text="draft" />
+			{watermark
+				? <Watermark text="draft" /> : null}
 			<section className={styles.section}>
 				<div className={styles.section_one}>
 					<div className={styles.section_one_child_1}>

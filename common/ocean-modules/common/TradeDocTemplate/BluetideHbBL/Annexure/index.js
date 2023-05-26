@@ -7,7 +7,7 @@ import Watermark from '../../commons/Watermark';
 
 import styles from './style.module.css';
 
-function Annexure({ control, mode = 'read', initialValues = {} }) {
+function Annexure({ control, mode = 'read', initialValues = {}, watermark = null }) {
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'containers',
@@ -15,7 +15,8 @@ function Annexure({ control, mode = 'read', initialValues = {} }) {
 
 	return (
 		<main className={styles.main}>
-			<Watermark text="draft" />
+			{watermark
+				? <Watermark text="draft" /> : null}
 			<section className={styles.section}>
 				<div className={styles.header}>
 					ANNEXURE SHEET

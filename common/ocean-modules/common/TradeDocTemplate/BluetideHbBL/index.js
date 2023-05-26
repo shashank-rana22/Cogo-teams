@@ -5,11 +5,11 @@ import Annexure from './Annexure';
 import Frontside from './Frontside';
 import styles from './styles.module.css';
 
-function BluetideHBL({ mode = 'read', initialValues = {} }, ref) {
+function BluetideHBL({ mode = 'read', initialValues = {}, watermark = null }, ref) {
 	const [addAnnexure, setaddAnnexure] = useState(false);
 	const containerCountMoreThan1 = (initialValues?.containers || []).length > 1;
 
-	const { control, handleSubmit } = useForm({
+	const { control, handleSubmit, setValue } = useForm({
 		defaultValues: {
 			containers: [{
 				container_number    : '',
@@ -35,6 +35,8 @@ function BluetideHBL({ mode = 'read', initialValues = {} }, ref) {
 				setaddAnnexure={setaddAnnexure}
 				control={control}
 				initialValues={initialValues}
+				watermark={watermark}
+				setValue={setValue}
 			/>
 
 			{addAnnexure && (
@@ -44,6 +46,7 @@ function BluetideHBL({ mode = 'read', initialValues = {} }, ref) {
 						initialValues={initialValues}
 						mode={mode}
 						control={control}
+						watermark={watermark}
 					/>
 				</>
 			)}
