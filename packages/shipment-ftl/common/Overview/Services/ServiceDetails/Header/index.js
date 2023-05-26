@@ -8,7 +8,7 @@ import Details from '../Details';
 import styles from './styles.module.css';
 
 function Header({ serviceData = [] }) {
-	const [showDetails, setShowDetails] = useState({});
+	const [showDetails, setShowDetails] = useState(true);
 
 	const { state, shipment_type, service_provider, payment_term } = serviceData?.[0] || {};
 
@@ -36,13 +36,10 @@ function Header({ serviceData = [] }) {
 						<div
 							role="button"
 							tabIndex={0}
-							onClick={() => setShowDetails({
-								...showDetails,
-								[serviceData?.[0]?.display_label]: !showDetails[serviceData?.[0]?.display_label],
-							})}
+							onClick={() => setShowDetails(!showDetails)}
 							className={styles.details_cta}
 						>
-							{ showDetails[serviceData?.[0]?.display_label] ? 'Hide Details' : 'View Details'}
+							{ showDetails ? 'Hide Details' : 'View Details'}
 						</div>
 
 						<div className={styles.edit_cancel}>
@@ -51,7 +48,7 @@ function Header({ serviceData = [] }) {
 					</div>
 				</div>
 			</div>
-			{showDetails[serviceData?.[0]?.display_label] ? <Details serviceData={serviceData} /> : null}
+			{showDetails ? <Details serviceData={serviceData} /> : null}
 		</div>
 
 	);

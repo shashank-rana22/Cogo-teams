@@ -12,6 +12,7 @@ import Overview from '../../common/Overview';
 import PocSop from '../../common/PocSop';
 import SalesInvoice from '../../common/SalesInvoice';
 import ShipmentHeader from '../../common/ShipmentHeader';
+import ShipmentInfo from '../../common/ShipmentInfo';
 import Tasks from '../../common/Tasks';
 import Timeline from '../../common/TimeLine';
 import useGetShipment from '../../hooks/useGetShipment';
@@ -90,6 +91,7 @@ function ShipmentDetails() {
 		<ShipmentDetailContext.Provider value={contextValues}>
 			<div>
 				<div className={styles.top_header}>
+					<ShipmentInfo />
 
 					<div className={styles.toggle_chat}>
 						<Toggle
@@ -125,7 +127,7 @@ function ShipmentDetails() {
 							<Overview shipmentData={shipment_data} />
 						</TabPanel>
 
-						<TabPanel name="tasks" title="Tasks">
+						<TabPanel name="timeline_and_tasks" title="TimeLine and Tasks">
 							<Tasks />
 						</TabPanel>
 
@@ -140,8 +142,8 @@ function ShipmentDetails() {
 						<TabPanel name="emails" title="Emails">
 							<ShipmentMails
 								source="cogo_rpa"
-								// filters={{ q: shipment_data?.serial_id }}
-								// pre_subject_text={`${shipment_data?.serial_id}`}
+								filters={{ q: shipment_data?.serial_id }}
+								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
 						</TabPanel>
 
