@@ -95,3 +95,7 @@
         word-break: break-word;
     }
 }
+
+.rejection_container {
+	height: 160px;
+}
