@@ -6,7 +6,7 @@ import ServiceIcon from '../../ServiceIcon';
 import styles from './styles.module.css';
 
 function PortDetails({ data = {}, icon }) {
-	const { port, trade_type } = data;
+	const { location, trade_type } = data;
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>
@@ -22,12 +22,12 @@ function PortDetails({ data = {}, icon }) {
 				<div className={styles.port_code}>
 					<div className={`${styles.code} core_ui_port_code`}>
 						(
-						{port?.port_code || port?.postal_code}
+						{location?.port_code || location?.postal_code}
 						)
 					</div>
 
 					<div className={`${styles.country} core_ui_country_code`}>
-						{port?.country_code}
+						{location?.country_code}
 					</div>
 				</div>
 
@@ -35,9 +35,9 @@ function PortDetails({ data = {}, icon }) {
 					placement="bottom"
 					theme="light"
 					interactive
-					content={port?.display_name}
+					content={location?.display_name}
 				>
-					<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>{port?.name}</div>
+					<div className={`${styles.ellipsis_text} core_ui_loaction_name`}>{location?.name}</div>
 				</Tooltip>
 			</div>
 		</div>

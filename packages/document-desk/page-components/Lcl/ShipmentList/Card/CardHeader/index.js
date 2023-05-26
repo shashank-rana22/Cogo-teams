@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 export default function CardHeader({ item = {} }) {
-	const { trade_type, source, is_cogo_assured, importer_exporter } = item || {};
+	const { trade_type, source, is_cogo_assured, importer_exporter } = item;
 
 	const displaySource = source === 'direct' ? 'Sell Without Buy' : startCase(source || '');
 
@@ -40,6 +40,7 @@ export default function CardHeader({ item = {} }) {
 			>
 				{displaySource}
 			</Pill>
+
 		</div>
 	);
 }

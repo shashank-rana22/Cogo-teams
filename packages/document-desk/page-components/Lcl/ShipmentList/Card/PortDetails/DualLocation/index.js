@@ -35,7 +35,7 @@ const handleLocationDetails = (location) => (
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
 
 function PortDetails({ data = {}, icon }) {
-	const { destination_port = {}, origin_port = {}, estimated_arrival = '', estimated_departure = '' } = data;
+	const { destination_port = {}, origin_port = {}, schedule_arrival = '', schedule_departure = '' } = data;
 
 	return (
 		<div className={`${styles.container} core_ui_port_conatiner`}>
@@ -43,13 +43,13 @@ function PortDetails({ data = {}, icon }) {
 
 			<div className={styles.port_detail}>
 				{handleLocationDetails(origin_port)}
-				{estimated_departure ? (
+				{schedule_departure ? (
 					<div className={styles.eta_etd}>
 						ETD:
 						{' '}
-						{getDisplayDate(estimated_departure)}
+						{getDisplayDate(schedule_departure)}
 					</div>
-				) : 'TBD'}
+				) : 'ETD: TBD'}
 			</div>
 
 			<div className={styles.icon_wrapper}>
@@ -58,13 +58,13 @@ function PortDetails({ data = {}, icon }) {
 
 			<div className={styles.port_detail}>
 				{handleLocationDetails(destination_port)}
-				{estimated_arrival ? (
+				{schedule_arrival ? (
 					<div className={styles.eta_etd}>
 						ETA:
 						{' '}
-						{getDisplayDate(estimated_arrival)}
+						{getDisplayDate(schedule_arrival)}
 					</div>
-				) : 'TBD'}
+				) : 'ETA: TBD'}
 			</div>
 		</div>
 	);

@@ -3,7 +3,7 @@ import { Tooltip, cl } from '@cogoport/components';
 import styles from './styles.module.css';
 
 export default function ShipmentInfo({ item = {} }) {
-	const { serial_id, service_provider, service_ops2, shipping_line } = item;
+	const { serial_id, service_provider, service_ops2 } = item;
 
 	return (
 		<div className={styles.container}>
@@ -11,6 +11,7 @@ export default function ShipmentInfo({ item = {} }) {
 				Shipment ID #
 				{serial_id}
 			</div>
+
 			<Tooltip
 				placement="bottom"
 				interactive
@@ -18,20 +19,7 @@ export default function ShipmentInfo({ item = {} }) {
 			>
 				<div className={styles.business_name}>{service_provider?.business_name}</div>
 			</Tooltip>
-			<Tooltip
-				placement="bottom"
-				interactive
-				content={(
-					<div>
-						{shipping_line?.business_name}
-					</div>
-				)}
-			>
-				<div className={styles.heading}>
-					Line:
-					<div className={cl`${styles.ellipsis_text} ${styles.pointer}`}>{shipping_line?.business_name}</div>
-				</div>
-			</Tooltip>
+
 			{service_ops2?.name ? (
 				<div className={styles.heading}>
 					SO2:

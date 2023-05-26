@@ -1,4 +1,4 @@
-import { IcMFfcl, IcMFlocalCharges, IcMFcustoms, IcMFcfs } from '@cogoport/icons-react';
+import { IcMFlcl, IcMFcustoms } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useContext } from 'react';
 
@@ -14,10 +14,8 @@ import ShipmentInfo from './ShipmentInfo';
 import styles from './styles.module.css';
 
 const iconMapping = {
-	fcl_freight       : { Icon: IcMFfcl, text: 'FCL' },
-	fcl_freight_local : { Icon: IcMFlocalCharges, text: 'FCL Local' },
-	fcl_customs       : { Icon: IcMFcustoms, text: 'FCL Customs' },
-	fcl_cfs           : { Icon: IcMFcfs, text: 'FCL CFS' },
+	lcl_freight : { Icon: IcMFlcl, text: 'LCL' },
+	lcl_customs : { Icon: IcMFcustoms, text: 'LCL Customs' },
 };
 
 export default function Card({ item = {} }) {
@@ -52,7 +50,7 @@ export default function Card({ item = {} }) {
 				<div className={styles.separator} />
 
 				<div className={styles.location_container}>
-					{item?.shipment_type === 'fcl_freight'
+					{item?.shipment_type === 'lcl_freight'
 						? <DualLocation data={item} icon={iconProps} />
 						: <SingleLocation data={item} icon={iconProps} />}
 				</div>

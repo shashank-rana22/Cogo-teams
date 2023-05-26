@@ -17,9 +17,7 @@
 	white-space: nowrap;
 }
 
-.fcl,
-.fcl_local,
-.fcl_cfs {
+.lcl {
 	svg path {
 		fill: var(--color-primary-error-red-2);
 	}
@@ -29,7 +27,7 @@
 	}
 }
 
-.fcl_customs {
+.lcl_customs {
 	svg path {
 		fill: var(--color-primary-error-red-3);
 	}

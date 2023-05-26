@@ -21,7 +21,11 @@ const getDocumentDeskFilters = ({ documentDeskContextValues, filters }) => {
 
 	const tabFilters = stepperMapping?.TABWISE_FILTERS({ activeTab, isCriticalOn }) || {};
 
-	let finalFilters = { ...(tabFilters || {}), ...restFilters };
+	let finalFilters = {
+		lcl_freight_service: { trade_type: undefined },
+		...(tabFilters || {}),
+		...restFilters,
+	};
 
 	if (isCriticalOn) {
 		const criticalFilters = isCriticalOn ? stepperMapping?.CRITICAL_TABS?.[activeTab] || {} : {};
@@ -33,9 +37,10 @@ const getDocumentDeskFilters = ({ documentDeskContextValues, filters }) => {
 		finalFilters[`${keyMapping[date_type]}_less_than`] = endDate;
 	}
 
-	if (['import', 'export'].includes(stepperTab)) finalFilters.trade_type = stepperTab;
+	if (['import', 'export'].includes(stepperTab)) {
+		finalFilters.lcl_freight_service.trade_type = stepperTab;
+	}
 
-	console.log(finalFilters, 'finalFilters');
 	return finalFilters;
 };
 
