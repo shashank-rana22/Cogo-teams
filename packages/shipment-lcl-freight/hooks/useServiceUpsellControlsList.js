@@ -45,9 +45,8 @@ const useGetControls = ({ truckTypeToggle }) => {
 				prefix : 'Truck',
 				span   : 12,
 				rules  : {
-					required   : 'Trucks are required',
-					min        : 1,
-					setValueAs : (v) => parseInt(v, 10),
+					required : 'Trucks are required',
+					min      : 1,
 				},
 			},
 		],

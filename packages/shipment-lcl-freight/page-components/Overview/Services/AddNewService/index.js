@@ -58,18 +58,17 @@ function AddNewService({
 
 	return (
 		<>
-			{showAddServiceBox
-				? (
-					<div
-						className={styles.container}
-						onClick={closeModal}
-						role="button"
-						tabIndex={0}
-					>
-						<div className={styles.text}>{upsellableService.display_label}</div>
-						<IcMPlus />
-					</div>
-				) : null}
+			{showAddServiceBox ? (
+				<div
+					className={styles.container}
+					onClick={closeModal}
+					role="button"
+					tabIndex={0}
+				>
+					<div className={styles.text}>{upsellableService.display_label}</div>
+					<IcMPlus />
+				</div>
+			) : null}
 
 			{upsellModal ? (
 				<Form

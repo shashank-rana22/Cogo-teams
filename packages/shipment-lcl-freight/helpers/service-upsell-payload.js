@@ -107,7 +107,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 const formatPayload = ({
 	formValues = {},
 	service = {},
-	shipmentData = {},
+	shipment_data = {},
 	primary_service,
 	organization_id = '',
 	user = {},
@@ -128,7 +128,7 @@ const formatPayload = ({
 	const newPayload = {
 		search_type,
 		source                                 : 'upsell',
-		source_id                              : shipmentData?.id,
+		source_id                              : shipment_data?.id,
 		importer_exporter_id                   : organization_id,
 		importer_exporter_branch_id            : user?.branch_id,
 		user_id                                : user?.user_id,

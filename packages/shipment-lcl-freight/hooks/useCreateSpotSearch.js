@@ -7,7 +7,7 @@ import formatPayload from '../helpers/service-upsell-payload';
 export default function useCreateSpotSearch({
 	service = {},
 	primary_service = {},
-	shipmentData = {},
+	shipment_data = {},
 	organization_id = '',
 	user = {},
 }) {
@@ -22,7 +22,7 @@ export default function useCreateSpotSearch({
 		const { payload } = formatPayload({
 			service,
 			primary_service,
-			shipmentData,
+			shipment_data,
 			formValues: values,
 			organization_id,
 			user,
@@ -33,7 +33,7 @@ export default function useCreateSpotSearch({
 
 			if (!res.hasError) {
 				let newHref = `${window.location.origin}/${router?.query?.partner_id}/book/`;
-				newHref += `${res.data?.id}/${shipmentData?.importer_exporter_id}/${shipmentData?.id}`;
+				newHref += `${res.data?.id}/${shipment_data?.importer_exporter_id}/${shipment_data?.id}`;
 
 				window.location.href = newHref;
 			}

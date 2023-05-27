@@ -15,16 +15,6 @@
 	align-items: center;
 }
 
-.button {
-	display: flex;
-	margin-right: 8px;
-	cursor: pointer;
-
-	&:hover {
-		color: #ee3427;
-	}
-}
-
 .error {
-	color: #fb8279;
+	color: var(--color-primary-error-red-2);
 }

@@ -1,6 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase, isEmpty } from '@cogoport/utils';
-import { useContext, useState, useMemo } from 'react';
+import React, { useContext, useState, useMemo } from 'react';
 
 import AddNewService from './AddNewService';
 import helperFuncs from './helpers/getHelperFuncs';
@@ -37,7 +37,7 @@ function Services() {
 			<div className={styles.container}>
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
-						<>
+						<React.Fragment key={serviceCategory}>
 							{!isKam ? heading(serviceCategory) : null}
 
 							{ isKam
@@ -64,7 +64,7 @@ function Services() {
 									/>
 								))}
 							</div>
-						</>
+						</React.Fragment>
 					))}
 				</div>
 			</div>
