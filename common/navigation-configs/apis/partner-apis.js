@@ -4481,6 +4481,11 @@ const partner = {
 			service_name : 'unified_dashboard',
 			feature      : 'live_booking',
 		},
+		{
+			api          : 'get_weight_slabs_for_airline',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
 	],
 	operations_dashboard: [
 		{
@@ -10833,7 +10838,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
 		},
-
+		{
+			api          : 'get_weight_slabs_for_airline',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
 		{
 			api          : 'create_domestic_air_freight_rate',
 			access_type  : 'private',

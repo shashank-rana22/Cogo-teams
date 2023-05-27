@@ -1,4 +1,4 @@
-import { Button, Checkbox, Popover, Tooltip, Badge } from '@cogoport/components';
+import { Button, Checkbox, Popover, Tooltip, Badge, Pill } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useAllocationRequest } from '@cogoport/request';
@@ -25,12 +25,13 @@ const useListAllocationRequests = () => {
 	};
 
 	const [params, setParams] = useState({
-		sort_by       : 'created_at',
-		sort_type     : 'desc',
-		page_limit    : 10,
-		page          : 1,
-		data_required : true,
-		filters       : {
+		sort_by                        : 'created_at',
+		sort_type                      : 'desc',
+		page_limit                     : 10,
+		page                           : 1,
+		data_required                  : true,
+		organization_sub_type_required : true,
+		filters                        : {
 			status       : 'pending',
 			service_type : 'organization',
 			q            : searchQuery || undefined,
@@ -178,16 +179,32 @@ const useListAllocationRequests = () => {
 		{
 			key      : 'organization',
 			Header   : 'Organization',
-			accessor : ({ service }) => (
-				<Tooltip content={(
-					<div className={styles.tooltip_text}>
-						{service.business_name || null}
-					</div>
-				)}
-				>
-					<div className={styles.business_name}>{service?.business_name || '___'}</div>
-				</Tooltip>
-			),
+			accessor : ({ service, partner }) => {
+				const { service_type: toggleValue } = params.filters || {};
+
+				const pathname = toggleValue === 'organization'
+					? `/${partner?.id}/details/demand/${service.id}` : `/${partner?.id}/prm/${service.id}`;
+
+				return (
+					<Tooltip content={(
+						<div className={styles.tooltip_text}>
+							{service.business_name || null}
+						</div>
+					)}
+					>
+						<a href={pathname} target="_blank" rel="noopener noreferrer">
+							<div className={styles.business_name}>
+								{service?.business_name || '___'}
+							</div>
+						</a>
+					</Tooltip>
+				);
+			},
+		},
+		{
+			key      : 'sub_type',
+			Header   : 'Sub Type',
+			accessor : ({ sub_type }) => <div className={styles.sub_type}>{startCase(sub_type || '___')}</div>,
 		},
 		{
 			key      : 'service_user',
@@ -196,6 +213,15 @@ const useListAllocationRequests = () => {
 				<div className={styles.value_container}>
 					{startCase(service_user?.name || '___')}
 					<div className={styles.email_id}>{service_user?.email || '___'}</div>
+				</div>
+			),
+		},
+		{
+			key      : 'partner',
+			Header   : 'Partner',
+			accessor : ({ partner: entity_partner }) => (
+				<div className={styles.value_container}>
+					{entity_partner?.business_name || '___'}
 				</div>
 			),
 		},
@@ -213,8 +239,11 @@ const useListAllocationRequests = () => {
 			Header   : 'Previous Agent',
 			accessor : ({ old_stakeholder }) => (
 				<div className={styles.value_container}>
-					{old_stakeholder?.name || '___'}
-					<div className={styles.email_id}>{old_stakeholder?.email || '___'}</div>
+					<div>
+						{old_stakeholder?.name || '___'}
+						{old_stakeholder?.block_access && <Pill size="md" color="red">Blocked</Pill>}
+					</div>
+					<div className={styles.role_name}>{old_stakeholder?.role_name || '___'}</div>
 				</div>
 			),
 		},
@@ -223,8 +252,11 @@ const useListAllocationRequests = () => {
 			Header   : 'Requested Agent',
 			accessor : ({ user }) => (
 				<div className={styles.value_container}>
-					{user?.name || '___'}
-					<div className={styles.email_id}>{user?.email || '___'}</div>
+					<div>
+						{user?.name || '___'}
+						{user?.block_access && <Pill size="md" color="red">Blocked</Pill>}
+					</div>
+					<div className={styles.role_name}>{user?.role_name || '___'}</div>
 				</div>
 			),
 		},
