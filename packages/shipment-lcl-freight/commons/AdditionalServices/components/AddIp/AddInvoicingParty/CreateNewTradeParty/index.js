@@ -2,7 +2,7 @@ import { Stepper } from '@cogoport/components';
 import { useState } from 'react';
 
 import useCreateOrganizationTradeParty from '../../../../../../hooks/useCreateOrganizationTradeParty';
-import AddressForm from '../AddressForm';
+import AddressForm from '../common/AddressForm';
 
 import CompanyDetails from './CompanyDetails';
 import styles from './styles.module.css';
@@ -47,42 +47,34 @@ function CreateNewTradeParty({
 		apiTrigger(payload);
 	};
 
-	let renderCurrentStepControls = null;
-
-	if (currentStep === 'company_details') {
-		renderCurrentStepControls = (
-			<CompanyDetails
-				filledDetails={filledDetails}
-				setFilledDetails={setFilledDetails}
-				setCurrentStep={setCurrentStep}
-				setShowComponent={setShowComponent}
-			/>
-		);
-	}
-
-	if (currentStep === 'billing_address') {
-		renderCurrentStepControls = (
-			<AddressForm
-				companyDetails={filledDetails}
-				setCurrentStep={setCurrentStep}
-				showComponent={showComponent}
-				onSubmit={onSubmit}
-				gstNumber={gstNumber}
-				setGstNumber={setGstNumber}
-				isAddressRegisteredUnderGst={isAddressRegisteredUnderGst}
-				setIsAddressRegisteredUnderGst={setIsAddressRegisteredUnderGst}
-				source="create_trade_party"
-			/>
-		);
-	}
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.stepper_container}>
 				<Stepper active={currentStep} setActive={setCurrentStep} items={items} />
 			</div>
 
-			{renderCurrentStepControls}
+			{currentStep === 'company_details' ? (
+				<CompanyDetails
+					filledDetails={filledDetails}
+					setFilledDetails={setFilledDetails}
+					setCurrentStep={setCurrentStep}
+					setShowComponent={setShowComponent}
+				/>
+			) : null}
+
+			{currentStep === 'billing_address' ? (
+				<AddressForm
+					companyDetails={filledDetails}
+					setCurrentStep={setCurrentStep}
+					showComponent={showComponent}
+					onSubmit={onSubmit}
+					gstNumber={gstNumber}
+					setGstNumber={setGstNumber}
+					isAddressRegisteredUnderGst={isAddressRegisteredUnderGst}
+					setIsAddressRegisteredUnderGst={setIsAddressRegisteredUnderGst}
+					source="create_trade_party"
+				/>
+			) : null}
 		</div>
 	);
 }

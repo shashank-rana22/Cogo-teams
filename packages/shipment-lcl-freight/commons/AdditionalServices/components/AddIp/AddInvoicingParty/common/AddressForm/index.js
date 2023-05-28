@@ -1,9 +1,8 @@
 import { Button, Checkbox } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { useEffect } from 'react';
 
-import useGetBusiness from '../../../../../../hooks/useGetBusiness';
-import AsyncGstListController from '../CreateNewBillingAddress/AsyncGstListController';
+import useGetBusiness from '../../../../../../../hooks/useGetBusiness';
+import AsyncGstListController from '../../CreateNewBillingAddress/AsyncGstListController';
 
 import Form from './Form';
 import styles from './styles.module.css';
@@ -22,32 +21,37 @@ function AddressForm({
 	source = '',
 	refetch = () => {},
 }) {
-	const data = useGetBusiness({ gstNumber });
-
-	const {
-		handleSubmit,
-		control,
-		setValue,
-		formState: { errors },
-	} = useForm({
-		defaultValues: {
-			poc_details: [{ name: '', email: '', mobile_country_code: '', mobile_number: '' }],
-		},
-	});
+	const { data } = useGetBusiness({ gstNumber });
 
 	const {
 		addresses = [],
 		trade_name = '',
 		business_name = '',
 	} = data || {};
+	const { pincode: firstPincode, address: firstAddress } = addresses?.[0] || {};
 
-	const { firstPincode, firstAddress } = addresses?.[0] || {};
-
-	useEffect(() => {
-		setValue('name', trade_name || business_name || '');
-		setValue('pincode', firstPincode || '');
-		setValue('address', firstAddress || '');
-	}, [setValue, firstPincode, firstAddress, business_name, trade_name]);
+	const {
+		handleSubmit,
+		control,
+		formState: { errors },
+	} = useForm({
+		defaultValues: {
+			poc_details: [
+				{
+					name                : '',
+					email               : '',
+					mobile_country_code : '',
+					mobile_number       : '',
+				},
+			],
+		},
+		shouldUnregister : true,
+		values           : {
+			name    : trade_name || business_name || '',
+			pincode : firstPincode || '',
+			address : firstAddress || '',
+		},
+	});
 
 	const handleCancel = () => {
 		if (source === 'create_trade_party') {
@@ -109,7 +113,7 @@ function AddressForm({
 					{source === 'create_trade_party' ? 'Back' : 'Cancel'}
 				</Button>
 
-				<Button type="submit" onClick={handleSubmit(onSubmit)}>Submit</Button>
+				<Button onClick={handleSubmit(onSubmit)}>Submit</Button>
 			</div>
 		</div>
 	);

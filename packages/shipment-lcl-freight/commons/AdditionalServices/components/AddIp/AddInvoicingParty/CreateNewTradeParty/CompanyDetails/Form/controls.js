@@ -15,11 +15,13 @@ const controls = ({ watch }) => {
 
 	const formControl = [
 		{
-			name     : 'country_id',
-			label    : 'Country',
-			type     : 'async-select',
-			asyncKey : 'list_locations',
-			params   : {
+			name        : 'country_id',
+			label       : 'Country',
+			type        : 'async-select',
+			asyncKey    : 'list_locations',
+			size        : 'sm',
+			initialCall : false,
+			params      : {
 				filters: { type: ['country'] },
 			},
 			placeholder : 'Select Country',
@@ -29,6 +31,7 @@ const controls = ({ watch }) => {
 			name        : 'registration_number',
 			label       : 'PAN Number',
 			type        : 'input',
+			size        : 'sm',
 			placeholder : 'Enter PAN Number',
 			rules       : {
 				required : 'PAN Number is required',
@@ -42,6 +45,7 @@ const controls = ({ watch }) => {
 			name        : 'business_name',
 			label       : 'Business Name',
 			type        : 'input',
+			size        : 'sm',
 			placeholder : 'Enter Business Name here',
 			rules       : { required: 'Business Name is required' },
 		},
@@ -49,6 +53,7 @@ const controls = ({ watch }) => {
 			name        : 'company_type',
 			label       : 'Type of Company',
 			type        : 'select',
+			size        : 'sm',
 			placeholder : 'Select Type of Company',
 			options     : geo.options.registration_types,
 			rules       : { required: 'Type of Company is required' },

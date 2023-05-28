@@ -1,5 +1,6 @@
 import { RadioGroup, Pill, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React, { useMemo } from 'react';
 
 import styles from './styles.module.css';
@@ -69,23 +70,25 @@ function InvoicingPartyItem({
 		<div>
 			<div className={styles.label}>
 				<div className={styles.business_name}>{business_name}</div>
+
 				{verification_status && (
 					<div className={styles.tag_container}>
 						<Pill size="md" className={verification_status} color="green">
-							{verification_status}
+							{startCase(verification_status)}
 						</Pill>
-						<Tooltip
-							content={(
-								<div>
-									Please provide a proof of agreement that verifies the trade
-									party&apos;s authorization to make payment on behalf of the
-									Booking party.
-								</div>
-							)}
-							placement="top"
-							caret={false}
-						>
-							{verification_status === 'pending' && (
+
+						{verification_status === 'pending' && (
+							<Tooltip
+								content={(
+									<div>
+										Please provide a proof of agreement that verifies the trade
+										party&apos;s authorization to make payment on behalf of the
+										Booking party.
+									</div>
+								)}
+								placement="top"
+								caret={false}
+							>
 								<div>
 									<IcMInfo
 										className="image"
@@ -94,8 +97,8 @@ function InvoicingPartyItem({
 										width={16}
 									/>
 								</div>
-							)}
-						</Tooltip>
+							</Tooltip>
+						)}
 					</div>
 				)}
 			</div>
@@ -112,7 +115,7 @@ function InvoicingPartyItem({
 
 			<div
 				className={styles.add_address}
-				onClick={() => onClickAddAddress()}
+				onClick={onClickAddAddress}
 				role="button"
 				tabIndex={0}
 			>

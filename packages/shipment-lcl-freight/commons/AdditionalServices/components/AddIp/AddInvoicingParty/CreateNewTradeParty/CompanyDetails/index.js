@@ -10,14 +10,14 @@ function CompanyDetails({
 	setCurrentStep = () => {},
 	setShowComponent = () => {},
 }) {
+	const { registration_number, business_name, company_type, country_id } = filledDetails;
+
 	const {
 		formState: { errors },
 		handleSubmit,
 		control,
-		register,
-		setValue,
 		watch,
-	} = useForm();
+	} = useForm({ defaultValues: { registration_number, business_name, company_type, country_id } });
 
 	const onSubmitOfCompanyDetails = (values = {}) => {
 		setFilledDetails({ ...values });
@@ -26,16 +26,8 @@ function CompanyDetails({
 
 	return (
 		<div className={styles.container}>
-			<Form
-				watch={watch}
-				control={control}
-				register={register}
-				handleSubmit={handleSubmit}
-				onSubmitOfCompanyDetails={onSubmitOfCompanyDetails}
-				errors={errors}
-				setValue={setValue}
-				filledDetails={filledDetails}
-			/>
+			<Form watch={watch} control={control} errors={errors} />
+
 			<div className={styles.button_container}>
 				<Button
 					onClick={() => setShowComponent('view_billing_addresses')}
@@ -43,9 +35,8 @@ function CompanyDetails({
 				>
 					Cancel
 				</Button>
-				<Button
-					onClick={handleSubmit(onSubmitOfCompanyDetails)}
-				>
+
+				<Button onClick={handleSubmit(onSubmitOfCompanyDetails)}>
 					Proceed
 				</Button>
 			</div>

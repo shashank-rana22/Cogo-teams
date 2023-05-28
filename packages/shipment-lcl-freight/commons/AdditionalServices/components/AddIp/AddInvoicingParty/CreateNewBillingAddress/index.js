@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useState } from 'react';
 
 import useCreateOrganizationAddress from '../../../../../../hooks/useCreateOrganizationAddress';
-import AddressForm from '../AddressForm';
+import AddressForm from '../common/AddressForm';
 
 import styles from './styles.module.css';
 
