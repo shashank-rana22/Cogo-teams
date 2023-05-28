@@ -27,3 +27,13 @@
 	font-size: 20px;
 	font-weight: 600;
 }
+
+.profile{
+	display: flex;
+	align-items: center;
+}
+
+.centered{
+	margin: 0;
+	margin-left: 6px;
+}

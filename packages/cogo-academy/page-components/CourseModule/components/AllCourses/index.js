@@ -9,7 +9,7 @@ import CourseCard from '../CourseCard';
 
 import styles from './styles.module.css';
 
-function AllCourses() {
+function AllCourses({ currentCategory, setCurrentCategory }) {
 	const router = useRouter();
 
 	const {
@@ -66,8 +66,13 @@ function AllCourses() {
 			<div className={styles.tabs_container}>
 				{courseCategories.map((category) => (
 
-					<div className={styles.tab}>
-						<h5>{category.name}</h5>
+					<div
+						role="presentation"
+						className={`${styles.tab} ${currentCategory === category.name ? styles.active : ''}`}
+						key={category.id}
+						onClick={() => setCurrentCategory(category.name)}
+					>
+						<h4>{category.name}</h4>
 						<p className={styles.total_courses}>
 							{category.number}
 							{' '}

@@ -1,5 +1,5 @@
 import { Input, Button } from '@cogoport/components';
-import { IcMArrowDown, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMSearchlight, IcMProfile } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import CoursesModal from '../CoursesModal';
@@ -10,25 +10,32 @@ function Header({ loading, courseCategories, currentCategory, setCurrentCategory
 	const [showCoursesModal, setShowCoursesModal] = useState(false);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.button_container}>
-				<div className={styles.title}>Cogo Courses</div>
+		<>
+			<div className={styles.container}>
+				<div className={styles.button_container}>
+					<div className={styles.title}>Cogo Courses</div>
 
-				<Button
-					size="lg"
-					type="button"
-					onClick={() => setShowCoursesModal(true)}
-				>
-					Courses
-					{' '}
-					<IcMArrowDown style={{ marginLeft: '8px' }} />
-				</Button>
+					<Button
+						size="lg"
+						type="button"
+						onClick={() => setShowCoursesModal(true)}
+					>
+						Courses
+						{' '}
+						<IcMArrowDown style={{ marginLeft: '8px' }} />
+					</Button>
+				</div>
+
+				<Input
+					placeholder="Search by Course, Category, Topic or Tags"
+					suffix={<IcMSearchlight style={{ marginRight: '12px' }} />}
+				/>
+
+				<div className={styles.profile}>
+					<IcMProfile width={18} height={18} />
+					<h4 className={styles.centered}>Hi, Levi</h4>
+				</div>
 			</div>
-
-			<Input
-				placeholder="Search by Course, Category, Topic or Tags"
-				suffix={<IcMSearchlight style={{ marginRight: '12px' }} />}
-			/>
 
 			{showCoursesModal ? (
 				<CoursesModal
@@ -40,7 +47,7 @@ function Header({ loading, courseCategories, currentCategory, setCurrentCategory
 					setCurrentCategory={setCurrentCategory}
 				/>
 			) : null}
-		</div>
+		</>
 	);
 }
 
