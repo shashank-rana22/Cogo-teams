@@ -4,11 +4,9 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function TicketStructureLoader() {
-	const ticketStructureLoaderItems = [...Array(4)].fill();
-
 	return (
 		<div className={styles.tickets_container}>
-			{ticketStructureLoaderItems.map((key) => (
+			{[...Array(4)].fill().map((key) => (
 				<div key={key} className={styles.container}>
 					<div className={styles.subcontainer_one}>
 						<div className={styles.subcontainer_header}>

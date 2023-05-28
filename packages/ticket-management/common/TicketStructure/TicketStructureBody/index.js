@@ -11,6 +11,8 @@ function TicketStructureBody({
 	data,
 	updateTicketActivity = () => {},
 }) {
+	const { profile } = useSelector((state) => state);
+
 	const {
 		ID: id = '',
 		Status: status = '',
@@ -22,8 +24,8 @@ function TicketStructureBody({
 		TicketReviewerID :ticketReviewerId = '',
 	} = data;
 
-	const { profile } = useSelector((state) => state);
 	const { color: textColor, label } =	statusLabelTransformation[getTicketStatus(status)] || {};
+
 	const handleTicketClick = (e) => {
 		e.stopPropagation();
 		updateTicketActivity(actionButtonKeys[status]?.name, id);

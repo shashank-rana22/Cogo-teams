@@ -41,7 +41,7 @@ export const statsIconsAndData = [
 	{
 		icon  : <IcMAverage fill="#ABB0DE" width="22px" height="22px" />,
 		label : 'Neutral customers',
-		key   : 'netural_customer',
+		key   : 'neutral_customer',
 
 	},
 	{

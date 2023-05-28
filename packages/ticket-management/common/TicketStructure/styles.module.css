@@ -4,10 +4,6 @@
 	overflow-y: auto;
 }
 
-.raised_box {
-	padding-bottom: 20px;
-}
-
 .ticket_box::-webkit-scrollbar {
 	display: none;
 }
