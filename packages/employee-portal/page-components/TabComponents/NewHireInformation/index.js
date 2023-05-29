@@ -3,6 +3,7 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
+import AddressDetails from './AddressDetails';
 import IdentificationDocuments from './IdentificationDocuments';
 import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
@@ -18,6 +19,11 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 			title     : 'IDENTIFICATION DOCUMENTS',
 			content   : IdentificationDocuments,
 			isPending : isEmpty(data?.documents),
+		},
+		{
+			title     : 'ADDRESS DETAILS',
+			content   : AddressDetails,
+			isPending : isEmpty(data?.detail?.permanent_address),
 		},
 
 	];
@@ -39,13 +45,6 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 				{content_mapping.map((item) => {
 					const { content: Component, isPending } = item;
 
-					const getStatus = () => {
-						if (data[isPending]) {
-							return false;
-						}
-						return true;
-					};
-
 					return (
 						<div
 							key={item.title}
@@ -58,8 +57,8 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 									<div className={styles.status}>
 										<div className={styles.accordion_title}>{item.title}</div>
 										<Pill color="green">
-											{getStatus()
-												? 'Completed' : 'Pending'}
+											{isPending
+												? 'Pending' : 'Completed'}
 										</Pill>
 									</div>
 								)}
