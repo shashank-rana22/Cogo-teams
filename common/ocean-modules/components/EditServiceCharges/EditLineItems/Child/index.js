@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useMemo } from 'react';
 
