@@ -20,7 +20,7 @@ const useUpdateRequestStatus = (props) => {
 		try {
 			const payload = {
 				...requestStatusItem,
-				rejection_reasons: rejection_reasons.length !== 0 ? rejection_reasons : undefined,
+				rejection_reasons: rejection_reasons?.length !== 0 ? rejection_reasons : undefined,
 			};
 
 			await trigger({
