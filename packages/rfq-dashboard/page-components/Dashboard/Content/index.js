@@ -31,7 +31,7 @@ function Content(props) {
 					onChange={setActiveTab}
 				>
 					{TAB_MAPPING.map(({ name, title }) => (
-						<TabPanel name={name} title={title}>
+						<TabPanel name={name} title={title} key={name}>
 							<RfqDetails
 								{...props}
 								list={list}
