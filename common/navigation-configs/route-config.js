@@ -24,6 +24,7 @@ import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
 import referral from './config/referral';
+import rfqDashboard from './config/rfq-dashboard';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasTools from './config/saas-tools';
 import shipmentFclFreight from './config/shipment-fcl-freight';
@@ -69,6 +70,7 @@ const routeConfig = {
 	...saasTools,
 	...so2Surface,
 	...chakravyuh,
+	...rfqDashboard,
 };
 
 export default routeConfig;
