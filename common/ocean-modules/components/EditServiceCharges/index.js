@@ -1,6 +1,5 @@
-import { ShipmentDetailContext } from '@cogoport/context';
 import { upperCase } from '@cogoport/utils';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
 import useGetServiceChargeCodes from '../../hooks/useGetServiceChargeCodes';
 
@@ -8,7 +7,6 @@ import EditLineItems from './EditLineItems';
 import styles from './styles.module.css';
 
 function EditServiceCharges(props) {
-	const { shipment_data = {}, primary_service = {} } = useContext(ShipmentDetailContext);
 	const { controls, service_name = '', customValues = {}, shipment_id = '' } = props || {};
 
 	const [q, setQ] = useState('');

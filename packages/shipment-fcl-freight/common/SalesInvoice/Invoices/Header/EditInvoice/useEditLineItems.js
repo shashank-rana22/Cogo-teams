@@ -42,7 +42,6 @@ const useEditLineItems = ({
 			if (control.type === 'edit_service_charges') {
 				defaultValues[control.name] = control.value.map((value) => {
 					const fieldValue = {};
-
 					control.controls.forEach((subControl) => {
 						fieldValue[subControl.name] = value[subControl.name] || '';
 					});
@@ -51,10 +50,23 @@ const useEditLineItems = ({
 				});
 			}
 		});
+
 		return defaultValues;
 	};
-
 	const controls = services.map((service, index) => ({
+		...rawControls(
+			handleChange,
+			service,
+			info,
+			isFclFreight,
+			shipment_data,
+			index,
+			trade_mapping,
+		),
+		onOptionsChange: (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
+	}));
+
+	const defaultControls = services.map((service, index) => ({
 		...rawControls(
 			handleChange,
 			service,
@@ -81,7 +93,8 @@ const useEditLineItems = ({
 		})),
 	}));
 
-	const defaultValues = generateDefaultValues({ values: controls });
+	const defaultValues = generateDefaultValues({ values: defaultControls });
+
 	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm({ defaultValues });
 
 	const formValues = watch();
@@ -112,7 +125,6 @@ const useEditLineItems = ({
 			id         : key,
 		};
 	});
-
 	controls.forEach((ctrl) => {
 		if (ctrl?.controls) {
 			(ctrl?.controls || []).forEach((childCtrl) => {
@@ -140,7 +152,6 @@ const useEditLineItems = ({
 	const onCreate = async (values) => {
 		try {
 			const payload = [];
-
 			Object.keys(values).forEach((key) => {
 				const currentService = services.find(
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
@@ -151,6 +162,7 @@ const useEditLineItems = ({
 						chargeCodes[chgCode.code] = chgCode;
 					},
 				);
+				console.log(values?.[key], ' :values?.[key] : ', chargeCodes);
 				const service = {
 					service_id   : currentService?.service_id,
 					service_type : currentService?.service_type,
@@ -191,7 +203,6 @@ const useEditLineItems = ({
 	// const onError = (err) => {
 	// 	setErrors({ ...err });
 	// };
-
 	return {
 		onCreate,
 		handleSubmit,

@@ -1,6 +1,5 @@
+import { Layout } from '@cogoport/ocean-modules';
 import React, { useEffect } from 'react';
-
-import Layout from '../../../../Tasks/TaskExecution/helpers/Layout';
 
 function Form({
 	prevData = {},

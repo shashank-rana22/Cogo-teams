@@ -8,11 +8,13 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function EditLineItems({
-	control, showAddButtons = true, showDeleteButton = true,
-	 controls = [], name = '', cargoDetails, value:emptyValue, customValues = {},
+	control,
+	showAddButtons = true, showDeleteButton = true, controls = [],
+	name = '', cargoDetails, value:emptyValue,
+	customValues = {},
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
-	console.log({ controls, customValues, emptyValue });
+
 	return (
 		<div className={styles.container}>
 			<CargoDetails primary_service={cargoDetails} />
@@ -37,7 +39,16 @@ function EditLineItems({
 			</div>
 
 			{showAddButtons
-				? <Button onClick={() => append(emptyValue)}>+ Add Line Items</Button> : null}
+				? (
+					<Button
+						size="sm"
+						themeType="accent"
+						onClick={() => append(emptyValue)}
+						className={styles.button_div}
+					>
+						+ Add Line Items
+					</Button>
+				) : null}
 		</div>
 	);
 }

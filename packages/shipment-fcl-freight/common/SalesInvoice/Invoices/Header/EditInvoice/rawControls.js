@@ -9,6 +9,8 @@ const handleDisableCond = (charge, isFclFreight, shipment_data) => {
 	return disable;
 };
 
+// const fclUnitOptions = convertObjectMappingToArray(FCL_UNITS);
+
 const rawControls = (
 	handleChange,
 	charge,
@@ -18,14 +20,12 @@ const rawControls = (
 	index,
 	trade_mapping = {},
 ) => ({
-	type               : 'edit_service_charges',
-	name               : `${charge?.service_id}:${index}`,
-	service_name       : charge?.service_type,
-	showHeader         : true,
-	showButtons        : true,
-	noDeleteButtonTill : charge?.line_items?.length ?? 0,
-	buttonText         : 'Add Line Item',
-	value              : [
+	type         : 'edit_service_charges',
+	name         : `${charge?.service_id}:${index}`,
+	service_name : charge?.service_type,
+	showHeader   : true,
+	showButtons  : true,
+	value        : [
 		{
 			code             : '',
 			alias            : '',
@@ -36,6 +36,7 @@ const rawControls = (
 			exchange_rate    : '',
 			tax              : '',
 			total            : '',
+			name             : '',
 		},
 	],
 	controls: [
@@ -78,6 +79,7 @@ const rawControls = (
 			name        : 'unit',
 			placeholder : 'select...',
 			span        : 1.5,
+			options     : convertObjectMappingToArray(FCL_UNITS),
 		},
 		{
 			name           : 'currency',

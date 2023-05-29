@@ -1,13 +1,10 @@
 import { Button, Modal } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
 import React, { useEffect } from 'react';
 
-// import getDefaultValues from '../../../../../../Tasks/TaskExecution/utils/get-default-values';
-// import controls from './controls';
-// import Info from './Info';
-import Form from './Form';
 import Info from './Info';
 import styles from './styles.module.css';
 import useEditLineItems from './useEditLineItems';
@@ -33,7 +30,6 @@ function EditInvoice({
 		loading,
 		onCreate,
 		handleSubmit,
-		customValues,
 		errors,
 		control,
 		setValue,
@@ -48,31 +44,11 @@ function EditInvoice({
 		info         : <Info />,
 	});
 
-	const updateFormValue = ({ formValues }) => {
-		const updatedObj = {};
-		Object.entries(formValues).forEach(([key, value]) => {
-			switch (key) {
-				case 'remarks':
-				case 'uploadDocument':
-					updatedObj[key] = value;
-					break;
-				default:
-					updatedObj[key] = value.map((_item) => ({
-						..._item,
-						total: _item.price_discounted * _item.quantity,
-					}));
-					break;
-			}
-		});
-		return updatedObj;
-	};
-
 	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service'
 		&& !isFclFreight
 		&& shipment_data?.serial_id > 130000;
 
 	const formValues = watch();
-	const updatedObj = updateFormValue({ formValues });
 
 	useEffect(() => {
 		if (defaultValues) {
@@ -109,15 +85,11 @@ function EditInvoice({
 						</span>
 					</div>
 
-					<Form
-							// data={data}
-						// invoiceData={invoice}
-						controls={controls}
-						defaultValues={updatedObj}
-						errors={errors}
+					<Layout
 						control={control}
-						setValue={setValue}
-						// disabledProps={disabledProps}
+						fields={controls}
+						errors={errors}
+						customValues={defaultValues}
 					/>
 				</div>
 
@@ -136,6 +108,7 @@ function EditInvoice({
 					size="md"
 					onClick={handleSubmit(onCreate)}
 					style={{ marginLeft: '16px' }}
+					disabled={loading}
 				>
 					Save
 				</Button>
