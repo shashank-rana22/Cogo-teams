@@ -8,20 +8,19 @@ import styles from './styles.module.css';
 function TrackingDetails({ list, loading = false }) {
 	if (loading) {
 		return (
-			<div className={styles.Container}>
+			<div className={styles.container}>
 				<LoadingState />
 			</div>
 		);
 	}
 
 	return (
-		<div className={styles.TrackingInfoContainer}>
+		<div className={styles.tracking_info}>
 			{!loading && !list?.list?.length ? (
 				<EmptyState />
 			) : (
 				<TrackingInfo
 					data={list?.list}
-					shippingLine={list?.[0]?.shipping_line}
 					tripInfo={list?.tripinfo}
 				/>
 			)}

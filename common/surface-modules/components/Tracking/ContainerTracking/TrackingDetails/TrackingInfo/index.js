@@ -1,8 +1,4 @@
-import {
-	IcATruck,
-	IcAShipAmber,
-	IcASurfaceFttRail,
-} from '@cogoport/icons-react';
+import { IcATruck } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import { Tooltip } from '@cogoport/components';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -17,22 +13,26 @@ const styleIcon = {
 	transform: 'rotateZ(90deg) rotateX(180deg)',
 };
 
-const Icon = {
-	TRUCK: <IcATruck style={styleIcon} />,
-	VESSEL: <IcAShipAmber style={styleIcon} />,
-	RAIL: <IcASurfaceFttRail style={styleIcon} />,
-};
-
-function TrackingInfo({ data = [], shippingLine = {}, tripInfo = {} }) {
+function TrackingInfo({ data = [], tripInfo = {} }) {
 	return (
-		<div classname={styles.Container}>
+		<div className={styles.container}>
+			{tripInfo?.intugine_eta ? (
+				<div className={cl `${styles.Info} ${styles.eta}`}>
+					Expected Arrival Time At Destination :
+					{formatDate({
+						date: tripInfo.intugine_eta,
+						formatType: 'dateTime',
+						separator: ' ',
+					})}
+				</div>
+			) : null}
 			{data?.map((item, idx) => {
 				return (
 					<div className={styles.SingleItem}>
 						{item?.transport_mode ? (
-							Icon[item.transport_mode?.toUpperCase()]
+							<IcATruck style={styleIcon} ></IcATruck>
 						) : (
-							<span className="space" />
+							<span className={cl `${styles.SingleItem} ${styles.space}`} />
 						)}
 						<VerticleLine
 							checked={item?.checked}
@@ -43,7 +43,7 @@ function TrackingInfo({ data = [], shippingLine = {}, tripInfo = {} }) {
 							<Tooltip
 								theme="light"
 								content={
-									<div className={cl `${styles.heading} ${styles.tooltip}`}>
+									<div className={cl `${styles.Heading} ${styles.tooltip}`}>
 										{item?.location || item?.station || item?.last_location}
 									</div>
 								}
@@ -59,22 +59,6 @@ function TrackingInfo({ data = [], shippingLine = {}, tripInfo = {} }) {
 							<div className={styles.Gap}>
 								{item?.milestone && (
 									<div className={cl `${styles.StyledTag} ${styles.sm}`}>{item?.milestone}</div>
-								)}
-								{item?.flight_number && (
-									<div className={styles.Info}>
-										{item?.piece ? (
-											<div className={cl `${styles.Info} ${styles.piece}`}>
-												{item?.piece.split(':')?.[1] ?? item?.piece} Pieces •
-											</div>
-										) : null}{' '}
-										<div className={styles.Info}>Flight no - {item?.flight_number} </div>
-										{item?.weight ? (
-											<div className={cl `${styles.Info} ${styles.weight}`}>
-												• {`${item?.weight.split(':')?.[1]}g` ?? item?.weight}{' '}
-												Weight
-											</div>
-										) : null}
-									</div>
 								)}
 								{item?.distance_remained && (
 									<div className={cl `${styles.Info} ${styles.piece}`} >
@@ -104,19 +88,6 @@ function TrackingInfo({ data = [], shippingLine = {}, tripInfo = {} }) {
 										})}{' '}
 									- {tripInfo?.status}
 								</div>
-								{item?.vessel_name && shippingLine?.business_name ? (
-									<div classname={styles.StyledText}>
-										<img
-											src={shippingLine?.logo_url}
-											alt="logo"
-											style={{
-												marginRight: '10px',
-												height: '30px',
-											}}
-										/>
-										{shippingLine?.business_name} - {item?.vessel_name}
-									</div>
-								) : null}
 							</div>
 						</div>
 					</div>

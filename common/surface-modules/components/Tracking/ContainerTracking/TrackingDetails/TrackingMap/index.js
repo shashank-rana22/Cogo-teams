@@ -31,7 +31,7 @@ function TrackingMap({
 		return <div className={styles.MapLoading}>Loading...</div>;
 	}
 	return (
-		<div classname={styles.MapContainer}>
+		<div className={styles.MapContainer}>
 			<CogoMaps
 				remainingPoints={remainingPoints}
 				curvePoints={curvePoints}
