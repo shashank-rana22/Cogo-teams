@@ -98,6 +98,7 @@ function Header({
 	return (
 		<div className={styles.container}>
 			<div>
+
 				{invoice?.source === 'pass_through' ? (
 					<div className={styles.invoice_source}>
 						Source -
@@ -239,6 +240,7 @@ function Header({
 							isIRNGenerated={isIRNGenerated}
 							salesInvoicesRefetch={salesInvoicesRefetch}
 							bfInvoice={bfInvoice}
+							isAuthorized={isAuthorized}
 						/>
 					) : null}
 
