@@ -9,7 +9,7 @@ const handleDisableCond = (charge, isFclFreight, shipment_data) => {
 	return disable;
 };
 
-// const fclUnitOptions = convertObjectMappingToArray(FCL_UNITS);
+const fclUnitOptions = convertObjectMappingToArray(FCL_UNITS);
 
 const rawControls = (
 	handleChange,
@@ -31,11 +31,11 @@ const rawControls = (
 			alias            : '',
 			sac_code         : '',
 			currency         : '',
-			price_discounted : '',
-			quantity         : '',
-			exchange_rate    : '',
-			tax              : '',
-			total            : '',
+			price_discounted : 0,
+			quantity         : 0,
+			exchange_rate    : 0,
+			tax              : 0,
+			total            : 0,
 			name             : '',
 		},
 	],
@@ -79,7 +79,7 @@ const rawControls = (
 			name        : 'unit',
 			placeholder : 'select...',
 			span        : 1.5,
-			options     : convertObjectMappingToArray(FCL_UNITS),
+			options     : fclUnitOptions,
 		},
 		{
 			name           : 'currency',

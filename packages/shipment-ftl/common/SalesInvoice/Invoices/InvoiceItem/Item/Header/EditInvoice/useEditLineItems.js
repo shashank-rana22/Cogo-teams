@@ -43,7 +43,7 @@ const useEditLineItems = ({
 				defaultValues[control.name] = control.value.map((value) => {
 					const fieldValue = {};
 					control.controls.forEach((subControl) => {
-						fieldValue[subControl.name] = value[subControl.name] || '';
+						fieldValue[subControl.name] = value[subControl.name] || 0;
 					});
 
 					return fieldValue;
@@ -92,6 +92,8 @@ const useEditLineItems = ({
 			id               : uuid(),
 		})),
 	}));
+
+	console.log(defaultControls, 'defaultControls');
 
 	const defaultValues = generateDefaultValues({ values: defaultControls });
 

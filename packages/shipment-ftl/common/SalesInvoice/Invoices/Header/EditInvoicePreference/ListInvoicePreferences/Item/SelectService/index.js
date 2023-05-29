@@ -1,5 +1,5 @@
 import { Button, Tooltip, CheckboxGroup, Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { startCase } from '@cogoport/utils';

@@ -44,6 +44,9 @@ function EditInvoice({
 		info         : <Info />,
 	});
 
+	console.log({ controls, defaultValues });
+
+	console.log({ defaultValues });
 	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service'
 		&& !isFclFreight
 		&& shipment_data?.serial_id > 130000;
@@ -67,12 +70,13 @@ function EditInvoice({
 			show={show}
 			closeOnOuterClick={false}
 		>
+			<Modal.Header title="Edit Invoice" />
 			<Modal.Body>
 				<div className={styles.forms}>
 					<div className={styles.invoice_value}>
 						Invoice Value -
 						{' '}
-						<span className="amount">
+						<span className={styles.amount}>
 							{formatAmount({
 								amount   : invoice?.invoicing_party_total,
 								currency : invoice?.invoice_total_currency,
