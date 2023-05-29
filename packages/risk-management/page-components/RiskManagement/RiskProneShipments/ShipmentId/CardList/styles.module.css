@@ -12,16 +12,27 @@
     align-items: center; 
     text-decoration-line: underline;
     color: #333333;
+    width: 30%;
 }
 .vr{
     background: #BDBDBD;
     width: 1px;
     height: 50px;
+    @media(max-width:1068px){
+        height: 1px;
+        width: 100%;
+        margin-top: 12px;
+        margin-bottom: 12px;
+        background:#F68B21;
+    }
 }
 .container{
     display: flex;
-    justify-content: space-between;
     align-items: center;
+    @media (max-width: 1068px) {
+		display: flex;
+        flex-direction: column;
+	}
 }
 .origin_text{
     font-weight: 500;
@@ -42,6 +53,24 @@
 .sub_container{
     display: flex;
     flex-direction: column;
+    @media(max-width:1068px){
+        display: flex;
+        flex-direction: row;
+        width: 100%;
+        justify-content: space-around;
+    }
+}
+.sub_booking{
+    display: flex;
+    flex-direction: column;
+}
+.first_right_border{
+    width: 2%;
+    margin-right: 12px;
+    margin-left: 12px;
+    @media(max-width:1068px){
+        width: 0%;
+    }
 }
 .hr{
     background:#F68B21;
@@ -71,12 +100,12 @@
     border-radius: 6px;
     display: flex;
     align-items: center;
+    justify-content: center;
     padding: 0px 4px 0px 4px;
     font-size: 12px;
+    width: fit-content;
     font-weight: 300;
-    margin-bottom: 14px;
-    margin-top: 14px;
-    margin-right: 12px;
+    margin: 4px;
 }
 
 .footer {
@@ -96,4 +125,58 @@
     color: #333333;
 	text-align: center;
 	text-decoration-line: underline;
+}
+.tooltip{
+    white-space: nowrap;
+    overflow: scroll;
+}
+.column1{
+    display: flex;
+    width: 40%;
+    @media (max-width: 1068px) {
+		display: flex;
+        width: 100%;
+        justify-content: space-around;
+	}
+}
+.column2{
+    display: flex;
+    width: 30%;
+    align-items: center;
+    justify-content: space-between;
+    margin-left: 12px;
+    margin-right: 12px;
+    @media(max-width:1068px){
+        display: flex;
+        width: 100%;
+        justify-content: space-around;
+    }
+}
+.column3{
+    display: flex;
+    width: 30%;
+    @media(max-width:1068px){
+        width: 100%;
+        justify-content: space-around;
+    }
+}
+.container_pickup{
+   margin-right: 12px;
+}
+.right_border{
+    width: 2%;
+    margin-right: 12px;
+    margin-left: 12px;
+    @media(max-width:1068px){
+        width: 100%;
+    }
+}
+.booking{
+    width:50% ;
+}
+.port_icon{
+    display: flex;
+    align-items: center;
+    width: 12%;
+    margin-right: 12px;
 }

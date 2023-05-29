@@ -1,20 +1,44 @@
+import { Placeholder } from '@cogoport/components';
 import { IcAShipAmber, IcASchedules } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ data, loading }) {
+	const { stats } = data || {};
+	const {
+		ongoing_shipments = '', risk_prone_shipments = '', container_movement_count = '',
+		bl_do_release_count = '', both_count = '', risk_free_shipments = '',
+	} = stats || {};
+	const CONTAINER_MAPPING = [
+		{
+			label : 'Container Movement',
+			value : container_movement_count,
+		},
+		{
+			label : 'BL/DO Release',
+			value : bl_do_release_count,
+		},
+		{
+			label : 'Both',
+			value : both_count,
+		},
+	];
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.shipment_icon}>
-				<IcAShipAmber height={120} width={120} />
-			</div>
-			<div className={styles.ongoing_container}>
-				<div className={styles.count}>
-					1200
+			<div className={styles.div_container}>
+				<div className={styles.shipment_icon}>
+					<IcAShipAmber height={120} width={120} />
 				</div>
-				<div className={styles.count_text}>
-					ongoing shipment
+				<div className={styles.ongoing_container}>
+					<div className={styles.count}>
+						{loading ? <Placeholder className={styles.loader} />
+							: ongoing_shipments || '-'}
+					</div>
+					<div className={styles.count_text}>
+						ongoing shipment
+					</div>
 				</div>
 			</div>
 			<div className={styles.risk_prone}>
@@ -28,39 +52,29 @@ function Header() {
 					</div>
 					<div className={styles.risk_prone_count}>
 						{'  '}
-						94
+						{loading ? <Placeholder className={styles.loader} />
+							: risk_prone_shipments || '-'}
 					</div>
 				</div>
 				<div className={styles.vr} />
-				<div className={styles.sub_container}>
-					<div className={styles.release_count}>
-						24
+				{CONTAINER_MAPPING.map((item) => (
+					<div className={styles.sub_container} key={item.label}>
+						<div className={styles.release_count}>
+							{loading ? <Placeholder className={styles.loader} />
+								: item.value}
+						</div>
+						<div>
+							{item.label}
+						</div>
 					</div>
-					<div>
-						Container Movement
-					</div>
-				</div>
-				<div className={styles.sub_container}>
-					<div className={styles.release_count}>
-						24
-					</div>
-					<div>
-						BL/DO Release
-					</div>
-				</div>
-				<div className={styles.sub_container}>
-					<div className={styles.release_count}>
-						30
-					</div>
-					<div>
-						Both
-					</div>
-				</div>
+				))}
+
 			</div>
 			<div className={styles.risk_free_container}>
 				<div className={styles.sub_container}>
 					<div className={styles.release_count}>
-						1106
+						{loading ? <Placeholder className={styles.loader} />
+							: risk_free_shipments}
 					</div>
 					<div className={styles.release_count}>
 						Risk Free
@@ -69,7 +83,6 @@ function Header() {
 				</div>
 				<div className={styles.image}>
 					<img
-						// src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/kyc-verified.svg"
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/MicrosoftTeams-image (14).png"
 						alt="badge-icon"
 					/>

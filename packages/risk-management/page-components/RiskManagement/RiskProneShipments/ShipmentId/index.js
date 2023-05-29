@@ -2,16 +2,16 @@ import { Input, Pagination } from '@cogoport/components';
 import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import LoadingState from '../../common/LoadingState';
+
 import CardList from './CardList';
 import SelectFilter from './SelectFilter';
 import styles from './styles.module.css';
 
-function ShipmentId() {
+function ShipmentId({ data, loading, filters, setFilters }) {
+	const { search } = filters || {};
+	const { list = [], total_count, page_limit } = data || {};
 	const [searchInput, setSearchInput] = useState(null);
-	const [currentPage, setCurrentPage] = useState(1);
-	const onPageChange = (pageNumber) => {
-		setCurrentPage(pageNumber);
-	};
 	const suffix = !searchInput ? (
 		<div className={styles.icon_wrapper}>
 			<IcMSearchlight />
@@ -24,6 +24,32 @@ function ShipmentId() {
 			/>
 		</div>
 	);
+	const handleShipmentView = () => {
+		if (loading) {
+			return (
+				<div style={{ marginTop: '10px' }}>
+					{[1, 2, 3, 4, 5].map((item) => (
+						<div key={item.id}>
+							<LoadingState />
+						</div>
+					))}
+				</div>
+			);
+		}
+		if (list.length === 0) {
+			return (
+				<div className={styles.no_data}>
+					No data Available
+				</div>
+			);
+		}
+		return list?.map((item) => (
+			<CardList
+				itemData={item}
+				key={item?.serial_id}
+			/>
+		));
+	};
 
 	return (
 		<div className={styles.container}>
@@ -35,31 +61,27 @@ function ShipmentId() {
 					<Input
 						size="sm"
 						placeholder="Search"
-						value={searchInput}
-						onChange={(e) => setSearchInput(e)}
+						value={search}
+						onChange={(e) => setFilters({ ...filters, search: e || undefined })}
 						suffix={suffix}
 					/>
 				</div>
 			</div>
 			<div className={styles.hr} />
 			<div>
-				<SelectFilter />
+				<SelectFilter filters={filters} setFilters={setFilters} />
 			</div>
 			<div>
-				{[1, 2, 3, 4, 5].map((item) => (
-					<div key={item.id}>
-						<CardList />
-					</div>
-				))}
-
+				{handleShipmentView()}
 			</div>
 			<div className={styles.pagination}>
 				<Pagination
 					type="number"
-					currentPage={currentPage}
-					totalItems={1000}
-					pageSize={5}
-					onPageChange={onPageChange}
+					currentPage={filters.pageIndex}
+					totalItems={total_count}
+					pageSize={page_limit}
+					onPageChange={(val) => setFilters({ ...filters, pageIndex: val })}
+
 				/>
 			</div>
 		</div>

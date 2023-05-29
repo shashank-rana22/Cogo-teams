@@ -3,66 +3,83 @@ import { Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
 
+import Loader from '../../common/Loader';
+
 import styles from './styles.module.css';
 
-function PieChart({ activeTab }) {
+function PieChart({ activeTab, chartData, loading }) {
+	const { stats, container_stats, late_collection_stats, late_release_stats } = chartData || {};
+	const {
+		container_movement_count = '',
+		bl_do_release_count = '', both_count = '',
+	} = stats || {};
+	const {
+		draft_bl_approval_pending = '', invoice_not_uploaded = '', late_collection = '',
+		late_collection_total = '', payment_not_done = '',
+	} = late_collection_stats || {};
+
+	const { late_release_total = '', payment_not_received = '' } = late_release_stats || {};
+	const {
+		gated_in_at_vessel_departure = '', pick_up_and_not_gated_in = '',
+		vessel_arrived_but_not_gated_out = '', container_not_picked_up = '', gated_out_but_not_returned = '',
+	} = container_stats || {};
+	let centroidValue = '';
+	if (activeTab === 'container_movement') {
+		centroidValue = container_movement_count;
+	} else if (activeTab === 'bl_do_release') {
+		centroidValue = bl_do_release_count;
+	} else if (activeTab === 'both') {
+		centroidValue = both_count;
+	}
 	const CONTAINER_MOVEMENT_MAPPING = [
 		{
 			label : 'Container Not Picked Up :',
-			value : 484,
+			value : container_not_picked_up,
 			color : '#EE3425',
 		},
 		{
 			label : 'Pick Up And Not Gated In :',
-			value : 484,
+			value : pick_up_and_not_gated_in,
 			color : ' #F37166',
 		},
 		{
 			label : 'Gated In At Vessel Dep. :',
-			value : 484,
+			value : gated_in_at_vessel_departure,
 			color : '#F8AEA8',
 		},
 		{
 			label : 'Vessel Arrived but not gated out :',
-			value : 484,
+			value : vessel_arrived_but_not_gated_out,
 			color : '#BF291E',
 		},
 		{
 			label : 'Gated out + not returned :',
-			value : 484,
+			value : gated_out_but_not_returned,
 			color : ' #FFD1CC',
 		},
 	];
 	const LATE_COLLECTION_MAPPING = [
 		{
 			label : 'Payment Not Done :',
-			value : 84,
+			value : payment_not_done,
 		},
 		{
 			label : 'Draft Bl Approval Pending : ',
-			value : 14,
+			value : draft_bl_approval_pending,
 		},
 		{
 			label : 'Invoice Not Uploaded : ',
-			value : 40,
-		},
-		{
-			label : 'Invoice Not Uploaded : ',
-			value : 54,
+			value : invoice_not_uploaded,
 		},
 		{
 			label : 'Late Collection :  ',
-			value : 78,
+			value : late_collection,
 		},
 	];
 	const LATE_RELEASE_MAPPING = [
 		{
 			label : 'Customer - Payment Not Received : ',
-			value : 23,
-		},
-		{
-			label : 'Disputed/Collateral Cargo :',
-			value : 76,
+			value : payment_not_received,
 		},
 	];
 
@@ -97,30 +114,30 @@ function PieChart({ activeTab }) {
 		{
 			id    : 'Container Not Picked Up',
 			label : 'Container Not Picked Up: 484',
-			value : 484,
+			value : container_not_picked_up,
 
 		},
 		{
 			id    : 'Pick Up And Not Gated In',
 			label : 'Pick Up And Not Gated In: 314',
-			value : 314,
+			value : pick_up_and_not_gated_in,
 
 		},
 		{
 			id    : 'Gated In At Vessel Dep',
 			label : 'Gated In At Vessel Dep.: 219',
-			value : 219,
+			value : gated_in_at_vessel_departure,
 
 		},
 		{
 			id    : 'Vessel Arrived but not gated out',
 			label : 'Vessel Arrived but not gated out: 468',
-			value : 468,
+			value : vessel_arrived_but_not_gated_out,
 		},
 		{
 			id    : 'Gated out + not returned',
 			label : 'Gated out + not returned: 272',
-			value : 272,
+			value : gated_out_but_not_returned,
 		},
 	];
 	const bl_do_data = [
@@ -158,7 +175,7 @@ function PieChart({ activeTab }) {
 					fontWeight : 600,
 				}}
 			>
-				{300}
+				{centroidValue}
 			</text>
 		);
 	}
@@ -166,19 +183,26 @@ function PieChart({ activeTab }) {
 		<div className={styles.container}>
 			<div>
 				<div className={styles.pie_chart}>
-					<ResponsivePie
-						data={data}
-						// margin={{ top: 0, right: 0, bottom: 4, left: 10 }}
-						innerRadius={0.7}
-						colors={colors}
-						padAngle={1}
-						enableArcLabels={false}
-						enableArcLinkLabels={false}
-						isInteractive
-						activeOuterRadiusOffset={4}
-						layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
-					/>
-
+					{loading ? (
+						<img
+							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg"
+							alt="badge-icon"
+						/>
+					)
+						: (
+							<ResponsivePie
+								data={data}
+								margin={{ top: 8, right: 0, bottom: 4, left: 10 }}
+								innerRadius={0.7}
+								colors={colors}
+								padAngle={1}
+								enableArcLabels={false}
+								enableArcLinkLabels={false}
+								isInteractive
+								activeOuterRadiusOffset={4}
+								layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
+							/>
+						)}
 				</div>
 				<div className={styles.bottom_heading}>
 					{activeTab === 'container_movement' && 'Container Movement'}
@@ -186,87 +210,94 @@ function PieChart({ activeTab }) {
 					{activeTab === 'both' && 'Charge Range'}
 				</div>
 			</div>
-			{activeTab === 'container_movement' && (
-				<div className={styles.column_container}>
-					{CONTAINER_MOVEMENT_MAPPING.map((item) => (
-						<div className={styles.sub_container} key={item.label}>
-							<div className={styles.square} style={{ background: item.color }} />
-							<div className={styles.label}>
-								{item.label}
+			{activeTab === 'container_movement' && (loading ? <Loader />
+				: (
+					<div className={styles.column_container}>
+						{CONTAINER_MOVEMENT_MAPPING.map((item) => (
+							<div className={styles.sub_container} key={item.label}>
+								<div className={styles.square} style={{ background: item.color }} />
+								<div className={styles.label}>
+									{item.label}
+								</div>
+								<div className={styles.value}>
+									{ item.value || '-'}
+								</div>
 							</div>
-							<div className={styles.value}>
-								{item.value}
-							</div>
-						</div>
-					))}
-				</div>
+						))}
+					</div>
+				)
 			)}
 
 			{activeTab === 'bl_do_release' && (
-				<div className={styles.bl_do_container}>
-					<div>
-						<div className={styles.bl_square1} />
-						<div className={styles.sub_container}>
+				loading ? <Loader />
+					:				(
+						<div className={styles.bl_do_container}>
+							<div>
+								<div className={styles.bl_square1} />
+								<div className={styles.sub_container}>
 
-							<div className={styles.label}>
-								Late collection :
+									<div className={styles.label}>
+										Late collection :
+									</div>
+									<div className={styles.value}>
+										{late_collection_total || '-'}
+									</div>
+								</div>
+								{LATE_COLLECTION_MAPPING.map((item) => (
+									<div className={styles.sub_container} key={item.value}>
+										<div className={styles.point} />
+										<div>
+											{item.label}
+											{' '}
+											{ item.value || '-'}
+										</div>
+									</div>
+								))}
 							</div>
-							<div className={styles.value}>
-								10
+							<div className={styles.bl_do_container}>
+								<div>
+									<div className={styles.bl_square5} />
+									<div className={styles.sub_container}>
+										<div className={styles.label}>
+											Late Release :
+										</div>
+										<div className={styles.value}>
+											{late_release_total || '-'}
+										</div>
+									</div>
+									{LATE_RELEASE_MAPPING.map((item) => (
+										<div className={styles.sub_container} key={item.value}>
+											<div className={styles.point} />
+											<div>
+												{item.label}
+												{' '}
+												{ item.value || '-'}
+											</div>
+										</div>
+									))}
+
+								</div>
 							</div>
 						</div>
-						{LATE_COLLECTION_MAPPING.map((item) => (
+					)
+			)}
+			{activeTab === 'both'
+			&& (loading ? <Loader />
+				: (
+					<div>
+						{CHARGE_RANGE_MAPPING.map((item) => (
 							<div className={styles.sub_container} key={item.value}>
-								<div className={styles.point} />
-								<div>
+								<div className={styles.square} style={{ background: item.color }} />
+								<div className={styles.label}>
 									{item.label}
-									{' '}
+								</div>
+								<div className={styles.value}>
 									{item.value}
 								</div>
 							</div>
 						))}
 					</div>
-					<div className={styles.bl_do_container}>
-						<div>
-							<div className={styles.bl_square5} />
-							<div className={styles.sub_container}>
-								<div className={styles.label}>
-									Late Release :
-								</div>
-								<div className={styles.value}>
-									11
-								</div>
-							</div>
-							{LATE_RELEASE_MAPPING.map((item) => (
-								<div className={styles.sub_container} key={item.value}>
-									<div className={styles.point} />
-									<div>
-										{item.label}
-										{' '}
-										{item.value}
-									</div>
-								</div>
-							))}
-
-						</div>
-					</div>
-				</div>
-			)}
-			{activeTab === 'both'
-			&& (
-				<div>
-					{CHARGE_RANGE_MAPPING.map((item) => (
-						<div className={styles.sub_container} key={item.value}>
-							<div className={styles.square} style={{ background: item.color }} />
-							<div className={styles.label}>
-								{item.label}
-							</div>
-							<div className={styles.value}>
-								{item.value}
-							</div>
-						</div>
-					))}
-				</div>
+				)
 			)}
 
 			<div className={styles.side_container}>

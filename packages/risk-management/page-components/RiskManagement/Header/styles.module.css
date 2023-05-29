@@ -7,8 +7,20 @@
     display: flex;
     background: #FFFFFF;
     border-radius: 8px;
+    justify-content: space-between;
     padding: 16px;
     margin-top: 12px;
+    @media (max-width: 1068px) {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        align-items: center;
+		width: 100%;
+		margin-top: 8px;
+	}
+}
+.div_container{
+   display: flex;
 }
 .shipment_icon{
     margin-left: 16px;
@@ -56,6 +68,7 @@
 .risk{
     display: flex;
     padding: 36px 24px 36px 12px;
+  
 }
 .risk_free_container{
     background: #F7FAEF;
@@ -72,4 +85,10 @@
     justify-content: flex-end;
     height: 100px;
     /* transform: rotate(-25deg); */
+}
+.loader{
+    margin-top: 2px;
+    height: 16px;
+    width: 58px;
+    margin-bottom: 12px;
 }

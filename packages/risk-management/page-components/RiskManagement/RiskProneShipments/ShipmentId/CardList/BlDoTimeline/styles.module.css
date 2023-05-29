@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    padding: 24px;
+    justify-content: center;
+}
+.div_container{
+    background: #FFFFFF;
+    border: 1px solid #E0E0E0;
+    border-radius: 8px;
+    margin-top: 16px;
+    margin-bottom: 16px;
+}
