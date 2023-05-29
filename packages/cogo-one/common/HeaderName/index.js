@@ -27,7 +27,7 @@ function HeaderName({ formattedData = {} }) {
 
 	return (
 		<div className={styles.align_channel_type}>
-			{/* <UserAvatar type={channel_type} /> */}
+			<UserAvatar type={channel_type} />
 			<div className={styles.parent}>
 				<div className={styles.name}>
 					{startCase(user_name) || 'User'}

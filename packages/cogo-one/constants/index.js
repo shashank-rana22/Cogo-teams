@@ -4,7 +4,7 @@ import {
 	IcCFcl,
 	IcCAir,
 	IcMFftl,
-	IcMFltl, IcCTelegram, IcMInsta
+	IcMFltl, IcCTelegram, IcCZalo,
 } from '@cogoport/icons-react';
 
 export const SOURCE_ICON_MAPPING = {
@@ -12,7 +12,7 @@ export const SOURCE_ICON_MAPPING = {
 	facebook  : <IcCFacebook width={25} height={25} />,
 	instagram : <IcCInstagram width={25} height={25} />,
 	telegram  : <IcCTelegram width={25} height={25} />,
-	zalo	  : <IcMInsta width={25} height={25} />,
+	zalo      : <IcCZalo width={25} height={25} />,
 	email     : <img
 		src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg"
 		alt=""

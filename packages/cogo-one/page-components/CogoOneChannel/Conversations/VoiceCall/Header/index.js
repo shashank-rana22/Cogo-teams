@@ -14,7 +14,7 @@ function Header({
 	return (
 		<div className={styles.container}>
 			<div className={styles.flex}>
-				{/* <UserAvatar /> */}
+				<UserAvatar />
 				<div>
 					<div className={styles.name}>{startCase(name || 'unkown_user')}</div>
 					<div className={styles.phone_number}>
