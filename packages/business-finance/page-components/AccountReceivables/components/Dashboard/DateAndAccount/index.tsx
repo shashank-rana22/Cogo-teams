@@ -43,9 +43,6 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 						: (
 							<>
 								<div className={styles.account_receivables_line}>
-									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || keyValue[entityCode]}
-									</div>
 									<div className={styles.account_receivables_amount}>
 										<Tooltip content={(
 											<div>
@@ -68,7 +65,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 														notation              : 'compact',
 														compactDisplay        : 'short',
 														maximumFractionDigits : 2,
-														style                 : 'decimal',
+														style                 : 'currency',
 														currencyDisplay       : 'code',
 													},
 												})}
@@ -104,10 +101,6 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 						: (
 							<>
 								<div className={styles.account_receivables_open_line}>
-									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || keyValue[entityCode]}
-									</div>
-
 									<div
 										className={styles.account_receivables_amount}
 									>
@@ -132,7 +125,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 														notation              : 'compact',
 														compactDisplay        : 'short',
 														maximumFractionDigits : 2,
-														style                 : 'decimal',
+														style                 : 'currency',
 														currencyDisplay       : 'code',
 
 													},
@@ -158,9 +151,6 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 						: (
 							<>
 								<div className={styles.account_receivables_open_line}>
-									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || keyValue[entityCode]}
-									</div>
 
 									<div
 										className={styles.account_receivables_amount}
@@ -186,7 +176,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 														notation              : 'compact',
 														compactDisplay        : 'short',
 														maximumFractionDigits : 2,
-														style                 : 'decimal',
+														style                 : 'currency',
 														currencyDisplay       : 'code',
 
 													},

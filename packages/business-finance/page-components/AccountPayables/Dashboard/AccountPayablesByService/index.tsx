@@ -301,10 +301,17 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 				<div className={styles.amount_container}>
 
 					{SERVICE_MAPPING.map((item) => (
-						loading ? <Placeholder key={item} height="30px" width="200px" margin="0px 12px 26px 0px" />
+						loading ? (
+							<Placeholder
+								key={item?.service}
+								height="30px"
+								width="200px"
+								margin="0px 12px 26px 0px"
+							/>
+						)
 							: (
 								<div
-									key={item.service}
+									key={item?.service}
 									className={activeBox === item?.service ? styles.sub_container_click : styles.amount}
 									onClick={() => {
 										handleClick();

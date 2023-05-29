@@ -82,7 +82,7 @@ function BarChart({
 									currencyDisplay       : 'code',
 									compactDisplay        : 'short',
 									maximumFractionDigits : 2,
-									style                 : 'decimal',
+									style                 : 'currency',
 								},
 							})}
 						</tspan>
@@ -102,7 +102,18 @@ function BarChart({
 								style={{ dominantBaseline: 'central', fontWeight: '600', fontSize: 11, fill: '#333' }}
 							>
 								{' '}
-								{getAmountInLakhCrK(bar.data.value)}
+								{formatAmount({
+									amount   : bar.data.value as any,
+									currency : currencyType,
+									options  : {
+										notation              : 'compact',
+										currencyDisplay       : 'code',
+										compactDisplay        : 'short',
+										maximumFractionDigits : 2,
+										style                 : 'currency',
+									},
+								})}
+								{/* {getAmountInLakhCrK(bar.data.value)} */}
 								{' '}
 								{' '}
 							</text>

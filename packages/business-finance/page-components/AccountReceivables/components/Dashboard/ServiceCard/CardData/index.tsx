@@ -32,7 +32,7 @@ function CardData({ tab }: CardDataProps) {
 							notation              : 'compact',
 							compactDisplay        : 'short',
 							maximumFractionDigits : 2,
-							style                 : 'decimal',
+							style                 : 'currency',
 							currencyDisplay       : 'code',
 						},
 					});
@@ -83,7 +83,7 @@ function CardData({ tab }: CardDataProps) {
 													amount   :	item?.openInvoiceAmount as any,
 													currency :	item?.currency,
 													options  : {
-														style           : 'currncy',
+														style           : 'currency',
 														currencyDisplay : 'code',
 													},
 

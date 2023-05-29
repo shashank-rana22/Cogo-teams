@@ -1,5 +1,5 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import getPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
 import { CSSProperties } from 'react';
@@ -172,11 +172,16 @@ const completedColumn = ({
 			<div className={styles.fieldPair}>
 				<div>
 					<div>
-						{getPrice(
-							getByKey(row, 'invoiceAmount') as number,
-							getByKey(row, 'invoiceCurrency') as string,
-						)}
-
+						{
+						formatAmount({
+							amount   : getByKey(row, 'invoiceAmount') as any,
+							currency : getByKey(row, 'invoiceCurrency') as string,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})
+					}
 					</div>
 				</div>
 
@@ -221,11 +226,16 @@ const completedColumn = ({
 		accessor : (row) => (
 			<div>
 				<div>
-					{getPrice(
-						getByKey(row, 'ledgerAmount') as number,
-						getByKey(row, 'ledgerCurrency') as string,
-					)}
-
+					{
+					formatAmount({
+						amount   : getByKey(row, 'ledgerAmount') as any,
+						currency : getByKey(row, 'ledgerCurrency') as string,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})
+					}
 				</div>
 			</div>
 		),
@@ -235,10 +245,16 @@ const completedColumn = ({
 		accessor : (row) => (
 			<div>
 				<div>
-					{getPrice(
-						getByKey(row, 'balanceAmount') as number,
-						getByKey(row, 'invoiceCurrency') as string,
-					)}
+					{
+						formatAmount({
+							amount   : getByKey(row, 'balanceAmount') as any,
+							currency : getByKey(row, 'invoiceCurrency') as string,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})
+					}
 
 				</div>
 			</div>

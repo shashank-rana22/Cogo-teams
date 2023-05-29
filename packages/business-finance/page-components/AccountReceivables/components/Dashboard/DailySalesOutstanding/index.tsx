@@ -168,7 +168,7 @@ function DailySalesOutstanding({
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												maximumFractionDigits : 2,
-												style                 : 'decimal',
+												style                 : 'currency',
 												currencyDisplay       : 'code',
 											},
 										})
@@ -195,7 +195,7 @@ function DailySalesOutstanding({
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												maximumFractionDigits : 2,
-												style                 : 'decimal',
+												style                 : 'currency',
 											},
 										})}
 									</div>

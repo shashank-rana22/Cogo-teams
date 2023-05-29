@@ -193,9 +193,6 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 											</div>
 											<div className={styles.amount_currency}>
 												<div className={styles.account_receivables_open_line}>
-													<div>
-														{item.currency}
-													</div>
 
 													<div
 														className={styles.account_receivables_amount}
@@ -221,7 +218,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 																		notation              : 'compact',
 																		compactDisplay        : 'short',
 																		maximumFractionDigits : 2,
-																		style                 : 'decimal',
+																		style                 : 'currency',
 																		currencyDisplay       : 'code',
 																	},
 																})}

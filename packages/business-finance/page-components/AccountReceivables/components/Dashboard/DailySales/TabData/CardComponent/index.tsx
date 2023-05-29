@@ -1,5 +1,4 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format } from '@cogoport/utils';
 import React from 'react';
@@ -63,7 +62,7 @@ function CardComponent({
 						<div className={styles.sub_flex}>
 							<div className={styles.label_flex}>
 								<div className={styles.styled_text}>
-									{dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR}
+									{/* {dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR} */}
 								</div>
 								<div className={styles.label}>
 									<Tooltip content={(
@@ -89,7 +88,7 @@ function CardComponent({
 													compactDisplay        : 'short',
 													currencyDisplay       : 'code',
 													maximumFractionDigits : 2,
-													style                 : 'decimal',
+													style                 : 'currency',
 
 												},
 											})}
