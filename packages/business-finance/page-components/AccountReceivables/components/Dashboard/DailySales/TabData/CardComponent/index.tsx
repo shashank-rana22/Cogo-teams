@@ -61,9 +61,7 @@ function CardComponent({
 					<div className={styles.item} key={item}>
 						<div className={styles.sub_flex}>
 							<div className={styles.label_flex}>
-								<div className={styles.styled_text}>
-									{/* {dashboardCurrency || GLOBAL_CONSTANTS.currency_code.INR} */}
-								</div>
+								<div className={styles.styled_text} />
 								<div className={styles.label}>
 									<Tooltip content={(
 										<div>

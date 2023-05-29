@@ -113,7 +113,6 @@ function BarChart({
 										style                 : 'currency',
 									},
 								})}
-								{/* {getAmountInLakhCrK(bar.data.value)} */}
 								{' '}
 								{' '}
 							</text>
