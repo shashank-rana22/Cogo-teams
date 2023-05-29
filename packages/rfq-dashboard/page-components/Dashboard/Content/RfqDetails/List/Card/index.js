@@ -1,5 +1,6 @@
 import { Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMProfile } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 import { useRouter } from 'next/router';
@@ -10,12 +11,25 @@ import { getformattedDuration } from '../../../../../../utils/getFormattedDurati
 import styles from './styles.module.css';
 
 function Card({ item, handleCheck, checkedItems, partner_id }) {
-	const { stats } = item;
+	const { stats = {} } = item;
+	console.log('stats', stats);
 	const router = useRouter();
 
 	const { port_pair_count = {} } = item;
 
 	const services = Object.keys(port_pair_count);
+	const priceFormating = (price, currency) => formatAmount({
+		amount: price,
+		currency,
+
+		options: {
+			style: 'currency',
+
+			currencyDisplay: 'code',
+
+			maximumFractionDigits: 0,
+		},
+	});
 
 	return (
 		<div
@@ -78,14 +92,23 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 				<div className={styles.figures}>
 					<div className={styles.field}>
 						<div className={styles.label}>Promised Con Revenue</div>
-						<div className={styles.value}>{Math.round(stats.promised_consolidated_revenue)}</div>
+						<div className={styles.value}>
+							{stats.promised_consolidated_revenue
+								? priceFormating(
+									stats.promised_consolidated_revenue,
+									stats.promised_consolidated_revenue_currency,
+								)
+								: '-'}
+
+						</div>
 
 					</div>
 					<div className={styles.field}>
 						<div className={styles.label}>Promised Con Profitability</div>
 						<div className={styles.value}>
-							{Math.round(stats.promised_consolidated_profitability).toFixed(2)}
-							%
+							{stats.promised_consolidated_profitability !== undefined
+								? `${stats.promised_consolidated_profitability.toFixed(2)}%` : '-'}
+
 						</div>
 
 					</div>
