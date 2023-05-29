@@ -12,7 +12,6 @@ function Header({
 	ctcStructure = {},
 }) {
 	const { name, employee_code, designation, passport_size_photo_url } = detail || {};
-	console.log('det', detail);
 
 	return (
 		<div className={styles.container}>
