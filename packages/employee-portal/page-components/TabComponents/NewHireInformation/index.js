@@ -25,7 +25,6 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 			content   : AddressDetails,
 			isPending : isEmpty(data?.detail?.permanent_address),
 		},
-
 	];
 
 	return (
