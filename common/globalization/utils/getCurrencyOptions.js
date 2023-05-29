@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '../constants/globals.json';
+import GLOBAL_CONSTANTS from '../constants/globals';
 
 const getCurrencyOptions = () => Object.keys(GLOBAL_CONSTANTS.currency_code).map((currency) => ({
 	label : currency,
