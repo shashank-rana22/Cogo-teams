@@ -1,32 +1,29 @@
-import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
-const useUpdateTask = ({
-	successMessage = 'Task Updated Successfully!',
+function useUpdateBookingParameter({
 	refetch = () => {},
-}) => {
+}) {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_pending_task',
+		url    : '/update_shipment_booking_parameter',
 		method : 'POST',
-	});
+	}, { manual: true });
 
-	const apiTrigger = async (val) => {
+	const updateBookingParameter = async (val) => {
 		try {
 			const res = await trigger({ data: val });
-			Toast.success(successMessage);
-			refetch();
-			return res;
+			if (!res?.hasError) {
+				refetch();
+			}
 		} catch (err) {
 			toastApiError(err);
-			return err;
 		}
 	};
 
 	return {
 		loading,
-		apiTrigger,
+		updateBookingParameter,
 	};
-};
+}
 
-export default useUpdateTask;
+export default useUpdateBookingParameter;

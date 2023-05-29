@@ -10,6 +10,7 @@ import {
 	UploadContainerDetails,
 	MarkConfirmServices,
 	CustomerInvoiceDetails,
+	FTLApproveTruck,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -90,6 +91,19 @@ function ExecuteTask({
 				pendingTask={task}
 				onCancel={onCancel}
 				services={servicesList}
+				taskListRefetch={taskListRefetch}
+			/>
+		);
+	}
+
+	if (['approve_additional_truck', 'approve_updated_truck'].includes(task?.task)) {
+		return (
+			<FTLApproveTruck
+				onCancel={onCancel}
+				services={servicesList}
+				shipment_data={shipment_data}
+				task={task}
+				timeLineRefetch={getShipmentTimeline}
 				taskListRefetch={taskListRefetch}
 			/>
 		);
