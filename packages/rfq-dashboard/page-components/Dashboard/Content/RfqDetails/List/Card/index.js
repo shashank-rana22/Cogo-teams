@@ -79,10 +79,10 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 				</div>
 				<div className={styles.rest_tags}>
 					{
-						item?.kam?.name ? (
+						item?.sales_agent?.name ? (
 							<div className={styles.secondary_tag}>
 								<IcMProfile className={styles.avatar} />
-								{item?.kam?.name}
+								{item?.sales_agent?.name}
 							</div>
 						) : null
 					}

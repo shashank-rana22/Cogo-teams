@@ -4,13 +4,13 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import styles from './styles.module.css';
 
 const STATS_MAPPING = {
-	promised_consolidated_revenue: {
-		key: 'promised_consolidated_revenue',
+	promised_revenue: {
+		key: 'promised_revenue',
 
 		label: 'Promised Revenue',
 	},
-	promised_consolidated_profitability: {
-		key: 'promised_consolidated_profitability',
+	promised_profitability: {
+		key: 'promised_profitability',
 
 		label: 'Promised Profitability',
 	},
@@ -22,13 +22,13 @@ const STATS_MAPPING = {
 };
 
 function ServiceStats({ data = [], type = '', source = '' }) {
-	console.log(data);
 	const renderItem = (item) => {
-		if (item.key === 'promised_revenue' || item.key === 'promised_consolidated_revenue') {
+		if (item.key === 'promised_revenue') {
 			return formatAmount({
-				amount: data?.[item.key],
+				amount: data?.[item.key] || data?.promised_consolidated_revenue,
 
-				currency: data?.[item.key]?.promised_consolidated_revenue_currency,
+				currency: data?.promised_consolidated_revenue_currency
+					|| data?.[item.key]?.promised_revenue_currency,
 
 				options: {
 					style: 'currency',
@@ -39,14 +39,13 @@ function ServiceStats({ data = [], type = '', source = '' }) {
 				},
 			});
 		}
-		if (item.key === 'promised_profitability' || item.key === 'utilization'
-			|| item.key === 'promised_consolidated_profitability') {
-			return typeof data?.[item?.key] === 'number' ? (
+		if (item.key === 'promised_profitability') {
+			return data[item?.key] !== undefined || data?.promised_consolidated_profitability !== undefined ? (
 				<span
 					className={cl`${data?.[item?.key] > 0 ? styles.green : styles.red}
 					${data?.[item?.key] === 0 ? styles.black : ''}`}
 				>
-					{`${data?.[item?.key]}%`}
+					{`${data?.[item?.key] || data?.promised_consolidated_profitability}%`}
 				</span>
 			) : '-';
 		}

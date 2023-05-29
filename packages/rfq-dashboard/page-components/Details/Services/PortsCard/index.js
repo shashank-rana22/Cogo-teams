@@ -1,4 +1,4 @@
-import { IcMFcl, IcMPortArrow, IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
+import { IcCFcl, IcMPortArrow, IcMArrowRotateDown, IcMArrowRotateUp, IcCLcl, IcCAir } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -17,18 +17,34 @@ import styles from './styles.module.css';
 const COMMODITY_MAPPING = ['cargo_weight_per_container', 'commodity',
 	'container_size', 'container_type', 'containers_count'];
 
+const ICONMAPPING = {
+	fcl_freight: IcCFcl,
+
+	lcl_freight: IcCLcl,
+
+	air_freight: IcCAir,
+};
+
+const TEXTMAPPING = {
+	fcl_freight: 'FCL',
+
+	lcl_freight: 'LCL',
+
+	air_freight: 'AIR',
+};
+
 function PortsCard(props) {
+	console.log('props', props);
 	const { data = {}, loading, refetchRateCards } = props;
 
 	const [showPrice, setShowPrice] = useState({});
-
 	const {
 		detail = {}, freight_price_currency = '', freight_price_discounted = '',
 		total_price_discounted = '', id = '', stats = {},
 	} = data;
 
 	const {
-		origin_port = {}, destination_port = {},
+		origin_port = {}, destination_port = {}, service_type,
 	} = detail;
 
 	const commodity_array = [];
@@ -54,13 +70,13 @@ function PortsCard(props) {
 
 	const [convenienceDetails, setConvenienceDetails] = useState({
 		convenience_rate: {
-			price    : convenience_line_item?.price,
-			currency : convenience_line_item?.currency,
-			unit     : convenience_line_item?.unit,
+			price: convenience_line_item?.price,
+
+			currency: convenience_line_item?.currency,
+
+			unit: convenience_line_item?.unit,
 		},
 	});
-
-	console.log('convenienceDetails::', convenienceDetails);
 
 	const primary_service_id = rate_card_details?.primary_service_id;
 	const primaryService = {
@@ -77,13 +93,15 @@ function PortsCard(props) {
 	priceBreakupChildData?.forEach((item) => {
 		item?.data.forEach((dataItem) => {
 			prefilledValues.push({
-				margin_type           : dataItem.margin_type,
-				margin_value_currency : dataItem.margin_value_currency,
-				margin_value          : dataItem.margin_value,
+				margin_type: dataItem.margin_type,
+
+				margin_value_currency: dataItem.margin_value_currency,
+
+				margin_value: dataItem.margin_value,
 			});
 		});
 	});
-
+	const Component = ICONMAPPING[service_type];
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.port_container}>
@@ -92,8 +110,8 @@ function PortsCard(props) {
 						: (
 							<>
 								<div className={styles.service}>
-									<IcMFcl fill="#436DF4" className={styles.icmfcl_icon} />
-									<span className={styles.service_type}>FCL</span>
+									<Component className={styles.icmfcl_icon} />
+									<span className={styles.service_type}>{TEXTMAPPING[service_type]}</span>
 								</div>
 								<div className={styles.ports_tags_container}>
 									<div className={styles.location_box}>
@@ -122,7 +140,7 @@ function PortsCard(props) {
 							setShowPrice(isEmpty(showPrice) ? { rfq_rate_card_id: id } : {});
 						}}
 					>
-						{showPrice ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+						{isEmpty(showPrice) ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 					</button>
 				</div>
 				{!isEmpty(showPrice) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && (
@@ -141,6 +159,9 @@ function PortsCard(props) {
 						setShowPrice={setShowPrice}
 					/>
 				)}
+				{
+					isEmpty(showPrice) && !rfq_card_loading && 'hi'
+				}
 			</div>
 		</div>
 	);

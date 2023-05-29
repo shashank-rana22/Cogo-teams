@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: flex-start;
 	margin-top: 30px;
+
 	:global {
 		/* stylelint-disable-next-line selector-class-pattern */
 		.ui_checkbox_container {
@@ -22,7 +23,7 @@
 }
 
 .container {
-	z-index: 1;
+	z-index: 0;
 	display: flex;
 	align-items: center;
 	padding: 10px;
