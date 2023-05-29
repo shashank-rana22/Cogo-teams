@@ -25,8 +25,8 @@ const useGetControlledBooking = () => {
 						sort_by         : status === 'approved' ? 'updated_at' : undefined,
 						q               : q || undefined,
 					},
-					approval_data_required: true,
-
+					approval_data_required   : true,
+					checkout_detail_required : true,
 					page,
 				},
 			});

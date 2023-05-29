@@ -5,6 +5,7 @@ import EmptyState from '../../../../commons/EmptyState';
 import Loader from '../../../../commons/Loader';
 
 import Card from './Card';
+import CardComponent from './CardComponent';
 import styles from './styles.module.css';
 
 function ListComponent({ data, loading, filters, setFilters, refetchBookingList }) {
@@ -18,7 +19,9 @@ function ListComponent({ data, loading, filters, setFilters, refetchBookingList 
 
 	return (
 		<div className={styles.container}>
-			{(data?.list || []).map((item) => <Card key={item.id} item={item} filters={filters} refetchBookingList={refetchBookingList} />)}
+			{/* {(data?.list || []).map((item) => <Card key={item.id} item={item} filters={filters} refetchBookingList={refetchBookingList} />)} */}
+
+			{ (data?.list || []).map((item) => <CardComponent key={item.id} item={item} filters={filters} refetchBookingList={refetchBookingList} />)}
 
 			<div className={styles.pagination_container}>
 				<Pagination

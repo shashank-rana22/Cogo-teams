@@ -125,10 +125,6 @@ function Card({ item, filters, refetchBookingList }) {
 								{/* <div>Validity End:</div> */}
 
 								<div className={styles.value}>
-									{/* {format(
-								item?.validity_end,
-								'dd MMM YYYY',
-							)} */}
 									<p className={styles.timer}>
 										<span style={{ fontWeight: 400, marginLeft: '4px' }}>
 											{hasExpired

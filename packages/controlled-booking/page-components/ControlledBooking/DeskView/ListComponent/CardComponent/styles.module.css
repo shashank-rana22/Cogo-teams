@@ -1,0 +1,84 @@
+.container{
+    box-shadow: 0px 0px 8px rgba(98, 127, 172, 0.2);
+    border-radius: 6px 6px 0px 0px;
+    padding: 20px 24px 20px 24px;
+    height: 112px;
+    background: #FFFFFF;   
+}
+
+.parent{
+    padding-top:16px ;
+    position: relative;
+    height: 126px;
+
+}
+
+.more_details{
+    background: #FDFBF6;
+    border-radius: 0px 0px 6px 6px;
+    margin-bottom: 20px;
+    
+}
+
+.source{
+    position: absolute;
+    background: #F7FAEF;
+    border-radius: 6px;
+    padding: 4px; 
+    top:0;
+    /* margin-left: 16px; */
+}
+
+.horizontal_div{
+    display: flex;justify-content: space-between;
+    justify-content: space-between;
+    align-items: center;
+    
+}
+
+.quotation{
+    width: 10%;
+    display: flex;
+    flex-direction: column;
+    border-right:1px solid #CFEAED;
+    height: 72px;
+}
+
+.account_div{
+    width: 30%;
+    padding: 0px 24px 24px 24px;
+    border-right:1px solid #CFEAED;
+    height: 72px;
+}
+
+.account_name{
+    font-weight: 500;
+    font-size: 14px;
+    color: #221F20;
+    display: flex;
+    align-items: center;
+}
+
+.port_details{
+    width: 45%;
+    padding: 0px 24px 24px 24px;
+    border-right:1px solid #CFEAED;
+    height: 72px;
+}
+
+.validity{
+    width: 15%;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+   
+}
+
+.tags{
+    border:0.5px solid #4F4F4F;
+    margin-left: 8px;
+    padding: 2px 4px 2px 4px;
+    border-radius: 6px ;
+    font-size: 12px;
+    color: #4F4F4F
+}
