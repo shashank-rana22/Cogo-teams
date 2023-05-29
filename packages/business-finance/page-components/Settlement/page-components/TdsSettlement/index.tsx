@@ -18,8 +18,6 @@ function TdsSettlement() {
 				activeTab={activeTds}
 				onChange={handleTabChange}
 			>
-				{/* id="receivables-tab"
-				id="payables-tab" */}
 				<TabPanel name="AR" title="Receivables">
 					<ReceivablesPayablesSettlement
 						active={activeTds}

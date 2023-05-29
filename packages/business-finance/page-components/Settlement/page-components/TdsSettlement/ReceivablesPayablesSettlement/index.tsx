@@ -24,8 +24,6 @@ function ReceivablesPayablesSettlement({
 		tdsDocumentsLoading,
 		editTdsLoading,
 		approveTds,
-		setSummData,
-		setApiTdsData,
 	} = useTdsSettlement({
 		active,
 		globalFilters,
@@ -35,13 +33,6 @@ function ReceivablesPayablesSettlement({
 	const column = receivablesPayablesColumn();
 	const { list, pageNo = 0, totalRecords = 0 } = data || {};
 
-	const clearFilters = () => {
-		setGlobalFilters({});
-		setApiTdsData({});
-		setSummData({});
-	};
-
-	const showClearBtn = Object.keys(globalFilters).length > 1;
 	return (
 		<div>
 			<div className={styles.main_div}>
@@ -50,8 +41,7 @@ function ReceivablesPayablesSettlement({
 						controls={CreateTdsFilters}
 						filters={globalFilters}
 						setFilters={setGlobalFilters}
-						showClearBtn={showClearBtn}
-						clearFilters={clearFilters}
+
 					/>
 				</div>
 				<div className={styles.div_search}>
