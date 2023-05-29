@@ -1,9 +1,10 @@
 import { Legend, ProgressBar, cl, Popover, Placeholder, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMArrowRotateDown, IcMArrowNext } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 // import SegmentedControl from '../../../commons/SegmentedControl/index';
-import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import totalReceivablesKeyMappings from '../../constants/total-receivables-key-mapping';
 // import totalRecievablesStats from '../../constants/total-recievales';
 import useGetPayablesList from '../../hooks/getPayablesData';
@@ -114,16 +115,30 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 								<span className={styles.current_amount_style}>
 
 									{showInTooltop(
-										getFormattedPrice(nonOverdueAmount, 'INR'),
-										getAmountInLakhCrK(nonOverdueAmount, 'INR'),
+										formatAmount({
+											amount   :	nonOverdueAmount,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
+										getAmountInLakhCrK(nonOverdueAmount, GLOBAL_CONSTANTS.currency_code.INR),
 									)}
 
 								</span>
 								<div className={styles.icon_style}>
 									<span className={styles.current_amount_style}>
 										{showInTooltop(
-											getFormattedPrice(overdueAmount, 'INR'),
-											getAmountInLakhCrK(overdueAmount, 'INR'),
+											formatAmount({
+												amount   :	overdueAmount,
+												currency : GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
+											getAmountInLakhCrK(overdueAmount, GLOBAL_CONSTANTS.currency_code.INR),
 										)}
 
 									</span>
@@ -150,8 +165,18 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 								<div style={{ marginLeft: '20px', display: 'flex' }}>
 									<div>
 										{showInTooltop(
-											getFormattedPrice(Math.abs(progressDataReceivables), 'INR'),
-											getAmountInLakhCrK(Math.abs(progressDataReceivables), 'INR'),
+											formatAmount({
+												amount   :	Math.abs(progressDataReceivables) as any,
+												currency : GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
+											getAmountInLakhCrK(
+												Math.abs(progressDataReceivables),
+												GLOBAL_CONSTANTS.currency_code.INR,
+											),
 										)}
 									</div>
 									<span style={{ marginLeft: '5px' }}>
@@ -185,8 +210,18 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									<div style={{ display: 'flex' }}>
 										<span>
 											{showInTooltop(
-												getFormattedPrice(onAccountReceivable, 'INR'),
-												getAmountInLakhCrK(onAccountReceivable, 'INR'),
+												formatAmount({
+													amount   :	onAccountReceivable as any,
+													currency : GLOBAL_CONSTANTS.currency_code.INR,
+													options  : {
+														style           : 'currency',
+														currencyDisplay : 'code',
+													},
+												}),
+												getAmountInLakhCrK(
+													onAccountReceivable,
+													GLOBAL_CONSTANTS.currency_code.INR,
+												),
 											)}
 										</span>
 										<div className={styles.on_account}>On Account Payment</div>
@@ -227,8 +262,18 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 									<div style={{ display: 'flex' }}>
 										<span>
 											{showInTooltop(
-												getFormattedPrice(outstandingReceivable, 'INR'),
-												getAmountInLakhCrK(outstandingReceivable, 'INR'),
+												formatAmount({
+													amount   :	outstandingReceivable as any,
+													currency : GLOBAL_CONSTANTS.currency_code.INR,
+													options  : {
+														style           : 'currency',
+														currencyDisplay : 'code',
+													},
+												}),
+												getAmountInLakhCrK(
+													outstandingReceivable,
+													GLOBAL_CONSTANTS.currency_code.INR,
+												),
 											)}
 										</span>
 										<div className={styles.on_account}>Outstanding</div>

@@ -1,8 +1,9 @@
 import { Button, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMOceanSchedules, IcMAirport, IcMTransport } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import OverallPayablesStatsKeyMapping from '../../constants/overall-payables-stats-key-mapping';
 import OverallReceivablesStatsKeyMapping from '../../constants/overall-receivables-key-mapping';
 import { serviceDataMapping } from '../../constants/service-base-data-mapping';
@@ -59,8 +60,9 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 		<div>
 			{accordianDataLoading ? (
 				<>
-					{([1, 2, 3]).map(() => (
+					{([1, 2, 3]).map((val) => (
 						<Placeholder
+							key={val}
 							height="100px"
 							width="100%"
 							margin="20px 20px 20px 0px"
@@ -71,7 +73,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 			) : (
 				<div>
 					{(accordianDataData || []).map((item) => (
-						<div className={styles.container}>
+						<div className={styles.container} key={item}>
 							<div className={styles.main_div}>
 								<div className={styles.icon_div}>
 									<div style={{ display: 'flex', width: '100px' }}>
@@ -103,12 +105,18 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 															? styles.pills : styles.pill}
 														>
 															{showInTooltop(
-																getFormattedPrice(Math.abs(
-																	item.accountRec + item.accountPay,
-																), 'INR'),
+																formatAmount({
+																	amount:	(Math.abs(item.accountRec
+																		+ item.accountPay)) as any,
+																	currency : GLOBAL_CONSTANTS.currency_code.INR,
+																	options  : {
+																		style           : 'currency',
+																		currencyDisplay : 'code',
+																	},
+																}),
 																getAmountInLakhCrK(Math.abs(
 																	item.accountRec + item.accountPay,
-																), 'INR'),
+																), GLOBAL_CONSTANTS.currency_code.INR),
 															)}
 														</div>
 													</div>
@@ -125,8 +133,18 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 												<div className={styles.ar_amount}>
 													<span style={{ marginRight: '10px' }}>AR:</span>
 													{showInTooltop(
-														getFormattedPrice(item?.accountRec, 'INR'),
-														getAmountInLakhCrK(item?.accountRec, 'INR'),
+														formatAmount({
+															amount   :	item?.accountRec,
+															currency : GLOBAL_CONSTANTS.currency_code.INR,
+															options  : {
+																style           : 'currency',
+																currencyDisplay : 'code',
+															},
+														}),
+														getAmountInLakhCrK(
+															item?.accountRec,
+															GLOBAL_CONSTANTS.currency_code.INR,
+														),
 													)}
 												</div>
 											)}
@@ -141,8 +159,18 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 												<div className={styles.ar_amount}>
 													<span style={{ marginRight: '10px' }}>AP:</span>
 													{showInTooltop(
-														getFormattedPrice(Math.abs(item?.accountPay), 'INR'),
-														getAmountInLakhCrK(Math.abs(item?.accountPay), 'INR'),
+														formatAmount({
+															amount   :	(Math.abs(item?.accountPay)) as any,
+															currency : GLOBAL_CONSTANTS.currency_code.INR,
+															options  : {
+																style           : 'currency',
+																currencyDisplay : 'code',
+															},
+														}),
+														getAmountInLakhCrK(
+															Math.abs(item?.accountPay),
+															GLOBAL_CONSTANTS.currency_code.INR,
+														),
 													)}
 												</div>
 											)}
@@ -258,14 +286,30 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																			AR :
 																			<div style={{ marginLeft: '10px' }}>
 																				{showInTooltop(
-																					getFormattedPrice((
-																						accordianStatsData?.cardDataAr
+																					formatAmount({
+																						amount: (accordianStatsData
+																							?.cardDataAr
 																		|| {})[((serviceDataMapping[item?.service]
-																		|| {})[val?.key] || {})?.AR] || '', 'INR'),
-																					getAmountInLakhCrK((
-																						accordianStatsData?.cardDataAr
+																		|| {})[val?.key] || {})?.AR] || '',
+																						currency:
+																						GLOBAL_CONSTANTS
+																							.currency_code.INR,
+																						options: {
+																							style:
+																							'currency',
+																							currencyDisplay: 'code',
+																						},
+																					}),
+																					getAmountInLakhCrK(
+																						(
+																							accordianStatsData
+																								?.cardDataAr
 																|| {})[((serviceDataMapping[item?.service]
-																|| {})[val?.key] || {})?.AR] || '', 'INR'),
+																|| {})[val?.key] || {})?.AR]
+																|| '',
+																						GLOBAL_CONSTANTS
+																							.currency_code.INR,
+																					),
 																				)}
 																			</div>
 																		</div>
@@ -273,14 +317,29 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																			AP :
 																			<div style={{ marginLeft: '10px' }}>
 																				{showInTooltop(
-																					getFormattedPrice((
-																						(accordianStatsData?.cardDataAp
+																					formatAmount({
+																						amount: (
+																							(accordianStatsData
+																								?.cardDataAp
 																|| {})[((serviceDataMapping[item?.service]
-																|| {})[val?.key] || {})?.AR] || '') * -1, 'INR'),
-																					getAmountInLakhCrK((
-																						(accordianStatsData?.cardDataAp
+																|| {})[val?.key] || {})?.AR] || '') * -1 as any,
+																						currency: GLOBAL_CONSTANTS
+																							.currency_code.INR,
+																						options: {
+																							style:
+																							'currency',
+																							currencyDisplay: 'code',
+																						},
+																					}),
+																					getAmountInLakhCrK(
+																						(
+																							(accordianStatsData
+																								?.cardDataAp
 																|| {})[((serviceDataMapping[item?.service]
-																|| {})[val?.key] || {})?.AR] || '') * -1, 'INR'),
+																|| {})[val?.key] || {})?.AR] || '') * -1,
+																						GLOBAL_CONSTANTS
+																							.currency_code.INR,
+																					),
 																				)}
 																			</div>
 																		</div>
@@ -306,10 +365,21 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 													<>
 														<div style={{ fontWeight: '600' }}>
 															{showInTooltop(
-																getFormattedPrice(accordianStatsData
-																	?.arData?.overdueAmount, 'INR'),
-																getAmountInLakhCrK(accordianStatsData
-																	?.arData?.overdueAmount, 'INR'),
+																formatAmount({
+																	amount:	accordianStatsData
+																		?.arData?.overdueAmount,
+																	currency : GLOBAL_CONSTANTS.currency_code.INR,
+																	options  : {
+																		style:
+																		'currency',
+																		currencyDisplay: 'code',
+																	},
+																}),
+																getAmountInLakhCrK(
+																	accordianStatsData
+																		?.arData?.overdueAmount,
+																	GLOBAL_CONSTANTS.currency_code.INR,
+																),
 															)}
 														</div>
 														<div>Account Receivables</div>
@@ -323,7 +393,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 											<div className={styles.right_container}>
 												{(OverallReceivablesStatsKeyMapping({ accordianStatsData })
 												|| []).map((val) => (
-													<div className={styles.due_ageing}>
+													<div className={styles.due_ageing} key={val as any}>
 														{accordianStatsLoading ? (
 															<Placeholder
 																height="20px"
@@ -353,10 +423,21 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 													<>
 														<div style={{ fontWeight: '600' }}>
 															{showInTooltop(
-																getFormattedPrice(Math.abs(accordianStatsData
-																	?.apData?.overdueAmount), 'INR'),
-																getAmountInLakhCrK(Math.abs(accordianStatsData
-																	?.apData?.overdueAmount), 'INR'),
+																formatAmount({
+																	amount:	Math.abs(accordianStatsData
+																		?.apData?.overdueAmount) as any,
+																	currency : GLOBAL_CONSTANTS.currency_code.INR,
+																	options  : {
+																		style:
+																		'currency',
+																		currencyDisplay: 'code',
+																	},
+																}),
+																getAmountInLakhCrK(
+																	Math.abs(accordianStatsData
+																		?.apData?.overdueAmount),
+																	GLOBAL_CONSTANTS.currency_code.INR,
+																),
 															)}
 														</div>
 														<div>Account Payables</div>
@@ -369,7 +450,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 											<div className={styles.right_container}>
 												{(OverallPayablesStatsKeyMapping({ accordianStatsData })
 												|| []).map((val) => (
-													<div className={styles.due_ageing}>
+													<div className={styles.due_ageing} key={val as any}>
 														{accordianStatsLoading ? (
 															<Placeholder
 																height="20px"

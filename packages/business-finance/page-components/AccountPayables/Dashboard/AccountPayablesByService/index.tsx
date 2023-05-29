@@ -1,5 +1,5 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
-import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -71,7 +71,19 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									FCL Imports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(list[0]?.amount, currency)} interactive>
+									<Tooltip
+										content={
+										formatAmount({
+											amount  : list[0]?.amount,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+											},
+										})
+										}
+										interactive
+									>
 										<div>{getAmountInLakhCrK(list[0]?.amount)}</div>
 									</Tooltip>
 								</div>
@@ -82,7 +94,19 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									FCL Exports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(list[1]?.amount, currency)} interactive>
+									<Tooltip
+										content={
+										formatAmount({
+											amount  : list[1]?.amount,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+											},
+										})
+										}
+										interactive
+									>
 										<div>
 											{getAmountInLakhCrK(list[1]?.amount)}
 										</div>
@@ -95,7 +119,19 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									LCL Imports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(list[2]?.amount, currency)} interactive>
+									<Tooltip
+										content={
+										formatAmount({
+											amount  : list[2]?.amount,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+											},
+										})
+										}
+										interactive
+									>
 										<div>
 											{getAmountInLakhCrK(list[2]?.amount)}
 										</div>
@@ -108,7 +144,19 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									LCL Exports
 								</div>
 								<div className={styles.ocean_value}>
-									<Tooltip content={getFormattedPrice(list[3]?.amount, currency)} interactive>
+									<Tooltip
+										content={
+										formatAmount({
+											amount  : list[3]?.amount,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+											},
+										})
+										}
+										interactive
+									>
 										<div>
 											{getAmountInLakhCrK(list[3]?.amount)}
 										</div>
@@ -133,7 +181,17 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 								Domestic
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(list[4]?.amount, currency)} interactive>
+								<Tooltip
+									content={formatAmount({
+										amount  : list[4]?.amount,
+										currency,
+										options : {
+											currencyDisplay : 'code',
+											style           : 'currency',
+										},
+									})}
+									interactive
+								>
 									<div>
 										{getAmountInLakhCrK(list[4]?.amount)}
 									</div>
@@ -146,7 +204,17 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 								International
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(list[5]?.amount, currency)} interactive>
+								<Tooltip
+									content={formatAmount({
+										amount  : list[5]?.amount,
+										currency,
+										options : {
+											currencyDisplay : 'code',
+											style           : 'currency',
+										},
+									})}
+									interactive
+								>
 									<div>
 										{getAmountInLakhCrK(list[5]?.amount)}
 									</div>
@@ -171,7 +239,17 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 								Trailer
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(list[6]?.amount, currency)} interactive>
+								<Tooltip
+									content={formatAmount({
+										amount  : list[6]?.amount,
+										currency,
+										options : {
+											currencyDisplay : 'code',
+											style           : 'currency',
+										},
+									})}
+									interactive
+								>
 									<div>
 										{getAmountInLakhCrK(list[6]?.amount)}
 									</div>
@@ -184,7 +262,17 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 								Haulage
 							</div>
 							<div className={styles.ocean_value}>
-								<Tooltip content={getFormattedPrice(list[7]?.amount, currency)} interactive>
+								<Tooltip
+									content={formatAmount({
+										amount  : list[7]?.amount,
+										currency,
+										options : {
+											currencyDisplay : 'code',
+											style           : 'currency',
+										},
+									})}
+									interactive
+								>
 									<div>
 										{getAmountInLakhCrK(list[7]?.amount)}
 									</div>
@@ -213,9 +301,10 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 				<div className={styles.amount_container}>
 
 					{SERVICE_MAPPING.map((item) => (
-						loading ? <Placeholder height="30px" width="200px" margin="0px 12px 26px 0px" />
+						loading ? <Placeholder key={item} height="30px" width="200px" margin="0px 12px 26px 0px" />
 							: (
 								<div
+									key={item.service}
 									className={activeBox === item?.service ? styles.sub_container_click : styles.amount}
 									onClick={() => {
 										handleClick();
@@ -227,7 +316,17 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 										{item?.service}
 									</div>
 									<div className={styles.value}>
-										{getFormattedPrice(item?.formatedAmount, currency)}
+
+										{
+											formatAmount({
+												amount  : item?.formatedAmount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+												},
+											})
+										}
 									</div>
 								</div>
 							)

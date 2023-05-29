@@ -1,5 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -25,16 +25,17 @@ function CardData({ tab }: CardDataProps) {
 			<div className={styles.sub_container}>
 				{
 				(tab?.data || [{}]).map((item) => {
-					const getFormat = getFormattedPrice(
-						item?.openInvoiceAmount || 0,
-						item?.currency,
-						{
+					const getFormat = formatAmount({
+						amount   : item?.openInvoiceAmount as any || 0,
+						currency : item?.currency,
+						options  : {
 							notation              : 'compact',
 							compactDisplay        : 'short',
 							maximumFractionDigits : 2,
 							style                 : 'decimal',
+							currencyDisplay       : 'code',
 						},
-					);
+					});
 					return (
 						<>
 							<div className={styles.lable_container}>
@@ -78,11 +79,15 @@ function CardData({ tab }: CardDataProps) {
 									<div>
 										<Tooltip content={(
 											<div>
-												{getFormattedPrice(
-													item?.openInvoiceAmount,
-													item?.currency,
+												{formatAmount({
+													amount   :	item?.openInvoiceAmount as any,
+													currency :	item?.currency,
+													options  : {
+														style           : 'currncy',
+														currencyDisplay : 'code',
+													},
 
-												)}
+												})}
 											</div>
 										)}
 										>

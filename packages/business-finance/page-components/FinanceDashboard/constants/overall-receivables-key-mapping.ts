@@ -1,4 +1,6 @@
-import getFormattedPrice from '../../commons/utils/getFormattedPrice';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
 import { getAmountInLakhCrK } from '../Logistics/getAmountInLakhCrK';
 import showInTooltop from '../utils/getOverFlowData';
 
@@ -11,8 +13,15 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '0-30 DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(thirtyDayOverdue, 'INR'),
-				getAmountInLakhCrK(thirtyDayOverdue, 'INR'),
+				formatAmount({
+					amount   :	thirtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				getAmountInLakhCrK(thirtyDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_0_30',
@@ -20,8 +29,15 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '30-60 DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(threeSixtyDayOverdue, 'INR'),
-				getAmountInLakhCrK(threeSixtyDayOverdue, 'INR'),
+				formatAmount({
+					amount   : threeSixtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				getAmountInLakhCrK(threeSixtyDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_30_60',
@@ -29,8 +45,15 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '60-90 DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(sixtyDayOverdue, 'INR'),
-				getAmountInLakhCrK(sixtyDayOverdue, 'INR'),
+				formatAmount({
+					amount   :	sixtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				getAmountInLakhCrK(sixtyDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_60_90',
@@ -38,8 +61,15 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '90-180 DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(ninetyDayOverdue, 'INR'),
-				getAmountInLakhCrK(ninetyDayOverdue, 'INR'),
+				formatAmount({
+					amount   :	ninetyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				getAmountInLakhCrK(ninetyDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_90_180',
@@ -47,8 +77,15 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '180-365 DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(oneEightyDayOverdue, 'INR'),
-				getAmountInLakhCrK(oneEightyDayOverdue, 'INR'),
+				formatAmount({
+					amount   :	oneEightyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				getAmountInLakhCrK(oneEightyDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count__180_365',
@@ -56,8 +93,15 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 		{
 			label    : '365+ DAYS',
 			valueKey	: showInTooltop(
-				getFormattedPrice(threeSixtyPlusDayOverdue, 'INR'),
-				getAmountInLakhCrK(threeSixtyPlusDayOverdue, 'INR'),
+				formatAmount({
+					amount   :	threeSixtyPlusDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
+				getAmountInLakhCrK(threeSixtyPlusDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_365',

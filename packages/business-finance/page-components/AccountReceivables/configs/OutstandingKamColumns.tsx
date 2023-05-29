@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { getByKey } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -41,16 +42,29 @@ export const OutstandingKamColumn = [
 			<div>
 				<Tooltip content={(
 					<div className={styles.wrapper}>
-						{getFormattedPrice(getByKey(row, 'open_invoice_amount') as number, 'INR')}
+						{formatAmount({
+							amount   : getByKey(row, 'open_invoice_amount') as any,
+							currency :	GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 				)}
 				>
 					<div className={styles.styled_name}>
-						{getFormattedPrice(getByKey(row, 'open_invoice_amount') as number, 'INR',	{
-							notation              : 'compact',
-							compactDisplay        : 'short',
-							maximumFractionDigits : 2,
-							style                 : 'decimal',
+						{formatAmount({
+							amount   :	getByKey(row, 'open_invoice_amount') as any,
+							currency :	GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								notation              : 'compact',
+								compactDisplay        : 'short',
+								maximumFractionDigits : 2,
+								style                 : 'decimal',
+								currencyDisplay       : 'code',
+
+							},
 						})}
 					</div>
 
@@ -67,24 +81,30 @@ export const OutstandingKamColumn = [
 
 				<Tooltip content={(
 					<div className={styles.wrapper}>
-						{getFormattedPrice(
-							getByKey(row, 'total_outstanding_amount') as number,
-							'INR',
-						)}
+						{formatAmount({
+							amount   : getByKey(row, 'total_outstanding_amount') as any,
+							currency :	GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 				)}
 				>
 					<div className={styles.styled_name}>
-						{getFormattedPrice(
-							getByKey(row, 'total_outstanding_amount') as number,
-							'INR',
-							{
+						{formatAmount({
+							amount   :	getByKey(row, 'total_outstanding_amount') as any,
+							currency : GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
 								notation              : 'compact',
 								compactDisplay        : 'short',
 								maximumFractionDigits : 2,
 								style                 : 'decimal',
+								currencyDisplay       : 'code',
+
 							},
-						)}
+						})}
 					</div>
 
 				</Tooltip>

@@ -1,7 +1,7 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getAmountInLakhCrK from '../../../../../../../commons/getAmountInLakhCrK';
 import EmptyState from '../../../../../../commons/EmptyStateDocs';
@@ -69,7 +69,14 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 					colors={['#88CAD1', '#F68B21']}
 					enableSlices="x"
 					yScale={{ type: 'linear', min: 0, max: 'auto' }}
-					yFormat={(value) => getFormattedPrice(value, keyValue[entityCode])}
+					yFormat={(value) => formatAmount({
+						amount   : value as any,
+						currency : keyValue[entityCode],
+						options  : {
+							currencyDisplay : 'code',
+							style           : 'currency',
+						},
+					})}
 					axisTop={null}
 					axisRight={null}
 					axisBottom={{

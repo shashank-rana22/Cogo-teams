@@ -1,5 +1,5 @@
 import { BarDatum, ResponsiveBar } from '@cogoport/charts/bar';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 const tooltTipStyle = {
@@ -75,15 +75,16 @@ function BarChart({
 						:
 						{' '}
 						<tspan color="#000">
-							{getFormattedPrice(
-								value,
-								currencyType,
-								{
+							{formatAmount({
+								amount   : value as any,
+								currency : currencyType,
+								options  : {
+									currencyDisplay       : 'code',
 									compactDisplay        : 'short',
 									maximumFractionDigits : 2,
 									style                 : 'decimal',
 								},
-							)}
+							})}
 						</tspan>
 					</strong>
 				)}

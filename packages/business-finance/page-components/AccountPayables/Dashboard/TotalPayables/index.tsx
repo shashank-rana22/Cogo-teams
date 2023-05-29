@@ -1,5 +1,5 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import useGetTotalPayables from '../hooks/useGetTotalPayables';
@@ -50,7 +50,14 @@ function TotalPayables({
 							: (
 								<div className={styles.point_label}>
 									<Tooltip
-										content={getFormattedPrice(currentAmount, currency)}
+										content={formatAmount({
+											amount  : currentAmount,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+											},
+										})}
 										placement="top"
 										interactive
 									>
@@ -80,7 +87,16 @@ function TotalPayables({
 							:						(
 								<div className={styles.point_label}>
 									<Tooltip
-										content={getFormattedPrice(todayDueAmount, currency)}
+										content={
+											formatAmount({
+												amount  : todayDueAmount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+												},
+											})
+										}
 										placement="top"
 										interactive
 									>
@@ -110,7 +126,16 @@ function TotalPayables({
 							:						(
 								<div className={styles.point_label}>
 									<Tooltip
-										content={getFormattedPrice(overDueAmount, currency)}
+										content={
+											formatAmount({
+												amount  : overDueAmount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+												},
+											})
+										}
 										placement="top"
 										interactive
 									>

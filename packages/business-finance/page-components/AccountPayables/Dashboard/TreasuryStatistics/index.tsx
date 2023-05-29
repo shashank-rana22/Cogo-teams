@@ -1,5 +1,5 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
-import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import Filter from '../../../commons/Filters';
@@ -90,7 +90,20 @@ function TreasuryStatistics({ activeEntity }:ItemProps) {
 					</div>
 					{loading ? <Placeholder className={styles.loader} />
 						: (
-							<Tooltip content={getFormattedPrice(allocatedAmount, currency)} placement="top" interactive>
+							<Tooltip
+								content={
+								formatAmount({
+									amount  : allocatedAmount,
+									currency,
+									options : {
+										currencyDisplay : 'code',
+										style           : 'currency',
+									},
+								})
+								}
+								placement="top"
+								interactive
+							>
 								<div className={styles.value}>
 									{currency}
 									{' '}
@@ -101,13 +114,26 @@ function TreasuryStatistics({ activeEntity }:ItemProps) {
 				</div>
 				<div className={styles.vr} />
 				{TREASURY_MAP.map((item) => (
-					<div className={styles.funds}>
+					<div className={styles.funds} key={item.label}>
 						<div className={styles.label}>
 							{item?.label}
 						</div>
 						{loading ? <Placeholder className={styles.loader} />
 							: (
-								<Tooltip content={getFormattedPrice(item.amount, currency)} placement="top" interactive>
+								<Tooltip
+									content={
+									formatAmount({
+										amount  : item.amount,
+										currency,
+										options : {
+											currencyDisplay : 'code',
+											style           : 'currency',
+										},
+									})
+									}
+									placement="top"
+									interactive
+								>
 									<div className={styles.value}>
 										{currency}
 										{' '}
@@ -121,7 +147,7 @@ function TreasuryStatistics({ activeEntity }:ItemProps) {
 				<div className={styles.vr} />
 
 				{TREASURY_PERCENTAGE?.map((item) => (
-					<div className={styles.funds}>
+					<div className={styles.funds} key={item.label}>
 						<div className={styles.label}>
 							{item?.label}
 						</div>

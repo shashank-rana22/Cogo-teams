@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format, startCase, getByKey } from '@cogoport/utils';
 
 import { GenericObject } from '../commons/Interfaces';
@@ -67,10 +67,14 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 
 			<div>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'paymentAmount') as string,
-						getByKey(row, 'currency') as string,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'paymentAmount') as string,
+						currency :	getByKey(row, 'currency'),
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
@@ -84,10 +88,14 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 		accessor : (row) => (
 			<div>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'utilizedAmount') as number,
-						getByKey(row, 'currency') as number,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'utilizedAmount') as any,
+						currency :	getByKey(row, 'currency'),
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>

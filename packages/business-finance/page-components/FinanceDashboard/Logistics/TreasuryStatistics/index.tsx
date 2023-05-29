@@ -1,9 +1,10 @@
 import { cl, Placeholder, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcCCountryIndia } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
-import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import useGetTreasuryStats from '../../hooks/getTreasuryData';
 import showInTooltop from '../../utils/getOverFlowData';
 import { treasuryControls } from '../controls';
@@ -128,8 +129,15 @@ function TreasuryStatistics() {
 								) : (
 									<>
 										{showInTooltop(
-											getFormattedPrice(allocatedAmount, 'INR'),
-											getAmountInLakhCrK(allocatedAmount, 'INR'),
+											formatAmount({
+												amount   :	allocatedAmount,
+												currency :	GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
+											getAmountInLakhCrK(allocatedAmount, GLOBAL_CONSTANTS.currency_code.INR),
 										)}
 									</>
 								)}
@@ -146,8 +154,15 @@ function TreasuryStatistics() {
 								) : (
 									<>
 										{showInTooltop(
-											getFormattedPrice(utilizedAmount, 'INR'),
-											getAmountInLakhCrK(utilizedAmount, 'INR'),
+											formatAmount({
+												amount   :	utilizedAmount,
+												currency : GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
+											getAmountInLakhCrK(utilizedAmount, GLOBAL_CONSTANTS.currency_code.INR),
 										)}
 									</>
 								)}
@@ -163,8 +178,15 @@ function TreasuryStatistics() {
 								) : (
 									<>
 										{showInTooltop(
-											getFormattedPrice(settledAmount, 'INR'),
-											getAmountInLakhCrK(settledAmount, 'INR'),
+											formatAmount({
+												amount   :	settledAmount,
+												currency : GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
+											getAmountInLakhCrK(settledAmount, GLOBAL_CONSTANTS.currency_code.INR),
 										)}
 									</>
 								)}
@@ -180,8 +202,15 @@ function TreasuryStatistics() {
 								) : (
 									<>
 										{showInTooltop(
-											getFormattedPrice(UTRPendingAmount, 'INR'),
-											getAmountInLakhCrK(UTRPendingAmount, 'INR'),
+											formatAmount({
+												amount   :	UTRPendingAmount as any,
+												currency : GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
+											getAmountInLakhCrK(UTRPendingAmount, GLOBAL_CONSTANTS.currency_code.INR),
 										)}
 									</>
 								)}

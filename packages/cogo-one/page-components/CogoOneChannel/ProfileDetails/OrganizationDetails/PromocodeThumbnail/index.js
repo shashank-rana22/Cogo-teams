@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -26,6 +27,7 @@ function PromocodeThumbnail({ list = [] }) {
 				const { promotion_discounts, terms_and_conditions, thumbnail_image, codes } = item || [];
 				return (
 					<div
+						key={item}
 						className={styles.container}
 						style={{ backgroundColor: getCardColor(index) }}
 					>
@@ -40,14 +42,15 @@ function PromocodeThumbnail({ list = [] }) {
 							<div className={styles.promodiscount}>
 								{promotion_discounts?.[0]?.unit !== 'percentage'
 						|| promotion_discounts?.[0]?.unit !== 'by_unit_percentage'
-									? `${getFormattedPrice(
-										promotion_discounts?.[0]?.value || 0,
-										promotion_discounts?.[0]?.amount_currency || 'INR',
-										{
-											currencyDisplay: 'code',
+									? `${formatAmount({
+										amount   :	promotion_discounts?.[0]?.value || 0,
+										currency :	promotion_discounts?.[0]?.amount_currency
+										|| GLOBAL_CONSTANTS.currency_code.INR,
+										options: {
+											currencyDisplay : 'code',
+											style           : 'currency',
 										},
-										'en-Us',
-									)}`
+									})}`
 									: `${promotion_discounts?.[0]?.value} %`}
 								{' '}
 								Off On

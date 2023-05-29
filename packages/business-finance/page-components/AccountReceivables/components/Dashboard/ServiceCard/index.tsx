@@ -1,5 +1,5 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateUp, IcMAirport, IcMTransport, IcMShip, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
@@ -167,9 +167,9 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 
 						{outstandingLoading
 
-							? [1, 2, 3].map(() => (
+							? [1, 2, 3].map((val) => (
 
-								<div className={styles.card}>
+								<div key={val} className={styles.card}>
 									<div className={styles.row}>
 										<Placeholder />
 
@@ -202,24 +202,29 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 													>
 														<Tooltip content={(
 															<div>
-																{getFormattedPrice(
-																	item.amount,
-																	item.currency,
-																)}
+																{formatAmount({
+																	amount   : item.amount as any,
+																	currency : item.currency,
+																	options  : {
+																		style           : 'currency',
+																		currencyDisplay : 'code',
+																	},
+																})}
 															</div>
 														)}
 														>
 															<div className={styles.wrapper}>
-																{getFormattedPrice(
-																	item.amount,
-																	item.currency,
-																	{
+																{formatAmount({
+																	amount   : item.amount as any,
+																	currency : item.currency,
+																	options  : {
 																		notation              : 'compact',
 																		compactDisplay        : 'short',
 																		maximumFractionDigits : 2,
 																		style                 : 'decimal',
+																		currencyDisplay       : 'code',
 																	},
-																)}
+																})}
 															</div>
 
 														</Tooltip>
@@ -253,6 +258,7 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 
 						{getCardData.map((item) => (
 							<div
+								key={item.label}
 								className={item.label === tab.key ? styles.on_click_ocean_card : styles.ocean_card}
 								onClick={() => {
 									setTab((prev) => ({
@@ -280,15 +286,17 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 								</div>
 								<div>
 									<div className={styles.styled_ocean_text}>
-										{getFormattedPrice(
-											item?.openInvoices,
-											item?.currency,
-											{
+										{formatAmount({
+											amount   : item?.openInvoices as any,
+											currency : item?.currency,
+											options  : {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												maximumFractionDigits : 2,
+												style                 : 'currency',
+												currencyDisplay       : 'code',
 											},
-										)}
+										})}
 
 									</div>
 								</div>

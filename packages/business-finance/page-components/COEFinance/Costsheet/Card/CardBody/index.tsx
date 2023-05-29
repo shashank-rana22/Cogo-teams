@@ -1,4 +1,6 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowNext,
 	IcMArrowRotateDown,
@@ -8,7 +10,6 @@ import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { GenericObject } from '../../../../commons/Interfaces';
-import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
@@ -86,7 +87,7 @@ export function CardBody({ charge, type }: Props) {
 					iconClassName = styles.profiticon;
 				}
 				return (
-					<div className={styles.values}>
+					<div key={lineItem?.id} className={styles.values}>
 						<div
 							className={`${styles.coloredlabel} ${
 								lineItem?.sameCurrencyDataPresent && className
@@ -110,19 +111,27 @@ export function CardBody({ charge, type }: Props) {
 							className={styles.flex}
 							style={{ '--span': 1 } as React.CSSProperties}
 						>
-							{getFormattedPrice(
-								lineItem?.priceQuotation,
-								lineItem?.currencyQuotation,
-							) || '-'}
+							{formatAmount({
+								amount   : lineItem?.priceQuotation,
+								currency :	lineItem?.currencyQuotation,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							}) || '-'}
 						</div>
 						<div
 							className={styles.flex}
 							style={{ '--span': 1 } as React.CSSProperties}
 						>
-							{getFormattedPrice(
-								lineItem?.priceActual,
-								lineItem?.currencyActual,
-							) || '-'}
+							{formatAmount({
+								amount   :	lineItem?.priceActual,
+								currency :	lineItem?.currencyActual,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							}) || '-'}
 							{lineItem?.sameCurrencyDataPresent && (
 								<span className={iconClassName}>
 									<IcMArrowNext height={15} width={15} />
@@ -143,7 +152,14 @@ export function CardBody({ charge, type }: Props) {
 						style={{ '--span': 1 } as React.CSSProperties}
 					>
 						{charge?.serviceTotalQuotational
-							? getFormattedPrice(charge?.serviceTotalQuotational, 'INR')
+							? formatAmount({
+								amount   :	charge?.serviceTotalQuotational,
+								currency : GLOBAL_CONSTANTS.currency_code.INR,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})
 							: '-'}
 					</div>
 					<div
@@ -151,7 +167,14 @@ export function CardBody({ charge, type }: Props) {
 						style={{ '--span': 1 } as React.CSSProperties}
 					>
 						{charge?.serviceTotalActual
-							? getFormattedPrice(charge?.serviceTotalActual, 'INR')
+							? formatAmount({
+								amount   :	charge?.serviceTotalActual,
+								currency : GLOBAL_CONSTANTS.currency_code.INR,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})
 							: '-'}
 					</div>
 				</div>

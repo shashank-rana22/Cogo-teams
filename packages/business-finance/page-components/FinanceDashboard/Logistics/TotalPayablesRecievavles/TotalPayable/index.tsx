@@ -1,8 +1,9 @@
 import { Legend, ProgressBar, Popover, Placeholder, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMArrowRotateDown, IcMArrowNext } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 
-import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 import totalPayablesKeyMappings from '../../../constants/total-payables-key-mapping';
 import showInTooltop from '../../../utils/getOverFlowData';
 import { getAmountInLakhCrK } from '../../getAmountInLakhCrK';
@@ -79,15 +80,29 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 					<div className={styles.current_overdue_style}>
 						<span className={styles.current_amount_style}>
 							{showInTooltop(
-								getFormattedPrice(Math.abs(payNonOverdueAmount), 'INR'),
-								getAmountInLakhCrK(Math.abs(payNonOverdueAmount), 'INR'),
+								formatAmount({
+									amount   :	Math.abs(payNonOverdueAmount) as any,
+									currency : GLOBAL_CONSTANTS.currency_code.INR,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								}),
+								getAmountInLakhCrK(Math.abs(payNonOverdueAmount), GLOBAL_CONSTANTS.currency_code.INR),
 							)}
 						</span>
 						<div className={styles.icon_style}>
 							<span className={styles.current_amount_style}>
 								{showInTooltop(
-									getFormattedPrice(Math.abs(payOverdueAmount), 'INR'),
-									getAmountInLakhCrK(Math.abs(payOverdueAmount), 'INR'),
+									formatAmount({
+										amount   :	Math.abs(payOverdueAmount) as any,
+										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}),
+									getAmountInLakhCrK(Math.abs(payOverdueAmount), GLOBAL_CONSTANTS.currency_code.INR),
 								)}
 							</span>
 							<Popover
@@ -114,8 +129,18 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 							{' '}
 							<div>
 								{showInTooltop(
-									getFormattedPrice(Math.abs(progressPayableData), 'INR'),
-									getAmountInLakhCrK(Math.abs(progressPayableData), 'INR'),
+									formatAmount({
+										amount   :	Math.abs(progressPayableData) as any,
+										currency :	GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}),
+									getAmountInLakhCrK(
+										Math.abs(progressPayableData),
+										GLOBAL_CONSTANTS.currency_code.INR,
+									),
 								)}
 							</div>
 							<span style={{ marginLeft: '5px' }}>
@@ -148,8 +173,15 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 							<div style={{ display: 'flex' }}>
 								<span>
 									{showInTooltop(
-										getFormattedPrice(onAccountPayable, 'INR'),
-										getAmountInLakhCrK(onAccountPayable, 'INR'),
+										formatAmount({
+											amount   :	onAccountPayable as any,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
+										getAmountInLakhCrK(onAccountPayable, GLOBAL_CONSTANTS.currency_code.INR),
 									)}
 								</span>
 								<div className={styles.on_account}>On Account Payment</div>
@@ -190,8 +222,15 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 							<div style={{ display: 'flex' }}>
 								<span>
 									{showInTooltop(
-										getFormattedPrice(outstandingPayable, 'INR'),
-										getAmountInLakhCrK(outstandingPayable, 'INR'),
+										formatAmount({
+											amount   :	outstandingPayable as any,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
+										getAmountInLakhCrK(outstandingPayable, GLOBAL_CONSTANTS.currency_code.INR),
 									)}
 								</span>
 								<div className={styles.on_account}>Outstanding</div>

@@ -1,8 +1,9 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
-import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import useGetTodayStats from '../../hooks/getTodayStats';
 import showInTooltop from '../../utils/getOverFlowData';
 import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
@@ -63,8 +64,15 @@ function Statistics({ globalFilters, entityTabFilters }) {
 								<div className={styles.amount_styles}>
 
 									{showInTooltop(
-										getFormattedPrice(totalExpense, 'INR'),
-										getAmountInLakhCrK(totalExpense, 'INR'),
+										formatAmount({
+											amount   :	totalExpense,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
+										getAmountInLakhCrK(totalExpense, GLOBAL_CONSTANTS.currency_code.INR),
 									)}
 								</div>
 								<div className={styles.invoices_styles}>
@@ -90,8 +98,15 @@ function Statistics({ globalFilters, entityTabFilters }) {
 								<div className={styles.amount_styles}>
 
 									{showInTooltop(
-										getFormattedPrice(totalRevenue, 'INR'),
-										getAmountInLakhCrK(totalRevenue, 'INR'),
+										formatAmount({
+											amount   : totalRevenue,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
+										getAmountInLakhCrK(totalRevenue, GLOBAL_CONSTANTS.currency_code.INR),
 									)}
 								</div>
 								<div className={styles.invoices_styles}>
@@ -119,8 +134,15 @@ function Statistics({ globalFilters, entityTabFilters }) {
 									? styles.amount_plus_styles : styles.amount_minus_styles}
 								>
 									{showInTooltop(
-										getFormattedPrice(totalCashFlow, 'INR'),
-										getAmountInLakhCrK(totalCashFlow, 'INR'),
+										formatAmount({
+											amount   : totalCashFlow,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
+										getAmountInLakhCrK(totalCashFlow, GLOBAL_CONSTANTS.currency_code.INR),
 									)}
 								</div>
 								<div className={styles.text_styles}>
@@ -140,7 +162,14 @@ function Statistics({ globalFilters, entityTabFilters }) {
 															Yesterday Cash Flow Amount :
 														</div>
 														<div>
-															{getFormattedPrice(yesterdayCashFlow, 'INR')}
+															{formatAmount({
+																amount   :	yesterdayCashFlow,
+																currency : GLOBAL_CONSTANTS.currency_code.INR,
+																options  : {
+																	style           : 'currency',
+																	currencyDisplay : 'code',
+																},
+															})}
 														</div>
 													</div>
 												)}

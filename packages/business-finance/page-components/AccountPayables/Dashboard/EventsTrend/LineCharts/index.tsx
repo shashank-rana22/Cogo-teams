@@ -1,5 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
@@ -155,7 +155,14 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 					min  : 0,
 					max  : 'auto',
 				}}
-				yFormat={isCountView ? ' >-.2f' : (value) => getFormattedPrice(value, currency)}
+				yFormat={isCountView ? ' >-.2f' : (value) => formatAmount({
+					amount  : value as any,
+					currency,
+					options : {
+						currencyDisplay : 'code',
+						style           : 'currency',
+					},
+				})}
 				axisTop={null}
 				axisRight={null}
 				axisBottom={{

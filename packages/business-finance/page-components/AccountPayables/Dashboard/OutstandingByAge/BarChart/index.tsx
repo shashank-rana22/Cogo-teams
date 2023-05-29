@@ -1,6 +1,6 @@
 import { BarDatum, ResponsiveBar } from '@cogoport/charts/bar';
 import { Toggle } from '@cogoport/components';
-import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React, { useState } from 'react';
 
 import { getAmountInLakhCrK } from '../../utils/getAmountInLakhCrK';
@@ -97,7 +97,16 @@ function BarChart({ data }:ItemProps) {
 							:
 							{' '}
 							<tspan color="#000">
-								{getFormattedPrice(value, currency)}
+								{
+									formatAmount({
+										amount  : value as any,
+										currency,
+										options : {
+											currencyDisplay : 'code',
+											style           : 'currency',
+										},
+									})
+								}
 							</tspan>
 						</strong>
 					)}

@@ -1,7 +1,7 @@
 import { BarDatum } from '@cogoport/charts/bar';
 import { Tooltip, Toggle } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
@@ -156,19 +156,23 @@ function DailySalesOutstanding({
 						{ params.quarterView === 'normalView' && params.graphView !== 'graphView' && (
 							(arrayMonths || []).map((item) => (
 								<div
+									key={item}
 									className={styles.price_container}
 								>
 									<div className={styles.amount}>
-										{getFormattedPrice(
-											item.dsoForTheMonth,
-											item.currency,
-											{
+										{
+										formatAmount({
+											amount   : item.dsoForTheMonth,
+											currency : item.currency,
+											options  : {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												maximumFractionDigits : 2,
 												style                 : 'decimal',
+												currencyDisplay       : 'code',
 											},
-										)}
+										})
+										}
 									</div>
 									<div style={{ fontWeight: '500', fontSize: '16px' }}>
 										{item.month}
@@ -182,18 +186,18 @@ function DailySalesOutstanding({
 
 						{params.quarterView === 'quarterView' && params.graphView !== 'graphView' && (
 							(quaterly).map((item, index) => (
-								<div className={styles.price_container}>
+								<div className={styles.price_container} key={item.currency}>
 									<div className={styles.amount}>
-										{getFormattedPrice(
-											item.qsoForQuarter || 0,
-											item.currency,
-											{
+										{formatAmount({
+											amount   : item.qsoForQuarter as any || 0,
+											currency : item.currency,
+											options  :	{
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												maximumFractionDigits : 2,
 												style                 : 'decimal',
 											},
-										)}
+										})}
 									</div>
 									<div
 										className={styles.quarter_container}

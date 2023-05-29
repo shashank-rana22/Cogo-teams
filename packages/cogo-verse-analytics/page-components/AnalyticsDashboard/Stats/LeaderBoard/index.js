@@ -1,5 +1,6 @@
 import { cl, Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import { INTENT_LEADERBOARD, USER_STATUS } from '../../../../configurations/primary-stats';
@@ -14,7 +15,14 @@ function LeaderBoard(props = {}) {
 	} = props || {};
 	const statsData = stats?.list || {};
 	const getAmount = (value) => {
-		const amount = getFormattedPrice(value, 'INR');
+		const amount = formatAmount({
+			amount   :	value,
+			currency : GLOBAL_CONSTANTS.currency_code.INR,
+			options  : {
+				currencyDisplay : 'code',
+				style           : 'currency',
+			},
+		});
 		return ((amount.substring(4)).split('.'))[0];
 	};
 	return (
@@ -34,7 +42,7 @@ function LeaderBoard(props = {}) {
 					{INTENT_LEADERBOARD.map((stat) => {
 						const { valueKey, title } = stat;
 						return (
-							<div className={styles.leaderboard_values}>
+							<div className={styles.leaderboard_values} key={stat}>
 
 								<div className={styles.leaderboard_title}>
 
@@ -72,7 +80,7 @@ function LeaderBoard(props = {}) {
 					const { valueKey, title, src } = stat;
 
 					return (
-						<div className={styles.user_status_content}>
+						<div className={styles.user_status_content} key={stat}>
 							<div className={styles.user_status_icon}><img src={src} alt={title} /></div>
 							<div className={styles.user_status_right}>
 								<div className={styles.user_status_num}>

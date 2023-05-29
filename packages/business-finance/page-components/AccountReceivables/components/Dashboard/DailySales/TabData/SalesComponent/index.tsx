@@ -1,5 +1,5 @@
 import { Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, format } from '@cogoport/utils';
 import React from 'react';
 
@@ -121,35 +121,38 @@ function SalesComponent({
 						<td key={val}>
 							{' '}
 							<div className={styles.styled_credit}>
-								{getFormattedPrice(
-									getDataFromDuration(invoiceArray, durations[val - 1])?.[0]?.amount || 0,
-									getDataFromDuration(
+								{
+								formatAmount({
+									amount   : getDataFromDuration(invoiceArray, durations[val - 1])?.[0]?.amount || 0,
+									currency : getDataFromDuration(
 										invoiceArray,
 										durations[val - 1],
 									)?.[0]?.dashboardCurrency || keyValue[entityCode],
-									{
+									options: {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
 										maximumFractionDigits : 0,
 									},
-								)}
+								})
+}
 							</div>
 							<div className={styles.styled_credit}>
 
 								{' '}
 
-								{getFormattedPrice(
+								{formatAmount({
+									amount:
 									getDataFromDuration(creditNoteArray, durations[val - 1])?.[0]?.amount || 0,
-									getDataFromDuration(
+									currency: getDataFromDuration(
 										creditNoteArray,
 										durations[val - 1],
 									)?.[0]?.dashboardCurrency || keyValue[entityCode],
-									{
+									options: {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
 										maximumFractionDigits : 0,
 									},
-								)}
+								})}
 								{' '}
 								<span className={styles.credit_note_text}>(-)</span>
 							</div>
@@ -169,18 +172,18 @@ function SalesComponent({
 
 							<span className={styles.styled_amount}>
 
-								{getFormattedPrice(
-									getDataFromDuration(revenueArray, durations[val - 1])?.[0]?.amount || 0,
-									getDataFromDuration(
+								{formatAmount({
+									amount   : getDataFromDuration(revenueArray, durations[val - 1])?.[0]?.amount || 0,
+									currency : getDataFromDuration(
 										revenueArray,
 										durations[val - 1],
 									)?.[0]?.dashboardCurrency || keyValue[entityCode],
-									{
+									options: {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
 										maximumFractionDigits : 0,
 									},
-								)}
+								})}
 							</span>
 
 						</td>
@@ -194,8 +197,8 @@ function SalesComponent({
 		return (
 			<div className={styles.place}>
 				{
-					[1, 2, 3, 4].map(() => (
-						<Placeholder className={styles.placeholder_container} />
+					[1, 2, 3, 4].map((val) => (
+						<Placeholder key={val} className={styles.placeholder_container} />
 					))
 				}
 			</div>

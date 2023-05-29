@@ -1,5 +1,5 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import { keyValue } from '../../../constants';
@@ -49,25 +49,29 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 									<div className={styles.account_receivables_amount}>
 										<Tooltip content={(
 											<div>
-												{getFormattedPrice(
-													overallStats?.openInvoicesAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
-
-												)}
+												{formatAmount({
+													amount   : overallStats?.openInvoicesAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || keyValue[entityCode],
+													options  : {
+														style           : 'currency',
+														currencyDisplay : 'code',
+													},
+												})}
 											</div>
 										)}
 										>
 											<div className={styles.wrapper}>
-												{getFormattedPrice(
-													overallStats?.openInvoicesAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
-													{
+												{formatAmount({
+													amount   : overallStats?.openInvoicesAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || keyValue[entityCode],
+													options  : {
 														notation              : 'compact',
 														compactDisplay        : 'short',
 														maximumFractionDigits : 2,
 														style                 : 'decimal',
+														currencyDisplay       : 'code',
 													},
-												)}
+												})}
 											</div>
 
 										</Tooltip>
@@ -109,24 +113,30 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 									>
 										<Tooltip content={(
 											<div>
-												{getFormattedPrice(
-													overallStats?.onAccountAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
-												)}
+												{formatAmount({
+													amount   : overallStats?.onAccountAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || keyValue[entityCode],
+													options  : {
+														style           : 'currency',
+														currencyDisplay : 'code',
+													},
+												})}
 											</div>
 										)}
 										>
 											<div className={styles.wrapper}>
-												{getFormattedPrice(
-													overallStats?.onAccountAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
-													{
+												{formatAmount({
+													amount   : overallStats?.onAccountAmount as any || 0,
+													currency :	overallStats?.dashboardCurrency || keyValue[entityCode],
+													options  :	{
 														notation              : 'compact',
 														compactDisplay        : 'short',
 														maximumFractionDigits : 2,
 														style                 : 'decimal',
+														currencyDisplay       : 'code',
+
 													},
-												)}
+												})}
 											</div>
 
 										</Tooltip>
@@ -157,24 +167,30 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 									>
 										<Tooltip content={(
 											<div>
-												{getFormattedPrice(
-													overallStats?.totalOutstandingAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
-												)}
+												{formatAmount({
+													amount   : overallStats?.totalOutstandingAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || keyValue[entityCode],
+													options  : {
+														style           : 'currency',
+														currencyDisplay : 'code',
+													},
+												})}
 											</div>
 										)}
 										>
 											<div className={styles.wrapper}>
-												{getFormattedPrice(
-													overallStats?.totalOutstandingAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
-													{
+												{formatAmount({
+													amount   : overallStats?.totalOutstandingAmount as any || 0,
+													currency : overallStats?.dashboardCurrency || keyValue[entityCode],
+													options  : {
 														notation              : 'compact',
 														compactDisplay        : 'short',
 														maximumFractionDigits : 2,
 														style                 : 'decimal',
+														currencyDisplay       : 'code',
+
 													},
-												)}
+												})}
 											</div>
 
 										</Tooltip>
