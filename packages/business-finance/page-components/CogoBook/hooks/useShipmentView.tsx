@@ -34,7 +34,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
 		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
-		sortType = '', sortBy = '', entity = '', milestone,
+		sortType = '', sortBy = '', entity = '', channel = '', milestone,
 	} = filters || {};
 
 	const { startDate, endDate } = date || {};
@@ -91,6 +91,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 					lowerProfitMargin    : profitAmount || profitPercent || undefined,
 					profitType           : profitType || undefined,
 					sortType             : sortType || undefined,
+					channel              : channel || undefined,
 					sortBy               : sortBy || undefined,
 					upperProfitMargin    : profitAmountUpper || profitPercentUpper || undefined,
 					startDate            : (startDate && endDate) ? format(startDate, 'yyy-MM-dd') : undefined,
@@ -137,6 +138,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		year,
 		entity,
 		milestone,
+		channel,
 	]);
 
 	useEffect(() => {

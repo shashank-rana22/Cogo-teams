@@ -18,6 +18,7 @@ export interface FilterInterface {
 	sortType?:string
 	entity?:string
 	milestone?:string,
+	channel?:string
 }
 
 export interface ColumnInterface {

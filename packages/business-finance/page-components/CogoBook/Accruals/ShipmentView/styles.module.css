@@ -214,7 +214,6 @@
 .select_container {
   display: flex;
   justify-content: space-between;
-  width: 40%;
 }
 .content_tooltip {
   display: flex;

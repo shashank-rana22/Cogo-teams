@@ -671,9 +671,9 @@ export const MILESTONE_OPTIONS = [
 
 export const CHANNEL_OPTIONS = [{
 	label : 'Review Channel',
-	value : 'Review Channel',
+	value : 'REVIEW',
 
 }, {
 	label : 'Audit Channel',
-	value : 'Audit Channel',
+	value : 'AUDIT',
 }];
