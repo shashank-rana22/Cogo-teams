@@ -15,7 +15,7 @@ function AdditionsServicesTasks({
 
 	const [addRate, setAddRate] = useState(null);
 
-	const { list, loading } = useListAdditionalServices({
+	const { list = [], loading = true } = useListAdditionalServices({
 		shipment_data,
 		filters             : { id: task.task_field_id },
 		performed_by_org_id : true,

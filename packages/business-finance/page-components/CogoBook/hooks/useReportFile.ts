@@ -1,11 +1,14 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
 
-import { entityMappingData } from '../P&L/PLStatement/constant';
-
 const useReportFile = ({ query }) => {
 	const { month = '', entity = '' } = query || {};
+
+	const entityDetails = GLOBAL_CONSTANTS.cogoport_entities[entity] || {};
+
+	const { id: entityId } = entityDetails;
 
 	const [
 		{ data:sourceFileData, loading:sourceFileLoading },
@@ -23,14 +26,14 @@ const useReportFile = ({ query }) => {
 		try {
 			await sourceFileTrigger({
 				params: {
-					cogoEntityId : entityMappingData[entity],
+					cogoEntityId : entityId,
 					period       : month,
 				},
 			});
 		} catch (error) {
 			Toast.error(error?.response?.data?.message);
 		}
-	}, [entity, month, sourceFileTrigger]);
+	}, [entityId, month, sourceFileTrigger]);
 	return {
 		sourceFileData,
 		sourceFileLoading,

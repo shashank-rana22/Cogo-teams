@@ -19,10 +19,12 @@ import useGetHawb from './Helpers/hooks/useGetHawb';
 import usePackingList from './Helpers/hooks/usePackingList';
 import styles from './styles.module.css';
 
-const agentOtherChargesCode = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
-const carrierOtherChargesCode = [{ code: 'AMS', price: '' }, { code: 'AWC', price: '' },
-	{ code: 'XRAY', price: '' }, { code: 'CGC', price: '' }];
-const unsavedFields = ['consigneeAddress',
+const AGENT_OTHER_CHARGES_CODE = [{ code: 'AWB', price: '150' }, { code: 'PCA', price: '250' }];
+const CARRIER_OTHER_CHARGES_CODE = [{ code: 'FSC', chargeType: 'chargeable_wt', price: '' },
+	{ code: 'SSC', chargeType: 'chargeable_wt', price: '' }, { code: 'XRAY', chargeType: 'chargeable_wt', price: '' },
+	{ code: 'AWC', chargeType: 'chargeable_wt', price: '' }, { code: 'AMS', chargeType: 'chargeable_wt', price: '' }];
+const UNSAVED_FIELDS = ['document_number',
+	'consigneeAddress',
 	'shipperName',
 	'shipperAddress',
 	'consigneeName',
@@ -38,6 +40,7 @@ interface Props {
 	item?: NestedObj;
 	edit?: boolean;
 	setEdit?: Function;
+	setItem?: Function;
 	setGenerate?:Function;
 }
 
@@ -47,9 +50,11 @@ function GenerateMAWB({
 	item = {},
 	edit,
 	setEdit = () => {},
+	setItem = () => {},
 	setGenerate = () => {},
 }:Props) {
 	const [back, setBack] = useState(false);
+	const [editCopies, setEditCopies] = useState(null);
 	const { control, watch, setValue, handleSubmit, formState: { errors } } = useForm();
 
 	const {
@@ -75,7 +80,9 @@ function GenerateMAWB({
 	const [activeHawb, setActiveHawb] = useState(hawbDetails[0]);
 	const [activeKey, setActiveKey] = useState('basic');
 
-	const fields = mawbControls(disableClass);
+	const [customHawbNumber, setCustomHawbNumber] = useState(false);
+
+	const fields = mawbControls(disableClass, !customHawbNumber);
 
 	const { packingData, packingList } = usePackingList();
 
@@ -90,16 +97,17 @@ function GenerateMAWB({
 
 	const [taskItem, setTaskItem] = useState({
 		...item,
-		...item.documentData,
+		...item?.documentData,
 	});
 
 	const category = item.blCategory;
 	const mawbId = item.documentId;
 	const pendingTaskId = item.id;
 
-	const [activeCategory, setActiveCategory] = useState(edit ? 'mawb' : taskItem.blCategory);
+	const [activeCategory, setActiveCategory] = useState('mawb');
 
 	const finalFields = [
+		...fields.hawb_controls,
 		...fields.basic,
 		...fields.package,
 		...fields.handling,
@@ -111,6 +119,16 @@ function GenerateMAWB({
 	) || 0.0).toFixed(2)));
 
 	const { data:hawbDataList = {}, loading:hawbListLoading, getHawbList } = useGetHawbList(item.shipmentId);
+
+	let cogoSeriesNumber:Array<number> = [];
+
+	hawbDetails?.forEach((itm) => {
+		if (String(itm?.documentNo)?.includes('COGO')) {
+			cogoSeriesNumber.push(Number((itm?.documentNo || '').slice(5)));
+		}
+	});
+
+	cogoSeriesNumber = cogoSeriesNumber.sort((a, b) => a - b);
 
 	useEffect(() => {
 		if (activeCategory === 'hawb') {
@@ -144,9 +162,10 @@ function GenerateMAWB({
 	}, [activeHawb, activeCategory]);
 
 	useEffect(() => {
-		if (category === 'mawb') {
+		if (category === 'mawb' || category === undefined) {
 			return;
 		}
+
 		if (hawbSuccess) {
 			setTaskItem({
 				...taskItem,
@@ -158,9 +177,9 @@ function GenerateMAWB({
 			setHawbSuccess(false);
 		}
 		finalFields.forEach((c) => {
-			if (activeCategory === 'hawb' && activeHawb.isNew && unsavedFields.includes(c.name)) {
+			if (activeCategory === 'hawb' && activeHawb.isNew && UNSAVED_FIELDS.includes(c.name)) {
 				setValue(c.name, '');
-			} else if (activeCategory === 'mawb' && unsavedFields.includes(c.name) && !edit) {
+			} else if (activeCategory === 'mawb' && UNSAVED_FIELDS.includes(c.name) && !edit) {
 				setValue(c.name, '');
 			} else {
 				setValue(c.name, taskItem[c.name] || '');
@@ -172,17 +191,40 @@ function GenerateMAWB({
 		setValue('place', taskItem?.place || 'NEW DELHI');
 		setValue('class', taskItem?.class || 'q');
 		setValue('currency', 'INR');
+		setValue('ratePerKg', edit ? taskItem.ratePerKg : taskItem?.tariffRate);
 		setValue('commodity', taskItem.commodity
 			|| `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
-		setValue('agentOtherCharges', taskItem.agentOtherCharges || agentOtherChargesCode);
+		setValue('agentOtherCharges', taskItem.agentOtherCharges || AGENT_OTHER_CHARGES_CODE);
 		setValue('carrierOtherCharges', activeCategory === 'hawb' && activeHawb.isNew
-			? carrierOtherChargesCode
-			: taskItem.carrierOtherCharges || carrierOtherChargesCode);
+			? CARRIER_OTHER_CHARGES_CODE
+			: taskItem.carrierOtherCharges || CARRIER_OTHER_CHARGES_CODE);
 		setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 		setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 		setValue('amountOfInsurance', 'NIL');
-		setValue('accountingInformation', 'FREIGHT PREPAID');
+		setValue('accountingInformation', taskItem?.accountingInformation || 'FREIGHT PREPAID');
 	}, [hawbSuccess, activeHawb, category, activeCategory]);
+
+	useEffect(() => {
+		if (!customHawbNumber && activeHawb.isNew) {
+			setValue('document_number', activeHawb.documentNo);
+			setHawbDetails((prev) => (
+				prev.map((hawbItem) => (hawbItem.id === activeHawb.id
+					? {
+						...hawbItem,
+						documentNo: activeHawb.documentNo ? activeHawb.documentNo
+							: `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`,
+					}
+					: hawbItem))
+			));
+		} else if (customHawbNumber && activeHawb.isNew) {
+			setValue('document_number', '');
+			setHawbDetails((prev) => (
+				prev.map((hawbItem) => (hawbItem.id === activeHawb.id
+					? { ...hawbItem, documentNo: null }
+					: hawbItem))
+			));
+		}
+	}, [activeHawb, customHawbNumber]);
 
 	useEffect(() => {
 		setChargeableWeight(formValues.chargeableWeight);
@@ -248,9 +290,19 @@ function GenerateMAWB({
 	}, [airportList]);
 
 	useEffect(() => {
+		if (!viewDoc && !edit) {
+			setValue(
+				'accountingInformation',
+				formValues.paymentTerm === 'prepaid' ? 'FREIGHT PREPAID' : 'FREIGHT COLLECT',
+			);
+		}
+	}, [formValues.paymentTerm]);
+
+	useEffect(() => {
 		finalFields.forEach((c) => {
 			setValue(c.name, taskItem[c.name]);
 		});
+
 		if (!viewDoc) {
 			listAirport();
 			listOperator();
@@ -262,18 +314,33 @@ function GenerateMAWB({
 			setValue('place', taskItem?.place || 'NEW DELHI');
 			setValue('class', taskItem?.class || 'q');
 			setValue('currency', 'INR');
+			setValue('ratePerKg', edit ? taskItem.ratePerKg : taskItem?.tariffRate);
 			setValue('commodity', edit ? `${taskItem.commodity || ''}`
 				: `${'SAID TO CONTAIN\n'}${taskItem.commodity || ''}`);
 			setValue('agentOtherCharges', edit ? taskItem.agentOtherCharges
-				: agentOtherChargesCode);
+				: AGENT_OTHER_CHARGES_CODE);
 			setValue('carrierOtherCharges', edit ? taskItem.carrierOtherCharges
-				: carrierOtherChargesCode);
+				: CARRIER_OTHER_CHARGES_CODE);
 			setValue('agentName', 'COGOPORT FREIGHT FORCE PVT LTD');
 			setValue('shipperSignature', taskItem?.shipperSignature || taskItem.customer_name);
 			setValue('amountOfInsurance', 'NIL');
-			setValue('accountingInformation', 'FREIGHT PREPAID');
+			setValue('accountingInformation', taskItem?.accountingInformation || 'FREIGHT PREPAID');
 		}
 	}, []);
+
+	useEffect(() => {
+		if (!viewDoc && editCopies) {
+			setTaskItem({
+				...item,
+				...item?.documentData,
+			});
+			finalFields.forEach((c) => {
+				setValue(c.name, item?.documentData?.[c.name]);
+			});
+			setValue('executedDate', edit && item?.documentData?.executedDate
+				? new Date(item?.documentData?.executedDate) : new Date());
+		}
+	}, [edit, editCopies]);
 
 	useEffect(() => {
 		let totalVolume:number = 0;
@@ -301,7 +368,7 @@ function GenerateMAWB({
 
 	return (
 		<div className={styles.container}>
-			{loading && <Loader themeType="primary" className={styles.loader} />}
+			{(loading || hawbListLoading) && <Loader themeType="primary" className={styles.loader} />}
 			{!viewDoc && (
 				<>
 					<GenerateHeader
@@ -310,8 +377,9 @@ function GenerateMAWB({
 						category={category}
 						activeCategory={activeCategory}
 						setActiveCategory={setActiveCategory}
-						awbNumber={item.awbNumber}
+						awbNumber={item.awbNumber || item.document_number}
 						serialId={item.serialId}
+						editCopies={editCopies}
 					/>
 
 					<FormContainer
@@ -323,9 +391,11 @@ function GenerateMAWB({
 						fields={fields}
 						control={control}
 						errors={errors}
+						setValue={setValue}
 						item={item}
 						setGenerate={setGenerate}
 						handleSubmit={handleSubmit}
+						category={category}
 						activeCategory={activeCategory}
 						hawbDetails={hawbDetails}
 						setHawbDetails={setHawbDetails}
@@ -334,6 +404,9 @@ function GenerateMAWB({
 						activeKey={activeKey}
 						setActiveKey={setActiveKey}
 						taskItem={taskItem}
+						formValues={formValues}
+						setCustomHawbNumber={setCustomHawbNumber}
+						cogoSeriesNumber={cogoSeriesNumber}
 					/>
 				</>
 			)}
@@ -362,6 +435,10 @@ function GenerateMAWB({
 							activeHawb={activeHawb}
 							pendingTaskId={pendingTaskId}
 							category={category}
+							setViewDoc={setViewDoc}
+							setItem={setItem}
+							editCopies={editCopies}
+							setEditCopies={setEditCopies}
 						/>
 					</Modal>
 				)}

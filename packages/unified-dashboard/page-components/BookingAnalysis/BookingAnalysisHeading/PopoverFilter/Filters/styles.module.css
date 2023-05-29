@@ -1,0 +1,92 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.filter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.text_trade {
+	display: block;
+	font-weight: bold;
+}
+
+.text_error {
+	font-weight: bold;
+	color: red;
+}
+
+.text_shipment {
+	display: block;
+	font-weight: bold;
+}
+
+.shipment_checkbox {
+	display: flex;
+	flex-wrap: wrap;
+
+	:global {
+		.ui_checkbox_container {
+			min-width: 33%;
+			padding: 10px 0;
+		}
+	}
+}
+
+.trade_checkbox {
+	display: flex;
+	flex-wrap: wrap;
+
+	:global {
+		.ui_checkbox_container {
+			min-width: 33%;
+			padding: 10px 0;
+		}
+	}
+}
+
+.trade {
+	width: 100%;
+}
+
+.shipment {
+	width: 100%;
+}
+
+.border {
+	margin: 10px 0;
+	border: 1px solid #e0e0e0;
+}
+
+.detail_text {
+	font-size: 16px;
+	font-weight: bold;
+}
+
+.flex_apply {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 16px;
+}
+
+.checkbox_wrapper {
+	display: flex;
+	flex-wrap: wrap;
+}
+
+@media (max-width: 767px) {
+	.shipment_checkbox {
+		display: flex;
+		flex-wrap: wrap;
+
+		:global {
+			.ui_checkbox_container {
+				min-width: 50%;
+				padding: 10px 0;
+			}
+		}
+	}
+}

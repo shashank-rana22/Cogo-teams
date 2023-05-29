@@ -1,27 +1,24 @@
 const getFormattedRates = ({
-	selectedRate,
-	shipment_data,
-	primary_service:primaryService,
-	servicesList,
+	selectedRate = {},
+	servicesList = [],
 }) => {
-	if (!selectedRate?.id) {
+	if (!selectedRate.id) {
 		return {};
 	}
-	const service_type = primaryService?.service_type || `${shipment_data.shipment_type}_service`;
 
 	const primary_service = (servicesList || []).find(
-		(service) => service.service_type === service_type,
-	);
+		(service) => service.service_type === 'fcl_freight_service',
+	) || {};
 
 	const origin_local = (servicesList || []).find(
-		(service) => service.service_type === `${shipment_data.shipment_type}_local_service`
+		(service) => service.service_type === 'fcl_freight_service_local_service'
 			&& service.trade_type === 'export',
-	);
+	) || {};
 
 	const destination_local = (servicesList || []).find(
-		(service) => service.service_type === `${shipment_data.shipment_type}_local_service`
-			&& service.trade_type === 'export',
-	);
+		(service) => service.service_type === 'fcl_freight_service_local_service'
+			&& service.trade_type === 'import',
+	) || {};
 
 	const { data } = selectedRate || {};
 	const rate = data?.[0] || {};

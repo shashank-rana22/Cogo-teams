@@ -1,7 +1,7 @@
 import { Loader, Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { InputController, RadioGroupController, useForm } from '@cogoport/forms';
-import { useContext, useEffect } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 
 import useListShipmentCancellationReasons from '../../hooks/useListShipmentCancellationReasons';
 import useUpdateShipment from '../../hooks/useUpdateShipment';
@@ -10,8 +10,11 @@ import getCancelShipmentPayload from './getCancelShipmentPayload';
 import styles from './styles.module.css';
 
 const STAKEHOLDER_MAPPING = {
-	booking_desk         : 'service_ops1',
-	booking_desk_manager : 'service_ops1',
+	booking_desk          : 'service_ops1',
+	booking_desk_manager  : 'service_ops1',
+	document_desk         : 'service_ops2',
+	document_desk_manager : 'service_ops2',
+	so1_so2_ops           : ['service_ops1', 'service_ops2', 'lastmile_ops'],
 };
 
 export default function CancelShipment({ setShow }) {
@@ -27,18 +30,27 @@ export default function CancelShipment({ setShow }) {
 	const { shipment_data, activeStakeholder } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
 
+	let stakeholder_type = useMemo(() => [activeStakeholder], [activeStakeholder]);
+
+	if (activeStakeholder in STAKEHOLDER_MAPPING) {
+		if (Array.isArray(STAKEHOLDER_MAPPING[activeStakeholder])) {
+			stakeholder_type =	(STAKEHOLDER_MAPPING[activeStakeholder] || []);
+		} else {
+			stakeholder_type = [STAKEHOLDER_MAPPING[activeStakeholder]];
+		}
+	}
+
 	useEffect(() => {
 		getReasons({
 			filters: {
-				shipment_type    : 'fcl_freight',
-				stakeholder_type : [activeStakeholder in STAKEHOLDER_MAPPING
-					? STAKEHOLDER_MAPPING[activeStakeholder]
-					: activeStakeholder],
+				shipment_type: 'fcl_freight',
+				stakeholder_type,
+
 			},
 			shipment_id          : id,
 			options_key_required : true,
 		});
-	}, [id, activeStakeholder, getReasons]);
+	}, [id, getReasons, stakeholder_type]);
 
 	const { control, formState: { errors }, handleSubmit } = useForm();
 

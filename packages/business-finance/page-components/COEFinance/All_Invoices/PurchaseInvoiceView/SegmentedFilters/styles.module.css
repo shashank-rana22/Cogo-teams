@@ -1,5 +1,6 @@
 .main {
 	display: flex;
+	align-items: center;
 	justify-content: space-between;
 }
 
@@ -19,7 +20,6 @@
 .search {
 	:global {
 		width: 336px;
-		margin-right: 20px;
 
 		.ui_input_container {
 			height: 38px;
@@ -34,9 +34,15 @@
 
 .search_filter {
 	display: flex;
+	justify-content: flex-end;
 	margin-top: 20px;
 }
 
 .urgency {
 	margin-top: 12px;
+}
+
+.filter_input {
+	display: flex;
+	justify-content: space-between;
 }

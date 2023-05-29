@@ -17,7 +17,7 @@ function RPASearch({
 	return (
 		<div className={styles.container}>
 			<Popover
-				placement="top"
+				placement="bottom"
 				theme="light"
 				interactive
 				className={styles.popover_container}

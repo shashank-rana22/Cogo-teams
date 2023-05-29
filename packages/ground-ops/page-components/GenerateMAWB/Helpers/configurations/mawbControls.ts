@@ -1,6 +1,16 @@
 import currencies from '../currencies';
 
-const mawbControls = (disableClass) => ({
+const mawbControls = (disableClass, editHawbNumberCondition) => ({
+	hawb_controls: [
+		{
+			name        : 'document_number',
+			label       : 'Document Number',
+			type        : 'text',
+			span        : 5,
+			placeholder : 'Document Number',
+			disabled    : editHawbNumberCondition,
+		},
+	],
 	basic: [
 		{
 			name         : 'shipperName',
@@ -17,12 +27,11 @@ const mawbControls = (disableClass) => ({
 		},
 		{
 			name        : 'shipperAddress',
-			className   : 'textarea',
 			label       : "Shipper's Address",
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 200,
-			row         : 4,
+			rows        : 6,
 			placeholder : 'Enter Address',
 			rules       : {
 				required: 'Shippers Address is Required',
@@ -43,12 +52,11 @@ const mawbControls = (disableClass) => ({
 		},
 		{
 			name        : 'consigneeAddress',
-			className   : 'textarea',
 			label       : "Consignee's Address",
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 200,
-			row         : 4,
+			rows        : 6,
 			placeholder : 'Enter Address',
 			rules       : {
 				required: 'Consignees Address is Required',
@@ -343,13 +351,12 @@ const mawbControls = (disableClass) => ({
 		},
 		{
 			name        : 'remark',
-			className   : 'textarea',
 			label       : 'Remarks',
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 500,
 			placeholder : 'Remarks',
-			rows        : 3,
+			rows        : 6,
 		},
 		{
 			name               : 'agentOtherCharges',
@@ -391,14 +398,16 @@ const mawbControls = (disableClass) => ({
 			name               : 'carrierOtherCharges',
 			label              : 'Due Carrier Charges',
 			className          : 'primary lg',
-			span               : 5,
+			span               : 7,
 			type               : 'fieldArray',
 			showButtons        : true,
 			noDeleteButtonTill : 1,
 			value              : [
 				{
-					code  : '',
-					price : '',
+					code       : '',
+					chargeType : '',
+					chargeUnit : '',
+					price      : '',
 				},
 			],
 			controls: [
@@ -406,17 +415,35 @@ const mawbControls = (disableClass) => ({
 					name        : 'code',
 					type        : 'text',
 					className   : 'primary lg',
-					span        : 5,
+					span        : 2,
 					placeholder : 'Enter Code',
 					rules       : {
 						required: 'Code is Required',
 					},
 				},
 				{
+					name        : 'chargeType',
+					type        : 'select',
+					className   : 'primary lg',
+					span        : 3,
+					placeholder : 'Enter Charge Type',
+					options     : [
+						{ value: 'chargeable_wt', label: 'Chargeable Weight' },
+						{ value: 'gross_wt', label: 'Gross Weight' },
+					],
+				},
+				{
+					name        : 'chargeUnit',
+					type        : 'text',
+					className   : 'primary lg',
+					span        : 2,
+					placeholder : 'Enter Charge Unit',
+				},
+				{
 					name        : 'price',
 					placeholder : 'Enter Price',
 					type        : 'text',
-					span        : 5,
+					span        : 2,
 					className   : 'primary lg',
 					rules       : {
 						required: 'Price is Required',
@@ -437,12 +464,12 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
-			name      : 'accountingInformation',
-			type      : 'textarea',
-			className : 'textarea',
-			label     : 'Accounting Information:',
-			span      : 7,
-			rules     : {
+			name  : 'accountingInformation',
+			type  : 'textarea',
+			label : 'Accounting Information:',
+			span  : 7,
+			rows  : 6,
+			rules : {
 				required: 'Accounting Information is Required',
 			},
 		},
@@ -476,10 +503,10 @@ const mawbControls = (disableClass) => ({
 		{
 			name         : 'handlingInformation',
 			type         : 'textarea',
-			className    : 'textarea',
 			label        : 'Handling Information:',
 			showOptional : false,
 			span         : 5,
+			rows         : 6,
 			placeholder  : 'Handling Information...*',
 			maxLength    : 300,
 		},
@@ -487,11 +514,10 @@ const mawbControls = (disableClass) => ({
 			name        : 'commodity',
 			label       : 'Commodity Details:',
 			type        : 'textarea',
-			className   : 'textarea',
 			span        : 5,
 			maxLength   : 300,
 			placeholder : 'Commodity...',
-			rows        : 3,
+			rows        : 6,
 			rules       : {
 				required: 'Commodity is Required',
 			},

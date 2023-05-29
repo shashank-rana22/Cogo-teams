@@ -27,6 +27,7 @@ export { default as CountrySelectController } from './page-components/Controlled
 export { default as ToggleController } from './page-components/Controlled/ToggleController';
 export { default as RangeSliderController } from './page-components/Controlled/RangeSliderController';
 export { default as SingleDateRangeController } from './page-components/Controlled/SingleDateRangeController';
+export { default as AsyncSelect } from './page-components/Business/AsyncSelect';
 
 export { default as useInterval } from './hooks/useInterval';
 export { default as useGetAsyncOptions } from './hooks/useGetAsyncOptions';

@@ -37,7 +37,7 @@ const useListShipmentBookingConfirmationPreferences = ({ defaultFilters = {}, sh
 	return {
 		loading,
 		apiTrigger,
-		apiData,
+		data: apiData,
 		filters,
 		setFilters,
 	};

@@ -1,7 +1,7 @@
 const booking_list_priority_array = [
 	{ name: 'coe-shipments', version: 'v1' },
 	{ name: 'coe-booking_desk', version: 'v2' },
-	{ name: 'coe-bl_do_collection_release', version: 'v1' },
+	{ name: 'coe-bl_do_collection_release', version: 'v2' },
 	{ name: 'coe-kam_desk', version: 'v1' },
 	{ name: 'coe-document_desk', version: 'v1' },
 	{ name: 'coe-last_mile', version: 'v1' },

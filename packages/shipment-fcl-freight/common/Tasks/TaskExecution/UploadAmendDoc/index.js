@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { Layout } from '@cogoport/ocean-modules';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
-import FormLayout from '../helpers/Layout';
 import getDefaultValues from '../utils/get-default-values';
 
 import controls from './controls';
@@ -14,7 +14,7 @@ function UploadAmendDoc({
 	onClose = () => {},
 	refetch = () => {},
 }) {
-	const { list, loading } = useListDocuments({
+	const { list = {}, loading = true } = useListDocuments({
 		defaultFilters: {
 			shipment_id: task.shipment_id, id: task.task_field_id,
 		},
@@ -31,7 +31,7 @@ function UploadAmendDoc({
 	const { updateDocument } = useUpdateShipmentDocuments({ refetch: newRefetch });
 
 	const allControls = controls(task) || [];
-	const details = list?.list?.[0] || {};
+	const details = list.list?.[0] || {};
 
 	const payloadData = details?.data;
 	const requiredObj = {};
@@ -52,7 +52,7 @@ function UploadAmendDoc({
 			service_type        : task.service_type,
 			document_type       : task.document_type,
 			performed_by_org_id : task.organization_id,
-			id                  : list?.list?.[0]?.id,
+			id                  : details?.id,
 			pending_task_id     : task.id,
 			data                : { ...documentPayloadData, status: 'uploaded' },
 			document_url:
@@ -77,11 +77,11 @@ function UploadAmendDoc({
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 				<div className={styles.remark}>
 					<div className={styles.remark_head}>Remarks:</div>
-					<div className={styles.remark_head}>{list?.[0]?.remarks}</div>
+					<div className={styles.remark_head}>{details?.remarks}</div>
 				</div>
 			</div>
 
-			<FormLayout control={control} fields={allControls} errors={errors} />
+			<Layout control={control} fields={allControls} errors={errors} />
 			<div className={styles.button_wrap}>
 				<Button
 					onClick={handleSubmit(handleSubmitFinal)}

@@ -14,6 +14,7 @@ import {
 	asyncFieldsListOperators,
 	asyncFieldListRateChargeCodes,
 	asyncAllotBanks,
+	asyncShippingLines,
 	asyncFieldsExpertiseConfigurations,
 	asyncFieldsExpertiseBadgeName,
 	asyncKamExpertiseRuleOptions,
@@ -22,6 +23,13 @@ import {
 	asyncListHsCodes,
 	asyncListCurrency,
 	asyncAccountEngagementScoringEvents,
+	asyncJvList,
+	asyncJournalCode,
+	asyncAccMode,
+	asyncCodeMaster,
+	asyncListOrgTradeParties,
+	asyncFieldsPartnerUsersIds,
+	asyncAllocationRequestRejectionType,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -44,7 +52,6 @@ import {
  */
 
 const keyAsyncFieldsParamsMapping = {
-	list_vendors                  : listVendors,
 	organizations                 : asyncFieldsOrganizations,
 	organization_users            : asyncFieldsOrganizationUser,
 	partners                      : asyncFieldsPartner,
@@ -55,6 +62,8 @@ const keyAsyncFieldsParamsMapping = {
 	list_operators                : asyncFieldsListOperators,
 	list_rate_charge_codes        : asyncFieldListRateChargeCodes,
 	allot_bank                    : asyncAllotBanks,
+	shipping_lines                : asyncShippingLines,
+	list_vendors                  : listVendors,
 	list_cogo_entity              : asyncListCogoEntity,
 	expertise_configuration       : asyncFieldsExpertiseConfigurations,
 	badge_name                    : asyncFieldsExpertiseBadgeName,
@@ -62,6 +71,13 @@ const keyAsyncFieldsParamsMapping = {
 	list_hs_codes                 : asyncListHsCodes,
 	list_exchange_rate_currencies : asyncListCurrency,
 	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
+	journal_category              : asyncJvList,
+	journal_code                  : asyncJournalCode,
+	jv_account_mode               : asyncAccMode,
+	jv_code_master                : asyncCodeMaster,
+	list_trade_parties            : asyncListOrgTradeParties,
+	partner_users_ids             : asyncFieldsPartnerUsersIds,
+	allocation_rejection_type     : asyncAllocationRequestRejectionType,
 };
 
 function AsyncSelect(props) {

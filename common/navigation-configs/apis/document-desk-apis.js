@@ -498,5 +498,55 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'checkout',
 	},
+	{
+		api          : 'update_shipment_bl_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_operating_procedure',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_operating_procedures',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_operating_procedure',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_operating_procedure',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_booking_confirmation_preferences',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_rate_charge_codes',
+		access_type  : 'private',
+		service_name : 'rate_sheet',
+	},
+	{
+		api          : 'list_partner_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'generate_bluetide_hbl',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_pending_task_authorization',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 export default apis;
