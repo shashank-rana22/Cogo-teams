@@ -26,3 +26,7 @@
 		}
 	}
 }
+
+.package_container {
+	font-size: var(--font-size-sm);
+}
