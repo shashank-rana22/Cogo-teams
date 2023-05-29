@@ -9,7 +9,7 @@ import React, { useState, useEffect } from 'react';
 import RaiseTicket from '../../common/RaiseTicket';
 import { firebaseConfig } from '../../configurations/firebase-config';
 import { ANDRIOD_APK } from '../../constants';
-import { hasPermission } from '../../constants/IDS_CONSTANTS';
+import getViewType from '../../helpers/getViewType';
 import useGetTicketsData from '../../helpers/useGetTicketsData';
 import useAgentWorkPrefernce from '../../hooks/useAgentWorkPrefernce';
 import useCreateUserInactiveStatus from '../../hooks/useCreateUserInactiveStatus';
@@ -22,6 +22,7 @@ import Conversations from './Conversations';
 import Customers from './Customers';
 import DialCallModal from './DialCallModal';
 import EmptyChatPage from './EmptyChatPage';
+import FeedbackModal from './FeedbackModal';
 import ProfileDetails from './ProfileDetails';
 import ReminderModal from './ReminderModal';
 import styles from './styles.module.css';
@@ -52,8 +53,10 @@ function CogoOne() {
 		subject : '',
 		body    : '',
 	});
+
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [agentDetails, setAgentDetails] = useState(false);
+	const [showFeedback, setShowFeedback] = useState(false);
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 
@@ -64,8 +67,9 @@ function CogoOne() {
 		emailAddress : profile?.user?.email,
 	}));
 
-	const isomniChannelAdmin = userRoleIds?.some((eachRole) => hasPermission.includes(eachRole)) || false;
+	const viewType = getViewType(userRoleIds);
 
+	const isomniChannelAdmin = viewType === 'admin_view';
 	const {
 		loading:statusLoading,
 		updateUserStatus = () => {},
@@ -113,12 +117,15 @@ function CogoOne() {
 		handleScroll,
 		activeRoomLoading,
 		getAssignedChats,
+		flashMessagesLoading,
 	} = useListChats({
 		firestore,
 		userId,
 		isomniChannelAdmin,
 		showBotMessages,
 		searchValue,
+		viewType,
+		setShowFeedback,
 	});
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
@@ -145,6 +152,7 @@ function CogoOne() {
 						mailProps={mailProps}
 						setActiveMessage={setActiveMessage}
 						setRaiseTicketModal={setRaiseTicketModal}
+						viewType={viewType}
 					/>
 
 					{activeTab !== 'mail' && (
@@ -159,6 +167,7 @@ function CogoOne() {
 							activeRoomLoading={activeRoomLoading}
 							setRaiseTicketModal={setRaiseTicketModal}
 							zippedTicketsData={zippedTicketsData}
+							viewType={viewType}
 						/>
 					)}
 				</>
@@ -198,6 +207,7 @@ function CogoOne() {
 			<div className={styles.layout_container}>
 				<Customers
 					isomniChannelAdmin={isomniChannelAdmin}
+					viewType={viewType}
 					setActiveMessage={setActiveMessage}
 					activeMessageCard={activeMessageCard}
 					setActiveVoiceCard={setActiveVoiceCard}
@@ -232,6 +242,7 @@ function CogoOne() {
 					tagOptions={tagOptions}
 					mailProps={mailProps}
 					firestore={firestore}
+					flashMessagesLoading={flashMessagesLoading}
 				/>
 				<div className={styles.chat_details_continer}>
 					{renderComponent()}
@@ -274,6 +285,14 @@ function CogoOne() {
 					setAgentDetails={setAgentDetails}
 				/>
 			)}
+			{
+				showFeedback && (
+					<FeedbackModal
+						showFeedback={showFeedback}
+						setShowFeedback={setShowFeedback}
+					/>
+				)
+			}
 			{raiseTicketModal?.state && (
 				<RaiseTicket
 					setRaiseTicketModal={setRaiseTicketModal}

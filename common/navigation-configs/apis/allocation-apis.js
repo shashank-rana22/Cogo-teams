@@ -168,6 +168,12 @@ const allocation = {
 			feature      : 'allocation',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'get_allocation_request_rejection_reasons',
+			access_type  : 'private',
+			feature      : 'allocation',
+			service_name : 'allocation',
+		},
 	],
 	kam_expertise: [
 		{

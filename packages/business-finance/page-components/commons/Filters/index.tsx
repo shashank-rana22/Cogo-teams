@@ -12,7 +12,8 @@ interface FilterProps {
 	setFilters: (p:object) => void,
 	showClearBtn?:boolean,
 	clearFilters?:()=>void,
-	types?:string,
+	types?: string,
+	pageKey?:string,
 }
 
 function Filter({
@@ -21,6 +22,7 @@ function Filter({
 	setFilters = () => {},
 	showClearBtn = false,
 	clearFilters,
+	pageKey = 'pageIndex',
 }:FilterProps) {
 	const getElement = (singlecontrol:ControlProps) => {
 		const {
@@ -28,7 +30,7 @@ function Filter({
 		} = singlecontrol || {};
 		const customiseControl = {
 			id       : `filter-${name}`,
-			value    : filters![name as keyof typeof filters] || '',
+			value    : filters?.[name as keyof typeof filters] || '',
 			onChange : (val:string) => {
 				let value:string;
 				if (type === 'input') value = val;
@@ -36,8 +38,8 @@ function Filter({
 				else value = val;
 				setFilters((prev:object) => ({
 					...prev,
-					[name]    : value,
-					pageIndex : 1,
+					[name]                   : value,
+					[pageKey || 'pageIndex'] : 1,
 				}));
 			},
 			name,
