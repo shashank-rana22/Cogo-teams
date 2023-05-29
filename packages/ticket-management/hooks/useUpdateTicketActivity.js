@@ -12,7 +12,6 @@ const useUpdateTicketActivity = ({
 	}, { manual: false });
 
 	const { profile } = useSelector((state) => state);
-	console.log('profile', profile);
 	const updateTicketActivity = async (Status = '', ID = '') => {
 		try {
 			const Type = Status?.toLowerCase() === 'resolve' ? 'mark_as_resolved' : 'reopened';
