@@ -14,6 +14,8 @@ const useUpdateRequestStatus = (props) => {
 
 	const formProps = useForm();
 
+	 const { reset } = formProps;
+
 	const onStatusUpdate = async (formValues) => {
 		const { rejection_reasons } = formValues || {};
 
@@ -30,6 +32,8 @@ const useUpdateRequestStatus = (props) => {
 			fetchList();
 
 			setRequestStatusItem({});
+
+			reset();
 
 			Toast.success('Request updated successfully!');
 		} catch (error) {
