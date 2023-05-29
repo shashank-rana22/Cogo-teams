@@ -30,7 +30,7 @@ const useGetPayablesList = ({ globalFilters, entityTabFilters }:Props) => {
 			try {
 				trigger({
 					params: {
-						entityCode   : entityTabFilters === 'all' ? undefined : entityTabFilters,
+						entityCode   : entityTabFilters,
 						serviceTypes : globalFilters?.serviceType,
 						accountMode  : 'AP',
 						startDate    : startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
