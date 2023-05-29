@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCFtick, IcMCrossInCircle } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React from 'react';
@@ -102,7 +102,7 @@ function Banner({ data = {} }) {
 
 			<div className={styles.content}>
 				{keysToDisplay.map((item) => (
-					<div className={styles.item}>
+					<div key={item} className={styles.item}>
 						<div className={styles.label}>
 							{valuesToDisplay[item].label}
 						</div>
