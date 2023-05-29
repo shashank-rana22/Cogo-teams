@@ -97,6 +97,14 @@ const validateIfsc = (ifsc, context) => {
 	return true;
 };
 
+const validateBenificiaryName = (beneficiaryName) => {
+	if (isEmpty(beneficiaryName)) {
+		Toast.error('Benificiary name is not present');
+		return false;
+	}
+	return true;
+};
+
 export const validateData = (data, extraData) => {
 	const { billingPartyObj, collectionPartyObj, formValues } = extraData || {};
 	const billingPartyAddress = (billingPartyObj?.addresses || []).find(
@@ -115,7 +123,7 @@ export const validateData = (data, extraData) => {
 	);
 
 	const bankDetails = (bank_details || []).find(
-		(item) => item?.data?.bank_account_number === collectionPartyObj?.selectedAccNo,
+		(item) => item?.data?.bank_account_number === formValues?.collection_party_bank_details,
 	);
 
 	const collectionPartyBA = allBillingAddresses?.find(
@@ -128,6 +136,9 @@ export const validateData = (data, extraData) => {
 		return false;
 	}
 	if (!validateIfsc(bankDetails?.data?.ifsc_number?.toString(), 'Seller')) {
+		return false;
+	}
+	if (!validateBenificiaryName(bankDetails?.data?.account_holder_name)) {
 		return false;
 	}
 	return true;
@@ -232,7 +243,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			placeOfSupply : formValues?.place_of_supply,
 			billCurrency  : formValues?.invoice_currency || ocrData?.invoice_currency,
 			creditDays:
-                Math.round((new Date(formValues?.due_date)
+                Math.ceil(Math.abs(new Date(formValues?.due_date)
                         - new Date(formValues?.invoice_date))
                     / (24 * 60 * 60 * 1000)) || 0,
 
@@ -294,8 +305,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 				branchCode : bankDetails?.data?.ifsc_number,
 				branchName:
                     bankDetails?.data?.branch_name || bankDetails?.data?.bank_name,
-				beneficiaryName:
-                    bankDetails?.data?.account_holder_name || bankDetails?.data.bank_name,
+				beneficiaryName   : bankDetails?.data?.account_holder_name,
 				ifscCode          : bankDetails?.data?.ifsc_number,
 				accountNumber     : bankDetails?.data?.bank_account_number,
 				swiftCode         : bankDetails?.data.swift_number,

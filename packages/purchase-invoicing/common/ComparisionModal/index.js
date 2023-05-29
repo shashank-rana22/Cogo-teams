@@ -100,6 +100,7 @@ function ComparisionModal({
 					partyId={collectionPartyId?.partyId}
 					onClose={onClose}
 					closeModal={closeModal}
+					formValues={purchaseInvoiceValues}
 				/>
 			) : null}
 		</Modal>

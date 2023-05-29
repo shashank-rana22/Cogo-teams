@@ -17,7 +17,7 @@ const getEditData = (editData) => {
 		collection_party      : editData?.registration_number,
 		collection_party_bank_details:
             editData?.bank_details?.[0]?.bank_account_number,
-		collection_party_address : editData?.address,
+		collection_party_address : editData?.tax_number,
 		...(editData?.shipment_detail || {}),
 		...editData,
 		line_items               : editData?.line_items || [],

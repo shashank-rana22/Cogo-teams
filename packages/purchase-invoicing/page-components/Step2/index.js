@@ -24,6 +24,7 @@ function Step2({
 	billId,
 	partyId,
 	closeModal = () => {},
+	formValues = {},
 }) {
 	const [globalSelected, setGlobalSelected] = useState({});
 	const [knockOffMode, setknockOffMode] = useState(false);
@@ -96,6 +97,7 @@ function Step2({
 								isLockedMode={isLockedMode}
 								billingPartyObj={billingPartyObj}
 								collectionPartyObj={collectionPartyObj}
+								formValues={formValues}
 							/>
 						</div>
 					</div>

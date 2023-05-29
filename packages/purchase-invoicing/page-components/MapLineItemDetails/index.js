@@ -11,15 +11,16 @@ function MapLineItemDetails({
 	handleChange = () => {},
 	isLockedMode = false,
 	collectionPartyObj = {},
+	formValues = {},
 }) {
 	let bankDetails = [];
 	if (!isEmpty(collectionPartyObj?.bank_details)) {
 		bankDetails = (collectionPartyObj?.bank_details || []).filter(
-			(item) => item?.bank_account_number === collectionPartyObj?.selectedAccNo,
+			(item) => item?.bank_account_number === formValues?.collection_party_bank_details,
 		);
 	} else if (!isEmpty(collectionPartyObj?.documents)) {
 		bankDetails = (collectionPartyObj?.documents || []).filter(
-			(item) => item?.data?.bank_account_number === collectionPartyObj?.selectedAccNo
+			(item) => item?.data?.bank_account_number === formValues?.collection_party_bank_details
 				&& ['pending', 'verified'].includes(item?.verification_status)
 				&& item?.status === 'active'
 				&& item?.document_type === 'bank_account_details',
