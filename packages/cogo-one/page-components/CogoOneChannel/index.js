@@ -53,6 +53,7 @@ function CogoOne() {
 		subject : '',
 		body    : '',
 	});
+
 	const [raiseTicketModal, setRaiseTicketModal] = useState({ state: false, data: {} });
 	const [agentDetails, setAgentDetails] = useState(false);
 	const [showFeedback, setShowFeedback] = useState(false);
@@ -116,6 +117,7 @@ function CogoOne() {
 		handleScroll,
 		activeRoomLoading,
 		getAssignedChats,
+		flashMessagesLoading,
 	} = useListChats({
 		firestore,
 		userId,
@@ -240,6 +242,7 @@ function CogoOne() {
 					tagOptions={tagOptions}
 					mailProps={mailProps}
 					firestore={firestore}
+					flashMessagesLoading={flashMessagesLoading}
 				/>
 				<div className={styles.chat_details_continer}>
 					{renderComponent()}
