@@ -16,29 +16,6 @@
 	padding-top: 4px;
 }
 
-.subcontainer_two {
-	padding: 10px;
-}
-
-.ticket_date_time {
-	display: flex;
-	padding: 0 10px 0 0;
-}
-
-.ticket_date {
-	padding: 0 8px 0 0;
-}
-
-.ticket_reason_box {
-	display: flex;
-	justify-content: space-between;
-	padding: 6px 0 0;
-}
-
-.messages_nos {
-	padding: 3px 9px;
-}
-
 .loading_skeleton {
 	border-radius: 4px;
 }
