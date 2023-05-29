@@ -12,6 +12,9 @@ const SUPPLIER_STAKEHOLDERS = [
 	'document_desk_manager',
 	'supply_agent',
 	'booking_desk_manager',
+	'lastmile_ops',
+	'lastmile_ops_manager',
+	'so1_so2_ops',
 ];
 
 export default function useGetServiceCancelControls({

@@ -229,7 +229,7 @@ function GenerateMawb({
 						pdf.addPage();
 					}
 				});
-				pdf.save(awbNumber);
+				pdf.save(activeCategory === 'hawb' ? documentNumber : awbNumber);
 			});
 		} else {
 			html2canvas(document.getElementById('mawb')).then((canvas) => {
@@ -238,7 +238,7 @@ function GenerateMawb({
 				const pdfWidth = pdf.internal.pageSize.getWidth();
 				const pdfHeight = pdf.internal.pageSize.getHeight();
 				pdf.addImage(imgData, 'jpeg', 0, 0, pdfWidth, pdfHeight);
-				pdf.save(awbNumber);
+				pdf.save(activeCategory === 'hawb' ? documentNumber : awbNumber);
 			});
 		}
 		setSaveDocument(false);

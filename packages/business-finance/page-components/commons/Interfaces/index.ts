@@ -74,7 +74,8 @@ export interface ControlProps {
 	groupBy?:ControlProps[];
 	style?: React.CSSProperties;
 	show?: boolean;
-	[key:string]: string | number | undefined | boolean | Options[] | object[] | React.CSSProperties | Date;
+	renderLabel?: Function;
+	[key: string]: string | number | undefined | boolean | Options[] | object[] | React.CSSProperties | Date | Function;
 }
 
 interface PortInterface {
