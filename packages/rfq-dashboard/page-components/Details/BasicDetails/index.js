@@ -10,9 +10,9 @@ import Empty from './Empty';
 import Loader from './Loader';
 import styles from './styles.module.css';
 
-function BasicDetails({ loading }) {
+function BasicDetails() {
 	const { rfq_id } = useRouter().query;
-	const { getRfqsForApproval, data = {} } = useListRfqs({ id: rfq_id });
+	const { getRfqsForApproval, data = {}, loading: Detailsloading } = useListRfqs({ id: rfq_id });
 	const detail = data.list?.[0];
 	useEffect(() => {
 		getRfqsForApproval();
@@ -20,7 +20,7 @@ function BasicDetails({ loading }) {
 	const {
 		importer_exporter, serial_id, sales_agent, stats, total_port_pair, requested_for_approval,
 	} = detail || {};
-	if (loading) return <Loader />;
+	if (Detailsloading) return <Loader />;
 
 	if (isEmpty(detail)) return <Empty />;
 
@@ -33,13 +33,13 @@ function BasicDetails({ loading }) {
 			<div className={styles.rfqid_and_agent}>
 				<div className={styles.rfq_id}>
 					RFQ ID :
-					<div className={styles.data_value}>{serial_id}</div>
+					{serial_id ? <div className={styles.data_value}>{serial_id}</div> : null}
 				</div>
 				<div className={styles.sales_agent_section}>
 					<IcMProfile fill="#4F4F4F" />
 					<div className={styles.sales_agent}>
 						Sales Agent :
-						<div className={styles.data_value}>{sales_agent?.name}</div>
+						{sales_agent ? <div className={styles.data_value}>{sales_agent?.name}</div> : null}
 					</div>
 				</div>
 			</div>
@@ -48,23 +48,34 @@ function BasicDetails({ loading }) {
 
 				<div className={styles.port_pairs_section}>
 					<div className={styles.tag_prefix_name}>
-						{total_port_pair}
-						Port Pairs :
+						{
+							total_port_pair ? `${total_port_pair}
+							Port Pairs :` : null
+						}
+
 					</div>
 					<div className={styles.tag_suffix_name}>
+
 						{requested_for_approval}
+						{' '}
+
 						Requested For Approval
+
 					</div>
 				</div>
 
-				<div className={styles.enterprise_tag}>{startCase(importer_exporter?.sub_type)}</div>
-
-				<div className={styles.last_shipment_section}>
-					<div className={styles.tag_prefix_name}>Last Shipment: </div>
-					<div className={styles.tag_suffix_name}>
-						{importer_exporter?.bookings_completed_last_date}
-					</div>
-				</div>
+				{startCase(importer_exporter?.sub_type)
+					? <div className={styles.enterprise_tag}>{startCase(importer_exporter?.sub_type)}</div> : null}
+				{
+					importer_exporter?.bookings_completed_last_date ? (
+						<div className={styles.last_shipment_section}>
+							<div className={styles.tag_prefix_name}>Last Shipment: </div>
+							<div className={styles.tag_suffix_name}>
+								{importer_exporter?.bookings_completed_last_date}
+							</div>
+						</div>
+					) : null
+				}
 
 			</div>
 

@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 
 function Card({ item, handleCheck, checkedItems, partner_id }) {
 	const { stats = {} } = item;
+	console.log('item', item);
 	console.log('stats', stats);
 	const router = useRouter();
 
@@ -50,41 +51,58 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 				/>
 			</div>
 			<div className={styles.basic_details}>
-				<div className={styles.org_name}>{item?.name || '-'}</div>
+				<div className={styles.org_name}>{item?.name ? startCase(item?.name) : '-'}</div>
 				<div className={styles.tags}>
 					<div className={styles.primary_tag}>
-						{item?.total_port_pair}
-						{' '}
-						Port Pairs :
-						{' '}
-						{item?.requested_for_approval}
-						{' '}
-						Requested for Approval
+						{
+							item?.total_port_pair ? `${item?.total_port_pair} Port Pairs ` : null
+						}
+
+						{
+							item?.requested_for_approval ? `: ${item?.requested_for_approval}
+							Requested for Approval` : null
+						}
 					</div>
-					<div className={styles.primary_tag}>{startCase(item?.importer_exporter?.sub_type)}</div>
-					{item?.sub_type && <div className={styles.primary_tag}>{startCase(item?.sub_type)}</div>}
-					<div className={styles.primary_tag}>
-						Last Shipment :
-						{' '}
-						{getformattedDuration(item?.importer_exporter?.bookings_completed_last_date)}
-						{' '}
-						Ago
-					</div>
+					{item?.importer_exporter?.sub_type
+						&& <div className={styles.primary_tag}>{startCase(item?.importer_exporter?.sub_type)}</div>}
+					{
+						item?.importer_exporter?.bookings_completed_last_date ? (
+							<div className={styles.primary_tag}>
+								Last Shipment :
+								{' '}
+								{getformattedDuration(item?.importer_exporter?.bookings_completed_last_date)}
+								{' '}
+								Ago
+							</div>
+						) : null
+					}
 				</div>
 				<div className={styles.rest_tags}>
-					<div className={styles.secondary_tag}>
-						<IcMProfile className={styles.avatar} />
-						{item?.kam?.name}
-					</div>
-					<div className={styles.secondary_tag}>
-						Requested on :
-						{format(item?.requested_on, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
-					</div>
-					<div className={styles.secondary_tag}>
-						RFQ ID :
-						{' '}
-						{item?.serial_id}
-					</div>
+					{
+						item?.kam?.name ? (
+							<div className={styles.secondary_tag}>
+								<IcMProfile className={styles.avatar} />
+								{item?.kam?.name}
+							</div>
+						) : null
+					}
+					{
+						item?.requested_on ? (
+							<div className={styles.secondary_tag}>
+								Requested on :
+								{format(item?.requested_on, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
+							</div>
+						) : null
+					}
+					{
+						item?.serial_id ? (
+							<div className={styles.secondary_tag}>
+								RFQ ID :
+								{' '}
+								{item?.serial_id}
+							</div>
+						) : null
+					}
 				</div>
 			</div>
 

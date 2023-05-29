@@ -4,34 +4,43 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import styles from './styles.module.css';
 
 const STATS_MAPPING = {
-	promised_revenue: {
-		key   : 'promised_revenue',
-		label : 'Promised Revenue',
+	promised_consolidated_revenue: {
+		key: 'promised_consolidated_revenue',
+
+		label: 'Promised Revenue',
 	},
-	promised_profitability: {
-		key   : 'promised_profitability',
-		label : 'Promised Profitability',
+	promised_consolidated_profitability: {
+		key: 'promised_consolidated_profitability',
+
+		label: 'Promised Profitability',
 	},
 	utilization: {
-		key   : 'utilization',
-		label : 'Utilization',
+		key: 'utilization',
+
+		label: 'Utilization',
 	},
 };
 
 function ServiceStats({ data = [], type = '', source = '' }) {
+	console.log(data);
 	const renderItem = (item) => {
-		if (item.key === 'promised_revenue') {
+		if (item.key === 'promised_revenue' || item.key === 'promised_consolidated_revenue') {
 			return formatAmount({
-				amount   : data?.[item.key],
-				currency : data?.[item.key]?.promised_revenue_currency,
-				options  : {
-					style                 : 'currency',
-					currencyDisplay       : 'code',
-					maximumFractionDigits : 0,
+				amount: data?.[item.key],
+
+				currency: data?.[item.key]?.promised_consolidated_revenue_currency,
+
+				options: {
+					style: 'currency',
+
+					currencyDisplay: 'code',
+
+					maximumFractionDigits: 0,
 				},
 			});
 		}
-		if (item.key === 'promised_profitability' || item.key === 'utilization') {
+		if (item.key === 'promised_profitability' || item.key === 'utilization'
+			|| item.key === 'promised_consolidated_profitability') {
 			return typeof data?.[item?.key] === 'number' ? (
 				<span
 					className={cl`${data?.[item?.key] > 0 ? styles.green : styles.red}
@@ -47,7 +56,7 @@ function ServiceStats({ data = [], type = '', source = '' }) {
 	return (
 		<div className={cl`${styles.revenue_profitability_utilisation_section} 
         ${(source
-			=== 'ports-card') ? styles.service_stats_ports_section : ''}`}
+				=== 'ports-card') ? styles.service_stats_ports_section : ''}`}
 		>
 			{Object.keys(STATS_MAPPING).map((key) => (
 				<div>

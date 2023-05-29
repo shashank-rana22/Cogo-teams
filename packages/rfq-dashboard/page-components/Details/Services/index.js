@@ -36,36 +36,36 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards }) {
 					themeType="primary"
 					onClick={() => setShow(true)}
 				>
-					 Preview and Approve
+					Preview and Approve
 
 				</Button>
 
 				{
-		 show && (
+					show && (
 
-			<ToApproveModal
-				show={show}
-				setShow={setShow}
-				rfq_id={rfq_id}
-			/>
-		 )
- }
+						<ToApproveModal
+							show={show}
+							setShow={setShow}
+							rfq_id={rfq_id}
+						/>
+					)
+				}
 			</div>
 			<div className={styles.cards}>
 				{(isEmpty(rate_card_list_object) && !loading)
- 	? <EmptyPortsSection />
+					? <EmptyPortsSection />
 					: Object.keys(rate_card_list_object).map((key) => (
 						<div className={styles.approve_remaining_complete_shipment_section}>
 							<div className={styles.lists_heading_section}>
 								<span className={styles.lists_heading_section}>{TITLE_MAPPING[key]}</span>
-								<div className={` ${styles.lists_heading_section} ${styles.port_pairs_nos}`}>
+								{/* <div className={` ${styles.lists_heading_section} ${styles.port_pairs_nos}`}>
 									{' '}
 									(
 									{rate_card_list_object[key].length}
 									{' '}
 									{' '}
 									Port Pairs)
-								</div>
+								</div> */}
 							</div>
 							{rate_card_list_object[key].map((rate_card) => (
 								<div key={rate_card.id}>
