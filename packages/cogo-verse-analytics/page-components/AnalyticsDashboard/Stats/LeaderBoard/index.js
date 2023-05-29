@@ -1,5 +1,5 @@
 import { cl, Placeholder } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
@@ -45,7 +45,6 @@ function LeaderBoard(props = {}) {
 							<div className={styles.leaderboard_values} key={stat}>
 
 								<div className={styles.leaderboard_title}>
-
 									{title}
 								</div>
 

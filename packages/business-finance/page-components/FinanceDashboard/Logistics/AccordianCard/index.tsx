@@ -1,5 +1,5 @@
 import { Button, Placeholder } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMOceanSchedules, IcMAirport, IcMTransport } from '@cogoport/icons-react';
 import { useState } from 'react';

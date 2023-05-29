@@ -1,5 +1,5 @@
 import { ResponsivePie } from '@cogoport/charts/pie/index';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';

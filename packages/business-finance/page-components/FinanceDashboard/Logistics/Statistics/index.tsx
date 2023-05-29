@@ -1,5 +1,5 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
