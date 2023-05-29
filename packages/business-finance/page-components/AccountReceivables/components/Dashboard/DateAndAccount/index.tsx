@@ -102,6 +102,10 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 						: (
 							<>
 								<div className={styles.account_receivables_open_line}>
+									<div className={styles.dashboard_currency}>
+										{overallStats?.dashboardCurrency || currency}
+									</div>
+
 									<div
 										className={styles.account_receivables_amount}
 									>
