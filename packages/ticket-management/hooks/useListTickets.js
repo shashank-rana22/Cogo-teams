@@ -7,6 +7,8 @@ import {
 	useCallback,
 } from 'react';
 
+import { ticketSectionMapping } from '../constants';
+
 const useListTickets = (searchValue, status, key, refreshList, setRefreshList) => {
 	const [pagination, setPagination] = useState(1);
 	const [ticketList, setTicketList] = useState({ list: [], total: 0 });
@@ -23,16 +25,18 @@ const useListTickets = (searchValue, status, key, refreshList, setRefreshList) =
 
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {
+			let payload = {
+				PerformedByID : profile?.user?.id,
+				size          : 10,
+				page          : pageIndex - 1,
+				QFilter       : searchQuery.text || undefined,
+				Type          : searchQuery.category,
+
+			};
+			payload = { ...payload, ...(ticketSectionMapping?.[status] || {}) };
+
 			const response = await trigger({
-				params: {
-					Status        : status,
-					DisplayAll    : true,
-					PerformedByID : profile?.user?.id,
-					size          : 10,
-					page          : pageIndex - 1,
-					QFilter       : searchQuery.text || undefined,
-					Type          : searchQuery.category,
-				},
+				params: payload,
 			});
 
 			if (response?.data?.items) {

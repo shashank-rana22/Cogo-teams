@@ -31,8 +31,16 @@ export const actionButtonKeys = ({
 });
 
 export const ticketSectionMapping = {
-	Open      : 'open',
-	Pending   : 'pending',
-	Escalated : 'escalated',
-	Closed    : 'closed',
+	Open: {
+		Status: 'unresolved',
+	},
+	Pending: {
+		Statuses: 'pending,reject_requested,resolve_requested',
+	},
+	Escalated: {
+		Status: 'escalated',
+	},
+	Closed: {
+		Statuses: 'closed,rejected,overdue',
+	},
 };
