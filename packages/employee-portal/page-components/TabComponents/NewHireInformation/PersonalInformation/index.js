@@ -29,8 +29,6 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 		updateEmployeeDetails({ data: values, formType: 'personal_info' });
 	};
 
-	console.log('content?.detail', content);
-
 	useEffect(() => {
 		const mapping = {
 			mobile_number: {
@@ -81,7 +79,6 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 						<div key={controlName} className={styles.control_container}>
 							<div className={styles.label}>
 								{label}
-								<sup className={styles.sup}>*</sup>
 							</div>
 
 							<div className={styles.control}>
@@ -91,7 +88,6 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 									control={control}
 									key={controlName}
 									className={styles[`element_${controlName}`]}
-
 								/>
 
 								{errors[controlName]?.message

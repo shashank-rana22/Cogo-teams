@@ -35,6 +35,23 @@ function useUpdateEmployeeDetails({ id, getEmployeeDetails = () => {} }) {
 					ended_at   : String(item.ended_at),
 				})),
 			};
+		} else if (formType === 'address_details') {
+			payload = {
+				permanent_address: {
+					address : data?.permanent_address,
+					city    : data?.permanent_city,
+					pincode : data?.permanent_pincode,
+					state   : data?.permanent_state,
+					country : data?.permanent_country,
+				},
+				present_address: {
+					address : data?.current_address,
+					city    : data?.current_city,
+					pincode : data?.current_pincode,
+					state   : data?.current_state,
+					country : data?.current_country,
+				},
+			};
 		} else {
 			payload = {
 				employee_experience_details: data?.employment_history.map((item) => ({

@@ -99,19 +99,11 @@ const controls = () => ([
 		rules       : { required: 'This is required' },
 	},
 	{
-		name        : 'address',
-		label       : 'Address',
-		type        : 'textarea',
-		placeholder : 'Address',
-		style       : {
-			height: '150%',
-		},
-	},
-	{
 		name        : 'cogoport_email',
 		label       : 'Cogoport Email',
 		type        : 'email',
 		placeholder : 'Cogoport Email Id',
+		disabled    : true,
 		rules       : { required: 'This is required' },
 	},
 	{
