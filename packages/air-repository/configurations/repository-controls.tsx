@@ -28,7 +28,7 @@ const repositoryControls = () => ({
 				page_limit : 10,
 				sort_by    : 'name',
 				sort_type  : 'asc',
-				includes   : { country: null, default_params_required: true },
+				includes   : { default_params_required: true },
 			},
 			label       : 'Select Airport',
 			placeholder : 'Select Airport...',
