@@ -43,3 +43,9 @@
 .currency {
   width: 40%;
 }
+.business_name_wrapper {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  width: 300px;
+}

@@ -1,4 +1,4 @@
-import { Select } from '@cogoport/components';
+import { Select, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useRequest } from '@cogoport/request';
@@ -6,6 +6,8 @@ import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import styles from './styles.module.css';
+
+const BUSINESS_NAME_LENGTH = 15;
 
 function BankName({ item, valueTradeParty, setValueTradeParty }) {
 	const {
@@ -49,8 +51,19 @@ function BankName({ item, valueTradeParty, setValueTradeParty }) {
 					<div className={styles.name_data}>
 						<div>
 							Name
-							{' '}
-							<div className={styles.bold}>{startCase(businessName)}</div>
+
+							{businessName.length > BUSINESS_NAME_LENGTH ?	(
+								<div className={styles.bold}>
+									<Tooltip
+										placement="top"
+										content={startCase(businessName)}
+										maxWidth={480}
+									>
+										<div className={styles.business_name_wrapper}>{startCase(businessName)}</div>
+									</Tooltip>
+
+								</div>
+							) : startCase(businessName)}
 						</div>
 						<div>
 							Trade Party Serial ID
@@ -78,13 +91,6 @@ function BankName({ item, valueTradeParty, setValueTradeParty }) {
 								options={getBankData()}
 								value={item?.newVal?.value}
 								onChange={(valData, obj) => {
-									// const newValueTradeParty = [...valueTradeParty];
-									// const filtered = newValueTradeParty?.filter((i) => i?.id === obj?.id);
-
-									// if (filtered[0]) { filtered[0].bankDetails = obj?.value; }
-
-									// setValueTradeParty(newValueTradeParty);
-
 									setValueTradeParty((pv) => pv.map((key) => (key?.id === item?.id
 										? {
 											...key,

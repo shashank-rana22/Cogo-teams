@@ -12,7 +12,17 @@ import TradeParty from './TradeParty';
 function DownloadFileFormat({ showModal, setShowModal, control }:UploadFileInterface) {
 	const [stepper, setStepper] = useState('tradeParty');
 	const [value, onChange] = useState('AP');
-	const [valueTradeParty, setValueTradeParty] = useState([]);
+	const [valueTradeParty, setValueTradeParty] = useState([{
+		cogo_entity_id      : '',
+		id                  : '',
+		serial_id           : '',
+		legal_business_name : '',
+		currency            : '',
+		newVal              : {
+			account_number : '',
+			account_name   : '',
+		},
+	}]);
 
 	const formattedData = (valueTradeParty || []).map((item) => {
 		const {
@@ -24,7 +34,6 @@ function DownloadFileFormat({ showModal, setShowModal, control }:UploadFileInter
 			currency,
 		} = item || {};
 
-		console.log(item, 'item');
 		const { account_number:accountNumber, account_name:cogoBank } = newVal || {};
 
 		return {
