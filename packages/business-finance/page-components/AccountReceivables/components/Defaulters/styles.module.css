@@ -1,0 +1,10 @@
+.toggle_header{
+    display:flex;
+    justify-content: space-between;
+    margin-top:8px;
+}
+
+.toggle_right{
+    display: flex;
+    align-items: center;
+}

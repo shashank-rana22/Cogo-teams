@@ -1,5 +1,6 @@
-import { SingleDateRange, Select, Button, Popover } from '@cogoport/components';
+import { SingleDateRange, Select, Button, Popover, Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
@@ -10,7 +11,7 @@ import { defaultersControls } from './controls';
 import defaultersCustomerFilters from './defaultersCustomerFilters';
 import styles from './styles.module.css';
 
-function DefaultersFilters({ globalFilters, setGlobalFilters, isCustomerView }) {
+function DefaultersFilters({ globalFilters, setGlobalFilters, isCustomerView, isClear, clearFilters }) {
 	const [visible, setVisible] = useState(false);
 
 	const { general } = useSelector((state) => state || {});
@@ -19,7 +20,7 @@ function DefaultersFilters({ globalFilters, setGlobalFilters, isCustomerView }) 
 	const control = isCustomerView
 		? defaultersCustomerFilters()
 		: [
-			...defaultersControls()[
+			...defaultersControls({ globalFilters })[
 				Object.keys(GLOBAL_CONSTANTS.country_entity_ids).find(
 					(key) => GLOBAL_CONSTANTS.country_entity_ids[key] === partnerIds,
 				)
@@ -94,23 +95,46 @@ function DefaultersFilters({ globalFilters, setGlobalFilters, isCustomerView }) 
 	return (
 		<div>
 			<div className={styles.filter_container}>
-				<div style={{ width: '38%' }}>
-					<Filter
-						controls={control}
-						filters={globalFilters}
-						setFilters={setGlobalFilters}
-					/>
-				</div>
-				<div>
-					<Popover visible={visible} placement="bottom" render={popoverContent()}>
+				<div className={styles.left_filters}>
+					<div>
+						<Filter
+							controls={control}
+							filters={globalFilters}
+							setFilters={setGlobalFilters}
+						/>
+					</div>
+					<div>
+						<Popover visible={visible} placement="bottom" render={popoverContent()}>
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => setVisible(!visible)}
+							>
+								+ More Filters
+							</Button>
+						</Popover>
+					</div>
+					{!isClear && (
 						<Button
-							size="md"
-							themeType="secondary"
-							onClick={() => setVisible(!visible)}
+							style={{ marginLeft: '8px' }}
+							onClick={() => clearFilters()}
 						>
-							+ More Filters
+							Clear Filters
+
 						</Button>
-					</Popover>
+					)}
+				</div>
+				<div className={styles.search}>
+					<Input
+						value={globalFilters?.search}
+						onChange={(value) => { setGlobalFilters((prev:object) => ({ ...prev, search: value })); }}
+						placeholder="Search by Customer Name /Invoice number /SID"
+						suffix={(
+							<div style={{ margin: '4px', display: 'flex' }}>
+								<IcMSearchlight height={15} width={15} />
+							</div>
+						)}
+					/>
 				</div>
 			</div>
 		</div>
