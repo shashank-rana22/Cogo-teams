@@ -16,7 +16,7 @@ export default function SubmitSection({
 	return (
 		<div className={styles.popover_inner}>
 			<div>
-				<h4>Please provide a reason</h4>
+				<h4>Rejection Reason</h4>
 
 				<Textarea
 					value={finalReview}
@@ -38,7 +38,7 @@ export default function SubmitSection({
 					themeType="secondary"
 					onClick={onBack}
 				>
-					Go Back
+					Cancel
 				</Button>
 
 				<Button

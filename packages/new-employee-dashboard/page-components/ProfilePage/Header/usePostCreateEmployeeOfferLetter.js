@@ -1,52 +1,45 @@
-import { Toast } from "@cogoport/components";
-// import { useForm } from "@cogoport/forms";
-import getApiErrorString from "@cogoport/forms/utils/getApiError";
-import { useHarbourRequest } from "@cogoport/request";
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useHarbourRequest } from '@cogoport/request';
 
 function usePostCreateEmployeeOfferLetter() {
-  //   const formProps = useForm();
+	const [{ data, loading }, trigger] = useHarbourRequest(
+		{
+			url    : '/create_employee_offer_letter',
+			method : 'POST',
+		},
+		{ manual: true },
+	);
 
-  //   const { watch } = formProps;
+	const onFinalSubmit = async (joiningBonus, salaryDetails, ctc, id) => {
+		try {
+			const combinedObject = { ...joiningBonus, ...salaryDetails, init: ctc };
 
-  const [{ data, loading }, trigger] = useHarbourRequest(
-    {
-      url: "/create_employee_offer_letter",
-      method: "POST",
-    },
-    { manual: true }
-  );
+			const payload = {
+				employee_detail_id : id,
+				performed_by_id    : '20',
+				performed_by_type  : 'ok',
+				metadata           : combinedObject,
+				strip              : false,
+				status             : 'active',
+			};
 
-  const onFinalSubmit = async (joiningBonus, salaryDetails, ctc, id) => {
-    try {
-      const combinedObject = { ...joiningBonus, ...salaryDetails, init: ctc };
-      console.log("combinedObject", combinedObject);
+			await trigger({
+				data: payload,
+			});
 
-      const payload = {
-        employee_detail_id: id,
-        performed_by_id: "20",
-        performed_by_type: "ok",
-        metadata: combinedObject,
-        strip: false,
-        status: "active",
-      };
+			Toast.success('Letter initiated!');
+		} catch (err) {
+			Toast.error(
+				getApiErrorString(err.response?.data) || 'Something went wrong',
+			);
+		}
+	};
 
-      await trigger({
-        data: payload,
-      });
-
-      Toast.success("Letter initiated!");
-    } catch (err) {
-      console.log("err :: ", err);
-      Toast.error(
-        getApiErrorString(err.response?.data) || "Something went wrong"
-      );
-    }
-  };
-
-  return {
-    loading,
-    onFinalSubmit,
-  };
+	return {
+		loading,
+		onFinalSubmit,
+	};
 }
 
 export default usePostCreateEmployeeOfferLetter;

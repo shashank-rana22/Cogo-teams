@@ -15,7 +15,7 @@ function TableView({ search }) {
 
 	const { data = {}, onPageChange } = useGetTableView();
 
-	const { list = [], page, page_limit, total_count } = data;
+	const { list = [], page, page_limit, total_count } = data || {};
 
 	const { metadata = {}, id } = ctcBreakup || {};
 	const { onFinalSubmit = () => {} } = useUpdateOfferLetter(id);
