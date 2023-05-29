@@ -551,6 +551,16 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'get_user_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 'get_user_course_details',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 };
 

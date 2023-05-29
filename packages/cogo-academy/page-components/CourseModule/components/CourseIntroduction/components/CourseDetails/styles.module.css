@@ -1,0 +1,48 @@
+.container{
+    background-color: white;
+    padding: 10px;
+}
+
+#bold{
+    margin-bottom: 0;
+}
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+}
+.header_description{
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.header_rating{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+}
+
+.instructions{
+    margin-top: 20px;
+    margin-bottom: 10px;
+}
+.instruction_head{
+    margin-bottom: 10px;
+
+}
+
+.bottom_box{
+    padding: 12px 24px;
+    background: #F7FAEF;
+    margin-bottom: 10px;
+    border-radius: 6px;
+
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
