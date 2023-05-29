@@ -1,4 +1,3 @@
-// import { useForm } from '@cogoport/forms';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -13,12 +12,9 @@ function useUpdateOfferLetter(id = '') {
 		{
 			method : 'post',
 			url    : '/update_employee_offer_letter',
-			//   params,
 		},
 		{ manual: false },
 	);
-
-	// const formProps = useForm();
 
 	const onFinalSubmit = async (status) => {
 		try {
@@ -29,7 +25,8 @@ function useUpdateOfferLetter(id = '') {
 				strip             : false,
 				status,
 				rejectionReason   : '',
-				document_url      : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/7ec8639af765db36130fb7c72dce73c1/offerlettersample.pdf',
+				// document_url      : 'https://cogoport-testing.sgp1.digitaloceanspaces.com/
+				// 7ec8639af765db36130fb7c72dce73c1/offerlettersample.pdf',
 			};
 
 			await trigger({

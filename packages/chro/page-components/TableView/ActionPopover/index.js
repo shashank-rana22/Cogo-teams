@@ -9,11 +9,6 @@ export default function ActionPopover({
 	onFinalSubmit = () => {},
 }) {
 	const [visible, setVisible] = useState(false);
-	console.log('ctcBreakup', ctcBreakup);
-
-	const onCheck = () => {
-		setVisible(() => !visible);
-	};
 
 	return (
 		<div className={styles.popover_container}>
@@ -29,7 +24,7 @@ export default function ActionPopover({
 					/>
 				)}
 			>
-				<Button themeType="secondary" onClick={onCheck}>
+				<Button themeType="secondary" onClick={() => setVisible(() => !visible)}>
 					Reject
 				</Button>
 			</Popover>

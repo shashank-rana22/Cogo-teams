@@ -37,7 +37,7 @@ function Header({
 					</div>
 					<div className={styles.role}>
 						{!loading ? (
-            	startCase(designation)
+							startCase(designation)
 						) : (
 							<Placeholder height="20px" width="240px" />
 						)}
@@ -45,7 +45,7 @@ function Header({
 					<div className={styles.emp_code}>
 						<div style={{ marginRight: 2 }}>Employee Code: </div>
 						{!loading ? (
-            	employee_code
+							employee_code
 						) : (
 							<Placeholder height="20px" width="80px" />
 						)}
