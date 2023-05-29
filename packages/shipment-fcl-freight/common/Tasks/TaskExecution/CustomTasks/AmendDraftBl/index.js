@@ -42,9 +42,10 @@ function AmendDraftBl({
 				document_type        : 'bluetide_hbl',
 				shipment_document_id : task?.task_field_id,
 			},
-			page_limit: 1000,
 		},
 	});
+
+	const hblDoc = tradeDocList?.list?.[0];
 
 	const afterRefetch = () => {
 		refetch();
@@ -58,7 +59,6 @@ function AmendDraftBl({
 		setisHBLUploaded(tradeDocList?.list?.length > 0);
 	}, [tradeDocList?.list]);
 
-	const hblDoc = tradeDocList?.list?.[0];
 	useEffect(() => {
 		setHblData(hblDoc?.data);
 	}, [hblDoc]);
