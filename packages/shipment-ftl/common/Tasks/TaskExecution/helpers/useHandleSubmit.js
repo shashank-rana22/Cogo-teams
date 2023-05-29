@@ -7,12 +7,22 @@ import { useContext, useState } from 'react';
 
 import extraApiPayload from '../utils/extra-api-payload';
 import formatRawValues from '../utils/format-raw-payload';
+import formatForTrucking from '../utils/format-trucking-payload';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
 
 const shipmentRefetchTasks = [
 	'confirm_booking',
 	'mark_confirmed',
+];
+
+const TRUCKING_TASK = [
+	'upload_lorry_receipt',
+	'upload_proof_of_delivery',
+	'mark_completed',
+	'upload_ftl_eway_bill_copy',
+	'upload_ftl_commercial_invoice',
+	'confirmation_on_services_taken',
 ];
 
 function useHandleSubmit({
@@ -35,12 +45,17 @@ function useHandleSubmit({
 	} = useContext(ShipmentDetailContext);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : finalConfig.end_point || 'update_shipment_pending_task',
+		url    : finalConfig.end_point || '/update_shipment_pending_task',
 		method : 'POST',
 	}, { manual: true });
 
 	const [{ loading: loadingTask }, triggerTask] = useRequest({
-		url    : 'update_shipment_pending_task',
+		url    : '/update_shipment_pending_task',
+		method : 'POST',
+	}, { manual: true });
+
+	const [triggerBulkUpdate] = useRequest({
+		url    : 'bulk_update_shipment_services',
 		method : 'POST',
 	}, { manual: true });
 
@@ -89,7 +104,19 @@ function useHandleSubmit({
 			};
 		}
 
+		let truckingPayload = {};
+		if (TRUCKING_TASK.includes(task.task)) {
+			truckingPayload = formatForTrucking(task, rawValues, getApisData);
+		}
+
 		try {
+			if (
+				TRUCKING_TASK.includes(task.task)
+				&& Object.keys(truckingPayload).length
+			) {
+				await triggerBulkUpdate(truckingPayload);
+			}
+
 			const res = await trigger({
 				data: finalPayload,
 			});

@@ -1,0 +1,28 @@
+.button_content {
+	display: flex;
+	justify-content: end;
+	align-items: center;
+	margin-top: 20px;
+
+	> *:not(:last-of-type) {
+		margin-right: 0.5rem;
+	}
+};
+
+.container {
+	.core-ui-input-root {
+		height: 41px;
+	}
+
+	.core-ui-date-time-picker-container {
+		border: 1.5px solid #bdbdbd;
+		border-radius: 4px;
+		color: #cbcff5 !important;
+	}
+	.ui-single-date-picker-input-container {
+		border: none;
+		&:placeholder {
+			color: #cbcff5 !important;
+		}
+	}
+};

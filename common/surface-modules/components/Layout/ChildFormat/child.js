@@ -1,6 +1,6 @@
 import { IcMDelete } from '@cogoport/icons-react';
-import React, { useMemo } from 'react';
 import { startCase } from '@cogoport/utils';
+import React, { useMemo } from 'react';
 
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
