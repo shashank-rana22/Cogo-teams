@@ -12,6 +12,8 @@ import Freeze from './Freeze';
 import MonthInfo from './MonthInfo';
 import styles from './styles.module.css';
 
+const IS_BOOKED = (key) => (key ? styles.selected : styles.button_tab);
+
 function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateAction<boolean>> }) {
 	const [toggleValue, setToggleValue] = useState('declared');
 	const [isBookedActive, setIsBookActive] = useState(true);
@@ -103,7 +105,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 					<div className={styles.sub_tabs}>
 						<div className={styles.button_value}>
 							<div
-								className={isBookedActive ? styles.selected : styles.button_tab}
+								className={IS_BOOKED(isBookedActive)}
 								onClick={() => {
 									setGlobalFilters((p) => ({
 										...p,
@@ -117,7 +119,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 							</div>
 
 							<div
-								className={!isBookedActive ? styles.selected : styles.button_tab}
+								className={IS_BOOKED(!isBookedActive)}
 								onClick={() => {
 									setGlobalFilters((p) => ({
 										...p,
