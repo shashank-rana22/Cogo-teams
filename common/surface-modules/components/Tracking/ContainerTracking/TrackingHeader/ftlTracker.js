@@ -1,17 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { Button, Tooltip, Popover } from '@cogoport/components';
+import { Button, Tooltip, Popover, cl } from '@cogoport/components';
 import { InputController, useForm } from '@cogoport/forms';
+import React, { useState, useEffect } from 'react';
+
 import useGetTrackingConsent from '../../../../hooks/useGetTrackingConsent';
 import useUpdateFtlFreightServiceTracking from '../../../../hooks/useUpdateFtlFreightServiceTracking';
+
 import styles from './styles.module.css';
 
-const FtlTracker = ({
+const DISABLED_STATE = ['cargo_dropped', 'completed', 'aborted', 'cancelled'];
+
+
+function FtlTracker({
 	serialId,
 	data,
 	servicesData = {},
 	listShipments = () => {},
 	refetch = () => {},
-}) => {
+}) {
 	const [startTruckTracker, setStartTruckTracker] = useState(false);
 
 	const mobileNumber = servicesData.driver_details?.contact;
@@ -24,8 +29,7 @@ const FtlTracker = ({
 		setValue,
 	} = useForm();
 
-	const { consentLoading, getTrackingConsent, consentData } =
-		useGetTrackingConsent({ mobileNumber });
+	const { consentLoading, getTrackingConsent, consentData } =		useGetTrackingConsent({ mobileNumber });
 
 	const { loading, updateService } = useUpdateFtlFreightServiceTracking();
 
@@ -49,18 +53,20 @@ const FtlTracker = ({
 		});
 	};
 
+	const disabledButton = DISABLED_STATE.includes(servicesData.state);
+
 	useEffect(() => {
 		if (startTruckTracker) setValue('mobile_number', mobileNumber);
-	}, [startTruckTracker, servicesData]);
+	}, [startTruckTracker, servicesData, mobileNumber, setValue]);
 
 	const content = (
-		<div classname={styles.Content}>
+		<div className={styles.Content}>
 			<InputController
 				control={control}
 				errors={errors}
-				name='mobile_number'
-				label= 'Enter Mobile Number for Tracking'
-				placeholder= 'Enter Mobile Number'
+				name="mobile_number"
+				label="Enter Mobile Number for Tracking"
+				placeholder="Enter Mobile Number"
 				themeType="admin"
 			/>
 			<div className={styles.ButtonDiv}>
@@ -88,7 +94,7 @@ const FtlTracker = ({
 	);
 
 	return (
-		<>	
+		<>
 			{!data?.track_exist ? (
 				<Popover
 					theme="light-border"
@@ -116,22 +122,26 @@ const FtlTracker = ({
 			)}
 			<Tooltip
 				content={
-					!consentLoading && (
+					(!consentLoading && (
 						<div>
 							{consentData?.[0]?.result?.consent && (
-								<div className={cl `${styles.Text} ${styles.status}`}>
-									Status: {consentData?.[0].result?.consent}
+								<div className={cl`${styles.Text} ${styles.status}`}>
+									Status:
+									{' '}
+									{consentData?.[0].result?.consent}
 								</div>
 							)}
 							{consentData?.[0]?.result?.consent_suggestion && (
 								<div className={styles.SuggestionBox}>
-									<div className={cl `${styles.Text} ${styles.status}`}>
-										Suggestion : {consentData?.[0]?.result?.consent_suggestion}
+									<div className={cl`${styles.Text} ${styles.status}`}>
+										Suggestion :
+										{' '}
+										{consentData?.[0]?.result?.consent_suggestion}
 									</div>
 								</div>
 							)}
 						</div>
-					)
+					))
 				}
 				onClick
 				animation="shift-away"
@@ -143,6 +153,7 @@ const FtlTracker = ({
 				<Button
 					className="primary sm"
 					style={{ marginLeft: 30, height: '40px' }}
+					disabled={true}
 					onClick={() => getTrackingConsent()}
 				>
 					Check Consent
@@ -150,6 +161,6 @@ const FtlTracker = ({
 			</Tooltip>
 		</>
 	);
-};
+}
 
 export default FtlTracker;

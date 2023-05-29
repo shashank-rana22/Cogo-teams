@@ -9,6 +9,8 @@ import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import EditInvoice from '../EditInvoice';
+
 import styles from './styles.module.css';
 
 const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
@@ -28,8 +30,10 @@ function Actions({
 	invoiceData = {},
 	isIRNGenerated = false,
 	salesInvoicesRefetch = () => {},
+	isAuthorized = false,
 }) {
 	const [show, setShow] = useState(false);
+	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
@@ -76,6 +80,11 @@ function Actions({
 		setShowChangePaymentMode(true);
 	};
 
+	const handleClickInvoice = () => {
+		setShow(false);
+		setIsEditInvoice(true);
+	};
+
 	const remarkRender = () => (
 		<div className={styles.remarkcontainer}>
 			<div className={styles.title}>Invoice Remarks</div>
@@ -90,10 +99,28 @@ function Actions({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
+	const editInvoicesVisiblity =	(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
+	|| isAuthorized;
+
 	const content = (
 		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
+					{editInvoicesVisiblity ? (
+						<div style={{ width: '100%' }}>
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.text}
+								onClick={handleClickInvoice}
+							>
+								Edit Invoices
+
+							</div>
+							<div className={styles.line} />
+						</div>
+					) : null}
+
 					<div>
 						<div
 							role="button"
@@ -277,6 +304,15 @@ function Actions({
 					refetch={handleRefetch}
 				/>
 			) : null} */}
+			{(invoice.services || []).length && isEditInvoice ? (
+				<EditInvoice
+					show={isEditInvoice}
+					onClose={() => setIsEditInvoice(false)}
+					invoice={invoice}
+					refetch={handleRefetch}
+					shipment_data={shipment_data}
+				/>
+			) : null}
 
 			{isChangeCurrency ? (
 				<ChangeCurrency

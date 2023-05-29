@@ -1,5 +1,5 @@
 # Catchall
-* @Cogoport/platform-engineering @prashantp01
+* @Cogoport/platform-engineering @prashantp01 
 
 # Github Actions
 .github/ @Cogoport/platform-engineering @prashantp01
@@ -7,6 +7,7 @@
 # Packages
 cogo-control/ @Cogoport/platform-engineering @prashantp01
 common/ @Cogoport/platform-engineering @prashantp01
+common/globalization @Cogoport/platform-engineering @riyazKhanCogoport @Rkoshta79 @akashcogoport @sushilr29
 scripts/ @Cogoport/platform-engineering @prashantp01
 packages/ @Cogoport/platform-engineering @prashantp01
 packages/shipment-fcl-freight @Cogoport/platform-engineering @ajeets585
