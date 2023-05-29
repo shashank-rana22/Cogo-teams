@@ -1,13 +1,13 @@
 import { RadioGroup, Toast } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
+import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import { tradePartyOptions } from '../../../../../Constants';
 
 import styles from './styles.module.css';
 
-function TradeParty({ value, onChange, control, tradePartyName, valueTradeParty, setValueTradeParty }) {
-	console.log(valueTradeParty, 'valueTradeParty');
+function TradeParty({ value, onChange, control, valueTradeParty, setValueTradeParty }) {
 	return (
 		<div>
 			<div className={styles.select_mode}>
@@ -26,16 +26,15 @@ function TradeParty({ value, onChange, control, tradePartyName, valueTradeParty,
 						name="tradePartyId"
 						placeholder="Select Partner"
 						asyncKey="list_trade_parties"
-						value
-						isClearable
-						onChange={(val) => {
+						valueKey="legal_business_name"
+						onChange={(val, obj) => {
 							const newData = [...valueTradeParty];
-							const filterData = newData.filter((i) => i === val);
+							const filterData = newData.filter((i) => i?.id === obj?.id);
 							if (filterData.length > 0) {
-								Toast.info('Trade Party is already selected');
+								Toast.info('Trade Party Is Already Selected');
 								return;
 							}
-							const newVal = [...valueTradeParty, val];
+							const newVal = obj?.id && [...valueTradeParty, obj];
 							setValueTradeParty(newVal);
 						}}
 						initialCall
@@ -53,9 +52,26 @@ function TradeParty({ value, onChange, control, tradePartyName, valueTradeParty,
 				<div className={styles.list_data}>Selected List of Trade Parties</div>
 				<div className={styles.card_list_details}>
 					<div className={styles.name_heading}>Name</div>
+
 					<div className={styles.card}>
 						{' '}
-						{startCase(tradePartyName)}
+						{(valueTradeParty || []).map((item) => (
+							<div key={item} className={styles.card_name}>
+								{startCase(item?.legal_business_name)}
+								{item?.id && (
+									<div>
+										<IcMDelete
+											onClick={() => {
+												const newData = [...valueTradeParty];
+												const filterData = newData.filter((i) => i?.id !== item?.id);
+												setValueTradeParty(filterData);
+											}}
+											className={styles.icon_delete}
+										/>
+									</div>
+								)}
+							</div>
+						)) }
 					</div>
 
 				</div>

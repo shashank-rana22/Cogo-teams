@@ -1,10 +1,33 @@
 import { Button, Modal } from '@cogoport/components';
 
+import useCreateManualEntry from '../../../../hooks/useCreateManualEntry';
 import { UploadFileInterface } from '../../interface';
 
 import CreateRequest from './CreateRequest';
+import styles from './styles.module.css';
 
-function ManualEntry({ showModal, setShowModal, refetch }:UploadFileInterface) {
+function ManualEntry({ showModal, setShowModal, refetch, isEdit, selectedItem, show, itemData }:UploadFileInterface) {
+	const onClose = () => setShowModal({ manual_entry: false });
+	const {
+		controls,
+		control,
+		formProps,
+		errors,
+		onError,
+		createManualEntry,
+		loading,
+		disable_controls,
+		exRate,
+		handleSubmit,
+		showBprNumber,
+	} = useCreateManualEntry({
+		onClose,
+		isEdit,
+		selectedItem,
+		refetch,
+		show,
+		itemData,
+	});
 	return (
 		<div>
 			<Modal
@@ -17,10 +40,19 @@ function ManualEntry({ showModal, setShowModal, refetch }:UploadFileInterface) {
 				<Modal.Header title="Manual Entry" />
 
 				<Modal.Body>
+					{(showBprNumber || itemData?.sageOrganizationId) && (
+						<div className={styles.bpr_value}>
+							BPR:
+							{' '}
+							{isEdit
+								? itemData?.sageOrganizationId || ''
+								: showBprNumber?.sage_organization_id || ''}
+						</div>
+					)}
 					<CreateRequest
-						refetch={refetch}
-						show={showModal.manual_entry}
-						onClose={() => setShowModal({ manual_entry: false })}
+						control={control}
+						controls={controls}
+						errors={errors}
 					/>
 				</Modal.Body>
 				<Modal.Footer>
@@ -35,6 +67,7 @@ function ManualEntry({ showModal, setShowModal, refetch }:UploadFileInterface) {
 					<Button
 						size="md"
 						type="submit"
+						onClick={handleSubmit(createManualEntry, onError)}
 					>
 						Submit
 					</Button>

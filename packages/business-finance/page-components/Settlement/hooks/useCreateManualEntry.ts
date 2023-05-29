@@ -15,6 +15,7 @@ const useCreateManualEntry = ({
 	selectedItem = {},
 	refetch,
 	show,
+	itemData,
 }) => {
 	const [errors, setErrors] = useState({});
 	const { profile } = useSelector((state) => state || {});
@@ -46,6 +47,8 @@ const useCreateManualEntry = ({
 		setEditMode,
 		setLedgerCurrency,
 		setTradeId,
+		setShowBprNumber,
+		itemData,
 	});
 	const [processedControls, setProcessedControls] = useState(controls);
 	const [fieldsData, setFieldsData] = useState({});
@@ -213,7 +216,7 @@ const useCreateManualEntry = ({
 		if (isEdit) {
 			setValues({
 				orgSerialId,
-				entityType: String(entityType),
+				entityType,
 				bankId,
 				currency,
 				utr,

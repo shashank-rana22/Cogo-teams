@@ -1,28 +1,23 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 
 const geo = getGeoConstants();
 
 const controls = () => [
 	{
-		label          : 'Cogo Entity',
-		name           : 'entityType',
-		type           : 'select',
-		placeholder    : 'Search by Cogo Entity',
-		optionsListKey : 'cogo-entities-id',
-		defaultOptions : true,
-		valueKey       : 'entity_code',
-		theme          : 'admin',
-		className      : 'primary md',
-		labelKey       : 'description',
-		rules          : { required: 'Required' },
-		span           : 3.9,
+		label       : 'Cogo Entity',
+		name        : 'entityType',
+		type        : 'async-select',
+		placeholder : 'Search by Cogo Entity',
+		asyncKey    : 'list_cogo_entity',
+		initialCall : true,
+		rules       : { required: 'Required' },
+		span        : 3.9,
 	},
 	{
 		name        : 'accMode',
 		label       : 'Account Mode',
-		theme       : 'admin',
 		type        : 'select',
-		className   : 'primary lg',
 		placeholder : 'Select Account Mode',
 		rules       : { required: true },
 		value       : 'AR',
@@ -39,36 +34,30 @@ const controls = () => [
 		],
 	},
 	{
-		label          : 'Trade Party',
-		name           : 'customerId',
-		type           : 'select',
-		theme          : 'admin',
-		optionsListKey : 'trade_party_details',
-		valueKey       : 'id',
-		className      : 'primary lg',
-		span           : 3.9,
-		placeholder    : 'Enter Trade Party Name',
-		rules          : { required: 'Trade Party is required' },
+		label       : 'Trade Party',
+		name        : 'customerId',
+		type        : 'async-select',
+		asyncKey    : 'list_trade_parties',
+		initialCall : true,
+		valueKey    : 'legal_business_name',
+		span        : 3.9,
+		placeholder : 'Enter Trade Party Name',
+		rules       : { required: 'Trade Party is required' },
 	},
 	{
-		label          : 'Transaction Date',
-		name           : 'paymentDate',
-		type           : 'date_picker',
-		placeholder    : 'Transaction Date',
-		maxDate        : new Date(),
-		value          : new Date(),
-		defaultOptions : true,
-		theme          : 'admin',
-		className      : 'primarydate',
-		span           : 3.9,
-		rules          : { required: ' Transaction Date is Required' },
+		label                 : 'Transaction Date',
+		name                  : 'paymentDate',
+		type                  : 'date_picker',
+		placeholder           : 'Transaction Date',
+		isPreviousDaysAllowed : true,
+		value                 : new Date(),
+		span                  : 3.9,
+		rules                 : { required: ' Transaction Date is Required' },
 	},
 	{
 		name        : 'docType',
 		label       : 'Doc Type',
-		theme       : 'admin',
 		type        : 'select',
-		className   : 'primary lg',
 		placeholder : 'Enter Doc Type',
 		rules       : { required: true },
 		span        : 3.9,
@@ -80,36 +69,27 @@ const controls = () => [
 			},
 		],
 	},
-
 	{
 		name         : 'bankId',
 		label        : 'Cogo Bank',
-		theme        : 'admin',
-		className    : 'primary md',
 		placeholder  : 'Select Cogo Bank',
 		type         : 'select',
 		showOptional : false,
 		span         : 3.9,
 	},
-
 	{
-		label          : 'Default Currency',
-		name           : 'currency',
-		type           : 'select',
-		theme          : 'admin',
-		className      : 'primary md',
-		value          : geo.country.currency.code,
-		rules          : { required: 'Required' },
-		span           : 3.9,
-		optionsListKey : 'currencies',
-		placeholder    : 'Select Currency',
+		label       : 'Default Currency',
+		name        : 'currency',
+		type        : 'select',
+		rules       : { required: 'Required' },
+		span        : 3.9,
+		options     : getCurrencyOptions(),
+		placeholder : 'Select Currency',
 	},
 	{
 		label       : 'Amount Received',
 		name        : 'amount',
 		type        : 'number',
-		theme       : 'admin',
-		className   : 'primary lg',
 		min         : 1,
 		span        : 3.9,
 		placeholder : 'Enter amount received',
@@ -120,8 +100,6 @@ const controls = () => [
 		label       : 'Enter Exchange Rate',
 		name        : 'exchangeRate',
 		type        : 'number',
-		theme       : 'admin',
-		className   : 'primary lg',
 		disabled    : false,
 		min         : 1,
 		value       : 1,
@@ -133,8 +111,6 @@ const controls = () => [
 		name        : 'ledCurrency',
 		label       : 'Ledger Currency',
 		type        : 'text',
-		theme       : 'admin',
-		className   : 'primary lg',
 		value       : geo.country.currency.code,
 		span        : 3.9,
 		placeholder : 'Enter Ledger Currency',
@@ -145,8 +121,6 @@ const controls = () => [
 		label       : 'Ledger Amount',
 		name        : 'ledAmount',
 		type        : 'number',
-		theme       : 'admin',
-		className   : 'primary lg',
 		disabled    : true,
 		span        : 3.9,
 		placeholder : 'Enter amount received',
@@ -156,8 +130,6 @@ const controls = () => [
 		label       : 'Description',
 		name        : 'utr',
 		type        : 'text',
-		theme       : 'admin',
-		className   : 'primary lg',
 		span        : 3.9,
 		placeholder : 'Enter UTR',
 		rules       : { required: 'UTR is required' },
@@ -167,8 +139,6 @@ const controls = () => [
 		label       : 'Payment Mode',
 		type        : 'select',
 		span        : 3.9,
-		theme       : 'admin',
-		className   : 'primary md',
 		placeholder : 'Select Payment Mode',
 		options     : [
 			{ label: 'CASH', value: 'CASH' },
@@ -189,6 +159,13 @@ interface ControlInterface {
 	setLedgerCurrency?: React.Dispatch<(prevState: undefined) => undefined>
 	setEditMode?: React.Dispatch<React.SetStateAction<boolean>>
 	setTradeId?: React.Dispatch<(prevState: undefined) => undefined>
+	setShowBprNumber?: any
+	itemData?:{
+		bankName?:string
+		transactionDate?:Date
+		payMode?:string
+	}
+
 }
 
 const getControls = ({
@@ -197,27 +174,48 @@ const getControls = ({
 	setEditMode,
 	setLedgerCurrency,
 	setTradeId,
+	setShowBprNumber,
+	itemData,
 }:ControlInterface) => {
 	const controlsData = controls();
 	return controlsData.map((control) => {
-		if (control.name === 'entityType' && isEdit) {
+		const { name } = control;
+		if (name === 'entityType' && isEdit) {
 			return {
 				...control,
-				value        : entityType,
-				disabled     : true,
-				handleChange : (e:any) => {
+				value    : entityType,
+				onChange : (e) => {
 					setLedgerCurrency(e?.ledger_currency);
 				},
 			};
 		}
-		if (control.name === 'accMode' && isEdit) {
+		if (name === 'bankId' && isEdit) {
+			return {
+				...control,
+				value: itemData?.bankName,
+			};
+		}
+
+		if (name === 'paymentDate' && isEdit) {
+			return {
+				...control,
+				value: itemData?.transactionDate,
+			};
+		}
+		if (name === 'paymentMode' && isEdit) {
+			return {
+				...control,
+				value: itemData?.payMode,
+			};
+		}
+		if (name === 'accMode' && isEdit) {
 			return {
 				...control,
 				disabled: true,
 			};
 		}
 
-		if (control.name === 'exchangeRate') {
+		if (name === 'exchangeRate') {
 			return {
 				...control,
 				disabled: true,
@@ -226,49 +224,47 @@ const getControls = ({
 
 		if (
 			isEdit
-			&& (control.name === 'amount'
-				|| control.name === 'currency'
-				|| control.name === 'bankId'
-				|| control.name === 'exchangeRate'
-				|| control.name === 'paymentDate'
-				|| control.name === 'paymentMode'
-				|| control.name === 'docType'
-				|| control.name === 'utr')
+			&& (name === 'currency'
+				|| name === 'exchangeRate'
+				|| name === 'docType'
+				|| name === 'utr')
 		) {
 			return {
 				...control,
 				disabled: true,
 			};
 		}
-		if (control.name === 'entityType') {
+		if (name === 'entityType') {
 			return {
 				...control,
-				handleChange: (e) => {
+				onChange: (e) => {
 					setLedgerCurrency(e?.ledger_currency);
 					setEditMode(true);
 				},
 			};
 		}
-		if (control.name === 'currency' || control.name === 'bankId') {
+		if (name === 'currency' || name === 'bankId') {
 			return {
 				...control,
-				handleChange: () => setEditMode(true),
+				onChange: () => setEditMode(true),
 			};
 		}
-		if (control.name === 'customerId' && isEdit) {
+		if (name === 'customerId' && isEdit) {
 			return {
 				...control,
-				disabled     : true,
-				handleChange : (e) => {
+				disabled : true,
+				onChange : (e) => {
 					setTradeId(e?.id);
+					setShowBprNumber(e);
 				},
 			};
 		}
-		if (control.name === 'customerId') {
+		if (name === 'customerId') {
 			return {
 				...control,
-				handleChange: (e) => {
+				onChange: (e) => {
 					setTradeId(e?.id);
+					setShowBprNumber(e);
 				},
 			};
 		}

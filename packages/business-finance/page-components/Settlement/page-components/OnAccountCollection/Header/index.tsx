@@ -8,7 +8,7 @@ import ManualEntry from './ManualEntry';
 import styles from './styles.module.css';
 import UploadFile from './UploadFile';
 
-function Header({ refetch, loading, control, watch }) {
+function Header({ refetch, control }) {
 	const [showModal, setShowModal] = useState<ModalInterface>({
 		upload_file     : false,
 		manual_entry    : false,
@@ -84,7 +84,6 @@ function Header({ refetch, loading, control, watch }) {
 					showModal={showModal}
 					setShowModal={setShowModal}
 					control={control}
-					watch={watch}
 				/>
 			)}
 		</div>

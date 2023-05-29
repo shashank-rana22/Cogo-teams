@@ -62,7 +62,7 @@ function OnAccountCollection() {
 
 	return (
 		<div>
-			<Header refetch={clearFilters} loading={loading} control={control} watch={watch} />
+			<Header refetch={clearFilters} control={control} />
 
 			<div className={styles.container}>
 				<div className={styles.filter_data}>

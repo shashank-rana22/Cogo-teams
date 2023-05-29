@@ -40,45 +40,48 @@ function UploadFile({ showModal, setShowModal }:UploadFileInterface) {
 					</div>
 				)}
 				/>
-				<div className={styles.mode_selection}>
-					<div>
-						* Please upload payment for
-						{' '}
-						{toggleValue }
-						{' '}
-						mode
-					</div>
-					<div>
-						<Button
-							type="button"
-							themeType="secondary"
-							size="md"
-							onClick={() => window.open(
-								getDownloadURL,
-								'_blank',
-							)}
-						>
-							Download File Format
-						</Button>
+				<Modal.Body>
+					<div className={styles.mode_selection}>
+						<div>
+							* Please upload payment for
+							{' '}
+							{toggleValue }
+							{' '}
+							mode
+						</div>
+						<div>
+							<Button
+								type="button"
+								themeType="secondary"
+								size="md"
+								onClick={() => window.open(
+									getDownloadURL,
+									'_blank',
+								)}
+							>
+								Download File Format
+							</Button>
 
+						</div>
 					</div>
-				</div>
 
-				<div className={styles.upload_data}>
-					<div>Upload File</div>
-					<div>
-						<FileUploader
-							value={uploadProof}
-							onChange={setUploadProof}
-							showProgress
-							draggable
-							fileLink={uploadProof}
-							uploadDesc="Upload files"
-							uploadIcon={<IcMCloudUpload height={40} width={40} />}
-							accept=".csv,.xlsx"
-						/>
+					<div className={styles.upload_data}>
+						<div>Upload File</div>
+						<div>
+							<FileUploader
+								value={uploadProof}
+								onChange={setUploadProof}
+								showProgress
+								draggable
+								fileLink={uploadProof}
+								uploadDesc="Upload files"
+								uploadIcon={<IcMCloudUpload height={40} width={40} />}
+								accept=".csv,.xlsx"
+							/>
+						</div>
 					</div>
-				</div>
+				</Modal.Body>
+
 				<Modal.Footer>
 					<div className={styles.button_wrapper}>
 						<Button
