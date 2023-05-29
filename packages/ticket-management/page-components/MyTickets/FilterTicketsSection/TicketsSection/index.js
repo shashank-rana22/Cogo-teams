@@ -1,16 +1,11 @@
 import { useState } from 'react';
 
+import { ticketSectionMapping } from '../../../../constants';
+
 import styles from './styles.module.css';
 import TicketsSectionPart from './TicketSectionPart';
 
 function TicketsSection(props) {
-	const mapping = {
-		Open      : 'open',
-		Pending   : 'pending',
-		Escalated : 'escalated',
-		Closed    : 'closed',
-	};
-
 	const [refreshList, setRefreshList] = useState({
 		Open      : false,
 		Pending   : false,
@@ -21,12 +16,12 @@ function TicketsSection(props) {
 	return (
 		<div className={styles.tickets_section}>
 			{
-				Object.keys(mapping).map((item) => (
+				Object.keys(ticketSectionMapping).map((item) => (
 					<TicketsSectionPart
 						key={item}
 						{...props}
 						label={item}
-						status={mapping[item]}
+						status={ticketSectionMapping[item]}
 						refreshList={refreshList}
 						setRefreshList={setRefreshList}
 					/>

@@ -9,7 +9,7 @@ function EmptyStateTicketStructure({ label }) {
 			className={styles.container}
 
 		>
-			<IcMTicket className={styles.icm_tag} />
+			<IcMTicket className={styles.icmticket_tag} />
 			<div className={styles.ticket_label}>{`No ${label} Tickets Raised`}</div>
 		</div>
 	);

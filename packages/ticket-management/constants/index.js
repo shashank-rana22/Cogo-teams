@@ -29,3 +29,10 @@ export const actionButtonKeys = ({
 		name  : 'reopen',
 	},
 });
+
+export const ticketSectionMapping = {
+	Open      : 'open',
+	Pending   : 'pending',
+	Escalated : 'escalated',
+	Closed    : 'closed',
+};
