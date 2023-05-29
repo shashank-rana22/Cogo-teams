@@ -59,6 +59,12 @@
 	color: #cb6464;
 }
 
+.check {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+}
+
 .button {
 	margin-top: 10px;
 	margin-left: 75vw;

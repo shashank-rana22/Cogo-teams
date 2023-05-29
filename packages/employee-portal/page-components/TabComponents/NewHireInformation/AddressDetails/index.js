@@ -1,6 +1,6 @@
-import { Button } from '@cogoport/components';
+import { Button, Checkbox } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
@@ -16,7 +16,9 @@ const removeTypeField = (controlItem) => {
 };
 
 function AddressDetails({ data:content, getEmployeeDetails }) {
-	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
+	const [address, setAddress] = useState(false);
+
+	const { handleSubmit, control, formState: { errors }, setValue, getValues } = useForm();
 
 	const controlsvalue = controls({ content });
 
@@ -26,6 +28,11 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 
 	const id = info?.detail?.id;
 
+	const permanent_address_fields = (permanentcontrols || []).map((item) => item?.name);
+	const permanent_address_values = getValues(permanent_address_fields);
+
+	const addressFields = (controlsvalue || []).map((item) => item?.name);
+
 	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
 	const onSubmit = (values) => {
@@ -33,27 +40,42 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	};
 
 	useEffect(() => {
-		const mapping = {
-			permanent_address : content?.detail?.permanent_address?.address || '',
-			permanent_city    : content?.detail?.permanent_address?.city || '',
-			permanent_pincode : content?.detail?.permanent_address?.pincode || '',
-			permanent_state   : content?.detail?.permanent_address?.state || '',
-			permanent_country : content?.detail?.permanent_address?.country || '',
-			current_address   : content?.detail?.present_address?.address || '',
-			current_city      : content?.detail?.present_address?.city || '',
-			current_pincode   : content?.detail?.present_address?.pincode || '',
-			current_state     : content?.detail?.present_address?.state || '',
-			current_country   : content?.detail?.present_address?.country || '',
-		};
+		if (address) {
+			(addressFields || []).forEach((item, index) => {
+				console.log('shivam');
+				setValue(item, permanent_address_values?.[index]);
+			});
+		} else {
+			(addressFields || []).forEach((item) => {
+				console.log('shivam123123');
 
-		[...controlsvalue, ...permanentcontrols].forEach((item) => {
-			setValue(
-				`${item.name}`,
-				mapping[item.name]
-                || content?.detail?.[item.name],
-			);
-		});
-	}, [controlsvalue, content?.detail, setValue, permanentcontrols]);
+				setValue(item, '');
+			});
+		}
+	}, [address, addressFields, permanent_address_values, setValue]);
+
+	// useEffect(() => {
+	// 	const mapping = {
+	// 		permanent_address : content?.detail?.permanent_address?.address || '',
+	// 		permanent_city    : content?.detail?.permanent_address?.city || '',
+	// 		permanent_pincode : content?.detail?.permanent_address?.pincode || '',
+	// 		permanent_state   : content?.detail?.permanent_address?.state || '',
+	// 		permanent_country : content?.detail?.permanent_address?.country || '',
+	// 		current_address   : content?.detail?.present_address?.address || '',
+	// 		current_city      : content?.detail?.present_address?.city || '',
+	// 		current_pincode   : content?.detail?.present_address?.pincode || '',
+	// 		current_state     : content?.detail?.present_address?.state || '',
+	// 		current_country   : content?.detail?.present_address?.country || '',
+	// 	};
+
+	// 	[...controlsvalue, ...permanentcontrols].forEach((item) => {
+	// 		setValue(
+	// 			`${item.name}`,
+	// 			mapping[item.name]
+	//             || content?.detail?.[item.name],
+	// 		);
+	// 	});
+	// }, [controlsvalue, content?.detail, setValue, permanentcontrols]);
 
 	return (
 		<div className={styles.whole_container}>
@@ -130,6 +152,11 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 						})}
 					</div>
 				</div>
+			</div>
+
+			<div className={styles.check}>
+				<Checkbox onChange={() => setAddress((prev) => !prev)} />
+				Current Address is same as Permanent Address
 			</div>
 
 			<Button
