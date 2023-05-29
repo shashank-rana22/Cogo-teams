@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useArchive from '../../hooks/useArchive';
-import { optionsEntity, serviceTypeOptions } from '../constant';
+import { getEntityOptions, serviceTypeOptions } from '../constant';
 
 import { ARCHIVE_DECLARED, ARCHIVE_MONTH_BOOKED } from './configuration';
 import Freeze from './Freeze';
@@ -37,6 +37,8 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 	const { list:drillDataList, totalRecords:drillTotalRecords } = drillData || {};
 
 	const { page } = globalFilters || {};
+
+	const entityOptions = getEntityOptions() as any;
 
 	const subComponent = (itemData) => {
 		const {
@@ -181,7 +183,7 @@ function Archive({ setShowTab }:{ setShowTab: React.Dispatch<React.SetStateActio
 									setGlobalFilters((prev) => ({ ...prev, entity: val }));
 								}}
 								placeholder="Entity"
-								options={optionsEntity}
+								options={entityOptions}
 								isClearable
 								style={{ width: '100px' }}
 							/>

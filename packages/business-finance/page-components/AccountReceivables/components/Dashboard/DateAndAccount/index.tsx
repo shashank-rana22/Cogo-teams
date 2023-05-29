@@ -1,8 +1,7 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
-
-import { keyValue } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -33,6 +32,8 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 		overallStats = {},
 	} = outstandingData || {};
 
+	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
+
 	return (
 		<div>
 
@@ -48,7 +49,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div>
 												{formatAmount({
 													amount   : overallStats?.openInvoicesAmount as any || 0,
-													currency : overallStats?.dashboardCurrency || keyValue[entityCode],
+													currency : overallStats?.dashboardCurrency || currency,
 													options  : {
 														style           : 'currency',
 														currencyDisplay : 'code',
@@ -60,7 +61,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div className={styles.wrapper}>
 												{formatAmount({
 													amount   : overallStats?.openInvoicesAmount as any || 0,
-													currency : overallStats?.dashboardCurrency || keyValue[entityCode],
+													currency : overallStats?.dashboardCurrency || currency,
 													options  : {
 														notation              : 'compact',
 														compactDisplay        : 'short',
@@ -108,7 +109,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div>
 												{formatAmount({
 													amount   : overallStats?.onAccountAmount as any || 0,
-													currency : overallStats?.dashboardCurrency || keyValue[entityCode],
+													currency : overallStats?.dashboardCurrency || currency,
 													options  : {
 														style           : 'currency',
 														currencyDisplay : 'code',
@@ -120,7 +121,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div className={styles.wrapper}>
 												{formatAmount({
 													amount   : overallStats?.onAccountAmount as any || 0,
-													currency :	overallStats?.dashboardCurrency || keyValue[entityCode],
+													currency :	overallStats?.dashboardCurrency || currency,
 													options  :	{
 														notation              : 'compact',
 														compactDisplay        : 'short',
@@ -159,7 +160,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div>
 												{formatAmount({
 													amount   : overallStats?.totalOutstandingAmount as any || 0,
-													currency : overallStats?.dashboardCurrency || keyValue[entityCode],
+													currency : overallStats?.dashboardCurrency || currency,
 													options  : {
 														style           : 'currency',
 														currencyDisplay : 'code',
@@ -171,7 +172,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div className={styles.wrapper}>
 												{formatAmount({
 													amount   : overallStats?.totalOutstandingAmount as any || 0,
-													currency : overallStats?.dashboardCurrency || keyValue[entityCode],
+													currency : overallStats?.dashboardCurrency || currency,
 													options  : {
 														notation              : 'compact',
 														compactDisplay        : 'short',

@@ -1,8 +1,7 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback } from 'react';
-
-import { entityMappingData } from '../P&L/PLStatement/constant';
 
 interface FilterInterface {
 	filters?:{
@@ -40,6 +39,11 @@ const useReport = ({
 		{ manual: true },
 	);
 	const { category = '', date:FilterDate = '', entity = '' } = filters || {};
+
+	const entityDetails = GLOBAL_CONSTANTS.cogoport_entities[entity] || {};
+
+	const { id: entityId } = entityDetails;
+
 	const getLastMonthData = useCallback(() => {
 		if (category === 'lastMonth') {
 			const currentDate = new Date();
@@ -70,7 +74,7 @@ const useReport = ({
 			await reportTrigger({
 				params: {
 					periods      : getLastMonthData() || [FilterDate] || undefined,
-					cogoEntityId : entityMappingData[entity] || undefined,
+					cogoEntityId : entityId || undefined,
 				},
 			});
 
@@ -80,14 +84,14 @@ const useReport = ({
 				Toast.error(error?.response?.data?.message);
 			}
 		}
-	}, [getLastMonthData, reportTrigger, FilterDate, entity]);
+	}, [getLastMonthData, reportTrigger, FilterDate, entityId]);
 
 	const fetchRatioApi = useCallback(async (setShowReport?:any) => {
 		try {
 			await ratioTrigger({
 				params: {
 					periods      : getLastMonthData() || monthPayload || FilterDate || undefined,
-					cogoEntityId : entityMappingData[entity] || undefined,
+					cogoEntityId : entityId || undefined,
 				},
 			});
 
@@ -97,7 +101,7 @@ const useReport = ({
 				Toast.error(error?.response?.data?.message);
 			}
 		}
-	}, [ratioTrigger, getLastMonthData, monthPayload, FilterDate, entity]);
+	}, [ratioTrigger, getLastMonthData, monthPayload, FilterDate, entityId]);
 
 	return {
 		ratiosData,

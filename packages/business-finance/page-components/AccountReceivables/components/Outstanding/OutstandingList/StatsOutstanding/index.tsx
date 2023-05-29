@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import { StatsKeyMapping, StatsKeyMappingPayment } from '../../../../constants/index';
@@ -16,13 +17,7 @@ function StatsOutstanding({ item }) {
 		entityCode = '',
 	} = item || {};
 
-	const keyValue = {
-		101 : 'INR',
-		201 : 'EUR',
-		301 : 'INR',
-		401 : 'SGD',
-		501 : 'VND',
-	};
+	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	const invoiceContainer = [{
 		name         : 'OPEN INVOICES',
@@ -46,6 +41,7 @@ function StatsOutstanding({ item }) {
 	},
 
 	];
+
 	return (
 		<div className={styles.container}>
 
@@ -59,8 +55,8 @@ function StatsOutstanding({ item }) {
 							</div>
 							<div className={styles.amount_open}>
 								{formatAmount({
-									amount   :	invoiceObject.LedgerAmount?.ledgerAmount || 0,
-									currency	: invoiceObject.LedgerAmount?.ledgerCurrency || keyValue[entityCode],
+									amount   : invoiceObject.LedgerAmount?.ledgerAmount || 0,
+									currency : invoiceObject.LedgerAmount?.ledgerCurrency || currency,
 									options  : {
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -89,9 +85,9 @@ function StatsOutstanding({ item }) {
 										className={styles.amount}
 									>
 										{formatAmount({
-											amount   :	invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount || 0,
-											currency :	invoiceObject.ageingBucket[val.valueKey]?.ledgerCurrency
-											|| keyValue[entityCode],
+											amount   : invoiceObject.ageingBucket[val.valueKey]?.ledgerAmount || 0,
+											currency : invoiceObject.ageingBucket[val.valueKey]?.ledgerCurrency
+																	|| currency,
 											options: {
 												style                 : 'currency',
 												currencyDisplay       : 'code',
@@ -113,8 +109,8 @@ function StatsOutstanding({ item }) {
 						className={styles.amount}
 					>
 						{formatAmount({
-							amount   :	totalOutstanding.ledgerAmount || 0,
-							currency :	totalOutstanding.ledgerCurrency || keyValue[entityCode],
+							amount   : totalOutstanding.ledgerAmount || 0,
+							currency : totalOutstanding.ledgerCurrency || currency,
 							options  : {
 								style                 : 'currency',
 								currencyDisplay       : 'code',

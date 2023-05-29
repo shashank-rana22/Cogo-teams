@@ -1,8 +1,9 @@
 import { Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANST from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
+import React from 'react';
 
 import SortIcon from '../common/SortIcon';
 
@@ -25,12 +26,21 @@ export const monthData = {
 	12 : 'December',
 };
 
-export const optionsEntity = [
-	{ label: '201', value: '201' },
-	{ label: '301', value: '301' },
-	{ label: '401', value: '401' },
-	{ label: '501', value: '501' },
-];
+export const getEntityOptions = () => {
+	const filteredEntity = Object.entries(GLOBAL_CONSTANTS.cogoport_entities).filter(
+		// eslint-disable-next-line @typescript-eslint/no-unused-vars
+		([_, value]: any) => value.feature_supported.includes('cogo_books'),
+	);
+
+	const ENTITY_OPTIONS = (filteredEntity || []).map(([key]: any) => (
+		{
+			label : Number(key),
+			value : Number(key),
+		}
+	));
+
+	return ENTITY_OPTIONS;
+};
 
 const content = (purchaseInvoicesCount, salesInvoicesCount) => {
 	const { creditNoteCount = '', invoiceCount = '', proformaCount = ''	} = purchaseInvoicesCount || {};
@@ -581,7 +591,7 @@ export const column = ({
 				<span>
 					{ formatAmount({
 						amount   :	incomeBooked,
-						currency : GLOBAL_CONSTANST.currency_code.INR,
+						currency : GLOBAL_CONSTANTS.currency_code.INR,
 						options  : {
 							style           : 'currency',
 							currencyDisplay : 'code',

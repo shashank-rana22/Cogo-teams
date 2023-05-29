@@ -1,11 +1,11 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getAmountInLakhCrK from '../../../../../../../commons/getAmountInLakhCrK';
 import EmptyState from '../../../../../../commons/EmptyStateDocs';
-import { keyValue } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -22,6 +22,8 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 		const dateB = new Date(`${b.year}-${b.date} 00:00:00`);
 		return dateA.getTime() - dateB.getTime();
 	});
+
+	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	const AmountData = [];
 	const CountData = [];
@@ -70,9 +72,9 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 					enableSlices="x"
 					yScale={{ type: 'linear', min: 0, max: 'auto' }}
 					yFormat={(value) => formatAmount({
-						amount   : value as any,
-						currency : keyValue[entityCode],
-						options  : {
+						amount  : value as any,
+						currency,
+						options : {
 							currencyDisplay : 'code',
 							style           : 'currency',
 						},
