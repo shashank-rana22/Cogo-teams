@@ -1,12 +1,10 @@
-import { Modal, Button, Toast } from '@cogoport/components';
+import { Modal, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
-import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState, useContext } from 'react';
 
 import useCreateShipmentCreditNote from '../../../../../../../hooks/useCreateShipmentCreditNote';
-import formatCreditNoteData from '../../../../../CreditNote/helpers/format-credit-note-data';
 import creditNoteControls from '../../../../../helpers/creditNoteControls';
 import generateDefaultValues from '../../../../../helpers/generateDefaultValuesOfCreditNote';
 import updateFormValueOfCreditNote from '../../../../../helpers/updateFormValuesOfCreditNote';
@@ -45,32 +43,12 @@ function RequestCN({
 		setShow(false);
 		refetchCN();
 	};
-	const { apiTrigger } = useCreateShipmentCreditNote({ refetch: afterRefetch });
-
-	const onCreate = async (data) => {
-		const { submit_data, checkError } = formatCreditNoteData({
-			data,
-			servicesIDs,
-			invoice,
-			invoiceData,
-		});
-
-		if (submit_data?.line_items?.length === 0) {
-			Toast.error('Line Items is required');
-		}
-		let isError = false;
-		Object.keys(checkError).forEach((key) => {
-			checkError[key].forEach((t) => {
-				if (!isEmpty(t)) {
-					isError = true;
-				}
-			});
-		});
-
-		if (isError === false) {
-			await apiTrigger(submit_data);
-		}
-	};
+	const { onCreate, loading } = useCreateShipmentCreditNote({
+		refetch: afterRefetch,
+		servicesIDs,
+		invoice,
+		invoiceData,
+	});
 
 	return (
 		<Modal show={show} onClose={() => setShow(false)} size="xl" closeOnOuterClick={false}>
@@ -102,6 +80,7 @@ function RequestCN({
 					<Button
 						type="button"
 						onClick={handleSubmit(onCreate)}
+						disabled={loading}
 					>
 						Request
 					</Button>

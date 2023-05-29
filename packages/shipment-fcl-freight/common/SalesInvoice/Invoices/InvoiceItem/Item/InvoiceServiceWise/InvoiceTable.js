@@ -58,7 +58,6 @@ export const InvoiceTable = (serviceItem = {}) => {
 					maximumFractionDigits : 2,
 				},
 			})} (${item?.tax_percent || 0}%)`,
-
 			span: 1,
 		},
 		{
@@ -72,7 +71,6 @@ export const InvoiceTable = (serviceItem = {}) => {
 					maximumFractionDigits : 2,
 				},
 			}),
-
 			span: 1,
 		},
 	];

@@ -93,6 +93,7 @@ function OTPVerification({
 				<Modal
 					show={showOtpModal}
 					onClose={() => setShowOTPModal(false)}
+					closeOnOuterClick={false}
 				>
 					<Modal.Header title="Select user to send OTP" />
 
@@ -125,6 +126,7 @@ function OTPVerification({
 					show={showOtpModal}
 					onClose={() => setModalIsOpen(false)}
 					className={styles.otp_modal}
+					closeOnOuterClick={false}
 				>
 					<Modal.Header title={title} />
 

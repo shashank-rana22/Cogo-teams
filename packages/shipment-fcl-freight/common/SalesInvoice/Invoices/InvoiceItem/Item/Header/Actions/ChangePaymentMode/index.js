@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 
 import useUpdateInvoicePaymentMode from '../../../../../../../../hooks/useUpdateInvoicePaymentMode';
 
+const optionsToShow = {
+	credit : { label: 'Cash', value: 'cash' },
+	cash   : { label: 'Deferred Payment', value: 'credit' },
+};
+
 function ChangePaymentMode({
 	show = false,
 	setShow = () => {},
@@ -11,11 +16,6 @@ function ChangePaymentMode({
 }) {
 	const [check, setCheck] = useState(!invoice?.paymentMode);
 	const [value, setValue] = useState('');
-
-	const optionsToShow = {
-		credit : { label: 'Cash', value: 'cash' },
-		cash   : { label: 'Deferred Payment', value: 'credit' },
-	};
 
 	const options = [optionsToShow.cash, optionsToShow.credit];
 

@@ -102,7 +102,7 @@ function Edit({
 							className={cl`${styles[CN_STATUS_MAPPING[status]]} ${styles.status_text
 							}`}
 						>
-							{status === 'rejected' ? <div>!</div> : null}
+							{status === 'rejected' ? '!' : null}
 							{startCase(CN_STATUS_MAPPING[status])}
 						</div>
 					</header>
