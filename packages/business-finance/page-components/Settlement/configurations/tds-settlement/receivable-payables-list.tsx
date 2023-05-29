@@ -1,6 +1,6 @@
 import { Pill, Tooltip, cl } from '@cogoport/components';
-// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-// import formatDate from '@cogoport/globalization/utils/formatDate';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
 import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
@@ -41,11 +41,11 @@ const receivablesPayablesColumn = () => (
 			id       : 'transactionDate',
 			accessor : (row) => (
 				<div className={styles.expense_text_style}>
-					{/* {(formatDate({
+					{(formatDate({
 						date       : row?.transactionDate,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 						formatType : 'date',
-					})) || ''} */}
+					})) || ''}
 				</div>
 
 			),
@@ -56,11 +56,11 @@ const receivablesPayablesColumn = () => (
 			accessor : (row) => (
 
 				<div className={styles.expense_text_style}>
-					{/* {(formatDate({
+					{(formatDate({
 						date       : row?.dueDate,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 						formatType : 'date',
-					})) || ''} */}
+					})) || ''}
 				</div>
 			),
 		},

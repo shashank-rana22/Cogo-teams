@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf, useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
@@ -53,28 +53,28 @@ const useTdsSettlement = ({
 			try {
 				const response = await trigger({
 					params: {
-						accMode : active,
+						accMode: active,
 						orgId,
-						// startDate:
-						// date
-						// && formatDate({
-						// 	date       : date?.startDate,
-						// 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-						// 	timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
-						// 	formatType : 'dateTime',
-						// 	separator  : ' ',
-						// }),
-						// endDate:
-						// date
-						// && formatDate({
-						// 	date       : date?.endDate,
-						// 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-						// 	timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
-						// 	formatType : 'dateTime',
-						// 	separator  : ' ',
-						// }),
-						query   : query || undefined,
-						page    : pageIndex,
+						startDate:
+						date
+						&& formatDate({
+							date       : date?.startDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
+							formatType : 'dateTime',
+							separator  : ' ',
+						}),
+						endDate:
+						date
+						&& formatDate({
+							date       : date?.endDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
+							formatType : 'dateTime',
+							separator  : ' ',
+						}),
+						query : query || undefined,
+						page  : pageIndex,
 					},
 				});
 				setApiTdsData(response.data);
@@ -92,25 +92,25 @@ const useTdsSettlement = ({
 					params: {
 						orgId,
 						accMode: active,
-						// startDate:
-						// date
-						// && formatDate({
-						// 	date       : date?.startDate,
-						// 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-						// 	timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-						// 	formatType : 'dateTime',
-						// 	separator  : ' ',
-						// }),
+						startDate:
+						date
+						&& formatDate({
+							date       : date?.startDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+							formatType : 'dateTime',
+							separator  : ' ',
+						}),
 
-						// endDate:
-						// date
-						// && formatDate({
-						// 	date       : date?.endDate,
-						// 	dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-						// 	timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
-						// 	formatType : 'dateTime',
-						// 	separator  : ' ',
-						// }),
+						endDate:
+						date
+						&& formatDate({
+							date       : date?.endDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
+							formatType : 'dateTime',
+							separator  : ' ',
+						}),
 						query: query || undefined,
 					},
 				});
