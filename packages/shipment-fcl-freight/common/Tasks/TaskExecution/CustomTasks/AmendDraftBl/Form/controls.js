@@ -6,7 +6,6 @@ const controls = [
 		size  : 'sm',
 		span  : 6,
 		rules : { required: { value: true, message: 'BL Number is required' } },
-
 	},
 	{
 		label : 'Container Quantity',
@@ -15,7 +14,6 @@ const controls = [
 		span  : 6,
 		size  : 'sm',
 		rules : { required: { value: true, message: 'Container Quantity is required', min: 1 } },
-
 	},
 	{
 		name  : 'url',

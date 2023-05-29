@@ -75,6 +75,7 @@ function HBLCreate({
 							onClose={() => setShow(false)}
 							className={styles.custom_modal}
 							showCloseIcon={false}
+							closeOnOuterClick={false}
 						>
 							<Modal.Header title={headerAction()} />
 							<Modal.Body>
