@@ -36,6 +36,10 @@
         "action_buttons": {
             "reallocate": false,
             "review_comments": false
+        },
+        "add_rate": {
+            "status::amendment_requested_by_importer_exporter": false,
+            "status::cancelled_by_supplier": false
         }
     }
 }
