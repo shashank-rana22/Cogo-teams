@@ -1,20 +1,28 @@
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { startCase } from '@cogoport/utils';
 import { useContext, useState } from 'react';
 
 import extraApiPayload from '../utils/extra-api-payload';
 import formatRawValues from '../utils/format-raw-payload';
+import formatForTrucking from '../utils/format-trucking-payload';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
 
 const shipmentRefetchTasks = [
 	'confirm_booking',
 	'mark_confirmed',
-	'upload_draft_bill_of_lading',
-	'update_airway_bill_number',
+];
+
+const TRUCKING_TASK = [
+	'upload_lorry_receipt',
+	'upload_proof_of_delivery',
+	'mark_completed',
+	'upload_eway_bill_copy',
+	'upload_commercial_invoice',
+	'confirmation_on_services_taken',
 ];
 
 function useHandleSubmit({
@@ -37,12 +45,17 @@ function useHandleSubmit({
 	} = useContext(ShipmentDetailContext);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : finalConfig.end_point || 'update_shipment_pending_task',
+		url    : finalConfig.end_point || '/update_shipment_pending_task',
 		method : 'POST',
 	}, { manual: true });
 
 	const [{ loading: loadingTask }, triggerTask] = useRequest({
-		url    : 'update_shipment_pending_task',
+		url    : '/update_shipment_pending_task',
+		method : 'POST',
+	}, { manual: true });
+
+	const [triggerBulkUpdate] = useRequest({
+		url    : '/bulk_update_shipment_services',
 		method : 'POST',
 	}, { manual: true });
 
@@ -82,6 +95,7 @@ function useHandleSubmit({
 			finalPayload = extraApiPayload(
 				rawValues,
 				finalConfig?.end_point,
+				task,
 			);
 
 			finalPayload = {
@@ -90,16 +104,25 @@ function useHandleSubmit({
 			};
 		}
 
+		let truckingPayload = {};
+		if (TRUCKING_TASK.includes(task.task)) {
+			truckingPayload = formatForTrucking(task, rawValues, getApisData);
+		}
+
 		try {
-			const skipUpdateTask = finalConfig?.end_point === 'send_nomination_notification'
-				&& task?.task === 'mark_confirmed';
+			if (
+				TRUCKING_TASK.includes(task.task)
+				&& Object.keys(truckingPayload).length
+			) {
+				await triggerBulkUpdate(truckingPayload);
+			}
 
 			const res = await trigger({
 				data: finalPayload,
 			});
 
 			if (!res.hasError) {
-				if (finalConfig.end_point && !skipUpdateTask) {
+				if (finalConfig.end_point) {
 					await triggerTask({
 						data: isLastStep
 							? { id: task?.id }
@@ -112,11 +135,7 @@ function useHandleSubmit({
 				}
 
 				if (isLastStep) {
-					if (skipUpdateTask && res?.data?.message) {
-						Toast.info('Notification sent to agent');
-					} else {
-						Toast.success('Task completed Successfully !');
-					}
+					Toast.success('Task completed Successfully !');
 					onCancel();
 				}
 
@@ -124,7 +143,7 @@ function useHandleSubmit({
 				try {
 					const rpaMappings = getRpaMappings(task, shipment_data, rawValues);
 					if (rpaMappings) {
-						await submitShipmentMapping(rpaMappings);
+						// await submitShipmentMapping(rpaMappings);
 					}
 				} catch (err) {
 					toastApiError(err);

@@ -55,7 +55,7 @@ function useHandleSubmit({
 	}, { manual: true });
 
 	const [triggerBulkUpdate] = useRequest({
-		url    : 'bulk_update_shipment_services',
+		url    : '/bulk_update_shipment_services',
 		method : 'POST',
 	}, { manual: true });
 
