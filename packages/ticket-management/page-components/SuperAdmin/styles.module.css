@@ -1,6 +1,9 @@
-.title {
-	margin-bottom: 12px;
-	font-size: 20px;
-	font-weight: 600;
-	color: #221f20;
+.container {
+	position: relative
+}
+
+.date_filter{
+	position: absolute;
+	top: 0;
+	right: 0;
 }

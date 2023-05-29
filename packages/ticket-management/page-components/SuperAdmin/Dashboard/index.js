@@ -5,8 +5,8 @@ import OverallStats from './OverallStats';
 import styles from './styles.module.css';
 import Widget from './Widget';
 
-function Dashboard() {
-	const { data, loading } = useGetDashboard();
+function Dashboard({ date }) {
+	const { data, loading } = useGetDashboard({ date });
 
 	const {
 		CustomerSatisfactionStats, TicketCount, TopCategory,

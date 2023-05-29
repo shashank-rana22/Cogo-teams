@@ -4,7 +4,9 @@ import {
 	useCallback,
 } from 'react';
 
-const useGetDashboard = () => {
+const useGetDashboard = ({ date }) => {
+	const { startDate, endDate } = date || {};
+
 	const [{ data, loading }, trigger] = useTicketsRequest({
 		url     : '/dashboard',
 		method  : 'get',
@@ -15,14 +17,14 @@ const useGetDashboard = () => {
 		try {
 			await trigger({
 				params: {
-					StartDate : '',
-					EndDate   : '',
+					StartDate : startDate,
+					EndDate   : endDate,
 				},
 			});
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [trigger]);
+	}, [trigger, startDate, endDate]);
 
 	useEffect(() => {
 		fetchTickets();
