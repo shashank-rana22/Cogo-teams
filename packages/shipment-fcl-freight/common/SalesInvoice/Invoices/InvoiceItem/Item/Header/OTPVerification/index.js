@@ -123,7 +123,7 @@ function OTPVerification({
 
 			{modalIsOpen ? (
 				<Modal
-					show={showOtpModal}
+					show={modalIsOpen}
 					onClose={() => setModalIsOpen(false)}
 					className={styles.otp_modal}
 					closeOnOuterClick={false}
