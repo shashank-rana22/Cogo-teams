@@ -111,7 +111,7 @@ export const ARCHIVE_MONTH_BOOKED = [
 					placement="bottom"
 					content={renderContent()}
 				>
-					<div style={{ display: 'flex', cursor: 'pointer' }}>
+					<div className={styles.cursor}>
 						<ValuePercentage data={original} keys="variance" />
 						<div><IcMArrowRotateDown /></div>
 					</div>
@@ -325,7 +325,7 @@ export const ARCHIVE_MONTH_ACCRUED = [
 					placement="bottom"
 					content={renderContent()}
 				>
-					<div style={{ display: 'flex', cursor: 'pointer' }}>
+					<div className={styles.cursor}>
 						<ValuePercentage data={original} keys="variance" />
 						<div><IcMArrowRotateDown /></div>
 					</div>

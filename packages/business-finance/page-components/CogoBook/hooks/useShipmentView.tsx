@@ -34,7 +34,7 @@ const useShipmentView = ({ filters, checkedRows, setCheckedRows, setBulkSection,
 		year = '', month = '', shipmentType = '',
 		profitAmount = '', profitType = '', tradeType = '', service = '', range,
 		jobState = '', query = '', page, date, profitPercent = '', profitPercentUpper = '', profitAmountUpper = '',
-		sortType = '', sortBy = '', entity = '', channel = '', milestone,
+		sortType = '', sortBy = '', entity = '', channel = '', milestone = '',
 	} = filters || {};
 
 	const entityDetails = GLOBAL_CONSTANTS.cogoport_entities[entity] || {};
