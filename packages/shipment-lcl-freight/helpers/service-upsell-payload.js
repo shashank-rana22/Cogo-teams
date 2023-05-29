@@ -1,9 +1,11 @@
-const typeNumberFields = ['length', 'width', 'height', 'packages_count', 'package_weight', 'trucks_count'];
+import { HAZ_CLASSES } from '@cogoport/globalization/constants/commodities';
+
+const TYPE_NUMBER_FIELDS = ['length', 'width', 'height', 'packages_count', 'package_weight', 'trucks_count'];
 
 const formattedAsNumberData = (values) => {
 	const formattedValues = {};
 	Object.entries(values).forEach(([key, val]) => {
-		if (typeNumberFields.includes(key) && typeof val === 'string') {
+		if (TYPE_NUMBER_FIELDS.includes(key) && typeof val === 'string') {
 			formattedValues[key] = parseInt(val, 10);
 		} else {
 			formattedValues[key] = val;
@@ -26,12 +28,13 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 	} = primary_service || {};
 
 	const common = {
-		commodity,
-		volume : Number(volume),
-		weight : Number(weight),
-		status : 'active',
+		commodity : commodity !== 'all_commodity' ? commodity : 'general',
+		volume    : Number(volume),
+		weight    : Number(weight),
+		status    : 'active',
 		trade_type,
 	};
+
 	const common2 = {
 		bls_count      : Number(bls_count || 1),
 		packages_count : Number(packages_count || 1),
@@ -57,12 +60,14 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 				origin_location_id : formValues?.location_id,
 				destination_country_id,
 				...common,
+				commodity          : HAZ_CLASSES.includes(commodity) ? commodity : null,
 				packages           : formValues?.packages?.map((obj) => formattedAsNumberData(obj)),
 			}];
 		}
 		return [{
 			destination_location_id : formValues?.location_id,
 			origin_country_id,
+			commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,
 			...common,
 			packages                : formValues?.packages?.map((obj) => formattedAsNumberData(obj)),
 		}];
@@ -77,6 +82,8 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 				truck_type              : formValues?.truck_type,
 				trucks_count            : Number(formValues?.trucks_count),
 				...common,
+				commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,
+
 			}];
 		} return [{
 			destination_location_id : formValues?.location_id,
@@ -85,6 +92,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 			truck_type              : formValues?.truck_type,
 			trucks_count            : Number(formValues?.trucks_count),
 			...common,
+			commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,
 		}];
 	}
 
@@ -94,10 +102,9 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 				trade_type === 'export'
 					? primary_service?.origin_port?.id
 					: primary_service?.destination_port?.id,
-			shipping_line_id : primary_service?.shipping_line?.id,
+			shipping_line_id: primary_service?.shipping_line?.id,
 			...common,
 			...common2,
-			commodity        : commodity && commodity !== 'all_commodity' ? commodity : 'general',
 		}];
 	}
 

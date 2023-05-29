@@ -30,11 +30,11 @@ export default function useGetShipment({ defaultParams = {}, defaultFilters = {}
 	return {
 		isGettingShipment,
 		refetch               : getShipment,
-		// documents             : dummyData?.documents,
+		documents             : data?.documents,
 		primary_service       : data?.primary_service_detail,
 		shipment_data         : data?.summary,
 		document_delay_status : data?.document_delay_status,
-		// booking_note_details  : dummyData?.booking_note_details,
+		booking_note_details  : data?.booking_note_details,
 		data,
 	};
 }
