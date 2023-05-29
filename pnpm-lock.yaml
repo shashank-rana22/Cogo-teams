@@ -167,6 +167,9 @@ importers:
       '@cogoport/request':
         specifier: workspace:0.1.0
         version: link:../common/request
+      '@cogoport/saas-subscription':
+        specifier: workspace:0.1.0
+        version: link:../packages/saas-subscription
       '@cogoport/saas-tools':
         specifier: workspace:0.1.0
         version: link:../packages/saas-tools
@@ -1537,6 +1540,36 @@ importers:
       react-d3-tree:
         specifier: ^3.5.2
         version: 3.5.2(react-dom@18.2.0)(react@18.2.0)
+
+  packages/saas-subscription:
+    dependencies:
+      '@cogoport/components':
+        specifier: ^1.0.417
+        version: 1.0.419(@babel/core@7.21.8)(@cogoport/icons-react@1.0.73)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/forms':
+        specifier: workspace:^0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: workspace:^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.68
+        version: 1.0.73(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../../common/next
+      '@cogoport/request':
+        specifier: workspace:^0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:^0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.10
+        version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
 
   packages/saas-tools:
     dependencies:
@@ -3297,6 +3330,41 @@ packages:
       react-dom: ^18.2.0
     dependencies:
       '@cogoport/icons-react': 1.0.71(react-dom@18.2.0)(react@18.2.0)
+      '@tippyjs/react': 4.2.6(react-dom@18.2.0)(react@18.2.0)
+      '@types/quill': 2.0.10
+      '@types/react-rte': 0.16.5
+      axios: 1.4.0
+      axios-hooks: 4.0.0(axios@1.4.0)(react@18.2.0)
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0(date-fns@2.30.0)(react@18.2.0)
+      react-dom: 18.2.0(react@18.2.0)
+      react-hook-form: 7.43.9(react@18.2.0)
+      react-quill: 2.0.0(react-dom@18.2.0)(react@18.2.0)
+      react-rte: 0.16.5(react-dom@18.2.0)(react@18.2.0)
+      react-table: 7.8.0(react@18.2.0)
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1(@babel/core@7.21.8)(react-dom@18.2.0)(react@18.2.0)
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components@1.0.419(@babel/core@7.21.8)(@cogoport/icons-react@1.0.73)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-BCEeLUJWMMAdWbxw4LFZEf5Z3ecTqvVAcBkc4j7yxT6W4m8aEIzOU7+Y7FLWdQw3tGJOyAUNhF9PE5njt4YQcQ==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react: ^18.2.0
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.73(react-dom@18.2.0)(react@18.2.0)
       '@tippyjs/react': 4.2.6(react-dom@18.2.0)(react@18.2.0)
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5
