@@ -1,6 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMPlus } from '@cogoport/icons-react';
-import React, { useState, useEffect, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 import upsellTransportation from '../helpers/upsellTransportation';
 
@@ -10,8 +10,6 @@ import styles from './styles.module.css';
 function AddNewService({
 	serviceObj = {},
 	upsellableService = {},
-	setShowTradeHeading = () => {},
-	showTradeHeading = {},
 }) {
 	const { cancelUpsellDestinationFor, cancelUpsellOriginFor } = upsellTransportation(serviceObj);
 
@@ -43,18 +41,6 @@ function AddNewService({
 	};
 
 	const showAddServiceBox = !cancelUpsell && isUpsellable;
-
-	const { origin, destination, main } = showTradeHeading;
-
-	useEffect(() => {
-		if (showAddServiceBox) {
-			setShowTradeHeading({
-				origin      : origin || upsellableService.trade_type === 'export',
-				destination : destination || upsellableService.trade_type === 'import',
-				main,
-			});
-		}
-	}, [showAddServiceBox, upsellableService.trade_type, setShowTradeHeading, origin, destination, main]);
 
 	return (
 		<>

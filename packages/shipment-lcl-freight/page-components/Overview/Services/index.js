@@ -1,6 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { startCase, isEmpty } from '@cogoport/utils';
-import React, { useContext, useState, useMemo } from 'react';
+import { startCase } from '@cogoport/utils';
+import React, { useContext, useMemo } from 'react';
 
 import AddNewService from './AddNewService';
 import helperFuncs from './helpers/getHelperFuncs';
@@ -13,24 +13,11 @@ function Services() {
 		isGettingShipment,
 		servicesList,
 		servicesLoading,
-		activeStakeholder,
 	} = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } = useMemo(() => helperFuncs(servicesList), [servicesList]);
 
 	const serviceCategories = Object.keys(serviceObj);
-
-	const [showTradeHeading, setShowTradeHeading] = useState({
-		origin      : !isEmpty(serviceObj.originServices),
-		destination : !isEmpty(serviceObj.destinationServices),
-		main        : true,
-	});
-
-	const isKam = ['booking_agent'].includes(activeStakeholder);
-
-	const heading = (serviceCategory) => (
-		<div className={styles.header}>{ startCase(serviceCategory)}</div>
-	);
 
 	return !servicesLoading && !isGettingShipment
 		? (
@@ -38,11 +25,7 @@ function Services() {
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<React.Fragment key={serviceCategory}>
-							{!isKam ? heading(serviceCategory) : null}
-
-							{ isKam
-							&& showTradeHeading[`${serviceCategory.split('Services')[0]}`]
-								? heading(serviceCategory) : null}
+							<div className={styles.header}>{startCase(serviceCategory)}</div>
 
 							<div className={styles.trade_services}>
 								{(Object.entries(serviceObj[serviceCategory])).map(([serviceKey, serviceData]) => (
@@ -59,8 +42,6 @@ function Services() {
 										key={`${service?.trade_type}_${service?.service_type}`}
 										upsellableService={service}
 										serviceObj={serviceObj}
-										setShowTradeHeading={setShowTradeHeading}
-										showTradeHeading={showTradeHeading}
 									/>
 								))}
 							</div>
