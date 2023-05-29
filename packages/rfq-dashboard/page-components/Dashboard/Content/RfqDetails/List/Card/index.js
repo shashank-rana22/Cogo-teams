@@ -1,5 +1,5 @@
 import { Checkbox } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMProfile } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
@@ -12,8 +12,6 @@ import styles from './styles.module.css';
 
 function Card({ item, handleCheck, checkedItems, partner_id }) {
 	const { stats = {} } = item;
-	console.log('item', item);
-	console.log('stats', stats);
 	const router = useRouter();
 
 	const { port_pair_count = {} } = item;
