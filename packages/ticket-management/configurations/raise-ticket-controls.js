@@ -1,6 +1,6 @@
 import { asyncFieldsTicketTypes } from '@cogoport/forms';
 
-import useGetAsyncTicketOptions from '../hooks/useGetAsyncTicketOptions';
+import useGetAsyncTicketOptions from '../utils/useGetAsyncTicketOptions';
 
 const useRaiseTicketControls = () => {
 	const loadOptions = useGetAsyncTicketOptions({ ...asyncFieldsTicketTypes() });
