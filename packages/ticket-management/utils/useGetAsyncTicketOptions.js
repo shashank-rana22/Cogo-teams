@@ -13,7 +13,7 @@ function useGetAsyncTicketOptions({
 	qFilterKey = 'q',
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
-	const [storeoptions, setstoreoptions] = useState([]);
+	const [storeOptions, setStoreOptions] = useState([]);
 
 	const [{ data, loading }] = useTicketsRequest({
 		url    : endpoint,
@@ -33,7 +33,7 @@ function useGetAsyncTicketOptions({
 	}, { manual: true });
 
 	useEffect(() => {
-		setstoreoptions((p) => [...p, ...options]);
+		setStoreOptions((p) => [...p, ...options]);
 	}, [options, optionValues]);
 
 	const onSearch = (inputValue) => {
@@ -45,7 +45,7 @@ function useGetAsyncTicketOptions({
 			let unorderedHydratedValue = [];
 			const toBeFetched = [];
 			value.forEach((v) => {
-				const singleHydratedValue = storeoptions.find((o) => o?.[valueKey] === v);
+				const singleHydratedValue = storeOptions.find((o) => o?.[valueKey] === v);
 				if (singleHydratedValue) {
 					unorderedHydratedValue.push(singleHydratedValue);
 				} else {
@@ -57,7 +57,7 @@ function useGetAsyncTicketOptions({
 				res = await triggerSingle({
 					params: { ...params, [valueKey]: toBeFetched },
 				});
-				storeoptions.push(...res?.data?.items || []);
+				storeOptions.push(...res?.data?.items || []);
 			}
 			unorderedHydratedValue = unorderedHydratedValue.concat(res?.data?.items || []);
 
