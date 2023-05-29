@@ -1,10 +1,10 @@
 import { Input, ButtonIcon, Table, Breadcrumb, Pagination } from '@cogoport/components';
-import { IcMArrowRotateUp, IcMSearchlight } from '@cogoport/icons-react';
+import { IcMSearchlight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 import useQuestionSet from './useQuestionSet';
 
-function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
+function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch, sortFilter, setSortFilter }) {
 	const {
 		data,
 		debounceQuery,
@@ -12,10 +12,8 @@ function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
 		setInput,
 		loading,
 		columns,
-		handleSort,
 		setParams,
-		sort,
-	} = useQuestionSet({ idArray, watch, setIdArray });
+	} = useQuestionSet({ idArray, watch, setIdArray, sortFilter, setSortFilter });
 
 	const { page = 0, page_limit: pageLimit = 0, total_count = 0, list } = data || {};
 	return (
@@ -45,29 +43,6 @@ function QuestionSet({ setIdArray, setShowQuestionSet, idArray, watch }) {
 					value={input}
 					className={styles.input}
 				/>
-
-				<div
-					role="presentation"
-					onClick={handleSort}
-					className={styles.filter}
-				>
-					<IcMArrowRotateUp
-						width={16}
-						height={16}
-						fill="#393f70"
-						style={{
-							transition : 'transform 0.5s',
-							cursor     : 'pointer',
-							transform  : sort ? 'rotate(180deg)' : '',
-						}}
-					/>
-
-					<span
-						className={styles.span_text}
-					>
-						Sort By
-					</span>
-				</div>
 			</div>
 
 			<Table

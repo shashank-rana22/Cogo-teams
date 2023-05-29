@@ -11,14 +11,7 @@ export default function useCallApi({
 
 	const debounceQuery = useRef({ q: filters.q });
 
-	const scopeRef = useRef({ scope });
-
 	useEffect(() => {
-		if (!scope && scopeRef.current.scope === 'none') {
-			return;
-		}
-		scopeRef.current.scope = 'none';
-
 		if (debounceQuery.current.q !== filters.q) {
 			clearTimeout(debounceQuery.current.timerId);
 

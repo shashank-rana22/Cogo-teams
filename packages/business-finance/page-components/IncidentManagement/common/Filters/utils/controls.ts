@@ -29,6 +29,14 @@ export const requestControls = (isSettlementExecutive = false) => {
 				value : 'SEZ_APPROVAL',
 				label : 'Sez Approval',
 			},
+			{
+				value : 'ADVANCE_SECURITY_DEPOSIT',
+				label : 'Advance Container Security Deposit',
+			},
+			{
+				value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
+				label : 'Advance Container Security Deposit Refund',
+			},
 		];
 	}
 
@@ -92,6 +100,14 @@ export const remainControls = (isSettlementExecutive = false) => {
 			{
 				value : 'SEZ_APPROVAL',
 				label : 'Sez Approval',
+			},
+			{
+				value : 'ADVANCE_SECURITY_DEPOSIT',
+				label : 'Advance Container Security Deposit',
+			},
+			{
+				value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
+				label : 'Advance Container Security Deposit Refund',
 			},
 		];
 	}

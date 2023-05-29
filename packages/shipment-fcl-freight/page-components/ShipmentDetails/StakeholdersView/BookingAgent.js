@@ -7,6 +7,8 @@ import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
 
+import CancelDetails from '../../../common/CancelDetails';
+import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
@@ -23,7 +25,7 @@ const services_additional_methods = ['stakeholder', 'service_objects', 'booking_
 
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
-	const [activeTab, setActiveTab] = useState('overview');
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 
@@ -114,6 +116,10 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 
 					<ShipmentChat />
 				</div>
+
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
+
+				<DocumentHoldDetails />
 
 				<div className={styles.header}>
 					<ShipmentHeader />

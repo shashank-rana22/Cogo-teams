@@ -10,20 +10,19 @@ import useListTasksHelper from './useListTasksHelper';
 
 function List() {
 	const {
-		count,
-		completedTaskCount,
+		count = 0,
+		completedTaskCount = 0,
 		tasksList = [],
-		loading,
+		loading = true,
 		taskListRefetch = () => {},
-		hideCompletedTasks,
+		hideCompletedTasks = false,
 		setHideCompletedTasks = () => {},
 		handleClick = () => {},
 		selectedTaskId,
 		setSelectedTaskId = () => {},
-		shipment_data = {},
-		showMyTasks,
+		showMyTasks = true,
 		setShowMyTasks = () => {},
-		selectedMail,
+		selectedMail = [],
 		setSelectedMail = () => {},
 	} = useListTasksHelper();
 
@@ -65,6 +64,7 @@ function List() {
 
 						{!selectedTaskId ? (tasksList || []).map((task) => (
 							<Card
+								key={task?.id}
 								task={task}
 								handleClick={handleClick}
 								loading={loading}
@@ -78,7 +78,6 @@ function List() {
 									handleClick={handleClick}
 									isTaskOpen
 									loading={loading}
-									shipment_data={shipment_data}
 								/>
 
 								<TaskExecution

@@ -15,7 +15,7 @@ const useCreateShipmentDocument = () => {
 			listAPI({ filters: {} });
 			Toast.success('Document Created Successfully');
 		} catch (err) {
-			Toast.error(err || 'Failed to Upload');
+			Toast.error(err?.message || 'Failed to Upload');
 		}
 	};
 

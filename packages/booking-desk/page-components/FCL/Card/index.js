@@ -44,7 +44,7 @@ export default function Card({ item = {}, couldBeCardsCritical = false, activeTa
 				<div className={card_footer}>
 					Approved by RD at:
 					{' '}
-					{format(item.approved_at, 'dd MMM yyyy | hh:mm aaa', null, true)}
+					{format(item.approved_at, 'dd MMM yyyy | hh:mm aaa')}
 				</div>
 			) : null}
 		</div>

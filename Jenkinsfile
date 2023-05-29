@@ -47,13 +47,13 @@ pipeline {
                 git checkout ${COMMIT_ID} && \
                 source /home/${SERVER_NAME}/.nvm/nvm.sh && \
                 nvm use 18 && \
-                pnpm i && \
+                pnpm i --frozen-lockfile	 && \
                 pnpm run deploy
                 \""""
             }
             post {
                 success {
-                    office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Successfully deployed commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server **${SERVER_NAME}** successfully", color:  '#66ff66'
+                    office365ConnectorSend webhookUrl: "${TEAMS_WEBHOOK_URL}", message: "## Successfully deployed commit *${COMMIT_ID}* of branch **${BRANCH_NAME}** on server **${SERVER_NAME}**", color:  '#66ff66'
                 }
                 
                 failure {

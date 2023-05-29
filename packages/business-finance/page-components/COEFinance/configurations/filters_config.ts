@@ -20,6 +20,7 @@ export const FILTERS : ControlProps[] = [
 					{ value: 'lcl_freight', label: 'LCL' },
 					{ value: 'air_freight', label: 'AIR' },
 					{ value: 'trailer_freight', label: 'Container Transportation' },
+					{ value: 'rail_domestic_freight', label: 'Rail Domestic Freight' },
 					{ value: 'ftl_freight', label: 'FTL' },
 					{ value: 'ltl_freight', label: 'LTL' },
 					{ value: 'haulage_freight', label: 'Rail Haulage' },

@@ -1,10 +1,9 @@
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { format } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
-
-import { entityMappingData } from '../P&L/PLStatement/constant';
 
 interface GlobalInterface {
 	page?:number
@@ -48,6 +47,10 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		entity,
 	} = globalFilters || {};
 
+	const entityDetails = GLOBAL_CONSTANTS.cogoport_entities[entity] || {};
+
+	const { id: entityId } = entityDetails;
+
 	useEffect(() => {
 		debounceQuery(search !== '' ? search : undefined);
 	}, [debounceQuery, search]);
@@ -84,14 +87,14 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 				params: {
 					serviceType : serviceType || undefined,
 					entityCode  : entity || undefined,
-					entityId    : entityMappingData[entity] || undefined,
+					entityId    : entityId || undefined,
 				},
 			});
 			setApiData(res.data);
 		} catch {
 			setApiData({ list: [], totalRecords: 0 });
 		}
-	}, [api, entity, serviceType]);
+	}, [api, entity, serviceType, entityId]);
 
 	const [
 		{ loading:drillDownArchiveLoading },
@@ -100,7 +103,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		{
 			url     : 'pnl/accrual/archive-shipment/list',
 			method  : 'get',
-			authKey : 'get_pnl_accrual_archive-shipment_list',
+			authKey : 'get_pnl_accrual_archive_shipment_list',
 		},
 		{ manual: true },
 	);
@@ -109,7 +112,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 		try {
 			const res = await drillDownArchiveTrigger({
 				params: {
-					period         : month.period || undefined,
+					period         : format(month.period, 'yyyy-MM-dd') || undefined,
 					startDate      : date ? format(date?.startDate, 'yyyy-MM-dd') : undefined,
 					endDate        : date ? format(date?.endDate, 'yyyy-MM-dd') : undefined,
 					archivedStatus : archivedStatus || undefined,
@@ -119,7 +122,7 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 					Percentage     : Percentage === '' ? undefined : Percentage,
 					Range          : Range || undefined,
 					entityCode     : entity || undefined,
-					entityId       : entityMappingData[entity] || undefined,
+					entityId       : entityId || undefined,
 				},
 			});
 			setDrillData(res.data);
@@ -128,7 +131,16 @@ const useArchive = ({ toggleValue = '', setShowTab }) => {
 				Toast.error(error?.response?.data?.message);
 			}
 		}
-	}, [Amount, Percentage, Range, archivedStatus, date, drillDownArchiveTrigger, query, serviceType, entity]);
+	}, [Amount,
+		Percentage,
+		Range,
+		archivedStatus,
+		date,
+		drillDownArchiveTrigger,
+		query,
+		serviceType,
+		entity,
+		entityId]);
 
 	useEffect(() => {
 		if (!particularMonth) {

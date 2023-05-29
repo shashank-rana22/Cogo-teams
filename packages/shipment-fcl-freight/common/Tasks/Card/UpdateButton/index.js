@@ -18,7 +18,6 @@ function UpdateButton({
 	handleClick = () => {},
 	handleChange = () => {},
 	hideButton = false,
-	shipment_type,
 	show = false,
 }) {
 	if (hideButton) {
@@ -46,8 +45,8 @@ function UpdateButton({
 	const disableTask = disabledStakeholders.includes(task?.assigned_stakeholder);
 
 	if (
-		rpaSupportedTasks.includes(task?.task)
-		&& (task?.task !== 'upload_si' || shipment_type === 'fcl_freight')
+		rpaSupportedTasks.includes(task.task)
+		&& (task.task !== 'upload_si')
 	) {
 		return (
 			<div className={styles.container}>

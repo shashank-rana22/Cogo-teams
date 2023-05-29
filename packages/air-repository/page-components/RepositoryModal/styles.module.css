@@ -1,0 +1,21 @@
+.modal_container {
+	padding: 20px;
+}
+
+.modal_header {
+	font-weight: 500;
+}
+
+.modal_header::after {
+	display: block;
+	width: 10%;
+	height: 2px;
+	content: "";
+	background: #f68b21;
+}
+
+.modal_footer {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 20px;
+}

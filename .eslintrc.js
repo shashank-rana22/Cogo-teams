@@ -1,7 +1,9 @@
 module.exports = {
 	extends : ['@cogoport/eslint-config/next'],
 	rules   : {
-		'react/no-danger': 'off',
+		'react/no-danger' : 'off',
+		'react/jsx-key'   : 'error',
+
 	},
 	ignorePatterns : ['cogo-control/dist/**/*', '!.stylelintrc.js'],
 	root           : true,
@@ -14,7 +16,8 @@ module.exports = {
 			files   : ['**/*.{ts,tsx}'],
 			extends : ['@cogoport/eslint-config/react-typescript'],
 			rules   : {
-				'react/no-danger': 'off',
+				'react/no-danger' : 'off',
+				'react/jsx-key'   : 'error',
 			},
 			env: {
 				browser : true,

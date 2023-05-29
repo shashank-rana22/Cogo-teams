@@ -1,8 +1,20 @@
+const checkIfServiceAlreadyPresent = (servicesObj, service) => {
+	if (service?.service_type in servicesObj) {
+		return !(servicesObj[service.service_type] || []).some((obj) => obj.id === service.id);
+	}
+	return true;
+};
+
+const tradeTypeBasedServiceType = {
+	import : 'fcl_freight_local_service_import',
+	export : 'fcl_freight_local_service_export',
+};
+
 const helperFuncs = (servicesList, possibleServices) => {
 	const serviceObj = {
-		originServices      : [],
-		mainServices        : [],
-		destinationServices : [],
+		originServices      : {},
+		mainServices        : {},
+		destinationServices : {},
 	};
 
 	const upsellServices = {
@@ -11,71 +23,66 @@ const helperFuncs = (servicesList, possibleServices) => {
 		destinationServices : [],
 	};
 
-	const checkIfServiceAlreadyPresent = (servicesArray, service) => {
-		let canPushService = true;
-		if (servicesArray[service.service_type]?.length) {
-			(servicesArray[service?.service_type] || []).forEach((obj) => {
-				if (obj.id === service.id) {
-					canPushService = false;
-				}
-			});
-		}
-		return canPushService;
-	};
-
 	const classifyTradeTypeBasedService = (serviceToIterate) => {
 		let isServiceAlreadyAdded = false;
 
 		(servicesList || []).forEach((service) => {
-			if (service?.service_type === serviceToIterate.service_type
-				&& ((serviceToIterate.trade_type === service?.trade_type)
-				|| (service?.service_type === 'fcl_freight_service'))) {
+			const { service_type, trade_type } = service || {};
+			if (service_type === serviceToIterate.service_type
+				&& ((serviceToIterate.trade_type === trade_type)
+				|| (service_type === 'fcl_freight_service'))) {
 				isServiceAlreadyAdded = true;
 
-				if (service?.trade_type === 'export' && !serviceToIterate.is_main) {
+				if (trade_type === 'export' && !serviceToIterate.is_main) {
 					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.originServices, service);
 
 					if (canPushService) {
-						if (Object.keys(serviceObj.originServices).includes(service?.service_type)) {
-							(serviceObj.originServices[service?.service_type]).push({
+						if (service_type in serviceObj.originServices) {
+							(serviceObj.originServices[service_type]).push({
 								...service,
 								display_label: serviceToIterate.display_label,
 							});
 						} else {
-							(serviceObj.originServices)[service?.service_type] = [{
+							serviceObj.originServices[service_type] = [{
 								...service,
 								display_label: serviceToIterate.display_label,
 							}];
 						}
 					}
-				} else 	if (service?.trade_type === 'import' && !serviceToIterate.is_main) {
+				} else 	if (trade_type === 'import' && !serviceToIterate.is_main) {
 					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.destinationServices, service);
 
 					if (canPushService) {
-						if (Object.keys(serviceObj.destinationServices).includes(service?.service_type)) {
-							(serviceObj.destinationServices[service?.service_type]).push({
+						if (service_type in serviceObj.destinationServices) {
+							(serviceObj.destinationServices[service_type]).push({
 								...service,
 								display_label: serviceToIterate.display_label,
 							});
 						} else {
-							(serviceObj.destinationServices)[service?.service_type] = [{
+							serviceObj.destinationServices[service_type] = [{
 								...service,
 								display_label: serviceToIterate.display_label,
 							}];
 						}
 					}
 				} else {
-					const canPushService = 	checkIfServiceAlreadyPresent(serviceObj.destinationServices, service);
+					const serviceType = trade_type in tradeTypeBasedServiceType
+						? tradeTypeBasedServiceType[trade_type]
+						: service_type;
+
+					const canPushService = checkIfServiceAlreadyPresent(
+						serviceObj.mainServices,
+						{ ...service, service_type: serviceType },
+					);
 
 					if (canPushService) {
-						if (Object.keys(serviceObj.mainServices).includes(service?.service_type)
-						&& serviceObj.mainServices?.[0]?.trade_type === serviceToIterate.trade_type) {
-							(serviceObj.mainServices[serviceToIterate.service_type]).push({
+						if (serviceType in serviceObj.mainServices) {
+							(serviceObj.mainServices[serviceType]).push({
 								...service,
 								display_label: serviceToIterate.display_label,
 							});
-						} else if (!Object.keys(serviceObj.mainServices).includes(service?.service_type)) {
-							(serviceObj.mainServices)[service?.service_type] = [{
+						} else {
+							(serviceObj.mainServices)[serviceType] = [{
 								...service,
 								display_label: serviceToIterate.display_label,
 							}];

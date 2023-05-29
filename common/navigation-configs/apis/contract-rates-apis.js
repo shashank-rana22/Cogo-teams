@@ -773,6 +773,11 @@ const apis = [
 		feature      : 'contract_rates',
 		service_name : 'contract',
 	},
+	{
+		api          : 'get_exchange_rate',
+		access_type  : 'private',
+		service_name : 'exchange_rate',
+	},
 ];
 
 export default apis;

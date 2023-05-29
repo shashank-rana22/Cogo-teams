@@ -1,0 +1,25 @@
+.button_style {
+	width: 100px;
+}
+
+.button_val {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	margin-top: 8px;
+}
+
+.button_container {
+	margin-top: 8px;
+}
+
+.style_cancel {
+	margin-right: 12px;
+}
+
+.generate_container {
+	display: flex;
+	flex-direction: column;
+	width: max-content;
+	margin: 8px;
+}

@@ -14,8 +14,14 @@ const firestoreWhatsappPath = '/customer_chat/whatsapp/rooms';
 
 const firestoreTelegramPath = '/customer_chat/telegram/rooms';
 
+const fireStoreShipmentReminderPath = '/customer_chat/shipment_reminder/agents';
+
+const cogoOneConstants = '/cogoone_constants';
 export const FIRESTORE_PATH = {
-	whatsapp      : firestoreWhatsappPath,
-	platform_chat : firestoreChatbotPath,
-	telegram      : firestoreTelegramPath,
+	whatsapp          : firestoreWhatsappPath,
+	platform_chat     : firestoreChatbotPath,
+	telegram          : firestoreTelegramPath,
+	shipment_reminder : fireStoreShipmentReminderPath,
+	cogoone_constants : cogoOneConstants,
+
 };

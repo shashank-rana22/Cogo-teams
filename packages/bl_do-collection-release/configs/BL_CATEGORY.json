@@ -1,0 +1,6 @@
+{
+    "bl_category" : [
+		{ "label": "HBL", "value": "house_bill_of_lading" },
+		{ "label": "MBL", "value": "bill_of_lading" }
+	]
+}

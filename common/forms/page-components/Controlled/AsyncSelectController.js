@@ -4,7 +4,7 @@ import AsyncSelect from '../Business/AsyncSelect';
 
 function AsyncSelectController(props) {
 	const {
-		name, control, rules, ...rest
+		name, control, rules, value, ...rest
 	} = props;
 
 	return (
@@ -12,11 +12,21 @@ function AsyncSelectController(props) {
 			control={control}
 			name={name}
 			rules={rules}
-			render={({ field: { onChange, value } }) => (
+			defaultValue={value}
+			render={({ field: { onChange, value: newValue } }) => (
 				<AsyncSelect
 					{...rest}
-					onChange={onChange}
-					value={value}
+					onChange={(val, obj) => {
+						if (typeof rest?.onChange === 'function') {
+							rest?.onChange(val, obj);
+							onChange(val, obj);
+						} else if (typeof rest?.handleChange === 'function') {
+							rest?.handleChange(val, obj);
+						} else {
+							onChange(val, obj);
+						}
+					}}
+					value={rest?.finalvalue || newValue}
 				/>
 			)}
 		/>

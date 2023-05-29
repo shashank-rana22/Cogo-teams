@@ -6,9 +6,18 @@
 	background: #fff;
 	border-radius: 0 0 8px 8px;
 
-	:global(.textarea) {
-		height: 120px;
-		border-radius: 6px;
+	:global {
+		.textarea {
+			min-height: 120px;
+			border-radius: 6px;
+		}
+
+		.ui_toggle_container {
+			position: relative;
+			top: 62px;
+			left: 22%;
+			width: fit-content;
+		}
 	}
 }
 
@@ -30,6 +39,14 @@
 	flex-flow: row wrap;
 	max-width: 74%;
 	margin-top: 28px;
+
+	:global {
+		.ui_badge_container {
+			margin-left: 4px;
+			font-size: 8px;
+			color: #fff;
+		}
+	}
 }
 
 .hawb_container_click {
@@ -115,5 +132,26 @@
 		font-size: 14px;
 		line-height: 150%;
 		color: #828282;
+	}
+}
+
+.sure_approve {
+	font-size: 16px;
+	line-height: 24px;
+	text-align: center;
+
+	span {
+		font-weight: 600;
+	}
+}
+
+.calcuate_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 20%;
+
+	:global(.ui_button_container) {
+		position: relative;
+		bottom: 42px;
 	}
 }

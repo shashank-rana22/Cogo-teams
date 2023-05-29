@@ -13,7 +13,7 @@ const getCreateTradePartnerParams = (values) => {
 		...restValues
 	} = values || {};
 
-	const [addressValue] = (address || '').split('::');
+	const [addressValue, pincode] = (address || '').split('::');
 
 	const params = {
 		address: addressValue,
@@ -26,6 +26,7 @@ const getCreateTradePartnerParams = (values) => {
 			alternate_mobile_number       : alternate_mobile_number?.number,
 		}),
 		...(ORG_ID_REQUIRED.includes(companyType) && { organization_id: organization_id || importer_exporter_id }),
+		...(companyType === 'historical' && pincode ? { pincode } : {}),
 		...restValues,
 	};
 

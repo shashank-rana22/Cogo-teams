@@ -1,7 +1,7 @@
 import { Avatar } from '@cogoport/components';
 import { format } from '@cogoport/utils';
 
-import timeLineFunctions from '../../../../../utils/timeLineFunctions';
+import getVoiceCallStatement from '../../../../../utils/getVoiceCallStatement';
 
 import styles from './styles.module.css';
 
@@ -15,10 +15,12 @@ function AgentTimeLine({ timeLineList = [] }) {
 					performed_by_data = {},
 					created_at,
 					conversation_started_at,
+					channel = '',
+					status = '',
+					user_data :{ name: voiceCallUserName = '' } = {},
 				} = item || {};
 				const { name : presentAgent } = agent_data || {};
 				const { name : previousAgent } = performed_by_data || {};
-				const { renderStatement } = timeLineFunctions();
 
 				return (
 					<>
@@ -34,11 +36,12 @@ function AgentTimeLine({ timeLineList = [] }) {
 						<div className={styles.main_card}>
 							<div className={styles.card}>
 								<div className={styles.title}>
-									{renderStatement({
-										type     : conversation_type,
-										present  : presentAgent,
-										previous : previousAgent,
-										startAt  : conversation_started_at,
+									{getVoiceCallStatement({
+										type            : conversation_type,
+										present         : presentAgent,
+										previous        : channel === 'voice_call' ? voiceCallUserName : previousAgent,
+										startAt         : conversation_started_at,
+										voiceCallStatus : status,
 									})}
 								</div>
 								<div className={styles.user_avatar}>

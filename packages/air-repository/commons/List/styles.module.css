@@ -1,0 +1,23 @@
+.pagination {
+	display: flex;
+	justify-content: flex-end;
+	padding: 16px;
+}
+
+.center {
+	align-items: center;
+	width: 0;
+	margin-left: 8px;
+}
+
+.flex {
+	width: var(--span) px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.scroll {
+	max-height: 600px;
+	overflow: auto;
+}
