@@ -1,11 +1,11 @@
 import { Modal, Button, Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
+import { Layout } from '@cogoport/ocean-modules';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState, useContext } from 'react';
 
 import useCreateShipmentCreditNote from '../../../../../../../hooks/useCreateShipmentCreditNote';
-import Layout from '../../../../../../Tasks/TaskExecution/helpers/Layout';
 import formatCreditNoteData from '../../../../../CreditNote/helpers/format-credit-note-data';
 import creditNoteControls from '../../../../../helpers/creditNoteControls';
 import generateDefaultValues from '../../../../../helpers/generateDefaultValuesOfCreditNote';
