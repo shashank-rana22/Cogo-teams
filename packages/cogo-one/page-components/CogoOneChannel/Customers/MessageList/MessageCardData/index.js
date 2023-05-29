@@ -1,9 +1,10 @@
-import { cl, Tooltip, Checkbox } from '@cogoport/components';
+import { cl, Tooltip, Checkbox, Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCPin, IcMPin, IcMShip } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import UserAvatar from '../../../../../common/UserAvatar';
-import { PLATFORM_MAPPING, ECLAMATION_SVG } from '../../../../../constants';
+import { PLATFORM_MAPPING } from '../../../../../constants';
 import updatePin from '../../../../../helpers/updatePin';
 import dateTimeConverter from '../../../../../utils/dateTimeConverter';
 import formatLastMessage from '../../../../../utils/formatLastMessage';
@@ -19,23 +20,18 @@ function MessageCardData({
 	firestore,
 	autoAssignChats = true,
 	handleCheckedChats = () => {},
+	source = '',
+	claimChat = () => {},
+	claimLoading = false,
 }) {
-	if (item?.id === 'CqOvd0ZUnfeRBO7YLB3I') {
-		console.log('autoAssignChats:', autoAssignChats);
-		console.log('firestore:', firestore);
-		console.log('setActiveMessage:', setActiveMessage);
-		console.log('userId:', userId);
-		console.log('activeCardId:', activeCardId);
-		console.log('item:', item);
-		console.log('handleCheckedChats:', handleCheckedChats);
-	}
-
+	const formattedData = getActiveCardDetails(item) || {};
 	const {
 		user_name = '',
 		organization_name = '',
 		user_type = '',
 		search_user_name = '',
-		chat_tags = [], chat_status = '',
+		chat_tags = [],
+		chat_status = '',
 		id = '',
 		channel_type = '',
 		new_message_sent_at = '',
@@ -44,8 +40,7 @@ function MessageCardData({
 		last_message_document = null,
 		new_message_count = 0,
 		is_likely_to_book_shipment = false,
-	} = getActiveCardDetails(item) || {};
-
+	} = formattedData || {};
 	const lastMessageVar = last_message_document || last_message;
 	const isImportant = chat_tags?.includes('important') || false;
 	const lastActive = new Date(new_message_sent_at);
@@ -69,11 +64,12 @@ function MessageCardData({
 			userId,
 		});
 	};
+	const isFlashMessages = source === 'flash_messages';
 
 	return (
 		<div
 			key={id}
-			className={styles.chat_card_main_container}
+			className={cl`${styles.chat_card_main_container} ${isFlashMessages ? styles.flash_height : ''}`}
 		>
 			{!autoAssignChats && (
 				<Checkbox
@@ -87,6 +83,7 @@ function MessageCardData({
 						${styles.card_container} 
 						${!autoAssignChats ? styles.card_with_checkbox : ''}
 						${checkActiveCard ? styles.active_card : ''} 
+						 ${isFlashMessages ? styles.flash_messages_padding : ''} 
 							`}
 				onClick={() => setActiveMessage(item)}
 			>
@@ -152,25 +149,39 @@ function MessageCardData({
 				{isImportant && (
 					<div className={styles.important_icon}>
 						<img
-							src={ECLAMATION_SVG}
+							src={GLOBAL_CONSTANTS.image_url.eclamation_svg}
 							alt="important"
 							width="10px"
 						/>
 					</div>
 				)}
-				<div className={styles.pinned_div}>
-					{pinnedTime[userId] > 0
-						? (
-							<IcCPin
-								onClick={(e) => updatePinnedChats(e, 'unpin')}
-							/>
-						) : (
-							<IcMPin
-								onClick={(e) => updatePinnedChats(e, 'pin')}
-							/>
-						)}
-				</div>
-
+				{!isFlashMessages ? (
+					<div className={styles.pinned_div}>
+						{pinnedTime[userId] > 0
+							? (
+								<IcCPin
+									onClick={(e) => updatePinnedChats(e, 'unpin')}
+								/>
+							) : (
+								<IcMPin
+									onClick={(e) => updatePinnedChats(e, 'pin')}
+								/>
+							)}
+					</div>
+				) : (
+					<Button
+						size="xs"
+						themeType="primary"
+						className={styles.claim_button_styles}
+						disabled={claimLoading}
+						onClick={(e) => {
+							e.stopPropagation();
+							claimChat(formattedData);
+						}}
+					>
+						CLAIM
+					</Button>
+				)}
 			</div>
 		</div>
 
