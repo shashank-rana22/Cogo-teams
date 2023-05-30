@@ -1,0 +1,12 @@
+.container{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    background-color: white;
+    justify-content: flex-end;
+    align-items: center;
+}
+
+.btn{
+    margin: 0px 10px;
+}
