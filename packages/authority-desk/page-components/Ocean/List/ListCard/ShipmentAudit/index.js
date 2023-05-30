@@ -12,6 +12,7 @@ import BlDetails from './BlDetails';
 import CustodyShipments from './CustodyShipments';
 import Invoices from './Invoices';
 import Organizations from './Organizations';
+import PocSop from './PocSop';
 import ReleaseCard from './ReleaseCard';
 import styles from './styles.module.css';
 
@@ -113,24 +114,31 @@ function ShipmentAudit({
 						</div>
 					</div>
 
-					<div className={styles.tabs}>
-						{Object.keys(tabs).map((tab) => (
-							<ClickableDiv
-								className={cl`${styles.tab} ${
-									tab === additionalTab
-										? styles.active
-										: ''
-								}`}
-								onClick={() => setAdditionalTab(tab)}
-							>
-								{tabs[tab]}
-							</ClickableDiv>
-						))}
+					<div className={styles.tabs_header}>
+
+						<div className={styles.tabs}>
+							{Object.keys(tabs).map((tab) => (
+								<ClickableDiv
+									key={tab}
+									className={cl`${styles.tab} ${
+										tab === additionalTab
+											? styles.active
+											: ''
+									}`}
+									onClick={() => setAdditionalTab(tab)}
+								>
+									{tabs[tab]}
+								</ClickableDiv>
+							))}
+						</div>
+						<PocSop shipment_data={item} primary_service={primary_service} role={role} />
 					</div>
 
 					<div className={styles.more_info}>
 						{moreInfoComponentMapping[additionalTab]}
+
 					</div>
+
 				</Modal.Body>
 
 				{role === 'credit_control' && isApprovalAllowed ? (

@@ -15,6 +15,10 @@
 	border-top: 1px solid #abcd62;
 }
 
+.container.cancelled {
+	border-top: 1px solid #b0b0b0;
+}
+
 .remaining_keys {
 	display: flex;
 	flex-wrap: wrap;

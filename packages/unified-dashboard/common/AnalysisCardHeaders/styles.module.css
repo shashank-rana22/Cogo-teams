@@ -1,0 +1,38 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 10px 10px 12px;
+	margin: 16px 0;
+	cursor: pointer;
+	border: 1px solid #cedcea;
+	border-radius: 4px;
+}
+
+.title_container {
+	display: flex;
+	align-items: center;
+}
+
+.title {
+	margin-right: 12px;
+	margin-left: 12px;
+	font-size: 16px;
+	font-weight: 500;
+}
+
+.revenue_icon {
+	width: 18px;
+	height: 18px;
+	margin-right: 12px;
+}
+
+.collapse_icon_active {
+	transition: transform 400ms;
+	transform: rotate(180deg);
+}
+
+.collapse_icon_inactive {
+	transition: transform 400ms;
+	transform: rotate(0deg);
+}

@@ -13,6 +13,7 @@ import {
 	GenerateFreightCertificate,
 	ChooseServiceProvider,
 	UploadDraftBL,
+	AmendDraftBl,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -120,7 +121,16 @@ function ExecuteTask({
 	}
 
 	if (task?.task === 'amend_draft_house_bill_of_lading') {
-		return <div>Amend draft bl flow</div>;
+		return (
+			<AmendDraftBl
+				task={task}
+				shipmentData={shipment_data}
+				primaryService={primary_service}
+				selectedMail={selectedMail}
+				clearTask={onCancel}
+				taskListRefetch={taskListRefetch}
+			/>
+		);
 	}
 
 	if (task.task === 'choose_service_provider') {

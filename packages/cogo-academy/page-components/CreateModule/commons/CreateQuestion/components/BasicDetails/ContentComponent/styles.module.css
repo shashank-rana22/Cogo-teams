@@ -25,6 +25,16 @@
 	display: flex;
 	flex-direction: column;
 	align-items: center;
+
+	:global {
+		.tippy-box {
+			max-width: 500px !important;
+
+			@media (max-width: 768px) {
+				max-width: 280px !important;
+			}
+		}
+	}
 }
 
 .button {
@@ -38,4 +48,21 @@
 .value {
 	margin-top: 8px;
 	font-weight: 600;
+}
+
+.tooltip_content {
+	align-items: center;
+	max-height: 300px;
+	margin: 6px 0;
+	overflow: scroll;
+}
+
+.styled_button {
+	padding: 2px 8px;
+	margin-top: 8px;
+	font-size: 10px;
+	color: #000;
+	cursor: pointer;
+	background-color: #dce1ff;
+	border-radius: 8px;
 }

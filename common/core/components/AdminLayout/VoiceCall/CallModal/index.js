@@ -1,74 +1,105 @@
 import { Modal, cl } from '@cogoport/components';
-import { IcMProfile, IcMMinus } from '@cogoport/icons-react';
-import { setProfileState } from '@cogoport/store/reducers/profile';
-import { startCase } from '@cogoport/utils';
-import React from 'react';
+import { useForm } from '@cogoport/forms';
+import { IcMMinus, IcMUserAllocations, IcMCall } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import hideNumber from '../../../../helpers/hideNumber';
+import { useGetControls } from '../configurations/group-call-controls';
+import secsToDurationConverter from '../utils/secsToDurationConverter';
 
+import Attendees from './Attendees';
+import ConferenceForm from './ConferenceForm';
 import styles from './styles.module.css';
 
 function CallModal({
-	dispatch,
-	profileData = {},
-	showCallModal,
-	name = '',
-	mobile_number = '',
-	mobile_country_code = '',
+	voice_call_recipient_data = {},
 	status = '',
-	handleEnd = () => {},
-	durationTime = () => {},
-	callLoading,
+	callLoading = false,
+	updateLiveCallStatusLoading = false,
+	updateLiveCallStatus,
+	localStateReducer,
+	counter,
+	hangUpCall,
+	hangUpLoading = false,
+	attendees = [],
 }) {
-	const handleClick = () => {
-		dispatch(
-			setProfileState({
-				...profileData,
-				voice_call: {
-					...profileData?.voice_call,
-					showCallModal : false,
-					minimizeModal : true,
-				},
-			}),
-		);
-	};
+	const { handleSubmit, control, formState: { errors }, watch, reset } = useForm();
+	const controls = useGetControls({ localStateReducer });
+	const { live_call_action_type = '' } = watch();
+	const {
+		mobile_number = '',
+		mobile_country_code = '',
+		userName = '',
+	} = voice_call_recipient_data || {};
 
+	const isInConferenceCall = !isEmpty(attendees) || false;
+
+	const hangUpFunc = () => {
+		if (!hangUpLoading && !callLoading) {
+			hangUpCall();
+		}
+	};
 	return (
 		<Modal
-			show={showCallModal}
-			size="sm"
+			show
 			className={styles.modal_styles}
+			scroll={false}
+			closeOnOuterClick={false}
 		>
 			<Modal.Body>
-				<IcMMinus
-					width={25}
-					height={25}
-					cursor="pointer"
-					onClick={handleClick}
-				/>
+				<div className={styles.minus_div}>
+					<IcMMinus
+						className={styles.minus_sign}
+						onClick={() => localStateReducer({ showCallModalType: 'minimizedModal' })}
+					/>
+				</div>
 				<div className={styles.content}>
-					<div className={styles.avatar}>
-						<IcMProfile width={40} height={40} />
+					<div className={cl`${styles.header_flex} ${isInConferenceCall ? styles.header_on_conference : ''}`}>
+						<div className={styles.avatar}>
+							<IcMUserAllocations width={43} height={43} fill="#888FD1" />
+						</div>
+						<div className={cl`${styles.user_details} 
+						${isInConferenceCall ? styles.user_details_on_conference : ''}`}
+						>
+							<div className={styles.user_name}>
+								{userName
+							|| `${mobile_country_code} ${mobile_number}` || 'Unknown User'}
+							</div>
+							<div className={styles.number}>
+								{mobile_country_code}
+								<span>{hideNumber(mobile_number)}</span>
+							</div>
+							<div className={styles.timer}>{secsToDurationConverter(status, counter)}</div>
+						</div>
 					</div>
-					<div className={styles.org_name}>
-						{name || 'Unknown User'}
-					</div>
-					<div className={styles.number}>
-						{mobile_country_code}
-						{' '}
-						{hideNumber(mobile_number)}
-					</div>
-					<div className={styles.status_div}>{startCase(status) || 'Connecting...'}</div>
-					<div className={styles.timer}>{durationTime()}</div>
-					<div className={styles.hang_up}>
-						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/hangUp.svg"
-							alt="hang-Up"
-							style={{ width: '50px', height: '50px' }}
-							role="presentation"
-							onClick={handleEnd}
-							className={cl`${callLoading ? styles.disable : ''}`}
-						/>
+					{isInConferenceCall &&	<Attendees attendees={attendees} />}
+					<div className={styles.footer} style={{ '--height': status ? '56%' : '30%' }}>
+						{status
+							? (
+								<ConferenceForm {...{
+									...(controls || {}),
+									control,
+									live_call_action_type,
+									reset,
+									updateLiveCallStatusLoading,
+									updateLiveCallStatus,
+									handleSubmit,
+									errors,
+								}}
+								/>
+							)
+							: <div className={styles.connecting}>Connecting...</div>}
+						{!live_call_action_type && (
+							<div
+								className={cl`${styles.end_call} 
+								${(hangUpLoading || callLoading) ? styles.disable : ''}`}
+								tabIndex={0}
+								role="button"
+								onClick={hangUpFunc}
+							>
+								<IcMCall className={styles.end_call_icon} />
+							</div>
+						)}
 					</div>
 				</div>
 			</Modal.Body>

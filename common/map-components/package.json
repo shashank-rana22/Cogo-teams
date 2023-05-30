@@ -1,0 +1,13 @@
+{
+	"name": "@cogoport/map-components",
+	"description": "General Map components",
+	"version": "0.0.1",
+	"main": "index.js",
+	"sideEffects": false,
+	"dependencies": {
+        "react": "18.2.0",
+		"@cogoport/utils": "^1.2.2",
+        "@cogoport/maps": "^1.0.2",
+        "@cogoport/icons-react": "^1.0.61"
+	}
+}

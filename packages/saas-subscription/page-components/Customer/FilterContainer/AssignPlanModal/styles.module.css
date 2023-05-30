@@ -1,0 +1,22 @@
+.col {
+	padding: 0 8px;
+	margin-bottom: 20px;
+}
+
+.label_container {
+	display: flex;
+	justify-content: space-between;
+
+	.label {
+		font-weight: 600;
+	}
+
+	.error {
+		font-size: 12px;
+		color: red;
+	}
+}
+
+.submit_btn {
+	margin-left: 10px;
+}

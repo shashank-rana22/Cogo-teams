@@ -8,6 +8,7 @@ import getLocalStorageVal from '../helpers/getLocalStorageVal';
 const ResolveCostBookingDesk = {
 	fcl_freight : dynamic(() => import('./FCL'), { ssr: false }),
 	lcl_freight : dynamic(() => import('./LCL'), { ssr: false }),
+	fcl_cfs     : dynamic(() => import('./FCL-CFS'), { ssr: false }),
 };
 
 function CostBookingDesk() {
