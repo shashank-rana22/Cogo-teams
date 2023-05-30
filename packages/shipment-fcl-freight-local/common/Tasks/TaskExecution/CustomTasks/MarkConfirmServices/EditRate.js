@@ -3,10 +3,10 @@ import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
 
 import getDefaultValues from '../../utils/get-default-values';
-import Step3 from '../UploadBookingNote/components/Step3';
-import useGetStep3Data from '../UploadBookingNote/helpers/useGetStep3Data';
 
 import getControls from './helper/getControls';
+import useGetStep3Data from './helper/useGetStep3Data';
+import Step3 from './Step3';
 import styles from './styles.module.css';
 
 function EditRate({

@@ -5,22 +5,15 @@ import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import useTaskRpa from '../../../hooks/useTaskRpa';
 
 import {
-	UploadBookingNote,
 	UploadCargoArrival,
 	UploadContainerDetails,
 	MarkConfirmServices,
-	NominationTask,
 	GenerateFreightCertificate,
 	ChooseServiceProvider,
 	UploadDraftBL,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
-
-const excludeServices = [
-	'fcl_freight_service',
-	'haulage_freight_service',
-];
 
 function ExecuteTask({
 	task = {},
@@ -52,7 +45,6 @@ function ExecuteTask({
 	if (
 		task.service_type
 		&& task.task === 'mark_confirmed'
-		&& (!excludeServices.includes(task.service_type))
 	) {
 		return (
 			<MarkConfirmServices
@@ -75,20 +67,6 @@ function ExecuteTask({
 				shipmentData={shipment_data}
 				primaryService={primary_service}
 				selectedMail={selectedMail}
-			/>
-		);
-	}
-
-	if (task.task === 'upload_booking_note') {
-		if (mailLoading) {
-			return <div>Loading...</div>;
-		}
-
-		return (
-			<UploadBookingNote
-				task={task}
-				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
 			/>
 		);
 	}
@@ -132,20 +110,6 @@ function ExecuteTask({
 				services={servicesList}
 			/>
 
-		);
-	}
-
-	if (
-		task.task === 'update_nomination_details'
-	) {
-		return (
-			<NominationTask
-				primaryService={primary_service}
-				shipmentData={shipment_data}
-				task={task}
-				onCancel={onCancel}
-				refetch={taskListRefetch}
-			/>
 		);
 	}
 

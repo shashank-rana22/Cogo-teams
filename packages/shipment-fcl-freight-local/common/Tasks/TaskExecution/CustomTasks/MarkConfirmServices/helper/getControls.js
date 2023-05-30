@@ -69,7 +69,7 @@ const getControls = ({
 		);
 	}
 
-	service_provider.value =		subsidiary_service_rendered?.service_provider?.id
+	service_provider.value = subsidiary_service_rendered?.service_provider?.id
 		|| service_rendered?.[0]?.service_provider_id
 		|| '';
 
