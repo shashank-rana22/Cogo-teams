@@ -1,11 +1,13 @@
 import { Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useRouter } from 'next/router';
 
 import styles from './styles.module.css';
 
-function Header({ loading }) {
+function Header({ loading, requestedOn }) {
 	const router = useRouter();
 	const { profile } = useSelector((state) => state);
 	const { partner } = profile;
@@ -37,7 +39,15 @@ function Header({ loading }) {
 					/>
 				) : (
 					<div className={styles.requested_date_section}>
-						Requested on : 20 Mar 2023
+						Requested on :
+						{' '}
+						{formatDate({
+							date: requestedOn?.created_at,
+
+							dateFormat: GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+
+							formatType: 'date',
+						})}
 					</div>
 				)
 			}

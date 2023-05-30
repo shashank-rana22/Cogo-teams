@@ -1,5 +1,5 @@
 import { Button, cl } from '@cogoport/components';
-import 	formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
 import { useEffect, useState } from 'react';
 
@@ -18,14 +18,15 @@ function BreakdownDetails({
 	rate,
 	conversions,
 	editedMargins = {},
-	setEditedMargins = () => {},
+	setEditedMargins = () => { },
 	primaryService = {},
 	convenienceDetails = {},
-	setConvenienceDetails = () => {},
+	setConvenienceDetails = () => { },
 	updateMargin,
 	rfq_rate_card_id = '',
 	refetchRateCards,
 	setShowPrice,
+	getRfqsForApproval,
 }) {
 	const { query } = useRouter();
 	const { rfq_id = '' } = query;
@@ -56,7 +57,7 @@ function BreakdownDetails({
 
 	const convenience_fee = convertCurrencyValue(
 		(convenienceDetails?.convenience_rate?.price || 0)
-			* (convenience_line_item?.quantity || 1),
+		* (convenience_line_item?.quantity || 1),
 		convenienceDetails?.convenience_rate?.currency,
 		rate?.total_price_currency,
 		conversions,
@@ -70,6 +71,7 @@ function BreakdownDetails({
 		});
 		setShowPrice({});
 		refetchRateCards({ rfq_id });
+		getRfqsForApproval();
 	};
 
 	return (
@@ -103,6 +105,7 @@ function BreakdownDetails({
 							conversions={conversions}
 							totalDisplay={totalDisplay}
 							setEditedMargins={setEditedMargins}
+							key={serviceKey}
 						/>
 					);
 				})}
@@ -116,12 +119,16 @@ function BreakdownDetails({
 						<div className={styles.service_title}>Convenience Fee</div>
 						<div className={styles.service_total_amount}>
 							{formatAmount({
-								amount   : convenience_fee,
-								currency : rate?.total_price_currency,
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
+								amount: convenience_fee,
+
+								currency: rate?.total_price_currency,
+
+								options: {
+									style: 'currency',
+
+									currencyDisplay: 'code',
+
+									maximumFractionDigits: 0,
 								},
 							})}
 						</div>
@@ -144,11 +151,11 @@ function BreakdownDetails({
 								amount:
 									(convenienceDetails?.convenience_rate?.price || 0)
 									* (convenience_line_item?.quantity || 1),
-								currency : convenience_line_item?.currency,
-								options  : {
-									style                 : 'currency',
-									currencyDisplay       : 'code',
-									maximumFractionDigits : 0,
+								currency: convenience_line_item?.currency,
+								options: {
+									style: 'currency',
+									currencyDisplay: 'code',
+									maximumFractionDigits: 0,
 								},
 							})}
 
@@ -162,12 +169,12 @@ function BreakdownDetails({
 					<div className={styles.total_title}>TOTAL</div>
 					<div className={styles.total_title}>
 						{formatAmount({
-							amount   : total + convenience_fee,
-							currency : rate?.total_price_currency,
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-								maximumFractionDigits : 0,
+							amount: total + convenience_fee,
+							currency: rate?.total_price_currency,
+							options: {
+								style: 'currency',
+								currencyDisplay: 'code',
+								maximumFractionDigits: 0,
 							},
 						})}
 					</div>
@@ -176,16 +183,16 @@ function BreakdownDetails({
 			<div className={styles.info_footer}>
 				<div className={styles.info_title}>
 					<div className={styles.footer_title}>
-						Projected Revenue:
+						Projected Revenue :
 					</div>
 					<div className={styles.title_value}>
 						{formatAmount({
-							amount   : total + convenience_fee,
-							currency : rate?.total_price_currency,
-							options  : {
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-								maximumFractionDigits : 0,
+							amount: total + convenience_fee,
+							currency: rate?.total_price_currency,
+							options: {
+								style: 'currency',
+								currencyDisplay: 'code',
+								maximumFractionDigits: 0,
 							},
 						})}
 					</div>
@@ -198,7 +205,7 @@ function BreakdownDetails({
 						className={cl`${styles.title_value} ${profitability > 0 ? styles.green : styles.red}
 					${profitability === 0 ? styles.black : ''}`}
 					>
-						{profitability}
+						{Math.round(profitability).toFixed(2)}
 						{' '}
 						%
 					</div>

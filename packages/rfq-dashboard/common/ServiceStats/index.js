@@ -40,12 +40,17 @@ function ServiceStats({ data = [], type = '', source = '' }) {
 			});
 		}
 		if (item.key === 'promised_profitability') {
-			return data[item?.key] !== undefined || data?.promised_consolidated_profitability !== undefined ? (
+			let profitability = data?.[item?.key];
+			if (typeof (data?.promised_consolidated_profitability) === 'number') {
+				profitability = data?.promised_consolidated_profitability;
+			}
+			console.log(profitability, 'data?.promised_consolidated_profitability)');
+			return typeof profitability === 'number' ? (
 				<span
 					className={cl`${data?.[item?.key] > 0 ? styles.green : styles.red}
 					${data?.[item?.key] === 0 ? styles.black : ''}`}
 				>
-					{`${data?.[item?.key] || data?.promised_consolidated_profitability}%`}
+					{`${Math.round(profitability).toFixed(2)}%`}
 				</span>
 			) : '-';
 		}
@@ -58,7 +63,7 @@ function ServiceStats({ data = [], type = '', source = '' }) {
 				=== 'ports-card') ? styles.service_stats_ports_section : ''}`}
 		>
 			{Object.keys(STATS_MAPPING).map((key) => (
-				<div>
+				<div key={key}>
 					<div className={styles.revenyue_profitability_utilization_name}>{STATS_MAPPING[key].label}</div>
 					<div className={styles.stats_value}>{renderItem(STATS_MAPPING[key])}</div>
 				</div>

@@ -2,6 +2,7 @@ import { useRouter } from '@cogoport/next';
 import { useEffect } from 'react';
 
 import useGetRfqRateCards from '../../hooks/useGetRfqRateCards';
+import useListRfqs from '../../hooks/useListrfqs';
 
 import BasicDetails from './BasicDetails';
 import Graph from './Graph';
@@ -14,22 +15,30 @@ function Details() {
 	const { rfq_id = '' } = query || {};
 
 	const { getRfqsRateCards, data = {}, loading } = useGetRfqRateCards({ rfq_id });
+	const { getRfqsForApproval, data: listData, loading: Detailsloading } = useListRfqs({ id: rfq_id });
 
 	useEffect(() => {
 		getRfqsRateCards();
-	}, [getRfqsRateCards, rfq_id]);
+		getRfqsForApproval();
+	}, [getRfqsRateCards, rfq_id, getRfqsForApproval]);
 
 	const { list: list_object = {} } = data;
+	console.log('listData', listData);
 
 	return (
 		<div className={styles.container}>
-			<Header loading={loading} />
+			<Header loading={Detailsloading} requestedOn={listData?.list?.[0]} />
 			<div className={styles.basic_details}>
-				<BasicDetails loading={loading} />
+				<BasicDetails Detailsloading={Detailsloading} data={listData} getRfqsForApproval={getRfqsForApproval} />
 				<Graph loading={loading} />
 			</div>
 			<div className={styles.rfq_list}>
-				<Services loading={loading} rate_card_list_object={list_object} refetchRateCards={getRfqsRateCards} />
+				<Services
+					loading={loading}
+					rate_card_list_object={list_object}
+					refetchRateCards={getRfqsRateCards}
+					getRfqsForApproval={getRfqsForApproval}
+				/>
 			</div>
 		</div>
 	);

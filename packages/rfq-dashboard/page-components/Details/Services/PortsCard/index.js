@@ -8,6 +8,7 @@ import useGetRfqRateCardDetails from '../../../../hooks/useGetRfqRateCardDetails
 import useUpdateRfqRateMargin from '../../../../hooks/useUpdateRfqRateMargin';
 import BreakdownDetails from '../BreakdownDetails';
 
+import BreakdownLoading from './BreakdownLoading';
 import CommodityMapping from './CommodityMapping';
 import LoaderPortsCard from './LoaderPortsCard';
 import LocationDetails from './LocationDetails';
@@ -34,8 +35,7 @@ const TEXTMAPPING = {
 };
 
 function PortsCard(props) {
-	console.log('props', props);
-	const { data = {}, loading, refetchRateCards } = props;
+	const { data = {}, loading, refetchRateCards, getRfqsForApproval } = props;
 
 	const [showPrice, setShowPrice] = useState({});
 	const {
@@ -157,10 +157,11 @@ function PortsCard(props) {
 						rfq_rate_card_id={id}
 						refetchRateCards={refetchRateCards}
 						setShowPrice={setShowPrice}
+						getRfqsForApproval={getRfqsForApproval}
 					/>
 				)}
 				{
-					isEmpty(showPrice) && !rfq_card_loading && 'hi'
+					rfq_card_loading && <BreakdownLoading />
 				}
 			</div>
 		</div>

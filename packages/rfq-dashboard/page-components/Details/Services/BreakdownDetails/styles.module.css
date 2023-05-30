@@ -1,91 +1,91 @@
-.row{
-    display: flex;
-    flex-wrap: wrap;
-    align-items: center;
-	padding: 22px 0px;
-	border-bottom: 1px solid #E0E0E0;
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 22px 0;
+	border-bottom: 1px solid #e0e0e0;
 }
 
-.col{
-    padding: 0 8px;
-	
+.col {
+	padding: 0 8px;
 }
 
-.header{
+.header {
 	font-weight: 600;
 }
 
-.container{
-    display: flex;
+.container {
+	display: flex;
 	flex-direction: column;
 	width: 100%;
 	padding: 20px;
 	background-color: #f9f9f9;
+
 	&:last-child {
 		border-bottom: unset;
-	} 
+	}
 }
 
-.total_title{
-	font-weight: 500;
-	font-size: 14px;
-	color: #333333;
+.total_title {
 	margin-right: 45px;
+	font-size: 14px;
+	font-weight: 500;
+	color: #333;
 }
 
-.service_title{
-	font-weight: 500;
+.service_title {
+	width: 86%;
+	overflow: hidden;
 	font-size: 14px;
-	color: #849E4C;
+	font-weight: 500;
+	color: #849e4c;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
-	width: 86%;
 }
 
-.service_total_amount{
+.service_total_amount {
 	width: 14%;
-	color: #849E4C;
-	;
 	margin-top: 15px 0 0 12px;
+	color: #849e4c;
 }
 
-.convenience_container{
+.convenience_container {
 	display: flex;
-	width: 100%;
-	margin-bottom: 15px;
 	align-items: center;
-	padding: 15px 0px;
+	width: 100%;
+	padding: 15px 0;
+	margin-bottom: 15px;
+
 	div {
 		align-items: center;
 	}
 }
 
-.service_line{
-	margin-top: 15px;
+.service_line {
 	display: flex;
 	justify-content: space-between;
+	margin-top: 15px;
 	margin-right: 32px;
 }
 
-.divider{
-	color: #bdbdbd;
+.divider {
 	width: 100%;
+	color: #bdbdbd;
 }
 
-.table_footer{
+.table_footer {
 	display: flex;
-	padding: 15px 84px 15px 0px;
 	justify-content: space-between;
+	padding: 15px 84px 15px 0;
 	background: #f9f9f9;
 	border-top: 1px solid #e0e0e0;
 	border-bottom: 1px solid #e0e0e0;
 }
 
-.note{
+.note {
+	margin-bottom: 10px;
 	font-size: 14px;
 	color: #4f4f4f;
-	margin-bottom: 10px;
 
 	span {
 		margin-left: 3px;
@@ -93,35 +93,36 @@
 	}
 }
 
-.info_footer{
-	margin-top: 12px;
+.info_footer {
 	display: flex;
-	justify-content: flex-end;
 	align-items: center;
+	justify-content: flex-end;
+	margin-top: 12px;
 }
 
-.info_title{
+.info_title {
 	display: flex;
 	padding: 8px;
 }
 
-.footer_title{
+.footer_title {
+	margin-right: 5px;
 	color: #828282;
 }
 
-.title_value{
-	color: #221F20;
+.title_value {
 	font-weight: 600;
+	color: #221f20;
 }
 
-.green{
-	color: #849E4C
+.green {
+	color: #849e4c;
 }
 
-.red{
+.red {
 	color: red;
 }
 
-.black{
+.black {
 	color: #333;
 }

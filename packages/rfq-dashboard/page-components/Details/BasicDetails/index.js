@@ -1,22 +1,14 @@
 import { IcMProfile } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useRouter } from 'next/router';
-import { useEffect } from 'react';
 
 import ServiceStats from '../../../common/ServiceStats';
-import useListRfqs from '../../../hooks/useListrfqs';
 
 import Empty from './Empty';
 import Loader from './Loader';
 import styles from './styles.module.css';
 
-function BasicDetails() {
-	const { rfq_id } = useRouter().query;
-	const { getRfqsForApproval, data = {}, loading: Detailsloading } = useListRfqs({ id: rfq_id });
+function BasicDetails({ data = {}, Detailsloading }) {
 	const detail = data.list?.[0];
-	useEffect(() => {
-		getRfqsForApproval();
-	}, [getRfqsForApproval]);
 	const {
 		importer_exporter, serial_id, sales_agent, stats, total_port_pair, requested_for_approval,
 	} = detail || {};

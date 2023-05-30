@@ -18,7 +18,7 @@ const TITLE_MAPPING = {
 
 };
 
-function Services({ loading, rate_card_list_object = {}, refetchRateCards }) {
+function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRfqsForApproval }) {
 	const { query } = useRouter();
 
 	const { rfq_id = '' } = query || {};
@@ -35,6 +35,7 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards }) {
 					size="md"
 					themeType="primary"
 					onClick={() => setShow(true)}
+					disabled={isEmpty(rate_card_list_object)}
 				>
 					Preview and Approve
 
@@ -55,7 +56,7 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards }) {
 				{(isEmpty(rate_card_list_object) && !loading)
 					? <EmptyPortsSection />
 					: Object.keys(rate_card_list_object).map((key) => (
-						<div className={styles.approve_remaining_complete_shipment_section}>
+						<div className={styles.approve_remaining_complete_shipment_section} key={key}>
 							<div className={styles.lists_heading_section}>
 								<span className={styles.lists_heading_section}>{TITLE_MAPPING[key]}</span>
 								<div className={` ${styles.lists_heading_section} ${styles.port_pairs_nos}`}>
@@ -75,6 +76,7 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards }) {
 										loading={loading}
 										title={key}
 										refetchRateCards={refetchRateCards}
+										getRfqsForApproval={getRfqsForApproval}
 									/>
 								</div>
 							))}
