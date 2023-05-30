@@ -2,7 +2,7 @@ import { Button, Checkbox, Input } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import useContainerDetails from '../../../../../../hooks/useContainerDetails';
-import Layout from '../../../helpers/Layout';
+import { Layout } from '@cogoport/ocean-modules';
 import TaskContainer from '../../common/TaskContainer';
 
 import styles from './styles.module.css';

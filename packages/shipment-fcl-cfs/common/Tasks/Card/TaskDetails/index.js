@@ -1,6 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';

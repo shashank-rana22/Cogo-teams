@@ -5,7 +5,7 @@ import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipm
 import useUpdateShipmentBuyQuotations from '../../../../../../hooks/useUpdateShipmentBuyQuotations';
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
-import checkLineItemsSum from './checkLineItemSum';
+import checkLineItemsSum from './checkLineItemsSum';
 import getStep3Controls from './getStep3Controls';
 
 const TRADE_MAPPING = {
