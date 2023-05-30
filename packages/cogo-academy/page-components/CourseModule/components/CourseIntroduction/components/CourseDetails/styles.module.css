@@ -1,86 +1,87 @@
-.container{
-    background-color: white;
-    padding: 10px;
+.container {
+	padding: 10px;
+	background-color: #fff;
 }
 
-#bold{
-    margin-bottom: 0;
-}
-.header{
-    display: flex;
-    flex-direction: row;
-    justify-content: center;
-    align-items: center;
-}
-.header_description{
-    width: 90%;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+#bold {
+	margin-bottom: 0;
 }
 
-.header_rating{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
+.header {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
 }
 
-.instructions{
-    margin-top: 20px;
-    margin-bottom: 10px;
-}
-.instruction_head{
-    margin-bottom: 10px;
-
-}
-
-.bottom_box{
-    padding: 12px 24px;
-    background: #F7FAEF;
-    margin-bottom: 10px;
-    border-radius: 6px;
-
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-between;
+.header_description {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 90%;
 }
 
-.card_display{
-    display: flex;
-    flex-direction: row;
-    width: 100%;
-    align-items: center;
-    justify-content: space-between;
-    margin: 80px 10px 10px 0px;
-
-    :hover{
-        background-color: white;
-    }
+.header_rating {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
 }
 
-.card{
-    border: 1px solid #fef199;
-    background-color: #fdfbf6;
-    border-radius: 6px;
-    padding: 10px;
-    display: flex;
-    flex-direction: column;
+.instructions {
+	margin-top: 20px;
+	margin-bottom: 10px;
 }
 
-.card_details{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    justify-content: space-around;
+.instruction_head {
+	margin-bottom: 10px;
 }
 
-.card_title{
-    font-weight: 700;
-    margin-bottom: 10px;
+.bottom_box {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 12px 24px;
+	margin-bottom: 10px;
+	background: #f7faef;
+	border-radius: 6px;
 }
 
-.description{
-    margin: 10px 0;
+.card_display {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	margin: 80px 10px 10px 0;
+
+	:hover {
+		background-color: white;
+	}
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	padding: 10px;
+	background-color: #fdfbf6;
+	border: 1px solid #fef199;
+	border-radius: 6px;
+}
+
+.card_details {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+}
+
+.card_title {
+	margin-bottom: 10px;
+	font-weight: 700;
+}
+
+.description {
+	margin: 10px 0;
 }

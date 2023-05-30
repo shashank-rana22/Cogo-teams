@@ -11,8 +11,11 @@ import styles from './styles.module.css';
 
 function CourseModule() {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
-	const router = useRouter();
-	const { page = '' } = router.query;
+
+	const { query } = useRouter();
+
+	const { page = '' } = query;
+
 	const [currentCategory, setCurrentCategory] = useState('all_courses');
 
 	const {
@@ -21,7 +24,6 @@ function CourseModule() {
 
 	return (
 		<div className={styles.container}>
-
 			<Header
 				courseCategories={courseCategories}
 				currentCategory={currentCategory}
@@ -34,7 +36,6 @@ function CourseModule() {
 					setCurrentCategory={setCurrentCategory}
 				/>
 			)}
-
 		</div>
 	);
 }

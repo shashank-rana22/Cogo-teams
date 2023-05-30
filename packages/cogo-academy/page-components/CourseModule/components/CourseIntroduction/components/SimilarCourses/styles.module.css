@@ -1,12 +1,12 @@
-.container{
-    background-color: white;
-    padding: 10px;
+.container {
+	padding: 10px;
+	background-color: #fff;
 }
 
 .carousel_container {
-    margin: 24px 0px;
-    
-    :global {
+	margin: 24px 0;
+
+	:global {
 		.ui_carousel_arrow {
 			fill: #221f20;
 		}

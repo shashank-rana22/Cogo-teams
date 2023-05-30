@@ -10,9 +10,9 @@
 }
 
 .carousel_container {
-    margin: 24px 0px;
-    
-    :global {
+	margin: 24px 0;
+
+	:global {
 		.ui_carousel_arrow {
 			margin-left: -36px;
 			fill: #221f20;
@@ -29,7 +29,7 @@
 	}
 }
 
-.header{
+.header {
 	display: flex;
 	justify-content: space-between;
 }

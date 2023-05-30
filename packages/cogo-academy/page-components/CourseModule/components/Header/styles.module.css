@@ -23,19 +23,19 @@
 }
 
 .title {
+	padding: 10px;
 	margin-right: 24px;
 	font-size: 20px;
 	font-weight: 600;
-	padding: 10px;
 	cursor: pointer;
 }
 
-.profile{
+.profile {
 	display: flex;
 	align-items: center;
 }
 
-.centered{
+.centered {
 	margin: 0;
 	margin-left: 6px;
 }

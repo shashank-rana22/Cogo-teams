@@ -45,7 +45,11 @@ function ModalContent({ finalCourseCategories, loading, currentCategory, setCurr
 			</div>
 
 			<div className={styles.right_component}>
-				<RightComponent data={data} listLoading={listLoading} setShowCoursesModal={setShowCoursesModal} />
+				<RightComponent
+					data={data}
+					listLoading={listLoading}
+					setShowCoursesModal={setShowCoursesModal}
+				/>
 			</div>
 		</Modal.Body>
 	);

@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function RightComponent({ data = {}, listLoading, setShowCoursesModal }) {
 	const router = useRouter();
+
 	const { list = [] } = data || {};
 
 	if (listLoading) {
@@ -17,46 +18,39 @@ function RightComponent({ data = {}, listLoading, setShowCoursesModal }) {
 	return (
 		<div className={styles.container}>
 			{list.map((item, index) => {
-				if (index < 8) {
-					return <CategoryCard item={item} key={item.id} />;
-				} if (index === 8) {
+				if (index > 8) {
+					return null;
+				}
+
+				if (index === 8) {
 					return (
 						<div
 							key={item.id}
 							role="presentation"
-							className={styles.see_all}
+							className={styles.outer_container}
 							onClick={() => {
 								setShowCoursesModal(false);
 								router.push('/learning/course?page="all"');
 							}}
 						>
-							<div>
-								See All
-								{'  '}
-							</div>
+							<div className={styles.see_all}>
+								<div>
+									See All
+									{'  '}
+								</div>
 
-							<IcMArrowRight width={18} height={18} />
+								<IcMArrowRight width={18} height={18} />
+							</div>
 						</div>
 					);
 				}
-				return null;
+				return (
+					<CategoryCard
+						item={item}
+						key={item.id}
+					/>
+				);
 			})}
-			<div
-				key="123456"
-				role="presentation"
-				className={styles.see_all}
-				onClick={() => {
-					router.push('/learning/course?page="all"');
-					setShowCoursesModal(false);
-				}}
-			>
-				<div>
-					See All
-					{'  '}
-				</div>
-
-				<IcMArrowRight width={18} height={18} />
-			</div>
 		</div>
 	);
 }

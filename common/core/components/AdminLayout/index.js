@@ -10,7 +10,11 @@ import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
 import VoiceCall from './VoiceCall';
 
-const WHITE_BACKGROUND_MAPPING = ['/[partner_id]/learning/course'];
+const WHITE_BACKGROUND_MAPPING = [
+	'/[partner_id]/learning/course',
+	'/[partner_id]/learning/course/[course_id]',
+	'/[partner_id]/learning/course/introduction',
+];
 
 function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},

@@ -1,8 +1,8 @@
-.container{
-    width: 100%;
-    position: relative;
+.container {
+	position: relative;
+	width: 100%;
 }
 
-.main_content{
-    display: flex;
+.main_content {
+	display: flex;
 }

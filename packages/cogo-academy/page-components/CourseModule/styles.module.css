@@ -10,9 +10,9 @@
 }
 
 .carousel_container {
-    margin: 24px 0px;
-    
-    :global {
+	margin: 24px 0;
+
+	:global {
 		.ui_carousel_arrow {
 			margin-left: -36px;
 			fill: #221f20;
@@ -29,16 +29,17 @@
 	}
 }
 
-.btn_container, .sort_by{
+.btn_container,
+.sort_by {
 	display: flex;
 	align-items: center;
 }
 
-.sort_by{
+.sort_by {
 	margin-left: 20px;
 }
 
-.header{
+.header {
 	display: flex;
 	justify-content: space-between;
 }

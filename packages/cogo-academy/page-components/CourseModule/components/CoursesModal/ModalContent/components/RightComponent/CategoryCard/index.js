@@ -11,25 +11,27 @@ function CategoryCard({ item }) {
 	const topicsArr = faq_topics.map((topic) => startCase(topic.name));
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.title}>{name}</div>
+		<div className={styles.outer_container}>
+			<div className={styles.container}>
+				<div className={styles.title}>{name}</div>
 
-			<div>
-				{topicsArr.map((topic, index) => {
-					if (index > 0 && topicsArr.length > 2) {
-						return null;
-					}
+				<div>
+					{topicsArr.map((topic, index) => {
+						if (index > 0 && topicsArr.length > 2) {
+							return null;
+						}
 
-					return (
-						<Pill size="md" color="#EBEBEB" className={styles.status_pill}>
-							{topic}
-						</Pill>
-					);
-				})}
+						return (
+							<Pill size="md" color="#EBEBEB" className={styles.status_pill}>
+								{topic}
+							</Pill>
+						);
+					})}
 
-				{topicsArr.length > 2 ? (
-					<Pill color="#EBEBEB">{`+${topicsArr.length - 1} More`}</Pill>
-				) : null}
+					{topicsArr.length > 2 ? (
+						<Pill color="#EBEBEB">{`+${topicsArr.length - 1} More`}</Pill>
+					) : null}
+				</div>
 			</div>
 		</div>
 	);

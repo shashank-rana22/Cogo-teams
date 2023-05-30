@@ -1,9 +1,8 @@
-.container{
-    background-color: white;
-    padding: 10px 30px;
-
+.container {
+	padding: 10px 30px;
+	background-color: #fff;
 }
 
-.date_display{
-    margin: 40px 10px; 
+.date_display {
+	margin: 40px 10px;
 }
