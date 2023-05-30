@@ -1,0 +1,105 @@
+.formcontainer {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 16px 0;
+	margin-top: 16px;
+	border: 1px solid #797979;
+	border-radius: 4px;
+}
+
+.label {
+	margin: 4px 2px;
+}
+
+.selectcontainer {
+	:global {
+		.ui_select_input_placeholder,
+		::placeholder {
+			font-size: var(--font-size-md);
+		}
+
+		.ui_select_display_container {
+			width: 242px;
+			max-height: 36px;
+		}
+
+		.ui_select_options_container {
+			min-width: 300px;
+		}
+	}
+}
+
+.flex {
+	display: flex;
+	padding-bottom: 6px;
+}
+
+.marginleft {
+	margin-left: 26px;
+}
+
+.address {
+	display: flex;
+	flex-wrap: wrap;
+	padding: 16px 4px;
+	margin-top: 16px;
+	border: 1px solid #d9d9d9;
+	border-radius: 4px;
+}
+
+.key {
+	padding-left: 16px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+}
+
+.value {
+	padding-left: 8px;
+	font-size: var(--font-size-md);
+}
+
+.verification_status {
+	display: flex;
+	align-items: center;
+	width: fit-content;
+	height: fit-content;
+	padding: 4px 12px;
+	margin-left: 12px;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	background-color: #f3fafa;
+	border-radius: 8px;
+}
+
+.margintop {
+	margin-top: 6px;
+}
+
+.errors {
+	padding-left: 4px;
+	font-size: var(--font-size-sm);
+	color: var(--color-primary-error-red-2);
+}
+
+.marginTop {
+	margin-top: 36px;
+	margin-left: 10px;
+}
+
+.circle {
+	cursor: pointer;
+}
+
+.link {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 12px;
+	color: var(--color-accent-orange-2);
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.spacebetween {
+	display: flex;
+	justify-content: space-between;
+}
