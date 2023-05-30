@@ -2,16 +2,16 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-function useUpdateShipmentDocuments({
+const useGenerateBluetideHbl = ({
 	refetch = () => {},
-	successMessage = 'Updated Successfully!',
-}) {
+	successMessage = 'Successfully Generated',
+}) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'update_shipment_document',
+		url    : '/generate_bluetide_hbl',
 		method : 'POST',
 	}, { manual: true });
 
-	const updateDocument = async (val) => {
+	const apiTrigger = async (val) => {
 		try {
 			await trigger({ data: val });
 			Toast.success(successMessage);
@@ -22,9 +22,8 @@ function useUpdateShipmentDocuments({
 	};
 
 	return {
-		taskUpdateLoading: loading,
-		updateDocument,
+		apiTrigger,
+		docLoading: loading,
 	};
-}
-
-export default useUpdateShipmentDocuments;
+};
+export default useGenerateBluetideHbl;
