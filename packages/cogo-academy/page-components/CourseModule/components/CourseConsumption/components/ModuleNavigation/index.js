@@ -4,7 +4,7 @@ import SubModuleContent from '../SubModuleContent';
 
 import styles from './styles.module.css';
 
-function ModuleNavigation({ data = [] }) {
+function ModuleNavigation({ data = [], setChapterContent = () => {} }) {
 	return (
 		<div className={styles.container}>
 			{data?.map((module, index) => (
@@ -22,7 +22,7 @@ function ModuleNavigation({ data = [] }) {
 					)}
 				>
 					<div>
-						{module?.course_sub_modules?.map((subModule, subIndex) => (
+						{(module.course_sub_modules || []).map((subModule, subIndex) => (
 							<Accordion
 								key={subModule.id}
 								type="text"
@@ -40,8 +40,15 @@ function ModuleNavigation({ data = [] }) {
 									</div>
 								)}
 							>
-								<SubModuleContent id={subModule.id} />
+
+								<SubModuleContent
+									key={subModule.id}
+									id={subModule.id}
+									setChapterContent={setChapterContent}
+								/>
+
 							</Accordion>
+
 						))}
 
 					</div>

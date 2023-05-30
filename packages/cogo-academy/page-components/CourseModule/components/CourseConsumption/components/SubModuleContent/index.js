@@ -5,17 +5,23 @@ import useGetCourseSubModule from '../../hooks/useGetCourseSubModule';
 
 import styles from './styles.module.css';
 
-function SubModuleContent({ id = '' }) {
-	const { data, loading } = useGetCourseSubModule({ id });
-
-	console.log(data);
+function SubModuleContent({ id = '', setChapterContent = () => {} }) {
+	const { data = {}, loading } = useGetCourseSubModule({ id });
 
 	const { course_sub_module_chapters = [] } = data;
 
 	return (
-		<div className={styles.container} key={id}>
-			{course_sub_module_chapters?.map((chapter) => (
-				<div key={chapter.id} className={styles.chapter_container}>
+		<div className={styles.container}>
+
+			{course_sub_module_chapters.map((chapter) => (
+				<div
+					role="presentation"
+					key={chapter?.id}
+					className={styles.chapter_container}
+					onClick={() => {
+						setChapterContent(chapter);
+					}}
+				>
 					<div className={styles.wrapper}>
 						<div className={styles.number}>
 							<div className={styles.icon}>
@@ -31,6 +37,7 @@ function SubModuleContent({ id = '' }) {
 					</div>
 				</div>
 			))}
+
 		</div>
 	);
 }

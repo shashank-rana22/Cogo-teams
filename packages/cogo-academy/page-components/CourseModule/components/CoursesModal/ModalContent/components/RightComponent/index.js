@@ -6,7 +6,7 @@ import LoadingState from '../../../../../commons/LoadingState';
 import CategoryCard from './CategoryCard';
 import styles from './styles.module.css';
 
-function RightComponent({ data = {}, listLoading }) {
+function RightComponent({ data = {}, listLoading, setShowCoursesModal }) {
 	const router = useRouter();
 	const { list = [] } = data || {};
 
@@ -26,11 +26,8 @@ function RightComponent({ data = {}, listLoading }) {
 							role="presentation"
 							className={styles.see_all}
 							onClick={() => {
-								router.push('/learning/course', {
-									query: {
-										page: 'all',
-									},
-								});
+								setShowCoursesModal(false);
+								router.push('/learning/course?page="all"');
 							}}
 						>
 							<div>
@@ -44,12 +41,13 @@ function RightComponent({ data = {}, listLoading }) {
 				}
 				return null;
 			})}
-
 			<div
+				key="123456"
 				role="presentation"
 				className={styles.see_all}
 				onClick={() => {
 					router.push('/learning/course?page="all"');
+					setShowCoursesModal(false);
 				}}
 			>
 				<div>

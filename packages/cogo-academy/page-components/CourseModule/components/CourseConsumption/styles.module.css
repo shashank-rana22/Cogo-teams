@@ -1,11 +1,8 @@
-.header{
-    display: flex;
-    align-items: center;
-    justify-content: center;
-
+.container{
+    width: 100%;
+    position: relative;
 }
 
-.name {
-    font-weight: 600;
-    font-size: 36px;
+.main_content{
+    display: flex;
 }

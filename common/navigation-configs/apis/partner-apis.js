@@ -11050,6 +11050,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_organization',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'list_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',

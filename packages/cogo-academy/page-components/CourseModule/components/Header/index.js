@@ -1,5 +1,6 @@
 import { Input, Button } from '@cogoport/components';
 import { IcMArrowDown, IcMSearchlight, IcMProfile } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import CoursesModal from '../CoursesModal';
@@ -8,12 +9,17 @@ import styles from './styles.module.css';
 
 function Header({ loading, courseCategories, currentCategory, setCurrentCategory }) {
 	const [showCoursesModal, setShowCoursesModal] = useState(false);
+	const router = useRouter();
+
+	const handleClick = () => {
+		router.push('/learning/course');
+	};
 
 	return (
 		<>
 			<div className={styles.container}>
 				<div className={styles.button_container}>
-					<div className={styles.title}>Cogo Courses</div>
+					<div role="presentation" className={styles.title} onClick={handleClick}>Cogo Courses</div>
 
 					<Button
 						size="lg"

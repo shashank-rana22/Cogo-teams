@@ -19,6 +19,7 @@ function CoursesModal({
 				loading={loading}
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
+				setShowCoursesModal={setShowCoursesModal}
 			/>
 		</Modal>
 	);

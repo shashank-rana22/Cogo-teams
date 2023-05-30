@@ -9,7 +9,7 @@ import RightComponent from './components/RightComponent';
 import styles from './styles.module.css';
 import useListCourseUserMappings from './useListCourseUserMappings';
 
-function ModalContent({ finalCourseCategories, loading, currentCategory, setCurrentCategory }) {
+function ModalContent({ finalCourseCategories, loading, currentCategory, setCurrentCategory, setShowCoursesModal }) {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
 	const [params, setParams] = useState({
 		page    : 1,
@@ -45,7 +45,7 @@ function ModalContent({ finalCourseCategories, loading, currentCategory, setCurr
 			</div>
 
 			<div className={styles.right_component}>
-				<RightComponent data={data} listLoading={listLoading} />
+				<RightComponent data={data} listLoading={listLoading} setShowCoursesModal={setShowCoursesModal} />
 			</div>
 		</Modal.Body>
 	);
