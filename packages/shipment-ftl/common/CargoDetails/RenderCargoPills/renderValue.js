@@ -230,6 +230,10 @@ export const renderValue = (label, detail) => {
 			return format(detail?.delivery_date, 'dd MMM yyyy');
 		case 'container_load_type':
 			return startCase(detail?.container_load_type);
+		case 'truck_number':
+			return startCase(detail?.truck_number);
+		case 'driver_details':
+			return `${startCase(detail?.driver_details.name)} , ${detail?.driver_details.contact}`;
 		default:
 			return detail[label] || null;
 	}

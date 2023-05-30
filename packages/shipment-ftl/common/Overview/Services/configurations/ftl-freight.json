@@ -32,19 +32,27 @@
 			"key": "truck_type"
 		},
 		{
+			"label": "Truck Number",
+			"key": "truck_number"
+		},
+		{
 			"label": "Stuffing date",
 			"key": "stuffing_at",
 			"type": "date"
 		},
 		{
-			"label": "Pickup date'",
+			"label": "Pickup date",
 			"key": "pickup_date",
 			"type": "date"
 		},
 		{
-			"label": "Delivery date'",
+			"label": "Delivery date",
 			"key": "delivery_date",
 			"type": "date"
+		},
+		{
+			"label": "Driver details",
+			"key": "driver_details"
 		},
 		{
 			"label": "Origin Cargo handling type",
