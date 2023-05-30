@@ -1,5 +1,5 @@
 import FTL_UNITS from '@cogoport/surface-modules/contants/FTL_UNITS';
-// import { convertObjectMappingToArray } from '@cogoport/surfce-modules/utils/convertObjectMappingToArray';
+import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/convertObjectMappingToArray';
 import { startCase } from '@cogoport/utils';
 
 const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
@@ -58,7 +58,7 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 				label   : 'Unit',
 				type    : 'select',
 				name    : 'unit',
-				options : convertObjectMappingToArray(FCL_UNITS),
+				options : convertObjectMappingToArray(FTL_UNITS),
 				size    : 'sm',
 				span    : 2,
 			},

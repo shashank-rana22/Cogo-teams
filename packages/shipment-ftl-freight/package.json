@@ -1,5 +1,5 @@
 {
-  "name": "@cogoport/shipment-ftl",
+  "name": "@cogoport/shipment-ftl-freight",
   "version": "0.1.0",
   "description": "Package for Shipment Ftl Service",
   "main": "index.js",
@@ -11,7 +11,6 @@
     "@cogoport/globalization": "workspace:^0.0.1",
     "@cogoport/icons-react": "^1.0.75",
     "@cogoport/navigation-configs": "workspace:^0.1.0",
-    "@cogoport/ocean-modules": "workspace:^0.1.0",
     "@cogoport/next": "workspace:^0.1.0",
     "@cogoport/request": "workspace:^0.1.0",
     "@cogoport/shipment-chat": "workspace:^0.1.0",

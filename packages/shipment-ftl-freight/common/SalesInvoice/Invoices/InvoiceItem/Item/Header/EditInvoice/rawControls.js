@@ -1,5 +1,5 @@
-import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
-import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
+import FTL_UNITS from '@cogoport/surface-modules/contants/FTL_UNITS';
+import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 const handleDisableCond = (charge, isFclFreight, shipment_data) => {
@@ -8,8 +8,6 @@ const handleDisableCond = (charge, isFclFreight, shipment_data) => {
 
 	return disable;
 };
-
-const fclUnitOptions = convertObjectMappingToArray(FCL_UNITS);
 
 const rawControls = (
 	handleChange,
@@ -58,12 +56,7 @@ const rawControls = (
 			rules: { required: 'Required' },
 		},
 		{
-			label: (
-				<>
-					<div>Alias Name</div>
-					{info}
-				</>
-			),
+
 			type        : 'text',
 			name        : 'alias',
 			placeholder : 'Enter alias name/code',
@@ -74,12 +67,12 @@ const rawControls = (
 			span     : 2,
 		},
 		{
-			label       : 'Unit',
-			type        : 'select',
-			name        : 'unit',
-			placeholder : 'select...',
-			span        : 1.5,
-			options     : fclUnitOptions,
+			label    : 'Unit',
+			type     : 'select',
+			name     : 'unit',
+			options  : convertObjectMappingToArray(FTL_UNITS),
+			disabled : true,
+			span     : 2,
 		},
 		{
 			name           : 'currency',
@@ -100,7 +93,7 @@ const rawControls = (
 			placeholder : 'enter price',
 			span        : 1.5,
 			rules       : {
-				required : 'Required',
+				required : 'Price is Required',
 				validate : (v) => v > 0 || 'Price must be greater than 0',
 			},
 			disabled: handleDisableCond(charge, isFclFreight, shipment_data),

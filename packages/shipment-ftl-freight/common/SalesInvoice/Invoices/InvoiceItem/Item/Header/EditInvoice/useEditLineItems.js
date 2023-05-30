@@ -53,20 +53,8 @@ const useEditLineItems = ({
 
 		return defaultValues;
 	};
-	const controls = services.map((service, index) => ({
-		...rawControls(
-			handleChange,
-			service,
-			info,
-			isFclFreight,
-			shipment_data,
-			index,
-			trade_mapping,
-		),
-		onOptionsChange: (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
-	}));
 
-	const defaultControls = services.map((service, index) => ({
+	const controls = services.map((service, index) => ({
 		...rawControls(
 			handleChange,
 			service,
@@ -80,7 +68,7 @@ const useEditLineItems = ({
 		value           : (service?.line_items || []).map((item) => ({
 			code             : item?.code,
 			alias            : item?.alias,
-			sac_code         : item.hsn_code || 'NA',
+			sac_code         : item?.hsn_code || 'NA',
 			currency         : item?.currency,
 			price_discounted : item?.price_discounted || 0,
 			quantity         : item?.quantity || 0,
@@ -93,9 +81,7 @@ const useEditLineItems = ({
 		})),
 	}));
 
-	console.log(defaultControls, 'defaultControls');
-
-	const defaultValues = generateDefaultValues({ values: defaultControls });
+	const defaultValues = generateDefaultValues({ values: controls });
 
 	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm({ defaultValues });
 
@@ -150,8 +136,9 @@ const useEditLineItems = ({
 			});
 		}
 	});
+	console.log({ allChargeCodes });
 
-	const onCreate = async (values) => {
+	const onCreate = (values) => {
 		try {
 			const payload = [];
 			Object.keys(values).forEach((key) => {
@@ -164,7 +151,6 @@ const useEditLineItems = ({
 						chargeCodes[chgCode.code] = chgCode;
 					},
 				);
-				console.log(values?.[key], ' :values?.[key] : ', chargeCodes);
 				const service = {
 					service_id   : currentService?.service_id,
 					service_type : currentService?.service_type,
@@ -181,43 +167,39 @@ const useEditLineItems = ({
 				payload.push(service);
 			});
 
-			const res = await trigger({
-				data: {
-					quotations             : payload,
-					shipment_id            : shipment_data?.id,
-					invoice_combination_id : invoice?.id || undefined,
-				},
-			});
-			if (!res.hasError) {
-				Toast.success('Line Items updated successfully!');
-				if (refetch) {
-					refetch();
-				}
-				if (onClose) {
-					onClose();
-				}
-			}
+			console.log({ values, payload });
+			// const res = await trigger({
+			// 	data: {
+			// 		quotations             : payload,
+			// 		shipment_id            : shipment_data?.id,
+			// 		invoice_combination_id : invoice?.id || undefined,
+			// 	},
+			// });
+			// if (!res.hasError) {
+			// 	Toast.success('Line Items updated successfully!');
+			// 	if (refetch) {
+			// 		refetch();
+			// 	}
+			// 	if (onClose) {
+			// 		onClose();
+			// 	}
+			// }
 		} catch (err) {
 			Toast.error(err?.data?.invoices);
 		}
 	};
 
-	// const onError = (err) => {
-	// 	setErrors({ ...err });
-	// };
 	return {
 		onCreate,
 		handleSubmit,
 		controls,
 		loading,
 		customValues,
-		// fields,
-		// onError,
 		errors,
 		control,
 		setValue,
 		watch,
-		defaultValues,
+		newFormValues,
 	};
 };
 

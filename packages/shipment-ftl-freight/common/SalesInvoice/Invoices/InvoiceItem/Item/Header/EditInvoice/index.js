@@ -34,7 +34,7 @@ function EditInvoice({
 		control,
 		setValue,
 		watch,
-		defaultValues,
+		newFormValues,
 	} = useEditLineItems({
 		invoice,
 		onClose,
@@ -44,25 +44,23 @@ function EditInvoice({
 		info         : <Info />,
 	});
 
-	console.log({ controls, defaultValues });
-
-	console.log({ defaultValues });
 	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service'
-		&& !isFclFreight
-		&& shipment_data?.serial_id > 130000;
+	&& !isFclFreight
+	&& shipment_data?.serial_id > 130000;
 
 	const formValues = watch();
 
 	useEffect(() => {
-		if (defaultValues) {
-			Object.keys(defaultValues).forEach((fieldName) => {
+		if (newFormValues) {
+			Object.keys(newFormValues).forEach((fieldName) => {
 				if (!formValues[fieldName]) {
-					setValue(fieldName, defaultValues[fieldName]);
+					setValue(fieldName, newFormValues[fieldName]);
 				}
 			});
 		}
-	}, [defaultValues, watch, setValue, formValues]);
+	}, [newFormValues, watch, setValue, formValues]);
 
+	console.log({ controls, newFormValues });
 	return (
 		<Modal
 			size="xl"
@@ -93,7 +91,7 @@ function EditInvoice({
 						control={control}
 						fields={controls}
 						errors={errors}
-						customValues={defaultValues}
+						customValues={newFormValues}
 					/>
 				</div>
 
