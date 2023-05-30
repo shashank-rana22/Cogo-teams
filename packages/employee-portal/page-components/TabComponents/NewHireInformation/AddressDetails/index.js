@@ -42,13 +42,10 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	useEffect(() => {
 		if (address) {
 			(addressFields || []).forEach((item, index) => {
-				console.log('shivam');
 				setValue(item, permanent_address_values?.[index]);
 			});
 		} else {
 			(addressFields || []).forEach((item) => {
-				console.log('shivam123123');
-
 				setValue(item, '');
 			});
 		}
