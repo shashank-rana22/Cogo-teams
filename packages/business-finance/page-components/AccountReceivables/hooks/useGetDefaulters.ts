@@ -7,7 +7,7 @@ import { useCallback, useEffect } from 'react';
 
 import { formatDate } from '../../commons/utils/formatDate';
 
-const useGetDefaulters = ({ isCustomerView, globalFilters, activeTab, sort }) => {
+const useGetDefaulters = ({ globalFilters, activeTab, sort }) => {
 	const {
 		search, zone, dueDate, invoiceStatus, status, services, pageIndex, migrated,
 		invoiceDate, currency, cogoEntity, pageLimit, ...rest
@@ -31,16 +31,7 @@ const useGetDefaulters = ({ isCustomerView, globalFilters, activeTab, sort }) =>
 		{ manual: useTicketsRequest },
 	);
 
-	const [{ data: customerData, loading:customerListLoading }, customerTrigger] = useRequestBf(
-		{
-			url     : '/sales/outstanding/overall',
-			method  : 'get',
-			authKey : 'get_sales_outstanding_overall',
-		},
-		{ manual: true },
-	);
-
-	const trigger = isCustomerView ? customerTrigger : invoiceTrigger;
+	const trigger = invoiceTrigger;
 
 	const [apiState, downloadApi] = useRequestBf(
 		{
@@ -86,20 +77,21 @@ const useGetDefaulters = ({ isCustomerView, globalFilters, activeTab, sort }) =>
 					invoiceDateStart : formatProvidedDate(invoiceDate?.startDate),
 					invoiceDateEnd   : formatProvidedDate(invoiceDate?.endDate),
 					query            : JSON.parse(stringifiedQuery) !== '' ? JSON.parse(stringifiedQuery) : undefined,
-					zone,
+					zone             : zone?.length > 0 ? zone : undefined,
 					role             : userProfile.partner.user_role_ids,
 					flag             : 'defaulters',
+					type             : activeTab || undefined,
 					page             : pageIndex,
 					pageLimit,
 					sortBy,
 					sortType,
 				},
 			});
-			// if (sort.sortBy === 'grandTotal' && !currency) {
-			// 	Toast.warn(
-			// 		'Please apply currency filter to sort invoice amount accurately  ',
-			// 	);
-			// }
+			if (sortBy === 'grandTotal' && !currency) {
+				Toast.warn(
+					'Please apply currency filter to sort invoice amount accurately  ',
+				);
+			}
 		} catch (e) {
 			console.log('error->', e);
 		}
@@ -107,7 +99,7 @@ const useGetDefaulters = ({ isCustomerView, globalFilters, activeTab, sort }) =>
 		invoiceDate?.startDate, invoiceStatus, migrated, pageIndex, services, status,
 		stringifiedQuery, stringifiedRest, trigger,
 		pageLimit,
-		userProfile.partner.user_role_ids, zone, sortBy, sortType]);
+		userProfile.partner.user_role_ids, zone, sortBy, sortType, activeTab]);
 
 	const sendReport = async () => {
 		try {
@@ -142,7 +134,6 @@ const useGetDefaulters = ({ isCustomerView, globalFilters, activeTab, sort }) =>
 	useEffect(() => {
 		refetch();
 	}, [
-		isCustomerView,
 		stringifiedRest,
 		stringifiedQuery,
 		zone,
@@ -157,7 +148,6 @@ const useGetDefaulters = ({ isCustomerView, globalFilters, activeTab, sort }) =>
 	return {
 		invoiceData,
 		invoiceListLoading,
-		customerData,
 		refetch,
 		sendReport,
 		apiState,

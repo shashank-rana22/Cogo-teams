@@ -8,24 +8,21 @@ import Filter from '../../../../commons/Filters';
 
 import { CURRENCY, PAYMENT_STATUS, SHIPMENT_TYPE } from './constants';
 import { defaultersControls } from './controls';
-import defaultersCustomerFilters from './defaultersCustomerFilters';
 import styles from './styles.module.css';
 
-function DefaultersFilters({ globalFilters, setGlobalFilters, isCustomerView, isClear, clearFilters }) {
+function DefaultersFilters({ globalFilters, setGlobalFilters, isClear, clearFilters }) {
 	const [visible, setVisible] = useState(false);
 
 	const { general } = useSelector((state) => state || {});
 	const partnerIds = general?.query?.partner_id;
 
-	const control = isCustomerView
-		? defaultersCustomerFilters()
-		: [
-			...defaultersControls({ globalFilters })[
-				Object.keys(GLOBAL_CONSTANTS.country_entity_ids).find(
-					(key) => GLOBAL_CONSTANTS.country_entity_ids[key] === partnerIds,
-				)
-			],
-		];
+	const control = [
+		...defaultersControls({ globalFilters })[
+			Object.keys(GLOBAL_CONSTANTS.country_entity_ids).find(
+				(key) => GLOBAL_CONSTANTS.country_entity_ids[key] === partnerIds,
+			)
+		],
+	];
 
 	const popoverContent = () => (
 		<div className={styles.filter_popover}>

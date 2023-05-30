@@ -1,4 +1,4 @@
-import { Pill, TabPanel, Tabs, Toggle, Tooltip } from '@cogoport/components';
+import { Pill, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { format } from '@cogoport/utils';
 import startCase from '@cogoport/utils/src/utilities/startCase';
@@ -54,6 +54,7 @@ interface GlobalInterface {
 	invoiceDate?: { startDate?: string, endDate?: string },
 	dueDate?: { startDate?: string, endDate?: string },
 	currency?: string,
+	zone?:string,
 }
 
 function Defaulters() {
@@ -62,7 +63,6 @@ function Defaulters() {
 		pageLimit : 10,
 	});
 	const [isClear, setIsClear] = useState(true);
-	const [isCustomerView, setIsCustomerView] = useState(false);
 	const [activeTab, setActiveTab] = useState('overall');
 	const [sort, setSort] = useState({});
 	const {
@@ -70,17 +70,17 @@ function Defaulters() {
 		invoiceListLoading,
 		refetch,
 		sendReport,
-	} = useGetDefaulters({ isCustomerView, globalFilters, isClear, activeTab, sort });
+	} = useGetDefaulters({ globalFilters, activeTab, sort });
 
 	useEffect(() => {
 		const {
-			migrated, cogoEntity, invoiceStatus, status, services, invoiceDate, dueDate, currency,
+			migrated, cogoEntity, invoiceStatus, status, services, invoiceDate, dueDate, currency, zone,
 		} = globalFilters || {};
 
 		const isFilterApplied = String(migrated)?.length > 0 || cogoEntity?.length > 0
 		|| invoiceStatus?.length > 0 || status.length > 0 || services?.length > 0
 		|| invoiceDate?.startDate?.length > 0 || invoiceDate?.endDate?.length > 0 || dueDate?.startDate?.length > 0
-		|| dueDate?.endDate?.length > 0 || currency?.length;
+		|| dueDate?.endDate?.length > 0 || currency?.length > 0;
 
 		if (isFilterApplied) {
 			setIsClear(false);
@@ -293,7 +293,6 @@ function Defaulters() {
 			<DefaultersFilters
 				globalFilters={globalFilters}
 				setGlobalFilters={setGlobalFilters}
-				isCustomerView={isCustomerView}
 				isClear={isClear}
 				clearFilters={clearFilters}
 			/>
@@ -305,38 +304,30 @@ function Defaulters() {
 						themeType="primary"
 						onChange={setActiveTab}
 					>
-						<TabPanel name="overall" title="Overall" badge={3} />
+						<TabPanel
+							name="overall"
+							title="Overall"
+							badge={invoiceData?.totalRecords}
+						/>
 					</Tabs>
 
 				</div>
 
 				<div className={styles.toggle_right}>
-					{!isCustomerView && (
-						<div>
-							<div
-								className={styles.send_report}
-								onClick={() => { sendReport(); }}
-								role="presentation"
-							>
-								Send Report
-
-							</div>
-
+					<div>
+						<div
+							className={styles.send_report}
+							onClick={() => { sendReport(); }}
+							role="presentation"
+						>
+							Send Report
 						</div>
-					)}
-					<Toggle
-						name="toggle"
-						size="md"
-						disabled={false}
-						onLabel="Customer"
-						offLabel="Invoice"
-						onChange={() => setIsCustomerView(!isCustomerView)}
-					/>
+					</div>
 
 				</div>
 			</div>
 
-			{activeTab === 'overall' && !isCustomerView && (
+			{activeTab === 'overall' && (
 				<List
 					config={invoiceListConfig()}
 					itemData={invoiceData}
