@@ -255,9 +255,10 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 					role="presentation"
 					onClick={() => setShowDetails(!showDetails)}
 				>
-					{showDetails ? 'show less' : 'Take Action'}
+					{showDetails ? 'Show less' : 'Take Action'}
 					{' '}
-					{showDetails ? <IcMArrowUp /> : <IcMArrowDown />}
+					{showDetails ? <IcMArrowUp style={{ marginLeft: 4 }} />
+						: <IcMArrowDown style={{ marginLeft: 4 }} />}
 					{' '}
 				</div>
 

@@ -76,11 +76,12 @@ function ApprovalForm({ errors, control, formValues }) {
 				rules={{ required: 'Required' }}
 				multiple
 			/>
-			{formValues?.booking_placed_on.includes('nvocc') ? (
+			{formValues?.booking_placed_on?.includes('nvocc') ? (
 				<div style={{ fontSize: 10, marginTop: 4 }}>
 					*NVOCC: non-vessel operating common carrier
 				</div>
 			) : null}
+
 			{errors?.booking_placed_on
 				? <div className={styles.error_message}>{errors?.booking_placed_on?.message}</div> : null}
 

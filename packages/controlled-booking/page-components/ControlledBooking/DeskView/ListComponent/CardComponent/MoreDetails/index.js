@@ -23,8 +23,8 @@ function MoreDetails({ primaryServiceDetails = {}, approvals }) {
 					</div>
 
 					<div
-						className={styles.approvals}
 						role="presentation"
+						className={styles.approvals}
 						onClick={() => handleDownload(approvals?.[0]?.manager_approval_proof)}
 					>
 						<IcMDownload style={{ marginRight: 4 }} />
@@ -36,6 +36,7 @@ function MoreDetails({ primaryServiceDetails = {}, approvals }) {
 				<div className={styles.frieght_value}>
 					Cargo to Freight Value
 				</div>
+
 			</div>
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
 				<div style={{ width: '75%' }}>
