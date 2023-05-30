@@ -8,10 +8,10 @@ import Loader from '../../common/Loader';
 import styles from './styles.module.css';
 
 function PieChart({ activeTab, chartData, loading }) {
-	const { stats, container_stats, late_collection_stats, late_release_stats } = chartData || {};
+	const { stats } = chartData || {};
 	const {
 		container_movement_count = '',
-		bl_do_release_count = '', both_count = '',
+		bl_do_release_count = '', both_count = '', container_stats, late_collection_stats, late_release_stats,
 	} = stats || {};
 	const {
 		draft_bl_approval_pending = '', invoice_not_uploaded = '', late_collection = '',

@@ -26,7 +26,7 @@ function CardList({ itemData }) {
 	const renderTooltip = (content, maxLength) => {
 		if (content.length > maxLength) {
 			return (
-				<Tooltip interactive placement="top" content={content} className={styles.tooltip}>
+				<Tooltip maxWidth={500} interactive placement="top" content={content} className={styles.tooltip}>
 					<div className={styles.value}>{`${content.substring(0, maxLength)}...`}</div>
 				</Tooltip>
 			);
@@ -120,8 +120,22 @@ function CardList({ itemData }) {
 						overflow   : 'hidden',
 					}}
 					>
-						<ShipmentTimline />
-						<BlDoTimeline />
+						<div>
+							<div className={styles.text}>
+								Shipment Timeline
+							</div>
+							<div>
+								<ShipmentTimline itemData={itemData} isAccordionActive={isAccordionActive} />
+							</div>
+						</div>
+						<div>
+							<div className={styles.text}>
+								BL/DO Timeline
+							</div>
+							<div>
+								<BlDoTimeline />
+							</div>
+						</div>
 					</div>
 				</div>
 			</div>

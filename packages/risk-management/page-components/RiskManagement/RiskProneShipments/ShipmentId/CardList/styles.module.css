@@ -128,7 +128,6 @@
 }
 .tooltip{
     white-space: nowrap;
-    overflow: scroll;
 }
 .column1{
     display: flex;
@@ -179,4 +178,13 @@
     align-items: center;
     width: 12%;
     margin-right: 12px;
+}
+.text{
+    font-size: 14px;
+    font-weight: 500;
+    color: #000000;
+    text-align: center;
+    align-items: center;
+    display: flex;
+    margin-top: 16px;
 }

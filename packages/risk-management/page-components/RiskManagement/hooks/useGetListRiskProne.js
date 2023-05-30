@@ -5,7 +5,8 @@ import { useEffect, useCallback, useState } from 'react';
 
 const useGetListRiskProne = ({ activeTab }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url: 'fcl_freight/list_risk_prone_shipments',
+		url    : 'fcl_freight/list_risk_prone_shipments',
+		method : 'get',
 	}, { manual: true, autoCancel: false });
 	const [filters, setFilters] = useState({
 		pageIndex        : 1,

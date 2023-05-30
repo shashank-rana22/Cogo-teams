@@ -39,7 +39,10 @@ function ShipmentId({ data, loading, filters, setFilters }) {
 		if (list.length === 0) {
 			return (
 				<div className={styles.no_data}>
-					No data Available
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/noShipmentFound.svg"
+						alt="empty_data"
+					/>
 				</div>
 			);
 		}

@@ -5,8 +5,10 @@ import PieChart from './PieChart';
 import ShipmentId from './ShipmentId';
 import styles from './styles.module.css';
 
-function RiskProneShipments({ data, loading, activeTab, setActiveTab, filters, setFilters }) {
-	const { stats } = data || {};
+function RiskProneShipments({
+	data, statsData, statsLoading, loading, activeTab, setActiveTab, filters, setFilters,
+}) {
+	const { stats } = statsData || {};
 	const {
 		container_movement_count = '',
 		bl_do_release_count = '', both_count = '',
@@ -33,7 +35,7 @@ function RiskProneShipments({ data, loading, activeTab, setActiveTab, filters, s
 				</Tabs>
 			</div>
 			<div className={styles.tab}>
-				<PieChart activeTab={activeTab} chartData={data} loading={loading} />
+				<PieChart activeTab={activeTab} chartData={statsData} loading={statsLoading} />
 			</div>
 			<div className={styles.tab}>
 				<ShipmentId data={data} loading={loading} filters={filters} setFilters={setFilters} />
