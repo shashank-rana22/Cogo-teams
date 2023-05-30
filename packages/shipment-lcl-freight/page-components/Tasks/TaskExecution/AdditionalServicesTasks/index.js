@@ -1,6 +1,5 @@
 import { Loader } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
-import React, { useState, useContext } from 'react';
+import React, { useState } from 'react';
 
 import AddRate from '../../../../commons/AdditionalServices/components/AddRate';
 import getStaus from '../../../../commons/AdditionalServices/components/List/ItemAdded/get_status';
@@ -10,9 +9,8 @@ function AdditionsServicesTasks({
 	task = {},
 	onCancel = () => {},
 	refetch = () => {},
+	shipment_data = {},
 }) {
-	const { shipment_data = {} } = useContext(ShipmentDetailContext);
-
 	const [addRate, setAddRate] = useState(null);
 
 	const { list = [], loading = true } = useListShipmentAdditionalServices({

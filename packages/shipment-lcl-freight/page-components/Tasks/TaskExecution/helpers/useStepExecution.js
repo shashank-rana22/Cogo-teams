@@ -1,6 +1,4 @@
-import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import { useContext } from 'react';
 
 import getDefaultValues from '../utils/get-default-values';
 import injectForm from '../utils/inject-form';
@@ -11,9 +9,9 @@ function useStepExecution({
 	stepConfig = {},
 	getApisData = {},
 	selectedMail = {},
+	shipment_data = {},
+	primary_service = {},
 }) {
-	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
-
 	const populatedControls = stepConfig.controls;
 
 	const valueInjectedControls = injectValues({

@@ -1,6 +1,3 @@
-import { ShipmentDetailContext } from '@cogoport/context';
-import { useContext } from 'react';
-
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import LoadingState from '../LoadingState';
 
@@ -19,18 +16,21 @@ function ExecuteTask({
 	selectedMail = [],
 	// setSelectedMail = () => {},
 	services = [],
+	shipment_data = {},
+	primary_service = {},
+	getShipment = () => {},
+	getShipmentTimeline = () => {},
+
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
-
-	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const {
 		steps = [],
 		currentStep = {},
 		setCurrentStep = () => {},
 		serviceIdMapping = [],
-	} = useTaskExecution({ task, taskConfigData });
+	} = useTaskExecution({ task, taskConfigData, servicesList: services, primaryService: primary_service });
 
 	const stepConfigValue = steps.length ? steps[currentStep] || steps[steps.length - 1] : {};
 
@@ -46,7 +46,7 @@ function ExecuteTask({
 				refetch={taskListRefetch}
 				primaryService={primary_service}
 				shipment_data={shipment_data}
-				servicesList={servicesList}
+				servicesList={services}
 			/>
 		);
 	}
@@ -94,6 +94,8 @@ function ExecuteTask({
 			uiConfig={taskConfigData?.task_config?.ui_config?.[currentStep]}
 			selectedMail={selectedMail}
 			serviceIdMapping={serviceIdMapping}
+			getShipment={getShipment}
+			getShipmentTimeline={getShipmentTimeline}
 		/>
 	);
 }

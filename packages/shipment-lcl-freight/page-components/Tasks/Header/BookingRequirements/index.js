@@ -1,16 +1,12 @@
 import { Modal } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
 import { getByKey } from '@cogoport/utils';
-import { useContext } from 'react';
 
 import { renderValue } from '../../../../commons/CargoDetails/RenderCargoPills/renderValue';
 
 import serviceMapping from './mapping.json';
 import styles from './styles.module.css';
 
-function BookingRequirements({ showBookingReq = false, setShowBookingReq = () => {} }) {
-	const { servicesList = [] } = useContext(ShipmentDetailContext);
-
+function BookingRequirements({ showBookingReq = false, setShowBookingReq = () => {}, servicesList = [] }) {
 	const main_service = servicesList?.find((s) => s?.main_service_id === null);
 
 	const { booking_desk_details, multi_service_details, supply_details } = serviceMapping;
@@ -66,11 +62,7 @@ function BookingRequirements({ showBookingReq = false, setShowBookingReq = () =>
 
 							<div className={styles.detail_container}>
 								{supply_details?.map((obj) => (
-									getByKey(main_service, obj.key)
-										? renderDetail({
-											obj,
-											key: obj.key,
-										}) : null))}
+									getByKey(main_service, obj.key) ? renderDetail({ obj, key: obj.key }) : null))}
 							</div>
 						</div>
 					</div>

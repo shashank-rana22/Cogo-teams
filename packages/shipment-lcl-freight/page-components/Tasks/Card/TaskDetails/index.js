@@ -1,10 +1,8 @@
 import { Tooltip } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
-import { useContext } from 'react';
 
 import CargoDetails from '../../../../commons/CargoDetails';
 
@@ -14,9 +12,8 @@ import styles from './styles.module.css';
 function TaskDetails({
 	task = {},
 	isTaskOpen = false,
+	servicesList = [],
 }) {
-	const { servicesList } = useContext(ShipmentDetailContext);
-
 	const requiredServiceArr = [];
 	(task.task_field_ids || []).forEach((id) => {
 		(servicesList || []).forEach((serviceObj) => {

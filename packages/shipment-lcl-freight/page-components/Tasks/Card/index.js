@@ -9,6 +9,7 @@ function Card({
 	selectedTaskId = '',
 	isTaskOpen = false,
 	refetch = () => {},
+	servicesList = [],
 }) {
 	const handleChange = (newMails) => {
 		handleClick(task, newMails);
@@ -16,7 +17,7 @@ function Card({
 
 	return (
 		<div className={styles.container}>
-			<TaskDetails task={task} isTaskOpen={isTaskOpen} />
+			<TaskDetails task={task} isTaskOpen={isTaskOpen} servicesList={servicesList} />
 
 			<div className={styles.action}>
 				{isTaskOpen ? (
@@ -34,6 +35,7 @@ function Card({
 					task={task}
 					hideThreeDots={task.status === 'completed'}
 					refetch={refetch}
+					services={servicesList}
 				/>
 			</div>
 		</div>

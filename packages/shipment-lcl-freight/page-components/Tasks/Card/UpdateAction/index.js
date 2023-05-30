@@ -1,19 +1,16 @@
 import { Tooltip, Popover } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMCall, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useState, useContext } from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 import UnableToDoTask from './UnableToDoTask';
 import UpdateAssignedStakeholder from './UpdateAssignedStakeholder';
 
-function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {} }) {
+function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {}, services = [] }) {
 	const [showAction, setShowAction] = useState(false);
 	const [showUnableTo, setShowUnableTo] = useState(false);
 	const [showAdmin, setShowAdmin] = useState(false);
-
-	const { servicesList: services } = useContext(ShipmentDetailContext);
 
 	const isMainServiceCancelled = false;
 	const requiredServiceArr = [];

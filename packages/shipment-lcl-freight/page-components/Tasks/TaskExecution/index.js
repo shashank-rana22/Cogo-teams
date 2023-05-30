@@ -9,6 +9,11 @@ function TaskExecution({
 	taskListRefetch = () => {},
 	selectedMail = [],
 	setSelectedMail = () => {},
+	shipment_data = {},
+	servicesList = [],
+	primary_service = {},
+	getShipmentTimeline = () => {},
+	getShipment = () => {},
 }) {
 	if (task?.task_type === 'amend_document' && task?.task !== 'amend_draft_house_bill_of_lading') {
 		return (
@@ -39,6 +44,7 @@ function TaskExecution({
 					onCancel={onCancel}
 					task={task}
 					refetch={taskListRefetch}
+					shipment_data={shipment_data}
 				/>
 			);
 
@@ -50,6 +56,11 @@ function TaskExecution({
 					taskListRefetch={taskListRefetch}
 					selectedMail={selectedMail}
 					setSelectedMail={setSelectedMail}
+					services={servicesList}
+					shipment_data={shipment_data}
+					primary_service={primary_service}
+					getShipmentTimeline={getShipmentTimeline}
+					getShipment={getShipment}
 				/>
 			);
 	}

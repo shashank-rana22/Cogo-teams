@@ -26,6 +26,7 @@ function UpdateAssignedStakeholder({
 			status : 'pending',
 			assigned_stakeholder,
 		};
+
 		apiTrigger(payload);
 	};
 

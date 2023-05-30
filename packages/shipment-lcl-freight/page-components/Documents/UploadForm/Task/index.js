@@ -1,4 +1,5 @@
-import { useState } from 'react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import { useState, useContext } from 'react';
 
 import TaskCard from '../../../Tasks/TaskExecution';
 
@@ -8,6 +9,10 @@ function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
 	const [pendingTask, setPendingTask] = useState({});
 	const { pendingItem = {} } = showDoc;
 
+	const {
+		shipment_data, primary_service,
+		servicesList, getShipmentTimeline = () => {}, getShipment = () => {},
+	} = useContext(ShipmentDetailContext);
 	const handleClick = () => {
 		setShowDoc(null);
 
@@ -23,7 +28,11 @@ function Task({ showDoc = {}, setShowDoc = () => {}, refetch = () => {} }) {
 				task={pendingItem}
 				onCancel={() => handleClick(pendingItem)}
 				taskListRefetch={refetch}
-				type="modal"
+				shipment_data={shipment_data}
+				getShipmentTimeline={getShipmentTimeline}
+				getShipment={getShipment}
+				primary_service={primary_service}
+				servicesList={servicesList}
 			/>
 		</div>
 

@@ -1,25 +1,20 @@
 import { Button } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-import { useContext } from 'react';
 
-import useTask from '../../../hooks/useTask';
-import Card from '../Card';
-import Header from '../Header';
-import LoadingState from '../LoadingState';
-import TaskExecution from '../TaskExecution';
+import useTask from '../../../../hooks/useTask';
+import Card from '../../Card';
+import Header from '../../Header';
+import LoadingState from '../../LoadingState';
+import TaskExecution from '../../TaskExecution';
 
 import styles from './styles.module.css';
 
-function TaskView() {
-	const {
-		shipment_data, primary_service, servicesList,
-		refetch:getShipment = () => {},
-		getShipmentTimeline = () => {},
-		isGettingShipment,
-	} = useContext(ShipmentDetailContext);
-
+function Task({
+	shipment_data = {}, services = [],
+	isGettingShipment = false,
+	primary_service,
+}) {
 	const {
 		count = 0,
 		completedTaskCount = 0,
@@ -46,8 +41,6 @@ function TaskView() {
 				setHideCompletedTasks={setHideCompletedTasks}
 				showMyTasks={showMyTasks}
 				setShowMyTasks={setShowMyTasks}
-				shipment_data={shipment_data}
-				servicesList={servicesList}
 			/>
 
 			{loading ? <LoadingState /> : null}
@@ -67,15 +60,15 @@ function TaskView() {
 
 							<div style={{ width: 200 }}>See All Tasks</div>
 						</Button>
-					) : (tasksList || []).map((task) => (
-						<Card
-							key={task?.id}
-							task={task}
-							handleClick={handleClick}
-							refetch={taskListRefetch}
-							servicesList={servicesList}
-						/>
-					)) }
+					)
+						: (tasksList || []).map((task) => (
+							<Card
+								key={task?.id}
+								task={task}
+								handleClick={handleClick}
+								refetch={taskListRefetch}
+							/>
+						)) }
 
 					{selectedTaskId ? (
 						<>
@@ -84,7 +77,6 @@ function TaskView() {
 								handleClick={handleClick}
 								isTaskOpen
 								loading={loading}
-								servicesList={servicesList}
 							/>
 
 							<TaskExecution
@@ -94,10 +86,9 @@ function TaskView() {
 								selectedMail={selectedMail}
 								setSelectedMail={setSelectedMail}
 								shipment_data={shipment_data}
-								servicesList={servicesList}
+								servicesList={services}
 								primary_service={primary_service}
-								getShipment={getShipment}
-								getShipmentTimeline={getShipmentTimeline}
+
 							/>
 						</>
 					) : null }
@@ -107,4 +98,4 @@ function TaskView() {
 	);
 }
 
-export default TaskView;
+export default Task;

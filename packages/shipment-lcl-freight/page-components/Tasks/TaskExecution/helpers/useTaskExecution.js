@@ -1,11 +1,8 @@
-import { ShipmentDetailContext } from '@cogoport/context';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import injectUiConfigs from '../utils/inject-ui-configs';
 
-function useTaskExecution({ task = {}, taskConfigData = {} }) {
-	const { primary_service: primaryService = {}, servicesList = [] } = useContext(ShipmentDetailContext);
-
+function useTaskExecution({ task = {}, taskConfigData = {}, primaryService = {}, servicesList = [] }) {
 	const dataConfig = injectUiConfigs(taskConfigData, task, primaryService);
 
 	let initialStep = 0;

@@ -4,14 +4,10 @@ import { useContext, useState, useEffect } from 'react';
 
 import useListShipmentPendingTasks from './useListShipmentPendingTasks';
 
-const useTask = () => {
+const useTask = ({ shipment_data = {}, isGettingShipment = false }) => {
 	const { user_id } = useSelector(({ profile }) => ({ user_id: profile?.user?.id }));
 
-	const {
-		shipment_data = {}, isGettingShipment,
-		stakeholderConfig : { tasks = {} } = {},
-		activeStakeholder,
-	} = useContext(ShipmentDetailContext);
+	const { stakeholderConfig : { tasks = {} } = {}, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const [selectedTaskId, setSelectedTaskId] = useState(null);
 	const [hideCompletedTasks, setHideCompletedTasks] = useState(false);

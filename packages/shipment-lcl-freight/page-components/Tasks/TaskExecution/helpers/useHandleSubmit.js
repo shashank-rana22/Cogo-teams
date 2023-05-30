@@ -1,9 +1,8 @@
 import { Toast } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../hooks/useUpdateShipmentCogoid';
 import extraApiPayload from '../utils/extra-api-payload';
@@ -22,13 +21,12 @@ function useHandleSubmit({
 	currentStep = 0,
 	isLastStep = 0,
 	getApisData,
+	shipment_data = {},
+	primary_service = {},
+	getShipment = () => {},
+	getShipmentTimeline = () => {},
 }) {
 	const [isLoading, setIsLoading] = useState();
-
-	const {
-		shipment_data = {}, primary_service = {},
-		getShipment = () => {}, getShipmentTimeline = () => {},
-	} = useContext(ShipmentDetailContext);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : finalConfig.end_point || 'update_shipment_pending_task',

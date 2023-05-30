@@ -1,19 +1,16 @@
-import { ShipmentDetailContext } from '@cogoport/context';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest, request } from '@cogoport/request';
-import { useContext, useState } from 'react';
+import { useState } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../../../hooks/useUpdateShipmentCogoid';
 
 const useDraftBLHelper = ({
 	pendingTask = {},
+	getShipmentRefetch = () => {},
+	shipment_data = {},
+	primary_service = {},
 }) => {
 	const [createTradeDocLoading, setCreateTradeDocLoading] = useState();
-	const {
-		refetch: getShipmentRefetch,
-		shipment_data,
-		primary_service,
-	} = useContext(ShipmentDetailContext);
 
 	const { submitShipmentMapping } = useUpdateShipmentCogoid();
 

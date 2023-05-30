@@ -12,8 +12,10 @@ function Header({
 	setHideCompletedTasks = () => {},
 	showMyTasks = true,
 	setShowMyTasks = () => {},
+	shipment_data = {},
+	servicesList = [],
 }) {
-	const { stakeholderConfig : { tasks = {} } = {}, shipment_data = {} } = useContext(ShipmentDetailContext);
+	const { stakeholderConfig : { tasks = {} } = {} } = useContext(ShipmentDetailContext);
 	const bookingReqCond = !!(tasks.show_booking_req && shipment_data?.state !== 'shipment_received');
 	const [showBookingReq, setShowBookingReq] = useState(false);
 
@@ -66,6 +68,7 @@ function Header({
 					<BookingRequirements
 						showBookingReq={showBookingReq}
 						setShowBookingReq={setShowBookingReq}
+						servicesList={servicesList}
 					/>
 				)
 				: null}

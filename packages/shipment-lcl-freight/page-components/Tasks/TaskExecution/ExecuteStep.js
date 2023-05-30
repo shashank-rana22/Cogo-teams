@@ -15,12 +15,18 @@ function ExecuteStep({
 	getApisData = {},
 	selectedMail = [],
 	serviceIdMapping = [],
+	shipment_data = {},
+	primary_service = {},
+	getShipment = () => {},
+	getShipmentTimeline = () => {},
 }) {
 	const { formProps, fields, showElements } = useStepExecution({
 		task,
 		stepConfig,
 		getApisData,
 		selectedMail,
+		shipment_data,
+		primary_service,
 	});
 
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;
@@ -35,6 +41,8 @@ function ExecuteStep({
 		isLastStep,
 		getApisData,
 		showElements,
+		getShipment,
+		getShipmentTimeline,
 	});
 
 	const formValues = watch();
