@@ -1,8 +1,8 @@
 import { Button, Modal } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
+import { Layout } from '@cogoport/surface-modules';
 import React, { useEffect } from 'react';
 
 import Info from './Info';
