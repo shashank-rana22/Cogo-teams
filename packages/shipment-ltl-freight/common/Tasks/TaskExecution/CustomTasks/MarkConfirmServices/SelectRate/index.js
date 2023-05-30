@@ -1,8 +1,8 @@
 import { Loader } from '@cogoport/components';
 import React, { useEffect } from 'react';
 
-import useListShipmentBookingConfirmationPreferences
-	from '../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
+import useListBookingPreferences
+	from '../../../../../../hooks/useListBookingPreferences';
 
 import Card from './Card';
 import SelectNormal from './SelectNormal';
@@ -14,7 +14,7 @@ function SelectRate({
 	updateConfirmation,
 	task = {},
 }) {
-	const { data, loading } = useListShipmentBookingConfirmationPreferences({
+	const { data, loading } = useListBookingPreferences({
 		shipment_id    : task.shipment_id,
 		defaultFilters : { service_type: task.service_type },
 	});

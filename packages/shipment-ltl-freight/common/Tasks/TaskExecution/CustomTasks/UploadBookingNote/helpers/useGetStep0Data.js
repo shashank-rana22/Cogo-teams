@@ -1,10 +1,10 @@
 import { useForm } from '@cogoport/forms';
 import { useState, useEffect } from 'react';
 
-import useListShipmentBookingConfirmationPreferences
-	from '../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
-import useUpdateShipmentBookingConfirmationPreferences
-	from '../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
+import useListBookingPreferences
+	from '../../../../../../hooks/useListBookingPreferences';
+import useUpdateBookingPreferences
+	from '../../../../../../hooks/useUpdateBookingPreferences';
 
 const useGetStep0Data = ({ shipment_data = {}, task = {}, servicesList = [], setStep = () => {} }) => {
 	const { service_id, service_type } = task || {};
@@ -21,11 +21,11 @@ const useGetStep0Data = ({ shipment_data = {}, task = {}, servicesList = [], set
 		}
 	};
 
-	const { apiTrigger, loading:updatePreferenceLoading } = useUpdateShipmentBookingConfirmationPreferences({
+	const { apiTrigger, loading:updatePreferenceLoading } = useUpdateBookingPreferences({
 		refetch: updateRefetch,
 	});
 
-	const { data, loading } = useListShipmentBookingConfirmationPreferences({
+	const { data, loading } = useListBookingPreferences({
 		shipment_id,
 		defaultFilters: {
 			service_id,

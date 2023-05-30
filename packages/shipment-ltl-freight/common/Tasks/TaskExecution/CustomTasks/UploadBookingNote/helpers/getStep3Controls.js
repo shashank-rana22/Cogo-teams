@@ -1,5 +1,5 @@
-import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
-import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
+import FTL_UNITS from '@cogoport/surface-modules/contants/FTL_UNITS';
+// import { convertObjectMappingToArray } from '@cogoport/surfce-modules/utils/convertObjectMappingToArray';
 import { startCase } from '@cogoport/utils';
 
 const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {

@@ -1,7 +1,7 @@
 import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-
 import { Layout } from '@cogoport/surface-modules';
+
 import getDefaultValues from '../../utils/get-default-values';
 import Step3 from '../UploadBookingNote/components/Step3';
 import useGetStep3Data from '../UploadBookingNote/helpers/useGetStep3Data';
