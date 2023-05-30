@@ -1,6 +1,6 @@
-import { SingleDateRange, Select, Button, Popover, Input } from '@cogoport/components';
+import { SingleDateRange, Select, Button, Popover, Input, MultiSelect } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
@@ -40,7 +40,7 @@ function DefaultersFilters({ globalFilters, setGlobalFilters, isCustomerView, is
 					style={{ width: '200px' }}
 				/>
 
-				<Select
+				<MultiSelect
 					value={globalFilters?.services}
 					onChange={(e) => setGlobalFilters((prev) => ({ ...prev, services: e }))}
 					placeholder="Shipment Type"
@@ -54,7 +54,7 @@ function DefaultersFilters({ globalFilters, setGlobalFilters, isCustomerView, is
 			<div className={styles.filter_section}>
 				<SingleDateRange
 					placeholder="Invoice Date"
-					dateFormat="MM/dd/yyyy"
+					dateFormat="dd/MM/yyyy"
 					name="invoiceDate"
 					onChange={(e) => { setGlobalFilters((prev) => ({ ...prev, invoiceDate: e })); }}
 					value={globalFilters?.invoiceDate}
@@ -64,7 +64,7 @@ function DefaultersFilters({ globalFilters, setGlobalFilters, isCustomerView, is
 
 				<SingleDateRange
 					placeholder="Due Date"
-					dateFormat="MM/dd/yyyy"
+					dateFormat="dd/MM/yyyy"
 					name="dueDate"
 					onChange={(e) => { setGlobalFilters((prev) => ({ ...prev, dueDate: e })); }}
 					value={globalFilters?.dueDate}
@@ -111,6 +111,9 @@ function DefaultersFilters({ globalFilters, setGlobalFilters, isCustomerView, is
 								onClick={() => setVisible(!visible)}
 							>
 								+ More Filters
+								<span className={styles.icon}>
+									<IcMFilter />
+								</span>
 							</Button>
 						</Popover>
 					</div>

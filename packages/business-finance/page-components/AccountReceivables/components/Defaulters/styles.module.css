@@ -8,3 +8,50 @@
     display: flex;
     align-items: center;
 }
+
+.send_report {
+	margin-right: 20px;
+	font-size: 14px;
+	font-weight: 600;
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.field_pair {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.tool_tip {
+	font-size: 12px;
+}
+
+.link {
+	color: #f68b21;
+	text-decoration: underline;
+	cursor: pointer;
+	font-size: 12px;
+}
+
+.field_pair {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.styled_pills {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+	height: 16px;
+	padding: 8px 12px;
+	background-color: var(--color);
+	border-radius: 4px;
+}
+
+.style_text {
+	font-size: 10px;
+}

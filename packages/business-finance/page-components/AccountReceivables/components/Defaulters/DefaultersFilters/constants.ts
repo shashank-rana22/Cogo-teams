@@ -8,8 +8,8 @@ export const ENTITY_OPTIONS = Object.keys(entityDetails)?.map((entity) => ({
 }));
 
 export const MIGRATE_STATUS = [
-	{ label: 'True', value: 'true' },
-	{ label: 'False', value: 'false' },
+	{ label: 'True', value: true },
+	{ label: 'False', value: false },
 ];
 
 export const INVOICE_STATUSES = [
