@@ -29,7 +29,7 @@ function Details() {
 			<Header loading={Detailsloading} requestedOn={listData?.list?.[0]} />
 			<div className={styles.basic_details}>
 				<BasicDetails Detailsloading={Detailsloading} data={listData} getRfqsForApproval={getRfqsForApproval} />
-				<Graph rfq_id={rfq_id} />
+				{/* <Graph rfq_id={rfq_id} /> */}
 			</div>
 			<div className={styles.rfq_list}>
 				<Services
