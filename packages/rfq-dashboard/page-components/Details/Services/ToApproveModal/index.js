@@ -1,15 +1,22 @@
 import { Modal, Button } from '@cogoport/components';
+import { useEffect } from 'react';
 
+import useGetRfqRateCards from '../../../../hooks/useGetRfqRateCards';
 import useUpdateRfqState from '../../../../hooks/useUpdateRfqState';
 
 import styles from './styles.module.css';
 
 function ToApproveModal({ show, setShow = () => {}, rfq_id = '' }) {
+	const { getRfqsRateCards, data = {} } = useGetRfqRateCards({ rfq_id, state: 'modified_and_sent' });
+
 	const { updateRfqState, loading } = useUpdateRfqState();
 
 	const approve_rfq = () => {
 		updateRfqState({ rfq_id, setShow });
 	};
+	useEffect(() => {
+		getRfqsRateCards();
+	}, [getRfqsRateCards]);
 
 	if (!show) {
 		return null;

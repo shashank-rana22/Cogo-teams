@@ -10,7 +10,7 @@ function Dashboard() {
 	const formProps = useForm();
 
 	const { watch } = formProps;
-	const { end_date, organization_size, status, search, service_type, start_date, profitability } = watch();
+	const { end_date, organization_size, search, service_type, start_date, profitability } = watch();
 
 	const [filterStore, setFilterStore] = useState({
 		activeTab,
@@ -23,7 +23,7 @@ function Dashboard() {
 			...prev,
 			activeTab,
 			search,
-			status,
+
 			organizationSize : organization_size,
 			serviceType      : service_type,
 			endDate          : end_date,
@@ -31,7 +31,7 @@ function Dashboard() {
 			lowProfitability,
 			highProfitability,
 		}));
-	}, [search, organization_size, status, service_type, start_date, end_date,
+	}, [search, organization_size, service_type, start_date, end_date,
 		activeTab, filterStore.sortBy, profitability]);
 
 	return (

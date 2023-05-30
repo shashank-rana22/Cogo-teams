@@ -3,14 +3,14 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useGetRfqRateCards = ({ rfq_id = '' }) => {
+const useGetRfqRateCards = ({ rfq_id = '', state }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_rfq_rate_cards',
 		method : 'GET',
 		params : {
 			group_by_data_required : true,
 			filters                : {
-				state: 'requested_for_approval',
+				card_state: state,
 				rfq_id,
 			},
 		},

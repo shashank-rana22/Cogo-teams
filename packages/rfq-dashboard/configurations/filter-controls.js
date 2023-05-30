@@ -42,26 +42,6 @@ const controls = [
 		],
 	},
 	{
-		name     : 'status',
-		label    : 'RFQ Status',
-		type     : 'checkbox',
-		multiple : true,
-		options  : [
-			{
-				label : 'RFQ Sent',
-				value : 'sent',
-			},
-			{
-				label : 'Contract Live',
-				value : 'live',
-			},
-			{
-				label : 'Pending',
-				value : 'pending',
-			},
-		],
-	},
-	{
 		name    : 'service_type',
 		label   : 'Service Type',
 		type    : 'chips',

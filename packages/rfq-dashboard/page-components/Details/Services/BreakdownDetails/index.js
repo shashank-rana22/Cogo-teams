@@ -27,6 +27,7 @@ function BreakdownDetails({
 	refetchRateCards,
 	setShowPrice,
 	getRfqsForApproval,
+	margin_limit,
 }) {
 	const { query } = useRouter();
 	const { rfq_id = '' } = query;
@@ -76,7 +77,7 @@ function BreakdownDetails({
 
 	return (
 		<div className={styles.container}>
-			<Header />
+			<Header margin_limit={margin_limit} />
 			<div>
 				{(rateDetails || []).map((item) => {
 					const serviceKey = item?.id;
@@ -151,11 +152,11 @@ function BreakdownDetails({
 								amount:
 									(convenienceDetails?.convenience_rate?.price || 0)
 									* (convenience_line_item?.quantity || 1),
-								currency: convenience_line_item?.currency,
-								options: {
-									style: 'currency',
-									currencyDisplay: 'code',
-									maximumFractionDigits: 0,
+								currency : convenience_line_item?.currency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 0,
 								},
 							})}
 
@@ -169,12 +170,12 @@ function BreakdownDetails({
 					<div className={styles.total_title}>TOTAL</div>
 					<div className={styles.total_title}>
 						{formatAmount({
-							amount: total + convenience_fee,
-							currency: rate?.total_price_currency,
-							options: {
-								style: 'currency',
-								currencyDisplay: 'code',
-								maximumFractionDigits: 0,
+							amount   : total + convenience_fee,
+							currency : rate?.total_price_currency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 0,
 							},
 						})}
 					</div>
@@ -187,12 +188,12 @@ function BreakdownDetails({
 					</div>
 					<div className={styles.title_value}>
 						{formatAmount({
-							amount: total + convenience_fee,
-							currency: rate?.total_price_currency,
-							options: {
-								style: 'currency',
-								currencyDisplay: 'code',
-								maximumFractionDigits: 0,
+							amount   : total + convenience_fee,
+							currency : rate?.total_price_currency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 0,
 							},
 						})}
 					</div>

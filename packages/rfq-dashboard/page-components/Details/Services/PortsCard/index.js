@@ -62,7 +62,9 @@ function PortsCard(props) {
 		}
 	}, [getRfqRateCardDetails, showPrice]);
 
-	const { rate = {}, detail: rate_card_details = {}, currency_conversion = {} } = rate_card_details_data || {};
+	const {
+		rate = {}, detail: rate_card_details = {}, currency_conversion = {}, margin_limit = {},
+	} = rate_card_details_data || {};
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
 
@@ -140,7 +142,7 @@ function PortsCard(props) {
 							setShowPrice(isEmpty(showPrice) ? { rfq_rate_card_id: id } : {});
 						}}
 					>
-						{isEmpty(showPrice) ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+						{!isEmpty(showPrice) ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 					</button>
 				</div>
 				{!isEmpty(showPrice) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && (
@@ -158,6 +160,7 @@ function PortsCard(props) {
 						refetchRateCards={refetchRateCards}
 						setShowPrice={setShowPrice}
 						getRfqsForApproval={getRfqsForApproval}
+						margin_limit={margin_limit}
 					/>
 				)}
 				{
