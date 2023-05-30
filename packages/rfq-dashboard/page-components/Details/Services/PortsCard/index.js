@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { IcCFcl, IcMPortArrow, IcMArrowRotateDown, IcMArrowRotateUp, IcCLcl, IcCAir } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -19,19 +20,15 @@ const COMMODITY_MAPPING = ['cargo_weight_per_container', 'commodity',
 	'container_size', 'container_type', 'containers_count'];
 
 const ICONMAPPING = {
-	fcl_freight: IcCFcl,
-
-	lcl_freight: IcCLcl,
-
-	air_freight: IcCAir,
+	fcl_freight : IcCFcl,
+	lcl_freight : IcCLcl,
+	air_freight : IcCAir,
 };
 
 const TEXTMAPPING = {
-	fcl_freight: 'FCL',
-
-	lcl_freight: 'LCL',
-
-	air_freight: 'AIR',
+	fcl_freight : 'FCL',
+	lcl_freight : 'LCL',
+	air_freight : 'AIR',
 };
 
 function PortsCard(props) {
@@ -56,7 +53,7 @@ function PortsCard(props) {
 
 	const commodity_array = [];
 
-	COMMODITY_MAPPING.map((commodity) => commodity_array.push({ [commodity]: detail[commodity] }));
+	COMMODITY_MAPPING.forEach((commodity) => commodity_array.push({ [commodity]: detail[commodity] }));
 
 	const {
 		getRfqRateCardDetails, rfq_card_loading,
@@ -143,14 +140,14 @@ function PortsCard(props) {
 							</>
 						)}
 
-					<button
+					<Button
 						className={styles.down_card_button}
 						onClick={() => {
 							setShowPrice(isEmpty(showPrice) ? { rfq_rate_card_id: id } : {});
 						}}
 					>
 						{!isEmpty(showPrice) ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-					</button>
+					</Button>
 				</div>
 				{!isEmpty(showPrice) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && (
 					<BreakdownDetails
@@ -170,9 +167,7 @@ function PortsCard(props) {
 						margin_limit={margin_limit}
 					/>
 				)}
-				{
-					rfq_card_loading && <BreakdownLoading />
-				}
+				{rfq_card_loading && <BreakdownLoading />}
 			</div>
 		</div>
 	);

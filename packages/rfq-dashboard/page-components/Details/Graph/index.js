@@ -4,14 +4,13 @@ import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 // import { graphPastMonthData } from '../../../configurations/past-months-graph-data';
-import usegetRfqGraph from '../../../hooks/useGetRfqGraph';
+import useGetRfqGraph from '../../../hooks/useGetRfqGraph';
 
 import EmptyLineChart from './EmptyStateLineChart';
 import LineChartLoader from './LoaderGraph';
 import styles from './styles.module.css';
 
 function Graph({ rfq_id = '' }) {
-	console.log('rfq_id::', rfq_id);
 	const LegendsData = [
 		{
 			label: '100 Shipment Booked',
@@ -30,29 +29,59 @@ function Graph({ rfq_id = '' }) {
 		},
 	];
 
-	const { getRfqGraph, data = {}, loading } = usegetRfqGraph();
+	const { getRfqGraph, data = {}, loading } = useGetRfqGraph();
 	useEffect(() => {
 		getRfqGraph({ rfq_id });
-	}, [getRfqGraph]);
+	}, [getRfqGraph, rfq_id]);
 
-	const { graph_data = {} } = data;
-	// console.log(graph_data, 'graph_data');
-	const graphPastMonthData = [];
-	(graph_data?.y_axis || []).forEach((item) => {
-		graphPastMonthData.push({
+	const { graph_data = {}, shipment_booked = '', contracts_created = '', revenue_generated = '' } = data;
+	const { y_axis = [] } = graph_data;
+
+	console.log('data::', data);
+
+	let graphPastMonthDatas = [];
+	if (y_axis?.length > 0 && !loading) {
+		graphPastMonthDatas = (y_axis || []).map((item) => ({
 			x : item?.month,
 			y : item?.count,
-		});
-	});
+		}));
+	}
 
-	// const graphPastMonthData = Object.entries(graph_data?.y_axis || {}).map(([key, value]) => ({
-	// 	x : key,
-	// 	y : value?.shipment_received,
-	// }));
+	const graphValue = [{ id: 'shipment', data: graphPastMonthDatas }];
 
+	// (y_axis || []).forEach((item) => {
+	// 	console.log('item :: ', item);
+
+	// 	if (item) {
+	// 		// graphPastMonthData.push({
+	// 		// 	x : item?.month,
+	// 		// 	y : item?.count,
+	// 		// });
+	// 	}
+	// });
+
+	// let graphPastMonthData = [];
+
+	// if (y_axis && !loading) {
+	// 	graphPastMonthData = (y_axis)?.map(([key, value]) => ({
+	// 		x : key,
+	// 		y : value,
+	// 	}));
+	// }
+
+	// let graphPastMonthData = [];
+
+	// if (Array.isArray(y_axis) && !loading) {
+	// 	graphPastMonthData = y_axis.map(([key, value]) => ({
+	// 		x : key,
+	// 		y : value,
+	// 	}));
+	// }
+
+	console.log(graphPastMonthDatas, 'graphPastMonthData');
 	return (
 		<div className={styles.container}>
-			{(isEmpty(graphPastMonthData) && !loading)
+			{(isEmpty(graphPastMonthDatas) && !loading)
 				? <EmptyLineChart />
 				:			(
 					<>
@@ -62,7 +91,7 @@ function Graph({ rfq_id = '' }) {
 								<ResponsiveLine
 									width={380}
 									height={120}
-									data={graphPastMonthData}
+									data={graphValue}
 									colors={['#FFEBAD']}
 									margin={{ top: 15, right: 10, bottom: 35, left: 35 }}
 									xScale={{ type: 'point' }}
@@ -110,7 +139,7 @@ function Graph({ rfq_id = '' }) {
 									colorBy="id"
 								/>
 								<div className={styles.legend_sections}>
-									{(LegendsData || []).map((item) => (
+									{(LegendsData || []).map((item, index) => (
 										<div className={styles.legends_section_part}>
 											<IcCFtick fill="#C4DC91" />
 											<p className={styles.legend_name}>{item.label}</p>

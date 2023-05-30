@@ -72,6 +72,7 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRf
 							</div>
 							{rate_card_list_object[key].map((rate_card) => (
 								<div key={rate_card.id}>
+
 									<PortsCard
 										id={rate_card.id}
 										data={rate_card}
