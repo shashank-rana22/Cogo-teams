@@ -24,6 +24,7 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRf
 	const { rfq_id = '' } = query || {};
 
 	const [show, setShow] = useState(false);
+	const [cardStateCount, setCardStateCount] = useState();
 
 	return (
 
@@ -48,6 +49,7 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRf
 							show={show}
 							setShow={setShow}
 							rfq_id={rfq_id}
+							cardStateCount={cardStateCount}
 						/>
 					)
 				}
@@ -77,6 +79,7 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRf
 										title={key}
 										refetchRateCards={refetchRateCards}
 										getRfqsForApproval={getRfqsForApproval}
+										setCardStateCount={setCardStateCount}
 									/>
 								</div>
 							))}

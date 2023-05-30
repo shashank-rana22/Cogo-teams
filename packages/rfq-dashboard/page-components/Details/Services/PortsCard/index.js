@@ -35,13 +35,20 @@ const TEXTMAPPING = {
 };
 
 function PortsCard(props) {
-	const { data = {}, loading, refetchRateCards, getRfqsForApproval } = props;
+	const { data = {}, loading, refetchRateCards, getRfqsForApproval, setCardStateCount } = props;
 
 	const [showPrice, setShowPrice] = useState({});
 	const {
 		detail = {}, freight_price_currency = '', freight_price_discounted = '',
-		total_price_discounted = '', id = '', stats = {},
+		total_price_discounted = '', id = '', stats = {}, card_state = '',
 	} = data;
+
+	if (card_state) {
+		setCardStateCount((previous) => ({
+			modified : card_state === 'modified_and_sent' ? (previous?.modified || 0) + 1 : (previous?.modified || 0),
+			total    : (previous?.total || 0) + 1,
+		}));
+	}
 
 	const {
 		origin_port = {}, destination_port = {}, service_type,
