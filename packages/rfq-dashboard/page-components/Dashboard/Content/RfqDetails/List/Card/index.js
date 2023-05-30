@@ -109,10 +109,10 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 					<div className={styles.field}>
 						<div className={styles.label}>Promised Con Revenue</div>
 						<div className={styles.value}>
-							{stats.promised_consolidated_revenue
+							{stats?.promised_consolidated_revenue
 								? priceFormating(
-									stats.promised_consolidated_revenue,
-									stats.promised_consolidated_revenue_currency,
+									stats?.promised_consolidated_revenue,
+									stats?.promised_consolidated_revenue_currency,
 								)
 								: '-'}
 
@@ -122,8 +122,8 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 					<div className={styles.field}>
 						<div className={styles.label}>Promised Con Profitability</div>
 						<div className={styles.value}>
-							{stats.promised_consolidated_profitability !== undefined
-								? `${stats.promised_consolidated_profitability.toFixed(2)}%` : '-'}
+							{typeof stats?.promised_consolidated_profitability === 'number'
+								? `${stats?.promised_consolidated_profitability?.toFixed(2)}%` : '-'}
 
 						</div>
 
