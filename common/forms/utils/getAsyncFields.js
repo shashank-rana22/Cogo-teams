@@ -444,6 +444,27 @@ function asyncAllocationRequestRejectionType() {
 	};
 }
 
+function asyncPlanPricingList() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_plan_pricings',
+		initialCall : true,
+		params      : {
+			filters: { is_active: true },
+		},
+	};
+}
+
+function asyncQuotaList() {
+	return {
+		labelKey    : 'product_name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_products',
+		initialCall : true,
+	};
+}
+
 function asyncListPromotions() {
 	return {
 		labelKey    : 'name',
@@ -495,5 +516,7 @@ export {
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
 	asyncListPromotions,
+	asyncPlanPricingList,
+	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
 };
