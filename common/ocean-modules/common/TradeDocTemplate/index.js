@@ -8,6 +8,7 @@ function TradeDocTemplate(
 		documentType = 'bluetide_hbl',
 		initialValues = null,
 		mode = 'read',
+		watermark = null,
 	},
 
 	ref,
@@ -19,6 +20,7 @@ function TradeDocTemplate(
 					mode={mode}
 					ref={ref}
 					initialValues={initialValues}
+					watermark={watermark}
 				/>
 			);
 		case 'container_arrival_notice':
