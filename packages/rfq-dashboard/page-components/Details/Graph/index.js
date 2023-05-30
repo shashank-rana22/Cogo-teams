@@ -10,7 +10,8 @@ import EmptyLineChart from './EmptyStateLineChart';
 import LineChartLoader from './LoaderGraph';
 import styles from './styles.module.css';
 
-function Graph() {
+function Graph({ rfq_id = '' }) {
+	console.log('rfq_id::', rfq_id);
 	const LegendsData = [
 		{
 			label: '100 Shipment Booked',
@@ -29,15 +30,17 @@ function Graph() {
 		},
 	];
 
-	const { getRfqGraph, graph_data, loading } = usegetRfqGraph();
-
+	const { getRfqGraph, data = {}, loading } = usegetRfqGraph();
 	useEffect(() => {
-		getRfqGraph();
+		getRfqGraph({ rfq_id });
 	}, [getRfqGraph]);
 
-	const graphPastMonthData = Object.entries(graph_data.graph_data.y_axis).map(([key, value]) => ({
+	const { graph_data = {} } = data;
+	// console.log(graph_data, 'graph_data');
+
+	const graphPastMonthData = Object.entries(graph_data?.y_axis || {}).map(([key, value]) => ({
 		x : key,
-		y : value.shipment_received,
+		y : value?.shipment_received,
 	}));
 
 	return (
