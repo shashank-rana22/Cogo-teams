@@ -2,15 +2,23 @@ import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React from 'react';
 
+import { GenericObject } from '../Interfaces/index';
 import ReceivablesPayablesFrom from '../ReceivablesPayablesForm';
 
+interface Props {
+	show?:boolean
+	approveTds?:any,
+	globalFilters?:GenericObject,
+	editTdsLoading?:boolean
+	setShow?:(p:boolean)=> void,
+}
 function PayablesEditModal({
 	show,
 	setShow,
 	editTdsLoading,
 	approveTds,
 	globalFilters,
-}) {
+}:Props) {
 	const {
 		handleSubmit,
 		control,

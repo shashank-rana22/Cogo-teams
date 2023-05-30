@@ -2,15 +2,22 @@ import { SelectController, InputController, AsyncSelectController, DatepickerCon
 
 import tdsPayableFilters from '../../../../../configurations/tds-settlement/tds-payables-collection';
 import tdsCollectionFilters from '../../../../../configurations/tds-settlement/tds-receivables-collection';
+import { GenericObject } from '../Interfaces/index';
 
 import styles from './styles.module.css';
 
+interface Props {
+	control?:GenericObject;
+	globalFilters?:GenericObject;
+	TypeKey?:string,
+	errors?:GenericObject,
+}
 function ReceivablesPayablesFrom({
 	control,
 	errors,
 	TypeKey,
 	globalFilters,
-}) {
+}:Props) {
 	const powerControls = (newControls) => newControls.map((controls) => {
 		if (controls.name === 'id') {
 			return {

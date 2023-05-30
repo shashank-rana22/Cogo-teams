@@ -1,14 +1,31 @@
 import { Tooltip } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { getFormattedPrice } from '@cogoport/forms';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import { GenericObject } from './Interfaces/index';
 import PayablesEditModal from './PayablesEditModal';
 import ReceivavlesEditModal from './ReceivablesEditModal';
 import styles from './styles.module.css';
 
-const geo = getGeoConstants();
+interface TdsStyleInterface {
+	rate?:number,
+	style?:string,
+	type?:string
+}
+interface DataInterfaces {
+	orgName?:string,
+	currency?:string,
+	outstanding?:string | number,
+	tdsStyle?:TdsStyleInterface,
+}
+interface Props {
+	active?:string,
+	approveTds?:any,
+	globalFilters?:GenericObject,
+	data?:DataInterfaces,
+	editTdsLoading?:boolean
+}
 
 function TdsSingleCard({
 	globalFilters,
@@ -16,7 +33,7 @@ function TdsSingleCard({
 	data = {},
 	editTdsLoading,
 	approveTds,
-}) {
+}:Props) {
 	const [show, setShow] = useState(false);
 	const onClick = () => {
 		setShow(true);
@@ -24,7 +41,7 @@ function TdsSingleCard({
 
 	const {
 		orgName = '',
-		currency = geo.country.currency.code,
+		currency = '',
 		outstanding = 0,
 		tdsStyle = {},
 	} = data || {};
@@ -37,7 +54,11 @@ function TdsSingleCard({
 				</div>
 				<div>
 					{orgName?.length > 25 ? (
-						<Tooltip maxWidth="none" theme="light" content={orgName}>
+						<Tooltip
+							placement="top"
+							caret={false}
+							content={orgName}
+						>
 							<div className={styles.company_name}>{`${orgName.substring(0, 25)}..` || ''}</div>
 						</Tooltip>
 					) : (
@@ -48,15 +69,7 @@ function TdsSingleCard({
 			<div>
 				<div className={styles.text}>Outstanding </div>
 				<div className={styles.amount}>
-					{ formatAmount({
-						amount   : outstanding || '',
-						currency : geo.country.currency.code,
-						options  : {
-							style                 : 'currency',
-							currencyDisplay       : 'code',
-							maximumFractionDigits : 2,
-						},
-					})}
+					{ getFormattedPrice(outstanding || '', currency)}
 				</div>
 			</div>
 
