@@ -1,4 +1,3 @@
-import { IcMStarfull } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
@@ -14,6 +13,8 @@ function CourseConsumption() {
 	const [chapterContent, setChapterContent] = useState({});
 
 	const course_id = router?.query?.course_id;
+
+	console.log(course_id);
 
 	const {
 		loading,

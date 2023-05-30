@@ -8,7 +8,7 @@ function ModuleContent({ data = {} }) {
 	const { content_type, chapter_content } = data;
 
 	if (isEmpty(data)) {
-		<EmptyState />;
+		return <EmptyState />;
 	}
 
 	return (
@@ -25,9 +25,12 @@ function ModuleContent({ data = {} }) {
 						title="YouTube video player"
 						allow="accelerometer; clipboard-write;
                         encrypted-media; gyroscope; picture-in-picture; web-share"
-						allowfullscreen="true"
+						allowFullScreen
 					/>
 				)}
+
+			<div className={styles.description} />
+			<div className={styles.additional_resources} />
 
 		</div>
 	);
