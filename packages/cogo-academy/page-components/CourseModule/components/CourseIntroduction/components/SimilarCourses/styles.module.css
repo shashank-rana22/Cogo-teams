@@ -2,3 +2,23 @@
     background-color: white;
     padding: 10px;
 }
+
+.carousel_container {
+    margin: 24px 0px;
+    
+    :global {
+		.ui_carousel_arrow {
+			fill: #221f20;
+		}
+
+		.ui_carousel_next {
+			margin-right: -24px;
+			background: none;
+		}
+
+		.ui_carousel_prev {
+			margin-left: -36px;
+			background: none;
+		}
+	}
+}

@@ -5,7 +5,7 @@ import { useCallback, useEffect } from 'react';
 
 const useGetUserCourseDetails = ({ course_id }) => {
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/get_user_course_details',
+		url    : '/get_cogo_academy_course',
 		method : 'GET',
 	}, { manual: true });
 

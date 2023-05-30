@@ -15,10 +15,11 @@ function CourseIntroduction() {
 	const {
 		general: { query = {} },
 	} = useSelector((state) => state);
+	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 
 	const { course_id = '' } = query;
 
-	const { data, loading } = useGetUserCourse({ course_id });
+	const { data, loading } = useGetUserCourse({ course_id, user_id });
 	const { dataDetails, DetailsLoading } = useGetUserCourseDetails({ course_id });
 
 	// console.log('data', data);
@@ -27,8 +28,8 @@ function CourseIntroduction() {
 	return (
 		<>
 			<div className={styles.container}>
-				<CourseDetails data={data} />
-				<CourseCurriculum data={dataDetails} />
+				<CourseDetails data={dataDetails} />
+				<CourseCurriculum data={data} />
 
 				<div className={styles.date_display}>
 					<b>Last Updated:</b>

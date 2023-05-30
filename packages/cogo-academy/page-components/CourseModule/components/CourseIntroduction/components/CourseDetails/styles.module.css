@@ -46,3 +46,41 @@
     align-items: center;
     justify-content: space-between;
 }
+
+.card_display{
+    display: flex;
+    flex-direction: row;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between;
+    margin: 80px 10px 10px 0px;
+
+    :hover{
+        background-color: white;
+    }
+}
+
+.card{
+    border: 1px solid #fef199;
+    background-color: #fdfbf6;
+    border-radius: 6px;
+    padding: 10px;
+    display: flex;
+    flex-direction: column;
+}
+
+.card_details{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+}
+
+.card_title{
+    font-weight: 700;
+    margin-bottom: 10px;
+}
+
+.description{
+    margin: 10px 0;
+}

@@ -36,10 +36,10 @@ function HomePage({ user_id }) {
 			router.push(`/learning/course/introduction?course_id=${course_id}`);
 		},
 		mandatory: (course_id) => {
-			router.push(`/learning/course/${course_id}`);
+			router.push(`/learning/course/introduction?course_id=${course_id}`);
 		},
 		completed: (course_id) => {
-			router.push(`/learning/course/${course_id}`);
+			router.push(`/learning/course/introduction?course_id=${course_id}`); // download certificate
 		},
 		saved: () => {},
 	};

@@ -1,16 +1,25 @@
 import { Accordion } from '@cogoport/components';
+import { IcMDocument, IcMPpt, IcMText, IcMVideoCall } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
 
 function CourseCurriculum({ data }) {
 	// console.log('dataDetails', data);
+
+	const ContentType_Mapping = {
+		document     : <IcMDocument width="24px" height="24px" fill="white" />,
+		video        : <IcMVideoCall width="24px" height="24px" fill="white" />,
+		presentation : <IcMPpt width="24px" height="24px" fill="white" />,
+		text         : <IcMText width="24px" height="24px" fill="white" />,
+	};
+
 	return (
 		<div className={styles.container}>
 			<span className={styles.heading}>Course Curriculum</span>
 			{data?.map((item, index) => (
 
-				<div className={styles.outer_accordian}>
+				<div className={styles.outer_accordian} key={item.id}>
 					<Accordion
 						type="text"
 						title={(
@@ -40,11 +49,11 @@ function CourseCurriculum({ data }) {
 								</div>
 							</div>
 						)}
-						styles={{ margin: '10px', width: '100%' }}
+						styles={{ width: '100%' }}
 					>
 						{item?.course_sub_modules?.map((subItem, subIndex) => (
 
-							<div className={styles.inner_accordian}>
+							<div className={styles.inner_accordian} key={subItem.id}>
 								<Accordion
 									type="text"
 									title={(
@@ -58,13 +67,18 @@ function CourseCurriculum({ data }) {
 											<div>{subItem.description}</div>
 										</div>
 									)}
-									styles={{ margin: '10px', width: '100%' }}
+									styles={{ width: '100%' }}
 								>
-									<div className={styles.databox}>Lorem5</div>
-									<div className={styles.databox}>Lorem5</div>
-									<div className={styles.databox}>Lorem5</div>
-									<div className={styles.databox}>Lorem5</div>
-									<div className={styles.databox}>Lorem5</div>
+									{ subItem?.course_sub_module_chapters?.map((itemChapter, indexChapter) => (
+										<div className={styles.databox} key={itemChapter?.id}>
+											<div className={styles.databox_image}>
+												{ContentType_Mapping[itemChapter?.content_type]}
+											</div>
+											<div className={styles.databox_content}>
+												{itemChapter?.name}
+											</div>
+										</div>
+									))}
 
 								</Accordion>
 							</div>
@@ -74,9 +88,12 @@ function CourseCurriculum({ data }) {
 				</div>
 			))}
 
-			<div className={styles.bottom_box}>
-				Course Completion Test
-			</div>
+			<Accordion
+				type="text"
+				title="Course Completion Test"
+				className={styles.bottom_box}
+				styles={{ margin: '10px', width: '100%' }}
+			/>
 		</div>
 	);
 }

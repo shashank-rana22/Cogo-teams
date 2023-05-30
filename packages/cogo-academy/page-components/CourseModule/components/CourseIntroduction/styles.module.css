@@ -4,11 +4,6 @@
 
 }
 
-.bottom{
-    display: absolute;
-    float: bottom;
-}
-
 .date_display{
     margin: 40px 10px; 
 }

@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useGetUserCourse = ({ course_id }) => {
+const useGetUserCourse = ({ course_id, user_id }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_user_course',
 		method : 'GET',
@@ -12,12 +12,15 @@ const useGetUserCourse = ({ course_id }) => {
 	const getUserCourse = useCallback(async ({ id }) => {
 		try {
 			await trigger({
-				params: { id },
+				params: {
+					course_id: id,
+					user_id,
+				},
 			});
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
 		}
-	}, [trigger]);
+	}, [trigger, user_id]);
 
 	useEffect(() => {
 		getUserCourse({ id: course_id });

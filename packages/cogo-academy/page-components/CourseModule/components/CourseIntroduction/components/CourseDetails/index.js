@@ -20,7 +20,7 @@ function CourseDetails({ data }) {
 				</div>
 			</div>
 
-			<div>
+			<div className={styles.description}>
 				<b>About the course:</b>
 				{data?.description}
 			</div>
@@ -43,10 +43,79 @@ function CourseDetails({ data }) {
 				))}
 			</div>
 
+			<div className={styles.card_display}>
+				<div className={styles.card} style={{ width: '38%' }}>
+					<div className={styles.card_title}>Course Details</div>
+					<div className={styles.card_details}>
+						<div>
+							<img
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/resume.png"
+								alt="resume.png"
+							/>
+						</div>
+						<div>
+							<div>5 Modules</div>
+							<div>24 Sub Modules</div>
+							<div>50 Chapters</div>
+						</div>
+						<div>
+							<div>1 Graded Test</div>
+							<div>4 Practice Tests</div>
+							<div><b>Certification</b></div>
+						</div>
+					</div>
+				</div>
+
+				<div className={styles.card} style={{ width: '30%' }}>
+					<div className={styles.card_title}>Estimated Completion</div>
+					<div className={styles.card_details}>
+						<div>
+							<img
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/back_in_time.png"
+								alt="resume.png"
+							/>
+						</div>
+						<div>
+							<div>
+								{data?.course_completion_duration?.course_completion_value}
+								&nbsp;
+								{data?.course_completion_duration?.course_completion_unit}
+							</div>
+							<div>24 Sub Modules</div>
+							<div>50 Chapters</div>
+						</div>
+					</div>
+				</div>
+
+				<div className={styles.card} style={{ width: '30%' }}>
+					<div className={styles.card_title}>Course Creator</div>
+					<div className={styles.card_details}>
+						<div>
+							<img
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tutor.png"
+								alt="resume.png"
+							/>
+						</div>
+						<div>
+							<div>Muskan Tushir</div>
+							<div>Product analyst</div>
+							<div>1+ Years in Logistics industry</div>
+						</div>
+					</div>
+				</div>
+			</div>
+
 			<div className={styles.bottom_box}>
-				<div>Complete in 5 weeks to Get Certification</div>
+				<div>
+					Complete in &nbsp;
+					{data?.course_completion_duration?.course_completion_value}
+					&nbsp;
+					{data?.course_completion_duration?.course_completion_unit}
+					&nbsp;to Get Certification
+				</div>
 				<Pill color="green">On or Before 18th May, 2023</Pill>
 			</div>
+
 		</div>
 	);
 }

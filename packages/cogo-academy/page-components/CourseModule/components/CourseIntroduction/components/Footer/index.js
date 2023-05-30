@@ -8,21 +8,22 @@ export function Footer({ course_id }) {
 	const router = useRouter();
 	return (
 		<div className={styles.container}>
-			<Button
-				className={styles.btn}
-				themeType="secondary"
-				styles={{ margin: '10px' }}
-			>
-				Schedule Time to Begin
-			</Button>
-			<Button
-				className={styles.btn}
-				themeType="accent"
-				onClick={() => { router.push(`/learning/course/${course_id}`); }}
-			>
-				Begin Course
+			<div className={styles.btn_container}>
+				<Button
+					className={styles.btn}
+					themeType="secondary"
+				>
+					Schedule Time to Begin
+				</Button>
+				<Button
+					className={styles.btn}
+					themeType="accent"
+					onClick={() => { router.push(`/learning/course/${course_id}`); }}
+				>
+					Begin Course
 
-			</Button>
+				</Button>
+			</div>
 		</div>
 	);
 }
