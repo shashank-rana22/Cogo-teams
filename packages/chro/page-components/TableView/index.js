@@ -22,7 +22,7 @@ function TableView({ search, activeTab }) {
 
 	const { onFinalSubmit = () => {} } = useUpdateOfferLetter();
 
-	const columns = getColumns({ setCtcBreakup, ctcBreakup, onFinalSubmit });
+	const columns = getColumns({ setCtcBreakup, onFinalSubmit, activeTab });
 
 	const {
 		init = 0, joining_bonus_yearly = 0,
