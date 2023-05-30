@@ -4,17 +4,14 @@ import useListTickets from '../../../../../hooks/useListTickets';
 import styles from './styles.module.css';
 
 function TicketsSectionPart({ label, status, searchParams, refreshList, setRefreshList }) {
-	const {
-		ticketList,
-		listLoading,
-		handleScroll,
-	} =	useListTickets(
+	const { tickets, listLoading, handleScroll } = useListTickets(
 		searchParams,
 		status,
 		label,
 		refreshList,
 		setRefreshList,
 	);
+
 	const refreshTickets = () => {
 		setRefreshList((prev) => {
 			const newState = {};
@@ -24,7 +21,9 @@ function TicketsSectionPart({ label, status, searchParams, refreshList, setRefre
 			return newState;
 		});
 	};
-	const { list, total = 0 } = ticketList;
+
+	const { list, total = 0 } = tickets;
+
 	return (
 		<div className={styles.tickets_section_part}>
 			<div className={styles.status_heading}>

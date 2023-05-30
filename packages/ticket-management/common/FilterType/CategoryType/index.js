@@ -7,6 +7,9 @@ import styles from './styles.module.css';
 function CategoryType(props) {
 	const { searchParams, setSearchParams } = props;
 	const raiseTicketControl = useRaiseTicketControls();
+	const ticketControlOption = raiseTicketControl?.options.map(
+		(item) => ({ value: item.TicketType, label: item.TicketType }),
+	);
 
 	return (
 		<div className={styles.category_container}>
@@ -17,9 +20,7 @@ function CategoryType(props) {
 					category: val,
 				}))}
 				value={raiseTicketControl.loading ? '' : searchParams.category}
-				options={raiseTicketControl?.options.map(
-					(item) => ({ value: item.TicketType, label: item.TicketType }),
-				)}
+				options={ticketControlOption || []}
 				placeholder="Ticket type"
 				isClearable
 

@@ -6,8 +6,8 @@ import styles from './styles.module.css';
 function TicketStructureLoader() {
 	return (
 		<div className={styles.tickets_container}>
-			{[...Array(4)].fill().map((key) => (
-				<div key={key} className={styles.container}>
+			{[...Array(4).keys()].map((item) => (
+				<div key={item} className={styles.container}>
 					<div className={styles.subcontainer_one}>
 						<div className={styles.subcontainer_header}>
 							<Placeholder

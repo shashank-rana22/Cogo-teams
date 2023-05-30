@@ -11,7 +11,7 @@ import { ticketSectionMapping } from '../constants';
 
 const useListTickets = (searchValue, status, key, refreshList, setRefreshList) => {
 	const [pagination, setPagination] = useState(1);
-	const [ticketList, setTicketList] = useState({ list: [], total: 0 });
+	const [tickets, setTickets] = useState({ list: [], total: 0 });
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
 
@@ -23,53 +23,49 @@ const useListTickets = (searchValue, status, key, refreshList, setRefreshList) =
 
 	const { profile } = useSelector((state) => state);
 
+	const getPayload = useCallback((pageIndex) => {
+		const payload = {
+			PerformedByID : profile?.user?.id,
+			size          : 10,
+			page          : pageIndex - 1,
+			QFilter       : searchQuery.text || undefined,
+			Type          : searchQuery.category,
+		};
+		return { ...payload, ...(ticketSectionMapping?.[status] || {}) };
+	}, [profile?.user?.id, searchQuery.category, searchQuery.text, status]);
+
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {
-			let payload = {
-				PerformedByID : profile?.user?.id,
-				size          : 10,
-				page          : pageIndex - 1,
-				QFilter       : searchQuery.text || undefined,
-				Type          : searchQuery.category,
-
-			};
-			payload = { ...payload, ...(ticketSectionMapping?.[status] || {}) };
-
 			const response = await trigger({
-				params: payload,
+				params: getPayload(pageIndex),
 			});
 
 			if (response?.data?.items) {
-				setTicketList((prev) => {
-					if (prev) {
-						return {
-							list: [...(prev.list),
-								...response.data.items],
-							total: response.data.total,
-						};
-					}
-					return {};
-				});
+				setTickets((prev) => ({
+					list: [...(prev.list),
+						...response.data.items],
+					total: response.data.total,
+				}));
 			}
 			setPagination(pageIndex + 1);
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [profile?.user?.id, searchQuery.category, searchQuery.text, status, trigger]);
+	}, [getPayload, trigger]);
 
 	useEffect(() => {
-		setTicketList({ list: [], total: 0 });
+		setTickets({ list: [], total: 0 });
 		fetchTickets(1);
 		if (refreshList[key]) {
 			setRefreshList((prev) => ({ ...prev, [key]: false }));
 		}
-	}, [fetchTickets, searchQuery, setTicketList, key, refreshList, setRefreshList]);
+	}, [fetchTickets, searchQuery, setTickets, key, refreshList, setRefreshList]);
 
 	useEffect(() => {
 		debounceQuery(searchValue);
 	}, [debounceQuery, searchValue]);
 
-	const handleScroll = (clientHeight, scrollTop, scrollHeight) => {
+	const handleScroll = ({ clientHeight, scrollTop, scrollHeight }) => {
 		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 20;
 		const hasMoreData = pagination <= (data?.total_pages || 0);
 		if (reachBottom && hasMoreData && !loading) {
@@ -78,7 +74,7 @@ const useListTickets = (searchValue, status, key, refreshList, setRefreshList) =
 	};
 
 	return {
-		ticketList,
+		tickets,
 		listLoading: loading,
 		fetchTickets,
 		handleScroll,

@@ -1,22 +1,12 @@
-export const getTicketStatus = (val) => {
-	if (
-		['pending', 'reject_requested', 'resolve_requested'].includes(
-			val,
-		)
-	) {
-		return 'pending';
-	}
-	if (
-		['closed', 'rejected', 'overdue'].includes(
-			val,
-		)
-	) {
-		return 'closed';
-	}
-	if (val === 'unresolved') {
-		return 'open';
-	}
-	return val;
+export const STATUS_MAPPING = {
+	pending           : 'pending',
+	reject_requested  : 'pending',
+	resolve_requested : 'pending',
+	closed            : 'closed',
+	rejected          : 'closed',
+	overdue           : 'closed',
+	unresolved        : 'open',
+	escalated         : 'escalated',
 };
 
 export const actionButtonKeys = ({

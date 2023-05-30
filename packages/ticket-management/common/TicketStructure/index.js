@@ -28,9 +28,11 @@ function TicketStructure({
 		<div
 			className={styles.ticket_box}
 			onScroll={(e) => handleScroll(
-				e.target.clientHeight,
-				e.target.scrollTop,
-				e.target.scrollHeight,
+				{
+					clientHeight :	e.target.clientHeight,
+					scrollTop    :	e.target.scrollTop,
+					scrollHeight :	e.target.scrollHeight,
+				},
 			)}
 		>
 			{

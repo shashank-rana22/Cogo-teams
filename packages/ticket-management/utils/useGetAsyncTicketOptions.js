@@ -2,13 +2,12 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useTicketsRequest } from '@cogoport/request';
 import { useEffect, useState, useMemo } from 'react';
 
-const INITIALIZE_PARAMS = {};
 function useGetAsyncTicketOptions({
 	endpoint = '',
 	initialCall = false,
 	valueKey = '',
 	labelKey = '',
-	params = INITIALIZE_PARAMS,
+	params = {},
 	authkey = '',
 	qFilterKey = 'q',
 }) {

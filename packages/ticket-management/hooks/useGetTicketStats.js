@@ -8,9 +8,9 @@ const useGetTicketStats = () => {
 		authkey : 'get_tickets_stats',
 	}, { manual: false });
 
-	const ticketStats = useCallback(async () => {
+	const ticketStats = useCallback(() => {
 		try {
-			await trigger();
+			trigger();
 		} catch (error) {
 			console.log('error', error);
 		}

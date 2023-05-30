@@ -3,7 +3,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useSelector } from '@cogoport/store';
 
 import { statusLabelTransformation } from '../../../configurations/key-mapping';
-import { actionButtonKeys, getTicketStatus } from '../../../constants';
+import { actionButtonKeys, STATUS_MAPPING } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -24,7 +24,7 @@ function TicketStructureBody({
 		TicketReviewerID :ticketReviewerId = '',
 	} = data;
 
-	const { color: textColor, label } =	statusLabelTransformation[getTicketStatus(status)] || {};
+	const { color: textColor, label } =	statusLabelTransformation[STATUS_MAPPING[status]] || {};
 
 	const handleTicketClick = (e) => {
 		e.stopPropagation();
