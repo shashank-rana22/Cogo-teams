@@ -28,6 +28,7 @@ import rolesAndPermissions from './config/roles-n-permission';
 import saasTools from './config/saas-tools';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import shipmentFtl from './config/shipment-ftl';
+import shipmentLtlFreight from './config/shipment-ltl-freight';
 import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
 import unifiedDashboard from './config/unified-dashboard';
@@ -71,6 +72,7 @@ const routeConfig = {
 	...so2Surface,
 	...chakravyuh,
 	...shipmentFtl,
+	...shipmentLtlFreight,
 };
 
 export default routeConfig;
