@@ -5,13 +5,13 @@ import PerformanceCard from './PerformanceCard';
 import styles from './styles.module.css';
 import UserCard from './UserCard';
 
-function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type, loading, isMargin }) {
-	const cardComponentMapping = {
-		Users       : UserCard,
-		Categories  : CategoriesCard,
-		Performance : PerformanceCard,
-	};
+const cardComponentMapping = {
+	Users       : UserCard,
+	Categories  : CategoriesCard,
+	Performance : PerformanceCard,
+};
 
+function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type, loading, isMargin }) {
 	const CardComponent = cardComponentMapping[type];
 
 	return (
