@@ -30,7 +30,7 @@ const useGetIncomeExpense = ({ globalFilters, yearFilters, entityTabFilters }:Pr
 						financeYearStart : yearFilters.length === 2 ? yearFilters[0] : undefined,
 						financeYearEnd   : yearFilters.length === 2 ? yearFilters[1] : undefined,
 						serviceTypes     : globalFilters?.serviceType,
-						entityCode       : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
+						entityCode       : entityTabFilters,
 					},
 				});
 			} catch (e) {
