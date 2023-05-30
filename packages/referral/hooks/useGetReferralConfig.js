@@ -12,9 +12,7 @@ const useGetReferralConfig = () => {
 	const getRules = useCallback(
 		async () => {
 			try {
-				const res = await trigger({
-					params: {},
-				});
+				const res = await trigger({});
 
 				if (res?.data?.data !== null) setIsEdit(true);
 			} catch (error) {

@@ -27,9 +27,7 @@
 }
 
 .error {
-	position: absolute;
-	bottom: -20px;
-	left: 14px;
+	margin-left: 14px;
 	font-size: 12px;
 	color: #ee3425;
 }
