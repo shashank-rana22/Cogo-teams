@@ -942,7 +942,7 @@ const partner = {
 		{
 			api          : 'bulk_update_partner_user_expertise_status',
 			access_type  : 'private',
-			service_name : 'organization',
+			service_name : 'partner',
 		},
 	],
 	user_allocation: [
