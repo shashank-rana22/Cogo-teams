@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
@@ -138,11 +139,12 @@ const useTdsSettlement = ({
 			getSummary();
 		}
 	}, [active, JSON.stringify(query), JSON.stringify(rest?.orgId),
-		JSON.stringify(getSummary), JSON.stringify(refetch), pageIndex, JSON.stringify(date)]);
+		JSON.stringify(getSummary), JSON.stringify(refetch),
+		pageIndex, JSON.stringify(date)]);
 
 	const approveTds = async (value, setShow, reset) => {
 		try {
-			const response = await approveTDsApi({
+			const response:GenericObject = await approveTDsApi({
 				data: {
 					...value,
 				},

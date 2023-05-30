@@ -60,7 +60,7 @@ function ReceivablesPayablesFrom({
 
 	return (
 		<form className={styles.form_container}>
-			{formControls.map((item) => <FormElement control={control} errors={errors} {...item} />)}
+			{formControls.map((item) => <FormElement control={control} errors={errors} key={item.name} {...item} />)}
 		</form>
 	);
 }
