@@ -2,10 +2,10 @@
 	min-height: 220px`;
 	max-height: 460px;
 	overflow-y: auto;
-}
 
-.list::-webkit-scrollbar {
-	display: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .card {
@@ -17,18 +17,13 @@
 	border-bottom: 1px solid #e0e0e0;
 }
 
-.agent_name {
-	font-size: 14px;
-	font-weight: 500;
-}
-
 .agent_org {
 	font-size: 10px;
 	font-weight: 400;
 	color: #828282;
 }
 
-.count {
+.agent_name, .count {
 	font-size: 14px;
 	font-weight: 500;
 }

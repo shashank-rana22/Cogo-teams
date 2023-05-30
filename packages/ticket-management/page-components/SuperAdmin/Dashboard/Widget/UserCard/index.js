@@ -5,7 +5,7 @@ import UserCardLoader from '../../../../../common/UserCardLoader';
 
 import styles from './styles.module.css';
 
-function UserCard({ data, loading }) {
+function UserCard({ data = [], loading = false }) {
 	if (loading) return <UserCardLoader />;
 
 	if (isEmpty(data)) return <EmptyTicket emptyText="No User Data" />;

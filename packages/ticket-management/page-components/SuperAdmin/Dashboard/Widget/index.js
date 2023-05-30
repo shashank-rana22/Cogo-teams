@@ -7,9 +7,9 @@ import UserCard from './UserCard';
 
 function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type, loading, isMargin }) {
 	const cardComponentMapping = {
-		Users       : <UserCard data={data} loading={loading} />,
-		Categories  : <CategoriesCard data={data} loading={loading} />,
-		Performance : <PerformanceCard data={data} loading={loading} />,
+		Users       : UserCard,
+		Categories  : CategoriesCard,
+		Performance : PerformanceCard,
 	};
 
 	const CardComponent = cardComponentMapping[type];
@@ -22,7 +22,7 @@ function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type, lo
 				<div className={styles.title}>{label}</div>
 				<div className={styles.title}>{subLabel}</div>
 			</div>
-			{CardComponent || null}
+			<CardComponent data={data} loading={loading} />
 		</div>
 
 	);

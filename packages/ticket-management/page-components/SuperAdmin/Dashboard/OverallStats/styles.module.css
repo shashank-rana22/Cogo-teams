@@ -8,11 +8,13 @@
 	margin-right: 12px;
 	background-color: #fff;
 	border-radius: 6px;
+
+	&:last-child {
+		margin-right: 0;
+	}
 }
 
-.tile:last-child {
-	margin-right: 0;
-}
+
 
 .total_graph {
 	position: relative;
@@ -30,7 +32,6 @@
 
 .label {
 	font-size: 12px;
-	font-weight: 400;
 	color: #4f4f4f;
 }
 
@@ -52,7 +53,6 @@
 .graph_label {
 	width: 30px;
 	font-size: 10px;
-	font-weight: 400;
 	color: #828282;
 }
 
@@ -139,6 +139,5 @@
 .stats_label {
 	margin-left: 38px;
 	font-size: 10px;
-	font-weight: 400;
 	color: #4f4f4f;
 }

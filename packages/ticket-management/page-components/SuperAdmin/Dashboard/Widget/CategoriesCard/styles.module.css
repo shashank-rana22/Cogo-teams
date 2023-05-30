@@ -2,10 +2,10 @@
 	min-height: 220px;
 	max-height: 460px;
 	overflow-y: auto;
-}
 
-.list::-webkit-scrollbar {
-	display: none;
+	&::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .card {

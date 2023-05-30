@@ -13,9 +13,9 @@ const useGetDashboard = ({ date }) => {
 		authkey : 'get_tickets_dashboard',
 	}, { manual: true });
 
-	const fetchTickets = useCallback(async () => {
+	const fetchTickets = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					StartDate : startDate,
 					EndDate   : endDate,

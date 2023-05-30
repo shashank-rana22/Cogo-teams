@@ -5,7 +5,7 @@ import UserCardLoader from '../../../../../common/UserCardLoader';
 
 import styles from './styles.module.css';
 
-function PerformanceCard({ data, loading }) {
+function PerformanceCard({ data = [], loading = false }) {
 	if (loading) return <UserCardLoader />;
 
 	if (isEmpty(data)) return <EmptyTicket emptyText="No Agents Found" />;
