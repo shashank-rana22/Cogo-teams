@@ -14,12 +14,12 @@ export const statsMapping = [
 		icon   : <IcMFtick fill="#ABB0DE" width="25px" height="25px" />,
 	},
 	{
-		key   : 'four',
+		key   : 'Reopened',
 		label : 'Reopened Tickets',
 		icon  : <IcMTicket fill="#F8AEA8" width="25px" height="25px" />,
 	},
 	{
-		key   : 'five',
+		key   : 'Escalated',
 		label : 'Escalated Tickets',
 		icon  : <IcMTicket fill="#D6B300" width="25px" height="25px" />,
 	},

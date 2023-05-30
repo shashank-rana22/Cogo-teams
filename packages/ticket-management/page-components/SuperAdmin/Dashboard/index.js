@@ -16,8 +16,8 @@ function Dashboard({ date }) {
 	return (
 		<div className={styles.container}>
 			<OverallStats
-				ticketCount={TicketCount}
 				data={data}
+				ticketCount={TicketCount}
 			/>
 			<div className={styles.body}>
 				<div className={styles.agents}>

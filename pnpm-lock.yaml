@@ -302,9 +302,6 @@ importers:
       '@cogoport/components':
         specifier: ^1.0.395
         version: 1.0.413(@babel/core@7.21.8)(@cogoport/icons-react@1.0.73)(react-dom@18.2.0)(react@18.2.0)
-      '@cogoport/constants':
-        specifier: workspace:0.1.0
-        version: link:../constants
       '@cogoport/globalization':
         specifier: workspace:*
         version: link:../globalization
@@ -326,6 +323,9 @@ importers:
 
   common/globalization:
     dependencies:
+      '@cogoport/icons-react':
+        specifier: ^1.0.72
+        version: 1.0.73(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/utils':
         specifier: ^1.2.2
         version: 1.2.10
@@ -512,9 +512,6 @@ importers:
       '@cogoport/components':
         specifier: ^1.0.391
         version: 1.0.413(@babel/core@7.21.8)(@cogoport/icons-react@1.0.71)(react-dom@18.2.0)(react@18.2.0)
-      '@cogoport/constants':
-        specifier: workspace:^0.1.0
-        version: link:../constants
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../context
@@ -1040,11 +1037,8 @@ importers:
         specifier: ^1.0.1
         version: 1.0.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
-        specifier: ^1.0.359
-        version: 1.0.418(@babel/core@7.21.8)(@cogoport/icons-react@1.0.71)(react-dom@18.2.0)(react@18.2.0)
-      '@cogoport/constants':
-        specifier: workspace:^0.1.0
-        version: link:../../common/constants
+        specifier: ^1.0.419
+        version: 1.0.419(@babel/core@7.21.8)(@cogoport/icons-react@1.0.71)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1303,9 +1297,6 @@ importers:
       '@cogoport/components':
         specifier: ^1.0.389
         version: 1.0.413(@babel/core@7.21.8)(@cogoport/icons-react@1.0.71)(react-dom@18.2.0)(react@18.2.0)
-      '@cogoport/constants':
-        specifier: workspace:^0.1.0
-        version: link:../../common/constants
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -1580,9 +1571,6 @@ importers:
       '@cogoport/components':
         specifier: ^1.0.395
         version: 1.0.413(@babel/core@7.21.8)(@cogoport/icons-react@1.0.71)(react-dom@18.2.0)(react@18.2.0)
-      '@cogoport/constants':
-        specifier: workspace:^0.1.0
-        version: link:../../common/constants
       '@cogoport/context':
         specifier: workspace:^0.1.0
         version: link:../../common/context
@@ -1634,9 +1622,6 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
-      react-hook-form:
-        specifier: ^7.43.3
-        version: 7.43.9(react@18.2.0)
       uuid:
         specifier: ^9.0.0
         version: 9.0.0
@@ -1691,12 +1676,12 @@ importers:
       '@cogoport/components':
         specifier: ^1.0.366
         version: 1.0.413(@babel/core@7.21.8)(@cogoport/icons-react@1.0.71)(react-dom@18.2.0)(react@18.2.0)
-      '@cogoport/constants':
-        specifier: workspace:0.1.0
-        version: link:../../common/constants
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: workspace:*
+        version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.58
         version: 1.0.71(react-dom@18.2.0)(react@18.2.0)
@@ -1721,6 +1706,9 @@ importers:
 
   packages/ticket-management:
     dependencies:
+      '@cogoport/charts':
+        specifier: ^1.0.1
+        version: 1.0.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.359
         version: 1.0.418(@babel/core@7.21.8)(@cogoport/icons-react@1.0.73)(react-dom@18.2.0)(react@18.2.0)
@@ -1796,9 +1784,6 @@ importers:
       '@cogoport/components':
         specifier: ^1.0.316
         version: 1.0.413(@babel/core@7.21.8)(@cogoport/icons-react@1.0.71)(react-dom@18.2.0)(react@18.2.0)
-      '@cogoport/constants':
-        specifier: workspace:^0.1.0
-        version: link:../../common/constants
       '@cogoport/forms':
         specifier: workspace:*
         version: link:../../common/forms
@@ -3312,14 +3297,14 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components@1.0.418(@babel/core@7.21.8)(@cogoport/icons-react@1.0.71)(react-dom@18.2.0)(react@18.2.0):
+  /@cogoport/components@1.0.418(@babel/core@7.21.8)(@cogoport/icons-react@1.0.73)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-EPLS6XO2X9ZveHQAdJLoiuJKIEF/okMVyH4EsIrtfajRUYN2p4SRjpZiccMTxApmxNmHoBziSn5CSy0DlfpzsQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.71(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/icons-react': 1.0.73(react-dom@18.2.0)(react@18.2.0)
       '@tippyjs/react': 4.2.6(react-dom@18.2.0)(react@18.2.0)
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5
@@ -3347,14 +3332,14 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components@1.0.418(@babel/core@7.21.8)(@cogoport/icons-react@1.0.73)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-EPLS6XO2X9ZveHQAdJLoiuJKIEF/okMVyH4EsIrtfajRUYN2p4SRjpZiccMTxApmxNmHoBziSn5CSy0DlfpzsQ==}
+  /@cogoport/components@1.0.419(@babel/core@7.21.8)(@cogoport/icons-react@1.0.71)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-BCEeLUJWMMAdWbxw4LFZEf5Z3ecTqvVAcBkc4j7yxT6W4m8aEIzOU7+Y7FLWdQw3tGJOyAUNhF9PE5njt4YQcQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.73(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/icons-react': 1.0.71(react-dom@18.2.0)(react@18.2.0)
       '@tippyjs/react': 4.2.6(react-dom@18.2.0)(react@18.2.0)
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5

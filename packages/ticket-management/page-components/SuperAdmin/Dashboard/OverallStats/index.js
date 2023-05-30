@@ -1,4 +1,4 @@
-import { ResponsivePie } from '@cogoport/charts/pie/index';
+import { ResponsivePie } from '@cogoport/charts/pie';
 import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
@@ -73,7 +73,7 @@ function OverallStats({ data, ticketCount }) {
 				<div className={styles.tile} key={key}>
 					<div>{icon}</div>
 					<div className={styles.count}>
-						{(Number(data?.[key]) || 0).toFixed(2)}
+						{(Number(data?.[key]) || ticketCount?.[key] || 0).toFixed()}
 						{' '}
 						{suffix}
 					</div>
