@@ -79,25 +79,10 @@ const taskDisplayName = (trade_type) => {
 		approve_booking_params: {
 			display_name: 'Approve changed booking parameters',
 		},
-		approve_purchase_invoice_for_fcl_freight_service: {
-			display_name: 'Verify purchase invoice details',
-		},
-		approve_purchase_invoice_for_origin_fcl_freight_local_service: {
-			display_name: 'Verify purchase invoice details',
-		},
-		approve_purchase_invoice_for_destination_fcl_freight_local_service: {
-			display_name: 'Verify purchase invoice details',
-		},
 		approve_purchase_invoice_for_origin_lcl_freight_local_service: {
 			display_name: 'Verify purchase invoice details',
 		},
 		approve_purchase_invoice_for_destination_lcl_freight_local_service: {
-			display_name: 'Verify purchase invoice details',
-		},
-		approve_purchase_invoice_for_origin_air_freight_local_service: {
-			display_name: 'Verify purchase invoice details',
-		},
-		approve_purchase_invoice_for_destination_air_freight_local_service: {
 			display_name: 'Verify purchase invoice details',
 		},
 		approve_purchase_invoice_for_origin_trailer_freight_service: {
@@ -110,18 +95,6 @@ const taskDisplayName = (trade_type) => {
 			display_name: 'Verify purchase invoice details',
 		},
 		approve_purchase_invoice_for_destination_ftl_freight_service: {
-			display_name: 'Verify purchase invoice details',
-		},
-		approve_purchase_invoice_for_origin_fcl_customs_service: {
-			display_name: 'Verify purchase invoice details',
-		},
-		approve_purchase_invoice_for_destination_fcl_customs_service: {
-			display_name: 'Verify purchase invoice details',
-		},
-		approve_purchase_invoice_for_origin_fcl_cfs_service: {
-			display_name: 'Verify purchase invoice details',
-		},
-		approve_purchase_invoice_for_destination_fcl_cfs_service: {
 			display_name: 'Verify purchase invoice details',
 		},
 		approve_purchase_invoice_for_origin_haulage_freight_service: {
@@ -220,13 +193,6 @@ const taskDisplayName = (trade_type) => {
 			display_name : 'Choose Billing Address',
 			activity     : 'billing address',
 			why_needed   : 'Duty & taxes apply as per the billing address chosen by you',
-		},
-		approve_fcl_freight_service_amended_quote: {
-			display_name : 'Quotation for FCL freight has been updated',
-			activity     : 'accepted the updated quotation for FCL freight',
-			addPrefix    : false,
-			why_needed:
-				'Service Provider has updated the quotation for FCL freight. Please review and accept.',
 		},
 		amend_booking_note: {
 			display_name : 'Amend booking note',
@@ -549,12 +515,6 @@ const taskDisplayName = (trade_type) => {
 			addPrefix    : false,
 			why_needed   : '',
 		},
-		upload_draft_house_airway_bill: {
-			display_name : 'Upload Draft House Airway Bill',
-			activity     : 'uploaded draft house airway bill',
-			addPrefix    : false,
-			why_needed   : '',
-		},
 		upload_draft_si: {
 			display_name : 'Upload Draft Shipping Instruction',
 			activity     : 'uploaded draft si',
@@ -582,24 +542,6 @@ const taskDisplayName = (trade_type) => {
 		upload_gst: {
 			display_name : 'Upload gst',
 			activity     : 'uploaded gst',
-			addPrefix    : false,
-			why_needed   : '',
-		},
-		upload_house_airway_bill: {
-			display_name : 'Upload house airway bill',
-			activity     : 'uploaded house airway bill',
-			addPrefix    : false,
-			why_needed   : '',
-		},
-		upload_house_airway_bill_amendment: {
-			display_name : 'Upload house airway bill amendment',
-			activity     : 'uploaded house airway bill amendment',
-			addPrefix    : false,
-			why_needed   : '',
-		},
-		upload_house_airway_bill_instructions: {
-			display_name : 'Upload house airway bill instructions',
-			activity     : 'uploaded house airway bill instructions',
 			addPrefix    : false,
 			why_needed   : '',
 		},
@@ -666,12 +608,6 @@ const taskDisplayName = (trade_type) => {
 		upload_license_document: {
 			display_name : 'Upload license document',
 			activity     : 'uploaded license document',
-			addPrefix    : false,
-			why_needed   : '',
-		},
-		upload_airway_bill: {
-			display_name : 'Upload airway bill',
-			activity     : 'uploaded airway bill',
 			addPrefix    : false,
 			why_needed   : '',
 		},

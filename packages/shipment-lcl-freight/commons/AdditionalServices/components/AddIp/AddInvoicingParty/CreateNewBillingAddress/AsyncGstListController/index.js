@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 import useGetGstList from './useGetGstList';
 
 function AsyncGstListController({ gstNumber, setGstNumber = () => {}, registrationNumber = '' }) {
-	const { data } = useGetGstList({ registrationNumber });
+	const { data = {} } = useGetGstList({ registrationNumber });
 
 	const options = (data?.data?.gsts || []).map((item) => ({ label: item, value: item }));
 

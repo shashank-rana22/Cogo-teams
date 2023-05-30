@@ -1,6 +1,6 @@
 const tableFields = (priceRequest, countObj, tagDisplay) => [
 	{
-		label : `Services (${countObj.listCount})`,
+		label : `Services (${countObj?.listCount})`,
 		key   : 'name',
 		span  : 4,
 		func  : 'startCase',

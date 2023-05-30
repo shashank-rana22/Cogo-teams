@@ -36,9 +36,7 @@ function SecondStep({ item = {}, setSecondStep = () => {}, updateResponse = {} }
 					GO BACK
 				</Button>
 
-				<Button
-					onClick={handleShipperRevision}
-				>
+				<Button onClick={handleShipperRevision}>
 					REQUEST CHANGES
 				</Button>
 			</div>

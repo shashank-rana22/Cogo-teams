@@ -17,9 +17,7 @@ export const renderValue = (label, detail) => {
 		: '';
 
 	const inputValue = valueForInput
-		? `${valueForInput.packages_count} Pkg, ${dimension} ${startCase(
-			valueForInput?.packing_type,
-		)}`
+		? `${valueForInput.packages_count} Pkg, ${dimension} ${startCase(valueForInput?.packing_type)}`
 		: '';
 
 	const volume = ` ${detail.volume} cbm`;
@@ -43,9 +41,7 @@ export const renderValue = (label, detail) => {
 					)}
 				>
 					<div className="cargo-details-info">
-						{`Package: ${inputValue} + ${packages.length - 1
-						} more`}
-
+						{`Package: ${inputValue} + ${packages.length - 1} more`}
 					</div>
 				</Tooltip>
 			);

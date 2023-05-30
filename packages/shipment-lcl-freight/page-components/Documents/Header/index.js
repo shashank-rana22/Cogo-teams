@@ -54,6 +54,7 @@ function Header({
 							onChange={(e) => setFilters({ ...filters, uploaded_by_org_id: e })}
 							isClearable
 						/>
+
 						<Select
 							className={styles.select}
 							size="sm"
@@ -66,7 +67,7 @@ function Header({
 						/>
 
 					</div>
-				) }
+				)}
 			</div>
 
 			<div className={styles.sub_heading}>

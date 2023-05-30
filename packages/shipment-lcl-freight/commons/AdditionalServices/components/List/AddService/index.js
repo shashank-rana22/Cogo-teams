@@ -31,7 +31,7 @@ function AddService({
 		shipment_id,
 		services,
 		isSeller,
-		name: `${item.code} ${startCase(item.name)}`,
+		name: `${item?.code} ${startCase(item?.name)}`,
 	}));
 
 	if (filters.name) {
@@ -60,6 +60,7 @@ function AddService({
 			closeOnOuterClick={false}
 		>
 			<Modal.Header title="ADD NEW SERVICE" />
+
 			<Modal.Body>
 				<div className={styles.container}>
 					{!showAddRate && !showPrice ? (

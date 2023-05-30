@@ -12,6 +12,7 @@ const getConsigneeShipperId = (shipment_data) => {
 			value : shipment_data?.importer_exporter?.id,
 		},
 	];
+
 	return options;
 };
 
@@ -26,8 +27,10 @@ function UploadDocument({
 	orgId = '',
 	setOrgId = () => {},
 }) {
-	const documents = document_data?.list?.map((e) => (
-		{ label: startCase(e?.document_type), value: e?.document_type })) || [];
+	const documents = document_data?.list?.map((e) => ({
+		label : startCase(e?.document_type),
+		value : e?.document_type,
+	})) || [];
 
 	return (
 		<div>

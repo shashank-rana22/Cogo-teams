@@ -114,7 +114,7 @@ export default function InvoicingPartiesList({
 	if (isEmpty(newInvoicingPartiesList)) {
 		return (
 			<>
-				{bookingType === 'self' && (
+				{bookingType === 'self' ? (
 					<Button
 						onClick={() => {
 							setShowComponent('create_billing_address');
@@ -127,7 +127,7 @@ export default function InvoicingPartiesList({
 					>
 						Add Address
 					</Button>
-				)}
+				) : null}
 
 				<EmptyState />
 			</>

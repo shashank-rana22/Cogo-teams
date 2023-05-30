@@ -4,23 +4,12 @@ import useGetShipmentAdditionalServiceCodes from './useGetShipmentAdditionalServ
 import useListRateChargeCodes from './useListRateChargeCodes';
 
 const servicesChargeCodes = {
-	fcl_freight_service       : ['fcl_freight_charges', 'fcl_freight_seasonal_charges'],
-	fcl_freight_local_service : ['fcl_freight_local_charges'],
-	ftl_freight_service       : ['ftl_freight_charges'],
-	haulage_freight_service   : ['haulage_freight_charges'],
-	fcl_customs_service       : ['fcl_customs_charges'],
-	air_freight_service       : [
-		'air_freight_charges',
-		'air_freight_surcharges',
-		'air_freight_warehouse_charges',
-	],
-	air_freight_local_service     : ['air_freight_local_charges'],
-	air_customs_service           : ['air_customs_charges'],
+	ftl_freight_service           : ['ftl_freight_charges'],
+	haulage_freight_service       : ['haulage_freight_charges'],
 	lcl_freight_service           : ['lcl_freight_charges', 'lcl_freight_surcharge_charges'],
 	lcl_freight_local_service     : ['lcl_freight_local_charges'],
 	lcl_customs_service           : ['lcl_customs_charges'],
 	ltl_freight_service           : ['ltl_freight_charges'],
-	fcl_cfs_service               : ['fcl_cfs_charges'],
 	rail_domestic_freight_service : ['rail_domestic_freight_charges'],
 };
 

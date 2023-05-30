@@ -22,12 +22,7 @@ function Content({
 	setShowApproved,
 	docType,
 }) {
-	const isBlReleased = [
-		'approved',
-		'released',
-		'surrendered',
-		'delivered',
-	].includes(uploadedItem?.bl_detail_status);
+	const isBlReleased = ['approved', 'released', 'surrendered', 'delivered'].includes(uploadedItem?.bl_detail_status);
 
 	const tradeType = primary_service?.trade_type;
 
@@ -77,11 +72,13 @@ function Content({
 									|| uploadedItem?.uploaded_by_org?.business_name}
 
 							</div>
+
 							<div className={styles.upload_info}>
 								Uploaded On:&nbsp;
 								{format(uploadedItem?.created_at, 'dd MMM yyyy')}
 
 							</div>
+
 							<div className={cl`${styles.document_status}
 							 ${['document_amendment_requested', 'document_rejected'].includes(uploadedItem?.state)
 								? styles.pending : styles.accepted}`}
@@ -98,12 +95,12 @@ function Content({
 								</div>
 							) : null}
 
-							{receivedViaEmail && (
+							{receivedViaEmail ? (
 								<div className={styles.message_text}>
 									<IcCError width={14} height={14} />
 									Document recieved - Please confirm
 								</div>
-							)}
+							) : null}
 
 						</div>
 					)}
@@ -111,13 +108,8 @@ function Content({
 
 				{isChecked ? (
 					<div className={styles.action_container}>
-						{(!(
-							[
-								'house_bill_of_lading',
-								'bill_of_lading',
-							].includes(uploadedItem?.document_type) && tradeType === 'export'
-						)
-						|| isBlReleased)
+						{(!(['house_bill_of_lading', 'bill_of_lading']
+							.includes(uploadedItem?.document_type) && tradeType === 'export') || isBlReleased)
 							? (
 								<>
 									<Button

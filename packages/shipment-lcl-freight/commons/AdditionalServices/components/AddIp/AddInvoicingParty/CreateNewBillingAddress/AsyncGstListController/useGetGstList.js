@@ -11,11 +11,7 @@ function useGetGstList({ registrationNumber }) {
 	useEffect(() => {
 		(async () => {
 			try {
-				await trigger({
-					params: {
-						registration_number: registrationNumber,
-					},
-				});
+				await trigger({ params: { registration_number: registrationNumber } });
 			} catch (err) {
 				toastApiError(err);
 			}

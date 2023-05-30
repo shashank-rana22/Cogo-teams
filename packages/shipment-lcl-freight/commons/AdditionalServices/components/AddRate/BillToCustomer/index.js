@@ -3,9 +3,11 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function BillToCustomer({ updateResponse, onCancel, onBillToCustomer }) {
+function BillToCustomer({ updateResponse, onCancel = () => {}, onBillToCustomer = () => {} }) {
 	const [modeOfReview, setModeOfReview] = useState('bill');
+
 	const { updateBillingInfo } = updateResponse || {};
+
 	const options = [
 		{ label: 'Bill to Customer', value: 'bill' },
 		{ label: 'Don’t Bill to Customer', value: 'not_bill' },

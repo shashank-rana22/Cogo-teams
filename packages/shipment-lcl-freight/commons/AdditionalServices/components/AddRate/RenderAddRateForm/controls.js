@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
-const currencyOptions = [
+const CURRENCY_OPTIONS = [
 	GLOBAL_CONSTANTS.currency_code.INR,
 	GLOBAL_CONSTANTS.currency_code.USD,
 	GLOBAL_CONSTANTS.currency_code.EUR,
@@ -22,7 +22,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			name    : 'currency',
 			label   : 'Currency',
 			type    : 'select',
-			options : currencyOptions,
+			options : CURRENCY_OPTIONS,
 			rules   : { required: 'Currency is required' },
 			show    : ['task', 'overview'].includes(source),
 			size    : 'sm',

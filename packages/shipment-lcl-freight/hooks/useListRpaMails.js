@@ -2,9 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback, useRef } from 'react';
 
-const KEY_MAPPING = {
-	shipping_instruction: 'si',
-};
+const KEY_MAPPING = { shipping_instruction: 'si' };
 
 const useListRpaMails = ({ params = {} }) => {
 	const { page_no, entity_type, ...restPayload } = params || {};
@@ -34,6 +32,7 @@ const useListRpaMails = ({ params = {} }) => {
 	}, [trigger]);
 
 	const newEmailData = [];
+
 	if ((response?.data?.body || [])?.length) {
 		(response?.data?.body || [])?.forEach((child) => {
 			if (Object.keys(KEY_MAPPING).includes(child?.entity_type)) {

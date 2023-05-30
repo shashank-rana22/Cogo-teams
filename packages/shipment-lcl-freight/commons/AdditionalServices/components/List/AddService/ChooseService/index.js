@@ -10,11 +10,11 @@ import styles from './styles.module.css';
 import tableFields from './tableFields';
 
 function ChooseService({
-	setAddRate,
+	setAddRate = () => {},
 	isSeller,
-	list,
+	list = [],
 	loading,
-	setFilters,
+	setFilters = () => {},
 	filters,
 	setShowPrice = () => { },
 	refetch = () => { },

@@ -36,13 +36,12 @@ function AddressForm({
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			poc_details: [
-				{
-					name                : '',
-					email               : '',
-					mobile_country_code : '',
-					mobile_number       : '',
-				},
+			poc_details: [{
+				name                : '',
+				email               : '',
+				mobile_country_code : '',
+				mobile_number       : '',
+			},
 			],
 		},
 		shouldUnregister : true,
@@ -57,6 +56,7 @@ function AddressForm({
 		if (source === 'create_trade_party') {
 			setCurrentStep('company_details');
 		}
+
 		setShowComponent('view_billing_addresses');
 		refetch();
 	};
@@ -69,14 +69,14 @@ function AddressForm({
 				onChange={() => setIsAddressRegisteredUnderGst(!isAddressRegisteredUnderGst)}
 			/>
 
-			{isAddressRegisteredUnderGst && (
+			{isAddressRegisteredUnderGst ? (
 				<div className={styles.text}>
 					Addresses not registered under GST will be added in
 					&quot;Other Addresses&quot; for the organisation and&nbsp;
 					<b>will not be available for GST Invoicing</b>
 					.
 				</div>
-			)}
+			) : null}
 
 			{isAddressRegisteredUnderGst ? (
 				<section className={styles.section}>

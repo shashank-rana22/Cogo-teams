@@ -18,9 +18,7 @@ const Card = ({
 	};
 
 	const handleSave = (url) => {
-		if (url) {
-			saveAs(url);
-		}
+		if (url) { saveAs(url); }
 	};
 
 	return (taskList || []).map((item, idx) => {

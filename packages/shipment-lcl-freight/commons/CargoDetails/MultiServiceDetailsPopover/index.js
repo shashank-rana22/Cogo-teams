@@ -6,7 +6,7 @@ import RenderCargoPills from '../RenderCargoPills';
 import styles from './styles.module.css';
 
 function MultiServiceDetailsPopover({
-	children,
+	children = null,
 	mainServices,
 
 }) {
@@ -31,7 +31,6 @@ function MultiServiceDetailsPopover({
 			<div className={styles.tooltip_customise}>
 				{children}
 			</div>
-
 		</Tooltip>
 	);
 }

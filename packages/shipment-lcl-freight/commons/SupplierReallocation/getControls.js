@@ -13,10 +13,9 @@ export default function getControls({
 	const showAllControls = isEmpty(documents) && !isAdditional && `${shipment_type}_service` === service_type;
 
 	const blCategoryOptions = trade_type === 'export' && payment_term === 'prepaid'
-		? [
-			{ label: 'Mbl', value: 'mbl' },
-			{ label: 'Hbl', value: 'hbl' },
-		] : [{ label: 'Hbl', value: 'hbl' }];
+		? [{ label: 'Mbl', value: 'mbl' },
+			{ label: 'Hbl', value: 'hbl' }]
+		: [{ label: 'Hbl', value: 'hbl' }];
 
 	const controls = [
 		{
@@ -66,10 +65,10 @@ export default function getControls({
 		controls      : showControls,
 		defaultValues : {
 			service_provider_id: service_provider?.id,
-			...(showAllControls && {
+			...(showAllControls ? {
 				bls_count,
 				bl_category,
-			}),
+			} : {}),
 		},
 		showAllControls,
 	};

@@ -56,7 +56,6 @@ function List({
 				sort={sort}
 				setSort={setSort}
 			/>
-
 			{handleRender()}
 		</div>
 	);

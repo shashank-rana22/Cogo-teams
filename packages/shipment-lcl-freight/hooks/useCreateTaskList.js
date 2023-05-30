@@ -9,6 +9,8 @@ import useListShipmentOrganizations from './useListShipmentOrganizations';
 import useListShipmentPendingTasks from './useListShipmentPendingTasks';
 
 const TASKS = ['upload_document', 'approve_document', 'amend_document'];
+const PAGE_LIMIT = 50;
+const PAGE = 1;
 
 const useCreateTaskList = ({ shipment_data = {} }) => {
 	const trade_type = getShipmentTradeType({ shipment_data });
@@ -28,9 +30,9 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 		apiTrigger:refetch,
 	} = useListShipmentDocuments({
 		defaultParams: {
-			page_limit                       : 50,
+			page_limit                       : PAGE_LIMIT,
 			created_by_user_details_required : true,
-			page                             : 1,
+			page                             : PAGE,
 		},
 		defaultFilters: {
 			shipment_id,
@@ -45,7 +47,7 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 			shipment_type,
 		},
 		defaultParams: {
-			page_limit: 50,
+			page_limit: PAGE_LIMIT,
 		},
 	});
 

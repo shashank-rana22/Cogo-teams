@@ -16,7 +16,7 @@ import styles from '../styles.module.css';
 
 import controls from './controls';
 
-const controlTypeMapping = {
+const CONTROL_TYPE_MAPPING = {
 	select         : SelectController,
 	'async-select' : AsyncSelectController,
 	text           : InputController,
@@ -29,7 +29,7 @@ const controlTypeMapping = {
 function FormElement({
 	name, nameSuffix, show, label, errors, type, isFieldArrayElement = false, ...rest
 }) {
-	const Element = controlTypeMapping[type];
+	const Element = CONTROL_TYPE_MAPPING[type];
 
 	return show && Element ? (
 		<div className={cl`${styles.input_container} ${styles[rest.className]}`}>

@@ -144,9 +144,7 @@ const formatPayload = ({
 		}),
 	};
 
-	return {
-		payload: newPayload,
-	};
+	return { payload: newPayload };
 };
 
 export default formatPayload;

@@ -11,19 +11,19 @@ const fields = (items, setAddRate) => [
 		label  : 'Validity End',
 		key    : 'validity_end',
 		span   : 2.2,
-		render : (item) => <div>{item.validity_end}</div>,
+		render : (item) => <div>{item?.validity_end}</div>,
 	},
 	{
 		label  : 'Currency',
 		key    : 'currency',
 		span   : 2.2,
-		render : (item) => <div>{item.currency}</div>,
+		render : (item) => <div>{item?.currency}</div>,
 	},
 	{
 		label  : 'Price',
 		key    : 'price',
 		span   : 2.2,
-		render : (item) => <div>{item.buy_price}</div>,
+		render : (item) => <div>{item?.buy_price}</div>,
 	},
 	{
 		label  : '',
@@ -32,7 +32,7 @@ const fields = (items, setAddRate) => [
 		render : (item) => (
 			<Button
 				className="secondary sm"
-				onClick={() => setAddRate({ ...item, ...items })}
+				onClick={() => setAddRate({ ...(item || {}), ...items })}
 			>
 				Choose This Rate
 			</Button>

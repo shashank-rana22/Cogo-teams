@@ -39,6 +39,7 @@ function Item({
 						className="card-body-col"
 					>
 						{loading ? <Placeholder width="100%" height="20px" /> : null}
+
 						{!isTotalRow ? (
 							<div>
 								{singleItem?.render && !loading

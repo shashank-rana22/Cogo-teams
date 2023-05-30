@@ -8,7 +8,7 @@ import CreateNewTradeParty from '../CreateNewTradeParty';
 import InvoicingPartiesList from './InvoicingPartyiesList';
 import styles from './styles.module.css';
 
-const tradePartyType = {
+const TRADE_PARTY_TYPE = {
 	key   : 'paying_party',
 	label : 'PAYING PARTY',
 	value : 'paying_party',
@@ -83,7 +83,7 @@ function InvoicingParties({
 					orgResponse={organization}
 					setShowComponent={setShowComponent}
 					showComponent={showComponent}
-					tradePartyType={tradePartyType}
+					tradePartyType={TRADE_PARTY_TYPE}
 					fetchOrganizationTradeParties={refetch}
 				/>
 			) : null}

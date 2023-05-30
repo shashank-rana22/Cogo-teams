@@ -12,6 +12,7 @@ function LoadingState({ fields = [], isLast = false }) {
 				if (singleItem?.show === false) {
 					return null;
 				}
+
 				return (
 					<div key={keys[index]} style={stylesCol}>
 						<Placeholder width="100%" height="20px" />

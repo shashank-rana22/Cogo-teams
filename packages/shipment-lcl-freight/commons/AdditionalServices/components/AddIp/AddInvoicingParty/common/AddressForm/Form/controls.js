@@ -29,11 +29,9 @@ const controls = ({ showComponent, mobileCountryCodeOptions }) => {
 			initialCall : false,
 			placeholder : 'Select Country',
 			size        : 'sm',
-			params      : {
-				filters: { type: ['country'] },
-			},
-			rules : { required: 'Country of Registration is required' },
-			show  : showComponent !== 'create_trade_party',
+			params      : { filters: { type: ['country'] } },
+			rules       : { required: 'Country of Registration is required' },
+			show        : showComponent !== 'create_trade_party',
 		},
 		{
 			name        : 'pincode',
@@ -44,11 +42,9 @@ const controls = ({ showComponent, mobileCountryCodeOptions }) => {
 			initialCall : false,
 			placeholder : 'Select Pincode',
 			size        : 'sm',
-			params      : {
-				filters: { type: ['pincode'] },
-			},
-			rules : { required: 'Pincode is required' },
-			show  : true,
+			params      : { filters: { type: ['pincode'] } },
+			rules       : { required: 'Pincode is required' },
+			show        : true,
 		},
 		{
 			name  : 'address',

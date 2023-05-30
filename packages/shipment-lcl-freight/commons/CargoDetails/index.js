@@ -24,9 +24,7 @@ function CargoDetails({ primary_service = {} }) {
 					</div>
 				</>
 			) : (
-				<RenderCargoPills
-					detail={{ ...primary_service, ...primary_service?.cargo_details?.[0] } || {}}
-				/>
+				<RenderCargoPills detail={{ ...primary_service, ...primary_service?.cargo_details?.[0] } || {}} />
 			)}
 		</div>
 	);

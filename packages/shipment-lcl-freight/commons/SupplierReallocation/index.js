@@ -18,8 +18,10 @@ function FormElement(props) {
 		return (
 			<div>
 				<div className={styles.label}>{label}</div>
+
 				<Element {...props} />
-				{errors[name] && (<span className={styles.errors}>{errors[name].message}</span>)}
+
+				{errors[name] ? (<span className={styles.errors}>{errors[name].message}</span>) : null}
 			</div>
 		);
 	}
@@ -31,12 +33,16 @@ function SupplierReallocation({
 	closeModal = () => {},
 	isAdditional = false,
 }) {
-	const { shipment_data, refetch, refetchServices, primary_service = {} } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data, refetch = () => {},
+		refetchServices = () => {}, primary_service = {},
+	} = useContext(ShipmentDetailContext);
 	const { service_provider = {} } = primary_service;
 
 	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
 
 	const serviceObj = serviceData?.[0] || {};
+
 	const { service_type } = serviceObj || {};
 
 	const { defaultValues, controls, showAllControls } = getControls({
@@ -57,7 +63,7 @@ function SupplierReallocation({
 	};
 
 	const {
-		apiTrigger, loading,
+		apiTrigger = () => {}, loading,
 	} = useUpdateShipmentService({
 		refetch        : afterUpdateRefetch,
 		successMessage : 'Service updated successfully!',
@@ -70,6 +76,7 @@ function SupplierReallocation({
 			service_type,
 			performed_by_org_id : service_provider?.id,
 		};
+
 		apiTrigger(payload);
 	};
 

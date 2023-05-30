@@ -10,11 +10,11 @@ function VerticleLine({ checked, isLast }) {
 				{checked ? <IcMTick /> : null}
 			</div>
 
-			{!isLast && (
+			{!isLast ? (
 				<div
 					className={`${checked ? styles.checked_line : styles.line}`}
 				/>
-			)}
+			) : null}
 		</div>
 	);
 }

@@ -13,9 +13,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 		destination_port = {},
 	} = primary_service;
 
-	if (isEmpty(data)) {
-		return null;
-	}
+	if (isEmpty(data)) { return null; }
 
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
@@ -44,7 +42,6 @@ function PortDetails({ data = {}, primary_service = {} }) {
 			>
 				<div className={cl`${styles.value}`}>{location?.name}</div>
 			</Tooltip>
-
 		</>
 	);
 
@@ -70,6 +67,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 				<IcMFlcl />
 				<span>LCL</span>
 			</div>
+
 			{renderLocation()}
 		</div>
 	);

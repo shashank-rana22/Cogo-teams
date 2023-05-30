@@ -14,6 +14,8 @@ const USER_ID_CONTROL = {
 	rules       : { required: 'User is required' },
 };
 
+const PAGE_LIMIT = 30;
+
 function useServiceUpsellControls({
 	service = '',
 	services = [],
@@ -72,7 +74,7 @@ function useServiceUpsellControls({
 						organization_id,
 						status: 'active',
 					},
-					page_limit: 30,
+					page_limit: PAGE_LIMIT,
 				},
 				getModifiedOptions,
 			},

@@ -18,7 +18,9 @@ function ActionsToShow({
 	const { stakeholderConfig } = useContext(ShipmentDetailContext);
 
 	const config = stakeholderConfig?.additional_services?.add_rate || {};
+
 	const stakeholderAllowed = {};
+
 	Object.entries(config).forEach(([key, val]) => {
 		stakeholderAllowed[key?.split('::')?.[1]] = val;
 	});
