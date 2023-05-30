@@ -1,6 +1,7 @@
-import { Carousel, Tabs, TabPanel, Button } from '@cogoport/components';
+import { Carousel, Tabs, TabPanel, Button, Tooltip } from '@cogoport/components';
 import { IcMSort } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 
 import LoadingState from '../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../configs/BUTTON_CONTENT_MAPPING';
@@ -9,12 +10,12 @@ import CourseCard from '../CourseCard';
 
 import styles from './styles.module.css';
 
-function AllCourses({ currentCategory, setCurrentCategory }) {
+function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 	const router = useRouter();
 
-	const {
-		finalCourseCategories:courseCategories = [],
-	} = useListCourseCategory();
+	// const {
+	// 	finalCourseCategories:courseCategories = [],
+	// } = useListCourseCategory();
 
 	const HANDLE_CLICK_MAPPING = {
 
@@ -44,7 +45,13 @@ function AllCourses({ currentCategory, setCurrentCategory }) {
 	// 			handleClick={HANDLE_CLICK_MAPPING[activeTab]}
 	// 		/>
 	// 	),
-	// }));
+	// }))
+
+	const openOptions = () => {
+		<Tooltip content="Tool tip" placement="top" />;
+	};
+
+	console.log('courseCategories', courseCategories);
 
 	return (
 		<div className={styles.container}>
@@ -53,17 +60,22 @@ function AllCourses({ currentCategory, setCurrentCategory }) {
 				<div className={styles.main_heading}>All Courses</div>
 
 				<div className={styles.btn_container}>
-					<Button size="md" themeType="secondary">Ongoind Courses</Button>
-					<Button size="md" themeType="secondary">Mandatory Courses</Button>
-
-					<div className={styles.sort_by}>
+					<Button size="md" themeType="secondary" style={{ margin: '10px' }}>Completed</Button>
+					<Button size="md" themeType="secondary" style={{ margin: '10px' }}>Ongoing</Button>
+					<Button size="md" themeType="secondary" style={{ margin: '10px' }}>Mandatory</Button>
+					<Button
+						size="md"
+						themeType="tertiary"
+						style={{ margin: '10px' }}
+						onClick={openOptions()}
+					>
 						<IcMSort />
 						<div>Sort By</div>
-					</div>
+					</Button>
 				</div>
 			</div>
 
-			<div className={styles.tabs_container}>
+			{/* <div className={styles.tabs_container}>
 				{courseCategories.map((category) => (
 
 					<div
@@ -72,7 +84,7 @@ function AllCourses({ currentCategory, setCurrentCategory }) {
 						key={category.id}
 						onClick={() => setCurrentCategory(category.name)}
 					>
-						<h4>{category.name}</h4>
+						<h4><div className={styles.overflow}>{startCase(category.name)}</div></h4>
 						<p className={styles.total_courses}>
 							{category.number}
 							{' '}
@@ -81,7 +93,7 @@ function AllCourses({ currentCategory, setCurrentCategory }) {
 					</div>
 
 				))}
-			</div>
+			</div> */}
 		</div>
 	);
 }

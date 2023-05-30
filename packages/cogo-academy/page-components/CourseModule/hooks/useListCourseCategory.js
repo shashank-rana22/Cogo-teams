@@ -7,7 +7,10 @@ const useListCourseCategory = () => {
 	const [{ data = {}, loading }] = useRequest({
 		url    : '/list_course_categories',
 		method : 'GET',
-		params : { filters: { user_id } },
+		params : {
+			filters              : { user_id },
+			topics_data_required : true,
+		},
 	}, { manual: false });
 
 	const { list = [] } = data;
@@ -24,6 +27,7 @@ const useListCourseCategory = () => {
 
 	return {
 		loading,
+		CourseCategoryData: data,
 		finalCourseCategories,
 	};
 };

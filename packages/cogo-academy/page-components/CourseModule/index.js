@@ -20,6 +20,7 @@ function CourseModule() {
 
 	const {
 		finalCourseCategories: courseCategories = [],
+		CourseCategoryData,
 	} = useListCourseCategory();
 
 	return (
@@ -29,12 +30,16 @@ function CourseModule() {
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
 			/>
-
-			{isEmpty(page) ? <HomePage user_id={user_id} /> : (
-				<AllCourses
-					currentCategory={currentCategory}
-					setCurrentCategory={setCurrentCategory}
-				/>
+			{/* <AllCourses
+				CourseCategoryData={CourseCategoryData}
+				currentCategory={currentCategory}
+				setCurrentCategory={setCurrentCategory}
+			/>
+			<HomePage user_id={user_id} CourseCategoryData={CourseCategoryData} /> */}
+			{isEmpty(page) ? (
+				<HomePage user_id={user_id} CourseCategoryData={CourseCategoryData} />
+			) : (
+				null
 			)}
 		</div>
 	);

@@ -69,5 +69,12 @@
 .header {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 40px;
+}
+
+.overflow{
+	white-space: nowrap; 
+	align-content: center;
+  	width: 100px; 
+  	overflow: hidden;
+  	text-overflow: ellipsis;
 }

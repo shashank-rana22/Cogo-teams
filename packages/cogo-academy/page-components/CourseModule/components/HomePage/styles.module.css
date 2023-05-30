@@ -14,7 +14,6 @@
 
 	:global {
 		.ui_carousel_arrow {
-			margin-left: -36px;
 			fill: #221f20;
 		}
 
@@ -24,6 +23,7 @@
 		}
 
 		.ui_carousel_prev {
+			margin-left: -36px;
 			background: none;
 		}
 	}
@@ -32,4 +32,13 @@
 .header {
 	display: flex;
 	justify-content: space-between;
+}
+
+.category_head{
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+
+	margin-bottom: 20px;
 }
