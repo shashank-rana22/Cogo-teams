@@ -1,6 +1,6 @@
 import { Select } from '@cogoport/components';
 
-import useRaiseTicketControls from '../../../configurations/raise-ticket-controls';
+import useRaiseTicketControls from '../../../../configurations/raise-ticket-controls';
 
 import styles from './styles.module.css';
 

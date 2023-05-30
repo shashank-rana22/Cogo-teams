@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import { ticketSectionMapping } from '../../../../constants';
+import { ticketSectionMapping } from '../../../constants';
 
 import styles from './styles.module.css';
 import TicketsSectionPart from './TicketSectionPart';

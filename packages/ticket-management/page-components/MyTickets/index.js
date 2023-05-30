@@ -1,6 +1,6 @@
+import FilterTicketsSection from '../../common/FilterTicketsSection';
 import Header from '../../common/Header';
 
-import FilterTicketsSection from './FilterTicketsSection';
 import StatsSection from './StatsSection';
 
 function MyTickets() {

@@ -1,5 +1,5 @@
-import TicketStructure from '../../../../../common/TicketStructure';
-import useListTickets from '../../../../../hooks/useListTickets';
+import useListTickets from '../../../../hooks/useListTickets';
+import TicketStructure from '../../../TicketStructure';
 
 import styles from './styles.module.css';
 
