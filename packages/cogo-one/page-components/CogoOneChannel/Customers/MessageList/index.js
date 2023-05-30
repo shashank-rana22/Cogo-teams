@@ -63,21 +63,31 @@ function MessageList(messageProps) {
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	const isFlashMessagesEmpty = isEmpty(flashMessagesList) || false;
 
+	const canShowCarousel = showCarousel
+	&& showCarousel !== 'in_timeout' && !isFlashMessagesEmpty && !flashMessagesLoading;
+
 	const getListHeightStyles = () => {
-		if (showBotMessages && isomniChannelAdmin && !showCarousel) {
+		if (showBotMessages && isomniChannelAdmin && !canShowCarousel) {
 			return 'bot_list_container_empty_flash';
 		}
 		if (showBotMessages && isomniChannelAdmin) {
 			return 'bot_list_container';
 		}
-		if (!showCarousel) {
+		if (!canShowCarousel) {
 			return 'list_container_empty_flash';
 		}
 		return 'list_container_height';
 	};
 
 	useEffect(() => {
-		setShowCarousel(!isFlashMessagesEmpty);
+		if (!isFlashMessagesEmpty) {
+			setShowCarousel((p) => {
+				if (p !== 'in_timeout') {
+					return true;
+				}
+				return p;
+			});
+		}
 	}, [isFlashMessagesEmpty]);
 
 	const {
@@ -104,9 +114,9 @@ function MessageList(messageProps) {
 				userId={userId}
 				setActiveMessage={setActiveMessage}
 				firestore={firestore}
-				flashMessagesLoading={flashMessagesLoading}
 				showCarousel={showCarousel}
 				setShowCarousel={setShowCarousel}
+				canShowCarousel={canShowCarousel}
 			/>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
