@@ -12,9 +12,9 @@ import ToApproveModal from './ToApproveModal';
 
 const TITLE_MAPPING = {
 
-	auto_approved: 'Request For Approvals',
+	auto_approved: 'Remaining Port Pairs',
 
-	requested_for_approval: 'Remaining Port Pairs',
+	requested_for_approval: 'Request For Approvalss',
 
 };
 
