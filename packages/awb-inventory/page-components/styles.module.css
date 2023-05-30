@@ -1,0 +1,30 @@
+.container {
+	margin: 12px 10px;
+}
+
+.middle_container {
+	display: flex;
+	justify-content: space-between;
+	margin: 40px 0 24px;
+}
+
+.input_search {
+	width: 280px;
+	height: 32px !important;
+
+	:global {
+		.ui_input_control {
+			font-size: 12px !important;
+		}
+
+		.ui_input_suffix {
+			width: 24px;
+			height: 80%;
+
+			svg {
+				width: 16px;
+				height: 16px;
+			}
+		}
+	}
+}
