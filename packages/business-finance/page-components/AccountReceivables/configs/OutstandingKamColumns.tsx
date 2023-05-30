@@ -61,7 +61,7 @@ export const OutstandingKamColumn = [
 								notation              : 'compact',
 								compactDisplay        : 'short',
 								maximumFractionDigits : 2,
-								style                 : 'decimal',
+								style                 : 'currency',
 								currencyDisplay       : 'code',
 
 							},
@@ -100,7 +100,7 @@ export const OutstandingKamColumn = [
 								notation              : 'compact',
 								compactDisplay        : 'short',
 								maximumFractionDigits : 2,
-								style                 : 'decimal',
+								style                 : 'currency',
 								currencyDisplay       : 'code',
 
 							},

@@ -5,6 +5,13 @@ import GLOBAL_CONSTANTS from '../constants/globals';
 
 const geo = getGeoConstants();
 
+const currencyMapping = {
+	VND: {
+		Tr : 'M',
+		T  : 'B',
+	},
+};
+
 const isAmountValid = ({ amount }) => !(
 	amount === null
 		|| Array.isArray(amount)
@@ -34,13 +41,34 @@ const getCurrencyLocale = ({ currency }) => {
 	return GLOBAL_CONSTANTS.currency_locale[tempCurrency];
 };
 
-const format = ({ locale, amount, options, currency }) => new Intl.NumberFormat(locale, {
-	minimumFractionDigits: 0,
-	...options,
-	...('style' in options && {
-		currency: options.currency || currency,
-	}),
-}).format(Number(amount));
+const formatCurrency = ({ amount, currency, options }) => {
+	if (!(currency in currencyMapping) || !(options?.notation === 'compact' && options?.compactDisplay === 'short')) {
+		return amount;
+	}
+
+	let formattedAmount = amount;
+	const splittedAmount = formattedAmount.split(/\s+/);
+
+	Object.entries(currencyMapping[currency]).forEach(([current, newVal]) => {
+		if (splittedAmount.includes(current)) {
+			formattedAmount = amount.replace(current, newVal);
+		}
+	});
+
+	return formattedAmount;
+};
+
+const format = ({ locale, amount, options, currency }) => {
+	const formatted = new Intl.NumberFormat(locale, {
+		minimumFractionDigits: 0,
+		...options,
+		...('style' in options && {
+			currency: options.currency || currency,
+		}),
+	}).format(Number(amount));
+
+	return formatCurrency({ amount: formatted, currency, options });
+};
 
 /**
  *  @typedef {Object}             [arguments]
