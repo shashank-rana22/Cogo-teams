@@ -32,10 +32,6 @@
 			"key": "truck_type"
 		},
 		{
-			"label": "Truck Number",
-			"key": "truck_number"
-		},
-		{
 			"label": "Stuffing date",
 			"key": "stuffing_at",
 			"type": "date"
@@ -49,10 +45,6 @@
 			"label": "Delivery date",
 			"key": "delivery_date",
 			"type": "date"
-		},
-		{
-			"label": "Driver details",
-			"key": "driver_details"
 		},
 		{
 			"label": "Origin Cargo handling type",
@@ -94,6 +86,22 @@
 			"type": "obj",
 			"key": "destination_location.display_name",
 			"label": "Destination Location"
+		},
+		{
+			"label": "Truck Number",
+			"key": "truck_number"
+		},
+		{
+			"label": "Driver details",
+			"key": "driver_details"
+		},
+		{
+			"label": "ETD",
+			"key": "estimated_departure"
+		},
+		{
+			"label": "ETA",
+			"key": "estimated_arrival"
 		}
 	],
 	"commnets": { "emptyContent": "" }

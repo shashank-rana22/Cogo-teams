@@ -1,15 +1,10 @@
 import { Tooltip } from '@cogoport/components';
-import { IcMOpenlink } from '@cogoport/icons-react';
 import { startCase, upperCase, format } from '@cogoport/utils';
-
-import styles from './styles.module.css';
 
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || {};
 
 	const valueForInput = Array.isArray(packages) && packages?.length > 0 ? packages[0] : null;
-
-	const chargableWeight = Math.max(detail.volume * 166.67, detail?.weight);
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -20,8 +15,6 @@ export const renderValue = (label, detail) => {
 			valueForInput?.packing_type,
 		)}`
 		: '';
-
-	const volume = ` ${detail.volume} cbm`;
 
 	const packageDetails = () => {
 		if (packages?.length > 1) {
@@ -68,21 +61,6 @@ export const renderValue = (label, detail) => {
 		<div>
 			<div>{shipperDetails?.name}</div>
 			<div>{shipperDetails?.address}</div>
-		</div>
-	);
-
-	const formatCertificate = (certificates) => (
-		<div className={styles.certificate_container}>
-			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer">
-					Click to view certificate
-					&nbsp;
-					{key + 1}
-					&nbsp;
-					<IcMOpenlink />
-					<br />
-				</a>
-			))}
 		</div>
 	);
 
@@ -140,14 +118,6 @@ export const renderValue = (label, detail) => {
 			}
 			return packageDetails();
 
-		case 'volume':
-			return ` ${volume} ${detail.service_type === 'ftl_freight_service'
-				|| detail.service_type === 'haulage_freight_service'
-				? ''
-				: `, Chargeable Weight: ${chargableWeight.toFixed(2)} kg`
-			}`;
-		case 'weight':
-			return ` ${detail.weight} kgs`;
 		case 'haulage_type':
 			return startCase(detail.haulage_type || '');
 		case 'transport_mode':
@@ -188,34 +158,6 @@ export const renderValue = (label, detail) => {
 			return detail.container_pickup_location?.display_name || '';
 		case 'destination_location.display_name':
 			return detail.destination_location?.display_name || '';
-		case 'schedule_departure':
-			return format(detail?.schedule_departure || detail?.selected_schedule_departure, 'dd MMM yyyy');
-		case 'schedule_arrival':
-			return format(detail?.schedule_arrival || detail?.selected_schedule_arrival, 'dd MMM yyyy');
-		case 'bn_expiry':
-			return format(detail?.bn_expiry, 'dd MMM yyyy');
-		case 'booking_note_deadline':
-			return format(detail?.booking_note_deadline, 'dd MMM yyyy - hh:mm aaa');
-		case 'si_cutoff':
-			return format(detail?.si_cutoff, 'dd MMM yyyy - hh:mm aaa');
-		case 'vgm_cutoff':
-			return format(detail?.vgm_cutoff, 'dd MMM yyyy - hh:mm aaa');
-		case 'gate_in_cutoff':
-			return format(detail?.gate_in_cutoff, 'dd MMM yyyy - hh:mm aaa');
-		case 'document_cutoff':
-			return format(detail?.document_cutoff, 'dd MMM yyyy - hh:mm aaa');
-		case 'tr_cutoff':
-			return format(detail?.tr_cutoff, 'dd MMM yyyy - hh:mm aaa');
-		case 'iip_certificates':
-			return formatCertificate(detail?.iip_certificates || []);
-		case 'msds_certificates':
-			return formatCertificate(detail?.msds_certificates || []);
-		case 'bl_category':
-			return upperCase(detail.bl_category);
-		case 'bl_type':
-			return upperCase(detail.bl_type);
-		case 'cargo_readiness_date':
-			return format(detail?.cargo_readiness_date, 'dd MMM yyyy');
 		case 'supplier_poc':
 			return formatPocData(detail?.supplier_poc || {});
 		case 'origin_oversea_agent':
@@ -234,6 +176,10 @@ export const renderValue = (label, detail) => {
 			return startCase(detail?.truck_number);
 		case 'driver_details':
 			return `${startCase(detail?.driver_details.name)} , ${detail?.driver_details.contact}`;
+		case 'estimated_departure':
+			return format(detail?.estimated_departure, 'dd MMM yyyy');
+		case 'estimated_arrival':
+			return format(detail?.estimated_arrival, 'dd MMM yyyy');
 		default:
 			return detail[label] || null;
 	}
