@@ -86,7 +86,9 @@ function UploadDraftBL({
 		loading,
 		createTradeDocLoading,
 	} = useDraftBLHelper({
-		pendingTask: task,
+		pendingTask     : task,
+		shipment_data   : shipmentData,
+		primary_service : primaryService,
 	});
 
 	const showUploadView = shipmentDocsLength > 0 && tradeDocsLength === 0;
