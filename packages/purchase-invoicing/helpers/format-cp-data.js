@@ -260,7 +260,7 @@ export const formatCollectionPartyPayload = (data, extraData) => {
 			businessName            : billingPartyObj?.business_name,
 			pincode                 : billingpartyAddress?.pin_code,
 			address                 : billingpartyAddress?.address,
-			entityCodeId            : collectionPartyObj?.cogo_entity_id,
+			entityCodeId            : billingPartyObj?.id,
 			cityName                : billingpartyAddress?.city?.name || '',
 			countryName             : billingpartyAddress?.country?.name || '',
 			countryCode             : billingpartyAddress?.country?.country_code,
