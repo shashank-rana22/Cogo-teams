@@ -54,7 +54,7 @@ function useHandleSubmit({
 		method : 'POST',
 	}, { manual: true });
 
-	const [triggerBulkUpdate] = useRequest({
+	const [{ loading: updatingService }, triggerBulkUpdate] = useRequest({
 		url    : '/bulk_update_shipment_services',
 		method : 'POST',
 	}, { manual: true });
@@ -109,12 +109,14 @@ function useHandleSubmit({
 			truckingPayload = formatForTrucking(task, rawValues, getApisData);
 		}
 
+		console.log('payload', truckingPayload);
+		console.log('final', finalPayload);
 		try {
 			if (
 				TRUCKING_TASK.includes(task.task)
 				&& Object.keys(truckingPayload).length
 			) {
-				await triggerBulkUpdate(truckingPayload);
+				await triggerBulkUpdate({ data: truckingPayload });
 			}
 
 			const res = await trigger({
@@ -161,6 +163,7 @@ function useHandleSubmit({
 				Toast.error('Something went wrong');
 			}
 		} catch (err) {
+			console.log('err', err);
 			const errorString =	err?.data?.message
 				|| err?.error?.message
 				|| err?.data?.base
@@ -176,7 +179,7 @@ function useHandleSubmit({
 
 	return {
 		onSubmit,
-		loading: loading || loadingTask || isLoading,
+		loading: loading || loadingTask || isLoading || updatingService,
 	};
 }
 export default useHandleSubmit;

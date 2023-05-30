@@ -60,24 +60,26 @@ function CustomerInvoiceDetails(props) {
 	};
 
 	return (
-		<div className={styles.container}>
-			<Layout
-				control={control}
-				fields={fields}
-				errors={errors}
-			/>
+		<div>
+			<div className={styles.form}>
+				<Layout
+					control={control}
+					fields={fields}
+					errors={errors}
+				/>
+			</div>
 			<div className={styles.button_container}>
 				<Button
 					onClick={() => onCancel()}
-					className="secondary lg"
-					style={{ marginRight: 10 }}
+					themeType="secondary"
 					disabled={loading || taskLoading}
+					className={styles.button}
 				>
 					Cancel
 				</Button>
 				<Button
 					onClick={handleSubmit(onSubmit)}
-					className="primary lg"
+					themeType="primary"
 					disabled={loading || taskLoading}
 				>
 					Submit

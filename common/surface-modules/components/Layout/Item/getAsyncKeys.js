@@ -1,20 +1,5 @@
 const getAsyncFields = (key) => {
 	const OPTIONS = {
-		'shipping-lines': {
-			valueKey       : 'id',
-			lableKey       : 'short_name',
-			asyncKey       : 'list_operators',
-			defaultOptions : true,
-			defaultParams  : {
-				filters: {
-					operator_type : 'shipping_line',
-					status        : 'active',
-				},
-				page_limit : 100,
-				sort_by    : 'short_name',
-				sort_type  : 'asc',
-			},
-		},
 		'cogo-entities': {
 			valueKey       : 'entity_code',
 			lableKey       : 'entity_code',
@@ -83,14 +68,6 @@ const getAsyncFields = (key) => {
 					default_params_required : true,
 				},
 			},
-		},
-		container_shipping_lines: {
-			valueKey       : 'id',
-			lableKey       : 'short_name',
-			asyncKey       : 'get_container_shipping_lines',
-			defaultParams  : {},
-			defaultOptions : true,
-			isSearchable   : false,
 		},
 		hs_codes: {
 			valueKey      : 'id',
@@ -209,20 +186,14 @@ const getAsyncFields = (key) => {
 			defaultOptions: true,
 		},
 		currencies: {
-			valueKey      : 'id',
-			lableKey      : 'label',
+			valueKey      : 'iso_code',
+			lableKey      : 'iso_code',
 			asyncKey      : 'list_exchange_rate_currencies',
 			defaultParams : {
 				filters: {
 					status: 'active',
 				},
 			},
-		},
-		'fcl-freight-rate-line-items': {
-			valueKey       : 'code',
-			lableKey       : 'name',
-			asyncKey       : 'get_fcl_freight_rate',
-			defaultOptions : true,
 		},
 		'verified-service-providers': {
 			valueKey       : 'id',
@@ -265,12 +236,6 @@ const getAsyncFields = (key) => {
 			valueKey       : 'value',
 			lableKey       : 'bpr_name',
 			asyncKey       : 'search_bpr_number',
-			defaultOptions : true,
-		},
-		'dunning-templates': {
-			valueKey       : 'id',
-			lableKey       : 'name',
-			asyncKey       : 'list_dunning_templates',
 			defaultOptions : true,
 		},
 		'local-agents': {
@@ -320,17 +285,6 @@ const getAsyncFields = (key) => {
 					status: 'active',
 				},
 				page_limit: 200,
-			},
-		},
-		lcl_pudo_locations: {
-			valueKey      : 'id',
-			lableKey      : 'name',
-			asyncKey      : 'list_lcl_pudo_locations',
-			defaultParams : {
-				filters: {
-					status: 'active',
-				},
-				page_limit: 10,
 			},
 		},
 		'purchase-invoice-line-items': {
@@ -428,51 +382,6 @@ const getAsyncFields = (key) => {
 				isSearchable   : true,
 			},
 		},
-		'event-data': {
-			valueKey      : 'name',
-			lableKey      : 'name',
-			asyncKey      : 'get_unique_event_data',
-			defaultParams : {
-				defaultOptions : true,
-				isSearchable   : true,
-			},
-		},
-		'campaign-tags': {
-			valueKey      : 'name',
-			lableKey      : 'name',
-			asyncKey      : 'get_campaign_tags',
-			defaultParams : {
-				defaultOptions : true,
-				isSearchable   : true,
-			},
-		},
-		'template-tags': {
-			valueKey      : 'name',
-			lableKey      : 'name',
-			asyncKey      : 'get_template_tags',
-			defaultParams : {
-				defaultOptions : true,
-				isSearchable   : true,
-			},
-		},
-		'event-mappings': {
-			valueKey      : 'name',
-			lableKey      : 'name',
-			asyncKey      : 'list_event_mappings',
-			defaultParams : {
-				defaultOptions : true,
-				isSearchable   : true,
-			},
-		},
-		'promotion-tags': {
-			valueKey      : 'name',
-			lableKey      : 'name',
-			asyncKey      : 'list_promotion_tags',
-			defaultParams : {
-				defaultOptions : true,
-				isSearchable   : true,
-			},
-		},
 		trade_parties: {
 			asyncKey      : 'list_organization_trade_parties',
 			valueKey      : 'id',
@@ -512,17 +421,6 @@ const getAsyncFields = (key) => {
 				pageSize: 50,
 			},
 		},
-		'campaign-sender-email': {
-			valueKey       : 'email',
-			lableKey       : 'email',
-			asyncKey       : 'list_campaign_email_configuration',
-			defaultOptions : true,
-			defaultParams  : {
-				status     : 'active',
-				sort_by    : 'updated_at',
-				page_limit : 50,
-			},
-		},
 		'charge-codes': {
 			valueKey       : 'code',
 			lableKey       : 'label',
@@ -546,31 +444,6 @@ const getAsyncFields = (key) => {
 			lableKey       : 'label',
 			asyncKey       : 'get_utm_campaign_audience_data',
 			defaultOptions : true,
-		},
-
-		fcl_freight_contracts: {
-			valueKey      : 'value',
-			lableKey      : 'label',
-			asyncKey      : 'list_contract_fcl_freight_services',
-			defaultParams : {
-				page_limit: 50,
-			},
-		},
-		lcl_freight_contracts: {
-			valueKey      : 'value',
-			lableKey      : 'label',
-			asyncKey      : 'list_contract_lcl_freight_services',
-			defaultParams : {
-				page_limit: 50,
-			},
-		},
-		air_freight_contracts: {
-			valueKey      : 'value',
-			lableKey      : 'label',
-			asyncKey      : 'list_contract_air_freight_services',
-			defaultParams : {
-				page_limit: 50,
-			},
 		},
 		'location-clusters': {
 			valueKey      : 'id',
@@ -709,16 +582,6 @@ const getAsyncFields = (key) => {
 				},
 			},
 		},
-		'list-overseas-trade-parties': {
-			valueKey      : 'organizationId',
-			lableKey      : 'description',
-			asyncKey      : 'purchase/bills/list-overseas-trade-parties',
-			defaultParams : {
-				defaultOptions : true,
-				isSearchable   : true,
-				authkey        : 'get_purchase_bills_list_overseas_trade_parties',
-			},
-		},
 		'unloading-dockets': {
 			valueKey      : 'lr_number',
 			lableKey      : 'lr_number',
@@ -794,7 +657,30 @@ const getAsyncFields = (key) => {
 				page       : 1,
 			},
 		},
-
+		list_ltl_vehicles_details: {
+			valueKey      : 'id',
+			lableKey      : 'vehicle_number',
+			asyncKey      : 'list_ltl_freight_vehicle_details',
+			defaultParams : {
+				filters: {
+					status: 'active',
+				},
+				page_limit : 100,
+				page       : 1,
+			},
+		},
+		list_ltl_consol_drivers: {
+			valueKey      : 'driver_name',
+			lableKey      : 'driver_name',
+			asyncKey      : 'list_ltl_consol_drivers',
+			defaultParams : {
+				filters: {
+					status: 'active',
+				},
+				page_limit : 100,
+				page       : 1,
+			},
+		},
 	};
 
 	return OPTIONS[key];
