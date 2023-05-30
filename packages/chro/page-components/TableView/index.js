@@ -18,7 +18,9 @@ function TableView({ search }) {
 	const { list = [], page, page_limit, total_count } = data || {};
 
 	const { metadata = {}, id } = ctcBreakup || {};
-	const { onFinalSubmit = () => {} } = useUpdateOfferLetter(id);
+
+	const { onFinalSubmit = () => {} } = useUpdateOfferLetter();
+
 	const columns = getColumns({ setCtcBreakup, ctcBreakup, onFinalSubmit });
 
 	const {
@@ -71,7 +73,7 @@ function TableView({ search }) {
 					<div className={styles.button_container}>
 						<ActionPopover ctcBreakup={ctcBreakup} onFinalSubmit={onFinalSubmit} />
 						<Button
-							onClick={() => { onFinalSubmit('approved'); }}
+							onClick={() => onFinalSubmit({ id, status: 'approved' })}
 							themeType="primary"
 							style={{ marginLeft: 8 }}
 						>

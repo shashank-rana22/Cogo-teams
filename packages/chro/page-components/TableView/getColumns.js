@@ -5,10 +5,8 @@ import { startCase } from '@cogoport/utils';
 
 import ActionPopover from './ActionPopover';
 import styles from './styles.module.css';
-// import useUpdateOfferLetter from "./useUpdateOfferLetter";
 
-// const { loading = false } = useUpdateOfferLetter();
-const getColumns = ({ setCtcBreakup, ctcBreakup, onFinalSubmit = () => {} }) => [
+const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {} }) => [
 	{
 		Header   : 'NAME & EMAIL',
 		accessor : (item) => (
@@ -87,10 +85,10 @@ const getColumns = ({ setCtcBreakup, ctcBreakup, onFinalSubmit = () => {} }) => 
 		Header   : 'ACTION',
 		accessor : (item) => (
 			<div className={styles.button_container}>
-				<ActionPopover ctcBreakup={ctcBreakup} onFinalSubmit={onFinalSubmit} />
+				<ActionPopover item={item} onFinalSubmit={onFinalSubmit} />
 
 				<Button
-					onClick={() => onFinalSubmit('approved')}
+					onClick={() => onFinalSubmit({ id: item?.id, status: 'approved' })}
 					themeType="primary"
 					style={{ marginLeft: 8 }}
 				>

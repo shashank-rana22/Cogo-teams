@@ -5,10 +5,12 @@ import styles from './styles.module.css';
 import SubmitSection from './SubmitSection';
 
 export default function ActionPopover({
-	ctcBreakup,
+	item,
 	onFinalSubmit = () => {},
 }) {
 	const [visible, setVisible] = useState(false);
+
+	const { id = '' } = item || {};
 
 	return (
 		<div className={styles.popover_container}>
@@ -19,6 +21,7 @@ export default function ActionPopover({
 				visible={visible}
 				render={(
 					<SubmitSection
+						employeeId={id}
 						setVisible={setVisible}
 						onFinalSubmit={onFinalSubmit}
 					/>

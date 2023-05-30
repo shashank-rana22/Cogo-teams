@@ -4,14 +4,11 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 
 export default function SubmitSection({
+	employeeId = '',
 	setVisible = () => {},
 	onFinalSubmit = () => {},
 }) {
 	const [finalReview, setFinalReview] = useState('');
-
-	const onBack = () => {
-		setVisible(false);
-	};
 
 	return (
 		<div className={styles.popover_inner}>
@@ -36,7 +33,7 @@ export default function SubmitSection({
 				<Button
 					className={styles.button_submit}
 					themeType="secondary"
-					onClick={onBack}
+					onClick={() => setVisible(false)}
 				>
 					Cancel
 				</Button>
@@ -44,7 +41,11 @@ export default function SubmitSection({
 				<Button
 					className={styles.button_submit}
 					themeType="primary"
-					onClick={() => onFinalSubmit('rejected')}
+					onClick={() => onFinalSubmit({
+						id               : employeeId,
+						status           : 'rejected',
+						rejection_reason : finalReview,
+					})}
 				>
 					Confirm
 				</Button>
