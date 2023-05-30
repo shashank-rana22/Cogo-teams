@@ -7,9 +7,12 @@ import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
 
+import Documents from '../../common/Documents';
+import Overview from '../../common/Overview';
+import PocSop from '../../common/PocSop';
 import ShipmentHeader from '../../common/ShipmentHeader';
+import ShipmentInfo from '../../common/ShipmentInfo';
 import Timeline from '../../common/TimeLine';
-// import Overview from '../../common/Overview';
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
 import useServiceList from '../../hooks/useServiceList';
@@ -86,6 +89,7 @@ function ShipmentDetails() {
 		<ShipmentDetailContext.Provider value={contextValues}>
 			<div>
 				<div className={styles.top_header}>
+					<ShipmentInfo />
 
 					<div className={styles.toggle_chat}>
 						<Toggle
@@ -105,7 +109,7 @@ function ShipmentDetails() {
 				<div className={styles.header}>
 					<ShipmentHeader />
 
-					{/* <PocSop /> */}
+					<PocSop />
 				</div>
 
 				<Timeline />
@@ -118,7 +122,7 @@ function ShipmentDetails() {
 						onChange={setActiveTab}
 					>
 						<TabPanel name="overview" title="Overview">
-							{/* <Overview shipmentData={shipment_data} /> */}
+							<Overview shipmentData={shipment_data} />
 						</TabPanel>
 
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
@@ -126,7 +130,7 @@ function ShipmentDetails() {
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
-							{/* <Documents /> */}
+							<Documents />
 						</TabPanel>
 
 						<TabPanel name="emails" title="Emails">

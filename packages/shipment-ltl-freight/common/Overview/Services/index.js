@@ -1,6 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { startCase, isEmpty } from '@cogoport/utils';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 import Loader from './Loader';
 import ServiceDetails from './ServiceDetails';

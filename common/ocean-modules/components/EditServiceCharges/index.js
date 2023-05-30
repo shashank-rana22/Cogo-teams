@@ -7,7 +7,7 @@ import EditLineItems from './EditLineItems';
 import styles from './styles.module.css';
 
 function EditServiceCharges(props) {
-	const { controls, service_name = '', shipment_id = '' } = props;
+	const { controls, service_name = '', customValues = {}, shipment_id = '' } = props || {};
 
 	const [q, setQ] = useState('');
 
@@ -19,22 +19,12 @@ function EditServiceCharges(props) {
 	const options = (data?.list || [])
 		.filter((item) => item?.code?.includes(q) || item?.name?.includes(q) || (item?.code)?.includes(upperCase(q)))
 		.map((item) => ({
-			value : item.code,
+			value : item?.code,
 			label : (
-				<div
-					className={styles.label}
-				>
-					<div>
-						{item?.code}
-						{' '}
-						-
-						{' '}
-						{item?.name || ''}
-					</div>
+				<div className={styles.label}>
+					<div>{`${item?.code || ''} - ${item?.name || ''}`}</div>
 
-					<div>
-						{item?.sac_code}
-					</div>
+					<div>{item?.sac_code}</div>
 				</div>
 			),
 			...item,
@@ -58,6 +48,7 @@ function EditServiceCharges(props) {
 				<EditLineItems
 					{...props}
 					controls={finalControls}
+					customValues={customValues}
 				/>
 			) : null}
 		</div>
