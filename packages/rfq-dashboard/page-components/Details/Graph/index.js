@@ -37,11 +37,18 @@ function Graph({ rfq_id = '' }) {
 
 	const { graph_data = {} } = data;
 	// console.log(graph_data, 'graph_data');
+	const graphPastMonthData = [];
+	(graph_data?.y_axis || []).forEach((item) => {
+		graphPastMonthData.push({
+			x : item?.month,
+			y : item?.count,
+		});
+	});
 
-	const graphPastMonthData = Object.entries(graph_data?.y_axis || {}).map(([key, value]) => ({
-		x : key,
-		y : value?.shipment_received,
-	}));
+	// const graphPastMonthData = Object.entries(graph_data?.y_axis || {}).map(([key, value]) => ({
+	// 	x : key,
+	// 	y : value?.shipment_received,
+	// }));
 
 	return (
 		<div className={styles.container}>
