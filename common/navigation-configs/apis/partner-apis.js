@@ -12101,11 +12101,6 @@ const partner = {
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'create_analytics_dashboard',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
-		{
 			api          : 'create_analytics_dashboard_permission',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
@@ -12152,11 +12147,6 @@ const partner = {
 		},
 	],
 	analytics_dashboard_management: [
-		{
-			api          : 'create_analytics_dashboard',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
-		},
 		{
 			api          : 'create_analytics_dashboard_permission',
 			access_type  : 'private',
