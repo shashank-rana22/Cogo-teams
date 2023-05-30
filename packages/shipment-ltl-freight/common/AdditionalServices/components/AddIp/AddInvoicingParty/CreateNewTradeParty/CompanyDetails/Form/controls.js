@@ -1,6 +1,6 @@
-import PATTERNS from '@cogoport/constants/patterns';
+// import PATTERNS from '@cogoport/constants/patterns';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const geo = getGeoConstants();
 const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_ids;
@@ -29,7 +29,8 @@ const controls = ({ watch }) => {
 			rules       : {
 				required : 'PAN Number is required',
 				pattern  : {
-					value   : isCountryIndia && PATTERNS.PAN_NUMBER,
+					value   : isCountryIndia,
+					// && PATTERNS.PAN_NUMBER,
 					message : 'PAN is invalid',
 				},
 			},
