@@ -1,5 +1,4 @@
 import { cl } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 
 import CategoriesCard from './CategoriesCard';
 import PerformanceCard from './PerformanceCard';

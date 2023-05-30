@@ -21,43 +21,6 @@
 	color: #828282;
 }
 
-.list {
-	min-height: 220px;
-	max-height: 460px;
-	overflow-y: auto;
-}
-
-.list::-webkit-scrollbar {
-	display: none;
-}
-
-.card {
-	display: flex;
-	align-items: center;
-	justify-content: space-between;
-	padding-bottom: 4px;
-	margin-bottom: 8px;
-	border-bottom: 1px solid #e0e0e0;
-}
-
-.count {
-	font-size: 14px;
-	font-weight: 500;
-}
-
-.agent_name {
-	font-size: 14px;
-	font-weight: 500;
-}
-
-.agent_org {
-	font-size: 10px;
-	font-weight: 400;
-	color: #828282;
-}
-
-.type { width: 85%; }
-
 .is_margin {
 	margin-right: 12px;
 }
