@@ -66,11 +66,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	// 	};
 
 	// 	[...controlsvalue, ...permanentcontrols].forEach((item) => {
-	// 		setValue(
-	// 			`${item.name}`,
-	// 			mapping[item.name]
-	//             || content?.detail?.[item.name],
-	// 		);
+	// 		setValue(`${item.name}`, mapping[item.name]);
 	// 	});
 	// }, [controlsvalue, content?.detail, setValue, permanentcontrols]);
 
