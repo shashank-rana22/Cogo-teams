@@ -29,9 +29,9 @@ function TableView({ search, activeTab }) {
 		retention_bonus_yearly = 0, performance_linked_variable_yearly = 0,
 	} = metadata || {};
 
-	const variable_pay = (joining_bonus_yearly
-				+ retention_bonus_yearly
-				+ performance_linked_variable_yearly) || 0;
+	const variable_pay = (Number(joining_bonus_yearly)
+				+ Number(retention_bonus_yearly)
+				+ Number(performance_linked_variable_yearly)) || 0;
 
 	if ((list || []).length < 1 && !loading) {
 		return (
@@ -82,14 +82,26 @@ function TableView({ search, activeTab }) {
 				</Modal.Body>
 				<Modal.Footer>
 					<div className={styles.button_container}>
-						<ActionPopover ctcBreakup={ctcBreakup} onFinalSubmit={onFinalSubmit} />
-						<Button
-							onClick={() => onFinalSubmit({ id, status: 'approved' })}
-							themeType="primary"
-							style={{ marginLeft: 8 }}
-						>
-							Approve
-						</Button>
+						{ctcBreakup?.status === 'active' ? (
+							<>
+								<ActionPopover ctcBreakup={ctcBreakup} onFinalSubmit={onFinalSubmit} />
+								<Button
+									onClick={() => onFinalSubmit({ id, status: 'approved' })}
+									themeType="primary"
+									style={{ marginLeft: 8 }}
+								>
+									Approve
+								</Button>
+							</>
+						) : (
+							<Button
+								onClick={() => setCtcBreakup('')}
+								themeType="secondary"
+								style={{ marginLeft: 8 }}
+							>
+								Close
+							</Button>
+						)}
 					</div>
 				</Modal.Footer>
 			</Modal>

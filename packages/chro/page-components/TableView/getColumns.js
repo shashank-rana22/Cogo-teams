@@ -49,9 +49,9 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab }) => [
 				retention_bonus_yearly = 0, performance_linked_variable_yearly = 0,
 			} = metadata || {};
 
-			const variable_pay = (joining_bonus_yearly
-				+ retention_bonus_yearly
-				+ performance_linked_variable_yearly) || 0;
+			const variable_pay = (Number(joining_bonus_yearly)
+				+ Number(retention_bonus_yearly)
+				+ Number(performance_linked_variable_yearly)) || 0;
 
 			return (
 				<div>
