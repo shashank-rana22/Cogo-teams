@@ -1,13 +1,13 @@
 .table_container {
-	margin-top: 20px;
+  margin-top: 20px;
 }
 
 .button_container {
-	display: flex;
+  display: flex;
 }
 
 .pagination_container {
-	display: flex;
-	justify-content: flex-end;
-	width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
 }

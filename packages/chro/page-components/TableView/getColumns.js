@@ -6,7 +6,7 @@ import { startCase } from '@cogoport/utils';
 import ActionPopover from './ActionPopover';
 import styles from './styles.module.css';
 
-const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {} }) => [
+const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab }) => [
 	{
 		Header   : 'NAME & EMAIL',
 		accessor : (item) => (
@@ -85,15 +85,30 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {} }) => [
 		Header   : 'ACTION',
 		accessor : (item) => (
 			<div className={styles.button_container}>
-				<ActionPopover item={item} onFinalSubmit={onFinalSubmit} />
+				{activeTab === 'active' ? (
+					<>
+						<ActionPopover item={item} onFinalSubmit={onFinalSubmit} />
 
-				<Button
-					onClick={() => onFinalSubmit({ id: item?.id, status: 'approved' })}
-					themeType="primary"
-					style={{ marginLeft: 8 }}
-				>
-					Approve
-				</Button>
+						<Button
+							onClick={() => onFinalSubmit({ id: item?.id, status: 'approved' })}
+							themeType="primary"
+							style={{ marginLeft: 8 }}
+						>
+							Approve
+						</Button>
+					</>
+				) : (
+					<div
+						style={{
+							background   : item?.status === 'approved' ? 'lightgreen' : '#ff6865',
+							color        : item?.status === 'approved' ? '' : '#fff',
+							padding      : '2px 5px',
+							borderRadius : 4,
+						}}
+					>
+						{startCase(item?.status)}
+					</div>
+				)}
 			</div>
 		),
 	},
