@@ -1,14 +1,16 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { IcCFtick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useEffect } from 'react';
 
-import { graphPastMonthData } from '../../../configurations/past-months-graph-data';
+// import { graphPastMonthData } from '../../../configurations/past-months-graph-data';
+import usegetRfqGraph from '../../../hooks/useGetRfqGraph';
 
 import EmptyLineChart from './EmptyStateLineChart';
 import LineChartLoader from './LoaderGraph';
 import styles from './styles.module.css';
 
-function Graph({ loading }) {
+function Graph() {
 	const LegendsData = [
 		{
 			label: '100 Shipment Booked',
@@ -26,6 +28,18 @@ function Graph({ loading }) {
 			label: 'Profit %',
 		},
 	];
+
+	const { getRfqGraph, graph_data, loading } = usegetRfqGraph();
+
+	useEffect(() => {
+		getRfqGraph();
+	}, [getRfqGraph]);
+
+	const graphPastMonthData = Object.entries(graph_data.graph_data.y_axis).map(([key, value]) => ({
+		x : key,
+		y : value.shipment_received,
+	}));
+
 	return (
 		<div className={styles.container}>
 			{(isEmpty(graphPastMonthData) && !loading)
