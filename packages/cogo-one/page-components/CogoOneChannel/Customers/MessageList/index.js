@@ -81,12 +81,7 @@ function MessageList(messageProps) {
 
 	useEffect(() => {
 		if (!isFlashMessagesEmpty) {
-			setShowCarousel((p) => {
-				if (p !== 'in_timeout') {
-					return true;
-				}
-				return p;
-			});
+			setShowCarousel((p) => (p !== 'in_timeout' || p));
 		}
 	}, [isFlashMessagesEmpty]);
 
