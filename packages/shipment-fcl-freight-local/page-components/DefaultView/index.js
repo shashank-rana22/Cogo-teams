@@ -1,13 +1,13 @@
-import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-// import { ShipmentChat } from '@cogoport/shipment-chat';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect, useCallback } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
 import CancelDetails from '../../common/CancelDetails';
-// import DocumentHoldDetails from '../../common/DocumentHoldDetails';
+import DocumentHoldDetails from '../../common/DocumentHoldDetails';
 import Documents from '../../common/Documents';
 import Overview from '../../common/Overview';
 import PocSop from '../../common/PocSop';
@@ -24,7 +24,7 @@ import styles from './styles.module.css';
 const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
 const SHIPMENT_ADDITIONAL_METHODS = ['main_service', 'documents'];
 
-function DefaultView({ activeStakeholder = '' }) {
+function DefaultView() {
 	const router = useRouter();
 
 	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
@@ -32,12 +32,6 @@ function DefaultView({ activeStakeholder = '' }) {
 	const { get } = useGetShipment({ additional_methods: SHIPMENT_ADDITIONAL_METHODS });
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
-
-	// const handleVersionChange = useCallback(() => {
-	// 	const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
-	// 	window.location.replace(newHref);
-	// 	window.sessionStorage.setItem('prev_nav', newHref);
-	// }, [router?.query?.partner_id, shipment_data?.id]);
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
@@ -50,8 +44,8 @@ function DefaultView({ activeStakeholder = '' }) {
 		...get,
 		...servicesGet,
 		...getTimeline,
-		activeStakeholder,
-	}), [get, activeStakeholder, servicesGet, getTimeline]);
+		activeStakeholder: 'superadmin',
+	}), [get, servicesGet, getTimeline]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
@@ -104,19 +98,14 @@ function DefaultView({ activeStakeholder = '' }) {
 					<ShipmentInfo />
 
 					<div className={styles.toggle_chat}>
-						{/* <Toggle
-							size="md"
-							onLabel="Old"
-							offLabel="New"
-							onChange={handleVersionChange}
-						/> */}
-						{/* <ShipmentChat /> */}
+
+						<ShipmentChat />
 					</div>
 				</div>
 
 				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
-				{/* <DocumentHoldDetails /> */}
+				<DocumentHoldDetails />
 
 				<div className={styles.header}>
 					<ShipmentHeader />

@@ -10,7 +10,6 @@ export const getOceanLocationInfo = (primary_service, trade_type) => {
 			destination_port = primary_service?.port;
 		} else {
 			origin_port = primary_service?.port;
-			destination_port = primary_service?.port_of_loading;
 		}
 	}
 
@@ -19,8 +18,7 @@ export const getOceanLocationInfo = (primary_service, trade_type) => {
 			origin_port = primary_service?.port;
 			destination_port = primary_service?.port_of_loading;
 		} else {
-			origin_port = primary_service?.port_of_loading;
-			destination_port = primary_service?.port;
+			origin_port = primary_service?.port;
 		}
 	}
 

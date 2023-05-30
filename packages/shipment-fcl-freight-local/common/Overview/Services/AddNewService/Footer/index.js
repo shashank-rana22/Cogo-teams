@@ -1,65 +1,57 @@
-import { Button } from '@cogoport/components';
-import React from 'react';
+import { Button, Toast } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
+import React, { useContext } from 'react';
 
-// import useCreateUpsell from '../../../../../hooks/useCreateUpsell';
+import useCreateSpotSearch from '../../../../../hooks/useCreateUpsell';
 
 import styles from './styles.module.css';
 
 function Footer({
 	onClose = () => {},
-	primary_service = {},
 	service = {},
-	shipmentData = {},
 	formProps = {},
-	haveToUpsell = false,
 	step = 1,
 	setStep = () => {},
-	organization_id = '',
-	user = {},
-
 }) {
-	const { handleSubmit = () => {} } = formProps;
+	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const { handleSubmit = () => {}, formValues, trigger } = formProps;
 
-	// const { onAddService = () => {}, loading } = useCreateUpsell({
-	// 	primary_service,
-	// 	service,
-	// 	shipmentData,
-	// 	organization_id,
-	// 	user,
-	// });
+	const { organization_id = '', user_id = {} } = formValues || {};
+
+	const { onAddService = () => {}, loading } = useCreateSpotSearch({
+		primary_service,
+		service,
+		shipment_data,
+		organization_id,
+		user: user_id,
+	});
+
+	const goToSecondStep = async () => {
+		const formValid = await trigger();
+		if (formValid) {
+			setStep(2);
+		} else {
+			Toast.error('Some form fields are empty or invalid');
+		}
+	};
+
+	const buttons = [
+		{
+			label     : step === 1 ? 'Cancel' : 'Back',
+			onClick   : step === 1 ? onClose : () => setStep(1),
+			themeType : 'secondary',
+			disabled  : loading,
+		},
+		{
+			label    : step === 1 ? 'Next' : 'Submit',
+			onClick  : step === 1 ? goToSecondStep : handleSubmit(onAddService),
+			disabled : loading,
+		},
+	];
 
 	return (
 		<div className={styles.container}>
-			{/* <Button
-				onClick={onClose}
-				disabled={loading || haveToUpsell}
-				themeType="secondary"
-				id="shipment_form_header_cancel"
-			>
-				Cancel
-			</Button> */}
-
-			{/* {step === 1
-				? (
-					<Button
-						onClick={() => setStep(2)}
-						disabled={loading}
-						className={styles.button_wrapper}
-					>
-						Next
-					</Button>
-				) : (
-					<Button
-						type="submit"
-						disabled={loading}
-						onClick={handleSubmit(onAddService)}
-						className={styles.button_wrapper}
-						id="shipment_form_header_submit"
-					>
-						{loading ? 'Adding Service...' : 'Submit'}
-					</Button>
-				)} */}
-
+			{buttons.map(({ label, ...rest }) => <Button key={label} {...rest}>{label}</Button>)}
 		</div>
 	);
 }

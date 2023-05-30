@@ -3,16 +3,14 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-// import useShipmentBack from '../../hooks/useShipmentBack';
+import useShipmentBack from '../../hooks/useShipmentBack';
 
 import styles from './styles.module.css';
 
 function ShipmentInfo() {
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 
-	// const { handleShipmentsClick } = useShipmentBack();
-
-	const handleShipmentsClick = () => {};
+	const { handleShipmentsClick } = useShipmentBack();
 
 	const sourceText = shipment_data?.source === 'direct'
 		? 'Sell Without Buy'
