@@ -7,15 +7,21 @@ import NodeColumns from '../NodeColumns';
 
 import styles from './styles.module.css';
 
-function TableColumns({ listType = '', showOptions = {}, setShowOptions = () => {} }) {
+function TableColumns({
+	listType = '',
+	showOptions = {},
+	setShowOptions = () => {},
+	setShowActivityModal,
+}) {
+	console.log('showOptions:', showOptions);
 	const columns = [
 		{
 			Header   : 'NETWORK NAME',
 			accessor : (item = {}) => (
 				<div className={styles.tooltip_content}>
-					<Tooltip content={startCase('Cogoport')} placement="bottom">
+					<Tooltip content={startCase(item?.referrer_data?.name)} placement="bottom">
 						<div className={styles.user_name}>
-							{startCase(item?.user_name)}
+							{startCase(item?.referrer_data?.name) || 'NA'}
 						</div>
 					</Tooltip>
 				</div>
@@ -35,15 +41,15 @@ function TableColumns({ listType = '', showOptions = {}, setShowOptions = () => 
 			),
 			conditions: ['users'],
 		},
-		{
-			Header   : 'LEVELS',
-			accessor : (item = {}) => (
-				<div className={styles.user_name}>
-					{item?.level}
-				</div>
-			),
-			conditions: ['network'],
-		},
+		// {
+		// 	Header   : 'LEVELS',
+		// 	accessor : (item = {}) => (
+		// 		<div className={styles.user_name}>
+		// 			{item?.level}
+		// 		</div>
+		// 	),
+		// 	conditions: ['network'],
+		// },
 		{
 			Header   : 'Referrals',
 			accessor : (item = {}) => (
@@ -57,7 +63,7 @@ function TableColumns({ listType = '', showOptions = {}, setShowOptions = () => 
 			Header   : 'USERS',
 			accessor : (item = {}) => (
 				<div className={styles.user_name}>
-					{item?.user_count}
+					{item?.total_child_count}
 				</div>
 			),
 			conditions: ['network', 'users'],
@@ -94,10 +100,16 @@ function TableColumns({ listType = '', showOptions = {}, setShowOptions = () => 
 			accessor : (item = {}) => (
 				<div className={styles.show_details} key={item?.id}>
 					<Popover
+						// visible={showOptions?.id === item?.id}
 						onClickOutside={() => setShowOptions({})}
 						placement="left"
-						// render="hello"
-						render={<ListButtons item={item} />}
+						render={(
+							<ListButtons
+								item={item}
+								setShowActivityModal={setShowActivityModal}
+								setShowOptions={setShowOptions}
+							/>
+						)}
 					>
 						<IcMOverflowDot className={styles.dot_icon} onClick={() => setShowOptions(item)} />
 					</Popover>

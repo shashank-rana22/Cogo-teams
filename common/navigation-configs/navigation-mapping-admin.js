@@ -2262,7 +2262,7 @@ const navigationMappingAdmin = {
 		main_apis   : [],
 		options     : [
 			{
-				key           : 'referral-dashboard',
+				key           : 'referral-referral_dashboard',
 				title         : 'Dashboard',
 				href          : '/v2/referral/dashboard',
 				as            : '/v2/referral/dashboard',
@@ -2270,12 +2270,12 @@ const navigationMappingAdmin = {
 				possible_apis : apis.referral_dashboard,
 			},
 			{
-				key           : 'referral-analytics',
+				key           : 'referral-referral_analytics',
 				title         : 'Analytics',
 				href          : '/v2/referral/analytics',
 				as            : '/v2/referral/analytics',
 				type          : 'link',
-				possible_apis : apis.referral_dashboard,
+				possible_apis : apis.referral_analytics,
 			},
 		],
 	},

@@ -1,18 +1,24 @@
 import styles from './styles.module.css';
 
 function NodeColumns({ index = 0, item = {}, type = '' }) {
-	const { direct = 0, indirect = 0 } = item;
-	const { direct: expecteCogopoint = 0, indirect: inexpectedCogopoints = 0 } = item;
+	const { cogopoints = {} } = item || {};
+	const {
+		network_cogopoint_earned = 0,
+		network_cogopoint_estimated = 0,
+		referral_cogopoint_earned = 0,
+		referral_cogopoint_estimated = 0,
+	} = cogopoints || {};
+
 	const subTitleOptions = [
 		{
 			title : 'Direct',
 			name  : 'direct',
-			count : type === 'total_cogopoints' ? direct : expecteCogopoint,
+			count : type === 'total_cogopoints' ? referral_cogopoint_earned : referral_cogopoint_estimated,
 		},
 		{
 			title : 'Indirect',
 			name  : 'indirect',
-			count : type === 'total_cogopoints' ? indirect : inexpectedCogopoints,
+			count : type === 'total_cogopoints' ? network_cogopoint_earned : network_cogopoint_estimated,
 		},
 	];
 

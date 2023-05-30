@@ -1,150 +1,23 @@
 import { Table } from '@cogoport/components';
-import { useState } from 'react';
 
 import AnalyticsFilter from '../../../../common/AnalyticsFilter';
+import useGetListReferralMappings from '../../../../hooks/useGetListReferralMappings';
 import TableColumns from '../List/TableColumn';
 
 import styles from './styles.module.css';
 
-function NetworkList() {
-	const [showPopover, setShowPopover] = useState(false);
-	const [showOptions, setShowOptions] = useState({});
-	const [filterValue, setFilterValue] = useState({
-		levelType : '',
-		userCount : '',
-	});
-	const data = [
-		{
-			user_name        : 'hello',
-			level            : 12,
-			user_count       : 13,
-			total_cogopoints : {
-				direct   : 200,
-				indirect : 100,
-			},
-			expected_cogopoints: {
-				direct   : 700,
-				indirect : 300,
-			},
-		},
-		{
-			user_name        : 'hello',
-			level            : 12,
-			user_count       : 13,
-			total_cogopoints : {
-				direct   : 200,
-				indirect : 100,
-			},
-			expected_cogopoints: {
-				direct   : 700,
-				indirect : 300,
-			},
-		},
-		{
-			user_name        : 'hello',
-			level            : 12,
-			user_count       : 13,
-			total_cogopoints : {
-				direct   : 200,
-				indirect : 100,
-			},
-			expected_cogopoints: {
-				direct   : 700,
-				indirect : 300,
-			},
-		},
-		{
-			user_name        : 'hello',
-			level            : 12,
-			user_count       : 13,
-			total_cogopoints : {
-				direct   : 200,
-				indirect : 100,
-			},
-			expected_cogopoints: {
-				direct   : 700,
-				indirect : 300,
-			},
-		},
-		{
-			user_name        : 'hello',
-			level            : 12,
-			user_count       : 13,
-			total_cogopoints : {
-				direct   : 200,
-				indirect : 100,
-			},
-			expected_cogopoints: {
-				direct   : 700,
-				indirect : 300,
-			},
-		},
-		{
-			user_name        : 'hello',
-			level            : 12,
-			user_count       : 13,
-			total_cogopoints : {
-				direct   : 200,
-				indirect : 100,
-			},
-			expected_cogopoints: {
-				direct   : 700,
-				indirect : 300,
-			},
-		},
-		{
-			user_name        : 'hello',
-			level            : 12,
-			user_count       : 13,
-			total_cogopoints : {
-				direct   : 200,
-				indirect : 100,
-			},
-			expected_cogopoints: {
-				direct   : 700,
-				indirect : 300,
-			},
-		},
-		{
-			user_name        : 'hello',
-			level            : 12,
-			user_count       : 13,
-			total_cogopoints : {
-				direct   : 200,
-				indirect : 100,
-			},
-			expected_cogopoints: {
-				direct   : 700,
-				indirect : 300,
-			},
-		},
-		{
-			user_name        : 'hello',
-			level            : 12,
-			user_count       : 13,
-			total_cogopoints : {
-				direct   : 200,
-				indirect : 100,
-			},
-			expected_cogopoints: {
-				direct   : 700,
-				indirect : 300,
-			},
-		},
-		{
-			user_name        : 'hello',
-			level            : 12,
-			user_count       : 13,
-			total_cogopoints : {
-				direct   : 200,
-				indirect : 100,
-			},
-			expected_cogopoints: {
-				direct   : 700,
-				indirect : 300,
-			},
-		},
-	];
+function NetworkList({
+	showPopover,
+	filterValue,
+	setFilterValue,
+	setShowPopover,
+	showOptions,
+	setShowOptions,
+	showActivityModal,
+	setShowActivityModal,
+}) {
+	const { networkData = {}, loading = false, debounceQuery } = useGetListReferralMappings();
+	const { list = [] } = networkData || {};
 
 	return (
 		<div className={styles.container}>
@@ -154,11 +27,19 @@ function NetworkList() {
 				setShowPopover={setShowPopover}
 				filterValue={filterValue}
 				setFilterValue={setFilterValue}
+				debounceQuery={debounceQuery}
 			/>
 			<Table
-				columns={TableColumns({ listType: 'network', showOptions, setShowOptions })}
-				data={data || []}
+				columns={TableColumns({
+					listType: 'network',
+					showOptions,
+					setShowOptions,
+					showActivityModal,
+					setShowActivityModal,
+				})}
+				data={list || []}
 				loadingRowsCount={10}
+				loading={loading}
 			/>
 		</div>
 	);

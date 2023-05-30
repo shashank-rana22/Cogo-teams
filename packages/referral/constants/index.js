@@ -58,21 +58,6 @@ export const NETWORK_LOADER = 'https://cdn.cogoport.io/cms-prod/cogo_public/vaul
 
 export const USER_AVATAR = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp';
 
-export const USER_OPTIONS = [
-	{
-		label : 'CP',
-		value : 'cp',
-	},
-	{
-		label : 'IE',
-		value : 'ie',
-	},
-	{
-		label : 'Affilate',
-		value : 'affilate',
-	},
-];
-
 export const TABS_OPTIONS = [
 	{
 		label : 'Invited',

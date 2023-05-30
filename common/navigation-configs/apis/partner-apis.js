@@ -12260,6 +12260,18 @@ const partner = {
 			service_name : 'referral',
 		},
 	],
+	referral_analytics: [
+		{
+			api          : 'list_referral_mappings',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_transactions',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
 	air_repository: [
 		{
 			api          : 'list_shipment_service_ops_repository',
