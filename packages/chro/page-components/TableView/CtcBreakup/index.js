@@ -39,39 +39,37 @@ function CtcBreakup({ metadata }) {
 			</div>
 
 			{Object.entries(metadata).map(([key, value]) => {
-        	const { heading = null, yearlyValue = null, monthlyValue = null } = value;
-        	return (
-	<div key={key}>
-		{heading != null ? (
-			<div className={styles.list} key={key}>
-				{heading ? <div style={{ width: '60%' }}>{startCase(heading ?? '___')}</div> : null}
-				{yearlyValue != null ? (
-					<div style={{ width: '20%' }}>
-						{yearlyValue.toFixed(2) ?? '___'}
+				const { heading = null, yearlyValue = null, monthlyValue = null } = value;
+				return (
+					<div key={key}>
+						{heading != null ? (
+							<div className={styles.list} key={key}>
+								{heading ? <div style={{ width: '60%' }}>{startCase(heading ?? '______')}</div> : null}
+								{yearlyValue != null ? (
+									<div style={{ width: '20%' }}>
+										{yearlyValue.toFixed(2) ?? '______'}
+									</div>
+								) : null}
+								{monthlyValue != null ? (
+									<div style={{ width: '20%' }}>
+										{monthlyValue.toFixed(2) ?? '______'}
+									</div>
+								) : null}
+							</div>
+						) : (
+							<div className={styles.list} key={key}>
+								<div style={{ width: '60%' }}>{startCase(MAPPING?.[key]?.heading ?? '______')}</div>
+								<div style={{ width: '20%' }}>
+									{MAPPING?.[key]?.yearlyValue ?? '______'}
+								</div>
+								<div style={{ width: '20%' }}>
+									{MAPPING?.[key]?.monthlyValue ?? '______'}
+								</div>
+							</div>
+						)}
 					</div>
-				) : null}
-				{monthlyValue != null ? (
-					<div style={{ width: '20%' }}>
-						{monthlyValue.toFixed(2) ?? '___'}
-					</div>
-				) : null}
-			</div>
-		) : (
-			<div className={styles.list} key={key}>
-				<div style={{ width: '60%' }}>{startCase(MAPPING?.[key]?.heading ?? '___')}</div>
-				<div style={{ width: '20%' }}>
-					{MAPPING?.[key]?.yearlyValue ?? '___'}
-				</div>
-				<div style={{ width: '20%' }}>
-					{MAPPING?.[key]?.monthlyValue ?? '___'}
-				</div>
-			</div>
-		)}
-
-	</div>
-);
+				);
 			})}
-			;
 		</div>
 	);
 }

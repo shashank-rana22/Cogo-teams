@@ -21,6 +21,15 @@ function TableView({ search }) {
 	const { onFinalSubmit = () => {} } = useUpdateOfferLetter(id);
 	const columns = getColumns({ setCtcBreakup, ctcBreakup, onFinalSubmit });
 
+	const {
+		init = 0, joining_bonus_yearly = 0,
+		retention_bonus_yearly = 0, performance_linked_variable_yearly = 0,
+	} = metadata || {};
+
+	const variable_pay = (joining_bonus_yearly
+				+ retention_bonus_yearly
+				+ performance_linked_variable_yearly) || 0;
+
 	return (
 		<div className={styles.table_container}>
 			<StyledTable columns={columns} data={list} />
@@ -41,9 +50,21 @@ function TableView({ search }) {
 				show={ctcBreakup}
 				onClose={() => setCtcBreakup('')}
 			>
-				<Modal.Header title="Are you sure?" />
+				{ctcBreakup?.employee_detail?.name
+					? <Modal.Header title={`${ctcBreakup?.employee_detail?.name}`} />
+					: null}
 				<Modal.Body>
-					{metadata?.init}
+					Final Compensation Offered:
+					{' '}
+					<span style={{ fontWeight: 600 }}>
+						Rs.
+						{' '}
+						{init}
+						{' '}
+						LPA (fixed)
+						{variable_pay > 0 ? ` + Rs. ${variable_pay} LPA (variable)`
+							: null}
+					</span>
 					<CtcBreakup metadata={metadata} />
 				</Modal.Body>
 				<Modal.Footer>

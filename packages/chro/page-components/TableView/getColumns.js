@@ -87,7 +87,7 @@ const getColumns = ({ setCtcBreakup, ctcBreakup, onFinalSubmit = () => {} }) => 
 		Header   : 'ACTION',
 		accessor : (item) => (
 			<div className={styles.button_container}>
-				<ActionPopover ctcBreakup={ctcBreakup} />
+				<ActionPopover ctcBreakup={ctcBreakup} onFinalSubmit={onFinalSubmit} />
 
 				<Button
 					onClick={() => onFinalSubmit('approved')}
