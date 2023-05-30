@@ -11,7 +11,6 @@ function Content(props) {
 
 	const TAB_MAPPING = [
 		{ name: 'approval', title: 'Approval' },
-		{ name: 'all', title: 'All RFQ' },
 	];
 
 	const { getRfqsForApproval, data = {}, page, setPage, loading } = useListRfqs({ filterStore });

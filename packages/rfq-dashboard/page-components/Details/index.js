@@ -14,7 +14,7 @@ function Details() {
 	const { query } = useRouter();
 	const { rfq_id = '' } = query || {};
 
-	const { getRfqsRateCards, data = {}, loading } = useGetRfqRateCards({ rfq_id });
+	const { getRfqsRateCards, data = {}, loading } = useGetRfqRateCards({ rfq_id, state: 'requested_for_approval' });
 	const { getRfqsForApproval, data: listData, loading: Detailsloading } = useListRfqs({ id: rfq_id });
 
 	useEffect(() => {
@@ -23,7 +23,6 @@ function Details() {
 	}, [getRfqsRateCards, rfq_id, getRfqsForApproval]);
 
 	const { list: list_object = {} } = data;
-	console.log('listData', listData);
 
 	return (
 		<div className={styles.container}>

@@ -9,7 +9,7 @@ import getMarginControls from './controls';
 function Form({
 	serviceKey,
 	lineItem = {},
-	onChange = () => {},
+	onChange = () => { },
 	// marginType = 'demand',
 	id_prefix,
 }) {
@@ -34,9 +34,10 @@ function Form({
 	const { control, watch } = useForm({
 		defaultValues: {
 			[nameKey]: [{
-				type  : 'absolute_total',
+				type: 'absolute_total',
+
 				currency,
-				value : marginValue,
+				value: marginValue,
 			}],
 		},
 	});
@@ -45,10 +46,13 @@ function Form({
 		watch((v) => {
 			onChange({
 				serviceKey,
-				code     : lineItem?.code,
-				currency : v[nameKey][0]?.currency,
-				type     : v[nameKey][0]?.type,
-				value    : Number(v[nameKey][0]?.value),
+				code: lineItem?.code,
+
+				currency: v[nameKey][0]?.currency,
+
+				type: v[nameKey][0]?.type,
+
+				value: Number(v[nameKey][0]?.value),
 			});
 		});
 	}, [lineItem?.code, nameKey, onChange, serviceKey, watch]);

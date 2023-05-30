@@ -1,13 +1,27 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
 import getWidth from '../../../../utils/getWidth';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({ margin_limit }) {
+	const { margin_value, margin_currency } = margin_limit;
 	return (
 		<>
 			<div className={styles.note}>
 				Please note that reducing the total margin by more than
-				<span>INR 8000</span>
+				<span>
+					{formatAmount({
+						amount   : margin_value,
+						currency : margin_currency,
+						options  : {
+							style                 : 'currency',
+							currencyDisplay       : 'code',
+							maximumFractionDigits : 2,
+						},
+					})}
+
+				</span>
 				{' '}
 				will require an approval.
 			</div>

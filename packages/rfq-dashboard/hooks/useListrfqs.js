@@ -6,7 +6,7 @@ import { useState, useCallback } from 'react';
 const useListRfqs = ({ filterStore = {}, id = '' }) => {
 	const {
 		endDate, highProfitability,
-		lowProfitability, organizationSize, search, serviceType, startDate, status, sortBy, activeTab,
+		lowProfitability, organizationSize, search, serviceType, startDate, sortBy, activeTab,
 
 	} = filterStore || {};
 	const [page, setPage] = useState(1);
@@ -46,9 +46,9 @@ const useListRfqs = ({ filterStore = {}, id = '' }) => {
 
 				service_type: serviceType,
 
-				status: activeTab === 'all' ? 'live' : undefined,
+				status: 'live',
 
-				id,
+				id: id || undefined,
 			},
 			page,
 		},
