@@ -2,16 +2,21 @@ import { Avatar, Button, Placeholder } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import useUpdateEmployeeDeatils from '../../hooks/useUpdateEmployeeDetails';
+
 import styles from './styles.module.css';
 
 function Header({
 	detail,
 	loading,
 	setShowCtcBreakupModal,
+	getEmployeeDetails,
 	setCtcStructure = () => {},
 	ctcStructure = {},
 }) {
-	const { name, employee_code, designation, passport_size_photo_url } = detail || {};
+	const { id, name, employee_code, designation, passport_size_photo_url, status } = detail || {};
+
+	const { updateEmployeeStatus, btnloading } = useUpdateEmployeeDeatils({ id, status, getEmployeeDetails });
 
 	return (
 		<div className={styles.container}>
@@ -62,9 +67,16 @@ function Header({
 				>
 					Add CTC breakup
 				</Button>
-				<Button type="button" style={{ marginLeft: 12 }}>
-					Reject Candidate
+
+				<Button
+					type="button"
+					style={{ marginLeft: 12 }}
+					onClick={() => { updateEmployeeStatus(); }}
+					loading={btnloading}
+				>
+					{status === 'active' ? 'Reject Candidate' : 'Reactivate Employee Profile'}
 				</Button>
+
 			</div>
 		</div>
 	);
