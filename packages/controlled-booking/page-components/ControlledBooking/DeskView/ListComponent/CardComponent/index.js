@@ -1,8 +1,10 @@
-import { IcMTimer } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMArrowUp, IcMTimer } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 import React, { useRef, useEffect, useState } from 'react';
 
+import MoreDetails from './MoreDetails';
 import PortPair from './PortPair';
+import StatusApproval from './StatusApproval';
 import styles from './styles.module.css';
 
 const handleTimer = (end_date) => {
@@ -26,17 +28,15 @@ const handleTimer = (end_date) => {
 };
 
 function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} }) {
-	const { services, primary_service, importer_exporter, source } = item || {};
+	const { services, primary_service, approvals, importer_exporter, source } = item || {};
 	const { agents } = importer_exporter;
 	const ownerName = agents?.[0]?.name;
 
 	const [showDetails, setShowDetails] = useState(false);
 
 	const primaryServiceDetails = Object.values(services).filter(
-		(childItem) => childItem.service_type === primary_service && childItem?.container_type === 'refer',
-	)?.[0];
-
-	console.log('primaryServiceDetails', primaryServiceDetails);
+		(childItem) => childItem.service_type === primary_service,
+	);
 
 	const timerRef = useRef(null);
 	let time = null;
@@ -66,7 +66,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 			<div className={styles.parent}>
 				<div className={styles.container}>
 					<p className={styles.source}>
-						{source}
+						{startCase(source)}
 					</p>
 					<div className={styles.horizontal_div}>
 						<div className={styles.quotation}>
@@ -80,14 +80,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 
 						<div className={styles.account_div}>
 							<div className={styles.account_name}>
-								<div style={{
-									maxWidth     : '80%',
-									fontSize     : 16,
-									whiteSpace   : 'nowrap',
-									overflow     : 'hidden',
-									textOverflow : 'ellipsis',
-								}}
-								>
+								<div className={styles.business_name}>
 									{startCase(item?.importer_exporter?.business_name) || '-'}
 								</div>
 								{' '}
@@ -96,32 +89,25 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 								</div>
 							</div>
 							<div style={{ display: 'flex', justifyContent: 'space-between' }}>
-								<div style={{ display: 'flex', color: '#828282', marginBottom: 4, marginTop: 4 }}>
+								<div className={styles.primary_text}>
 									User:
-									<div style={{
-										color        : '#4F4F4F',
-										marginLeft   : 4,
-										maxWidth     : '80%',
-										whiteSpace   : 'nowrap',
-										overflow     : 'hidden',
-										textOverflow : 'ellipsis',
-									}}
-									>
+									<div className={styles.secondary_text}>
 										{startCase(item?.importer_exporter_poc?.name) || '-'}
 
 									</div>
 								</div>
-								<div style={{ display: 'flex', color: '#828282', marginBottom: 4, marginTop: 4 }}>
+
+								<div className={styles.primary_text}>
 									Requested By:
-									<div style={{ color: '#4F4F4F', marginLeft: 4 }}>
+									<div className={styles.secondary_text}>
 										{startCase(item?.quotation_email_sent_by
 											?.name) || '--'}
 									</div>
 								</div>
 							</div>
-							<div style={{ display: 'flex', color: '#828282' }}>
+							<div className={styles.primary_text}>
 								Kam:
-								<div style={{ color: '#4F4F4F', marginLeft: 4 }}>
+								<div className={styles.secondary_text}>
 									{ownerName}
 								</div>
 							</div>
@@ -130,47 +116,48 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 						<div className={styles.port_details}>
 							<PortPair
 								portPair={{
-									originPort      : primaryServiceDetails?.origin_port,
-									destinationPort : primaryServiceDetails?.destination_port,
+									originPort      : primaryServiceDetails?.[0]?.origin_port,
+									destinationPort : primaryServiceDetails?.[0]?.destination_port,
 
 								}}
 								service_type={primary_service}
 							/>
 
-							<div style={{
-								display        : 'flex',
-								alignItems     : 'center',
-								justifyContent : 'space-between',
-								marginBottom   : 4,
-								marginTop      : 6,
-							}}
+							<div
+								style={{
+									display        : 'flex',
+									alignItems     : 'center',
+									justifyContent : 'space-between',
+									marginBottom   : 4,
+									marginTop      : 6,
+								}}
 							>
-								<div style={{ display: 'flex', color: '#828282', fontSize: 12 }}>
+								<div className={styles.primary_text}>
 									ETD:
-									<div style={{ color: '#4F4F4F' }}>
+									<div className={styles.secondary_text}>
 										{format(
-											primaryServiceDetails?.departure,
+											primaryServiceDetails?.[0]?.departure,
 											'dd MMM YYYY',
 										)}
 									</div>
 								</div>
-								<div style={{ color: '#828282' }}>
+								<div className={styles.primary_text}>
 									--------
 								</div>
-								<div style={{ display: 'flex', color: '#828282', fontSize: 12 }}>
+								<div className={styles.primary_text}>
 									Transit Time :
-									<div style={{ color: '#4F4F4F' }}>
+									<div className={styles.secondary_text}>
 										4 Days
 									</div>
 								</div>
-								<div style={{ color: '#828282' }}>
+								<div className={styles.primary_text}>
 									--------
 								</div>
-								<div style={{ display: 'flex', color: '#828282', fontSize: 12 }}>
+								<div className={styles.primary_text}>
 									ETA  :
-									<div style={{ color: '#4F4F4F' }}>
+									<div className={styles.secondary_text}>
 										{format(
-											primaryServiceDetails?.arrival,
+											primaryServiceDetails?.[0]?.arrival,
 											'dd MMM YYYY',
 										)}
 									</div>
@@ -178,50 +165,23 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 							</div>
 
 							<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
-								<div style={{
-									display      : 'flex',
-									color        : '#828282',
-									fontSize     : 12,
-									maxWidth     : '80%',
-									whiteSpace   : 'nowrap',
-									overflow     : 'hidden',
-									textOverflow : 'ellipsis',
-								}}
-								>
+								<div className={styles.primary_text}>
 									Shipping line :
-									<div style={{ color: '#4F4F4F', marginLeft: 4 }}>
-										{primaryServiceDetails?.shipping_line?.short_name}
+									<div className={styles.secondary_text}>
+										{primaryServiceDetails?.[0]?.shipping_line?.short_name}
 									</div>
 								</div>
-								<div style={{
-									display      : 'flex',
-									color        : '#828282',
-									fontSize     : 12,
-									maxWidth     : '80%',
-									whiteSpace   : 'nowrap',
-									overflow     : 'hidden',
-									textOverflow : 'ellipsis',
-								}}
-								>
+								<div className={styles.primary_text}>
 									Freight Value :
-									<div style={{ color: '#4F4F4F', marginLeft: 4 }}>
+									<div className={styles.secondary_text}>
 										{item?.total_price || '--'}
 										{' '}
 										{item?.total_price_currency}
 									</div>
 								</div>
-								<div style={{
-									display      : 'flex',
-									color        : '#828282',
-									fontSize     : 12,
-									maxWidth     : '80%',
-									whiteSpace   : 'nowrap',
-									overflow     : 'hidden',
-									textOverflow : 'ellipsis',
-								}}
-								>
+								<div className={styles.primary_text}>
 									Payment mode :
-									<div style={{ color: '#4F4F4F', marginLeft: 4 }}>
+									<div className={styles.secondary_text}>
 										Hard code
 									</div>
 								</div>
@@ -252,12 +212,12 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 								/>
 
 							</p>
-							<div style={{ display: 'flex', color: '#828282', fontSize: 12 }}>
+							<div className={styles.primary_text}>
 								<div>
 									{filters?.status === 'Approved on' ? 'Updated on' : 'Requested on'}
 									:
 								</div>
-								<div style={{ color: '#4F4F4F', marginLeft: 4 }}>
+								<div className={styles.secondary_text}>
 									{format(
 										filters?.status === 'approved'
 											? item?.created_at
@@ -272,18 +232,34 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 			</div>
 			<div className={styles.more_details}>
 
+				{showDetails ? (
+					<div className={styles.more_details}>
+						<MoreDetails
+							primaryServiceDetails={primaryServiceDetails}
+							approvals={approvals}
+							item={item}
+							refetchBookingList={refetchBookingList}
+							filters={filters}
+						/>
+					</div>
+				) : null}
+
+				{showDetails && filters.status === 'pending_approval'
+					? (<StatusApproval filters={filters} item={item} refetchBookingList={refetchBookingList} />) : null}
+
 				<div
-					style={{ display: 'flex', justifyContent: 'center', padding: 4, color: '#221F20', fontSize: 12 }}
+					className={styles.take_actions}
+					style={{
+						backgroundColor: showDetails ? '#ffffff' : '#FDFBF6',
+					}}
 					role="presentation"
 					onClick={() => setShowDetails(!showDetails)}
 				>
-					Take Action
+					{showDetails ? 'show less' : 'Take Action'}
+					{' '}
+					{showDetails ? <IcMArrowUp /> : <IcMArrowDown />}
+					{' '}
 				</div>
-				{showDetails ? (
-					<div className={styles.more_details}>
-						lol
-					</div>
-				) : null}
 
 			</div>
 

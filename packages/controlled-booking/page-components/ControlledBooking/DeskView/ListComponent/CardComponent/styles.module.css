@@ -17,7 +17,6 @@
     background: #FDFBF6;
     border-radius: 0px 0px 6px 6px;
     margin-bottom: 20px;
-    
 }
 
 .source{
@@ -26,7 +25,6 @@
     border-radius: 6px;
     padding: 4px; 
     top:0;
-    /* margin-left: 16px; */
 }
 
 .horizontal_div{
@@ -81,4 +79,42 @@
     border-radius: 6px ;
     font-size: 12px;
     color: #4F4F4F
+}
+
+.business_name{
+    max-width     : 80%;
+	font-size     : 16;
+	white-space   : nowrap;
+	overflow     : hidden;
+text-Overflow : ellipsis;
+
+}
+
+.primary_text{
+    display      : flex;
+	color        : #828282;
+    margin-bottom : 4px;
+    margin-top    : 4px;
+    font-size     : 12px;
+    margin-right  : 8px;
+}
+
+.secondary_text{
+    color        : #4F4F4F;
+    margin-left   : 4;
+    max-width     : 80%;
+    white-space   : nowrap;
+	overflow     : hidden;
+	text-Overflow : ellipsis;
+    margin-left: 4px;
+}
+
+.take_actions{
+    display         : flex;
+    justify-content  : center;
+    align-items      : center;
+    padding         : 4px;
+    color           : #221F20;
+    font-size        : 12px;
+    box-shadow       : 0px 0px 8px rgba(98, 127, 172, 0.2);
 }

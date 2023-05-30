@@ -1,0 +1,103 @@
+.container{
+    padding: 36px 36px 0 36px;
+}
+
+.heading{
+    color: #221F20;
+    font-weight: 600;
+    font-size: 16px;
+    border-bottom: 1.5px solid #ACDADF;
+    padding-bottom: 4px;
+    width: 10%;
+}
+
+.container_detials{
+     display: flex;
+     justify-content: space-between;
+     align-items: center;
+     margin-top: 20px;
+     margin-bottom: 16px;
+     width: 75%;
+
+}
+
+.frieght_value{
+    margin-top: 20px;
+    margin-bottom: 16px;
+    margin-left:6px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+
+}
+
+.card_container{
+    padding: 12px 24px;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    background: #FFFFFF;
+    margin-bottom: 12px;
+    width: 100%;
+    display: flex; 
+    justify-content: space-between;
+    position: relative;
+}
+
+.text{
+	margin: 4px;
+	background:#F9F9F9;
+	padding: 2px 4px;
+	font-size: 12px;
+	border-radius: 4px;
+    display: flex;
+}
+
+.commodity_text{
+    margin: 4px;
+	background:#FEF3E9;
+	padding: 2px 4px;
+	font-size: 12px;
+	border-radius: 4px;
+    display: flex;
+    align-items: center;
+}
+
+.cargo_value{
+    background: #FFFFFF;
+    border: 1px solid #F0F0F0;
+    border-radius: 6px;
+    padding: 8px 8px 8px 8px;
+    width: 25%;
+    margin-left: 30px;
+}
+
+.eligibilty{
+    height: 67px;
+    border-radius: 6px;
+    padding: 8px 16px;
+    margin-top: 8px;
+}
+
+.index{
+    position: absolute;
+    background: #FCDC00;
+    border-radius:50% ;
+    height: 16px;
+    width: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+padding: 6px;
+font-size: 10px;
+top:16px;
+left: -8px;
+}
+
+.approvals{
+    display         : flex;
+	align-items      : center;
+	background-color : #ffffff;
+	padding         : 4px;
+	cursor          : pointer;
+	margin-right    : 16px,
+}
