@@ -9,6 +9,7 @@ function Frontside({
 	addAnnexure = false,
 	control,
 	initialValues = {},
+	watermark = null,
 }) {
 	const isReadonly = mode === 'read';
 
@@ -20,7 +21,7 @@ function Frontside({
 			control={control}
 			setaddAnnexure={setaddAnnexure}
 			addAnnexure={addAnnexure}
-			initialValues={initialValues}
+			watermark={watermark}
 		/>
 	);
 }
