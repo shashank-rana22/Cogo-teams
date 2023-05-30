@@ -5,11 +5,12 @@ import TableView from '../TableView';
 
 function ChroDashboard() {
 	const [search, setSearch] = useState('');
+	const [activeTab, setActiveTab] = useState('active');
 
 	return (
 		<div>
-			<Header search={search} setSearch={setSearch} />
-			<TableView search={search} />
+			<Header search={search} setSearch={setSearch} activeTab={activeTab} setActiveTab={setActiveTab} />
+			<TableView search={search} activeTab={activeTab} />
 		</div>
 	);
 }

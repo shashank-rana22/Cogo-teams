@@ -1,7 +1,8 @@
 import { Modal, Button, Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import StyledTable from '../StyledTable';
+import EmptyState from '../../commons/EmptyState';
+import StyledTable from '../../commons/StyledTable';
 
 import ActionPopover from './ActionPopover';
 import CtcBreakup from './CtcBreakup';
@@ -10,10 +11,10 @@ import styles from './styles.module.css';
 import useGetTableView from './useGetTableView';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
-function TableView({ search }) {
+function TableView({ search, activeTab }) {
 	const [ctcBreakup, setCtcBreakup] = useState();
 
-	const { data = {}, onPageChange } = useGetTableView();
+	const { data = {}, onPageChange, loading } = useGetTableView({ search, activeTab });
 
 	const { list = [], page, page_limit, total_count } = data || {};
 
@@ -32,9 +33,19 @@ function TableView({ search }) {
 				+ retention_bonus_yearly
 				+ performance_linked_variable_yearly) || 0;
 
+	if ((list || []).length < 1 && !loading) {
+		return (
+			<EmptyState
+				flexDirection="column"
+				emptyText="No pending requests to review"
+				textSize={20}
+			/>
+		);
+	}
+
 	return (
 		<div className={styles.table_container}>
-			<StyledTable columns={columns} data={list} />
+			<StyledTable columns={columns} data={list} loading={loading} />
 			{total_count > page_limit && (
 				<div className={styles.pagination_container}>
 					<Pagination

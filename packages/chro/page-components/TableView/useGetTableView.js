@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
-function useGetTableView() {
+function useGetTableView({ search, activeTab }) {
 	const [params, setParams] = useState({
 		employee_details_required: true,
 	});
@@ -18,6 +18,16 @@ function useGetTableView() {
 			page: pageNumber,
 		}));
 	};
+
+	useEffect(() => {
+		setParams((previousParams) => ({
+			...previousParams,
+			filters: {
+				q      : search,
+				status : activeTab,
+			},
+		}));
+	}, [activeTab, search]);
 
 	return {
 		onPageChange,
