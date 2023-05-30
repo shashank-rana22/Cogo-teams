@@ -458,6 +458,27 @@ function asyncAllocationRequestRejectionType() {
 	};
 }
 
+function asyncPlanPricingList() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_plan_pricings',
+		initialCall : true,
+		params      : {
+			filters: { is_active: true },
+		},
+	};
+}
+
+function asyncQuotaList() {
+	return {
+		labelKey    : 'product_name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_products',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -494,5 +515,7 @@ export {
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
 	asyncTradePartydetails,
+	asyncPlanPricingList,
+	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
 };

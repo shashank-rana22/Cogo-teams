@@ -29,7 +29,9 @@ import {
 	asyncAccMode,
 	asyncCodeMaster,
 	asyncListOrgTradeParties,
+	asyncPlanPricingList,
 	asyncFieldsPartnerUsersIds,
+	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
 } from '../../../utils/getAsyncFields';
 
@@ -73,12 +75,14 @@ const keyAsyncFieldsParamsMapping = {
 	list_exchange_rate_currencies : asyncListCurrency,
 	engagement_scoring_events     : asyncAccountEngagementScoringEvents,
 	trade_party_details           : asyncTradePartydetails,
+	plan_pricing_list             : asyncPlanPricingList,
+	partner_users_ids             : asyncFieldsPartnerUsersIds,
+	addon_list                    : asyncQuotaList,
 	journal_category              : asyncJvList,
 	journal_code                  : asyncJournalCode,
 	jv_account_mode               : asyncAccMode,
 	jv_code_master                : asyncCodeMaster,
 	list_trade_parties            : asyncListOrgTradeParties,
-	partner_users_ids             : asyncFieldsPartnerUsersIds,
 	allocation_rejection_type     : asyncAllocationRequestRejectionType,
 };
 

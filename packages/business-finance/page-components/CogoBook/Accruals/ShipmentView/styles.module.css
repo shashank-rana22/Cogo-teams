@@ -212,3 +212,24 @@
 	margin-top: 5px;
 	border: 0.5px solid #f37166;
 }
+
+.select_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.content_tooltip {
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+}
+
+.heading_bold {
+	font-weight: 600;
+}
+
+.channel_info {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}
