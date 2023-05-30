@@ -74,16 +74,17 @@ function ShipmentId({ data, loading, filters, setFilters }) {
 			<div>
 				{handleShipmentView()}
 			</div>
-			<div className={styles.pagination}>
-				<Pagination
-					type="number"
-					currentPage={filters.pageIndex}
-					totalItems={total_count}
-					pageSize={page_limit}
-					onPageChange={(val) => setFilters({ ...filters, pageIndex: val })}
-
-				/>
-			</div>
+			{list.length > 0 && (
+				<div className={styles.pagination}>
+					<Pagination
+						type="number"
+						currentPage={filters.pageIndex}
+						totalItems={total_count}
+						pageSize={page_limit}
+						onPageChange={(val) => setFilters({ ...filters, pageIndex: val })}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }
