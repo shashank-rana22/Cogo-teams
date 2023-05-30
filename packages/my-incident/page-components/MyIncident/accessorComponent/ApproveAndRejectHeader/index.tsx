@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFcrossInCircle, IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -37,7 +37,7 @@ function ApproveAndRejectHeader({ row }:Props) {
 						date       : updatedAt,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 						formatType : 'dateTime',
-						timeFormat : GLOBAL_CONSTANTS.formats.date['hh:mm a'],
+						timeFormat : GLOBAL_CONSTANTS.formats.date['hh:mm aaa'],
 					})}
 					{' '}
 				</div>

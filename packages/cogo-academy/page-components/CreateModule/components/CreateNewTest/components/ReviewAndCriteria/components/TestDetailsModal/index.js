@@ -1,5 +1,5 @@
 import { Modal, Pill, Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase, format } from '@cogoport/utils';
 
 import useUpdateTest from '../../../../../../hooks/useUpdateTest';

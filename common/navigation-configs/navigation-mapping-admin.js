@@ -53,6 +53,7 @@ import {
 	IcMCreditRequest,
 	IcCCogoassured, IcMOverview,
 	IcMFaq,
+	IcMRolesIncluded,
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
@@ -820,8 +821,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-settlement',
 				title         : 'Settlement',
-				href          : '/business-finance/settlement/[active_tab]',
-				as            : '/business-finance/settlement/ap-ar-settlement',
+				href          : '/v2/business-finance/settlement/[active_tab]',
+				as            : '/v2/business-finance/settlement/JournalVoucher',
 				type          : 'link',
 				main_apis     : ['list_organizations'],
 				possible_apis : apis.settlement,
@@ -1375,6 +1376,15 @@ const navigationMappingAdmin = {
 				main_apis     : ['list_lastmile_desk_shipments'],
 				possible_apis : [...apis.document_desk, ...apis.cogolens, ...apis.shipment],
 			},
+			{
+				key           : 'coe-so2_surface',
+				title         : 'SO2 Dashboard',
+				href          : '/v2/so2-surface',
+				as            : '/v2/so2-surface',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.so2_surface,
+			},
 		],
 	},
 	terms_and_conditions: {
@@ -1773,19 +1783,14 @@ const navigationMappingAdmin = {
 		isSubNavs   : true,
 		icon        : IcMUserAllocations,
 		module_type : 'dashboards',
-		main_apis   : [
-			'get_allocation_configurations',
-			'get_allocation_relations',
-			'get_allocation_requests',
-			'get_allocation_quotas',
-		],
-		options: [
+		options     : [
 			{
 				key           : 'allocations-core_engine',
 				title         : 'Core Engine',
 				href          : '/v2/allocation/core-engine',
 				as            : '/v2/allocation/core-engine',
 				possible_apis : apis.allocation_engine,
+				main_apis     : ['get_allocation_requests'],
 			},
 			{
 				key           : 'allocations-kam_expertise',
@@ -1800,6 +1805,7 @@ const navigationMappingAdmin = {
 				href          : '/v2/allocation/crm-feedback-dashboard',
 				as            : '/v2/allocation/crm-feedback-dashboard',
 				possible_apis : apis.crm_feedback_dashboard,
+				main_apis     : ['get_allocation_feedbacks'],
 			},
 			{
 				key           : 'allocations-account_scoring',
@@ -2246,6 +2252,67 @@ const navigationMappingAdmin = {
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
+	},
+	saas_subscription: {
+		key         : 'saas_subscription',
+		title       : 'Saas Subscription',
+		isSubNavs   : true,
+		icon        : IcMExportfile,
+		module_type : 'dashboards',
+		options     : [
+			{
+				key           : 'saas_subscription-customer',
+				title         : 'Customer',
+				href          : '/v2/saas-subscription/customer',
+				as            : '/v2/saas-subscription/customer',
+				type          : 'link',
+				icon          : IcMActivePlans,
+				possible_apis : apis.saas_subscription_customer,
+			},
+			{
+				key           : 'saas_subscription-plan',
+				title         : 'Plan',
+				href          : '/v2/saas-subscription/plan',
+				as            : '/v2/saas-subscription/plan',
+				type          : 'link',
+				icon          : IcMActivePlans,
+				possible_apis : apis.saas_subscription_plan,
+			},
+		],
+	},
+	referral: {
+		key         : 'referral',
+		title       : 'Referral',
+		isSubNavs   : true,
+		icon        : IcMRolesIncluded,
+		module_type : 'dashboards',
+		main_apis   : [],
+		options     : [
+			{
+				key           : 'referral-dashboard',
+				title         : 'Dashboard',
+				href          : '/v2/referral/dashboard',
+				as            : '/v2/referral/dashboard',
+				type          : 'link',
+				possible_apis : apis.referral_dashboard,
+			},
+		],
+	},
+	chakravyuh: {
+		key         : 'chakravyuh',
+		title       : 'Chakravyuh',
+		isSubNavs   : true,
+		module_type : 'crm',
+		options     : [
+			{
+				key           : 'chakravyuh-trends',
+				title         : 'Pricing Trends',
+				href          : '/v2/pricing/trends',
+				as            : '/v2/pricing/trends',
+				possible_apis : apis.pricing_trends,
+			},
+		],
+
 	},
 };
 

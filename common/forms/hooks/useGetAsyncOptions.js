@@ -17,7 +17,7 @@ function useGetAsyncOptions({
 	const [{ data, loading }] = useRequest({
 		url    : endpoint,
 		method : 'GET',
-		params : merge(params, { filters: { q: query } }),
+		params : merge(params, { filters: { q: query || undefined } }),
 	}, { manual: !(initialCall || query) });
 	const options = data?.list || [];
 

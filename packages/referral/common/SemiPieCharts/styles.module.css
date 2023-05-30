@@ -1,0 +1,58 @@
+.wrapper {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.view {
+	position: absolute;
+	left: 38%;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	text-align: center;
+}
+
+.empty_count {
+	top: 55%;
+}
+
+.non_empty_count {
+	top: 35%;
+}
+
+.total_count {
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.sub_text {
+	font-size: 12px;
+	color: #828282;
+}
+
+.chart_styles {
+	width: 200px;
+	height: 200px;
+}
+
+.bar_over_flow {
+	position: relative;
+	width: 200px;
+	height: 110px;
+	margin-top: 12px;
+	overflow: hidden;
+}
+
+.bar {
+	position: absolute;
+	top: 0;
+	left: 0;
+	width: 200px;
+	height: 200px;
+	border: 18px solid #f8f2e7;
+	border-radius: 50%;
+}

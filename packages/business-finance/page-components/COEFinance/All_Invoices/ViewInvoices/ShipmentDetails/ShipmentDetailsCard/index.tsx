@@ -44,7 +44,9 @@ function ShipmentDetailsCard({
 	const [rejected, setRejected] = useState([]);
 	const [showLineItem, setShowLineItem] = useState(false);
 	const [showRejected, setShowRejected] = useState({});
-	const { lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill } = data || {};
+	const {
+		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject,
+	} = data || {};
 	const {
 		entityCode = '',
 		organizationName: organizationNameBuyer = '',
@@ -68,6 +70,13 @@ function ShipmentDetailsCard({
 		billType = '',
 		isProforma,
 	} = bill || {};
+
+	const {
+		shipmentType = '',
+		reasonForCN = '',
+		outstandingDocument = '',
+	} = billAdditionalObject || {};
+
 	const [DetailsCard, setDetailsCard] = useState([
 		{
 			id    : 1,
@@ -125,6 +134,9 @@ function ShipmentDetailsCard({
 		}));
 	};
 
+	const viewDocument = (document) => {
+		window.open(document);
+	};
 	const onClose = () => {
 		if (Object.keys(showRejected).includes('1')) {
 			setRemarksVal({ ...remarksVal, collectionPartyRemark: '' });
@@ -695,6 +707,31 @@ function ShipmentDetailsCard({
 												{' '}
 												<span>{placeOfSupply}</span>
 											</div>
+											{shipmentType === 'ftl_freight' && outstandingDocument
+											&& (
+												<div className={styles.document}>
+													Outstanding Document -
+													{' '}
+													<Button
+														className={styles.button}
+														onClick={() => {
+															viewDocument(outstandingDocument);
+														}}
+													>
+														View
+
+													</Button>
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
+											&& billType === 'CREDIT_NOTE' && reasonForCN
+											&& (
+												<div className={styles.margin_bottom}>
+													Reason For CN -
+													{' '}
+													<span>{reasonForCN}</span>
+												</div>
+											)}
 										</div>
 									</div>
 								)}

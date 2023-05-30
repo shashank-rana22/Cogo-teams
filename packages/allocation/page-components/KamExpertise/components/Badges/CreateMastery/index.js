@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 
@@ -81,7 +81,7 @@ function CreateMastery(props) {
 						if (!Element) return null;
 
 						return (
-							<div className={styles.form_container}>
+							<div key={ele.name} className={styles.form_container}>
 								{ele.label}
 
 								<Element
