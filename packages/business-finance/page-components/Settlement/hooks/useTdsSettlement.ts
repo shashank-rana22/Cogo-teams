@@ -155,7 +155,7 @@ const useTdsSettlement = ({
 			setShow(false);
 			Toast.success('Tds Upload  Successfully');
 		} catch (error) {
-			Toast.error(getApiErrorString(error.data));
+			Toast.error(getApiErrorString(error.data) || 'Something went wrong');
 		}
 	};
 	return {

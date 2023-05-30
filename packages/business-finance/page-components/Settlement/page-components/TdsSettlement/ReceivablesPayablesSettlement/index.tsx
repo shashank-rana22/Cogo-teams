@@ -43,7 +43,7 @@ function ReceivablesPayablesSettlement({
 	});
 	const rest = { 	loading: tdsDocumentsLoading };
 	const column = receivablesPayablesColumn();
-	const { list, pageNo = 0, totalRecords = 0 }:ValueInterfaces = data || {};
+	const { list = [], pageNo = 1, totalRecords = 0 }:ValueInterfaces = data || {};
 
 	return (
 		<div>
@@ -89,16 +89,18 @@ function ReceivablesPayablesSettlement({
 					{...rest}
 				/>
 				<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-					<Pagination
-						type="table"
-						currentPage={pageNo}
-						totalItems={totalRecords}
-						pageSize={10}
-						onPageChange={(pageValue: number) => {
-							setGlobalFilters((p) => ({ ...p, pageIndex: pageValue }));
-						}}
-
-					/>
+					{list?.length > 0
+						&& (
+							<Pagination
+								type="table"
+								currentPage={pageNo}
+								totalItems={totalRecords}
+								pageSize={10}
+								onPageChange={(pageValue: number) => {
+									setGlobalFilters((p) => ({ ...p, pageIndex: pageValue }));
+								}}
+							/>
+						)}
 				</div>
 			</div>
 		</div>
