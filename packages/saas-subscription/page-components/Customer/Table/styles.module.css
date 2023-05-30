@@ -1,0 +1,40 @@
+.container {
+	margin: 25px 0;
+}
+
+.row {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	padding: 16px;
+
+	&.item_row {
+		border-bottom: 1px solid #fbd1a6;
+	}
+}
+
+.card_header {
+	font-weight: 600;
+	color: #f68b21;
+	background-color: #fffaee;
+	border: 1px solid #ffead4;
+	border-radius: 9px;
+}
+
+.col {
+	width: 80px;
+	padding: 0 8px;
+
+	:global {
+		.ui_legend_container,
+		.ui_legend_item {
+			margin: 0;
+		}
+	}
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: center;
+	margin: 20px 0;
+}

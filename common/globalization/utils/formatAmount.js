@@ -1,7 +1,7 @@
 import { getCookie, getByKey } from '@cogoport/utils';
 
 import getGeoConstants from '../constants/geo';
-import GLOBAL_CONSTANTS from '../constants/globals.json';
+import GLOBAL_CONSTANTS from '../constants/globals';
 
 const geo = getGeoConstants();
 

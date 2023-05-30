@@ -21,7 +21,7 @@ function Card({ data = {} }) {
 
 	const { shipmentType, stepperTab, activeTab } = useContext(KamDeskContext);
 
-	const icon_type = ['fcl_local', 'fcl_customs'].includes(stepperTab)
+	const icon_type = ['fcl_local', 'fcl_customs', 'fcl_cfs'].includes(stepperTab)
 		? stepperTab
 		: shipmentType;
 

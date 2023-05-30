@@ -45,7 +45,7 @@ const actions = ({
 	}
 
 	if (status.status === 'cancelled_by_supplier'
-		&& ['booking_desk', 'booking_desk_manager'].includes(activeStakeholder)) {
+		&& ['booking_desk', 'booking_desk_manager', 'so1_so2_ops'].includes(activeStakeholder)) {
 		return (
 			<Button
 				themeType="secondary"

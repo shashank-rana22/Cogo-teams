@@ -161,6 +161,27 @@ const tabPayload = {
 			completed : { state: 'completed' },
 			cancelled : { state: 'cancelled' },
 		},
+		fcl_cfs: {
+			mark_confirmed: {
+				state           : 'shipment_received',
+				task_attributes : [
+					{
+						task   : 'mark_confirmed',
+						status : 'pending',
+					},
+				],
+			},
+			mark_completed: {
+				task_attributes: [
+					{
+						task   : 'mark_completed',
+						status : 'pending',
+					},
+				],
+			},
+			completed : { state: 'completed' },
+			cancelled : { state: 'cancelled' },
+		},
 		fcl_local: {
 			mark_confirmed: {
 				state           : 'shipment_received',

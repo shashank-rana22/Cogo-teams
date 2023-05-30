@@ -23,10 +23,13 @@ import lastMileDesk from './config/last-mile-desk';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
+import referral from './config/referral';
 import riskManagement from './config/risk-management';
 import rolesAndPermissions from './config/roles-n-permission';
+import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import shipmentFclFreight from './config/shipment-fcl-freight';
+import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
@@ -58,6 +61,7 @@ const routeConfig = {
 	...authorityDesk,
 	...lastMileDesk,
 	...welcome,
+	...referral,
 	...athenaDashboard,
 	...kamDesk,
 	...airRepository,
@@ -65,6 +69,8 @@ const routeConfig = {
 	...ingestion,
 	...blDoCollectionRelease,
 	...saasTools,
+	...saasSubscription,
+	...so2Surface,
 	...chakravyuh,
 	...riskManagement,
 };
