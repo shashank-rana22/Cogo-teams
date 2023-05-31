@@ -1,9 +1,7 @@
-/* eslint-disable no-mixed-spaces-and-tabs */
-
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import EmptyPortsSection from './EmptyPortSection';
 import PortsCard from './PortsCard';
@@ -24,7 +22,24 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRf
 	const { rfq_id = '' } = query || {};
 
 	const [show, setShow] = useState(false);
-	const [cardStateCount, setCardStateCount] = useState();
+	const [cardStateCount, setCardStateCount] = useState({ modified: 0, total: 0 });
+
+	useEffect(() => {
+		let modified = 0;
+		let total = 0;
+		if (!isEmpty(rate_card_list_object)) {
+			Object.keys(rate_card_list_object).forEach((key) => {
+				rate_card_list_object[key].forEach((rate_card) => {
+					const { card_state = '' } = rate_card;
+					if (card_state === 'modified_and_sent') {
+						modified += 1;
+					}
+					total += 1;
+				});
+			});
+			setCardStateCount({ modified, total });
+		}
+	}, [rate_card_list_object]);
 
 	return (
 

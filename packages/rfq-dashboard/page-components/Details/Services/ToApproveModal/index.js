@@ -7,9 +7,7 @@ import useUpdateRfqState from '../../../../hooks/useUpdateRfqState';
 import styles from './styles.module.css';
 
 function ToApproveModal({ show, setShow = () => {}, rfq_id = '', cardStateCount = {} }) {
-	const { getRfqsRateCards, data = {} } = useGetRfqRateCards({ rfq_id, state: 'modified_and_sent' });
-
-	console.log('cardStateCount::', cardStateCount);
+	const { getRfqsRateCards } = useGetRfqRateCards({ rfq_id, state: 'modified_and_sent' });
 
 	const { modified = '', total = '' } = cardStateCount;
 
@@ -38,7 +36,9 @@ function ToApproveModal({ show, setShow = () => {}, rfq_id = '', cardStateCount 
 					Are you sure you want to approve this RFQ?
 				</div>
 				<div className={styles.margin_value}>
-					Margin Modified in$
+					Margin Modified in
+					{' '}
+
 					{modified}
 					/
 					{total}
