@@ -11,6 +11,7 @@ function TagsSelect({ category }) {
 			color    : 'grey',
 			tooltip  : false,
 			disabled : false,
+			closable : true,
 		});
 	});
 
