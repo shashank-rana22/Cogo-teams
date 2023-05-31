@@ -34,9 +34,6 @@ function useAllowReTest({ setShowRetestModal = () => {}, test_id, refetchTest = 
 			} catch (err) {
 				Toast.error(getApiErrorString(err.response?.data));
 			}
-			refetchTest({ test_id });
-			setShowRetestModal(false);
-			reset();
 		} else {
 			try {
 				await trigger({
@@ -51,10 +48,10 @@ function useAllowReTest({ setShowRetestModal = () => {}, test_id, refetchTest = 
 			} catch (err) {
 				Toast.error(getApiErrorString(err.response?.data));
 			}
-			refetchTest({ test_id });
-			setShowRetestModal(false);
-			reset();
 		}
+		refetchTest({ test_id });
+		setShowRetestModal(false);
+		reset();
 	};
 
 	return {
