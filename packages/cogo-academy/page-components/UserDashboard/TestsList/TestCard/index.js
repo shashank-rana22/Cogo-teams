@@ -96,9 +96,7 @@ function TestCard({ test_card }) {
 				)}
 			</div>
 
-			{current_status === 'active'
-				|| current_status === 'retest'
-				|| (current_status === 'completed' && attempts_count < maximum_attempts)
+			{current_status.includes['active','retest','completed'] && attempts_count < maximum_attempts
 				? (
 					<div
 						role="presentation"
