@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import Navbar from './Navbar';
+import TnC from './newTnC';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
@@ -76,6 +77,7 @@ function AdminLayout({
 				inCall={inCall}
 			/>
 			<AnnouncementModal data={announcements} />
+			<TnC />
 		</div>
 	);
 }
