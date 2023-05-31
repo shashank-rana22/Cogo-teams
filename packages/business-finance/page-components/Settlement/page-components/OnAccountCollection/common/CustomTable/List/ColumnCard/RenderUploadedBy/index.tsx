@@ -1,7 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 
-import getFormattedDate from '../../../../../../../commons/Utils/getFormattedDate';
-
+import getFormattedDate from './getFormattedDate';
 import styles from './styles.module.css';
 
 const renderUploadedBy = ({ item }) => {

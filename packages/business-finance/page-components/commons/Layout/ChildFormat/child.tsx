@@ -1,11 +1,14 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
-import { NestedObj } from '../../List/Interfaces';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
+
+export interface NestedObj {
+	[key: string]: string;
+}
 
 function Child({
 	controls,
