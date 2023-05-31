@@ -66,6 +66,9 @@
 }
 
 .three_dot_icon {
+	display: flex;
+	justify-content: center;
+	margin-right: auto;
 	width: 16px;
 	height: 16px;
 	cursor: pointer;
