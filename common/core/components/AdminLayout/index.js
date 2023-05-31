@@ -26,9 +26,10 @@ function AdminLayout({
 
 	const {
 		user: { id: user_id = '' },
-		partner: { id: partner_id = '', partner_user_id = '' },
+		partner: { id: partner_id = '', partner_user_id = '', is_joining_tnc_accepted = '' },
 		is_in_voice_call:inCall = false, voice_call_recipient_data = {},
 	} = user_data;
+
 	const {
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys, setAnnouncements });
@@ -77,7 +78,11 @@ function AdminLayout({
 				inCall={inCall}
 			/>
 			<AnnouncementModal data={announcements} />
-			<TnC />
+
+			{
+				is_joining_tnc_accepted === false && <TnC partner_user_id={partner_user_id} />
+			}
+
 		</div>
 	);
 }

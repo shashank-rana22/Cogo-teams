@@ -77,6 +77,11 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'harbour',
 		},
+		{
+			api          : 'update_partner_user',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 };
 
