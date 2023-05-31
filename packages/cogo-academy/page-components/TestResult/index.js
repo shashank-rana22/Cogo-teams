@@ -38,7 +38,7 @@ function TestResult() {
 		},
 	}, { manual: false });
 
-	const { not_attempted = false } = data;
+	const { not_attempted = false } = data || {};
 
 	const { data: summaryData = {} } = data || {};
 
