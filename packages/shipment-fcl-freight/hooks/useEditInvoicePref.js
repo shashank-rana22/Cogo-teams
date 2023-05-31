@@ -9,7 +9,7 @@ import formatIps from '../common/SalesInvoice/helpers/format-ips';
 import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
 import incoTermMapping from '../configurations/inco-term-mapping.json';
 
-const exportServiceTypes = 'fcl_freight_service';
+const EXPORT_SERVICES_TYPES = 'fcl_freight_service';
 
 const geo = getGeoConstants();
 
@@ -100,22 +100,38 @@ const useEditInvoicePref = ({
 	}, { manual: true });
 
 	const handleInvoicingPartyAdd = (ba) => {
+		const {
+			trade_party_type,
+			tax_number,
+			organization_trade_party_id,
+			registration_number,
+			poc,
+			pincode,
+			organization_id,
+			organization_country_id,
+			name,
+			is_sez,
+			business_name,
+			address,
+			tax_mechanism
+		} = ba || {};
+		
 		const newParty = {
 			id              : selectedParties.length,
 			billing_address : {
-				tax_number                  : ba?.tax_number,
-				organization_trade_party_id : ba?.organization_trade_party_id,
-				registration_number         : ba?.registration_number,
-				poc                         : ba?.poc,
-				pincode                     : ba?.pincode,
-				organization_id             : ba?.organization_id,
-				organization_country_id     : ba?.organization_country_id,
-				name                        : ba?.name,
-				is_sez                      : ba?.is_sez,
-				tax_mechanism               : ba?.tax_mechanism,
-				business_name               : ba?.business_name,
-				address                     : ba?.address,
-				trade_party_type            : ba?.trade_party_type,
+				trade_party_type,
+				tax_number,
+				organization_trade_party_id,
+				registration_number,
+				poc,
+				pincode,
+				organization_id,
+				organization_country_id,
+				name,
+				is_sez,
+				business_name,
+				address,
+				tax_mechanism
 			},
 			invoice_currency : geo.country.currency.code,
 			services         : [],
@@ -211,7 +227,7 @@ const useEditInvoicePref = ({
 				(finalNewSelectParties || []).forEach((party) => {
 					const BFLineItem = (party?.services || []).some(
 						(service) => service.serviceKey === isBasicFreightInvService.serviceKey
-							&& exportServiceTypes === isBasicFreightInvService.service_type,
+							&& EXPORT_SERVICES_TYPES === isBasicFreightInvService.service_type,
 					);
 
 					if (party?.services?.length > 1 && BFLineItem) {
@@ -253,7 +269,7 @@ const useEditInvoicePref = ({
 				const partyServices = [];
 
 				party?.services?.map((item) => {
-					const xyz = {
+					const partyService = {
 						...item,
 						invoice_combination_id: updateExportInvoices
 							? initial_service_invoice_id[item?.serviceKey] || undefined
@@ -264,7 +280,7 @@ const useEditInvoicePref = ({
 						is_igst      : null,
 					};
 
-					partyServices.push(xyz);
+					partyServices.push(partyService);
 					return partyServices;
 				});
 
@@ -279,10 +295,8 @@ const useEditInvoicePref = ({
 				) {
 					if (typeof partyDetails.id === 'number') {
 						delete partyDetails.id;
+						}
 						finalParties.push(partyDetails);
-					} else {
-						finalParties.push(partyDetails);
-					}
 				}
 			});
 
