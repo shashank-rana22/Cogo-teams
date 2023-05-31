@@ -11,7 +11,7 @@ function useUpdateOfferLetter() {
 			method : 'post',
 			url    : '/update_employee_offer_letter',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const onFinalSubmit = async ({ id, status, rejection_reason }) => {
