@@ -75,6 +75,7 @@ function Form({
 		<Modal
 			show
 			onClose={closeModal}
+			size="lg"
 			showCloseIcon={!haveToUpsell}
 			closeOnOuterClick={false}
 			className={styles.custom_modal}
