@@ -15,7 +15,6 @@ const labels = [
 	'haulage_type',
 	'transport_mode',
 	'cargo_weight_per_container',
-	'destination_cargo_handling_type',
 	'payment_term',
 ];
 

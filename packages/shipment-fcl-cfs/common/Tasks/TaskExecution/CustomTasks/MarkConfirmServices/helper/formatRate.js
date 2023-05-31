@@ -1,19 +1,17 @@
 const formatRates = (selectedRate, shipment_data, service_type_prop, primaryService, servicesList) => {
 	if (!selectedRate) return {};
 
-	const service_type = service_type_prop || 'fcl_freight_service';
+	const service_type = service_type_prop || 'fcl_cfs_service';
 
 	const origin_local = (servicesList || []).find(
-		(service) => service.service_type === 'fcl_freight_local_service'
-			&& service.trade_type === 'export',
+		(service) => service.service_type === 'origin_cfs_service'
 	);
 
 	const destination_local = (servicesList || []).find(
-		(service) => service.service_type === 'fcl_freight_local_service'
-			&& service.trade_type === 'export',
+		(service) => service.service_type === 'destination_cfs_service'
 	);
 
-	if (service_type === 'fcl_freight_service') {
+	if (service_type === 'fcl_cfs_service') {
 		const { data } = selectedRate || {};
 		const rate = data?.[0] || {};
 
@@ -41,8 +39,7 @@ const formatRates = (selectedRate, shipment_data, service_type_prop, primaryServ
 	}
 	if (
 		[
-			'ftl_freight_service',
-			'fcl_customs_service',
+			'ftl_cfs_service',
 		].includes(service_type)
 		&& selectedRate.source === 'flash_booking'
 	) {

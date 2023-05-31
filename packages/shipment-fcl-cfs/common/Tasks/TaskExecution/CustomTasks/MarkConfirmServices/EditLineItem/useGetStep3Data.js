@@ -16,27 +16,13 @@ const TRADE_MAPPING = {
 
 const useGetStep3Data = ({
 	servicesList = [], shipment_data, onCancel, task,
-	taskListRefetch = () => {}, primary_service,
+	taskListRefetch = () => {},
 }) => {
-	const { trade_type } = primary_service || {};
-
+	
 	const service_ids = [];
-	let notMainService = false;
 
 	(servicesList || []).forEach((serviceObj) => {
-		if (serviceObj.service_type === 'fcl_freight_service'
-			|| (serviceObj.service_type === 'fcl_freight_local_service'
-			&& trade_type === 'import' && serviceObj.trade_type === 'export')
-		) {
-			notMainService = true;
 			service_ids.push(serviceObj.id);
-		}
-	});
-
-	(servicesList || []).forEach((serviceObj) => {
-		if (!notMainService) {
-			service_ids.push(serviceObj.id);
-		}
 	});
 
 	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({
