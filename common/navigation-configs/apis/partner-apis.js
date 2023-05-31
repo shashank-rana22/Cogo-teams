@@ -1021,7 +1021,7 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
-			api          : 'create_organization_approval',
+			api          : 'create_organization_account_conversion_approval',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -2214,7 +2214,7 @@ const partner = {
 		},
 		{
 			feature      : 'supply_crm',
-			api          : 'create_organization_account_conversion_approval',
+			api          : 'create_organization_approval',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
