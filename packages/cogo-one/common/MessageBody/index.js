@@ -55,6 +55,9 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 						<source src={media_url} type={`video/${fileExtension}`} />
 					</video>
 				);
+			case 'file':
+				if (media_url) { return (<a href={media_url} target="_blank" rel="noreferrer">Open</a>); }
+				return null;
 			default:
 				return null;
 		}

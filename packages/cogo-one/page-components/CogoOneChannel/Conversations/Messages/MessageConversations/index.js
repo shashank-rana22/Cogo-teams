@@ -1,4 +1,4 @@
-import { cl, Popover } from '@cogoport/components';
+import { cl, Popover, Toast } from '@cogoport/components';
 import {
 	IcMHappy,
 	IcMAttach,
@@ -12,6 +12,7 @@ import { useRef, useEffect } from 'react';
 import CustomFileUploader from '../../../../../common/CustomFileUploader';
 import ReceiveDiv from '../../../../../common/ReceiveDiv';
 import SentDiv from '../../../../../common/SentDiv';
+import { ZALO_FILE_TYPES, ZALO_FILE_UPLOAD_ERROR, ZALO_LIMIATION_SIZE } from '../../../../../constants/ZALO_CONSTANTS';
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
 
@@ -63,6 +64,8 @@ function MessageConversations({
 	formattedData = {},
 	setRaiseTicketModal = () => {},
 	canMessageOnBotSession,
+	fileData = {},
+	setFileData = () => {},
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
@@ -86,6 +89,22 @@ function MessageConversations({
 				behavior : 'smooth',
 			});
 		}, 200);
+	};
+	const getFileType = (type) => {
+		if ((type || '').includes('image')) return 'image';
+		if (ZALO_FILE_TYPES.includes(type)) return 'file';
+		return '';
+	};
+
+	const fileExceed = () => {
+		const file = (fileData || {})[id] || undefined;
+		if (!file) return '';
+		const { size = 0, type = '' } = file || {};
+		const fileType = getFileType(type);
+		if (!isEmpty(ZALO_LIMIATION_SIZE[fileType]) && size < ZALO_LIMIATION_SIZE[fileType]) {
+			return '';
+		}
+		return ZALO_FILE_UPLOAD_ERROR[fileType];
 	};
 
 	useEffect(() => {
@@ -335,10 +354,16 @@ function MessageConversations({
 										}}
 									/>
 								)}
-								onChange={(val) => {
+								onChange={(val, obj) => {
+									setFileData((prev) => ({
+										...prev,
+										[id]: isEmpty(obj) ? [] : obj[0],
+
+									}));
 									setDraftUploadedFiles((prev) => ({
 										...prev,
 										[id]: val,
+
 									}));
 								}}
 							/>
@@ -399,7 +424,9 @@ function MessageConversations({
 						<IcMSend
 							fill="#EE3425"
 							onClick={() => {
-								if (hasPermissionToEdit && !messageLoading) {
+								if (channel_type === 'zalo' && fileExceed() !== '') {
+									Toast.error(fileExceed());
+								} else if (hasPermissionToEdit && !messageLoading) {
 									sendChatMessage(scrollToBottom);
 								}
 							}}

@@ -46,7 +46,7 @@ function CustomFileUploader(props, ref) {
 		if (multiple) {
 			onChange(urlStore);
 		} else {
-			onChange(urlStore[0]);
+			onChange(urlStore[0], fileName);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [urlStore]);

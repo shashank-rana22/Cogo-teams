@@ -32,6 +32,7 @@ function Messages({
 	const [openModal, setOpenModal] = useState({ data: {}, type: null });
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
+	const [fileData, setFileData] = useState({});
 	const [uploading, setUploading] = useState({});
 	const [disableButton, setDisableButton] = useState('');
 	const { tagOptions = [] } = useListAssignedChatTags();
@@ -195,6 +196,8 @@ function Messages({
 						setRaiseTicketModal={setRaiseTicketModal}
 						canMessageOnBotSession={canMessageOnBotSession}
 						changeSessionAndMessage={changeSessionAndMessage}
+						fileData={fileData}
+						setFileData={setFileData}
 					/>
 				</div>
 			</div>
