@@ -6,7 +6,7 @@ import getChapter from '../../utils/getChapter';
 
 import styles from './styles.module.css';
 
-function Footer({ course_id, indexes, data, setIndexes, setChapterContent }) {
+function Footer({ course_id, indexes, data, setIndexes, getUserCourse, setChapterContent }) {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
 
 	const {
@@ -20,30 +20,52 @@ function Footer({ course_id, indexes, data, setIndexes, setChapterContent }) {
 
 			<div className={styles.btn_container}>
 
-				<Button size="md" themeType="secondary" loading={loading}>Skip For Now</Button>
+				<Button
+					size="md"
+					themeType="secondary"
+					loading={loading}
+					onClick={() => {
+						updateCourseProgress({
+							next_chapter_id    : getChapter({ data, indexes, which: 'next', setIndexes })?.id,
+							next_chapter_state : 'completed',
+
+						});
+
+						// setIndexes((prev) => ({
+						// 	...prev,
+						// 	chapterIndex: prev.chapterIndex + 1,
+
+						// }));
+
+						setChapterContent(getChapter({ data, indexes, setIndexes }));
+
+						getUserCourse();
+					}}
+				>
+					Skip For Now
+
+				</Button>
 				<Button
 					size="md"
 					themeType="accent"
 					loading={loading}
 					onClick={() => {
 						updateCourseProgress({
-							current_chapter_id : getChapter({ data, indexes }).id,
-							next_chapter_id    : data[indexes.moduleIndex]
-								?.course_sub_modules[indexes.subModuleIndex]
-								?.course_sub_module_chapters[indexes.chapterIndex + 1]?.id,
-							next_chapter_state: data[indexes.moduleIndex]
-								?.course_sub_modules[indexes.subModuleIndex]
-								?.course_sub_module_chapters[indexes.chapterIndex + 1]?.state,
+							current_chapter_id : getChapter({ data, indexes, which: 'curr', setIndexes }).id,
+							next_chapter_id    : getChapter({ data, indexes, which: 'next', setIndexes })?.id,
+							next_chapter_state : 'completed',
 
 						});
 
-						setIndexes((prev) => ({
-							...prev,
-							chapterIndex: prev.chapterIndex + 1,
+						// setIndexes((prev) => ({
+						// 	...prev,
+						// 	chapterIndex: prev.chapterIndex + 1,
 
-						}));
+						// }));
 
-						setChapterContent(getChapter({ data, indexes }));
+						setChapterContent(getChapter({ data, indexes, setIndexes }));
+
+						getUserCourse();
 					}}
 				>
 					Mark As Complete

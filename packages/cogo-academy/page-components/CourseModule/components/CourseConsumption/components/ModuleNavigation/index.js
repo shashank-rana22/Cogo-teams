@@ -1,13 +1,34 @@
-import { Accordion } from '@cogoport/components';
+import { Accordion, Pill } from '@cogoport/components';
 
 import SubModuleContent from '../SubModuleContent';
 
 import styles from './styles.module.css';
 
-function ModuleNavigation({ data = [], setChapterIds = () => {}, setChapterContent = () => {}, setIndexes }) {
+function ModuleNavigation({ data = {}, setChapterContent = () => {}, indexes, setIndexes }) {
+	const { name, course_completion_duration = {} } = data.course_details || {};
+
+	const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration;
+
 	return (
 		<div className={styles.container}>
-			{data?.map((module, moduleIndex) => (
+
+			<div>
+				<h3 className={styles.course_name}>{name}</h3>
+
+				<div className={styles.duration}>
+					Complete in
+					{' '}
+					{course_completion_value}
+					{' '}
+					{course_completion_unit}
+					s
+					{' '}
+					to Get Certification
+					<Pill size="md" color="#C4DC91">On or Before 30 June, 2023</Pill>
+				</div>
+			</div>
+
+			{(data.course_modules || []).map((module, moduleIndex) => (
 				<Accordion
 					key={module.id}
 					type="text"
@@ -47,8 +68,8 @@ function ModuleNavigation({ data = [], setChapterIds = () => {}, setChapterConte
 									data={subModule.course_sub_module_chapters}
 									moduleIndex={moduleIndex}
 									subModuleIndex={subModuleIndex}
+									indexes={indexes}
 									setIndexes={setIndexes}
-									setChapterIds={setChapterIds}
 									setChapterContent={setChapterContent}
 								/>
 

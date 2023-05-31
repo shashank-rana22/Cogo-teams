@@ -9,18 +9,19 @@ const useGetUserCourse = ({ course_id, user_id }) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const getUserCourse = useCallback(async ({ id }) => {
+	const getUserCourse = useCallback(async () => {
+		console.log('reached here');
 		try {
 			await trigger({
 				params: {
-					course_id: id,
+					course_id,
 					user_id,
 				},
 			});
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
 		}
-	}, [trigger, user_id]);
+	}, [trigger, user_id, course_id]);
 
 	useEffect(() => {
 		getUserCourse({ id: course_id });

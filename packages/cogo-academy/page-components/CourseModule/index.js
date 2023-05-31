@@ -25,7 +25,6 @@ function CourseModule() {
 				CourseCategoryData={CourseCategoryData}
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
-				courseCategories={courseCategories}
 			/>
 		</div>
 	);

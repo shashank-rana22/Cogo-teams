@@ -12,6 +12,11 @@ import styles from './styles.module.css';
 function CourseConsumption() {
 	const router = useRouter();
 	const [chapterContent, setChapterContent] = useState({});
+	const [indexes, setIndexes] = useState({
+		moduleIndex    : 0,
+		subModuleIndex : 0,
+		chapterIndex   : 0,
+	});
 
 	const course_id = router?.query?.course_id;
 
@@ -27,20 +32,17 @@ function CourseConsumption() {
 
 	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 
-	const { data = [] } = useGetUserCourse({ course_id, user_id });
-
-	const [indexes, setIndexes] = useState({
-		moduleIndex    : 0,
-		subModuleIndex : 0,
-		chapterIndex   : 0,
-	});
-
 	const { moduleIndex, subModuleIndex, chapterIndex } = indexes;
 
-	useEffect(() => {
-		setChapterContent(data[moduleIndex]
-			?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex]);
-	}, [chapterIndex, data, moduleIndex, subModuleIndex]);
+	const { data = {}, getUserCourse, loading } = useGetUserCourse({ course_id, user_id });
+
+	// setChapterContent(data?.course_modules?.[moduleIndex]
+	// 	?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex]);
+
+	// useEffect(() => {
+	// 	setChapterContent(data?.course_modules?.[moduleIndex]
+	// 		?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex]);
+	// }, [chapterIndex, data, moduleIndex, subModuleIndex]);
 
 	return (
 		<div className={styles.container}>
@@ -53,7 +55,15 @@ function CourseConsumption() {
 					setIndexes={setIndexes}
 				/>
 
-				<ModuleContent data={chapterContent} />
+				<ModuleContent
+					data={data}
+					chapterData={chapterContent}
+					course_id={course_id}
+					user_id={user_id}
+					indexes={indexes}
+					setIndexes={setIndexes}
+					setChapterContent={setChapterContent}
+				/>
 
 			</div>
 
@@ -62,6 +72,7 @@ function CourseConsumption() {
 				data={data}
 				indexes={indexes}
 				setIndexes={setIndexes}
+				getUserCourse={getUserCourse}
 				setChapterContent={setChapterContent}
 			/>
 		</div>

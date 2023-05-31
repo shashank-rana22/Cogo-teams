@@ -1,17 +1,11 @@
 .container {
 	width: 70%;
-	padding: 20px;
 	margin: 0 20px;
-	background: #fff;
-	border: 1px solid #E0E0E0;
-	border-radius: 6px;
-	display: flex;
-    justify-content: center;
 }
 
 .btn_container {
 	display: flex;
-	justify-content: space-between;
+	justify-content: flex-end;
 	margin-top: auto;
 
 	:global {
@@ -34,4 +28,40 @@
 
 .arrow_right{
 	margin-left: 2px;
+}
+
+.content{
+	padding: 20px;
+	border: 1px solid #E0E0E0;
+	border-radius: 6px;
+	display: flex;
+    justify-content: center;
+}
+
+.next_btn{
+	margin-left: 18px;
+}
+
+.description, .additional_resources{
+	color: #4F4F4F;
+	margin-top: 30px;
+}
+
+.list_text{
+    text-decoration: underline;
+	cursor: pointer;
+}
+
+.header{
+	margin-bottom: 10px;
+	color: #4F4F4F;
+	font-size: 16px;
+	display: flex;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.name{
+	color: #221F20;
+	font-weight: 600;
 }
