@@ -1,0 +1,36 @@
+
+.container{
+	.toggle {
+		margin: 30px 0px;
+	}
+	.custom-fullscreen {
+		max-height: 100%;
+	}
+}
+
+.heading{
+	color: #333333;
+	font-weight: 500;
+	font-size: 18px;
+	margin: 6px 0px 16px;
+}
+
+.button_wrapper{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	
+	& > button{
+		margin-right: 12px;
+	}
+}
+
+.download_container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+}
+
+.download_link{
+	color: #5936f0;
+}
