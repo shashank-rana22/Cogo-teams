@@ -1,12 +1,29 @@
+import { Checkbox, Toast } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
 import PreviewDocumet from '../../../commons/PreviewDocumet';
 
 import styles from './styles.module.css';
-import useCompanyPolicyDetails from './useGetCompanyPolicyDetails';
 
-function CompanyPolicies({ setInformationPage }) {
-	const { list } = useCompanyPolicyDetails();
+function checkIfObjectContainsAllIDs(policies_data, companyPolicyIds) {
+	return companyPolicyIds.every((id) => id in policies_data);
+}
+
+const handleChange = (checked = false) => {
+	if (checked) {
+		Toast.default('You can View the Company Policies Again');
+	} else {
+		Toast.error('Please Read all the company Policies');
+	}
+};
+
+function CompanyPolicies({ setInformationPage, getEmployeeDetails, data }) {
+	const { company_policy_data : list, detail } = data || {};
+	const { policies_data } = detail || {};
+
+	const companyPolicyIds = (list || []).map((element) => (element.id));
+
+	const check = checkIfObjectContainsAllIDs(policies_data, companyPolicyIds);
 
 	return (
 		<div className={styles.container}>
@@ -31,13 +48,26 @@ function CompanyPolicies({ setInformationPage }) {
 							<div className={styles.header_wrapper}>
 								{name}
 							</div>
-
-							<PreviewDocumet document_url={document_url} preview />
+							<PreviewDocumet
+								document_url={document_url}
+								preview
+								id={id}
+								policy_data={policies_data}
+								getEmployeeDetails={getEmployeeDetails}
+							/>
 
 						</div>
 					);
 				})
 			}
+			</div>
+
+			<div className={styles.submit}>
+				<Checkbox
+					label="I have Read all the Company Policies & I agree to it"
+					checked={check}
+					onChange={() => handleChange(check)}
+				/>
 			</div>
 
 		</div>
