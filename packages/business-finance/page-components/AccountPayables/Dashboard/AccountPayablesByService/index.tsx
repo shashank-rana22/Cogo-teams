@@ -4,7 +4,6 @@ import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import useGetPayablesByService from '../hooks/useGetPayablesByService';
-import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
@@ -84,7 +83,18 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 										}
 										interactive
 									>
-										<div>{getAmountInLakhCrK(list[0]?.amount)}</div>
+										<div>
+											{formatAmount({
+												amount  : list[0]?.amount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+													notation        : 'compact',
+													compactDisplay  : 'short',
+												},
+											})}
+										</div>
 									</Tooltip>
 								</div>
 							</div>
@@ -108,7 +118,16 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 										interactive
 									>
 										<div>
-											{getAmountInLakhCrK(list[1]?.amount)}
+											{formatAmount({
+												amount  : list[1]?.amount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+													notation        : 'compact',
+													compactDisplay  : 'short',
+												},
+											})}
 										</div>
 									</Tooltip>
 								</div>
@@ -133,7 +152,16 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 										interactive
 									>
 										<div>
-											{getAmountInLakhCrK(list[2]?.amount)}
+											{formatAmount({
+												amount  : list[2]?.amount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+													notation        : 'compact',
+													compactDisplay  : 'short',
+												},
+											})}
 										</div>
 									</Tooltip>
 								</div>
@@ -158,7 +186,16 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 										interactive
 									>
 										<div>
-											{getAmountInLakhCrK(list[3]?.amount)}
+											{formatAmount({
+												amount  : list[3]?.amount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+													notation        : 'compact',
+													compactDisplay  : 'short',
+												},
+											})}
 										</div>
 									</Tooltip>
 								</div>
@@ -193,7 +230,17 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									interactive
 								>
 									<div>
-										{getAmountInLakhCrK(list[4]?.amount)}
+										{formatAmount({
+											amount  : list[4]?.amount,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+												notation        : 'compact',
+												compactDisplay  : 'short',
+											},
+										})}
+
 									</div>
 								</Tooltip>
 							</div>
@@ -216,7 +263,17 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									interactive
 								>
 									<div>
-										{getAmountInLakhCrK(list[5]?.amount)}
+										{formatAmount({
+											amount  : list[5]?.amount,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+												notation        : 'compact',
+												compactDisplay  : 'short',
+											},
+										})}
+
 									</div>
 								</Tooltip>
 							</div>
@@ -251,7 +308,17 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									interactive
 								>
 									<div>
-										{getAmountInLakhCrK(list[6]?.amount)}
+										{formatAmount({
+											amount  : list[6]?.amount,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+												notation        : 'compact',
+												compactDisplay  : 'short',
+											},
+										})}
+
 									</div>
 								</Tooltip>
 							</div>
@@ -274,7 +341,17 @@ function AccountPayablesByService({ activeEntity }:ItemProps) {
 									interactive
 								>
 									<div>
-										{getAmountInLakhCrK(list[7]?.amount)}
+										{formatAmount({
+											amount  : list[7]?.amount,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+												notation        : 'compact',
+												compactDisplay  : 'short',
+											},
+										})}
+
 									</div>
 								</Tooltip>
 							</div>
