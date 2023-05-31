@@ -58,36 +58,56 @@ export default function CancelShipment({ setShow }) {
 		updateShipment(getCancelShipmentPayload(data, id));
 	};
 
-	let modalBody = null;
+	let modalContent = null;
 	if (reasonsLoading) {
-		modalBody = <Loader />;
+		modalContent = <Loader />;
 	} else if (!reasonsLoading && reasons.length === 0) {
-		modalBody = <div className={styles.no_reasons_found}>No cancellation reasons found...</div>;
+		modalContent = <div className={styles.no_reasons_found}>No cancellation reasons found...</div>;
 	} else {
-		modalBody = (
-			<Modal.Body>
-				<strong>Please select a reason for cancelling the shipment</strong>
-				<RadioGroupController
-					name="cancellation_reason"
-					control={control}
-					options={reasons}
-					rules={{ required: 'Cancellation reason is required' }}
-				/>
-				{errors?.cancellation_reason
-					? <div className={styles.error_message}>{errors.cancellation_reason.message}</div>
-					: null}
+		modalContent = (
+			<>
+				<Modal.Body>
+					<strong>Please select a reason for cancelling the shipment</strong>
+					<RadioGroupController
+						name="cancellation_reason"
+						control={control}
+						options={reasons}
+						rules={{ required: 'Cancellation reason is required' }}
+					/>
+					{errors?.cancellation_reason
+						? <div className={styles.error_message}>{errors.cancellation_reason.message}</div>
+						: null}
 
-				<div className={styles.label}>Remarks</div>
-				<InputController
-					name="remarks"
-					control={control}
-					rules={{ required: 'Remarks is required' }}
-					size="sm"
-				/>
-				{errors?.remarks
-					? <div className={styles.error_message}>{errors.remarks.message}</div>
-					: null}
-			</Modal.Body>
+					<div className={styles.label}>Remarks</div>
+					<InputController
+						name="remarks"
+						control={control}
+						rules={{ required: 'Remarks is required' }}
+						size="sm"
+					/>
+					{errors?.remarks
+						? <div className={styles.error_message}>{errors.remarks.message}</div>
+						: null}
+				</Modal.Body>
+
+				<Modal.Footer>
+					<Button
+						disabled={updateShipmentLoading}
+						themeType="secondary"
+						onClick={closeModal}
+					>
+						Cancel
+					</Button>
+
+					<Button
+						disabled={updateShipmentLoading}
+						style={{ marginLeft: 10 }}
+						onClick={handleSubmit(onSubmit)}
+					>
+						Submit
+					</Button>
+				</Modal.Footer>
+			</>
 		);
 	}
 
@@ -102,24 +122,7 @@ export default function CancelShipment({ setShow }) {
 		>
 			<Modal.Header title="CANCEL SHIPMENT" />
 
-			{modalBody}
-
-			<Modal.Footer className={styles.modal_footer}>
-				<Button
-					disabled={updateShipmentLoading}
-					themeType="secondary"
-					onClick={closeModal}
-				>
-					Cancel
-				</Button>
-
-				<Button
-					disabled={updateShipmentLoading || reasonsLoading || reasons.length === 0}
-					onClick={handleSubmit(onSubmit)}
-				>
-					Submit
-				</Button>
-			</Modal.Footer>
+			{modalContent}
 		</Modal>
 	);
 }

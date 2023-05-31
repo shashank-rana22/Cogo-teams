@@ -32,7 +32,7 @@ const useGetAccordianStatsData = ({ globalFilters, entityTabFilters }) => {
 						? format(endDate as Date, 'yyyy-MM-dd', {}, false) : undefined,
 					interfaceType : servicemapping[serviceName] || undefined,
 					tradeType     : tradeTypeMapping(),
-					entityCode    : entityTabFilters,
+					entityCode    : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
 				},
 			});
 		} catch (e) {

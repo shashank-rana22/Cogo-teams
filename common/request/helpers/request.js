@@ -54,7 +54,7 @@ request.interceptors.request.use((oldConfig) => {
 		.filter((t) => t)
 		.join('/');
 
-	const serviceName = newConfig?.service_name || microServices[apiPath];
+	const serviceName = microServices[apiPath];
 
 	newConfig.paramsSerializer = { serialize: customSerializer };
 

@@ -1,4 +1,4 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import React from 'react';
 
 import useCreateUpsell from '../../../../../hooks/useCreateUpsell';
@@ -18,7 +18,7 @@ function Footer({
 	user = {},
 
 }) {
-	const { handleSubmit = () => {}, trigger } = formProps;
+	const { handleSubmit = () => {} } = formProps;
 
 	const { onAddService = () => {}, loading } = useCreateUpsell({
 		primary_service,
@@ -27,15 +27,6 @@ function Footer({
 		organization_id,
 		user,
 	});
-
-	const goToSecondStep = async () => {
-		const formValid = await trigger();
-		if (formValid) {
-			setStep(2);
-		} else {
-			Toast.error('Some form fields are empty or invalid');
-		}
-	};
 
 	return (
 		<div className={styles.container}>
@@ -51,7 +42,7 @@ function Footer({
 			{step === 1
 				? (
 					<Button
-						onClick={goToSecondStep}
+						onClick={() => setStep(2)}
 						disabled={loading}
 						className={styles.button_wrapper}
 					>

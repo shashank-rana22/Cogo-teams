@@ -15,7 +15,7 @@ const colorMapping = {
 };
 
 export default function DocumentHoldDetails() {
-	const { document_delay_status = '', documents = [], shipment_data = {} } = useContext(ShipmentDetailContext);
+	const { document_delay_status = '', documents = [], tradeType } = useContext(ShipmentDetailContext);
 
 	if (!document_delay_status) {
 		return null;
@@ -23,7 +23,7 @@ export default function DocumentHoldDetails() {
 
 	const status = docStatusMapping[document_delay_status] || startCase(document_delay_status);
 
-	const remarksAccessKey = shipment_data?.trade_type === 'export' ? 'bl_remarks' : 'remarks';
+	const remarksAccessKey = tradeType === 'export' ? 'bl_remarks' : 'remarks';
 
 	const holdReasons = (documents || []).flatMap((doc) => doc?.[remarksAccessKey] || []);
 
@@ -38,7 +38,7 @@ export default function DocumentHoldDetails() {
 
 			<div>
 				<h2 className={styles.heading}>
-					{`Your ${shipment_data?.trade_type === 'export' ? 'BL' : 'DO'} Document is ${status}`}
+					{`Your ${tradeType === 'export' ? 'BL' : 'DO'} Document is ${status}`}
 				</h2>
 
 				<h4>

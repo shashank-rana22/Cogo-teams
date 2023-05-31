@@ -23,7 +23,7 @@ function Logistics() {
 
 	const entityTab = [
 		{
-			key   : undefined,
+			key   : 'all',
 			label : 'ALL',
 		},
 		{

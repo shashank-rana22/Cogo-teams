@@ -40,7 +40,7 @@ const useGetReceivablesList = ({ globalFilters, entityTabFilters }:Props) => {
 			try {
 				trigger({
 					params: {
-						entityCode   : entityTabFilters,
+						entityCode   : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
 						serviceTypes : globalFilters?.serviceType,
 						accountMode  : 'AR',
 						buyerType    : buyerTypeFilter(),

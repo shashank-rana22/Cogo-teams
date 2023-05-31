@@ -27,7 +27,7 @@ const useGetTodayStats = ({ globalFilters, entityTabFilters }:Props) => {
 				trigger({
 					params: {
 						serviceTypes : serviceType,
-						entityCode   : entityTabFilters,
+						entityCode   : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
 					},
 				});
 			} catch (e) {

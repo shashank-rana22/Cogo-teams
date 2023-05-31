@@ -4,7 +4,7 @@ import { Controller } from 'react-hook-form';
 
 function DatepickerController(props) {
 	const {
-		name, control, rules, value, ...rest
+		name, control, rules, ...rest
 	} = props;
 
 	return (
@@ -13,14 +13,13 @@ function DatepickerController(props) {
 			control={control}
 			name={name}
 			rules={rules}
-			defaultValue={value}
-			render={({ field: { onChange, onBlur, value:newValue } }) => (
+			render={({ field: { onChange, onBlur, value } }) => (
 				<Datepicker
 					{...rest}
 					key={name}
 					id={name}
 					onChange={onChange}
-					value={newValue}
+					value={value}
 					onBlur={onBlur}
 					data-test-value={value}
 				/>

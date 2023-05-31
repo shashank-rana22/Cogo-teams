@@ -272,24 +272,6 @@ function asyncKamExpertiseRuleOptions() {
 	};
 }
 
-function asyncOrganizationTradeParties() {
-	return {
-		labelKey    : 'display_name',
-		valueKey    : 'registration_number',
-		endpoint    : '/list_organization_trade_parties',
-		initialCall : true,
-	};
-}
-
-function asyncSearchProducts() {
-	return {
-		labelKey    : 'item_name',
-		valueKey    : 'code',
-		endpoint    : '/search_products_v2',
-		initialCall : true,
-	};
-}
-
 function asyncKamExpertiseGroupOptions() {
 	return {
 		labelKey     : 'name',
@@ -333,16 +315,6 @@ function asyncAccountEngagementScoringEvents() {
 		authkey      : 'get_allocation_engagement_scoring_event_names',
 		microService : 'allocation',
 		initialCall  : true,
-	};
-}
-
-function asyncShipmentContainerDetails() {
-	return {
-		valueKey      : 'container_number',
-		finalLabelKey : 'container_number',
-		endpoint      : 'list_shipment_container_details',
-		initialCall   : true,
-		defaultParams : {},
 	};
 }
 
@@ -522,9 +494,6 @@ export {
 	asyncJvList,
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
-	asyncOrganizationTradeParties,
-	asyncSearchProducts,
-	asyncShipmentContainerDetails,
 	asyncJournalCode,
 	asyncAccMode,
 	asyncCodeMaster,

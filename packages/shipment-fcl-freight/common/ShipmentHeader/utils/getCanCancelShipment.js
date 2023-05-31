@@ -1,10 +1,10 @@
-const SHIPMENT_CANCELLATION_STATES = [
+const shipmentCancellationStates = [
 	'shipment_received',
 	'confirmed_by_importer_exporter',
 	'in_progress',
 ];
 
-const SHIPMENT_CANCEL_STAKEHOLDERS = [
+const shipmentCancelStakeholders = [
 	'superadmin',
 	'admin',
 	'booking_agent',
@@ -14,26 +14,14 @@ const SHIPMENT_CANCEL_STAKEHOLDERS = [
 	'so1_so2_ops',
 ];
 
-const SERVICE_CANCELLATION_STATES = [
-	'init',
-	'awaiting_service_provider_confirmation',
-	'confirmed_by_service_provider',
-	'containers_gated_in',
-	'cargo_carted_in',
-	'container_departed',
-	'cancelled',
-];
-
-export default function getCanCancelShipment({ shipment_data, primary_service, user_data, activeStakeholder }) {
+export default function getCanCancelShipment({ shipment_data, user_data, activeStakeholder }) {
 	const { state } = shipment_data || {};
 
-	const isShipmentInCancellationState = SHIPMENT_CANCELLATION_STATES.includes(state);
+	const isShipmentInCancellationState = shipmentCancellationStates.includes(state);
 
-	const isServiceInCancellationState = SERVICE_CANCELLATION_STATES.includes(primary_service?.state);
-
-	const isStakeholderAllowed = SHIPMENT_CANCEL_STAKEHOLDERS.includes(activeStakeholder);
+	const isStakeholderAllowed = shipmentCancelStakeholders.includes(activeStakeholder);
 
 	const allowedEmail = user_data?.email === 'ajeet@cogoport.com';
 
-	return isShipmentInCancellationState && isServiceInCancellationState && (isStakeholderAllowed || allowedEmail);
+	return isShipmentInCancellationState && (isStakeholderAllowed || allowedEmail);
 }

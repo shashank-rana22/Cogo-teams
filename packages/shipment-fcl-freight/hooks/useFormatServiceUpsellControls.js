@@ -48,7 +48,7 @@ function useServiceUpsellControls({
 		defaultValues[control?.name] = service?.[control?.name] || prefilledValues?.[control?.name] || control?.value;
 	});
 
-	const { handleSubmit, watch, control, formState : { errors }, trigger } = useForm({ defaultValues });
+	const { handleSubmit, watch, control, formState : { errors } } = useForm({ defaultValues });
 
 	const formValues = watch();
 	const { truck_body_type } = formValues;
@@ -62,7 +62,6 @@ function useServiceUpsellControls({
 		handleSubmit,
 		control,
 		errors,
-		trigger,
 	};
 
 	return {

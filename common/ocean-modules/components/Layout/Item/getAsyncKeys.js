@@ -54,7 +54,7 @@ const getAsyncFields = (key) => {
 		},
 		locations: {
 			valueKey      : 'id',
-			labelKey      : 'name',
+			lableKey      : 'name',
 			asyncKey      : 'list_locations',
 			defaultParams : {
 				filters: {
@@ -209,8 +209,8 @@ const getAsyncFields = (key) => {
 			defaultOptions: true,
 		},
 		currencies: {
-			labelKey      : 'iso_code',
-			valueKey      : 'iso_code',
+			valueKey      : 'id',
+			lableKey      : 'label',
 			asyncKey      : 'list_exchange_rate_currencies',
 			defaultParams : {
 				filters: {

@@ -2,7 +2,6 @@ import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
-import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
@@ -138,9 +137,6 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 							<Tasks />
-						</TabPanel>
-						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
-							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
