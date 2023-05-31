@@ -11,9 +11,9 @@ function FlashUserChats({
 	userId,
 	setActiveMessage,
 	firestore,
-	flashMessagesLoading,
 	showCarousel,
 	setShowCarousel,
+	canShowCarousel,
 }) {
 	const { claimChat, claimLoading = false } = useClaimChat({ userId, setShowCarousel, firestore });
 
@@ -28,8 +28,8 @@ function FlashUserChats({
 	}) : [];
 
 	return (
-		<div className={styles.flash_messages_div} style={{ '--height': !showCarousel ? '0' : '16%' }}>
-			{!flashMessagesLoading && showCarousel && (
+		<div className={styles.flash_messages_div} style={{ '--height': !canShowCarousel ? '0' : '16%' }}>
+			{canShowCarousel && (
 				<Carousel
 					id="flash_messages"
 					size="sm"
