@@ -1,9 +1,8 @@
 .header {
 	display: flex;
-    width: 40%;
+	width: 40%;
 }
 
 .select_container {
-    margin-left: 20px;
-    margin-top: 5px;
+	margin: 5px 0px 0px 20px;
 }
