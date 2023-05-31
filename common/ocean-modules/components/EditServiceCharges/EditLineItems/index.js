@@ -25,7 +25,7 @@ function EditLineItems({
 
 	const isBas = (value || []).some((lineItem) => lineItem?.code === 'BAS');
 
-	const disableAddLineItem =		(service_name === 'subsidiary_service' && value.length > 0)
+	const disableAddLineItem =	(service_name === 'subsidiary_service' && value.length > 0)
 		|| (isBas && ['fcl_freight_service', 'lcl_freight_service'].includes(service_name)
 		&& INCO_TERM_MAPPING[incoTerm] === 'export') || disableServiceEdit;
 
@@ -54,7 +54,7 @@ function EditLineItems({
 						customValues={customValues?.formValues?.[index] || customValues?.[index]}
 						showDeleteButton={showDeleteButton}
 						error={error?.[index]}
-						disabledProps={disabledProps}
+						disableServiceEdit={disableServiceEdit}
 					/>
 				))}
 			</div>

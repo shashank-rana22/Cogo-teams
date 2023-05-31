@@ -53,16 +53,14 @@ function Child({
 
 				{showDeleteButton
 					? (
-						<div className={
-							cl`${styles.delete_button_container} ${disableServiceEdit ? styles.disableServiceEdit : ''}`
+						<IcMDelete
+							width={20}
+							height={20}
+							onClick={!disableServiceEdit ? () => remove(index, 1) : null}
+							className={
+						cl`${disableServiceEdit ? styles.disableServiceEdit : styles.delete_button_container}`
 }
-						>
-							<IcMDelete
-								width={20}
-								height={20}
-								onClick={!disableServiceEdit ? () => remove(index, 1) : null}
-							/>
-						</div>
+						/>
 					) : null}
 			</div>
 		</div>

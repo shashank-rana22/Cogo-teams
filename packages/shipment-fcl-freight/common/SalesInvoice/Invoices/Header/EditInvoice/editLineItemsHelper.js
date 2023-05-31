@@ -14,7 +14,7 @@ const useEditLineItems = ({
 	invoice,
 	onClose,
 	refetch,
-	isFclFreight,
+	isAdminSuperAdmin,
 	shipment_data,
 	info,
 }) => {
@@ -65,7 +65,7 @@ const useEditLineItems = ({
 			handleChange,
 			service,
 			info,
-			isFclFreight,
+			isAdminSuperAdmin,
 			shipment_data,
 			index,
 			trade_mapping,

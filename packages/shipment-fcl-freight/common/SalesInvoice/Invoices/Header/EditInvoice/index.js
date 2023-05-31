@@ -38,9 +38,9 @@ function EditInvoice({
 		invoice,
 		onClose,
 		refetch,
-		isFclFreight : true,
+		isAdminSuperAdmin,
 		shipment_data,
-		info         : <Info />,
+		info: <Info />,
 	});
 
 	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service' && !isAdminSuperAdmin

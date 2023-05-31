@@ -2,8 +2,8 @@ import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-const handleDisableCond = (charge, isFclFreight, shipment_data) => {
-	const disable =	charge?.service_type === 'fcl_freight_service' && !isFclFreight
+const handleDisableCond = (charge, isAdminSuperAdmin, shipment_data) => {
+	const disable =	charge?.service_type === 'fcl_freight_service' && !isAdminSuperAdmin
 	&& shipment_data?.serial_id > 130000;
 
 	return disable;
@@ -13,7 +13,7 @@ const rawControls = (
 	handleChange,
 	charge,
 	info,
-	isFclFreight,
+	isAdminSuperAdmin,
 	shipment_data,
 	index,
 	trade_mapping = {},
@@ -52,7 +52,7 @@ const rawControls = (
 			handleChange,
 			placeholder : 'select line item',
 			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data),
+				handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
 			rules: { required: 'Required' },
 		},
 		{
@@ -69,15 +69,16 @@ const rawControls = (
 			rules       : {
 				validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
 			},
-			disabled : handleDisableCond(charge, isFclFreight, shipment_data),
+			disabled : handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
 			span     : 2,
 		},
 		{
-			label   : 'Unit',
-			type    : 'select',
-			name    : 'unit',
-			options : convertObjectMappingToArray(FCL_UNITS),
-			span    : 2,
+			label    : 'Unit',
+			type     : 'select',
+			name     : 'unit',
+			options  : convertObjectMappingToArray(FCL_UNITS),
+			disabled : handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
+			span     : 2,
 		},
 		{
 			name           : 'currency',
@@ -89,7 +90,7 @@ const rawControls = (
 			rules          : { required: 'currency is required' },
 			span           : 1.5,
 			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data),
+				handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
 		},
 		{
 			label       : 'Price',
@@ -101,7 +102,7 @@ const rawControls = (
 				required : 'Price is Required',
 				validate : (v) => v > 0 || 'Price must be greater than 0',
 			},
-			disabled: handleDisableCond(charge, isFclFreight, shipment_data),
+			disabled: handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
 		},
 		{
 			label       : 'Quantity',
@@ -111,7 +112,7 @@ const rawControls = (
 			rules       : { required: 'Required', min: 1 },
 			span        : 1,
 			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data),
+				handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
 		},
 		{
 			label  : 'Amount (Tax Excl.)',

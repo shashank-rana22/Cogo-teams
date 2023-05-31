@@ -84,6 +84,7 @@ function Layout({
 										customValues={customValues?.[field?.name]}
 										shipment_id={shipment_id}
 										disabledProps={disabledProps}
+										error={errors?.[field?.name]}
 										{...field}
 									/>
 								</div>
