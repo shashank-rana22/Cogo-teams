@@ -10,10 +10,16 @@ import styles from './styles.module.css';
 function EditLineItems({
 	control,
 	showAddButtons = true, showDeleteButton = true, controls = [],
-	name = '', cargoDetails, value:emptyValue,
+	name = '', cargoDetails,
 	customValues = {},
+	error = {},
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
+
+	const childEmptyValues = {};
+	controls.forEach((controlItem) => {
+		childEmptyValues[controlItem.name] = controlItem.value || '';
+	});
 
 	return (
 		<div className={styles.container}>
@@ -34,6 +40,7 @@ function EditLineItems({
 						remove={remove}
 						customValues={customValues?.formValues?.[index] || customValues?.[index]}
 						showDeleteButton={showDeleteButton}
+						error={error?.[index]}
 					/>
 				))}
 			</div>
@@ -43,7 +50,7 @@ function EditLineItems({
 					<Button
 						size="sm"
 						themeType="accent"
-						onClick={() => append(emptyValue)}
+						onClick={() => append(childEmptyValues)}
 						className={styles.button_div}
 					>
 						+ Add Line Items
