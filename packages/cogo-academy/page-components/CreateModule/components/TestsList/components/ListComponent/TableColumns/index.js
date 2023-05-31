@@ -232,7 +232,7 @@ export const testSetColumns = ({
 					{' '}
 					Subjective
 				</div>
-			</section>
+			</div>
 		),
 	},
 	{
