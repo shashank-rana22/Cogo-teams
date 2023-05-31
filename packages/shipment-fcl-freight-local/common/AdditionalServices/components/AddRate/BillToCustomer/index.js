@@ -3,7 +3,7 @@ import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-function BillToCustomer({ updateResponse, onCancel, onBillToCustomer }) {
+function BillToCustomer({ updateResponse = () => {}, onCancel = () => {}, onBillToCustomer = () => {} }) {
 	const [modeOfReview, setModeOfReview] = useState('bill');
 	const { updateBillingInfo } = updateResponse || {};
 	const options = [

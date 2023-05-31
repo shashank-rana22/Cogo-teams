@@ -1,6 +1,8 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOpenlink } from '@cogoport/icons-react';
-import { startCase, upperCase, format } from '@cogoport/utils';
+import { startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -36,7 +38,7 @@ export const renderValue = (label, detail) => {
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div>{values}</div>;
+								return <div key={values}>{values}</div>;
 							})}
 						</div>
 					)}
@@ -74,7 +76,7 @@ export const renderValue = (label, detail) => {
 	const formatCertificate = (certificates) => (
 		<div className={styles.certificate_container}>
 			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer">
+				<a href={item} target="_blank" rel="noreferrer" key={item}>
 					Click to view certificate
 					&nbsp;
 					{key + 1}
@@ -215,7 +217,12 @@ export const renderValue = (label, detail) => {
 		case 'bl_type':
 			return upperCase(detail.bl_type);
 		case 'cargo_readiness_date':
-			return format(detail?.cargo_readiness_date, 'dd MMM yyyy');
+			return formatDate({
+				date       : detail?.cargo_readiness_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+				separator  : ' - ',
+			});
 		case 'supplier_poc':
 			return formatPocData(detail?.supplier_poc || {});
 		case 'origin_oversea_agent':
@@ -227,7 +234,13 @@ export const renderValue = (label, detail) => {
 		case 'hs_code':
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
-			return format(detail?.delivery_date, 'dd MMM yyyy');
+			return formatDate({
+				date       : detail?.delivery_date,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				formatType : 'date',
+				separator  : ' - ',
+			});
+
 		default:
 			return detail[label] || null;
 	}

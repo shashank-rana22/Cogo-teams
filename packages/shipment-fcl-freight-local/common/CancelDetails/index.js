@@ -6,7 +6,7 @@ import { useContext } from 'react';
 import styles from './styles.module.css';
 
 export default function CancelDetails() {
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data = {} } = useContext(ShipmentDetailContext);
 
 	return (
 		<div className={styles.container}>

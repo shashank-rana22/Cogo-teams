@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-function Field({ field }) {
+function Field({ field = {} }) {
 	return (
 		<div
 			key={field?.key || field?.label}

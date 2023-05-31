@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-function useGetGstList({ registrationNumber }) {
+function useGetGstList({ registrationNumber = '' }) {
 	const [{ data }, trigger] = useRequest({
 		url    : '/get_cogoscore_tax_numbers',
 		method : 'GET',

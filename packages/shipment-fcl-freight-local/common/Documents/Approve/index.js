@@ -5,7 +5,7 @@ import styles from './styles.module.css';
 function Approve({
 	showApproved,
 	setAddToWallet = () => {},
-	addToWallet,
+	addToWallet = '',
 	handleApprove = () => {},
 	setShowApproved = () => {},
 	setShowDoc = () => {},

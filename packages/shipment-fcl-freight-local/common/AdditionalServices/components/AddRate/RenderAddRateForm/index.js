@@ -7,7 +7,7 @@ function RenderAddRateForm({
 	handleSubmit = () => {},
 	onSubmit = () => {},
 	control,
-	errors,
+	errors = {},
 	serviceData = {},
 	source = '',
 }) {
@@ -35,7 +35,7 @@ function RenderAddRateForm({
 
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.form_container}>
-			{formControl.map((item) => <FormElement control={control} errors={errors} {...item} />)}
+			{formControl.map((item) => <FormElement key={item?.name} control={control} errors={errors} {...item} />)}
 		</form>
 	);
 }

@@ -20,9 +20,8 @@ const RADIO_GROUP_OPTIONS = Object.entries(COMPONENTS_MAPPING).map(
 
 function AddInvoicingParty({
 	organizationDetails = {},
-	primary_service,
+	primary_service = {},
 	updateInvoicingParty = () => {},
-	isIE = false,
 }) {
 	const [activeComponentKey, setActiveComponentKey] = useState(() => RADIO_GROUP_OPTIONS[0].value);
 
@@ -32,7 +31,6 @@ function AddInvoicingParty({
 			primary_service,
 			updateInvoicingParty,
 			bookingType  : 'self',
-			isIE,
 		},
 		invoice_to_trade_partner: {
 			organization : organizationDetails,

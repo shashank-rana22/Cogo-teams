@@ -17,7 +17,7 @@ const STAKEHOLDER_MAPPING = {
 	so1_so2_ops           : ['service_ops1', 'service_ops2', 'lastmile_ops'],
 };
 
-export default function CancelShipment({ setShow }) {
+export default function CancelShipment({ setShow = () => {} }) {
 	const closeModal = () => setShow(false);
 
 	const { reasonsLoading, reasons = [], getReasons } = useListShipmentCancellationReasons();

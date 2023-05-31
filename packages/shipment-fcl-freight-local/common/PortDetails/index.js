@@ -1,6 +1,6 @@
 import { cl, Tooltip } from '@cogoport/components';
 import { IcMPortArrow, IcCFclLocals } from '@cogoport/icons-react';
-import { format, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { getOceanLocationInfo } from '../../helpers/getOceanLocaltionInfo';
@@ -8,12 +8,7 @@ import { getOceanLocationInfo } from '../../helpers/getOceanLocaltionInfo';
 import styles from './styles.module.css';
 
 function PortDetails({ primary_service = {} }) {
-	const {
-
-		schedule_arrival = '',
-		schedule_departure = '',
-		trade_type = '',
-	} = primary_service;
+	const { trade_type = '' } = primary_service;
 
 	const { origin_port, destination_port } = getOceanLocationInfo(
 		primary_service,
@@ -55,12 +50,6 @@ function PortDetails({ primary_service = {} }) {
 		<>
 			<div className={styles.flex_row_origin}>
 				{handleLocationDetails(origin_port)}
-				{ schedule_departure ? (
-					<div className={styles.date}>
-						ETD: &nbsp;
-						{format(schedule_departure, 'dd MMM yyyy', null, true)}
-					</div>
-				) : null}
 
 			</div>
 
@@ -72,12 +61,7 @@ function PortDetails({ primary_service = {} }) {
 
 					<div className={styles.flex_row_destination}>
 						{handleLocationDetails(destination_port)}
-						{ schedule_arrival ? (
-							<div className={styles.date}>
-								ETA: &nbsp;
-								{format(schedule_arrival, 'dd MMM yyyy', null, true)}
-							</div>
-						) : null}
+
 					</div>
 				</>
 			)

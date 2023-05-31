@@ -18,10 +18,9 @@ const tradePartyType = {
 
 function InvoicingParties({
 	organization = {},
-	primary_service,
+	primary_service = {},
 	updateInvoicingParty = () => {},
 	bookingType = 'self',
-	isIE,
 }) {
 	const { id: organizationId = '', is_tax_applicable = false } = organization;
 
@@ -169,7 +168,6 @@ function InvoicingParties({
 				organization={organization}
 				handleChange={handleChange}
 				optionsDisabled={optionsDisabledState}
-				isIE={isIE}
 				setShowComponent={setShowComponent}
 				setInvoiceToTradePartyDetails={setInvoiceToTradePartyDetails}
 			/>

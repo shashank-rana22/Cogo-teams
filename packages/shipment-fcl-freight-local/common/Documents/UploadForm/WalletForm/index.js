@@ -7,10 +7,10 @@ import Wallet from '../../Wallet';
 import styles from './styles.module.css';
 
 function WalletForm({
-	showWalletDocs,
-	activeWallet,
+	showWalletDocs = false,
+	activeWallet = '',
 	setActiveWallet = () => {},
-	showDoc,
+	showDoc = '',
 	handleDocClick = () => {},
 }) {
 	const [searchDocs, setSearchDocs] = useState('');

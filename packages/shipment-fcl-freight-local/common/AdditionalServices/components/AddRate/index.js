@@ -23,11 +23,11 @@ const showRemarksStatus = [
 ];
 
 function AddRate({
-	item,
-	setAddRate,
-	status,
+	item = {},
+	setAddRate = () => {},
+	status = '',
 	setAddSellPrice = () => {},
-	refetch,
+	refetch = () => {},
 	onCancel = () => {},
 	filters,
 	setShowChargeCodes = () => {},

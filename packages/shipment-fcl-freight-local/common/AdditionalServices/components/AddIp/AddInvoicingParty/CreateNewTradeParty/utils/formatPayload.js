@@ -7,7 +7,7 @@ const formatPayload = ({
 	orgResponse = {},
 	source = '',
 	setFilledDetails = () => {},
-	gstNumber,
+	gstNumber = '',
 }) => {
 	let newFilledDetails = { ...filledDetails };
 

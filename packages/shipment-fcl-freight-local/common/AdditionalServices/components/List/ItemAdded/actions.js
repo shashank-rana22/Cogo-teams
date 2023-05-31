@@ -5,13 +5,13 @@ import IP_STATE_CONDITONS from '../../../constants/IP_STATE_CONDITIONS';
 
 const actions = ({
 	status = {},
-	serviceListItem,
-	addRate,
+	serviceListItem = {},
+	addRate = {},
 	setShowModal = () => {},
 	setItem = () => {},
 	activeStakeholder = '',
 }) => {
-	const isSameItem = serviceListItem.id === addRate?.item?.id;
+	const isSameItem = serviceListItem?.id === addRate?.item?.id;
 
 	const onClickSetItem = () => setItem({ serviceListItem, status });
 

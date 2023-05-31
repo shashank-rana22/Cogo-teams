@@ -6,12 +6,12 @@ import useCreateShipmentAdditionalService from '../../../../../../hooks/useCreat
 import styles from './styles.module.css';
 
 function Price({
-	item,
-	isSeller,
-	setAddRate,
+	item = {},
+	isSeller = false,
+	setAddRate = () => {},
 	refetch = () => {},
 	setShowChargeCodes = () => {},
-	setShowPrice,
+	setShowPrice = () => {},
 }) {
 	const afterRequestRate = () => {
 		setShowChargeCodes(false);

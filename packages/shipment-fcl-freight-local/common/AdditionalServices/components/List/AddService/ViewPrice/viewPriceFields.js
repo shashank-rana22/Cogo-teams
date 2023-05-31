@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 
-const fields = (items, setAddRate) => [
+const fields = (items, setAddRate = () => {}) => [
 	{
 		label  : 'Validity Start',
 		key    : 'validity_start',

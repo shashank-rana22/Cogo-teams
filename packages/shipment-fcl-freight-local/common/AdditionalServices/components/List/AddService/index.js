@@ -11,9 +11,9 @@ import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
 
 function AddService({
-	shipmentId,
-	services,
-	isSeller,
+	shipmentId = '',
+	services = [],
+	isSeller = false,
 	refetch = () => {},
 	setShowChargeCodes = () => {},
 }) {

@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMTaskCompleted, IcMTaskNotCompleted, IcMFtick, IcMTimer } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import { useContext } from 'react';
 
 import CargoDetails from '../../../CargoDetails';
@@ -60,13 +60,13 @@ function TaskDetails({
 								theme="light"
 								content={(
 									<div style={{ fontSize: '10px' }}>
-										{format(
-											task?.deadline,
-											`${GLOBAL_CONSTANTS.formats.date['dd MMM yyyy']}
-											${GLOBAL_CONSTANTS.formats.time['hh:mm aaa']}`,
-											null,
-											true,
-										)}
+										{formatDate({
+											date       : task?.deadline,
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+											formatType : 'date',
+											separator  : ' - ',
+										})}
+
 									</div>
 								)}
 							>

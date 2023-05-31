@@ -4,13 +4,13 @@ import React from 'react';
 import Content from './Content';
 
 const Card = ({
-	taskList,
-	completedDocs,
-	emailDocs,
-	shipment_data,
-	primary_service,
-	setShowDoc,
-	setShowApproved,
+	taskList = [],
+	completedDocs = [],
+	emailDocs = [],
+	shipment_data = {},
+	primary_service = {},
+	setShowDoc = () => {},
+	setShowApproved = () => {},
 }) => {
 	const handleView = (url) => {
 		window.open(url, '_blank');
@@ -39,6 +39,7 @@ const Card = ({
 
 			return (
 				<Content
+					key={uploadedItem?.document_type}
 					uploadedItem={uploadedItem}
 					receivedViaEmail={receivedViaEmail}
 					showUploadText={showUploadText}

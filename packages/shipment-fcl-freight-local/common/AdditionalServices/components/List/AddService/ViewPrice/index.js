@@ -8,7 +8,7 @@ import CardList from '../../../../../CardList';
 import styles from './styles.module.css';
 import fields from './viewPriceFields';
 
-function ViewPrice({ showPrice, setShowPrice }) {
+function ViewPrice({ showPrice = false, setShowPrice = () => {} }) {
 	const { apiData = [], loading } = useGetSubsidiaryServiceRateCards({
 		item: showPrice?.item,
 	});

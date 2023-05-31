@@ -5,7 +5,7 @@ import controls from './controls';
 import styles from './styles.module.css';
 
 function Form({
-	control, onSubmitOfCompanyDetails, handleSubmit, errors, setValue = () => {},
+	control, onSubmitOfCompanyDetails = () => {}, handleSubmit = () => {}, errors = {}, setValue = () => {},
 	filledDetails = {}, watch,
 }) {
 	const { registration_number, business_name, company_type, country_id } = filledDetails;

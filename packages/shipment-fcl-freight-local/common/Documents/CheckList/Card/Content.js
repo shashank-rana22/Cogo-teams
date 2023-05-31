@@ -1,26 +1,28 @@
 import { Button, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCError } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import VerticleLine from '../VerticleLine';
 
 import styles from './styles.module.css';
 
 function Content({
-	uploadedItem,
-	idx,
-	taskList,
-	isChecked,
-	item,
-	shipment_data,
-	handleSave,
-	handleView,
-	primary_service,
-	receivedViaEmail,
-	showUploadText,
-	setShowDoc,
-	setShowApproved,
-	docType,
+	uploadedItem = {},
+	idx = '',
+	taskList = [],
+	isChecked = false,
+	item = {},
+	shipment_data = {},
+	handleSave = () => {},
+	handleView = () => {},
+	primary_service = {},
+	receivedViaEmail = false,
+	showUploadText = '',
+	setShowDoc = () => {},
+	setShowApproved = () => {},
+	docType = '',
 }) {
 	const isBlReleased = [
 		'approved',
@@ -79,7 +81,12 @@ function Content({
 							</div>
 							<div className={styles.upload_info}>
 								Uploaded On:&nbsp;
-								{format(uploadedItem?.created_at, 'dd MMM yyyy')}
+								{formatDate({
+									date       : uploadedItem?.created_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+									separator  : ' - ',
+								})}
 
 							</div>
 							<div className={cl`${styles.document_status}
@@ -89,12 +96,18 @@ function Content({
 								{startCase(uploadedItem?.state?.split('_')?.[1])}
 							</div>
 						</div>
+
 					) : (
 						<div className={styles.gap}>
 							{item?.pendingItem ? (
 								<div className={styles.upload_info}>
 									Due On:&nbsp;
-									{format(item?.pendingItem?.deadline, 'dd MMM yyyy')}
+									{formatDate({
+										date       : item?.pendingItem?.deadline,
+										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+										formatType : 'date',
+										separator  : ' - ',
+									})}
 								</div>
 							) : null}
 
