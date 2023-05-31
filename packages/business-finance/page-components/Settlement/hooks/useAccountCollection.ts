@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
