@@ -699,6 +699,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'send_channel_partner_user_welcome_email',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -2569,6 +2574,11 @@ const partner = {
 			api          : 'update_organization_asset',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'send_channel_partner_user_welcome_email',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	support_crm: [
@@ -4470,6 +4480,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'unified_dashboard',
 			feature      : 'live_booking',
+		},
+		{
+			api          : 'get_weight_slabs_for_airline',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
 		},
 	],
 	operations_dashboard: [
@@ -8526,6 +8541,10 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
+		{
 			api         : 'post_payments_journal_voucher_post_to_sage',
 			access_type : 'private',
 			module      : 'settlement',
@@ -10386,6 +10405,12 @@ const partner = {
 			feature     : 'jobs',
 		},
 		{
+			api         : 'post_common_job_by_id_open',
+			access_type : 'private',
+			module      : 'jobs',
+			feature     : 'jobs',
+		},
+		{
 			api          : 'list_sage_jobs',
 			access_type  : 'private',
 			service_name : 'sage',
@@ -10819,7 +10844,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
 		},
-
+		{
+			api          : 'get_weight_slabs_for_airline',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
 		{
 			api          : 'create_domestic_air_freight_rate',
 			access_type  : 'private',
