@@ -37,7 +37,10 @@ function CourseModule() {
 			/>
 			<HomePage user_id={user_id} CourseCategoryData={CourseCategoryData} /> */}
 			{isEmpty(page) ? (
-				<HomePage user_id={user_id} CourseCategoryData={CourseCategoryData} />
+				<AllCourses
+					currentCategory={currentCategory}
+					setCurrentCategory={setCurrentCategory}
+				/>
 			) : (
 				null
 			)}

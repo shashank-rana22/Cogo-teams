@@ -1,7 +1,8 @@
-import { Carousel, Tabs, TabPanel, Button, Tooltip } from '@cogoport/components';
-import { IcMSort } from '@cogoport/icons-react';
+import { Carousel, Tabs, TabPanel, Button, Tooltip, Pill } from '@cogoport/components';
+import { IcMSort, IcMTick } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
+import React, { useState } from 'react';
 
 import LoadingState from '../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../configs/BUTTON_CONTENT_MAPPING';
@@ -10,12 +11,14 @@ import CourseCard from '../CourseCard';
 
 import styles from './styles.module.css';
 
-function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
+function AllCourses({ currentCategory, setCurrentCategory }) {
 	const router = useRouter();
 
-	// const {
-	// 	finalCourseCategories:courseCategories = [],
-	// } = useListCourseCategory();
+	const {
+		finalCourseCategories:courseCategories = [],
+	} = useListCourseCategory();
+
+	const [activeTab, setActiveTab] = useState();
 
 	const HANDLE_CLICK_MAPPING = {
 
@@ -60,24 +63,42 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 				<div className={styles.main_heading}>All Courses</div>
 
 				<div className={styles.btn_container}>
-					<Button size="md" themeType="secondary" style={{ margin: '10px' }}>Completed</Button>
-					<Button size="md" themeType="secondary" style={{ margin: '10px' }}>Ongoing</Button>
-					<Button size="md" themeType="secondary" style={{ margin: '10px' }}>Mandatory</Button>
+					<div
+						role="presentation"
+						onClick={() => setActiveTab('completed')}
+						className={`${styles.btn} ${activeTab === 'completed' ? styles.btn_active : null}`}
+					>
+						{activeTab === 'completed' ? <IcMTick height="20px" width="20px" /> : null}
+						Completed
+					</div>
+					<div
+						role="presentation"
+						onClick={() => setActiveTab('ongoing')}
+						className={`${styles.btn} ${activeTab === 'ongoing' ? styles.btn_active : null}`}
+					>
+						{activeTab === 'ongoing' ? <IcMTick height="20px" width="20px" /> : null}
+						Ongoing
+					</div>
+					<div
+						role="presentation"
+						onClick={() => setActiveTab('mandatory')}
+						className={`${styles.btn} ${activeTab === 'mandatory' ? styles.btn_active : null}`}
+					>
+						{activeTab === 'mandatory' ? <IcMTick height="20px" width="20px" /> : null}
+						Mandatory
+					</div>
 					<Button
-						size="md"
-						themeType="tertiary"
-						style={{ margin: '10px' }}
+						role="presentation"
 						onClick={openOptions()}
+						themeType="tertiary"
 					>
 						<IcMSort />
 						<div>Sort By</div>
 					</Button>
 				</div>
 			</div>
-
-			{/* <div className={styles.tabs_container}>
-				{courseCategories.map((category) => (
-
+			<div className={styles.tabs_container}>
+				{courseCategories?.map((category) => (
 					<div
 						role="presentation"
 						className={`${styles.tab} ${currentCategory === category.name ? styles.active : ''}`}
@@ -86,14 +107,27 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 					>
 						<h4><div className={styles.overflow}>{startCase(category.name)}</div></h4>
 						<p className={styles.total_courses}>
-							{category.number}
+							{category.course_count}
 							{' '}
 							courses
 						</p>
 					</div>
 
 				))}
-			</div> */}
+			</div>
+			<div className={styles.pill}>
+				{courseCategories?.map((category) => (
+					<div>
+						{ currentCategory === category.name
+							? category?.topics?.map((item) => (
+								<Pill>{item.topic_name}</Pill>
+							))
+							: null}
+					</div>
+
+				))}
+			</div>
+
 		</div>
 	);
 }

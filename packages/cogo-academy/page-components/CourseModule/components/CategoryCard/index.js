@@ -5,7 +5,7 @@ import CategoriesCard from './component/CategoriesCard';
 import styles from './styles.module.css';
 
 function CategoryCard({ CourseCategoryData }) {
-	// console.log('CourseCategoryData', CourseCategoryData);
+	console.log('CourseCategoryData', CourseCategoryData);
 
 	const CAROUSELDATA = (CourseCategoryData?.list || []).map((item) => ({
 		key    : item?.id,
@@ -14,7 +14,6 @@ function CategoryCard({ CourseCategoryData }) {
 				key={item?.id}
 				data={item}
 			/>
-			// <div>dsf</div>
 		),
 	}));
 

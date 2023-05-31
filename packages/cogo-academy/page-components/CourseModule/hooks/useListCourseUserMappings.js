@@ -14,10 +14,10 @@ function useListCourseUserMappings({ activeTab, params, query }) {
 		...params,
 		filters: {
 			...params.filters,
-			// ...MAPPING[activeTab],
+			...MAPPING[activeTab],
 			q: query,
 		},
-	}), [params, query]);
+	}), [params, query, activeTab]);
 
 	const [{ data = {}, loading }, trigger] = useRequest({
 		url    : '/list_user_courses',
