@@ -80,7 +80,7 @@
 	justify-content: flex-start;
 }
 
-.posttosage {
+.post_to_sage {
 	display: flex;
 	padding: 8px 12px;
 	color: var(--color-accent-orange-2);

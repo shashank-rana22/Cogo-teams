@@ -272,6 +272,24 @@ function asyncKamExpertiseRuleOptions() {
 	};
 }
 
+function asyncOrganizationTradeParties() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'registration_number',
+		endpoint    : '/list_organization_trade_parties',
+		initialCall : true,
+	};
+}
+
+function asyncSearchProducts() {
+	return {
+		labelKey    : 'item_name',
+		valueKey    : 'code',
+		endpoint    : '/search_products_v2',
+		initialCall : true,
+	};
+}
+
 function asyncKamExpertiseGroupOptions() {
 	return {
 		labelKey     : 'name',
@@ -315,6 +333,16 @@ function asyncAccountEngagementScoringEvents() {
 		authkey      : 'get_allocation_engagement_scoring_event_names',
 		microService : 'allocation',
 		initialCall  : true,
+	};
+}
+
+function asyncShipmentContainerDetails() {
+	return {
+		valueKey      : 'container_number',
+		finalLabelKey : 'container_number',
+		endpoint      : 'list_shipment_container_details',
+		initialCall   : true,
+		defaultParams : {},
 	};
 }
 
@@ -433,6 +461,38 @@ function asyncListOrgTradeParties() {
 	};
 }
 
+function asyncAllocationRequestRejectionType() {
+	return {
+		labelKey     : 'reason',
+		valueKey     : 'reason',
+		endpoint     : '/request_rejection_reasons',
+		authkey      : 'get_allocation_request_rejection_reasons',
+		microService : 'allocation',
+		initialCall  : true,
+	};
+}
+
+function asyncPlanPricingList() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_plan_pricings',
+		initialCall : true,
+		params      : {
+			filters: { is_active: true },
+		},
+	};
+}
+
+function asyncQuotaList() {
+	return {
+		labelKey    : 'product_name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_products',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -462,10 +522,16 @@ export {
 	asyncJvList,
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
+	asyncOrganizationTradeParties,
+	asyncSearchProducts,
+	asyncShipmentContainerDetails,
 	asyncJournalCode,
 	asyncAccMode,
 	asyncCodeMaster,
 	asyncListOrgTradeParties,
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
+	asyncPlanPricingList,
+	asyncQuotaList,
+	asyncAllocationRequestRejectionType,
 };

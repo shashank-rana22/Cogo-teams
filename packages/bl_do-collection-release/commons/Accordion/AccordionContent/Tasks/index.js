@@ -1,7 +1,6 @@
 import { useForm } from '@cogoport/forms';
+import { Layout } from '@cogoport/ocean-modules';
 import React, { useEffect, useImperativeHandle, forwardRef } from 'react';
-
-import Layout from '../../../Layout';
 
 const getDefaultValues = (controls) => {
 	const defaultValues = {};

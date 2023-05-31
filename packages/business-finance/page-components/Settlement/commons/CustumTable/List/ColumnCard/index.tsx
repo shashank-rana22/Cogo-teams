@@ -1,4 +1,6 @@
 import { Button, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateDown, IcMArrowRotateUp, IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -6,7 +8,6 @@ import React, { useState } from 'react';
 import useGetDeleteJv from '../../../../hooks/useGetDeleteJv';
 import usePostToSage from '../../../../hooks/usePostToSage';
 import ConfirmationModal from '../../../../page-components/ConfirmationModal';
-import getFormattedDate from '../../../Utils/getFormattedDate';
 
 import Details from './Details';
 import styles from './styles.module.css';
@@ -47,7 +48,7 @@ function ColumnCard({ item, refetch }: Props) {
 		<div className={styles.flexend}>
 			{STATUS?.includes(item?.status) ? (
 				<Button
-					className={styles.posttosage}
+					className={styles.post_to_sage}
 					onClick={() => {
 						setShowConfirm('post');
 					}}
@@ -57,7 +58,7 @@ function ColumnCard({ item, refetch }: Props) {
 				</Button>
 			) : null}
 			<Button
-				className={styles.posttosage}
+				className={styles.post_to_sage}
 				onClick={() => {
 					setShowConfirm('delete');
 				}}
@@ -74,7 +75,11 @@ function ColumnCard({ item, refetch }: Props) {
 				<div className={styles.jvtype}>{item?.category || ''}</div>
 				<div className={styles.accdate}>
 					{item?.transactionDate
-						? getFormattedDate({ date: item?.transactionDate })
+						? formatDate({
+							date       : item?.transactionDate,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+							formatType : 'date',
+						})
 						: '--'}
 				</div>
 				<div className={styles.curr}>{item?.currency || ''}</div>
