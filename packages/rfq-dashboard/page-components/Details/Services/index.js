@@ -9,11 +9,8 @@ import styles from './styles.module.css';
 import ToApproveModal from './ToApproveModal';
 
 const TITLE_MAPPING = {
-
-	auto_approved: 'Remaining Port Pairs',
-
-	requested_for_approval: 'Request For Approvalss',
-
+	auto_approved          : 'Remaining Port Pairs',
+	requested_for_approval : 'Request For Approvalss',
 };
 
 function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRfqsForApproval }) {
