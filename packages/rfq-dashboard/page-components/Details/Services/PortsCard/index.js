@@ -1,4 +1,3 @@
-import { Button } from '@cogoport/components';
 import { IcCFcl, IcMPortArrow, IcMArrowRotateDown, IcMArrowRotateUp, IcCLcl, IcCAir } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
@@ -140,14 +139,14 @@ function PortsCard(props) {
 							</>
 						)}
 
-					<Button
+					<button
 						className={styles.down_card_button}
 						onClick={() => {
 							setShowPrice(isEmpty(showPrice) ? { rfq_rate_card_id: id } : {});
 						}}
 					>
 						{!isEmpty(showPrice) ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-					</Button>
+					</button>
 				</div>
 				{!isEmpty(showPrice) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && (
 					<BreakdownDetails
