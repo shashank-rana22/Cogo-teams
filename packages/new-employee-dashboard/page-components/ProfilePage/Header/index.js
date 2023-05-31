@@ -11,8 +11,6 @@ function Header({
 	loading,
 	setShowCtcBreakupModal,
 	getEmployeeDetails,
-	setCtcStructure = () => {},
-	ctcStructure = {},
 }) {
 	const { id, name, employee_code, designation, passport_size_photo_url, status } = detail || {};
 
@@ -72,9 +70,9 @@ function Header({
 					type="button"
 					style={{ marginLeft: 12 }}
 					onClick={() => { updateEmployeeStatus(); }}
-					loading={btnloading}
+					loading={loading || btnloading}
 				>
-					{status === 'active' ? 'Reject Candidate' : 'Reactivate Employee Profile'}
+					{status === 'active' ? 'Reject Candidate' : 'Reactivate Candidate Profile'}
 				</Button>
 
 			</div>

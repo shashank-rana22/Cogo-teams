@@ -12,6 +12,8 @@ import styles from './styles.module.css';
 
 function ProfilePage() {
 	const [activeTab, setActiveTab] = useState('profile_info');
+	const [showCtcBreakupModal, setShowCtcBreakupModal] = useState(false);
+
 	const {
 		data: profileData = {},
 		loading = false,
@@ -25,11 +27,11 @@ function ProfilePage() {
 
 	const { detail = {} } = profileData || {};
 
-	const [showCtcBreakupModal, setShowCtcBreakupModal] = useState(false);
 	return (
 		<div className={styles.container}>
 			<Header
 				detail={detail}
+				loading={loading}
 				setShowCtcBreakupModal={setShowCtcBreakupModal}
 				getEmployeeDetails={getEmployeeDetails}
 			/>
