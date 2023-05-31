@@ -1971,7 +1971,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'ticket_management-super_admin',
-				title         : 'Super Admin',
+				title         : 'Admin Dashboard',
 				href          : '/v2/ticket-management/super-admin',
 				as            : '/v2/ticket-management/super-admin',
 				type          : 'link',
