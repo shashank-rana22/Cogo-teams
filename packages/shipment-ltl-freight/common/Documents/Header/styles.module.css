@@ -7,6 +7,7 @@
 }
 
 .sub_heading {
+	margin-left: 12px;
 	display: flex;
 	align-items: center;
 	justify-content: space-between;

@@ -18,7 +18,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 	const { data: taskConfigs, loading : taskConfigLoading } = useGetProcess({
 		defaultParams: {
 			task_filters  : { trade_type: 'export' },
-			shipment_type : 'ftl_freight',
+			shipment_type : 'ltl_freight',
 		},
 	});
 
