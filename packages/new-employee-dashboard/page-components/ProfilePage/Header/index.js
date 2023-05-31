@@ -1,4 +1,6 @@
 import { Avatar, Button, Placeholder } from '@cogoport/components';
+import { IcMArrowBack } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
@@ -14,46 +16,60 @@ function Header({
 	offerLetter,
 	offerLetterApiLoading,
 }) {
+	const router = useRouter();
 	const { id, name, employee_code, designation, passport_size_photo_url, status } = detail || {};
 
 	const { updateEmployeeStatus, btnloading } = useUpdateEmployeeDeatils({ id, status, getEmployeeDetails });
 
+	const onClickGoBack = () => {
+		router.push('/new-employee-dashboard', '/new-employee-dashboard');
+	};
+
 	return (
 		<div className={styles.container}>
-			<div className={styles.profile}>
-				<Avatar
-					src={passport_size_photo_url}
-					alt="img"
-					disabled={false}
-					size="160px"
-					personName={name}
-				/>
-				<div>
-					<div className={styles.name}>
-						{!loading ? (
-							name
-						) : (
-							<Placeholder
-								height="32px"
-								width="240px"
-								margin="0px 0px 12px 0px"
-							/>
-						)}
-					</div>
-					<div className={styles.role}>
-						{!loading ? (
-							startCase(designation)
-						) : (
-							<Placeholder height="20px" width="240px" />
-						)}
-					</div>
-					<div className={styles.emp_code}>
-						<div style={{ marginRight: 2 }}>Employee Code: </div>
-						{!loading ? (
-							employee_code
-						) : (
-							<Placeholder height="20px" width="80px" />
-						)}
+			<div>
+				<Button type="button" themeType="tertiary" onClick={onClickGoBack}>
+					<IcMArrowBack style={{ marginRight: 8 }} />
+					{' '}
+					GO BACK
+				</Button>
+
+				<div className={styles.profile}>
+					<Avatar
+						src={passport_size_photo_url}
+						alt="img"
+						disabled={false}
+						size="160px"
+						personName={name}
+					/>
+
+					<div>
+						<div className={styles.name}>
+							{!loading ? (
+								name
+							) : (
+								<Placeholder
+									height="32px"
+									width="240px"
+									margin="0px 0px 12px 0px"
+								/>
+							)}
+						</div>
+						<div className={styles.role}>
+							{!loading ? (
+								startCase(designation)
+							) : (
+								<Placeholder height="20px" width="240px" />
+							)}
+						</div>
+						<div className={styles.emp_code}>
+							<div style={{ marginRight: 2 }}>Employee Code: </div>
+							{!loading ? (
+								employee_code
+							) : (
+								<Placeholder height="20px" width="80px" />
+							)}
+						</div>
 					</div>
 				</div>
 			</div>
