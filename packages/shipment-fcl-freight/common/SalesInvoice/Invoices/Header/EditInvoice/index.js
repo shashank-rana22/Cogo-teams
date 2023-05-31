@@ -3,11 +3,12 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
+// import { Layout } from '@cogoport/surface-modules';
 import React, { useEffect } from 'react';
 
+import editLineItemsHelper from './editLineItemsHelper';
 import Info from './Info';
 import styles from './styles.module.css';
-import useEditLineItems from './useEditLineItems';
 
 const geo = getGeoConstants();
 
@@ -34,8 +35,8 @@ function EditInvoice({
 		control,
 		setValue,
 		watch,
-		defaultValues,
-	} = useEditLineItems({
+		newFormValues,
+	} = editLineItemsHelper({
 		invoice,
 		onClose,
 		refetch,
@@ -45,20 +46,20 @@ function EditInvoice({
 	});
 
 	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service'
-		&& !isFclFreight
-		&& shipment_data?.serial_id > 130000;
+	&& !isFclFreight
+	&& shipment_data?.serial_id > 130000;
 
 	const formValues = watch();
 
 	useEffect(() => {
-		if (defaultValues) {
-			Object.keys(defaultValues).forEach((fieldName) => {
+		if (newFormValues) {
+			Object.keys(newFormValues).forEach((fieldName) => {
 				if (!formValues[fieldName]) {
-					setValue(fieldName, defaultValues[fieldName]);
+					setValue(fieldName, newFormValues[fieldName]);
 				}
 			});
 		}
-	}, [defaultValues, watch, setValue, formValues]);
+	}, [newFormValues, watch, setValue, formValues]);
 
 	return (
 		<Modal
@@ -67,12 +68,13 @@ function EditInvoice({
 			show={show}
 			closeOnOuterClick={false}
 		>
+			<Modal.Header title="Edit Invoice" />
 			<Modal.Body>
 				<div className={styles.forms}>
 					<div className={styles.invoice_value}>
 						Invoice Value -
 						{' '}
-						<span className="amount">
+						<span className={styles.amount}>
 							{formatAmount({
 								amount   : invoice?.invoicing_party_total,
 								currency : invoice?.invoice_total_currency,
@@ -89,7 +91,7 @@ function EditInvoice({
 						control={control}
 						fields={controls}
 						errors={errors}
-						customValues={defaultValues}
+						customValues={newFormValues}
 					/>
 				</div>
 

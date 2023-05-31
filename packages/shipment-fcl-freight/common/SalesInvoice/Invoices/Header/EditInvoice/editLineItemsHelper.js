@@ -1,8 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import rawControls from './rawControls';
@@ -25,7 +24,7 @@ const useEditLineItems = ({
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/update_invoice_line_items',
+		url    : '/update_shipment_sell_quotations',
 		method : 'POST',
 	}, { manual: true });
 
@@ -43,7 +42,7 @@ const useEditLineItems = ({
 				defaultValues[control.name] = control.value.map((value) => {
 					const fieldValue = {};
 					control.controls.forEach((subControl) => {
-						fieldValue[subControl.name] = value[subControl.name] || '';
+						fieldValue[subControl.name] = value[subControl.name] || 0;
 					});
 
 					return fieldValue;
@@ -53,6 +52,14 @@ const useEditLineItems = ({
 
 		return defaultValues;
 	};
+
+	const handleOptionsChange = useCallback(
+		(vals) => {
+			setAllChargeCodes((prevChargeCodes) => ({ ...prevChargeCodes, ...vals }));
+		},
+		[setAllChargeCodes],
+	);
+
 	const controls = services.map((service, index) => ({
 		...rawControls(
 			handleChange,
@@ -63,26 +70,13 @@ const useEditLineItems = ({
 			index,
 			trade_mapping,
 		),
-		onOptionsChange: (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
-	}));
-
-	const defaultControls = services.map((service, index) => ({
-		...rawControls(
-			handleChange,
-			service,
-			info,
-			isFclFreight,
-			shipment_data,
-			index,
-			trade_mapping,
-		),
-		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
+		onOptionsChange : handleOptionsChange,
 		value           : (service?.line_items || []).map((item) => ({
 			code             : item?.code,
 			alias            : item?.alias,
-			sac_code         : item.hsn_code || 'NA',
+			sac_code         : item?.hsn_code || 'NA',
 			currency         : item?.currency,
-			price_discounted : item?.price_discounted || 0,
+			price_discounted : item?.price_discounted || '0',
 			quantity         : item?.quantity || 0,
 			exchange_rate    : item?.exchange_rate || 1,
 			tax_percent      : item?.tax_percent || 0,
@@ -93,7 +87,7 @@ const useEditLineItems = ({
 		})),
 	}));
 
-	const defaultValues = generateDefaultValues({ values: defaultControls });
+	const defaultValues = generateDefaultValues({ values: controls });
 
 	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm({ defaultValues });
 
@@ -125,29 +119,6 @@ const useEditLineItems = ({
 			id         : key,
 		};
 	});
-	controls.forEach((ctrl) => {
-		if (ctrl?.controls) {
-			(ctrl?.controls || []).forEach((childCtrl) => {
-				if (childCtrl?.name === 'unit') {
-					const unitOptions = {};
-					(formValues[ctrl?.name] || []).forEach((item, i) => {
-						const chargeCodes = {};
-						(allChargeCodes[ctrl?.service_name] || []).forEach((chgCode) => {
-							chargeCodes[chgCode?.code] = chgCode;
-						});
-						const updatedChildCtrl = { ...childCtrl, options: unitOptions };
-						unitOptions[i] = (
-							chargeCodes[item?.code]?.units || ['per_container']
-						).map((unit) => ({
-							label : startCase(unit),
-							value : unit,
-						}));
-						Object.assign(childCtrl, updatedChildCtrl);
-					});
-				}
-			});
-		}
-	});
 
 	const onCreate = async (values) => {
 		try {
@@ -162,7 +133,6 @@ const useEditLineItems = ({
 						chargeCodes[chgCode.code] = chgCode;
 					},
 				);
-				console.log(values?.[key], ' :values?.[key] : ', chargeCodes);
 				const service = {
 					service_id   : currentService?.service_id,
 					service_type : currentService?.service_type,
@@ -200,22 +170,17 @@ const useEditLineItems = ({
 		}
 	};
 
-	// const onError = (err) => {
-	// 	setErrors({ ...err });
-	// };
 	return {
 		onCreate,
 		handleSubmit,
 		controls,
 		loading,
 		customValues,
-		// fields,
-		// onError,
 		errors,
 		control,
 		setValue,
 		watch,
-		defaultValues,
+		newFormValues,
 	};
 };
 

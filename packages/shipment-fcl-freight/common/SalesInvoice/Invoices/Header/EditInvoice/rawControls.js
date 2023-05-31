@@ -9,8 +9,6 @@ const handleDisableCond = (charge, isFclFreight, shipment_data) => {
 	return disable;
 };
 
-// const fclUnitOptions = convertObjectMappingToArray(FCL_UNITS);
-
 const rawControls = (
 	handleChange,
 	charge,
@@ -31,11 +29,11 @@ const rawControls = (
 			alias            : '',
 			sac_code         : '',
 			currency         : '',
-			price_discounted : '',
-			quantity         : '',
-			exchange_rate    : '',
-			tax              : '',
-			total            : '',
+			price_discounted : 0,
+			quantity         : 0,
+			exchange_rate    : 0,
+			tax              : 0,
+			total            : 0,
 			name             : '',
 		},
 	],
@@ -58,14 +56,15 @@ const rawControls = (
 			rules: { required: 'Required' },
 		},
 		{
-			label: (
+
+			type  : 'text',
+			name  : 'alias',
+			label : (
 				<>
 					<div>Alias Name</div>
 					{info}
 				</>
 			),
-			type        : 'text',
-			name        : 'alias',
 			placeholder : 'Enter alias name/code',
 			rules       : {
 				validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
@@ -74,12 +73,11 @@ const rawControls = (
 			span     : 2,
 		},
 		{
-			label       : 'Unit',
-			type        : 'select',
-			name        : 'unit',
-			placeholder : 'select...',
-			span        : 1.5,
-			options     : convertObjectMappingToArray(FCL_UNITS),
+			label   : 'Unit',
+			type    : 'select',
+			name    : 'unit',
+			options : convertObjectMappingToArray(FCL_UNITS),
+			span    : 2,
 		},
 		{
 			name           : 'currency',
@@ -100,7 +98,7 @@ const rawControls = (
 			placeholder : 'enter price',
 			span        : 1.5,
 			rules       : {
-				required : 'Required',
+				required : 'Price is Required',
 				validate : (v) => v > 0 || 'Price must be greater than 0',
 			},
 			disabled: handleDisableCond(charge, isFclFreight, shipment_data),
