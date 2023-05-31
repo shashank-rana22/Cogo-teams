@@ -79,9 +79,6 @@ const displayNameMappings = (trade_type) => {
 		approve_booking_params: {
 			display_name: 'Approve changed booking parameters',
 		},
-		approve_purchase_invoice_for_fcl_freight_service: {
-			display_name: 'Verify purchase invoice details',
-		},
 		approve_purchase_invoice_for_origin_fcl_freight_local_service: {
 			display_name: 'Verify purchase invoice details',
 		},

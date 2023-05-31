@@ -47,8 +47,6 @@ function ChooseServiceProvider({
 		(services || []).forEach((serviceObj) => {
 			if (serviceObj?.service_type?.includes('fcl_freight_local_service')) {
 				localServiceIds.push(serviceObj?.id);
-			} else if (serviceObj?.service_type?.includes('fcl_freight_service')) {
-				fclServiceIds.push(serviceObj?.id);
 			}
 		});
 		const performed_by_org_id = mainService?.service_provider?.id;

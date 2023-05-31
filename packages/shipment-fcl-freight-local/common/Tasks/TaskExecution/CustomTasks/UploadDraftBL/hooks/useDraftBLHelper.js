@@ -79,7 +79,7 @@ const useDraftBLHelper = ({
 						document_number  : value?.document_number,
 						containers_count : value?.containers_count,
 						service_id       : primary_service?.id,
-						service_type     : 'fcl_freight_service',
+						service_type     : 'fcl_freight_local_service',
 					},
 				})),
 			};

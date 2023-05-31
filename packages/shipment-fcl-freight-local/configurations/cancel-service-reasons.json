@@ -245,7 +245,6 @@
 				"label": "Tell us what went wrong?"
 			},
 			"applicable_to": [
-				"fcl_freight_service", 
 				"fcl_freight_local_service"
 			]			
 		},
@@ -257,7 +256,6 @@
 				"label": "Tell us what went wrong?"
 			},
 			"applicable_to": [
-				"fcl_freight_service", 
 				"fcl_freight_local_service"
 			]				
 		}

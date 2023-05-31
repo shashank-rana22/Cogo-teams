@@ -24,8 +24,7 @@ const useGetStep3Data = ({
 	let notMainService = false;
 
 	(servicesList || []).forEach((serviceObj) => {
-		if (serviceObj.service_type === 'fcl_freight_service'
-			|| (serviceObj.service_type === 'fcl_freight_local_service'
+		if ((serviceObj.service_type === 'fcl_freight_local_service'
 			&& trade_type === 'import' && serviceObj.trade_type === 'export')
 		) {
 			notMainService = true;
