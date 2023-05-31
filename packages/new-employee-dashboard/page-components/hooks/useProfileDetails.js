@@ -116,6 +116,7 @@ const useProfileDetails = () => {
 	const params = {
 		id                     : profile_id,
 		document_data_required : true,
+		offer_letter_required  : true,
 	};
 
 	const [{ loading, data }, trigger] = useHarbourRequest(

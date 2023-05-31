@@ -1,5 +1,11 @@
 .container {
-	margin-top: 20px;
+	margin-top: 12px;
+}
+
+.filter_container {
+	display: flex;
+	align-items: baseline;
+	justify-content: space-between;
 }
 
 .name_and_email {

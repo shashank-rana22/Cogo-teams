@@ -12,6 +12,7 @@ function StyledTable({ columns = [], data = [], loading = false }) {
 			</div>
 		);
 	}
+
 	return (
 		<section className={styles.container}>
 			<Table columns={columns} data={data} loading={loading} />

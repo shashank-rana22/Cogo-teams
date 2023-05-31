@@ -1,6 +1,8 @@
 import { Avatar, Button, Placeholder } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
+
+import useUpdateEmployeeDeatils from '../../hooks/useUpdateEmployeeDetails';
 
 import styles from './styles.module.css';
 
@@ -8,10 +10,13 @@ function Header({
 	detail,
 	loading,
 	setShowCtcBreakupModal,
-	setCtcStructure = () => {},
-	ctcStructure = {},
+	getEmployeeDetails,
+	offerLetter,
+	offerLetterApiLoading,
 }) {
-	const { name, employee_code, designation, passport_size_photo_url } = detail || {};
+	const { id, name, employee_code, designation, passport_size_photo_url, status } = detail || {};
+
+	const { updateEmployeeStatus, btnloading } = useUpdateEmployeeDeatils({ id, status, getEmployeeDetails });
 
 	return (
 		<div className={styles.container}>
@@ -59,12 +64,20 @@ function Header({
 					type="button"
 					themeType="secondary"
 					style={{ marginLeft: 12 }}
+					loading={loading || btnloading || offerLetterApiLoading}
 				>
-					Add CTC breakup
+					{isEmpty(offerLetter) ? 'Add CTC breakup' : 'View CTC breakup'}
 				</Button>
-				<Button type="button" style={{ marginLeft: 12 }}>
-					Reject Candidate
+
+				<Button
+					type="button"
+					style={{ marginLeft: 12 }}
+					onClick={() => { updateEmployeeStatus(); }}
+					loading={loading || btnloading || offerLetterApiLoading}
+				>
+					{status === 'active' ? 'Reject Candidate' : 'Reactivate Candidate Profile'}
 				</Button>
+
 			</div>
 		</div>
 	);

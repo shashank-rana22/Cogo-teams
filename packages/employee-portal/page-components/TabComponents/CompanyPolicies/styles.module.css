@@ -23,6 +23,7 @@
 
 .flex_wrapper {
 	display: flex;
+	flex-wrap: wrap;
 }
 
 .header_wrapper {
@@ -30,4 +31,10 @@
 	justify-content: center;
 	padding-bottom: 4px;
 	font-weight: 700;
+}
+
+.submit{
+	display: flex;
+	justify-content: space-between;
+	padding-top: 16px;
 }

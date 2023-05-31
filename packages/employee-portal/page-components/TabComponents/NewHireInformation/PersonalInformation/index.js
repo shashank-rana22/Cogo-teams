@@ -33,7 +33,7 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 		const mapping = {
 			mobile_number: {
 				number       : content?.detail?.mobile_number,
-				country_code : content?.detail?.mobile_country_code || +91,
+				country_code : content?.detail?.mobile_country_code || '+91',
 			},
 			emergency_contact_details: {
 				mobile_number: {
@@ -42,6 +42,7 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 				},
 			},
 		};
+
 		controlsvalue.forEach((item) => {
 			if (item?.name === 'mobile_number') {
 				setValue(
@@ -49,9 +50,10 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 					mapping[item.name]
 					|| content?.detail?.[item.name],
 				);
-			} else if (item?.name === 'date_of_birth'
+			} else if ((item?.name === 'date_of_birth'
 				|| item?.name === 'date_of_joining'
-				|| item?.name === 'updated_at' || item?.name === 'created_at') {
+				|| item?.name === 'updated_at' || item?.name === 'created_at')
+				&& content?.detail?.[item?.name]) {
 				setValue(item.name, new Date(content?.detail?.[item?.name]));
 			} else if (item?.name === 'emergency_contact_details') {
 				setValue(
