@@ -7,7 +7,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 	if (search_type === 'fcl_cfs') {
 		if (trade_type === 'export') {
 			return {
-				port_id             : primary_service?.port?.id,
+				port_id             : primary_service?.origin_port?.id,
 				trade_type,
 				cargo_handling_type : formValues?.cargo_handling_type,
 			};
