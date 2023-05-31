@@ -10,7 +10,7 @@ const handleDownload = (val) => {
 	}
 };
 
-function MoreDetails({ primaryServiceDetails = {}, approvals }) {
+function MoreDetails({ primaryServiceDetails = {}, approvals, tax_total_price_currency, tax_total_price_discounted }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
@@ -48,9 +48,19 @@ function MoreDetails({ primaryServiceDetails = {}, approvals }) {
 				<div className={styles.cargo_value}>
 					<div style={{ color: '#828282' }}>
 						Total Frieght value:
+						{' '}
+						{tax_total_price_discounted}
+						{' '}
+						{
+							tax_total_price_currency
+						}
 					</div>
 					<div style={{ color: '#828282' }}>
 						Total Cargo value:
+						{' '}
+						{primaryServiceDetails?.[0]?.cargo_value}
+						{' '}
+						{primaryServiceDetails?.[0]?.cargo_value_currency}
 					</div>
 					<div className={styles.eligibilty} style={{ backgroundColor: '#FDEBE9' }}>
 						<div style={{

@@ -28,9 +28,15 @@ const handleTimer = (end_date) => {
 };
 
 function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} }) {
-	const { services, primary_service, approvals, importer_exporter, source } = item || {};
+	const { services, primary_service, approvals, importer_exporter, source, checkout_detail = {} } = item || {};
 	const { agents } = importer_exporter;
 	const ownerName = agents?.[0]?.name;
+	const { rate } = checkout_detail || {};
+
+	const {
+		tax_total_price_discounted,
+		tax_total_price_currency,
+	} = rate;
 
 	const [showDetails, setShowDetails] = useState(false);
 
@@ -164,7 +170,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 								</div>
 							</div>
 
-							<div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between' }}>
+							<div style={{ display: 'flex', alignItems: 'center' }}>
 								<div className={styles.primary_text}>
 									Shipping line :
 									<div className={styles.secondary_text}>
@@ -174,17 +180,12 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 								<div className={styles.primary_text}>
 									Freight Value :
 									<div className={styles.secondary_text}>
-										{item?.total_price || '--'}
+										{tax_total_price_discounted?.toFixed(2) || '--'}
 										{' '}
-										{item?.total_price_currency}
+										{tax_total_price_currency}
 									</div>
 								</div>
-								<div className={styles.primary_text}>
-									Payment mode :
-									<div className={styles.secondary_text}>
-										Hard code
-									</div>
-								</div>
+
 							</div>
 
 						</div>
@@ -237,9 +238,8 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 						<MoreDetails
 							primaryServiceDetails={primaryServiceDetails}
 							approvals={approvals}
-							item={item}
-							refetchBookingList={refetchBookingList}
-							filters={filters}
+							tax_total_price_discounted={tax_total_price_discounted}
+							tax_total_price_currency={tax_total_price_currency}
 						/>
 					</div>
 				) : null}
@@ -248,11 +248,11 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 					? (<StatusApproval filters={filters} item={item} refetchBookingList={refetchBookingList} />) : null}
 
 				<div
+					role="presentation"
 					className={styles.take_actions}
 					style={{
 						backgroundColor: showDetails ? '#ffffff' : '#FDFBF6',
 					}}
-					role="presentation"
 					onClick={() => setShowDetails(!showDetails)}
 				>
 					{showDetails ? 'Show less' : 'Take Action'}
