@@ -16,10 +16,12 @@ const MAPPING = {
 function StatusApproval({ item, refetchBookingList }) {
 	const [showModal, setShowModal] = useState(false);
 
-	const { control, handleSubmit, formState:{ errors = {} }, watch	} = useForm();
+	const { checkout_approvals = [] } = item;
+
+	const { control, handleSubmit, formState:{ errors = {} }, watch, setValue } = useForm();
 
 	const { updateState = () => {}, loading } = useStateUpdate({
-		id: item?.checkout_approvals?.[0]?.id,
+		id: checkout_approvals?.[0]?.id,
 		refetchBookingList,
 		setShowModal,
 		showModal,
@@ -56,7 +58,13 @@ function StatusApproval({ item, refetchBookingList }) {
 						) : null}
 
 						{showModal === 'approved' ? (
-							<ApprovalForm item={item} control={control} errors={errors} formValues={formValues} />
+							<ApprovalForm
+								control={control}
+								errors={errors}
+								setValue={setValue}
+								formValues={formValues}
+								checkout_approvals={checkout_approvals}
+							/>
 						) : null}
 
 					</Modal.Body>

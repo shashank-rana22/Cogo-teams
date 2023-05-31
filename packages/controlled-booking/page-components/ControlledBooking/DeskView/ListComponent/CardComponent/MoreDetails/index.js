@@ -11,6 +11,8 @@ const handleDownload = (val) => {
 };
 
 function MoreDetails({ primaryServiceDetails = {}, approvals, tax_total_price_currency, tax_total_price_discounted }) {
+	const { advance_payment_info } = approvals?.[0] || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>

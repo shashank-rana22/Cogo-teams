@@ -28,7 +28,13 @@ const handleTimer = (end_date) => {
 };
 
 function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} }) {
-	const { services, primary_service, approvals, importer_exporter, source, checkout_detail = {} } = item || {};
+	const {
+		services,
+		primary_service,
+		checkout_approvals,
+		importer_exporter,
+		source, checkout_detail = {},
+	} = item || {};
 	const { agents } = importer_exporter;
 	const ownerName = agents?.[0]?.name;
 	const { rate } = checkout_detail || {};
@@ -237,7 +243,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 					<div className={styles.more_details}>
 						<MoreDetails
 							primaryServiceDetails={primaryServiceDetails}
-							approvals={approvals}
+							approvals={checkout_approvals}
 							tax_total_price_discounted={tax_total_price_discounted}
 							tax_total_price_currency={tax_total_price_currency}
 						/>

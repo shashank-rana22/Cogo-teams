@@ -1,11 +1,18 @@
 import {
 	ChipsController, InputController, RadioGroupController, SelectController,
 } from '@cogoport/forms';
-import React from 'react';
+import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-function ApprovalForm({ errors, control, formValues }) {
+function ApprovalForm({ errors, setValue, control, formValues, checkout_approvals }) {
+	useEffect(() => {
+		setValue(
+			'advance_payment',
+			checkout_approvals?.[0]?.advance_payment_info?.is_required ? 'required' : 'not_required',
+		);
+	}, [checkout_approvals, setValue]);
+
 	return (
 		<>
 			<div className={styles.label}>Advance Payment</div>
@@ -19,7 +26,7 @@ function ApprovalForm({ errors, control, formValues }) {
 						label: 'Required', value: 'required',
 					},
 					{
-						label: 'Not Required', value: 'not_requried',
+						label: 'Not Required', value: 'not_required',
 					},
 					]}
 					className={styles.checkbox_controller}
@@ -44,8 +51,11 @@ function ApprovalForm({ errors, control, formValues }) {
 									label: 'USD', value: 'usd',
 								}, {	label: 'INR', value: 'inr' }]}
 								rules={{ required: 'This field is required' }}
+								value={checkout_approvals?.[0]?.advance_payment_info?.amount_currency}
+								disabled
 							/>
 						</div>
+
 						<div className={styles.input}>
 							<InputController
 								name="amount"
@@ -53,6 +63,8 @@ function ApprovalForm({ errors, control, formValues }) {
 								size="md"
 								placeholder="Enter amount"
 								rules={{ required: 'This field is required' }}
+								value={checkout_approvals?.[0]?.advance_payment_info?.amount}
+								disabled
 							/>
 						</div>
 

@@ -1,3 +1,4 @@
+import { Tooltip } from '@cogoport/components';
 import { IcMDownload } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
@@ -54,21 +55,19 @@ function ContainerDetails({ details, index }) {
 					<div className={styles.commodity_text}>
 						HS Code:
 						<div style={{ marginLeft: 4 }}>
-							{details?.containers_count}
+							{details?.hs_code?.hsCode}
 							{' '}
-							Ctr
 						</div>
 					</div>
 
 					<div className={styles.commodity_text}>
-						{startCase(details?.container_type)}
-						:
 
-						<div style={{ marginLeft: 4 }}>
-							{startCase(details?.commodity)}
-							{' '}
+						<Tooltip content={details?.hs_code?.description}>
+							<div className={styles.hs_code_text}>
+								{details?.hs_code?.description}
+							</div>
+						</Tooltip>
 
-						</div>
 					</div>
 
 					{details?.cargo_value ? (
