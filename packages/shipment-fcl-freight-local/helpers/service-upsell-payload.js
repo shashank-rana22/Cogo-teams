@@ -20,31 +20,31 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 	const {
 		port,
 		commodity,
-		volume,
-		weight,
-		packages_count,
 		bls_count,
+		container_size,
+		container_type,
+		containers_count,
 	} = primary_service || {};
 
 	const common = {
-		commodity : commodity !== 'all_commodity' ? commodity : 'general',
-		volume    : Number(volume),
-		weight    : Number(weight),
-		status    : 'active',
+		containers_count : Number(containers_count),
+		container_size,
+		container_type,
+		status           : 'active',
 		trade_type,
 	};
 
 	const common2 = {
-		bls_count      : Number(bls_count || 1),
-		packages_count : Number(packages_count || 1),
+		bls_count: Number(bls_count || 1),
 	};
 
 	if (search_type === 'fcl_customs') {
 		if (trade_type === 'export') {
 			return [{
-				location_id: port?.id,
+				port_id             : port?.id,
 				...common,
 				...common2,
+				cargo_handling_type : formValues?.cargo_handling_type,
 			}];
 		} return [{
 			location_id: port?.id,
@@ -53,7 +53,22 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		}];
 	}
 
-	if (search_type === 'ltl_freight') {
+	if (search_type === 'fcl_cfs') {
+		if (trade_type === 'export') {
+			return [{
+				port_id             : port?.id,
+				...common,
+				...common2,
+				cargo_handling_type : formValues?.cargo_handling_type,
+			}];
+		} return [{
+			location_id: port?.id,
+			...common,
+			...common2,
+		}];
+	}
+
+	if (search_type === 'trailer_freight') {
 		if (trade_type === 'export') {
 			return [{
 				origin_location_id     : formValues?.location_id,
@@ -80,7 +95,8 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 				trip_type               : 'one_way',
 				truck_type              : formValues?.truck_type,
 				trucks_count            : Number(formValues?.trucks_count),
-				...common,
+				status                  : 'active',
+				trade_type,
 				commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,
 
 			}];
