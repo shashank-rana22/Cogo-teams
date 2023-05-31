@@ -1,5 +1,5 @@
 .list {
-	min-height: 220px`;
+	min-height: 220px;
 	max-height: 460px;
 	overflow-y: auto;
 
@@ -23,7 +23,8 @@
 	color: #828282;
 }
 
-.agent_name, .count {
+.agent_name,
+.count {
 	font-size: 14px;
 	font-weight: 500;
 }
