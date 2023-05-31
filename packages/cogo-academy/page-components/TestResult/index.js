@@ -38,6 +38,8 @@ function TestResult() {
 		},
 	}, { manual: false });
 
+	const { not_attempted = false } = data;
+
 	const { data: summaryData = {} } = data || {};
 
 	const handleGoBack = () => {
@@ -80,8 +82,13 @@ function TestResult() {
 						<span><b>{userName}</b></span>
 					</div>
 				)}
-
-			<Summary summaryData={summaryData} />
+     
+	        { not_attempted ? 
+	          <div className={styles.attempted_data}> 
+	            You haven't attempted this test. Hence, there's no data to show here.
+	          </div> 
+			  : <Summary summaryData={summaryData} />}
+			
 
 			<QnA
 				user_name={view === 'admin' ? userName : name}
