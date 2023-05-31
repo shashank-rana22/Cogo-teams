@@ -96,20 +96,19 @@ function TestCard({ test_card }) {
 				)}
 			</div>
 
-			{['active', 're-test', 'completed'].includes(current_status) && attempts_count < maximum_attempts
-				? (
-					<div
-						role="presentation"
-						onClick={() => handleRedirect({ test_id: id, redirect_to: 'test', push })}
-						className={styles.arrow}
-					>
-						<IcMArrowRight
-							height={40}
-							width={30}
-						/>
-					</div>
-				)
-				: null}
+		      {['active', 'retest'].includes(current_status) || 
+		      (current_status === 'completed' && attempts_count < maximum_attempts)
+	          ? (
+		     <div
+			  role="presentation"
+			  onClick={() => handleRedirect({ test_id: id, redirect_to: 'test', push })}
+			  className={styles.arrow}
+		      >
+			 <IcMArrowRight
+				height={40}
+				width={30}
+			 />
+		    </div>) : null}
 		</div>
 	);
 }
