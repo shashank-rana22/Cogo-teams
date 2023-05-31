@@ -83,14 +83,15 @@ function TestResult() {
 						<span><b>{userName}</b></span>
 					</div>
 				)}
-     
-	        { not_attempted ? 
+
+	        {not_attempted ? 
 	          <div className={styles.attempted_data}> 
 	            You haven't attempted this test. Hence, there's no data to show here.
 				<EmptyState className={styles.emptystate}/>
 	          </div> 
-			  : <Summary summaryData={summaryData} />}
-			
+			  : 
+			  <Summary summaryData={summaryData} 
+			  />}
 
 			<QnA
 				user_name={view === 'admin' ? userName : name}

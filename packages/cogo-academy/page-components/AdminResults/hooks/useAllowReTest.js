@@ -10,7 +10,7 @@ function useAllowReTest({ setShowRetestModal = () => {}, test_id, refetchTest = 
 
 	const [{ loading = false }, trigger] = useRequest({
 		method : 'post',
-		url    : 're_allow_test',
+		url    : '/re_allow_test',
 	}, { manual: true });
 
 	const onSubmit = async (values) => {
