@@ -4,7 +4,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import getServiceNameforTableColumn from '../../../helpers/getServiceNameforTableColumn';
 
 export const tableColumn = ({ serviceItem = {} }) => {
-	console.log(serviceItem, " :serviceItem");
 	const trade_type = serviceItem?.trade_type;
 	const currencyLocale = GLOBAL_CONSTANTS.currency_locale.INR;
 
@@ -14,33 +13,33 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : serviceName,
 			render : (item) => item?.name || '-',
-			span   : 2,
+			span   : 3,
 		},
 		{
 			label  : 'Currency',
 			render : (item) => item?.currency || '-',
-			span   : 1,
+			span   : 1.2,
 		},
 		{
 			label  : 'Rate',
 			render : (item) => Number(item?.price_discounted || 0).toLocaleString(currencyLocale) || 0,
-			span   : 1,
+			span   : 1.2,
 		},
 		{
 			label  : 'Quantity',
 			render : (item) => item?.quantity || 0,
-			span   : 1,
+			span   : 1.2,
 		},
 		{
 			label  : 'Discount',
 			render : (item) => Number(item?.discount_price || 0).toLocaleString(currencyLocale) || 'NA',
-			span   : 1,
+			span   : 1.2,
 		},
 
 		{
 			label  : 'Exc. Rate',
 			render : (item) => Number(item?.exchange_rate || 0).toLocaleString(currencyLocale) || 'NA',
-			span   : 1,
+			span   : 1.2,
 		},
 		{
 			label  : 'Tax Amt.',

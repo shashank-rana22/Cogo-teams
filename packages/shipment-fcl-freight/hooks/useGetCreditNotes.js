@@ -21,11 +21,8 @@ const useGetCreditNotes = () => {
 	const getCreditNoteList = useCallback(async () => {
 		try {
 			const res = await trigger();
-
 			setApiData(res.data || {});
 		} catch (err) {
-			setApiData({});
-
 			toastApiError(err);
 		}
 	}, [trigger]);
