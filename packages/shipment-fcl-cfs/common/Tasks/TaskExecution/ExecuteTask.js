@@ -2,10 +2,8 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
-import useTaskRpa from '../../../hooks/useTaskRpa';
 
 import {
-	UploadBookingNote,
 	UploadCargoArrival,
 	UploadContainerDetails,
 	MarkConfirmServices,
@@ -16,10 +14,8 @@ import useTaskExecution from './helpers/useTaskExecution';
 function ExecuteTask({
 	task = {}, onCancel = () => {}, taskListRefetch = () => {},
 	selectedMail = [],
-	setSelectedMail = () => {},
 }) {
 	const { taskConfigData, loading } = useGetTaskConfig({ task });
-	const { mailLoading } = useTaskRpa({ setSelectedMail, task });
 
 	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
@@ -49,21 +45,6 @@ function ExecuteTask({
 				primaryService={primary_service}
 				shipment_data={shipment_data}
 				servicesList={servicesList}
-			/>
-		);
-	}
-
-	if (task.task === 'upload_booking_note') {
-		if (mailLoading) {
-			return <div>Loading...</div>;
-		}
-
-		return (
-			<UploadBookingNote
-				task={task}
-				onCancel={onCancel}
-				taskListRefetch={taskListRefetch}
-				taskConfigData={taskConfigData}
 			/>
 		);
 	}

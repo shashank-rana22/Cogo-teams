@@ -39,7 +39,6 @@ const getControls = ({
 
 	const getIds = () => {
 		const ids = {
-			fcl_shipping_line_id     : '',
 			haulage_shipping_line_id : '',
 		};
 
@@ -49,9 +48,6 @@ const getControls = ({
 				&& service?.haulage_type === 'carrier'
 			) {
 				ids.haulage_shipping_line_id = service?.shipping_line_id || '';
-			}
-			if (service?.service_type === 'fcl_freight_service') {
-				ids.fcl_shipping_line_id = service.shipping_line_id || '';
 			}
 		});
 		return ids;
@@ -75,11 +71,6 @@ const getControls = ({
 
 	const controls = [];
 	const data = getIds();
-
-	if (['fcl_freight', 'fcl_freight_service'].includes(service_type)) {
-		shipping_line.value = data.fcl_shipping_line_id;
-		controls.push(shipping_line);
-	}
 
 	if (iscarrierHaulage() && service_type === 'haulage_freight_service') {
 		shipping_line.value = data.haulage_shipping_line_id;
