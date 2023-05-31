@@ -1,4 +1,5 @@
 import { Pill } from '@cogoport/components';
+import { v4 as uuid } from 'uuid';
 
 import getPillsFormat from '../../../../../../helpers/getPillsFormat';
 
@@ -11,8 +12,8 @@ function PopoverContent({ list = [] }) {
 				const pills = getPillsFormat(item);
 
 				return (
-					<div className={styles.pills_container}>
-						{pills?.map((pill) => <Pill>{pill || ''}</Pill>)}
+					<div className={styles.pills_container} key={uuid()}>
+						{pills?.map((pill) => <Pill key={pill}>{pill || ''}</Pill>)}
 					</div>
 				);
 			})}

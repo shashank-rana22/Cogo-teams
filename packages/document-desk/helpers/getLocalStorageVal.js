@@ -22,22 +22,15 @@ const getLocalStorageVal = () => {
 	const { filters = {}, scopeFilters = {} } = storedValues || {};
 	let { stepperTab, activeTab, shipment_type } = storedValues || {};
 
-	console.log(storedValues, 'storedValues');
-	console.log(shipment_type, 'shipmentType');
 	if (typeof filters?.page !== 'number') {
 		filters.page = 1;
 	}
 
-	console.log(SHIPMENT_TYPES_CONFIGS, 'SHIPMENT_TYPES_CONFIGS');
 	if (!SHIPMENT_TYPES_CONFIGS?.some((shipment_type_obj) => shipment_type_obj.value === shipment_type)) {
-		console.log('1234');
 		shipment_type = 'fcl_freight';
 	}
 
-	console.log(shipment_type, 'shipmentType 222');
-	console.log(ResolveConfigs[shipment_type], 'ResolveConfigs[shipment_type]');
 	if (!ResolveConfigs[shipment_type].stepper_tabs.some((tab) => tab.value === stepperTab)) {
-		console.log('222');
 		stepperTab = 'export';
 		activeTab = 'awaiting_service_provider_confirmation';
 		filters.isCriticalOn = false;
