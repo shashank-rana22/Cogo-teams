@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
 	const { handleSubmit, control, formState: { errors }, reset, setValue } = useForm();
 
-	const isUpdate = !isEmpty(showModal);
+	const isUpdate = (Object.keys(showModal || {}) || []).length > 0;
 	const url = isUpdate ? '/update_document_template' : '/create_document_template';
 	const [{ loading }, trigger] = useHarbourRequest({
 		url,
