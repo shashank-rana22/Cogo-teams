@@ -18,11 +18,10 @@ function EditInvoice({
 	refetch = () => {},
 	shipment_data = {},
 }) {
-	const { role_ids } = useSelector(({ profile, general }) => ({
-		role_ids : profile.partner?.user_role_ids,
-		isMobile : general.isMobile,
+	const { role_ids } = useSelector(({ profile }) => ({
+		role_ids: profile.partner?.user_role_ids,
 	}));
-	const isFclFreight = [geo.uuid.admin_id, geo.uuid.super_admin_id]
+	const isAdminSuperAdmin = [geo.uuid.admin_id, geo.uuid.super_admin_id]
 		.some((ele) => role_ids?.includes(ele));
 
 	const {
@@ -44,8 +43,7 @@ function EditInvoice({
 		info         : <Info />,
 	});
 
-	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service'
-	&& !isFclFreight
+	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service' && !isAdminSuperAdmin
 	&& shipment_data?.serial_id > 130000;
 
 	const formValues = watch();
@@ -91,6 +89,7 @@ function EditInvoice({
 						fields={controls}
 						errors={errors}
 						customValues={newFormValues}
+						disabledProps={disabledProps}
 					/>
 				</div>
 

@@ -53,7 +53,7 @@ function EditServiceCharges(props) {
 		return item;
 	});
 
-	const allOptions = useMemo(() => [...options, ...miscCharges], []);
+	const allOptions = useMemo(() => [...options, ...miscCharges], [miscCharges, options]);
 
 	useEffect(() => {
 		if (allOptions.length && onOptionsChange) {

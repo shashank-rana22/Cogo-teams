@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useMemo } from 'react';
 
@@ -15,6 +16,7 @@ function Child({
 	customValues = {},
 	showDeleteButton = true,
 	error = {},
+	disableServiceEdit = false,
 }) {
 	const keys = useMemo(
 		() => Array(controls.length).fill(null).map(() => Math.random()),
@@ -51,8 +53,15 @@ function Child({
 
 				{showDeleteButton
 					? (
-						<div className={styles.delete_button_container}>
-							<IcMDelete width={20} height={20} onClick={() => remove(index, 1)} />
+						<div className={
+							cl`${styles.delete_button_container} ${disableServiceEdit ? styles.disableServiceEdit : ''}`
+}
+						>
+							<IcMDelete
+								width={20}
+								height={20}
+								onClick={!disableServiceEdit ? () => remove(index, 1) : null}
+							/>
 						</div>
 					) : null}
 			</div>
