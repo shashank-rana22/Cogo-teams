@@ -2,7 +2,6 @@ import { Button, Input, Popover, Tooltip } from '@cogoport/components';
 import { AsyncSelectController, SelectController, useForm } from '@cogoport/forms';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { IcMRefresh, IcMSearchlight } from '@cogoport/icons-react';
-import { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
 import { amountCollectionFilters } from '../../configurations/on-account-collections/accountCollectionFilter';
@@ -17,7 +16,6 @@ import styles from './styles.module.css';
 const searchPlaceholder = 'Search by Customer Name / UTR No /Doc. Value';
 
 function OnAccountCollection() {
-	const [sort, setSort] = useState({});
 	const { control, watch, formState: { errors = {} } } = useForm();
 	const entityType = watch('entityCode');
 	const currencyType = watch('currency');
@@ -28,7 +26,7 @@ function OnAccountCollection() {
 		loading,
 		clearFilters,
 		refetch,
-	} = useAccountCollection({ sort, entityType, currencyType });
+	} = useAccountCollection({ entityType, currencyType });
 
 	const onPageChange = (val:number) => {
 		setGlobalFilters((prev) => ({ ...prev, page: val }
@@ -136,7 +134,14 @@ function OnAccountCollection() {
 					</div>
 				</div>
 
-				<CustomTable data={data} onPageChange={onPageChange} refetch={refetch} loading={loading} />
+				<CustomTable
+					data={data}
+					onPageChange={onPageChange}
+					refetch={refetch}
+					loading={loading}
+					setGlobalFilters={setGlobalFilters}
+					globalFilters={globalFilters}
+				/>
 			</div>
 
 		</div>

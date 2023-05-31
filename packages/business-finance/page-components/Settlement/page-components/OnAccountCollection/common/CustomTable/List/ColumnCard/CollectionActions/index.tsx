@@ -304,7 +304,7 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 			{show && (
 				<ManualEntry
 					show={show}
-					onClose={() => setShow(false)}
+					setShow={setShow}
 					isEdit
 					selectedItem={selectedItem}
 					refetch={refetch}

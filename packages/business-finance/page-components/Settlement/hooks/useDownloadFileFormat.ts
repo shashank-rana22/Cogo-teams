@@ -6,15 +6,13 @@ const useDownloadFileFormat = ({
 	value,
 	setShowModal,
 }) => {
-	const onClose = () => { setShowModal({ download_format: false }); };
-
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/sales/accounts/download-sample',
 			authKey : 'post_sales_accounts_download_sample',
 			method  : 'post',
 		},
-		{ manual: false },
+		{ manual: true },
 	);
 
 	const payload = {
@@ -30,7 +28,7 @@ const useDownloadFileFormat = ({
 			const downloadFileFormat = `${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}
             /sales/download?id=${rest.data}`;
 			if (rest.data) window.open(downloadFileFormat);
-			onClose();
+			setShowModal({ download_format: false });
 		} catch (err) {
 			Toast.error(err?.response?.data?.message);
 		}

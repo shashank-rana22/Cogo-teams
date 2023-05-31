@@ -81,6 +81,7 @@ const controls = () => [
 		label       : 'Default Currency',
 		name        : 'currency',
 		type        : 'select',
+		value       : geo.country.currency.code,
 		rules       : { required: 'Required' },
 		span        : 3.9,
 		options     : getCurrencyOptions(),
@@ -165,7 +166,10 @@ interface ControlInterface {
 		transactionDate?:Date
 		payMode?:string
 	}
-
+	setValue?: any
+	setBankDetails?: React.Dispatch<React.SetStateAction<any>>
+	docTypeValue?:string
+	accountMode?:string
 }
 
 const getControls = ({
@@ -176,6 +180,7 @@ const getControls = ({
 	setTradeId,
 	setShowBprNumber,
 	itemData,
+	docTypeValue,
 }:ControlInterface) => {
 	const controlsData = controls();
 	return controlsData.map((control) => {
@@ -189,6 +194,23 @@ const getControls = ({
 				},
 			};
 		}
+		if (['docType', 'bankId', 'paymentMode'].includes(name)) {
+			if (docTypeValue === 'TDS') {
+				if (name === 'bankId') {
+					return {
+						...control,
+						disabled: true,
+					};
+				}
+				if (name === 'paymentMode') {
+					return {
+						...control,
+						disabled: true,
+					};
+				}
+			}
+		}
+
 		if (name === 'bankId' && isEdit) {
 			return {
 				...control,
@@ -268,7 +290,7 @@ const getControls = ({
 				},
 			};
 		}
-		return control;
+		return { ...control };
 	});
 };
 

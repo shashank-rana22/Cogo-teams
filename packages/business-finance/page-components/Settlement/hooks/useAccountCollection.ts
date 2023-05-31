@@ -16,18 +16,24 @@ interface GlobalInterface {
 	}
 	paymentDocumentStatus?:string
 	docType?:string
+	sortBy?: string,
+	sortType?: string,
 }
 
 const MAX_FILTERS_LENGTH = 3;
 
-const useAccountCollection = ({ sort = {}, entityType, currencyType }) => {
+const useAccountCollection = ({ entityType, currencyType }) => {
 	const [globalFilters, setGlobalFilters] = useState<GlobalInterface>({
-		page    : 1,
-		accMode : 'AR',
+		page     : 1,
+		accMode  : 'AR',
+		sortBy   : '',
+		sortType : 'ASC',
 	});
 	const { query, debounceQuery } = useDebounceQuery();
 
-	const { search, date, paymentDocumentStatus, docType, accMode, page } = globalFilters;
+	const {
+		search, date, paymentDocumentStatus, docType, accMode, page, sortBy, sortType,
+	} = globalFilters;
 
 	const [{ data, loading }, listApiTrigger] = useRequestBf(
 		{
@@ -70,14 +76,16 @@ const useAccountCollection = ({ sort = {}, entityType, currencyType }) => {
 					query        : query || undefined,
 					entityType   : entityType || undefined,
 					currencyType : currencyType || undefined,
-					...sort,
+					sortBy,
+					sortType,
 				},
 			});
 		} catch (error) {
 			Toast.error('Someting went wrong, we are working on it!');
 		}
 	}, [accMode, api, currencyType, date?.endDate,
-		date?.startDate, docType, entityType, page, paymentDocumentStatus, query, sort]);
+		date?.startDate, docType, entityType, page, paymentDocumentStatus, query, sortBy,
+		sortType]);
 	const clearFilters = () => {
 		if (Object.keys(globalFilters).length > MAX_FILTERS_LENGTH) {
 			setGlobalFilters({
@@ -92,7 +100,8 @@ const useAccountCollection = ({ sort = {}, entityType, currencyType }) => {
 
 	useEffect(() => {
 		refetch();
-	}, [query, date, sort, entityType, currencyType, paymentDocumentStatus, docType, refetch]);
+	}, [query, date, sortBy,
+		sortType, entityType, currencyType, paymentDocumentStatus, docType, refetch]);
 
 	useEffect(() => {
 		debounceQuery(search);

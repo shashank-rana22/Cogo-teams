@@ -9,10 +9,10 @@ export interface UploadFileInterface {
 	setShowModal?: React.Dispatch<React.SetStateAction<ModalInterface>>
 	refetch?:() => void
 	show?:boolean
-	onClose?:() => void
+	setShow?: any
 	isEdit?:boolean
 	selectedItem?:object
-	itemData?:object
+	itemData?:any
 	control?:object
 	watch?:Function
 }

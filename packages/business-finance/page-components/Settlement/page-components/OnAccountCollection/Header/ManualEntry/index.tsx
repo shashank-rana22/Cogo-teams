@@ -6,60 +6,72 @@ import { UploadFileInterface } from '../../interface';
 import CreateRequest from './CreateRequest';
 import styles from './styles.module.css';
 
-function ManualEntry({ showModal, setShowModal, refetch, isEdit, selectedItem, show, itemData }:UploadFileInterface) {
-	const onClose = () => setShowModal({ manual_entry: false });
+function ManualEntry({
+	showModal, setShowModal = () => {}, refetch, isEdit, show, setShow = () => {}, selectedItem, itemData,
+}:UploadFileInterface) {
 	const {
 		controls,
 		control,
-		formProps,
 		errors,
 		onError,
 		createManualEntry,
-		loading,
-		disable_controls,
-		exRate,
 		handleSubmit,
 		showBprNumber,
 	} = useCreateManualEntry({
-		onClose,
+		setShowModal,
 		isEdit,
 		selectedItem,
 		refetch,
-		show,
 		itemData,
 	});
+	const handleCloseModal = () => {
+		setShowModal({ manual_entry: false });
+		setShow(false);
+	};
+
 	return (
 		<div>
 			<Modal
-				show={showModal.manual_entry}
+				show={show || showModal.manual_entry}
 				size="lg"
 				placement="center"
 				closeOnOuterClick={false}
-				onClose={() => setShowModal({ manual_entry: false })}
+				onClose={() => handleCloseModal()}
 			>
-				<Modal.Header title="Manual Entry" />
+				<Modal.Header title={(
+					<div className={styles.bpr_value}>
+						<div>Manual Entry</div>
+						{(showBprNumber || itemData?.sageOrganizationId) && (
+							<div>
+								BPR
+								{' '}
+								{' '}
+								:
+								{' '}
+								{isEdit
+									? itemData?.sageOrganizationId || '---'
+									: showBprNumber?.sage_organization_id || '---'}
+							</div>
+						)}
+					</div>
+
+				)}
+				/>
 
 				<Modal.Body>
-					{(showBprNumber || itemData?.sageOrganizationId) && (
-						<div className={styles.bpr_value}>
-							BPR:
-							{' '}
-							{isEdit
-								? itemData?.sageOrganizationId || ''
-								: showBprNumber?.sage_organization_id || ''}
-						</div>
-					)}
 					<CreateRequest
 						control={control}
 						controls={controls}
 						errors={errors}
 					/>
 				</Modal.Body>
+
 				<Modal.Footer>
 					<Button
 						size="md"
 						style={{ marginRight: 10 }}
 						themeType="secondary"
+						onClick={() => handleCloseModal()}
 					>
 						Cancel
 					</Button>

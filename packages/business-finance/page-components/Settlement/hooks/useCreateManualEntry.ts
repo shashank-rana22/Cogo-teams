@@ -1,3 +1,4 @@
+/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
@@ -5,42 +6,70 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest, useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 import getControls from '../configurations/on-account-collections/manualEntryControls';
 
+interface SelectedInterface {
+	entityType?:string,
+	tradePartyMappingId?:string,
+	taggedOrganizationId?:string,
+	id?:string,
+	paymentCode?:string,
+	transactionDate?:Date
+}
+
+interface BankInterface {
+	bankAccountNumber?:string
+	bankName?:string
+}
 const useCreateManualEntry = ({
-	onClose,
+	setShowModal,
 	isEdit = false,
 	selectedItem = {},
 	refetch,
 	itemData,
 }) => {
 	const [errors, setErrors] = useState({});
-	const { profile } = useSelector((state) => state || {});
+	const profile = useSelector((state:any) => state.profile || {});
+	const { id:profileId = '', name:profileName = '' } = profile?.user || {};
 	const [editMode, setEditMode] = useState(false);
-	const [showBprNumber, setShowBprNumber] = useState();
+	const [showBprNumber, setShowBprNumber] = useState({ sage_organization_id: '' });
 	const [ledgerCurrency, setLedgerCurrency] = useState();
 	const [tpId, setTradeId] = useState();
 	const {
-		orgSerialId,
 		entityType,
-		currency,
-		exchangeRate,
-		bankId,
-		utr,
-		amount,
-		ledAmount,
-		ledCurrency,
-		paymentDate,
-		paymentMode,
-		customerId,
 		tradePartyMappingId,
 		taggedOrganizationId,
 		id,
-		accMode,
 		paymentCode,
-	} = selectedItem;
+		transactionDate,
+	}:SelectedInterface = selectedItem;
+
+	const [bankDetails, setBankDetails] = useState<BankInterface>();
+	const [venderDataValue, setVenderDataValue] = useState({ id: '', organization_id: '' });
+	const { bankAccountNumber, bankName } = bankDetails || {};
+	const isVenderExists = tradePartyMappingId || venderDataValue?.id;
+
+	const formProps = useForm();
+	const {
+		watch,
+		control,
+		setValue,
+		handleSubmit,
+		formState: { errors: errorVal },
+	} = formProps;
+
+	const formValues = watch();
+
+	const {
+		currency: fromCur,
+		ledCurrency: toCur,
+		accMode: accountMode,
+		paymentDate: paymentDateValue,
+		docType: docTypeValue,
+	} = formValues || {};
+
 	const controls = getControls({
 		isEdit,
 		entityType,
@@ -49,29 +78,79 @@ const useCreateManualEntry = ({
 		setTradeId,
 		setShowBprNumber,
 		itemData,
+		docTypeValue,
 	});
 	const [processedControls, setProcessedControls] = useState(controls);
-	const [fieldsData, setFieldsData] = useState({});
-	const [bankDetails, setbankDetails] = useState({});
-	const [vanderData, setVenderData] = useState({});
-	const { bankAccountNumber, bankName } = bankDetails || {};
-	const disable_controls = {
-		orgSerialId  : 'orgSerialId',
-		customerName : 'customerName',
-	};
-	const isVenderExists = tradePartyMappingId || vanderData?.id;
-	const powerControls = (newControls, bankData) => newControls.map((control) => {
-		if (control.name === 'bankId') {
+
+	const powerControls = (newControls, bankData) => newControls.map((controlValue) => {
+		const { name } = controlValue;
+
+		if (name === 'bankId') {
 			return {
-				...control,
+				...controlValue,
 				options: (bankData.bank_details || []).map((item) => ({
 					value : item.id,
 					label : `${item.beneficiary_name} (${item.account_number})`,
 				})),
 			};
 		}
-		return { ...control };
+
+		if (name === 'docType') {
+			if (accountMode === 'AP') {
+				const currentOptions = [...controlValue.options];
+				const mutatedOptions = currentOptions.slice(1);
+
+				return {
+					...controlValue,
+					options: [
+						{ label: 'Payment', value: 'PAYMENT' },
+						...mutatedOptions,
+					],
+				};
+			}
+			return {
+				...controlValue,
+				options: [...controlValue.options],
+			};
+		}
+
+		return { ...controlValue };
 	});
+
+	const [{ loading:createLoading }, createEntryTrigger] = useRequestBf(
+		{
+			url     : '/payments/accounts',
+			authKey : 'post_payments_accounts',
+			method  : 'post',
+		},
+		{ manual: true },
+	);
+
+	const [{ loading:updateLoading }, updateEntryTrigger] = useRequestBf(
+		{
+			url     : '/payments/accounts',
+			authKey : 'put_payments_accounts',
+			method  : 'put',
+		},
+		{ manual: true },
+	);
+
+	const [{ loading:exchangeLoading }, exRateTrigger] = useRequest(
+		{
+			url    : 'get_exchange_rate',
+			method : 'get',
+		},
+		{ manual: false },
+	);
+
+	const [{ data }, trigger] = useRequestBf(
+		{
+			url     : 'purchase/payable/bank/list',
+			authKey : 'get_purchase_payable_bank_list',
+			method  : 'get',
+		},
+		{ manual: true },
+	);
 
 	const formatPayload = (payload) => {
 		const newPayload = { ...payload };
@@ -82,20 +161,20 @@ const useCreateManualEntry = ({
 				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 				formatType : 'date',
 			});
-			newPayload.uploadedBy = profile.name || '';
+			newPayload.uploadedBy = profileName || '';
 			newPayload.id = id;
 		}
 
 		const { ...rest } = newPayload || {};
 		return {
 			...rest,
-			tradePartyMappingId  : tradePartyMappingId || vanderData?.id,
-			taggedOrganizationId : taggedOrganizationId || vanderData?.organization_id,
+			tradePartyMappingId  : tradePartyMappingId || venderDataValue?.id,
+			taggedOrganizationId : taggedOrganizationId || venderDataValue?.organization_id,
 			bankAccountNumber,
 			bankName,
 			paymentCode,
-			createdBy            : profile?.id,
-			updatedBy            : profile?.id,
+			createdBy            : profileId,
+			updatedBy            : profileId,
 			sageOrganizationId   : showBprNumber?.sage_organization_id,
 		};
 	};
@@ -103,55 +182,24 @@ const useCreateManualEntry = ({
 		setErrors(errs);
 	};
 
-	const formProps = useForm(processedControls);
-	const {
-		setValues,
-		watch,
-		fields,
-		control,
-		setValue,
-		handleSubmit,
-		formState: { errors: errorVal },
-	} = formProps;
-
-	const formValues = watch();
-
-	const {
-		currency: from_cur,
-		ledCurrency: to_cur,
-		accMode: accountMode,
-		paymentDate: payment_date,
-		docType: doc_type,
-	} = formValues || {};
-
 	const transactionDates = formatDate({
-		date       : payment_date,
+		date       : paymentDateValue,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 		formatType : 'date',
 	});
-	useEffect(() => {
-		const newFileds = { ...fields };
-		if (newFileds.exchangeRate && from_cur === to_cur) {
-			newFileds.exchangeRate.disabled = true;
-		}
 
-		setFieldsData(newFileds);
-		if (editMode) exchangeApi();
-	}, [from_cur, to_cur, payment_date]);
-
-	const partyType = {
-		AP : ['self', 'collection_party'],
-		AR : ['self', 'paying_party'],
-	};
-
-	const [{ data:venderData }, venderApiTrigger] = useRequest(
+	const [{ loading:venderLoading }, venderApiTrigger] = useRequest(
 		{
 			url    : 'list_organization_trade_parties',
 			method : 'get',
 		},
 		{ manual: true },
 	);
-	const vender = async () => {
+	const vender = useCallback(async () => {
+		const partyType = {
+			AP : ['self', 'collection_party'],
+			AR : ['self', 'paying_party'],
+		};
 		try {
 			const resp = await venderApiTrigger({
 				params: {
@@ -165,23 +213,15 @@ const useCreateManualEntry = ({
 			if (isEmpty(resp.data.list[0])) {
 				Toast.warn('No TradeParty Exists for the Selected Organization');
 			}
-			setVenderData(resp.data.list[0]);
+			setVenderDataValue(resp.data.list[0]);
 		} catch (error) {
-			console.log(error);
+			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}
-	};
-	useEffect(() => {
-		if (tpId && accountMode) vender();
-	}, [tpId, accountMode]);
-	const paymentM = watch('paymentMode');
+	}, [accountMode, tpId, venderApiTrigger]);
 
 	useEffect(() => {
-		const newFileds = { ...fields };
-		if (newFileds.paymentDate) {
-			newFileds.paymentDate.maxDate =	paymentM === 'CHQ' ? undefined : new Date();
-		}
-		setFieldsData(newFileds);
-	}, [paymentM]);
+		if (tpId && accountMode) vender();
+	}, [tpId, accountMode, vender]);
 
 	useEffect(() => {
 		if (errorVal) {
@@ -195,55 +235,19 @@ const useCreateManualEntry = ({
 		});
 
 		setErrors({ ...errors, ...errorVal });
-	}, [errorVal, errors]);
-
-	let docType = '';
-	switch (paymentCode) {
-		case 'REC':
-		case 'PAY':
-			docType = 'PAYMENT';
-			break;
-		case 'CTDSP':
-		case 'CTDS':
-		case 'VTDS':
-			docType = 'TDS';
-			break;
-		default:
-			break;
-	}
+	}, [JSON.stringify(errorVal), JSON.stringify(errors)]);
 
 	useEffect(() => {
 		if (isEdit) {
-			setValues({
-				orgSerialId,
-				entityType,
-				bankId,
-				currency,
-				utr,
-				amount,
-				paymentDate,
-				paymentMode,
-				ledCurrency,
-				customerId,
-				ledAmount,
-				tradePartyMappingId,
-				exchangeRate,
-				accMode,
-				docType,
+			controls.forEach((c) => {
+				setValue(c.name, selectedItem[c.name]);
 			});
+			setValue('paymentDate', new Date(transactionDate));
 		}
-	}, [isEdit]);
+	}, []);
 
 	const entityCode = watch('entityType');
 
-	const [{ data }, trigger] = useRequestBf(
-		{
-			url     : 'purchase/payable/bank/list',
-			authKey : 'get_purchase_payable_bank_list',
-			method  : 'get',
-		},
-		{ manual: true },
-	);
 	useEffect(() => {
 		if (entityCode && !isEdit) {
 			trigger({
@@ -252,7 +256,7 @@ const useCreateManualEntry = ({
 				},
 			});
 		}
-	}, [entityCode]);
+	}, [entityCode, isEdit, trigger]);
 
 	const bankID = watch('bankId');
 
@@ -262,114 +266,61 @@ const useCreateManualEntry = ({
 
 			const {
 				currency: bankCurr = '',
-				beneficiary_name = '',
-				account_number = '',
+				beneficiary_name:bankNameData = '',
+				account_number:bankAccount = '',
 			} = findBankById || {};
 			if (editMode) setValue('currency', bankCurr);
 
-			setbankDetails({
-				bankAccountNumber : account_number,
-				bankName          : beneficiary_name,
+			setBankDetails({
+				bankAccountNumber : bankAccount,
+				bankName          : bankNameData,
 			});
 		}
-	}, [bankID, data]);
+	}, [bankID, data, editMode]);
 
 	useEffect(() => {
 		if (entityCode && ledgerCurrency) {
 			setValue('ledCurrency', ledgerCurrency);
 		}
-	}, [entityCode]);
+	}, [entityCode, ledgerCurrency]);
 
 	const amountReceived = watch('amount');
+
 	const Exchange = watch('exchangeRate');
+
 	useEffect(() => {
 		if (Exchange > 0 || amountReceived) {
-			const total = amountReceived * (Exchange || 1);
+			const total = amountReceived * (Exchange || 1) || 0.00;
+
 			setValue('ledAmount', total.toFixed(2));
 		}
-	}, [amountReceived, Exchange]);
+	}, [JSON.stringify(amountReceived), JSON.stringify(Exchange)]);
 
 	useEffect(() => {
-		setProcessedControls(powerControls(controls || [], data?.[0] || []));
-		const newFileds = { ...fields };
-		if (newFileds.bankId) {
-			newFileds.bankId.options = (data?.[0].bank_details || []).map((item) => ({
-				value : item.id,
-				label : `${item.beneficiary_name} (${item.account_number})`,
-			}));
-		}
-		if (newFileds.docType) {
-			if (doc_type === 'TDS') {
-				newFileds.bankId.disabled = true;
-				setValue('bankId', undefined);
-				setbankDetails({});
-			}
-			newFileds.paymentMode.disabled = doc_type === 'TDS';
-		}
+		setProcessedControls(powerControls((controls || []), (data?.[0] || [])));
+	}, [JSON.stringify(data), docTypeValue, accountMode]);
 
-		// if (accountMode === 'AP') {
-		// 	const currentOptions = [...newFileds.docType?.options];
-		// 	const mutatedOptions = currentOptions.slice(1);
-		// 	newFileds.docType.options = [
-		// 		{ label: 'Payment', value: 'PAYMENT' },
-		// 		...mutatedOptions,
-		// 	];
-		// 	const [firstObj] = newFileds.docType?.options;
-		// 	if (isEmpty(doc_type)) {
-		// 		setValue('docType', firstObj.value);
-		// 	}
-		// } else {
-		// 	newFileds.docType.options = [...newFileds.docType?.options];
-		// 	const [firstObj] = newFileds.docType.options;
-		// 	const prefilledValue = firstObj.value;
-		// 	if (isEmpty(doc_type)) {
-		// 		setValue('docType', prefilledValue);
-		// 	}
-		// }
-
-		setFieldsData(newFileds);
-	}, [data, doc_type, accountMode, from_cur, controls, fields, setValue]);
-
-	const [{ data:createData }, createEntryTrigger] = useRequestBf(
-		{
-			url     : '/payments/accounts',
-			authKey : 'post_payments_accounts',
-			method  : 'post',
-		},
-		{ manual: true },
-	);
-
-	const [{ data:updateData }, updateEntryTrigger] = useRequestBf(
-		{
-			url     : '/payments/accounts',
-			authKey : 'put_payments_accounts',
-			method  : 'put',
-		},
-		{ manual: true },
-	);
-
-	const [{ data:exRateData }, exRateTrigger] = useRequestBf(
-		{
-			url    : 'get_exchange_rate',
-			method : 'get',
-		},
-		{ manual: false },
-	);
-	const exchangeApi = async () => {
+	const exchangeApi = useCallback(async () => {
 		try {
 			const exData = await exRateTrigger({
 				params: {
-					from_currency : from_cur,
-					to_currency   : to_cur,
+					from_currency : fromCur,
+					to_currency   : toCur,
 					exchange_date : transactionDates,
 				},
 			});
 			setValue('exchangeRate', exData.data.toFixed(4));
 		} catch (error) {
-			console.log(error);
+			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}
-	};
+	}, [exRateTrigger, fromCur, toCur, transactionDates]);
+
+	useEffect(() => {
+		if (editMode) exchangeApi();
+	}, [fromCur, toCur, paymentDateValue, editMode, exchangeApi]);
+
 	const entryApi = isEdit ? updateEntryTrigger : createEntryTrigger;
+
 	const successMessage = isEdit
 		? 'Payment has been updated successfully'
 		: 'Payment has been created successfully';
@@ -380,7 +331,7 @@ const useCreateManualEntry = ({
 		try {
 			const rest = await entryApi({ data: formatPayload(payload) });
 
-			onClose();
+			setShowModal({ manual_entry: false });
 
 			if (!rest.data.isSuccess) {
 				Toast.error('Something went wrong');
@@ -389,26 +340,24 @@ const useCreateManualEntry = ({
 				refetch();
 			}
 		} catch (err) {
-			if (err?.data) {
-				Toast.error(flattenErrorToString(err?.data) || 'Something went wrong');
-			}
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
 	};
 
 	return {
-		formProps : { fields: { ...fieldsData } },
-		controls  : processedControls,
+		controls : processedControls,
 		createManualEntry,
 		control,
 		onError,
 		handleSubmit,
 		errors,
-		loading   : entryApi.loading,
-		disable_controls,
+		loading  : createLoading || updateLoading,
 		exRateTrigger,
 		accountMode,
 		showBprNumber,
 		isVenderExists,
+		exchangeLoading,
+		venderLoading,
 	};
 };
 

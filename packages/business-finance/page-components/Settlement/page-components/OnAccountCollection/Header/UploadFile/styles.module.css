@@ -1,71 +1,82 @@
 .mode_selection {
-  padding: 0px 24px 16px 16px;
-  display: flex;
-  justify-content: space-between;
-  width: 100%;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 0 24px 16px 16px;
 }
+
 .upload_data {
-  padding: 0px 24px 16px 24px;
-  display: flex;
-  flex-direction: column;
-  gap: 8px;
+	display: flex;
+	flex-direction: column;
+	gap: 8px;
+	padding: 0 24px 16px;
 }
+
 .button_wrapper {
-  display: flex;
-  justify-content: flex-end;
-  width: 100%;
-  gap: 8px;
+	display: flex;
+	gap: 8px;
+	justify-content: flex-end;
+	width: 100%;
 }
+
 .text_data {
-  display: flex;
-  gap: 8px;
-  margin-top: 14px;
-  align-items: center;
-  font-size: 14px;
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	margin-top: 14px;
+	font-size: 14px;
 }
+
 .text_data_bold {
-  margin-top: 14px;
-  align-items: center;
-  font-weight: 600;
-  font-size: 14px;
+	align-items: center;
+	margin-top: 14px;
+	font-size: 14px;
+	font-weight: 600;
 }
+
 .url_container {
-  color: #3471ae;
-  cursor: pointer;
-  text-decoration: underline;
+	color: #3471ae;
+	text-decoration: underline;
+	cursor: pointer;
 }
+
 .flex_data {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
+
 .tick_icon {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: center;
 }
+
 .flex_value {
-  display: flex;
-  cursor: pointer;
-  justify-content: center;
-  align-items: center;
-  margin-top: 16px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-top: 16px;
+	cursor: pointer;
 }
 
 .img_height {
-  height: 110px;
+	height: 110px;
 }
+
 .success {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
 }
+
 .close {
-  display: flex;
-  justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }
+
 .uploaded {
-  font-size: 16px;
-  font-weight: 600;
+	font-size: 16px;
+	font-weight: 600;
 }

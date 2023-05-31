@@ -1,6 +1,5 @@
 .bpr_value {
-  display: flex;
-  justify-content: flex-end;
-  margin-right: 12%;
-  padding: 4px;
+	display: flex;
+	justify-content: space-between;
+	padding: 4px;
 }
