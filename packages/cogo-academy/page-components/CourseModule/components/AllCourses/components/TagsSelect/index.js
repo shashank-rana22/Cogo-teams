@@ -1,6 +1,8 @@
 import { Tags } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import styles from './styles.module.css';
+
 function TagsSelect({ category }) {
 	const topicName = [];
 	const options = category?.topics;
@@ -18,7 +20,9 @@ function TagsSelect({ category }) {
 	const [items, setItems] = useState(topicName);
 
 	return (
-		<Tags items={items} onItemsChange={setItems} />
+		<div className={styles.container}>
+			<Tags items={items} onItemsChange={setItems} />
+		</div>
 	);
 }
 

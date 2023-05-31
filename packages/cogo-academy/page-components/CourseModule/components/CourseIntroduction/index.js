@@ -1,6 +1,6 @@
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import useGetUserCourse from '../../hooks/useGetUserCourse';
 import useGetUserCourseDetails from '../../hooks/useGetUserCourseDetails';
@@ -20,15 +20,21 @@ function CourseIntroduction() {
 	const { course_id = '' } = query;
 
 	const { data, loading } = useGetUserCourse({ course_id, user_id });
-	const { dataDetails, DetailsLoading } = useGetUserCourseDetails({ course_id });
 
 	// console.log('data', data);
-	// console.log('dataDetails', dataDetails);
+
+	if (loading) {
+		return null;
+	}
 
 	return (
 		<>
 			<div className={styles.container}>
-				<CourseDetails data={dataDetails} />
+				<CourseDetails
+					data={data?.course_details}
+					instructorData={data?.instructors}
+					module={data?.course_modules}
+				/>
 				<CourseCurriculum data={data} />
 
 				<div className={styles.date_display}>
@@ -42,7 +48,7 @@ function CourseIntroduction() {
 
 				</div>
 
-				<SimilarCourses />
+				<SimilarCourses course_details={data?.course_details} />
 			</div>
 			<div className={styles.bottom}>
 				<Footer course_id={course_id} user_id={user_id} data={data} />

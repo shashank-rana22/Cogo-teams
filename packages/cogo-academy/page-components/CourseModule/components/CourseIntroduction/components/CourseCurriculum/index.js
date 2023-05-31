@@ -5,8 +5,6 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function CourseCurriculum({ data }) {
-	// console.log('dataDetails', data);
-
 	const ContentType_Mapping = {
 		document     : <IcMDocument width="24px" height="24px" fill="white" />,
 		video        : <IcMVideoCall width="24px" height="24px" fill="white" />,
@@ -17,8 +15,7 @@ function CourseCurriculum({ data }) {
 	return (
 		<div className={styles.container}>
 			<span className={styles.heading}>Course Curriculum</span>
-			{data?.map((item, index) => (
-
+			{data?.course_modules?.map((item, index) => (
 				<div className={styles.outer_accordian} key={item.id}>
 					<Accordion
 						type="text"
@@ -42,7 +39,8 @@ function CourseCurriculum({ data }) {
                                         &nbsp;
 									</div>
 									<div className={styles.right}>
-										10 &nbsp;
+										{item?.chapter_count}
+										&nbsp;
 										<div className={styles.light}>Chapter</div>
                                         &nbsp;
 									</div>

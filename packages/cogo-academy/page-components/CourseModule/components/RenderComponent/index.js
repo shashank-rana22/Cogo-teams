@@ -20,8 +20,11 @@ function RenderComponent({ CourseCategoryData, currentCategory, setCurrentCatego
 			/>
 		);
 	}
+	{ /* <HomePage user_id={user_id} CourseCategoryData={CourseCategoryData} /> */ }
+	return (
+		<HomePage user_id={user_id} CourseCategoryData={CourseCategoryData} />
 
-	return <HomePage user_id={user_id} CourseCategoryData={CourseCategoryData} />;
+	);
 }
 
 export default RenderComponent;

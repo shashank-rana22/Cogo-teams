@@ -21,7 +21,7 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {} }) {
 				const { id, display_name } = item;
 
 				return (
-					index > 1 ? (
+					index >= 1 ? (
 						<Pill
 							key={id}
 							size="md"

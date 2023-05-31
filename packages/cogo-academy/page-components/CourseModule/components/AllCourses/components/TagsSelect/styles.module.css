@@ -1,0 +1,13 @@
+.container{
+    display: flex;
+    flex-wrap: wrap;
+    margin-bottom: 20px;
+
+    :global{
+        .ui_tags_container{
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+        }
+    }
+}

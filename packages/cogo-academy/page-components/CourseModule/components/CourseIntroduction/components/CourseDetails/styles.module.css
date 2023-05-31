@@ -85,3 +85,18 @@
 .description {
 	margin: 10px 0;
 }
+
+.carasol{
+	width: 200px;
+	display: flex;
+	flex-direction: column;
+	
+}
+
+.box{
+	width: 200px;
+	white-space: nowrap; 
+  	overflow: hidden;
+  	text-overflow: ellipsis;
+	
+}

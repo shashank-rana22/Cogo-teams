@@ -1,6 +1,11 @@
 import { IcMArrowRight, IcMDownload } from '@cogoport/icons-react';
 
 const BUTTON_CONTENT_MAPPING = {
+	default: {
+		secondaryBtnText : 'Curriculum',
+		primaryBtnText   : 'Visit Course',
+		icon             : <IcMArrowRight width={16} height={16} />,
+	},
 	ongoing: {
 		secondaryBtnText : 'Curriculum',
 		primaryBtnText   : 'Continue Learning',

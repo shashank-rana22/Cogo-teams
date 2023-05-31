@@ -12,8 +12,10 @@ import CourseCard from '../../../CourseCard';
 
 import styles from './styles.module.css';
 
-function SimilarCourses({ course_details }) {
+function RecommendedComponents() {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
+
+	const { HANDLE_CLICK_MAPPINGS } = HANDLE_CLICK_MAPPING();
 
 	const router = useRouter();
 
@@ -23,19 +25,17 @@ function SimilarCourses({ course_details }) {
 
 	const { query, debounceQuery } = useDebounceQuery();
 
-	const { HANDLE_CLICK_MAPPINGS } = HANDLE_CLICK_MAPPING();
-
 	const topics = [];
-	course_details?.faq_topics?.map((item) => (
-		topics.push(item?.id)
-	));
 
+	// course_details?.faq_topics?.map((item) => (
+	// 	topics.push([item?.id])
+	// ));
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			status       : 'active',
+			status: 'active',
 			user_id,
-			faq_topic_id : topics,
+			// faq_topic_id : topics,
 		},
 	});
 
@@ -58,8 +58,6 @@ function SimilarCourses({ course_details }) {
 	}
 	return (
 		<div className={styles.container}>
-			<b>Similar Courses</b>
-
 			<div className={styles.carousel_container}>
 				<Carousel
 					size="md"
@@ -74,4 +72,4 @@ function SimilarCourses({ course_details }) {
 	);
 }
 
-export default SimilarCourses;
+export default RecommendedComponents;

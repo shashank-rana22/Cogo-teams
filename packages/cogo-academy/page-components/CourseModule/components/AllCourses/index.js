@@ -1,12 +1,16 @@
 import { Carousel, Tabs, TabPanel, Button, Tooltip, Pill, Tags } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMSort, IcMTick } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import LoadingState from '../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../configs/BUTTON_CONTENT_MAPPING';
-import useListCourseCategory from '../../hooks/useListCourseCategory';
+import HANDLE_CLICK_MAPPING from '../../configs/HANDLE_CLICK_MAPPING.JS';
+// import useListCourseCategory from '../../hooks/useListCourseCategory';
+import useListCourseUserMappings from '../../hooks/useListCourseUserMappings';
 import CourseCard from '../CourseCard';
 
 import FilterPopover from './components/FilterPopover';
@@ -14,41 +18,33 @@ import TagsSelect from './components/TagsSelect';
 import styles from './styles.module.css';
 
 function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
+	const { user:{ id: user_id } } = useSelector((state) => state.profile);
+
 	const router = useRouter();
 
 	const [activeTab, setActiveTab] = useState();
 	const [filters, setFilters] = useState('');
-	// const [topicName, setTopicName] = useState([]);
 
-	const HANDLE_CLICK_MAPPING = {
+	const { query, debounceQuery } = useDebounceQuery();
 
-		ongoing: (course_id) => {
-			router.push(`/learning/course/${course_id}`);
+	const [params, setParams] = useState({
+		page    : 1,
+		filters : {
+			status: 'active',
+			user_id,
 		},
-		mandatory: (course_id) => {
-			router.push(`/learning/course/${course_id}`);
-		},
-		completed: (course_id) => {
-			router.push(`/learning/course/${course_id}`);
-		},
-		saved: () => {},
-	};
+	});
 
-	// if (loading) {
-	// 	return <LoadingState rowsCount={7} />;
-	// }
+	const { data = {}, loading } = useListCourseUserMappings({ activeTab, params, query });
 
-	// const CAROUSELDATA = list.map((item, index) => ({
-	// 	key    : index,
-	// 	render : () => (
-	// 		<CourseCard
-	// 			key={item.id}
-	// 			data={item}
-	// 			buttonContent={BUTTON_CONTENT_MAPPING[activeTab]}
-	// 			handleClick={HANDLE_CLICK_MAPPING[activeTab]}
-	// 		/>
-	// 	),
-	// }))
+	const { HANDLE_CLICK_MAPPINGS } = HANDLE_CLICK_MAPPING();
+
+	if (loading) {
+		return <LoadingState rowsCount={7} />;
+	}
+
+	console.log('data1', activeTab);
+	console.log('data2', currentCategory);
 
 	return (
 		<div className={styles.container}>
@@ -59,7 +55,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 				<div className={styles.btn_container}>
 					<div
 						role="presentation"
-						onClick={() => setActiveTab('completed')}
+						onClick={() => { setActiveTab('completed'); setCurrentCategory('all_courses'); }}
 						className={`${styles.btn} ${activeTab === 'completed' ? styles.btn_active : null}`}
 					>
 						{activeTab === 'completed' ? <IcMTick height="20px" width="20px" /> : null}
@@ -67,7 +63,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 					</div>
 					<div
 						role="presentation"
-						onClick={() => setActiveTab('ongoing')}
+						onClick={() => { setActiveTab('ongoing'); setCurrentCategory('all_courses'); }}
 						className={`${styles.btn} ${activeTab === 'ongoing' ? styles.btn_active : null}`}
 					>
 						{activeTab === 'ongoing' ? <IcMTick height="20px" width="20px" /> : null}
@@ -75,7 +71,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 					</div>
 					<div
 						role="presentation"
-						onClick={() => setActiveTab('mandatory')}
+						onClick={() => { setActiveTab('mandatory'); setCurrentCategory('all_courses'); }}
 						className={`${styles.btn} ${activeTab === 'mandatory' ? styles.btn_active : null}`}
 					>
 						{activeTab === 'mandatory' ? <IcMTick height="20px" width="20px" /> : null}
@@ -89,13 +85,14 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 
 				</div>
 			</div>
+
 			<div className={styles.tabs_container}>
 				{courseCategories?.map((category) => (
 					<div
 						role="presentation"
 						className={`${styles.tab} ${currentCategory === category.name ? styles.active : ''}`}
 						key={category.id}
-						onClick={() => setCurrentCategory(category.name)}
+						onClick={() => { setActiveTab(''); setCurrentCategory(category.name); }}
 					>
 						<h4><div className={styles.overflow}>{startCase(category.name)}</div></h4>
 						<p className={styles.total_courses}>
@@ -107,6 +104,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 
 				))}
 			</div>
+
 			<div className={styles.pill}>
 				{courseCategories?.map((category) => (
 					currentCategory === category.name
@@ -116,6 +114,17 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 							/>
 						)
 						: null
+				))}
+			</div>
+
+			<div className={styles.carousel_container}>
+				{(data.list || []).map((item) => (
+					<CourseCard
+						key={item.id}
+						data={item}
+						buttonContent={BUTTON_CONTENT_MAPPING[activeTab || 'default']}
+						handleClick={HANDLE_CLICK_MAPPINGS[activeTab || 'default']}
+					/>
 				))}
 			</div>
 

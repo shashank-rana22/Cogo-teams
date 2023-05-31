@@ -16,7 +16,7 @@ export function Footer({ course_id, user_id, data = {} }) {
 		updateCourseProgress,
 	} = useUpdateUserCourseProgress({ course_id, user_id });
 
-	console.log('data:: ', data);
+	// console.log('data:: ', data);
 
 	return (
 		<div className={styles.container}>
