@@ -14,7 +14,8 @@ function Dashboard() {
 
 	return (
 		<div className={styles.container}>
-			<Header search={search} setSearch={setSearch} />
+			<Header />
+
 			<div className={styles.tab_container}>
 				<Tabs
 					activeTab={activeTab}
@@ -22,7 +23,7 @@ function Dashboard() {
 					onChange={setActiveTab}
 				>
 					<TabPanel name="new_employee_list" title="New Employee List">
-						<TableView search={search} />
+						<TableView search={search} setSearch={setSearch} />
 					</TabPanel>
 
 					<TabPanel name="day_1" title="Day 1 Download">

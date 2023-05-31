@@ -4,7 +4,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ search, setSearch }) {
+function Header() {
 	const router = useRouter();
 
 	const onClickAddNewJoinee = () => {
@@ -17,14 +17,6 @@ function Header({ search, setSearch }) {
 			<div className={styles.title}>New Employee Dashboard</div>
 
 			<div className={styles.button_container}>
-				<Input
-					value={search}
-					onChange={setSearch}
-					size="md"
-					style={{ marginRight: '8px', width: 300, height: 40 }}
-					placeholder="Search via Name or Email"
-				/>
-
 				<Button type="button" size="lg" onClick={onClickAddNewJoinee}>Add new joinee</Button>
 			</div>
 		</div>
