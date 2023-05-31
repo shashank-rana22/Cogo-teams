@@ -4,6 +4,7 @@ import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
+import EmptyState from '../CreateModule/components/EmptyState';
 
 import TestResultMessage from '../../commons/TestResultMessage';
 import useGetTest from '../AdminResults/hooks/useGetTest';
@@ -86,6 +87,7 @@ function TestResult() {
 	        { not_attempted ? 
 	          <div className={styles.attempted_data}> 
 	            You haven't attempted this test. Hence, there's no data to show here.
+				<EmptyState className={styles.emptystate}/>
 	          </div> 
 			  : <Summary summaryData={summaryData} />}
 			
