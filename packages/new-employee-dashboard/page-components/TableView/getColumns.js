@@ -72,7 +72,7 @@ const getColumns = ({ onClickNewJoinerColumn }) => [
 			<div>
 				<Pill
 					size="md"
-					color="#fff085"
+					color={item?.status === 'active' ? '#f1ee8e' : '#ffcbd1'}
 				>
 					{startCase(item?.status)}
 				</Pill>

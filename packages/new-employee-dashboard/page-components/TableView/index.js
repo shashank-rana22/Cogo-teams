@@ -17,27 +17,18 @@ function TableView({ search }) {
 					activeTab={activeTab}
 					themeType="tertiary"
 					onChange={setActiveTab}
+					style={{ marginBottom: 8 }}
 				>
-					<TabPanel name="active" title="Active">
-						<StyledTable
-							columns={columns}
-							data={list}
-							loading={loading}
-						/>
-					</TabPanel>
-
-					<TabPanel name="inactive" title="Inactive">
-						<StyledTable
-							columns={columns}
-							data={list}
-							loading={loading}
-						/>
-					</TabPanel>
-
+					<TabPanel name="active" title="Active" />
+					<TabPanel name="inactive" title="Inactive" />
 				</Tabs>
 
+				<StyledTable
+					columns={columns}
+					data={list}
+					loading={loading}
+				/>
 			</div>
-
 		</div>
 	);
 }
