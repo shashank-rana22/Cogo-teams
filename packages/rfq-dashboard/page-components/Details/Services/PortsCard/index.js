@@ -68,11 +68,9 @@ function PortsCard(props) {
 
 	const [convenienceDetails, setConvenienceDetails] = useState({
 		convenience_rate: {
-			price: convenience_line_item?.price,
-
-			currency: convenience_line_item?.currency,
-
-			unit: convenience_line_item?.unit,
+			price    : convenience_line_item?.price,
+			currency : convenience_line_item?.currency,
+			unit     : convenience_line_item?.unit,
 		},
 	});
 
@@ -91,11 +89,9 @@ function PortsCard(props) {
 	priceBreakupChildData?.forEach((item) => {
 		item?.data.forEach((dataItem) => {
 			prefilledValues.push({
-				margin_type: dataItem.margin_type,
-
-				margin_value_currency: dataItem.margin_value_currency,
-
-				margin_value: dataItem.margin_value,
+				margin_type           : dataItem.margin_type,
+				margin_value_currency : dataItem.margin_value_currency,
+				margin_value          : dataItem.margin_value,
 			});
 		});
 	});
