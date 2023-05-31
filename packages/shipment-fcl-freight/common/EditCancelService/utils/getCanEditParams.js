@@ -1,4 +1,4 @@
-const editParamsStakeholders = {
+const EDIT_PARAMS_STAKEHOLDERS = {
 	booking_agent: {
 		idToMatch: 'importer_exporter_id',
 	},
@@ -8,7 +8,7 @@ const editParamsStakeholders = {
 	superadmin: {},
 };
 
-const controlsEditableConditions = [
+const CONTROLS_EDITABLE_CONDITIONS = [
 	{
 		state      : ['confirmed_by_service_provider'],
 		trade_type : ['export'],
@@ -38,16 +38,16 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return true;
 	}
 
-	let userCanEdit = activeStakeholder in editParamsStakeholders;
-	if (userCanEdit && editParamsStakeholders[activeStakeholder]?.idToMatch) {
-		const idToMatch = shipment_data[editParamsStakeholders[activeStakeholder].idToMatch];
+	let userCanEdit = activeStakeholder in EDIT_PARAMS_STAKEHOLDERS;
+	if (userCanEdit && EDIT_PARAMS_STAKEHOLDERS[activeStakeholder]?.idToMatch) {
+		const idToMatch = shipment_data[EDIT_PARAMS_STAKEHOLDERS[activeStakeholder].idToMatch];
 		userCanEdit = idToMatch === serviceData?.importer_exporter?.id;
 	}
 
 	const showEditParamsKey = serviceData?.show_edit_params;
 
-	const isControlsEditable = controlsEditableConditions.some(
-		(conditions) => getShowCondition(shipment_data, conditions),
+	const isControlsEditable = CONTROLS_EDITABLE_CONDITIONS.some(
+		(conditions) => getShowCondition({ trade_type: shipment_data?.trade_type, ...serviceData }, conditions),
 	);
 
 	return userCanEdit && showEditParamsKey && isControlsEditable;
