@@ -11,7 +11,8 @@ function Header({
 	loading,
 	setShowCtcBreakupModal,
 	getEmployeeDetails,
-	offer_letter,
+	offerLetter,
+	offerLetterApiLoading,
 }) {
 	const { id, name, employee_code, designation, passport_size_photo_url, status } = detail || {};
 
@@ -63,15 +64,16 @@ function Header({
 					type="button"
 					themeType="secondary"
 					style={{ marginLeft: 12 }}
+					loading={loading || btnloading || offerLetterApiLoading}
 				>
-					{isEmpty(offer_letter) ? 'Add CTC breakup' : 'View CTC breakup'}
+					{isEmpty(offerLetter) ? 'Add CTC breakup' : 'View CTC breakup'}
 				</Button>
 
 				<Button
 					type="button"
 					style={{ marginLeft: 12 }}
 					onClick={() => { updateEmployeeStatus(); }}
-					loading={loading || btnloading}
+					loading={loading || btnloading || offerLetterApiLoading}
 				>
 					{status === 'active' ? 'Reject Candidate' : 'Reactivate Candidate Profile'}
 				</Button>

@@ -14,15 +14,12 @@ export default function SubmitSection({
 	setShowCtcBreakupModal = () => {},
 	setInitialQuestion = () => {},
 }) {
-	const { handleSubmit, reset } = formProps;
+	const { handleSubmit } = formProps;
 
-	const { loading, onFinalSubmit } = usePostCreateEmployeeOfferLetter();
+	const { loading, onFinalSubmit } = usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal });
 	const onSubmit = (values) => {
 		onFinalSubmit(values, ctcStructure, initialQuestion, detail?.id);
-		console.log('detail?.id', detail?.id);
-
 		setVisible(false);
-		// setShowCtcBreakupModal(false);
 		setInitialQuestion('');
 	};
 	const onClose = () => {
