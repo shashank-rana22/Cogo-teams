@@ -22,7 +22,6 @@ function Dashboard() {
 			...prev,
 			activeTab,
 			search,
-
 			organizationSize  : organization_size,
 			serviceType       : service_type,
 			endDate           : end_date,
@@ -36,7 +35,6 @@ function Dashboard() {
 	return (
 		<div>
 			<div className={styles.title}>RFQ Dashboard</div>
-
 			<div className={styles.container}>
 				<Filters formProps={formProps} />
 				<Content
