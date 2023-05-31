@@ -2,10 +2,15 @@ import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import Archive from './Archive';
+import Dashboard from './Dashboard';
 import ShipmentView from './ShipmentView';
 import styles from './styles.module.css';
 
 const tabs = [
+	{
+		key   : 'dashboard',
+		label : 'Dashboard',
+	},
 	{
 		key   : 'shipment_view',
 		label : 'Shipment View',
@@ -19,6 +24,7 @@ const tabs = [
 const tabsKeyComponentMapping = {
 	shipment_view : ShipmentView,
 	archive       : Archive,
+	dashboard     : Dashboard,
 };
 
 function Accruals() {
@@ -29,6 +35,7 @@ function Accruals() {
 	const tabComponentProps = {
 		shipment_view : {},
 		archive       : { setShowTab },
+		dashboard     : {},
 	};
 
 	const ActiveTabComponent = tabsKeyComponentMapping[subActiveTab] || null;
