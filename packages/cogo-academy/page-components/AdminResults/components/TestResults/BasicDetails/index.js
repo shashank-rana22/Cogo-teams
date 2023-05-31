@@ -28,7 +28,7 @@ function BasicDetails({ basic_info_data, questions, stats_data }) {
 	};
 
 	const content_mapping_middle = {
-		Passpercent: {
+		passpercent: {
 			label: 'Pass %',
 			renderData:
 	<div className={styles.values}>
@@ -169,7 +169,6 @@ function BasicDetails({ basic_info_data, questions, stats_data }) {
 										{renderData}
 									</div>
 								</div>
-
 							</div>
 						);
 					})
