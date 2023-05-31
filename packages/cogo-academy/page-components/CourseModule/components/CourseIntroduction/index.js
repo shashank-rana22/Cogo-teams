@@ -45,7 +45,7 @@ function CourseIntroduction() {
 				<SimilarCourses />
 			</div>
 			<div className={styles.bottom}>
-				<Footer course_id={course_id} />
+				<Footer course_id={course_id} user_id={user_id} data={data} />
 			</div>
 		</>
 	);

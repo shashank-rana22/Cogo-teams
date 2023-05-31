@@ -13,7 +13,7 @@ const useGetCourseDetails = ({ id }) => {
 	const getCourseDetails = useCallback(async () => {
 		try {
 			const res = await trigger({ params: { id } });
-			const { data = {} } = res || {};
+			const { data = [] } = res || {};
 			setFinalData(data);
 		} catch (error) {
 			// if (error.response?.data) {

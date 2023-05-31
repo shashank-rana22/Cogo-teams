@@ -3,4 +3,35 @@
 	padding: 20px;
 	margin: 0 20px;
 	background: #fff;
+	border: 1px solid #E0E0E0;
+	border-radius: 6px;
+	display: flex;
+    justify-content: center;
+}
+
+.btn_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: auto;
+
+	:global {
+		.ui_button_container {
+			padding: 6px 10px;
+		}
+	}
+}
+
+.btn {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	white-space: nowrap;
+}
+
+.arrow_left{
+	margin-right: 2px;
+}
+
+.arrow_right{
+	margin-left: 2px;
 }

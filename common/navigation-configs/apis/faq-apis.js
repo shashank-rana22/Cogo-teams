@@ -562,6 +562,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'update_user_course_progress',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'list_course_categories',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
