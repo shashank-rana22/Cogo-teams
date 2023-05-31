@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function Dashboard() {
 	const [informationPage, setInformationPage] = useState('');
 
-	const { data, getEmployeeDetails } = useGetEmployeeDetails({});
+	const { data, getEmployeeDetails } = useGetEmployeeDetails({ company_policy_data_required: true });
 	const { detail } = data || {};
 	const { name } = detail || {};
 
