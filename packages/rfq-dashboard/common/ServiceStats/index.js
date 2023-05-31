@@ -28,11 +28,9 @@ function ServiceStats({ data = [], type = '', source = '' }) {
 					|| data?.[item.key]?.promised_revenue_currency,
 
 				options: {
-					style: 'currency',
-
-					currencyDisplay: 'code',
-
-					maximumFractionDigits: 0,
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 0,
 				},
 			});
 		}
