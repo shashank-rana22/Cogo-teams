@@ -101,7 +101,8 @@ function MessageConversations({
 		if (!file) return '';
 		const { size = 0, type = '' } = file || {};
 		const fileType = getFileType(type);
-		if (!isEmpty(ZALO_LIMIATION_SIZE[fileType]) && size < ZALO_LIMIATION_SIZE[fileType]) {
+		if (fileType === '') return ZALO_FILE_UPLOAD_ERROR.not_supported;
+		if (size < ZALO_LIMIATION_SIZE[fileType]) {
 			return '';
 		}
 		return ZALO_FILE_UPLOAD_ERROR[fileType];

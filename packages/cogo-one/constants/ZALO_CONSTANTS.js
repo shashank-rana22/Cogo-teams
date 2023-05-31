@@ -9,6 +9,7 @@ export const ZALO_FILE_TYPES = [
 ];
 
 export const ZALO_FILE_UPLOAD_ERROR = {
-	image : 'Image size should be less than 1 mb',
-	file  : 'File size should be less than 5 mb',
+	image       : 'Image size should be less than 1 mb',
+	file        : 'File size should be less than 5 mb',
+	not_support : 'Document Type not supported',
 };
