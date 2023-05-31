@@ -56,6 +56,17 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	// 	}
 	// }, [address]);
 
+	const setAddressValue = (address) => {
+		if (address) {
+			(addressFields || []).forEach((item, index) => {
+				setValue(item, permanent_address_values?.[index]);
+			});
+		} else {
+			(addressFields || []).forEach((item) => {
+				setValue(item, '');
+			});
+		}
+	}
 
 	const mapping = {
 		permanent_address : permanent_address?.address || '',
@@ -149,6 +160,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 											? (
 												<div className={styles.error_msg}>
 													{errors[controlName]?.message}
+
 												</div>
 											) : null}
 									</div>
