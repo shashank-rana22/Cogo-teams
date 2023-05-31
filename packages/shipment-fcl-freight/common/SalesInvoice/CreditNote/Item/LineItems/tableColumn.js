@@ -4,6 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import getServiceNameforTableColumn from '../../../helpers/getServiceNameforTableColumn';
 
 export const tableColumn = ({ serviceItem = {} }) => {
+	console.log(serviceItem, " :serviceItem");
 	const trade_type = serviceItem?.trade_type;
 	const currencyLocale = GLOBAL_CONSTANTS.currency_locale.INR;
 

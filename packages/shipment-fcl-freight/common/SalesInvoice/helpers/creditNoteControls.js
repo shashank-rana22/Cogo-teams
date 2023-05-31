@@ -144,7 +144,10 @@ const creditNoteControls = ({
 				tax_percent: tax_percent = 0,
 				unit,
 				tax_total_price_discounted: tax_total_price_discounted = 0,
+				sac_code,
+				total,
 				name } = item || {};
+
 			return {
 				is_checked,
 				code,
