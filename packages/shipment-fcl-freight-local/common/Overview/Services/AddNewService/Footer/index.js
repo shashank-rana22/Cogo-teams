@@ -1,4 +1,4 @@
-import { Button, Toast } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useContext } from 'react';
 
@@ -10,11 +10,10 @@ function Footer({
 	onClose = () => {},
 	service = {},
 	formProps = {},
-	step = 1,
-	setStep = () => {},
+
 }) {
 	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
-	const { handleSubmit = () => {}, formValues, trigger } = formProps;
+	const { handleSubmit = () => {}, formValues } = formProps;
 
 	const { organization_id = '', user_id = {} } = formValues || {};
 
@@ -26,25 +25,17 @@ function Footer({
 		user: user_id,
 	});
 
-	const goToSecondStep = async () => {
-		const formValid = await trigger();
-		if (formValid) {
-			setStep(2);
-		} else {
-			Toast.error('Some form fields are empty or invalid');
-		}
-	};
-
 	const buttons = [
 		{
-			label     : step === 1 ? 'Cancel' : 'Back',
-			onClick   : step === 1 ? onClose : () => setStep(1),
+			label     : 'Cancel',
+			onClick   : onClose,
 			themeType : 'secondary',
 			disabled  : loading,
+			className : styles.first_button,
 		},
 		{
-			label    : step === 1 ? 'Next' : 'Submit',
-			onClick  : step === 1 ? goToSecondStep : handleSubmit(onAddService),
+			label    : 'Submit',
+			onClick  : handleSubmit(onAddService),
 			disabled : loading,
 		},
 	];

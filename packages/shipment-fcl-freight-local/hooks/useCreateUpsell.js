@@ -7,9 +7,7 @@ import formatPayload from '../helpers/service-upsell-payload';
 const useCreateUpsell = ({
 	service = {},
 	primary_service = {},
-	shipmentData = {},
-	organization_id = '',
-	user = {},
+	shipment_data = {},
 }) => {
 	const router = useRouter();
 
@@ -22,17 +20,16 @@ const useCreateUpsell = ({
 		const { payload } = formatPayload({
 			service,
 			primary_service,
-			shipmentData,
+			shipment_data,
 			formValues: values,
-			organization_id,
-			user,
+
 		});
 
 		try {
 			const res = await trigger({ data: { ...payload } });
 			if (!res.hasError) {
 				let newHref = `${window.location.origin}/${router?.query?.partner_id}/book/`;
-				newHref += `${res.data?.id}/${res.data?.importer_exporter_id}/${shipmentData?.id}`;
+				newHref += `${res.data?.id}/${res.data?.importer_exporter_id}/${shipment_data?.id}`;
 
 				window.location.href = newHref;
 			}

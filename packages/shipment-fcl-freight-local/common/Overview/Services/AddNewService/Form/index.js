@@ -1,9 +1,8 @@
 import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { AsyncSelectController } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
 import Footer from '../Footer';
@@ -16,8 +15,6 @@ function Form({ upsellableService = {}, closeModal = () => {} }) {
 	const { importer_exporter_id = '' } = shipment_data;
 
 	const service = upsellableService.service_type.replace('_service', '');
-
-	const [step, setStep] = useState(1);
 
 	const { controls, formProps } = useServiceUpsellControls({
 		service,
@@ -46,24 +43,16 @@ function Form({ upsellableService = {}, closeModal = () => {} }) {
 			/>
 
 			<Modal.Body>
-				{step === 1 && controls.step1?.length === 0 ? (
+				{ controls.length === 0 ? (
 					<div> Are you sure you want to upsell this service?</div>
 				) : null }
 
-				{controls.step1?.length && step === 1 ? (
+				{controls.length ? (
 					<Layout
-						fields={controls.step1}
+						fields={controls}
 						errors={errors}
 						control={control}
 					/>
-				) : null}
-
-				{step === 2 && controls?.step2 ? (
-					<>
-						<AsyncSelectController {...controls.step2} />
-
-						{errors?.user_id ? <div className={styles.error}>{errors?.user_id?.message}</div> : null}
-					</>
 				) : null}
 
 			</Modal.Body>
@@ -73,8 +62,7 @@ function Form({ upsellableService = {}, closeModal = () => {} }) {
 					onClose={closeModal}
 					formProps={formProps}
 					service={upsellableService}
-					step={step}
-					setStep={setStep}
+
 				/>
 			</Modal.Footer>
 		</Modal>
