@@ -11,7 +11,8 @@ import OfferLetter from './OfferLetter';
 import SignYourDocuments from './SignYourDocuments';
 import styles from './styles.module.css';
 
-function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails }) {
+function
+TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails }) {
 	const component_mapping = {
 		new_hire_information   : NewHireInformation,
 		offer_letter           : OfferLetter,

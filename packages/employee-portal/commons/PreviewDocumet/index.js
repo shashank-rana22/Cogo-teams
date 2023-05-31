@@ -1,7 +1,15 @@
 import FullView from './FullView';
 import styles from './styles.module.css';
 
-function PreviewDocumet({ document_header, height = '200px', width = '200px', preview = false, document_url = '' }) {
+function PreviewDocumet({
+	document_header,
+	height = '200px', width = '200px',
+	preview = false,
+	document_url = '',
+	id,
+	policy_data,
+	getEmployeeDetails,
+}) {
 	return (
 		<div className={styles.container}>
 			<div
@@ -33,6 +41,9 @@ function PreviewDocumet({ document_header, height = '200px', width = '200px', pr
 								right    : 16,
 							}}
 							url={document_url}
+							id={id}
+							policy_data={policy_data}
+							getEmployeeDetails={getEmployeeDetails}
 						/>
 					)
 				}

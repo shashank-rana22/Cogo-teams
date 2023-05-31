@@ -12,8 +12,6 @@ function Dashboard() {
 	const [search, setSearch] = useState('');
 	const [activeTab, setActiveTab] = useState('new_employee_list');
 
-	console.log('search',search);
-
 	return (
 		<div className={styles.container}>
 			<Header />

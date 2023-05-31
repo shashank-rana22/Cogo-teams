@@ -50,16 +50,16 @@ const getColumns = ({ onClickNewJoinerColumn }) => [
 	{
 		Header   : 'PROFILE COMPLETION',
 		accessor : (item) => {
-			const progress = item.progress || Math.floor(Math.random() * 100);
+			const progress_percentage = item?.progress?.progress_percentage || 0;
 			return (
 				<div className={styles.profile_completion}>
 					<div className={styles.animate}>
-						<div className={styles.progress_bar} style={{ width: `${progress}%` }}>
+						<div className={styles.progress_bar} style={{ width: `${progress_percentage}%` }}>
 							<div className={styles.progress} />
 						</div>
 					</div>
 					<div>
-						{progress}
+						{Math.round(progress_percentage * 100) / 100}
 						% complete
 					</div>
 				</div>

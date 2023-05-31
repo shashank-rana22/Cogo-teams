@@ -1,11 +1,14 @@
 import { Tabs, TabPanel } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useGetOfferLetter from '../hooks/useGetEmployeeOfferLetter';
 import useProfileDetails from '../hooks/useProfileDetails';
 
 import AdditionalDetails from './AdditionalDetails';
 import Header from './Header';
 import CtcBreakupModal from './Header/CtcBreakupModal';
+import ViewCtcBreakup from './Header/ViewCtcBreakup';
 import ProfileDetails from './ProfileDetails';
 import SignedDocuments from './SignedDocuments';
 import styles from './styles.module.css';
@@ -25,6 +28,9 @@ function ProfilePage() {
 		getEmployeeDetails,
 	} = useProfileDetails();
 
+	const { offerLetter, loading:offerLetterApiLoading } = useGetOfferLetter();
+	const { metadata } = offerLetter || {};
+
 	const { detail = {} } = profileData || {};
 
 	return (
@@ -34,6 +40,8 @@ function ProfilePage() {
 				loading={loading}
 				setShowCtcBreakupModal={setShowCtcBreakupModal}
 				getEmployeeDetails={getEmployeeDetails}
+				offerLetter={offerLetter}
+				offerLetterApiLoading={offerLetterApiLoading}
 			/>
 
 			<div className={styles.tab_container}>
@@ -65,15 +73,24 @@ function ProfilePage() {
 			</div>
 
 			{showCtcBreakupModal && (
-				<CtcBreakupModal
-					detail={detail}
-					showCtcBreakupModal={showCtcBreakupModal}
-					setShowCtcBreakupModal={setShowCtcBreakupModal}
-					ctcStructure={ctcStructure}
-					initialQuestion={initialQuestion}
-					setInitialQuestion={setInitialQuestion}
-					formProps={formProps}
-				/>
+				isEmpty(offerLetter)
+					? (
+						<CtcBreakupModal
+							detail={detail}
+							showCtcBreakupModal={showCtcBreakupModal}
+							setShowCtcBreakupModal={setShowCtcBreakupModal}
+							ctcStructure={ctcStructure}
+							initialQuestion={initialQuestion}
+							setInitialQuestion={setInitialQuestion}
+							formProps={formProps}
+						/>
+					) : (
+						<ViewCtcBreakup
+							metadata={metadata}
+							setShowCtcBreakupModal={setShowCtcBreakupModal}
+							showCtcBreakupModal={showCtcBreakupModal}
+						/>
+					)
 			)}
 		</div>
 	);
