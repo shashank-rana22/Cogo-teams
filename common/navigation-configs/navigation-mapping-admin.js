@@ -822,7 +822,7 @@ const navigationMappingAdmin = {
 				key           : 'business_finance-settlement',
 				title         : 'Settlement',
 				href          : '/v2/business-finance/settlement/[active_tab]',
-				as            : '/v2/business-finance/settlement/ap-ar-settlement',
+				as            : '/v2/business-finance/settlement/JournalVoucher',
 				type          : 'link',
 				main_apis     : ['list_organizations'],
 				possible_apis : apis.settlement,
