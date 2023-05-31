@@ -216,7 +216,7 @@ export const testSetColumns = ({
 		Header   : 'TOTAL QUESTIONS',
 		id       : 'total_questions',
 		accessor : ({ case_study_questions = 0, stand_alone_questions = 0, subjective_questions = 0 }) => (
-			<div className={styles.questions_count}>
+			<section className={styles.questions_count}>
 				<div>
 					{stand_alone_questions || 0}
 					{' '}
@@ -232,7 +232,7 @@ export const testSetColumns = ({
 					{' '}
 					Subjective
 				</div>
-			</div>
+			</section>
 		),
 	},
 	{
