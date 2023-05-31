@@ -58,10 +58,9 @@ function AdminResults() {
 			<div className={styles.header}>
 				<div role="presentation" onClick={handleGoBack} className={styles.go_back}>
 					<IcMArrowBack />
-
 					<p className={styles.go_back_text}>Test Result</p>
 				</div>
-				{ }
+				
 				{data?.status === 'publishing' && (
 					<Button themeType="accent" onClick={() => getTest({ test_id })} disabled={loading}>
 						Refresh
