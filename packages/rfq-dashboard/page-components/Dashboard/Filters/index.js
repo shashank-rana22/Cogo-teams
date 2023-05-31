@@ -17,7 +17,10 @@ function Filters({ formProps }) {
 					if (!Element) return null;
 
 					return (
-						<div className={styles.control_container}>
+						<div
+							key={controlItem.name}
+							className={styles.control_container}
+						>
 							{el.label && <div className={styles.label}>{el.label}</div>}
 							<Element
 								{...el}

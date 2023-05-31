@@ -16,6 +16,7 @@ function Dashboard() {
 		activeTab,
 		sortBy: '',
 	});
+
 	useEffect(() => {
 		const [lowProfitability, highProfitability] = profitability || [];
 		setFilterStore((prev) => ({
