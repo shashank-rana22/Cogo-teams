@@ -11,7 +11,7 @@ function TnC() {
 	return (
 		<div>
 
-			{(Object.keys(profile).includes('partne') && tnc?.accepted === false) ? (
+			{(Object.keys(profile).includes('partner') && tnc?.accepted === false) ? (
 				<div className={styles.container}>
 
 					<Modal size="lg" show placement="center" showCloseIcon={false}>
