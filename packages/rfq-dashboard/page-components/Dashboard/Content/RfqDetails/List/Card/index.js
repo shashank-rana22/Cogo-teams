@@ -142,9 +142,9 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 				{services ? (
 					<div className={styles.services}>
 						{(services || []).map((val) => (
-							<div className={styles.services}>
-								{SERVICE_MAPPING[val].icon}
-								<div className={styles.service_name}>{SERVICE_MAPPING[val].label}</div>
+							<div className={styles.services} key={`${val}`}>
+								{SERVICE_MAPPING[val]?.icon}
+								<div className={styles.service_name}>{SERVICE_MAPPING[val]?.label}</div>
 							</div>
 						))}
 					</div>

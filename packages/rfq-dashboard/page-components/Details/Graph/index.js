@@ -11,24 +11,6 @@ import LineChartLoader from './LoaderGraph';
 import styles from './styles.module.css';
 
 function Graph({ rfq_id = '' }) {
-	const LegendsData = [
-		{
-			label: '100 Shipment Booked',
-		},
-		{
-			label: '20 Contracts',
-		},
-		{
-			label: '1000 Container Booked',
-		},
-		{
-			label: 'Revenue',
-		},
-		{
-			label: 'Profit %',
-		},
-	];
-
 	const { getRfqGraph, data = {}, loading } = useGetRfqGraph();
 	useEffect(() => {
 		getRfqGraph({ rfq_id });
@@ -36,8 +18,17 @@ function Graph({ rfq_id = '' }) {
 
 	const { graph_data = {}, shipment_booked = '', contracts_created = '', revenue_generated = '' } = data;
 	const { y_axis = [] } = graph_data;
-
-	console.log('data::', data);
+	const LegendsData = [
+		{
+			label: `${shipment_booked} Shipment Booked`,
+		},
+		{
+			label: `${contracts_created} Contracts`,
+		},
+		{
+			label: `${(revenue_generated || 0).toFixed(2)} Revenue`,
+		},
+	];
 
 	let graphPastMonthDatas = [];
 	if (y_axis?.length > 0 && !loading) {
@@ -77,8 +68,6 @@ function Graph({ rfq_id = '' }) {
 	// 		y : value,
 	// 	}));
 	// }
-
-	console.log(graphPastMonthDatas, 'graphPastMonthData');
 	return (
 		<div className={styles.container}>
 			{(isEmpty(graphPastMonthDatas) && !loading)
@@ -139,7 +128,7 @@ function Graph({ rfq_id = '' }) {
 									colorBy="id"
 								/>
 								<div className={styles.legend_sections}>
-									{(LegendsData || []).map((item, index) => (
+									{(LegendsData || []).map((item) => (
 										<div className={styles.legends_section_part}>
 											<IcCFtick fill="#C4DC91" />
 											<p className={styles.legend_name}>{item.label}</p>
