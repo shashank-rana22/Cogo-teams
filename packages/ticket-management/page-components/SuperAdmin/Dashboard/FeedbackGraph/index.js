@@ -1,4 +1,4 @@
-import { ResponsivePie } from '@cogoport/charts';
+import { ResponsivePie } from '@cogoport/charts/pie';
 import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
