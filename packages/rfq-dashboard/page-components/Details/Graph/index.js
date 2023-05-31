@@ -98,7 +98,10 @@ function Graph({ rfq_id = '' }) {
 								/>
 								<div className={styles.legend_sections}>
 									{(LegendsData || []).map((item) => (
-										<div className={styles.legends_section_part}>
+										<div
+											key={item?.label}
+											className={styles.legends_section_part}
+										>
 											<IcCFtick fill="#C4DC91" />
 											<p className={styles.legend_name}>{item.label}</p>
 										</div>
