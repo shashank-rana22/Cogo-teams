@@ -16,7 +16,6 @@ const shipmentRefetchTasks = [
 	'confirm_booking',
 	'mark_confirmed',
 	'upload_draft_bill_of_lading',
-	'update_airway_bill_number',
 ];
 
 function useHandleSubmit({

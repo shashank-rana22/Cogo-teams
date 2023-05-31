@@ -15,10 +15,10 @@ export const formatPayloadForSubsidiaryServiceRateCards = ({ code, service_type 
 		location_id          : addedService?.location?.id,
 		importer_exporter_id : addedService?.importer_exporter?.id,
 		origin_location_id   : addedService?.origin_port_id || addedService?.origin_port?.id
-        || addedService?.origin_location?.id || addedService?.origin_airport?.id || undefined,
+        || addedService?.origin_location?.id,
 
 		destination_location_id: addedService?.destination_port_id || addedService?.destination_port?.id
-        || addedService?.destination_location?.id || addedService?.destination_airport?.id,
+        || addedService?.destination_location?.id,
 
 		container_type      : addedService?.container_type,
 		container_size      : addedService?.container_size,

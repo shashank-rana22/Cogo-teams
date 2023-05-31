@@ -640,12 +640,6 @@ const displayNameMappings = (trade_type) => {
 			addPrefix    : false,
 			why_needed   : '',
 		},
-		upload_airway_bill: {
-			display_name : 'Upload airway bill',
-			activity     : 'uploaded airway bill',
-			addPrefix    : false,
-			why_needed   : '',
-		},
 		upload_master_bill_of_lading: {
 			display_name : 'Upload master bill of lading',
 			activity     : 'uploaded master bill of lading',

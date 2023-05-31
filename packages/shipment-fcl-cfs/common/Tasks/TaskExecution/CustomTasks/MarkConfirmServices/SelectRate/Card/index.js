@@ -77,16 +77,6 @@ function Card({
 							</div>
 						</div>
 
-						{dataObj?.airline?.business_name ? (
-							<div>
-								<div className={styles.heading}>Carrier</div>
-
-								<div className={styles.sub_heading}>
-									{dataObj?.operator?.business_name || dataObj?.airline?.business_name}
-								</div>
-							</div>
-						) : null}
-
 						<div>
 							<div className={styles.heading}>Source of Rate</div>
 
