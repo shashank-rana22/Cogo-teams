@@ -39,16 +39,6 @@ const formatRawValues = (rawValues, task, getApisData) => {
 		}
 	});
 
-	const formattedObj = flatten(values);
-
-	if (task?.task === 'add_importer_exporter_poc') {
-		return { importer_exporter_poc: formattedObj };
-	}
-
-	if (task?.task === 'update_fcl_poc') {
-		return { service_provider_poc: formattedObj };
-	}
-
 	if ('booking_ref_status' in values) {
 		const newValues = JSON.parse(JSON.stringify(values));
 
@@ -76,7 +66,6 @@ const formatRawValues = (rawValues, task, getApisData) => {
 	}
 	if (
 		task?.task === 'update_container_details'
-		&& task?.shipment_type === 'fcl_freight_local'
 	) {
 		return {
 			update_data: (rawValues?.update_data || []).map((item) => ({

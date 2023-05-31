@@ -7,9 +7,6 @@
 				"label": "Could you share with us the cost difference? (We'll try to get a better rate next time)"
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
 				"haulage_freight_service",
 				"trailer_freight_service",
 				"ftl_freight_service",
@@ -23,9 +20,6 @@
 				"label": "How can we help you better?"
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
 				"haulage_freight_service",
 				"trailer_freight_service",
 				"ftl_freight_service",
@@ -46,11 +40,10 @@
 				]
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_freight_local_service",
 				"haulage_freight_service",
 				"trailer_freight_service",
-				"ftl_freight_service"
+				"ftl_freight_service",
+				"fcl_cfs_service"
 			]
 		},
 		"I have changed by mind": {
@@ -60,9 +53,6 @@
 				"label": "How can we help you better?"
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
 				"haulage_freight_service",
 				"trailer_freight_service",
 				"ftl_freight_service",
@@ -83,11 +73,10 @@
 				]
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_freight_local_service",
 				"haulage_freight_service",
 				"trailer_freight_service",
-				"ftl_freight_service"
+				"ftl_freight_service",
+				"fcl_cfs_service"
 			]
 		},
 		"Other issues": {
@@ -97,9 +86,6 @@
 				"label": "How can we help you better?"
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
 				"haulage_freight_service",
 				"trailer_freight_service",
 				"ftl_freight_service",
@@ -113,25 +99,9 @@
 				"required": false
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
 				"haulage_freight_service",
 				"trailer_freight_service",
 				"ftl_freight_service",
-				"fcl_cfs_service"
-			]
-		},
-		"Customer did not pick the containers": {
-			"free_text": {
-				"required": false
-			},
-			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
-				"trailer_freight_service",
 				"fcl_cfs_service"
 			]
 		},
@@ -144,8 +114,7 @@
 				"required": false
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_freight_local_service"
+				"fcl_cfs_service"
 			]
 		},
 		"Inventory issue at the yard(s)": {
@@ -158,8 +127,7 @@
 				"required": false
 			},
 			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"
+				"fcl_cfs_service"
 			]				
 		},
 		"Quote has expired": {
@@ -167,9 +135,6 @@
 				"required": false
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
 				"haulage_freight_service",
 				"trailer_freight_service",
 				"ftl_freight_service",
@@ -185,10 +150,6 @@
 				"subreasons": ["Working capital Issue"]
 			},
 			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_customs_service",
-				"fcl_freight_local_service",
-				"haulage_freight_service",
 				"trailer_freight_service",
 				"ftl_freight_service",
 				"fcl_cfs_service"
@@ -203,7 +164,8 @@
 			},
 			"applicable_to": [
 				"trailer_freight_service",
-				"ftl_freight_service"
+				"ftl_freight_service",
+				"fcl_cfs_service"
 			]
 		},
 		"Unable to serve the location": {
@@ -234,8 +196,7 @@
 				"label": "Tell us what went wrong?"
 			},
 			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"			
+				"fcl_cfs_service"		
 			]
 		},
 		"Sailing cancelled by the line": {
@@ -245,21 +206,8 @@
 				"label": "Tell us what went wrong?"
 			},
 			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"
+				"fcl_cfs_service"
 			]			
-		},
-		"BL type is not issued by the line": {
-			"subreasons": ["Seaway Original", "RFS Original"],
-			"free_text": {
-				"required": true,
-				"mandatory": true,
-				"label": "Tell us what went wrong?"
-			},
-			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"
-			]				
 		}
 	}
 }
