@@ -5,19 +5,16 @@ import styles from './styles.module.css';
 
 const STATS_MAPPING = {
 	promised_revenue: {
-		key: 'promised_revenue',
-
-		label: 'Promised Revenue',
+		key   : 'promised_revenue',
+		label : 'Promised Revenue',
 	},
 	promised_profitability: {
-		key: 'promised_profitability',
-
-		label: 'Promised Profitability',
+		key   : 'promised_profitability',
+		label : 'Promised Profitability',
 	},
 	utilization: {
-		key: 'utilization',
-
-		label: 'Utilization',
+		key   : 'utilization',
+		label : 'Utilization',
 	},
 };
 
@@ -31,11 +28,9 @@ function ServiceStats({ data = [], type = '', source = '' }) {
 					|| data?.[item.key]?.promised_revenue_currency,
 
 				options: {
-					style: 'currency',
-
-					currencyDisplay: 'code',
-
-					maximumFractionDigits: 0,
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 0,
 				},
 			});
 		}
@@ -44,7 +39,6 @@ function ServiceStats({ data = [], type = '', source = '' }) {
 			if (typeof (data?.promised_consolidated_profitability) === 'number') {
 				profitability = data?.promised_consolidated_profitability;
 			}
-			console.log(profitability, 'data?.promised_consolidated_profitability)');
 			return typeof profitability === 'number' ? (
 				<span
 					className={cl`${data?.[item?.key] > 0 ? styles.green : styles.red}
