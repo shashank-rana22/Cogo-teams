@@ -7,7 +7,7 @@ import EditLineItems from './EditLineItems';
 import styles from './styles.module.css';
 
 function EditServiceCharges(props) {
-	const { controls = [], service_name = '', shipment_id = '', onOptionsChange = () => {}, value } = props;
+	const { controls = [], service_name = '', shipment_id = '', onOptionsChange = () => {}, value } = props || {};
 
 	const [q, setQ] = useState('');
 

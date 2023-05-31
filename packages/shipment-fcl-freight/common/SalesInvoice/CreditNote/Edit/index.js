@@ -1,7 +1,7 @@
 import { Modal, Button, cl, Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
@@ -102,7 +102,7 @@ function Edit({
 							className={cl`${styles[CN_STATUS_MAPPING[status]]} ${styles.status_text
 							}`}
 						>
-							{status === 'rejected' ? <div>!</div> : null}
+							{status === 'rejected' ? '!' : null}
 							{startCase(CN_STATUS_MAPPING[status])}
 						</div>
 					</header>

@@ -1,7 +1,7 @@
 const generateDefaultValues = ({ values }) => {
 	const defaultValues = {};
 
-	values.forEach((control) => {
+	(values || []).forEach((control) => {
 		if (control.type === 'edit_service_charges') {
 			defaultValues[control.name] = control.value.map((value) => {
 				const fieldValue = {};

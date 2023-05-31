@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getServiceNameforTableColumn from '../../../../helpers/getServiceNameforTableColumn';
@@ -58,7 +58,6 @@ export const InvoiceTable = (serviceItem = {}) => {
 					maximumFractionDigits : 2,
 				},
 			})} (${item?.tax_percent || 0}%)`,
-
 			span: 1,
 		},
 		{
@@ -72,7 +71,6 @@ export const InvoiceTable = (serviceItem = {}) => {
 					maximumFractionDigits : 2,
 				},
 			}),
-
 			span: 1,
 		},
 	];

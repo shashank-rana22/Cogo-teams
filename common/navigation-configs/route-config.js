@@ -25,8 +25,10 @@ import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
 import referral from './config/referral';
 import rolesAndPermissions from './config/roles-n-permission';
+import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import shipmentFclFreight from './config/shipment-fcl-freight';
+import shipmentLclFreight from './config/shipment-lcl-freight';
 import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
 import unifiedDashboard from './config/unified-dashboard';
@@ -53,6 +55,7 @@ const routeConfig = {
 	...kamMonitoring,
 	...performanceManagement,
 	...shipmentFclFreight,
+	...shipmentLclFreight,
 	...bookingDesk,
 	...bnSalvage,
 	...costBookingDesk,
@@ -67,6 +70,7 @@ const routeConfig = {
 	...ingestion,
 	...blDoCollectionRelease,
 	...saasTools,
+	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
 };

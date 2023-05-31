@@ -6,7 +6,7 @@ const getInstructionData = ({ data = {} }) => {
 		document_handling_preference : [],
 	};
 
-	operating_instructions.map((item) => format_data?.[item?.instruction].push(item));
+	operating_instructions.map((item) => format_data?.[item?.instruction]?.push(item));
 
 	return format_data;
 };

@@ -1,8 +1,8 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
 const getCountryCode = (id) => {
-	const details = getCountryDetails({ country_id: id	});
+	const details = getCountryDetails({ country_id: id });
 
 	return details.country_code;
 };

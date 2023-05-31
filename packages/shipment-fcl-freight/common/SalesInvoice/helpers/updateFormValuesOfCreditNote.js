@@ -7,7 +7,7 @@ const updateFormValueOfCreditNote = ({ formValues }) => {
 				updatedObj[key] = value;
 				break;
 			default:
-				updatedObj[key] = value.map((_item) => ({
+				updatedObj[key] = (value || []).map((_item) => ({
 					..._item,
 					total: _item.price_discounted * _item.quantity,
 				}));
