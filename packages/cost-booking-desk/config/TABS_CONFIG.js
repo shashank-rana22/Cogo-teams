@@ -58,6 +58,10 @@ const TABS = {
 		import      : commonTabs,
 		lcl_customs : commonTabs,
 	},
+	fcl_cfs: {
+		export : commonTabs,
+		import : commonTabs,
+	},
 };
 
 export default TABS;

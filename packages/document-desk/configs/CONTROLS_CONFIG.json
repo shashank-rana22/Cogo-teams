@@ -3,6 +3,7 @@
         { "label": "Export", "value": "export" },
 	{ "label": "Import", "value": "import" },
 	{ "label": "Locals", "value": "fcl_local" },
-        { "label": "Customs", "value": "fcl_customs" }
+        { "label": "Customs", "value": "fcl_customs" },
+        { "label": "Cfs", "value": "fcl_cfs" }
     ]
 }

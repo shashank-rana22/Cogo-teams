@@ -1,0 +1,8 @@
+.answer_text {
+	padding: 4px;
+
+	&.correct {
+		font-weight: 600;
+		color: #849e4c;
+	}
+}

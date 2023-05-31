@@ -47,6 +47,8 @@ function useListFaqSearchHistories() {
 		dateRange,
 		setDateRange,
 		loading,
+		formatStartDate,
+		formatEndDate,
 	};
 }
 

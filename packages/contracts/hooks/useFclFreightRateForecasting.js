@@ -1,10 +1,10 @@
-import useAxios from 'axios-hooks';
+import { useLensRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
 const useFclFreightRateForecasting = ({ data = {} }) => {
-	const [predictedRateApi, triggerForecaset] = useAxios(
+	const [predictedRateApi, triggerForecaset] = useLensRequest(
 		{
-			url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/fcl_freight_rate_forecasting`,
+			url    : '/fcl_freight_rate_forecasting',
 			method : 'POST',
 		},
 		{ manual: true },

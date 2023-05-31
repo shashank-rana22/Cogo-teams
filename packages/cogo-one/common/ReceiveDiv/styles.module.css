@@ -19,7 +19,7 @@
 
 .receive_message_container {
 	width: fit-content;
-	max-width: 320px;
+	max-width: 57%;
 	padding: 0 0 12px 8px;
 	margin-top: 10px;
 	font-size: 14px;
@@ -54,4 +54,31 @@
 
 .replied_messages {
 	padding-top: 12px;
+}
+
+.order_container {
+	width: 57%;
+}
+
+.btn_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 100%;
+}
+
+.btn_icon {
+	width: 12px;
+	height: 12px;
+	margin-right: 3px;
+}
+
+.list_button {
+	width: 100%;
+	padding: 6px;
+	margin-top: 3px;
+	cursor: pointer;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 2px 3px 0 #627fac33;
 }

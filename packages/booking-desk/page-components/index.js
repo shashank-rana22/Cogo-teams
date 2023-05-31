@@ -7,6 +7,7 @@ const ResolveBookingDesk = {
 	fcl_freight       : dynamic(() => import('./FCL'), { ssr: false }),
 	fcl_freight_local : dynamic(() => import('./FCL-Local'), { ssr: false }),
 	lcl_freight       : dynamic(() => import('./LCL'), { ssr: false }),
+	fcl_cfs           : dynamic(() => import('./FCL-CFS'), { ssr: false }),
 };
 
 export default function BookingDesk() {

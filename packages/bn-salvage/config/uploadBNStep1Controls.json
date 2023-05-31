@@ -1,0 +1,130 @@
+[
+	{
+		"name": "operator_id",
+		"label": "Shipping Line",
+		"type": "async_select",
+		"asyncKey": "list_operators",
+		"labelKey": "business_name",
+		"valueKey": "id",
+		"placeholder": "Select Shipping Line",
+		"params": {
+			"filters": {
+				"operator_type": "shipping_line",
+				"status": "active"
+			},
+			"page_limit": 100,
+			"sort_by": "short_name",
+			"sort_type": "asc"
+		},
+		"rules": {
+			"required": "Shipping line is required"
+		}
+	},
+	{
+		"name": "service_provider_id",
+		"label": "Service Provider",
+		"type": "async_select",
+		"asyncKey": "organizations",
+		"placeholder": "Select Service Provider",
+		"params": {
+			"filters": {
+				"account_type": "service_provider",
+				"status": "active",
+				"kyc_status": "verified"
+			}
+		},
+		"rules": {
+			"required": "Service Provider is required"
+		}
+	},
+	{
+		"name": "origin_location_id",
+		"label": "Origin location",
+		"type": "async_select",
+		"asyncKey": "list_locations",
+		"placeholder": "Select Origin location",
+		"params": {
+			"filters": {
+				"status": "active",
+				"type": ["seaport", "country", "trade"]
+			},
+			"includes": {
+				"country": true,
+				"default_params_required": true
+			},
+			"page_limit": 20,
+			"sort_by": "name",
+			"sort_type": "asc"
+		},
+		"rules": {
+			"required": "Origin location is required"
+		}
+	},
+	{
+		"name": "destination_location_id",
+		"label": "Destination location",
+		"type": "async_select",
+		"asyncKey": "list_locations",
+		"placeholder": "Select Destination location",
+		"params": {
+			"filters": {
+				"status": "active",
+				"type": ["seaport", "country", "trade"]
+			},
+			"includes": {
+				"country": true,
+				"default_params_required": true
+			},
+			"page_limit": 20,
+			"sort_by": "name",
+			"sort_type": "asc"
+		},
+		"rules": {
+			"required": "Destination location is required"
+		}
+	},
+	{
+		"name": "currency",
+		"label": "Currency",
+		"type": "async_select",
+		"asyncKey": "list_exchange_rate_currencies",
+		"className": "currency_input",
+		"params": {
+			"filters": {
+				"status": "active"
+			}
+		},
+		"rules": {
+			"required": "Currency is required"
+		}
+	},
+	{
+		"name": "price",
+		"label": "Buy Price",
+		"type": "number",
+		"placeholder": "Enter Amount",
+		"rules": {
+			"required": "Price is required",
+			"min": {
+				"value": 0.0001,
+				"message": "Price should be greater than 0"
+			}
+		}
+	},
+	{
+		"label": "Upload File",
+		"name": "url",
+		"type": "file",
+		"className": "upload_file",
+		"draggable"     : true,
+		"loading"       : true,
+		"dropareaProps" : { 
+			"heading": "Upload your file here",
+			"subHeading": "supports - jpeg, jpg, svg, png, pdf, docx" 
+		},
+		"accept"        : ".jpeg, .xlsx, .jpg, .pdf, .png, .svg",
+		"rules": {
+			"required": "Document is required"
+		}
+	}
+]
