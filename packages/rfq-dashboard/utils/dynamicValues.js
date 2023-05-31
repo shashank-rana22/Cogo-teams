@@ -4,7 +4,6 @@ export const convertCurrencyValue = (
 	toCurrency,
 	conversions,
 ) => {
-	console.log('conversions::', conversions);
 	const {
 		base_currency,
 		currencies,

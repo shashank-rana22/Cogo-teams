@@ -37,7 +37,6 @@ function PriceFreightCtr({
 		},
 	];
 
-	console.log('price data::', data);
 	return (
 
 		<div className={styles.container}>

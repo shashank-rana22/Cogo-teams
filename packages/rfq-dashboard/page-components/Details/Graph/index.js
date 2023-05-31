@@ -3,7 +3,6 @@ import { IcCFtick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
-// import { graphPastMonthData } from '../../../configurations/past-months-graph-data';
 import useGetRfqGraph from '../../../hooks/useGetRfqGraph';
 
 import EmptyLineChart from './EmptyStateLineChart';
@@ -40,34 +39,6 @@ function Graph({ rfq_id = '' }) {
 
 	const graphValue = [{ id: 'shipment', data: graphPastMonthDatas }];
 
-	// (y_axis || []).forEach((item) => {
-	// 	console.log('item :: ', item);
-
-	// 	if (item) {
-	// 		// graphPastMonthData.push({
-	// 		// 	x : item?.month,
-	// 		// 	y : item?.count,
-	// 		// });
-	// 	}
-	// });
-
-	// let graphPastMonthData = [];
-
-	// if (y_axis && !loading) {
-	// 	graphPastMonthData = (y_axis)?.map(([key, value]) => ({
-	// 		x : key,
-	// 		y : value,
-	// 	}));
-	// }
-
-	// let graphPastMonthData = [];
-
-	// if (Array.isArray(y_axis) && !loading) {
-	// 	graphPastMonthData = y_axis.map(([key, value]) => ({
-	// 		x : key,
-	// 		y : value,
-	// 	}));
-	// }
 	return (
 		<div className={styles.container}>
 			{(isEmpty(graphPastMonthDatas) && !loading)
@@ -101,7 +72,6 @@ function Graph({ rfq_id = '' }) {
 
 									}}
 									pointSize={0}
-				// pointColor={{ theme: 'background' }}
 									pointBorderWidth={2}
 									pointBorderColor={{ from: 'serieColor' }}
 									pointLabelYOffset={-12}
@@ -124,7 +94,6 @@ function Graph({ rfq_id = '' }) {
 										{ match: '*', id: 'gradientC' },
 									]}
 									animate
-					// colors="linear-gradient(to bottom, #FFEBAD, #FFFFFF45)"
 									colorBy="id"
 								/>
 								<div className={styles.legend_sections}>
