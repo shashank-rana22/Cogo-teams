@@ -10405,6 +10405,12 @@ const partner = {
 			feature     : 'jobs',
 		},
 		{
+			api         : 'post_common_job_by_id_open',
+			access_type : 'private',
+			module      : 'jobs',
+			feature     : 'jobs',
+		},
+		{
 			api          : 'list_sage_jobs',
 			access_type  : 'private',
 			service_name : 'sage',
