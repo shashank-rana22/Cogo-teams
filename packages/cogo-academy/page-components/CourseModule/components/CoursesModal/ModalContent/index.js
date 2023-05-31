@@ -11,6 +11,7 @@ import useListCourseUserMappings from './useListCourseUserMappings';
 
 function ModalContent({ finalCourseCategories, loading, currentCategory, setCurrentCategory, setShowCoursesModal }) {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
+
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {

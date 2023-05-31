@@ -66,6 +66,7 @@ function HomePage({ user_id, CourseCategoryData }) {
 		<div>
 			<div>
 				<div className={styles.main_heading}>My Courses</div>
+
 				<div>
 					<Tabs
 						activeTab={activeTab}
@@ -112,6 +113,7 @@ function HomePage({ user_id, CourseCategoryData }) {
 						<IcMArrowRight />
 					</div>
 				</div>
+
 				<div>
 					<div className={styles.carousel_container}>
 						<Carousel

@@ -3,8 +3,12 @@ import { Modal } from '@cogoport/components';
 import ModalContent from './ModalContent';
 
 function CoursesModal({
-	loading, courseCategories, showCoursesModal,
-	setShowCoursesModal, currentCategory, setCurrentCategory,
+	loading,
+	courseCategories,
+	showCoursesModal,
+	setShowCoursesModal,
+	currentCategory,
+	setCurrentCategory,
 }) {
 	return (
 		<Modal

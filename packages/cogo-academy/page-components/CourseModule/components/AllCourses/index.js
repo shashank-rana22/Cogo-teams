@@ -13,15 +13,12 @@ import FilterPopover from './components/FilterPopover';
 import TagsSelect from './components/TagsSelect';
 import styles from './styles.module.css';
 
-function AllCourses({ currentCategory, setCurrentCategory }) {
+function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 	const router = useRouter();
+
 	const [activeTab, setActiveTab] = useState();
 	const [filters, setFilters] = useState('');
 	// const [topicName, setTopicName] = useState([]);
-
-	const {
-		finalCourseCategories:courseCategories = [],
-	} = useListCourseCategory();
 
 	const HANDLE_CLICK_MAPPING = {
 
@@ -52,9 +49,6 @@ function AllCourses({ currentCategory, setCurrentCategory }) {
 	// 		/>
 	// 	),
 	// }))
-
-	// console.log('courseCategories', courseCategories);
-	// console.log('filters', filters);
 
 	return (
 		<div className={styles.container}>

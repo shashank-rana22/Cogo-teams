@@ -30,7 +30,7 @@ function RightComponent({ data = {}, listLoading, setShowCoursesModal }) {
 							className={styles.outer_container}
 							onClick={() => {
 								setShowCoursesModal(false);
-								router.push('/learning/course?page="all"');
+								router.push('/learning/course?viewType=all_courses');
 							}}
 						>
 							<div className={styles.see_all}>
