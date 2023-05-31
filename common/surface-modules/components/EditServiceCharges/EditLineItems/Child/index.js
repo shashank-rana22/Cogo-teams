@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { IcMDelete } from '@cogoport/icons-react';
 import { useMemo } from 'react';
 
 import Item from '../../../Layout/Item';
@@ -13,6 +13,8 @@ function Child({
 	field = {},
 	remove = () => {},
 	customValues = {},
+	showDeleteButton = true,
+	error = {},
 }) {
 	const keys = useMemo(
 		() => Array(controls.length).fill(null).map(() => Math.random()),
@@ -41,14 +43,18 @@ function Child({
 							name={`${name}.${index}.${control_item?.name}`}
 							value={field?.[control_item?.name]}
 							control={control}
-							label={null}
+							label={control_item?.label}
+							error={error?.[control_item.name]}
 						/>
 					);
 				})}
 
-				<div className={styles.delete_button_container}>
-					<Button onClick={() => remove(index, 1)}>Delete</Button>
-				</div>
+				{showDeleteButton
+					? (
+						<div className={styles.delete_button_container}>
+							<IcMDelete width={20} height={20} onClick={() => remove(index, 1)} />
+						</div>
+					) : null}
 			</div>
 		</div>
 	);

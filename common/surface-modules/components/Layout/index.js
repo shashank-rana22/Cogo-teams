@@ -82,6 +82,7 @@ function Layout({
 										control={control}
 										customValues={customValues?.[field?.name]}
 										shipment_id={shipment_id}
+										error={errors?.[field?.name]}
 										{...field}
 									/>
 								</div>

@@ -57,8 +57,14 @@ const rawControls = (
 		},
 		{
 
-			type        : 'text',
-			name        : 'alias',
+			type  : 'text',
+			name  : 'alias',
+			label : (
+				<>
+					<div>Alias Name</div>
+					{info}
+				</>
+			),
 			placeholder : 'Enter alias name/code',
 			rules       : {
 				validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
@@ -67,12 +73,11 @@ const rawControls = (
 			span     : 2,
 		},
 		{
-			label    : 'Unit',
-			type     : 'select',
-			name     : 'unit',
-			options  : convertObjectMappingToArray(FTL_UNITS),
-			disabled : true,
-			span     : 2,
+			label   : 'Unit',
+			type    : 'select',
+			name    : 'unit',
+			options : convertObjectMappingToArray(FTL_UNITS),
+			span    : 2,
 		},
 		{
 			name           : 'currency',
