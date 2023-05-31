@@ -44,7 +44,7 @@ function ServiceStats({ data = [], type = '', source = '' }) {
 					className={cl`${data?.[item?.key] > 0 ? styles.green : styles.red}
 					${data?.[item?.key] === 0 ? styles.black : ''}`}
 				>
-					{`${Math.round(profitability).toFixed(2)}%`}
+					{`${(profitability).toFixed(2)}%`}
 				</span>
 			) : '-';
 		}
