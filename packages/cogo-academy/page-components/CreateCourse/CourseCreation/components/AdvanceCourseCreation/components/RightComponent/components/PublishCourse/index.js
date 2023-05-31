@@ -7,7 +7,7 @@ import { getFieldController } from '../../../../../../../../../commons/getFieldC
 import controls from './controls';
 import styles from './styles.module.css';
 
-const MAPPING = ['course_categories', 'course_title', 'thumbnail_url', 'description'];
+const MAPPING = ['course_categories', 'course_title', 'thumbnail_url', 'description', 'instructor_ids'];
 
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;

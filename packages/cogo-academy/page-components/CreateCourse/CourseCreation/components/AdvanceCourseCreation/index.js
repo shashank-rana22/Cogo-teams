@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 
+import EmptyState from '../../../commons/EmptyState';
 import LoadingState from '../../../commons/LoadingState';
 
 import LeftComponent from './components/LeftComponent';
@@ -28,6 +29,20 @@ function AdvanceCourseCreation({ id, mode }) {
 				<div className={styles.right_section}>
 					<LoadingState rowsCount={6} />
 				</div>
+			</div>
+		);
+	}
+
+	if (state === 'published') {
+		return (
+			<div style={{ marginTop: '100px' }}>
+				<EmptyState
+					height={200}
+					width={300}
+					emptyText="This course is already published"
+					flexDirection="column"
+					textSize={24}
+				/>
 			</div>
 		);
 	}
