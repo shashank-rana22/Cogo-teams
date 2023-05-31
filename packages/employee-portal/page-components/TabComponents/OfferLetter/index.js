@@ -7,7 +7,12 @@ import styles from './styles.module.css';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
 function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
-	const { id, status } = data?.offer_letter || {};
+	const { progress_stats = {} } = data;
+	const { id } = data?.offer_letter || {};
+	const {
+		offer_letter_signed = {},
+	} = progress_stats;
+	const { get_offer_letter_signed = false } = offer_letter_signed;
 
 	const document_url = 'https://www.orimi.com/pdf-test.pdf';
 
@@ -26,7 +31,7 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 			</div>
 
 			{
-				status !== 'accepted' ? (
+				get_offer_letter_signed ? (
 					<div className={styles.button_container}>
 						<div style={{ paddingRight: 10 }}>
 							<Button

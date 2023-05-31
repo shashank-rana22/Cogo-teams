@@ -17,8 +17,10 @@ function useGetEmployeeDetails({ id = '', company_policy_data_required = false }
 		try {
 			trigger({
 				params: {
-					user_id               : userId,
-					offer_letter_required : true,
+
+					user_id                 : userId,
+					offer_letter_required   : true,
+					progress_stats_required : true,
 					company_policy_data_required,
 				},
 			});

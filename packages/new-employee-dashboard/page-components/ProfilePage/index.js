@@ -31,8 +31,6 @@ function ProfilePage() {
 	const { offerLetter, loading:offerLetterApiLoading } = useGetOfferLetter();
 	const { metadata } = offerLetter || {};
 
-	console.log('offerLetter', offerLetter);
-
 	const { detail = {} } = profileData || {};
 
 	return (

@@ -59,7 +59,7 @@ const getColumns = ({ onClickNewJoinerColumn }) => [
 						</div>
 					</div>
 					<div>
-						{progress_percentage}
+						{Math.round(progress_percentage * 100) / 100}
 						% complete
 					</div>
 				</div>

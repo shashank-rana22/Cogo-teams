@@ -142,6 +142,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 											? (
 												<div className={styles.error_msg}>
 													{errors[controlName]?.message}
+
 												</div>
 											) : null}
 									</div>

@@ -1,6 +1,5 @@
 import { Accordion, Pill } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 
 import BankDetails from './BankDetails';
 import EducationalQualification from './EducationalQualification';
@@ -9,27 +8,37 @@ import Resume from './Resume';
 import styles from './styles.module.css';
 
 function AdditionalInformation({ setInformationPage, data }) {
+	const { progress_stats = {} } = data || {};
+	const {
+		additional_info_added = {},
+	} = progress_stats;
+	const {
+		bank_details = false,
+		educational_qualification = false,
+		employment_history = false,
+		resume = false,
+	} = additional_info_added;
 	const content_mapping = [
 		{
 			title     : 'EMPLOYMENT HISTORY',
 			content   : EmploymentHistory,
-			isPending : isEmpty(data?.detail?.employee_experience_details),
+			isPending : employment_history,
 		},
 		{
 			title     : 'EDUCATIONAL QUALIFICATION',
 			content   : EducationalQualification,
-			isPending : isEmpty(data?.detail?.employee_education_details),
+			isPending : educational_qualification,
 		},
 		{
 			title     : 'RESUME',
 			content   : Resume,
-			isPending : isEmpty(data?.documents),
+			isPending : resume,
 		},
 		{
 			title     : 'BANK DETAILS',
 			content   : BankDetails,
 			key       : 'bank_details',
-			isPending : isEmpty(data?.bank_details),
+			isPending : bank_details,
 		},
 	];
 
@@ -50,13 +59,6 @@ function AdditionalInformation({ setInformationPage, data }) {
 				{content_mapping.map((item) => {
 					const { content: Component, isPending } = item;
 
-					const getStatus = () => {
-						if (data[isPending]) {
-							return false;
-						}
-						return true;
-					};
-
 					return (
 						<div
 							key={item.title}
@@ -68,10 +70,10 @@ function AdditionalInformation({ setInformationPage, data }) {
 								title={(
 									<div className={styles.status}>
 										<div className={styles.accordion_title}>{item.title}</div>
-										<Pill color="green">
-											{getStatus()
-												? 'Completed' : 'Pending'}
-										</Pill>
+
+										{isPending
+											? <Pill color="green">Completed</Pill>
+											: <Pill color="yellow">Pending</Pill>}
 									</div>
 								)}
 								animate

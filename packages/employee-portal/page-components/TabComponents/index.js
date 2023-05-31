@@ -35,8 +35,6 @@ TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails })
 
 	};
 
-	const { status } = data?.offer_letter || {};
-
 	if (informationPage) {
 		const PageComponent = component_mapping[informationPage];
 		return (
@@ -76,11 +74,12 @@ TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails })
 								height="60"
 							/>
 							<div className={styles.card_header}>{startCase(item)}</div>
-						</div>
 
+						</div>
 						<div className={styles.arrow_wrapper}>
 							<IcMArrowNext width={20} height={20} />
 						</div>
+
 					</div>
 				))
 			}
