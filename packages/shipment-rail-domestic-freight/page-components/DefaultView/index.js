@@ -15,8 +15,8 @@ import styles from './styles.module.css';
 // const DocumentHoldDetails = dynamic(() => import('../DocumentHoldDetails'), { ssr: false });
 
 const TAB_MAPPING = {
-	// overview  : dynamic(() => import('../Overview'), { ssr: false }),
-	// tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
+	overview  : dynamic(() => import('../Overview'), { ssr: false }),
+	tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
 };

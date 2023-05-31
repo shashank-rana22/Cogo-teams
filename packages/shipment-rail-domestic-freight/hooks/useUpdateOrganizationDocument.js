@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
-const useUpdateOrganizationDocument = ({ refetch, defaultParams = {} }) => {
+const useUpdateOrganizationDocument = ({ refetch = () => {}, defaultParams = {} }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : 'update_organization_document',
 		method : 'POST',
@@ -22,7 +22,7 @@ const useUpdateOrganizationDocument = ({ refetch, defaultParams = {} }) => {
 
 			refetch();
 		} catch (err) {
-			// toastApiError(err);
+			toastApiError(err);
 		}
 	};
 

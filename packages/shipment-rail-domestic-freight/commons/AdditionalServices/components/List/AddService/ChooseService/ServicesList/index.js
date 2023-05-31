@@ -1,4 +1,4 @@
-import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
+import EmptyState from '@cogoport/surface-modules/common/EmptyState';
 import React from 'react';
 
 import Header from './CardHeader';

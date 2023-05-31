@@ -14,7 +14,7 @@ import SecondStep from './SecondStep';
 import STAKE_HOLDER_SPECIFIC_PROPS from './stakeHolderCongifs';
 import styles from './styles.module.css';
 
-const showRemarksStatus = [
+const REMARK_STATUS = [
 	'amendment_requested_by_importer_exporter',
 	'requested_for_service_provider',
 	'cancelled_by_supplier',
@@ -78,9 +78,7 @@ function AddRate({
 		refetch();
 	};
 
-	const {
-		loading, apiTrigger: apiTriggerCreate,
-	} = useCreateShipmentAdditionalService({
+	const { loading, apiTrigger: apiTriggerCreate = () => {} } = useCreateShipmentAdditionalService({
 		refetch        : afterAddRate,
 		successMessage : 'Successfully Added Additional Service',
 	});
@@ -130,7 +128,7 @@ function AddRate({
 				{startCase(item?.service_type || item.service_type)}
 				)
 			</div>
-			{showRemarksStatus.includes(status?.status) ? (
+			{REMARK_STATUS.includes(status?.status) ? (
 				<p style={{ marginTop: '8px' }}>
 					<strong> Comment:</strong>
 					&nbsp;

@@ -19,7 +19,7 @@ const useCreateShipmentAdditionalService = ({
 
 			refetch();
 		} catch (err) {
-			// toastApiError(err);
+			toastApiError(err);
 		}
 	};
 

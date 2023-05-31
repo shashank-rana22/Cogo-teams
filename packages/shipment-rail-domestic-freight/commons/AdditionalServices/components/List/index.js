@@ -122,7 +122,7 @@ function List({ isSeller = false }) {
 				</Button>
 			</div>
 
-			{showModal === 'add_sell_price' && (
+			{showModal === 'add_sell_price' ? (
 				<Modal
 					size="lg"
 					show
@@ -141,17 +141,17 @@ function List({ isSeller = false }) {
 						/>
 					</Modal.Body>
 				</Modal>
-			)}
+			) : null}
 
-			{showModal === 'ip' && (
+			{showModal === 'ip' ? (
 				<AddIp
 					shipmentData={shipment_data}
 					closeModal={closeModal}
 					updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
 				/>
-			)}
+			) : null}
 
-			{showModal === 'charge_code' && (
+			{showModal === 'charge_code' ? (
 				<AddService
 					shipmentId={shipment_data?.id}
 					services={servicesList}
@@ -160,8 +160,7 @@ function List({ isSeller = false }) {
 					setItem={setItem}
 					closeModal={closeModal}
 				/>
-			)}
-
+			) : null}
 		</div>
 	);
 }

@@ -177,6 +177,8 @@ export const renderValue = (label, detail) => {
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
 			return format(detail?.delivery_date, 'dd MMM yyyy');
+		case 'container_load_type':
+			return startCase(detail[label] || '');
 		default:
 			return detail[label] || null;
 	}
