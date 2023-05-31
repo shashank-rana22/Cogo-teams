@@ -1,4 +1,4 @@
-import { Placeholder, Tooltip } from '@cogoport/components';
+import { Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import {
 	IcMArrowRotateLeft,
@@ -52,11 +52,11 @@ function InvoiceDetails({ item }) {
 				onClick={handleShow}
 				role="presentation"
 			>
-				<Tooltip placement="top" content="Invoice Timeline">
-					<div>
-						<IcMOverview width={24} height={24} />
-					</div>
-				</Tooltip>
+
+				<div>
+					<IcMOverview width={24} height={24} />
+				</div>
+
 			</div>
 			{showDetailsCard && (
 				<>
@@ -69,6 +69,7 @@ function InvoiceDetails({ item }) {
 									className={styles.icon_container}
 									onClick={() => {
 										setShowDetailsCard(false);
+										document.body.style.overflow = 'auto';
 									}}
 									role="presentation"
 								>

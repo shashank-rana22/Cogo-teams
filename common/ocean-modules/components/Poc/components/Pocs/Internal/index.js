@@ -6,8 +6,9 @@ import getInternalPocData from '../../../helpers/getInternalPocData';
 import Stakeholders from './Stakeholders';
 import styles from './styles.module.css';
 
-function Internal({ data = [], setAddPoc = () => { }, loading = false }) {
+function Internal({ data = [], setAddPoc = () => { }, loading = false, rolesPermission = {} }) {
 	const internalData = getInternalPocData(data);
+	const canAddPoc = !!rolesPermission?.add_internal_poc;
 
 	return (
 		<div>
@@ -15,7 +16,7 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false }) {
 				<>
 					<div className={styles.header}>
 						<div className={styles.heading}>Internal : Cogoport</div>
-						<div>
+						{canAddPoc ? (
 							<Button
 								size="sm"
 								onClick={() => {
@@ -25,8 +26,7 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false }) {
 							>
 								+ ADD POC
 							</Button>
-
-						</div>
+						) : null}
 					</div>
 
 					<div>
@@ -37,6 +37,7 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false }) {
 									<Stakeholders
 										data={internalData[key]}
 										setAddPoc={setAddPoc}
+										rolesPermission={rolesPermission}
 									/>
 
 								</div>

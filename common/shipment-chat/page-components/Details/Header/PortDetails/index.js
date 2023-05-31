@@ -60,7 +60,7 @@ function PortDetails({ data = {}, primary_service = {}, isShow = true }) {
 
 			{destination_port ? (
 				<div className={styles.icon_wrapper}>
-					<IcMPortArrow style={{ width: '1.5em', height: '1.5em' }} />
+					<IcMPortArrow style={{ width: '1.2em', height: '1.2em' }} />
 				</div>
 			) : null}
 

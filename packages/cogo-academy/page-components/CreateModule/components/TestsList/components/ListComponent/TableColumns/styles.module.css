@@ -86,3 +86,7 @@
 .details {
 	margin: auto;
 }
+
+.questions_count {
+	text-align: start;
+}

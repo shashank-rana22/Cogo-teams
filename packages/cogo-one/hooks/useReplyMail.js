@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { usePublicRequest } from '@cogoport/request';
+import { useLensRequest } from '@cogoport/request';
 
 function useReplyMail(mailProps) {
 	const {
@@ -17,8 +17,8 @@ function useReplyMail(mailProps) {
 		forward   : 'forward_mail',
 		send_mail : 'send_mail',
 	};
-	const [{ loading }, trigger] = usePublicRequest({
-		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/${apiName[buttonType]}`,
+	const [{ loading }, trigger] = useLensRequest({
+		url    : `/${apiName[buttonType]}`,
 		method : 'POST',
 
 	}, { manual: true });

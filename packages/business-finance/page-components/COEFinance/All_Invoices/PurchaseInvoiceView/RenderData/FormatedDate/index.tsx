@@ -60,7 +60,7 @@ function FormatedDate({ item, field }: Props) {
 				<div className={styled.invoice_amount}>
 					<div className={styled.show_amount}>{showOverflowingNumber(formatAmount, 16)}</div>
 
-					<Tooltip placement="top" content={content}>
+					<Tooltip placement="top" content={content} interactive>
 						<div className={styled.ic_min_icon}>
 							<IcMInfo width="16px" height="16px" />
 						</div>

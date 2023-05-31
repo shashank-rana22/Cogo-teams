@@ -1,4 +1,5 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { Toggle } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 

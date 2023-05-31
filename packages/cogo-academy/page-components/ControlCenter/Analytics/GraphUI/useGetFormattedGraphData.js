@@ -1,6 +1,6 @@
 import { format } from '@cogoport/utils';
 
-const MAPPING = {
+const TOTAL_SEARCHES_MAPPING = {
 	view_data_points: {
 		color: '#2a9df4', title: 'View count',
 	},
@@ -13,9 +13,18 @@ const MAPPING = {
 	search_data_points: {
 		color: '#EE3425', title: 'Total searches',
 	},
+
 };
 
-const useGetFormattedGraphData = ({ graph_data = {} }) => {
+const TOKEN_DATA_MAPPING = {
+	token_utilization_data_points: {
+		color: '#2a9df4', title: 'Token utilization',
+	},
+};
+
+const useGetFormattedGraphData = ({ graph_data = {}, source = '' }) => {
+	const MAPPING = source === 'token_utilization' ? TOKEN_DATA_MAPPING : TOTAL_SEARCHES_MAPPING;
+
 	const { abscissa, ...restData } = graph_data || {};
 
 	const graphData = [];

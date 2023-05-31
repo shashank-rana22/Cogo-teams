@@ -35,6 +35,7 @@ function useUpdateStandAloneTestQuestion({
 	editDetails,
 	editorValue = {},
 	uploadable,
+	setQuestionDetails = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
@@ -83,6 +84,7 @@ function useUpdateStandAloneTestQuestion({
 			setAllKeysSaved(true);
 			setEditDetails({});
 			setQuestionToDelete({});
+			setQuestionDetails({});
 			reset();
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));

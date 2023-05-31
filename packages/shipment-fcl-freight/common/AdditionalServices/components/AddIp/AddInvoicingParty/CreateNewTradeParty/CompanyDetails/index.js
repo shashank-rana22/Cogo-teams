@@ -39,6 +39,7 @@ function CompanyDetails({
 			<div className={styles.button_container}>
 				<Button
 					onClick={() => setShowComponent('view_billing_addresses')}
+					themeType="secondary"
 				>
 					Cancel
 				</Button>

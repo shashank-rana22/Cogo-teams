@@ -1,0 +1,30 @@
+.header_text {
+	font-size: 16px;
+	font-weight: 600;
+	color: #4f4f4f;
+}
+
+.table {
+	background-color: #fff;
+
+	tr {
+		height: 60px;
+	}
+
+	:global(.ui_table_head_cell) {
+		font-size: 14px;
+	}
+}
+
+.empty_container {
+	padding: 16px;
+	margin-top: 20px;
+	background: #fff;
+	border: 1px solid #d6d4d46e;
+	border-radius: 8px;
+}
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-end;
+}

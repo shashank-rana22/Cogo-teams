@@ -1,3 +1,5 @@
+import styles from './styles.module.css';
+
 export const requestControls = (isSettlementExecutive = false) => {
 	let optionsVal = [{}];
 	if (isSettlementExecutive) {
@@ -22,6 +24,18 @@ export const requestControls = (isSettlementExecutive = false) => {
 			{
 				value : 'CONCOR_PDA_APPROVAL',
 				label : 'Concor PDA Approval',
+			},
+			{
+				value : 'SEZ_APPROVAL',
+				label : 'Sez Approval',
+			},
+			{
+				value : 'ADVANCE_SECURITY_DEPOSIT',
+				label : 'Advance Container Security Deposit',
+			},
+			{
+				value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
+				label : 'Advance Container Security Deposit Refund',
 			},
 		];
 	}
@@ -53,6 +67,7 @@ export const requestControls = (isSettlementExecutive = false) => {
 			isPreviousDaysAllowed : true,
 			caret                 : true,
 			isClearable           : true,
+			className             : styles.date,
 		},
 	];
 };
@@ -82,6 +97,18 @@ export const remainControls = (isSettlementExecutive = false) => {
 				value : 'CONCOR_PDA_APPROVAL',
 				label : 'Concor PDA Approval',
 			},
+			{
+				value : 'SEZ_APPROVAL',
+				label : 'Sez Approval',
+			},
+			{
+				value : 'ADVANCE_SECURITY_DEPOSIT',
+				label : 'Advance Container Security Deposit',
+			},
+			{
+				value : 'ADVANCE_SECURITY_DEPOSIT_REFUND',
+				label : 'Advance Container Security Deposit Refund',
+			},
 		];
 	}
 
@@ -101,6 +128,7 @@ export const remainControls = (isSettlementExecutive = false) => {
 			caret                 : true,
 			isPreviousDaysAllowed : true,
 			isClearable           : true,
+			className             : styles.date,
 		},
 	];
 };

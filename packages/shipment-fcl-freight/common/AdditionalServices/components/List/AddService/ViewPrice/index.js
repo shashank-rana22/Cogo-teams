@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { useEffect, useMemo } from 'react';
 
 import useGetSubsidiaryServiceRateCards from '../../../../../../hooks/useGetSubsidiaryServiceRateCards';
 import CardList from '../../../../../CardList';
-import EmptyState from '../../../../../EmptyState';
 
 import styles from './styles.module.css';
 import fields from './viewPriceFields';

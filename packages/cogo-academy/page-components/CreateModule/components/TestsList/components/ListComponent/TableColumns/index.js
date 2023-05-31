@@ -1,31 +1,30 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMShare } from '@cogoport/icons-react';
 import { Link } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
 
-import SortComponent from '../../SortComponent';
+import SortComponent from '../../../../../commons/SortComponent';
 import copyToClipboard from '../helpers/copyToClipboard';
 
 import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
 import styles from './styles.module.css';
 import ValidityDisplay from './ValidityDisplay';
 
-const PILL_COLOR_MAPPING = {
-	active    : '#C4DC91',
-	upcoming  : '#CFEAEC',
-	published : '#FAD1A5',
-	expired   : '#F8AEA8',
-	draft     : '#FEF099',
-	retest    : '#E0E0E0',
-};
+const propsFunction = ({ router, id }) => ({
+	role    : 'presentation',
+	style   : { cursor: 'pointer' },
+	onClick : () => {
+		router.push(`/learning/test-module/question?mode=view&id=${id}`);
+	},
+});
 
 export const questionSetColumns = ({ loading, router, setShowModal, setQuestionSetId, sortFilter, setSortFilter }) => [
 	{
 		Header   : 'QUESTION SET NAME',
 		id       : 'name',
-		accessor : ({ name = '' }) => (
-			<div>
+		accessor : ({ name = '', id = '' }) => (
+			<div {...propsFunction({ router, id })}>
 				<Tooltip maxWidth={500} content={startCase(name)} placement="top">
 					<div className={styles.content}>
 						{name}
@@ -37,8 +36,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	{
 		Header   : 'TOPIC',
 		id       : 'topic',
-		accessor : ({ topic = [] }) => (
-			<section className={styles.content}>
+		accessor : ({ topic = [], id = '' }) => (
+			<section {...propsFunction({ router, id })} className={styles.content}>
 				<Tooltip maxWidth={500} content={startCase(topic)} placement="top">
 					<Pill
 						className={styles.topic_pill}
@@ -54,15 +53,15 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	{
 		Header   : 'COGO ENTITY',
 		id       : 'cogo_entity_name',
-		accessor : ({ cogo_entity_name = '' }) => (
-			<section>{cogo_entity_name}</section>
+		accessor : ({ cogo_entity_name = '', id = '' }) => (
+			<section {...propsFunction({ router, id })}>{cogo_entity_name}</section>
 		),
 	},
 	{
 		Header   : 'NO. OF STANDALONE QUESTIONS',
 		id       : 'questions',
-		accessor : ({ stand_alone_question_count = 0 }) => (
-			<section>
+		accessor : ({ stand_alone_question_count = 0, id = '' }) => (
+			<section {...propsFunction({ router, id })}>
 				{stand_alone_question_count || 0}
 			</section>
 		),
@@ -70,8 +69,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	{
 		Header   : 'NO. OF CASES',
 		id       : 'case_study_questions',
-		accessor : ({ case_study_question_count = 0 }) => (
-			<section>
+		accessor : ({ case_study_question_count = 0, id = '' }) => (
+			<section {...propsFunction({ router, id })}>
 				{case_study_question_count || 0}
 			</section>
 		),
@@ -79,8 +78,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	{
 		Header   : 'NO. OF SUBJECTIVE QUESTIONS',
 		id       : 'subjective_questions',
-		accessor : ({ subjective_question_count = 0 }) => (
-			<section>
+		accessor : ({ subjective_question_count = 0, id = '' }) => (
+			<section {...propsFunction({ router, id })}>
 				{subjective_question_count || 0}
 			</section>
 		),
@@ -88,8 +87,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 	{
 		Header   : 'NO. OF TESTS USING THE SET',
 		id       : 'number_of_tests',
-		accessor : ({ set_count = 0 }) => (
-			<section>
+		accessor : ({ set_count = 0, id = '' }) => (
+			<section {...propsFunction({ router, id })}>
 				{set_count}
 			</section>
 		),
@@ -107,8 +106,8 @@ export const questionSetColumns = ({ loading, router, setShowModal, setQuestionS
 			</div>
 		),
 		id       : 'updated_at',
-		accessor : ({ updated_at = '' }) => (
-			<span className={styles.time}>
+		accessor : ({ updated_at = '', id = '' }) => (
+			<span className={styles.time} {...propsFunction({ router, id })}>
 				{`${format(updated_at, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}`}
 				{' '}
 				{format(updated_at, GLOBAL_CONSTANTS.formats.time['hh:mm aaa'])}
@@ -187,6 +186,7 @@ export const testSetColumns = ({
 						maxWidth={400}
 						content={(topics.map((topic, index) => ((index >= 1) ? (
 							<Pill
+								key={topic}
 								className={styles.topic_pill_sub}
 								size="lg"
 								color="#F3FAFA"
@@ -216,7 +216,7 @@ export const testSetColumns = ({
 		Header   : 'TOTAL QUESTIONS',
 		id       : 'total_questions',
 		accessor : ({ case_study_questions = 0, stand_alone_questions = 0, subjective_questions = 0 }) => (
-			<section className={styles.questions_count}>
+			<div className={styles.questions_count}>
 				<div>
 					{stand_alone_questions || 0}
 					{' '}
@@ -233,6 +233,13 @@ export const testSetColumns = ({
 					Subjective
 				</div>
 			</section>
+		),
+	},
+	{
+		Header   : 'ALLOWED ATTEMPTS',
+		id       : 'allowed_attempts',
+		accessor : ({ maximum_attempts = 0 }) => (
+			<section>{maximum_attempts || '-'}</section>
 		),
 	},
 	{

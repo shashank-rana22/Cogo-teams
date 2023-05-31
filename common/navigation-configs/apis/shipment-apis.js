@@ -608,11 +608,6 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'list_organization_invoicing_parties',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-	{
 		api          : 'list_organization_billing_addresses',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -719,12 +714,6 @@ const apis = [
 	},
 	{
 		api          : 'update_shipment_operating_instruction',
-		access_type  : 'private',
-		service_name : 'shipment',
-	},
-
-	{
-		api          : 'list_organization_invoicing_parties',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
@@ -1310,6 +1299,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'get_buyers',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'list_documents',
 		access_type  : 'private',
 		service_name : 'bookings',
@@ -1370,6 +1364,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'get_possible_documents',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'update_shipment_rail_domestic_freight_invoice_type',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1400,6 +1399,21 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
+		api          : 'create_saas_surface_shipment_detail',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_tracking_consent',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_saas_ftl_tracking_detail',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
 		api          : 'send_whatsapp_booking_note_delayed',
 		access_type  : 'private',
 		service_name : 'shipment',
@@ -1417,9 +1431,82 @@ const apis = [
 		feature      : 'revenue_desk',
 	},
 	{
+		api          : 'send_booking_preference_email',
+		access_type  : 'private',
+		service_name : 'communication',
+		feature      : 'revenue_desk',
+	},
+	{
 		api          : 'list_organization_assets',
 		access_type  : 'private',
 		service_name : 'organization',
+	},
+	{
+		api          : 'list_authority_desk_bl_documents',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'bl_do',
+	},
+	{
+		api          : 'list_organization_branches',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'create_organization_asset',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'update_organization_asset',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'list_partner_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'generate_bluetide_hbl',
+		access_type  : 'private',
+		service_name : 'shipment',
+
+	},
+	{
+		api          : 'get_pending_task_authorization',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_shipment_fortigo_trip_locations',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_shipment_fortigo_trip_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_fortigo_trip_detail',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_saas_rail_domestic_freight_container_details',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'get_maruti_tracking_details',
+		access_type  : 'private',
+		service_name : 'saas_traceability',
+	},
+	{
+		api          : 'list_contracts',
+		access_type  : 'private',
+		service_name : 'contract',
 	},
 ];
 

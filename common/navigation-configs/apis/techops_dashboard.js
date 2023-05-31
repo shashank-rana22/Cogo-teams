@@ -53,6 +53,24 @@ const apis = [
 		feature      : 'techops_dashboard',
 		service_name : 'air_freight_rate',
 	},
+	{
+		api          : 'list_draft_fcl_freight_rate_locals',
+		access_type  : 'private',
+		feature      : 'techops_dashboard',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'update_fcl_freight_rate_local',
+		access_type  : 'private',
+		feature      : 'techops_dashboard',
+		service_name : 'fcl_freight_rate',
+	},
+	{
+		api          : 'update_draft_fcl_freight_rate_local',
+		access_type  : 'private',
+		feature      : 'techops_dashboard',
+		service_name : 'fcl_freight_rate',
+	},
 ];
 
 export default apis;

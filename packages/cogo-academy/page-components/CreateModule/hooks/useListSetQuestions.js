@@ -22,7 +22,7 @@ function useListSetQuestions({
 			const res = await trigger({
 				params: {
 					id         : questionSetId,
-					page_limit : 5,
+					page_limit : 10,
 					page       : pageToShow || page,
 					...sortFilter,
 					filters    : {

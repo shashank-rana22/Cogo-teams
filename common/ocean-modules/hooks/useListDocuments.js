@@ -18,9 +18,7 @@ function useListDocuments({
 				...defaultFilters,
 			},
 			...defaultParams,
-
 		},
-
 	}, { manual: true });
 
 	const listDocuments = useCallback(() => {

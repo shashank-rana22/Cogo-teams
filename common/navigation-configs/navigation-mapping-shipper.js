@@ -110,6 +110,16 @@ const navigationMappingShipper = {
 				possible_apis : app_apis.saas_import_export_doc,
 			},
 			{
+				key           : 'saas_premium_services-import_export_controls',
+				title         : 'Import/Export Controls',
+				type          : 'link',
+				icon          : 'nav-trade-payment',
+				href          : '/saas/premium-services/import-export-controls',
+				as            : '/saas/premium-services/import-export-controls',
+				main_apis     : [],
+				possible_apis : app_apis.saas_import_export_controls,
+			},
+			{
 				key           : 'saas_premium_services-order_history',
 				title         : 'Order History',
 				href          : '/saas/premium-services/order-history',
@@ -354,7 +364,7 @@ const navigationMappingShipper = {
 		icon      : 'nav-container-tracking',
 		type      : 'link',
 		isSubNavs : true,
-		showInNav : false,
+		showInNav : true,
 		options   : [
 			{
 				key           : 'saas_tracking-map_dashboard',

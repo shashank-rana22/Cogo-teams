@@ -1,0 +1,28 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+	width: 15%;
+	margin: 0 24px;
+	font-size: 12px;
+}
+
+.col {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	margin: 6px 0;
+}
+
+.grey {
+	color: var(--color-secondary-greyscale-3);
+}
+
+.left {
+	width: 40%;
+}
+
+.right {
+	width: 60%;
+}

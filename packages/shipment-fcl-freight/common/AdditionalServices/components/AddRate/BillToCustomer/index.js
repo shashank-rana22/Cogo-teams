@@ -21,7 +21,7 @@ function BillToCustomer({ updateResponse, onCancel, onBillToCustomer }) {
 			<div className={styles.button_container}>
 				<Button
 					onClick={onCancel}
-					className="secondary md"
+					themeType="secondary"
 					style={{ marginRight: 10 }}
 				>
 					Cancel

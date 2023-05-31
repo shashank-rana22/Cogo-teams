@@ -1,4 +1,4 @@
-const controls = () => {
+const controls = ({ showComponent }) => {
 	const formControls = [
 		{
 			type  : 'input',
@@ -7,6 +7,7 @@ const controls = () => {
 			rules : {
 				required: { value: true, message: 'Name is required' },
 			},
+			show: true,
 		},
 		{
 			type    : 'select',
@@ -20,6 +21,7 @@ const controls = () => {
 			rules: {
 				required: { value: true, message: 'Address Type is required' },
 			},
+			show: showComponent !== 'create_trade_party',
 		},
 		{
 			type        : 'async-select',
@@ -34,6 +36,7 @@ const controls = () => {
 			rules: {
 				required: { value: true, message: 'Country of Registration is required' },
 			},
+			show: showComponent !== 'create_trade_party',
 		},
 		{
 			type        : 'async-select',
@@ -49,6 +52,7 @@ const controls = () => {
 			rules: {
 				required: { value: true, message: 'Pincode is required' },
 			},
+			show: true,
 		},
 		{
 			type  : 'text-area',
@@ -58,6 +62,7 @@ const controls = () => {
 			rules : {
 				required: { value: true },
 			},
+			show: true,
 		},
 		{
 			type  : 'file',
@@ -66,11 +71,13 @@ const controls = () => {
 			rules : {
 				required: { value: true, message: 'Document is required' },
 			},
+			show: true,
 		},
 		{
 			type  : 'checkbox',
 			name  : 'is_sez',
 			label : 'Is Sez',
+			show  : true,
 		},
 	];
 

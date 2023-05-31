@@ -264,11 +264,6 @@ export const MAIL_REPLY_TYPE = [
 	},
 ];
 export const PAGE_LIMIT = 50;
-export const INDIA_COUNTRY_ID = '541d1232-58ce-4d64-83d6-556a42209eb7';
-
-export const GENERAL_ICON = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg';
-
-export const ECLAMATION_SVG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg';
 
 export const FILTER_KEYS_MAPPING = {
 	requested  : { Statuses: 'reject_requested,resolve_requested' },
@@ -281,3 +276,11 @@ export const PRIORITY_MAPPING = {
 	high   : '#EE3425',
 	low    : '#FCDC00',
 };
+
+export const ICON_MAPPING = {
+	incoming : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
+	outgoing : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
+	missed   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
+};
+
+export const STRING_TO_ARRAY_REGEX = /'/g;

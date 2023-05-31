@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
-import { useDispatch, useSelector } from '@cogoport/store';
+import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
 import { isEmpty } from '@cogoport/utils';
 
@@ -13,14 +13,10 @@ function VoiceCallComponent({
 	orgId,
 	userId,
 	userName,
-	emptyState,
 	activeTab,
 	setModalType = () => {},
 }) {
 	const dispatch = useDispatch();
-	const { profileData } = useSelector(({ profile }) => ({
-		profileData: profile,
-	}));
 
 	let code;
 	let number;
@@ -40,27 +36,19 @@ function VoiceCallComponent({
 			},
 		});
 	};
-	const handleCall = async () => {
+	const handleCall = () => {
 		if (!isEmpty(userMobile)) {
 			dispatch(
 				setProfileState({
-					...profileData,
-					voice_call: {
-						...profileData.voice_call,
-						showCallModal       : true,
-						inCall              : true,
-						endCall             : false,
-						showFeedbackModal   : false,
+					is_in_voice_call          : true,
+					voice_call_recipient_data : {
 						startTime           : new Date(),
 						orgId,
 						userId,
 						mobile_number       : number,
 						mobile_country_code : `+${code}`,
-						agentId             : profileData?.user?.id,
-						name                : userName,
-						dialCall            : false,
-						emptyState,
-
+						userName,
+						isUnkownUser        : !userId,
 					},
 				}),
 			);
@@ -72,11 +60,10 @@ function VoiceCallComponent({
 			{userMobile ? (
 				<>
 					<div className={styles.flex_div}>
-						<div className={styles.dialer_icon_div}>
+						<div className={styles.dialer_icon_div} onClick={handleCall} role="button" tabIndex={0}>
 							<IcMCall
 								className={cl`${
 									(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
-								onClick={handleCall}
 							/>
 						</div>
 						<div className={styles.call_on_div}>

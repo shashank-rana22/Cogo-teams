@@ -30,6 +30,7 @@
 	font-size: 10px;
 	font-weight: 400;
 	color: #333;
+	cursor: pointer;
 	background: #f68b21;
 	border-radius: 4px;
 }
@@ -68,4 +69,8 @@
 	color: #333;
 	background: #fcedbf;
 	border-radius: 4px;
+}
+
+.styledText {
+	font-size: 12px;
 }

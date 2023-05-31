@@ -44,7 +44,7 @@ const useListCogooneTimeline = ({
 					filters: {
 						channel_chat_id: id,
 					},
-					pagination,
+					page: pagination,
 				};
 			}
 			res = await trigger({

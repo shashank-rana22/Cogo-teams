@@ -1,20 +1,20 @@
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
-import toastApiError from '../../../utils/toastApiError';
-import { getPrefillValue, getDateForPayload } from '../../utils/dateFormatter';
 import controls from '../EditSchedule/controls';
+import { getDate } from '../utils/getDate';
 
 export default function useEditServiceSchedule({
 	setShow = () => {},
 	timelineData = [],
 }) {
-	const { servicesList, primary_service, refetch: shipmentRefetch } = useContext(ShipmentDetailContext);
+	const { servicesList, primary_service, refetch: shipmentRefetch = () => {} } = useContext(ShipmentDetailContext);
 
-	const [departureDate, setDepartureDate] = useState(getPrefillValue(primary_service?.schedule_departure));
+	const [departureDate, setDepartureDate] = useState(getDate(primary_service?.schedule_departure));
 
 	const [{ loading }, updateShipmentService] = useRequest({
 		url    : 'update_shipment_service',
@@ -34,43 +34,38 @@ export default function useEditServiceSchedule({
 			setDepartureDate(schedule_departure);
 
 			const newDefaultValues = {};
+
 			finalControls.forEach(({ name }) => {
 				newDefaultValues[name] = (name === 'schedule_arrival'
-					? formValues[name] < schedule_departure
-					: formValues[name] > schedule_departure)
-					? null : formValues[name];
+					? formValues?.[name] < schedule_departure
+					: formValues?.[name] > schedule_departure)
+					? null : formValues?.[name];
 			});
+
 			reset(newDefaultValues);
 		}
 	}, [formValues, departureDate, reset, finalControls]);
 
 	const updateData = async (values) => {
-		const timezonedValues = {};
-		(Object.entries(values).forEach(([key, val]) => { timezonedValues[key] = getDateForPayload(val); }));
-
 		const mainServiceIds = (servicesList || [])
-			.filter((item) => item?.service_type === primary_service?.service_type)
-			.map((service) => service?.id);
+			?.filter((item) => item?.service_type === primary_service?.service_type)
+			?.map((service) => service?.id);
 
 		const payloadForUpdateShipment = {
 			ids                 : mainServiceIds,
-			performed_by_org_id : primary_service?.service_provider_id,
-			data                : ['vessel_arrived'].includes(
-				primary_service?.state,
-			)
-				? { schedule_arrival: timezonedValues?.schedule_arrival }
-				: { ...timezonedValues },
+			performed_by_org_id : primary_service?.service_provider?.id,
+			data                : ['vessel_arrived'].includes(primary_service?.state)
+				? { schedule_arrival: values?.schedule_arrival }
+				: { ...values },
 			service_type: primary_service?.service_type,
 		};
 
 		try {
-			const res = await updateShipmentService({ data: payloadForUpdateShipment });
+			await updateShipmentService({ data: payloadForUpdateShipment });
 
-			if (res.status === 200) {
-				Toast.success('Booking Note Updated Successfully !');
-				setShow(false);
-				shipmentRefetch();
-			}
+			Toast.success('Booking Note Updated Successfully !');
+			setShow(false);
+			shipmentRefetch();
 		} catch (err) {
 			toastApiError(err);
 		}
