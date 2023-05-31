@@ -25,7 +25,7 @@ function ProfilePage() {
 		getEmployeeDetails,
 	} = useProfileDetails();
 
-	const { detail = {} } = profileData || {};
+	const { detail = {}, offer_letter } = profileData || {};
 
 	return (
 		<div className={styles.container}>
@@ -34,6 +34,7 @@ function ProfilePage() {
 				loading={loading}
 				setShowCtcBreakupModal={setShowCtcBreakupModal}
 				getEmployeeDetails={getEmployeeDetails}
+				offer_letter={offer_letter}
 			/>
 
 			<div className={styles.tab_container}>

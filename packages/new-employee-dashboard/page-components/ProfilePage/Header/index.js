@@ -1,5 +1,5 @@
 import { Avatar, Button, Placeholder } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import useUpdateEmployeeDeatils from '../../hooks/useUpdateEmployeeDetails';
@@ -11,6 +11,7 @@ function Header({
 	loading,
 	setShowCtcBreakupModal,
 	getEmployeeDetails,
+	offer_letter,
 }) {
 	const { id, name, employee_code, designation, passport_size_photo_url, status } = detail || {};
 
@@ -63,7 +64,7 @@ function Header({
 					themeType="secondary"
 					style={{ marginLeft: 12 }}
 				>
-					Add CTC breakup
+					{isEmpty(offer_letter) ? 'Add CTC breakup' : 'View CTC breakup'}
 				</Button>
 
 				<Button
