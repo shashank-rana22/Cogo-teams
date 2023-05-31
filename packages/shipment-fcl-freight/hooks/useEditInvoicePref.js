@@ -1,66 +1,25 @@
 import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
-import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import formatIps from '../common/SalesInvoice/helpers/format-ips';
-import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
 import incoTermMapping from '../configurations/inco-term-mapping.json';
 
-const exportServiceTypes = 'fcl_freight_service';
+import useUpdateInvoiceCombination from './useUpdateInvoiceCombination';
+
+const EXPORT_SERVICES_TYPES = 'fcl_freight_service';
 
 const geo = getGeoConstants();
 
-const isAllServicesTaken = (
-	servicesList,
-	selectedParties,
-	shipment_data,
-	allServiceLineitemsCount,
-) => {
-	const shipmentMainService = `${shipment_data?.shipment_type}_service`;
-
-	let allServicesTaken = [];
-	selectedParties.forEach((party) => {
-		allServicesTaken.push(...(party.services || []));
-	});
-
-	allServicesTaken = allServicesTaken.map((service) => service.service_id);
-
-	let mainServices = [];
-	if (shipment_data?.state === 'cancelled') {
-		mainServices = servicesList?.filter(
-			(service) => service?.service_type === shipmentMainService,
-		);
-	} else {
-		mainServices = servicesList?.filter(
-			(service) => service?.service_type !== 'subsidiary_service',
-		);
-	}
-
-	let isAllMainServicesTaken = true;
-	const notTaken = [];
-
-	mainServices.forEach((service) => {
-		if (!allServicesTaken.includes(service.id)) {
-			isAllMainServicesTaken = false;
-			notTaken.push(service.service_type);
-		}
-	});
-
-	if (allServicesTaken.length !== allServiceLineitemsCount) {
-		isAllMainServicesTaken = false;
-	}
-	return { isAllMainServicesTaken, notTaken };
-};
-
 const useEditInvoicePref = ({
+	shipment_data = {},
 	servicesList,
 	invoicing_parties = [],
-	shipment_data = {},
 	refetch = () => {},
 }) => {
+	const { inco_term = '', importer_exporter_id = '' } = shipment_data;
+	const updateExportInvoices = incoTermMapping[inco_term] === 'export';
 	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
 		const { invoice_currency, is_igst } = p || {};
@@ -72,8 +31,6 @@ const useEditInvoicePref = ({
 		allServiceLineitems.push(...allServices);
 	});
 
-	const allServiceLineitemsCount = allServiceLineitems.length;
-
 	const formattedIps = formatIps(invoicing_parties || []);
 	const initial_service_invoice_id = {};
 	formattedIps?.forEach((ip) => {
@@ -84,38 +41,39 @@ const useEditInvoicePref = ({
 
 	const [selectedParties, setSelectedParties] = useState(formattedIps || []);
 
-	const {
-		inco_term = '',
-		importer_exporter_id,
-	} = shipment_data;
-
-	const updateExportInvoices = incoTermMapping[inco_term] === 'export';
-
-	const endPoint = updateExportInvoices ? '/update_shipment_export_invoice_combination'
-		: '/update_shipment_invoice_combination';
-
-	const [{ loading }, trigger] = useRequest({
-		url    : endPoint,
-		method : 'POST',
-	}, { manual: true });
-
 	const handleInvoicingPartyAdd = (ba) => {
+		const {
+			trade_party_type,
+			tax_number,
+			organization_trade_party_id,
+			registration_number,
+			poc,
+			pincode,
+			organization_id,
+			organization_country_id,
+			name,
+			is_sez,
+			business_name,
+			address,
+			tax_mechanism,
+		} = ba || {};
+
 		const newParty = {
 			id              : selectedParties.length,
 			billing_address : {
-				tax_number                  : ba?.tax_number,
-				organization_trade_party_id : ba?.organization_trade_party_id,
-				registration_number         : ba?.registration_number,
-				poc                         : ba?.poc,
-				pincode                     : ba?.pincode,
-				organization_id             : ba?.organization_id,
-				organization_country_id     : ba?.organization_country_id,
-				name                        : ba?.name,
-				is_sez                      : ba?.is_sez,
-				tax_mechanism               : ba?.tax_mechanism,
-				business_name               : ba?.business_name,
-				address                     : ba?.address,
-				trade_party_type            : ba?.trade_party_type,
+				trade_party_type,
+				tax_number,
+				organization_trade_party_id,
+				registration_number,
+				poc,
+				pincode,
+				organization_id,
+				organization_country_id,
+				name,
+				is_sez,
+				business_name,
+				address,
+				tax_mechanism,
 			},
 			invoice_currency : geo.country.currency.code,
 			services         : [],
@@ -125,10 +83,7 @@ const useEditInvoicePref = ({
 		setSelectedParties([newParty, ...selectedParties]);
 	};
 
-	const handleServiceChange = (
-		inv,
-		{ service_ids: newServices, invoice_currency: new_ic },
-	) => {
+	const handleServiceChange = (inv, { service_ids: newServices, invoice_currency: new_ic }) => {
 		const currentInvoiceIndex = selectedParties?.findIndex(
 			(party) => party.id === inv.id,
 		);
@@ -211,7 +166,7 @@ const useEditInvoicePref = ({
 				(finalNewSelectParties || []).forEach((party) => {
 					const BFLineItem = (party?.services || []).some(
 						(service) => service.serviceKey === isBasicFreightInvService.serviceKey
-							&& exportServiceTypes === isBasicFreightInvService.service_type,
+							&& EXPORT_SERVICES_TYPES === isBasicFreightInvService.service_type,
 					);
 
 					if (party?.services?.length > 1 && BFLineItem) {
@@ -230,77 +185,15 @@ const useEditInvoicePref = ({
 		}
 	};
 
-	const handleEditPreferences = async () => {
-		try {
-			const { isAllMainServicesTaken } = isAllServicesTaken(
-				servicesList,
-				selectedParties,
-				shipment_data,
-				allServiceLineitemsCount,
-			);
-
-			if (!isAllMainServicesTaken) {
-				Toast.error('You have not added all taken services');
-				return;
-			}
-			const filteredParties = selectedParties.filter(
-				(party) => !!party.services.length || typeof party.id === 'string',
-			);
-
-			const finalParties = [];
-
-			filteredParties.forEach((party) => {
-				const partyServices = [];
-
-				party?.services?.map((item) => {
-					const xyz = {
-						...item,
-						invoice_combination_id: updateExportInvoices
-							? initial_service_invoice_id[item?.serviceKey] || undefined
-							: undefined,
-						display_name : undefined,
-						trade_type   : undefined,
-						serviceKey   : undefined,
-						is_igst      : null,
-					};
-
-					partyServices.push(xyz);
-					return partyServices;
-				});
-
-				const partyDetails = {
-					...party,
-					services: partyServices,
-				};
-
-				if (
-					!POST_REVIEWED_INVOICES.includes(partyDetails?.status)
-					&& partyDetails?.services?.length
-				) {
-					if (typeof partyDetails.id === 'number') {
-						delete partyDetails.id;
-						finalParties.push(partyDetails);
-					} else {
-						finalParties.push(partyDetails);
-					}
-				}
-			});
-
-			const payload = {
-				shipment_id          : shipment_data.id,
-				invoice_combinations : finalParties,
-				performed_by_org_id  : importer_exporter_id,
-			};
-
-			await trigger({
-				data: payload,
-			});
-			Toast.success('Invoice Preference edited!');
-			refetch();
-		} catch (err) {
-			toastApiError(err?.data);
-		}
-	};
+	const { handleEditPreferences, loading } = useUpdateInvoiceCombination({
+		servicesList,
+		selectedParties,
+		initial_service_invoice_id,
+		allServiceLineitemsCount: allServiceLineitems.length,
+		refetch,
+		importer_exporter_id,
+		updateExportInvoices,
+	});
 
 	return {
 		selectedParties,

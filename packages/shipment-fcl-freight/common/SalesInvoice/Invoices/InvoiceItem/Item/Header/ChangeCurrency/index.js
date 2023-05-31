@@ -1,10 +1,10 @@
 import { Button, Modal, Select } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateCurrency from '../../../../../../../hooks/useUpdateCurrency';
-import INVOICE_CURRENCY_MAPPINGS from '../../../../../helpers/invoiceCurrencyMapping';
 
 import styles from './styles.module.css';
 
@@ -21,9 +21,9 @@ function ChangeCurrency({
 
 	const geo = getGeoConstants();
 
-	const currencyOptionsOld =	INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.[
+	const currencyOptionsOld =	GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.[
 		invoice?.country_code || geo.country.currency.code
-	] || INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.others;
+	] || GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.others;
 
 	const currencyOptions = currencyOptionsOld.map((item) => ({
 		label : item,

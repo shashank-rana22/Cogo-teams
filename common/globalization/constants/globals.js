@@ -132,4 +132,28 @@ const GLOBAL_CONSTANTS = {
 	},
 };
 
+GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
+	freight_invoice_currency: {
+		IN: [
+			GLOBAL_CONSTANTS.currency_code.INR,
+			GLOBAL_CONSTANTS.currency_code.USD,
+		],
+		GB: [
+			GLOBAL_CONSTANTS.currency_code.GBP,
+			GLOBAL_CONSTANTS.currency_code.EUR,
+			GLOBAL_CONSTANTS.currency_code.USD,
+		],
+		VN: [
+			GLOBAL_CONSTANTS.currency_code.USD,
+			GLOBAL_CONSTANTS.currency_code.VND,
+		],
+		others: [
+			GLOBAL_CONSTANTS.currency_code.USD,
+			GLOBAL_CONSTANTS.currency_code.EUR,
+			GLOBAL_CONSTANTS.currency_code.INR,
+		],
+
+	},
+};
+
 export default GLOBAL_CONSTANTS;
