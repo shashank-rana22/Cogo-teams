@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { format } from '@cogoport/utils';
@@ -96,7 +96,7 @@ function TestCard({ test_card }) {
 				)}
 			</div>
 
-			{current_status.includes['active','retest','completed'] && attempts_count < maximum_attempts
+			{['active', 're-test', 'completed'].includes(current_status) && attempts_count < maximum_attempts
 				? (
 					<div
 						role="presentation"
