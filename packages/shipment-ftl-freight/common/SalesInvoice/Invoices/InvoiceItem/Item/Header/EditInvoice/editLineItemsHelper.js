@@ -1,8 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import rawControls from './rawControls';
@@ -25,7 +24,7 @@ const useEditLineItems = ({
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/update_invoice_line_items',
+		url    : '/update_shipment_sell_quotations',
 		method : 'POST',
 	}, { manual: true });
 
@@ -54,6 +53,13 @@ const useEditLineItems = ({
 		return defaultValues;
 	};
 
+	const handleOptionsChange = useCallback(
+		(vals) => {
+			setAllChargeCodes((prevChargeCodes) => ({ ...prevChargeCodes, ...vals }));
+		},
+		[setAllChargeCodes],
+	);
+
 	const controls = services.map((service, index) => ({
 		...rawControls(
 			handleChange,
@@ -64,13 +70,13 @@ const useEditLineItems = ({
 			index,
 			trade_mapping,
 		),
-		onOptionsChange : (vals) => setAllChargeCodes({ ...allChargeCodes, ...vals }),
+		onOptionsChange : handleOptionsChange,
 		value           : (service?.line_items || []).map((item) => ({
 			code             : item?.code,
 			alias            : item?.alias,
 			sac_code         : item?.hsn_code || 'NA',
 			currency         : item?.currency,
-			price_discounted : item?.price_discounted || 0,
+			price_discounted : item?.price_discounted || '0',
 			quantity         : item?.quantity || 0,
 			exchange_rate    : item?.exchange_rate || 1,
 			tax_percent      : item?.tax_percent || 0,
@@ -114,9 +120,7 @@ const useEditLineItems = ({
 		};
 	});
 
-	console.log({ allChargeCodes });
-
-	const onCreate = (values) => {
+	const onCreate = async (values) => {
 		try {
 			const payload = [];
 			Object.keys(values).forEach((key) => {
@@ -145,23 +149,22 @@ const useEditLineItems = ({
 				payload.push(service);
 			});
 
-			console.log({ values, payload });
-			// const res = await trigger({
-			// 	data: {
-			// 		quotations             : payload,
-			// 		shipment_id            : shipment_data?.id,
-			// 		invoice_combination_id : invoice?.id || undefined,
-			// 	},
-			// });
-			// if (!res.hasError) {
-			// 	Toast.success('Line Items updated successfully!');
-			// 	if (refetch) {
-			// 		refetch();
-			// 	}
-			// 	if (onClose) {
-			// 		onClose();
-			// 	}
-			// }
+			const res = await trigger({
+				data: {
+					quotations             : payload,
+					shipment_id            : shipment_data?.id,
+					invoice_combination_id : invoice?.id || undefined,
+				},
+			});
+			if (!res.hasError) {
+				Toast.success('Line Items updated successfully!');
+				if (refetch) {
+					refetch();
+				}
+				if (onClose) {
+					onClose();
+				}
+			}
 		} catch (err) {
 			Toast.error(err?.data?.invoices);
 		}

@@ -11,6 +11,7 @@ import React, { useState } from 'react';
 
 import EditInvoice from '../EditInvoice';
 
+import AddCustomerInvoice from './AddCustomerInvoice';
 import styles from './styles.module.css';
 
 const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
@@ -18,7 +19,7 @@ const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false }
 // const OTPVerification = dynamic(() => import('../OTPVerification'), { ssr: false });
 // const ReviewServices = dynamic(() => import('../ReviewServices'), { ssr: false });
 // const AmendmentReasons = dynamic(() => import('./AmendmentReasons'), { ssr: false });
-// const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
+const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
 // const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
@@ -38,6 +39,7 @@ function Actions({
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
+	const [addCustomerInvoice, setAddCustomerInvoice] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setShowOTPModal] = useState(false);
 	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
@@ -83,6 +85,11 @@ function Actions({
 	const handleClickInvoice = () => {
 		setShow(false);
 		setIsEditInvoice(true);
+	};
+
+	const handleCustomerInvoice = () => {
+		setShow(false);
+		setAddCustomerInvoice(true);
 	};
 
 	const remarkRender = () => (
@@ -169,8 +176,58 @@ function Actions({
 					>
 						Exchange Rate Document
 					</div>
+					<div className={styles.line} />
+					<div
+						role="button"
+						tabIndex={0}
+						// onClick={handleExchangeRateModal}
+						className={styles.text}
+					>
+						Exchange Rate Sheet
+
+					</div>
+					{shipment_data?.shipment_type === 'ftl_freight' ? (
+						<div>
+							<div className={styles.line} />
+							<div
+								role="button"
+								tabIndex={0}
+								className={styles.text}
+								onClick={handleCustomerInvoice}
+							>
+								{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
+								&nbsp;
+								{invoice?.status === 'approved' ? '/Generate' : ''}
+								Customer Invoice
+							</div>
+							{invoice?.status === 'approved' ? (
+								<div
+									role="button"
+									tabIndex={0}
+									className={styles.text}
+									// onClick={handleUpdateCustomerInvoice}
+								>
+									Update Customer Invoice
+								</div>
+							) : null}
+						</div>
+					) : null}
 				</div>
 			))}
+			{shipment_data?.shipment_type === 'ftl_freight'
+			&& invoice?.status === 'approved' ? (
+				<div>
+					<div className={styles.line} />
+					<div
+						role="button"
+						tabIndex={0}
+						className={styles.text}
+						// onClick={handleFillCustomerPortal}
+					>
+						Fill Shipment Data For Customer Portal
+					</div>
+				</div>
+				) : null}
 		</div>
 	);
 
@@ -351,14 +408,22 @@ function Actions({
 				/>
 			) : null} */}
 
-			{/* {showChangePaymentMode ? (
+			{showChangePaymentMode ? (
 				<ChangePaymentMode
 					show={showChangePaymentMode}
 					setShow={setShowChangePaymentMode}
 					invoice={invoice}
 					refetch={handleRefetch}
 				/>
-			) : null} */}
+			) : null}
+			<AddCustomerInvoice
+				show={addCustomerInvoice}
+				setShow={setAddCustomerInvoice}
+				closeModal={() => setAddCustomerInvoice(false)}
+				handleRefetch={handleRefetch}
+				invoice={invoice}
+				shipment_data={shipment_data}
+			/>
 		</div>
 	);
 }

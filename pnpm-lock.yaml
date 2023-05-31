@@ -1796,6 +1796,9 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+      uuid:
+        specifier: ^9.0.0
+        version: 9.0.0
 
   packages/shipment-lcl-freight:
     dependencies:

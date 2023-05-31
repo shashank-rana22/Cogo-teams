@@ -5,9 +5,9 @@ import { useSelector } from '@cogoport/store';
 import { Layout } from '@cogoport/surface-modules';
 import React, { useEffect } from 'react';
 
+import editLineItemsHelper from './editLineItemsHelper';
 import Info from './Info';
 import styles from './styles.module.css';
-import useEditLineItems from './useEditLineItems';
 
 const geo = getGeoConstants();
 
@@ -35,7 +35,7 @@ function EditInvoice({
 		setValue,
 		watch,
 		newFormValues,
-	} = useEditLineItems({
+	} = editLineItemsHelper({
 		invoice,
 		onClose,
 		refetch,
@@ -60,7 +60,6 @@ function EditInvoice({
 		}
 	}, [newFormValues, watch, setValue, formValues]);
 
-	console.log({ controls, newFormValues });
 	return (
 		<Modal
 			size="xl"
