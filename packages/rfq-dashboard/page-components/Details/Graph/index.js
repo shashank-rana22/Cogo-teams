@@ -1,4 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCFtick } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
@@ -17,6 +18,8 @@ function Graph({ rfq_id = '' }) {
 
 	const { graph_data = {}, shipment_booked = '', contracts_created = '', revenue_generated = '' } = data;
 	const { y_axis = [] } = graph_data;
+
+	const { revenue_currency = '', revenue = '' } = revenue_generated;
 	const LegendsData = [
 		{
 			label: `${shipment_booked} Shipment Booked`,
@@ -25,7 +28,15 @@ function Graph({ rfq_id = '' }) {
 			label: `${contracts_created} Contracts`,
 		},
 		{
-			label: `${(revenue_generated || 0).toFixed(2)} Revenue`,
+			label: `${formatAmount({
+				amount   : revenue,
+				currency : revenue_currency,
+				options  : {
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 0,
+				},
+			})} Revenue`,
 		},
 	];
 
