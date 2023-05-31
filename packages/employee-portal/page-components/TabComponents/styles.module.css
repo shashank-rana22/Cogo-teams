@@ -5,10 +5,8 @@
 }
 
 .options {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 12vw;
+	flex-wrap: wrap;
+	min-width: 180px;
 	padding: 24px 24px 10px;
 	margin-right: 20px;
 	margin-bottom: 20px;
@@ -42,8 +40,11 @@
 
 .arrow_wrapper {
 	display: flex;
+	flex-direction: row;
 	justify-content: flex-end;
+	align-items: flex-end;
 	padding-top: 30px;
+	bottom: '0%';
 }
 
 .icon_container {

@@ -2,7 +2,12 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function SignYourDocuments({ setInformationPage }) {
+function SignYourDocuments({ setInformationPage, data }) {
+	const { progress_stats = {} } = data || {};
+	const {
+		documents_signed = {},
+	} = progress_stats;
+	const { documents_signed:document_sign = false } = documents_signed;
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>

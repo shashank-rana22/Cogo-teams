@@ -4,33 +4,58 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function StepperComponent({ data }) {
-	const { offer_letter } = data || {};
-	const { status = '' } = offer_letter || {};
+	const { progress_stats = {} } = data || {};
+	const {
+		additional_info_added = {},
+		offer_letter_signed = {},
+		personal_details = {},
+		documents_signed = {},
+	} = progress_stats;
+	const { documents_signed:document_sign = false } = documents_signed;
+	const {
+		bank_details = false,
+		educational_qualification = false,
+		employment_history = false,
+		resume = false,
+	} = additional_info_added;
+	const { get_offer_letter_signed = false } = offer_letter_signed;
+	const {
+		address_details = false,
+		identification_documents = false,
+		personal_information = false,
+	} = personal_details;
 	const MAPPING = [
 		{
 			name      : 'profile_details',
 			icon      : IcMProfile,
-			is_added  : true,
+			is_added  : address_details && identification_documents && personal_information,
 			sub_title : 'Added',
 		},
 		{
 			name      : 'offer_letter',
 			icon      : IcMDocument,
-			is_added  : status === 'accepted',
+			is_added  : get_offer_letter_signed,
 			sub_title : 'Signed',
 		},
 		{
 			name      : 'additional_info',
 			icon      : IcMDocument,
-			is_added  : false,
+			is_added  : bank_details && educational_qualification && employment_history && resume,
 			sub_title : 'Added',
 		},
 		{
 			name      : 'documents',
 			icon      : IcMDocument,
-			is_added  : false,
+			is_added  : document_sign,
 			sub_title : 'Signed',
 		},
+		{
+			name      : 'company_policies',
+			icon      : IcMDocument,
+			is_added  : false,
+			sub_title : 'Read',
+		},
+
 	];
 	return (
 		<div className={styles.container}>
@@ -50,7 +75,7 @@ function StepperComponent({ data }) {
 								</div>
 
 								<div className={styles.icon_wrapper}>
-									<Icon width={22} height={22} />
+									<Icon width={20} height={20} />
 								</div>
 
 								<div>
@@ -64,9 +89,9 @@ function StepperComponent({ data }) {
 								</div>
 							</div>
 							{
-								name !== 'documents' && (
+								name !== 'company_policies' && (
 									<div>
-										-----
+										------
 										{'>'}
 									</div>
 								)

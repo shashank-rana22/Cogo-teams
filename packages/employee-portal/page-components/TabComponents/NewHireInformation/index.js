@@ -9,21 +9,30 @@ import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
 
 function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }) {
+	const { progress_stats = {} } = data || {};
+	const {
+		personal_details = {},
+	} = progress_stats;
+	const {
+		address_details = false,
+		identification_documents = false,
+		personal_information = false,
+	} = personal_details;
 	const content_mapping = [
 		{
 			title     : 'PERSONAL INFORMATION',
 			content   : PersonalInformation,
-			isPending : isEmpty(data?.detail),
+			isPending : personal_information,
 		},
 		{
 			title     : 'IDENTIFICATION DOCUMENTS',
 			content   : IdentificationDocuments,
-			isPending : isEmpty(data?.documents),
+			isPending : identification_documents,
 		},
 		{
 			title     : 'ADDRESS DETAILS',
 			content   : AddressDetails,
-			isPending : isEmpty(data?.detail?.permanent_address),
+			isPending : address_details,
 		},
 	];
 
@@ -55,10 +64,11 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 								title={(
 									<div className={styles.status}>
 										<div className={styles.accordion_title}>{item.title}</div>
-										<Pill color="green">
-											{isPending
-												? 'Pending' : 'Completed'}
-										</Pill>
+
+										{isPending
+											? <Pill color="green">Completed</Pill>
+											: <Pill color="yellow">Pending</Pill>}
+
 									</div>
 								)}
 								animate={false}
