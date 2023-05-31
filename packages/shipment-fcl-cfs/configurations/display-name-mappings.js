@@ -94,12 +94,6 @@ const displayNameMappings = (trade_type) => {
 		approve_purchase_invoice_for_destination_lcl_freight_local_service: {
 			display_name: 'Verify purchase invoice details',
 		},
-		approve_purchase_invoice_for_origin_air_freight_local_service: {
-			display_name: 'Verify purchase invoice details',
-		},
-		approve_purchase_invoice_for_destination_air_freight_local_service: {
-			display_name: 'Verify purchase invoice details',
-		},
 		approve_purchase_invoice_for_origin_trailer_freight_service: {
 			display_name: 'Verify purchase invoice details',
 		},
@@ -549,12 +543,6 @@ const displayNameMappings = (trade_type) => {
 			addPrefix    : false,
 			why_needed   : '',
 		},
-		upload_draft_house_airway_bill: {
-			display_name : 'Upload Draft House Airway Bill',
-			activity     : 'uploaded draft house airway bill',
-			addPrefix    : false,
-			why_needed   : '',
-		},
 		upload_draft_si: {
 			display_name : 'Upload Draft Shipping Instruction',
 			activity     : 'uploaded draft si',
@@ -585,24 +573,7 @@ const displayNameMappings = (trade_type) => {
 			addPrefix    : false,
 			why_needed   : '',
 		},
-		upload_house_airway_bill: {
-			display_name : 'Upload house airway bill',
-			activity     : 'uploaded house airway bill',
-			addPrefix    : false,
-			why_needed   : '',
-		},
-		upload_house_airway_bill_amendment: {
-			display_name : 'Upload house airway bill amendment',
-			activity     : 'uploaded house airway bill amendment',
-			addPrefix    : false,
-			why_needed   : '',
-		},
-		upload_house_airway_bill_instructions: {
-			display_name : 'Upload house airway bill instructions',
-			activity     : 'uploaded house airway bill instructions',
-			addPrefix    : false,
-			why_needed   : '',
-		},
+	
 		upload_house_bill_of_lading: {
 			display_name : 'Upload house bill of lading',
 			activity     : 'uploaded house bill of lading',

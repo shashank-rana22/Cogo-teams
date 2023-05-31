@@ -29,6 +29,7 @@ import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import shipmentFclCfs from './config/shipment-fcl-cfs';
 import shipmentFclFreight from './config/shipment-fcl-freight';
+import shipmentLclFreight from './config/shipment-lcl-freight';
 import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
 import unifiedDashboard from './config/unified-dashboard';
@@ -56,6 +57,7 @@ const routeConfig = {
 	...performanceManagement,
 	...shipmentFclFreight,
 	...shipmentFclCfs,
+	...shipmentLclFreight,
 	...bookingDesk,
 	...bnSalvage,
 	...costBookingDesk,

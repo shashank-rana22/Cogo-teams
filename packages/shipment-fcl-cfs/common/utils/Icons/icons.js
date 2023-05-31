@@ -1,5 +1,4 @@
 import {
-	IcCAir,
 	IcCHaulage,
 	IcMCustoms,
 	IcCFfcl,
@@ -7,7 +6,6 @@ import {
 } from '@cogoport/icons-react';
 
 const icons = {
-	air    : IcCAir,
 	train  : IcCHaulage,
 	ship   : IcCFfcl,
 	truck  : IcMTrailorFull,
