@@ -4,7 +4,6 @@ import { format } from '@cogoport/utils';
 import React from 'react';
 
 import { dateDay } from '../../Constants';
-import { getAmountInLakhCrK } from '../../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
@@ -133,7 +132,17 @@ function LineCharts({ data, isCountView, showData, currency }:ItemProps) {
 		},
 	];
 	const formatPrice = (value) => {
-		const formattedValue = getAmountInLakhCrK(value);
+		const formattedValue = formatAmount({
+			amount  : value,
+			currency,
+			options : {
+				style           : 'currency',
+				compactDisplay  : 'short',
+				currencyDisplay : 'code',
+				notation        : 'compact',
+			},
+
+		});
 		if (isCountView) {
 			return null;
 		}

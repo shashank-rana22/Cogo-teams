@@ -3,8 +3,6 @@ import { Toggle } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React, { useState } from 'react';
 
-import { getAmountInLakhCrK } from '../../utils/getAmountInLakhCrK';
-
 import styles from './styles.module.css';
 
 interface ItemDataProps {
@@ -159,7 +157,16 @@ function BarChart({ data }:ItemProps) {
 											fill             : '#333',
 										}}
 									>
-										{getAmountInLakhCrK(bar.data.value)}
+										{formatAmount({
+											amount  : bar.data.value as any,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+												notation        : 'compact',
+												compactDisplay  : 'short',
+											},
+										})}
 									</text>
 								))}
 							</g>

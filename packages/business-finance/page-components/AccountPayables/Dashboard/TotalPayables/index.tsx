@@ -3,7 +3,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import useGetTotalPayables from '../hooks/useGetTotalPayables';
-import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import ProgressLine from './ProgressLine';
 import styles from './styles.module.css';
@@ -62,9 +61,15 @@ function TotalPayables({
 										interactive
 									>
 										<div className={styles.value}>
-											{currency}
 											{' '}
-											{getAmountInLakhCrK(currentAmount)}
+											{formatAmount({
+												amount  : currentAmount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+												},
+											})}
 											<div className={styles.inline_style}>
 												{' '}
 												(
@@ -101,9 +106,17 @@ function TotalPayables({
 										interactive
 									>
 										<div className={styles.value}>
-											{currency}
 											{' '}
-											{getAmountInLakhCrK(todayDueAmount)}
+											{formatAmount({
+												amount  : todayDueAmount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+													notation        : 'compact',
+													compactDisplay  : 'short',
+												},
+											})}
 											<div className={styles.inline_style}>
 												{' '}
 												(
@@ -140,9 +153,17 @@ function TotalPayables({
 										interactive
 									>
 										<div className={styles.value}>
-											{currency}
 											{' '}
-											{getAmountInLakhCrK(overDueAmount)}
+											{formatAmount({
+												amount  : overDueAmount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+													notation        : 'compact',
+													compactDisplay  : 'short',
+												},
+											})}
 											<div className={styles.inline_style}>
 												{' '}
 												(

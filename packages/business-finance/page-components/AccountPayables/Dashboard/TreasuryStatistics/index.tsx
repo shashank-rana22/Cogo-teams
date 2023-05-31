@@ -4,7 +4,6 @@ import React from 'react';
 
 import Filter from '../../../commons/Filters';
 import useGetTreasuryStats from '../hooks/useGetTreasuryStats';
-import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import { monthControls } from './monthControls';
 import styles from './styles.module.css';
@@ -105,9 +104,18 @@ function TreasuryStatistics({ activeEntity }:ItemProps) {
 								interactive
 							>
 								<div className={styles.value}>
-									{currency}
 									{' '}
-									{getAmountInLakhCrK(allocatedAmount)}
+									{formatAmount({
+										amount  : allocatedAmount,
+										currency,
+										options : {
+											currencyDisplay : 'code',
+											style           : 'currency',
+											notation        : 'compact',
+											compactDisplay  : 'short',
+
+										},
+									})}
 								</div>
 							</Tooltip>
 						)}
@@ -135,9 +143,18 @@ function TreasuryStatistics({ activeEntity }:ItemProps) {
 									interactive
 								>
 									<div className={styles.value}>
-										{currency}
 										{' '}
-										{getAmountInLakhCrK(item?.amount)}
+										{formatAmount({
+											amount  : item?.amount,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+												notation        : 'compact',
+												compactDisplay  : 'short',
+
+											},
+										})}
 									</div>
 								</Tooltip>
 							)}
