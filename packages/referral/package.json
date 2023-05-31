@@ -6,7 +6,7 @@
     "main": "./index.js",
     "dependencies": {
         "@cogoport/charts": "^1.0.1",
-        "@cogoport/components": "^1.0.403",
+        "@cogoport/components": "^1.0.423",
         "@cogoport/constants": "workspace:^0.1.0",
         "@cogoport/forms": "workspace:0.1.0",
         "@cogoport/globalization": "workspace:*",

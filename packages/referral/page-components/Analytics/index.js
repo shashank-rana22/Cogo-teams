@@ -6,10 +6,7 @@ import styles from './styles.module.css';
 import UserPerformance from './Users';
 
 function ReferralAnalytics() {
-	const [filterOptions, setFilterOptioins] = useState({
-		userType   : '',
-		selectDate : '',
-	});
+	const [selectedDate, setSelectedDate] = useState({});
 
 	const [performanceType, setPerformanceType] = useState('user_performance');
 
@@ -19,8 +16,8 @@ function ReferralAnalytics() {
 				<div className={styles.title}>Referral- Analytics</div>
 				<DateRangepicker
 					name="date"
-					onChange={(val) => setFilterOptioins((prev) => ({ ...prev, selectDate: val }))}
-					value={filterOptions?.selectDate}
+					onChange={(val) => setSelectedDate(val)}
+					value={selectedDate}
 					isPreviousDaysAllowed
 				/>
 			</div>
@@ -32,7 +29,10 @@ function ReferralAnalytics() {
 				>
 					<TabPanel name="user_performance" title="User Performance">
 						<div className={styles.label}>Users that are</div>
-						<UserPerformance />
+						<UserPerformance
+							selectedDate={selectedDate}
+							setSelectedDate={setSelectedDate}
+						/>
 					</TabPanel>
 
 					<TabPanel name="business_performance" title="Business Performance">

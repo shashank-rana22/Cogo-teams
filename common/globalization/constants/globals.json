@@ -151,5 +151,9 @@
 				"irn_label": "E-INVOICE"
 			}
 		}
+	},
+	"image_url": {
+		"spinner_loader": "https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg",
+		"empty_image": "https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg"
 	}
 }

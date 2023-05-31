@@ -62,22 +62,18 @@ export const TABS_OPTIONS = [
 	{
 		label : 'Invited',
 		name  : 'invited',
-		badge : 3,
 	},
 	{
 		label : 'Signed Up',
 		name  : 'signed_up',
-		badge : 3,
 	},
 	{
 		label : 'Have KYC Registered Orgs',
-		name  : 'kyc_registered',
-		badge : 3,
+		name  : 'kyc_verified',
 	},
 	{
 		label : 'Affiliates',
-		name  : 'affiliates',
-		badge : 3,
+		name  : 'affiliate',
 	},
 
 ];

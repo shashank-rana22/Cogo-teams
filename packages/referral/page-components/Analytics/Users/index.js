@@ -7,7 +7,7 @@ import PerformanceStats from './PerformaceStats';
 import styles from './styles.module.css';
 import UserList from './UsersList';
 
-function UserPerformance() {
+function UserPerformance({ selectedDate = {}, setSelectedDate = () => {} }) {
 	const [showPopover, setShowPopover] = useState(false);
 	const [showOptions, setShowOptions] = useState({});
 	const [filterValue, setFilterValue] = useState({
@@ -17,7 +17,7 @@ function UserPerformance() {
 	const [showActivityModal, setShowActivityModal] = useState(false);
 	return (
 		<div>
-			<PerformanceStats />
+			<PerformanceStats selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
 			<div className={styles.list_div}>
 				<NetworkList
 					showPopover={showPopover}

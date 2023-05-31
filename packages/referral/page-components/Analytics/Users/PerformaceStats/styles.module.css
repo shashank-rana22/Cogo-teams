@@ -30,6 +30,8 @@
 
 .graph_div {
 	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 650px;
 	height: 204px;
 	margin-right: 16px;
