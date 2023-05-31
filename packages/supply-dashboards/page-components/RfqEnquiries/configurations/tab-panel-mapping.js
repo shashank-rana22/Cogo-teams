@@ -1,3 +1,4 @@
+import RateCoverage from '../../RateCoverage';
 import RfqEnquiries from '../Content';
 
 const tabPanelMapping = [
@@ -19,7 +20,7 @@ const tabPanelMapping = [
 	{
 		name      : 'rate_density',
 		title     : 'Rate Density & Coverage',
-		component : <>--</>,
+		component : <RateCoverage />,
 	},
 	{
 		name      : 'manage_forecast',

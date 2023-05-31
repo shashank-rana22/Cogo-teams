@@ -23,7 +23,6 @@ function RfqEnquiriesView() {
 			window.location.href = `/${partnerId}/supply/dashboards/${route}`;
 		}
 	};
-
 	return (
 		<div>
 			<Tabs fullWidth activeTab={activeTab} onChange={(tab) => { handleTabChange(tab); }}>

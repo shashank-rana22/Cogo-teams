@@ -368,6 +368,7 @@ export default {
 					'manage_forecast',
 					'rfq_enquiries',
 					'rates_sheets',
+					'rate_density',
 				],
 			},
 		},

@@ -66,7 +66,7 @@ function ModalContent({
 				</div>
 				<div className={styles.button}>
 					<div className={styles.info}>
-						{`${multiSelected.length} date selected from ${allOptions.length} weeks`}
+						{`${multiSelected?.length} date selected from ${allOptions.length} weeks`}
 					</div>
 					<Button onClick={handleSave}>Save</Button>
 				</div>

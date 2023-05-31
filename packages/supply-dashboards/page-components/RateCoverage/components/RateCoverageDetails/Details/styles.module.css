@@ -1,0 +1,92 @@
+.parent {
+	width: 100%;
+	height: auto;
+	margin-top: 22px;
+	background: linear-gradient(90deg, #fff 0%, #fff 95.61%);
+	border-radius: 6px;
+}
+
+.nav {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 100%;
+	padding: 11px 20px;
+	background: #f9f9f9;
+	border-radius: 6px 6px 0 0;
+}
+
+.nav > :first-child {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+	font-size: 20px;
+	font-weight: 500;
+	color: #333;
+}
+
+.nav > :last-child {
+	color: rgb(0 0 205);
+	text-align: right;
+	text-decoration: underline;
+	cursor: pointer;
+}
+
+.table {
+	padding: 20px;
+}
+
+.number_of_rates {
+	background-color: #f2f3fa;
+}
+
+.add_rate {
+	width: 100%;
+	color:#034AFD;;
+	cursor: pointer;
+	background: none;
+	border: 0;
+	text-decoration: underline;
+}
+
+.pagination {
+	display: flex;
+	justify-content: end;
+}
+
+.send_email_div {
+	padding-top: 20px;
+	padding-left: 20px;
+}
+
+.filter {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.filter_left,
+.filter_right {
+	display: flex;
+	gap: 16px;
+	align-items: center;
+	padding: 14px 20px;
+	padding-bottom: 0;
+}
+
+.filter_left > * {
+	width: 210px;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.filter_left > * :first-child {
+	font-size: 12px;
+	font-weight: 400;
+	line-height: 150%;
+}
+
+.loader{
+	margin-top: 20px;
+	height: 12vh;
+}
