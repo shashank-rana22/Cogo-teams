@@ -11,6 +11,15 @@ import { QuestionSetButtons, TestSetButtons } from './ButtonComponent';
 import styles from './styles.module.css';
 import ValidityDisplay from './ValidityDisplay';
 
+const PILL_COLOR_MAPPING = {
+	active    : '#C4DC91',
+	upcoming  : '#CFEAEC',
+	published : '#FAD1A5',
+	expired   : '#F8AEA8',
+	draft     : '#FEF099',
+	retest    : '#E0E0E0',
+};
+
 const propsFunction = ({ router, id }) => ({
 	role    : 'presentation',
 	style   : { cursor: 'pointer' },
