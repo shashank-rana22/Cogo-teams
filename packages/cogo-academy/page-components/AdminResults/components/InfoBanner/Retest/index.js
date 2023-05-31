@@ -3,7 +3,6 @@ import { useEffect } from 'react';
 
 import getControls from './controls';
 import Item from './Item';
-import styles from './styles.module.css';
 
 function Retest({ watch, control, setValue, errors }) {
 	const formvalues = watch();
@@ -28,9 +27,9 @@ function Retest({ watch, control, setValue, errors }) {
 	}, [setValue, formvalues?.filtered_users]);
 
 	return (
-		<div className={styles.info}>
+		<div>
 			{(controls || []).map((controlItem) => {
-				const { show = false } = controlItem;
+				const { show = true } = controlItem;
 
 				if (!isEmpty(show) && !show) {
 					return null;
