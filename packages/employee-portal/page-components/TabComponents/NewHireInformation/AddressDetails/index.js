@@ -18,9 +18,12 @@ const removeTypeField = (controlItem) => {
 function AddressDetails({ data:content, getEmployeeDetails }) {
 	const [address, setAddress] = useState(false);
 
-	const { handleSubmit, control, formState: { errors }, setValue, watch } = useForm();
+	const { handleSubmit, control, formState: { errors }, setValue, getValues } = useForm();
 
-	const { permanent_address,present_address } = content?.detail || {};
+	const { permanent_address, present_address } = content?.detail || {};
+
+	const [permanentAdd, setPermanentAdd] = useState(permanent_address);
+	const [currentAdd, setCurrentAdd] = useState(present_address);
 
 	const controlsvalue = controls({ content });
 
@@ -30,58 +33,48 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 
 	const id = info?.detail?.id;
 
-	const permanent_address_fields = (permanentcontrols || []).map((item) => item?.name);
-
-	const permanent_address_values = watch('permanent_address_fields');
-
-	const addressFields = (controlsvalue || []).map((item) => item?.name);
-
-	console.log('addressFields',addressFields);
-
 	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
 	const onSubmit = (values) => {
 		updateEmployeeDetails({ data: values, formType: 'address_details' });
 	};
 
-	// useEffect(() => {
-	// 	if (address) {
-	// 		(addressFields || []).forEach((item, index) => {
-	// 			setValue(item, permanent_address_values?.[index]);
-	// 		});
-	// 	} else {
-	// 		(addressFields || []).forEach((item) => {
-	// 			setValue(item, '');
-	// 		});
-	// 	}
-	// }, [address]);
-
-
-	const mapping = {
-		permanent_address : permanent_address?.address || '',
-		permanent_city    : permanent_address?.city || '',
-		permanent_pincode : permanent_address?.pincode || '',
-		permanent_state   : permanent_address?.state || '',
-		permanent_country : permanent_address?.country || '',
-		current_address   : present_address?.address || '',
-		current_city      : present_address?.city || '',
-		current_pincode   : present_address?.pincode || '',
-		current_state     : present_address?.state || '',
-		current_country   : present_address?.country || '',
-	};
+	useEffect(() => {
+		setValue('current_city', currentAdd?.city);
+		setValue('current_country', currentAdd?.country);
+		setValue('current_pincode', currentAdd?.pincode);
+		setValue('current_state', currentAdd?.state);
+		setValue('current_address', currentAdd?.address);
+		setValue('permanent_city', permanentAdd?.city);
+		setValue('permanent_country', permanentAdd?.country);
+		setValue('permanent_pincode', permanentAdd?.pincode);
+		setValue('permanent_state', permanentAdd?.state);
+		setValue('permanent_address', permanentAdd?.address);
+	}, [currentAdd, permanentAdd, setValue]);
 
 	const handleAddressChange = () => {
-		console.log('hi')
-		setAddress((prev) => !prev); 
-		setAddressValue(address);
-	}
+		setAddress((prev) => !prev);
+		const getControlvalues = getValues();
 
-
-	useEffect(() => {
-		[...controlsvalue, ...permanentcontrols].forEach((item) => {
-			setValue(`${item.name}`, mapping[item.name]);
-		});
-	}, []);
+		if (address === false) {
+			setCurrentAdd({
+				address : getControlvalues?.permanent_address,
+				city    : getControlvalues?.permanent_city,
+				pincode : getControlvalues?.permanent_pincode,
+				state   : getControlvalues?.permanent_state,
+				country : getControlvalues?.permanent_country,
+			});
+			setPermanentAdd({
+				address : getControlvalues?.permanent_address,
+				city    : getControlvalues?.permanent_city,
+				pincode : getControlvalues?.permanent_pincode,
+				state   : getControlvalues?.permanent_state,
+				country : getControlvalues?.permanent_country,
+			});
+		} else {
+			setCurrentAdd(present_address);
+		}
+	};
 
 	return (
 		<div className={styles.whole_container}>
