@@ -98,12 +98,15 @@ text-Overflow : ellipsis;
     font-size     : 12px;
     margin-right  : 8px;
     max-width     : 80%;
+    white-space   : nowrap;
+	overflow     : hidden;
+	text-Overflow : ellipsis;
 }
 
 .secondary_text{
     color        : #4F4F4F;
     margin-left   : 4;
-    max-width     : 80%;
+    max-width     : 70%;
     white-space   : nowrap;
 	overflow     : hidden;
 	text-Overflow : ellipsis;

@@ -12162,7 +12162,7 @@ const partner = {
 		},
 		{
 			api          : 'update_checkout_approval',
-	      	access_type  : 'private',
+			access_type  : 'private',
 			service_name : 'checkout',
 		},
 

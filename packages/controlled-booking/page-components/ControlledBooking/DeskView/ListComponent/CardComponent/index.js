@@ -32,6 +32,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 		services,
 		primary_service,
 		checkout_approvals,
+		approvals,
 		importer_exporter,
 		source, checkout_detail = {},
 	} = item || {};
@@ -70,7 +71,6 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 			}
 			return () => clearInterval(interval);
 		}
-		// return null;
 	}, []);
 
 	return (
@@ -112,7 +112,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 								<div className={styles.primary_text}>
 									Requested By:
 									<div className={styles.secondary_text}>
-										{startCase(item?.quotation_email_sent_by
+										{startCase(approvals?.[0]?.requested_by_user
 											?.name) || '--'}
 									</div>
 								</div>

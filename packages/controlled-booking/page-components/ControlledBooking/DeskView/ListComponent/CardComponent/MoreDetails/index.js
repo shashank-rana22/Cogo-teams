@@ -12,6 +12,7 @@ const handleDownload = (val) => {
 
 function MoreDetails({ primaryServiceDetails = {}, approvals, tax_total_price_currency, tax_total_price_discounted }) {
 	const { advance_payment_info } = approvals?.[0] || {};
+	const { eligible_for_booking = false, payment_ratio = '' } = advance_payment_info;
 
 	return (
 		<div className={styles.container}>
@@ -64,22 +65,28 @@ function MoreDetails({ primaryServiceDetails = {}, approvals, tax_total_price_cu
 						{' '}
 						{primaryServiceDetails?.[0]?.cargo_value_currency}
 					</div>
-					<div className={styles.eligibilty} style={{ backgroundColor: '#FDEBE9' }}>
-						<div style={{
-							color      : '#EE3425',
-							fontWeight : '600',
-							fontSize   : '18px',
-						}}
+					{payment_ratio ? (
+						<div
+							className={styles.eligibilty}
+							style={{ backgroundColor: eligible_for_booking ? '#F7FAEF' : '#FDEBE9' }}
 						>
-							67%
+							<div style={{
+								color      : eligible_for_booking ? '#849e4c' : '#EE3425',
+								fontWeight : '600',
+								fontSize   : '18px',
+							}}
+							>
+								{payment_ratio.toFixed(2)}
+								%
+							</div>
+							<div style={{
+								color: eligible_for_booking ? '#849e4c' : '#EE3425',
+							}}
+							>
+								{eligible_for_booking ? 'Eligible for Reefers' : 'Not eligible for Reefers'}
+							</div>
 						</div>
-						<div style={{
-							color: '#EE3425',
-						}}
-						>
-							Not eligible for Reefers
-						</div>
-					</div>
+					) : null}
 				</div>
 			</div>
 

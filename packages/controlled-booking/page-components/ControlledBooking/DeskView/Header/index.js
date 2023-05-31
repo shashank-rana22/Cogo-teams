@@ -21,9 +21,10 @@ function Header({ filters, setFilters }) {
 				}}
 				id="tab_view"
 			>
-				{TABS_MAPPING.map(({ label = '', value = '' }) => (
-					<TabPanel themeType="primary" key={value} name={value} title={label} />
-				))}
+				{TABS_MAPPING.map((item) => {
+					const { label = '', value = '' } = item;
+					return 	<TabPanel themeType="primary" key={value} name={value} title={label} />;
+				})}
 			</Tabs>
 			<div className={styles.input}>
 				<Input
