@@ -17,3 +17,55 @@
   width: 100%;
   gap: 8px;
 }
+.text_data {
+  display: flex;
+  gap: 8px;
+  margin-top: 14px;
+  align-items: center;
+  font-size: 14px;
+}
+.text_data_bold {
+  margin-top: 14px;
+  align-items: center;
+  font-weight: 600;
+  font-size: 14px;
+}
+.url_container {
+  color: #3471ae;
+  cursor: pointer;
+  text-decoration: underline;
+}
+.flex_data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.tick_icon {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+.flex_value {
+  display: flex;
+  cursor: pointer;
+  justify-content: center;
+  align-items: center;
+  margin-top: 16px;
+}
+
+.img_height {
+  height: 110px;
+}
+.success {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.close {
+  display: flex;
+  justify-content: flex-end;
+}
+.uploaded {
+  font-size: 16px;
+  font-weight: 600;
+}

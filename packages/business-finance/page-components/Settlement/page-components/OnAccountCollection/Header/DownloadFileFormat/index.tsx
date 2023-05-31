@@ -12,17 +12,7 @@ import TradeParty from './TradeParty';
 function DownloadFileFormat({ showModal, setShowModal, control }:UploadFileInterface) {
 	const [stepper, setStepper] = useState('tradeParty');
 	const [value, onChange] = useState('AP');
-	const [valueTradeParty, setValueTradeParty] = useState([{
-		cogo_entity_id      : '',
-		id                  : '',
-		serial_id           : '',
-		legal_business_name : '',
-		currency            : '',
-		newVal              : {
-			account_number : '',
-			account_name   : '',
-		},
-	}]);
+	const [valueTradeParty, setValueTradeParty] = useState([]);
 
 	const formattedData = (valueTradeParty || []).map((item) => {
 		const {
@@ -48,7 +38,7 @@ function DownloadFileFormat({ showModal, setShowModal, control }:UploadFileInter
 		};
 	});
 
-	const { handleDownload } = useDownloadFileFormat({
+	const { handleDownload, loading } = useDownloadFileFormat({
 		formattedData,
 		value,
 		setShowModal,
@@ -86,7 +76,7 @@ function DownloadFileFormat({ showModal, setShowModal, control }:UploadFileInter
 							<div className={styles.count_data}>
 								You have Selected
 								{' '}
-								{valueTradeParty.length - 1}
+								{valueTradeParty.length}
 								{' '}
 								Organizations in
 								{' '}
@@ -130,6 +120,7 @@ function DownloadFileFormat({ showModal, setShowModal, control }:UploadFileInter
 							</Button>
 							<Button
 								type="button"
+								loading={loading}
 								onClick={() => {
 									handleDownload();
 								}}

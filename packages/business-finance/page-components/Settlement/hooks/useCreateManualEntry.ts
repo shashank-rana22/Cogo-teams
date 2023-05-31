@@ -14,12 +14,12 @@ const useCreateManualEntry = ({
 	isEdit = false,
 	selectedItem = {},
 	refetch,
-	show,
 	itemData,
 }) => {
 	const [errors, setErrors] = useState({});
 	const { profile } = useSelector((state) => state || {});
 	const [editMode, setEditMode] = useState(false);
+	const [showBprNumber, setShowBprNumber] = useState();
 	const [ledgerCurrency, setLedgerCurrency] = useState();
 	const [tpId, setTradeId] = useState();
 	const {
@@ -96,6 +96,7 @@ const useCreateManualEntry = ({
 			paymentCode,
 			createdBy            : profile?.id,
 			updatedBy            : profile?.id,
+			sageOrganizationId   : showBprNumber?.sage_organization_id,
 		};
 	};
 	const onError = (errs) => {
@@ -194,7 +195,7 @@ const useCreateManualEntry = ({
 		});
 
 		setErrors({ ...errors, ...errorVal });
-	}, [JSON.stringify(errorVal)]);
+	}, [errorVal, errors]);
 
 	let docType = '';
 	switch (paymentCode) {
@@ -207,7 +208,6 @@ const useCreateManualEntry = ({
 		case 'VTDS':
 			docType = 'TDS';
 			break;
-
 		default:
 			break;
 	}
@@ -308,18 +308,18 @@ const useCreateManualEntry = ({
 		}
 
 		// if (accountMode === 'AP') {
-		// 	const currentOptions = [...newFileds.docType.options];
+		// 	const currentOptions = [...newFileds.docType?.options];
 		// 	const mutatedOptions = currentOptions.slice(1);
 		// 	newFileds.docType.options = [
 		// 		{ label: 'Payment', value: 'PAYMENT' },
 		// 		...mutatedOptions,
 		// 	];
-		// 	const [firstObj] = newFileds.docType.options;
+		// 	const [firstObj] = newFileds.docType?.options;
 		// 	if (isEmpty(doc_type)) {
 		// 		setValue('docType', firstObj.value);
 		// 	}
 		// } else {
-		// 	newFileds.docType.options = [...newFileds.docType.options];
+		// 	newFileds.docType.options = [...newFileds.docType?.options];
 		// 	const [firstObj] = newFileds.docType.options;
 		// 	const prefilledValue = firstObj.value;
 		// 	if (isEmpty(doc_type)) {
@@ -328,7 +328,7 @@ const useCreateManualEntry = ({
 		// }
 
 		setFieldsData(newFileds);
-	}, [data, doc_type, accountMode, from_cur]);
+	}, [data, doc_type, accountMode, from_cur, controls, fields, setValue]);
 
 	const [{ data:createData }, createEntryTrigger] = useRequestBf(
 		{
@@ -407,6 +407,7 @@ const useCreateManualEntry = ({
 		disable_controls,
 		exRateTrigger,
 		accountMode,
+		showBprNumber,
 		isVenderExists,
 	};
 };

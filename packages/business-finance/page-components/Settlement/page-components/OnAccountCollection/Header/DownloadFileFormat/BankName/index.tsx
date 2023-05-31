@@ -7,7 +7,7 @@ import { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const BUSINESS_NAME_LENGTH = 15;
+const BUSINESS_NAME_LENGTH = 20;
 
 function BankName({ item, valueTradeParty, setValueTradeParty }) {
 	const {
@@ -63,8 +63,13 @@ function BankName({ item, valueTradeParty, setValueTradeParty }) {
 									</Tooltip>
 
 								</div>
-							) : startCase(businessName)}
+							) : (
+								<div className={styles.bold}>
+									{startCase(businessName)}
+								</div>
+							)}
 						</div>
+
 						<div>
 							Trade Party Serial ID
 							<div className={styles.bold}>{serialId}</div>

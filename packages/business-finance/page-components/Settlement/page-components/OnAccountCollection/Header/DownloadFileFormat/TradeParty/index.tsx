@@ -34,8 +34,10 @@ function TradeParty({ value, onChange, control, valueTradeParty, setValueTradePa
 								Toast.info('Trade Party Is Already Selected');
 								return;
 							}
-							const newVal = obj?.id && [...valueTradeParty, obj];
-							setValueTradeParty(newVal);
+							if (obj) {
+								const newVal = [...valueTradeParty, obj];
+								setValueTradeParty(newVal);
+							}
 						}}
 						initialCall
 						params={{

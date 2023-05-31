@@ -35,6 +35,7 @@ function Header({ refetch, control }) {
 			{showModal.upload_file && (
 				<UploadFile
 					showModal={showModal}
+					refetch={refetch}
 					setShowModal={setShowModal}
 				/>
 			)}

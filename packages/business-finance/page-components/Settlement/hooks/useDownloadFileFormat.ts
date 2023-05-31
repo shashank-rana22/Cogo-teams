@@ -6,10 +6,12 @@ const useDownloadFileFormat = ({
 	value,
 	setShowModal,
 }) => {
+	const onClose = () => { setShowModal({ download_format: false }); };
+
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : '/payments/accounts/download-sample',
-			authKey : 'post_payments_accounts_download_sample',
+			url     : '/sales/accounts/download-sample',
+			authKey : 'post_sales_accounts_download_sample',
 			method  : 'post',
 		},
 		{ manual: false },
@@ -28,11 +30,9 @@ const useDownloadFileFormat = ({
 			const downloadFileFormat = `${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}
             /sales/download?id=${rest.data}`;
 			if (rest.data) window.open(downloadFileFormat);
-			// setShowModal({ download_format: false })}
+			onClose();
 		} catch (err) {
-			if (err?.data) {
-				Toast.error('Fill All Details');
-			}
+			Toast.error(err?.response?.data?.message);
 		}
 	};
 
