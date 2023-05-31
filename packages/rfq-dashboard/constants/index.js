@@ -8,6 +8,7 @@ const EMPTY_CUSTOMER_CARD = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/o
 
 const SORT_OPTIONS = [
 	{ label: 'Newest Arrival', value: 'newest' },
+	{ label: 'Oldest Arrival', value: 'oldest' },
 	{ label: 'Profitability (High to Low)', value: 'profitability_high' },
 	{ label: 'Profitability (Low to High)', value: 'profitability_low' },
 ];

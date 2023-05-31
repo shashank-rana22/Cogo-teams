@@ -54,7 +54,8 @@ function ServiceStats({ data = [], type = '', source = '' }) {
 				</span>
 			) : '-';
 		}
-		return null;
+
+		return '-';
 	};
 
 	return (
