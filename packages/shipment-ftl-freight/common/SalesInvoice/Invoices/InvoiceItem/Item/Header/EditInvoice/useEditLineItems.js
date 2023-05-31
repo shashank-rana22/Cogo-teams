@@ -113,29 +113,7 @@ const useEditLineItems = ({
 			id         : key,
 		};
 	});
-	controls.forEach((ctrl) => {
-		if (ctrl?.controls) {
-			(ctrl?.controls || []).forEach((childCtrl) => {
-				if (childCtrl?.name === 'unit') {
-					const unitOptions = {};
-					(formValues[ctrl?.name] || []).forEach((item, i) => {
-						const chargeCodes = {};
-						(allChargeCodes[ctrl?.service_name] || []).forEach((chgCode) => {
-							chargeCodes[chgCode?.code] = chgCode;
-						});
-						const updatedChildCtrl = { ...childCtrl, options: unitOptions };
-						unitOptions[i] = (
-							chargeCodes[item?.code]?.units || ['per_container']
-						).map((unit) => ({
-							label : startCase(unit),
-							value : unit,
-						}));
-						Object.assign(childCtrl, updatedChildCtrl);
-					});
-				}
-			});
-		}
-	});
+
 	console.log({ allChargeCodes });
 
 	const onCreate = (values) => {
