@@ -21,7 +21,7 @@ import useGetTimeLine from '../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const SHIPMENT_ADDITIONAL_METHODS = ['main_service', 'documents'];
 
 function DefaultView() {
@@ -35,7 +35,7 @@ function DefaultView() {
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
-		additional_methods: services_additional_methods,
+		additional_methods: SERVICE_ADDITIONAL_METHODS,
 	});
 
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });

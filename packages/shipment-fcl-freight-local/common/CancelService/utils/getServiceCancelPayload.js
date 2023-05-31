@@ -1,4 +1,4 @@
-const completeOrCancel = ['complete', 'cancelled'];
+const COMPLETE_CANCEL = ['complete', 'cancelled'];
 
 export default function getServiceCancelPayload({
 	controls = {}, servicesList = [], service_type = '', trade_type = '', formData = {}, shipment_data = {},
@@ -10,7 +10,7 @@ export default function getServiceCancelPayload({
 	);
 
 	const cancelIds = cancellation_services
-		.filter((service) => !completeOrCancel.includes(service.status))
+		.filter((service) => !COMPLETE_CANCEL.includes(service.status))
 		.map((service) => service?.id);
 
 	const formValues = {};

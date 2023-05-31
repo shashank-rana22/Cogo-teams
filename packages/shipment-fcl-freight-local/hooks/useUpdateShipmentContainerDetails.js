@@ -15,9 +15,7 @@ const useUpdateShipmentContainerDetails = ({
 		if (update_data?.length !== 0) {
 			try {
 				await trigger({ data: { update_data } });
-
 				Toast.success(successMessage);
-
 				refetch();
 			} catch (err) {
 				toastApiError(err);

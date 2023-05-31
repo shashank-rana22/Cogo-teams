@@ -2,7 +2,7 @@ import { useLensRequest } from '@cogoport/request';
 
 const useUpdateShipmentCogoid = () => {
 	const [loading, trigger] = useLensRequest({
-		url    : 'update_shipment_cogoid',
+		url    : '/update_shipment_cogoid',
 		method : 'POST',
 	}, { manual: true });
 
