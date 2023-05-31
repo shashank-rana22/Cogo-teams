@@ -59,7 +59,8 @@ function TnC() {
 							<div className={styles.flex}>
 								<div style={{ marginLeft: '5px' }}>
 									<Checkbox
-										label="Read and Agreed with our all Terms of Use"
+										label="By clicking on AGREE,
+										you are accepting the above Terms of Use"
 										onChange={() => setDisabled(!disabled)}
 									/>
 
@@ -71,10 +72,8 @@ function TnC() {
 										themeType="primary"
 										onClick={() => { window.location.reload(true); }}
 									>
-										Agree
-
+										AGREE
 									</Button>
-
 								</div>
 							</div>
 						</Modal.Body>
