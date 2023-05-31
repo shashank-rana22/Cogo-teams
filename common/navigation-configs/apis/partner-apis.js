@@ -704,6 +704,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'create_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -5379,6 +5394,21 @@ const partner = {
 		{
 			feature      : 'sales',
 			api          : 'create_organization_setting',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'list_organization_exchange_rate_configurations',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -11625,7 +11655,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'exchange_rate',
 		},
-
+		{
+			api          : 'list_organization_exchange_rate_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	contracts: [
 		{
