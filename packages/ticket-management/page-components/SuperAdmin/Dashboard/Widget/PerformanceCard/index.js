@@ -12,15 +12,19 @@ function PerformanceCard({ data = [], loading = false }) {
 
 	return (
 		<div className={styles.list}>
-			{(data || []).map(({ AgentName, PerformanceRating }) => (
-				<div className={styles.card} key={PerformanceRating}>
-					<div className={styles.type}>{AgentName}</div>
-					<div className={styles.count}>
-						{PerformanceRating.toFixed(2)}
-						%
+			{(data || []).map((item) => {
+				const { AgentName: agentName = '', PerformanceRating: performanceRating = 0 } = item || {};
+
+				return (
+					<div className={styles.card} key={performanceRating}>
+						<div className={styles.type}>{agentName}</div>
+						<div className={styles.count}>
+							{performanceRating.toFixed(2)}
+							%
+						</div>
 					</div>
-				</div>
-			))}
+				);
+			})}
 		</div>
 	);
 }

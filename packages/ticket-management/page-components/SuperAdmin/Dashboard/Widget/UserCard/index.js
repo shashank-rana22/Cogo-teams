@@ -12,15 +12,22 @@ function UserCard({ data = [], loading = false }) {
 
 	return (
 		<div className={styles.list}>
-			{(data || []).map(({ UserId, Name, OrganizationName, Tickets }) => (
-				<div className={styles.card} key={UserId}>
-					<div>
-						<div className={styles.agent_name}>{Name}</div>
-						<div className={styles.agent_org}>{OrganizationName}</div>
+			{(data || []).map((item) => {
+				const {
+					UserId: userId, Name: name = '',
+					OrganizationName: organizationName = '', Tickets: tickets = '',
+				} = item || {};
+
+				return (
+					<div className={styles.card} key={userId}>
+						<div>
+							<div className={styles.agent_name}>{name}</div>
+							<div className={styles.agent_org}>{organizationName}</div>
+						</div>
+						<div className={styles.count}>{tickets}</div>
 					</div>
-					<div className={styles.count}>{Tickets}</div>
-				</div>
-			))}
+				);
+			})}
 		</div>
 	);
 }

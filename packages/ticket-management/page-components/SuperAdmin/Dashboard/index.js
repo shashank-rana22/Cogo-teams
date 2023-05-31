@@ -9,36 +9,39 @@ function Dashboard({ date }) {
 	const { data, loading } = useGetDashboard({ date });
 
 	const {
-		CustomerSatisfactionStats, TicketCount, TopCategory,
-		TopCustomer, TopAgents,
+		CustomerSatisfactionStats: customerSatisfactionStats = {},
+		TicketCount: ticketCount = {},
+		TopCategory: topCategory = [],
+		TopCustomer: topCustomer = [],
+		TopAgents: topAgents = [],
 	} = data || {};
 
 	return (
 		<div className={styles.container}>
 			<OverallStats
 				data={data}
-				ticketCount={TicketCount}
+				ticketCount={ticketCount}
 			/>
 			<div className={styles.body}>
 				<div className={styles.agents}>
 					<Widget
 						label="Top Agents"
 						subLabel="Performance Rating"
-						data={TopAgents}
+						data={topAgents}
 						type="Performance"
 						loading={loading}
 					/>
-					<FeedbackGraph customerSatisfactionStats={CustomerSatisfactionStats} loading />
+					<FeedbackGraph customerSatisfactionStats={customerSatisfactionStats} loading />
 				</div>
 				<div className={styles.category}>
 					<Widget
 						label="Users (based on issues)"
-						data={TopCustomer}
+						data={topCustomer}
 						type="Users"
 						loading={loading}
 						isMargin
 					/>
-					<Widget label="Top Categories" data={TopCategory} type="Categories" loading={loading} />
+					<Widget label="Top Categories" data={topCategory} type="Categories" loading={loading} />
 				</div>
 			</div>
 		</div>

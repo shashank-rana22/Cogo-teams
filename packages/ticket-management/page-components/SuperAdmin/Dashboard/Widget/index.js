@@ -22,7 +22,7 @@ function Widget({ label = 'Top Users', subLabel = 'No of issues', data, type, lo
 				<div className={styles.title}>{label}</div>
 				<div className={styles.title}>{subLabel}</div>
 			</div>
-			<CardComponent data={data} loading={loading} />
+			{CardComponent && <CardComponent key={type} data={data} loading={loading} />}
 		</div>
 
 	);

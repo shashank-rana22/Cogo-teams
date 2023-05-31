@@ -1,6 +1,8 @@
-import { ResponsivePie } from '@cogoport/charts/pie';
+import { ResponsivePie } from '@cogoport/charts';
 import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+
+import { TOTAL_FEEDBACK_KEY } from '../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -9,7 +11,7 @@ function FeedbackGraph({ customerSatisfactionStats }) {
 		id    : key.toLocaleLowerCase(),
 		label : key,
 		value : customerSatisfactionStats[key] || 0,
-	})).filter((item) => item.label !== 'TotalFeedback');
+	})).filter((item) => item.label !== TOTAL_FEEDBACK_KEY);
 
 	return (
 		<div className={styles.container}>

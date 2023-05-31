@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function UserCardLoader() {
 	return (
 		<div>
-			{[...Array(4)].fill().map((key) => (
+			{[...Array(4).keys()].map((key) => (
 				<div key={key} className={styles.container}>
 					<div className={styles.subcontainer_header}>
 						<Placeholder
