@@ -37,7 +37,6 @@ function BasicDetails({ basic_info_data, questions, stats_data }) {
 			{stats_data.current_pass_percentage || 0}
 		</div>
 		<div style={{
-			fontWeight  : '400',
 			color       : '#828282',
 			marginTop   : '20px',
 			paddingLeft : '10px',
@@ -45,12 +44,10 @@ function BasicDetails({ basic_info_data, questions, stats_data }) {
 		>
 			{' '}
 			Cumulative of Both the Tests
-
 		</div>
 	</div>
-			,
 
-		},
+		}
 	};
 
 	const content_mapping_right = {
