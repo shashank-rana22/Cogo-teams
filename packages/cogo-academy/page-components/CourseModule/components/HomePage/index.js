@@ -1,4 +1,4 @@
-import { Carousel, Tabs, TabPanel, Placeholder } from '@cogoport/components';
+import { Carousel, Tabs, TabPanel, Placeholder, Button } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -34,8 +34,6 @@ function HomePage({ user_id, CourseCategoryData }) {
 	const { HANDLE_CLICK_MAPPINGS } = HANDLE_CLICK_MAPPING();
 
 	const { data = {}, loading } = useListCourseUserMappings({ activeTab, params, query });
-
-	console.log('CourseCategoryData', CourseCategoryData);
 
 	const CAROUSELDATA = (data.list || []).map((item, index) => ({
 		key    : index,
@@ -92,11 +90,13 @@ function HomePage({ user_id, CourseCategoryData }) {
 				<div className={styles.main_heading}>Explore Courses</div>
 				<div className={styles.category_head}>
 					<div style={{ color: '#6FA5AB' }}>By Category</div>
-					<div className={styles.category_head}>
+					<Button
+						themeType="tertiary"
+					>
 						See All
 						{' '}
 						<IcMArrowRight />
-					</div>
+					</Button>
 				</div>
 				<CategoryCard CourseCategoryData={CourseCategoryData} />
 			</div>
