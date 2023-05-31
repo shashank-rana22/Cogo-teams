@@ -7,7 +7,7 @@ import PublishNow from '../PublishNow';
 
 import Retest from './Retest';
 import styles from './styles.module.css';
-import testStatus from './testStatus';
+import getTestStatus from './testStatus';
 import TEXT_MAPPING from './text-mapping';
 
 function InfoBanner({
@@ -33,7 +33,7 @@ function InfoBanner({
 
 	const isUnderValidity = new Date() < new Date(validity_end);
 
-	const status = testStatus(retest, activeAttempt, test_status);
+	const status = getTestStatus(retest, activeAttempt, test_status);
 
 	const content = TEXT_MAPPING[status];
 

@@ -2,8 +2,7 @@ import { Tooltip } from '@cogoport/components';
 import { InputController } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 
-const getControls = ({ control, formvalues }) => {
-	const controls = [
+const getControls = ({ control, formvalues }) => [
 		{
 			name    : 'users_list',
 			label   : 'Select Users to appear for Retest',
@@ -110,7 +109,6 @@ const getControls = ({ control, formvalues }) => {
 			},
 		},
 	];
-	return controls;
-};
+
 
 export default getControls;

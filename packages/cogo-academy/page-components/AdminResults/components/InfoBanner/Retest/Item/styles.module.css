@@ -18,7 +18,7 @@
 			margin-left: 0;
 		}
 
-		.ui_AAj92 {
+		.ui_radiogroup_container {
 			padding: 2px !important;
 			margin-bottom: 4px;
 		}
@@ -45,4 +45,14 @@
 	display: flex;
 	flex-shrink: 1;
 	margin-bottom: 8px;
+	flex-direction: column;
+}
+
+.error_text {
+	color: #ff0000;
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	text-align: center;
+	margin-left: 2px;
 }

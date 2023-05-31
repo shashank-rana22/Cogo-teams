@@ -1,4 +1,3 @@
-// eslint-disable-next-line max-len
 import { SelectController, CheckboxGroupController, RadioGroupController, DateRangePickerController } from '@cogoport/forms';
 import React from 'react';
 
@@ -8,7 +7,6 @@ function getElementController(type = '') {
 	switch (type) {
 		case 'radio':
 			return RadioGroupController;
-
 		case 'checkboxgroup':
 			return CheckboxGroupController;
 		case 'select':
@@ -37,14 +35,12 @@ function Item(props) {
 				<sup className={styles.sup}>*</sup>
 			</div>
 			<div className={styles.filters_types}>
-				{Element && (
 					<Element
 						{...props}
 						control={control}
 						className={styles.field_controller}
 					/>
-				)}
-				{error?.type && <div className={styles.error_text}>This is Required</div>}
+				{error?.type  && <div className={styles.error_text}>This is Required</div>}
 			</div>
 		</div>
 	);

@@ -29,9 +29,9 @@ function Retest({ watch, control, setValue, errors }) {
 
 	return (
 		<div className={styles.info}>
-
 			{(controls || []).map((controlItem) => {
-				const { show } = controlItem;
+				const { show = false } = controlItem;
+
 				if (!isEmpty(show) && !show) {
 					return null;
 				}
@@ -44,7 +44,6 @@ function Retest({ watch, control, setValue, errors }) {
 					/>
 				);
 			})}
-
 		</div>
 	);
 }
