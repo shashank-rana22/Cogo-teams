@@ -68,39 +68,28 @@ function StepperComponent({ data }) {
 					const TickIcon = is_added ? IcCFtick : IcMFtick;
 
 					return (
-						<div key={name} className={styles.flex_wrapper} style={{ opacity: is_added ? 1 : 0.5 }}>
-							<div className={styles.single_card}>
-								<div className={styles.tick_icon}>
-									<TickIcon width={24} height={24} />
+						<div key={name} className={styles.single_card} style={{ opacity: is_added ? 1 : 0.5 }}>
+							<div className={styles.tick_icon}>
+								<TickIcon width={24} height={24} />
+							</div>
+
+							<div className={styles.icon_wrapper}>
+								<Icon width={20} height={20} />
+							</div>
+
+							<div>
+								<div className={styles.text_wrapper}>
+									{startCase(name)}
 								</div>
 
-								<div className={styles.icon_wrapper}>
-									<Icon width={20} height={20} />
-								</div>
-
-								<div>
-									<div className={styles.text_wrapper}>
-										{startCase(name)}
-									</div>
-
-									<div className={styles.text_wrapper}>
-										{sub_title}
-									</div>
+								<div className={styles.text_wrapper}>
+									{sub_title}
 								</div>
 							</div>
-							{
-								name !== 'company_policies' && (
-									<div>
-										------
-										{'>'}
-									</div>
-								)
-							}
 						</div>
 					);
 				})}
 			</div>
-
 		</div>
 	);
 }

@@ -14,13 +14,13 @@ import useUpdateOfferLetter from './useUpdateOfferLetter';
 function TableView({ search, activeTab }) {
 	const [ctcBreakup, setCtcBreakup] = useState();
 
-	const { data = {}, onPageChange, loading } = useGetTableView({ search, activeTab });
+	const { data = {}, onPageChange, loading, refetch } = useGetTableView({ search, activeTab });
 
 	const { list = [], page, page_limit, total_count } = data || {};
 
 	const { metadata = {}, id } = ctcBreakup || {};
 
-	const { onFinalSubmit = () => {} } = useUpdateOfferLetter();
+	const { onFinalSubmit = () => {} } = useUpdateOfferLetter({ refetch });
 
 	const columns = getColumns({ setCtcBreakup, onFinalSubmit, activeTab });
 

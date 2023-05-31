@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-function useUpdateOfferLetter() {
+function useUpdateOfferLetter({ refetch }) {
 	const [params, setParams] = useState({});
 
 	const [{ data, loading }, trigger] = useHarbourRequest(
@@ -27,6 +27,8 @@ function useUpdateOfferLetter() {
 			await trigger({
 				data: payload,
 			});
+
+			refetch();
 		} catch (err) {
 			Toast.error(
 				getApiErrorString(err.response?.data) || 'Something went wrong',
