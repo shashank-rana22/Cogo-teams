@@ -34,3 +34,5 @@ export const ticketSectionMapping = {
 		Statuses: 'closed,rejected,overdue',
 	},
 };
+
+export const TOTAL_FEEDBACK_KEY = 'TotalFeedback';
