@@ -33,13 +33,13 @@ function AdvanceCourseCreation({ id, mode }) {
 		);
 	}
 
-	if (state === 'published') {
+	if (state === 'published' || !data) {
 		return (
 			<div style={{ marginTop: '100px' }}>
 				<EmptyState
 					height={200}
 					width={300}
-					emptyText="This course is already published"
+					emptyText={state === 'published' ? 'This course is already published' : 'Course not found'}
 					flexDirection="column"
 					textSize={24}
 				/>

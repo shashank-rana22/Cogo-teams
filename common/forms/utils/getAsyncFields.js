@@ -377,6 +377,20 @@ function asyncListCourseCategories() {
 	};
 }
 
+function asyncListProgrammingQuestions() {
+	return {
+		labelKey    : 'title',
+		valueKey    : 'id',
+		endpoint    : 'list_programming_questions',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -407,4 +421,5 @@ export {
 	asyncListFAQTopics,
 	asyncListFAQTags,
 	asyncListCourseCategories,
+	asyncListProgrammingQuestions,
 };

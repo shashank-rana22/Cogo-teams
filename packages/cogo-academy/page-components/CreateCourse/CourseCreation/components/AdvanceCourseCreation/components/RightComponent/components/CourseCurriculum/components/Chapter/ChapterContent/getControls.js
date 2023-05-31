@@ -1,4 +1,4 @@
-const controls = [
+const getControls = ({ setQuestion }) => [
 	{
 		label       : 'Chapter Name',
 		name        : 'name',
@@ -35,6 +35,10 @@ const controls = [
 				value : 'text',
 				label : 'Text',
 			},
+			{
+				value : 'programming_assessment',
+				label : 'Programming Assessment',
+			},
 			// {
 			// 	value : 'jupyter_notebook',
 			// 	label : 'Jupyter Notebook',
@@ -42,6 +46,34 @@ const controls = [
 		],
 		rules: { required: { value: true, message: 'This is required' } },
 	},
+	{
+		label       : 'Programming Assessment',
+		name        : 'programming_assessment',
+		elementType : 'groupSelect1',
+		subControls : [
+			{
+				label             : 'Programming Assessment',
+				name              : 'programming_assessment',
+				elementType       : 'asyncSelect',
+				asyncKey          : 'list_programming_questions',
+				getSelectedOption : (obj) => {
+					setQuestion(obj);
+				},
+				style : { width: '50%' },
+				rules : { required: { value: true, message: 'This is required' } },
+			},
+			{
+				label       : 'Allowed Programming Languages',
+				name        : 'allowed_programming_languages',
+				elementType : 'select',
+				style       : { width: '50%' },
+				rules       : { required: { value: true, message: 'This is required' } },
+			},
+		],
+		style : { width: '50%' },
+		rules : { required: { value: true, message: 'This is required' } },
+	},
+
 	{
 		name          : 'upload_presentation',
 		elementType   : 'fileUpload',
@@ -113,7 +145,6 @@ const controls = [
 				label       : '',
 				name        : 'completion_duration_value',
 				elementType : 'number',
-				type        : 'number',
 				placeholder : 'Select',
 				rules       : { required: { value: true, message: 'This is required' } },
 			},
@@ -121,4 +152,4 @@ const controls = [
 	},
 ];
 
-export default controls;
+export default getControls;
