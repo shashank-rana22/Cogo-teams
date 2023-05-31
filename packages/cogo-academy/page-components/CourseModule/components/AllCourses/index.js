@@ -1,4 +1,4 @@
-import { Carousel, Tabs, TabPanel, Button, Tooltip, Pill } from '@cogoport/components';
+import { Carousel, Tabs, TabPanel, Button, Tooltip, Pill, Tags } from '@cogoport/components';
 import { IcMSort, IcMTick } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
@@ -9,16 +9,19 @@ import BUTTON_CONTENT_MAPPING from '../../configs/BUTTON_CONTENT_MAPPING';
 import useListCourseCategory from '../../hooks/useListCourseCategory';
 import CourseCard from '../CourseCard';
 
+import FilterPopover from './components/FilterPopover';
+import TagsSelect from './components/TagsSelect';
 import styles from './styles.module.css';
 
 function AllCourses({ currentCategory, setCurrentCategory }) {
 	const router = useRouter();
+	const [activeTab, setActiveTab] = useState();
+	const [filters, setFilters] = useState('');
+	// const [topicName, setTopicName] = useState([]);
 
 	const {
 		finalCourseCategories:courseCategories = [],
 	} = useListCourseCategory();
-
-	const [activeTab, setActiveTab] = useState();
 
 	const HANDLE_CLICK_MAPPING = {
 
@@ -50,11 +53,8 @@ function AllCourses({ currentCategory, setCurrentCategory }) {
 	// 	),
 	// }))
 
-	const openOptions = () => {
-		<Tooltip content="Tool tip" placement="top" />;
-	};
-
-	console.log('courseCategories', courseCategories);
+	// console.log('courseCategories', courseCategories);
+	// console.log('filters', filters);
 
 	return (
 		<div className={styles.container}>
@@ -87,14 +87,12 @@ function AllCourses({ currentCategory, setCurrentCategory }) {
 						{activeTab === 'mandatory' ? <IcMTick height="20px" width="20px" /> : null}
 						Mandatory
 					</div>
-					<Button
-						role="presentation"
-						onClick={openOptions()}
-						themeType="tertiary"
-					>
-						<IcMSort />
-						<div>Sort By</div>
-					</Button>
+
+					<FilterPopover
+						filters={filters}
+						setFilters={setFilters}
+					/>
+
 				</div>
 			</div>
 			<div className={styles.tabs_container}>
@@ -117,14 +115,13 @@ function AllCourses({ currentCategory, setCurrentCategory }) {
 			</div>
 			<div className={styles.pill}>
 				{courseCategories?.map((category) => (
-					<div>
-						{ currentCategory === category.name
-							? category?.topics?.map((item) => (
-								<Pill>{item.topic_name}</Pill>
-							))
-							: null}
-					</div>
-
+					currentCategory === category.name
+						? 						(
+							<TagsSelect
+								category={category}
+							/>
+						)
+						: null
 				))}
 			</div>
 

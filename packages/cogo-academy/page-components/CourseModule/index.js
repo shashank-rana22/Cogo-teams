@@ -20,7 +20,6 @@ function CourseModule() {
 
 	const {
 		finalCourseCategories: courseCategories = [],
-		CourseCategoryData,
 	} = useListCourseCategory();
 
 	return (
@@ -31,7 +30,6 @@ function CourseModule() {
 				setCurrentCategory={setCurrentCategory}
 			/>
 			{/* <AllCourses
-				CourseCategoryData={CourseCategoryData}
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
 			/>
