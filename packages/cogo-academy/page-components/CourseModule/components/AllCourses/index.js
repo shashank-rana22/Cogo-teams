@@ -30,8 +30,9 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 	const [params, setParams] = useState({
 		page    : 1,
 		filters : {
-			status: 'active',
+			status             : 'active',
 			user_id,
+			course_category_id : currentCategory === 'all_courses' ? null : [`${currentCategory}`],
 		},
 	});
 
@@ -45,6 +46,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 
 	console.log('data1', activeTab);
 	console.log('data2', currentCategory);
+	console.log('data3', courseCategories);
 
 	return (
 		<div className={styles.container}>
@@ -90,9 +92,9 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 				{courseCategories?.map((category) => (
 					<div
 						role="presentation"
-						className={`${styles.tab} ${currentCategory === category.name ? styles.active : ''}`}
+						className={`${styles.tab} ${currentCategory === category.id ? styles.active : ''}`}
 						key={category.id}
-						onClick={() => { setActiveTab(''); setCurrentCategory(category.name); }}
+						onClick={() => { setActiveTab(''); setCurrentCategory(category.id); }}
 					>
 						<h4><div className={styles.overflow}>{startCase(category.name)}</div></h4>
 						<p className={styles.total_courses}>
@@ -107,7 +109,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 
 			<div className={styles.pill}>
 				{courseCategories?.map((category) => (
-					currentCategory === category.name
+					currentCategory === category.id
 						? 						(
 							<TagsSelect
 								category={category}

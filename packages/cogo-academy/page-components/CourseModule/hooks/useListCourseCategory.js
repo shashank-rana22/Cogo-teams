@@ -19,7 +19,7 @@ const useListCourseCategory = () => {
 		{
 			display_name       : 'All Courses',
 			name               : 'all_courses',
-			id                 : new Date().getTime(),
+			id                 : 'all_courses', // new Date().getTime(),
 			is_course_category : false,
 		},
 		...(list || []),

@@ -9,6 +9,8 @@ function RenderComponent({ courseCategoryData, currentCategory, setCurrentCatego
 
 	const { query } = useRouter();
 
+	console.log('courseCategories', CourseCategoryData);
+
 	const { viewType = '' } = query;
 
 	if (viewType === 'all_courses') {
