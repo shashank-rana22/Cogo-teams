@@ -855,11 +855,6 @@ const partner = {
 			service_name : 'user',
 		},
 		{
-			api          : 'update_user',
-			access_type  : 'private',
-			service_name : 'user',
-		},
-		{
 			api          : 'list_partner_user_expertises',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -946,6 +941,11 @@ const partner = {
 		},
 		{
 			api          : 'update_partner_user',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'bulk_update_partner_user_expertise_status',
 			access_type  : 'private',
 			service_name : 'partner',
 		},
@@ -12109,24 +12109,37 @@ const partner = {
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'list_partner_users',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-	],
-	analytics_dashboard_management: [
-		{
-			api          : 'create_analytics_permission_entry',
+			api          : 'create_analytics_dashboard_permission',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'list_analytics_permission_entries',
+			api          : 'update_analytics_dashboard_permission',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'delete_analytics_dashboard_entry',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
 		{
 			api          : 'list_analytics_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboard_entries',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboard_permissions',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_permission_user_roles',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
@@ -12139,11 +12152,6 @@ const partner = {
 			api          : 'list_auth_roles',
 			access_type  : 'private',
 			service_name : 'auth',
-		},
-		{
-			api          : 'list_analytics_permission_entries',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
 		},
 	],
 	ticket_management: [
