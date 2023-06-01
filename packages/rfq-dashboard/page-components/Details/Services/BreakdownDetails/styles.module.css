@@ -70,7 +70,8 @@
 
 .divider {
 	width: 100%;
-	color: #bdbdbd;
+	height: 1px;
+	background-color: #bdbdbd;
 }
 
 .table_footer {

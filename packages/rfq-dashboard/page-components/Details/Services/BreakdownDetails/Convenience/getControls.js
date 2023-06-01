@@ -1,22 +1,13 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const getControls = (convenienceDetails) => {
-	const { convenience_rate } = convenienceDetails;
-
+const getControls = () => {
 	const controls = {
 		name             : 'convenience_fee',
 		type             : 'fieldArray',
 		showButtons      : false,
 		showDeleteButton : false,
 		showDivider      : false,
-		value            : [
-			{
-				unit            : convenience_rate?.unit,
-				currency        : convenience_rate.currency,
-				convenience_fee : convenience_rate?.price,
-			},
-		],
-		controls: [
+		controls         : [
 			{
 				name        : 'unit',
 				type        : 'text',

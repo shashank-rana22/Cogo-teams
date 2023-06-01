@@ -55,16 +55,16 @@ function Form({
 	return (
 		<>
 			{marginControls.map((controItem) => {
-				const { type: form_type, label } = controItem;
+				const { type: form_type, label, name } = controItem;
 
 				if (form_type === 'fieldArray') {
-					return <FieldArray control={control} {...controItem} key={label} />;
+					return <FieldArray key={name} control={control} {...controItem} />;
 				}
 
 				const Element = getController(type);
 
 				return (
-					<>
+					<React.Fragment key={name}>
 						<div>
 							{label}
 						</div>
@@ -74,7 +74,7 @@ function Form({
 							width="133px"
 							height=" 32px"
 						/>
-					</>
+					</React.Fragment>
 				);
 			})}
 
