@@ -1,0 +1,93 @@
+.revenue_col {
+	position: relative;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 16px;
+	margin: 10px 0;
+}
+
+.revenue_col_color {
+	position: relative;
+	display: flex;
+	flex: 1;
+	flex-direction: column;
+	padding: 16px;
+	margin: 10px 0;
+	background-color: #f9fef8;
+}
+
+.revenue_col:not(:last-child) {
+	border-right: 1px solid #e0e0e0;
+}
+
+.revenue_col_color:not(:last-child) {
+	border-right: 1px solid #e0e0e0;
+}
+
+.revenue_span {
+	font-weight: 500;
+	color: #828282;
+}
+
+.value_span {
+	font-weight: 600;
+}
+
+.text_currency {
+	padding-bottom: 4.8px;
+	font-size: 24px;
+	font-weight: 600;
+	text-align: center;
+}
+
+.text_bookings {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	justify-content: center;
+	padding-top: 16px;
+	font-size: 11px;
+	text-align: center;
+	border-top: 1px solid #e0e0e0;
+}
+
+.point {
+	padding: 0 3px;
+}
+
+.bar {
+	padding: 0 5px;
+}
+
+.desktop {
+	display: flex;
+	justify-content: space-between;
+}
+
+.mobile {
+	display: none;
+}
+
+@media (max-width: 967px) {
+	.desktop {
+		display: none;
+	}
+
+	.mobile {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+	}
+}
+@media (min-width: 968px) and (max-width: 1024px) {
+	.text_bookings {
+		display: flex;
+		align-items: center;
+		justify-content: center;
+		padding-top: 16px;
+		font-size: 10px;
+		text-align: center;
+		border-top: 1px solid #e0e0e0;
+	}
+}

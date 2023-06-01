@@ -699,6 +699,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'send_channel_partner_user_welcome_email',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	terms_and_conditons: [
 		{
@@ -850,11 +855,6 @@ const partner = {
 			service_name : 'user',
 		},
 		{
-			api          : 'update_user',
-			access_type  : 'private',
-			service_name : 'user',
-		},
-		{
 			api          : 'list_partner_user_expertises',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -941,6 +941,11 @@ const partner = {
 		},
 		{
 			api          : 'update_partner_user',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'bulk_update_partner_user_expertise_status',
 			access_type  : 'private',
 			service_name : 'partner',
 		},
@@ -2584,6 +2589,11 @@ const partner = {
 			api          : 'update_organization_asset',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'send_channel_partner_user_welcome_email',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 	support_crm: [
@@ -4486,6 +4496,11 @@ const partner = {
 			service_name : 'unified_dashboard',
 			feature      : 'live_booking',
 		},
+		{
+			api          : 'get_weight_slabs_for_airline',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
 	],
 	operations_dashboard: [
 		{
@@ -4588,6 +4603,11 @@ const partner = {
 			api          : 'list_contracts',
 			access_type  : 'private',
 			service_name : 'contract',
+		},
+		{
+			api          : 'list_saas_rail_domestic_freight_invoice_details',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
 		},
 	],
 	discount: [
@@ -6015,6 +6035,11 @@ const partner = {
 			api          : 'get_contract_service_details',
 			access_type  : 'private',
 			service_name : 'contract',
+		},
+		{
+			api          : 'get_exchange_rate',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
 		},
 	],
 	incentives: [
@@ -8531,6 +8556,10 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api         : 'list_cogo_entities',
+			access_type : 'private',
+		},
+		{
 			api         : 'post_payments_journal_voucher_post_to_sage',
 			access_type : 'private',
 			module      : 'settlement',
@@ -8809,6 +8838,30 @@ const partner = {
 			api          : 'get_shipment_process',
 			access_type  : 'private',
 			service_name : 'shipment',
+		},
+	],
+	so2_surface: [
+		{
+			api          : 'bulk_update_shipment_stakeholders',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+
+		{
+			api          : 'list_surface_so2_dashboard_shipments',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_organizations',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 
@@ -9467,8 +9520,18 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'segmentation',
 		},
+		{
+			api          : 'list_partners',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
 	],
 	templates: [
+		{
+			api          : 'update_communication_whatsapp_template',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 		{
 			api          : 'list_communication_templates',
 			access_type  : 'private',
@@ -9526,6 +9589,21 @@ const partner = {
 		},
 		{
 			api          : 'create_communication_template_suggestions',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_platform_config_constants',
+			access_type  : 'private',
+			service_name : 'platform_config',
+		},
+		{
+			api          : 'update_meta_catalog',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_sms_sender_mappings',
 			access_type  : 'private',
 			service_name : 'communication',
 		},
@@ -10342,6 +10420,12 @@ const partner = {
 			feature     : 'jobs',
 		},
 		{
+			api         : 'post_common_job_by_id_open',
+			access_type : 'private',
+			module      : 'jobs',
+			feature     : 'jobs',
+		},
+		{
 			api          : 'list_sage_jobs',
 			access_type  : 'private',
 			service_name : 'sage',
@@ -10775,7 +10859,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'air_freight_rate',
 		},
-
+		{
+			api          : 'get_weight_slabs_for_airline',
+			access_type  : 'private',
+			service_name : 'air_freight_rate',
+		},
 		{
 			api          : 'create_domestic_air_freight_rate',
 			access_type  : 'private',
@@ -11111,6 +11199,24 @@ const partner = {
 			api          : 'list_shipment_invoice_combinations',
 			access_type  : 'private',
 			service_name : 'shipment',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'list_rail_domestic_freight_rate_free_days',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'create_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
+			feature      : 'detention_demurrage',
+		},
+		{
+			api          : 'update_rail_domestic_freight_rate_free_day',
+			access_type  : 'private',
+			service_name : 'rail_domestic_freight_rate',
 			feature      : 'detention_demurrage',
 		},
 	],
@@ -11595,6 +11701,14 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_air_coe_document_copy_list',
+			access_type : 'private',
+		},
+		{
+			api         : 'put_air_coe_document_copy',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_locations',
 			access_type  : 'private',
 			service_name : 'location',
@@ -11657,6 +11771,11 @@ const partner = {
 			service_name : 'shipment',
 		},
 		{
+			api          : 'generate_variance_report',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
+		{
 			api          : 'create_shipment_air_freight_consolidated_invoice',
 			access_type  : 'private',
 			service_name : 'shipment',
@@ -11700,6 +11819,16 @@ const partner = {
 		},
 	],
 	cogo_one: [
+		{
+			api          : 'create_agent_feedback',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_checkouts',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 		{
 			api          : 'get_user',
 			access_type  : 'private',
@@ -11955,6 +12084,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'checkout',
 		},
+		{
+			api          : 'list_servetel_agents',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
+		{
+			api          : 'update_live_call',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	analytics_dashboard: [
 		{
@@ -11983,24 +12122,37 @@ const partner = {
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'list_partner_users',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-	],
-	analytics_dashboard_management: [
-		{
-			api          : 'create_analytics_permission_entry',
+			api          : 'create_analytics_dashboard_permission',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'list_analytics_permission_entries',
+			api          : 'update_analytics_dashboard_permission',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'delete_analytics_dashboard_entry',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
 		{
 			api          : 'list_analytics_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboard_entries',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboard_permissions',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_permission_user_roles',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
@@ -12013,11 +12165,6 @@ const partner = {
 			api          : 'list_auth_roles',
 			access_type  : 'private',
 			service_name : 'auth',
-		},
-		{
-			api          : 'list_analytics_permission_entries',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
 		},
 	],
 	ticket_management: [
@@ -12135,6 +12282,39 @@ const partner = {
 			api          : 'delete_tickets_default_type',
 			access_type  : 'private',
 			service_name : 'tickets',
+		},
+	],
+
+	referral_dashboard: [
+		{
+			api          : 'get_referrer_network_node',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referrer_network',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_invites',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_admin_stats',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_mappings',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_transactions',
+			access_type  : 'private',
+			service_name : 'referral',
 		},
 	],
 	air_repository: [

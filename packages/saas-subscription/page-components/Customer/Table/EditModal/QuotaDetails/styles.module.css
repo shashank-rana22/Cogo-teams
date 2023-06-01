@@ -1,0 +1,40 @@
+.container {
+	border: 1px solid #f8f2e7;
+	border-radius: 9px;
+}
+
+.flex_box {
+	display: flex;
+	justify-content: space-between;
+	padding: 12px 16px;
+	border-bottom: 1px solid #f8f2e7;
+
+	.no_border {
+		border: none;
+	}
+}
+
+.card_header {
+	div {
+		font-weight: 600;
+	}
+}
+
+.scroll_container {
+	max-height: 200px;
+	overflow-y: scroll;
+}
+
+.quota_row {
+	font-size: 12px;
+
+	.quota_quantity {
+		margin-right: 10px;
+	}
+
+	.edit_icon {
+		width: 10px;
+		margin-left: 4px;
+		cursor: pointer;
+	}
+}

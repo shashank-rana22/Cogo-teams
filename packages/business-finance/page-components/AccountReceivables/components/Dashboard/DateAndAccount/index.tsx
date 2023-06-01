@@ -1,8 +1,7 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
-
-import { keyValue } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -33,6 +32,8 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 		overallStats = {},
 	} = outstandingData || {};
 
+	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
+
 	return (
 		<div>
 
@@ -44,14 +45,14 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 							<>
 								<div className={styles.account_receivables_line}>
 									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || keyValue[entityCode]}
+										{overallStats?.dashboardCurrency || currency}
 									</div>
 									<div className={styles.account_receivables_amount}>
 										<Tooltip content={(
 											<div>
 												{getFormattedPrice(
 													overallStats?.openInvoicesAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
+													overallStats?.dashboardCurrency || currency,
 
 												)}
 											</div>
@@ -60,7 +61,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
 													overallStats?.openInvoicesAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
+													overallStats?.dashboardCurrency || currency,
 													{
 														notation              : 'compact',
 														compactDisplay        : 'short',
@@ -101,7 +102,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 							<>
 								<div className={styles.account_receivables_open_line}>
 									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || keyValue[entityCode]}
+										{overallStats?.dashboardCurrency || currency}
 									</div>
 
 									<div
@@ -111,7 +112,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div>
 												{getFormattedPrice(
 													overallStats?.onAccountAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
+													overallStats?.dashboardCurrency || currency,
 												)}
 											</div>
 										)}
@@ -119,7 +120,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
 													overallStats?.onAccountAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
+													overallStats?.dashboardCurrency || currency,
 													{
 														notation              : 'compact',
 														compactDisplay        : 'short',
@@ -149,7 +150,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 							<>
 								<div className={styles.account_receivables_open_line}>
 									<div className={styles.dashboard_currency}>
-										{overallStats?.dashboardCurrency || keyValue[entityCode]}
+										{overallStats?.dashboardCurrency || currency}
 									</div>
 
 									<div
@@ -159,7 +160,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div>
 												{getFormattedPrice(
 													overallStats?.totalOutstandingAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
+													overallStats?.dashboardCurrency || currency,
 												)}
 											</div>
 										)}
@@ -167,7 +168,7 @@ function DateAndAccount({ outstandingData, outstandingLoading, entityCode }: Dat
 											<div className={styles.wrapper}>
 												{getFormattedPrice(
 													overallStats?.totalOutstandingAmount || 0,
-													overallStats?.dashboardCurrency || keyValue[entityCode],
+													overallStats?.dashboardCurrency || currency,
 													{
 														notation              : 'compact',
 														compactDisplay        : 'short',

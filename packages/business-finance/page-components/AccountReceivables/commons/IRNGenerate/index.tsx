@@ -1,5 +1,5 @@
 import { Popover, Button, Modal, Textarea } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -18,6 +18,7 @@ type Itemdata = {
 	invoiceStatus?: string
 	entityCode?: number
 	daysLeftForAutoIrnGeneration?: string
+	isFinalPosted?:boolean
 };
 interface IRNGeneration {
 	itemData?: Itemdata
@@ -42,7 +43,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 	const [visible, setVisible] = useState(false);
 
-	const { invoiceStatus = '', entityCode = '' } = itemData || {};
+	const { invoiceStatus = '', entityCode = '', isFinalPosted = false } = itemData || {};
 
 	const { partner = {} } = profile;
 
@@ -136,64 +137,11 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 								disabled={finalPostLoading}
 								onClick={() => handleFinalpost()}
 							>
-								<div className={styles.button_style}>Final Post</div>
-							</Button>
-						</div>
-					)}
-					{INVOICE_STATUS.includes(invoiceStatus) && (
-						<div className={styles.button_container}>
-							<Button
-								size="sm"
-								disabled={loading}
-								onClick={() => financeRejected()}
-							>
-								<div className={styles.button_style}>Finance Reject</div>
-							</Button>
-						</div>
-					)}
-					{openReject && (
-						<Modal
-							show={openReject}
-							onClose={() => {
-								setOpenReject(false);
-							}}
-						>
-
-							<Modal.Header title="Remarks*" />
-							<Modal.Body>
-
-								<Textarea
-									size="md"
-									value={textValue}
-									onChange={onChange}
-									style={{ height: '100px' }}
-								/>
-
-							</Modal.Body>
-							<Modal.Footer>
-								<div className={styles.button_val}>
-									<div className={styles.style_cancel}>
-										<Button
-											className="secondary sm"
-											onClick={() => {
-												setOpenReject(false);
-											}}
-										>
-											Cancel
-										</Button>
-									</div>
-									<Button
-										className="primary sm"
-										disabled={!textValue || loadingReject}
-										onClick={() => {
-											financeReject();
-										}}
-									>
-										Reject
-									</Button>
+								<div className={styles.button_style}>
+									{isFinalPosted ? 'Information' : 'Final Post'}
 								</div>
-							</Modal.Footer>
-						</Modal>
+							</Button>
+						</div>
 					)}
 
 					{IRN_FAILED_STATUS.includes(invoiceStatus) && (
@@ -215,18 +163,79 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						sageInvoiceData={sageInvoiceData}
 						sageInvoiceLoading={sageInvoiceLoading}
 						finalPostLoading={finalPostLoading}
+						isFinalPosted={isFinalPosted}
 					/>
 
 				</div>
 			)}
+			{INVOICE_STATUS.includes(invoiceStatus) && (
+				<div className={styles.button_container}>
+					<Button
+						size="sm"
+						disabled={loading}
+						onClick={() => financeRejected()}
+					>
+						<div className={styles.button_style}>Finance Reject</div>
+					</Button>
+				</div>
+			)}
+			{openReject && (
+				<Modal
+					show={openReject}
+					onClose={() => {
+						setOpenReject(false);
+					}}
+				>
+
+					<Modal.Header title="Remarks*" />
+					<Modal.Body>
+
+						<Textarea
+							size="md"
+							value={textValue}
+							onChange={onChange}
+							style={{ height: '100px' }}
+						/>
+
+					</Modal.Body>
+					<Modal.Footer>
+						<div className={styles.button_val}>
+							<div className={styles.style_cancel}>
+								<Button
+									className="secondary sm"
+									onClick={() => {
+										setOpenReject(false);
+									}}
+								>
+									Cancel
+								</Button>
+							</div>
+							<Button
+								className="primary sm"
+								disabled={!textValue || loadingReject}
+								onClick={() => {
+									financeReject();
+								}}
+							>
+								Reject
+							</Button>
+						</div>
+					</Modal.Footer>
+				</Modal>
+			)}
 		</div>
 	);
+
+	const rest = {
+		onClickOutside: () => setVisible(false),
+	};
 
 	return (
 		<Popover
 			placement="left"
 			render={content()}
 			visible={visible}
+			{...rest}
 		>
 
 			<IcMOverflowDot

@@ -11,7 +11,20 @@ function asyncFieldsLocations2() {
 		},
 	};
 }
-
+function asyncFieldsPartnerUsersIds() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'user_id',
+		endpoint    : 'list_partner_users',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+			page_limit: 100,
+		},
+	};
+}
 function asyncFieldsLocations() {
 	return {
 		valueKey    : 'id',
@@ -259,6 +272,24 @@ function asyncKamExpertiseRuleOptions() {
 	};
 }
 
+function asyncOrganizationTradeParties() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'registration_number',
+		endpoint    : '/list_organization_trade_parties',
+		initialCall : true,
+	};
+}
+
+function asyncSearchProducts() {
+	return {
+		labelKey    : 'item_name',
+		valueKey    : 'code',
+		endpoint    : '/search_products_v2',
+		initialCall : true,
+	};
+}
+
 function asyncKamExpertiseGroupOptions() {
 	return {
 		labelKey     : 'name',
@@ -305,6 +336,16 @@ function asyncAccountEngagementScoringEvents() {
 	};
 }
 
+function asyncShipmentContainerDetails() {
+	return {
+		valueKey      : 'container_number',
+		finalLabelKey : 'container_number',
+		endpoint      : 'list_shipment_container_details',
+		initialCall   : true,
+		defaultParams : {},
+	};
+}
+
 function asyncFieldsTicketTypes() {
 	return {
 		labelKey     : 'TicketType',
@@ -343,6 +384,114 @@ function asyncListCurrency() {
 		},
 	};
 }
+function asyncListServetelAgents() {
+	return {
+		labelKey    : 'mobile_number',
+		valueKey    : 'id',
+		endpoint    : 'list_servetel_agents',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncJvList() {
+	return {
+		labelKey     : 'category',
+		valueKey     : 'category',
+		endpoint     : 'payments/parent-jv/jv-category',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_jv_category',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncJournalCode() {
+	return {
+		labelKey     : 'description',
+		valueKey     : 'number',
+		endpoint     : 'payments/parent-jv/journal-code',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_journal_code',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncAccMode() {
+	return {
+		labelKey     : 'label',
+		valueKey     : 'label',
+		endpoint     : 'payments/parent-jv/acc-mode',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_acc_mode',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncCodeMaster() {
+	return {
+		labelKey     : 'accountCode',
+		valueKey     : 'accountCode',
+		endpoint     : 'payments/parent-jv/gl-code-master',
+		initialCall  : true,
+		authkey      : 'get_payments_parent_jv_gl_code_master',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
+function asyncListOrgTradeParties() {
+	return {
+		labelKey    : 'legal_business_name',
+		valueKey    : 'id',
+		endpoint    : 'list_organization_trade_party_details',
+		initialCall : true,
+		params      : {
+			sage_organization_id_required : true,
+			filters                       : {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncAllocationRequestRejectionType() {
+	return {
+		labelKey     : 'reason',
+		valueKey     : 'reason',
+		endpoint     : '/request_rejection_reasons',
+		authkey      : 'get_allocation_request_rejection_reasons',
+		microService : 'allocation',
+		initialCall  : true,
+	};
+}
+
+function asyncPlanPricingList() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_plan_pricings',
+		initialCall : true,
+		params      : {
+			filters: { is_active: true },
+		},
+	};
+}
+
+function asyncQuotaList() {
+	return {
+		labelKey    : 'product_name',
+		valueKey    : 'id',
+		endpoint    : 'list_saas_products',
+		initialCall : true,
+	};
+}
 
 export {
 	asyncFieldsLocations,
@@ -370,6 +519,19 @@ export {
 	asyncListCogoEntity,
 	asyncListHsCodes,
 	asyncListCurrency,
+	asyncJvList,
 	asyncAccountEngagementScoringEvents,
 	asyncFieldsTicketTypes,
+	asyncOrganizationTradeParties,
+	asyncSearchProducts,
+	asyncShipmentContainerDetails,
+	asyncJournalCode,
+	asyncAccMode,
+	asyncCodeMaster,
+	asyncListOrgTradeParties,
+	asyncFieldsPartnerUsersIds,
+	asyncListServetelAgents,
+	asyncPlanPricingList,
+	asyncQuotaList,
+	asyncAllocationRequestRejectionType,
 };

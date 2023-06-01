@@ -37,7 +37,7 @@ function EditCancelService({ serviceData = {} }) {
 
 	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
 	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
-	actionButtons[2].show = getCanCancelService({ shipment_data, user_data, state, activeStakeholder });
+	actionButtons[2].show = getCanCancelService({ state, activeStakeholder });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;
@@ -45,6 +45,7 @@ function EditCancelService({ serviceData = {} }) {
 
 	const content = actionButtons.map(({ label, value, show }) => (show ? (
 		<div
+			key={value}
 			role="button"
 			tabIndex={0}
 			className={styles.action_button}
