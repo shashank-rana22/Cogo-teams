@@ -1,6 +1,4 @@
-import { Tooltip } from '@cogoport/components';
-import { InputController } from '@cogoport/forms';
-import { IcMInfo } from '@cogoport/icons-react';
+import PercentagePercentile from './PercentagePercentile';
 
 const getControls = ({ control, formvalues }) => [
 	{
@@ -31,53 +29,14 @@ const getControls = ({ control, formvalues }) => [
 		options: [
 			{
 				label: (
-					<>
-						<InputController
-							name="percentile"
-							placeholder="Type Percentile"
-							control={control}
-							size="sm"
-							type="number"
-							disabled={!formvalues.filtered_users?.includes('percentile_checked')}
-						/>
-						<Tooltip
-							theme="light"
-							content="Type Minimum Percentile for retest eligibilty"
-							maxWidth="none"
-							placement="right"
-							interactive
-						>
-
-							<IcMInfo style={{ marginLeft: 8 }} />
-
-						</Tooltip>
-					</>
+					<PercentagePercentile formvalues={formvalues} control={control} value="percentile_checked" />
 				),
 				value    : 'percentile_checked',
 				disabled : formvalues.filtered_users?.includes('percentage_checked'),
 			},
 			{
 				label: (
-					<>
-						<InputController
-							name="percentage"
-							placeholder="Type Percentage"
-							control={control}
-							size="sm"
-							type="number"
-							disabled={!formvalues.filtered_users?.includes('percentage_checked')}
-						/>
-						<Tooltip
-							theme="light"
-							content="Type Minimum Percentage for retest eligibilty"
-							maxWidth="none"
-							placement="right"
-							interactive
-						>
-							<IcMInfo style={{ marginLeft: 8 }} />
-
-						</Tooltip>
-					</>
+					<PercentagePercentile formvalues={formvalues} control={control} value="percentage_checked" />
 				),
 				value    : 'percentage_checked',
 				disabled : formvalues.filtered_users?.includes('percentile_checked'),
