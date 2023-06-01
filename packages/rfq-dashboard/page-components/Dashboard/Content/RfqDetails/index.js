@@ -11,12 +11,12 @@ import styles from './styles.module.css';
 function RfqDetails(props) {
 	const [checkedItems, setCheckedItems] = useState([]);
 	const [selectAll, setSelectAll] = useState(false);
-
 	const { list = [], loading, getRfqsForApproval } = props;
 
 	useEffect(() => {
 		setSelectAll(checkedItems.length === list.length);
 	}, [list.length, checkedItems.length]);
+
 	if (!loading && isEmpty(list)) {
 		return (
 			<div className={styles.emptycontainer}>
