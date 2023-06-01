@@ -15,7 +15,7 @@ import CourseCard from '../CourseCard';
 import RecommemndedCourses from './components/RecommemndedCourses';
 import styles from './styles.module.css';
 
-function HomePage({ user_id, CourseCategoryData }) {
+function HomePage({ user_id, courseCategoryData, categoryLoading }) {
 	const router = useRouter();
 
 	const [activeTab, setActiveTab] = useState('ongoing');
@@ -35,6 +35,10 @@ function HomePage({ user_id, CourseCategoryData }) {
 
 	const { data = {}, loading } = useListCourseUserMappings({ activeTab, params, query });
 
+	if (loading) {
+		return <LoadingState rowsCount={1} />;
+	}
+
 	const CAROUSELDATA = (data.list || []).map((item, index) => ({
 		key    : index,
 		render : () => (
@@ -46,10 +50,6 @@ function HomePage({ user_id, CourseCategoryData }) {
 			/>
 		),
 	}));
-
-	if (loading) {
-		return <LoadingState rowsCount={1} />;
-	}
 
 	return (
 		<div>
@@ -98,7 +98,8 @@ function HomePage({ user_id, CourseCategoryData }) {
 						<IcMArrowRight />
 					</Button>
 				</div>
-				<CategoryCard CourseCategoryData={CourseCategoryData} />
+
+				<CategoryCard courseCategoryData={courseCategoryData} categoryLoading={categoryLoading} />
 			</div>
 
 			<div>

@@ -27,7 +27,7 @@ const useListCourseCategory = () => {
 
 	return {
 		loading,
-		CourseCategoryData: data,
+		courseCategoryData: data,
 		finalCourseCategories,
 	};
 };

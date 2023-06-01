@@ -1,12 +1,18 @@
 import { Carousel } from '@cogoport/components';
 import React from 'react';
 
+import LoadingState from '../../../../commons/LoadingState';
+
 import CategoriesCard from './component/CategoriesCard';
 import styles from './styles.module.css';
 
-function CategoryCard({ CourseCategoryData }) {
-	const CAROUSELDATA = (CourseCategoryData?.list || []).map((item, index) => ({
-		key    : index,
+function CategoryCard({ courseCategoryData, categoryLoading }) {
+	if (categoryLoading) {
+		return <LoadingState />;
+	}
+
+	const CAROUSELDATA = (courseCategoryData?.list || []).map((item, index) => ({
+		key    : item?.id,
 		render : () => (
 			<CategoriesCard
 				key={item?.id}
