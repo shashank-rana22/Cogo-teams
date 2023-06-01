@@ -1,24 +1,11 @@
 import { cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
+import { STATS_MAPPING } from '../../configurations/stats-mapping';
+
 import styles from './styles.module.css';
 
-const STATS_MAPPING = {
-	promised_revenue: {
-		key   : 'promised_revenue',
-		label : 'Promised Revenue',
-	},
-	promised_profitability: {
-		key   : 'promised_profitability',
-		label : 'Promised Profitability',
-	},
-	utilization: {
-		key   : 'utilization',
-		label : 'Utilization',
-	},
-};
-
-function ServiceStats({ data = [], type = '', source = '' }) {
+function ServiceStats({ data = [], source = '' }) {
 	const renderItem = (item) => {
 		if (item.key === 'promised_revenue') {
 			return formatAmount({
