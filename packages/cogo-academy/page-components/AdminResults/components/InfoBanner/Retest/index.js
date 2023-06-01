@@ -1,30 +1,8 @@
-import { isEmpty } from '@cogoport/utils';
-import { useEffect } from 'react';
-
 import getControls from './controls';
 import Item from './Item';
 
-function Retest({ watch, control, setValue, errors }) {
-	const formvalues = watch();
-
+function Retest({ control, formvalues, errors }) {
 	const controls = getControls({ control, formvalues });
-
-	useEffect(() => {
-		setValue('filtered_users', '');
-		setValue('percentage', '');
-		setValue('percentile', '');
-	}, [setValue, formvalues.users_list]);
-
-	useEffect(() => {
-		if (isEmpty(formvalues?.filtered_users)) {
-			setValue('percentage', '');
-			setValue('percentile', '');
-		} else if (formvalues?.filtered_users?.includes('percentile_checked')) {
-			setValue('percentage', '');
-		} else if (formvalues?.filtered_users?.includes('percentage_checked')) {
-			setValue('percentile', '');
-		}
-	}, [setValue, formvalues?.filtered_users]);
 
 	return (
 		<div>

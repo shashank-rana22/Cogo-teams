@@ -1,5 +1,6 @@
 import { Button, Modal, Placeholder } from '@cogoport/components';
-import { useState } from 'react';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import useAllowReTest from '../../hooks/useAllowReTest';
 import PublishNow from '../PublishNow';
@@ -35,6 +36,27 @@ function InfoBanner({
 	const status = getTestStatus({ retest, activeAttempt, test_status });
 
 	const content = TEXT_MAPPING[status];
+
+	const formvalues = watch();
+
+	console.log(formvalues);
+
+	useEffect(() => {
+		setValue('filtered_users', '');
+		setValue('percentage', '');
+		setValue('percentile', '');
+	}, [formvalues.users_list, setValue]);
+
+	useEffect(() => {
+		if (isEmpty(formvalues?.filtered_users)) {
+			setValue('percentage', '');
+			setValue('percentile', '');
+		} else if (formvalues?.filtered_users?.includes('percentile_checked')) {
+			setValue('percentage', '');
+		} else if (formvalues?.filtered_users?.includes('percentage_checked')) {
+			setValue('percentile', '');
+		}
+	}, [setValue, formvalues?.filtered_users]);
 
 	const { key, backgroundColor, text, subText, iconColor, Icon, borderColor } = content || {};
 
@@ -86,10 +108,9 @@ function InfoBanner({
 
 						<Modal.Body>
 							<Retest
-								watch={watch}
 								control={control}
-								setValue={setValue}
 								errors={errors}
+								formvalues={formvalues}
 							/>
 						</Modal.Body>
 
