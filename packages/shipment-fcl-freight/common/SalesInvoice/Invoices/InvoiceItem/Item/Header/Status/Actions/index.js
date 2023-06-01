@@ -1,6 +1,5 @@
-import { Button, Popover, Tooltip, cl } from '@cogoport/components';
+import { Button, Tooltip, cl } from '@cogoport/components';
 import {
-	IcMOverflowDot,
 	IcMInfo,
 	IcCError,
 	IcMEmail,
@@ -9,6 +8,7 @@ import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import KebabContent from './KebabContent';
 import styles from './styles.module.css';
 
 const AddRemarks = dynamic(() => import('./AddRemarks'), { ssr: false });
@@ -28,7 +28,6 @@ function Actions({
 	invoiceData = {},
 	isIRNGenerated = false,
 }) {
-	const [show, setShow] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
@@ -59,77 +58,6 @@ function Actions({
 		disableMarkAsReviewed = isIRNGenerated && isInvoiceBefore20Aug2022;
 	}
 	// HARD CODING ENDS
-
-	const handleClick = (setState = () => {}) => {
-		setState(true);
-		setShow(false);
-	};
-
-	const remarkRender = () => (
-		<div className={styles.remarkcontainer}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
-
-	const commonActions = invoice.status !== 'approved' && !disableAction;
-
-	const content = (
-		<div className={styles.dialog_box}>
-			{commonActions ? (
-				<>
-					<div>
-						<div
-							role="button"
-							tabIndex={0}
-							className={styles.text}
-							onClick={() => handleClick(setIsChangeCurrency)}
-						>
-							Change Currency
-						</div>
-						<div className={styles.line} />
-					</div>
-
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.text}
-						onClick={() => handleClick(setShowAddRemarks)}
-					>
-						Add Remarks
-					</div>
-
-					{invoice?.billing_address?.trade_party_type === 'self' ? (
-						<div>
-							<div className={styles.line} />
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.text}
-								onClick={() => handleClick(setShowChangePaymentMode)}
-							>
-								Change Payment Mode
-							</div>
-						</div>
-					) : null}
-				</>
-			) : null}
-
-			{(invoice.exchange_rate_document || []).map((url) => (
-				<div key={url}>
-					{commonActions ? <div className={styles.line} /> : null}
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.text}
-						onClick={() => window.open(url, '_blank')}
-					>
-						Exchange Rate Document
-					</div>
-				</div>
-			))}
-		</div>
-	);
 
 	return (
 		<div className={styles.container}>
@@ -172,13 +100,11 @@ function Actions({
 						</Tooltip>
 					) : null}
 				</div>
-
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 					<div className={styles.email_wrapper}>
 						<IcMEmail
 							onClick={() => setSendEmail(true)}
 						/>
-
 						<Tooltip
 							placement="bottom"
 							content={(
@@ -210,46 +136,18 @@ function Actions({
 							)}
 							theme="light"
 						>
-							<div className={styles.icon_div}>
-								<IcMInfo />
-							</div>
+							<div className={styles.icon_div}><IcMInfo /></div>
 						</Tooltip>
 					</div>
-
-					{(!disableAction || invoice.exchange_rate_document?.length > 0)
-					&& invoice.status !== 'revoked' ? (
-						<Popover
-							interactive
-							placement="bottom"
-							visible={show}
-							content={content}
-							theme="light"
-							onClickOutside={() => setShow(false)}
-						>
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.icon_more_wrapper}
-								onClick={() => setShow(!show)}
-							>
-								<IcMOverflowDot />
-							</div>
-						</Popover>
-						)
-						: (
-							<div className={styles.empty_div} />
-						)}
-
-					{!isEmpty(invoice.remarks) ? (
-						<Tooltip
-							placement="bottom"
-							content={remarkRender()}
-						>
-							<div className={styles.icon_more_wrapper}>
-								<IcMInfo fill="#DDEBC0" />
-							</div>
-						</Tooltip>
-					) : null}
+					<KebabContent
+						invoice={invoice}
+						shipment_data={shipment_data}
+						invoiceData={invoiceData}
+						isIRNGenerated={isIRNGenerated}
+						setIsChangeCurrency={setIsChangeCurrency}
+						setShowAddRemarks={setShowAddRemarks}
+						setShowChangePaymentMode={setShowChangePaymentMode}
+					/>
 				</div>
 			</div>
 
