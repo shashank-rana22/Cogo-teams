@@ -1,5 +1,6 @@
 import { Pill, Carousel } from '@cogoport/components';
 import { IcMStarfull } from '@cogoport/icons-react';
+import { format } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -38,7 +39,11 @@ function CourseDetails({ data, instructorData, module }) {
 			<div className={styles.header}>
 				<div className={styles.header_description}>
 					<h1 id={styles.bold}>{data?.name}</h1>
-					<div>by Muskan Tushir</div>
+					<div>
+						by
+						{' '}
+						{instructorData?.[0]?.name}
+					</div>
 				</div>
 				<div className={styles.header_rating}>
 					<IcMStarfull />
@@ -102,7 +107,7 @@ function CourseDetails({ data, instructorData, module }) {
 								{data?.course_stats?.practice_tests}
 								&nbsp;Practice Tests
 							</div>
-							<div><b>Certification</b></div>
+							<div><b>{data?.course_completion_rewards_details?.[0]}</b></div>
 						</div>
 					</div>
 				</div>
@@ -165,7 +170,11 @@ function CourseDetails({ data, instructorData, module }) {
 					{data?.course_completion_duration?.course_completion_unit}
 					&nbsp;to Get Certification
 				</div>
-				<Pill color="green">On or Before 18th May, 2023</Pill>
+				<Pill color="green">
+					On or Before
+					{' '}
+					{format(data?.course_end_date || '', 'dd MMMM YYYY')}
+				</Pill>
 			</div>
 
 		</div>
