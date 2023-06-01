@@ -570,6 +570,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_supported_exchange_rate_sources',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
 			api          : 'create_channel_partner_persona',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -5364,6 +5369,11 @@ const partner = {
 			api          : 'list_partner_user_allocations',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'get_supported_exchange_rate_sources',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
 		},
 		{
 			api          : 'get_allocation_requests',
