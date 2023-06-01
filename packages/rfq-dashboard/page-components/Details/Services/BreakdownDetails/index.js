@@ -28,6 +28,7 @@ function BreakdownDetails({
 	setShowPrice,
 	getRfqsForApproval,
 	margin_limit,
+	rfq_state = '',
 }) {
 	const { query } = useRouter();
 	const { rfq_id = '' } = query;
@@ -214,6 +215,7 @@ function BreakdownDetails({
 					size="md"
 					themeType="secondary"
 					onClick={save_card_margins}
+					disabled={rfq_state === 'approved'}
 				>
 					Save Changes
 

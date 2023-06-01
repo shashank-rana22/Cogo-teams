@@ -21,7 +21,7 @@ const TEXTMAPPING = {
 };
 
 const useGetPortCard = ({ props }) => {
-	const { data = {}, loading, refetchRateCards, getRfqsForApproval } = props;
+	const { data = {}, loading, refetchRateCards, getRfqsForApproval, rfq_state = '' } = props;
 
 	const [showPrice, setShowPrice] = useState({});
 	const {
@@ -112,6 +112,7 @@ const useGetPortCard = ({ props }) => {
 		refetchRateCards,
 		getRfqsForApproval,
 		margin_limit,
+		rfq_state,
 	};
 };
 

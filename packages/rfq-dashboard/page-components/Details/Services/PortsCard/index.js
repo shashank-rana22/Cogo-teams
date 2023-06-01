@@ -20,7 +20,7 @@ function PortsCard(props) {
 		total_price_discounted, showPrice, setShowPrice, id, rfq_card_loading, rate_card_details_data,
 		rate, rate_card_details, currency_conversion, editedMargins, setEditedMargins, primaryService,
 		convenienceDetails, setConvenienceDetails, updateMargin, refetchRateCards, getRfqsForApproval,
-		margin_limit,
+		margin_limit, rfq_state,
 	} = useGetPortCard({ props });
 
 	return (
@@ -81,6 +81,7 @@ function PortsCard(props) {
 						setShowPrice={setShowPrice}
 						getRfqsForApproval={getRfqsForApproval}
 						margin_limit={margin_limit}
+						rfq_state={rfq_state}
 					/>
 				)}
 				{rfq_card_loading && <BreakdownLoading />}

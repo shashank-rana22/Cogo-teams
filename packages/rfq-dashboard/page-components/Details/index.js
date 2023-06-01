@@ -26,6 +26,8 @@ function Details() {
 
 	const { list: list_object = {} } = data;
 
+	const { state = '' } = listData?.list[0] || {};
+
 	return (
 		<div className={styles.container}>
 			<Header loading={details_loading} requestedOn={listData?.list?.[0]} />
@@ -39,10 +41,12 @@ function Details() {
 			</div>
 			<div className={styles.rfq_list}>
 				<Services
-					loading={loading}
+					listRfqData={listData}
+					loading={loading && details_loading}
 					rate_card_list_object={list_object}
 					refetchRateCards={getRfqsRateCards}
 					getRfqsForApproval={getRfqsForApproval}
+					rfq_state={state}
 				/>
 			</div>
 		</div>

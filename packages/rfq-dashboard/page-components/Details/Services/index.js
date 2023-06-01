@@ -13,7 +13,7 @@ const TITLE_MAPPING = {
 	requested_for_approval : 'Request For Approvalss',
 };
 
-function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRfqsForApproval }) {
+function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRfqsForApproval, rfq_state = '' }) {
 	const { query } = useRouter();
 
 	const { rfq_id = '' } = query || {};
@@ -39,21 +39,16 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRf
 	}, [rate_card_list_object]);
 
 	return (
-
 		<div className={styles.main_container}>
-
 			<div className={styles.header}>
-
 				<Button
 					size="md"
 					themeType="primary"
 					onClick={() => setShow(true)}
-					disabled={isEmpty(rate_card_list_object)}
+					disabled={rfq_state === 'approved' || isEmpty(rate_card_list_object)}
 				>
 					Preview and Approve
-
 				</Button>
-
 				{
 					show && (
 
@@ -92,6 +87,7 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRf
 										refetchRateCards={refetchRateCards}
 										getRfqsForApproval={getRfqsForApproval}
 										setCardStateCount={setCardStateCount}
+										rfq_state={rfq_state}
 									/>
 								</div>
 							))}
