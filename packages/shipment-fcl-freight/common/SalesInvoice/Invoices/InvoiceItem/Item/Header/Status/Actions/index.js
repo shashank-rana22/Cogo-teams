@@ -4,8 +4,8 @@ import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import EmailInfo from './EmailInfo';
-import KebabContent from './KebabContent';
+import EmailInfo from './Components/EmailInfo';
+import KebabContent from './Components/KebabContent';
 import styles from './styles.module.css';
 
 const AddRemarks = dynamic(() => import('./AddRemarks'), { ssr: false });

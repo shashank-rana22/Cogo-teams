@@ -3,7 +3,7 @@ import { IcMOverflowDot, IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import styles from '../styles.module.css';
+import styles from '../../styles.module.css';
 
 function KebabContent({
 	invoice = {},
