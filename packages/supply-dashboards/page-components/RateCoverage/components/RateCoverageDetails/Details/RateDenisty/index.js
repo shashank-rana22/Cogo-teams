@@ -78,7 +78,7 @@ function RateDensityDetails({ setIndex, value }) {
 								style={{ backgroundColor: 'inherit' }}
 							/>
 						</div>
-						<div style={{ color: '#7278AD', fontWeight: '700' }}>{value}</div>
+						<div style={{ color: '#7278AD', fontWeight: '700' }}>{!isNaN(value)?value:0}</div>
 						<div>
 							rate density as per today
 						</div>

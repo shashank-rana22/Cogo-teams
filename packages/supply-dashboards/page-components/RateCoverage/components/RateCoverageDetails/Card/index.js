@@ -59,7 +59,7 @@ function Card({ value, type, setIndex }) {
 			</div>
 			<div className={styles.card} style={backgroundImgs[type]}>
 				<div className={styles.title}>{title[type]}</div>
-				<div className={styles.value} style={{ color: colors[type] }}>{value || 0}</div>
+				<div className={styles.value} style={{ color: colors[type] }}>{ !isNaN(value) ? value : 0}</div>
 			</div>
 			<div className={styles.download_link}>
 				Download

@@ -128,7 +128,7 @@ function ExpiringRates({ setIndex, value, filter }) {
 								style={{ backgroundColor: 'inherit' }}
 							/>
 						</div>
-						<div style={{ color: '#F37166', fontWeight: '700' }}>{value}</div>
+						<div style={{ color: '#F37166', fontWeight: '700' }}>{!isNaN(value)?value:0}</div>
 						<div>
 							rates are expiring today
 						</div>

@@ -5,6 +5,8 @@ const apiName = {
 	fcl_freight : 'get_fcl_freight_rate_stats',
 	lcl_freight : 'get_lcl_freight_rate_stats',
 	air_freight : 'get_air_freight_rate_stats',
+	ftl_freight : 'get_ftl_freight_rate_stats',
+	ltl_freight : 'get_ltl_freight_rate_stats',
 };
 
 const keyFormatter = (filter) => Object.fromEntries(
