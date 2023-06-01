@@ -1,9 +1,8 @@
 import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { AsyncSelectController } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useContext } from 'react';
+import React, { useContext } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
 import Footer from '../Footer';
@@ -11,19 +10,14 @@ import Footer from '../Footer';
 import styles from './styles.module.css';
 
 function Form({ upsellableService = {}, closeModal = () => {} }) {
-	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
-
-	const { importer_exporter_id = '' } = shipment_data;
+	const { servicesList } = useContext(ShipmentDetailContext);
 
 	const service = upsellableService.service_type.replace('_service', '');
-
-	const [step, setStep] = useState(1);
 
 	const { controls, formProps } = useServiceUpsellControls({
 		service,
 		services: servicesList,
 		upsellableService,
-		importer_exporter_id,
 	});
 
 	const { errors, control } = formProps;
@@ -46,28 +40,15 @@ function Form({ upsellableService = {}, closeModal = () => {} }) {
 			/>
 
 			<Modal.Body>
-				{step === 1 && controls?.step1 ? (
-					<>
-						<div> Are you sure you want to upsell this service?</div>
+				{!controls.length ? <div> Are you sure you want to upsell this service?</div> : null}
 
-						{controls.step1?.length ? (
-							<Layout
-								fields={controls.step1}
-								errors={errors}
-								control={control}
-							/>
-						) : null}
-					</>
-				) : null }
-
-				{step === 2 && controls?.step2 ? (
-					<>
-						<AsyncSelectController {...controls.step2} />
-
-						{errors?.user_id ? <div className={styles.error}>{errors?.user_id?.message}</div> : null}
-					</>
+				{controls.length ? (
+					<Layout
+						fields={controls}
+						errors={errors}
+						control={control}
+					/>
 				) : null}
-
 			</Modal.Body>
 
 			<Modal.Footer>
@@ -75,8 +56,6 @@ function Form({ upsellableService = {}, closeModal = () => {} }) {
 					onClose={closeModal}
 					formProps={formProps}
 					service={upsellableService}
-					step={step}
-					setStep={setStep}
 				/>
 			</Modal.Footer>
 		</Modal>
