@@ -3,16 +3,13 @@ import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
 const getPayload = ({ state, formValues }) => {
-	if (state === 'rejected') {
-		return {
+	const payloadMap = {
+		rejected: {
 			booking_status     : 'rejected',
 			explanation        : formValues?.rejection_reason,
 			explanation_checks : formValues?.rejection_category,
-		};
-	}
-
-	if (state === 'approved') {
-		return {
+		},
+		approved: {
 			booking_status       : 'approved',
 			explanation_checks   : formValues?.booking_placed_on,
 			advance_payment_info : {
@@ -20,9 +17,10 @@ const getPayload = ({ state, formValues }) => {
 				amount          : formValues?.advance_payment === 'required' ? Number(formValues?.amount) : undefined,
 				amount_currency : formValues?.advance_payment === 'required' ? formValues?.amount_currency : undefined,
 			},
-		};
-	}
-	return null;
+		},
+	};
+
+	return payloadMap[state] || null;
 };
 
 const useStateUpdate = ({ id, refetchBookingList, setShowModal, showModal }) => {
