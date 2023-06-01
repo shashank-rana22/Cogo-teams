@@ -1,6 +1,7 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { Button } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import Loader from '../../common/Loader';
@@ -220,7 +221,7 @@ function PieChart({ activeTab, chartData, loading }) {
 									{item.label}
 								</div>
 								<div className={styles.value}>
-									{ item.value || '-'}
+									{ isEmpty(item.value) ? '-' : item.value}
 								</div>
 							</div>
 						))}

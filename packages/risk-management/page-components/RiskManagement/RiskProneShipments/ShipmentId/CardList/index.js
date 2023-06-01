@@ -1,6 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMPortArrow } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import BlDoTimeline from './BlDoTimeline';
@@ -12,7 +13,7 @@ const MAX_LENGTH = 16;
 function CardList({ itemData }) {
 	const {
 		serial_id = '', origin_port = {}, destination_port = {},
-		commodity = '', cargo_value_currency, cargo_value,
+		commodity = '', cargo_value_currency, cargo_value, trade_type,
 	} = itemData || {};
 	const { display_name = '', port_code = '' } = origin_port || {};
 	const {
@@ -36,10 +37,11 @@ function CardList({ itemData }) {
 	return (
 		<div style={{ marginTop: '16px' }}>
 			<div className={styles.div_container}>
-				<div
-					className={styles.container}
+				<div className={styles.trade}>
+					{startCase(trade_type)}
+				</div>
+				<div className={styles.container}>
 
-				>
 					<div className={styles.column1}>
 						<div className={styles.shipment_id_text}>
 							#
@@ -116,7 +118,7 @@ function CardList({ itemData }) {
 				<div>
 					<div style={{
 						transition : 'max-height 0.3s ease-in-out',
-						maxHeight  : isAccordionActive ? '430px' : '0px',
+						maxHeight  : isAccordionActive ? '930px' : '0px',
 						overflow   : 'hidden',
 					}}
 					>
@@ -133,7 +135,7 @@ function CardList({ itemData }) {
 								BL/DO Timeline
 							</div>
 							<div>
-								<BlDoTimeline />
+								<BlDoTimeline itemData={itemData} isAccordionActive={isAccordionActive} />
 							</div>
 						</div>
 					</div>
