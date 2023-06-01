@@ -38,12 +38,12 @@
 }
 
 .arrow_wrapper {
+	bottom: "0%";
 	display: flex;
 	flex-direction: row;
-	justify-content: flex-end;
 	align-items: flex-end;
+	justify-content: flex-end;
 	padding-top: 30px;
-	bottom: '0%';
 }
 
 .icon_container {

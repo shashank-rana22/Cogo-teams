@@ -9,7 +9,6 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails }) {
 	const data = [
 		{ title: 'PERSONAL INFORMATION', content: PersonalInformation },
 		{ title: 'IDENTIFICATION DOCUMENTS', content: IdentificationDocuments },
-
 	];
 
 	return (
