@@ -207,6 +207,9 @@ importers:
       '@cogoport/supply-dashboards':
         specifier: workspace:0.1.0
         version: link:../packages/supply-dashboards
+      '@cogoport/ticket-management':
+        specifier: workspace:0.1.1
+        version: link:../packages/ticket-management
       '@cogoport/translate':
         specifier: workspace:0.1.0
         version: link:../packages/Translation
@@ -1994,6 +1997,45 @@ importers:
       react-hook-form:
         specifier: ^7.43.3
         version: 7.43.3(react@18.2.0)
+
+  packages/ticket-management:
+    dependencies:
+      '@cogoport/charts':
+        specifier: ^1.0.1
+        version: 1.0.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/components':
+        specifier: ^1.0.359
+        version: 1.0.422(@babel/core@7.22.1)(@cogoport/icons-react@1.0.75)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/constants':
+        specifier: workspace:^0.1.0
+        version: link:../../common/constants
+      '@cogoport/forms':
+        specifier: workspace:0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: workspace:^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.68
+        version: 1.0.75(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../../common/next
+      '@cogoport/request':
+        specifier: workspace:0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.6
+        version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      stylelint:
+        specifier: ^14.16.1
+        version: 14.16.1
 
   packages/unified-dashboard:
     dependencies:
@@ -6963,7 +7005,7 @@ packages:
   /d3-time-format@3.0.0:
     resolution: {integrity: sha512-UXJh6EKsHBTjopVqZBhFysQcoXSv/5yLONZvkQ5Kk3qbwiUYkdX17Xa1PT6U1ZWXGGfB1ey5L8dKMlFq2DO0Ag==}
     dependencies:
-      d3-time: 1.1.0
+      d3-time: 2.1.1
     dev: false
 
   /d3-time-format@4.1.0:
