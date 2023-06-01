@@ -1,7 +1,6 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Placeholder } from '@cogoport/components';
 import { useState } from 'react';
 
-import Spinner from '../../../../commons/Spinner';
 import useAllowReTest from '../../hooks/useAllowReTest';
 import PublishNow from '../PublishNow';
 
@@ -39,11 +38,17 @@ function InfoBanner({
 
 	const { key, backgroundColor, text, subText, iconColor, Icon, borderColor } = content || {};
 
-	if (!['published', 'active'].includes(test_status) && loading) {
-		return null;
+	if (retestLoading || loading) {
+		return (
+			<div className={styles.loading_container}>
+				<Placeholder height="48px" />
+			</div>
+		);
 	}
 
-	if (retestLoading) return <Spinner />;
+	if (!['published', 'active'].includes(test_status)) {
+		return null;
+	}
 
 	return (
 		<div className={styles.container} style={{ border: `1px solid ${borderColor}`, background: backgroundColor }}>

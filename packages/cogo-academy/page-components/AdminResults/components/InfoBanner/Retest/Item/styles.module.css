@@ -3,11 +3,7 @@
 		.ui_checkbox_group_container {
 			display: flex;
 			flex-direction: column;
-			padding: 0 !important;
-		}
-
-		.ui_checkbox_style {
-			width: 28px;
+			padding: 0;
 		}
 
 		.ui_checkbox_container {
@@ -19,7 +15,7 @@
 		}
 
 		.ui_radiogroup_container {
-			padding: 2px !important;
+			padding: 2px;
 			margin-bottom: 4px;
 		}
 
@@ -32,6 +28,8 @@
 		}
 
 		.ui_checkbox_normal {
+			display: flex;
+			flex-shrink: 0;
 			margin-left: 0;
 		}
 	}

@@ -29,7 +29,7 @@ function Retest({ watch, control, setValue, errors }) {
 	return (
 		<div>
 			{(controls || []).map((controlItem) => {
-				const { show = true } = controlItem;
+				const { show = true, name } = controlItem;
 
 				if (!isEmpty(show) && !show) {
 					return null;
@@ -38,6 +38,7 @@ function Retest({ watch, control, setValue, errors }) {
 				return (
 					<Item
 						{...controlItem}
+						key={name}
 						control={control}
 						error={errors[controlItem?.name]}
 					/>

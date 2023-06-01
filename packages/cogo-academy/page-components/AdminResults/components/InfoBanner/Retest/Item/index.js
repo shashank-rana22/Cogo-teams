@@ -1,4 +1,9 @@
-import { SelectController, CheckboxGroupController, RadioGroupController, DateRangePickerController } from '@cogoport/forms';
+import {
+	SelectController,
+	CheckboxGroupController,
+	RadioGroupController,
+	DateRangePickerController,
+} from '@cogoport/forms';
 import React from 'react';
 
 import styles from './styles.module.css';
