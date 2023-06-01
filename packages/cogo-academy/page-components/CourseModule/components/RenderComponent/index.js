@@ -33,6 +33,7 @@ function RenderComponent({
 		<HomePage
 			user_id={user_id}
 			courseCategoryData={courseCategoryData}
+			setCurrentCategory={setCurrentCategory}
 			categoryLoading={categoryLoading}
 		/>
 	);

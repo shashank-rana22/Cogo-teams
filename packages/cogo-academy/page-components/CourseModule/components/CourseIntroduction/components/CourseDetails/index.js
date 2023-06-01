@@ -52,7 +52,7 @@ function CourseDetails({ data, instructorData, module }) {
 			</div>
 
 			<div className={styles.description}>
-				<b>About the course:</b>
+				<b>About the course &nbsp;:&nbsp;</b>
 				{data?.description}
 			</div>
 

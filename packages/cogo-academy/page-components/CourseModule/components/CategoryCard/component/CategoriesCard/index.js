@@ -1,9 +1,12 @@
 import { Pill, Tooltip } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function CategoriesCard({ data }) {
+function CategoriesCard({ data, setCurrentCategory }) {
+	const router = useRouter();
+
 	const allpills = (item) => (
 		<div key={item?.topic_id}>
 			{item?.map((tag, i) => (i >= 1 ? (
@@ -13,7 +16,16 @@ function CategoriesCard({ data }) {
 	);
 
 	return (
-		<div className={styles.container}>
+		<div
+			className={styles.container}
+			role="button"
+			tabIndex="0"
+			onClick={() => {
+				setCurrentCategory(data?.id);
+				router.push('/learning/course?viewType=all_courses');
+			}}
+
+		>
 			<div className={styles.title}>{data?.display_name}</div>
 
 			<div className={styles.details}>
