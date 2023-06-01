@@ -1,8 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-// import { data } from '../../../../configurations/list-dummy-data';
-
 import EmptyState from '../../../../common/EmptyState/EmptyState';
 
 import Filter from './Filter';

@@ -4,16 +4,11 @@
 	margin-top: 30px;
 
 	:global {
-		/* stylelint-disable-next-line selector-class-pattern */
 		.ui_checkbox_container {
 			padding: 0 10px 0 0;
 			margin-top: 20px;
 		}
 	}
-}
-
-.empty_space {
-	/* margin-left: 10px; */
 }
 
 .port_container {
@@ -64,8 +59,6 @@
 .location_box {
 	display: flex;
 	align-items: center;
-
-	/* background-color: azure; */
 }
 
 .icmportarrow_icon {

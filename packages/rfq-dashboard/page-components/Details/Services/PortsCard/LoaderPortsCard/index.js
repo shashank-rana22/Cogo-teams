@@ -9,7 +9,6 @@ function LoaderPortsCard() {
 				<Placeholder
 					width="30px"
 					height="20px"
-					// margin="8px 5px"
 					className={styles.placeholder}
 				/>
 				<Placeholder
@@ -23,7 +22,6 @@ function LoaderPortsCard() {
 				<Placeholder
 					width="520px"
 					height="20px"
-					// margin="8px 5px"
 					className={styles.placeholder}
 				/>
 				<Placeholder
@@ -49,7 +47,6 @@ function LoaderPortsCard() {
 				<Placeholder
 					width="150px"
 					height="48px"
-					// margin="8px 5px"
 					className={styles.placeholder}
 				/>
 			</div>
@@ -57,7 +54,6 @@ function LoaderPortsCard() {
 				<Placeholder
 					width="100px"
 					height="20px"
-					// margin="8px 5px"
 					className={styles.placeholder}
 				/>
 				<Placeholder

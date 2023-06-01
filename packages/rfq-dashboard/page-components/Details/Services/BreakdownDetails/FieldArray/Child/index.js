@@ -25,7 +25,7 @@ function Child(props) {
 				if (!Element) return null;
 
 				return (
-					<div className={styles.list}>
+					<div className={styles.list} key={controlItem.label}>
 						<div className={styles.label}>{controlItem.label}</div>
 
 						<Element

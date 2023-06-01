@@ -10,7 +10,6 @@ function Form({
 	serviceKey,
 	lineItem = {},
 	onChange = () => { },
-	// marginType = 'demand',
 	id_prefix,
 }) {
 	const nameKey = id_prefix ? `${id_prefix}_edit_margin` : 'edit_margin';
@@ -57,35 +56,13 @@ function Form({
 		});
 	}, [lineItem?.code, nameKey, onChange, serviceKey, watch]);
 
-	// useEffect(() => {
-	// 	const filteredMargins = (lineItem?.margins || []).filter(
-	// 		(m) => m.margin_type === marginType,
-	// 	);
-	// 	if (filteredMargins?.length > 0) {
-	// 		const [margin] = filteredMargins;
-	// 		let type = margin?.type;
-	// 		let value = margin?.value;
-
-	// 		if (type === 'percentage') {
-	// 			type = 'absolute_total';
-	// 			value = margin?.total_margin_value;
-	// 		}
-	// 		const prefillValues = { type, value, currency: margin?.currency };
-	// 		onChange({ serviceKey, code: lineItem?.code, ...prefillValues });
-	// 	}
-	// }, [lineItem, marginType, onChange, serviceKey]);
-
 	return (
 		<>
 			{marginControls.map((controItem) => {
 				const { type: form_type, label } = controItem;
 
-				// if (!show) {
-				// 	return null;
-				// }
-
 				if (form_type === 'fieldArray') {
-					return <FieldArray control={control} {...controItem} />;
+					return <FieldArray control={control} {...controItem} key={label} />;
 				}
 
 				const Element = getController(type);

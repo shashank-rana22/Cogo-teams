@@ -1,7 +1,5 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import { getFormattedAmount } from '../../../../../common/helpers/getFormattedSum';
-
 import styles from './styles.module.css';
 
 function PriceFreightCtr({
@@ -42,7 +40,7 @@ function PriceFreightCtr({
 		<div className={styles.container}>
 			{
 				data.map((Item) => (
-					<div className={styles.get_amount_section}>
+					<div className={styles.get_amount_section} key={Item.label}>
 						<div className={styles.get_amount_type}>{Item.label}</div>
 						<div className={styles.get_amount_value}>{Item.amount}</div>
 					</div>

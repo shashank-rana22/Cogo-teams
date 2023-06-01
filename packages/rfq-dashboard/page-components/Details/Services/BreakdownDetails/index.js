@@ -120,16 +120,12 @@ function BreakdownDetails({
 						<div className={styles.service_title}>Convenience Fee</div>
 						<div className={styles.service_total_amount}>
 							{formatAmount({
-								amount: convenience_fee,
-
-								currency: rate?.total_price_currency,
-
-								options: {
-									style: 'currency',
-
-									currencyDisplay: 'code',
-
-									maximumFractionDigits: 0,
+								amount   : convenience_fee,
+								currency : rate?.total_price_currency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 0,
 								},
 							})}
 						</div>
@@ -206,7 +202,7 @@ function BreakdownDetails({
 						className={cl`${styles.title_value} ${profitability > 0 ? styles.green : styles.red}
 					${profitability === 0 ? styles.black : ''}`}
 					>
-						{Math.round(profitability).toFixed(2)}
+						{(profitability || 0).toFixed(2)}
 						{' '}
 						%
 					</div>

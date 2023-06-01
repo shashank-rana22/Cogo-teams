@@ -72,5 +72,3 @@ export const PortsOriginDestinationDetailsData = [
 		],
 	},
 ];
-
-// export const PortsOriginDestinationDetailsData = [];

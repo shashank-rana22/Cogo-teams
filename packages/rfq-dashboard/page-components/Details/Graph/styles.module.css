@@ -17,8 +17,6 @@
 .graph_container {
 	display: flex;
 	min-height: 120px;
-
-	/* background-color: aqua; */
 }
 
 .legend_sections {
@@ -37,9 +35,5 @@
 	font-size: 10px;
 	font-weight: 500;
 	color: #4f4f4f;
-
-	/* width: calc(100% - 20px); */
 	white-space: no-wrap;
-
-	/* background-color: yellow; */
 }

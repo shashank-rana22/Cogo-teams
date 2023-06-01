@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
+import { useCallback } from 'react';
 
 const useUpdateRfqState = () => {
 	const [{ loading }, trigger] = useRequest({
@@ -8,7 +9,7 @@ const useUpdateRfqState = () => {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateRfqState = async ({ rfq_id = '', setShow }) => {
+	const updateRfqState = useCallback(async ({ rfq_id = '', setShow }) => {
 		try {
 			const response = await trigger({
 				data: {
@@ -26,7 +27,7 @@ const useUpdateRfqState = () => {
 				Toast.error(getApiErrorString(error?.response?.data));
 			}
 		}
-	};
+	}, [trigger]);
 
 	return {
 		updateRfqState,
