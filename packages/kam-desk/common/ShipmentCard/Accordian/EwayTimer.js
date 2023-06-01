@@ -9,8 +9,8 @@ const MILI_SECONDS_IN_A_SECONDS = 1000;
 
 function EwayTimer({ data = '' }) {
 	const handleTimer = (end_date) => {
-        if(!end_date) return '-';
-        
+		if (!end_date) return '-';
+
 		const timeNow = new Date().getTime();
 		const countDownDate = new Date(end_date).getTime();
 
@@ -33,17 +33,17 @@ function EwayTimer({ data = '' }) {
 	const timerRef = useRef(null);
 
 	useEffect(() => {
-        let time = null;
-            const interval = setInterval(() => {
-                time = handleTimer(data);
-    
-                if (time) {
-                    timerRef.current.innerText = time;
-                }
-            }, 1000);
-    
-            return () => clearInterval(interval);
-	},[data]);
+		let time = null;
+		const interval = setInterval(() => {
+			time = handleTimer(data);
+
+			if (time) {
+				timerRef.current.innerText = time;
+			}
+		}, 1000);
+
+		return () => clearInterval(interval);
+	}, [data]);
 
 	if (!data) {
 		return <>-</>;
