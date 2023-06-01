@@ -12,6 +12,7 @@ function Header({ loading, requestedOn }) {
 	const { profile } = useSelector((state) => state);
 	const { partner } = profile;
 	const { id } = partner;
+
 	return (
 		<div className={styles.header_container}>
 			<div
