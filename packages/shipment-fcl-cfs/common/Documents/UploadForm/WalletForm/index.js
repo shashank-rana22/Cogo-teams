@@ -1,6 +1,6 @@
 import { Input, Tabs, TabPanel, Modal } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Wallet from '../../Wallet';
 

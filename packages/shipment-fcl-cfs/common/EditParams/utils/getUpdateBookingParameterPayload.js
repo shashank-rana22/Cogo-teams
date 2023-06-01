@@ -1,4 +1,4 @@
-const dependentServicesArray = [
+const DEPENDENT_SERVICES_ARRAY = [
 	'fcl_freight_local_service',
 	'haulage_freight_service',
 	'trailer_freight_service',
@@ -23,7 +23,7 @@ export default function getUpdateBookingParameterPaylaod({ formValues, shipment_
 		payload.services.push({ service_id, service_type, booking_params: newBookingParams });
 
 		const dependentServices = servicesList.filter(
-			(service) => dependentServicesArray.includes(service?.service_type),
+			(service) => DEPENDENT_SERVICES_ARRAY.includes(service?.service_type),
 		);
 
 		dependentServices.filter(

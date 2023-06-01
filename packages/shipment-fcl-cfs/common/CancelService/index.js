@@ -4,14 +4,14 @@ import { ChipsController, InputController, RadioGroupController } from '@cogopor
 import useGetServiceCancelControls from './hooks/useGetServiceCancelControls';
 import styles from './styles.module.css';
 
-const controlTypeMapping = {
+const CONTROL_TYPE_MAPPING = {
 	radio : RadioGroupController,
 	text  : InputController,
 	chips : ChipsController,
 };
 
 function FormElement({ name, label, errors, type, ...rest }) {
-	const Element = controlTypeMapping[type];
+	const Element = CONTROL_TYPE_MAPPING[type];
 
 	return Element ? (
 		<div className={styles.form_element}>

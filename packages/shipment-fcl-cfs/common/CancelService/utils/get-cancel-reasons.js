@@ -9,7 +9,7 @@ const checkCondition = (reason, service) => {
 	return true;
 };
 
-const getCancelReasons = (type, service = 'fcl_freight_service') => {
+const getCancelReasons = (type, service = 'fcl_cfs_service') => {
 	const allReasons = cancelReasons[type] || {};
 	const finalReasons = [];
 

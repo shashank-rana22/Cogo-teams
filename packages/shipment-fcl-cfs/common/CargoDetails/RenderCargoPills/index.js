@@ -3,7 +3,7 @@ import { cl } from '@cogoport/components';
 import { renderValue } from './renderValue';
 import styles from './styles.module.css';
 
-const labels = [
+const LABELS = [
 	'container_size',
 	'containers_count',
 	'container_type',
@@ -21,7 +21,7 @@ const labels = [
 function RenderCargoPills({ detail }) {
 	return (
 		<>
-			{labels.map((label) => {
+			{LABELS.map((label) => {
 				const value = renderValue(label, detail);
 				if (detail?.[label] && value) {
 					return (

@@ -1,10 +1,10 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo, IcMArrowRotateDown } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-const stylesCol = {
+const STYLES_COL = {
 	display    : 'flex',
 	flex       : 1,
 	alignItems : 'center',
@@ -43,7 +43,7 @@ function Field({
 
 	return (
 		<div
-			style={field.hasStyle ? field.styles : stylesCol}
+			style={field.hasStyle ? field.styles : STYLES_COL}
 			key={field?.key || field?.label}
 		>
 			<div className={styles.card_title}>

@@ -1,5 +1,5 @@
 import { Loader } from '@cogoport/components';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import useListShipmentBookingConfirmationPreferences
 	from '../../../../../../hooks/useListShipmentBookingConfirmationPreferences';

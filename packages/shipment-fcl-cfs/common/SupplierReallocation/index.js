@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { InputController, SelectController, AsyncSelectController, useForm } from '@cogoport/forms';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import useUpdateShipmentService from '../../hooks/useUpdateShipmentService';
 

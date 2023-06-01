@@ -1,4 +1,4 @@
-const booking_list_priority_array = [
+const BOOKING_LIST_PRIORITY_ARRAY = [
 	{ name: 'coe-shipments', version: 'v1' },
 	{ name: 'coe-booking_desk', version: 'v2' },
 	{ name: 'coe-bl_do_collection_release', version: 'v1' },
@@ -30,7 +30,7 @@ export const getRedirectNavMapping = (allNavs) => {
 	let navToRedirect = false;
 	let version = 'v1';
 
-	booking_list_priority_array.some((prNav) => {
+	BOOKING_LIST_PRIORITY_ARRAY.some((prNav) => {
 		navToRedirect = coe_navs.find((nav) => nav.key === prNav.name) ?? false;
 		version = prNav.version;
 

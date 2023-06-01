@@ -1,6 +1,4 @@
 import { dynamic } from '@cogoport/next';
-import React from 'react';
-
 import useGetShipment from '../../hooks/useGetShipment';
 import { useStakeholderCheck } from '../../hooks/useStakeholderCheck';
 

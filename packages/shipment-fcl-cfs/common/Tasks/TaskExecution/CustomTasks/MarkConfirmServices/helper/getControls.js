@@ -1,4 +1,4 @@
-const shipping_line = {
+const SHIPPING_LINE = {
 	name           : 'shipping_line_id',
 	label          : 'Shipping Line',
 	type           : 'select',
@@ -8,7 +8,7 @@ const shipping_line = {
 	rules          : { required: 'Shipping Line is Required' },
 };
 
-const service_provider = {
+const SERVICE_PROVIDER = {
 	name           : 'service_provider_id',
 	type           : 'select',
 	label          : 'Service Provider',
@@ -65,7 +65,7 @@ const getControls = ({
 		);
 	}
 
-	service_provider.value =		subsidiary_service_rendered?.service_provider?.id
+	SERVICE_PROVIDER.value =		subsidiary_service_rendered?.service_provider?.id
 		|| service_rendered?.[0]?.service_provider_id
 		|| '';
 
@@ -73,11 +73,11 @@ const getControls = ({
 	const data = getIds();
 
 	if (iscarrierHaulage() && service_type === 'haulage_freight_service') {
-		shipping_line.value = data.haulage_shipping_line_id;
-		controls.push(shipping_line);
+		SHIPPING_LINE.value = data.haulage_shipping_line_id;
+		controls.push(SHIPPING_LINE);
 	}
 
-	controls.push(service_provider);
+	controls.push(SERVICE_PROVIDER);
 
 	return controls;
 };

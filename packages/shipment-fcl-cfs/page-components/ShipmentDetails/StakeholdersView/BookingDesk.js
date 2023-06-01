@@ -4,7 +4,7 @@ import { IcMRefresh } from '@cogoport/icons-react';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect } from 'react';
+import { useMemo, useState, useEffect } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
@@ -20,7 +20,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
+const SERVICES_ADDTIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 
 function BookingDesk({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -31,7 +31,7 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
-		additional_methods: services_additional_methods,
+		additional_methods: SERVICES_ADDTIONAL_METHODS,
 		activeStakeholder,
 	});
 

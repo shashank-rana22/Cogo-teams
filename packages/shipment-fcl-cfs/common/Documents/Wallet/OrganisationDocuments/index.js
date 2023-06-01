@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { format, startCase } from '@cogoport/utils';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import useListOrganizationDocuments from '../../../../hooks/useListOrganizationDocuments';
 import useUpdateOrganizationDocument from '../../../../hooks/useUpdateOrganizationDocument';

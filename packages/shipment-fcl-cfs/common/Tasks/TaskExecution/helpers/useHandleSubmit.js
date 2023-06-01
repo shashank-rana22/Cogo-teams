@@ -12,7 +12,7 @@ import getRpaMappings from '../utils/get-rpa-mappings';
 
 import useCreateShipmentMapping from './useCreateShipmentMapping';
 
-const shipmentRefetchTasks = [
+const SHIPMENT_REFETCH_TASKS = [
 	'confirm_booking',
 	'mark_confirmed',
 	'upload_draft_bill_of_lading',
@@ -138,7 +138,7 @@ function useHandleSubmit({
 
 				getShipmentTimeline();
 
-				if (shipmentRefetchTasks.includes(task?.task)) {
+				if (SHIPMENT_REFETCH_TASKS.includes(task?.task)) {
 					getShipment();
 				}
 			} else {

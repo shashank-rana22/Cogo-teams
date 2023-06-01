@@ -1,6 +1,4 @@
 import { Placeholder } from '@cogoport/components';
-import React from 'react';
-
 import VerticleLine from '../CheckList/VerticleLine';
 
 import styles from './styles.module.css';

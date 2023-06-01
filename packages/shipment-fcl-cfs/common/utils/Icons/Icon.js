@@ -1,6 +1,4 @@
 import { string } from 'prop-types';
-import React from 'react';
-
 function Icon(props, ref) {
 	const { type, ...rest } = props;
 

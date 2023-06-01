@@ -1,6 +1,4 @@
 import { Loader } from '@cogoport/components';
-import React from 'react';
-
 import useGetTask from '../../../../../hooks/useGetTaskConfig';
 
 import TaskForm from './TaskForm';

@@ -1,5 +1,4 @@
 import { Placeholder } from '@cogoport/components';
-import React from 'react';
 
 function LoadingState({ fields = [], isLast = false }) {
 	const stylesCol = { padding: '0px 4px' };

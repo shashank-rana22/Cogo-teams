@@ -6,7 +6,7 @@ import getControls from '../utils/getControls';
 
 import styles from './styles.module.css';
 
-const keysToShow = [
+const KEYS_TO_SHOW = [
 	'container_size',
 	'containers_count',
 	'container_type',
@@ -38,7 +38,7 @@ export default forwardRef(({ service }, ref) => {
 
 	return (
 		<div>
-			{keysToShow.map((key) => {
+			{KEYS_TO_SHOW.map((key) => {
 				const { name, label, ...rest } = controls.find((item) => item.name === key) || {};
 				return (
 					<div className={styles.form_element} key={name}>

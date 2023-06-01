@@ -1,6 +1,4 @@
 import { startCase } from '@cogoport/utils';
-import React from 'react';
-
 import taskDisplayNames from '../../../../../../configurations/display-name-mappings';
 import incoTermMapping from '../../../../../../configurations/inco-term-mapping.json';
 

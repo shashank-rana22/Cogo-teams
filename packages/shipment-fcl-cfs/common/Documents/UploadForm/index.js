@@ -1,7 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
 import { IcMPdf } from '@cogoport/icons-react';
-import React from 'react';
-
 import styles from './styles.module.css';
 import Task from './Task';
 import WalletForm from './WalletForm';

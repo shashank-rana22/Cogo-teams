@@ -2,7 +2,7 @@ import { Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import CancelService from '../CancelService';
 import EditParams from '../EditParams';
@@ -13,7 +13,7 @@ import getCanCancelService from './utils/getCanCancelService';
 import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
-const actionButtons = [
+const ACTION_BUTTONS = [
 	{ label: 'Edit', value: 'supplier_reallocation' },
 	{ label: 'Edit Params', value: 'edit_params' },
 	{ label: 'Cancel', value: 'cancel' },
@@ -35,15 +35,15 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
-	actionButtons[2].show = getCanCancelService({ shipment_data, user_data, state, activeStakeholder });
+	ACTION_BUTTONS[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
+	ACTION_BUTTONS[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
+	ACTION_BUTTONS[2].show = getCanCancelService({ shipment_data, user_data, state, activeStakeholder });
 
-	if (!actionButtons.some((actionButton) => actionButton.show)) {
+	if (!ACTION_BUTTONS.some((actionButton) => actionButton.show)) {
 		return null;
 	}
 
-	const content = actionButtons.map(({ label, value, show }) => (show ? (
+	const content = ACTION_BUTTONS.map(({ label, value, show }) => (show ? (
 		<div
 			key={value}
 			role="button"

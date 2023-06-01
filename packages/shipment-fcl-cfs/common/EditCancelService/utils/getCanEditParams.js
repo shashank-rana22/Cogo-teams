@@ -1,6 +1,6 @@
-const editParamsStakeholders = ['booking_agent', 'superadmin'];
+const EDIT_PARAMS_STAKEHOLDERS = ['booking_agent', 'superadmin'];
 
-const controlsEditableConditions = [
+const CONTROLS_EDITABLE_CONDITIONS = [
 	{
 		state      : ['confirmed_by_service_provider'],
 		trade_type : ['export'],
@@ -24,11 +24,11 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return true;
 	}
 
-	const userCanCancel = editParamsStakeholders.includes(activeStakeholder);
+	const userCanCancel = EDIT_PARAMS_STAKEHOLDERS.includes(activeStakeholder);
 
 	const showEditParamsKey = serviceData?.show_edit_params;
 
-	const isControlsEditable = controlsEditableConditions.some(
+	const isControlsEditable = CONTROLS_EDITABLE_CONDITIONS.some(
 		(conditions) => getShowCondition(shipment_data, conditions),
 	);
 

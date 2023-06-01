@@ -1,6 +1,4 @@
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-import React from 'react';
-
 import Header from './CardHeader';
 import CardItem from './Carditem';
 import LoadingState from './LoadingState';
