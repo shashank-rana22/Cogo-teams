@@ -16,7 +16,7 @@ import { addTruckConfigs } from './configs/addTruckConfigs';
 // import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
 import styles from './styles.module.css';
 
-function FTLApproveTruck({
+function ApproveTruck({
 	onCancel = () => {},
 	task = {},
 	taskListRefetch = () => {},
@@ -151,4 +151,4 @@ function FTLApproveTruck({
 	);
 }
 
-export default FTLApproveTruck;
+export default ApproveTruck;

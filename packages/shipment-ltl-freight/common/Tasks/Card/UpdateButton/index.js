@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { RPASearch } from '@cogoport/ocean-modules';
+import { RPASearch } from '@cogoport/surface-modules';
 
 import styles from './styles.module.css';
 

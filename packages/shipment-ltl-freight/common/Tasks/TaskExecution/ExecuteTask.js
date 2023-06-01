@@ -7,10 +7,10 @@ import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import {
 	// UploadBookingNote,
 	// UploadCargoArrival,
+	AddPaymentInfo,
+	ConfirmationOnServicesTaken,
 	UploadContainerDetails,
 	MarkConfirmServices,
-	CustomerInvoiceDetails,
-	FTLApproveTruck,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -41,23 +41,8 @@ function ExecuteTask({
 	if (loading) {
 		return <div>Loading...</div>;
 	}
-	if (task.task === 'update_customer_invoice_details') {
-		return (
-			<CustomerInvoiceDetails
-				onCancel={onCancel}
-				servicesList={servicesList}
-				shipment_data={shipment_data}
-				task={task}
-				refetch={taskListRefetch}
-				getShipmentTimeline={getShipmentTimeline}
-			/>
-		);
-	}
 
-	if (
-		task.service_type
-		&& task.task === 'mark_confirmed'
-	) {
+	if (task.service_type && task.task === 'mark_confirmed') {
 		return (
 			<MarkConfirmServices
 				task={task}
@@ -70,19 +55,27 @@ function ExecuteTask({
 		);
 	}
 
-	// if (task.task === 'upload_booking_note') {
-	// 	if (mailLoading) {
-	// 		return <div>Loading...</div>;
-	// 	}
+	if (task.task === 'confirmation_on_services_taken') {
+		return (
+			<ConfirmationOnServicesTaken
+				onCancel={onCancel}
+				shipment_data={shipment_data}
+				task={task}
+				taskListRefetch={taskListRefetch}
+			/>
+		);
+	}
 
-	// 	return (
-	// 		<UploadBookingNote
-	// 			task={task}
-	// 			onCancel={onCancel}
-	// 			taskListRefetch={taskListRefetch}
-	// 		/>
-	// 	);
-	// }
+	if (task.task === 'add_payment_info') {
+		return (
+			<AddPaymentInfo
+				onCancel={onCancel}
+				shipment_data={shipment_data}
+				task={task}
+				taskListRefetch={taskListRefetch}
+			/>
+		);
+	}
 
 	if (
 		task.task === 'update_container_details') {
@@ -91,19 +84,6 @@ function ExecuteTask({
 				pendingTask={task}
 				onCancel={onCancel}
 				services={servicesList}
-				taskListRefetch={taskListRefetch}
-			/>
-		);
-	}
-
-	if (['approve_additional_truck', 'approve_updated_truck'].includes(task?.task)) {
-		return (
-			<FTLApproveTruck
-				onCancel={onCancel}
-				services={servicesList}
-				shipment_data={shipment_data}
-				task={task}
-				timeLineRefetch={getShipmentTimeline}
 				taskListRefetch={taskListRefetch}
 			/>
 		);

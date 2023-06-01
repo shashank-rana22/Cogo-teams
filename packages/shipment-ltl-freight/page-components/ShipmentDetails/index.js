@@ -12,6 +12,7 @@ import Overview from '../../common/Overview';
 import PocSop from '../../common/PocSop';
 import ShipmentHeader from '../../common/ShipmentHeader';
 import ShipmentInfo from '../../common/ShipmentInfo';
+import Tasks from '../../common/Tasks';
 import Timeline from '../../common/TimeLine';
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
@@ -125,8 +126,8 @@ function ShipmentDetails() {
 							<Overview shipmentData={shipment_data} />
 						</TabPanel>
 
-						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-							{/* <Tasks /> */}
+						<TabPanel name="tasks" title="Tasks">
+							<Tasks />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">

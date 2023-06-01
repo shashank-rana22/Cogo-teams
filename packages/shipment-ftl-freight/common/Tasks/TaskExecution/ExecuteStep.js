@@ -40,6 +40,7 @@ function ExecuteStep({
 		showElements,
 	});
 
+	console.log('controls', fields);
 	return (
 		<div>
 			<div className={styles.form}>

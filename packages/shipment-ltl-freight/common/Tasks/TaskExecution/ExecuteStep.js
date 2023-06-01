@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
-
 import { Layout } from '@cogoport/surface-modules';
+
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';
 import styles from './styles.module.css';
@@ -39,6 +39,7 @@ function ExecuteStep({
 		getApisData,
 		showElements,
 	});
+	console.log('controls', fields);
 
 	return (
 		<div className={styles.container}>
