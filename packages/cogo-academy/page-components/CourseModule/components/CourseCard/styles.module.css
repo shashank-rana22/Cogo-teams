@@ -1,6 +1,6 @@
 .container {
 	width: 300px;
-	height: 400px;
+	height: 350px;
 	margin: 6px;
 	border-radius: 12px;
 	box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
@@ -9,12 +9,16 @@
 .topics_rating_container {
 	display: flex;
 	justify-content: space-between;
-	margin-bottom: 50px;
+	align-items: self-start;
+	margin: 3px;
 }
 
 .header {
 	height: 150px;
 	background-color: #fffce6;
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
 }
 
 .topics,
@@ -40,7 +44,7 @@
 .details {
 	display: flex;
 	flex-direction: column;
-	height: 250px;
+	height: 200px;
 }
 
 .details,
@@ -49,9 +53,13 @@
 }
 
 .description {
-	font-size: 12px;
-	line-height: 18px;
+	height: 40px;
+	font-size: 14px;
+	line-height: 30px;
 	color: #828282;
+	white-space: nowrap; 
+  	overflow-y: hidden;
+  	text-overflow: ellipsis;
 }
 
 .btn_container {

@@ -1,5 +1,5 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import { IcMSort, IcMTick } from '@cogoport/icons-react';
+import { IcMTick } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 
 import LoadingState from '../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../configs/BUTTON_CONTENT_MAPPING';
-import HANDLE_CLICK_MAPPING from '../../configs/HANDLE_CLICK_MAPPING.js';
+import HANDLE_CLICK_MAPPING from '../../configs/HANDLE_CLICK_MAPPING';
 // import useListCourseCategory from '../../hooks/useListCourseCategory';
 import useListCourseUserMappings from '../../hooks/useListCourseUserMappings';
 import CourseCard from '../CourseCard';
@@ -50,10 +50,10 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 
 	// console.log('data1', activeTab);
 	// console.log('data2', currentCategory);
-	// console.log('data3', courseCategories);
+	console.log('data3', courseCategories);
 	// console.log('params', params);
 	// console.log('selected', selected);
-	console.log('parafiltersms', filters);
+	// console.log('parafiltersms', filters);
 
 	return (
 		<div className={styles.container}>
@@ -104,11 +104,15 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 						onClick={() => { ClickOptions('', category.id, ''); }}
 					>
 						<h4><div className={styles.overflow}>{startCase(category.name)}</div></h4>
-						<p className={styles.total_courses}>
-							{category.course_count}
-							{' '}
-							courses
-						</p>
+						{ category.name === 'all_courses'
+							? null
+							: (
+								<p className={styles.total_courses}>
+									{category.course_count}
+									{' '}
+									courses
+								</p>
+							)}
 					</div>
 
 				))}

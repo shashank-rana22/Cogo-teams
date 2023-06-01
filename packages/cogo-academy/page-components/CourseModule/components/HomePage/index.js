@@ -1,6 +1,7 @@
 import { Carousel, Tabs, TabPanel, Button } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowRight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import CategoryCard from '../CategoryCard';
 
@@ -9,6 +10,7 @@ import RecommemndedCourses from './components/RecommemndedCourses';
 import styles from './styles.module.css';
 
 function HomePage({ user_id, courseCategoryData, categoryLoading }) {
+	const router = useRouter();
 	return (
 		<div>
 			<MyCourses user_id={user_id} />
