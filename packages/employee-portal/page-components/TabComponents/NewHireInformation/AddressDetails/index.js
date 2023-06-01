@@ -22,9 +22,6 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 
 	const { permanent_address, present_address } = content?.detail || {};
 
-	const [permanentAdd, setPermanentAdd] = useState(permanent_address);
-	const [currentAdd, setCurrentAdd] = useState(present_address);
-
 	const controlsvalue = controls({ content });
 
 	const permanentcontrols = permanent_controls({ content });
@@ -40,39 +37,39 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	};
 
 	useEffect(() => {
-		setValue('current_city', currentAdd?.city);
-		setValue('current_country', currentAdd?.country);
-		setValue('current_pincode', currentAdd?.pincode);
-		setValue('current_state', currentAdd?.state);
-		setValue('current_address', currentAdd?.address);
-		setValue('permanent_city', permanentAdd?.city);
-		setValue('permanent_country', permanentAdd?.country);
-		setValue('permanent_pincode', permanentAdd?.pincode);
-		setValue('permanent_state', permanentAdd?.state);
-		setValue('permanent_address', permanentAdd?.address);
-	}, [currentAdd, permanentAdd, setValue]);
+		setValue('current_city', present_address?.city);
+		setValue('current_country', present_address?.country);
+		setValue('current_pincode', present_address?.pincode);
+		setValue('current_state', present_address?.state);
+		setValue('current_address', present_address?.address);
+		setValue('permanent_city', permanent_address?.city);
+		setValue('permanent_country', permanent_address?.country);
+		setValue('permanent_pincode', permanent_address?.pincode);
+		setValue('permanent_state', permanent_address?.state);
+		setValue('permanent_address', permanent_address?.address);
+	}, [present_address, permanent_address, setValue]);
 
 	const handleAddressChange = () => {
 		setAddress((prev) => !prev);
 		const getControlvalues = getValues();
 
 		if (address === false) {
-			setCurrentAdd({
-				address : getControlvalues?.permanent_address,
-				city    : getControlvalues?.permanent_city,
-				pincode : getControlvalues?.permanent_pincode,
-				state   : getControlvalues?.permanent_state,
-				country : getControlvalues?.permanent_country,
-			});
-			setPermanentAdd({
-				address : getControlvalues?.permanent_address,
-				city    : getControlvalues?.permanent_city,
-				pincode : getControlvalues?.permanent_pincode,
-				state   : getControlvalues?.permanent_state,
-				country : getControlvalues?.permanent_country,
-			});
+			setValue('current_city', getControlvalues?.permanent_city);
+			setValue('current_country', getControlvalues?.permanent_country);
+			setValue('current_pincode', getControlvalues?.permanent_pincode);
+			setValue('current_state', getControlvalues?.permanent_state);
+			setValue('current_address', getControlvalues?.permanent_address);
+			setValue('permanent_city', getControlvalues?.permanent_city);
+			setValue('permanent_country', getControlvalues?.permanent_country);
+			setValue('permanent_pincode', getControlvalues?.permanent_pincode);
+			setValue('permanent_state', getControlvalues?.permanent_state);
+			setValue('permanent_address', getControlvalues?.permanent_address);
 		} else {
-			setCurrentAdd(present_address);
+			setValue('current_city', present_address?.city);
+			setValue('current_country', present_address?.country);
+			setValue('current_pincode', present_address?.pincode);
+			setValue('current_state', present_address?.state);
+			setValue('current_address', present_address?.address);
 		}
 	};
 
