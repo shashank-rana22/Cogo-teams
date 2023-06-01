@@ -21,6 +21,5 @@
     "react-globe.gl": "^2.23.3",
     "react-kapsule": "^2.4.0",
     "@cogoport/globalization": "workspace:^0.0.1"
-
   }
 }
