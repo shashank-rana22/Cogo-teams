@@ -6,7 +6,10 @@ import { useState, useEffect } from 'react';
 const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsData }) => {
 	const [showModal, setShowModal] = useState(false);
 
-	const [editNameModal, setEditNameModal] = useState(false);
+	const [editNameModal, setEditNameModal] = useState({
+		from  : 'name',
+		state : false,
+	});
 
 	const { handleSubmit, formState: { errors }, control, watch, setValue } = useForm();
 

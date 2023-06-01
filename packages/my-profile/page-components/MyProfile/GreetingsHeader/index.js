@@ -54,6 +54,7 @@ function Greetings({
 		refetch: setRefetch,
 		detailsData,
 		setShowModal,
+		editNameModal,
 		setEditNameModal,
 		partner_user_id,
 	});
@@ -139,7 +140,7 @@ function Greetings({
 
 						<IcMEdit
 							size={1.8}
-							onClick={() => setEditNameModal(true)}
+							onClick={() => setEditNameModal({ ...editNameModal, from: 'name', state: true })}
 							style={{ cursor: 'pointer' }}
 						/>
 
@@ -148,8 +149,8 @@ function Greetings({
 			</div>
 
 			<Modal
-				show={editNameModal}
-				onClose={() => setEditNameModal(false)}
+				show={editNameModal.state}
+				onClose={() => setEditNameModal({ ...editNameModal, state: false })}
 				onOuterClick={onOuterClick}
 				size="md"
 			>
@@ -160,6 +161,8 @@ function Greetings({
 						control={control}
 						errors={errors}
 						detailsData={detailsData}
+						editNameModal={editNameModal}
+
 					/>
 				</Modal.Body>
 				<Modal.Footer>
@@ -188,6 +191,8 @@ function Greetings({
 				detailsData={detailsData}
 				showMobileVerificationModal={showMobileVerificationModal}
 				setShowMobileVerificationModal={setShowMobileVerificationModal}
+				editNameModal={editNameModal}
+				setEditNameModal={setEditNameModal}
 			/>
 
 			<Modal
