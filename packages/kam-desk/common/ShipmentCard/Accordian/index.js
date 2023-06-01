@@ -24,7 +24,7 @@ function Accordian({ data = {} }) {
 						<div>Eway Bill Number</div>
 						<div>Eway Time Till Expiry(hrs)</div>
 					</div>
-					{data?.expiring_eway_bills.map((item) => (
+					{(data?.expiring_eway_bills || []).map((item) => (
 						<div key={item?.id} className={styles.details}>
 							<div>{item?.eway_bill_number || '-'}</div>
 							<div>

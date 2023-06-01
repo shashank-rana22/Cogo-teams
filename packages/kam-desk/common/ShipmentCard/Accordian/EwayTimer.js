@@ -7,7 +7,7 @@ const MILI_SECONDS_IN_A_HOUR = 1000 * 60 * 60;
 const MILI_SECONDS_IN_A_MINUTES = 1000 * 60;
 const MILI_SECONDS_IN_A_SECONDS = 1000;
 
-function EwayTimer({ data = '' }) {
+function EwayTimer({ data = {} }) {
 	const handleTimer = (end_date) => {
 		const timeNow = new Date().getTime();
 		const countDownDate = new Date(end_date).getTime();
