@@ -1,0 +1,19 @@
+.container {
+	margin-top: 12px;
+	border-radius: 4px;
+}
+
+.body {
+	display: flex;
+}
+
+.agents {
+	flex: 0.99;
+	margin: 12px 12px 0 0;
+}
+
+.category {
+	display: flex;
+	flex: 2;
+	margin-top: 12px;
+}
