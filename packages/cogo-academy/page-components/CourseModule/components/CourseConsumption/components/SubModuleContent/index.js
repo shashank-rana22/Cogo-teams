@@ -3,8 +3,8 @@ import { IcMFtick, IcMDocument, IcMVideoCall, IcMPpt, IcMText } from '@cogoport/
 import styles from './styles.module.css';
 
 function SubModuleContent({
-	data = [], moduleIndex, indexes, setIndexes,
-	subModuleIndex, chapterContent = {}, setChapterContent = () => {},
+	data = [], moduleIndex, setIndexes,
+	subModuleIndex, chapter = {}, setChapter = () => {},
 }) {
 	const ICON_MAPPING = {
 		document     : <IcMDocument width={14} height={14} fill="white" />,
@@ -16,14 +16,14 @@ function SubModuleContent({
 	return (
 		<div className={styles.container}>
 
-			{data.map((chapter, chapterIndex) => (
+			{data.map((currChapter, chapterIndex) => (
 				<div
 					role="presentation"
-					key={chapter?.id}
+					key={currChapter?.id}
 					className={`${styles.chapter_container} 
-								${(chapterContent.id === chapter.id) && styles.active}`}
+								${(currChapter.id === chapter.id) && styles.active}`}
 					onClick={() => {
-						setChapterContent(chapter);
+						setChapter(currChapter);
 
 						setIndexes({
 							moduleIndex,
@@ -34,20 +34,20 @@ function SubModuleContent({
 				>
 					<div className={styles.wrapper}>
 
-						{chapter.user_progress_state === 'completed'
+						{currChapter.user_progress_state === 'completed'
 						&& <IcMFtick fill="#849E4C" width={24} height={24} className={styles.icon} />}
 
 						<div className={styles.databox_image}>
-							{ICON_MAPPING[chapter.content_type]}
+							{ICON_MAPPING[currChapter.content_type]}
 						</div>
 
 						<div className={styles.name}>
-							{chapter.name}
+							{currChapter.name}
 						</div>
 					</div>
 
 					<div className={styles.duration}>
-						{chapter.completion_duration_value}
+						{currChapter.completion_duration_value}
 						{' mins'}
 					</div>
 

@@ -3,7 +3,6 @@ import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 import { startCase, isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../CreateCourse/commons/EmptyState';
-import useUpdateUserCourseProgress from '../../hooks/useUpdateUserCourseProgress';
 import getChapter from '../../utils/getChapter';
 
 import LoadingState from './LoadingState';
@@ -11,12 +10,12 @@ import styles from './styles.module.css';
 
 function ModuleContent({
 	data = {}, loading, courseProgressUpdateLoading,
-	updateCourseProgress, chapterData = {}, indexes,
+	updateCourseProgress, chapter = {}, indexes,
 	setIndexes,
 	getUserCourse,
-	setChapterContent,
+	setChapter,
 }) {
-	const { name, content_type = '', chapter_content = '', description, chapter_attachments } = chapterData;
+	const { name, content_type = '', chapter_content = '', description, chapter_attachments } = chapter;
 
 	if (loading || courseProgressUpdateLoading) {
 		return <LoadingState />;
@@ -75,7 +74,6 @@ function ModuleContent({
 								indexes,
 								state: 'prev',
 								setIndexes,
-								setChapterContent,
 							}) || {};
 
 							const { id, user_progress_state } = prevChapterContent;
@@ -88,7 +86,7 @@ function ModuleContent({
 							});
 
 							await getUserCourse();
-							setChapterContent(prevChapterContent);
+							setChapter(prevChapterContent);
 						}}
 					>
 						<IcMArrowLeft width={14} height={14} className={styles.arrow_left} />
@@ -101,15 +99,15 @@ function ModuleContent({
 						className={`${styles.btn} ${styles.next_btn}`}
 						loading={courseProgressUpdateLoading || loading}
 						onClick={async () => {
-							const nextChapterContent = await getChapter({
+							const nextChapter = await getChapter({
 								data,
 								indexes,
 								state: 'next',
 								setIndexes,
-								setChapterContent,
+								setChapter,
 							}) || {};
 
-							const { id, user_progress_state } = nextChapterContent;
+							const { id, user_progress_state } = nextChapter;
 
 							await updateCourseProgress({
 								next_chapter_id    : id,
@@ -120,7 +118,7 @@ function ModuleContent({
 
 							await getUserCourse();
 
-							setChapterContent(nextChapterContent);
+							setChapter(nextChapter);
 						}}
 					>
 						Next

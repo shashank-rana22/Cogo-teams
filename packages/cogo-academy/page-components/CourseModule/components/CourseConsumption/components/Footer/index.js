@@ -6,7 +6,7 @@ import getChapter from '../../utils/getChapter';
 
 import styles from './styles.module.css';
 
-function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterContent = {}, setChapterContent }) {
+function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapter = {}, setChapter }) {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
 
 	const {
@@ -20,7 +20,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterCo
 
 			<div className={styles.btn_container}>
 
-				{chapterContent.user_progress_state === 'completed' ? (
+				{chapter.user_progress_state === 'completed' ? (
 					<Button
 						size="md"
 						themeType="accent"
@@ -31,7 +31,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterCo
 								indexes,
 								state: 'next',
 								setIndexes,
-								setChapterContent,
+								setChapter,
 							});
 
 							await updateCourseProgress({
@@ -40,7 +40,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterCo
 
 							});
 							getUserCourse();
-							setChapterContent(nextChapterContent);
+							setChapter(nextChapterContent);
 						}}
 					>
 						Continue
@@ -57,7 +57,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterCo
 									indexes,
 									state: 'next',
 									setIndexes,
-									setChapterContent,
+									setChapter,
 								});
 
 								const { id, user_progress_state } = nextChapterContent;
@@ -70,7 +70,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterCo
 								});
 
 								getUserCourse();
-								setChapterContent(nextChapterContent);
+								setChapter(nextChapterContent);
 							}}
 						>
 							Skip For Now
@@ -82,14 +82,14 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterCo
 							themeType="accent"
 							loading={loading}
 							onClick={async () => {
-								const { id:current_chapter_id = '' } = chapterContent;
+								const { id:current_chapter_id = '' } = chapter;
 
 								const nextChapterContent = await getChapter({
 									data,
 									indexes,
 									state: 'next',
 									setIndexes,
-									setChapterContent,
+									setChapter,
 								});
 
 								const { id, user_progress_state } = nextChapterContent;
@@ -102,7 +102,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterCo
 								});
 
 								getUserCourse();
-								setChapterContent(nextChapterContent);
+								setChapter(nextChapterContent);
 							}}
 						>
 							Mark As Complete

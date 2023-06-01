@@ -13,7 +13,8 @@ import styles from './styles.module.css';
 
 function CourseConsumption() {
 	const router = useRouter();
-	const [chapterContent, setChapterContent] = useState({});
+	const [chapter, setChapter] = useState({});
+
 	const [indexes, setIndexes] = useState({
 		moduleIndex    : 0,
 		subModuleIndex : 0,
@@ -30,7 +31,7 @@ function CourseConsumption() {
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
-			setChapterContent(data?.course_modules?.[moduleIndex]
+			setChapter(data?.course_modules?.[moduleIndex]
 				?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex]);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -49,8 +50,8 @@ function CourseConsumption() {
 					data={data}
 					loading={loading}
 					courseProgressUpdateLoading={courseProgressUpdateLoading}
-					chapterContent={chapterContent}
-					setChapterContent={setChapterContent}
+					chapter={chapter}
+					setChapter={setChapter}
 					indexes={indexes}
 					setIndexes={setIndexes}
 				/>
@@ -60,13 +61,13 @@ function CourseConsumption() {
 					loading={loading}
 					courseProgressUpdateLoading={courseProgressUpdateLoading}
 					updateCourseProgress={updateCourseProgress}
-					chapterData={chapterContent}
+					chapter={chapter}
 					course_id={course_id}
 					user_id={user_id}
 					indexes={indexes}
 					setIndexes={setIndexes}
 					getUserCourse={getUserCourse}
-					setChapterContent={setChapterContent}
+					setChapter={setChapter}
 				/>
 
 			</div>
@@ -77,8 +78,8 @@ function CourseConsumption() {
 				indexes={indexes}
 				setIndexes={setIndexes}
 				getUserCourse={getUserCourse}
-				chapterContent={chapterContent}
-				setChapterContent={setChapterContent}
+				chapter={chapter}
+				setChapter={setChapter}
 			/>
 		</div>
 	);

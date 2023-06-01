@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function ModuleNavigation({
 	data = {}, loading,
-	courseProgressUpdateLoading, chapterContent, setChapterContent = () => {}, indexes, setIndexes,
+	courseProgressUpdateLoading, chapter, setChapter = () => {}, indexes, setIndexes,
 }) {
 	const { name, course_completion_duration = {} } = data.course_details || {};
 
@@ -78,10 +78,9 @@ function ModuleNavigation({
 									data={subModule.course_sub_module_chapters}
 									moduleIndex={moduleIndex}
 									subModuleIndex={subModuleIndex}
-									indexes={indexes}
 									setIndexes={setIndexes}
-									chapterContent={chapterContent}
-									setChapterContent={setChapterContent}
+									chapter={chapter}
+									setChapter={setChapter}
 								/>
 
 							</Accordion>
