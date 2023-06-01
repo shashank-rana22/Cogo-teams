@@ -10,7 +10,9 @@ const controls = () => [
 		type        : 'async-select',
 		placeholder : 'Search by Cogo Entity',
 		asyncKey    : 'list_cogo_entity',
+		renderLabel : (item) => (`${item?.entity_code} - ${item?.business_name}`),
 		initialCall : true,
+		labelKey    : 'entity_code',
 		rules       : { required: 'Required' },
 		span        : 3.9,
 	},
@@ -39,7 +41,8 @@ const controls = () => [
 		type        : 'async-select',
 		asyncKey    : 'list_trade_parties',
 		initialCall : true,
-		valueKey    : 'legal_business_name',
+		valueKey    : 'id',
+		labelKey    : 'legal_business_name',
 		span        : 3.9,
 		placeholder : 'Enter Trade Party Name',
 		rules       : { required: 'Trade Party is required' },
@@ -189,8 +192,8 @@ const getControls = ({
 			return {
 				...control,
 				value    : entityType,
-				onChange : (e) => {
-					setLedgerCurrency(e?.ledger_currency);
+				onChange : (e, obj) => {
+					setLedgerCurrency(obj?.ledger_currency);
 				},
 			};
 		}
@@ -259,8 +262,8 @@ const getControls = ({
 		if (name === 'entityType') {
 			return {
 				...control,
-				onChange: (e) => {
-					setLedgerCurrency(e?.ledger_currency);
+				onChange: (e, obj) => {
+					setLedgerCurrency(obj?.ledger_currency);
 					setEditMode(true);
 				},
 			};
@@ -275,18 +278,18 @@ const getControls = ({
 			return {
 				...control,
 				disabled : true,
-				onChange : (e) => {
-					setTradeId(e?.id);
-					setShowBprNumber(e);
+				onChange : (e, obj) => {
+					setTradeId(obj?.id);
+					setShowBprNumber(obj);
 				},
 			};
 		}
 		if (name === 'customerId') {
 			return {
 				...control,
-				onChange: (e) => {
-					setTradeId(e?.id);
-					setShowBprNumber(e);
+				onChange: (e, obj) => {
+					setTradeId(obj?.id);
+					setShowBprNumber(obj);
 				},
 			};
 		}

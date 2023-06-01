@@ -1,5 +1,8 @@
 import { Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
+
+import EmptyStateDocs from '../../../../../commons/EmptyStateDocs';
 
 import Header from './Header';
 import List from './List';
@@ -37,17 +40,20 @@ function CustomTable({
 }:CustomInterface) {
 	const { list = [], page = 1, totalRecords = 0 } = data;
 	return (
-		<div className={styles.table}>
-			<Header setGlobalFilters={setGlobalFilters} globalFilters={globalFilters} />
-			<List list={list} refetch={refetch} loading={loading} />
-			<Pagination
-				className={styles.pagination}
-				currentPage={page}
-				totalItems={totalRecords}
-				pageSize={10}
-				onPageChange={onPageChange}
-			/>
-		</div>
+		isEmpty(list) ? <EmptyStateDocs />
+			: (
+				<div className={styles.table}>
+					<Header setGlobalFilters={setGlobalFilters} globalFilters={globalFilters} />
+					<List list={list} refetch={refetch} loading={loading} />
+					<Pagination
+						className={styles.pagination}
+						currentPage={page}
+						totalItems={totalRecords}
+						pageSize={10}
+						onPageChange={onPageChange}
+					/>
+				</div>
+			)
 	);
 }
 

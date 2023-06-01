@@ -50,7 +50,6 @@ const useCreateManualEntry = ({
 	const [venderDataValue, setVenderDataValue] = useState({ id: '', organization_id: '' });
 	const { bankAccountNumber, bankName } = bankDetails || {};
 	const isVenderExists = tradePartyMappingId || venderDataValue?.id;
-
 	const formProps = useForm();
 	const {
 		watch,
@@ -140,7 +139,7 @@ const useCreateManualEntry = ({
 			url    : 'get_exchange_rate',
 			method : 'get',
 		},
-		{ manual: false },
+		{ manual: false, autoCancel: false },
 	);
 
 	const [{ data }, trigger] = useRequestBf(

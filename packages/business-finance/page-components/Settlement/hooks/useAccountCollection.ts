@@ -41,7 +41,7 @@ const useAccountCollection = ({ entityType, currencyType }) => {
 			authKey : 'get_payments_accounts',
 			method  : 'get',
 		},
-		{ manual: false },
+		{ manual: false, autoCancel: false },
 	);
 
 	const api = listApiTrigger;
