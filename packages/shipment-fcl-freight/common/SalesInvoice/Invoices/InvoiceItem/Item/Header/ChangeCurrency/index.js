@@ -53,6 +53,7 @@ function ChangeCurrency({
 			className={styles.form}
 			show={isChangeCurrency}
 			closeOnOuterClick={false}
+			onClose={onClose}
 		>
 			<Modal.Header title="CHANGE CURRENCY" />
 			<Modal.Body>
