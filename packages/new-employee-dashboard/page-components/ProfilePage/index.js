@@ -21,14 +21,13 @@ function ProfilePage() {
 		data: profileData = {},
 		loading = false,
 		ctcStructure = {},
-		// setCtcStructure = () => {},
 		initialQuestion = '',
 		setInitialQuestion = () => {},
 		formProps = {},
 		getEmployeeDetails,
 	} = useProfileDetails();
 
-	const { offerLetter, loading:offerLetterApiLoading } = useGetOfferLetter();
+	const { offerLetter, loading: offerLetterApiLoading } = useGetOfferLetter();
 	const { metadata } = offerLetter || {};
 
 	const { detail = {} } = profileData || {};

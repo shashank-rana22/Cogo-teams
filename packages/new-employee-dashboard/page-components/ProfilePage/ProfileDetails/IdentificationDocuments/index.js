@@ -18,6 +18,7 @@ function IdentificationDocuments({ profileData, getEmployeeDetails }) {
 		inputValue,
 		setInputValue,
 		setShowRejectPopover = () => {},
+		loading,
 	} = useUpdateEmployeeDocuments({ getEmployeeDetails });
 
 	if (isEmpty(documents)) {
@@ -78,15 +79,14 @@ function IdentificationDocuments({ profileData, getEmployeeDetails }) {
 											interactive
 											visible={showRejectPopover === id}
 										>
-											<Button onClick={() => setShowRejectPopover(id)}>
+											<Button onClick={() => setShowRejectPopover(id)} loading={loading}>
 												Reject
 											</Button>
 										</Popover>
-
 									</div>
 
 									<div className={styles.approve_btn}>
-										<Button onClick={() => onClickApproveButton(id)}>
+										<Button onClick={() => onClickApproveButton(id)} loading={loading}>
 											Approve
 										</Button>
 									</div>
