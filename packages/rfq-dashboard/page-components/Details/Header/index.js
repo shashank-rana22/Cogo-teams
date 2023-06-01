@@ -12,6 +12,7 @@ function Header({ loading, requestedOn }) {
 	const { profile } = useSelector((state) => state);
 	const { partner } = profile;
 	const { id } = partner;
+
 	return (
 		<div className={styles.header_container}>
 			<div
@@ -42,11 +43,9 @@ function Header({ loading, requestedOn }) {
 						Requested on :
 						{' '}
 						{formatDate({
-							date: requestedOn?.created_at,
-
-							dateFormat: GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-
-							formatType: 'date',
+							date       : requestedOn?.created_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+							formatType : 'date',
 						})}
 					</div>
 				)

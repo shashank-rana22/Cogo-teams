@@ -103,6 +103,7 @@ function ServiceMargin({
 
 			{(item?.line_items || []).map((lineItem) => (
 				<RenderLineItem
+					key={lineItem?.code}
 					lineItem={lineItem}
 					item={item}
 					editedMargins={editedMargins}

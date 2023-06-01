@@ -12,14 +12,15 @@ import styles from './styles.module.css';
 
 function Graph({ rfq_id = '' }) {
 	const { getRfqGraph, data = {}, loading } = useGetRfqGraph();
+
 	useEffect(() => {
 		getRfqGraph({ rfq_id });
 	}, [getRfqGraph, rfq_id]);
 
-	const { graph_data = {}, shipment_booked = '', contracts_created = '', revenue_generated = '' } = data;
+	const { graph_data = {}, shipment_booked = 0, contracts_created = '', revenue_generated = '' } = data;
 	const { y_axis = [] } = graph_data;
+	const { revenue_currency = '', revenue = '' } = revenue_generated || {};
 
-	const { revenue_currency = '', revenue = '' } = revenue_generated;
 	const LegendsData = [
 		{
 			label: `${shipment_booked} Shipment Booked`,

@@ -17,7 +17,7 @@ function Details() {
 	const { getRfqsRateCards, data = {}, loading } = useGetRfqRateCards(
 		{ rfq_id, state: ['requested_for_approval', 'modified_and_sent', 'approved_and_sent'] },
 	);
-	const { getRfqsForApproval, data: listData, loading: Detailsloading } = useListRfqs({ id: rfq_id });
+	const { getRfqsForApproval, data: listData, loading: details_loading } = useListRfqs({ id: rfq_id });
 
 	useEffect(() => {
 		getRfqsRateCards();
@@ -28,9 +28,13 @@ function Details() {
 
 	return (
 		<div className={styles.container}>
-			<Header loading={Detailsloading} requestedOn={listData?.list?.[0]} />
+			<Header loading={details_loading} requestedOn={listData?.list?.[0]} />
 			<div className={styles.basic_details}>
-				<BasicDetails Detailsloading={Detailsloading} data={listData} getRfqsForApproval={getRfqsForApproval} />
+				<BasicDetails
+					details_loading={details_loading}
+					data={listData}
+					getRfqsForApproval={getRfqsForApproval}
+				/>
 				<Graph rfq_id={rfq_id} />
 			</div>
 			<div className={styles.rfq_list}>
