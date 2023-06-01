@@ -1,5 +1,11 @@
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 export function getDate(date, dateFormat = 'dd MMM yyyy - hh:mm aaa') {
-	return date ? format(date, dateFormat, null, true) : null;
+	return date ? formatDate({
+		date       : date, 
+		dateFormat : GLOBAL_CONSTANTS.formats.date[dateFormat],
+		formatType : 'date',
+		separator  : ' - ',
+	}): null;
 }
