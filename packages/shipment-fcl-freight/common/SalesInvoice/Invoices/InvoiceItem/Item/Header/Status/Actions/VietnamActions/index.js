@@ -1,6 +1,5 @@
-import { Button, Popover, Tooltip, cl } from '@cogoport/components';
+import { Button, Tooltip, cl } from '@cogoport/components';
 import {
-	IcMOverflowDot,
 	IcMInfo,
 	IcCError,
 	IcMEmail,
@@ -11,6 +10,8 @@ import React, { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../../hooks/useUpdateInvoiceStatus';
 import styles from '../styles.module.css';
+
+import KebabContent from './KebabContent';
 
 const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
@@ -29,7 +30,6 @@ function Actions({
 	salesInvoicesRefetch = () => {},
 	bfInvoice = {},
 }) {
-	const [show, setShow] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
@@ -70,18 +70,6 @@ function Actions({
 		refetch: refetchAfterCall,
 	});
 
-	const handleClick = (setState = () => {}) => {
-		setState(true);
-		setShow(false);
-	};
-
-	const remarkRender = (
-		<div className={styles.remark_container}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
-
 	const handleRefetch = () => {
 		refetch();
 		salesInvoicesRefetch();
@@ -100,60 +88,6 @@ function Actions({
 				</Button>
 			</div>
 		) : null
-	);
-
-	const commonActions = invoice.status !== 'approved' && !disableAction;
-
-	const content = (
-		<div className={styles.dialog_box}>
-			{commonActions ? (
-				<>
-					<div>
-						<div
-							role="button"
-							tabIndex={0}
-							className={styles.text}
-							onClick={() => handleClick(setIsChangeCurrency)}
-						>
-							Change Currency
-						</div>
-						<div className={styles.line} />
-					</div>
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.text}
-						onClick={() => handleClick(setShowAddRemarks)}
-					>
-						Add Remarks
-					</div>
-					<div>
-						<div className={styles.line} />
-						<div
-							role="button"
-							tabIndex={0}
-							className={styles.text}
-							onClick={() => handleClick(setShowChangePaymentMode)}
-						>
-							Change Payment Mode
-						</div>
-					</div>
-				</>
-			) : null}
-			{(invoice.exchange_rate_document || []).map((url) => (
-				<div key={url}>
-					{commonActions ? <div className={styles.line} /> : null}
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.text}
-						onClick={() => window.open(url, '_blank')}
-					>
-						Exchange Rate Document
-					</div>
-				</div>
-			))}
-		</div>
 	);
 
 	return (
@@ -232,40 +166,15 @@ function Actions({
 							</div>
 						</Tooltip>
 					</div>
-
-					{!disableAction || invoice.exchange_rate_document?.length > 0 ? (
-						<Popover
-							interactive
-							placement="bottom"
-							visible={show}
-							content={content}
-							theme="light"
-							onClickOutside={() => setShow(false)}
-						>
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.icon_more_wrapper}
-								onClick={() => setShow(!show)}
-							>
-								<IcMOverflowDot />
-							</div>
-						</Popover>
-					) : (
-						<div className={styles.empty_div} />
-					)}
-
-					{!isEmpty(invoice.remarks) ? (
-						<Tooltip
-							placement="bottom"
-							theme="light-border"
-							content={remarkRender}
-						>
-							<div className={styles.icon_more_wrapper}>
-								<IcMInfo fill="yellow" />
-							</div>
-						</Tooltip>
-					) : null}
+					<KebabContent
+						invoice={invoice}
+						shipment_data={shipment_data}
+						invoiceData={invoiceData}
+						isIRNGenerated={isIRNGenerated}
+						setIsChangeCurrency={setIsChangeCurrency}
+						setShowAddRemarks={setShowAddRemarks}
+						setShowChangePaymentMode={setShowChangePaymentMode}
+					/>
 				</div>
 			</div>
 
