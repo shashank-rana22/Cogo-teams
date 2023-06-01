@@ -71,7 +71,6 @@ function UploadForm({
 
 					<div className={styles.buttons_container}>
 						<Button
-							className="secondary md"
 							onClick={() => {
 								setShowDoc(null);
 							}}
