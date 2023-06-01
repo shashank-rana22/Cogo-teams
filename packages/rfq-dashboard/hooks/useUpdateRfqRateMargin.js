@@ -1,8 +1,3 @@
-// import { useRequest } from '@cogo/commons/hooks';
-// import { useSelector } from '@cogo/store';
-// import getApiErrorString from '@cogo/utils/getApiErrorString';
-// import { toast } from '@cogoport/front/components';
-
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
@@ -15,7 +10,7 @@ const useUpdateRfqRateMargin = ({
 }) => {
 	const endpoint = '/update_rfq_rate_card_margin';
 
-	const [{ loading, data }, trigger] = useRequest({
+	const [trigger] = useRequest({
 		url    : endpoint,
 		method : 'POST',
 	}, { manual: true });

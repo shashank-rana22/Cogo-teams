@@ -9,11 +9,13 @@ function Filter({
 	data, filterStore, setFilterStore, checkedItems,
 	selectAll, setCheckedItems, setSelectAll, getRfqsForApproval,
 }) {
+	const { bulkUpdateRfqState } = useBulkUpdateRfqState();
+
 	const handleSelectAll = () => {
 		setSelectAll(!selectAll);
 		setCheckedItems(!selectAll ? data : []);
 	};
-	const { bulkUpdateRfqState } = useBulkUpdateRfqState();
+
 	const handleApproveRfq = () => {
 		const payload = checkedItems.map((item) => item.id);
 		bulkUpdateRfqState({ payload, getRfqsForApproval });

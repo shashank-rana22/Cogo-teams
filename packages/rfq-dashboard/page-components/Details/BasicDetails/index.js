@@ -31,7 +31,7 @@ function BasicDetails({ data = {}, Detailsloading }) {
 					<IcMProfile fill="#4F4F4F" />
 					<div className={styles.sales_agent}>
 						Sales Agent :
-						{sales_agent ? <div className={styles.data_value}>{sales_agent?.name}</div> : null}
+						{sales_agent ? <div className={styles.data_value}>{sales_agent?.name}</div> : '-'}
 					</div>
 				</div>
 			</div>
@@ -48,7 +48,7 @@ function BasicDetails({ data = {}, Detailsloading }) {
 					</div>
 					<div className={styles.tag_suffix_name}>
 
-						{requested_for_approval}
+						{requested_for_approval || 0}
 						{' '}
 
 						Requested For Approval
@@ -56,7 +56,7 @@ function BasicDetails({ data = {}, Detailsloading }) {
 					</div>
 				</div>
 
-				{startCase(importer_exporter?.sub_type)
+				{importer_exporter?.sub_type
 					? <div className={styles.enterprise_tag}>{startCase(importer_exporter?.sub_type)}</div> : null}
 				{
 					importer_exporter?.bookings_completed_last_date ? (

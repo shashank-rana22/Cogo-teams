@@ -18,15 +18,12 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 
 	const services = Object.keys(port_pair_count);
 	const priceFormating = (price, currency) => formatAmount({
-		amount: price,
+		amount  : price,
 		currency,
-
-		options: {
-			style: 'currency',
-
-			currencyDisplay: 'code',
-
-			maximumFractionDigits: 0,
+		options : {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 0,
 		},
 	});
 
@@ -128,11 +125,6 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 						</div>
 
 					</div>
-					{/* <div className={styles.field}>
-						<div className={styles.label}>Avg Contract Utilization</div>
-						<div className={styles.value}>11.2 %</div>
-
-					</div> */}
 					<div className={styles.field}>
 						<div className={styles.label}>Live Contracts of Organization</div>
 						<div className={styles.value}>{item?.live_contracts}</div>

@@ -1,8 +1,5 @@
-// import Layout from '@cogo/business-modules/form/Layout';
 import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-// import startCase from '@cogo/utils/startCase';
-// import { useFormCogo } from '@cogoport/front/hooks';
 import React, { useEffect } from 'react';
 
 import FieldArray from '../FieldArray';
@@ -28,7 +25,7 @@ function Convenience({
 				},
 			});
 		});
-	}, [watch]);
+	}, [watch, convenienceDetails, onChange]);
 
 	useEffect(() => {
 		onChange({
@@ -46,7 +43,7 @@ function Convenience({
 				unit            : startCase(convenience_line_item?.unit),
 			},
 		]);
-	}, []);
+	}, [convenience_line_item, onChange, setValue]);
 
 	return (
 		<>
@@ -58,7 +55,7 @@ function Convenience({
 				}
 
 				if (type === 'feildArray') {
-					return <FieldArray control={control} {...controItem} />;
+					return <FieldArray control={control} {...controItem} key={label} />;
 				}
 
 				const Element = getController(type);
