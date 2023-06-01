@@ -32,7 +32,7 @@ const controls = [
 				value : 'sme',
 			},
 			{
-				label : 'ChannelPartner',
+				label : 'Channel Partner',
 				value : 'channel_partner',
 			},
 			{

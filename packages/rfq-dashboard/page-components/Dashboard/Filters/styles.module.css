@@ -1,12 +1,12 @@
 .container {
+	position: sticky;
+	top: 0;
+	left: 0;
 	width: 25%;
 	height: 100%;
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 10%);
-	position:sticky;
-	top:0;
-	left:0;
 }
 
 .title {

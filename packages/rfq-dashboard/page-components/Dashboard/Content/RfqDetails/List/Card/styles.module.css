@@ -48,6 +48,7 @@
 	display: flex;
 	align-items: center;
 	padding: 4px;
+	margin-top: 6px;
 	margin-right: 6px;
 	font-size: 12px;
 	color: #4f4f4f;
@@ -76,6 +77,8 @@
 
 .field {
 	flex: 1;
+	width: 100px;
+	margin-right: 30px;
 }
 
 .label {
