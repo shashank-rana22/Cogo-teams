@@ -57,6 +57,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 	const ownerName = agents?.[0]?.name;
 	const { rate, detail } = checkout_detail || {};
 	const { checkout_approvals } = detail || {};
+	const { additional_info = {} } = checkout_approvals[0] || {};
 
 	const {
 		tax_total_price_discounted,
@@ -112,7 +113,8 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 							{filters.status === 'approved' ? 'Shipment ID' : 'Quotation ID'}
 							<div style={{ color: '#034AFD' }}>
 								#
-								{filters.status === 'approved' ? 'Shipment ID' : item?.serial_id}
+								{filters.status === 'approved' ? additional_info?.shipment_serial_id
+									: item?.serial_id}
 							</div>
 						</div>
 
