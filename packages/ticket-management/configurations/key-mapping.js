@@ -20,3 +20,14 @@ export const statusLabelTransformation = {
 		color : '#F37166',
 	},
 };
+
+export const actionButtonKeys = () => ({
+	unresolved: {
+		label : 'Resolve',
+		name  : 'resolve',
+	},
+	closed: {
+		label : 'Reopen',
+		name  : 'reopen',
+	},
+});

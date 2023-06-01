@@ -115,6 +115,28 @@ const GLOBAL_CONSTANTS = {
 		cart_png                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cart_icon.png',
 		saas_subscription_loading : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
 	},
+	image_urls: {
+		emoticonMapping: {
+			1       : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/1_rating.gif',
+			2       : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/2_rating.gif',
+			3       : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/3_score.gif',
+			4       : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/4_score.gif',
+			5       : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/5_score.gif',
+			6       : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/3_rating.gif',
+			7       : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/7_score.gif',
+			8       : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/8_score.gif',
+			9       : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/9_score.gif',
+			10      : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/5_rating.gif',
+			default : 'https://cdn.cogoport.io/cms-debug/cogo_app/vault/original/3_rating.gif',
+		},
+		bot_icon      : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/web_bot',
+		cogoport_logo : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoLogo.svg',
+		user_avatar   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png',
+	},
+	regex: {
+		url_match_regex:
+		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
+	},
 };
 
 export default GLOBAL_CONSTANTS;

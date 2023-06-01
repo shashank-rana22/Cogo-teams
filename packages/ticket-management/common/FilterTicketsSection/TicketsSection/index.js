@@ -18,8 +18,8 @@ function TicketsSection(props) {
 			{
 				Object.keys(ticketSectionMapping).map((item) => (
 					<TicketsSectionPart
-						key={item.key}
 						{...props}
+						key={item.key}
 						label={item}
 						status={item}
 						refreshList={refreshList}

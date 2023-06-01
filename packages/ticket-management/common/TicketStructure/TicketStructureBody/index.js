@@ -9,6 +9,7 @@ import styles from './styles.module.css';
 function TicketStructureBody({
 	data,
 	updateTicketActivity = () => {},
+	setModalData = () => {},
 }) {
 	const {
 		ID: id = '',
@@ -29,7 +30,12 @@ function TicketStructureBody({
 
 	return (
 		<div
+			role="presentation"
 			className={styles.ticket_container}
+			onClick={() => setModalData({
+				type     : 'ticket_details',
+				ticketId : id,
+			})}
 		>
 			<div className={styles.subcontainer_one}>
 				<div className={styles.subcontainer_header}>

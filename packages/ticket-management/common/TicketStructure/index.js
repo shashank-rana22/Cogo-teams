@@ -12,6 +12,7 @@ function TicketStructure({
 	handleScroll = () => {},
 	loading = false,
 	refreshTickets = () => {},
+	setModalData = () => {},
 	label,
 }) {
 	const { updateTicketActivity } = useUpdateTicketActivity({
@@ -40,6 +41,7 @@ function TicketStructure({
 					<TicketStructureBody
 						data={item}
 						key={item.id}
+						setModalData={setModalData}
 						updateTicketActivity={updateTicketActivity}
 					/>
 				))
