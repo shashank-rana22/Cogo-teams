@@ -3,78 +3,90 @@ import { IcMTimer, IcMActivePlans } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 
 function BasicDetails({ basic_info_data, questions, stats_data }) {
-	const content_mapping_left = {
-		topics_covered: {
-			label      : 'Topics Covered',
-			icon       : <IcMActivePlans />,
-			renderData : (
-				<div className={styles.topic}>
-					{basic_info_data.topics_covered?.length > 0 ? (
-						<div>{basic_info_data.topics_covered.join(', ')}</div>
-					) : ('-')}
-				</div>
-			),
-		},
-		duration: {
-			label      : 'Time taken',
-			icon       : <IcMTimer />,
-			renderData : (
-				<div className={styles.text_bottom}>
-					{basic_info_data.time_taken}
-					<div className={styles.minutes}>minutes </div>
-				</div>
-			),
-		},
-	};
-
-	const content_mapping_middle = {
-		passpercent: {
-			label      : 'Pass %',
-			renderData : (
-				<div className={styles.values}>
-					<div className={styles.current}>
-						{stats_data.current_pass_percentage || 0}
+	function createContentMappingLeft() {
+		return {
+			topics_covered: {
+				label      : 'Topics Covered',
+				icon       : <IcMActivePlans />,
+				renderData : (
+					<div className={styles.topic}>
+						{basic_info_data.topics_covered?.length > 0 ? (
+							<div>{basic_info_data.topics_covered.join(', ')}</div>
+						) : ('-')}
 					</div>
-
-					<div style={{
-						color       : '#828282',
-						marginTop   : '20px',
-						paddingLeft : '10px',
-					}}
-					>
-						Cumulative of Both the Tests
+				),
+			},
+			duration: {
+				label      : 'Time taken',
+				icon       : <IcMTimer />,
+				renderData : (
+					<div className={styles.text_bottom}>
+						{basic_info_data.time_taken}
+						<div className={styles.minutes}>minutes </div>
 					</div>
-				</div>
-			),
-		},
-	};
+				),
+			},
+		};
+	}
 
-	const content_mapping_right = {
-		students_appeared: {
-			label      : 'Students Appeared',
-			renderData : (
-				<div>
-					{basic_info_data.total_students_appeared || 0}
-				</div>
-			),
-		},
-		Passed: {
-			label      : 'Passed',
-			renderData : (
-				<div>
-					{basic_info_data.failed_and_passed.total_passed || 0}
-				</div>
-			),
-		},
-		Failed: {
-			label      : 'Failed',
-			renderData : (
-				<div>
-					{basic_info_data.failed_and_passed.total_failed || 0}
-				</div>
-			),
-		},
-	};
+	function createContentMappingMiddle() {
+		return {
+			passpercent: {
+				label      : 'Pass %',
+				renderData : (
+					<div className={styles.values}>
+						<div className={styles.current}>
+							{stats_data.current_pass_percentage || 0}
+						</div>
+
+						<div style={{
+							color       : '#828282',
+							marginTop   : '20px',
+							paddingLeft : '10px',
+						}}
+						>
+							Cumulative of Both the Tests
+						</div>
+					</div>
+				),
+			},
+		};
+	}
+
+	function createContentMappingRight() {
+		return {
+			students_appeared: {
+				label      : 'Students Appeared',
+				renderData : (
+					<div>
+						{basic_info_data.total_students_appeared || 0}
+					</div>
+				),
+			},
+			Passed: {
+				label      : 'Passed',
+				renderData : (
+					<div>
+						{basic_info_data.failed_and_passed.total_passed || 0}
+					</div>
+				),
+			},
+			Failed: {
+				label      : 'Failed',
+				renderData : (
+					<div>
+						{basic_info_data.failed_and_passed.total_failed || 0}
+					</div>
+				),
+			},
+		};
+	}
+
+	const content_mapping_left = createContentMappingLeft();
+
+	const content_mapping_middle = createContentMappingMiddle();
+
+	const content_mapping_right = createContentMappingRight();
 
 	return (
 		<div className={styles.row}>
