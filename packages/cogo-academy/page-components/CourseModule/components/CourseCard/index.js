@@ -37,9 +37,7 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {} }) {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.header}>
-
 				<div className={styles.topics_rating_container}>
 					<div className={styles.topics}>
 
