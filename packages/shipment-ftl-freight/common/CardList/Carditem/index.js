@@ -36,7 +36,6 @@ function Item({
 					<div
 						style={singleItem.hasStyle ? singleItem.styles : stylesCol}
 						key={singleItem?.key}
-						className="card-body-col"
 					>
 						{loading ? <Placeholder width="100%" height="20px" /> : null}
 						{!isTotalRow ? (
