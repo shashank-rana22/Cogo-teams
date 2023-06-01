@@ -1,44 +1,11 @@
 import { cl } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import { STATS_MAPPING } from '../../configurations/stats-mapping';
 
+import RenderItem from './RenderItem';
 import styles from './styles.module.css';
 
 function ServiceStats({ data = [], source = '' }) {
-	const renderItem = (item) => {
-		if (item.key === 'promised_revenue') {
-			return formatAmount({
-				amount: data?.[item.key] || data?.promised_consolidated_revenue,
-
-				currency: data?.promised_consolidated_revenue_currency
-					|| data?.[item.key]?.promised_revenue_currency,
-
-				options: {
-					style                 : 'currency',
-					currencyDisplay       : 'code',
-					maximumFractionDigits : 0,
-				},
-			});
-		}
-		if (item.key === 'promised_profitability') {
-			let profitability = data?.[item?.key];
-			if (typeof (data?.promised_consolidated_profitability) === 'number') {
-				profitability = data?.promised_consolidated_profitability;
-			}
-			return typeof profitability === 'number' ? (
-				<span
-					className={cl`${data?.[item?.key] > 0 ? styles.green : styles.red}
-					${data?.[item?.key] === 0 ? styles.black : ''}`}
-				>
-					{`${(profitability).toFixed(2)}%`}
-				</span>
-			) : '-';
-		}
-
-		return '-';
-	};
-
 	return (
 		<div className={cl`${styles.revenue_profitability_utilisation_section} 
         ${(source
@@ -47,7 +14,9 @@ function ServiceStats({ data = [], source = '' }) {
 			{Object.keys(STATS_MAPPING).map((key) => (
 				<div key={key}>
 					<div className={styles.revenyue_profitability_utilization_name}>{STATS_MAPPING[key].label}</div>
-					<div className={styles.stats_value}>{renderItem(STATS_MAPPING[key])}</div>
+					<div className={styles.stats_value}>
+						<RenderItem item={STATS_MAPPING[key]} data={data} />
+					</div>
 				</div>
 			))}
 		</div>
