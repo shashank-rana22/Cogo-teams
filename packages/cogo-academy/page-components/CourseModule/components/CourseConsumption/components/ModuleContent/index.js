@@ -10,19 +10,13 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function ModuleContent({
-	data = {}, loading, chapterData = {}, indexes,
-	course_id,
-	user_id,
+	data = {}, loading, courseProgressUpdateLoading,
+	updateCourseProgress, chapterData = {}, indexes,
 	setIndexes,
 	getUserCourse,
 	setChapterContent,
 }) {
 	const { name, content_type = '', chapter_content = '', description, chapter_attachments } = chapterData;
-
-	const {
-		courseProgressUpdateLoading,
-		updateCourseProgress,
-	} = useUpdateUserCourseProgress({ course_id, user_id });
 
 	if (loading || courseProgressUpdateLoading) {
 		return <LoadingState />;

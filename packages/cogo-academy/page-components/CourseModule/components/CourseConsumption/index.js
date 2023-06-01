@@ -8,6 +8,7 @@ import useGetUserCourse from '../../hooks/useGetUserCourse';
 import Footer from './components/Footer';
 import ModuleContent from './components/ModuleContent';
 import ModuleNavigation from './components/ModuleNavigation';
+import useUpdateUserCourseProgress from './hooks/useUpdateUserCourseProgress';
 import styles from './styles.module.css';
 
 function CourseConsumption() {
@@ -32,7 +33,13 @@ function CourseConsumption() {
 			setChapterContent(data?.course_modules?.[moduleIndex]
 				?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex]);
 		}
-	}, [chapterIndex, data, moduleIndex, subModuleIndex]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [data]);
+
+	const {
+		courseProgressUpdateLoading,
+		updateCourseProgress,
+	} = useUpdateUserCourseProgress({ course_id, user_id });
 
 	return (
 		<div className={styles.container}>
@@ -41,6 +48,7 @@ function CourseConsumption() {
 				<ModuleNavigation
 					data={data}
 					loading={loading}
+					courseProgressUpdateLoading={courseProgressUpdateLoading}
 					chapterContent={chapterContent}
 					setChapterContent={setChapterContent}
 					indexes={indexes}
@@ -50,6 +58,8 @@ function CourseConsumption() {
 				<ModuleContent
 					data={data}
 					loading={loading}
+					courseProgressUpdateLoading={courseProgressUpdateLoading}
+					updateCourseProgress={updateCourseProgress}
 					chapterData={chapterContent}
 					course_id={course_id}
 					user_id={user_id}

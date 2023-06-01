@@ -39,7 +39,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterCo
 								next_chapter_id: nextChapterContent.id,
 
 							});
-							await getUserCourse();
+							getUserCourse();
 							setChapterContent(nextChapterContent);
 						}}
 					>
@@ -69,7 +69,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterCo
 										: user_progress_state,
 								});
 
-								await getUserCourse();
+								getUserCourse();
 								setChapterContent(nextChapterContent);
 							}}
 						>
@@ -101,7 +101,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterCo
 										? 'ongoing' : user_progress_state,
 								});
 
-								await getUserCourse();
+								getUserCourse();
 								setChapterContent(nextChapterContent);
 							}}
 						>

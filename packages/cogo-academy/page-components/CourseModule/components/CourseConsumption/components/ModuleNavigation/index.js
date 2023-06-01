@@ -5,12 +5,15 @@ import SubModuleContent from '../SubModuleContent';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-function ModuleNavigation({ data = {}, loading, chapterContent, setChapterContent = () => {}, indexes, setIndexes }) {
+function ModuleNavigation({
+	data = {}, loading,
+	courseProgressUpdateLoading, chapterContent, setChapterContent = () => {}, indexes, setIndexes,
+}) {
 	const { name, course_completion_duration = {} } = data.course_details || {};
 
 	const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration;
 
-	if (loading) {
+	if (loading || courseProgressUpdateLoading) {
 		return <LoadingState />;
 	}
 
