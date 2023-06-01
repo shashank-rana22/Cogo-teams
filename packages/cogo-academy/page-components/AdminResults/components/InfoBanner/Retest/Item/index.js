@@ -35,12 +35,13 @@ function Item(props) {
 				<sup className={styles.sup}>*</sup>
 			</div>
 			<div className={styles.filters_types}>
-					<Element
-						{...props}
-						control={control}
-						className={styles.field_controller}
-					/>
-				{error?.type  && <div className={styles.error_text}>This is Required</div>}
+				<Element
+					{...props}
+					control={control}
+					className={styles.field_controller}
+				/>
+
+				{error?.type && <div className={styles.error_text}>This is Required</div>}
 			</div>
 		</div>
 	);
