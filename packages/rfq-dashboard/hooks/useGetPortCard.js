@@ -2,8 +2,6 @@ import { IcCFcl, IcCLcl, IcCAir } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
-import { priceBreakupChildData } from '../configurations/price-breakup-card-child-data';
-
 import useGetRfqRateCardDetails from './useGetRfqRateCardDetails';
 import useUpdateRfqRateMargin from './useUpdateRfqRateMargin';
 
@@ -77,16 +75,6 @@ const useGetPortCard = ({ props }) => {
 		rate_card_details,
 	});
 
-	const prefilledValues = [];
-	priceBreakupChildData?.forEach((item) => {
-		item?.data.forEach((dataItem) => {
-			prefilledValues.push({
-				margin_type           : dataItem.margin_type,
-				margin_value_currency : dataItem.margin_value_currency,
-				margin_value          : dataItem.margin_value,
-			});
-		});
-	});
 	const Component = ICONMAPPING[service_type];
 
 	return {
