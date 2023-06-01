@@ -36,7 +36,7 @@ function RenderLineItem({
 		(m) => m?.code === lineItem?.code,
 	);
 
-	let buy_price =		(lineItem?.total_price_discounted || 0)
+	let buy_price =	(lineItem?.total_price_discounted || 0)
 		- ((lineItem.margins || []).find(
 			(marginObj) => marginObj?.margin_type === 'demand',
 		)?.total_margin_value || 0);

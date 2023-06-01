@@ -56,13 +56,19 @@ const useGetPortCard = ({ props }) => {
 
 	const [editedMargins, setEditedMargins] = useState({});
 
-	const [convenienceDetails, setConvenienceDetails] = useState({
-		convenience_rate: {
-			price    : convenience_line_item?.price,
-			currency : convenience_line_item?.currency,
-			unit     : convenience_line_item?.unit,
-		},
-	});
+	const [convenienceDetails, setConvenienceDetails] = useState({});
+
+	useEffect(() => {
+		if (!isEmpty(convenience_line_item)) {
+			setConvenienceDetails({
+				convenience_rate: {
+					price    : convenience_line_item?.price,
+					currency : convenience_line_item?.currency,
+					unit     : convenience_line_item?.unit,
+				},
+			});
+		}
+	}, [convenience_line_item]);
 
 	const primary_service_id = rate_card_details?.primary_service_id;
 	const primaryService = {

@@ -3,6 +3,7 @@ import { InputController, SelectController } from '@cogoport/forms';
 const controlTypeControllerMapping = {
 	number : InputController,
 	select : SelectController,
+	text   : InputController,
 
 };
 
