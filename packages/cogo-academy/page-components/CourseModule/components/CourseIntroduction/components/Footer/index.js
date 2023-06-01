@@ -21,12 +21,12 @@ export function Footer({ course_id, user_id, data = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.btn_container}>
-				<Button
+				{/* <Button
 					className={styles.btn}
 					themeType="secondary"
 				>
 					Schedule Time to Begin
-				</Button>
+				</Button> */}
 				<Button
 					className={styles.btn}
 					themeType="accent"

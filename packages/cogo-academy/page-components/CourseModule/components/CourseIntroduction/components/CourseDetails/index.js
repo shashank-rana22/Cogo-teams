@@ -45,10 +45,14 @@ function CourseDetails({ data, instructorData, module }) {
 						{instructorData?.[0]?.name}
 					</div>
 				</div>
-				<div className={styles.header_rating}>
-					<IcMStarfull />
-					{data?.rating || 0}
-				</div>
+				{data?.rating
+					? (
+						<div className={styles.header_rating}>
+							<IcMStarfull fill="#fcdc00" />
+							<span style={{ color: '#fcdc00' }}>{data?.rating}</span>
+						</div>
+					)
+					: null}
 			</div>
 
 			<div className={styles.description}>

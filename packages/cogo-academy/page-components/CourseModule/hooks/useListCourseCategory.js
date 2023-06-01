@@ -11,6 +11,7 @@ const useListCourseCategory = () => {
 			page_limit           : 100000000000000,
 			filters              : { user_id },
 			topics_data_required : true,
+			status               : 'active',
 		},
 	}, { manual: false });
 
