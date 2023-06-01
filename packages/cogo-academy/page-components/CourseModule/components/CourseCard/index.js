@@ -1,11 +1,11 @@
-import { Pill, Button, Tooltip } from '@cogoport/components';
+import { Pill, Button, Tooltip, ProgressBar } from '@cogoport/components';
 import { IcMStarfull, IcMBookmark } from '@cogoport/icons-react';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {} }) {
-	const { cogo_academy_course = {}, cogo_academy_course_id : course_id = '' } = data;
+function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, activeTab }) {
+	const { cogo_academy_course = {}, cogo_academy_course_id : course_id = '', course_progress } = data;
 
 	const { faq_topics = [], name = '', description = '', course_categories = [] } = cogo_academy_course;
 
@@ -87,9 +87,7 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {} }) {
 			</div>
 
 			<div className={styles.details}>
-
 				<div className={styles.categories_container}>
-
 					{course_categories.map((topic, index) => {
 						if (index > 1 && course_categories.length > 2) {
 							return null;
@@ -97,32 +95,39 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {} }) {
 						const { id, display_name } = topic;
 						return (
 
-							<p
+							<div
 								key={id}
 								className={styles.category_name}
 							>
 								{display_name}
-							</p>
+							</div>
 						);
 					})}
 
 					{course_categories.length > 2 ? (
-						<p
+						<div
 							className={`${styles.category_name} ${styles.more}`}
 						>
 							{`+${course_categories.length - 2} More`}
-						</p>
+						</div>
 					) : null}
 				</div>
 
 				<h2>{name}</h2>
-				<p className={styles.description}>
+				<div className={styles.description}>
 					{description}
-				</p>
+				</div>
+
+				{activeTab === 'ongoing' ? (
+					<div>
+						<div className={styles.remaining_text}>Remaining</div>
+						<ProgressBar progress={course_progress} uploadText=" " />
+					</div>
+				) : null}
 
 				<div className={styles.btn_container}>
-
 					<Button size="md" themeType="link">{secondaryBtnText}</Button>
+
 					<Button
 						size="md"
 						themeType="secondary"

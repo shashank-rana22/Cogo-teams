@@ -1,5 +1,4 @@
-import { Carousel, Tabs, TabPanel, Button } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
+import { Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
