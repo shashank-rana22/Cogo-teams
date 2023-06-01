@@ -27,6 +27,22 @@ const handleTimer = (end_date) => {
 		hours > 1 ? 'Hrs' : 'Hr'
 	}`;
 };
+const getTransitTime = ({ departure, arrival }) => {
+	const dateString1 = departure;
+	const dateString2 = arrival;
+
+	const dateParts1 = dateString1.split('/');
+	const date1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]);
+
+	const dateParts2 = dateString2.split('/');
+	const date2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]);
+
+	const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+
+	const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+	return daysDiff;
+};
 
 function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} }) {
 	const {
@@ -83,23 +99,6 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 		dateFormat : 'dd MMM YYYY',
 	});
 
-	const getTransitTime = () => {
-		const dateString1 = departure;
-		const dateString2 = arrival;
-
-		const dateParts1 = dateString1.split('/');
-		const date1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]);
-
-		const dateParts2 = dateString2.split('/');
-		const date2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]);
-
-		const timeDiff = Math.abs(date2.getTime() - date1.getTime());
-
-		const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
-
-		return daysDiff;
-	};
-
 	return (
 		<>
 			<div className={styles.parent}>
@@ -109,11 +108,10 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 					</p>
 					<div className={styles.horizontal_div}>
 						<div className={styles.quotation}>
-							Quotation ID
-							{' '}
+							{filters.status === 'approved' ? 'Shipment ID' : 'Quotation ID'}
 							<div style={{ color: '#034AFD' }}>
 								#
-								{item?.serial_id}
+								{filters.status === 'approved' ? 'Shipment ID' : item?.serial_id}
 							</div>
 						</div>
 
@@ -180,7 +178,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 								<div className={styles.primary_text}>
 									Transit Time :
 									<div className={styles.secondary_text}>
-										{getTransitTime()}
+										{getTransitTime({ arrival, departure })}
 										{' '}
 										Days
 									</div>

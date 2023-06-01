@@ -13,6 +13,11 @@ const LABEL_MAPPING = {
 	approved : 'Approve',
 };
 
+const FORM_MAPPING = {
+	approved : ApprovalForm,
+	rejected : RejectionForm,
+};
+
 function StatusApproval({ item, refetchBookingList }) {
 	const [modalType, setModalType] = useState('');
 
@@ -33,18 +38,21 @@ function StatusApproval({ item, refetchBookingList }) {
 
 	const formValues = watch();
 
-	const formMapping = {
-		approved: <ApprovalForm
-			control={control}
-			errors={errors}
-			setValue={setValue}
-			formValues={formValues}
-			checkout_approvals={checkout_approvals}
-		/>,
-
-		rejected: <RejectionForm control={control} errors={errors} />,
-
+	const PROPS_MAPPING = {
+		approved: {
+			control,
+			errors,
+			setValue,
+			formValues,
+			checkout_approvals,
+		},
+		rejected: {
+			control,
+			errors,
+		},
 	};
+
+	const FormComponent = FORM_MAPPING[modalType];
 
 	return (
 		<div className={styles.container}>
@@ -73,9 +81,8 @@ function StatusApproval({ item, refetchBookingList }) {
 					className={styles.modal}
 				>
 					<Modal.Header title={`Are you sure you want to ${LABEL_MAPPING[modalType]}?`} />
-
 					<Modal.Body className={styles.preview_modal_body}>
-						{formMapping[modalType]}
+						<FormComponent {...PROPS_MAPPING[modalType]} />
 					</Modal.Body>
 
 					<Modal.Footer>
