@@ -38,7 +38,7 @@ function ExchangeRate({
 				onClick={() => setOpen(true)}
 				disabled={disableBtn}
 				themeType="secondary"
-				className={styles.ModifyButton}
+				className={styles.modify_button}
 			>
 				Exchange Rate
 			</Button>

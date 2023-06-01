@@ -1,31 +1,35 @@
+import { Button, Popover } from '@cogoport/components';
 import React, { useState } from 'react';
-import { Button, Popover } from '@cogoport/front/components';
-import { Text } from '@cogo/commons/components';
-import { Container, FlexCol } from './styles';
 
-const ExchangeDetails = ({
+import styles from './styles.module.css';
+
+function ExchangeDetails({
 	children = null,
 	availableCurrencyConversions = {},
 	invoiceCurrency = '',
-}) => {
+}) {
 	const [show, setShow] = useState(false);
 
 	const currencyConversions = Object.keys(availableCurrencyConversions || {});
 
 	const renderBody = () => (
-		<FlexCol>
+		<div className={styles.flex_col}>
 			{currencyConversions?.map((key) => (
-				<Text size={12} color="#666" as="span" bold key={key}>
-					{`${key}`} 1 ={' '}
-					{`${Number(availableCurrencyConversions[key])?.toFixed(2)}`}{' '}
+				<div className={styles.text} key={key}>
+					{`${key}`}
+					{' '}
+					1 =
+					{' '}
+					{`${Number(availableCurrencyConversions[key])?.toFixed(2)}`}
+					{' '}
 					{`${invoiceCurrency}`}
-				</Text>
+				</div>
 			))}
-		</FlexCol>
+		</div>
 	);
 
 	return (
-		<Container>
+		<div>
 			{currencyConversions?.length > 1 ? (
 				<Popover
 					theme="light"
@@ -39,8 +43,8 @@ const ExchangeDetails = ({
 					<Button>{children}</Button>
 				</Popover>
 			) : null}
-		</Container>
+		</div>
 	);
-};
+}
 
 export default ExchangeDetails;

@@ -1,43 +1,13 @@
-.ModifyButton {
+.modify_button {
 	margin-right: 5px;
 }
 
-.ExchangeRateType {
-	height: 10px;
-	margin-top: 18px;
-	margin-bottom: 18px;
-	margin-left: 12px;
-	font-size: 14px;
-	font-weight: bold;
-	line-height: 20px;
-}
-
-.ExchangeRateForm {
-	width: 340px;
-	border-radius: 10px;
-}
-
-.DateHeading {
-	height: 16px;
+.heading {
 	margin-bottom: 18px;
 	font-size: 12px;
 	font-weight: bold;
 	line-height: 16px;
 	color: #4f4f4f;
-}
-
-.Heading {
-	margin-bottom: 18px;
-	font-size: 12px;
-	font-weight: bold;
-	line-height: 16px;
-	color: #4f4f4f;
-}
-
-.Buttons {
-	width: 350px;
-	background: #fff;
-	border-radius: 0 0 10px 10px;
 }
 
 .form_container {
