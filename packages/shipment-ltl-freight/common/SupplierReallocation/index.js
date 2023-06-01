@@ -1,6 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { InputController, SelectController, AsyncSelectController, useForm } from '@cogoport/forms';
+import { AsyncSelectController, useForm } from '@cogoport/forms';
 import React, { useContext } from 'react';
 
 import useUpdateShipmentService from '../../hooks/useUpdateShipmentService';
@@ -8,7 +8,7 @@ import useUpdateShipmentService from '../../hooks/useUpdateShipmentService';
 import getControls from './getControls';
 import styles from './styles.module.css';
 
-const controlsMapping = { asyncSelect: AsyncSelectController, select: SelectController, number: InputController };
+const controlsMapping = { asyncSelect: AsyncSelectController };
 
 function FormElement(props) {
 	const { name, type, label, errors } = props || {};
@@ -29,23 +29,15 @@ function FormElement(props) {
 function SupplierReallocation({
 	serviceData = [],
 	setShow = () => {},
-	isAdditional = false,
 }) {
-	const { shipment_data, refetch, refetchServices, primary_service = {} } = useContext(ShipmentDetailContext);
+	const { refetch, refetchServices, primary_service = {} } = useContext(ShipmentDetailContext);
 	const { service_provider = {} } = primary_service;
-
-	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
 
 	const serviceObj = serviceData?.[0] || {};
 	const { service_type } = serviceObj || {};
 
-	const { defaultValues, controls, showAllControls } = getControls({
+	const { defaultValues, controls } = getControls({
 		serviceObj,
-		shipment_type,
-		documents,
-		isAdditional,
-		trade_type,
-		payment_term,
 	});
 
 	const { handleSubmit, control, formState: { errors } } = useForm({ defaultValues });
@@ -66,7 +58,7 @@ function SupplierReallocation({
 	const onUpdate = (values) => {
 		const payload = {
 			ids                 : serviceData?.map((item) => item?.id),
-			data                : { ...values },
+			data                : { service_provider_id: values?.service_provider_id },
 			service_type,
 			performed_by_org_id : service_provider?.id,
 		};
@@ -87,7 +79,6 @@ function SupplierReallocation({
 				<Modal.Header title={(
 					<div className={styles.header}>
 						Supplier Reallocation
-						{showAllControls ? ' & BL Details' : null}
 					</div>
 				)}
 				/>
