@@ -92,12 +92,12 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 
 	const departure = formatDate({
 		date       : primaryServiceDetails?.[0]?.departure,
-		dateFormat : GLOBAL_CONSTANTS.format.date['dd/MM/yyyy'],
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 	});
 
 	const arrival = formatDate({
 		date       : primaryServiceDetails?.[0]?.arrival,
-		dateFormat : GLOBAL_CONSTANTS.format.date['dd/MM/yyyy'],
+		dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 	});
 
 	return (
@@ -169,7 +169,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 									<div className={styles.secondary_text}>
 										{formatDate({
 											date       : primaryServiceDetails?.[0]?.departure,
-											dateFormat : GLOBAL_CONSTANTS.format.date['dd/MM/yyyy'],
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 										})}
 									</div>
 								</div>
@@ -192,7 +192,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 									<div className={styles.secondary_text}>
 										{formatDate({
 											date       : primaryServiceDetails?.[0]?.arrival,
-											dateFormat : GLOBAL_CONSTANTS.format.date['dd/MM/yyyy'],
+											dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 										})}
 									</div>
 								</div>
@@ -251,7 +251,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 										date: filters?.status !== 'approved'
 											? item?.created_at
 											: item?.updated_at,
-										dateFormat: GLOBAL_CONSTANTS.format.date['dd/MM/yyyy'],
+										dateFormat: GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 									})}
 								</div>
 							</div>

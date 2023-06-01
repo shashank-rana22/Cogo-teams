@@ -104,7 +104,6 @@
 }
 
 .hs_code_text{
-    margin-left   : 4;
     max-width: 200px;
     white-space   : nowrap;
 	overflow     : hidden;
