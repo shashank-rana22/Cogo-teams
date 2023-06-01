@@ -13,7 +13,7 @@ const useUpdateTicketActivity = ({
 		authkey : 'post_tickets_activity',
 	}, { manual: false });
 
-	const updateTicketActivity = async (status = '', ID = '') => {
+	const updateTicketActivity = async (status = '', id = '') => {
 		try {
 			const isReslove = status?.toLowerCase() === 'resolve';
 
@@ -22,7 +22,7 @@ const useUpdateTicketActivity = ({
 					UserType      : 'ticket_user',
 					PerformedByID : profile?.user?.id,
 					Type          : isReslove ? 'mark_as_resolved' : 'reopened',
-					TicketID      : [Number(ID)],
+					TicketID      : [Number(id)],
 					Status        : isReslove ? 'resolved' : 'reopened',
 				},
 			});
