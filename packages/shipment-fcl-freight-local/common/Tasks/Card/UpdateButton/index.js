@@ -3,9 +3,9 @@ import { RPASearch } from '@cogoport/ocean-modules';
 
 import styles from './styles.module.css';
 
-const disabledStakeholders = ['release_desk', 'collection_desk'];
+const DISABLED_STAKEHOLDERS = ['release_desk', 'collection_desk'];
 
-const rpaSupportedTasks = [
+const RPA_SUPPORTED_TASKS = [
 	'upload_booking_note',
 	'update_container_details',
 	'upload_draft_bill_of_lading',
@@ -42,10 +42,10 @@ function UpdateButton({
 		buttonText = 'Review';
 	}
 
-	const disableTask = disabledStakeholders.includes(task?.assigned_stakeholder);
+	const disableTask = DISABLED_STAKEHOLDERS.includes(task?.assigned_stakeholder);
 
 	if (
-		rpaSupportedTasks.includes(task.task)
+		RPA_SUPPORTED_TASKS.includes(task.task)
 		&& (task.task !== 'upload_si')
 	) {
 		return (

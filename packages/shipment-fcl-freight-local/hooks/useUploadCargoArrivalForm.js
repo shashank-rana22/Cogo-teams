@@ -10,7 +10,7 @@ import { useRef } from 'react';
 import compareCargoArrivalData from '../utils/compareCargoArrivalData';
 import formatCargoArrivalData from '../utils/formatCargoArrivalData';
 
-const cargoArrivalData = {
+const CARGO_ARRIVAL_DATA = {
 	notify_party      : '',
 	consignee         : '',
 	shipper           : '',
@@ -89,7 +89,7 @@ const useUploadCargoArrivalForm = ({
 	);
 
 	const templateInitialValues = {
-		...cargoArrivalData,
+		...CARGO_ARRIVAL_DATA,
 		port_of_loading   : summary?.origin_port?.display_name || '',
 		port_of_discharge : summary?.destination_port?.display_name || '',
 		volume            : summary?.volume ? String(summary?.volume) : '',
@@ -103,13 +103,13 @@ const useUploadCargoArrivalForm = ({
 		shipper        : summary?.consignee_details?.company_name || summary?.consignee_detail?.company_name || '',
 		containers     : [
 			{
-				...(cargoArrivalData?.containers?.[0] || {}),
+				...(CARGO_ARRIVAL_DATA?.containers?.[0] || {}),
 				marks_and_number : 'Nm',
 				container_no     : container_numbers.join(', ') || '',
 			},
 		],
 		shipment_details: {
-			...(cargoArrivalData?.shipment_details || {}),
+			...(CARGO_ARRIVAL_DATA?.shipment_details || {}),
 			vessel     : movement_details?.[0]?.vessel || '',
 			voyage     : movement_details?.[0]?.voyage || '',
 			obl_number : mbl_details?.[0]?.data?.document_number || '',
@@ -143,7 +143,7 @@ const useUploadCargoArrivalForm = ({
 		ref.current.submit.handleSubmit((values) => {
 			const formmatedValues = formatCargoArrivalData(values);
 
-			const check = compareCargoArrivalData(formmatedValues, cargoArrivalData);
+			const check = compareCargoArrivalData(formmatedValues, CARGO_ARRIVAL_DATA);
 
 			if (check) {
 				setSavedData(null);

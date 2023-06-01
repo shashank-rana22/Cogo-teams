@@ -3,7 +3,7 @@ import React, { forwardRef, useImperativeHandle } from 'react';
 
 import styles from './styles.module.css';
 
-const controlTypeMapping = {
+const CONTROL_TYPE_MAPPING = {
 	file     : UploadController,
 	text     : InputController,
 	number   : InputController,
@@ -11,7 +11,7 @@ const controlTypeMapping = {
 };
 
 function FormElement({ name, label, errors, type, span, ...rest }) {
-	const Element = controlTypeMapping[type];
+	const Element = CONTROL_TYPE_MAPPING[type];
 	const widthVal = (span / 12) * 100;
 	return Element ? (
 		<div style={{ width: `${widthVal}%` }}>

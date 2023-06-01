@@ -1,4 +1,4 @@
-const numberKeys = ['bls_count', 'volume', 'weight', 'packages_count'];
+const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
 
 const extraParamsToMerge = (values) => {
 	if (values?.dimension) {
@@ -42,7 +42,7 @@ const formatDataForService = (
 		}
 
 		if (sendKeyObj?.source === 'formData') {
-			if (numberKeys.includes(sendKeyObj?.key)) {
+			if (NUMBER_KEYS.includes(sendKeyObj?.key)) {
 				payloadObj[sendKeyObj?.key] = Number(rawValues?.[sendKeyObj?.key_from_source] || 1);
 			} else {
 				payloadObj[sendKeyObj?.key] = rawValues?.[sendKeyObj?.key_from_source];

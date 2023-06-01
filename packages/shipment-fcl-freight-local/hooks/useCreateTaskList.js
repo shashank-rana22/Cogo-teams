@@ -5,7 +5,7 @@ import useGetPendingTasks from './useGetPendingTask';
 import useGetProcess from './useGetProcess';
 import useGetListDocuments from './useListDocuments';
 
-const docTasks = ['upload_document', 'approve_document', 'amend_document'];
+const DOC_TASKS = ['upload_document', 'approve_document', 'amend_document'];
 
 const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 	const [filters, setFilters] = useState({ uploaded_by_org_id: '', service_type: '' });
@@ -51,7 +51,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 
 	const taskConfigsForAllShipmentTasks = useMemo(() => (taskConfigs || [])
 		.map(({ states }) => states?.map(({ configs }) => configs?.filter(
-			(task) => docTasks.includes(task?.task_type)
+			(task) => DOC_TASKS.includes(task?.task_type)
 				&& task?.trade_type === primary_service?.trade_type,
 		)))
 		.flat(2), [taskConfigs, primary_service?.trade_type]);
