@@ -63,6 +63,7 @@ function ApprovalForm({ errors, setValue, control, formValues, checkout_approval
 							<InputController
 								name="amount"
 								control={control}
+								type="number"
 								size="md"
 								placeholder="Enter amount"
 								rules={{ required: 'This field is required' }}
