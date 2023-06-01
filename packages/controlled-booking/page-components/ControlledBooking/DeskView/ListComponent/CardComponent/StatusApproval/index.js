@@ -24,9 +24,6 @@ function StatusApproval({ item, refetchBookingList }) {
 	const { checkout_detail = [] } = item;
 	const { detail } = checkout_detail;
 	const { checkout_approvals } = detail || {};
-
-	const { advance_payment_info } = checkout_approvals?.[0] || {};
-
 	const { control, handleSubmit, formState: { errors = {} }, watch, setValue } = useForm();
 
 	const { updateState = () => {}, loading } = useStateUpdate({
@@ -66,7 +63,7 @@ function StatusApproval({ item, refetchBookingList }) {
 			<Button
 				size="sm"
 				themeType="primary"
-				disbaled={loading || advance_payment_info?.eligible_for_booking}
+				disbaled={loading}
 				onClick={() => setModalType('approved')}
 			>
 				Approve

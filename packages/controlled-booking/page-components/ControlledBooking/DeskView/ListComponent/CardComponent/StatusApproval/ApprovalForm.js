@@ -52,7 +52,6 @@ function ApprovalForm({ errors, setValue, control, formValues, checkout_approval
 								}, {	label: 'INR', value: 'INR' }]}
 								rules={{ required: 'This field is required' }}
 								value={checkout_approvals?.[0]?.advance_payment_info?.amount_currency}
-								disabled
 							/>
 						</div>
 
@@ -64,7 +63,6 @@ function ApprovalForm({ errors, setValue, control, formValues, checkout_approval
 								placeholder="Enter amount"
 								rules={{ required: 'This field is required' }}
 								value={checkout_approvals?.[0]?.advance_payment_info?.amount}
-								disabled
 							/>
 						</div>
 
