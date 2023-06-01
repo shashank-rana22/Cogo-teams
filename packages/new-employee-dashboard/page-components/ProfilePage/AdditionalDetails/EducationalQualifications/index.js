@@ -1,6 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
+
+import EmptyState from '../../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
@@ -84,6 +86,11 @@ function EducationalQualifications({ profileData }) {
 			</div>
 		);
 	});
+
+	if (isEmpty(employee_education_details)) {
+		return <EmptyState />;
+	}
+
 	return (
 		<div className={styles.container}>
 			{educationDetails()}

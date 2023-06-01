@@ -1,5 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
+
+import EmptyState from '../../../../common/EmptyState';
 
 import styles from './styles.module.css';
 
@@ -67,6 +70,11 @@ function EmploymentHistory({ profileData }) {
 			</div>
 		);
 	});
+
+	if (isEmpty(employee_experience_details)) {
+		return <EmptyState emptyText="Employment history not found" />;
+	}
+
 	return (
 		<div className={styles.container}>
 			{employmentDetails()}

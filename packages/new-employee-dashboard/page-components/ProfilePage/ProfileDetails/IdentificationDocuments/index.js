@@ -1,6 +1,7 @@
 import { Button, Popover } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
+import EmptyState from '../../../../common/EmptyState';
 import PreviewDocumet from '../../../../common/PreviewDocumet';
 import useUpdateEmployeeDocuments from '../../../hooks/useUpdateEmployeeDocuments';
 import RejectPopoverContent from '../RejectPopoverContent';
@@ -18,6 +19,10 @@ function IdentificationDocuments({ profileData, getEmployeeDetails }) {
 		setInputValue,
 		setShowRejectPopover = () => {},
 	} = useUpdateEmployeeDocuments({ getEmployeeDetails });
+
+	if (isEmpty(documents)) {
+		return <EmptyState emptyText="Identification documents not found" />;
+	}
 
 	return (
 		<div className={styles.container}>
