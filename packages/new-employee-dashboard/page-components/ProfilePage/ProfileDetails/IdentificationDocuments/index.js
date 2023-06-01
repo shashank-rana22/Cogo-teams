@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const IDENTIFICATION_DOCUMENT_EXCLUSION_LIST = ['resume'];
 
-function IdentificationDocuments({ profileData, getEmployeeDetails }) {
+function IdentificationDocuments({ mainApiLoading, profileData, getEmployeeDetails }) {
 	const { documents } = profileData || {};
 
 	const {
@@ -79,18 +79,23 @@ function IdentificationDocuments({ profileData, getEmployeeDetails }) {
 											interactive
 											visible={showRejectPopover === id}
 										>
-											<Button onClick={() => setShowRejectPopover(id)} loading={loading}>
+											<Button
+												onClick={() => setShowRejectPopover(id)}
+												loading={loading || mainApiLoading}
+											>
 												Reject
 											</Button>
 										</Popover>
 									</div>
 
 									<div className={styles.approve_btn}>
-										<Button onClick={() => onClickApproveButton(id)} loading={loading}>
+										<Button
+											onClick={() => onClickApproveButton(id)}
+											loading={loading || mainApiLoading}
+										>
 											Approve
 										</Button>
 									</div>
-
 								</div>
 							) : null
       }
