@@ -10,7 +10,7 @@ const useUpdateRfqRateMargin = ({
 }) => {
 	const endpoint = '/update_rfq_rate_card_margin';
 
-	const [trigger] = useRequest({
+	const [{ data }, trigger] = useRequest({
 		url    : endpoint,
 		method : 'POST',
 	}, { manual: true });
@@ -24,12 +24,16 @@ const useUpdateRfqRateMargin = ({
 					card_state : 'modified_and_sent',
 				},
 			});
+
 			if (response?.status === 200) {
 				Toast.success('Rate updated successfully');
 			}
+
+			return response;
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.data));
 		}
+		return null;
 	};
 
 	const updateMargin = async ({ editedMargins, convenienceDetails, rfq_rate_card_id = '' }) => {
@@ -58,7 +62,7 @@ const useUpdateRfqRateMargin = ({
 			margins          : final_margins,
 		};
 
-		updateRfqRateMargin({ editBody, rfq_rate_card_id });
+		return updateRfqRateMargin({ editBody, rfq_rate_card_id });
 	};
 
 	return {

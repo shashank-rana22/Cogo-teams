@@ -64,15 +64,18 @@ function BreakdownDetails({
 		conversions,
 	);
 
-	const save_card_margins = () => {
-		updateMargin({
+	const save_card_margins = async () => {
+		const response = await updateMargin({
 			editedMargins,
 			convenienceDetails,
 			rfq_rate_card_id,
 		});
-		setShowPrice({});
-		refetchRateCards({ rfq_id });
-		getRfqsForApproval();
+
+		if (response?.status === 200) {
+			setShowPrice({});
+			refetchRateCards({ rfq_id });
+			getRfqsForApproval();
+		}
 	};
 
 	return (
