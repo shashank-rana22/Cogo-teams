@@ -62,7 +62,7 @@ const controls = [
 		isClearable           : true,
 	},
 	{
-		name        : 'location',
+		name        : 'office_location',
 		type        : 'select',
 		label       : 'Location Details',
 		placeholder : 'Select Location',
@@ -72,6 +72,20 @@ const controls = [
 		],
 		rules: {
 			required: 'Location is required',
+		},
+	},
+
+	{
+		name        : 'cogoport_email',
+		label       : 'Cogoport Email ID',
+		placeholder : 'Enter a valid email id',
+		type        : 'text',
+		rules       : {
+			required : 'Email is required',
+			pattern  : {
+				value   : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+				message : 'Email is invalid',
+			},
 		},
 	},
 

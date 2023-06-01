@@ -4,13 +4,13 @@ import FormComponent from './FormComponent';
 import SuccessComponent from './SucessComponent';
 
 function AddNewJoinee() {
-	const [activePage, setActivePage] = useState('');
+	const [activePage, setActivePage] = useState('form');
 
-	if (activePage === 'success') {
-		return <SuccessComponent />;
+	if (activePage === 'form') {
+		return <FormComponent setActivePage={setActivePage} />;
 	}
 
-	return <FormComponent setActivePage={setActivePage} />;
+	return <SuccessComponent activePage={activePage} />;
 }
 
 export default AddNewJoinee;

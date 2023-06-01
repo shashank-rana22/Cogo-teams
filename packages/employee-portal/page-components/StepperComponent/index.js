@@ -10,20 +10,26 @@ function StepperComponent({ data }) {
 		offer_letter_signed = {},
 		personal_details = {},
 		documents_signed = {},
+		company_policies_read,
 	} = progress_stats;
+
 	const { documents_signed:document_sign = false } = documents_signed;
+
 	const {
 		bank_details = false,
 		educational_qualification = false,
 		employment_history = false,
 		resume = false,
 	} = additional_info_added;
+
 	const { get_offer_letter_signed = false } = offer_letter_signed;
+
 	const {
 		address_details = false,
 		identification_documents = false,
 		personal_information = false,
 	} = personal_details;
+
 	const MAPPING = [
 		{
 			name      : 'profile_details',
@@ -52,7 +58,7 @@ function StepperComponent({ data }) {
 		{
 			name      : 'company_policies',
 			icon      : IcMDocument,
-			is_added  : false,
+			is_added  : company_policies_read?.company_policies_read,
 			sub_title : 'Read',
 		},
 

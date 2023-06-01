@@ -1,15 +1,19 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 
 import AnimatedTick from '../../../common/AnimatedTick';
+import useGetEmployeeDetails from '../useGetEmployeeDetails';
 
 import styles from './styles.module.css';
 
-function SuccessComponent() {
+function SuccessComponent({ activePage }) {
 	const router = useRouter();
 
-	const name = 'Aditya Singh';
-	const employeeCode = '(Cogo-1894)';
+	const { data } = useGetEmployeeDetails({ activePage });
+
+	const { detail } = data || {};
+	const { name, employee_code } = detail || {};
 
 	const onClickGoToDashboard = () => {
 		const href = '/new-employee-dashboard';
@@ -25,9 +29,9 @@ function SuccessComponent() {
 
 			<div>
 				<span style={{ fontWeight: '800' }}>
-					{name}
+					{startCase(name)}
 					{' '}
-					{employeeCode}
+					{employee_code}
 					{' '}
 				</span>
 				{' '}

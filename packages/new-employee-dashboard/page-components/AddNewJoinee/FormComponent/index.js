@@ -19,8 +19,8 @@ const CONTROLS_MAPPING = {
 
 const PERSONAL_DETAILS_MAPPING = ['name', 'personal_email', 'mobile_number'];
 
-const EMPLOYEE_DETAILS_MAPPING = ['employee_code',
-	'designation', 'date_of_joining', 'location', 'hiring_manager', 'hiring_manager_email'];
+const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
+	'office_location', 'cogoport_email', 'hiring_manager', 'hiring_manager_email'];
 
 const HR_DETAILS_MAPPING = ['hr_name', 'hr_email'];
 
@@ -47,7 +47,7 @@ const SECTION_MAPPING = [
 function FormComponent({ setActivePage }) {
 	const router = useRouter();
 
-	const [{ loading }, trigger] = useHarbourRequest({
+	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/create_employee_detail',
 	}, { manual: true });
@@ -64,15 +64,13 @@ function FormComponent({ setActivePage }) {
 				...values,
 				performed_by_type   : 'agent',
 				performed_by_id     : '961cc7d4-53f0-4319-96e9-2a90217bdc4e',
-				address             : '',
-				date_of_birth       : new Date(),
-				gender              : 'female',
 				mobile_number       : values?.mobile_number?.number,
 				mobile_country_code : values?.mobile_number?.country_code,
 
 			};
-			await trigger({ data: payload });
-			setActivePage('success');
+			const res = await trigger({ data: payload });
+
+			setActivePage(res?.data?.id);
 		} catch (error) {
 			console.log('error :: ', error);
 		}
