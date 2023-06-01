@@ -4,12 +4,12 @@ import { useSelector } from '@cogoport/store';
 import AllCourses from '../AllCourses';
 import HomePage from '../HomePage';
 
-function RenderComponent({ CourseCategoryData, currentCategory, setCurrentCategory }) {
+function RenderComponent({ CourseCategoryData, currentCategory, setCurrentCategory, courseCategories }) {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
 
 	const { query } = useRouter();
 
-	// console.log('courseCategories', CourseCategoryData);
+	console.log('courseCategories', CourseCategoryData);
 
 	const { viewType = '' } = query;
 
@@ -18,7 +18,7 @@ function RenderComponent({ CourseCategoryData, currentCategory, setCurrentCatego
 			<AllCourses
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
-				courseCategories={CourseCategoryData}
+				courseCategories={courseCategories}
 			/>
 		);
 	}

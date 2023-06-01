@@ -5,6 +5,7 @@ import CategoriesCard from './component/CategoriesCard';
 import styles from './styles.module.css';
 
 function CategoryCard({ CourseCategoryData }) {
+	// console.log('CourseCategoryData', CourseCategoryData);
 	const CAROUSELDATA = (CourseCategoryData?.list || []).map((item, index) => ({
 		key    : index,
 		render : () => (
@@ -29,7 +30,6 @@ function CategoryCard({ CourseCategoryData }) {
 			</div>
 		</div>
 	);
-	// return <h1>hello</h1>;
 }
 
 export default CategoryCard;
