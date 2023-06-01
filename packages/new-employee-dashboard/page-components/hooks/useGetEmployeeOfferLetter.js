@@ -8,11 +8,12 @@ const useGetOfferLetter = () => {
 	const params = {
 		employee_details_required : true,
 		filters                   : {
-			employee_detail_id: profile_id,
+			employee_detail_id : profile_id,
+			status             : ['active', 'approved', 'accepted'],
 		},
 	};
 
-	const [{ data, loading }] = useHarbourRequest({
+	const [{ data, loading }, trigger] = useHarbourRequest({
 		method : 'get',
 		url    : '/list_employee_offer_letters',
 		params,
@@ -23,6 +24,7 @@ const useGetOfferLetter = () => {
 	return {
 		offerLetter,
 		loading,
+		offerLetterApiRefetch: trigger,
 	};
 };
 
