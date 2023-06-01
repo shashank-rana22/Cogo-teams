@@ -31,8 +31,7 @@ function SimilarCourses({ course_details }) {
 	));
 
 	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
+		filters: {
 			status       : 'active',
 			user_id,
 			faq_topic_id : topics,

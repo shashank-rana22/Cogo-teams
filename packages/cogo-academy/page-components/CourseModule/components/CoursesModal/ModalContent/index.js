@@ -13,8 +13,7 @@ function ModalContent({ finalCourseCategories, loading, currentCategory, setCurr
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
 
 	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
+		filters: {
 			status: 'active',
 			user_id,
 		},

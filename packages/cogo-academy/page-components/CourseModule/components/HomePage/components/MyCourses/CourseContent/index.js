@@ -17,8 +17,7 @@ function CourseContent({ activeTab, user_id }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
+		filters: {
 			status: 'active',
 			user_id,
 		},

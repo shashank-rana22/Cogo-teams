@@ -1,5 +1,6 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -24,9 +25,8 @@ function CategoriesCard({ data, setCurrentCategory }) {
 				setCurrentCategory(data?.id);
 				router.push('/learning/course?viewType=all_courses');
 			}}
-
 		>
-			<div className={styles.title}>{data?.display_name}</div>
+			<div className={styles.title}>{startCase(data?.display_name)}</div>
 
 			<div className={styles.details}>
 

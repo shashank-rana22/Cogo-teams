@@ -1,3 +1,4 @@
+import { Pagination } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMTick } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -24,23 +25,33 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 	const [activeTab, setActiveTab] = useState();
 	const [filters, setFilters] = useState('');
 	const [selected, setSelected] = useState('');
-
+	const [page, setPage] = useState(1);
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
+		page,
+		filters: {
 			status: 'active',
 			user_id,
 		},
 	});
+
+	const page_limit = 12;
 	const ClickOptions = (active, category, select) => {
 		setActiveTab(active);
 		setCurrentCategory(category);
 		setSelected(select);
 	};
 
-	const { data = {}, loading } = useListCourseUserMappings({ activeTab, params, query, selected, currentCategory });
+	const { data = {}, loading } = useListCourseUserMappings({
+		activeTab,
+		params,
+		query,
+		selected,
+		currentCategory,
+		page_limit,
+		page,
+	});
 
 	const { HANDLE_CLICK_MAPPINGS } = HANDLE_CLICK_MAPPING();
 
@@ -48,7 +59,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 		return <LoadingState rowsCount={7} />;
 	}
 
-	// console.log('data1', activeTab);
+	console.log('data1', page);
 	// console.log('data2', currentCategory);
 	// console.log('data3', courseCategories);
 	// console.log('params', params);
@@ -142,6 +153,17 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 					/>
 				))}
 			</div>
+
+			{data?.total_count > 12 && (
+				<div className={styles.pagination_container}>
+					<Pagination
+						totalItems={data?.total_count || 0}
+						currentPage={page || 1}
+						pageSize={data?.page_limit}
+						onPageChange={setPage}
+					/>
+				</div>
+			)}
 
 		</div>
 	);

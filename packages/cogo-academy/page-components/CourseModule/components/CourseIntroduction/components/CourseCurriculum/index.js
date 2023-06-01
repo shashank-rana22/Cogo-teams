@@ -12,7 +12,7 @@ function CourseCurriculum({ data }) {
 		text         : <IcMText width="24px" height="24px" fill="white" />,
 	};
 
-	console.log('data', data);
+	// console.log('data', data);
 
 	return (
 		<div className={styles.container}>
