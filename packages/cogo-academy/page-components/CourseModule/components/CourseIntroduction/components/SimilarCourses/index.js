@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 import LoadingState from '../../../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../../../configs/BUTTON_CONTENT_MAPPING';
-import HANDLE_CLICK_MAPPING from '../../../../configs/HANDLE_CLICK_MAPPING.js';
+import HANDLE_CLICK_MAPPING from '../../../../configs/HANDLE_CLICK_MAPPING';
 import useListCourseUserMappings from '../../../../hooks/useListCourseUserMappings';
 import CourseCard from '../../../CourseCard';
 

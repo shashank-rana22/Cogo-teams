@@ -1,13 +1,17 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useCallback, useEffect } from 'react';
+import { useCallback } from 'react';
 
 const useGetUserCourse = ({ course_id, user_id }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_user_course',
 		method : 'GET',
-	}, { manual: true });
+		params : {
+			course_id,
+			user_id,
+		},
+	}, { manual: false });
 
 	const getUserCourse = useCallback(async () => {
 		try {
@@ -22,10 +26,6 @@ const useGetUserCourse = ({ course_id, user_id }) => {
 		}
 		console.log('here');
 	}, [trigger, user_id, course_id]);
-
-	useEffect(() => {
-		getUserCourse({ id: course_id });
-	}, [course_id, getUserCourse]);
 
 	return {
 		data,
