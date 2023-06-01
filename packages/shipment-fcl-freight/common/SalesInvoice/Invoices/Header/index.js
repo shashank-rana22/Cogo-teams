@@ -1,7 +1,7 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useSelector } from '@cogoport/store';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import EditInvoicePreference from './EditInvoicePreference';
 import ExchangeRate from './ExchangeRate';

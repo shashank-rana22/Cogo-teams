@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { TextAreaController, UploadController, useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useCreditNoteNullify from '../../../../../../../hooks/useCreditNoteNullify';
 import RequestCN from '../RequestCN';

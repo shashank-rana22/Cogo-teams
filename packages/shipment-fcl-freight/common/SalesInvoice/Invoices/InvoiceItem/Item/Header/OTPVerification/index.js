@@ -1,6 +1,6 @@
 import { Modal, Button, RadioGroup, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useGetOrgUsersData from '../../../../../../../hooks/useGetOrgUsersData';
 import useSendInvoiceOtp from '../../../../../../../hooks/useSendInvoiceOtp';

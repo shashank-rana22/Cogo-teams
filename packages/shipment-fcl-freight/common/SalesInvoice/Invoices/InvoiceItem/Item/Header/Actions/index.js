@@ -8,7 +8,7 @@ import {
 import { dynamic } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 

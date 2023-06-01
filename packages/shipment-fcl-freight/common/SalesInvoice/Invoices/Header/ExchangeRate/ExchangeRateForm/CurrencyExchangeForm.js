@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
@@ -27,6 +27,24 @@ function CurrencyExchangeForm({
 		formState: { errors },
 		control,
 	} = useForm({ defaultValues });
+
+	const handleAddRate = async (value) => {
+		const exchangeCurrencyHash = {};
+		const currencyData = value;
+
+		Object.keys(value || {}).forEach((val) => {
+			const key = `${currencyData[val]?.[0]?.from_currency}_${currencyData?.[val]?.[0]?.to_currency}`;
+			if (currencyData?.[val]?.[0]?.exchange_rate) {
+				exchangeCurrencyHash[key] = Number(
+					currencyData?.[val]?.[0]?.exchange_rate,
+				);
+			}
+		});
+		if (Object.keys(exchangeCurrencyHash).length === 0) {
+			Toast.error('Please fill atleast one field !');
+		}
+		handleFormSubmit(exchangeCurrencyHash);
+	};
 
 	return (
 		<Modal
@@ -60,7 +78,7 @@ function CurrencyExchangeForm({
 
 				<Button
 					disabled={loading || !isEmpty(errors)}
-					onClick={handleSubmit(handleFormSubmit)}
+					onClick={handleSubmit(handleAddRate)}
 					style={{ marginLeft: '16px' }}
 				>
 					Add rate

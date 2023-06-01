@@ -2,7 +2,7 @@ import { Modal, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/ocean-modules';
-import React, { useEffect, useState, useContext } from 'react';
+import { useEffect, useState, useContext } from 'react';
 
 import useCreateShipmentCreditNote from '../../../../../../../hooks/useCreateShipmentCreditNote';
 import creditNoteControls from '../../../../../helpers/creditNoteControls';

@@ -1,11 +1,8 @@
-import { ShipmentDetailContext } from '@cogoport/context';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useCallback, useContext } from 'react';
+import { useEffect, useCallback } from 'react';
 
-const useListCurrencyConversion = () => {
-	const { shipment_data } = useContext(ShipmentDetailContext);
-
+const useListCurrencyConversion = ({ shipment_id = '' }) => {
 	const [{ data }, trigger] = useRequest({
 		url    : '/list_shipment_currency_conversions',
 		method : 'GET',
@@ -15,13 +12,13 @@ const useListCurrencyConversion = () => {
 		(async () => {
 			try {
 				await trigger({
-					params: { filters: { shipment_id: shipment_data?.id } },
+					params: { filters: { shipment_id } },
 				});
 			} catch (err) {
 				toastApiError(err);
 			}
 		})();
-	}, [shipment_data?.id, trigger]);
+	}, [shipment_id, trigger]);
 
 	useEffect(() => {
 		getCurrencyConversion();

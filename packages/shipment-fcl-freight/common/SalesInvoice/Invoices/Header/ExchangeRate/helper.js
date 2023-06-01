@@ -2,10 +2,10 @@ import useGetShipmentQuotation from '../../../../../hooks/useGetShipmentQuotatio
 import useListCurrencyConversion from '../../../../../hooks/useListCurrencyConversion';
 import useUpdateCurrencyConversion from '../../../../../hooks/useUpdateCurrencyConversion';
 
-const Helper = ({ invoiceCurrency = '', refetch = () => {} }) => {
-	const { currencyConversionData } = useListCurrencyConversion();
-	const { quotationData } = useGetShipmentQuotation({ invoiceCurrency });
-	const { handleFormSubmit, loading } = useUpdateCurrencyConversion({ refetch });
+const Helper = ({ invoiceCurrency = '', refetch = () => {}, shipment_id = '' }) => {
+	const { currencyConversionData } = useListCurrencyConversion({ shipment_id });
+	const { quotationData } = useGetShipmentQuotation({ shipment_id });
+	const { handleFormSubmit, loading } = useUpdateCurrencyConversion({ shipment_id, refetch });
 
 	const differentCurrenciesHash = {};
 	const obj = {};

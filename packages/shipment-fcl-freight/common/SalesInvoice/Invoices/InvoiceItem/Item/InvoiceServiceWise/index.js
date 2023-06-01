@@ -1,5 +1,4 @@
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import React from 'react';
 
 import CardList from '../../../../commons/CardList';
 
