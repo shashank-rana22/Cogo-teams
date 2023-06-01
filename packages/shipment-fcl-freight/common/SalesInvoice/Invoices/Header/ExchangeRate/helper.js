@@ -5,7 +5,11 @@ import useUpdateCurrencyConversion from '../../../../../hooks/useUpdateCurrencyC
 const Helper = ({ invoiceCurrency = '', refetch = () => {}, setOpen = () => {} }) => {
 	const { currencyConversionData } = useListCurrencyConversion();
 	const { quotationData } = useGetShipmentQuotation({ invoiceCurrency });
-	const { handleFormSubmit, loading } = useUpdateCurrencyConversion({ refetch, setOpen });
+	const refetchAfterApiCall = () => {
+		refetch();
+		setOpen(false);
+	};
+	const { handleFormSubmit, loading } = useUpdateCurrencyConversion({ refetch: refetchAfterApiCall });
 
 	const differentCurrenciesHash = {};
 	const obj = {};

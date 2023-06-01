@@ -1,15 +1,16 @@
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useContext } from 'react';
 
-const useUpdateCurrencyConversion = ({ refetch = () => {}, setOpen = () => {} }) => {
+const useUpdateCurrencyConversion = ({ refetch = () => {}, successMessage = 'Rate Added Successfully!' }) => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_currency_conversion',
 		method : 'POST',
-	});
+	}, { manual: true });
 
 	const handleFormSubmit = async (value) => {
 		const exchangeCurrencyHash = {};
@@ -23,7 +24,6 @@ const useUpdateCurrencyConversion = ({ refetch = () => {}, setOpen = () => {} })
 				);
 			}
 		});
-		console.log('hiii');
 		if (Object.keys(exchangeCurrencyHash).length === 0) {
 			Toast.error('Please fill atleast one field !');
 			return;
@@ -36,11 +36,10 @@ const useUpdateCurrencyConversion = ({ refetch = () => {}, setOpen = () => {} })
 					updated_currency_conversion_rate : exchangeCurrencyHash,
 				},
 			});
-			Toast.success('Rate Added Successfully!');
+			Toast.success(successMessage);
 			refetch();
-			setOpen(false);
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiError(err?.response?.data));
 		}
 	};
 
