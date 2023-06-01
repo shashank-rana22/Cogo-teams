@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
-import { startCase, isEmpty } from '@cogoport/utils';
+import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../CreateCourse/commons/EmptyState';
 import getChapter from '../../utils/getChapter';
@@ -54,7 +54,7 @@ function ModuleContent({
 			<div className={styles.header}>
 
 				<div>
-					{startCase(content_type)}
+					Title
 					:
 					{' '}
 					<span className={styles.name}>{name}</span>
@@ -127,6 +127,13 @@ function ModuleContent({
 				</div>
 			</div>
 
+			{!isEmpty(description) && (
+				<div className={styles.description}>
+					<h3>Description:</h3>
+					<p>{description}</p>
+				</div>
+			)}
+
 			<div className={styles.content}>
 				{content_type === 'text' ? <div dangerouslySetInnerHTML={{ __html: chapter_content }} />
 					: (
@@ -144,13 +151,6 @@ function ModuleContent({
 						/>
 					)}
 			</div>
-
-			{!isEmpty(description) && (
-				<div className={styles.description}>
-					<h3>Description:</h3>
-					<p>{description}</p>
-				</div>
-			)}
 
 			{!isEmpty(chapter_attachments) && (
 				<div className={styles.additional_resources}>
