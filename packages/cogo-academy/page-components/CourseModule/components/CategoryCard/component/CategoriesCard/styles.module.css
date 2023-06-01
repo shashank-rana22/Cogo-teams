@@ -1,9 +1,10 @@
-.container {
-	width: 300px;
-	padding: 10px;
-	margin: 6px;
-	border-radius: 6px;
-	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+.container{
+    margin: 10px;
+    padding: 10px;
+    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
+    border-radius: 6px;
+
+    
 }
 
 .title {
@@ -25,10 +26,21 @@
 	border-radius: 6px;
 }
 
-.pill_box {
-	display: flex;
-	flex-wrap: wrap;
-	width: 180px;
+.pill_box{
+    width: 180px;
+    display: flex;
+    flex-wrap: wrap;
+    
+    /* :global{
+        .ui_pill_container{
+            display: flex;
+            white-space: nowrap; 
+            align-items: center;
+            width: 80px; 
+            overflow: hidden;
+            text-overflow: ellipsis; 
+        }
+    } */
 }
 
 .courses {

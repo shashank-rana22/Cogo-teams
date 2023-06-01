@@ -1,4 +1,5 @@
-import { Button } from '@cogoport/components';
+import { Carousel, Tabs, TabPanel, Button } from '@cogoport/components';
+import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
 import CategoryCard from '../CategoryCard';
@@ -20,6 +21,7 @@ function HomePage({ user_id, courseCategoryData, categoryLoading }) {
 
 					<Button
 						themeType="tertiary"
+						onClick={() => router.push('/learning/course?viewType=all_courses')}
 					>
 						See All
 						{' '}
@@ -38,6 +40,7 @@ function HomePage({ user_id, courseCategoryData, categoryLoading }) {
 					<div className={styles.sub_category}>Recommended for You</div>
 					<Button
 						themeType="tertiary"
+						onClick={() => router.push('/learning/course?viewType=all_courses')}
 					>
 						See All
 						{' '}

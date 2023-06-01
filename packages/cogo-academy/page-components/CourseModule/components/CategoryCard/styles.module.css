@@ -1,8 +1,27 @@
-.container {
-	margin: 24px 0;
+.container{
+    margin: 20px 0px;
+    
+}
+.carousel_container {
+    margin: 24px 12px;
 
-	:global {
-		.ui_carousel_arrow {
+    :global{
+        .ui_carousel_container{
+            display: flex;
+            position: relative;
+            flex-wrap: wrap;
+        }
+
+        .ui_o0St8{
+            width: fit-content;
+            :hover{
+                background: #fffce6;
+                cursor: pointer;
+            }
+
+        }
+
+        .ui_carousel_arrow {
 			fill: #221f20;
 		}
 

@@ -9,15 +9,18 @@ const MAPPING = {
 	saved     : { is_saved: true },
 };
 
-function useListCourseUserMappings({ activeTab, params, query }) {
+function useListCourseUserMappings({ activeTab, params, query, selected, currentCategory }) {
 	const finalPayload = useMemo(() => ({
 		...params,
 		filters: {
 			...params.filters,
 			...MAPPING[activeTab],
-			q: query,
+			course_category_id:
+			(currentCategory === 'all_courses' || currentCategory === undefined) ? null : [`${currentCategory}`],
+			faq_topic_id : selected === '' ? null : selected,
+			q            : query,
 		},
-	}), [params, query, activeTab]);
+	}), [params, query, activeTab, currentCategory, selected]);
 
 	const [{ data = {}, loading }, trigger] = useRequest({
 		url    : '/list_user_courses',

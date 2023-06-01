@@ -1,14 +1,14 @@
-import { Tags } from '@cogoport/components';
-import React, { useState } from 'react';
+import { Chips } from '@cogoport/components';
+import React from 'react';
 
 import styles from './styles.module.css';
 
-function TagsSelect({ category }) {
+function TagsSelect({ category, selected, setSelected }) {
 	const topicName = [];
 	const options = category?.topics;
-	(options || []).forEach((item, index) => {
+	(options || []).forEach((item) => {
 		topicName.push({
-			key      : index,
+			key      : item.topic_id,
 			children : item.topic_name,
 			color    : 'grey',
 			tooltip  : false,
@@ -16,12 +16,14 @@ function TagsSelect({ category }) {
 			closable : true,
 		});
 	});
-
-	const [items, setItems] = useState(topicName);
-
 	return (
 		<div className={styles.container}>
-			<Tags items={items} onItemsChange={setItems} />
+			<Chips
+				enableMultiSelect
+				items={topicName}
+				selectedItems={selected}
+				onItemChange={setSelected}
+			/>
 		</div>
 	);
 }

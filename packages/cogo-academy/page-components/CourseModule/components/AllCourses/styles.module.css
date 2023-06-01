@@ -10,7 +10,7 @@
 	justify-content: center;
 	width: 120px;
 	height: 60px;
-	margin-right: 20px;
+	margin: 10px 16px;
 	cursor: pointer;
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
@@ -97,7 +97,7 @@
 .pill {
 	display: flex;
 	flex-wrap: wrap;
-	margin: 10px 0;
+	margin: 10px 16px;
 }
 
 .carousel_container {
