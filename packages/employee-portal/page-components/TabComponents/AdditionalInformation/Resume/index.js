@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 import useCreateEmployeeDocument from '../../../../hooks/useCreateEmployeeDocument';
-import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -14,14 +13,12 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function Resume() {
+function Resume({ getEmployeeDetails, data: info }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
 	const component = 'resume';
 
-	const { createEmployeeDocument } = useCreateEmployeeDocument({ component });
-
-	const { data: info } = useGetEmployeeDetails({});
+	const { createEmployeeDocument } = useCreateEmployeeDocument({ component, getEmployeeDetails });
 
 	const id = info?.detail?.id;
 

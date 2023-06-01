@@ -4,15 +4,12 @@ import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 import useCreateEmployeeBankDetails from '../../../../hooks/useCreateEmployeeBankDetails';
-import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function BankDetails() {
+function BankDetails({ getEmployeeDetails, data: info }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
-
-	const { data: info } = useGetEmployeeDetails({});
 
 	const { bank_details = [], detail } = info || {};
 
@@ -23,7 +20,7 @@ function BankDetails() {
 
 	const { id } = detail || {};
 
-	const { createEmployeeBankDetails } = useCreateEmployeeBankDetails({ bank_details });
+	const { createEmployeeBankDetails } = useCreateEmployeeBankDetails({ bank_details, getEmployeeDetails });
 
 	const removeTypeField = (controlItem) => {
 		const { type, ...rest } = controlItem;

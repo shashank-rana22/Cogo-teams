@@ -4,7 +4,7 @@ import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useEffect, useCallback } from 'react';
 
-function useGetEmployeeDetails({ id = '', company_policy_data_required = false }) {
+function useGetEmployeeDetails({ company_policy_data_required = false }) {
 	const { user } = useSelector((state) => state?.profile);
 	const { id:userId } = user || {};
 
@@ -27,7 +27,7 @@ function useGetEmployeeDetails({ id = '', company_policy_data_required = false }
 		} catch (err) {
 			Toast.error(getApiErrorString(err.response?.data));
 		}
-	}, [trigger, userId]);
+	}, [company_policy_data_required, trigger, userId]);
 
 	useEffect(() => {
 		getEmployeeDetails();

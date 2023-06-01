@@ -7,7 +7,7 @@ import EmploymentHistory from './EmploymentHistory';
 import Resume from './Resume';
 import styles from './styles.module.css';
 
-function AdditionalInformation({ setInformationPage, data }) {
+function AdditionalInformation({ setInformationPage, data, getEmployeeDetails }) {
 	const { progress_stats = {} } = data || {};
 	const {
 		additional_info_added = {},
@@ -78,7 +78,7 @@ function AdditionalInformation({ setInformationPage, data }) {
 								)}
 								animate
 							>
-								<Component data={data} />
+								<Component data={data} getEmployeeDetails={getEmployeeDetails} />
 							</Accordion>
 						</div>
 					);

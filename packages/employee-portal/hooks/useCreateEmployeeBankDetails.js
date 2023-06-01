@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
-function useCreateEmployeeBankDetails({ bank_details }) {
+function useCreateEmployeeBankDetails({ bank_details, getEmployeeDetails }) {
 	const api = isEmpty(bank_details) ? '/create_employee_bank_details' : '/update_employee_bank_details';
 
 	const { id :bankDetailId = '' } = bank_details?.[0] || {};
@@ -31,6 +31,7 @@ function useCreateEmployeeBankDetails({ bank_details }) {
 				},
 			});
 			Toast.success('Bank Details have been saved successfully!');
+			getEmployeeDetails();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}

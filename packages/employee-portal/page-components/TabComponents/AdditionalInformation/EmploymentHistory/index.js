@@ -3,20 +3,17 @@ import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import FieldArray from '../../../../commons/FieldArray';
-import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-function EmploymentHistory() {
+function EmploymentHistory({ getEmployeeDetails, data: info }) {
 	const { handleSubmit, control, setValue } = useForm();
-
-	const { data: info } = useGetEmployeeDetails({});
 
 	const id = info?.detail?.id;
 
-	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id });
+	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
 	const onSubmit = (values) => {
 		updateEmployeeDetails({ data: values, formType: 'employment_history' });
