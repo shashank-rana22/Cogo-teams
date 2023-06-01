@@ -45,13 +45,10 @@ function Form({
 		watch((v) => {
 			onChange({
 				serviceKey,
-				code: lineItem?.code,
-
-				currency: v[nameKey][0]?.currency,
-
-				type: v[nameKey][0]?.type,
-
-				value: Number(v[nameKey][0]?.value),
+				code     : lineItem?.code,
+				currency : v[nameKey][0]?.currency,
+				type     : v[nameKey][0]?.type,
+				value    : Number(v[nameKey][0]?.value),
 			});
 		});
 	}, [lineItem?.code, nameKey, onChange, serviceKey, watch]);
