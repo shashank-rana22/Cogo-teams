@@ -39,8 +39,6 @@ function InfoBanner({
 
 	const formvalues = watch();
 
-	console.log(formvalues);
-
 	useEffect(() => {
 		setValue('filtered_users', '');
 		setValue('percentage', '');
