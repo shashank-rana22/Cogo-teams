@@ -20,7 +20,7 @@ interface Props {
 	tdsStyle?:TdsStyleInterface,
 	setShow?:(p:boolean)=> void,
 }
-function ReceivavlesEditModal({
+function ReceivablesEditModal({
 	show,
 	setShow,
 	editTdsLoading,
@@ -59,7 +59,7 @@ function ReceivavlesEditModal({
 						Current TDS Rate :
 						{' '}
 						<span className={styles.values}>
-							{tdsStyle?.rate}
+							{tdsStyle?.rate || ''}
 							%
 						</span>
 					</div>
@@ -102,4 +102,4 @@ function ReceivavlesEditModal({
 	);
 }
 
-export default ReceivavlesEditModal;
+export default ReceivablesEditModal;

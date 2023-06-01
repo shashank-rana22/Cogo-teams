@@ -5,7 +5,7 @@ import { useState } from 'react';
 
 import { GenericObject } from './Interfaces/index';
 import PayablesEditModal from './PayablesEditModal';
-import ReceivavlesEditModal from './ReceivablesEditModal';
+import ReceivablesEditModal from './ReceivablesEditModal';
 import styles from './styles.module.css';
 
 interface TdsStyleInterface {
@@ -59,7 +59,7 @@ function TdsSingleCard({
 							caret={false}
 							content={orgName}
 						>
-							<div className={styles.company_name}>{`${orgName.substring(0, 25)}..` || ''}</div>
+							<div className={styles.company_name}>{`${orgName?.substring(0, 25)}..` || ''}</div>
 						</Tooltip>
 					) : (
 						<div className={styles.company_name}>{orgName || ''}</div>
@@ -69,7 +69,7 @@ function TdsSingleCard({
 			<div>
 				<div className={styles.text}>Outstanding </div>
 				<div className={styles.amount}>
-					{ getFormattedPrice(outstanding || '', currency)}
+					{ outstanding ? getFormattedPrice(outstanding || '', currency) : '-'}
 				</div>
 			</div>
 
@@ -91,7 +91,7 @@ function TdsSingleCard({
 					<IcMEdit onClick={onClick} />
 				</div>
 				{show && active === 'AR' ? (
-					<ReceivavlesEditModal
+					<ReceivablesEditModal
 						show={show}
 						setShow={setShow}
 						editTdsLoading={editTdsLoading}

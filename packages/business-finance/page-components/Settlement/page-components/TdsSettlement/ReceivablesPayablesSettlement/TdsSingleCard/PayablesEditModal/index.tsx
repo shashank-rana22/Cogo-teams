@@ -24,10 +24,9 @@ function PayablesEditModal({
 		control,
 		formState: { errors },
 		reset,
-		getValues,
 	} = useForm();
-	const onSubmit = () => {
-		const data = getValues();
+
+	const onSubmit = (data) => {
 		approveTds(data, setShow, reset);
 	};
 

@@ -397,20 +397,6 @@ function asyncListServetelAgents() {
 		},
 	};
 }
-function asyncTradePartydetails() {
-	return {
-		valueKey    : 'id',
-		labelKey    : 'legal_business_name',
-		endpoint    : 'list_organization_trade_party_details',
-		initialCall : true,
-		params      : {
-			filters: {
-				status: 'active',
-			},
-			pagination_data_required: false,
-		},
-	};
-}
 
 function asyncJvList() {
 	return {
@@ -545,7 +531,6 @@ export {
 	asyncListOrgTradeParties,
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
-	asyncTradePartydetails,
 	asyncPlanPricingList,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,

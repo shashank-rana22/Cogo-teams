@@ -64,24 +64,22 @@ const useTdsSettlement = ({
 					params: {
 						accMode: active,
 						orgId,
-						startDate:
-						date
-						&& formatDate({
+
+						startDate: date ? formatDate({
 							date       : date?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
 							formatType : 'dateTime',
 							separator  : ' ',
-						}),
-						endDate:
-						date
-						&& formatDate({
+						}) : undefined,
+
+						endDate: date ? formatDate({
 							date       : date?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
 							formatType : 'dateTime',
 							separator  : ' ',
-						}),
+						}) : undefined,
 						query : query || undefined,
 						page  : pageIndex,
 					},
@@ -101,25 +99,22 @@ const useTdsSettlement = ({
 					params: {
 						orgId,
 						accMode: active,
-						startDate:
-						date
-						&& formatDate({
+
+						startDate: date ? formatDate({
 							date       : date?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
 							formatType : 'dateTime',
 							separator  : ' ',
-						}),
+						}) : undefined,
 
-						endDate:
-						date
-						&& formatDate({
+						endDate: date ? formatDate({
 							date       : date?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
 							formatType : 'dateTime',
 							separator  : ' ',
-						}),
+						}) : undefined,
 						query: query || undefined,
 					},
 				});
@@ -128,6 +123,8 @@ const useTdsSettlement = ({
 			}
 		})();
 	}, [active, getOrgSummary, rest, date, query]);
+
+	const dateValue = JSON.stringify(date || {});
 
 	useEffect(() => {
 		debounceQuery(searchValue);
@@ -138,19 +135,17 @@ const useTdsSettlement = ({
 			refetch();
 			getSummary();
 		}
-	}, [active, JSON.stringify(query), JSON.stringify(rest?.orgId),
-		JSON.stringify(getSummary), JSON.stringify(refetch),
-		pageIndex, JSON.stringify(date)]);
+	}, [active, query, rest?.orgId, JSON.stringify(getSummary),
+		JSON.stringify(refetch), pageIndex, dateValue]);
 
 	const approveTds = async (value, setShow, reset) => {
 		try {
-			const response:GenericObject = await approveTDsApi({
+			await approveTDsApi({
 				data: {
 					...value,
 				},
 			});
 
-			if (response?.hasError) return;
 			refetch();
 			getSummary();
 			reset();

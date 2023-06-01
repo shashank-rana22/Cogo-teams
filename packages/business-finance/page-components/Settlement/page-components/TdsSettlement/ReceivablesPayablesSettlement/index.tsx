@@ -61,10 +61,10 @@ function ReceivablesPayablesSettlement({
 						name="q"
 						size="md"
 						value={searchValue}
-						onChange={(e: any) => setSearchValue(e)}
+						onChange={(e: string) => setSearchValue(e)}
 						placeholder="Search By Document Number"
 						suffix={(
-							<div style={{ margin: '4px', display: 'flex' }}>
+							<div className={styles.search}>
 								<IcMSearchlight height={15} width={15} />
 							</div>
 						)}
@@ -88,9 +88,9 @@ function ReceivablesPayablesSettlement({
 					imageFind="FinanceDashboard"
 					{...rest}
 				/>
-				<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<div className={styles.list}>
 					{list?.length > 0
-						&& (
+						? (
 							<Pagination
 								type="table"
 								currentPage={pageNo}
@@ -100,7 +100,7 @@ function ReceivablesPayablesSettlement({
 									setGlobalFilters((p) => ({ ...p, pageIndex: pageValue }));
 								}}
 							/>
-						)}
+						) : ''}
 				</div>
 			</div>
 		</div>

@@ -3,7 +3,7 @@ export const CreateTdsFilters = [
 		name        : 'orgId',
 		type        : 'asyncSelect',
 		placeholder : 'Business Partner',
-		asyncKey    : 'trade_party_details',
+		asyncKey    : 'list_trade_parties',
 		isClearable : true,
 		initialCall : true,
 		valueKey    : 'id',
@@ -20,7 +20,6 @@ export const CreateTdsFilters = [
 		isPreviousDaysAllowed : true,
 		caret                 : true,
 		isClearable           : true,
-		defaultValue          : null,
 		span               	  : 6,
 	},
 ];

@@ -7,8 +7,8 @@ import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
-const receivablesPayablesColumn = () => (
-	[
+function receivablesPayablesColumn() {
+	return [
 		{
 			Header   : 'Document No.',
 			id       : 'documentValue',
@@ -18,19 +18,21 @@ const receivablesPayablesColumn = () => (
 						{row?.documentValue}
 					</div>
 					<div className={cl`${styles.sentence_case} ${styles.business_text_style}`}>
-						<Tooltip
-							content={(
-								<div className={styles.tooltip_text}>
-									{row?.documentType}
+						{row?.documentType ? (
+							<Tooltip
+								content={(
+									<div className={styles.tooltip_text}>
+										{row?.documentType}
+									</div>
+								)}
+								interactive
+							>
+								<div>
+									{(row?.documentType as string).substring(0, 12)}
+									...
 								</div>
-							)}
-							interactive
-						>
-							<div>
-								{(row?.documentType as string).substring(0, 12)}
-								...
-							</div>
-						</Tooltip>
+							</Tooltip>
+						) : ''}
 
 					</div>
 				</>
@@ -41,11 +43,11 @@ const receivablesPayablesColumn = () => (
 			id       : 'transactionDate',
 			accessor : (row) => (
 				<div className={styles.expense_text_style}>
-					{(formatDate({
+					{row?.transactionDate ? (formatDate({
 						date       : row?.transactionDate,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 						formatType : 'date',
-					})) || ''}
+					})) : '-'}
 				</div>
 
 			),
@@ -56,11 +58,11 @@ const receivablesPayablesColumn = () => (
 			accessor : (row) => (
 
 				<div className={styles.expense_text_style}>
-					{(formatDate({
+					{row?.dueDate ? (formatDate({
 						date       : row?.dueDate,
 						dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 						formatType : 'date',
-					})) || ''}
+					})) : ''}
 				</div>
 			),
 		},
@@ -71,10 +73,10 @@ const receivablesPayablesColumn = () => (
 			accessor : (row) => (
 
 				<div className={styles.expense_text_style}>
-					{getFormattedPrice(
-						Math.abs(row?.documentAmount),
+					{ row?.documentAmount ? getFormattedPrice(
+						Math.abs(row?.documentAmount || 0),
 						(row?.currency),
-					)}
+					) : '-'}
 				</div>
 			),
 		},
@@ -84,10 +86,10 @@ const receivablesPayablesColumn = () => (
 			accessor : (row) => (
 
 				<div className={styles.expense_text_style}>
-					{getFormattedPrice(
-						Math.abs(row?.taxableAmount),
+					{ row?.taxableAmount ? getFormattedPrice(
+						Math.abs(row?.taxableAmount || 0),
 						(row?.currency),
-					)}
+					) : '-'}
 				</div>
 			),
 		},
@@ -97,7 +99,7 @@ const receivablesPayablesColumn = () => (
 			accessor : (row) => (
 				<div className={styles.expense_text_style}>
 					{getFormattedPrice(
-						Math.abs(row?.settledTds),
+						Math.abs(row?.settledTds || 0),
 						(row?.currency),
 					)}
 				</div>
@@ -109,8 +111,8 @@ const receivablesPayablesColumn = () => (
 			accessor : (row) => (
 				<div className={styles.expense_text_style}>
 					{getFormattedPrice(
-						Math.abs(row?.afterTdsAmount),
-						(row?.currency),
+						Math.abs(row?.afterTdsAmount || 0),
+						(row?.currency || '-'),
 					)}
 				</div>
 			),
@@ -121,7 +123,7 @@ const receivablesPayablesColumn = () => (
 			accessor : (row) => (
 				<div className={styles.expense_text_style}>
 					{getFormattedPrice(
-						Math.abs(row?.settledAmount),
+						Math.abs(row?.settledAmount || 0),
 						(row?.currency),
 					)}
 				</div>
@@ -133,7 +135,7 @@ const receivablesPayablesColumn = () => (
 			accessor : (row) => (
 				<div className={styles.expense_text_style}>
 					{getFormattedPrice(
-						Math.abs(row?.currentBalance),
+						Math.abs(row?.currentBalance || 0),
 						(row?.currency),
 					)}
 				</div>
@@ -145,7 +147,7 @@ const receivablesPayablesColumn = () => (
 			accessor : (row) => (
 				<div>
 					<Pill
-						style={{ borderRadius: '6px', marginLeft: '-6px', fontWeight: '500' }}
+						className={styles.pill}
 						size="md"
 						color="#C4DC91"
 					>
@@ -155,7 +157,7 @@ const receivablesPayablesColumn = () => (
 				</div>
 			),
 		},
-	]
-);
+	];
+}
 
 export default receivablesPayablesColumn;

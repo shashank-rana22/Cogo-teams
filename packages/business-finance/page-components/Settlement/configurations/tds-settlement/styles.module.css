@@ -7,11 +7,9 @@
 }
 
 .tooltip_text {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
-	word-break: break-word;
 	word-wrap: break-word;
-	white-space: pre-wrap;
 }
 
 .text_weight {
@@ -20,7 +18,7 @@
 
 .name_text_style {
 	margin-left: 10px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 700;
 }
 
@@ -30,12 +28,12 @@
 
 .entity_text_style {
 	margin-right: 20px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 700;
 }
 
 .business_text_style {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 700;
 }
 
@@ -43,16 +41,21 @@
 	display: flex;
 	flex-direction: column;
 	margin-left: 16px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 700;
 }
 
 .jobnumber_text {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	text-decoration-line: underline;
 }
 
 .status {
-	background: #c4dc91;
+	background: var(--color-tertiary-success-green-3);
+	border-radius: 6px;
+}
+
+.pill {
+	font-weight: 500;
 	border-radius: 6px;
 }
