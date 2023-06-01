@@ -45,9 +45,8 @@ function BasicDetails({ basic_info_data, questions, stats_data }) {
 			{' '}
 			Cumulative of Both the Tests
 		</div>
-	</div>
-
-		}
+	</div>,
+		},
 	};
 
 	const content_mapping_right = {
