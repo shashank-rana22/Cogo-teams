@@ -6,21 +6,15 @@ import {
 	IcMEmail,
 } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
-<<<<<<< Updated upstream
-=======
 import { useSelector } from '@cogoport/store';
->>>>>>> Stashed changes
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';
 import styles from '../styles.module.css';
 
-<<<<<<< Updated upstream
-=======
 const EditInvoice = dynamic(() => import('../../../../../Header/EditInvoice'), { ssr: false });
 
->>>>>>> Stashed changes
 const AddRemarks = dynamic(() => import('../../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../../ChangeCurrency'), { ssr: false });
 const OTPVerification = dynamic(() => import('../../OTPVerification'), { ssr: false });
@@ -39,10 +33,7 @@ function Actions({
 	bfInvoice = {},
 }) {
 	const [show, setShow] = useState(false);
-<<<<<<< Updated upstream
-=======
 	const [isEditInvoice, setIsEditInvoice] = useState(false);
->>>>>>> Stashed changes
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
@@ -51,11 +42,8 @@ function Actions({
 	const [showOtpModal, setOTPModal] = useState(false);
 	const showForOldShipments =	shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
-<<<<<<< Updated upstream
-=======
 	const user_data = useSelector(({ profile }) => profile || {});
 
->>>>>>> Stashed changes
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
 
@@ -79,14 +67,11 @@ function Actions({
 	}
 	// HARD CODING ENDS
 
-<<<<<<< Updated upstream
-=======
 	const handleClickInvoice = () => {
 		setShow(false);
 		setIsEditInvoice(true);
 	};
 
->>>>>>> Stashed changes
 	const refetchAfterCall = () => {
 		setShowReview(false);
 		refetch();
@@ -149,19 +134,14 @@ function Actions({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
-<<<<<<< Updated upstream
-=======
 	const editInvoicesVisiblity =	(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
 		|| user_data.email === 'ajeet@cogoport.com';
 
->>>>>>> Stashed changes
 	const content = (
 		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
 					<div>
-<<<<<<< Updated upstream
-=======
 						{editInvoicesVisiblity ? (
 							<div style={{ width: '100%' }}>
 								<div
@@ -176,7 +156,6 @@ function Actions({
 								<div className={styles.line} />
 							</div>
 						) : null}
->>>>>>> Stashed changes
 						<div
 							role="button"
 							tabIndex={0}
@@ -337,8 +316,6 @@ function Actions({
 				</div>
 			</div>
 
-<<<<<<< Updated upstream
-=======
 			{(invoice.services || []).length && isEditInvoice ? (
 				<EditInvoice
 					show={isEditInvoice}
@@ -349,7 +326,6 @@ function Actions({
 				/>
 			) : null}
 
->>>>>>> Stashed changes
 			{showReview ? (
 				<ReviewServices
 					showReview={showReview}
