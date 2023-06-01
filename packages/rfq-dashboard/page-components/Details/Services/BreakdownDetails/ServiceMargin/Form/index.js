@@ -33,10 +33,9 @@ function Form({
 	const { control, watch } = useForm({
 		defaultValues: {
 			[nameKey]: [{
-				type: 'absolute_total',
-
+				type  : 'absolute_total',
 				currency,
-				value: marginValue,
+				value : marginValue,
 			}],
 		},
 	});
