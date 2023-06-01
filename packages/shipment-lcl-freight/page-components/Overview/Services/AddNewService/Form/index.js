@@ -40,7 +40,7 @@ function Form({ upsellableService = {}, closeModal = () => {} }) {
 			/>
 
 			<Modal.Body>
-				<div> Are you sure you want to upsell this service?</div>
+				{!controls.length ? <div> Are you sure you want to upsell this service?</div> : null}
 
 				{controls.length ? (
 					<Layout
