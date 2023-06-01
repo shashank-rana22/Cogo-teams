@@ -42,11 +42,9 @@ function Header({ loading, requestedOn }) {
 						Requested on :
 						{' '}
 						{formatDate({
-							date: requestedOn?.created_at,
-
-							dateFormat: GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
-
-							formatType: 'date',
+							date       : requestedOn?.created_at,
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+							formatType : 'date',
 						})}
 					</div>
 				)
