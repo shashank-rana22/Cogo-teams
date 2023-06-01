@@ -7,14 +7,12 @@ import styles from './styles.module.css';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
 function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
-	const { progress_stats = {} } = data;
-	const { id } = data?.offer_letter || {};
-	const {
-		offer_letter_signed = {},
-	} = progress_stats;
-	const { get_offer_letter_signed = false } = offer_letter_signed;
-
-	const document_url = 'https://www.orimi.com/pdf-test.pdf';
+	// const { progress_stats = {} } = data;
+	const { id, document_url, status } = data?.offer_letter || {};
+	// const {
+	// 	offer_letter_signed = {},
+	// } = progress_stats;
+	// const { get_offer_letter_signed = false } = offer_letter_signed;
 
 	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails });
 	return (
@@ -31,7 +29,7 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 			</div>
 
 			{
-				get_offer_letter_signed ? (
+				status === 'approved' ? (
 					<div className={styles.button_container}>
 						<div style={{ paddingRight: 10 }}>
 							<Button

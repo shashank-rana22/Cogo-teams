@@ -15,26 +15,13 @@ function StepperComponent({ data }) {
 
 	const { documents_signed:document_sign = false } = documents_signed;
 
-	const {
-		bank_details = false,
-		educational_qualification = false,
-		employment_history = false,
-		resume = false,
-	} = additional_info_added;
-
 	const { get_offer_letter_signed = false } = offer_letter_signed;
-
-	const {
-		address_details = false,
-		identification_documents = false,
-		personal_information = false,
-	} = personal_details;
 
 	const MAPPING = [
 		{
 			name      : 'profile_details',
 			icon      : IcMProfile,
-			is_added  : address_details && identification_documents && personal_information,
+			is_added  : Object.keys(personal_details).every((key) => (personal_details[key])),
 			sub_title : 'Added',
 		},
 		{
@@ -46,7 +33,7 @@ function StepperComponent({ data }) {
 		{
 			name      : 'additional_info',
 			icon      : IcMDocument,
-			is_added  : bank_details && educational_qualification && employment_history && resume,
+			is_added  : Object.keys(additional_info_added).every((key) => (additional_info_added[key])),
 			sub_title : 'Added',
 		},
 		{
