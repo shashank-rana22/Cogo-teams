@@ -1,35 +1,36 @@
-.container{
-    margin: 10px;
-    padding: 10px;
-    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-    border-radius: 6px;
+.container {
+	width: 300px;
+	padding: 10px;
+	margin: 6px;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
-.title{
-    font-weight: 500;
+.title {
+	font-weight: 500;
 }
 
-.details{
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    margin-top: 10px;
+.details {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	margin-top: 10px;
 }
 
-.image_box{
-    margin-right: 20px;
-    width: 72px;
-    height: 72px;
-    background: #FDEBE9;
-    border-radius: 6px;
+.image_box {
+	width: 72px;
+	height: 72px;
+	margin-right: 20px;
+	background: #fdebe9;
+	border-radius: 6px;
 }
 
-.pill_box{
-    width: 180px;
-    display: flex;
-    flex-wrap: wrap;
+.pill_box {
+	display: flex;
+	flex-wrap: wrap;
+	width: 180px;
 }
 
-.courses{
-    margin: 2px 10px;
+.courses {
+	margin: 2px 10px;
 }

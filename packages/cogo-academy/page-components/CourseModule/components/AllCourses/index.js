@@ -8,7 +8,7 @@ import React, { useState } from 'react';
 
 import LoadingState from '../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../configs/BUTTON_CONTENT_MAPPING';
-import HANDLE_CLICK_MAPPING from '../../configs/HANDLE_CLICK_MAPPING.JS';
+import HANDLE_CLICK_MAPPING from '../../configs/HANDLE_CLICK_MAPPING.js';
 // import useListCourseCategory from '../../hooks/useListCourseCategory';
 import useListCourseUserMappings from '../../hooks/useListCourseUserMappings';
 import CourseCard from '../CourseCard';

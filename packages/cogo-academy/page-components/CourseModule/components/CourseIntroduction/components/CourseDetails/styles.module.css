@@ -86,17 +86,15 @@
 	margin: 10px 0;
 }
 
-.carasol{
-	width: 200px;
+.carasol {
 	display: flex;
 	flex-direction: column;
-	
+	width: 200px;
 }
 
-.box{
+.box {
 	width: 200px;
-	white-space: nowrap; 
-  	overflow: hidden;
-  	text-overflow: ellipsis;
-	
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }

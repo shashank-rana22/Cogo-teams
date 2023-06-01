@@ -21,9 +21,9 @@
 	border: 1px solid #fef199;
 }
 
-.btn_active{
-	background: #ACDADF;
-	border: 1px solid #CFEAED;
+.btn_active {
+	background: #acdadf;
+	border: 1px solid #cfeaed;
 }
 
 .total_courses {
@@ -82,27 +82,27 @@
 
 .header {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 }
 
-.overflow{
-	white-space: nowrap; 
+.overflow {
 	align-content: center;
-  	width: 100px; 
-  	overflow: hidden;
-  	text-overflow: ellipsis;
+	width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
-.pill{
+.pill {
 	display: flex;
 	flex-wrap: wrap;
 	margin: 10px 0;
 }
 
 .carousel_container {
-	margin: 24px 0;
 	display: flex;
 	flex-direction: row;
 	flex-wrap: wrap;
+	margin: 24px 0;
 }

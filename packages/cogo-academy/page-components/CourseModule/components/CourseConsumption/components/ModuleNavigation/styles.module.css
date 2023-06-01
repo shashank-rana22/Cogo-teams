@@ -89,26 +89,26 @@
 	white-space: nowrap;
 }
 
-.duration{
-	border-radius: 6px;
-	background: #F7FAEF;
+.duration {
 	padding: 8px 20px;
 	margin-bottom: 8px;
-	color: #849E4C;
 	font-size: 14px;
 	font-weight: 500;
+	color: #849e4c;
+	background: #f7faef;
+	border-radius: 6px;
 
-	:global{
-		.ui_pill_container{
+	:global {
+		.ui_pill_container {
 			margin: 0;
 			margin-top: 8px;
-			color: #221F20;
 			font-weight: 600;
+			color: #221f20;
 		}
 	}
 }
 
-.course_name{
+.course_name {
 	margin-left: 20px;
-	color: #4F4F4F;
+	color: #4f4f4f;
 }

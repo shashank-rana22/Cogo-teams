@@ -1,9 +1,9 @@
 .container {
 	width: 300px;
 	height: 400px;
+	margin: 6px;
 	border-radius: 12px;
 	box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
-	margin: 5px;
 }
 
 .topics_rating_container {
@@ -45,7 +45,7 @@
 
 .details,
 .header {
-	padding: 24px;
+	padding: 16px;
 }
 
 .description {

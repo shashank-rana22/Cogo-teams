@@ -22,17 +22,15 @@ function CategoryCard({ courseCategoryData, categoryLoading }) {
 	}));
 
 	return (
-		<div className={styles.conatiner}>
-			<div className={styles.carousel_container}>
-				<Carousel
-					size="md"
-					slides={CAROUSELDATA}
-					itemsToShow={8}
-					itemsToScroll={4}
-					showDots={false}
-					showArrow
-				/>
-			</div>
+		<div className={styles.container}>
+			<Carousel
+				size="md"
+				slides={CAROUSELDATA}
+				itemsToShow={4}
+				itemsToScroll={4}
+				showDots={false}
+				showArrow
+			/>
 		</div>
 	);
 }
