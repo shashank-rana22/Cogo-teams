@@ -1,5 +1,6 @@
 .container{
     margin: 20px 0px;
+    
 }
 .carousel_container {
     margin: 24px 12px;
@@ -13,6 +14,11 @@
 
         .ui_o0St8{
             width: fit-content;
+            :hover{
+                background: #fffce6;
+                cursor: pointer;
+            }
+
         }
 
         .ui_carousel_arrow {
@@ -25,9 +31,8 @@
 		}
 
 		.ui_carousel_prev {
-			margin-left: -36px;
+			margin-left: -30px;
 			background: none;
 		}
-    }
-    
+	}
 }

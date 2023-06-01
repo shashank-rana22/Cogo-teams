@@ -4,12 +4,18 @@ import { useSelector } from '@cogoport/store';
 import AllCourses from '../AllCourses';
 import HomePage from '../HomePage';
 
-function RenderComponent({ CourseCategoryData, currentCategory, setCurrentCategory }) {
-	const { user:{ id: user_id } } = useSelector((state) => state.profile);
+function RenderComponent({
+	courseCategoryData,
+	currentCategory,
+	setCurrentCategory,
+	courseCategories,
+	categoryLoading,
+}) {
+	const {
+		user: { id: user_id },
+	} = useSelector((state) => state.profile);
 
 	const { query } = useRouter();
-
-	// console.log('courseCategories', CourseCategoryData);
 
 	const { viewType = '' } = query;
 
@@ -18,14 +24,17 @@ function RenderComponent({ CourseCategoryData, currentCategory, setCurrentCatego
 			<AllCourses
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
-				courseCategories={CourseCategoryData}
+				courseCategories={courseCategories}
 			/>
 		);
 	}
-	{ /* <HomePage user_id={user_id} CourseCategoryData={CourseCategoryData} /> */ }
-	return (
-		<HomePage user_id={user_id} CourseCategoryData={CourseCategoryData} />
 
+	return (
+		<HomePage
+			user_id={user_id}
+			courseCategoryData={courseCategoryData}
+			categoryLoading={categoryLoading}
+		/>
 	);
 }
 

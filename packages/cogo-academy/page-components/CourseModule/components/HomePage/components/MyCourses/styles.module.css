@@ -1,5 +1,12 @@
-.container {
-	margin: 8px 0;
+.main_heading {
+	margin-top: 32px;
+	margin-bottom: 20px;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.carousel_container {
+	margin: 24px 0;
 
 	:global {
 		.ui_carousel_arrow {

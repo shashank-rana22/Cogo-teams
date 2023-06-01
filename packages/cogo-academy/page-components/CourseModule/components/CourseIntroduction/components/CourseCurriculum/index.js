@@ -12,6 +12,8 @@ function CourseCurriculum({ data }) {
 		text         : <IcMText width="24px" height="24px" fill="white" />,
 	};
 
+	console.log('data', data);
+
 	return (
 		<div className={styles.container}>
 			<span className={styles.heading}>Course Curriculum</span>
@@ -28,7 +30,7 @@ function CourseCurriculum({ data }) {
 										{index + 1}
 										.&nbsp;
 									</div>
-									<div>{item.description}</div>
+									<div>{item.name}</div>
 								</div>
 
 								<div className={styles.title_right}>
@@ -62,7 +64,7 @@ function CourseCurriculum({ data }) {
 												{subIndex + 1}
 												.&nbsp;
 											</div>
-											<div>{subItem.description}</div>
+											<div>{subItem.name}</div>
 										</div>
 									)}
 									styles={{ width: '100%' }}

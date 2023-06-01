@@ -10,6 +10,8 @@ function CourseModule() {
 
 	const {
 		finalCourseCategories: courseCategories = [],
+		courseCategoryData,
+		loading: categoryLoading,
 	} = useListCourseCategory();
 
 	return (
@@ -21,9 +23,11 @@ function CourseModule() {
 			/>
 
 			<RenderComponent
-				CourseCategoryData={courseCategories}
+				courseCategoryData={courseCategoryData}
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
+				courseCategories={courseCategories}
+				categoryLoading={categoryLoading}
 			/>
 		</div>
 	);

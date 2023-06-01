@@ -75,7 +75,7 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {} }) {
 
 					<div className={styles.rating}>
 						<IcMStarfull style={{ marginRight: '6px' }} />
-						<div>4.4</div>
+						<div>{data?.rating || 0}</div>
 					</div>
 				</div>
 
