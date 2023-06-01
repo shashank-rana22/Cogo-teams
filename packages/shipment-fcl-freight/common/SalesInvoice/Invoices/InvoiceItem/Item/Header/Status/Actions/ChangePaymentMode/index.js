@@ -1,7 +1,7 @@
 import { RadioGroup, Modal, Radio, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useUpdateInvoicePaymentMode from '../../../../../../../../hooks/useUpdateInvoicePaymentMode';
+import useUpdateInvoicePaymentMode from '../../../../../../../../../hooks/useUpdateInvoicePaymentMode';
 
 const OPTIONS_TO_SHOW = {
 	credit : { label: 'Cash', value: 'cash' },

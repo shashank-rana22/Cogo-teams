@@ -21,7 +21,7 @@ const useListSageSalesInvoices = () => {
 		try {
 			await trigger({
 				params: {
-					page_limit : 50,
+					page_limit : 10,
 					filters    : { invoice_type: 'income', entity_id: shipment_id },
 				},
 			});

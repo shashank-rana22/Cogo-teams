@@ -1,92 +1,101 @@
-import { Modal, Button } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
-import { useForm } from '@cogoport/forms';
-import { Layout } from '@cogoport/ocean-modules';
-import React, { useEffect, useState, useContext } from 'react';
+import { Button, Modal } from '@cogoport/components';
+import { TextAreaController, UploadController, useForm } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
+import React, { useState } from 'react';
 
-import useCreateShipmentCreditNote from '../../../../../../../hooks/useCreateShipmentCreditNote';
-import creditNoteControls from '../../../../../helpers/creditNoteControls';
-import generateDefaultValues from '../../../../../helpers/generateDefaultValuesOfCreditNote';
-import updateFormValueOfCreditNote from '../../../../../helpers/updateFormValuesOfCreditNote';
+import useCreditNoteNullify from '../../../../../../../hooks/useCreditNoteNullify';
 
+import PartialCN from './PartialCN';
 import styles from './styles.module.css';
 
 function RequestCN({
-	show = false,
-	setShow = () => {},
-	invoice = {},
+	askNullify,
+	setAskNullify = () => {},
+	invoice,
 	refetchCN = () => {},
-	invoiceData = {},
+	invoiceData,
+	bfInvoiceRefetch = () => {},
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
-	const [servicesIDs, setServicesIDs] = useState([]);
+	const [isRequestCN, setIsRequestCN] = useState(false);
 
-	const { services } = invoice;
-
-	useEffect(() => {
-		const servicesID = services?.map((service) => (service?.service_id)) || [];
-		setServicesIDs(servicesID);
-	}, [services]);
-
-	const controls = creditNoteControls({
-		services,
-	});
-
-	const defaultValues = generateDefaultValues({ values: controls });
-
-	const { handleSubmit, control, watch, formState:{ errors = {} } } =	useForm({ defaultValues });
+	const { handleSubmit, control, reset, watch } = useForm();
 	const formValues = watch();
 
-	const updatedObj = updateFormValueOfCreditNote({ formValues });
-
-	const afterRefetch = () => {
-		setShow(false);
+	const refetchAfterApiCall = () => {
+		setAskNullify(false);
+		bfInvoiceRefetch();
 		refetchCN();
+		reset();
 	};
-	const { onCreate, loading } = useCreateShipmentCreditNote({
-		refetch: afterRefetch,
-		servicesIDs,
-		invoice,
-		invoiceData,
+	const {
+		onCreate = () => {},
+		loading,
+	} = useCreditNoteNullify({
+		invoiceId : invoice?.id,
+		refetch   : refetchAfterApiCall,
 	});
 
+	const handleNo = () => {
+		setIsRequestCN(true);
+		setAskNullify(false);
+	};
+
+	const handleOnClose = () => {
+		reset();
+		setAskNullify(false);
+	};
+
 	return (
-		<Modal show={show} onClose={() => setShow(false)} size="xl" closeOnOuterClick={false}>
-			<Modal.Header title="REQUEST CREDIT NOTE" />
-			<Modal.Body>
-				<div className={styles.div}>
-					<div className={styles.bold_text}>
-						{`SID ${shipment_data?.serial_id} - Invoice number -`}
-						<div className={styles.underLined_text}>{invoice?.live_invoice_number}</div>
-					</div>
-				</div>
-				<Layout
-					control={control}
-					fields={controls}
-					errors={errors}
-					customValues={updatedObj}
-				/>
-
-			</Modal.Body>
-			<Modal.Footer>
-				<div className={styles.button_wrap}>
+		<>
+			<Modal
+				className="primary md"
+				show={askNullify}
+				onClose={handleOnClose}
+				closeOnOuterClick={false}
+			>
+				<Modal.Header title="Do you want to revoke this invoice ?" />
+				<Modal.Body>
+					<label>Details (Mandatory)</label>
+					<TextAreaController
+						id="remarks"
+						name="remarks"
+						control={control}
+						placeholder="Enter Details Here"
+					/>
+					<label>Upload File</label>
+					<UploadController
+						name="file"
+						control={control}
+					/>
+				</Modal.Body>
+				<Modal.Footer>
 					<Button
-						themeType="secondary"
-						onClick={() => setShow(false)}
+						size="md"
+						onClick={handleNo}
+						className={styles.button_div}
 					>
-						Cancel
-
+						Create Partial CN
 					</Button>
 					<Button
-						type="button"
 						onClick={handleSubmit(onCreate)}
-						disabled={loading}
+						disabled={loading || isEmpty(formValues.remarks) || isEmpty(formValues.file)}
+						size="md"
 					>
-						Request
+						Revoke Invoice
 					</Button>
-				</div>
-			</Modal.Footer>
-		</Modal>
+				</Modal.Footer>
+			</Modal>
+
+			{isRequestCN ? (
+				<PartialCN
+					invoice={invoice}
+					show={isRequestCN}
+					setShow={setIsRequestCN}
+					refetchCN={refetchCN}
+					invoiceData={invoiceData}
+				/>
+			) : null}
+		</>
 	);
 }
 
