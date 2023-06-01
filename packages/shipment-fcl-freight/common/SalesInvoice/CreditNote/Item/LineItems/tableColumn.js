@@ -6,7 +6,6 @@ import getServiceNameforTableColumn from '../../../helpers/getServiceNameforTabl
 export const tableColumn = ({ serviceItem = {} }) => {
 	const trade_type = serviceItem?.trade_type;
 	const currencyLocale = GLOBAL_CONSTANTS.currency_locale.INR;
-
 	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, trade_type);
 
 	return [
