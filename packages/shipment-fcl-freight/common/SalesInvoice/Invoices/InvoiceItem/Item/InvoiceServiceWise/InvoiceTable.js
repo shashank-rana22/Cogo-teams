@@ -27,8 +27,7 @@ export const InvoiceTable = (serviceItem = {}) => {
 				amount   : item?.price_discounted || 0,
 				currency : item?.currency,
 				options  : {
-					style                 : 'currency',
-					currencyDisplay       : 'code',
+					style                 : 'decimal',
 					maximumFractionDigits : 2,
 				},
 			}),
@@ -40,8 +39,7 @@ export const InvoiceTable = (serviceItem = {}) => {
 				amount   : item?.quantity || 0,
 				currency : item?.currency,
 				options  : {
-					style                 : 'currency',
-					currencyDisplay       : 'code',
+					style                 : 'decimal',
 					maximumFractionDigits : 2,
 				},
 			}),
@@ -53,8 +51,7 @@ export const InvoiceTable = (serviceItem = {}) => {
 				amount   : item?.discount_price || 0,
 				currency : item?.currency,
 				options  : {
-					style                 : 'currency',
-					currencyDisplay       : 'code',
+					style                 : 'decimal',
 					maximumFractionDigits : 2,
 				},
 			}),
@@ -67,8 +64,7 @@ export const InvoiceTable = (serviceItem = {}) => {
 				amount   : item?.exchange_rate || 0,
 				currency : item?.currency,
 				options  : {
-					style                 : 'currency',
-					currencyDisplay       : 'code',
+					style                 : 'decimal',
 					maximumFractionDigits : 2,
 				},
 			}),
