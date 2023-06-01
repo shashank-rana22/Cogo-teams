@@ -25,8 +25,8 @@ function RenderItem({ item = {}, data = [] }) {
 		}
 		return typeof profitability === 'number' ? (
 			<span
-				className={cl`${data?.[item?.key] > 0 ? styles.green : styles.red}
-					${data?.[item?.key] === 0 ? styles.black : ''}`}
+				className={cl`${profitability > 0 ? styles.green : styles.red}
+					${profitability === 0 ? styles.black : ''}`}
 			>
 				{`${(profitability).toFixed(2)}%`}
 			</span>
