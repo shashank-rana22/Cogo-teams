@@ -4,7 +4,7 @@ import { useState } from 'react';
 import EwayTimer from './EwayTimer';
 import styles from './styles.module.css';
 
-function Accordian({ data = '' }) {
+function Accordian({ data = {} }) {
 	const [open, setOpen] = useState(false);
 	return (
 		<>
