@@ -311,6 +311,17 @@ const navigationMappingAdmin = {
 		main_apis   : ['list_shipments'],
 		module_type : 'dashboards',
 	},
+	schedules: {
+		key           : 'schedules',
+		title         : 'Schedules',
+		href          : '/schedules',
+		as            : '/schedules',
+		type          : 'link',
+		icon          : IcMDashboard,
+		possible_apis : [],
+		main_apis     : [],
+		module_type   : 'schedules',
+	},
 	okam_dashboard: {
 		key           : 'okam_dashboard',
 		title         : 'KAM Dashboard',
