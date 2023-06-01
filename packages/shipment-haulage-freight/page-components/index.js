@@ -10,7 +10,7 @@ import getStakeholderConfig from '../stakeholderConfig';
 
 import DefaultView from './DefaultView';
 
-function LclFreight() {
+function HaulageFreight() {
 	const router = useRouter();
 	const { shipment_id } = router.query || {};
 
@@ -49,4 +49,4 @@ function LclFreight() {
 	);
 }
 
-export default LclFreight;
+export default HaulageFreight;
