@@ -27,7 +27,7 @@ function TestResult() {
 
 	const { retest } = useGetTest({ id: test_id });
 
-	const [activeAttempt, setActiveAttempt] = useState('attempt_1');
+	const [activeAttempt, setActiveAttempt] = useState('attempt1');
 
 	const [{ data, loading }] = useRequest({
 		method : 'GET',
@@ -35,7 +35,7 @@ function TestResult() {
 		params : {
 			test_id,
 			user_id                   : view === 'admin' ? id : user_id,
-			active_questions_required : activeAttempt === 'attempt_1',
+			active_questions_required : activeAttempt === 'attempt1',
 		},
 	}, { manual: false });
 
@@ -66,7 +66,7 @@ function TestResult() {
 					activeTab={activeAttempt}
 					onChange={setActiveAttempt}
 				>
-					<TabPanel name="attempt_1" title="Attempt 1" />
+					<TabPanel name="attempt1" title="Attempt 1" />
 
 					<TabPanel name="retest" title="Retest" />
 				</Tabs>

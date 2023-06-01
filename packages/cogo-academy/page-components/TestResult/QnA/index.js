@@ -28,7 +28,7 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, sta
 		params : {
 			user_id,
 			test_id,
-			active_questions_required: activeAttempt === 'attempt_1',
+			active_questions_required: activeAttempt === 'attempt1',
 		},
 	}, { manual: false });
 

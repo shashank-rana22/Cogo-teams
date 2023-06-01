@@ -9,7 +9,7 @@ const useListTestCaseStudyQuestions = ({ test_id = '', question_id = '', activeA
 				test_id,
 				question_id,
 			},
-			active_questions_required: activeAttempt === 'attempt_1',
+			active_questions_required: activeAttempt === 'attempt1',
 		},
 	}, { manual: false });
 

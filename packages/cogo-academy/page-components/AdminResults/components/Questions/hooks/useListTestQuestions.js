@@ -15,7 +15,7 @@ const useListQuestions = ({ test_id, activeAttempt }) => {
 		stand_alone_questions: {
 			payload: {
 				filters                   : { q: query, question_type: ['single_correct', 'multi_correct'], test_id },
-				active_questions_required : activeAttempt === 'attempt_1',
+				active_questions_required : activeAttempt === 'attempt1',
 				...params,
 
 			},
@@ -24,7 +24,7 @@ const useListQuestions = ({ test_id, activeAttempt }) => {
 		case_study_based: {
 			payload: {
 				filters                   : { question_type: 'case_study', q: query, test_id },
-				active_questions_required : activeAttempt === 'attempt_1',
+				active_questions_required : activeAttempt === 'attempt1',
 				...params,
 			},
 			title: 'Case Study Based',
@@ -32,7 +32,7 @@ const useListQuestions = ({ test_id, activeAttempt }) => {
 		subjective: {
 			payload: {
 				filters                   : { question_type: 'subjective', q: query, test_id },
-				active_questions_required : activeAttempt === 'attempt_1',
+				active_questions_required : activeAttempt === 'attempt1',
 				...params,
 			},
 			title: 'Subjective',

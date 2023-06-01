@@ -31,7 +31,7 @@ function AdminResults() {
 
 	const [activeTab, setActiveTab] = useState('students');
 
-	const [activeAttempt, setActiveAttempt] = useState('attempt_1');
+	const [activeAttempt, setActiveAttempt] = useState('attempt1');
 
 	const { test_id = '' } = query || {};
 
@@ -77,13 +77,13 @@ function AdminResults() {
 					activeTab={activeAttempt}
 					onChange={setActiveAttempt}
 				>
-					<TabPanel name="attempt_1" title="Attempt 1" />
+					<TabPanel name="attempt1" title="Attempt 1" />
 
 					<TabPanel name="retest" title="Retest" />
 				</Tabs>
 			) : null}
 
-			{status === 'published' || activeAttempt === 'attempt_1'
+			{status === 'published' || activeAttempt === 'attempt1'
 				? <TestResults test_id={test_id} activeAttempt={activeAttempt} /> : null}
 
 			<InfoBanner

@@ -1,5 +1,5 @@
 const getTestStatus = ({ retest, activeAttempt, test_status }) => {
-	if (retest && activeAttempt === 'attempt_1') {
+	if (retest && activeAttempt === 'attempt1') {
 		return 'published';
 	}
 	return test_status;

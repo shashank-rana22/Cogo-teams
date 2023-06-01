@@ -9,7 +9,7 @@ const useGetTestPerformace = ({ test_id = '', activeAttempt }) => {
 		url    : '/get_test_performance',
 		params : {
 			test_id,
-			active_questions_required: activeAttempt === 'attempt_1',
+			active_questions_required: activeAttempt === 'attempt1',
 		},
 	}, { manual: false });
 

@@ -23,7 +23,7 @@ const showResult = (is_evaluated, activeAttempt, status, retest) => {
 	if (!is_evaluated) {
 		return false;
 	}
-	if (activeAttempt === 'attempt_1') {
+	if (activeAttempt === 'attempt1') {
 		if (retest) return true;
 		if (status === 'published') return true;
 		return false;
