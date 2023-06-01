@@ -30,7 +30,7 @@ function useAssignMarks({ setError = () => {}, activeAttempt }) {
 					test_question_id,
 					marks          : parseFloat(marks),
 					question_type  : 'subjective',
-					active_attempt : activeAttempt === 'attempt_1' || true,
+					active_attempt : activeAttempt === 'attempt_1' || activeAttempt === undefined,
 				},
 			});
 
