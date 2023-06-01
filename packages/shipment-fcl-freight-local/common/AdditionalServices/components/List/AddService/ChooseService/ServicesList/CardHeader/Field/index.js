@@ -1,6 +1,5 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import React from 'react';
 
 import styles from '../styles.module.css';
 

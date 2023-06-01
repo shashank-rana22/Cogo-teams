@@ -1,6 +1,5 @@
 import { Select, Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import React from 'react';
 
 import styles from './styles.module.css';
 
