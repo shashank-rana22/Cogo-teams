@@ -1,5 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useTicketsRequest } from '@cogoport/request';
-import { format } from '@cogoport/utils';
 import {
 	useEffect,
 	useCallback,
@@ -18,8 +19,16 @@ const useGetDashboard = ({ date }) => {
 		try {
 			trigger({
 				params: {
-					StartDate : format(startDate, 'isoUtcDateTime'),
-					EndDate   : format(endDate, 'isoUtcDateTime'),
+					StartDate: formatDate({
+						date       : startDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+						formatType : 'date',
+					}),
+					EndDate: formatDate({
+						date       : endDate,
+						dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+						formatType : 'date',
+					}),
 				},
 			});
 		} catch (error) {
