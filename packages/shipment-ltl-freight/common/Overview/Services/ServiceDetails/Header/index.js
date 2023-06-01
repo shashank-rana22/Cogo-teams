@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import EditCancelService from '../../../../EditCancelService';
+import EditCancelService from '../../../../EditCancelService';
 import Details from '../Details';
 
 import styles from './styles.module.css';
@@ -43,7 +43,7 @@ function Header({ serviceData = [] }) {
 						</div>
 
 						<div className={styles.edit_cancel}>
-							{/* <EditCancelService serviceData={serviceData?.[0]} /> */}
+							<EditCancelService serviceData={serviceData?.[0]} />
 						</div>
 					</div>
 				</div>

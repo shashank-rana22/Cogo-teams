@@ -21,6 +21,7 @@ import useServiceList from '../../hooks/useServiceList';
 import styles from './styles.module.css';
 
 function ShipmentDetails() {
+	const activeStakeholder = 'superadmin';
 	const router = useRouter();
 	const { get } = useGetShipment();
 
@@ -40,7 +41,8 @@ function ShipmentDetails() {
 		...get,
 		...getTimeline,
 		...servicesGet,
-	}), [get, servicesGet, getTimeline]);
+		activeStakeholder,
+	}), [get, servicesGet, getTimeline, activeStakeholder]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
