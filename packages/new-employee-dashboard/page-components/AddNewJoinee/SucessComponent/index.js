@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Loader } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function SuccessComponent({ activePage }) {
 	const router = useRouter();
 
-	const { data } = useGetEmployeeDetails({ activePage });
+	const { data, loading } = useGetEmployeeDetails({ activePage });
 
 	const { detail } = data || {};
 	const { name, employee_code } = detail || {};
@@ -19,6 +19,14 @@ function SuccessComponent({ activePage }) {
 		const href = '/new-employee-dashboard';
 		router.push(href, href);
 	};
+
+	if (loading) {
+		return (
+			<div className={styles.spinner}>
+				<Loader width="100px" height="100px" style={{ height: '50px', width: '50px' }} />
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

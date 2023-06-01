@@ -18,3 +18,11 @@
 .button_wrapper {
 	padding-top: 20px;
 }
+
+.spinner {
+	width:90vw;
+	height:90vh;
+	display:flex;
+	justify-content:center;
+	align-items:center
+}

@@ -39,7 +39,6 @@ const controls = () => ([
 		label                 : 'Date of Birth',
 		type                  : 'date-select',
 		placeholder           : 'DD/MM/YYYY',
-		disable               : true,
 		isPreviousDaysAllowed : true,
 		rules                 : { required: 'This is required' },
 	},
