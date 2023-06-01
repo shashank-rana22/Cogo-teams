@@ -31,7 +31,7 @@ function Retest({ watch, control, setValue, errors }) {
 			{(controls || []).map((controlItem) => {
 				const { show = true, name } = controlItem;
 
-				if (!isEmpty(show) && !show) {
+				if (!show) {
 					return null;
 				}
 
