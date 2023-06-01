@@ -6,7 +6,7 @@ import { useState, useEffect, useMemo } from 'react';
 import {
 	backAllowed,
 	eventListener, getRedirectNavMapping,
-} from '../page-components/ShipmentInfo/helpers/getRedirectNavMapping';
+} from '../helpers/getRedirectNavMapping';
 
 export default function useShipmentBack() {
 	const profileData = useSelector(({ profile }) => profile);
