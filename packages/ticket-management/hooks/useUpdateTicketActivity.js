@@ -13,9 +13,9 @@ const useUpdateTicketActivity = ({
 		authkey : 'post_tickets_activity',
 	}, { manual: false });
 
-	const updateTicketActivity = async (Status = '', ID = '') => {
+	const updateTicketActivity = async (status = '', ID = '') => {
 		try {
-			const isReslove = Status?.toLowerCase() === 'resolve';
+			const isReslove = status?.toLowerCase() === 'resolve';
 
 			const res = await trigger({
 				data: {
