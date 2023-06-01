@@ -425,7 +425,7 @@ function MessageConversations({
 						<IcMSend
 							fill="#EE3425"
 							onClick={() => {
-								if (channel_type === 'zalo' && fileExceed() !== '') {
+								if (channel_type === 'zalo' && fileExceed() && fileExceed() !== '') {
 									Toast.error(fileExceed());
 								} else if (hasPermissionToEdit && !messageLoading) {
 									sendChatMessage(scrollToBottom);
