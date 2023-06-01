@@ -4,7 +4,7 @@ import {
 	IcMEmail,
 } from '@cogoport/icons-react';
 
-import styles from '../styles.module.css';
+import styles from '../../styles.module.css';
 
 function EmailInfo({
 	invoice = {},
