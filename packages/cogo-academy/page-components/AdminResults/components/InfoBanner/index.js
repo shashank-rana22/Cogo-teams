@@ -32,7 +32,7 @@ function InfoBanner({
 
 	const isUnderValidity = new Date() < new Date(validity_end);
 
-	const status = getTestStatus(retest, activeAttempt, test_status);
+	const status = getTestStatus({ retest, activeAttempt, test_status });
 
 	const content = TEXT_MAPPING[status];
 
@@ -46,7 +46,7 @@ function InfoBanner({
 		);
 	}
 
-	if (!['published', 'active'].includes(test_status)) {
+	if (!['published', 'active'].includes(test_status) && loading) {
 		return null;
 	}
 

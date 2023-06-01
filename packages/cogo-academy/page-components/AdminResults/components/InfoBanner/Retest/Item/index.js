@@ -8,20 +8,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function getElementController(type = '') {
-	switch (type) {
-		case 'radio':
-			return RadioGroupController;
-		case 'checkboxgroup':
-			return CheckboxGroupController;
-		case 'select':
-			return SelectController;
-		case 'date-picker':
-			return DateRangePickerController;
-		default:
-			return null;
-	}
-}
+const controlMapping = {
+	radio         : RadioGroupController,
+	checkboxgroup : CheckboxGroupController,
+	select        : SelectController,
+	'date-picker' : DateRangePickerController,
+};
 
 function Item(props) {
 	const {
@@ -31,7 +23,7 @@ function Item(props) {
 		error = {},
 	} = props || {};
 
-	const Element = getElementController(type);
+	const Element = controlMapping[type] || null;
 
 	return (
 		<div className={styles.element}>
@@ -40,12 +32,13 @@ function Item(props) {
 				<sup className={styles.sup}>*</sup>
 			</div>
 			<div className={styles.filters_types}>
-				<Element
-					{...props}
-					control={control}
-					className={styles.field_controller}
-				/>
-
+				{Element && (
+					<Element
+						{...props}
+						control={control}
+						className={styles.field_controller}
+					/>
+				)}
 				{error?.type && <div className={styles.error_text}>This is Required</div>}
 			</div>
 		</div>
