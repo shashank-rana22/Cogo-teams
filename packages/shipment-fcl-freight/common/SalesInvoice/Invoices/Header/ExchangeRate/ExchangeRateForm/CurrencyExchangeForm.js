@@ -5,7 +5,6 @@ import { isEmpty } from '@cogoport/utils';
 import FieldArrayItem from '../FieldArrayItem';
 
 import { getCurrencyControls } from './getCurrencyControls';
-import styles from './styles.module.css';
 
 function CurrencyExchangeForm({
 	invoiceCurrency = '',
@@ -52,8 +51,6 @@ function CurrencyExchangeForm({
 			onClose={() => setOpen(false)}
 			size="lg"
 			closeOnOuterClick={false}
-			className={styles.modal}
-
 		>
 			<Modal.Header title="Modify Exchange Rate" />
 			<Modal.Body>

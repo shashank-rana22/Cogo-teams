@@ -20,7 +20,7 @@ export default function FieldArrayItem({ control, controls, errors = [] }) {
 		<div className={styles.form}>
 			{fields.map((field, index) => controls.controls.map((ctrl) => (
 				<FormElement
-					// key={field.id}
+					key={field.id}
 					namePrefix={`${controls.name}.${index}`}
 					control={control}
 					errors={errors[index]}

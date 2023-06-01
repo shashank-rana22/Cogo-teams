@@ -6,10 +6,11 @@ import { v4 as uuid } from 'uuid';
 
 import rawControls from './rawControls';
 
-const trade_mapping = {
+const TRADE_MAPPING = {
 	import : 'Destination',
 	export : 'Origin',
 };
+
 const useEditLineItems = ({
 	invoice,
 	onClose,
@@ -68,7 +69,7 @@ const useEditLineItems = ({
 			isAdminSuperAdmin,
 			shipment_data,
 			index,
-			trade_mapping,
+			TRADE_MAPPING,
 		),
 		onOptionsChange : handleOptionsChange,
 		value           : (service?.line_items || []).map((item) => ({
