@@ -39,7 +39,7 @@ const useListTickets = ({
 			Type          : searchParams.category,
 		};
 		return { ...payload, ...(ticketSectionMapping?.[status] || {}) };
-	}, [profile?.user?.id, searchParams.category, searchQuery, searchParams?.agent, status]);
+	}, [profile?.user?.id, searchParams?.category, searchQuery, searchParams?.agent, status]);
 
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {
