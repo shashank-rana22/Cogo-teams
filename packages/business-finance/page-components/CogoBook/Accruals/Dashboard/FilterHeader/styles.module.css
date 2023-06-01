@@ -2,4 +2,55 @@
   display: flex;
   justify-content: space-between;
   align-items: center;
+  margin: 24px 0px;
+}
+
+.select_container {
+  display: flex;
+  gap: 16px;
+}
+.async_select {
+  :global {
+    .ui_select_display_container {
+      height: 32px;
+      width: 200px;
+    }
+  }
+}
+.legends {
+  background: #ffffff;
+  border-radius: 8px;
+  padding: 6px 24px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.small_hr {
+  display: flex;
+  background: #e0e0e0;
+  border-radius: 28px;
+  width: 2px;
+  height: 22px;
+  margin: 0px 16px;
+}
+.booked_circle {
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background: #adcd6b;
+  margin: 0px 8px;
+}
+.acc_circle {
+  border-radius: 50%;
+  width: 15px;
+  height: 15px;
+  background: #58c6d2;
+  margin: 0px 8px;
+}
+.flex_data {
+  display: flex;
+  align-items: center;
+}
+.legend {
+  font-weight: 600;
 }
