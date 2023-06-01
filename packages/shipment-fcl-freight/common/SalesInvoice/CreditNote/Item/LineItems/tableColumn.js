@@ -1,12 +1,9 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getServiceNameforTableColumn from '../../../helpers/getServiceNameforTableColumn';
 
 export const tableColumn = ({ serviceItem = {} }) => {
-	const trade_type = serviceItem?.trade_type;
-	const currencyLocale = GLOBAL_CONSTANTS.currency_locale.INR;
-	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, trade_type);
+	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, serviceItem?.trade_type);
 
 	return [
 		{
@@ -21,8 +18,16 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		},
 		{
 			label  : 'Rate',
-			render : (item) => Number(item?.price_discounted || 0).toLocaleString(currencyLocale) || 0,
-			span   : 1.2,
+			render : (item) => formatAmount({
+				amount   : item?.price_discounted || 0,
+				currency : item?.currency,
+				options  : {
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 2,
+				},
+			}),
+			span: 1.2,
 		},
 		{
 			label  : 'Quantity',
@@ -31,14 +36,30 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		},
 		{
 			label  : 'Discount',
-			render : (item) => Number(item?.discount_price || 0).toLocaleString(currencyLocale) || 'NA',
-			span   : 1.2,
+			render : (item) => formatAmount({
+				amount   : item?.discount_price || 0,
+				currency : item?.currency,
+				options  : {
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 2,
+				},
+			}),
+			span: 1.2,
 		},
 
 		{
 			label  : 'Exc. Rate',
-			render : (item) => Number(item?.exchange_rate || 0).toLocaleString(currencyLocale) || 'NA',
-			span   : 1.2,
+			render : (item) => formatAmount({
+				amount   : item?.exchange_rate || 0,
+				currency : item?.currency,
+				options  : {
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 2,
+				},
+			}),
+			span: 1.2,
 		},
 		{
 			label  : 'Tax Amt.',
