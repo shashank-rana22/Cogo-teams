@@ -7,6 +7,7 @@ function List({ checkedItems, setCheckedItems, setSelectAll, data, selectAll }) 
 	const { profile = {} } = useSelector((state) => state);
 	const { partner } = profile;
 	const { id } = partner;
+
 	const handleCheck = (event) => {
 		const { value, checked } = event.target;
 		if (checked) {
@@ -19,6 +20,7 @@ function List({ checkedItems, setCheckedItems, setSelectAll, data, selectAll }) 
 			setSelectAll(false);
 		}
 	};
+
 	return (
 		<div className={styles.container}>
 			{(data || []).map((item) => (
