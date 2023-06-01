@@ -86,7 +86,7 @@ function TestResult() {
 
 			{not_attempted ? (
 				<div className={styles.attempted_data}>
-					You haven't attempted this test. Hence, there's no data to show here.
+					You have not attempted this test. Hence, there is no data to show here.
 					<EmptyState className={styles.emptystate} />
 				</div>
 			) : (

@@ -68,10 +68,8 @@ function QuestionsComponent({ test_id, activeAttempt }) {
 
 			{loading && (
 				<div className={styles.placeholder_container}>
-					{Array(5).fill('').map(() => (
-						<div
-							className={styles.placeholder_inner_container}
-						>
+					{[...Array(5).keys()].map((key) => (
+						<div key={key} className={styles.placeholder_inner_container}>
 							<Placeholder height="24px" />
 						</div>
 					))}

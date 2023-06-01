@@ -157,7 +157,7 @@ const getAppearedColumns = ({
 	{
 		Header   : '',
 		id       : 'see_more',
-		accessor : ({ user = {}, test_id = '', is_evaluated = false, activeAttempt }) => (
+		accessor : ({ user = {}, test_id = '', is_evaluated = false }) => (
 			<div
 				role="presentation"
 				onClick={

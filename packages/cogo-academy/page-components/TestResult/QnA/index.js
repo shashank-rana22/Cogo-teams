@@ -66,6 +66,7 @@ function QnA({ user_name = '', test_id, user_id, view, is_evaluated = false, sta
 				{!isEmpty(case_study_questions) ? (
 					case_study_questions.map((item, index) => (
 						<CaseStudy
+							key={item?.questions_description?.id}
 							case_study={item}
 							index={index}
 							user_name={user_name}
