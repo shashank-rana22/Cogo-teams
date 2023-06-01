@@ -16,6 +16,7 @@ function Conversations({
 	mailProps,
 	setActiveMessage = () => {},
 	setRaiseTicketModal = () => {},
+	viewType = '',
 }) {
 	return (
 		<div className={cl`${activeTab === 'mail' ? styles.mail_div : styles.container}`}>
@@ -28,6 +29,7 @@ function Conversations({
 					isomniChannelAdmin={isomniChannelAdmin}
 					setActiveMessage={setActiveMessage}
 					setRaiseTicketModal={setRaiseTicketModal}
+					viewType={viewType}
 				/>
 			)}
 			{activeTab === 'voice' && (<VoiceCall activeVoiceCard={activeVoiceCard} />)}

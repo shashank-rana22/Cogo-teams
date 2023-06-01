@@ -42,30 +42,12 @@ export const ARCHIVE_MONTH_BOOKED = [
 		},
 	},
 	{
-		Header   : 'Expense Accrued',
-		accessor : 'expenseAccrued',
-		id       : 'expenseAccrued',
-		Cell     : ({ row: { original } }) => {
-			const { expenseAccrued, expenseCurrency } = original || {};
-			return <span>{getFormattedPrice(expenseAccrued, expenseCurrency) || '-' }</span>;
-		},
-	},
-	{
 		Header   : 'Income Booked',
 		accessor : 'incomeBooked',
 		id       : 'incomeBooked',
 		Cell     : ({ row: { original } }) => {
 			const { incomeBooked, incomeCurrency } = original || {};
 			return <span>{getFormattedPrice(incomeBooked, incomeCurrency) || '-' }</span>;
-		},
-	},
-	{
-		Header   : 'Income Accrued',
-		accessor : 'incomeAccrued',
-		id       : 'incomeAccrued',
-		Cell     : ({ row: { original } }) => {
-			const { incomeAccrued, incomeCurrency } = original || {};
-			return <span>{getFormattedPrice(incomeAccrued, incomeCurrency) || '-' }</span>;
 		},
 	},
 	{
@@ -129,7 +111,7 @@ export const ARCHIVE_MONTH_BOOKED = [
 					placement="bottom"
 					content={renderContent()}
 				>
-					<div style={{ display: 'flex', cursor: 'pointer' }}>
+					<div className={styles.cursor}>
 						<ValuePercentage data={original} keys="variance" />
 						<div><IcMArrowRotateDown /></div>
 					</div>
@@ -233,6 +215,121 @@ export const ARCHIVE_DECLARED = (
 				<div className={styles.button}>
 					<Button className="arrow" onClick={clickHandle} themeType="secondary"> View</Button>
 				</div>
+			);
+		},
+	},
+];
+
+export const ARCHIVE_MONTH_ACCRUED = [
+	{
+		Header   : 'SID',
+		accessor : 'sid',
+		id       : 'sid',
+		Cell     : ({ row: { original } }) => {
+			const { jobNumber = '', serviceType = '' } = original || {};
+			return (
+
+				<div className={styles.job_number}>
+					<div className={styles.job_number_data}>{ jobNumber || '-' }</div>
+					<div>{startCase(serviceType || '-')}</div>
+				</div>
+
+			);
+		},
+	},
+	{
+		Header   : 'Transaction Date',
+		accessor : 'etd',
+		id       : 'etd',
+		Cell     : ({ row: { original } }) => {
+			const { etd } = original || {};
+			return <span>{ format(etd, 'dd/MM/yyy') || '-' }</span>;
+		},
+	},
+	{
+		Header   : 'Expense Accrued',
+		accessor : 'expenseAccrued',
+		id       : 'expenseAccrued',
+		Cell     : ({ row: { original } }) => {
+			const { expenseAccrued, expenseCurrency } = original || {};
+			return <span>{getFormattedPrice(expenseAccrued, expenseCurrency) || '-' }</span>;
+		},
+	},
+	{
+		Header   : 'Income Accrued',
+		accessor : 'incomeAccrued',
+		id       : 'incomeAccrued',
+		Cell     : ({ row: { original } }) => {
+			const { incomeAccrued, incomeCurrency } = original || {};
+			return <span>{getFormattedPrice(incomeAccrued, incomeCurrency) || '-' }</span>;
+		},
+	},
+	{
+		Header   : 'Booked Profit',
+		accessor : 'bookedProfit',
+		id       : 'bookedProfit',
+		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="bookedProfit" />,
+	},
+	{
+		Header   : 'Actual Profit',
+		accessor : 'actualProfit',
+		id       : 'actualProfit',
+		Cell     : ({ row: { original } }) => <ValuePercentage data={original} keys="actualProfit" />,
+	},
+	{
+		Header   : 'Variance',
+		accessor : 'variance',
+		id       : 'variance',
+		Cell     : ({ row: { original } }) => {
+			const {
+				expenseBooked = 0,
+				actualExpense = 0,
+				incomeBooked = 0,
+				actualIncome = 0,
+				expenseAccrued = 0,
+				incomeAccrued = 0,
+				expenseCurrency,
+			} = original || {};
+
+			const renderContent = () => (
+				<div className={styles.variance_styles}>
+					<div>
+						<div className={styles.expense}>Expense Variation</div>
+						<div>
+							Amount :
+							{' '}
+							<span className={styles.amount}>
+								{getFormattedPrice((actualExpense
+								- (expenseBooked + expenseAccrued)), expenseCurrency)}
+
+							</span>
+						</div>
+					</div>
+					<div>
+						<div className={styles.income}>Income Variation</div>
+						<div>
+							Amount :
+							{' '}
+							<span className={styles.amount}>
+								{getFormattedPrice((actualIncome - (
+									incomeBooked + incomeAccrued)), expenseCurrency)}
+
+							</span>
+						</div>
+					</div>
+				</div>
+			);
+
+			return (
+				<Tooltip
+					placement="bottom"
+					content={renderContent()}
+				>
+					<div className={styles.cursor}>
+						<ValuePercentage data={original} keys="variance" />
+						<div><IcMArrowRotateDown /></div>
+					</div>
+				</Tooltip>
 			);
 		},
 	},

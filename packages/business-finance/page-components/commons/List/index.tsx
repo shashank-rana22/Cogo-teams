@@ -28,6 +28,7 @@ export interface Props {
 	showPagination?: boolean;
 	subActiveTab?: string;
 	width?: string;
+	rowStyle?:string;
 }
 
 function List({
@@ -44,6 +45,7 @@ function List({
 	showPagination = true,
 	subActiveTab,
 	width,
+	rowStyle,
 }: Props) {
 	const {
 		showHeader = true,
@@ -74,6 +76,7 @@ function List({
 			<div style={bodyStyles}>
 				{(list || [1, 2, 3, 4, 5]).map((singleitem) => (
 					<CardColumn
+						key={singleitem.id}
 						fields={fields}
 						itemStyles={itemStyles}
 						singleitem={singleitem}
@@ -83,6 +86,7 @@ function List({
 						isMobile={isMobile}
 						subActiveTab={subActiveTab}
 						width={width}
+						rowStyle={rowStyle}
 					/>
 				))}
 			</div>

@@ -1,0 +1,52 @@
+.text_style {
+	display: flex;
+	justify-content: flex-start;
+	margin-bottom: 12px;
+	font-size: 14px;
+	line-height: 21px;
+}
+
+.left_titles {
+	width: 40%;
+}
+
+.button {
+	display: flex;
+	justify-content: flex-end;
+}
+
+.remark_overflow {
+	text-overflow: ellipsis;
+}
+
+.tooltip_text {
+	font-size: 12px;
+	font-weight: 600;
+	word-break: break-word;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}
+
+.remarks {
+	margin: 20px 0 8px;
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.title {
+	min-width: 200px;
+	font-weight: 600;
+}
+
+.flex {
+	display: flex;
+	margin-bottom: 8px;
+}
+
+.name {
+	padding: 0 4px;
+}
+
+.divider {
+	margin-right: 4px;
+}

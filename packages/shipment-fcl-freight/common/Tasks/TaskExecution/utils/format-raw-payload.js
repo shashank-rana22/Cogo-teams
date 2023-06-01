@@ -103,6 +103,17 @@ const formatRawValues = (rawValues, task, getApisData) => {
 		};
 	}
 
+	if (task.task === 'mark_container_gated_out') {
+		return {
+			update_data: rawValues?.containers_gated_out?.map((i) => ({
+				id   : i?.id,
+				data : {
+					gated_out_at: i?.gated_out_at,
+				},
+			})),
+		};
+	}
+
 	return values;
 };
 

@@ -1,17 +1,23 @@
 {
 	"shipment_types": [
 		{ "label": "FCL", "value": "fcl_freight" },
+		{ "label": "FCL CFS", "value": "fcl_cfs" },
 		{ "label": "LCL", "value": "lcl_freight" }
+       
 	],
 	"fcl_freight": [
-        { "label": "Export", "value": "export", "isDateFilterVisible":true },
-        { "label": "Import", "value": "import", "isDateFilterVisible":true },
-        { "label": "Customs", "value": "fcl_customs" },
-        { "label": "Local", "value": "fcl_local" }
-    ], 
-    "lcl_freight": [
-        { "label": "Export", "value": "export", "isDateFilterVisible":true  },
-        { "label": "Import", "value": "import", "isDateFilterVisible":true },
-        { "label": "Customs", "value": "lcl_customs" }
-    ]
+		{ "label": "Export", "value": "export", "isDateFilterVisible":true },
+		{ "label": "Import", "value": "import", "isDateFilterVisible":true },
+		{ "label": "Customs", "value": "fcl_customs" },
+		{ "label": "Local", "value": "fcl_local" }
+	], 
+	"lcl_freight": [
+		{ "label": "Export", "value": "export", "isDateFilterVisible":true },
+		{ "label": "Import", "value": "import", "isDateFilterVisible":true },
+		{ "label": "Customs", "value": "lcl_customs" }
+	],
+	"fcl_cfs": [
+		{ "label": "Export", "value": "export", "isDateFilterVisible":true  },
+		{ "label": "Import", "value": "import", "isDateFilterVisible":true }
+	]
 }

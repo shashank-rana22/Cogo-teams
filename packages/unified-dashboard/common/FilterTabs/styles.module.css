@@ -1,0 +1,15 @@
+.revenue_filter_btn {
+	height: 32px;
+	padding-top: 3.5px;
+	font-size: 12px;
+	color: #000;
+	background: #fff;
+	border-color: #e0e0e0;
+	border-radius: 0;
+}
+
+.active {
+	font-weight: 500;
+	color: #fff;
+	background: #000;
+}
