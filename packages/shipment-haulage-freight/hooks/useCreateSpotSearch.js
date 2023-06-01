@@ -1,6 +1,6 @@
 import { useRouter } from '@cogoport/next';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
 import formatPayload from '../helpers/service-upsell-payload';
 

@@ -1,5 +1,5 @@
 import { cl, Tooltip } from '@cogoport/components';
-import { IcMPortArrow, IcMFlcl } from '@cogoport/icons-react';
+import { IcMPortArrow, IcMFhaulage } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -64,8 +64,8 @@ function PortDetails({ data = {}, primary_service = {} }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.icons_and_service}>
-				<IcMFlcl />
-				<span>LCL</span>
+				<IcMFhaulage />
+				<span>Haulage</span>
 			</div>
 
 			{renderLocation()}

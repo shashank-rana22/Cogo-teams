@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
+import EmptyState from '@cogoport/surface-modules/common/EmptyState';
 import { useEffect } from 'react';
 
 import useGetSubsidiaryServiceRateCards from '../../../../../../hooks/useGetSubsidiaryServiceRateCards';

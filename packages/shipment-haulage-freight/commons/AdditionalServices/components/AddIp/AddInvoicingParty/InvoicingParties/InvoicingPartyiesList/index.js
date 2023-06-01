@@ -1,5 +1,5 @@
 import { Loader, Button } from '@cogoport/components';
-import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
+import EmptyState from '@cogoport/surface-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo, useState, useEffect } from 'react';
 

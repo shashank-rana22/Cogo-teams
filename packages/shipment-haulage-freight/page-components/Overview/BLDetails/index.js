@@ -1,6 +1,6 @@
 import { Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
+import EmptyState from '@cogoport/surface-modules/common/EmptyState';
 import React, { useContext } from 'react';
 
 import useListBillOfLadings from '../../../hooks/useListBillOfLadings';

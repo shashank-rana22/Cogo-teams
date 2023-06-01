@@ -1,6 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import Assured from '@cogoport/ocean-modules/components/Assured';
-import TermsAndConditions from '@cogoport/ocean-modules/components/TermsAndConditions';
+import Assured from '@cogoport/surface-modules/components/Assured';
+import TermsAndConditions from '@cogoport/surface-modules/components/TermsAndConditions';
 import { useContext } from 'react';
 
 import BLDetails from './BLDetails';
