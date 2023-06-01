@@ -3,6 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../../../../../../../../commons/getFieldController';
 
+import controls from './controls';
 import styles from './styles.module.css';
 import useHandleChapterContent from './useHandleChapterContent';
 
@@ -26,7 +27,6 @@ function ChapterContent({
 		setEditorValue,
 		uploadVideoWatch,
 		uploadDocumentWatch,
-		controls,
 	} = useHandleChapterContent({
 		chapterContent,
 		onSaveChapter,
@@ -43,95 +43,6 @@ function ChapterContent({
 					name,
 					subControls = [],
 				} = controlItem || {};
-
-				if (
-					['additional_resources_title', 'additional_resources_link'].includes(
-						name,
-					)
-					&& !additionalResourcesWatch
-				) {
-					return null;
-				}
-
-				if (name === 'upload_file' && additionalResourcesWatch) {
-					return null;
-				}
-
-				if (
-					!['presentation', 'text'].includes(contentTypeWatch)
-					&& name === 'upload_presentation'
-				) {
-					return null;
-				}
-
-				if (contentTypeWatch !== 'document' && name === 'upload_document') {
-					return null;
-				}
-
-				if (contentTypeWatch !== 'video' && name === 'upload_video') {
-					return null;
-				}
-
-				if (
-					!['presentation', 'text'].includes(contentTypeWatch)
-					&& name === 'upload_presentation'
-				) {
-					return null;
-				}
-
-				if (
-					contentTypeWatch !== 'programming_assessment'
-					&& name === 'programming_assessment'
-				) {
-					return null;
-				}
-
-				if (
-					contentTypeWatch === 'programming_assessment'
-					&& name === 'programming_assessment'
-				) {
-					return (
-						<div className={styles.select_group}>
-							{subControls.map((subControlItem) => {
-								const {
-									name: subControlName,
-									elementType: subControlType,
-									label: subControlLabel,
-									style = {},
-								} = subControlItem || {};
-
-								const SubControlElement = getFieldController(subControlType);
-
-								return (
-									<div
-										key={name}
-										className={`${styles.form_group} ${styles[subControlName]}`}
-										style={style}
-									>
-										<div className={styles.label}>
-											{subControlLabel}
-											<sup className={styles.superscipt}>*</sup>
-										</div>
-
-										<SubControlElement
-											{...subControlItem}
-											key={subControlName}
-											control={control}
-											style={{ width: '90%' }}
-											id={`${subControlName}_input`}
-										/>
-
-										{errors?.[subControlName]?.message ? (
-											<div className={styles.error_message}>
-												{errors?.[subControlName]?.message}
-											</div>
-										) : null}
-									</div>
-								);
-							})}
-						</div>
-					);
-				}
 
 				if (elementType === 'groupSelect') {
 					return (
@@ -174,6 +85,41 @@ function ChapterContent({
 							</div>
 						</div>
 					);
+				}
+
+				if (
+					['additional_resources_title', 'additional_resources_link'].includes(
+						name,
+					)
+					&& !additionalResourcesWatch
+				) {
+					return null;
+				}
+
+				if (name === 'upload_file' && additionalResourcesWatch) {
+					return null;
+				}
+
+				if (
+					!['presentation', 'text'].includes(contentTypeWatch)
+					&& name === 'upload_presentation'
+				) {
+					return null;
+				}
+
+				if (contentTypeWatch !== 'document' && name === 'upload_document') {
+					return null;
+				}
+
+				if (contentTypeWatch !== 'video' && name === 'upload_video') {
+					return null;
+				}
+
+				if (
+					!['presentation', 'text'].includes(contentTypeWatch)
+					&& name === 'upload_presentation'
+				) {
+					return null;
 				}
 
 				const docToUse = name === 'upload_video' ? uploadVideoWatch : uploadDocumentWatch;

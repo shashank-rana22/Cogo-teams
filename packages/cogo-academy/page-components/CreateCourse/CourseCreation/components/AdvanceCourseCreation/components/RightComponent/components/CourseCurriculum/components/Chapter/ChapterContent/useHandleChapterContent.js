@@ -4,8 +4,6 @@ import { useState, useEffect } from 'react';
 
 import getPayload from '../../../../../../../utils/getPayload';
 
-import getControls from './getControls';
-
 let RichTextEditor;
 
 if (typeof window !== 'undefined') {
@@ -17,9 +15,6 @@ const MAPPING = ['name', 'description', 'content_type', 'completion_duration_val
 
 const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, index }) => {
 	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
-	const [question, setQuestion] = useState({});
-
-	const controls = getControls({ setQuestion });
 
 	const { control, formState:{ errors = {} }, watch, handleSubmit, setValue } = useForm();
 
@@ -29,8 +24,6 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 		upload_video: uploadVideoWatch,
 		upload_document: uploadDocumentWatch,
 	} = watch();
-
-	console.log('question', question);
 
 	const onSubmit = (values) => {
 		const { isNew = false } = chapterContent || {};
@@ -138,7 +131,6 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 		setEditorValue,
 		uploadVideoWatch,
 		uploadDocumentWatch,
-		controls,
 	};
 };
 
