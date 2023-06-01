@@ -1108,6 +1108,16 @@ const navigationMappingAdmin = {
 		icon        : IcMCoe,
 		options     : [
 			{
+				key           : 'coe-revenue_desk',
+				title         : 'Revenue Desk',
+				href          : '/v2/revenue-desk',
+				as            : '/v2/revenue-desk',
+				type          : '',
+				main_apis     : [],
+				possible_apis : apis.revenue_desk,
+
+			},
+			{
 				key           : 'coe-booking_tasks',
 				title         : 'Operations Management',
 				href          : '/booking-tasks',
