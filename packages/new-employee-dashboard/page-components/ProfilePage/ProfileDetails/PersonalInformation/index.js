@@ -60,11 +60,11 @@ function PersonalInformation({ profileData }) {
 							{startCase(element)}
 							{' '}
 						</div>
-						<div>
 
+						<div>
 							{' '}
 							{MAPPING?.[element]
-								|| detail?.[element]?.mobile_number || detail?.[element]?.mobile_country_code}
+								|| detail?.[element]?.mobile_number || detail?.[element]?.mobile_country_code || '-'}
 						</div>
 					</div>
 				))
