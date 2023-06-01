@@ -73,10 +73,13 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, act
 
 					</div>
 
-					<div className={styles.rating}>
-						<IcMStarfull style={{ marginRight: '6px' }} />
-						<div>{data?.rating || 0}</div>
-					</div>
+					{data?.rating ? (
+						<div className={styles.rating}>
+							<IcMStarfull style={{ marginRight: '6px' }} fill="#fcdc00" />
+							<span style={{ color: '#fcdc00' }}>{data?.rating}</span>
+						</div>
+					)
+						: null}
 				</div>
 
 				<div className={styles.save}>
