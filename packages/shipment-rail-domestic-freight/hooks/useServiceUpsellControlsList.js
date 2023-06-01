@@ -50,8 +50,7 @@ const useGetControls = ({ truckTypeToggle }) => {
 				},
 			},
 		],
-		lcl_customs : [],
-		ltl_freight : [
+		ltl_freight: [
 			{
 				label       : 'Pickup/Drop Pincode',
 				name        : 'location_id',
@@ -160,6 +159,17 @@ const useGetControls = ({ truckTypeToggle }) => {
 						rules : { required: 'Required' },
 					},
 				],
+			},
+		],
+		trailer_freight: [
+			{
+				label       : 'Pickup/Drop Pincode',
+				name        : 'location_id',
+				placeholder : 'Search via pincode',
+				type        : 'select',
+				span        : 12,
+				rules       : { required: 'This is required' },
+				...locationAsyncOptions,
 			},
 		],
 	};

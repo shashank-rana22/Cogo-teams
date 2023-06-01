@@ -7,7 +7,7 @@ const useGetShipmentProcess = ({ defaultParams = {} }) => {
 		url    : 'get_shipment_process',
 		method : 'GET',
 		params : {
-			shipment_type: 'lcl_freight',
+			shipment_type: 'rail_domestic_freight',
 			...defaultParams,
 		},
 	}, { manual: true });

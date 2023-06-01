@@ -23,8 +23,10 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		commodity,
 		volume,
 		weight,
-		packages_count,
-		bls_count,
+		cargo_weight_per_container,
+		container_size,
+		container_type,
+		containers_count,
 	} = primary_service || {};
 
 	const common = {
@@ -35,22 +37,31 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		trade_type,
 	};
 
-	const common2 = {
-		bls_count      : Number(bls_count || 1),
-		packages_count : Number(packages_count || 1),
-	};
-
-	if (search_type === 'lcl_customs') {
+	if (search_type === 'trailer_freight') {
 		if (trade_type === 'export') {
 			return [{
-				location_id: primary_service?.origin_port?.id,
-				...common,
-				...common2,
+				trade_type              : common.trade_type,
+				commodity               : common.commodity,
+				status                  : common.status,
+				origin_location_id      : formValues?.location_id,
+				destination_location_id : primary_service?.origin_location?.id,
+				cargo_weight_per_container,
+				container_size,
+				container_type,
+				containers_count,
 			}];
-		} return [{
-			location_id: primary_service?.destination_port?.id,
-			...common,
-			...common2,
+		}
+
+		return [{
+			trade_type              : common.trade_type,
+			commodity               : common.commodity,
+			status                  : common.status,
+			destination_location_id : formValues?.location_id,
+			origin_location_id      : primary_service?.destination_location?.id,
+			cargo_weight_per_container,
+			container_size,
+			container_type,
+			containers_count,
 		}];
 	}
 
@@ -77,7 +88,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		if (trade_type === 'export') {
 			return [{
 				origin_location_id      : formValues?.location_id,
-				destination_location_id : primary_service?.origin_port?.id,
+				destination_location_id : primary_service?.origin_location?.id,
 				trip_type               : 'one_way',
 				truck_type              : formValues?.truck_type,
 				trucks_count            : Number(formValues?.trucks_count),
@@ -87,24 +98,12 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 			}];
 		} return [{
 			destination_location_id : formValues?.location_id,
-			origin_location_id      : primary_service?.destination_port?.id,
+			origin_location_id      : primary_service?.destination_location?.id,
 			trip_type               : 'one_way',
 			truck_type              : formValues?.truck_type,
 			trucks_count            : Number(formValues?.trucks_count),
 			...common,
 			commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,
-		}];
-	}
-
-	if (search_type === 'lcl_freight_local') {
-		return [{
-			port_id:
-				trade_type === 'export'
-					? primary_service?.origin_port?.id
-					: primary_service?.destination_port?.id,
-			shipping_line_id: primary_service?.shipping_line?.id,
-			...common,
-			...common2,
 		}];
 	}
 
@@ -120,6 +119,7 @@ const formatPayload = ({
 	user = {},
 }) => {
 	const search_type = service?.service_type?.replace('_service', '');
+	const { id, importer_exporter_branch_id, importer_exporter_id, user_id } = shipment_data;
 
 	const { trade_type = '' } = service || {};
 
@@ -133,15 +133,13 @@ const formatPayload = ({
 	};
 
 	const newPayload = {
-		search_type,
 		source                                 : 'upsell',
-		source_id                              : shipment_data?.id,
-		importer_exporter_id                   : organization_id,
-		importer_exporter_branch_id            : user?.branch_id,
-		user_id                                : user?.user_id,
-		[`${search_type}_services_attributes`] : formatDataForSingleService({
-			rawParams,
-		}),
+		source_id                              : id,
+		search_type,
+		importer_exporter_id,
+		importer_exporter_branch_id,
+		user_id,
+		[`${search_type}_services_attributes`] : formatDataForSingleService({ rawParams }),
 	};
 
 	return { payload: newPayload };

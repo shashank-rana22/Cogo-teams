@@ -8,10 +8,13 @@ import useListShipmentDocuments from './useListShipmentDocuments';
 import useListShipmentOrganizations from './useListShipmentOrganizations';
 import useListShipmentPendingTasks from './useListShipmentPendingTasks';
 
+const PAGE_LIMIT = 50;
+const PAGE = 1;
 const TASKS = ['upload_document', 'approve_document', 'amend_document'];
 
 const useCreateTaskList = ({ shipment_data = {} }) => {
 	const trade_type = getShipmentTradeType({ shipment_data });
+
 	const [taskList, setTaskList] = useState([]);
 	const [docTypes, setDocTypes] = useState([]);
 
@@ -28,9 +31,9 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 		apiTrigger:refetch,
 	} = useListShipmentDocuments({
 		defaultParams: {
-			page_limit                       : 50,
+			page_limit                       : PAGE_LIMIT,
 			created_by_user_details_required : true,
-			page                             : 1,
+			page                             : PAGE,
 		},
 		defaultFilters: {
 			shipment_id,
@@ -57,10 +60,11 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 
 	const taskConfigsForAllShipmentTasks = useMemo(() => (processData?.data?.services_config || [])
 		.map(({ states }) => states?.map(({ configs }) => configs?.filter(
-			(task) => TASKS.includes(task?.task_type)
-				&& task?.trade_type === trade_type,
+			(task) => TASKS.includes(task?.task_type) && task?.trade_type === trade_type,
 		)))
 		.flat(2), [processData?.data?.services_config, trade_type]);
+
+	console.log({ taskConfigsForAllShipmentTasks }, processData?.data?.services_config);
 
 	const listOfAllShipmentDocTypes = useMemo(
 		() => taskConfigsForAllShipmentTasks?.map((t) => getDocType(t?.task)),
@@ -84,6 +88,7 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 				}
 				return false;
 			});
+			console.log({ pushInDocTypesArr });
 
 			extraDocumentUploaded = (extraDocumentUploaded || []).map((child) => ({
 				...child,
@@ -96,9 +101,11 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 			const restList = [];
 			const pendingList = [];
 			const uploadedList = [];
+			console.log({ taskConfigsForAllShipmentTasks });
 
 			(taskConfigsForAllShipmentTasks || []).forEach((child) => {
 				const doc_type = getDocType(child?.task);
+				console.log({ child, doc_type });
 				pushInDocTypesArr.push(doc_type);
 
 				if (listOfUploadedDocumentTypes.includes(doc_type)) {
@@ -114,7 +121,7 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 			});
 
 			setTaskList([...extraDocumentUploaded, ...uploadedList, ...pendingList, ...restList]);
-
+			console.log({ restList });
 			setDocTypes([...pushInDocTypesArr]);
 		}
 	}, [

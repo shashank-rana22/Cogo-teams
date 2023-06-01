@@ -6,6 +6,7 @@ import styles from './styles.module.css';
 
 function Item({ label, detail }) {
 	const valueFormatted = renderValue(label?.key, detail);
+	console.log({ label });
 
 	return valueFormatted
 		? (

@@ -9,7 +9,6 @@ export default function useCreateSpotSearch({
 	primary_service = {},
 	shipment_data = {},
 	organization_id = '',
-	user = {},
 }) {
 	const router = useRouter();
 
@@ -25,7 +24,6 @@ export default function useCreateSpotSearch({
 			shipment_data,
 			formValues: values,
 			organization_id,
-			user,
 		});
 
 		try {

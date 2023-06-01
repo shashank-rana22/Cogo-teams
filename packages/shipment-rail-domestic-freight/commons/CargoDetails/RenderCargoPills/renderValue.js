@@ -115,20 +115,8 @@ export const renderValue = (label, detail) => {
 			return detail?.source === 'direct'
 				? 'Sell Without Buy'
 				: startCase(detail.source || '');
-		case 'shipping_line.business_name':
-			return detail.shipping_line?.business_name;
-		case 'preferred_shipping_line.business_name':
-			return detail.preferred_shipping_line?.business_name;
 		case 'state':
 			return startCase(detail.state || '');
-		case 'origin_port.display_name':
-			return detail?.origin_port?.display_name || '';
-		case 'destination_port.display_name':
-			return detail?.destination_port?.display_name || '';
-		case 'origin_main_port.display_name':
-			return detail?.origin_main_port?.display_name || '';
-		case 'destination_main_port.display_name':
-			return detail?.destination_main_port?.display_name || '';
 		case 'origin_location.display_name':
 			return detail.origin_location?.display_name || '';
 		case 'container_handover_location':

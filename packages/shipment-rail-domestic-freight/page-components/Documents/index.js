@@ -18,7 +18,7 @@ function Documents() {
 	const {
 		shipment_data, activeStakeholder,
 		stakeholderConfig:{ documents = {} } = {},
-	} = 	useContext(ShipmentDetailContext);
+	} = useContext(ShipmentDetailContext);
 
 	const [showDoc, setShowDoc] = useState(null);
 	const [showApproved, setShowApproved] = useState(false);
@@ -27,7 +27,7 @@ function Documents() {
 	const [addToWallet, setAddToWallet] = useState(true);
 	const [searchValue, setSearchValue] = useState('');
 
-	const { apiTrigger:createDocumentTrigger } = useCreateOrganizationDocument({});
+	const { apiTrigger:createDocumentTrigger = () => {} } = useCreateOrganizationDocument({});
 
 	const {
 		loading,

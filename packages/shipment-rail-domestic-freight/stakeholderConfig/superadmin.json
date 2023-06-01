@@ -4,7 +4,7 @@
     "timeline": {
         "can_edit": true
     },
-    "default_tab":"tasks",
+    "default_tab":"documents",
     "overview":{
         "tab_title":"Overview"
     },

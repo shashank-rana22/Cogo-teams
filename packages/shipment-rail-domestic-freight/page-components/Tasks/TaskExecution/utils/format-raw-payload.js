@@ -1,4 +1,7 @@
-const formatRawValues = (rawValues, task) => {
+import containerDetailTasks from '../configs/containerDetailTasks';
+import truckDetailTasks from '../configs/truckDetailTasks';
+
+const formatRawValues = (rawValues, task, getApisData) => {
 	const values = {};
 
 	Object.keys(rawValues || {}).forEach((key) => {
@@ -36,14 +39,28 @@ const formatRawValues = (rawValues, task) => {
 		};
 	}
 
-	if (task.task === 'mark_container_gated_out') {
+	if (truckDetailTasks.includes(task?.task)) {
 		return {
-			update_data: rawValues?.containers_gated_out?.map((i) => ({
-				id   : i?.id,
-				data : {
-					gated_out_at: i?.gated_out_at,
-				},
-			})),
+			update_data: (getApisData?.list_shipment_truck_details || []).map(
+				(item) => ({
+					id   : item.id,
+					data : { ...(values || {}) },
+				}),
+			),
+		};
+	}
+
+	if (containerDetailTasks.includes(task?.task)) {
+		return {
+			update_data: (getApisData?.list_shipment_container_details || []).map(
+				(item) => ({
+					id   : item?.id,
+					data : {
+						container_number: item?.container_number,
+						...(values || {}),
+					},
+				}),
+			),
 		};
 	}
 

@@ -12,7 +12,6 @@ function Services() {
 	const { isGettingShipment, servicesList, servicesLoading } = useContext(ShipmentDetailContext);
 
 	const { serviceObj, upsellServices } = useMemo(() => helperFuncs(servicesList), [servicesList]);
-	console.log({ serviceObj });
 
 	const serviceCategories = Object.keys(serviceObj);
 

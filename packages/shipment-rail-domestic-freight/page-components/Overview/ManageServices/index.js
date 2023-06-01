@@ -3,15 +3,15 @@ import { Accordion } from '@cogoport/components';
 import { AdditionalServiceList } from '../../../commons/AdditionalServices';
 import Services from '../Services';
 
+import styles from './styles.module.css';
+
 function ManageServices() {
 	return (
-		<div>
-			<Accordion title={<div>Manage Services</div>} isOpen>
-				<Services />
+		<Accordion title={<div className={styles.title}>Manage Services</div>} isOpen>
+			<Services />
 
-				<AdditionalServiceList />
-			</Accordion>
-		</div>
+			<AdditionalServiceList />
+		</Accordion>
 	);
 }
 
