@@ -104,11 +104,13 @@ function HomePage({ user_id, CourseCategoryData }) {
 			<div>
 				<div className={styles.category_head}>
 					<div style={{ color: '#6FA5AB' }}>Recommended for You</div>
-					<div className={styles.category_head}>
+					<Button
+						themeType="tertiary"
+					>
 						See All
 						{' '}
 						<IcMArrowRight />
-					</div>
+					</Button>
 				</div>
 
 				<div>
