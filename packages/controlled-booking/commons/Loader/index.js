@@ -20,7 +20,7 @@ function Card() {
 			</div>
 			<div className={styles.body}>
 				<div className={styles.port_pair}>
-					{[...Array(3)].map((index) => <PortPair key={index} />)}
+					{[...Array(3).keys()].map((value) => <PortPair key={value} />)}
 				</div>
 				<div className={styles.last}>
 					<div className={styles.extra}>

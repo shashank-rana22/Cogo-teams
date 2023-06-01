@@ -48,8 +48,8 @@ function ApprovalForm({ errors, setValue, control, formValues, checkout_approval
 								size="md"
 								placeholder="Select"
 								options={[{
-									label: 'USD', value: 'usd',
-								}, {	label: 'INR', value: 'inr' }]}
+									label: 'USD', value: 'USD',
+								}, {	label: 'INR', value: 'INR' }]}
 								rules={{ required: 'This field is required' }}
 								value={checkout_approvals?.[0]?.advance_payment_info?.amount_currency}
 								disabled

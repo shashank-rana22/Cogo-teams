@@ -86,7 +86,7 @@
 	font-size     : 16;
 	white-space   : nowrap;
 	overflow     : hidden;
-text-Overflow : ellipsis;
+    text-Overflow : ellipsis;
 
 }
 
@@ -121,4 +121,12 @@ text-Overflow : ellipsis;
     color           : #221F20;
     font-size        : 12px;
     box-shadow       : 0px 0px 8px rgba(98, 127, 172, 0.2);
+}
+
+.text_style{
+    display        : flex;
+	align-items     : center;
+	justify-content : space-between;
+	margin-bottom   : 4px;
+	margin-top      : 6px;
 }

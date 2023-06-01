@@ -1,5 +1,6 @@
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowDown, IcMArrowUp, IcMTimer } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useRef, useEffect, useState } from 'react';
 
 import MoreDetails from './MoreDetails';
@@ -31,14 +32,14 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 	const {
 		services,
 		primary_service,
-		checkout_approvals,
-		approvals,
 		importer_exporter,
 		source, checkout_detail = {},
 	} = item || {};
+
 	const { agents } = importer_exporter;
 	const ownerName = agents?.[0]?.name;
-	const { rate } = checkout_detail || {};
+	const { rate, detail } = checkout_detail || {};
+	const { checkout_approvals } = detail || {};
 
 	const {
 		tax_total_price_discounted,
@@ -52,26 +53,52 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 	);
 
 	const timerRef = useRef(null);
-	let time = null;
+	const intervalRef = useRef(null);
 
 	const hasExpired = new Date()?.getTime() >= new Date(item?.validity_end || '').getTime();
 
 	useEffect(() => {
-		if (!hasExpired) {
-			const interval = setInterval(() => {
-				time = handleTimer(item?.validity_end);
-
-				if (time) {
-					timerRef.current.innerText = time;
-				}
+		if (hasExpired && intervalRef.current) {
+			clearInterval(intervalRef.current);
+		} else {
+			intervalRef.current = setInterval(() => {
+				timerRef.current.innerText = handleTimer(item?.validity_end);
 			}, 1000);
 
 			if (!item?.validity_end) {
-				return () => clearInterval(interval);
+				clearInterval(intervalRef.current);
 			}
-			return () => clearInterval(interval);
 		}
-	}, []);
+
+		return () => intervalRef.current && clearInterval(intervalRef.current);
+	}, [hasExpired, item?.validity_end]);
+
+	const departure = formatDate({
+		date       : primaryServiceDetails?.[0]?.departure,
+		dateFormat : 'dd MMM YYYY',
+	});
+
+	const arrival = formatDate({
+		date       : primaryServiceDetails?.[0]?.arrival,
+		dateFormat : 'dd MMM YYYY',
+	});
+
+	const getTransitTime = () => {
+		const dateString1 = departure;
+		const dateString2 = arrival;
+
+		const dateParts1 = dateString1.split('/');
+		const date1 = new Date(dateParts1[2], dateParts1[1] - 1, dateParts1[0]);
+
+		const dateParts2 = dateString2.split('/');
+		const date2 = new Date(dateParts2[2], dateParts2[1] - 1, dateParts2[0]);
+
+		const timeDiff = Math.abs(date2.getTime() - date1.getTime());
+
+		const daysDiff = Math.ceil(timeDiff / (1000 * 3600 * 24));
+
+		return daysDiff;
+	};
 
 	return (
 		<>
@@ -112,7 +139,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 								<div className={styles.primary_text}>
 									Requested By:
 									<div className={styles.secondary_text}>
-										{startCase(approvals?.[0]?.requested_by_user
+										{startCase(checkout_approvals?.[0]?.requested_by_user
 											?.name) || '--'}
 									</div>
 								</div>
@@ -136,21 +163,15 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 							/>
 
 							<div
-								style={{
-									display        : 'flex',
-									alignItems     : 'center',
-									justifyContent : 'space-between',
-									marginBottom   : 4,
-									marginTop      : 6,
-								}}
+								className={styles.text_style}
 							>
 								<div className={styles.primary_text}>
 									ETD:
 									<div className={styles.secondary_text}>
-										{format(
-											primaryServiceDetails?.[0]?.departure,
-											'dd MMM YYYY',
-										)}
+										{formatDate({
+											date       : primaryServiceDetails?.[0]?.departure,
+											dateFormat : 'dd MMM YYYY',
+										})}
 									</div>
 								</div>
 								<div className={styles.primary_text}>
@@ -159,7 +180,9 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 								<div className={styles.primary_text}>
 									Transit Time :
 									<div className={styles.secondary_text}>
-										4 Days
+										{getTransitTime()}
+										{' '}
+										Days
 									</div>
 								</div>
 								<div className={styles.primary_text}>
@@ -168,10 +191,10 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 								<div className={styles.primary_text}>
 									ETA  :
 									<div className={styles.secondary_text}>
-										{format(
-											primaryServiceDetails?.[0]?.arrival,
-											'dd MMM YYYY',
-										)}
+										{formatDate({
+											date       : primaryServiceDetails?.[0]?.arrival,
+											dateFormat : 'dd MMM YYYY',
+										})}
 									</div>
 								</div>
 							</div>
@@ -225,12 +248,12 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 									:
 								</div>
 								<div className={styles.secondary_text}>
-									{format(
-										filters?.status === 'approved'
+									{formatDate({
+										date: filters?.status !== 'approved'
 											? item?.created_at
-											: item?.created_at,
-										'dd MMM YYYY',
-									)}
+											: item?.updated_at,
+										dateFormat: 'dd MMM YYYY',
+									})}
 								</div>
 							</div>
 						</div>
@@ -259,7 +282,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 					style={{
 						backgroundColor: showDetails ? '#ffffff' : '#FDFBF6',
 					}}
-					onClick={() => setShowDetails(!showDetails)}
+					onClick={() => setShowDetails((pv) => !pv)}
 				>
 					{showDetails ? 'Show less' : 'Take Action'}
 					{' '}

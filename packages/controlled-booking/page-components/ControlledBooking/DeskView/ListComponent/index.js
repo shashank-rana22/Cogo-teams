@@ -7,9 +7,11 @@ import Loader from '../../../../commons/Loader';
 import CardComponent from './CardComponent';
 import styles from './styles.module.css';
 
+const paginationLength = 9;
+
 function ListComponent({ data, loading, filters, setFilters, refetchBookingList }) {
 	if (loading) {
-		return [...Array(10)].map(() => <Loader />);
+		return [...Array(10).keys()].map((value) => <Loader key={value} />);
 	}
 
 	if (!(data?.list || []).length && !loading) {
@@ -19,9 +21,16 @@ function ListComponent({ data, loading, filters, setFilters, refetchBookingList 
 	return (
 		<div className={styles.container}>
 
-			{ (data?.list || []).map((item) => <CardComponent key={item.id} item={item} filters={filters} refetchBookingList={refetchBookingList} />)}
+			{ (data?.list || []).map((item) => (
+				<CardComponent
+					key={item.id}
+					item={item}
+					filters={filters}
+					refetchBookingList={refetchBookingList}
+				/>
+			))}
 
-			{data?.list?.length > 9 ? (
+			{data?.list?.length > paginationLength ? (
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"

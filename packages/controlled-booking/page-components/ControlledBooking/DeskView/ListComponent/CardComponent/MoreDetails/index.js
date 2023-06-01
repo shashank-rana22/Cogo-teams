@@ -1,14 +1,10 @@
 import { IcMDownload } from '@cogoport/icons-react';
 import React from 'react';
 
+import docDownloader from '../../../../../../utils/docDownloader';
+
 import ContainerDetails from './ContainerDetails';
 import styles from './styles.module.css';
-
-const handleDownload = (val) => {
-	if (val) {
-		window.open(val, '_blank');
-	}
-};
 
 function MoreDetails({ primaryServiceDetails = {}, approvals, tax_total_price_currency, tax_total_price_discounted }) {
 	const { advance_payment_info } = approvals?.[0] || {};
@@ -28,7 +24,7 @@ function MoreDetails({ primaryServiceDetails = {}, approvals, tax_total_price_cu
 					<div
 						role="presentation"
 						className={styles.approvals}
-						onClick={() => handleDownload(approvals?.[0]?.manager_approval_proof)}
+						onClick={() => docDownloader(approvals?.[0]?.manager_approval_proof)}
 					>
 						<IcMDownload style={{ marginRight: 4 }} />
 						Manager approval Proof

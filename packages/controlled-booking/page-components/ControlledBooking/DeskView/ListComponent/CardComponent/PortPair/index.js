@@ -10,7 +10,7 @@ const iconMapping = {
 	air_freight : IcMFairport,
 };
 
-const getService = ({ service_type }) => {
+const getServiceIcon = ({ service_type }) => {
 	const Element = iconMapping[service_type] || IcMFship;
 
 	return Element;
@@ -26,7 +26,7 @@ function PortPair({ portPair, service_type }) {
 	const destinationCode = destination_port?.port_code;
 	const destinationName = destination_port?.name;
 	const destinationCountry = destination_port?.display_name?.split(' ')?.slice(-1);
-	const Element = getService({ service_type });
+	const Element = getServiceIcon({ service_type });
 
 	return (
 		<div className={styles.container}>

@@ -23,14 +23,14 @@ const getPayload = ({ state, formValues }) => {
 	return payloadMap[state] || null;
 };
 
-const useStateUpdate = ({ id, refetchBookingList, setShowModal, showModal }) => {
+const useStateUpdate = ({ id, refetchBookingList, setModalType, modalType }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_checkout_approval',
 		method : 'post',
 	}, { manual: true });
 
 	const updateState = useCallback(async (formValues) => {
-		const payload = getPayload({ state: showModal, formValues });
+		const payload = getPayload({ state: modalType, formValues });
 		try {
 			await	trigger({
 				data: {
@@ -39,13 +39,13 @@ const useStateUpdate = ({ id, refetchBookingList, setShowModal, showModal }) => 
 
 				},
 			});
-			setShowModal(false);
+			setModalType(false);
 			refetchBookingList();
-			Toast.success(`${showModal} successfully`);
+			Toast.success(`${modalType} successfully`);
 		} catch (err) {
 			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
-	}, [id, refetchBookingList, setShowModal, showModal, trigger]);
+	}, [id, refetchBookingList, setModalType, modalType, trigger]);
 
 	return {
 		loading,
