@@ -48,7 +48,7 @@ const formatIps = (ips) => {
 				serviceKey : service?.serviceKey,
 				is_igst    : is_igst || null,
 			})),
-			invoice_currency: ba?.invoice_currency || invoice_currency,
+			invoice_currency,
 			invoicing_party_total_discounted,
 			invoice_total_currency,
 			status,

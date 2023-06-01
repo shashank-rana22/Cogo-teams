@@ -1,7 +1,7 @@
 import { Input } from '@cogoport/components';
 import { memo, forwardRef } from 'react';
 
-import useOtpInput from '../../../../../../../../hooks/useOtpInput';
+import useOtpInput from '../../../../../../../../../../hooks/useOtpInput';
 
 import styles from './styles.module.css';
 

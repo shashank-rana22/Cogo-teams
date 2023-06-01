@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useState } from 'react';
 
-import useUpdateInvoiceStatus from '../../../../../../../hooks/useUpdateInvoiceStatus';
+import useUpdateInvoiceStatus from '../../../../../../../../../hooks/useUpdateInvoiceStatus';
 
 import Confirmation from './Confirmation';
 import LinersExchangeRateConfirm from './LinersExchangeRate';

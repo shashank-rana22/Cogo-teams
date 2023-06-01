@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRef, useEffect, useCallback } from 'react';
 
+const EVENTS = ['keydown', 'paste'];
+
 const useOtpInputEvents = ({
 	otpLength = 0,
 	setOtp = () => {},
@@ -90,14 +92,13 @@ const useOtpInputEvents = ({
 	}, [validateInputKeydownEvent, validateInputPasteEvent]);
 
 	useEffect(() => {
-		const events = ['keydown', 'paste'];
 		const currentRef = otpContainerRef.current;
-		events.forEach((eventType) => {
+		EVENTS.forEach((eventType) => {
 			currentRef?.addEventListener(eventType, validateInputs);
 		});
 
 		return () => {
-			events.forEach((eventType) => {
+			EVENTS.forEach((eventType) => {
 				currentRef?.removeEventListener(eventType, validateInputs);
 			});
 		};

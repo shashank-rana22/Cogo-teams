@@ -1,24 +1,24 @@
-import { Button, Popover, Tooltip, cl } from '@cogoport/components';
+import { Button, Tooltip, cl } from '@cogoport/components';
 import {
-	IcMOverflowDot,
 	IcMInfo,
 	IcCError,
 	IcMEmail,
 } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';
+import useUpdateInvoiceStatus from '../../../../../../../../../hooks/useUpdateInvoiceStatus';
 import styles from '../styles.module.css';
 
-const EditInvoice = dynamic(() => import('../../../../../Header/EditInvoice'), { ssr: false });
+import KebabContent from './KebabContent';
 
-const AddRemarks = dynamic(() => import('../../AddRemarks'), { ssr: false });
-const ChangeCurrency = dynamic(() => import('../../ChangeCurrency'), { ssr: false });
-const OTPVerification = dynamic(() => import('../../OTPVerification'), { ssr: false });
-const ReviewServices = dynamic(() => import('../../ReviewServices'), { ssr: false });
+const EditInvoice = dynamic(() => import('../../../../../../Header/EditInvoice'), { ssr: false });
+
+const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
+const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
+const OTPVerification = dynamic(() => import('../OTPVerification'), { ssr: false });
+const ReviewServices = dynamic(() => import('../ReviewServices'), { ssr: false });
 const AmendmentReasons = dynamic(() => import('../AmendmentReasons'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('../ChangePaymentMode'), { ssr: false });
 const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: false });
@@ -32,7 +32,6 @@ function Actions({
 	salesInvoicesRefetch = () => {},
 	bfInvoice = {},
 }) {
-	const [show, setShow] = useState(false);
 	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
@@ -41,8 +40,6 @@ function Actions({
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setOTPModal] = useState(false);
 	const showForOldShipments =	shipment_data.serial_id <= 120347 && invoice.status === 'pending';
-
-	const user_data = useSelector(({ profile }) => profile || {});
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
@@ -67,11 +64,6 @@ function Actions({
 	}
 	// HARD CODING ENDS
 
-	const handleClickInvoice = () => {
-		setShow(false);
-		setIsEditInvoice(true);
-	};
-
 	const refetchAfterCall = () => {
 		setShowReview(false);
 		refetch();
@@ -81,126 +73,24 @@ function Actions({
 		refetch: refetchAfterCall,
 	});
 
-	const handleClickCurrency = () => {
-		setIsChangeCurrency(true);
-		setShow(false);
-	};
-
-	const handleClickRemarks = () => {
-		setShow(false);
-		setShowAddRemarks(true);
-	};
-
-	const handleChangePayment = () => {
-		setShow(false);
-		setShowChangePaymentMode(true);
-	};
-
-	const remarkRender = (
-		<div className={styles.remark_container}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
-
 	const handleRefetch = () => {
 		refetch();
 		salesInvoicesRefetch();
 	};
 
-	const underTranslation = () => ((invoice?.status === 'reviewed'
-		&& (!bfInvoice?.systemGeneratedProforma
-			|| !bfInvoice?.proformaPdfUrl))
-	|| (invoice?.status === 'approved'
-		&& !bfInvoice?.systemGeneratedInvoice) ? (
-			<div className={styles.pill}>Under Translation</div>
-		) : null);
+	const underTranslation = () => ((invoice?.status === 'reviewed' && (!bfInvoice?.systemGeneratedProforma
+			|| !bfInvoice?.proformaPdfUrl)) || (invoice?.status === 'approved'
+			&& !bfInvoice?.systemGeneratedInvoice) ? (
+				<div className={styles.pill}>Under Translation</div>) : null);
 
 	const approveButton = () => (
-		invoice?.status === 'reviewed'
-						&& bfInvoice?.systemGeneratedProforma
-						&& bfInvoice?.proformaPdfUrl ? (
-							<div className={styles.review_invoice}>
-								<Button
-									size="sm"
-									onClick={updateInvoiceStatus}
-									disabled={loading}
-								>
-									Approve
-								</Button>
-							</div>
-			) : null
-	);
-
-	const commonActions = invoice.status !== 'approved' && !disableAction;
-
-	const editInvoicesVisiblity =	(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-		|| user_data.email === 'ajeet@cogoport.com';
-
-	const content = (
-		<div className={styles.dialog_box}>
-			{commonActions ? (
-				<>
-					<div>
-						{editInvoicesVisiblity ? (
-							<div style={{ width: '100%' }}>
-								<div
-									role="button"
-									tabIndex={0}
-									className={styles.text}
-									onClick={handleClickInvoice}
-								>
-									Edit Invoices
-
-								</div>
-								<div className={styles.line} />
-							</div>
-						) : null}
-						<div
-							role="button"
-							tabIndex={0}
-							className={styles.text}
-							onClick={handleClickCurrency}
-						>
-							Change Currency
-						</div>
-						<div className={styles.line} />
-					</div>
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.text}
-						onClick={handleClickRemarks}
-					>
-						Add Remarks
-					</div>
-					<div>
-						<div className={styles.line} />
-						<div
-							role="button"
-							tabIndex={0}
-							className={styles.text}
-							onClick={handleChangePayment}
-						>
-							Change Payment Mode
-						</div>
-					</div>
-				</>
-			) : null}
-			{(invoice.exchange_rate_document || []).map((url) => (
-				<div key={url}>
-					{commonActions ? <div className={styles.line} /> : null}
-					<div
-						role="button"
-						tabIndex={0}
-						className={styles.text}
-						onClick={() => window.open(url, '_blank')}
-					>
-						Exchange Rate Document
-					</div>
-				</div>
-			))}
-		</div>
+		invoice?.status === 'reviewed' && bfInvoice?.systemGeneratedProforma && bfInvoice?.proformaPdfUrl ? (
+			<div className={styles.review_invoice}>
+				<Button size="sm" onClick={updateInvoiceStatus} disabled={loading}>
+					Approve
+				</Button>
+			</div>
+		) : null
 	);
 
 	return (
@@ -279,40 +169,15 @@ function Actions({
 							</div>
 						</Tooltip>
 					</div>
-
-					{!disableAction || invoice.exchange_rate_document?.length > 0 ? (
-						<Popover
-							interactive
-							placement="bottom"
-							visible={show}
-							content={content}
-							theme="light"
-							onClickOutside={() => setShow(false)}
-						>
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.icon_more_wrapper}
-								onClick={() => setShow(!show)}
-							>
-								<IcMOverflowDot />
-							</div>
-						</Popover>
-					) : (
-						<div className={styles.empty_div} />
-					)}
-
-					{!isEmpty(invoice.remarks) ? (
-						<Tooltip
-							placement="bottom"
-							theme="light-border"
-							content={remarkRender}
-						>
-							<div className={styles.icon_more_wrapper}>
-								<IcMInfo fill="yellow" />
-							</div>
-						</Tooltip>
-					) : null}
+					<KebabContent
+						invoice={invoice}
+						shipment_data={shipment_data}
+						invoiceData={invoiceData}
+						isIRNGenerated={isIRNGenerated}
+						setIsChangeCurrency={setIsChangeCurrency}
+						setShowAddRemarks={setShowAddRemarks}
+						setShowChangePaymentMode={setShowChangePaymentMode}
+					/>
 				</div>
 			</div>
 

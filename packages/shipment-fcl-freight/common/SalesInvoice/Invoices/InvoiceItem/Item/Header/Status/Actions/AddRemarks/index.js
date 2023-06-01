@@ -2,7 +2,7 @@ import { Button, Textarea, Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useUpdateInvoiceRemarks from '../../../../../../../hooks/useUpdateInvoiceRemarks';
+import useUpdateInvoiceRemarks from '../../../../../../../../../hooks/useUpdateInvoiceRemarks';
 
 import styles from './styles.module.css';
 

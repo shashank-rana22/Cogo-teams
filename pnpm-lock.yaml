@@ -395,6 +395,12 @@ importers:
       '@cogoport/maps':
         specifier: ^1.0.2
         version: 1.0.3(@cogoport/icons-react@1.0.65)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/navigation-configs':
+        specifier: workspace:^0.1.0
+        version: link:../navigation-configs
+      '@cogoport/next':
+        specifier: workspace:^0.1.0
+        version: link:../next
       '@cogoport/request':
         specifier: workspace:^0.1.0
         version: link:../request

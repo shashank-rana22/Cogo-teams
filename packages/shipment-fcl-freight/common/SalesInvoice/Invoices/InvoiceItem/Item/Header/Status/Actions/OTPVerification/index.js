@@ -2,9 +2,9 @@ import { Modal, Button, RadioGroup, Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import useGetOrgUsersData from '../../../../../../../hooks/useGetOrgUsersData';
-import useSendInvoiceOtp from '../../../../../../../hooks/useSendInvoiceOtp';
-import useVerifyInvoiceOtp from '../../../../../../../hooks/useVerifyInvoiceOtp';
+import useGetOrgUsersData from '../../../../../../../../../hooks/useGetOrgUsersData';
+import useSendInvoiceOtp from '../../../../../../../../../hooks/useSendInvoiceOtp';
+import useVerifyInvoiceOtp from '../../../../../../../../../hooks/useVerifyInvoiceOtp';
 
 import OtpInput from './OtpInput';
 import styles from './styles.module.css';

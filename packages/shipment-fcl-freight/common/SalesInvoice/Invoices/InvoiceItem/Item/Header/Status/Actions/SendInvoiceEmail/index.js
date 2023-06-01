@@ -1,6 +1,6 @@
 import { Modal, Button, cl } from '@cogoport/components';
 
-import useSendInvoiceEmail from '../../../../../../../../hooks/useSendInvoiceEmail';
+import useSendInvoiceEmail from '../../../../../../../../../hooks/useSendInvoiceEmail';
 
 import styles from './styles.module.css';
 
