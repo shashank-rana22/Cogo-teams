@@ -50,7 +50,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 
 	// console.log('data1', activeTab);
 	// console.log('data2', currentCategory);
-	console.log('data3', courseCategories);
+	// console.log('data3', courseCategories);
 	// console.log('params', params);
 	// console.log('selected', selected);
 	// console.log('parafiltersms', filters);

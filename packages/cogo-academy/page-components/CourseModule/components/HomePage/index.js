@@ -9,7 +9,7 @@ import MyCourses from './components/MyCourses';
 import RecommemndedCourses from './components/RecommemndedCourses';
 import styles from './styles.module.css';
 
-function HomePage({ user_id, courseCategoryData, categoryLoading }) {
+function HomePage({ user_id, courseCategoryData, categoryLoading, setCurrentCategory }) {
 	const router = useRouter();
 	return (
 		<div>
@@ -34,6 +34,7 @@ function HomePage({ user_id, courseCategoryData, categoryLoading }) {
 				<CategoryCard
 					courseCategoryData={courseCategoryData}
 					categoryLoading={categoryLoading}
+					setCurrentCategory={setCurrentCategory}
 				/>
 			</div>
 

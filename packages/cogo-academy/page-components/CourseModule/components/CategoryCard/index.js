@@ -6,7 +6,7 @@ import LoadingState from '../../../../commons/LoadingState';
 import CategoriesCard from './component/CategoriesCard';
 import styles from './styles.module.css';
 
-function CategoryCard({ courseCategoryData, categoryLoading }) {
+function CategoryCard({ courseCategoryData, categoryLoading, setCurrentCategory }) {
 	if (categoryLoading) {
 		return <LoadingState />;
 	}
@@ -17,6 +17,7 @@ function CategoryCard({ courseCategoryData, categoryLoading }) {
 			<CategoriesCard
 				key={item?.id}
 				data={item}
+				setCurrentCategory={setCurrentCategory}
 			/>
 		),
 	}));
