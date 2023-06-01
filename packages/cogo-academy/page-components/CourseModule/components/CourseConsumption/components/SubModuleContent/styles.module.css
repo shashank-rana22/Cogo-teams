@@ -57,3 +57,15 @@
 	font-size: 10px;
 	color: #4F4F4F;
 }
+
+.databox_image {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: center;
+	width: 18px;
+	height: 18px;
+	background-color: black;
+	border-radius: 50%;
+	margin-right: 10px;
+}

@@ -1,5 +1,6 @@
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
 import useGetUserCourse from '../../hooks/useGetUserCourse';
@@ -20,29 +21,18 @@ function CourseConsumption() {
 
 	const course_id = router?.query?.course_id;
 
-	// const {
-	// 	loading,
-	// 	finalData,
-	// } = useGetCourseDetails({ id: course_id });
-
-	// const {
-	// 	courseData,
-	// 	courseLoading,
-	// } = useGetCogoAcademyCourse({ id: course_id });
-
 	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 
 	const { moduleIndex, subModuleIndex, chapterIndex } = indexes;
 
 	const { data = {}, getUserCourse, loading } = useGetUserCourse({ course_id, user_id });
 
-	// setChapterContent(data?.course_modules?.[moduleIndex]
-	// 	?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex]);
-
-	// useEffect(() => {
-	// 	setChapterContent(data?.course_modules?.[moduleIndex]
-	// 		?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex]);
-	// }, [chapterIndex, data, moduleIndex, subModuleIndex]);
+	useEffect(() => {
+		if (!isEmpty(data)) {
+			setChapterContent(data?.course_modules?.[moduleIndex]
+				?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex]);
+		}
+	}, [chapterIndex, data, moduleIndex, subModuleIndex]);
 
 	return (
 		<div className={styles.container}>
@@ -50,6 +40,8 @@ function CourseConsumption() {
 
 				<ModuleNavigation
 					data={data}
+					loading={loading}
+					chapterContent={chapterContent}
 					setChapterContent={setChapterContent}
 					indexes={indexes}
 					setIndexes={setIndexes}
@@ -57,6 +49,7 @@ function CourseConsumption() {
 
 				<ModuleContent
 					data={data}
+					loading={loading}
 					chapterData={chapterContent}
 					course_id={course_id}
 					user_id={user_id}
@@ -74,6 +67,7 @@ function CourseConsumption() {
 				indexes={indexes}
 				setIndexes={setIndexes}
 				getUserCourse={getUserCourse}
+				chapterContent={chapterContent}
 				setChapterContent={setChapterContent}
 			/>
 		</div>

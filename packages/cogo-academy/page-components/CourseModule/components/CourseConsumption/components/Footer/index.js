@@ -6,7 +6,7 @@ import getChapter from '../../utils/getChapter';
 
 import styles from './styles.module.css';
 
-function Footer({ course_id, indexes, data, setIndexes, getUserCourse, setChapterContent }) {
+function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapterContent = {}, setChapterContent }) {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
 
 	const {
@@ -20,54 +20,97 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, setChapte
 
 			<div className={styles.btn_container}>
 
-				<Button
-					size="md"
-					themeType="secondary"
-					loading={loading}
-					onClick={() => {
-						updateCourseProgress({
-							next_chapter_id: getChapter({
+				{chapterContent.user_progress_state === 'completed' ? (
+					<Button
+						size="md"
+						themeType="accent"
+						loading={loading}
+						onClick={async () => {
+							const nextChapterContent = getChapter({
 								data,
 								indexes,
 								state: 'next',
 								setIndexes,
 								setChapterContent,
-							})?.id,
+							});
 
-							next_chapter_state: 'completed',
-						});
+							await updateCourseProgress({
 
-						getUserCourse();
-					}}
-				>
-					Skip For Now
+								next_chapter_id: nextChapterContent.id,
 
-				</Button>
-				<Button
-					size="md"
-					themeType="accent"
-					loading={loading}
-					onClick={() => {
-						updateCourseProgress({
-							current_chapter_id: getChapter({ data, indexes, which: 'curr', setIndexes }).id,
+							});
+							await getUserCourse();
+							setChapterContent(nextChapterContent);
+						}}
+					>
+						Continue
+					</Button>
+				) : (
+					<>
+						<Button
+							size="md"
+							themeType="secondary"
+							loading={loading}
+							onClick={async () => {
+								const nextChapterContent = await getChapter({
+									data,
+									indexes,
+									state: 'next',
+									setIndexes,
+									setChapterContent,
+								});
 
-							next_chapter_id: getChapter({
-								data,
-								indexes,
-								state: 'next',
-								setIndexes,
-								setChapterContent,
-							})?.id,
+								const { id, user_progress_state } = nextChapterContent;
 
-							next_chapter_state: 'completed',
-						});
+								await updateCourseProgress({
+									next_chapter_id: id,
 
-						getUserCourse();
-					}}
-				>
-					Mark As Complete
+									next_chapter_state: user_progress_state === 'introduction' ? 'ongoing'
+										: user_progress_state,
+								});
 
-				</Button>
+								await getUserCourse();
+								setChapterContent(nextChapterContent);
+							}}
+						>
+							Skip For Now
+
+						</Button>
+
+						<Button
+							size="md"
+							themeType="accent"
+							loading={loading}
+							onClick={async () => {
+								const { id:current_chapter_id = '' } = chapterContent;
+
+								const nextChapterContent = await getChapter({
+									data,
+									indexes,
+									state: 'next',
+									setIndexes,
+									setChapterContent,
+								});
+
+								const { id, user_progress_state } = nextChapterContent;
+
+								await updateCourseProgress({
+									current_chapter_id,
+									next_chapter_id    : id,
+									next_chapter_state : user_progress_state === 'introduction'
+										? 'ongoing' : user_progress_state,
+								});
+
+								await getUserCourse();
+								setChapterContent(nextChapterContent);
+							}}
+						>
+							Mark As Complete
+
+						</Button>
+					</>
+				)}
+
 			</div>
 		</div>
 	);

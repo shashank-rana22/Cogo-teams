@@ -20,6 +20,8 @@ const useUpdateUserCourseProgress = ({ course_id, user_id }) => {
 					next_chapter_id,
 				},
 			});
+
+			console.log('hi');
 		} catch (error) {
 			if (error.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));

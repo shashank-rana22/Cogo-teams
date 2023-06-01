@@ -1,11 +1,18 @@
-import { IcMFtick, IcMDocument } from '@cogoport/icons-react';
+import { IcMFtick, IcMDocument, IcMVideoCall, IcMPpt, IcMText } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 function SubModuleContent({
 	data = [], moduleIndex, indexes, setIndexes,
-	subModuleIndex, setChapterContent = () => {},
+	subModuleIndex, chapterContent = {}, setChapterContent = () => {},
 }) {
+	const ICON_MAPPING = {
+		document     : <IcMDocument width={14} height={14} fill="white" />,
+		video        : <IcMVideoCall width={14} height={14} fill="white" />,
+		presentation : <IcMPpt width={14} height={14} fill="white" />,
+		text         : <IcMText width={14} height={14} fill="white" />,
+	};
+
 	return (
 		<div className={styles.container}>
 
@@ -14,7 +21,7 @@ function SubModuleContent({
 					role="presentation"
 					key={chapter?.id}
 					className={`${styles.chapter_container} 
-								${(indexes.chapterIndex === chapterIndex) && styles.active}`}
+								${(chapterContent.id === chapter.id) && styles.active}`}
 					onClick={() => {
 						setChapterContent(chapter);
 
@@ -26,17 +33,14 @@ function SubModuleContent({
 					}}
 				>
 					<div className={styles.wrapper}>
+
 						{chapter.user_progress_state === 'completed'
-						&& <IcMFtick fill="#849E4C" width={24} height={24} />}
+						&& <IcMFtick fill="#849E4C" width={24} height={24} className={styles.icon} />}
 
-						<IcMDocument width={20} height={20} className={styles.icon} />
+						<div className={styles.databox_image}>
+							{ICON_MAPPING[chapter.content_type]}
+						</div>
 
-						{/* <div className={styles.number}>
-							IcMDocument
-							<div className={styles.icon}>
-								<IcMDocument fill="white" />
-							</div>
-						</div> */}
 						<div className={styles.name}>
 							{chapter.name}
 						</div>

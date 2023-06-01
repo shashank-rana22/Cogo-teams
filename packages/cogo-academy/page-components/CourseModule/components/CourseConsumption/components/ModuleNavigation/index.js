@@ -2,12 +2,17 @@ import { Accordion, Pill } from '@cogoport/components';
 
 import SubModuleContent from '../SubModuleContent';
 
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
-function ModuleNavigation({ data = {}, setChapterContent = () => {}, indexes, setIndexes }) {
+function ModuleNavigation({ data = {}, loading, chapterContent, setChapterContent = () => {}, indexes, setIndexes }) {
 	const { name, course_completion_duration = {} } = data.course_details || {};
 
 	const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration;
+
+	if (loading) {
+		return <LoadingState />;
+	}
 
 	return (
 		<div className={styles.container}>
@@ -33,6 +38,7 @@ function ModuleNavigation({ data = {}, setChapterContent = () => {}, indexes, se
 					key={module.id}
 					type="text"
 					className={styles.module_accordion}
+					isOpen={moduleIndex === indexes.moduleIndex}
 					title={(
 						<div className={styles.flex}>
 							<div className={styles.number}>
@@ -48,6 +54,7 @@ function ModuleNavigation({ data = {}, setChapterContent = () => {}, indexes, se
 								key={subModule.id}
 								type="text"
 								className={styles.submodule_accordion}
+								isOpen={subModuleIndex === indexes.subModuleIndex}
 								title={(
 									<div className={styles.flex}>
 										<div className={styles.number}>
@@ -70,6 +77,7 @@ function ModuleNavigation({ data = {}, setChapterContent = () => {}, indexes, se
 									subModuleIndex={subModuleIndex}
 									indexes={indexes}
 									setIndexes={setIndexes}
+									chapterContent={chapterContent}
 									setChapterContent={setChapterContent}
 								/>
 
