@@ -17,12 +17,17 @@ function ExchangeRate({
 
 	const invoiceCurrency = invoiceData?.invoicing_parties?.[0]?.invoice_currency;
 
+	const refetchAfterApiCall = () => {
+		refetch();
+		setOpen(false);
+	};
+
 	const {
 		handleFormSubmit,
 		differentCurrenciesHash,
 		availableCurrencyConversions,
 		loading,
-	} = Helper({ invoiceCurrency, refetch, setOpen });
+	} = Helper({ invoiceCurrency, refetch: refetchAfterApiCall });
 
 	if (Object.keys(differentCurrenciesHash || {}).length === 0) {
 		return null;

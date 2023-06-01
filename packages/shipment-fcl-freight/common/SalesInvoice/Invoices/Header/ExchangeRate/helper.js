@@ -2,14 +2,10 @@ import useGetShipmentQuotation from '../../../../../hooks/useGetShipmentQuotatio
 import useListCurrencyConversion from '../../../../../hooks/useListCurrencyConversion';
 import useUpdateCurrencyConversion from '../../../../../hooks/useUpdateCurrencyConversion';
 
-const Helper = ({ invoiceCurrency = '', refetch = () => {}, setOpen = () => {} }) => {
+const Helper = ({ invoiceCurrency = '', refetch = () => {} }) => {
 	const { currencyConversionData } = useListCurrencyConversion();
 	const { quotationData } = useGetShipmentQuotation({ invoiceCurrency });
-	const refetchAfterApiCall = () => {
-		refetch();
-		setOpen(false);
-	};
-	const { handleFormSubmit, loading } = useUpdateCurrencyConversion({ refetch: refetchAfterApiCall });
+	const { handleFormSubmit, loading } = useUpdateCurrencyConversion({ refetch });
 
 	const differentCurrenciesHash = {};
 	const obj = {};
@@ -17,10 +13,7 @@ const Helper = ({ invoiceCurrency = '', refetch = () => {}, setOpen = () => {} }
 
 	(quotationData?.service_charges || []).forEach((service) => {
 		(service?.line_items || [])?.forEach((line_item) => {
-			if (
-				!obj[line_item?.currency]
-					&& line_item?.currency !== invoiceCurrency
-			) {
+			if (!obj[line_item?.currency] && line_item?.currency !== invoiceCurrency) {
 				differentCurrenciesHash[line_item?.currency] = {
 					from_currency : line_item?.currency,
 					to_currency   : invoiceCurrency,
