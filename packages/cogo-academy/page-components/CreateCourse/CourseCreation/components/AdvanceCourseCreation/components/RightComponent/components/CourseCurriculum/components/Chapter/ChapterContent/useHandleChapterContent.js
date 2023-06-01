@@ -13,7 +13,7 @@ if (typeof window !== 'undefined') {
 
 const MAPPING = ['name', 'description', 'content_type', 'completion_duration_value', 'completion_duration_unit'];
 
-const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, index }) => {
+const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, index, state }) => {
 	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 
 	const { control, formState:{ errors = {} }, watch, handleSubmit, setValue } = useForm();
@@ -37,6 +37,7 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 			payloadType          : 'chapter',
 			isNew,
 			additionalResourcesWatch,
+			state,
 		});
 
 		onSaveChapter({
@@ -65,14 +66,18 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 		}
 
 		if (!isEmpty(chapter_attachments)) {
-			const { type, name: additional_resources_title, media_url } = chapter_attachments[0] || {};
+			const { type, media_url } = chapter_attachments[0] || {};
 
 			if (type === 'downloadable_resource') {
 				setValue('additional_resources', false);
 				setValue('upload_file', media_url);
 			} else {
-				setValue('additional_resources_title', additional_resources_title);
-				setValue('additional_resources_link', media_url);
+				chapter_attachments.forEach((item, itemIndex) => {
+					const childKey = `external_link.${itemIndex}`;
+
+					setValue(`${childKey}.name`, item.name);
+					setValue(`${childKey}.media_url`, item.media_url);
+				});
 				setValue('additional_resources', true);
 			}
 		}

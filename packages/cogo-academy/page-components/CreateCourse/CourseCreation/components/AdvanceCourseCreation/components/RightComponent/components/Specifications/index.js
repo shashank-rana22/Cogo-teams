@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 
 const MAPPING = ['course_objectives', 'tags', 'topics'];
 
-function Specifications({ data = {}, id = '', activeTab = '', mode = '' }, ref) {
+function Specifications({ data = {}, id = '', activeTab = '', mode = '', state }, ref) {
 	const [showModal, setShowModal] = useState({
 		topics : false,
 		tags   : false,
@@ -41,7 +41,7 @@ function Specifications({ data = {}, id = '', activeTab = '', mode = '' }, ref) 
 					id,
 					topic_ids : values.topics,
 					tag_ids   : values.tags,
-					state     : CURRENT_TO_NEXT_MAPPING[activeTab],
+					...(state !== 'published' ? { state: CURRENT_TO_NEXT_MAPPING[activeTab] } : {}),
 					course_objectives:
 						(values.course_objectives || []).map((item) => item.objective),
 				},

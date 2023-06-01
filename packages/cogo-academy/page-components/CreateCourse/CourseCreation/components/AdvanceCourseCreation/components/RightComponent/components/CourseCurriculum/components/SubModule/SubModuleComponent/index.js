@@ -26,6 +26,7 @@ function SubModuleComponent({
 	setGetSubModuleRefetch,
 	courseSubModule,
 	showButtons,
+	state,
 }) {
 	const {
 		handleSubmit,
@@ -177,6 +178,7 @@ function SubModuleComponent({
 						getSubModuleRefetch={getSubModuleRefetch}
 						setGetSubModuleRefetch={setGetSubModuleRefetch}
 						showButtons={showButtons}
+						state={state}
 					/>
 				)}
 			</Accordion>

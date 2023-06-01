@@ -80,16 +80,28 @@ const controls = [
 		dropareaProps : { heading: 'Upload Now', subHeading: '(only .xlsx or .csv formats)' },
 	},
 	{
-		label       : 'Title',
-		name        : 'additional_resources_title',
-		elementType : 'text',
-		placeholder : 'Type a descriptive Title',
-	},
-	{
-		label       : 'Add Link',
-		name        : 'additional_resources_link',
-		elementType : 'text',
-		placeholder : 'www.example.com',
+		name               : 'external_link',
+		label              : 'Additional Resources',
+		elementType        : 'fieldArray',
+		buttonText         : 'Add More',
+		deleteMargin       : '32px',
+		noDeleteButtonTill : 1,
+		controls           : [
+			{
+				label       : 'Title',
+				name        : 'name',
+				elementType : 'text',
+				style       : { width: '48%', margin: '8px' },
+				placeholder : 'Type a descriptive Title',
+			},
+			{
+				label       : 'Add Link',
+				name        : 'media_url',
+				elementType : 'text',
+				style       : { width: '48%', margin: '8px' },
+				placeholder : 'www.example.com',
+			},
+		],
 	},
 	{
 		label       : 'Time permitted to complete Course, in order to get Reward',

@@ -8,7 +8,7 @@ import ExcelComponent from './ExcelComponent';
 import styles from './styles.module.css';
 import useHandleIntendedLearners from './useHandleIntendedLearners';
 
-function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse }, ref) {
+function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse, state }, ref) {
 	const {
 		control,
 		errors,
@@ -17,7 +17,7 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse }, re
 		audiences,
 		onClickGenerate,
 		loading,
-	} = useHandleIntendedLearners({ activeTab, data, ref, id, getCogoAcademyCourse });
+	} = useHandleIntendedLearners({ activeTab, data, ref, id, getCogoAcademyCourse, state });
 
 	const { cogo_academy_sheets = [] } = data || {};
 

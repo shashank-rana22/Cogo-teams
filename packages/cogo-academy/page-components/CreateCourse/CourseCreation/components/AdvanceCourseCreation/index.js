@@ -1,6 +1,5 @@
 import { useState, useEffect } from 'react';
 
-import EmptyState from '../../../commons/EmptyState';
 import LoadingState from '../../../commons/LoadingState';
 
 import LeftComponent from './components/LeftComponent';
@@ -16,7 +15,11 @@ function AdvanceCourseCreation({ id, mode }) {
 	const { state } = data || {};
 
 	useEffect(() => {
-		setActiveTab(state);
+		if (state === 'published') {
+			setActiveTab('overview');
+		} else {
+			setActiveTab(state);
+		}
 	}, [state]);
 
 	if (loading) {
@@ -33,20 +36,6 @@ function AdvanceCourseCreation({ id, mode }) {
 		);
 	}
 
-	if (state === 'published') {
-		return (
-			<div style={{ marginTop: '100px' }}>
-				<EmptyState
-					height={200}
-					width={300}
-					emptyText="This course is already published"
-					flexDirection="column"
-					textSize={24}
-				/>
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>
@@ -55,6 +44,7 @@ function AdvanceCourseCreation({ id, mode }) {
 					activeTab={activeTab}
 					getCogoAcademyCourse={getCogoAcademyCourse}
 					id={id}
+					state={state}
 				/>
 			</div>
 
@@ -66,6 +56,7 @@ function AdvanceCourseCreation({ id, mode }) {
 					getCogoAcademyCourse={getCogoAcademyCourse}
 					setActiveTab={setActiveTab}
 					mode={mode}
+					state={state}
 				/>
 			</div>
 		</div>

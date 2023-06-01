@@ -4,14 +4,14 @@ import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
 import styles from './styles.module.css';
 
-function CourseOverview({ id, activeTab }, ref) {
+function CourseOverview({ id, activeTab, state }, ref) {
 	useImperativeHandle(ref, () => ({
 		handleSubmit: () => {
 			const onSubmit = () => ({
 				hasError : false,
 				values   : {
 					id,
-					state: CURRENT_TO_NEXT_MAPPING[activeTab],
+					...(state !== 'published' ? { state: CURRENT_TO_NEXT_MAPPING[activeTab] } : {}),
 				},
 			});
 

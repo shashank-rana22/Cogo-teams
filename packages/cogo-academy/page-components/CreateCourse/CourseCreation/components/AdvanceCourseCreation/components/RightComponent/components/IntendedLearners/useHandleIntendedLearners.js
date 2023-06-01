@@ -6,7 +6,7 @@ import useGetAudiences from '../../../../hooks/useGetAudiences';
 import useUpdateCourse from '../../../../hooks/useUpdateCourse';
 import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
-const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCourse }) => {
+const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCourse, state }) => {
 	const {
 		control,
 		formState: { errors = {} },
@@ -81,7 +81,7 @@ const useHandleIntendedLearners = ({ activeTab, data, ref, id, getCogoAcademyCou
 					...(values?.mandatory_audiences_user === 'custom'
 						? { file_url: values.upload_excel.finalUrl }
 						: {}),
-					state          : CURRENT_TO_NEXT_MAPPING[activeTab],
+					...(state !== 'published' ? { state: CURRENT_TO_NEXT_MAPPING[activeTab] } : {}),
 					generate_sheet : false,
 					frequency      : values.frequency,
 					eligible_users : values?.mandatory_audiences_user,

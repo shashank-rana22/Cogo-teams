@@ -23,6 +23,7 @@ function ModuleComponent({
 	setGetSubModuleRefetch,
 	finalData,
 	showButtons,
+	state,
 }) {
 	const {
 		deleteModule,
@@ -172,6 +173,7 @@ function ModuleComponent({
 						getSubModuleRefetch={getSubModuleRefetch}
 						setGetSubModuleRefetch={setGetSubModuleRefetch}
 						showButtons={showButtons}
+						state={state}
 					/>
 				)}
 			</Accordion>

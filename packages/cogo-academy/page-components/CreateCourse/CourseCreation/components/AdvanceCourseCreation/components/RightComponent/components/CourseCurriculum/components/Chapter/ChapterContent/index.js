@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
+import FieldArray from '../../../../../../../../../../../../commons/FieldArray';
 import { getFieldController } from '../../../../../../../../../../../../commons/getFieldController';
 
 import controls from './controls';
@@ -14,6 +15,7 @@ function ChapterContent({
 	index,
 	chapterLoading,
 	showButtons,
+	state,
 }) {
 	const {
 		RichTextEditor,
@@ -32,6 +34,7 @@ function ChapterContent({
 		onSaveChapter,
 		subModuleId,
 		index,
+		state,
 	});
 
 	return (
@@ -88,9 +91,7 @@ function ChapterContent({
 				}
 
 				if (
-					['additional_resources_title', 'additional_resources_link'].includes(
-						name,
-					)
+					name === 'external_link'
 					&& !additionalResourcesWatch
 				) {
 					return null;
@@ -123,6 +124,18 @@ function ChapterContent({
 				}
 
 				const docToUse = name === 'upload_video' ? uploadVideoWatch : uploadDocumentWatch;
+
+				if (elementType === 'fieldArray') {
+					return (
+						<div style={{ margin: '32px 0px' }}>
+							<FieldArray
+								{...controlItem}
+								control={control}
+								error={errors?.[name]}
+							/>
+						</div>
+					);
+				}
 
 				const Element = getFieldController(elementType);
 
@@ -180,7 +193,6 @@ function ChapterContent({
 										: uploadDocumentWatch?.finalUrl
 								}
 								title="YouTube video player"
-								frameBorder="0"
 								allow="accelerometer; clipboard-write;
 										encrypted-media; gyroscope; picture-in-picture; web-share"
 								allowfullscreen="true"

@@ -7,17 +7,20 @@ import useUpdateCourse from '../../hooks/useUpdateCourse';
 import MAPPING from './MAPPING';
 import styles from './styles.module.css';
 
-function LeftComponent({ activeTab, setActiveTab, getCogoAcademyCourse, id }) {
+function LeftComponent({ activeTab, setActiveTab, getCogoAcademyCourse, id, state }) {
 	const { loading, updateCourse } = useUpdateCourse({
 		getCogoAcademyCourse,
 		setActiveTab,
 		activeTab,
 		changeTab: true,
+		state,
 	});
 
 	const handleChangeActiveTab = ({ value }) => {
-		if (!loading) {
+		if (!loading && state !== 'published') {
 			updateCourse({ values: { id, state: value } });
+		} else {
+			setActiveTab(value);
 		}
 	};
 

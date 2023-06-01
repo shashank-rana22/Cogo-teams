@@ -10,7 +10,7 @@ import ModuleComponent from './ModuleComponent';
 import styles from './styles.module.css';
 import useHandleCourseCurriculum from './useHandleCourseCurriculum';
 
-function CourseCurriculum({ id, activeTab, mode }, ref) {
+function CourseCurriculum({ id, activeTab, mode, state }, ref) {
 	const {
 		handleDragStart,
 		handleDrop,
@@ -31,7 +31,7 @@ function CourseCurriculum({ id, activeTab, mode }, ref) {
 				hasError : false,
 				values   : {
 					id,
-					state: CURRENT_TO_NEXT_MAPPING[activeTab],
+					...(state !== 'published' ? { state: CURRENT_TO_NEXT_MAPPING[activeTab] } : {}),
 				},
 			});
 
@@ -79,6 +79,7 @@ function CourseCurriculum({ id, activeTab, mode }, ref) {
 							finalData={finalData}
 							setGetSubModuleRefetch={setGetSubModuleRefetch}
 							showButtons={showButtons}
+							state={state}
 						/>
 					</div>
 				))}
