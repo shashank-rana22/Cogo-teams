@@ -17,6 +17,7 @@ const labels = [
 	'cargo_weight_per_container',
 	'destination_cargo_handling_type',
 	'payment_term',
+	'trip_type',
 ];
 
 function RenderCargoPills({ detail }) {

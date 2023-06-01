@@ -6,16 +6,11 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function PortDetails({ data = {}, primary_service = {} }) {
-	const {
-		origin_main_port = {},
-		destination_main_port = {},
-		origin_port = {},
-		destination_port = {},
-	} = primary_service;
+	const { origin_location = {}, destination_location = {} } = primary_service;
 
 	if (isEmpty(data)) { return null; }
 
-	const handleLocationDetails = (location, icdPortInfo) => (
+	const handleLocationDetails = (location) => (
 		<>
 			<div className={styles.port_code}>
 				<div className={` ${styles.code}`}>
@@ -32,13 +27,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 			<Tooltip
 				placement="bottom"
 				theme="light"
-				content={(
-					<div>
-						<div style={{ fontSize: '10px' }}>{location?.display_name}</div>
-
-						{!isEmpty(icdPortInfo) ? <div className={styles.icd}>{icdPortInfo?.name}</div> : null}
-					</div>
-				)}
+				content={(<div style={{ fontSize: '10px' }}>{location?.display_name}</div>)}
 			>
 				<div className={cl`${styles.value}`}>{location?.name}</div>
 			</Tooltip>
@@ -48,7 +37,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 	const renderLocation = () => (
 		<>
 			<div className={styles.flex_row_origin}>
-				{handleLocationDetails(origin_port, origin_main_port)}
+				{handleLocationDetails(origin_location)}
 			</div>
 
 			<div className={styles.icon_wrapper}>
@@ -56,7 +45,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 			</div>
 
 			<div className={styles.flex_row_destination}>
-				{handleLocationDetails(destination_port, destination_main_port)}
+				{handleLocationDetails(destination_location)}
 			</div>
 		</>
 	);

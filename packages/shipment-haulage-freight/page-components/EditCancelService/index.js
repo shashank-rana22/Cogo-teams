@@ -35,6 +35,8 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
+	const closeModal = () => setShowModal(null);
+
 	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
 	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig });
 	actionButtons[2].show = getCanCancelService({ state, stakeholderConfig });
@@ -68,14 +70,14 @@ function EditCancelService({ serviceData = {} }) {
 			</Popover>
 
 			{showModal === 'supplier_reallocation'
-			&& <SupplierReallocation setShow={setShowModal} serviceData={servicesData} />}
+			&& <SupplierReallocation closeModal={closeModal} serviceData={servicesData} />}
 
 			{showModal === 'edit_params'
-			&& <EditParams setShow={setShowModal} serviceData={serviceData} />}
+			&& <EditParams closeModal={closeModal} serviceData={serviceData} />}
 
 			{showModal === 'cancel' && 	(
 				<CancelService
-					setShow={setShowModal}
+					closeModal={closeModal}
 					trade_type={trade_type}
 					service_type={service_type}
 				/>

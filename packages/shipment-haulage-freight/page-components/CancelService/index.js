@@ -22,9 +22,7 @@ function FormElement({ name, label, errors, type, ...rest }) {
 	) : null;
 }
 
-export default function CancelService({ setShow, service_type, trade_type }) {
-	const closeModal = () => setShow(false);
-
+export default function CancelService({ closeModal, service_type, trade_type }) {
 	const {
 		controls, control, errors, handleSubmit, onSubmit, loading,
 	} = useGetServiceCancelControls({ service_type, trade_type, closeModal });

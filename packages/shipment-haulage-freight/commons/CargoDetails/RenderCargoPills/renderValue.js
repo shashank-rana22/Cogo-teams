@@ -226,6 +226,6 @@ export const renderValue = (label, detail) => {
 		case 'delivery_date':
 			return format(detail?.delivery_date, 'dd MMM yyyy');
 		default:
-			return detail[label] || null;
+			return startCase(detail[label]) || null;
 	}
 };

@@ -2,7 +2,6 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase } from '@cogoport/utils';
 import React, { useContext, useMemo } from 'react';
 
-import AddNewService from './AddNewService';
 import helperFuncs from './helpers/getHelperFuncs';
 import Loader from './Loader';
 import ServiceDetails from './ServiceDetails';
@@ -15,7 +14,7 @@ function Services() {
 		servicesLoading,
 	} = useContext(ShipmentDetailContext);
 
-	const { serviceObj, upsellServices } = useMemo(() => helperFuncs(servicesList), [servicesList]);
+	const { serviceObj } = useMemo(() => helperFuncs(servicesList), [servicesList]);
 
 	const serviceCategories = Object.keys(serviceObj);
 
@@ -32,16 +31,6 @@ function Services() {
 									<ServiceDetails
 										key={serviceKey}
 										servicesData={serviceData}
-									/>
-								))}
-							</div>
-
-							<div className={styles.upselling}>
-								{(upsellServices[serviceCategory]).map((service) => (
-									<AddNewService
-										key={`${service?.trade_type}_${service?.service_type}`}
-										upsellableService={service}
-										serviceObj={serviceObj}
 									/>
 								))}
 							</div>

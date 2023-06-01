@@ -3,7 +3,6 @@ import Assured from '@cogoport/surface-modules/components/Assured';
 import TermsAndConditions from '@cogoport/surface-modules/components/TermsAndConditions';
 import { useContext } from 'react';
 
-import BLDetails from './BLDetails';
 import OverviewManageServices from './OverviewManageServices';
 import styles from './styles.module.css';
 
@@ -13,8 +12,6 @@ function Overview() {
 	return (
 		<div className={styles.container}>
 			<OverviewManageServices />
-
-			<BLDetails />
 
 			<div className={styles.extra_details}>
 				{shipment_data?.is_cogo_assured ? (
