@@ -1,4 +1,5 @@
 import { useTicketsRequest } from '@cogoport/request';
+import { format } from '@cogoport/utils';
 import {
 	useEffect,
 	useCallback,
@@ -17,8 +18,8 @@ const useGetDashboard = ({ date }) => {
 		try {
 			trigger({
 				params: {
-					StartDate : startDate,
-					EndDate   : endDate,
+					StartDate : format(startDate, 'isoUtcDateTime'),
+					EndDate   : format(endDate, 'isoUtcDateTime'),
 				},
 			});
 		} catch (error) {

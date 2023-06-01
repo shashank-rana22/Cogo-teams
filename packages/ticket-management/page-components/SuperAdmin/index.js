@@ -1,4 +1,5 @@
 import { Tabs, TabPanel, DateRangepicker } from '@cogoport/components';
+import { subtractDays } from '@cogoport/utils';
 import { useState } from 'react';
 
 import FilterTicketsSection from '../../common/FilterTicketsSection';
@@ -8,7 +9,10 @@ import styles from './styles.module.css';
 
 function SuperAdmin() {
 	const [activeTab, setActiveTab] = useState('dashboard');
-	const [date, setDate] = useState({});
+	const [date, setDate] = useState({
+		startDate : subtractDays(new Date(), 7),
+		endate    : new Date(),
+	});
 
 	return (
 		<div className={styles.container}>
