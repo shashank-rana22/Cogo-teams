@@ -1,6 +1,7 @@
 import {
 	ChipsController, InputController, RadioGroupController, SelectController,
 } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
@@ -12,6 +13,11 @@ function ApprovalForm({ errors, setValue, control, formValues, checkout_approval
 			checkout_approvals?.[0]?.advance_payment_info?.is_required ? 'required' : 'not_required',
 		);
 	}, [checkout_approvals, setValue]);
+
+	const currencyOptions = Object.keys(GLOBAL_CONSTANTS.currency_code).map((item) => ({
+		label : item,
+		value : item,
+	}));
 
 	return (
 		<>
@@ -47,9 +53,7 @@ function ApprovalForm({ errors, setValue, control, formValues, checkout_approval
 								control={control}
 								size="md"
 								placeholder="Select"
-								options={[{
-									label: 'USD', value: 'USD',
-								}, {	label: 'INR', value: 'INR' }]}
+								options={currencyOptions}
 								rules={{ required: 'This field is required' }}
 								value={checkout_approvals?.[0]?.advance_payment_info?.amount_currency}
 							/>
