@@ -43,7 +43,7 @@ function BusinessPerformance() {
 			<div className={styles.tab_container}>
 				<Tabs
 					activeTab={businessFilterType?.activityType}
-					themeType="secondary-vertical"
+					themeType="primary-vertical"
 					onChange={(val) => setBusinessFilterType((prev) => ({ ...prev, activityType: val }))}
 				>
 					{BUSINESS_TAB_OPTIONS.map(({ label, name, badge }) => (

@@ -11,7 +11,7 @@ function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () =
 			<div className={styles.tab_container}>
 				<Tabs
 					activeTab={businessFilterType.rewardType}
-					themeType="secondary-vertical"
+					themeType="primary-vertical"
 					onChange={(val) => setBusinessFilterType((prev) => ({ ...prev, rewardType: val }))}
 				>
 					{BUSINESS_REWARDS_OPTIONS.map(({ label, name, badge }) => (
