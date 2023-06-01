@@ -3,12 +3,14 @@
     padding: 10px;
     box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
     border-radius: 6px;
-
-    
+    height: 140px;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
 }
 
 .title {
-	font-weight: 500;
+	font-weight: 600;
 }
 
 .details {
@@ -35,16 +37,6 @@
     display: flex;
     flex-wrap: wrap;
     
-    /* :global{
-        .ui_pill_container{
-            display: flex;
-            white-space: nowrap; 
-            align-items: center;
-            width: 80px; 
-            overflow: hidden;
-            text-overflow: ellipsis; 
-        }
-    } */
 }
 
 .courses {

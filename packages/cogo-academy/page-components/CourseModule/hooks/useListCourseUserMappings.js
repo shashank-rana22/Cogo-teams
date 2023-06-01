@@ -9,10 +9,11 @@ const MAPPING = {
 	saved     : { is_saved: true },
 };
 
-function useListCourseUserMappings({ activeTab, params, query, selected, currentCategory }) {
+function useListCourseUserMappings({ activeTab, params, query, selected, currentCategory, page_limit, page }) {
 	const finalPayload = useMemo(() => ({
 		...params,
-		filters: {
+		page    : page || 1,
+		filters : {
 			...params.filters,
 			...MAPPING[activeTab],
 			course_category_id:
@@ -20,7 +21,8 @@ function useListCourseUserMappings({ activeTab, params, query, selected, current
 			faq_topic_id : selected === '' ? null : selected,
 			q            : query,
 		},
-	}), [params, query, activeTab, currentCategory, selected]);
+		page_limit: page_limit || 10000000000000,
+	}), [params, query, activeTab, currentCategory, selected, page_limit, page]);
 
 	const [{ data = {}, loading }, trigger] = useRequest({
 		url    : '/list_user_courses',

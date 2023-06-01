@@ -26,8 +26,7 @@ function RecommendedComponents({ user_id }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
+		filters: {
 			status: 'active',
 			user_id,
 			// faq_topic_id : topics,
