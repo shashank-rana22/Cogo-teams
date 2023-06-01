@@ -62,14 +62,14 @@ function Header({
 				) : null}
 
 				<div className={styles.button_div}>
-					{/* {showExchangeRate ? ( */}
-					<ExchangeRate
-						shipment_id={shipment_data.id}
-						refetch={refetch}
-						invoiceData={invoiceData}
-						disableAction={disableAction}
-					/>
-					{/* ) : null} */}
+					{!showExchangeRate ? (
+						<ExchangeRate
+							shipment_id={shipment_data.id}
+							refetch={refetch}
+							invoiceData={invoiceData}
+							disableAction={disableAction}
+						/>
+					) : null}
 
 					<EditInvoicePreference
 						invoicing_parties={invoicing_parties}

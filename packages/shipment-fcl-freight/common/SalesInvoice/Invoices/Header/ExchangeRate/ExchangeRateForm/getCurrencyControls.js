@@ -1,10 +1,23 @@
+function validateExchangeRate(value, field, availableCurrencyConversions) {
+	const [currency] = Object.keys(field);
+
+	const initialConversion = availableCurrencyConversions?.[currency];
+	const ten_percent_initial = initialConversion * 0.1;
+	const ten_less = initialConversion - ten_percent_initial;
+	const ten_more = initialConversion + ten_percent_initial;
+	if (value < ten_less) {
+		return `Exchange rate can not be less then ${ten_less}`;
+	} if (value > ten_more) {
+		return `Exchange rate can not be more then ${ten_more}`;
+	}
+	return true;
+}
+
 export const getCurrencyControls = ({
 	invoiceCurrency,
 	differentCurrenciesHash,
 	availableCurrencyConversions,
 }) => {
-	// Object.keys(differentCurrenciesHash || {}).map((currency, i) => console.log(currency, i));
-	// console.log(differentCurrenciesHash, ' :differentCurrenciesHash');
 	const controls = Object.keys(differentCurrenciesHash || {}).map(
 		(currency) => ({
 			name             : `currency_control_${currency}`,
@@ -45,7 +58,7 @@ export const getCurrencyControls = ({
 					size        : 'sm',
 					rules       : {
 						required : 'Exchange Rate is required',
-						min      : 0.000001,
+						validate : (value, field) => validateExchangeRate(value, field, availableCurrencyConversions),
 					},
 				},
 			],

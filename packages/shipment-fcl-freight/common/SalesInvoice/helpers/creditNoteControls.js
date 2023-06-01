@@ -134,19 +134,21 @@ const creditNoteControls = ({
 	const control = services?.map((service) => ({
 		...rawControls(service, isEdit),
 		value: service?.line_items?.map((item) => {
-			const { is_checked,
+			const {
+				is_checked,
 				code,
-				hsn_code: hsn_code = 'NA',
+				hsn_code = 'NA',
 				currency,
-				price_discounted: price_discounted = 0,
-				quantity: quantity = 0,
-				exchange_rate: exchange_rate = 1,
-				tax_percent: tax_percent = 0,
+				price_discounted = 0,
+				quantity = 0,
+				exchange_rate = 1,
+				tax_percent = 0,
 				unit,
-				tax_total_price_discounted: tax_total_price_discounted = 0,
+				tax_total_price_discounted = 0,
 				sac_code,
 				total,
-				name } = item || {};
+				name,
+			} = item || {};
 
 			return {
 				is_checked,
@@ -160,8 +162,10 @@ const creditNoteControls = ({
 				unit,
 				total,
 				name,
-			}
-		})
+				tax_total_price_discounted,
+				hsn_code,
+			};
+		}),
 	}));
 
 	control.push(...controls);

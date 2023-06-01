@@ -1,7 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import React, { useEffect, useCallback, useMemo } from 'react';
 
 import FieldArrayItem from '../FieldArrayItem';
 
@@ -17,21 +16,6 @@ function CurrencyExchangeForm({
 	handleFormSubmit = () => {},
 	loading = false,
 }) {
-	const getCurrentCurrencyConversions = useCallback(() => {
-		const currentCurrencyConversions = {};
-
-		Object.keys(differentCurrenciesHash || {}).forEach((currency) => {
-			currentCurrencyConversions[`currency_control_${currency}`] = availableCurrencyConversions[currency];
-		});
-
-		return currentCurrencyConversions;
-	}, [availableCurrencyConversions, differentCurrenciesHash]);
-
-	const currentCurrencyConversions = useMemo(() => getCurrentCurrencyConversions(
-		differentCurrenciesHash,
-		availableCurrencyConversions,
-	), [availableCurrencyConversions, differentCurrenciesHash, getCurrentCurrencyConversions]);
-
 	const { controls, defaultValues } = getCurrencyControls({
 		invoiceCurrency,
 		differentCurrenciesHash,
@@ -40,40 +24,9 @@ function CurrencyExchangeForm({
 
 	const {
 		handleSubmit,
-		watch,
 		formState: { errors },
 		control,
-		setError: setErrorForm,
-		clearErrors,
 	} = useForm({ defaultValues });
-
-	const modifiedConversions = watch();
-
-	useEffect(() => {
-		Object.keys(currentCurrencyConversions).forEach((key) => {
-			const initialConverion = currentCurrencyConversions?.[key];
-			const newConversion = Number(modifiedConversions[key][0].exchange_rate);
-			const ten_percent_initial = initialConverion * 0.1;
-			const ten_less = initialConverion - ten_percent_initial;
-			const ten_more = initialConverion + ten_percent_initial;
-
-			if (newConversion < ten_less) {
-				setErrorForm(`${key}.0.exchange_rate`, {
-					type    : 'min',
-					message : `Exchange rate can not be less then ${ten_less}`,
-				});
-			}
-			if (newConversion > ten_more) {
-				setErrorForm(`${key}.0.exchange_rate`, {
-					type    : 'max',
-					message : `Exchange rate can not be more then ${ten_more}`,
-				});
-			}
-			if (newConversion > ten_less && newConversion < ten_more) {
-				clearErrors(`${key}.0.exchange_rate`);
-			}
-		});
-	}, [clearErrors, JSON.stringify(currentCurrencyConversions), JSON.stringify(modifiedConversions), setErrorForm]);
 
 	return (
 		<Modal
