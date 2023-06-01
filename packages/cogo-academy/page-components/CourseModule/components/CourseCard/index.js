@@ -4,18 +4,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, activeTab }) {
-	const { cogo_academy_course = {}, cogo_academy_course_id : course_id = '', course_progress } = data;
-
-	const { faq_topics = [], name = '', description = '', course_categories = [] } = cogo_academy_course;
-
-	const {
-		secondaryBtnText,
-		primaryBtnText,
-		icon,
-	} = buttonContent;
-
-	const toolTipContent = (
+function ToolTipContent({ faq_topics }) {
+	return (
 		<>
 			{(faq_topics || []).map((item, index) => {
 				const { id, display_name } = item;
@@ -34,10 +24,28 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, act
 			})}
 		</>
 	);
+}
+
+function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, activeTab }) {
+	const { cogo_academy_course = {}, cogo_academy_course_id : course_id = '', course_progress } = data;
+
+	const {
+		faq_topics = [],
+		name = '',
+		description = '',
+		course_categories = [],
+		thumbnail_url = '',
+	} = cogo_academy_course;
+
+	const {
+		secondaryBtnText,
+		primaryBtnText,
+		icon,
+	} = buttonContent;
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
+			<div style={{ backgroundImage: `url(${thumbnail_url})` }} className={styles.header}>
 				<div className={styles.topics_rating_container}>
 					<div className={styles.topics}>
 
@@ -59,10 +67,9 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, act
 						})}
 
 						{faq_topics.length > 2 ? (
-
 							<Tooltip
 								interactive
-								content={toolTipContent}
+								content={<ToolTipContent faq_topics={faq_topics} />}
 								placement="top"
 								className={styles.tooltip}
 							>

@@ -1,12 +1,12 @@
-.container{
-    margin: 10px;
-    padding: 10px;
-    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
-    border-radius: 6px;
-    height: 140px;
-    display: flex;
-    flex-direction: column;
-    justify-content: space-between;
+.container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	height: 140px;
+	padding: 10px;
+	margin: 10px;
+	border-radius: 6px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
 }
 
 .title {
@@ -27,16 +27,15 @@
 	background: #fdebe9;
 	border-radius: 6px;
 
-    :hover{
-	    background: #fdebe9;
-    }
+	:hover {
+		background: #fdebe9;
+	}
 }
 
-.pill_box{
-    width: 180px;
-    display: flex;
-    flex-wrap: wrap;
-    
+.pill_box {
+	display: flex;
+	flex-wrap: wrap;
+	width: 180px;
 }
 
 .courses {
