@@ -1,8 +1,7 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
-
-const regexPattern = /^[+-]?\d*\.?\d+$/;
 
 function useAssignMarks({ setError = () => {}, activeAttempt }) {
 	const [{ loading }, trigger] = useRequest({
@@ -11,7 +10,7 @@ function useAssignMarks({ setError = () => {}, activeAttempt }) {
 	}, { manual: true });
 
 	const handleAssignMarks = async ({ test_id, user_id, test_question_id, marks }) => {
-		const validMarks = regexPattern.test(marks);
+		const validMarks = GLOBAL_CONSTANTS.regex_patterns.number.test(marks);
 		if (validMarks) {
 			if (parseFloat(marks) > 10.0) {
 				setError('Marks should be less than or equal to 10');
