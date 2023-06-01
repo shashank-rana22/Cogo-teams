@@ -74,7 +74,7 @@ function Defaulters() {
 
 	useEffect(() => {
 		const {
-			migrated, cogoEntity, invoiceStatus, status, services, invoiceDate, dueDate, currency, zone,
+			migrated, cogoEntity, invoiceStatus, status, services, invoiceDate, dueDate, currency,
 		} = globalFilters || {};
 
 		const isFilterApplied = String(migrated)?.length > 0 || cogoEntity?.length > 0

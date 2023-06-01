@@ -1,32 +1,32 @@
-.filter_container{
-    margin-top: 20px;
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.filter_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
 }
 
-.left_filters{
-    display: flex;
-    align-items: center;
+.left_filters {
+	display: flex;
+	align-items: center;
 }
 
-.filter_popover{
-    width: 424px;
+.filter_popover {
+	width: 424px;
 }
 
-.filter_section{
-    display:flex;
-    justify-content: space-between;
-    margin:8px;
+.filter_section {
+	display: flex;
+	justify-content: space-between;
+	margin: 8px;
 }
 
-.close_popover{
-    display: flex;
-    flex-direction: row-reverse;
+.close_popover {
+	display: flex;
+	flex-direction: row-reverse;
 }
 
-.search{
-    :global {
+.search {
+	:global {
 		width: 336px;
 
 		.ui_input_container {
