@@ -72,7 +72,7 @@ function TicketStructureBody({
 				</div>
 				<div className={styles.ticket_reason_box}>
 					<div className={styles.description}>
-						{(ticketActivity?.description || description).substring(0, 100)}
+						{(ticketActivity?.Description || description).substring(0, 100)}
 					</div>
 					{activityCount ? (
 						<div className={styles.activity_count}>
