@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowDown, IcMArrowUp, IcMTimer } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -91,12 +92,12 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 
 	const departure = formatDate({
 		date       : primaryServiceDetails?.[0]?.departure,
-		dateFormat : 'dd MMM YYYY',
+		dateFormat : GLOBAL_CONSTANTS.format.date['dd/MM/yyyy'],
 	});
 
 	const arrival = formatDate({
 		date       : primaryServiceDetails?.[0]?.arrival,
-		dateFormat : 'dd MMM YYYY',
+		dateFormat : GLOBAL_CONSTANTS.format.date['dd/MM/yyyy'],
 	});
 
 	return (
@@ -168,7 +169,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 									<div className={styles.secondary_text}>
 										{formatDate({
 											date       : primaryServiceDetails?.[0]?.departure,
-											dateFormat : 'dd MMM YYYY',
+											dateFormat : GLOBAL_CONSTANTS.format.date['dd/MM/yyyy'],
 										})}
 									</div>
 								</div>
@@ -191,7 +192,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 									<div className={styles.secondary_text}>
 										{formatDate({
 											date       : primaryServiceDetails?.[0]?.arrival,
-											dateFormat : 'dd MMM YYYY',
+											dateFormat : GLOBAL_CONSTANTS.format.date['dd/MM/yyyy'],
 										})}
 									</div>
 								</div>
@@ -250,7 +251,7 @@ function CardComponent({ item = {}, filters = {}, refetchBookingList = () => {} 
 										date: filters?.status !== 'approved'
 											? item?.created_at
 											: item?.updated_at,
-										dateFormat: 'dd MMM YYYY',
+										dateFormat: GLOBAL_CONSTANTS.format.date['dd/MM/yyyy'],
 									})}
 								</div>
 							</div>
