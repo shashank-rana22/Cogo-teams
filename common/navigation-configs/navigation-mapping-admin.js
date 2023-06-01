@@ -2140,15 +2140,6 @@ const navigationMappingAdmin = {
 		module_type : 'dashboards',
 		options     : [
 			{
-				key           : 'analytics_dashboard-management',
-				title         : 'Dashboard Management',
-				href          : '/analytics-dashboard-management',
-				as            : '/analytics-dashboard-management',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.analytics_dashboard_management,
-			},
-			{
 				key           : 'analytics_dashboard-view',
 				title         : 'Dashboard',
 				href          : '/analytics-dashboard',

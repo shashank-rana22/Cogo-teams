@@ -13,16 +13,16 @@ const useUpdateTicketActivity = ({
 		authkey : 'post_tickets_activity',
 	}, { manual: false });
 
-	const updateTicketActivity = async (Status = '', ID = '') => {
+	const updateTicketActivity = async (status = '', id = '') => {
 		try {
-			const isReslove = Status?.toLowerCase() === 'resolve';
+			const isReslove = status?.toLowerCase() === 'resolve';
 
 			const res = await trigger({
 				data: {
 					UserType      : 'ticket_user',
 					PerformedByID : profile?.user?.id,
 					Type          : isReslove ? 'mark_as_resolved' : 'reopened',
-					TicketID      : [Number(ID)],
+					TicketID      : [Number(id)],
 					Status        : isReslove ? 'resolved' : 'reopened',
 				},
 			});
