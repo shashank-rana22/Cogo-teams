@@ -1,5 +1,10 @@
+.header_container {
+	display: flex;
+	justify-content: space-between;
+}
+
 .heading {
-	font-size: 24px;
+	font-size: 20px;
 	font-weight: 600;
 	line-height: 30px;
 }
@@ -10,4 +15,18 @@
 	height: 4px;
 	content: "";
 	background: #ed3726;
+}
+
+.button_head {
+	display: flex;
+}
+
+.button_style {
+	padding: 6px 14px;
+	margin: 16px 2px;
+	border-radius: 4px;
+}
+
+.plus_icon {
+	margin-right: 2px;
 }

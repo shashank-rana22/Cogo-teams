@@ -1,30 +1,21 @@
-.container {
-	margin: 12px 10px;
-}
-
-.middle_container {
-	display: flex;
-	justify-content: space-between;
-	margin: 40px 0 24px;
-}
-
-.input_search {
-	width: 280px;
-	height: 32px !important;
-
+.tabs_container {
+    margin-top: 20px;
 	:global {
-		.ui_input_control {
-			font-size: 12px !important;
-		}
-
-		.ui_input_suffix {
-			width: 24px;
-			height: 80%;
-
-			svg {
-				width: 16px;
-				height: 16px;
+		.ui_tab_list_container {
+			border-bottom: none;
+			.ui_tab_container {
+				background: #ffffff;
+				border-radius: 6px 6px 0px 0px;
+				font-weight: 500;
+				font-size: 10px;
+				line-height: 12px;
+				padding: 8px 20px;
+				margin-right: 12px !important;
 			}
 		}
 	}
+}
+
+.modal_container {
+	padding: 20px;
 }

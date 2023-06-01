@@ -589,9 +589,11 @@ importers:
       '@cogoport/icons-react': ^1.0.51
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
+      '@cogoport/scope-select': workspace:^0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/utils': ^1.2.2
       react: 18.2.0
+      react-infinite-scroller: ^1.2.4
     dependencies:
       '@cogoport/components': 1.0.423_gbfbxfylkmejm6nw6z2454h4va
       '@cogoport/forms': link:../../common/forms
@@ -599,9 +601,11 @@ importers:
       '@cogoport/icons-react': 1.0.73_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
+      '@cogoport/scope-select': link:../../common/scope-select
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       react: 18.2.0
+      react-infinite-scroller: 1.2.6_react@18.2.0
 
   packages/bl_do-collection-release:
     specifiers:
