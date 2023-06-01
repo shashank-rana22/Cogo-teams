@@ -62,6 +62,7 @@ function CourseConsumption() {
 					user_id={user_id}
 					indexes={indexes}
 					setIndexes={setIndexes}
+					getUserCourse={getUserCourse}
 					setChapterContent={setChapterContent}
 				/>
 

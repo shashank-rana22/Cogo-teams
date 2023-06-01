@@ -13,6 +13,7 @@ function ModuleContent({
 	course_id,
 	user_id,
 	setIndexes,
+	getUserCourse,
 	setChapterContent,
 }) {
 	const { name, content_type, chapter_content, description, chapter_attachments } = chapterData;
@@ -64,7 +65,13 @@ function ModuleContent({
 						className={styles.btn}
 						loading={loading}
 						onClick={() => {
-							const { id, state } = getChapter({ data, indexes, which: 'prev', setIndexes }) || {};
+							const { id, state } = getChapter({
+								data,
+								indexes,
+								state: 'prev',
+								setIndexes,
+								setChapterContent,
+							}) || {};
 
 							updateCourseProgress({
 								next_chapter_id    : id,
@@ -72,13 +79,9 @@ function ModuleContent({
 
 							});
 
-							// setIndexes((prev) => ({
-							// 	...prev,
-							// 	chapterIndex: prev.chapterIndex - 1,
-
-							// }));
-
 							setChapterContent(getChapter({ data, indexes }));
+
+							getUserCourse();
 						}}
 					>
 						<IcMArrowLeft width={14} height={14} className={styles.arrow_left} />
@@ -91,21 +94,22 @@ function ModuleContent({
 						className={`${styles.btn} ${styles.next_btn}`}
 						loading={loading}
 						onClick={() => {
-							const { id, state } = getChapter({ data, indexes, which: 'next' }) || {};
+							const { id, user_progress_state } = getChapter({
+								data,
+								indexes,
+								state: 'next',
+								setIndexes,
+								setChapterContent,
+							}) || {};
 
 							updateCourseProgress({
 								next_chapter_id    : id,
-								next_chapter_state : state === 'introduction' ? 'ongoing' : state,
+								next_chapter_state : user_progress_state === 'introduction'
+									? 'ongoing' : user_progress_state,
 
 							});
 
-							// setIndexes((prev) => ({
-							// 	...prev,
-							// 	chapterIndex: prev.chapterIndex + 1,
-
-							// }));
-
-							setChapterContent(getChapter({ data, indexes }));
+							getUserCourse();
 						}}
 					>
 						Next
@@ -115,18 +119,24 @@ function ModuleContent({
 			</div>
 
 			<div className={styles.content}>
-
 				{content_type === 'text' ? <div dangerouslySetInnerHTML={{ __html: chapter_content }} />
 					: (
 						<iframe
 							style={{ width: '90%', marginTop: '20px', border: '0' }}
 							height="400"
 							src={
-                    content_type === 'video' ? chapter_content.replace('/watch?v=', '/embed/') : chapter_content
-                }
+				    content_type === 'video' ? chapter_content.replace('/watch?v=', '/embed/') : chapter_content
+				}
 							title="video player"
 							allowFullScreen
 						/>
+						// <iframe
+						// 	src={`https://view.officeapps.live.com/op/embed.aspx?src=${chapter_content}`}
+						// 	width="100%"
+						// 	height="600px"
+						// 	title="video player"
+						// 	frameBorder="0"
+						// />
 					)}
 			</div>
 
@@ -141,6 +151,7 @@ function ModuleContent({
 				<div className={styles.additional_resources}>
 
 					<h3>Additional Resources:</h3>
+
 					{chapter_attachments.map((attachment) => (
 						<div
 							role="presentation"

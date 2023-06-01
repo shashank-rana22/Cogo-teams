@@ -26,18 +26,16 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, setChapte
 					loading={loading}
 					onClick={() => {
 						updateCourseProgress({
-							next_chapter_id    : getChapter({ data, indexes, which: 'next', setIndexes })?.id,
-							next_chapter_state : 'completed',
+							next_chapter_id: getChapter({
+								data,
+								indexes,
+								state: 'next',
+								setIndexes,
+								setChapterContent,
+							})?.id,
 
+							next_chapter_state: 'completed',
 						});
-
-						// setIndexes((prev) => ({
-						// 	...prev,
-						// 	chapterIndex: prev.chapterIndex + 1,
-
-						// }));
-
-						setChapterContent(getChapter({ data, indexes, setIndexes }));
 
 						getUserCourse();
 					}}
@@ -51,19 +49,18 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, setChapte
 					loading={loading}
 					onClick={() => {
 						updateCourseProgress({
-							current_chapter_id : getChapter({ data, indexes, which: 'curr', setIndexes }).id,
-							next_chapter_id    : getChapter({ data, indexes, which: 'next', setIndexes })?.id,
-							next_chapter_state : 'completed',
+							current_chapter_id: getChapter({ data, indexes, which: 'curr', setIndexes }).id,
 
+							next_chapter_id: getChapter({
+								data,
+								indexes,
+								state: 'next',
+								setIndexes,
+								setChapterContent,
+							})?.id,
+
+							next_chapter_state: 'completed',
 						});
-
-						// setIndexes((prev) => ({
-						// 	...prev,
-						// 	chapterIndex: prev.chapterIndex + 1,
-
-						// }));
-
-						setChapterContent(getChapter({ data, indexes, setIndexes }));
 
 						getUserCourse();
 					}}

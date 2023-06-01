@@ -10,7 +10,6 @@ const useGetUserCourse = ({ course_id, user_id }) => {
 	}, { manual: true });
 
 	const getUserCourse = useCallback(async () => {
-		console.log('reached here');
 		try {
 			await trigger({
 				params: {

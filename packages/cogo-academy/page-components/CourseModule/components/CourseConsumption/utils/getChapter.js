@@ -1,7 +1,10 @@
-const getChapter = ({ data = {}, indexes, which = 'curr', setIndexes = () => {} }) => {
+const getChapter = ({ data = {}, indexes, state = 'curr', setIndexes = () => {}, setChapterContent = () => {} }) => {
 	let { moduleIndex, subModuleIndex, chapterIndex } = indexes;
 
-	if (which === 'prev') {
+	console.log('indexes', indexes);
+	console.log('state', state);
+
+	if (state === 'prev') {
 		chapterIndex -= 1;
 
 		if (chapterIndex === -1) {
@@ -9,13 +12,13 @@ const getChapter = ({ data = {}, indexes, which = 'curr', setIndexes = () => {} 
 
 			if (subModuleIndex === -1) {
 				moduleIndex -= 1;
-				subModuleIndex = data?.course_modules[moduleIndex - 1]?.course_sub_modules.length - 1;
+				subModuleIndex = (data?.course_modules[moduleIndex - 1]?.course_sub_modules.length || 0) - 1;
 			}
 
-			chapterIndex = data?.course_modules[moduleIndex]
-				?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters.length - 1;
+			chapterIndex = (data?.course_modules[moduleIndex]
+				?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters.length || 0) - 1;
 		}
-	} else if (which === 'next') {
+	} else if (state === 'next') {
 		chapterIndex += 1;
 
 		if (chapterIndex === data?.course_modules[moduleIndex]
@@ -31,36 +34,20 @@ const getChapter = ({ data = {}, indexes, which = 'curr', setIndexes = () => {} 
 		}
 	}
 
-	// if (chapterIndex === data?.course_modules[moduleIndex]
-	// 	?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters?.length - 1) {
-	// 	chapterIndex = 0;
-	// 	subModuleIndex += 1;
-
-	// 	if (subModuleIndex === data?.course_modules[moduleIndex]
-	// 		?.course_sub_modules?.length - 1) {
-	// 		subModuleIndex = 0;
-	// 		moduleIndex += 1;
-	// 	}
-	// } else if (chapterIndex === -1) {
-	// 	subModuleIndex -= 1;
-
-	// 	if (subModuleIndex === -1) {
-	// 		moduleIndex -= 1;
-	// 		subModuleIndex = data?.course_modules[moduleIndex - 1]?.course_sub_modules.length - 1;
-	// 	}
-
-	// 	chapterIndex = data?.course_modules[moduleIndex]
-	// 		?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters.length - 1;
-	// }
-
 	setIndexes({
 		moduleIndex,
 		subModuleIndex,
 		chapterIndex,
 	});
 
-	return (data?.course_modules[moduleIndex]
-		?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex]);
+	const chapterContent = data?.course_modules[moduleIndex]
+		?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex];
+
+	if (state !== 'curr') {
+		setChapterContent(chapterContent);
+	}
+
+	return chapterContent;
 };
 
 export default getChapter;
