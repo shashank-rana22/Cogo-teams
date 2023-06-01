@@ -19,7 +19,7 @@ function StepperComponent({ data }) {
 
 	const MAPPING = [
 		{
-			name      : 'profile_details',
+			name      : 'personal_details',
 			icon      : IcMProfile,
 			is_added  : Object.keys(personal_details).every((key) => (personal_details[key])),
 			sub_title : 'Added',
