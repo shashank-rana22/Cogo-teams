@@ -60,6 +60,7 @@ function OnAccountCollection() {
 
 	return (
 		<div>
+
 			<Header refetch={clearFilters} control={control} />
 
 			<div className={styles.container}>

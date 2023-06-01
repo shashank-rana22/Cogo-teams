@@ -11,12 +11,12 @@ interface FilterPropsInterface {
 function SortIcon({ setFilters, sortingKey, filters }:FilterPropsInterface) {
 	const sortEle = () => {
 		let newSortType = '';
-		if (filters?.sortBy.toUpperCase() === sortingKey.toUpperCase() || !filters?.sortBy) {
+		if (filters?.sortBy === sortingKey || !filters?.sortBy) {
 			newSortType = (filters?.sortType === 'ASC') ? 'DESC' : 'ASC';
 		} else { newSortType = 'DESC'; }
 		setFilters((prev) => ({
 			...prev,
-			sortBy   : sortingKey?.toUpperCase(),
+			sortBy   : sortingKey,
 			sortType : newSortType,
 		}));
 	};
@@ -25,9 +25,9 @@ function SortIcon({ setFilters, sortingKey, filters }:FilterPropsInterface) {
 		<div className={styles.container}>
 			<div className={styles.center} onClick={() => { sortEle(); }} role="presentation">
 				<IcMArrowRotateUp
-					className={((filters?.sortBy === sortingKey?.toUpperCase()
+					className={((filters?.sortBy === sortingKey
 						&& filters?.sortType !== 'DESC')
-						|| filters?.sortBy !== sortingKey?.toUpperCase()) && styles.asc}
+						|| filters?.sortBy !== sortingKey) && styles.asc}
 				/>
 			</div>
 
@@ -37,7 +37,7 @@ function SortIcon({ setFilters, sortingKey, filters }:FilterPropsInterface) {
 				role="presentation"
 			>
 				<IcMArrowRotateDown
-					className={filters?.sortBy === sortingKey?.toUpperCase()
+					className={filters?.sortBy === sortingKey
 						&& filters?.sortType === 'DESC' && styles.desc}
 				/>
 			</div>

@@ -1,10 +1,11 @@
 import { Tooltip } from '@cogoport/components';
 
-import getFormattedDate from './getFormattedDate';
+import { formatDate } from './formatDate';
 import styles from './styles.module.css';
 
 const renderUploadedBy = ({ item }) => {
 	const { uploadedBy = '', transactionDate = '' } = item;
+
 	return (
 		<div className={styles.upload_container}>
 			<Tooltip
@@ -14,7 +15,7 @@ const renderUploadedBy = ({ item }) => {
 
 						<div>
 							{transactionDate
-								? getFormattedDate({ date: transactionDate })
+								? formatDate(new Date(transactionDate), 'dd/MMM/yy', {}, false)
 								: '--'}
 						</div>
 
@@ -30,7 +31,7 @@ const renderUploadedBy = ({ item }) => {
 
 					<div className={styles.text_truncate}>
 						{transactionDate
-							? getFormattedDate({ date: transactionDate })
+							? formatDate(new Date(transactionDate), 'dd/MMM/yy', {}, false)
 							: '--'}
 					</div>
 
