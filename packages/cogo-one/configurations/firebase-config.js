@@ -23,7 +23,7 @@ export const FIRESTORE_PATH = {
 	whatsapp          : firestoreWhatsappPath,
 	platform_chat     : firestoreChatbotPath,
 	telegram          : firestoreTelegramPath,
-	zalo			  : firestoreZaloPath,
+	zalo              : firestoreZaloPath,
 	shipment_reminder : fireStoreShipmentReminderPath,
 	cogoone_constants : cogoOneConstants,
 
