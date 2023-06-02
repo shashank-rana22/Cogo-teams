@@ -80,40 +80,41 @@ function CourseConsumption() {
 						setIndexes={setIndexes}
 					/>
 
-				<ModuleContent
-					data={data}
-					loading={loading || courseProgressUpdateLoading}
-					updateCourseProgress={updateCourseProgress}
-					chapter={chapter}
-					indexes={indexes}
-					setIndexes={setIndexes}
-					getUserCourse={getUserCourse}
-					setChapter={setChapter}
-					RichTextEditor={RichTextEditor}
-					editorValue={editorValue}
-					setEditorValue={setEditorValue}
-					editorError={editorError}
-					setEditorError={setEditorError}
-					readOnly={readOnly}
-					setReadOnly={setReadOnly}
-				/>
+					<ModuleContent
+						data={data}
+						loading={loading || courseProgressUpdateLoading}
+						updateCourseProgress={updateCourseProgress}
+						chapter={chapter}
+						indexes={indexes}
+						setIndexes={setIndexes}
+						getUserCourse={getUserCourse}
+						setChapter={setChapter}
+						RichTextEditor={RichTextEditor}
+						editorValue={editorValue}
+						setEditorValue={setEditorValue}
+						editorError={editorError}
+						setEditorError={setEditorError}
+						readOnly={readOnly}
+						setReadOnly={setReadOnly}
+					/>
 
 				</div>
 
-			<Footer
-				course_id={course_id}
-				data={data}
-				indexes={indexes}
-				setIndexes={setIndexes}
-				updateCourseProgress={updateCourseProgress}
-				loading={loading || courseProgressUpdateLoading}
-				getUserCourse={getUserCourse}
-				chapter={chapter}
-				editorValue={editorValue}
-				setEditorError={setEditorError}
-				setChapter={setChapter}
-			/>
-		</div>
+				<Footer
+					course_id={course_id}
+					data={data}
+					indexes={indexes}
+					setIndexes={setIndexes}
+					updateCourseProgress={updateCourseProgress}
+					loading={loading || courseProgressUpdateLoading}
+					getUserCourse={getUserCourse}
+					chapter={chapter}
+					editorValue={editorValue}
+					setEditorError={setEditorError}
+					setChapter={setChapter}
+				/>
+			</div>
+		</>
 	);
 }
 
