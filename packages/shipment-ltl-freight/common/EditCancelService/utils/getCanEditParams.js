@@ -5,7 +5,7 @@ const editParamsStakeholders = {
 	consignee_shipper_booking_agent: {
 		idToMatch: 'consignee_shipper_id',
 	},
-	superadmin: {},
+	superadmin: 'superadmin',
 };
 
 const controlsEditableConditions = [

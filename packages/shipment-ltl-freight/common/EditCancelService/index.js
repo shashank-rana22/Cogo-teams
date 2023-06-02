@@ -4,13 +4,12 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useContext } from 'react';
 
-// import EditParams from '../EditParams';
 import CancelService from '../CancelService';
+import EditParams from '../EditParams';
 import SupplierReallocation from '../SupplierReallocation';
 
 import styles from './styles.module.css';
 import getCanCancelService from './utils/getCanCancelService';
-// import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
 const actionButtons = [
@@ -36,7 +35,7 @@ function EditCancelService({ serviceData = {} }) {
 	};
 
 	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	// actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
+	actionButtons[1].show = true;
 	actionButtons[2].show = getCanCancelService({ state, activeStakeholder });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
@@ -70,8 +69,8 @@ function EditCancelService({ serviceData = {} }) {
 			{showModal === 'supplier_reallocation'
 			&& <SupplierReallocation setShow={setShowModal} serviceData={servicesData} />}
 
-			{/* {showModal === 'edit_params'
-			&& <EditParams setShow={setShowModal} serviceData={serviceData} />} */}
+			{showModal === 'edit_params'
+			&& <EditParams setShow={setShowModal} serviceData={serviceData} />}
 
 			{showModal === 'cancel' && 	(
 				<CancelService

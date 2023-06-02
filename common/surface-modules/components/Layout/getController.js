@@ -10,6 +10,7 @@ import {
 	UploadController,
 	CheckboxGroupController,
 	ToggleController,
+	InputGroupController,
 } from '@cogoport/forms';
 
 import DepartureDateSelectController from './DepartureDateSelect/index';
@@ -56,6 +57,9 @@ const getElementController = (type = 'text') => {
 
 		case 'toggle':
 			return ToggleController;
+
+		case 'input-group':
+			return InputGroupController;
 
 		default:
 			return InputController;
