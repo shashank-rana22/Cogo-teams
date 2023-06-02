@@ -68,7 +68,7 @@ const controls = [
 		placeholder : 'Select Location',
 		options     : [
 			{ value: 'mumbai', label: 'Mumbai' },
-			{ value: 'gurgoan', label: 'Gurgoan' },
+			{ value: 'gurgaon', label: 'Gurgaon' },
 		],
 		rules: {
 			required: 'Location is required',
