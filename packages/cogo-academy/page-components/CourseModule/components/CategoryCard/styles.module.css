@@ -1,26 +1,27 @@
-.container{
-    margin: 20px 0px;    
+.container {
+	margin: 20px 0;
 }
+
 .carousel_container {
-    margin: 24px 12px;
+	margin: 24px 12px;
 
-    :global{
-        .ui_carousel_container{
-            display: flex;
-            position: relative;
-            flex-wrap: wrap;
-        }
+	:global {
+		.ui_carousel_container {
+			position: relative;
+			display: flex;
+			flex-wrap: wrap;
+		}
 
-        .ui_o0St8{
-            width: fit-content;
-            :hover{
-                background: #fffce6;
-                cursor: pointer;
-            }
+		.ui_o0St8 {
+			width: fit-content;
 
-        }
+			:hover {
+				cursor: pointer;
+				background: #fffce6;
+			}
+		}
 
-        .ui_carousel_arrow {
+		.ui_carousel_arrow {
 			fill: #221f20;
 		}
 

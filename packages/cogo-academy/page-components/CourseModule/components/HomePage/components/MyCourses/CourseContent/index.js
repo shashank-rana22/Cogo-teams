@@ -43,6 +43,7 @@ function CourseContent({ activeTab, user_id }) {
 				data={item}
 				buttonContent={BUTTON_CONTENT_MAPPING[activeTab]}
 				handleClick={HANDLE_CLICK_MAPPINGS[activeTab]}
+				activeTab={activeTab}
 			/>
 		),
 	}));

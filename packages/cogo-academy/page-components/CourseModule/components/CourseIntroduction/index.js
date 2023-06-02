@@ -1,9 +1,8 @@
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
-import React, { useState } from 'react';
 
 import useGetUserCourse from '../../hooks/useGetUserCourse';
-import useGetUserCourseDetails from '../../hooks/useGetUserCourseDetails';
+import Header from '../Header';
 
 import CourseCurriculum from './components/CourseCurriculum';
 import CourseDetails from './components/CourseDetails';
@@ -20,8 +19,6 @@ function CourseIntroduction() {
 	const { course_id = '' } = query;
 
 	const { data, loading } = useGetUserCourse({ course_id, user_id });
-
-	// console.log('data', data);
 
 	if (loading) {
 		return null;

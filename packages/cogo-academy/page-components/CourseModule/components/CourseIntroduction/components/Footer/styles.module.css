@@ -4,6 +4,7 @@
 	display: block;
 	width: 92%;
 	background-color: #fff;
+	border-top: 1px solid #e0e0e0;
 }
 
 .btn_container {

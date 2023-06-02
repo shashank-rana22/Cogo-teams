@@ -48,7 +48,7 @@
 	color: #4f4f4f;
 }
 
-.description{
+.description {
 	margin-bottom: 30px;
 }
 
@@ -63,8 +63,8 @@
 	justify-content: space-between;
 	margin-bottom: 10px;
 	font-size: 18px;
-	color: #4f4f4f;
 	font-weight: 600;
+	color: #4f4f4f;
 }
 
 .name {

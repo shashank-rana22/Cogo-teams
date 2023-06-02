@@ -41,7 +41,9 @@ function useListCourseUserMappings({ activeTab, params, query, selected, current
 	}, [trigger, finalPayload]);
 
 	useEffect(() => {
-		fetchList();
+		if (activeTab) {
+			fetchList();
+		}
 	}, [activeTab, fetchList]);
 
 	return {
