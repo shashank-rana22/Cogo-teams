@@ -16,7 +16,7 @@ function AddCustomerInvoice({
 	show = false,
 	handleRefetch = () => {},
 	invoice = {},
-	shipment_data = {},
+	shipmentData = {},
 }) {
 	const [uploadProof, setUploadProof] = useState(null);
 	const [showModal, setShowModal] = useState(false);
@@ -24,7 +24,7 @@ function AddCustomerInvoice({
 
 	const { data: tradePartnerData } = useListShipmentTradePartners({
 		defaultFilters: {
-			shipment_id      : shipment_data?.id,
+			shipment_id      : shipmentData?.id,
 			trade_party_type : 'shipper',
 		},
 		defaultParams: { add_service_objects_required: true },
@@ -129,7 +129,7 @@ function AddCustomerInvoice({
 					<Modal.Header title="Template" />
 					<Modal.Body>
 						<Invoices
-							shipment_data={shipment_data}
+							shipmentData={shipmentData}
 							invoice={invoice}
 							handleRefetch={handleRefetch}
 							handleCloseModal={handleCloseModal}
