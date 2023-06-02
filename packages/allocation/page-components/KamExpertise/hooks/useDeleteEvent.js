@@ -16,7 +16,7 @@ const useDeleteEvent = ({ id, listRefetch }) => {
 		try {
 			const payload = {
 				configuration_detail_id : id,
-				status                  : false,
+				status                  : 'inactive',
 			};
 
 			await trigger({

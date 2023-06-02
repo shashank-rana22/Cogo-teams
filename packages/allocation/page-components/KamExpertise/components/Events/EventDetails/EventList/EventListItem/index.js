@@ -109,7 +109,7 @@ function EventListItem({ data, index, setEventListData }) {
 								size="lg"
 								color="#FEF3E9"
 							>
-								{startCase(res.parameters || '')}
+								{startCase(res.parameters.join(', ') || '')}
 							</Pill>
 						</span>
 					</div>
