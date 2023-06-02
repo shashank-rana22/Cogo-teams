@@ -35,12 +35,18 @@ const controls = [
 				value : 'text',
 				label : 'Text',
 			},
-			// {
-			// 	value : 'jupyter_notebook',
-			// 	label : 'Jupyter Notebook',
-			// },
+			{
+				value : 'assessment',
+				label : 'Assessment',
+			},
 		],
 		rules: { required: { value: true, message: 'This is required' } },
+	},
+	{
+		name        : 'assessment_value',
+		elementType : 'richText',
+		placeholder : 'Enter text ...',
+		rules       : { required: { value: true, message: 'This is required' } },
 	},
 	{
 		name          : 'upload_presentation',

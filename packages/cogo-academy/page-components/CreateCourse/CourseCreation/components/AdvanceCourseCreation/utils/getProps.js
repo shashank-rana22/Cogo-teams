@@ -11,6 +11,7 @@ const getProps = (data = {}) => ({
 		thumbnail_url     : data.thumbnail_url,
 		description       : data.description,
 		instructor_ids    : data.instructor_ids,
+		level             : data.level,
 	},
 	audience: {
 		course_audience_mappings : data.course_audience_mappings,

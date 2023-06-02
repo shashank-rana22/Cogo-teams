@@ -29,6 +29,8 @@ function ChapterContent({
 		setEditorValue,
 		uploadVideoWatch,
 		uploadDocumentWatch,
+		assessmentValue,
+		setAssessmentvalue,
 	} = useHandleChapterContent({
 		chapterContent,
 		onSaveChapter,
@@ -116,6 +118,10 @@ function ChapterContent({
 					return null;
 				}
 
+				if (contentTypeWatch !== 'assessment' && name === 'assessment_value') {
+					return null;
+				}
+
 				if (
 					!['presentation', 'text'].includes(contentTypeWatch)
 					&& name === 'upload_presentation'
@@ -132,6 +138,29 @@ function ChapterContent({
 								{...controlItem}
 								control={control}
 								error={errors?.[name]}
+							/>
+						</div>
+					);
+				}
+
+				if (name === 'assessment_value') {
+					return (
+						<div style={{ marginTop: '24px' }}>
+							<RichTextEditor
+								value={assessmentValue}
+								onChange={setAssessmentvalue}
+								required
+								id="body-text"
+								name="bodyText"
+								type="string"
+								multiline
+								variant="filled"
+								placeholder="Start Typing Here..."
+								rootStyle={{
+									zIndex    : 0,
+									position  : 'relative',
+									minHeight : '200px',
+								}}
 							/>
 						</div>
 					);

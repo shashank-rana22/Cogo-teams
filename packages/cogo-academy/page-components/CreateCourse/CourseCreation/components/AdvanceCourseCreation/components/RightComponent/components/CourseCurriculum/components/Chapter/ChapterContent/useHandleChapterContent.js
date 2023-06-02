@@ -15,6 +15,7 @@ const MAPPING = ['name', 'description', 'content_type', 'completion_duration_val
 
 const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, index, state }) => {
 	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
+	const [assessmentValue, setAssessmentvalue] = useState(RichTextEditor.createEmptyValue());
 
 	const { control, formState:{ errors = {} }, watch, handleSubmit, setValue } = useForm();
 
@@ -38,6 +39,7 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 			isNew,
 			additionalResourcesWatch,
 			state,
+			assessmentValue,
 		});
 
 		onSaveChapter({
@@ -61,6 +63,8 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 			setValue('upload_video', chapter_content);
 		} else if (content_type === 'presentation') {
 			setValue('upload_presentation', chapter_content);
+		} else if (content_type === 'assessment') {
+			setAssessmentvalue(RichTextEditor?.createValueFromString((chapter_content || ''), 'html'));
 		} else {
 			setValue('upload_document', chapter_content);
 		}
@@ -136,6 +140,8 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 		setEditorValue,
 		uploadVideoWatch,
 		uploadDocumentWatch,
+		assessmentValue,
+		setAssessmentvalue,
 	};
 };
 

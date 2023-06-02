@@ -1,9 +1,9 @@
 .container {
 	padding: 20px;
+	margin-top: 20px;
 	background: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
-	margin-top: 20px;
 }
 
 .tab_title {

@@ -42,6 +42,9 @@ function CourseOverview({ id, activeTab, state }, ref) {
 							Modules
 							<div className={styles.right_submodule}>
 								Sub Modules
+								<div className={styles.right_chapter}>
+									Chapter
+								</div>
 							</div>
 						</div>
 					</div>
