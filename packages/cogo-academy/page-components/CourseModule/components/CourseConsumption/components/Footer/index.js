@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function Footer({
 	indexes, data, setIndexes, updateCourseProgress, loading,
-	courseProgressUpdateLoading, getUserCourse, chapter = {}, setChapter,
+	getUserCourse, chapter = {}, editorValue, setEditorError, setChapter,
 }) {
 	return (
 		<div className={styles.container}>
@@ -18,7 +18,7 @@ function Footer({
 					<Button
 						size="md"
 						themeType="accent"
-						loading={loading || courseProgressUpdateLoading}
+						loading={loading}
 						onClick={async () => {
 							const nextChapterContent = getChapter({
 								data,
@@ -44,7 +44,7 @@ function Footer({
 						<Button
 							size="md"
 							themeType="secondary"
-							loading={loading || courseProgressUpdateLoading}
+							loading={loading}
 							onClick={async () => {
 								const nextChapterContent = await getChapter({
 									data,
@@ -74,9 +74,15 @@ function Footer({
 						<Button
 							size="md"
 							themeType="accent"
-							loading={loading || courseProgressUpdateLoading}
+							loading={loading}
 							onClick={async () => {
-								const { id:current_chapter_id = '' } = chapter;
+								const { id:current_chapter_id = '', content_type = '', is_updated = false } = chapter;
+
+								if (content_type === 'assessment'
+								&& !editorValue.getEditorState().getCurrentContent().hasText()) {
+									setEditorError(true);
+									return;
+								}
 
 								const nextChapterContent = await getChapter({
 									data,
@@ -93,6 +99,9 @@ function Footer({
 									next_chapter_id    : id,
 									next_chapter_state : user_progress_state === 'introduction'
 										? 'ongoing' : user_progress_state,
+									...(content_type === 'assessment'
+										? { user_submission: editorValue.toString('html') } : {}),
+									...(is_updated === true ? { is_updated: false } : {}),
 								});
 
 								getUserCourse();

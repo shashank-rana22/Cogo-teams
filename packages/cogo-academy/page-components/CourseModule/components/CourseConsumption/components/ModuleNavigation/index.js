@@ -1,5 +1,7 @@
 import { Accordion, Pill } from '@cogoport/components';
+import { IcMFtick } from '@cogoport/icons-react';
 
+import isSubModuleComplete from '../../utils/isSubModuleComplete';
 import SubModuleContent from '../SubModuleContent';
 
 import LoadingState from './LoadingState';
@@ -60,14 +62,37 @@ function ModuleNavigation({
 								isOpen={subModuleIndex === indexes.subModuleIndex}
 								title={(
 									<div className={styles.flex}>
-										<div className={styles.number}>
-											<div className={styles.index}>
-												{moduleIndex + 1}
-												.
-												{subModuleIndex + 1}
-											</div>
-										</div>
+
+										{isSubModuleComplete(moduleIndex, subModuleIndex, data)
+											? (
+												<>
+													<IcMFtick
+														fill="#849E4C"
+														width={28}
+														height={28}
+														className={styles.icon}
+													/>
+													<div className={styles.indexes}>
+														{' '}
+														{moduleIndex + 1}
+														.
+														{subModuleIndex + 1}
+													</div>
+
+												</>
+
+											) : (
+												<div className={styles.number}>
+													<div className={styles.index}>
+														{moduleIndex + 1}
+														.
+														{subModuleIndex + 1}
+													</div>
+												</div>
+											)}
+
 										<div className={styles.name}>{subModule.name}</div>
+
 									</div>
 								)}
 							>

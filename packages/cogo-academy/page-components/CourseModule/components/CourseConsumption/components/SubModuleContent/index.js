@@ -1,3 +1,4 @@
+import { Pill, Tooltip } from '@cogoport/components';
 import { IcMFtick, IcMDocument, IcMVideoCall, IcMPpt, IcMText } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
@@ -41,10 +42,26 @@ function SubModuleContent({
 							{ICON_MAPPING[currChapter.content_type]}
 						</div>
 
-						<div className={styles.name}>
-							{currChapter.name}
+						<div className={styles.tooltip}>
+							<Tooltip content={`${currChapter.name}`} placement="top" maxWidth={500}>
+								<div className={styles.name}>
+									{currChapter.name}
+									{' '}
+								</div>
+							</Tooltip>
 						</div>
+
 					</div>
+
+					{currChapter.is_updated && (
+						<Pill
+							key={chapter.id}
+							size="sm"
+							color="orange"
+						>
+							NEW
+						</Pill>
+					)}
 
 					<div className={styles.duration}>
 						{currChapter.completion_duration_value}

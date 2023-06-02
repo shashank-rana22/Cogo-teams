@@ -11,9 +11,19 @@ import ModuleNavigation from './components/ModuleNavigation';
 import useUpdateUserCourseProgress from './hooks/useUpdateUserCourseProgress';
 import styles from './styles.module.css';
 
+let RichTextEditor;
+
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
+
 function CourseConsumption() {
 	const router = useRouter();
 	const [chapter, setChapter] = useState({});
+	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
+	const [editorError, setEditorError] = useState(false);
+	const [readOnly, setReadOnly] = useState(false);
 
 	const [indexes, setIndexes] = useState({
 		moduleIndex    : 0,
@@ -58,16 +68,20 @@ function CourseConsumption() {
 
 				<ModuleContent
 					data={data}
-					loading={loading}
-					courseProgressUpdateLoading={courseProgressUpdateLoading}
+					loading={loading || courseProgressUpdateLoading}
 					updateCourseProgress={updateCourseProgress}
 					chapter={chapter}
-					course_id={course_id}
-					user_id={user_id}
 					indexes={indexes}
 					setIndexes={setIndexes}
 					getUserCourse={getUserCourse}
 					setChapter={setChapter}
+					RichTextEditor={RichTextEditor}
+					editorValue={editorValue}
+					setEditorValue={setEditorValue}
+					editorError={editorError}
+					setEditorError={setEditorError}
+					readOnly={readOnly}
+					setReadOnly={setReadOnly}
 				/>
 
 			</div>
@@ -78,10 +92,11 @@ function CourseConsumption() {
 				indexes={indexes}
 				setIndexes={setIndexes}
 				updateCourseProgress={updateCourseProgress}
-				loading={loading}
-				courseProgressUpdateLoading={courseProgressUpdateLoading}
+				loading={loading || courseProgressUpdateLoading}
 				getUserCourse={getUserCourse}
 				chapter={chapter}
+				editorValue={editorValue}
+				setEditorError={setEditorError}
 				setChapter={setChapter}
 			/>
 		</div>

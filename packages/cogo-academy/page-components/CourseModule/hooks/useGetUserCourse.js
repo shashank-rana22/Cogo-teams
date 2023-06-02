@@ -24,7 +24,6 @@ const useGetUserCourse = ({ course_id, user_id }) => {
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
 		}
-		console.log('here');
 	}, [trigger, user_id, course_id]);
 
 	return {

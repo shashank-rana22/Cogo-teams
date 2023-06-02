@@ -10,15 +10,24 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function ModuleContent({
-	data = {}, loading, courseProgressUpdateLoading,
+	data = {}, loading,
 	updateCourseProgress, chapter = {}, indexes,
 	setIndexes,
 	getUserCourse,
 	setChapter,
+	RichTextEditor,
+	editorValue,
+	setEditorValue,
+	editorError,
+	setEditorError,
+	readOnly,
+	setReadOnly,
 }) {
+	// const [showModal, setShowModal] = useState(false);
+
 	const { name, content_type = '', chapter_content = '', description, chapter_attachments } = chapter;
 
-	if (loading || courseProgressUpdateLoading) {
+	if (loading) {
 		return <LoadingState />;
 	}
 
@@ -49,6 +58,11 @@ function ModuleContent({
 		document     : chapter_content,
 	};
 
+	const handleChange = (value) => {
+		setEditorError(false);
+		setEditorValue(value);
+	};
+
 	return (
 		<div className={styles.container}>
 
@@ -69,7 +83,7 @@ function ModuleContent({
 							size="md"
 							themeType="tertiary"
 							className={styles.btn}
-							loading={courseProgressUpdateLoading || loading}
+							loading={loading}
 							onClick={async () => {
 								const prevChapterContent = await getChapter({
 									data,
@@ -101,7 +115,7 @@ function ModuleContent({
 							size="md"
 							themeType="tertiary"
 							className={`${styles.btn} ${styles.next_btn}`}
-							loading={courseProgressUpdateLoading || loading}
+							loading={loading}
 							onClick={async () => {
 								const nextChapter = await getChapter({
 									data,
@@ -140,6 +154,34 @@ function ModuleContent({
 			)}
 
 			<div className={styles.content}>
+
+				{content_type === 'assessment' && (
+					<div className={styles.rte}>
+
+						<RichTextEditor
+							value={editorValue}
+							onChange={handleChange}
+							readOnly={readOnly}
+							required
+							id="body-text"
+							name="bodyText"
+							type="string"
+							multiline
+							variant="filled"
+							rootStyle={{
+								minWidth: '80%',
+								...(!readOnly ? { minHeight: '300px' } : {}),
+							}}
+						/>
+
+						{editorError && (
+							<span className={styles.errors}>
+								Answer is required
+							</span>
+						)}
+					</div>
+				)}
+
 				{content_type === 'text' ? <div dangerouslySetInnerHTML={{ __html: chapter_content }} />
 					: (
 						<iframe

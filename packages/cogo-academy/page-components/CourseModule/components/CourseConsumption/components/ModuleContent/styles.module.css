@@ -71,3 +71,8 @@
 	font-weight: 600;
 	color: #221f20;
 }
+
+.errors {
+	margin-top: 8px;
+	color: #ee3425;
+}

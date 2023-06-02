@@ -31,7 +31,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-start;
-	width: 80%;
+	width: 70%;
+	flex-grow: 1;
 }
 
 .icon {
@@ -45,8 +46,11 @@
 	transform: translate(-50%, -50%);
 } */
 
-.name {
+.tooltip{
 	max-width: 60%;
+}
+
+.name {
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
@@ -56,6 +60,7 @@
 	margin-left: 8px;
 	font-size: 10px;
 	color: #4f4f4f;
+	white-space: nowrap;
 }
 
 .databox_image {
