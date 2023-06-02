@@ -2,8 +2,8 @@ import { Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMProfile } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
-import { useRouter } from 'next/router';
 
 import { SERVICE_MAPPING } from '../../../../../../constants';
 import { getformattedDuration } from '../../../../../../utils/getFormattedDuration';
