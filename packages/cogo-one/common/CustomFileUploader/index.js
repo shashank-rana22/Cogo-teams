@@ -99,8 +99,6 @@ function CustomFileUploader(props, ref) {
 	};
 
 	const handleChange = async (values) => {
-		console.log('ONE_MB:', ONE_MB);
-
 		if (channel === 'zalo' && values && !isEmpty(values)) {
 			const maxSize = getMaxFileSize(values[0]?.type);
 			if (!maxSize) {
