@@ -1,10 +1,12 @@
+import { startCase } from '@cogoport/utils';
+
 import styles from './styles.module.css';
 
 function LeftComponent({ finalCourseCategories, currentCategory, setCurrentCategory, fetchList }) {
-	const handleChangeActiveTab = ({ value }) => {
+	const handleChangeActiveTab = ({ value, id }) => {
 		if (currentCategory !== value) {
 			setCurrentCategory(value);
-			fetchList();
+			fetchList({ course_category_id: id === 'all_courses' ? undefined : id });
 		}
 	};
 
@@ -17,10 +19,10 @@ function LeftComponent({ finalCourseCategories, currentCategory, setCurrentCateg
 					<div
 						key={id}
 						role="presentation"
-						onClick={() => handleChangeActiveTab({ value: name })}
+						onClick={() => handleChangeActiveTab({ value: name, id })}
 						className={`${styles.ind_container} ${currentCategory === name && styles.active_tab}`}
 					>
-						<div>{display_name}</div>
+						<div>{startCase(display_name)}</div>
 					</div>
 				);
 			})}

@@ -23,14 +23,14 @@ function useListCourseUserMappings({ user_id, ongoingCategories, inputValue }) {
 		} catch (error) {
 			Toast.error(error.message);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [ongoingCategories.data, trigger, user_id]);
+	}, [ongoingCategories.data, trigger, user_id, inputValue]);
 
 	useEffect(() => {
 		if (ongoingCategories.loaded) {
 			fetchList();
 		}
-	}, [fetchList, ongoingCategories.loaded]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [ongoingCategories.loaded, inputValue]);
 
 	return {
 		data,

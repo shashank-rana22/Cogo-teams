@@ -1,31 +1,33 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
-import { useCallback, useMemo, useEffect } from 'react';
 
-function useListCourseUserMappings({ activeTab, params }) {
-	const finalPayload = useMemo(() => ({
-		...params,
-		filters: {
-			...params.filters,
-			// ...MAPPING[activeTab],
-		},
-	}), [params]);
-
+function useListCourseUserMappings({ user_id }) {
 	const [{ data = {}, loading }, trigger] = useRequest({
 		url    : '/list_user_courses',
 		method : 'GET',
-		params : finalPayload,
+		params : {
+			filters: {
+				status: 'active',
+				user_id,
+			},
+		},
 	}, { manual: false });
 
-	const fetchList = useCallback(() => {
+	const fetchList = ({ course_category_id = '' }) => {
 		try {
 			trigger({
-				params: finalPayload,
+				params: {
+					filters: {
+						status: 'active',
+						user_id,
+						course_category_id,
+					},
+				},
 			});
 		} catch (error) {
 			Toast.error(error.message);
 		}
-	}, [trigger, finalPayload]);
+	};
 
 	return {
 		data,
