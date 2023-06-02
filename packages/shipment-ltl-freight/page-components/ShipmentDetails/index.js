@@ -3,10 +3,10 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
-import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect } from 'react';
 
+import CancelDetails from '../../common/CancelDetails';
 import Documents from '../../common/Documents';
 import Overview from '../../common/Overview';
 import PocSop from '../../common/PocSop';
@@ -105,9 +105,7 @@ function ShipmentDetails() {
 					</div>
 				</div>
 
-				{/* {shipment_data?.state === 'cancelled' ? <CancelDetails /> : null} */}
-
-				{/* <DocumentHoldDetails /> */}
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
 				<div className={styles.header}>
 					<ShipmentHeader />
@@ -128,7 +126,7 @@ function ShipmentDetails() {
 							<Overview shipmentData={shipment_data} />
 						</TabPanel>
 
-						<TabPanel name="tasks" title="Tasks">
+						<TabPanel name="timeline_and_tasks" title="Tasks">
 							<Tasks />
 						</TabPanel>
 
@@ -139,13 +137,9 @@ function ShipmentDetails() {
 						<TabPanel name="emails" title="Emails">
 							<ShipmentMails
 								source="cogo_rpa"
-								// filters={{ q: shipment_data?.serial_id }}
-								// pre_subject_text={`${shipment_data?.serial_id}`}
+								filters={{ q: shipment_data?.serial_id }}
+								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
-						</TabPanel>
-
-						<TabPanel name="tracking" title="Tracking">
-							<Tracking shipmentData={shipment_data} />
 						</TabPanel>
 					</Tabs>
 				</div>

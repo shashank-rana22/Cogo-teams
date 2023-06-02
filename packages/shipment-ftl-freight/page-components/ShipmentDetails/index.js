@@ -7,6 +7,7 @@ import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
+import CancelDetails from '../../common/CancelDetails';
 import Documents from '../../common/Documents';
 import Overview from '../../common/Overview';
 import PocSop from '../../common/PocSop';
@@ -106,9 +107,7 @@ function ShipmentDetails() {
 					</div>
 				</div>
 
-				{/* {shipment_data?.state === 'cancelled' ? <CancelDetails /> : null} */}
-
-				{/* <DocumentHoldDetails /> */}
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
 				<div className={styles.header}>
 					<ShipmentHeader />
