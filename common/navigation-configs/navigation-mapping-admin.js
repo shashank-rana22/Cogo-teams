@@ -2250,7 +2250,7 @@ const navigationMappingAdmin = {
 	},
 	new_employee_dashboard: {
 		key           : 'new_employee_dashboard',
-		title         : 'New Employee Dashboard',
+		title         : 'New Hire Dashboard',
 		isSubNavs     : false,
 		module_type   : 'dashboards',
 		href          : '/v2/new-employee-dashboard',
@@ -2272,7 +2272,7 @@ const navigationMappingAdmin = {
 	},
 	chro: {
 		key           : 'chro',
-		title         : 'CHRO',
+		title         : 'CHRO CTC Approvals',
 		isSubNavs     : false,
 		module_type   : 'dashboards',
 		main_apis     : [''],
