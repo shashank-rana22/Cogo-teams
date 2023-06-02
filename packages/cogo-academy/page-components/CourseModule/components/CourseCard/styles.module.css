@@ -7,6 +7,21 @@
 	border-radius: 12px;
 	box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
 
+	&.all_courses {
+		width: 22%;
+		margin: 14px;
+
+		@media (max-width: 1260px) {
+			width: 30%;
+		}
+		@media (max-width: 900px) {
+			width: 45%;
+		}
+		@media (max-width: 768px) {
+			width: 90%;
+		}
+	}
+
 	:global {
 		.ui_progressbar_container {
 			display: flex;
@@ -33,9 +48,24 @@
 	}
 }
 
-/* .container:hover {
+.saved_div {
+	display: flex;
+	align-items: center;
+	padding: 2px 4px;
 	cursor: pointer;
-} */
+	background: #fff;
+	border-radius: 6px;
+}
+
+.not_saved {
+	display: flex;
+	align-items: center;
+	padding: 2px 4px;
+	color: #fff;
+	cursor: pointer;
+	background: #000;
+	border-radius: 6px;
+}
 
 .topics_rating_container {
 	display: flex;
@@ -65,15 +95,13 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	cursor: pointer;
 }
 
-.saved{
+.saved {
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	cursor: pointer;
-	color: #f68b21;
+	color: #000;
 }
 
 .category_name {

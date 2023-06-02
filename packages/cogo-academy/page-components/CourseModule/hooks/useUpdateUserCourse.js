@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useUpdateUserCourse = () => {
+const useUpdateUserCourse = ({ fetchList }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_user_course',
 		method : 'POST',
@@ -17,10 +17,12 @@ const useUpdateUserCourse = () => {
 					is_saved: !saved,
 				},
 			});
+
+			fetchList();
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
 		}
-	}, [trigger]);
+	}, [fetchList, trigger]);
 
 	return {
 		updateUserCourse,

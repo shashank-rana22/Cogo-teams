@@ -26,6 +26,7 @@ function RenderComponent({
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
 				courseCategories={courseCategories}
+				inputValue={inputValue}
 			/>
 		);
 	}

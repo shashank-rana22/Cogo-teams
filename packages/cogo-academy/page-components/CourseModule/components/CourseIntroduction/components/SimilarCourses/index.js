@@ -1,8 +1,6 @@
 import { Carousel } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import React, { useState } from 'react';
 
 import LoadingState from '../../../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../../../configs/BUTTON_CONTENT_MAPPING';
@@ -17,12 +15,6 @@ function SimilarCourses({ course_details }) {
 
 	const router = useRouter();
 
-	const [activeTab, setActiveTab] = useState('');
-
-	const [input, setInput] = useState('');
-
-	const { query, debounceQuery } = useDebounceQuery();
-
 	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
 
 	const topics = [];
@@ -30,15 +22,15 @@ function SimilarCourses({ course_details }) {
 		topics.push(item?.id)
 	));
 
-	const [params, setParams] = useState({
-		filters: {
-			status       : 'active',
-			user_id,
-			faq_topic_id : topics,
-		},
+	const {
+		data = {},
+		loading,
+		fetchList,
+	} = useListCourseUserMappings({
+		selected   : topics,
+		page_limit : 10,
+		user_id,
 	});
-
-	const { data = {}, loading } = useListCourseUserMappings({ activeTab, params, query });
 
 	const CAROUSELDATA = (data.list || []).map((item, index) => ({
 		key    : index,
@@ -46,14 +38,15 @@ function SimilarCourses({ course_details }) {
 			<CourseCard
 				key={item.id}
 				data={item}
-				buttonContent={BUTTON_CONTENT_MAPPING[activeTab || 'default']}
-				handleClick={GET_LINK_MAPPINGS[activeTab || 'default']}
+				buttonContent={BUTTON_CONTENT_MAPPING[item.state || 'default']}
+				handleClick={GET_LINK_MAPPINGS[item.state || 'default']}
+				fetchList={fetchList}
 			/>
 		),
 	}));
 
 	if (loading) {
-		return <LoadingState rowsCount={7} />;
+		return <LoadingState rowsCount={2} />;
 	}
 	return (
 		<div className={styles.container}>

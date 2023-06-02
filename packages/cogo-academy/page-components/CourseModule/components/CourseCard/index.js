@@ -28,7 +28,7 @@ function ToolTipContent({ faq_topics }) {
 	);
 }
 
-function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {} }) {
+function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, fetchList, viewType = '' }) {
 	const { cogo_academy_course = {}, cogo_academy_course_id : course_id = '', course_progress, state } = data;
 
 	const {
@@ -45,10 +45,10 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {} }) {
 		icon,
 	} = buttonContent;
 
-	const { updateUserCourse } = useUpdateUserCourse();
+	const { updateUserCourse } = useUpdateUserCourse({ fetchList });
 
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${styles[viewType]}`}>
 			<div style={{ backgroundImage: `url(${thumbnail_url})` }} className={styles.header}>
 				<div className={styles.topics_rating_container}>
 					<div className={styles.topics}>
@@ -99,12 +99,14 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {} }) {
 					tabIndex="0"
 					onClick={() => { updateUserCourse(data?.id, data?.is_saved); }}
 				>
-					<IcMBookmark
-						fill={data?.is_saved ? '#f68b21' : '#000'}
-						style={{ marginRight: '6px' }}
-					/>
+					<div className={data?.is_saved ? styles.saved_div : styles.not_saved}>
+						<IcMBookmark
+							fill={data?.is_saved ? '#000' : '#fff'}
+							style={{ marginRight: '6px' }}
+						/>
 
-					<div>Save</div>
+						<div>{data?.is_saved ? 'Saved' : 'Save'}</div>
+					</div>
 				</div>
 
 			</div>
