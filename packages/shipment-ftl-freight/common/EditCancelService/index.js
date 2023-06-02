@@ -7,15 +7,19 @@ import React, { useState, useContext } from 'react';
 import CancelService from '../CancelService';
 // import EditParams from '../EditParams';
 import SupplierReallocation from '../SupplierReallocation';
+import VerifyTruck from '../VerifyAssetModal';
+import VerifyDriver from '../VerifyDriverModal';
 
 import styles from './styles.module.css';
-import getCanCancelService from './utils/getCanCancelService';
+// import getCanCancelService from './utils/getCanCancelService';
 // import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
 const actionButtons = [
 	{ label: 'Edit', value: 'supplier_reallocation' },
 	{ label: 'Edit Params', value: 'edit_params' },
+	{ label: 'Verify Truck', value: 'verify_truck' },
+	{ label: 'Verify Driver', value: 'verify_driver' },
 	{ label: 'Cancel', value: 'cancel' },
 ];
 
@@ -37,7 +41,10 @@ function EditCancelService({ serviceData = {} }) {
 
 	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
 	// actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
-	actionButtons[2].show = getCanCancelService({ state, activeStakeholder });
+	actionButtons[2].show = true;
+	// actionButtons[3].show = true;
+	// actionButtons[4].show = true;
+	// actionButtons[4].show = getCanCancelService({ state, activeStakeholder });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;
@@ -54,6 +61,7 @@ function EditCancelService({ serviceData = {} }) {
 			{label}
 		</div>
 	) : null));
+	const truckList = [serviceData];
 
 	return (
 		<div className={styles.container}>
@@ -72,6 +80,12 @@ function EditCancelService({ serviceData = {} }) {
 
 			{/* {showModal === 'edit_params'
 			&& <EditParams setShow={setShowModal} serviceData={serviceData} />} */}
+
+			{showModal === 'verify_truck'
+			&& <VerifyTruck serviceData={serviceData} truckList={truckList} setShow={setShowModal} show={showModal} />}
+
+			{showModal === 'verify_driver'
+			&& <VerifyDriver serviceData={serviceData} />}
 
 			{showModal === 'cancel' && 	(
 				<CancelService

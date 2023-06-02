@@ -50,7 +50,7 @@ function Details({ serviceData = [] }) {
 			<div>
 				<div className={styles.remaining_keys}>
 					{(serviceItemsKey || []).map((element) => (getByKey(multiTruck, element.key) ? (
-						<Item state={state} label={element} detail={multiTruck} />
+						<Item key={element.id} state={state} label={element} detail={multiTruck} />
 					) : null))}
 				</div>
 			</div>
