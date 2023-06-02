@@ -27,14 +27,15 @@
 }
 
 .pill {
-	white-space: nowrap; 
-	display: flex; 
-} 
+	display: flex;
+	white-space: nowrap;
+}
 
 .text {
-	display: flex; 
-	align-items: center; 
+	display: flex;
+	align-items: center;
+
 	button {
 		margin: 0;
 	}
-}	
+}
