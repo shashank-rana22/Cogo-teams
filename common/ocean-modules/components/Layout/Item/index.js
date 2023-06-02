@@ -28,7 +28,7 @@ function Item(props) {
 
 	let newProps = { ...props };
 
-	const isAsyncSelect = ['select', 'creatable-select'].includes(type)
+	const isAsyncSelect = ['select', 'creatable-select', 'location-select'].includes(type)
 		&& Object.keys(props).includes('optionsListKey');
 
 	if (isAsyncSelect) {

@@ -570,6 +570,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_supported_exchange_rate_sources',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
 			api          : 'create_channel_partner_persona',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -855,11 +860,6 @@ const partner = {
 			service_name : 'user',
 		},
 		{
-			api          : 'update_user',
-			access_type  : 'private',
-			service_name : 'user',
-		},
-		{
 			api          : 'list_partner_user_expertises',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -946,6 +946,11 @@ const partner = {
 		},
 		{
 			api          : 'update_partner_user',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'bulk_update_partner_user_expertise_status',
 			access_type  : 'private',
 			service_name : 'partner',
 		},
@@ -4382,6 +4387,12 @@ const partner = {
 			feature      : 'disliked_rates',
 		},
 		{
+			api          : 'delete_trailer_freight_rate_feedback',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
 			api          : 'list_ltl_freight_rate_feedbacks',
 			access_type  : 'private',
 			service_name : 'ltl_freight_rate',
@@ -5364,6 +5375,11 @@ const partner = {
 			api          : 'list_partner_user_allocations',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'get_supported_exchange_rate_sources',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
 		},
 		{
 			api          : 'get_allocation_requests',
@@ -8621,7 +8637,7 @@ const partner = {
 			feature     : 'history',
 		},
 		{
-			api         : 'post_payments_settlement_matching_on_sage',
+			api         : 'post_payments_settlement_bulk_matching_on_sage',
 			access_type : 'private',
 			module      : 'history',
 			feature     : 'history',
@@ -10405,6 +10421,12 @@ const partner = {
 			feature     : 'jobs',
 		},
 		{
+			api         : 'post_common_job_by_id_open',
+			access_type : 'private',
+			module      : 'jobs',
+			feature     : 'jobs',
+		},
+		{
 			api          : 'list_sage_jobs',
 			access_type  : 'private',
 			service_name : 'sage',
@@ -12101,24 +12123,37 @@ const partner = {
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'list_partner_users',
-			access_type  : 'private',
-			service_name : 'partner',
-		},
-	],
-	analytics_dashboard_management: [
-		{
-			api          : 'create_analytics_permission_entry',
+			api          : 'create_analytics_dashboard_permission',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
 		{
-			api          : 'list_analytics_permission_entries',
+			api          : 'update_analytics_dashboard_permission',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'delete_analytics_dashboard_entry',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
 		{
 			api          : 'list_analytics_dashboards',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboard_entries',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_dashboard_permissions',
+			access_type  : 'private',
+			service_name : 'analytics_permissions',
+		},
+		{
+			api          : 'list_analytics_permission_user_roles',
 			access_type  : 'private',
 			service_name : 'analytics_permissions',
 		},
@@ -12131,11 +12166,6 @@ const partner = {
 			api          : 'list_auth_roles',
 			access_type  : 'private',
 			service_name : 'auth',
-		},
-		{
-			api          : 'list_analytics_permission_entries',
-			access_type  : 'private',
-			service_name : 'analytics_permissions',
 		},
 	],
 	ticket_management: [
