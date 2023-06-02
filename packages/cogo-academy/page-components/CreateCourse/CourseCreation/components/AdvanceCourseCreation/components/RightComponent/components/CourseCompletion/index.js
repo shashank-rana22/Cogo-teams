@@ -2,7 +2,7 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
 
-import { getFieldController } from '../../../../../../../commons/getFieldController';
+import { getFieldController } from '../../../../../../../../../commons/getFieldController';
 import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
 import ConditionSelectComponent from './ConditionSelectComponent';
@@ -14,7 +14,7 @@ const MAPPING = ['completion_criteria', 'completion_message', 'course_completion
 
 const CERTIFICATE_MAPPING = ['certificate_name', 'signing_authority_sign_url', 'signing_authority_user_id'];
 
-function CourseCompletion({ data = {}, id = '', activeTab }, ref) {
+function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 	const {
 		control,
 		formState: { errors = {} },
@@ -62,7 +62,7 @@ function CourseCompletion({ data = {}, id = '', activeTab }, ref) {
 							certificate_name,
 						},
 						completion_criteria,
-						state: CURRENT_TO_NEXT_MAPPING[activeTab],
+						...(state !== 'published' ? { state: CURRENT_TO_NEXT_MAPPING[activeTab] } : {}),
 					},
 				};
 			};

@@ -1,6 +1,6 @@
 import { isEmpty } from '@cogoport/utils';
 
-const chapter_content = ({ values, editorValue }) => {
+const getChapterContent = ({ values, editorValue, assessmentValue }) => {
 	const {
 		content_type = '',
 		upload_video = '',
@@ -10,6 +10,10 @@ const chapter_content = ({ values, editorValue }) => {
 
 	if (content_type === 'text') {
 		return editorValue.toString('html');
+	}
+
+	if (content_type === 'assessment') {
+		return assessmentValue.toString('html');
 	}
 
 	if (content_type === 'video') {
@@ -62,6 +66,8 @@ const getChapterPayload = ({
 	chapterId,
 	additionalResourcesWatch,
 	action_type,
+	state,
+	assessmentValue,
 }) => {
 	if (action_type === 'delete') {
 		return {
@@ -72,9 +78,8 @@ const getChapterPayload = ({
 
 	const {
 		upload_file,
-		additional_resources_title,
-		additional_resources_link,
 		completion_duration_value = '',
+		external_link = [],
 	} = values || {};
 
 	let chapter_attachments = [];
@@ -89,30 +94,31 @@ const getChapterPayload = ({
 		];
 	}
 
-	if (additionalResourcesWatch && additional_resources_title && additional_resources_link) {
-		chapter_attachments = [
-			{
-				name      : values.additional_resources_title,
-				media_url : values.additional_resources_link,
-				type      : 'external_link',
-			},
-		];
+	if (additionalResourcesWatch) {
+		chapter_attachments = [];
+
+		external_link.forEach((item) => {
+			if (!isEmpty(item.media_url)) {
+				chapter_attachments.push({ ...item, type: 'external_link' });
+			}
+		});
 	}
 
 	return {
 		...values,
 		course_sub_module_id,
-		sequence_order             : index + 1,
-		chapter_content            : chapter_content({ values, editorValue }),
-		completion_duration_value  : Number(completion_duration_value),
-		additional_resources       : undefined,
-		additional_resources_link  : undefined,
-		additional_resources_title : undefined,
-		upload_video               : undefined,
-		upload_presentation        : undefined,
-		upload_document            : undefined,
+		sequence_order            : index + 1,
+		chapter_content           : getChapterContent({ values, editorValue, assessmentValue }),
+		completion_duration_value : Number(completion_duration_value),
+		additional_resources      : undefined,
+		upload_video              : undefined,
+		upload_presentation       : undefined,
+		upload_document           : undefined,
+		assessment_value          : undefined,
+		external_link             : undefined,
 		...(!isNew ? { id: chapterId } : {}),
 		...(!isEmpty(chapter_attachments) ? { chapter_attachments } : {}),
+		...(state === 'published' ? { is_updated: true } : {}),
 	};
 };
 

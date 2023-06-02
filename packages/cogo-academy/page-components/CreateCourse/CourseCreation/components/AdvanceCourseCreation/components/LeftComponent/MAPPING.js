@@ -29,7 +29,7 @@ const MAPPING = [
 		children : [],
 	},
 	{
-		key      : 'publish',
+		key      : 'pre_publish',
 		title    : 'Publish Course',
 		children : [],
 	},

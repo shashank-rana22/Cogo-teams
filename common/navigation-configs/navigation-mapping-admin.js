@@ -2056,7 +2056,11 @@ const navigationMappingAdmin = {
 				as            : '/v2/learning',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : [...apis.create_faq, ...apis.create_test_set, ...apis.create_course],
+				possible_apis : [
+					...apis.create_faq,
+					...apis.create_test_set,
+					...apis.list_courses,
+				],
 			},
 			{
 				key           : 'cogo_academy-faq',

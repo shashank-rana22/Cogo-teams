@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 import LoadingState from '../../../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../../../configs/BUTTON_CONTENT_MAPPING';
-import HANDLE_CLICK_MAPPING from '../../../../configs/HANDLE_CLICK_MAPPING';
+import GET_LINK_MAPPING from '../../../../configs/GET_LINK_MAPPING';
 import useListCourseUserMappings from '../../../../hooks/useListCourseUserMappings';
 import CourseCard from '../../../CourseCard';
 
@@ -23,7 +23,7 @@ function SimilarCourses({ course_details }) {
 
 	const { query, debounceQuery } = useDebounceQuery();
 
-	const { HANDLE_CLICK_MAPPINGS } = HANDLE_CLICK_MAPPING();
+	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
 
 	const topics = [];
 	course_details?.faq_topics?.map((item) => (
@@ -47,7 +47,7 @@ function SimilarCourses({ course_details }) {
 				key={item.id}
 				data={item}
 				buttonContent={BUTTON_CONTENT_MAPPING[activeTab || 'default']}
-				handleClick={HANDLE_CLICK_MAPPINGS[activeTab || 'default']}
+				handleClick={GET_LINK_MAPPINGS[activeTab || 'default']}
 			/>
 		),
 	}));

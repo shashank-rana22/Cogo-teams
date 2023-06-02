@@ -5,11 +5,13 @@ const getProps = (data = {}) => ({
 		tags              : (data.faq_tags || []).map((item) => item.id) || [],
 		course_objectives : (data.course_objectives || []).map((objective) => ({ objective })) || [],
 	},
-	publish: {
+	pre_publish: {
 		course_title      : data.name,
 		course_categories : (data.course_categories || []).map((category) => category.id),
 		thumbnail_url     : data.thumbnail_url,
 		description       : data.description,
+		instructor_ids    : data.instructor_ids,
+		level             : data.level,
 	},
 	audience: {
 		course_audience_mappings : data.course_audience_mappings,

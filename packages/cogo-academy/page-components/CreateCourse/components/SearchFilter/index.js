@@ -17,6 +17,7 @@ function SearchFilter({ debounceQuery, input, setInput, setParams, params, setFi
 		onClickReset,
 		reset,
 		onClickCreate,
+		// onClickCreateQuestion,
 	} = useHandleSearchFilter({ setFilters });
 
 	useImperativeHandle(ref, () => ({ reset }));
@@ -47,8 +48,17 @@ function SearchFilter({ debounceQuery, input, setInput, setParams, params, setFi
 
 			<div className={styles.right_container}>
 				<div className={styles.button_container}>
+					{/* <Button
+						type="button"
+						themeType="accent"
+						onClick={onClickCreateQuestion}
+					>
+						Create Question
+					</Button> */}
+
 					<Button
 						type="button"
+						style={{ marginLeft: 8 }}
 						themeType="primary"
 						onClick={onClickCreate}
 					>

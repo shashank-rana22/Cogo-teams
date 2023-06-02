@@ -1,6 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
+import { useState } from 'react';
 
 import CategoryCard from '../CategoryCard';
 
@@ -8,11 +9,19 @@ import MyCourses from './components/MyCourses';
 import RecommemndedCourses from './components/RecommemndedCourses';
 import styles from './styles.module.css';
 
-function HomePage({ user_id, courseCategoryData, categoryLoading, setCurrentCategory }) {
+function HomePage({ user_id, courseCategoryData, categoryLoading, setCurrentCategory, inputValue }) {
 	const router = useRouter();
+
+	const [ongoingCategories, setOngoingCategories] = useState({ loaded: false, data: [] });
+
 	return (
 		<div>
-			<MyCourses user_id={user_id} />
+			<MyCourses
+				user_id={user_id}
+				setOngoingCategories={setOngoingCategories}
+				ongoingCategories={ongoingCategories}
+				inputValue={inputValue}
+			/>
 
 			<div style={{ margin: '60px 0px' }}>
 				<div className={styles.main_heading}>Explore Courses</div>
@@ -50,7 +59,11 @@ function HomePage({ user_id, courseCategoryData, categoryLoading, setCurrentCate
 					</Button>
 				</div>
 
-				<RecommemndedCourses user_id={user_id} />
+				<RecommemndedCourses
+					user_id={user_id}
+					ongoingCategories={ongoingCategories}
+					inputValue={inputValue}
+				/>
 			</div>
 		</div>
 

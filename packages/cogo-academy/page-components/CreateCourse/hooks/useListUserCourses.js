@@ -3,7 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useState, useCallback } from 'react';
 
-function useListCourseUserMappings({ filters, activeTab = '' }) {
+function useListUserCourses({ filters, activeTab = '' }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
@@ -56,4 +56,4 @@ function useListCourseUserMappings({ filters, activeTab = '' }) {
 	};
 }
 
-export default useListCourseUserMappings;
+export default useListUserCourses;

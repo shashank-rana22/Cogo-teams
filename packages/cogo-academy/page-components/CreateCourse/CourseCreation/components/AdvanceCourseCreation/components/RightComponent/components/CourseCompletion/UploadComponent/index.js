@@ -1,12 +1,11 @@
 import { isEmpty } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../../../../../commons/getFieldController';
+import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
 import { certificateControls } from '../controls';
 
 import styles from './styles.module.css';
 
 function UploadComponent({ errors, control }) {
-	console.log('errors', errors);
 	return (
 		<div className={styles.container}>
 			{(certificateControls || []).map((controlItem) => {

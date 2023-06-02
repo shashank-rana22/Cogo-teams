@@ -21,7 +21,16 @@ const BUTTON_CONTENT_MAPPING = {
 		primaryBtnText   : 'Download Certificate',
 		icon             : <IcMDownload width={16} height={16} />,
 	},
-	saved: {},
+	saved: {
+		secondaryBtnText : 'Curriculum',
+		primaryBtnText   : 'Visit Course',
+		icon             : <IcMArrowRight width={16} height={16} />,
+	},
+	introduction: {
+		secondaryBtnText : 'Curriculum',
+		primaryBtnText   : 'Visit Course',
+		icon             : <IcMArrowRight width={16} height={16} />,
+	},
 };
 
 export default BUTTON_CONTENT_MAPPING;

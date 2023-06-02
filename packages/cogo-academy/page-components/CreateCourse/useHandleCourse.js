@@ -2,7 +2,7 @@ import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import useListCogoAcademyCourses from './hooks/useListCogoAcademyCourses';
-import useListCourseUserMappings from './hooks/useListCourseUserMappings';
+import useListUserCourses from './hooks/useListUserCourses';
 
 const useHandleCourse = ({ ref, courseActiveTab }) => {
 	const { push } = useRouter();
@@ -32,7 +32,7 @@ const useHandleCourse = ({ ref, courseActiveTab }) => {
 		input: studentListInput,
 		setInput: setstudentListInput,
 		total_count:studentCount,
-	} = useListCourseUserMappings({ filters, activeTab });
+	} = useListUserCourses({ filters, activeTab });
 
 	const componentMapping = {
 		courses: {

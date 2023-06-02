@@ -19,6 +19,7 @@ function SubModule({
 	getSubModuleRefetch,
 	setGetSubModuleRefetch,
 	showButtons,
+	state,
 }) {
 	const {
 		onSaveSubModule,
@@ -60,6 +61,7 @@ function SubModule({
 						setGetSubModuleRefetch={setGetSubModuleRefetch}
 						courseSubModule={courseSubModule}
 						showButtons={showButtons}
+						state={state}
 					/>
 				</div>
 			))}
