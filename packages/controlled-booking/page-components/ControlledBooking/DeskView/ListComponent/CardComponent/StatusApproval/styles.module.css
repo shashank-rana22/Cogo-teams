@@ -1,26 +1,26 @@
-.container{
-     display: flex;
-     justify-content: flex-end;
-     align-items: center;
-	 background: #FFFFFF;
-	 height: 56px;
-	 padding-right: 36px;
-	 margin-top: 36px;
-}
-.button{
-     margin-right: 8px;
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	height: 56px;
+	padding-right: 36px;
+	margin-top: 36px;
+	background: #fff;
 }
 
-.rejection{
-     font-size:16;
-     margin-bottom:8px;
+.button {
+	margin-right: 8px;
 }
 
-.buttonWrapper{
-     display: flex;
-     justify-content: flex-end;
+.rejection {
+	margin-bottom: 8px;
+	font-size: 16;
 }
 
+.buttonWrapper {
+	display: flex;
+	justify-content: flex-end;
+}
 
 .checkbox_controller {
 	display: flex;
@@ -30,7 +30,7 @@
 	:global {
 		.ui_checkbox_container {
 			padding: 0 0 10px;
-               margin:8px;
+			margin: 8px;
 		}
 	}
 }
@@ -47,27 +47,27 @@
 	display: flex;
 }
 
-.select{
+.select {
 	max-width: 20%;
 	margin-right: 8px;
 }
 
-.input{
+.input {
 	max-width: 40%;
 }
-.amountLabel{
-	font-size: 14;
-	font-weight: 500;
+
+.amountLabel {
 	margin-bottom: 8px;
-}
-
-.label{
 	font-size: 14;
 	font-weight: 500;
 }
 
-.bookingLabel{
+.label {
+	font-size: 14;
+	font-weight: 500;
+}
+
+.bookingLabel {
 	margin-top: 12px;
 	margin-bottom: 8px;
 }
-

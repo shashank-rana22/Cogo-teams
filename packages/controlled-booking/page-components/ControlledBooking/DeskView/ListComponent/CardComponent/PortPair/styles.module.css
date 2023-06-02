@@ -7,10 +7,10 @@
 }
 
 .code {
+	margin-right: 4px;
 	font-size: 13px;
 	font-weight: 400;
 	color: #f68b21;
-	margin-right: 4px;
 }
 
 .name {
@@ -37,8 +37,9 @@
 
 .container {
 	display: flex;
-	justify-content: flex-start;
 	align-items: center;
+	justify-content: flex-start;
+
 	/* border: 1px solid #f2f2f2; */
 	border-radius: 4px;
 }
@@ -49,12 +50,12 @@
 	align-items: center;
 }
 
-.origin{
-	margin-right: 30px;
+.origin {
 	display: flex;
+	margin-right: 30px;
 }
 
-.destination{
-	margin-left: 30px;
+.destination {
 	display: flex;
+	margin-left: 30px;
 }

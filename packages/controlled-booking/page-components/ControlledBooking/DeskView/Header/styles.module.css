@@ -1,6 +1,7 @@
 .input {
 	max-width: 240px;
 	margin: 8px 16px;
+
 	:global {
 		input::placeholder {
 			font-size: 12px;
@@ -17,7 +18,7 @@
 
 .head {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 	margin-left: 8px;
 }
