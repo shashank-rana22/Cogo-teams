@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
@@ -52,29 +51,27 @@ const useTdsSettlement = ({
 		{ manual: true },
 	);
 
-	useEffect(() => {
-		setSummData(summaryData);
-	}, [summaryData]);
+	const { orgId = undefined } = rest || {};
+	const dateValue = JSON.stringify(date || {});
 
 	const refetch = useCallback(() => {
 		(async () => {
-			const { orgId = undefined } = rest || {};
 			try {
 				const response = await trigger({
 					params: {
 						accMode: active,
 						orgId,
 
-						startDate: date ? formatDate({
-							date       : date?.startDate,
+						startDate: dateValue ? formatDate({
+							date       : JSON.parse(dateValue)?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
 							formatType : 'dateTime',
 							separator  : ' ',
 						}) : undefined,
 
-						endDate: date ? formatDate({
-							date       : date?.endDate,
+						endDate: dateValue ? formatDate({
+							date       : JSON.parse(dateValue)?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
 							formatType : 'dateTime',
@@ -89,27 +86,26 @@ const useTdsSettlement = ({
 				setApiTdsData({});
 			}
 		})();
-	}, [active, trigger, rest, date, query, pageIndex]);
+	}, [active, trigger, orgId, dateValue, query, pageIndex]);
 
 	const getSummary = useCallback(() => {
 		(async () => {
 			try {
-				const { orgId = undefined } = rest || {};
 				await getOrgSummary({
 					params: {
 						orgId,
 						accMode: active,
 
-						startDate: date ? formatDate({
-							date       : date?.startDate,
+						startDate: dateValue ? formatDate({
+							date       : JSON.parse(dateValue)?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
 							formatType : 'dateTime',
 							separator  : ' ',
 						}) : undefined,
 
-						endDate: date ? formatDate({
-							date       : date?.endDate,
+						endDate: dateValue ? formatDate({
+							date       : JSON.parse(dateValue)?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
 							formatType : 'dateTime',
@@ -122,21 +118,13 @@ const useTdsSettlement = ({
 				setSummData({});
 			}
 		})();
-	}, [active, getOrgSummary, rest, date, query]);
-
-	const dateValue = JSON.stringify(date || {});
-
-	useEffect(() => {
-		debounceQuery(searchValue);
-	}, [debounceQuery, searchValue]);
-
-	useEffect(() => {
-		if (rest?.orgId) {
-			refetch();
-			getSummary();
-		}
-	}, [active, query, rest?.orgId, JSON.stringify(getSummary),
-		JSON.stringify(refetch), pageIndex, dateValue]);
+	}, [
+		active,
+		getOrgSummary,
+		orgId,
+		dateValue,
+		query,
+	]);
 
 	const approveTds = async (value, setShow, reset) => {
 		try {
@@ -155,6 +143,22 @@ const useTdsSettlement = ({
 			Toast.error(getApiErrorString(error.data) || 'Something went wrong');
 		}
 	};
+
+	useEffect(() => {
+		setSummData(summaryData);
+	}, [summaryData]);
+
+	useEffect(() => {
+		debounceQuery(searchValue);
+	}, [debounceQuery, searchValue]);
+
+	useEffect(() => {
+		if (orgId) {
+			refetch();
+			getSummary();
+		}
+	}, [active, query, orgId, refetch, getSummary, pageIndex, dateValue]);
+
 	return {
 		data: apiTdsData,
 		globalFilters,
