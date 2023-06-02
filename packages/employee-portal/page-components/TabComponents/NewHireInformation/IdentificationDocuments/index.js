@@ -69,6 +69,12 @@ function IdentificationDocuments({ data, getEmployeeDetails }) {
 		const doc = Object.keys(component).map((item) => {
 			const docNumber = `${item}_number`;
 
+			const checkDocument = (documents || []).find((element) => (element.document_type === item));
+
+			if (checkDocument?.status === 'approved') {
+				return null;
+			}
+
 			if (!values?.[item]?.finalUrl || !values?.[docNumber]) {
 				return null;
 			}
