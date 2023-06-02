@@ -38,7 +38,13 @@ function RiskProneShipments({
 				<PieChart activeTab={activeTab} chartData={statsData} loading={statsLoading} />
 			</div>
 			<div className={styles.tab}>
-				<ShipmentId data={data} loading={loading} filters={filters} setFilters={setFilters} />
+				<ShipmentId
+					data={data}
+					loading={loading}
+					filters={filters}
+					setFilters={setFilters}
+					activeTab={activeTab}
+				/>
 			</div>
 		</div>
 	);

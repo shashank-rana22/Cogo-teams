@@ -15,7 +15,7 @@ const useGetRiskProneStats = () => {
 					params: {},
 				});
 			} catch (err) {
-				Toast.error(err.meessage);
+				Toast.error(err.message);
 			}
 		})();
 	}, [trigger]);

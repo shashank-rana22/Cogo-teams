@@ -13,8 +13,9 @@ const useGetListRiskProne = ({ activeTab }) => {
 		search           : undefined,
 		originValue      : undefined,
 		destinationValue : undefined,
+		reason           : undefined,
 	});
-	const { pageIndex, search, originValue, destinationValue } = filters || {};
+	const { pageIndex, search, originValue, destinationValue, reason } = filters || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
@@ -29,6 +30,7 @@ const useGetListRiskProne = ({ activeTab }) => {
 						filters: {
 							origin_port_id      : originValue || undefined,
 							destination_port_id : destinationValue || undefined,
+							risk_sub_reason     : reason,
 							q                   : query || undefined,
 						},
 						risk_type          : activeTab,
@@ -41,10 +43,10 @@ const useGetListRiskProne = ({ activeTab }) => {
 					},
 				});
 			} catch (err) {
-				Toast.error(err.meessage);
+				Toast.error(err.message);
 			}
 		})();
-	}, [trigger, originValue, destinationValue, query, activeTab, pageIndex]);
+	}, [trigger, originValue, destinationValue, reason, query, activeTab, pageIndex]);
 
 	useEffect(() => {
 		getDahboardData();

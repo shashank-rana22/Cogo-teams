@@ -2,6 +2,7 @@ import { Select, Button } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import React, { useState } from 'react';
 
+import { optionsMap } from './constants';
 import styles from './styles.module.css';
 
 const OPTIONS = [
@@ -23,8 +24,9 @@ const OPTIONS = [
 	},
 ];
 
-function SelectFilter({ filters, setFilters }) {
-	const { originValue, destinationValue } = filters || {};
+function SelectFilter({ filters, setFilters, activeTab }) {
+	const OPTION = optionsMap[activeTab] || [];
+	const { originValue, destinationValue, reason } = filters || {};
 	const [cargoValue, setCargoValue] = useState('');
 
 	return (
@@ -105,13 +107,14 @@ function SelectFilter({ filters, setFilters }) {
 				<div className={styles.select}>
 					<Select
 						size="sm"
-						isClearable={false}
+						isClearable
 						placeholder="Reason"
-						value={cargoValue}
-						options={OPTIONS}
-						onChange={(value) => (
-							setCargoValue(value)
-						)}
+						value={reason}
+						options={OPTION}
+						onChange={(e) => setFilters({
+							...filters,
+							reason: e || undefined,
+						})}
 						className={styles.dropdown}
 					/>
 				</div>
