@@ -25,9 +25,7 @@ const useUpdateRfqRateMargin = ({
 				},
 			});
 
-			if (response?.status === 200) {
-				Toast.success('Rate updated successfully');
-			}
+			Toast.success('Rate updated successfully');
 
 			return response;
 		} catch (err) {
