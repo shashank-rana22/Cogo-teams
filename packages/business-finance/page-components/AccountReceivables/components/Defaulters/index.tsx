@@ -56,8 +56,8 @@ function Defaulters() {
 
 		const isFilterApplied = String(migrated)?.length > 0 || cogoEntity?.length > 0
 		|| invoiceStatus?.length > 0 || status.length > 0 || services?.length > 0
-		|| invoiceDate?.startDate?.length > 0 || invoiceDate?.endDate?.length > 0 || dueDate?.startDate?.length > 0
-		|| dueDate?.endDate?.length > 0 || currency?.length > 0;
+		|| String(invoiceDate?.startDate)?.length > 0 || String(invoiceDate?.endDate)?.length > 0 || String(dueDate?.startDate)?.length > 0
+		|| String(dueDate?.endDate)?.length > 0 || currency?.length > 0;
 
 		if (isFilterApplied) {
 			setIsClear(false);
