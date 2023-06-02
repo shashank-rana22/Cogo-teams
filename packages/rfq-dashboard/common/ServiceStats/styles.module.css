@@ -3,15 +3,15 @@
 	gap: 25px;
 	padding-top: 10px;
 
-	.green{
-		color: green
+	.green {
+		color: green;
 	}
 
-	.red{
+	.red {
 		color: red;
 	}
 
-	.black{
+	.black {
 		color: #333;
 	}
 }
@@ -58,4 +58,16 @@
 .individual_section .revenyue_profitability_utilization_value {
 	padding-left: 3px;
 	font-size: 16px;
+}
+
+.green {
+    color: green
+}
+
+.red {
+    color: red;
+}
+
+.black {
+    color: #333;
 }

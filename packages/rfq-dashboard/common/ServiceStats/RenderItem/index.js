@@ -3,8 +3,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
-function RenderItem({ item = {}, data = [] }) {
-	if (item.key === 'promised_revenue') {
+const mapping = {
+	promised_revenue({ data, item }) {
 		return formatAmount({
 			amount: data?.[item.key] || data?.promised_consolidated_revenue,
 
@@ -17,8 +17,8 @@ function RenderItem({ item = {}, data = [] }) {
 				maximumFractionDigits : 0,
 			},
 		});
-	}
-	if (item.key === 'promised_profitability') {
+	},
+	promised_profitability({ data, item }) {
 		let profitability = data?.[item?.key];
 		if (typeof (data?.promised_consolidated_profitability) === 'number') {
 			profitability = data?.promised_consolidated_profitability;
@@ -31,9 +31,15 @@ function RenderItem({ item = {}, data = [] }) {
 				{`${(profitability).toFixed(2)}%`}
 			</span>
 		) : '-';
-	}
+	},
+	default() {
+		return '-';
+	},
+};
 
-	return '-';
+function RenderItem({ item = {}, data = [] }) {
+	const key = item.key in mapping ? item.key : 'default';
+	return mapping[key]?.({ data, item });
 }
 
 export default RenderItem;
