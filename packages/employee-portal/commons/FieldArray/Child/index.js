@@ -29,7 +29,6 @@ function Child(props) {
 						<div key={`${name}.${index}.${controlItem.name}`} className={styles.control_container}>
 							<div className={styles.label}>
 								{controlItem.label}
-								<sup className={styles.sup}>*</sup>
 							</div>
 
 							<div className={styles.control}>

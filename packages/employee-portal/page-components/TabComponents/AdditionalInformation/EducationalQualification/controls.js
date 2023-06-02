@@ -81,7 +81,6 @@ const getControls = [{
 			label       : 'Courses',
 			type        : 'createmultiselect',
 			placeholder : 'Enter Courses',
-			rules       : { required: 'This is required' },
 		},
 		{
 			name        : 'description',

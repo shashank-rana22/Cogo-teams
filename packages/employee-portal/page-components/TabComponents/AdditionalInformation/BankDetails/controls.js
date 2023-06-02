@@ -11,6 +11,7 @@ const controls = [
 		label       : 'Account Holder Name',
 		type        : 'input',
 		placeholder : 'Enter Account Holder Name',
+		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'bank_name',
@@ -34,10 +35,11 @@ const controls = [
 		rules       : { required: 'This is required' },
 	},
 	{
-		name  : 'cancelled_cheque',
-		label : 'Upload Cancelled Cheque',
-		type  : 'fileUpload',
-		rules : { required: 'This is required' },
+		name   : 'cancelled_cheque',
+		label  : 'Upload Cancelled Cheque',
+		type   : 'fileUpload',
+		accept : '.pdf',
+		rules  : { required: 'This is required' },
 	},
 
 ];
