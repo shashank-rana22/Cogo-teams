@@ -1,150 +1,88 @@
-import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMRefresh } from '@cogoport/icons-react';
+import { dynamic } from '@cogoport/next';
 import { ShipmentChat } from '@cogoport/shipment-chat';
-import { ShipmentMails } from '@cogoport/shipment-mails';
-import { useRouter } from 'next/router';
-import React, { useMemo, useState, useEffect } from 'react';
+import { useContext, useState } from 'react';
 
-import CancelDetails from '../../common/CancelDetails';
-import DocumentHoldDetails from '../../common/DocumentHoldDetails';
-import Documents from '../../common/Documents';
-import Overview from '../../common/Overview';
-import PocSop from '../../common/PocSop';
+import SopAndPoc from '../../common/PocSop';
 import ShipmentHeader from '../../common/ShipmentHeader';
 import ShipmentInfo from '../../common/ShipmentInfo';
-import Tasks from '../../common/Tasks';
-import Timeline from '../../common/TimeLine';
-import useGetServices from '../../hooks/useGetServices';
-import useGetShipment from '../../hooks/useGetShipment';
-import useGetTimeLine from '../../hooks/useGetTimeline';
+import TimeLine from '../../common/TimeLine';
 
 import styles from './styles.module.css';
 
-const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
-const SHIPMENT_ADDITIONAL_METHODS = ['main_service', 'documents'];
+const CancelDetails = dynamic(() => import('../../common/CancelDetails'), { ssr: false });
+const DocumentHoldDetails = dynamic(() => import('../../common/DocumentHoldDetails'), { ssr: false });
+
+const TAB_MAPPING = {
+	overview  : dynamic(() => import('../../common/Overview'), { ssr: false }),
+	tasks     : dynamic(() => import('../../common/Tasks'), { ssr: false }),
+	documents : dynamic(() => import('../../common/Documents'), { ssr: false }),
+	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
+};
 
 function DefaultView() {
-	const router = useRouter();
+	const { shipment_data = {}, stakeholderConfig = {} } = useContext(ShipmentDetailContext) || {};
 
-	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
+	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
+	const [activeTab, setActiveTab] = useState(default_tab);
 
-	const { get } = useGetShipment({ additional_methods: SHIPMENT_ADDITIONAL_METHODS });
+	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
-	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
-
-	const { servicesGet = {} } = useGetServices({
-		shipment_data,
-		additional_methods: SERVICE_ADDITIONAL_METHODS,
-	});
-
-	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
-
-	const contextValues = useMemo(() => ({
-		...get,
-		...servicesGet,
-		...getTimeline,
-		activeStakeholder: 'superadmin',
-	}), [get, servicesGet, getTimeline]);
-
-	useEffect(() => {
-		router.prefetch(router.asPath);
-	}, [router]);
-
-	if (isGettingShipment || getShipmentStatusCode === undefined) {
-		return (
-			<div className={styles.loader}>
-				Loading Shipment Data....
-				<Loader themeType="primary" className={styles.loader_icon} />
-			</div>
-		);
-	}
-
-	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
-		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.section}>
-					<h2 className={styles.error}>Something Went Wrong!</h2>
-
-					<div className={styles.page}>We are looking into it.</div>
-
-					<Button
-						onClick={() => router.reload()}
-						className={styles.refresh}
-					>
-						<IcMRefresh />
-						&nbsp;Refresh
-					</Button>
-				</div>
-			</div>
-		);
-	}
-
-	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
-		return (
-			<div className={styles.shipment_not_found}>
-				<div className={styles.page}>
-					You don&apos;t have permission to visit this page.
-					Please contact at +91 7208083747
-				</div>
-			</div>
-		);
-	}
+	const conditionMapping = {
+		shipment_info       : !!features.includes('shipment_info'),
+		shipment_header     : !!features.includes('shipment_header'),
+		poc_sop             : !!(features.includes('poc') || features.includes('sop')),
+		chat                : !!features.includes('chat'),
+		cancelDetails       : !!(features.includes('cancel_details') && shipment_data?.state === 'cancelled'),
+		documentHoldDetails : !!features.includes('document_hold_details'),
+		timeline            : !!features.includes('timeline'),
+	};
 
 	return (
-		<ShipmentDetailContext.Provider value={contextValues}>
-			<div>
-				<div className={styles.top_header}>
-					<ShipmentInfo />
+		<div>
+			<div className={styles.top_header}>
+				<ShipmentInfo />
 
-					<div className={styles.toggle_chat}>
-
-						<ShipmentChat />
-					</div>
-				</div>
-
-				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
-
-				<DocumentHoldDetails />
-
-				<div className={styles.header}>
-					<ShipmentHeader />
-
-					<PocSop />
-				</div>
-
-				<Timeline />
-
-				<div className={styles.container}>
-					<Tabs
-						activeTab={activeTab}
-						fullWidth
-						themeType="secondary"
-						onChange={setActiveTab}
-					>
-						<TabPanel name="overview" title="Overview">
-							<Overview shipmentData={shipment_data} />
-						</TabPanel>
-
-						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
-							<Tasks />
-						</TabPanel>
-
-						<TabPanel name="documents" title="Documents">
-							<Documents />
-						</TabPanel>
-
-						<TabPanel name="emails" title="Emails">
-							<ShipmentMails
-								source="cogo_rpa"
-								filters={{ q: shipment_data?.serial_id }}
-								pre_subject_text={`${shipment_data?.serial_id}`}
-							/>
-						</TabPanel>
-					</Tabs>
+				<div className={styles.toggle_chat}>
+					{/* <Toggle
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleVersionChange}
+					/> */}
+					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>
-		</ShipmentDetailContext.Provider>
+
+			{conditionMapping.cancelDetails ? <CancelDetails /> : null}
+
+			{conditionMapping.documentHoldDetails ? <DocumentHoldDetails /> : null}
+
+			<div className={styles.header}>
+				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
+
+				{conditionMapping.poc_sop ? <SopAndPoc /> : null}
+			</div>
+
+			{conditionMapping.timeline ? <TimeLine /> : null}
+
+			<div className={styles.container}>
+				<Tabs
+					fullWidth
+					themeType="secondary"
+					activeTab={activeTab}
+					onChange={setActiveTab}
+				>
+					{tabs.map((t) => (
+						<TabPanel name={t} key={t} title={stakeholderConfig[t]?.tab_title}>
+							{TAB_MAPPING[t]()}
+						</TabPanel>
+					))}
+				</Tabs>
+			</div>
+
+		</div>
 	);
 }
 
