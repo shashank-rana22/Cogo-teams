@@ -10,6 +10,10 @@
 		.ui_table_container {
 			border: none !important;
 		}
+
+		.ui_table_head_cell {
+			text-align: center !important;
+		}
 	}
 }
 

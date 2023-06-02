@@ -1,6 +1,5 @@
 import { Table } from '@cogoport/components';
 
-import AnalyticsFilter from '../../../../common/AnalyticsFilter';
 import useGetTopTenReferralStats from '../../../../hooks/useGetTopTenReferralStats';
 import TableColumns from '../List/TableColumn';
 
@@ -145,7 +144,6 @@ function UserList() {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Top 10 Users</div>
-			<AnalyticsFilter />
 			<Table
 				columns={TableColumns({ listType: 'users' })}
 				data={data || []}

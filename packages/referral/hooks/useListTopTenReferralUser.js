@@ -1,9 +1,9 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetListReferralMappings = () => {
+const useGetTopTenReferral = () => {
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/list_referral_mappings',
+		url    : '/get_top_ten_referral',
 		method : 'get',
 	}, { manual: true });
 
@@ -20,9 +20,9 @@ const useGetListReferralMappings = () => {
 	}, [getListReferrals]);
 
 	return {
-		networkData: data,
+		data,
 		loading,
 	};
 };
 
-export default useGetListReferralMappings;
+export default useGetTopTenReferral;

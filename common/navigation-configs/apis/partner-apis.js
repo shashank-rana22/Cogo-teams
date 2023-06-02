@@ -12287,7 +12287,7 @@ const partner = {
 			service_name : 'referral',
 		},
 		{
-			api          : 'get_top_ten_referral_stats',
+			api          : 'get_top_ten_referral',
 			access_type  : 'private',
 			service_name : 'referral',
 		},
