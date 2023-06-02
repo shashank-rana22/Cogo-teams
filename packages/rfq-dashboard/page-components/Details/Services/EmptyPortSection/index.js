@@ -1,6 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
-
-import { EMPTY_PORT } from '../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -8,7 +7,7 @@ function EmptyPortsSection() {
 	return (
 		<div className={styles.container}>
 			<img
-				src={EMPTY_PORT}
+				src={GLOBAL_CONSTANTS.empty_port}
 				alt="empty port"
 				className={styles.empty_chat_image}
 			/>

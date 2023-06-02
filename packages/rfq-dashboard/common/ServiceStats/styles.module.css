@@ -17,6 +17,7 @@
 }
 
 .service_stats_ports_section {
+	display: flex;
 	justify-content: space-evenly;
 	padding-top: 0;
 }

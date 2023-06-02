@@ -1,6 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
-
-import { EMPTY_CHART } from '../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -9,7 +8,7 @@ function EmptyLineChart() {
 		<div className={styles.empty_state}>
 			<div className={styles.empty_image_container}>
 				<img
-					src={EMPTY_CHART}
+					src={GLOBAL_CONSTANTS.empty_chart}
 					alt="Empty State"
 					className={styles.empty_state_icon}
 					width="105px"
