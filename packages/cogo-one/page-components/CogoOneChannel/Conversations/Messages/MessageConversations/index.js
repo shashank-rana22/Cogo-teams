@@ -19,6 +19,9 @@ import EmojisBody from './EmojisBody';
 import styles from './styles.module.css';
 import TimeLine from './TimeLine';
 
+const ACCEPT_FOR_ALL = '.png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx';
+const ACCEPT_FOR_ZALO = '.png, .pdf, .jpg, .jpeg, .csv, .svg';
+
 function MessageMapping({ conversation_type, ...restProps }) {
 	switch (conversation_type) {
 		case 'sent':
@@ -324,6 +327,7 @@ function MessageConversations({
 								handleProgress={handleProgress}
 								showProgress={false}
 								draggable
+								accept={channel_type === 'zalo' ? ACCEPT_FOR_ZALO : ACCEPT_FOR_ALL}
 								className="file_uploader"
 								uploadIcon={(
 									<IcMAttach

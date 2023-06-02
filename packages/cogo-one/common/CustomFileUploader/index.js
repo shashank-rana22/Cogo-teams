@@ -101,13 +101,13 @@ function CustomFileUploader(props, ref) {
 	const handleChange = async (values) => {
 		if (channel === 'zalo' && values && !isEmpty(values)) {
 			const maxSize = getMaxFileSize(values[0]?.type);
-			if (maxSize === undefined) {
+			if (!maxSize) {
 				Toast.error('File Type Not Allowed');
 				return;
 			}
-			if (values[0].size >= maxSize) {
-				const size_in_mb = (maxSize / 1048576).toFixed(2);
-				Toast.error(`File Upload failed, Maximum size allowed - ${size_in_mb} MB`);
+			if (values[0]?.size >= maxSize) {
+				const sizeInMb = (maxSize / 1048576).toFixed(2);
+				Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);
 				return;
 			}
 		}
@@ -170,7 +170,7 @@ function CustomFileUploader(props, ref) {
 			/>
 
 			{showProgress && loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
-				<div className={styles.progress_container}>
+				<div className={styles.progress_container} key={key}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}
 					/>
