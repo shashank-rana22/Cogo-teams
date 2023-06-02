@@ -34,7 +34,7 @@ const useUpdateRfqRateMargin = ({
 		return null;
 	};
 
-	const updateMargin = async ({ editedMargins, convenienceDetails, rfq_rate_card_id = '' }) => {
+	const updateMargin = ({ editedMargins, convenienceDetails, rfq_rate_card_id = '' }) => {
 		const updatedMargins = transformMargins({
 			values   : editedMargins,
 			services : rate?.service_rates,

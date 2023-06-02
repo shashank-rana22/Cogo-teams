@@ -43,9 +43,9 @@ const useListRfqs = ({ filterStore = {}, id = '' }) => {
 		},
 	}, { manual: false });
 
-	const getRfqsForApproval = useCallback(async () => {
+	const getRfqsForApproval = useCallback( () => {
 		try {
-			await trigger();
+			trigger();
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));
