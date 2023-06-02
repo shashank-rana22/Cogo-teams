@@ -414,10 +414,9 @@ export default {
 	},
 	others: {
 		registration_number: {
-			label: 'GST',
-			pattern:
-					/\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
-			max_length: 15,
+			label      : 'GST',
+			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
+			max_length : 15,
 		},
 
 		pan_number: {
@@ -433,6 +432,10 @@ export default {
 			onboard_vendor: {
 				validate_registration: true,
 			},
+		},
+
+		email: {
+			pattern: /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		},
 	},
 };

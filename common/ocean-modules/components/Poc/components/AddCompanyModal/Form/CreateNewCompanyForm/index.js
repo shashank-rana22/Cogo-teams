@@ -126,7 +126,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
 								pattern  : {
-									value   : formValuePatterns.PAN_NUMBER,
+									value   : formValuePatterns(formValues).PAN_NUMBER,
 									message : 'Pan Number is invalid',
 								},
 							}}
@@ -207,7 +207,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							rules={{
 								pattern: {
-									value   : formValuePatterns.EMAIL,
+									value   : formValuePatterns(formValues).EMAIL,
 									message : 'Enter valid email',
 								},
 							}}
@@ -254,7 +254,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 									message : 'GST Number is required',
 								},
 								pattern: {
-									value   : formValuePatterns.GST_NUMBER,
+									value   : formValuePatterns(formValues).GST_NUMBER,
 									message : 'GST Number is invalid',
 								},
 							}}

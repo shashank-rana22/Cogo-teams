@@ -29,10 +29,10 @@ export default {
 		},
 	},
 	regex: {
-		PAN           : '',
+		PAN           : /^\d{9,12}$/,
 		GST           : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
 		MOBILE_NUMBER : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL         : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		EMAIL         : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
@@ -381,7 +381,7 @@ export default {
 
 		pan_number: {
 			label   : 'PAN',
-			pattern : undefined,
+			pattern : /^\d{9,12}$/,
 		},
 
 		economic_zone: {
@@ -392,6 +392,10 @@ export default {
 			onboard_vendor: {
 				validate_registration: false,
 			},
+		},
+
+		email: {
+			pattern: /^[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{2,}$/,
 		},
 	},
 };
