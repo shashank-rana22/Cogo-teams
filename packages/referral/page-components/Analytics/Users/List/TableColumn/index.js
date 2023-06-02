@@ -12,13 +12,9 @@ import styles from './styles.module.css';
 
 function TableColumns({
 	listType = '',
-	showOptions = {},
 	setShowOptions = () => {},
 	setShowActivityModal,
 }) {
-	console.log('showOptions:', showOptions);
-	// const { data } = useGetTopTenReferralStats();
-	// console.log('networkData:', data);
 	const columns = [
 		{
 			Header   : 'NETWORK NAME',
@@ -41,44 +37,12 @@ function TableColumns({
 			accessor : (item = {}) => (
 				<div className={styles.tooltip_content}>
 					<Tooltip content={startCase('Cogoport')} placement="bottom">
-						<div className={styles.user_name}>{startCase(item?.user_name)}</div>
+						<div className={styles.user_name}>{startCase(item?.referee_data?.name)}</div>
 					</Tooltip>
 				</div>
 			),
 			conditions: ['users'],
 		},
-		// {
-		// 	Header   : 'LEVELS',
-		// 	accessor : (item = {}) => (
-		// 		<div className={styles.user_name}>
-		// 			{item?.level}
-		// 		</div>
-		// 	),
-		// 	conditions: ['network'],
-		// },
-		// {
-		// 	Header   : 'Referrals',
-		// 	accessor : (item = {}) => (
-		// 		<div className={styles.user_name}>{item?.level}</div>
-		// 	),
-		// 	conditions: ['users'],
-		// },
-		// {
-		// 	Header   : 'USERS',
-		// 	accessor : (item = {}) => (
-		// 		<div className={styles.user_name}>{item?.total_child_count}</div>
-		// 	),
-		// 	conditions: ['network', 'users'],
-		// },
-		// {
-		// 	Header   : 'AFFILIATES',
-		// 	accessor : (item, index) => (
-		// 		<div className={styles.node_container}>
-		// 			<NodeColumns item={item} type="total_cogopoints" index={index} />
-		// 		</div>
-		// 	),
-		// 	conditions: ['users'],
-		// },
 		{
 			Header   : 'INVITIES',
 			accessor : (item, index) => (
@@ -120,7 +84,6 @@ function TableColumns({
 			accessor : (item = {}) => (
 				<div className={styles.show_details} key={item?.id}>
 					<Popover
-            // visible={showOptions?.id === item?.id}
 						onClickOutside={() => setShowOptions({})}
 						placement="left"
 						render={(

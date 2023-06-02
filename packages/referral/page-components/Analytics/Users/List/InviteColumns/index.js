@@ -1,29 +1,24 @@
 import styles from './styles.module.css';
 
-function InviteColumns({ index = 0, item = {}, type = '' }) {
-	const { cogopoints = {} } = item || {};
-	const {
-		network_cogopoint_earned = 0,
-		network_cogopoint_estimated = 0,
-		referral_cogopoint_earned = 0,
-		referral_cogopoint_estimated = 0,
-	} = cogopoints || {};
+function InviteColumns({ index = 0, item = {} }) {
+	const { invite_log = {} } = item || {};
+	const { pending = 0, accepted = 0, rejected = 0 } = invite_log || {};
 
 	const subTitleOptions = [
 		{
 			title : 'Pending',
 			name  : 'pending',
-			count : type === 'total_cogopoints' ? referral_cogopoint_earned : referral_cogopoint_estimated,
+			count : pending,
 		},
 		{
 			title : 'Accepted',
 			name  : 'accepted',
-			count : type === 'total_cogopoints' ? network_cogopoint_earned : network_cogopoint_estimated,
+			count : accepted,
 		},
 		{
 			title : 'Rejected',
 			name  : 'rejected',
-			count : type === 'total_cogopoints' ? network_cogopoint_earned : network_cogopoint_estimated,
+			count : rejected,
 		},
 	];
 

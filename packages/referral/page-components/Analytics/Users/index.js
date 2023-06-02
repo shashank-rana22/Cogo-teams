@@ -1,6 +1,6 @@
 import { useState } from 'react';
 
-import useListTopTenReferralUser from '../../../hooks/useListTopTenReferralUser';
+import useListTopTenReferral from '../../../hooks/useListTopTenReferral';
 import ActivityModal from '../../Dashboard/ActivityModal';
 
 import NetworkList from './NetworkList';
@@ -17,9 +17,9 @@ function UserPerformance({ selectedDate = {}, setSelectedDate = () => {} }) {
 	});
 	const [showActivityModal, setShowActivityModal] = useState(false);
 
-	const { data = {} } = useListTopTenReferralUser();
-	const { referral_network = {}, referral_user = {} } = data || {};
-	console.log('networkData:', data);
+	const { data = {}, loading = false } = useListTopTenReferral();
+	const { referral_network = [], referral_user = {} } = data || {};
+
 	return (
 		<div>
 			<PerformanceStats selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
@@ -33,7 +33,8 @@ function UserPerformance({ selectedDate = {}, setSelectedDate = () => {} }) {
 					showOptions={showOptions}
 					showActivityModal={showActivityModal}
 					setShowActivityModal={setShowActivityModal}
-					data={referral_network}
+					data={referral_network || []}
+					loading={loading}
 				/>
 				<UserList
 					showPopover={showPopover}
@@ -43,7 +44,8 @@ function UserPerformance({ selectedDate = {}, setSelectedDate = () => {} }) {
 					setShowOptions={setShowOptions}
 					showOptions={showOptions}
 					setShowActivityModal={setShowActivityModal}
-					data={referral_user}
+					data={referral_user || {}}
+					loading={loading}
 				/>
 			</div>
 			<ActivityModal

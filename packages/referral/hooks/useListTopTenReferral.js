@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetTopTenReferral = () => {
+const useListTopTenReferral = () => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_top_ten_referral',
 		method : 'get',
@@ -9,9 +9,9 @@ const useGetTopTenReferral = () => {
 
 	const getListReferrals = useCallback(() => {
 		try {
-			trigger({});
+			trigger();
 		} catch (error) {
-			console.log(error);
+			// console.log(error);
 		}
 	}, [trigger]);
 
@@ -25,4 +25,4 @@ const useGetTopTenReferral = () => {
 	};
 };
 
-export default useGetTopTenReferral;
+export default useListTopTenReferral;

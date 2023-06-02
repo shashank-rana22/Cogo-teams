@@ -1,24 +1,19 @@
 import styles from './styles.module.css';
 
-function SignedUpColumns({ index = 0, item = {}, type = '' }) {
-	const { cogopoints = {} } = item || {};
-	const {
-		network_cogopoint_earned = 0,
-		network_cogopoint_estimated = 0,
-		referral_cogopoint_earned = 0,
-		referral_cogopoint_estimated = 0,
-	} = cogopoints || {};
+function SignedUpColumns({ index = 0, item = {} }) {
+	const { sign_up = {} } = item || {};
+	const { user_count = 0, affiliate_count = 0 } = sign_up || {};
 
 	const subTitleOptions = [
 		{
 			title : 'Users',
 			name  : 'users',
-			count : type === 'total_cogopoints' ? referral_cogopoint_earned : referral_cogopoint_estimated,
+			count : user_count,
 		},
 		{
 			title : 'Affiliates',
 			name  : 'affiliates',
-			count : type === 'total_cogopoints' ? network_cogopoint_earned : network_cogopoint_estimated,
+			count : affiliate_count,
 		},
 	];
 
