@@ -12,14 +12,13 @@ const COMPLETION_MAPPING = {
 
 };
 
-function EventListItem({ data, index, setEventListData }) {
+function EventListItem({ data, index, setEventListData, listRefetch }) {
 	const {
 		condition_name: conditionName = '',
 		expertise_type: expertiseType = '',
 		description = '',
 		rules = [],
 		id = '',
-		listRefetch,
 	} = data || {};
 
 	const { onDelete, showDeleteModal, setShowDeleteModal, deleteLoading } = useDeleteEvent({ id, listRefetch });
