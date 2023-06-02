@@ -77,6 +77,9 @@ function CourseConsumption() {
 				data={data}
 				indexes={indexes}
 				setIndexes={setIndexes}
+				updateCourseProgress={updateCourseProgress}
+				loading={loading}
+				courseProgressUpdateLoading={courseProgressUpdateLoading}
 				getUserCourse={getUserCourse}
 				chapter={chapter}
 				setChapter={setChapter}
