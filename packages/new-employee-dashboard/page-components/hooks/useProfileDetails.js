@@ -141,7 +141,7 @@ const useProfileDetails = () => {
 
 	return {
 		data,
-		loading,
+		getEmployeeDetailsLoading: loading,
 		setCtcStructure,
 		ctcStructure,
 		initialQuestion,

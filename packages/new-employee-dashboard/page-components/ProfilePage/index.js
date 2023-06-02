@@ -1,5 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetOfferLetter from '../hooks/useGetEmployeeOfferLetter';
@@ -25,6 +25,7 @@ function ProfilePage() {
 		setInitialQuestion = () => {},
 		formProps = {},
 		getEmployeeDetails,
+		getEmployeeDetailsLoading,
 	} = useProfileDetails();
 
 	const {
@@ -36,6 +37,12 @@ function ProfilePage() {
 	const { metadata } = offerLetter || {};
 
 	const { detail = {} } = profileData || {};
+
+	const TABS_MAPPING = {
+		profile_info     : ProfileDetails,
+		additional_info  : AdditionalDetails,
+		Signed_documents : SignedDocuments,
+	};
 
 	return (
 		<div className={styles.container}>
@@ -50,29 +57,21 @@ function ProfilePage() {
 
 			<div className={styles.tab_container}>
 				<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
-					<TabPanel name="profile_info" title="Profile Info">
-						<ProfileDetails
-							profileData={profileData}
-							loading={loading}
-							getEmployeeDetails={getEmployeeDetails}
-						/>
-					</TabPanel>
-
-					<TabPanel name="additional_info" title="Additional Info">
-						<AdditionalDetails
-							profileData={profileData}
-							loading={loading}
-							getEmployeeDetails={getEmployeeDetails}
-						/>
-					</TabPanel>
-
-					<TabPanel name="Signed_documents" title="Signed Documents">
-						<SignedDocuments
-							profileData={profileData}
-							loading={loading}
-							getEmployeeDetails={getEmployeeDetails}
-						/>
-					</TabPanel>
+					{
+					Object.keys(TABS_MAPPING).map((tab) => {
+						const Component = TABS_MAPPING[tab];
+						return (
+							<TabPanel name={tab} title={startCase(tab)} key={tab}>
+								<Component
+									profileData={profileData}
+									loading={loading}
+									getEmployeeDetails={getEmployeeDetails}
+									getEmployeeDetailsLoading={getEmployeeDetailsLoading}
+								/>
+							</TabPanel>
+						);
+					})
+					}
 				</Tabs>
 			</div>
 

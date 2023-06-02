@@ -1,10 +1,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
+
+import CommonLoader from '../../../../common/Loader';
 
 import styles from './styles.module.css';
 
-function PersonalInformation({ profileData }) {
+function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 	const { detail } = profileData || {};
 
 	const {
@@ -19,14 +21,18 @@ function PersonalInformation({ profileData }) {
 	} = detail || {};
 
 	const { address = '', city = '', country = '', pincode = '', state = '' } = permanent_address || {};
-	const permanentAddress = `${address}, ${city}, ${state}, ${country} - ${pincode}`;
+	const permanentAddress = !isEmpty(permanent_address)
+		? `${address}, ${city}, ${state}, ${country} - ${pincode}` : '-';
 
-	const presentAddress = `${present_address?.address || ''}, ${present_address?.city || ''}, 
-	${present_address?.state || ''}, ${present_address?.country || ''} - ${present_address?.pincode || ''}`;
+	const presentAddress = !isEmpty(present_address)
+		? `${present_address?.address || ''}, ${present_address?.city || ''}, 
+	${present_address?.state || ''}, ${present_address?.country || ''} - ${present_address?.pincode || ''}` : '-';
 
 	const mobileNumber = `${mobile_country_code} ${mobile_number}`;
-	const emergencyContactDetails = 	`${emergency_contact_details?.[0]?.mobile_country_code}
-	${emergency_contact_details?.[0]?.mobile_number}`;
+
+	const emergencyContactDetails = !isEmpty(emergency_contact_details)
+		? `${emergency_contact_details?.[0]?.mobile_country_code}
+	${emergency_contact_details?.[0]?.mobile_number}` : '-';
 
 	const formatdate = ({ date }) => formatDate({
 		date,
@@ -36,7 +42,7 @@ function PersonalInformation({ profileData }) {
 
 	const MAPPING = {
 		name                      : startCase(name),
-		gender                    : startCase(gender),
+		gender                    : startCase(gender) || '-',
 		personal_email,
 		Mobile_number             : mobileNumber,
 		permanentAddress,
@@ -50,6 +56,10 @@ function PersonalInformation({ profileData }) {
 		hiring_manager_email,
 		emergency_contact_details : emergencyContactDetails,
 	};
+
+	if (getEmployeeDetailsLoading) {
+		return <CommonLoader />;
+	}
 
 	return (
 		<div className={styles.container}>

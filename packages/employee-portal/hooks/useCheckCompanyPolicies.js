@@ -3,7 +3,7 @@ import { useHarbourRequest } from '@cogoport/request';
 function useCheckCompanyPolicies({
 	policy_data,
 	policy_id,
-	user_id = 'a55d29e4-b045-4023-99c1-a2790948e061',
+	employeeId,
 	getEmployeeDetails = () => {},
 }) {
 	const [{ loading }, trigger] = useHarbourRequest({
@@ -20,7 +20,7 @@ function useCheckCompanyPolicies({
 		try {
 			await trigger({
 				data: {
-					id                : user_id,
+					id                : employeeId,
 					policies_data     : updatedPolicyData,
 					performed_by_id   : '5674cb',
 					performed_by_type : '2314fb',
