@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useEffect, useState } from 'react';
@@ -37,6 +36,7 @@ function EditAwbNumber({
 			setValue(c.name, item[c.name] || c?.value);
 		});
 		setValue('procured_date', new Date(item?.procured_date));
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	const { awb_number:awbNumber = '' } = watch();
@@ -58,6 +58,7 @@ function EditAwbNumber({
 			}
 			setValue('awb_number', number);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [awbNumber]);
 
 	return (

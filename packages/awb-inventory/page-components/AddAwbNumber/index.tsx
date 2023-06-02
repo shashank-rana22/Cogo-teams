@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import React, { useEffect, useState } from 'react';
@@ -48,12 +47,14 @@ function AddAwbNumber({
 		if (airlineId) {
 			getAWBPrefix(airlineId);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [airlineId]);
 
 	useEffect(() => {
 		if (data) {
 			setValue('first_awb_number', data);
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [data]);
 
 	useEffect(() => {
@@ -75,6 +76,7 @@ function AddAwbNumber({
 			awbNumber = `${firstAwbNumber.slice(0, 8)}`;
 		}
 		setValue('first_awb_number', awbNumber);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [firstAwbNumber]);
 
 	return (
