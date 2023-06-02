@@ -36,18 +36,18 @@ function ListButtons({
 		);
 	};
 
-	const disablButton = total_child_count === 0;
+	const disableButton = total_child_count === 0;
 
 	return (
 		<div className={styles.button_container}>
-			<Button size="md" themeType="secondary" onClick={handleNetwork} disabled={disablButton}>
+			<Button size="md" themeType="secondary" onClick={handleNetwork} disabled={disableButton}>
 				Show network
 			</Button>
 			<Button
 				size="md"
 				themeType="secondary"
 				onClick={() => { setShowActivityModal(true); setShowOptions({}); }}
-				disabled={disablButton}
+				disabled={disableButton}
 			>
 				Activity Log
 			</Button>
