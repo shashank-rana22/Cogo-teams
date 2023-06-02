@@ -12286,6 +12286,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'referral',
 		},
+		{
+			api          : 'get_top_ten_referral_stats',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
 	],
 	air_repository: [
 		{
