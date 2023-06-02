@@ -8,26 +8,25 @@ const CITY_OPTIONS = [
 	{ label: 'Vietnam', value: 'Vietnam' },
 ];
 
-
 const controls = [
-  {
-    name: "country_name",
-    label: "Country",
-    type: "select",
-    placeholder: "Select Country",
-    options: COUNTRY_OPTIONS,
-    isClearable: true,
-    rules: { required: "Country is Required" },
-  },
-  {
-    name: "city_name",
-    label: "City",
-    type: "select",
-    placeholder: "Select City",
-    options: CITY_OPTIONS,
-    isClearable: true,
-    rules: { required: "City is Required" },
-  },
+	{
+		name        : 'country_name',
+		label       : 'Country',
+		type        : 'select',
+		placeholder : 'Select Country',
+		options     : COUNTRY_OPTIONS,
+		isClearable : true,
+		rules       : { required: 'Country is Required' },
+	},
+	{
+		name        : 'city_name',
+		label       : 'City',
+		type        : 'select',
+		placeholder : 'Select City',
+		options     : CITY_OPTIONS,
+		isClearable : true,
+		rules       : { required: 'City is Required' },
+	},
 ];
 
 export default controls;
