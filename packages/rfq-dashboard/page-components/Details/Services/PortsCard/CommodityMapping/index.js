@@ -11,7 +11,10 @@ function CommodityMapping({ commodity_array }) {
 	return (
 		<div className={styles.container}>
 			{commodity_array.map((item = {}) => (
-				<div className={styles.tag}>
+				<div
+					key={item}
+					className={styles.tag}
+				>
 					{Object.keys(item).map((key) => (
 						<span key={key}>
 							{item[key]}
