@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
-import useListOrganizationTradeParties from '@cogoport/ocean-modules/hooks/useListOrganizationTradeParties';
 import React, { useRef } from 'react';
 
 import useCreateShipmentDocument from '../../../../../../../../../hooks/useCreateShipmentDocument';
 import useGetShipmentFortigoTripDetail from '../../../../../../../../../hooks/useGetShipmentFortigoTripDetail';
+import useListOrganizationTradeParties from '../../../../../../../../../hooks/useListOrganizationTradeParties';
 import useGeneratePdf from '../hooks/useGeneratePdf';
 import useGetImageSource from '../hooks/useGetImageSource';
 import { componentMapper } from '../utils/componentMapper';
