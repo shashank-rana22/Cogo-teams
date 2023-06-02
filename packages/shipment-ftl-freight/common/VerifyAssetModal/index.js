@@ -14,7 +14,7 @@ const SkeletonGroup = [1, 2, 3].map((item) => (
 	<div key={item} height="100px" width="100%" />
 ));
 
-function VerifyAssetModal({ truckList = [], organizationId, setShow }) {
+function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 	const [showInternal, setShowInternal] = useState(false);
 	const [showUploadDoc, setShowUploadDoc] = useState(false);
 	const [uploadProof, setUploadProof] = useState(null);
@@ -27,6 +27,7 @@ function VerifyAssetModal({ truckList = [], organizationId, setShow }) {
 		[truckList],
 	);
 
+	const organizationId = truckList[0]?.service_provider_id;
 	const { data: verifiedTruckList, getData: getVerifiedTruckList } = useListOrganizationAssets({
 		id: organizationId,
 		truckNumbers,
@@ -154,30 +155,30 @@ function VerifyAssetModal({ truckList = [], organizationId, setShow }) {
 		[categorisedTruckList, createCustomerInvoicefn],
 	);
 
-	if (!truckList?.length) {
-		return (
-			<Modal
-				show
-				onClose={setShow(false)}
-				className={styles.custom_modal}
-				closeOnOuterClick={false}
-				showCloseIcon
-			>
-				<Modal.Body>
+	// if (!truckList?.length) {
+	// 	return (
+	// 		<Modal
+	// 			show
+	// 			onClose={() => setShow(false)}
+	// 			className={styles.custom_modal}
+	// 			closeOnOuterClick={false}
+	// 			showCloseIcon
+	// 		>
+	// 			<Modal.Body>
 
-					<Modal.Header title={(
-						<div className={styles.header}>
-							Truck List
-						</div>
-					)}
-					/>
+	// 				<Modal.Header title={(
+	// 					<div className={styles.header}>
+	// 						Truck List
+	// 					</div>
+	// 				)}
+	// 				/>
 
-					<div style={{ marginTop: '1rem' }}>No Truck Found</div>
-				</Modal.Body>
+	// 				<div style={{ marginTop: '1rem' }}>No Truck Found</div>
+	// 			</Modal.Body>
 
-			</Modal>
-		);
-	}
+	// 		</Modal>
+	// 	);
+	// }
 
 	return (
 		<Modal
@@ -185,7 +186,7 @@ function VerifyAssetModal({ truckList = [], organizationId, setShow }) {
 			onClose={() => setShow(false)}
 			className={styles.custom_modal}
 			closeOnOuterClick={false}
-			showCloseIcon={!loading}
+			// showCloseIcon={!loading}
 		>
 			<Modal.Body>
 
@@ -217,6 +218,7 @@ function VerifyAssetModal({ truckList = [], organizationId, setShow }) {
 										setShowInternal={setShowInternal}
 										organization_id={organizationId}
 										fetch={getVerifiedTruckList}
+										setShow={setShow}
 									/>
 								</>
 							) : (

@@ -7,11 +7,12 @@ function AddOrganizationAssetModal({
 	setShowInternal,
 	organization_id,
 	fetch,
+	setShow,
 }) {
 	return (
 		<Modal
 			show
-			onClose={() => setShowInternal(false)}
+			onClose={() => setShow(false)}
 			// className={styles.custom_modal}
 			closeOnOuterClick={false}
 			// showCloseIcon={!loading}

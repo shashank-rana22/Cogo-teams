@@ -5,7 +5,6 @@ import { useSelector } from '@cogoport/store';
 import React, { useState, useContext } from 'react';
 
 import CancelService from '../CancelService';
-// import EditParams from '../EditParams';
 import SupplierReallocation from '../SupplierReallocation';
 import VerifyTruck from '../VerifyAssetModal';
 import VerifyDriver from '../VerifyDriverModal';
@@ -22,6 +21,34 @@ const actionButtons = [
 	{ label: 'Verify Driver', value: 'verify_driver' },
 	{ label: 'Cancel', value: 'cancel' },
 ];
+
+export const getTrucklistWithId = (all_services) => {
+	const servicesList = (all_services || []).filter(
+		(service) => service?.service_type !== 'subsidiary_service' && service?.truck_number,
+	);
+
+	const truckLists = servicesList.map((service) => ({
+		value : service?.id,
+		label : service?.truck_number,
+		...service,
+	}));
+
+	return truckLists;
+};
+
+export const getDriverDetails = (all_services) => {
+	const servicesList = (all_services || []).filter(
+		(service) => service?.truck_number,
+	);
+	const driverDetails = servicesList.map((service) => ({
+		service_id     : `${service?.id}`,
+		truck_number   : `${service?.truck_number}`,
+		driver_name    : `${service?.driver_details?.name}`,
+		contact_number : `${service?.driver_details?.contact}`,
+	}));
+
+	return driverDetails;
+};
 
 function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
@@ -61,7 +88,6 @@ function EditCancelService({ serviceData = {} }) {
 			{label}
 		</div>
 	) : null));
-	const truckList = [serviceData];
 
 	return (
 		<div className={styles.container}>
@@ -78,14 +104,20 @@ function EditCancelService({ serviceData = {} }) {
 			{showModal === 'supplier_reallocation'
 			&& <SupplierReallocation setShow={setShowModal} serviceData={servicesData} />}
 
-			{/* {showModal === 'edit_params'
-			&& <EditParams setShow={setShowModal} serviceData={serviceData} />} */}
-
 			{showModal === 'verify_truck'
-			&& <VerifyTruck serviceData={serviceData} truckList={truckList} setShow={setShowModal} show={showModal} />}
+			&& (
+				<VerifyTruck
+					setShow={setShowModal}
+					truckList={getTrucklistWithId(serviceData)}
+				/>
+			)}
 
 			{showModal === 'verify_driver'
-			&& <VerifyDriver serviceData={serviceData} />}
+			&& (
+				<VerifyDriver
+					driverDetails={getDriverDetails(serviceData)}
+				/>
+			)}
 
 			{showModal === 'cancel' && 	(
 				<CancelService

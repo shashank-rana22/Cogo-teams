@@ -43,7 +43,7 @@ function Header({ serviceData = [] }) {
 						</div>
 
 						<div className={styles.edit_cancel}>
-							<EditCancelService serviceData={serviceData?.[0]} />
+							<EditCancelService serviceData={serviceData} />
 						</div>
 					</div>
 				</div>
