@@ -16,6 +16,7 @@ const useHandleSubModuleComponent = ({
 	courseSubModule,
 }) => {
 	const [showSubModule, setShowSubModule] = useState([]);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const {
 		control,
@@ -28,6 +29,7 @@ const useHandleSubModuleComponent = ({
 		finalData : courseSubModule,
 		getCourseModuleDetails,
 		type      : 'sub_module',
+		setShowDeleteModal,
 	});
 
 	const onSubmit = (values) => {
@@ -88,6 +90,8 @@ const useHandleSubModuleComponent = ({
 		hideEditComponent,
 		setShowSubModule,
 		deleteLoading,
+		showDeleteModal,
+		setShowDeleteModal,
 	};
 };
 

@@ -69,3 +69,10 @@
 .group_select {
 	margin-top: 32px;
 }
+
+.error_text {
+	margin: 20px 0;
+	font-size: 12px;
+	font-weight: 600;
+	color: #cb6464;
+}

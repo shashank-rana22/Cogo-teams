@@ -13,8 +13,8 @@ const onClickBackIcon = (push) => {
 
 const onClickCogoAcademy = (push) => {
 	push(
-		'/learning',
-		'/learning',
+		'/learning?activeTab=course_module',
+		'/learning?activeTab=course_module',
 	);
 };
 

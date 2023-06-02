@@ -1,11 +1,12 @@
 export const controls = [
 	{
-		label       : 'Course Completion Message',
-		name        : 'completion_message',
-		type        : 'textarea',
-		rows        : 4,
-		placeholder : 'Type Description you want the user to see on before beginning the course',
-		rules       : { required: { value: true, message: 'This is required' } },
+		label : 'Course Completion Message',
+		name  : 'completion_message',
+		type  : 'textarea',
+		rows  : 4,
+		placeholder:
+			'Type Description you want the user to see on before beginning the course',
+		rules: { required: { value: true, message: 'This is required' } },
 	},
 	{
 		label       : '',
@@ -115,8 +116,11 @@ export const certificateControls = [
 		placeholder   : 'Select Category',
 		multiple      : false,
 		draggable     : true,
-		dropareaProps : { heading: 'Upload Authority Signature', subHeading: '11kb' },
-		rules         : { required: { value: true, message: 'This is required' } },
+		dropareaProps : {
+			heading    : 'Upload Authority Signature',
+			subHeading : '11kb',
+		},
+		rules: { required: { value: true, message: 'This is required' } },
 	},
 ];
 
@@ -131,13 +135,16 @@ export const selectControls = [
 				name        : 'course_completion_unit',
 				type        : 'select',
 				placeholder : 'Select period of',
-				options     : [{
-					value : 'week',
-					label : 'Week',
-				}, {
-					value : 'month',
-					label : 'Month',
-				}],
+				options     : [
+					{
+						value : 'week',
+						label : 'Week',
+					},
+					{
+						value : 'month',
+						label : 'Month',
+					},
+				],
 				rules: { required: { value: true, message: 'This is required' } },
 			},
 			{
@@ -145,8 +152,11 @@ export const selectControls = [
 				name        : 'course_completion_value',
 				type        : 'select',
 				placeholder : 'Select',
-				options     : [...Array(12).keys()].map((value) => ({ label: value + 1, value: value + 1 })),
-				rules       : { required: { value: true, message: 'This is required' } },
+				options     : [...Array(12).keys()].map((value) => ({
+					label : (value + 1).toString(),
+					value : (value + 1).toString(),
+				})),
+				rules: { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},

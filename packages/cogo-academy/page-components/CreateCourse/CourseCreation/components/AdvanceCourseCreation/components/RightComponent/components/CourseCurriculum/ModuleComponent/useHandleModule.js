@@ -17,6 +17,7 @@ const useHandleModule = ({
 	finalData,
 }) => {
 	const [showModule, setShowModule] = useState([]);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const { control, formState:{ errors = {} }, handleSubmit, setValue } = useForm();
 
@@ -34,6 +35,7 @@ const useHandleModule = ({
 		finalData,
 		getCourseModuleDetails,
 		type: 'module',
+		setShowDeleteModal,
 	});
 
 	const onSaveModule = ({ values }) => {
@@ -97,6 +99,8 @@ const useHandleModule = ({
 		showModule,
 		setShowModule,
 		deleteLoading,
+		showDeleteModal,
+		setShowDeleteModal,
 	};
 };
 

@@ -53,7 +53,7 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 						completion_message,
 						course_completion_rewards_details,
 						course_completion_duration: {
-							course_completion_value,
+							course_completion_value: Number(course_completion_value),
 							course_completion_unit,
 						},
 						certificate_params: {
@@ -101,7 +101,7 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 			});
 
 			setValue('course_completion_unit', course_completion_unit);
-			setValue('course_completion_value', course_completion_value);
+			setValue('course_completion_value', course_completion_value ? course_completion_value.toString() : '');
 		}
 	}, [data, setValue]);
 
