@@ -1,115 +1,77 @@
-import { Loader, Button, Modal } from '@cogoport/components';
+import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { InputController, RadioGroupController, useForm } from '@cogoport/forms';
-import { useContext, useEffect, useMemo } from 'react';
+import {
+	DatepickerController,
+	InputController,
+	SelectController,
+	RadioGroupController,
+	useForm,
+	AsyncSelectController,
+} from '@cogoport/forms';
+import { useContext } from 'react';
 
-import useListShipmentCancellationReasons from '../../hooks/useListShipmentCancellationReasons';
 import useUpdateShipment from '../../hooks/useUpdateShipment';
 
-import getCancelShipmentPayload from './getCancelShipmentPayload';
+import getCancelShipmentPayload from './helpers/getCancelShipmentPayload';
+import getShowElements from './helpers/getShowElements';
 import styles from './styles.module.css';
+import controls from './utils/shipment-cancel-controls';
 
-const STAKEHOLDER_MAPPING = {
-	booking_desk          : 'service_ops1',
-	booking_desk_manager  : 'service_ops1',
-	document_desk         : 'service_ops2',
-	document_desk_manager : 'service_ops2',
-	so1_so2_ops           : ['service_ops1', 'service_ops2', 'lastmile_ops'],
+const controlTypeMapping = {
+	radio        : RadioGroupController,
+	datepicker   : DatepickerController,
+	text         : InputController,
+	select       : SelectController,
+	number       : InputController,
+	async_select : AsyncSelectController,
 };
 
-export default function CancelShipment({ setShow = () => {} }) {
-	const closeModal = () => setShow(false);
+function FormElement({ name, label, show, errors, type, ...rest }) {
+	if (name === 'better_quotation_label' && show) {
+		return (
+			<div className={cl`${styles.form_element} ${styles[rest.className]}`}>
+				{label ? <div className={styles.label}>{label}</div> : null}
+			</div>
+		);
+	}
 
-	const { reasonsLoading, reasons = [], getReasons } = useListShipmentCancellationReasons();
+	const Element = controlTypeMapping[type];
+
+	return Element && show ? (
+		<div className={cl`${styles.form_element} ${styles[rest.className]}`}>
+			{label ? <div className={styles.label}>{label}</div> : null}
+
+			<Element name={name} type={type} {...rest} />
+
+			{errors[name] ? <div className={styles.error_msg}>{errors[name].message}</div> : null}
+		</div>
+	) : null;
+}
+
+export default function CancelShipment({ setShow }) {
+	const closeModal = () => setShow(false);
 
 	const { loading: updateShipmentLoading, updateShipment } = useUpdateShipment({
 		refetch        : closeModal,
 		successMessage : 'Shipment has been cancelled!!',
 	});
 
-	const { shipment_data, activeStakeholder } = useContext(ShipmentDetailContext);
+	const { shipment_data, stakeholderConfig } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
+	const role = stakeholderConfig?.cancel_shipment?.role || '';
 
-	let stakeholder_type = useMemo(() => [activeStakeholder], [activeStakeholder]);
+	const { control, formState: { errors }, watch, handleSubmit } = useForm({ shouldUnregister: true });
 
-	if (activeStakeholder in STAKEHOLDER_MAPPING) {
-		if (Array.isArray(STAKEHOLDER_MAPPING[activeStakeholder])) {
-			stakeholder_type =	(STAKEHOLDER_MAPPING[activeStakeholder] || []);
-		} else {
-			stakeholder_type = [STAKEHOLDER_MAPPING[activeStakeholder]];
-		}
-	}
+	const formValues = watch();
+	const { cancellation_reason } = formValues;
 
-	useEffect(() => {
-		getReasons({
-			filters: {
-				shipment_type: 'fcl_freight',
-				stakeholder_type,
-
-			},
-			shipment_id          : id,
-			options_key_required : true,
-		});
-	}, [id, getReasons, stakeholder_type]);
-
-	const { control, formState: { errors }, handleSubmit } = useForm();
+	const modifiedControls = controls(shipment_data?.state, cancellation_reason)[role] || [];
 
 	const onSubmit = (data) => {
 		updateShipment(getCancelShipmentPayload(data, id));
 	};
 
-	let modalContent = null;
-	if (reasonsLoading) {
-		modalContent = <Loader />;
-	} else if (!reasonsLoading && reasons.length === 0) {
-		modalContent = <div className={styles.no_reasons_found}>No cancellation reasons found...</div>;
-	} else {
-		modalContent = (
-			<>
-				<Modal.Body>
-					<strong>Please select a reason for cancelling the shipment</strong>
-					<RadioGroupController
-						name="cancellation_reason"
-						control={control}
-						options={reasons}
-						rules={{ required: 'Cancellation reason is required' }}
-					/>
-					{errors?.cancellation_reason
-						? <div className={styles.error_message}>{errors.cancellation_reason.message}</div>
-						: null}
-
-					<div className={styles.label}>Remarks</div>
-					<InputController
-						name="remarks"
-						control={control}
-						rules={{ required: 'Remarks is required' }}
-						size="sm"
-					/>
-					{errors?.remarks
-						? <div className={styles.error_message}>{errors.remarks.message}</div>
-						: null}
-				</Modal.Body>
-
-				<Modal.Footer>
-					<Button
-						disabled={updateShipmentLoading}
-						themeType="secondary"
-						onClick={closeModal}
-					>
-						Cancel
-					</Button>
-
-					<Button
-						disabled={updateShipmentLoading}
-						style={{ marginLeft: 10 }}
-						onClick={handleSubmit(onSubmit)}
-					>
-						Submit
-					</Button>
-				</Modal.Footer>
-			</>
-		);
-	}
+	const showElements = getShowElements(formValues) || {};
 
 	return (
 		<Modal
@@ -122,7 +84,36 @@ export default function CancelShipment({ setShow = () => {} }) {
 		>
 			<Modal.Header title="CANCEL SHIPMENT" />
 
-			{modalContent}
+			<Modal.Body className={styles.form_container}>
+				{modifiedControls?.length
+					? (modifiedControls || []).map((ctrl) => (
+						<FormElement
+							key={ctrl.name}
+							show={showElements[ctrl.name]}
+							control={control}
+							errors={errors}
+							{...ctrl}
+						/>
+					))
+					: <div className={styles.no_reasons_found}>No cancellation reasons found...</div> }
+			</Modal.Body>
+
+			<Modal.Footer className={styles.modal_footer}>
+				<Button
+					disabled={updateShipmentLoading}
+					themeType="secondary"
+					onClick={closeModal}
+				>
+					Cancel
+				</Button>
+
+				<Button
+					disabled={updateShipmentLoading || modifiedControls.length === 0}
+					onClick={handleSubmit(onSubmit)}
+				>
+					Submit
+				</Button>
+			</Modal.Footer>
 		</Modal>
 	);
 }
