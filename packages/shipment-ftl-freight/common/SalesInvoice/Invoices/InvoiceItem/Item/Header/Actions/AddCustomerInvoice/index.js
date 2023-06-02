@@ -84,14 +84,6 @@ function AddCustomerInvoice({
 
 						{toggle ? (
 							<div className={styles.button_wrapper}>
-								<Button
-									onClick={closeModal}
-									themeType="secondary"
-									disabled={loading}
-								>
-									Cancel
-								</Button>
-
 								<Button onClick={handleGenerate}>
 									Generate
 								</Button>
