@@ -1352,8 +1352,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-kam_desk',
 				title         : 'KAM Desk',
-				href          : '/kam-desk',
-				as            : '/kam-desk',
+				href          : '/v2/kam-desk',
+				as            : '/v2/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
 				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
