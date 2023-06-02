@@ -68,7 +68,7 @@ function Card({ data = {}, activeTab = '' }) {
 					</div>
 				</div>
 			</div>
-			{(data.shipment_type === 'rail_domestic_freight' && activeTab === 'eway_bill_extension') ? (
+			{(data?.shipment_type === 'rail_domestic_freight' && activeTab === 'eway_bill_extension') ? (
 				<Accordian data={data} />
 			) : null}
 		</>
