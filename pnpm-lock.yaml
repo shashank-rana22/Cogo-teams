@@ -278,6 +278,8 @@ importers:
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.65
       '@cogoport/maps': ^1.0.2
+      '@cogoport/navigation-configs': workspace:^0.1.0
+      '@cogoport/next': workspace:^0.1.0
       '@cogoport/request': workspace:^0.1.0
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.7
@@ -285,12 +287,14 @@ importers:
       file-saver: ^2.0.5
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.413_bykzbvvitan6xtqocjq62ilw64
+      '@cogoport/components': 1.0.413_gbfbxfylkmejm6nw6z2454h4va
       '@cogoport/context': link:../context
       '@cogoport/forms': link:../forms
       '@cogoport/globalization': link:../globalization
-      '@cogoport/icons-react': 1.0.71_react@18.2.0
-      '@cogoport/maps': 1.0.3_bykzbvvitan6xtqocjq62ilw64
+      '@cogoport/icons-react': 1.0.73_react@18.2.0
+      '@cogoport/maps': 1.0.3_gbfbxfylkmejm6nw6z2454h4va
+      '@cogoport/navigation-configs': link:../navigation-configs
+      '@cogoport/next': link:../next
       '@cogoport/request': link:../request
       '@cogoport/store': link:../store
       '@cogoport/utils': 1.2.10
@@ -11595,6 +11599,7 @@ packages:
     resolution: {integrity: sha512-1FXk9E2Hm+QzZQ7z+McJiHL4NW1F2EzMu9Nq9i3zAaGqibafqYwCVU6WyWAuyQRRzOlxou8xZSyXLEN8oKj24g==}
     engines: {node: '>=4.2.0'}
     hasBin: true
+    requiresBuild: true
 
   /ua-parser-js/0.7.35:
     resolution: {integrity: sha512-veRf7dawaj9xaWEu9HoTVn5Pggtc/qj+kqTOFvNiN1l0YdxwC1kvel57UCjThjGa3BHBihE8/UJAHI+uQHmd/g==}

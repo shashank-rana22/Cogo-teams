@@ -7,3 +7,4 @@ export { default as Poc } from './components/Poc';
 export { default as TradeDocTemplate } from './common/TradeDocTemplate';
 export { default as RPASearch } from './common/RPASearch';
 export { default as Layout } from './components/Layout';
+export { default as useShipmentBack } from './hooks/useShipmentBack';
