@@ -32,7 +32,7 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 	return (
 		<div
 			role="presentation"
-			onClick={() => router.push(`/${partner_id}/rfq-dashboard/${item.id}`)}
+			onClick={() => router.push(`/rfq-dashboard/${item.id}`)}
 			className={styles.container}
 			key={item.id}
 		>
