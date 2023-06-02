@@ -340,7 +340,6 @@ function MessageConversations({
 									setDraftUploadedFiles((prev) => ({
 										...prev,
 										[id]: val,
-
 									}));
 								}}
 							/>
