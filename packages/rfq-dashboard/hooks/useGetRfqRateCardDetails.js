@@ -9,9 +9,9 @@ const useGetRfqRateCardDetails = () => {
 		method : 'GET',
 	}, { manual: true });
 
-	const getRfqRateCardDetails = useCallback(async ({ rfq_rate_card_id = '' }) => {
+	const getRfqRateCardDetails = useCallback(({ rfq_rate_card_id = '' }) => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					rfq_rate_card_id,
 				},

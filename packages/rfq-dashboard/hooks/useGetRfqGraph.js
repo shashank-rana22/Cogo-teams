@@ -9,9 +9,9 @@ const useGetRfqGraph = () => {
 		method : 'GET',
 	}, { manual: true });
 
-	const getRfqGraph = useCallback(async ({ rfq_id = '' }) => {
+	const getRfqGraph = useCallback(({ rfq_id = '' }) => {
 		try {
-			await trigger({
+			trigger({
 				params: {
 					rfq_id,
 				},
