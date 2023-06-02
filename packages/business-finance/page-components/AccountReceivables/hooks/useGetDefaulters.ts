@@ -1,13 +1,32 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf, useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect } from 'react';
 
-import { formatDate } from '../../commons/utils/formatDate';
+interface Global {
+	search?:string,
+	zone?:string,
+	dueDate?:{ startDate?:Date, endDate?:Date },
+	invoiceStatus?:string,
+	status?:string,
+	services?:string[],
+	pageIndex?:number,
+	migrated?:boolean | string,
+	invoiceDate?:{ startDate?:Date, endDate?:Date },
+	currency?:string,
+	cogoEntity?:string,
+	pageLimit?:string | number
+}
+interface Props {
+	globalFilters?:Global
+	activeTab?: string,
+	sort?:object
+}
 
-const useGetDefaulters = ({ globalFilters, activeTab, sort }) => {
+const useGetDefaulters = ({ globalFilters, activeTab, sort }:Props) => {
 	const {
 		search, zone, dueDate, invoiceStatus, status, services, pageIndex, migrated,
 		invoiceDate, currency, cogoEntity, pageLimit, ...rest
@@ -49,13 +68,14 @@ const useGetDefaulters = ({ globalFilters, activeTab, sort }) => {
 	const stringifiedRest = JSON.stringify(rest);
 	const stringifiedQuery = JSON.stringify(query);
 
-	const formatProvidedDate = (date:Date) => {
+	const formatProvidedDate = (date:string | Date) => {
 		if (date) {
 			return formatDate(
-				date,
-				GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-				{},
-				false,
+				{
+					date,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+					formatType : 'date',
+				},
 			);
 		}
 		return undefined;
@@ -93,7 +113,7 @@ const useGetDefaulters = ({ globalFilters, activeTab, sort }) => {
 				);
 			}
 		} catch (e) {
-			console.log('error->', e);
+			console.log('error', e);
 		}
 	}, [cogoEntity, currency, dueDate?.endDate, dueDate?.startDate, invoiceDate?.endDate,
 		invoiceDate?.startDate, invoiceStatus, migrated, pageIndex, services, status,

@@ -1,4 +1,4 @@
-import { SingleDateRange, Select, Button, Popover, Input, MultiSelect } from '@cogoport/components';
+import { Button, Popover, Input } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -6,11 +6,39 @@ import { useState } from 'react';
 
 import Filter from '../../../../commons/Filters';
 
-import { CURRENCY, PAYMENT_STATUS, SHIPMENT_TYPE } from './constants';
 import { defaultersControls } from './controls';
+import PopoverFilters from './PopoverFilters';
 import styles from './styles.module.css';
 
-function DefaultersFilters({ globalFilters, setGlobalFilters, isClear, clearFilters }) {
+interface Global {
+
+	status?:string
+
+	services?:string[]
+
+	invoiceDate?:{ startDate?:Date, endDate?:Date }
+
+	dueDate?:{ startDate?:Date, endDate?:Date }
+
+	currency?:string
+
+	search?:string
+
+}
+
+interface Props {
+
+	globalFilters?: Global,
+
+	setGlobalFilters?:(p: object) => void,
+
+	isClear?:boolean,
+
+	clearFilters?:Function
+
+}
+
+function DefaultersFilters({ globalFilters, setGlobalFilters, isClear, clearFilters }:Props) {
 	const [visible, setVisible] = useState(false);
 
 	const { general } = useSelector((state) => state || {});
@@ -25,68 +53,11 @@ function DefaultersFilters({ globalFilters, setGlobalFilters, isClear, clearFilt
 	];
 
 	const popoverContent = () => (
-		<div className={styles.filter_popover}>
-			<div className={styles.filter_section}>
-				<Select
-					value={globalFilters?.status}
-					onChange={(e) => setGlobalFilters((prev) => ({ ...prev, status: e }))}
-					placeholder="Payment Status"
-					options={PAYMENT_STATUS}
-					size="sm"
-					isClearable
-					style={{ width: '200px' }}
-				/>
-
-				<MultiSelect
-					value={globalFilters?.services}
-					onChange={(e) => setGlobalFilters((prev) => ({ ...prev, services: e }))}
-					placeholder="Shipment Type"
-					options={SHIPMENT_TYPE}
-					size="sm"
-					isClearable
-					style={{ width: '200px' }}
-				/>
-			</div>
-
-			<div className={styles.filter_section}>
-				<SingleDateRange
-					placeholder="Invoice Date"
-					dateFormat="dd/MM/yyyy"
-					name="invoiceDate"
-					onChange={(e) => { setGlobalFilters((prev) => ({ ...prev, invoiceDate: e })); }}
-					value={globalFilters?.invoiceDate}
-					isPreviousDaysAllowed
-					style={{ width: '200px' }}
-				/>
-
-				<SingleDateRange
-					placeholder="Due Date"
-					dateFormat="dd/MM/yyyy"
-					name="dueDate"
-					onChange={(e) => { setGlobalFilters((prev) => ({ ...prev, dueDate: e })); }}
-					value={globalFilters?.dueDate}
-					isPreviousDaysAllowed
-					style={{ width: '200px' }}
-				/>
-			</div>
-
-			<div className={styles.filter_section}>
-				<Select
-					value={globalFilters?.currency}
-					onChange={(e) => setGlobalFilters((prev) => ({ ...prev, currency: e }))}
-					placeholder="Currency"
-					options={CURRENCY}
-					size="sm"
-					isClearable
-					style={{ width: '200px' }}
-				/>
-			</div>
-
-			<div className={styles.close_popover}>
-				<Button onClick={() => setVisible(false)}>Close</Button>
-			</div>
-
-		</div>
+		<PopoverFilters
+			globalFilters={globalFilters}
+			setGlobalFilters={setGlobalFilters}
+			setVisible={setVisible}
+		/>
 	);
 
 	return (

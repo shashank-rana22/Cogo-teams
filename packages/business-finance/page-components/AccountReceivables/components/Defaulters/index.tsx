@@ -1,6 +1,6 @@
 import { Pill, TabPanel, Tabs, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
-import { format } from '@cogoport/utils';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import startCase from '@cogoport/utils/src/utilities/startCase';
 import { useEffect, useState, CSSProperties } from 'react';
 
@@ -15,31 +15,8 @@ import { getDocumentNumber, getDocumentUrl } from '../../Utils/getDocumentNumber
 
 import { invoiceListConfig } from './config/listConfig';
 import DefaultersFilters from './DefaultersFilters';
+import { INVOICE_STATUS_MAPPING, INVOICE_TYPE, STATUS_MAPPING } from './DefaultersFilters/constants';
 import styles from './styles.module.css';
-
-const invoiceType = {
-	REIMBURSEMENT : '#FEF1DF',
-	CREDIT_NOTE   : '#D9EAFD',
-	INVOICE       : '#CDF7D4',
-};
-
-const statusMapping = {
-	UNPAID           : '#FEF1DF',
-	'PARTIALLY PAID' : '#D9EAFD',
-	PAID             : '#CDF7D4',
-};
-
-const invoiceStatusMapping = {
-	DRAFT            : '#fcedbf',
-	POSTED           : '#a1f0ae',
-	FINANCE_ACCEPTED : '#CDF7D4',
-	CONSOLIDATED     : '#D9EAFD',
-	IRN_GENERATED    : '#b8debe',
-	IRN_FAILED       : '#F89880',
-	FAILED           : '#f9b498',
-	IRN_CANCELLED    : '#fbc5b0',
-	FINANCE_REJECTED : '#f9ac98',
-};
 
 interface GlobalInterface {
 	page?:number,
@@ -50,9 +27,9 @@ interface GlobalInterface {
 	cogoEntity?: string,
 	invoiceStatus?: string,
 	status?: string,
-	services?: string[] | string,
-	invoiceDate?: { startDate?: string, endDate?: string },
-	dueDate?: { startDate?: string, endDate?: string },
+	services?: string[],
+	invoiceDate?: { startDate?: Date, endDate?: Date },
+	dueDate?: { startDate?: Date, endDate?: Date },
 	currency?: string,
 	zone?:string,
 }
@@ -74,7 +51,7 @@ function Defaulters() {
 
 	useEffect(() => {
 		const {
-			migrated, cogoEntity, invoiceStatus, status, services, invoiceDate, dueDate, currency, zone,
+			migrated, cogoEntity, invoiceStatus, status, services, invoiceDate, dueDate, currency,
 		} = globalFilters || {};
 
 		const isFilterApplied = String(migrated)?.length > 0 || cogoEntity?.length > 0
@@ -97,7 +74,6 @@ function Defaulters() {
 		});
 
 		setIsClear(true);
-		// refetch();
 	};
 
 	const functions = {
@@ -136,7 +112,7 @@ function Defaulters() {
 						</div>
 					)}
 				<div>
-					<Pill size="sm" color={invoiceType[(row?.invoiceType as string)]}>
+					<Pill size="sm" color={INVOICE_TYPE[(row?.invoiceType as string)]}>
 
 						{row?.eInvoicePdfUrl ? 'E INVOICE' : startCase(row?.invoiceType)}
 
@@ -162,11 +138,11 @@ function Defaulters() {
 				<div
 					className={styles.styled_pills}
 					style={{
-						'--color': statusMapping[row?.status],
+						'--color': STATUS_MAPPING[row?.status],
 					} as CSSProperties}
 				>
 
-					{startCase(row?.status)?.length > 10 ? (
+					{row?.status?.length > 10 ? (
 						<Tooltip
 							interactive
 							placement="top"
@@ -217,12 +193,25 @@ function Defaulters() {
 		),
 		showInvoiceDate: (row) => (
 			<div>
-				<div>{format(row?.invoiceDate, 'dd MMM yy', {}, false)}</div>
+				<div>
+					{formatDate({
+						date       : row?.invoiceDate,
+						dateFormat : 'dd MMM yy',
+						formatType : 'date',
+					})}
+
+				</div>
 			</div>
 		),
 		showDueDate: (row) => (
 			<div>
-				<div>{format(row?.dueDate, 'dd MMM yy', {}, false)}</div>
+				<div>
+					{formatDate({
+						date       : row?.dueDate,
+						dateFormat : 'dd MMM yy',
+						formatType : 'date',
+					})}
+				</div>
 			</div>
 		),
 		showProformaStatus: (row) => (
@@ -230,12 +219,12 @@ function Defaulters() {
 			<div
 				className={styles.styled_pills}
 				style={{
-					'--color': invoiceStatusMapping[row?.invoiceStatus],
+					'--color': INVOICE_STATUS_MAPPING[row?.invoiceStatus],
 				} as CSSProperties}
 			>
 				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
 					<div>
-						{startCase(row?.invoiceStatus).length > 10 ? (
+						{row?.invoiceStatus?.length > 10 ? (
 							<Tooltip
 								interactive
 								placement="top"
@@ -275,7 +264,7 @@ function Defaulters() {
 
 		),
 		showActions: (row) => (
-			<div style={{ display: 'flex', alignItems: 'center' }}>
+			<div className={styles.show_actions}>
 				<Remarks itemData={row} />
 				<InvoiceDetails
 					item={row}

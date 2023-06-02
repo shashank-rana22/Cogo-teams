@@ -59,3 +59,27 @@ export const CURRENCY = Object.keys(GLOBAL_CONSTANTS.currency_code)?.map((curren
 	label : currency,
 	value : GLOBAL_CONSTANTS.currency_code[currency],
 }));
+
+export const INVOICE_TYPE = {
+	REIMBURSEMENT : '#FEF1DF',
+	CREDIT_NOTE   : '#D9EAFD',
+	INVOICE       : '#CDF7D4',
+};
+
+export const STATUS_MAPPING = {
+	UNPAID           : '#FEF1DF',
+	'PARTIALLY PAID' : '#D9EAFD',
+	PAID             : '#CDF7D4',
+};
+
+export const INVOICE_STATUS_MAPPING = {
+	DRAFT            : '#fcedbf',
+	POSTED           : '#a1f0ae',
+	FINANCE_ACCEPTED : '#CDF7D4',
+	CONSOLIDATED     : '#D9EAFD',
+	IRN_GENERATED    : '#b8debe',
+	IRN_FAILED       : '#F89880',
+	FAILED           : '#f9b498',
+	IRN_CANCELLED    : '#fbc5b0',
+	FINANCE_REJECTED : '#f9ac98',
+};

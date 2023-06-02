@@ -1,6 +1,6 @@
 const headerStyle = {
 	borderRadius : '8px 8px 0px 0px',
-	borderBottom : '2px solid #F68B21',
+	borderBottom : '2px solid var(--color-accent-orange-2)',
 	background   : 'white',
 	color        : 'black',
 	marginTop    : '20px',
