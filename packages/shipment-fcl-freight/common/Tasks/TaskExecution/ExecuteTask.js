@@ -14,6 +14,7 @@ import {
 	ChooseServiceProvider,
 	UploadDraftBL,
 	AmendDraftBl,
+	UploadSI,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -165,6 +166,20 @@ function ExecuteTask({
 				task={task}
 				refetch={taskListRefetch}
 				onCancel={onCancel}
+			/>
+		);
+	}
+
+	if (
+		task.task === 'upload_si'
+		&& primary_service?.trade_type === 'export'
+	) {
+		return (
+			<UploadSI
+				pendingTask={task}
+				onCancel={onCancel}
+				services={servicesList}
+				refetch={taskListRefetch}
 			/>
 		);
 	}

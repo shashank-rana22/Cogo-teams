@@ -68,6 +68,7 @@ function List() {
 								task={task}
 								handleClick={handleClick}
 								loading={loading}
+								tasksList={tasksList}
 							/>
 						)) : null}
 
@@ -78,6 +79,7 @@ function List() {
 									handleClick={handleClick}
 									isTaskOpen
 									loading={loading}
+									tasksList={tasksList}
 								/>
 
 								<TaskExecution

@@ -7,3 +7,4 @@ export { default as UploadContainerDetails } from './UpdateContainerDetails';
 export { default as NominationTask } from './NominationTask';
 export { default as GenerateFreightCertificate } from './GenerateFreightCertificate';
 export { default as AmendDraftBl } from './AmendDraftBl';
+export { default as UploadSI } from './UploadSI';
