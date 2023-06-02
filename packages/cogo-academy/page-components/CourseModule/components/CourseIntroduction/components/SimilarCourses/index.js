@@ -23,7 +23,7 @@ function SimilarCourses({ course_details }) {
 
 	const { query, debounceQuery } = useDebounceQuery();
 
-	const { HANDLE_CLICK_MAPPINGS } = HANDLE_CLICK_MAPPING();
+	const HANDLE_CLICK_MAPPINGS = HANDLE_CLICK_MAPPING({ router });
 
 	const topics = [];
 	course_details?.faq_topics?.map((item) => (

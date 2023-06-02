@@ -1,9 +1,8 @@
 import { Carousel } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../commons/EmptyState';
 import LoadingState from '../../../../commons/LoadingState';
@@ -14,10 +13,10 @@ import CourseCard from '../../../CourseCard';
 
 import styles from './styles.module.css';
 
-function RecommendedComponents({ user_id }) {
-	const { HANDLE_CLICK_MAPPINGS } = HANDLE_CLICK_MAPPING();
-
+function RecommendedComponents({ user_id, ongoingCategories }) {
 	const router = useRouter();
+
+	const HANDLE_CLICK_MAPPINGS = HANDLE_CLICK_MAPPING({ router });
 
 	const [activeTab, setActiveTab] = useState('');
 
@@ -33,9 +32,15 @@ function RecommendedComponents({ user_id }) {
 		},
 	});
 
+	console.log('ongoingCategories', ongoingCategories);
+
 	const { data = {}, loading } = useListCourseUserMappings({ activeTab, params, query });
 
-	if (loading) {
+	// useEffect(() => {
+
+	// },[])
+
+	if (loading && !ongoingCategories.loaded) {
 		return <LoadingState rowsCount={7} />;
 	}
 

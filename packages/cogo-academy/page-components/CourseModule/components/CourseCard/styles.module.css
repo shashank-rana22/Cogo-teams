@@ -1,3 +1,5 @@
+/* stylelint-disable value-no-vendor-prefix */
+
 .container {
 	width: 300px;
 	height: 384px;
@@ -83,7 +85,7 @@
 }
 
 .description {
-	display: box;
+	display: -webkit-box;
 	max-width: 268px;
 	height: 40px;
 	margin-bottom: 8px;

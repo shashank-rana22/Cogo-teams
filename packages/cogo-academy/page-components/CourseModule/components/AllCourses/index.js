@@ -53,7 +53,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 		page,
 	});
 
-	const { HANDLE_CLICK_MAPPINGS } = HANDLE_CLICK_MAPPING();
+	const HANDLE_CLICK_MAPPINGS = HANDLE_CLICK_MAPPING({ router });
 
 	if (loading) {
 		return <LoadingState rowsCount={7} />;
