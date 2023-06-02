@@ -1,6 +1,7 @@
 import { Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMProfile } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -86,7 +87,11 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 						item?.requested_on ? (
 							<div className={styles.secondary_tag}>
 								Requested on :
-								{format(item?.requested_on, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
+								{formatDate({
+									date       : item?.requested_on,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})}
 							</div>
 						) : null
 					}
