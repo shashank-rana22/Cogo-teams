@@ -62,7 +62,7 @@ const useTdsSettlement = ({
 						accMode: active,
 						orgId,
 
-						startDate: dateValue ? formatDate({
+						startDate: Object.keys(dateValue).length > 0 ? formatDate({
 							date       : JSON.parse(dateValue)?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
@@ -70,7 +70,7 @@ const useTdsSettlement = ({
 							separator  : ' ',
 						}) : undefined,
 
-						endDate: dateValue ? formatDate({
+						endDate: Object.keys(dateValue).length > 0 ? formatDate({
 							date       : JSON.parse(dateValue)?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
@@ -96,7 +96,7 @@ const useTdsSettlement = ({
 						orgId,
 						accMode: active,
 
-						startDate: dateValue ? formatDate({
+						startDate: Object.keys(dateValue).length > 0 ? formatDate({
 							date       : JSON.parse(dateValue)?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
@@ -104,7 +104,7 @@ const useTdsSettlement = ({
 							separator  : ' ',
 						}) : undefined,
 
-						endDate: dateValue ? formatDate({
+						endDate: Object.keys(dateValue).length > 0 ? formatDate({
 							date       : JSON.parse(dateValue)?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
