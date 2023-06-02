@@ -1,13 +1,3 @@
-const editParamsStakeholders = {
-	booking_agent: {
-		idToMatch: 'importer_exporter_id',
-	},
-	consignee_shipper_booking_agent: {
-		idToMatch: 'consignee_shipper_id',
-	},
-	superadmin: {},
-};
-
 const controlsEditableConditions = [
 	{
 		state      : ['confirmed_by_service_provider'],
@@ -29,7 +19,7 @@ function getShowCondition(shipment_data, conditions) {
 	return Object.entries(conditions).some(([key, value]) => value.includes(shipment_data[key]));
 }
 
-export default function getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder }) {
+export default function getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig }) {
 	if (`${shipment_data?.shipment_type}_service` !== serviceData?.service_type) {
 		return false;
 	}
@@ -38,9 +28,9 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return true;
 	}
 
-	let userCanEdit = activeStakeholder in editParamsStakeholders;
-	if (userCanEdit && editParamsStakeholders[activeStakeholder]?.idToMatch) {
-		const idToMatch = shipment_data[editParamsStakeholders[activeStakeholder].idToMatch];
+	let userCanEdit = !!stakeholderConfig?.edit_params?.can_edit;
+	if (userCanEdit && stakeholderConfig?.edit_params?.idToMatch) {
+		const idToMatch = shipment_data[stakeholderConfig?.edit_params?.idToMatch];
 		userCanEdit = idToMatch === serviceData?.importer_exporter?.id;
 	}
 

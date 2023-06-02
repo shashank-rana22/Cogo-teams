@@ -1,7 +1,8 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useEffect, useCallback } from 'react';
+import { useContext, useEffect, useCallback } from 'react';
 
 const STAKEHOLDER_MAPPINGS = {
 	booking_desk  : 'service_ops',
@@ -15,11 +16,11 @@ function useListTasks({
 	defaultFilters = {},
 	defaultParams = {},
 	showMyTasks = true,
-	activeStakeholder,
 }) {
 	const { profile } = useSelector((state) => state);
 
 	const user_id = profile?.user?.id;
+	const { activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const stakeholder = STAKEHOLDER_MAPPINGS[activeStakeholder] || '';
 

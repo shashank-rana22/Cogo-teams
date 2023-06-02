@@ -17,7 +17,7 @@ import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
 function List({ isSeller = false }) {
-	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(
+	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
 		ShipmentDetailContext,
 	);
 
@@ -58,6 +58,7 @@ function List({ isSeller = false }) {
 
 						return (
 							<ItemAdded
+								key={serviceListItem?.id}
 								item={serviceListItem}
 								status={status}
 								showIp={showModal === 'ip'}
@@ -66,8 +67,8 @@ function List({ isSeller = false }) {
 									serviceListItem,
 									setShowModal,
 									setItem,
+									stakeholderConfig,
 									shipment_data,
-									activeStakeholder,
 								})}
 								refetch={handleRefetch}
 								services={servicesList}
@@ -78,30 +79,28 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
-			{totalCount > 8
-				? (
-					<div className={styles.show_more}>
-						{pageLimit > 8
-							? 	(
-								<Button
-									size="md"
-									themeType="link"
-									onClick={() => setPageLimit(8)}
-								>
-									Show Less
-								</Button>
-							) : (
-								<Button
-									size="md"
-									themeType="link"
-									onClick={() => setPageLimit(16)}
-								>
-									Show More
-								</Button>
-							)}
-					</div>
-				)
-				: null}
+			{totalCount > 8 ? (
+				<div className={styles.show_more}>
+					{pageLimit > 8
+						? 	(
+							<Button
+								size="md"
+								themeType="link"
+								onClick={() => setPageLimit(8)}
+							>
+								Show Less
+							</Button>
+						) : (
+							<Button
+								size="md"
+								themeType="link"
+								onClick={() => setPageLimit(16)}
+							>
+								Show More
+							</Button>
+						)}
+				</div>
+			) : null}
 
 			{additionalServiceList?.length ? (
 				<div className={styles.info_container}>
@@ -122,48 +121,45 @@ function List({ isSeller = false }) {
 				</Button>
 			</div>
 
-			{showModal === 'add_sell_price'
-				&& (
-					<Modal
-						size="lg"
-						show
-						onClose={() => setShowModal(false)}
-						closeOnOuterClick={false}
-						showCloseIcon={!updateResponse.loading}
-					>
-						<Modal.Header title="Add Sell Price" />
-						<Modal.Body>
-							<AddRate
-								item={item?.serviceListItem}
-								status={item?.status}
-								setAddSellPrice={setShowModal}
-								updateResponse={updateResponse}
-								source="add_sell_price"
-							/>
-						</Modal.Body>
-					</Modal>
-				)}
+			{showModal === 'add_sell_price' && (
+				<Modal
+					size="lg"
+					show
+					onClose={() => setShowModal(false)}
+					closeOnOuterClick={false}
+					showCloseIcon={!updateResponse.loading}
+				>
+					<Modal.Header title="Add Sell Price" />
+					<Modal.Body>
+						<AddRate
+							item={item?.serviceListItem}
+							status={item?.status}
+							setAddSellPrice={setShowModal}
+							updateResponse={updateResponse}
+							source="add_sell_price"
+						/>
+					</Modal.Body>
+				</Modal>
+			)}
 
-			{showModal === 'ip'
-				&& (
-					<AddIp
-						shipmentData={shipment_data}
-						setShowIp={setShowModal}
-						updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
-					/>
-				)}
+			{showModal === 'ip' && (
+				<AddIp
+					shipmentData={shipment_data}
+					setShowIp={setShowModal}
+					updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
+				/>
+			)}
 
-			{showModal === 'charge_code'
-				&& (
-					<AddService
-						shipmentId={shipment_data?.id}
-						services={servicesList}
-						isSeller={isSeller}
-						refetch={refetch}
-						setItem={setItem}
-						setShowChargeCodes={setShowModal}
-					/>
-				)}
+			{showModal === 'charge_code' && (
+				<AddService
+					shipmentId={shipment_data?.id}
+					services={servicesList}
+					isSeller={isSeller}
+					refetch={refetch}
+					setItem={setItem}
+					setShowChargeCodes={setShowModal}
+				/>
+			)}
 
 		</div>
 	);
