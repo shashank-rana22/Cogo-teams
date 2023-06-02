@@ -1,6 +1,8 @@
 import { Button } from '@cogoport/components';
 
 import getChapter from '../../utils/getChapter';
+import isLastChapter from '../../utils/isLastChapter';
+import notCompletedChapter from '../../utils/notCompletedChapter';
 
 import styles from './styles.module.css';
 
@@ -10,7 +12,6 @@ function Footer({
 }) {
 	return (
 		<div className={styles.container}>
-			<Button size="md" themeType="tertiary">Schedule Time to Begin</Button>
 
 			<div className={styles.btn_container}>
 
@@ -20,13 +21,22 @@ function Footer({
 						themeType="accent"
 						loading={loading}
 						onClick={async () => {
-							const nextChapterContent = getChapter({
-								data,
-								indexes,
-								state: 'next',
-								setIndexes,
-								setChapter,
-							});
+							const nextChapterContent = isLastChapter(data, indexes)
+								? notCompletedChapter(data, indexes, setIndexes) : await getChapter({
+									data,
+									indexes,
+									state: 'next',
+									setIndexes,
+									setChapter,
+								});
+
+							// const nextChapterContent = getChapter({
+							// 	data,
+							// 	indexes,
+							// 	state: 'next',
+							// 	setIndexes,
+							// 	setChapter,
+							// });
 
 							await updateCourseProgress({
 
@@ -46,15 +56,16 @@ function Footer({
 							themeType="secondary"
 							loading={loading}
 							onClick={async () => {
-								const nextChapterContent = await getChapter({
-									data,
-									indexes,
-									state: 'next',
-									setIndexes,
-									setChapter,
-								});
+								const nextChapterContent = isLastChapter(data, indexes)
+									? notCompletedChapter(data, indexes, setIndexes) : await getChapter({
+										data,
+										indexes,
+										state: 'next',
+										setIndexes,
+										setChapter,
+									});
 
-								const { id, user_progress_state } = nextChapterContent;
+								const { id, user_progress_state } = nextChapterContent || {};
 
 								await updateCourseProgress({
 									next_chapter_id: id,
@@ -84,15 +95,16 @@ function Footer({
 									return;
 								}
 
-								const nextChapterContent = await getChapter({
-									data,
-									indexes,
-									state: 'next',
-									setIndexes,
-									setChapter,
-								});
+								const nextChapterContent = isLastChapter(data, indexes)
+									? notCompletedChapter(data, indexes, setIndexes) : await getChapter({
+										data,
+										indexes,
+										state: 'next',
+										setIndexes,
+										setChapter,
+									});
 
-								const { id, user_progress_state } = nextChapterContent;
+								const { id, user_progress_state } = nextChapterContent || {};
 
 								await updateCourseProgress({
 									current_chapter_id,

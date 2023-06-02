@@ -33,8 +33,8 @@ export function Footer({ course_id, user_id, data = {} }) {
 					onClick={() => {
 						router.push(`/learning/course/${course_id}`);
 						updateCourseProgress({
-							next_chapter_id: data?.course_modules[0]
-								?.course_sub_modules[0]?.course_sub_module_chapters[0].id,
+							next_chapter_id: data?.course_modules?.[0]
+								.course_sub_modules?.[0].course_sub_module_chapters?.[0].id,
 
 							next_chapter_state: 'ongoing',
 						});
