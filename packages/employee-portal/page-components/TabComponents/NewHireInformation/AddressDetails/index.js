@@ -30,7 +30,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 
 	const id = info?.detail?.id;
 
-	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
+	const { updateEmployeeDetails, loading } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
 	const onSubmit = (values) => {
 		updateEmployeeDetails({ data: values, formType: 'address_details' });
@@ -159,6 +159,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 				size="md"
 				type="button"
 				className={styles.button}
+				loading={loading}
 				onClick={
 					handleSubmit(onSubmit)
 					}

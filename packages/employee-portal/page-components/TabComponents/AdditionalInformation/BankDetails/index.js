@@ -20,7 +20,7 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 
 	const { id } = detail || {};
 
-	const { createEmployeeBankDetails } = useCreateEmployeeBankDetails({ bank_details, getEmployeeDetails });
+	const { loading, createEmployeeBankDetails } = useCreateEmployeeBankDetails({ bank_details, getEmployeeDetails });
 
 	const removeTypeField = (controlItem) => {
 		const { type, ...rest } = controlItem;
@@ -78,6 +78,7 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 				size="md"
 				type="button"
 				className={styles.button}
+				loading={loading}
 				onClick={
 						handleSubmit(onSubmit)
 					}

@@ -5,7 +5,7 @@ import { IcMDocument, IcMEyeopen } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-const getColumns = ({ onClickViewDocument,setShowModal = () => {} }) => [
+const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
 	{
 		Header   : 'DOCUMENT TYPE',
 		accessor : (item) => (

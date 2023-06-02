@@ -31,7 +31,7 @@ function IdentificationDocuments({ data, getEmployeeDetails }) {
 
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
-	const { createEmployeeDocument } = useCreateEmployeeDocument({ documents, getEmployeeDetails });
+	const { loading, createEmployeeDocument } = useCreateEmployeeDocument({ documents, getEmployeeDetails });
 
 	const { data: info } = useGetEmployeeDetails({});
 
@@ -146,6 +146,7 @@ function IdentificationDocuments({ data, getEmployeeDetails }) {
 					type="button"
 					className={styles.button}
 					onClick={handleSubmit(onSubmit)}
+					loading={loading}
 				>
 					Save
 				</Button>
