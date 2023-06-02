@@ -13,7 +13,7 @@ function useListCourseUserMappings({ user_id, ongoingCategories, inputValue }) {
 			trigger({
 				params: {
 					filters: {
-						staus              : 'active',
+						status             : 'active',
 						user_id,
 						course_category_id : ongoingCategories.data,
 						q                  : inputValue,
