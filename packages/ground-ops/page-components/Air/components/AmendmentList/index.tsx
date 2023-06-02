@@ -68,27 +68,36 @@ function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setG
 				})}
 			</div>
 		),
-		handleDownload: (singleItem) => (
-			<Button
-				themeType="linkUi"
-				style={{ fontSize: 12 }}
-				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { handleClickOnDownload(singleItem.documentUrl); }
-					: () => { handleDownloadMAWB(singleItem?.documentData); }}
-			>
-				<IcMEyeopen fill="#8B8B8B" />
+		handleDownload: (singleItem) => {
+			const { documentData = {}, awbNumber, documentState, documentType } = singleItem || {};
 
-			</Button>
-		),
+			const docData = { ...documentData, awbNumber, documentState, documentType };
+
+			return (
+				<Button
+					themeType="linkUi"
+					style={{ fontSize: 12 }}
+					onClick={singleItem?.documentData?.status === 'uploaded'
+						? () => { handleClickOnDownload(singleItem.documentUrl); }
+						: () => { handleDownloadMAWB(docData); }}
+				>
+					<IcMEyeopen fill="#8B8B8B" />
+
+				</Button>
+			);
+		},
 		handleEdit: (singleItem) => {
-			const { documentData = {} } = singleItem || {};
+			const { documentData = {}, awbNumber, documentState, documentType, serialId } = singleItem || {};
+
+			const docData = { ...documentData, awbNumber, documentState, documentType, serialId };
+
 			return (
 				<Button
 					themeType="linkUi"
 					style={{ fontSize: 12 }}
 					onClick={documentData?.status === 'uploaded'
-						? () => { setShowUpload(documentData); setEdit('edit'); }
-						: () => { handleEditMAWB(documentData, 'edit'); }}
+						? () => { setShowUpload(docData); setEdit('edit'); }
+						: () => { handleEditMAWB(docData, 'edit'); }}
 				>
 					<IcMEdit fill="#8B8B8B" />
 				</Button>
