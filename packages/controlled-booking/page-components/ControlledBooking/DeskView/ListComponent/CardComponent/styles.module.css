@@ -75,15 +75,15 @@
 	font-size: 12px;
 	color: #4f4f4f;
 	border: 0.5px solid #4f4f4f;
-	border-radius: 6px ;
+	border-radius: 6px;
 }
 
 .business_name {
 	max-width: 80%;
 	overflow: hidden;
 	font-size: 16;
-	white-space: nowrap;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .primary_text {
@@ -95,8 +95,8 @@
 	overflow: hidden;
 	font-size: 12px;
 	color: #828282;
-	white-space: nowrap;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .secondary_text {
@@ -105,8 +105,8 @@
 	margin-left: 4px;
 	overflow: hidden;
 	color: #4f4f4f;
-	white-space: nowrap;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .take_actions {

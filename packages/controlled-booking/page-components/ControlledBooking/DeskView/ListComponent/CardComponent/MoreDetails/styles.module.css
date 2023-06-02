@@ -105,6 +105,6 @@
 	max-width: 200px;
 	margin-left: 4px;
 	overflow: hidden;
-	white-space: nowrap;
 	text-overflow: ellipsis;
+	white-space: nowrap;
 }
