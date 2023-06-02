@@ -1,4 +1,3 @@
-import { Loader } from '@cogoport/components';
 import React, { ReactNode } from 'react';
 
 import { FieldType, FunctionObjects, NestedObj } from '../Interfaces';
@@ -10,7 +9,6 @@ export interface Props {
 	fields: FieldType[];
 	singleitem?: NestedObj;
 	functions?: FunctionObjects;
-	loading?: boolean;
 	isMobile?: boolean;
 }
 
@@ -20,7 +18,6 @@ function CardItem({
 	fields,
 	singleitem,
 	functions = {},
-	loading = false,
 	isMobile = false,
 }:Props) {
 	return (

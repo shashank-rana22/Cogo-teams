@@ -19,7 +19,7 @@ function AddAwbNumber({
 	page,
 }) {
 	const [serviceProviderData, setServiceProviderData] = useState({});
-	const [isTopAirlines, setIsTopAirlines] = useState(true);
+
 	const { createAwbNumber, loading } = useCreateAwbNumber(
 		setShow,
 		awbList,
@@ -33,7 +33,6 @@ function AddAwbNumber({
 	const { control, handleSubmit, setValue, watch, formState:{ errors } } = useForm();
 
 	const fields = awbControls({
-		isTopAirlines,
 		setServiceProviderData,
 		serviceProviderData,
 	});
@@ -56,10 +55,6 @@ function AddAwbNumber({
 			setValue('first_awb_number', data);
 		}
 	}, [data]);
-
-	useEffect(() => {
-		setIsTopAirlines(false);
-	}, []);
 
 	useEffect(() => {
 		let awbNumber = firstAwbNumber;

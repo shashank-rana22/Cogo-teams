@@ -49,7 +49,6 @@ function List({
 					singleitem={singleitem}
 					fields={fields}
 					functions={functions}
-					loading={loading}
 					isMobile={isMobile}
 				/>
 			));

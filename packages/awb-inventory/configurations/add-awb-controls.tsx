@@ -1,7 +1,6 @@
 import checkValidation from '../helper/checkValidation';
 
 const awbControls = ({
-	isTopAirlines,
 	setServiceProviderData,
 	serviceProviderData,
 }) => [
