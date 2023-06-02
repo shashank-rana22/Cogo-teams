@@ -1,8 +1,8 @@
 import { isEmpty } from '@cogoport/utils';
 
 import useUpdateTicketActivity from '../../hooks/useUpdateTicketActivity';
+import EmptyTicket from '../EmptyTicket';
 
-import EmptyStateTicketStructure from './EmptyStateTicketStructure';
 import styles from './styles.module.css';
 import TicketStructureBody from './TicketStructureBody';
 import TicketStructureLoader from './TicketStructureLoader';
@@ -19,11 +19,7 @@ function TicketStructure({
 		refreshTickets,
 	});
 
-	if (isEmpty(data) && !loading) {
-		return (
-			<EmptyStateTicketStructure label={label} />
-		);
-	}
+	if (isEmpty(data) && !loading) return <EmptyTicket emptyText={`No ${label} Tickets`} />;
 
 	return (
 		<div
