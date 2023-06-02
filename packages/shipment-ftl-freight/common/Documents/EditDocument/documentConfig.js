@@ -5,7 +5,7 @@ export const documentType = [
 		name        : 'document_type',
 		placeholder : 'Document Type',
 		type        : 'select',
-		span        : 8,
+		span        : 6,
 		label       : 'Document Type',
 		options     : [
 			{ label: 'Eway Bill', value: 'ftl_eway_bill_copy' },
@@ -91,7 +91,7 @@ export const invoiceDocumentControls = (obj) => [
 			{
 				drag  : true,
 				name  : 'url',
-				span  : 11,
+				span  : 12,
 				type  : 'file',
 				label : 'Document',
 				rules : {
@@ -100,14 +100,6 @@ export const invoiceDocumentControls = (obj) => [
 						message : 'This is required',
 					},
 				},
-				accept:
-						'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-				showLabel     : false,
-				themeType     : 'secondary',
-				isShipment    : true,
-				uploadIcon    : 'ic-upload',
-				uploadType    : 'aws',
-				document_type : 'ftl_commercial_invoice',
 			},
 		],
 		showButtons      : false,
@@ -153,7 +145,7 @@ export const ewayBillControls = (obj) => [
 			{
 				drag  : true,
 				name  : 'url',
-				span  : 11,
+				span  : 12,
 				type  : 'file',
 				label : 'Document',
 				rules : {
@@ -162,14 +154,6 @@ export const ewayBillControls = (obj) => [
 						message : 'This is required',
 					},
 				},
-				accept:
-						'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-				showLabel     : false,
-				themeType     : 'secondary',
-				isShipment    : true,
-				uploadIcon    : 'ic-upload',
-				uploadType    : 'aws',
-				document_type : 'ftl_eway_bill_copy',
 			},
 		],
 		showButtons      : false,

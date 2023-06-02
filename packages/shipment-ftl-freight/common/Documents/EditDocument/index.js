@@ -3,11 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/surface-modules';
 import React from 'react';
 
-import {
-	documentType,
-	invoiceDocumentControls,
-	ewayBillControls,
-} from './documentConfig';
+import { documentType, invoiceDocumentControls, ewayBillControls } from './documentConfig';
 import styles from './styles.module.css';
 import useBulkUpdateShipmentService from './useBulkUpdateShipmentService';
 import useCreateShipmentDocument from './useCreateShipmentDocument';
@@ -34,17 +30,23 @@ function EditDocument({
 	});
 	const invoiceControls = invoiceDocumentControls(obj);
 	const ewayControls = ewayBillControls(obj);
+
 	const {
 		control,
 		formState: { errors },
 		handleSubmit,
 		watch,
-	} = useForm();
+	} = useForm({
+		defaultValues: {
+			upload_ftl_commercial_invoice : [{}],
+			upload_ftl_eway_bill_copy     : [{}],
+		},
+	});
 
 	const watchDocumentType = watch('document_type');
 
 	const onSubmit = async (values) => {
-		const serviceData =			watchDocumentType === 'ftl_eway_bill_copy'
+		const serviceData =	watchDocumentType === 'ftl_eway_bill_copy'
 			? values?.upload_ftl_eway_bill_copy || []
 			: values?.upload_ftl_commercial_invoice || [];
 
@@ -96,7 +98,7 @@ function EditDocument({
 
 		<Modal
 			show={showEdit}
-			size="md"
+			size="lg"
 			onClose={() => setShowEdit(false)}
 		>
 			<Modal.Header title="Edit Document" />
