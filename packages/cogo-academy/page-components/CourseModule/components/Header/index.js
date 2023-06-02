@@ -43,8 +43,6 @@ function Header({ loading, courseCategories, currentCategory, setCurrentCategory
 				/>
 
 				<div className={styles.profile}>
-					{/* <IcMProfile width={18} height={18} />
-					<h4 className={styles.centered}>Hi, Levi</h4> */}
 					<Button
 						themeType="tertiary"
 						onClick={() => setShowErrorModal(true)}

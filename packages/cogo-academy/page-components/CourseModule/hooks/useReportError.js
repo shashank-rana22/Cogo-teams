@@ -2,12 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
 
 const useReportError = () => {
-	const { partner = '' }	 = useSelector((state) => state?.profile || {});
-
 	const { handleSubmit, control, watch, formState: { errors } } = useForm();
 
 	const [{ loading : feedbackLoading }, trigger] = useRequest({
@@ -24,9 +20,13 @@ const useReportError = () => {
 			template_name : 'api_error_request_response',
 			provider_name : 'cogoport',
 			variables     : {
-				description : values?.description,
-				image_url   : values?.error_screenshot_url?.finalUrl,
-				status_code : 1,
+				description       : values?.description,
+				image_url         : values?.error_screenshot_url?.finalUrl,
+				status_code       : 1,
+				session_data      : '',
+				requested_payload : '',
+				api_response      : '',
+				api_curl          : '',
 			},
 		};
 
@@ -34,8 +34,6 @@ const useReportError = () => {
 			await trigger({
 				data: payload,
 			});
-
-			fetch();
 		} catch (error) {
 			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}

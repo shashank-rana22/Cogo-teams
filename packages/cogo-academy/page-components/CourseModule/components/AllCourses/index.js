@@ -85,10 +85,10 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 						Mandatory
 					</div>
 
-					<FilterPopover
+					{/* <FilterPopover
 						filters={filters}
 						setFilters={setFilters}
-					/>
+					/> */}
 
 				</div>
 			</div>
