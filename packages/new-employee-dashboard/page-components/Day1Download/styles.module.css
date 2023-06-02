@@ -1,34 +1,31 @@
 .container {
-	padding: 20px;
+  padding: 20px 20px 20px 0;
 }
 
 .text_editor {
-	/* margin:30px 0px 0px 0px; */
-	width: 70%;
+  width: 70%;
 }
 
 .header {
-	font-size: 16px;
-	font-weight: 700;
+  font-size: 16px;
+  font-weight: 700;
 }
 
 .content {
-	padding-right: 50px;
-	margin: 10px;
-	font-size: 13px;
-	line-height: 24px;
+  padding-right: 50px;
+  margin: 10px;
+  font-size: 13px;
+  line-height: 24px;
 }
 
 .text_editor_header {
-	margin: 30px 0 10px;
-
-	/* font-weight: 600; */
-	color: #4f4f4f;
+  margin: 0 0 10px;
+  color: #4f4f4f;
 }
 
 .button_wrapper {
-	display: flex;
-	justify-content: flex-end;
-	width: 70%;
-	padding-top: 10px;
+  display: flex;
+  justify-content: flex-end;
+  width: 70%;
+  padding-top: 10px;
 }
