@@ -285,3 +285,10 @@ export const ICON_MAPPING = {
 };
 
 export const STRING_TO_ARRAY_REGEX = /'/g;
+
+export const API_MAPPING = {
+	whatsapp      : '/create_communication',
+	platform_chat : '/create_communication_platform_chat',
+	telegram      : '/create_communication',
+	zalo          : '/create_communication',
+};
