@@ -38,6 +38,7 @@ function IdentificationDocuments({ mainApiLoading, profileData, getEmployeeDetai
 					if (IDENTIFICATION_DOCUMENT_EXCLUSION_LIST.includes(document_type)) {
 						return null;
 					}
+
 					return (
 						<div className={styles.card_wrapper} key={id}>
 							<div className={styles.tick_content}>

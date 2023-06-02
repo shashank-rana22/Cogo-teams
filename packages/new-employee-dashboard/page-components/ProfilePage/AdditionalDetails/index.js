@@ -6,7 +6,7 @@ import EmploymentHistory from './EmploymentHistory';
 import Resume from './Resume';
 import styles from './styles.module.css';
 
-function AdditionalDetails({ profileData }) {
+function AdditionalDetails({ profileData, getEmployeeDetailsLoading }) {
 	const data = [
 		{ title: 'EMPLOYMENT HISTORY', content: EmploymentHistory },
 		{ title: 'EDUCATIONAL QUALIFICATION', content: EducationalQualifications },
@@ -28,7 +28,10 @@ function AdditionalDetails({ profileData }) {
 							type="text"
 							title={item.title}
 						>
-							<Component profileData={profileData} />
+							<Component
+								profileData={profileData}
+								getEmployeeDetailsLoading={getEmployeeDetailsLoading}
+							/>
 
 							{' '}
 

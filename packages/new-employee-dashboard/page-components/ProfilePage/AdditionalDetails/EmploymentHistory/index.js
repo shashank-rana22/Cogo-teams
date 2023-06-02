@@ -3,10 +3,11 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import CommonLoader from '../../../../common/Loader';
 
 import styles from './styles.module.css';
 
-function EmploymentHistory({ profileData }) {
+function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 	const { detail } = profileData || {};
 	const { employee_experience_details = [] } = detail || {};
 
@@ -54,22 +55,26 @@ function EmploymentHistory({ profileData }) {
 						Description
 					</div>
 					<div className={styles.value}>
-						{description}
+						{description || '-'}
 					</div>
 				</div>
 
 				<div className={styles.label_value_container}>
 					<div className={styles.label}>
-						Courses
+						Skills
 					</div>
 					<div className={styles.skills_value}>
-						{renderSkills({ skills })}
+						{!isEmpty(skills) ? renderSkills({ skills }) : '-'}
 					</div>
 				</div>
 
 			</div>
 		);
 	});
+
+	if (getEmployeeDetailsLoading) {
+		return <CommonLoader />;
+	}
 
 	if (isEmpty(employee_experience_details)) {
 		return <EmptyState emptyText="Employment history not found" />;
