@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { Layout } from '@cogoport/ocean-modules';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
-import FormLayout from '../helpers/Layout';
 import getDefaultValues from '../utils/get-default-values';
 
 import controls from './controls';
@@ -81,7 +81,7 @@ function UploadAmendDoc({
 				</div>
 			</div>
 
-			<FormLayout control={control} fields={allControls} errors={errors} />
+			<Layout control={control} fields={allControls} errors={errors} />
 			<div className={styles.button_wrap}>
 				<Button
 					onClick={handleSubmit(handleSubmitFinal)}

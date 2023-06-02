@@ -1,0 +1,26 @@
+.order_container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+	background-color: #fffce6;
+	border-radius: 4px;
+}
+
+.img_styles {
+	width: 40%;
+	height: 100%;
+	margin-right: 5px;
+	border-radius: 4px 0 0 4px;
+}
+
+.order_icon {
+	width: 16px;
+	height: 16px;
+	margin-left: 15px;
+}
+
+.items {
+	margin-left: 3px;
+	font-size: 14px;
+	color: #000;
+}
