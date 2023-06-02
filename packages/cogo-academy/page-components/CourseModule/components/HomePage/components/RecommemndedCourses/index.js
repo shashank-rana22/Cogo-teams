@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 import EmptyState from '../../../../commons/EmptyState';
 import LoadingState from '../../../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../../../configs/BUTTON_CONTENT_MAPPING';
-import HANDLE_CLICK_MAPPING from '../../../../configs/HANDLE_CLICK_MAPPING';
+import GET_LINK_MAPPING from '../../../../configs/GET_LINK_MAPPING';
 import CourseCard from '../../../CourseCard';
 
 import styles from './styles.module.css';
@@ -14,7 +14,7 @@ import useListCourseUserMappings from './useListCourseUserMappings';
 function RecommendedComponents({ user_id, ongoingCategories, inputValue }) {
 	const router = useRouter();
 
-	const HANDLE_CLICK_MAPPINGS = HANDLE_CLICK_MAPPING({ router });
+	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
 
 	const { data = {}, loading } = useListCourseUserMappings({ user_id, ongoingCategories, inputValue });
 
@@ -39,7 +39,7 @@ function RecommendedComponents({ user_id, ongoingCategories, inputValue }) {
 				key={item.id}
 				data={item}
 				buttonContent={BUTTON_CONTENT_MAPPING[item.state] || BUTTON_CONTENT_MAPPING.default}
-				handleClick={HANDLE_CLICK_MAPPINGS[item.state] || HANDLE_CLICK_MAPPINGS.default}
+				handleClick={GET_LINK_MAPPINGS[item.state] || GET_LINK_MAPPINGS.default}
 			/>
 		),
 	}));

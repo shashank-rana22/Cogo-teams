@@ -6,14 +6,14 @@ import { useEffect } from 'react';
 import LoadingState from '../../../../../../../commons/LoadingState';
 import CourseEmptyState from '../../../../../commons/CourseEmptyState';
 import BUTTON_CONTENT_MAPPING from '../../../../../configs/BUTTON_CONTENT_MAPPING';
-import HANDLE_CLICK_MAPPING from '../../../../../configs/HANDLE_CLICK_MAPPING';
+import GET_LINK_MAPPING from '../../../../../configs/GET_LINK_MAPPING';
 import useListCourseUserMappings from '../../../../../hooks/useListCourseUserMappings';
 import CourseCard from '../../../../CourseCard';
 
 function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCategories, inputValue }) {
 	const router = useRouter();
 
-	const HANDLE_CLICK_MAPPINGS = HANDLE_CLICK_MAPPING({ router });
+	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
 
 	const { data = {}, loading } = useListCourseUserMappings({ activeTab, inputValue, user_id });
 
@@ -51,7 +51,7 @@ function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCatego
 				key={item.id}
 				data={item}
 				buttonContent={BUTTON_CONTENT_MAPPING[activeTab]}
-				handleClick={HANDLE_CLICK_MAPPINGS[activeTab]}
+				handleClick={GET_LINK_MAPPINGS[activeTab]}
 				activeTab={activeTab}
 			/>
 		),

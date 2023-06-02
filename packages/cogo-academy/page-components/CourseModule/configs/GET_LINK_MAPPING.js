@@ -1,4 +1,4 @@
-const HANDLE_CLICK_MAPPING = ({ router }) => ({
+const GET_LINK_MAPPING = ({ router }) => ({
 	default: (course_id) => {
 		router.push(`/learning/course/introduction?course_id=${course_id}`);
 	},
@@ -19,4 +19,4 @@ const HANDLE_CLICK_MAPPING = ({ router }) => ({
 	},
 });
 
-export default HANDLE_CLICK_MAPPING;
+export default GET_LINK_MAPPING;
