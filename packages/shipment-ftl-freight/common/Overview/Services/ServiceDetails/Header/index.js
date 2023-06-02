@@ -48,6 +48,7 @@ function Header({ serviceData = [] }) {
 					</div>
 				</div>
 			</div>
+
 			{showDetails ? <Details serviceData={serviceData} /> : null}
 		</div>
 
