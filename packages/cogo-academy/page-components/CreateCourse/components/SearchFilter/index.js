@@ -17,7 +17,7 @@ function SearchFilter({ debounceQuery, input, setInput, setParams, params, setFi
 		onClickReset,
 		reset,
 		onClickCreate,
-		onClickCreateQuestion,
+		// onClickCreateQuestion,
 	} = useHandleSearchFilter({ setFilters });
 
 	useImperativeHandle(ref, () => ({ reset }));
