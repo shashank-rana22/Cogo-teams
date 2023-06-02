@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { useState } from 'react';
 
-import { getFieldController } from '../../../commons/getFieldController';
+import { getFieldController } from '../../../../../commons/getFieldController';
 
 import controls from './controls';
 import useCreateCategory from './hooks/useCreateCategory';

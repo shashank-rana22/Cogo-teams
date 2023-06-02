@@ -15,7 +15,11 @@ function AdvanceCourseCreation({ id, mode }) {
 	const { state } = data || {};
 
 	useEffect(() => {
-		setActiveTab(state);
+		if (state === 'published') {
+			setActiveTab('overview');
+		} else {
+			setActiveTab(state);
+		}
 	}, [state]);
 
 	if (loading) {
@@ -40,6 +44,7 @@ function AdvanceCourseCreation({ id, mode }) {
 					activeTab={activeTab}
 					getCogoAcademyCourse={getCogoAcademyCourse}
 					id={id}
+					state={state}
 				/>
 			</div>
 
@@ -51,6 +56,7 @@ function AdvanceCourseCreation({ id, mode }) {
 					getCogoAcademyCourse={getCogoAcademyCourse}
 					setActiveTab={setActiveTab}
 					mode={mode}
+					state={state}
 				/>
 			</div>
 		</div>

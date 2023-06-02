@@ -17,15 +17,18 @@ export const studentColumns = ({
 	{
 		Header   : 'Name',
 		id       : 'name',
-		accessor : ({ name = '' }) => (
-			<div>
-				<Tooltip maxWidth={500} content={startCase(name)} placement="top">
-					<div className={styles.content}>
-						{name}
-					</div>
-				</Tooltip>
-			</div>
-		),
+		accessor : ({ user_details = {} }) => {
+			const { name = '' } = user_details || {};
+			return (
+				<div>
+					<Tooltip maxWidth={500} content={startCase(name)} placement="top">
+						<div className={styles.content}>
+							{name}
+						</div>
+					</Tooltip>
+				</div>
+			);
+		},
 	},
 	{
 		Header   : 'Source',

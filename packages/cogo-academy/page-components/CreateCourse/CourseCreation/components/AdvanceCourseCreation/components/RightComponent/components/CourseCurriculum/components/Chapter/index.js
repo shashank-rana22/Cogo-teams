@@ -19,6 +19,7 @@ function Chapter({
 	getSubModuleRefetch,
 	setGetSubModuleRefetch,
 	showButtons,
+	state,
 }) {
 	const {
 		chapterLoading,
@@ -111,6 +112,7 @@ function Chapter({
 							chapterLoading={chapterLoading}
 							getCourseSubModuleLoading={getCourseSubModuleLoading}
 							showButtons={showButtons}
+							state={state}
 						/>
 					</Accordion>
 				</div>

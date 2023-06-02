@@ -47,7 +47,7 @@ const controls = [
 			},
 			{
 				label   : 'Select difficulty level',
-				name    : 'difficulty_level',
+				name    : 'level',
 				type    : 'select',
 				options : [{
 					value : 'beginner',

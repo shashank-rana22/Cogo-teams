@@ -30,7 +30,7 @@ function Header({
 		childRef.current[activeTab]?.handleSubmit().then((res) => {
 			if (!res.hasError) {
 				updateCourse({
-					values            : buttonType === 'publish' ? payloadValues : res.values,
+					values            : buttonType === 'publish' ? { ...res.values, ...payloadValues } : res.values,
 					isRefetchRequired : true,
 					buttonType,
 				});
@@ -39,7 +39,7 @@ function Header({
 	};
 
 	const BUTTON_MAPPING = {
-		publish: [
+		pre_publish: [
 			{
 				buttonText      : 'Save',
 				themeType       : 'primary',

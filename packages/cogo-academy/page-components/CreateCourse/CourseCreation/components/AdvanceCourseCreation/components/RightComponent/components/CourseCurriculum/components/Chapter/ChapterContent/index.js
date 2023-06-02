@@ -1,7 +1,8 @@
 import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
+import FieldArray from '../../../../../../../../../../../../commons/FieldArray';
+import { getFieldController } from '../../../../../../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -14,6 +15,7 @@ function ChapterContent({
 	index,
 	chapterLoading,
 	showButtons,
+	state,
 }) {
 	const {
 		RichTextEditor,
@@ -27,11 +29,14 @@ function ChapterContent({
 		setEditorValue,
 		uploadVideoWatch,
 		uploadDocumentWatch,
+		assessmentValue,
+		setAssessmentvalue,
 	} = useHandleChapterContent({
 		chapterContent,
 		onSaveChapter,
 		subModuleId,
 		index,
+		state,
 	});
 
 	return (
@@ -88,9 +93,7 @@ function ChapterContent({
 				}
 
 				if (
-					['additional_resources_title', 'additional_resources_link'].includes(
-						name,
-					)
+					name === 'external_link'
 					&& !additionalResourcesWatch
 				) {
 					return null;
@@ -115,6 +118,10 @@ function ChapterContent({
 					return null;
 				}
 
+				if (contentTypeWatch !== 'assessment' && name === 'assessment_value') {
+					return null;
+				}
+
 				if (
 					!['presentation', 'text'].includes(contentTypeWatch)
 					&& name === 'upload_presentation'
@@ -123,6 +130,41 @@ function ChapterContent({
 				}
 
 				const docToUse = name === 'upload_video' ? uploadVideoWatch : uploadDocumentWatch;
+
+				if (elementType === 'fieldArray') {
+					return (
+						<div style={{ margin: '32px 0px' }}>
+							<FieldArray
+								{...controlItem}
+								control={control}
+								error={errors?.[name]}
+							/>
+						</div>
+					);
+				}
+
+				if (name === 'assessment_value') {
+					return (
+						<div style={{ marginTop: '24px' }}>
+							<RichTextEditor
+								value={assessmentValue}
+								onChange={setAssessmentvalue}
+								required
+								id="body-text"
+								name="bodyText"
+								type="string"
+								multiline
+								variant="filled"
+								placeholder="Start Typing Here..."
+								rootStyle={{
+									zIndex    : 0,
+									position  : 'relative',
+									minHeight : '200px',
+								}}
+							/>
+						</div>
+					);
+				}
 
 				const Element = getFieldController(elementType);
 
@@ -180,7 +222,6 @@ function ChapterContent({
 										: uploadDocumentWatch?.finalUrl
 								}
 								title="YouTube video player"
-								frameBorder="0"
 								allow="accelerometer; clipboard-write;
 										encrypted-media; gyroscope; picture-in-picture; web-share"
 								allowfullscreen="true"

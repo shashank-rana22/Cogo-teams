@@ -15,6 +15,7 @@ function Child(props) {
 		noDeleteButtonTill = 1,
 		disabled = false,
 		error = {},
+		deleteMargin = '12px',
 	} = props;
 
 	return (
@@ -28,6 +29,7 @@ function Child(props) {
 					<div
 						key={`${name}.${index}.${controlItem.name}`}
 						className={styles.list}
+						style={controlItem.style}
 					>
 						<div className={styles.label}>{controlItem.label}</div>
 
@@ -37,6 +39,7 @@ function Child(props) {
 							id={`create_form_${controlItem.name}_field`}
 							{...controlItem}
 							name={`${name}.${index}.${controlItem.name}`}
+							style={undefined}
 						/>
 
 						<div className={styles.error_message}>
@@ -53,7 +56,7 @@ function Child(props) {
 					style={{
 						height    : '20px',
 						width     : '20px',
-						marginTop : '12px',
+						marginTop : deleteMargin,
 						cursor    : 'pointer',
 					}}
 				/>

@@ -1,7 +1,7 @@
 import { Accordion, Pill, Button } from '@cogoport/components';
 import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
 
-import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
+import { getFieldController } from '../../../../../../../../../../../../commons/getFieldController';
 import LoadingState from '../../../../../../../../../../commons/LoadingState';
 import Chapter from '../../Chapter';
 
@@ -26,6 +26,7 @@ function SubModuleComponent({
 	setGetSubModuleRefetch,
 	courseSubModule,
 	showButtons,
+	state,
 }) {
 	const {
 		handleSubmit,
@@ -177,6 +178,7 @@ function SubModuleComponent({
 						getSubModuleRefetch={getSubModuleRefetch}
 						setGetSubModuleRefetch={setGetSubModuleRefetch}
 						showButtons={showButtons}
+						state={state}
 					/>
 				)}
 			</Accordion>

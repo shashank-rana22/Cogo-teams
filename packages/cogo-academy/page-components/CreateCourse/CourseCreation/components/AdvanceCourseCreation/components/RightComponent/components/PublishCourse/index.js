@@ -2,12 +2,12 @@ import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import { forwardRef, useImperativeHandle, useEffect } from 'react';
 
-import { getFieldController } from '../../../../../../../commons/getFieldController';
+import { getFieldController } from '../../../../../../../../../commons/getFieldController';
 
 import controls from './controls';
 import styles from './styles.module.css';
 
-const MAPPING = ['course_categories', 'course_title', 'thumbnail_url', 'description'];
+const MAPPING = ['course_categories', 'course_title', 'thumbnail_url', 'description', 'instructor_ids', 'level'];
 
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
