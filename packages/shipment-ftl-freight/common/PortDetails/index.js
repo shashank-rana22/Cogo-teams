@@ -19,13 +19,16 @@ function PortDetails({ data = {}, primary_service = {} }) {
 
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
-			<div className={styles.port_code}>
-				<div className={` ${styles.code}`}>
-					(
-					{location?.port_code || location?.postal_code}
-					)
-				</div>
-			</div>
+			{(location?.port_code || location?.postal_code)
+				&& (
+					<div className={styles.port_code}>
+						<div className={` ${styles.code}`}>
+							(
+							{location?.port_code || location?.postal_code}
+							)
+						</div>
+					</div>
+				) }
 
 			<Tooltip
 				placement="bottom"
@@ -38,21 +41,26 @@ function PortDetails({ data = {}, primary_service = {} }) {
 					</div>
 				)}
 			>
-				<div className={cl`${styles.value}`}>{location?.name}</div>
+				{location?.name
+				&& <div className={cl`${styles.value}`}>{location?.name}</div>}
 			</Tooltip>
 
 		</>
 	);
 
 	const renderLocation = () => (
+
 		<>
 			<div className={styles.flex_row_origin}>
 				{handleLocationDetails(origin_location, origin_port)}
 			</div>
 
-			<div className={styles.icon_wrapper}>
-				<IcMPortArrow className="core_ui_icon" />
-			</div>
+			{(destination_location)
+				? (
+					<div className={styles.icon_wrapper}>
+						<IcMPortArrow className="core_ui_icon" />
+					</div>
+				) : null}
 
 			<div className={styles.flex_row_destination}>
 				{handleLocationDetails(destination_location, destination_drop)}
