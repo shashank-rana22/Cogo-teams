@@ -13,7 +13,7 @@ function Convenience({
 	const { convenience_rate = {} } = convenienceDetails || {};
 
 	const { control } = useForm({
-		defaultValues: {
+		values: {
 			convenience_fee: [{
 				unit            : convenience_rate?.unit,
 				currency        : convenience_rate?.currency,

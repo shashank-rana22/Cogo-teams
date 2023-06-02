@@ -1,6 +1,7 @@
 import { Button, cl } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
 
 import { convertCurrencyValue, displayTotal } from '../../../../utils/dynamicValues';
@@ -142,6 +143,7 @@ function BreakdownDetails({
 						</div>
 						<div className={styles.col} style={{ width: getWidth(5.7) }}>
 							<Convenience
+								key={isEmpty(convenienceDetails)}
 								onChange={handleConvenienceFeeChange}
 								convenienceDetails={convenienceDetails}
 								convenience_line_item={convenience_line_item}

@@ -56,7 +56,13 @@ const useGetPortCard = ({ props }) => {
 
 	const [editedMargins, setEditedMargins] = useState({});
 
-	const [convenienceDetails, setConvenienceDetails] = useState({});
+	const [convenienceDetails, setConvenienceDetails] = useState({
+		convenience_rate: {
+			price    : convenience_line_item?.price,
+			currency : convenience_line_item?.currency,
+			unit     : convenience_line_item?.unit,
+		},
+	});
 
 	useEffect(() => {
 		if (!isEmpty(convenience_line_item)) {

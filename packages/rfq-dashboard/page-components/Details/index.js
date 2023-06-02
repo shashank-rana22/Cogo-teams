@@ -15,7 +15,7 @@ function Details() {
 	const { rfq_id = '' } = query || {};
 
 	const { getRfqsRateCards, data = {}, loading } = useGetRfqRateCards(
-		{ rfq_id, state: ['requested_for_approval', 'modified_and_sent', 'approved_and_sent'] },
+		{ rfq_id, state: ['requested_for_approval', 'modified_and_sent'] },
 	);
 	const { getRfqsForApproval, data: listData, loading: details_loading } = useListRfqs({ id: rfq_id });
 
