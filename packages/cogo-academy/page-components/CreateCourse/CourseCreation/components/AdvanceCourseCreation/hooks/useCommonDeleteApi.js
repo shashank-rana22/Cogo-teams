@@ -22,7 +22,13 @@ const URL_MAPPING = {
 	},
 };
 
-const useCommonDeleteApi = ({ getCourseModuleDetails, getCourseSubModule, type, finalData }) => {
+const useCommonDeleteApi = ({
+	getCourseModuleDetails,
+	getCourseSubModule,
+	type,
+	finalData,
+	setShowDeleteModal = () => {},
+}) => {
 	const { deleteUrl, orderUrl, key_name } = URL_MAPPING[type];
 
 	const [{ loading: deleteLoading }, triggerDelete] = useRequest({
@@ -41,7 +47,9 @@ const useCommonDeleteApi = ({ getCourseModuleDetails, getCourseSubModule, type, 
 		chapter    : getCourseSubModule,
 	};
 
-	const filteredIds = finalData.filter((item) => !item.isNew).map((item) => item.id);
+	const filteredIds = finalData
+		.filter((item) => !item.isNew)
+		.map((item) => item.id);
 
 	const refetchApi = refetchApiMapping[type];
 
@@ -49,7 +57,12 @@ const useCommonDeleteApi = ({ getCourseModuleDetails, getCourseSubModule, type, 
 		try {
 			await triggerDelete({ data: deletePayloadValues });
 
-			const sequenceOrderPayload = getDeleteSequenceOrderPayload({ idToDelete, filteredIds });
+			setShowDeleteModal(false);
+
+			const sequenceOrderPayload = getDeleteSequenceOrderPayload({
+				idToDelete,
+				filteredIds,
+			});
 
 			await triggerOrder({ data: { [key_name]: sequenceOrderPayload } });
 

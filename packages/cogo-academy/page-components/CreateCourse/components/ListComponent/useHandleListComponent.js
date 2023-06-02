@@ -29,13 +29,13 @@ const useHandleListComponent = ({ activeTab, fetchList, setParams, params }) => 
 
 	const propsMapping = {
 		courses: {
-			loading: false,
+			loading   : false,
 			router,
 			setShowModal,
 			setCourseId,
-			fetchList,
 			setParams,
 			params,
+			updateApi : deleteCourse,
 		},
 		students: {
 			loading: false,

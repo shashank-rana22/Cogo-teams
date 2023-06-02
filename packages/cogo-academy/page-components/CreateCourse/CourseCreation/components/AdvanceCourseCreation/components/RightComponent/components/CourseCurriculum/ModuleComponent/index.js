@@ -3,6 +3,7 @@ import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-r
 
 import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
 import LoadingState from '../../../../../../../../../../commons/LoadingState';
+import DeleteModal from '../components/DeleteModal';
 import SubModule from '../components/SubModule';
 
 import controls from './controls';
@@ -36,6 +37,8 @@ function ModuleComponent({
 		showModule,
 		setShowModule,
 		deleteLoading,
+		showDeleteModal,
+		setShowDeleteModal,
 	} = useHandleModule({
 		getLoading,
 		setFinalData,
@@ -58,6 +61,13 @@ function ModuleComponent({
 					showModule.includes(module.id) && styles.edit
 				} ${module.isNew && styles.new}`}
 			>
+				{state === 'published' ? (
+					<div style={{ marginBottom: '12px' }} className={styles.error_message}>
+						** This course is currently published, editing this will effect users
+						who are taking the test currently
+					</div>
+				) : null}
+
 				{showModule.includes(module.id) ? (
 					<div className={styles.edit_text}>
 						Edit - Module
@@ -112,14 +122,25 @@ function ModuleComponent({
 						<Button loading={moduleLoading} type="submit" size="sm">Save</Button>
 
 						<IcMDelete
-							onClick={() => deleteModule({
-								id     : module.id,
-								isNew  : module.isNew || false,
-								length : finalData.length,
-							})}
+							onClick={() => setShowDeleteModal(true)}
 							className={`${styles.left} ${styles.icon}`}
 						/>
 					</div>
+				) : null}
+
+				{showDeleteModal ? (
+					<DeleteModal
+						showDeleteModal={showDeleteModal}
+						setShowDeleteModal={setShowDeleteModal}
+						deleteLoading={deleteLoading}
+						onClickDelete={deleteModule}
+						viewType="Module"
+						deleteProps={{
+							id     : module.id,
+							isNew  : module.isNew || false,
+							length : finalData.length,
+						}}
+					/>
 				) : null}
 			</form>
 		);

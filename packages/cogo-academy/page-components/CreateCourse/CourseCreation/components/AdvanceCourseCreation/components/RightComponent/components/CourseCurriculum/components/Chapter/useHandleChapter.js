@@ -19,6 +19,8 @@ const useHandleChapter = ({
 	const { id } = subModule || {};
 
 	const [subModuleChapters, setSubModuleChapters] = useState([]);
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
+	const [deleteContent, setDeleteContent] = useState({});
 
 	const {
 		finalData,
@@ -44,6 +46,7 @@ const useHandleChapter = ({
 		finalData : subModuleChapters,
 		getCourseSubModule,
 		type      : 'chapter',
+		setShowDeleteModal,
 	});
 
 	if (isEmpty(subModuleChapters) && showButtons) {
@@ -70,9 +73,7 @@ const useHandleChapter = ({
 		]);
 	};
 
-	const deleteChapter = ({ e, child, length }) => {
-		e.stopPropagation();
-
+	const deleteChapter = ({ child, length }) => {
 		if (length === 1) {
 			Toast.error('cannot delete as there should be atleast one chapter');
 			return;
@@ -110,6 +111,10 @@ const useHandleChapter = ({
 		subModuleId: id,
 		getCourseSubModuleLoading,
 		deleteLoading,
+		showDeleteModal,
+		setShowDeleteModal,
+		deleteContent,
+		setDeleteContent,
 	};
 };
 

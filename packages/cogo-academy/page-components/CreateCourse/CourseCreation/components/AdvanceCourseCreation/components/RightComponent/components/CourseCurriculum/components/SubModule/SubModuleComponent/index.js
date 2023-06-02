@@ -4,6 +4,7 @@ import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-r
 import { getFieldController } from '../../../../../../../../../../../../commons/getFieldController';
 import LoadingState from '../../../../../../../../../../commons/LoadingState';
 import Chapter from '../../Chapter';
+import DeleteModal from '../../DeleteModal';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -38,6 +39,8 @@ function SubModuleComponent({
 		hideEditComponent,
 		setShowSubModule,
 		deleteLoading,
+		showDeleteModal,
+		setShowDeleteModal,
 	} = useHandleSubModuleComponent({
 		onSaveSubModule,
 		subModule,
@@ -59,6 +62,13 @@ function SubModuleComponent({
 				onSubmit={handleSubmit(onSubmit)}
 				className={`${styles.module} ${showSubModule.includes(subModule.id) && styles.edit}`}
 			>
+				{state === 'published' ? (
+					<div style={{ marginBottom: '12px' }} className={styles.error_message}>
+						** This course is currently published, editing this will effect users
+						who are taking the test currently
+					</div>
+				) : null}
+
 				{showSubModule.includes(subModule.id) ? (
 					<div className={styles.edit_text}>
 						Edit - Sub Module
@@ -115,10 +125,21 @@ function SubModuleComponent({
 						</Button>
 
 						<IcMDelete
-							onClick={() => deleteSubModule({ length: courseSubModule.length })}
+							onClick={() => setShowDeleteModal(true)}
 							className={`${styles.left} ${styles.icon}`}
 						/>
 					</div>
+				) : null}
+
+				{showDeleteModal ? (
+					<DeleteModal
+						showDeleteModal={showDeleteModal}
+						setShowDeleteModal={setShowDeleteModal}
+						deleteLoading={deleteLoading}
+						onClickDelete={deleteSubModule}
+						viewType="Sub module"
+						deleteProps={{ length: courseSubModule.length }}
+					/>
 				) : null}
 			</form>
 		);

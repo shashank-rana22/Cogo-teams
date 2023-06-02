@@ -1,9 +1,11 @@
 import { Pill, Accordion, Button } from '@cogoport/components';
 import { IcMDelete, IcMDrag } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import EmptyState from '../../../../../../../../../commons/EmptyState';
 import LoadingState from '../../../../../../../../../commons/LoadingState';
+import DeleteModal from '../DeleteModal';
 
 import ChapterContent from './ChapterContent';
 import styles from './styles.module.css';
@@ -30,6 +32,10 @@ function Chapter({
 		subModuleId,
 		getCourseSubModuleLoading,
 		deleteLoading,
+		showDeleteModal,
+		setShowDeleteModal,
+		deleteContent,
+		setDeleteContent,
 	} = useHandleChapter({
 		subModule,
 		getLoading,
@@ -89,7 +95,11 @@ function Chapter({
 
 								{showButtons ? (
 									<IcMDelete
-										onClick={(e) => deleteChapter({ e, child, length: subModuleChapters.length })}
+										onClick={(e) => {
+											e.stopPropagation();
+											setShowDeleteModal(true);
+											setDeleteContent(child);
+										}}
 										className={`${styles.left} ${styles.icon}`}
 									/>
 								) : null}
@@ -117,6 +127,17 @@ function Chapter({
 					</Accordion>
 				</div>
 			))}
+
+			{showDeleteModal ? (
+				<DeleteModal
+					showDeleteModal={showDeleteModal}
+					setShowDeleteModal={setShowDeleteModal}
+					deleteLoading={deleteLoading}
+					onClickDelete={deleteChapter}
+					viewType="chapter"
+					deleteProps={{ child: deleteContent, length: subModuleChapters.length }}
+				/>
+			) : null}
 
 			{showButtons ? (
 				<Button

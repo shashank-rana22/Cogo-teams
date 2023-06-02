@@ -39,8 +39,20 @@ function ChapterContent({
 		state,
 	});
 
+	const { completed_user_count = 0 } = chapterContent || {};
+
 	return (
 		<form onSubmit={handleSubmit(onSubmit)} className={styles.container}>
+			{state === 'published' ? (
+				<div className={styles.error_text}>
+					** This course is currently published,
+					{' '}
+					{completed_user_count}
+					{' '}
+					users have already completed this chapter, editing this will effect them
+				</div>
+			) : null}
+
 			{controls.map((controlItem) => {
 				const {
 					elementType,
