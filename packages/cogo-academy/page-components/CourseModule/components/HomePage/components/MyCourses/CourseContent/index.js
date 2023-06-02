@@ -50,8 +50,8 @@ function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCatego
 			<CourseCard
 				key={item.id}
 				data={item}
-				buttonContent={BUTTON_CONTENT_MAPPING[activeTab]}
-				handleClick={GET_LINK_MAPPINGS[activeTab]}
+				buttonContent={BUTTON_CONTENT_MAPPING[item.state] || BUTTON_CONTENT_MAPPING.default}
+				handleClick={GET_LINK_MAPPINGS[item.state] || GET_LINK_MAPPINGS.default}
 				fetchList={fetchList}
 			/>
 		),

@@ -1,13 +1,24 @@
 import { Pill, Carousel } from '@cogoport/components';
 import { IcMStarfull } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
-import React from 'react';
 
 import styles from './styles.module.css';
 
-function CourseDetails({ data, instructorData, module }) {
-	// console.log('CourseDetails', data);
+const formatTime = (time, type) => (
+	<div>
+		{(time / 60).toFixed(0)}
+		&nbsp;
+		<b>Hour</b>
+		&nbsp;
+		{(time % 60)}
+		&nbsp;
+		<b>Min</b>
+		&nbsp;
+		{type}
+	</div>
+);
 
+function CourseDetails({ data, instructorData = [], module }) {
 	const CAROUSELDATA = instructorData?.map((item, index) => ({
 		key    : `${index}${JSON.stringify(item)}`,
 		render : () => (
@@ -18,20 +29,6 @@ function CourseDetails({ data, instructorData, module }) {
 			</div>
 		),
 	}));
-
-	const formatTime = (time, type) => (
-		<div>
-			{(time / 60).toFixed(0)}
-			&nbsp;
-			<b>Hour</b>
-			&nbsp;
-			{(time % 60)}
-			&nbsp;
-			<b>Min</b>
-			&nbsp;
-			{type}
-		</div>
-	);
 
 	return (
 		<div className={styles.container}>

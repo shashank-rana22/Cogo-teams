@@ -132,16 +132,14 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 
 			<div className={styles.carousel_container}>
 				{(data.list || []).map((item) => (
-					// <div className={styles.course_card}>
 					<CourseCard
 						viewType="all_courses"
 						key={item.id}
 						data={item}
-						buttonContent={BUTTON_CONTENT_MAPPING[activeTab || 'default']}
-						handleClick={GET_LINK_MAPPINGS[activeTab || 'default']}
+						buttonContent={BUTTON_CONTENT_MAPPING[item.state] || BUTTON_CONTENT_MAPPING.default}
+						handleClick={GET_LINK_MAPPINGS[item.state] || GET_LINK_MAPPINGS.default}
 						fetchList={fetchList}
 					/>
-					// </div>
 				))}
 			</div>
 
