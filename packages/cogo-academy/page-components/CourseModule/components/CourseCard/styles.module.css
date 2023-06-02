@@ -33,9 +33,9 @@
 	}
 }
 
-.container:hover {
+/* .container:hover {
 	cursor: pointer;
-}
+} */
 
 .topics_rating_container {
 	display: flex;
@@ -65,6 +65,15 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+	cursor: pointer;
+}
+
+.saved{
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	cursor: pointer;
+	color: #f68b21;
 }
 
 .category_name {
