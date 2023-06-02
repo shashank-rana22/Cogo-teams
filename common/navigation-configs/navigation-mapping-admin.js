@@ -1970,8 +1970,17 @@ const navigationMappingAdmin = {
 				possible_apis : apis.ticket_management,
 			},
 			{
+				key           : 'ticket_management-my_tickets',
+				title         : 'My Tickets',
+				href          : '/v2/ticket-management/my-tickets',
+				as            : '/v2/ticket-management/my-tickets',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.ticket_management,
+			},
+			{
 				key           : 'ticket_management-super_admin',
-				title         : 'Super Admin',
+				title         : 'Admin Dashboard',
 				href          : '/v2/ticket-management/super-admin',
 				as            : '/v2/ticket-management/super-admin',
 				type          : 'link',
