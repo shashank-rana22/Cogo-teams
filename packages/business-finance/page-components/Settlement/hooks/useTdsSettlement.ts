@@ -54,6 +54,8 @@ const useTdsSettlement = ({
 	const { orgId = undefined } = rest || {};
 	const dateValue = JSON.stringify(date || {});
 
+	const isDateApplied = Object.keys(JSON.parse(dateValue)).length > 0;
+
 	const refetch = useCallback(() => {
 		(async () => {
 			try {
@@ -62,7 +64,7 @@ const useTdsSettlement = ({
 						accMode: active,
 						orgId,
 
-						startDate: Object.keys(dateValue).length > 0 ? formatDate({
+						startDate: isDateApplied ? formatDate({
 							date       : JSON.parse(dateValue)?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
@@ -70,7 +72,7 @@ const useTdsSettlement = ({
 							separator  : ' ',
 						}) : undefined,
 
-						endDate: Object.keys(dateValue).length > 0 ? formatDate({
+						endDate: isDateApplied ? formatDate({
 							date       : JSON.parse(dateValue)?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
@@ -86,7 +88,7 @@ const useTdsSettlement = ({
 				setApiTdsData({});
 			}
 		})();
-	}, [active, trigger, orgId, dateValue, query, pageIndex]);
+	}, [active, trigger, orgId, dateValue, isDateApplied, query, pageIndex]);
 
 	const getSummary = useCallback(() => {
 		(async () => {
@@ -96,7 +98,7 @@ const useTdsSettlement = ({
 						orgId,
 						accMode: active,
 
-						startDate: Object.keys(dateValue).length > 0 ? formatDate({
+						startDate: isDateApplied ? formatDate({
 							date       : JSON.parse(dateValue)?.startDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
@@ -104,7 +106,7 @@ const useTdsSettlement = ({
 							separator  : ' ',
 						}) : undefined,
 
-						endDate: Object.keys(dateValue).length > 0 ? formatDate({
+						endDate: isDateApplied ? formatDate({
 							date       : JSON.parse(dateValue)?.endDate,
 							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
 							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm:ss'],
@@ -122,6 +124,7 @@ const useTdsSettlement = ({
 		active,
 		getOrgSummary,
 		orgId,
+		isDateApplied,
 		dateValue,
 		query,
 	]);
