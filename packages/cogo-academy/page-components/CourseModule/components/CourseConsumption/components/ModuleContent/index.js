@@ -4,6 +4,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../../CreateCourse/commons/EmptyState';
 import getChapter from '../../utils/getChapter';
+import hideBtn from '../../utils/hideBtn';
 
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
@@ -63,67 +64,71 @@ function ModuleContent({
 
 				<div className={styles.btn_container}>
 
-					<Button
-						size="md"
-						themeType="tertiary"
-						className={styles.btn}
-						loading={courseProgressUpdateLoading || loading}
-						onClick={async () => {
-							const prevChapterContent = await getChapter({
-								data,
-								indexes,
-								state: 'prev',
-								setIndexes,
-							}) || {};
+					{ !hideBtn(data, 'prev', indexes) && (
+						<Button
+							size="md"
+							themeType="tertiary"
+							className={styles.btn}
+							loading={courseProgressUpdateLoading || loading}
+							onClick={async () => {
+								const prevChapterContent = await getChapter({
+									data,
+									indexes,
+									state: 'prev',
+									setIndexes,
+								}) || {};
 
-							const { id, user_progress_state } = prevChapterContent;
+								const { id, user_progress_state } = prevChapterContent;
 
-							await updateCourseProgress({
-								next_chapter_id    : id,
-								next_chapter_state : user_progress_state
+								await updateCourseProgress({
+									next_chapter_id    : id,
+									next_chapter_state : user_progress_state
 								=== 'introduction' ? 'ongoing' : user_progress_state,
 
-							});
+								});
 
-							await getUserCourse();
-							setChapter(prevChapterContent);
-						}}
-					>
-						<IcMArrowLeft width={14} height={14} className={styles.arrow_left} />
-						Previous
-					</Button>
+								await getUserCourse();
+								setChapter(prevChapterContent);
+							}}
+						>
+							<IcMArrowLeft width={14} height={14} className={styles.arrow_left} />
+							Previous
+						</Button>
+					)}
 
-					<Button
-						size="md"
-						themeType="tertiary"
-						className={`${styles.btn} ${styles.next_btn}`}
-						loading={courseProgressUpdateLoading || loading}
-						onClick={async () => {
-							const nextChapter = await getChapter({
-								data,
-								indexes,
-								state: 'next',
-								setIndexes,
-								setChapter,
-							}) || {};
+					{!hideBtn(data, 'next', indexes) && (
+						<Button
+							size="md"
+							themeType="tertiary"
+							className={`${styles.btn} ${styles.next_btn}`}
+							loading={courseProgressUpdateLoading || loading}
+							onClick={async () => {
+								const nextChapter = await getChapter({
+									data,
+									indexes,
+									state: 'next',
+									setIndexes,
+									setChapter,
+								}) || {};
 
-							const { id, user_progress_state } = nextChapter;
+								const { id, user_progress_state } = nextChapter;
 
-							await updateCourseProgress({
-								next_chapter_id    : id,
-								next_chapter_state : user_progress_state === 'introduction'
-									? 'ongoing' : user_progress_state,
+								await updateCourseProgress({
+									next_chapter_id    : id,
+									next_chapter_state : user_progress_state === 'introduction'
+										? 'ongoing' : user_progress_state,
 
-							});
+								});
 
-							await getUserCourse();
+								await getUserCourse();
 
-							setChapter(nextChapter);
-						}}
-					>
-						Next
-						<IcMArrowRight width={14} height={14} className={styles.arrow_right} />
-					</Button>
+								setChapter(nextChapter);
+							}}
+						>
+							Next
+							<IcMArrowRight width={14} height={14} className={styles.arrow_right} />
+						</Button>
+					)}
 				</div>
 			</div>
 

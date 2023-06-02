@@ -1,19 +1,13 @@
 import { Button } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
 
-import useUpdateUserCourseProgress from '../../hooks/useUpdateUserCourseProgress';
 import getChapter from '../../utils/getChapter';
 
 import styles from './styles.module.css';
 
-function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapter = {}, setChapter }) {
-	const { user:{ id: user_id } } = useSelector((state) => state.profile);
-
-	const {
-		courseProgressUpdateLoading : loading,
-		updateCourseProgress,
-	} = useUpdateUserCourseProgress({ course_id, user_id });
-
+function Footer({
+	indexes, data, setIndexes, updateCourseProgress, loading,
+	courseProgressUpdateLoading, getUserCourse, chapter = {}, setChapter,
+}) {
 	return (
 		<div className={styles.container}>
 			<Button size="md" themeType="tertiary">Schedule Time to Begin</Button>
@@ -24,7 +18,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapter =
 					<Button
 						size="md"
 						themeType="accent"
-						loading={loading}
+						loading={loading || courseProgressUpdateLoading}
 						onClick={async () => {
 							const nextChapterContent = getChapter({
 								data,
@@ -50,7 +44,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapter =
 						<Button
 							size="md"
 							themeType="secondary"
-							loading={loading}
+							loading={loading || courseProgressUpdateLoading}
 							onClick={async () => {
 								const nextChapterContent = await getChapter({
 									data,
@@ -80,7 +74,7 @@ function Footer({ course_id, indexes, data, setIndexes, getUserCourse, chapter =
 						<Button
 							size="md"
 							themeType="accent"
-							loading={loading}
+							loading={loading || courseProgressUpdateLoading}
 							onClick={async () => {
 								const { id:current_chapter_id = '' } = chapter;
 
