@@ -16,9 +16,9 @@ const useGetRfqRateCards = ({ rfq_id = '', state }) => {
 		},
 	}, { manual: false });
 
-	const getRfqsRateCards = useCallback(async () => {
+	const getRfqsRateCards = useCallback(() => {
 		try {
-			await trigger();
+			trigger();
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));

@@ -1,14 +1,25 @@
 import { Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMProfile } from '@cogoport/icons-react';
-import { startCase, format } from '@cogoport/utils';
-import { useRouter } from 'next/router';
+import { useRouter } from '@cogoport/next';
+import { startCase } from '@cogoport/utils';
 
 import { SERVICE_MAPPING } from '../../../../../../constants';
 import { getformattedDuration } from '../../../../../../utils/getFormattedDuration';
 
 import styles from './styles.module.css';
+
+const priceFormating = (price, currency) => formatAmount({
+	amount  : price,
+	currency,
+	options : {
+		style                 : 'currency',
+		currencyDisplay       : 'code',
+		maximumFractionDigits : 0,
+	},
+});
 
 function Card({ item, handleCheck, checkedItems, partner_id }) {
 	const { stats = {} } = item;
@@ -17,20 +28,11 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 	const { port_pair_count = {} } = item;
 
 	const services = Object.keys(port_pair_count);
-	const priceFormating = (price, currency) => formatAmount({
-		amount  : price,
-		currency,
-		options : {
-			style                 : 'currency',
-			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
-		},
-	});
 
 	return (
 		<div
 			role="presentation"
-			onClick={() => router.push(`/${partner_id}/rfq-dashboard/${item.id}`)}
+			onClick={() => router.push(`/rfq-dashboard/${item.id}`)}
 			className={styles.container}
 			key={item.id}
 		>
@@ -85,7 +87,11 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 						item?.requested_on ? (
 							<div className={styles.secondary_tag}>
 								Requested on :
-								{format(item?.requested_on, GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'])}
+								{formatDate({
+									date       : item?.requested_on,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})}
 							</div>
 						) : null
 					}

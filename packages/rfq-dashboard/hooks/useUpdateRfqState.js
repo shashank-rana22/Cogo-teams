@@ -11,17 +11,15 @@ const useUpdateRfqState = () => {
 
 	const updateRfqState = useCallback(async ({ rfq_id = '', setShow }) => {
 		try {
-			const response = await trigger({
+			await trigger({
 				data: {
 					rfq_id,
 					state: 'approved',
 				},
 			});
 
-			if (response.status === 200) {
-				Toast.success('Approved the RFQ');
-				setShow(false);
-			}
+			Toast.success('Approved the RFQ');
+			setShow(false);
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));

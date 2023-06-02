@@ -12,7 +12,7 @@ function Filter({
 	const { bulkUpdateRfqState } = useBulkUpdateRfqState();
 
 	const handleSelectAll = () => {
-		setSelectAll(!selectAll);
+		setSelectAll((prevSelectAll) => !prevSelectAll);
 		setCheckedItems(!selectAll ? data : []);
 	};
 

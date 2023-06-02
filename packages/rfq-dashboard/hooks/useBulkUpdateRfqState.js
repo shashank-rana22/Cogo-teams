@@ -10,16 +10,15 @@ const useBulkUpdateRfqState = () => {
 
 	const bulkUpdateRfqState = async ({ payload, getRfqsForApproval }) => {
 		try {
-			const response = await trigger({
+			await trigger({
 				data: {
 					rfq_ids : payload,
 					state   : 'approved',
 				},
 			});
-			if (response.status === 200) {
-				await getRfqsForApproval();
-				Toast.success('Approved the RFQS');
-			}
+
+			await getRfqsForApproval();
+			Toast.success('Approved the RFQS');
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));

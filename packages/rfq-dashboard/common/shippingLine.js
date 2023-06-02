@@ -23,20 +23,15 @@ const freightProvider = {
 	destination_air_customs     : 'airline',
 };
 
-const titleHandle = (type) => {
-	if (type === 'fcl_freight') {
-		return 'FCL Freight';
-	}
-	if (type === 'air_freight') {
-		return 'Air Freight';
-	}
-	return 'Freight';
+const TITLE_MAPPING = {
+	fcl_freight : 'FCL Freight',
+	air_freight : 'AIR Freight',
 };
 
 const shippingLine = (search_type, rate) => {
 	const name = (rate[freightProvider[search_type]] || {}).short_name;
 	const shipping_line = name ? `(${name})` : '';
-	const title = titleHandle(search_type);
+	const title = TITLE_MAPPING[search_type];
 	return `${title} ${shipping_line}`;
 };
 

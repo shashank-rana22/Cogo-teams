@@ -15,8 +15,8 @@ const useListRfqs = ({ filterStore = {}, id = '' }) => {
 	let sort_type;
 	let sort_by;
 	if (sortBy) {
-		sort_by = (['oldest', 'newest', ''].includes(sortBy)) ? 'created_at' : 'promised_consolidated_profitability';
-		sort_type = (sortBy === 'profitability_low' || sortBy === 'oldest') ? 'asc' : 'desc';
+		sort_by = (['oldest', 'newest'].includes(sortBy)) ? 'created_at' : 'promised_consolidated_profitability';
+		sort_type = ['profitability_low', 'oldest'].includes(sortBy) ? 'asc' : 'desc';
 	}
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -43,9 +43,9 @@ const useListRfqs = ({ filterStore = {}, id = '' }) => {
 		},
 	}, { manual: false });
 
-	const getRfqsForApproval = useCallback(async () => {
+	const getRfqsForApproval = useCallback( () => {
 		try {
-			await trigger();
+			trigger();
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));

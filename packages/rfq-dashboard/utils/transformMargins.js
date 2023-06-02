@@ -1,15 +1,14 @@
 const getMargins = (key, services) => {
 	const { margins: dbMargins } = services[key] || {};
-	const margins = [];
-	(dbMargins || []).forEach((margin) => {
+	
+	const margins = (dbMargins || []).flatMap(margin => {
 		const { margin_values } = margin;
-		const modifiedMarginValues = (margin_values || []).map((value) => ({
-			...value,
-			margin_type         : margin?.margin_type,
-			service_provider_id : margin?.service_provider_id,
+		return (margin_values || []).map(value => ({
+		  ...value,
+		  margin_type: margin?.margin_type,
+		  service_provider_id: margin?.service_provider_id,
 		}));
-		margins.push(...modifiedMarginValues);
-	});
+	  });	  
 	return margins;
 };
 

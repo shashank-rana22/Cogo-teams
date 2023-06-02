@@ -25,9 +25,7 @@ const useUpdateRfqRateMargin = ({
 				},
 			});
 
-			if (response?.status === 200) {
-				Toast.success('Rate updated successfully');
-			}
+			Toast.success('Rate updated successfully');
 
 			return response;
 		} catch (err) {
@@ -36,7 +34,7 @@ const useUpdateRfqRateMargin = ({
 		return null;
 	};
 
-	const updateMargin = async ({ editedMargins, convenienceDetails, rfq_rate_card_id = '' }) => {
+	const updateMargin = ({ editedMargins, convenienceDetails, rfq_rate_card_id = '' }) => {
 		const updatedMargins = transformMargins({
 			values   : editedMargins,
 			services : rate?.service_rates,
@@ -45,7 +43,7 @@ const useUpdateRfqRateMargin = ({
 		const margins = {};
 
 		Object.keys(updatedMargins).forEach((key) => {
-			if (String(key).indexOf('-') > -1) {
+			if (key.indexOf('-') > -1) {
 				margins[key] = updatedMargins[key];
 			}
 		});
