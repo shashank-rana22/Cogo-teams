@@ -10,7 +10,7 @@ import {
 	UploadContainerDetails,
 	MarkConfirmServices,
 	CustomerInvoiceDetails,
-	FTLApproveTruck,
+	ApproveTruck,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
@@ -98,7 +98,7 @@ function ExecuteTask({
 
 	if (['approve_additional_truck', 'approve_updated_truck'].includes(task?.task)) {
 		return (
-			<FTLApproveTruck
+			<ApproveTruck
 				onCancel={onCancel}
 				services={servicesList}
 				shipment_data={shipment_data}

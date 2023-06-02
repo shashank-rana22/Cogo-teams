@@ -36,7 +36,6 @@ function Content({
 			return (
 				<Button
 					themeType="link"
-					className="primary md text"
 					onClick={() => (
 						receivedViaEmail
 							? setShowApproved({

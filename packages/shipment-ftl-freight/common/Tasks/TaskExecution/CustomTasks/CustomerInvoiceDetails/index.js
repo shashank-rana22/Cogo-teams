@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/surface-modules';
 import React from 'react';
 
-import useBulkUpdate from '../../../../../hooks/useBulkUpdate';
+import useUpdateBulkServices from '../../../../../hooks/useUpdateBulkServices';
 import useUpdateTask from '../../../../../hooks/useUpdateTask';
 import getDefaultValues from '../../utils/get-default-values';
 
@@ -37,7 +37,7 @@ function CustomerInvoiceDetails(props) {
 		refetch: taskRefetch,
 	});
 
-	const { loading, handleBulkUpdate } = useBulkUpdate({});
+	const { loading, bulkUpdate } = useUpdateBulkServices({});
 
 	const service_id = servicesList.find(
 		(service) => service?.service_type === 'ftl_freight_service'
@@ -54,7 +54,7 @@ function CustomerInvoiceDetails(props) {
 			status : 'completed',
 		};
 		if (importExporterNameMapped.length) {
-			await handleBulkUpdate(finalValues);
+			await bulkUpdate(finalValues);
 		}
 		await apiTrigger(taskData);
 	};

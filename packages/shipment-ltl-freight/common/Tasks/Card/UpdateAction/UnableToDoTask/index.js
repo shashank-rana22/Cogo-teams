@@ -2,7 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import { TextAreaController, useForm } from '@cogoport/forms';
 import React from 'react';
 
-import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
+import useUpdateTask from '../../../../../hooks/useUpdateTask';
 
 function UnableToDoTask({
 	setShowUnableTo = () => {},
@@ -11,7 +11,7 @@ function UnableToDoTask({
 }) {
 	const { control, handleSubmit, reset } = useForm();
 
-	const { apiTrigger, loading } = useUpdateShipmentPendingTask({
+	const { apiTrigger, loading } = useUpdateTask({
 		refetch: () => {
 			setShowUnableTo(false);
 			reset();

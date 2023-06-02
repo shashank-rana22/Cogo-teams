@@ -1,6 +1,6 @@
 import { useRouter } from '@cogoport/next';
-import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useEffect, useCallback, useState } from 'react';
 
 function useGetShipment() {
@@ -9,7 +9,7 @@ function useGetShipment() {
 	const { shipment_id } = router.query;
 
 	const [{ loading : isGettingShipment, data }, trigger] = useRequest({
-		url          : 'get_shipment',
+		url          : '/get_shipment',
 		service_name : 'shipment',
 		method       : 'GET',
 	}, { manual: true });

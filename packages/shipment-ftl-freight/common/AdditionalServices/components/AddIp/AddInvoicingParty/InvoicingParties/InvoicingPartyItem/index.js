@@ -88,7 +88,6 @@ function InvoicingPartyItem({
 							{verification_status === 'pending' && (
 								<div>
 									<IcMInfo
-										className="image"
 										fill="red"
 										height={16}
 										width={16}

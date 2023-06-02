@@ -7,7 +7,7 @@ const useListBookingPreferences = ({ defaultFilters = {}, shipment_id = '' }) =>
 	const [filters, setFilters] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'list_shipment_booking_confirmation_preferences',
+		url    : '/list_shipment_booking_confirmation_preferences',
 		method : 'GET',
 		params : {
 			filters: {

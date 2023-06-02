@@ -1,8 +1,8 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
-const useUpdateShipmentPendingTask = ({
+const useUpdateTask = ({
 	successMessage = 'Task Updated Successfully!',
 	refetch = () => {},
 }) => {
@@ -32,4 +32,4 @@ const useUpdateShipmentPendingTask = ({
 	};
 };
 
-export default useUpdateShipmentPendingTask;
+export default useUpdateTask;

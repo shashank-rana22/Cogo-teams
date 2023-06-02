@@ -15,8 +15,6 @@ function useStepExecution({
 }) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
-	console.log('service list', servicesList);
-
 	const populatedControls = populateControls(stepConfig.controls);
 
 	const valueInjectedControls = injectValues(

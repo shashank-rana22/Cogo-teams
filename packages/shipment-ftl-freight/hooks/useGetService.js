@@ -25,7 +25,6 @@ function useGetService({ defaultParams = {} }) {
 
 	useEffect(() => {
 		getService();
-		console.log('data', data);
 	}, [getService]);
 
 	return {

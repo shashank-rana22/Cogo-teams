@@ -9,7 +9,7 @@ const useServiceList = () => {
 	const [servicesData, setServicesData] = useState([]);
 
 	const [{ loading : servicesLoading }, trigger] = useRequest({
-		url    : 'list_shipment_services',
+		url    : '/list_shipment_services',
 		method : 'GET',
 	}, { manual: true });
 

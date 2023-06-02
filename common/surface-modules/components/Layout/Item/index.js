@@ -18,6 +18,7 @@ function Item(props) {
 		rules = {},
 		className = '',
 		formValues = {},
+		source = '',
 	} = props || {};
 
 	const errorOriginal = getErrorMessage({
@@ -48,6 +49,8 @@ function Item(props) {
 		};
 	}
 
+	if (!newProps.type) return null;
+
 	const Element = getElementController(newProps.type);
 
 	const flex = ((span || 12) / 12) * 100 - 1;
@@ -59,6 +62,7 @@ function Item(props) {
 
 	return (
 		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%` }}>
+			{label && source !== 'edit_line_items' ? (<h4 className={styles.label}>{label}</h4>) : null}
 			{heading ? (<div className={styles.heading}>{heading}</div>) : null}
 
 			<Element

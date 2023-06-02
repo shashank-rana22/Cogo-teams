@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { RadioGroupController, useForm } from '@cogoport/forms';
 
-import useUpdateShipmentPendingTask from '../../../../../hooks/useUpdateShipmentPendingTask';
+import useUpdateTask from '../../../../../hooks/useUpdateTask';
 
 import styles from './styles.module.css';
 
@@ -13,7 +13,7 @@ function UpdateAssignedStakeholder({
 }) {
 	const { control, handleSubmit } = useForm();
 
-	const { apiTrigger, loading } = useUpdateShipmentPendingTask({
+	const { apiTrigger, loading } = useUpdateTask({
 		refetch: () => {
 			refetch();
 			setShowAdmin(false);
