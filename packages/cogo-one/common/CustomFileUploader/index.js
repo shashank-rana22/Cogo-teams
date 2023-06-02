@@ -1,10 +1,11 @@
 import { Upload, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
-import getMaxFileSize, { ONE_MB } from '../../helpers/getMaxFileSize';
+import getMaxFileSize from '../../helpers/getMaxFileSize';
 
 import styles from './styles.module.css';
 
@@ -106,7 +107,7 @@ function CustomFileUploader(props, ref) {
 				return;
 			}
 			if (values[0]?.size >= maxSize) {
-				const sizeInMb = (maxSize / ONE_MB).toFixed(2);
+				const sizeInMb = (maxSize / GLOBAL_CONSTANTS.one_mb).toFixed(2);
 				Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);
 				return;
 			}

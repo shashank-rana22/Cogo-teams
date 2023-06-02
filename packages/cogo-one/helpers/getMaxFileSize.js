@@ -1,8 +1,8 @@
-export const ONE_MB = 1048576;
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const ZALO_LIMITATION_SIZE = {
-	image : ONE_MB,
-	file  : 5 * ONE_MB,
+	image : GLOBAL_CONSTANTS.one_mb,
+	file  : 5 * GLOBAL_CONSTANTS.one_mb,
 };
 
 const ZALO_FILE_TYPES = [
