@@ -2,7 +2,7 @@ import {
 	IcCTelegram, IcMPlatformchat,
 	IcCWhatsapp,
 	IcMEmail,
-	IcMInsta,
+	IcMZalo,
 } from '@cogoport/icons-react';
 
 const OtherChannels = [
@@ -40,7 +40,7 @@ const OtherChannels = [
 	},
 	{
 		name               : 'zalo',
-		icon               : <IcMInsta width={20} height={20} fill="#E09B3D" />,
+		icon               : <IcMZalo width={20} height={20} fill="#E09B3D" />,
 		other_channel_type : 'zalo',
 		value_type         : 'number',
 		id_name            : 'zalo_id',

@@ -4,6 +4,8 @@ import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
+import getMaxFileSize from '../../helpers/getMaxFileSize';
+
 import styles from './styles.module.css';
 
 function CustomFileUploader(props, ref) {
@@ -15,6 +17,7 @@ function CustomFileUploader(props, ref) {
 		docName,
 		uploadIcon = null,
 		handleProgress,
+		channel,
 		...rest
 	} = props;
 	const [fileName, setFileName] = useState(null);
@@ -46,7 +49,7 @@ function CustomFileUploader(props, ref) {
 		if (multiple) {
 			onChange(urlStore);
 		} else {
-			onChange(urlStore[0], fileName);
+			onChange(urlStore[0]);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [urlStore]);
@@ -96,6 +99,18 @@ function CustomFileUploader(props, ref) {
 	};
 
 	const handleChange = async (values) => {
+		if (channel === 'zalo' && values && values.length > 0) {
+			const maxSize = getMaxFileSize(values[0]?.type);
+			if (maxSize === undefined) {
+				Toast.error('File Type Not Allowed');
+				return;
+			}
+			if (values[0].size >= maxSize) {
+				const size_in_mb = (maxSize / 1048576).toFixed(2);
+				Toast.error(`File Upload failed, Maximum size allowed - ${size_in_mb} MB`);
+				return;
+			}
+		}
 		try {
 			setLoading(true);
 

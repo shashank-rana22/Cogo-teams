@@ -55,9 +55,6 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 						<source src={media_url} type={`video/${fileExtension}`} />
 					</video>
 				);
-			case 'file':
-				if (media_url) { return (<a href={media_url} target="_blank" rel="noreferrer">Open</a>); }
-				return null;
 			default:
 				return null;
 		}
@@ -90,7 +87,7 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 			</>
 		);
 	}
-	if (message_type === 'document') {
+	if (['document', 'file'].includes(message_type)) {
 		return (
 			<>
 				<CustomFileDiv mediaUrl={media_url} />
