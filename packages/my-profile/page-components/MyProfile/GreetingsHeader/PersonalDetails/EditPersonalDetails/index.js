@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 function EditPersonalDetails({
 	control,
 	errors,
-
 	editNameModal,
 }) {
 	const controls = getControls();
