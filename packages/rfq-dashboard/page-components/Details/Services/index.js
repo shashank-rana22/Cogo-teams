@@ -65,7 +65,10 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRf
 				{(isEmpty(rate_card_list_object) && !loading)
 					? <EmptyPortsSection />
 					: Object.keys(rate_card_list_object).map((key) => (
-						<div className={styles.approve_remaining_complete_shipment_section} key={key}>
+						<div
+							key={key}
+							className={styles.approve_remaining_complete_shipment_section}
+						>
 							<div className={styles.lists_heading_section}>
 								<span className={styles.lists_heading_section}>{TITLE_MAPPING[key]}</span>
 								<div className={` ${styles.lists_heading_section} ${styles.port_pairs_nos}`}>
