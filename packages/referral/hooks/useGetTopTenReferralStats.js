@@ -2,14 +2,14 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetListReferralMappings = () => {
+const useGetTopTenReferralStats = () => {
 	const { query = '', debounceQuery } = useDebounceQuery();
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/list_referral_mappings',
+		url    : '/get_top_ten_referral_stats',
 		method : 'get',
 	}, { manual: true });
 
-	const getListReferrals = useCallback(() => {
+	const getReferralStats = useCallback(() => {
 		try {
 			trigger({
 				params: {
@@ -25,8 +25,8 @@ const useGetListReferralMappings = () => {
 	}, [trigger, query]);
 
 	useEffect(() => {
-		getListReferrals();
-	}, [getListReferrals]);
+		getReferralStats();
+	}, [getReferralStats]);
 
 	return {
 		networkData: data,
@@ -35,4 +35,4 @@ const useGetListReferralMappings = () => {
 	};
 };
 
-export default useGetListReferralMappings;
+export default useGetTopTenReferralStats;

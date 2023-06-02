@@ -1,5 +1,5 @@
 import { DateRangepicker, TabPanel, Tabs } from '@cogoport/components';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 import BusinessPerformance from './Business';
 import styles from './styles.module.css';
@@ -9,6 +9,10 @@ function ReferralAnalytics() {
 	const [selectedDate, setSelectedDate] = useState({});
 
 	const [performanceType, setPerformanceType] = useState('user_performance');
+
+	useEffect(() => {
+		setSelectedDate({});
+	}, [performanceType]);
 
 	return (
 		<div className={styles.container}>
@@ -36,7 +40,10 @@ function ReferralAnalytics() {
 					</TabPanel>
 
 					<TabPanel name="business_performance" title="Business Performance">
-						<BusinessPerformance />
+						<BusinessPerformance
+							selectedDate={selectedDate}
+							setSelectedDate={setSelectedDate}
+						/>
 					</TabPanel>
 				</Tabs>
 			</div>

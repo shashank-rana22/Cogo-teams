@@ -1,5 +1,7 @@
 .graph_div {
 	display: flex;
+	align-items: center;
+	justify-content: center;
 	width: 1025px;
 	height: 204px;
 	background: #fff;

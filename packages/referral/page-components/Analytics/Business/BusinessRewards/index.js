@@ -1,11 +1,47 @@
 import { TabPanel, Tabs } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import { BUSINESS_REWARDS_OPTIONS } from '../../../../constants';
+import useGetReferralBusinessAnalytics from '../../../../hooks/useGetReferralBusinessAnalytics';
 
 import BusinessRewardStats from './BusinessRewardStats';
 import styles from './styles.module.css';
 
-function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () => {} }) {
+function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () => {}, selectedDate = {} }) {
+	const { data: businessData = {}, loading = false } = useGetReferralBusinessAnalytics({
+		selectedDate,
+		businessFilterType,
+		type: 'reward',
+	});
+
+	const { count = {}, data = {} } = businessData || {};
+	const { kyc_verified = 0, shipment = 0, subscription = 0 } = count || {};
+	const total = kyc_verified + shipment + subscription;
+
+	const formatCount = {
+		total,
+		kyc_verified,
+		shipment,
+		subscription,
+	};
+
+	const newData = Object.keys(data || {}).map((item) => ({
+		x: formatDate({
+			date       : item,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+			formatType : 'date',
+		}),
+		y: data[item] || 0,
+	}));
+
+	const graphData = [
+		{
+			id   : 'date',
+			data : newData.reverse(),
+		},
+	];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.tab_container}>
@@ -14,13 +50,13 @@ function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () =
 					themeType="primary-vertical"
 					onChange={(val) => setBusinessFilterType((prev) => ({ ...prev, rewardType: val }))}
 				>
-					{BUSINESS_REWARDS_OPTIONS.map(({ label, name, badge }) => (
-						<TabPanel name={name} title={label} badge={badge} key={name} />
+					{BUSINESS_REWARDS_OPTIONS.map(({ label, name }) => (
+						<TabPanel name={name} title={label} badge={formatCount[name]} key={name} />
 					))}
 
 				</Tabs>
 				{businessFilterType.rewardType && (
-					<BusinessRewardStats />
+					<BusinessRewardStats graphData={graphData} loading={loading} />
 				)}
 			</div>
 		</div>

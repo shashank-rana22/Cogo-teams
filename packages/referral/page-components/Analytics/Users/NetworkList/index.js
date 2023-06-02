@@ -1,4 +1,7 @@
 import { Table } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 
 import AnalyticsFilter from '../../../../common/AnalyticsFilter';
 import useGetListReferralMappings from '../../../../hooks/useGetListReferralMappings';
@@ -18,6 +21,14 @@ function NetworkList({
 }) {
 	const { networkData = {}, loading = false, debounceQuery } = useGetListReferralMappings();
 	const { list = [] } = networkData || {};
+
+	if (isEmpty(list) && !loading) {
+		return (
+			<div className={styles.empty_div}>
+				<Image src={GLOBAL_CONSTANTS.image_url.list_empty_image} width={100} height={100} />
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
