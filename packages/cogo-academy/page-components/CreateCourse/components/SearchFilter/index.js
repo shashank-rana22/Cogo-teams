@@ -48,13 +48,13 @@ function SearchFilter({ debounceQuery, input, setInput, setParams, params, setFi
 
 			<div className={styles.right_container}>
 				<div className={styles.button_container}>
-					<Button
+					{/* <Button
 						type="button"
 						themeType="accent"
 						onClick={onClickCreateQuestion}
 					>
 						Create Question
-					</Button>
+					</Button> */}
 
 					<Button
 						type="button"
