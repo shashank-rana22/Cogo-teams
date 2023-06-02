@@ -1,4 +1,5 @@
 import { Button, Popover, Tooltip, cl } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import {
 	IcMOverflowDot,
 	IcMInfo,
@@ -7,12 +8,14 @@ import {
 } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
 import EditInvoice from '../EditInvoice';
 
 import AddCustomerInvoice from './AddCustomerInvoice';
+import FillCustomerPortalData from './FillCustomerPortalData';
 import styles from './styles.module.css';
+import UpdateCustomerInvoice from './UpdateCustomerInvoice';
 
 const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
@@ -27,7 +30,6 @@ const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 function Actions({
 	invoice = {},
 	bfInvoiceRefetch = () => {},
-	shipment_data = {},
 	invoiceData = {},
 	isIRNGenerated = false,
 	salesInvoicesRefetch = () => {},
@@ -40,8 +42,13 @@ function Actions({
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [addCustomerInvoice, setAddCustomerInvoice] = useState(false);
+	const [updateCustomerInvoice, setUpdateCustomerInvoice] = useState(false);
+	const [fillCustomerData, setFillCustomerData] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setShowOTPModal] = useState(false);
+
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
 	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
@@ -186,48 +193,45 @@ function Actions({
 						Exchange Rate Sheet
 
 					</div>
-					{shipment_data?.shipment_type === 'ftl_freight' ? (
-						<div>
-							<div className={styles.line} />
+					<div>
+						<div className={styles.line} />
+						<div
+							role="button"
+							tabIndex={0}
+							className={styles.text}
+							onClick={handleCustomerInvoice}
+						>
+							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
+								&nbsp;
+							{invoice?.status === 'reviewed' ? '/Generate' : ''}
+							Customer Invoice
+						</div>
+						{invoice?.status === 'reviewed' ? (
 							<div
 								role="button"
 								tabIndex={0}
 								className={styles.text}
-								onClick={handleCustomerInvoice}
+								onClick={() => { setShow(false); setUpdateCustomerInvoice(true); }}
 							>
-								{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
-								&nbsp;
-								{invoice?.status === 'approved' ? '/Generate' : ''}
-								Customer Invoice
+								Update Customer Invoice
 							</div>
-							{invoice?.status === 'approved' ? (
-								<div
-									role="button"
-									tabIndex={0}
-									className={styles.text}
-									// onClick={handleUpdateCustomerInvoice}
-								>
-									Update Customer Invoice
-								</div>
-							) : null}
-						</div>
-					) : null}
+						) : null}
+					</div>
 				</div>
 			))}
-			{shipment_data?.shipment_type === 'ftl_freight'
-			&& invoice?.status === 'approved' ? (
+			{invoice?.status === 'reviewed' ? (
 				<div>
 					<div className={styles.line} />
 					<div
 						role="button"
 						tabIndex={0}
 						className={styles.text}
-						// onClick={handleFillCustomerPortal}
+						onClick={() => { setShow(false); setFillCustomerData(true); }}
 					>
 						Fill Shipment Data For Customer Portal
 					</div>
 				</div>
-				) : null}
+			) : null}
 		</div>
 	);
 
@@ -416,13 +420,35 @@ function Actions({
 					refetch={handleRefetch}
 				/>
 			) : null}
+
+			{updateCustomerInvoice ? (
+				<UpdateCustomerInvoice
+					show={updateCustomerInvoice}
+					setShow={setUpdateCustomerInvoice}
+					closeModal={() => setUpdateCustomerInvoice(false)}
+					refetch={handleRefetch}
+					shipmentData={shipment_data}
+					invoice={invoice}
+				/>
+			) : null}
+
+			{fillCustomerData ? (
+				<FillCustomerPortalData
+					show={fillCustomerData}
+					closeModal={() => setFillCustomerData(false)}
+					handleRefetch={handleRefetch}
+					shipmentData={shipment_data}
+					invoice={invoice}
+				/>
+			) : null}
+
 			<AddCustomerInvoice
 				show={addCustomerInvoice}
 				setShow={setAddCustomerInvoice}
 				closeModal={() => setAddCustomerInvoice(false)}
 				handleRefetch={handleRefetch}
 				invoice={invoice}
-				shipment_data={shipment_data}
+				shipmentData={shipment_data}
 			/>
 		</div>
 	);
