@@ -18,7 +18,7 @@ import DefaultersFilters from './DefaultersFilters';
 import { INVOICE_STATUS_MAPPING, INVOICE_TYPE, STATUS_MAPPING } from './DefaultersFilters/constants';
 import styles from './styles.module.css';
 
-interface GlobalInterface {
+interface GlobalInterface {  
 	page?:number,
 	type?:string,
 	migrated?:boolean | string,
