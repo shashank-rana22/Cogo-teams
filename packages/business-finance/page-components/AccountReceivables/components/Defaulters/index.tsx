@@ -18,7 +18,7 @@ import DefaultersFilters from './DefaultersFilters';
 import { INVOICE_STATUS_MAPPING, INVOICE_TYPE, STATUS_MAPPING } from './DefaultersFilters/constants';
 import styles from './styles.module.css';
 
-interface GlobalInterface {  
+interface GlobalInterface {
 	page?:number,
 	type?:string,
 	migrated?:boolean | string,
@@ -56,8 +56,8 @@ function Defaulters() {
 
 		const isFilterApplied = String(migrated)?.length > 0 || cogoEntity?.length > 0
 		|| invoiceStatus?.length > 0 || status.length > 0 || services?.length > 0
-		|| String(invoiceDate?.startDate)?.length > 0 
-		|| String(invoiceDate?.endDate)?.length > 0 
+		|| String(invoiceDate?.startDate)?.length > 0
+		|| String(invoiceDate?.endDate)?.length > 0
 		|| String(dueDate?.startDate)?.length > 0
 		|| String(dueDate?.endDate)?.length > 0 || currency?.length > 0;
 
