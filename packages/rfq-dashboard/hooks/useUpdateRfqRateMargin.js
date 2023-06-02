@@ -68,6 +68,7 @@ const useUpdateRfqRateMargin = ({
 	return {
 		updateRfqRateMargin,
 		updateMargin,
+		data,
 	};
 };
 
