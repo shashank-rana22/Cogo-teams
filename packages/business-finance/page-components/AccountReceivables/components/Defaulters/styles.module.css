@@ -18,12 +18,6 @@
 	cursor: pointer;
 }
 
-.field_pair {
-	display: flex;
-	flex-direction: column;
-	align-items: flex-start;
-}
-
 .tool_tip {
 	font-size: var(--font-size-md);
 }
