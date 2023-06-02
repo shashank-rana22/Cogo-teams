@@ -19,11 +19,6 @@ export default function CancelDetails() {
 					Reason:&nbsp;
 					{startCase(shipment_data?.cancellation_reason || '')}
 				</h3>
-
-				<p>
-					Remarks:&nbsp;
-					{shipment_data?.cancellation_subreason || ''}
-				</p>
 			</div>
 		</div>
 	);

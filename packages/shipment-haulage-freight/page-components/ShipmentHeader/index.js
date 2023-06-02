@@ -23,6 +23,8 @@ function ShipmentHeader() {
 
 	const { po_number, importer_exporter = {} } = shipment_data || {};
 
+	const can_add_pop_number = !!stakeholderConfig?.shipment_header?.add_po_number && !po_number;
+
 	if (isGettingShipment) {
 		return <Loader />;
 	}
@@ -52,7 +54,9 @@ function ShipmentHeader() {
 						PO Number:&nbsp;
 						{po_number}
 					</div>
-				) : (
+				) : null}
+
+				{can_add_pop_number ? (
 					<div
 						className={styles.button}
 						role="button"
@@ -61,7 +65,7 @@ function ShipmentHeader() {
 					>
 						Add PO Number
 					</div>
-				)}
+				) : null}
 			</div>
 
 			<div className={styles.port_details}>

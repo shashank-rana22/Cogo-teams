@@ -12,7 +12,6 @@ import TimeLine from '../TimeLine';
 import styles from './styles.module.css';
 
 const CancelDetails = dynamic(() => import('../CancelDetails'), { ssr: false });
-const DocumentHoldDetails = dynamic(() => import('../DocumentHoldDetails'), { ssr: false });
 
 const TAB_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
@@ -56,8 +55,6 @@ function DefaultView() {
 			</div>
 
 			{conditionMapping.cancelDetails ? <CancelDetails /> : null}
-
-			{conditionMapping.documentHoldDetails ? <DocumentHoldDetails /> : null}
 
 			<div className={styles.header}>
 				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
