@@ -2,10 +2,10 @@ import React, { useEffect, useRef } from 'react';
 
 import styles from './styles.module.css';
 
-const MILI_SECONDS_IN_A_DAY = 1000 * 60 * 60 * 24;
-const MILI_SECONDS_IN_A_HOUR = 1000 * 60 * 60;
-const MILI_SECONDS_IN_A_MINUTES = 1000 * 60;
-const MILI_SECONDS_IN_A_SECONDS = 1000;
+const MILLI_SECONDS_IN_A_DAY = 1000 * 60 * 60 * 24;
+const MILLI_SECONDS_IN_A_HOUR = 1000 * 60 * 60;
+const MILLI_SECONDS_IN_A_MINUTES = 1000 * 60;
+const MILLI_SECONDS_IN_A_SECONDS = 1000;
 
 function EwayTimer({ data = '' }) {
 	const handleTimer = (end_date) => {
@@ -16,10 +16,10 @@ function EwayTimer({ data = '' }) {
 
 		const difference = Math.abs(countDownDate - timeNow);
 
-		let days = Math.floor(difference / MILI_SECONDS_IN_A_DAY);
-		const hours = Math.floor((difference % MILI_SECONDS_IN_A_DAY) / MILI_SECONDS_IN_A_HOUR) || '00';
-		const minutes =	Math.floor((difference % MILI_SECONDS_IN_A_HOUR) / MILI_SECONDS_IN_A_MINUTES) || '00';
-		const seconds = Math.floor((difference % MILI_SECONDS_IN_A_MINUTES) / MILI_SECONDS_IN_A_SECONDS) || '00';
+		let days = Math.floor(difference / MILLI_SECONDS_IN_A_DAY);
+		const hours = Math.floor((difference % MILLI_SECONDS_IN_A_DAY) / MILLI_SECONDS_IN_A_HOUR) || '00';
+		const minutes =	Math.floor((difference % MILLI_SECONDS_IN_A_HOUR) / MILLI_SECONDS_IN_A_MINUTES) || '00';
+		const seconds = Math.floor((difference % MILLI_SECONDS_IN_A_MINUTES) / MILLI_SECONDS_IN_A_SECONDS) || '00';
 
 		if (days) {
 			days = `${days} ${days > 1 ? 'Days' : 'Day'}`;
