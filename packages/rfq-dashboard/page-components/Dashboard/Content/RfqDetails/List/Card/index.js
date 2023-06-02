@@ -10,6 +10,16 @@ import { getformattedDuration } from '../../../../../../utils/getFormattedDurati
 
 import styles from './styles.module.css';
 
+const priceFormating = (price, currency) => formatAmount({
+	amount  : price,
+	currency,
+	options : {
+		style                 : 'currency',
+		currencyDisplay       : 'code',
+		maximumFractionDigits : 0,
+	},
+});
+
 function Card({ item, handleCheck, checkedItems, partner_id }) {
 	const { stats = {} } = item;
 	const router = useRouter();
@@ -17,15 +27,6 @@ function Card({ item, handleCheck, checkedItems, partner_id }) {
 	const { port_pair_count = {} } = item;
 
 	const services = Object.keys(port_pair_count);
-	const priceFormating = (price, currency) => formatAmount({
-		amount  : price,
-		currency,
-		options : {
-			style                 : 'currency',
-			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
-		},
-	});
 
 	return (
 		<div
