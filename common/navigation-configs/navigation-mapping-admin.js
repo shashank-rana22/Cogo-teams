@@ -1827,8 +1827,8 @@ const navigationMappingAdmin = {
 	awb_inventory: {
 		key           : 'awb_inventory',
 		title         : 'AWB Inventory',
-		href          : 'v2/awb-inventory',
-		as            : 'v2/awb-inventory',
+		href          : '/v2/awb-inventory',
+		as            : '/v2/awb-inventory',
 		main_apis     : [],
 		icon          : IcMInvoiceApprovals,
 		possible_apis : apis.awb_inventory,

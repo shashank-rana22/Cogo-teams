@@ -17,10 +17,18 @@ function AwbNumberUsed({
 	finalList,
 	page,
 	setPage,
-	awbList,
 }) {
 	const { fields } = AwbNumberUsedFields;
-	const { push } = useRouter();
+	const router = useRouter();
+
+	const redirectToShipment = (shipmentId) => {
+		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipmentId}`;
+		window.open(
+			newUrl,
+			'_blank',
+			'noreferrer',
+		);
+	};
 
 	const functions = {
 		handleAirline: (singleItem) => (
@@ -76,7 +84,7 @@ function AwbNumberUsed({
 
 			const handleClick = () => {
 				if (shipments[0]?.id) {
-					push('/shipments/[id]', `/shipments/${shipments[0].id}`);
+					redirectToShipment(shipments[0].id);
 				}
 			};
 			return (
