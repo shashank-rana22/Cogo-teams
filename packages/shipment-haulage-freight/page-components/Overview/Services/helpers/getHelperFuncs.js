@@ -36,14 +36,12 @@ const helperFuncs = (servicesList) => {
 	};
 
 	possibleServices.forEach((serviceToIterate) => {
-		const key = 'mainServices';
-
 		const { targetServiceObj } = classifyTradeTypeBasedService({
 			servicesList,
 			serviceToIterate,
-			targetServiceObj: serviceObj[key],
+			targetServiceObj: serviceObj.mainServices,
 		});
-		serviceObj[key] = targetServiceObj;
+		serviceObj.mainServices = targetServiceObj;
 	});
 
 	return {

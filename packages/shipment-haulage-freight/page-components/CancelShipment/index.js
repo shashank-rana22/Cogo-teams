@@ -8,13 +8,11 @@ import {
 	useForm,
 	AsyncSelectController,
 } from '@cogoport/forms';
-import { useSelector } from '@cogoport/store';
 import { useContext } from 'react';
 
 import useUpdateShipment from '../../hooks/useUpdateShipment';
 
 import getCancelShipmentPayload from './helpers/getCancelShipmentPayload';
-import { getRole } from './helpers/getRole';
 import getShowElements from './helpers/getShowElements';
 import styles from './styles.module.css';
 import controls from './utils/shipment-cancel-controls';
@@ -29,6 +27,14 @@ const controlTypeMapping = {
 };
 
 function FormElement({ name, label, show, errors, type, ...rest }) {
+	if (name === 'better_quotation_label') {
+		return (
+			<div className={cl`${styles.form_element} ${styles[rest.className]}`}>
+				{label ? <div className={styles.label}>{label}</div> : null}
+			</div>
+		);
+	}
+
 	const Element = controlTypeMapping[type];
 
 	return Element && show ? (
@@ -44,17 +50,15 @@ function FormElement({ name, label, show, errors, type, ...rest }) {
 
 export default function CancelShipment({ setShow }) {
 	const closeModal = () => setShow(false);
-	const { user_role_ids } = useSelector(({ profile }) => ({ user_role_ids: profile?.partner?.user_role_ids }));
-
-	const role = getRole(user_role_ids);
 
 	const { loading: updateShipmentLoading, updateShipment } = useUpdateShipment({
 		refetch        : closeModal,
 		successMessage : 'Shipment has been cancelled!!',
 	});
 
-	const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data, stakeholderConfig } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
+	const role = stakeholderConfig?.cancel_shipment?.role || '';
 
 	const { control, formState: { errors }, watch, handleSubmit } = useForm({ shouldUnregister: true });
 

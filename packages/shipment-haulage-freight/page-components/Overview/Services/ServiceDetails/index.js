@@ -9,7 +9,6 @@ function ServiceDetails({ servicesData = [] }) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	return (
-
 		<div className={cl`${styles[servicesData?.[0]?.state]} ${styles.main_container}`}>
 			<Header serviceData={servicesData} showDetails={showDetails} setShowDetails={setShowDetails} />
 

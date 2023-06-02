@@ -31,28 +31,15 @@ function FormElement(props) {
 function SupplierReallocation({
 	serviceData = [],
 	closeModal = () => {},
-	isAdditional = false,
 }) {
-	const {
-		shipment_data, refetch = () => {},
-		refetchServices = () => {}, primary_service = {},
-	} = useContext(ShipmentDetailContext);
+	const { refetch = () => {}, refetchServices = () => {}, primary_service = {} } = useContext(ShipmentDetailContext);
 	const { service_provider = {} } = primary_service;
-
-	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
 
 	const serviceObj = serviceData?.[0] || {};
 
 	const { service_type } = serviceObj || {};
 
-	const { defaultValues, controls, showAllControls } = getControls({
-		serviceObj,
-		shipment_type,
-		documents,
-		isAdditional,
-		trade_type,
-		payment_term,
-	});
+	const { defaultValues, controls } = getControls({ serviceObj });
 
 	const { handleSubmit, control, formState: { errors } } = useForm({ defaultValues });
 
@@ -92,7 +79,6 @@ function SupplierReallocation({
 				<Modal.Header title={(
 					<div className={styles.header}>
 						Supplier Reallocation
-						{showAllControls ? ' & BL Details' : null}
 					</div>
 				)}
 				/>

@@ -16,7 +16,7 @@ const controls = (state, cancelReason) => {
 				name      : 'cancellation_reason',
 				label     : 'Please select a reason for cancelling the shipment',
 				type      : 'radio',
-				className : 'radio_field',
+				className : 'width_100',
 				options   : sales_reason_options.slice(0, salesOptionLimit),
 				rules     : {
 					required: {
@@ -65,7 +65,8 @@ const controls = (state, cancelReason) => {
 			{
 				label:
 					'Please share the cost difference, and shipping line (we’ll try to get a better rate next time)',
-				name: 'better_quotation_label',
+				name      : 'better_quotation_label',
+				className : 'width_100',
 			},
 			{
 				name        : 'better_quotation_currency',
@@ -132,7 +133,7 @@ const controls = (state, cancelReason) => {
 				name      : 'cancellation_reason',
 				label     : 'Please select a reason for cancelling the shipment',
 				type      : 'radio',
-				className : 'radio_field',
+				className : 'width_100',
 				options   : supply_cancellation_reasons[supplyOptionsState],
 				rules     : {
 					required: 'Cancellation reason is required',

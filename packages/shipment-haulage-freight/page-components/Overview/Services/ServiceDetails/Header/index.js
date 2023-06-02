@@ -7,14 +7,18 @@ import styles from './styles.module.css';
 
 function Header({ serviceData = [], showDetails = false, setShowDetails = () => {} }) {
 	const service = serviceData?.[0] || {};
-	const { state, display_label, service_provider, payment_term } = service || {};
+	const { state, display_label, display_service_type, service_provider, payment_term } = service || {};
 
 	const statusText = state === 'init' ? 'Not Allocated' : startCase(state);
+
+	const heading = display_service_type === 'trailer_freight_service'
+		? 'Haulage Freight (Trailer)'
+		: display_label;
 
 	return (
 		<div className={styles.container}>
 			<div className={cl`${styles[state]} ${styles.service_details}`}>
-				<div className={styles.service_name}>{display_label}</div>
+				<div className={styles.service_name}>{heading}</div>
 
 				<div className={styles.service_provider}>{service_provider?.business_name}</div>
 			</div>
