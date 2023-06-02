@@ -1,5 +1,6 @@
 import EditRate from './EditRate';
 import formatRate from './helper/formatRate';
+import { useState } from 'react'
 import SelectRate from './SelectRate';
 
 const REVENUE_DESK_SERVICES = [
