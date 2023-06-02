@@ -5,11 +5,10 @@ import TableColumns from '../List/TableColumn';
 import styles from './styles.module.css';
 
 function NetworkList({
-	showOptions,
-	setShowOptions,
-	showActivityModal,
-	setShowActivityModal,
+	setShowOptions = () => {},
+	setShowActivityModal = () => {},
 	data = [],
+	loading = false,
 }) {
 	return (
 		<div className={styles.container}>
@@ -17,13 +16,12 @@ function NetworkList({
 			<Table
 				columns={TableColumns({
 					listType: 'network',
-					showOptions,
 					setShowOptions,
-					showActivityModal,
 					setShowActivityModal,
 				})}
 				data={data}
 				loadingRowsCount={10}
+				loading={loading}
 
 			/>
 		</div>

@@ -2,8 +2,8 @@ import { ResponsiveLine } from '@cogoport/charts/line';
 import { TabPanel, Tabs } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Image } from '@cogoport/next';
 
-// import { data } from '../../../../configurations/dummyData';
 import { BUSINESS_TAB_OPTIONS } from '../../../../constants';
 import useGetReferralBusinessAnalytics from '../../../../hooks/useGetReferralBusinessAnalytics';
 
@@ -58,40 +58,49 @@ function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => 
 			</Tabs>
 			{businessFilterType.activityType && (
 				<div className={styles.graph_div}>
-					<ResponsiveLine
-						data={graphData}
-						margin={{ top: 30, right: 25, bottom: 40, left: 48 }}
-						xScale={{ type: 'point' }}
-						yScale={{
-							type    : 'linear',
-							min     : 'auto',
-							max     : 'auto',
-							stacked : true,
-							reverse : false,
-						}}
-						yFormat=" >-.2f"
-						axisTop={null}
-						axisRight={null}
-						axisBottom={{
-							tickSize     : 5,
-							tickPadding  : 5,
-							tickRotation : 0,
-						}}
-						axisLeft={{
-							tickSize     : 5,
-							tickPadding  : 5,
-							tickRotation : 0,
-						}}
-						enableGridX={false}
-						enablePoints={false}
-						pointSize={10}
-						pointColor={{ theme: 'background' }}
-						pointBorderWidth={2}
-						pointBorderColor={{ from: 'serieColor' }}
-						pointLabelYOffset={-12}
-						useMesh
-						legends={[]}
-					/>
+					{loading ? (
+						<Image
+							src={GLOBAL_CONSTANTS.image_url.spinner_loader}
+							width={50}
+							height={50}
+						/>
+					) : (
+
+						<ResponsiveLine
+							data={graphData}
+							margin={{ top: 30, right: 25, bottom: 40, left: 48 }}
+							xScale={{ type: 'point' }}
+							yScale={{
+								type    : 'linear',
+								min     : 'auto',
+								max     : 'auto',
+								stacked : true,
+								reverse : false,
+							}}
+							yFormat=" >-.2f"
+							axisTop={null}
+							axisRight={null}
+							axisBottom={{
+								tickSize     : 5,
+								tickPadding  : 5,
+								tickRotation : 0,
+							}}
+							axisLeft={{
+								tickSize     : 5,
+								tickPadding  : 5,
+								tickRotation : 0,
+							}}
+							enableGridX={false}
+							enablePoints={false}
+							pointSize={10}
+							pointColor={{ theme: 'background' }}
+							pointBorderWidth={2}
+							pointBorderColor={{ from: 'serieColor' }}
+							pointLabelYOffset={-12}
+							useMesh
+							legends={[]}
+						/>
+					)}
 				</div>
 			)}
 		</>

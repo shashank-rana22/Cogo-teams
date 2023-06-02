@@ -2,7 +2,6 @@ import { Popover, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-// import useGetTopTenReferralStats from '../../../../../hooks/useGetTopTenReferralStats';
 import ListButtons from '../../../../../utils/renderButtonData';
 import InviteColumns from '../InviteColumns';
 import NodeColumns from '../NodeColumns';
@@ -13,7 +12,7 @@ import styles from './styles.module.css';
 function TableColumns({
 	listType = '',
 	setShowOptions = () => {},
-	setShowActivityModal,
+	setShowActivityModal = () => {},
 }) {
 	const columns = [
 		{
@@ -42,6 +41,22 @@ function TableColumns({
 				</div>
 			),
 			conditions: ['users'],
+		},
+		{
+			Header   : 'LEVELS',
+			accessor : (item = {}) => (
+				<div className={styles.user_name}>
+					{item?.level || 0}
+				</div>
+			),
+			conditions: ['network'],
+		},
+		{
+			Header   : 'USERS',
+			accessor : (item = {}) => (
+				<div className={styles.user_name}>{item?.total_child_count}</div>
+			),
+			conditions: ['network'],
 		},
 		{
 			Header   : 'INVITIES',

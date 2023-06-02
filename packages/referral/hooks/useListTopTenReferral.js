@@ -11,7 +11,7 @@ const useListTopTenReferral = () => {
 		try {
 			trigger();
 		} catch (error) {
-			// console.log(error);
+			console.log(error);
 		}
 	}, [trigger]);
 
