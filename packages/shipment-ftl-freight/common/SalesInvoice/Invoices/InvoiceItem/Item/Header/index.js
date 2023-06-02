@@ -235,7 +235,6 @@ function Header({
 						<Actions
 							invoice={invoice}
 							bfInvoiceRefetch={bfInvoiceRefetch}
-							shipment_data={shipment_data}
 							invoiceData={invoiceData}
 							isIRNGenerated={isIRNGenerated}
 							salesInvoicesRefetch={salesInvoicesRefetch}
