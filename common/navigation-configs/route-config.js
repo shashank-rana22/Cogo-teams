@@ -32,6 +32,7 @@ import shipmentFclFreightLocal from './config/shipment-fcl-freight-local';
 import shipmentLclFreight from './config/shipment-lcl-freight';
 import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
+import ticketManagement from './config/ticket-management';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
 import welcome from './config/welcome';
@@ -75,6 +76,7 @@ const routeConfig = {
 	...so2Surface,
 	...chakravyuh,
 	...shipmentFclFreightLocal,
+	...ticketManagement,
 };
 
 export default routeConfig;
