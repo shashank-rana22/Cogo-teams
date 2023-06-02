@@ -1,10 +1,10 @@
-import { Button } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import { AmendmentListFields } from '../../configurations/amendment_list_fields';
+import AmendmentListFields from '../../configurations/amendment-list-fields';
 import useUpdateShipmentDocument from '../../hooks/useUpdateShipmentDocument';
 import HawbListItem from '../HawbList/HawbListItem';
 import UploadModal from '../UploadModal';
@@ -18,10 +18,11 @@ const BL_CATEGORY = {
 };
 
 function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setGenerate }) {
-	const [showUpload, setShowUpload] = useState(null);
+	const [showUpload, setShowUpload] = useState();
+
 	const { pendingTasks = [] } = data || {};
 
-	const [showApprove, setShowApprove] = useState(null);
+	const [showApprove, setShowApprove] = useState();
 
 	const { loading:updateLoading, updateDocument } = useUpdateShipmentDocument();
 
@@ -87,9 +88,9 @@ function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setG
 			);
 		},
 		handleEdit: (singleItem) => {
-			const { documentData = {}, awbNumber, documentState, documentType, serialId } = singleItem || {};
+			const { documentData = {}, awbNumber, documentState, documentType, serialId, remarks } = singleItem || {};
 
-			const docData = { ...documentData, awbNumber, documentState, documentType, serialId };
+			const docData = { ...documentData, awbNumber, documentState, documentType, serialId, remarks };
 
 			return (
 				<Button
@@ -104,14 +105,19 @@ function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setG
 			);
 		},
 		handleStatus: (singleItem) => (
-			<Button
-				themeType="linkUi"
-				style={{ color: '#ee3425' }}
-				disabled={updateLoading}
-				onClick={() => { setShowApprove(singleItem); }}
+			<Tooltip
+				content={singleItem?.remarks?.toString()}
+				placement="top"
 			>
-				{`Approve ${BL_CATEGORY[singleItem?.task]}`}
-			</Button>
+				<Button
+					themeType="linkUi"
+					style={{ color: '#ee3425' }}
+					disabled={updateLoading}
+					onClick={() => { setShowApprove(singleItem); }}
+				>
+					{`Approve ${BL_CATEGORY[singleItem?.task]}`}
+				</Button>
+			</Tooltip>
 		),
 	};
 

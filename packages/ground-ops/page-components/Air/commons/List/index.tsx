@@ -20,7 +20,7 @@ interface Props {
 	setViewDoc?: Function;
 	setItem?: Function;
 	listAPI?: Function;
-	edit?: boolean;
+	edit?: boolean | string;
 	setEdit?: Function;
 	setGenerate?: Function;
 }

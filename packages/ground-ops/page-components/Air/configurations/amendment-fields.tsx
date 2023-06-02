@@ -1,4 +1,4 @@
-export const AmendmentFields = {
+const AmendmentFields = {
 	fields: [
 		{
 			key   : 'serialId',
@@ -25,3 +25,5 @@ export const AmendmentFields = {
 		},
 	],
 };
+
+export default AmendmentFields;

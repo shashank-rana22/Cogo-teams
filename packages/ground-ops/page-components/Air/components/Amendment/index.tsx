@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
 
 import List from '../../commons/List';
-import { AmendmentFields } from '../../configurations/amendment_fields';
+import AmendmentFields from '../../configurations/amendment-fields';
 import AmendmentList from '../AmendmentList';
 import UploadModal from '../UploadModal';
 

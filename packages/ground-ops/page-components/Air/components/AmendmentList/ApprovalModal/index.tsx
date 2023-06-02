@@ -21,7 +21,7 @@ function ApprovalModal({ showApprove, setShowApprove, handleUpdate, updateLoadin
 					style={{ marginRight: '10px', border: '1px solid #333' }}
 					size="md"
 					disabled={updateLoading}
-					onClick={() => setShowApprove(null)}
+					onClick={() => setShowApprove(false)}
 					themeType="secondary"
 				>
 					Cancel
