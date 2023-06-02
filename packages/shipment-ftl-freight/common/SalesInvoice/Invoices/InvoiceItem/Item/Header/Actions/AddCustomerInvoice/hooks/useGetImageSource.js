@@ -1,8 +1,8 @@
 import { useEffect, useState } from 'react';
 
-const LOGO_URL =	'https://cogoport-testing.sgp1.digitaloceanspaces.com/782ace87c99f4b4192741a3df89d4efb/Screenshot%202023-05-10%20at%2010.03.20%20AM.png';
+const LOGO_URL = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/782ace87c99f4b4192741a3df89d4efb/Screenshot%202023-05-10%20at%2010.03.20%20AM.png';
 
-const STAMP_URL =	'https://cogoport-testing.sgp1.digitaloceanspaces.com/b8726742e426c9ef54cbd08dcc30d362/Screenshot%202023-05-10%20at%2010.23.17%20AM.png';
+const STAMP_URL = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/b8726742e426c9ef54cbd08dcc30d362/Screenshot%202023-05-10%20at%2010.23.17%20AM.png';
 
 const fetchImageData = async ({ url = '', setterFunc }) => {
 	try {

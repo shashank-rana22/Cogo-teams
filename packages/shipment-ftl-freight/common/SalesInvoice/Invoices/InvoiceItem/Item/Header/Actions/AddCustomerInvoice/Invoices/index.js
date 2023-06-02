@@ -27,7 +27,7 @@ function Invoices({
 
 	const { docLoading, apiTrigger } = useCreateShipmentDocument({ refetch: callbackCustomerInvoice });
 
-	const ref = useRef(null);
+	const InvoiceRef = useRef(null);
 	const { loading: generateLoading, generatePdf } = useGeneratePdf();
 
 	const params = {
@@ -47,8 +47,6 @@ function Invoices({
 
 	const { data: tradePartyData } = useListOrganizationTradeParties({ ...params });
 
-	const shipperTradePartyPanNumber = tradePartnerData?.[0]?.trade_partner_details?.registration_number;
-
 	const callbackGeneratePdf = (res) => {
 		const pdfUrl = res?.data?.pdf_url;
 		const payload = getPayload({ shipmentData, invoice, pdfUrl });
@@ -56,22 +54,25 @@ function Invoices({
 	};
 
 	const { logoData, stampData } = useGetImageSource();
+
 	const { loading: customDataLoading, data: customData } = useGetShipmentFortigoTripDetail({
-		shipment_id                 : shipmentData?.serial_id,
-		invoice_combination_id      : invoice?.id,
-		shipper_registration_number : shipperTradePartyPanNumber,
+		defaultParams: {
+			shipment_id            : shipmentData?.serial_id,
+			invoice_combination_id : invoice?.id,
+		},
 	});
+	const finalRegistrationNumber = customData?.customer_details?.customer_pan;
 
 	const generateInvoice = () => {
-		const html = `<html><body>${ref.current.innerHTML}</body></html>`;
+		const html = `<html><body>${InvoiceRef.current.innerHTML}</body></html>`;
 		generatePdf({ html, scale: 0.7, callback: callbackGeneratePdf });
 	};
 
-	const Component = componentMapper[shipperTradePartyPanNumber].component;
+	const Component = finalRegistrationNumber ? componentMapper[finalRegistrationNumber].component : null;
 
 	return (
 		<>
-			<div ref={ref}>
+			<div ref={InvoiceRef}>
 				{Component ? (
 					<Component
 						logoData={logoData}
