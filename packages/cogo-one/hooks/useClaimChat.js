@@ -60,7 +60,7 @@ function useClaimChat({ userId, setShowCarousel, firestore }) {
 	const claimChat = async (payload) => {
 		const { user_id, lead_user_id, organization_id, mobile_no, sender = null, channel_type, id } = payload || {};
 		try {
-			setShowCarousel(false);
+			setShowCarousel('in_timeout');
 			await updateClaimKey({ id, channel_type, firestore, value: false });
 			await trigger({
 				data: {

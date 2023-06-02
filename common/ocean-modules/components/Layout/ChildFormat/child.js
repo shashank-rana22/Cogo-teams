@@ -61,7 +61,7 @@ function Child({
 		let newProps = { ...item };
 
 		const { type } = item;
-		const isAsyncSelect = ['select', 'creatable-select'].includes(type)
+		const isAsyncSelect = ['select', 'creatable-select', 'location-select'].includes(type)
 		&& Object.keys(item).includes('optionsListKey');
 
 		if (isAsyncSelect) {

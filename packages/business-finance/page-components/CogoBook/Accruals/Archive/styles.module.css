@@ -74,8 +74,6 @@
 .button_container {
 	display: flex;
 	align-items: center;
-	justify-content: flex-end;
-	margin-top: 20px;
 }
 
 .selected {
@@ -177,4 +175,15 @@
 
 .amount {
 	font-weight: 600;
+}
+
+.sub_tabs {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.cursor {
+	display: flex;
+	cursor: pointer;
 }
