@@ -2,7 +2,6 @@ import { Button } from '@cogoport/components';
 import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
-import EmptyState from '../../../../../CreateCourse/commons/EmptyState';
 import getChapter from '../../utils/getChapter';
 import hideBtn from '../../utils/hideBtn';
 
@@ -29,10 +28,6 @@ function ModuleContent({
 
 	if (loading) {
 		return <LoadingState />;
-	}
-
-	if (isEmpty(data)) {
-		return <EmptyState />;
 	}
 
 	const openInNewTab = (url) => {

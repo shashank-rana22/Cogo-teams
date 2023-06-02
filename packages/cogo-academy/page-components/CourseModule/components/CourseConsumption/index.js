@@ -3,6 +3,7 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import EmptyState from '../../../CreateCourse/commons/EmptyState';
 import useGetUserCourse from '../../hooks/useGetUserCourse';
 
 import Footer from './components/Footer';
@@ -51,6 +52,10 @@ function CourseConsumption() {
 		courseProgressUpdateLoading,
 		updateCourseProgress,
 	} = useUpdateUserCourseProgress({ course_id, user_id });
+
+	if (isEmpty(data) && !(loading || courseProgressUpdateLoading)) {
+		return <EmptyState />;
+	}
 
 	return (
 		<div className={styles.container}>

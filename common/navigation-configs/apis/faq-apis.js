@@ -583,6 +583,12 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'create_course_feedback',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+
 	],
 };
 
