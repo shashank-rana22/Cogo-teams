@@ -276,7 +276,10 @@ function MessageConversations({
 						<div className={styles.delete_icon_container}>
 							<IcMDelete
 								className={styles.delete_icon}
-								onClick={() => setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }))}
+								onClick={() => {
+									setFileData((p) => ({ ...p, [id]: undefined }));
+									setDraftUploadedFiles((p) => ({ ...p, [id]: undefined }));
+								}}
 							/>
 						</div>
 					</>
@@ -358,7 +361,7 @@ function MessageConversations({
 								onChange={(val, obj) => {
 									setFileData((prev) => ({
 										...prev,
-										[id]: isEmpty(obj) ? [] : obj[0],
+										[id]: obj ? obj[0] : [],
 
 									}));
 									setDraftUploadedFiles((prev) => ({
