@@ -9,7 +9,7 @@ function ConatinerDetails({ containerDetails = [], cargoDetails = {} }) {
 	return (
 		<div className={styles.container}>
 			{(containerDetails || [])?.map((item, index) => (
-				<div>
+				<div key={item?.container_number}>
 					<div className={styles.container_item}>
 						<div className={styles.container_description}>
 							<div className={styles.serial_number}>

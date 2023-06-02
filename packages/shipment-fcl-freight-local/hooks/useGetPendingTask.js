@@ -6,7 +6,6 @@ function useGetPendingTasks({
 	filters = {},
 	defaultFilters = {},
 	defaultParams = {},
-	shipment_type = '',
 }) {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_local/list_tasks',

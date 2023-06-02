@@ -1,5 +1,5 @@
 import { Loader } from '@cogoport/components';
-import React, { useEffect } from 'react';
+import React, { useEffect, useMemo } from 'react';
 
 import useListShipmentBookingConfirmationPreferences from
 	'../../../../../../hooks/useListShipmentBookingConfirmationPreferences';
@@ -18,6 +18,8 @@ function SelectRate({
 		shipment_id    : task.shipment_id,
 		defaultFilters : { service_type: task.service_type },
 	});
+
+	const keys = useMemo(() => Array(data?.length).fill(null).map(() => Math.random()), [data?.length]);
 
 	const list = data?.list || [];
 
@@ -42,8 +44,9 @@ function SelectRate({
 						Loading Task...
 					</div>
 				) : null}
-				{(data?.list || []).map((item) => (
+				{(data?.list || []).map((item, idx) => (
 					<Card
+						key={keys?.[idx]}
 						item={item}
 						priority={item.priority}
 						setStep={setStep}

@@ -1,5 +1,4 @@
 import { useRef, forwardRef, useImperativeHandle } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import Form from '../form';
 
@@ -45,7 +44,7 @@ function MBLDetails({ primaryService = {}, selectedMail = {} }, ref) {
 							formRefs.current[i] = r;
 						}}
 						id={i}
-						key={uuid()}
+						key={n}
 						bl_type="MBL"
 						controls={controls}
 					/>

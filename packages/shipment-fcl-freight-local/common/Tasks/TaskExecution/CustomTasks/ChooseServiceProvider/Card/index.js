@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useMemo } from 'react';
 
 import useUpdateShipmentBookingConfirmationPreferences
 	from '../../../../../../hooks/useUpdateShipmentBookingConfirmationPreferences';
@@ -14,6 +14,8 @@ function Card({ item, priority, handleUpdateTask }) {
 	const [serviceProvider, setServiceProvider] = useState(
 		item?.data?.[0]?.service_provider_id,
 	);
+
+	const keys = useMemo(() => Array(dataArr?.length).fill(null).map(() => Math.random()), [dataArr?.length]);
 
 	const { apiTrigger, loading } = useUpdateShipmentBookingConfirmationPreferences({});
 
@@ -41,8 +43,8 @@ function Card({ item, priority, handleUpdateTask }) {
 				</div>
 			</div>
 			<div className={styles.space_between}>
-				{(dataArr || []).map((dataObj) => cardValues(dataObj, item)?.map((eachItem) => (
-					<div className={styles.item}>
+				{(dataArr || []).map((dataObj, idx) => cardValues(dataObj, item)?.map((eachItem) => (
+					<div className={styles.item} key={keys?.[idx]}>
 						<div className={styles.heading}>{eachItem?.label}</div>
 						<div className={styles.sub_heading}>{eachItem?.value}</div>
 					</div>

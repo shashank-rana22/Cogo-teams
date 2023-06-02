@@ -16,7 +16,7 @@ function MultiServiceDetailsPopover({
 
 	const renderBody = () => (
 		mainServices?.map((item, idx) => (idx !== 0 ? (
-			<div className={styles.container}>
+			<div className={styles.container} key={item?.id}>
 				<RenderCargoPills detail={item} />
 			</div>
 		) : null)));

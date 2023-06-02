@@ -111,7 +111,7 @@ function NominationTask({
 			{subject}
 
 			<div className={styles.form_container}>
-				{controls.map((item) => <FormElement control={control} errors={errors} {...item} />)}
+				{controls.map((item) => <FormElement control={control} errors={errors} {...item} key={item?.name} />)}
 			</div>
 
 			<div className={styles.button_container}>

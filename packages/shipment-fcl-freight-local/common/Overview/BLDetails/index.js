@@ -89,7 +89,10 @@ function BLDetails() {
 						{(list || []).map((item) => (
 							item?.containers?.length >= 1
 								? (
-									<div className={styles.service_card}>
+									<div
+										className={styles.service_card}
+										key={item?.id}
+									>
 										<Accordion
 											title={(
 												<TitleCard
@@ -111,7 +114,10 @@ function BLDetails() {
 									</div>
 								)
 								: (
-									<div className={styles.service_card}>
+									<div
+										className={styles.service_card}
+										key={item?.id}
+									>
 										<TitleCard
 											item={item}
 											setOpen={setOpen}

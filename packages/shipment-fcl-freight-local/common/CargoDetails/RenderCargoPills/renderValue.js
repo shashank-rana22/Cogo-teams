@@ -191,23 +191,77 @@ export const renderValue = (label, detail) => {
 		case 'destination_location.display_name':
 			return detail.destination_location?.display_name || '';
 		case 'schedule_departure':
-			return format(detail?.schedule_departure || detail?.selected_schedule_departure, 'dd MMM yyyy');
+			return formatDate({
+				date       : detail?.schedule_departure || detail?.selected_schedule_departure,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' - ',
+			});
 		case 'schedule_arrival':
-			return format(detail?.schedule_arrival || detail?.selected_schedule_arrival, 'dd MMM yyyy');
+			return formatDate({
+				date       : detail?.schedule_arrival || detail?.selected_schedule_arrival,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' - ',
+			});
 		case 'bn_expiry':
-			return format(detail?.bn_expiry, 'dd MMM yyyy');
+			return formatDate({
+				date       : detail?.bn_expiry,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' - ',
+			});
 		case 'booking_note_deadline':
-			return format(detail?.booking_note_deadline, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.booking_note_deadline,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' - ',
+			});
 		case 'si_cutoff':
-			return format(detail?.si_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.si_cutoff,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' - ',
+			});
 		case 'vgm_cutoff':
-			return format(detail?.vgm_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.vgm_cutoff,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' - ',
+			});
 		case 'gate_in_cutoff':
-			return format(detail?.gate_in_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.gate_in_cutoff,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' - ',
+			});
 		case 'document_cutoff':
-			return format(detail?.document_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.document_cutoff,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' - ',
+			});
 		case 'tr_cutoff':
-			return format(detail?.tr_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return formatDate({
+				date       : detail?.tr_cutoff,
+				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
+				separator  : ' - ',
+			});
 		case 'iip_certificates':
 			return formatCertificate(detail?.iip_certificates || []);
 		case 'msds_certificates':
@@ -220,7 +274,8 @@ export const renderValue = (label, detail) => {
 			return formatDate({
 				date       : detail?.cargo_readiness_date,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-				formatType : 'date',
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
 				separator  : ' - ',
 			});
 		case 'supplier_poc':
@@ -237,7 +292,8 @@ export const renderValue = (label, detail) => {
 			return formatDate({
 				date       : detail?.delivery_date,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-				formatType : 'date',
+				timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+				formatType : 'dateTime',
 				separator  : ' - ',
 			});
 

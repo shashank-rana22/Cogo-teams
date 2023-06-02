@@ -6,7 +6,7 @@ import getControls from '../utils/getControls';
 
 import styles from './styles.module.css';
 
-const keysToShow = [
+const KEYS_TO_SHOW = [
 	'container_size',
 	'containers_count',
 	'container_type',
@@ -16,6 +16,8 @@ const keysToShow = [
 	'bls_count',
 	'cargo_weight_per_container',
 ];
+
+const keys = Array(KEYS_TO_SHOW?.length).fill(null).map(() => Math.random());
 
 function renderValue(label, value) {
 	switch (label) {
@@ -41,10 +43,10 @@ export default forwardRef(({ service }, ref) => {
 
 	return (
 		<div>
-			{keysToShow.map((key) => {
+			{KEYS_TO_SHOW.map((key, idx) => {
 				const { name, label, ...rest } = controls.find((item) => item.name === key) || {};
 				return (
-					<div className={styles.form_element}>
+					<div className={styles.form_element} key={keys?.[idx]}>
 						{name ? (
 							<>
 								<div className={styles.label}>
