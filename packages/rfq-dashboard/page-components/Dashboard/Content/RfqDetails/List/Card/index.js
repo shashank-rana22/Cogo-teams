@@ -4,7 +4,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMProfile } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { startCase, format } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 
 import { SERVICE_MAPPING } from '../../../../../../constants';
 import { getformattedDuration } from '../../../../../../utils/getFormattedDuration';
