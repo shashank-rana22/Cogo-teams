@@ -4,7 +4,7 @@ import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
-import getMaxFileSize from '../../helpers/getMaxFileSize';
+import getMaxFileSize, { ONE_MB } from '../../helpers/getMaxFileSize';
 
 import styles from './styles.module.css';
 
@@ -99,6 +99,8 @@ function CustomFileUploader(props, ref) {
 	};
 
 	const handleChange = async (values) => {
+		console.log('ONE_MB:', ONE_MB);
+
 		if (channel === 'zalo' && values && !isEmpty(values)) {
 			const maxSize = getMaxFileSize(values[0]?.type);
 			if (!maxSize) {
@@ -106,7 +108,7 @@ function CustomFileUploader(props, ref) {
 				return;
 			}
 			if (values[0]?.size >= maxSize) {
-				const sizeInMb = (maxSize / 1048576).toFixed(2);
+				const sizeInMb = (maxSize / ONE_MB).toFixed(2);
 				Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);
 				return;
 			}

@@ -1,6 +1,6 @@
-const ONE_MB = 1048576;
+export const ONE_MB = 1048576;
 
-const ZALO_LIMIATION_SIZE = {
+const ZALO_LIMITATION_SIZE = {
 	image : ONE_MB,
 	file  : 5 * ONE_MB,
 };
@@ -18,7 +18,7 @@ const getFileType = (type) => {
 
 const getMaxFileSize = (type = '') => {
 	const fileType = getFileType(type);
-	return ZALO_LIMIATION_SIZE[fileType];
+	return ZALO_LIMITATION_SIZE[fileType];
 };
 
 export default getMaxFileSize;
