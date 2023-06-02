@@ -36,7 +36,6 @@ function PriceFreightCtr({
 	];
 
 	return (
-
 		<div className={styles.container}>
 			{
 				data.map((Item) => (
