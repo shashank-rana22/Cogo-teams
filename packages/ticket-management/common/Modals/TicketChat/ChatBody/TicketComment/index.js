@@ -29,7 +29,7 @@ function TicketComment({
 			<div className={cl`${!isCurrentUser ? styles.agent_message_flex : ''}`}>
 				{!isCurrentUser && (
 					<img
-						src={GLOBAL_CONSTANTS.image_urls?.[isAgent ? 'bot_icon' : 'user_avatar']}
+						src={GLOBAL_CONSTANTS.image_url?.[isAgent ? 'bot_icon' : 'user_avatar']}
 						alt="agent"
 						width={20}
 						height={20}
