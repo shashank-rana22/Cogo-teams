@@ -1,11 +1,13 @@
-import { Tooltip } from '@cogoport/components';
+import { Button, Tooltip, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMAirport } from '@cogoport/icons-react';
-import React from 'react';
+import { IcMAirport, IcMProvision } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { AwbNumberDeletedFields } from '../../configurations/awb-number-deleted-fields';
+import useEditAwbNumber from '../../hooks/useEditAwbNumber';
+import ConfirmDelete from '../ConfirmDelete';
 
 import styles from './styles.module.css';
 
@@ -20,7 +22,21 @@ function AwbNumberDeleted({
 	setQfilter,
 	status,
 }) {
+	const [item, setItem] = useState({ id: '' });
+	const [showConfirm, setShowConfirm] = useState(false);
+
 	const { fields } = AwbNumberDeletedFields;
+
+	const { editAwbNumber, loading:editLoading } = useEditAwbNumber({
+		item,
+		awbList,
+		setPage,
+		setFinalList,
+		setQfilter,
+		setShowConfirm,
+		page,
+	});
+
 	const functions = {
 		handleAirline: (singleItem) => (
 			<div className={styles.tooltip_container}>
@@ -77,6 +93,25 @@ function AwbNumberDeleted({
 				})}
 			</div>
 		),
+		handleAction: (singleItem) => (
+			<div className={styles.tooltip_container}>
+				<Tooltip
+					content="Recover AWB Number"
+					placement="top"
+					interactive
+				>
+					<Button
+						themeType="linkUi"
+						onClick={() => {
+							setItem(singleItem);
+							setShowConfirm(true);
+						}}
+					>
+						<IcMProvision fill="#8B8B8B" />
+					</Button>
+				</Tooltip>
+			</div>
+		),
 	};
 	return (
 		<div className={styles.awbnumber_container}>
@@ -90,6 +125,20 @@ function AwbNumberDeleted({
 				finalList={finalList}
 				setFinalList={setFinalList}
 			/>
+			{showConfirm && (
+				<Modal
+					show={showConfirm}
+					onClose={() => setShowConfirm(false)}
+					className={styles.modal_container}
+				>
+					<ConfirmDelete
+						setShowConfirm={setShowConfirm}
+						editAwbNumber={editAwbNumber}
+						loading={editLoading}
+						status={status}
+					/>
+				</Modal>
+			)}
 		</div>
 	);
 }

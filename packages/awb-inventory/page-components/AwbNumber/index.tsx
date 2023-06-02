@@ -1,11 +1,14 @@
-import { Button, Tooltip } from '@cogoport/components';
+import { Button, Tooltip, Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMAirport, IcMEdit, IcMDelete } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { AwbNumberFields } from '../../configurations/awb-number-fields';
+import useEditAwbNumber from '../../hooks/useEditAwbNumber';
+import ConfirmDelete from '../ConfirmDelete';
+import EditAwbNumber from '../EditAwbNumber';
 
 import styles from './styles.module.css';
 
@@ -20,7 +23,23 @@ function AwbNumber({
 	setQfilter,
 	status,
 }) {
+	const [item, setItem] = useState({ id: '' });
+	const [showEdit, setShowEdit] = useState(false);
+	const [showConfirm, setShowConfirm] = useState(false);
+
 	const { fields } = AwbNumberFields;
+
+	const { editAwbNumber, loading:editLoading } = useEditAwbNumber({
+		item,
+		awbList,
+		setShowEdit,
+		setPage,
+		setFinalList,
+		setQfilter,
+		setShowConfirm,
+		page,
+	});
+
 	const functions = {
 		handleAirline: (singleItem) => (
 			<div className={styles.tooltip_container}>
@@ -45,11 +64,9 @@ function AwbNumber({
 							/>
 						)}
 						{singleItem?.airline?.business_name}
-
 					</div>
 				</Tooltip>
 			</div>
-			// </div>
 		),
 		handleAirport: (singleItem) => (
 			`(${singleItem?.airport?.port_code}) ${singleItem?.airport?.name}`
@@ -83,20 +100,25 @@ function AwbNumber({
 				<Button
 					themeType="linkUi"
 					onClick={() => {
-						// setShow(true);
+						setItem(singleItem);
+						setShowEdit(true);
 					}}
 				>
 					<IcMEdit fill="#8B8B8B" />
 				</Button>
 				<Button
 					themeType="linkUi"
-					// onClick={() => setShowConfirm(true)}
+					onClick={() => {
+						setItem(singleItem);
+						setShowConfirm(true);
+					}}
 				>
 					<IcMDelete fill="#8B8B8B" />
 				</Button>
 			</div>
 		),
 	};
+
 	return (
 		<div className={styles.awbnumber_container}>
 			<List
@@ -109,6 +131,34 @@ function AwbNumber({
 				finalList={finalList}
 				setFinalList={setFinalList}
 			/>
+			{showEdit && (
+				<Modal
+					show={showEdit}
+					onClose={() => setShowEdit(false)}
+					className={styles.modal_container}
+				>
+					<EditAwbNumber
+						item={item}
+						setShowEdit={setShowEdit}
+						editAwbNumber={editAwbNumber}
+						loading={editLoading}
+					/>
+				</Modal>
+			)}
+			{showConfirm && (
+				<Modal
+					show={showConfirm}
+					onClose={() => setShowConfirm(false)}
+					className={styles.modal_container}
+				>
+					<ConfirmDelete
+						setShowConfirm={setShowConfirm}
+						editAwbNumber={editAwbNumber}
+						loading={editLoading}
+						status={status}
+					/>
+				</Modal>
+			)}
 		</div>
 	);
 }

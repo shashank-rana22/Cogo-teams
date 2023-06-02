@@ -51,6 +51,7 @@ export const AwbNumberDeletedFields = {
 			key   : 'action',
 			label : 'Action',
 			span  : 0.8,
+			func  : 'handleAction',
 		},
 	],
 };

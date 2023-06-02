@@ -30,8 +30,6 @@ function AddAwbNumber({
 	);
 	const { data, getAWBPrefix } = useGetAWBPrefix();
 
-	console.log('serviceProviderData', serviceProviderData);
-
 	const { control, handleSubmit, setValue, watch, formState:{ errors } } = useForm();
 
 	const fields = awbControls({
@@ -86,7 +84,7 @@ function AddAwbNumber({
 
 	return (
 		<div className={styles.addawb_container}>
-			<div className={styles.modal_header}>AWB INVENTORY</div>
+			<div className={styles.modal_header}>ADD AWB NUMBER</div>
 			<Layout
 				fields={fields}
 				control={control}

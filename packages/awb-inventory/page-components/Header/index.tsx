@@ -15,7 +15,7 @@ function Header({ setShow = () => {} }:Props) {
 			<div className={styles.heading}>AWB Inventory</div>
 			<div className={styles.button_head}>
 				<div className={styles.button_style}>
-					<ScopeSelect size="md" showChooseAgent={false} />
+					<ScopeSelect size="md" showChooseAgent={false} apisToConsider={['list_awb_inventories']} />
 				</div>
 
 				<div className={styles.button_style}>

@@ -59,6 +59,22 @@
 			}
 		}
 
+		.ui_multiselect_container {
+			.ui_multiselect_display_container {
+				max-height: 32px;
+				border: 1px solid #333;
+			}
+
+			.ui_multiselect_input_control{
+				font-size: 12px;
+				color: #333;
+				div {
+					font-size: 12px;
+					color: #333 !important;
+				}
+			}
+		}
+
 		.react-datepicker__input-container {
 			input {
 				max-height: 32px;

@@ -39,3 +39,7 @@
 .button_group {
 	display: flex;
 }
+
+.modal_container {
+	padding: 20px;
+}
