@@ -99,7 +99,7 @@ function CustomFileUploader(props, ref) {
 	};
 
 	const handleChange = async (values) => {
-		if (channel === 'zalo' && values && values.length > 0) {
+		if (channel === 'zalo' && values && isEmpty(values) > 0) {
 			const maxSize = getMaxFileSize(values[0]?.type);
 			if (maxSize === undefined) {
 				Toast.error('File Type Not Allowed');
