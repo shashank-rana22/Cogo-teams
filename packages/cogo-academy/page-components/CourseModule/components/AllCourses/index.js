@@ -51,6 +51,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 		currentCategory,
 		page_limit,
 		page,
+		user_id,
 	});
 
 	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
@@ -59,7 +60,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories }) {
 		return <LoadingState rowsCount={7} />;
 	}
 
-	console.log('data1', page);
+	// console.log('data1', page);
 	// console.log('data2', currentCategory);
 	// console.log('data3', courseCategories);
 	// console.log('params', params);
