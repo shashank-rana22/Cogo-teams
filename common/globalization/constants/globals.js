@@ -114,6 +114,9 @@ const GLOBAL_CONSTANTS = {
 		eclamation_svg            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg',
 		cart_png                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cart_icon.png',
 		saas_subscription_loading : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
+		spinner_loader            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-spinner.svg',
+		empty_image               : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg',
+		list_empty_image          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state.svg',
 	},
 };
 
