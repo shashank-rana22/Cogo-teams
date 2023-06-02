@@ -114,9 +114,12 @@ function Child({
 						if (controlItem.customProps?.options) {
 							extraProps.options = controlItem.customProps.options[index];
 						}
+
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
 						const flex = ((controlItem?.span || 12) / 12) * 100;
+
 						if (!Element || !show) return null;
+
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
 								<h4 className={styles.label}>

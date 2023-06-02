@@ -1,9 +1,11 @@
-// import { ShipmentDetailContext } from '@cogoport/context';
-// import { useContext } from 'react';
+import { ShipmentDetailContext } from '@cogoport/context';
+import { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import LoadingState from '../LoadingState';
 
+import ConfirmShipmentRate from './CustomTasks/ConfirmShipmentRate';
+import UploadIndent from './CustomTasks/UploadIndent';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
@@ -18,7 +20,10 @@ function ExecuteTask({
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
 	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
-	// const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const {
+		servicesList, shipment_data, primary_service,
+		getShipmentTimeline = () => {},
+	} = useContext(ShipmentDetailContext);
 
 	const {
 		steps = [],
@@ -33,6 +38,31 @@ function ExecuteTask({
 		return <div><LoadingState /></div>;
 	}
 
+	if (task?.task === 'mark_confirmed') {
+		return (
+			<ConfirmShipmentRate
+				shipment_data={shipment_data}
+				primaryService={primary_service}
+				timeLineRefetch={getShipmentTimeline}
+				task={task}
+				refetch={taskListRefetch}
+				onCancel={onCancel}
+				servicesList={servicesList}
+			/>
+		);
+	}
+
+	if (task?.task === 'upload_indent') {
+		return (
+			<UploadIndent
+				task={task}
+				onCancel={onCancel}
+				services={servicesList}
+				refetch={taskListRefetch}
+			/>
+		);
+	}
+	console.log('d');
 	return (
 		<ExecuteStep
 			task={task}

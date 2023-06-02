@@ -1,8 +1,10 @@
+import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useContext } from 'react';
 
 import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
+import useListShipmentContainerDetails from '../../../../hooks/useListShipmentContainerDetails';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 
 import ActionsToShow from './ActionToShow';
@@ -37,11 +39,16 @@ function AddRate({
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setSecondStep] = useState(false);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const refetchForUpdateSubService = () => {
 		refetch();
 		onCancel();
 	};
+
+	const { containersData = {} } = useListShipmentContainerDetails({
+		defaultFilters: { shipment_id: shipment_data?.id },
+	});
 
 	const updateResponse = useUpdateShipmentAdditionalService({
 		item,
@@ -141,6 +148,7 @@ function AddRate({
 				errors={errors}
 				serviceData={item}
 				source={source}
+				containersData={containersData}
 			/>
 
 			<ActionsToShow

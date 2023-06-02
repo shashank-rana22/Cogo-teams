@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { Layout } from '@cogoport/surface-modules';
+import { Layout } from '@cogoport/surface-modules/index';
 
 import useHandleSubmit from './helpers/useHandleSubmit';
 import useStepExecution from './helpers/useStepExecution';

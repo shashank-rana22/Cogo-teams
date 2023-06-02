@@ -13,6 +13,7 @@ function Item(props) {
 		control,
 		span,
 		label = '',
+		showLabel = true,
 		error = {},
 		heading = '',
 		rules = {},
@@ -49,6 +50,7 @@ function Item(props) {
 	}
 
 	if (!newProps.type) return null;
+	// || ['date_picker', 'datepicker'].includes(newProps?.type)
 
 	const Element = getElementController(newProps.type);
 
@@ -62,6 +64,7 @@ function Item(props) {
 	return (
 		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%` }}>
 			{heading ? (<div className={styles.heading}>{heading}</div>) : null}
+			{label && showLabel ? (<div className={styles.label}>{label}</div>) : null}
 
 			<Element
 				size={type === 'pills' ? 'md' : 'sm'} // need to put in config

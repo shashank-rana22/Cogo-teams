@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
-const currencyOptions = [
+const CURRENCY_OPTIONS = [
 	GLOBAL_CONSTANTS.currency_code.INR,
 	GLOBAL_CONSTANTS.currency_code.USD,
 	GLOBAL_CONSTANTS.currency_code.EUR,
@@ -11,7 +11,7 @@ const currencyOptions = [
 	value : currency,
 }));
 
-const controls = ({ serviceData = {}, source = '' }) => {
+const controls = ({ serviceData = {}, source = '', containerOptions = [] }) => {
 	const unitOptions = [];
 	if (serviceData?.units) {
 		serviceData?.units?.forEach((unit) => { unitOptions.push({ label: startCase(unit), value: unit }); });
@@ -22,7 +22,7 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			name    : 'currency',
 			label   : 'Currency',
 			type    : 'select',
-			options : currencyOptions,
+			options : CURRENCY_OPTIONS,
 			rules   : { required: 'Currency is required' },
 			show    : ['task', 'overview'].includes(source),
 			size    : 'sm',
@@ -75,6 +75,16 @@ const controls = ({ serviceData = {}, source = '' }) => {
 			placeholder : 'Enter Alias (Only if required)',
 			show        : ['task', 'overview'].includes(source),
 			size        : 'sm',
+		},
+		{
+			name        : 'container_number',
+			label       : 'Container Number',
+			type        : 'select',
+			placeholder : 'Container Number',
+			rules       : { required: 'Container Number is required' },
+			show        : ['task', 'overview'].includes(source),
+			size        : 'sm',
+			options     : containerOptions,
 		},
 	];
 

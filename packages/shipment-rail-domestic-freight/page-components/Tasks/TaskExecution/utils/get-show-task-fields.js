@@ -18,14 +18,7 @@ const getShowElement = (field, formValues) => {
 		(field?.controls || []).forEach((controlObj) => {
 			if ('show' in controlObj) {
 				for (let j = 0; j < showElements.length; j += 1) {
-					if (formValues?.destination_cargo_handling_type
-						&& ['dpd_without_cfs', 'dpd_cfs_dock_destuffing', 'dpd_cfs_factory_destuffing']
-							.includes(formValues?.destination_cargo_handling_type)
-					) {
-						showElements[j][controlObj?.name] = true;
-					} else {
-						showElements[j][controlObj?.name] = controlObj?.show;
-					}
+					showElements[j][controlObj?.name] = controlObj?.show;
 				}
 			}
 		});

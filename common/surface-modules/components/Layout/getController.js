@@ -58,7 +58,7 @@ const getElementController = (type = 'text') => {
 			return ToggleController;
 
 		default:
-			return InputController;
+			return null;
 	}
 };
 

@@ -28,8 +28,14 @@ function RenderAddRateForm({
 	errors,
 	serviceData = {},
 	source = '',
+	containersData,
 }) {
-	const { formControl } = controls({ serviceData, source });
+	const containerOptions = containersData?.list?.map((item) => ({
+		label : item.container_number,
+		value : item.container_number,
+	})) || [];
+
+	const { formControl } = controls({ serviceData, source, containerOptions });
 
 	return (
 		<form className={styles.form_container}>
