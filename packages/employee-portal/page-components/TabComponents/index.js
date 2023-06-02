@@ -50,13 +50,13 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 
 		company_policies: {
 			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
-			component : Day1,
+			component : CompanyPolicies,
 			enable    : signDocEnableContd && documents_signed?.documents_signed,
 
 		},
 		day_1: {
 			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
-			component : CompanyPolicies,
+			component : Day1,
 			enable    : signDocEnableContd && company_policies_read?.company_policies_read,
 		},
 
