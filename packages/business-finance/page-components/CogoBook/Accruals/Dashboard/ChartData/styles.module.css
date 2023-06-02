@@ -2,6 +2,22 @@
   width: 50%;
   padding: 12px 24px;
   background: #ffffff;
-  border: 1px solid #e0e0e0;
+  border: 1px solid hsl(0, 0%, 88%);
   border-radius: 8px;
+  height: 132px;
+  display: flex;
+}
+.income_pie_chart {
+  width: 30%;
+  height: 132px;
+}
+.income_data {
+  margin-left: 12px;
+}
+.amount_data {
+  font-weight: 600;
+  margin-bottom: 12px;
+}
+.booked_data {
+  width: 130px;
 }

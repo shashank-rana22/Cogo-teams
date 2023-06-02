@@ -1,11 +1,6 @@
 .statistics {
   display: flex;
-  width: fit-content;
-  margin-right: 5px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 20px;
+  justify-content: space-between;
 }
 .font_size_tooltip {
   font-size: 12px;
@@ -25,7 +20,42 @@
 }
 .stats_full_data {
   display: flex;
-  padding: 20px;
+  padding: 20px 0px;
   justify-content: space-between;
   gap: 16px;
+}
+.sid_card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 24px;
+  margin: 24px 0px;
+}
+.report {
+  font-size: 12px;
+  text-decoration: underline;
+  cursor: pointer;
+}
+.sid_view {
+  display: flex;
+  width: fit-content;
+  margin-right: 5px;
+  font-size: 16px;
+  font-style: normal;
+  font-weight: 600;
+  line-height: 20px;
+}
+
+.days_show {
+  display: flex;
+  flex-direction: column;
+  border-bottom: 1px solid #edd7a9;
+  padding: 8px;
+  cursor: pointer;
+}
+:hover.days_show {
+  background-color: #fff0d0;
+}
+:last-child.days_show {
+  border-bottom: none;
 }
