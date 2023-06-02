@@ -1,12 +1,8 @@
-import { Button, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
-import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMEyeopen, IcMEdit } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import List from '../../commons/List';
 import { AmendmentFields } from '../../configurations/amendment_fields';
-import HAWBList from '../HawbList';
+import AmendmentList from '../AmendmentList';
 import UploadModal from '../UploadModal';
 
 import styles from './styles.module.css';
@@ -16,23 +12,6 @@ function Amendment({
 }) {
 	const [showUpload, setShowUpload] = useState(null);
 	const { fields } = AmendmentFields;
-
-	const handleDownloadMAWB = (singleItem) => {
-		setViewDoc(true);
-		setItem(singleItem);
-	};
-
-	const handleEditMAWB = (singleItem, action) => {
-		setEdit(action || true);
-		setGenerate(true);
-		setItem(singleItem);
-	};
-
-	const handleClickOnDownload = (documentUrl) => {
-		if (typeof window !== 'undefined') {
-			window.open(documentUrl, '_blank');
-		}
-	};
 
 	const functions = {
 		handleSerialId: (singleItem) => (
@@ -46,48 +25,10 @@ function Amendment({
 				{singleItem.blCategory === 'mawb' ? 'MAWB' : 'HAWB/MAWB'}
 			</div>
 		),
-		handleDeadline: (singleItem) => (
-			<div>
-				{formatDate({
-					date       : singleItem.deadline,
-					dateFormat : GLOBAL_CONSTANTS.formats.date['PP hh:mm a'],
-					formatType : 'date',
-				})}
+		handleStatus: () => (
+			<div className={styles.status}>
+				Amend Requested
 			</div>
-		),
-		handleStatus: (singleItem) => (
-			<Tooltip
-				content={singleItem?.remarks?.toString()}
-				placement="top"
-			>
-				<div className={styles.status}>
-					Amend Requested
-				</div>
-			</Tooltip>
-
-		),
-		handleDownload: (singleItem) => (
-			<Button
-				themeType="linkUi"
-				style={{ fontSize: 12 }}
-				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { handleClickOnDownload(singleItem.documentUrl); }
-					: () => { handleDownloadMAWB(singleItem); }}
-			>
-				<IcMEyeopen fill="#8B8B8B" />
-
-			</Button>
-		),
-		handleEdit: (singleItem) => (
-			<Button
-				themeType="linkUi"
-				style={{ fontSize: 12 }}
-				onClick={singleItem?.documentData?.status === 'uploaded'
-					? () => { setShowUpload(singleItem); setEdit('edit'); }
-					: () => { handleEditMAWB(singleItem, 'edit'); }}
-			>
-				<IcMEdit fill="#8B8B8B" />
-			</Button>
 		),
 	};
 
@@ -101,9 +42,13 @@ function Amendment({
 				loading={loading}
 				functions={functions}
 				activeTab={activeTab}
-				Child={HAWBList}
+				Child={AmendmentList}
 				setViewDoc={setViewDoc}
 				setItem={setItem}
+				listAPI={listAPI}
+				edit={edit}
+				setEdit={setEdit}
+				setGenerate={setGenerate}
 			/>
 			<UploadModal
 				showUpload={showUpload}
