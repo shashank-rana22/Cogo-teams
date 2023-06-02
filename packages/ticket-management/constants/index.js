@@ -9,7 +9,7 @@ export const STATUS_MAPPING = {
 	escalated         : 'escalated',
 };
 
-export const actionButtonKeys = ({
+export const ACTION_KEYS = {
 	unresolved: {
 		label : 'Resolve',
 		name  : 'resolve',
@@ -18,9 +18,9 @@ export const actionButtonKeys = ({
 		label : 'Reopen',
 		name  : 'reopen',
 	},
-});
+};
 
-export const ticketSectionMapping = {
+export const TICKET_SECTION_MAPPING = {
 	Open: {
 		Status: 'unresolved',
 	},
@@ -51,3 +51,26 @@ export const TICKET_OPEN_STATUS = [
 	'reject_requested',
 	'resolve_requested',
 ];
+
+export const STATUS_LABEL_MAPPING = {
+	open: {
+		label : 'Open',
+		color : '#D6B300',
+	},
+	closed: {
+		label : 'Closed',
+		color : '#BDBDBD',
+	},
+	rejected: {
+		label : 'Rejected!!',
+		color : '#F37166',
+	},
+	pending: {
+		label : 'Pending',
+		color : '#F68B21',
+	},
+	escalated: {
+		label : 'ESCALATED!!',
+		color : '#F37166',
+	},
+};

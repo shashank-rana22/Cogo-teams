@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMRefresh } from '@cogoport/icons-react';
 
-import { actionButtonKeys } from '../../../../configurations/key-mapping';
+import { ACTION_KEYS } from '../../../../constants';
 import useUpdateTicketActivity from '../../../../hooks/useUpdateTicketActivity';
 
 import styles from './styles.module.css';
@@ -11,7 +11,6 @@ function ModalHeader({
 	refetchTicket = () => {},
 	ticketExists = false,
 }) {
-	const actionButton = actionButtonKeys();
 	const { ID: id = '', Status: status = '' } = ticketData?.Ticket || {};
 
 	const { updateTicketActivity = () => {} } = useUpdateTicketActivity({
@@ -28,10 +27,10 @@ function ModalHeader({
 				<Button
 					size="md"
 					themeType="primary"
-					onClick={() => updateTicketActivity(actionButton[status]?.name, id)}
+					onClick={() => updateTicketActivity(ACTION_KEYS[status]?.name, id)}
 					disabled={!ticketExists || status === 'rejected'}
 				>
-					{actionButton[status]?.label || 'Resolve'}
+					{ACTION_KEYS[status]?.label || 'Resolve'}
 				</Button>
 			</div>
 		</div>

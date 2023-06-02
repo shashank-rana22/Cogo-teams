@@ -3,7 +3,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { statusLabelTransformation } from '../../../../configurations/key-mapping';
+import { STATUS_LABEL_MAPPING } from '../../../../constants';
 import getTicketStatus from '../../../../utils/getTicketStatus';
 
 import styles from './styles.module.css';
@@ -22,7 +22,7 @@ function TicketSummary({
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
 
-	const { label = '' } = statusLabelTransformation[getTicketStatus(status)] || {};
+	const { label = '' } = STATUS_LABEL_MAPPING[getTicketStatus(status)] || {};
 
 	return (
 		<div className={styles.container}>

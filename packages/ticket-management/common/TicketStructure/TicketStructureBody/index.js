@@ -1,8 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import { statusLabelTransformation } from '../../../configurations/key-mapping';
-import { actionButtonKeys, STATUS_MAPPING } from '../../../constants';
+import { STATUS_LABEL_MAPPING, ACTION_KEYS, STATUS_MAPPING } from '../../../constants';
 
 import styles from './styles.module.css';
 
@@ -21,11 +20,11 @@ function TicketStructureBody({
 		ActivityCount: activityCount = 0,
 	} = data;
 
-	const { color: textColor, label } =	statusLabelTransformation[STATUS_MAPPING[status]] || {};
+	const { color: textColor, label } =	STATUS_LABEL_MAPPING[STATUS_MAPPING[status]] || {};
 
 	const handleTicketClick = (e) => {
 		e.stopPropagation();
-		updateTicketActivity(actionButtonKeys[status]?.name, id);
+		updateTicketActivity(ACTION_KEYS[status]?.name, id);
 	};
 
 	return (
@@ -49,7 +48,7 @@ function TicketStructureBody({
 						className={styles.reopen_resolve}
 						onClick={(e) => handleTicketClick(e)}
 					>
-						{actionButtonKeys[status]?.label || ''}
+						{ACTION_KEYS[status]?.label || ''}
 					</div>
 				</div>
 				<div className={styles.category_ticket_activity}>

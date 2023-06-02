@@ -7,7 +7,7 @@ import {
 	useCallback,
 } from 'react';
 
-import { ticketSectionMapping } from '../constants';
+import { TICKET_SECTION_MAPPING } from '../constants';
 
 const useListTickets = ({
 	searchParams,
@@ -38,7 +38,7 @@ const useListTickets = ({
 			QFilter       : searchQuery || undefined,
 			Type          : searchParams.category,
 		};
-		return { ...payload, ...(ticketSectionMapping?.[status] || {}) };
+		return { ...payload, ...(TICKET_SECTION_MAPPING?.[status] || {}) };
 	}, [profile?.user?.id, searchParams?.category, searchQuery, searchParams?.agent, status]);
 
 	const fetchTickets = useCallback(async (pageIndex) => {
