@@ -42,9 +42,9 @@ function SelfAndTradePartyForm({
 		setValue,
 	} = useForm();
 
-	const firstTradeParty = list?.[0]?.id;
-
 	const { trade_party_id, address } = watch() || {};
+
+	const firstTradeParty = list?.[0]?.id;
 
 	useEffect(() => {
 		if (companyType === 'self') {
@@ -53,14 +53,12 @@ function SelfAndTradePartyForm({
 	}, [firstTradeParty, companyType, setValue]);
 
 	useEffect(() => {
-		if (!loading) {
-			const selectedTradeParty = list?.find((t) => t.id === trade_party_id);
-			setValue('registration_number', selectedTradeParty?.registration_number || '');
+		const selectedTradeParty = list?.find((t) => t.id === trade_party_id);
+		setValue('registration_number', selectedTradeParty?.registration_number || '');
 
-			resetField('address');
-			resetField('pincode');
-		}
-	}, [trade_party_id, list, setValue, resetField, loading, watch]);
+		resetField('address');
+		resetField('pincode');
+	}, [trade_party_id, list, setValue, resetField]);
 
 	useEffect(() => {
 		setValue('pincode', address?.split('::')?.[1]);

@@ -1,0 +1,17 @@
+[
+    {
+      "milestone": "Order Received",
+      "completed_on": "2023-05-31T11:49:08.318Z",
+      "is_sub": false
+    },
+    {
+      "milestone": "Pickup",
+      "completed_on": null,
+      "is_sub": false
+    },
+    {
+      "milestone": "Delivered",
+      "completed_on": null,
+      "is_sub": false
+    }
+  ]
