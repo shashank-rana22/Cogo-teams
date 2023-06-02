@@ -3,6 +3,20 @@ import { useSelector } from '@cogoport/store';
 
 const geo = getGeoConstants();
 
+/*
+	shipment_cancel_controls -> role_type
+	sales = [
+		...geo.uuid.kam_ids,
+		geo.uuid.super_admin_id,
+		geo.uuid.admin_id,
+		geo.uuid.prod_es_sales,
+		geo.uuid.trade_expert_team_lead_long_tail_id,
+		geo.uuid.tech_super_admin_id,
+		...geo.uuid.sales_role,
+	];
+	supply = [geo.uuid.service_ops1_role_ids]
+*/
+
 const useGetActiveStakeholder = () => {
 	const { role_ids } = useSelector(({ profile }) => ({ role_ids: profile?.partner?.user_role_ids }));
 
