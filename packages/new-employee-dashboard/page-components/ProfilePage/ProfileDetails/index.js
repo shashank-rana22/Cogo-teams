@@ -5,7 +5,7 @@ import IdentificationDocuments from './IdentificationDocuments';
 import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
 
-function ProfileDetails({ loading, profileData, getEmployeeDetails }) {
+function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeDetailsLoading }) {
 	const data = [
 		{ title: 'PERSONAL INFORMATION', content: PersonalInformation },
 		{ title: 'IDENTIFICATION DOCUMENTS', content: IdentificationDocuments },
@@ -30,6 +30,7 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails }) {
 								mainApiLoading={loading}
 								profileData={profileData}
 								getEmployeeDetails={getEmployeeDetails}
+								getEmployeeDetailsLoading={getEmployeeDetailsLoading}
 							/>
 							{' '}
 						</Accordion>

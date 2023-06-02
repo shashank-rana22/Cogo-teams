@@ -2,6 +2,7 @@ import { Button, Popover } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import CommonLoader from '../../../../common/Loader';
 import PreviewDocumet from '../../../../common/PreviewDocumet';
 import useUpdateEmployeeDocuments from '../../../hooks/useUpdateEmployeeDocuments';
 import RejectPopoverContent from '../RejectPopoverContent';
@@ -10,7 +11,7 @@ import styles from './styles.module.css';
 
 const IDENTIFICATION_DOCUMENT_EXCLUSION_LIST = ['resume'];
 
-function IdentificationDocuments({ mainApiLoading, profileData, getEmployeeDetails }) {
+function IdentificationDocuments({ mainApiLoading, profileData, getEmployeeDetails, getEmployeeDetailsLoading }) {
 	const { documents } = profileData || {};
 
 	const {
@@ -20,6 +21,10 @@ function IdentificationDocuments({ mainApiLoading, profileData, getEmployeeDetai
 		setShowRejectPopover = () => {},
 		loading,
 	} = useUpdateEmployeeDocuments({ getEmployeeDetails });
+
+	if (getEmployeeDetailsLoading) {
+		return <CommonLoader />;
+	}
 
 	if (isEmpty(documents)) {
 		return <EmptyState emptyText="Identification documents not found" />;
@@ -33,6 +38,7 @@ function IdentificationDocuments({ mainApiLoading, profileData, getEmployeeDetai
 					if (IDENTIFICATION_DOCUMENT_EXCLUSION_LIST.includes(document_type)) {
 						return null;
 					}
+
 					return (
 						<div className={styles.card_wrapper} key={id}>
 							<div className={styles.tick_content}>

@@ -3,10 +3,11 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import CommonLoader from '../../../../common/Loader';
 
 import styles from './styles.module.css';
 
-function EducationalQualifications({ profileData }) {
+function EducationalQualifications({ profileData, getEmployeeDetailsLoading }) {
 	const { detail } = profileData || {};
 	const { employee_education_details = [] } = detail || {};
 
@@ -70,7 +71,7 @@ function EducationalQualifications({ profileData }) {
 						Description
 					</div>
 					<div className={styles.value}>
-						{description}
+						{description || '-'}
 					</div>
 				</div>
 
@@ -79,13 +80,17 @@ function EducationalQualifications({ profileData }) {
 						Courses
 					</div>
 					<div className={styles.course_wrapper}>
-						{renderCources({ Courses })}
+						{!isEmpty(Courses) ? renderCources({ Courses }) : '-'}
 					</div>
 				</div>
 
 			</div>
 		);
 	});
+
+	if (getEmployeeDetailsLoading) {
+		return <CommonLoader />;
+	}
 
 	if (isEmpty(employee_education_details)) {
 		return <EmptyState />;

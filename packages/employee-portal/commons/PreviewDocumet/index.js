@@ -9,6 +9,7 @@ function PreviewDocumet({
 	id,
 	policy_data,
 	getEmployeeDetails,
+	employeeId,
 }) {
 	return (
 		<div className={styles.container}>
@@ -44,6 +45,7 @@ function PreviewDocumet({
 							id={id}
 							policy_data={policy_data}
 							getEmployeeDetails={getEmployeeDetails}
+							employeeId={employeeId}
 						/>
 					)
 				}

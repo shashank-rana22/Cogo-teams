@@ -19,7 +19,7 @@ const handleChange = (checked = false) => {
 
 function CompanyPolicies({ setInformationPage, getEmployeeDetails, data }) {
 	const { company_policy_data : list, detail } = data || {};
-	const { policies_data } = detail || {};
+	const { policies_data, id:employeeId } = detail || {};
 
 	const companyPolicyIds = (list || []).map((element) => (element.id));
 
@@ -54,6 +54,7 @@ function CompanyPolicies({ setInformationPage, getEmployeeDetails, data }) {
 								id={id}
 								policy_data={policies_data}
 								getEmployeeDetails={getEmployeeDetails}
+								employeeId={employeeId}
 							/>
 
 						</div>

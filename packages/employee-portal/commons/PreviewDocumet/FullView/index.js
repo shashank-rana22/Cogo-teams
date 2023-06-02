@@ -12,9 +12,15 @@ function FullView({
 	id,
 	policy_data,
 	getEmployeeDetails,
+	employeeId,
 
 }) {
-	const { updateEmployeeDetails } = useCheckCompanyPolicies({ policy_data, policy_id: id, getEmployeeDetails });
+	const { updateEmployeeDetails } = useCheckCompanyPolicies({
+		policy_data,
+		policy_id: id,
+		getEmployeeDetails,
+		employeeId,
+	});
 
 	const openDocument = () => {
 		let modifiedUrl = `https://${url}`;

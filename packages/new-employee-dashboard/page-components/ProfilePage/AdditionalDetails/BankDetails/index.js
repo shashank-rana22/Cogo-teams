@@ -1,14 +1,19 @@
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import CommonLoader from '../../../../common/Loader';
 import PreviewDocumet from '../../../../common/PreviewDocumet';
 
 import styles from './styles.module.css';
 
 const MAPPING = ['bank_name', 'bank_branch_name', 'ifsc_code', 'account_holder_name', 'account_number'];
 
-function BankDetails({ profileData }) {
+function BankDetails({ profileData, getEmployeeDetailsLoading }) {
 	const { bank_details } = profileData || {};
+
+	if (getEmployeeDetailsLoading) {
+		return <CommonLoader />;
+	}
 
 	if (isEmpty(bank_details)) {
 		return <EmptyState emptyText="Bank details not found" />;

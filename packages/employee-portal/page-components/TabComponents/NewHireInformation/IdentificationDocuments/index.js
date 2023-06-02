@@ -90,8 +90,10 @@ function IdentificationDocuments({ data, getEmployeeDetails }) {
 	return (
 		<div className={styles.whole_container}>
 			<div className={styles.introductory_text}>
-				Please upload the identification documents and enter the corresponding details !
+				Please upload the identification documents and enter the corresponding details,
+				<span style={{ color: 'red', paddingLeft: 4 }}>Documents once approved cannot be changed.</span>
 			</div>
+
 			<div className={styles.container}>
 				{finalControls?.map((controlItem) => {
 					const { type, label, name: controlName, status = '' } = controlItem || {};

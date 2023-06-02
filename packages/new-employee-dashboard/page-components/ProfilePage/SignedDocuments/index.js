@@ -1,20 +1,18 @@
-import React from 'react';
+import React, { useState } from 'react';
 
 import StyledTable from '../../StyledTable';
 
 import getColumns from './getColumns';
-import styles from './styles.module.css';
-import {useState} from 'react'
 import ReviewModal from './ReviewModal';
-
+import styles from './styles.module.css';
 
 function SignedDocuments({ profileData, loading }) {
 	const onClickViewDocument = (id) => {
 		window.open('www.google.com', '_blank');
 	};
-	const [showModal,setShowModal] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
-	const columns = getColumns({ onClickViewDocument,setShowModal });
+	const columns = getColumns({ onClickViewDocument, setShowModal });
 
 	return (
 		<div className={styles.container}>
@@ -28,8 +26,7 @@ function SignedDocuments({ profileData, loading }) {
 				data={[{ status: 'pending' }, { status: 'Approved' }, { status: 'pending' }, { status: 'Rejected' }]}
 			/>
 
-
-			{<ReviewModal showModal={showModal} setShowModal={setShowModal}/>}
+			<ReviewModal showModal={showModal} setShowModal={setShowModal} />
 		</div>
 	);
 }

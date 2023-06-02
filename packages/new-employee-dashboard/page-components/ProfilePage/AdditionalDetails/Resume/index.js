@@ -1,14 +1,19 @@
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
+import CommonLoader from '../../../../common/Loader';
 import PreviewDocumet from '../../../../common/PreviewDocumet';
 
 import styles from './styles.module.css';
 
-function Resume({ profileData }) {
+function Resume({ profileData, getEmployeeDetailsLoading }) {
 	const { documents } = profileData || {};
 
 	const resumeDoc = (documents || []).find((doc) => (doc?.document_type === 'resume')) || {};
+
+	if (getEmployeeDetailsLoading) {
+		return <CommonLoader height="30vh" />;
+	}
 
 	if (isEmpty(resumeDoc)) {
 		return <EmptyState emptyText="Resume not found" />;

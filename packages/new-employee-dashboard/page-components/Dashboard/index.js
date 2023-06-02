@@ -22,7 +22,7 @@ function Dashboard() {
 					themeType="primary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="new_employee_list" title="New Employee List">
+					<TabPanel name="new_employee_list" title="New Hire List">
 						<TableView search={search} setSearch={setSearch} />
 					</TabPanel>
 

@@ -1,9 +1,8 @@
 .container {
-	padding: 20px;
+	padding: 20px 20px 20px 0;
 }
 
 .text_editor {
-	/* margin:30px 0px 0px 0px; */
 	width: 70%;
 }
 
@@ -20,9 +19,7 @@
 }
 
 .text_editor_header {
-	margin: 30px 0 10px;
-
-	/* font-weight: 600; */
+	margin: 0 0 12px;
 	color: #4f4f4f;
 }
 
