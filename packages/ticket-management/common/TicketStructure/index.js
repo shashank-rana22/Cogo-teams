@@ -37,6 +37,7 @@ function TicketStructure({
 					<TicketStructureBody
 						data={item}
 						key={item.id}
+						label={label}
 						setModalData={setModalData}
 						updateTicketActivity={updateTicketActivity}
 					/>

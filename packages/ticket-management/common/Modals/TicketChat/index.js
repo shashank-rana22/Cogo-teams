@@ -52,7 +52,7 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 		ticketId: modalData?.ticketId || '',
 	});
 
-	const { TicketFeedback: ticketFeedback = {}, Ticket: ticket = {} } =		ticketData || {};
+	const { TicketFeedback: ticketFeedback = {}, Ticket: ticket = {} } = ticketData || {};
 
 	const { Rating: rating = 0 } = ticketFeedback || {};
 	const { Status: status = '' } = ticket || {};
@@ -118,6 +118,7 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 			<Modal.Header
 				title={(
 					<ModalHeader
+						modalData={modalData}
 						ticketData={ticketData}
 						refetchTicket={refetchTicket}
 						ticketExists={ticketExists}
@@ -150,13 +151,7 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 					/>
 				</div>
 				{ticketExists && (
-					<div
-						style={{
-							background: ['closed', 'rejected'].includes(status)
-								? '#f4f4f4'
-								: '#fff',
-						}}
-					>
+					<div style={{ background: ['closed', 'rejected'].includes(status) ? '#f4f4f4' : '#fff' }}>
 						{!['closed', 'rejected'].includes(status)
 							&& (
 								<FooterChat
@@ -174,10 +169,7 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 				)}
 				{ticketExists && (
 					<div className={styles.sub_modal_container}>
-						<TicketSummary
-							{...ticketData}
-							ticketExists={ticketExists}
-						/>
+						<TicketSummary {...ticketData} ticketExists={ticketExists} />
 					</div>
 				)}
 			</Modal.Body>

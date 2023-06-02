@@ -1,16 +1,16 @@
+import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
-import { STATUS_LABEL_MAPPING } from '../../../../constants';
+import { PRIORITY_MAPPING, STATUS_LABEL_MAPPING } from '../../../../constants';
 import getTicketStatus from '../../../../utils/getTicketStatus';
 
 import styles from './styles.module.css';
 
 function TicketSummary({
-	Ticket: ticket = {}, ClosureAuthorizers: closureAuthorizers, TicketUser: ticketUser,
-	TicketReviewer: ticketReviewer,
+	Ticket: ticket = {}, ClosureAuthorizers: closureAuthorizers, TicketUser: ticketUser, TicketReviewer: ticketReviewer,
 }) {
 	const {
 		ID: id = '',
@@ -18,6 +18,7 @@ function TicketSummary({
 		Status: status = '',
 		UpdatedAt: updatedAt = '',
 		CreatedAt: createdAt = '',
+		Priority: priority = '',
 	} = ticket || {};
 
 	const authorizers = (closureAuthorizers || []).map((item) => item.Name);
@@ -26,7 +27,12 @@ function TicketSummary({
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>Ticket Summary</div>
+			<div className={styles.header}>
+				<div className={styles.title}>Ticket Summary</div>
+				<div className={cl`${styles.priority} ${styles[PRIORITY_MAPPING[priority]]}`}>
+					{startCase(`${priority} priority`)}
+				</div>
+			</div>
 			<div className={styles.ticket_body}>
 				<div className={styles.ticket_header}>
 					<div className={styles.ticket_id}>
@@ -63,14 +69,28 @@ function TicketSummary({
 					</span>
 				</div>
 				<div className={styles.ticket_data}>
-					Source:
-					<span className={styles.updated_at}>{startCase(ticketUser?.Type)}</span>
-				</div>
-				<div className={styles.ticket_data}>
 					Created By:
 					<span className={styles.updated_at}>
 						{ticketUser?.Name}
 					</span>
+				</div>
+				<div className={styles.ticket_data}>
+					Email:
+					<span className={styles.updated_at}>
+						{ticketUser?.Email}
+					</span>
+				</div>
+				<div className={styles.ticket_data}>
+					Contact no:
+					<span className={styles.updated_at}>
+						{ticketUser?.MobileCountryCode}
+						{' '}
+						{ticketUser?.MobileNumber}
+					</span>
+				</div>
+				<div className={styles.ticket_data}>
+					Source:
+					<span className={styles.updated_at}>{startCase(ticketUser?.Type)}</span>
 				</div>
 				<div className={styles.ticket_data}>
 					Assigned To:
@@ -81,7 +101,7 @@ function TicketSummary({
 				<div className={styles.ticket_data}>
 					Closure Authorizers:
 					<span className={styles.updated_at}>
-						{authorizers.map((item) => item).join(', ')}
+						{authorizers.map((item) => item).join(', ') || '-'}
 					</span>
 				</div>
 			</div>

@@ -50,6 +50,10 @@
 	outline: none;
 }
 
+.chat_input textarea {
+	caret-color: red;
+}
+
 .no_upload {
 	align-self: flex-end;
 	width: 25px;

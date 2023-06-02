@@ -7,7 +7,7 @@ import {
 	IcMPdf,
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useEffect, useRef } from 'react';
 
 import { MATCH_IMAGE_EXTENSION } from '../../../../constants';
 import CustomFileUploader from '../../../CustomFileUploader';
@@ -25,6 +25,7 @@ function FooterChat({
 	handleSendComment = () => {},
 }) {
 	let fileName = '';
+	const chatRef = useRef(null);
 
 	const handleProgress = (obj) => {
 		if (obj) {
@@ -43,6 +44,10 @@ function FooterChat({
 		const urlArray = decodeURI(file)?.split('/');
 		fileName = urlArray[(urlArray?.length || 0) - 1] || '';
 	}
+
+	useEffect(() => {
+		chatRef?.current?.focus();
+	}, []);
 
 	return (
 		<>
@@ -83,6 +88,7 @@ function FooterChat({
 					onChange={handleChange}
 				/>
 				<Textarea
+					ref={chatRef}
 					className={styles.chat_input}
 					placeholder="Type here ..."
 					onChange={(val) => setMessage(val)}

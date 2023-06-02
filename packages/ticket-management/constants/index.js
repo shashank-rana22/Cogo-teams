@@ -74,3 +74,9 @@ export const STATUS_LABEL_MAPPING = {
 		color : '#F37166',
 	},
 };
+
+export const PRIORITY_MAPPING = {
+	high   : 'high',
+	medium : 'medium',
+	low    : 'low',
+};

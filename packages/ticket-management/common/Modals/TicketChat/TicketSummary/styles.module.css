@@ -5,6 +5,12 @@
 }
 
 .header {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.title {
 	font-size: 14px;
 	font-weight: 500;
 	color: #221f20;
@@ -16,6 +22,17 @@
 	border-radius: 6px;
 	box-shadow: 0 2px 8px 5px rgb(98 127 172 / 20%);
 }
+
+.priority {
+	font-size: 10px;
+	font-weight: 600;
+}
+
+.high { color: #ee3425; }
+
+.medium { color: #f68b21; }
+
+.low { color: #abcd62; }
 
 .ticket_header {
 	padding: 10px;
