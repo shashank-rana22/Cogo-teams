@@ -6,16 +6,13 @@ import React, { useState, useContext } from 'react';
 
 import SupplierReallocation from '../../commons/SupplierReallocation';
 import CancelService from '../CancelService';
-import EditParams from '../EditParams';
 
 import styles from './styles.module.css';
 import getCanCancelService from './utils/getCanCancelService';
-import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
 const actionButtons = [
 	{ label: 'Edit', value: 'supplier_reallocation' },
-	{ label: 'Edit Params', value: 'edit_params' },
 	{ label: 'Cancel', value: 'cancel' },
 ];
 
@@ -38,8 +35,7 @@ function EditCancelService({ serviceData = {} }) {
 	const closeModal = () => setShowModal(null);
 
 	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
-	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig });
-	actionButtons[2].show = getCanCancelService({ state, stakeholderConfig });
+	actionButtons[1].show = getCanCancelService({ state, stakeholderConfig });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;
@@ -71,9 +67,6 @@ function EditCancelService({ serviceData = {} }) {
 
 			{showModal === 'supplier_reallocation'
 			&& <SupplierReallocation closeModal={closeModal} serviceData={servicesData} />}
-
-			{showModal === 'edit_params'
-			&& <EditParams closeModal={closeModal} serviceData={serviceData} />}
 
 			{showModal === 'cancel' && 	(
 				<CancelService

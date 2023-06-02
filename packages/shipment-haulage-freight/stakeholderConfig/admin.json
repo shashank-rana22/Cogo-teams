@@ -20,15 +20,10 @@
     },
     "cancel_shipment": {
         "can_cancel": true,
-        "list_reasons": {
-            "stakeholder_type": ["superadmin"]
-        }
+        "role": "sales"
     },
     "edit_supplier": true,
     "cancel_service": true,
-    "edit_params": {
-        "can_edit": true
-    },
     "additional_services": {
         "action_buttons": {
             "reallocate": false,

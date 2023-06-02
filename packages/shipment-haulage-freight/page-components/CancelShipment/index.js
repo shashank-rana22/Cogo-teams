@@ -27,7 +27,7 @@ const controlTypeMapping = {
 };
 
 function FormElement({ name, label, show, errors, type, ...rest }) {
-	if (name === 'better_quotation_label') {
+	if (name === 'better_quotation_label' && show) {
 		return (
 			<div className={cl`${styles.form_element} ${styles[rest.className]}`}>
 				{label ? <div className={styles.label}>{label}</div> : null}
