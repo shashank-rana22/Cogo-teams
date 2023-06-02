@@ -43,7 +43,7 @@ const useUpdateRfqRateMargin = ({
 		const margins = {};
 
 		Object.keys(updatedMargins).forEach((key) => {
-			if (String(key).indexOf('-') > -1) {
+			if (key.indexOf('-') > -1) {
 				margins[key] = updatedMargins[key];
 			}
 		});
