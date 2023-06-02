@@ -22,7 +22,6 @@ function BreakdownDetails({
 	setEditedMargins = () => { },
 	primaryService = {},
 	convenienceDetails = {},
-	setConvenienceDetails = () => { },
 	updateMargin,
 	rfq_rate_card_id = '',
 	refetchRateCards,
@@ -41,9 +40,6 @@ function BreakdownDetails({
 	rateDetails.splice(0, 1);
 	rateDetails.splice(rateDetails.length - 1, 1);
 
-	const handleConvenienceFeeChange = (v) => {
-		setConvenienceDetails(v);
-	};
 	let total = 0;
 
 	const { totalAmount } = getTotalMarginSum({
@@ -144,7 +140,6 @@ function BreakdownDetails({
 						<div className={styles.col} style={{ width: getWidth(5.7) }}>
 							<Convenience
 								key={isEmpty(convenienceDetails)}
-								onChange={handleConvenienceFeeChange}
 								convenienceDetails={convenienceDetails}
 								convenience_line_item={convenience_line_item}
 							/>
