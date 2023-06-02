@@ -1,6 +1,6 @@
 import { Placeholder, Breadcrumb, Pill } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-// import { useShipmentBack } from '@cogoport/surface-modules';
+import { useShipmentBack } from '@cogoport/surface-modules';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
@@ -10,8 +10,7 @@ function ShipmentInfo() {
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 	const { source = '', serial_id = '', is_cogo_assured = false } = shipment_data || {};
 
-	// const { handleShipmentsClick } = useShipmentBack();
-	const handleShipmentsClick = () => {};
+	const { handleShipmentsClick } = useShipmentBack();
 
 	const sourceText = source === 'direct'
 		? 'Sell Without Buy'
