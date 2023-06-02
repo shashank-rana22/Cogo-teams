@@ -84,7 +84,7 @@ function TableView({ search, activeTab }) {
 					<div className={styles.button_container}>
 						{ctcBreakup?.status === 'active' ? (
 							<>
-								<ActionPopover ctcBreakup={ctcBreakup} onFinalSubmit={onFinalSubmit} />
+								<ActionPopover item={ctcBreakup} onFinalSubmit={onFinalSubmit} />
 								<Button
 									onClick={() => onFinalSubmit({ id, status: 'approved' })}
 									themeType="primary"

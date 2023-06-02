@@ -14,6 +14,7 @@ export default function CtcBreakupModal({
 	setInitialQuestion,
 	formProps,
 	detail,
+	offerLetterApiRefetch,
 }) {
 	const [visible, setVisible] = useState(false);
 
@@ -58,6 +59,7 @@ export default function CtcBreakupModal({
 								formProps={formProps}
 								setShowCtcBreakupModal={setShowCtcBreakupModal}
 								setInitialQuestion={setInitialQuestion}
+								offerLetterApiRefetch={offerLetterApiRefetch}
 							/>
 						)}
 					>

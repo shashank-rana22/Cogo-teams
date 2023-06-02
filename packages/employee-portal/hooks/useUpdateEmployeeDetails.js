@@ -70,7 +70,6 @@ function useUpdateEmployeeDetails({ id, getEmployeeDetails = () => {} }) {
 					performed_by_id    : '5674cb',
 					performed_by_type  : '2314fb',
 					...payload,
-					// ...rest,
 				},
 			});
 			getEmployeeDetails();

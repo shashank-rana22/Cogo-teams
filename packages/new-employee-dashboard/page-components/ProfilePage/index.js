@@ -21,14 +21,18 @@ function ProfilePage() {
 		data: profileData = {},
 		loading = false,
 		ctcStructure = {},
-		// setCtcStructure = () => {},
 		initialQuestion = '',
 		setInitialQuestion = () => {},
 		formProps = {},
 		getEmployeeDetails,
 	} = useProfileDetails();
 
-	const { offerLetter, loading:offerLetterApiLoading } = useGetOfferLetter();
+	const {
+		offerLetter,
+		loading: offerLetterApiLoading,
+		offerLetterApiRefetch,
+	} = useGetOfferLetter();
+
 	const { metadata } = offerLetter || {};
 
 	const { detail = {} } = profileData || {};
@@ -83,6 +87,7 @@ function ProfilePage() {
 							initialQuestion={initialQuestion}
 							setInitialQuestion={setInitialQuestion}
 							formProps={formProps}
+							offerLetterApiRefetch={offerLetterApiRefetch}
 						/>
 					) : (
 						<ViewCtcBreakup

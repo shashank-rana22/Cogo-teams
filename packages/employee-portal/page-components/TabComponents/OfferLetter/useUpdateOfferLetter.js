@@ -21,7 +21,7 @@ const useUpdateOfferLetter = ({ document_url, id, getEmployeeDetails }) => {
 				},
 			});
 			getEmployeeDetails();
-			Toast.success('Details have been saved successfully!');
+			Toast.success(`Offer Letter ${status} successfully`);
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}

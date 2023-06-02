@@ -129,9 +129,9 @@ const useProfileDetails = () => {
 		{ manual: false },
 	);
 
-	const getEmployeeDetails = () => {
+	const getEmployeeDetails = async () => {
 		try {
-			trigger({
+			await trigger({
 				params,
 			});
 		} catch (err) {

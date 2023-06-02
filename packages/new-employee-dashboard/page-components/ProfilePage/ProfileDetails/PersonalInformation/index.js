@@ -13,9 +13,16 @@ function PersonalInformation({ profileData }) {
 		personal_email,
 		mobile_country_code,
 		mobile_number,
-		address, cogoport_email, date_of_birth, date_of_joining, department, designation, emergency_contact_details,
+		permanent_address, present_address, cogoport_email, date_of_birth,
+		date_of_joining, designation, emergency_contact_details,
 		employee_code, hiring_manager, hiring_manager_email,
 	} = detail || {};
+
+	const { address = '', city = '', country = '', pincode = '', state = '' } = permanent_address || {};
+	const permanentAddress = `${address}, ${city}, ${state}, ${country} - ${pincode}`;
+
+	const presentAddress = `${present_address?.address || ''}, ${present_address?.city || ''}, 
+	${present_address?.state || ''}, ${present_address?.country || ''} - ${present_address?.pincode || ''}`;
 
 	const mobileNumber = `${mobile_country_code} ${mobile_number}`;
 	const emergencyContactDetails = 	`${emergency_contact_details?.[0]?.mobile_country_code}
@@ -32,11 +39,11 @@ function PersonalInformation({ profileData }) {
 		gender                    : startCase(gender),
 		personal_email,
 		Mobile_number             : mobileNumber,
-		address                   : startCase(address),
+		permanentAddress,
+		presentAddress,
 		cogoport_email,
 		date_of_birth             : formatdate({ date: date_of_birth }),
 		date_of_joining           : formatdate({ date: date_of_joining }),
-		department                : startCase(department),
 		designation               : startCase(designation),
 		employee_code,
 		hiring_manager            : startCase(hiring_manager),
@@ -53,11 +60,11 @@ function PersonalInformation({ profileData }) {
 							{startCase(element)}
 							{' '}
 						</div>
-						<div>
 
+						<div>
 							{' '}
 							{MAPPING?.[element]
-								|| detail?.[element]?.mobile_number || detail?.[element]?.mobile_country_code}
+								|| detail?.[element]?.mobile_number || detail?.[element]?.mobile_country_code || '-'}
 						</div>
 					</div>
 				))

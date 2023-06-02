@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal }) {
+function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch }) {
 	const [{ loading }, trigger] = useHarbourRequest(
 		{
 			url    : '/create_employee_offer_letter',
@@ -27,7 +27,8 @@ function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal }) {
 				data: payload,
 			});
 
-			Toast.success('Letter initiated!');
+			offerLetterApiRefetch();
+			Toast.success('Offer Letter initiated!');
 			setShowCtcBreakupModal(false);
 		} catch (err) {
 			Toast.error(

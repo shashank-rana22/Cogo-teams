@@ -45,7 +45,7 @@ function Header({
 
 					<div>
 						<div className={styles.name}>
-							{!loading ? (
+							{!loading || !isEmpty(detail) ? (
 								name
 							) : (
 								<Placeholder
@@ -56,7 +56,7 @@ function Header({
 							)}
 						</div>
 						<div className={styles.role}>
-							{!loading ? (
+							{!loading || !isEmpty(detail) ? (
 								startCase(designation)
 							) : (
 								<Placeholder height="20px" width="240px" />
@@ -64,7 +64,7 @@ function Header({
 						</div>
 						<div className={styles.emp_code}>
 							<div style={{ marginRight: 2 }}>Employee Code: </div>
-							{!loading ? (
+							{!loading || !isEmpty(detail) ? (
 								employee_code
 							) : (
 								<Placeholder height="20px" width="80px" />
@@ -80,7 +80,7 @@ function Header({
 					type="button"
 					themeType="secondary"
 					style={{ marginLeft: 12 }}
-					loading={loading || btnloading || offerLetterApiLoading}
+					loading={(loading && isEmpty(detail)) || btnloading || offerLetterApiLoading}
 				>
 					{isEmpty(offerLetter) ? 'Add CTC breakup' : 'View CTC breakup'}
 				</Button>
@@ -88,8 +88,8 @@ function Header({
 				<Button
 					type="button"
 					style={{ marginLeft: 12 }}
-					onClick={() => { updateEmployeeStatus(); }}
-					loading={loading || btnloading || offerLetterApiLoading}
+					onClick={() => updateEmployeeStatus()}
+					loading={(loading && isEmpty(detail)) || btnloading || offerLetterApiLoading}
 				>
 					{status === 'active' ? 'Reject Candidate' : 'Reactivate Candidate Profile'}
 				</Button>

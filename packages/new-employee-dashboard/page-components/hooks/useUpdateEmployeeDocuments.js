@@ -5,7 +5,7 @@ const useUpdateEmployeeDocuments = ({ getEmployeeDetails }) => {
 	const [showRejectPopover, setShowRejectPopover] = useState(null);
 	const [inputValue, setInputValue] = useState('');
 
-	const [{ loading }, trigger] = useHarbourRequest({
+	const [{ loading = false }, trigger] = useHarbourRequest({
 		url    : '/update_employee_document',
 		method : 'POST',
 	}, { manual: true });
@@ -50,6 +50,7 @@ const useUpdateEmployeeDocuments = ({ getEmployeeDetails }) => {
 		onClickSubmitButton,
 		inputValue,
 		setInputValue,
+		loading,
 	};
 };
 
