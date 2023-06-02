@@ -7,6 +7,8 @@ import useUpdateCourse from '../../hooks/useUpdateCourse';
 import MAPPING from './MAPPING';
 import styles from './styles.module.css';
 
+const STATE_MAPPING = ['overview', 'specification', 'curriculum', 'completion', 'audience', 'pre_publish'];
+
 function LeftComponent({ activeTab, setActiveTab, getCogoAcademyCourse, id, state }) {
 	const { loading, updateCourse } = useUpdateCourse({
 		getCogoAcademyCourse,
@@ -17,9 +19,20 @@ function LeftComponent({ activeTab, setActiveTab, getCogoAcademyCourse, id, stat
 	});
 
 	const handleChangeActiveTab = ({ value }) => {
-		if (!loading && state !== 'published') {
+		let currIndex = 1;
+
+		if (state !== 'published') {
+			currIndex = STATE_MAPPING.findIndex((item) => item === activeTab);
+		}
+
+		const nextIndex = STATE_MAPPING.findIndex((item) => item === value);
+
+		if (!loading && state !== 'published' && currIndex > nextIndex) {
 			updateCourse({ values: { id, state: value } });
-		} else {
+			return;
+		}
+
+		if (state === 'published') {
 			setActiveTab(value);
 		}
 	};
