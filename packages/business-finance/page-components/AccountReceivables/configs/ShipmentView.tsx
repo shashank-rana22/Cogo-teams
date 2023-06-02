@@ -49,7 +49,7 @@ function ShipmentView({ row }) {
 					</div>
 				)}
 
-			{getByKey(row, 'serviceType')?.length > CHECK_MAX_VALUE ? (
+			{startCase(getByKey(row, 'serviceType') as string)?.length > CHECK_MAX_VALUE ? (
 				<Tooltip
 					interactive
 					placement="top"
