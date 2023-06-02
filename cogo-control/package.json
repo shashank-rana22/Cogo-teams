@@ -43,8 +43,6 @@
     "@cogoport/shipment-fcl-freight": "workspace:0.1.0",
     "@cogoport/shipment-ftl-freight": "workspace:0.1.0",
     "@cogoport/shipment-lcl-freight": "workspace:0.1.0",
-    "@cogoport/shipment-rail-domestic-freight": "workspace:0.1.0",
-    "@cogoport/shipment-haulage-freight": "workspace:0.1.0",
     "@cogoport/document-desk" : "workspace:0.1.0",
     "@cogoport/ocean-modules": "workspace:0.1.0",
     "@cogoport/surface-modules": "workspace:0.1.0",
