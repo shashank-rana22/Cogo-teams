@@ -68,52 +68,58 @@ function EventListItem({ data, index, setEventListData }) {
 					Rule
 				</div>
 
-				{rules.map((res, i) => (
-					<div className={styles.rule_body} key={res.id}>
-						<div className={styles.margin_right}>
-							Rule #
-							{i + 1}
+				{rules.map((res, i) => {
+					const { parameters = [] } = res || {};
+
+					const startCaseArray = parameters?.map((parameter) => startCase(parameter)) || [];
+
+					return (
+						<div className={styles.rule_body} key={res.id}>
+							<div className={styles.margin_right}>
+								Rule #
+								{i + 1}
+							</div>
+							<span className={styles.margin_right}>
+								<Pill
+									key="Reactivation"
+									size="lg"
+									color="blue"
+								>
+									{startCase(res.name || '')}
+								</Pill>
+							</span>
+
+							<div className={styles.margin_right}>
+								is triggered on
+							</div>
+
+							<span className={styles.margin_right}>
+								<Pill
+									key="Shipment_creation"
+									size="lg"
+									color="#FEF3E9"
+								>
+									{COMPLETION_MAPPING[data.event_state_on] || 'Event'}
+								</Pill>
+							</span>
+
+							<span className={styles.margin_right}>
+								having parameter
+							</span>
+
+							{' '}
+							<span className={styles.margin_right}>
+								<Pill
+									key="Account"
+									size="lg"
+									color="#FEF3E9"
+								>
+									{startCaseArray.join(', ')}
+								</Pill>
+							</span>
 						</div>
-						<span className={styles.margin_right}>
-							<Pill
-								key="Reactivation"
-								size="lg"
-								color="blue"
-							>
-								{startCase(res.name || '')}
-							</Pill>
-						</span>
-
-						<div className={styles.margin_right}>
-							is triggered on
-						</div>
-
-						<span className={styles.margin_right}>
-							<Pill
-								key="Shipment_creation"
-								size="lg"
-								color="#FEF3E9"
-							>
-								{COMPLETION_MAPPING[data.event_state_on] || 'Event'}
-							</Pill>
-						</span>
-
-						<span className={styles.margin_right}>
-							having parameter
-						</span>
-
-						{' '}
-						<span className={styles.margin_right}>
-							<Pill
-								key="Account"
-								size="lg"
-								color="#FEF3E9"
-							>
-								{startCase(res.parameters.join(', ') || '')}
-							</Pill>
-						</span>
-					</div>
-				))}
+					);
+				})}
 			</div>
 
 			{showDeleteModal && (
