@@ -13,7 +13,7 @@ function EducationalQualification({ getEmployeeDetails, data: info }) {
 
 	const id = info?.detail?.id;
 
-	const { updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
+	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
 	const onSubmit = (values) => {
 		updateEmployeeDetails({ data: values, formType: 'educational_qualification' });
@@ -60,6 +60,7 @@ function EducationalQualification({ getEmployeeDetails, data: info }) {
 				size="md"
 				type="button"
 				className={styles.button}
+				loading={loading}
 				onClick={handleSubmit(onSubmit)}
 			>
 				Save

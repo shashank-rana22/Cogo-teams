@@ -18,7 +18,7 @@ function Resume({ getEmployeeDetails, data: info }) {
 
 	const component = 'resume';
 
-	const { createEmployeeDocument } = useCreateEmployeeDocument({ component, getEmployeeDetails });
+	const { loading, createEmployeeDocument } = useCreateEmployeeDocument({ component, getEmployeeDetails });
 
 	const id = info?.detail?.id;
 
@@ -75,6 +75,7 @@ function Resume({ getEmployeeDetails, data: info }) {
 				size="md"
 				type="button"
 				className={styles.button}
+				loading={loading}
 				onClick={
 						handleSubmit(onSubmit)
 					}
