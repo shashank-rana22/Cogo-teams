@@ -4,11 +4,8 @@ import { convertCurrencyValue } from './dynamicValues';
 
 function getTotalMarginSum({ editedMargins = {}, currency_conversion, rate }) {
 	let totalAmount = 0;
-	let combinedLineItems = [];
 
-	Object.values(editedMargins || {}).forEach((itm) => {
-		combinedLineItems = [...combinedLineItems, ...itm];
-	});
+	let combinedLineItems = Object.values(editedMargins || {}).reduce((acc, itm) => [...acc, ...itm], []);
 
 	combinedLineItems.forEach((itm) => {
 		totalAmount += convertCurrencyValue(
