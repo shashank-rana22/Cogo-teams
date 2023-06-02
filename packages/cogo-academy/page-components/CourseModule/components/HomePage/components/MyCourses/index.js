@@ -6,7 +6,7 @@ import TABS_MAPPING from '../../../../configs/TABS_MAPPING';
 import CourseContent from './CourseContent';
 import styles from './styles.module.css';
 
-function MyCourses({ user_id, setOngoingCategories, ongoingCategories }) {
+function MyCourses({ user_id, setOngoingCategories, ongoingCategories, inputValue }) {
 	const [activeTab, setActiveTab] = useState('ongoing');
 
 	return (
@@ -27,6 +27,7 @@ function MyCourses({ user_id, setOngoingCategories, ongoingCategories }) {
 									activeTab={activeTab}
 									ongoingCategories={ongoingCategories}
 									setOngoingCategories={setOngoingCategories}
+									inputValue={inputValue}
 								/>
 							</div>
 						</TabPanel>

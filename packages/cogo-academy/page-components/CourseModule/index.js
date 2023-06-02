@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useState } from 'react';
 
 import Header from './components/Header';
@@ -7,6 +8,8 @@ import styles from './styles.module.css';
 
 function CourseModule() {
 	const [currentCategory, setCurrentCategory] = useState('all_courses');
+
+	const { query, debounceQuery } = useDebounceQuery();
 
 	const {
 		finalCourseCategories: courseCategories = [],
@@ -20,6 +23,7 @@ function CourseModule() {
 				courseCategories={courseCategories}
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
+				debounceQuery={debounceQuery}
 			/>
 
 			<RenderComponent
@@ -28,6 +32,7 @@ function CourseModule() {
 				setCurrentCategory={setCurrentCategory}
 				courseCategories={courseCategories}
 				categoryLoading={categoryLoading}
+				query={query}
 			/>
 		</div>
 	);

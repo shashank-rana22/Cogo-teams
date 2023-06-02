@@ -10,6 +10,7 @@ function RenderComponent({
 	setCurrentCategory,
 	courseCategories,
 	categoryLoading,
+	query: inputValue,
 }) {
 	const {
 		user: { id: user_id },
@@ -35,6 +36,7 @@ function RenderComponent({
 			courseCategoryData={courseCategoryData}
 			setCurrentCategory={setCurrentCategory}
 			categoryLoading={categoryLoading}
+			inputValue={inputValue}
 		/>
 	);
 }

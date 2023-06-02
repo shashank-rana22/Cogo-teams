@@ -1,47 +1,25 @@
 import { Carousel } from '@cogoport/components';
-import { useDebounceQuery } from '@cogoport/forms';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
 
 import EmptyState from '../../../../commons/EmptyState';
 import LoadingState from '../../../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../../../configs/BUTTON_CONTENT_MAPPING';
 import HANDLE_CLICK_MAPPING from '../../../../configs/HANDLE_CLICK_MAPPING';
-import useListCourseUserMappings from '../../../../hooks/useListCourseUserMappings';
 import CourseCard from '../../../CourseCard';
 
 import styles from './styles.module.css';
+import useListCourseUserMappings from './useListCourseUserMappings';
 
-function RecommendedComponents({ user_id, ongoingCategories }) {
+function RecommendedComponents({ user_id, ongoingCategories, inputValue }) {
 	const router = useRouter();
 
 	const HANDLE_CLICK_MAPPINGS = HANDLE_CLICK_MAPPING({ router });
 
-	const [activeTab, setActiveTab] = useState('');
+	const { data = {}, loading } = useListCourseUserMappings({ user_id, ongoingCategories, inputValue });
 
-	const [input, setInput] = useState('');
-
-	const { query, debounceQuery } = useDebounceQuery();
-
-	const [params, setParams] = useState({
-		filters: {
-			status: 'active',
-			user_id,
-			// faq_topic_id : topics,
-		},
-	});
-
-	console.log('ongoingCategories', ongoingCategories);
-
-	const { data = {}, loading } = useListCourseUserMappings({ activeTab, params, query });
-
-	// useEffect(() => {
-
-	// },[])
-
-	if (loading && !ongoingCategories.loaded) {
-		return <LoadingState rowsCount={7} />;
+	if (loading || !ongoingCategories.loaded) {
+		return <LoadingState rowsCount={2} />;
 	}
 
 	if (isEmpty(data?.list || [])) {
@@ -60,8 +38,8 @@ function RecommendedComponents({ user_id, ongoingCategories }) {
 			<CourseCard
 				key={item.id}
 				data={item}
-				buttonContent={BUTTON_CONTENT_MAPPING[activeTab || 'default']}
-				handleClick={HANDLE_CLICK_MAPPINGS[activeTab || 'default']}
+				buttonContent={BUTTON_CONTENT_MAPPING[item.state] || BUTTON_CONTENT_MAPPING.default}
+				handleClick={HANDLE_CLICK_MAPPINGS[item.state] || HANDLE_CLICK_MAPPINGS.default}
 			/>
 		),
 	}));

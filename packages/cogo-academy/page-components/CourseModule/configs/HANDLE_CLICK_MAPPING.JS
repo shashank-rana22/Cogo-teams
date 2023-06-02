@@ -11,7 +11,12 @@ const HANDLE_CLICK_MAPPING = ({ router }) => ({
 	completed: (course_id) => {
 		router.push(`/learning/course/introduction?course_id=${course_id}`);
 	},
-	saved: () => {},
+	saved: (course_id) => {
+		router.push(`/learning/course/introduction?course_id=${course_id}`);
+	},
+	introduction: (course_id) => {
+		router.push(`/learning/course/introduction?course_id=${course_id}`);
+	},
 });
 
 export default HANDLE_CLICK_MAPPING;

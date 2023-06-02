@@ -9,7 +9,7 @@ import MyCourses from './components/MyCourses';
 import RecommemndedCourses from './components/RecommemndedCourses';
 import styles from './styles.module.css';
 
-function HomePage({ user_id, courseCategoryData, categoryLoading, setCurrentCategory }) {
+function HomePage({ user_id, courseCategoryData, categoryLoading, setCurrentCategory, inputValue }) {
 	const router = useRouter();
 
 	const [ongoingCategories, setOngoingCategories] = useState({ loaded: false, data: [] });
@@ -20,6 +20,7 @@ function HomePage({ user_id, courseCategoryData, categoryLoading, setCurrentCate
 				user_id={user_id}
 				setOngoingCategories={setOngoingCategories}
 				ongoingCategories={ongoingCategories}
+				inputValue={inputValue}
 			/>
 
 			<div style={{ margin: '60px 0px' }}>
@@ -58,7 +59,11 @@ function HomePage({ user_id, courseCategoryData, categoryLoading, setCurrentCate
 					</Button>
 				</div>
 
-				<RecommemndedCourses user_id={user_id} ongoingCategories={ongoingCategories} />
+				<RecommemndedCourses
+					user_id={user_id}
+					ongoingCategories={ongoingCategories}
+					inputValue={inputValue}
+				/>
 			</div>
 		</div>
 

@@ -7,9 +7,10 @@ import CoursesModal from '../CoursesModal';
 
 import styles from './styles.module.css';
 
-function Header({ loading, courseCategories, currentCategory, setCurrentCategory }) {
-	const [showCoursesModal, setShowCoursesModal] = useState(false);
+function Header({ loading, courseCategories, currentCategory, setCurrentCategory, debounceQuery }) {
 	const router = useRouter();
+
+	const [showCoursesModal, setShowCoursesModal] = useState(false);
 
 	const handleClick = () => {
 		router.push('/learning/course');
@@ -35,6 +36,7 @@ function Header({ loading, courseCategories, currentCategory, setCurrentCategory
 				<Input
 					placeholder="Search by Course, Category, Topic or Tags"
 					suffix={<IcMSearchlight style={{ marginRight: '12px' }} />}
+					onChange={(val) => debounceQuery(val)}
 				/>
 
 				<div className={styles.profile}>

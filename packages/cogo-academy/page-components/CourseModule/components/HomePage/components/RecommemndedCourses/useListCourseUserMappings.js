@@ -1,34 +1,42 @@
-// import { Toast } from '@cogoport/components';
-// import { useRequest } from '@cogoport/request';
-// import { useCallback, useMemo, useEffect } from 'react';
+import { Toast } from '@cogoport/components';
+import { useRequest } from '@cogoport/request';
+import { useCallback, useEffect } from 'react';
 
-// function useListCourseUserMappings({ activeTab, params, query, selected, currentCategory, page_limit, page }) {
-// 	const [{ data = {}, loading }, trigger] = useRequest({
-// 		url    : '/list_user_courses',
-// 		method : 'GET',
-// 	}, { manual: true });
+function useListCourseUserMappings({ user_id, ongoingCategories, inputValue }) {
+	const [{ data = {}, loading }, trigger] = useRequest({
+		url    : '/list_user_courses',
+		method : 'GET',
+	}, { manual: true });
 
-// 	const fetchList = useCallback(() => {
-// 		try {
-// 			trigger({
-// 				params: finalPayload,
-// 			});
-// 		} catch (error) {
-// 			Toast.error(error.message);
-// 		}
-// 	}, [trigger, finalPayload]);
+	const fetchList = useCallback(() => {
+		try {
+			trigger({
+				params: {
+					filters: {
+						staus              : 'active',
+						user_id,
+						course_category_id : ongoingCategories.data,
+						q                  : inputValue,
+					},
+				},
+			});
+		} catch (error) {
+			Toast.error(error.message);
+		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [ongoingCategories.data, trigger, user_id]);
 
-// 	useEffect(() => {
-// 		if (activeTab) {
-// 			fetchList();
-// 		}
-// 	}, [activeTab, fetchList]);
+	useEffect(() => {
+		if (ongoingCategories.loaded) {
+			fetchList();
+		}
+	}, [fetchList, ongoingCategories.loaded]);
 
-// 	return {
-// 		data,
-// 		loading,
-// 		fetchList,
-// 	};
-// }
+	return {
+		data,
+		loading,
+		fetchList,
+	};
+}
 
-// export default useListCourseUserMappings;
+export default useListCourseUserMappings;
