@@ -2,7 +2,6 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
-import useTaskRpa from '../../../hooks/useTaskRpa';
 
 import {
 	UploadCargoArrival,
@@ -15,15 +14,15 @@ import {
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
+const EXCLUDED_SERVICES = ['haulage_freight_service'];
+
 function ExecuteTask({
 	task = {},
 	onCancel = () => {},
 	taskListRefetch = () => {},
 	selectedMail = [],
-	setSelectedMail = () => {},
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
-	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
 	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
@@ -45,6 +44,7 @@ function ExecuteTask({
 	if (
 		task.service_type
 		&& task.task === 'mark_confirmed'
+		&& !EXCLUDED_SERVICES.includes(task?.service_type)
 	) {
 		return (
 			<MarkConfirmServices

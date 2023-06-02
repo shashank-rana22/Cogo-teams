@@ -41,7 +41,7 @@ function Services() {
 				<div className={styles.services_container}>
 					{serviceCategories.map((serviceCategory) => (
 						<>
-							{ showTradeHeading[`${serviceCategory.split('Services')[0]}`]
+							{showTradeHeading[`${serviceCategory.split('Services')[0]}`]
 								? heading(serviceCategory) : null}
 
 							<div className={styles.trade_services}>
