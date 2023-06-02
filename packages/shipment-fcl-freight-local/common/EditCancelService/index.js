@@ -13,7 +13,7 @@ import getCanCancelService from './utils/getCanCancelService';
 import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
-const actionButtons = [
+const ACTION_BUTTONS = [
 	{ label: 'Edit', value: 'supplier_reallocation' },
 	{ label: 'Edit Params', value: 'edit_params' },
 	{ label: 'Cancel', value: 'cancel' },
@@ -35,15 +35,15 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
-	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig });
-	actionButtons[2].show = getCanCancelService({ state, stakeholderConfig });
+	ACTION_BUTTONS[0].show = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
+	ACTION_BUTTONS[1].show = getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig });
+	ACTION_BUTTONS[2].show = getCanCancelService({ state, stakeholderConfig });
 
-	if (!actionButtons.some((actionButton) => actionButton.show)) {
+	if (!ACTION_BUTTONS.some((actionButton) => actionButton.show)) {
 		return null;
 	}
 
-	const content = actionButtons.map(({ label, value, show }) => (show ? (
+	const content = ACTION_BUTTONS.map(({ label, value, show }) => (show ? (
 		<div
 			key={value}
 			role="button"
