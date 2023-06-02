@@ -1,7 +1,7 @@
 .awbnumber_container {
-    padding-top: 10px;
+	padding-top: 10px;
 	padding-bottom: 10px;
-	background-color: #ffffff;
+	background-color: #fff;
 }
 
 .airline {
@@ -16,7 +16,7 @@
 	padding: 8px;
 	overflow: hidden;
 	text-overflow: ellipsis;
-	white-space: nowrap;	
+	white-space: nowrap;
 }
 
 .tooltip_container {

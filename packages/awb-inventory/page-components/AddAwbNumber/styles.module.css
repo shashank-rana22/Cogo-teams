@@ -1,14 +1,14 @@
 .addawb_container {
-    padding: 2px;
+	padding: 2px;
 }
 
 .modal_header {
-	font-weight: 600;
 	font-size: 18px;
+	font-weight: 600;
 }
 
 .button_container {
-    padding-top: 18px;
 	display: flex;
 	justify-content: right;
+	padding-top: 18px;
 }

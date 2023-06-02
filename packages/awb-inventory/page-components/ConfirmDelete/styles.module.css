@@ -1,25 +1,26 @@
 .delete_container {
-    padding: 8px;
+	padding: 8px;
 	text-align: center;
 }
 
 .modal_title {
-    font-weight: 500;
+	font-weight: 500;
 	color: #ee3425;
+
 	svg {
-		height: 30px;
 		width: 30px;
+		height: 30px;
 		fill: #ee3425;
 	}
 }
 
 .text {
-    color: #ee3425;
 	font-size: 14px;
+	color: #ee3425;
 }
 
 .button_container {
-    display: flex;
+	display: flex;
 	align-items: center;
 	justify-content: center;
 	margin-top: 40px;

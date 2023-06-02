@@ -36,62 +36,60 @@ function Filters({ filters, setFilters, activeTab }) {
 	};
 
 	return (
-		<div className={styles.filter_container}>
-			<Popover
-				placement="bottom"
-				trigger="click"
-				render={(
-					<div className={styles.pop_container}>
-						<div className={styles.header}>
-							<div className={styles.heading}>Filters</div>
-							<Button
-								themeType="tertiary"
-								onClick={() => setOpen(false)}
-							>
-								<IcMCrossInCircle width={18} height={18} fill="#ee3425" />
-							</Button>
-						</div>
-						<Layout
-							control={control}
-							fields={controls}
-							errors={errors}
-						/>
-						<div className={styles.styled_button}>
-							<Button
-								themeType="secondary"
-								onClick={() => handleReset()}
-								style={{ marginRight: 12 }}
-							>
-								Clear
-							</Button>
-							<Button
-								onClick={handleSubmit(handleData)}
-							>
-								Apply
-							</Button>
-						</div>
+		<Popover
+			placement="bottom"
+			trigger="click"
+			render={(
+				<div className={styles.pop_container}>
+					<div className={styles.header}>
+						<div className={styles.heading}>Filters</div>
+						<Button
+							themeType="tertiary"
+							onClick={() => setOpen(false)}
+						>
+							<IcMCrossInCircle width={18} height={18} fill="#ee3425" />
+						</Button>
 					</div>
-				)}
-				visible={open}
-			>
-				<Button
-					themeType="secondary"
-					size="md"
-					onClick={() => {
-						setOpen(!open);
-					}}
-					style={{ marginLeft: '8px' }}
-				>
-					<IcMFilter
-						width={20}
-						height={20}
-						fill="#ee3425"
-						style={{ padding: '1px 1px 2px 2px' }}
+					<Layout
+						control={control}
+						fields={controls}
+						errors={errors}
 					/>
-					{showFilterDot()}
-				</Button>
-			</Popover>
-		</div>
+					<div className={styles.styled_button}>
+						<Button
+							themeType="secondary"
+							onClick={() => handleReset()}
+							style={{ marginRight: 12 }}
+						>
+							Clear
+						</Button>
+						<Button
+							onClick={handleSubmit(handleData)}
+						>
+							Apply
+						</Button>
+					</div>
+				</div>
+			)}
+			visible={open}
+		>
+			<Button
+				themeType="secondary"
+				size="md"
+				onClick={() => {
+					setOpen(!open);
+				}}
+				style={{ marginLeft: '8px' }}
+			>
+				<IcMFilter
+					width={20}
+					height={20}
+					fill="#ee3425"
+					style={{ padding: '1px 1px 2px 2px' }}
+				/>
+				{showFilterDot()}
+			</Button>
+		</Popover>
 	);
 }
 
