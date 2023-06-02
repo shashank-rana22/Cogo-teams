@@ -10,7 +10,6 @@ function Day1Download() {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.text_editor_header}>Provide Day 1 Download</div>
 
 			<div className={styles.text_editor}>
