@@ -17,6 +17,7 @@ function getRenderHeader({
 		ticket_created       : 'Ticket has been created.',
 		respond              : `${description}`,
 		ticket_updated       : `${ticketType} has been updated.`,
+		reopened             : `This ticket has been reopened by ${name}`,
 	};
 
 	if (type === 'escalated' && userType === 'system') {
