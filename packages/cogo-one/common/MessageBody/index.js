@@ -87,7 +87,7 @@ function MessageBody({ response = {}, message_type = 'text' }) {
 			</>
 		);
 	}
-	if (['document', 'file'].includes(message_type)) {
+	if (MESSAGE_MAPPING.document.includes(message_type)) {
 		return (
 			<>
 				<CustomFileDiv mediaUrl={media_url} />
