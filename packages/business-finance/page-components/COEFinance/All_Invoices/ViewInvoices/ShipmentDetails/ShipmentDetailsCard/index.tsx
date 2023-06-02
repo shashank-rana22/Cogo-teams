@@ -119,11 +119,11 @@ function ShipmentDetailsCard({
 		setRejected(undoRejectedData);
 
 		if (id === 1) {
-			setRemarksVal({ ...remarksVal, collectionPartyRemark: '' });
+			setRemarksVal({ ...remarksVal, collectionPartyRemark: null });
 		} else if (id === 2) {
-			setRemarksVal({ ...remarksVal, billingPartyRemark: '' });
+			setRemarksVal({ ...remarksVal, billingPartyRemark: null });
 		} else if (id === 3) {
-			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: '' });
+			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: null });
 		}
 	};
 
@@ -139,11 +139,11 @@ function ShipmentDetailsCard({
 	};
 	const onClose = () => {
 		if (Object.keys(showRejected).includes('1')) {
-			setRemarksVal({ ...remarksVal, collectionPartyRemark: '' });
+			setRemarksVal({ ...remarksVal, collectionPartyRemark: null });
 		} else if (Object.keys(showRejected).includes('2')) {
-			setRemarksVal({ ...remarksVal, billingPartyRemark: '' });
+			setRemarksVal({ ...remarksVal, billingPartyRemark: null });
 		} else {
-			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: '' });
+			setRemarksVal({ ...remarksVal, invoiceDetailsRemark: null });
 		}
 		setShowRejected(false);
 	};

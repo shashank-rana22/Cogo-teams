@@ -38,7 +38,6 @@ function AssignedStakeholder({ data = {} }) {
 				) : null}
 			</div>
 		) : null
-
 	);
 }
 
