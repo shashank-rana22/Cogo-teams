@@ -10,7 +10,7 @@ function useListCogoAcademyCourses({ filters, activeTab = '' }) {
 		page                    : 1,
 		course_details_required : true,
 		filters                 : {
-			status: 'active',
+			status: ['active', 'inactive'],
 		},
 	});
 

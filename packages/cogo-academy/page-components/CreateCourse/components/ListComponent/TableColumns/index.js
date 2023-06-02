@@ -6,6 +6,18 @@ import { StudentButtons, CourseButtons } from './components/ButtonComponent';
 import SortComponent from './components/SortComponent';
 import styles from './styles.module.css';
 
+const getState = ({ state, status }) => {
+	if (status === 'inactive') {
+		return { state: 'Inactive', color: '#ff8888' };
+	}
+
+	if (state === 'published') {
+		return { state: 'Active', color: '#CFEAEC' };
+	}
+
+	return { state: 'Draft', color: '#FEF3E9' };
+};
+
 export const studentColumns = ({
 	loading,
 	router,
@@ -121,21 +133,21 @@ export const courseColumns = ({
 	router,
 	setShowModal,
 	setCourseId,
-	fetchList,
 	setParams,
 	params,
+	updateApi,
 }) => ([
 	{
 		Header   : 'Status',
 		id       : 'status',
-		accessor : ({ status = '' }) => (
+		accessor : ({ state	= '', status }) => (
 			<div>
 				<Pill
 					size="md"
-					color={status === 'active' ? '#CFEAEC' : '#FEF3E9'}
+					color={getState({ status, state }).color}
 					className={styles.status_pill}
 				>
-					{startCase(status)}
+					{getState({ status, state }).state}
 				</Pill>
 			</div>
 		),
@@ -258,13 +270,15 @@ export const courseColumns = ({
 	{
 		Header   : '',
 		id       : 'options',
-		accessor : ({ id = '' }) => (
+		accessor : ({ id = '', status }) => (
 			<CourseButtons
 				id={id}
 				loading={loading}
 				setShowModal={setShowModal}
 				setCourseId={setCourseId}
 				router={router}
+				status={status}
+				updateApi={updateApi}
 			/>
 		),
 	},

@@ -44,6 +44,7 @@ function RightComponent({ data = {}, listLoading, setShowCoursesModal }) {
 						</div>
 					);
 				}
+
 				return (
 					<CategoryCard
 						item={item}

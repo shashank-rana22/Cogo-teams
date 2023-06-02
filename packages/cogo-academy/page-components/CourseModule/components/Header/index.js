@@ -1,13 +1,16 @@
 import { Input, Button } from '@cogoport/components';
-import { IcMArrowDown, IcMSearchlight, IcMProfile } from '@cogoport/icons-react';
+import { IcMArrowDown, IcMSearchlight, IcMHelpInCircle } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
 import CoursesModal from '../CoursesModal';
+import ReportErrorModal from '../ReportErrorModal';
 
 import styles from './styles.module.css';
 
 function Header({ loading, courseCategories, currentCategory, setCurrentCategory, debounceQuery }) {
+	const [showErrorModal, setShowErrorModal] = useState(false);
+
 	const router = useRouter();
 
 	const [showCoursesModal, setShowCoursesModal] = useState(false);
@@ -40,8 +43,17 @@ function Header({ loading, courseCategories, currentCategory, setCurrentCategory
 				/>
 
 				<div className={styles.profile}>
-					<IcMProfile width={18} height={18} />
-					<h4 className={styles.centered}>Hi, Levi</h4>
+					{/* <IcMProfile width={18} height={18} />
+					<h4 className={styles.centered}>Hi, Levi</h4> */}
+					<Button
+						themeType="tertiary"
+						onClick={() => setShowErrorModal(true)}
+					>
+						Report Issue
+						&nbsp;&nbsp;
+						<IcMHelpInCircle width={18} height={18} />
+					</Button>
+
 				</div>
 			</div>
 
@@ -53,6 +65,14 @@ function Header({ loading, courseCategories, currentCategory, setCurrentCategory
 					setShowCoursesModal={setShowCoursesModal}
 					currentCategory={currentCategory}
 					setCurrentCategory={setCurrentCategory}
+				/>
+			) : null}
+
+			{showErrorModal ? (
+				<ReportErrorModal
+					loading={loading}
+					showErrorModal={showErrorModal}
+					setShowErrorModal={setShowErrorModal}
 				/>
 			) : null}
 		</>

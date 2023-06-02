@@ -1,6 +1,5 @@
 import { Modal } from '@cogoport/components';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
 
 import LoadingState from '../../../../../commons/LoadingState';
 
@@ -12,18 +11,11 @@ import useListCourseUserMappings from './useListCourseUserMappings';
 function ModalContent({ finalCourseCategories, loading, currentCategory, setCurrentCategory, setShowCoursesModal }) {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
 
-	const [params, setParams] = useState({
-		filters: {
-			status: 'active',
-			user_id,
-		},
-	});
-
 	const {
 		data,
 		loading: listLoading,
 		fetchList,
-	} = useListCourseUserMappings({ activeTab: currentCategory, params });
+	} = useListCourseUserMappings({ user_id });
 
 	if (loading) {
 		return (

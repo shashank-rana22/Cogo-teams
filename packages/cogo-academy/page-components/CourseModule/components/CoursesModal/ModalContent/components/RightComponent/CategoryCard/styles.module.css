@@ -12,6 +12,12 @@
 			padding: 4px;
 			margin: 2px;
 		}
+
+		.ui_pill_text {
+			overflow: hidden;
+			text-overflow: ellipsis;
+			white-space: nowrap;
+		}
 	}
 }
 

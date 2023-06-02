@@ -7,7 +7,7 @@ const handleOpenCourse = ({ id, router, view }) => {
 	router.push(`/learning/course/create?mode=${view}&id=${id}`);
 };
 
-export function StudentButtons({ item, router, setStudentId, setShowModal, loading }) {
+export function StudentButtons({ item, setStudentId, setShowModal, loading }) {
 	return (
 		<div className={styles.container}>
 			<Tooltip
@@ -71,6 +71,8 @@ export function CourseButtons({
 	setShowModal,
 	setCourseId,
 	router,
+	status,
+	updateApi,
 }) {
 	return (
 		<div>
@@ -105,13 +107,18 @@ export function CourseButtons({
 								className={styles.btn}
 								type="button"
 								onClick={() => {
-									setShowModal(true);
-									setCourseId(id);
+									if (status !== 'inactive') {
+										setShowModal(true);
+										setCourseId(id);
+									} else {
+										updateApi({ values: { id, status: 'active' } });
+									}
 								}}
 							>
-								<IcMDelete />
-								<div>Delete</div>
+								{status !== 'inactive' ? <IcMDelete /> : null}
+								<div>{status !== 'inactive' ? 'Delete' : 'Make active'}</div>
 							</Button>
+
 						</div>
 					)}
 					trigger="click"

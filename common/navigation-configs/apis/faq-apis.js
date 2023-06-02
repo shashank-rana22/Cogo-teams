@@ -588,7 +588,12 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
 
+			api          : 'create_communication',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 };
 

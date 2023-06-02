@@ -16,7 +16,7 @@ function RecommendedComponents({ user_id, ongoingCategories, inputValue }) {
 
 	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
 
-	const { data = {}, loading } = useListCourseUserMappings({ user_id, ongoingCategories, inputValue });
+	const { data = {}, loading, fetchList } = useListCourseUserMappings({ user_id, ongoingCategories, inputValue });
 
 	if (loading || !ongoingCategories.loaded) {
 		return <LoadingState rowsCount={2} />;
@@ -40,6 +40,7 @@ function RecommendedComponents({ user_id, ongoingCategories, inputValue }) {
 				data={item}
 				buttonContent={BUTTON_CONTENT_MAPPING[item.state] || BUTTON_CONTENT_MAPPING.default}
 				handleClick={GET_LINK_MAPPINGS[item.state] || GET_LINK_MAPPINGS.default}
+				fetchList={fetchList}
 			/>
 		),
 	}));

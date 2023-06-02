@@ -5,6 +5,8 @@ import { useState, useEffect } from 'react';
 
 import EmptyState from '../../../CreateCourse/commons/EmptyState';
 import useGetUserCourse from '../../hooks/useGetUserCourse';
+import useListCourseCategory from '../../hooks/useListCourseCategory';
+import Header from '../Header';
 
 import Footer from './components/Footer';
 import ModuleContent from './components/ModuleContent';
@@ -37,6 +39,12 @@ function CourseConsumption() {
 	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 
 	const { moduleIndex, subModuleIndex, chapterIndex } = indexes;
+	const [currentCategory, setCurrentCategory] = useState('all_courses');
+	const {
+		finalCourseCategories: courseCategories = [],
+		courseCategoryData,
+		loading: categoryLoading,
+	} = useListCourseCategory();
 
 	const { data = {}, getUserCourse, loading } = useGetUserCourse({ course_id, user_id });
 
@@ -58,53 +66,60 @@ function CourseConsumption() {
 	}
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.main_content}>
-
-				<ModuleNavigation
-					data={data}
-					loading={loading}
-					courseProgressUpdateLoading={courseProgressUpdateLoading}
-					chapter={chapter}
-					setChapter={setChapter}
-					indexes={indexes}
-					setIndexes={setIndexes}
-				/>
-
-				<ModuleContent
-					data={data}
-					loading={loading || courseProgressUpdateLoading}
-					updateCourseProgress={updateCourseProgress}
-					chapter={chapter}
-					indexes={indexes}
-					setIndexes={setIndexes}
-					getUserCourse={getUserCourse}
-					setChapter={setChapter}
-					RichTextEditor={RichTextEditor}
-					editorValue={editorValue}
-					setEditorValue={setEditorValue}
-					editorError={editorError}
-					setEditorError={setEditorError}
-					readOnly={readOnly}
-					setReadOnly={setReadOnly}
-				/>
-
-			</div>
-
-			<Footer
-				course_id={course_id}
-				data={data}
-				indexes={indexes}
-				setIndexes={setIndexes}
-				updateCourseProgress={updateCourseProgress}
-				loading={loading || courseProgressUpdateLoading}
-				getUserCourse={getUserCourse}
-				chapter={chapter}
-				editorValue={editorValue}
-				setEditorError={setEditorError}
-				setChapter={setChapter}
+		<>
+			<Header
+				courseCategories={courseCategories}
+				currentCategory={currentCategory}
+				setCurrentCategory={setCurrentCategory}
 			/>
-		</div>
+			<div className={styles.container}>
+				<div className={styles.main_content}>
+
+					<ModuleNavigation
+						data={data}
+						loading={loading}
+						courseProgressUpdateLoading={courseProgressUpdateLoading}
+						chapter={chapter}
+						setChapter={setChapter}
+						indexes={indexes}
+						setIndexes={setIndexes}
+					/>
+
+					<ModuleContent
+						data={data}
+						loading={loading || courseProgressUpdateLoading}
+						updateCourseProgress={updateCourseProgress}
+						chapter={chapter}
+						indexes={indexes}
+						setIndexes={setIndexes}
+						getUserCourse={getUserCourse}
+						setChapter={setChapter}
+						RichTextEditor={RichTextEditor}
+						editorValue={editorValue}
+						setEditorValue={setEditorValue}
+						editorError={editorError}
+						setEditorError={setEditorError}
+						readOnly={readOnly}
+						setReadOnly={setReadOnly}
+					/>
+
+				</div>
+
+				<Footer
+					course_id={course_id}
+					data={data}
+					indexes={indexes}
+					setIndexes={setIndexes}
+					updateCourseProgress={updateCourseProgress}
+					loading={loading || courseProgressUpdateLoading}
+					getUserCourse={getUserCourse}
+					chapter={chapter}
+					editorValue={editorValue}
+					setEditorError={setEditorError}
+					setChapter={setChapter}
+				/>
+			</div>
+		</>
 	);
 }
 

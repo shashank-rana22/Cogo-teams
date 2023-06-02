@@ -15,7 +15,7 @@ function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCatego
 
 	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
 
-	const { data = {}, loading } = useListCourseUserMappings({ activeTab, inputValue, user_id });
+	const { data = {}, loading, fetchList } = useListCourseUserMappings({ activeTab, inputValue, user_id });
 
 	useEffect(() => {
 		if (!loading && activeTab !== 'ongoing' && !ongoingCategories.loaded) {
@@ -52,7 +52,7 @@ function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCatego
 				data={item}
 				buttonContent={BUTTON_CONTENT_MAPPING[activeTab]}
 				handleClick={GET_LINK_MAPPINGS[activeTab]}
-				activeTab={activeTab}
+				fetchList={fetchList}
 			/>
 		),
 	}));

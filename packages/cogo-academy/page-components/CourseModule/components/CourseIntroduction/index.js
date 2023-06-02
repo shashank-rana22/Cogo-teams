@@ -1,7 +1,9 @@
 import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
+import { useState } from 'react';
 
 import useGetUserCourse from '../../hooks/useGetUserCourse';
+import useListCourseCategory from '../../hooks/useListCourseCategory';
 import Header from '../Header';
 
 import CourseCurriculum from './components/CourseCurriculum';
@@ -17,6 +19,12 @@ function CourseIntroduction() {
 	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 
 	const { course_id = '' } = query;
+	const [currentCategory, setCurrentCategory] = useState('all_courses');
+	const {
+		finalCourseCategories: courseCategories = [],
+		courseCategoryData,
+		loading: categoryLoading,
+	} = useListCourseCategory();
 
 	const { data, loading } = useGetUserCourse({ course_id, user_id });
 
@@ -26,6 +34,12 @@ function CourseIntroduction() {
 
 	return (
 		<>
+			<Header
+				courseCategories={courseCategories}
+				currentCategory={currentCategory}
+				setCurrentCategory={setCurrentCategory}
+			/>
+
 			<div className={styles.container}>
 				<CourseDetails
 					data={data?.course_details}

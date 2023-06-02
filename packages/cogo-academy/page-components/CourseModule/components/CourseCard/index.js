@@ -2,6 +2,8 @@ import { Pill, Button, Tooltip, ProgressBar } from '@cogoport/components';
 import { IcMStarfull, IcMBookmark } from '@cogoport/icons-react';
 import React from 'react';
 
+import useUpdateUserCourse from '../../hooks/useUpdateUserCourse';
+
 import styles from './styles.module.css';
 
 function ToolTipContent({ faq_topics }) {
@@ -26,8 +28,8 @@ function ToolTipContent({ faq_topics }) {
 	);
 }
 
-function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, activeTab }) {
-	const { cogo_academy_course = {}, cogo_academy_course_id : course_id = '', course_progress } = data;
+function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, fetchList, viewType = '' }) {
+	const { cogo_academy_course = {}, cogo_academy_course_id : course_id = '', course_progress, state } = data;
 
 	const {
 		faq_topics = [],
@@ -43,8 +45,10 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, act
 		icon,
 	} = buttonContent;
 
+	const { updateUserCourse } = useUpdateUserCourse({ fetchList });
+
 	return (
-		<div className={styles.container}>
+		<div className={`${styles.container} ${styles[viewType]}`}>
 			<div style={{ backgroundImage: `url(${thumbnail_url})` }} className={styles.header}>
 				<div className={styles.topics_rating_container}>
 					<div className={styles.topics}>
@@ -89,11 +93,22 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, act
 						: null}
 				</div>
 
-				<div className={styles.save}>
-					<IcMBookmark fill="#000000" style={{ marginRight: '6px' }} />
+				<div
+					className={data?.is_saved ? styles.saved : styles.save}
+					role="button"
+					tabIndex="0"
+					onClick={() => { updateUserCourse(data?.id, data?.is_saved); }}
+				>
+					<div className={data?.is_saved ? styles.saved_div : styles.not_saved}>
+						<IcMBookmark
+							fill={data?.is_saved ? '#000' : '#fff'}
+							style={{ marginRight: '6px' }}
+						/>
 
-					<div>Save</div>
+						<div>{data?.is_saved ? 'Saved' : 'Save'}</div>
+					</div>
 				</div>
+
 			</div>
 
 			<div className={styles.details}>
@@ -118,7 +133,16 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, act
 						<div
 							className={`${styles.category_name} ${styles.more}`}
 						>
-							{`+${course_categories.length - 2} More`}
+							<Tooltip
+								interactive
+								content={<ToolTipContent faq_topics={faq_topics} />}
+								placement="top"
+								className={styles.tooltip}
+							>
+								{`+${course_categories.length - 2} More`}
+
+							</Tooltip>
+
 						</div>
 					) : null}
 				</div>
@@ -128,7 +152,7 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, act
 					{description}
 				</div>
 
-				{activeTab === 'ongoing' ? (
+				{state === 'ongoing' ? (
 					<div>
 						<div className={styles.remaining_text}>Remaining</div>
 						<ProgressBar progress={course_progress} uploadText=" " />
