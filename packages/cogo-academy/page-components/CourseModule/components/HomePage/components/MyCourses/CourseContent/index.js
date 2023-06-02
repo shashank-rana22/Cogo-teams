@@ -52,7 +52,6 @@ function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCatego
 				data={item}
 				buttonContent={BUTTON_CONTENT_MAPPING[activeTab]}
 				handleClick={GET_LINK_MAPPINGS[activeTab]}
-				activeTab={activeTab}
 			/>
 		),
 	}));

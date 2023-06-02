@@ -26,8 +26,8 @@ function ToolTipContent({ faq_topics }) {
 	);
 }
 
-function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, activeTab }) {
-	const { cogo_academy_course = {}, cogo_academy_course_id : course_id = '', course_progress } = data;
+function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {} }) {
+	const { cogo_academy_course = {}, cogo_academy_course_id : course_id = '', course_progress, state = '' } = data;
 
 	const {
 		faq_topics = [],
@@ -128,7 +128,7 @@ function CourseCard({ data = {}, buttonContent = {}, handleClick = () => {}, act
 					{description}
 				</div>
 
-				{activeTab === 'ongoing' ? (
+				{state === 'ongoing' ? (
 					<div>
 						<div className={styles.remaining_text}>Remaining</div>
 						<ProgressBar progress={course_progress} uploadText=" " />
