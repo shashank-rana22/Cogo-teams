@@ -43,6 +43,7 @@ const getElementController = (type = 'text') => {
 			return DepartureDateSelectController;
 
 		case 'textArea':
+		case 'textarea':
 			return TextAreaController;
 
 		case 'checkbox':

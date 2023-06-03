@@ -62,7 +62,7 @@ function ExecuteTask({
 			/>
 		);
 	}
-	console.log('d');
+
 	return (
 		<ExecuteStep
 			task={task}
