@@ -35,7 +35,7 @@ function CourseCard({
 	const {
 		cogo_academy_course = {},
 		cogo_academy_course_id: course_id = '',
-		course_progress,
+		user_progress,
 		state,
 		modules_count = 0,
 	} = data;
@@ -148,10 +148,10 @@ function CourseCard({
 				{state === 'ongoing' ? (
 					<div>
 						<div className={styles.remaining_text}>
-							{100 - Number(course_progress)}
+							{100 - Number(user_progress)}
 							% Remaining
 						</div>
-						<ProgressBar progress={course_progress} uploadText=" " />
+						<ProgressBar progress={user_progress} uploadText=" " />
 					</div>
 				) : null}
 

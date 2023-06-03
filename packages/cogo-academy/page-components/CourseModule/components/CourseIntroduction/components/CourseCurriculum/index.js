@@ -86,12 +86,12 @@ function CourseCurriculum({ data }) {
 				</div>
 			))}
 
-			<Accordion
+			{/* <Accordion
 				type="text"
 				title="Course Completion Test"
 				className={styles.bottom_box}
 				styles={{ margin: '10px', width: '100%' }}
-			/>
+			/> */}
 		</div>
 	);
 }
