@@ -17,14 +17,13 @@ function Header({
 	currentCategory,
 	setCurrentCategory,
 	debounceQuery,
-	input,
-	setInput,
 	input_required = true,
 }) {
 	const router = useRouter();
 
 	const [showErrorModal, setShowErrorModal] = useState(false);
 	const [showCoursesModal, setShowCoursesModal] = useState(false);
+	const [input, setInput] = useState('');
 
 	const handleClick = () => {
 		router.push('/learning/course');

@@ -1,6 +1,5 @@
 import { Pill, Carousel } from '@cogoport/components';
 import { IcMStarfull } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -18,7 +17,35 @@ const formatTime = (time, type) => (
 	</div>
 );
 
-function CourseDetails({ data, instructorData = [], module }) {
+const getModulesCount = ({ course_modules = [], type }) => {
+	if (type === 'modules') {
+		return course_modules.length;
+	}
+
+	if (type === 'sub_modules') {
+		let finalValue = 0;
+
+		course_modules.forEach((item) => {
+			finalValue += (item.course_sub_modules || []).length;
+		});
+
+		return finalValue;
+	}
+
+	let chaptersCount = 0;
+
+	course_modules.forEach((modules) => {
+		const { course_sub_modules = [] } = modules || {};
+
+		course_sub_modules.forEach((subModule) => {
+			chaptersCount += (subModule.course_sub_module_chapters || []).length;
+		});
+	});
+
+	return chaptersCount;
+};
+
+function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 	const CAROUSELDATA = instructorData?.map((item, index) => ({
 		key    : `${index}${JSON.stringify(item)}`,
 		render : () => (
@@ -32,16 +59,18 @@ function CourseDetails({ data, instructorData = [], module }) {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.header}>
 				<div className={styles.header_description}>
 					<h1 id={styles.bold}>{data?.name}</h1>
-					<div>
-						by
-						{' '}
-						{instructorData?.[0]?.name}
-					</div>
+					{viewType !== 'preview' ? (
+						<div>
+							by
+							{' '}
+							{instructorData?.[0]?.name}
+						</div>
+					) : null}
 				</div>
+
 				{data?.rating
 					? (
 						<div className={styles.header_rating}>
@@ -58,7 +87,7 @@ function CourseDetails({ data, instructorData = [], module }) {
 			</div>
 
 			{data?.course_categories?.map((item) => (
-				<Pill color="green">
+				<Pill key={item.id} color="green">
 					{item.display_name}
 				</Pill>
 			))}
@@ -67,7 +96,7 @@ function CourseDetails({ data, instructorData = [], module }) {
 				<div className={styles.instruction_head}><b>In this course, you will learn (Objectives)</b></div>
 
 				{data?.course_objectives?.map((item, index) => (
-					<div>
+					<div key={item}>
 						{index + 1}
 						.&nbsp;
 						{ item }
@@ -87,15 +116,18 @@ function CourseDetails({ data, instructorData = [], module }) {
 						</div>
 						<div>
 							<div>
-								{data?.course_stats?.modules_count}
+								{data?.course_stats?.modules_count
+								|| getModulesCount({ course_modules: data?.course_modules, type: 'modules' })}
 								&nbsp;Modules
 							</div>
 							<div>
-								{data?.course_stats?.sub_modules_count}
+								{data?.course_stats?.sub_modules_count
+								|| getModulesCount({ course_modules: data?.course_modules, type: 'sub_modules' })}
 								&nbsp;Sub Modules
 							</div>
 							<div>
-								{data?.course_stats?.course_sub_module_chapters_count}
+								{data?.course_stats?.course_sub_module_chapters_count
+								|| getModulesCount({ course_modules: data?.course_modules, type: 'chapters' })}
 								&nbsp;Chapters
 							</div>
 						</div>
@@ -113,56 +145,58 @@ function CourseDetails({ data, instructorData = [], module }) {
 					</div>
 				</div>
 
-				<div className={styles.card} style={{ width: '30%' }}>
-					<div className={styles.card_title}>Estimated Completion</div>
-					<div className={styles.card_details}>
-						<div>
-							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/back_in_time.png"
-								alt="resume.png"
-							/>
-						</div>
-						<div>
+				{viewType !== 'preview' ? (
+					<div className={styles.card} style={{ width: '30%' }}>
+						<div className={styles.card_title}>Estimated Completion</div>
+						<div className={styles.card_details}>
 							<div>
-								{data?.course_completion_duration?.course_completion_value}
+								<img
+									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/back_in_time.png"
+									alt="resume.png"
+								/>
+							</div>
+							<div>
+								<div>
+									{data?.course_completion_duration?.course_completion_value}
 								&nbsp;
-								{data?.course_completion_duration?.course_completion_unit}
-							</div>
-							<div>
-								{formatTime(data?.course_content_stats?.video_duration, 'Videos')}
-							</div>
-							<div>
-								{formatTime(data?.course_content_stats?.reading_duration, 'Reading')}
+									{data?.course_completion_duration?.course_completion_unit}
+								</div>
+								<div>
+									{formatTime(data?.course_content_stats?.video_duration, 'Videos')}
+								</div>
+								<div>
+									{formatTime(data?.course_content_stats?.reading_duration, 'Reading')}
+								</div>
 							</div>
 						</div>
 					</div>
-				</div>
+				) : null}
 
-				<div className={styles.card} style={{ width: '30%' }}>
-					<div className={styles.card_title}>Course Creator</div>
-					<div className={styles.card_details}>
-						<div>
-							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tutor.png"
-								alt="resume.png"
-							/>
-						</div>
-						<div className={styles.carasol}>
-							{/* <div className={styles.box}>{instructorData?.[0]?.name}</div>
-							<div className={styles.box}>{instructorData?.[0]?.mobile_number}</div>
-							<div className={styles.box}>{instructorData?.[0]?.email}</div> */}
-							<Carousel
-								slides={CAROUSELDATA}
-								itemsToShow={1}
-								itemsToScroll={1}
-								showDots={false}
-								showArrow
-							/>
+				{viewType !== 'preview' ? (
+					<div className={styles.card} style={{ width: '30%' }}>
+						<div className={styles.card_title}>Course Creator</div>
+						<div className={styles.card_details}>
+							<div>
+								<img
+									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tutor.png"
+									alt="resume.png"
+								/>
+							</div>
+							<div className={styles.carasol}>
+								<Carousel
+									slides={CAROUSELDATA}
+									itemsToShow={1}
+									itemsToScroll={1}
+									showDots={false}
+									showArrow
+								/>
+							</div>
 						</div>
 					</div>
-				</div>
+				) : null}
 			</div>
 
+			{/*
 			<div className={styles.bottom_box}>
 				<div>
 					Complete in &nbsp;
@@ -176,8 +210,7 @@ function CourseDetails({ data, instructorData = [], module }) {
 					{' '}
 					{format(data?.course_end_date || '', 'dd MMMM YYYY')}
 				</Pill>
-			</div>
-
+			</div> */}
 		</div>
 	);
 }

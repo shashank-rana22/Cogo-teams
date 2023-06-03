@@ -4,5 +4,7 @@
 }
 
 .date_display {
+	display: flex;
+	align-items: center;
 	margin: 40px 10px;
 }
