@@ -83,7 +83,7 @@ const controlsFunc = (organization_id, item) => [
 	},
 	{
 		name        : 'asset_registration_number',
-		label       : 'Registration Number (Truck Number)',
+		label       : 'Registration Number (Truck No.)',
 		placeholder : 'RC Number (Truck Number)',
 		type        : 'text',
 		value       : item?.data?.asset_registration_number,

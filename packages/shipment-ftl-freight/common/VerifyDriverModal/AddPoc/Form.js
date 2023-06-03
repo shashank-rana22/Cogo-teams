@@ -1,4 +1,4 @@
-import Button from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { Layout } from '@cogoport/surface-modules';
 import React from 'react';
 
@@ -9,11 +9,11 @@ import styles from './styles.module.css';
 function Form({
 	fetch = () => {},
 	organization_id,
-	setShow = () => {},
-	show,
+	showInternal = '',
+	setShowInternalInternal = () => {},
 }) {
 	const {
-		fields,
+		control,
 		handleSubmit,
 		createOrgPoc,
 		formState,
@@ -22,8 +22,8 @@ function Form({
 	} = useCreateOrganizationPoc({
 		fetch,
 		organization_id,
-		item    : show,
-		setItem : setShow,
+		item    : showInternal,
+		setItem : setShowInternalInternal,
 	});
 
 	const { loading } = createOrganizationPocAPI;
@@ -31,13 +31,13 @@ function Form({
 	return (
 		<div className={styles.container}>
 			<div className={styles.layout_container}>
-				<Layout controls={controls} errors={formState.errors} fields={fields} />
+				<Layout fields={controls} control={control} errors={formState.errors} />
 			</div>
 
 			<div className={styles.button_container}>
 				<Button
 					disabled={loading}
-					onClick={() => setShow(false)}
+					onClick={() => setShowInternalInternal(false)}
 					className="secondary md"
 					style={{ marginRight: '12px' }}
 				>

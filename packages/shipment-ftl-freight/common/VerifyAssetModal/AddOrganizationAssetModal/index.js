@@ -7,22 +7,19 @@ function AddOrganizationAssetModal({
 	setShowInternal,
 	organization_id,
 	fetch,
-	setShow,
 }) {
 	return (
 		<Modal
-			show
-			onClose={() => setShow(false)}
-			// className={styles.custom_modal}
+			show={showInternal}
+			size="lg"
+			onClose={() => setShowInternal(false)}
 			closeOnOuterClick={false}
-			// showCloseIcon={!loading}
 			showCloseIcon
 
 		>
 			<Modal.Body>
 
 				<Modal.Header title={(
-					// <div className={styles.header}>
 					<div>
 						Truck List
 					</div>

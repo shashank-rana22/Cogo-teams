@@ -23,7 +23,7 @@ const useCreateOrganizationAsset = ({
 	}, { manual: true });
 
 	const controls = controlsFuncOrgAsset(organization_id, item);
-	const { fields, handleSubmit, reset, setValue, formState } = useForm(controls);
+	const { control, handleSubmit, reset, setValue, formState } = useForm();
 
 	const createOrgAsset = async (values) => {
 		try {
@@ -51,7 +51,7 @@ const useCreateOrganizationAsset = ({
 
 	return {
 		createOrgAsset,
-		fields,
+		control,
 		handleSubmit,
 		formState,
 		controls,

@@ -1,4 +1,4 @@
-import { Button, Skeleton } from '@cogoport/components';
+import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useMemo, useState, useEffect, useContext, useCallback } from 'react';
 
@@ -11,12 +11,13 @@ import useCreateOrganizationPoc from './AddPoc/hooks/useCreateOrganizationPoc';
 import styles from './styles.module.css';
 
 const SkeletonGroup = [1, 2, 3].map((item) => (
-	<Skeleton key={item} height="100px" width="100%" />
+	<div key={item} height="100px" width="100%" />
 ));
 
-function VerifyDriverModal({ driverList = [], organizationId }) {
-	const [show, setShow] = useState(false);
-	const [showUploadDoc, setShowUploadDoc] = useState(false);
+function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
+	const organizationId = driverList[0]?.service_provider_id;
+	const [showInternal, setShowInternalInternal] = useState(false);
+	const [showInternalUploadDoc, setShowInternalInternalUploadDoc] = useState(false);
 	const [uploadProof, setUploadProof] = useState(null);
 
 	const mobileNumberList = useMemo(
@@ -32,8 +33,8 @@ function VerifyDriverModal({ driverList = [], organizationId }) {
 	const { createOrgPoc, createOrganizationPocAPI } = useCreateOrganizationPoc({
 		fetch           : getVerifiedDriverList,
 		organization_id : organizationId,
-		item            : show,
-		setItem         : setShow,
+		item            : showInternal,
+		setItem         : setShowInternalInternal,
 	});
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
@@ -76,34 +77,34 @@ function VerifyDriverModal({ driverList = [], organizationId }) {
 	}, [createOrgPoc]);
 
 	useEffect(() => {
-		if (uploadProof && show) {
-			setShowUploadDoc(false);
+		if (uploadProof && showInternal) {
+			setShowInternalInternalUploadDoc(false);
 			onSubmit({
-				name                   : show?.name,
-				email                  : show?.email,
-				organization_branch_id : show?.organization_branch_id,
+				name                   : showInternal?.name,
+				email                  : showInternal?.email,
+				organization_branch_id : showInternal?.organization_branch_id,
 				mobile_number          : {
-					mobile_country_code : show?.mobile_country_code,
-					mobile_number       : show?.mobile_number,
+					mobile_country_code : showInternal?.mobile_country_code,
+					mobile_number       : showInternal?.mobile_number,
 				},
-				dob                      : show?.data?.dob,
-				address                  : show?.data?.address,
-				pincode                  : show?.data?.pincode,
-				address_proof_type       : show?.data?.address_proof_type,
-				address_proof_number     : show?.data?.address_proof_number,
-				pan_number               : show?.data?.pan_number,
-				pan_url                  : show?.data?.pan_url,
-				driver_license_type      : show?.data?.driver_license_type,
-				dl_number                : show?.data?.dl_number,
-				last_date_of_validity_dl : show?.data?.last_date_of_validity_dl,
-				bank_name                : show?.data?.bank_account_details?.bank_name,
-				branch_name              : show?.data?.bank_account_details?.branch_name,
-				ifsc_number              : show?.data?.bank_account_details?.ifsc_number,
+				dob                      : showInternal?.data?.dob,
+				address                  : showInternal?.data?.address,
+				pincode                  : showInternal?.data?.pincode,
+				address_proof_type       : showInternal?.data?.address_proof_type,
+				address_proof_number     : showInternal?.data?.address_proof_number,
+				pan_number               : showInternal?.data?.pan_number,
+				pan_url                  : showInternal?.data?.pan_url,
+				driver_license_type      : showInternal?.data?.driver_license_type,
+				dl_number                : showInternal?.data?.dl_number,
+				last_date_of_validity_dl : showInternal?.data?.last_date_of_validity_dl,
+				bank_name                : showInternal?.data?.bank_account_details?.bank_name,
+				branch_name              : showInternal?.data?.bank_account_details?.branch_name,
+				ifsc_number              : showInternal?.data?.bank_account_details?.ifsc_number,
 				account_holder_name:
-					show?.data?.bank_account_details?.account_holder_name,
+					showInternal?.data?.bank_account_details?.account_holder_name,
 				bank_account_number:
-					show?.data?.bank_account_details?.bank_account_number,
-				cancelled_cheque         : show?.data?.bank_account_details?.cancelled_cheque,
+					showInternal?.data?.bank_account_details?.bank_account_number,
+				cancelled_cheque         : showInternal?.data?.bank_account_details?.cancelled_cheque,
 				pan_details_heading      : '',
 				empty_row                : '',
 				driver_details_heading   : '',
@@ -112,12 +113,12 @@ function VerifyDriverModal({ driverList = [], organizationId }) {
 				driving_license_document : uploadProof,
 			});
 		}
-	}, [uploadProof, onSubmit, show]);
+	}, [uploadProof, onSubmit, showInternal]);
 
 	const driverListJSX = useMemo(
 		() => Object.entries(categorisedDriverList).map(([driverType, listOfDrivers]) => (listOfDrivers.length ? (
-			<div className={styles.driver_type_heading} key={driverType}>
-				<span className="driver_type">
+			<div key={driverType}>
+				<span className={styles.driver_type}>
 					{driverType}
 					{' '}
 					drivers
@@ -125,15 +126,15 @@ function VerifyDriverModal({ driverList = [], organizationId }) {
 				<ul>
 					{listOfDrivers.map((driver) => (
 						<li key={driver.name}>
-							<div className="driverBox">
+							<div>
 								<span>
 									driver Name:
 									{' '}
 									{driver.driver_name || driver.name}
 								</span>
-								<div className="actionRow">
+								<div className={styles.actionRow}>
 									<Button
-										onClick={() => setShow(driver)}
+										onClick={() => setShowInternalInternal(driver)}
 										className="secondary md"
 										disabled={driverType === 'verified'}
 									>
@@ -144,8 +145,8 @@ function VerifyDriverModal({ driverList = [], organizationId }) {
 										className="secondary md"
 										onClick={() => {
 											setUploadProof(null);
-											setShow(driver);
-											setShowUploadDoc(true);
+											setShowInternalInternal(driver);
+											setShowInternalInternalUploadDoc(true);
 										}}
 										disabled={!driver?.data}
 										style={{ marginLeft: '10px' }}
@@ -174,45 +175,78 @@ function VerifyDriverModal({ driverList = [], organizationId }) {
 
 	if (!driverList?.length) {
 		return (
-			<>
-				<div className={styles.heading}>Driver List</div>
-				<div style={{ marginTop: '1rem' }}>No Driver Found</div>
-				{SkeletonGroup}
-			</>
+			<Modal
+				show
+				onClose={() => setShow(false)}
+				className={styles.custom_modal}
+				closeOnOuterClick={false}
+				showInternalCloseIcon={!loading}
+			>
+				<Modal.Body>
+
+					<Modal.Header title={(
+						<div className={styles.heading}>
+							Driver List
+						</div>
+					)}
+					/>
+					<div style={{ marginTop: '1rem' }}>No Driver Found</div>
+					{SkeletonGroup}
+
+				</Modal.Body>
+
+			</Modal>
 		);
 	}
 
 	return (
-		<div>
-			{showUploadDoc ? (
-				<AWSUploadModal
-					hide={() => {
-						setShow(null);
-						setShowUploadDoc(false);
-					}}
-					setUploadProof={setUploadProof}
-					uploadProof={uploadProof || show?.data?.driving_license_document}
-					customText="DL Proof"
+		<Modal
+			show
+			onClose={() => setShow(false)}
+			className={styles.custom_modal}
+			closeOnOuterClick={false}
+			showInternalCloseIcon={!loading}
+		>
+			<Modal.Body>
+
+				<Modal.Header title={(
+					<div className={styles.heading}>
+						Driver List
+					</div>
+				)}
 				/>
-			) : (
-				<>
-					<div className={styles.heading}>Driver List</div>
-					{!loading ? (
-						<>
-							{driverListJSX}
-							<AddOrganizationPoc
-								organization_id={organizationId}
-								fetch={getVerifiedDriverList}
-								show={show}
-								setShow={setShow}
-							/>
-						</>
+				<div>
+					{showInternalUploadDoc ? (
+						<AWSUploadModal
+							hide={() => {
+								setShowInternalInternal(null);
+								setShowInternalInternalUploadDoc(false);
+							}}
+							setUploadProof={setUploadProof}
+							uploadProof={uploadProof || showInternal?.data?.driving_license_document}
+							customText="DL Proof"
+						/>
 					) : (
-						{ SkeletonGroup }
+						<div>
+							{!loading ? (
+								<>
+									{driverListJSX}
+									<AddOrganizationPoc
+										organization_id={organizationId}
+										fetch={getVerifiedDriverList}
+										showInternal={showInternal}
+										setShowInternalInternal={setShowInternalInternal}
+									/>
+								</>
+							) : (
+								{ SkeletonGroup }
+							)}
+						</div>
 					)}
-				</>
-			)}
-		</div>
+				</div>
+			</Modal.Body>
+
+		</Modal>
 	);
 }
 

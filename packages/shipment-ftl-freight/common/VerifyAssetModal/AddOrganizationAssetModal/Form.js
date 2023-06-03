@@ -12,7 +12,7 @@ function Form({
 	showInternal,
 }) {
 	const {
-		fields,
+		control,
 		handleSubmit,
 		createOrgAsset,
 		formState,
@@ -33,7 +33,7 @@ function Form({
 	return (
 		<div className={styles.container}>
 			<div className={styles.layout_container}>
-				<Layout controls={controls} errors={formState.errors} fields={fields} />
+				<Layout fields={controls} errors={formState.errors} control={control} />
 			</div>
 
 			<div className={styles.button_container}>

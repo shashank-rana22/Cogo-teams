@@ -21,3 +21,21 @@
 		}
 	}
 }
+.driver_type {
+	text-transform: capitalize;
+	background: #eaeaea;
+	border-radius: 5px;
+	padding: 5px;
+}
+
+.driverBox {
+	text-transform: capitalize;
+		display: flex;
+		margin: 5px 0 10px 5px;
+}
+
+.actionRow {
+	text-transform: capitalize;
+	display: flex;
+	margin: 5px 0 10px 5px;
+}
