@@ -27,6 +27,14 @@ const useGetPortCard = ({ props }) => {
 	const { data = {}, loading, refetchRateCards, getRfqsForApproval, rfq_state = '' } = props;
 
 	const [showPrice, setShowPrice] = useState({});
+	const [editedMargins, setEditedMargins] = useState({});
+
+	const [convenienceDetails, setConvenienceDetails] = useState({});
+	const {
+		getRfqRateCardDetails, rfq_card_loading,
+		rate_card_details_data,
+	} = useGetRfqRateCardDetails();
+
 	const {
 		detail = {}, freight_price_currency = '', freight_price_discounted = '',
 		total_price_discounted = '', id = '', stats = {},
@@ -37,11 +45,6 @@ const useGetPortCard = ({ props }) => {
 	} = detail;
 
 	const commodity_array = COMMODITY_MAPPING.map((commodity) => ({ [commodity]: detail[commodity] }));
-
-	const {
-		getRfqRateCardDetails, rfq_card_loading,
-		rate_card_details_data,
-	} = useGetRfqRateCardDetails();
 
 	useEffect(() => {
 		if (!isEmpty(showPrice)) {
@@ -54,16 +57,6 @@ const useGetPortCard = ({ props }) => {
 	} = rate_card_details_data || {};
 
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
-
-	const [editedMargins, setEditedMargins] = useState({});
-
-	const [convenienceDetails, setConvenienceDetails] = useState({
-		convenience_rate: {
-			price    : convenience_line_item?.price,
-			currency : convenience_line_item?.currency,
-			unit     : convenience_line_item?.unit,
-		},
-	});
 
 	useEffect(() => {
 		if (!isEmpty(convenience_line_item)) {

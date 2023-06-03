@@ -8,10 +8,8 @@ const useUpdateRfqRateMargin = ({
 	rate,
 	details,
 }) => {
-	const endpoint = '/update_rfq_rate_card_margin';
-
 	const [{ data }, trigger] = useRequest({
-		url    : endpoint,
+		url    : '/update_rfq_rate_card_margin',
 		method : 'POST',
 	}, { manual: true });
 
@@ -41,7 +39,6 @@ const useUpdateRfqRateMargin = ({
 			detail   : details,
 		});
 		const margins = {};
-
 		Object.keys(updatedMargins).forEach((key) => {
 			if (key.indexOf('-') > -1) {
 				margins[key] = updatedMargins[key];
