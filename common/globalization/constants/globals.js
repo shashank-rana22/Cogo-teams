@@ -133,7 +133,13 @@ const GLOBAL_CONSTANTS = {
 		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
 
 	},
-	one_mb: 1048576,
+	options: {
+		upload_file_size: {
+			'1MB'  : '1048576',
+			'5MB'  : '5242880',
+			'15MB' : '15728640',
+		},
+	},
 
 	regex_patterns: {
 		number: /^[+-]?\d*\.?\d+$/,
