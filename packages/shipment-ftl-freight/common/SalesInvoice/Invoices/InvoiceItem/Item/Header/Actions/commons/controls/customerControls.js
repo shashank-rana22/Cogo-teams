@@ -8,6 +8,7 @@ export const customerControls = [
 		placeholder    : 'Select Company',
 		type           : 'select',
 		optionsListKey : 'trade-parties',
+		labelKey       : 'business_name',
 		span           : 4,
 		label          : 'Customer',
 		defaultOptions : true,

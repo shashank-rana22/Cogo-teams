@@ -9,7 +9,7 @@ import useListShipmentTradePartners from '../../../../../../../../hooks/useListS
 import { formControls } from './configs/formControls';
 import Form from './Form';
 import styles from './styles..module.css';
-import { getFormatValue } from './utils/getFormatValue';
+import { getFormatValue } from '../commons/utils/getFormatValue';
 import { useFillFormData } from './utils/useFillFormData';
 
 function UpdateCustomerInvoice(props) {

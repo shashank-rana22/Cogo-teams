@@ -1,6 +1,6 @@
 import { useEffect, useMemo } from 'react';
 
-import { DATA_OBJECT_KEYS_MAPPING } from './getFormatValue';
+import { DATA_OBJECT_KEYS_MAPPING } from '../../commons/utils/getFormatValue';
 
 const getDate = (date) => {
 	const tempDate = new Date(date);

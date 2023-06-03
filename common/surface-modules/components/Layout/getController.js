@@ -11,6 +11,7 @@ import {
 	CheckboxGroupController,
 	ToggleController,
 	InputGroupController,
+	CreatableSelectController,
 } from '@cogoport/forms';
 
 import DepartureDateSelectController from './DepartureDateSelect/index';
@@ -60,6 +61,9 @@ const getElementController = (type = 'text') => {
 
 		case 'input-group':
 			return InputGroupController;
+
+		case 'creatable-select':
+			return CreatableSelectController;
 
 		default:
 			return InputController;

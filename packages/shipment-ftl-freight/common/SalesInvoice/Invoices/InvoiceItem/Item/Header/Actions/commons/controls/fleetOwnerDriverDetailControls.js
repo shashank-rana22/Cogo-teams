@@ -6,7 +6,6 @@ export const fleetOwnerDriverDetailControls = [
 		placeholder : 'Type here...',
 		label       : <Label>Fleet Owner Company PAN</Label>,
 		type        : 'text',
-		className   : 'primary lg',
 		span        : 4,
 	},
 	{
@@ -14,7 +13,6 @@ export const fleetOwnerDriverDetailControls = [
 		placeholder : 'Type here...',
 		label       : <Label>Fleet Owner Company Name</Label>,
 		type        : 'text',
-		className   : 'primary lg',
 		span        : 4,
 	},
 	{
@@ -22,7 +20,6 @@ export const fleetOwnerDriverDetailControls = [
 		placeholder : 'Type here...',
 		label       : <Label>Fleet Owner Company Owner Name</Label>,
 		type        : 'text',
-		className   : 'primary lg',
 		span        : 4,
 	},
 	{
@@ -30,7 +27,6 @@ export const fleetOwnerDriverDetailControls = [
 		placeholder : 'Type here...',
 		label       : <Label>Fleet Owner Company Owner Mobile</Label>,
 		type        : 'text',
-		className   : 'primary lg',
 		span        : 4,
 	},
 	{
@@ -38,7 +34,6 @@ export const fleetOwnerDriverDetailControls = [
 		placeholder : 'Type here...',
 		label       : <Label>Fleet Owner Company Legal Entity Type</Label>,
 		type        : 'text',
-		className   : 'primary lg',
 		span        : 4,
 	},
 	{
@@ -46,7 +41,6 @@ export const fleetOwnerDriverDetailControls = [
 		placeholder : 'Type here...',
 		label       : <Label>Fleet Owner Company Regd Address Pincode</Label>,
 		type        : 'text',
-		className   : 'primary lg',
 		span        : 4,
 	},
 	{
@@ -54,7 +48,6 @@ export const fleetOwnerDriverDetailControls = [
 		placeholder : 'Type here...',
 		label       : <Label>Driver DL Number</Label>,
 		type        : 'text',
-		className   : 'primary lg',
 		span        : 4,
 	},
 	{
@@ -62,7 +55,6 @@ export const fleetOwnerDriverDetailControls = [
 		placeholder : 'Type here...',
 		label       : <Label>Driver Mobile</Label>,
 		type        : 'text',
-		className   : 'primary lg',
 		span        : 4,
 	},
 	{
@@ -70,7 +62,6 @@ export const fleetOwnerDriverDetailControls = [
 		placeholder : 'Type here...',
 		label       : <Label>Driver Name</Label>,
 		type        : 'text',
-		className   : 'primary lg',
 		span        : 4,
 	},
 ];

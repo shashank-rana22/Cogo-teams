@@ -5,7 +5,7 @@ import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 const useCreateShipmentFortigoTripDetail = ({
 	refetch = () => {},
 	successMessage = 'Successfully Created',
-}) => {
+} = {}) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_fortigo_trip_detail',
 		method : 'POST',

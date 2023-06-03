@@ -69,14 +69,14 @@ const DOCUMENT_KEYS = [
 	'customer_invoice',
 ];
 
-const DATA_OBJECT_KEYS_MAPPING = {
-	customer_details: CUSTOMER_KEYS,
-	consignor_details: CONSIGNOR_KEYS,
-	consignee_details: CONSIGNEE_KEYS,
-	fleet_owner_details: FLEET_OWNER_KEYS,
-	driver_details: DRIVER_KEYS,
-	trip_documents: DOCUMENT_KEYS,
-	additional_charges: ADDITIONAL_CHARGE_KEYS,
+export const DATA_OBJECT_KEYS_MAPPING = {
+	customer_details    : CUSTOMER_KEYS,
+	consignor_details   : CONSIGNOR_KEYS,
+	consignee_details   : CONSIGNEE_KEYS,
+	fleet_owner_details : FLEET_OWNER_KEYS,
+	driver_details      : DRIVER_KEYS,
+	trip_documents      : DOCUMENT_KEYS,
+	additional_charges  : ADDITIONAL_CHARGE_KEYS,
 };
 
 export const getFormatValue = ({
@@ -97,16 +97,15 @@ export const getFormatValue = ({
 		const entryAdded = Object.entries(DATA_OBJECT_KEYS_MAPPING).some(
 			([objKey, objValue]) => {
 				if (Array.isArray(objValue) && objValue.includes(rawKey)) {
-					const finalValue =
-						objKey === 'trip_documents' ? rawValue?.url : rawValue;
-					formattedData[objKey][rawKey] = finalValue || undefined;
+					const finalValue = objKey === 'trip_documents' ? rawValue?.finalUrl || rawValue : rawValue;
+					formattedData[objKey][rawKey] = finalValue ?? undefined;
 					return true;
 				}
 				return false;
 			},
 		);
 		if (!entryAdded) {
-			formattedData[rawKey] = rawValue || undefined;
+			formattedData[rawKey] = rawValue ?? undefined;
 		}
 	});
 
