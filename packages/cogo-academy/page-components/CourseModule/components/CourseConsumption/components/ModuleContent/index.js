@@ -19,9 +19,8 @@ function ModuleContent({
 	setEditorValue,
 	editorError,
 	setEditorError,
+	viewType,
 }) {
-	// const [showModal, setShowModal] = useState(false);
-
 	const {
 		name, content_type = '', chapter_content = '',
 		description, chapter_attachments, user_progress_state : state,
@@ -50,7 +49,7 @@ function ModuleContent({
 	};
 
 	const SOURCE_MAPPING = {
-		video        : chapter_content.replace('/watch?v=', '/embed/'),
+		video        : chapter_content.includes('/watch?v=') ? chapter_content.replace('/watch?v=', '/embed/') : '',
 		presentation : `https://view.officeapps.live.com/op/embed.aspx?src=${chapter_content}`,
 		document     : chapter_content,
 	};
@@ -69,74 +68,75 @@ function ModuleContent({
 					{name}
 				</div>
 
-				<div className={styles.btn_container}>
+				{viewType !== 'preview' ? (
+					<div className={styles.btn_container}>
+						{ !hideBtn(data, 'prev', indexes) && (
+							<Button
+								size="md"
+								themeType="tertiary"
+								className={styles.btn}
+								loading={loading}
+								onClick={async () => {
+									const prevChapterContent = await getChapter({
+										data,
+										indexes,
+										state: 'prev',
+										setIndexes,
+									}) || {};
 
-					{ !hideBtn(data, 'prev', indexes) && (
-						<Button
-							size="md"
-							themeType="tertiary"
-							className={styles.btn}
-							loading={loading}
-							onClick={async () => {
-								const prevChapterContent = await getChapter({
-									data,
-									indexes,
-									state: 'prev',
-									setIndexes,
-								}) || {};
+									const { id, user_progress_state } = prevChapterContent;
 
-								const { id, user_progress_state } = prevChapterContent;
-
-								await updateCourseProgress({
-									next_chapter_id    : id,
-									next_chapter_state : user_progress_state
+									await updateCourseProgress({
+										next_chapter_id    : id,
+										next_chapter_state : user_progress_state
 								=== 'introduction' ? 'ongoing' : user_progress_state,
 
-								});
+									});
 
-								await getUserCourse();
-								setChapter(prevChapterContent);
-							}}
-						>
-							<IcMArrowLeft width={14} height={14} className={styles.arrow_left} />
-							Previous
-						</Button>
-					)}
+									await getUserCourse();
+									setChapter(prevChapterContent);
+								}}
+							>
+								<IcMArrowLeft width={14} height={14} className={styles.arrow_left} />
+								Previous
+							</Button>
+						)}
 
-					{!hideBtn(data, 'next', indexes) && (
-						<Button
-							size="md"
-							themeType="tertiary"
-							className={`${styles.btn} ${styles.next_btn}`}
-							loading={loading}
-							onClick={async () => {
-								const nextChapter = await getChapter({
-									data,
-									indexes,
-									state: 'next',
-									setIndexes,
-									setChapter,
-								}) || {};
+						{!hideBtn(data, 'next', indexes) && (
+							<Button
+								size="md"
+								themeType="tertiary"
+								className={`${styles.btn} ${styles.next_btn}`}
+								loading={loading}
+								onClick={async () => {
+									const nextChapter = await getChapter({
+										data,
+										indexes,
+										state: 'next',
+										setIndexes,
+										setChapter,
+									}) || {};
 
-								const { id, user_progress_state } = nextChapter;
+									const { id, user_progress_state } = nextChapter;
 
-								await updateCourseProgress({
-									next_chapter_id    : id,
-									next_chapter_state : user_progress_state === 'introduction'
-										? 'ongoing' : user_progress_state,
+									await updateCourseProgress({
+										next_chapter_id    : id,
+										next_chapter_state : user_progress_state === 'introduction'
+											? 'ongoing' : user_progress_state,
 
-								});
+									});
 
-								await getUserCourse();
+									await getUserCourse();
 
-								setChapter(nextChapter);
-							}}
-						>
-							Next
-							<IcMArrowRight width={14} height={14} className={styles.arrow_right} />
-						</Button>
-					)}
-				</div>
+									setChapter(nextChapter);
+								}}
+							>
+								Next
+								<IcMArrowRight width={14} height={14} className={styles.arrow_right} />
+							</Button>
+						)}
+					</div>
+				) : null}
 			</div>
 
 			{!isEmpty(description) && (
@@ -150,7 +150,6 @@ function ModuleContent({
 				{content_type === 'assessment' && (state === 'completed'
 					? <div dangerouslySetInnerHTML={{ __html: user_submission }} /> : (
 						<div className={styles.rte}>
-
 							<RichTextEditor
 								value={editorValue}
 								onChange={handleChange}
@@ -191,23 +190,21 @@ function ModuleContent({
 						allowFullScreen
 					/>
 				)}
-
 			</div>
 
 			{!isEmpty(chapter_attachments) && (
 				<div className={styles.additional_resources}>
-
 					<h3>Additional Resources:</h3>
 
 					{chapter_attachments.map((attachment) => (
 						<div
+							key={attachment.name}
 							role="presentation"
 							onClick={() => (attachment.type === 'downloadable_resource'
 								? downloadFileAtUrl(attachment.media_url) : openInNewTab(attachment.media_url))}
 							className={styles.list_text}
 						>
 							{attachment.name}
-
 						</div>
 					))}
 				</div>

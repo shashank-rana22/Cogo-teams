@@ -7,3 +7,9 @@
 .main_content {
 	display: flex;
 }
+
+.button_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}

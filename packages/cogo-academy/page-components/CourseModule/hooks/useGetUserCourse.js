@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useGetUserCourse = ({ course_id, user_id }) => {
+const useGetUserCourse = ({ course_id, user_id, viewType }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_user_course',
 		method : 'GET',
@@ -11,7 +11,7 @@ const useGetUserCourse = ({ course_id, user_id }) => {
 			course_id,
 			user_id,
 		},
-	}, { manual: false });
+	}, { manual: viewType === 'preview' });
 
 	const getUserCourse = useCallback(async () => {
 		try {

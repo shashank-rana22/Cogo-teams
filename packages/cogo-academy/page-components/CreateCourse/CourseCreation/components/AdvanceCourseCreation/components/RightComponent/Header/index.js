@@ -1,5 +1,6 @@
 import { Tags, Button } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 
 import useUpdateCourse from '../../../hooks/useUpdateCourse';
 
@@ -27,6 +28,8 @@ function Header({
 	setActiveTab,
 	mode,
 }) {
+	const router = useRouter();
+
 	const { name, status = 'draft', state = '' } = data || {};
 
 	const { title, text } = MAPPING[activeTab] || {};
@@ -52,8 +55,18 @@ function Header({
 		});
 	};
 
+	const handlePreviewCourse = () => {
+		router.push(`/learning/course/preview?course_id=${id}`);
+	};
+
 	const BUTTON_MAPPING = {
 		pre_publish: [
+			{
+				buttonText      : 'Preview',
+				themeType       : 'secondary',
+				onClickFunction : handlePreviewCourse,
+				funcProps       : {},
+			},
 			{
 				buttonText      : 'Save',
 				themeType       : 'primary',
@@ -74,6 +87,12 @@ function Header({
 			},
 		],
 		others: [
+			{
+				buttonText      : 'Preview',
+				themeType       : 'secondary',
+				onClickFunction : handlePreviewCourse,
+				funcProps       : {},
+			},
 			{
 				buttonText      : 'Next',
 				icon            : IcMArrowRight,

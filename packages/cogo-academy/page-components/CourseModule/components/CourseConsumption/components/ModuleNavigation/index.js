@@ -1,4 +1,4 @@
-import { Accordion, Pill } from '@cogoport/components';
+import { Accordion } from '@cogoport/components';
 import { IcMFtick } from '@cogoport/icons-react';
 
 import isSubModuleComplete from '../../utils/isSubModuleComplete';
@@ -11,9 +11,9 @@ function ModuleNavigation({
 	data = {}, loading,
 	courseProgressUpdateLoading, chapter, setChapter = () => {}, indexes, setIndexes,
 }) {
-	const { name, course_completion_duration = {} } = data.course_details || {};
+	const { name = '' } = data.course_details || {};
 
-	const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration;
+	// const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration;
 
 	if (loading || courseProgressUpdateLoading) {
 		return <LoadingState />;
@@ -24,7 +24,7 @@ function ModuleNavigation({
 
 			<div>
 				<h3 className={styles.course_name}>{name}</h3>
-
+				{/*
 				<div className={styles.duration}>
 					Complete in
 					{' '}
@@ -35,7 +35,7 @@ function ModuleNavigation({
 					{' '}
 					to Get Certification
 					<Pill size="md" color="#C4DC91">On or Before 30 June, 2023</Pill>
-				</div>
+				</div> */}
 			</div>
 
 			{(data.course_modules || []).map((module, moduleIndex) => (
@@ -62,7 +62,6 @@ function ModuleNavigation({
 								isOpen={subModuleIndex === indexes.subModuleIndex}
 								title={(
 									<div className={styles.flex}>
-
 										{isSubModuleComplete(moduleIndex, subModuleIndex, data)
 											? (
 												<>
@@ -96,7 +95,6 @@ function ModuleNavigation({
 									</div>
 								)}
 							>
-
 								<SubModuleContent
 									key={subModule.id}
 									id={subModule.id}
@@ -107,13 +105,9 @@ function ModuleNavigation({
 									chapter={chapter}
 									setChapter={setChapter}
 								/>
-
 							</Accordion>
-
 						))}
-
 					</div>
-
 				</Accordion>
 
 			))}
