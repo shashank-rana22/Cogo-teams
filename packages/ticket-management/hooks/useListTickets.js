@@ -34,7 +34,7 @@ const useListTickets = ({
 			PerformedByID : profile?.user?.id,
 			size          : 10,
 			page          : pageIndex - 1,
-			AgentID       : searchParams.agent,
+			AgentID       : searchParams.agent || undefined,
 			QFilter       : searchQuery || undefined,
 			Type          : searchParams.category,
 		};
