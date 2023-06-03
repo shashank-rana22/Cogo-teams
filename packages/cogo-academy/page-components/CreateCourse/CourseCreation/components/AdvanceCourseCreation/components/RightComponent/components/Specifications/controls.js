@@ -1,6 +1,6 @@
 const controls = [
 	{
-		label       : 'What will the students learn from the course?',
+		label       : 'Which topics give a semblance of the Course content?',
 		name        : 'topics',
 		type        : 'asyncSelect',
 		isClearable : true,

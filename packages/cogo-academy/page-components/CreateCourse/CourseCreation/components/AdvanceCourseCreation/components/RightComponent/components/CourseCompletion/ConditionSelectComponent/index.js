@@ -27,7 +27,6 @@ function ConditionSelectComponent({
 				<div className={styles.select_row}>
 					<div className={styles.row_label}>
 						Select test from Assessment Module
-						<sup className={styles.superscipt}>*</sup>
 					</div>
 
 					<Select
@@ -43,7 +42,6 @@ function ConditionSelectComponent({
 				<div className={styles.select_row}>
 					<div className={styles.row_label}>
 						Select Reward Template
-						<sup className={styles.superscipt}>*</sup>
 					</div>
 
 					<Button

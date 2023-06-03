@@ -1,5 +1,6 @@
 import { Accordion, Pill, Button } from '@cogoport/components';
 import { IcMCrossInCircle, IcMDelete, IcMDrag, IcMEdit } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import { getFieldController } from '../../../../../../../../../../commons/getFieldController';
 import LoadingState from '../../../../../../../../../../commons/LoadingState';
@@ -150,6 +151,7 @@ function ModuleComponent({
 		<div className={styles.child_accordian}>
 			<Accordion
 				type="text"
+				isOpen={isEmpty(module.course_sub_modules || [])}
 				title={(
 					<div
 						key={module.id}

@@ -110,7 +110,7 @@ const controls = [
 		],
 	},
 	{
-		label       : 'Time permitted to complete Course, in order to get Reward',
+		label       : 'Estimated time to complete this chapter',
 		name        : 'group_select_1',
 		elementType : 'groupSelect',
 		subControls : [
