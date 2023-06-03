@@ -31,7 +31,7 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 	const onSubmit = async (values) => {
 		try {
 			const payload = {
-				picture : values?.profile_picture_url,
+				picture : values?.profile_picture_url.finalUrl,
 				id      : partner_user_id,
 			};
 

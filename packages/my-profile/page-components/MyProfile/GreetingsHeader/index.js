@@ -58,7 +58,7 @@ function Greetings({
 		setEditNameModal,
 		partner_user_id,
 	});
-
+	console.log(picture, watchProfilePicture, 'zz');
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.empty_background} />
@@ -225,7 +225,7 @@ function Greetings({
 							{picture || watchProfilePicture ? (
 								<div className={styles.image_container}>
 									<img
-										src={watchProfilePicture?.fileUrl || picture}
+										src={watchProfilePicture?.finalUrl || picture}
 										alt="loading"
 										className={styles.avatar_container}
 									/>
