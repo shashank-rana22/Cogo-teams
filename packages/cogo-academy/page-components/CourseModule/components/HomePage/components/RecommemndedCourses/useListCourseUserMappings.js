@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-function useListCourseUserMappings({ user_id, ongoingCategories, inputValue }) {
+function useListCourseUserMappings({ user_id, ongoingCategories }) {
 	const [{ data = {}, loading }, trigger] = useRequest({
 		url    : '/list_user_courses',
 		method : 'GET',
@@ -16,21 +16,20 @@ function useListCourseUserMappings({ user_id, ongoingCategories, inputValue }) {
 						status             : 'active',
 						user_id,
 						course_category_id : ongoingCategories.data,
-						q                  : inputValue,
 					},
 				},
 			});
 		} catch (error) {
 			Toast.error(error.message);
 		}
-	}, [ongoingCategories.data, trigger, user_id, inputValue]);
+	}, [ongoingCategories.data, trigger, user_id]);
 
 	useEffect(() => {
 		if (ongoingCategories.loaded) {
 			fetchList();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [ongoingCategories.loaded, inputValue]);
+	}, [ongoingCategories.loaded]);
 
 	return {
 		data,

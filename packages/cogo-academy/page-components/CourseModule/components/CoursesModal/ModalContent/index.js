@@ -8,8 +8,17 @@ import RightComponent from './components/RightComponent';
 import styles from './styles.module.css';
 import useListCourseUserMappings from './useListCourseUserMappings';
 
-function ModalContent({ finalCourseCategories, loading, currentCategory, setCurrentCategory, setShowCoursesModal }) {
-	const { user:{ id: user_id } } = useSelector((state) => state.profile);
+function ModalContent({
+	finalCourseCategories,
+	loading,
+	currentCategory,
+	setCurrentCategory,
+	setShowCoursesModal,
+	categoryLoading,
+}) {
+	const {
+		user: { id: user_id },
+	} = useSelector((state) => state.profile);
 
 	const {
 		data,
@@ -17,7 +26,7 @@ function ModalContent({ finalCourseCategories, loading, currentCategory, setCurr
 		fetchList,
 	} = useListCourseUserMappings({ user_id });
 
-	if (loading) {
+	if (loading || categoryLoading) {
 		return (
 			<div style={{ margin: '20px' }}>
 				<LoadingState rowsCount={3} />

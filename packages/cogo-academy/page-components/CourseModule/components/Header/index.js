@@ -8,15 +8,16 @@ import ReportErrorModal from '../ReportErrorModal';
 
 import styles from './styles.module.css';
 
-function Header({ loading, courseCategories, currentCategory, setCurrentCategory, debounceQuery }) {
-	const [showErrorModal, setShowErrorModal] = useState(false);
-
+function Header({ loading, currentCategory, setCurrentCategory, debounceQuery, input, setInput }) {
 	const router = useRouter();
 
+	const [showErrorModal, setShowErrorModal] = useState(false);
 	const [showCoursesModal, setShowCoursesModal] = useState(false);
 
 	const handleClick = () => {
 		router.push('/learning/course');
+		setInput('');
+		debounceQuery('');
 	};
 
 	return (
@@ -30,7 +31,7 @@ function Header({ loading, courseCategories, currentCategory, setCurrentCategory
 						type="button"
 						onClick={() => setShowCoursesModal(true)}
 					>
-						Courses
+						All Courses
 						{' '}
 						<IcMArrowDown style={{ marginLeft: '8px' }} />
 					</Button>
@@ -39,7 +40,11 @@ function Header({ loading, courseCategories, currentCategory, setCurrentCategory
 				<Input
 					placeholder="Search by Course, Category, Topic or Tags"
 					suffix={<IcMSearchlight style={{ marginRight: '12px' }} />}
-					onChange={(val) => debounceQuery(val)}
+					onChange={(val) => {
+						debounceQuery(val);
+						setInput(val);
+					}}
+					value={input}
 				/>
 
 				<div className={styles.profile}>
@@ -58,7 +63,6 @@ function Header({ loading, courseCategories, currentCategory, setCurrentCategory
 			{showCoursesModal ? (
 				<CoursesModal
 					loading={loading}
-					courseCategories={courseCategories}
 					showCoursesModal={showCoursesModal}
 					setShowCoursesModal={setShowCoursesModal}
 					currentCategory={currentCategory}

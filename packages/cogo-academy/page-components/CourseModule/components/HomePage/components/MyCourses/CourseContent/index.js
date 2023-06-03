@@ -10,12 +10,12 @@ import GET_LINK_MAPPING from '../../../../../configs/GET_LINK_MAPPING';
 import useListCourseUserMappings from '../../../../../hooks/useListCourseUserMappings';
 import CourseCard from '../../../../CourseCard';
 
-function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCategories, inputValue }) {
+function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCategories }) {
 	const router = useRouter();
 
 	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
 
-	const { data = {}, loading, fetchList } = useListCourseUserMappings({ activeTab, inputValue, user_id });
+	const { data = {}, loading, fetchList } = useListCourseUserMappings({ activeTab, user_id });
 
 	useEffect(() => {
 		if (!loading && activeTab !== 'ongoing' && !ongoingCategories.loaded) {
@@ -33,6 +33,10 @@ function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCatego
 					return course_categories.map((category) => category.id);
 				}).flat()))],
 			});
+		}
+
+		if (!loading && activeTab === 'ongoing' && isEmpty(data?.list || [])) {
+			setOngoingCategories({ loaded: true, data: [] });
 		}
 	}, [activeTab, data?.list, loading, ongoingCategories.loaded, setOngoingCategories]);
 

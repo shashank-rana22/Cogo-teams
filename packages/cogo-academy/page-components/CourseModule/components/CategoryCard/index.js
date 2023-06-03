@@ -1,7 +1,9 @@
 import { Carousel } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import LoadingState from '../../../../commons/LoadingState';
+import EmptyState from '../../commons/EmptyState';
 
 import CategoriesCard from './component/CategoriesCard';
 import styles from './styles.module.css';
@@ -11,7 +13,16 @@ function CategoryCard({ courseCategoryData, categoryLoading, setCurrentCategory 
 		return <LoadingState />;
 	}
 
-	const CAROUSELDATA = (courseCategoryData?.list || []).map((item, index) => ({
+	if (isEmpty(courseCategoryData?.list)) {
+		return (
+			<EmptyState
+				emptyText="Categories not found"
+				flexDirection="column"
+			/>
+		);
+	}
+
+	const CAROUSELDATA = (courseCategoryData?.list || []).map((item) => ({
 		key    : item?.id,
 		render : () => (
 			<CategoriesCard

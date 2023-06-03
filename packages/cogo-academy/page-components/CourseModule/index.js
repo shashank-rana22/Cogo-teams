@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function CourseModule() {
 	const [currentCategory, setCurrentCategory] = useState('all_courses');
+	const [input, setInput] = useState('');
 
 	const { query, debounceQuery } = useDebounceQuery();
 
@@ -20,10 +21,12 @@ function CourseModule() {
 	return (
 		<div className={styles.container}>
 			<Header
-				courseCategories={courseCategories}
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
 				debounceQuery={debounceQuery}
+				query={query}
+				input={input}
+				setInput={setInput}
 			/>
 
 			<RenderComponent
