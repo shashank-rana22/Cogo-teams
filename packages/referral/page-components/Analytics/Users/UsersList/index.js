@@ -5,18 +5,17 @@ import TableColumns from '../List/TableColumn';
 import styles from './styles.module.css';
 
 function UserList({
-	data = {},
+	data = [],
 	loading = false,
 	setShowOptions = () => {},
 	setShowActivityModal = () => {},
 }) {
-	const { list = [] } = data;
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Top 10 Users</div>
 			<Table
 				columns={TableColumns({ listType: 'users', setShowOptions, setShowActivityModal })}
-				data={list}
+				data={data}
 				loadingRowsCount={10}
 				loading={loading}
 			/>

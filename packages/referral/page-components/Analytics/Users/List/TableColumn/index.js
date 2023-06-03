@@ -20,11 +20,11 @@ function TableColumns({
 			accessor : (item = {}) => (
 				<div className={styles.tooltip_content}>
 					<Tooltip
-						content={startCase(item?.referrer_data?.name)}
+						content={startCase(item?.referee_data?.name)}
 						placement="bottom"
 					>
 						<div className={styles.user_name}>
-							{startCase(item?.referrer_data?.name) || 'NA'}
+							{startCase(item?.referee_data?.name) || 'NA'}
 						</div>
 					</Tooltip>
 				</div>

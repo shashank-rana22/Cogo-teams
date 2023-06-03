@@ -13,7 +13,8 @@ function UserPerformance({ selectedDate = {}, setSelectedDate = () => {} }) {
 	const [showActivityModal, setShowActivityModal] = useState(false);
 
 	const { data = {}, loading = false } = useListTopTenReferral();
-	const { referral_network = [], referral_user = {} } = data || {};
+	const { referral_network = {}, referral_user = [] } = data || {};
+	const { list = [] } = referral_network || {};
 
 	return (
 		<div>
@@ -22,13 +23,13 @@ function UserPerformance({ selectedDate = {}, setSelectedDate = () => {} }) {
 				<NetworkList
 					setShowOptions={setShowOptions}
 					setShowActivityModal={setShowActivityModal}
-					data={referral_network || []}
+					data={list || []}
 					loading={loading}
 				/>
 				<UserList
 					setShowOptions={setShowOptions}
 					setShowActivityModal={setShowActivityModal}
-					data={referral_user || {}}
+					data={referral_user || []}
 					loading={loading}
 				/>
 			</div>

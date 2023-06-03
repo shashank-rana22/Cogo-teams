@@ -29,7 +29,7 @@ function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () =
 	const newData = Object.keys(data || {}).map((item) => ({
 		x: formatDate({
 			date       : item,
-			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
 		}),
 		y: data[item] || 0,
