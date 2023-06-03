@@ -570,6 +570,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_supported_exchange_rate_sources',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
 			api          : 'create_channel_partner_persona',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -4382,6 +4387,12 @@ const partner = {
 			feature      : 'disliked_rates',
 		},
 		{
+			api          : 'delete_trailer_freight_rate_feedback',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
 			api          : 'list_ltl_freight_rate_feedbacks',
 			access_type  : 'private',
 			service_name : 'ltl_freight_rate',
@@ -5364,6 +5375,11 @@ const partner = {
 			api          : 'list_partner_user_allocations',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'get_supported_exchange_rate_sources',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
 		},
 		{
 			api          : 'get_allocation_requests',
@@ -8529,6 +8545,8 @@ const partner = {
 			api          : 'list_organization_trade_party_details',
 			access_type  : 'private',
 			service_name : 'organization',
+			module       : 'tds-settlement',
+			feature      : 'tds-settlement',
 		},
 		{
 			api          : 'list_organization_users',
@@ -8621,7 +8639,7 @@ const partner = {
 			feature     : 'history',
 		},
 		{
-			api         : 'post_payments_settlement_matching_on_sage',
+			api         : 'post_payments_settlement_bulk_matching_on_sage',
 			access_type : 'private',
 			module      : 'history',
 			feature     : 'history',
