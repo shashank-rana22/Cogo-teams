@@ -24,6 +24,7 @@
 .outer_container {
 	width: 33%;
 	padding: 12px;
+	cursor: pointer;
 }
 
 .container:hover {
