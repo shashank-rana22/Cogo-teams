@@ -15,7 +15,7 @@ const validateZaloFileUpload = ({ values = [] }) => {
 	const maxSize = getMaxFileSize(values[0]?.type);
 
 	if (values[0]?.size >= maxSize) {
-		const sizeInMb = (maxSize / GLOBAL_CONSTANTS.options.upload_file_size['1MB']).toFixed(2);
+		const sizeInMb = (maxSize / Number(GLOBAL_CONSTANTS.options.upload_file_size['1MB'])).toFixed(2);
 		Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);
 		return false;
 	}

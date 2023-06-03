@@ -1,8 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const ZALO_LIMITATION_SIZE = {
-	image : GLOBAL_CONSTANTS.options.upload_file_size['1MB'],
-	file  : 5 * GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
+	image : Number(GLOBAL_CONSTANTS.options.upload_file_size['1MB']),
+	file  : Number(GLOBAL_CONSTANTS.options.upload_file_size['5MB']),
 };
 
 const ZALO_FILE_TYPES = [
