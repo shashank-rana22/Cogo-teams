@@ -8,6 +8,7 @@ import useGetUserCourse from '../../hooks/useGetUserCourse';
 import useListCourseCategory from '../../hooks/useListCourseCategory';
 import Header from '../Header';
 
+import CompletionAndFeedback from './components/CompletionAndFeedback';
 import Footer from './components/Footer';
 import ModuleContent from './components/ModuleContent';
 import ModuleNavigation from './components/ModuleNavigation';
@@ -26,7 +27,6 @@ function CourseConsumption() {
 	const [chapter, setChapter] = useState({});
 	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 	const [editorError, setEditorError] = useState(false);
-	const [readOnly, setReadOnly] = useState(false);
 
 	const [indexes, setIndexes] = useState({
 		moduleIndex    : 0,
@@ -65,6 +65,10 @@ function CourseConsumption() {
 		return <EmptyState />;
 	}
 
+	if (data?.all_chapters_completed) {
+		return <CompletionAndFeedback course_id={course_id} />;
+	}
+
 	return (
 		<>
 			<Header
@@ -99,8 +103,6 @@ function CourseConsumption() {
 						setEditorValue={setEditorValue}
 						editorError={editorError}
 						setEditorError={setEditorError}
-						readOnly={readOnly}
-						setReadOnly={setReadOnly}
 					/>
 
 				</div>
@@ -114,7 +116,9 @@ function CourseConsumption() {
 					loading={loading || courseProgressUpdateLoading}
 					getUserCourse={getUserCourse}
 					chapter={chapter}
+					RichTextEditor={RichTextEditor}
 					editorValue={editorValue}
+					setEditorValue={setEditorValue}
 					setEditorError={setEditorError}
 					setChapter={setChapter}
 				/>

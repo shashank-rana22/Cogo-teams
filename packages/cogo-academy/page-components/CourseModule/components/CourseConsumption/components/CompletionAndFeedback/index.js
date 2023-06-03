@@ -5,11 +5,11 @@ import useCreateCourseFeedback from '../../hooks/useCourseFeedback';
 
 import styles from './styles.module.css';
 
-function CompletionAndFeedback() {
+function CompletionAndFeedback({ course_id }) {
 	const [starRating, setStarRating] = useState(0);
 	const [feedback, setFeedback] = useState('');
 
-	const { loading, createCourseFeedback } = useCreateCourseFeedback();
+	const { loading, createCourseFeedback } = useCreateCourseFeedback({ course_id });
 
 	return (
 		<div className={styles.container}>
@@ -18,19 +18,19 @@ function CompletionAndFeedback() {
 
 				<div>
 					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/resume.png"
-						alt="resume.png"
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/completed_course_confetti.svg"
+						alt="course_completion.png"
 					/>
 				</div>
 
-				<div>
+				<div className={styles.congrats_text}>
 					<h2>Congratulations!</h2>
 					<p>You have successfully completed the &apos;Intro to Cogoport&apos; course!</p>
 				</div>
 			</div>
 
 			<h3>
-				Congratulations! You have successfully completed the entire course.
+				Apply your newfound knowledge to excel in the field.
 				You&apos;ve shown great dedication and commitment. Well done!
 			</h3>
 
@@ -64,6 +64,7 @@ function CompletionAndFeedback() {
 				size="md"
 				themeType="primary"
 				className={styles.btn}
+				loading={loading}
 				onClick={() => {
 					createCourseFeedback({ rating: starRating, remark: feedback });
 				}}

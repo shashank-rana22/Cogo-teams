@@ -19,12 +19,14 @@ function ModuleContent({
 	setEditorValue,
 	editorError,
 	setEditorError,
-	readOnly,
-	setReadOnly,
 }) {
 	// const [showModal, setShowModal] = useState(false);
 
-	const { name, content_type = '', chapter_content = '', description, chapter_attachments } = chapter;
+	const {
+		name, content_type = '', chapter_content = '',
+		description, chapter_attachments, user_progress_state : state,
+		user_submission = '',
+	} = chapter;
 
 	if (loading) {
 		return <LoadingState />;
@@ -63,12 +65,8 @@ function ModuleContent({
 
 			<div className={styles.header}>
 
-				<div>
-					Title
-					:
-					{' '}
-					<span className={styles.name}>{name}</span>
-
+				<div className={styles.name}>
+					{name}
 				</div>
 
 				<div className={styles.btn_container}>
@@ -143,55 +141,57 @@ function ModuleContent({
 
 			{!isEmpty(description) && (
 				<div className={styles.description}>
-					<h3>Description:</h3>
 					<p>{description}</p>
 				</div>
 			)}
 
 			<div className={styles.content}>
 
-				{content_type === 'assessment' && (
-					<div className={styles.rte}>
+				{content_type === 'assessment' && (state === 'completed'
+					? <div dangerouslySetInnerHTML={{ __html: user_submission }} /> : (
+						<div className={styles.rte}>
 
-						<RichTextEditor
-							value={editorValue}
-							onChange={handleChange}
-							readOnly={readOnly}
-							required
-							id="body-text"
-							name="bodyText"
-							type="string"
-							multiline
-							variant="filled"
-							rootStyle={{
-								minWidth: '80%',
-								...(!readOnly ? { minHeight: '300px' } : {}),
-							}}
-						/>
+							<RichTextEditor
+								value={editorValue}
+								onChange={handleChange}
+								required
+								id="body-text"
+								name="bodyText"
+								type="string"
+								multiline
+								variant="filled"
+								className={styles.text_editor}
+								rootStyle={{
+									minWidth: '80%',
+									...(!readOnly ? { minHeight: '300px' } : {}),
+								}}
+							/>
 
-						{editorError && (
-							<span className={styles.errors}>
-								Answer is required
-							</span>
-						)}
-					</div>
+							{editorError && (
+								<span className={styles.errors}>
+									Answer is required
+								</span>
+							)}
+						</div>
+					))}
+
+				{content_type === 'text' && <div dangerouslySetInnerHTML={{ __html: chapter_content }} />}
+
+				{content_type !== 'assessment' && content_type !== 'text' && (
+					<iframe
+						style={{
+							width     : '90%',
+							marginTop : '20px',
+							height:
+							content_type === 'document' ? '80vh' : '400px',
+							border: '0',
+						}}
+						src={SOURCE_MAPPING[content_type]}
+						title="video player"
+						allowFullScreen
+					/>
 				)}
 
-				{content_type === 'text' ? <div dangerouslySetInnerHTML={{ __html: chapter_content }} />
-					: (
-						<iframe
-							style={{
-								width     : '90%',
-								marginTop : '20px',
-								height:
-							content_type === 'document' ? '80vh' : '400px',
-								border: '0',
-							}}
-							src={SOURCE_MAPPING[content_type]}
-							title="video player"
-							allowFullScreen
-						/>
-					)}
 			</div>
 
 			{!isEmpty(chapter_attachments) && (

@@ -1,8 +1,11 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
-const useCreateCourseFeedback = () => {
+const useCreateCourseFeedback = ({ course_id }) => {
+	const router = useRouter();
+
 	const [{ loading }, trigger] = useRequest({
 
 		url    : '/create_course_feedback',
@@ -13,11 +16,13 @@ const useCreateCourseFeedback = () => {
 		try {
 			await trigger({
 				params: {
-					cogo_academy_course_id: '',
+					cogo_academy_course_id: course_id,
 					rating,
 					remark,
 				},
 			});
+
+			router.push('/learning/course');
 		} catch (error) {
 			if (error.response?.data) {
 				Toast.error(getApiErrorString(error.response?.data));
