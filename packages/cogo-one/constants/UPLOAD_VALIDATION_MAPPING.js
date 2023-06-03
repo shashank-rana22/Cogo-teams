@@ -4,29 +4,29 @@ import { isEmpty } from '@cogoport/utils';
 
 import getMaxFileSize, { getFileType } from '../helpers/getMaxFileSize';
 
-const isZaloUploadValidate = ({ values }) => {
-	if (values && !isEmpty(values)) {
-		if (getFileType(values[0]?.type) === '') {
-			Toast.error('File Type Not Allowed');
-			return false;
-		}
+const validateZaloFileUpload = ({ values = [] }) => {
+	if (isEmpty(values || [])) return true;
 
-		const maxSize = getMaxFileSize(values[0]?.type);
-
-		if (values[0]?.size >= maxSize) {
-			const sizeInMb = (maxSize / GLOBAL_CONSTANTS.one_mb).toFixed(2);
-			Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);
-			return false;
-		}
-		return true;
+	if (getFileType(values[0]?.type) === '') {
+		Toast.error('File Type Not Allowed');
+		return false;
 	}
+
+	const maxSize = getMaxFileSize(values[0]?.type);
+
+	if (values[0]?.size >= maxSize) {
+		const sizeInMb = (maxSize / GLOBAL_CONSTANTS.one_mb).toFixed(2);
+		Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);
+		return false;
+	}
+
 	return true;
 };
 
 const defaultValidation = () => true;
 
 const UPLOAD_VALIDATION_MAPPING = {
-	zalo    : isZaloUploadValidate,
+	zalo    : validateZaloFileUpload,
 	default : defaultValidation,
 };
 
