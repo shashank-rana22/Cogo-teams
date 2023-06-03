@@ -1,3 +1,4 @@
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useLensRequest } from '@cogoport/request';
 
 const useUpdateShipmentCogoid = () => {
@@ -34,7 +35,7 @@ const useUpdateShipmentCogoid = () => {
 				},
 			});
 		} catch (err) {
-			console.log(err);
+			toastApiError(err);
 		}
 	};
 

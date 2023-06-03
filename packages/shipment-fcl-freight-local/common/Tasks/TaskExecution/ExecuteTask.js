@@ -7,8 +7,6 @@ import {
 	UploadCargoArrival,
 	UploadContainerDetails,
 	MarkConfirmServices,
-	GenerateFreightCertificate,
-	ChooseServiceProvider,
 	UploadDraftBL,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
@@ -99,28 +97,6 @@ function ExecuteTask({
 
 	if (task?.task === 'amend_draft_house_bill_of_lading') {
 		return <div>Amend draft bl flow</div>;
-	}
-
-	if (task.task === 'choose_service_provider') {
-		return (
-			<ChooseServiceProvider
-				task={task}
-				onCancel={onCancel}
-				refetch={taskListRefetch}
-				services={servicesList}
-			/>
-
-		);
-	}
-
-	if (task.task === 'generate_freight_certificate') {
-		return (
-			<GenerateFreightCertificate
-				task={task}
-				refetch={taskListRefetch}
-				onCancel={onCancel}
-			/>
-		);
 	}
 
 	return (
