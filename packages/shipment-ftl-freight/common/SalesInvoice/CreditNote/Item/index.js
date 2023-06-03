@@ -8,6 +8,7 @@ import {
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useRef } from 'react';
 
+import ClickableDiv from '../../../ClickableDiv';
 import Edit from '../Edit';
 import ReviewCN from '../Review';
 
@@ -130,14 +131,12 @@ function Item({
 				</div>
 
 				{itemStatus === 'pending' ? (
-					<div
+					<ClickableDiv
 						onClick={() => setOpen('edit')}
-						role="button"
-						tabIndex={0}
 						className={styles.actions}
 					>
 						<IcMEdit />
-					</div>
+					</ClickableDiv>
 				) : null}
 
 			</section>

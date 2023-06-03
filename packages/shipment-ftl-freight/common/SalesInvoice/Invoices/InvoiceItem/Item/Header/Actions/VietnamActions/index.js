@@ -10,6 +10,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';
+import ClickableDiv from '../../../../../../../ClickableDiv';
 import styles from '../styles.module.css';
 
 const AddRemarks = dynamic(() => import('../../AddRemarks'), { ssr: false });
@@ -128,48 +129,40 @@ function Actions({
 			{commonActions ? (
 				<>
 					<div>
-						<div
-							role="button"
-							tabIndex={0}
+						<ClickableDiv
 							className={styles.text}
 							onClick={handleClickCurrency}
 						>
 							Change Currency
-						</div>
+						</ClickableDiv>
 						<div className={styles.line} />
 					</div>
-					<div
-						role="button"
-						tabIndex={0}
+					<ClickableDiv
 						className={styles.text}
 						onClick={handleClickRemarks}
 					>
 						Add Remarks
-					</div>
+					</ClickableDiv>
 					<div>
 						<div className={styles.line} />
-						<div
-							role="button"
-							tabIndex={0}
+						<ClickableDiv
 							className={styles.text}
 							onClick={handleChangePayment}
 						>
 							Change Payment Mode
-						</div>
+						</ClickableDiv>
 					</div>
 				</>
 			) : null}
 			{(invoice.exchange_rate_document || []).map((url) => (
 				<div key={url}>
 					{commonActions ? <div className={styles.line} /> : null}
-					<div
-						role="button"
-						tabIndex={0}
+					<ClickableDiv
 						className={styles.text}
 						onClick={() => window.open(url, '_blank')}
 					>
 						Exchange Rate Document
-					</div>
+					</ClickableDiv>
 				</div>
 			))}
 		</div>
@@ -261,14 +254,12 @@ function Actions({
 							theme="light"
 							onClickOutside={() => setShow(false)}
 						>
-							<div
-								role="button"
-								tabIndex={0}
+							<ClickableDiv
 								className={styles.icon_more_wrapper}
 								onClick={() => setShow(!show)}
 							>
 								<IcMOverflowDot />
-							</div>
+							</ClickableDiv>
 						</Popover>
 					) : (
 						<div className={styles.empty_div} />

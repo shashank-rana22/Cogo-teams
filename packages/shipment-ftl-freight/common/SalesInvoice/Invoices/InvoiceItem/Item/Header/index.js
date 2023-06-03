@@ -9,6 +9,7 @@ import React, { useState, useContext, useRef } from 'react';
 
 import CONSTANTS from '../../../../../../configurations/contants.json';
 import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
+import ClickableDiv from '../../../../../ClickableDiv';
 
 import Actions from './Actions';
 // import CNNullify from './CNNullify';
@@ -147,10 +148,8 @@ function Header({
 
 				<div className={styles.invoice_info}>
 					<div className={styles.so_container}>
-						<div
+						<ClickableDiv
 							className={cl`${styles.so_number} ${!isEmpty(bfInvoice) ? styles.active : ''}`}
-							role="button"
-							tabIndex={0}
 							onClick={() => (!isEmpty(bfInvoice)
 								? handleDownload(
 									bfInvoice?.invoicePdfUrl || bfInvoice?.proformaPdfUrl,
@@ -160,7 +159,7 @@ function Header({
 							{bfInvoice?.invoiceNumber
 								|| bfInvoice?.proformaNumber
 								|| live_invoice_number}
-						</div>
+						</ClickableDiv>
 
 						<div className={styles.status_container}>
 							{invoiceStatus === 'FINANCE_REJECTED' ? (
@@ -269,10 +268,8 @@ function Header({
 					) : null}
 				</div>
 
-				<div
+				<ClickableDiv
 					className={styles.icon_wrapper}
-					role="button"
-					tabIndex={0}
 					onClick={() => setOpen(!open)}
 					style={{
 						height:
@@ -280,7 +277,7 @@ function Header({
 					}}
 				>
 					{open ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
-				</div>
+				</ClickableDiv>
 			</div>
 
 			{open ? <div>{children}</div> : null}

@@ -7,9 +7,11 @@ import {
 	IcMEmail,
 } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
+import NoStyleButton from '@cogoport/surface-modules/common/NoStyleButton';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
+import ClickableDiv from '../../../../../../ClickableDiv';
 import EditInvoice from '../EditInvoice';
 
 import AddCustomerInvoice from './AddCustomerInvoice';
@@ -122,51 +124,43 @@ function Actions({
 				<>
 					{editInvoicesVisiblity ? (
 						<div style={{ width: '100%' }}>
-							<div
-								role="button"
-								tabIndex={0}
+							<ClickableDiv
 								className={styles.text}
 								onClick={handleClickInvoice}
 							>
 								Edit Invoices
 
-							</div>
+							</ClickableDiv>
 							<div className={styles.line} />
 						</div>
 					) : null}
 
 					<div>
-						<div
-							role="button"
-							tabIndex={0}
+						<ClickableDiv
 							className={styles.text}
 							onClick={handleClickCurrency}
 						>
 							Change Currency
-						</div>
+						</ClickableDiv>
 						<div className={styles.line} />
 					</div>
 
-					<div
-						role="button"
-						tabIndex={0}
+					<ClickableDiv
 						className={styles.text}
 						onClick={handleClickRemarks}
 					>
 						Add Remarks
-					</div>
+					</ClickableDiv>
 
 					{invoice?.billing_address?.trade_party_type === 'self' ? (
 						<div>
 							<div className={styles.line} />
-							<div
-								role="button"
-								tabIndex={0}
+							<ClickableDiv
 								className={styles.text}
 								onClick={handleChangePayment}
 							>
 								Change Payment Mode
-							</div>
+							</ClickableDiv>
 						</div>
 					) : null}
 				</>
@@ -175,29 +169,23 @@ function Actions({
 			{(invoice.exchange_rate_document || []).map((url) => (
 				<div key={url}>
 					{commonActions ? <div className={styles.line} /> : null}
-					<div
-						role="button"
-						tabIndex={0}
+					<ClickableDiv
 						className={styles.text}
 						onClick={() => window.open(url, '_blank')}
 					>
 						Exchange Rate Document
-					</div>
+					</ClickableDiv>
 					<div className={styles.line} />
-					<div
-						role="button"
-						tabIndex={0}
+					<ClickableDiv
 						// onClick={handleExchangeRateModal}
 						className={styles.text}
 					>
 						Exchange Rate Sheet
 
-					</div>
+					</ClickableDiv>
 					<div>
 						<div className={styles.line} />
-						<div
-							role="button"
-							tabIndex={0}
+						<ClickableDiv
 							className={styles.text}
 							onClick={handleCustomerInvoice}
 						>
@@ -205,16 +193,14 @@ function Actions({
 								&nbsp;
 							{['reviewed', 'approved'].includes(invoice?.status) ? '/Generate' : ''}
 							Customer Invoice
-						</div>
+						</ClickableDiv>
 						{['reviewed', 'approved'].includes(invoice?.status) ? (
-							<div
-								role="button"
-								tabIndex={0}
+							<ClickableDiv
 								className={styles.text}
 								onClick={() => { setShow(false); setUpdateCustomerInvoice(true); }}
 							>
 								Update Customer Invoice
-							</div>
+							</ClickableDiv>
 						) : null}
 					</div>
 				</div>
@@ -222,14 +208,12 @@ function Actions({
 			{['reviewed', 'approved'].includes(invoice?.status) ? (
 				<div>
 					<div className={styles.line} />
-					<div
-						role="button"
-						tabIndex={0}
+					<ClickableDiv
 						className={styles.text}
 						onClick={() => { setShow(false); setFillCustomerData(true); }}
 					>
 						Fill Shipment Data For Customer Portal
-					</div>
+					</ClickableDiv>
 				</div>
 			) : null}
 		</div>
@@ -330,14 +314,12 @@ function Actions({
 							theme="light"
 							onClickOutside={() => setShow(false)}
 						>
-							<div
-								role="button"
-								tabIndex={0}
+							<ClickableDiv
 								className={styles.icon_more_wrapper}
 								onClick={() => setShow(!show)}
 							>
 								<IcMOverflowDot />
-							</div>
+							</ClickableDiv>
 						</Popover>
 						)
 						: (
@@ -450,6 +432,9 @@ function Actions({
 				invoice={invoice}
 				shipmentData={shipment_data}
 			/>
+
+			<NoStyleButton>Edit Invoices</NoStyleButton>
+
 		</div>
 	);
 }
