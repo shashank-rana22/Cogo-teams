@@ -162,8 +162,8 @@ function ModuleContent({
 								variant="filled"
 								className={styles.text_editor}
 								rootStyle={{
-									minWidth: '80%',
-									...(!readOnly ? { minHeight: '300px' } : {}),
+									minWidth  : '80%',
+									minHeight : '300px',
 								}}
 							/>
 
