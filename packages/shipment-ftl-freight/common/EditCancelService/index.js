@@ -80,13 +80,8 @@ function EditCancelService({ serviceData = {} }) {
 	actionButtons[1].show = true;
 	actionButtons[2].show = true;
 	actionButtons[3].show = true;
-<<<<<<< HEAD
 	// actionButtons[4].show = true;
 	// actionButtons[4].show = getCanCancelService({ state, activeStakeholder });
-=======
-	actionButtons[4].show = true;
-	actionButtons[5].show = getCanCancelService({ state, activeStakeholder });
->>>>>>> c27f12bb7f63d1033eb0ecab85a80d8fb15108c1
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;

@@ -19,12 +19,15 @@ import Timeline from '../../common/TimeLine';
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
 import useServiceList from '../../hooks/useServiceList';
+import getStakeholderConfig from '../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
 function ShipmentDetails() {
 	const activeStakeholder = 'superadmin';
 	const router = useRouter();
+
+	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
 	const { get } = useGetShipment();
 
 	const [activeTab, setActiveTab] = useState('overview');
@@ -44,7 +47,8 @@ function ShipmentDetails() {
 		...getTimeline,
 		...servicesGet,
 		activeStakeholder,
-	}), [get, servicesGet, getTimeline, activeStakeholder]);
+		stakeholderConfig,
+	}), [get, servicesGet, getTimeline, activeStakeholder, stakeholderConfig]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
