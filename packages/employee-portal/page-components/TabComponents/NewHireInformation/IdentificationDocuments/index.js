@@ -4,7 +4,6 @@ import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 import useCreateEmployeeDocument from '../../../../hooks/useCreateEmployeeDocument';
-import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -26,14 +25,12 @@ const MAPPING = {
 	active   : 'Waiting for Approval',
 };
 
-function IdentificationDocuments({ data, getEmployeeDetails }) {
-	const { documents = [] } = data || {};
+function IdentificationDocuments({ data: info, getEmployeeDetails }) {
+	const { documents = [] } = info || {};
 
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
 	const { loading, createEmployeeDocument } = useCreateEmployeeDocument({ documents, getEmployeeDetails });
-
-	const { data: info } = useGetEmployeeDetails({});
 
 	const id = info?.detail?.id;
 
