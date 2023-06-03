@@ -8,6 +8,7 @@ import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import Actions from '../components/AllocationRequests/List/Actions';
 import styles from '../components/AllocationRequests/List/styles.module.css';
+import REQUEST_STATUS_COLOR_MAPPING from '../constants/request-status-color-mapping';
 
 const useListAllocationRequests = () => {
 	const { profile: { authParams } } = useSelector((state) => state);
@@ -331,6 +332,18 @@ const useListAllocationRequests = () => {
 						: '___'}
 				</div>
 			),
+		},
+		{
+			key      : 'status',
+			Header   : 'Status',
+			accessor : ({ status }) => (status ? (
+				<Pill
+					size="md"
+					color={REQUEST_STATUS_COLOR_MAPPING?.[status]}
+				>
+					{startCase(status)}
+				</Pill>
+			) : '___'),
 		},
 		{
 			key      : 'action',
