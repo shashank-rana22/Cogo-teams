@@ -11675,6 +11675,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'list_organization_wise_fx_configurations',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_exchange_rate_configuration',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	contracts: [
 		{
