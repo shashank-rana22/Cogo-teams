@@ -187,7 +187,7 @@ function ShipmentDetails({
 										</div>
 										<div className={styles.kam_data}>Wallet Usage - </div>
 										<div>
-											{amountCurrency || 'USD'}
+											{amountCurrency || ''}
 
 											{amount || 0}
 										</div>
