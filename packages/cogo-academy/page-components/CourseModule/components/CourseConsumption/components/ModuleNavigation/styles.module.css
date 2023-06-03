@@ -113,3 +113,30 @@
 .icon {
 	margin-left: -4px;
 }
+
+.box_active {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	padding: 12px 24px;
+	margin-bottom: 10px;
+	background: #fffce6;
+	border-radius: 6px;
+	align-items: center;
+	cursor: pointer;
+}
+
+.box_deactive {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-around;
+	padding: 12px 24px;
+	margin-bottom: 10px;
+	background: #f9f9f9;
+	border-radius: 6px;
+	align-items: center;
+	cursor: not-allowed;
+
+}

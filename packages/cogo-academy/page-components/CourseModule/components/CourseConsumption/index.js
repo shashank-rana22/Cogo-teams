@@ -51,6 +51,7 @@ function CourseConsumption({
 	const [currentCategory, setCurrentCategory] = useState('all_courses');
 
 	const { moduleIndex, subModuleIndex, chapterIndex } = indexes;
+	const [showTestData, setShowTestData] = useState();
 
 	const {
 		data = {},
@@ -90,9 +91,9 @@ function CourseConsumption({
 		return <EmptyState />;
 	}
 
-	if (finalData?.all_chapters_completed) {
-		return <CompletionAndFeedback course_id={course_id} />;
-	}
+	// if (finalData?.all_chapters_completed) {
+	// 	return <CompletionAndFeedback course_id={course_id} />;
+	// }
 
 	return (
 		<>
@@ -114,6 +115,8 @@ function CourseConsumption({
 						setChapter={setChapter}
 						indexes={indexes}
 						setIndexes={setIndexes}
+						setShowTestData={setShowTestData}
+						showTestData={showTestData}
 					/>
 
 					<ModuleContent
@@ -131,6 +134,8 @@ function CourseConsumption({
 						editorError={editorError}
 						setEditorError={setEditorError}
 						viewType={viewType}
+						setShowTestData={setShowTestData}
+						showTestData={showTestData}
 					/>
 				</div>
 

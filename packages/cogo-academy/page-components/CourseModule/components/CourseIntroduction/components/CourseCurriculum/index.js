@@ -1,5 +1,6 @@
 import { Accordion } from '@cogoport/components';
 import { IcMDocument, IcMPpt, IcMText, IcMVideoCall } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -11,7 +12,6 @@ function CourseCurriculum({ data }) {
 		presentation : <IcMPpt width="24px" height="24px" fill="white" />,
 		text         : <IcMText width="24px" height="24px" fill="white" />,
 	};
-
 	return (
 		<div className={styles.container}>
 			<span className={styles.heading}>Course Curriculum</span>
@@ -86,12 +86,14 @@ function CourseCurriculum({ data }) {
 				</div>
 			))}
 
-			{/* <Accordion
-				type="text"
-				title="Course Completion Test"
-				className={styles.bottom_box}
-				styles={{ margin: '10px', width: '100%' }}
-			/> */}
+			{!isEmpty(data?.course_details?.tests) ? (
+				<div className={styles.bottom_box}>
+					<div>
+						Course Completion Test
+					</div>
+				</div>
+			)
+				: null}
 		</div>
 	);
 }

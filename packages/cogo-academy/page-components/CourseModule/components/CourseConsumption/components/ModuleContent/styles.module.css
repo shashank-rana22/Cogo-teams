@@ -76,3 +76,38 @@
 	margin-top: 8px;
 	color: #ee3425;
 }
+
+.instruction{
+	margin: 40px 0 0 0 ;
+	background: #fff;
+	border-radius: 6px;
+	border: 3px solid #FDFBF6;
+
+}
+.description_box{
+	padding: 10px;
+	background: #FDFBF6;
+	border-radius: 6px;
+}
+
+.test_details{
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.data_box{
+	padding: 10px;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	align-items: center;
+}
+
+.data_display{
+	padding:  0 25px;
+	display: flex;
+	flex-direction: column;
+}
