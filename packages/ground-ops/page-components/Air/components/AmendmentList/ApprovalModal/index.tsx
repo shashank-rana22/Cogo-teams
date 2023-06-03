@@ -30,7 +30,7 @@ function ApprovalModal({ showApprove, setShowApprove, handleUpdate, updateLoadin
 					size="md"
 					themeType="accent"
 					disabled={updateLoading}
-					onClick={() => { handleUpdate(showApprove); }}
+					onClick={() => handleUpdate(showApprove)}
 				>
 					Approve
 

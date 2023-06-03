@@ -17,12 +17,12 @@ function Amendment({
 		handleSerialId: (singleItem) => (
 			<div>
 				#
-				{singleItem.serialId}
+				{singleItem?.serialId}
 			</div>
 		),
 		handleBlCategory: (singleItem) => (
 			<div style={{ textTransform: 'uppercase' }}>
-				{singleItem.blCategory === 'mawb' ? 'MAWB' : 'HAWB/MAWB'}
+				{singleItem?.blCategory === 'mawb' ? 'MAWB' : 'HAWB/MAWB'}
 			</div>
 		),
 		handleStatus: () => (

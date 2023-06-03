@@ -8,7 +8,7 @@ const URL_MAPPING = {
 	approval_pending : 'list',
 	approved_awb     : 'list',
 	final_awb        : 'list',
-	amendment        : 'list-amend-document-tasks',
+	amendment        : 'amend/list',
 };
 
 const AUTH_KEY_MAPPING = {

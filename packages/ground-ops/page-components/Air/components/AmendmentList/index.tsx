@@ -49,7 +49,7 @@ function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setG
 		handleSerialId: (singleItem) => (
 			<div>
 				#
-				{singleItem.serialId || '-'}
+				{singleItem?.serialId || '-'}
 			</div>
 		),
 		handleDocumentNumber: (singleItem) => (
@@ -61,7 +61,7 @@ function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setG
 		handleDeadline: (singleItem) => (
 			<div>
 				{formatDate({
-					date       : singleItem.deadline,
+					date       : singleItem?.deadline,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 					timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 					formatType : 'dateTime',
@@ -70,16 +70,16 @@ function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setG
 			</div>
 		),
 		handleDownload: (singleItem) => {
-			const { documentData = {}, awbNumber, documentState, documentType } = singleItem || {};
+			const { documentData = {} } = singleItem || {};
 
-			const docData = { ...documentData, awbNumber, documentState, documentType };
+			const docData = { ...documentData, ...singleItem };
 
 			return (
 				<Button
 					themeType="linkUi"
 					style={{ fontSize: 12 }}
 					onClick={singleItem?.documentData?.status === 'uploaded'
-						? () => { handleClickOnDownload(singleItem.documentUrl); }
+						? () => { handleClickOnDownload(singleItem?.documentUrl); }
 						: () => { handleDownloadMAWB(docData); }}
 				>
 					<IcMEyeopen fill="#8B8B8B" />
@@ -88,9 +88,9 @@ function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setG
 			);
 		},
 		handleEdit: (singleItem) => {
-			const { documentData = {}, awbNumber, documentState, documentType, serialId, remarks } = singleItem || {};
+			const { documentData = {} } = singleItem || {};
 
-			const docData = { ...documentData, awbNumber, documentState, documentType, serialId, remarks };
+			const docData = { ...documentData, ...singleItem };
 
 			return (
 				<Button
@@ -131,7 +131,7 @@ function AmendmentList({ data, setViewDoc, setItem, listAPI, edit, setEdit, setG
 			id                  : values?.documentId,
 			service_id          : values?.serviceId,
 			service_type        : 'air_freight_service',
-			pending_task_id     : values?.id,
+			pending_task_id     : values?.taskId,
 			state               : 'document_accepted',
 			file_name:
 			`Draft_Airway_Bill_For_Shipment_${serialId}_${new Date().getTime()}`,
