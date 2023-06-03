@@ -16,7 +16,7 @@ const AUTH_KEY_MAPPING = {
 	approval_pending : 'get_air_coe_pending_tasks_list',
 	approved_awb     : 'get_air_coe_pending_tasks_list',
 	final_awb        : 'get_air_coe_pending_tasks_list',
-	amendment        : 'get_air_coe_documents_list_amend_document_tasks',
+	amendment        : 'get_air_coe_pending_tasks_amend_list',
 };
 
 const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relevantToMe }) => {

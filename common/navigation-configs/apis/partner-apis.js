@@ -11727,7 +11727,7 @@ const partner = {
 			access_type : 'private',
 		},
 		{
-			api         : 'get_air_coe_documents_list_amend_document_tasks',
+			api         : 'get_air_coe_pending_tasks_amend_list',
 			access_type : 'private',
 		},
 		{
