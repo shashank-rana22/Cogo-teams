@@ -145,34 +145,36 @@ function CourseCard({
 				<div className={styles.title}>{name}</div>
 				<div className={styles.description}>{description}</div>
 
-				{state === 'ongoing' ? (
-					<div className={styles.progress_container}>
-						<div className={styles.remaining_text}>
-							{toFixed(100 - Number(user_progress), 2)}
-							% Remaining
-						</div>
-						<ProgressBar progress={toFixed(user_progress, 2)} uploadText=" " />
-					</div>
-				) : null}
+				<div className={styles.additional_content}>
+					{state === 'ongoing' ? (
+						<>
+							<div className={styles.remaining_text}>
+								{toFixed(100 - Number(user_progress), 2)}
+								% Remaining
+							</div>
+							<ProgressBar progress={toFixed(user_progress, 2)} uploadText=" " />
+						</>
+					) : null}
 
-				<div className={styles.info_container}>
-					<div className={styles.info}>
-						<IcMFolder height={16} width={16} fill="#F68B21" />
-						<div style={{ marginLeft: '4px' }}>
-							{modules_count}
-							{' '}
-							Module
-							{modules_count === 1 ? '' : 's'}
+					<div className={styles.info_container}>
+						<div className={styles.info}>
+							<IcMFolder height={16} width={16} fill="#F68B21" />
+							<div style={{ marginLeft: '4px' }}>
+								{modules_count}
+								{' '}
+								Module
+								{modules_count === 1 ? '' : 's'}
+							</div>
 						</div>
-					</div>
 
-					<div style={{ marginLeft: '24px' }} className={styles.info}>
-						<IcCWaitForSometime height={16} width={16} fill="#F68B21" />
-						<div style={{ marginLeft: '4px' }}>
-							{course_completion_value}
-							{' '}
-							{course_completion_unit}
-							{course_completion_value === 1 ? '' : 's'}
+						<div style={{ marginLeft: '24px' }} className={styles.info}>
+							<IcCWaitForSometime height={16} width={16} fill="#F68B21" />
+							<div style={{ marginLeft: '4px' }}>
+								{course_completion_value}
+								{' '}
+								{course_completion_unit}
+								{course_completion_value === 1 ? '' : 's'}
+							</div>
 						</div>
 					</div>
 				</div>

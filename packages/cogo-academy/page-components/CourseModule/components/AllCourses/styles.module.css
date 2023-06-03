@@ -30,10 +30,6 @@
 	color: #828282;
 }
 
-/* .container {
-	padding: 0 20px;
-} */
-
 .main_heading {
 	margin-top: 32px;
 	margin-bottom: 20px;
@@ -42,6 +38,8 @@
 }
 
 .carousel_container {
+	display: flex;
+	flex-flow: row wrap;
 	margin: 24px 0;
 
 	:global {
@@ -98,13 +96,6 @@
 	display: flex;
 	flex-wrap: wrap;
 	margin: 10px 16px;
-}
-
-.carousel_container {
-	display: flex;
-	flex-direction: row;
-	flex-wrap: wrap;
-	margin: 24px 0;
 }
 
 .pagination_container {
