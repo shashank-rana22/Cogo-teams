@@ -9,15 +9,18 @@ const COMMODITY_MAPPING = ['cargo_weight_per_container', 'commodity',
 	'container_size', 'container_type', 'containers_count'];
 
 const ICONMAPPING = {
-	fcl_freight : IcCFcl,
-	lcl_freight : IcCLcl,
-	air_freight : IcCAir,
-};
-
-const TEXTMAPPING = {
-	fcl_freight : 'FCL',
-	lcl_freight : 'LCL',
-	air_freight : 'AIR',
+	fcl_freight: {
+		service_component : IcCFcl,
+		service_text      : 'FCL',
+	},
+	lcl_freight: {
+		service_component : IcCLcl,
+		service_text      : 'LCL',
+	},
+	air_freight: {
+		service_component : IcCAir,
+		service_text      : 'AIR',
+	},
 };
 
 const useGetPortCard = ({ props }) => {
@@ -33,9 +36,7 @@ const useGetPortCard = ({ props }) => {
 		origin_port = {}, destination_port = {}, service_type,
 	} = detail;
 
-	const commodity_array = [];
-
-	COMMODITY_MAPPING.forEach((commodity) => commodity_array.push({ [commodity]: detail[commodity] }));
+	const commodity_array = COMMODITY_MAPPING.map((commodity) => ({ [commodity]: detail[commodity] }));
 
 	const {
 		getRfqRateCardDetails, rfq_card_loading,
@@ -87,13 +88,13 @@ const useGetPortCard = ({ props }) => {
 		rate_card_details,
 	});
 
-	const Component = ICONMAPPING[service_type];
+	const Component = ICONMAPPING[service_type].service_component;
+	const iconText = ICONMAPPING[service_type].service_text;
 
 	return {
 		loading,
 		Component,
 		origin_port,
-		TEXTMAPPING,
 		service_type,
 		destination_port,
 		commodity_array,
@@ -119,6 +120,7 @@ const useGetPortCard = ({ props }) => {
 		getRfqsForApproval,
 		margin_limit,
 		rfq_state,
+		iconText,
 	};
 };
 

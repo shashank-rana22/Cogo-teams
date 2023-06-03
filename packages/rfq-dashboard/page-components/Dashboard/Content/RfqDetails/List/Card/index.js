@@ -21,7 +21,7 @@ const priceFormating = (price, currency) => formatAmount({
 	},
 });
 
-function Card({ item, handleCheck, checkedItems, partner_id }) {
+function Card({ item, handleCheck, checkedItems }) {
 	const { stats = {} } = item;
 	const router = useRouter();
 

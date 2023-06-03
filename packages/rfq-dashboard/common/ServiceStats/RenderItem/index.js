@@ -19,18 +19,21 @@ const mapping = {
 		});
 	},
 	promised_profitability({ data, item }) {
-		let profitability = data?.[item?.key];
-		if (typeof (data?.promised_consolidated_profitability) === 'number') {
-			profitability = data?.promised_consolidated_profitability;
+		if (typeof (data?.promised_consolidated_profitability) !== 'number'
+		&& typeof (data?.[item?.key]) !== 'number') {
+			return '-';
 		}
-		return typeof profitability === 'number' ? (
+
+		const profitability = data?.promised_consolidated_profitability || data?.[item?.key] || 0;
+
+		return (
 			<span
 				className={cl`${profitability > 0 ? styles.green : styles.red}
 					${profitability === 0 ? styles.black : ''}`}
 			>
 				{`${(profitability).toFixed(2)}%`}
 			</span>
-		) : '-';
+		);
 	},
 	default() {
 		return '-';

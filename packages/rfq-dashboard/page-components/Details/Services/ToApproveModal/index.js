@@ -6,15 +6,16 @@ import useUpdateRfqState from '../../../../hooks/useUpdateRfqState';
 
 import styles from './styles.module.css';
 
-function ToApproveModal({ show, setShow = () => {}, rfq_id = '', cardStateCount = {} }) {
+function ToApproveModal({ show, setShow = () => {}, rfq_id = '', cardStateCount = {}, getRfqsForApproval }) {
 	const { getRfqsRateCards } = useGetRfqRateCards({ rfq_id, state: 'modified_and_sent' });
 
 	const { modified = '', total = '' } = cardStateCount;
 
 	const { updateRfqState, loading } = useUpdateRfqState();
 
-	const approve_rfq = () => {
-		updateRfqState({ rfq_id, setShow });
+	const approve_rfq = async () => {
+		await updateRfqState({ rfq_id, setShow });
+		await getRfqsForApproval();
 	};
 	useEffect(() => {
 		getRfqsRateCards();

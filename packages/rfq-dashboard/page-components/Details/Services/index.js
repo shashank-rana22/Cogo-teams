@@ -57,6 +57,7 @@ function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRf
 							setShow={setShow}
 							rfq_id={rfq_id}
 							cardStateCount={cardStateCount}
+							getRfqsForApproval={getRfqsForApproval}
 						/>
 					)
 				}

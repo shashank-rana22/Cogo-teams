@@ -14,13 +14,12 @@ import styles from './styles.module.css';
 
 function PortsCard(props) {
 	const {
-		loading, Component, origin_port, TEXTMAPPING,
-		service_type, destination_port, commodity_array,
+		loading, Component, origin_port, destination_port, commodity_array,
 		stats, freight_price_currency, freight_price_discounted,
 		total_price_discounted, showPrice, setShowPrice, id, rfq_card_loading, rate_card_details_data,
 		rate, rate_card_details, currency_conversion, editedMargins, setEditedMargins, primaryService,
 		convenienceDetails, setConvenienceDetails, updateMargin, refetchRateCards, getRfqsForApproval,
-		margin_limit, rfq_state,
+		margin_limit, rfq_state, iconText,
 	} = useGetPortCard({ props });
 
 	return (
@@ -32,7 +31,7 @@ function PortsCard(props) {
 							<>
 								<div className={styles.service}>
 									<Component className={styles.icmfcl_icon} />
-									<span className={styles.service_type}>{TEXTMAPPING[service_type]}</span>
+									<span className={styles.service_type}>{iconText}</span>
 								</div>
 								<div className={styles.ports_tags_container}>
 									<div className={styles.location_box}>
