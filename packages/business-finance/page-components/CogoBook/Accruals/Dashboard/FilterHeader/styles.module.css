@@ -12,7 +12,7 @@
 .async_select {
   :global {
     .ui_select_display_container {
-      height: 32px;
+      height: 32px !important;
       width: 200px;
     }
   }

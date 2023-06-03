@@ -1,18 +1,19 @@
 import { Select } from '@cogoport/components';
 import { AsyncSelectController, useForm } from '@cogoport/forms';
 
-import { optionsMonth, optionsYear } from '../../ShipmentView/constant';
-
 import styles from './styles.module.css';
 
-function FilterHeader({ dashboardFilters, setDashboardFilters }) {
+function FilterHeader({
+	dashboardFilters, setDashboardFilters,
+	GetYearDetails, optionsYear, GetMonthDetails, optionsMonth,
+}) {
 	const { control } = useForm();
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.select_container}>
 				<Select
-					value={dashboardFilters?.year}
+					value={dashboardFilters?.year || GetYearDetails}
 					onChange={(val:string) => { setDashboardFilters((prev) => ({ ...prev, year: val })); }}
 					placeholder="Year"
 					options={optionsYear()}
@@ -21,7 +22,7 @@ function FilterHeader({ dashboardFilters, setDashboardFilters }) {
 					size="sm"
 				/>
 				<Select
-					value={dashboardFilters?.month}
+					value={dashboardFilters?.month || GetMonthDetails?.value}
 					onChange={(val:string) => { setDashboardFilters((prev) => ({ ...prev, month: val })); }}
 					placeholder="Month"
 					options={optionsMonth}
@@ -37,6 +38,7 @@ function FilterHeader({ dashboardFilters, setDashboardFilters }) {
 						renderLabel={(item) => (`${item?.business_name}(${item?.entity_code})`)}
 						placeholder="Entity"
 						labelKey="entity_code"
+						finalValue="301"
 						initialCall
 						rules={{ required: true }}
 						isClearable

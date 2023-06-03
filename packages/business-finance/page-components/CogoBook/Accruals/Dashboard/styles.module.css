@@ -59,3 +59,10 @@
 :last-child.days_show {
   border-bottom: none;
 }
+.stats_card {
+  border: 1px solid #e0e0e0;
+  border-radius: 8px;
+  background: #ffffff;
+  padding: 24px;
+  margin: 24px 0px;
+}
