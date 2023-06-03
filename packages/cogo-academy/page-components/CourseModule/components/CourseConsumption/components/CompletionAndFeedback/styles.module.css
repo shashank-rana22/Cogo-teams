@@ -1,59 +1,58 @@
-.container{
-    margin-top: -24px;
+.container {
+	margin-top: -24px;
 }
 
+.rating {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 0 16px;
+	margin-top: 40px;
+	margin-bottom: 40px;
+	background: #f2f3fa;
+	border-radius: 6px;
 
-.rating{
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    background: #F2F3FA;
-    border-radius: 6px;
-    padding: 0 16px;
-    margin-top: 40px;
-    margin-bottom: 40px;
+	:global {
+		.ui_star_rating_container,
+		.ui_star_rating {
+			background-color: #f2f3fa;
+		}
 
-    :global{
-        .ui_star_rating_container, .ui_star_rating{
-            background-color: #F2F3FA;
-        }
-
-        .ui_star_rating{
-            padding: 0;
-            margin: 0;
-        }
-    }
+		.ui_star_rating {
+			padding: 0;
+			margin: 0;
+		}
+	}
 }
 
-.rating_text{
-    color: #221F20;
-    font-weight: 600;
+.rating_text {
+	font-weight: 600;
+	color: #221f20;
 }
 
-.rating_text span{
-    color: #4F4F4F;
-    font-weight: 400;
+.rating_text span {
+	font-weight: 400;
+	color: #4f4f4f;
 }
 
-.btn{
-    float: right;
-    margin-top: 20px;
+.btn {
+	float: right;
+	margin-top: 20px;
 }
 
-.congrats img{
-    display:block;
-    margin:auto;
-    width: 80%;
+.congrats img {
+	display: block;
+	width: 80%;
+	margin: auto;
 }
 
-.congrats_text{
-
-    position: absolute;
-    top: 40px;
-    text-align: center;
-    width: 90%;
+.congrats_text {
+	position: absolute;
+	top: 40px;
+	width: 90%;
+	text-align: center;
 }
 
-.congrats{
-    margin-bottom: 40px;
+.congrats {
+	margin-bottom: 40px;
 }

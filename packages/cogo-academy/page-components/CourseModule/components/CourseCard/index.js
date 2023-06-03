@@ -1,9 +1,9 @@
 import { Pill, Button, Tooltip, ProgressBar } from '@cogoport/components';
 import { IcMStarfull, IcMBookmark, IcMFolder, IcCWaitForSometime } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import React from 'react';
 
 import useUpdateUserCourse from '../../hooks/useUpdateUserCourse';
+import toFixed from '../../utils/toFixed';
 
 import styles from './styles.module.css';
 
@@ -146,12 +146,12 @@ function CourseCard({
 				<div className={styles.description}>{description}</div>
 
 				{state === 'ongoing' ? (
-					<div>
+					<div className={styles.progress_container}>
 						<div className={styles.remaining_text}>
-							{100 - Number(user_progress)}
+							{toFixed(100 - Number(user_progress), 2)}
 							% Remaining
 						</div>
-						<ProgressBar progress={user_progress} uploadText=" " />
+						<ProgressBar progress={toFixed(user_progress, 2)} uploadText=" " />
 					</div>
 				) : null}
 

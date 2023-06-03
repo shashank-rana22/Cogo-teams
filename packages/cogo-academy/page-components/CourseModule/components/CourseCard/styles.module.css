@@ -118,7 +118,7 @@
 
 .details,
 .header {
-	padding: 16px;
+	padding: 8px 12px;
 }
 
 .description {
@@ -138,6 +138,7 @@
 .btn_container {
 	display: flex;
 	justify-content: space-between;
+	margin-top: auto;
 
 	:global {
 		.ui_button_container {
@@ -167,23 +168,22 @@
 
 .remaining_text {
 	margin-bottom: -6px;
+	margin-left: 4px;
 	font-size: 12px;
 	font-weight: 600;
 	color: #849e4c;
 }
 
 .info_container {
+	display: flex;
+	margin-left: 4px;
 	font-size: 12px;
 	color: #828282;
-	margin-top: auto;
-	display: flex;
-	margin-bottom: 12px;
-	margin-left: 4px;
 }
 
 .info {
-	align-items: center;
 	display: flex;
+	align-items: center;
 
 	g {
 		fill: #f68b21;
@@ -191,9 +191,13 @@
 }
 
 .title {
-	color: #221F20;
-	font-weight: 600;
-	font-size: 16px;
-	margin-bottom: 8px;
 	margin-top: 2px;
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.progress_container {
+	margin-top: auto;
 }
