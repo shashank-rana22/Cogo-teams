@@ -20,7 +20,7 @@ function RenderComponent({
 
 	const { viewType = '' } = query;
 
-	if (viewType === 'all_courses') {
+	if (viewType === 'all_courses' || inputValue) {
 		return (
 			<AllCourses
 				currentCategory={currentCategory}
@@ -37,7 +37,6 @@ function RenderComponent({
 			courseCategoryData={courseCategoryData}
 			setCurrentCategory={setCurrentCategory}
 			categoryLoading={categoryLoading}
-			inputValue={inputValue}
 		/>
 	);
 }

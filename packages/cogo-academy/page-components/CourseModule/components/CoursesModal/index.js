@@ -1,15 +1,21 @@
 import { Modal } from '@cogoport/components';
 
+import useListCourseCategory from '../../hooks/useListCourseCategory';
+
 import ModalContent from './ModalContent';
 
 function CoursesModal({
 	loading,
-	courseCategories,
 	showCoursesModal,
 	setShowCoursesModal,
 	currentCategory,
 	setCurrentCategory,
 }) {
+	const {
+		finalCourseCategories: courseCategories = [],
+		loading: categoryLoading,
+	} = useListCourseCategory();
+
 	return (
 		<Modal
 			show={showCoursesModal}
@@ -24,6 +30,7 @@ function CoursesModal({
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
 				setShowCoursesModal={setShowCoursesModal}
+				categoryLoading={categoryLoading}
 			/>
 		</Modal>
 	);

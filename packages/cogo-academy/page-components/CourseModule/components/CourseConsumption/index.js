@@ -5,7 +5,6 @@ import { useState, useEffect } from 'react';
 
 import EmptyState from '../../../CreateCourse/commons/EmptyState';
 import useGetUserCourse from '../../hooks/useGetUserCourse';
-import useListCourseCategory from '../../hooks/useListCourseCategory';
 import Header from '../Header';
 
 import CompletionAndFeedback from './components/CompletionAndFeedback';
@@ -40,11 +39,6 @@ function CourseConsumption() {
 
 	const { moduleIndex, subModuleIndex, chapterIndex } = indexes;
 	const [currentCategory, setCurrentCategory] = useState('all_courses');
-	const {
-		finalCourseCategories: courseCategories = [],
-		courseCategoryData,
-		loading: categoryLoading,
-	} = useListCourseCategory();
 
 	const { data = {}, getUserCourse, loading } = useGetUserCourse({ course_id, user_id });
 
@@ -72,7 +66,6 @@ function CourseConsumption() {
 	return (
 		<>
 			<Header
-				courseCategories={courseCategories}
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
 			/>

@@ -11,12 +11,12 @@ import CourseCard from '../../../CourseCard';
 import styles from './styles.module.css';
 import useListCourseUserMappings from './useListCourseUserMappings';
 
-function RecommendedComponents({ user_id, ongoingCategories, inputValue }) {
+function RecommendedComponents({ user_id, ongoingCategories = {} }) {
 	const router = useRouter();
 
 	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
 
-	const { data = {}, loading, fetchList } = useListCourseUserMappings({ user_id, ongoingCategories, inputValue });
+	const { data = {}, loading, fetchList } = useListCourseUserMappings({ user_id, ongoingCategories });
 
 	if (loading || !ongoingCategories.loaded) {
 		return <LoadingState rowsCount={2} />;

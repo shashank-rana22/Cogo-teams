@@ -3,7 +3,6 @@ import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetUserCourse from '../../hooks/useGetUserCourse';
-import useListCourseCategory from '../../hooks/useListCourseCategory';
 import Header from '../Header';
 
 import CourseCurriculum from './components/CourseCurriculum';
@@ -15,16 +14,14 @@ import styles from './styles.module.css';
 function CourseIntroduction() {
 	const {
 		general: { query = {} },
+		profile:{ user = {} },
 	} = useSelector((state) => state);
-	const { user_id } = useSelector((state) => ({ user_id: state?.profile?.user.id }));
 
-	const { course_id = '' } = query;
+	const { id: user_id } = user;
+
+	const { course_id = '', viewType = '' } = query;
+
 	const [currentCategory, setCurrentCategory] = useState('all_courses');
-	const {
-		finalCourseCategories: courseCategories = [],
-		courseCategoryData,
-		loading: categoryLoading,
-	} = useListCourseCategory();
 
 	const { data, loading } = useGetUserCourse({ course_id, user_id });
 
@@ -35,7 +32,6 @@ function CourseIntroduction() {
 	return (
 		<>
 			<Header
-				courseCategories={courseCategories}
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
 			/>
@@ -61,9 +57,12 @@ function CourseIntroduction() {
 
 				<SimilarCourses course_details={data?.course_details} />
 			</div>
-			<div className={styles.bottom}>
-				<Footer course_id={course_id} user_id={user_id} data={data} />
-			</div>
+
+			{viewType !== 'curriculum' ? (
+				<div className={styles.bottom}>
+					<Footer course_id={course_id} user_id={user_id} data={data} />
+				</div>
+			) : null}
 		</>
 	);
 }

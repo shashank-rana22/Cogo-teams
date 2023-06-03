@@ -11,7 +11,6 @@ import GET_LINK_MAPPING from '../../configs/GET_LINK_MAPPING';
 import useListCourseUserMappings from '../../hooks/useListCourseUserMappings';
 import CourseCard from '../CourseCard';
 
-import FilterPopover from './components/FilterPopover';
 import TagsSelect from './components/TagsSelect';
 import styles from './styles.module.css';
 
@@ -21,7 +20,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 	const router = useRouter();
 
 	const [activeTab, setActiveTab] = useState();
-	const [filters, setFilters] = useState('');
+
 	const [selected, setSelected] = useState('');
 	const [page, setPage] = useState(1);
 
@@ -84,37 +83,33 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 						{activeTab === 'mandatory' ? <IcMTick height="20px" width="20px" /> : null}
 						Mandatory
 					</div>
-
-					{/* <FilterPopover
-						filters={filters}
-						setFilters={setFilters}
-					/> */}
-
 				</div>
 			</div>
 
-			<div className={styles.tabs_container}>
-				{courseCategories?.map((category) => (
-					<div
-						role="presentation"
-						className={`${styles.tab} ${currentCategory === category.id ? styles.active : ''}`}
-						key={category.id}
-						onClick={() => { clickOptions('', category.id, ''); }}
-					>
-						<h4><div className={styles.overflow}>{startCase(category.name)}</div></h4>
-						{ category.name === 'all_courses'
-							? null
-							: (
-								<p className={styles.total_courses}>
-									{category.course_count}
-									{' '}
-									courses
-								</p>
-							)}
-					</div>
+			{!inputValue ? (
+				<div className={styles.tabs_container}>
+					{courseCategories?.map((category) => (
+						<div
+							role="presentation"
+							className={`${styles.tab} ${currentCategory === category.id ? styles.active : ''}`}
+							key={category.id}
+							onClick={() => { clickOptions('', category.id, ''); }}
+						>
+							<h4><div className={styles.overflow}>{startCase(category.name)}</div></h4>
+							{ category.name === 'all_courses'
+								? null
+								: (
+									<p className={styles.total_courses}>
+										{category.course_count}
+										{' '}
+										courses
+									</p>
+								)}
+						</div>
 
-				))}
-			</div>
+					))}
+				</div>
+			) : null}
 
 			<div className={styles.pill}>
 				{courseCategories?.map((category) => (
