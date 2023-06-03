@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useCreateTestUserMapping = () => {
+const useUpdateTestUserMapping = () => {
 	const {
 		query: { test_id },
 		user: { id: user_id },
@@ -13,7 +13,7 @@ const useCreateTestUserMapping = () => {
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
-		url    : '/create_test_user_mapping',
+		url    : '/update_test_user_mapping',
 	}, { manual: true });
 
 	const passStartTime = async () => {
@@ -23,6 +23,7 @@ const useCreateTestUserMapping = () => {
 				test_id,
 				user_id,
 				start_time,
+				state: 'ongoing',
 			};
 
 			await trigger({
@@ -39,4 +40,4 @@ const useCreateTestUserMapping = () => {
 	};
 };
 
-export default useCreateTestUserMapping;
+export default useUpdateTestUserMapping;

@@ -10,7 +10,7 @@ import MarksComponent from './MarksComponent';
 import styles from './styles.module.css';
 import useAssignMarks from './useAssignMarks';
 
-function SubjectiveItem({ data, index, view, user_id, test_id, status }) {
+function SubjectiveItem({ data, index, view, user_id, test_id, status, activeAttempt }) {
 	const { question_data = {}, answers: { answer_text = '' }, assign_marks = 0, user_answers = {} } = data;
 
 	const [value, setValue] = useState(assign_marks);
@@ -20,7 +20,7 @@ function SubjectiveItem({ data, index, view, user_id, test_id, status }) {
 
 	const { answer_text: user_answer = '', file_url = '' } = user_answers || {};
 
-	const { loading, handleAssignMarks } = useAssignMarks({ setError });
+	const { loading, handleAssignMarks } = useAssignMarks({ setError, activeAttempt });
 
 	const handleOnSubmit = () => {
 		handleAssignMarks({ test_id, user_id, test_question_id: question_id, marks: value });
