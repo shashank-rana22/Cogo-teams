@@ -1,15 +1,7 @@
 import { useEffect, useMemo } from 'react';
 
+import getDate from '../../commons/utils/getDate';
 import { DATA_OBJECT_KEYS_MAPPING } from '../../commons/utils/getFormatValue';
-
-const getDate = (date) => {
-	const tempDate = new Date(date);
-
-	if (date && tempDate.toDateString() !== 'Invalid Date') {
-		return tempDate;
-	}
-	return null;
-};
 
 export const useFillFormData = ({
 	customData = {},

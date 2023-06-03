@@ -5,11 +5,11 @@ import { useMemo, useRef } from 'react';
 import useCreateShipmentFortigoTripDetail from '../../../../../../../../hooks/useCreateShipmentFortigoTripDetail';
 import useGetShipmentFortigoTripDetail from '../../../../../../../../hooks/useGetShipmentFortigoTripDetail';
 import useListShipmentTradePartners from '../../../../../../../../hooks/useListShipmentTradePartners';
+import { formControls } from '../commons/controls/formControls';
+import { getFormatValue } from '../commons/utils/getFormatValue';
 
-import { formControls } from './configs/formControls';
 import Form from './Form';
 import styles from './styles..module.css';
-import { getFormatValue } from '../commons/utils/getFormatValue';
 import { useFillFormData } from './utils/useFillFormData';
 
 function UpdateCustomerInvoice(props) {
@@ -60,7 +60,7 @@ function UpdateCustomerInvoice(props) {
 	const onSubmit = (values) => {
 		const formatValues = getFormatValue({
 			values,
-			shipment_id            : shipmentData?.id,
+			shipment_id            : `${shipmentData?.serial_id}`,
 			invoice_combination_id : invoice?.id,
 		});
 		apiTrigger(formatValues);

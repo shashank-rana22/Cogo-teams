@@ -57,7 +57,6 @@ export const customerControls = [
 		span         : 4,
 		label        : 'Customer Address',
 		showOptional : false,
-		className    : 'primary lg',
 	},
 	{
 		name         : 'customer_state_code',
@@ -67,7 +66,6 @@ export const customerControls = [
 		options      : stateCodeOptions,
 		label        : 'Customer State Code',
 		showOptional : false,
-		className    : 'primary lg',
 		isClearable  : true,
 	},
 	{

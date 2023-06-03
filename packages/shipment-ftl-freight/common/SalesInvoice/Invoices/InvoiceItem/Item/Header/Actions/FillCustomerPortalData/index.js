@@ -5,13 +5,12 @@ import { useMemo, useEffect, useState } from 'react';
 
 import useCreateShipmentFortigoTripDetail from '../../../../../../../../hooks/useCreateShipmentFortigoTripDetail';
 import useListShipmentTradePartners from '../../../../../../../../hooks/useListShipmentTradePartners';
+import { formControls } from '../commons/controls/formControls';
 import { companyToIdMap } from '../commons/utils/companyIdMapper';
 import { getFormatValue } from '../commons/utils/getFormatValue';
-import { useFillFormData } from '../UpdateCustomerInvoice/utils/useFillFormData';
 
-import { formControls } from './configs/formControls';
 import getFieldLikeControls from './utils/getFieldLikeControls';
-import getPreFillformValues from './utils/getPrefillFormValues';
+import { getFormatPrefillValues } from './utils/getFormatPrefillValues';
 
 function FillCustomerPortalData({
 	show = false,
@@ -32,9 +31,7 @@ function FillCustomerPortalData({
 		},
 	});
 
-	// const { loading: preFillLoading } = getPreFillformValues({
-	// 	data, shipmentData, controls,
-	// });
+	const defaultValues = getFormatPrefillValues({ data, invoice, customerObj });
 
 	const {
 		formState: { errors },
@@ -42,13 +39,11 @@ function FillCustomerPortalData({
 		setValue,
 		handleSubmit,
 		watch,
-	} = useForm();
+	} = useForm({ defaultValues });
 
 	const fieldsLikeControls = getFieldLikeControls({ controls, shipmentData, setValue, setCustomerObj, customerObj });
 
 	const watchCustomerName = watch('customer_name');
-
-	console.log(fieldsLikeControls.slice(0, 10));
 
 	useEffect(() => {
 		setValue('customer_id', companyToIdMap[watchCustomerName]);
@@ -62,8 +57,7 @@ function FillCustomerPortalData({
 			shipment_id            : `${shipmentData?.serial_id}`,
 			invoice_combination_id : invoice?.id,
 		});
-		console.log({ payload });
-		// apiTrigger(payload);
+		apiTrigger(payload);
 	};
 
 	return (
@@ -72,7 +66,6 @@ function FillCustomerPortalData({
 			closeOnOuterClick={false}
 			showCloseIcon={false}
 			size="xl"
-
 		>
 			<Modal.Header title="Fill Customer Portal Data" />
 			<Modal.Body>
@@ -83,8 +76,8 @@ function FillCustomerPortalData({
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={closeModal} themeType="secondary">Cancel</Button>
-				<Button onClick={handleSubmit(onSubmit)}>Submit</Button>
+				<Button onClick={closeModal} themeType="secondary" disabled={loading}>Cancel</Button>
+				<Button onClick={handleSubmit(onSubmit)} disabled={loading}>Submit</Button>
 			</Modal.Footer>
 		</Modal>
 	);

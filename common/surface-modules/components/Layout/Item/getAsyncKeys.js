@@ -681,6 +681,15 @@ const getAsyncFields = (key) => {
 				page       : 1,
 			},
 		},
+		fortigo_locations: {
+			valueKey      : 'id',
+			labelKey      : 'location_name',
+			asyncKey      : 'list_shipment_fortigo_trip_locations',
+			defaultParams : {
+				page_limit : 100,
+				page       : 1,
+			},
+		},
 	};
 
 	return OPTIONS[key];

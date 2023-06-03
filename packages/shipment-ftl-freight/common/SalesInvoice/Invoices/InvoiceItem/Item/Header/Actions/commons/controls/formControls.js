@@ -1,14 +1,15 @@
-import { amountControls } from '../../commons/controls/amountControls';
-import { customerControls } from '../../commons/controls/customerControls';
-import { deliveryControls } from '../../commons/controls/deliveryControls';
-import { fleetOwnerDriverDetailControls } from '../../commons/controls/fleetOwnerDriverDetailControls';
-import { uploadControls } from '../../commons/controls/uploadControls';
-import Label from '../../commons/Label';
-import { commodityOptions } from '../../commons/utils/commodityOptions';
-import { indentDhalaType } from '../../commons/utils/indentDhalaTypeOptions';
-import { indentTruckType } from '../../commons/utils/indentTruckTypeOptions';
-import { truckLengthOptions } from '../../commons/utils/truckLengthOptions';
-import { truckType } from '../../commons/utils/truckTypeOptions';
+import Label from '../Label';
+import { commodityOptions } from '../utils/commodityOptions';
+import { indentDhalaType } from '../utils/indentDhalaTypeOptions';
+import { indentTruckType } from '../utils/indentTruckTypeOptions';
+import { truckLengthOptions } from '../utils/truckLengthOptions';
+import { truckType } from '../utils/truckTypeOptions';
+
+import { amountControls } from './amountControls';
+import { customerControls } from './customerControls';
+import { deliveryControls } from './deliveryControls';
+import { fleetOwnerDriverDetailControls } from './fleetOwnerDriverDetailControls';
+import { uploadControls } from './uploadControls';
 
 export const formControls = {
 	mainControls: [
@@ -117,7 +118,6 @@ export const formControls = {
 			placeholder    : 'Enter',
 			label          : <Label>From Town</Label>,
 			type           : 'text',
-			// disabled    : true,
 			optionsListKey : 'fortigo_locations',
 			span           : 4,
 		},
@@ -126,7 +126,6 @@ export const formControls = {
 			placeholder    : 'Enter',
 			label          : <Label>To Town</Label>,
 			type           : 'text',
-			// disabled    : true,
 			optionsListKey : 'fortigo_locations',
 			span           : 4,
 		},
@@ -147,9 +146,8 @@ export const formControls = {
 				{ label: 'Fixed', value: 'Fixed' },
 				{ label: 'RPT', value: 'RPT' },
 			],
-			className : 'primary lg',
-			span      : 4,
-			rules     : {
+			span  : 4,
+			rules : {
 				required: {
 					value   : true,
 					message : 'This is required',
@@ -161,7 +159,6 @@ export const formControls = {
 			placeholder    : 'Enter',
 			label          : <Label>From State</Label>,
 			type           : 'text',
-			// disabled    : true,
 			optionsListKey : 'fortigo_locations',
 			span           : 4,
 		},
@@ -170,7 +167,6 @@ export const formControls = {
 			placeholder    : 'Enter',
 			label          : <Label>To State</Label>,
 			type           : 'text',
-			// disabled    : true,
 			optionsListKey : 'fortigo_locations',
 			span           : 4,
 		},
@@ -273,9 +269,8 @@ export const formControls = {
 				{ label: '996791 - Freight Transportation', value: 996791 },
 				{ label: '996513 - Rental Invoice', value: 996513 },
 			],
-			className : 'primary lg',
-			span      : 4,
-			rules     : {
+			span  : 4,
+			rules : {
 				required: {
 					value   : true,
 					message : 'This is required',

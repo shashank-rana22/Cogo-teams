@@ -1,7 +1,12 @@
 import { companyOptions } from '../../commons/utils/companyOptions';
 
-function getFieldLikeControls({ controls, shipmentData, setCustomerObj, customerObj, setValue }) {
-	console.log({ customerObj });
+function getFieldLikeControls({
+	controls = [],
+	shipmentData = {},
+	setCustomerObj = () => {},
+	customerObj = {},
+	setValue = () => {},
+}) {
 	const updatedControls = controls.map((controlObj) => {
 		if (controlObj.name === 'customer_organization') {
 			return {
@@ -16,7 +21,7 @@ function getFieldLikeControls({ controls, shipmentData, setCustomerObj, customer
 					organization_payment_mode_data_required : true,
 					organization_data_required              : true,
 				},
-				onChange: (obj) => {
+				onChange: (_, obj) => {
 					setValue('customer_pan', obj?.registration_number || undefined);
 					setValue('customer_gstin', undefined);
 					setCustomerObj(obj);
