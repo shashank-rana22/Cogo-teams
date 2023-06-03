@@ -32,7 +32,6 @@ const useListAllocationRequests = () => {
 		data_required                  : true,
 		organization_sub_type_required : true,
 		filters                        : {
-			// status       : 'pending',
 			service_type : 'organization',
 			q            : searchQuery || undefined,
 		},
@@ -342,7 +341,8 @@ const useListAllocationRequests = () => {
 						>
 							<div
 								className={styles.svg_container}
-								style={checkedRowsId.includes(id) ? { pointerEvents: 'none' } : {}}
+								style={(checkedRowsId.includes(id) || params.filters?.status !== 'pending')
+									? { pointerEvents: 'none' } : {}}
 							>
 								<IcMOverflowDot
 									height={16}
