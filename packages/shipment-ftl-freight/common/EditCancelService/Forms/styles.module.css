@@ -1,0 +1,49 @@
+.container {
+	align-items: left;
+
+	:global {
+		.ui_popover_container {
+			justify-content: center;
+			min-height: initial;
+			padding: 0;
+
+			> div {
+				padding: 0;
+			}
+		}
+	}
+}
+
+.text {
+	font-weight: 500;
+	font-size: 14px;
+	color: #393f70;
+	margin: 0 auto;
+	padding-bottom: 12px;
+	margin-top: 30px;
+}
+
+.header {
+	font-weight: 500;
+	font-size: 18px;
+	line-height: 15px;
+	text-transform: uppercase;
+	color: #393f70;
+}
+
+.form_div {
+	overflow: auto;
+	height: calc(100vh - 33.5vh);
+}
+
+.line {
+	border-bottom: 1px solid #f2f2f2;
+	width: 100%;
+}
+
+.btn {
+	width: 100%;
+	display: flex;
+	justify-content: flex-end;
+	padding-top: 10%;
+}

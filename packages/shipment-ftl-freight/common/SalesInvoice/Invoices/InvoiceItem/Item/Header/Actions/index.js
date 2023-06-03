@@ -203,10 +203,10 @@ function Actions({
 						>
 							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
 								&nbsp;
-							{invoice?.status === 'reviewed' ? '/Generate' : ''}
+							{['reviewed', 'approved'].includes(invoice?.status) ? '/Generate' : ''}
 							Customer Invoice
 						</div>
-						{invoice?.status === 'reviewed' ? (
+						{['reviewed', 'approved'].includes(invoice?.status) ? (
 							<div
 								role="button"
 								tabIndex={0}
@@ -219,7 +219,7 @@ function Actions({
 					</div>
 				</div>
 			))}
-			{invoice?.status === 'reviewed' ? (
+			{['reviewed', 'approved'].includes(invoice?.status) ? (
 				<div>
 					<div className={styles.line} />
 					<div
@@ -257,7 +257,7 @@ function Actions({
 							</Button>
 						) : null}
 
-						{invoice?.status === 'reviewed' ? (
+						{['reviewed', 'approved'].includes(invoice?.status) ? (
 							<Button size="sm" onClick={() => setShowOTPModal(true)}>
 								Send OTP for Approval
 							</Button>
