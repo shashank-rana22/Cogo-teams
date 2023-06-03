@@ -46,12 +46,12 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab }) => [
 			const { metadata } = item || {};
 			const {
 				init = 0, joining_bonus_yearly = 0,
-				retention_bonus_yearly = 0, performance_linked_variable_yearly = 0,
+				retention_bonus_yearly = 0, performance_linked_variable_yearly = 0, sign_on_bonus_yearly = 0,
 			} = metadata || {};
 
 			const variable_pay = (Number(joining_bonus_yearly)
 				+ Number(retention_bonus_yearly)
-				+ Number(performance_linked_variable_yearly)) || 0;
+				+ Number(performance_linked_variable_yearly) + Number(sign_on_bonus_yearly)) || 0;
 
 			return (
 				<div>

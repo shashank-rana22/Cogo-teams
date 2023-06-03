@@ -15,7 +15,7 @@ export default function SubmitSection({
 	setInitialQuestion = () => {},
 	offerLetterApiRefetch,
 }) {
-	const { handleSubmit } = formProps;
+	const { handleSubmit, reset } = formProps;
 
 	const {
 		loading,
@@ -23,9 +23,11 @@ export default function SubmitSection({
 	} = usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch });
 
 	const onSubmit = (values) => {
+		console.log('submit sure values',values)
 		onFinalSubmit(values, ctcStructure, initialQuestion, detail?.id);
 		setVisible(false);
 		setInitialQuestion('');
+		reset();
 	};
 	const onClose = () => {
 		setVisible(false);
