@@ -728,7 +728,7 @@ importers:
       '@cogoport/components': ^1.0.359
       '@cogoport/core': workspace:*
       '@cogoport/forms': workspace:*
-      '@cogoport/globalization': workspace:*
+      '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.58
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:^0.1.0

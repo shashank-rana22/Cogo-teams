@@ -68,10 +68,11 @@ function CourseConsumption() {
 			<Header
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
+				input_required={false}
 			/>
+
 			<div className={styles.container}>
 				<div className={styles.main_content}>
-
 					<ModuleNavigation
 						data={data}
 						loading={loading}

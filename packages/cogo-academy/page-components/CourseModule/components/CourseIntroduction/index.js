@@ -34,6 +34,7 @@ function CourseIntroduction() {
 			<Header
 				currentCategory={currentCategory}
 				setCurrentCategory={setCurrentCategory}
+				input_required={false}
 			/>
 
 			<div className={styles.container}>

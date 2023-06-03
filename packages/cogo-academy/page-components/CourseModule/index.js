@@ -27,6 +27,7 @@ function CourseModule() {
 				query={query}
 				input={input}
 				setInput={setInput}
+				input_required
 			/>
 
 			<RenderComponent
