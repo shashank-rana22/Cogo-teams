@@ -53,12 +53,7 @@ function DefaultView() {
 				<ShipmentInfo />
 
 				<div className={styles.toggle_chat}>
-					{/* <Toggle
-						size="md"
-						onLabel="Old"
-						offLabel="New"
-						onChange={handleVersionChange}
-					/> */}
+
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>

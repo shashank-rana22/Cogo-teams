@@ -5,7 +5,6 @@ import formatRate from './helper/formatRate';
 import SelectRate from './SelectRate';
 
 const REVENEUE_DESK_SERVICES = [
-	'ftl_freight_service',
 	'fcl_customs_service',
 	'fcl_cfs_service',
 	'haulage_freight_service',

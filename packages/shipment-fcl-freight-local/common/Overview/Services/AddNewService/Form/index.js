@@ -12,15 +12,13 @@ import styles from './styles.module.css';
 function Form({ upsellableService = {}, closeModal = () => {} }) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
-	const { importer_exporter_id = '' } = shipment_data;
-
 	const service = upsellableService.service_type.replace('_service', '');
 
 	const { controls, formProps } = useServiceUpsellControls({
 		service,
-		services: servicesList,
+		services             : servicesList,
 		upsellableService,
-		importer_exporter_id,
+		importer_exporter_id : shipment_data?.importer_exporter_id,
 	});
 
 	const { errors, control } = formProps;

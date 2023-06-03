@@ -10,7 +10,7 @@ import CreateNewTradeParty from '../CreateNewTradeParty';
 import InvoicingPartyItem from './InvoicingPartyItem';
 import styles from './styles.module.css';
 
-const tradePartyType = {
+const TRADE_PARTY_TYPE = {
 	key   : 'paying_party',
 	label : 'PAYING PARTY',
 	value : 'paying_party',
@@ -92,8 +92,9 @@ function InvoicingParties({
 				},
 			);
 
-			const selectedAddress = invoicingParty[address_to_use]
-				.find((address) => address.id === newSelectedAddressId);
+			const selectedAddress = (invoicingParty?.[address_to_use] || []).find(
+				(address) => address.id === newSelectedAddressId,
+			);
 
 			const {
 				organization_id = '',
@@ -215,7 +216,7 @@ function InvoicingParties({
 					orgResponse={organization}
 					setShowComponent={setShowComponent}
 					showComponent={showComponent}
-					tradePartyType={tradePartyType}
+					tradePartyType={TRADE_PARTY_TYPE}
 					fetchOrganizationTradeParties={refetch}
 				/>
 

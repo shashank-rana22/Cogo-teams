@@ -25,8 +25,6 @@ function OrganizationDocuments({
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const { importer_exporter_id = '' } = shipment_data;
-
 	const {
 		data,
 		getList,
@@ -34,7 +32,7 @@ function OrganizationDocuments({
 	} =	useListOrganizationDocuments({
 		defaultFilters: {
 			status          : 'active',
-			organization_id : importer_exporter_id,
+			organization_id : shipment_data?.importer_exporter_id,
 			q               : searchDocsVal || undefined,
 		},
 		defaultParams: {

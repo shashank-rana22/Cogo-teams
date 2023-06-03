@@ -1,4 +1,5 @@
-const containerKey = ['container_no', 'marks_and_number', 'package_description', 'gross_weight', 'measurement', 'seal',
+const CONTAINERS_KEY = ['container_no', 'marks_and_number',
+	'package_description', 'gross_weight', 'measurement', 'seal',
 ];
 
 const SHIPMENT_DETAILS_KEY = ['po_no', 'hbl_no', 'vessel', 'voyage', 'flight_number', 'obl_number',
@@ -14,7 +15,7 @@ const formatCargoArrivalData = (values) => {
 	const formattedValues = {};
 
 	Object.keys(values || {}).forEach((key) => {
-		if (containerKey.includes(key)) {
+		if (CONTAINERS_KEY.includes(key)) {
 			containerObj[key] = values?.[key] || '';
 		}
 
@@ -22,7 +23,7 @@ const formatCargoArrivalData = (values) => {
 			shipmentDetailObj[key] = values?.[key] || '';
 		} else if (
 			!SHIPMENT_DETAILS_KEY.includes(key)
-			&& !containerKey.includes(key)
+			&& !CONTAINERS_KEY.includes(key)
 		) {
 			formattedValues[key] = values?.[key] || '';
 		}

@@ -1,4 +1,4 @@
-const sub_reason_show = [
+const SUB_REASON_SHOW = [
 	'space_unavailable',
 	'rates_do_not_match',
 	'shipping_line_rejected_the_service',
@@ -35,7 +35,7 @@ const getShowElements = (formValues) => {
 
 	showElements.exploring_remark = formValues.cancellation_reason === 'i_was_just_exploring';
 
-	showElements.cancellation_sub_reason = sub_reason_show.includes(
+	showElements.cancellation_sub_reason = SUB_REASON_SHOW.includes(
 		formValues.cancellation_reason,
 	);
 

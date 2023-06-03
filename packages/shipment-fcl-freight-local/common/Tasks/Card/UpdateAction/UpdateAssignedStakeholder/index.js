@@ -43,10 +43,8 @@ function UpdateAssignedStakeholder({
 							{ label: 'KAM', value: 'booking_agent' },
 							{ label: 'Service Ops 1', value: 'service_ops1' },
 							{ label: 'Document Desk', value: 'service_ops2' },
-							{ label: 'Costbooking Desk', value: 'costbooking_ops' },
 							{ label: 'Collection Desk', value: 'collection_desk' },
 							{ label: 'Release Desk', value: 'release_desk' },
-							{ label: 'Lastmile Desk', value: 'lastmile_ops' },
 						]}
 						control={control}
 						name="assigned_stakeholder"

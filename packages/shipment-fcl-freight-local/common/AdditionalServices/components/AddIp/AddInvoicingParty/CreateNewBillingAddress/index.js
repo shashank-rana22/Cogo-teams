@@ -15,9 +15,6 @@ function CreateNewBillingAddress({
 }) {
 	const [isAddressRegisteredUnderGst, setIsAddressRegisteredUnderGst] = useState(false);
 	const [gstNumber, setGstNumber] = useState('');
-	const {
-		id = '',
-	} = organizationDetails;
 
 	const {
 		registrationNumber = '',
@@ -53,7 +50,7 @@ function CreateNewBillingAddress({
 		}
 		const payload = {
 			...values,
-			organization_id             : id,
+			organization_id             : organizationDetails?.id,
 			organization_trade_party_id : tradePartyId,
 			tax_number                  : gstNumber,
 		};

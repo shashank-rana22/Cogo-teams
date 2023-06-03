@@ -23,7 +23,7 @@ const getValue = (itemData, itemField, functions, emptyState) => {
 		}
 	}
 
-	return val === null || val === undefined ? null : val;
+	return isEmpty(val) ? null : val;
 };
 
 export default getValue;

@@ -85,6 +85,7 @@ function BlContainersMapping({
 			<Modal.Footer>
 				<Button
 					onClick={closeModal}
+					disabled={loading}
 					size="md"
 					themeType="secondary"
 				>

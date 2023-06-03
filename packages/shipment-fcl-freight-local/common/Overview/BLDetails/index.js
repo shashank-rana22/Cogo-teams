@@ -11,6 +11,11 @@ import ContainerNmUpdate from './ContainerNumUpdate';
 import styles from './styles.module.css';
 import TitleCard from './TitleCard';
 
+const EMPTY_STATE_CONTENT = {
+	heading     : 'No BL Details Found!',
+	description : 'Currently BL is not uploaded from the respective stakeholder.',
+};
+
 function BLDetails() {
 	const [open, setOpen] = useState(false);
 	const [activeId, setActiveId] = useState('');
@@ -65,11 +70,6 @@ function BLDetails() {
 		</div>
 	);
 
-	const emptyStateContent = {
-		heading     : 'No BL Details Found!',
-		description : 'Currently BL is not uploaded from the respective stakeholder.',
-	};
-
 	return (
 		<div className={styles.container}>
 
@@ -79,7 +79,7 @@ function BLDetails() {
 			<Accordion title={renderBlCount} style={{ width: '100%' }}>
 				{!list?.length ? (
 					<EmptyState
-						showContent={emptyStateContent}
+						showContent={EMPTY_STATE_CONTENT}
 						textSize="20px"
 						emptyText="No BL Details Found!"
 						subEmptyText="Currently BL is not uploaded from the respective stakeholder."

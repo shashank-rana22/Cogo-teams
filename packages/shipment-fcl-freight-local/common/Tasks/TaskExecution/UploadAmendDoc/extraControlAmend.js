@@ -28,7 +28,7 @@ const getExtraControls = {
 			type  : 'text',
 			span  : 6,
 			rules : {
-				required: { value: true, message: 'Bill od Lading Number is required' },
+				required: { value: true, message: 'Bill of lading Number is required' },
 			},
 		},
 	],
@@ -40,7 +40,7 @@ const getExtraControls = {
 			span     : 6,
 			disabled : true,
 			rules    : {
-				required: { value: true, message: 'Bill od Lading Number is required' },
+				required: { value: true, message: 'Bill of lading Number is required' },
 			},
 		},
 		{
