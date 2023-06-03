@@ -36,7 +36,7 @@ function Header({
 						show={showFilter}
 						visible={showFilter}
 						onClose={() => setShowFilters(false)}
-						onClickOutside={() => setShowFilters(false)}
+						onClickOutside={false}
 						placement="bottom"
 						interactive
 						content={(

@@ -22,7 +22,7 @@ function AddSop({
 	primary_service,
 	shipment_data,
 }) {
-	const [sopType, setSopType] = useState('');
+	const [sopType, setSopType] = useState(SOP_TYPE_OPTIONS[0]?.value);
 	const [formHeading, setFormHeading] = useState('');
 	const [errors, setErrors] = useState({});
 	const [hasData, sethasData] = useState(false);
