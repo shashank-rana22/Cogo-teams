@@ -11,8 +11,8 @@ import VerifyDriver from '../VerifyDriverModal';
 
 import {
 	EditTruckNumberControls,
-	EditETAControls,
-	EditDriverControls,
+	// EditETAControls,
+	// EditDriverControls,
 } from './Controls';
 import Form from './Forms';
 import styles from './styles.module.css';
@@ -121,7 +121,7 @@ function EditCancelService({ serviceData = {} }) {
 					truckList={getTrucklistWithId(serviceData)}
 				/>
 			)}
-			{console.log('serviceData', serviceData)}
+
 			{showModal === 'verify_driver'
 			&& (
 				<VerifyDriver
