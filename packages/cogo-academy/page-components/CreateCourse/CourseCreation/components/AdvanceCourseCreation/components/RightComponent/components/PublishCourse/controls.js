@@ -32,6 +32,7 @@ const controls = [
 				type        : 'asyncSelect',
 				placeholder : 'Select Instructor from list',
 				asyncKey    : 'partner_users',
+				valueKey    : 'user_id',
 				multiple    : true,
 				params      : {
 					filters: {

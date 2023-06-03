@@ -38,8 +38,8 @@ function SimilarCourses({ course_details }) {
 			<CourseCard
 				key={item.id}
 				data={item}
-				buttonContent={BUTTON_CONTENT_MAPPING[item.state || 'default']}
-				handleClick={GET_LINK_MAPPINGS[item.state || 'default']}
+				buttonContent={BUTTON_CONTENT_MAPPING[item.state] || BUTTON_CONTENT_MAPPING.default}
+				handleClick={GET_LINK_MAPPINGS[item.state] || GET_LINK_MAPPINGS.default}
 				fetchList={fetchList}
 			/>
 		),

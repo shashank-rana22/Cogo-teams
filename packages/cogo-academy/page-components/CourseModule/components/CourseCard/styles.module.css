@@ -172,3 +172,13 @@
 	font-weight: 600;
 	color: #849e4c;
 }
+
+.info_container {
+	font-size: 12px;
+	color: #828282;
+}
+
+.info {
+	align-items: center;
+	display: flex;
+}
