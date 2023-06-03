@@ -35,7 +35,7 @@ function UpdateCustomerInvoice(props) {
 
 	const finalControls = useMemo(() => Object.values(formControls).flat(), []);
 
-	const shipperTradePartyPanNumber = tradePartnerData?.[0]?.trade_partner_details?.registration_number;
+	const shipperTradePartyPanNumber = tradePartnerData?.list?.[0]?.trade_partner_details?.registration_number;
 
 	const { data: customData } = useGetShipmentFortigoTripDetail({
 		defaultParams: {
@@ -64,7 +64,6 @@ function UpdateCustomerInvoice(props) {
 			invoice_combination_id : invoice?.id,
 		});
 		apiTrigger(formatValues);
-		console.log('onSubmit', formatValues);
 	};
 
 	const handleFormSubmit = () => {

@@ -35,8 +35,8 @@ function useListShipmentTradePartners({
 
 	return {
 		loading,
-		refetch : getTradePartners,
-		data    : data?.list,
+		refetch: getTradePartners,
+		data,
 	};
 }
 
