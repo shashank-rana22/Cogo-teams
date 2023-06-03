@@ -9,9 +9,9 @@ const useFilterContent = ({ params, setParams }) => {
 
 	const formProps = useForm({ defaultValues: { status: 'pending' } });
 
-	const [filters, setFilters] = useState(formProps.getValues());
-
 	const { reset, getValues } = formProps;
+
+	const [filters, setFilters] = useState(getValues());
 
 	useEffect(() => {
 		if (!isEmpty(filters)) {
