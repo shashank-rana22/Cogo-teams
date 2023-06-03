@@ -1,4 +1,4 @@
-import { Button, cl } from '@cogoport/components';
+import { Button, cl, Toast } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
@@ -63,17 +63,45 @@ function BreakdownDetails({
 	);
 
 	const save_card_margins = async () => {
-		const response = await updateMargin({
-			editedMargins,
-			convenienceDetails,
-			rfq_rate_card_id,
-		});
-
-		if (response?.status === 200) {
+		try {
+			await updateMargin({
+				editedMargins,
+				convenienceDetails,
+				rfq_rate_card_id,
+			});
 			setShowPrice({});
-			refetchRateCards({ rfq_id });
-			getRfqsForApproval();
+			await refetchRateCards({ rfq_id });
+			await getRfqsForApproval();
+		} catch (error) {
+			Toast.error(error?.data);
 		}
+	};
+
+	const currencyConversion = (item) => {
+		const serviceKey = item?.id;
+		const serviceEditedMargins = editedMargins?.[serviceKey];
+
+		const totalDisplay = displayTotal(
+			{
+
+				lineItems     : item?.line_items || [],
+				editedMargins : serviceEditedMargins,
+				conversions,
+				toCurrency    : item?.total_price_currency,
+			},
+
+		);
+
+		total += convertCurrencyValue(
+			Number(Math.floor(totalDisplay)),
+			item?.total_price_currency,
+			rate?.total_price_currency,
+			conversions,
+		);
+		return {
+			totalDisplay,
+			serviceKey,
+		};
 	};
 
 	return (
@@ -81,22 +109,7 @@ function BreakdownDetails({
 			<Header margin_limit={margin_limit} />
 			<div>
 				{(rateDetails || []).map((item) => {
-					const serviceKey = item?.id;
-					const serviceEditedMargins = editedMargins?.[serviceKey];
-
-					const totalDisplay = displayTotal(
-						item?.line_items || [],
-						serviceEditedMargins,
-						conversions,
-						item?.total_price_currency,
-					);
-
-					total += convertCurrencyValue(
-						Number(Math.floor(totalDisplay)),
-						item?.total_price_currency,
-						rate?.total_price_currency,
-						conversions,
-					);
+					const { totalDisplay, serviceKey } = currencyConversion(item);
 
 					return (
 						<ServiceMargin

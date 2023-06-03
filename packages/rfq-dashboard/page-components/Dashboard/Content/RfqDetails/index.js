@@ -33,12 +33,12 @@ function RfqDetails(props) {
 
 				<div>
 					<EmptyState
-						height="250px"
-						width="400px"
+						height="250"
+						width="400"
 						flexDirection="column"
 						alignItems="center"
 						emptyText="Data Not Found"
-						textSize="20px"
+						textSize="20"
 					/>
 				</div>
 			</div>

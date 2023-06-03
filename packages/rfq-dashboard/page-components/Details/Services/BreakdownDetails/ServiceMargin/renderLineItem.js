@@ -12,22 +12,22 @@ function RenderLineItem({
 	editedMargins,
 	setEditedMargins,
 }) {
-	const handleChangeOnEditMargin = (v) => {
-		setEditedMargins((m) => {
-			const newM = { ...m };
-			const { serviceKey, ...rest } = v;
-			if (!newM[serviceKey]) {
-				newM[serviceKey] = [];
+	const handleChangeOnEditMargin = (values) => {
+		setEditedMargins((margin) => {
+			const newMargin = { ...margin };
+			const { serviceKey, ...rest } = values;
+			if (!newMargin[serviceKey]) {
+				newMargin[serviceKey] = [];
 			}
-			const codeIndex = newM[serviceKey].findIndex(
+			const codeIndex = newMargin[serviceKey].findIndex(
 				(mar) => mar?.code === rest?.code,
 			);
 			if (codeIndex > -1) {
-				newM[serviceKey][codeIndex] = rest;
+				newMargin[serviceKey][codeIndex] = rest;
 			} else {
-				newM[serviceKey].push(rest);
+				newMargin[serviceKey].push(rest);
 			}
-			return newM;
+			return newMargin;
 		});
 	};
 
@@ -51,15 +51,6 @@ function RenderLineItem({
 		},
 	});
 
-	const finalPrice = (
-		<div className={styles.container} style={{ width: getWidth(2.0) }}>
-			<Margin
-				item={lineItem}
-				editedDemandMargin={editedMargins?.[serviceKey]?.[codeIndex] || {}}
-			/>
-		</div>
-	);
-
 	return (
 		<div className={styles.row}>
 			<div className={styles.col} style={{ width: getWidth(2.5) }}>{lineItem?.name}</div>
@@ -72,7 +63,15 @@ function RenderLineItem({
 					marginType="demand"
 				/>
 			</div>
-			<div className={styles.col} style={{ width: getWidth(2), paddingLeft: '6px' }}>{finalPrice}</div>
+			<div className={styles.col} style={{ width: getWidth(2), paddingLeft: '6px' }}>
+				<div className={styles.container} style={{ width: getWidth(2.0) }}>
+					<Margin
+						item={lineItem}
+						editedDemandMargin={editedMargins?.[serviceKey]?.[codeIndex] || {}}
+					/>
+				</div>
+
+			</div>
 		</div>
 	);
 }

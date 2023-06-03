@@ -7,7 +7,7 @@ function EmptyPortsSection() {
 	return (
 		<div className={styles.container}>
 			<img
-				src={GLOBAL_CONSTANTS.empty_port}
+				src={GLOBAL_CONSTANTS.image_url.empty_port}
 				alt="empty port"
 				className={styles.empty_chat_image}
 			/>

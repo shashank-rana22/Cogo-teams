@@ -23,12 +23,13 @@ export const convertCurrencyValue = (
 	return (inBase / (currencies?.[toCurrency] || 1)) * fxFees;
 };
 
-export const displayTotal = (
+export const displayTotal = ({
 	lineItems,
 	editedMargins,
 	conversions,
 	toCurrency,
-) => {
+
+}) => {
 	let total = 0;
 
 	(lineItems || []).forEach((line_item) => {

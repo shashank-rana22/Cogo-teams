@@ -1,4 +1,4 @@
-export const getformattedDuration = (date) => {
+export const getFormattedDuration = (date) => {
 	if (!date) return null;
 
 	const date1 = new Date(date);

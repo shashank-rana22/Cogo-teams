@@ -36,23 +36,6 @@ function ServiceMargin({
 	totalDisplay,
 	setEditedMargins = () => {},
 }) {
-	const service_details = detail?.service_details?.[item?.id];
-
-	const totalDisplayString = formatAmount({
-		amount   : totalDisplay,
-		currency : item.total_price_currency,
-		options  : {
-			style                 : 'currency',
-			currencyDisplay       : 'code',
-			maximumFractionDigits : 0,
-		},
-	});
-
-	const fclLocalEmpty =		item?.line_items?.length === 0
-		&& (item?.service_type === 'fcl_freight_local_service'
-			|| item?.service_type === 'fcl_freight_local'
-			|| item?.service_type === 'air_freight_local');
-
 	const renderServiceType = (itm, serviceDetails) => {
 		const serviceName = item.service_name
 			? item?.service_name
@@ -79,6 +62,25 @@ function ServiceMargin({
 		}
 		return startCase(serviceName || '');
 	};
+
+	const service_details = detail?.service_details?.[item?.id];
+
+	const totalDisplayString = formatAmount({
+		amount   : totalDisplay,
+		currency : item.total_price_currency,
+		options  : {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 0,
+		},
+	});
+
+	const fclLocalEmpty = item?.line_items?.length === 0
+	&& ([
+		'fcl_freight_local_service',
+		'fcl_freight_local',
+		'air_freight_local']
+		.includes(item?.service_type));
 
 	return (
 		<div className={styles.container}>

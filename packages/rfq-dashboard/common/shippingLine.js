@@ -31,7 +31,7 @@ const TITLE_MAPPING = {
 };
 
 const shippingLine = (search_type, rate) => {
-	const name = (rate[freightProvider[search_type]] || {})?.short_name;
+	const name = (getByKey(rate, freightProvider[search_type]) || {})?.short_name;
 	const shipping_line = name ? `(${name})` : '';
 	const title = TITLE_MAPPING[search_type];
 	return `${title} ${shipping_line}`;

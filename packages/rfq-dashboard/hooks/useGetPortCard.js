@@ -8,18 +8,18 @@ import useUpdateRfqRateMargin from './useUpdateRfqRateMargin';
 const COMMODITY_MAPPING = ['cargo_weight_per_container', 'commodity',
 	'container_size', 'container_type', 'containers_count'];
 
-const ICONMAPPING = {
+const ICON_MAPPING = {
 	fcl_freight: {
-		service_component : IcCFcl,
-		service_text      : 'FCL',
+		service_icon  : IcCFcl,
+		service_label : 'FCL',
 	},
 	lcl_freight: {
-		service_component : IcCLcl,
-		service_text      : 'LCL',
+		service_icon  : IcCLcl,
+		service_label : 'LCL',
 	},
 	air_freight: {
-		service_component : IcCAir,
-		service_text      : 'AIR',
+		service_icon  : IcCAir,
+		service_label : 'AIR',
 	},
 };
 
@@ -28,8 +28,8 @@ const useGetPortCard = ({ props }) => {
 
 	const [showPrice, setShowPrice] = useState({});
 	const [editedMargins, setEditedMargins] = useState({});
-
 	const [convenienceDetails, setConvenienceDetails] = useState({});
+
 	const {
 		getRfqRateCardDetails, rfq_card_loading,
 		rate_card_details_data,
@@ -81,8 +81,8 @@ const useGetPortCard = ({ props }) => {
 		rate_card_details,
 	});
 
-	const Component = ICONMAPPING[service_type].service_component;
-	const iconText = ICONMAPPING[service_type].service_text;
+	const Component = ICON_MAPPING?.[service_type]?.service_component;
+	const iconText = ICON_MAPPING?.[service_type]?.service_text;
 
 	return {
 		loading,

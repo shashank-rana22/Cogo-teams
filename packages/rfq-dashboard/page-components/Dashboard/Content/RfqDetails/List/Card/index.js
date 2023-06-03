@@ -7,7 +7,7 @@ import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
 import { SERVICE_MAPPING } from '../../../../../../constants';
-import { getformattedDuration } from '../../../../../../utils/getFormattedDuration';
+import { getFormattedDuration } from '../../../../../../utils/getFormattedDuration';
 
 import styles from './styles.module.css';
 
@@ -67,7 +67,7 @@ function Card({ item, handleCheck, checkedItems }) {
 							<div className={styles.primary_tag}>
 								Last Shipment :
 								{' '}
-								{getformattedDuration(item?.importer_exporter?.bookings_completed_last_date)}
+								{getFormattedDuration(item?.importer_exporter?.bookings_completed_last_date)}
 								{' '}
 								Ago
 							</div>

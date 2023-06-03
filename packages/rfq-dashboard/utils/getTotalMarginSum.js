@@ -3,18 +3,14 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { convertCurrencyValue } from './dynamicValues';
 
 function getTotalMarginSum({ editedMargins = {}, currency_conversion, rate }) {
-	let totalAmount = 0;
+	const combinedLineItems = Object.values(editedMargins || {}).reduce((acc, itm) => [...acc, ...itm], []);
 
-	let combinedLineItems = Object.values(editedMargins || {}).reduce((acc, itm) => [...acc, ...itm], []);
-
-	combinedLineItems.forEach((itm) => {
-		totalAmount += convertCurrencyValue(
-			itm?.value,
-			itm?.currency,
-			rate?.total_price_currency,
-			currency_conversion,
-		);
-	});
+	const totalAmount = combinedLineItems.reduce((acc, curr) => acc + convertCurrencyValue(
+		curr?.value,
+		curr?.currency,
+		rate?.total_price_currency,
+		currency_conversion,
+	), 0);
 
 	const total_margin_by_kam = formatAmount({
 		amount   : totalAmount,
