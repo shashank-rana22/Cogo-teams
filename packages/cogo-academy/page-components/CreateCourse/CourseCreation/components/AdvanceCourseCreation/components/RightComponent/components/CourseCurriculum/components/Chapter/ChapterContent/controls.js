@@ -83,7 +83,7 @@ const controls = [
 		elementType   : 'fileUpload',
 		multiple      : false,
 		draggable     : true,
-		dropareaProps : { heading: 'Upload Now', subHeading: '(only .xlsx or .csv formats)' },
+		dropareaProps : { heading: 'Upload Now', subHeading: 'all formats' },
 	},
 	{
 		name               : 'external_link',
