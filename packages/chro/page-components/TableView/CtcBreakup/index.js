@@ -52,7 +52,7 @@ function CtcBreakup({ metadata }) {
 								) : null}
 								{monthlyValue != null ? (
 									<div style={{ width: '20%' }}>
-										{monthlyValue.toFixed(2) ?? '______'}
+										{monthlyValue?.toFixed(2) ?? '______'}
 									</div>
 								) : null}
 							</div>

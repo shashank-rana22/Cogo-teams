@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import {
 	InputController, SelectController, MobileNumberController, useForm, DatepickerController,
 } from '@cogoport/forms';
@@ -72,7 +72,7 @@ function FormComponent({ setActivePage }) {
 
 			setActivePage(res?.data?.id);
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(error.response?.data?.message);
 		}
 	};
 
