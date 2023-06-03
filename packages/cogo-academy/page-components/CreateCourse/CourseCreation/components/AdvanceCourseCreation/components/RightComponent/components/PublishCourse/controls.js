@@ -77,7 +77,7 @@ const controls = [
 		type          : 'fileUpload',
 		multiple      : false,
 		draggable     : true,
-		dropareaProps : { heading: 'Upload Image', subHeading: 'Only Jpeg, Jpg files (max lim?)' },
+		dropareaProps : { heading: 'Upload Image', subHeading: 'Only Jpeg, Jpg files' },
 		accept        : '.jpeg,.jpg',
 		rules         : { required: { value: true, message: 'This is required' } },
 	},
