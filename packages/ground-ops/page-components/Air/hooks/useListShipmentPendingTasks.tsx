@@ -68,9 +68,10 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 					task                : ['upload_airway_bill'],
 				},
 				amendment: {
-					status       : 'pending',
-					task         : ['amend_draft_airway_bill', 'amend_draft_house_airway_bill'],
-					documentType : ['draft_airway_bill', 'draft_house_airway_bill'],
+					assignedStakeholder : 'service_ops2_docs',
+					status              : 'pending',
+					task                : ['amend_draft_airway_bill', 'amend_draft_house_airway_bill'],
+					documentType        : ['draft_airway_bill', 'draft_house_airway_bill'],
 				},
 			};
 			if (searchValue) {
