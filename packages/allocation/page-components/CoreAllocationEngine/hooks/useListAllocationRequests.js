@@ -367,7 +367,7 @@ const useListAllocationRequests = () => {
 			key      : 'action',
 			Header   : 'Action',
 			accessor : (item) => {
-				const { id } = item;
+				const { id, status: requestStatus } = item;
 
 				return (
 					<div className={styles.content_container}>
@@ -389,7 +389,7 @@ const useListAllocationRequests = () => {
 						>
 							<div
 								className={styles.svg_container}
-								style={(checkedRowsId.includes(id) || params.filters?.status !== 'pending')
+								style={(checkedRowsId.includes(id) || requestStatus !== 'pending')
 									? { pointerEvents: 'none' } : {}}
 							>
 								<IcMOverflowDot
