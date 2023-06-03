@@ -4,6 +4,7 @@ import React, { useState, useContext } from 'react';
 
 import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
 import AddInvoicingParty from '../../../../AdditionalServices/components/AddIp/AddInvoicingParty';
+import ClickableDiv from '../../../../ClickableDiv';
 import getModifiedInvoicingParties from '../../../helpers/getModifiedInvoicingParties';
 
 import ListInvoicePreferences from './ListInvoicePreferences';
@@ -76,14 +77,12 @@ function EditInvoicePreference({
 					<Modal.Header title="EDIT INVOICING PREFERENCE" />
 
 					<Modal.Body className={styles.form}>
-						<div
+						<ClickableDiv
 							className={styles.full_width_btn}
 							onClick={() => setAddInvoicingParty(true)}
-							tabIndex={0}
-							role="button"
 						>
 							+ Add Invoicing Party
-						</div>
+						</ClickableDiv>
 
 						<ListInvoicePreferences
 							shipmentData={shipment_data}

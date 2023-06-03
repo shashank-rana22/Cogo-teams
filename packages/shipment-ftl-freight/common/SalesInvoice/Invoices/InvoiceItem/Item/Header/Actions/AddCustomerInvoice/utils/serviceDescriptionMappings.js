@@ -2,8 +2,6 @@ import getGeoConstants from '@cogoport/globalization/constants/geo';
 
 const geo = getGeoConstants();
 
-console.log('geo', geo);
-
 // export const customerToServiceDescription = {
 // 	[geo.uuid.fortigo_agencies_mapping.fortigo_network_logistics]:
 // 		'Goods Transport Agency - FCM',

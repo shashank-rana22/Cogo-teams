@@ -1,13 +1,13 @@
 import { Checkbox } from '@cogoport/components';
 import React from 'react';
 
+import ClickableDiv from '../../../../../../../ClickableDiv';
+
 import styles from './styles.module.css';
 
 function Confirmation({ value = false, setValue = () => {} }) {
 	return (
-		<div
-			role="button"
-			tabIndex={0}
+		<ClickableDiv
 			className={styles.container}
 			onClick={() => setValue(!value)}
 		>
@@ -17,7 +17,7 @@ function Confirmation({ value = false, setValue = () => {} }) {
 				I have verified the invoice and ensured that all the services taken &
 				charges incurred during the shipment have been billed to the customer
 			</div>
-		</div>
+		</ClickableDiv>
 	);
 }
 

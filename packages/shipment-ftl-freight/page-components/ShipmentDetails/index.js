@@ -7,6 +7,7 @@ import { Tracking } from '@cogoport/surface-modules';
 import { useRouter } from 'next/router';
 import React, { useMemo, useState, useEffect, useCallback } from 'react';
 
+import CancelDetails from '../../common/CancelDetails';
 import Documents from '../../common/Documents';
 import Overview from '../../common/Overview';
 import PocSop from '../../common/PocSop';
@@ -18,15 +19,18 @@ import Timeline from '../../common/TimeLine';
 import useGetShipment from '../../hooks/useGetShipment';
 import useGetTimeLine from '../../hooks/useGetTimeline';
 import useServiceList from '../../hooks/useServiceList';
+import getStakeholderConfig from '../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
 function ShipmentDetails() {
 	const activeStakeholder = 'superadmin';
 	const router = useRouter();
+
+	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
 	const { get } = useGetShipment();
 
-	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
+	const [activeTab, setActiveTab] = useState('overview');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
@@ -43,7 +47,8 @@ function ShipmentDetails() {
 		...getTimeline,
 		...servicesGet,
 		activeStakeholder,
-	}), [get, servicesGet, getTimeline, activeStakeholder]);
+		stakeholderConfig,
+	}), [get, servicesGet, getTimeline, activeStakeholder, stakeholderConfig]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
@@ -106,9 +111,7 @@ function ShipmentDetails() {
 					</div>
 				</div>
 
-				{/* {shipment_data?.state === 'cancelled' ? <CancelDetails /> : null} */}
-
-				{/* <DocumentHoldDetails /> */}
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
 				<div className={styles.header}>
 					<ShipmentHeader />
