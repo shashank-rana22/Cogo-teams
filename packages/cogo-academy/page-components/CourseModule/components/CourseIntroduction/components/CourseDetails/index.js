@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 const formatTime = (time, type) => (
 	<div>
-		{(time / 60).toFixed(0)}
+		{Math.floor(time / 60)}
 		&nbsp;
 		<b>Hour</b>
 		&nbsp;
