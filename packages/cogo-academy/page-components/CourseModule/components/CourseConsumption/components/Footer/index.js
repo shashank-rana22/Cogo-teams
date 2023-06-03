@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function Footer({
 	indexes, data, setIndexes, updateCourseProgress, loading,
-	getUserCourse, chapter = {}, editorValue, setEditorError, setChapter,
+	getUserCourse, chapter = {}, RichTextEditor, editorValue, setEditorValue, setEditorError, setChapter,
 }) {
 	return (
 		<div className={styles.container}>
@@ -87,7 +87,7 @@ function Footer({
 							themeType="accent"
 							loading={loading}
 							onClick={async () => {
-								const { id:current_chapter_id = '', content_type = '', is_updated = false } = chapter;
+								const { id:current_chapter_id = '', content_type, is_updated = false } = chapter;
 
 								if (content_type === 'assessment'
 								&& !editorValue.getEditorState().getCurrentContent().hasText()) {
@@ -105,6 +105,11 @@ function Footer({
 									});
 
 								const { id, user_progress_state } = nextChapterContent || {};
+
+								if (content_type === 'assessment') {
+									setEditorValue(RichTextEditor.createEmptyValue());
+									setEditorError(false);
+								}
 
 								await updateCourseProgress({
 									current_chapter_id,

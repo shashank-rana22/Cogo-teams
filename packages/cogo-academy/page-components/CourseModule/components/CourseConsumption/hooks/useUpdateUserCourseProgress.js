@@ -9,15 +9,13 @@ const useUpdateUserCourseProgress = ({ course_id, user_id }) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateCourseProgress = async ({ current_chapter_id, next_chapter_state, next_chapter_id }) => {
+	const updateCourseProgress = async (params) => {
 		try {
 			await trigger({
 				params: {
 					course_id,
 					user_id,
-					next_chapter_state,
-					current_chapter_id,
-					next_chapter_id,
+					...params,
 				},
 			});
 		} catch (error) {
