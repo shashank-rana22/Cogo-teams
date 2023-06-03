@@ -1,0 +1,68 @@
+.header {
+	display: flex;
+	padding: 16px 4px;
+	font-weight: 600;
+	border-bottom: 2px solid var(--color-accent-orange-2);
+}
+
+.jvnumb {
+	flex: 1.8;
+	width: calc(1.8*(100 / 12));
+}
+
+.jvtype {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.accdate {
+	display: flex;
+	flex: 1.5;
+	width: calc(1.5*(100 / 12));
+}
+
+.entity {
+	flex: 0.6;
+	width: calc(0.6*(100 / 12));
+}
+
+.journal {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.exrate {
+	flex: 1.2;
+	width: calc(1*(100 / 12));
+}
+
+.legcurr {
+	flex: 1.2;
+	width: calc(1*(100 / 12));
+}
+
+.accord {
+	flex: 0.2;
+	width: calc(0.2*(100 / 12));
+}
+
+.curr {
+	flex: 1;
+	width: calc(1*(100 / 12));
+}
+
+.sorticons {
+	display: flex;
+	flex-direction: column;
+	margin-left: 4px;
+}
+
+.dots {
+	flex: 0.3;
+	width: calc(0.3*(100 / 12));
+}
+
+.status {
+	flex: 1.2;
+	width: calc(1.2*(100 / 12));
+}
