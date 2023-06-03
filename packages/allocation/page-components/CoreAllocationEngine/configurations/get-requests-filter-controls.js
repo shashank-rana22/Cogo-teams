@@ -14,10 +14,10 @@ const controls = [
 		],
 	},
 	{
-		name     : 'status',
-		type     : 'chips',
-		label    : 'Request Status',
-		options  : [
+		name    : 'status',
+		type    : 'chips',
+		label   : 'Request Status',
+		options : [
 			{ value: 'pending', label: 'Pending' },
 			{ value: 'approved', label: 'Approved' },
 			{ value: 'rejected', label: 'Rejected' },
