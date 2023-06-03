@@ -32,8 +32,15 @@ const useFilterContent = ({ params, setParams }) => {
 
 		const values = {};
 		controls.forEach((control) => {
-			if (!isEmpty(data[control.name] || {})) {
-				values[control.name] = data?.[control.name];
+			const { name } = control;
+
+			if (!isEmpty(data[name] || {})) {
+				if (name === 'created_at') {
+					values.created_at_greater_than = data[name]?.startDate || undefined;
+					values.created_at_less_than = data[name]?.endDate || undefined;
+				} else {
+					values[name] = data[name];
+				}
 			}
 		});
 		setFilters(values);

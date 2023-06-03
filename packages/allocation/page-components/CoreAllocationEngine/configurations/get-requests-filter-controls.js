@@ -23,6 +23,12 @@ const controls = [
 			{ value: 'rejected', label: 'Rejected' },
 		],
 	},
+	{
+		name                  : 'created_at',
+		type                  : 'dateRangePicker',
+		label                 : 'Requested At',
+		isPreviousDaysAllowed : true,
+	},
 ];
 
 export default controls;

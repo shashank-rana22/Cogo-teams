@@ -286,6 +286,23 @@ const useListAllocationRequests = () => {
 			),
 		},
 		{
+			key      : 'updated_at',
+			Header   : 'Updated At',
+			accessor : ({ updated_at }) => (
+				<div>
+					{updated_at ? (
+						<div className={styles.created_date}>
+							{format(updated_at, 'dd MMM yyyy') || '___'}
+
+							<div className={styles.created_time}>
+								{format(updated_at, 'hh:mm aaa') || '___'}
+							</div>
+						</div>
+					) : '___'}
+				</div>
+			),
+		},
+		{
 			key      : 'reason',
 			Header   : 'Reason',
 			accessor : ({ reason }) => (
