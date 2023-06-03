@@ -32,7 +32,7 @@ const useListAllocationRequests = () => {
 		data_required                  : true,
 		organization_sub_type_required : true,
 		filters                        : {
-			status       : 'pending',
+			// status       : 'pending',
 			service_type : 'organization',
 			q            : searchQuery || undefined,
 		},

@@ -13,6 +13,16 @@ const controls = [
 			{ value: 'portfolio_manager', label: 'Portfolio Manager' },
 		],
 	},
+	{
+		name     : 'status',
+		type     : 'chips',
+		label    : 'Request Status',
+		options  : [
+			{ value: 'pending', label: 'Pending' },
+			{ value: 'approved', label: 'Approved' },
+			{ value: 'rejected', label: 'Rejected' },
+		],
+	},
 ];
 
 export default controls;

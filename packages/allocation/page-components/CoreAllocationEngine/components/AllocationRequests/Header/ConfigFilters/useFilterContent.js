@@ -7,9 +7,9 @@ import controls from '../../../../configurations/get-requests-filter-controls';
 const useFilterContent = ({ params, setParams }) => {
 	const [showFilters, setShowFilters] = useState(false);
 
-	const [filters, setFilters] = useState({});
+	const formProps = useForm({ defaultValues: { status: 'pending' } });
 
-	const formProps = useForm();
+	const [filters, setFilters] = useState(formProps.getValues());
 
 	const { reset, getValues } = formProps;
 
