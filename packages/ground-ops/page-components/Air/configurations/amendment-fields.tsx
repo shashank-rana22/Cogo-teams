@@ -3,24 +3,24 @@ const AmendmentFields = {
 		{
 			key   : 'serialId',
 			label : 'SID',
-			span  : 0.8,
+			span  : 3,
 			func  : 'handleSerialId',
 		},
 		{
 			key   : 'blCategory',
 			label : 'AWB Category',
-			span  : 1,
+			span  : 3,
 			func  : 'handleBlCategory',
 		},
 		{
 			key   : 'awbNumber',
 			label : 'AWB',
-			span  : 1.2,
+			span  : 3,
 		},
 		{
 			key   : 'status',
 			label : 'Status',
-			span  : 1,
+			span  : 3,
 			func  : 'handleStatus',
 		},
 	],
