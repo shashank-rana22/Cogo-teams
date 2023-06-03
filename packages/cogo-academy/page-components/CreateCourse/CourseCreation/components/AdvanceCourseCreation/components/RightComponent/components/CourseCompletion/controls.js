@@ -44,6 +44,21 @@ export const controls = [
 						label : 'only course content (pdf, doc, test within modules)',
 					},
 				],
+				rules: { required: { value: true, message: 'This is required' } },
+			},
+			{
+				label       : 'Select test from Assessment Module',
+				name        : 'test_id',
+				type        : 'asyncSelect',
+				placeholder : 'Select Test from list',
+				asyncKey    : 'list_tests',
+				params      : {
+					filters: {
+						status         : 'active',
+						current_status : 'active_test',
+					},
+				},
+				rules: { required: { value: true, message: 'This is required' } },
 			},
 			{
 				label       : 'Reward on Course Completion',
@@ -68,6 +83,7 @@ export const controls = [
 						label : 'Badge',
 					},
 				],
+				rules: { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},

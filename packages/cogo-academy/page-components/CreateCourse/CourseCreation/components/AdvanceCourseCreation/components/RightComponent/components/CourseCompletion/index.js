@@ -1,16 +1,17 @@
+/* eslint-disable no-nested-ternary */
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useImperativeHandle, forwardRef, useEffect } from 'react';
+import { useImperativeHandle, forwardRef, useEffect } from 'react';
 
 import { getFieldController } from '../../../../../../../../../commons/getFieldController';
 import CURRENT_TO_NEXT_MAPPING from '../../Header/CURRENT_TO_NEXT_MAPPING';
 
-import ConditionSelectComponent from './ConditionSelectComponent';
+// import ConditionSelectComponent from './ConditionSelectComponent';
 import { controls, selectControls } from './controls';
 import styles from './styles.module.css';
 import UploadComponent from './UploadComponent';
 
-const MAPPING = ['completion_criteria', 'completion_message', 'course_completion_rewards_details'];
+const MAPPING = ['completion_criteria', 'completion_message', 'course_completion_rewards_details', 'test_id'];
 
 const CERTIFICATE_MAPPING = ['certificate_name', 'signing_authority_sign_url', 'signing_authority_user_id'];
 
@@ -23,14 +24,17 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 		setValue,
 	} = useForm();
 
-	const [value, onChange] = useState([]);
-	const [show, setShow] = useState(false);
-	const [multiSelectedUser, setMultiSelectedUser] = useState([]);
-	const [multiSelectedEdit, setMultiSelectedEdit] = useState([]);
+	// const [value, onChange] = useState([]);
+	// const [show, setShow] = useState(false);
+	// const [multiSelectedUser, setMultiSelectedUser] = useState([]);
+	// const [multiSelectedEdit, setMultiSelectedEdit] = useState([]);
 
-	const onClose = () => setShow(false);
+	// const onClose = () => setShow(false);
 
-	const options = [];
+	// const options = [];
+
+	const watchData = watch();
+	const Criteria = watchData?.completion_criteria || [];
 
 	useImperativeHandle(ref, () => ({
 		handleSubmit: () => {
@@ -44,6 +48,7 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 					course_completion_value,
 					course_completion_unit,
 					course_completion_rewards_details = [],
+					test_id,
 				} = values || {};
 
 				return {
@@ -52,6 +57,8 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 						id,
 						completion_message,
 						course_completion_rewards_details,
+						test_ids:
+						(Criteria.includes('test') || Criteria.includes('timed_test')) ? [test_id] : null,
 						course_completion_duration: {
 							course_completion_value: Number(course_completion_value),
 							course_completion_unit,
@@ -80,7 +87,7 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 
 	useEffect(() => {
 		if (!isEmpty(data)) {
-			const { course_completion_duration, course_certificates = [] } = data || {};
+			const { course_completion_duration, course_certificates = [], tests = [] } = data || {};
 
 			const { course_completion_unit, course_completion_value } = course_completion_duration || {};
 
@@ -98,9 +105,14 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 				if (data[item] && !isEmpty(data[item])) {
 					setValue(item, data[item]);
 				}
+
+				if (item === 'test_id' && !isEmpty(tests[0])) {
+					setValue('test_id', tests[0].id);
+				}
 			});
 
 			setValue('course_completion_unit', course_completion_unit);
+
 			setValue('course_completion_value', course_completion_value ? course_completion_value.toString() : '');
 		}
 	}, [data, setValue]);
@@ -108,11 +120,11 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
-				const { name, label, type, subControls = [], subLabel = '', rules = {} } = controlItem || {};
+				const { name, label, type, subControls = [], subLabel = '' } = controlItem || {};
 
 				if (type === 'groupSelect') {
 					return (
-						<div className={styles.group_container}>
+						<div key={name} className={styles.group_container}>
 							<div className={`${styles.group_select_container} ${styles[name]}`}>
 								{subControls.map((subControlItem) => {
 									const {
@@ -128,18 +140,44 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 											key={subControlName}
 											className={`${styles.form_group} ${styles[subControlName]}`}
 										>
-											<div className={styles.label}>
-												{subControlLabel}
-												{!isEmpty(rules) ? <sup className={styles.superscipt}>*</sup> : null}
-											</div>
+											{ (Criteria.includes('test')
+												|| Criteria.includes('timed_test'))
+												? (
+													<div className={styles.label}>
+														{subControlLabel}
+														<sup className={styles.superscipt}>*</sup>
+													</div>
+												) : (
+													(subControlName
+														=== 'test_id') ? null : (
+															<div className={styles.label}>
+																{subControlLabel}
+																<sup className={styles.superscipt}>*</sup>
+															</div>
+														)
+												)}
 
 											<div className={`${styles.input_group} ${styles[subControlName]}`}>
-												<SubControlElement
-													{...subControlItem}
-													key={subControlName}
-													control={control}
-													id={`${subControlName}_input`}
-												/>
+												{!(Criteria.includes('test')
+												|| Criteria.includes('timed_test'))
+													? 	null : subControlName === 'test_id' ? (
+														<SubControlElement
+															{...subControlItem}
+															key={subControlName}
+															control={control}
+															id={`${subControlName}_input`}
+														/>
+													)
+														: null}
+												{ !(subControlName === 'test_id') ? (
+													<SubControlElement
+														{...subControlItem}
+														key={subControlName}
+														control={control}
+														id={`${subControlName}_input`}
+													/>
+												)
+													: null}
 											</div>
 
 											{errors?.[subControlName]?.message ? (
@@ -149,11 +187,12 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 											) : null}
 
 										</div>
+
 									);
 								})}
 							</div>
 
-							<ConditionSelectComponent
+							{/* <ConditionSelectComponent
 								options={options}
 								onClose={onClose}
 								multiSelectedEdit={multiSelectedEdit}
@@ -165,7 +204,7 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 								value={value}
 								onChange={onChange}
 								watch={watch}
-							/>
+							/> */}
 						</div>
 					);
 				}

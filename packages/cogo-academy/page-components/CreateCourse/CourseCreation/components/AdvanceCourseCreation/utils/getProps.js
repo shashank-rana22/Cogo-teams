@@ -20,6 +20,7 @@ const getProps = (data = {}) => ({
 		frequency                : data.frequency,
 	},
 	completion: {
+		tests                             : data.tests,
 		completion_criteria               : data.completion_criteria,
 		completion_message                : data.completion_message,
 		course_completion_duration        : data.course_completion_duration,

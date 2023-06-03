@@ -535,6 +535,20 @@ function asyncListCourseCategories() {
 	};
 }
 
+function asyncListTests() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_tests',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -579,4 +593,5 @@ export {
 	asyncListFAQTopics,
 	asyncListFAQTags,
 	asyncListCourseCategories,
+	asyncListTests,
 };
