@@ -134,6 +134,10 @@ const GLOBAL_CONSTANTS = {
 
 	},
 	one_mb: 1048576,
+
+	regex_patterns: {
+		number: /^[+-]?\d*\.?\d+$/,
+	},
 };
 
 export default GLOBAL_CONSTANTS;
