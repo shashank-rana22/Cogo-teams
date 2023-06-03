@@ -1,9 +1,11 @@
 import { Button, Checkbox, Popover, Tooltip, Badge, Pill } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format, isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import Actions from '../components/AllocationRequests/List/Actions';
@@ -276,10 +278,18 @@ const useListAllocationRequests = () => {
 				<div>
 					{created_at	 ? (
 						<div className={styles.created_date}>
-							{format(created_at, 'dd MMM yyyy') || '___'}
+							{formatDate({
+								date       : created_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							}) || '___'}
 
 							<div className={styles.created_time}>
-								{format(created_at, 'hh:mm aaa') || '___'}
+								{formatDate({
+									date       : created_at,
+									timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+									formatType : 'time',
+								}) || '___'}
 							</div>
 						</div>
 					) : '___'}
@@ -293,10 +303,18 @@ const useListAllocationRequests = () => {
 				<div>
 					{updated_at ? (
 						<div className={styles.created_date}>
-							{format(updated_at, 'dd MMM yyyy') || '___'}
+							{formatDate({
+								date       : updated_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							}) || '___'}
 
 							<div className={styles.created_time}>
-								{format(updated_at, 'hh:mm aaa') || '___'}
+								{formatDate({
+									date       : updated_at,
+									timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+									formatType : 'time',
+								}) || '___'}
 							</div>
 						</div>
 					) : '___'}
