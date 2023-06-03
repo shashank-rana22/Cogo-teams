@@ -2,3 +2,16 @@
     font-weight: 600;
     font-size: 20px;
 }
+.container{
+    background: #FDEBE9;
+    padding: 8px;
+    width: 8%;
+    cursor: pointer;
+    font-weight: 600;
+    margin-top: 8px;
+    margin-bottom: 8px;
+    border-radius: 4px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}

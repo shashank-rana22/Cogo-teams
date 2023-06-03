@@ -13,7 +13,7 @@ const MAX_LENGTH = 16;
 function CardList({ itemData }) {
 	const {
 		serial_id = '', origin_port = {}, destination_port = {},
-		commodity = '', cargo_value_currency, cargo_value, trade_type,
+		commodity = '', cargo_value_currency, cargo_value, trade_type, reason = [], potential_charge,
 	} = itemData || {};
 	const { display_name = '', port_code = '' } = origin_port || {};
 	const {
@@ -78,22 +78,34 @@ function CardList({ itemData }) {
 						<div className={styles.vr} />
 					</div>
 					<div className={styles.column2}>
-						<div className={styles.container_pickup}>
+						{reason.map((item) => (
+							<div className={styles.container_pickup} key={item}>
+								<div className={styles.not_picked}>
+									{startCase(item)}
+								</div>
+								<div className={styles.potential_text}>
+									Potential Charge:
+									{' '}
+									{potential_charge}
+								</div>
+							</div>
+						))}
+						{/* <div className={styles.container_pickup}>
 							<div className={styles.not_picked}>
 								Container Not Picked Up
 							</div>
 							<div className={styles.potential_text}>
 								Potential Charge: USD 120
 							</div>
-						</div>
-						<div>
+						</div> */}
+						{/* <div>
 							<div className={styles.not_picked}>
 								Container Not Picked Up
 							</div>
 							<div className={styles.potential_text}>
 								Potential Charge: USD 120
 							</div>
-						</div>
+						</div> */}
 					</div>
 					<div className={styles.right_border}>
 						<div className={styles.vr} />
@@ -103,7 +115,7 @@ function CardList({ itemData }) {
 							<div className={styles.commodity_text}>
 								Commodity :
 								{' '}
-								{commodity}
+								{commodity || '-'}
 							</div>
 							<div className={styles.commodity_text}>
 								Cargo Value :

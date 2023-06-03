@@ -465,6 +465,18 @@ function asyncQuotaList() {
 	};
 }
 
+function asyncCommoditiesList() {
+	return {
+		labelKey     : 'description',
+		valueKey     : 'id',
+		endpoint     : 'saas/hs-code/list',
+		initialCall  : true,
+		authkey      : 'get_saas_hs_code_list',
+		microService : 'business_finance',
+		searchByq    : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -503,4 +515,5 @@ export {
 	asyncPlanPricingList,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncCommoditiesList,
 };

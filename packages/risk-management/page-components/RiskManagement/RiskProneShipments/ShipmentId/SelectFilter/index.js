@@ -1,4 +1,4 @@
-import { Select, Button } from '@cogoport/components';
+import { Select } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import React, { useState } from 'react';
 
@@ -26,7 +26,7 @@ const OPTIONS = [
 
 function SelectFilter({ filters, setFilters, activeTab }) {
 	const OPTION = optionsMap[activeTab] || [];
-	const { originValue, destinationValue, reason } = filters || {};
+	const { originValue, destinationValue, reason, hsCode } = filters || {};
 	const [cargoValue, setCargoValue] = useState('');
 
 	return (
@@ -119,10 +119,25 @@ function SelectFilter({ filters, setFilters, activeTab }) {
 					/>
 				</div>
 				<div className={styles.select}>
+					<AsyncSelect
+						name="hsCodeId"
+						asyncKey="hs_code_list"
+						size="sm"
+						isClearable
+						placeholder="Commodity Type"
+						defaultOptions="true"
+						value={hsCode}
+						onChange={(e) => setFilters({
+							...filters,
+							hsCode: e || undefined,
+						})}
+					/>
+				</div>
+				{/* <div className={styles.select}>
 					<Button size="md" themeType="secondary">
 						+ More Filters
 					</Button>
-				</div>
+				</div> */}
 			</div>
 		</div>
 	);

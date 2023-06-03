@@ -15,7 +15,7 @@
     width: 30%;
 }
 .vr{
-    background: #BDBDBD;
+    background:var(--color-secondary-greyscale-4);
     width: 1px;
     height: 50px;
     @media(max-width:1068px){
@@ -23,7 +23,7 @@
         width: 100%;
         margin-top: 12px;
         margin-bottom: 12px;
-        background:#F68B21;
+        background:var(--color-accent-orange-2);
     }
 }
 .container{
@@ -73,13 +73,13 @@
     }
 }
 .hr{
-    background:#F68B21;
+    background:var(--color-accent-orange-2);
     height: 1px;
     width: 100%;
     margin-top: 16px;
 }
 .not_picked{
-    background: #F8AEA8;
+    background:var(--color-primary-error-red-4);
     border-radius: 6px;
     display: flex;
     flex-direction: row;
@@ -93,10 +93,10 @@
     font-size: 10px;
     display: flex;
     padding: 4px;
-    color: #EE3425;
+    color: var(--color-primary-error-red-2);
 }
 .commodity_text{
-    background: #C4DC91;
+    background:var(--color-tertiary-success-green-3);
     border-radius: 6px;
     display: flex;
     align-items: center;
@@ -143,8 +143,8 @@
     width: 30%;
     align-items: center;
     justify-content: space-between;
-    margin-left: 12px;
-    margin-right: 12px;
+    /* margin-left: 12px;
+    margin-right: 12px; */
     @media(max-width:1068px){
         display: flex;
         width: 100%;
@@ -189,7 +189,7 @@
     margin-top: 16px;
 }
 .trade{
-    background: #F8F2E7;
+    background:var(--color-tertiary-beige-4);
     border-radius: 4px;
     padding: 0px 4px 0px 4px;
     width: fit-content;

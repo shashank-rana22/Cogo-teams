@@ -14,8 +14,9 @@ const useGetListRiskProne = ({ activeTab }) => {
 		originValue      : undefined,
 		destinationValue : undefined,
 		reason           : undefined,
+		hsCode           : undefined,
 	});
-	const { pageIndex, search, originValue, destinationValue, reason } = filters || {};
+	const { pageIndex, search, originValue, destinationValue, reason, hsCode } = filters || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
@@ -39,14 +40,14 @@ const useGetListRiskProne = ({ activeTab }) => {
 						additional_methods : ['pagination'],
 						page_limit         : 10,
 						page               : pageIndex,
-
+						commodity_type     : hsCode,
 					},
 				});
 			} catch (err) {
 				Toast.error(err.message);
 			}
 		})();
-	}, [trigger, originValue, destinationValue, reason, query, activeTab, pageIndex]);
+	}, [trigger, originValue, destinationValue, reason, query, activeTab, pageIndex, hsCode]);
 
 	useEffect(() => {
 		getDahboardData();
