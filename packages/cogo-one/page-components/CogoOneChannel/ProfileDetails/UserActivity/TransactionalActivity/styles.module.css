@@ -68,9 +68,11 @@
 }
 
 .booking_id {
-	font-size: 14px;
-	font-weight: 500;
-	color: #4f4f4f;
+	font-size: 12px;
+	font-weight: 600;
+	color: #0645ad;
+	text-decoration: underline;
+	cursor: pointer;
 }
 
 .port_pair {

@@ -1,0 +1,30 @@
+[
+	{
+		"header" : "Origin Location",
+		"span"   : 1.2
+	},
+	{
+		"header" : "Destination Location",
+		"span"   : 1.2
+	},
+	{
+		"header" : "BN Expiry Date",
+		"span"   : 0.8
+	},
+	{
+		"header" : "Containers",
+		"span"   : 0.8
+	},
+	{
+		"header" : "Shipping Line",
+		"span"   : 1.1
+	},
+	{
+		"header" : "Supplier",
+		"span"   : 1.1
+	},
+	{
+		"header" : "Sailing Date",
+		"span"   : 0.8
+	}
+]

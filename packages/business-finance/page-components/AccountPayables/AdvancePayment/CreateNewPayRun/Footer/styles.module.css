@@ -1,0 +1,63 @@
+.container {
+	position: fixed;
+	bottom: 0;
+	z-index: 1px;
+	display: flex;
+	justify-content: space-between;
+	width: 95%;
+	padding: 16px;
+	margin-left: -36px;
+	background: #fff;
+	box-shadow: 0 0 33px rgb(0 0 0 / 25%);
+}
+
+.amount {
+	display: flex;
+	align-items: center;
+	margin-left: 4px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #f68b21;
+	text-align: center;
+}
+
+.button_container {
+	display: flex;
+	margin-right: 4px;
+}
+
+.view_button {
+	margin-left: 16px;
+}
+
+.text {
+	display: flex;
+	align-items: center;
+	font-size: 22px;
+	font-weight: 500;
+	color: #333;
+	text-align: center;
+}
+
+.amount_container {
+	display: flex;
+	margin-left: 16px;
+}
+
+.currency {
+	display: flex;
+	margin-top: 9px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #f68b21;
+}
+
+.sid_count {
+	display: flex;
+	gap: 4px;
+	margin-top: 9px;
+	margin-left: 16px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #333;
+}

@@ -1,0 +1,21 @@
+.flex_box {
+	display: flex;
+}
+
+.styled_div {
+	padding: 4px;
+	border: 1px #333 solid;
+}
+
+.block {
+	padding: 4px;
+	border: 1px #333 solid;
+}
+
+.styled_text {
+	font-family: monospace;
+	font-size: 10px;
+	line-height: 1;
+	word-wrap: break-word;
+	white-space: pre-wrap;
+}

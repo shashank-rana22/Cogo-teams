@@ -3,7 +3,7 @@ import { Controller } from 'react-hook-form';
 
 function RadioGroupController(props) {
 	const {
-		name, control, value, rules, ...rest
+		name, control, rules, value, ...rest
 	} = props;
 
 	return (
@@ -13,7 +13,7 @@ function RadioGroupController(props) {
 			name={name}
 			defaultValue={value}
 			rules={rules}
-			render={({ field: { onChange, onBlur, value: newValue } }) => (
+			render={({ field: { onChange, onBlur, value:newValue } }) => (
 				<RadioGroup
 					{...rest}
 					key={rest.id}

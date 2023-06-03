@@ -1,0 +1,141 @@
+.container {
+	display: flex;
+}
+
+.tile {
+	flex: 1;
+	padding: 8px 16px;
+	margin-right: 12px;
+	background-color: #fff;
+	border-radius: 6px;
+
+	&:last-child {
+		margin-right: 0;
+	}
+}
+
+.total_graph {
+	position: relative;
+	display: flex;
+	flex: 2.25;
+	justify-content: space-between;
+}
+
+.count {
+	margin-bottom: 8px;
+	font-size: 16px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.label {
+	font-size: 12px;
+	color: #4f4f4f;
+}
+
+.graph {
+	width: 80px;
+	height: 80px;
+}
+
+.graph_total {
+	position: absolute;
+	top: 24px;
+	left: 40px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: center;
+}
+
+.graph_label {
+	width: 30px;
+	font-size: 10px;
+	color: #828282;
+}
+
+.graph_count {
+	font-size: 12px;
+	font-weight: 500;
+	color: #221f20;
+}
+
+.dot {
+	width: 8px;
+	height: 8px;
+	margin-right: 4px;
+	border-radius: 50%;
+}
+
+.open {
+	background-color: #f8aea8;
+}
+
+.closed {
+	background-color: #e0e0e0;
+}
+
+.escalated {
+	background-color: #7278ad;
+}
+
+.pending {
+	background-color: #fcdc00;
+}
+
+.reopened {
+	background-color: #2ac85f;
+}
+
+.pie_tooltip {
+	display: flex;
+	align-items: center;
+	width: max-content;
+	padding: 2px 4px;
+	background-color: #fff;
+	border-radius: 4px;
+	box-shadow: 2px 2px 8px #4d4d4d;
+}
+
+.tooltip_dot {
+	width: 12px;
+	height: 12px;
+	margin-right: 8px;
+	border-radius: 2px;
+}
+
+.legends {
+	display: flex;
+	flex-wrap: wrap;
+	align-items: center;
+	width: 75%;
+}
+
+.legend {
+	display: flex;
+	flex-direction: column;
+	width: 33%;
+}
+
+.margin_bottom {
+	margin-bottom: 8px;
+}
+
+.legend_count {
+	display: flex;
+	align-items: center;
+	margin-left: 26px;
+}
+
+.stats_count {
+	min-width: 35px;
+	font-size: 12px;
+	font-weight: bold;
+	color: #221f20;
+}
+
+.stats_label {
+	margin-left: 38px;
+	font-size: 10px;
+	color: #4f4f4f;
+}

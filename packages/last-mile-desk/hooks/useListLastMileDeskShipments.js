@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useState, useEffect, useCallback, useContext } from 'react';
+import { useState, useEffect, useCallback, useContext, useRef } from 'react';
 
 import LastMileDeskContext from '../context/LastMileDeskContext';
 import getLastMileAddtionalMethods from '../helpers/getLastMileAddtionalMethods';
@@ -12,6 +12,8 @@ const useListLastMileDeskShipments = () => {
 
 	const { filters, setFilters, activeTab } = lastMileContextValues || {};
 	const { page = 1, ...restFilters } = filters || {};
+
+	const debounceQuery = useRef({ q: filters.q });
 
 	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 
@@ -49,10 +51,19 @@ const useListLastMileDeskShipments = () => {
 
 	useEffect(() => {
 		const [, scope, view_type] = (authParams || '').split(':');
+
 		if (!scope) { return; }
 
 		const newScopeFilters = { scope, view_type, selected_agent_id };
-		apiTrigger();
+
+		if (debounceQuery.current.q !== filters.q) {
+			clearTimeout(debounceQuery.current.timerId);
+
+			debounceQuery.current.q = filters.q;
+			debounceQuery.current.timerId = setTimeout(apiTrigger, 600);
+		} else {
+			apiTrigger();
+		}
 
 		localStorage.setItem('last_mile_desk_values', JSON.stringify({
 			filters,

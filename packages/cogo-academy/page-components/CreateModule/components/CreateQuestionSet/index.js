@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
@@ -60,15 +61,28 @@ function CreateQuestionSet() {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.header}>
-				<IcMArrowBack
-					style={{ cursor: 'pointer' }}
-					width={20}
-					height={20}
-					onClick={() => router.push('/learning?activeTab=test_module&testModuleTab=question_set')}
-				/>
+			<div className={styles.main_header}>
+				<div className={styles.header}>
+					<IcMArrowBack
+						style={{ cursor: 'pointer' }}
+						width={20}
+						height={20}
+						onClick={() => router.push('/learning?activeTab=test_module&testModuleTab=question_set')}
+					/>
 
-				<div className={styles.title}>{`${startCase(mode || 'new')} Question Set`}</div>
+					<div className={styles.title}>{`${startCase(mode || 'new')} Question Set`}</div>
+				</div>
+
+				{mode === 'view' ? (
+					<Button
+						type="button"
+						onClick={() => {
+							router.push(`/learning/test-module/question?mode=edit&id=${id}`);
+						}}
+					>
+						Edit Question Set
+					</Button>
+				) : null}
 			</div>
 
 			<BasicDetailsForm

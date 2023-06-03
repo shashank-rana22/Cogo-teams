@@ -54,13 +54,14 @@ function AddTradePartyPoc({
 	];
 
 	const title = (
-		<div>
+		<header className={styles.modal_header}>
 			<div>ADD POC</div>
 			<div>
-				Company Name:&nbsp;
+				(Company Name:&nbsp;
 				<span>{business_name}</span>
+				)
 			</div>
-		</div>
+		</header>
 	);
 
 	const onSubmit = (formValues) => {

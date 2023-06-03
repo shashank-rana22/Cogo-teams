@@ -1,9 +1,9 @@
-import { usePublicRequest } from '@cogoport/request';
+import { useLensRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
 function useGetMail({ activeMail = {}, emailAddress = '' }) {
-	const [{ data, loading }, trigger] = usePublicRequest({
-		url    : `${process.env.NEXT_PUBLIC_COGO_LENS_URL}/get_mail`,
+	const [{ data, loading }, trigger] = useLensRequest({
+		url    : '/get_mail',
 		method : 'get',
 	}, { manual: true });
 

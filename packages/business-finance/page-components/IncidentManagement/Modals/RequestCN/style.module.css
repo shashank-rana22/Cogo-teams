@@ -163,3 +163,9 @@
 	font-weight: 600;
 	color: #f68b21;
 }
+
+.credit {
+	display: flex;
+	gap: 8px;
+	align-items: center;
+}

@@ -93,3 +93,7 @@
 	display: flex;
 	align-items: center;
 }
+
+.cancelled .state {
+	background-color: #d3d3d3;
+}

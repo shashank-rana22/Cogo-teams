@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { useContext, useState, useEffect, useCallback } from 'react';
+import { useContext, useState, useEffect, useCallback, useRef } from 'react';
 
 import DocumentDeskContext from '../context/DocumentDeskContext';
 import getDocumentDeskAdditionalMethods from '../helpers/getDocumentDeskAdditionalMethods';
@@ -15,9 +15,11 @@ const useListDocumentDesk = () => {
 
 	const { page = 1, ...restFilters } = filters || {};
 
+	const debounceQuery = useRef({ q: filters.q });
+
 	const [apiData, setApiData] = useState({});
 
-	const prefix = ['fcl_customs', 'fcl_local']?.includes(stepperTab) ? stepperTab : 'fcl_freight';
+	const prefix = ['fcl_customs', 'fcl_local', 'fcl_cfs']?.includes(stepperTab) ? stepperTab : 'fcl_freight';
 
 	const additional_methods = getDocumentDeskAdditionalMethods({ documentDeskContextValues });
 
@@ -52,10 +54,19 @@ const useListDocumentDesk = () => {
 
 	useEffect(() => {
 		const [, scope, view_type] = (authParams || '').split(':');
+
 		if (!scope) { return; }
 
 		const newScopeFilters = { scope, view_type, selected_agent_id };
-		apiTrigger();
+
+		if (debounceQuery.current.q !== filters.q) {
+			clearTimeout(debounceQuery.current.timerId);
+
+			debounceQuery.current.q = filters.q;
+			debounceQuery.current.timerId = setTimeout(apiTrigger, 600);
+		} else {
+			apiTrigger();
+		}
 
 		localStorage.setItem('document_desk_values', JSON.stringify({
 			filters,

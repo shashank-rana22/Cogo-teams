@@ -26,7 +26,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 			poc_data_required               : true,
 		},
 		defaultFilters: {
-			organization_status: true,
+			organization_status: 'active',
 		},
 	});
 
