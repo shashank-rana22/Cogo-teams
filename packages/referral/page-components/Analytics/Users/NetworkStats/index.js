@@ -81,7 +81,7 @@ function NetworkStats({ network_data = {}, statsLoading = false }) {
 						xScale={{ type: 'point' }}
 						yScale={{
 							type    : 'linear',
-							min     : 'auto',
+							min     : '0',
 							max     : 'auto',
 							stacked : false,
 							reverse : false,
@@ -98,7 +98,6 @@ function NetworkStats({ network_data = {}, statsLoading = false }) {
 						axisLeft={{
 							tickSize       : 0,
 							tickPadding    : 10,
-							tickValues     : 5,
 							tickRotation   : 0,
 							legend         : 'cogopoints',
 							legendOffset   : -45,

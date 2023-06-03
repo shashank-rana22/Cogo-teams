@@ -3,7 +3,6 @@ import { TabPanel, Tabs } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { Image } from '@cogoport/next';
-import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { TABS_OPTIONS } from '../../../../constants';
@@ -44,7 +43,7 @@ function PerformanceStats({ selectedDate = {} }) {
 				<div className={styles.tabs_container}>
 					<Tabs
 						activeTab={filterType}
-						themeType="primary-vertical"
+						themeType="secondary-vertical"
 						onChange={setFilterType}
 					>
 						{TABS_OPTIONS.map(({ label, name }) => (
@@ -53,64 +52,52 @@ function PerformanceStats({ selectedDate = {} }) {
 
 					</Tabs>
 					{filterType && (
-						<>
-							<div className={styles.graph_div}>
-								{loading ? (
-									<Image
-										src={GLOBAL_CONSTANTS.image_url.spinner_loader}
-										width={50}
-										height={50}
-									/>
-								) : (
-									<ResponsiveLine
-										data={graphData}
-										margin={{ top: 30, right: 25, bottom: 40, left: 48 }}
-										xScale={{ type: 'point' }}
-										yScale={{
-											type    : 'linear',
-											min     : 'auto',
-											max     : 'auto',
-											stacked : true,
-											reverse : false,
-										}}
-										yFormat=" >-.2f"
-										axisTop={null}
-										axisRight={null}
-										axisBottom={{
-											tickSize     : 5,
-											tickPadding  : 5,
-											tickRotation : 0,
+						<div className={styles.graph_div}>
+							{loading ? (
+								<Image
+									src={GLOBAL_CONSTANTS.image_url.spinner_loader}
+									width={50}
+									height={50}
+								/>
+							) : (
+								<ResponsiveLine
+									data={graphData}
+									margin={{ top: 30, right: 25, bottom: 40, left: 48 }}
+									xScale={{ type: 'point' }}
+									yScale={{
+										type    : 'linear',
+										min     : 'auto',
+										max     : 'auto',
+										stacked : true,
+										reverse : false,
+									}}
+									yFormat=" >-.2f"
+									axisTop={null}
+									axisRight={null}
+									axisBottom={{
+										tickSize     : 5,
+										tickPadding  : 5,
+										tickRotation : 0,
 
-										}}
-										axisLeft={{
-											tickSize     : 5,
-											tickPadding  : 5,
-											tickRotation : 0,
+									}}
+									axisLeft={{
+										tickSize     : 5,
+										tickPadding  : 5,
+										tickRotation : 0,
 
-										}}
-										enableGridX={false}
-										enablePoints={false}
-										pointSize={10}
-										pointColor={{ theme: 'background' }}
-										pointBorderWidth={2}
-										pointBorderColor={{ from: 'serieColor' }}
-										pointLabelYOffset={-12}
-										useMesh
-										legends={[]}
-									/>
-								)}
-							</div>
-
-							{isEmpty(statsData) && !loading && (
-								<div className={styles.graph_div}>
-									<Image
-										src={GLOBAL_CONSTANTS.image_url.empty_image}
-										width={50}
-										height={50}
-									/>
-								</div>
+									}}
+									enableGridX={false}
+									enablePoints={false}
+									pointSize={10}
+									pointColor={{ theme: 'background' }}
+									pointBorderWidth={2}
+									pointBorderColor={{ from: 'serieColor' }}
+									pointLabelYOffset={-12}
+									useMesh
+									legends={[]}
+								/>
 							)}
-						</>
+						</div>
 					)}
 					<NetworkStats network_data={network_data} statsLoading={statsLoading} />
 

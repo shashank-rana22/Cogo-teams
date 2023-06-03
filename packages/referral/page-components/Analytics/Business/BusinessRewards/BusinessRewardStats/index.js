@@ -5,6 +5,18 @@ import { Image } from '@cogoport/next';
 import styles from './styles.module.css';
 
 function BusinessRewardStats({ graphData = [], loading = false }) {
+	const rendersliceToolTip = ({ slice }) => (
+		<div className={styles.tooltip_div}>
+			<div className={styles.title}>
+				Date:
+				<div className={styles.amount}>{slice?.points?.[0]?.data.x}</div>
+			</div>
+			<div className={styles.title}>
+				Cogopoints:
+				<div className={styles.amount}>{slice?.points?.[0]?.data.y}</div>
+			</div>
+		</div>
+	);
 	return (
 		<div className={styles.graph_div}>
 			{loading ? (
@@ -17,7 +29,7 @@ function BusinessRewardStats({ graphData = [], loading = false }) {
 
 				<ResponsiveLine
 					data={graphData}
-					margin={{ top: 30, right: 25, bottom: 40, left: 48 }}
+					margin={{ top: 30, right: 45, bottom: 40, left: 52 }}
 					xScale={{ type: 'point' }}
 					yScale={{
 						type    : 'linear',
@@ -26,7 +38,6 @@ function BusinessRewardStats({ graphData = [], loading = false }) {
 						stacked : true,
 						reverse : false,
 					}}
-					yFormat=" >-.2f"
 					axisTop={null}
 					axisRight={null}
 					axisBottom={{
@@ -48,6 +59,8 @@ function BusinessRewardStats({ graphData = [], loading = false }) {
 					pointLabelYOffset={-12}
 					useMesh
 					legends={[]}
+					enableSlices="x"
+					sliceTooltip={rendersliceToolTip}
 				/>
 			)}
 		</div>

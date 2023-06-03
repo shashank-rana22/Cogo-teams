@@ -7,3 +7,28 @@
 	background: #fff;
 	border-radius: 0 6px 6px 0;
 }
+
+.tooltip_div {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 9px 12px;
+	background: #fff;
+	border: 1px solid #ccc;
+}
+
+.title {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 450;
+}
+
+.amount {
+	display: flex;
+	align-items: center;
+	margin-right: 6px;
+	margin-left: 6px;
+	font-size: 14px;
+	font-weight: 700;
+}

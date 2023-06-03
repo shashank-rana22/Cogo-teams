@@ -44,11 +44,24 @@ function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => 
 		},
 	];
 
+	const rendersliceToolTip = ({ slice }) => (
+		<div className={styles.tooltip_div}>
+			<div className={styles.title}>
+				Date:
+				<div className={styles.amount}>{slice?.points?.[0]?.data.x}</div>
+			</div>
+			<div className={styles.title}>
+				Count:
+				<div className={styles.amount}>{slice?.points?.[0]?.data.y}</div>
+			</div>
+		</div>
+	);
+
 	return (
 		<>
 			<Tabs
 				activeTab={businessFilterType?.activityType}
-				themeType="primary-vertical"
+				themeType="secondary-vertical"
 				onChange={(val) => setBusinessFilterType((prev) => ({ ...prev, activityType: val }))}
 			>
 				{BUSINESS_TAB_OPTIONS.map(({ label, name }) => (
@@ -68,7 +81,7 @@ function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => 
 
 						<ResponsiveLine
 							data={graphData}
-							margin={{ top: 30, right: 25, bottom: 40, left: 48 }}
+							margin={{ top: 30, right: 45, bottom: 40, left: 48 }}
 							xScale={{ type: 'point' }}
 							yScale={{
 								type    : 'linear',
@@ -99,6 +112,8 @@ function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => 
 							pointLabelYOffset={-12}
 							useMesh
 							legends={[]}
+							enableSlices="x"
+							sliceTooltip={rendersliceToolTip}
 						/>
 					)}
 				</div>

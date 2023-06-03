@@ -1,21 +1,21 @@
 export const shipmentIncentives = [
 	{
-		label : 'Average % of shipment incentive given',
+		label : 'Shipment incentives given to channel partners',
 		name  : 'channel_partner',
 	},
 	{
-		label : 'Average % of shipment incentive given',
+		label : 'Shipment incentives given to importer exporters',
 		name  : 'importer_exporter',
 	},
 ];
 
 export const subscriptionIncentives = [
 	{
-		label : 'Average % of subscription incentive given',
+		label : 'Subscription incentives given to channel partners',
 		name  : 'channel_partner',
 	},
 	{
-		label : 'Average % of subscription incentive given',
+		label : 'Subscription incentives given to importer exporters',
 		name  : 'importer_exporter',
 	},
 ];
