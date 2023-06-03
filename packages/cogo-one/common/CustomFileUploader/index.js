@@ -1,11 +1,10 @@
 import { Upload, Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
 
-import getMaxFileSize from '../../helpers/getMaxFileSize';
+import UPLOAD_VALIDATION_MAPPING from '../../constants/UPLOAD_VALIDATION_MAPPING';
 
 import styles from './styles.module.css';
 
@@ -18,7 +17,7 @@ function CustomFileUploader(props, ref) {
 		docName,
 		uploadIcon = null,
 		handleProgress,
-		channel,
+		channel = '',
 		...rest
 	} = props;
 	const [fileName, setFileName] = useState(null);
@@ -100,18 +99,16 @@ function CustomFileUploader(props, ref) {
 	};
 
 	const handleChange = async (values) => {
-		if (channel === 'zalo' && values && !isEmpty(values)) {
-			const maxSize = getMaxFileSize(values[0]?.type);
-			if (!maxSize) {
-				Toast.error('File Type Not Allowed');
-				return;
-			}
-			if (values[0]?.size >= maxSize) {
-				const sizeInMb = (maxSize / GLOBAL_CONSTANTS.one_mb).toFixed(2);
-				Toast.error(`File Upload failed, Maximum size allowed - ${sizeInMb} MB`);
-				return;
-			}
+		let channelTemp = 'default';
+		if (channel in UPLOAD_VALIDATION_MAPPING) {
+			channelTemp = channel;
 		}
+		const isValid = UPLOAD_VALIDATION_MAPPING[channelTemp]?.({ values });
+
+		if (!isValid) {
+			return;
+		}
+
 		try {
 			setLoading(true);
 

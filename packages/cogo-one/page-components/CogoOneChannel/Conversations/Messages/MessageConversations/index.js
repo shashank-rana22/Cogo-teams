@@ -325,9 +325,7 @@ function MessageConversations({
 								handleProgress={handleProgress}
 								showProgress={false}
 								draggable
-								accept={channel_type === 'zalo'
-									? ACCEPT_FILE_MAPPING.zalo
-									: ACCEPT_FILE_MAPPING.default}
+								accept={ACCEPT_FILE_MAPPING[channel_type] || ACCEPT_FILE_MAPPING.default}
 								className="file_uploader"
 								uploadIcon={(
 									<IcMAttach

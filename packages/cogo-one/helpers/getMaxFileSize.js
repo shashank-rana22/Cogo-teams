@@ -10,7 +10,7 @@ const ZALO_FILE_TYPES = [
 	'text/csv',
 ];
 
-const getFileType = (type) => {
+export const getFileType = (type) => {
 	if ((type || '').includes('image')) return 'image';
 	if (ZALO_FILE_TYPES.includes(type)) return 'file';
 	return '';
