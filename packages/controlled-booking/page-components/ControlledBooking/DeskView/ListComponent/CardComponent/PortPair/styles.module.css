@@ -1,0 +1,61 @@
+.upper_body {
+	display: flex;
+	gap: 12px;
+	align-items: center;
+	justify-content: space-between;
+	padding-right: 2px;
+}
+
+.code {
+	margin-right: 4px;
+	font-size: 13px;
+	font-weight: 400;
+	color: #f68b21;
+}
+
+.name {
+	display: flex;
+	align-self: center;
+	font-size: 13px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.country {
+	padding: 1px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #4f4f4f;
+}
+
+.subname {
+	max-width: 120px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+
+	/* border: 1px solid #f2f2f2; */
+	border-radius: 4px;
+}
+
+.service {
+	display: flex;
+	gap: 6px;
+	align-items: center;
+}
+
+.origin {
+	display: flex;
+	margin-right: 30px;
+}
+
+.destination {
+	display: flex;
+	margin-left: 30px;
+}
