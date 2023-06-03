@@ -59,6 +59,17 @@ const controlsFunc = (organization_id, item) => [
 		},
 	},
 	{
+		label       : '   ',
+		name        : 'mobile_number',
+		type        : 'number',
+		span        : 4,
+		placeholder : 'Enter Mobile Number',
+		value       : item?.mobile_number,
+		rules       : {
+			required: 'Mobile Number is required',
+		},
+	},
+	{
 		label        : '   ',
 		name         : 'dob',
 		type         : 'datepicker',

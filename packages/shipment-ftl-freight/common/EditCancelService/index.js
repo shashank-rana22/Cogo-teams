@@ -47,12 +47,15 @@ export const getDriverDetails = (all_services) => {
 	const servicesList = (all_services || []).filter(
 		(service) => service?.truck_number,
 	);
-	const driverDetails = servicesList.map((service) => ({
-		service_id     : `${service?.id}`,
-		truck_number   : `${service?.truck_number}`,
-		driver_name    : `${service?.driver_details?.name}`,
-		contact_number : `${service?.driver_details?.contact}`,
-	}));
+	const driverDetails = servicesList.map((service) => (
+		{
+			service_id          : `${service?.id}`,
+			truck_number        : `${service?.truck_number}`,
+			driver_name         : `${service?.driver_details?.name}`,
+			contact_number      : `${service?.driver_details?.contact}`,
+			service_provider_id : `${service?.service_provider_id}`,
+		}
+	));
 
 	return driverDetails;
 };
@@ -77,8 +80,13 @@ function EditCancelService({ serviceData = {} }) {
 	actionButtons[1].show = true;
 	actionButtons[2].show = true;
 	actionButtons[3].show = true;
+<<<<<<< HEAD
+	// actionButtons[4].show = true;
+	// actionButtons[4].show = getCanCancelService({ state, activeStakeholder });
+=======
 	actionButtons[4].show = true;
 	actionButtons[5].show = getCanCancelService({ state, activeStakeholder });
+>>>>>>> c27f12bb7f63d1033eb0ecab85a80d8fb15108c1
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;
@@ -118,11 +126,12 @@ function EditCancelService({ serviceData = {} }) {
 					truckList={getTrucklistWithId(serviceData)}
 				/>
 			)}
-
+			{console.log('serviceData', serviceData)}
 			{showModal === 'verify_driver'
 			&& (
 				<VerifyDriver
-					driverDetails={getDriverDetails(serviceData)}
+					setShow={setShowModal}
+					driverList={getDriverDetails(serviceData)}
 				/>
 			)}
 

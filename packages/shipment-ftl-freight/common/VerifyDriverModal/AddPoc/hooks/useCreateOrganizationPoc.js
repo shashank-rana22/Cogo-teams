@@ -24,7 +24,8 @@ const useCreateOrganizationPoc = ({
 
 	const controls = controlsFuncDriver(organization_id, item);
 
-	const { fields, handleSubmit, reset, formState } = useForm(controls);
+	// const { fields, handleSubmit, reset, formState } = useForm();
+	const { control, handleSubmit, reset, formState } = useForm();
 
 	const createOrgPoc = async (values) => {
 		try {
@@ -50,7 +51,7 @@ const useCreateOrganizationPoc = ({
 
 	return {
 		createOrgPoc,
-		fields,
+		control,
 		handleSubmit,
 		formState,
 		controls,

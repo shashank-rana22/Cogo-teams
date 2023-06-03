@@ -167,7 +167,7 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 	// 			<Modal.Body>
 
 	// 				<Modal.Header title={(
-	// 					<div className={styles.header}>
+	// 					<div className={styles.heading}>
 	// 						Truck List
 	// 					</div>
 	// 				)}
@@ -186,12 +186,12 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 			onClose={() => setShow(false)}
 			className={styles.custom_modal}
 			closeOnOuterClick={false}
-			// showCloseIcon={!loading}
+			showCloseIcon={!loading}
 		>
 			<Modal.Body>
 
 				<Modal.Header title={(
-					<div className={styles.header}>
+					<div className={styles.heading}>
 						Truck List
 					</div>
 				)}

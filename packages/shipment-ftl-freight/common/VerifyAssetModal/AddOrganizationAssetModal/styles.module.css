@@ -15,26 +15,28 @@
 	align-items: flex-end;
 	width: 100%;
 
-	.form-item-label {
-		font-weight: 500;
-		font-size: 12px;
-		color: #4f4f4f;
-		margin: 16px 0 8px 0;
-	}
+	:global {
+		.form-item-label {
+			font-weight: 500;
+			font-size: 12px;
+			color: #4f4f4f;
+			margin: 16px 0 8px 0;
+		}
 
-	.core-ui-select__control {
-		border: 1px solid #cddbff !important;
+		.core-ui-select__control {
+			border: 1px solid #cddbff !important;
+
+			.core-ui-input-root {
+				border: unset;
+			}
+		}
+
+		.core-ui-select__placeholder {
+			color: #cddbff;
+		}
 
 		.core-ui-input-root {
-			border: unset;
+			border: 1px solid #cddbff !important;
 		}
-	}
-
-	.core-ui-select__placeholder {
-		color: #cddbff;
-	}
-
-	.core-ui-input-root {
-		border: 1px solid #cddbff !important;
 	}
 }
