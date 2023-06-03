@@ -58,6 +58,7 @@ function Chapter({
 				<div className={styles.child_accordian}>
 					<Accordion
 						type="text"
+						isOpen={child.isNew}
 						title={(
 							<div
 								key={child.id}

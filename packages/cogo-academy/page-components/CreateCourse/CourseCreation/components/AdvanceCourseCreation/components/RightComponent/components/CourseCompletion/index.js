@@ -108,7 +108,7 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 	return (
 		<div className={styles.container}>
 			{controls.map((controlItem) => {
-				const { name, label, type, subControls = [], subLabel = '' } = controlItem || {};
+				const { name, label, type, subControls = [], subLabel = '', rules = {} } = controlItem || {};
 
 				if (type === 'groupSelect') {
 					return (
@@ -130,7 +130,7 @@ function CourseCompletion({ data = {}, id = '', activeTab, state }, ref) {
 										>
 											<div className={styles.label}>
 												{subControlLabel}
-												<sup className={styles.superscipt}>*</sup>
+												{!isEmpty(rules) ? <sup className={styles.superscipt}>*</sup> : null}
 											</div>
 
 											<div className={`${styles.input_group} ${styles[subControlName]}`}>

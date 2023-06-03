@@ -44,7 +44,6 @@ export const controls = [
 						label : 'only course content (pdf, doc, test within modules)',
 					},
 				],
-				rules: { required: { value: true, message: 'This is required' } },
 			},
 			{
 				label       : 'Reward on Course Completion',
@@ -69,7 +68,6 @@ export const controls = [
 						label : 'Badge',
 					},
 				],
-				rules: { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},
@@ -95,6 +93,7 @@ export const certificateControls = [
 				type        : 'asyncSelect',
 				placeholder : 'Select Authority from list',
 				asyncKey    : 'partner_users',
+				valueKey    : 'user_id',
 				params      : {
 					filters: {
 						partner_entity_types : ['cogoport'],

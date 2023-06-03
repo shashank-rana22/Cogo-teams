@@ -6,6 +6,18 @@ import useUpdateCourse from '../../../hooks/useUpdateCourse';
 import MAPPING from './MAPPING';
 import styles from './styles.module.css';
 
+const getState = ({ state, status }) => {
+	if (status === 'inactive') {
+		return { state: 'Inactive', color: '#ff8888' };
+	}
+
+	if (state === 'published') {
+		return { state: 'Active', color: '#CFEAEC' };
+	}
+
+	return { state: 'Draft', color: '#fdd1a7' };
+};
+
 function Header({
 	activeTab,
 	id,
@@ -15,9 +27,11 @@ function Header({
 	setActiveTab,
 	mode,
 }) {
-	const { name, status = 'draft' } = data || {};
+	const { name, status = 'draft', state = '' } = data || {};
 
 	const { title, text } = MAPPING[activeTab] || {};
+
+	const { state: currentState, color } = getState({ status, state });
 
 	const { loading, updateCourse } = useUpdateCourse({
 		getCogoAcademyCourse,
@@ -80,8 +94,8 @@ function Header({
 						size="md"
 						items={[{
 							disabled : false,
-							children : status,
-							color    : '#FEF199',
+							children : currentState,
+							color,
 							tooltip  : false,
 						}]}
 					/>

@@ -71,7 +71,7 @@ function CourseOverview({ id, activeTab, state }, ref) {
 				<div className={styles.footer_top}>
 					<div className={styles.footer_title}>Module:</div>
 					<div className={styles.footer_content}>
-						Introduce each Module by describing the Module s goals and importance.
+						Introduce each Module by describing the Module goals and importance.
 						Give Sub Modules and Module titles that reflect their content and have a logical flow.
 						You could design your course such that there is an Assessment at the end of each one.
 					</div>
@@ -79,9 +79,15 @@ function CourseOverview({ id, activeTab, state }, ref) {
 				<div className={styles.footer_bottom}>
 					<div className={styles.footer_title}>Sub Module:</div>
 					<div className={styles.footer_content}>
-						Each sub module covers one concept with one Content type.
+						Each sub module consists of multiple chapters in which we can have the content of the course
+					</div>
+				</div>
+				<div className={styles.footer_bottom}>
+					<div className={styles.footer_title}>Chapter:</div>
+					<div className={styles.footer_content}>
+						Each chapter covers one concept with one Content type.
 						If there is a topic which requires multiple Content types,
-						consider making it a course and breaking the concepts into Sub Modules.
+						consider making it a course and breaking the concepts into chapters.
 					</div>
 				</div>
 			</div>
