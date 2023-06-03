@@ -11,8 +11,8 @@ function RadioGroupController(props) {
 			key={rest.id}
 			control={control}
 			name={name}
-			rules={rules}
 			defaultValue={value}
+			rules={rules}
 			render={({ field: { onChange, onBlur, value:newValue } }) => (
 				<RadioGroup
 					{...rest}

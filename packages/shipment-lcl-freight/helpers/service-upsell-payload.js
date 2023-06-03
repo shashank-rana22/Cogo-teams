@@ -116,8 +116,6 @@ const formatPayload = ({
 	service = {},
 	shipment_data = {},
 	primary_service,
-	organization_id = '',
-	user = {},
 }) => {
 	const search_type = service?.service_type?.replace('_service', '');
 
@@ -128,17 +126,15 @@ const formatPayload = ({
 		search_type,
 		primary_service,
 		formValues,
-		organization_id,
-		user,
 	};
 
 	const newPayload = {
 		search_type,
 		source                                 : 'upsell',
 		source_id                              : shipment_data?.id,
-		importer_exporter_id                   : organization_id,
-		importer_exporter_branch_id            : user?.branch_id,
-		user_id                                : user?.user_id,
+		importer_exporter_id                   : shipment_data?.importer_exporter_id,
+		importer_exporter_branch_id            : shipment_data?.importer_exporter_branch_id,
+		user_id                                : shipment_data?.user_id,
 		[`${search_type}_services_attributes`] : formatDataForSingleService({
 			rawParams,
 		}),
