@@ -139,7 +139,7 @@ function ShipmentDetails({
 		return <div>NO DATA FOUND</div>;
 	};
 
-	const jobTypeValue = jobType.toLowerCase();
+	const jobTypeValue = jobType?.toLowerCase();
 	return (
 		<div className={styles.container}>
 			<h3>
