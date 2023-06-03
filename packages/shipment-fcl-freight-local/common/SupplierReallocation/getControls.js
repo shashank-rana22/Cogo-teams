@@ -25,7 +25,7 @@ export default function getControls({
 		placeholder : 'Select Service Provider',
 		asyncKey    : 'organizations',
 		params      : {
-			 filters: {
+			filters: {
 				account_type : 'service_provider',
 				kyc_status   : 'verified',
 				service      : (service_type || '').split('_', 2).join('_'),
