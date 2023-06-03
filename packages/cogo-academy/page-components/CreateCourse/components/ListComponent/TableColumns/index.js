@@ -1,5 +1,5 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase, format, isEmpty } from '@cogoport/utils';
 
 import { StudentButtons, CourseButtons } from './components/ButtonComponent';
@@ -174,7 +174,7 @@ export const courseColumns = ({
 			return (
 				<div className={styles.audience}>
 					{audienceArray.map((item) => (
-						<div>
+						<div key={item}>
 							<Pill
 								size="md"
 								color="#FEF3E9"
@@ -212,6 +212,7 @@ export const courseColumns = ({
 
 						return (
 							<Pill
+								key={item}
 								size="md"
 								color="#F7FAEF"
 								className={styles.status_pill}
