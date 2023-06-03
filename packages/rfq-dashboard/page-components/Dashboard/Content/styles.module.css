@@ -10,8 +10,9 @@
 	font-weight: 600;
 	color: #221f20;
 }
-.pagination_container{
-	display:flex;
+
+.pagination_container {
+	display: flex;
 	justify-content: center;
 	margin-top: 6px;
 }

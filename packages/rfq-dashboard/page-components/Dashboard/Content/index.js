@@ -6,12 +6,12 @@ import useListRfqs from '../../../hooks/useListrfqs';
 import RfqDetails from './RfqDetails';
 import styles from './styles.module.css';
 
+const TAB_MAPPING = [
+	{ name: 'approval', title: 'Approval' },
+];
+
 function Content(props) {
 	const { activeTab, setActiveTab, filterStore } = props;
-
-	const TAB_MAPPING = [
-		{ name: 'approval', title: 'Approval' },
-	];
 
 	const { getRfqsForApproval, data = {}, page, setPage, loading } = useListRfqs({ filterStore });
 

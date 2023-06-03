@@ -120,6 +120,7 @@ const GLOBAL_CONSTANTS = {
 		'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
 		empty_customer_card: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg',
 	},
+	currency_conversion_constant: 0.04,
 };
 
 export default GLOBAL_CONSTANTS;

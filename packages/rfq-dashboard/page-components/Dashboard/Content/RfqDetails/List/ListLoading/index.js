@@ -6,8 +6,8 @@ function ListLoading() {
 	return (
 		<div>
 			{
-				[...Array(10)].map((_, i) => (
-					<div className={styles.container} key={i}>
+				[...Array(10).keys()].map((key) => (
+					<div className={styles.container} key={key}>
 						<div>
 							<Placeholder height="25px" width="200px" margin="10px 4px 10px 4px" />
 						</div>

@@ -21,7 +21,7 @@ function Graph({ rfq_id = '' }) {
 	const { y_axis = [] } = graph_data;
 	const { revenue_currency = '', revenue = '' } = revenue_generated || {};
 
-	const LegendsData = [
+	const legendsData = [
 		{
 			label: `${shipment_booked} Shipment Booked`,
 		},
@@ -109,7 +109,7 @@ function Graph({ rfq_id = '' }) {
 									colorBy="id"
 								/>
 								<div className={styles.legend_sections}>
-									{(LegendsData || []).map((item) => (
+									{(legendsData || []).map((item) => (
 										<div
 											key={item?.label}
 											className={styles.legends_section_part}

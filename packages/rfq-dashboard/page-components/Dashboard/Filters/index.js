@@ -28,7 +28,6 @@ function Filters({ formProps }) {
 								key={el.name}
 								control={control}
 								id={`${el.name}_input`}
-								style={{ zIndex: '0' }}
 							/>
 						</div>
 					);

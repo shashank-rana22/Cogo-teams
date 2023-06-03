@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 export const convertCurrencyValue = (
 	value,
 	fromCurrency,
@@ -7,7 +9,7 @@ export const convertCurrencyValue = (
 	const {
 		base_currency,
 		currencies,
-		currency_conversion_delta = 0.04,
+		currency_conversion_delta = GLOBAL_CONSTANTS.currency_conversion_constant,
 	} = conversions || {};
 
 	const fxFees = 1 + currency_conversion_delta;
@@ -27,11 +29,11 @@ export const displayTotal = (
 	conversions,
 	toCurrency,
 ) => {
-	let Total = 0;
+	let total = 0;
 
 	(lineItems || []).forEach((line_item) => {
 		if (line_item.source !== 'manual') {
-			Total += convertCurrencyValue(
+			total += convertCurrencyValue(
 				line_item?.total_buy_price === 0
 					? line_item?.total_price_discounted
 					: (line_item?.total_price_discounted || 0)
@@ -57,7 +59,7 @@ export const displayTotal = (
 					const temp =						(editedMargin.value || 0) * (lineItem?.quantity || 0)
 						- (lineItem.source !== 'manual' ? total_margin_value : 0);
 
-					Total += convertCurrencyValue(
+					total += convertCurrencyValue(
 						temp,
 						editedMargin.currency,
 						toCurrency,
@@ -79,7 +81,7 @@ export const displayTotal = (
 				if (editedMargin.code === lineItem.code) {
 					const temp =						editedMargin.value
 						- (lineItem.source !== 'manual' ? total_margin_value : 0);
-					Total += convertCurrencyValue(
+					total += convertCurrencyValue(
 						temp,
 						editedMargin.currency,
 						toCurrency,
@@ -90,7 +92,7 @@ export const displayTotal = (
 		}
 	});
 
-	return Total;
+	return total;
 };
 
 export const displayMarginValue = (value, { lineItem, editedMargin }) => {
