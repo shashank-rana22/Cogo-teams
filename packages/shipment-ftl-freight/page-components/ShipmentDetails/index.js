@@ -27,7 +27,7 @@ function ShipmentDetails() {
 	const router = useRouter();
 	const { get } = useGetShipment();
 
-	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
+	const [activeTab, setActiveTab] = useState('overview');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });

@@ -1,4 +1,4 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
@@ -9,14 +9,21 @@ import SupplierReallocation from '../SupplierReallocation';
 import VerifyTruck from '../VerifyAssetModal';
 import VerifyDriver from '../VerifyDriverModal';
 
+import {
+	EditTruckNumberControls,
+	EditETAControls,
+	EditDriverControls,
+} from './Controls';
+import Form from './Forms';
 import styles from './styles.module.css';
-// import getCanCancelService from './utils/getCanCancelService';
-// import getCanEditParams from './utils/getCanEditParams';
+import getCanCancelService from './utils/getCanCancelService';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
 const actionButtons = [
 	{ label: 'Edit', value: 'supplier_reallocation' },
-	{ label: 'Edit Params', value: 'edit_params' },
+	{ label: 'Edit Truck Number', value: 'edit_truck_number' },
+	{ label: 'Edit ETA/ETD', value: 'edit_eta_etd' },
+	{ label: 'Edit Driver Details', value: 'edit_driver_details' },
 	{ label: 'Verify Truck', value: 'verify_truck' },
 	{ label: 'Verify Driver', value: 'verify_driver' },
 	{ label: 'Cancel', value: 'cancel' },
@@ -67,11 +74,11 @@ function EditCancelService({ serviceData = {} }) {
 	};
 
 	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	// actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
+	actionButtons[1].show = true;
 	actionButtons[2].show = true;
-	// actionButtons[3].show = true;
-	// actionButtons[4].show = true;
-	// actionButtons[4].show = getCanCancelService({ state, activeStakeholder });
+	actionButtons[3].show = true;
+	actionButtons[4].show = true;
+	actionButtons[5].show = getCanCancelService({ state, activeStakeholder });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;
@@ -126,6 +133,27 @@ function EditCancelService({ serviceData = {} }) {
 					service_type={service_type}
 				/>
 			)}
+
+			{showModal ? (
+				<Modal
+					show={showModal}
+					onClose={() => setShowModal(false)}
+					size="md"
+				>
+					<Modal.Header title="ADD INVOICING PARTY" />
+					<Modal.Body>
+						<Form
+							controls={EditTruckNumberControls}
+							heading="EDIT TRUCK NUMBER"
+							type="truck_number"
+							truckList={getTrucklistWithId(serviceData)}
+							// refetchServices={refetchServices}
+						/>
+					</Modal.Body>
+
+				</Modal>
+			) : null}
+
 		</div>
 	);
 }
