@@ -7,6 +7,7 @@ const BarData = () => {
 	return dashboardData.map((item) => (
 		{
 			date     : format(item?.date, 'dd MMM ', {}, false),
+			Uploaded :	item?.uploadedCount,
 			Approved : item?.approvedCount,
 			Rejected : item?.rejectedCount,
 		}));

@@ -45,6 +45,7 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 				{ label: 'Whatsapp', value: 'whatsapp' },
 				{ label: 'Platform Chat', value: 'platform_chat' },
 				{ label: 'Telegram', value: 'telegram' },
+				{ label: 'Zalo', value: 'zalo' },
 			],
 		},
 		{
