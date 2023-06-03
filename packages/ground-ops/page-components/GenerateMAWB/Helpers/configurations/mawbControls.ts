@@ -1,6 +1,16 @@
 import currencies from '../currencies';
 
-const mawbControls = (disableClass) => ({
+const mawbControls = (disableClass, editHawbNumberCondition) => ({
+	hawb_controls: [
+		{
+			name        : 'document_number',
+			label       : 'Document Number',
+			type        : 'text',
+			span        : 5,
+			placeholder : 'Document Number',
+			disabled    : editHawbNumberCondition,
+		},
+	],
 	basic: [
 		{
 			name         : 'shipperName',
@@ -17,12 +27,11 @@ const mawbControls = (disableClass) => ({
 		},
 		{
 			name        : 'shipperAddress',
-			className   : 'textarea',
 			label       : "Shipper's Address",
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 200,
-			row         : 4,
+			rows        : 6,
 			placeholder : 'Enter Address',
 			rules       : {
 				required: 'Shippers Address is Required',
@@ -43,12 +52,11 @@ const mawbControls = (disableClass) => ({
 		},
 		{
 			name        : 'consigneeAddress',
-			className   : 'textarea',
 			label       : "Consignee's Address",
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 200,
-			row         : 4,
+			rows        : 6,
 			placeholder : 'Enter Address',
 			rules       : {
 				required: 'Consignees Address is Required',
@@ -343,13 +351,12 @@ const mawbControls = (disableClass) => ({
 		},
 		{
 			name        : 'remark',
-			className   : 'textarea',
 			label       : 'Remarks',
 			type        : 'textarea',
 			span        : 7,
 			maxLength   : 500,
 			placeholder : 'Remarks',
-			rows        : 3,
+			rows        : 6,
 		},
 		{
 			name               : 'agentOtherCharges',
@@ -457,12 +464,12 @@ const mawbControls = (disableClass) => ({
 			},
 		},
 		{
-			name      : 'accountingInformation',
-			type      : 'textarea',
-			className : 'textarea',
-			label     : 'Accounting Information:',
-			span      : 7,
-			rules     : {
+			name  : 'accountingInformation',
+			type  : 'textarea',
+			label : 'Accounting Information:',
+			span  : 7,
+			rows  : 6,
+			rules : {
 				required: 'Accounting Information is Required',
 			},
 		},
@@ -496,10 +503,10 @@ const mawbControls = (disableClass) => ({
 		{
 			name         : 'handlingInformation',
 			type         : 'textarea',
-			className    : 'textarea',
 			label        : 'Handling Information:',
 			showOptional : false,
 			span         : 5,
+			rows         : 6,
 			placeholder  : 'Handling Information...*',
 			maxLength    : 300,
 		},
@@ -507,11 +514,10 @@ const mawbControls = (disableClass) => ({
 			name        : 'commodity',
 			label       : 'Commodity Details:',
 			type        : 'textarea',
-			className   : 'textarea',
 			span        : 5,
 			maxLength   : 300,
 			placeholder : 'Commodity...',
-			rows        : 3,
+			rows        : 6,
 			rules       : {
 				required: 'Commodity is Required',
 			},

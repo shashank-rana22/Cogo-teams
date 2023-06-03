@@ -1,4 +1,5 @@
-import InvoiceTable from './InvoiceTable';
+import InvoiceTable from '../../../commons/InvoiceTable';
+
 import OrganizationUsers from './OrganizationUsers';
 import PaymentsTable from './PaymentTable';
 import SettlementTable from './SettlementTable';

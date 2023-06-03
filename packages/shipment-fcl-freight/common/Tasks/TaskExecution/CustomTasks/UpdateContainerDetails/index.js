@@ -6,10 +6,10 @@ import useGetTask from '../../../../../hooks/useGetTaskConfig';
 import TaskForm from './TaskForm';
 
 function UpdateContainerDetails({
-	pendingTask,
-	onCancel,
-	services,
-	taskListRefetch,
+	pendingTask = {},
+	onCancel = () => {},
+	services = [],
+	taskListRefetch = () => {},
 }) {
 	const { taskConfigData, loading } = useGetTask({
 		task: pendingTask,

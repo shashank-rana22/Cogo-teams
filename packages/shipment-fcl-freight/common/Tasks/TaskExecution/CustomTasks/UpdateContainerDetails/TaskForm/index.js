@@ -1,17 +1,17 @@
 import { Button, Checkbox, Input } from '@cogoport/components';
+import { Layout } from '@cogoport/ocean-modules';
 import React, { useState } from 'react';
 
 import useContainerDetails from '../../../../../../hooks/useContainerDetails';
-import Layout from '../../../helpers/Layout';
 import TaskContainer from '../../common/TaskContainer';
 
 import styles from './styles.module.css';
 
 function TaskForm({
-	apis_data,
-	pendingTask,
+	apis_data = {},
+	pendingTask = {},
 	onCancel = () => {},
-	services,
+	services = [],
 	taskListRefetch = () => {},
 }) {
 	const [details, setDetails] = useState('');

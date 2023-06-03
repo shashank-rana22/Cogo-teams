@@ -200,7 +200,6 @@ function AccordianCards({
 								</Button>
 							) : (
 								<Button
-									disabled={!dataCard?.jobNumber}
 									themeType="secondary"
 									style={{ height: '30px', fontSize: '12px' }}
 									onClick={() => {

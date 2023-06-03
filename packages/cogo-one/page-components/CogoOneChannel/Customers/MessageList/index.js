@@ -14,6 +14,7 @@ import LoadingState from '../LoadingState';
 import NewWhatsappMessage from '../NewWhatsappMessage';
 
 import AutoAssignComponent from './AutoAssignComponent';
+import FlashUserChats from './FlashUserChats';
 import MessageCardData from './MessageCardData';
 import styles from './styles.module.css';
 
@@ -39,11 +40,15 @@ function MessageList(messageProps) {
 		userId,
 		sortedPinnedChatList = [],
 		firestore,
+		viewType = '',
+		flashMessagesList = [],
+		flashMessagesLoading = false,
 	} = messageProps;
+
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
-
+	const [showCarousel, setShowCarousel] = useState(false);
 	const handleCheckedChats = (item, id) => {
 		if (id in selectedAutoAssign) {
 			setSelectedAutoAssign((p) => {
@@ -55,6 +60,30 @@ function MessageList(messageProps) {
 			setSelectedAutoAssign((p) => ({ ...p, [id]: item }));
 		}
 	};
+	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
+	const isFlashMessagesEmpty = isEmpty(flashMessagesList) || false;
+
+	const canShowCarousel = showCarousel
+	&& showCarousel !== 'in_timeout' && !isFlashMessagesEmpty && !flashMessagesLoading;
+
+	const getListHeightStyles = () => {
+		if (showBotMessages && isomniChannelAdmin && !canShowCarousel) {
+			return 'bot_list_container_empty_flash';
+		}
+		if (showBotMessages && isomniChannelAdmin) {
+			return 'bot_list_container';
+		}
+		if (!canShowCarousel) {
+			return 'list_container_empty_flash';
+		}
+		return 'list_container_height';
+	};
+
+	useEffect(() => {
+		if (!isFlashMessagesEmpty) {
+			setShowCarousel((p) => (p !== 'in_timeout' || p));
+		}
+	}, [isFlashMessagesEmpty]);
 
 	const {
 		bulkAssignChat = () => {},
@@ -71,9 +100,19 @@ function MessageList(messageProps) {
 	}, [showBotMessages, appliedFilters]);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
-	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
+
 	return (
 		<>
+			<FlashUserChats
+				flashMessagesList={flashMessagesList}
+				activeCardId={activeCardId}
+				userId={userId}
+				setActiveMessage={setActiveMessage}
+				firestore={firestore}
+				showCarousel={showCarousel}
+				setShowCarousel={setShowCarousel}
+				canShowCarousel={canShowCarousel}
+			/>
 			<div className={styles.filters_container}>
 				<div className={styles.source_types}>
 					<Input
@@ -98,6 +137,7 @@ function MessageList(messageProps) {
 									showBotMessages={showBotMessages}
 									isomniChannelAdmin={isomniChannelAdmin}
 									tagOptions={tagOptions}
+									viewType={viewType}
 								/>
 							)
 						)}
@@ -136,7 +176,7 @@ function MessageList(messageProps) {
 					)}
 					<div
 						className={cl`${styles.list_container} 
-						${(showBotMessages && isomniChannelAdmin) ? styles.bot_list_container : ''}`}
+						${styles[getListHeightStyles()]}`}
 						onScroll={handleScroll}
 					>
 						{!isPinnedChatEmpty && (
@@ -154,6 +194,7 @@ function MessageList(messageProps) {
 									<div className={styles.pinned_chats_div}>
 										{(sortedPinnedChatList || []).map((item) => (
 											<MessageCardData
+												key={item?.id}
 												item={item}
 												activeCardId={activeCardId}
 												userId={userId}
@@ -171,6 +212,7 @@ function MessageList(messageProps) {
 						<div className={styles.recent_text}>Recent</div>
 						{(messagesList || []).map((item) => (
 							<MessageCardData
+								key={item?.id}
 								item={item}
 								activeCardId={activeCardId}
 								userId={userId}

@@ -1,10 +1,9 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRouter } from '@cogoport/next';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
-
-import { entityMappingData } from '../P&L/PLStatement/constant';
 
 const useSaveReport = ({
 	setModalData,
@@ -42,6 +41,10 @@ const useSaveReport = ({
 	const { query, push } = useRouter();
 	const { month, entity, id } = query || {};
 
+	const entityDetails = GLOBAL_CONSTANTS.cogoport_entities[entity] || {};
+
+	const { id: entityId } = entityDetails;
+
 	const { profile } = useSelector((state) => state || {});
 
 	const [
@@ -62,7 +65,7 @@ const useSaveReport = ({
 				data: [
 					{
 						ratioBasis           : 'VALUE',
-						cogoEntityId         : entityMappingData[entity],
+						cogoEntityId         : entityId,
 						period               : month,
 						sourceFileId         : id,
 						turnoverRatioDetails : {
@@ -87,7 +90,7 @@ const useSaveReport = ({
 					},
 					{
 						ratioBasis           : 'VOLUME',
-						cogoEntityId         : entityMappingData[entity],
+						cogoEntityId         : entityId,
 						period               : month,
 						sourceFileId         : id,
 						turnoverRatioDetails : {
@@ -124,7 +127,7 @@ const useSaveReport = ({
 		}
 	}, [FTLValuePer, FTLVolumePer, LTLValuePer, LTLVolumePer, airCustomValuePer,
 		airCustomVolumePer, airExportValuePer, airExportVolumePer, airImportValuePer, airImportVolumePer,
-		entity, fclExportValuePer, fclExportVolumePer, fclImportValuePer, fclImportVolumePer, id,
+		entityId, fclExportValuePer, fclExportVolumePer, fclImportValuePer, fclImportVolumePer, id,
 		lclExportValuePer, lclExportVolumePer, lclImportValuePer, lclImportVolumePer, month,
 		oceanCustomValuePer, oceanCustomVolumePer, profile.partner?.id, profile?.user?.id, push,
 		railValuePer, railVolumePer, setModalData, totalPer, totalPerAir, totalPerOcean, totalPerRail,

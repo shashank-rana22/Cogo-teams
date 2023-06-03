@@ -47,7 +47,7 @@ function ChapterContent({
 				<div className={styles.error_text}>
 					** This course is currently published,
 					{' '}
-					{completed_user_count}
+					{completed_user_count || 0}
 					{' '}
 					users have already completed this chapter, editing this will effect them
 				</div>
@@ -63,7 +63,7 @@ function ChapterContent({
 
 				if (elementType === 'groupSelect') {
 					return (
-						<div className={styles.group_select}>
+						<div key={name} className={styles.group_select}>
 							<div className={styles.label}>
 								{label}
 								<sup className={styles.superscipt}>*</sup>
@@ -145,7 +145,7 @@ function ChapterContent({
 
 				if (elementType === 'fieldArray') {
 					return (
-						<div style={{ margin: '32px 0px' }}>
+						<div key={name} style={{ margin: '32px 0px' }}>
 							<FieldArray
 								{...controlItem}
 								control={control}
@@ -157,7 +157,7 @@ function ChapterContent({
 
 				if (name === 'assessment_value') {
 					return (
-						<div style={{ marginTop: '24px' }}>
+						<div key={name} style={{ marginTop: '24px' }}>
 							<RichTextEditor
 								value={assessmentValue}
 								onChange={setAssessmentvalue}
@@ -184,7 +184,7 @@ function ChapterContent({
 
 				if (contentTypeWatch === 'text' && name === 'upload_presentation') {
 					return (
-						<div style={{ marginTop: '24px' }}>
+						<div key={name} style={{ marginTop: '24px' }}>
 							<RichTextEditor
 								value={editorValue}
 								onChange={setEditorValue}

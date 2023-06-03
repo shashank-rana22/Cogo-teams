@@ -1,5 +1,9 @@
 import { Input, Button } from '@cogoport/components';
-import { IcMArrowDown, IcMSearchlight, IcMHelpInCircle } from '@cogoport/icons-react';
+import {
+	IcMArrowDown,
+	IcMSearchlight,
+	IcMHelpInCircle,
+} from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
 
@@ -8,7 +12,15 @@ import ReportErrorModal from '../ReportErrorModal';
 
 import styles from './styles.module.css';
 
-function Header({ loading, currentCategory, setCurrentCategory, debounceQuery, input, setInput }) {
+function Header({
+	loading,
+	currentCategory,
+	setCurrentCategory,
+	debounceQuery,
+	input,
+	setInput,
+	input_required = true,
+}) {
 	const router = useRouter();
 
 	const [showErrorModal, setShowErrorModal] = useState(false);
@@ -24,7 +36,13 @@ function Header({ loading, currentCategory, setCurrentCategory, debounceQuery, i
 		<>
 			<div className={styles.container}>
 				<div className={styles.button_container}>
-					<div role="presentation" className={styles.title} onClick={handleClick}>Cogo Courses</div>
+					<div
+						role="presentation"
+						className={styles.title}
+						onClick={handleClick}
+					>
+						Cogo Courses
+					</div>
 
 					<Button
 						size="lg"
@@ -37,26 +55,23 @@ function Header({ loading, currentCategory, setCurrentCategory, debounceQuery, i
 					</Button>
 				</div>
 
-				<Input
-					placeholder="Search by Course, Category, Topic or Tags"
-					suffix={<IcMSearchlight style={{ marginRight: '12px' }} />}
-					onChange={(val) => {
-						debounceQuery(val);
-						setInput(val);
-					}}
-					value={input}
-				/>
+				{input_required ? (
+					<Input
+						placeholder="Search by Course, Category, Topic or Tags"
+						suffix={<IcMSearchlight style={{ marginRight: '12px' }} />}
+						onChange={(val) => {
+							debounceQuery(val);
+							setInput(val);
+						}}
+						value={input}
+					/>
+				) : null}
 
 				<div className={styles.profile}>
-					<Button
-						themeType="tertiary"
-						onClick={() => setShowErrorModal(true)}
-					>
-						Report Issue
-						&nbsp;&nbsp;
+					<Button themeType="tertiary" onClick={() => setShowErrorModal(true)}>
+						Report Issue &nbsp;&nbsp;
 						<IcMHelpInCircle width={18} height={18} />
 					</Button>
-
 				</div>
 			</div>
 

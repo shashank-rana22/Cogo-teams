@@ -24,6 +24,7 @@
 	overflow-y: auto;
 	background: white;
 	background-color: none;
+	border-top-left-radius: 8px;
 }
 
 .content_caret {
@@ -137,4 +138,10 @@
 	height: 45px;
 	margin: 5px 1px 14px 25px;
 	border-radius: 4px;
+}
+
+.enter_left {
+	height: 100%;
+	animation-duration: 750ms;
+	animation-timing-function: ease-in-out;
 }

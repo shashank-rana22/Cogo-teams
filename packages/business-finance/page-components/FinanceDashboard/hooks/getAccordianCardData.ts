@@ -30,7 +30,7 @@ const useGetAccordianCardData = ({ globalFilters, entityTabFilters }:Props) => {
 			try {
 				trigger({
 					params: {
-						entityCode : entityTabFilters === 'all' ? ['101', '301'] : entityTabFilters,
+						entityCode : entityTabFilters,
 						startDate  : startDate ? format(startDate as Date, 'yyyy-MM-dd', {}, false)
 							: undefined,
 						endDate: endDate

@@ -35,6 +35,8 @@
 }
 
 .modal_container {
+	margin-top: 20px;
+
 	:global {
 		.ui_modal_dialog {
 			width: 600px !important;

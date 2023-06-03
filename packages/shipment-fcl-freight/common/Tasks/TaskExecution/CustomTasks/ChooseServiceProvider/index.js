@@ -1,4 +1,5 @@
 import { Loader } from '@cogoport/components';
+import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 
 import useListShipmentBookingConfirmationPreferences
@@ -24,7 +25,7 @@ function ChooseServiceProvider({
 		return service_ids;
 	});
 
-	const { data, loading } = useListShipmentBookingConfirmationPreferences({
+	const { data = {}, loading = true } = useListShipmentBookingConfirmationPreferences({
 		defaultFilters: {
 			service_id   : service_ids,
 			service_type : task.service_type,
@@ -96,15 +97,18 @@ function ChooseServiceProvider({
 	}
 
 	return (
-		<div>
-			{(data?.list || []).map((item) => (
+		data?.list?.length > 0
+			? data?.list.map((item) => (
 				<Card
+					key={item?.id}
 					item={item}
 					priority={item.priority}
 					handleUpdateTask={handleUpdateTask}
 				/>
-			))}
-		</div>
+			))
+			: (
+				<EmptyState subEmptyText="No Booking Preference Found" />
+			)
 	);
 }
 export default ChooseServiceProvider;

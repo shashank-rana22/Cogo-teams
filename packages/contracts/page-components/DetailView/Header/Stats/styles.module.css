@@ -21,6 +21,20 @@
 	margin-left: 8px;
 }
 
+.bidding_proof {
+	display: flex;
+	align-items: center;
+}
+
+.bidding_contract {
+	padding: 2px 4px;
+	margin-right: 12px;
+	font-size: 12px;
+	font-weight: 500;
+	background: #acdadf;
+	border-radius: 4px;
+}
+
 .contract_details {
 	display: flex;
 	align-items: center;

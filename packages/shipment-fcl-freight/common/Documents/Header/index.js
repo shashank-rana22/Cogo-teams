@@ -13,6 +13,8 @@ function Header({
 	data = {},
 	filters = {},
 	setFilters = () => {},
+	setSearchValue = () => {},
+	searchValue = '',
 	activeWallet = '',
 	setActiveWallet = () => {},
 	activeStakeholder,
@@ -36,13 +38,13 @@ function Header({
 				{!activeToggle ? (
 					<div className={styles.sub_heading}>
 						<Input
-							value={filters?.q || ''}
+							value={searchValue || ''}
 							size="sm"
 							type="search"
 							placeholder="Search..."
 							suffix={<IcMSearchlight style={{ fontSize: '16px' }} />}
 							style={{ padding: '6px', marginRight: '6px', width: '250px' }}
-							onChange={(e) => setFilters({ ...filters, q: e })}
+							onChange={(e) => setSearchValue(e)}
 						/>
 						<Select
 							className={styles.select}
@@ -81,6 +83,17 @@ function Header({
 				) : null}
 			</div>
 
+			{showModal ? (
+				<GenericUpload
+					showModal={showModal}
+					setShowModal={setShowModal}
+					data={data}
+					shipment_data={shipment_data}
+					activeStakeholder={activeStakeholder}
+					refetch={refetch}
+				/>
+			) : null }
+
 			<div className={styles.sub_heading}>
 				<div
 					className={styles.generic_upload}
@@ -102,17 +115,6 @@ function Header({
 					onChange={() => setActiveToggle((p) => !p)}
 				/>
 			</div>
-
-			{showModal ? (
-				<GenericUpload
-					showModal={showModal}
-					setShowModal={setShowModal}
-					data={data}
-					shipment_data={shipment_data}
-					activeStakeholder={activeStakeholder}
-					refetch={refetch}
-				/>
-			) : null }
 
 		</div>
 	);

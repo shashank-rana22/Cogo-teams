@@ -16,8 +16,14 @@ const getLastMileFilters = ({ filters = {}, lastMileContextValues }) => {
 	}
 
 	if (dateRange && startDate && date_type && endDate) {
-		finalFilters[`${keyMapping[date_type]}_greater_than`] = startDate;
-		finalFilters[`${keyMapping[date_type]}_less_than`] = endDate;
+		const start = new Date(startDate);
+		start.setHours(start.getHours() + 5, 30, 0, 0);
+
+		const end = new Date(endDate);
+		end.setHours(end.getHours() + 5, 30, 0, 0);
+
+		finalFilters[`${keyMapping[date_type]}_greater_than`] = start;
+		finalFilters[`${keyMapping[date_type]}_less_than`] = end;
 	}
 
 	return finalFilters;
