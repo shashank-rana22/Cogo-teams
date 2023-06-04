@@ -68,7 +68,7 @@ function Edit({
 		});
 
 		if (submit_data?.line_items?.length === 0) {
-			Toast.error('Line Items is required');
+			Toast.error('Line Items is required!');
 			return;
 		}
 
