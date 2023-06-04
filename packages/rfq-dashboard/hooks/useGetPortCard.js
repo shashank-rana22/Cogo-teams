@@ -81,8 +81,8 @@ const useGetPortCard = ({ props }) => {
 		rate_card_details,
 	});
 
-	const Component = ICON_MAPPING?.[service_type]?.service_component;
-	const iconText = ICON_MAPPING?.[service_type]?.service_text;
+	const Component = ICON_MAPPING?.[service_type]?.service_icon;
+	const iconText = ICON_MAPPING?.[service_type]?.service_label;
 
 	return {
 		loading,
