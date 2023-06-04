@@ -11727,6 +11727,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_air_coe_pending_tasks_amend_list',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_locations',
 			access_type  : 'private',
 			service_name : 'location',
