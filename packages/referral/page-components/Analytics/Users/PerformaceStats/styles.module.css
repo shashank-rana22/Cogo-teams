@@ -32,7 +32,8 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 650px;
+	width: 51%;
+	min-width: 650px;
 	height: 204px;
 	margin-right: 16px;
 	background: #fff;

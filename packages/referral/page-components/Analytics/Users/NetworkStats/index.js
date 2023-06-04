@@ -74,10 +74,8 @@ function NetworkStats({ network_data = {}, statsLoading = false }) {
 
 					<ResponsiveLine
 						data={newData}
-						width={385}
-						height={195}
 						colors={['#F9AE64']}
-						margin={{ top: 12, right: 20, bottom: 55, left: 50 }}
+						margin={{ top: 12, right: 20, bottom: 55, left: 60 }}
 						xScale={{ type: 'point' }}
 						yScale={{
 							type    : 'linear',
@@ -100,7 +98,7 @@ function NetworkStats({ network_data = {}, statsLoading = false }) {
 							tickPadding    : 10,
 							tickRotation   : 0,
 							legend         : 'cogopoints',
-							legendOffset   : -45,
+							legendOffset   : -35,
 							legendPosition : 'middle',
 						}}
 						enableGridX={false}

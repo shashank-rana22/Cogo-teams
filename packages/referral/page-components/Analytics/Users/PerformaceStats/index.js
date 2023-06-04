@@ -99,9 +99,9 @@ function PerformanceStats({ selectedDate = {} }) {
 							)}
 						</div>
 					)}
-					<NetworkStats network_data={network_data} statsLoading={statsLoading} />
 
 				</div>
+				<NetworkStats network_data={network_data} statsLoading={statsLoading} />
 			</div>
 		</div>
 	);
