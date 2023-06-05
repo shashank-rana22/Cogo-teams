@@ -4,16 +4,16 @@
 }
 
 .count_sop {
-	font-size: 16px;
-	color: #333333;
-	margin-bottom: 12px;
 	padding-left: 8px;
+	margin-bottom: 12px;
+	font-size: 16px;
+	color: #333;
 }
 
 .empty_state {
 	display: flex;
-	justify-content: center;
 	align-items: center;
+	justify-content: center;
 }
 
 .sop_list {
