@@ -1,0 +1,110 @@
+.container {
+	padding: 36px 36px 0;
+}
+
+.heading {
+	width: 10%;
+	padding-bottom: 4px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #221f20;
+	border-bottom: 1.5px solid #acdadf;
+}
+
+.container_detials {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 75%;
+	margin-top: 20px;
+	margin-bottom: 12px;
+}
+
+.frieght_value {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin-top: 20px;
+	margin-bottom: 12px;
+	margin-left: 6px;
+}
+
+.card_container {
+	position: relative;
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+	padding: 12px 24px;
+	margin-bottom: 12px;
+	background: #fff;
+	border: 1px solid #f0f0f0;
+	border-radius: 6px;
+}
+
+.text {
+	display: flex;
+	padding: 2px 4px;
+	margin: 4px;
+	font-size: 12px;
+	background: #f9f9f9;
+	border-radius: 4px;
+}
+
+.commodity_text {
+	display: flex;
+	align-items: center;
+	padding: 2px 4px;
+	margin: 4px;
+	font-size: 12px;
+	background: #fef3e9;
+	border-radius: 4px;
+}
+
+.cargo_value {
+	width: 25%;
+	height: 134px;
+	padding: 8px;
+	margin-left: 30px;
+	background: #fff;
+	border: 1px solid #f0f0f0;
+	border-radius: 6px;
+}
+
+.eligibilty {
+	height: 67px;
+	padding: 8px 16px;
+	margin-top: 8px;
+	border-radius: 6px;
+}
+
+.index {
+	position: absolute;
+	top: 16px;
+	left: -8px;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 16px;
+	height: 16px;
+	padding: 6px;
+	font-size: 10px;
+	background: #fcdc00;
+	border-radius: 50%;
+}
+
+.approvals {
+	display: flex;
+	align-items: center;
+	padding: 4px;
+	margin-right: 16px;
+	cursor: pointer;
+	background-color: #fff;
+}
+
+.hs_code_text {
+	max-width: 200px;
+	margin-left: 4px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

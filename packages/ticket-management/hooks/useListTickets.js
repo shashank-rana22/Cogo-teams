@@ -9,7 +9,13 @@ import {
 
 import { ticketSectionMapping } from '../constants';
 
-const useListTickets = (searchValue, status, key, refreshList, setRefreshList) => {
+const useListTickets = ({
+	searchParams,
+	status,
+	label,
+	refreshList,
+	setRefreshList,
+}) => {
 	const [pagination, setPagination] = useState(1);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
 
@@ -28,11 +34,12 @@ const useListTickets = (searchValue, status, key, refreshList, setRefreshList) =
 			PerformedByID : profile?.user?.id,
 			size          : 10,
 			page          : pageIndex - 1,
-			QFilter       : searchQuery.text || undefined,
-			Type          : searchQuery.category,
+			AgentID       : searchParams.agent,
+			QFilter       : searchQuery || undefined,
+			Type          : searchParams.category,
 		};
 		return { ...payload, ...(ticketSectionMapping?.[status] || {}) };
-	}, [profile?.user?.id, searchQuery.category, searchQuery.text, status]);
+	}, [profile?.user?.id, searchParams?.category, searchQuery, searchParams?.agent, status]);
 
 	const fetchTickets = useCallback(async (pageIndex) => {
 		try {
@@ -56,14 +63,14 @@ const useListTickets = (searchValue, status, key, refreshList, setRefreshList) =
 	useEffect(() => {
 		setTickets({ list: [], total: 0 });
 		fetchTickets(1);
-		if (refreshList[key]) {
-			setRefreshList((prev) => ({ ...prev, [key]: false }));
+		if (refreshList?.[label]) {
+			setRefreshList((prev) => ({ ...prev, [label]: false }));
 		}
-	}, [fetchTickets, searchQuery, setTickets, key, refreshList, setRefreshList]);
+	}, [fetchTickets, searchQuery, setTickets, label, refreshList, setRefreshList]);
 
 	useEffect(() => {
-		debounceQuery(searchValue);
-	}, [debounceQuery, searchValue]);
+		debounceQuery(searchParams?.text);
+	}, [debounceQuery, searchParams?.text]);
 
 	const handleScroll = ({ clientHeight, scrollTop, scrollHeight }) => {
 		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= 20;

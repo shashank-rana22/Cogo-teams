@@ -1,6 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { useSelector } from '@cogoport/store';
 
 import { statusLabelTransformation } from '../../../configurations/key-mapping';
 import { actionButtonKeys, STATUS_MAPPING } from '../../../constants';
@@ -11,8 +10,6 @@ function TicketStructureBody({
 	data,
 	updateTicketActivity = () => {},
 }) {
-	const { profile } = useSelector((state) => state);
-
 	const {
 		ID: id = '',
 		Status: status = '',
@@ -20,8 +17,7 @@ function TicketStructureBody({
 		CreatedAt: createdAt = '',
 		TicketActivity: ticketActivity = {},
 		Type: type = '',
-		Activitycount: activityCount = 0,
-		TicketReviewerID :ticketReviewerId = '',
+		ActivityCount: activityCount = 0,
 	} = data;
 
 	const { color: textColor, label } =	statusLabelTransformation[STATUS_MAPPING[status]] || {};
@@ -42,15 +38,13 @@ function TicketStructureBody({
 						{id}
 					</div>
 
-					{(profile?.user?.id === ticketReviewerId) && (
-						<div
-							role="presentation"
-							className={styles.reopen_resolve}
-							onClick={(e) => handleTicketClick(e)}
-						>
-							{actionButtonKeys[status]?.label || ''}
-						</div>
-					)}
+					<div
+						role="presentation"
+						className={styles.reopen_resolve}
+						onClick={(e) => handleTicketClick(e)}
+					>
+						{actionButtonKeys[status]?.label || ''}
+					</div>
 				</div>
 				<div className={styles.category_ticket_activity}>
 					{type || description.substring(0, 100)}
