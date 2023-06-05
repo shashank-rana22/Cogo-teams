@@ -28,6 +28,7 @@ function Review({
 			show
 			onClose={() => setOpen(false)}
 			className={styles.custom_modal}
+			showCloseIcon={false}
 			closeOnOuterClick={false}
 		>
 			<Modal.Header title="MARK AS REVIEWED" />

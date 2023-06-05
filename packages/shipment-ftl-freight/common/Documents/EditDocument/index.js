@@ -3,10 +3,11 @@ import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/surface-modules';
 import React from 'react';
 
+import useBulkUpdateShipmentService from '../../../hooks/useBulkUpdateShipmentService';
+import useCreateShipmentDocument from '../../../hooks/useCreateShipmentDocument';
+
 import { documentType, invoiceDocumentControls, ewayBillControls } from './documentConfig';
 import styles from './styles.module.css';
-import useBulkUpdateShipmentService from './useBulkUpdateShipmentService';
-import useCreateShipmentDocument from './useCreateShipmentDocument';
 
 function EditDocument({
 	showEdit,
@@ -102,10 +103,8 @@ function EditDocument({
 			onClose={() => setShowEdit(false)}
 		>
 			<Modal.Header title="Edit Document" />
-
 			<Modal.Body>
 				<div>
-					{' '}
 					<Layout
 						control={control}
 						fields={documentType}

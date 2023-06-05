@@ -44,10 +44,6 @@ function EditInvoice({
 		info         : <Info />,
 	});
 
-	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service'
-	&& !isFclFreight
-	&& shipment_data?.serial_id > 130000;
-
 	const formValues = watch();
 
 	useEffect(() => {

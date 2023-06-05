@@ -72,6 +72,7 @@ function EditInvoicePreference({
 					show
 					size="lg"
 					onClose={handleClose}
+					showCloseIcon={false}
 					closeOnOuterClick={false}
 				>
 					<Modal.Header title="EDIT INVOICING PREFERENCE" />

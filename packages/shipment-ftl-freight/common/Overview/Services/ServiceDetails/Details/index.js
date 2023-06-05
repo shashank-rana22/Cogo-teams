@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import { getByKey } from '@cogoport/utils';
+import { getByKey, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import getConfigs from '../../configurations/get-configs';
@@ -41,7 +41,7 @@ function Details({ serviceData = [] }) {
 							key={keys[i]}
 							onClick={() => handleSelect(key)}
 						>
-							{`${key}`}
+							{`${startCase(key)}`}
 						</div>
 					))}
 				</div>
