@@ -165,17 +165,14 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 				showCloseIcon
 			>
 				<Modal.Body>
-
 					<Modal.Header title={(
 						<div className={styles.heading}>
 							Truck List
 						</div>
 					)}
 					/>
-
 					<div style={{ marginTop: '1rem' }}>No Truck Found</div>
 				</Modal.Body>
-
 			</Modal>
 		);
 	}
