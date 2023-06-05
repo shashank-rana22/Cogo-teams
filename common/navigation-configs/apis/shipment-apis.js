@@ -1513,6 +1513,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'contract',
 	},
+	{
+		api          : 'create_rollover_shipment',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
