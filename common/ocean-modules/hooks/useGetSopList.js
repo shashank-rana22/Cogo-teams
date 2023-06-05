@@ -93,7 +93,6 @@ const useGetSopList = ({
 				const key = conditions[element]?.key;
 				customfilter[key] = conditions[element]?.data;
 			}
-			// customfilter.conditions[element].key = conditions[element]?.data;
 		});
 	}
 	customfilter.organization_id = importer_exporter_id;

@@ -50,10 +50,7 @@ function SopOld({ shipment_data = {}, primary_service = {} }) {
 
 	if (loading || trade_partners_loading) {
 		content = (
-			<>
-				{/* <SkeletonV1 style={{ marginBottom: '12px' }} /> */}
-				<SopLoader />
-			</>
+			<SopLoader />
 		);
 	}
 
