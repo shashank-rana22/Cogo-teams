@@ -30,7 +30,7 @@ function FormElement(props) {
 
 function SupplierReallocation({
 	serviceData = [],
-	closeModal = () => {},
+	setShow = () => {},
 	isAdditional = false,
 }) {
 	const {
@@ -38,6 +38,8 @@ function SupplierReallocation({
 		refetchServices = () => {}, primary_service = {},
 	} = useContext(ShipmentDetailContext);
 	const { service_provider = {} } = primary_service;
+
+	const closeModal = () => setShow(false);
 
 	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
 
