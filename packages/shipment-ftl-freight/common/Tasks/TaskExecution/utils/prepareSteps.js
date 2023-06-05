@@ -134,7 +134,6 @@ const evaluateObject = (control, task, shipment_data) => {
 	// 						obj.adhoc_conditions,
 	// 					);
 	// 				} else {
-	// 					console.log('hererereer');
 	// 					finalControl[obj.key_to_add] = new Date();
 	// 				}
 	// 			}

@@ -1,29 +1,29 @@
-.custom_modal{
-	:global{
-		.ui_modal_body_container{
+.custom_modal {
+	:global {
+		.ui_modal_body_container {
 			height: calc(100vh - 64px);
 			max-height: 100%;
 		}
 	}
 }
 
-.heading{
-	color: #333333;
-	font-weight: 500;
+.heading {
+	margin: 6px 0 16px;
 	font-size: 18px;
-	margin: 6px 0px 16px;
+	font-weight: 500;
+	color: #333;
 }
 
-.button_wrapper{
+.button_wrapper {
 	display: flex;
-	justify-content: center;
 	align-items: center;
-	
-	& > button{
+	justify-content: center;
+
+	& > button {
 		margin-right: 12px;
 	}
 }
 
-.download_link{
+.download_link {
 	color: #5936f0;
 }

@@ -23,7 +23,6 @@ function ExecuteStep({
 	} = useStepExecution({
 		task,
 		stepConfig,
-		getApisData,
 		selectedMail,
 	});
 	const { control, formState: { errors }, handleSubmit, watch } = formProps;

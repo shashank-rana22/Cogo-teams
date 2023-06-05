@@ -6,13 +6,13 @@
 .button_wrap {
 	display: flex;
 	justify-content: flex-end;
-	margin: 18px 0px 8px 0px;
+	margin: 18px 0 8px;
 }
 
 .heading {
-	font-weight: 500;
+	margin: 14px 0;
 	font-size: 22px;
-	margin: 14px 0px;
+	font-weight: 500;
 	line-height: 18px;
 	color: #393f70;
 }

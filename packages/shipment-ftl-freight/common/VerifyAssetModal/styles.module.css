@@ -1,5 +1,7 @@
 .heading {
+	width: fit-content;
 	font-weight: 500;
+	border-bottom: 1px solid;
 	width: fit-content;
 }
 
@@ -7,27 +9,27 @@
 	text-transform: capitalize;
 
 	.truck_type {
+		padding: 5px;
 		background: #eaeaea;
 		border-radius: 5px;
-		padding: 5px;
 	}
+
 	ul {
 		padding-left: 10px;
 	}
 }
 
 .truck_type {
+	padding: 5px;
 	text-transform: capitalize;
 	background: #eaeaea;
 	border-radius: 5px;
-	padding: 5px;
 }
 
-
 .action_row {
-	text-transform: capitalize;
 	display: flex;
 	margin: 5px 0 10px 5px;
+	text-transform: capitalize;
 }
 
 .custom_modal {
