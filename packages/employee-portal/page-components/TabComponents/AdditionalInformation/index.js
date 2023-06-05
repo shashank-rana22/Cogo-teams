@@ -8,39 +8,53 @@ import Resume from './Resume';
 import styles from './styles.module.css';
 
 function AdditionalInformation({ setInformationPage, data, getEmployeeDetails }) {
-	const { progress_stats = {} } = data || {};
+	const { progress_stats = {}, bank_details:bankDetails } = data || {};
 	const {
 		additional_info_added = {},
 	} = progress_stats;
+
 	const {
 		bank_details = false,
 		educational_qualification = false,
 		employment_history = false,
 		resume = false,
 	} = additional_info_added;
+
 	const content_mapping = [
 		{
-			title     : 'EMPLOYMENT HISTORY',
-			content   : EmploymentHistory,
-			isPending : employment_history,
+			title       : 'EMPLOYMENT HISTORY',
+			content     : EmploymentHistory,
+			isCompleted : employment_history,
 		},
 		{
-			title     : 'EDUCATIONAL QUALIFICATION',
-			content   : EducationalQualification,
-			isPending : educational_qualification,
+			title       : 'EDUCATIONAL QUALIFICATION',
+			content     : EducationalQualification,
+			isCompleted : educational_qualification,
 		},
 		{
-			title     : 'RESUME',
-			content   : Resume,
-			isPending : resume,
+			title       : 'RESUME',
+			content     : Resume,
+			isCompleted : resume,
 		},
 		{
-			title     : 'BANK DETAILS',
-			content   : BankDetails,
-			key       : 'bank_details',
-			isPending : bank_details,
+			title       : 'BANK DETAILS',
+			content     : BankDetails,
+			key         : 'bank_details',
+			isCompleted : bank_details,
 		},
 	];
+
+	const renderPills = ({ isCompleted, key }) => {
+		if (isCompleted) {
+			return <Pill color="green">Completed</Pill>;
+		}
+
+		if (bankDetails?.[0]?.status === 'active' && key === 'bank_details') {
+			return <Pill color="orange">Waiting for approval</Pill>;
+		}
+
+		return <Pill color="yellow">Pending</Pill>;
+	};
 
 	return (
 		<div className={styles.container}>
@@ -57,11 +71,11 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 			<div className={styles.subcontainer}>
 
 				{content_mapping.map((item) => {
-					const { content: Component, isPending } = item;
+					const { content: Component, isCompleted, key } = item;
 
 					return (
 						<div
-							key={item.title}
+							key={key}
 							role="presentation"
 							className={styles.accordion}
 						>
@@ -70,10 +84,7 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 								title={(
 									<div className={styles.status}>
 										<div className={styles.accordion_title}>{item.title}</div>
-
-										{isPending
-											? <Pill color="green">Completed</Pill>
-											: <Pill color="yellow">Pending</Pill>}
+										{renderPills({ isCompleted, key })}
 									</div>
 								)}
 								animate

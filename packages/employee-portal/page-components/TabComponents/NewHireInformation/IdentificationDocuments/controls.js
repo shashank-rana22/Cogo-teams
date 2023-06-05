@@ -1,11 +1,19 @@
+import patterns from '../../../../commons/patterns';
+
 const controls = [
 	{
-		name             : 'aadhaar_card_number',
-		label            : 'Aadhaar Card Number',
-		type             : 'number',
-		placeholder      : 'Aadhaar Card Number',
-		rules            : { required: 'This is required' },
-		verification_key : 'aadhaar_card',
+		name        : 'aadhaar_card_number',
+		label       : 'Aadhaar Card Number',
+		type        : 'number',
+		placeholder : 'Aadhaar Card Number',
+		rules       : {
+			required : 'This is required',
+			pattern  : {
+				value   : patterns.AADHAR_NUMBER,
+				message : 'Enter valid Adhar card number',
+			},
+		},
+		verification_key: 'aadhaar_card',
 	},
 
 	{
@@ -19,12 +27,18 @@ const controls = [
 	},
 
 	{
-		name             : 'pan_card_number',
-		label            : 'Pan Card Number',
-		type             : 'input',
-		placeholder      : 'Pan Card Number',
-		rules            : { required: 'This is required' },
-		verification_key : 'pan_card',
+		name        : 'pan_card_number',
+		label       : 'Pan Card Number',
+		type        : 'input',
+		placeholder : 'Pan Card Number',
+		rules       : {
+			required : 'This is required',
+			pattern  : {
+				value   : patterns.PAN_NUMBER,
+				message : 'Enter valid Pan card number',
+			},
+		},
+		verification_key: 'pan_card',
 	},
 
 	{
@@ -38,11 +52,17 @@ const controls = [
 	},
 
 	{
-		name             : 'passport_number',
-		label            : 'Passport Number',
-		type             : 'input',
-		placeholder      : 'Passport Number',
-		verification_key : 'passport',
+		name        : 'passport_number',
+		label       : 'Passport Number',
+		type        : 'input',
+		placeholder : 'Passport Number',
+		rules       : {
+			pattern: {
+				value   : patterns.PASSPORT_NUMBER,
+				message : 'Enter valid Passport number',
+			},
+		},
+		verification_key: 'passport',
 	},
 
 	{

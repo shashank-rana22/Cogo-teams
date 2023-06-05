@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import React from 'react';
 
+import EmptyState from '../../common/EmptyState';
 import StyledTable from '../StyledTable';
 
 import CompanyPolicyModal from './CompanyPolicyModal';
@@ -11,6 +12,14 @@ function CompanyPolicyDetails() {
 	const {
 		columns, listLoading, list, showModal, setShowModal, refetchList,
 	} = useCompanyPolicyDetails();
+
+	if ((list || []).length === 0) {
+		return (
+			<div className={styles.container}>
+				<EmptyState emptyText="No Company Policy Added" />
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>

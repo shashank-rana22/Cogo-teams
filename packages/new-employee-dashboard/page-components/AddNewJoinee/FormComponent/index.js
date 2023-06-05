@@ -2,11 +2,12 @@ import { Button, Toast } from '@cogoport/components';
 import {
 	InputController, SelectController, MobileNumberController, useForm, DatepickerController,
 } from '@cogoport/forms';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
-import React from 'react';
+import React, { useState } from 'react';
+
+import BulkUpload from '../BulkUpload';
 
 import controls from './controls';
 import styles from './styles.module.css';
@@ -46,9 +47,11 @@ const SECTION_MAPPING = [
 ];
 
 function FormComponent({ setActivePage }) {
+	const [bulkUploadComponent, setBulkUploadComponent] = useState(false);
+
 	const router = useRouter();
 
-	const [{ loading, data }, trigger] = useHarbourRequest({
+	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/create_employee_detail',
 	}, { manual: true });
@@ -109,14 +112,32 @@ function FormComponent({ setActivePage }) {
 		);
 	});
 
+	if (bulkUploadComponent) {
+		return <BulkUpload setBulkUploadComponent={setBulkUploadComponent} />;
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header_flex}>
-				<div className={styles.back_arrow} role="presentation" onClick={onClickBackIcon}>
-					<IcMArrowBack width={20} height={20} />
+				<div className={styles.back_arrow}>
+					<IcMArrowBack
+						width={20}
+						height={20}
+						style={{ cursor: 'pointer' }}
+						onClick={onClickBackIcon}
+					/>
+
+					<div className={styles.header}>NEW HIRE&apos;S DETAILS</div>
 				</div>
 
-				<div className={styles.header}>NEW JOINEE&apos;S DETAILS</div>
+				<Button
+					type="button"
+					themeType="secondary"
+					style={{ marginRight: 20 }}
+					onClick={() => setBulkUploadComponent(true)}
+				>
+					Bulk Upload
+				</Button>
 			</div>
 
 			<div className={styles.form}>
