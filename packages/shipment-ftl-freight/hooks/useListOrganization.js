@@ -6,7 +6,7 @@ function useListOrganization({
 	defaultParams = {},
 }) {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'list_shipment_organizations',
+		url    : '/list_shipment_organizations',
 		method : 'GET',
 		params : {
 			...defaultParams,

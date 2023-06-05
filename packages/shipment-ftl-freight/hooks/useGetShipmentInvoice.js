@@ -20,7 +20,7 @@ const useGetShipmentInvoice = () => {
 	const router = useRouter();
 	const { shipment_id } = router.query;
 	const [{ loading, data: invoiceData }, trigger] = useRequest({
-		url    : 'get_shipment_invoice_preference',
+		url    : '/get_shipment_invoice_preference',
 		method : 'GET',
 	}, { manual: true });
 

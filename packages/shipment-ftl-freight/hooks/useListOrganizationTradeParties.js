@@ -13,7 +13,7 @@ const useListOrganizationTradeParties = ({
 	const { page = 1, ...restFilters } = filters;
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'list_organization_trade_parties',
+		url    : '/list_organization_trade_parties',
 		params : {
 			filters: {
 				organization_id,

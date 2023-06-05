@@ -8,7 +8,7 @@ const useListAdditionalServices = ({ shipment_data = {}, pageLimit = 8, filters 
 	const { importer_exporter_id = '', id:shipment_id = '' } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/list_additional_services',
+		url    : '/list_shipment_additional_services',
 		params : {
 			performed_by_org_id : importer_exporter_id,
 			filters             : {
@@ -18,6 +18,7 @@ const useListAdditionalServices = ({ shipment_data = {}, pageLimit = 8, filters 
 			additional_methods : ['pagination'],
 			page_limit         : pageLimit || 8,
 		},
+		service_name: 'shipment',
 	}, { manual: true });
 
 	const getAdditionalServiceListApi = useCallback(async () => {

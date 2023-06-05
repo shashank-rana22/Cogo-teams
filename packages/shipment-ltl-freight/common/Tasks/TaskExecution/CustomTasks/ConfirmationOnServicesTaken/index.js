@@ -89,12 +89,13 @@ function ConfirmationOnServicesTaken({
 				errors={errors}
 				showElements={showElements}
 			/>
-			<div className={styles.button_wrap}>
-				<Button className="secondary md" onClick={() => onCancel()}>
+			<div className={styles.button_container}>
+				<Button themeType="secondary" size="md" onClick={() => onCancel()}>
 					Cancel
 				</Button>
 				<Button
-					className="primary md"
+					themeType="primary"
+					size="md"
 					disabled={taskLoading || bulkLoading}
 					onClick={handleSubmit(saveSubmit)}
 				>

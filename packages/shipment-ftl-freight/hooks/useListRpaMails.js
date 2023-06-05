@@ -12,7 +12,7 @@ const useShipmentEmails = ({ payload = {} }) => {
 	const entityType = useRef(entity_type);
 
 	const [recentClassifiedShipmentApi, triggerRecentClassifiedShipment] = useLensRequest({
-		url    : 'list_rpa_mails',
+		url    : '/list_rpa_mails',
 		method : 'GET',
 		params : {
 			filters: {

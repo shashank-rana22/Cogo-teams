@@ -11,7 +11,7 @@ export default function useUpdateShipment({
 	const { refetch: shipmentRefetch } = useContext(ShipmentDetailContext);
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'update_shipment',
+		url    : '/update_shipment',
 		method : 'POST',
 	}, { manual: true });
 

@@ -5,7 +5,7 @@ function useUpdateShipmentDocuments({
 	refetch = () => {},
 }) {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'update_shipment_document',
+		url    : '/update_shipment_document',
 		method : 'POST',
 	}, { manual: true });
 

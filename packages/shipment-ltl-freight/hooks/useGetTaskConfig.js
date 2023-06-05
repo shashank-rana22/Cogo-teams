@@ -6,7 +6,7 @@ function useGetTaskConfig({ task = {} }) {
 	const [apiData, setApiData] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'get_task_config',
+		url    : '/get_task_config',
 		method : 'GET',
 	}, { manual: true });
 

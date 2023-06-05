@@ -39,7 +39,6 @@ function ExecuteStep({
 		getApisData,
 		showElements,
 	});
-	console.log('controls', fields);
 
 	return (
 		<div className={styles.container}>
