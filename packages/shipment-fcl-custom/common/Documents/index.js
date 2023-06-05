@@ -15,15 +15,19 @@ import UploadForm from './UploadForm';
 import Wallet from './Wallet';
 
 function Documents() {
+	const {
+		shipment_data, activeStakeholder, primary_service,
+		stakeholderConfig:{ documents = {} } = {},
+	} = 	useContext(ShipmentDetailContext);
+
 	const [showDoc, setShowDoc] = useState(null);
 	const [showApproved, setShowApproved] = useState(false);
 	const [activeToggle, setActiveToggle] = useState(false);
-	const [activeWallet, setActiveWallet] = useState('trade_documents');
+	const [activeWallet, setActiveWallet] = useState(documents.default_wallet);
 	const [addToWallet, setAddToWallet] = useState(true);
 	const [searchValue, setSearchValue] = useState('');
 
 	const { updateDocument } = useUpdateDocument({});
-	const { shipment_data, primary_service, activeStakeholder } = useContext(ShipmentDetailContext);
 
 	const {
 		loading,

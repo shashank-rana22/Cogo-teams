@@ -17,7 +17,7 @@ import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
 function List({ isSeller = false }) {
-	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(
+	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
 		ShipmentDetailContext,
 	);
 
@@ -61,14 +61,12 @@ function List({ isSeller = false }) {
 								key={serviceListItem?.id}
 								item={serviceListItem}
 								status={status}
-								showIp={showModal === 'ip'}
 								actionButton={actions({
 									status,
 									serviceListItem,
 									setShowModal,
 									setItem,
-									shipment_data,
-									activeStakeholder,
+									stakeholderConfig,
 								})}
 								refetch={handleRefetch}
 								services={servicesList}

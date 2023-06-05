@@ -10,7 +10,7 @@ function useListTasksHelper() {
 	const [selectedMail, setSelectedMail] = useState([]);
 	const [filters] = useState({});
 
-	const { shipment_data, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
+	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 
 	const { id: shipment_id } = shipment_data || '';
 
@@ -20,7 +20,6 @@ function useListTasksHelper() {
 		filters,
 		showMyTasks,
 		shipment_data,
-		activeStakeholder,
 	});
 
 	let completedTaskCount = 0;

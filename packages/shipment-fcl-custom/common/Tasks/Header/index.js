@@ -15,11 +15,11 @@ function Header({
 }) {
 	const [showBookingReq, setShowBookingReq] = useState(false);
 
-	const contextValues = useContext(ShipmentDetailContext);
-	const { activeStakeholder, shipment_data } = contextValues || {};
+	const {
+		stakeholderConfig : { tasks = {} } = {}, shipment_data,
+	} = useContext(ShipmentDetailContext);
 
-	const showBookingRequirementsCondition = ['superadmin', 'booking_desk', 'booking_desk_manager', 'so1_so2_ops']
-		.includes(activeStakeholder) && shipment_data?.state !== 'shipment_received';
+	const bookingReqCond = !!(tasks.show_booking_req && shipment_data?.state !== 'shipment_received');
 
 	return (
 		<div className={styles.container}>
@@ -51,7 +51,7 @@ function Header({
 				</div>
 			</div>
 
-			{showBookingRequirementsCondition
+			{bookingReqCond
 				? (
 					<div className={styles.booking_req_heading}>
 						<div>Booking Requirements</div>

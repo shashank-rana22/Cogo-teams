@@ -15,7 +15,15 @@ function ActionsToShow({
 	loading,
 	onCancel = () => {},
 }) {
-	const { activeStakeholder } = useContext(ShipmentDetailContext);
+	const { stakeholderConfig } = useContext(ShipmentDetailContext);
+
+	const config = stakeholderConfig?.additional_services?.add_rate || {};
+
+	const stakeholderAllowed = {};
+
+	Object.entries(config).forEach(([key, val]) => {
+		stakeholderAllowed[key?.split('::')?.[1]] = val;
+	});
 
 	const {
 		handleShipperConfirm,
@@ -43,7 +51,8 @@ function ActionsToShow({
 	}
 
 	if (
-		status?.status === 'amendment_requested_by_importer_exporter' && activeStakeholder === 'booking_agent'
+		status?.status === 'amendment_requested_by_importer_exporter'
+		&& !!stakeholderAllowed.amendment_requested_by_importer_exporter
 	) {
 		return (
 			<div className={styles.button_container}>
@@ -74,7 +83,7 @@ function ActionsToShow({
 	}
 
 	if (status?.status === 'cancelled_by_supplier'
-		&& ['booking_desk_manager', 'booking_desk', 'so1_so2_ops'].includes(activeStakeholder)
+		&& !!stakeholderAllowed.cancelled_by_supplier
 	) {
 		return (
 			<div className={styles.button_container}>

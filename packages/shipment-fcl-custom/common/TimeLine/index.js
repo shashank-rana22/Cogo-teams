@@ -1,6 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMEdit } from '@cogoport/icons-react';
-import { useState, useContext, useEffect } from 'react';
+import { useState, useContext, useEffect, useMemo } from 'react';
 
 import EditSchedule from './EditSchedule';
 import { canEditSchedule } from './helpers/canEditSchedule';
@@ -10,8 +10,13 @@ import TimelineItem from './TimelineItem';
 
 function Timeline() {
 	const {
-		shipment_data, primary_service, timelineLoading : loading, isGettingShipment,
-		timelineData, getShipmentTimeline, activeStakeholder,
+		shipment_data,
+		primary_service,
+		stakeholderConfig,
+		timelineData,
+		timelineLoading: loading,
+		isGettingShipment,
+		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
 
 	useEffect(() => {
@@ -22,13 +27,15 @@ function Timeline() {
 
 	const [showEditSchedule, setShowEditSchedule] = useState(false);
 
-	const showEditScheduleIcon = canEditSchedule({ primary_service, activeStakeholder });
+	const showEditScheduleIcon = canEditSchedule({ primary_service, stakeholderConfig });
 
 	const filteredTimelineData = (timelineData || []).filter(
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
 	);
 
 	const totalItems = (timelineData || []).length;
+	const mapKeys = useMemo(() => Array(totalItems).fill(null).map(() => Math.random()), [totalItems]);
+
 	let consecutivelyCompleted = true;
 
 	if (isGettingShipment || loading) {
@@ -48,10 +55,10 @@ function Timeline() {
 					consecutivelyCompleted = consecutivelyCompleted && timelineItem.completed_on;
 					return (
 						<TimelineItem
+							key={mapKeys[index]}
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
 							isLast={totalItems === index + 1}
-							key={timelineItem.milestone}
 						/>
 					);
 				})}
@@ -62,10 +69,7 @@ function Timeline() {
 			) : null}
 
 			{showEditSchedule ? (
-				<EditSchedule
-					setShow={setShowEditSchedule}
-					timelineData={timelineData}
-				/>
+				<EditSchedule setShow={setShowEditSchedule} timelineData={timelineData} />
 			) : null}
 		</div>
 	);

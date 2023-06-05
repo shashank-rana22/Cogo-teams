@@ -13,7 +13,7 @@ import getCanCancelService from './utils/getCanCancelService';
 import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
-const actionButtons = [
+const ACTION_BUTTONS = [
 	{ label: 'Edit', value: 'supplier_reallocation' },
 	{ label: 'Edit Params', value: 'edit_params' },
 	{ label: 'Cancel', value: 'cancel' },
@@ -26,7 +26,7 @@ function EditCancelService({ serviceData = {} }) {
 	const { state, trade_type, service_type } = serviceData || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
-	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList, stakeholderConfig } = useContext(ShipmentDetailContext);
 
 	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
 
@@ -35,15 +35,15 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
-	actionButtons[2].show = getCanCancelService({ state, activeStakeholder });
+	ACTION_BUTTONS[0].show = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
+	ACTION_BUTTONS[1].show = getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig });
+	ACTION_BUTTONS[2].show = getCanCancelService({ state, stakeholderConfig });
 
-	if (!actionButtons.some((actionButton) => actionButton.show)) {
+	if (!ACTION_BUTTONS.some((actionButton) => actionButton.show)) {
 		return null;
 	}
 
-	const content = actionButtons.map(({ label, value, show }) => (show ? (
+	const content = ACTION_BUTTONS.map(({ label, value, show }) => (show ? (
 		<div
 			key={value}
 			role="button"
