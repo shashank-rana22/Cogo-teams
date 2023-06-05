@@ -19,7 +19,7 @@ import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDef
 
 import styles from './styles.module.css';
 
-const goe = getGeoConstants();
+const geo = getGeoConstants();
 
 function SelfAndTradePartyForm({
 	companyType = '',
@@ -170,7 +170,7 @@ function SelfAndTradePartyForm({
 										size="sm"
 										rules={{
 											pattern: {
-												value   : goe.regex.EMAIL,
+												value   : geo.regex.EMAIL,
 												message : 'Enter valid email',
 											},
 										}}
