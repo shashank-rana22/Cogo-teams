@@ -42,15 +42,16 @@ function Form({
 		},
 	});
 
-	// useEffect(() => {
-	// 	onChange({
-	// 		serviceKey,
-	// 		code  : lineItem?.code,
-	// 		type  : 'absolute_total',
-	// 		currency,
-	// 		value : marginValue,
-	// 	});
-	// }, []);
+	useEffect(() => {
+		onChange({
+			serviceKey,
+			code  : lineItem?.code,
+			type  : 'absolute_total',
+			currency,
+			value : marginValue,
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		console.log('watch::', watch());
