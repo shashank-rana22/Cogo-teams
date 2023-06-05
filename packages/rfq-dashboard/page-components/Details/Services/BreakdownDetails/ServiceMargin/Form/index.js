@@ -48,6 +48,7 @@ function Form({
 			currency,
 			value : marginValue,
 		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
