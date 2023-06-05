@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 
+import EmptyState from '../../../common/EmptyState';
 import StyledTable from '../../StyledTable';
 
 import getColumns from './getColumns';
@@ -7,12 +8,12 @@ import ReviewModal from './ReviewModal';
 import styles from './styles.module.css';
 import ListEmployeeSignedDocuments from './useListEmployeeSignedDocuments';
 
-function SignedDocuments({ profileData, loading }) {
+function SignedDocuments() {
 	const onClickViewDocument = (id) => {
 		window.open('https://www.africau.edu/images/default/sample.pdf', '_blank');
 	};
 
-	const { list } = ListEmployeeSignedDocuments();
+	const { list, loading: listLoading } = ListEmployeeSignedDocuments();
 
 	const [showModal, setShowModal] = useState(false);
 
@@ -25,7 +26,15 @@ function SignedDocuments({ profileData, loading }) {
 				<div className={styles.approval_done}>1/5</div>
 			</div>
 
-			<StyledTable columns={columns} data={list} loading={loading} />
+			{(list || []).length > 0 || listLoading
+				? <StyledTable columns={columns} data={list} loading={listLoading} />
+				: (
+					<EmptyState
+						flexDirection="column"
+						emptyText="No Signed Document to Review"
+						textSize={20}
+					/>
+				)}
 
 			<ReviewModal showModal={showModal} setShowModal={setShowModal} />
 		</div>

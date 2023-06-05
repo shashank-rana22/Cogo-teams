@@ -41,7 +41,7 @@ function ProfilePage() {
 	const TABS_MAPPING = {
 		profile_info     : ProfileDetails,
 		additional_info  : AdditionalDetails,
-		Signed_documents : SignedDocuments,
+		signed_documents : SignedDocuments,
 	};
 
 	return (

@@ -24,7 +24,7 @@ function CompanyPolicyDetails() {
 				</Button>
 			</div>
 
-			{(list || []).length > 0 ? (
+			{(list || []).length > 0 || listLoading ? (
 				<StyledTable
 					columns={columns}
 					data={list}
