@@ -1,5 +1,6 @@
 import { useRequest } from '@cogoport/request';
-import { useState } from 'react';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
+import { useState, useEffect, useCallback } from 'react';
 
 const useListSaasRailDomesticFreightContainerDetails = ({ defaultFilters = {}, defaultParams = {} }) => {
 	const [filters, setFilters] = useState({});
@@ -16,6 +17,30 @@ const useListSaasRailDomesticFreightContainerDetails = ({ defaultFilters = {}, d
 
 		},
 	});
+
+	const apiTrigger = useCallback(() => {
+		(
+			async () => {
+				try {
+					await trigger();
+				} catch (err) {
+					toastApiError(err);
+				}
+			}
+		)();
+	}, [trigger]);
+
+	useEffect(() => {
+		apiTrigger();
+	}, [apiTrigger, filters]);
+
+	return {
+		loading,
+		data,
+		apiTrigger,
+		filters,
+		setFilters,
+	};
 };
 
 export default useListSaasRailDomesticFreightContainerDetails;

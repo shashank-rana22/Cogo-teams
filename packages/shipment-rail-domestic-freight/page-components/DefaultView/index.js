@@ -19,6 +19,7 @@ const TAB_MAPPING = {
 	tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
+	tracking  : dynamic(() => import('../Tracking'), { ssr: false }),
 };
 
 function DefaultView() {
@@ -37,6 +38,7 @@ function DefaultView() {
 		cancelDetails       : !!(features.includes('cancel_details') && shipment_data?.state === 'cancelled'),
 		documentHoldDetails : !!features.includes('document_hold_details'),
 		timeline            : !!features.includes('timeline'),
+		tracking            : !!features.includes('tracking'),
 	};
 
 	return (
