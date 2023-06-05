@@ -70,7 +70,8 @@ const businessFinance = {
 		navigation: 'business_finance-overheads',
 	},
 	'/[partner_id]/business-finance/settlement/[active_tab]': {
-		navigation: 'business_finance-settlement',
+		navigation : 'business_finance-settlement',
+		isMainNav  : true,
 	},
 };
 
