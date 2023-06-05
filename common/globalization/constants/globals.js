@@ -1,4 +1,5 @@
 import ENTITY_MAPPING from './entityMapping';
+import LANGUAGE_MAPPING from './languageMapping';
 
 const GLOBAL_CONSTANTS = {
 	country_entity_ids: {
@@ -115,6 +116,8 @@ const GLOBAL_CONSTANTS = {
 		cart_png                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cart_icon.png',
 		saas_subscription_loading : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
 	},
+	languages: LANGUAGE_MAPPING,
+
 };
 
 export default GLOBAL_CONSTANTS;
