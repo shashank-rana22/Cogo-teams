@@ -30,6 +30,7 @@ import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import shipmentFclCustom from './config/shipment-fcl-custom';
 import shipmentFclFreight from './config/shipment-fcl-freight';
+import shipmentFclFreightLocal from './config/shipment-fcl-freight-local';
 import shipmentLclFreight from './config/shipment-lcl-freight';
 import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
@@ -78,6 +79,7 @@ const routeConfig = {
 	...so2Surface,
 	...chakravyuh,
 	...shipmentFclCustom,
+	...shipmentFclFreightLocal,
 	...ticketManagement,
 };
 
