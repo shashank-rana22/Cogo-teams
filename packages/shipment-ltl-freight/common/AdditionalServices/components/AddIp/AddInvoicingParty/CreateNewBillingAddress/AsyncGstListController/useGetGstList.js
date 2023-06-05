@@ -1,5 +1,5 @@
-// import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useEffect } from 'react';
 
 function useGetGstList({ registrationNumber }) {
@@ -17,7 +17,7 @@ function useGetGstList({ registrationNumber }) {
 					},
 				});
 			} catch (err) {
-				// toastApiError(err);
+				toastApiError(err);
 			}
 		})();
 	}, [trigger, registrationNumber]);

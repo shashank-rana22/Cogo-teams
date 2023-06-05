@@ -1,12 +1,10 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 
 const geo = getGeoConstants();
 
 const controls = ({ watch }) => {
 	const watchCountryId = watch('country_id');
-	const isCountryIndia = watchCountryId === GLOBAL_CONSTANTS.country_entity_ids.IN;
 
 	const panPatternValue = getCountrySpecificData({
 		country_id    : watchCountryId,
@@ -35,7 +33,7 @@ const controls = ({ watch }) => {
 			rules       : {
 				required : 'PAN Number is required',
 				pattern  : {
-					value   : isCountryIndia && panPatternValue,
+					value   : panPatternValue,
 					message : 'PAN is invalid',
 				},
 			},
