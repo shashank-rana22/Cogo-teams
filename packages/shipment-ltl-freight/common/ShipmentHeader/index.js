@@ -4,7 +4,7 @@ import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useContext, useState } from 'react';
 
-// import CancelShipment from '../CancelShipment';
+import CancelShipment from '../CancelShipment';
 import CargoDetails from '../CargoDetails';
 import PortDetails from '../PortDetails';
 
@@ -104,9 +104,9 @@ function ShipmentHeader() {
 				/>
 			) : null}
 
-			{/* {showModal === 'cancel_shipment' ? (
+			{showModal === 'cancel_shipment' ? (
 				<CancelShipment setShow={setShowModal} />
-			) : null} */}
+			) : null}
 		</div>
 	);
 }
