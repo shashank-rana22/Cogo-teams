@@ -4,7 +4,6 @@ import { isEmpty } from '@cogoport/utils';
 import EmptyState from '../../../CreateCourse/commons/EmptyState';
 import Header from '../Header';
 
-// import CompletionAndFeedback from './components/CompletionAndFeedback';
 import Footer from './components/Footer';
 import ModuleContent from './components/ModuleContent';
 import ModuleNavigation from './components/ModuleNavigation';
@@ -39,15 +38,13 @@ function CourseConsumption({
 		editorError,
 		course_id,
 		router,
+		showFeedback,
+		setShowFeedback,
 	} = useHandleCourseConsumption({ courseData, courseLoading, trigger, viewType });
 
 	if (isEmpty(finalData) && !(finalLoading || courseProgressUpdateLoading)) {
 		return <EmptyState />;
 	}
-
-	// if (finalData?.all_chapters_completed) {
-	// 	return <CompletionAndFeedback course_id={course_id} />;
-	// }
 
 	return (
 		<>
@@ -71,6 +68,8 @@ function CourseConsumption({
 						setIndexes={setIndexes}
 						setShowTestData={setShowTestData}
 						showTestData={showTestData}
+						showFeedback={showFeedback}
+						setShowFeedback={setShowFeedback}
 						redirect_chapter_details={finalData?.redirect_chapter_details || {}}
 					/>
 
@@ -91,25 +90,32 @@ function CourseConsumption({
 						viewType={viewType}
 						setShowTestData={setShowTestData}
 						showTestData={showTestData}
+						showFeedback={showFeedback}
+						setShowFeedback={setShowFeedback}
+						course_id={course_id}
+
 					/>
 				</div>
 
 				{viewType !== 'preview' ? (
-					<Footer
-						course_id={course_id}
-						data={finalData}
-						indexes={indexes}
-						setIndexes={setIndexes}
-						updateCourseProgress={updateCourseProgress}
-						loading={finalLoading || courseProgressUpdateLoading}
-						getUserCourse={refetchApi}
-						chapter={chapter}
-						RichTextEditor={RichTextEditor}
-						editorValue={editorValue}
-						setEditorValue={setEditorValue}
-						setEditorError={setEditorError}
-						setChapter={setChapter}
-					/>
+					(showFeedback || showTestData)
+						? null : (
+							<Footer
+								course_id={course_id}
+								data={finalData}
+								indexes={indexes}
+								setIndexes={setIndexes}
+								updateCourseProgress={updateCourseProgress}
+								loading={finalLoading || courseProgressUpdateLoading}
+								getUserCourse={refetchApi}
+								chapter={chapter}
+								RichTextEditor={RichTextEditor}
+								editorValue={editorValue}
+								setEditorValue={setEditorValue}
+								setEditorError={setEditorError}
+								setChapter={setChapter}
+							/>
+						)
 				) : null}
 
 				{viewType === 'preview' ? (

@@ -40,6 +40,7 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 
 	const { moduleIndex, subModuleIndex, chapterIndex } = indexes;
 	const [showTestData, setShowTestData] = useState();
+	const [showFeedback, setShowFeedback] = useState();
 
 	const {
 		data = {},
@@ -106,6 +107,8 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 		editorError,
 		course_id,
 		router,
+		showFeedback,
+		setShowFeedback,
 	};
 };
 

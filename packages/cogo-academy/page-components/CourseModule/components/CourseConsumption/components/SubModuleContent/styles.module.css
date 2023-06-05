@@ -57,7 +57,7 @@
 }
 
 .duration {
-	margin-left: 8px;
+	margin: 0 8px 0 8px;
 	font-size: 10px;
 	color: #4f4f4f;
 	white-space: nowrap;

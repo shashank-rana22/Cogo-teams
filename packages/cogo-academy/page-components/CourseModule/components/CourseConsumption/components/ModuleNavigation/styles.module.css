@@ -118,22 +118,37 @@
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-around;
 	padding: 12px 24px;
 	margin-bottom: 10px;
 	cursor: pointer;
-	background: #fffce6;
 	border-radius: 6px;
+	border: 2px solid #f9f9f9;
+
+}
+
+.box_selected{
+	background: #fffce6;
+}
+
+.box_notselected{
+	background: white;
 }
 
 .box_deactive {
 	display: flex;
 	flex-direction: row;
 	align-items: center;
-	justify-content: space-around;
 	padding: 12px 24px;
 	margin-bottom: 10px;
 	cursor: not-allowed;
 	background: #f9f9f9;
 	border-radius: 6px;
+	align-items: center;
+	cursor: not-allowed;
+	border: 2px solid #f9f9f9;
+
+}
+
+.text{
+	margin-left: 30px;
 }

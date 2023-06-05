@@ -25,14 +25,14 @@ function SubModuleContent({
 	subModuleIndex,
 	chapter = {},
 	setChapter = () => {},
-	setShowTestData,
+	setStates,
 }) {
 	return (
 		<div
 			className={styles.container}
 			role="button"
 			tabIndex="0"
-			onClick={() => { setShowTestData(false); }}
+			onClick={() => { setStates(false, false); }}
 		>
 			{data.map((currChapter, chapterIndex) => (
 				<div

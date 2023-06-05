@@ -5,6 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import getChapter from '../../utils/getChapter';
 import hideBtn from '../../utils/hideBtn';
+import CompletionAndFeedback from '../CompletionAndFeedback';
 
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
@@ -23,6 +24,8 @@ function ModuleContent({
 	viewType,
 	setShowTestData,
 	showTestData,
+	showFeedback,
+	course_id,
 }) {
 	const {
 		name, content_type = '', chapter_content = '',
@@ -35,8 +38,6 @@ function ModuleContent({
 	if (loading) {
 		return <LoadingState />;
 	}
-
-	// console.log('data', data);
 
 	const openInNewTab = (url) => {
 		window.open(url, '_blank', 'noopener,noreferrer');
@@ -78,6 +79,14 @@ function ModuleContent({
 		</div>
 	);
 
+	if (showFeedback) {
+		return (
+			<div className={styles.container}>
+				<CompletionAndFeedback course_id={course_id} feedbackData={data?.course_details?.feedback} />
+			</div>
+		);
+	}
+
 	return (
 		<div className={styles.container}>
 			{ showTestData ? (
@@ -116,12 +125,16 @@ function ModuleContent({
 
 								</div>
 							</div>
-							<Button
-								onClick={() => { router.push(`/learning/tests/${data?.course_details?.tests[0]?.id}`); }}
-							>
-								Visit Test
+							{ data?.test_completed
+								? <Button themeType="tertiary">Test Completed</Button>
+								: (
+									<Button
+										onClick={() => { router.push(`/learning/tests/${data?.course_details?.tests[0]?.id}?from=${data?.course_details?.id}`); }}
+									>
+										Visit Test
 
-							</Button>
+									</Button>
+								)}
 						</div>
 					</div>
 				</div>
