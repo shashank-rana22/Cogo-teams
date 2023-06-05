@@ -4,7 +4,7 @@ import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-const onClickBackIcon = (push) => {
+const onClickCourse = (push) => {
 	push(
 		'/learning/course',
 		'/learning/course',
@@ -39,7 +39,7 @@ function Header() {
 					<div
 						className={styles.link}
 						role="presentation"
-						onClick={() => onClickBackIcon(push)}
+						onClick={() => onClickCourse(push)}
 					>
 						Course
 					</div>
@@ -54,7 +54,7 @@ function Header() {
 					className={styles.back_icon}
 					width={20}
 					height={20}
-					onClick={() => onClickBackIcon(push)}
+					onClick={() => onClickCogoAcademy(push)}
 				/>
 
 				<div role="presentation" className={styles.title}>Create your Own Course</div>

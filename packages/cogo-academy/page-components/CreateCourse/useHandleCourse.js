@@ -20,7 +20,7 @@ const useHandleCourse = ({ ref, courseActiveTab }) => {
 		input,
 		setInput,
 		total_count:courseCount,
-	} = useListCogoAcademyCourses({ filters, activeTab });
+	} = useListCogoAcademyCourses({ filters });
 
 	const {
 		data: studentData,
@@ -32,7 +32,7 @@ const useHandleCourse = ({ ref, courseActiveTab }) => {
 		input: studentListInput,
 		setInput: setstudentListInput,
 		total_count:studentCount,
-	} = useListUserCourses({ filters, activeTab });
+	} = useListUserCourses({ filters });
 
 	const componentMapping = {
 		courses: {
