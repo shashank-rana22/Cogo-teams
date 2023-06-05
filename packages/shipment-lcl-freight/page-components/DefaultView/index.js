@@ -29,6 +29,14 @@ function DefaultView() {
 
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
+	const tabProps = {
+		emails: {
+			source           : 'cogo_rpa',
+			filters          : { q: shipment_data?.serial_id },
+			pre_subject_text : `${shipment_data?.serial_id}`,
+		},
+	};
+
 	const conditionMapping = {
 		shipment_info       : !!features.includes('shipment_info'),
 		shipment_header     : !!features.includes('shipment_header'),
@@ -76,7 +84,8 @@ function DefaultView() {
 				>
 					{tabs.map((t) => (
 						<TabPanel name={t} key={t} title={stakeholderConfig[t]?.tab_title}>
-							{TAB_MAPPING[t]()}
+							{TAB_MAPPING[t](tabProps[t] || {})}
+
 						</TabPanel>
 					))}
 				</Tabs>
