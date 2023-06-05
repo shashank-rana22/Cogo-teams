@@ -13,7 +13,7 @@ export const useStakeholderCheck = () => {
 			role_ids: [geo.uuid.coe_finance_head,
 				geo.uuid.super_admin_id,
 				geo.uuid.admin_id,
-				geo.uuid.prod_settlement_executive],
+				geo.uuid.prod_settlement_executive, geo.uuid.operation_manager],
 			role: 'credit_control',
 		},
 		{ role_ids: geo.uuid.service_ops2_role_id, role: 'so2' },
