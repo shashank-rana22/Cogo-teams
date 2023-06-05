@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import Card from '../Card';
 
@@ -12,13 +12,17 @@ function InvoicingParty({ tradePartnersData = {} }) {
 	const [show, setShow] = useState({});
 	const { invoicing_parties_details = [] } = tradePartnersData;
 	const invoicePartyLength = invoicing_parties_details.length;
+	const keys = useMemo(
+		() => Array(invoicePartyLength.length).fill(null).map(() => Math.random()),
+		[invoicePartyLength.length],
+	);
 
 	return (invoicing_parties_details.map((invoiceParty, index) => {
 		const { business_name = '', services = [], poc_data = [] } = invoiceParty;
 		const format_services = services.map((t) => startCase(t)).join(', ');
 
 		return	(
-			<Card title={`Invoicing Party ${invoicePartyLength <= 1 ? '' : index + 1}`}>
+			<Card title={`Invoicing Party ${invoicePartyLength <= 1 ? '' : index + 1}`} key={keys[index]}>
 				<div className={styles.header}>
 					<div className={styles.party_name}>{business_name}</div>
 					<div>

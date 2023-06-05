@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMHelp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import useGetMails from '../../../hooks/useGetMails';
 import FeedBack from '../FeedBack';
@@ -67,6 +67,10 @@ function RPASearch({
 		entity_name,
 		show,
 	});
+	const keys = useMemo(
+		() => Array(data?.body?.length).fill(null).map(() => Math.random()),
+		[data?.body?.length],
+	);
 
 	let content = (
 		<div className={styles.container}>
@@ -141,9 +145,10 @@ function RPASearch({
 					<h2>Loading emails from operations@cogoport.com...</h2>
 				) : null}
 
-				{(data?.body || []).map((item) => (
+				{(data?.body || []).map((item, i) => (
 					<MailData
 						item={item}
+						key={keys[i]}
 						onClick={handleChange}
 						values={selectedMail}
 						multiple={multiple}

@@ -1,5 +1,6 @@
 import { Button, Loader } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 import getInternalPocData from '../../../helpers/getInternalPocData';
 
@@ -7,8 +8,14 @@ import Stakeholders from './Stakeholders';
 import styles from './styles.module.css';
 
 function Internal({ data = [], setAddPoc = () => { }, loading = false, rolesPermission = {} }) {
-	const internalData = getInternalPocData(data);
+	const internalData = getInternalPocData(data) || {};
 	const canAddPoc = !!rolesPermission?.add_internal_poc;
+
+	const keysLength = Object.keys(internalData)?.length;
+	const keys = useMemo(
+		() => Array(keysLength).fill(null).map(() => Math.random()),
+		[keysLength],
+	);
 
 	return (
 		<div>
@@ -30,8 +37,8 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false, rolesPerm
 					</div>
 
 					<div>
-						{Object.keys(internalData).map((key) => (
-							<div className={styles.service_container}>
+						{Object.keys(internalData).map((key, index) => (
+							<div className={styles.service_container} key={keys[index]}>
 								<div className={styles.service_name}>{startCase(key)}</div>
 								<div>
 									<Stakeholders

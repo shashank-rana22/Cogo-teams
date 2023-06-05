@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function EditLineItems({
 	control,
 	showAddButtons = true, showDeleteButton = true, controls = [],
-	name = '', cargoDetails,
+	name = '',
 	customValues = {},
 	error = {},
 }) {

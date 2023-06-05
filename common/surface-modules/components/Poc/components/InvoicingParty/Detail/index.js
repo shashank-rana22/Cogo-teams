@@ -25,8 +25,14 @@ function Detail({ data = [] }) {
 			{ data.map((poc) => {
 				const sp_poc_data = mapping(poc);
 				return (
-					<div className={styles.detail_card}>
-						{Object.keys(sp_poc_data).map((key) => <LabelValue label={key} value={sp_poc_data[key]} />)}
+					<div className={styles.detail_card} key={poc?.id}>
+						{Object.keys(sp_poc_data).map((key) => (
+							<LabelValue
+								label={key}
+								value={sp_poc_data[key]}
+								key={`${poc?.id}_${key}`}
+							/>
+						))}
 					</div>
 				);
 			})}
