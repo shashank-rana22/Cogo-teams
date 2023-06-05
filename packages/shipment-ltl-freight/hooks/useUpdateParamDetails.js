@@ -11,11 +11,11 @@ const useUpdateParamDetails = (shipmentNumber, closeModal = () => {}) => {
 	const createParamDetails = async ({ values }) => {
 		const packages = (values.packages || []).map((item) => ({
 			packing_type   : item?.package_type || item?.packing_type,
-			packages_count : +item?.packages_count,
-			package_weight : +item?.package_weight,
-			length         : +item?.length || +item?.dimensions?.length,
-			width          : +item?.width || +item?.dimensions?.width,
-			height         : +item?.height || +item?.dimensions?.height,
+			packages_count : +(item?.packages_count || 0),
+			package_weight : +(item?.package_weight || 0),
+			length         : +(item?.length || 0) || +(item?.dimensions?.length || 0),
+			width          : +(item?.width || 0) || +(item?.dimensions?.width || 0),
+			height         : +(item?.height || 0) || +(item?.dimensions?.height || 0),
 		}));
 
 		const payload = { shipment_id: shipmentNumber, packages };
