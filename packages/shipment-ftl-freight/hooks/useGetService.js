@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 function useGetService({ defaultParams = {} }) {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'get_shipment_service',
+		url    : '/get_shipment_service',
 		method : 'GET',
 		params : {
 			...defaultParams,

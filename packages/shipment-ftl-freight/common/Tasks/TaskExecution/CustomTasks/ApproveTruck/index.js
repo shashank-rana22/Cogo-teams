@@ -30,7 +30,6 @@ function ApproveTruck({
 	const { loading: serviceLoading, data } = useGetService({ defaultParams: { id: task.task_field_id } });
 
 	const { updateBookingParameter } = useUpdateBookingParameter();
-	console.log('data', data);
 	// const { loading: shipmentLoading, updateShipmentBookingParameter } =		useUpdateShipmentBookingParameter();
 	// const { loading: taskLoading, updateShipmentPendingTask } =		useUpdateShipmentPendingTask();
 

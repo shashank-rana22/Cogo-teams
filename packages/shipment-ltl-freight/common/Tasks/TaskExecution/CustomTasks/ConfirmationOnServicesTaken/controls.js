@@ -105,7 +105,11 @@ const getControls = () => {
 					message : 'Payment sub Type is Required',
 				},
 			},
-			options: [],
+			options: [
+				{ label: 'Paid', value: 'paid' },
+				{ label: 'TBB', value: 'tbb' },
+				{ label: 'To Pay', value: 'to_pay' },
+			],
 		},
 	];
 	return controls;

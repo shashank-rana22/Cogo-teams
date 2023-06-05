@@ -3,9 +3,9 @@ import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/surface-modules';
 
 import getDefaultValues from '../../utils/get-default-values';
-import Step3 from '../UploadBookingNote/components/Step3';
-import useGetStep3Data from '../UploadBookingNote/helpers/useGetStep3Data';
 
+import EditQuotations from './EditQuotations';
+import useEditQuotations from './EditQuotations/useEditQuotations';
 import getControls from './helper/getControls';
 import styles from './styles.module.css';
 
@@ -17,7 +17,7 @@ function EditRate({
 	refetch = () => {},
 	formattedRate = {},
 }) {
-	const editQuote = useGetStep3Data({
+	const editQuote = useEditQuotations({
 		servicesList    : servicesList.filter((item) => item.id === task.service_id),
 		shipment_data,
 		onCancel,
@@ -66,7 +66,7 @@ function EditRate({
 					<Loader themeType="primary" className={styles.loader_icon} />
 				</div>
 			) : (
-				<Step3 data={editQuote} />
+				<EditQuotations data={editQuote} shipment_id={task?.shipment_id} onCancel={onCancel} />
 			)}
 		</div>
 	);

@@ -1,4 +1,4 @@
-const formatRates = (selectedRate, shipment_data, service_type_prop, primaryService, servicesList) => {
+const formatRates = (selectedRate, service_type_prop, primaryService, servicesList) => {
 	if (!selectedRate) return {};
 
 	const service_type = service_type_prop || 'fcl_freight_service';

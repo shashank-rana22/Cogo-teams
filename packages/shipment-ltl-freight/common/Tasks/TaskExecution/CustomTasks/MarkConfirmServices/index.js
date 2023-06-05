@@ -5,10 +5,7 @@ import formatRate from './helper/formatRate';
 import SelectRate from './SelectRate';
 
 const revenueDeskServices = [
-	'ftl_freight_service',
-	'fcl_customs_service',
-	'fcl_cfs_service',
-	'haulage_freight_service',
+	'ltl_freight_service',
 ];
 
 function MarkServiceConfirmed({

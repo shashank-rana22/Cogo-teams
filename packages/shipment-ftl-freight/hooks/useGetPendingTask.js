@@ -8,7 +8,7 @@ function useGetPendingTasks({
 	defaultParams = {},
 }) {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'list_shipment_pending_tasks',
+		url    : '/list_shipment_pending_tasks',
 		method : 'GET',
 		params : {
 			filters: {

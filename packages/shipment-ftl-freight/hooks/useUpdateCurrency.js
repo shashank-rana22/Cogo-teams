@@ -4,7 +4,7 @@ import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
 const useUpdateCurrency = ({ refetch, currency }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'update_shipment_invoice_currency',
+		url    : '/update_shipment_invoice_currency',
 		method : 'POST',
 	}, { manual: true });
 

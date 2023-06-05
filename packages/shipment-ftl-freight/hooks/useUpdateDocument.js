@@ -4,7 +4,7 @@ import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
 const useUpdateDocument = ({ refetch = () => {} }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : 'create_organization_document',
+		url    : '/create_organization_document',
 		method : 'POST',
 
 	}, { manual: true });
