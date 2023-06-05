@@ -25,6 +25,8 @@ function Header({
 		router.push('/new-employee-dashboard', '/new-employee-dashboard');
 	};
 
+	const isLoading = loading || isEmpty(detail || {}) || false;
+
 	return (
 		<div className={styles.container}>
 			<div>
@@ -45,7 +47,7 @@ function Header({
 
 					<div>
 						<div className={styles.name}>
-							{!loading || !isEmpty(detail) ? (
+							{!isLoading ? (
 								name
 							) : (
 								<Placeholder
@@ -56,7 +58,7 @@ function Header({
 							)}
 						</div>
 						<div className={styles.role}>
-							{!loading || !isEmpty(detail) ? (
+							{!isLoading ? (
 								startCase(designation)
 							) : (
 								<Placeholder height="20px" width="240px" />
@@ -64,7 +66,7 @@ function Header({
 						</div>
 						<div className={styles.emp_code}>
 							<div style={{ marginRight: 2 }}>Employee Code: </div>
-							{!loading || !isEmpty(detail) ? (
+							{!isLoading ? (
 								employee_code
 							) : (
 								<Placeholder height="20px" width="80px" />
@@ -80,7 +82,7 @@ function Header({
 					type="button"
 					themeType="secondary"
 					style={{ marginLeft: 12 }}
-					loading={(loading && isEmpty(detail)) || btnloading || offerLetterApiLoading}
+					loading={isLoading || btnloading || offerLetterApiLoading}
 				>
 					{isEmpty(offerLetter) ? 'Add CTC breakup' : 'View CTC breakup'}
 				</Button>
@@ -89,7 +91,7 @@ function Header({
 					type="button"
 					style={{ marginLeft: 12 }}
 					onClick={() => updateEmployeeStatus()}
-					loading={(loading && isEmpty(detail)) || btnloading || offerLetterApiLoading}
+					loading={isLoading || btnloading || offerLetterApiLoading}
 				>
 					{status === 'active' ? 'Reject Candidate' : 'Reactivate Candidate Profile'}
 				</Button>
