@@ -16,7 +16,7 @@ import styles from './styles.module.css';
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
 const SHIPMENT_ADDITIONAL_METHODS = ['main_service', 'documents'];
 
-function FclFreightLocal() {
+function FclCustoms() {
 	const router = useRouter();
 
 	const { get } = useGetShipment({ additional_methods: SHIPMENT_ADDITIONAL_METHODS });
@@ -92,4 +92,4 @@ function FclFreightLocal() {
 	);
 }
 
-export default FclFreightLocal;
+export default FclCustoms;
