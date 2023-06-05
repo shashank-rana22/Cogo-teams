@@ -6,7 +6,6 @@ import { useRequest } from '@cogoport/request';
 import getControls from '../common/Tasks/TaskExecution/CustomTasks/UploadSI/TaskForm/controls';
 
 const formatData = (data, pendingTask, services) => {
-	console.log(pendingTask, 'pendingTask');
 	const modifiedData = (data.container || []).map((item) => ({
 		id   : item?.id,
 		data : {
@@ -35,13 +34,11 @@ const formatData = (data, pendingTask, services) => {
 		},
 	};
 
-	if (pendingTask?.service_type) {
-		formattedData.data[pendingTask?.service_type] = {
-			id: (services || []).find(
-				(service) => service?.service_type === pendingTask?.service_type,
-			)?.id,
-		};
-	}
+	formattedData.data.fcl_freight_service = {
+		id: (services || []).find(
+			(service) => service?.service_type === 'fcl_freight_service',
+		)?.id,
+	};
 
 	return formattedData;
 };
@@ -64,8 +61,8 @@ const useUpdateSIDetails = ({
 		container : [],
 		documents : [
 			{
-				url         : '',
-				description : '',
+				url         : undefined,
+				description : undefined,
 			},
 		],
 	};
@@ -88,25 +85,24 @@ const useUpdateSIDetails = ({
 			pendingTask,
 			services,
 		);
-		console.log(formattedData, 'formattedData');
 
-		// try {
-		// 	const res = await trigger({
-		// 		data: formattedData,
-		// 	});
+		try {
+			const res = await trigger({
+				data: formattedData,
+			});
 
-		// 	if (!res.hasError) {
-		// 		Toast.success('Task updated successfully');
+			if (!res.hasError) {
+				Toast.success('Task updated successfully');
 
-		// 		onCancel();
+				onCancel();
 
-		// 		taskListRefetch();
-		// 	} else {
-		// 		Toast.error('Something went wrong');
-		// 	}
-		// } catch (err) {
-		// 	toastApiError(err);
-		// }
+				taskListRefetch();
+			} else {
+				Toast.error('Something went wrong');
+			}
+		} catch (err) {
+			toastApiError(err);
+		}
 	};
 
 	return {

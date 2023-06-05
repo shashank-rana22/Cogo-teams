@@ -3,9 +3,7 @@ const controls = () => [
 		name               : 'documents',
 		type               : 'fieldArray',
 		heading            : 'Documents',
-		showButtons        : false,
 		showDivider        : false,
-		showDeleteButton   : false,
 		isSectionRequired  : true,
 		noDeleteButtonTill : 1,
 		controls           : [
@@ -22,16 +20,14 @@ const controls = () => [
 				span          : 4,
 				type          : 'file',
 				label         : 'Please Upload your document',
-				// themeType     : 'secondary',
+				themeType     : 'secondary',
 				drag          : true,
-				// isShipment    : true,
-				// uploadIcon    : 'ic-upload',
+				uploadIcon    : 'ic-upload',
 				document_type : 'si',
 				accept:
 					'image/*,.pdf,.doc,.docx,.xlsx,application/msword,'
 					+ 'application/vnd.openxmlformats-officedocument.wordprocessingml.document',
-				uploadType : 'aws',
-				rules      : { required: { value: true, message: 'Document is required' } },
+				rules: { required: 'Document is required' },
 			},
 		],
 
