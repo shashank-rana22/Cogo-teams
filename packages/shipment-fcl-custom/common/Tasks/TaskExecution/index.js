@@ -1,7 +1,6 @@
 import AdditionsServicesTasks from './AdditionalServicesTasks';
 import ExecuteTask from './ExecuteTask';
 import ReviewDoc from './ReviewDoc';
-import UploadAmendDoc from './UploadAmendDoc';
 
 function TaskExecution({
 	task = {},
@@ -13,16 +12,6 @@ function TaskExecution({
 	if (task?.task_type === 'approve_document') {
 		return (
 			<ReviewDoc
-				task={task}
-				onClose={onCancel}
-				refetch={taskListRefetch}
-			/>
-		);
-	}
-
-	if (task?.task_type === 'amend_document' && task?.task !== 'amend_draft_house_bill_of_lading') {
-		return (
-			<UploadAmendDoc
 				task={task}
 				onClose={onCancel}
 				refetch={taskListRefetch}
