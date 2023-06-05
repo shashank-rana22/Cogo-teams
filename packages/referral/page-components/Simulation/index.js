@@ -29,7 +29,7 @@ function ReturnComponent({
 		return (
 			<div>
 				<div className={styles.networks_chart}>
-					{[...Array(type === 'level' ? 14 : 15)].map((itm) => (
+					{[...Array(type === 'level' ? 14 : 15).keys()].map((itm) => (
 						<Placeholder
 							className={styles.networks_skeleton}
 							key={itm}

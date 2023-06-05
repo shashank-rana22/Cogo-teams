@@ -19,7 +19,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 		return (
 			<div>
 				<div className={styles.networks_chart}>
-					{[...Array(14)].map((itm) => (
+					{[...Array(14).keys()].map((itm) => (
 						<Placeholder
 							className={styles.networks_skeleton}
 							key={itm}
