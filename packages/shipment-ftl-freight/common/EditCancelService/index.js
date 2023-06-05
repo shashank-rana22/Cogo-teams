@@ -91,7 +91,7 @@ function EditCancelService({ serviceData = {} }) {
 	const { state, trade_type, service_type } = serviceData?.[0] || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
-	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList, activeStakeholder, refetchServices } = useContext(ShipmentDetailContext);
 
 	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
 
@@ -176,7 +176,7 @@ function EditCancelService({ serviceData = {} }) {
 							heading="EDIT TRUCK NUMBER"
 							type="truck_number"
 							truckList={getTrucklistWithId(serviceData)}
-							// refetchServices={refetchServices}
+							refetchServices={refetchServices}
 						/>
 					</Modal.Body>
 
