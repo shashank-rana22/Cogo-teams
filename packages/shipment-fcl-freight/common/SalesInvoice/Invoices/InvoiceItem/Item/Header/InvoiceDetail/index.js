@@ -1,10 +1,10 @@
 import { Button, cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import CONSTANTS from '../../../../../../../configurations/constant.json';
 import styles from '../styles.module.css';
 
 const API_SUCCESS_MESSAGE = {
@@ -33,7 +33,7 @@ function InvoiceDetail({
 		window.open(invoiceLink);
 	};
 
-	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= CONSTANTS.invoice_check_id
+	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
 	&& invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 

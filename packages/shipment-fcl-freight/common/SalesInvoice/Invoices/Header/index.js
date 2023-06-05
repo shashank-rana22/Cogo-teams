@@ -1,4 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useSelector } from '@cogoport/store';
 import { useContext } from 'react';
@@ -23,7 +24,7 @@ function Header({
 	const user_data = useSelector(({ profile }) => profile || {});
 	const { shipment_data } = useContext(ShipmentDetailContext) || {};
 
-	const showExchangeRate = user_data.email === 'ajeet@cogoport.com';
+	const showExchangeRate = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const refetch = () => {
 		bfInvoiceRefetch();

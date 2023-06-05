@@ -1,4 +1,5 @@
 import { Popover, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMOverflowDot,
 	IcMInfo,
@@ -6,7 +7,6 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import CONSTANTS from '../../../../../../../../../../configurations/constant.json';
 import styles from '../../styles.module.css';
 
 function Actions({
@@ -20,7 +20,8 @@ function Actions({
 	setIsEditInvoice = () => {},
 }) {
 	const [show, setShow] = useState(false);
-	const showForOldShipments =	shipment_data.serial_id <= CONSTANTS.invoice_check_id && invoice.status === 'pending';
+	const showForOldShipments =	shipment_data.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
