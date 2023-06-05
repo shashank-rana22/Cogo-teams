@@ -23,7 +23,7 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal, response }: IrnCa
 	const onSubmit = async (values) => {
 		try {
 			const payload = {
-				cancelReason      : response?.value || undefined,
+				cancelReason      : response?.remarks || undefined,
 				agreementNumber   : values?.Agreement_number || undefined,
 				agreementDate     : values?.Agreement_date || undefined,
 				agreementDocument : values?.Agreement_pdf_file?.finalUrl || undefined,

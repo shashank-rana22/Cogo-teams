@@ -19,8 +19,7 @@ function CancellationModal({
 	} = useForm();
 
 	const [response, setResponse] = useState({
-		value   : '',
-		remarks : '',
+		remarks: '',
 	});
 
 	const { onSubmit, loading } = useGetIrnCancellation({
