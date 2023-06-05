@@ -1,5 +1,5 @@
 import ENTITY_MAPPING from './entityMapping';
-import LANGUAGE_MAPPING from './languageMapping';
+import LANGUAGE_OPTIONS from './languageMapping';
 
 const GLOBAL_CONSTANTS = {
 	country_entity_ids: {
@@ -145,7 +145,7 @@ const GLOBAL_CONSTANTS = {
 	regex_patterns: {
 		number: /^[+-]?\d*\.?\d+$/,
 	},
-	languages: LANGUAGE_MAPPING,
+	languages: LANGUAGE_OPTIONS,
 
 };
 

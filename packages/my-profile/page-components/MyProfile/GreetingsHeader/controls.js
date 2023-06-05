@@ -41,6 +41,7 @@ const getControls = (detailsData = {}) => [
 		label       : 'Preferred Languages',
 		placeholder : 'Choose Preferred Languages',
 		options     : GLOBAL_CONSTANTS.languages,
+		isClearable : true,
 
 	},
 

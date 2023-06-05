@@ -12,7 +12,6 @@ function PersonDetails({
 	detailsData,
 	setShowMobileVerificationModal = () => {},
 	showMobileVerificationModal,
-	editNameModal,
 	setEditNameModal,
 }) {
 	const {
@@ -56,7 +55,7 @@ function PersonDetails({
 						<div className={styles.value_text}>
 
 							<div className={styles.flex}>
-								{preferred_languages?.map(
+								{(preferred_languages || [])?.map(
 									(lang) => <div key={lang} className={styles.languge_tag}>{startCase(lang)}</div>,
 								)}
 
@@ -67,7 +66,7 @@ function PersonDetails({
 							<IcMEdit
 								fill="#000000"
 								style={{ marginTop: '4px', cursor: 'pointer' }}
-								onClick={() => setEditNameModal({ ...editNameModal, from: 'language', state: true })}
+								onClick={() => setEditNameModal((prev) => ({ ...prev, from: 'language', state: true }))}
 
 							/>
 						</div>

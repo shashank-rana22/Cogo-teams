@@ -44,7 +44,7 @@ const useEditPersonalDetails = ({
 			window.location.reload();
 
 			setShowModal(false);
-			setEditNameModal({ ...editNameModal, state: false });
+			setEditNameModal((prev) => ({ ...prev, from: 'language', state: false }));
 			Toast.success(`${startCase(editNameModal.from)} updated successfully!`);
 		} catch (e) {
 			console.log(e);

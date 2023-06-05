@@ -8,8 +8,10 @@ function EditPersonalDetails({
 	control,
 	errors,
 	editNameModal,
+	detailsData,
 }) {
-	const controls = getControls();
+	const controls = getControls(detailsData);
+
 	return (
 		<div>
 
@@ -38,12 +40,10 @@ function EditPersonalDetails({
 					<div className={styles.label}>Preferred Languages</div>
 					<div className={styles.value}>
 						<MultiselectController
-							{...controls[2]}
-							placeholder={controls[2].placeholder}
-							options={controls[2].options}
-							isClearable
-							control={control}
 							key={controls[2].name}
+							{...controls[2]}
+							control={control}
+							value={detailsData.preferred_languages}
 						/>
 					</div>
 				</div>

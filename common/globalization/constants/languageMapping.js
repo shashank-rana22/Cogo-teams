@@ -1,4 +1,4 @@
-export const LANGUAGE_OPTIONS = [
+const LANGUAGE_OPTIONS = [
 	{ value: 'english', label: 'English' },
 	{ value: 'spanish', label: 'Spanish' },
 	{ value: 'mandarin_chinese', label: 'Mandarin chinese' },
@@ -39,3 +39,5 @@ export const LANGUAGE_OPTIONS = [
 	{ value: 'dutch', label: 'Nederlands, Vlaams' },
 	{ value: 'assamese', label: 'অসমীয়া' },
 ];
+
+export default LANGUAGE_OPTIONS;

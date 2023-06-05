@@ -140,7 +140,9 @@ function Greetings({
 
 						<IcMEdit
 							size={1.8}
-							onClick={() => setEditNameModal({ ...editNameModal, from: 'name', state: true })}
+							onClick={() => setEditNameModal(
+								(prev) => ({ ...prev, from: 'name', state: true }),
+							)}
 							style={{ cursor: 'pointer' }}
 						/>
 
@@ -150,7 +152,7 @@ function Greetings({
 
 			<Modal
 				show={editNameModal.state}
-				onClose={() => setEditNameModal({ ...editNameModal, state: false })}
+				onClose={() => setEditNameModal((prev) => ({ ...prev, state: false }))}
 				onOuterClick={onOuterClick}
 				size="md"
 			>

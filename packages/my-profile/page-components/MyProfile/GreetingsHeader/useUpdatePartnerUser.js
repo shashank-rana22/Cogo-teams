@@ -24,7 +24,7 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 
 	const onOuterClick = () => {
 		setShowModal(false);
-		setEditNameModal(false);
+		setEditNameModal((prev) => ({ ...prev, state: false }));
 		setValue('profile_picture_url', watchProfilePicture || picture);
 	};
 
@@ -78,7 +78,7 @@ const useUpdatePartnerUser = ({ picture, partner_user_id, setRefetch, detailsDat
 	};
 
 	const onClickCancel = () => {
-		setEditNameModal(false);
+		setEditNameModal((prev) => ({ ...prev, state: false }));
 	};
 
 	return {
