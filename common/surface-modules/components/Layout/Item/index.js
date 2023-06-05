@@ -47,7 +47,7 @@ function Item(props) {
 		};
 	}
 
-	if (!newProps.type) return null;
+	if (!newProps.type && !newProps.showOnlyLabel) return null;
 
 	const Element = getElementController(newProps.type);
 
@@ -62,11 +62,14 @@ function Item(props) {
 		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%` }}>
 			{label && source !== 'edit_line_items' ? (<h4 className={styles.label}>{label}</h4>) : null}
 
-			<Element
-				size={type === 'pills' ? 'md' : 'sm'} // need to put in config
-				{...newProps}
-				control={control}
-			/>
+			{Element
+				? (
+					<Element
+						size={type === 'pills' ? 'md' : 'sm'} // need to put in config
+						{...newProps}
+						control={control}
+					/>
+				) : null}
 
 			<p className={styles.errors}>{errorOriginal}</p>
 		</div>

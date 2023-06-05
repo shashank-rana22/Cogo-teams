@@ -3,11 +3,9 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import {
 	IcMOverflowDot,
 	IcMInfo,
-	IcCError,
 	IcMEmail,
 } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
-import NoStyleButton from '@cogoport/surface-modules/common/NoStyleButton';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
@@ -15,17 +13,14 @@ import ClickableDiv from '../../../../../../ClickableDiv';
 import EditInvoice from '../EditInvoice';
 
 import AddCustomerInvoice from './AddCustomerInvoice';
+import ExchangeRateModal from './ExchangeRateModal';
 import FillCustomerPortalData from './FillCustomerPortalData';
 import styles from './styles.module.css';
 import UpdateCustomerInvoice from './UpdateCustomerInvoice';
 
 const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
-// const OTPVerification = dynamic(() => import('../OTPVerification'), { ssr: false });
-// const ReviewServices = dynamic(() => import('../ReviewServices'), { ssr: false });
-// const AmendmentReasons = dynamic(() => import('./AmendmentReasons'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
-// const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 
@@ -46,6 +41,7 @@ function Actions({
 	const [addCustomerInvoice, setAddCustomerInvoice] = useState(false);
 	const [updateCustomerInvoice, setUpdateCustomerInvoice] = useState(false);
 	const [fillCustomerData, setFillCustomerData] = useState(false);
+	const [showExchangeRate, setExchangeRate] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setShowOTPModal] = useState(false);
 
@@ -99,6 +95,11 @@ function Actions({
 	const handleCustomerInvoice = () => {
 		setShow(false);
 		setAddCustomerInvoice(true);
+	};
+
+	const handleExchangeRateModal = () => {
+		setShow(false);
+		setExchangeRate(true);
 	};
 
 	const remarkRender = () => (
@@ -177,7 +178,7 @@ function Actions({
 					</ClickableDiv>
 					<div className={styles.line} />
 					<ClickableDiv
-						// onClick={handleExchangeRateModal}
+						onClick={handleExchangeRateModal}
 						className={styles.text}
 					>
 						Exchange Rate Sheet
@@ -366,15 +367,13 @@ function Actions({
 				/>
 			) : null}
 
-			{/* {showOtpModal ? (
-				<OTPVerification
-					showOtpModal={showOtpModal}
-					setShowOTPModal={setShowOTPModal}
+			{showExchangeRate ? (
+				<ExchangeRateModal
+					showExchangeRate={showExchangeRate}
+					setExchangeRate={setExchangeRate}
 					invoice={invoice}
-					refetch={handleRefetch}
-					shipment_data={shipment_data}
 				/>
-			) : null} */}
+			) : null}
 
 			{showAddRemarks ? (
 				<AddRemarks
@@ -384,15 +383,6 @@ function Actions({
 					refetch={handleRefetch}
 				/>
 			) : null}
-
-			{/* {sendEmail ? (
-				<SendInvoiceEmail
-					show={sendEmail}
-					setShow={setSendEmail}
-					invoice={invoice}
-					refetch={handleRefetch}
-				/>
-			) : null} */}
 
 			{showChangePaymentMode ? (
 				<ChangePaymentMode
@@ -424,16 +414,16 @@ function Actions({
 				/>
 			) : null}
 
-			<AddCustomerInvoice
-				show={addCustomerInvoice}
-				setShow={setAddCustomerInvoice}
-				closeModal={() => setAddCustomerInvoice(false)}
-				handleRefetch={handleRefetch}
-				invoice={invoice}
-				shipmentData={shipment_data}
-			/>
-
-			<NoStyleButton>Edit Invoices</NoStyleButton>
+			{addCustomerInvoice ? (
+				<AddCustomerInvoice
+					show={addCustomerInvoice}
+					setShow={setAddCustomerInvoice}
+					closeModal={() => setAddCustomerInvoice(false)}
+					handleRefetch={handleRefetch}
+					invoice={invoice}
+					shipmentData={shipment_data}
+				/>
+			) : null}
 
 		</div>
 	);
