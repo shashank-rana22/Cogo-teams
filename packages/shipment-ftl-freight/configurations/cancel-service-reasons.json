@@ -135,33 +135,6 @@
 				"fcl_cfs_service"
 			]
 		},
-		"Space unavailable": {
-			"subreasons": [
-				"Different sailing date available on same carrier",
-				"Space available on same date with a different carrier"
-			],
-			"free_text": {
-				"required": false
-			},
-			"applicable_to": [
-				"fcl_freight_service",
-				"fcl_freight_local_service"
-			]
-		},
-		"Inventory issue at the yard(s)": {
-			"subreasons": [
-				"Partial inventory available for the selected carrier",
-				"Inventory available on different carrier",
-				"Inventory available on a later date"
-			],
-			"free_text": {
-				"required": false
-			},
-			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"
-			]				
-		},
 		"Quote has expired": {
 			"free_text": {
 				"required": false
@@ -222,44 +195,6 @@
 				"ftl_freight_service",
 				"fcl_cfs_service"
 			]
-		},
-		"Shipping line rejected the service": {
-			"subreasons": [
-				"Commodity is blacklisted/high risk",
-				"Importer/exporter or consignee is blacklisted"
-			],
-			"free_text": {
-				"required": true,
-				"mandatory": true,
-				"label": "Tell us what went wrong?"
-			},
-			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"			
-			]
-		},
-		"Sailing cancelled by the line": {
-			"free_text": {
-				"required": true,
-				"mandatory": true,
-				"label": "Tell us what went wrong?"
-			},
-			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"
-			]			
-		},
-		"BL type is not issued by the line": {
-			"subreasons": ["Seaway Original", "RFS Original"],
-			"free_text": {
-				"required": true,
-				"mandatory": true,
-				"label": "Tell us what went wrong?"
-			},
-			"applicable_to": [
-				"fcl_freight_service", 
-				"fcl_freight_local_service"
-			]				
 		}
 	}
 }
