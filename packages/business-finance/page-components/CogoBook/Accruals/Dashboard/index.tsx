@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
 
+import useMonthlyTrendStats from '../../hooks/useMonthlyTrendStats';
 import useShipmentIdStats from '../../hooks/useShipmentIdStats';
 import useShipmentViewStats from '../../hooks/useShipmentViewStats';
 import { optionsMonth, optionsYear } from '../ShipmentView/constant';
@@ -38,6 +39,13 @@ function Dashboard() {
 		year  : dashboardFilters?.year,
 		entityCode,
 	});
+	const { monthlyData = {}, monthlyLoading } = useMonthlyTrendStats({
+		month : dashboardFilters?.month,
+		year  : dashboardFilters?.year,
+		entityCode,
+	});
+
+	console.log({ monthlyData, monthlyLoading }, 'monthlyData');
 
 	const {
 		expenseBookedSum = 0,
@@ -122,9 +130,9 @@ function Dashboard() {
 						<Tooltip
 							content={(
 								<div className={styles.font_size_tooltip}>
-									Please select the
+									Fuck
 									<br />
-									accounting month
+									You
 								</div>
 							)}
 							placement="top"
@@ -168,9 +176,9 @@ function Dashboard() {
 						<Tooltip
 							content={(
 								<div className={styles.font_size_tooltip}>
-									Please select the
+									Fuck
 									<br />
-									accounting month
+									You
 								</div>
 							)}
 							placement="top"
@@ -206,9 +214,9 @@ function Dashboard() {
 							<Tooltip
 								content={(
 									<div className={styles.font_size_tooltip}>
-										Please select the
+										Fuck
 										<br />
-										accounting month
+										You
 									</div>
 								)}
 								placement="top"
