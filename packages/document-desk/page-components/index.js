@@ -1,10 +1,13 @@
-import { useRouter } from 'next/router';
+import { dynamic, useRouter } from '@cogoport/next';
 import { useState, useCallback, useMemo } from 'react';
 
 import DocumentDeskContext from '../context/DocumentDeskContext';
 import getLocalStorageVal from '../helpers/getLocalStorageVal';
 
-import Fcl from './Fcl';
+const ResolveDocumentDesk = {
+	fcl_freight : dynamic(() => import('./Fcl'), { ssr: false }),
+	lcl_freight : dynamic(() => import('./Lcl'), { ssr: false }),
+};
 
 export default function DocumentDesk() {
 	const defaultValues = getLocalStorageVal();
@@ -14,6 +17,7 @@ export default function DocumentDesk() {
 	const [stepperTab, setStepperTab] = useState(defaultValues?.stepperTab);
 	const [activeTab, setActiveTab] = useState(defaultValues?.activeTab);
 	const [scopeFilters] = useState(defaultValues?.scopeFilters);
+	const [shipmentType, setShipmentType] = useState(defaultValues?.shipment_type);
 
 	const handleVersionChange = useCallback(() => {
 		const newPathname = `${router.asPath}`;
@@ -30,11 +34,26 @@ export default function DocumentDesk() {
 		handleVersionChange,
 		stepperTab,
 		setStepperTab,
-	}), [activeTab, setActiveTab, filters, setFilters, scopeFilters, handleVersionChange, stepperTab, setStepperTab]);
+		shipmentType,
+		setShipmentType,
+	}), [
+		activeTab,
+		setActiveTab,
+		filters,
+		setFilters,
+		scopeFilters,
+		handleVersionChange,
+		stepperTab,
+		setStepperTab,
+		shipmentType,
+		setShipmentType,
+	]);
+
+	const RenderDesk = shipmentType in ResolveDocumentDesk ? ResolveDocumentDesk[shipmentType] : null;
 
 	return (
 		<DocumentDeskContext.Provider value={contextValues}>
-			{activeTab ? <Fcl /> : null}
+			{shipmentType ? <RenderDesk /> : null}
 		</DocumentDeskContext.Provider>
 	);
 }
