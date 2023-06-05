@@ -1,0 +1,57 @@
+.body_container{
+    display: flex;
+    width:100%;
+    border-bottom: 1px dashed #BDBDBD;;
+}
+.heading_container{
+    display: flex;
+    align-items: center;
+}
+
+
+.text1{
+    font-weight: 600;
+    font-size: 14px;
+    color: #333333;
+}
+.text2{
+    font-weight: 500;
+    font-size: 14px;
+    color: #828282;
+}
+
+.left_section{
+    width:45%;
+    border-right:  1px dashed #BDBDBD;
+    padding: 20px 24px;
+}
+
+
+.middle_section{
+    flex:1;
+    border-right:  1px dashed #BDBDBD;
+}
+.right_section{
+    flex:0.5;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 24px;
+
+}
+
+.sell_price{
+    font-weight: 500;
+    font-size: 18px;
+    color: #4F4F4F;
+}
+
+.kam_discount_text{
+    font-weight: 400;
+    font-size: 12px;
+    color: #4F4F4F;
+}
+
+.portpair_container{
+    padding-top:20px;
+}

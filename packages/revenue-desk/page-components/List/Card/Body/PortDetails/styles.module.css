@@ -1,0 +1,38 @@
+.port_pair_container{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.origin_code,.destination_code{
+    font-weight: 400;
+    font-size: 16px;
+    color: #F68B21;
+}
+
+.origin_country,.destination_country{
+    display: flex;
+}
+
+.port_name{
+    font-weight: 600;
+    font-size: 16px;
+    color:#4F4F4F;
+    width: 200px;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+}
+
+.single_port_name{
+    font-weight: 600;
+    font-size: 16px;
+    color:#4F4F4F;
+    /* padding-bottom: 20px; */
+}
+
+.country_name{
+    font-weight: 400;
+    font-size: 16px;
+    color:#4F4F4F 
+}

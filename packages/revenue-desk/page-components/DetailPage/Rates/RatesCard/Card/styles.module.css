@@ -1,0 +1,114 @@
+.container{
+    background-color: #F9F9F9;
+    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
+    border-radius: 4px;
+    margin: 24px 0;
+    display: flex;
+    align-items: center;
+    padding: 16px 20px 0;
+}
+
+.selected_rate_card_container{
+    background-color: #F3FAFA;
+    box-shadow: 0px 0px 4px rgba(98, 127, 172, 0.2);
+    border-radius: 4px;
+    margin: 24px 0;
+    display: flex;
+    align-items: center;
+    padding: 16px 20px 0;
+    border: 1px solid #88CAD1;
+}
+
+.upper_section{
+    display: flex;
+    justify-content: space-between;
+    border-bottom: 1px dashed #BDBDBD;
+    padding: 0 24px 12px;
+    align-items: center;
+}
+.lower_section{
+    display: flex;  
+}
+
+.upper_left_section{
+    display: flex;
+    align-items: center;
+   
+}
+.upper_right_section{
+    display: flex;
+    align-items: center;
+}
+.left_section_container{
+    width:30px;
+}
+
+.right_section_container{
+    flex:1;
+    border-left: 1px solid #E0E0E0;
+}
+.supply_agent_text{
+    margin-left: 7px;
+    font-weight: 400;
+    font-size: 12px;
+    color: #4F4F4F;
+}
+
+.text{
+    font-weight: 400;
+    font-size: 10px;
+    color: #828282;
+}
+.text1{
+    font-weight: 500;
+    font-size: 14px;
+    color: #F37166;
+}
+
+.text2{
+    font-weight: 500;
+    font-size: 14px;
+    color: #828282;
+}
+
+.progress_bar_section{
+    display: flex;
+    border-right: 1px dashed #BDBDBD;
+    padding: 16px 36px;
+}
+
+.price_text{
+    font-weight: 500;
+    font-size: 14px;
+    color: #828282;
+}
+
+.last_section{
+    font-weight: 400;
+    font-size: 12px;
+    color: #221F20;
+    padding: 16px 36px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.first_section{
+    border-right: 1px dashed #BDBDBD;
+    padding: 16px 36px;
+    display: flex;
+    justify-content: space-between;
+    flex-direction: column;
+}
+
+.price_section{
+    border-right: 1px dashed #BDBDBD;
+    padding: 16px 36px;
+}
+
+.service_provider_heading{
+    font-weight: 500;
+    font-size: 14px;
+    color: #221F20;
+    margin-right: 38px;
+}

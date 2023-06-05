@@ -1,0 +1,8 @@
+.card_container{
+    background-color: #fff;
+    border-radius: 8px;
+    display: flex;
+    flex-direction: column;
+    padding: 16px;
+    cursor: pointer;
+}

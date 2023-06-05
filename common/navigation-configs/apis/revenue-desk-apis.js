@@ -134,6 +134,36 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_revenue_desk_air_customs_shipments',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'list_revenue_desk_air_freight_shipments',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'list_revenue_desk_ftl_freight_shipments',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'list_revenue_desk_haulage_freight_shipments',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'list_revenue_desk_ltl_freight_shipments',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
+		api          : 'list_revenue_desk_available_rates',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
 ];
 
 export default apis;
