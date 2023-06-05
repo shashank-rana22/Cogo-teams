@@ -92,6 +92,7 @@ function Edit({
 			show
 			onClose={() => setOpen(false)}
 			size="xl"
+			showCloseIcon={false}
 			closeOnOuterClick={false}
 		>
 			<Modal.Header
