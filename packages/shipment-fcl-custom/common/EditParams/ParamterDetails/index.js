@@ -44,7 +44,7 @@ export default forwardRef(({ service }, ref) => {
 			{keysToShow.map((key) => {
 				const { name, label, ...rest } = controls.find((item) => item.name === key) || {};
 				return (
-					<div className={styles.form_element}>
+					<div className={styles.form_element} key={key}>
 						{name ? (
 							<>
 								<div className={styles.label}>

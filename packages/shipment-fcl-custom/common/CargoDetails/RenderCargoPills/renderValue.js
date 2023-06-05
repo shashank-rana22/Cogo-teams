@@ -36,7 +36,7 @@ export const renderValue = (label, detail) => {
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div>{values}</div>;
+								return <div key={values}>{values}</div>;
 							})}
 						</div>
 					)}
@@ -74,7 +74,7 @@ export const renderValue = (label, detail) => {
 	const formatCertificate = (certificates) => (
 		<div className={styles.certificate_container}>
 			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer">
+				<a href={item} target="_blank" rel="noreferrer" key={item}>
 					Click to view certificate
 					&nbsp;
 					{key + 1}

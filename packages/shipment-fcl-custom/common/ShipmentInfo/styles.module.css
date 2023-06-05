@@ -27,11 +27,11 @@
 }
 
 .pill {
-	white-space: nowrap; 
-	display: flex; 
-} 
+	display: flex;
+	white-space: nowrap;
+}
 
 .text {
-	display: flex; 
+	display: flex;
 	align-items: center;
-}	
+}

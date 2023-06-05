@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { format, startCase } from '@cogoport/utils';
-import React, { useContext } from 'react';
+import React, { useContext, useMemo } from 'react';
 
 import useListOrganizationDocuments from '../../../../hooks/useListOrganizationDocuments';
 import useUpdateOrganizationDocument from '../../../../hooks/useUpdateOrganizationDocument';
@@ -20,6 +20,8 @@ function OrganizationDocuments({
 	handleDocClick = () => {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
+
+	const keys = useMemo(() => Array(3).fill(null).map(() => Math.random()), []);
 
 	const { importer_exporter_id = '' } = shipment_data;
 
@@ -60,8 +62,8 @@ function OrganizationDocuments({
 
 	const contentToShow = () => {
 		if (loading) {
-			return [...Array(forModal ? 3 : 2)].map(() => (
-				<Loader forModal={forModal} />
+			return [...Array(forModal ? 3 : 2)].map((n, i) => (
+				<Loader forModal={forModal} key={keys?.[i]} />
 			));
 		}
 		if (!loading && data?.list?.length === 0) {
@@ -71,6 +73,7 @@ function OrganizationDocuments({
 			<>
 				{(data?.list || []).map((doc) => (
 					<div
+						key={doc?.id}
 						role="button"
 						tabIndex={0}
 						className={styles.single_doc}

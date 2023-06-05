@@ -58,6 +58,7 @@ function List({ isSeller = false }) {
 
 						return (
 							<ItemAdded
+								key={serviceListItem?.id}
 								item={serviceListItem}
 								status={status}
 								showIp={showModal === 'ip'}

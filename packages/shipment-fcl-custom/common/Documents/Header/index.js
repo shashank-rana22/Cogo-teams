@@ -1,9 +1,7 @@
 import { Toggle, Input, Select, Tabs, TabPanel } from '@cogoport/components';
-import { IcMSearchlight, IcMUpload } from '@cogoport/icons-react';
+import { IcMSearchlight } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
 
-import GenericUpload from './GenericUpload';
 import styles from './styles.module.css';
 
 function Header({
@@ -17,19 +15,12 @@ function Header({
 	searchValue = '',
 	activeWallet = '',
 	setActiveWallet = () => {},
-	activeStakeholder,
-	refetch = () => {},
 }) {
-	const [showModal, setShowModal] = useState(false);
 	const SourceOptions = Array.isArray(data)
 		? (data || [])?.map((e) => ({ label: e?.business_name, value: e?.id }))
 		: [];
 
 	const serviceOptions = shipment_data?.services?.map((service) => ({ label: startCase(service), value: service }));
-
-	const handleGenericUpload = () => {
-		setShowModal(true);
-	};
 
 	return (
 		<div className={styles.heading}>
@@ -83,28 +74,7 @@ function Header({
 				) : null}
 			</div>
 
-			{showModal ? (
-				<GenericUpload
-					showModal={showModal}
-					setShowModal={setShowModal}
-					data={data}
-					shipment_data={shipment_data}
-					activeStakeholder={activeStakeholder}
-					refetch={refetch}
-				/>
-			) : null }
-
 			<div className={styles.sub_heading}>
-				<div
-					className={styles.generic_upload}
-					role="button"
-					tabIndex={0}
-					onClick={() => handleGenericUpload()}
-				>
-					<IcMUpload />
-					<div className={styles.upload}>Upload</div>
-				</div>
-
 				<Toggle
 					name="myTransilates"
 					size="md"

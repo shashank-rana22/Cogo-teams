@@ -57,7 +57,7 @@ function ContainerNmUpdate({
 					: (
 						<div className={styles.container}>
 							{(containerDetails || []).map((container) => (
-								<div className={styles.render_container}>
+								<div className={styles.render_container} key={container?.container_number}>
 									<div className={styles.container_num}>{container?.container_number}</div>
 									<Input
 										size="sm"

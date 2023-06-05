@@ -12,7 +12,7 @@ function List({ fields, data, loading }) {
 			<div className={styles.card_list}>
 				{data.length ? (
 					(data || []).map((item) => (
-						<CardItem item={item} loading={loading} fields={fields} />
+						<CardItem item={item} loading={loading} fields={fields} key={item?.id} />
 					))
 				) : (
 					<EmptyState />

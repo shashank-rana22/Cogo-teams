@@ -1,5 +1,5 @@
 import { saveAs } from 'file-saver';
-import React from 'react';
+import React, { useMemo } from 'react';
 
 import Content from './Content';
 
@@ -22,6 +22,8 @@ const Card = ({
 		}
 	};
 
+	const keys = useMemo(() => Array(completedDocs).fill(null).map(() => Math.random()), [completedDocs]);
+
 	return (taskList || []).map((item, idx) => {
 		const docType =	item?.document_type || item?.task.split('upload_').slice(-1)[0];
 
@@ -32,13 +34,14 @@ const Card = ({
 			allUploadedDocs = [{}];
 		}
 
-		return allUploadedDocs.map((uploadedItem) => {
+		return allUploadedDocs.map((uploadedItem, i) => {
 			const isChecked = uploadedItem?.document_type === docType;
 			const receivedViaEmail = !isChecked && uploadedItem?.entity_type === docType;
 			const showUploadText = item?.pendingItem ? 'Upload' : '';
 
 			return (
 				<Content
+					key={keys?.[i]}
 					uploadedItem={uploadedItem}
 					receivedViaEmail={receivedViaEmail}
 					showUploadText={showUploadText}

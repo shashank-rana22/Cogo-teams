@@ -13,6 +13,7 @@ function LoadingState({ fields = [], isLast = false }) {
 				return (
 					<div
 						style={stylesCol}
+						key={singleItem?.name}
 					>
 						<Placeholder width="100%" height="20px" />
 					</div>
