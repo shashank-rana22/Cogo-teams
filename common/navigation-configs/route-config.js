@@ -11,6 +11,7 @@ import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
+import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
 import enrichment from './config/enrichment';
@@ -25,11 +26,14 @@ import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
 import referral from './config/referral';
 import rolesAndPermissions from './config/roles-n-permission';
+import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
 import shipmentFclCustom from './config/shipment-fcl-custom';
 import shipmentFclFreight from './config/shipment-fcl-freight';
+import shipmentLclFreight from './config/shipment-lcl-freight';
 import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
+import ticketManagement from './config/ticket-management';
 import unifiedDashboard from './config/unified-dashboard';
 import vendorRM from './config/vendor-rm';
 import welcome from './config/welcome';
@@ -54,6 +58,7 @@ const routeConfig = {
 	...kamMonitoring,
 	...performanceManagement,
 	...shipmentFclFreight,
+	...shipmentLclFreight,
 	...bookingDesk,
 	...bnSalvage,
 	...costBookingDesk,
@@ -68,9 +73,12 @@ const routeConfig = {
 	...ingestion,
 	...blDoCollectionRelease,
 	...saasTools,
+	...controlledBooking,
+	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
 	...shipmentFclCustom,
+	...ticketManagement,
 };
 
 export default routeConfig;

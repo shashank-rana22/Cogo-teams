@@ -5,7 +5,7 @@ import ViewQuestions from '../ViewQuestions';
 
 import styles from './styles.module.css';
 
-function Description({ question_text = '', id = '', test_id = '' }) {
+function Description({ question_text = '', id = '', test_id = '', activeAttempt }) {
 	const [viewQuestions, setViewQuestions] = useState(false);
 
 	return (
@@ -29,7 +29,14 @@ function Description({ question_text = '', id = '', test_id = '' }) {
 			</div>
 
 			<div>
-				{viewQuestions ? <ViewQuestions question_id={id} test_id={test_id} /> : null}
+				{viewQuestions
+					? (
+						<ViewQuestions
+							question_id={id}
+							test_id={test_id}
+							activeAttempt={activeAttempt}
+						/>
+					) : null}
 			</div>
 		</div>
 	);
