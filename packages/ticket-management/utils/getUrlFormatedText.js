@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const UrlRegex = new RegExp(GLOBAL_CONSTANTS.regex.url_match_regex);
+const UrlRegex = new RegExp(GLOBAL_CONSTANTS.regex_patterns.url_match);
 
 const getUrlFormatedText = (txt = '') => (txt.split(' ') || [])
 	.map((part) => (UrlRegex.test(part)
