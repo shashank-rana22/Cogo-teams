@@ -1,0 +1,50 @@
+
+.container {
+	background: linear-gradient(0deg, #ffffff, #ffffff), #ffffff;
+	box-shadow: 0px 2px 20px rgba(0, 0, 0, 0.1);
+	border-radius: 4px;
+	padding: 10px;
+}
+
+.button_clear_text {
+	font-weight: 500;
+	font-size: 10px;
+	text-align: center;
+	color: #393f70;
+	cursor: pointer;
+}
+
+.select_container {
+	width: 240px;
+
+	.core-ui-select__placeholder {
+		font-weight: 400 !important;
+		font-size: 14px !important;
+		color: #cbcff5 !important;
+	}
+
+	.core-ui-select__control {
+		border-color: #cbcff5 !important;
+
+		&:hover {
+			border-color: #cbcff5 !important;
+		}
+
+		&:focus-within {
+			border-color: #cbcff5 !important;
+			box-shadow: 0 0 0 1px #cbcff5 !important;
+		}
+	}
+}
+
+.actions_row {
+	margin-top: 40px;
+	display: flex;
+	justify-content: flex-end;
+	align-items: center;
+
+	.core-ui-button-root {
+		text-transform: capitalize;
+		margin-left: 8px;
+	}
+}

@@ -1,7 +1,7 @@
 import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMArrowRotateLeft, IcMArrowRotateRight } from '@cogoport/icons-react';
-import { Poc, Sop } from '@cogoport/ocean-modules';
+import { Poc, SopOld } from '@cogoport/ocean-modules';
 import { useState, useContext } from 'react';
 
 import styles from './styles.module.css';
@@ -76,7 +76,7 @@ function SopAndPoc() {
 								</TabPanel>
 								<TabPanel name="sop" title="SOP">
 									<div style={{ height: '80vh', overflow: 'scroll' }}>
-										<Sop shipment_data={shipment_data} primary_service={primary_service} />
+										<SopOld shipment_data={shipment_data} primary_service={primary_service} />
 									</div>
 								</TabPanel>
 							</Tabs>
