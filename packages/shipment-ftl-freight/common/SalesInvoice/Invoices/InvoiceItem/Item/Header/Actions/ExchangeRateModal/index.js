@@ -36,7 +36,6 @@ function ExchangeRateModal({
 		<Modal
 			show={showExchangeRate}
 			onClose={() => setExchangeRate(false)}
-			className="primary sm"
 			loading={loading}
 		>
 			<Modal.Header title={`Exchange Rates of${invoice.invoice_currency}`} />

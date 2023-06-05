@@ -117,14 +117,12 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 								<div className={styles.action_row}>
 									<Button
 										onClick={() => setShowInternal(truck)}
-										className="secondary md"
 										disabled={truckType === 'verified'}
 									>
 										Edit Info
 									</Button>
 									{' '}
 									<Button
-										className="secondary md"
 										onClick={() => {
 											setUploadProof(null);
 											setShowInternal(truck);
@@ -136,7 +134,6 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 										Upload Document
 									</Button>
 									<Button
-										className="secondary md"
 										onClick={() => {
 											createCustomerInvoicefn(truck);
 										}}

@@ -88,7 +88,6 @@ function TruckDetails(props) {
 			<Layout fields={newControls} control={control} errors={errors} />
 			<div className={styles.button_wrapper}>
 				<Button
-					className="primary md"
 					onClick={() => {
 						handleSubmit(handleTruckConfirmation)();
 					}}

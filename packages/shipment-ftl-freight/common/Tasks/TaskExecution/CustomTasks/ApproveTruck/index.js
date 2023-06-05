@@ -120,14 +120,12 @@ function ApproveTruck({
 			/>
 			<div className={styles.button_content}>
 				<Button
-					className="secondary md"
 					onClick={() => onCancel()}
 					disabled={disabled}
 				>
 					Cancel
 				</Button>
 				<Button
-					className="secondary md"
 					onClick={() => (task?.task === 'approve_additional_truck'
 						? approveTruck(false)
 						: updateTruck(false))}
@@ -136,7 +134,6 @@ function ApproveTruck({
 					Reject
 				</Button>
 				<Button
-					className="primary md"
 					onClick={() => (task?.task === 'approve_additional_truck'
 						? approveTruck(true)
 						: updateTruck(true))}

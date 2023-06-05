@@ -85,7 +85,6 @@ function SplitAthAmountModal({ item = {}, setFinalGetHookData = () => {} }) {
 		<>
 			<Modal
 				show={show}
-				className="primary md"
 				position="center"
 				onClose={() => setShow(false)}
 				onOuterClick={() => setShow(false)}
