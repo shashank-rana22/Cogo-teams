@@ -2,7 +2,6 @@ import { Button, cl, Toast } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
 
 import { convertCurrencyValue, displayTotal } from '../../../../utils/dynamicValues';
 import getBreakdown from '../../../../utils/getBreakdown';
@@ -34,14 +33,11 @@ function BreakdownDetails({
 	const { rfq_id = '' } = query;
 	let profitability = 0.0;
 
-	// const [profitability, setProfitability] = useState(0);
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
 
 	const rateDetails = getBreakdown(rate);
 	rateDetails.splice(0, 1);
 	rateDetails.splice(rateDetails.length - 1, 1);
-
-	console.error('rate::', rate);
 
 	let total = 0;
 
@@ -102,13 +98,6 @@ function BreakdownDetails({
 		};
 	};
 
-	console.error('editedMargins::', editedMargins);
-
-	console.error('k::', totalAmount);
-	console.error('editedMargins::', editedMargins, total);
-
-	console.error('profitability::', profitability, typeof profitability);
-
 	(rateDetails || []).forEach((item) => {
 		total += currencyConversion(item).total;
 	});
@@ -117,17 +106,12 @@ function BreakdownDetails({
 		profitability = (totalAmount / (total - totalAmount)) * 100;
 	}
 
-	console.error('after totalAmount', totalAmount, 'total::', total);
-
-	console.error(' after profitability::', profitability, typeof profitability);
-
 	return (
 		<div className={styles.container}>
 			<Header margin_limit={margin_limit} />
 			<div>
 				{(rateDetails || []).map((item) => {
 					const { totalDisplay, serviceKey } = currencyConversion(item);
-					console.error('totalDisplay::', totalDisplay);
 
 					return (
 						<ServiceMargin
