@@ -43,26 +43,19 @@ function Form({
 	});
 
 	// useEffect(() => {
-	// 	setValue([nameKey][0],	{
+	// 	onChange({
+	// 		serviceKey,
+	// 		code  : lineItem?.code,
 	// 		type  : 'absolute_total',
 	// 		currency,
 	// 		value : marginValue,
 	// 	});
-	// }, [currency, marginValue, nameKey, setValue]);
-
-	// useEffect(() => {
-	// 	onChange({
-	// 		serviceKey,
-	// code     : lineItem?.code,
-	// currency : lineItem?.currency,
-	// type     : lineItem?.type,
-	// value    : marginValue,
-	// 	});
-	// }, [lineItem?.code, lineItem?.currency, lineItem?.type, marginValue, onChange, serviceKey]);
+	// }, []);
 
 	useEffect(() => {
-		// console.log('watch::', watch());
+		console.log('watch::', watch());
 		watch((v) => {
+			console.error('inside useEfect ll');
 			onChange({
 				serviceKey,
 				code     : lineItem?.code,
@@ -73,24 +66,6 @@ function Form({
 		});
 	}, [lineItem, nameKey, onChange, serviceKey, watch]);
 
-	// useEffect(() => {
-	// 	onChange({
-	// 		serviceKey,
-	// 		code     : lineItem?.code,
-	// 		currency : v[nameKey][0]?.currency,
-	// 		type     : v[nameKey][0]?.type,
-	// 		value    : Number(v[nameKey][0]?.value),
-	// 	});
-	// }, []);
-
-	// useEffect(() => {
-	// 	watch((v)=>{
-	// 		onChange({
-	// 			serviceKey,
-
-	// 		})
-	// 	})
-	// }, [lineItem]);
 	console.log(lineItem, 'lineItem');
 	console.log(watch(), 'watch');
 	return (
