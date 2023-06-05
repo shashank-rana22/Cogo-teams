@@ -1,7 +1,6 @@
 import styles from './styles.module.css';
 
 function CancellationAgreement({ data }) {
-	console.log(data, 'data');
 	const { cancelledEInvoiceDetails } = data || {};
 
 	console.log(cancelledEInvoiceDetails, 'cancellationAgreement');
@@ -10,19 +9,19 @@ function CancellationAgreement({ data }) {
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
 				Agreement No. -
-				<span style={{ fontWeight: 600 }}>12345</span>
+				<span style={{ fontWeight: 600 }}>{cancelledEInvoiceDetails?.agreementNumber}</span>
 			</div>
 			<div className={styles.sub_container}>
 				Agreement Date -
-				<span style={{ fontWeight: 600 }}>12/4/2023</span>
+				<span style={{ fontWeight: 600 }}>{cancelledEInvoiceDetails?.agreementDate}</span>
 			</div>
 			<div className={styles.sub_container}>
 				Agreement Proof -
-				<a style={{ fontWeight: 600 }} href="demo">View Documnet</a>
+				<a style={{ fontWeight: 600 }} href={cancelledEInvoiceDetails?.agreementDocument}>View Documnet</a>
 			</div>
 			<div className={styles.sub_container}>
 				Form 04 -
-				<a style={{ fontWeight: 600 }} href="demo">View Domcument</a>
+				<a style={{ fontWeight: 600 }} href={cancelledEInvoiceDetails?.eInvoiceForm04}>View Document</a>
 			</div>
 		</div>
 	);
