@@ -32,8 +32,9 @@ function BreakdownDetails({
 }) {
 	const { query } = useRouter();
 	const { rfq_id = '' } = query;
+	let profitability = 0.0;
 
-	const [profitability, setProfitability] = useState(0);
+	// const [profitability, setProfitability] = useState(0);
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
 
 	const rateDetails = getBreakdown(rate);
@@ -46,16 +47,6 @@ function BreakdownDetails({
 		currency_conversion: conversions,
 		rate,
 	});
-
-	console.error('totalAmount::', totalAmount);
-
-	useEffect(() => {
-		const calculate = (totalAmount / (total - totalAmount)) * 100;
-		const formattedCalculate = calculate.toFixed(3);
-		console.error('calculate::', calculate);
-		console.error('formattedCalculate::', formattedCalculate);
-		setProfitability(+formattedCalculate);
-	}, [total, totalAmount]);
 
 	const convenience_fee = convertCurrencyValue(
 		(convenienceDetails?.convenience_rate?.price || 0)
@@ -95,7 +86,7 @@ function BreakdownDetails({
 
 		);
 
-		total += convertCurrencyValue(
+		total = convertCurrencyValue(
 			Number(Math.floor(totalDisplay)),
 			item?.total_price_currency,
 			rate?.total_price_currency,
@@ -104,8 +95,26 @@ function BreakdownDetails({
 		return {
 			totalDisplay,
 			serviceKey,
+			total,
 		};
 	};
+
+	console.error('k::', totalAmount);
+	console.error('editedMargins::', editedMargins, total);
+
+	console.error('profitability::', profitability, typeof profitability);
+
+	(rateDetails || []).forEach((item) => {
+		total += currencyConversion(item).total;
+	});
+
+	if (total !== totalAmount) {
+		profitability = (totalAmount / (total - totalAmount)) * 100;
+	}
+
+	console.error('after totalAmount', totalAmount, 'total::', total);
+
+	console.error(' after profitability::', profitability, typeof profitability);
 
 	return (
 		<div className={styles.container}>
@@ -113,6 +122,7 @@ function BreakdownDetails({
 			<div>
 				{(rateDetails || []).map((item) => {
 					const { totalDisplay, serviceKey } = currencyConversion(item);
+					console.error('totalDisplay::', totalDisplay);
 
 					return (
 						<ServiceMargin
@@ -219,7 +229,7 @@ function BreakdownDetails({
 						className={cl`${styles.title_value} ${profitability > 0 ? styles.green : styles.red}
 					${profitability === 0 ? styles.black : ''}`}
 					>
-						{(profitability || 0).toFixed(3)}
+						{profitability.toFixed(3)}
 						{' '}
 						%
 					</div>
