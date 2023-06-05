@@ -4,7 +4,6 @@ const controls = [
 		type  : 'fieldArray',
 		value : [
 			{
-				url              : '',
 				amount           : '',
 				payment_mode     : '',
 				invoice_number   : '',
@@ -28,7 +27,7 @@ const controls = [
 			},
 			{
 				name      : 'payment_mode',
-				span      : 1.5,
+				span      : 2,
 				type      : 'select',
 				label     : 'Payment Mode',
 				className : 'primary lg',
@@ -54,9 +53,23 @@ const controls = [
 				],
 			},
 			{
-				name      : 'amount',
+				name      : 'currency',
+				span      : 1,
+				type      : 'async-select',
+				asyncKey  : 'list_exchange_rate_currencies',
+				label     : 'Currency',
+				className : 'primary lg',
+				rules     : {
+					required: {
+						value   : true,
+						message : 'This is required',
+					},
+				},
+			},
+			{
+				name      : 'price',
 				span      : 2,
-				type      : 'price-select',
+				type      : 'text',
 				label     : 'Total amount',
 				className : 'primary lg',
 				disabled  : true,
@@ -69,7 +82,7 @@ const controls = [
 			},
 			{
 				name      : 'reference_number',
-				span      : 3,
+				span      : 4,
 				type      : 'text',
 				label     : 'Payment Reference Number',
 				className : 'primary lg',
@@ -83,7 +96,7 @@ const controls = [
 			{
 				drag      : true,
 				name      : 'url',
-				span      : 3,
+				span      : 6,
 				type      : 'file',
 				label     : 'Payment Proof Document',
 				className : 'primary lg',
@@ -94,7 +107,8 @@ const controls = [
 					},
 				},
 				accept:
-					'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document',
+					'image/*,.pdf,.doc,.docx,.xlsx,application/msword,application/'
+					+ 'vnd.openxmlformats-officedocument.wordprocessingml.document',
 				showLabel     : false,
 				themeType     : 'secondary',
 				isShipment    : true,

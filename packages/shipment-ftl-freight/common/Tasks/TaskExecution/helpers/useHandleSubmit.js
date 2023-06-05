@@ -109,8 +109,6 @@ function useHandleSubmit({
 			truckingPayload = formatForTrucking(task, rawValues, getApisData);
 		}
 
-		console.log('payload', truckingPayload);
-		console.log('final', finalPayload);
 		try {
 			if (
 				TRUCKING_TASK.includes(task.task)
@@ -163,7 +161,6 @@ function useHandleSubmit({
 				Toast.error('Something went wrong');
 			}
 		} catch (err) {
-			console.log('err', err);
 			const errorString =	err?.data?.message
 				|| err?.error?.message
 				|| err?.data?.base

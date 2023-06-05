@@ -42,7 +42,7 @@ const handleServiceIdForTruck = (formatProps, services) => {
 	return temp;
 };
 
-function ConfirmationBooking(props) {
+function ConfirmationBookingSP(props) {
 	const { services, onCancel, shipment_data } = props;
 
 	const [finalFormatForHook2, setFinalFormatForHook2] = useState([]);
@@ -139,4 +139,4 @@ function ConfirmationBooking(props) {
 	);
 }
 
-export default ConfirmationBooking;
+export default ConfirmationBookingSP;

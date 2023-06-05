@@ -49,3 +49,9 @@
 		padding: 6px;
 	}
 }
+
+.loader{
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+}

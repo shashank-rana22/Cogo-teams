@@ -14,20 +14,19 @@
 	}
 }
 
-.button_wrap {
-	margin: 20px 0px;
-	display: flex;
-	justify-content: flex-end;
-
-	.core-ui-button-root {
-		margin-left: 10px;
-		text-transform: capitalize;
-		width: 100px;
-	}
-}
-
 .loading_container {
 	display: flex;
 	justify-content: center;
 	align-items: center;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+
+	:global {
+		.ui_button_container:first-child {
+			margin-right: 8px;
+		}
+	}
 }

@@ -14,13 +14,11 @@ function Item(props) {
 		span,
 		label = '',
 		error = {},
-		heading = '',
 		rules = {},
 		className = '',
 		formValues = {},
 		source = '',
 	} = props || {};
-
 	const errorOriginal = getErrorMessage({
 		error,
 		rules,
@@ -29,7 +27,7 @@ function Item(props) {
 
 	let newProps = { ...props };
 
-	const isAsyncSelect = ['select', 'creatable-select'].includes(type)
+	const isAsyncSelect = ['select', 'creatable-select', 'location-select'].includes(type)
 		&& Object.keys(props).includes('optionsListKey');
 
 	if (isAsyncSelect) {

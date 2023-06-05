@@ -148,28 +148,13 @@ const evaluateObject = (control, task, shipment_data) => {
 	return finalControl;
 };
 
-const evaluateCondition = (step, primaryService, task) => {
+const evaluateCondition = (step) => {
 	let showStep = true;
 
-	if (task?.task === 'upload_bill_of_lading') {
-		const bl_category = primaryService?.bl_category?.toLowerCase() || 'hbl';
-
-		if (
-			bl_category === 'mbl'
-			&& step?.name === 'house_bill_of_lading'
-			&& primaryService?.service_type !== 'lcl_freight_service'
-		) {
-			showStep = false;
-		}
+	if (step) {
+		showStep = true;
 	}
 
-	if (task?.task === 'upload_draft_bill_of_lading') {
-		const bl_category = primaryService?.bl_category?.toLowerCase() || 'mbl';
-
-		if (bl_category === 'mbl' && step?.name === 'hbl') {
-			showStep = false;
-		}
-	}
 	return showStep;
 };
 
@@ -222,7 +207,7 @@ const injectDataIntoValues = (step, task, shipment_data) => {
 
 const prepareSteps = (steps, task, primary_service = {}) => {
 	const filteredSteps = steps
-		?.filter((step) => evaluateCondition(step, primary_service, task))
+		?.filter((step) => evaluateCondition(step))
 		?.map((step) => conditionalAddition(step, primary_service));
 
 	const dataRichUi = filteredSteps?.map((step) => injectDataIntoValues(step, task, primary_service));

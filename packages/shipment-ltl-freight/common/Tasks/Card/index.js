@@ -12,6 +12,7 @@ function Card({
 	const handleChange = (newMails) => {
 		handleClick(task, newMails);
 	};
+	console.log('tasks', task?.task);
 
 	return (
 		<div className={styles.container}>

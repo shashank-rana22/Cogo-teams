@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
@@ -14,6 +15,7 @@ import {
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
+import styles from './styles.module.css';
 
 function ExecuteTask({
 	task = {},
@@ -39,7 +41,12 @@ function ExecuteTask({
 		: {};
 
 	if (loading) {
-		return <div>Loading...</div>;
+		return (
+			<div className={styles.loader}>
+				<Loader />
+				Loading Task
+			</div>
+		);
 	}
 
 	if (task.service_type && task.task === 'mark_confirmed') {

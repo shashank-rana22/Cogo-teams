@@ -11,7 +11,6 @@ function Layout({
 	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
 }) {
 	const totalFields = [];
-
 	let rowWiseFields = [];
 	let span = 0;
 
@@ -88,7 +87,6 @@ function Layout({
 								</div>
 							);
 						}
-
 						return (
 							<Item
 								key={field.name}

@@ -44,7 +44,7 @@ const extraApiPayload = (values, end_point, task) => {
 			const data = {};
 
 			Object.keys(values).forEach((key) => {
-				if (key === 'trailer_details') {
+				if (key === 'truck_details') {
 					const index = values[key].findIndex((ind) => ind.id === item);
 
 					Object.keys(values[key][index]).forEach((lineItem) => {

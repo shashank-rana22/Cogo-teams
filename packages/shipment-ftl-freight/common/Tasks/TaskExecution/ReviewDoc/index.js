@@ -81,7 +81,7 @@ function ReviewDoc({
 
 	if (loading) {
 		return (
-			<div>
+			<div className={styles.loader}>
 				<Loader />
 				Loading Document...
 			</div>

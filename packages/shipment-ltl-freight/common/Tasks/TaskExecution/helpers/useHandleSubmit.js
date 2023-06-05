@@ -54,7 +54,7 @@ function useHandleSubmit({
 		method : 'POST',
 	}, { manual: true });
 
-	const [triggerBulkUpdate] = useRequest({
+	const [{ loading: updatingBulkServices }, triggerBulkUpdate] = useRequest({
 		url    : '/bulk_update_shipment_services',
 		method : 'POST',
 	}, { manual: true });
@@ -114,7 +114,7 @@ function useHandleSubmit({
 				TRUCKING_TASK.includes(task.task)
 				&& Object.keys(truckingPayload).length
 			) {
-				await triggerBulkUpdate(truckingPayload);
+				await triggerBulkUpdate({ data: truckingPayload });
 			}
 
 			const res = await trigger({
@@ -176,7 +176,7 @@ function useHandleSubmit({
 
 	return {
 		onSubmit,
-		loading: loading || loadingTask || isLoading,
+		loading: loading || loadingTask || isLoading || updatingBulkServices,
 	};
 }
 export default useHandleSubmit;

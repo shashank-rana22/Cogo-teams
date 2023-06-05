@@ -1,4 +1,5 @@
 import { useState } from 'react';
+
 import useEditQuote from './useEditQuote';
 
 const useUpdateRate = (props) => {

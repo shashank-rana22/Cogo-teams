@@ -17,7 +17,7 @@ function LTLAddPaymentInfo({
 	task = {},
 	taskListRefetch = () => {},
 }) {
-	const { loading, data } = useGetInvoicePreference({ defaultFilters: { shipment_id: shipment_data.id } });
+	const { loading, data } = useGetInvoicePreference({ defaultParams: { shipment_id: shipment_data.id } });
 
 	const refetch = () => {
 		taskListRefetch();
@@ -30,10 +30,9 @@ function LTLAddPaymentInfo({
 
 	const {
 		control,
-		fields,
 		handleSubmit,
 		formState: { errors },
-		setValues,
+		setValue,
 	} = useForm({ defaultValues });
 
 	useEffect(() => {
@@ -41,17 +40,13 @@ function LTLAddPaymentInfo({
 			const { invoicing_parties = [] } = data;
 			const invoicingParties = invoicing_parties.map((invoicing_party) => ({
 				invoice_number : invoicing_party?.live_invoice_number || '',
-				amount         : {
-					currency : invoicing_party?.invoice_total_currency,
-					price    : invoicing_party?.invoicing_party_total_discounted,
-				},
-			}));
+				currency       : invoicing_party?.invoice_total_currency,
+				price          : invoicing_party?.invoicing_party_total_discounted,
 
-			setValues({
-				documents: invoicingParties,
-			});
+			}));
+			setValue('documents', invoicingParties);
 		}
-	}, [data, setValues]);
+	}, [data, setValue]);
 
 	const submitForm = async (val) => {
 		if (validateData({ val })) {
@@ -71,7 +66,7 @@ function LTLAddPaymentInfo({
 			) : null}
 
 			<Layout fields={controls} control={control} errors={errors} />
-			<div className={styles.button_wrap}>
+			<div className={styles.button_container}>
 				<Button themeType="secondary" size="md" onClick={() => onCancel()}>
 					Cancel
 				</Button>

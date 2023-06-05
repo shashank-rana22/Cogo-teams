@@ -19,7 +19,6 @@ function FieldArray({
 	...rest
 }) {
 	const { fields, append, remove } = useFieldArray({ control, name });
-
 	return (
 		<div className={styles.child}>
 			{fields.map((field, index) => (

@@ -102,44 +102,45 @@ const evaluateExpression = (operator, lhs, rhs) => {
 const evaluateObject = (control, task, shipment_data) => {
 	const finalControl = control;
 
-	if (control?.conditions) {
-		(control?.conditions || []).forEach((obj) => {
-			const { condition = {}, value: value_to_insert } = obj || {};
+	// if (control?.conditions) {
+	// 	(control?.conditions || []).forEach((obj) => {
+	// 		const { condition = {}, value: value_to_insert } = obj || {};
 
-			if (!condition) {
-				finalControl[obj?.key_to_add] = evaluateVal(
-					value_to_insert,
-					shipment_data,
-				);
-			} else {
-				const {
-					leftHandSide, rightHandSide, value, elseValue,
-				} = getConditionalParams(condition, shipment_data, obj);
+	// 		if (!condition) {
+	// 			finalControl[obj?.key_to_add] = evaluateVal(
+	// 				value_to_insert,
+	// 				shipment_data,
+	// 			);
+	// 		} else {
+	// 			const {
+	// 				leftHandSide, rightHandSide, value, elseValue,
+	// 			} = getConditionalParams(condition, shipment_data, obj);
 
-				const addConditionsValue = evaluateExpression(
-					condition?.operator,
-					leftHandSide,
-					rightHandSide,
-				);
+	// 			const addConditionsValue = evaluateExpression(
+	// 				condition?.operator,
+	// 				leftHandSide,
+	// 				rightHandSide,
+	// 			);
 
-				if (addConditionsValue) {
-					finalControl[obj.key_to_add] = value;
-				} else if (elseValue !== 'undefined') {
-					finalControl[obj.key_to_add] = elseValue;
-				}
+	// 			if (addConditionsValue) {
+	// 				finalControl[obj.key_to_add] = value;
+	// 			} else if (elseValue !== 'undefined') {
+	// 				finalControl[obj.key_to_add] = elseValue;
+	// 			}
 
-				if (condition?.operator === 'date') {
-					if (obj.adhoc_conditions) {
-						finalControl[obj.key_to_add] = evalAdhocConditions(
-							obj.adhoc_conditions,
-						);
-					} else {
-						finalControl[obj.key_to_add] = new Date();
-					}
-				}
-			}
-		});
-	}
+	// 			if (condition?.operator === 'date') {
+	// 				if (obj.adhoc_conditions) {
+	// 					finalControl[obj.key_to_add] = evalAdhocConditions(
+	// 						obj.adhoc_conditions,
+	// 					);
+	// 				} else {
+	// 					console.log('hererereer');
+	// 					finalControl[obj.key_to_add] = new Date();
+	// 				}
+	// 			}
+	// 		}
+	// 	});
+	// }
 
 	if (control?.type === 'fieldArray') {
 		finalControl.controls = (control?.controls || [])?.map((ctrl) => evaluateObject(ctrl, task, shipment_data));
@@ -148,8 +149,12 @@ const evaluateObject = (control, task, shipment_data) => {
 	return finalControl;
 };
 
-const evaluateCondition = (step, primaryService, task) => {
+const evaluateCondition = (step) => {
 	let showStep = true;
+
+	if (step) {
+		showStep = true;
+	}
 
 	return showStep;
 };
@@ -203,7 +208,7 @@ const injectDataIntoValues = (step, task, shipment_data) => {
 
 const prepareSteps = (steps, task, primary_service = {}) => {
 	const filteredSteps = steps
-		?.filter((step) => evaluateCondition(step, primary_service, task))
+		?.filter((step) => evaluateCondition(step))
 		?.map((step) => conditionalAddition(step, primary_service));
 
 	const dataRichUi = filteredSteps?.map((step) => injectDataIntoValues(step, task, primary_service));

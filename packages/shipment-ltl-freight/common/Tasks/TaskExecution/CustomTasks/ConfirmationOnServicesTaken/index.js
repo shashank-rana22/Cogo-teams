@@ -18,12 +18,11 @@ function ConfirmationOnServicesTaken({
 	onCancel = () => {},
 	shipment_data,
 }) {
-	console.log('hereeee');
 	const refetch = () => {
 		taskListRefetch();
 		onCancel();
 	};
-	const { data } = useGetInvoicePreference({ defaultFilters: { shipment_id: shipment_data.id } });
+	const { data } = useGetInvoicePreference({ defaultParams: { shipment_id: shipment_data.id } });
 	const { loading : taskLoading, apiTrigger } = useUpdateTask({ refetch });
 	const { loading : bulkLoading, bulkUpdate } = useUpdateBulkServices({});
 
@@ -38,7 +37,6 @@ function ConfirmationOnServicesTaken({
 	const defaultValues = getDefaultValues(controls);
 	const {
 		control,
-		fields,
 		handleSubmit,
 		formState: { errors },
 		watch,
@@ -51,22 +49,33 @@ function ConfirmationOnServicesTaken({
 		if (data?.invoicing_parties?.[0]?.billing_address?.tax_number === null) {
 			setValue('payment_term', 'prepaid');
 			setValue('payment_subterm', 'paid');
+			(controls || []).forEach((controlObj, index) => {
+				if (['payment_term', 'payment_subterm'].includes(controlObj.name) === 'payment_term') {
+					controls[index].disabled = true;
+					controls[index].disabled = true;
+				}
+			});
 		}
-	}, [data]);
+	}, [controls, data, setValue]);
 
-	if (data?.invoicing_parties?.[0]?.billing_address?.tax_number === null) {
-		fields.payment_term.disabled = true;
-		fields.payment_subterm.disabled = true;
-	}
-
-	if (paymentTerm === 'prepaid') {
-		fields.payment_subterm.options = [{ label: 'Paid', value: 'paid' }];
-	} else if (paymentTerm === 'collect') {
-		fields.payment_subterm.options = [
-			{ label: 'TBB', value: 'tbb' },
-			{ label: 'To Pay', value: 'to_pay' },
-		];
-	}
+	useEffect(() => {
+		if (paymentTerm === 'prepaid') {
+			(controls || []).forEach((controlObj, index) => {
+				if (controlObj.name === 'payment_subterm') {
+					controls[index].options = [{ label: 'Paid', value: 'paid' }];
+				}
+			});
+		} else if (paymentTerm === 'collect') {
+			(controls || []).forEach((controlObj, index) => {
+				if (controlObj.name === 'payment_subterm') {
+					controls[index].options = [
+						{ label: 'TBB', value: 'tbb' },
+						{ label: 'To Pay', value: 'to_pay' },
+					];
+				}
+			});
+		}
+	}, [controls, paymentTerm, watch]);
 
 	const showElements = {
 		payment_sub_term: !!paymentTerm,
