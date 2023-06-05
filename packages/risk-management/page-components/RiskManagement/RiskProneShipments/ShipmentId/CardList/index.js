@@ -4,7 +4,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import BlDoTimeline from './BlDoTimeline';
+// import BlDoTimeline from './BlDoTimeline';
 import ShipmentTimline from './ShipmentTimeline';
 import styles from './styles.module.css';
 
@@ -130,7 +130,7 @@ function CardList({ itemData }) {
 				<div>
 					<div style={{
 						transition : 'max-height 0.3s ease-in-out',
-						maxHeight  : isAccordionActive ? '930px' : '0px',
+						maxHeight  : isAccordionActive ? '430px' : '0px',
 						overflow   : 'hidden',
 					}}
 					>
@@ -142,14 +142,14 @@ function CardList({ itemData }) {
 								<ShipmentTimline itemData={itemData} isAccordionActive={isAccordionActive} />
 							</div>
 						</div>
-						<div>
+						{/* <div>
 							<div className={styles.text}>
 								BL/DO Timeline
 							</div>
 							<div>
 								<BlDoTimeline itemData={itemData} isAccordionActive={isAccordionActive} />
 							</div>
-						</div>
+						</div> */}
 					</div>
 				</div>
 			</div>
