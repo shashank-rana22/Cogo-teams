@@ -8,6 +8,7 @@ import EmailInfo from './Components/EmailInfo';
 import KebabContent from './Components/KebabContent';
 import styles from './styles.module.css';
 
+const EditInvoice = dynamic(() => import('../../../../../Header/EditInvoice'), { ssr: false });
 const AddRemarks = dynamic(() => import('./AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('./ChangeCurrency'), { ssr: false });
 const OTPVerification = dynamic(() => import('./OTPVerification'), { ssr: false });
@@ -25,6 +26,7 @@ function Actions({
 	invoiceData = {},
 	isIRNGenerated = false,
 }) {
+	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
@@ -107,9 +109,20 @@ function Actions({
 						setIsChangeCurrency={setIsChangeCurrency}
 						setShowAddRemarks={setShowAddRemarks}
 						setShowChangePaymentMode={setShowChangePaymentMode}
+						setIsEditInvoice={setIsEditInvoice}
 					/>
 				</div>
 			</div>
+
+			{(invoice.services || []).length && isEditInvoice ? (
+				<EditInvoice
+					show={isEditInvoice}
+					onClose={() => setIsEditInvoice(false)}
+					invoice={invoice}
+					refetch={refetch}
+					shipment_data={shipment_data}
+				/>
+			) : null}
 
 			{showReview ? (
 				<ReviewServices

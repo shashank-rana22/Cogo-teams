@@ -1,5 +1,5 @@
 import { RadioGroup, Modal, Radio, Button } from '@cogoport/components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import useUpdateInvoicePaymentMode from '../../../../../../../../../hooks/useUpdateInvoicePaymentMode';
 

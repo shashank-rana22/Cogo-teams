@@ -16,6 +16,7 @@ function Actions({
 	setIsChangeCurrency = () => {},
 	setShowAddRemarks = () => {},
 	setShowChangePaymentMode = () => {},
+	setIsEditInvoice = () => {},
 }) {
 	const [show, setShow] = useState(false);
 	const showForOldShipments =	shipment_data.serial_id <= 120347 && invoice.status === 'pending';
@@ -50,6 +51,15 @@ function Actions({
 			{commonActions ? (
 				<>
 					<div>
+						<div
+							role="button"
+							tabIndex={0}
+							className={styles.text}
+							onClick={() => handleClick(setIsEditInvoice)}
+						>
+							Edit Invoice
+						</div>
+						<div className={styles.line} />
 						<div
 							role="button"
 							tabIndex={0}

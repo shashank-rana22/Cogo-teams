@@ -6,7 +6,7 @@ import {
 } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../../hooks/useUpdateInvoiceStatus';
 import styles from '../styles.module.css';
@@ -14,7 +14,6 @@ import styles from '../styles.module.css';
 import KebabContent from './KebabContent';
 
 const EditInvoice = dynamic(() => import('../../../../../../Header/EditInvoice'), { ssr: false });
-
 const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
 const OTPVerification = dynamic(() => import('../OTPVerification'), { ssr: false });
@@ -177,6 +176,7 @@ function Actions({
 						setIsChangeCurrency={setIsChangeCurrency}
 						setShowAddRemarks={setShowAddRemarks}
 						setShowChangePaymentMode={setShowChangePaymentMode}
+						setIsEditInvoice={setIsEditInvoice}
 					/>
 				</div>
 			</div>
