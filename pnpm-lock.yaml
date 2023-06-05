@@ -1337,8 +1337,7 @@ importers:
       '@cogoport/utils': ^1.2.10
       file-saver: ^2.0.5
       react: 18.2.0
-      "utils\n": |
-        link:@cogoport/utils
+      utils: link:@cogoport/utils
     dependencies:
       '@cogoport/components': 1.0.423_i6zki3o327eoyx2ndl4diuajiu
       '@cogoport/context': link:../../common/context
@@ -1356,8 +1355,7 @@ importers:
       '@cogoport/utils': 1.2.10
       file-saver: 2.0.5
       react: 18.2.0
-      "utils\n": |
-        link:@cogoport/utils
+      utils: link:@cogoport/utils
 
   packages/shipment-fcl-freight:
     specifiers:
