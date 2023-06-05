@@ -1,13 +1,14 @@
 import { Placeholder } from '@cogoport/components';
 import React from 'react';
 import { v4 as uuid } from 'uuid';
-// import VerticleLine from '../CheckList/VerticleLine';
+
+import VerticleLine from '../CheckList/VerticleLine';
 
 import styles from './styles.module.css';
 
-const LoadingState = () => Array(6).fill().map(() => (
+const LoadingState = () => Array(6).fill().map((_, idx) => (
 	<div className={styles.single_item} key={uuid()}>
-		{/* <VerticleLine isLast={idx === 5} /> */}
+		<VerticleLine isLast={idx === 5} />
 
 		<div className={styles.main}>
 			<div className={styles.heading}>

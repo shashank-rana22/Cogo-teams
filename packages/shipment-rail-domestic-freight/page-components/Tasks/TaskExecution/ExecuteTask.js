@@ -14,11 +14,9 @@ function ExecuteTask({
 	onCancel = () => {},
 	taskListRefetch = () => {},
 	selectedMail = [],
-	// setSelectedMail = () => {},
-	// services = [],
+
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
-	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
 	const {
 		servicesList, shipment_data, primary_service,

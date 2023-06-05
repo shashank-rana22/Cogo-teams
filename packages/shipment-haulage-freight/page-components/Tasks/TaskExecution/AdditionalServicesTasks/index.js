@@ -2,8 +2,8 @@ import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useState, useContext } from 'react';
 
-// import AddRate from '../../../../commons/AdditionalServices/components/AddRate';
-// import getStaus from '../../../../commons/AdditionalServices/components/List/ItemAdded/get_status';
+import AddRate from '../../../../commons/AdditionalServices/components/AddRate';
+import getStaus from '../../../../commons/AdditionalServices/components/List/ItemAdded/get_status';
 import useListShipmentAdditionalServices from '../../../../hooks/useListShipmentAdditionalServices';
 
 function AdditionsServicesTasks({
@@ -25,19 +25,18 @@ function AdditionsServicesTasks({
 	return loading ? (
 		<Loader />
 	) : (
-		// <AddRate
-		// 	item={serviceListItem}
-		// 	shipment_data={shipment_data}
-		// 	status={getStaus({ serviceListItem })}
-		// 	addRate={addRate}
-		// 	setAddRate={setAddRate}
-		// 	showLabel={false}
-		// 	onCancel={onCancel}
-		// 	refetch={refetch}
-		// 	source="task"
-		// 	task={task}
-		// />
-		null
+		<AddRate
+			item={serviceListItem}
+			shipment_data={shipment_data}
+			status={getStaus({ serviceListItem })}
+			addRate={addRate}
+			setAddRate={setAddRate}
+			showLabel={false}
+			onCancel={onCancel}
+			refetch={refetch}
+			source="task"
+			task={task}
+		/>
 	);
 }
 

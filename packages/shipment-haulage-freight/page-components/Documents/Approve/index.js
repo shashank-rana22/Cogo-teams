@@ -20,7 +20,7 @@ function Approve({
 			width="auto"
 			size="lg"
 			show={showApproved}
-			styles={{ dialog: { width: '700px' } }} // todo
+			styles={{ dialog: { width: '700px' } }}
 			closeOnOuterClick={false}
 		>
 			<Modal.Body>

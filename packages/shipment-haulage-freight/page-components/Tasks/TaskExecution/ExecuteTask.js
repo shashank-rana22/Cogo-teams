@@ -1,6 +1,3 @@
-// import { ShipmentDetailContext } from '@cogoport/context';
-// import { useContext } from 'react';
-
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import LoadingState from '../LoadingState';
 
@@ -12,13 +9,8 @@ function ExecuteTask({
 	onCancel = () => {},
 	taskListRefetch = () => {},
 	selectedMail = [],
-	// setSelectedMail = () => {},
-	// services = [],
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
-	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
-
-	// const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const {
 		steps = [],

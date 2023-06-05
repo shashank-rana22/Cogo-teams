@@ -1,7 +1,7 @@
 import { Button, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
-// import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
+import EmptyState from '@cogoport/surface-modules/common/EmptyState';
 import { format, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -65,9 +65,11 @@ function OrganizationDocuments({
 				<Loader forModal={forModal} key={uuid()} />
 			));
 		}
-		// if (!loading && data?.list?.length === 0) {
-		// return <EmptyState />;
-		// }
+
+		if (!loading && data?.list?.length === 0) {
+			return <EmptyState />;
+		}
+
 		return (
 			<>
 				{(data?.list || []).map((doc) => (
