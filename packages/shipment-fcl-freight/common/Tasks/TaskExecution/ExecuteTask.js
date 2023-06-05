@@ -179,7 +179,7 @@ function ExecuteTask({
 				pendingTask={task}
 				onCancel={onCancel}
 				services={servicesList}
-				refetch={taskListRefetch}
+				taskListRefetch={taskListRefetch}
 			/>
 		);
 	}

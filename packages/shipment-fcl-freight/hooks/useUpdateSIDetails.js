@@ -16,11 +16,11 @@ const formatData = (data, pendingTask, services) => {
 
 	const modifiedSIData = (data.documents || []).map((item) => ({
 		document_type : 'si',
-		document_url  : item?.url?.name,
-		file_name     : item?.url?.url,
+		document_url  : item?.url?.fileName,
+		file_name     : item?.url?.fileUrl,
 		data          : {
 			description : item?.description || undefined,
-			url         : item?.url?.url,
+			url         : item?.url?.fileUrl,
 		},
 	}));
 
