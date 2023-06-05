@@ -24,7 +24,6 @@ function SubModuleContent({
 	setIndexes,
 	subModuleIndex,
 	chapter = {},
-	setChapter = () => {},
 	setStates,
 }) {
 	return (

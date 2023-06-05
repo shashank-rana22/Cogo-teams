@@ -116,3 +116,21 @@
 	flex-direction: column;
 	padding: 0 25px;
 }
+
+.display_assesment{
+	width: 100%;
+}
+
+.question{
+	font-weight: 600;
+	display: flex;
+	flex-direction: row;
+}
+.answer{
+	display: flex;
+	flex-direction: row;
+}
+
+.flex{
+	width: 90%
+}

@@ -256,9 +256,34 @@ function ModuleContent({
 					<div className={styles.content}>
 						{content_type === 'assessment'
 							&& (state === 'completed' ? (
-								<div dangerouslySetInnerHTML={{ __html: user_submission }} />
+								// <div dangerouslySetInnerHTML={{ __html: user_submission }} />
+								<div className={styles.display_assesment}>
+									<div className={styles.question}>
+										<div>Question : &nbsp;</div>
+										<div
+											dangerouslySetInnerHTML={{ __html: chapter_content }}
+											className={styles.flex}
+										/>
+									</div>
+									<div className={styles.answer}>
+										<div>Answer : &nbsp;</div>
+										<div
+											dangerouslySetInnerHTML={{ __html: user_submission }}
+											className={styles.flex}
+										/>
+									</div>
+								</div>
 							) : (
 								<div className={styles.rte}>
+									<div className={styles.display_assesment}>
+										<div className={styles.question}>
+											<div>Question : &nbsp;</div>
+											<div
+												dangerouslySetInnerHTML={{ __html: chapter_content }}
+												className={styles.flex}
+											/>
+										</div>
+									</div>
 									<RichTextEditor
 										value={editorValue}
 										onChange={handleChange}
