@@ -4,7 +4,11 @@ import { IcMEyeopen, IcMDelete, IcMOverflowDot, IcMEdit } from '@cogoport/icons-
 import styles from './styles.module.css';
 
 const handleOpenCourse = ({ id, router, view }) => {
-	router.push(`/learning/course/create?mode=${view}&id=${id}`);
+	if (view === 'view') {
+		router.push(`/learning/course/preview?course_id=${id}`);
+	} else {
+		router.push(`/learning/course/create?mode=${view}&id=${id}`);
+	}
 };
 
 export function StudentButtons({ item, setStudentId, setShowModal, loading }) {
@@ -98,7 +102,7 @@ export function CourseButtons({
 								onClick={() => handleOpenCourse({ id, router, view: 'view' })}
 							>
 								<IcMEyeopen />
-								<div>View</div>
+								<div>Preview</div>
 							</Button>
 
 							<Button

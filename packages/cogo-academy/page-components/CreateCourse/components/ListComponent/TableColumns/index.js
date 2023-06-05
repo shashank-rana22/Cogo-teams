@@ -156,8 +156,15 @@ export const courseColumns = ({
 		Header   : 'Name of Course',
 		id       : 'course_name',
 		accessor : ({ name = '' }) => (
-			<div>
-				{name}
+			<div className={styles.text}>
+				<Tooltip
+					theme="light"
+					placement="bottom"
+					interactive
+					content={name}
+				>
+					{name}
+				</Tooltip>
 			</div>
 		),
 	},
@@ -222,7 +229,15 @@ export const courseColumns = ({
 						);
 					})}
 					{topicsArr.length > 1 ? <Pill color="#F7FAEF">{`+${topicsArr.length - 1} More`}</Pill> : null}
-					<div className={styles.tags}>{finalString}</div>
+					<Tooltip
+						theme="light"
+						placement="bottom"
+						interactive
+						content={finalString}
+					>
+						<div className={styles.tags}>{finalString}</div>
+					</Tooltip>
+
 				</div>
 			);
 		},

@@ -1,9 +1,9 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState, useCallback } from 'react';
+import { useState, useCallback } from 'react';
 
-function useListUserCourses({ filters, activeTab = '' }) {
+function useListUserCourses({ filters }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
@@ -18,7 +18,8 @@ function useListUserCourses({ filters, activeTab = '' }) {
 	const [{ data = {}, loading }, trigger] = useRequest({
 		url    : '/list_user_courses',
 		method : 'GET',
-	}, { manual: true });
+		params,
+	}, { manual: false });
 
 	const fetchList = useCallback(() => {
 		try {
@@ -36,12 +37,6 @@ function useListUserCourses({ filters, activeTab = '' }) {
 			Toast.error(error.message);
 		}
 	}, [query, params, filters, trigger]);
-
-	useEffect(() => {
-		if (activeTab === 'students') {
-			fetchList();
-		}
-	}, [fetchList, activeTab]);
 
 	return {
 		data,
