@@ -8,7 +8,7 @@ import useGetDocumentSigningUrl from './useGetDocumentSigningUrl';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
 function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
-	const { id, document_url, status } = data?.offer_letter || {};
+	const { id, document_url, status, signed_document_url:detail_signed_document_url } = data?.offer_letter || {};
 
 	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails });
 
@@ -57,7 +57,7 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 				<PreviewDocumet
 					height="700px"
 					width="800px"
-					document_url={signed_document_url || document_url}
+					document_url={detail_signed_document_url || signed_document_url || document_url}
 				/>
 
 			</div>
