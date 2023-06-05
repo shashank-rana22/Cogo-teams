@@ -31,7 +31,7 @@ export const AwbNumberUsedFields = {
 		{
 			key   : 'shipments',
 			label : 'SID Created',
-			span  : 1.2,
+			span  : 1,
 			func  : 'handleShipments',
 		},
 		{

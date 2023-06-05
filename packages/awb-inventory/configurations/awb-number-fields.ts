@@ -3,7 +3,7 @@ export const AwbNumberFields = {
 		{
 			key   : 'airline',
 			label : 'Airline Name',
-			span  : 1.8,
+			span  : 1.6,
 			func  : 'handleAirline',
 		},
 		{

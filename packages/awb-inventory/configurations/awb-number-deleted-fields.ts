@@ -3,7 +3,7 @@ export const AwbNumberDeletedFields = {
 		{
 			key   : 'airline',
 			label : 'Airline Name',
-			span  : 1.2,
+			span  : 1.6,
 			func  : 'handleAirline',
 		},
 		{
@@ -21,13 +21,13 @@ export const AwbNumberDeletedFields = {
 		{
 			key   : 'importer_exporter_id',
 			label : 'Shipper Name',
-			span  : 1,
+			span  : 1.2,
 			func  : 'handleIE',
 		},
 		{
 			key   : 'awb_number',
 			label : 'AWB Number',
-			span  : 1.4,
+			span  : 1,
 		},
 		{
 			key   : 'procured_by',
@@ -44,13 +44,13 @@ export const AwbNumberDeletedFields = {
 		{
 			key   : 'procured_date',
 			label : 'Procured Date',
-			span  : 1.2,
+			span  : 1,
 			func  : 'handleDate',
 		},
 		{
 			key   : 'action',
 			label : 'Action',
-			span  : 0.8,
+			span  : 1,
 			func  : 'handleAction',
 		},
 	],
