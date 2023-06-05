@@ -44,6 +44,7 @@ function BreakdownDetails({
 	console.error('rate::', rate);
 
 	let total = 0;
+
 	const { totalAmount } = getTotalMarginSum({
 		editedMargins,
 		currency_conversion: conversions,
