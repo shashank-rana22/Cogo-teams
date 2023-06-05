@@ -8357,7 +8357,12 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
-
+		{
+			api         : 'post_sales_invoice_bulk_irn_generate',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
 	],
 	incident_controller: [
 		{

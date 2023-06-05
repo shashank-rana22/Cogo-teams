@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters';
 import completedColumn from '../../configs/Completed_table';
+import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
 import { INVOICE_FILTER } from '../../Utils/invoicelistFilter';
 import FilterModal from '../FilterModal';
@@ -22,7 +23,7 @@ const GREY = '#BDBDBD';
 
 function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 	const [checkedRows, setCheckedRows] = useState([]);
-	console.log('checkedRows->', checkedRows);
+	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
 
 	const {
 		listData,
@@ -35,6 +36,16 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		sort,
 		setSort,
 	} = useGetOutstandingCard(organizationId, entityCode);
+
+	const {
+		bulkIrnGenerate,
+		bulkIrnLoading,
+	} = useBulkIrnGenerate({
+		getOrganizationInvoices,
+		checkedRows,
+		setCheckedRows,
+		setIsHeaderChecked,
+	});
 
 	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
 
@@ -67,9 +78,9 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		checkedRows,
 		setCheckedRows,
 		totalRows : listData?.list || [],
+		isHeaderChecked,
+		setIsHeaderChecked,
 	});
-
-	console.log('checked rows->', checkedRows);
 
 	return (
 		<div>
@@ -96,7 +107,11 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 				<div className={styles.filter_container}>
 
 					{checkedRows?.length > 0 ? (
-						<Button style={{ marginRight: '20px' }}>
+						<Button
+							style={{ marginRight: '20px' }}
+							onClick={bulkIrnGenerate}
+							loading={bulkIrnLoading}
+						>
 							Bulk IRN Generate
 						</Button>
 					) : null}
