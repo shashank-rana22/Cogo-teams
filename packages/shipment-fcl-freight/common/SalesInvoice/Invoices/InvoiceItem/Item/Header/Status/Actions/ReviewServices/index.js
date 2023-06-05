@@ -53,6 +53,7 @@ function ReviewServices({
 					size="md"
 					themeType="secondary"
 					onClick={() => setShowReview(false)}
+					disabled={loading}
 				>
 					Close
 				</Button>
