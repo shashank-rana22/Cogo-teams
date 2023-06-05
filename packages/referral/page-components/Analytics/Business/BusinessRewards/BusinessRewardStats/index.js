@@ -4,18 +4,21 @@ import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-const styledToolTip = ({ slice }) => (
-	<div className={styles.tooltip_div}>
-		<div className={styles.title}>
-			Date:
-			<div className={styles.amount}>{slice?.points?.[0]?.data.x}</div>
+const renderSliceTooltip = ({ slice }) => {
+	const { data } = slice?.points?.[0] || {};
+	return (
+		<div className={styles.tooltip_div}>
+			<div className={styles.title}>
+				Date:
+				<div className={styles.amount}>{data?.x}</div>
+			</div>
+			<div className={styles.title}>
+				Cogopoints:
+				<div className={styles.amount}>{data?.y}</div>
+			</div>
 		</div>
-		<div className={styles.title}>
-			Cogopoints:
-			<div className={styles.amount}>{slice?.points?.[0]?.data.y}</div>
-		</div>
-	</div>
-);
+	);
+};
 
 function BusinessRewardStats({ graphData = [], loading = false }) {
 	return (
@@ -61,7 +64,7 @@ function BusinessRewardStats({ graphData = [], loading = false }) {
 					useMesh
 					legends={[]}
 					enableSlices="x"
-					sliceTooltip={styledToolTip}
+					sliceTooltip={renderSliceTooltip}
 				/>
 			)}
 		</div>
