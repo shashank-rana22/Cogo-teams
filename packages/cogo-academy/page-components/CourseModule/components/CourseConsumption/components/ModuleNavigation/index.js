@@ -25,9 +25,10 @@ function ModuleNavigation({
 
 	// const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration;
 
-	const setStates = (feedback, test) => {
+	const setStates = (feedback, test, Chapter) => {
 		setShowFeedback(feedback);
 		setShowTestData(test);
+		setChapter(Chapter);
 	};
 
 	if (loading || courseProgressUpdateLoading) {
@@ -136,7 +137,7 @@ function ModuleNavigation({
 					role="button"
 					tabIndex="0"
 					onClick={() => {
-						(data?.all_chapters_completed) ? setStates(false, true) : null;
+						(data?.all_chapters_completed) ? setStates(false, true, {}) : null;
 					}}
 				>
 					{(data?.all_chapters_completed)
@@ -153,7 +154,7 @@ function ModuleNavigation({
 				role="button"
 				tabIndex="0"
 				onClick={() => {
-					(data?.test_completed) ? setStates(true, false) : null;
+					(data?.test_completed) ? setStates(true, false, {}) : null;
 				}}
 			>
 				{(data?.all_chapters_completed)

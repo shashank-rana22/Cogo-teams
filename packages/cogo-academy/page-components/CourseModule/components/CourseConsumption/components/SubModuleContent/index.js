@@ -32,7 +32,6 @@ function SubModuleContent({
 			className={styles.container}
 			role="button"
 			tabIndex="0"
-			onClick={() => { setStates(false, false); }}
 		>
 			{data.map((currChapter, chapterIndex) => (
 				<div
@@ -41,7 +40,7 @@ function SubModuleContent({
 					className={`${styles.chapter_container} 
 								${currChapter.id === chapter.id && styles.active}`}
 					onClick={() => {
-						setChapter(currChapter);
+						setStates(false, false, currChapter);
 						setIndexes({
 							moduleIndex,
 							subModuleIndex,
