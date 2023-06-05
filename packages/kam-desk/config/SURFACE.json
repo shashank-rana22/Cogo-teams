@@ -1,0 +1,105 @@
+{
+  "ftl_freight": {
+    "tabs": [
+      {
+        "label": "Confirm Booking",
+        "value": "confirm_booking"
+      },
+      {
+        "label": "Confirm Services",
+        "value": "confirmation_on_services_taken"
+      },
+      {
+        "label": "Confirm By Service Provider",
+        "value": "confirmation_of_booking_with_service_provider"
+      },
+      {
+        "label": "Cargo Picked up",
+        "value": "cargo_picked_up"
+      },
+      {
+        "label": "Cargo Dropped / POD Pending",
+        "value": "cargo_dropped_pod_pending"
+      },
+      {
+        "label": "POD Uploaded",
+        "value": "pod_uploaded"
+      },
+      {
+        "label": "Completed",
+        "value": "completed"
+      },
+      {
+        "label": "Cancelled",
+        "value": "cancelled"
+      }
+    ],
+    "possible_filters":["importer_exporter_id","pending_invoice","source","payment_term","tags"]
+  },
+  "ltl_freight": {
+    "tabs": [
+      {
+        "label": "Confirm Booking",
+        "value": "confirm_booking"
+      },
+      {
+        "label": "Confirm Services",
+        "value": "confirmation_on_services_taken"
+      },
+      {
+        "label": "Confirm Cargo Details",
+        "value": "confirm_cargo_details"
+      },
+      {
+        "label": "Cargo Picked up",
+        "value": "cargo_picked_up"
+      },
+      {
+        "label": "Cargo Dropped",
+        "value": "cargo_dropped_pod_pending"
+      },
+      {
+        "label": "Completed",
+        "value": "completed"
+      },
+      {
+        "label": "Cancelled",
+        "value": "cancelled"
+      }
+    ],
+    "possible_filters":["importer_exporter_id","pending_invoice","source","payment_term","tags"]
+  },
+  "rail_domestic_freight": {
+    "tabs": [
+      {
+        "label": "Confirm Booking",
+        "value": "confirm_booking"
+      },
+      {
+        "label": "Upload Commercial Invoice",
+        "value": "upload_commercial_invoice"
+      },
+      {
+        "label": "Invoice Pending",
+        "value": "invoice_pending"
+      },
+      {
+        "label": "Invoice Reviewed",
+        "value": "invoice_reviewed"
+      },
+      {
+        "label": "Invoice Approved",
+        "value": "invoice_approved"
+      },
+      {
+        "label": "Completed",
+        "value": "completed"
+      },
+      {
+        "label": "Cancelled",
+        "value": "cancelled"
+      }
+    ],
+    "possible_filters":["importer_exporter_id","pending_invoice","source","payment_term","tags"]
+  }
+}

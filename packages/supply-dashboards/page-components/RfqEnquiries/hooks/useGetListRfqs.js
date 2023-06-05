@@ -1,4 +1,4 @@
-import ROLE_IDS from '@cogoport/constants/role_ids';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -16,8 +16,9 @@ const useGetListRfqs = () => {
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
-	const fullAccessIds = [ROLE_IDS.SUPERADMIN_ID, ROLE_IDS.ADMIN_ID];
-	const isFullAccess = user_profile.partner.user_role_ids.filter((id) => fullAccessIds.includes(id)).length;
+
+	const isFullAccess = user_profile.partner.user_role_ids
+		.filter((id) => GLOBAL_CONSTANTS.uuid.rfq_admin_ids.includes(id)).length;
 
 	const listAPi = (restFilters, currentPage) => {
 		const { rates_status, ...filters } = restFilters;

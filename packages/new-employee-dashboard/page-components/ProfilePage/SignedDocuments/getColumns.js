@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDocument, IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -11,7 +11,6 @@ const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
 		Header   : 'DOCUMENT TYPE',
 		accessor : (item) => <div className={styles.name}>{item?.name || 'Aadhar Card'}</div>,
 	},
-
 	{
 		Header   : 'FILE',
 		accessor : (item) => (
@@ -30,7 +29,6 @@ const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
 			</div>
 		),
 	},
-
 	{
 		Header   : 'UPLOAD DATE',
 		accessor : (item) => (
@@ -43,7 +41,6 @@ const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
 			</div>
 		),
 	},
-
 	{
 		Header   : 'ACTION/STATUS',
 		accessor : (item) => (

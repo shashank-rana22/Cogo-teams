@@ -5,8 +5,8 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useContext } from 'react';
 
-import { getPrefillValue, getDateForPayload } from '../../utils/dateFormatter';
 import controls from '../EditSchedule/controls';
+import { getDate } from '../utils/getDate';
 
 export default function useEditServiceSchedule({
 	setShow = () => {},
@@ -14,7 +14,7 @@ export default function useEditServiceSchedule({
 }) {
 	const { servicesList, primary_service, refetch: shipmentRefetch = () => {} } = useContext(ShipmentDetailContext);
 
-	const [departureDate, setDepartureDate] = useState(getPrefillValue(primary_service?.schedule_departure));
+	const [departureDate, setDepartureDate] = useState(getDate(primary_service?.schedule_departure));
 
 	const [{ loading }, updateShipmentService] = useRequest({
 		url    : 'update_shipment_service',
@@ -47,10 +47,6 @@ export default function useEditServiceSchedule({
 	}, [formValues, departureDate, reset, finalControls]);
 
 	const updateData = async (values) => {
-		const timezonedValues = {};
-
-		(Object.entries(values).forEach(([key, val]) => { timezonedValues[key] = getDateForPayload(val); }));
-
 		const mainServiceIds = (servicesList || [])
 			?.filter((item) => item?.service_type === primary_service?.service_type)
 			?.map((service) => service?.id);
@@ -59,8 +55,8 @@ export default function useEditServiceSchedule({
 			ids                 : mainServiceIds,
 			performed_by_org_id : primary_service?.service_provider?.id,
 			data                : ['vessel_arrived'].includes(primary_service?.state)
-				? { schedule_arrival: timezonedValues?.schedule_arrival }
-				: { ...timezonedValues },
+				? { schedule_arrival: values?.schedule_arrival }
+				: { ...values },
 			service_type: primary_service?.service_type,
 		};
 
@@ -68,9 +64,7 @@ export default function useEditServiceSchedule({
 			await updateShipmentService({ data: payloadForUpdateShipment });
 
 			Toast.success('Booking Note Updated Successfully !');
-
 			setShow(false);
-
 			shipmentRefetch();
 		} catch (err) {
 			toastApiError(err);
