@@ -78,18 +78,6 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		};
 	}
 
-	if (search_type === 'fcl_freight_local') {
-		if (trade_type === 'export') {
-			return {
-				port_id: primary_service?.origin_port?.id,
-				trade_type,
-			};
-		} return {
-			port_id: primary_service?.destination_port?.id,
-			trade_type,
-		};
-	}
-
 	return null;
 };
 
