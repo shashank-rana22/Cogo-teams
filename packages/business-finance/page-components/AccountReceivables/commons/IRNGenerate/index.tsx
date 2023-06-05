@@ -61,12 +61,6 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		refetch,
 	});
 
-	// const { uploadEInvoice, loading: invoiceLoading } = useUploadeInvoice({
-	// 	id,
-	// 	setUploadInvoice,
-	// 	partner,
-	// });
-
 	const financeRejected = () => {
 		setOpenReject(!openReject);
 	};
@@ -95,7 +89,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						disabled={loading}
 						onClick={() => generateIrn()}
 					>
-						Generate
+						{loading ? 'Generating' : 'Generate'}
 						{' '}
 						{IrnLabel}
 					</Button>

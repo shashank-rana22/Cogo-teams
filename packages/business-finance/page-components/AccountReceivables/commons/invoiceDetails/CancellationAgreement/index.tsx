@@ -3,7 +3,11 @@ import styles from './styles.module.css';
 function CancellationAgreement({ data }) {
 	const { cancelledEInvoiceDetails } = data || {};
 
-	console.log(cancelledEInvoiceDetails, 'cancellationAgreement');
+	if (cancelledEInvoiceDetails === undefined) {
+		return (
+			<div>Cancellation Aggreement Does Not Exist</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -17,7 +21,9 @@ function CancellationAgreement({ data }) {
 			</div>
 			<div className={styles.sub_container}>
 				Agreement Proof -
-				<a style={{ fontWeight: 600 }} href={cancelledEInvoiceDetails?.agreementDocument}>View Documnet</a>
+				<a style={{ fontWeight: 600 }} href={cancelledEInvoiceDetails?.agreementDocument}>
+					View Documnet
+				</a>
 			</div>
 			<div className={styles.sub_container}>
 				Form 04 -
