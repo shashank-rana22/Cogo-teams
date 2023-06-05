@@ -8,7 +8,7 @@ function SIDView({ reportMonth }) {
 			<div className={styles.shipment_days}>
 				Days Left For Shipment ID’s
 				<br />
-				To Get Auto Reversed
+				To Get Auto Closed
 			</div>
 			<div className={styles.days_data}>
 				{reportMonth.map((item) => (

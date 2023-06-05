@@ -1,40 +1,13 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
+import { getFormattedPrice } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
-const colors = ['#57C6D1', '#ADCC6A'];
-
-const data = [
-	{
-		id    : 'Income Accrued',
-		label : 'Income Accrued',
-		value : 12,
-		color : '#57C6D1',
-	},
-	{
-		id    : 'Income Booked',
-		label : 'Income Booked',
-		value : 12,
-		color : '#ADCC6A',
-	},
-];
-
-const dataExpense = [
-	{
-		id    : 'Expense Accrued',
-		label : 'Expense Accrued',
-		value : 12,
-		color : '#57C6D1',
-	},
-	{
-		id    : 'Expense Booked',
-		label : 'Expense Booked',
-		value : 12,
-		color : '#ADCC6A',
-	},
-];
-
-function ChartData() {
+function ChartData({
+	expenseBookedSum, expenseAccruedSum, expenseCurrency, incomeBookedSum, incomeAccruedSum,
+	incomeCurrency, statsLoading, COLORS, data, dataExpense,
+}) {
+	console.log(statsLoading, 'statsLoading');
 	function CenteredMetric({ centerX, centerY }) {
 		return (
 			<text
@@ -53,6 +26,25 @@ function ChartData() {
 
 		);
 	}
+
+	function CenteredMetricExpense({ centerX, centerY }) {
+		return (
+			<text
+				x={centerX}
+				y={centerY}
+				textAnchor="middle"
+				dominantBaseline="central"
+				style={{
+					fontSize   : '12px',
+					fontWeight : 600,
+
+				}}
+			>
+				Expense
+			</text>
+
+		);
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.income_pie_chart}>
@@ -60,7 +52,7 @@ function ChartData() {
 					data={data}
 					margin={{ top: 0, right: 0, bottom: 25, left: 10 }}
 					innerRadius={0.7}
-					colors={colors}
+					colors={COLORS}
 					padAngle={1}
 					enableArcLabels={false}
 					enableArcLinkLabels={false}
@@ -74,14 +66,14 @@ function ChartData() {
 				<div className={styles.booked_data}>
 					Booked Income
 					<div className={styles.amount_data}>
-						INR 60,30,00,000
+						{getFormattedPrice(incomeBookedSum, incomeCurrency) || 0.00}
 					</div>
 				</div>
 
 				<div>
 					Accrued Income
 					<div className={styles.amount_data}>
-						INR 60,30,00,000
+						{getFormattedPrice(incomeAccruedSum, incomeCurrency) || 0.00}
 					</div>
 				</div>
 
@@ -92,13 +84,13 @@ function ChartData() {
 					data={dataExpense}
 					margin={{ top: 0, right: 0, bottom: 25, left: 10 }}
 					innerRadius={0.7}
-					colors={colors}
+					colors={COLORS}
 					padAngle={1}
 					enableArcLabels={false}
 					enableArcLinkLabels={false}
 					isInteractive
 					activeOuterRadiusOffset={4}
-					layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetric]}
+					layers={['arcs', 'arcLabels', 'arcLinkLabels', 'legends', CenteredMetricExpense]}
 				/>
 			</div>
 
@@ -106,14 +98,14 @@ function ChartData() {
 				<div className={styles.booked_data}>
 					Booked Expense
 					<div className={styles.amount_data}>
-						INR 60,30,00,000
+						{getFormattedPrice(expenseBookedSum, expenseCurrency) || 0.00}
 					</div>
 				</div>
 
 				<div>
 					Accrued Expense
 					<div className={styles.amount_data}>
-						INR 60,30,00,000
+						{getFormattedPrice(expenseAccruedSum, expenseCurrency) || 0.00}
 					</div>
 				</div>
 

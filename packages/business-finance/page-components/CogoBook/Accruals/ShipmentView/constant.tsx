@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { format, startCase } from '@cogoport/utils';
 
 import SortIcon from '../../common/SortIcon';
@@ -12,20 +13,13 @@ const newArray = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3
 export const optionsYear = () => (newArray || [{}]).map((item) => (
 	{ value: item.toString(), label: item.toString() }));
 
-export const optionsMonth = [
-	{ value: '1', label: 'January' },
-	{ value: '2', label: 'February' },
-	{ value: '3', label: 'March' },
-	{ value: '4', label: 'April' },
-	{ value: '5', label: 'May' },
-	{ value: '6', label: 'June' },
-	{ value: '7', label: 'July' },
-	{ value: '8', label: 'August' },
-	{ value: '9', label: 'September' },
-	{ value: '10', label: 'October' },
-	{ value: '11', label: 'November' },
-	{ value: '12', label: 'December' },
-];
+const getMonth = GLOBAL_CONSTANTS.months;
+
+export const optionsMonth = (getMonth || [{}]).map((item: string, index: number) => {
+	const count = index + 1;
+	const options = { value: count.toString(), label: item };
+	return options;
+});
 
 export const optionsShipment = [
 	{ value: 'SHIPMENT', label: 'Shipment' },

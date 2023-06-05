@@ -1,13 +1,12 @@
 import { Select } from '@cogoport/components';
-import { AsyncSelectController, useForm } from '@cogoport/forms';
+import { AsyncSelectController } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
 function FilterHeader({
 	dashboardFilters, setDashboardFilters,
-	GetYearDetails, optionsYear, GetMonthDetails, optionsMonth,
+	GetYearDetails, optionsYear, GetMonthDetails, optionsMonth, control,
 }) {
-	const { control } = useForm();
 	return (
 		<div className={styles.container}>
 

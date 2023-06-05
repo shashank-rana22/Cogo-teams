@@ -1,12 +1,29 @@
 import { Popover } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function StatsNumericData() {
+function StatsNumericData({ statsData, statsLoading }) {
+	console.log({ statsLoading, statsData }, 'StatsData');
+	const {
+		bookedShipmentCount = 0,
+		accruedShipmentCount = 0,
+		expenseCurrency,
+		bookedProfitPercentage = 0,
+		bookedProfit = 0,
+		actualProfit = 0,
+		actualProfitPercentage = 0,
+		variance = 0,
+		variancePercentage = 0,
+		varianceExpense = 0,
+		varianceIncome = 0,
+		varianceCurrency,
+	} = statsData;
+
 	const MappingData = [{
 		id    : '1',
-		value : '430',
+		value : bookedShipmentCount,
 		label:
 	<div>
 		Shipment ID’S
@@ -18,7 +35,7 @@ function StatsNumericData() {
 	},
 	{
 		id    : '2',
-		value : '430',
+		value : accruedShipmentCount,
 		label:
 	<div>
 		Shipment ID’S
@@ -30,14 +47,22 @@ function StatsNumericData() {
 	}];
 
 	const getRenderProfitData = [
-		{ label: 'Booked Profit', amount: 'INR 2000' },
-		{ label: 'Actual Profit ', amount: 'INR 2000' },
-		{ label: 'Variance', amount: 'INR 2000' },
+		{ label: 'Booked Profit', amount: getFormattedPrice(bookedProfit, expenseCurrency) || 0.00 },
+		{ label: 'Actual Profit ', amount: getFormattedPrice(actualProfit, expenseCurrency) || 0.00 },
+		{ label: 'Variance', amount: getFormattedPrice(variance, expenseCurrency) || 0.00 },
 	];
 
 	const getRenderVarianceData = [
-		{ label: 'Expense Variation', amount: 'INR 2000', invoices: '12', color: '#EE3425' },
-		{ label: 'Income Variation', amount: 'INR 2000', invoices: '12', color: '#849E4C' },
+		{
+			label  : 'Expense Variation',
+			amount : getFormattedPrice(varianceExpense, varianceCurrency) || 0.00,
+			color  : '#EE3425',
+		},
+		{
+			label  : 'Income Variation',
+			amount : getFormattedPrice(varianceIncome, varianceCurrency) || 0.00,
+			color  : '#849E4C',
+		},
 	];
 
 	const contentProfit = (
@@ -77,13 +102,6 @@ function StatsNumericData() {
 						</div>
 					</div>
 
-					<div className={styles.flex_data}>
-						<span>Invoices:</span>
-
-						<div className={styles.amount}>
-							{val?.invoices}
-						</div>
-					</div>
 				</div>
 			))}
 		</div>
@@ -104,13 +122,13 @@ function StatsNumericData() {
 					{' '}
 					Booked Profit :
 					{' '}
-					<span className={styles.percentage}>33.33% </span>
+					<span className={styles.percentage}>{`${bookedProfitPercentage.toFixed(2)} %`}</span>
 					{' '}
 					| Actual Profit :
 					{' '}
 					<span className={styles.percentage}>
 						{' '}
-						25%
+						{`${actualProfitPercentage.toFixed(2)} %`}
 						{' '}
 					</span>
 					<Popover placement="bottom" render={contentProfit}>
@@ -122,7 +140,10 @@ function StatsNumericData() {
 					{' '}
 					Avg. Variance :
 					{' '}
-					<span className={styles.percentage}> 33.33% </span>
+					<span className={styles.percentage}>
+						{' '}
+						{`${variancePercentage.toFixed(2)} %`}
+					</span>
 					<Popover placement="bottom" render={contentVariance}>
 						<div className={styles.icon_arrow}><IcMArrowRotateDown /></div>
 					</Popover>
