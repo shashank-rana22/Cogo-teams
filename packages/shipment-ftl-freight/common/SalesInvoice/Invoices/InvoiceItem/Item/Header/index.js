@@ -12,7 +12,7 @@ import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShi
 import ClickableDiv from '../../../../../ClickableDiv';
 
 import Actions from './Actions';
-// import CNNullify from './CNNullify';
+import CNNullify from './CNNullify';
 import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
@@ -282,14 +282,14 @@ function Header({
 
 			{open ? <div>{children}</div> : null}
 
-			{/* <CNNullify
+			<CNNullify
 				askNullify={askNullify}
 				setAskNullify={setAskNullify}
 				invoice={invoice}
 				refetchCN={refetchCN}
 				invoiceData={invoiceData}
 				bfInvoiceRefetch={bfInvoiceRefetch}
-			/> */}
+			/>
 		</div>
 	);
 }

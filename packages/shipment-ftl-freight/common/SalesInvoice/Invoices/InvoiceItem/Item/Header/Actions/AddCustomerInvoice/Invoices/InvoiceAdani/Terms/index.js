@@ -24,17 +24,12 @@ function Terms({
 
 	const bankDetailObj = bankDetailsArray?.[0] || {};
 
-	// const {
-	// 	bank_name = '',
-	// 	bank_branch = '',
-	// 	ifsc_code = '',
-	// 	account_number = '',
-	// } = customerToBankDetails[importerExporterId] || {};
-
-	const bank_name = '';
-	const 	bank_branch = '';
-	const 	ifsc_code = '';
-	const 	account_number = '';
+	const {
+		bank_name = '',
+		bank_branch = '',
+		ifsc_code = '',
+		account_number = '',
+	} = customerToBankDetails[importerExporterId] || {};
 
 	return (
 		<>
