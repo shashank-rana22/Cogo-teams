@@ -1,7 +1,7 @@
 import { Button, Modal, Input } from '@cogoport/components';
 import React, { useState } from 'react';
 
-// import useUpdateShipment from '../../../hooks/useUpdateShipment';
+import useUpdateShipment from '../../../hooks/useUpdateShipment';
 
 import styles from './styles.module.css';
 
@@ -9,27 +9,27 @@ function AddPoNumber({
 	setShow = () => {},
 	shipment_data = {},
 }) {
-	// const [poNumber, setPoNumber] = useState('');
+	const [poNumber, setPoNumber] = useState('');
 
 	const closeModal = () => setShow(false);
 
-	// const { loading, updateShipment } = useUpdateShipment({
-	// 	refetch        : closeModal,
-	// 	successMessage : 'Purchase Order Number Added!',
-	// });
+	const { loading, updateShipment } = useUpdateShipment({
+		refetch        : closeModal,
+		successMessage : 'Purchase Order Number Added!',
+	});
 
 	const onCreate = () => {
-		// updateShipment({
-		// 	id        : shipment_data?.id,
-		// 	po_number : poNumber,
-		// });
+		updateShipment({
+			id        : shipment_data?.id,
+			po_number : poNumber,
+		});
 	};
 
 	return (
 		<Modal
 			show
 			onClose={closeModal}
-			// showCloseIcon={!loading}
+			showCloseIcon={!loading}
 			closeOnOuterClick={false}
 			className={styles.custom_modal}
 		>
@@ -46,13 +46,13 @@ function AddPoNumber({
 				<Button
 					themeType="secondary"
 					onClick={closeModal}
-					// disabled={loading}
+					disabled={loading}
 				>
 					Cancel
 				</Button>
 
 				<Button
-					// disabled={loading}
+					disabled={loading}
 					onClick={onCreate}
 				>
 					Submit

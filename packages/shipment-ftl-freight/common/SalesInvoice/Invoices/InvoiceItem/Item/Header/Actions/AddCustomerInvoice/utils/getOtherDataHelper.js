@@ -90,7 +90,7 @@ export const getOtherDataHelper = ({
 			const entryAdded = Object.entries(DATA_OBJECT_KEYS_MAPPING).some(
 				([dataObjKey, dataObjValue]) => {
 					if (dataObjValue.includes(requiredValue)) {
-						finalDataObj[requiredKey] =							customData?.[dataObjKey]?.[requiredValue] ?? '';
+						finalDataObj[requiredKey] =	customData?.[dataObjKey]?.[requiredValue] ?? '';
 						return true;
 					}
 					return false;

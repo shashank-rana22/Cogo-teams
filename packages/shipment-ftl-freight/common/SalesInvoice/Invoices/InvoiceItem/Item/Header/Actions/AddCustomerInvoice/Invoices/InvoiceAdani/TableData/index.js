@@ -89,8 +89,7 @@ function TableData({
 								{billing_address?.registration_number}
 							</p>
 							<p style={{ margin: '3px 0', fontSize: '12px' }}>
-								CIN:U72200KA2015PTC082767
-								{/* {customerToCin[importerExporterId] || ''} */}
+								{customerToCin[importerExporterId] || ''}
 							</p>
 						</div>
 					</td>
