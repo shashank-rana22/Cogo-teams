@@ -10,15 +10,23 @@ import IndentForm from './IndentForm';
 import styles from './styles.module.css';
 
 function UploadIndent({
-	task = {}, // todo
+	task = {},
 	onCancel = () => {},
-	refetch = () => {}, // todo
+	refetch = () => {},
 	services = [],
 }) {
 	const [showModal, setShowModal] = useState(false);
 	const [indentURL, setIndentURL] = useState('');
 
-	const { apiTrigger:updatePendingTask = () => {}, loading } = useUpdateShipmentPendingTask({}); // need to see
+	const callBack = () => {
+		refetch();
+		onCancel();
+	};
+
+	const {
+		apiTrigger:updatePendingTask = () => {},
+		loading,
+	} = useUpdateShipmentPendingTask({ refetch: callBack });
 
 	const { control, formState: { errors }, handleSubmit, watch, setValue } = useForm({
 		defaultValues: {
@@ -39,6 +47,27 @@ function UploadIndent({
 	}, [indentURL, setValue]);
 
 	const formValues = watch();
+
+	const onSubmit = (values) => {
+		const payload = {
+			id   : task?.id,
+			data : {},
+		};
+
+		const documents = (values.documents || []).map((documentItem) => ({
+			document_type : 'indent',
+			document_url  : documentItem?.url?.url,
+			file_name     : documentItem?.url?.name,
+			data          : {
+				url         : documentItem?.url?.url,
+				description : documentItem?.description,
+			},
+		}));
+
+		payload.data.documents = documents;
+
+		updatePendingTask(payload);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -72,7 +101,7 @@ function UploadIndent({
 				<Button
 					themeType="primary"
 					disabled={loading}
-					// onClick={handleSubmit(onSubmit)}
+					onClick={handleSubmit(onSubmit)}
 				>
 					SUBMIT
 				</Button>
