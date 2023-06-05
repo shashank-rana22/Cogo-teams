@@ -26,7 +26,7 @@ const Helper = ({ invoiceCurrency = '', refetch = () => {}, shipment_id = '' }) 
 	const exchangeRateApiData = currencyConversionData?.[0];
 	const allCurrenciesWithConversionFactor = exchangeRateApiData?.currency_conversion_rate?.currencies;
 	const updatedCurrencyConversionRate = exchangeRateApiData?.updated_currency_conversion_rate;
-	const currency_conversion_delta = exchangeRateApiData?.currency_conversion_rate?.currency_conversion_delta;
+	const currency_conversion_delta = exchangeRateApiData?.updated_currency_conversion_rate?.currency_conversion_delta;
 
 	Object.keys(allCurrenciesWithConversionFactor || {})?.forEach((currency) => {
 		if (differentCurrenciesHash[currency]) {
