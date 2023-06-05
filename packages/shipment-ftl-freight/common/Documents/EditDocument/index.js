@@ -131,7 +131,6 @@ function EditDocument({
 				<div className={styles.button_wrap}>
 					<Button
 						onClick={handleSubmit(onSubmit)}
-						className="primary lg"
 						style={{ textTransform: 'capitalize' }}
 						disabled={loading}
 					>

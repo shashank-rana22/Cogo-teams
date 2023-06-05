@@ -48,7 +48,6 @@ function UnableToDoTask({
 
 			<Modal.Footer>
 				<Button
-					className="secondary md"
 					style={{ marginRight: '12px' }}
 					onClick={() => {
 						setShowUnableTo(false);

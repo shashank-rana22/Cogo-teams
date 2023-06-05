@@ -38,7 +38,6 @@ function Form({
 				<Button
 					disabled={loading}
 					onClick={() => setShowInternalInternal(false)}
-					className="secondary md"
 					style={{ marginRight: '12px' }}
 				>
 					Back
