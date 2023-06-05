@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMUpload } from '@cogoport/icons-react';
 
 const uploadIcon = () => <IcMUpload height={20} width={20} />;
@@ -34,6 +35,14 @@ const getControls = (detailsData = {}) => [
 				message : 'max length is 40',
 			},
 		},
+	},
+	{
+		name        : 'preferred_languages',
+		label       : 'Preferred Languages',
+		placeholder : 'Choose Preferred Languages',
+		options     : GLOBAL_CONSTANTS.languages,
+		isClearable : true,
+
 	},
 
 ];
