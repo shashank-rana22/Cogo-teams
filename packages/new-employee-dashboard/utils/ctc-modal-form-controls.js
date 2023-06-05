@@ -5,6 +5,9 @@ const controls = [
 			label       : 'Joining Bonus',
 			type        : 'number',
 			placeholder : 'Add Joining Bonus Yearly',
+			rules       : {
+				required: { value: true, message: 'Yearly Joining Bonus is required' },
+			},
 		},
 
 		monthly: {
@@ -12,6 +15,9 @@ const controls = [
 			label       : 'Joining Bonus',
 			type        : 'number',
 			placeholder : 'Add Joining Bonus Monthly',
+			rules       : {
+				required: { value: true, message: 'Monthly Joining Bonus is required' },
+			},
 		},
 	},
 	{
@@ -20,6 +26,9 @@ const controls = [
 			label       : 'Retention Bonus',
 			type        : 'number',
 			placeholder : 'Add Retention Bonus Yearly',
+			rules       : {
+				required: { value: true, message: 'Yearly Retention Bonus is required' },
+			},
 		},
 
 		monthly: {
@@ -27,6 +36,9 @@ const controls = [
 			label       : 'Retention Bonus',
 			type        : 'number',
 			placeholder : 'Add Retention Bonus Monthly',
+			rules       : {
+				required: { value: true, message: 'Monthly Retention Bonus is required' },
+			},
 		},
 	},
 	{
@@ -35,6 +47,9 @@ const controls = [
 			label       : 'Performance Linked Variable',
 			type        : 'number',
 			placeholder : 'Add Performance Linked Variable Yearly',
+			rules       : {
+				required: { value: true, message: 'Yearly Performance Linked Variable is required' },
+			},
 		},
 
 		monthly: {
@@ -42,6 +57,9 @@ const controls = [
 			label       : 'Performance Linked Variable',
 			type        : 'number',
 			placeholder : 'Add Performance Linked Variable Monthly',
+			rules       : {
+				required: { value: true, message: 'Monthly Performance Linked Variable is required' },
+			},
 		},
 	},
 ];
@@ -53,6 +71,9 @@ const lessControls = [
 			label       : 'Joining Bonus',
 			type        : 'number',
 			placeholder : 'Add Joining Bonus Yearly',
+			rules       : {
+				required: { value: true, message: 'Yearly Joining Bonus is required' },
+			},
 		},
 
 		monthly: {
@@ -60,6 +81,9 @@ const lessControls = [
 			label       : 'Joining Bonus',
 			type        : 'number',
 			placeholder : 'Add Joining Bonus Monthly',
+			rules       : {
+				required: { value: true, message: 'Monthly Joining Bonus is required' },
+			},
 		},
 	},
 	{
@@ -68,6 +92,9 @@ const lessControls = [
 			label       : 'SignOn Bonus',
 			type        : 'number',
 			placeholder : 'Add SignOn Bonus Yearly',
+			rules       : {
+				required: { value: true, message: 'Yearly SignOn Bonus is required' },
+			},
 		},
 
 		monthly: {
@@ -75,6 +102,9 @@ const lessControls = [
 			label       : 'SignOn Bonus',
 			type        : 'number',
 			placeholder : 'Add SignOn Bonus Monthly',
+			rules       : {
+				required: { value: true, message: 'Monthly SignOn Bonus is required' },
+			},
 		},
 	},
 

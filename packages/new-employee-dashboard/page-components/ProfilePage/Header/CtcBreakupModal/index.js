@@ -18,9 +18,12 @@ export default function CtcBreakupModal({
 }) {
 	const [visible, setVisible] = useState(false);
 
+	const { handleSubmit, reset, control } = formProps;
+
 	const onClose = () => {
 		setShowCtcBreakupModal(false);
 		setInitialQuestion('');
+		reset();
 	};
 
 	const onCheck = () => {
@@ -40,7 +43,8 @@ export default function CtcBreakupModal({
 					ctcStructure={ctcStructure}
 					initialQuestion={initialQuestion}
 					setInitialQuestion={setInitialQuestion}
-					formProps={formProps}
+					// formProps={formProps}
+					control={control}
 				/>
 			</Modal.Body>
 			<Modal.Footer>
@@ -56,7 +60,9 @@ export default function CtcBreakupModal({
 								initialQuestion={initialQuestion}
 								ctcStructure={ctcStructure}
 								setVisible={setVisible}
-								formProps={formProps}
+								// formProps={formProps}
+								handleSubmit={handleSubmit}
+								reset={reset}
 								setShowCtcBreakupModal={setShowCtcBreakupModal}
 								setInitialQuestion={setInitialQuestion}
 								offerLetterApiRefetch={offerLetterApiRefetch}

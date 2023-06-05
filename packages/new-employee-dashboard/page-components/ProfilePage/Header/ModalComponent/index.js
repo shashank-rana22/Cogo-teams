@@ -10,9 +10,10 @@ function ModalComponent({
 	ctcStructure,
 	initialQuestion,
 	setInitialQuestion,
-	formProps,
+	// formProps,
+	control,
 }) {
-	const { control } = formProps;
+	// const { control } = formProps;
 
 	const finalControls = getControls(initialQuestion);
 	return (
@@ -38,6 +39,7 @@ function ModalComponent({
 				</div>
 
 				{Object.entries(ctcStructure).map(([key, value]) => {
+					console.log(ctcStructure?.total_targeted_compensation,'ejkfb')
         	const { heading, yearlyValue, monthlyValue } = value;
         	return (
 	<div className={styles.list} key={key}>
@@ -54,7 +56,6 @@ function ModalComponent({
 			</div>
 
 			{finalControls.map((controlItem) => {
-				
       	const { yearly, monthly } = controlItem;
 
       	const Element = getElementController(controlItem?.yearly.type);

@@ -53,13 +53,12 @@ function CtcBreakup({ metadata }) {
 			</div>
 
 			{CTC_BREAK_MAPPING.map((key) => {
-				console.log('metadata[key]', metadata[key]);
 
       	const {
       		heading = null,
       		yearlyValue = null,
       		monthlyValue = null,
-      	} = value;
+      	} = metadata[key] || {};
       	return (
 	<div key={key}>
 		{heading != null ? (
@@ -95,7 +94,8 @@ function CtcBreakup({ metadata }) {
 			</div>
 		)}
 	</div>
-      	);
+	// <div>ok</div>
+				);
 			})}
 		</div>
 	);

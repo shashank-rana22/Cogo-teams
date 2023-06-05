@@ -124,7 +124,7 @@ const useProfileDetails = () => {
 
 	const formProps = useForm();
 
-	const { getValues, watch } = formProps;
+	const { watch } = formProps;
 
 	const yearlyJoiningBonus = watch('joining_bonus_yearly');
 	const monthlyJoiningBonus = watch('joining_bonus_monthly');
@@ -136,8 +136,20 @@ const useProfileDetails = () => {
 	const monthlySignInBonus = watch('sign_on_bonus_monthly');
 
 	useEffect(() => {
-		const data = getValues();
-		// console.log('ok', data);
+		// const data = getValues();
+
+		const data = {
+			yearlyJoiningBonus,
+			monthlyJoiningBonus,
+			yearlyRetentionBonus,
+			monthlyRetentionBonus,
+			yearlyPerformance,
+			monthlyPerformance,
+			yearlySignInBonus,
+			monthlySignInBonus,
+		};
+		console.log('ok', data);
+
 		if (initialQuestion >= 600000) {
 			const ctcInfo = ctcModalControls(initialQuestion, data);
 			setCtcStructure(ctcInfo.controls);
@@ -145,7 +157,7 @@ const useProfileDetails = () => {
 			const ctcInfo = ctcModalLessControls(initialQuestion, data);
 			setCtcStructure(ctcInfo.controls);
 		}
-	}, [getValues, initialQuestion, monthlyPerformance, yearlyPerformance,
+	}, [initialQuestion, monthlyPerformance, yearlyPerformance,
 		monthlyRetentionBonus, yearlyRetentionBonus, monthlyJoiningBonus,
 		yearlyJoiningBonus, yearlySignInBonus, monthlySignInBonus]);
 
