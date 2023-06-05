@@ -150,7 +150,6 @@ function SopCard({
 			</div>
 
 			<div
-				className={styles.container_rows}
 				role="button"
 				tabIndex={0}
 				onMouseDown={() => setShowActions(true)}
