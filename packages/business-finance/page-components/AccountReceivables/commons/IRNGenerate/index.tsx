@@ -1,16 +1,13 @@
 import { Popover, Button, Modal, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import useFinanceReject from '../../hooks/useFinanceReject';
 import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
 import useGetRefresh from '../../hooks/useGetRefresh';
-import useUploadeInvoice from '../../hooks/useUploadInvoice';
 
 import FinalPostModal from './FinalPostModal';
-import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
 
 type Itemdata = {
@@ -34,8 +31,6 @@ const IRN_FAILED_STATUS = ['IRN_FAILED'];
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
 
 function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
-	const { profile = {} } = useSelector((state) => state);
-	const [uploadInvoice, setUploadInvoice] = useState(false);
 	const [openReject, setOpenReject] = useState(false);
 	const [textValue, setTextValue] = useState('');
 
@@ -44,10 +39,6 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const [visible, setVisible] = useState(false);
 
 	const { invoiceStatus = '', entityCode = '', isFinalPosted = false } = itemData || {};
-
-	const { partner = {} } = profile;
-
-	const { id: partnerId = '' } = partner;
 
 	const { id = '' } = itemData;
 
@@ -70,11 +61,11 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		refetch,
 	});
 
-	const { uploadEInvoice, loading: invoiceLoading } = useUploadeInvoice({
-		id,
-		setUploadInvoice,
-		partner,
-	});
+	// const { uploadEInvoice, loading: invoiceLoading } = useUploadeInvoice({
+	// 	id,
+	// 	setUploadInvoice,
+	// 	partner,
+	// });
 
 	const financeRejected = () => {
 		setOpenReject(!openReject);
@@ -95,79 +86,56 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 	const content = () => (
 		<div>
-			{partnerId === GLOBAL_CONSTANTS.country_entity_ids.VN ? (
-				<div>
-					<div className={styles.generate_container}>
+			<div
+				className={styles.generate_container}
+			>
+				{INVOICE_STATUS.includes(invoiceStatus) && (
+					<Button
+						size="sm"
+						disabled={loading}
+						onClick={() => generateIrn()}
+					>
+						Generate
+						{' '}
+						{IrnLabel}
+					</Button>
+				)}
+				{POSTED_STATUS.includes(invoiceStatus) && (
+					<div className={styles.button_container}>
 						<Button
 							size="sm"
-							disabled={loading}
-							onClick={() => setUploadInvoice(true)}
+							disabled={finalPostLoading}
+							onClick={() => handleFinalpost()}
 						>
-							Generate E-invoice
+							<div className={styles.button_style}>
+								{isFinalPosted ? 'Information' : 'Final Post'}
+							</div>
 						</Button>
 					</div>
-					{uploadInvoice ? (
-						<InvoiceModal
-							uploadInvoice={uploadInvoice}
-							setUploadInvoice={setUploadInvoice}
-							uploadEInvoice={uploadEInvoice}
-							loading={invoiceLoading}
-						/>
-					) : null}
-				</div>
-			) : (
-				<div
-					className={styles.generate_container}
-				>
-					{INVOICE_STATUS.includes(invoiceStatus) && (
+				)}
+
+				{IRN_FAILED_STATUS.includes(invoiceStatus) && (
+					<div className={styles.button_container}>
 						<Button
 							size="sm"
-							disabled={loading}
-							onClick={() => generateIrn()}
+							disabled={loadingOnRefresh}
+							onClick={refresh}
 						>
-							Generate
-							{' '}
-							{IrnLabel}
+							<div className={styles.button_style}>Refresh</div>
 						</Button>
-					)}
-					{POSTED_STATUS.includes(invoiceStatus) && (
-						<div className={styles.button_container}>
-							<Button
-								size="sm"
-								disabled={finalPostLoading}
-								onClick={() => handleFinalpost()}
-							>
-								<div className={styles.button_style}>
-									{isFinalPosted ? 'Information' : 'Final Post'}
-								</div>
-							</Button>
-						</div>
-					)}
+					</div>
+				)}
 
-					{IRN_FAILED_STATUS.includes(invoiceStatus) && (
-						<div className={styles.button_container}>
-							<Button
-								size="sm"
-								disabled={loadingOnRefresh}
-								onClick={refresh}
-							>
-								<div className={styles.button_style}>Refresh</div>
-							</Button>
-						</div>
-					)}
-
-					<FinalPostModal
-						finalPostToSageModal={finalPostToSageModal}
-						setFinalPostToSageModal={setFinalPostToSageModal}
-						finalPostFromSage={finalPostFromSage}
-						sageInvoiceData={sageInvoiceData}
-						sageInvoiceLoading={sageInvoiceLoading}
-						finalPostLoading={finalPostLoading}
-						isFinalPosted={isFinalPosted}
-					/>
-
-				</div>
-			)}
+				<FinalPostModal
+					finalPostToSageModal={finalPostToSageModal}
+					setFinalPostToSageModal={setFinalPostToSageModal}
+					finalPostFromSage={finalPostFromSage}
+					sageInvoiceData={sageInvoiceData}
+					sageInvoiceLoading={sageInvoiceLoading}
+					finalPostLoading={finalPostLoading}
+					isFinalPosted={isFinalPosted}
+				/>
+			</div>
 			{INVOICE_STATUS.includes(invoiceStatus) && (
 				<div className={styles.button_container}>
 					<Button
