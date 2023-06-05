@@ -1,4 +1,3 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -6,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest, useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 
 import getControls from '../configurations/on-account-collections/manualEntryControls';
 
@@ -69,7 +68,7 @@ const useCreateManualEntry = ({
 		docType: docTypeValue,
 	} = formValues || {};
 
-	const controls = getControls({
+	const controls = useMemo(() => getControls({
 		isEdit,
 		entityType,
 		setEditMode,
@@ -78,10 +77,10 @@ const useCreateManualEntry = ({
 		setShowBprNumber,
 		itemData,
 		docTypeValue,
-	});
+	}), [docTypeValue, entityType, isEdit, itemData]);
 	const [processedControls, setProcessedControls] = useState(controls);
 
-	const powerControls = (newControls, bankData) => newControls.map((controlValue) => {
+	const powerControls = useCallback((newControls, bankData) => newControls.map((controlValue) => {
 		const { name } = controlValue;
 
 		if (name === 'bankId') {
@@ -114,7 +113,7 @@ const useCreateManualEntry = ({
 		}
 
 		return { ...controlValue };
-	});
+	}), [accountMode]);
 
 	const [{ loading:createLoading }, createEntryTrigger] = useRequestBf(
 		{
@@ -222,19 +221,24 @@ const useCreateManualEntry = ({
 		if (tpId && accountMode) vender();
 	}, [tpId, accountMode, vender]);
 
+	const jsonErrorVal = JSON.stringify(errorVal);
+	const jsonErr = JSON.stringify(errors);
+
 	useEffect(() => {
-		if (errorVal) {
-			onError(errorVal);
+		const jsonError = JSON.parse(jsonErrorVal);
+		const val = JSON.parse(jsonErr);
+		if (jsonError) {
+			onError(jsonError);
 		}
 
-		Object.keys(errors).forEach((key) => {
-			if (!errorVal[key]) {
-				delete errors[key];
+		Object.keys(val).forEach((key) => {
+			if (!jsonError[key]) {
+				delete val[key];
 			}
 		});
 
-		setErrors({ ...errors, ...errorVal });
-	}, [JSON.stringify(errorVal), JSON.stringify(errors)]);
+		setErrors({ ...val, ...jsonError });
+	}, [jsonErrorVal, jsonErr]);
 
 	let docType = '';
 	switch (paymentCode) {
@@ -259,7 +263,7 @@ const useCreateManualEntry = ({
 			setValue('paymentDate', new Date(transactionDate));
 			setValue('docType', docType);
 		}
-	}, []);
+	}, [controls, docType, isEdit, selectedItem, setValue, transactionDate]);
 
 	const entityCode = watch('entityType');
 
@@ -291,13 +295,13 @@ const useCreateManualEntry = ({
 				bankName          : bankNameData,
 			});
 		}
-	}, [bankID, data, editMode]);
+	}, [bankID, data, editMode, setValue]);
 
 	useEffect(() => {
 		if (entityCode && ledgerCurrency) {
 			setValue('ledCurrency', ledgerCurrency);
 		}
-	}, [entityCode, ledgerCurrency]);
+	}, [entityCode, ledgerCurrency, setValue]);
 
 	const amountReceived = watch('amount');
 
@@ -309,11 +313,11 @@ const useCreateManualEntry = ({
 
 			setValue('ledAmount', total.toFixed(2));
 		}
-	}, [JSON.stringify(amountReceived), JSON.stringify(Exchange)]);
+	}, [amountReceived, Exchange, setValue]);
 
 	useEffect(() => {
 		setProcessedControls(powerControls((controls || []), (data?.[0] || [])));
-	}, [JSON.stringify(data), docTypeValue, accountMode]);
+	}, [docTypeValue, accountMode, controls, data, powerControls]);
 
 	const exchangeApi = useCallback(async () => {
 		try {
@@ -328,7 +332,7 @@ const useCreateManualEntry = ({
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}
-	}, [exRateTrigger, fromCur, toCur, transactionDates]);
+	}, [exRateTrigger, fromCur, setValue, toCur, transactionDates]);
 
 	useEffect(() => {
 		if (editMode) exchangeApi();

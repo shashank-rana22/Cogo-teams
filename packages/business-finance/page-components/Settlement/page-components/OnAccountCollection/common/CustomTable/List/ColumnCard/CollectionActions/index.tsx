@@ -48,11 +48,7 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 		show: false,
 	});
 	const [modalFinalPost, setModalFinalPost] = useState(false);
-	// const { isConditionMatches } = useGetPermission();
-	// const isDeleteAllowed = isConditionMatches(
-	// 	CC.SEE_DELETE_BUTTON_ON_ACCOUNT,
-	// 	'and',
-	// );
+
 	const closePermissionModal = () => {
 		setPermissionModal({
 			show: false,
