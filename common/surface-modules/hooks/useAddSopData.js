@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import getSopPayload from '../components/SopNew/helpers/format-sop-payload';
+import getSopPayload from '../components/Sop/helpers/format-sop-payload';
 
 const useAddSopData = ({
 	formValues,

@@ -502,6 +502,19 @@ function asyncFortigoLocations() {
 	};
 }
 
+function asyncOrganizationBranches() {
+	return {
+		valueKey      : 'id',
+		labelKey      : 'branch_name',
+		endpoint      : 'list_organization_branches',
+		initialCall   : true,
+		defaultParams : {
+			filters    : { status: 'active' },
+			page_limit : 10,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -544,4 +557,5 @@ export {
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
 	asyncFortigoLocations,
+	asyncOrganizationBranches,
 };

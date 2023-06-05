@@ -117,14 +117,12 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 								<div className={styles.action_row}>
 									<Button
 										onClick={() => setShowInternal(truck)}
-										className="secondary md"
 										disabled={truckType === 'verified'}
 									>
 										Edit Info
 									</Button>
 									{' '}
 									<Button
-										className="secondary md"
 										onClick={() => {
 											setUploadProof(null);
 											setShowInternal(truck);
@@ -136,7 +134,6 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 										Upload Document
 									</Button>
 									<Button
-										className="secondary md"
 										onClick={() => {
 											createCustomerInvoicefn(truck);
 										}}
@@ -160,17 +157,17 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 			<Modal
 				show
 				onClose={() => setShow(false)}
-				className={styles.custom_modal}
 				closeOnOuterClick={false}
 				showCloseIcon
 			>
-				<Modal.Body>
-					<Modal.Header title={(
+				<Modal.Header
+					title={(
 						<div className={styles.heading}>
 							Truck List
 						</div>
 					)}
-					/>
+				/>
+				<Modal.Body>
 					<div style={{ marginTop: '1rem' }}>No Truck Found</div>
 				</Modal.Body>
 			</Modal>
@@ -181,19 +178,16 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 		<Modal
 			show
 			onClose={() => setShow(false)}
-			className={styles.custom_modal}
 			closeOnOuterClick={false}
 			showCloseIcon={!loading}
 		>
+			<Modal.Header title={(
+				<div>
+					Truck List
+				</div>
+			)}
+			/>
 			<Modal.Body>
-
-				<Modal.Header title={(
-					<div className={styles.heading}>
-						Truck List
-					</div>
-				)}
-				/>
-
 				<div>
 					{showUploadDoc ? (
 						<AWSUploadModal
@@ -225,7 +219,6 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 					)}
 				</div>
 			</Modal.Body>
-
 		</Modal>
 	);
 }

@@ -1,9 +1,7 @@
 const controlsFunc = (organization_id, item) => [
 	{
-		label        : 'Driver details *',
-		span         : 12,
-		showOptional : false,
-		name         : 'driver_details_heading',
+		label         : 'Driver details *',
+		showOnlyLabel : true,
 	},
 	{
 		name        : 'name',
@@ -42,21 +40,10 @@ const controlsFunc = (organization_id, item) => [
 		label       : '   ',
 		name        : 'mobile_number',
 		placeholder : 'Enter Mobile Number',
-		type        : 'mobile-number-select',
-		value       : {
-			mobile_country_code : item?.mobile_country_code,
-			mobile_number       : item?.mobile_number,
-		},
-		numberKey : 'mobile_number',
-		codeKey   : 'mobile_country_code',
-		span      : 4,
-		select2   : 'new',
-		rules     : {
-			required : true,
-			validate : (value) => (value?.mobile_country_code && value?.mobile_number
-				? undefined
-				: 'Mobile Number is Required'),
-		},
+		type        : 'number',
+		span        : 4,
+		rules       : { required: 'Organization is required' },
+
 	},
 	{
 		label       : '   ',
@@ -89,10 +76,8 @@ const controlsFunc = (organization_id, item) => [
 	},
 
 	{
-		label        : 'Address *',
-		span         : 12,
-		name         : 'address_details_heading',
-		showOptional : false,
+		label         : 'Address *',
+		showOnlyLabel : true,
 	},
 	{
 		label       : '   ',
@@ -141,7 +126,6 @@ const controlsFunc = (organization_id, item) => [
 		label           : '   ',
 		name            : 'address_proof_document',
 		type            : 'file',
-		className       : 'primary md',
 		span            : 12,
 		uploadIcon      : 'ic-upload',
 		themeType       : 'secondary',
@@ -164,10 +148,8 @@ const controlsFunc = (organization_id, item) => [
 	},
 
 	{
-		label        : 'Pan Details *',
-		span         : 12,
-		name         : 'pan_details_heading',
-		showOptional : false,
+		label         : 'Pan Details *',
+		showOnlyLabel : true,
 	},
 	{
 		label       : '   ',
@@ -181,7 +163,6 @@ const controlsFunc = (organization_id, item) => [
 		label           : '   ',
 		name            : 'pan_url',
 		type            : 'file',
-		className       : 'primary md',
 		span            : 12,
 		uploadIcon      : 'ic-upload',
 		themeType       : 'secondary',
@@ -203,10 +184,8 @@ const controlsFunc = (organization_id, item) => [
 		name         : 'empty_row',
 	},
 	{
-		label        : 'Driving License Details *',
-		span         : 12,
-		name         : 'driving_license_details_heading',
-		showOptional : false,
+		label         : 'Driving License Details *',
+		showOnlyLabel : true,
 	},
 	{
 		label       : '   ',
@@ -247,7 +226,6 @@ const controlsFunc = (organization_id, item) => [
 		label           : '   ',
 		name            : 'driving_license_document',
 		type            : 'file',
-		className       : 'primary md',
 		span            : 12,
 		value           : item?.data?.driving_license_document,
 		uploadIcon      : 'ic-upload',
@@ -272,14 +250,11 @@ const controlsFunc = (organization_id, item) => [
 		name         : 'empty_row',
 	},
 	{
-		label        : 'Bank Details',
-		span         : 12,
-		name         : 'bank_details_heading',
-		showOptional : false,
+		label         : 'Bank Details',
+		showOnlyLabel : true,
 	},
 	{
 		name         : 'bank_name',
-		className    : 'primary md',
 		type         : 'text',
 		span         : 6,
 		value        : item?.data?.bank_account_details?.bank_name,
@@ -289,7 +264,6 @@ const controlsFunc = (organization_id, item) => [
 
 	{
 		name         : 'branch_name',
-		className    : 'primary md',
 		type         : 'text',
 		span         : 3,
 		value        : item?.data?.bank_account_details?.branch_name,
@@ -299,7 +273,6 @@ const controlsFunc = (organization_id, item) => [
 	{
 		name         : 'ifsc_number',
 		type         : 'text',
-		className    : 'primary md',
 		span         : 3,
 		value        : item?.data?.bank_account_details?.ifsc_number,
 		placeholder  : 'Bank IFSC',
@@ -309,7 +282,6 @@ const controlsFunc = (organization_id, item) => [
 		label        : '  ',
 		name         : 'account_holder_name',
 		type         : 'text',
-		className    : 'primary md',
 		span         : 6,
 		value        : item?.data?.bank_account_details?.account_holder_name,
 		placeholder  : 'Enter Account Holder',
@@ -320,7 +292,6 @@ const controlsFunc = (organization_id, item) => [
 		label        : '  ',
 		name         : 'bank_account_number',
 		type         : 'text',
-		className    : 'primary md',
 		span         : 6,
 		value        : item?.data?.bank_account_details?.bank_account_number,
 		placeholder  : 'Enter your Bank A/c Number',
@@ -331,7 +302,6 @@ const controlsFunc = (organization_id, item) => [
 		label           : '  ',
 		name            : 'cancelled_cheque',
 		type            : 'file',
-		className       : 'primary md',
 		span            : 12,
 		value           : item?.data?.bank_account_details?.cancelled_cheque,
 		uploadIcon      : 'ic-upload',

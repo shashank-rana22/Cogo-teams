@@ -18,6 +18,7 @@ import Form from './Forms';
 import styles from './styles.module.css';
 import getCanCancelService from './utils/getCanCancelService';
 import getCanEditSupplier from './utils/getCanEditSupplier';
+import getEditServiceDetails from './utils/getEditServiceDetails';
 
 const actionButtons = [
 	{ label: 'Edit Supplier', value: 'supplier_reallocation' },
@@ -87,10 +88,10 @@ function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
-	const { state, trade_type, service_type } = serviceData || {};
+	const { state, trade_type, service_type } = serviceData?.[0] || {};
 
 	const user_data = useSelector((({ profile }) => profile?.user));
-	const { shipment_data, servicesList, activeStakeholder } = useContext(ShipmentDetailContext);
+	const { shipment_data, servicesList, activeStakeholder, refetchServices } = useContext(ShipmentDetailContext);
 
 	const servicesData = (servicesList || []).filter((service) => service.service_type === service_type);
 
@@ -100,11 +101,11 @@ function EditCancelService({ serviceData = {} }) {
 	};
 
 	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	actionButtons[1].show = true;
-	actionButtons[2].show = true;
-	actionButtons[3].show = true;
-	actionButtons[4].show = true;
-	actionButtons[5].show = true;
+	actionButtons[1].show = getEditServiceDetails({ state, activeStakeholder });
+	actionButtons[2].show = getEditServiceDetails({ state, activeStakeholder });
+	actionButtons[3].show = getEditServiceDetails({ state, activeStakeholder });
+	actionButtons[4].show = getEditServiceDetails({ state, activeStakeholder });
+	actionButtons[5].show = getEditServiceDetails({ state, activeStakeholder });
 	actionButtons[6].show = getCanCancelService({ state, activeStakeholder });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
@@ -175,7 +176,7 @@ function EditCancelService({ serviceData = {} }) {
 							heading="EDIT TRUCK NUMBER"
 							type="truck_number"
 							truckList={getTrucklistWithId(serviceData)}
-							// refetchServices={refetchServices}
+							refetchServices={refetchServices}
 						/>
 					</Modal.Body>
 

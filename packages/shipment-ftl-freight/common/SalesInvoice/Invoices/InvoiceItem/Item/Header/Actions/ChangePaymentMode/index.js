@@ -31,7 +31,12 @@ function ChangePaymentMode({
 	const { changePaymentMode = () => {}, loading } = useUpdateInvoicePaymentMode({ refetch: refetchAfterCall });
 
 	return (
-		<Modal show={show} onClose={() => setShow(false)}>
+		<Modal
+			show={show}
+			onClose={() => setShow(false)}
+			showCloseIcon={false}
+			closeOnOuterClick={false}
+		>
 			<Modal.Header title="Change Payment Mode" />
 
 			<Modal.Body>

@@ -2,12 +2,11 @@ const editSupplierServiceStates = ['init', 'awaiting_service_provider_confirmati
 
 const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = [
 	'superadmin',
-	'booking_desk',
-	'booking_desk_manager',
-	'document_desk',
-	'document_desk_manager',
-	'costbooking_ops',
-	'so1_so2_ops',
+	'service_ops',
+	'service_ops1',
+	'service_ops2',
+	'service_ops3',
+	'prod_process owner',
 ];
 
 const serviceCompletedOrCancelled = ['completed', 'cancelled'];

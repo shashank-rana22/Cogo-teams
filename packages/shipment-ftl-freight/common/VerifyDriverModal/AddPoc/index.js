@@ -19,14 +19,13 @@ function OnBoardUser({
 			closeOnOuterClick={false}
 			showInternalCloseIcon
 		>
+			<Modal.Header title={(
+				<div className={styles.heading}>
+					Create Driver Poc *
+				</div>
+			)}
+			/>
 			<Modal.Body>
-				<Modal.Header title={(
-					<div className={styles.heading}>
-						Truck List
-					</div>
-				)}
-				/>
-
 				<Form
 					fetch={fetch}
 					organization_id={organization_id}
@@ -35,7 +34,6 @@ function OnBoardUser({
 				/>
 			</Modal.Body>
 		</Modal>
-
 	);
 }
 

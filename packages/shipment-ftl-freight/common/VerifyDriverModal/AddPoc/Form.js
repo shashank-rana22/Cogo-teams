@@ -4,7 +4,6 @@ import React from 'react';
 
 import useCreateOrganizationPoc from './hooks/useCreateOrganizationPoc';
 import styles from './styles.module.css';
-// import { ButtonContainer, Container, LayoutContainer } from './styles';
 
 function Form({
 	fetch = () => {},
@@ -38,7 +37,6 @@ function Form({
 				<Button
 					disabled={loading}
 					onClick={() => setShowInternalInternal(false)}
-					className="secondary md"
 					style={{ marginRight: '12px' }}
 				>
 					Back

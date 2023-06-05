@@ -16,7 +16,7 @@ import {
 
 import DepartureDateSelectController from './DepartureDateSelect/index';
 
-const getElementController = (type = 'text') => {
+const getElementController = (type) => {
 	switch (type) {
 		case 'async-select':
 			return AsyncSelectController;
@@ -66,7 +66,7 @@ const getElementController = (type = 'text') => {
 			return CreatableSelectController;
 
 		default:
-			return InputController;
+			return null;
 	}
 };
 

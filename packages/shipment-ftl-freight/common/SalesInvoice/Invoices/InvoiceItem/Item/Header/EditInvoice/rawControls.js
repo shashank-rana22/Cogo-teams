@@ -3,8 +3,7 @@ import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/con
 import { startCase, isEmpty } from '@cogoport/utils';
 
 const handleDisableCond = (charge, isFclFreight, shipment_data) => {
-	const disable =	charge?.service_type === 'fcl_freight_service' && !isFclFreight
-	&& shipment_data?.serial_id > 130000;
+	const disable =	!isFclFreight && shipment_data?.serial_id > 130000;
 
 	return disable;
 };

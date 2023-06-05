@@ -42,12 +42,12 @@ function FieldArray({
 				<div className={styles.add_button_container}>
 					<Button
 						size="sm"
-						themeType="tertiary"
+						themeType="accent"
 						onClick={() => append()}
 					>
 						<div className={styles.add_button_text}>
 							+&nbsp;
-							{buttonText || 'Add'}
+							{buttonText || 'Add Items'}
 						</div>
 					</Button>
 

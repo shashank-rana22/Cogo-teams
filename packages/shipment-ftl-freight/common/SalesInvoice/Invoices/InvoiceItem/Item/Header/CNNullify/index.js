@@ -48,7 +48,6 @@ function CNNullify({
 	return (
 		<>
 			<Modal
-				className="primary md"
 				show={askNullify}
 				onClose={handleOnClose}
 				closeOnOuterClick={false}

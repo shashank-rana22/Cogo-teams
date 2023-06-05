@@ -36,6 +36,7 @@ import {
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
 	asyncFortigoLocations,
+	asyncOrganizationBranches,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -90,6 +91,7 @@ const keyAsyncFieldsParamsMapping = {
 	search_products_v2                   : asyncSearchProducts,
 	list_organization_trade_parties      : asyncOrganizationTradeParties,
 	list_shipment_fortigo_trip_locations : asyncFortigoLocations,
+	list_organization_branches           : asyncOrganizationBranches,
 };
 
 function AsyncSelect(props) {
