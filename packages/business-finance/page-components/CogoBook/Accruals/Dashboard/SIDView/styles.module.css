@@ -1,36 +1,42 @@
 .container {
-  background: #ffffff;
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  display: flex;
-  margin: 24px 0px;
-  padding: 8px;
+	display: flex;
+	padding: 8px;
+	margin: 24px 0;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
 }
+
 .shipment_days {
-  padding: 16px 48px;
-  border-right: 1px solid #e0e0e0;
-  font-weight: 600;
+	padding: 16px 48px;
+	font-weight: 600;
+	border-right: 1px solid #e0e0e0;
 }
+
 .days_data {
-  display: flex;
-  padding: 16px 48px;
-  justify-content: space-between;
-  width: 75%;
+	display: flex;
+	justify-content: space-between;
+	width: 75%;
+	padding: 16px 48px;
 }
+
 .days_left {
-  display: flex;
-  align-items: center;
-  text-decoration: underline;
-  font-weight: 600;
-  font-size: 12px;
+	display: flex;
+	align-items: center;
+	font-size: 12px;
+	font-weight: 600;
+	text-decoration: underline;
 }
+
 .id_data {
-  color: #828282;
+	color: #828282;
 }
+
 .id_show {
-  display: flex;
-  gap: 4px;
+	display: flex;
+	gap: 4px;
 }
+
 .id_color_data {
-  color: #f68b21;
+	color: #f68b21;
 }

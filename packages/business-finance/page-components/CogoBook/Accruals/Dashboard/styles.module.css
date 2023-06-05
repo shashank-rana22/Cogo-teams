@@ -1,68 +1,79 @@
 .statistics {
-  display: flex;
-  justify-content: space-between;
+	display: flex;
+	justify-content: space-between;
 }
+
 .font_size_tooltip {
-  font-size: 12px;
+	font-size: 12px;
 }
+
 .info_icon_container {
-  padding: 2px 0 0 4px;
+	padding: 2px 0 0 4px;
 }
+
 .hr_statistics {
-  width: 8%;
-  border: 1px solid #ee3425;
+	width: 8%;
+	border: 1px solid #ee3425;
 }
+
 .statistics_card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #ffffff;
-  padding: 24px;
+	padding: 24px;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
 }
+
 .stats_full_data {
-  display: flex;
-  padding: 20px 0px;
-  justify-content: space-between;
-  gap: 16px;
+	display: flex;
+	gap: 16px;
+	justify-content: space-between;
+	padding: 20px 0;
 }
+
 .sid_card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #ffffff;
-  padding: 24px;
-  margin: 24px 0px;
+	padding: 24px;
+	margin: 24px 0;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
 }
+
 .report {
-  font-size: 12px;
-  text-decoration: underline;
-  cursor: pointer;
+	font-size: 12px;
+	text-decoration: underline;
+	cursor: pointer;
 }
+
 .sid_view {
-  display: flex;
-  width: fit-content;
-  margin-right: 5px;
-  font-size: 16px;
-  font-style: normal;
-  font-weight: 600;
-  line-height: 20px;
+	display: flex;
+	width: fit-content;
+	margin-right: 5px;
+	font-size: 16px;
+	font-style: normal;
+	font-weight: 600;
+	line-height: 20px;
 }
 
 .days_show {
-  display: flex;
-  flex-direction: column;
-  border-bottom: 1px solid #edd7a9;
-  padding: 8px;
-  cursor: pointer;
+	display: flex;
+	flex-direction: column;
+	padding: 8px;
+	cursor: pointer;
+	border-bottom: 1px solid #edd7a9;
 }
+
 :hover.days_show {
-  background-color: #fff0d0;
+	background-color: #fff0d0;
 }
+
 :last-child.days_show {
-  border-bottom: none;
+	border-bottom: none;
 }
+
 .stats_card {
-  border: 1px solid #e0e0e0;
-  border-radius: 8px;
-  background: #ffffff;
-  padding: 24px;
-  margin: 24px 0px;
+	padding: 24px;
+	margin: 24px 0;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
 }
