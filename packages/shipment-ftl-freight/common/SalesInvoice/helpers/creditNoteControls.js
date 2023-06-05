@@ -1,5 +1,5 @@
-import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
-import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
+import FTL_UNITS from '@cogoport/surface-modules/contants/FTL_UNITS';
+import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/convertObjectMappingToArray';
 
 import { handleServiceType } from '../CreditNote/helpers/handleServiceType';
 
@@ -17,7 +17,7 @@ const commonControls = (handleChange, charge) => [
 		label    : 'Unit',
 		type     : 'select',
 		name     : 'unit',
-		options  : convertObjectMappingToArray(FCL_UNITS),
+		options  : convertObjectMappingToArray(FTL_UNITS),
 		disabled : true,
 		span     : 2,
 	},

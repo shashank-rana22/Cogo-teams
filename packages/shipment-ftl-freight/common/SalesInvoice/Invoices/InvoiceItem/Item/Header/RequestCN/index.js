@@ -1,7 +1,7 @@
 import { Modal, Button, Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
-import { Layout } from '@cogoport/ocean-modules';
+import { Layout } from '@cogoport/surface-modules';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState, useContext } from 'react';
 

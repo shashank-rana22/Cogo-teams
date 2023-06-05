@@ -1,4 +1,4 @@
-import { cl } from '@cogoport/components';
+import { cl, Loader } from '@cogoport/components';
 import React from 'react';
 
 import Header from './CardHeader';
@@ -17,14 +17,21 @@ function List({
 		<main className={cl`${styles.main} ${creditNote ? styles.creditNote : ''}`}>
 			<Header fields={fields} showCode={showCode} detail={detail} />
 
-			{(data || []).map((item) => (
-				<CardItem
-					key={item}
-					item={item}
-					loading={loading}
-					fields={fields}
-				/>
-			))}
+			{loading
+				? (
+					<div className={styles.loading_wrapper}>
+						<Loader />
+					</div>
+				)
+
+				: (data || []).map((item) => (
+					<CardItem
+						key={item}
+						item={item}
+						loading={loading}
+						fields={fields}
+					/>
+				))}
 		</main>
 	);
 }
