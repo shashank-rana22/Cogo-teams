@@ -1,3 +1,12 @@
+const getDate = (date) => {
+	const tempDate = new Date(date);
+
+	if (date && tempDate.toDateString() !== 'Invalid Date') {
+		return tempDate;
+	}
+	return null;
+};
+
 const dataExtractionFunc = (obj, index, arr) => {
 	if (index === (arr || []).length - 1) {
 		if (obj === undefined) {
@@ -102,44 +111,44 @@ const evaluateExpression = (operator, lhs, rhs) => {
 const evaluateObject = (control, task, shipment_data) => {
 	const finalControl = control;
 
-	// if (control?.conditions) {
-	// 	(control?.conditions || []).forEach((obj) => {
-	// 		const { condition = {}, value: value_to_insert } = obj || {};
+	if (control?.conditions) {
+		(control?.conditions || []).forEach((obj) => {
+			const { condition = {}, value: value_to_insert } = obj || {};
 
-	// 		if (!condition) {
-	// 			finalControl[obj?.key_to_add] = evaluateVal(
-	// 				value_to_insert,
-	// 				shipment_data,
-	// 			);
-	// 		} else {
-	// 			const {
-	// 				leftHandSide, rightHandSide, value, elseValue,
-	// 			} = getConditionalParams(condition, shipment_data, obj);
+			if (!condition) {
+				finalControl[obj?.key_to_add] = evaluateVal(
+					value_to_insert,
+					shipment_data,
+				);
+			} else {
+				const {
+					leftHandSide, rightHandSide, value, elseValue,
+				} = getConditionalParams(condition, shipment_data, obj);
 
-	// 			const addConditionsValue = evaluateExpression(
-	// 				condition?.operator,
-	// 				leftHandSide,
-	// 				rightHandSide,
-	// 			);
+				const addConditionsValue = evaluateExpression(
+					condition?.operator,
+					leftHandSide,
+					rightHandSide,
+				);
 
-	// 			if (addConditionsValue) {
-	// 				finalControl[obj.key_to_add] = value;
-	// 			} else if (elseValue !== 'undefined') {
-	// 				finalControl[obj.key_to_add] = elseValue;
-	// 			}
+				if (addConditionsValue) {
+					finalControl[obj.key_to_add] = value;
+				} else if (elseValue !== 'undefined') {
+					finalControl[obj.key_to_add] = elseValue;
+				}
 
-	// 			if (condition?.operator === 'date') {
-	// 				if (obj.adhoc_conditions) {
-	// 					finalControl[obj.key_to_add] = evalAdhocConditions(
-	// 						obj.adhoc_conditions,
-	// 					);
-	// 				} else {
-	// 					finalControl[obj.key_to_add] = new Date();
-	// 				}
-	// 			}
-	// 		}
-	// 	});
-	// }
+				if (condition?.operator === 'date') {
+					if (obj.adhoc_conditions) {
+						finalControl[obj.key_to_add] = getDate(evalAdhocConditions(
+							obj.adhoc_conditions,
+						));
+					} else {
+						finalControl[obj.key_to_add] = new Date();
+					}
+				}
+			}
+		});
+	}
 
 	if (control?.type === 'fieldArray') {
 		finalControl.controls = (control?.controls || [])?.map((ctrl) => evaluateObject(ctrl, task, shipment_data));

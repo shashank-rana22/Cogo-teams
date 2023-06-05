@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { startCase, upperCase, format } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || {};
@@ -16,6 +17,10 @@ export const renderValue = (label, detail) => {
 		)}`
 		: '';
 
+	const keysForPackages = useMemo(
+		() => Array(packages.length).fill(null).map(() => Math.random()),
+		[packages.length],
+	);
 	const packageDetails = () => {
 		if (packages?.length > 1) {
 			return (
@@ -24,12 +29,12 @@ export const renderValue = (label, detail) => {
 					theme="light"
 					content={(
 						<div style={{ fontSize: '10px' }}>
-							{(packages || []).map((item) => {
+							{(packages || []).map((item, index) => {
 								const values = item
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div>{values}</div>;
+								return <div key={keysForPackages[index]}>{values}</div>;
 							})}
 						</div>
 					)}

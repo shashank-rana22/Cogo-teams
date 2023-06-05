@@ -1,3 +1,12 @@
+const getDate = (date) => {
+	const tempDate = new Date(date);
+
+	if (date && tempDate.toDateString() !== 'Invalid Date') {
+		return tempDate;
+	}
+	return null;
+};
+
 const dataExtractionFunc = (obj, index, arr) => {
 	if (index === (arr || []).length - 1) {
 		if (obj === undefined) {
@@ -130,9 +139,9 @@ const evaluateObject = (control, task, shipment_data) => {
 
 				if (condition?.operator === 'date') {
 					if (obj.adhoc_conditions) {
-						finalControl[obj.key_to_add] = evalAdhocConditions(
+						finalControl[obj.key_to_add] = getDate(evalAdhocConditions(
 							obj.adhoc_conditions,
-						);
+						));
 					} else {
 						finalControl[obj.key_to_add] = new Date();
 					}
