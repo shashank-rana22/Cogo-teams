@@ -46,9 +46,6 @@ function ViewCtcBreakupContent({ metadata }) {
 			</div>
 
 			{Object.entries(metadata).map(([key, value]) => {
-
-				console.log('key',key)
-				console.log('val',value)
 				const { heading = null, yearlyValue = null, monthlyValue = null } = value;
 				return (
 					<div key={key}>

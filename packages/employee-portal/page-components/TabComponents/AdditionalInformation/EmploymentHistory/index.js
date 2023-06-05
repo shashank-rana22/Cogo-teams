@@ -11,20 +11,23 @@ import { extraDocsControls } from './extraDocsControls';
 import styles from './styles.module.css';
 
 function EmploymentHistory({ getEmployeeDetails, data: info }) {
-	const { handleSubmit, control, setValue, formState: { errors } } = useForm();
+	const { handleSubmit, control, setValue, formState: { errors }, watch } = useForm();
 
 	const id = info?.detail?.id;
 
-	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
+	const paySlip = watch('salary_slip');
+	const offerLetter = watch('offer_letter');
+
+	const { loading, updateEmployeeDetails } =	useUpdateEmployeeDetails({
+		id,
+		getEmployeeDetails,
+		offerLetter,
+		paySlip,
+	});
 
 	const onSubmit = (values) => {
-		// console.log('val', values);
 		updateEmployeeDetails({ data: values, formType: 'employment_history' });
 	};
-
-	// useEffect((item) => {
-
-	// })
 
 	const removeTypeField = (controlItem) => {
 		const { type, ...rest } = controlItem;
@@ -67,32 +70,6 @@ function EmploymentHistory({ getEmployeeDetails, data: info }) {
 				})}
 
 				<div className={styles.upload_row}>
-
-					{/* {extraDocsControls.map((controlItem) => {
-					// const { yearly, monthly } = controlItem;
-
-						const Element = getElementController(controlItem?.type);
-
-						console.log('control', controlItem);
-
-						return (
-							<div
-								key={controlItem?.name}
-								className={styles.upload_row}
-							>
-								<span className={styles.control_label}>{controlItem?.label}</span>
-								<Element
-									{...controlItem}
-									size="lg"
-									key={controlItem?.name}
-									control={control}
-									className={styles.field_controller}
-								/>
-							</div>
-
-						// null
-						);
-					})} */}
 
 					{extraDocsControls.map((controlItem) => {
 						const el = { ...controlItem };

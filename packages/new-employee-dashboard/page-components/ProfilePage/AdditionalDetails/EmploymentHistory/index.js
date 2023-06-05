@@ -4,14 +4,13 @@ import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
 import CommonLoader from '../../../../common/Loader';
+import PreviewDocumet from '../../../../common/PreviewDocumet';
 
 import styles from './styles.module.css';
 
 function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
-	const { detail } = profileData || {};
+	const { detail, offer_letter, pay_slip } = profileData || {};
 	const { employee_experience_details = [] } = detail || {};
-
-	console.log('employee_experience_details', employee_experience_details);
 
 	const formatdate = ({ date }) => formatDate({
 		date,
@@ -24,6 +23,7 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 			{skill}
 		</div>
 	));
+
 
 	const employmentDetails = () => (employee_experience_details || []).map((element) => {
 		const {
@@ -83,11 +83,38 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 	}
 
 	return (
-		<div className={styles.container}>
-			{employmentDetails()}
-			{' '}
 
-		</div>
+		<>
+
+			<div className={styles.container}>
+				{employmentDetails()}
+				{' '}
+
+			</div>
+			<div
+				className={styles.extra_docs}
+			>
+
+				<div>
+
+					<div className={styles.extra_header}>Last Offer</div>
+					<PreviewDocumet
+						document_url={offer_letter?.document_url}
+						preview="true"
+					/>
+				</div>
+
+				<div>
+
+					<div className={styles.extra_header}>Last Pay Slip</div>
+
+					<PreviewDocumet
+						document_url={pay_slip?.document_url}
+						preview="true"
+					/>
+				</div>
+			</div>
+		</>
 	);
 }
 

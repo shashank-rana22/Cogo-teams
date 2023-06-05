@@ -52,3 +52,18 @@
 .skills_value {
 	display: flex;
 }
+
+.extra_docs {
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+	width: 40%;
+	max-height: 70vh;
+	margin: 4px 20px;
+}
+
+.extra_header {
+	margin-top: 4px;
+	font-size: 14px;
+	font-weight: 600;
+}
