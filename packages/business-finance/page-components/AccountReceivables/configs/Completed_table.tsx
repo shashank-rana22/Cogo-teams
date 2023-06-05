@@ -1,4 +1,4 @@
-import { Pill, Tooltip } from '@cogoport/components';
+import { Checkbox, Pill, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
@@ -50,6 +50,9 @@ interface InvoiceTable {
 	sortStyleDueDateDesc?: string,
 	invoiceFilters?: object,
 	setinvoiceFilters?: (p:object) => void,
+	checkedRows?:object[],
+	setCheckedRows?:Function,
+	totalRows?:object[],
 }
 const MIN_NAME_STRING = 0;
 const MAX_NAME_STRING = 12;
@@ -66,8 +69,47 @@ const completedColumn = ({
 	sortStyleDueDateDesc,
 	invoiceFilters,
 	setinvoiceFilters,
+	checkedRows,
+	setCheckedRows,
+	totalRows,
 }: InvoiceTable) => [
-
+	{
+		Header: <div>
+			<Checkbox
+				checked={checkedRows?.length === totalRows?.length}
+				onChange={(e) => {
+					if (e?.target?.checked) {
+						const totalIds = totalRows?.map((row:{ id?:string | number }) => row?.id);
+						setCheckedRows([...totalIds]);
+					}
+				}}
+			/>
+		</div>,
+		span     : 1,
+		id       : 'checkbox',
+		accessor : (row) => {
+			const { id } = row || {};
+			return (
+				<div>
+					<Checkbox
+						checked={(checkedRows || []).includes(id)}
+						onChange={() => {
+							if ((checkedRows || []).includes(id)) {
+								const index = (checkedRows || []).indexOf(id);
+								if (index > -1) { // only splice array when item is found
+									checkedRows.splice(index, 1);
+									setCheckedRows([...checkedRows]);
+								}
+							} else {
+								setCheckedRows((prev) => [...prev,
+									id]);
+							}
+						}}
+					/>
+				</div>
+			);
+		},
+	},
 	{
 		Header   : showName && 'Name',
 		id       : 'name',
