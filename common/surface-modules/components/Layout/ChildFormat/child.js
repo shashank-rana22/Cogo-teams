@@ -98,7 +98,7 @@ function Child({
 					{rowFields.map((controlItem) => {
 						const newControl = getNewControls(controlItem);
 
-						if (!newControl.type) return null;
+						if (!newControl.type && !newControl.showOnlyLabel) return null;
 
 						const Element = getElementController(newControl.type);
 
@@ -116,23 +116,29 @@ function Child({
 						}
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
 						const flex = ((controlItem?.span || 12) / 12) * 100;
-						if (!Element || !show) return null;
+						if ((!Element || !show) && (!newControl.showOnlyLabel)) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
 								<h4 className={styles.label}>
 									{controlItem?.label}
 								</h4>
-								<Element
-									{...newControl}
-									{...extraProps}
-									style={{ minWidth: '0px' }}
-									key={`${name}.${index}.${controlItem.name}`}
-									name={`${name}.${index}.${controlItem.name}`}
-									index={index}
-									control={control}
-									size="sm"
-									disabled={newControl?.disabled ?? (disabled || disable)}
-								/>
+
+								{Element
+									? 								 (
+										<Element
+											{...newControl}
+											{...extraProps}
+											style={{ minWidth: '0px' }}
+											key={`${name}.${index}.${controlItem.name}`}
+											name={`${name}.${index}.${controlItem.name}`}
+											index={index}
+											control={control}
+											size="sm"
+											disabled={newControl?.disabled ?? (disabled || disable)}
+										/>
+									)
+									: null}
+
 								<p style={{
 									fontStyle     : 'normal',
 									fontSize      : '12px',
@@ -154,7 +160,6 @@ function Child({
 			))}
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<div className={styles.delete_icon}>
-					<hr />
 					<IcMDelete
 						className={styles.icon}
 						onClick={() => remove(index, 1)}
