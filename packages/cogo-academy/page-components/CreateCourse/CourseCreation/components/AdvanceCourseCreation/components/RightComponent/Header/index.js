@@ -133,6 +133,7 @@ function Header({
 
 							return (
 								<Button
+									key={buttonText}
 									type="button"
 									themeType={themeType}
 									className={styles.button}
