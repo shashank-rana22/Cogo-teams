@@ -9,7 +9,7 @@ import useListShipmentServices from '../../hooks/useListShipmentservices';
 import PortDetails from '../List/Card/Body/PortDetails';
 
 import Card from './Card';
-import Rates from './Rates';
+import ServiceWiseDetails from './ServiceWiseDetails';
 import styles from './styles.module.css';
 
 function DetailPage({ setShowDetailPage, showDetailPage:itemData }) {
@@ -35,7 +35,6 @@ function DetailPage({ setShowDetailPage, showDetailPage:itemData }) {
 		}
 		return acc;
 	}, {});
-	const tabKeys = Object?.keys(groupedShowServicesData || {});
 	const singleServiceData = servicesData?.list[0];
 	return (
 		<div className={styles.Detail_page}>
@@ -91,16 +90,11 @@ function DetailPage({ setShowDetailPage, showDetailPage:itemData }) {
 			<div className={styles.card}>
 				<Card serviceData={singleServiceData} />
 			</div>
-			{/* <div className={styles.card}>
-				<DecisionPointsCard />
-			</div> */}
 			<div>
 				{loading ? null
 					: (
-						<Rates
+						<ServiceWiseDetails
 							groupedShowServicesData={groupedShowServicesData}
-							tabKeys={tabKeys}
-							setPayload={setSupplierPayload}
 						/>
 					)}
 
