@@ -82,6 +82,7 @@ function IRNCancel({ itemData }) {
 						itemData={itemData}
 						showCancellationModal={showCancellationModal}
 						setShowCancellationModal={setShowCancellationModal}
+						IRNLabel={IRNLabel}
 					/>
 				)}
 			</div>

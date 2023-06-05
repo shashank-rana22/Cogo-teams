@@ -4,9 +4,10 @@ import { useRequestBf } from '@cogoport/request';
 interface IrnCancellationProps {
 	id?: string,
 	setShowCancellationModal?: (p: boolean)=> void,
+	response:any,
 }
 
-const useGetIrnCancellation = ({ id, setShowCancellationModal }: IrnCancellationProps) => {
+const useGetIrnCancellation = ({ id, setShowCancellationModal, response }: IrnCancellationProps) => {
 	const [
 		{ loading },
 		cancelIrnApi,
@@ -19,11 +20,13 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal }: IrnCancellation
 		{ manual: true },
 	);
 
-	const cancelIrn = async (response) => {
+	const onSubmit = async (values) => {
 		try {
 			const payload = {
-				cancelReason   : response?.value,
-				cancelReminder : response?.remarks,
+				cancelReason      : response?.value || undefined,
+				agreementNumber   : values?.Agreement_number || undefined,
+				agreementDate     : values?.Agreement_date || undefined,
+				agreementDocument : values?.Agreement_pdf_file?.finalUrl || undefined,
 			};
 			const resp = await cancelIrnApi({
 				data: payload,
@@ -38,7 +41,7 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal }: IrnCancellation
 	};
 
 	return {
-		cancelIrn,
+		onSubmit,
 		loading,
 	};
 };

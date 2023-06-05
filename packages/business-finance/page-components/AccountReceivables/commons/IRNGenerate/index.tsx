@@ -103,7 +103,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							disabled={loading}
 							onClick={() => setUploadInvoice(true)}
 						>
-							Upload E-invoice
+							Generate E-invoice
 						</Button>
 					</div>
 					{uploadInvoice ? (
