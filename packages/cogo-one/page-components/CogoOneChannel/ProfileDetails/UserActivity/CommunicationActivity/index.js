@@ -38,7 +38,7 @@ function CommunicationActivity({ communication = {} }) {
 						{!type && (
 							<VoiceTimeLine item={item} />
 						) }
-						{template_id && (['email', 'whatsapp', 'telegram'].includes(type)) && (
+						{template_id && (['email', 'whatsapp', 'telegram', 'zalo'].includes(type)) && (
 							<>
 								<div className={styles.activity_date}>
 									<div className={styles.dot} />
