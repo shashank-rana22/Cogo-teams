@@ -36,7 +36,7 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return false;
 	}
 
-	if (user_data?.user?.id === GLOBAL_CONSTANTS.ajeet_email) {
+	if (user_data?.user?.id === GLOBAL_CONSTANTS.ajeet_singh_user_id) {
 		return true;
 	}
 
