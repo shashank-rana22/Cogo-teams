@@ -50,6 +50,8 @@ function BreakdownDetails({
 	useEffect(() => {
 		const calculate = (totalAmount / (total - totalAmount)) * 100;
 		const formattedCalculate = calculate.toFixed(3);
+		console.log('calculate::', calculate);
+		console.log('formattedCalculate::', formattedCalculate);
 		setProfitability(+formattedCalculate);
 	}, [total, totalAmount]);
 
