@@ -5,7 +5,7 @@ import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
-import editLineItemsHelper from './editLineItemsHelper';
+import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
 
@@ -34,7 +34,7 @@ function EditInvoice({
 		setValue,
 		watch,
 		newFormValues,
-	} = editLineItemsHelper({
+	} = editLineItems({
 		invoice,
 		onClose,
 		refetch,

@@ -12,11 +12,11 @@ const TRADE_MAPPING = {
 };
 
 const useEditLineItems = ({
-	invoice,
-	onClose,
-	refetch,
-	isAdminSuperAdmin,
-	shipment_data,
+	invoice = {},
+	onClose = () => {},
+	refetch = () => {},
+	isAdminSuperAdmin = false,
+	shipment_data = {},
 	info,
 }) => {
 	const services = invoice.services || [];
