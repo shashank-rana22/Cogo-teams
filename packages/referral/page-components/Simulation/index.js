@@ -132,7 +132,8 @@ function SimulationGraphs({ simulationData = {}, singleData = {}, setSingleData 
 function Simulation() {
 	const [activeTab, setActiveTab] = useState('shipment');
 	const [singleData, setSingleData] = useState({});
-	const { data = {} } = useGetSimulation({ activeTab, singleData });
+
+	const { data = {} } = useGetSimulation({ activeTab, singleData, setSingleData });
 	const simulationData = data?.data;
 
 	return (

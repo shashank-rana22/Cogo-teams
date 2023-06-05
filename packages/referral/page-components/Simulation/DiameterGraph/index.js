@@ -2,135 +2,33 @@ import { ResponsiveHeatMap } from '@cogoport/charts/heatmap';
 import { cl } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
 
+import getFormattedData from '../../../utils/getFormattedData';
+import { handleValues } from '../../../utils/handleValue';
+
 import styles from './styles.module.css';
 
 function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {} }) {
-	console.log('simulationData:', simulationData);
-	// const mapData = () => {
-	// 	let details = [];
-	// 	const graphData = [];
-	// 	let levelsData = [];
-
-	// 	for (let i = 1; i <= 20; i += 1) {
-	// 		levelsData = [
-	// 			...levelsData,
-	// 			{
-	// 				levels  : i,
-	// 				payouts : 1000,
-	// 			},
-	// 		];
-
-	// 		// for (let j = 1; j <= 20; j += 1) {
-	// 		// 	graphData = [
-	// 		// 		...graphData,
-	// 		// 		{
-	// 		// 			x : 10000 * j,
-	// 		// 			y : 10000,
-	// 		// 			levelsData,
-	// 		// 		},
-
-	// 		// 	];
-	// 		// }
-
-	// 		details = [
-	// 			...details,
-	// 			{
-	// 				id   : i,
-	// 				data : graphData,
-	// 			},
-	// 		];
-	// 	}
-	// 	return details;
-	// };
-
-	// const data = mapData();
-
-	const hello = [
-		{
-			id   : 1,
-			data : [
-				{
-					x : '10k',
-					y : 10000,
-
-				},
-				{
-					x : '20k',
-					y : 15000,
-
-				},
-				{
-					x : '30k',
-					y : 15000,
-				},
-				{
-					x : '40k',
-					y : 1500,
-				},
-				{
-					x : '50k',
-					y : 1000,
-				},
-				{
-					x : '60k',
-					y : 15000,
-				},
-				{
-					x : '70k',
-					y : 9000,
-				},
-				{
-					x : '80k',
-					y : 1500,
-				},
-				{
-					x : '90k',
-					y : 15000,
-				},
-				{
-					x : '100k',
-					y : 15000,
-				},
-			],
-		},
-		{
-			id   : 2,
-			data : [
-				{
-					x : '10k',
-					y : 1000,
-				},
-				{
-					x : '20k',
-					y : 15000,
-				},
-				{
-					x : '30k',
-					y : 1500,
-				},
-				{
-					x : '40k',
-					y : 1500,
-				},
-			],
-		},
-	];
+	const formattedData = getFormattedData(simulationData);
 
 	const mapData = (data) => {
-		const details = [];
-		Object.entries(data).forEach(([key, value], index) => {
-			console.log(`Index: ${index}, Key: ${key}, Value: ${value}`);
-		});
+		const details = Object.entries(data).map(([key, value]) => ({
+			id   : key,
+			data : Object.entries(value).map(([childKey, childValue]) => ({
+				x : handleValues(childKey),
+				y : handleValues(childValue),
+			})),
+
+		}));
 
 		return details;
 	};
 
-	const finalData = mapData(simulationData);
+	const finalData = mapData(formattedData);
 
 	return (
 		<div className={styles.container}>
 			<ResponsiveHeatMap
-				data={hello}
+				data={finalData.reverse()}
 				margin={{ top: 30, right: 20, bottom: 80, left: 70 }}
 				valueFormat=">-.2s"
 				xOuterPadding={0.05}
