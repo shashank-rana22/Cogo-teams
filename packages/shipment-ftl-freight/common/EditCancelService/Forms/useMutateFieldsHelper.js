@@ -39,7 +39,7 @@ const useMutateFieldsHelper = ({
 			if (newtype === 'change') {
 				index = name?.split('.')?.[1];
 			} else {
-				index = value?.service_data?.length - 1;
+				index = (value?.service_data?.length || 0) - 1;
 			}
 			setFieldArrIndex(index);
 		});

@@ -1,3 +1,4 @@
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { startCase } from '@cogoport/utils';
 import converter from 'number-to-words';
 
@@ -19,7 +20,7 @@ export const finalAmountInWords = (grand_total = 0) => {
 				? `${amountInWords} and ${subAmountWords} Paise`
 				: amountInWords;
 		} catch (err) {
-			console.log(err);
+			getApiErrorString(err);
 		}
 	}
 	return amountInWords;
