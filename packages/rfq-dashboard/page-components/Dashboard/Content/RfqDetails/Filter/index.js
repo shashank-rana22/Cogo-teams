@@ -43,7 +43,6 @@ function Filter({
 				onChange={(val) => setFilterStore((prev) => ({
 					...prev,
 					sortBy: val,
-
 				}))}
 			/>
 		</div>
