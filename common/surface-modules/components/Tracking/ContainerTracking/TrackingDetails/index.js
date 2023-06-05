@@ -1,9 +1,10 @@
-import React, { useState, useEffect } from 'react';
-import TrackingInfo from './TrackingInfo';
-import LoadingState from './LoadingState';
+import React from 'react';
+
 import EmptyState from './EmptyState';
-import TrackingMap from './TrackingMap';
+import LoadingState from './LoadingState';
 import styles from './styles.module.css';
+import TrackingInfo from './TrackingInfo';
+import TrackingMap from './TrackingMap';
 
 function TrackingDetails({ list, loading = false }) {
 	if (loading) {
