@@ -59,6 +59,58 @@ const extraApiPayload = (values, end_point, task) => {
 			return payload;
 		}
 
+		if ([
+			'upload_lorry_receipt',
+			'upload_eway_bill_copy',
+			'upload_commercial_invoice',
+			'upload_iwb',
+			'upload_proof_of_delivery',
+		].includes(task.task)) {
+			const payload = {
+				service      : task.shipment_type,
+				service_data : [],
+			};
+
+			const serviceMapping = {
+				ftl_freight_service           : 'ftl_freight',
+				haulage_freight_service       : 'haulage_freight',
+				rail_domestic_freight_service : 'rail_domestic_freight',
+			};
+			const TaskKeyMapping = {
+				upload_lorry_receipt      : 'lr_number',
+				upload_eway_bill_copy     : 'eway_bill_number',
+				upload_commercial_invoice : 'commercial_invoice_number',
+				upload_iwb                : 'iwb_number',
+				upload_proof_of_delivery  : 'delivery_date',
+			};
+			payload.service = task.service_type
+				? serviceMapping[task.service_type]
+				: task.shipment_type;
+
+			let dataKey = TaskKeyMapping[task.task];
+			let dataValue = values?.documents?.[0]?.[dataKey] || values[dataKey];
+			if (
+				task.service_type === 'ftl_freight_service'
+				&& task.task === 'upload_lorry_receipt'
+			) {
+				dataKey = `${dataKey}s`;
+				dataValue = [dataValue];
+			}
+
+			const eachServicePayload = {
+				service_id: task.service_id
+					? task?.service_id
+					: task?.task_field_ids?.[0],
+				data: {
+					[dataKey]: dataValue,
+				},
+			};
+
+			payload.service_data.push(eachServicePayload);
+
+			return payload;
+		}
+
 		return values;
 	}
 	return values;

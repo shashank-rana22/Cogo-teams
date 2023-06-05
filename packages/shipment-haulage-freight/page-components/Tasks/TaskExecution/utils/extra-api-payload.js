@@ -1,4 +1,4 @@
-const extraApiPayload = (values, end_point, task) => {
+const extraApiPayload = (values, end_point, task, getApisData) => {
 	if (end_point === 'create_shipment_document') {
 		let documentArr = values?.documents;
 
@@ -55,6 +55,59 @@ const extraApiPayload = (values, end_point, task) => {
 					},
 				},
 			}));
+
+			return payload;
+		}
+
+		if (task.task === 'upload_lorry_receipt'
+		) {
+			const payload = {
+				service      : task.shipment_type,
+				service_data : [],
+			};
+
+			getApisData.list_shipment_services.forEach((item) => {
+				const eachTrailerPayload = {
+					service_id : item.id,
+					data       : {
+						lr_number: [],
+					},
+				};
+
+				values.documents.forEach((documentItem) => {
+					if (documentItem.service_id === item.id) {
+						eachTrailerPayload.data.lr_number.push(documentItem.lr_number);
+					}
+				});
+				payload.service_data.push(eachTrailerPayload);
+			});
+
+			return payload;
+		}
+
+		if (
+			task.task === 'upload_proof_of_delivery'
+		) {
+			const payload = {
+				service      : task.shipment_type,
+				service_data : [],
+			};
+			getApisData.list_shipment_services.forEach((item) => {
+				const eachTruckPayload = {
+					service_id : item.id,
+					data       : {
+						delivery_date: '',
+					},
+				};
+
+				values.documents.forEach((documentItem) => {
+					if (documentItem.service_id === item.id) {
+						eachTruckPayload.data.delivery_date = documentItem.delivery_date;
+					}
+				});
+
+				payload.service_data.push(eachTruckPayload);
+			});
 
 			return payload;
 		}

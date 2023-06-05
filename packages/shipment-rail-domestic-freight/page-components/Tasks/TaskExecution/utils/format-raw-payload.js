@@ -64,6 +64,29 @@ const formatRawValues = (rawValues, task, getApisData) => {
 		};
 	}
 
+	if (task.task === 'container_details_update') {
+		const { update_data = [] } = values;
+		return {
+			update_data: (getApisData?.list_shipment_container_details || []).map(
+				(item, index) => {
+					const {
+						container_number = '',
+						estimated_departure,
+						estimated_arrival,
+					} = update_data?.[index] || [];
+					return {
+						id   : item?.id,
+						data : {
+							container_number,
+							estimated_departure,
+							estimated_arrival,
+						},
+					};
+				},
+			),
+		};
+	}
+
 	return values;
 };
 
