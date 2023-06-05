@@ -6,9 +6,13 @@
 }
 
 .carousel_container {
-	margin: 24px 0;
+	margin: 12px 0;
 
 	:global {
+		.ui_carousel_container {
+			overflow: auto;
+		}
+
 		.ui_carousel_arrow {
 			fill: #221f20;
 		}
@@ -21,6 +25,10 @@
 		.ui_carousel_prev {
 			margin-left: -30px;
 			background: none;
+		}
+
+		.ui_o0St8 {
+			width: unset;
 		}
 	}
 }

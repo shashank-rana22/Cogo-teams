@@ -54,14 +54,13 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.header}>
 				<div className={styles.main_heading}>All Courses</div>
 
 				<div className={styles.btn_container}>
 					<div
 						role="presentation"
-						onClick={() => { clickOptions('completed', 'all_courses', ''); }}
+						onClick={() => clickOptions('completed', 'all_courses', '')}
 						className={`${styles.btn} ${activeTab === 'completed' ? styles.btn_active : null}`}
 					>
 						{activeTab === 'completed' ? <IcMTick height="20px" width="20px" /> : null}
@@ -69,7 +68,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 					</div>
 					<div
 						role="presentation"
-						onClick={() => { clickOptions('ongoing', 'all_courses', ''); }}
+						onClick={() => clickOptions('ongoing', 'all_courses', '')}
 						className={`${styles.btn} ${activeTab === 'ongoing' ? styles.btn_active : null}`}
 					>
 						{activeTab === 'ongoing' ? <IcMTick height="20px" width="20px" /> : null}
@@ -77,7 +76,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 					</div>
 					<div
 						role="presentation"
-						onClick={() => { clickOptions('mandatory', 'all_courses', ''); }}
+						onClick={() => clickOptions('mandatory', 'all_courses', '')}
 						className={`${styles.btn} ${activeTab === 'mandatory' ? styles.btn_active : null}`}
 					>
 						{activeTab === 'mandatory' ? <IcMTick height="20px" width="20px" /> : null}
@@ -112,17 +111,20 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 			) : null}
 
 			<div className={styles.pill}>
-				{courseCategories?.map((category) => (
-					currentCategory === category.id
-						? 						(
+				{courseCategories?.map((category) => {
+					if (currentCategory === category.id) {
+						return (
 							<TagsSelect
+								key={category.id}
 								category={category}
 								selected={selected}
 								setSelected={setSelected}
 							/>
-						)
-						: null
-				))}
+						);
+					}
+
+					return null;
+				})}
 			</div>
 
 			<div className={styles.carousel_container}>

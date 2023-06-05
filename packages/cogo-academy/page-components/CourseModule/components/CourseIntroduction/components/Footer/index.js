@@ -42,7 +42,7 @@ export function Footer({ course_id, user_id, data = {} }) {
 
 			<Button
 				className={styles.btn}
-				themeType="primary"
+				themeType="accent"
 				size="lg"
 				loading={loading}
 				onClick={() => {
