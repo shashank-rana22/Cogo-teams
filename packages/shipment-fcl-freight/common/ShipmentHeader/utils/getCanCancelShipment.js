@@ -1,4 +1,4 @@
-import CONSTANTS from '../../../configurations/contants.json';
+import CONSTANTS from '../../../configurations/constant.json';
 
 const SHIPMENT_CANCELLATION_STATES = [
 	'shipment_received',
