@@ -1,12 +1,4 @@
-const DEPENDENT_SERVICES_ARRAY = [
-	'fcl_freight_local_service',
-	'haulage_freight_service',
-	'trailer_freight_service',
-	'fcl_customs_service',
-	'fcl_cfs_service',
-];
-
-export default function getUpdateBookingParameterPaylaod({ formValues, shipment_data, serviceData, servicesList }) {
+export default function getUpdateBookingParameterPaylaod({ formValues, shipment_data }) {
 	const payload = {
 		shipment_id : shipment_data?.id,
 		services    : [],
@@ -21,23 +13,6 @@ export default function getUpdateBookingParameterPaylaod({ formValues, shipment_
 		});
 
 		payload.services.push({ service_id, service_type, booking_params: newBookingParams });
-
-		const dependentServices = servicesList.filter(
-			(service) => DEPENDENT_SERVICES_ARRAY.includes(service?.service_type),
-		);
-
-		dependentServices.filter(
-			(service) => serviceData.container_size === service.container_size
-					&& serviceData.container_type === service.container_type,
-		);
-
-		dependentServices.forEach((dependentService) => {
-			payload.services.push({
-				service_id     : dependentService?.id,
-				service_type   : dependentService?.service_type,
-				booking_params : newBookingParams,
-			});
-		});
 	});
 	return payload;
 }
