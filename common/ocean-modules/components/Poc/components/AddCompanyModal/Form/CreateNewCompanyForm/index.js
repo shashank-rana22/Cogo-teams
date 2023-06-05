@@ -97,6 +97,8 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 
 	const workScopeOptions = convertObjectMappingToArray(POC_WORKSCOPE_MAPPING);
 
+	const regEx = formValuePatterns(formValues?.country_id);
+
 	return (
 		<div>
 			<form>
@@ -126,7 +128,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
 								pattern  : {
-									value   : formValuePatterns(formValues).PAN_NUMBER,
+									value   : regEx.PAN_NUMBER,
 									message : 'Pan Number is invalid',
 								},
 							}}
@@ -207,7 +209,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							rules={{
 								pattern: {
-									value   : formValuePatterns(formValues).EMAIL,
+									value   : regEx.EMAIL,
 									message : 'Enter valid email',
 								},
 							}}
@@ -254,7 +256,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 									message : 'GST Number is required',
 								},
 								pattern: {
-									value   : formValuePatterns(formValues).GST_NUMBER,
+									value   : regEx.GST_NUMBER,
 									message : 'GST Number is invalid',
 								},
 							}}

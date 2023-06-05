@@ -1,13 +1,17 @@
 import { getCountryConstants } from '@cogoport/globalization/constants/geo';
 
-const formValuePatterns = (formValues) => ({
-	PAN_NUMBER: getCountryConstants({ country_id: formValues?.country_id })?.regex?.PAN,
+const formValuePatterns = (country_id) => {
+	const regEx = getCountryConstants({ country_id, isDefaultData: false })?.regex || {};
 
-	EMAIL: getCountryConstants({ country_id: formValues?.country_id })?.regex?.EMAIL,
+	return {
+		PAN_NUMBER: regEx.PAN,
 
-	CONTAINER_NUMBER: /^[A-Z]{3}U[0-9]{6,7}$/,
+		EMAIL: regEx.EMAIL,
 
-	GST_NUMBER: getCountryConstants({ country_id: formValues?.country_id }),
-});
+		CONTAINER_NUMBER: regEx.CONTAINER_NUMBER,
+
+		GST_NUMBER: regEx.GST,
+	};
+};
 
 export default formValuePatterns;
