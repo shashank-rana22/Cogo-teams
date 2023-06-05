@@ -33,9 +33,9 @@
 
 .text {
 	display: flex;
-	align-items: center; 
+	align-items: center;
 
-	button{
+	button {
 		margin: 0;
 	}
 }

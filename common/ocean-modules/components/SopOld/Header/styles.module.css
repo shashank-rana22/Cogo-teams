@@ -1,15 +1,15 @@
 .container {
-  padding: 12px 8px 12px 8px;
+	padding: 12px 8px;
 }
 
 .buttons_container {
 	display: flex;
-	width: 100%;
 	justify-content: space-between;
+	width: 100%;
 
 	.core-ui-button-root {
-		text-transform: capitalize;
 		height: fit-content;
+		text-transform: capitalize;
 	}
 }
 
@@ -18,7 +18,7 @@
 	justify-content: space-between;
 
 	.tippy-content {
-		padding: 0px;
+		padding: 0;
 	}
 }
 
@@ -26,14 +26,14 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	border: 1px solid #cbcff5;
-	border-radius: 4px;
+	height: fit-content;
 	padding: 4px;
 	cursor: pointer;
-	height: fit-content;
+	border: 1px solid #cbcff5;
+	border-radius: 4px;
 }
 
 .line {
+	margin: 16px 0 12px;
 	border-bottom: 1px solid #ded7fc;
-	margin: 16px 0px 12px 0px;
 }

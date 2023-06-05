@@ -8,7 +8,10 @@ import Details from '../Details';
 import styles from './styles.module.css';
 
 function Header({ serviceData = {} }) {
-	const { state = '', display_label = '', service_provider = '', payment_term = '' } = serviceData || {};
+	const {
+		state = '', service_provider = '',
+		payment_term = '', service_type = '',
+	} = serviceData || {};
 
 	const [showDetails, setShowDetails] = useState({});
 
@@ -21,7 +24,7 @@ function Header({ serviceData = {} }) {
 		<div className={cl`${styles[state]} ${styles.main_container}`}>
 			<div className={cl` ${styles.container}`}>
 				<div className={cl`${styles[state]} ${styles.service_details}`}>
-					<div className={styles.service_name}>{display_label}</div>
+					<div className={styles.service_name}>{startCase(service_type)}</div>
 					<div className={styles.service_provider}>{service_provider?.business_name}</div>
 				</div>
 
@@ -37,20 +40,21 @@ function Header({ serviceData = {} }) {
 							tabIndex={0}
 							onClick={() => setShowDetails({
 								...showDetails,
-								[serviceData?.[0]?.display_label]: !showDetails[serviceData?.[0]?.display_label],
+								[serviceData?.id]: !showDetails[serviceData?.id],
 							})}
 							className={styles.details_cta}
 						>
 
-							{ showDetails[serviceData?.[0]?.display_label] ? 'Hide Details' : 'View Details'}
+							{ showDetails[serviceData?.id] ? 'Hide Details' : 'View Details'}
 						</div>
 						<div className={styles.edit_cancel}>
-							<EditCancelService serviceData={serviceData?.[0]} />
+							<EditCancelService serviceData={serviceData} />
 						</div>
 					</div>
 				</div>
 			</div>
-			<Details serviceData={serviceData} />
+
+			{ showDetails[serviceData?.id] ? 	<Details serviceData={serviceData} /> : null}
 		</div>
 
 	);
