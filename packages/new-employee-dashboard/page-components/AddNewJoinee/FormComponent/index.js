@@ -48,7 +48,7 @@ const SECTION_MAPPING = [
 function FormComponent({ setActivePage }) {
 	const router = useRouter();
 
-	const [{ loading, data }, trigger] = useHarbourRequest({
+	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/create_employee_detail',
 	}, { manual: true });
@@ -116,7 +116,7 @@ function FormComponent({ setActivePage }) {
 					<IcMArrowBack width={20} height={20} />
 				</div>
 
-				<div className={styles.header}>NEW JOINEE&apos;S DETAILS</div>
+				<div className={styles.header}>NEW HIRE&apos;S DETAILS</div>
 			</div>
 
 			<div className={styles.form}>
