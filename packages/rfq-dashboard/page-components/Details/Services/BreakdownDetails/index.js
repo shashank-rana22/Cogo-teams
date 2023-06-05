@@ -101,6 +101,8 @@ function BreakdownDetails({
 		};
 	};
 
+	console.error('editedMargins::', editedMargins);
+
 	console.error('k::', totalAmount);
 	console.error('editedMargins::', editedMargins, total);
 
