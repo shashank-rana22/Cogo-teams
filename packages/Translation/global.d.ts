@@ -1,1 +1,1 @@
-// declare module '@cogoport/*';
+declare module '@cogoport/*';
