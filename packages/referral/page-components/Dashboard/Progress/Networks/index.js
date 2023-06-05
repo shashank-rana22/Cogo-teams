@@ -15,7 +15,7 @@ function Networks({ networkData = {} }) {
 			{emptyState ? (
 				<div className={styles.empty_state}>
 					<Image
-						src={GLOBAL_CONSTANTS.image_url.network_empty_list}
+						src={GLOBAL_CONSTANTS.image_url.empty_image}
 						alt="empty-state"
 						width={120}
 						height={120}
