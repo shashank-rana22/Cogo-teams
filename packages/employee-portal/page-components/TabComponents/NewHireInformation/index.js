@@ -80,7 +80,7 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 									<div className={styles.status}>
 										<div className={styles.accordion_title}>{startCase(name)}</div>
 
-										{renderPills({ isCompleted })}
+										{renderPills({ isCompleted, name })}
 
 									</div>
 								)}

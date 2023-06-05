@@ -5,11 +5,15 @@ import StyledTable from '../../StyledTable';
 import getColumns from './getColumns';
 import ReviewModal from './ReviewModal';
 import styles from './styles.module.css';
+import ListEmployeeSignedDocuments from './useListEmployeeSignedDocuments';
 
 function SignedDocuments({ profileData, loading }) {
 	const onClickViewDocument = (id) => {
-		window.open('www.google.com', '_blank');
+		window.open('https://www.africau.edu/images/default/sample.pdf', '_blank');
 	};
+
+	const { list } = ListEmployeeSignedDocuments();
+
 	const [showModal, setShowModal] = useState(false);
 
 	const columns = getColumns({ onClickViewDocument, setShowModal });
@@ -23,7 +27,7 @@ function SignedDocuments({ profileData, loading }) {
 
 			<StyledTable
 				columns={columns}
-				data={[{ status: 'pending' }, { status: 'Approved' }, { status: 'pending' }, { status: 'Rejected' }]}
+				data={list}
 			/>
 
 			<ReviewModal showModal={showModal} setShowModal={setShowModal} />

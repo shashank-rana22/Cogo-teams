@@ -95,7 +95,6 @@ function EmploymentHistory({ getEmployeeDetails, data: info }) {
 						);
 					})}
 				</div>
-
 			</div>
 
 			<Button

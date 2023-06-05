@@ -40,7 +40,14 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'harbour',
 		},
+		{
+			api          : 'list_employee_signed_documents',
+			access_type  : 'private',
+			service_name : 'harbour',
+		},
+
 	],
+
 	employee_portal: [
 		{
 			api          : 'get_employee_details',
@@ -86,6 +93,11 @@ const consolidated_invoices = {
 			api          : 'get_document_signing_url',
 			access_type  : 'private',
 			service_name : 'harbour',
+		},
+		{
+			api          : 'update_partner_user',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 	],
 };

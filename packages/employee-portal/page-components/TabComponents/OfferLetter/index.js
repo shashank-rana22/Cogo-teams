@@ -12,7 +12,10 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 
 	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails });
 
-	const { onClickSignDocument } = useGetDocumentSigningUrl({ id });
+	const { onClickSignDocument, data:docData } = useGetDocumentSigningUrl({ id, getEmployeeDetails });
+
+	const { signed_document_url } = docData || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -42,31 +45,19 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 						<Button
 							themeType="primary"
 							size="md"
-							onClick={() => updateData({ status: 'accepted' })}
+							onClick={onClickSignDocument}
 						>
 							Accept
 						</Button>
 					</div>
-				) : (
-					<div className={styles.button_container}>
-						<Button
-							themeType="primary"
-							size="md"
-							onClick={onClickSignDocument}
-						>
-							Sign Documents
-						</Button>
-
-					</div>
-
-				)
-			}
+				) : null
+}
 
 			<div style={{ display: 'flex', justifyContent: 'center' }}>
 				<PreviewDocumet
 					height="700px"
 					width="800px"
-					document_url={document_url}
+					document_url={signed_document_url || document_url}
 				/>
 
 			</div>

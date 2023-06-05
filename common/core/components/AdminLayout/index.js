@@ -5,6 +5,7 @@ import React, { useState } from 'react';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import Navbar from './Navbar';
+import TnC from './newTnC';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
@@ -25,9 +26,12 @@ function AdminLayout({
 
 	const {
 		user: { id: user_id = '' },
-		partner: { id: partner_id = '', partner_user_id = '' },
+		partner: partnerData,
 		is_in_voice_call:inCall = false, voice_call_recipient_data = {},
 	} = user_data;
+
+	const { id: partner_id = '', partner_user_id = '', is_joining_tnc_accepted = '' } = partner || {};
+
 	const {
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys, setAnnouncements });
@@ -37,6 +41,9 @@ function AdminLayout({
 	const { nav_items = {} } = configs || {};
 
 	const { partner = [], pinnedNavs = [] } = nav_items || {};
+
+	const isTnCModalVisible = Object.keys(partnerData).includes('is_joining_tnc_accepted')
+									&& is_joining_tnc_accepted === false;
 
 	return (
 		<div className={cl`
@@ -76,6 +83,8 @@ function AdminLayout({
 				inCall={inCall}
 			/>
 			<AnnouncementModal data={announcements} />
+
+			{isTnCModalVisible ? <TnC partner_user_id={partner_user_id} /> : null}
 		</div>
 	);
 }
