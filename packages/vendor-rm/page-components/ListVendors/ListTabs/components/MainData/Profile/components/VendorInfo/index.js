@@ -24,6 +24,7 @@ function VendorInfo({
 		setShowAddbankModal,
 	} = useVendorBankDetail({
 		refetchVendorInfo,
+		data,
 	});
 
 	return (
