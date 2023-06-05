@@ -1,8 +1,10 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf, IcMImage } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-import { format, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useContext, useMemo } from 'react';
 
 import useListTradeDocuments from '../../../../hooks/useListTradeDocuments';
@@ -62,10 +64,11 @@ function TradeDocuments({
 								{startCase(doc.document_type)}
 							</div>
 							<div className={styles.upload_info}>
-								{`Uploaded On ${format(
-									doc?.updated_at,
-									'dd MMM yyyy',
-								)}`}
+								{`Uploaded On ${formatDate({
+									date       : doc?.updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})}`}
 							</div>
 						</div>
 						<div className={styles.button_wrapper}>

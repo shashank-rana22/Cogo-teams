@@ -1,8 +1,28 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOpenlink } from '@cogoport/icons-react';
-import { startCase, upperCase, format } from '@cogoport/utils';
+import { startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+
+const dateFormatter = (props) => {
+	const {
+		date,
+		formatType = 'date',
+		dateFormat = GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		timeFormat = GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+		separator = ' - ',
+	} = props || {};
+
+	return date && new Date(date).toDateString() !== 'Invalid Date' ? formatDate({
+		date,
+		dateFormat,
+		formatType,
+		...(formatType === 'dateTime' && { timeFormat }),
+		separator,
+	}) : null;
+};
 
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || {};
@@ -189,23 +209,23 @@ export const renderValue = (label, detail) => {
 		case 'destination_location.display_name':
 			return detail.destination_location?.display_name || '';
 		case 'schedule_departure':
-			return format(detail?.schedule_departure || detail?.selected_schedule_departure, 'dd MMM yyyy');
+			return dateFormatter({ date: detail?.schedule_departure || detail?.selected_schedule_departure });
 		case 'schedule_arrival':
-			return format(detail?.schedule_arrival || detail?.selected_schedule_arrival, 'dd MMM yyyy');
+			return dateFormatter({ date: detail?.schedule_arrival || detail?.selected_schedule_arrival });
 		case 'bn_expiry':
-			return format(detail?.bn_expiry, 'dd MMM yyyy');
+			return dateFormatter({ date: detail?.bn_expiry });
 		case 'booking_note_deadline':
-			return format(detail?.booking_note_deadline, 'dd MMM yyyy - hh:mm aaa');
+			return dateFormatter({ date: detail?.booking_note_deadline, type: 'dateTime' });
 		case 'si_cutoff':
-			return format(detail?.si_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return dateFormatter({ date: detail?.si_cutoff, type: 'dateTime' });
 		case 'vgm_cutoff':
-			return format(detail?.vgm_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return dateFormatter({ date: detail?.vgm_cutoff, type: 'dateTime' });
 		case 'gate_in_cutoff':
-			return format(detail?.gate_in_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return dateFormatter({ date: detail?.gate_in_cutoff, type: 'dateTime' });
 		case 'document_cutoff':
-			return format(detail?.document_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return dateFormatter({ date: detail?.document_cutoff, type: 'dateTime' });
 		case 'tr_cutoff':
-			return format(detail?.tr_cutoff, 'dd MMM yyyy - hh:mm aaa');
+			return dateFormatter({ date: detail?.tr_cutoff, type: 'dateTime' });
 		case 'iip_certificates':
 			return formatCertificate(detail?.iip_certificates || []);
 		case 'msds_certificates':
@@ -215,7 +235,7 @@ export const renderValue = (label, detail) => {
 		case 'bl_type':
 			return upperCase(detail.bl_type);
 		case 'cargo_readiness_date':
-			return format(detail?.cargo_readiness_date, 'dd MMM yyyy');
+			return dateFormatter({ date: detail?.cargo_readiness_date, type: 'dateTime' });
 		case 'supplier_poc':
 			return formatPocData(detail?.supplier_poc || {});
 		case 'origin_oversea_agent':
@@ -227,7 +247,7 @@ export const renderValue = (label, detail) => {
 		case 'hs_code':
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
-			return format(detail?.delivery_date, 'dd MMM yyyy');
+			return dateFormatter({ date: detail?.delivery_date, type: 'dateTime' });
 		default:
 			return detail[label] || null;
 	}
