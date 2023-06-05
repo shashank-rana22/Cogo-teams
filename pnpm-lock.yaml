@@ -89,9 +89,11 @@ importers:
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/shipment-fcl-freight-local': workspace:0.1.0
       '@cogoport/shipment-ftl-freight': workspace:0.1.0
+      '@cogoport/shipment-haulage-freight': workspace:0.1.0
       '@cogoport/shipment-lcl-freight': workspace:0.1.0
       '@cogoport/shipment-ltl-freight': workspace:0.1.0
       '@cogoport/shipment-mails': workspace:0.1.0
+      '@cogoport/shipment-rail-domestic-freight': workspace:0.1.0
       '@cogoport/so2-surface': workspace:0.1.0
       '@cogoport/store': workspace:0.1.0
       '@cogoport/supply-dashboards': workspace:0.1.0
@@ -157,9 +159,11 @@ importers:
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/shipment-fcl-freight-local': link:../packages/shipment-fcl-freight-local
       '@cogoport/shipment-ftl-freight': link:../packages/shipment-ftl-freight
+      '@cogoport/shipment-haulage-freight': link:../packages/shipment-haulage-freight
       '@cogoport/shipment-lcl-freight': link:../packages/shipment-lcl-freight
       '@cogoport/shipment-ltl-freight': link:../packages/shipment-ltl-freight
       '@cogoport/shipment-mails': link:../common/shipment-mails
+      '@cogoport/shipment-rail-domestic-freight': link:../packages/shipment-rail-domestic-freight
       '@cogoport/so2-surface': link:../packages/so2-surface
       '@cogoport/store': link:../common/store
       '@cogoport/supply-dashboards': link:../packages/supply-dashboards

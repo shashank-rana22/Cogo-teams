@@ -14,6 +14,7 @@ import getCanEditSupplier from './utils/getCanEditSupplier';
 
 const actionButtons = [
 	{ label: 'Edit', value: 'supplier_reallocation' },
+	{ label: 'Edit Params', value: 'edit_params' },
 	{ label: 'Cancel', value: 'cancel' },
 ];
 

@@ -17,7 +17,10 @@ function ShipmentHeader() {
 	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
-	const { shipment_data, primary_service, isGettingShipment, activeStakeholder } = useContext(ShipmentDetailContext);
+	const {
+		shipment_data,
+		primary_service, isGettingShipment, activeStakeholder, stakeholderConfig,
+	} = useContext(ShipmentDetailContext);
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 

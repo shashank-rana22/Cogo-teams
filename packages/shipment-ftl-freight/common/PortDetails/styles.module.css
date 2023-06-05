@@ -91,11 +91,7 @@
 	justify-content: center;
 	font-size: 10px;
 	font-weight: 700;
-<<<<<<< HEAD:packages/shipment-rail-domestic-freight/commons/PortDetails/styles.module.css
-	color: #96e2a2;
-=======
 	color: #ee3426;
->>>>>>> new_ftl_ltl:packages/shipment-ftl-freight/common/PortDetails/styles.module.css
 	letter-spacing: 0;
 	white-space: nowrap;
 
@@ -108,10 +104,3 @@
 		}
 	}
 }
-<<<<<<< HEAD:packages/shipment-rail-domestic-freight/commons/PortDetails/styles.module.css
-
-.location_tooltip {
-	font-size: var(--font-size-sm);
-}
-=======
->>>>>>> new_ftl_ltl:packages/shipment-ftl-freight/common/PortDetails/styles.module.css

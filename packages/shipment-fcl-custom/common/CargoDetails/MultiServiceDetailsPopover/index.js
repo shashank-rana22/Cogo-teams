@@ -6,14 +6,8 @@ import RenderCargoPills from '../RenderCargoPills';
 import styles from './styles.module.css';
 
 function MultiServiceDetailsPopover({
-<<<<<<<< HEAD:packages/shipment-fcl-custom/common/CargoDetails/MultiServiceDetailsPopover/index.js
-	children,
-	mainServices,
-
-========
 	children = {},
 	mainServices = [],
->>>>>>>> new_ftl_ltl:packages/shipment-ltl-freight/common/CargoDetails/MultiServiceDetailsPopover/index.js
 }) {
 	if (mainServices?.length <= 1) {
 		return null;
