@@ -28,6 +28,7 @@ import referral from './config/referral';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
+import shipmentFclCustom from './config/shipment-fcl-custom';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import shipmentLclFreight from './config/shipment-lcl-freight';
 import so2Surface from './config/so2-surface';
@@ -76,6 +77,7 @@ const routeConfig = {
 	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
+	...shipmentFclCustom,
 	...ticketManagement,
 };
 
