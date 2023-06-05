@@ -2,6 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { TermsAndConditions } from '@cogoport/surface-modules';
 import { useContext, useEffect } from 'react';
 
+import Inventory from './Inventory';
 import ManageServices from './ManageServices';
 import styles from './styles.module.css';
 
@@ -17,6 +18,8 @@ function Overview() {
 	return (
 		<div className={styles.container}>
 			<ManageServices />
+
+			<Inventory />
 
 			{shipment_data?.terms_and_conditions?.length ? (
 				<TermsAndConditions shipmentData={shipment_data} />

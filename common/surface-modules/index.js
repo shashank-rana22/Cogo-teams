@@ -7,3 +7,4 @@ export { default as RPASearch } from './common/RPASearch';
 export { default as Layout } from './components/Layout';
 export { default as EditServiceCharges } from './components/EditServiceCharges';
 export { default as useShipmentBack } from './hooks/useShipmentBack';
+export { default as EmptyState } from './common/EmptyState';

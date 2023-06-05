@@ -4,7 +4,7 @@ import { useCallback, useEffect } from 'react';
 
 const useGetRailShipmentContainerDetail = ({ defaultParams = {} }) => {
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/get_business',
+		url    : '/get_rail_shipment_container_detail',
 		method : 'get',
 		params : defaultParams,
 	}, { manual: true });
