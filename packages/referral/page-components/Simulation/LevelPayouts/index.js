@@ -32,7 +32,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 
 	if (checkLevelEmptyState) {
 		return (
-			<div className={cl`${styles.empty_state} ${styles.level_empty_state}`}>
+			<div className={cl`${styles.empty_state} `}>
 				<Image
 					src={NETWORK_EMPTY_STATE}
 					alt="empty-state"
@@ -43,7 +43,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 		);
 	}
 	return (
-		<div>
+		<>
 			<div className={styles.user_lavel_payouts}>
 				{
     Object.entries(levelData || {}).map(([key, value]) => (
@@ -67,7 +67,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 				</div>
 			)}
 
-		</div>
+		</>
 	);
 }
 

@@ -16,7 +16,7 @@
 .level_graph {
 	width: 30%;
 	height: 85vh;
-	background: white;
+	background: #fff;
 	border-radius: 8px;
 }
 
@@ -48,7 +48,7 @@
 }
 
 .user_lavel_payouts {
-	height: 73vh;
+	height: 85%;
 	overflow-y: auto;
 	animation: payouts 0.5s both;
 
@@ -63,7 +63,7 @@
 		}
 	}
 
-	::-webkit-scrollbar {
+	&::-webkit-scrollbar {
 		display: none;
 	}
 }
@@ -100,12 +100,9 @@
 
 .empty_state {
 	display: flex;
+	align-items: center;
 	justify-content: center;
-	margin-top: 250px;
-}
-
-.level_empty_state {
-	margin-top: 220px;
+	height: 90%;
 }
 
 .networks_chart {

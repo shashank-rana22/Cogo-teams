@@ -41,7 +41,7 @@ function ReturnComponent({
 	}
 	if (emptyState) {
 		return (
-			<div className={cl`${styles.empty_state} ${type === 'level' && styles.level_empty_state}`}>
+			<div className={cl`${styles.empty_state} `}>
 				<Image
 					src={NETWORK_EMPTY_STATE}
 					alt="empty-state"
