@@ -22,7 +22,6 @@ function NetworkList({
 				data={data}
 				loadingRowsCount={10}
 				loading={loading}
-
 			/>
 		</div>
 	);

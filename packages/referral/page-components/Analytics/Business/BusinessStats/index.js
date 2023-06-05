@@ -9,6 +9,19 @@ import useGetReferralBusinessAnalytics from '../../../../hooks/useGetReferralBus
 
 import styles from './styles.module.css';
 
+const styledToolTip = ({ slice }) => (
+	<div className={styles.tooltip_div}>
+		<div className={styles.title}>
+			Date:
+			<div className={styles.amount}>{slice?.points?.[0]?.data.x}</div>
+		</div>
+		<div className={styles.title}>
+			Count:
+			<div className={styles.amount}>{slice?.points?.[0]?.data.y}</div>
+		</div>
+	</div>
+);
+
 function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => {}, selectedDate = {} }) {
 	const { data: businessData = {}, loading = false } = useGetReferralBusinessAnalytics({
 		selectedDate,
@@ -19,10 +32,10 @@ function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => 
 	const { count = {}, data = {} } = businessData || {};
 
 	const { kyc_verified = 0, shipment = 0, subscription = 0 } = count || {};
-	const total = kyc_verified + shipment + subscription;
+	const totalShipmentIncentive = kyc_verified + shipment + subscription;
 
 	const formatCount = {
-		total,
+		total: totalShipmentIncentive,
 		kyc_verified,
 		shipment,
 		subscription,
@@ -44,23 +57,10 @@ function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => 
 		},
 	];
 
-	const rendersliceToolTip = ({ slice }) => (
-		<div className={styles.tooltip_div}>
-			<div className={styles.title}>
-				Date:
-				<div className={styles.amount}>{slice?.points?.[0]?.data.x}</div>
-			</div>
-			<div className={styles.title}>
-				Count:
-				<div className={styles.amount}>{slice?.points?.[0]?.data.y}</div>
-			</div>
-		</div>
-	);
-
 	return (
 		<>
 			<Tabs
-				activeTab={businessFilterType?.activityType}
+				activeTab={businessFilterType.activityType}
 				themeType="secondary-vertical"
 				onChange={(val) => setBusinessFilterType((prev) => ({ ...prev, activityType: val }))}
 			>
@@ -76,9 +76,9 @@ function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => 
 							src={GLOBAL_CONSTANTS.image_url.spinner_loader}
 							width={50}
 							height={50}
+							alt="loader"
 						/>
 					) : (
-
 						<ResponsiveLine
 							data={graphData}
 							margin={{ top: 30, right: 45, bottom: 40, left: 48 }}
@@ -113,7 +113,7 @@ function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => 
 							useMesh
 							legends={[]}
 							enableSlices="x"
-							sliceTooltip={rendersliceToolTip}
+							sliceTooltip={styledToolTip}
 						/>
 					)}
 				</div>

@@ -5,7 +5,7 @@ import BusinessPerformance from './Business';
 import styles from './styles.module.css';
 import UserPerformance from './Users';
 
-function ReferralAnalytics() {
+function Analytics() {
 	const [selectedDate, setSelectedDate] = useState({});
 
 	const [performanceType, setPerformanceType] = useState('user_performance');
@@ -51,4 +51,4 @@ function ReferralAnalytics() {
 		</div>
 	);
 }
-export default ReferralAnalytics;
+export default Analytics;

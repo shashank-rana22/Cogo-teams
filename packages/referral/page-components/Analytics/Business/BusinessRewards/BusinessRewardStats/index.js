@@ -4,19 +4,20 @@ import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-function BusinessRewardStats({ graphData = [], loading = false }) {
-	const rendersliceToolTip = ({ slice }) => (
-		<div className={styles.tooltip_div}>
-			<div className={styles.title}>
-				Date:
-				<div className={styles.amount}>{slice?.points?.[0]?.data.x}</div>
-			</div>
-			<div className={styles.title}>
-				Cogopoints:
-				<div className={styles.amount}>{slice?.points?.[0]?.data.y}</div>
-			</div>
+const styledToolTip = ({ slice }) => (
+	<div className={styles.tooltip_div}>
+		<div className={styles.title}>
+			Date:
+			<div className={styles.amount}>{slice?.points?.[0]?.data.x}</div>
 		</div>
-	);
+		<div className={styles.title}>
+			Cogopoints:
+			<div className={styles.amount}>{slice?.points?.[0]?.data.y}</div>
+		</div>
+	</div>
+);
+
+function BusinessRewardStats({ graphData = [], loading = false }) {
 	return (
 		<div className={styles.graph_div}>
 			{loading ? (
@@ -24,9 +25,9 @@ function BusinessRewardStats({ graphData = [], loading = false }) {
 					src={GLOBAL_CONSTANTS.image_url.spinner_loader}
 					width={50}
 					height={50}
+					alt="loader"
 				/>
 			) : (
-
 				<ResponsiveLine
 					data={graphData}
 					margin={{ top: 30, right: 45, bottom: 40, left: 52 }}
@@ -60,7 +61,7 @@ function BusinessRewardStats({ graphData = [], loading = false }) {
 					useMesh
 					legends={[]}
 					enableSlices="x"
-					sliceTooltip={rendersliceToolTip}
+					sliceTooltip={styledToolTip}
 				/>
 			)}
 		</div>

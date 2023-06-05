@@ -16,21 +16,23 @@ function UserPerformance({ selectedDate = {}, setSelectedDate = () => {} }) {
 	const { referral_network = {}, referral_user = [] } = data || {};
 	const { list = [] } = referral_network || {};
 
+	const commonProps = {
+		setShowOptions,
+		setShowActivityModal,
+		loading,
+	};
+
 	return (
 		<>
 			<PerformanceStats selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
 			<div className={styles.list_div}>
 				<NetworkList
-					setShowOptions={setShowOptions}
-					setShowActivityModal={setShowActivityModal}
+					{...commonProps}
 					data={list || []}
-					loading={loading}
 				/>
 				<UserList
-					setShowOptions={setShowOptions}
-					setShowActivityModal={setShowActivityModal}
+					{...commonProps}
 					data={referral_user || []}
-					loading={loading}
 				/>
 			</div>
 			<ActivityModal

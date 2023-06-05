@@ -4,44 +4,16 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
-import { FIRST_LEVEL_DATA, SECOUND_LEVEL_DATA, THIRD_LEVEL_DATA } from '../../../../constants';
-import { handleValues } from '../../../../utils/handleValue';
+import { formatData, getUserLevel } from '../../../../utils/network-stats-helper';
 
 import styles from './styles.module.css';
 
-function NetworkStats({ network_data = {}, statsLoading = false }) {
-	const networkLength = Object.keys(network_data).length;
+function NetworkStats({ networkData = {}, statsLoading = false }) {
+	const networkLength = Object.keys(networkData).length;
 
-	const getUserLevel = () => {
-		let userLevel = [];
-		if (networkLength <= 10) {
-			userLevel = FIRST_LEVEL_DATA;
-		} else if (networkLength <= 20) {
-			userLevel = SECOUND_LEVEL_DATA;
-		} else {
-			userLevel = THIRD_LEVEL_DATA;
-		}
-		return userLevel;
-	};
+	const network = formatData(networkData);
 
-	const mapdata = (data) => {
-		const keys = Object.keys(data || {});
-		let details = [];
-		keys.forEach((key, index) => {
-			details = [
-				...details,
-				{
-					x : `L${index + 1}`,
-					y : handleValues(data?.[key]),
-				},
-			];
-		});
-		return details;
-	};
-
-	const network = mapdata(network_data);
-
-	const filteredNetwork = network.filter((item) => getUserLevel().includes(item?.x));
+	const filteredNetwork = network.filter((item) => getUserLevel(networkLength).includes(item?.x));
 	const newData = [
 		{
 			id   : 'network',
@@ -49,7 +21,7 @@ function NetworkStats({ network_data = {}, statsLoading = false }) {
 		},
 	];
 
-	if (isEmpty(network_data) && !statsLoading) {
+	if (isEmpty(networkData) && !statsLoading) {
 		return (
 			<div className={styles.container}>
 				<Image
@@ -57,6 +29,7 @@ function NetworkStats({ network_data = {}, statsLoading = false }) {
 					width={40}
 					height={40}
 					className={styles.empty_image}
+					alt="empty"
 				/>
 			</div>
 		);
@@ -66,12 +39,11 @@ function NetworkStats({ network_data = {}, statsLoading = false }) {
 		<div className={styles.container}>
 			<div className={styles.title}>Network</div>
 			{statsLoading ? (
-				[...Array(6)].map((itm) => (
+				[...Array(6).keys()].map((itm) => (
 					<Placeholder className={styles.networks_skeleton} key={itm} />
 				))
 			) : (
 				<div className={styles.graph_div}>
-
 					<ResponsiveLine
 						data={newData}
 						colors={['#F9AE64']}
@@ -112,7 +84,6 @@ function NetworkStats({ network_data = {}, statsLoading = false }) {
 					/>
 				</div>
 			)}
-
 		</div>
 	);
 }

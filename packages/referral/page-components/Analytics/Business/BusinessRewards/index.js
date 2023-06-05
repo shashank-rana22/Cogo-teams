@@ -17,10 +17,10 @@ function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () =
 
 	const { count = {}, data = {} } = businessData || {};
 	const { kyc_verified = 0, shipment = 0, subscription = 0 } = count || {};
-	const total = kyc_verified + shipment + subscription;
+	const totalBusinessReward = kyc_verified + shipment + subscription;
 
 	const formatCount = {
-		total,
+		total: totalBusinessReward,
 		kyc_verified,
 		shipment,
 		subscription,

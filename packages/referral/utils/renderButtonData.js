@@ -5,6 +5,14 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const renderUserProfile = ({ account_type = '', checkPartner, partnerId, id }) => {
+	if (account_type === 'importer_exporter') {
+		const urlPrefix = `/${partnerId}`;
+		const url = checkPartner ? `${urlPrefix}/prm/${id}` : `${urlPrefix}/details/demand/${id}`;
+		window.open(url, '_blank');
+	}
+};
+
 function ListButtons({
 	item = {},
 	setShowActivityModal = () => {},
@@ -12,29 +20,22 @@ function ListButtons({
 }) {
 	const router = useRouter();
 	const { partnerId } = useSelector(({ profile }) => ({
-		partnerId: profile.partner?.id,
+		partnerId: profile.partner.id,
 	}));
 
 	const { organization_data = [], referee_data = {}, total_child_count = 0, name = '' } = item;
-	const { id: refereeId = '', name: refereename = '' } = referee_data || {};
+	const { id: refereeId = '', name: refereeName = '' } = referee_data || {};
 
 	const emptyOrg = isEmpty(organization_data);
 
 	const { account_type = '', tags = [], id = '' } = organization_data?.[0] || [];
 	const checkPartner = (tags || []).includes('partner');
-	const userProfile = () => {
-		if (account_type === 'importer_exporter' && checkPartner) {
-			window.open(`/${partnerId}/prm/${id}`, '_blank');
-		} else if (account_type === 'importer_exporter' && !checkPartner) {
-			window.open(`/${partnerId}/details/demand/${id}`, '_blank');
-		}
-	};
 
 	const handleNetwork = () => {
 		setShowOptions({});
 		router.push(
-			`/referral/dashboard/[referrer_id]?user_name=${name || refereename}`,
-			`/referral/dashboard/${refereeId}?user_name=${name || refereename}`,
+			`/referral/dashboard/[referrer_id]?user_name=${name || refereeName}`,
+			`/referral/dashboard/${refereeId}?user_name=${name || refereeName}`,
 		);
 	};
 
@@ -53,7 +54,12 @@ function ListButtons({
 			>
 				Activity Log
 			</Button>
-			<Button size="md" themeType="secondary" onClick={userProfile} disabled={emptyOrg}>
+			<Button
+				size="md"
+				themeType="secondary"
+				onClick={() => renderUserProfile({ account_type, checkPartner, partnerId, id })}
+				disabled={emptyOrg}
+			>
 				View Profile
 			</Button>
 		</div>

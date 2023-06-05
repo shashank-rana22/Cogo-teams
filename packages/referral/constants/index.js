@@ -105,3 +105,29 @@ export const BUSINESS_REWARDS_OPTIONS = [
 		name  : 'subscription',
 	},
 ];
+
+export const SUB_TITLE_OPTIONS = [
+	{
+		title : 'Pending',
+		name  : 'pending',
+	},
+	{
+		title : 'Accepted',
+		name  : 'accepted',
+	},
+	{
+		title : 'Rejected',
+		name  : 'rejected',
+	},
+];
+
+export const SIGN_UP_TITLE_OPTIONS = [
+	{
+		title : 'Users',
+		name  : 'active_user_count',
+	},
+	{
+		title : 'Affiliates',
+		name  : 'affiliate_count',
+	},
+];

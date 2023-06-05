@@ -22,6 +22,12 @@ function BusinessPerformance({ selectedDate = {} }) {
 
 	const { shipment = {}, subscription = {} } = data || {};
 
+	const businessProps = {
+		businessFilterType,
+		setBusinessFilterType,
+		selectedDate,
+	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.stats_container}>
@@ -54,18 +60,10 @@ function BusinessPerformance({ selectedDate = {} }) {
 			</div>
 			<div className={styles.title}>Business that are</div>
 			<div className={styles.tab_container}>
-				<BusinessStats
-					businessFilterType={businessFilterType}
-					setBusinessFilterType={setBusinessFilterType}
-					selectedDate={selectedDate}
-				/>
+				<BusinessStats {...businessProps} />
 			</div>
 			<div className={styles.header}>Rewards</div>
-			<BusinessRewards
-				businessFilterType={businessFilterType}
-				setBusinessFilterType={setBusinessFilterType}
-				selectedDate={selectedDate}
-			/>
+			<BusinessRewards {...businessProps} />
 
 		</div>
 	);

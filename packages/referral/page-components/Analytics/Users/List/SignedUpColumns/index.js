@@ -1,24 +1,12 @@
+import { SIGN_UP_TITLE_OPTIONS } from '../../../../../constants';
+
 import styles from './styles.module.css';
 
 function SignedUpColumns({ index = 0, item = {} }) {
 	const { direct_data = {} } = item || {};
-	const { active_user_count = 0, affiliate_count = 0 } = direct_data || {};
-
-	const subTitleOptions = [
-		{
-			title : 'Users',
-			name  : 'users',
-			count : active_user_count,
-		},
-		{
-			title : 'Affiliates',
-			name  : 'affiliates',
-			count : affiliate_count,
-		},
-	];
 
 	return (
-		subTitleOptions.map((node) => (
+		SIGN_UP_TITLE_OPTIONS.map((node) => (
 			<div className={styles.node} key={node.name}>
 				{index === 0 ? (
 					<div className={styles.node_title}>
@@ -26,7 +14,7 @@ function SignedUpColumns({ index = 0, item = {} }) {
 					</div>
 				) : ''}
 				<div className={styles.node_count}>
-					{node.count}
+					{direct_data[node.name] || 0}
 				</div>
 			</div>
 		))

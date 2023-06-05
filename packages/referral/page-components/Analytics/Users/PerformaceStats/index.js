@@ -58,6 +58,7 @@ function PerformanceStats({ selectedDate = {} }) {
 									src={GLOBAL_CONSTANTS.image_url.spinner_loader}
 									width={50}
 									height={50}
+									alt="loader"
 								/>
 							) : (
 								<ResponsiveLine
@@ -99,9 +100,8 @@ function PerformanceStats({ selectedDate = {} }) {
 							)}
 						</div>
 					)}
-
 				</div>
-				<NetworkStats network_data={network_data} statsLoading={statsLoading} />
+				<NetworkStats networkData={network_data} statsLoading={statsLoading} />
 			</div>
 		</div>
 	);
