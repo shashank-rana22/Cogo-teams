@@ -25,10 +25,7 @@ function SignedDocuments({ profileData, loading }) {
 				<div className={styles.approval_done}>1/5</div>
 			</div>
 
-			<StyledTable
-				columns={columns}
-				data={list}
-			/>
+			<StyledTable columns={columns} data={list} loading={loading} />
 
 			<ReviewModal showModal={showModal} setShowModal={setShowModal} />
 		</div>
