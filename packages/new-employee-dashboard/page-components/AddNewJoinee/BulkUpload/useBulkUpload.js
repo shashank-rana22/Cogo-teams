@@ -18,11 +18,7 @@ const useBulkUpload = () => {
 	const router = useRouter();
 
 	const onClickViewSampleFile = () => {
-		window.open(
-			SAMPLE_DOCUMENT_URL,
-			'_blank',
-			'noreferrer',
-		);
+		window.open(SAMPLE_DOCUMENT_URL, '_blank', 'noreferrer');
 	};
 
 	const bulkUploadNewHire = async (val) => {
