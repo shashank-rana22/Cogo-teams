@@ -13,7 +13,6 @@ function Item(props) {
 		control,
 		span,
 		label = '',
-		showLabel = true,
 		error = {},
 		rules = {},
 		className = '',

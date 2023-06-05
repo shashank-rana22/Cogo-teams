@@ -40,7 +40,6 @@ const extraApiPayload = (values, end_point, task) => {
 			service_data : [],
 		};
 
-		console.log('here');
 		payload.service_data = task.task_field_ids.map((item) => {
 			const data = {};
 

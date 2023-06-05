@@ -7,6 +7,7 @@ import SopCard from './Card';
 import EmptyState from './EmptyState';
 import Header from './Header';
 import SopLoader from './SopLoader';
+import styles from './styles.module.css';
 
 function SopOld({ shipment_data = {}, primary_service = {} }) {
 	const [filters, setFilters] = useState([]);
