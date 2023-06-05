@@ -2,8 +2,6 @@ import { useRequest } from '@cogoport/request';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useCallback, useEffect } from 'react';
 
-// import dummyData from '../dummyData/get_shipment.json';
-
 export default function useGetShipment({ defaultParams = {}, defaultFilters = {}, initialCall = true }) {
 	const [{ loading: isGettingShipment, data }, trigger] = useRequest({
 		url          : '/get_shipment',

@@ -3,8 +3,9 @@ import { TermsAndConditions } from '@cogoport/surface-modules';
 import { useContext, useEffect } from 'react';
 
 import ManageServices from './ManageServices';
+import styles from './styles.module.css';
 
-const notToShowManageServices = ['service_ops1', 'service_ops2']; // send to stakeholder_config
+// const notToShowManageServices = ['service_ops1', 'service_ops2']; // send to stakeholder_config
 
 function Overview() {
 	const { shipment_data, refetchServices = () => {} } = useContext(ShipmentDetailContext);
@@ -14,7 +15,7 @@ function Overview() {
 	}, [refetchServices]);
 
 	return (
-		<div>
+		<div className={styles.container}>
 			<ManageServices />
 
 			{shipment_data?.terms_and_conditions?.length ? (
