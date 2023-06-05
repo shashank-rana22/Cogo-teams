@@ -61,6 +61,7 @@ importers:
       '@cogoport/cogo-verse-analytics': workspace:0.1.0
       '@cogoport/components': ^1.0.359
       '@cogoport/contracts': workspace:0.1.0
+      '@cogoport/controlled-booking': workspace:0.1.0
       '@cogoport/core': workspace:0.1.0
       '@cogoport/cost-booking-desk': workspace:0.1.0
       '@cogoport/document-desk': workspace:0.1.0
@@ -125,6 +126,7 @@ importers:
       '@cogoport/cogo-verse-analytics': link:../packages/cogo-verse-analytics
       '@cogoport/components': 1.0.413_2bs67kxzunawqq2xngzau3gtue
       '@cogoport/contracts': link:../packages/contracts
+      '@cogoport/controlled-booking': link:../packages/controlled-booking
       '@cogoport/core': link:../common/core
       '@cogoport/cost-booking-desk': link:../packages/cost-booking-desk
       '@cogoport/document-desk': link:../packages/document-desk
@@ -241,7 +243,7 @@ importers:
       '@cogoport/icons-react': ^1.0.72
       '@cogoport/utils': ^1.2.2
     dependencies:
-      '@cogoport/icons-react': 1.0.75
+      '@cogoport/icons-react': 1.0.73
       '@cogoport/utils': 1.2.10
 
   common/map-components:
@@ -440,7 +442,7 @@ importers:
       react: 18.2.0
       uuid: ^9.0.0
     dependencies:
-      '@cogoport/components': 1.0.418_lvbbuavnhuzpvbs62bwnmuhwfq
+      '@cogoport/components': 1.0.423_lvbbuavnhuzpvbs62bwnmuhwfq
       '@cogoport/context': link:../context
       '@cogoport/forms': link:../forms
       '@cogoport/globalization': link:../globalization
@@ -807,7 +809,7 @@ importers:
       uuid: ^9.0.0
     dependencies:
       '@cogoport/charts': 1.0.3_react@18.2.0
-      '@cogoport/components': 1.0.421_wlatc5jtlfcjqbf2alnfpqxjai
+      '@cogoport/components': 1.0.419_wlatc5jtlfcjqbf2alnfpqxjai
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.71_react@18.2.0
@@ -878,6 +880,28 @@ importers:
       '@cogoport/utils': 1.2.10
       axios: 1.4.0
       axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
+      react: 18.2.0
+
+  packages/controlled-booking:
+    specifiers:
+      '@cogoport/components': ^1.0.423
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': ^0.0.1
+      '@cogoport/icons-react': ^1.0.65
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      react: 18.2.0
+    dependencies:
+      '@cogoport/components': 1.0.423_lvbbuavnhuzpvbs62bwnmuhwfq
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.73_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
       react: 18.2.0
 
   packages/cost-booking-desk:
@@ -952,6 +976,7 @@ importers:
     specifiers:
       '@cogoport/components': ^1.0.322
       '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': ^0.0.1
       '@cogoport/icons-react': ^1.0.51
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
@@ -966,6 +991,7 @@ importers:
     dependencies:
       '@cogoport/components': 1.0.413_wlatc5jtlfcjqbf2alnfpqxjai
       '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.71_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
@@ -1148,12 +1174,12 @@ importers:
       file-saver: ^2.0.5
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.421_tubbkacy7ji5owi7odlqbrijxa
+      '@cogoport/components': 1.0.423_lvbbuavnhuzpvbs62bwnmuhwfq
       '@cogoport/constants': link:../../common/constants
       '@cogoport/context': link:../../common/context
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/icons-react': 1.0.73_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
@@ -1201,10 +1227,10 @@ importers:
       '@cogoport/utils': ^1.2.10
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.421_tubbkacy7ji5owi7odlqbrijxa
+      '@cogoport/components': 1.0.419_lvbbuavnhuzpvbs62bwnmuhwfq
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/icons-react': 1.0.73_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
@@ -1294,12 +1320,12 @@ importers:
       react: 18.2.0
       uuid: ^9.0.0
     dependencies:
-      '@cogoport/components': 1.0.421_tubbkacy7ji5owi7odlqbrijxa
+      '@cogoport/components': 1.0.423_cor42tcbxcdki2jnxeludukzn4
       '@cogoport/constants': link:../../common/constants
       '@cogoport/context': link:../../common/context
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/icons-react': 1.0.76_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
@@ -1336,13 +1362,13 @@ importers:
       react-hook-form: ^7.43.3
       uuid: ^9.0.0
     dependencies:
-      '@cogoport/components': 1.0.421_tubbkacy7ji5owi7odlqbrijxa
+      '@cogoport/components': 1.0.423_lvbbuavnhuzpvbs62bwnmuhwfq
       '@cogoport/constants': link:../../common/constants
       '@cogoport/context': link:../../common/context
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.75_react@18.2.0
-      '@cogoport/maps': 1.0.3_guhuyhrafl7yprlcl7n6dekiki
+      '@cogoport/icons-react': 1.0.73_react@18.2.0
+      '@cogoport/maps': 1.0.3_gbfbxfylkmejm6nw6z2454h4va
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/ocean-modules': link:../../common/ocean-modules
@@ -1376,12 +1402,12 @@ importers:
       file-saver: ^2.0.5
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.421_tubbkacy7ji5owi7odlqbrijxa
+      '@cogoport/components': 1.0.423_cor42tcbxcdki2jnxeludukzn4
       '@cogoport/constants': link:../../common/constants
       '@cogoport/context': link:../../common/context
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/icons-react': 1.0.76_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
@@ -1465,11 +1491,11 @@ importers:
       stylelint: ^14.16.1
     dependencies:
       '@cogoport/charts': 1.0.3_react@18.2.0
-      '@cogoport/components': 1.0.423_tubbkacy7ji5owi7odlqbrijxa
+      '@cogoport/components': 1.0.423_lvbbuavnhuzpvbs62bwnmuhwfq
       '@cogoport/constants': link:../../common/constants
       '@cogoport/forms': link:../../common/forms
       '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/icons-react': 1.0.73_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
       '@cogoport/store': link:../../common/store
@@ -3104,13 +3130,13 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.421_tubbkacy7ji5owi7odlqbrijxa:
-    resolution: {integrity: sha512-JiYJrtvaiWgSQx4fa1+I/CPU0+uUAQ/8m2dU5fUJ7KZLLSr9rDjmcKWNoPYVdyjnCcoEuSnPkmyauWwLYwaFhA==}
+  /@cogoport/components/1.0.419_lvbbuavnhuzpvbs62bwnmuhwfq:
+    resolution: {integrity: sha512-BCEeLUJWMMAdWbxw4LFZEf5Z3ecTqvVAcBkc4j7yxT6W4m8aEIzOU7+Y7FLWdQw3tGJOyAUNhF9PE5njt4YQcQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react-dom: ^18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/icons-react': 1.0.73_react@18.2.0
       '@tippyjs/react': 4.2.6_react@18.2.0
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5
@@ -3137,8 +3163,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.421_wlatc5jtlfcjqbf2alnfpqxjai:
-    resolution: {integrity: sha512-JiYJrtvaiWgSQx4fa1+I/CPU0+uUAQ/8m2dU5fUJ7KZLLSr9rDjmcKWNoPYVdyjnCcoEuSnPkmyauWwLYwaFhA==}
+  /@cogoport/components/1.0.419_wlatc5jtlfcjqbf2alnfpqxjai:
+    resolution: {integrity: sha512-BCEeLUJWMMAdWbxw4LFZEf5Z3ecTqvVAcBkc4j7yxT6W4m8aEIzOU7+Y7FLWdQw3tGJOyAUNhF9PE5njt4YQcQ==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react-dom: ^18.2.0
@@ -3170,13 +3196,46 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components/1.0.423_tubbkacy7ji5owi7odlqbrijxa:
+  /@cogoport/components/1.0.423_cor42tcbxcdki2jnxeludukzn4:
     resolution: {integrity: sha512-GlXVeGU/lg8/O1lDkL+AYUu9PW7A6S3JpobcNnT1py1ak9vZ2+6T3Y39TG6YLrUPRyh6mRkkWUpJV52HgDOshA==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react-dom: ^18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/icons-react': 1.0.76_react@18.2.0
+      '@tippyjs/react': 4.2.6_react@18.2.0
+      '@types/quill': 2.0.10
+      '@types/react-rte': 0.16.5
+      axios: 1.4.0
+      axios-hooks: 4.0.0_axios@1.4.0+react@18.2.0
+      date-fns: 2.30.0
+      fs: 0.0.1-security
+      react: 18.2.0
+      react-date-range: 1.4.0_kzhlcyde2l6xjiirkbg7jzhosa
+      react-hook-form: 7.43.9_react@18.2.0
+      react-quill: 2.0.0_react@18.2.0
+      react-rte: 0.16.5_react@18.2.0
+      react-table: 7.8.0_react@18.2.0
+      tippy.js: 6.3.7
+    optionalDependencies:
+      next: 12.3.1_react@18.2.0
+    transitivePeerDependencies:
+      - '@babel/core'
+      - babel-plugin-macros
+      - debug
+      - encoding
+      - fibers
+      - node-sass
+      - sass
+    dev: false
+
+  /@cogoport/components/1.0.423_lvbbuavnhuzpvbs62bwnmuhwfq:
+    resolution: {integrity: sha512-GlXVeGU/lg8/O1lDkL+AYUu9PW7A6S3JpobcNnT1py1ak9vZ2+6T3Y39TG6YLrUPRyh6mRkkWUpJV52HgDOshA==}
+    peerDependencies:
+      '@cogoport/icons-react': ^1.0.23
+      react-dom: ^18.2.0
+    dependencies:
+      '@cogoport/icons-react': 1.0.73_react@18.2.0
       '@tippyjs/react': 4.2.6_react@18.2.0
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5
@@ -3283,6 +3342,15 @@ packages:
       react: 18.2.0
     dev: false
 
+  /@cogoport/icons-react/1.0.73:
+    resolution: {integrity: sha512-WRK2oE7P+rPiyu6EU9jKBRRC5zxvd35DL7+AhsoiNckkfyzOuCVSeb6H6Ddk7YpKF5OytchBo/cM3Vc7+mYAGw==}
+    peerDependencies:
+      react: 18.2.0
+      react-dom: 18.2.0
+    dependencies:
+      '@cogoport/icons': 1.0.73
+    dev: false
+
   /@cogoport/icons-react/1.0.73_react@18.2.0:
     resolution: {integrity: sha512-WRK2oE7P+rPiyu6EU9jKBRRC5zxvd35DL7+AhsoiNckkfyzOuCVSeb6H6Ddk7YpKF5OytchBo/cM3Vc7+mYAGw==}
     peerDependencies:
@@ -3293,22 +3361,13 @@ packages:
       react: 18.2.0
     dev: false
 
-  /@cogoport/icons-react/1.0.75:
-    resolution: {integrity: sha512-Dpkl04lwmUy0XBX8FDLzG7Iv4owcPLHlsULg+AXATZv0cz000u28e8aiLCxZl1+rscxLrcEoCrP6gfAKPqikhA==}
+  /@cogoport/icons-react/1.0.76_react@18.2.0:
+    resolution: {integrity: sha512-rdrORP+ixIRnxA4G3JRIgAk+zcx9hyho0YkrUYG+VKHZZG5Z9Hp1Onpz35mGUNKhGNlPIZvxIG3vN0Gir9u6CQ==}
     peerDependencies:
       react: 18.2.0
       react-dom: 18.2.0
     dependencies:
-      '@cogoport/icons': 1.0.75
-    dev: false
-
-  /@cogoport/icons-react/1.0.75_react@18.2.0:
-    resolution: {integrity: sha512-Dpkl04lwmUy0XBX8FDLzG7Iv4owcPLHlsULg+AXATZv0cz000u28e8aiLCxZl1+rscxLrcEoCrP6gfAKPqikhA==}
-    peerDependencies:
-      react: 18.2.0
-      react-dom: 18.2.0
-    dependencies:
-      '@cogoport/icons': 1.0.75
+      '@cogoport/icons': 1.0.76
       react: 18.2.0
     dev: false
 
@@ -3320,8 +3379,8 @@ packages:
     resolution: {integrity: sha512-R6cLIHkkIkIb0DqbcfrkKto/PTKkvfx2F0PFKlh3Ohlx+VilH/sZGM9rIpqmuC9+RPjF9JtbcDjLyj7dIbwLMg==}
     dev: false
 
-  /@cogoport/icons/1.0.75:
-    resolution: {integrity: sha512-8fNQj+Ia62usyWh4kOwaPVrifWLGB1C5TbGvXBXYgfKeY1Fe8VPUp9nTrfYt8ucQmRMXDbC1OeG7REjAXYGapw==}
+  /@cogoport/icons/1.0.76:
+    resolution: {integrity: sha512-MpDg5quwGBeLXV2p0pwbmyIDt1aGtl8SPKHX+CzMJawFjZGKrymwnHn6gcypwQIWtxE8BZ+9SJWMAndLGXyOCQ==}
     dev: false
 
   /@cogoport/maps/1.0.3_bykzbvvitan6xtqocjq62ilw64:
@@ -3345,19 +3404,6 @@ packages:
       react-dom: ^18.2.0
     dependencies:
       '@cogoport/icons-react': 1.0.73_react@18.2.0
-      leaflet: 1.9.3
-      react: 18.2.0
-      react-leaflet: 4.2.1_leaflet@1.9.3+react@18.2.0
-    dev: false
-
-  /@cogoport/maps/1.0.3_guhuyhrafl7yprlcl7n6dekiki:
-    resolution: {integrity: sha512-nWNhGesbEQNqBGy1KO9O85eU04zcVaIVvuHXcq7CKa+pij74yU3BKB4PTBvoSrbLHAgIctxe8KOQVzBVgTLl/w==}
-    peerDependencies:
-      '@cogoport/icons-react': ^1.0.23
-      react: ^18.2.0
-      react-dom: ^18.2.0
-    dependencies:
-      '@cogoport/icons-react': 1.0.75_react@18.2.0
       leaflet: 1.9.3
       react: 18.2.0
       react-leaflet: 4.2.1_leaflet@1.9.3+react@18.2.0

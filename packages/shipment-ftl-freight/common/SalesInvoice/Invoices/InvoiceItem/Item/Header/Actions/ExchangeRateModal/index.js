@@ -5,6 +5,7 @@ import useGetAllExchangeRates from '../../../../../../../../hooks/useGetAllExcha
 import CardList from '../../../../../../commons/CardList';
 
 import fields from './fields';
+import styles from './styles.module.css';
 
 function ExchangeRateModal({
 	setExchangeRate = () => {},
@@ -31,13 +32,18 @@ function ExchangeRateModal({
 		list = currencyArray.filter((item) => item?.currency.includes(q.toUpperCase()));
 	}
 
+	const onClose = () => {
+		setExchangeRate(false);
+	};
+
 	return (
 		<Modal
 			show
-			onClose={() => setExchangeRate(false)}
+			onClose={onClose}
 			loading={loading}
 			showCloseIcon={false}
 			closeOnOuterClick={false}
+			className={styles.custom_modal}
 		>
 			<Modal.Header title={`Exchange Rates of ${invoice.invoice_currency}`} />
 			<Modal.Body>
@@ -51,9 +57,7 @@ function ExchangeRateModal({
 				<CardList fields={fields} data={list} loading={loading} />
 			</Modal.Body>
 			<Modal.Footer>
-				<div>
-					<Button themeType="secondary">Close</Button>
-				</div>
+				<Button themeType="secondary" onClick={onClose}>Close</Button>
 			</Modal.Footer>
 		</Modal>
 	);

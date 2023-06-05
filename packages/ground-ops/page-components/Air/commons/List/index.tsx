@@ -1,4 +1,4 @@
-import { Pagination } from '@cogoport/components';
+import { Button, Pagination } from '@cogoport/components';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import React, { useState, ReactFragment } from 'react';
 
@@ -19,6 +19,10 @@ interface Props {
 	Child?: ReactFragment;
 	setViewDoc?: Function;
 	setItem?: Function;
+	listAPI?: Function;
+	edit?: boolean | string;
+	setEdit?: Function;
+	setGenerate?: Function;
 }
 
 function List({
@@ -32,6 +36,10 @@ function List({
 	Child = () => {},
 	setViewDoc = () => {},
 	setItem = () => {},
+	listAPI = () => {},
+	edit = false,
+	setEdit = () => {},
+	setGenerate = () => {},
 } :Props) {
 	const { data = {} } = listData;
 	const { shipmentPendingTasks = [] } = data;
@@ -48,7 +56,7 @@ function List({
 
 		if (loading || shipmentPendingTasks.length) {
 			return (showlist).map((singleitem) => (
-				<div className="card-list-data">
+				<div className="card-list-data" key={singleitem.id}>
 					<ListItem
 						singleitem={singleitem}
 						fields={fields}
@@ -58,6 +66,10 @@ function List({
 						Child={Child}
 						setViewDoc={setViewDoc}
 						setItem={setItem}
+						listAPI={listAPI}
+						edit={edit}
+						setEdit={setEdit}
+						setGenerate={setGenerate}
 					/>
 					{singleitem.blCategory === 'hawb' && ['approval_pending', 'approved_awb'].includes(activeTab) && (
 						<div
@@ -78,6 +90,39 @@ function List({
 										handleProgramDetail(singleitem);
 									}}
 								/>
+							)}
+						</div>
+					)}
+					{activeTab === 'amendment' && (
+						<div
+							style={{ '--length': isOpen ? 0 : '-20px' } as React.CSSProperties}
+							className={styles.amaendment_accordian_style}
+						>
+							{isOpen === singleitem.id ? (
+								<Button
+									themeType="linkUi"
+									onClick={() => {
+										setIsOpen(null);
+									}}
+								>
+									Show Less
+									<IcMArrowDown
+										style={{ transform: 'rotate(180deg)', cursor: 'pointer' }}
+									/>
+								</Button>
+							) : (
+								<Button
+									size="md"
+									themeType="linkUi"
+									onClick={() => {
+										handleProgramDetail(singleitem);
+									}}
+								>
+									<span>Show More</span>
+									<IcMArrowDown
+										style={{ cursor: 'pointer' }}
+									/>
+								</Button>
 							)}
 						</div>
 					)}
