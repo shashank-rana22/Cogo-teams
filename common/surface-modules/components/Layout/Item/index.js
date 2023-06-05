@@ -47,6 +47,8 @@ function Item(props) {
 		};
 	}
 
+	if (!newProps.type) return null;
+
 	const Element = getElementController(newProps.type);
 
 	const flex = ((span || 12) / 12) * 100 - 1;

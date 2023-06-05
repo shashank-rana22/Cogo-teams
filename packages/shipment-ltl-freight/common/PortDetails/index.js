@@ -19,13 +19,16 @@ function PortDetails({ data = {}, primary_service = {} }) {
 
 	const handleLocationDetails = (location, icdPortInfo) => (
 		<>
-			<div className={styles.port_code}>
-				<div className={` ${styles.code}`}>
-					(
-					{location?.port_code || location?.postal_code}
-					)
+			{(location?.port_code || location?.postal_code)
+			&& (
+				<div className={styles.port_code}>
+					<div className={` ${styles.code}`}>
+						(
+						{location?.port_code || location?.postal_code}
+						)
+					</div>
 				</div>
-			</div>
+			)}
 
 			<Tooltip
 				placement="bottom"
@@ -38,7 +41,8 @@ function PortDetails({ data = {}, primary_service = {} }) {
 					</div>
 				)}
 			>
-				<div className={cl`${styles.value}`}>{location?.name}</div>
+				{location?.name
+				&& <div className={cl`${styles.value}`}>{location?.name}</div>}
 			</Tooltip>
 
 		</>

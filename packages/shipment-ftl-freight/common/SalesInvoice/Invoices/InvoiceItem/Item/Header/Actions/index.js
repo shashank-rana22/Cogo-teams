@@ -1,4 +1,5 @@
 import { Button, Popover, Tooltip, cl } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import {
 	IcMOverflowDot,
 	IcMInfo,
@@ -6,13 +7,17 @@ import {
 	IcMEmail,
 } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
+import NoStyleButton from '@cogoport/surface-modules/common/NoStyleButton';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React, { useState, useContext } from 'react';
 
+import ClickableDiv from '../../../../../../ClickableDiv';
 import EditInvoice from '../EditInvoice';
 
 import AddCustomerInvoice from './AddCustomerInvoice';
+import FillCustomerPortalData from './FillCustomerPortalData';
 import styles from './styles.module.css';
+import UpdateCustomerInvoice from './UpdateCustomerInvoice';
 
 const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
@@ -27,7 +32,6 @@ const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 function Actions({
 	invoice = {},
 	bfInvoiceRefetch = () => {},
-	shipment_data = {},
 	invoiceData = {},
 	isIRNGenerated = false,
 	salesInvoicesRefetch = () => {},
@@ -40,8 +44,13 @@ function Actions({
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [addCustomerInvoice, setAddCustomerInvoice] = useState(false);
+	const [updateCustomerInvoice, setUpdateCustomerInvoice] = useState(false);
+	const [fillCustomerData, setFillCustomerData] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setShowOTPModal] = useState(false);
+
+	const { shipment_data } = useContext(ShipmentDetailContext);
+
 	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
@@ -115,51 +124,43 @@ function Actions({
 				<>
 					{editInvoicesVisiblity ? (
 						<div style={{ width: '100%' }}>
-							<div
-								role="button"
-								tabIndex={0}
+							<ClickableDiv
 								className={styles.text}
 								onClick={handleClickInvoice}
 							>
 								Edit Invoices
 
-							</div>
+							</ClickableDiv>
 							<div className={styles.line} />
 						</div>
 					) : null}
 
 					<div>
-						<div
-							role="button"
-							tabIndex={0}
+						<ClickableDiv
 							className={styles.text}
 							onClick={handleClickCurrency}
 						>
 							Change Currency
-						</div>
+						</ClickableDiv>
 						<div className={styles.line} />
 					</div>
 
-					<div
-						role="button"
-						tabIndex={0}
+					<ClickableDiv
 						className={styles.text}
 						onClick={handleClickRemarks}
 					>
 						Add Remarks
-					</div>
+					</ClickableDiv>
 
 					{invoice?.billing_address?.trade_party_type === 'self' ? (
 						<div>
 							<div className={styles.line} />
-							<div
-								role="button"
-								tabIndex={0}
+							<ClickableDiv
 								className={styles.text}
 								onClick={handleChangePayment}
 							>
 								Change Payment Mode
-							</div>
+							</ClickableDiv>
 						</div>
 					) : null}
 				</>
@@ -168,66 +169,53 @@ function Actions({
 			{(invoice.exchange_rate_document || []).map((url) => (
 				<div key={url}>
 					{commonActions ? <div className={styles.line} /> : null}
-					<div
-						role="button"
-						tabIndex={0}
+					<ClickableDiv
 						className={styles.text}
 						onClick={() => window.open(url, '_blank')}
 					>
 						Exchange Rate Document
-					</div>
+					</ClickableDiv>
 					<div className={styles.line} />
-					<div
-						role="button"
-						tabIndex={0}
+					<ClickableDiv
 						// onClick={handleExchangeRateModal}
 						className={styles.text}
 					>
 						Exchange Rate Sheet
 
-					</div>
-					{shipment_data?.shipment_type === 'ftl_freight' ? (
-						<div>
-							<div className={styles.line} />
-							<div
-								role="button"
-								tabIndex={0}
-								className={styles.text}
-								onClick={handleCustomerInvoice}
-							>
-								{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
+					</ClickableDiv>
+					<div>
+						<div className={styles.line} />
+						<ClickableDiv
+							className={styles.text}
+							onClick={handleCustomerInvoice}
+						>
+							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
 								&nbsp;
-								{invoice?.status === 'approved' ? '/Generate' : ''}
-								Customer Invoice
-							</div>
-							{invoice?.status === 'approved' ? (
-								<div
-									role="button"
-									tabIndex={0}
-									className={styles.text}
-									// onClick={handleUpdateCustomerInvoice}
-								>
-									Update Customer Invoice
-								</div>
-							) : null}
-						</div>
-					) : null}
+							{['reviewed', 'approved'].includes(invoice?.status) ? '/Generate' : ''}
+							Customer Invoice
+						</ClickableDiv>
+						{['reviewed', 'approved'].includes(invoice?.status) ? (
+							<ClickableDiv
+								className={styles.text}
+								onClick={() => { setShow(false); setUpdateCustomerInvoice(true); }}
+							>
+								Update Customer Invoice
+							</ClickableDiv>
+						) : null}
+					</div>
 				</div>
 			))}
-			{shipment_data?.shipment_type === 'ftl_freight'
-			&& invoice?.status === 'approved' ? (
+			{['reviewed', 'approved'].includes(invoice?.status) ? (
 				<div>
 					<div className={styles.line} />
-					<div
-						role="button"
-						tabIndex={0}
+					<ClickableDiv
 						className={styles.text}
-						// onClick={handleFillCustomerPortal}
+						onClick={() => { setShow(false); setFillCustomerData(true); }}
 					>
 						Fill Shipment Data For Customer Portal
-					</div>
+					</ClickableDiv>
 				</div>
-				) : null}
+			) : null}
 		</div>
 	);
 
@@ -253,7 +241,7 @@ function Actions({
 							</Button>
 						) : null}
 
-						{invoice?.status === 'reviewed' ? (
+						{['reviewed', 'approved'].includes(invoice?.status) ? (
 							<Button size="sm" onClick={() => setShowOTPModal(true)}>
 								Send OTP for Approval
 							</Button>
@@ -326,14 +314,12 @@ function Actions({
 							theme="light"
 							onClickOutside={() => setShow(false)}
 						>
-							<div
-								role="button"
-								tabIndex={0}
+							<ClickableDiv
 								className={styles.icon_more_wrapper}
 								onClick={() => setShow(!show)}
 							>
 								<IcMOverflowDot />
-							</div>
+							</ClickableDiv>
 						</Popover>
 						)
 						: (
@@ -416,14 +402,39 @@ function Actions({
 					refetch={handleRefetch}
 				/>
 			) : null}
+
+			{updateCustomerInvoice ? (
+				<UpdateCustomerInvoice
+					show={updateCustomerInvoice}
+					setShow={setUpdateCustomerInvoice}
+					closeModal={() => setUpdateCustomerInvoice(false)}
+					refetch={handleRefetch}
+					shipmentData={shipment_data}
+					invoice={invoice}
+				/>
+			) : null}
+
+			{fillCustomerData ? (
+				<FillCustomerPortalData
+					show={fillCustomerData}
+					closeModal={() => setFillCustomerData(false)}
+					handleRefetch={handleRefetch}
+					shipmentData={shipment_data}
+					invoice={invoice}
+				/>
+			) : null}
+
 			<AddCustomerInvoice
 				show={addCustomerInvoice}
 				setShow={setAddCustomerInvoice}
 				closeModal={() => setAddCustomerInvoice(false)}
 				handleRefetch={handleRefetch}
 				invoice={invoice}
-				shipment_data={shipment_data}
+				shipmentData={shipment_data}
 			/>
+
+			<NoStyleButton>Edit Invoices</NoStyleButton>
+
 		</div>
 	);
 }

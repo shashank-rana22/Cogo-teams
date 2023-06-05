@@ -98,6 +98,8 @@ function Child({
 					{rowFields.map((controlItem) => {
 						const newControl = getNewControls(controlItem);
 
+						if (!newControl.type) return null;
+
 						const Element = getElementController(newControl.type);
 
 						const errorOriginal = getErrorMessage({

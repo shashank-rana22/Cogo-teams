@@ -2,16 +2,17 @@ import { Button } from '@cogoport/components';
 import React, { useRef } from 'react';
 
 import useCreateShipmentDocument from '../../../../../../../../../hooks/useCreateShipmentDocument';
+import useGetShipmentFortigoTripDetail from '../../../../../../../../../hooks/useGetShipmentFortigoTripDetail';
+import useListOrganizationTradeParties from '../../../../../../../../../hooks/useListOrganizationTradeParties';
 import useGeneratePdf from '../hooks/useGeneratePdf';
-import useGetCustomInvoiceData from '../hooks/useGetCustomInvoiceData';
 import useGetImageSource from '../hooks/useGetImageSource';
-import useGetTradeParties from '../hooks/useGetTradeParties';
 import { componentMapper } from '../utils/componentMapper';
+import { getPayload } from '../utils/getPayload';
 
 import styles from './styles.module.css';
 
 function Invoices({
-	shipment_data = {},
+	shipmentData = {},
 	invoice = {},
 	tradePartnerData = {},
 	handleRefetch = () => {},
@@ -24,38 +25,54 @@ function Invoices({
 		handleClose();
 	};
 
-	const { docLoading, apiTrigger } = useCreateShipmentDocument({
-		callback: callbackCustomerInvoice,
-		shipment_data,
-		invoice,
-	});
+	const { docLoading, apiTrigger } = useCreateShipmentDocument({ refetch: callbackCustomerInvoice });
 
-	const ref = useRef(null);
+	const InvoiceRef = useRef(null);
 	const { loading: generateLoading, generatePdf } = useGeneratePdf();
-	const { data: tradePartyData } = useGetTradeParties({ shipment_data });
-	const shipperTradePartyPanNumber = 'AABCA8056G';
-	// tradePartnerData?.list?.[0]?.trade_partner_details?.registration_number;
+
+	const params = {
+		defaultParams: {
+			documents_data_required         : true,
+			other_addresses_data_required   : true,
+			poc_data_required               : true,
+			billing_addresses_data_required : true,
+			page_limit                      : 50,
+		},
+		defaultFilters: {
+			trade_party_type : 'self',
+			status           : 'active',
+		},
+		organization_id: shipmentData?.importer_exporter_id,
+	};
+
+	const { data: tradePartyData } = useListOrganizationTradeParties({ ...params });
 
 	const callbackGeneratePdf = (res) => {
-		apiTrigger(res?.data?.pdf_url);
+		const pdfUrl = res?.data?.pdf_url;
+		const payload = getPayload({ shipmentData, invoice, pdfUrl });
+		apiTrigger(payload);
 	};
+
 	const { logoData, stampData } = useGetImageSource();
-	const { loading: customDataLoading, data: customData } = useGetCustomInvoiceData({
-		shipment_id                 : shipment_data?.serial_id,
-		invoice_combination_id      : invoice?.id,
-		shipper_registration_number : shipperTradePartyPanNumber,
+
+	const { loading: customDataLoading, data: customData } = useGetShipmentFortigoTripDetail({
+		defaultParams: {
+			shipment_id            : shipmentData?.serial_id,
+			invoice_combination_id : invoice?.id,
+		},
 	});
+	const finalRegistrationNumber = customData?.customer_details?.customer_pan;
+
 	const generateInvoice = () => {
-		const html = `<html><body>
-		${ref.current.innerHTML}</body></html>`;
+		const html = `<html><body>${InvoiceRef.current.innerHTML}</body></html>`;
 		generatePdf({ html, scale: 0.7, callback: callbackGeneratePdf });
 	};
 
-	const Component = componentMapper[shipperTradePartyPanNumber].component;
+	const Component = finalRegistrationNumber ? componentMapper[finalRegistrationNumber].component : null;
 
 	return (
 		<>
-			<div ref={ref}>
+			<div ref={InvoiceRef}>
 				{Component ? (
 					<Component
 						logoData={logoData}
@@ -63,16 +80,15 @@ function Invoices({
 						customData={customData}
 						tradePartnerData={tradePartnerData}
 						invoice={invoice}
-						// tradePartyData={tradePartyData}
-						importerExporterId={shipment_data?.importer_exporter_id}
+						tradePartyData={tradePartyData}
+						importerExporterId={shipmentData?.importer_exporter_id}
 					/>
 				) : null}
 			</div>
 			<div className={styles.button_wrapper}>
 				<Button
-					className="primary md"
 					onClick={generateInvoice}
-					// loading={generateLoading || docLoading || customDataLoading}
+					loading={generateLoading || docLoading || customDataLoading}
 				>
 					Submit
 				</Button>

@@ -493,6 +493,15 @@ function asyncQuotaList() {
 	};
 }
 
+function asyncFortigoLocations() {
+	return {
+		labelKey    : 'location_name',
+		valueKey    : 'id',
+		endpoint    : 'list_shipment_fortigo_trip_locations',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -534,4 +543,5 @@ export {
 	asyncPlanPricingList,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncFortigoLocations,
 };

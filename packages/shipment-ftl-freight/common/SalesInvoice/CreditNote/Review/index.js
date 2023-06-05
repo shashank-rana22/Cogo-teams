@@ -2,6 +2,7 @@ import { Modal, Button, Checkbox } from '@cogoport/components';
 import { useState } from 'react';
 
 import useUpdateShipmentCreditNote from '../../../../hooks/useUpdateShipmentCreditNote';
+import ClickableDiv from '../../../ClickableDiv';
 
 import styles from './styles.module.css';
 
@@ -37,10 +38,10 @@ function Review({
 						checked={value}
 						onChange={() => setValue(!value)}
 					/>
-					<div role="button" tabIndex={0} onClick={() => setValue(!value)}>
+					<ClickableDiv onClick={() => setValue(!value)}>
 						I have verified the Credit Note and ensured that all the services taken
 						& charges incurred during the shipment have been billed to the customer
-					</div>
+					</ClickableDiv>
 				</form>
 			</Modal.Body>
 

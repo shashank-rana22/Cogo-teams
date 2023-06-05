@@ -1,23 +1,64 @@
-import { Popover } from '@cogoport/components';
+import { Popover, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useContext } from 'react';
 
 import CancelService from '../CancelService';
-// import EditParams from '../EditParams';
 import SupplierReallocation from '../SupplierReallocation';
+import VerifyTruck from '../VerifyAssetModal';
+import VerifyDriver from '../VerifyDriverModal';
 
+import {
+	EditTruckNumberControls,
+	// EditETAControls,
+	// EditDriverControls,
+} from './Controls';
+import Form from './Forms';
 import styles from './styles.module.css';
 import getCanCancelService from './utils/getCanCancelService';
-// import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
 const actionButtons = [
 	{ label: 'Edit', value: 'supplier_reallocation' },
-	{ label: 'Edit Params', value: 'edit_params' },
+	{ label: 'Edit Truck Number', value: 'edit_truck_number' },
+	{ label: 'Edit ETA/ETD', value: 'edit_eta_etd' },
+	{ label: 'Edit Driver Details', value: 'edit_driver_details' },
+	{ label: 'Verify Truck', value: 'verify_truck' },
+	{ label: 'Verify Driver', value: 'verify_driver' },
 	{ label: 'Cancel', value: 'cancel' },
 ];
+
+export const getTrucklistWithId = (all_services) => {
+	const servicesList = (all_services || []).filter(
+		(service) => service?.service_type !== 'subsidiary_service' && service?.truck_number,
+	);
+
+	const truckLists = servicesList.map((service) => ({
+		value : service?.id,
+		label : service?.truck_number,
+		...service,
+	}));
+
+	return truckLists;
+};
+
+export const getDriverDetails = (all_services) => {
+	const servicesList = (all_services || []).filter(
+		(service) => service?.truck_number,
+	);
+	const driverDetails = servicesList.map((service) => (
+		{
+			service_id          : `${service?.id}`,
+			truck_number        : `${service?.truck_number}`,
+			driver_name         : `${service?.driver_details?.name}`,
+			contact_number      : `${service?.driver_details?.contact}`,
+			service_provider_id : `${service?.service_provider_id}`,
+		}
+	));
+
+	return driverDetails;
+};
 
 function EditCancelService({ serviceData = {} }) {
 	const [showModal, setShowModal] = useState(false);
@@ -36,8 +77,11 @@ function EditCancelService({ serviceData = {} }) {
 	};
 
 	actionButtons[0].show = getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder });
-	// actionButtons[1].show = getCanEditParams({ shipment_data, user_data, serviceData, activeStakeholder });
-	actionButtons[2].show = getCanCancelService({ state, activeStakeholder });
+	actionButtons[1].show = true;
+	actionButtons[2].show = true;
+	actionButtons[3].show = true;
+	// actionButtons[4].show = true;
+	// actionButtons[4].show = getCanCancelService({ state, activeStakeholder });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;
@@ -70,8 +114,21 @@ function EditCancelService({ serviceData = {} }) {
 			{showModal === 'supplier_reallocation'
 			&& <SupplierReallocation setShow={setShowModal} serviceData={servicesData} />}
 
-			{/* {showModal === 'edit_params'
-			&& <EditParams setShow={setShowModal} serviceData={serviceData} />} */}
+			{showModal === 'verify_truck'
+			&& (
+				<VerifyTruck
+					setShow={setShowModal}
+					truckList={getTrucklistWithId(serviceData)}
+				/>
+			)}
+
+			{showModal === 'verify_driver'
+			&& (
+				<VerifyDriver
+					setShow={setShowModal}
+					driverList={getDriverDetails(serviceData)}
+				/>
+			)}
 
 			{showModal === 'cancel' && 	(
 				<CancelService
@@ -80,6 +137,27 @@ function EditCancelService({ serviceData = {} }) {
 					service_type={service_type}
 				/>
 			)}
+
+			{showModal ? (
+				<Modal
+					show={showModal}
+					onClose={() => setShowModal(false)}
+					size="md"
+				>
+					<Modal.Header title="ADD INVOICING PARTY" />
+					<Modal.Body>
+						<Form
+							controls={EditTruckNumberControls}
+							heading="EDIT TRUCK NUMBER"
+							type="truck_number"
+							truckList={getTrucklistWithId(serviceData)}
+							// refetchServices={refetchServices}
+						/>
+					</Modal.Body>
+
+				</Modal>
+			) : null}
+
 		</div>
 	);
 }

@@ -207,6 +207,9 @@ importers:
       '@cogoport/supply-dashboards':
         specifier: workspace:0.1.0
         version: link:../packages/supply-dashboards
+      '@cogoport/surface-modules':
+        specifier: workspace:0.1.0
+        version: link:../common/surface-modules
       '@cogoport/ticket-management':
         specifier: workspace:0.1.1
         version: link:../packages/ticket-management
@@ -401,6 +404,12 @@ importers:
       '@cogoport/maps':
         specifier: ^1.0.2
         version: 1.0.2(@cogoport/icons-react@1.0.75)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/navigation-configs':
+        specifier: workspace:^0.1.0
+        version: link:../navigation-configs
+      '@cogoport/next':
+        specifier: workspace:^0.1.0
+        version: link:../next
       '@cogoport/request':
         specifier: workspace:^0.1.0
         version: link:../request
@@ -617,6 +626,9 @@ importers:
       react:
         specifier: 18.2.0
         version: 18.2.0
+      uuid:
+        specifier: ^9.0.0
+        version: 9.0.0
 
   packages/Translation:
     dependencies:
@@ -1841,9 +1853,6 @@ importers:
       '@cogoport/request':
         specifier: workspace:^0.1.0
         version: link:../../common/request
-      '@cogoport/scope-select':
-        specifier: workspace:^0.1.0
-        version: link:../../common/scope-select
       '@cogoport/shipment-chat':
         specifier: workspace:^0.1.0
         version: link:../../common/shipment-chat
