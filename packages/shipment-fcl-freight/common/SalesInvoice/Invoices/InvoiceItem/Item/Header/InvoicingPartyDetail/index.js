@@ -33,27 +33,26 @@ function InvoicingPartyDetail({
 				{billing_address?.name || billing_address?.business_name}
 			</div>
 
-			{shipment_data?.entity_id
-						!== GLOBAL_CONSTANTS.country_entity_ids.VN ? (
-							<div className={styles.gst}>
-								<div className={styles.label}>GST Number :</div>
-								<Tooltip
-									theme="light"
-									placement="bottom"
-									content={(
-										<div className={styles.tooltip_div}>
-											{billing_address?.address}
-										</div>
-									)}
-								>
-									<div
-										className={styles.gst_number}
-									>
-										{billing_address?.tax_number}
-									</div>
-								</Tooltip>
+			{!GLOBAL_CONSTANTS.restricted_country_id_invoicing.includes(shipment_data?.entity_id) ? (
+				<div className={styles.gst}>
+					<div className={styles.label}>GST Number :</div>
+					<Tooltip
+						theme="light"
+						placement="bottom"
+						content={(
+							<div className={styles.tooltip_div}>
+								{billing_address?.address}
 							</div>
-				) : null}
+						)}
+					>
+						<div
+							className={styles.gst_number}
+						>
+							{billing_address?.tax_number}
+						</div>
+					</Tooltip>
+				</div>
+			) : null}
 		</div>
 	);
 }

@@ -2,6 +2,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
+import CONSTANTS from '../../../configurations/constant.json';
 import useGetCreditNotes from '../../../hooks/useGetCreditNotes';
 import useListBfSalesInvoices from '../../../hooks/useListBfSalesInvoices';
 import useOrgOutStanding from '../../../hooks/useOrgOutStanding';
@@ -40,8 +41,9 @@ function Invoices({
 		disableAction = true;
 	}
 
-	const showForOldShipments = invoiceData?.invoice_trigger_date && shipment_data?.serial_id <= 120347
-		&& !invoiceStatuses.some((ele) => ['reviewed', 'approved'].includes(ele));
+	const showForOldShipments = invoiceData?.invoice_trigger_date
+	&& shipment_data?.serial_id <= CONSTANTS.invoice_check_id
+	&& !invoiceStatuses.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;
 

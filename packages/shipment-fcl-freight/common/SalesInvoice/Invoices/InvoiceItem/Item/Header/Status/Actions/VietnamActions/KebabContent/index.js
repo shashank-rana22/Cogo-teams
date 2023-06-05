@@ -6,6 +6,7 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import CONSTANTS from '../../../../../../../../../../configurations/constant.json';
 import styles from '../../styles.module.css';
 
 function Actions({
@@ -19,7 +20,7 @@ function Actions({
 	setIsEditInvoice = () => {},
 }) {
 	const [show, setShow] = useState(false);
-	const showForOldShipments =	shipment_data.serial_id <= 120347 && invoice.status === 'pending';
+	const showForOldShipments =	shipment_data.serial_id <= CONSTANTS.invoice_check_id && invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
