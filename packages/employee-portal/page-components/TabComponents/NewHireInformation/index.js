@@ -1,6 +1,6 @@
 import { Accordion, Pill } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import AddressDetails from './AddressDetails';
@@ -9,7 +9,7 @@ import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
 
 function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }) {
-	const { progress_stats = {} } = data || {};
+	const { progress_stats = {}, documents } = data || {};
 	const {
 		personal_details = {},
 	} = progress_stats;
@@ -20,21 +20,36 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 	} = personal_details;
 	const content_mapping = [
 		{
-			title     : 'PERSONAL INFORMATION',
-			content   : PersonalInformation,
-			isPending : personal_information,
+			name        : 'personal_information',
+			content     : PersonalInformation,
+			isCompleted : personal_information,
 		},
 		{
-			title     : 'IDENTIFICATION DOCUMENTS',
-			content   : IdentificationDocuments,
-			isPending : identification_documents,
+			name        : 'identification_documents',
+			content     : IdentificationDocuments,
+			isCompleted : identification_documents,
 		},
 		{
-			title     : 'ADDRESS DETAILS',
-			content   : AddressDetails,
-			isPending : address_details,
+			name        : 'address_details',
+			content     : AddressDetails,
+			isCompleted : address_details,
 		},
 	];
+
+	const isDocsApproved = (documents || []).filter((doc) => (
+		['aadhaar_card', 'pan_card'].includes(doc?.document_type))).every((ele) => (ele?.status === 'approved'));
+
+	const renderPills = ({ name, isCompleted }) => {
+		if (isCompleted) {
+			return <Pill color="green">Completed</Pill>;
+		}
+
+		if (!isDocsApproved && name === 'identification_documents') {
+			return <Pill color="orange">Approval Pending</Pill>;
+		}
+
+		return <Pill color="yellow">Pending</Pill>;
+	};
 
 	return (
 		<div className={styles.container}>
@@ -51,11 +66,11 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 			<div className={styles.subcontainer}>
 
 				{content_mapping.map((item) => {
-					const { content: Component, isPending } = item;
+					const { content: Component, isCompleted, name } = item;
 
 					return (
 						<div
-							key={item.title}
+							key={name}
 							role="presentation"
 							className={styles.accordion}
 						>
@@ -63,11 +78,9 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 								type="text"
 								title={(
 									<div className={styles.status}>
-										<div className={styles.accordion_title}>{item.title}</div>
+										<div className={styles.accordion_title}>{startCase(name)}</div>
 
-										{isPending
-											? <Pill color="green">Completed</Pill>
-											: <Pill color="yellow">Pending</Pill>}
+										{renderPills({ isCompleted })}
 
 									</div>
 								)}
