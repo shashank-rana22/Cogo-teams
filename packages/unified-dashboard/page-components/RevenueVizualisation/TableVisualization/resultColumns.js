@@ -25,7 +25,7 @@ function ResultColumns({ columns = [] }) {
 			accessor : (item) => {
 				if (column === 'organization_name') {
 					return (
-						<Tooltip content={item?.[`${column}`]} animation="shift-toward">
+						<Tooltip content={item?.[`${column}`]} placement="bottom">
 							<div>
 								<div className={styles.data}>{startCase(item?.[`${column}`])}</div>
 							</div>
