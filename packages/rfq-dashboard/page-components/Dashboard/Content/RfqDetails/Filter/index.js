@@ -42,9 +42,8 @@ function Filter({
 				value={filterStore.sortBy}
 				onChange={(val) => setFilterStore((prev) => ({
 					...prev,
-					sortBy            : val,
-					lowProfitability  : undefined,
-					highProfitability : undefined,
+					sortBy: val,
+
 				}))}
 			/>
 		</div>

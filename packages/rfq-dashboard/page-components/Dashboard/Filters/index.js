@@ -1,10 +1,11 @@
-import controls from '../../../configurations/filter-controls';
+import getControls from '../../../configurations/filter-controls';
 import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
 function Filters({ formProps }) {
 	const { control } = formProps;
+	const controls = getControls();
 
 	return (
 		<div className={styles.container}>
