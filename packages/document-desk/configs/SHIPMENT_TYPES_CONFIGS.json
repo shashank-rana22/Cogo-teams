@@ -1,0 +1,10 @@
+[
+    {
+        "label": "FCL Freight",
+        "value": "fcl_freight"
+    },
+    {
+        "label": "LCL Freight",
+        "value": "lcl_freight"
+    }
+]
