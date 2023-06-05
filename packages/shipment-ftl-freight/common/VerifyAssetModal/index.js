@@ -157,17 +157,17 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 			<Modal
 				show
 				onClose={() => setShow(false)}
-				className={styles.custom_modal}
 				closeOnOuterClick={false}
 				showCloseIcon
 			>
-				<Modal.Body>
-					<Modal.Header title={(
+				<Modal.Header
+					title={(
 						<div className={styles.heading}>
 							Truck List
 						</div>
 					)}
-					/>
+				/>
+				<Modal.Body>
 					<div style={{ marginTop: '1rem' }}>No Truck Found</div>
 				</Modal.Body>
 			</Modal>
@@ -178,19 +178,16 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 		<Modal
 			show
 			onClose={() => setShow(false)}
-			className={styles.custom_modal}
 			closeOnOuterClick={false}
 			showCloseIcon={!loading}
 		>
+			<Modal.Header title={(
+				<div>
+					Truck List
+				</div>
+			)}
+			/>
 			<Modal.Body>
-
-				<Modal.Header title={(
-					<div className={styles.heading}>
-						Truck List
-					</div>
-				)}
-				/>
-
 				<div>
 					{showUploadDoc ? (
 						<AWSUploadModal
@@ -222,7 +219,6 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 					)}
 				</div>
 			</Modal.Body>
-
 		</Modal>
 	);
 }

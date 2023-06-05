@@ -9,8 +9,6 @@ import formatIps from '../common/SalesInvoice/helpers/format-ips';
 import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
 import incoTermMapping from '../configurations/inco-term-mapping.json';
 
-const exportServiceTypes = 'fcl_freight_service';
-
 const geo = getGeoConstants();
 
 const isAllServicesTaken = (
@@ -210,8 +208,7 @@ const useEditInvoicePref = ({
 			if (!isEmpty(isBasicFreightInvService)) {
 				(finalNewSelectParties || []).forEach((party) => {
 					const BFLineItem = (party?.services || []).some(
-						(service) => service.serviceKey === isBasicFreightInvService.serviceKey
-							&& exportServiceTypes === isBasicFreightInvService.service_type,
+						(service) => service.serviceKey === isBasicFreightInvService.serviceKey,
 					);
 
 					if (party?.services?.length > 1 && BFLineItem) {

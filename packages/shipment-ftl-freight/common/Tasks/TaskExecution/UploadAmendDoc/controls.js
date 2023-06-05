@@ -1,28 +1,8 @@
 import getExtraControls from './extraControlAmend';
 
 const getControls = (data) => {
-	const containers_count = [
-		{
-			label : 'Container Quantity',
-			name  : 'containers_count',
-			type  : 'number',
-			span  : 6,
-			min   : 1,
-			rules : {
-				required: { value: true, message: 'Container quantity is required' },
-			},
-		},
-	];
-
 	const controls = getExtraControls[data.document_type] || [];
-	const bls = ['draft_bill_of_lading', 'draft_house_bill_of_lading'];
 
-	if (
-		data.shipment_type === 'fcl_freight'
-		&& bls.includes(data.document_type)
-	) {
-		return [...controls, ...containers_count];
-	}
 	return controls;
 };
 

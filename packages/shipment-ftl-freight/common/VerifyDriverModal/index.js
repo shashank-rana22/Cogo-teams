@@ -128,7 +128,7 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 						<li key={driver.name}>
 							<div>
 								<span>
-									driver Name:
+									Driver Name:
 									{' '}
 									{driver.driver_name || driver.name}
 								</span>
@@ -175,21 +175,18 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 			<Modal
 				show
 				onClose={() => setShow(false)}
-				className={styles.custom_modal}
 				closeOnOuterClick={false}
 				showInternalCloseIcon={!loading}
 			>
+				<Modal.Header title={(
+					<div className={styles.heading}>
+						Driver List
+					</div>
+				)}
+				/>
 				<Modal.Body>
-
-					<Modal.Header title={(
-						<div className={styles.heading}>
-							Driver List
-						</div>
-					)}
-					/>
 					<div style={{ marginTop: '1rem' }}>No Driver Found</div>
 					{SkeletonGroup}
-
 				</Modal.Body>
 
 			</Modal>
@@ -200,18 +197,16 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 		<Modal
 			show
 			onClose={() => setShow(false)}
-			className={styles.custom_modal}
 			closeOnOuterClick={false}
 			showInternalCloseIcon={!loading}
 		>
+			<Modal.Header title={(
+				<div className={styles.heading}>
+					Driver List
+				</div>
+			)}
+			/>
 			<Modal.Body>
-
-				<Modal.Header title={(
-					<div className={styles.heading}>
-						Driver List
-					</div>
-				)}
-				/>
 				<div>
 					{showInternalUploadDoc ? (
 						<AWSUploadModal
@@ -242,7 +237,6 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 					)}
 				</div>
 			</Modal.Body>
-
 		</Modal>
 	);
 }

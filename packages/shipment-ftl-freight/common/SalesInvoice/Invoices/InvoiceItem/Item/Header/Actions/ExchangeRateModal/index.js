@@ -7,7 +7,6 @@ import CardList from '../../../../../../commons/CardList';
 import fields from './fields';
 
 function ExchangeRateModal({
-	showExchangeRate = false,
 	setExchangeRate = () => {},
 	invoice = {},
 }) {
@@ -34,11 +33,13 @@ function ExchangeRateModal({
 
 	return (
 		<Modal
-			show={showExchangeRate}
+			show
 			onClose={() => setExchangeRate(false)}
 			loading={loading}
+			showCloseIcon={false}
+			closeOnOuterClick={false}
 		>
-			<Modal.Header title={`Exchange Rates of${invoice.invoice_currency}`} />
+			<Modal.Header title={`Exchange Rates of ${invoice.invoice_currency}`} />
 			<Modal.Body>
 				<Input
 					name="q"

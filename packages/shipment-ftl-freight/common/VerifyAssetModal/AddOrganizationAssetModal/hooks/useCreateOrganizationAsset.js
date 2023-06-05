@@ -28,7 +28,9 @@ const useCreateOrganizationAsset = ({
 	const createOrgAsset = async (values) => {
 		try {
 			const formattedValues = getFormattedValues(values);
+
 			const payload = formattedValuesForAsset(formattedValues);
+
 			if (values) {
 				await createOrganizationAssetAPI.trigger({
 					data: {

@@ -1,9 +1,7 @@
 const controlsFunc = (organization_id, item) => [
 	{
-		label        : 'Driver details *',
-		span         : 12,
-		showOptional : false,
-		name         : 'driver_details_heading',
+		label         : 'Driver details *',
+		showOnlyLabel : true,
 	},
 	{
 		name        : 'name',
@@ -42,21 +40,10 @@ const controlsFunc = (organization_id, item) => [
 		label       : '   ',
 		name        : 'mobile_number',
 		placeholder : 'Enter Mobile Number',
-		type        : 'mobile-number-select',
-		value       : {
-			mobile_country_code : item?.mobile_country_code,
-			mobile_number       : item?.mobile_number,
-		},
-		numberKey : 'mobile_number',
-		codeKey   : 'mobile_country_code',
-		span      : 4,
-		select2   : 'new',
-		rules     : {
-			required : true,
-			validate : (value) => (value?.mobile_country_code && value?.mobile_number
-				? undefined
-				: 'Mobile Number is Required'),
-		},
+		type        : 'number',
+		span        : 4,
+		rules       : { required: 'Organization is required' },
+
 	},
 	{
 		label       : '   ',
@@ -89,10 +76,8 @@ const controlsFunc = (organization_id, item) => [
 	},
 
 	{
-		label        : 'Address *',
-		span         : 12,
-		name         : 'address_details_heading',
-		showOptional : false,
+		label         : 'Address *',
+		showOnlyLabel : true,
 	},
 	{
 		label       : '   ',
@@ -163,10 +148,8 @@ const controlsFunc = (organization_id, item) => [
 	},
 
 	{
-		label        : 'Pan Details *',
-		span         : 12,
-		name         : 'pan_details_heading',
-		showOptional : false,
+		label         : 'Pan Details *',
+		showOnlyLabel : true,
 	},
 	{
 		label       : '   ',
@@ -201,10 +184,8 @@ const controlsFunc = (organization_id, item) => [
 		name         : 'empty_row',
 	},
 	{
-		label        : 'Driving License Details *',
-		span         : 12,
-		name         : 'driving_license_details_heading',
-		showOptional : false,
+		label         : 'Driving License Details *',
+		showOnlyLabel : true,
 	},
 	{
 		label       : '   ',
@@ -269,10 +250,8 @@ const controlsFunc = (organization_id, item) => [
 		name         : 'empty_row',
 	},
 	{
-		label        : 'Bank Details',
-		span         : 12,
-		name         : 'bank_details_heading',
-		showOptional : false,
+		label         : 'Bank Details',
+		showOnlyLabel : true,
 	},
 	{
 		name         : 'bank_name',
