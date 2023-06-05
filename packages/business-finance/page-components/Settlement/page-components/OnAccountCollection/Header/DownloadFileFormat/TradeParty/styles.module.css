@@ -3,12 +3,12 @@
 	align-items: center;
 	padding: 0 24px;
 	margin: 20px;
-	border: 1px solid #88cad1;
+	border: 1px solid var(--color-tertiary-blue-2);
 	border-radius: 8px;
 }
 
 .radio_group {
-	border-left: 1px solid #88cad1;
+	border-left: 1px solid var(--color-tertiary-blue-2);
 }
 
 .text_select {
@@ -59,6 +59,6 @@
 .icon_delete {
 	width: 15px;
 	height: 15px;
-	color: red;
+	color: var(--color-primary-error-red-1);
 	cursor: pointer;
 }

@@ -2,11 +2,16 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+interface UploadInterface {
+	setShowUrlModal?: React.Dispatch<React.SetStateAction<boolean>>
+	toggleValue?: string
+	refetch?: () => void
+}
 const useGetUploadFile = ({
 	setShowUrlModal,
 	toggleValue,
 	refetch,
-}) => {
+}:UploadInterface) => {
 	const { user_data:userData } = useSelector(({ profile }:any) => ({
 		user_data: profile?.user || {},
 	}));

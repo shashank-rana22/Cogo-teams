@@ -25,13 +25,13 @@
 	gap: 8px;
 	align-items: center;
 	margin-top: 14px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 }
 
 .text_data_bold {
 	align-items: center;
 	margin-top: 14px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 600;
 }
 
@@ -77,6 +77,6 @@
 }
 
 .uploaded {
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 600;
 }

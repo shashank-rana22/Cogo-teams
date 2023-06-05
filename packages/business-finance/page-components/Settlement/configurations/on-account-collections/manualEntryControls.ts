@@ -247,13 +247,7 @@ const getControls = ({
 			};
 		}
 
-		if (
-			isEdit
-			&& (name === 'currency'
-				|| name === 'exchangeRate'
-				|| name === 'docType'
-				|| name === 'utr')
-		) {
+		if (isEdit && ['currency', 'exchangeRate', 'docType', 'utr'].includes(name)) {
 			return {
 				...control,
 				disabled: true,
@@ -268,7 +262,7 @@ const getControls = ({
 				},
 			};
 		}
-		if (name === 'currency' || name === 'bankId') {
+		if (['currency', 'bankId'].includes(name)) {
 			return {
 				...control,
 				onChange: () => setEditMode(true),

@@ -14,7 +14,7 @@
 		}
 
 		.ui_select_input_placeholder {
-			color: #bdbdbd;
+			color: var(--color-secondary-greyscale-4);
 		}
 	}
 }
@@ -36,7 +36,7 @@
 .icon_color {
 	width: 15px;
 	height: 15px;
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 }
 
 .content_filter {
@@ -63,7 +63,7 @@
 }
 
 .container {
-	background: #ffff;
+	background: var(--color-secondary-5);
 }
 
 .filter_search_more_filters {
@@ -79,7 +79,7 @@
 
 .clear_filters {
 	margin-left: 8px;
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	text-decoration: underline;
 	cursor: pointer;
 }

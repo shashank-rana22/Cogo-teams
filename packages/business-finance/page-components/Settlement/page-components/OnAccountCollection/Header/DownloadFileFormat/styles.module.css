@@ -9,7 +9,7 @@
 	padding: 12px 16px;
 	margin: 20px;
 	font-weight: 600;
-	color: #ee3425;
-	border: 1px solid #ee3425;
+	color: var(--color-primary-error-red-2);
+	border: 1px solid var(--color-primary-error-red-2);
 	border-radius: 8px;
 }

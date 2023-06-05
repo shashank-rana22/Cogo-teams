@@ -2,6 +2,22 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
+interface PermissionInterface {
+	show?:boolean
+	id?:string
+	isDelete?:boolean
+}
+interface SelectedInterface {
+	id?:string
+}
+interface CollectionActionInterface {
+	closePermissionModal?:any
+	permissionModal?: PermissionInterface
+	refetch?: () => void
+	itemData?:any
+	setSelectedId?: React.Dispatch<React.SetStateAction<SelectedInterface>>
+	setModalFinalPost?: React.Dispatch<React.SetStateAction<boolean>>
+}
 const useCollectionActions = ({
 	closePermissionModal,
 	permissionModal,
@@ -9,7 +25,7 @@ const useCollectionActions = ({
 	itemData,
 	setSelectedId,
 	setModalFinalPost,
-}) => {
+}:CollectionActionInterface) => {
 	const { accMode, paymentCode, entityType, paymentNumValue } = itemData || {};
 
 	const [{ loading:deleteApiLoading }, deleteApiTrigger] = useRequestBf(

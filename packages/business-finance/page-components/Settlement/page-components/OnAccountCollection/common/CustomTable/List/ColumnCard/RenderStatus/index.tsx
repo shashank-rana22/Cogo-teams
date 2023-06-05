@@ -6,10 +6,10 @@ function RenderStatus({ item }) {
 
 	const showStatus = () => {
 		if (paymentDocumentStatus === 'CREATED') {
-			return <Pill size="md" color="green"> Uploaded</Pill>;
+			return <Pill size="md" color="orange"> Uploaded</Pill>;
 		}
 		if (paymentDocumentStatus === 'DELETED') {
-			return <Pill size="md" color="green">Deleted</Pill>;
+			return <Pill size="md" color="red">Deleted</Pill>;
 		}
 		if (paymentDocumentStatus === 'APPROVED') {
 			return <Pill size="md" color="green">Approved</Pill>;
@@ -18,7 +18,7 @@ function RenderStatus({ item }) {
 			return <Pill size="md" color="green">Posted</Pill>;
 		}
 		if (paymentDocumentStatus === 'POSTING_FAILED') {
-			return <Pill size="md" color="green">Posting Failed</Pill>;
+			return <Pill size="md" color="red">Posting Failed</Pill>;
 		}
 		return <Pill size="md" color="green">Final Posted</Pill>;
 	};

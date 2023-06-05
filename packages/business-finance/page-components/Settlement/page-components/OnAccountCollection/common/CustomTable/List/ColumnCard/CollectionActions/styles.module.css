@@ -3,7 +3,7 @@
 	padding: 10px 5px;
 
 	:hover {
-		color: #f68b21;
+		color: var(--color-accent-orange-2);
 	}
 }
 
@@ -31,7 +31,7 @@
 }
 
 .text_value {
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 600;
 }
 

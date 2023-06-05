@@ -1,6 +1,5 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
-
-import getFormattedAmount from '../../../../../../commons/Utils/getFormattedAmount';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import CollectionActions from './CollectionActions';
 import RenderStatus from './RenderStatus';
@@ -11,7 +10,24 @@ import ToolTipWrapper from './ToolTipWrapper';
 const MAX_BANK_LENGTH = 12;
 const MAX_LENGTH_ECLIPSES = 12;
 
-function ColumnCard({ item, refetch, loading }) {
+interface ColumnCardInterface {
+	refetch?:()=> void
+	loading?:boolean
+	item?:{
+		customerName?:string
+		accCode?:string
+		bankAccountNumber?:string
+		orgSerialId?:string
+		bankName?:string
+		paymentNumValue?:string
+		amount?:string
+		utr?:string
+		entityType?:string
+		currency?:string
+	}
+}
+
+function ColumnCard({ item, refetch, loading }:ColumnCardInterface) {
 	const {
 		customerName = '', bankName = '', accCode = '',
 		bankAccountNumber = '', orgSerialId = '', paymentNumValue = '',
@@ -85,9 +101,14 @@ function ColumnCard({ item, refetch, loading }) {
 
 				<div className={styles.amount}>
 					{loading
-						? <Placeholder width="100px" height="30px" /> : getFormattedAmount({
+						? <Placeholder width="100px" height="30px" /> : formatAmount({
 							amount,
 							currency,
+							options: {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+							},
 						}) || '---'}
 				</div>
 

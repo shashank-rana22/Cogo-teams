@@ -1,4 +1,5 @@
 import { Button, Modal, Popover } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -19,7 +20,7 @@ interface CollectionActionInterface {
 		id?:string
 		accMode?:string
 		paymentDocumentStatus?:string
-		entityType?:number
+		entityType?:string
 	}
 	refetch?:() => void
 }
@@ -30,7 +31,9 @@ interface SelectedInterface {
 
 const GET_STATUS = ['POSTED', 'APPROVED', 'POSTING_FAILED', 'FINAL_POSTED'];
 
-const GET_ENTITY = [101, 201, 301, 401];
+const GET_ENTITY = [];
+
+Object.keys(GLOBAL_CONSTANTS.cogoport_entities).slice(0, -1).forEach((i) => { GET_ENTITY.push(Number(i)); });
 
 function checkPostedValue(STATUS) {
 	const conditionalStatus = ['POSTED', 'FINAL_POSTED'];

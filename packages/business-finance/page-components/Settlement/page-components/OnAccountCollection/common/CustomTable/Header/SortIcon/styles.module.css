@@ -1,10 +1,10 @@
 .asc {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	cursor: pointer;
 }
 
 .desc {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	cursor: pointer;
 }
 

@@ -6,7 +6,7 @@
 
 .div_value {
 	width: 100%;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: bold;
 }
 
@@ -17,7 +17,7 @@
 	width: 100%;
 	padding: 10px 14px;
 	margin: 8px 0 12px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	border: 1px solid #f7d598;
 	border-radius: 8px;
 }

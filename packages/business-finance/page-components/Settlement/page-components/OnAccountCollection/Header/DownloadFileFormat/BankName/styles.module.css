@@ -1,7 +1,7 @@
 .card_details {
 	padding: 24px;
 	margin-bottom: 24px;
-	box-shadow: 0 0 16px rgb(98 127 172 / 20%);
+	box-shadow: 0 0 16px var(--color-secondary-greyscale-5);
 }
 
 .card_flex {
@@ -24,7 +24,7 @@
 .icon_delete {
 	width: 20px;
 	height: 20px;
-	color: red;
+	color: var(--color-primary-error-red-2);
 	cursor: pointer;
 }
 

@@ -1,10 +1,29 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import { formatDate } from './formatDate';
 import styles from './styles.module.css';
 
-const renderUploadedBy = ({ item }) => {
-	const { uploadedBy = '', transactionDate = '' } = item;
+interface UploadInterface {
+	item?:{
+		uploadedBy?:string
+		transactionDate?:Date
+		customerName?:string
+		accCode?:string
+		bankAccountNumber?:string
+		orgSerialId?:string
+		bankName?:string
+		paymentNumValue?:string
+		amount?:string
+		utr?:string
+		entityType?:string
+		currency?:string
+
+	}
+}
+
+const renderUploadedBy = ({ item }:UploadInterface) => {
+	const { uploadedBy = '', transactionDate } = item;
 
 	return (
 		<div className={styles.upload_container}>
@@ -15,7 +34,11 @@ const renderUploadedBy = ({ item }) => {
 
 						<div>
 							{transactionDate
-								? formatDate(new Date(transactionDate), 'dd/MMM/yy', {}, false)
+								? formatDate({
+									date       : new Date(transactionDate),
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})
 								: '--'}
 						</div>
 
@@ -31,7 +54,11 @@ const renderUploadedBy = ({ item }) => {
 
 					<div className={styles.text_truncate}>
 						{transactionDate
-							? formatDate(new Date(transactionDate), 'dd/MMM/yy', {}, false)
+							? formatDate({
+								date       : new Date(transactionDate),
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							})
 							: '--'}
 					</div>
 
