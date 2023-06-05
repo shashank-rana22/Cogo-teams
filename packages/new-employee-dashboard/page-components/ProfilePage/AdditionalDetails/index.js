@@ -47,7 +47,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading }) {
 		}
 
 		if (bankDetails?.[0]?.status === 'active' && name === 'bank_details') {
-			return <Pill color="orange">waiting for Approval</Pill>;
+			return <Pill color="orange">Approval pending</Pill>;
 		}
 
 		return <Pill color="yellow">Pending</Pill>;

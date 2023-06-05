@@ -45,7 +45,7 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 		}
 
 		if (!isDocsApproved && name === 'identification_documents') {
-			return <Pill color="orange">Approval Pending</Pill>;
+			return <Pill color="orange">Waiting for approval</Pill>;
 		}
 
 		return <Pill color="yellow">Pending</Pill>;
