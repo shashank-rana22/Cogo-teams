@@ -147,7 +147,6 @@ const controlsFunc = (organization_id, item) => [
 		label           : 'Truck Proof',
 		name            : 'image_url',
 		type            : 'file',
-		className       : 'primary md',
 		span            : 12,
 		uploadIcon      : 'ic-upload',
 		themeType       : 'secondary',

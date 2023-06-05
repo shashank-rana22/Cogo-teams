@@ -40,7 +40,6 @@ function Approve({
 							onChange={() => {
 								setAddToWallet(false);
 							}}
-							className="primary md"
 						/>
 						Add document to Wallet
 					</div>

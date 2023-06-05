@@ -23,7 +23,6 @@ function WalletForm({
 				<div className={styles.header}>
 					<div className={styles.search_container}>
 						<Input
-							className="primary md"
 							value={searchDocs}
 							placeholder="Search..."
 							suffix={<IcMSearchlight style={{ fontSize: '1rem' }} />}

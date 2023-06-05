@@ -1,7 +1,0 @@
-.remove_hover{
-    :global{
-        .ui_ps_themeType_tertiary:hover{
-            background-color: red;
-        }
-    }
-}

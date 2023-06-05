@@ -135,14 +135,12 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 								<div className={styles.actionRow}>
 									<Button
 										onClick={() => setShowInternalInternal(driver)}
-										className="secondary md"
 										disabled={driverType === 'verified'}
 									>
 										Edit Info
 									</Button>
 									{' '}
 									<Button
-										className="secondary md"
 										onClick={() => {
 											setUploadProof(null);
 											setShowInternalInternal(driver);
@@ -154,7 +152,6 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 										Upload Document
 									</Button>
 									<Button
-										className="secondary md"
 										onClick={() => {
 											createCustomerInvoicefn(driver);
 										}}

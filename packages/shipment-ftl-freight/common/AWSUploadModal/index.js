@@ -37,7 +37,6 @@ function AWSUploadModal({
 
 				<div className={styles.button_wrap}>
 					<Button
-						className="secondary md"
 						onClick={() => {
 							hide();
 							setUploadProof(null);
@@ -46,7 +45,7 @@ function AWSUploadModal({
 						Cancel
 					</Button>
 
-					<Button className="primary md" onClick={handleManualUpload}>
+					<Button onClick={handleManualUpload}>
 						Upload
 					</Button>
 				</div>

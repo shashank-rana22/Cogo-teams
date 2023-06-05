@@ -10,7 +10,6 @@ const customTaskControls = {
 				required : true,
 				min      : 0,
 			},
-			className: 'primary lg',
 		},
 		{
 			name           : 'in_date',
@@ -22,7 +21,6 @@ const customTaskControls = {
 			rules          : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name        : 'unloading_date',
@@ -33,7 +31,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name           : 'out_date',
@@ -45,7 +42,6 @@ const customTaskControls = {
 			rules          : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name        : 'detention_days',
@@ -57,7 +53,6 @@ const customTaskControls = {
 				required : true,
 				min      : 0,
 			},
-			className: 'primary lg',
 		},
 	],
 	adani_wilmar_limited: [
@@ -70,7 +65,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 	],
 	gujarat_milk_marketing: [
@@ -83,7 +77,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name  : 'grn_date',
@@ -93,7 +86,6 @@ const customTaskControls = {
 			rules : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 	],
 	ivl_dhunseri_petrochem: [
@@ -106,7 +98,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name        : 'grade',
@@ -117,7 +108,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 	],
 	orissa_metaliks: [
@@ -130,7 +120,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name        : 'trip_count',
@@ -142,7 +131,6 @@ const customTaskControls = {
 				required : true,
 				min      : 0,
 			},
-			className: 'primary lg',
 		},
 		{
 			name        : 'gcn_number',
@@ -153,7 +141,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 	],
 	kansai_nerolac_paints: [
@@ -166,7 +153,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name  : 'grashof_date',
@@ -176,7 +162,6 @@ const customTaskControls = {
 			rules : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name        : 'supply_chain_number',
@@ -187,7 +172,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 	],
 	varun_beverages_limited: [
@@ -200,7 +184,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name  : 'outward_delivery_number',
@@ -210,7 +193,6 @@ const customTaskControls = {
 			rules : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name  : 'outward_delivery_date',
@@ -220,7 +202,6 @@ const customTaskControls = {
 			rules : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name  : 'inward_delivery_number',
@@ -230,7 +211,6 @@ const customTaskControls = {
 			rules : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name  : 'inward_delivery_date',
@@ -240,7 +220,6 @@ const customTaskControls = {
 			rules : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name        : 'converted_case',
@@ -251,7 +230,6 @@ const customTaskControls = {
 			rules       : {
 				required: true,
 			},
-			className: 'primary lg',
 		},
 		{
 			name        : 'empty_quantity',
@@ -263,7 +241,6 @@ const customTaskControls = {
 				required : true,
 				min      : 0,
 			},
-			className: 'primary lg',
 		},
 	],
 };

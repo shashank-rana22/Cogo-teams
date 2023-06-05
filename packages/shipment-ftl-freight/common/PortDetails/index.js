@@ -58,7 +58,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 			{(destination_location)
 				? (
 					<div className={styles.icon_wrapper}>
-						<IcMPortArrow className="core_ui_icon" />
+						<IcMPortArrow />
 					</div>
 				) : null}
 
