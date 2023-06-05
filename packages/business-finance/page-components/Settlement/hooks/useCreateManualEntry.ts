@@ -236,12 +236,28 @@ const useCreateManualEntry = ({
 		setErrors({ ...errors, ...errorVal });
 	}, [JSON.stringify(errorVal), JSON.stringify(errors)]);
 
+	let docType = '';
+	switch (paymentCode) {
+		case 'REC':
+		case 'PAY':
+			docType = 'PAYMENT';
+			break;
+		case 'CTDSP':
+		case 'CTDS':
+		case 'VTDS':
+			docType = 'TDS';
+			break;
+
+		default:
+			break;
+	}
 	useEffect(() => {
 		if (isEdit) {
 			controls.forEach((c) => {
 				setValue(c.name, selectedItem[c.name]);
 			});
 			setValue('paymentDate', new Date(transactionDate));
+			setValue('docType', docType);
 		}
 	}, []);
 

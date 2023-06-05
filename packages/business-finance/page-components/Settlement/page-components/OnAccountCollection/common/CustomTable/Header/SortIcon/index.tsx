@@ -12,8 +12,8 @@ function SortIcon({ setFilters, sortingKey, filters }:FilterPropsInterface) {
 	const sortEle = () => {
 		let newSortType = '';
 		if (filters?.sortBy === sortingKey || !filters?.sortBy) {
-			newSortType = (filters?.sortType === 'ASC') ? 'DESC' : 'ASC';
-		} else { newSortType = 'DESC'; }
+			newSortType = (filters?.sortType === 'Asc') ? 'Desc' : 'Asc';
+		} else { newSortType = 'Desc'; }
 		setFilters((prev) => ({
 			...prev,
 			sortBy   : sortingKey,
@@ -26,7 +26,7 @@ function SortIcon({ setFilters, sortingKey, filters }:FilterPropsInterface) {
 			<div className={styles.center} onClick={() => { sortEle(); }} role="presentation">
 				<IcMArrowRotateUp
 					className={((filters?.sortBy === sortingKey
-						&& filters?.sortType !== 'DESC')
+						&& filters?.sortType !== 'Desc')
 						|| filters?.sortBy !== sortingKey) && styles.asc}
 				/>
 			</div>
@@ -38,7 +38,7 @@ function SortIcon({ setFilters, sortingKey, filters }:FilterPropsInterface) {
 			>
 				<IcMArrowRotateDown
 					className={filters?.sortBy === sortingKey
-						&& filters?.sortType === 'DESC' && styles.desc}
+						&& filters?.sortType === 'Desc' && styles.desc}
 				/>
 			</div>
 		</div>

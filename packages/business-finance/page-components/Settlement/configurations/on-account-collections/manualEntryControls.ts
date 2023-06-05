@@ -220,7 +220,6 @@ const getControls = ({
 				value: itemData?.bankName,
 			};
 		}
-
 		if (name === 'paymentDate' && isEdit) {
 			return {
 				...control,

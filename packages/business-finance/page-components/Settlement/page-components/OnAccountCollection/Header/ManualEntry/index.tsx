@@ -17,6 +17,7 @@ function ManualEntry({
 		createManualEntry,
 		handleSubmit,
 		showBprNumber,
+		loading,
 	} = useCreateManualEntry({
 		setShowModal,
 		isEdit,
@@ -28,7 +29,6 @@ function ManualEntry({
 		setShowModal({ manual_entry: false });
 		setShow(false);
 	};
-
 	return (
 		<div>
 			<Modal
@@ -80,6 +80,7 @@ function ManualEntry({
 						size="md"
 						type="submit"
 						onClick={handleSubmit(createManualEntry, onError)}
+						loading={loading}
 					>
 						Submit
 					</Button>
