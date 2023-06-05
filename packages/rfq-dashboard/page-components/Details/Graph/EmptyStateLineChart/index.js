@@ -8,7 +8,7 @@ function EmptyLineChart() {
 		<div className={styles.empty_state}>
 			<div className={styles.empty_image_container}>
 				<img
-					src={GLOBAL_CONSTANTS.empty_chart}
+					src={GLOBAL_CONSTANTS.image_url.empty_chart}
 					alt="Empty State"
 					className={styles.empty_state_icon}
 					width="105px"

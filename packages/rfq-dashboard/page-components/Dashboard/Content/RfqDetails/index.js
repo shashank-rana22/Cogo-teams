@@ -14,7 +14,7 @@ function RfqDetails(props) {
 	const { list = [], loading, getRfqsForApproval } = props;
 
 	useEffect(() => {
-		setSelectAll(checkedItems.length === list.length);
+		setSelectAll(checkedItems.length === list.length && list.length !== 0);
 	}, [list.length, checkedItems.length]);
 
 	if (!loading && isEmpty(list)) {
@@ -54,6 +54,7 @@ function RfqDetails(props) {
 				checkedItems={checkedItems}
 				setSelectAll={setSelectAll}
 				setCheckedItems={setCheckedItems}
+				getRfqsForApproval={getRfqsForApproval}
 
 			/>
 

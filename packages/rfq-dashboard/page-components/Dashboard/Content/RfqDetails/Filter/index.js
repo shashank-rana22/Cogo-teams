@@ -9,7 +9,7 @@ function Filter({
 	data, filterStore, setFilterStore, checkedItems,
 	selectAll, setCheckedItems, setSelectAll, getRfqsForApproval,
 }) {
-	const { bulkUpdateRfqState } = useBulkUpdateRfqState();
+	const { bulkUpdateRfqState } = useBulkUpdateRfqState({ getRfqsForApproval });
 
 	const handleSelectAll = () => {
 		setSelectAll((prevSelectAll) => !prevSelectAll);
@@ -18,7 +18,7 @@ function Filter({
 
 	const handleApproveRfq = () => {
 		const payload = checkedItems.map((item) => item.id);
-		bulkUpdateRfqState({ payload, getRfqsForApproval });
+		bulkUpdateRfqState({ payload });
 	};
 
 	return (
@@ -40,7 +40,12 @@ function Filter({
 				prefix="Sort By : "
 				options={SORT_OPTIONS}
 				value={filterStore.sortBy}
-				onChange={(val) => setFilterStore((prev) => ({ ...prev, sortBy: val }))}
+				onChange={(val) => setFilterStore((prev) => ({
+					...prev,
+					sortBy            : val,
+					lowProfitability  : undefined,
+					highProfitability : undefined,
+				}))}
 			/>
 		</div>
 	);
