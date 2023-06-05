@@ -77,37 +77,37 @@
 	color: #ee3425;
 }
 
-.instruction{
-	margin: 40px 0 0 0 ;
+.instruction {
+	margin: 40px 0 0;
 	background: #fff;
-	border-radius: 6px;
-	border: 3px solid #FDFBF6;
-
-}
-.description_box{
-	padding: 10px;
-	background: #FDFBF6;
+	border: 3px solid #fdfbf6;
 	border-radius: 6px;
 }
 
-.test_details{
+.description_box {
 	padding: 10px;
-	display: flex;
-	flex-direction: row;
-	justify-content: space-between;
-	align-items: center;
+	background: #fdfbf6;
+	border-radius: 6px;
 }
 
-.data_box{
-	padding: 10px;
+.test_details {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
 }
 
-.data_display{
-	padding:  0 25px;
+.data_box {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px;
+}
+
+.data_display {
 	display: flex;
 	flex-direction: column;
+	padding: 0 25px;
 }

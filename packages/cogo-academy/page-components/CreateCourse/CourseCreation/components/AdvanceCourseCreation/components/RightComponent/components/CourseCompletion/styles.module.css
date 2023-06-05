@@ -64,18 +64,16 @@
 	&.completion_criteria {
 		width: 50%;
 		padding-right: 5%;
-
 	}
 
 	&.course_completion_rewards_details {
 		width: 50%;
 		padding-right: 5%;
-
 	}
+
 	&.test_id {
 		width: 50%;
 		padding-right: 24px;
-
 	}
 
 	&.certificate_name {
@@ -110,9 +108,8 @@
 
 .group_container {
 	display: flex;
-	width: 100%;
 	flex-wrap: wrap;
-
+	width: 100%;
 }
 
 .group_select_container {
@@ -121,9 +118,8 @@
 
 .group_select {
 	display: flex;
-	flex-direction: row;
+	flex-flow: row wrap;
 	width: 100%;
-	flex-wrap: wrap;
 }
 
 .sub_label {

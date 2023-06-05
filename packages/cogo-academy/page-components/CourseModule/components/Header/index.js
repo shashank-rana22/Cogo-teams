@@ -27,8 +27,11 @@ function Header({
 
 	const handleClick = () => {
 		router.push('/learning/course');
-		setInput('');
-		debounceQuery('');
+
+		if (input_required) {
+			setInput('');
+			debounceQuery('');
+		}
 	};
 
 	return (

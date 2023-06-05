@@ -121,10 +121,9 @@
 	justify-content: space-around;
 	padding: 12px 24px;
 	margin-bottom: 10px;
+	cursor: pointer;
 	background: #fffce6;
 	border-radius: 6px;
-	align-items: center;
-	cursor: pointer;
 }
 
 .box_deactive {
@@ -134,9 +133,7 @@
 	justify-content: space-around;
 	padding: 12px 24px;
 	margin-bottom: 10px;
+	cursor: not-allowed;
 	background: #f9f9f9;
 	border-radius: 6px;
-	align-items: center;
-	cursor: not-allowed;
-
 }

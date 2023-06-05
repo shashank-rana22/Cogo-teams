@@ -88,7 +88,6 @@ function ModuleNavigation({
 													</div>
 
 												</>
-
 											) : (
 												<div className={styles.number}>
 													<div className={styles.index}>

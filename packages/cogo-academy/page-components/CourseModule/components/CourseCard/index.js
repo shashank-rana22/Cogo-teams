@@ -194,7 +194,7 @@ function CourseCard({
 					<Button
 						size="md"
 						themeType="secondary"
-						className={styles.btn}
+						className={`${styles.btn} primary_button`}
 						onClick={() => {
 							handleClick(course_id);
 						}}

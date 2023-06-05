@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useState, useEffect } from 'react';
 
@@ -16,9 +18,9 @@ const useGetCourseDetails = ({ id }) => {
 			const { data = [] } = res || {};
 			setFinalData(data);
 		} catch (error) {
-			// if (error.response?.data) {
-			// 	Toast.error(getApiErrorString(error.response?.data));
-			// }
+			if (error.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 	}, [id, trigger]);
 

@@ -1,10 +1,11 @@
 .container {
 	padding: 10px;
+	margin-top: 48px;
 	background-color: #fff;
 }
 
 .carousel_container {
-	margin: 24px 0;
+	margin: 12px 0;
 
 	:global {
 		.ui_carousel_arrow {
