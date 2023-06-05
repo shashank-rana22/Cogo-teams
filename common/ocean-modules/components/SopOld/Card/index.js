@@ -26,7 +26,6 @@ function SopCard({
 
 	let updatePermission = true;
 
-	// let updatePermission = dataFromOtherSource?.permissions?.add;
 	if (![true, false].includes(updatePermission)) {
 		updatePermission = true;
 	}
@@ -150,7 +149,6 @@ function SopCard({
 			</div>
 
 			<div
-				className={styles.container_rows}
 				role="button"
 				tabIndex={0}
 				onMouseDown={() => setShowActions(true)}
