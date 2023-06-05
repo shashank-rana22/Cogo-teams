@@ -1,4 +1,5 @@
 import { Accordion, Pill } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import IdentificationDocuments from './IdentificationDocuments';
@@ -6,7 +7,7 @@ import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
 
 function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeDetailsLoading }) {
-	const { progress_stats = {} } = profileData || {};
+	const { progress_stats = {}, documents } = profileData || {};
 	const {
 		personal_details = {},
 	} = progress_stats;
@@ -18,22 +19,36 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 	} = personal_details;
 	const data = [
 		{
-			title     : 'PERSONAL INFORMATION',
-			content   : PersonalInformation,
-			isPending : address_details && personal_information,
+			name        : 'personal_information',
+			content     : PersonalInformation,
+			isCompleted : address_details && personal_information,
 		},
 		{
-			title:
-			'IDENTIFICATION DOCUMENTS',
-			content   : IdentificationDocuments,
-			isPending : identification_documents,
+			name        : 'identification_documents',
+			content     : IdentificationDocuments,
+			isCompleted : identification_documents,
 		},
 	];
+
+	const isDocsApproved = (documents || []).filter((doc) => (
+		['aadhaar_card', 'pan_card'].includes(doc?.document_type))).every((ele) => (ele?.status === 'approved'));
+
+	const renderPills = ({ name, isCompleted }) => {
+		if (isCompleted) {
+			return <Pill color="green">Completed</Pill>;
+		}
+
+		if (!isDocsApproved && name === 'identification_documents') {
+			return <Pill color="orange">Approval Pending</Pill>;
+		}
+
+		return <Pill color="yellow">Pending</Pill>;
+	};
 
 	return (
 		<div className={styles.container}>
 			{data.map((item) => {
-				const { content: Component, isPending } = item;
+				const { content: Component, isCompleted, name } = item;
 
 				return (
 					<div
@@ -45,11 +60,9 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 							type="text"
 							title={(
 								<div className={styles.status}>
-									<div className={styles.accordion_title}>{item.title}</div>
+									<div className={styles.accordion_title}>{startCase(name)}</div>
 
-									{isPending
-										? <Pill color="green">Completed</Pill>
-										: <Pill color="yellow">Pending</Pill>}
+									{renderPills({ name, isCompleted })}
 
 								</div>
 							)}

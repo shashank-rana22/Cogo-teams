@@ -1,4 +1,5 @@
 import { Accordion, Pill } from '@cogoport/components';
+import { startCase } from '@cogoport/utils';
 
 import BankDetails from './BankDetails';
 import EducationalQualifications from './EducationalQualifications';
@@ -7,7 +8,7 @@ import Resume from './Resume';
 import styles from './styles.module.css';
 
 function AdditionalDetails({ profileData, getEmployeeDetailsLoading }) {
-	const { progress_stats = {} } = profileData || {};
+	const { progress_stats = {}, bank_details:bankDetails } = profileData || {};
 	const {
 		additional_info_added = {},
 	} = progress_stats;
@@ -20,34 +21,46 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading }) {
 
 	const data = [
 		{
-			title     : 'EMPLOYMENT HISTORY',
-			content   : EmploymentHistory,
-			isPending : employment_history,
+			name        : 'employment_history',
+			content     : EmploymentHistory,
+			isCompleted : employment_history,
 		},
 		{
-			title     : 'EDUCATIONAL QUALIFICATION',
-			content   : EducationalQualifications,
-			isPending : educational_qualification,
+			name        : 'educational_qualifications',
+			content     : EducationalQualifications,
+			isCompleted : educational_qualification,
 		},
 		{
-			title     : 'RESUME',
-			content   : Resume,
-			isPending : resume,
+			name        : 'resume',
+			content     : Resume,
+			isCompleted : resume,
 		},
 		{
-			title     : 'BANK DETAILS',
-			content   : BankDetails,
-			isPending : bank_details,
+			name        : 'bank_details',
+			content     : BankDetails,
+			isCompleted : bank_details,
 		}];
+
+	const renderPills = ({ isCompleted, name }) => {
+		if (isCompleted) {
+			return <Pill color="green">Completed</Pill>;
+		}
+
+		if (bankDetails?.[0]?.status === 'active' && name === 'bank_details') {
+			return <Pill color="orange">Approval pending</Pill>;
+		}
+
+		return <Pill color="yellow">Pending</Pill>;
+	};
 
 	return (
 		<div className={styles.container}>
 			{data.map((item) => {
-				const { content: Component, isPending } = item;
+				const { content: Component, isCompleted, name } = item;
 
 				return (
 					<div
-						key={item.title}
+						key={name}
 						role="presentation"
 						className={styles.accordion}
 					>
@@ -55,11 +68,8 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading }) {
 							type="text"
 							title={(
 								<div className={styles.status}>
-									<div className={styles.accordion_title}>{item.title}</div>
-
-									{isPending
-										? <Pill color="green">Completed</Pill>
-										: <Pill color="yellow">Pending</Pill>}
+									<div className={styles.accordion_title}>{startCase(name)}</div>
+									{renderPills({ isCompleted, name })}
 
 								</div>
 							)}
