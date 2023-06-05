@@ -163,7 +163,7 @@ function ShipmentDetails({
 
 			{jobType === 'SHIPMENT' && (
 				<>
-					<div className={styles.caret}>
+					<div className={styles.card}>
 						<div
 							className={styles.card_upper}
 							onClick={() => {
@@ -222,7 +222,7 @@ function ShipmentDetails({
 					</div>
 
 					<div
-						className={styles.caret}
+						className={styles.card}
 						onClick={() => {
 							setShowDocuments(!showDocuments);
 						}}
