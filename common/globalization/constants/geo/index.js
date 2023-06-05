@@ -23,10 +23,13 @@ export const getCountryConstants = ({ country_id, isDefaultData = true }) => {
 
 	const { country_code: countryCode } = countryData || {};
 
+	const isCountryCodeValid = countryCode in COUNTRY_ID_MAPPING;
+
 	if (isDefaultData) {
-		return COUNTRY_ID_MAPPING[countryCode in COUNTRY_ID_MAPPING ? countryCode : 'IN'];
+		return COUNTRY_ID_MAPPING[isCountryCodeValid ? countryCode : 'IN'];
 	}
-	return countryCode in COUNTRY_ID_MAPPING ? COUNTRY_ID_MAPPING[countryCode] : null;
+
+	return isCountryCodeValid ? COUNTRY_ID_MAPPING[countryCode] : {};
 };
 
 const getGeoConstants = () => {
