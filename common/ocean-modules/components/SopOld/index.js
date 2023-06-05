@@ -9,7 +9,7 @@ import Header from './Header';
 import SopLoader from './SopLoader';
 import styles from './styles.module.css';
 
-function SopNew({ shipment_data = {}, primary_service = {} }) {
+function SopOld({ shipment_data = {}, primary_service = {} }) {
 	const [filters, setFilters] = useState([]);
 	const [reload, setReload] = useState(false);
 
@@ -88,4 +88,4 @@ function SopNew({ shipment_data = {}, primary_service = {} }) {
 		</div>
 	);
 }
-export default SopNew;
+export default SopOld;
