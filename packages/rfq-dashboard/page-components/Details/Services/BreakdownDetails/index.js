@@ -41,7 +41,6 @@ function BreakdownDetails({
 	rateDetails.splice(rateDetails.length - 1, 1);
 
 	let total = 0;
-
 	const { totalAmount } = getTotalMarginSum({
 		editedMargins,
 		currency_conversion: conversions,
@@ -216,7 +215,7 @@ function BreakdownDetails({
 						className={cl`${styles.title_value} ${profitability > 0 ? styles.green : styles.red}
 					${profitability === 0 ? styles.black : ''}`}
 					>
-						{(profitability || 0).toFixed(2)}
+						{(profitability || 0).toFixed(3)}
 						{' '}
 						%
 					</div>
