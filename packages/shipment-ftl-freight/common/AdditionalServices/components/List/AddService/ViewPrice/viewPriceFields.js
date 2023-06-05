@@ -31,6 +31,7 @@ const fields = (items, setAddRate) => [
 		span   : 2.2,
 		render : (item) => (
 			<Button
+				className="secondary sm"
 				onClick={() => setAddRate({ ...item, ...items })}
 			>
 				Choose This Rate
