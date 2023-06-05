@@ -46,8 +46,10 @@ const controls = [
 		label       : 'Role',
 		placeholder : 'Role',
 		options     : [
-			{ value: 'front_Developer', label: 'Front-end Developer' },
-			{ value: 'backend_Developer', label: 'Back-end Developer' },
+			{ value: 'software_development_engineer_1', label: 'Software Development Engineer - I' },
+			{ value: 'business_analyst', label: 'Business Analyst' },
+			{ value: 'product_analyst', label: 'Product Analyst' },
+			{ value: 'business_consultant', label: 'Business Consultant' },
 		],
 		rules: {
 			required: 'Role is required',

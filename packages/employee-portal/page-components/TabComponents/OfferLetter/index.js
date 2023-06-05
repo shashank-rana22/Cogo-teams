@@ -4,17 +4,15 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import PreviewDocumet from '../../../commons/PreviewDocumet';
 
 import styles from './styles.module.css';
+import useGetDocumentSigningUrl from './useGetDocumentSigningUrl';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
 function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
-	// const { progress_stats = {} } = data;
 	const { id, document_url, status } = data?.offer_letter || {};
-	// const {
-	// 	offer_letter_signed = {},
-	// } = progress_stats;
-	// const { get_offer_letter_signed = false } = offer_letter_signed;
 
 	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails });
+
+	const { onClickSignDocument } = useGetDocumentSigningUrl({ id });
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -49,7 +47,19 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 							Accept
 						</Button>
 					</div>
-				) : null
+				) : (
+					<div className={styles.button_container}>
+						<Button
+							themeType="primary"
+							size="md"
+							onClick={onClickSignDocument}
+						>
+							Sign Documents
+						</Button>
+
+					</div>
+
+				)
 			}
 
 			<div style={{ display: 'flex', justifyContent: 'center' }}>

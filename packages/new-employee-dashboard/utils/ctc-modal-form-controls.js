@@ -81,7 +81,6 @@ const lessControls = [
 ];
 
 const getControls = (type) => {
-	console.log('tyoe', type);
 	if (Number(type) > 600000) {
 		return controls;
 	}

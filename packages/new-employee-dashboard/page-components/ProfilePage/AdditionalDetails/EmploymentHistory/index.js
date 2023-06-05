@@ -11,6 +11,8 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 	const { detail } = profileData || {};
 	const { employee_experience_details = [] } = detail || {};
 
+	console.log('employee_experience_details', employee_experience_details);
+
 	const formatdate = ({ date }) => formatDate({
 		date,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['MMM, yyyy'],

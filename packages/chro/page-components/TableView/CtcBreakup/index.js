@@ -67,6 +67,7 @@ function CtcBreakup({ metadata }) {
 				{heading ? (
 					<div style={{ width: '60%' }}>
 						{startCase(heading ?? '______')}
+
 					</div>
 				) : null}
 				{yearlyValue != null ? (

@@ -132,10 +132,12 @@ const useProfileDetails = () => {
 	const monthlyRetentionBonus = watch('retention_bonus_monthly');
 	const yearlyPerformance = watch('performance_linked_variable_yearly');
 	const monthlyPerformance = watch('performance_linked_variable_monthly');
+	const yearlySignInBonus = watch('sign_on_bonus_yearly');
+	const monthlySignInBonus = watch('sign_on_bonus_monthly');
 
 	useEffect(() => {
 		const data = getValues();
-		console.log('ok', data);
+		// console.log('ok', data);
 		if (initialQuestion >= 600000) {
 			const ctcInfo = ctcModalControls(initialQuestion, data);
 			setCtcStructure(ctcInfo.controls);
@@ -144,7 +146,8 @@ const useProfileDetails = () => {
 			setCtcStructure(ctcInfo.controls);
 		}
 	}, [getValues, initialQuestion, monthlyPerformance, yearlyPerformance,
-		monthlyRetentionBonus, yearlyRetentionBonus, monthlyJoiningBonus, yearlyJoiningBonus]);
+		monthlyRetentionBonus, yearlyRetentionBonus, monthlyJoiningBonus,
+		yearlyJoiningBonus, yearlySignInBonus, monthlySignInBonus]);
 
 	const params = {
 		id                      : profile_id,

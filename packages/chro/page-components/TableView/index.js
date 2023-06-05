@@ -20,7 +20,7 @@ function TableView({ search, activeTab }) {
 
 	const { metadata = {}, id } = ctcBreakup || {};
 
-	const { onFinalSubmit = () => {} } = useUpdateOfferLetter({ refetch });
+	const { onFinalSubmit = () => {}, loading:updateOfferLetterLoading } = useUpdateOfferLetter({ refetch });
 
 	const columns = getColumns({ setCtcBreakup, onFinalSubmit, activeTab });
 
@@ -89,6 +89,7 @@ function TableView({ search, activeTab }) {
 									onClick={() => onFinalSubmit({ id, status: 'approved' })}
 									themeType="primary"
 									style={{ marginLeft: 8 }}
+									loading={updateOfferLetterLoading}
 								>
 									Approve
 								</Button>
@@ -98,6 +99,7 @@ function TableView({ search, activeTab }) {
 								onClick={() => setCtcBreakup('')}
 								themeType="secondary"
 								style={{ marginLeft: 8 }}
+								disable={updateOfferLetterLoading}
 							>
 								Close
 							</Button>

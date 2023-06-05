@@ -85,10 +85,11 @@ const controls = () => ([
 		rules       : { required: 'This is required' },
 	},
 	{
-		name  : 'passport_size_photo_url',
-		label : 'Passport Size Photograph',
-		type  : 'fileUpload',
-		rules : { required: 'This is required' },
+		name   : 'passport_size_photo_url',
+		label  : 'Passport Size Photograph',
+		type   : 'fileUpload',
+		accept : '.png,.jpg,.jpeg,',
+		rules  : { required: 'This is required' },
 	},
 	{
 		name        : 'emergency_contact_details',

@@ -337,49 +337,6 @@ export const ctcModalControls = (ctcInput, data) => {
 	}
 
 	const specialAllowanceYearlyValue = result;
-	// ctcInput -
-	//   (basicYearlyValue +
-	//     hraYearlyValue +
-	//     conveyanceYearlyValue +
-	//     foodAllowanceYearlyValue +
-	//     fuelAllowanceYearlyValue +
-	//     telephoneAllowanceYearlyValue +
-	//     0.0833 * basicYearlyValue +
-	//     15000 +
-	//     Math.round(
-	//       basicYearlyValue / 12 < 15000 ? 0.1301 * basicYearlyValue : 1950 * 12
-	//     ) +
-	//     0.0833 * basicYearlyValue +
-	//     basicYearlyValue / 12 >
-	//   21000
-	//     ? 0
-	//     : basicYearlyValue / 12 < 21000 && basicYearlyValue / 12 > 9056
-	//     ? 754 * 12
-	//     : 754 * 12) >
-	// 0
-	//   ? ctcInput -
-	//     (basicYearlyValue +
-	//       hraYearlyValue +
-	//       conveyanceYearlyValue +
-	//       foodAllowanceYearlyValue +
-	//       fuelAllowanceYearlyValue +
-	//       telephoneAllowanceYearlyValue +
-	//       0.0833 * basicYearlyValue +
-	//       15000 +
-	//       Math.round(
-	//         basicYearlyValue / 12 < 15000
-	//           ? 0.1301 * basicYearlyValue
-	//           : 1950 * 12
-	//       ) +
-	//       0.0833 * basicYearlyValue +
-	//       2400 +
-	//       basicYearlyValue / 12 >
-	//     21000
-	//       ? 0
-	//       : basicYearlyValue / 12 < 21000 && basicYearlyValue / 12 > 9056
-	//       ? 754 * 12
-	//       : 754 * 12)
-	//   : 0;
 
 	const sum = basicYearlyValue
     + hraYearlyValue

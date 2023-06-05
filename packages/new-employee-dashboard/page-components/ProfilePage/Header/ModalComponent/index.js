@@ -53,10 +53,8 @@ function ModalComponent({
 				})}
 			</div>
 
-			{finalControls.map((controlItem, index) => {
-				// if (initialQuestion <= 600000 && index === 2) {
-				// 	return null;
-				// }
+			{finalControls.map((controlItem) => {
+				
       	const { yearly, monthly } = controlItem;
 
       	const Element = getElementController(controlItem?.yearly.type);
