@@ -21,7 +21,7 @@ function Header({ refetch, control }:HeaderInterface) {
 		download_format : false,
 	});
 	const handleVersionChange = () => {
-		window.location.href = `/${query.partner_id}/business-finance/settlement/on-account-collection`;
+		window.location.href = `/${query.partner_id}/business-finance/settlement/onAccountCollection`;
 	};
 	return (
 		<div className={styles.header_container}>

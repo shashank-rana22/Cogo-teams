@@ -13,7 +13,7 @@ function Settlement() {
 	const [activeTab, setActiveTab] = useState(query?.active_tab);
 
 	const handleChange = (tab: any) => {
-		if (['JournalVoucher', 'tds-settlement', 'on-account-collection'].includes(tab)) {
+		if (['JournalVoucher', 'tds-settlement', 'onAccountCollection'].includes(tab)) {
 			setActiveTab(tab);
 			push(
 				'/business-finance/settlement/[active_tab]',
@@ -43,7 +43,7 @@ function Settlement() {
 					-
 				</TabPanel>
 
-				<TabPanel name="on-account-collection" title="On Account Collection">
+				<TabPanel name="onAccountCollection" title="On Account Collection">
 					<OnAccountCollection />
 				</TabPanel>
 				<TabPanel name="JournalVoucher" title="Journal Voucher">
