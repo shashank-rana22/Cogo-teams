@@ -42,11 +42,12 @@ const getCurrencyLocale = ({ currency }) => {
 };
 
 const formatCurrency = ({ amount, locale, options }) => {
-	if (!(locale in currencyMapping) || !(options?.notation === 'compact' && options?.compactDisplay === 'short')) {
+	if (!(locale in currencyMapping) || !(options?.notation === 'compact')) {
 		return amount;
 	}
 
 	let formattedAmount = amount;
+
 	const splittedAmount = formattedAmount.split(/\s+/);
 
 	Object.entries(currencyMapping[locale]).forEach(([current, newVal]) => {
@@ -59,7 +60,7 @@ const formatCurrency = ({ amount, locale, options }) => {
 };
 
 const format = ({ locale, amount, options, currency }) => {
-	const formatted = new Intl.NumberFormat(locale, {
+	const formattedAmount = new Intl.NumberFormat(locale, {
 		minimumFractionDigits: 0,
 		...options,
 		...('style' in options && {
@@ -67,7 +68,7 @@ const format = ({ locale, amount, options, currency }) => {
 		}),
 	}).format(Number(amount));
 
-	return formatCurrency({ amount: formatted, locale, options });
+	return formatCurrency({ amount: formattedAmount, locale, options });
 };
 
 /**
