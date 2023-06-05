@@ -6,16 +6,15 @@ import RenderCargoPills from '../RenderCargoPills';
 import styles from './styles.module.css';
 
 function MultiServiceDetailsPopover({
-	children,
-	mainServices,
-
+	children = {},
+	mainServices = [],
 }) {
 	if (mainServices?.length <= 1) {
 		return null;
 	}
 
 	const renderBody = () => (
-		mainServices?.map((item, idx) => (idx !== 0 ? (
+		mainServices.map((item, idx) => (idx !== 0 ? (
 			<div className={styles.container} key={item.id}>
 				<RenderCargoPills detail={item} />
 			</div>
