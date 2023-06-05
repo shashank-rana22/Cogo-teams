@@ -28,6 +28,15 @@ const TEXT_MAPPING = {
 		backgroundColor : '#FDFBF6',
 		borderColor     : '#D6B300',
 	},
+	retest: {
+		key             : 'retest',
+		text            : 'Test Results have not been published yet.',
+		subText         : 'Please click on publish results button when the test is completed',
+		Icon            : IcMCrossInCircle,
+		iconColor       : '#D6B300',
+		backgroundColor : '#FDFBF6',
+		borderColor     : '#D6B300',
+	},
 };
 
 export default TEXT_MAPPING;

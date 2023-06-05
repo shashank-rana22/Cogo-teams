@@ -114,12 +114,39 @@ const GLOBAL_CONSTANTS = {
 		eclamation_svg            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg',
 		cart_png                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cart_icon.png',
 		saas_subscription_loading : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
-		bot_icon                  : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/web_bot',
-		cogoport_logo             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoLogo.svg',
-		user_avatar               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png',
+		email_svg                 : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg',
+		platform_chat_svg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg',
+		platform_notification_svg:
+			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg',
+		missed_call_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
+		not_connected_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
+		outgoing_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
+		incoming_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
+		empty_chat_jpg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
+		admin_logo_svg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg',
+		bot_logo_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
+		reply_icon_png      : 'https://cdn-icons-png.flaticon.com/512/1933/1933011.png',
+		reply_all_icon_png  : 'https://cdn-icons-png.flaticon.com/512/747/747334.png',
+		forward_icon_png    : 'https://cdn-icons-png.flaticon.com/512/60/60546.png',
+		incoming_green_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
+		outgoing_orange_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
+		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
+		bot_icon            : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/web_bot',
+		cogoport_logo       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogoLogo.svg',
+		user_avatar         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/img_avatar.png',
 	},
-	regex: {
-		url_match_regex:
+
+	options: {
+		upload_file_size: {
+			'1MB'  : '1048576',
+			'5MB'  : '5242880',
+			'15MB' : '15728640',
+		},
+	},
+
+	regex_patterns: {
+		number: /^[+-]?\d*\.?\d+$/,
+		url_match:
 		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
 	},
 };

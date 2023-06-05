@@ -60,6 +60,12 @@
 	height: 25px;
 }
 
+.share_test {
+	text-decoration-line: underline;
+	cursor: pointer;
+	background-color: inherit;
+}
+
 .content {
 	max-width: 140px;
 	overflow: hidden;
