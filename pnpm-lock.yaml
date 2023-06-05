@@ -111,6 +111,9 @@ importers:
       '@cogoport/contracts':
         specifier: workspace:0.1.0
         version: link:../packages/contracts
+      '@cogoport/controlled-booking':
+        specifier: workspace:0.1.0
+        version: link:../packages/controlled-booking
       '@cogoport/core':
         specifier: workspace:0.1.0
         version: link:../common/core
@@ -395,6 +398,12 @@ importers:
       '@cogoport/maps':
         specifier: ^1.0.2
         version: 1.0.3(@cogoport/icons-react@1.0.75)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/navigation-configs':
+        specifier: workspace:^0.1.0
+        version: link:../navigation-configs
+      '@cogoport/next':
+        specifier: workspace:^0.1.0
+        version: link:../next
       '@cogoport/request':
         specifier: workspace:^0.1.0
         version: link:../request
@@ -1163,6 +1172,36 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
 
+  packages/controlled-booking:
+    dependencies:
+      '@cogoport/components':
+        specifier: ^1.0.423
+        version: 1.0.423(@babel/core@7.22.1)(@cogoport/icons-react@1.0.75)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/forms':
+        specifier: workspace:^0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: ^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.65
+        version: 1.0.75(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../../common/next
+      '@cogoport/request':
+        specifier: workspace:^0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:^0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.6
+        version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+
   packages/cost-booking-desk:
     dependencies:
       '@cogoport/components':
@@ -1264,6 +1303,9 @@ importers:
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: ^0.0.1
+        version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.51
         version: 1.0.75(react-dom@18.2.0)(react@18.2.0)

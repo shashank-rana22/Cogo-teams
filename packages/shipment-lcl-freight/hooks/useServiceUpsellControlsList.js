@@ -1,26 +1,24 @@
-import { useGetAsyncOptions } from '@cogoport/forms';
-import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { merge } from '@cogoport/utils';
 
 const geo = getGeoConstants();
 
 const useGetControls = ({ truckTypeToggle }) => {
-	const locationAsyncOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		initialCall : false,
-		params      : { filters: { type: ['pincode'] } },
-	}));
-
 	const serviceWiseControls = {
 		ftl_freight: [
 			{
 				label       : 'Pickup/Drop Pincode',
 				name        : 'location_id',
 				placeholder : 'Search via pincode',
-				type        : 'select',
-				span        : 12,
-				rules       : { required: 'This is required' },
-				...locationAsyncOptions,
+				type        : 'async-select',
+				asyncKey    : 'list_locations',
+				initialCall : false,
+				params      : {
+					filters: {
+						type: ['pincode'],
+					},
+				},
+				span  : 12,
+				rules : { required: 'This is required' },
 			},
 			{
 				name     : 'truck_body_type',
@@ -56,12 +54,16 @@ const useGetControls = ({ truckTypeToggle }) => {
 				label       : 'Pickup/Drop Pincode',
 				name        : 'location_id',
 				placeholder : 'Search via pincode',
-				type        : 'select',
-				caret       : true,
-				className   : 'primary sm',
-				span        : 12,
-				rules       : { required: 'This is required' },
-				...locationAsyncOptions,
+				type        : 'async-select',
+				asyncKey    : 'list_locations',
+				initialCall : false,
+				params      : {
+					filters: {
+						type: ['pincode'],
+					},
+				},
+				span  : 12,
+				rules : { required: 'This is required' },
 			},
 			{
 				name        : 'packages',

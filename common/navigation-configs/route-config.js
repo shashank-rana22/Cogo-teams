@@ -11,6 +11,7 @@ import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
 import contracts from './config/contracts';
+import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
 import enrichment from './config/enrichment';
@@ -71,6 +72,7 @@ const routeConfig = {
 	...ingestion,
 	...blDoCollectionRelease,
 	...saasTools,
+	...controlledBooking,
 	...saasSubscription,
 	...so2Surface,
 	...chakravyuh,
