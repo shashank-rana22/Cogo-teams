@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-indent */
 import { Checkbox, Pill, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
