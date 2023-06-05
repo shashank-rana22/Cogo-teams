@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 function PieChart({ activeTab, chartData, loading }) {
 	const { stats } = chartData || {};
 	const {
-		CONTAINER_MOVEMENT_MAPPING, LATE_COLLECTION_MAPPING, CHARGE_RANGE_MAPPING,
+		CONTAINER_MOVEMENT_MAPPING, LATE_COLLECTION_MAPPING,
 		tabData, colors,
 	} = getFormatedData(stats);
 	const {
@@ -25,7 +25,7 @@ function PieChart({ activeTab, chartData, loading }) {
 
 	const tabCounts = {
 		container_movement : container_movement_count,
-		bl_do_release      : bl_do_release_count,
+		bl_do              : bl_do_release_count,
 		both               : both_count,
 	};
 	const centroidValue = tabCounts[activeTab] || '';
@@ -75,8 +75,8 @@ function PieChart({ activeTab, chartData, loading }) {
 				</div>
 				<div className={styles.bottom_heading}>
 					{activeTab === 'container_movement' && 'Container Movement'}
-					{activeTab === 'bl_do_release' && 'BL/DO Release'}
-					{activeTab === 'both' && 'Charge Range'}
+					{activeTab === 'bl_do' && 'BL/DO Release'}
+					{/* {activeTab === 'both' && 'Charge Range'} */}
 				</div>
 			</div>
 			{activeTab === 'container_movement' && (loading ? <Loader />
@@ -97,7 +97,7 @@ function PieChart({ activeTab, chartData, loading }) {
 				)
 			)}
 
-			{activeTab === 'bl_do_release' && (
+			{activeTab === 'bl_do' && (
 				loading ? <Loader />
 					:				(
 						<div className={styles.bl_do_container}>
@@ -148,24 +148,6 @@ function PieChart({ activeTab, chartData, loading }) {
 							</div>
 						</div>
 					)
-			)}
-			{activeTab === 'both'
-			&& (loading ? <Loader />
-				: (
-					<div>
-						{CHARGE_RANGE_MAPPING.map((item) => (
-							<div className={styles.sub_container} key={item.value}>
-								<div className={styles.square} style={{ background: item.color }} />
-								<div className={styles.label}>
-									{item.label}
-								</div>
-								<div className={styles.value}>
-									{item.value}
-								</div>
-							</div>
-						))}
-					</div>
-				)
 			)}
 
 			<div className={styles.side_container}>

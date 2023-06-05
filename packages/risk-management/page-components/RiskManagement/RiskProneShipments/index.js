@@ -29,14 +29,17 @@ function RiskProneShipments({
 				>
 					<TabPanel name="container_movement" title="Container Movement" badge={container_movement_count} />
 
-					<TabPanel name="bl_do_release" title="BL/DO Release" badge={bl_do_release_count} />
+					<TabPanel name="bl_do" title="BL/DO Release" badge={bl_do_release_count} />
 
 					<TabPanel name="both" title="Both" badge={both_count} />
 				</Tabs>
 			</div>
-			<div className={styles.tab}>
-				<PieChart activeTab={activeTab} chartData={statsData} loading={statsLoading} />
-			</div>
+			{activeTab !== 'both'
+			&& (
+				<div className={styles.tab}>
+					<PieChart activeTab={activeTab} chartData={statsData} loading={statsLoading} />
+				</div>
+			)}
 			<div className={styles.tab}>
 				<ShipmentId
 					data={data}

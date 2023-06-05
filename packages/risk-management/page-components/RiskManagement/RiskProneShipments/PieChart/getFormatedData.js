@@ -61,33 +61,7 @@ const getFormatedData = (stats) => {
 			value : late_collection,
 		},
 	];
-	const CHARGE_RANGE_MAPPING = [
-		{
-			label : 'INR 10,000 - INR 1,00,000 :',
-			value : 4,
-			color : '#EE3425',
-		},
-		{
-			label : 'INR 100,001 - INR 5,00,000 :',
-			value : 68,
-			color : '#F37166',
-		},
-		{
-			label : 'INR 500,001 - INR 10,00,000',
-			value : 50,
-			color : '#F8AEA8',
-		},
-		{
-			label : 'INR 10,00,001 - INR 50,00,000 :',
-			value : 23,
-			color : '#BF291E',
-		},
-		{
-			label : '> INR 50,00,000 :',
-			value : 25,
-			color : '#FFD1CC',
-		},
-	];
+
 	const bl_do_data = [
 		{
 			id    : 'Late Collection',
@@ -104,7 +78,7 @@ const getFormatedData = (stats) => {
 	];
 	const tabData = {
 		container_movement : CONTAINER_MOVEMENT_MAPPING,
-		bl_do_release      : bl_do_data,
+		bl_do              : bl_do_data,
 		both               : CONTAINER_MOVEMENT_MAPPING,
 	};
 
@@ -112,7 +86,6 @@ const getFormatedData = (stats) => {
 		colors,
 		CONTAINER_MOVEMENT_MAPPING,
 		LATE_COLLECTION_MAPPING,
-		CHARGE_RANGE_MAPPING,
 		tabData,
 	};
 };

@@ -6,7 +6,7 @@ function useGetShipmentTimeLine({ itemData }) {
 	const { id } = itemData || {};
 
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/get_timeline',
+		url    : 'fcl_freight/get_container_timeline',
 		method : 'get',
 	}, { manual: true, autoCancel: false });
 

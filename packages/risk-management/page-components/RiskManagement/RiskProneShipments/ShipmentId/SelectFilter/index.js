@@ -6,22 +6,22 @@ import { optionsMap } from './constants';
 import styles from './styles.module.css';
 
 const OPTIONS = [
-	{
-		label : 'Customer Expertise',
-		value : 'customer_expertise',
-	},
-	{
-		label : 'Trade Expertise',
-		value : 'trade_expertise',
-	},
-	{
-		label : 'Commodity Expertise',
-		value : 'commodity_expertise',
-	},
-	{
-		label : 'Misc Expertise',
-		value : 'miscellaneous',
-	},
+	// {
+	// 	label : 'Customer Expertise',
+	// 	value : 'customer_expertise',
+	// },
+	// {
+	// 	label : 'Trade Expertise',
+	// 	value : 'trade_expertise',
+	// },
+	// {
+	// 	label : 'Commodity Expertise',
+	// 	value : 'commodity_expertise',
+	// },
+	// {
+	// 	label : 'Misc Expertise',
+	// 	value : 'miscellaneous',
+	// },
 ];
 
 function SelectFilter({ filters, setFilters, activeTab }) {
@@ -91,7 +91,7 @@ function SelectFilter({ filters, setFilters, activeTab }) {
 				</div>
 			</div>
 			<div className={styles.sub_container}>
-				<div className={styles.select}>
+				{/* <div className={styles.select}>
 					<Select
 						size="sm"
 						isClearable={false}
@@ -103,7 +103,7 @@ function SelectFilter({ filters, setFilters, activeTab }) {
 						)}
 						className={styles.dropdown}
 					/>
-				</div>
+				</div> */}
 				<div className={styles.select}>
 					<Select
 						size="sm"
@@ -133,11 +133,6 @@ function SelectFilter({ filters, setFilters, activeTab }) {
 						})}
 					/>
 				</div>
-				{/* <div className={styles.select}>
-					<Button size="md" themeType="secondary">
-						+ More Filters
-					</Button>
-				</div> */}
 			</div>
 		</div>
 	);

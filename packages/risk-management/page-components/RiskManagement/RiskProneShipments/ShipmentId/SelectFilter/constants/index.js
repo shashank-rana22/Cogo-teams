@@ -46,6 +46,6 @@ export const BOTH_REASON_OPTIONS = CONTAINER_REASON_OPTIONS.concat(BL_DO_REASON_
 
 export const optionsMap = {
 	container_movement : CONTAINER_REASON_OPTIONS,
-	bl_do_release      : BL_DO_REASON_OPTIONS,
+	bl_do              : BL_DO_REASON_OPTIONS,
 	both               : BOTH_REASON_OPTIONS,
 };

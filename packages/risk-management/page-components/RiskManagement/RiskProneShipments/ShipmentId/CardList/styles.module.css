@@ -131,7 +131,7 @@
 }
 .column1{
     display: flex;
-    width: 40%;
+    width: 44%;
     @media (max-width: 1068px) {
 		display: flex;
         width: 100%;
@@ -139,12 +139,11 @@
 	}
 }
 .column2{
-    display: flex;
-    width: 30%;
+    /* display: flex; */
+    width: 24%;
     align-items: center;
     justify-content: space-between;
-    /* margin-left: 12px;
-    margin-right: 12px; */
+
     @media(max-width:1068px){
         display: flex;
         width: 100%;
@@ -160,11 +159,12 @@
     }
 }
 .container_pickup{
-   margin-right: 12px;
+   margin-top: 8px;
+   width: fit-content;
 }
 .right_border{
     width: 2%;
-    margin-right: 12px;
+    /* margin-right: 12px; */
     margin-left: 12px;
     @media(max-width:1068px){
         width: 100%;
