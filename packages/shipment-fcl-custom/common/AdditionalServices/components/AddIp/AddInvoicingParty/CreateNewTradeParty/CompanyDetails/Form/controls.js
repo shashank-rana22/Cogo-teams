@@ -1,9 +1,9 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
 
 const geo = getGeoConstants();
-const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_ids;
+const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_entity_ids;
 
 const controls = ({ watch }) => {
 	const watchCountryId = watch('country_id');

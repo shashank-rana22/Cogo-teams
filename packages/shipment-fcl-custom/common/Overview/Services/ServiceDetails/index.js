@@ -2,7 +2,7 @@ import React from 'react';
 
 import Header from './Header';
 
-function ServiceDetails({ servicesData = [] }) {
+function ServiceDetails({ servicesData = {} }) {
 	const addedServiceComponent = (
 		<Header serviceData={servicesData} />
 	);

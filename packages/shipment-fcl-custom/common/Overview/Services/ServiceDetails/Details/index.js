@@ -7,22 +7,22 @@ import getConfigs from '../../configurations/get-configs';
 import Item from './Item';
 import styles from './styles.module.css';
 
-function Details({ serviceData = [] }) {
+function Details({ serviceData = {} }) {
 	const {
 		service_type = '', state = '', free_days_demurrage_destination = '',
 		free_days_demurrage_origin = '', free_days_detention_destination = '', free_days_detention_origin = '',
-	} = serviceData[0];
+	} = serviceData || {};
 
 	const service_items_key = getConfigs(service_type).details || {};
 
-	const freeDays = {
+	const freeDays = [
 		free_days_demurrage_destination,
 		free_days_demurrage_origin,
 		free_days_detention_destination,
 		free_days_detention_origin,
-	};
+	];
 
-	const remainingServiceData = omit(serviceData?.[0], freeDays);
+	const remainingServiceData = omit((serviceData || {}), freeDays);
 
 	return (
 		<div className={cl`${styles.container} ${styles[state]}`}>

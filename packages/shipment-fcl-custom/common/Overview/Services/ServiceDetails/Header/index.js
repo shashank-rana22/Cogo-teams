@@ -7,8 +7,8 @@ import Details from '../Details';
 
 import styles from './styles.module.css';
 
-function Header({ serviceData = [] }) {
-	const { state, display_label, service_provider, payment_term } = serviceData?.[0] || {};
+function Header({ serviceData = {} }) {
+	const { state = '', display_label = '', service_provider = '', payment_term = '' } = serviceData || {};
 
 	const [showDetails, setShowDetails] = useState({});
 
@@ -50,7 +50,7 @@ function Header({ serviceData = [] }) {
 					</div>
 				</div>
 			</div>
-			{showDetails[serviceData?.[0]?.display_label] ? <Details serviceData={serviceData} /> : null}
+			<Details serviceData={serviceData} />
 		</div>
 
 	);
