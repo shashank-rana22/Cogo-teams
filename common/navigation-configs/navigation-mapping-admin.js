@@ -82,7 +82,7 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		icon          : IcMDashboard,
 		main_apis     : [],
-		possible_apis : [],
+		possible_apis : apis.employee_portal,
 		module_type   : 'dashboards',
 	},
 	employee_portal: {
