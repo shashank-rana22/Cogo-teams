@@ -130,7 +130,7 @@ function BreakdownDetails({
 
 			<div className={styles.divider} />
 
-			{convenience_line_item?.total_price_discounted !== 0 ? (
+			{convenience_line_item?.price || convenience_line_item?.price === 0 ? (
 				<>
 					<div className={styles.service_line}>
 						<div className={styles.service_title}>Convenience Fee</div>
