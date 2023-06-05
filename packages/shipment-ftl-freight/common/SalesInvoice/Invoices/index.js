@@ -2,10 +2,10 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
-import useGetCreditNotes from '../../../hooks/useGetCreditNotes';
+import useGetShipmentCreditNotes from '../../../hooks/useGetShipmentCreditNotes';
 import useListBfSalesInvoices from '../../../hooks/useListBfSalesInvoices';
 import useOrgOutStanding from '../../../hooks/useOrgOutStanding';
-import CreditNote from '../CreditNote';
+// import CreditNote from '../CreditNote';
 import POST_REVIEWED_INVOICES from '../helpers/post-reviewed-sales-invoices';
 
 import Header from './Header';
@@ -45,7 +45,7 @@ function Invoices({
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { list, cnRefetch, loading: cNLoading } = useGetCreditNotes({});
+	const { cnRefetch } = useGetShipmentCreditNotes({});
 
 	return (
 		<main className={styles.container}>
@@ -77,7 +77,7 @@ function Invoices({
 				))}
 			</section>
 
-			{list?.length
+			{/* {list?.length
 				? (
 					<CreditNote
 						cnRefetch={cnRefetch}
@@ -86,7 +86,7 @@ function Invoices({
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 					/>
-				) : null}
+				) : null} */}
 		</main>
 	);
 }
