@@ -2,8 +2,8 @@ import { Button } from '@cogoport/components';
 import { useState } from 'react';
 
 import CurrencyExchangeForm from './ExchangeRateForm/CurrencyExchangeForm';
-import Helper from './helper';
 import styles from './styles.module.css';
+import useHelper from './useHelper';
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 
@@ -27,7 +27,7 @@ function ExchangeRate({
 		differentCurrenciesHash,
 		availableCurrencyConversions,
 		loading,
-	} = Helper({ invoiceCurrency, refetch: refetchAfterApiCall, shipment_id });
+	} = useHelper({ invoiceCurrency, refetch: refetchAfterApiCall, shipment_id });
 
 	if (Object.keys(differentCurrenciesHash || {}).length === 0) {
 		return null;
