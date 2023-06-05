@@ -60,7 +60,7 @@ function Status({
 	};
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > 120347 || isAuthorized);
+	&& (shipment_data?.serial_id > CONSTANTS.invoice_check_id || isAuthorized);
 
 	return (
 		<div className={styles.invoice_container}>
@@ -83,7 +83,7 @@ function Status({
 			) : null}
 
 			{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= 120347 ? (
+					&& shipment_data?.serial_id <= CONSTANTS.invoice_check_id ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
