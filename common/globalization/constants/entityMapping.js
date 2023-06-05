@@ -58,7 +58,7 @@ const ENTITY_MAPPING = {
 		currency          : 'VND',
 		feature_supported : ['cogo_books'],
 		labels            : {
-			irn_label: 'IRN',
+			irn_label: 'E-invoice',
 		},
 	},
 };
