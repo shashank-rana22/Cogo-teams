@@ -47,6 +47,8 @@ function BreakdownDetails({
 		rate,
 	});
 
+	console.log('totalAmount::', totalAmount);
+
 	useEffect(() => {
 		const calculate = (totalAmount / (total - totalAmount)) * 100;
 		const formattedCalculate = calculate.toFixed(3);
