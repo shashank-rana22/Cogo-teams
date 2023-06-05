@@ -29,7 +29,7 @@ function SopOld({ shipment_data = {}, primary_service = {} }) {
 
 	let content = (
 		<>
-			<div className={styles.count_sop}>
+			<div>
 				{sops?.length}
 				{' '}
 				SOP’s

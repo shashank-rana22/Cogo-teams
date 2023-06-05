@@ -11,4 +11,5 @@
 
 .delete_button_container {
 	width: 5%;
+	cursor: pointer;
 }
