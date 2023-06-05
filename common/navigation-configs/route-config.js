@@ -32,6 +32,8 @@ import shipmentFclCustom from './config/shipment-fcl-custom';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import shipmentFclFreightLocal from './config/shipment-fcl-freight-local';
 import shipmentLclFreight from './config/shipment-lcl-freight';
+import shipmentRailDomesticFreight from './config/shipment-rail-domestic-freight';
+import shipmentHaulageFreight from './config/shipment-haulage-freight';
 import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
 import ticketManagement from './config/ticket-management';
@@ -60,6 +62,8 @@ const routeConfig = {
 	...performanceManagement,
 	...shipmentFclFreight,
 	...shipmentLclFreight,
+	...shipmentRailDomesticFreight,
+	...shipmentHaulageFreight,
 	...bookingDesk,
 	...bnSalvage,
 	...costBookingDesk,
