@@ -23,6 +23,8 @@ function ModuleNavigation({
 }) {
 	const { course_details = {}, all_chapters_completed = false } = data;
 
+	console.log('data', data);
+
 	// const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration;
 
 	const setStates = (feedback, test, Chapter) => {
@@ -132,15 +134,19 @@ function ModuleNavigation({
 
 			{(!isEmpty(data?.course_details?.tests)) ? (
 				<div
-					className={`${(data?.all_chapters_completed) ? styles.box_active : styles.box_deactive} 
-					${showTestData ? styles.box_selected : styles.box_notselected}`}
+					className={
+					`${(data?.all_chapters_completed || data?.test_completed)
+						? styles.box_active : styles.box_deactive} 
+					${showTestData ? styles.box_selected : styles.box_notselected}`
+}
 					role="button"
 					tabIndex="0"
 					onClick={() => {
-						(data?.all_chapters_completed) ? setStates(false, true, {}) : null;
+						(data?.all_chapters_completed || data?.test_completed)
+							? setStates(false, true, {}) : null;
 					}}
 				>
-					{(data?.all_chapters_completed)
+					{(data?.all_chapters_completed || data?.test_completed)
 						? <IcMUnlock height={20} width={20} /> : <IcMLock height={20} width={20} />}
 					<div className={styles.text}>
 						Course Completion Test
@@ -157,7 +163,7 @@ function ModuleNavigation({
 					(data?.test_completed) ? setStates(true, false, {}) : null;
 				}}
 			>
-				{(data?.all_chapters_completed)
+				{(data?.test_completed)
 					? <IcMUnlock height={20} width={20} /> : <IcMLock height={20} width={20} />}
 				<div className={styles.text}>
 					Course Completion
