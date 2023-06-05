@@ -1,15 +1,11 @@
 import { Button, Modal } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { useSelector } from '@cogoport/store';
 import { Layout } from '@cogoport/surface-modules';
 import React, { useEffect } from 'react';
 
 import editLineItemsHelper from './editLineItemsHelper';
 import Info from './Info';
 import styles from './styles.module.css';
-
-const geo = getGeoConstants();
 
 function EditInvoice({
 	show = 'false',
@@ -18,13 +14,6 @@ function EditInvoice({
 	refetch = () => {},
 	shipment_data = {},
 }) {
-	const { role_ids } = useSelector(({ profile, general }) => ({
-		role_ids : profile.partner?.user_role_ids,
-		isMobile : general.isMobile,
-	}));
-	const isFclFreight = [geo.uuid.admin_id, geo.uuid.super_admin_id]
-		.some((ele) => role_ids?.includes(ele));
-
 	const {
 		controls,
 		loading,

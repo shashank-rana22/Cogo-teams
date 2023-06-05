@@ -1,14 +1,12 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
-import { customerToCin } from '../../../utils/serviceDescriptionMappings';
 import { getLineItems } from '../getLineItems';
 import { getOtherData, getChargesData } from '../getOtherData';
 
 function TableData({
 	billing_address = {},
 	customData = {},
-	importerExporterId = '',
 }) {
 	const { lineItems = [], lineItemsKeysMapping = {} } = getLineItems({
 		customData,
@@ -90,7 +88,6 @@ function TableData({
 							</p>
 							<p style={{ margin: '3px 0', fontSize: '12px' }}>
 								CIN:U72200KA2015PTC082767
-								{/* {customerToCin[importerExporterId] || ''} */}
 							</p>
 						</div>
 					</td>

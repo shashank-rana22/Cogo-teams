@@ -1,12 +1,9 @@
-import { customerToBankDetails } from '../../../utils/serviceDescriptionMappings';
-
 const BANK_VERIFICATION_STATUSES = ['pending', 'verified'];
 
 function Terms({
 	stampData = '',
 	billing_address = {},
 	tradeParty = {},
-	importerExporterId = '',
 }) {
 	const bankDetails = (tradeParty?.documents || []).filter(
 		(item) => item?.document_type === 'bank_account_details',
@@ -23,18 +20,10 @@ function Terms({
 	}, []);
 
 	const bankDetailObj = bankDetailsArray?.[0] || {};
-
-	// const {
-	// 	bank_name = '',
-	// 	bank_branch = '',
-	// 	ifsc_code = '',
-	// 	account_number = '',
-	// } = customerToBankDetails[importerExporterId] || {};
-
 	const bank_name = '';
-	const 	bank_branch = '';
-	const 	ifsc_code = '';
-	const 	account_number = '';
+	const bank_branch = '';
+	const ifsc_code = '';
+	const account_number = '';
 
 	return (
 		<>
