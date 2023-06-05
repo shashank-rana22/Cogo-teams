@@ -42,7 +42,7 @@ export default function CancelService({ setShow, service_type, trade_type }) {
 			<Modal.Header title="Cancel Service" />
 
 			<Modal.Body>
-				{controls.map((item) => <FormElement control={control} errors={errors} {...item} />)}
+				{controls.map((item) => <FormElement control={control} errors={errors} {...item} key={control.name} />)}
 			</Modal.Body>
 
 			<Modal.Footer>

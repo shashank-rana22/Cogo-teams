@@ -1,8 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-import { IcMOpenlink } from '@cogoport/icons-react';
 import { startCase, upperCase, format } from '@cogoport/utils';
-
-import styles from './styles.module.css';
 
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || {};
@@ -21,6 +18,8 @@ export const renderValue = (label, detail) => {
 		)}`
 		: '';
 
+	const keysForPackages = Array(packages.length).fill(null).map(() => Math.random());
+
 	const volume = ` ${detail.volume} cbm`;
 
 	const packageDetails = () => {
@@ -31,12 +30,12 @@ export const renderValue = (label, detail) => {
 					theme="light"
 					content={(
 						<div style={{ fontSize: '10px' }}>
-							{(packages || []).map((item) => {
+							{(packages || []).map((item, index) => {
 								const values = item
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div>{values}</div>;
+								return <div key={keysForPackages[index]}>{values}</div>;
 							})}
 						</div>
 					)}
@@ -68,21 +67,6 @@ export const renderValue = (label, detail) => {
 		<div>
 			<div>{shipperDetails?.name}</div>
 			<div>{shipperDetails?.address}</div>
-		</div>
-	);
-
-	const formatCertificate = (certificates) => (
-		<div className={styles.certificate_container}>
-			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer">
-					Click to view certificate
-					&nbsp;
-					{key + 1}
-					&nbsp;
-					<IcMOpenlink />
-					<br />
-				</a>
-			))}
 		</div>
 	);
 
@@ -206,14 +190,6 @@ export const renderValue = (label, detail) => {
 			return format(detail?.document_cutoff, 'dd MMM yyyy - hh:mm aaa');
 		case 'tr_cutoff':
 			return format(detail?.tr_cutoff, 'dd MMM yyyy - hh:mm aaa');
-		case 'iip_certificates':
-			return formatCertificate(detail?.iip_certificates || []);
-		case 'msds_certificates':
-			return formatCertificate(detail?.msds_certificates || []);
-		case 'bl_category':
-			return upperCase(detail.bl_category);
-		case 'bl_type':
-			return upperCase(detail.bl_type);
 		case 'cargo_readiness_date':
 			return format(detail?.cargo_readiness_date, 'dd MMM yyyy');
 		case 'supplier_poc':

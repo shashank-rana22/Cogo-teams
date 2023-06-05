@@ -25,7 +25,7 @@ const Card = ({
 	return (taskList || []).map((item, idx) => {
 		const docType =	item?.document_type || item?.task.split('upload_').slice(-1)[0];
 
-		let allUploadedDocs =	(completedDocs || []).filter((doc) => doc.document_type === docType)
+		let allUploadedDocs = (completedDocs || []).filter((doc) => doc.document_type === docType)
 			|| emailDocs.filter((doc) => doc?.entity_type === docType);
 
 		if (allUploadedDocs.length === 0) {
@@ -41,6 +41,7 @@ const Card = ({
 				<Content
 					uploadedItem={uploadedItem}
 					receivedViaEmail={receivedViaEmail}
+					key={item?.id}
 					showUploadText={showUploadText}
 					idx={idx}
 					taskList={taskList}
