@@ -29,7 +29,7 @@ function AddRemarks({
 	});
 
 	return (
-		<Modal onClose={onClose} show={showAddRemarks} width={600}>
+		<Modal onClose={onClose} show={showAddRemarks} width={600} closeOnOuterClick={false}>
 			<Modal.Header title="Invoice Remarks" />
 
 			<Modal.Body>
@@ -48,6 +48,7 @@ function AddRemarks({
 					themeType="secondary"
 					onClick={onClose}
 					className={styles.button_div}
+					disabled={loading}
 				>
 					Cancel
 				</Button>

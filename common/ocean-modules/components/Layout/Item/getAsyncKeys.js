@@ -564,14 +564,6 @@ const getAsyncFields = (key) => {
 				page_limit: 10,
 			},
 		},
-		air_freight_contracts: {
-			valueKey      : 'value',
-			lableKey      : 'label',
-			asyncKey      : 'list_contract_air_freight_services',
-			defaultParams : {
-				page_limit: 10,
-			},
-		},
 		'location-clusters': {
 			valueKey      : 'id',
 			asyncKey      : 'list_location_clusters',

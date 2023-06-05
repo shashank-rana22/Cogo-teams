@@ -69,6 +69,7 @@ function PartialCN({
 					<Button
 						themeType="secondary"
 						onClick={() => setShow(false)}
+						disabled={loading}
 					>
 						Cancel
 
