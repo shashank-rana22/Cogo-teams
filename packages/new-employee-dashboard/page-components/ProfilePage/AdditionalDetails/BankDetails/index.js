@@ -6,11 +6,16 @@ import CommonLoader from '../../../../common/Loader';
 import PreviewDocumet from '../../../../common/PreviewDocumet';
 
 import styles from './styles.module.css';
+import useUpdateBankDetails from './useUpdateBankDetails';
 
 const MAPPING = ['bank_name', 'bank_branch_name', 'ifsc_code', 'account_holder_name', 'account_number'];
 
 function BankDetails({ profileData, getEmployeeDetailsLoading }) {
 	const { bank_details } = profileData || {};
+
+	const { id, status } = bank_details?.[0] || {};
+
+	const { updateBankDetails } = useUpdateBankDetails({ id });
 
 	if (getEmployeeDetailsLoading) {
 		return <CommonLoader />;
@@ -47,23 +52,31 @@ function BankDetails({ profileData, getEmployeeDetailsLoading }) {
 				</div>
 
 			</div>
-			<div className={styles.button_container}>
-				<div style={{ paddingRight: 16 }}>
-					<Button
-						size="md"
-						themeType="secondary"
-					>
-						Reject
-					</Button>
-				</div>
 
-				<Button
-					size="md"
-					themeType="primary"
-				>
-					Approve
-				</Button>
-			</div>
+			{
+			status === 'active'
+				? (
+					<div className={styles.button_container}>
+						<div style={{ paddingRight: 16 }}>
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => updateBankDetails({ status: 'rejected' })}
+							>
+								Reject
+							</Button>
+						</div>
+
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={() => updateBankDetails({ status: 'approved' })}
+						>
+							Approve
+						</Button>
+					</div>
+				) : null
+}
 
 		</div>
 

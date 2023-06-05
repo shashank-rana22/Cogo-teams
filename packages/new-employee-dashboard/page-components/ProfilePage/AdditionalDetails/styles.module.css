@@ -5,10 +5,23 @@
 }
 
 .accordion {
-	max-height: 100vh;
-	margin-bottom: 12px !important;
-	overflow: hidden;
+	margin-bottom: 20px !important;
+	overflow-y: scroll;
 	background-color: #fff;
 	border: 0.5px solid gold;
 	transition: height 1s ease-out;
+
+	:global {
+		.ui_accordion_header {
+			position: sticky;
+			top: 0;
+		}
+	}
+}
+
+.status {
+	display: flex;
+	flex-basis: 80%;
+	flex-direction: row;
+	align-items: center;
 }
