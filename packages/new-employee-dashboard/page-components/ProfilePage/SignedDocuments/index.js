@@ -1,18 +1,20 @@
 import React, { useState } from 'react';
 
+import useGetEmployeeSignedDocuments from '../../hooks/useGetEmployeeSigningDocuments';
 import StyledTable from '../../StyledTable';
 
 import getColumns from './getColumns';
 import ReviewModal from './ReviewModal';
 import styles from './styles.module.css';
-import ListEmployeeSignedDocuments from './useListEmployeeSignedDocuments';
 
-function SignedDocuments({ profileData, loading }) {
-	const onClickViewDocument = (id) => {
-		window.open('https://www.africau.edu/images/default/sample.pdf', '_blank');
+function SignedDocuments() {
+	const onClickViewDocument = ({ url }) => {
+		window.open(url || 'https://www.africau.edu/images/default/sample.pdf', '_blank');
 	};
 
-	const { list } = ListEmployeeSignedDocuments();
+	const { data:docData } = useGetEmployeeSignedDocuments();
+
+	const { signed_documents = [] } = docData || {};
 
 	const [showModal, setShowModal] = useState(false);
 
@@ -27,7 +29,7 @@ function SignedDocuments({ profileData, loading }) {
 
 			<StyledTable
 				columns={columns}
-				data={list}
+				data={signed_documents}
 			/>
 
 			<ReviewModal showModal={showModal} setShowModal={setShowModal} />

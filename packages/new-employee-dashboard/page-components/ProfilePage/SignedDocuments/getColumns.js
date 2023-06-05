@@ -25,7 +25,7 @@ const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
 					width={14}
 					height={14}
 					style={{ cursor: 'pointer' }}
-					onClick={() => onClickViewDocument(item?.id)}
+					onClick={() => onClickViewDocument({ url: item?.signed_document_url || item?.document_url })}
 				/>
 			</div>
 		),
