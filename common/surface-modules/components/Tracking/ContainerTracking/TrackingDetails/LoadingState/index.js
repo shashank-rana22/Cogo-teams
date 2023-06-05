@@ -5,9 +5,11 @@ import VerticleLine from '../TrackingInfo/VerticleLine';
 
 import styles from './styles.module.css';
 
+const keys = Array(4).fill(null).map(() => Math.random());
+
 const LoadingState = () => [...Array(4)].map((v, idx) => (
 
-	<div className={styles.SingleItem}>
+	<div className={styles.SingleItem} key={keys[idx]}>
 
 		<VerticleLine zIndex={idx} isLast={idx === 4} />
 

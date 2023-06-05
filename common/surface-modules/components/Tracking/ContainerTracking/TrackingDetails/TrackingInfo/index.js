@@ -2,6 +2,7 @@ import { Tooltip, cl } from '@cogoport/components';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcATruck } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 import VerticleLine from './VerticleLine';
@@ -14,6 +15,10 @@ const styleIcon = {
 };
 
 function TrackingInfo({ data = [], tripInfo = {} }) {
+	const keys = useMemo(
+		() => Array(data.length).fill(null).map(() => Math.random()),
+		[data.length],
+	);
 	return (
 		<div className={styles.container}>
 			{tripInfo?.intugine_eta ? (
@@ -27,7 +32,7 @@ function TrackingInfo({ data = [], tripInfo = {} }) {
 				</div>
 			) : null}
 			{data?.map((item, idx) => (
-				<div className={styles.SingleItem}>
+				<div className={styles.SingleItem} key={keys[idx]}>
 					{item?.transport_mode ? (
 						<IcATruck style={styleIcon} />
 					) : (
@@ -82,7 +87,7 @@ function TrackingInfo({ data = [], tripInfo = {} }) {
 										'dd MMM yyyy (hh:mm aa)',
 										null,
 										true,
-										  )
+									)
 									: null}
 								{item?.tracking_updated_at
 										&& formatDate({
