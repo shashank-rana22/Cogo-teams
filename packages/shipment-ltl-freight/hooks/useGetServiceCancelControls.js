@@ -2,18 +2,18 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import { useState, useEffect, useContext } from 'react';
 
-import useUpdateShipmentService from '../../../hooks/useUpdateShipmentService';
-import getCancelControls from '../utils/get-cancel-controls';
-import getServiceCancelPayload from '../utils/getServiceCancelPayload';
+import getCancelControls from '../common/CancelService/utils/get-cancel-controls';
+import getServiceCancelPayload from '../common/CancelService/utils/getServiceCancelPayload';
+
+import useUpdateShipmentService from './useUpdateShipmentService';
 
 const SUPPLIER_STAKEHOLDERS = [
-	'booking_desk',
-	'document_desk',
-	'document_desk_manager',
-	'supply_agent',
-	'booking_desk_manager',
-	'lastmile_ops',
-	'lastmile_ops_manager',
+	'superadmin',
+	'service_ops',
+	'service_ops1',
+	'service_ops2',
+	'service_ops3',
+	'prod_process owner',
 	'so1_so2_ops',
 ];
 

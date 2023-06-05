@@ -1,7 +1,8 @@
 import { Button, Modal } from '@cogoport/components';
 import { ChipsController, InputController, RadioGroupController } from '@cogoport/forms';
 
-import useGetServiceCancelControls from './hooks/useGetServiceCancelControls';
+import useGetServiceCancelControls from '../../hooks/useGetServiceCancelControls';
+
 import styles from './styles.module.css';
 
 const controlTypeMapping = {
