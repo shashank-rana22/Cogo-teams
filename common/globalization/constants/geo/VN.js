@@ -382,7 +382,7 @@ export default {
 
 		pan_number: {
 			label   : 'PAN',
-			pattern : '',
+			pattern : undefined,
 		},
 
 		economic_zone: {
