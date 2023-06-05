@@ -2,10 +2,10 @@ import { ResponsiveLine } from '@cogoport/charts/line';
 import { StreamDatum } from '@cogoport/charts/stream/index';
 import { Loader } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import getAmountInLakhCrK from '../../../../../../../commons/getAmountInLakhCrK';
 import EmptyState from '../../../../../../commons/EmptyStateDocs';
-import { keyValue } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
@@ -22,6 +22,8 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 		const dateB = new Date(`${b.year}-${b.date} 00:00:00`);
 		return dateA.getTime() - dateB.getTime();
 	});
+
+	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	const AmountData = [];
 	const CountData = [];
@@ -69,7 +71,7 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 					colors={['#88CAD1', '#F68B21']}
 					enableSlices="x"
 					yScale={{ type: 'linear', min: 0, max: 'auto' }}
-					yFormat={(value) => getFormattedPrice(value, keyValue[entityCode])}
+					yFormat={(value) => getFormattedPrice(value, currency)}
 					axisTop={null}
 					axisRight={null}
 					axisBottom={{

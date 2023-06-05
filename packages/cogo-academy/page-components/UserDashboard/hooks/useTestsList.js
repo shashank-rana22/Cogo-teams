@@ -36,7 +36,7 @@ const useTestsList = () => {
 						q              : searchQuery,
 						user_id,
 						current_status : testCategory,
-						status         : ['active', 'draft', 'published'],
+						status         : ['active', 'draft', 'published', 'retest'],
 					},
 				},
 			});
