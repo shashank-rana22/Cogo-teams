@@ -13,8 +13,9 @@
 }
 
 .action_button {
-	margin: 10px 0;
-	font-size: var(--font-size-md);
+	padding: 0 12px;
+	margin: 8px 0;
+	font-size: 10px;
 	color: var(--color-secondary-greyscale-3);
 	text-align: center;
 	cursor: pointer;

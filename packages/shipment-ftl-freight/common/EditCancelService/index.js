@@ -11,8 +11,8 @@ import VerifyDriver from '../VerifyDriverModal';
 
 import {
 	EditTruckNumberControls,
-	// EditETAControls,
-	// EditDriverControls,
+	EditETAControls,
+	EditDriverControls,
 } from './Controls';
 import Form from './Forms';
 import styles from './styles.module.css';
@@ -20,7 +20,7 @@ import getCanCancelService from './utils/getCanCancelService';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
 const actionButtons = [
-	{ label: 'Edit', value: 'supplier_reallocation' },
+	{ label: 'Edit Supplier', value: 'supplier_reallocation' },
 	{ label: 'Edit Truck Number', value: 'edit_truck_number' },
 	{ label: 'Edit ETA/ETD', value: 'edit_eta_etd' },
 	{ label: 'Edit Driver Details', value: 'edit_driver_details' },
@@ -42,6 +42,14 @@ export const getTrucklistWithId = (all_services) => {
 
 	return truckLists;
 };
+function getDate(date) {
+	const tempDate = new Date(date);
+
+	if (date && tempDate.toDateString() !== 'Invalid Date') {
+		return tempDate;
+	}
+	return null;
+}
 
 export const getDriverDetails = (all_services) => {
 	const servicesList = (all_services || []).filter(
@@ -58,6 +66,21 @@ export const getDriverDetails = (all_services) => {
 	));
 
 	return driverDetails;
+};
+
+export const getEtaEtdList = (all_services) => {
+	const servicesList = (all_services || []).filter(
+		(service) => service?.truck_number,
+	);
+
+	const etaEtdList = servicesList.map((service) => ({
+		service_id          : `${service?.id}`,
+		truck_number        : `${service?.truck_number}`,
+		estimated_departure : getDate(service?.estimated_departure),
+		estimated_arrival   : getDate(service?.estimated_arrival),
+	}));
+
+	return etaEtdList;
 };
 
 function EditCancelService({ serviceData = {} }) {
@@ -80,8 +103,9 @@ function EditCancelService({ serviceData = {} }) {
 	actionButtons[1].show = true;
 	actionButtons[2].show = true;
 	actionButtons[3].show = true;
-	// actionButtons[4].show = true;
-	// actionButtons[4].show = getCanCancelService({ state, activeStakeholder });
+	actionButtons[4].show = true;
+	actionButtons[5].show = true;
+	actionButtons[6].show = getCanCancelService({ state, activeStakeholder });
 
 	if (!actionButtons.some((actionButton) => actionButton.show)) {
 		return null;
@@ -138,13 +162,13 @@ function EditCancelService({ serviceData = {} }) {
 				/>
 			)}
 
-			{showModal ? (
+			{showModal === 'edit_truck_number' ? (
 				<Modal
 					show={showModal}
 					onClose={() => setShowModal(false)}
 					size="md"
 				>
-					<Modal.Header title="ADD INVOICING PARTY" />
+					<Modal.Header title="EDIT TRUCK NUMBER" />
 					<Modal.Body>
 						<Form
 							controls={EditTruckNumberControls}
@@ -152,6 +176,44 @@ function EditCancelService({ serviceData = {} }) {
 							type="truck_number"
 							truckList={getTrucklistWithId(serviceData)}
 							// refetchServices={refetchServices}
+						/>
+					</Modal.Body>
+
+				</Modal>
+			) : null}
+
+			{showModal === 'edit_eta_etd' ? (
+				<Modal
+					show={showModal}
+					onClose={() => setShowModal(false)}
+					size="md"
+				>
+					<Modal.Header title="EDIT ETA/ETD" />
+					<Modal.Body>
+						<Form
+							controls={EditETAControls}
+							heading="EDIT ETA/ETD"
+							type="eta"
+							etaEtdList={getEtaEtdList(serviceData)}
+						/>
+					</Modal.Body>
+
+				</Modal>
+			) : null}
+
+			{showModal === 'edit_driver_details' ? (
+				<Modal
+					show={showModal}
+					onClose={() => setShowModal(false)}
+					size="md"
+				>
+					<Modal.Header title="EDIT DRIVER DETAILS" />
+					<Modal.Body>
+						<Form
+							controls={EditDriverControls}
+							heading="EDIT DRIVER DETAILS"
+							type="driver"
+							driverDetails={getDriverDetails(serviceData)}
 						/>
 					</Modal.Body>
 

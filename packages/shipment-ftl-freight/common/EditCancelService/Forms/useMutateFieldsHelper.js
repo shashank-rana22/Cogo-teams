@@ -3,7 +3,7 @@ import { useState, useEffect } from 'react';
 const useMutateFieldsHelper = ({
 	type = '',
 	truckList = [],
-	fields = {},
+	fields = [],
 	watch = () => {},
 }) => {
 	const [fieldArrIndex, setFieldArrIndex] = useState(0);
@@ -15,7 +15,7 @@ const useMutateFieldsHelper = ({
 			(item) => item.id === formValues.service_data[fieldArrIndex]?.service_id,
 		)?.service_provider_id;
 
-		newFields.service_data.controls.forEach((item) => {
+		newFields?.[0].controls.forEach((item) => {
 			const newItem = item;
 			if (newItem?.name === 'service_id') {
 				newItem.options = truckList;
