@@ -28,12 +28,13 @@ import referral from './config/referral';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
+import shipmentFclCfs from './config/shipment-fcl-cfs';
 import shipmentFclCustom from './config/shipment-fcl-custom';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import shipmentFclFreightLocal from './config/shipment-fcl-freight-local';
+import shipmentHaulageFreight from './config/shipment-haulage-freight';
 import shipmentLclFreight from './config/shipment-lcl-freight';
 import shipmentRailDomesticFreight from './config/shipment-rail-domestic-freight';
-import shipmentHaulageFreight from './config/shipment-haulage-freight';
 import so2Surface from './config/so2-surface';
 import supplyDashboard from './config/supply-dashboards';
 import ticketManagement from './config/ticket-management';
@@ -61,6 +62,7 @@ const routeConfig = {
 	...kamMonitoring,
 	...performanceManagement,
 	...shipmentFclFreight,
+	...shipmentFclCfs,
 	...shipmentLclFreight,
 	...shipmentRailDomesticFreight,
 	...shipmentHaulageFreight,

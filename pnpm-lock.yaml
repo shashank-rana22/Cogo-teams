@@ -84,6 +84,7 @@ importers:
       '@cogoport/saas-tools': workspace:0.1.0
       '@cogoport/scope-select': workspace:0.1.0
       '@cogoport/shipment-chat': workspace:0.1.0
+      '@cogoport/shipment-fcl-cfs': workspace:0.1.0
       '@cogoport/shipment-fcl-custom': workspace:0.1.0
       '@cogoport/shipment-fcl-freight': workspace:0.1.0
       '@cogoport/shipment-fcl-freight-local': workspace:0.1.0
@@ -151,6 +152,7 @@ importers:
       '@cogoport/saas-tools': link:../packages/saas-tools
       '@cogoport/scope-select': link:../common/scope-select
       '@cogoport/shipment-chat': link:../common/shipment-chat
+      '@cogoport/shipment-fcl-cfs': link:../packages/shipment-fcl-cfs
       '@cogoport/shipment-fcl-custom': link:../packages/shipment-fcl-custom
       '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
       '@cogoport/shipment-fcl-freight-local': link:../packages/shipment-fcl-freight-local
@@ -1260,6 +1262,50 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       react: 18.2.0
+
+  packages/shipment-fcl-cfs:
+    specifiers:
+      '@cogoport/components': ^1.0.395
+      '@cogoport/constants': workspace:^0.1.0
+      '@cogoport/context': workspace:^0.1.0
+      '@cogoport/forms': workspace:^0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.60
+      '@cogoport/maps': ^1.0.2
+      '@cogoport/navigation-configs': workspace:^0.1.0
+      '@cogoport/next': workspace:^0.1.0
+      '@cogoport/ocean-modules': workspace:^0.1.0
+      '@cogoport/request': workspace:^0.1.0
+      '@cogoport/scope-select': workspace:^0.1.0
+      '@cogoport/shipment-chat': workspace:^0.1.0
+      '@cogoport/shipment-mails': workspace:^0.1.0
+      '@cogoport/store': workspace:^0.1.0
+      '@cogoport/utils': ^1.2.6
+      file-saver: ^2.0.5
+      prop-types: ^15.8.1
+      react: 18.2.0
+      react-hook-form: ^7.43.3
+    dependencies:
+      '@cogoport/components': 1.0.423_guhuyhrafl7yprlcl7n6dekiki
+      '@cogoport/constants': link:../../common/constants
+      '@cogoport/context': link:../../common/context
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/maps': 1.0.3_guhuyhrafl7yprlcl7n6dekiki
+      '@cogoport/navigation-configs': link:../../common/navigation-configs
+      '@cogoport/next': link:../../common/next
+      '@cogoport/ocean-modules': link:../../common/ocean-modules
+      '@cogoport/request': link:../../common/request
+      '@cogoport/scope-select': link:../../common/scope-select
+      '@cogoport/shipment-chat': link:../../common/shipment-chat
+      '@cogoport/shipment-mails': link:../../common/shipment-mails
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      file-saver: 2.0.5
+      prop-types: 15.8.1
+      react: 18.2.0
+      react-hook-form: 7.43.9_react@18.2.0
 
   packages/shipment-fcl-custom:
     specifiers:

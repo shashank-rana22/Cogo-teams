@@ -41,6 +41,7 @@
     "@cogoport/vendor-rm": "workspace:0.1.0",
     "@cogoport/translate": "workspace:0.1.0",
     "@cogoport/shipment-fcl-freight": "workspace:0.1.0",
+    "@cogoport/shipment-fcl-cfs": "workspace:0.1.0",
     "@cogoport/shipment-lcl-freight": "workspace:0.1.0",
     "@cogoport/shipment-rail-domestic-freight": "workspace:0.1.0",
     "@cogoport/shipment-haulage-freight": "workspace:0.1.0",
