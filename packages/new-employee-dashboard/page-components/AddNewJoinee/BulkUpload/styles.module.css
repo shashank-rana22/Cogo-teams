@@ -1,37 +1,37 @@
 .container {
-  padding: 20px;
+	padding: 20px;
 }
 
 .header {
-  display: flex;
-  align-items: center;
+	display: flex;
+	align-items: center;
 }
 
 .title {
-  font-size: 24px;
-  font-weight: 700;
-  margin-top: 20px;
+	margin-top: 20px;
+	font-size: 24px;
+	font-weight: 700;
 }
 
 .uploader {
-  margin-top: 10px;
+	margin-top: 10px;
 }
 
 .error_msg {
-  color: red;
+	color: red;
 }
 
 .btn_row {
-  display: flex;
-  margin-top: 24px;
+	display: flex;
+	margin-top: 24px;
 }
 
 .container2 {
-  padding: 50px 50px 0;
+	padding: 50px 50px 0;
 }
 
 .upload_new_hire {
-  font-size: 15px;
-  font-weight: 100;
-  color: #6d6d6d;
+	font-size: 15px;
+	font-weight: 100;
+	color: #6d6d6d;
 }
