@@ -1,8 +1,7 @@
-import React, { useState, useEffect } from 'react';
 import dynamic from 'next/dynamic';
-import { isSameDay } from '@cogoport/utils';
-import styles from './styles.module.css';
+import React, { useState, useEffect } from 'react';
 
+import styles from './styles.module.css';
 
 const CogoMaps = dynamic(() => import('./map'), { ssr: false });
 
@@ -17,15 +16,15 @@ function TrackingMap({
 
 	useEffect(() => {
 		if (points?.length > 0) {
-				setRemainingPoints(points);
-				setCurvePoints(points);
-				setLoading(false);
+			setRemainingPoints(points);
+			setCurvePoints(points);
+			setLoading(false);
 		} else {
 			setTimeout(() => {
 				setLoading(false);
 			}, 0);
 		}
-	}, [points?.length]);
+	}, [points?.length, points]);
 
 	if (routesLoading || isLoading) {
 		return <div className={styles.MapLoading}>Loading...</div>;

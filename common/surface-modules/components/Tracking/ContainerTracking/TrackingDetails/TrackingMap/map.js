@@ -1,13 +1,14 @@
-import { useState, useEffect } from 'react';
 import { CogoMaps, L } from '@cogoport/maps';
+import { useState, useEffect } from 'react';
+
 import Pointer from './Pointer';
 import Route from './Route';
 
 const LAYER = [
 	{
-		name: 'Cogo Maps',
-		url: `${process.env.NEXT_PUBLIC_MAPS_BASE_URL}/cogo-tiles/{z}/{x}/{y}.png`,
-		attribution: '',
+		name        : 'Cogo Maps',
+		url         : `${process.env.NEXT_PUBLIC_MAPS_BASE_URL}/cogo-tiles/{z}/{x}/{y}.png`,
+		attribution : '',
 	},
 ];
 
@@ -26,9 +27,8 @@ function MapComp({
 	const bounds = L.latLngBounds(corner1, corner2);
 	const curvePointLength = curvePoints?.length;
 
-	const check =
-		destination?.latitude !== curvePoints?.[curvePointLength - 1]?.lat &&
-		destination?.longitude !== curvePoints?.[curvePointLength - 1]?.lng;
+	const check =		destination?.latitude !== curvePoints?.[curvePointLength - 1]?.lat
+		&& destination?.longitude !== curvePoints?.[curvePointLength - 1]?.lng;
 
 	useEffect(() => {
 		const timeout = setTimeout(() => {
@@ -43,11 +43,10 @@ function MapComp({
 		if (map) {
 			map.setMaxBounds(bounds);
 			map?.attributionControl?.setPrefix(
-				// eslint-disable-next-line max-len
 				'<a href="https://www.cogoport.com/en/terms-and-conditions/" target="_blank">&copy; Cogoport T&C</a> | <a href="https://www.cogoport.com/en/privacy-policy/" target="_blank">Privacy & data protection</a> | <a href="https://leafletjs.com/" target="_blank" >Leaflet</a>',
 			);
 		}
-	}, [map]);
+	}, [map, bounds]);
 
 	return (
 		<CogoMaps
@@ -64,9 +63,7 @@ function MapComp({
 				<Pointer
 					lat={curvePoints?.[0]?.lat}
 					lng={curvePoints?.[0]?.lng}
-					iconSvg={
-						'source' 
-					}
+					iconSvg="source"
 					map={map}
 				/>
 			)}
