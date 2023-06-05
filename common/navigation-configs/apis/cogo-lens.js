@@ -209,6 +209,12 @@ const cogoLens = [
 		feature      : 'cogolens',
 		service_name : 'cogolens',
 	},
+	{
+		api          : 'fcl_freight_rate_forecasting',
+		access_type  : 'private',
+		feature      : 'cogolens',
+		service_name : 'cogolens',
+	},
 
 ];
 
