@@ -1,6 +1,5 @@
 import { Pill, Carousel } from '@cogoport/components';
 import { IcMStarfull } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -197,7 +196,7 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 				) : null}
 			</div>
 
-			<div className={styles.bottom_box}>
+			{/* <div className={styles.bottom_box}>
 				<div>
 					Complete in &nbsp;
 					{data?.course_completion_duration?.course_completion_value}
@@ -210,7 +209,7 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 					{' '}
 					{format(data?.course_end_date || '', 'dd MMMM YYYY')}
 				</Pill>
-			</div>
+			</div> */}
 		</div>
 	);
 }

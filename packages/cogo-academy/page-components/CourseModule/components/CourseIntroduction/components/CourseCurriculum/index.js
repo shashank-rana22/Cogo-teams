@@ -1,21 +1,23 @@
 import { Accordion } from '@cogoport/components';
 import { IcMDocument, IcMPpt, IcMText, IcMVideoCall } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import styles from './styles.module.css';
 
-function CourseCurriculum({ data }) {
-	const ContentType_Mapping = {
-		document     : <IcMDocument width="24px" height="24px" fill="white" />,
-		video        : <IcMVideoCall width="24px" height="24px" fill="white" />,
-		presentation : <IcMPpt width="24px" height="24px" fill="white" />,
-		text         : <IcMText width="24px" height="24px" fill="white" />,
-	};
+const ContentType_Mapping = {
+	document     : <IcMDocument width="24px" height="24px" fill="#fff" />,
+	video        : <IcMVideoCall width="24px" height="24px" fill="#fff" />,
+	presentation : <IcMPpt width="24px" height="24px" fill="#fff" />,
+	text         : <IcMText width="24px" height="24px" fill="#fff" />,
+};
+
+function CourseCurriculum({ data = {} }) {
+	const { course_modules = [], course_details = {} } = data;
+
 	return (
 		<div className={styles.container}>
 			<span className={styles.heading}>Course Curriculum</span>
-			{data?.course_modules?.map((item, index) => (
+			{course_modules?.map((item, index) => (
 				<div className={styles.outer_accordian} key={item.id}>
 					<Accordion
 						type="text"
@@ -50,7 +52,6 @@ function CourseCurriculum({ data }) {
 						styles={{ width: '100%' }}
 					>
 						{item?.course_sub_modules?.map((subItem, subIndex) => (
-
 							<div className={styles.inner_accordian} key={subItem.id}>
 								<Accordion
 									type="text"
@@ -67,7 +68,7 @@ function CourseCurriculum({ data }) {
 									)}
 									styles={{ width: '100%' }}
 								>
-									{ subItem?.course_sub_module_chapters?.map((itemChapter, indexChapter) => (
+									{ subItem?.course_sub_module_chapters?.map((itemChapter) => (
 										<div className={styles.databox} key={itemChapter?.id}>
 											<div className={styles.databox_image}>
 												{ContentType_Mapping[itemChapter?.content_type]}
@@ -77,7 +78,6 @@ function CourseCurriculum({ data }) {
 											</div>
 										</div>
 									))}
-
 								</Accordion>
 							</div>
 						))}
@@ -86,14 +86,13 @@ function CourseCurriculum({ data }) {
 				</div>
 			))}
 
-			{!isEmpty(data?.course_details?.tests) ? (
+			{!isEmpty(course_details.tests || {}) ? (
 				<div className={styles.bottom_box}>
 					<div>
 						Course Completion Test
 					</div>
 				</div>
-			)
-				: null}
+			) : null}
 		</div>
 	);
 }
