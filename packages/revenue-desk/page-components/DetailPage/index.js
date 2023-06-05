@@ -1,18 +1,24 @@
 import { Pill } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import iconMapping from '../../helper/iconMapping';
 import serviceLabelMapping from '../../helper/serviceLabelMapping';
+import useListBookingOptions from '../../hooks/useListBookingOptions';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
 import PortDetails from '../List/Card/Body/PortDetails';
 
 import Card from './Card';
-// import DecisionPointsCard from './DecisionPointCard';
 import Rates from './Rates';
 import styles from './styles.module.css';
 
 function DetailPage({ setShowDetailPage, showDetailPage:itemData }) {
+	const [supplierPayload, setSupplierPayload] = useState({});
 	const { data:servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
+	const existingRatePrefrences = [];
+	const remarks = [];
+	const {} = useListBookingOptions({});
+
 	const excludedServices = [
 		'fcl_freight_local_service',
 		'lcl_freight_local_service',
@@ -94,6 +100,7 @@ function DetailPage({ setShowDetailPage, showDetailPage:itemData }) {
 						<Rates
 							groupedShowServicesData={groupedShowServicesData}
 							tabKeys={tabKeys}
+							setPayload={setSupplierPayload}
 						/>
 					)}
 

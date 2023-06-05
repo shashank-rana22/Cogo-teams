@@ -1,7 +1,8 @@
 import { Tabs, TabPanel, Select, Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
+import getSupplierPrefrencePayload from '../../../helper/getSupplierPreferencePayload';
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
 
 import RatesCard from './RatesCard';
@@ -25,6 +26,17 @@ function Rates({ groupedShowServicesData, tabKeys }) {
 			data          : ratesData?.flashed_rates?.list,
 		},
 	];
+
+	const { service_providers = [] } = getSupplierPrefrencePayload({
+		currentRates : ratesData?.flashed_rates?.list,
+		systemRates  : ratesData?.system_rates,
+		prefrences,
+	});
+
+	useEffect(() => {
+		setPayload({ service_providers: service_providers || [] });
+	}, [JSON.stringify(prefrences)]);
+
 	return (
 		<div className={styles.container}>
 			<Tabs
