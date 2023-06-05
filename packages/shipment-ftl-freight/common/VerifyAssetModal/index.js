@@ -155,30 +155,30 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 		[categorisedTruckList, createCustomerInvoicefn],
 	);
 
-	// if (!truckList?.length) {
-	// 	return (
-	// 		<Modal
-	// 			show
-	// 			onClose={() => setShow(false)}
-	// 			className={styles.custom_modal}
-	// 			closeOnOuterClick={false}
-	// 			showCloseIcon
-	// 		>
-	// 			<Modal.Body>
+	if (!truckList?.length) {
+		return (
+			<Modal
+				show
+				onClose={() => setShow(false)}
+				className={styles.custom_modal}
+				closeOnOuterClick={false}
+				showCloseIcon
+			>
+				<Modal.Body>
 
-	// 				<Modal.Header title={(
-	// 					<div className={styles.heading}>
-	// 						Truck List
-	// 					</div>
-	// 				)}
-	// 				/>
+					<Modal.Header title={(
+						<div className={styles.heading}>
+							Truck List
+						</div>
+					)}
+					/>
 
-	// 				<div style={{ marginTop: '1rem' }}>No Truck Found</div>
-	// 			</Modal.Body>
+					<div style={{ marginTop: '1rem' }}>No Truck Found</div>
+				</Modal.Body>
 
-	// 		</Modal>
-	// 	);
-	// }
+			</Modal>
+		);
+	}
 
 	return (
 		<Modal
