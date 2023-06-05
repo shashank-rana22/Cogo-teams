@@ -20,7 +20,7 @@ function ShipmentDetails({ formData = {}, whiteout = false, taskItem = {} }:Prop
 	}
 	const { documentType = '' } = taskItem || {};
 
-	const docType = documentType === 'draft_airway_bill' ? 'mawb' : 'hawb';
+	const docType = documentType === 'draft_house_airway_bill' ? 'hawb' : 'mawb';
 
 	return (
 		<div className={styles.container} style={{ pointerEvents: 'none' }}>
