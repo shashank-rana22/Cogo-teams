@@ -4,15 +4,17 @@ import { useState } from 'react';
 
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
 
+import ExistingInventory from './ExistingInventory';
 import RatesCard from './RatesCard';
 import SelectedRatesCard from './SelectedRatesCard';
 import styles from './styles.module.css';
 
-function Rates({ groupedShowServicesData, tabKeys }) {
+function Rates({ groupedShowServicesData }) {
+	const tabKeys = Object?.keys(groupedShowServicesData || {});
 	const [prefrences, setPrefrences] = useState([]);
 	const [activeTab, setActiveTab] = useState(tabKeys[0]);
 	const singleServiceData = groupedShowServicesData[activeTab][0];
-	const { data:ratesData, loading:ratesLoading } = useListRevenueDeskAvailableRates({ singleServiceData });
+	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({ singleServiceData });
 	const rateCardObj = [
 		{
 			prefrence_key : 'system',
@@ -50,6 +52,12 @@ function Rates({ groupedShowServicesData, tabKeys }) {
 							</div>
 						</div>
 						<SelectedRatesCard prefrences={prefrences} />
+						<ExistingInventory
+							docs={ratesData?.eligible_booking_document?.docs}
+							loading={ratesLoading}
+							prefrences={prefrences}
+							setPrefrences={setPrefrences}
+						/>
 						{rateCardObj.map((item) => (
 							<RatesCard
 								ratesData={item}
