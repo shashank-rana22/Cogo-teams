@@ -1,13 +1,11 @@
 import { cl } from '@cogoport/components';
 import { getByKey, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState, useMemo } from 'react';
 
 import getConfigs from '../../configurations/get-configs';
 
 import Item from './Item';
 import styles from './styles.module.css';
-
-const keys = Array(2).fill(null).map(() => Math.random());
 
 function Details({ serviceData = [] }) {
 	const [multiTruck, setMultiTruck] = useState(serviceData?.[0]);
@@ -18,6 +16,10 @@ function Details({ serviceData = [] }) {
 	const totalTruck = ['truck-1', 'truck-2'];
 	const [showTruck, setShowTruck] = useState('truck-1');
 
+	const keys = useMemo(
+		() => Array(totalTruck.length).fill(null).map(() => Math.random()),
+		[totalTruck.length],
+	);
 	const handleSelect = (key) => {
 		if (key === 'truck-2') {
 			setMultiTruck(serviceData?.[1]);
