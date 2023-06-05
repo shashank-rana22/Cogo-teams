@@ -1,12 +1,13 @@
 .conatiner {
 	display: flex;
 	align-items: center;
+	height: 85vh;
 	margin-top: 15px;
 }
 
 .revenue_graph {
 	width: 70%;
-	height: 85vh;
+	height: 100%;
 	padding: 10px;
 	margin-right: 20px;
 	background: #fff;
@@ -15,7 +16,7 @@
 
 .level_graph {
 	width: 30%;
-	height: 85vh;
+	height: 100%;
 	background: #fff;
 	border-radius: 8px;
 }
