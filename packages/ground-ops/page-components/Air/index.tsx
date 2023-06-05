@@ -4,6 +4,7 @@ import React, { useState, useEffect } from 'react';
 
 import Filters from '../Filters';
 
+import Amendment from './components/Amendment';
 import ApprovalPending from './components/ApprovalPending';
 import ApprovedAWB from './components/ApprovedAWB';
 import FinalAWB from './components/FinalAWB';
@@ -32,6 +33,11 @@ const tabs = [
 		label : 'Final AWB',
 		count : 'finalAwbCount',
 	},
+	{
+		key   : 'amendment',
+		label : 'Amendment',
+		count : 'amendmentCount',
+	},
 ];
 
 const tabsStatsMapping = {
@@ -39,6 +45,7 @@ const tabsStatsMapping = {
 	approvalPendingCount : 'approval_pending',
 	approvedAwbCount     : 'approved_awb',
 	finalAwbCount        : 'final_awb',
+	amendmentCount       : 'amendment',
 };
 
 const tabsComponentMapping = {
@@ -46,6 +53,7 @@ const tabsComponentMapping = {
 	approval_pending : ApprovalPending,
 	approved_awb     : ApprovedAWB,
 	final_awb        : FinalAWB,
+	amendment        : Amendment,
 };
 
 function Air({ setGenerate, setItem, setViewDoc, edit, setEdit }) {
