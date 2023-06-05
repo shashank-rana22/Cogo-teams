@@ -95,6 +95,7 @@ function ModuleContent({
 				<CompletionAndFeedback
 					course_id={course_id}
 					feedbackData={data?.course_details?.feedback}
+					name={data?.course_details?.name}
 				/>
 			</div>
 		);

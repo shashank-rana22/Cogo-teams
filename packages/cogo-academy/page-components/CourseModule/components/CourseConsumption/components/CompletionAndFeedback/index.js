@@ -6,7 +6,7 @@ import useUpdateCourseFeedback from '../../hooks/useUpdateCourseFeedback';
 
 import styles from './styles.module.css';
 
-function CompletionAndFeedback({ course_id, feedbackData }) {
+function CompletionAndFeedback({ course_id, feedbackData, name }) {
 	const [starRating, setStarRating] = useState(feedbackData?.rating || 0);
 	const [feedback, setFeedback] = useState(feedbackData?.remark || '');
 
@@ -27,7 +27,11 @@ function CompletionAndFeedback({ course_id, feedbackData }) {
 
 				<div className={styles.congrats_text}>
 					<h2>Congratulations!</h2>
-					<p>You have successfully completed the &apos;Intro to Cogoport&apos; course!</p>
+					<div>
+						You have successfully completed the &apos;
+						{name}
+						&apos; course!
+					</div>
 				</div>
 			</div>
 
@@ -69,9 +73,11 @@ function CompletionAndFeedback({ course_id, feedbackData }) {
 				className={styles.btn}
 				loading={feedbackData?.id ? updateCourseFeedbackLoading : loading}
 				onClick={() => {
-					{ feedbackData?.id
-						? updateCourseFeedback({ rating: starRating, remark: feedback, feedback_id: feedbackData?.id })
-						: createCourseFeedback({ rating: starRating, remark: feedback }); }
+					if (feedbackData?.id) {
+						updateCourseFeedback({ rating: starRating, remark: feedback, feedback_id: feedbackData?.id });
+					} else {
+						createCourseFeedback({ rating: starRating, remark: feedback });
+					}
 				}}
 			>
 				Submit
