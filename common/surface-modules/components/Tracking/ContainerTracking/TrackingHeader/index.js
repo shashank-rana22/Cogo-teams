@@ -1,10 +1,11 @@
 import { Select } from '@cogoport/components';
-import React, { useState, useEffect } from 'react';
+import React, { useEffect } from 'react';
 
 import FtlTracker from './ftlTracker';
 import styles from './styles.module.css';
 
 function TrackingHeader({
+	trackingLoading,
 	setContainerNo = () => {},
 	containerNo = '',
 	truckOptions = [],
@@ -20,7 +21,7 @@ function TrackingHeader({
 
 	useEffect(() => {
 		listShipments();
-	}, [containerNo]);
+	}, [listShipments, containerNo]);
 
 	return (
 		<div className={styles.Container}>
@@ -40,6 +41,7 @@ function TrackingHeader({
 
 				{!data?.is_trip_completed && (
 					<FtlTracker
+						trackingLoading={trackingLoading}
 						serialId={serialId}
 						data={data}
 						servicesData={servicesData?.[0] || {}}

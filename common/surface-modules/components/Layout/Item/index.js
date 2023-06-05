@@ -15,12 +15,11 @@ function Item(props) {
 		label = '',
 		showLabel = true,
 		error = {},
-		heading = '',
 		rules = {},
 		className = '',
 		formValues = {},
+		source = '',
 	} = props || {};
-
 	const errorOriginal = getErrorMessage({
 		error,
 		rules,
@@ -29,7 +28,7 @@ function Item(props) {
 
 	let newProps = { ...props };
 
-	const isAsyncSelect = ['select', 'creatable-select'].includes(type)
+	const isAsyncSelect = ['select', 'creatable-select', 'location-select'].includes(type)
 		&& Object.keys(props).includes('optionsListKey');
 
 	if (isAsyncSelect) {
@@ -49,8 +48,7 @@ function Item(props) {
 		};
 	}
 
-	if (!newProps.type) return null;
-	// || ['date_picker', 'datepicker'].includes(newProps?.type)
+	if (!newProps.type && !newProps.showOnlyLabel) return null;
 
 	const Element = getElementController(newProps.type);
 
@@ -63,14 +61,16 @@ function Item(props) {
 
 	return (
 		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%` }}>
-			{heading ? (<div className={styles.heading}>{heading}</div>) : null}
-			{label && showLabel ? (<div className={styles.label}>{label}</div>) : null}
+			{label && source !== 'edit_line_items' ? (<h4 className={styles.label}>{label}</h4>) : null}
 
-			<Element
-				size={type === 'pills' ? 'md' : 'sm'} // need to put in config
-				{...newProps}
-				control={control}
-			/>
+			{Element
+				? (
+					<Element
+						size={type === 'pills' ? 'md' : 'sm'} // need to put in config
+						{...newProps}
+						control={control}
+					/>
+				) : null}
 
 			<p className={styles.errors}>{errorOriginal}</p>
 		</div>

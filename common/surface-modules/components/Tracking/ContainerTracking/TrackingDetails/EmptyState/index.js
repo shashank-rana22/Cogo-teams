@@ -1,5 +1,6 @@
-import React from 'react';
 import { IcMVerySad } from '@cogoport/icons-react';
+import React from 'react';
+
 import styles from './styles.module.css';
 
 function EmptyState() {

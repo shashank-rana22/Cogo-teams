@@ -30,6 +30,7 @@ function Card({ data = {} }) {
 			{Object.keys(mapping).map((key) => (
 				<LabelValue
 					label={key}
+					key={key}
 					value={mapping[key]}
 				/>
 			))}

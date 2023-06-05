@@ -1,5 +1,6 @@
 import { Button, Tooltip, Popover, cl } from '@cogoport/components';
 import { InputController, useForm } from '@cogoport/forms';
+import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
 import useGetTrackingConsent from '../../../../hooks/useGetTrackingConsent';
@@ -9,8 +10,8 @@ import styles from './styles.module.css';
 
 const DISABLED_STATE = ['cargo_dropped', 'completed', 'aborted', 'cancelled'];
 
-
 function FtlTracker({
+	trackingLoading,
 	serialId,
 	data,
 	servicesData = {},
@@ -20,6 +21,8 @@ function FtlTracker({
 	const [startTruckTracker, setStartTruckTracker] = useState(false);
 
 	const mobileNumber = servicesData.driver_details?.contact;
+
+	const errorMsg = `Truck is in ${startCase(servicesData.state)} state`;
 
 	const {
 		control,
@@ -107,6 +110,8 @@ function FtlTracker({
 						className="primary sm"
 						style={{ marginLeft: 30, height: '40px' }}
 						onClick={() => setStartTruckTracker(!startTruckTracker)}
+						disabled={disabledButton}
+						title={disabledButton ? errorMsg : ''}
 					>
 						Start Tracking
 					</Button>
@@ -116,6 +121,8 @@ function FtlTracker({
 					className="primary sm"
 					style={{ marginLeft: 30, height: '40px' }}
 					onClick={() => handleRefresh()}
+					disabled={disabledButton || loading || trackingLoading}
+					title={disabledButton ? errorMsg : ''}
 				>
 					Refresh
 				</Button>
@@ -153,7 +160,7 @@ function FtlTracker({
 				<Button
 					className="primary sm"
 					style={{ marginLeft: 30, height: '40px' }}
-					disabled={true}
+					disabled
 					onClick={() => getTrackingConsent()}
 				>
 					Check Consent

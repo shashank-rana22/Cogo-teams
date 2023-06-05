@@ -80,7 +80,13 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 				{!isEmpty(poc_data) && show[title]
 					? (
 						<div className={styles.detail_card}>
-							{Object.keys(mapping).map((key) => <LabelValue label={key} value={mapping[key]} />)}
+							{Object.keys(mapping).map((key) => (
+								<LabelValue
+									label={key}
+									value={mapping[key]}
+									key={key}
+								/>
+							))}
 						</div>
 					) : null}
 			</div>

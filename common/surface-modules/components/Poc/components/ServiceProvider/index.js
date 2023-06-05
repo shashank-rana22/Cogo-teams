@@ -22,7 +22,10 @@ function ServiceProvider({
 
 	return (
 		Object.keys(serviceProviders).map((sp_key, index) => (
-			<Card title={`Service Provider ${serviceProvidersLength <= 1 ? '' : index + 1}`}>
+			<Card
+				title={`Service Provider ${serviceProvidersLength <= 1 ? '' : index + 1}`}
+				key={serviceProviders[sp_key]?.id}
+			>
 				<div className={styles.header}>
 					<div className={styles.service_provider_name}>{serviceProviders[sp_key]}</div>
 					<div className={styles.row}>

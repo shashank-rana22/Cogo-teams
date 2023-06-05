@@ -4,8 +4,8 @@ import useGetShipmentAdditionalServiceCodes from './useGetShipmentAdditionalServ
 import useListRateChargeCodes from './useListRateChargeCodes';
 
 const servicesChargeCodes = {
-	ftl_freight_service       : ['ftl_freight_charges'],
-	haulage_freight_service   : ['haulage_freight_charges'],
+	ftl_freight_service           : ['ftl_freight_charges'],
+	haulage_freight_service       : ['haulage_freight_charges'],
 	ltl_freight_service           : ['ltl_freight_charges'],
 	rail_domestic_freight_service : ['rail_domestic_freight_charges'],
 };

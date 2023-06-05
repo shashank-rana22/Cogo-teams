@@ -34,12 +34,6 @@
 		font-size: 12px !important;
 	}
 
-	.core-ui-select__option {
-		width: 400px !important;
-		padding: 10px !important;
-		font-size: 12px !important;
-	}
-
 	.custom {
 		.core-ui-select__option {
 			font-size: 12px !important;
@@ -118,11 +112,6 @@
 
 	.form-layout-root-col {
 		flex: auto !important;
-		width: 100% !important;
-		max-width: 100% !important;
-	}
-
-	.core-ui-select__menu {
 		width: 100% !important;
 		max-width: 100% !important;
 	}

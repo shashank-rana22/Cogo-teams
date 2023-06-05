@@ -20,6 +20,7 @@ function AddedTradeParty({
 		const trade_party_data = list.find((i) => i.trade_party_type === item);
 		return (
 			<TradeParty
+				key={item?.id}
 				data={trade_party_data}
 				title={TRADE_PARTY_MAPPING[item]}
 				setAddCompany={setAddCompany}

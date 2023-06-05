@@ -8,7 +8,7 @@ function Detail({ data = [] }) {
 	return (
 		<div>
 			{data?.map((item) => (
-				<div className={styles.trade_party}>
+				<div className={styles.trade_party} key={item?.id}>
 					<IcCFtick />
 					<span className={styles.trade_party_display}>
 						{TRADE_PARTY_MAPPING[item?.trade_party_type]}

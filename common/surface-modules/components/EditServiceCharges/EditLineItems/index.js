@@ -1,8 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 
-// import CargoDetails from '../../../common/CargoDetails';
-
 import Child from './Child';
 import Header from './Header';
 import styles from './styles.module.css';
