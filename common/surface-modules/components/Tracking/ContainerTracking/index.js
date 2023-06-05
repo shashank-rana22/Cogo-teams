@@ -1,8 +1,10 @@
 import React, { useState, useEffect } from 'react';
+
+import useGetSaasContainerSubscription from '../../../hooks/useGetSaasContainerSubscription';
+
+import styles from './styles.module.css';
 import TrackingDetails from './TrackingDetails';
 import TrackingHeader from './TrackingHeader';
-import useGetSaasContainerSubscription from '../../../hooks/useGetSaasContainerSubscription';
-import styles from './styles.module.css';
 
 function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 	const serialId = shipment_data?.serial_id;
@@ -32,11 +34,12 @@ function ContainerTracking({ shipment_data = {}, refetch = () => {} }) {
 
 	useEffect(() => {
 		refetch();
-	}, []);
+	}, [refetch]);
 
 	return (
 		<div className={styles.Container}>
 			<TrackingHeader
+				trackingLoading={loading}
 				ContainerOptions={ContainerOptions}
 				setContainerNo={setContainerNo}
 				containerNo={

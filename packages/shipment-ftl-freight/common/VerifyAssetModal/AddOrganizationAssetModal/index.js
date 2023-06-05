@@ -17,14 +17,13 @@ function AddOrganizationAssetModal({
 			showCloseIcon
 
 		>
+			<Modal.Header title={(
+				<div>
+					Vehicle details *
+				</div>
+			)}
+			/>
 			<Modal.Body>
-
-				<Modal.Header title={(
-					<div>
-						Truck List
-					</div>
-				)}
-				/>
 				<Form
 					organization_id={organization_id}
 					setShowInternal={setShowInternal}
@@ -34,7 +33,6 @@ function AddOrganizationAssetModal({
 
 			</Modal.Body>
 		</Modal>
-
 	);
 }
 export default AddOrganizationAssetModal;

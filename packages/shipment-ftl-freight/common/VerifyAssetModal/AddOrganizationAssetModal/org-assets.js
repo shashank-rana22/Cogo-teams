@@ -1,3 +1,5 @@
+import { truckType } from '../../../helpers/truck-type';
+
 const controlsFunc = (organization_id, item) => [
 	{
 		label        : 'Vehicle details *',
@@ -62,15 +64,14 @@ const controlsFunc = (organization_id, item) => [
 		rules: { required: 'Vehicle category is required' },
 	},
 	{
-		label          : 'Vehicle Type',
-		name           : 'vehicle_type',
-		type           : 'select',
-		value          : item?.data?.vehicle_type,
-		caret          : true,
-		optionsListKey : 'truck-types',
-		placeholder    : 'Vehicle type',
-		span           : 4,
-		rules          : { required: 'Truck Type is required' },
+		label       : 'Vehicle Type',
+		name        : 'vehicle_type',
+		type        : 'select',
+		value       : item?.data?.vehicle_type,
+		options     : truckType,
+		placeholder : 'Vehicle type',
+		span        : 4,
+		rules       : { required: 'Truck Type is required' },
 	},
 	{
 		name        : 'truck_number',
