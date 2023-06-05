@@ -9,7 +9,7 @@ import PreviewDocumet from '../../../../common/PreviewDocumet';
 import styles from './styles.module.css';
 
 function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
-	const { detail, offer_letter, pay_slip } = profileData || {};
+	const { detail, offer_letter, payslip } = profileData || {};
 	const { employee_experience_details = [] } = detail || {};
 
 	const formatdate = ({ date }) => formatDate({
@@ -109,7 +109,7 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 					<div className={styles.extra_header}>Last Pay Slip</div>
 
 					<PreviewDocumet
-						document_url={pay_slip?.document_url}
+						document_url={payslip}
 						preview="true"
 					/>
 				</div>

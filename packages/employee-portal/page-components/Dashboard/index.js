@@ -10,20 +10,22 @@ import styles from './styles.module.css';
 function Dashboard() {
 	const [informationPage, setInformationPage] = useState('');
 
-	const { data, getEmployeeDetails } = useGetEmployeeDetails({ company_policy_data_required: true });
+	const { data, getEmployeeDetails } = useGetEmployeeDetails({
+		company_policy_data_required: true,
+
+	});
+
 	const { detail } = data || {};
 	const { name } = detail || {};
 
 	return (
 		<div className={styles.container}>
-			{
-				!informationPage && (
-					<div>
-						<HeaderComponent name={name} />
-						<StepperComponent informationPage={informationPage} data={data} />
-					</div>
-				)
-			}
+			{!informationPage && (
+				<div>
+					<HeaderComponent name={name} />
+					<StepperComponent informationPage={informationPage} data={data} />
+				</div>
+			)}
 
 			<TabComponents
 				data={data}

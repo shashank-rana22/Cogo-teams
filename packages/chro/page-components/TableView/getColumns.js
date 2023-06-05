@@ -57,10 +57,10 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab }) => [
 				<div>
 					Rs.
 					{' '}
-					{init}
+					{init / 100000}
 					{' '}
 					LPA (fixed)
-					{variable_pay > 0 ? ` + Rs. ${variable_pay} LPA (variable)`
+					{variable_pay > 0 ? ` + Rs. ${variable_pay / 100000} LPA (variable)`
 						: null}
 				</div>
 			);

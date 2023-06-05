@@ -68,12 +68,12 @@ function useUpdateEmployeeDetails({
 			payload = {
 				employee_experience_details: data?.employment_history.map((item) => ({
 					...item,
-					started_at : String(item.started_at),
-					ended_at   : String(item.ended_at),
-
+					started_at   : String(item.started_at),
+					ended_at     : String(item.ended_at),
+					offer_letter : offerLetter?.finalUrl,
+					payslip      : paySlip?.finalUrl,
 				})),
-				offer_letter : offerLetter?.finalUrl,
-				pay_slip     : paySlip?.finalUrl,
+
 			};
 		}
 
