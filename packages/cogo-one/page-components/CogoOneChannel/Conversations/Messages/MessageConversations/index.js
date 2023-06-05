@@ -12,6 +12,7 @@ import { useRef, useEffect } from 'react';
 import CustomFileUploader from '../../../../../common/CustomFileUploader';
 import ReceiveDiv from '../../../../../common/ReceiveDiv';
 import SentDiv from '../../../../../common/SentDiv';
+import { ACCEPT_FILE_MAPPING } from '../../../../../constants';
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
 
@@ -324,6 +325,7 @@ function MessageConversations({
 								handleProgress={handleProgress}
 								showProgress={false}
 								draggable
+								accept={ACCEPT_FILE_MAPPING[channel_type] || ACCEPT_FILE_MAPPING.default}
 								className="file_uploader"
 								uploadIcon={(
 									<IcMAttach
@@ -335,6 +337,7 @@ function MessageConversations({
 										}}
 									/>
 								)}
+								channel={channel_type}
 								onChange={(val) => {
 									setDraftUploadedFiles((prev) => ({
 										...prev,

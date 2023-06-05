@@ -250,7 +250,7 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
-			api          : 'create_test_user_mapping',
+			api          : 'update_test_user_mapping',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
@@ -429,6 +429,11 @@ const faq = {
 		},
 		{
 			api          : 'update_test_mapping_responses',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
+			api          : 're_allow_test',
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
