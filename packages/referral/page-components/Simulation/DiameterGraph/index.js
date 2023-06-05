@@ -1,13 +1,14 @@
 import { ResponsiveHeatMap } from '@cogoport/charts/heatmap';
 import { cl } from '@cogoport/components';
 import { IcMArrowNext } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import getFormattedData from '../../../utils/getFormattedData';
 import { handleValues } from '../../../utils/handleValue';
 
 import styles from './styles.module.css';
 
-function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {} }) {
+function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}, activeTab = '' }) {
 	const formattedData = getFormattedData(simulationData);
 
 	const mapData = (data) => {
@@ -15,7 +16,7 @@ function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}
 			id   : key,
 			data : Object.entries(value).map(([childKey, childValue]) => ({
 				x : handleValues(childKey),
-				y : handleValues(childValue),
+				y : childValue,
 			})),
 
 		}));
@@ -38,7 +39,7 @@ function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}
 					tickSize       : 0,
 					tickPadding    : 6,
 					tickRotation   : 0,
-					legend         : 'Shipment Revenue (INR)',
+					legend         : `${startCase(activeTab)} Revenue (INR)`,
 					legendPosition : 'start',
 					legendOffset   : 34,
 				}}
@@ -52,13 +53,14 @@ function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}
 				}}
 				colors={{
 					type      : 'diverging',
-					scheme    : 'red_yellow_blue',
 					divergeAt : 0.5,
 					minValue  : -100000,
 					maxValue  : 100000,
 				}}
 				activeOpacity={0.4}
 				inactiveOpacity={0.8}
+				borderWidth={1}
+				borderColor={{ theme: 'grid.line.stroke' }}
 				onClick={(item) => setSingleData({ item })}
 			/>
 			<div className={styles.direction_container}>

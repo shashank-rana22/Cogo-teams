@@ -9,7 +9,7 @@
 	height: 85vh;
 	padding: 10px;
 	margin-right: 20px;
-	background: white;
+	background: #fff;
 	border-radius: 8px;
 }
 
@@ -42,19 +42,13 @@
 	padding: 10px 0 0 20px;
 }
 
-.shipment_value {
-	display: flex;
-	align-items: center;
-	padding: 10px 0 0 20px;
-}
-
 .amount {
 	margin-left: 5px;
 	font-weight: 600;
 }
 
 .user_lavel_payouts {
-	height: 68vh;
+	height: 73vh;
 	overflow-y: auto;
 	animation: payouts 0.5s both;
 
@@ -68,10 +62,10 @@
 			opacity: 1;
 		}
 	}
-}
 
-.user_lavel_payouts::-webkit-scrollbar {
-	display: none;
+	::-webkit-scrollbar {
+		display: none;
+	}
 }
 
 .payouts {

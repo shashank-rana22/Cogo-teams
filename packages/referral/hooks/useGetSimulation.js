@@ -1,11 +1,14 @@
-/* eslint-disable react-hooks/exhaustive-deps */
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
 
+import { MAX_LEVEL, REVENUE_START_PRICE, REVENUE_END_PRICE } from '../constants';
 import getSimulationLevelRevenue from '../utils/getSimulationLevelRevenue';
 
-const useGetSimulation = ({ activeTab = '', singleData = {}, setSingleData = () => {} }) => {
+const EMPTY_FUNCTION = () => {};
+const EMPTY_OBJECT = {};
+
+const useGetSimulation = ({ type = '', activeTab = '', singleData = EMPTY_OBJECT, setSingleData = EMPTY_FUNCTION }) => {
 	const emptyCheck = !isEmpty(singleData);
 
 	const { item = {} } = singleData;
@@ -20,24 +23,34 @@ const useGetSimulation = ({ activeTab = '', singleData = {}, setSingleData = () 
 
 	useEffect(() => {
 		setSingleData({});
-	}, [activeTab]);
+	}, [activeTab, setSingleData]);
 
 	const getSimulation = useCallback(async () => {
+		const simulationPayload = {
+			event               : activeTab,
+			revenue_currency    : 'INR',
+			max_levels          : MAX_LEVEL,
+			revenue_start_price : REVENUE_START_PRICE,
+			revenue_end_price   : REVENUE_END_PRICE,
+		};
+
+		const levelPayload = {
+			...simulationPayload,
+			detail_data_required : emptyCheck ? true : undefined,
+			selected_revenue     : selectedRevenue || undefined,
+			selected_level       : emptyCheck ? serieId : undefined,
+		};
+
+		const newParams = type === 'level_data' && !isEmpty(singleData) ? levelPayload : simulationPayload;
 		try {
 			await trigger({
-				params: {
-					event                : activeTab,
-					revenue_currency     : 'INR',
-					max_levels           : 30,
-					detail_data_required : emptyCheck ? true : undefined,
-					selected_revenue     : selectedRevenue || undefined,
-					selected_level       : emptyCheck ? serieId : undefined,
-				},
+				params: newParams,
+
 			});
 		} catch (error) {
 			console.log(error);
 		}
-	}, [activeTab, emptyCheck, selectedRevenue, serieId, trigger]);
+	}, [activeTab, emptyCheck, selectedRevenue, serieId, singleData, trigger, type]);
 
 	useEffect(() => {
 		getSimulation();
