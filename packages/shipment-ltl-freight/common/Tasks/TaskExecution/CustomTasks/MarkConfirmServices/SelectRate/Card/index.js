@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 import useUpdateBookingPreferences
 	from '../../../../../../../hooks/useUpdateBookingPreferences';
@@ -37,6 +38,10 @@ function Card({
 	setSelectedCard = () => {},
 }) {
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
+	const keysForArr = useMemo(
+		() => Array(dataArr.length).fill(null).map(() => Math.random()),
+		[dataArr.length],
+	);
 
 	const { apiTrigger, loading } = useUpdateBookingPreferences({});
 
@@ -67,8 +72,8 @@ function Card({
 			</div>
 
 			<div className={styles.body}>
-				{(dataArr || []).map((dataObj) => (
-					<div className={styles.space_between}>
+				{(dataArr || []).map((dataObj, index) => (
+					<div className={styles.space_between} key={keysForArr[index]}>
 						<div>
 							<div className={styles.heading}>Supplier Name</div>
 

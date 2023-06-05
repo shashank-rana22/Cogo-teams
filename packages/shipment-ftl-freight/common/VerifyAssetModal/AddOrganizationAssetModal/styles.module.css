@@ -4,7 +4,7 @@
 	padding: 24px;
 }
 
-.button_container{
+.button_container {
 	display: flex;
 	justify-content: flex-end;
 	margin-top: 16px;
@@ -17,10 +17,10 @@
 
 	:global {
 		.form-item-label {
-			font-weight: 500;
+			margin: 16px 0 8px;
 			font-size: 12px;
+			font-weight: 500;
 			color: #4f4f4f;
-			margin: 16px 0 8px 0;
 		}
 
 		.core-ui-select__control {

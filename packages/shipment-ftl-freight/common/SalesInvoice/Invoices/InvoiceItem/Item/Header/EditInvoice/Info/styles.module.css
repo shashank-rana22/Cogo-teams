@@ -1,17 +1,17 @@
-.container{
+.container {
 	.tippy-box {
 		max-width: fit-content !important;
 	}
 }
 
-.info_div{
-	margin-left: 6px;
+.info_div {
 	display: flex;
 	align-items: center;
+	margin-left: 6px;
 }
 
-.content_div{
+.content_div {
 	width: 160px;
-	background: #fff;
 	font-size: 11px;
+	background: #fff;
 }

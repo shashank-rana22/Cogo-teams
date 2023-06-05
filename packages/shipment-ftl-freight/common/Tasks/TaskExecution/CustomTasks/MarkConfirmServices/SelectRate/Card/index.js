@@ -2,6 +2,7 @@ import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
+import { useMemo } from 'react';
 
 import useUpdateBookingPreferences
 	from '../../../../../../../hooks/useUpdateBookingPreferences';
@@ -40,6 +41,11 @@ function Card({
 
 	const { apiTrigger, loading } = useUpdateBookingPreferences({});
 
+	const keysForArr = useMemo(
+		() => Array(dataArr.length).fill(null).map(() => Math.random()),
+		[dataArr.length],
+	);
+
 	const handleProceed = async () => {
 		await apiTrigger(item);
 
@@ -67,8 +73,8 @@ function Card({
 			</div>
 
 			<div className={styles.body}>
-				{(dataArr || []).map((dataObj) => (
-					<div className={styles.space_between}>
+				{(dataArr || []).map((dataObj, index) => (
+					<div className={styles.space_between} key={keysForArr[index]}>
 						<div>
 							<div className={styles.heading}>Supplier Name</div>
 
@@ -76,16 +82,6 @@ function Card({
 								{dataObj?.service_provider?.business_name}
 							</div>
 						</div>
-
-						{dataObj?.airline?.business_name ? (
-							<div>
-								<div className={styles.heading}>Carrier</div>
-
-								<div className={styles.sub_heading}>
-									{dataObj?.operator?.business_name || dataObj?.airline?.business_name}
-								</div>
-							</div>
-						) : null}
 
 						<div>
 							<div className={styles.heading}>Source of Rate</div>
