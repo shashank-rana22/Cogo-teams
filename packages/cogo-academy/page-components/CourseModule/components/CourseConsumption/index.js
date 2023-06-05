@@ -113,7 +113,6 @@ function CourseConsumption({
 						setEditorError={setEditorError}
 						setChapter={setChapter}
 					/>
-
 				) : null}
 
 				{viewType === 'preview' ? (

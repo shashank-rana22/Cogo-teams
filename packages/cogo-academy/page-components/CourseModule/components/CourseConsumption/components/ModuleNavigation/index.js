@@ -21,7 +21,9 @@ function ModuleNavigation({
 	showFeedback,
 	setShowFeedback,
 }) {
-	const { course_details = {}, all_chapters_completed = false } = data;
+	const { course_details = {}, all_chapters_completed = false, test_completed = false } = data;
+
+	const { name = '', tests = [] } = course_details;
 
 	// const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration;
 
@@ -39,7 +41,7 @@ function ModuleNavigation({
 		<div className={styles.container}>
 
 			<div>
-				<h3 className={styles.course_name}>{data?.course_details?.name}</h3>
+				<h3 className={styles.course_name}>{name}</h3>
 
 				{/* <div className={styles.duration}>
 					Complete in
@@ -130,17 +132,19 @@ function ModuleNavigation({
 
 			))}
 
-			{(!isEmpty(data?.course_details?.tests)) ? (
+			{(!isEmpty(tests)) ? (
 				<div
-					className={`${(data?.all_chapters_completed) ? styles.box_active : styles.box_deactive} 
+					className={`${(all_chapters_completed) ? styles.box_active : styles.box_deactive} 
 					${showTestData ? styles.box_selected : styles.box_notselected}`}
 					role="button"
 					tabIndex="0"
 					onClick={() => {
-						(data?.all_chapters_completed) ? setStates(false, true, {}) : null;
+						if (all_chapters_completed) {
+							setStates(false, true, {});
+						}
 					}}
 				>
-					{(data?.all_chapters_completed)
+					{(all_chapters_completed)
 						? <IcMUnlock height={20} width={20} /> : <IcMLock height={20} width={20} />}
 					<div className={styles.text}>
 						Course Completion Test
@@ -149,16 +153,20 @@ function ModuleNavigation({
 			) : null}
 
 			<div
-				className={`${(data?.test_completed) ? styles.box_active : styles.box_deactive} 
+				className={`${(test_completed) ? styles.box_active : styles.box_deactive} 
 					${showFeedback ? styles.box_selected : styles.box_notselected}`}
 				role="button"
 				tabIndex="0"
 				onClick={() => {
-					(data?.test_completed) ? setStates(true, false, {}) : null;
+					if (test_completed) {
+						setStates(true, false, {});
+					}
 				}}
 			>
-				{(data?.all_chapters_completed)
-					? <IcMUnlock height={20} width={20} /> : <IcMLock height={20} width={20} />}
+				{all_chapters_completed
+					? <IcMUnlock height={20} width={20} />
+					: <IcMLock height={20} width={20} />}
+
 				<div className={styles.text}>
 					Course Completion
 				</div>

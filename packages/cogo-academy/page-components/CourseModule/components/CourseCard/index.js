@@ -55,6 +55,12 @@ function CourseCard({
 
 	const { updateUserCourse } = useUpdateUserCourse({ fetchList });
 
+	let finalUserProgress = user_progress;
+
+	if (finalUserProgress > 100) {
+		finalUserProgress = 100;
+	}
+
 	return (
 		<div className={`${styles.container} ${styles[viewType]}`}>
 			<div
@@ -149,10 +155,10 @@ function CourseCard({
 					{state === 'ongoing' ? (
 						<>
 							<div className={styles.remaining_text}>
-								{toFixed(100 - Number(user_progress), 2)}
+								{toFixed(100 - Number(finalUserProgress), 2)}
 								% Remaining
 							</div>
-							<ProgressBar progress={toFixed(user_progress, 2)} uploadText=" " />
+							<ProgressBar progress={toFixed(finalUserProgress, 2)} uploadText=" " />
 						</>
 					) : null}
 
@@ -193,6 +199,7 @@ function CourseCard({
 
 					<Button
 						size="md"
+						type="button"
 						themeType="secondary"
 						className={`${styles.btn} primary_button`}
 						onClick={() => {
