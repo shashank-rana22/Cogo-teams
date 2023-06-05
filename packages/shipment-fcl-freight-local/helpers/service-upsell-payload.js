@@ -138,7 +138,7 @@ const formatPayload = ({
 		source_id                              : shipment_data?.id,
 		importer_exporter_id                   : shipment_data?.importer_exporter_id,
 		importer_exporter_branch_id            : shipment_data?.importer_exporter_branch_id,
-		user_id                                : shipment_data?.user_id,
+		user_id                                : shipment_data?.importer_exporter_poc_id,
 		[`${search_type}_services_attributes`] : formatDataForSingleService({
 			rawParams,
 		}),

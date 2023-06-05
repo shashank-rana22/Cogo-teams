@@ -15,14 +15,13 @@ function Footer({
 	const { shipment_data, primary_service } = useContext(ShipmentDetailContext);
 	const { handleSubmit = () => {}, formValues } = formProps;
 
-	const { organization_id = '', user_id = {} } = formValues || {};
+	const { organization_id = '' } = formValues || {};
 
 	const { onAddService = () => {}, loading } = useCreateSpotSearch({
 		primary_service,
 		service,
 		shipment_data,
 		organization_id,
-		user: user_id,
 	});
 
 	const buttons = [
