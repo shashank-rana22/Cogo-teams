@@ -22,7 +22,6 @@ function Header({
 
 	let updatePermission = true;
 
-	// let updatePermission = dataFromOtherSource?.permissions?.add;
 	if (![true, false].includes(updatePermission)) {
 		updatePermission = true;
 	}
