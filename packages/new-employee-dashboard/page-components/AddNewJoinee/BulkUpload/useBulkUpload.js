@@ -15,8 +15,6 @@ const useBulkUpload = () => {
 
 	const { formState: { errors }, control, handleSubmit } = useForm();
 
-	const router = useRouter();
-
 	const onClickViewSampleFile = () => {
 		window.open(SAMPLE_DOCUMENT_URL, '_blank', 'noreferrer');
 	};
@@ -32,7 +30,6 @@ const useBulkUpload = () => {
 			await trigger({ data: payload });
 
 			Toast('New Hire details is uploaded Successfully');
-			router.back();
 		} catch (error) {
 			if (error?.message || error?.error?.message) {
 				if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
