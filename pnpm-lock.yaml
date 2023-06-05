@@ -111,6 +111,9 @@ importers:
       '@cogoport/contracts':
         specifier: workspace:0.1.0
         version: link:../packages/contracts
+      '@cogoport/controlled-booking':
+        specifier: workspace:0.1.0
+        version: link:../packages/controlled-booking
       '@cogoport/core':
         specifier: workspace:0.1.0
         version: link:../common/core
@@ -1053,7 +1056,7 @@ importers:
         version: 1.0.3(prop-types@15.8.1)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/components':
         specifier: ^1.0.419
-        version: 1.0.419(@babel/core@7.21.3)(@cogoport/icons-react@1.0.68)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.423(@babel/core@7.21.3)(@cogoport/icons-react@1.0.68)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
@@ -1172,6 +1175,36 @@ importers:
         specifier: 18.2.0
         version: 18.2.0
 
+  packages/controlled-booking:
+    dependencies:
+      '@cogoport/components':
+        specifier: ^1.0.423
+        version: 1.0.423(@babel/core@7.21.3)(@cogoport/icons-react@1.0.73)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/forms':
+        specifier: workspace:^0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: ^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.65
+        version: 1.0.73(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../../common/next
+      '@cogoport/request':
+        specifier: workspace:^0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:^0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.6
+        version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+
   packages/cost-booking-desk:
     dependencies:
       '@cogoport/components':
@@ -1273,6 +1306,9 @@ importers:
       '@cogoport/forms':
         specifier: workspace:0.1.0
         version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: ^0.0.1
+        version: link:../../common/globalization
       '@cogoport/icons-react':
         specifier: ^1.0.51
         version: 1.0.60(react-dom@18.2.0)(react@18.2.0)
@@ -1600,7 +1636,7 @@ importers:
     dependencies:
       '@cogoport/components':
         specifier: ^1.0.417
-        version: 1.0.418(@babel/core@7.21.3)(@cogoport/icons-react@1.0.73)(react-dom@18.2.0)(react@18.2.0)
+        version: 1.0.423(@babel/core@7.21.3)(@cogoport/icons-react@1.0.73)(react-dom@18.2.0)(react@18.2.0)
       '@cogoport/forms':
         specifier: workspace:^0.1.0
         version: link:../../common/forms
@@ -3750,14 +3786,14 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components@1.0.419(@babel/core@7.21.3)(@cogoport/icons-react@1.0.68)(react-dom@18.2.0)(react@18.2.0):
-    resolution: {integrity: sha512-BCEeLUJWMMAdWbxw4LFZEf5Z3ecTqvVAcBkc4j7yxT6W4m8aEIzOU7+Y7FLWdQw3tGJOyAUNhF9PE5njt4YQcQ==}
+  /@cogoport/components@1.0.423(@babel/core@7.21.3)(@cogoport/icons-react@1.0.65)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-GlXVeGU/lg8/O1lDkL+AYUu9PW7A6S3JpobcNnT1py1ak9vZ2+6T3Y39TG6YLrUPRyh6mRkkWUpJV52HgDOshA==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.68(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/icons-react': 1.0.65(react-dom@18.2.0)(react@18.2.0)
       '@tippyjs/react': 4.2.6(react-dom@18.2.0)(react@18.2.0)
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5
@@ -3785,14 +3821,14 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/components@1.0.423(@babel/core@7.21.3)(@cogoport/icons-react@1.0.65)(react-dom@18.2.0)(react@18.2.0):
+  /@cogoport/components@1.0.423(@babel/core@7.21.3)(@cogoport/icons-react@1.0.68)(react-dom@18.2.0)(react@18.2.0):
     resolution: {integrity: sha512-GlXVeGU/lg8/O1lDkL+AYUu9PW7A6S3JpobcNnT1py1ak9vZ2+6T3Y39TG6YLrUPRyh6mRkkWUpJV52HgDOshA==}
     peerDependencies:
       '@cogoport/icons-react': ^1.0.23
       react: ^18.2.0
       react-dom: ^18.2.0
     dependencies:
-      '@cogoport/icons-react': 1.0.65(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/icons-react': 1.0.68(react-dom@18.2.0)(react@18.2.0)
       '@tippyjs/react': 4.2.6(react-dom@18.2.0)(react@18.2.0)
       '@types/quill': 2.0.10
       '@types/react-rte': 0.16.5

@@ -1842,6 +1842,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'bulk_update_controlled_checkout_service',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
+			api          : 'update_checkout_approval',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
+			api          : 'send_checkout_for_approval',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 	],
 	supply_crm: [
 		{
@@ -4382,6 +4397,12 @@ const partner = {
 		},
 		{
 			api          : 'delete_haulage_freight_rate_feedback',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
+			api          : 'delete_trailer_freight_rate_feedback',
 			access_type  : 'private',
 			service_name : 'haulage_freight_rate',
 			feature      : 'disliked_rates',
@@ -8539,6 +8560,8 @@ const partner = {
 			api          : 'list_organization_trade_party_details',
 			access_type  : 'private',
 			service_name : 'organization',
+			module       : 'tds-settlement',
+			feature      : 'tds-settlement',
 		},
 		{
 			api          : 'list_organization_users',
@@ -11704,6 +11727,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_air_coe_pending_tasks_amend_list',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_locations',
 			access_type  : 'private',
 			service_name : 'location',
@@ -12328,6 +12355,19 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+	],
+	controlled_booking: [
+		{
+			api          : 'list_checkouts',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
+			api          : 'update_checkout_approval',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+
 	],
 };
 
