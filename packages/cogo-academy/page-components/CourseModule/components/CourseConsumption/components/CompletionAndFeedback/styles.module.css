@@ -1,8 +1,8 @@
 .container {
 	margin-top: -24px;
 
-	:global{
-		.ui_text_area_container{
+	:global {
+		.ui_text_area_container {
 			width: auto;
 			margin-left: 30px;
 		}
@@ -56,7 +56,7 @@
 .congrats_text {
 	position: absolute;
 	top: 100px;
-    right: 200px;
+	right: 200px;
 	width: 580px;
 	text-align: center;
 }
@@ -65,7 +65,7 @@
 	margin-bottom: 40px;
 }
 
-.remarks{
-	margin-left: 30px;
+.remarks {
 	margin-bottom: 6px;
+	margin-left: 30px;
 }
