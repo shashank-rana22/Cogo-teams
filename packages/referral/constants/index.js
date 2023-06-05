@@ -48,16 +48,6 @@ export const REFERRAL_TYPES = [
 	},
 ];
 
-export const LIST_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
-
-export const COGOPOINT_IMG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg';
-
-export const NETWORK_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg';
-
-export const NETWORK_LOADER = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif';
-
-export const USER_AVATAR = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp';
-
 export const TABS_OPTIONS = [
 	{
 		label : 'Invited',

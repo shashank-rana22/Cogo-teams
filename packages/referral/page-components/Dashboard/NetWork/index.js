@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -5,7 +6,6 @@ import Image from 'next/image';
 import React, { useState } from 'react';
 
 import NetworkChart from '../../../common/NetworkChart';
-import { NETWORK_LOADER } from '../../../constants';
 import useGetNetwork from '../../../hooks/useGetNetwork';
 
 import styles from './styles.module.css';
@@ -51,7 +51,7 @@ function NetWork() {
 			) : (
 				<div className={styles.loading_state}>
 					<Image
-						src={NETWORK_LOADER}
+						src={GLOBAL_CONSTANTS.image_url.network_loader}
 						alt="cogoport-loading"
 						width={120}
 						height={120}

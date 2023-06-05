@@ -135,6 +135,11 @@ const GLOBAL_CONSTANTS = {
 		incoming_green_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
 		outgoing_orange_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
 		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
+		list_empty          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png',
+		network_empty_list  : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg',
+		cogopoint_image     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg',
+		network_loader      : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif',
+		user_avatar         : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp',
 
 	},
 	options: {

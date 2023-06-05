@@ -17,7 +17,7 @@ function UserPerformance({ selectedDate = {}, setSelectedDate = () => {} }) {
 	const { list = [] } = referral_network || {};
 
 	return (
-		<div>
+		<>
 			<PerformanceStats selectedDate={selectedDate} setSelectedDate={setSelectedDate} />
 			<div className={styles.list_div}>
 				<NetworkList
@@ -38,7 +38,7 @@ function UserPerformance({ selectedDate = {}, setSelectedDate = () => {} }) {
 				setActivityModal={setShowActivityModal}
 				userDate={showOptions}
 			/>
-		</div>
+		</>
 	);
 }
 

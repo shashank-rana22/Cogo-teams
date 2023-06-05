@@ -1,10 +1,11 @@
 import { cl, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import Image from 'next/image';
 import React from 'react';
 
-import { USER_STATUS_MAPPING, USER_STATUS_COLOUR, COGOPOINT_IMG } from '../../../../constants';
+import { USER_STATUS_MAPPING, USER_STATUS_COLOUR } from '../../../../constants';
 import TooltipContent from '../../../TooltipContent';
 import styles from '../styles.module.css';
 
@@ -101,7 +102,7 @@ function DirectNode(
 						Total:
 					</div>
 					<Image
-						src={COGOPOINT_IMG}
+						src={GLOBAL_CONSTANTS.image_url.cogopoint_image}
 						alt="cogopoint"
 						width={18}
 						height={18}

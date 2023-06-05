@@ -1,6 +1,6 @@
 import { Popover, Tooltip } from '@cogoport/components';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { getByKey, startCase } from '@cogoport/utils';
 
 import ListButtons from '../../../../../utils/renderButtonData';
 import InviteColumns from '../InviteColumns';
@@ -20,11 +20,11 @@ function TableColumns({
 			accessor : (item = {}) => (
 				<div className={styles.tooltip_content}>
 					<Tooltip
-						content={startCase(item?.referee_data?.name)}
+						content={startCase(getByKey(item.referee_data, 'name'))}
 						placement="bottom"
 					>
 						<div className={styles.user_name}>
-							{startCase(item?.referee_data?.name) || 'NA'}
+							{startCase(getByKey(item.referee_data, 'name'))}
 						</div>
 					</Tooltip>
 				</div>
@@ -35,8 +35,8 @@ function TableColumns({
 			Header   : 'USER NAME',
 			accessor : (item = {}) => (
 				<div className={styles.tooltip_content}>
-					<Tooltip content={startCase('Cogoport')} placement="bottom">
-						<div className={styles.user_name}>{startCase(item?.referee_data?.name)}</div>
+					<Tooltip content={startCase(getByKey(item.referee_data, 'name'))} placement="bottom">
+						<div className={styles.user_name}>{startCase(getByKey(item.referee_data, 'name'))}</div>
 					</Tooltip>
 				</div>
 			),
@@ -54,7 +54,7 @@ function TableColumns({
 		{
 			Header   : 'USERS',
 			accessor : (item = {}) => (
-				<div className={styles.user_name}>{item?.total_child_count}</div>
+				<div className={styles.user_name}>{getByKey(item, 'total_child_count')}</div>
 			),
 			conditions: ['network'],
 		},

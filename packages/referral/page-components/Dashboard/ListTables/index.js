@@ -1,9 +1,9 @@
 import { Tabs, TabPanel, Pagination, Table } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import Image from 'next/image';
 
 import tableTabs from '../../../configurations/table-tabs';
-import { LIST_EMPTY_STATE } from '../../../constants';
 
 import styles from './styles.module.css';
 import TableColumns from './TableColumns';
@@ -59,7 +59,7 @@ function ListTables({
 								{isEmpty(list) && !listLoading && (
 									<figure className={styles.empty_state}>
 										<Image
-											src={LIST_EMPTY_STATE}
+											src={GLOBAL_CONSTANTS.image_url.list_empty}
 											alt="Empty State"
 											width={300}
 											height={250}

@@ -10,8 +10,10 @@ function ListButtons({
 	setShowActivityModal = () => {},
 	setShowOptions = () => {},
 }) {
-	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 	const router = useRouter();
+	const { partnerId } = useSelector(({ profile }) => ({
+		partnerId: profile.partner?.id,
+	}));
 
 	const { organization_data = [], referee_data = {}, total_child_count = 0, name = '' } = item;
 	const { id: refereeId = '', name: refereename = '' } = referee_data || {};

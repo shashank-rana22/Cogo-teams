@@ -1,9 +1,8 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import Image from 'next/image';
 import { useState } from 'react';
-
-import { COGOPOINT_IMG } from '../../../constants';
 
 import DirectNode from './DirectNode';
 import styles from './styles.module.css';
@@ -97,7 +96,7 @@ function RenderForeignObjectNode({
 
 					<div className={styles.cogopoints}>
 						<Image
-							src={COGOPOINT_IMG}
+							src={GLOBAL_CONSTANTS.image_url.cogopoint_image}
 							alt="cogopoint"
 							width={18}
 							height={18}

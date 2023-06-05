@@ -1,14 +1,14 @@
 import styles from './styles.module.css';
 
 function SignedUpColumns({ index = 0, item = {} }) {
-	const { sign_up = {} } = item || {};
-	const { user_count = 0, affiliate_count = 0 } = sign_up || {};
+	const { direct_data = {} } = item || {};
+	const { active_user_count = 0, affiliate_count = 0 } = direct_data || {};
 
 	const subTitleOptions = [
 		{
 			title : 'Users',
 			name  : 'users',
-			count : user_count,
+			count : active_user_count,
 		},
 		{
 			title : 'Affiliates',
