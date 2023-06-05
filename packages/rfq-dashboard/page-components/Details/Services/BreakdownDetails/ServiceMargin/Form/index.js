@@ -14,8 +14,6 @@ function Form({
 }) {
 	const nameKey = id_prefix ? `${id_prefix}_edit_margin` : 'edit_margin';
 
-	console.log('lineItem::', lineItem);
-
 	const {
 		value = 0,
 		type,
@@ -50,13 +48,10 @@ function Form({
 			currency,
 			value : marginValue,
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {
-		console.log('watch::', watch());
 		watch((v) => {
-			console.error('inside useEfect ll');
 			onChange({
 				serviceKey,
 				code     : lineItem?.code,
@@ -67,8 +62,6 @@ function Form({
 		});
 	}, [lineItem, nameKey, onChange, serviceKey, watch]);
 
-	console.log(lineItem, 'lineItem');
-	console.log(watch(), 'watch');
 	return (
 		<>
 			{marginControls.map((controItem) => {
