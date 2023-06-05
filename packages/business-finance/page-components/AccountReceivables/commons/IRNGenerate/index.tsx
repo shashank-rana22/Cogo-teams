@@ -7,6 +7,7 @@ import { useState } from 'react';
 import useFinanceReject from '../../hooks/useFinanceReject';
 import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
 import useGetRefresh from '../../hooks/useGetRefresh';
+import usePostToSage from '../../hooks/usePostToSage';
 import useUploadeInvoice from '../../hooks/useUploadInvoice';
 
 import FinalPostModal from './FinalPostModal';
@@ -19,6 +20,7 @@ type Itemdata = {
 	entityCode?: number
 	daysLeftForAutoIrnGeneration?: string
 	isFinalPosted?:boolean
+	invoiceType?:string
 };
 interface IRNGeneration {
 	itemData?: Itemdata
@@ -30,6 +32,8 @@ const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 const POSTED_STATUS = ['POSTED'];
 
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
+
+const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
 
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
 
@@ -43,7 +47,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 	const [visible, setVisible] = useState(false);
 
-	const { invoiceStatus = '', entityCode = '', isFinalPosted = false } = itemData || {};
+	const { invoiceStatus = '', entityCode = '', isFinalPosted = false, invoiceType = '' } = itemData || {};
 
 	const { partner = {} } = profile;
 
@@ -56,7 +60,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		textValue,
 		refetch,
 	});
-
+	const { postToSage, loading:showPostLoading } = usePostToSage(id);
 	const {
 		generateIrn, loading, finalPostFromSage, finalPostLoading, getSageInvoiceData, sageInvoiceData,
 		sageInvoiceLoading,
@@ -92,6 +96,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		getSageInvoiceData();
 		setVisible(!visible);
 	};
+	const showPost = invoiceType === 'REIMBURSEMENT' || invoiceType === 'REIMBURSEMENT_CREDIT_NOTE';
 
 	const content = () => (
 		<div>
@@ -119,7 +124,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 				<div
 					className={styles.generate_container}
 				>
-					{INVOICE_STATUS.includes(invoiceStatus) && (
+					{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
 						<Button
 							size="sm"
 							disabled={loading}
@@ -155,7 +160,15 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							</Button>
 						</div>
 					)}
-
+					{(SHOW_POST_TO_SAGE.includes(invoiceStatus) && showPost) && (
+						<Button
+							disabled={showPostLoading}
+							size="sm"
+							onClick={postToSage}
+						>
+							Post to Sage
+						</Button>
+					)}
 					<FinalPostModal
 						finalPostToSageModal={finalPostToSageModal}
 						setFinalPostToSageModal={setFinalPostToSageModal}
@@ -168,7 +181,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 				</div>
 			)}
-			{INVOICE_STATUS.includes(invoiceStatus) && (
+			{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
 				<div className={styles.button_container}>
 					<Button
 						size="sm"
