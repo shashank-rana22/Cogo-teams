@@ -41,6 +41,8 @@ function BreakdownDetails({
 	rateDetails.splice(0, 1);
 	rateDetails.splice(rateDetails.length - 1, 1);
 
+	console.error('rate::', rate);
+
 	let total = 0;
 	const { totalAmount } = getTotalMarginSum({
 		editedMargins,
