@@ -14,7 +14,6 @@ importers:
       git-precommit-checks: ^3.1.0
       husky: ^8.0.3
       next: 13.1.6
-      pnpm: ^7.5.2
       postcss: ^8.4.21
       postcss-flexbugs-fixes: ^5.0.2
       postcss-nested: ^6.0.1
@@ -26,7 +25,6 @@ importers:
       '@sentry/nextjs': 7.51.2_next@13.1.6
       axios-hooks: 4.0.0
       next: 13.1.6_react-dom@18.2.0
-      pnpm: 7.33.0
       react-dom: 18.2.0
     devDependencies:
       '@cogoport/eslint-config': 1.1.0_eslint@8.40.0
@@ -10027,12 +10025,6 @@ packages:
   /picomatch/2.3.1:
     resolution: {integrity: sha512-JU3teHTNjmE2VCGFzuY8EXzCDVwEqB2a8fsIvwaStHhAWJEeVd1o1QD80CU6+ZdEXXSLbSsuLwJjkCBWqRQUVA==}
     engines: {node: '>=8.6'}
-
-  /pnpm/7.33.0:
-    resolution: {integrity: sha512-Mx97pT+pbYWesDFARX3YbBADaXHQ8G5uZALx4WsbQVprGWFfTM+eSCygWUrhJ/KX6Qr51S7SwB6DTjFPx+8YHw==}
-    engines: {node: '>=14.6'}
-    hasBin: true
-    dev: false
 
   /polished/4.2.2:
     resolution: {integrity: sha512-Sz2Lkdxz6F2Pgnpi9U5Ng/WdWAUZxmHrNPoVlm3aAemxoy2Qy7LGjQg4uf8qKelDAUW94F4np3iH2YPf2qefcQ==}
