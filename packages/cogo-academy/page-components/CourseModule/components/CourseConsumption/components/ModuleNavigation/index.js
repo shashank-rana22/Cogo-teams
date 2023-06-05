@@ -134,17 +134,20 @@ function ModuleNavigation({
 
 			{(!isEmpty(tests)) ? (
 				<div
-					className={`${(all_chapters_completed) ? styles.box_active : styles.box_deactive} 
-					${showTestData ? styles.box_selected : styles.box_notselected}`}
+					className={
+					`${(all_chapters_completed || test_completed)
+						? styles.box_active : styles.box_deactive} 
+					${showTestData ? styles.box_selected : styles.box_notselected}`
+}
 					role="button"
 					tabIndex="0"
 					onClick={() => {
-						if (all_chapters_completed) {
+						if (all_chapters_completed || test_completed) {
 							setStates(false, true, {});
 						}
 					}}
 				>
-					{(all_chapters_completed)
+					{(all_chapters_completed || test_completed)
 						? <IcMUnlock height={20} width={20} /> : <IcMLock height={20} width={20} />}
 					<div className={styles.text}>
 						Course Completion Test
@@ -163,7 +166,7 @@ function ModuleNavigation({
 					}
 				}}
 			>
-				{all_chapters_completed
+				{test_completed
 					? <IcMUnlock height={20} width={20} />
 					: <IcMLock height={20} width={20} />}
 
