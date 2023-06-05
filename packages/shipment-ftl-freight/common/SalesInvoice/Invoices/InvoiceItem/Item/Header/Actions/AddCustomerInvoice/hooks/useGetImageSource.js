@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import { useEffect, useState } from 'react';
 
 const LOGO_URL = 'https://cogoport-testing.sgp1.digitaloceanspaces.com/782ace87c99f4b4192741a3df89d4efb/Screenshot%202023-05-10%20at%2010.03.20%20AM.png';
