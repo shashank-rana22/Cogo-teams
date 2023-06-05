@@ -1,4 +1,4 @@
-import CONSTANTS from '../../../configurations/contants.json';
+import CONSTANTS from '../../../configurations/constant.json';
 
 const EDIT_PARAMS_STAKEHOLDERS = {
 	booking_agent: {

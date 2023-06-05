@@ -1,4 +1,4 @@
-import CONSTANTS from '../../../configurations/contants.json';
+import CONSTANTS from '../../../configurations/constant.json';
 
 const EDIT_SUPPLIER_SERVICE_STATES = [
 	'init',

@@ -4,7 +4,7 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import CONSTANTS from '../../../../../../../configurations/contants.json';
+import CONSTANTS from '../../../../../../../configurations/constant.json';
 import styles from '../styles.module.css';
 
 import Actions from './Actions';
