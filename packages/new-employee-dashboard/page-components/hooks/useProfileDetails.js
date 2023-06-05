@@ -15,8 +15,8 @@ const useProfileDetails = () => {
 	const { profile_id } = query || {};
 
 	const [ctcStructure, setCtcStructure] = useState({
-		basic                : { heading: 'basic', yearlyValue: 0, monthlyValue: 0 },
-		hra                  : { heading: 'hra', yearlyValue: 0, monthlyValue: 0 },
+		basic                : { heading: 'Basic', yearlyValue: 0, monthlyValue: 0 },
+		hra                  : { heading: 'HRA', yearlyValue: 0, monthlyValue: 0 },
 		conveyance_allowance : {
 			heading      : 'Conveyance Allowance',
 			yearlyValue  : 0,
@@ -83,7 +83,7 @@ const useProfileDetails = () => {
 			monthlyValue : 0,
 		},
 		sub_total_monthly_gross: {
-			heading      : 'Sub-Total Monthly Gross Annualized [A + B+ C]',
+			heading      : 'Sub-Total Monthly Gross Annualized [A + B + C]',
 			yearlyValue  : 0,
 			monthlyValue : 0,
 		},
@@ -93,25 +93,61 @@ const useProfileDetails = () => {
 			monthlyValue : 0,
 		},
 		annual_gross_salary: {
-			heading      : 'Annual Gross Salary [A+B+C+D]',
+			heading      : 'Annual Gross Salary [ A + B + C + D]',
 			yearlyValue  : 0,
 			monthlyValue : 0,
 		},
+		incentives: {
+			heading      : 'Incentives [E]',
+			yearlyValue  : 0,
+			monthlyValue : 0,
+		},
+		variable_component: {
+			heading      : 'Variable Component [V]',
+			yearlyValue  : 0,
+			monthlyValue : 0,
+		},
+		total_targeted_compensation: {
+			heading      : 'Total Targeted Compensation [ A + B + C + D + E + V]',
+			yearlyValue  : 0,
+			monthlyValue : 0,
+		},
+		approx_in_hand: {
+			heading      : 'Approx in Hand without TDS Deduction',
+			yearlyValue  : 0,
+			monthlyValue : 0,
+		},
+
 	});
 
 	const [initialQuestion, setInitialQuestion] = useState('');
 
 	const formProps = useForm();
 
+	const { getValues, watch } = formProps;
+
+	const yearlyJoiningBonus = watch('joining_bonus_yearly');
+	const monthlyJoiningBonus = watch('joining_bonus_monthly');
+	const yearlyRetentionBonus = watch('retention_bonus_yearly');
+	const monthlyRetentionBonus = watch('retention_bonus_monthly');
+	const yearlyPerformance = watch('performance_linked_variable_yearly');
+	const monthlyPerformance = watch('performance_linked_variable_monthly');
+	const yearlySignInBonus = watch('sign_on_bonus_yearly');
+	const monthlySignInBonus = watch('sign_on_bonus_monthly');
+
 	useEffect(() => {
+		const data = getValues();
+		// console.log('ok', data);
 		if (initialQuestion >= 600000) {
-			const ctcInfo = ctcModalControls(initialQuestion);
+			const ctcInfo = ctcModalControls(initialQuestion, data);
 			setCtcStructure(ctcInfo.controls);
 		} else {
-			const ctcInfo = ctcModalLessControls(initialQuestion);
+			const ctcInfo = ctcModalLessControls(initialQuestion, data);
 			setCtcStructure(ctcInfo.controls);
 		}
-	}, [initialQuestion]);
+	}, [getValues, initialQuestion, monthlyPerformance, yearlyPerformance,
+		monthlyRetentionBonus, yearlyRetentionBonus, monthlyJoiningBonus,
+		yearlyJoiningBonus, yearlySignInBonus, monthlySignInBonus]);
 
 	const params = {
 		id                      : profile_id,

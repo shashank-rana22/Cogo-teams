@@ -1,7 +1,7 @@
 import { Input } from '@cogoport/components';
 import React from 'react';
 
-import controls from '../../../../utils/ctc-modal-form-controls';
+import getControls from '../../../../utils/ctc-modal-form-controls';
 import { getElementController } from '../../../../utils/get-element-controls';
 
 import styles from './styles.module.css';
@@ -13,6 +13,8 @@ function ModalComponent({
 	formProps,
 }) {
 	const { control } = formProps;
+
+	const finalControls = getControls(initialQuestion);
 	return (
 		<div>
 			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -41,17 +43,18 @@ function ModalComponent({
 	<div className={styles.list} key={key}>
 		<div style={{ width: '60%' }}>{heading ?? '___'}</div>
 		<div style={{ width: '20%' }}>
-			{yearlyValue.toFixed(2) ?? '___'}
+			{Number(yearlyValue || 0).toFixed(2) ?? '___'}
 		</div>
 		<div style={{ width: '20%' }}>
-			{monthlyValue.toFixed(2) ?? '___'}
+			{(Number(monthlyValue || 0).toFixed(2)) ?? '___'}
 		</div>
 	</div>
         	);
 				})}
 			</div>
 
-			{controls.map((controlItem) => {
+			{finalControls.map((controlItem) => {
+				
       	const { yearly, monthly } = controlItem;
 
       	const Element = getElementController(controlItem?.yearly.type);

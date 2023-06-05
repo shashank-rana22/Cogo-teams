@@ -47,12 +47,14 @@ function ViewCtcBreakupContent({ metadata }) {
 								{heading ? <div style={{ width: '60%' }}>{startCase(heading ?? '______')}</div> : null}
 								{yearlyValue != null ? (
 									<div style={{ width: '20%' }}>
-										{yearlyValue?.toFixed(2) ?? '______'}
+										{Number(yearlyValue || 0).toFixed(2) ?? '______'}
+
 									</div>
 								) : null}
 								{monthlyValue != null ? (
 									<div style={{ width: '20%' }}>
-										{monthlyValue?.toFixed(2) ?? '______'}
+										{Number(monthlyValue || 0).toFixed(2) ?? '______'}
+
 									</div>
 								) : null}
 							</div>
