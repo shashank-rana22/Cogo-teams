@@ -139,7 +139,6 @@
 	}
 }
 .column2{
-    /* display: flex; */
     width: 24%;
     align-items: center;
     justify-content: space-between;
@@ -164,7 +163,6 @@
 }
 .right_border{
     width: 2%;
-    /* margin-right: 12px; */
     margin-left: 12px;
     @media(max-width:1068px){
         width: 100%;

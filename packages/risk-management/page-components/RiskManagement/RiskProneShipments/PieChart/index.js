@@ -1,6 +1,4 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
-import { Button } from '@cogoport/components';
-import { IcMInfo } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -76,7 +74,6 @@ function PieChart({ activeTab, chartData, loading }) {
 				<div className={styles.bottom_heading}>
 					{activeTab === 'container_movement' && 'Container Movement'}
 					{activeTab === 'bl_do' && 'BL/DO Release'}
-					{/* {activeTab === 'both' && 'Charge Range'} */}
 				</div>
 			</div>
 			{activeTab === 'container_movement' && (loading ? <Loader />
@@ -150,21 +147,7 @@ function PieChart({ activeTab, chartData, loading }) {
 					)
 			)}
 
-			<div className={styles.side_container}>
-				<div className={styles.top_element}>
-					<IcMInfo height={20} width={20} />
-				</div>
-				{activeTab !== 'both'
-					&& (
-						<div className={styles.bottom_element}>
-							<Button size="md" themeType="linkUi">
-								<div className={styles.button_text}>
-									View By Charge
-								</div>
-							</Button>
-						</div>
-					)}
-			</div>
+			<div className={styles.side_container} />
 		</div>
 	);
 }

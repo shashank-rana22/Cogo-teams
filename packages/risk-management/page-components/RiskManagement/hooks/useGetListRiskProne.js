@@ -40,7 +40,7 @@ const useGetListRiskProne = ({ activeTab }) => {
 						additional_methods : ['pagination'],
 						page_limit         : 10,
 						page               : pageIndex,
-						commodity_type     : hsCode,
+						hs_code            : hsCode,
 					},
 				});
 			} catch (err) {

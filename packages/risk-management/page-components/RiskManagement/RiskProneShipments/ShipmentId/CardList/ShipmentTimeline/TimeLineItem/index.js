@@ -11,11 +11,6 @@ import {
 function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
 	const { milestone, is_sub, completed_on } = item || {};
 
-	// const milestoneToDisplayDate = {
-	// 	'Vessel Departed From Origin (ETD)'   : schedule_departure || selected_schedule_departure,
-	// 	'Vessel Arrived At Destination (ETA)' : cargo_arrived_at || schedule_arrival || selected_schedule_arrival,
-	// };
-
 	const displayCompletedDate = completed_on;
 
 	let isCompleted = !!completed_on && consecutivelyCompleted;
@@ -33,7 +28,8 @@ function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
 				<>
 					<div className={label}>Completed On</div>
 					<div className={value}>
-						{format(displayCompletedDate, 'dd MMM yyyy hh:mm a')}
+						{displayCompletedDate !== null
+						&& format(displayCompletedDate, 'dd MMM yyyy hh:mm a')}
 						{/* {getDisplayDate({ date: displayCompletedDate, formatType: 'dateTime' })} */}
 					</div>
 				</>
@@ -53,7 +49,8 @@ function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
 			{!is_sub || isLast ? (
 				<div className={display_milestone}>
 					<div className={ellipsis}>{milestone}</div>
-					<div className={ellipsis}>{format(displayCompletedDate, 'dd MMM yyyy hh:mm a')}</div>
+					{displayCompletedDate !== null
+					&& <div className={ellipsis}>{format(displayCompletedDate, 'dd MMM yyyy hh:mm a')}</div>}
 				</div>
 			) : null}
 		</div>

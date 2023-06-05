@@ -4,7 +4,6 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-// import BlDoTimeline from './BlDoTimeline';
 import ShipmentTimline from './ShipmentTimeline';
 import styles from './styles.module.css';
 
@@ -14,7 +13,6 @@ function CardList({ itemData }) {
 	const {
 		serial_id = '', origin_port = {}, destination_port = {},
 		commodity = '', cargo_value_currency, cargo_value, trade_type, reason = [],
-		// potential_charge,
 	} = itemData || {};
 	const { display_name = '', port_code = '' } = origin_port || {};
 	const {
@@ -122,14 +120,6 @@ function CardList({ itemData }) {
 								<ShipmentTimline itemData={itemData} isAccordionActive={isAccordionActive} />
 							</div>
 						</div>
-						{/* <div>
-							<div className={styles.text}>
-								BL/DO Timeline
-							</div>
-							<div>
-								<BlDoTimeline itemData={itemData} isAccordionActive={isAccordionActive} />
-							</div>
-						</div> */}
 					</div>
 				</div>
 			</div>
