@@ -900,6 +900,7 @@ importers:
       '@cogoport/store': workspace:^0.1.0
       '@cogoport/utils': ^1.2.6
       react: 18.2.0
+      uuid: ^9.0.0
     dependencies:
       '@cogoport/components': 1.0.423_cor42tcbxcdki2jnxeludukzn4
       '@cogoport/forms': link:../../common/forms
@@ -911,6 +912,7 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       react: 18.2.0
+      uuid: 9.0.0
 
   packages/enrichment:
     specifiers:
@@ -2932,7 +2934,7 @@ packages:
       react: 18.2.0
       react-date-range: 1.4.0_kzhlcyde2l6xjiirkbg7jzhosa
       react-dom: 18.2.0_react@18.2.0
-      react-hook-form: 7.44.3_react@18.2.0
+      react-hook-form: 7.44.2_react@18.2.0
       react-quill: 2.0.0_biqbaboplfbrettd7655fr4n2y
       react-rte: 0.16.5_biqbaboplfbrettd7655fr4n2y
       react-table: 7.8.0_react@18.2.0
@@ -2965,7 +2967,7 @@ packages:
       fs: 0.0.1-security
       react: 18.2.0
       react-date-range: 1.4.0_kzhlcyde2l6xjiirkbg7jzhosa
-      react-hook-form: 7.44.3_react@18.2.0
+      react-hook-form: 7.44.2_react@18.2.0
       react-quill: 2.0.0_react@18.2.0
       react-rte: 0.16.5_react@18.2.0
       react-table: 7.8.0_react@18.2.0
@@ -6943,7 +6945,7 @@ packages:
   /d3-time-format/3.0.0:
     resolution: {integrity: sha512-UXJh6EKsHBTjopVqZBhFysQcoXSv/5yLONZvkQ5Kk3qbwiUYkdX17Xa1PT6U1ZWXGGfB1ey5L8dKMlFq2DO0Ag==}
     dependencies:
-      d3-time: 2.1.1
+      d3-time: 1.1.0
     dev: false
 
   /d3-time-format/4.1.0:
@@ -10334,6 +10336,15 @@ packages:
       react: 18.2.0
       react-draggable: 4.4.5_react@18.2.0
       react-resizable: 3.0.5_react@18.2.0
+    dev: false
+
+  /react-hook-form/7.44.2_react@18.2.0:
+    resolution: {integrity: sha512-IyihmIbCwzDI/iqlecTRa7+4BCnzNx40upSlGvIU7qwENhTf6APatm4bmL9ANtWKPYlD67SIlxfls7GwCUe+Lg==}
+    engines: {node: '>=12.22.0'}
+    peerDependencies:
+      react: ^16.8.0 || ^17 || ^18
+    dependencies:
+      react: 18.2.0
     dev: false
 
   /react-hook-form/7.44.3_react@18.2.0:
