@@ -1,10 +1,6 @@
 import getExtraControls from './extraControlAmend';
 
-const getControls = (data) => {
-
-	return getExtraControls[data.document_type] || [];
-	
-};
+const getControls = (data) => getExtraControls[data.document_type] || [];
 
 const controls = (data) => [
 	{

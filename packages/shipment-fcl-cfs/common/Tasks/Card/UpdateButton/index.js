@@ -5,10 +5,7 @@ import styles from './styles.module.css';
 function UpdateButton({
 	task = {},
 	handleClick = () => {},
-	handleChange = () => {},
 	hideButton = false,
-	shipment_type,
-	show = false,
 }) {
 	if (hideButton) {
 		return null;

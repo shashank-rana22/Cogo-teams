@@ -76,10 +76,12 @@
 		}
 	}
 }
+
 .poc {
 	height: 80vh;
 	overflow: scroll;
 }
+
 .sop {
 	height: 80vh;
 	overflow: scroll;

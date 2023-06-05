@@ -1,11 +1,12 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf, IcMImage } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { startCase } from '@cogoport/utils';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useContext } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import useListTradeDocuments from '../../../../hooks/useListTradeDocuments';
 import Loader from '../Loader';
@@ -34,7 +35,7 @@ function TradeDocuments({
 	const contentToShow = () => {
 		if (loading) {
 			return [...Array(forModal ? 3 : 2)].map(() => (
-				<Loader forModal={forModal} />
+				<Loader forModal={forModal} key={uuid()} />
 			));
 		}
 		if (!loading && data?.list?.length === 0) {
@@ -45,6 +46,7 @@ function TradeDocuments({
 			<>
 				{(data?.list || []).map((doc) => (
 					<div
+						key={doc?.id}
 						role="button"
 						tabIndex={0}
 						className={styles.single_doc}
@@ -62,10 +64,10 @@ function TradeDocuments({
 							</div>
 							<div className={styles.upload_info}>
 								{`Uploaded On ${formatDate({
-										date       : doc?.updated_at,
-										dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-										formatType : 'date',
-									})}`}
+									date       : doc?.updated_at,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									formatType : 'date',
+								})}`}
 							</div>
 						</div>
 						<div className={styles.button_wrapper}>

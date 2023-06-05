@@ -7,7 +7,6 @@ import SopCard from './Card';
 import EmptyState from './EmptyState';
 import Header from './Header';
 import SopLoader from './SopLoader';
-import styles from './styles.module.css';
 
 function SopOld({ shipment_data = {}, primary_service = {} }) {
 	const [filters, setFilters] = useState([]);
@@ -29,7 +28,7 @@ function SopOld({ shipment_data = {}, primary_service = {} }) {
 
 	let content = (
 		<>
-			<div className={styles.count_sop}>
+			<div>
 				{sops?.length}
 				{' '}
 				SOP’s

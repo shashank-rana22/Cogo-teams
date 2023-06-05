@@ -1,33 +1,5 @@
 import { containerIncludingTasks } from '../controls/containerTasks';
 
-const flatten = (reqObj) => {
-	if (typeof reqObj === 'string' || Array.isArray(reqObj)) {
-		return reqObj;
-	}
-
-	let finalObj = {};
-
-	Object.keys(reqObj || {}).forEach((key) => {
-		if (
-			typeof reqObj[key] === 'string'
-			|| Array.isArray(reqObj[key])
-			|| Object.keys(reqObj[key] || {})?.length === 0
-		) {
-			finalObj = {
-				...finalObj,
-				[key]: reqObj[key],
-			};
-		} else if (Object.keys(reqObj[key] || {})?.length) {
-			finalObj = {
-				...finalObj,
-				...(flatten(reqObj[key]) || {}),
-			};
-		}
-	});
-
-	return finalObj;
-};
-
 const formatRawValues = (rawValues, task, getApisData) => {
 	const values = {};
 

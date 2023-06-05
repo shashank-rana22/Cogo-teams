@@ -1,4 +1,6 @@
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
+import { v4 as uuid } from 'uuid';
+
 import Header from './CardHeader';
 import CardItem from './Carditem';
 import LoadingState from './LoadingState';
@@ -18,7 +20,7 @@ function List({
 	const handleRender = () => {
 		if (loading) {
 			const loadingStates = Array.from({ length: numberOfLoader }, (_, i) => (
-				<LoadingState fields={fields} isLast={i === numberOfLoader - 1} />
+				<LoadingState fields={fields} isLast={i === numberOfLoader - 1} key={uuid()} />
 			));
 
 			return loadingStates;
@@ -33,6 +35,7 @@ function List({
 				{(data || []).map((item, i) => (
 					<CardItem
 						item={item}
+						key={item?.id}
 						loading={loading}
 						fields={fields}
 						isLast={data?.length === i + 1 && !isLclManifest}

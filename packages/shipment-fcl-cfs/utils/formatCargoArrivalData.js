@@ -1,4 +1,5 @@
-const CONTAINER_KEYS = ['container_no', 'marks_and_number', 'package_description', 'gross_weight', 'measurement', 'seal',
+const CONTAINER_KEYS = ['container_no',
+	'marks_and_number', 'package_description', 'gross_weight', 'measurement', 'seal',
 ];
 
 const SHIPMENT_DETAILS_KEY = ['po_no', 'hbl_no', 'vessel', 'voyage', 'flight_number', 'obl_number',

@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+
 import getValue from '../../../utils/getValue';
 
 import styles from './styles.module.css';

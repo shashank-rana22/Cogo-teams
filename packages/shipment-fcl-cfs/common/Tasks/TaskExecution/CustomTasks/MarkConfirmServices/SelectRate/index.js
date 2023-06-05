@@ -44,6 +44,7 @@ function SelectRate({
 				) : null}
 				{(data?.list || []).map((item) => (
 					<Card
+						key={item?.id}
 						item={item}
 						priority={item.priority}
 						setStep={setStep}

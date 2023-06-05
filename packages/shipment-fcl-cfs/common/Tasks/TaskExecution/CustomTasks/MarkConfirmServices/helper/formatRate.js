@@ -4,11 +4,11 @@ const formatRates = (selectedRate, shipment_data, service_type_prop, primaryServ
 	const service_type = service_type_prop || 'fcl_cfs_service';
 
 	const origin_local = (servicesList || []).find(
-		(service) => service.service_type === 'origin_cfs_service'
+		(service) => service.service_type === 'origin_cfs_service',
 	);
 
 	const destination_local = (servicesList || []).find(
-		(service) => service.service_type === 'destination_cfs_service'
+		(service) => service.service_type === 'destination_cfs_service',
 	);
 
 	if (service_type === 'fcl_cfs_service') {

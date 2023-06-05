@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { Layout } from '@cogoport/ocean-modules';
 
 import useListDocuments from '../../../../hooks/useListDocuments';
 import useUpdateShipmentDocuments from '../../../../hooks/useUpdateShipmentDocuments';
-import { Layout } from '@cogoport/ocean-modules';
 import getDefaultValues from '../utils/get-default-values';
 
 import controls from './controls';

@@ -18,11 +18,10 @@ const useGetStep3Data = ({
 	servicesList = [], shipment_data, onCancel, task,
 	taskListRefetch = () => {},
 }) => {
-	
 	const service_ids = [];
 
 	(servicesList || []).forEach((serviceObj) => {
-			service_ids.push(serviceObj.id);
+		service_ids.push(serviceObj.id);
 	});
 
 	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({

@@ -1,4 +1,5 @@
 import { Placeholder } from '@cogoport/components';
+import { v4 as uuid } from 'uuid';
 
 function LoadingState({ fields = [], isLast = false }) {
 	const stylesCol = { padding: '0px 4px' };
@@ -12,6 +13,7 @@ function LoadingState({ fields = [], isLast = false }) {
 				return (
 					<div
 						style={stylesCol}
+						key={uuid()}
 					>
 						<Placeholder width="100%" height="20px" />
 					</div>

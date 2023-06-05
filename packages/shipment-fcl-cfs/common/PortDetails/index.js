@@ -39,11 +39,9 @@ function PortDetails({ data = {}, primary_service = {} }) {
 	);
 
 	const renderLocation = () => (
-		<>
-			<div className={styles.flex_row_origin}>
-				{handleLocationDetails(port_id)}
-			</div>
-		</>
+		<div className={styles.flex_row_origin}>
+			{handleLocationDetails(port_id)}
+		</div>
 	);
 
 	return (

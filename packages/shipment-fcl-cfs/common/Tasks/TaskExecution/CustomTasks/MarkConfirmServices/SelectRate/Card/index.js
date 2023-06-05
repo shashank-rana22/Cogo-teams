@@ -68,7 +68,7 @@ function Card({
 
 			<div className={styles.body}>
 				{(dataArr || []).map((dataObj) => (
-					<div className={styles.space_between}>
+					<div className={styles.space_between} key={dataObj?.id}>
 						<div>
 							<div className={styles.heading}>Supplier Name</div>
 

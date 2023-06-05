@@ -1,5 +1,6 @@
-import React, { useState, useEffect } from 'react';
 import { Select } from '@cogoport/components';
+import React, { useState, useEffect } from 'react';
+
 import FtlTracker from './ftlTracker';
 import styles from './styles.module.css';
 
@@ -17,9 +18,8 @@ function TrackingHeader({
 		(item) => item?.truck_number === containerNo,
 	);
 
-
 	useEffect(() => {
-			listShipments();
+		listShipments();
 	}, [containerNo]);
 
 	return (
@@ -27,13 +27,13 @@ function TrackingHeader({
 			<div className={styles.RowContainer}>
 				<div className={styles.Text}>Tracking Information</div>
 				<Select
-						size="sm"
-						style={{ width: '200px' }}
-						placeholder="Truck No"
-						value={containerNo}
-						onChange={(e) => setContainerNo(e)}
-						options={truckOptions || []}
-					/>
+					size="sm"
+					style={{ width: '200px' }}
+					placeholder="Truck No"
+					value={containerNo}
+					onChange={(e) => setContainerNo(e)}
+					options={truckOptions || []}
+				/>
 			</div>
 
 			<div className={styles.SecondRow}>

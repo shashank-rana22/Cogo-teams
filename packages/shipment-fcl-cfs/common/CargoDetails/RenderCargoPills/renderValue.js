@@ -1,8 +1,8 @@
 import { Tooltip } from '@cogoport/components';
-import { IcMOpenlink } from '@cogoport/icons-react';
-import { startCase, upperCase } from '@cogoport/utils';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMOpenlink } from '@cogoport/icons-react';
+import { startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
@@ -38,7 +38,7 @@ export const renderValue = (label, detail) => {
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div>{values}</div>;
+								return <div key={values}>{values}</div>;
 							})}
 						</div>
 					)}
@@ -76,7 +76,7 @@ export const renderValue = (label, detail) => {
 	const formatCertificate = (certificates) => (
 		<div className={styles.certificate_container}>
 			{(certificates || []).map((item, key) => (
-				<a href={item} target="_blank" rel="noreferrer">
+				<a href={item} target="_blank" rel="noreferrer" key={item}>
 					Click to view certificate
 					&nbsp;
 					{key + 1}
@@ -195,60 +195,60 @@ export const renderValue = (label, detail) => {
 				date       : detail?.schedule_departure || detail?.selected_schedule_departure,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			})
+			});
 		case 'schedule_arrival':
-		    return formatDate({
+			return formatDate({
 				date       : detail?.schedule_arrival || detail?.selected_schedule_arrival,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			})
+			});
 		case 'bn_expiry':
 			return formatDate({
-				date       : detail?.bn_expiry, 
+				date       : detail?.bn_expiry,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			})
+			});
 		case 'booking_note_deadline':
 			return formatDate({
 				date       : detail?.booking_note_deadline,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy - hh:mm aaa'],
 				formatType : 'dateTime',
 				separator  : ' - ',
-			})
+			});
 		case 'si_cutoff':
 			return formatDate({
 				date       : detail?.si_cutoff,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy - hh:mm aaa'],
 				formatType : 'date',
 				separator  : ' - ',
-			})
+			});
 		case 'vgm_cutoff':
 			return formatDate({
-				date       : detail?.vgm_cutoff, 
+				date       : detail?.vgm_cutoff,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			})
+			});
 		case 'gate_in_cutoff':
 			return formatDate({
 				date       : detail?.gate_in_cutoff,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy - hh:mm aaa'],
 				formatType : 'date',
 				separator  : ' - ',
-			})
+			});
 		case 'document_cutoff':
 			return formatDate({
-				date       : detail?.document_cutoff, 
+				date       : detail?.document_cutoff,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy - hh:mm aaa'],
 				formatType : 'date',
 				separator  : ' - ',
-			})
+			});
 		case 'tr_cutoff':
 			return formatDate({
-				date       : detail?.tr_cutoff, 
+				date       : detail?.tr_cutoff,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy - hh:mm aaa'],
 				formatType : 'date',
 				separator  : ' - ',
-			})
+			});
 		case 'iip_certificates':
 			return formatCertificate(detail?.iip_certificates || []);
 		case 'msds_certificates':
@@ -259,10 +259,10 @@ export const renderValue = (label, detail) => {
 			return upperCase(detail.bl_type);
 		case 'cargo_readiness_date':
 			return formatDate({
-				date       : detail?.cargo_readiness_date, 
+				date       : detail?.cargo_readiness_date,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			})
+			});
 		case 'supplier_poc':
 			return formatPocData(detail?.supplier_poc || {});
 		case 'origin_oversea_agent':
@@ -275,10 +275,10 @@ export const renderValue = (label, detail) => {
 			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
 		case 'delivery_date':
 			return formatDate({
-				date       : detail?.delivery_date, 
+				date       : detail?.delivery_date,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
-			})
+			});
 		default:
 			return detail[label] || null;
 	}

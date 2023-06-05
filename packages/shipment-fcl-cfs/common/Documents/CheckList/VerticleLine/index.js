@@ -1,4 +1,5 @@
 import { IcMTick } from '@cogoport/icons-react';
+
 import styles from './styles.module.css';
 
 function VerticleLine({ checked, isLast }) {

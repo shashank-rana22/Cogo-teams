@@ -1,4 +1,6 @@
 import { Tooltip } from '@cogoport/components';
+import { v4 as uuid } from 'uuid';
+
 import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
@@ -14,7 +16,7 @@ function MultiServiceDetailsPopover({
 
 	const renderBody = () => (
 		mainServices?.map((item, idx) => (idx !== 0 ? (
-			<div className={styles.container}>
+			<div className={styles.container} key={uuid()}>
 				<RenderCargoPills detail={item} />
 			</div>
 		) : null)));

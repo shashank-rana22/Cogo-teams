@@ -39,7 +39,7 @@ const getControls = ({
 
 	const getIds = () => {
 		const ids = {
-			haulage_shipping_line_id : '',
+			haulage_shipping_line_id: '',
 		};
 
 		(servicesList || []).forEach((service) => {

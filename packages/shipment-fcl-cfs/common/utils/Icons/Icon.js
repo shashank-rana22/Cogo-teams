@@ -1,4 +1,5 @@
 import { string } from 'prop-types';
+
 function Icon(props, ref) {
 	const { type, ...rest } = props;
 

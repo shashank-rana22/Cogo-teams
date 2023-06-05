@@ -573,7 +573,7 @@ const displayNameMappings = (trade_type) => {
 			addPrefix    : false,
 			why_needed   : '',
 		},
-	
+
 		upload_house_bill_of_lading: {
 			display_name : 'Upload house bill of lading',
 			activity     : 'uploaded house bill of lading',

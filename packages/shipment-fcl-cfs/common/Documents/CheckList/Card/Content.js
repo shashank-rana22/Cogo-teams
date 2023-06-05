@@ -1,8 +1,8 @@
 import { Button, cl } from '@cogoport/components';
-import { IcCError } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcCError } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 
 import VerticleLine from '../VerticleLine';
 
@@ -74,7 +74,7 @@ function Content({
 							<div className={styles.upload_info}>
 								Uploaded On:&nbsp;
 								{formatDate({
-									date       : uploadedItem?.created_at, 
+									date       : uploadedItem?.created_at,
 									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 									formatType : 'date',
 									separator  : ' - ',

@@ -1,5 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext, useEffect } from 'react';
+
 import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';

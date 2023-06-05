@@ -1,6 +1,6 @@
 export const containerIncludingTasks = [
 	'mark_containers_on_the_way_to_cfs',
-	'mark_vessel_arrived_at_origin',,
+	'mark_vessel_arrived_at_origin',
 	'mark_offloaded',
 	'update_container_offloaded_at',
 	'update_containers_arrived_cfs_at',
