@@ -1,4 +1,4 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/surface-modules';
 import { useEffect } from 'react';
@@ -10,10 +10,6 @@ import useUpdateTask from '../../../../../hooks/useUpdateTask';
 import getDefaultValues from '../../utils/get-default-values';
 
 import { addTruckConfigs } from './configs/addTruckConfigs';
-// import useGetShipmentService from './hooks/useGetShipmentService';
-// import useUpdateAdditionalService from './hooks/useUpdateAdditionalService';
-// import useUpdateShipmentBookingParameter from './hooks/useUpdateShipmentBookingParameter';
-// import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
 import styles from './styles.module.css';
 
 function ApproveTruck({
@@ -21,17 +17,11 @@ function ApproveTruck({
 	task = {},
 	taskListRefetch = () => {},
 }) {
-	// const { loading, updateService } = useUpdateAdditionalService();
-	// const {
-	// 	loading: serviceLoading,
-	// 	getShipmentService,
-	// 	data,
-	// } = useGetShipmentService();
+	const { loading, updateService } = useUpdateFtlAdditionalService({});
 	const { loading: serviceLoading, data } = useGetService({ defaultParams: { id: task.task_field_id } });
 
-	const { updateBookingParameter } = useUpdateBookingParameter();
-	// const { loading: shipmentLoading, updateShipmentBookingParameter } =		useUpdateShipmentBookingParameter();
-	// const { loading: taskLoading, updateShipmentPendingTask } =		useUpdateShipmentPendingTask();
+	const { loading:shipmentLoading, updateBookingParameter } = useUpdateBookingParameter({});
+	const { loading: taskLoading, apiTrigger } = useUpdateTask({});
 
 	const truckConfigs = addTruckConfigs();
 	truckConfigs[0].controls[6].rules =		task?.task !== 'approve_additional_truck'
@@ -61,38 +51,47 @@ function ApproveTruck({
 		};
 	}
 
-	const refetch = async (is_approved = false) => {
-		// if (task?.task === 'approve_updated_truck' && is_approved) {
-		// 	await updateShipmentBookingParameter(
-		// 		data?.shipment_id,
-		// 		task?.service_id,
-		// 		obj,
-		// 	);
-		// }
+	const updateData = async (is_approved = false) => {
+		if (task?.task === 'approve_updated_truck' && is_approved) {
+			const val = {
+				shipment_id : data?.shipment_id,
+				services    : [
+					{
+						service_type   : 'ftl_freight_service',
+						service_id     : task?.service_id,
+						booking_params : obj,
+					},
+				],
+			};
+			await updateBookingParameter(val);
+		}
 
 		taskListRefetch();
 		onCancel();
 	};
 
-	// const approveTruck = (is_approved = false) => {
-	// 	updateService({
-	// 		service_id      : task?.service_id,
-	// 		pending_task_id : task?.id,
-	// 		is_approved,
-	// 		callback,
-	// 	});
-	// };
+	const approveTruck = async (is_approved = false) => {
+		const val = {
+			service_id      : task?.service_id,
+			pending_task_id : task?.id,
+			is_approved,
+		};
+		updateService(val);
+		Toast.success('Task completed successfully');
+		await updateData();
+	};
 
-	// const updateTruck = (is_approved = false) => {
-	// 	updateShipmentPendingTask(task?.id, is_approved, callback);
-	// };
-	// const disabled =		task?.task === 'approve_additional_truck'
-	// 	? loading || serviceLoading
-	// 	: shipmentLoading || taskLoading;
-
-	// useEffect(() => {
-	// 	getShipmentService(task?.task_field_id);
-	// }, []);
+	const updateTruck = async (is_approved = false) => {
+		const val = {
+			id: task?.id,
+		};
+		apiTrigger(val);
+		if (!is_approved) Toast.success('Task completed successfully');
+		await updateData();
+	};
+	const disabled = task?.task === 'approve_additional_truck'
+		? loading || serviceLoading
+		: shipmentLoading || taskLoading;
 
 	useEffect(() => {
 		if (data) {
@@ -123,25 +122,25 @@ function ApproveTruck({
 				<Button
 					className="secondary md"
 					onClick={() => onCancel()}
-					// disabled={disabled}
+					disabled={disabled}
 				>
 					Cancel
 				</Button>
 				<Button
 					className="secondary md"
-					// onClick={() => (task?.task === 'approve_additional_truck'
-					// 	? approveTruck(false)
-					// 	: updateTruck(false))}
-					// disabled={disabled}
+					onClick={() => (task?.task === 'approve_additional_truck'
+						? approveTruck(false)
+						: updateTruck(false))}
+					disabled={disabled}
 				>
 					Reject
 				</Button>
 				<Button
 					className="primary md"
-					// onClick={() => (task?.task === 'approve_additional_truck'
-					// 	? approveTruck(true)
-					// 	: updateTruck(true))}
-					// disabled={disabled}
+					onClick={() => (task?.task === 'approve_additional_truck'
+						? approveTruck(true)
+						: updateTruck(true))}
+					disabled={disabled}
 				>
 					Accept
 				</Button>

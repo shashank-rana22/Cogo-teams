@@ -4,10 +4,6 @@ import EditRate from './EditRate';
 import formatRate from './helper/formatRate';
 import SelectRate from './SelectRate';
 
-const revenueDeskServices = [
-	'ltl_freight_service',
-];
-
 function MarkServiceConfirmed({
 	task = {},
 	servicesList = [],
@@ -18,7 +14,7 @@ function MarkServiceConfirmed({
 	refetch = () => {},
 	localService = '',
 }) {
-	const intialStep = revenueDeskServices.includes(task.service_type) ? 1 : 2;
+	const intialStep = ['ltl_freight_service'].includes(task.service_type) ? 1 : 2;
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [step, setStep] = useState(intialStep);
 

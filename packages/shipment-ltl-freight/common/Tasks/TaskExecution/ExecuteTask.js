@@ -3,14 +3,10 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
-// import useTaskRpa from '../../../hooks/useTaskRpa';
 
 import {
-	// UploadBookingNote,
-	// UploadCargoArrival,
 	AddPaymentInfo,
 	ConfirmationOnServicesTaken,
-	UploadContainerDetails,
 	MarkConfirmServices,
 } from './CustomTasks';
 import ExecuteStep from './ExecuteStep';
@@ -22,12 +18,10 @@ function ExecuteTask({
 	onCancel = () => {},
 	taskListRefetch = () => {},
 	selectedMail = [],
-	setSelectedMail = () => {},
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
-	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
-	const { servicesList, shipment_data, primary_service, getShipmentTimeline } = useContext(ShipmentDetailContext);
+	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
 
 	const {
 		steps = [],
@@ -83,32 +77,6 @@ function ExecuteTask({
 			/>
 		);
 	}
-
-	if (
-		task.task === 'update_container_details') {
-		return (
-			<UploadContainerDetails
-				pendingTask={task}
-				onCancel={onCancel}
-				services={servicesList}
-				taskListRefetch={taskListRefetch}
-			/>
-		);
-	}
-
-	// if (task.task === 'upload_container_arrival_notice') {
-	// 	return (
-	// 		<UploadCargoArrival
-	// 			pendingTask={task}
-	// 			summary={{
-	// 				...(primary_service || {}),
-	// 				importer_exporter_id: shipment_data?.importer_exporter?.id,
-	// 			}}
-	// 			refetch={taskListRefetch}
-	// 			clearTask={onCancel}
-	// 		/>
-	// 	);
-	// }
 
 	return (
 		<ExecuteStep

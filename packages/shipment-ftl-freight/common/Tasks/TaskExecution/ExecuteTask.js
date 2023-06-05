@@ -4,12 +4,7 @@ import { useContext } from 'react';
 
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 
-// import useTaskRpa from '../../../hooks/useTaskRpa';
-
 import {
-	// UploadBookingNote,
-	// UploadCargoArrival,
-	UploadContainerDetails,
 	MarkConfirmServices,
 	CustomerInvoiceDetails,
 	ApproveTruck,
@@ -23,10 +18,8 @@ function ExecuteTask({
 	onCancel = () => {},
 	taskListRefetch = () => {},
 	selectedMail = [],
-	setSelectedMail = () => {},
 }) {
 	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
-	// const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
 
 	const { servicesList, shipment_data, primary_service, getShipmentTimeline } = useContext(ShipmentDetailContext);
 
@@ -78,32 +71,6 @@ function ExecuteTask({
 		);
 	}
 
-	// if (task.task === 'upload_booking_note') {
-	// 	if (mailLoading) {
-	// 		return <div>Loading...</div>;
-	// 	}
-
-	// 	return (
-	// 		<UploadBookingNote
-	// 			task={task}
-	// 			onCancel={onCancel}
-	// 			taskListRefetch={taskListRefetch}
-	// 		/>
-	// 	);
-	// }
-
-	if (
-		task.task === 'update_container_details') {
-		return (
-			<UploadContainerDetails
-				pendingTask={task}
-				onCancel={onCancel}
-				services={servicesList}
-				taskListRefetch={taskListRefetch}
-			/>
-		);
-	}
-
 	if (['approve_additional_truck', 'approve_updated_truck'].includes(task?.task)) {
 		return (
 			<ApproveTruck
@@ -116,20 +83,6 @@ function ExecuteTask({
 			/>
 		);
 	}
-
-	// if (task.task === 'upload_container_arrival_notice') {
-	// 	return (
-	// 		<UploadCargoArrival
-	// 			pendingTask={task}
-	// 			summary={{
-	// 				...(primary_service || {}),
-	// 				importer_exporter_id: shipment_data?.importer_exporter?.id,
-	// 			}}
-	// 			refetch={taskListRefetch}
-	// 			clearTask={onCancel}
-	// 		/>
-	// 	);
-	// }
 
 	return (
 		<ExecuteStep
