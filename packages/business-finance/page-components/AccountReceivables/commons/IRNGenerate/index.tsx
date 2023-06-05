@@ -96,7 +96,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		getSageInvoiceData();
 		setVisible(!visible);
 	};
-	const showPost = invoiceType === 'REIMBURSEMENT' || invoiceType === 'REIMBURSEMENT_CREDIT_NOTE';
+	const showPost = ['REIMBURSEMENT', 'REIMBURSEMENT_CREDIT_NOTE'].includes(invoiceType);
 
 	const content = () => (
 		<div>
