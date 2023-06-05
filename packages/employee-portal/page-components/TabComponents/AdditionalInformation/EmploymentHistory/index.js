@@ -3,20 +3,32 @@ import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
 import FieldArray from '../../../../commons/FieldArray';
+import getElementController from '../../../../configs/getElementController';
 import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails';
 
 import controls from './controls';
+import { extraDocsControls } from './extraDocsControls';
 import styles from './styles.module.css';
 
 function EmploymentHistory({ getEmployeeDetails, data: info }) {
-	const { handleSubmit, control, setValue } = useForm();
+	const { handleSubmit, control, setValue, formState: { errors } } = useForm();
 
 	const id = info?.detail?.id;
 
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
 	const onSubmit = (values) => {
+		// console.log('val', values);
 		updateEmployeeDetails({ data: values, formType: 'employment_history' });
+	};
+
+	// useEffect((item) => {
+
+	// })
+
+	const removeTypeField = (controlItem) => {
+		const { type, ...rest } = controlItem;
+		return rest;
 	};
 
 	useEffect(() => {
@@ -53,6 +65,60 @@ function EmploymentHistory({ getEmployeeDetails, data: info }) {
 						</div>
 					);
 				})}
+
+				<div className={styles.upload_row}>
+
+					{/* {extraDocsControls.map((controlItem) => {
+					// const { yearly, monthly } = controlItem;
+
+						const Element = getElementController(controlItem?.type);
+
+						console.log('control', controlItem);
+
+						return (
+							<div
+								key={controlItem?.name}
+								className={styles.upload_row}
+							>
+								<span className={styles.control_label}>{controlItem?.label}</span>
+								<Element
+									{...controlItem}
+									size="lg"
+									key={controlItem?.name}
+									control={control}
+									className={styles.field_controller}
+								/>
+							</div>
+
+						// null
+						);
+					})} */}
+
+					{extraDocsControls.map((controlItem) => {
+						const el = { ...controlItem };
+						const Element = getElementController(el.type);
+						if (!Element) return null;
+						return (
+							<div key={el.name} style={el.style} className={styles.section_container}>
+								<span className={styles.control_label}>{el.label}</span>
+
+								<Element
+									{...(el.type === 'fileUpload' ? removeTypeField(controlItem) : { ...controlItem })}
+									size="md"
+									key={el.name}
+									control={control}
+									id={`${el.name}_input`}
+									className={styles.field_controller}
+								/>
+
+								<div className={styles.error_message}>
+									{errors?.[el.name]?.message}
+								</div>
+							</div>
+						);
+					})}
+				</div>
+
 			</div>
 
 			<Button

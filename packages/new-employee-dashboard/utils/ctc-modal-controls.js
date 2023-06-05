@@ -1,4 +1,4 @@
-export const ctcModalLessControls = (ctcInput, data) => {
+export const ctcModalLessControls = (ctcInput, data = {}) => {
 	const fixed_split = 1;
 	const variable_split = 1 - fixed_split;
 	console.log('data', data);
@@ -199,11 +199,11 @@ export const ctcModalLessControls = (ctcInput, data) => {
 		incentives: {
 			heading: 'Incentives [E]',
 			yearlyValue:
-        Number(data?.joining_bonus_yearly)
-        + Number(data?.sign_on_bonus_yearly),
+        Number(data?.yearlyJoiningBonus|| 0)
+        + Number(data?.yearlySignInBonus|| 0),
 			monthlyValue:
-        Number(data?.joining_bonus_monthly)
-        + Number(data?.sign_on_bonus_monthly),
+        Number(data?.monthlyJoiningBonus|| 0)
+        + Number(data?.monthlySignInBonus|| 0),
 		},
 		variable_component: {
 			heading      : 'Variable Component [V]',
@@ -212,27 +212,28 @@ export const ctcModalLessControls = (ctcInput, data) => {
 		},
 
 		total_targeted_compensation: {
-			heading: 'Total Targeted Compensation [A+B+C+D+E+V]',
+			heading: 'Total Targeted Compensation [A + B + C + D + E + V]',
 			yearlyValue:
-        ctcInput * variable_split
-        + Number(data?.joining_bonus_yearly)
-        + Number(data?.sign_on_bonus_yearly) + Math.round(
+        (ctcInput * variable_split)
+        + (Number(data?.yearlyJoiningBonus || 0)
+        + Number(data?.yearlySignInBonus || 0))
+		+		(Math.round(
         	(basicYearlyValue / 12 < 15000
         		? 0.1301 * basicYearlyValue
         		: 1950 * 12)
             + 0.0483 * basicYearlyValue
             + 2400,
-        )
+		)
         + sum
         + flexible_benefit_sum
         + (basicYearlyValue / 12 > 21000
         	? 0
         	: basicYearlyValue / 12 < 21000 && basicYearlyValue / 12 > 9056
         		? 754 * 12
-        		: 754 * 12),
+        		: 754 * 12)),
 
-			monthlyValue: (ctcInput * variable_split) / 12 + Number(data?.joining_bonus_monthly)
-      + Number(data?.sign_on_bonus_monthly) + (Math.round(
+			monthlyValue: (ctcInput * variable_split) / 12 + Number(data?.monthlyJoiningBonus || 0)
+      + Number(data?.monthlySignInBonus || 0) + (Math.round(
 				(basicYearlyValue / 12 < 15000
 					? 0.1301 * basicYearlyValue
 					: 1950 * 12)
@@ -251,8 +252,8 @@ export const ctcModalLessControls = (ctcInput, data) => {
 		},
 		monthly_in_hand_without_tds: {
 			heading      : 'Monthly Approx in Hand without TDS Deduction',
-			monthlyValue : (ctcInput * variable_split) / 12 + Number(data?.joining_bonus_monthly)
-      + Number(data?.sign_on_bonus_monthly) + (Math.round(
+			monthlyValue : (ctcInput * variable_split) / 12 + Number(data?.monthlyJoiningBonus || 0)
+      + Number(data?.monthlySignInBonus || 0) + (Math.round(
 				(basicYearlyValue / 12 < 15000
 					? 0.1301 * basicYearlyValue
 					: 1950 * 12)
@@ -278,7 +279,7 @@ export const ctcModalLessControls = (ctcInput, data) => {
 	};
 };
 
-export const ctcModalControls = (ctcInput, data) => {
+export const ctcModalControls = (ctcInput, data = {}) => {
 	const fixed_split = 1;
 	const variable_split = 1 - fixed_split;
 
@@ -494,13 +495,13 @@ export const ctcModalControls = (ctcInput, data) => {
 		incentives: {
 			heading: 'Incentives [E]',
 			yearlyValue:
-        Number(data?.joining_bonus_yearly)
-        + Number(data?.performance_linked_variable_yearly)
-        + Number(data?.retention_bonus_yearly),
+        Number(data?.yearlyJoiningBonus || 0)
+        + Number(data?.yearlyPerformance || 0)
+        + Number(data?.yearlyRetentionBonus || 0),
 			monthlyValue:
-        Number(data?.joining_bonus_monthly)
-        + Number(data?.performance_linked_variable_monthly)
-        + Number(data?.retention_bonus_monthly),
+        Number(data?.monthlyJoiningBonus || 0)
+        + Number(data?.monthlyPerformance || 0)
+        + Number(data?.monthlyRetentionBonus || 0),
 		},
 		variable_component: {
 			heading      : 'Variable Component [V]',
@@ -510,9 +511,9 @@ export const ctcModalControls = (ctcInput, data) => {
 		total_targeted_compensation_no_retention: {
 			heading: 'Total Targeted Compensation without retention [A+B+C+D+E]',
 			yearlyValue:
-        Number(data?.joining_bonus_yearly)
-        + Number(data?.performance_linked_variable_yearly)
-        + Number(data?.retention_bonus_yearly)
+        Number(data?.yearlyJoiningBonus || 0)
+        + Number(data?.yearlyPerformance || 0)
+        + Number(data?.yearlyRetentionBonus || 0)
         + sum
         + (basicYearlyValue / 12 > 21000
         	? 0
@@ -526,9 +527,9 @@ export const ctcModalControls = (ctcInput, data) => {
         + 2400
         + flexible_benefit_sum,
 			monthlyValue:
-        Number(data?.joining_bonus_monthly)
-        + Number(data?.performance_linked_variable_monthly)
-        + Number(data?.retention_bonus_monthly)
+        Number(data?.monthlyJoiningBonus || 0)
+        + Number(data?.monthlyPerformance || 0)
+        + Number(data?.monthlyRetentionBonus || 0)
         + (sum
           + (basicYearlyValue / 12 > 21000
           	? 0
@@ -549,9 +550,9 @@ export const ctcModalControls = (ctcInput, data) => {
 			heading: 'Total Targeted Compensation [A+B+C+D+E+V]',
 			yearlyValue:
         ctcInput * variable_split
-        + Number(data?.joining_bonus_yearly)
-        + Number(data?.performance_linked_variable_yearly)
-        + Number(data?.retention_bonus_yearly)
+        + Number(data?.yearlyJoiningBonus || 0)
+        + Number(data?.yearlyPerformance || 0)
+        + Number(data?.yearlyRetentionBonus || 0)
         + sum
         + (basicYearlyValue / 12 > 21000
         	? 0
@@ -564,9 +565,9 @@ export const ctcModalControls = (ctcInput, data) => {
         + 0.0483 * basicYearlyValue
         + 2400
         + flexible_benefit_sum,
-			monthlyValue: (ctcInput * variable_split) / 12 + Number(data?.joining_bonus_monthly)
-      + Number(data?.performance_linked_variable_monthly)
-      + Number(data?.retention_bonus_monthly)
+			monthlyValue: (ctcInput * variable_split) / 12 + Number(data?.monthlyJoiningBonus || 0)
+      + Number(data?.monthlyPerformance || 0)
+      + Number(data?.monthlyRetentionBonus || 0)
       + (sum
         + (basicYearlyValue / 12 > 21000
         	? 0
@@ -602,7 +603,7 @@ export const ctcModalControls = (ctcInput, data) => {
         + flexible_benefit_sum)
       / 12 - Math.round(
 				basicYearlyValue / 12 < 15000 ? 0.1301 * basicYearlyValue : 1950 * 12,
-			) / 12 - (0.0483 * basicYearlyValue) / 12 - 200 - Number(data?.joining_bonus_monthly) - 1800 - 200,
+			) / 12 - (0.0483 * basicYearlyValue) / 12 - 200 - Number(data?.monthlyJoiningBonus || 0) - 1800 - 200,
 		},
 
 	};

@@ -11,6 +11,8 @@ function ViewCtcBreakupContent({ metadata }) {
 		performance_linked_variable_monthly,
 		retention_bonus_yearly,
 		retention_bonus_monthly,
+		sign_on_bonus_monthly,
+		sign_on_bonus_yearly,
 	} = metadata;
 	const MAPPING = {
 		joining_bonus_monthly: {
@@ -28,6 +30,11 @@ function ViewCtcBreakupContent({ metadata }) {
 			yearlyValue  : retention_bonus_yearly,
 			monthlyValue : retention_bonus_monthly,
 		},
+		sign_on_bonus_monthly: {
+			heading      : 'Sign On Bonus',
+			yearlyValue  : sign_on_bonus_yearly,
+			monthlyValue : sign_on_bonus_monthly,
+		},
 
 	};
 	return (
@@ -39,6 +46,9 @@ function ViewCtcBreakupContent({ metadata }) {
 			</div>
 
 			{Object.entries(metadata).map(([key, value]) => {
+
+				console.log('key',key)
+				console.log('val',value)
 				const { heading = null, yearlyValue = null, monthlyValue = null } = value;
 				return (
 					<div key={key}>
@@ -48,13 +58,13 @@ function ViewCtcBreakupContent({ metadata }) {
 								{yearlyValue != null ? (
 									<div style={{ width: '20%' }}>
 										{Number(yearlyValue || 0).toFixed(2) ?? '______'}
-
 									</div>
 								) : null}
 								{monthlyValue != null ? (
 									<div style={{ width: '20%' }}>
 										{Number(monthlyValue || 0).toFixed(2) ?? '______'}
 
+										{monthlyValue?.toFixed(2) ?? '______'}
 									</div>
 								) : null}
 							</div>

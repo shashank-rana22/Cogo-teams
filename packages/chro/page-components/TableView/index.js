@@ -75,7 +75,7 @@ function TableView({ search, activeTab }) {
 						{init}
 						{' '}
 						LPA (fixed)
-						{variable_pay > 0 ? ` + Rs. ${variable_pay} LPA (variable)`
+						{variable_pay > 0 ? ` + Rs. ${variable_pay} (variable)`
 							: null}
 					</span>
 					<CtcBreakup metadata={metadata} />
