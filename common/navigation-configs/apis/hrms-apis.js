@@ -77,6 +77,11 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'harbour',
 		},
+		{
+			api          : 'get_document_signing_url',
+			access_type  : 'private',
+			service_name : 'harbour',
+		},
 	],
 };
 

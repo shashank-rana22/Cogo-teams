@@ -2,6 +2,7 @@ import { Button, Toast } from '@cogoport/components';
 import {
 	InputController, SelectController, MobileNumberController, useForm, DatepickerController,
 } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
@@ -73,6 +74,7 @@ function FormComponent({ setActivePage }) {
 			setActivePage(res?.data?.id);
 		} catch (error) {
 			Toast.error(error.response?.data?.message);
+			// Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
 

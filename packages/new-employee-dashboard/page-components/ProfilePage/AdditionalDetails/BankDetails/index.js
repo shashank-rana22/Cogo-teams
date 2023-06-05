@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import EmptyState from '../../../../common/EmptyState';
@@ -20,9 +21,10 @@ function BankDetails({ profileData, getEmployeeDetailsLoading }) {
 	}
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.top_bar}>
-				{
+		<div>
+			<div className={styles.container}>
+				<div className={styles.top_bar}>
+					{
 					(MAPPING || []).map((element) => (
 						<div key={element}>
 							<div className={styles.label}>
@@ -35,13 +37,32 @@ function BankDetails({ profileData, getEmployeeDetailsLoading }) {
 					))
 				}
 
-			</div>
-
-			<div className={styles.cancelled_cheque}>
-				<div className={styles.label}>
-					Cancelled Cheque
 				</div>
-				<PreviewDocumet document_url={bank_details?.[0]?.cancelled_check_url} preview />
+
+				<div className={styles.cancelled_cheque}>
+					<div className={styles.label}>
+						Cancelled Cheque
+					</div>
+					<PreviewDocumet document_url={bank_details?.[0]?.cancelled_check_url} preview />
+				</div>
+
+			</div>
+			<div className={styles.button_container}>
+				<div style={{ paddingRight: 16 }}>
+					<Button
+						size="md"
+						themeType="secondary"
+					>
+						Reject
+					</Button>
+				</div>
+
+				<Button
+					size="md"
+					themeType="primary"
+				>
+					Approve
+				</Button>
 			</div>
 
 		</div>

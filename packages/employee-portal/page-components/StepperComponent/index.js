@@ -1,10 +1,10 @@
 import { IcMProfile, IcCFtick, IcMDocument, IcMFtick } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
 function StepperComponent({ data }) {
-	const { progress_stats = {} } = data || {};
+	const { progress_stats = {}, company_policy_documents } = data || {};
 	const {
 		additional_info_added = {},
 		offer_letter_signed = {},
@@ -45,7 +45,7 @@ function StepperComponent({ data }) {
 		{
 			name      : 'company_policies',
 			icon      : IcMDocument,
-			is_added  : company_policies_read?.company_policies_read,
+			is_added  : !isEmpty(company_policy_documents) && company_policies_read?.company_policies_read,
 			sub_title : 'Read',
 		},
 

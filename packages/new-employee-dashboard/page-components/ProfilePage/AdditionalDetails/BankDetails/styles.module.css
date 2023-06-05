@@ -20,3 +20,8 @@
 .value {
 	font-size: 13;
 }
+
+.button_container{
+	display:flex;
+	justify-content:flex-end;
+}
