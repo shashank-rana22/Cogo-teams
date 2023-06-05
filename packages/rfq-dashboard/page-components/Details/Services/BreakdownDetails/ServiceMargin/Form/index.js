@@ -31,7 +31,7 @@ function Form({
 
 	const marginControls = getMarginControls(nameKey);
 	const { control, watch } = useForm({
-		defaultValues: {
+		values: {
 			[nameKey]: [{
 				type  : 'absolute_total',
 				currency,
@@ -39,6 +39,17 @@ function Form({
 			}],
 		},
 	});
+
+	useEffect(() => {
+		onChange({
+			serviceKey,
+			code  : lineItem?.code,
+			type  : 'absolute_total',
+			currency,
+			value : marginValue,
+		});
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, []);
 
 	useEffect(() => {
 		watch((v) => {
@@ -50,7 +61,7 @@ function Form({
 				value    : Number(v[nameKey][0]?.value),
 			});
 		});
-	}, [lineItem?.code, nameKey, onChange, serviceKey, watch]);
+	}, [lineItem, nameKey, onChange, serviceKey, watch]);
 
 	return (
 		<>

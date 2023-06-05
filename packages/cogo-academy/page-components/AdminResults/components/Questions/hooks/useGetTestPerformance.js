@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useGetTestPerformace = ({ test_id = '' }) => {
+const useGetTestPerformace = ({ test_id = '', activeAttempt }) => {
 	const [toggleState, setToggleState] = useState(false);
 
 	const [{ data, loading }] = useRequest({
@@ -9,6 +9,7 @@ const useGetTestPerformace = ({ test_id = '' }) => {
 		url    : '/get_test_performance',
 		params : {
 			test_id,
+			active_questions_required: activeAttempt === 'attempt1',
 		},
 	}, { manual: false });
 

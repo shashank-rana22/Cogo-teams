@@ -64,7 +64,7 @@ function PortsCard(props) {
 						{!isEmpty(showPrice) ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 					</div>
 				</div>
-				{!isEmpty(showPrice) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && (
+				{!isEmpty(showPrice) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && rate && (
 					<BreakdownDetails
 						rate={rate}
 						detail={rate_card_details}

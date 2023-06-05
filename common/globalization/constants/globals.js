@@ -118,7 +118,36 @@ const GLOBAL_CONSTANTS = {
 		empty_port                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
 		empty_chart:
 		'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
-		empty_customer_card: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg',
+		empty_customer_card : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg',
+		email_svg           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg',
+		platform_chat_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg',
+		platform_notification_svg:
+			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg',
+		missed_call_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
+		not_connected_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
+		outgoing_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
+		incoming_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
+		empty_chat_jpg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
+		admin_logo_svg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg',
+		bot_logo_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
+		reply_icon_png      : 'https://cdn-icons-png.flaticon.com/512/1933/1933011.png',
+		reply_all_icon_png  : 'https://cdn-icons-png.flaticon.com/512/747/747334.png',
+		forward_icon_png    : 'https://cdn-icons-png.flaticon.com/512/60/60546.png',
+		incoming_green_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
+		outgoing_orange_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
+		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
+
+	},
+	options: {
+		upload_file_size: {
+			'1MB'  : '1048576',
+			'5MB'  : '5242880',
+			'15MB' : '15728640',
+		},
+	},
+
+	regex_patterns: {
+		number: /^[+-]?\d*\.?\d+$/,
 	},
 	currency_conversion_constant: 0.04,
 };

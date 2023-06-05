@@ -1,0 +1,7 @@
+{
+    "stepper_tabs":[
+        { "label": "Export", "value": "export" },
+        { "label": "Import", "value": "import" },
+        { "label": "Customs", "value": "lcl_customs" }
+    ]
+}

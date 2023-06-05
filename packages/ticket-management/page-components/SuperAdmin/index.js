@@ -1,12 +1,18 @@
 import { Tabs, TabPanel, DateRangepicker } from '@cogoport/components';
+import { subtractDays } from '@cogoport/utils';
 import { useState } from 'react';
+
+import FilterTicketsSection from '../../common/FilterTicketsSection';
 
 import Dashboard from './Dashboard';
 import styles from './styles.module.css';
 
 function SuperAdmin() {
 	const [activeTab, setActiveTab] = useState('dashboard');
-	const [date, setDate] = useState({});
+	const [date, setDate] = useState({
+		startDate : subtractDays(new Date(), 7),
+		endate    : new Date(),
+	});
 
 	return (
 		<div className={styles.container}>
@@ -22,11 +28,19 @@ function SuperAdmin() {
 				>
 					<Dashboard date={date} />
 				</TabPanel>
+				<TabPanel
+					name="all_tickets"
+					title="All Tickets"
+				>
+					<FilterTicketsSection type="admin" />
+				</TabPanel>
 			</Tabs>
 
-			<div className={styles.date_filter}>
-				<DateRangepicker name="date" onChange={setDate} value={date} isPreviousDaysAllowed />
-			</div>
+			{activeTab === 'dashboard' ?	(
+				<div className={styles.date_filter}>
+					<DateRangepicker name="date" onChange={setDate} value={date} isPreviousDaysAllowed />
+				</div>
+			) : null}
 		</div>
 
 	);
