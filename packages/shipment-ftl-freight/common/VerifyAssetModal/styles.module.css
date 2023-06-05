@@ -2,17 +2,10 @@
 	width: fit-content;
 	font-weight: 500;
 	border-bottom: 1px solid;
-	width: fit-content;
 }
 
 .truck_type_heading {
 	text-transform: capitalize;
-
-	.truck_type {
-		padding: 5px;
-		background: #eaeaea;
-		border-radius: 5px;
-	}
 
 	ul {
 		padding-left: 10px;

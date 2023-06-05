@@ -23,14 +23,6 @@
 			color: #4f4f4f;
 		}
 
-		.core-ui-select__control {
-			border: 1px solid #cddbff !important;
-
-			.core-ui-input-root {
-				border: unset;
-			}
-		}
-
 		.core-ui-select__placeholder {
 			color: #cddbff;
 		}
