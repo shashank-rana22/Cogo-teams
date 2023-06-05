@@ -1,15 +1,15 @@
-.container{
-    padding-bottom: 10px;
+.container {
+	padding-bottom: 10px;
 
-    :global{
-        .ui_modal_scroll .ui_modal_body_container{
-            min-height: 100vh !important;
-        }
-    }
+	:global {
+		.ui_modal_scroll .ui_modal_body_container {
+			min-height: 100vh !important;
+		}
+	}
 }
 
-.generate_button{
-    margin: auto 10px 10px;
+.generate_button {
+	margin: auto 10px 10px;
 }
 
 .button_container {

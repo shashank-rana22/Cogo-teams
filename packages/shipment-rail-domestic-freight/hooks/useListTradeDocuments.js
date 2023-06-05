@@ -19,7 +19,7 @@ const useListTradeDocuments = ({ defaultFilters = {}, defaultParams = {} }) => {
 		try {
 			await trigger();
 		} catch (err) {
-			// toastApiError(err);
+			toastApiError(err);
 		}
 	}, [trigger]);
 

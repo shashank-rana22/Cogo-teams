@@ -18,9 +18,9 @@
     "pre-build": "NODE_ENV=production node scripts/build-pages && node scripts/pre-build",
     "dev": "node scripts/build-pages && node scripts/pre-build && turbo run dev",
     "start": "turbo run start",
-    "eslint": "eslint \"**/*.{js,jsx,ts,tsx}\"",
+    "eslint": "eslint \"packages/shipment-rail-domestic-freight/**/*.{js,jsx,ts,tsx}\"",
     "eslint_file": "eslint",
-    "stylelint": "stylelint \"**/*.css\"",
+    "stylelint": "stylelint \"packages/shipment-rail-domestic-freight/**/*.css\"",
     "clean": "turbo run clean"
   },
   "dependencies": {

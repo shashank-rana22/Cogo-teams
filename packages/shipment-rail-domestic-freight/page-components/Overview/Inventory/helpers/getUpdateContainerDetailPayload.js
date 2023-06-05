@@ -1,4 +1,4 @@
-const getUpdateContainerDetailPayload = ({ globalRouteState = {}, setShowModal = () => {}, routeList = [] }) => ({
+const getUpdateContainerDetailPayload = ({ routeList = [] }) => ({
 	shipment_type : 'rail_domestic',
 	update_data   : (routeList || []).reduce((acc, val) => {
 		if (val.name === 'Transit') return acc;

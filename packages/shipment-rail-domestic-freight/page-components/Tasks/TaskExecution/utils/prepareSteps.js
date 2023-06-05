@@ -103,7 +103,6 @@ const evaluateExpression = (operator, lhs, rhs) => {
 
 const evaluateObject = (control, task, shipment_data) => {
 	const finalControl = control;
-	console.log({ control });
 
 	if (control?.conditions) {
 		(control?.conditions || []).forEach((obj) => {
@@ -225,7 +224,6 @@ const prepareSteps = (steps, task, primary_service = {}) => {
 	const filteredSteps = steps
 		?.filter((step) => evaluateCondition(step, primary_service, task))
 		?.map((step) => conditionalAddition(step, primary_service));
-	console.log({ filteredSteps });
 
 	const dataRichUi = filteredSteps?.map((step) => injectDataIntoValues(step, task, primary_service));
 

@@ -2,23 +2,12 @@ import { startCase } from '@cogoport/utils';
 
 import injectCustomFormValidations from './inject-custom-form-validations';
 
-function getDate(date) {
-	const tempDate = new Date(date);
-
-	if (date && tempDate.toDateString() !== 'Invalid Date') {
-		return tempDate;
-	}
-	return null;
-}
-
 const injectValues = ({
 	selectedMail,
 	populatedControls,
 	task = {},
 	getApisData,
-	shipment_data,
-	stepConfig,
-	primary_service,
+
 }) => {
 	const controls = populatedControls || [];
 

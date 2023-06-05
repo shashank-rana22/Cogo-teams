@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
-import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 
 const useUpdateOrganizationDocument = ({ refetch, defaultParams = {} }) => {
 	const [{ loading }, trigger] = useRequest({

@@ -27,7 +27,6 @@ function useStepExecution({
 	});
 
 	const defaultValues = getDefaultValues(valueInjectedControls);
-	console.log({ defaultValues });
 
 	const formProps = useForm({ defaultValues });
 

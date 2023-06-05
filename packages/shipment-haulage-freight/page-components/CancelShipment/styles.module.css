@@ -17,12 +17,14 @@
 
 .form_element {
 	width: 48%;
+
 	:global {
 		.ui_radiogroup_container {
 			flex-wrap: wrap;
 			justify-content: space-between;
 			padding: 0;
 		}
+
 		.ui_radio_container {
 			width: 48%;
 		}

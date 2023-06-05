@@ -39,7 +39,6 @@ const classifyTradeTypeBasedService = ({
 		const serviceType = is_main && trade_type in tradeTypeBasedServiceType
 			? tradeTypeBasedServiceType[trade_type] : service_type;
 
-		console.log({ service_type, trade_type });
 		const canPushService = checkIfServiceAlreadyPresent(
 			newTargetObj,
 			{ ...matchingService, service_type: serviceType },

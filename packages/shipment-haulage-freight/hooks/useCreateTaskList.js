@@ -64,8 +64,6 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 		)))
 		.flat(2), [processData?.data?.services_config, trade_type]);
 
-	console.log({ taskConfigsForAllShipmentTasks }, processData?.data?.services_config);
-
 	const listOfAllShipmentDocTypes = useMemo(
 		() => taskConfigsForAllShipmentTasks?.map((t) => getDocType(t?.task)),
 		[taskConfigsForAllShipmentTasks, getDocType],
@@ -88,7 +86,6 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 				}
 				return false;
 			});
-			console.log({ pushInDocTypesArr });
 
 			extraDocumentUploaded = (extraDocumentUploaded || []).map((child) => ({
 				...child,
@@ -101,11 +98,10 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 			const restList = [];
 			const pendingList = [];
 			const uploadedList = [];
-			console.log({ taskConfigsForAllShipmentTasks });
 
 			(taskConfigsForAllShipmentTasks || []).forEach((child) => {
 				const doc_type = getDocType(child?.task);
-				console.log({ child, doc_type });
+
 				pushInDocTypesArr.push(doc_type);
 
 				if (listOfUploadedDocumentTypes.includes(doc_type)) {
@@ -121,7 +117,7 @@ const useCreateTaskList = ({ shipment_data = {} }) => {
 			});
 
 			setTaskList([...extraDocumentUploaded, ...uploadedList, ...pendingList, ...restList]);
-			console.log({ restList });
+
 			setDocTypes([...pushInDocTypesArr]);
 		}
 	}, [
