@@ -9,7 +9,11 @@ import ManualEntry from './ManualEntry';
 import styles from './styles.module.css';
 import UploadFile from './UploadFile';
 
-function Header({ refetch, control }) {
+interface HeaderInterface {
+	refetch?:()=>void;
+	control?:object;
+}
+function Header({ refetch, control }:HeaderInterface) {
 	const { query } = useRouter();
 	const [showModal, setShowModal] = useState<ModalInterface>({
 		upload_file     : false,

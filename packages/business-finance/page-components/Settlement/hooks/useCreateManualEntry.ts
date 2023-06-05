@@ -10,11 +10,11 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import getControls from '../configurations/on-account-collections/manualEntryControls';
 
 interface SelectedInterface {
-	entityType?:string,
-	tradePartyMappingId?:string,
-	taggedOrganizationId?:string,
-	id?:string,
-	paymentCode?:string,
+	entityType?:string
+	tradePartyMappingId?:string
+	taggedOrganizationId?:string
+	id?:string
+	paymentCode?:string
 	transactionDate?:Date
 }
 
@@ -328,7 +328,7 @@ const useCreateManualEntry = ({
 					exchange_date : transactionDates,
 				},
 			});
-			setValue('exchangeRate', exData.data.toFixed(4));
+			setValue('exchangeRate', exData?.data?.toFixed(4));
 		} catch (error) {
 			Toast.error(error?.response?.data?.message || 'Something went wrong');
 		}

@@ -1,10 +1,29 @@
 import SortIcon from './SortIcon';
 import styles from './styles.module.css';
 
+interface GlobalInterface {
+	page?:number;
+	pageLimit?:number;
+	accMode?:string;
+	search?:string;
+	date?:{
+		startDate?:Date;
+		endDate?:Date;
+	}
+	paymentDocumentStatus?:string;
+	docType?:string;
+	sortBy?: string;
+	sortType?: string;
+}
+interface HeaderInterface {
+	setGlobalFilters?: React.Dispatch<React.SetStateAction<GlobalInterface>>;
+	globalFilters?:GlobalInterface;
+}
+
 function Header({
 	setGlobalFilters,
 	globalFilters,
-}) {
+}:HeaderInterface) {
 	return (
 		<div className={styles.header}>
 			<div className={styles.customer_name}>Customer Name</div>

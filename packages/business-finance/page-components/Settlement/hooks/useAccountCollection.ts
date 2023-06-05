@@ -1,9 +1,10 @@
-import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
+
+import toastApiError from '../../commons/toastApiError';
 
 interface GlobalInterface {
 	page?:number
@@ -17,17 +18,27 @@ interface GlobalInterface {
 	paymentDocumentStatus?:string
 	docType?:string
 	sortBy?: string,
-	sortType?: string,
+	sortType?: string
 }
 
 const MAX_FILTERS_LENGTH = 3;
+
+const GET_FORMAT_DATE = (dateValue) => {
+	formatDate({
+		date       : dateValue,
+		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
+		timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
+		formatType : 'dateTime',
+		separator  : ' ',
+	});
+};
 
 const useAccountCollection = ({ entityType, currencyType }) => {
 	const [globalFilters, setGlobalFilters] = useState<GlobalInterface>({
 		page     : 1,
 		accMode  : 'AR',
 		sortBy   : '',
-		sortType : 'ASC',
+		sortType : 'Asc',
 	});
 	const { query, debounceQuery } = useDebounceQuery();
 
@@ -41,14 +52,12 @@ const useAccountCollection = ({ entityType, currencyType }) => {
 			authKey : 'get_payments_accounts',
 			method  : 'get',
 		},
-		{ manual: false, autoCancel: false },
+		{ manual: true },
 	);
-
-	const api = listApiTrigger;
 
 	const refetch = useCallback(async () => {
 		try {
-			await api({
+			await listApiTrigger({
 				params: {
 					docType               : docType || undefined,
 					paymentDocumentStatus : paymentDocumentStatus || undefined,
@@ -57,22 +66,10 @@ const useAccountCollection = ({ entityType, currencyType }) => {
 					pageLimit             : 10,
 					startDate:
 					date?.startDate
-						? formatDate({
-							date       : date?.startDate,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
-							formatType : 'dateTime',
-							separator  : ' ',
-						}) : undefined,
+						? GET_FORMAT_DATE(date?.startDate) : undefined,
 					endDate:
 					date?.endDate
-						? formatDate({
-							date       : date?.endDate,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-							timeFormat : GLOBAL_CONSTANTS.formats.time['00:00:00'],
-							formatType : 'dateTime',
-							separator  : ' ',
-						}) : undefined,
+						? GET_FORMAT_DATE(date?.endDate) : undefined,
 					query        : query || undefined,
 					entityType   : entityType || undefined,
 					currencyType : currencyType || undefined,
@@ -81,9 +78,9 @@ const useAccountCollection = ({ entityType, currencyType }) => {
 				},
 			});
 		} catch (error) {
-			Toast.error('Someting went wrong, we are working on it!');
+			toastApiError(error);
 		}
-	}, [accMode, api, currencyType, date?.endDate,
+	}, [accMode, listApiTrigger, currencyType, date?.endDate,
 		date?.startDate, docType, entityType, page, paymentDocumentStatus, query, sortBy,
 		sortType]);
 	const clearFilters = () => {

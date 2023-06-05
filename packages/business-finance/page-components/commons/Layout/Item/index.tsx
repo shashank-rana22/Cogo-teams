@@ -5,6 +5,16 @@ import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
 
+interface ItemInterface {
+	type?:string
+	span?:number
+	label?:string
+	error?:object
+	heading?:string
+	rules?:object
+	control?:object
+}
+
 function Item({
 	type,
 	control,
@@ -14,7 +24,7 @@ function Item({
 	heading,
 	rules,
 	...props
-}) {
+}:ItemInterface) {
 	const errorOriginal = getErrorMessage({
 		error,
 		rules,

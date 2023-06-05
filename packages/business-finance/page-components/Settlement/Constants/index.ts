@@ -5,7 +5,6 @@ export const EMPTY_LINE_ITEMS = ({
 	tradePartyId : '',
 	type         : 'CREDIT',
 	amount       : '',
-
 });
 
 export const AR_FILE_URL =	'https://cogoport-production.sgp1.digitaloceanspaces.com'

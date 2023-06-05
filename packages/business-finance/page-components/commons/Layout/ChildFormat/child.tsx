@@ -88,7 +88,7 @@ function Child({
 							</div>
 						);
 					})}
-					<div style={{ width: '32px', marginTop: '24px' }}>
+					<div className={styles.icon_delete}>
 						{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 							<IcMDelete
 								className={`form-fieldArray-${name}-remove ${styles.delete_icon}`}

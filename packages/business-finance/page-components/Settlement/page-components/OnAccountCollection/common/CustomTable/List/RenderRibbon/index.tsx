@@ -10,11 +10,17 @@ function RenderRibbon({ item }) {
 	const DocType = MAPPING[paymentCode];
 	return (
 		<div>
-			<div className={accMode === 'AP' ? styles.ap_ribbon : styles.simple_ribbon}>
+			<div
+				style={{ background: accMode === 'AP' ? '#dfd9c8' : '#d5ddd6' }}
+				className={styles.ap_ribbon}
+			>
 				{accMode}
 			</div>
 
-			<div className={DocType ? styles.doc_type_ribbon : styles.tds_ribbon}>
+			<div
+				style={{ background: DocType ? '#dfd9c8' : '#ffccbc' }}
+				className={styles.doc_type_ribbon}
+			>
 				{DocType || 'TDS'}
 			</div>
 		</div>

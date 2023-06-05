@@ -4,7 +4,25 @@ import ColumnCard from './ColumnCard';
 import RenderRibbon from './RenderRibbon';
 import styles from './styles.module.css';
 
-function List({ list = [], refetch, loading }) {
+interface ItemInterface {
+	customerName?:string;
+	accCode?:string;
+	bankAccountNumber?:string;
+	orgSerialId?:string;
+	bankName?:string;
+	paymentNumValue?:string;
+	amount?:string;
+	utr?:string;
+	entityType?:string;
+	currency?:string;
+	id?:string;
+}
+interface ListInterface {
+	list?:Array<ItemInterface>
+	refetch?:() => void
+	loading?:boolean
+}
+function List({ list = [], refetch, loading }:ListInterface) {
 	return (
 		<div className={styles.list}>
 			{list?.map((item) => (

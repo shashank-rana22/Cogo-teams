@@ -73,7 +73,7 @@ const useCollectionActions = ({
 		{ manual: true },
 	);
 
-	const { user_data:userData } = useSelector(({ profile }:any) => ({
+	const { user_data:userData } = useSelector(({ profile }:{ profile?:{ user?:{ id?:string, name?:string } } }) => ({
 		user_data: profile?.user || {},
 	}));
 	const { isDelete } = permissionModal || {};

@@ -35,7 +35,7 @@ function OnAccountCollection() {
 
 	const { accMode = '', search = '' } = globalFilters || {};
 
-	const content = () => (
+	const content = (
 		<div className={styles.content_filter}>
 			<SelectController
 				control={control}
@@ -94,7 +94,7 @@ function OnAccountCollection() {
 					<div className={styles.filter_search_more_filters}>
 						<Popover
 							placement="bottom"
-							render={content()}
+							render={content}
 						>
 							<Button themeType="secondary" size="md">
 								<div className={styles.more_filter_div}>

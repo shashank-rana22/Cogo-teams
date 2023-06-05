@@ -9,30 +9,30 @@ import List from './List';
 import styles from './styles.module.css';
 
 interface GlobalInterface {
-	page?:number
-	pageLimit?:number
-	accMode?:string
-	search?:string
+	page?:number;
+	pageLimit?:number;
+	accMode?:string;
+	search?:string;
 	date?:{
-		startDate?:Date
-		endDate?:Date
+		startDate?:Date;
+		endDate?:Date;
 	}
-	paymentDocumentStatus?:string
-	docType?:string
-	sortBy?: string,
-	sortType?: string,
+	paymentDocumentStatus?:string;
+	docType?:string;
+	sortBy?: string;
+	sortType?: string;
 }
 interface CustomInterface {
 	data?:{
-		list?:Array<object>
-		page?:number
-		totalRecords?:number
+		list?:Array<object>;
+		page?:number;
+		totalRecords?:number;
 	}
-	onPageChange?:(val: number) => void
-	refetch?:Function
-	loading?:boolean
-	globalFilters?: GlobalInterface
-	setGlobalFilters?: React.Dispatch<React.SetStateAction<GlobalInterface>>
+	onPageChange?:(val: number) => void;
+	refetch?:()=> void;
+	loading?:boolean;
+	globalFilters?: GlobalInterface;
+	setGlobalFilters?: React.Dispatch<React.SetStateAction<GlobalInterface>>;
 }
 function CustomTable({
 	data = {}, onPageChange, refetch, loading, setGlobalFilters,

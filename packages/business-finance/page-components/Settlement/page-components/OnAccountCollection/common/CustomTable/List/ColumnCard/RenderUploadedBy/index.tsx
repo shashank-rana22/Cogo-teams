@@ -30,7 +30,7 @@ const renderUploadedBy = ({ item }:UploadInterface) => {
 			<Tooltip
 				content={(
 					<div>
-						{uploadedBy && <div>{uploadedBy || '----'}</div>}
+						<div>{uploadedBy || '----'}</div>
 
 						<div>
 							{transactionDate
@@ -48,9 +48,8 @@ const renderUploadedBy = ({ item }:UploadInterface) => {
 				interactive
 			>
 				<div className={styles.flex}>
-					{uploadedBy && (
-						<div className={styles.text_truncate}>{uploadedBy || '----'}</div>
-					)}
+
+					<div className={styles.text_truncate}>{uploadedBy || '----'}</div>
 
 					<div className={styles.text_truncate}>
 						{transactionDate
