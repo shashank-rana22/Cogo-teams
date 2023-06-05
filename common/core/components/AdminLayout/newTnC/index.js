@@ -8,6 +8,7 @@ import styles from './styles.module.css';
 
 function TnC({ partner_user_id }) {
 	const { profile = {} } = useSelector((state) => state);
+	const { partner = {} } = profile;
 	const tnc = { accepted: false };
 	const [disabled, setDisabled] = useState(true);
 
@@ -16,7 +17,7 @@ function TnC({ partner_user_id }) {
 	return (
 		<div>
 
-			{(Object.keys(profile).includes('partner') && tnc?.accepted === false) ? (
+			{(Object.keys(partner).includes('is_joining_tnc_accepted') && tnc?.accepted === false) ? (
 				<div className={styles.container}>
 
 					<Modal size="lg" show placement="center" showCloseIcon={false}>
