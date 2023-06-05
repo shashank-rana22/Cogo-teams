@@ -30,6 +30,9 @@ function DefaultView() {
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
 	const tabProps = {
+		overview: {
+			shipmentData: shipment_data,
+		},
 		emails: {
 			source           : 'cogo_rpa',
 			filters          : { q: shipment_data?.serial_id },
