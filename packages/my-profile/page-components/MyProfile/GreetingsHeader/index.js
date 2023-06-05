@@ -58,7 +58,7 @@ function Greetings({
 		setEditNameModal,
 		partner_user_id,
 	});
-	console.log(picture, watchProfilePicture, 'zz');
+
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.empty_background} />
