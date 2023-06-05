@@ -99,12 +99,11 @@ const useGetStep3Data = ({
 	});
 
 	const onSubmit = async (values) => {
-		const quotations = [];
-
+		let quotation = {};
 		Object.keys(values).forEach((key) => {
 			const items = values[key];
 
-			const newQuote = {
+			quotation = {
 				id         : key,
 				service_id : (service_charges || []).find((charge) => charge?.id === key)
 					?.service_id,
@@ -118,16 +117,16 @@ const useGetStep3Data = ({
 				})),
 			};
 
-			quotations.push(newQuote);
+			return quotation;
 		});
 
-		const checkSum = checkLineItemsSum(quotations);
+		const checkSum = checkLineItemsSum(quotation);
 
 		if (!checkSum.check) {
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
-				const res = await updateBuyQuotationTrigger({ quotations });
+				const res = await updateBuyQuotationTrigger({ ...quotation });
 
 				if (res?.status === 200) {
 					await updateTask({ id: task?.id });
