@@ -9,7 +9,7 @@ function Filters({ formProps }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.title}>Filters</div>
-			<form className={styles.form}>
+			<form>
 				{controls.map((controlItem) => {
 					const el = { ...controlItem };
 					const Element = getFieldController(el.type);

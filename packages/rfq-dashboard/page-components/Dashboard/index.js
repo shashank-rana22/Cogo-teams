@@ -31,7 +31,7 @@ function Dashboard() {
 			highProfitability : !dirtyFields.profitability ? undefined : highProfitability,
 		}));
 	}, [search, organization_size, service_type, start_date, end_date,
-		activeTab, filterStore.sortBy, profitability, dirtyFields.profitability]);
+		activeTab, profitability, dirtyFields.profitability]);
 
 	return (
 		<div>

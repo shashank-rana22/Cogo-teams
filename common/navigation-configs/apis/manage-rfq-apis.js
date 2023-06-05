@@ -170,7 +170,7 @@ const apis = [
 		service_name : 'rfq',
 	},
 	{
-		api          : 'create_request_approval',
+		api          : 'create_approval_rate_card',
 		access_type  : 'private',
 		feature      : 'rfq',
 		service_name : 'rfq',
