@@ -16,8 +16,8 @@
 
 .graph_total {
 	position: absolute;
-	top: 90px;
-	left: 66px;
+	top: 80px;
+	left: 114px;
 	display: flex;
 	flex-direction: column;
 	align-items: center;

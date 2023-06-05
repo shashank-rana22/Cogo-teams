@@ -55,7 +55,7 @@ function FeedbackGraph({ customerSatisfactionStats }) {
 						})}
 
 					</span>
-					<span className={styles.graph_label}>Total No. of Customers</span>
+					<span className={styles.graph_label}>Tickets</span>
 				</div>
 			</div>
 
@@ -66,11 +66,7 @@ function FeedbackGraph({ customerSatisfactionStats }) {
 							<div className={cl`${styles.dot} ${styles[id]}`} />
 							<span className={styles.stats_count}>{value || 0}</span>
 						</div>
-						<div className={styles.stats_label}>
-							{label}
-							{' '}
-							customers
-						</div>
+						<div className={styles.stats_label}>{label}</div>
 					</div>
 				))}
 			</div>
