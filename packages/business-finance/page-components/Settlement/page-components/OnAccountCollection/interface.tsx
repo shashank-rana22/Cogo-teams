@@ -12,7 +12,13 @@ export interface UploadFileInterface {
 	setShow?: any;
 	isEdit?:boolean;
 	selectedItem?:object;
-	itemData?:{ sageOrganizationId?:string };
+	itemData?:{
+		sageOrganizationId?:string,
+		id?: string;
+		accMode?: string;
+		paymentDocumentStatus?: string;
+		entityType?: string;
+	};
 	control?:object;
 	watch?:Function;
 }
