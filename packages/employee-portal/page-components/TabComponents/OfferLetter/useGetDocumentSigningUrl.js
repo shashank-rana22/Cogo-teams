@@ -1,8 +1,7 @@
 import { Toast } from '@cogoport/components';
-import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useGetDocumentSigningUrl = ({ id }) => {
+const useGetDocumentSigningUrl = ({ id, getEmployeeDetails }) => {
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'get',
 		url    : '/get_document_signing_url',
@@ -18,11 +17,14 @@ const useGetDocumentSigningUrl = ({ id }) => {
 				},
 			});
 
-			window.open(res?.data?.signing_url, '_blank');
+			if (res?.data?.status === 'not_signed') {
+				window.open(res?.data?.signing_url, '_blank');
+			} else getEmployeeDetails();
 		} catch (err) {
-			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
+			Toast.error((err?.response?.data?.message) || 'Something went wrong');
 		}
 	};
+
 	return {
 		onClickSignDocument,
 		loading,

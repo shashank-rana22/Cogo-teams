@@ -9,7 +9,7 @@ import ListEmployeeSignedDocuments from './useListEmployeeSignedDocuments';
 
 function SignedDocuments({ profileData, loading }) {
 	const onClickViewDocument = (id) => {
-		window.open(id, '_blank');
+		window.open('https://www.africau.edu/images/default/sample.pdf', '_blank');
 	};
 
 	const { list } = ListEmployeeSignedDocuments();

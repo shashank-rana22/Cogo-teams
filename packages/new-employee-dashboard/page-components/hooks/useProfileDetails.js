@@ -148,7 +148,6 @@ const useProfileDetails = () => {
 			yearlySignInBonus,
 			monthlySignInBonus,
 		};
-		console.log('ok', data);
 
 		if (initialQuestion >= 600000) {
 			const ctcInfo = ctcModalControls(initialQuestion, data);
