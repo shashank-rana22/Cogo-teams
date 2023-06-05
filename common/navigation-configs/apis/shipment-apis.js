@@ -1513,6 +1513,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'contract',
 	},
+	{
+		api          : 'get_purchase_deduction_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_line_items_deduction',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
