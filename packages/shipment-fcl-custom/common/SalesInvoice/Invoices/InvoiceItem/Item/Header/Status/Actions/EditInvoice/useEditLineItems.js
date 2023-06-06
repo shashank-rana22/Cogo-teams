@@ -25,7 +25,7 @@ const useEditLineItems = ({
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 
 	const [{ loading }, trigger] = useRequest({
-		url    : 'fcl_freight/update_invoice_line_items',
+		url    : 'fcl_customs/update_invoice_line_items',
 		method : 'POST',
 	}, { manual: true });
 

@@ -1,16 +1,19 @@
 import { Loader } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import useGetShipmentInvoice from '../../hooks/useGetShipmentInvoice';
-import useListSageSalesInvoices from '../../hooks/useListSageSalesInvoices';
+import useGetShipmentInvoicePreference from '../../hooks/useGetShipmentInvoicePreference';
+import useListSageInvoicesV2 from '../../hooks/useListSageInvoicesV2';
 import OverviewManageServices from '../Overview/OverviewManageServices';
 
 import Invoices from './Invoices';
 import styles from './styles.module.css';
 
 function SalesInvoice() {
-	const { list } = useListSageSalesInvoices();
-	const { data: invoiceData, groupedInvoices, refetch: salesInvoicesRefetch, loading } = useGetShipmentInvoice();
+	const { list } = useListSageInvoicesV2();
+	const {
+		data: invoiceData,
+		groupedInvoices, refetch: salesInvoicesRefetch, loading,
+	} = useGetShipmentInvoicePreference();
 
 	const isIRNGenerated = !!list?.find((item) => !!item?.irn_number);
 

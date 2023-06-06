@@ -16,7 +16,7 @@ const groupByRegistrationNum = (invoices) => {
 	return groupByOrgInvoices;
 };
 
-const useGetShipmentInvoice = () => {
+const useGetShipmentInvoicePreference = () => {
 	const router = useRouter();
 	const { shipment_id } = router.query;
 	const [{ loading, data: invoiceData }, trigger] = useRequest({
@@ -47,4 +47,4 @@ const useGetShipmentInvoice = () => {
 	return { loading, data: invoiceData || {}, refetch: getInvoiceInfo, groupedInvoices };
 };
 
-export default useGetShipmentInvoice;
+export default useGetShipmentInvoicePreference;

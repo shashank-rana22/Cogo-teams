@@ -3,8 +3,7 @@ import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/conve
 import { startCase, isEmpty } from '@cogoport/utils';
 
 const handleDisableCond = (charge, isAdminSuperAdmin, shipment_data) => {
-	const disable =	charge?.service_type === 'fcl_freight_service' && !isAdminSuperAdmin
-	&& shipment_data?.serial_id > 130000;
+	const disable =	 !isAdminSuperAdmin	&& shipment_data?.serial_id > 130000;
 
 	return disable;
 };

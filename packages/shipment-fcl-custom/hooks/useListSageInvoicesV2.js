@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import { useRouter } from 'next/router';
 import { useEffect, useCallback } from 'react';
 
-const useListSageSalesInvoices = () => {
+const useListSageInvoicesV2 = () => {
 	const router = useRouter();
 	const { shipment_id } = router?.query || {};
 	const [
@@ -37,4 +37,4 @@ const useListSageSalesInvoices = () => {
 	return { loading, list: data?.list || [] };
 };
 
-export default useListSageSalesInvoices;
+export default useListSageInvoicesV2;
