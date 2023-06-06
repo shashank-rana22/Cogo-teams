@@ -8,7 +8,7 @@ import CardList from './CardList';
 import SelectFilter from './SelectFilter';
 import styles from './styles.module.css';
 
-function ShipmentId({ data, loading, filters, setFilters }) {
+function ShipmentId({ data, loading, filters, setFilters, activeTab }) {
 	const { search } = filters || {};
 	const { list = [], total_count, page_limit } = data || {};
 	const [searchInput, setSearchInput] = useState(null);
@@ -39,7 +39,10 @@ function ShipmentId({ data, loading, filters, setFilters }) {
 		if (list.length === 0) {
 			return (
 				<div className={styles.no_data}>
-					No data Available
+					<img
+						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/noShipmentFound.svg"
+						alt="empty_data"
+					/>
 				</div>
 			);
 		}
@@ -60,7 +63,7 @@ function ShipmentId({ data, loading, filters, setFilters }) {
 				<div className={styles.search}>
 					<Input
 						size="sm"
-						placeholder="Search"
+						placeholder="Search By Serial Id"
 						value={search}
 						onChange={(e) => setFilters({ ...filters, search: e || undefined })}
 						suffix={suffix}
@@ -69,7 +72,7 @@ function ShipmentId({ data, loading, filters, setFilters }) {
 			</div>
 			<div className={styles.hr} />
 			<div>
-				<SelectFilter filters={filters} setFilters={setFilters} />
+				<SelectFilter filters={filters} setFilters={setFilters} activeTab={activeTab} />
 			</div>
 			<div>
 				{handleShipmentView()}

@@ -61,7 +61,7 @@ function Header({ data, loading }) {
 					<div className={styles.sub_container} key={item.label}>
 						<div className={styles.release_count}>
 							{loading ? <Placeholder className={styles.loader} />
-								: item.value}
+								: item.value || '-'}
 						</div>
 						<div>
 							{item.label}
@@ -74,7 +74,7 @@ function Header({ data, loading }) {
 				<div className={styles.sub_container}>
 					<div className={styles.release_count}>
 						{loading ? <Placeholder className={styles.loader} />
-							: risk_free_shipments}
+							: risk_free_shipments || '-'}
 					</div>
 					<div className={styles.release_count}>
 						Risk Free

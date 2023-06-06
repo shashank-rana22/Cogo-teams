@@ -1,31 +1,13 @@
-import { Select, Button } from '@cogoport/components';
+import { Select } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import React, { useState } from 'react';
+import React from 'react';
 
+import { optionsMap } from './constants';
 import styles from './styles.module.css';
 
-const OPTIONS = [
-	{
-		label : 'Customer Expertise',
-		value : 'customer_expertise',
-	},
-	{
-		label : 'Trade Expertise',
-		value : 'trade_expertise',
-	},
-	{
-		label : 'Commodity Expertise',
-		value : 'commodity_expertise',
-	},
-	{
-		label : 'Misc Expertise',
-		value : 'miscellaneous',
-	},
-];
-
-function SelectFilter({ filters, setFilters }) {
-	const { originValue, destinationValue } = filters || {};
-	const [cargoValue, setCargoValue] = useState('');
+function SelectFilter({ filters, setFilters, activeTab }) {
+	const OPTION = optionsMap[activeTab] || [];
+	const { originValue, destinationValue, reason, hsCode } = filters || {};
 
 	return (
 		<div className={styles.container}>
@@ -73,52 +55,36 @@ function SelectFilter({ filters, setFilters }) {
 						}}
 					/>
 				</div>
-
-				<div className={styles.select}>
-					<Select
-						size="sm"
-						isClearable={false}
-						placeholder="Cargo Value"
-						value={cargoValue}
-						options={OPTIONS}
-						onChange={(value) => (
-							setCargoValue(value)
-						)}
-						className={styles.dropdown}
-					/>
-				</div>
 			</div>
 			<div className={styles.sub_container}>
 				<div className={styles.select}>
 					<Select
 						size="sm"
-						isClearable={false}
-						placeholder="Potential Charges"
-						value={cargoValue}
-						options={OPTIONS}
-						onChange={(value) => (
-							setCargoValue(value)
-						)}
-						className={styles.dropdown}
-					/>
-				</div>
-				<div className={styles.select}>
-					<Select
-						size="sm"
-						isClearable={false}
+						isClearable
 						placeholder="Reason"
-						value={cargoValue}
-						options={OPTIONS}
-						onChange={(value) => (
-							setCargoValue(value)
-						)}
+						value={reason}
+						options={OPTION}
+						onChange={(e) => setFilters({
+							...filters,
+							reason: e || undefined,
+						})}
 						className={styles.dropdown}
 					/>
 				</div>
 				<div className={styles.select}>
-					<Button size="md" themeType="secondary">
-						+ More Filters
-					</Button>
+					<AsyncSelect
+						name="hsCodeId"
+						asyncKey="hs_code_list"
+						size="sm"
+						isClearable
+						placeholder="Commodity Type"
+						defaultOptions="true"
+						value={hsCode}
+						onChange={(e) => setFilters({
+							...filters,
+							hsCode: e || undefined,
+						})}
+					/>
 				</div>
 			</div>
 		</div>

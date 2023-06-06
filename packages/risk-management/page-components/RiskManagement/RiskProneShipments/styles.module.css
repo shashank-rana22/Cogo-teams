@@ -1,24 +1,28 @@
-.container{
-    background: #FFFFFF;
-    border-radius: 8px;
-    padding: 24px;
-    margin-top: 16px;
+.container {
+	padding: 24px;
+	margin-top: 16px;
+	background: #fff;
+	border-radius: 8px;
 }
-.header{
-    color: #333333;
-    font-size: 16px;
-    font-weight: 600;
+
+.header {
+	font-size: 16px;
+	font-weight: 600;
+	color: #333;
 }
-.hr{
-    height: 2px;
-    width: 48px;
-    background: #ED3726;
-   border-radius: 12px;
+
+.hr {
+	width: 48px;
+	height: 2px;
+	background: #ed3726;
+	border-radius: 12px;
 }
-.header_container{
-    display: flex;
-    flex-direction: column;
+
+.header_container {
+	display: flex;
+	flex-direction: column;
 }
-.tab{
-    margin-top: 16px;
+
+.tab {
+	margin-top: 16px;
 }

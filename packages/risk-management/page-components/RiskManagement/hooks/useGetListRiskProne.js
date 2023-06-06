@@ -5,15 +5,18 @@ import { useEffect, useCallback, useState } from 'react';
 
 const useGetListRiskProne = ({ activeTab }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url: 'fcl_freight/list_risk_prone_shipments',
+		url    : 'fcl_freight/list_risk_prone_shipments',
+		method : 'get',
 	}, { manual: true, autoCancel: false });
 	const [filters, setFilters] = useState({
 		pageIndex        : 1,
 		search           : undefined,
 		originValue      : undefined,
 		destinationValue : undefined,
+		reason           : undefined,
+		hsCode           : undefined,
 	});
-	const { pageIndex, search, originValue, destinationValue } = filters || {};
+	const { pageIndex, search, originValue, destinationValue, reason, hsCode } = filters || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
@@ -28,20 +31,23 @@ const useGetListRiskProne = ({ activeTab }) => {
 						filters: {
 							origin_port_id      : originValue || undefined,
 							destination_port_id : destinationValue || undefined,
+							risk_sub_reason     : reason,
 							q                   : query || undefined,
+							hs_code             : hsCode,
 						},
 						risk_type          : activeTab,
+						sort_by            : 'created_at',
+						sort_type          : 'desc',
 						additional_methods : ['pagination'],
 						page_limit         : 10,
 						page               : pageIndex,
-
 					},
 				});
 			} catch (err) {
-				Toast.error(err.meessage);
+				Toast.error(err.message);
 			}
 		})();
-	}, [trigger, originValue, destinationValue, query, activeTab, pageIndex]);
+	}, [trigger, originValue, destinationValue, reason, query, activeTab, pageIndex, hsCode]);
 
 	useEffect(() => {
 		getDahboardData();

@@ -1,22 +1,25 @@
-.container{
-    display: flex;
-    justify-content: space-between;
-    margin-top: 16px;
-    margin-bottom: 16px;
-    @media (max-width: 1368px) {
-		    display: flex;
-        flex-direction: column;
-	}
+.container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
+	margin-bottom: 16px;
 
+	@media (max-width: 1068px) {
+		display: flex;
+		flex-direction: column;
+	}
 }
-.select{
-    width: 200px;
-    margin-right: 12px;
-   @media (max-width: 1368px) {
+
+.select {
+	width: 230px;
+	margin-right: 12px;
+
+	@media (max-width: 1068px) {
 		width: 100%;
 		margin-top: 8px;
 	}
 }
-.sub_container{
-  display: flex;
+
+.sub_container {
+	display: flex;
 }

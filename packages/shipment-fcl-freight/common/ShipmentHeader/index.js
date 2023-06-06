@@ -27,7 +27,12 @@ function ShipmentHeader() {
 		return <Loader />;
 	}
 
-	const showCancelShipmentIcon = getCanCancelShipment({ shipment_data, user_data, activeStakeholder });
+	const showCancelShipmentIcon = getCanCancelShipment({
+		shipment_data,
+		primary_service,
+		user_data,
+		activeStakeholder,
+	});
 
 	return (
 		<div className={styles.container}>
