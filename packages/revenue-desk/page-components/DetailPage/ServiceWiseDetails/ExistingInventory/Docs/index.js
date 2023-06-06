@@ -8,17 +8,18 @@ const existing_inventory = [
 
 function Docs({ data, preferences, setPreferences }) {
 	return (
-		<div>
-			<div>Existing Inventory</div>
+		<div style={{ backgroundColor: '#fff', marginTop: '18px', padding: '20px' }}>
+			<div style={{ fontSize: '20px', fontWeight: '600', color: '#4F4F4F' }}>Existing Inventory</div>
 			{existing_inventory.map((type) => (
-				<InventoryCard
-					type={type}
-					data={data}
-					expanded
-					key={type}
-					preferences={preferences}
-					setPreferences={setPreferences}
-				/>
+				<div key={type} style={{ marginTop: '10px' }}>
+					<InventoryCard
+						type={type}
+						data={data}
+						expanded
+						preferences={preferences}
+						setPreferences={setPreferences}
+					/>
+				</div>
 			))}
 		</div>
 	);

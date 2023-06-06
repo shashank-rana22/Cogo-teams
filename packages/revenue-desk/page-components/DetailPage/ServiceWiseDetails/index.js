@@ -35,10 +35,6 @@ function Rates({ groupedShowServicesData }) {
 		prefrences,
 	});
 
-	useEffect(() => {
-		setPayload({ service_providers: service_providers || [] });
-	}, [JSON.stringify(prefrences)]);
-
 	return (
 		<div className={styles.container}>
 			<Tabs

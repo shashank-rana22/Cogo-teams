@@ -65,7 +65,7 @@ const getRows = ({ key, details }) => {
 						row.push(
 							format(child?.schedule_departure, 'dd MMM yyyy'),
 						);
-						row.push(child?.booking_party);
+						row.push(child?.booking_party || '-----');
 						childrens.push(row);
 						ids.push(child?.id);
 					});

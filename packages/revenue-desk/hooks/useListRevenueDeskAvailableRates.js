@@ -18,7 +18,7 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData } = {}) => {
 			await trigger({
 				params: {
 					filters: {
-						shipment_id  : 'f33211e6-a07c-460d-af87-bc3f713e7813' || singleServiceData?.shipment_id,
+						shipment_id  : '4b9f2240-d934-4b0f-9f6f-d5ad578b4dcb' || singleServiceData?.shipment_id,
 						service_id   : singleServiceData?.id,
 						service_type : 'fcl_freight'
 						|| singleServiceData?.service_type?.split('_').slice(0, -1).join('_'),
