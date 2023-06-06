@@ -1126,7 +1126,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
 			},
 			{
 				key           : 'coe-bn_salvage',
@@ -1552,7 +1552,7 @@ const navigationMappingAdmin = {
 				href          : '/cogo-assured/fcl_freight_local',
 				as            : '/cogo-assured/fcl_freight_local',
 				type          : 'link',
-				possible_apis : apis.cogo_assured,
+				possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
 
 				main_apis: [],
 			},
