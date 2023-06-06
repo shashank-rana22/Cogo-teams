@@ -2,8 +2,8 @@ import { Pill } from '@cogoport/components';
 
 import { renderValue } from './renderValue';
 
-function CargoDetailPills({ detail }) {
-	const labels = [
+function CargoDetailPills({ detail, labels }) {
+	const labelsMapping = [
 		'airline',
 		'container_size',
 		'containers_count',
@@ -32,13 +32,15 @@ function CargoDetailPills({ detail }) {
 		'truck_types',
 	];
 
+	const label = labels || labelsMapping;
+
 	return (
 		<div style={{ display: 'flex', flexWrap: 'wrap' }}>
-			{labels.map((label) => {
-				if (detail?.[label] && renderValue(label, detail)) {
+			{label.map((singleLabel) => {
+				if (detail?.[singleLabel] && renderValue(singleLabel, detail)) {
 					return (
-						<div key={label}>
-							<Pill size="lg" color="#F9F9F9">{renderValue(label, detail)}</Pill>
+						<div key={singleLabel}>
+							<Pill size="lg" color="#F9F9F9">{renderValue(singleLabel, detail)}</Pill>
 						</div>
 					);
 				}
