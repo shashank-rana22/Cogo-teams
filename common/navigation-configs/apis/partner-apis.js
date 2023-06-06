@@ -3477,7 +3477,7 @@ const partner = {
 			feature      : 'rate_feedbacks',
 		},
 		{
-			api          : 'update_risk_category',
+			api          : 'update_checkout_risk_category',
 			access_type  : 'private',
 			service_name : 'checkout',
 		},
