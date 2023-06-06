@@ -9,7 +9,6 @@ export default function SubmitSection({
 	initialQuestion = '',
 	ctcStructure = {},
 	setVisible = () => {},
-	// formProps,
 	detail,
 	setShowCtcBreakupModal = () => {},
 	setInitialQuestion = () => {},
@@ -17,15 +16,12 @@ export default function SubmitSection({
 	handleSubmit,
 	reset,
 }) {
-	// const { handleSubmit, reset } = formProps;
-
-	const { loading, onFinalSubmit } = usePostCreateEmployeeOfferLetter({
-		setShowCtcBreakupModal,
-		offerLetterApiRefetch,
-	});
+	const {
+		loading,
+		onFinalSubmit,
+	} = usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch });
 
 	const onSubmit = (values) => {
-		// console.log('submit sure values',values)
 		onFinalSubmit(values, ctcStructure, initialQuestion, detail?.id);
 		setVisible(false);
 		setInitialQuestion('');
@@ -38,11 +34,13 @@ export default function SubmitSection({
 	return (
 		<div className={styles.popover_inner}>
 			<h4>Are you sure?</h4>
+
 			<div className={styles.sumbit}>
 				<Button
 					className={styles.button_submit}
 					themeType="secondary"
 					onClick={onClose}
+					disabled={loading}
 				>
 					No
 				</Button>

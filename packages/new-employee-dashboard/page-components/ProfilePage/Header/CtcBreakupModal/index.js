@@ -38,15 +38,16 @@ export default function CtcBreakupModal({
 			placement="center"
 		>
 			<Modal.Header title="Set CTC Values" />
+
 			<Modal.Body>
 				<ModalComponent
 					ctcStructure={ctcStructure}
 					initialQuestion={initialQuestion}
 					setInitialQuestion={setInitialQuestion}
-					// formProps={formProps}
 					control={control}
 				/>
 			</Modal.Body>
+
 			<Modal.Footer>
 				<div className={styles.popover_container}>
 					<Popover
@@ -60,7 +61,6 @@ export default function CtcBreakupModal({
 								initialQuestion={initialQuestion}
 								ctcStructure={ctcStructure}
 								setVisible={setVisible}
-								// formProps={formProps}
 								handleSubmit={handleSubmit}
 								reset={reset}
 								setShowCtcBreakupModal={setShowCtcBreakupModal}
