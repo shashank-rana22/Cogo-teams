@@ -48,7 +48,11 @@ function Card({ item, handleCheck, checkedItems }) {
 				/>
 			</div>
 			<div className={styles.basic_details}>
-				<div className={styles.org_name}>{item?.name ? startCase(item?.name) : '-'}</div>
+				<div className={styles.org_name}>
+					{item?.name ? startCase(item?.importer_exporter
+						?.business_name) : '-'}
+
+				</div>
 				<div className={styles.tags}>
 					<div className={styles.primary_tag}>
 						{

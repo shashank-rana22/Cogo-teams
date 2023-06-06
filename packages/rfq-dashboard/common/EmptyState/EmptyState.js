@@ -9,9 +9,10 @@ function EmptyState({
 	emptyText = 'Data not found',
 	flexDirection = 'row',
 	textSize = '16px',
+	marginTop = '0px',
 }) {
 	return (
-		<div className={`${styles.container} ${styles[flexDirection]}`}>
+		<div className={`${styles.container} ${styles[flexDirection]}`} style={{ marginTop }}>
 			<Image
 				src={GLOBAL_CONSTANTS.image_url.rfq_loading}
 				width={width}
