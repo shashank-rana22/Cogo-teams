@@ -6,7 +6,7 @@ import { startCase } from '@cogoport/utils';
 import ActionPopover from './ActionPopover';
 import styles from './styles.module.css';
 
-const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab }) => [
+const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab, loading }) => [
 	{
 		Header   : 'NAME & EMAIL',
 		accessor : (item) => (
@@ -75,6 +75,7 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab }) => [
 					themeType="tertiary"
 					style={{ textDecoration: 'underline' }}
 					onClick={() => setCtcBreakup(item)}
+
 				>
 					View
 				</Button>
@@ -93,6 +94,7 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab }) => [
 							onClick={() => onFinalSubmit({ id: item?.id, status: 'approved' })}
 							themeType="primary"
 							style={{ marginLeft: 8 }}
+							loading={loading}
 						>
 							Approve
 						</Button>
