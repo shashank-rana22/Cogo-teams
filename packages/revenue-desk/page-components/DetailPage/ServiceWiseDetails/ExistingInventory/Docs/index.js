@@ -6,7 +6,7 @@ const existing_inventory = [
 	['Split Booking Note', 'splitable_booking_notes'],
 ];
 
-function Docs({ data, preferences, setPreferences }) {
+function Docs({ data, preferences, setPreferences, serviceId }) {
 	return (
 		<div style={{ backgroundColor: '#fff', marginTop: '18px', padding: '20px' }}>
 			<div style={{ fontSize: '20px', fontWeight: '600', color: '#4F4F4F' }}>Existing Inventory</div>
@@ -18,6 +18,7 @@ function Docs({ data, preferences, setPreferences }) {
 						expanded
 						preferences={preferences}
 						setPreferences={setPreferences}
+						serviceId={serviceId}
 					/>
 				</div>
 			))}
