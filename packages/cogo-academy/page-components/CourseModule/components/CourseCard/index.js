@@ -93,10 +93,10 @@ function CourseCard({
 						) : null}
 					</div>
 
-					{data?.rating ? (
+					{data?.average_rating ? (
 						<div className={styles.rating}>
 							<IcMStarfull style={{ marginRight: '6px' }} fill="#fcdc00" />
-							<span style={{ color: '#fcdc00' }}>{data?.rating}</span>
+							<span style={{ color: '#fcdc00' }}>{data?.average_rating}</span>
 						</div>
 					) : null}
 				</div>
