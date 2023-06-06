@@ -1,10 +1,10 @@
-import { Loader, Placeholder, Pill } from '@cogoport/components';
+import { Loader, Placeholder, Pill, Popover } from '@cogoport/components';
 import {
 	IcMArrowRotateDown,
 	IcMArrowRotateUp,
 	IcADocumentTemplates,
 } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
@@ -79,6 +79,7 @@ export interface DataInterface {
 	sellerBankDetail?: SellerBankDetailInterface;
 	sellerDetail?: SellerDetailInterface;
 	bill: BillInterface;
+	consolidatedShipmentIds:Array<string>;
 }
 
 interface ShipmentDetailsInterface {
@@ -109,8 +110,9 @@ function ShipmentDetails({
 	const [showDocuments, setShowDocuments] = useState(false);
 	const [showVariance, setShowVariance] = useState(false);
 	const [itemCheck, setItemCheck] = useState(false);
+	const [showConsolidatedSID, setShowConsolidatedSID] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
-	const { job } = data || {};
+	const { job, consolidatedShipmentIds = [] } = data || {};
 	const { jobNumber } = job || {};
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
@@ -138,7 +140,37 @@ function ShipmentDetails({
 		}
 		return <div>NO DATA FOUND</div>;
 	};
+	const rest = { onClickOutside: () => { setShowConsolidatedSID(false); } };
 
+	const getConsolidatedSID = () => {
+		if (isEmpty(consolidatedShipmentIds)) {
+			return (
+				<div>
+					Not Available
+				</div>
+			);
+		}
+		return (
+			<div>
+				{consolidatedShipmentIds.map((item:string) => (
+					<div key={item} className={styles.sid_div}>
+						<div>
+							SID
+						</div>
+						<div>
+							-
+						</div>
+						<div>
+							{item}
+						</div>
+					</div>
+				))}
+			</div>
+		);
+	};
+	const handleConsolidatedSID = () => {
+		setShowConsolidatedSID(!showConsolidatedSID);
+	};
 	const jobTypeValue = jobType?.toLowerCase();
 	return (
 		<div className={styles.container}>
@@ -163,7 +195,7 @@ function ShipmentDetails({
 
 			{jobType === 'SHIPMENT' && (
 				<>
-					<div className={styles.caret}>
+					<div className={styles.card}>
 						<div
 							className={styles.card_upper}
 							onClick={() => {
@@ -222,7 +254,7 @@ function ShipmentDetails({
 					</div>
 
 					<div
-						className={styles.caret}
+						className={styles.card}
 						onClick={() => {
 							setShowDocuments(!showDocuments);
 						}}
@@ -282,6 +314,35 @@ function ShipmentDetails({
 						)}
 					</div>
 				) : null}
+				{jobType === 'CONSOLIDATED'
+				&& (
+					<div className={styles.show_consolidated}>
+						<Popover
+							placement="bottom"
+							caret
+							visible={showConsolidatedSID}
+							render={getConsolidatedSID()}
+							{...rest}
+						>
+							<div
+								className={styles.consolidated_sid}
+								onClick={() => {
+									handleConsolidatedSID();
+								}}
+								role="presentation"
+							>
+								<div className={styles.consolidated_text}>
+									Consolidated SID
+								</div>
+
+								<div className={styles.consolidated_icon}>
+									{showConsolidatedSID ? <IcMArrowRotateUp height={20} width={20} />
+										: <IcMArrowRotateDown height={20} width={20} />}
+								</div>
+							</div>
+						</Popover>
+					</div>
+				)}
 				<POC itemData={data} />
 			</div>
 
