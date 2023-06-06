@@ -22,7 +22,7 @@ function ViewCtcBreakup({ metadata, showCtcBreakupModal, setShowCtcBreakupModal 
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={onClose}>Close</Button>
+				<Button themeType="secondary" onClick={onClose}>Close</Button>
 			</Modal.Footer>
 		</Modal>
 	);
