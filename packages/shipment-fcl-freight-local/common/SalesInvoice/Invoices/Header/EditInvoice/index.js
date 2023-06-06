@@ -1,5 +1,4 @@
 import { Button, Modal } from '@cogoport/components';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/ocean-modules';
 import React, { useEffect } from 'react';
@@ -7,8 +6,6 @@ import React, { useEffect } from 'react';
 import editLineItemsHelper from './editLineItemsHelper';
 import Info from './Info';
 import styles from './styles.module.css';
-
-const geo = getGeoConstants();
 
 function EditInvoice({
 	show = 'false',

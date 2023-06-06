@@ -43,7 +43,7 @@ const rawControls = (
 			span        : 2,
 			handleChange,
 			placeholder : 'select line item',
-			rules: { required: 'Required' },
+			rules       : { required: 'Required' },
 		},
 		{
 
@@ -59,14 +59,14 @@ const rawControls = (
 			rules       : {
 				validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
 			},
-			span     : 2,
+			span: 2,
 		},
 		{
-			label    : 'Unit',
-			type     : 'select',
-			name     : 'unit',
-			options  : convertObjectMappingToArray(FCL_UNITS),
-			span     : 2,
+			label   : 'Unit',
+			type    : 'select',
+			name    : 'unit',
+			options : convertObjectMappingToArray(FCL_UNITS),
+			span    : 2,
 		},
 		{
 			name           : 'currency',
