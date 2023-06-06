@@ -23,14 +23,13 @@ export const studentColumns = ({
 	router,
 	setShowModal,
 	setStudentId,
-	setParams,
-	params,
 }) => [
 	{
 		Header   : 'Name',
 		id       : 'name',
 		accessor : ({ user_details = {} }) => {
-			const { name = '' } = user_details || {};
+			const { name = '' } = user_details;
+
 			return (
 				<div>
 					<Tooltip maxWidth={500} content={startCase(name)} placement="top">
@@ -43,72 +42,39 @@ export const studentColumns = ({
 		},
 	},
 	{
-		Header   : 'Source',
-		id       : 'topic',
-		accessor : ({ topic = [] }) => (
-			<section className={styles.content}>
-				<Tooltip maxWidth={500} content={startCase(topic)} placement="top">
-					<Pill
-						className={styles.topic_pill}
-						size="md"
-						color="#F3FAFA"
-					>
-						{startCase(topic)}
-					</Pill>
-				</Tooltip>
+		Header   : 'Mandatory courses',
+		id       : 'mandatory',
+		accessor : ({ mandatory = 0 }) => (
+			<section>
+				{mandatory}
 			</section>
 		),
 	},
 	{
-		Header   : 'Audience',
-		id       : 'cogo_entity_name',
-		accessor : ({ cogo_entity_name = '' }) => (
-			<section>{cogo_entity_name}</section>
-		),
-	},
-	{
-		Header   : 'Mandatory courses(Opened/Total)',
-		id       : 'questions',
-		accessor : ({ stand_alone_question_count = 0 }) => (
+		Header   : 'Other courses',
+		id       : 'not_mandatory',
+		accessor : ({ not_mandatory = 0 }) => (
 			<section>
-				{stand_alone_question_count || 0}
+				{not_mandatory}
 			</section>
 		),
 	},
 	{
-		Header   : 'Other courses(Opened/Total)',
-		id       : 'case_study_questions',
-		accessor : ({ case_study_question_count = 0 }) => (
+		Header   : 'Total courses',
+		id       : 'total_courses',
+		accessor : ({ total_courses = 0 }) => (
 			<section>
-				{case_study_question_count || 0}
+				{total_courses}
 			</section>
 		),
 	},
 	{
 		Header   : 'Courses Completion %',
 		id       : 'subjective_questions',
-		accessor : ({ subjective_question_count = 0 }) => (
+		accessor : ({ total_courses = 0, courses_completion = 0 }) => (
 			<section>
-				{subjective_question_count || 0}
-			</section>
-		),
-	},
-	{
-		Header: (
-			<div className={styles.updated_at}>
-				<div className={styles.updated_at_text}>Joined CogoAcademy</div>
-
-				<SortComponent
-					value="created_at"
-					setParams={setParams}
-					params={params}
-				/>
-			</div>
-		),
-		id       : 'number_of_tests',
-		accessor : ({ set_count = 0 }) => (
-			<section>
-				{set_count}
+				{total_courses ? courses_completion / total_courses : 0}
+				%
 			</section>
 		),
 	},
