@@ -9,7 +9,7 @@ function Filter({
 	data, filterStore, setFilterStore, checkedItems,
 	selectAll, setCheckedItems, setSelectAll, getRfqsForApproval,
 }) {
-	const { bulkUpdateRfqState } = useBulkUpdateRfqState({ getRfqsForApproval });
+	const { bulkUpdateRfqState, loading } = useBulkUpdateRfqState({ getRfqsForApproval });
 
 	const handleSelectAll = () => {
 		setSelectAll((prevSelectAll) => !prevSelectAll);
@@ -29,7 +29,7 @@ function Filter({
 					checked={selectAll}
 					onChange={handleSelectAll}
 				/>
-				<Button onClick={handleApproveRfq}>
+				<Button onClick={handleApproveRfq} disabled={loading}>
 					Approve Selected (
 					{checkedItems.length}
 					)
