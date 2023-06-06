@@ -13,6 +13,34 @@ import Header from './header';
 import ServiceMargin from './ServiceMargin';
 import styles from './styles.module.css';
 
+const currencyConversion = ({ item, editedMargins, conversions, rate }) => {
+	const serviceKey = item?.id;
+	const serviceEditedMargins = editedMargins?.[serviceKey];
+
+	const totalDisplay = displayTotal(
+		{
+
+			lineItems     : item?.line_items || [],
+			editedMargins : serviceEditedMargins,
+			conversions,
+			toCurrency    : item?.total_price_currency,
+		},
+
+	);
+
+	const totalValue = convertCurrencyValue(
+		Number(Math.floor(totalDisplay)),
+		item?.total_price_currency,
+		rate?.total_price_currency,
+		conversions,
+	);
+	return {
+		totalDisplay,
+		serviceKey,
+		totalValue,
+	};
+};
+
 function BreakdownDetails({
 	detail,
 	rate,
@@ -31,8 +59,6 @@ function BreakdownDetails({
 }) {
 	const { query } = useRouter();
 	const { rfq_id = '' } = query;
-	let profitability = 0.0;
-
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
 
 	const rateDetails = getBreakdown(rate);
@@ -71,38 +97,11 @@ function BreakdownDetails({
 		}
 	};
 
-	const currencyConversion = (item) => {
-		const serviceKey = item?.id;
-		const serviceEditedMargins = editedMargins?.[serviceKey];
-
-		const totalDisplay = displayTotal(
-			{
-
-				lineItems     : item?.line_items || [],
-				editedMargins : serviceEditedMargins,
-				conversions,
-				toCurrency    : item?.total_price_currency,
-			},
-
-		);
-
-		total = convertCurrencyValue(
-			Number(Math.floor(totalDisplay)),
-			item?.total_price_currency,
-			rate?.total_price_currency,
-			conversions,
-		);
-		return {
-			totalDisplay,
-			serviceKey,
-			total,
-		};
-	};
-
 	(rateDetails || []).forEach((item) => {
-		total += currencyConversion(item).total;
+		total += currencyConversion({ item, editedMargins, conversions, rate }).totalValue;
 	});
 
+	let profitability = 0.0;
 	if (total !== totalAmount) {
 		profitability = (totalAmount / (total - totalAmount)) * 100;
 	}
@@ -112,8 +111,7 @@ function BreakdownDetails({
 			<Header margin_limit={margin_limit} />
 			<div>
 				{(rateDetails || []).map((item) => {
-					const { totalDisplay, serviceKey } = currencyConversion(item);
-
+					const { totalDisplay, serviceKey } = currencyConversion({ item, editedMargins, conversions, rate });
 					return (
 						<ServiceMargin
 							item={item}
