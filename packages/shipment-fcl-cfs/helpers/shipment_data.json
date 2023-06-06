@@ -1,0 +1,66 @@
+{
+    "shipment_data": {
+      "id": "cbd9ee9c-ec1d-4a5d-8a06-59aa3538c979",
+      "serial_id": 147771,
+      "shipment_type": "fcl_cfs",
+      "services": [
+        "fcl_cfs_service"
+      ],
+      "is_job_closed": false,
+      "is_flashed": false,
+      "source": "quotation",
+      "state": "shipment_received",
+      "importer_exporter_id": "e0c1ce39-299a-44c4-b5e8-03c25bde387e",
+      "pinned_by_id": null,
+      "agent_id": "0ccfc574-f942-4fb4-971d-a34c7ae691c3",
+      "created_at": "2023-05-09T07:23:49.887Z",
+      "is_cancellation_requested": null,
+      "po_number": null,
+      "importer_exporter_branch_id": "08c9fa64-4586-4f6c-b751-316a8feb18dd",
+      "cogo_assured_value_props": [],
+      "consignee_shipper_id": null,
+      "payment_term": null,
+      "all_states": [
+        "shipment_received",
+        "confirmed_by_importer_exporter",
+        "in_progress",
+        "completed"
+      ],
+      "importer_exporter": {
+        "id": "e0c1ce39-299a-44c4-b5e8-03c25bde387e",
+        "business_name": "VOLTAS LIMITED",
+        "account_type": "importer_exporter",
+        "tags": [],
+        "kyc_status": "verified",
+        "is_tax_applicable": true,
+        "country_id": "541d1232-58ce-4d64-83d6-556a42209eb7"
+      }
+    },
+    "primary_service": {
+      "id": "d75ae4f2-9128-461e-92be-5c475a5d153c",
+      "state": "init",
+      "service_provider_id": "17dba570-40dd-4bc5-9945-ca22ed5135a6",
+      "cargo_details": [
+        {
+          "container_size": "20",
+          "container_type": "standard",
+          "containers_count": 1,
+          "cargo_weight_per_container": null
+        }
+      ],
+      "trade_type": "export",
+      "service_type": "fcl_cfs_service",
+      "port_id": {
+        "id": "c4301086-92a8-463d-af00-9c1222ff223f",
+        "name": "Mundra",
+        "display_name": "Mundra (INMUN), Bhuj, India",
+        "port_code": "INMUN",
+        "type": "seaport",
+        "is_icd": false,
+        "country_code": "IN",
+        "country_id": "541d1232-58ce-4d64-83d6-556a42209eb7"
+      }
+    },
+    "container_details": []
+}
+  

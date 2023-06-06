@@ -8,9 +8,18 @@ import Header from './Header';
 import styles from './styles.module.css';
 
 function EditLineItems({
-	control, controls = [], name = '', cargoDetails, value:emptyValue, customValues = {},
+	control,
+	showAddButtons = true, showDeleteButton = true, controls = [],
+	name = '', cargoDetails,
+	customValues = {},
+	error = {},
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
+
+	const childEmptyValues = {};
+	controls.forEach((controlItem) => {
+		childEmptyValues[controlItem.name] = controlItem.value || '';
+	});
 
 	return (
 		<div className={styles.container}>
@@ -29,12 +38,24 @@ function EditLineItems({
 						field={field}
 						append={append}
 						remove={remove}
-						customValues={customValues?.formValues?.[index]}
+						customValues={customValues?.formValues?.[index] || customValues?.[index]}
+						error={error?.[index]}
+						showDeleteButton={showDeleteButton}
 					/>
 				))}
 			</div>
 
-			<Button onClick={() => append(emptyValue)}>Add</Button>
+			{showAddButtons
+				? (
+					<Button
+						size="sm"
+						themeType="accent"
+						onClick={() => append(childEmptyValues)}
+						className={styles.button_div}
+					>
+						+ Add Line Items
+					</Button>
+				) : null}
 		</div>
 	);
 }

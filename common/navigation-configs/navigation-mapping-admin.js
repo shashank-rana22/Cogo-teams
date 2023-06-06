@@ -57,6 +57,7 @@ import {
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
+	IcMBookingDesk,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -1352,8 +1353,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-kam_desk',
 				title         : 'KAM Desk',
-				href          : '/kam-desk',
-				as            : '/kam-desk',
+				href          : '/v2/kam-desk',
+				as            : '/v2/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
 				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
@@ -1731,6 +1732,14 @@ const navigationMappingAdmin = {
 				as            : '/cogo-fx',
 				main_apis     : [],
 				possible_apis : apis.cogo_fx,
+			},
+			{
+				key           : 'transaction_setting-controlled_booking',
+				title         : 'Controlled Booking Desk',
+				icon          : IcMBookingDesk,
+				href          : '/v2/controlled-booking',
+				as            : '/v2/controlled-booking',
+				possible_apis : apis.controlled_booking,
 			},
 		],
 		module_type: 'dashboards',
