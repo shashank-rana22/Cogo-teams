@@ -23,7 +23,7 @@ function SelectedRatesCard({ prefrences }) {
 			<div className={styles.lower_section}>
 				{prefrences?.map((Singleitem) => (
 					<div key={Singleitem}>
-						<Card data={Singleitem?.data} rate_key={Singleitem?.key} />
+						<Card data={Singleitem?.data} rate_key />
 					</div>
 				))}
 			</div>

@@ -6,7 +6,7 @@ import EmptyState from '../../../../EmptyState';
 import Card from './Card';
 import styles from './styles.module.css';
 
-function RatesCard({ ratesData = [], setPrefrences, prefrences, prefrence_key }) {
+function RatesCard({ ratesData = [], setPrefrences, prefrences, serviceId }) {
 	const [showFullList, setShowFullList] = useState(false);
 	const initialCardCount = 2;
 	const toggleList = () => {
@@ -27,7 +27,7 @@ function RatesCard({ ratesData = [], setPrefrences, prefrences, prefrence_key })
 						key={item}
 						prefrences={prefrences}
 						setPrefrences={setPrefrences}
-						prefrence_key={prefrence_key}
+						serviceId={serviceId}
 					/>
 				))}
 			</div>

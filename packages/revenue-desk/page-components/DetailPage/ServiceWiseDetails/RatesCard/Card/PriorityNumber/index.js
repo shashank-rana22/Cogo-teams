@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 function PriorityNumber({ data, id, showPriority }) {
-	const searchObject = (data || []).find((obj) => obj?.id === id);
+	const searchObject = (data || []).find((obj) => obj?.rate_id === id);
 
 	let priority = null;
 	if (searchObject) {

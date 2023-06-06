@@ -39,11 +39,11 @@ function SingleService({
 	inventory,
 	setInventory,
 }) {
-	const [prefrences, setPrefrences] = useState([]);
-	const [existingInventory, setExistingInventory] = useState([]);
-
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
 	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({ singleServiceData });
+
+	// const [prefrences, setPrefrences] = useState(supplierPayload?.[singleServiceData?.id] || []);
+	const [existingInventory, setExistingInventory] = useState([]);
 
 	const options = [];
 	(groupedServicesData || []).forEach((data) => {
@@ -68,20 +68,20 @@ function SingleService({
 		},
 	];
 
-	const { service_providers = [] } = getSupplierPrefrencePayload({
-		currentRates : ratesData?.flashed_rates?.list,
-		systemRates  : ratesData?.system_rates,
-		prefrences,
-	});
+	// const { service_providers = [] } = getSupplierPrefrencePayload({
+	// 	currentRates : ratesData?.flashed_rates?.list,
+	// 	systemRates  : ratesData?.system_rates,
+	// 	prefrences,
+	// });
 
-	useEffect(() => {
-		setSupplierPayload({
-			...supplierPayload,
-			[singleServiceData?.id]:
-            service_providers || [],
-		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(prefrences)]);
+	// useEffect(() => {
+	// 	setSupplierPayload({
+	// 		...supplierPayload,
+	// 		[singleServiceData?.id]:
+	//         service_providers || [],
+	// 	});
+	// // eslint-disable-next-line react-hooks/exhaustive-deps
+	// }, [JSON.stringify(prefrences)]);
 
 	useEffect(() => {
 		setInventory({ ...inventory, [singleServiceData?.id]: existingInventory });
@@ -96,7 +96,8 @@ function SingleService({
 				onChange={(e) => { setSingleServiceData(e); }}
 			/>
 
-			{prefrences.length ? <SelectedRatesCard prefrences={prefrences} /> : null}
+			{(supplierPayload?.[singleServiceData?.id] || []).length
+				? <SelectedRatesCard prefrences={supplierPayload?.[singleServiceData?.id]} /> : null}
 			<ExistingInventory
 				docs={ratesData?.eligible_booking_document?.docs}
 				loading={ratesLoading}
@@ -107,9 +108,9 @@ function SingleService({
 				<RatesCard
 					ratesData={item}
 					key={item}
-					prefrences={prefrences}
-					setPrefrences={setPrefrences}
-					prefrence_key={item?.prefrence_key}
+					prefrences={supplierPayload}
+					setPrefrences={setSupplierPayload}
+					serviceId={singleServiceData?.id}
 				/>
 			))}
 		</div>

@@ -3,36 +3,38 @@ import { IcMProfile, IcMDrag, IcMAirport, IcMShip } from '@cogoport/icons-react'
 import PriorityNumber from './PriorityNumber';
 import styles from './styles.module.css';
 
-function Card({ data, setPrefrences, prefrences, prefrence_key, rate_key }) {
-	const handlePrefrence = (row_id) => {
-		const foundItem = (prefrences || []).find((obj) => obj?.id === row_id);
+function Card({ data, setPrefrences, prefrences, rate_key, serviceId }) {
+	const handlePrefrence = (rate) => {
+		const foundItem = (prefrences?.[serviceId] || []).find((obj) => obj?.rate_id === rate?.id);
 		if (foundItem) {
-			const oldItems = prefrences;
-			const newRows = oldItems.filter((val) => val?.id !== row_id);
+			const oldItems = prefrences?.[serviceId];
+			const newRows = oldItems.filter((val) => val?.rate_id !== rate?.id);
 
 			if (newRows.length) {
-				setPrefrences([...newRows]);
+				setPrefrences({ ...prefrences, [serviceId]: [...newRows] });
 			} else {
-				setPrefrences([]);
+				setPrefrences({ ...prefrences, [serviceId]: [] });
 			}
 		} else {
-			const newList = prefrences;
+			const newList = prefrences?.[serviceId] || [];
+			const priority = newList.length ? Number(newList[newList.length - 1]?.priority) + 1 : 1;
 			newList.push({
-				id  : row_id,
-				key : prefrence_key,
-				data,
+				rate_id : rate?.id,
+				id      : rate?.service_provider?.id,
+				priority,
+				data    : rate,
 			});
-			setPrefrences([...newList]);
+			setPrefrences({ ...prefrences, [serviceId]: [...newList] });
 		}
 	};
 	return (
 		<div
 			className={rate_key ? styles.selected_rate_card_container : styles.container}
 			role="presentation"
-			onClick={() => (!rate_key ? handlePrefrence(data?.id) : null)}
+			onClick={() => (!rate_key ? handlePrefrence(data) : null)}
 		>
 			<div className={styles.left_section_container}>
-				{rate_key ? <IcMDrag /> : <PriorityNumber data={prefrences} id={data?.id} showPriority />}
+				{rate_key ? <IcMDrag /> : <PriorityNumber data={prefrences?.[serviceId]} id={data?.id} showPriority />}
 
 			</div>
 			<div className={styles.line} />
