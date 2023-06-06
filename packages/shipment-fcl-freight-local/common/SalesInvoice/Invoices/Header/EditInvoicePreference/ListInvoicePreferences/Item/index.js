@@ -54,13 +54,9 @@ function Item({
 			: null;
 
 		const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
-		const isBas = (service?.line_items || []).some(
-			(lineItem) => lineItem?.code === 'BAS',
-		);
-
 		return service?.service_type ? (
 			<div className={styles.service_name}>
-				{`${tradeType} ${startCase(service?.service_type)} ${isBas && !service?.is_igst ? '(BAS)' : ''}`}
+				{`${tradeType} ${startCase(service?.service_type)}`}
 			</div>
 		) : null;
 	});
