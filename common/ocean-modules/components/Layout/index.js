@@ -8,7 +8,8 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Layout({
-	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
+	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {},
+	shipment_id = '', disabledProps = false,
 }) {
 	const totalFields = [];
 
@@ -83,6 +84,7 @@ function Layout({
 										control={control}
 										customValues={customValues?.[field?.name]}
 										shipment_id={shipment_id}
+										disabledProps={disabledProps}
 										{...field}
 									/>
 								</section>
