@@ -1,12 +1,12 @@
 import { cl } from '@cogoport/components';
 
-import { statFn } from '../../configurations/stats-mapping';
+import { statsConversion } from '../../configurations/stats-mapping';
 
 import RenderItem from './RenderItem';
 import styles from './styles.module.css';
 
 function ServiceStats({ data = {}, source = '', type = 'basic_details', live_contracts = '' }) {
-	const STATS_MAPPING = statFn({ type: type === 'basic_details' ? 'live_contracts' : 'utilization' });
+	const STATS_MAPPING = statsConversion({ type: type === 'basic_details' ? 'live_contracts' : 'utilization' });
 
 	return (
 		<div className={cl`${styles.revenue_profitability_utilisation_section} 

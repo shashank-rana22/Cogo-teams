@@ -20,7 +20,7 @@ const extra_stats = {
 	},
 };
 
-export const statFn = ({ type = '' }) => ({
+export const statsConversion = ({ type = '' }) => ({
 	...stats,
 	[type]: extra_stats?.[type],
 });
