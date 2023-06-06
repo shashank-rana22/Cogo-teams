@@ -39,13 +39,6 @@ const useHandleSearchFilter = ({ setFilters }) => {
 		);
 	};
 
-	const onClickCreateQuestion = () => {
-		router.push(
-			'/learning/course/create-question',
-			'/learning/course/create-question',
-		);
-	};
-
 	return {
 		showFilter,
 		setShowFilter,
@@ -55,7 +48,6 @@ const useHandleSearchFilter = ({ setFilters }) => {
 		onClickReset,
 		reset,
 		onClickCreate,
-		onClickCreateQuestion,
 	};
 };
 

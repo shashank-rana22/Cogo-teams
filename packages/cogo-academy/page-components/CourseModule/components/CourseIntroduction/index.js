@@ -1,5 +1,4 @@
 import { useSelector } from '@cogoport/store';
-import { format } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetUserCourse from '../../hooks/useGetUserCourse';
@@ -43,27 +42,15 @@ function CourseIntroduction() {
 					instructorData={data?.instructors}
 					module={data?.course_modules}
 				/>
+
 				<CourseCurriculum data={data} />
 
-				<div className={styles.date_display}>
-					<b>Last Updated:</b>
-					&nbsp;
-					{format(data?.updated_at, 'dd MMMM yyyy')}
-					&nbsp;|&nbsp;
-					<b>Created on:</b>
-					&nbsp;
-					{format(data?.created_at, 'dd MMMM yyyy')}
-
-				</div>
+				{viewType !== 'curriculum' ? (
+					<Footer course_id={course_id} user_id={user_id} data={data} />
+				) : null}
 
 				<SimilarCourses course_details={data?.course_details} />
 			</div>
-
-			{viewType !== 'curriculum' ? (
-				<div className={styles.bottom}>
-					<Footer course_id={course_id} user_id={user_id} data={data} />
-				</div>
-			) : null}
 		</>
 	);
 }

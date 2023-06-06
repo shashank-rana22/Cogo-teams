@@ -1,5 +1,6 @@
 import { Accordion } from '@cogoport/components';
-import { IcMFtick } from '@cogoport/icons-react';
+import { IcMFtick, IcMLock, IcMUnlock } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 
 import isSubModuleComplete from '../../utils/isSubModuleComplete';
 import SubModuleContent from '../SubModuleContent';
@@ -8,12 +9,29 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 function ModuleNavigation({
-	data = {}, loading,
-	courseProgressUpdateLoading, chapter, setChapter = () => {}, indexes, setIndexes,
+	data = {},
+	loading,
+	courseProgressUpdateLoading,
+	chapter,
+	setChapter = () => {},
+	indexes,
+	setIndexes,
+	setShowTestData,
+	showTestData,
+	showFeedback,
+	setShowFeedback,
 }) {
-	const { name = '' } = data.course_details || {};
+	const { course_details = {}, all_chapters_completed = false, test_completed = false } = data;
+
+	const { name = '', tests = [] } = course_details;
 
 	// const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration;
+
+	const setStates = (feedback, test, Chapter) => {
+		setShowFeedback(feedback);
+		setShowTestData(test);
+		setChapter(Chapter);
+	};
 
 	if (loading || courseProgressUpdateLoading) {
 		return <LoadingState />;
@@ -24,8 +42,8 @@ function ModuleNavigation({
 
 			<div>
 				<h3 className={styles.course_name}>{name}</h3>
-				{/*
-				<div className={styles.duration}>
+
+				{/* <div className={styles.duration}>
 					Complete in
 					{' '}
 					{course_completion_value}
@@ -61,7 +79,9 @@ function ModuleNavigation({
 								className={styles.submodule_accordion}
 								isOpen={subModuleIndex === indexes.subModuleIndex}
 								title={(
-									<div className={styles.flex}>
+									<div
+										className={styles.flex}
+									>
 										{isSubModuleComplete(moduleIndex, subModuleIndex, data)
 											? (
 												<>
@@ -79,7 +99,6 @@ function ModuleNavigation({
 													</div>
 
 												</>
-
 											) : (
 												<div className={styles.number}>
 													<div className={styles.index}>
@@ -104,6 +123,7 @@ function ModuleNavigation({
 									setIndexes={setIndexes}
 									chapter={chapter}
 									setChapter={setChapter}
+									setStates={setStates}
 								/>
 							</Accordion>
 						))}
@@ -111,6 +131,49 @@ function ModuleNavigation({
 				</Accordion>
 
 			))}
+
+			{(!isEmpty(tests)) ? (
+				<div
+					className={
+					`${(all_chapters_completed || test_completed)
+						? styles.box_active : styles.box_deactive} 
+					${showTestData ? styles.box_selected : styles.box_notselected}`
+}
+					role="button"
+					tabIndex="0"
+					onClick={() => {
+						if (all_chapters_completed || test_completed) {
+							setStates(false, true, {});
+						}
+					}}
+				>
+					{(all_chapters_completed || test_completed)
+						? <IcMUnlock height={20} width={20} /> : <IcMLock height={20} width={20} />}
+					<div className={styles.text}>
+						Course Completion Test
+					</div>
+				</div>
+			) : null}
+
+			<div
+				className={`${(test_completed) ? styles.box_active : styles.box_deactive} 
+					${showFeedback ? styles.box_selected : styles.box_notselected}`}
+				role="button"
+				tabIndex="0"
+				onClick={() => {
+					if (test_completed) {
+						setStates(true, false, {});
+					}
+				}}
+			>
+				{test_completed
+					? <IcMUnlock height={20} width={20} />
+					: <IcMLock height={20} width={20} />}
+
+				<div className={styles.text}>
+					Course Completion
+				</div>
+			</div>
 		</div>
 	);
 }

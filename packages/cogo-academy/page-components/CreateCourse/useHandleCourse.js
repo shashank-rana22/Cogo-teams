@@ -32,7 +32,7 @@ const useHandleCourse = ({ ref, courseActiveTab }) => {
 		input: studentListInput,
 		setInput: setstudentListInput,
 		total_count:studentCount,
-	} = useListUserCourses({ filters });
+	} = useListUserCourses({ filters, activeTab });
 
 	const componentMapping = {
 		courses: {

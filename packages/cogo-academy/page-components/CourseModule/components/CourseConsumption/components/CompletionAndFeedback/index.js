@@ -2,14 +2,16 @@ import { Button, RatingComponent, Textarea } from '@cogoport/components';
 import { useState } from 'react';
 
 import useCreateCourseFeedback from '../../hooks/useCourseFeedback';
+import useUpdateCourseFeedback from '../../hooks/useUpdateCourseFeedback';
 
 import styles from './styles.module.css';
 
-function CompletionAndFeedback({ course_id }) {
-	const [starRating, setStarRating] = useState(0);
-	const [feedback, setFeedback] = useState('');
+function CompletionAndFeedback({ course_id, feedbackData, name }) {
+	const [starRating, setStarRating] = useState(feedbackData?.rating || 0);
+	const [feedback, setFeedback] = useState(feedbackData?.remark || '');
 
 	const { loading, createCourseFeedback } = useCreateCourseFeedback({ course_id });
+	const { updateCourseFeedbackLoading, updateCourseFeedback } = useUpdateCourseFeedback();
 
 	return (
 		<div className={styles.container}>
@@ -25,16 +27,20 @@ function CompletionAndFeedback({ course_id }) {
 
 				<div className={styles.congrats_text}>
 					<h2>Congratulations!</h2>
-					<p>You have successfully completed the &apos;Intro to Cogoport&apos; course!</p>
+					<div>
+						You have successfully completed the &apos;
+						{name}
+						&apos; course!
+					</div>
 				</div>
 			</div>
 
-			<h3>
+			<h3 style={{ marginLeft: '30px' }}>
 				Apply your newfound knowledge to excel in the field.
 				You&apos;ve shown great dedication and commitment. Well done!
 			</h3>
 
-			<div className={styles.rating}>
+			<div className={styles.rating} style={{ marginLeft: '30px' }}>
 				<div className={styles.rating_text}>
 					Rate This Course.
 					{' '}
@@ -50,6 +56,7 @@ function CompletionAndFeedback({ course_id }) {
 
 			</div>
 
+			<div className={styles.remarks}>Remarks (If Any) :</div>
 			<Textarea
 				name="feedback"
 				size="md"
@@ -64,9 +71,13 @@ function CompletionAndFeedback({ course_id }) {
 				size="md"
 				themeType="primary"
 				className={styles.btn}
-				loading={loading}
+				loading={feedbackData?.id ? updateCourseFeedbackLoading : loading}
 				onClick={() => {
-					createCourseFeedback({ rating: starRating, remark: feedback });
+					if (feedbackData?.id) {
+						updateCourseFeedback({ rating: starRating, remark: feedback, feedback_id: feedbackData?.id });
+					} else {
+						createCourseFeedback({ rating: starRating, remark: feedback });
+					}
 				}}
 			>
 				Submit

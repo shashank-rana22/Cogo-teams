@@ -1,19 +1,13 @@
 .container {
-	position: fixed;
-	bottom: 0;
-	display: block;
-	width: 92%;
-	background-color: #fff;
-	border-top: 1px solid #e0e0e0;
-}
-
-.btn_container {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
-	justify-content: flex-end;
-	width: 98%;
-	margin: 10px;
+	justify-content: space-between;
+	padding: 12px 20px;
+	margin: 8px;
+	margin-bottom: 32px;
+	background-color: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 6px;
 }
 
 .btn {

@@ -13,7 +13,7 @@ function CoursesModal({
 		handleSubmit,
 		onSubmit,
 		feedbackLoading,
-	} = useReportError();
+	} = useReportError({ setShowErrorModal });
 
 	return (
 		<Modal

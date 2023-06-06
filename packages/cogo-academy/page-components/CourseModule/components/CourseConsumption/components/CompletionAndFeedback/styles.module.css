@@ -1,5 +1,12 @@
 .container {
 	margin-top: -24px;
+
+	:global {
+		.ui_text_area_container {
+			width: auto;
+			margin-left: 30px;
+		}
+	}
 }
 
 .rating {
@@ -48,11 +55,17 @@
 
 .congrats_text {
 	position: absolute;
-	top: 40px;
-	width: 90%;
+	top: 100px;
+	right: 200px;
+	width: 580px;
 	text-align: center;
 }
 
 .congrats {
 	margin-bottom: 40px;
+}
+
+.remarks {
+	margin-bottom: 6px;
+	margin-left: 30px;
 }

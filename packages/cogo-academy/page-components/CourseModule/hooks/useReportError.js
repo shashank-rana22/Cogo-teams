@@ -3,7 +3,7 @@ import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useReportError = () => {
+const useReportError = ({ setShowErrorModal = () => {} }) => {
 	const { handleSubmit, control, watch, formState: { errors } } = useForm();
 
 	const [{ loading : feedbackLoading }, trigger] = useRequest({
@@ -21,7 +21,7 @@ const useReportError = () => {
 			provider_name : 'cogoport',
 			variables     : {
 				description       : values?.description,
-				image_url         : values?.error_screenshot_url?.finalUrl,
+				image_url         : values?.error_screenshot_url?.finalUrl || '',
 				status_code       : 1,
 				session_data      : '',
 				requested_payload : '',
@@ -34,6 +34,8 @@ const useReportError = () => {
 			await trigger({
 				data: payload,
 			});
+			Toast.success('Your Report Was Submitted Successfully...');
+			setShowErrorModal(false);
 		} catch (error) {
 			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}

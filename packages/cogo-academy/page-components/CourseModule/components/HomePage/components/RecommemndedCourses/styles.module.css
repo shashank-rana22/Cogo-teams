@@ -1,5 +1,5 @@
 .container {
-	margin: 8px 0;
+	scroll-behavior: smooth;
 
 	:global {
 		.ui_carousel_arrow {
@@ -7,13 +7,22 @@
 		}
 
 		.ui_carousel_next {
-			margin-right: -16px;
+			margin-right: -18px;
 			background: none;
 		}
 
 		.ui_carousel_prev {
-			margin-left: -30px;
+			margin-left: -16px;
 			background: none;
+		}
+
+		.ui_carousel_container {
+			padding: 8px;
+			overflow: scroll;
+		}
+
+		.ui_o0St8 {
+			width: unset;
 		}
 	}
 }

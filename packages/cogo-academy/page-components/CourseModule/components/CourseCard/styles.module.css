@@ -3,7 +3,7 @@
 .container {
 	width: 300px;
 	height: 384px;
-	margin: 6px;
+	margin: 12px;
 	border-radius: 12px;
 	box-shadow: 0 4px 6px rgb(0 0 0 / 10%);
 
@@ -143,6 +143,10 @@
 	:global {
 		.ui_button_container {
 			padding: 6px 10px;
+
+			&.primary_button {
+				border: 1px solid #bbd583;
+			}
 		}
 	}
 }

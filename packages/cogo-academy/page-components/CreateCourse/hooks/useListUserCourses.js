@@ -1,14 +1,15 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
-function useListUserCourses({ filters }) {
+function useListUserCourses({ filters, activeTab }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
-		page    : 1,
-		filters : {
+		page          : 1,
+		is_admin_view : true,
+		filters       : {
 			status: 'active',
 		},
 	});
@@ -37,6 +38,12 @@ function useListUserCourses({ filters }) {
 			Toast.error(error.message);
 		}
 	}, [query, params, filters, trigger]);
+
+	useEffect(() => {
+		if (activeTab === 'students') {
+			fetchList();
+		}
+	}, [activeTab, fetchList]);
 
 	return {
 		data,

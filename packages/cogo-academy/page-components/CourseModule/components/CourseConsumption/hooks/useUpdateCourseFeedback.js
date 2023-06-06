@@ -3,20 +3,20 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
 
-const useCreateCourseFeedback = ({ course_id }) => {
+const useUpdateCourseFeedback = () => {
 	const router = useRouter();
 
-	const [{ loading }, trigger] = useRequest({
+	const [{ loading: updateCourseFeedbackLoading }, trigger] = useRequest({
 
-		url    : '/create_course_feedback',
+		url    : '/update_course_feedback',
 		method : 'POST',
 	}, { manual: true });
 
-	const createCourseFeedback = async ({ rating, remark }) => {
+	const updateCourseFeedback = async ({ rating, remark, feedback_id }) => {
 		try {
 			await trigger({
 				params: {
-					cogo_academy_course_id: course_id,
+					id: feedback_id,
 					rating,
 					remark,
 				},
@@ -34,9 +34,9 @@ const useCreateCourseFeedback = ({ course_id }) => {
 	};
 
 	return {
-		loading,
-		createCourseFeedback,
+		updateCourseFeedbackLoading,
+		updateCourseFeedback,
 	};
 };
 
-export default useCreateCourseFeedback;
+export default useUpdateCourseFeedback;

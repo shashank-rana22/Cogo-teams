@@ -6,9 +6,10 @@ import styles from './styles.module.css';
 
 function CategoryCard({ item }) {
 	const router = useRouter();
-	const { cogo_academy_course = {}, id:course_id } = item || {};
 
-	const { name, faq_topics = [] } = cogo_academy_course || {};
+	const { cogo_academy_course = {} } = item || {};
+
+	const { name, faq_topics = [], id = '' } = cogo_academy_course || {};
 
 	const topicsArr = faq_topics.map((topic) => startCase(topic.name));
 
@@ -16,19 +17,24 @@ function CategoryCard({ item }) {
 		<div
 			role="presentation"
 			className={styles.outer_container}
-			onClick={() => router.push(`/learning/course/introduction?course_id=${course_id}`)}
+			onClick={() => router.push(`/learning/course/introduction?course_id=${id}`)}
 		>
 			<div className={styles.container}>
 				<div className={styles.title}>{name}</div>
 
 				<div>
 					{topicsArr.map((topic, index) => {
-						if (index > 0 && topicsArr.length > 2) {
+						if (index && topicsArr.length > 2) {
 							return null;
 						}
 
 						return (
-							<Pill size="md" color="#EBEBEB" className={styles.status_pill}>
+							<Pill
+								key={topic}
+								size="md"
+								color="#EBEBEB"
+								className={styles.status_pill}
+							>
 								{topic}
 							</Pill>
 						);

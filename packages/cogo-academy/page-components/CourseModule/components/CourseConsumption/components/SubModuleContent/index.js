@@ -24,10 +24,14 @@ function SubModuleContent({
 	setIndexes,
 	subModuleIndex,
 	chapter = {},
-	setChapter = () => {},
+	setStates,
 }) {
 	return (
-		<div className={styles.container}>
+		<div
+			className={styles.container}
+			role="button"
+			tabIndex="0"
+		>
 			{data.map((currChapter, chapterIndex) => (
 				<div
 					role="presentation"
@@ -35,7 +39,7 @@ function SubModuleContent({
 					className={`${styles.chapter_container} 
 								${currChapter.id === chapter.id && styles.active}`}
 					onClick={() => {
-						setChapter(currChapter);
+						setStates(false, false, currChapter);
 						setIndexes({
 							moduleIndex,
 							subModuleIndex,
@@ -78,7 +82,7 @@ function SubModuleContent({
 					)}
 
 					<div className={styles.duration}>
-						{toFixed(currChapter.completion_duration_value, 2)}
+						{toFixed(currChapter.completion_duration_value, 0)}
 						{' mins'}
 					</div>
 				</div>

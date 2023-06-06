@@ -18,8 +18,8 @@ const BUTTON_CONTENT_MAPPING = {
 	},
 	completed: {
 		secondaryBtnText : 'Rewatch',
-		primaryBtnText   : 'Download Certificate',
-		icon             : <IcMDownload width={16} height={16} />,
+		primaryBtnText   : 'Visit Course',
+		icon             : <IcMArrowRight width={16} height={16} />,
 	},
 	saved: {
 		secondaryBtnText : 'Curriculum',

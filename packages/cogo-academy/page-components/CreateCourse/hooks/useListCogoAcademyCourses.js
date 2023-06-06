@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
-import { useState, useCallback } from 'react';
+import { useState, useCallback, useEffect } from 'react';
 
 function useListCogoAcademyCourses({ filters }) {
 	const { query, debounceQuery } = useDebounceQuery();
@@ -38,6 +38,10 @@ function useListCogoAcademyCourses({ filters }) {
 			Toast.error(error.message);
 		}
 	}, [query, params, filters, trigger]);
+
+	useEffect(() => {
+		fetchList();
+	}, [fetchList]);
 
 	return {
 		data,

@@ -21,31 +21,7 @@ export function StudentButtons({ item, setStudentId, setShowModal, loading }) {
 						<Button
 							loading={loading}
 							type="button"
-							themeType="primary"
-							className={styles.btn}
-						>
-							<IcMEyeopen />
-							<div>
-								View
-							</div>
-						</Button>
-
-						<Button
-							loading={loading}
-							type="button"
-							themeType="secondary"
-							className={styles.btn}
-						>
-							<IcMEdit />
-							<div>
-								Edit
-							</div>
-						</Button>
-
-						<Button
-							loading={loading}
-							type="button"
-							themeType="secondary"
+							themeType="accent"
 							className={styles.btn}
 							onClick={() => {
 								setStudentId(item.id);

@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { IcMArrowBack, IcMArrowRight } from '@cogoport/icons-react';
 import { useRouter, Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 
@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function Completion() {
 	const {
-		query: { test_id },
+		query: { test_id, from },
 		user: { id: user_id },
 	} = useSelector(({ general, profile }) => ({
 		query : general.query,
@@ -58,6 +58,14 @@ function Completion() {
 		push('/learning/tests/dashboard', '/learning/tests/dashboard', '_blank');
 
 		// document.getElementById('container').innerHTML = 'redirecting ...'; TODO
+	};
+
+	const handleGoToCourse = () => {
+		push(
+			`/learning/course/${from}`,
+			`/learning/course/${from}`,
+			'_blank',
+		);
 	};
 
 	return (
@@ -115,10 +123,19 @@ function Completion() {
 			<div className={styles.bottom_text}>Dashboard will be updated as soon as Results have been Published!</div>
 
 			<div className={styles.button_container}>
-				<Button type="button" onClick={handleGoToDashboard}>
-					<IcMArrowBack style={{ marginRight: 4 }} />
-					Dashboard
-				</Button>
+				{ from
+					? (
+						<Button type="button" onClick={handleGoToCourse}>
+							Go Back To Course
+							<IcMArrowRight style={{ marginLeft: 4 }} />
+						</Button>
+					)
+					: (
+						<Button type="button" onClick={handleGoToDashboard}>
+							<IcMArrowBack style={{ marginRight: 4 }} />
+							Dashboard
+						</Button>
+					)}
 			</div>
 		</div>
 	);
