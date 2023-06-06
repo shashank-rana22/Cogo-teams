@@ -37,6 +37,7 @@ function Header({
 	const { state: currentState, color } = getState({ status, state });
 
 	const { loading, updateCourse } = useUpdateCourse({
+		data,
 		getCogoAcademyCourse,
 		setActiveTab,
 		activeTab,

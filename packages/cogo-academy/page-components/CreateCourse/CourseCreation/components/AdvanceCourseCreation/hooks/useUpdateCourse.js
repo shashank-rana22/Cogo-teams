@@ -5,7 +5,7 @@ import { useRequest } from '@cogoport/request';
 
 import CURRENT_TO_NEXT_MAPPING from '../components/RightComponent/Header/CURRENT_TO_NEXT_MAPPING';
 
-const useUpdateCourse = ({ setActiveTab, activeTab, getCogoAcademyCourse, changeTab = true }) => {
+const useUpdateCourse = ({ data, setActiveTab, activeTab, getCogoAcademyCourse, changeTab = true }) => {
 	const router = useRouter();
 
 	const [{ loading }, trigger] = useRequest({
@@ -15,7 +15,15 @@ const useUpdateCourse = ({ setActiveTab, activeTab, getCogoAcademyCourse, change
 
 	const updateCourse = async ({ values, isRefetchRequired = true, buttonType = 'save' }) => {
 		try {
-			await trigger({ data: values });
+			if (activeTab === 'audience') {
+				const audiences = values?.audiences?.map((audience) => audience.id);
+				const inactive_audience_ids = data?.course_audience_mappings
+					?.map((audience) => audience.faq_audience_id)?.filter((id) => !audiences.includes(id));
+
+				await trigger({ data: { ...values, inactive_audience_ids } });
+			} else {
+				await trigger({ data: values });
+			}
 
 			if (isRefetchRequired) {
 				await getCogoAcademyCourse();
