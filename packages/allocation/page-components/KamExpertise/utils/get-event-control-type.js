@@ -6,7 +6,7 @@ const getEventControlType = ({ name, options }) => {
 	const CONTROL_TYPE_MAPPING = {
 		string      : { type: 'text' },
 		integer     : { type: 'number' },
-		select      : { type: 'select', isClearable: true, options },
+		select      : { type: 'multiSelect', isClearable: true, options },
 		checkbox    : { type: 'checkbox' },
 		asyncSelect : {
 			type        : 'asyncSelect',
@@ -18,6 +18,7 @@ const getEventControlType = ({ name, options }) => {
 					{startCase(item.option)}
 				</div>
 			),
+			multiple: true,
 		},
 		asyncMultiSelect: {
 			type        : 'asyncSelect',
