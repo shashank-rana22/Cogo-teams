@@ -45,6 +45,7 @@ function Child({
 							control={control}
 							label={controlItem?.label}
 							error={error?.[controlItem.name]}
+							source="edit_line_items"
 						/>
 					);
 				})}

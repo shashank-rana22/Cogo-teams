@@ -6,7 +6,7 @@
 .cargo_detail_pill {
 	height: fit-content;
 	font-weight: 500;
-	color: #4f4f4f;
+	color: var(--color-secondary-greyscale-1);
 	text-transform: capitalize;
 }
 
@@ -23,6 +23,6 @@
 }
 
 .more_details_popover_text {
-	color: #f68b21;
+	color: var(--color-accent-orange-2);
 	cursor: pointer;
 }

@@ -13,10 +13,9 @@ function AsyncGstListController({ gstNumber, setGstNumber = () => {}, registrati
 		<div>
 			<label htmlFor="gst_list">Select GST</label>
 			<Select
-				name="gst_list"
 				size="sm"
 				value={gstNumber}
-				onChange={(e) => setGstNumber(e)}
+				onChange={setGstNumber}
 				options={options}
 				className={styles.gst_select}
 			/>

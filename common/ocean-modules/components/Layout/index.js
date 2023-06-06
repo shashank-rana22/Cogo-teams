@@ -53,7 +53,7 @@ function Layout({
 			{totalFields.map((rowFields, i) => (
 				<div className={cl`${styles.row} form_layout_row`} key={keysForFields[i]}>
 					{rowFields.map((field) => {
-						const { type, heading = '' } = field || {};
+						const { type, heading = '', name = '' } = field || {};
 
 						if (type === 'fieldArray') {
 							return (
@@ -66,7 +66,7 @@ function Layout({
 
 									<FieldArray
 										{...field}
-										error={errors?.[field?.name]}
+										error={errors?.[name]}
 										control={control}
 										showElements={showElements}
 										formValues={formValues}
@@ -93,7 +93,7 @@ function Layout({
 							<Item
 								key={field.name}
 								control={control}
-								error={errors?.[field?.name]}
+								error={errors?.[name]}
 								formValues={formValues}
 								{...field}
 							/>
