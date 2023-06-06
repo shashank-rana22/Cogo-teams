@@ -1129,6 +1129,14 @@ const navigationMappingAdmin = {
 				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback],
 			},
 			{
+				key       : 'shipment_air',
+				title     : 'Bookings Air',
+				href      : '/v2/booking/air',
+				as        : '/v2/booking/air',
+				type      : 'link',
+				main_apis : ['list_shipments'],
+			},
+			{
 				key           : 'coe-bn_salvage',
 				title         : 'BN Salvage',
 				href          : '/v2/bn-salvage',

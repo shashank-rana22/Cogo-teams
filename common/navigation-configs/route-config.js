@@ -28,6 +28,11 @@ import referral from './config/referral';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
+import shipmentAir from './config/shipment-air';
+import shipmentAirCustoms from './config/shipment-air-customs';
+import shipmentAirFreight from './config/shipment-air-freight';
+import shipmentAirFreightLocal from './config/shipment-air-freight-local';
+import shipmentDomesticAirFreight from './config/shipment-domestic-air-freight';
 import shipmentFclFreight from './config/shipment-fcl-freight';
 import shipmentLclFreight from './config/shipment-lcl-freight';
 import so2Surface from './config/so2-surface';
@@ -58,6 +63,11 @@ const routeConfig = {
 	...performanceManagement,
 	...shipmentFclFreight,
 	...shipmentLclFreight,
+	...shipmentAir,
+	...shipmentAirFreight,
+	...shipmentAirFreightLocal,
+	...shipmentAirCustoms,
+	...shipmentDomesticAirFreight,
 	...bookingDesk,
 	...bnSalvage,
 	...costBookingDesk,
