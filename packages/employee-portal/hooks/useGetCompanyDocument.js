@@ -1,7 +1,6 @@
 import { useHarbourRequest } from '@cogoport/request';
 
 const useGetCompanyDocument = ({ detail = {} }) => {
-	console.log('oooo', detail?.id);
 	const params = {
 		employee_detail_id: detail?.id,
 	};

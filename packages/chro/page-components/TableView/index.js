@@ -72,10 +72,10 @@ function TableView({ search, activeTab }) {
 					<span style={{ fontWeight: 600 }}>
 						Rs.
 						{' '}
-						{init}
+						{init / 100000}
 						{' '}
 						LPA (fixed)
-						{variable_pay > 0 ? ` + Rs. ${variable_pay} (variable)`
+						{variable_pay > 0 ? ` + Rs. ${variable_pay / 100000} LPA (variable)`
 							: null}
 					</span>
 					<CtcBreakup metadata={metadata} />

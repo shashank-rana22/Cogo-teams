@@ -15,14 +15,14 @@ export default function SubmitSection({
 	setInitialQuestion = () => {},
 	offerLetterApiRefetch,
 	handleSubmit,
-	reset
+	reset,
 }) {
 	// const { handleSubmit, reset } = formProps;
 
-	const {
-		loading,
-		onFinalSubmit,
-	} = usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch });
+	const { loading, onFinalSubmit } = usePostCreateEmployeeOfferLetter({
+		setShowCtcBreakupModal,
+		offerLetterApiRefetch,
+	});
 
 	const onSubmit = (values) => {
 		// console.log('submit sure values',values)

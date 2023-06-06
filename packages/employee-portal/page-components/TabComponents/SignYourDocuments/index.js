@@ -20,6 +20,8 @@ function SignYourDocuments({ setInformationPage, data }) {
 
 	const { signDocumentsRefetch } = useGetEsignDocuments();
 
+	console.log('companyDoc', companyDoc);
+
 	const onOpen = (url, item) => {
 		signDocumentsRefetch();
 

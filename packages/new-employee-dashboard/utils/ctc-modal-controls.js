@@ -1,7 +1,6 @@
 export const ctcModalLessControls = (ctcInput, data = {}) => {
 	const fixed_split = 1;
 	const variable_split = 1 - fixed_split;
-	console.log('data', data);
 
 	const basicYearlyValue = ctcInput * 0.4;
 	const hraYearlyValue = basicYearlyValue * 0.5;
@@ -199,11 +198,11 @@ export const ctcModalLessControls = (ctcInput, data = {}) => {
 		incentives: {
 			heading: 'Incentives [E]',
 			yearlyValue:
-        Number(data?.yearlyJoiningBonus|| 0)
-        + Number(data?.yearlySignInBonus|| 0),
+        Number(data?.yearlyJoiningBonus || 0)
+        + Number(data?.yearlySignInBonus || 0),
 			monthlyValue:
-        Number(data?.monthlyJoiningBonus|| 0)
-        + Number(data?.monthlySignInBonus|| 0),
+        Number(data?.monthlyJoiningBonus || 0)
+        + Number(data?.monthlySignInBonus || 0),
 		},
 		variable_component: {
 			heading      : 'Variable Component [V]',
