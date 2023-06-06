@@ -96,6 +96,7 @@ function EditInvoicePreference({
 							size="md"
 							themeType="secondary"
 							onClick={() => handleClose()}
+							disabled={rest?.loading}
 						>
 							Cancel
 						</Button>
