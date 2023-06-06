@@ -15,7 +15,7 @@ const useGetCompanyDocument = ({ detail = {} }) => {
 	);
 
 	return {
-		companyDoc    : data,
+		companyDoc    : data?.signed_documents,
 		loading,
 		getDocRefetch : trigger,
 	};

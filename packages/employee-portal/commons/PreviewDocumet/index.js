@@ -23,8 +23,6 @@ function PreviewDocumet({
 				<object
 					data={document_url}
 					type="application/pdf"
-					// height="200px"
-					// width="200px"
 					style={{ height, width }}
 				>
 					<a href={document_url}>

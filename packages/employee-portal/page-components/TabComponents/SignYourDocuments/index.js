@@ -1,33 +1,20 @@
 import { Button, Loader } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
+import { IcCFtick, IcMArrowBack } from '@cogoport/icons-react';
 
-import PreviewDocumet from '../../../commons/PreviewDocumet';
+import PreviewDocument from '../../../commons/PreviewDocumet';
 import useGetCompanyDocument from '../../../hooks/useGetCompanyDocument';
-import useGetEsignDocuments from '../../../hooks/useGetEsignDocuments';
+import useGetDocumentSigningUrl from '../../../hooks/useGetDocumentSigningUrl';
 
 import styles from './styles.module.css';
 
 function SignYourDocuments({ setInformationPage, data }) {
-	const { progress_stats = {}, detail = {} } = data || {};
-	const { documents_signed = {} } = progress_stats;
-	const { documents_signed: document_sign = false } = documents_signed;
-
 	const { companyDoc, loading, getDocRefetch } = useGetCompanyDocument({
-		detail,
+		detail: data?.detail,
 	});
 
-	const { signDocumentsRefetch } = useGetEsignDocuments();
-
-	const onOpen = (url, item) => {
-		signDocumentsRefetch();
-
-		if (item?.status === 'accepted') {
-			getDocRefetch();
-		} else {
-			window.open(url, '_blank');
-		}
-	};
+	const { onClickSignDocument } = useGetDocumentSigningUrl(
+		{ getEmployeeDetails: getDocRefetch, document_type: 'signed_document' },
+	);
 
 	return (
 		<div className={styles.container}>
@@ -41,7 +28,6 @@ function SignYourDocuments({ setInformationPage, data }) {
 				/>
 				<div className={styles.title}>SIGN YOUR DOCUMENTS</div>
 			</div>
-			<div> Sign Your Documents</div>
 
 			{loading ? (
 				<div className={styles.spinner}>
@@ -52,28 +38,37 @@ function SignYourDocuments({ setInformationPage, data }) {
 					/>
 				</div>
 			) : (
-				<div style={{ display: 'flex', marginTop: '20px' }}>
-					{companyDoc
-            || [].map((item, i) => (
-	<div key={i} style={{ padding: '0 12px' }}>
-		<PreviewDocumet document_url={item?.document_url} />
-		{item?.status === 'accepted' ? (
-			<div>Already Done</div>
-		) : (
-			<Button
-				size="md"
-				themeType="primary"
-				style={{
-                    	margin : '12px auto',
-                    	width  : '20%',
-				}}
-				onClick={() => onOpen(item?.document_url, item)}
-			>
-				Sign
-			</Button>
-		)}
-	</div>
-            ))}
+				<div style={{ display: 'flex', marginTop: '20px', flexWrap: 'wrap' }}>
+
+					{(companyDoc || []).map((item) => (
+						<div key={item?.id} style={{ padding: '0 12px', flexWrap: 'wrap' }}>
+
+							<PreviewDocument document_url={item?.signed_document_url || item?.document_url} />
+
+							<div>
+								{item?.status === 'accepted' ? (
+									<div className={styles.already_signed}>
+										<span style={{ paddingRight: 4 }}>Already Signed</span>
+
+										<IcCFtick width={20} height={20} />
+									</div>
+								) : (
+									<Button
+										size="md"
+										themeType="primary"
+										style={{
+											margin : '12px auto',
+											width  : '20%',
+										}}
+										onClick={() => onClickSignDocument(item?.id)}
+									>
+										Sign
+									</Button>
+								)}
+							</div>
+
+						</div>
+					))}
 				</div>
 			)}
 		</div>
