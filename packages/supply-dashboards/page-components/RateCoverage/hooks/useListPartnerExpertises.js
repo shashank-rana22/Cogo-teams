@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect, useState, useCallback } from 'react';
+import { useEffect, useCallback } from 'react';
 
-const useListPartnerExpertises = () => {
+const useListPartnerExpertises = ({ currentPage }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_partner_user_expertises',
 		method : 'GET',
@@ -11,7 +11,7 @@ const useListPartnerExpertises = () => {
 		try {
 			await trigger({
 				params: {
-					// page                   : pagination,
+					page                   : currentPage,
 					location_data_required : true,
 					filters                : {
 						status       : 'active',
@@ -23,7 +23,7 @@ const useListPartnerExpertises = () => {
 		} catch (err) {
 			console.log(err);
 		}
-	}, [trigger]);
+	}, [trigger, currentPage]);
 
 	useEffect(() => {
 		fetch();

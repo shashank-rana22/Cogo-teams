@@ -2,6 +2,8 @@ import { Tabs, TabPanel } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 
+// eslint-disable-next-line import/no-cycle
+import LiveBookingsView from '../LiveBookings';
 import RfqEnquiries from '../RfqEnquiries/Content';
 
 import RateCoverageContent from './Content';
@@ -10,6 +12,7 @@ function RateCoverage() {
 	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 	const activeTab = 'rate_density';
 	const { push } = useRouter();
+
 	const handleTabChange = (tab) => {
 		if (tab !== 'rate_density') {
 			const route = tab.replace('_', '-');
@@ -24,7 +27,7 @@ function RateCoverage() {
 	return (
 		<div>
 			<Tabs fullWidth activeTab={activeTab} themeType="primary" onChange={(tab) => { handleTabChange(tab); }}>
-				<TabPanel name="live_bookings" title="Live Bookings">--</TabPanel>
+				<TabPanel name="live_bookings" title="Live Bookings"><LiveBookingsView /></TabPanel>
 				<TabPanel name="trade_enquiry" title="Missing Rates">--</TabPanel>
 				<TabPanel name="disliked_rates" title="Disliked Rates">--</TabPanel>
 				<TabPanel name="rate_density" title="Rate Density"><RateCoverageContent /></TabPanel>

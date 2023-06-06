@@ -38,57 +38,6 @@ function ExpiringRates({ setIndex, value, filter }) {
 		serviceProvider: item?.service_provider?.short_name,
 	}));
 
-	// const columns = [
-	// 	{
-
-	// 		Header: () => (
-	// 			<Checkbox
-	// 				checked={isSelectedAll}
-	// 				onChange={() => {
-	// 					if (!isSelectedAll) {
-	// 						setSelectedArray(selectedArray.map(() => true));
-	// 						setIsSelectedAll(true);
-	// 						setNumberOfSelectedRows(3);
-	// 					} else {
-	// 						setSelectedArray(selectedArray.map(() => false));
-	// 						setIsSelectedAll(false);
-	// 						setNumberOfSelectedRows(0);
-	// 					}
-	// 				}}
-	// 			/>
-	// 		),
-	// 		accessor: ({ index }) => (
-	// 			<Checkbox
-	// 				checked={selectedArray[index]}
-	// 				onChange={() => {
-	// 					setSelectedArray(selectedArray.map((item, i) => {
-	// 						if (i === index) {
-	// 							if (item) {
-	// 								setIsSelectedAll(false);
-	// 								setNumberOfSelectedRows(numberOfSelectedRows - 1);
-	// 							} else {
-	// 								setNumberOfSelectedRows(numberOfSelectedRows + 1);
-	// 							}
-	// 							return !item;
-	// 						}
-	// 						return item;
-	// 					}));
-	// 				}}
-	// 			/>
-	// 		),
-	// 		id: 'select',
-	// 	},
-	// 	{ Header: 'ORIGIN PORT', accessor: 'originPort' },
-	// 	{ Header: 'DESTINATION PORT', accessor: 'destinationPort' },
-	// 	{ Header: 'COMMODITY', accessor: 'commodity' },
-	// 	{ Header: 'CONTAINER TYPE', accessor: 'containerType' },
-	// 	{ Header: 'CONTAINER SIZE', accessor: 'containerSize' },
-	// 	{ Header: 'VALIDITY', accessor: 'validity' },
-	// 	{ Header: 'Stops', accessor: 'stops' },
-	// 	{ Header: 'SERVICE PROVIDER', accessor: 'serviceProvider' },
-	// 	{ Header: 'SHIPPING LINE', accessor: 'shippingLine' },
-	// ];
-
 	const column = {
 		fcl_freight: [
 			{ Header: 'ORIGIN PORT', accessor: 'originPort' },

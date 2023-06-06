@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useCallback } from 'react';
 
 const api = {
 	fcl_freight : 'list_fcl_freight_rate_requests',
@@ -17,7 +17,7 @@ const useListFreightRateRequest = ({ filter, currentPage }) => {
 		method : 'GET',
 	}, { manual: true });
 
-	const listFreightRateRequest = async () => {
+	const listFreightRateRequest = useCallback(async () => {
 		const updateFilter = keyFilter(filter);
 		try {
 			await trigger({
@@ -34,11 +34,11 @@ const useListFreightRateRequest = ({ filter, currentPage }) => {
 		} catch (e) {
 			// console.log(e);
 		}
-	};
+	}, [currentPage, filter, trigger]);
 
 	useEffect(() => {
 		listFreightRateRequest();
-	}, [JSON.stringify(filter), currentPage]);
+	}, [currentPage, listFreightRateRequest]);
 
 	return {
 		data,

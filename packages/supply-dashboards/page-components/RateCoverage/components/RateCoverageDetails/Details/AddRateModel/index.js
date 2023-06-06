@@ -4,7 +4,7 @@ import {
 	asyncFieldsOrganization, asyncFieldsOrganizationUsers,
 }
 	from '@cogoport/forms/utils/getAsyncFields';
-import { merge, startCase } from '@cogoport/utils';
+import { merge } from '@cogoport/utils';
 
 import Layout from '../../../../../RfqEnquiries/Layout';
 import LclFields from '../../../../configurations/lcl-controls';

@@ -6,45 +6,15 @@ import useListPartnerExpertises from '../../../../hooks/useListPartnerExpertises
 import AddRateModel from '../AddRateModel';
 import styles from '../styles.module.css';
 
-const data = [
-	{
-		originPort      : 'Shanghai(China)',
-		destinationPort : 'linsley',
-		commodity       : 'lskdjf',
-		containerType   : 'ksdjfk',
-		containerSize   : 'skldjk',
-		noOfRates       : 3,
-		addRate         : 'Add Rate',
-	},
-	{
-		originPort      : 'tanner',
-		destinationPort : 'linsley',
-		commodity       : 'lskdjf',
-		containerType   : 'ksdjfk',
-		containerSize   : 'skldjk',
-		noOfRates       : 3,
-		addRate         : 'Add Rate',
-	},
-	{
-		originPort      : 'tanner',
-		destinationPort : 'linsley',
-		commodity       : 'lskdjf',
-		containerType   : 'ksdjfk',
-		containerSize   : 'skldjk',
-		noOfRates       : 3,
-		addRate         : 'Add Rate',
-	},
-];
-
 function RateDensityDetails({ setIndex, value }) {
 	const [show, setShow] = useState(false);
+	const [currentPage, setCurrentPage] = useState();
+	console.log(currentPage, 'currentPage');
 
-	const { data:rug } = useListPartnerExpertises();
-	console.log(rug, 'data');
-
+	const { data } = useListPartnerExpertises({ currentPage });
 	const columns = [
-		{ Header: 'ORIGIN PORT', accessor: 'originPort' },
-		{ Header: 'DESTINATION PORT', accessor: 'destinationPort' },
+		{ Header: 'ORIGIN PORT', accessor: 'location.origin_location.name' },
+		{ Header: 'DESTINATION PORT', accessor: 'location.destination_location.name' },
 		{ Header: 'COMMODITY', accessor: 'commodity' },
 		{ Header: 'CONTAINER TYPE', accessor: 'containerType' },
 		{ Header: 'CONTAINER SIZE', accessor: 'containerSize' },
@@ -63,6 +33,10 @@ function RateDensityDetails({ setIndex, value }) {
 			),
 		},
 	];
+
+	const onPageChange = (pageNumber) => {
+		setCurrentPage(pageNumber);
+	};
 	return (
 		<>
 			<AddRateModel show={show} setShow={setShow} />
@@ -88,13 +62,14 @@ function RateDensityDetails({ setIndex, value }) {
 					</div>
 				</div>
 				<div className={styles.table}>
-					<Table columns={columns} data={data} />
+					<Table columns={columns} data={data?.list || []} />
 					<div className={styles.pagination}>
 						<Pagination
 							type="table"
-							currentPage={2}
-							totalItems={1000}
-							pageSize={5}
+							currentPage={data?.page}
+							totalItems={data?.total_count}
+							pageSize={data?.page_limit}
+							onPageChange={(val) => onPageChange(val)}
 						/>
 
 					</div>

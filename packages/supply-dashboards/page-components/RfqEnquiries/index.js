@@ -19,7 +19,7 @@ function RfqEnquiriesView() {
 	const handleTabChange = (tab) => {
 		if (tab !== 'rfq_enquiries') {
 			const route = tab.replace('_', '-');
-			// eslint-disable-next-line no-undef
+			console.log(route);
 			window.location.href = `/${partnerId}/supply/dashboards/${route}`;
 		}
 	};
@@ -30,6 +30,7 @@ function RfqEnquiriesView() {
 					name, title,
 					component,
 				}) => {
+					console.log(component, name, 'component');
 					if (tabs.includes(name)) {
 						return <TabPanel key={title} name={name} title={title}>{component}</TabPanel>;
 					}

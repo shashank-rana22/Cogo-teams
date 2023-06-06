@@ -12,7 +12,6 @@ const useAddRate = () => {
 	}, { manual: true });
 
 	const postApi = async (values) => {
-		console.log(values, 'values::');
 		await trigger({
 			params: { ...values },
 		});

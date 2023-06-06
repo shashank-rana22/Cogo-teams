@@ -1,6 +1,7 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 
+// eslint-disable-next-line import/no-cycle
 import RateCoverage from '../RateCoverage';
 
 import LiveBookings from './Content';
