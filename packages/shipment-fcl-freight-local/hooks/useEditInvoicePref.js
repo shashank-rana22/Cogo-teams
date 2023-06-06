@@ -8,8 +8,6 @@ import incoTermMapping from '../configurations/inco-term-mapping.json';
 
 import useUpdateInvoiceCombination from './useUpdateInvoiceCombination';
 
-const EXPORT_SERVICES_TYPES = 'fcl_freight_service';
-
 const geo = getGeoConstants();
 
 const useEditInvoicePref = ({
@@ -165,8 +163,7 @@ const useEditInvoicePref = ({
 			if (!isEmpty(isBasicFreightInvService)) {
 				(finalNewSelectParties || []).forEach((party) => {
 					const BFLineItem = (party?.services || []).some(
-						(service) => service.serviceKey === isBasicFreightInvService.serviceKey
-							&& EXPORT_SERVICES_TYPES === isBasicFreightInvService.service_type,
+						(service) => service.serviceKey === isBasicFreightInvService.serviceKey,
 					);
 
 					if (party?.services?.length > 1 && BFLineItem) {

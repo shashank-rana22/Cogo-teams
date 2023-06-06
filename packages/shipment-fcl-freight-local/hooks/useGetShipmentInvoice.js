@@ -6,7 +6,7 @@ import { useEffect, useCallback } from 'react';
 const groupByRegistrationNum = (invoices) => {
 	const groupByOrgInvoices = {};
 	(invoices || []).forEach((invoice) => {
-		const key = invoice.billing_address?.registration_number;
+		const key = invoice?.billing_address?.registration_number;
 		groupByOrgInvoices[key] = {
 			invoices      : [...(groupByOrgInvoices[key]?.invoices || []), invoice],
 			business_name : invoice?.billing_address?.business_name,

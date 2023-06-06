@@ -14,7 +14,6 @@ function ListInvoicePreferences({
 		...item,
 		currency       : ip?.invoice_currency,
 		service_source : ip?.source,
-		is_igst        : ip?.is_igst,
 		status         : ip?.status,
 	}))).flat();
 
