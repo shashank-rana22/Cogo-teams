@@ -4,13 +4,13 @@ import { useAllocationRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useDeleteEvent = ({ id, listRefetch }) => {
+	const [showDeleteModal, setShowDeleteModal] = useState(false);
+
 	const [{ loading }, trigger] = useAllocationRequest({
 		method  : 'POST',
 		url     : '/kam_expertise_rule_status_change',
 		authkey : 'post_allocation_kam_expertise_rule_status_change',
 	}, { manual: true });
-
-	const [showDeleteModal, setShowDeleteModal] = useState(false);
 
 	const onDelete = async () => {
 		try {
