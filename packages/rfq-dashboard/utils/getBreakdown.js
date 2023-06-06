@@ -1,5 +1,42 @@
+const pushRate = (rate, name, prefix = 'total') => {
+	const totalPrice = {
+		total_price            : rate?.total_price,
+		total_price_discounted : rate?.total_price,
+		currency               : rate?.total_price_currency,
+	};
+
+	if (!rate) {
+		return {};
+	}
+
+	return {
+		total_price            : totalPrice[`${prefix}_price`],
+		total_price_discounted : totalPrice[`${prefix}_price_discounted`],
+		currency               : totalPrice?.currency,
+		line_items             : [
+			{
+				name                   : name || totalPrice.name,
+				total_price            : totalPrice[`${prefix}_price`],
+				total_price_discounted : totalPrice[`${prefix}_price_discounted`],
+				currency               : totalPrice?.currency,
+				quantity               : totalPrice?.quantity,
+				unit                   : totalPrice?.unit,
+				informations           : totalPrice?.informations || [],
+				price                  : totalPrice?.price,
+				price_discounted       : totalPrice?.price_discounted,
+			},
+		],
+		title: name || totalPrice?.name,
+	};
+};
+
 const getBreakdown = (rate) => {
-	const list = [
+	const rates = Object.keys(rate?.service_rates || {}).map((id) => ({
+		...rate?.service_rates[id],
+		id,
+	}));
+
+	return [
 		{
 			total_price            : rate?.total_price,
 			total_price_discounted : rate?.total_price_discounted,
@@ -12,49 +49,9 @@ const getBreakdown = (rate) => {
 			all_sellers            : [],
 			service                : '',
 		},
+		...rates,
+		pushRate(rate, 'Total Price', 'price'),
 	];
-
-	const rates = Object.keys(rate?.service_rates || {}).map((id) => ({
-		...rate?.service_rates[id],
-		id,
-	}));
-
-	list.push(...rates);
-
-	const totalPrice = {
-		total_price            : rate?.total_price,
-		total_price_discounted : rate?.total_price,
-		currency               : rate?.total_price_currency,
-	};
-
-	const pushRate = (data, name, prefix = 'total') => {
-		if (data) {
-			const obj = {
-				total_price            : data[`${prefix}_price`],
-				total_price_discounted : data[`${prefix}_price_discounted`],
-				currency               : data?.currency,
-				line_items             : [
-					{
-						name                   : name || data.name,
-						total_price            : data[`${prefix}_price`],
-						total_price_discounted : data[`${prefix}_price_discounted`],
-						currency               : data?.currency,
-						quantity               : data?.quantity,
-						unit                   : data?.unit,
-						informations           : data?.informations || [],
-						price                  : data?.price,
-						price_discounted       : data?.price_discounted,
-					},
-				],
-				title: name || data?.name,
-			};
-			list.push(obj);
-		}
-	};
-
-	pushRate(totalPrice, 'Total Price', 'price');
-
-	return list;
 };
 
 export default getBreakdown;

@@ -48,8 +48,8 @@ function Form({
 			currency,
 			value : marginValue,
 		});
-	// eslint-disable-next-line react-hooks/exhaustive-deps
 	// need this code for first render
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 
 	useEffect(() => {

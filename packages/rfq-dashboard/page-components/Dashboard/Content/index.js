@@ -42,16 +42,18 @@ function Content(props) {
 				</Tabs>
 
 			</div>
-			<div className={styles.pagination_container}>
-				<Pagination
-					className="md"
-					totalItems={data?.total_count || 0}
-					currentPage={page || 1}
-					pageSize={data?.page_limit}
-					onPageChange={setPage}
-					type="table"
-				/>
-			</div>
+			{!loading && (
+				<div className={styles.pagination_container}>
+					<Pagination
+						className="md"
+						totalItems={data?.total_count || 0}
+						currentPage={page || 1}
+						pageSize={data?.page_limit}
+						onPageChange={setPage}
+						type="table"
+					/>
+				</div>
+			)}
 		</div>
 	);
 }

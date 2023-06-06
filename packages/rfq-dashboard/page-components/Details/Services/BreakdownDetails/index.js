@@ -36,6 +36,7 @@ function BreakdownDetails({
 	const convenience_line_item = rate?.booking_charges?.convenience_rate?.line_items[0];
 
 	const rateDetails = getBreakdown(rate);
+
 	rateDetails.splice(0, 1);
 	rateDetails.splice(rateDetails.length - 1, 1);
 
