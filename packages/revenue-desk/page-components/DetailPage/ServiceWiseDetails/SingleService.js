@@ -87,10 +87,16 @@ function SingleService({
 		setInventory({ ...inventory, [singleServiceData?.id]: existingInventory });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(existingInventory)]);
+
 	return (
 		<div>
-			{prefrences?.length !== 0 && <SelectedRatesCard prefrences={prefrences} />}
+			<Select
+				options={options}
+				value={singleServiceData}
+				onChange={(e) => { setSingleServiceData(e); }}
+			/>
 
+			{prefrences.length ? <SelectedRatesCard prefrences={prefrences} /> : null}
 			<ExistingInventory
 				docs={ratesData?.eligible_booking_document?.docs}
 				loading={ratesLoading}
