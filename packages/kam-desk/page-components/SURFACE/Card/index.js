@@ -1,6 +1,6 @@
 import { useRouter } from '@cogoport/next';
 import { useContext } from 'react';
-
+import { Tooltip } from '@cogoport/components'
 import {
 	BasicDetails,
 	AssignedStakeholder,
@@ -11,6 +11,7 @@ import {
 	SingleLocation,
 	Accordian,
 } from '../../../common/ShipmentCard';
+import { IcMInfo } from '@cogoport/icons-react'
 import KamDeskContext from '../../../context/KamDeskContext';
 import isSingleLocation from '../../../utils/checkSingleLocation';
 
@@ -65,6 +66,15 @@ function Card({ data = {}, activeTab = '' }) {
 
 					<div className={styles.pill_container}>
 						<CargoPills data={data} />
+						{data?.fm_rejection_reason && <Tooltip content={<div className={styles.rejection_tooltip}>{data?.fm_rejection_reason}</div>} placement="top">
+						<div style={{ marginBlock: 'auto' }}>
+							<IcMInfo
+								width={15}
+								height={15}
+								style={{ marginBottom: '2px', color: 'red' }}
+							/>
+						</div>
+					</Tooltip>}
 					</div>
 				</div>
 			</div>

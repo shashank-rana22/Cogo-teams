@@ -20,7 +20,7 @@ function CargoPills({ data = {} }) {
 	});
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={data?.fm_rejection_reason ? { flex: 1 } : {}}>
 			{getPillsFormat(initialPills)?.map((pill) => (
 				<Pill key={pill}>{pill}</Pill>
 			))}

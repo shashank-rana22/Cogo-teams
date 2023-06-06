@@ -40,6 +40,7 @@
 
 .pill_container {
 	width: 24%;
+	display: flex;
 }
 
 .header {
@@ -64,4 +65,8 @@
 			font-size: var(--font-size-sm);
 		}
 	}
+}
+
+.rejection_tooltip {
+	font-size: 12px;
 }
