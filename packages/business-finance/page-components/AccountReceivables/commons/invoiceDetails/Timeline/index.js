@@ -42,10 +42,10 @@ function Timeline({ data, loading }) {
 
 	return (timelineDetails || [])?.map((item) => {
 		const showLine = item.eventName === 'CREATED';
-		const completeLine =			item.eventName === 'POSTED' || item.eventName === 'PAID';
+		const completeLine = item.eventName === 'POSTED' || item.eventName === 'PAID';
 
 		return (
-			<div className={styles.container}>
+			<div className={styles.container} key={item.occurredAt}>
 				<div className={styles.sub_container}>
 					<div style={{ width: '20%' }}>
 						<div>{getDate(item.occurredAt)}</div>

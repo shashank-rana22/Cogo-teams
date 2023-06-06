@@ -1,13 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
-interface IrnCancellationProps {
-	id?: string,
-	setShowCancellationModal?: (p: boolean)=> void,
-	response:any,
-}
-
-const useGetIrnCancellation = ({ id, setShowCancellationModal, response }: IrnCancellationProps) => {
+const useGetIrnCancellation = ({ id, setShowCancellationModal, response }) => {
 	const [
 		{ loading },
 		cancelIrnApi,

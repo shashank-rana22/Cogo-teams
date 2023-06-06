@@ -5,25 +5,10 @@ import Loader from './Loader';
 import SageDetailsCard from './SageDetailsCard';
 import styles from './styles.module.css';
 
-interface InvoiceData {
-	platformInvoiceInfo?:object,
-	sageInvoiceInfo?:object
-}
-
-interface Props {
-	finalPostToSageModal?:boolean,
-	setFinalPostToSageModal?:Function,
-	finalPostFromSage?:Function,
-	sageInvoiceData?:InvoiceData,
-	sageInvoiceLoading?:boolean,
-	finalPostLoading?:boolean,
-	isFinalPosted?:boolean,
-}
-
 function FinalPostModal({
 	finalPostToSageModal, setFinalPostToSageModal, finalPostFromSage,
 	sageInvoiceData, sageInvoiceLoading, finalPostLoading, isFinalPosted,
-}:Props) {
+}) {
 	const { platformInvoiceInfo = {}, sageInvoiceInfo = {} } = sageInvoiceData || {};
 
 	return (

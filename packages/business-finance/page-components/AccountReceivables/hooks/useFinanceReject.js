@@ -2,13 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-interface FinanceInterface {
-	id?: string,
-	textValue?: string,
-	refetch?: Function
-}
-
-const useFinanceReject = ({ id, textValue, refetch }: FinanceInterface) => {
+const useFinanceReject = ({ id, textValue, refetch }) => {
 	const { user_profile: UserProfile = {} } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
