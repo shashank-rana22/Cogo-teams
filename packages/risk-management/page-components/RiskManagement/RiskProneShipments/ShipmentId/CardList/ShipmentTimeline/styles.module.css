@@ -1,12 +1,13 @@
- .container{
-    display: flex;
-    padding: 36px 46px 64px 36px;
-    justify-content: center;
+.container {
+	display: flex;
+	justify-content: center;
+	padding: 36px 46px 64px 36px;
 }
-.div_container{
-    background: #FFFFFF;
-    border: 1px solid #E0E0E0;
-    border-radius: 8px;
-    margin-top: 16px;
-    margin-bottom: 16px;
+
+.div_container {
+	margin-top: 16px;
+	margin-bottom: 16px;
+	background: #fff;
+	border: 1px solid #e0e0e0;
+	border-radius: 8px;
 }
