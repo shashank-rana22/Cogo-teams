@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function EditInvoice({
 	show = 'false',
-	onClose,
+	onClose = () => {},
 	invoice = {},
 	refetch = () => {},
 	shipment_data = {},

@@ -12,7 +12,6 @@ function Header({
 	invoiceData = {},
 	bfInvoiceRefetch = () => {},
 	disableAction = false,
-	isCustomer = false,
 	salesInvoicesRefetch = () => {},
 }) {
 	const {
@@ -50,17 +49,15 @@ function Header({
 			</div>
 
 			<div className={styles.edit_invoice}>
-				{!isCustomer ? (
-					<div className={styles.reviwed_stats}>
-						{reviewed_invoices}
-						&nbsp;
-						of
-						&nbsp;
-						{invoicing_parties?.length}
-						&nbsp;
-						reviewed
-					</div>
-				) : null}
+				<div className={styles.reviwed_stats}>
+					{reviewed_invoices}
+					&nbsp;
+					of
+					&nbsp;
+					{invoicing_parties?.length}
+					&nbsp;
+					reviewed
+				</div>
 
 				<div className={styles.button_div}>
 					{showExchangeRate ? (

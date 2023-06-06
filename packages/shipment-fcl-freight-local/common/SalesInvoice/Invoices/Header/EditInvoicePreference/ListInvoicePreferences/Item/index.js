@@ -11,7 +11,6 @@ import React from 'react';
 import SelectService from './SelectService';
 import styles from './styles.module.css';
 
-const MAIN_SERVICES = 'fcl_freight_service';
 const ACTION_STATE = ['reviewed', 'approved', 'revoked'];
 
 function Item({
@@ -49,11 +48,7 @@ function Item({
 	) : null;
 
 	const renderServicesTaken = (services || []).map((service) => {
-		const trade_type = MAIN_SERVICES !== service?.service_type
-			? service?.trade_type
-			: null;
-
-		const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
+		const tradeType = service?.trade_type === 'export' ? 'Origin' : 'Destination';
 		return service?.service_type ? (
 			<div className={styles.service_name}>
 				{`${tradeType} ${startCase(service?.service_type)}`}

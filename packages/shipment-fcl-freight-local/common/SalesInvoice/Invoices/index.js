@@ -18,7 +18,6 @@ function Invoices({
 	groupedInvoices = {},
 	loading = false,
 	salesInvoicesRefetch = () => {},
-	isCustomer = false,
 	isIRNGenerated = false,
 }) {
 	const { outstanding_by_reg_num } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
@@ -47,7 +46,7 @@ function Invoices({
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { list, cnRefetch, loading: cNLoading } = useGetCreditNotes();
+	const { list, cnRefetch, loading: cnLoading } = useGetCreditNotes();
 
 	return (
 		<main className={styles.container}>
@@ -55,7 +54,6 @@ function Invoices({
 				invoiceData={invoiceData}
 				bfInvoiceRefetch={bfInvoiceRefetch}
 				disableAction={disableAction}
-				isCustomer={isCustomer}
 				salesInvoicesRefetch={salesInvoicesRefetch}
 			/>
 
@@ -84,7 +82,7 @@ function Invoices({
 					<CreditNote
 						cnRefetch={cnRefetch}
 						list={list}
-						loading={cNLoading}
+						loading={cnLoading}
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 					/>

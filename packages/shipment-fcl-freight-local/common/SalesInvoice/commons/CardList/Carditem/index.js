@@ -6,8 +6,8 @@ import getValue from '../../../../../utils/getValue';
 import styles from './styles.module.css';
 
 function Item({
-	item,
-	fields,
+	item = {},
+	fields = [],
 	loading = false,
 }) {
 	return (

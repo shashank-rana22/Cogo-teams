@@ -10,8 +10,6 @@ import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';
 
-const MAIN_SERVICES = 'fcl_freight_service';
-
 function SelectService({
 	invoice = {},
 	handleServiceChange = () => {},
@@ -30,9 +28,7 @@ function SelectService({
 		const countryCode = getCountryDetails({ country_id: invoice?.billing_address?.organization_country_id });
 
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
-			const trade_type = MAIN_SERVICES !== service?.service_type ? service?.trade_type : null;
-
-			const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
+			const tradeType = service?.trade_type === 'export' ? 'Origin' : 'Destination';
 
 			const invoiceAmount = formatAmount({
 				amount   : service?.service_total_discounted || 0,
