@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import ShipmentLoader from '../../../../common/BlDoLoader/ShipmentLoader';
+import ShipmentLoader from '../../../../common/ShipmentLoader';
 import useGetShipmentTimeLine from '../../../../hooks/useGetShipmentTimline';
 
 import styles from './styles.module.css';
