@@ -164,6 +164,16 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'revenue_desk',
 	},
+	{
+		api          : 'create_shipment_booking_confirmation_preference',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_revenue_desk_shipments',
+		access_type  : 'private',
+		service_name : 'booking',
+	},
 ];
 
 export default apis;

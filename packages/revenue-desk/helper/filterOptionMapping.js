@@ -1,4 +1,5 @@
 export const serviceOptions = [
+	{ label: 'Fcl Freight', value: 'fcl_freight' },
 	{ label: 'Air Custom', value: 'air_customs' },
 	{ label: 'Air Freight', value: 'air_freight' },
 	{ label: 'Ftl Freight', value: 'ftl_freight' },
