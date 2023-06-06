@@ -1,15 +1,14 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowLeft, IcMArrowRight } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
-import getChapter from '../../utils/getChapter';
 import hideBtn from '../../utils/hideBtn';
 import CompletionAndFeedback from '../CompletionAndFeedback';
 
 import AssessmentComponent from './components/AssessmentComponent';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
+import useHandleCourseContent from './useHandleCourseContent';
 
 function ModuleContent({
 	data = {},
@@ -40,55 +39,29 @@ function ModuleContent({
 		user_submission = '',
 	} = chapter;
 
-	const router = useRouter();
+	const {
+		onClickNextChapter,
+		onClickPreviousChapter,
+		formatTime,
+		handleChange,
+		SOURCE_MAPPING,
+		onClickVisitTest,
+		onClickAttachment,
+	} = useHandleCourseContent({
+		updateCourseProgress,
+		getUserCourse,
+		setChapter,
+		data,
+		indexes,
+		setIndexes,
+		setEditorError,
+		setEditorValue,
+		chapter_content,
+	});
 
 	if (loading) {
 		return <LoadingState />;
 	}
-
-	const openInNewTab = (url) => {
-		window.open(url, '_blank', 'noopener,noreferrer');
-	};
-
-	const downloadFileAtUrl = (url) => {
-		fetch(url)
-			.then((response) => response.blob())
-			.then((blob) => {
-				const blobURL = URL.createObjectURL(new Blob([blob]));
-				const fileName = url.split('/').pop();
-				const aTag = document.createElement('a');
-				aTag.href = blobURL;
-				aTag.setAttribute('download', fileName);
-				document.body.appendChild(aTag);
-				aTag.click();
-				aTag.remove();
-			});
-	};
-
-	const SOURCE_MAPPING = {
-		video: chapter_content.includes('/watch?v=')
-			? chapter_content.replace('/watch?v=', '/embed/')
-			: '',
-		presentation : `https://view.officeapps.live.com/op/embed.aspx?src=${chapter_content}`,
-		document     : chapter_content,
-	};
-
-	const handleChange = (value) => {
-		setEditorError(false);
-		setEditorValue(value);
-	};
-
-	const formatTime = (time) => (
-		<div>
-			{Math.floor(time / 60)}
-			&nbsp;
-			<b>Hour</b>
-			&nbsp;
-			{time % 60}
-			&nbsp;
-			<b>Min</b>
-		</div>
-	);
 
 	if (showFeedback) {
 		return (
@@ -105,62 +78,58 @@ function ModuleContent({
 	if (showTestData) {
 		return (
 			<div className={styles.container}>
-				<div>
-					<h3>Course Completion Test</h3>
+				<h3>Course Completion Test</h3>
 
-					<div className={styles.instruction}>
-						<div className={styles.description_box}>
-							<b>
-								There is a timed test you need to Pass in order to complete this
-								course.
-							</b>
-							&nbsp; It has been designed specifically to gauge your learnings
-							from the course.
-						</div>
+				<div className={styles.instruction}>
+					<div className={styles.description_box}>
+						<b>
+							There is a timed test you need to Pass in order to complete this
+							course.
+						</b>
+						&nbsp; It has been designed specifically to gauge your learnings
+						from the course.
+					</div>
 
-						<div className={styles.test_details}>
-							<div className={styles.data_box}>
-								<div className={styles.data_display}>
-									<span>No of Questions</span>
-									<b>{data?.course_details?.tests[0]?.total_questions || 0}</b>
-								</div>
-
-								<div className={styles.data_display}>
-									<span>Duration</span>
-									<b>
-										{formatTime(data?.course_details?.tests[0]?.test_duration)}
-									</b>
-								</div>
-
-								<div className={styles.data_display}>
-									<span>Attempts</span>
-									<b>{data?.course_details?.tests[0]?.maximum_attempts}</b>
-								</div>
-
-								<div className={styles.data_display}>
-									<span>Required Pass %</span>
-									<b>{data?.course_details?.tests[0]?.cut_off_percentage}</b>
-								</div>
+					<div className={styles.test_details}>
+						<div className={styles.data_box}>
+							<div className={styles.data_display}>
+								<span>No of Questions</span>
+								<b>{data?.course_details?.tests[0]?.total_questions || 0}</b>
 							</div>
 
-							{data?.test_completed ? (
-								<Button type="button" themeType="tertiary">
-									Test Completed
-								</Button>
-							) : (
-								<Button
-									type="button"
-									onClick={() => {
-										router.push(
-											`/learning/tests/${data?.course_details?.tests[0]?.id}?f
-											rom=${data?.course_details?.id}`,
-										);
-									}}
-								>
-									Visit Test
-								</Button>
-							)}
+							<div className={styles.data_display}>
+								<span>Duration</span>
+								<b>
+									{formatTime(data?.course_details?.tests[0]?.test_duration)}
+								</b>
+							</div>
+
+							<div className={styles.data_display}>
+								<span>Attempts</span>
+								<b>{data?.course_details?.tests[0]?.maximum_attempts}</b>
+							</div>
+
+							<div className={styles.data_display}>
+								<span>Required Pass %</span>
+								<b>{data?.course_details?.tests[0]?.cut_off_percentage}</b>
+							</div>
 						</div>
+
+						{data?.test_completed ? (
+							<Button
+								type="button"
+								themeType="tertiary"
+							>
+								Test Completed
+							</Button>
+						) : (
+							<Button
+								type="button"
+								onClick={onClickVisitTest}
+							>
+								Visit Test
+							</Button>
+						)}
 					</div>
 				</div>
 			</div>
@@ -177,30 +146,11 @@ function ModuleContent({
 						{!hideBtn(data, 'prev', indexes) && (
 							<Button
 								size="md"
+								type="button"
 								themeType="tertiary"
 								className={styles.btn}
 								loading={loading}
-								onClick={async () => {
-									const prevChapterContent = (await getChapter({
-										data,
-										indexes,
-										state: 'prev',
-										setIndexes,
-									})) || {};
-
-									const { id, user_progress_state } = prevChapterContent;
-
-									await updateCourseProgress({
-										next_chapter_id: id,
-										next_chapter_state:
-													user_progress_state === 'introduction'
-														? 'ongoing'
-														: user_progress_state,
-									});
-
-									await getUserCourse();
-									setChapter(prevChapterContent);
-								}}
+								onClick={onClickPreviousChapter}
 							>
 								<IcMArrowLeft
 									width={14}
@@ -214,32 +164,11 @@ function ModuleContent({
 						{!hideBtn(data, 'next', indexes) && (
 							<Button
 								size="md"
+								type="button"
 								themeType="tertiary"
 								className={`${styles.btn} ${styles.next_btn}`}
 								loading={loading}
-								onClick={async () => {
-									const nextChapter = (await getChapter({
-										data,
-										indexes,
-										state: 'next',
-										setIndexes,
-										setChapter,
-									})) || {};
-
-									const { id, user_progress_state } = nextChapter;
-
-									await updateCourseProgress({
-										next_chapter_id: id,
-										next_chapter_state:
-													user_progress_state === 'introduction'
-														? 'ongoing'
-														: user_progress_state,
-									});
-
-									await getUserCourse();
-
-									setChapter(nextChapter);
-								}}
+								onClick={onClickNextChapter}
 							>
 								Next
 								<IcMArrowRight
@@ -299,9 +228,7 @@ function ModuleContent({
 						<div
 							key={attachment.name}
 							role="presentation"
-							onClick={() => (attachment.type === 'downloadable_resource'
-								? downloadFileAtUrl(attachment.media_url)
-								: openInNewTab(attachment.media_url))}
+							onClick={onClickAttachment}
 							className={styles.list_text}
 						>
 							{attachment.name}

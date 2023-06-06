@@ -19,8 +19,8 @@
 .left_part {
 	display: flex;
 
-	:global{
-		.ui_tag_container{
+	:global {
+		.ui_tag_container {
 			padding: 0;
 		}
 	}

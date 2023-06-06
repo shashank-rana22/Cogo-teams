@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 function CategoryCard({ courseCategoryData, categoryLoading, setCurrentCategory }) {
 	if (categoryLoading) {
-		return <LoadingState />;
+		return <LoadingState rowsCount={2} />;
 	}
 
 	if (isEmpty(courseCategoryData?.list)) {

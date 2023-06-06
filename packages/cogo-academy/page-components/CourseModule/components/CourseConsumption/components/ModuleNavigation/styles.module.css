@@ -42,13 +42,6 @@
 		.ui_accordion_content {
 			padding-left: 64px;
 			background-color: #fff;
-
-			/* background: #FFF;
-
-      &:hover{
-        background: #FFFCE6;
-        cursor: pointer;
-      } */
 		}
 	}
 }
@@ -130,7 +123,7 @@
 }
 
 .box_notselected {
-	background: white;
+	background: #fff;
 }
 
 .box_deactive {

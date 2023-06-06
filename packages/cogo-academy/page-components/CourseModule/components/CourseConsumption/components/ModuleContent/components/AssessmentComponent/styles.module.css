@@ -1,20 +1,20 @@
-.display_assesment{
+.display_assesment {
 	width: 100%;
 }
 
-.question{
+.question {
+	display: flex;
+	flex-direction: row;
 	font-weight: 600;
+}
+
+.answer {
 	display: flex;
 	flex-direction: row;
 }
 
-.answer{
-	display: flex;
-	flex-direction: row;
-}
-
-.flex{
-	width: 90%
+.flex {
+	width: 90%;
 }
 
 .errors {

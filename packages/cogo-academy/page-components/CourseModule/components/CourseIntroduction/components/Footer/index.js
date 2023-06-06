@@ -14,7 +14,6 @@ export function Footer({ course_id, user_id, data = {} }) {
 
 	const { created_at = '', updated_at = '' } = course_details;
 
-	console.log('data', data);
 	const {
 		courseProgressUpdateLoading : loading,
 		updateCourseProgress,

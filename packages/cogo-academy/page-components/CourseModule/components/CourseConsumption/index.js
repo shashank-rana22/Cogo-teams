@@ -112,6 +112,8 @@ function CourseConsumption({
 						setEditorValue={setEditorValue}
 						setEditorError={setEditorError}
 						setChapter={setChapter}
+						setShowTestData={setShowTestData}
+						setShowFeedback={setShowFeedback}
 					/>
 				) : null}
 

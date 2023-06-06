@@ -21,7 +21,7 @@ function ModuleNavigation({
 	showFeedback,
 	setShowFeedback,
 }) {
-	const { course_details = {}, all_chapters_completed = false, test_completed = false } = data;
+	const { course_details = {}, all_chapters_completed = false, test_completed = false, test_mapping = {} } = data;
 
 	const { name = '', tests = [] } = course_details;
 
@@ -39,7 +39,6 @@ function ModuleNavigation({
 
 	return (
 		<div className={styles.container}>
-
 			<div>
 				<h3 className={styles.course_name}>{name}</h3>
 
@@ -156,24 +155,29 @@ function ModuleNavigation({
 			) : null}
 
 			<div
-				className={`${(test_completed) ? styles.box_active : styles.box_deactive} 
-					${showFeedback ? styles.box_selected : styles.box_notselected}`}
+				className={`${
+					test_completed || isEmpty(test_mapping || {})
+						? styles.box_active
+						: styles.box_deactive
+				} ${showFeedback ? styles.box_selected : styles.box_notselected}`}
 				role="button"
 				tabIndex="0"
 				onClick={() => {
-					if (test_completed) {
+					if (test_completed || isEmpty(test_mapping || {})) {
 						setStates(true, false, {});
 					}
 				}}
 			>
-				{test_completed
-					? <IcMUnlock height={20} width={20} />
-					: <IcMLock height={20} width={20} />}
+				{all_chapters_completed && (test_completed || isEmpty(test_mapping || {})) ? (
+					<IcMUnlock height={20} width={20} />
+				) : (
+					<IcMLock height={20} width={20} />
+				)}
 
-				<div className={styles.text}>
-					Course Completion
-				</div>
+				<div className={styles.text}>Course Completion</div>
 			</div>
+			;
+
 		</div>
 	);
 }

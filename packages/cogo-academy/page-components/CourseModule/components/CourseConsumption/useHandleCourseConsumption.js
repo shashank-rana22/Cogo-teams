@@ -34,11 +34,12 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 		moduleIndex    : 0,
 		subModuleIndex : 0,
 		chapterIndex   : 0,
+		isNew          : true,
 	});
 
 	const [currentCategory, setCurrentCategory] = useState('all_courses');
 
-	const { moduleIndex, subModuleIndex, chapterIndex } = indexes;
+	const { moduleIndex, subModuleIndex, chapterIndex, isNew = false } = indexes;
 	const [showTestData, setShowTestData] = useState();
 	const [showFeedback, setShowFeedback] = useState();
 
@@ -63,46 +64,57 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 
 	const { finalData = {}, finalLoading, refetchApi } =	MAPPING[viewType] || MAPPING.normal;
 
+	const {
+		all_chapters_completed = false,
+		test_mapping = {},
+		test_completed = false,
+		redirect_chapter_details = {},
+		course_modules = [],
+	} = finalData || {};
+
 	const { courseProgressUpdateLoading, updateCourseProgress } = useUpdateUserCourseProgress({ course_id, user_id });
 
 	useEffect(() => {
-		if (!isEmpty(finalData)) {
+		if (!isEmpty(finalData) && !isEmpty(indexes)) {
 			setChapter(
-				finalData?.course_modules?.[moduleIndex]?.course_sub_modules[
+				course_modules?.[moduleIndex]?.course_sub_modules[
 					subModuleIndex
 				]?.course_sub_module_chapters[chapterIndex],
 			);
-			if (finalData?.all_chapters_completed
-				&& finalData?.test_completed) {
+
+			if (all_chapters_completed && test_completed && isNew) {
 				setShowFeedback(true);
 			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [finalData]);
 
-	const { redirect_chapter_details = {} } = finalData;
-
 	useEffect(() => {
 		if (
 			!isEmpty(redirect_chapter_details)
 			&& viewType !== 'preview'
-			&& !(moduleIndex || subModuleIndex || chapterIndex)
+			&& isNew
 		) {
 			const values = getIndex({
 				redirect_chapter_details,
-				course_modules: finalData.course_modules,
+				course_modules,
 			});
 
 			setIndexes(values);
 		}
-	}, [
-		chapterIndex,
-		finalData,
-		moduleIndex,
-		redirect_chapter_details,
-		subModuleIndex,
-		viewType,
-	]);
+	}, [course_modules, isNew, redirect_chapter_details, viewType]);
+
+	useEffect(() => {
+		if (isNew && all_chapters_completed && (!isEmpty(test_mapping || {}) && !test_completed)) {
+			setShowTestData(true);
+			setChapter({});
+		}
+
+		if (isNew && all_chapters_completed && (test_completed || isEmpty(test_mapping || {}))) {
+			setShowFeedback(true);
+			setChapter({});
+		}
+	}, [all_chapters_completed, test_completed, test_mapping, isNew]);
 
 	return {
 		finalData,
