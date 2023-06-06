@@ -3,7 +3,6 @@ import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
 import Filter from '../../../../commons/Filters';
-import { ControlProps } from '../../../../commons/Interfaces';
 
 import { defaultersControls } from './controls';
 import PopoverFilters from './PopoverFilters';
