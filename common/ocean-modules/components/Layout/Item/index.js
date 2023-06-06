@@ -14,7 +14,6 @@ function Item(props) {
 		span,
 		label = '',
 		error = {},
-		heading = '',
 		rules = {},
 		className = '',
 		formValues = {},
