@@ -39,8 +39,8 @@
 }
 
 .pill_container {
-	width: 24%;
 	display: flex;
+	width: 24%;
 }
 
 .header {
