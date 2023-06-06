@@ -11,9 +11,8 @@ const useUpdateBankDetails = ({ id }) => {
 			await trigger({
 				data: {
 					status,
-					id                : id || undefined,
-					performed_by_id   : 'sdfghjk',
-					performed_by_type : 'sdfghjkl',
+					id: id || undefined,
+
 				},
 			});
 		} catch (err) {

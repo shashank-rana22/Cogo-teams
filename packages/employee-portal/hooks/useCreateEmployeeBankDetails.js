@@ -26,8 +26,6 @@ function useCreateEmployeeBankDetails({ bank_details, getEmployeeDetails }) {
 					cancelled_check_url : data?.cancelled_cheque?.finalUrl,
 					status              : data?.status || 'active',
 					employee_detail_id  : id,
-					performed_by_id     : '85ab',
-					performed_by_type   : '65cv',
 				},
 			});
 			Toast.success('Bank Details have been saved successfully!');

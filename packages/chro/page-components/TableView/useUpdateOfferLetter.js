@@ -18,10 +18,8 @@ function useUpdateOfferLetter({ refetch }) {
 		try {
 			const payload = {
 				id,
-				performed_by_id   : 'user_id',
-				performed_by_type : 'agent',
 				status,
-				rejection_reason  : rejection_reason || undefined,
+				rejection_reason: rejection_reason || undefined,
 			};
 
 			await trigger({

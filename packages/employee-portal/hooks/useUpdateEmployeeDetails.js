@@ -81,9 +81,7 @@ function useUpdateEmployeeDetails({
 			await trigger({
 				data: {
 					id,
-					employee_detail_id : id,
-					performed_by_id    : '5674cb',
-					performed_by_type  : '2314fb',
+					employee_detail_id: id,
 					...payload,
 				},
 			});

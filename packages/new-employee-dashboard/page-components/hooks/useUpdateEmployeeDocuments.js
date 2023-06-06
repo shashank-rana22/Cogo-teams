@@ -12,9 +12,7 @@ const useUpdateEmployeeDocuments = ({ getEmployeeDetails }) => {
 
 	const updateEmployeeDocument = async ({ data }) => {
 		const payload = {
-			documents         : [{ ...data }],
-			performed_by_id   : '5674cb',
-			performed_by_type : '2314fb',
+			documents: [{ ...data }],
 
 		};
 

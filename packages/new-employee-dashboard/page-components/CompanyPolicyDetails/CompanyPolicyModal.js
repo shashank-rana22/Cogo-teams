@@ -19,12 +19,10 @@ function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
 	const onSubmit = async (values) => {
 		try {
 			const payload = {
-				id                : isUpdate ? showModal?.id : undefined,
-				performed_by_id   : '123',
-				performed_by_type : 'agent',
-				name              : values?.company_policy_name,
-				template_type     : 'company_policy',
-				document_url      : values?.company_policy_document?.finalUrl,
+				id            : isUpdate ? showModal?.id : undefined,
+				name          : values?.company_policy_name,
+				template_type : 'company_policy',
+				document_url  : values?.company_policy_document?.finalUrl,
 			};
 
 			await trigger({

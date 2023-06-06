@@ -15,8 +15,6 @@ function useCreateEmployeeDetails({ id, getEmployeeDetails }) {
 					employee_detail_id : id,
 					document_url       : data?.document_url,
 					status             : data?.status || 'active',
-					performed_by_id    : '5674cb',
-					performed_by_type  : '2314fb',
 				},
 			});
 			getEmployeeDetails();
