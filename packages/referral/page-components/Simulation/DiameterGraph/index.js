@@ -41,21 +41,21 @@ function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}
 
 	const handleCellClick = (cell) => {
 		setSingleData({ cell });
+
 		const updatedArray = (formattedArray || []).map((item) => {
 			if (item.id === cell.serieId) {
 				const updatedData = item.data.map((dataItem) => {
 					if (dataItem.x === cell.data.x) {
-						if (dataItem.color === '#FFFFFF') {
-							return { ...dataItem, color: '#FEF199' };
-						}
-						return dataItem;
+						return { ...dataItem, color: '#FEF199' };
 					}
+
 					return { ...dataItem, color: '#FFFFFF' };
 				});
+
 				return { ...item, data: updatedData };
 			}
 
-			return item;
+			return { ...item, data: item.data.map((dataItem) => ({ ...dataItem, color: '#FFFFFF' })) };
 		});
 
 		setFormattedArray(updatedArray);
