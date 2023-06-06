@@ -1,5 +1,5 @@
 import { Tabs, TabPanel, cl, Placeholder } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
@@ -56,6 +56,8 @@ function ReturnComponent({
 }
 
 function SimulationGraphs({ activeTab = '', simulationData = {}, singleData = {}, setSingleData = () => {}, loading }) {
+	const geo = getGeoConstants();
+	const currencyCode = geo.country.currency.code;
 	return (
 		<div className={styles.conatiner}>
 			<div className={styles.revenue_graph}>
@@ -71,7 +73,7 @@ function SimulationGraphs({ activeTab = '', simulationData = {}, singleData = {}
 			</div>
 			<div className={styles.level_graph}>
 				<div className={styles.levels_header}>
-					{['Levels', `Payout (${GLOBAL_CONSTANTS.currency_code.INR})`].map((itm) => (
+					{['Levels', `Payout (${currencyCode})`].map((itm) => (
 						<div key={itm}>
 							<div className={styles.level_name}>{itm}</div>
 						</div>

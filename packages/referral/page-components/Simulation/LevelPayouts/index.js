@@ -1,4 +1,5 @@
 import { cl, Placeholder } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
@@ -7,6 +8,9 @@ import useGetSimulation from '../../../hooks/useGetSimulation';
 import styles from '../styles.module.css';
 
 function LevelPayouts({ singleData = {}, activeTab = '' }) {
+	const geo = getGeoConstants();
+	const currencyCode = geo.country.currency.code;
+
 	const { data = {}, loading } = useGetSimulation({
 		type: 'level_data',
 		singleData,
@@ -62,7 +66,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 				<div className={styles.total_payouts}>
 					Total Payout:
 					<div className={styles.amount}>
-						INR
+						{currencyCode}
 						{' '}
 						{totalPayouts}
 					</div>

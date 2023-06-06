@@ -1,5 +1,6 @@
 import { ResponsiveHeatMap } from '@cogoport/charts/heatmap';
 import { cl } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -9,14 +10,18 @@ import { handleValues } from '../../../utils/handleValue';
 import styles from './styles.module.css';
 
 function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}, activeTab = '' }) {
+	const geo = getGeoConstants();
+	const currencyCode = geo.country.currency.code;
+
 	const formattedData = getFormattedData(simulationData);
 
 	const mapData = (data) => {
 		const details = Object.entries(data).map(([key, value]) => ({
 			id   : key,
 			data : Object.entries(value).map(([childKey, childValue]) => ({
-				x : handleValues(childKey),
-				y : childValue,
+				x     : handleValues(childKey),
+				y     : childValue,
+				color : '#fff',
 			})),
 
 		}));
@@ -39,7 +44,7 @@ function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}
 					tickSize       : 0,
 					tickPadding    : 6,
 					tickRotation   : 0,
-					legend         : `${startCase(activeTab)} Revenue (INR)`,
+					legend         : `${startCase(activeTab)} Revenue (${currencyCode}`,
 					legendPosition : 'start',
 					legendOffset   : 34,
 				}}
@@ -51,12 +56,7 @@ function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}
 					legendPosition : 'start',
 					legendOffset   : -52,
 				}}
-				colors={{
-					type      : 'diverging',
-					divergeAt : 0.5,
-					minValue  : -100000,
-					maxValue  : 100000,
-				}}
+				colors={(d) => d.data.color}
 				activeOpacity={0.4}
 				inactiveOpacity={0.8}
 				borderWidth={1}

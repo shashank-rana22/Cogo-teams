@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
@@ -10,6 +10,8 @@ const EMPTY_FUNCTION = () => {};
 const EMPTY_OBJECT = {};
 
 const useGetSimulation = ({ type = '', activeTab = '', singleData = EMPTY_OBJECT, setSingleData = EMPTY_FUNCTION }) => {
+	const geo = getGeoConstants();
+	const currencyCode = geo.country.currency.code;
 	const emptyCheck = !isEmpty(singleData);
 
 	const { item = {} } = singleData;
@@ -29,7 +31,7 @@ const useGetSimulation = ({ type = '', activeTab = '', singleData = EMPTY_OBJECT
 	const getSimulation = useCallback(async () => {
 		const simulationPayload = {
 			event               : activeTab,
-			revenue_currency    : GLOBAL_CONSTANTS.currency_code.INR,
+			revenue_currency    : currencyCode,
 			max_levels          : MAX_LEVEL,
 			revenue_start_price : REVENUE_START_PRICE,
 			revenue_end_price   : REVENUE_END_PRICE,
@@ -51,7 +53,7 @@ const useGetSimulation = ({ type = '', activeTab = '', singleData = EMPTY_OBJECT
 		} catch (error) {
 			console.log(error);
 		}
-	}, [activeTab, emptyCheck, selectedRevenue, serieId, singleData, trigger, type]);
+	}, [activeTab, currencyCode, emptyCheck, selectedRevenue, serieId, singleData, trigger, type]);
 
 	useEffect(() => {
 		getSimulation();
