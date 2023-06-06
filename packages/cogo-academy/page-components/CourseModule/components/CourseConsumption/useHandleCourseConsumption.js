@@ -72,6 +72,10 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 					subModuleIndex
 				]?.course_sub_module_chapters[chapterIndex],
 			);
+			if (finalData?.all_chapters_completed
+				&& finalData?.test_completed) {
+				setShowFeedback(true);
+			}
 		}
 		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [finalData]);

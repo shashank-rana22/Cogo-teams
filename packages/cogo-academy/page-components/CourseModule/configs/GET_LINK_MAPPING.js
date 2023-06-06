@@ -9,7 +9,7 @@ const GET_LINK_MAPPING = ({ router }) => ({
 		router.push(`/learning/course/introduction?course_id=${course_id}`);
 	},
 	completed: (course_id) => {
-		router.push(`/learning/course/introduction?course_id=${course_id}`);
+		router.push(`/learning/course/${course_id}`);
 	},
 	saved: (course_id) => {
 		router.push(`/learning/course/introduction?course_id=${course_id}`);
