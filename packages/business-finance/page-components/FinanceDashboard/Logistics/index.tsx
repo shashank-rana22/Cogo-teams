@@ -13,7 +13,7 @@ import TotalPayablesRecievables from './TotalPayablesRecievavles';
 import TreasuryStatistics from './TreasuryStatistics';
 
 interface ItemProps {
-	key?: string;
+	key?: string | undefined;
 	label?: string;
 	icon?: JSX.Element;
 }
@@ -56,7 +56,7 @@ function Logistics() {
 						<div
 							key={item.key}
 							onClick={() => {
-								setEntityTabFilters(item.key);
+								setEntityTabFilters(item.key as undefined);
 							}}
 							role="presentation"
 						>
