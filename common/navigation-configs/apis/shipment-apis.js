@@ -1528,6 +1528,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api: 'list_platform_config_constants',
+		access_type: 'private',
+		service_name: 'platform_config',
+	},
 ];
 
 export default apis;
