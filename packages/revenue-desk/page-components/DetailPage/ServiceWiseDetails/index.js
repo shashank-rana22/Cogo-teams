@@ -43,8 +43,7 @@ function Rates({ groupedShowServicesData, serviceData }) {
 				{tabKeys.map((singleTab) => (
 					<TabPanel name={singleTab} title={startCase(singleTab.replace('_service', ''))} key={singleTab}>
 						<SingleService
-							activeTab={activeTab}
-							groupedShowServicesData={groupedShowServicesData}
+							groupedServicesData={groupedShowServicesData[activeTab]}
 							supplierPayload={supplierPayload}
 							setSupplierPayload={setSupplierPayload}
 							inventory={inventory}
