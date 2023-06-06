@@ -1,0 +1,61 @@
+.container {
+	min-width: 860px;
+	max-width: 860px;
+	min-height: 432px;
+	padding: 8px 0;
+}
+
+.heading {
+	margin-left: 12px;
+	font-size: 18px;
+	font-weight: 600;
+	color: #000;
+	text-transform: uppercase;
+}
+
+.styled_button {
+	display: flex;
+	justify-content: flex-end;
+	margin-top: 8px;
+}
+
+.cancel_button {
+	display: flex;
+	margin-right: 10px;
+}
+
+.styled_checkbox {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+}
+
+.text_feedback {
+	color: #000;
+	letter-spacing: 0.02em;
+}
+
+.back_button {
+	display: flex;
+	align-items: center;
+	cursor: pointer;
+}
+
+.header {
+	display: flex;
+	align-items: center;
+	justify-content: flex-start;
+	margin-bottom: 12px;
+}
+
+.remarks_textarea {
+	margin-bottom: 8px;
+	font-weight: 600;
+	color: #000;
+}
+
+.styled_textarea {
+	padding: 0 10px;
+	margin-top: 24px;
+	margin-bottom: 138px;
+}

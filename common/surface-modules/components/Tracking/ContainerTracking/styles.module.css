@@ -1,0 +1,7 @@
+.Container {
+	display: flex;
+	flex-direction: column;
+	justify-content: space-between;
+	margin-top: 15px;
+	margin-bottom: 15px;
+}
