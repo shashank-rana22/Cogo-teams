@@ -1,7 +1,7 @@
 const formatIps = (ips) => {
 	const newIps = ips?.map((ip) => {
 		const {
-			billing_address : ba, id, is_active, services = [], is_igst,
+			billing_address : ba, id, is_active, services = [],
 			invoice_currency, invoicing_party_total_discounted, invoice_total_currency,
 			status, source:invoice_source,
 		} = ip || {};
@@ -45,15 +45,13 @@ const formatIps = (ips) => {
 				display_name : service?.service_type === 'shipment'
 					? 'Convenience Fees'
 					: service?.display_name,
-				serviceKey : service?.serviceKey,
-				is_igst    : is_igst || null,
+				serviceKey: service?.serviceKey,
 			})),
 			invoice_currency,
 			invoicing_party_total_discounted,
 			invoice_total_currency,
 			status,
 			invoice_source,
-			is_igst,
 		};
 	});
 

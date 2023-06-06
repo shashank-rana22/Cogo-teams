@@ -12,18 +12,13 @@ const useUpdateInvoiceCombination = ({
 	successMessage = 'Invoice Preference edited!',
 	servicesList,
 	selectedParties,
-	initial_service_invoice_id,
 	allServiceLineitemsCount,
 	importer_exporter_id,
-	updateExportInvoices,
 }) => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const endPoint = updateExportInvoices ? '/update_shipment_export_invoice_combination'
-		: '/update_shipment_invoice_combination';
-
 	const [{ loading, data }, trigger] = useRequest({
-		url    : endPoint,
+		url    : '/update_shipment_invoice_combination',
 		method : 'POST',
 	}, { manual: true });
 
@@ -52,9 +47,6 @@ const useUpdateInvoiceCombination = ({
 					const { display_name, trade_type, serviceKey, is_igst, ...rest } = item;
 					const partyService = {
 						...rest,
-						invoice_combination_id: updateExportInvoices
-							? initial_service_invoice_id[item?.serviceKey] || undefined
-							: undefined,
 					};
 					partyServices.push(partyService);
 					return partyServices;

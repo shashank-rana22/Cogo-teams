@@ -1,14 +1,10 @@
-import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import formatIps from '../common/SalesInvoice/helpers/format-ips';
-import incoTermMapping from '../configurations/inco-term-mapping.json';
 
 import useUpdateInvoiceCombination from './useUpdateInvoiceCombination';
-
-const EXPORT_SERVICES_TYPES = 'fcl_freight_service';
 
 const geo = getGeoConstants();
 
@@ -18,8 +14,7 @@ const useEditInvoicePref = ({
 	invoicing_parties = [],
 	refetch = () => {},
 }) => {
-	const { inco_term = '', importer_exporter_id = '' } = shipment_data;
-	const updateExportInvoices = incoTermMapping[inco_term] === 'export';
+	const { importer_exporter_id = '' } = shipment_data;
 	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
 		const { invoice_currency, is_igst } = p || {};
@@ -88,10 +83,6 @@ const useEditInvoicePref = ({
 			(party) => party.id === inv.id,
 		);
 
-		const currentInvoiceId = selectedParties?.find(
-			(party) => party.id === inv.id,
-		)?.id;
-
 		if (currentInvoiceIndex >= 0) {
 			const newSelectParties = [];
 			selectedParties.forEach((party) => {
@@ -102,29 +93,18 @@ const useEditInvoicePref = ({
 				newSelectParties.push(updateParty);
 			});
 
-			let isBasicFreightInvService = {};
 			newSelectParties[currentInvoiceIndex].services = newServices?.map(
 				(service) => {
 					const itemsService = allServiceLineitems.find(
 						(item) => item.serviceKey === service,
 					);
 
-					const isBasicFreight = (itemsService?.line_items || []).find(
-						(item) => item?.code === 'BAS',
-					);
-
-					if (!isEmpty(isBasicFreight)) {
-						isBasicFreightInvService = itemsService;
-					}
-
 					const currentService = invoicing_parties?.services?.find(
 						(serv) => serv?.id === service?.split(':')?.[0],
 					);
 
 					let serviceType = currentService?.service_type;
-					if (currentService?.service_type === 'trailer_freight_service') {
-						serviceType = 'haulage_freight_service';
-					}
+
 					if (isEmpty(currentService?.service_type)) {
 						serviceType = itemsService?.service_type;
 					}
@@ -151,37 +131,7 @@ const useEditInvoicePref = ({
 				);
 			}
 
-			const changedIP = finalNewSelectParties?.find(
-				(item) => item?.id === currentInvoiceId,
-			);
-
-			const igstArray = (changedIP?.services || []).map(
-				(service) => service?.is_igst,
-			);
-			const uniq_igst_val = new Set(igstArray || []);
-			const allowServiceMerge = uniq_igst_val?.length === 1;
-
-			let isBasicFreight = false;
-			if (!isEmpty(isBasicFreightInvService)) {
-				(finalNewSelectParties || []).forEach((party) => {
-					const BFLineItem = (party?.services || []).some(
-						(service) => service.serviceKey === isBasicFreightInvService.serviceKey
-							&& EXPORT_SERVICES_TYPES === isBasicFreightInvService.service_type,
-					);
-
-					if (party?.services?.length > 1 && BFLineItem) {
-						isBasicFreight = true;
-					}
-				});
-			}
-
-			if (isBasicFreight && updateExportInvoices && !allowServiceMerge) {
-				Toast.error(
-					'Basic Freight or IGST invoices cannot be merged with other services',
-				);
-			} else {
-				setSelectedParties([...finalNewSelectParties]);
-			}
+			setSelectedParties([...finalNewSelectParties]);
 		}
 	};
 
@@ -192,7 +142,6 @@ const useEditInvoicePref = ({
 		allServiceLineitemsCount: allServiceLineitems.length,
 		refetch,
 		importer_exporter_id,
-		updateExportInvoices,
 	});
 
 	return {

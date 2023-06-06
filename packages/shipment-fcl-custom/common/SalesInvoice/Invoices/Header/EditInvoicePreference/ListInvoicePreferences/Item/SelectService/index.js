@@ -32,8 +32,6 @@ function SelectService({
 
 			const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
 
-			const isBas = (service?.line_items || []).some((lineItem) => lineItem?.code === 'BAS');
-
 			const invoiceAmount = formatAmount({
 				amount   : service?.service_total_discounted || 0,
 				currency : service?.service_total_currency,
@@ -74,14 +72,13 @@ function SelectService({
 				</div>
 			);
 
-			const id_with_igst = service?.serviceKey;
+			const id = service?.serviceKey;
 
 			const serviceName = service?.service_name || service?.service_type;
 
 			const serviceType = service?.service_type === 'shipment'
 				? 'Convenience Fees'
-				: `${tradeType} ${startCase(serviceName)} ${service?.is_igst ? '(IGST)' : ''} ${isBas
-					&& !service?.is_igst ? '(BAS)' : ''}`;
+				: `${tradeType} ${startCase(serviceName)}`;
 
 			const servicesToPush = {
 				label: (
@@ -92,7 +89,7 @@ function SelectService({
 					</Tooltip>
 				),
 				isTaxable : service?.tax_total > 0,
-				value     : id_with_igst,
+				value     : id,
 				...service,
 			};
 
