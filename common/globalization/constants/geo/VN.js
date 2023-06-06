@@ -362,6 +362,7 @@ export default {
 				label: '501 Cogoport Vietnam', value: '501',
 			},
 		],
+		migration_status: [],
 	},
 	navigations: {
 		supply_dashboard: {

@@ -1,9 +1,9 @@
 import { Button, Popover, Input } from '@cogoport/components';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import Filter from '../../../../commons/Filters';
+import { ControlProps } from '../../../../commons/Interfaces';
 
 import { defaultersControls } from './controls';
 import PopoverFilters from './PopoverFilters';
@@ -40,10 +40,7 @@ interface Props {
 function DefaultersFilters({ globalFilters, setGlobalFilters, isClear, clearFilters }:Props) {
 	const [visible, setVisible] = useState(false);
 
-	const { general } = useSelector((state) => state || {});
-	const partnerIds = general?.query?.partner_id;
-
-	const control = [...defaultersControls({ globalFilters, partnerIds })];
+	const control = defaultersControls({ globalFilters });
 
 	const popoverContent = () => (
 		<PopoverFilters
