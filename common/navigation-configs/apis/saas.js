@@ -220,6 +220,10 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api         : 'get_saas_hs_code_six_digit_list',
+			access_type : 'private',
+		},
 	],
 	app_saas_air_tracking: [
 		{
@@ -316,6 +320,10 @@ const saas = {
 			api          : 'list_saas_store_quota',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
+		},
+		{
+			api         : 'get_saas_hs_code_six_digit_list',
+			access_type : 'private',
 		},
 	],
 	app_saas_map_tracking: [

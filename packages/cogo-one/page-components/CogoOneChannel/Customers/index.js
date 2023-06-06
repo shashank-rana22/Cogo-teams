@@ -46,6 +46,8 @@ function Customers({
 	tagOptions = [],
 	mailProps = {},
 	firestore,
+	viewType = '',
+	flashMessagesLoading,
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
@@ -54,6 +56,7 @@ function Customers({
 		messagesList = [],
 		unReadChatsCount = 0,
 		sortedPinnedChatList = [],
+		flashMessagesList = [],
 	} = chatsData || {};
 
 	const {
@@ -101,6 +104,9 @@ function Customers({
 		userId,
 		sortedPinnedChatList,
 		firestore,
+		viewType,
+		flashMessagesList,
+		flashMessagesLoading,
 	};
 
 	const voiceProps = {

@@ -22,6 +22,7 @@ const useListChats = ({
 	isomniChannelAdmin,
 	showBotMessages = false,
 	searchValue = '',
+	viewType = '',
 	setShowFeedback = () => {},
 }) => {
 	const { query:searchQuery, debounceQuery } = useDebounceQuery();
@@ -34,7 +35,7 @@ const useListChats = ({
 	const pinSnapshotListener = useRef(null);
 	const unreadCountSnapshotListner = useRef(null);
 	const activeRoomSnapshotListner = useRef(null);
-
+	const flashSalesSnapShotListener = useRef(null);
 	const [firstMount, setFirstMount] = useState(false);
 
 	const [activeCard, setActiveCard] = useState({
@@ -43,8 +44,10 @@ const useListChats = ({
 	});
 
 	const [loading, setLoading] = useState(false);
+	const [flashMessagesLoading, setFlashMessagesLoading] = useState(false);
 	const [activeRoomLoading, setActiveRoomLoading] = useState(false);
 	const [appliedFilters, setAppliedFilters] = useState({});
+	const [flashMessagesData, setFlashMessagesData] = useState({});
 
 	const [listData, setListData] = useState({
 		messagesListData     : {},
@@ -110,8 +113,9 @@ const useListChats = ({
 			userId,
 			appliedFilters,
 			showBotMessages,
+			viewType,
 		}),
-		[appliedFilters, isomniChannelAdmin, showBotMessages, userId],
+		[appliedFilters, isomniChannelAdmin, showBotMessages, userId, viewType],
 	);
 
 	const queryForSearch = useMemo(() => (
@@ -120,6 +124,36 @@ const useListChats = ({
 				where('user_name', '<=', `${searchQuery}\\uf8ff`), orderBy('user_name', 'asc')] : []
 
 	), [searchQuery]);
+
+	const mountFlashChats = useCallback(() => {
+		setFlashMessagesLoading(true);
+		snapshotCleaner({ ref: flashSalesSnapShotListener });
+		setFlashMessagesData({});
+		try {
+			const newChatsQuery = query(
+				omniChannelCollection,
+				where('session_type', '==', 'bot'),
+				where('can_claim_chat', '==', true),
+				orderBy('updated_at', 'desc'),
+			);
+			flashSalesSnapShotListener.current = onSnapshot(
+				newChatsQuery,
+				(querySnapshot) => {
+					const { resultList } = dataFormatter(querySnapshot);
+					setFlashMessagesData(resultList);
+					setFlashMessagesLoading(false);
+				},
+
+			);
+		} catch (error) {
+			console.log('error', error);
+		} finally {
+			setFlashMessagesLoading(false);
+		}
+		return () => {
+			snapshotCleaner({ ref: pinSnapshotListener });
+		};
+	}, [omniChannelCollection]);
 
 	const mountPinnedSnapShot = useCallback(() => {
 		setLoading(true);
@@ -260,8 +294,10 @@ const useListChats = ({
 	}, [firestore, activeCardId, activeChannelType]);
 
 	useEffect(() => {
-		mountPinnedSnapShot();
-	}, [mountPinnedSnapShot]);
+		if (viewType !== 'shipment_view') {
+			mountPinnedSnapShot();
+		}
+	}, [mountPinnedSnapShot, viewType]);
 
 	useEffect(() => {
 		mountSnapShot();
@@ -274,6 +310,10 @@ const useListChats = ({
 	useEffect(() => {
 		mountActiveRoomSnapShot();
 	}, [mountActiveRoomSnapShot]);
+
+	useEffect(() => {
+		mountFlashChats();
+	}, [mountFlashChats]);
 
 	const setActiveMessage = async (val) => {
 		const { channel_type, id } = val || {};
@@ -317,6 +357,10 @@ const useListChats = ({
 		}
 	};
 
+	const sortedFlashMessages = Object.keys(flashMessagesData || {})
+		.sort((a, b) => Number(b.updated_at || 0) - Number(a.updated_at || 0))
+		.map((sortedkeys) => flashMessagesData[sortedkeys]);
+
 	const getAssignedChats = useCallback(async () => {
 		const assignedChatsQuery = query(
 			omniChannelCollection,
@@ -326,11 +370,13 @@ const useListChats = ({
 		const getAssignedChatsQuery = await getDocs(assignedChatsQuery);
 		return getAssignedChatsQuery.size || 0;
 	}, [omniChannelCollection, userId]);
+
 	return {
 		chatsData: {
-			messagesList     : sortedUnpinnedList || [],
-			unReadChatsCount : listData?.unReadChatsCount,
+			messagesList      : sortedUnpinnedList || [],
+			unReadChatsCount  : listData?.unReadChatsCount,
 			sortedPinnedChatList,
+			flashMessagesList : sortedFlashMessages || [],
 		},
 		setActiveMessage,
 		activeMessageCard: activeCardData,
@@ -344,6 +390,7 @@ const useListChats = ({
 		handleScroll,
 		activeRoomLoading,
 		getAssignedChats,
+		flashMessagesLoading,
 	};
 };
 

@@ -57,6 +57,7 @@ import {
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
+	IcMBookingDesk,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -821,8 +822,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'business_finance-settlement',
 				title         : 'Settlement',
-				href          : '/business-finance/settlement/[active_tab]',
-				as            : '/business-finance/settlement/ap-ar-settlement',
+				href          : '/v2/business-finance/settlement/[active_tab]',
+				as            : '/v2/business-finance/settlement/JournalVoucher',
 				type          : 'link',
 				main_apis     : ['list_organizations'],
 				possible_apis : apis.settlement,
@@ -1352,8 +1353,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-kam_desk',
 				title         : 'KAM Desk',
-				href          : '/kam-desk',
-				as            : '/kam-desk',
+				href          : '/v2/kam-desk',
+				as            : '/v2/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
 				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
@@ -1732,6 +1733,14 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.cogo_fx,
 			},
+			{
+				key           : 'transaction_setting-controlled_booking',
+				title         : 'Controlled Booking Desk',
+				icon          : IcMBookingDesk,
+				href          : '/v2/controlled-booking',
+				as            : '/v2/controlled-booking',
+				possible_apis : apis.controlled_booking,
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -1961,6 +1970,24 @@ const navigationMappingAdmin = {
 				possible_apis : apis.ticket_management,
 			},
 			{
+				key           : 'ticket_management-my_tickets',
+				title         : 'My Tickets',
+				href          : '/v2/ticket-management/my-tickets',
+				as            : '/v2/ticket-management/my-tickets',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.ticket_management,
+			},
+			{
+				key           : 'ticket_management-super_admin',
+				title         : 'Admin Dashboard',
+				href          : '/v2/ticket-management/super-admin',
+				as            : '/v2/ticket-management/super-admin',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.ticket_management,
+			},
+			{
 				key           : 'ticket_management-ticket_configurations',
 				title         : 'Ticket Configurations',
 				href          : '/ticket-management/configurations',
@@ -2122,15 +2149,6 @@ const navigationMappingAdmin = {
 		module_type : 'dashboards',
 		options     : [
 			{
-				key           : 'analytics_dashboard-management',
-				title         : 'Dashboard Management',
-				href          : '/analytics-dashboard-management',
-				as            : '/analytics-dashboard-management',
-				type          : 'link',
-				main_apis     : [],
-				possible_apis : apis.analytics_dashboard_management,
-			},
-			{
 				key           : 'analytics_dashboard-view',
 				title         : 'Dashboard',
 				href          : '/analytics-dashboard',
@@ -2252,6 +2270,33 @@ const navigationMappingAdmin = {
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
+	},
+	saas_subscription: {
+		key         : 'saas_subscription',
+		title       : 'Saas Subscription',
+		isSubNavs   : true,
+		icon        : IcMExportfile,
+		module_type : 'dashboards',
+		options     : [
+			{
+				key           : 'saas_subscription-customer',
+				title         : 'Customer',
+				href          : '/v2/saas-subscription/customer',
+				as            : '/v2/saas-subscription/customer',
+				type          : 'link',
+				icon          : IcMActivePlans,
+				possible_apis : apis.saas_subscription_customer,
+			},
+			{
+				key           : 'saas_subscription-plan',
+				title         : 'Plan',
+				href          : '/v2/saas-subscription/plan',
+				as            : '/v2/saas-subscription/plan',
+				type          : 'link',
+				icon          : IcMActivePlans,
+				possible_apis : apis.saas_subscription_plan,
+			},
+		],
 	},
 	referral: {
 		key         : 'referral',

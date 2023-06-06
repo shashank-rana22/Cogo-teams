@@ -29,21 +29,25 @@ export default {
 		},
 	},
 	regex: {
-		PAN           : /^([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1})+$/g,
+		PAN              : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
 		// eslint-disable-next-line max-len
-		GST           : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Z]{3}[PCHFATBLJG]{1}[A-Z]{1}[0-9]{4}[A-Z]{1}[1-9A-Z]{1}[Z]{1}[0-9A-Z]{1})+$/g,
-		MOBILE_NUMBER : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL         : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		GST              : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL            : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
 	uuid: {
-		super_admin_id              : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
-		admin_id                    : 'ebafce31-75ef-4865-9060-775574e9606f',
-		tech_super_admin_id         : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
-		parent_entity_id            : '6fd98605-9d5d-479d-9fac-cf905d292b88',
-		cogo_demo_account_shipper   : ['302bdc56-e807-4c71-a27c-92f83640f140'],
-		spot_booking_shipping_lines : [
+		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
+		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
+		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
+		parent_entity_id                 : '6fd98605-9d5d-479d-9fac-cf905d292b88',
+		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
+		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
+		cogo_demo_account_shipper        : ['302bdc56-e807-4c71-a27c-92f83640f140'],
+		spot_booking_shipping_lines      : [
 			'c3649537-0c4b-4614-b313-98540cffcf40',
 			'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
 			'fb1aa2f1-d136-4f26-ad8f-2e1545cc772a',
@@ -184,7 +188,26 @@ export default {
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
+		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
+		cogo_one_admin_ids    : [
+			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
+			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
+			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
+		],
+		cogo_one_shipment_agent_ids: [
+			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
+		],
+		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		fortigo_network_ids : [
+			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+		],
+		fortigo_agencies_mapping: {
+			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+		},
 	},
 	options: {
 		registration_types: [
@@ -338,7 +361,12 @@ export default {
 				value : 'closed_body_32ft_triple_axle_HQ_20_21_ton',
 			},
 		],
-
+		tax_types: [
+			{
+				label : 'PAN',
+				value : 'pan',
+			},
+		],
 		invoice_status: [
 			{ label: 'Draft', value: 'DRAFT' },
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
@@ -376,5 +404,42 @@ export default {
 				value : 'open_side',
 			},
 		],
+	},
+	navigations: {
+		supply_dashboard: {
+			rfq_enquiries: {
+				tabs: [
+					'live_bookings',
+					'trade_enquiry',
+					'disliked_rates',
+					'rate_density',
+					'manage_forecast',
+					'rfq_enquiries',
+					'rates_sheets',
+				],
+			},
+		},
+	},
+	others: {
+		registration_number: {
+			label      : 'GST',
+			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
+			max_length : 15,
+		},
+
+		pan_number: {
+			label   : 'PAN',
+			pattern : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+		},
+
+		economic_zone: {
+			label: 'SEZ',
+		},
+
+		navigations: {
+			onboard_vendor: {
+				validate_registration: true,
+			},
+		},
 	},
 };

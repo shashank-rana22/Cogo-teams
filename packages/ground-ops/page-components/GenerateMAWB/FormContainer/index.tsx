@@ -1,4 +1,4 @@
-import { Button, Stepper, RadioGroup, Toast } from '@cogoport/components';
+import { Button, Stepper, RadioGroup, Toast, Toggle, Badge } from '@cogoport/components';
 import { IcMPlus } from '@cogoport/icons-react';
 import React, { useState, useEffect } from 'react';
 import { v4 as uuid } from 'uuid';
@@ -22,9 +22,9 @@ const options = [
 ];
 
 function FormContainer({
-	back, setBack, edit, setEdit, packingData, fields,
-	control, errors, setValue, item, setGenerate, handleSubmit, category, activeCategory, hawbDetails,
-	setHawbDetails, activeHawb, setActiveHawb, activeKey, setActiveKey, taskItem, formValues,
+	back, setBack, edit, setEdit, packingData, fields, control, errors, setValue, item,
+	setGenerate, handleSubmit, category, activeCategory, hawbDetails, setHawbDetails, activeHawb,
+	setActiveHawb, activeKey, setActiveKey, taskItem, formValues, setCustomHawbNumber, cogoSeriesNumber,
 }) {
 	const [value, onChange] = useState('manual');
 	const [confirmDelete, setConfirmDelete] = useState(false);
@@ -94,13 +94,11 @@ function FormContainer({
 
 	const calculateCharges = () => {
 		const updatedCharges = (formValues.carrierOtherCharges || []).map((charge) => {
-			let price = 0;
+			let price:number = 0;
 			if (charge.chargeType === 'chargeable_wt') {
-				price = formValues.chargeableWeight * charge.chargeUnit;
+				price = Number((formValues.chargeableWeight * charge.chargeUnit).toFixed(2));
 			} else if (charge.chargeType === 'gross_wt') {
-				price = formValues.weight * charge.chargeUnit;
-			} else if (charge.chargeType === 'rate_per_kg') {
-				price = formValues.ratePerKg * charge.chargeUnit;
+				price = Number((formValues.weight * charge.chargeUnit).toFixed(2));
 			}
 			return { ...charge, price };
 		});
@@ -129,13 +127,23 @@ function FormContainer({
 									&& `HAWB - ${hawbItem.id}`}
 									{' '}
 									{hawbItem?.documentNo}
+									{' '}
+									{hawbItem.isNew && <Badge color="#ee3425" size="md" text="NOT SAVED" />}
 								</div>
 							</div>
 						))}
 
 						<Button
 							onClick={() => {
-								setHawbDetails((prev) => ([...prev, { id: uuid(), documentNo: null, isNew: true }]));
+								setHawbDetails((prev) => ([...prev, {
+									id: uuid(),
+									documentNo:
+									cogoSeriesNumber.length >= 1
+										? `COGO-${cogoSeriesNumber[cogoSeriesNumber.length - 1] + 1}`
+										: `COGO-${taskItem.serialId}${
+											(hawbDetails.length + 1).toString().padStart(2, '0')}`,
+									isNew: true,
+								}]));
 							}}
 							themeType="secondary"
 						>
@@ -211,11 +219,21 @@ function FormContainer({
 					{activeKey === 'basic' && (
 						<>
 							{activeCategory === 'hawb' && (
-								<Layout
-									fields={fields?.hawb_controls}
-									errors={errors}
-									control={control}
-								/>
+								<>
+									<Toggle
+										name="document_number"
+										size="sm"
+										disabled={!activeHawb.isNew}
+										onLabel="Custom Series"
+										offLabel="COGO Series"
+										onChange={() => setCustomHawbNumber((prev) => !prev)}
+									/>
+									<Layout
+										fields={fields?.hawb_controls}
+										errors={errors}
+										control={control}
+									/>
+								</>
 							)}
 							<Layout fields={fields?.basic} control={control} errors={errors} />
 							<div className={styles.button_container}>
