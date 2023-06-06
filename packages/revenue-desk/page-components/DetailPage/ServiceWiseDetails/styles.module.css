@@ -1,5 +1,7 @@
 .container{
     margin:20px;
+    display: flex;
+    flex-direction: column;
 }
 
 .tab_heading{
@@ -8,7 +10,7 @@
 }
 .button_select_container{
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-end;
     margin-top: 16px;
 }
 

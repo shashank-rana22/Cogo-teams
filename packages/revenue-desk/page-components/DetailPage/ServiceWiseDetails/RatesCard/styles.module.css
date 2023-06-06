@@ -9,13 +9,3 @@
     font-size: 20px;
     color: #4F4F4F;
 }
-
-.select_outer_container{
-    display: flex;
-    margin-top: 16px;
-}
-
-.select_container{
-   width:210px;
-   margin-right: 16px;
-}

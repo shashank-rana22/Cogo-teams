@@ -52,10 +52,10 @@ function SingleService({
 		setInventory({ ...inventory, [singleServiceData?.id]: existingInventory });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(existingInventory)]);
-
 	return (
 		<div>
-			<SelectedRatesCard prefrences={prefrences} />
+			{prefrences?.length !== 0 && <SelectedRatesCard prefrences={prefrences} />}
+
 			<ExistingInventory
 				docs={ratesData?.eligible_booking_document?.docs}
 				loading={ratesLoading}

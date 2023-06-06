@@ -1,10 +1,12 @@
-import { Select, Button } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useState } from 'react';
+
+import EmptyState from '../../../../EmptyState';
 
 import Card from './Card';
 import styles from './styles.module.css';
 
-function RatesCard({ ratesData = [1, 2], setPrefrences, prefrences, prefrence_key }) {
+function RatesCard({ ratesData = [], setPrefrences, prefrences, prefrence_key }) {
 	const [showFullList, setShowFullList] = useState(false);
 	const initialCardCount = 2;
 	const toggleList = () => {
@@ -17,21 +19,8 @@ function RatesCard({ ratesData = [1, 2], setPrefrences, prefrences, prefrence_ke
 			<div className={styles.heading}>
 				{ratesData.type}
 			</div>
-			<div className={styles.select_outer_container}>
-				<div className={styles.select_container}>
-					<Select
-						placeholder="Sort By"
-						size="md"
-					/>
-				</div>
-				<div className={styles.select_container}>
-					<Select
-						placeholder="Filters"
-						size="md"
-					/>
-				</div>
-			</div>
 			<div>
+				{!ratesData?.data?.length && <EmptyState isSmall heading={ratesData.type} /> }
 				{renderedCards?.map((item) => (
 					<Card
 						data={item}
