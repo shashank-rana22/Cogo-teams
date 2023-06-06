@@ -6,6 +6,7 @@ import { useState } from 'react';
 import useFinanceReject from '../../hooks/useFinanceReject';
 import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
 import useGetRefresh from '../../hooks/useGetRefresh';
+import usePostToSage from '../../hooks/usePostToSage';
 
 import FinalPostModal from './FinalPostModal';
 import styles from './styles.module.css';
@@ -16,38 +17,30 @@ type Itemdata = {
 	entityCode?: number
 	daysLeftForAutoIrnGeneration?: string
 	isFinalPosted?:boolean
+	invoiceType?:string
 };
 interface IRNGeneration {
 	itemData?: Itemdata
 	refetch?: Function
 }
-
 const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
-
 const POSTED_STATUS = ['POSTED'];
-
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
-
+const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
-
 function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const [openReject, setOpenReject] = useState(false);
 	const [textValue, setTextValue] = useState('');
-
 	const [finalPostToSageModal, setFinalPostToSageModal] = useState(false);
-
 	const [visible, setVisible] = useState(false);
-
-	const { invoiceStatus = '', entityCode = '', isFinalPosted = false } = itemData || {};
-
+	const { invoiceStatus = '', entityCode = '', isFinalPosted = false, invoiceType = '' } = itemData || {};
 	const { id = '' } = itemData;
-
 	const { financeReject, loading: loadingReject } = useFinanceReject({
 		id,
 		textValue,
 		refetch,
 	});
-
+	const { postToSage, loading:showPostLoading } = usePostToSage(id);
 	const {
 		generateIrn, loading, finalPostFromSage, finalPostLoading, getSageInvoiceData, sageInvoiceData,
 		sageInvoiceLoading,
@@ -55,35 +48,30 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		id,
 		refetch,
 	});
-
 	const { refresh, loadingOnRefresh } = useGetRefresh({
 		id,
 		refetch,
 	});
-
 	const financeRejected = () => {
 		setOpenReject(!openReject);
 	};
-
 	const onChange = (e) => {
 		setTextValue(e);
 	};
 	const { labels } = CogoportEntity[entityCode] || {};
-
 	const { irn_label: IrnLabel } = labels || {};
-
 	const handleFinalpost = () => {
 		setFinalPostToSageModal(true);
 		getSageInvoiceData();
 		setVisible(!visible);
 	};
-
+	const showPost = ['REIMBURSEMENT', 'REIMBURSEMENT_CREDIT_NOTE'].includes(invoiceType);
 	const content = () => (
 		<div>
 			<div
 				className={styles.generate_container}
 			>
-				{INVOICE_STATUS.includes(invoiceStatus) && (
+				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
 					<Button
 						size="sm"
 						disabled={loading}
@@ -107,7 +95,6 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						</Button>
 					</div>
 				)}
-
 				{IRN_FAILED_STATUS.includes(invoiceStatus) && (
 					<div className={styles.button_container}>
 						<Button
@@ -119,7 +106,15 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						</Button>
 					</div>
 				)}
-
+				{(SHOW_POST_TO_SAGE.includes(invoiceStatus) && showPost) && (
+					<Button
+						disabled={showPostLoading}
+						size="sm"
+						onClick={postToSage}
+					>
+						Post to Sage
+					</Button>
+				)}
 				<FinalPostModal
 					finalPostToSageModal={finalPostToSageModal}
 					setFinalPostToSageModal={setFinalPostToSageModal}
@@ -130,7 +125,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 					isFinalPosted={isFinalPosted}
 				/>
 			</div>
-			{INVOICE_STATUS.includes(invoiceStatus) && (
+			{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
 				<div className={styles.button_container}>
 					<Button
 						size="sm"
@@ -148,17 +143,14 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						setOpenReject(false);
 					}}
 				>
-
 					<Modal.Header title="Remarks*" />
 					<Modal.Body>
-
 						<Textarea
 							size="md"
 							value={textValue}
 							onChange={onChange}
 							style={{ height: '100px' }}
 						/>
-
 					</Modal.Body>
 					<Modal.Footer>
 						<div className={styles.button_val}>
@@ -187,11 +179,9 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 			)}
 		</div>
 	);
-
 	const rest = {
 		onClickOutside: () => setVisible(false),
 	};
-
 	return (
 		<Popover
 			placement="left"
@@ -199,15 +189,14 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 			visible={visible}
 			{...rest}
 		>
-
 			<IcMOverflowDot
 				style={{ cursor: 'pointer' }}
 				width="16px"
 				height="16px"
 				onClick={() => setVisible(!visible)}
 			/>
-
 		</Popover>
+
 	);
 }
 
