@@ -4,6 +4,7 @@ import { useState, useEffect } from 'react';
 const useGetRDShipmentList = () => {
 	const [filters, setFilters] = useState({ service: 'air_freight', sort_by: 'created_at_desc' });
 	const apiMapping = {
+		fcl_freight     : 'fcl_freight/list_revenue_desk_shipments',
 		air_customs     : './list_revenue_desk_air_customs_shipments',
 		air_freight     : './list_revenue_desk_air_freight_shipments',
 		ftl_freight     : './list_revenue_desk_ftl_freight_shipments',

@@ -10,15 +10,15 @@ function List({ shipmentList, loading, setShowDetailPage }) {
 			{loading && (loadingArray).map((item) => (
 				<Card loading={loading} key={item} item={item} />
 			))}
-			{!loading && !shipmentList?.length && <EmptyState />}
-			{!loading && (shipmentList || []).map((item) => (
+			{!loading && !shipmentList?.length ? <EmptyState /> : null}
+			{!loading && (shipmentList || []).length ? (shipmentList || []).map((item) => (
 				<Card
 					item={item}
 					key={item}
 					loading={loading}
 					setShowDetailPage={setShowDetailPage}
 				/>
-			))}
+			)) : null}
 		</div>
 	);
 }

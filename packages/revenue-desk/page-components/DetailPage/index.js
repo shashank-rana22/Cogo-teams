@@ -10,8 +10,8 @@ import Card from './Card';
 import ServiceWiseDetails from './ServiceWiseDetails';
 import styles from './styles.module.css';
 
-function DetailPage({ setShowDetailPage, showDetailPage:itemData }) {
-	const { data:servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
+function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
+	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
 
 	const excludedServices = [
 		'fcl_freight_local_service',
@@ -89,6 +89,7 @@ function DetailPage({ setShowDetailPage, showDetailPage:itemData }) {
 					: (
 						<ServiceWiseDetails
 							groupedShowServicesData={groupedShowServicesData}
+							serviceData={servicesData?.list}
 						/>
 					)}
 
