@@ -1,0 +1,80 @@
+{
+	"name": "haulage_freight_service",
+	"routeInfo": {
+		"origin_pickup": "origin_location",
+		"origin_port": "origin_location",
+		"origin_main_port": "",
+		"destination_main_port": "",
+		"destination_port": "destination_location",
+		"destination_drop": "destination_location"
+	},
+	"possibleFullRoute": [
+		{
+			"service_types": ["haulage_freight_service"],
+			"display": "Haulage Freight",
+			"origin": "origin_location",
+			"destination": "destination_location",
+			"iconType": "land",
+			"type": "train"
+		}
+	],
+	"details": [
+		{
+			"label": "Containers Count",
+			"key": "containers_count"
+		},
+		{
+			"label": "Container Size",
+			"key": "container_size"
+		},
+		{
+			"label": "Container Type",
+			"key": "container_type"
+		},
+		{
+			"label": "Commodity",
+			"key": "commodity"
+		},
+		{
+			"key": "cargo_weight_per_container",
+			"label": "Cargo Weight/Cont.",
+			"type": "cargo",
+			"isShowKey":true
+
+		},
+		{
+			"label": "Transportation mode",
+			"key": "transport_mode"
+		},
+		{
+			"key": "refer_humidity",
+			"label": "Reefer Humidity",
+			"type": "percent"
+		},
+		{
+			"label": "Origin Cargo handling type",
+			"key": "origin_cargo_handling_type",
+			"type": "origin_cargo_handling_type"
+		},
+		{
+			"label": "Destination Cargo handling type",
+			"key": "destination_cargo_handling_type",
+			"type": "destination_cargo_handling_type"
+		},
+		{
+			"key": "refer_temperature",
+			"label": "Reefer Temperature",
+			"type": "temperature"
+		},
+		{
+			"key": "refer_vent_setting",
+			"label": "Reefer Ventilation Setting"
+		},
+		{
+			"key": "refer_ventilation",
+			"label": "Reefer Ventilation",
+			"type": "percent"
+		}
+	],
+	"commnets": { "emptyContent": "" }
+}
