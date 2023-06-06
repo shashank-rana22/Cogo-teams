@@ -76,7 +76,7 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 				setValue('additional_resources', false);
 				setValue('upload_file', media_url);
 			} else {
-				chapter_attachments.forEach((item, itemIndex) => {
+				chapter_attachments.filter((item) => item.status === 'active').forEach((item, itemIndex) => {
 					const childKey = `external_link.${itemIndex}`;
 
 					setValue(`${childKey}.name`, item.name);
