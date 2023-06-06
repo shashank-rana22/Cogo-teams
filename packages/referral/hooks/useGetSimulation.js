@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback, useEffect } from 'react';
@@ -28,7 +29,7 @@ const useGetSimulation = ({ type = '', activeTab = '', singleData = EMPTY_OBJECT
 	const getSimulation = useCallback(async () => {
 		const simulationPayload = {
 			event               : activeTab,
-			revenue_currency    : 'INR',
+			revenue_currency    : GLOBAL_CONSTANTS.currency_code.INR,
 			max_levels          : MAX_LEVEL,
 			revenue_start_price : REVENUE_START_PRICE,
 			revenue_end_price   : REVENUE_END_PRICE,

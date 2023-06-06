@@ -1,4 +1,5 @@
 import { Tabs, TabPanel, cl, Placeholder } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
@@ -70,7 +71,7 @@ function SimulationGraphs({ activeTab = '', simulationData = {}, singleData = {}
 			</div>
 			<div className={styles.level_graph}>
 				<div className={styles.levels_header}>
-					{['Levels', 'Payout (INR)'].map((itm) => (
+					{['Levels', `Payout (${GLOBAL_CONSTANTS.currency_code.INR})`].map((itm) => (
 						<div key={itm}>
 							<div className={styles.level_name}>{itm}</div>
 						</div>
