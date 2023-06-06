@@ -14,6 +14,14 @@ import ProfileDetails from './ProfileDetails';
 import SignedDocuments from './SignedDocuments';
 import styles from './styles.module.css';
 
+const TABS_MAPPING = {
+	profile_info     : ProfileDetails,
+	additional_info  : AdditionalDetails,
+	offer_letter     : OfferLetter,
+	Signed_documents : SignedDocuments,
+
+};
+
 function ProfilePage() {
 	const [activeTab, setActiveTab] = useState('profile_info');
 	const [showCtcBreakupModal, setShowCtcBreakupModal] = useState(false);
@@ -39,16 +47,9 @@ function ProfilePage() {
 
 	const { detail = {} } = profileData || {};
 
-	const TABS_MAPPING = {
-		profile_info     : ProfileDetails,
-		additional_info  : AdditionalDetails,
-		offer_letter     : OfferLetter,
-		Signed_documents : SignedDocuments,
-
-	};
-
 	return (
 		<div className={styles.container}>
+
 			<Header
 				detail={detail}
 				loading={loading}

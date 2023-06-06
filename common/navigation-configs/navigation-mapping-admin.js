@@ -2299,7 +2299,7 @@ const navigationMappingAdmin = {
 		title         : 'CHRO CTC Approvals',
 		isSubNavs     : false,
 		module_type   : 'dashboards',
-		main_apis     : [''],
+		main_apis     : [],
 		href          : '/v2/chro',
 		as            : '/v2/chro',
 		possible_apis : apis.chro,

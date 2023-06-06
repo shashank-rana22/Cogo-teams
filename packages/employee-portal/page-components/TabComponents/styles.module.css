@@ -21,7 +21,6 @@
 
 .components {
 	display: flex;
-	flex-direction: row;
 	flex-wrap: wrap;
 	justify-content: center;
 	margin-top: 16px;
@@ -40,7 +39,6 @@
 .arrow_wrapper {
 	bottom: "0%";
 	display: flex;
-	flex-direction: row;
 	align-items: flex-end;
 	justify-content: flex-end;
 	padding-top: 30px;
