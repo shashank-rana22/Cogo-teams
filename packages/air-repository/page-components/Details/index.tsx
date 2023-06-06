@@ -1,5 +1,5 @@
 import { Badge, Button, Popover, Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMEdit, IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
@@ -31,6 +31,9 @@ function Details({
 	const functions = {
 		handleAirline: (singleItem) => (
 			singleItem?.airline?.business_name
+		),
+		handleAirport: (singleItem) => (
+			singleItem?.airport?.display_name
 		),
 		handleMode: (singleItem) => (
 			<Badge
@@ -86,8 +89,10 @@ function Details({
 						{' '}
 						{formatDate({
 							date       : singleItem.updated_at,
-							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yy hh:mm'],
-							formatType : 'date',
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
+							timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+							formatType : 'dateTime',
+							separator  : ' ',
 						})}
 					</span>
 				</div>

@@ -29,8 +29,9 @@ function FilterComponents({
 	isomniChannelAdmin = false,
 	tagOptions = [],
 	showBotMessages = false,
+	viewType,
 }) {
-	const filterControls = useGetControls({ isomniChannelAdmin, tagOptions, showBotMessages });
+	const filterControls = useGetControls({ isomniChannelAdmin, tagOptions, showBotMessages, viewType });
 
 	const defaultValues = getDefaultValues({ filters: appliedFilters, filterControls });
 

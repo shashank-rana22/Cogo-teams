@@ -12,6 +12,7 @@ import { useRef, useEffect } from 'react';
 import CustomFileUploader from '../../../../../common/CustomFileUploader';
 import ReceiveDiv from '../../../../../common/ReceiveDiv';
 import SentDiv from '../../../../../common/SentDiv';
+import { ACCEPT_FILE_MAPPING } from '../../../../../constants';
 import useGetEmojiList from '../../../../../hooks/useGetEmojis';
 import getFileAttributes from '../../../../../utils/getFileAttributes';
 
@@ -29,6 +30,15 @@ function MessageMapping({ conversation_type, ...restProps }) {
 			return <TimeLine {...restProps} />;
 	}
 }
+const getPlaceHolder = (hasPermissionToEdit, canMessageOnBotSession) => {
+	if (canMessageOnBotSession) {
+		return 'This chat is currently in bot session, send a message to talk with customer';
+	}
+	if (hasPermissionToEdit) {
+		return 'Type your message...';
+	}
+	return 'You do not have permission to chat';
+};
 
 function MessageConversations({
 	messagesData = [],
@@ -53,6 +63,7 @@ function MessageConversations({
 	messageLoading = false,
 	formattedData = {},
 	setRaiseTicketModal = () => {},
+	canMessageOnBotSession,
 }) {
 	const messageRef = useRef();
 	const { id = '', channel_type = '', new_user_message_count = 0, user_name = '' } = activeMessageCard;
@@ -269,15 +280,13 @@ function MessageConversations({
 							</div>
 							{(suggestions || []).map((eachSuggestion) => (
 								<div
+									key={eachSuggestion}
 									className={styles.tag_div}
 									role="button"
 									tabIndex={0}
 									onClick={() => {
 										if (hasPermissionToEdit && !messageLoading) {
-											sentQuickSuggestions(
-												eachSuggestion,
-												scrollToBottom,
-											);
+											sentQuickSuggestions(scrollToBottom, eachSuggestion);
 										}
 									}}
 									style={{
@@ -294,11 +303,7 @@ function MessageConversations({
 				)}
 				<textarea
 					rows={4}
-					placeholder={
-						hasPermissionToEdit
-							? 'Type your message...'
-							: 'You do not have typing controls as you are observing this chat'
-					}
+					placeholder={getPlaceHolder(hasPermissionToEdit, canMessageOnBotSession)}
 					className={styles.text_area}
 					value={draftMessage || ''}
 					onChange={(e) => setDraftMessages((p) => ({
@@ -320,6 +325,7 @@ function MessageConversations({
 								handleProgress={handleProgress}
 								showProgress={false}
 								draggable
+								accept={ACCEPT_FILE_MAPPING[channel_type] || ACCEPT_FILE_MAPPING.default}
 								className="file_uploader"
 								uploadIcon={(
 									<IcMAttach
@@ -331,6 +337,7 @@ function MessageConversations({
 										}}
 									/>
 								)}
+								channel={channel_type}
 								onChange={(val) => {
 									setDraftUploadedFiles((prev) => ({
 										...prev,

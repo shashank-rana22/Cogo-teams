@@ -17,6 +17,7 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 		identification_documents = false,
 		personal_information = false,
 	} = personal_details;
+
 	const data = [
 		{
 			name        : 'personal_information',

@@ -1,7 +1,7 @@
 .main {
 	position: relative;
 	width: 812px;
-	height: 1128px;
+	min-height: 1128px;
 	padding: 50px;
 	margin: auto;
 	background-color: #fff;

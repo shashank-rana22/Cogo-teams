@@ -1,7 +1,7 @@
 import FullView from './FullView';
 import styles from './styles.module.css';
 
-function PreviewDocumet({ document_header, height = '200px', width = '200px', preview = false, document_url = '' }) {
+function PreviewDocument({ document_header, height = '200px', width = '200px', preview = false, document_url = '' }) {
 	return (
 		<div className={styles.container}>
 			<div
@@ -14,8 +14,6 @@ function PreviewDocumet({ document_header, height = '200px', width = '200px', pr
 				<object
 					data={document_url}
 					type="application/pdf"
-					// height="200px"
-					// width="200px"
 					style={{ height, width }}
 				>
 					<a href={document_url}>
@@ -42,4 +40,4 @@ function PreviewDocumet({ document_header, height = '200px', width = '200px', pr
 	);
 }
 
-export default PreviewDocumet;
+export default PreviewDocument;

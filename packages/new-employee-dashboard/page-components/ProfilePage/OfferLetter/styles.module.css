@@ -1,0 +1,19 @@
+.container{
+    padding:30px;
+    display:flex;
+    background-color: #ffffff;
+    margin:20px 0px;
+    border-radius: 8px;
+    border: 0.9px solid #FFD601;
+}
+
+.content{
+    padding:20px
+}
+
+.label{
+    font-weight:500;
+    font-size: 13px;
+    font-weight: 600;
+    margin-bottom: 50px;
+}

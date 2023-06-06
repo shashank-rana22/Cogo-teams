@@ -9,6 +9,7 @@ import AdditionalDetails from './AdditionalDetails';
 import Header from './Header';
 import CtcBreakupModal from './Header/CtcBreakupModal';
 import ViewCtcBreakup from './Header/ViewCtcBreakup';
+import OfferLetter from './OfferLetter';
 import ProfileDetails from './ProfileDetails';
 import SignedDocuments from './SignedDocuments';
 import styles from './styles.module.css';
@@ -41,7 +42,9 @@ function ProfilePage() {
 	const TABS_MAPPING = {
 		profile_info     : ProfileDetails,
 		additional_info  : AdditionalDetails,
+		offer_letter     : OfferLetter,
 		Signed_documents : SignedDocuments,
+
 	};
 
 	return (

@@ -13,14 +13,6 @@ function CompanyPolicyDetails() {
 		columns, listLoading, list, showModal, setShowModal, refetchList,
 	} = useCompanyPolicyDetails();
 
-	if ((list || []).length === 0) {
-		return (
-			<div className={styles.container}>
-				<EmptyState emptyText="No Company Policy Added" />
-			</div>
-		);
-	}
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_container}>
@@ -32,11 +24,13 @@ function CompanyPolicyDetails() {
 				</Button>
 			</div>
 
-			<StyledTable
-				columns={columns}
-				data={list}
-				loading={listLoading}
-			/>
+			{(list || []).length > 0 || listLoading ? (
+				<StyledTable
+					columns={columns}
+					data={list}
+					loading={listLoading}
+				/>
+			) : <EmptyState emptyText="No Company Policy Added" />}
 
 			<Modal
 				size="md"
