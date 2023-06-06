@@ -1,9 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { IcMEdit } from '@cogoport/icons-react';
-import { useState, useContext, useEffect, useMemo } from 'react';
+import { useContext, useEffect, useMemo } from 'react';
 
-import EditSchedule from './EditSchedule';
-import { canEditSchedule } from './helpers/canEditSchedule';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
@@ -11,8 +8,6 @@ import TimelineItem from './TimelineItem';
 function Timeline() {
 	const {
 		shipment_data,
-		primary_service,
-		stakeholderConfig,
 		timelineData,
 		timelineLoading: loading,
 		isGettingShipment,
@@ -24,10 +19,6 @@ function Timeline() {
 			getShipmentTimeline();
 		}
 	}, [getShipmentTimeline, shipment_data?.id]);
-
-	const [showEditSchedule, setShowEditSchedule] = useState(false);
-
-	const showEditScheduleIcon = canEditSchedule({ primary_service, stakeholderConfig });
 
 	const filteredTimelineData = (timelineData || []).filter(
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
@@ -63,14 +54,6 @@ function Timeline() {
 					);
 				})}
 			</div>
-
-			{showEditScheduleIcon ? (
-				<IcMEdit onClick={() => setShowEditSchedule((p) => !p)} className={styles.edit_icon} />
-			) : null}
-
-			{showEditSchedule ? (
-				<EditSchedule setShow={setShowEditSchedule} timelineData={timelineData} />
-			) : null}
 		</div>
 	);
 }
