@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -22,7 +22,7 @@ const useGetPieBreakdown = ({ selectedPieData, byEtd, headerFilters }) => {
 	);
 
 	const getPieBreakdown = useCallback(async () => {
-		const { type, sub_type, indexValue } = selectedPieData || {};
+		const { type, sub_type, indexValue, category } = selectedPieData || {};
 
 		const getDate = new Date(Date.parse(indexValue));
 
@@ -37,6 +37,7 @@ const useGetPieBreakdown = ({ selectedPieData, byEtd, headerFilters }) => {
 				params: {
 					type,
 					sub_type,
+					category,
 					as_on_date  : formattedDate,
 					page,
 					page_size   : 10,

@@ -12,12 +12,12 @@ import VendorDetail from './VendorDetails';
 
 function ViewInvoices() {
 	const { query } = useRouter();
-	const { billId, orgId, status, jobNumber } = query || {};
+	const { billId, orgId, status, jobNumber, jobType } = query || {};
 	const [remarksVal, setRemarksVal] = useState({
-		collectionPartyRemark : '',
-		billingPartyRemark    : '',
-		invoiceDetailsRemark  : '',
-		taggingRemark         : '',
+		collectionPartyRemark : null,
+		billingPartyRemark    : null,
+		invoiceDetailsRemark  : null,
+		taggingRemark         : null,
 	});
 	const [overAllRemark, setOverAllRemark] = useState('');
 	const [lineItemsRemarks, setLineItemsRemarks] = useState({});
@@ -66,6 +66,7 @@ function ViewInvoices() {
 				setLineItem={setLineItem}
 				lineItem={lineItem}
 				status={status}
+				jobType={jobType}
 			/>
 		</div>
 	);

@@ -51,7 +51,7 @@ function KamDesk() {
 
 	return (
 		<KamDeskContext.Provider value={contextValues}>
-			{shipmentType ? <RenderDesk /> : null}
+			{shipmentType ? <RenderDesk activeTab={activeTab} /> : null}
 		</KamDeskContext.Provider>
 	);
 }

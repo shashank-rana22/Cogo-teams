@@ -161,6 +161,27 @@ const tabPayload = {
 			completed : { state: 'completed' },
 			cancelled : { state: 'cancelled' },
 		},
+		fcl_cfs: {
+			mark_confirmed: {
+				state           : 'shipment_received',
+				task_attributes : [
+					{
+						task   : 'mark_confirmed',
+						status : 'pending',
+					},
+				],
+			},
+			mark_completed: {
+				task_attributes: [
+					{
+						task   : 'mark_completed',
+						status : 'pending',
+					},
+				],
+			},
+			completed : { state: 'completed' },
+			cancelled : { state: 'cancelled' },
+		},
 		fcl_local: {
 			mark_confirmed: {
 				state           : 'shipment_received',
@@ -452,11 +473,12 @@ const tabPayload = {
 					status : 'pending',
 				},
 			},
-			invoice_pending  : { invoice_status: 'pending' },
-			invoice_reviewed : { invoice_status: 'reviewed' },
-			invoice_approved : { invoice_status: 'approved' },
-			completed        : { state: 'completed' },
-			cancelled        : { state: 'cancelled' },
+			eway_bill_extension : { ewb_expiration: true	},
+			invoice_pending     : { invoice_status: 'pending' },
+			invoice_reviewed    : { invoice_status: 'reviewed' },
+			invoice_approved    : { invoice_status: 'approved' },
+			completed           : { state: 'completed' },
+			cancelled           : { state: 'cancelled' },
 		},
 	},
 

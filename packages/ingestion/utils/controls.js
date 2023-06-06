@@ -1,10 +1,8 @@
-import { PARTNER_IDS } from '@cogoport/constants/role_ids';
-
-const { INDIA_PARTNER_ID:indiaId, VIETNAM_PARTNER_ID:vietnamId } = PARTNER_IDS;
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const PARTNER_OPTIONS = [
-	{ label: 'Cogoport India', value: indiaId },
-	{ label: 'Cogoport Vietnam', value: vietnamId },
+	{ label: 'Cogoport India', value: GLOBAL_CONSTANTS.country_entity_ids.IN },
+	{ label: 'Cogoport Vietnam', value: GLOBAL_CONSTANTS.country_entity_ids.VN },
 ];
 
 const controls = [

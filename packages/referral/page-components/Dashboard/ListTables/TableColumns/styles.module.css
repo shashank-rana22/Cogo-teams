@@ -1,0 +1,109 @@
+.popover_content {
+	:global {
+		.tippy-content {
+			padding: 0 !important;
+		}
+	}
+}
+
+.dots_icon {
+	width: 16px;
+	height: 16px;
+	cursor: pointer;
+}
+
+.user_name {
+	width: 130px;
+	overflow: hidden;
+	font-size: 13px;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.user_status {
+	font-size: 12px;
+	font-weight: 600;
+}
+
+.organisation_div {
+	position: relative;
+	display: flex;
+	align-items: center;
+}
+
+.organisation_name {
+	width: 80px;
+	overflow: hidden;
+	color: #4f4f4f;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.organisation_list {
+	display: flex;
+	flex-direction: column;
+	align-items: flex-start;
+}
+
+.more_count {
+	display: flex;
+	align-items: center;
+	color: #4f4f4f;
+}
+
+.user_type {
+	font-size: 13px;
+	font-weight: 600px;
+}
+
+.single_org {
+	padding: 4px;
+	margin-top: 5px;
+	font-size: 10px;
+	background: #f3ab7b;
+	border-radius: 4px;
+}
+
+.invented_by {
+	display: flex;
+	flex-direction: column;
+	align-items: start;
+	width: fit-content;
+}
+
+.invited_date {
+	font-size: 12px;
+	color: #bdbdbd;
+}
+
+.node_container {
+	display: flex;
+	align-items: center;
+}
+
+.contact_details {
+	display: flex;
+	align-items: center;
+}
+
+.each_item {
+	display: flex;
+	flex-direction: column;
+}
+
+.contact_icon {
+	width: 16px;
+	height: 16px;
+	margin-top: 5px;
+}
+
+.action_type {
+	margin-left: 8px;
+	font-size: 14px;
+	color: #4f4f4f;
+}
+
+.tooltip_content {
+	width: fit-content;
+}

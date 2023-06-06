@@ -29,19 +29,24 @@ export default {
 		},
 	},
 	regex: {
-		TAX           : /^[0-3]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
-		MOBILE_NUMBER : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL         : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		PAN              : '',
+		GST              : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL            : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
 	uuid: {
-		tech_super_admin_id         : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
-		super_admin_id              : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
-		admin_id                    : 'ebafce31-75ef-4865-9060-775574e9606f',
-		parent_entity_id            : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
-		cogo_demo_account_shipper   : ['302bdc56-e807-4c71-a27c-92f83640f140'],
-		spot_booking_shipping_lines : [
+		tech_super_admin_id              : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
+		super_admin_id                   : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
+		admin_id                         : 'ebafce31-75ef-4865-9060-775574e9606f',
+		parent_entity_id                 : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
+		cogoverse_shipment_specialist_id : '1b1c5648-ddf4-4472-b177-c11a53a505aa',
+		cogoverse_admin_id               : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
+		cogoverse_user_id                : 'a217c304-5296-4f1d-948c-814fa9ed9cdb',
+		cogo_demo_account_shipper        : ['302bdc56-e807-4c71-a27c-92f83640f140'],
+		spot_booking_shipping_lines      : [
 			'c3649537-0c4b-4614-b313-98540cffcf40',
 			'b2f92d49-6180-43bd-93a5-4d64f5819a9b',
 			'fb1aa2f1-d136-4f26-ad8f-2e1545cc772a',
@@ -85,11 +90,13 @@ export default {
 			'eab24509-187e-42b4-ae51-b77c74d82ad9', // Overseas CP KAM
 			'a5c83696-0248-4846-a558-1a054360f130', // Overseas CP KAM Manager
 			'650e1fe4-2e34-43c1-abfe-ce0a443aa4a6', // Prod_KAM Trasnport Sales
+			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse KAM
+			'6bd7a08c-974c-4dd0-b163-d4c31e794fba', // Vietnam KAM
+			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // Shipment Specialist
+			'1d75bd83-710c-4b63-b1a6-f0eb7f16c25a', // Vietnam KAM
 			'97649798-385e-42e7-b766-274fe1f04438', // CPKAM-Vietnam
 			'60b1593a-ab3d-4541-9746-d486f6e32a71', // Sales Owner
 			'579c3044-8daf-4ec1-bedf-47155deb0fa1', // SME KAM - Vietnam
-			'f041b303-3239-42c5-a386-03e787900bcd', // Cogoverse KAM
-			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // Cogoverse Shipment Specialist
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
@@ -183,7 +190,26 @@ export default {
 		prod_coe_finance_head : '7b1fc916-6984-4179-aee5-c23f9871085d',
 		finance_head_id       : 'a8a175c5-fec2-4c08-8e6b-0fb5c7951c86',
 		so_1_manager          : '17885538-e746-4650-a5bc-7d4d81247c7d',
+		cogoverse_kam         : 'f041b303-3239-42c5-a386-03e787900bcd',
+		cogoverse_admin       : '84dcd923-89cb-4bc6-baf7-7f23d93d6951',
 		so_2_manager          : '1665784f-6e58-4299-8a33-4b7487f61188',
+		cogo_one_admin_ids    : [
+			'381b9d1d-e005-4cc0-9844-a5f1636e71b1', // Tech SuperAdmin
+			'84dcd923-89cb-4bc6-baf7-7f23d93d6951', // Cogoverse Admin
+			'5de782f6-f59d-41fc-84f4-8425dc1fa670', // SuperAdmin
+		],
+		cogo_one_shipment_agent_ids: [
+			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
+		],
+		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		fortigo_network_ids : [
+			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+		],
+		fortigo_agencies_mapping: {
+			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+		},
 	},
 	options: {
 		registration_types: [
@@ -297,6 +323,16 @@ export default {
 				value : 'Close_body_18_ton',
 			},
 		],
+		tax_types: [
+			{
+				label : 'ECN',
+				value : 'ecn',
+			},
+			{
+				label : 'Tax',
+				value : 'tax',
+			},
+		],
 		invoice_status: [
 			{ label: 'Draft', value: 'DRAFT' },
 			{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },
@@ -330,5 +366,41 @@ export default {
 				value : 'open_side',
 			},
 		],
+	},
+	navigations: {
+		supply_dashboard: {
+			rfq_enquiries: {
+				tabs: [
+					'live_bookings',
+					'trade_enquiry',
+					'disliked_rates',
+					'manage_forecast',
+					'rfq_enquiries',
+					'rates_sheets',
+				],
+			},
+		},
+	},
+	others: {
+		registration_number: {
+			label      : 'VAT',
+			pattern    : /^[0-3]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+			max_length : 15,
+		},
+
+		pan_number: {
+			label   : 'PAN',
+			pattern : undefined,
+		},
+
+		economic_zone: {
+			label: 'Non-Tariff Zone',
+		},
+
+		navigations: {
+			onboard_vendor: {
+				validate_registration: false,
+			},
+		},
 	},
 };

@@ -1,8 +1,8 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useContext } from 'react';
 
-import controlConfig from '../../../configs/CONTROLS_CONFIG.json';
-import tabsConfig from '../../../configs/TAB_CONFIG.json';
+import controlConfig from '../../../configs/FCL/CONTROLS_CONFIG.json';
+import tabsConfig from '../../../configs/FCL/TAB_CONFIG.json';
 import DocumentDeskContext from '../../../context/DocumentDeskContext';
 
 function StepperTabs() {
@@ -24,6 +24,7 @@ function StepperTabs() {
 		<Tabs themeType="primary" onChange={onStepperTabChange} activeTab={stepperTab}>
 			{controlConfig.stepper_tabs.map((tab) => (
 				<TabPanel
+					key={tab.value}
 					title={tab.label}
 					name={tab.value}
 				/>
