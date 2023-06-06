@@ -17,6 +17,7 @@ const DocumentHoldDetails = dynamic(() => import('../../common/DocumentHoldDetai
 const TAB_MAPPING = {
 	overview  : dynamic(() => import('../../common/Overview'), { ssr: false }),
 	tasks     : dynamic(() => import('../../common/Tasks'), { ssr: false }),
+	sales     : dynamic(() => import('../../common/SalesInvoice'), { ssr: false }),
 	purchase  : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
 	documents : dynamic(() => import('../../common/Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
