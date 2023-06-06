@@ -83,12 +83,26 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 	const { redirect_chapter_details = {} } = finalData;
 
 	useEffect(() => {
-		if (!isEmpty(redirect_chapter_details) && viewType !== 'preview') {
-			const values = getIndex({ redirect_chapter_details, course_modules: finalData.course_modules });
+		if (
+			!isEmpty(redirect_chapter_details)
+			&& viewType !== 'preview'
+			&& !(moduleIndex || subModuleIndex || chapterIndex)
+		) {
+			const values = getIndex({
+				redirect_chapter_details,
+				course_modules: finalData.course_modules,
+			});
 
 			setIndexes(values);
 		}
-	}, [finalData, redirect_chapter_details, viewType]);
+	}, [
+		chapterIndex,
+		finalData,
+		moduleIndex,
+		redirect_chapter_details,
+		subModuleIndex,
+		viewType,
+	]);
 
 	return {
 		finalData,
