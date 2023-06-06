@@ -1,25 +1,15 @@
 import { Checkbox } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMProfile } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
+import ServiceStats from '../../../../../../common/ServiceStats';
 import { SERVICE_MAPPING } from '../../../../../../constants';
 import { getFormattedDuration } from '../../../../../../utils/getFormattedDuration';
 
 import styles from './styles.module.css';
-
-const priceFormating = (price, currency) => formatAmount({
-	amount  : price,
-	currency,
-	options : {
-		style                 : 'currency',
-		currencyDisplay       : 'code',
-		maximumFractionDigits : 0,
-	},
-});
 
 function Card({ item, handleCheck, checkedItems }) {
 	const { stats = {} } = item;
@@ -59,10 +49,12 @@ function Card({ item, handleCheck, checkedItems }) {
 							item?.total_port_pair ? `${item?.total_port_pair} Port Pairs ` : null
 						}
 
-						{
+						<div className={styles.requested}>
+							{
 							item?.requested_for_approval ? `: ${item?.requested_for_approval}
 							Requested for Approval` : null
 						}
+						</div>
 					</div>
 					{item?.importer_exporter?.sub_type
 						&& <div className={styles.primary_tag}>{startCase(item?.importer_exporter?.sub_type)}</div>}
@@ -112,35 +104,7 @@ function Card({ item, handleCheck, checkedItems }) {
 			</div>
 
 			<div className={styles.revenue_details}>
-				<div className={styles.figures}>
-					<div className={styles.field}>
-						<div className={styles.label}>Promised Con Revenue</div>
-						<div className={styles.value}>
-							{stats?.promised_consolidated_revenue
-								? priceFormating(
-									stats?.promised_consolidated_revenue,
-									stats?.promised_consolidated_revenue_currency,
-								)
-								: '-'}
-
-						</div>
-
-					</div>
-					<div className={styles.field}>
-						<div className={styles.label}>Promised Con Profitability</div>
-						<div className={styles.value}>
-							{typeof stats?.promised_consolidated_profitability === 'number'
-								? `${stats?.promised_consolidated_profitability?.toFixed(2)}%` : '-'}
-
-						</div>
-
-					</div>
-					<div className={styles.field}>
-						<div className={styles.label}>Live Contracts of Organization</div>
-						<div className={styles.value}>{item?.live_contracts}</div>
-
-					</div>
-				</div>
+				<ServiceStats data={stats} type="details" />
 				{services ? (
 					<div className={styles.services}>
 						{(services || []).map((val) => (

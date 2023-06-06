@@ -35,12 +35,15 @@ const mapping = {
 			</span>
 		);
 	},
+	live_contracts({ data, item }) {
+		return data?.[item.key];
+	},
 	default() {
 		return '-';
 	},
 };
 
-function RenderItem({ item = {}, data = [] }) {
+function RenderItem({ item = {}, data = {} }) {
 	const key = item.key in mapping ? item.key : 'default';
 	return mapping[key]?.({ data, item });
 }

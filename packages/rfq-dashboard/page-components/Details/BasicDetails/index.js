@@ -10,8 +10,9 @@ import styles from './styles.module.css';
 function BasicDetails({ data = {}, details_loading }) {
 	const detail = data.list?.[0];
 	const {
-		importer_exporter, serial_id, sales_agent, stats, total_port_pair, requested_for_approval,
+		importer_exporter, serial_id, sales_agent, stats, total_port_pair, requested_for_approval, live_contracts,
 	} = detail || {};
+
 	if (details_loading) return <Loader />;
 
 	if (isEmpty(detail)) return <Empty />;
@@ -71,7 +72,7 @@ function BasicDetails({ data = {}, details_loading }) {
 
 			</div>
 
-			<ServiceStats data={stats} />
+			<ServiceStats data={stats} live_contracts={live_contracts} type="basic_details" />
 		</div>
 	);
 }

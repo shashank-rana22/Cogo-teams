@@ -42,7 +42,7 @@ function PortsCard(props) {
 									<CommodityMapping commodity_array={commodity_array} />
 								</div>
 								<div className={styles.service_stats}>
-									<ServiceStats data={stats} source="ports-card" />
+									<ServiceStats data={stats} source="ports-card" type="card" />
 								</div>
 								<div className={styles.price_fright_ctr_section}>
 									<PriceFreightCtr

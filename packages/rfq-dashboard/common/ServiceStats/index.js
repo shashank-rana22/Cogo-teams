@@ -1,11 +1,13 @@
 import { cl } from '@cogoport/components';
 
-import { STATS_MAPPING } from '../../configurations/stats-mapping';
+import { statFn } from '../../configurations/stats-mapping';
 
 import RenderItem from './RenderItem';
 import styles from './styles.module.css';
 
-function ServiceStats({ data = [], source = '' }) {
+function ServiceStats({ data = {}, source = '', type = 'basic_details', live_contracts = '' }) {
+	const STATS_MAPPING = statFn({ type: type === 'basic_details' ? 'live_contracts' : 'utilization' });
+
 	return (
 		<div className={cl`${styles.revenue_profitability_utilisation_section} 
         ${(source
@@ -15,7 +17,10 @@ function ServiceStats({ data = [], source = '' }) {
 				<div key={key}>
 					<div className={styles.revenyue_profitability_utilization_name}>{STATS_MAPPING[key].label}</div>
 					<div className={styles.stats_value}>
-						<RenderItem item={STATS_MAPPING[key]} data={data} />
+						<RenderItem
+							item={STATS_MAPPING[key]}
+							data={type === 'basic_details' ? { ...data, live_contracts } : data}
+						/>
 					</div>
 				</div>
 			))}
