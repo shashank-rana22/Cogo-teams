@@ -172,7 +172,7 @@ const apis = [
 	{
 		api          : 'list_revenue_desk_shipments',
 		access_type  : 'private',
-		service_name : 'booking',
+		service_name : 'bookings',
 	},
 ];
 

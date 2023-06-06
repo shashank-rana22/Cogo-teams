@@ -1,3 +1,4 @@
+import { Select } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
 import getSupplierPrefrencePayload from '../../../helper/getSupplierPreferencePayload';
@@ -8,8 +9,7 @@ import RatesCard from './RatesCard';
 import SelectedRatesCard from './SelectedRatesCard';
 
 function SingleService({
-	activeTab,
-	groupedShowServicesData,
+	groupedServicesData,
 	supplierPayload,
 	setSupplierPayload,
 	inventory,
@@ -17,7 +17,7 @@ function SingleService({
 }) {
 	const [prefrences, setPrefrences] = useState([]);
 	const [existingInventory, setExistingInventory] = useState([]);
-	const singleServiceData = groupedShowServicesData[activeTab][0];
+	const singleServiceData = groupedServicesData[0];
 	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({ singleServiceData });
 
 	const rateCardObj = [
