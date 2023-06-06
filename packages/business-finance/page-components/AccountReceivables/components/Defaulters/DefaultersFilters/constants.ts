@@ -24,8 +24,6 @@ export const INVOICE_STATUSES = [
 	{ label: 'Requested', value: 'REQUESTED' },
 ];
 
-export const VN_ENTITIES = [{ label: '501 Cogoport Vietnam', value: '501' }];
-
 export const VN_INVOICE_STATUSES = [
 	{ label: 'Draft', value: 'DRAFT' },
 	{ label: 'Finance Rejected', value: 'FINANCE_REJECTED' },

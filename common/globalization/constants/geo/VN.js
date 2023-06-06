@@ -357,6 +357,11 @@ export default {
 				value : 'open_side',
 			},
 		],
+		vn_entities: [
+			{
+				label: '501 Cogoport Vietnam', value: '501',
+			},
+		],
 	},
 	navigations: {
 		supply_dashboard: {

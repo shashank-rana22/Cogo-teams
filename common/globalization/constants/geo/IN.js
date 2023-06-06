@@ -396,6 +396,7 @@ export default {
 				value : 'open_side',
 			},
 		],
+		vn_entities: [],
 	},
 	navigations: {
 		supply_dashboard: {

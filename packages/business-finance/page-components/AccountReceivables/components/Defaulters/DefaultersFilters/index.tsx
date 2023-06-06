@@ -1,5 +1,4 @@
 import { Button, Popover, Input } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMFilter, IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -44,13 +43,7 @@ function DefaultersFilters({ globalFilters, setGlobalFilters, isClear, clearFilt
 	const { general } = useSelector((state) => state || {});
 	const partnerIds = general?.query?.partner_id;
 
-	const control = [
-		...defaultersControls({ globalFilters })[
-			Object.keys(GLOBAL_CONSTANTS.country_entity_ids).find(
-				(key) => GLOBAL_CONSTANTS.country_entity_ids[key] === partnerIds,
-			)
-		],
-	];
+	const control = [...defaultersControls({ globalFilters, partnerIds })];
 
 	const popoverContent = () => (
 		<PopoverFilters
