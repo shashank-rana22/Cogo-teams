@@ -1,7 +1,7 @@
 const getFormattedData = (simulationData) => {
 	let formattedData = {};
 
-	Object.keys(simulationData).forEach((itm) => {
+	Object.keys(simulationData || {}).forEach((itm) => {
 		const value = simulationData?.[itm];
 
 		Object.keys(value).forEach((newItm) => {

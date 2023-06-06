@@ -1,5 +1,6 @@
 import { cl, Placeholder } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
@@ -19,7 +20,7 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 
 	const levelData = data?.data?.detail;
 
-	const totalPayouts = singleData?.item?.label;
+	const totalPayouts = singleData?.cell?.label;
 
 	const checkLevelEmptyState = isEmpty(levelData);
 
@@ -66,9 +67,16 @@ function LevelPayouts({ singleData = {}, activeTab = '' }) {
 				<div className={styles.total_payouts}>
 					Total Payout:
 					<div className={styles.amount}>
-						{currencyCode}
-						{' '}
-						{totalPayouts}
+						{formatAmount({
+							amount   : totalPayouts,
+							currency : currencyCode,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+
+							},
+						})}
+
 					</div>
 				</div>
 			)}

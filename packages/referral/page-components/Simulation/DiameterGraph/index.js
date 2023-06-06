@@ -3,6 +3,7 @@ import { cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
 
 import getFormattedData from '../../../utils/getFormattedData';
 import { handleValues } from '../../../utils/handleValue';
@@ -13,28 +14,59 @@ function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}
 	const geo = getGeoConstants();
 	const currencyCode = geo.country.currency.code;
 
-	const formattedData = getFormattedData(simulationData);
+	const [formattedArray, setFormattedArray] = useState([]);
 
-	const mapData = (data) => {
-		const details = Object.entries(data).map(([key, value]) => ({
-			id   : key,
-			data : Object.entries(value).map(([childKey, childValue]) => ({
-				x     : handleValues(childKey),
-				y     : childValue,
-				color : '#fff',
-			})),
+	useEffect(() => {
+		const formattedData = getFormattedData(simulationData);
 
-		}));
+		const mapData = (data) => {
+			const details = Object.entries(data).map(([key, value]) => ({
+				id   : key,
+				data : Object.entries(value).map(([childKey, childValue]) => ({
+					x     : handleValues(childKey),
+					y     : childValue,
+					color : '#FFFFFF',
 
-		return details;
+				})),
+
+			}));
+
+			return details;
+		};
+
+		const finalData = mapData(formattedData);
+
+		setFormattedArray(finalData);
+	}, [simulationData]);
+
+	const handleCellClick = (cell) => {
+		setSingleData({ cell });
+		const updatedArray = (formattedArray || []).map((item) => {
+			if (item.id === cell.serieId) {
+				const updatedData = item.data.map((dataItem) => {
+					if (dataItem.x === cell.data.x) {
+						if (dataItem.color === '#FFFFFF') {
+							return { ...dataItem, color: '#FEF199' };
+						}
+						return dataItem;
+					}
+					return { ...dataItem, color: '#FFFFFF' };
+				});
+				return { ...item, data: updatedData };
+			}
+
+			return item;
+		});
+
+		setFormattedArray(updatedArray);
 	};
 
-	const finalData = mapData(formattedData);
+	const data = formattedArray.slice().reverse();
 
 	return (
 		<div className={styles.container}>
 			<ResponsiveHeatMap
-				data={finalData.reverse()}
+				data={data}
 				margin={{ top: 30, right: 20, bottom: 80, left: 70 }}
 				valueFormat=">-.2s"
 				xOuterPadding={0.05}
@@ -44,7 +76,7 @@ function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}
 					tickSize       : 0,
 					tickPadding    : 6,
 					tickRotation   : 0,
-					legend         : `${startCase(activeTab)} Revenue (${currencyCode}`,
+					legend         : `${startCase(activeTab)} Revenue (${currencyCode})`,
 					legendPosition : 'start',
 					legendOffset   : 34,
 				}}
@@ -61,7 +93,7 @@ function MyResponsiveScatterPlot({ setSingleData = () => {}, simulationData = {}
 				inactiveOpacity={0.8}
 				borderWidth={1}
 				borderColor={{ theme: 'grid.line.stroke' }}
-				onClick={(item) => setSingleData({ item })}
+				onClick={(item) => handleCellClick(item)}
 			/>
 			<div className={styles.direction_container}>
 				<div className={cl`${styles.arrow} ${styles.right_arrow}`}>

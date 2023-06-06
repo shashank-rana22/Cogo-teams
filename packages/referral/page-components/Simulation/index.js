@@ -1,59 +1,11 @@
-import { Tabs, TabPanel, cl, Placeholder } from '@cogoport/components';
+import { Tabs, TabPanel } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
-import { NETWORK_EMPTY_STATE } from '../../constants';
 import useGetSimulation from '../../hooks/useGetSimulation';
 
-import MyResponsiveScatterPlot from './DiameterGraph';
-import LevelPayouts from './LevelPayouts';
+import ReturnComponent from './ReturnComponent';
 import styles from './styles.module.css';
-
-const emptyState = false;
-
-function ReturnComponent({
-	activeTab = '',
-	type = '', singleData = {}, setSingleData = () => {}, simulationData = {}, loading,
-}) {
-	const renderCom = {
-		level   : <LevelPayouts singleData={singleData} activeTab={activeTab} />,
-		revenue : <MyResponsiveScatterPlot
-			singleData={singleData}
-			setSingleData={setSingleData}
-			simulationData={simulationData}
-			activeTab={activeTab}
-		/>,
-
-	};
-	if (loading) {
-		return (
-			<div>
-				<div className={styles.networks_chart}>
-					{[...Array(type === 'level' ? 14 : 15).keys()].map((itm) => (
-						<Placeholder
-							className={styles.networks_skeleton}
-							key={itm}
-						/>
-					))}
-				</div>
-			</div>
-		);
-	}
-	if (emptyState) {
-		return (
-			<div className={cl`${styles.empty_state} `}>
-				<Image
-					src={NETWORK_EMPTY_STATE}
-					alt="empty-state"
-					width={150}
-					height={150}
-				/>
-			</div>
-		);
-	}
-	return renderCom[type];
-}
 
 function SimulationGraphs({ activeTab = '', simulationData = {}, singleData = {}, setSingleData = () => {}, loading }) {
 	const geo = getGeoConstants();

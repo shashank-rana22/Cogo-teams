@@ -14,7 +14,7 @@ const useGetSimulation = ({ type = '', activeTab = '', singleData = EMPTY_OBJECT
 	const currencyCode = geo.country.currency.code;
 	const emptyCheck = !isEmpty(singleData);
 
-	const { item = {} } = singleData;
+	const { cell: item = {} } = singleData;
 	const { serieId = '' } = item;
 
 	const selectedRevenue = getSimulationLevelRevenue(item?.data?.x);
