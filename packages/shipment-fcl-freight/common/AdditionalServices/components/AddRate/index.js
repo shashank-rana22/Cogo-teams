@@ -139,8 +139,6 @@ function AddRate({
 			) : null}
 
 			<RenderAddRateForm
-				handleSubmit={handleSubmit}
-				onSubmit={onAddRate}
 				control={control}
 				errors={errors}
 				serviceData={item}
@@ -154,7 +152,7 @@ function AddRate({
 				status={status}
 				updateResponse={updateResponse}
 				loading={loading || updateResponse.loading}
-				onCancel={() => onCancel()}
+				onCancel={onCancel}
 				setAddSellPrice={setAddSellPrice}
 				setSecondStep={setSecondStep}
 			/>
