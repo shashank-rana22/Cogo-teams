@@ -8,7 +8,7 @@ import Card from '../Card';
 
 import styles from './styles.module.css';
 
-export default function ShipmentList({ data = {}, loading = false }) {
+export default function ShipmentList({ data = {}, loading = false, activeTab = '' }) {
 	const { filters, setFilters } = useContext(KamDeskContext);
 
 	const { list = [], page, total_count, page_limit } = data || {};
@@ -31,7 +31,7 @@ export default function ShipmentList({ data = {}, loading = false }) {
 			<>
 				{renderPagination}
 
-				{list?.map((item) => <Card data={item} key={item?.id} />)}
+				{list?.map((item) => <Card data={item} key={item?.id} activeTab={activeTab} />)}
 
 				{renderPagination}
 			</>

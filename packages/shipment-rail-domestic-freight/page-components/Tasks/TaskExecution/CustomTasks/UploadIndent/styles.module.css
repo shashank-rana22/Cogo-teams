@@ -1,0 +1,25 @@
+.container {
+	padding-bottom: 10px;
+
+	:global {
+		.ui_modal_scroll .ui_modal_body_container {
+			min-height: 100vh !important;
+		}
+	}
+}
+
+.generate_button {
+	margin: auto 10px 10px;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	padding-bottom: 8px;
+
+	:global {
+		.ui_button_container {
+			margin-right: 8px;
+		}
+	}
+}

@@ -10,7 +10,7 @@ import useListKamDeskSurfaceShipments from '../../hooks/useListKamDeskSurfaceShi
 import ShipmentList from './ShipmentList';
 import styles from './styles.module.css';
 
-function Surface() {
+function Surface({ activeTab = '' }) {
 	const { data, loading } = useListKamDeskSurfaceShipments();
 
 	return (
@@ -39,6 +39,7 @@ function Surface() {
 					<ShipmentList
 						data={data}
 						loading={loading}
+						activeTab={activeTab}
 					/>
 				)}
 		</div>
