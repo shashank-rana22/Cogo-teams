@@ -4,6 +4,7 @@ import { IcMPortArrow } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import CargoDetails from './CargoDetails';
 import ShipmentTimline from './ShipmentTimeline';
 import styles from './styles.module.css';
 
@@ -12,9 +13,11 @@ const MAX_LENGTH = 20;
 function CardList({ itemData }) {
 	const {
 		serial_id = '', origin_port = {}, destination_port = {},
-		commodity = '', cargo_value_currency, cargo_value, trade_type, reason = [],
+		commodity = '', cargo_value_currency, cargo_value, trade_type,
+		reason = [], cargo_details = [], importer_exporter,
 	} = itemData || {};
 	const { display_name = '', port_code = '' } = origin_port || {};
+	const { business_name } = importer_exporter || {};
 	const {
 		port_code:destination_port_code, display_name:destination_port_display_name,
 	} = destination_port || {};
@@ -34,7 +37,7 @@ function CardList({ itemData }) {
 		return content;
 	};
 	return (
-		<div style={{ marginTop: '16px' }}>
+		<div className={styles.main_div}>
 			<div className={styles.div_container}>
 				<div className={styles.trade}>
 					{startCase(trade_type)}
@@ -97,9 +100,21 @@ function CardList({ itemData }) {
 							</div>
 							<div className={styles.commodity_text}>
 								Cargo Value :
-								{getFormattedPrice(cargo_value, cargo_value_currency)}
+								{getFormattedPrice(cargo_value, cargo_value_currency) || ' -'}
 
 							</div>
+						</div>
+					</div>
+				</div>
+				<div>
+					<div className={styles.hr} />
+					<div className={styles.cargo_container}>
+						<div className={styles.bottom_header}>
+							{business_name}
+						</div>
+						<div className={styles.bottom_vr} />
+						<div>
+							<CargoDetails cargo_details={cargo_details} />
 						</div>
 					</div>
 				</div>

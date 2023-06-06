@@ -33,6 +33,7 @@ const useGetListRiskProne = ({ activeTab }) => {
 							destination_port_id : destinationValue || undefined,
 							risk_sub_reason     : reason,
 							q                   : query || undefined,
+							hs_code             : hsCode,
 						},
 						risk_type          : activeTab,
 						sort_by            : 'created_at',
@@ -40,7 +41,6 @@ const useGetListRiskProne = ({ activeTab }) => {
 						additional_methods : ['pagination'],
 						page_limit         : 10,
 						page               : pageIndex,
-						hs_code            : hsCode,
 					},
 				});
 			} catch (err) {

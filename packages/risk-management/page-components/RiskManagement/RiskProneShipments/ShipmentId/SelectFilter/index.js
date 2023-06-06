@@ -1,33 +1,13 @@
 import { Select } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { optionsMap } from './constants';
 import styles from './styles.module.css';
 
-const OPTIONS = [
-	// {
-	// 	label : 'Customer Expertise',
-	// 	value : 'customer_expertise',
-	// },
-	// {
-	// 	label : 'Trade Expertise',
-	// 	value : 'trade_expertise',
-	// },
-	// {
-	// 	label : 'Commodity Expertise',
-	// 	value : 'commodity_expertise',
-	// },
-	// {
-	// 	label : 'Misc Expertise',
-	// 	value : 'miscellaneous',
-	// },
-];
-
 function SelectFilter({ filters, setFilters, activeTab }) {
 	const OPTION = optionsMap[activeTab] || [];
 	const { originValue, destinationValue, reason, hsCode } = filters || {};
-	const [cargoValue, setCargoValue] = useState('');
 
 	return (
 		<div className={styles.container}>
@@ -75,35 +55,8 @@ function SelectFilter({ filters, setFilters, activeTab }) {
 						}}
 					/>
 				</div>
-
-				<div className={styles.select}>
-					<Select
-						size="sm"
-						isClearable={false}
-						placeholder="Cargo Value"
-						value={cargoValue}
-						options={OPTIONS}
-						onChange={(value) => (
-							setCargoValue(value)
-						)}
-						className={styles.dropdown}
-					/>
-				</div>
 			</div>
 			<div className={styles.sub_container}>
-				{/* <div className={styles.select}>
-					<Select
-						size="sm"
-						isClearable={false}
-						placeholder="Potential Charges"
-						value={cargoValue}
-						options={OPTIONS}
-						onChange={(value) => (
-							setCargoValue(value)
-						)}
-						className={styles.dropdown}
-					/>
-				</div> */}
 				<div className={styles.select}>
 					<Select
 						size="sm"
