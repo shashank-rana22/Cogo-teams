@@ -3,9 +3,10 @@ import { useState } from 'react';
 import PriorityNumber from '../../../RatesCard/Card/PriorityNumber';
 
 import getRows from './getRows';
+import styles from './styles.module.css';
 
 const columns = [
-	'Shipping Line',
+	'Shopping Line',
 	'Total Containers',
 	'Total Buy Rate',
 	'BN Expiry Date',
@@ -28,7 +29,6 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 			details,
 		}).rows,
 	};
-
 	const [showAll, setShowAll] = useState(false);
 
 	const currentData = rowKeyMapping[key];
@@ -46,7 +46,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 		if (istype === 'other') {
 			const foundRow = (rowKeyMapping[key] || []).find((obj) => obj.id === id);
 			if (foundRow) {
-				ids = [...foundRow?.allid];
+				ids = [...foundRow.allid];
 			}
 		} else {
 			ids = [id];
@@ -93,58 +93,57 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 
 	const SingleRender = (currentDataRows || []).map((element) => (
 		<div
+			className={styles.tr}
 			style={{ cursor: 'pointer' }}
 			id={element?.id}
 			key={element?.id}
 			role="presentation"
 			onClick={() => handlePreference(element?.id, key)}
 		>
-			<div>
+			<div className={styles.td}>
 				<PriorityNumber data={preferences} id={element?.id} showPriority={false} />
 			</div>
 
 			{(element?.rowData || []).map((value) => (
-				<div>{showData(value)}</div>
+				<div className={styles.td} key={value}>{showData(value)}</div>
 			))}
 		</div>
 	));
 
 	const otherRenders = (currentDataRows || []).map((element) => (
 		<div
+			className={styles.tr}
 			style={{ cursor: 'pointer' }}
 			id={element?.id}
 			key={element?.id}
 			role="presentation"
 			onClick={() => handlePreference(element?.id, key)}
 		>
-			<div>
+			<div className={styles.select_container}>
 				<PriorityNumber data={preferences} id={element?.id} showPriority={false} />
 			</div>
 
 			{element?.childrens?.[0].map((childval) => (
-				<div>{showData(childval)}</div>
+				<div className={styles.td} key={childval}>{showData(childval)}</div>
 			))}
 		</div>
 	));
-
 	return (
-		<div>
+		<div className={styles.big_container}>
 			{currentDataRows?.length ? (
-				<div>
-					<div>{type}</div>
-
-					<div>
-						<div>
-							<div>{'   '}</div>
+				<div className={styles.ratescontainer}>
+					<div className={styles.description}>{type[0]}</div>
+					<div className={styles.table}>
+						<div className={styles.tr}>
+							<div className={styles.select_heading}>{'   '}</div>
 							{columns.map((label) => (
-								<div key={label}>{label}</div>
+								<div className={styles.th} key={label}>{label}</div>
 							))}
 						</div>
-
 						{renderSingle ? SingleRender : otherRenders}
 					</div>
 
-					<div role="presentation" onClick={() => setShowAll(!showAll)}>
+					<div className={styles.addmore} role="presentation" onClick={() => setShowAll(!showAll)}>
 						{currentData?.length > min && !expanded ? (
 							<div>{showAll && currentData?.length ? 'See Less' : 'See More'}</div>
 						) : null}

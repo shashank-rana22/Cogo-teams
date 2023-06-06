@@ -15,7 +15,6 @@ function ExistingInventory({ docs, loading, prefrences, setPrefrences }) {
 
 		return true;
 	};
-
 	return (
 		hasExistingRates() && <Docs data={docs} preferences={prefrences} setPreferences={setPrefrences} />
 	);

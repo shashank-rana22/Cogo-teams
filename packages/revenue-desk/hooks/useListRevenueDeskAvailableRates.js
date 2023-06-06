@@ -18,9 +18,10 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData } = {}) => {
 			await trigger({
 				params: {
 					filters: {
-						shipment_id       : singleServiceData?.shipment_id,
-						service_id        : singleServiceData?.id,
-						service_type      : singleServiceData?.service_type?.split('_').slice(0, -1).join('_'),
+						shipment_id  : '4b9f2240-d934-4b0f-9f6f-d5ad578b4dcb' || singleServiceData?.shipment_id,
+						service_id   : singleServiceData?.id,
+						service_type : 'fcl_freight'
+						|| singleServiceData?.service_type?.split('_').slice(0, -1).join('_'),
 						port_id           : singleServiceData?.port_id || undefined,
 						is_rate_available : true,
 						trade_type        : singleServiceData?.trade_type
