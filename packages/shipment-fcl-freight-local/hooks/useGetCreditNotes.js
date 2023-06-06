@@ -30,7 +30,7 @@ const useGetCreditNotes = () => {
 
 	return {
 		loading,
-		list      : data?.list || [],
+		list      : data?.data || [],
 		cnRefetch : getCreditNoteList,
 	};
 };
