@@ -224,6 +224,11 @@ const saas = {
 			api         : 'get_saas_hs_code_six_digit_list',
 			access_type : 'private',
 		},
+		{
+			api          : 'get_multiple_sea_routes',
+			access_type  : 'public',
+			service_name : 'location',
+		},
 	],
 	app_saas_air_tracking: [
 		{

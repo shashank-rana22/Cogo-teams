@@ -17,7 +17,7 @@ const STAKEHOLDER_MAPPING = {
 	so1_so2_ops           : ['service_ops1', 'service_ops2', 'lastmile_ops'],
 };
 
-export default function CancelShipment({ setShow }) {
+export default function CancelShipment({ setShow = () => {} }) {
 	const closeModal = () => setShow(false);
 
 	const { reasonsLoading, reasons = [], getReasons } = useListShipmentCancellationReasons();
@@ -76,7 +76,6 @@ export default function CancelShipment({ setShow }) {
 				{errors?.cancellation_reason
 					? <div className={styles.error_message}>{errors.cancellation_reason.message}</div>
 					: null}
-
 				<div className={styles.label}>Remarks</div>
 				<InputController
 					name="remarks"
