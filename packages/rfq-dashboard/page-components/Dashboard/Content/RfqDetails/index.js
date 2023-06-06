@@ -39,6 +39,7 @@ function RfqDetails(props) {
 						alignItems="center"
 						emptyText="Data Not Found"
 						textSize="20"
+						marginTop="100px"
 					/>
 				</div>
 			</div>
