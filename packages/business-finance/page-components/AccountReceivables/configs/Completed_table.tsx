@@ -1,5 +1,5 @@
 /* eslint-disable react/jsx-indent */
-import { Checkbox, Pill, Tooltip } from '@cogoport/components';
+import { Pill, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
@@ -11,6 +11,8 @@ import RenderIRNGenerated from '../commons/RenderIRNGenerated';
 import RibbonRender from '../commons/RibbonRender';
 import { getDocumentNumber, getDocumentUrl } from '../Utils/getDocumentNumber';
 
+import CheckboxItem from './CheckboxItem';
+import HeaderCheckbox from './HeaderCheckbox';
 import ShipmentView from './ShipmentView';
 import SortHeaderInvoice from './SortHeaderInvoice';
 import styles from './styles.module.css';
@@ -81,50 +83,23 @@ const completedColumn = ({
 	setIsHeaderChecked,
 }: InvoiceTable) => [
 	{
-		Header: <div>
-			<Checkbox
-				checked={isHeaderChecked}
-				onChange={(e) => {
-					if (e?.target?.checked) {
-						setIsHeaderChecked(true);
-						const totalIds = totalRows?.map((row:{ id?:string | number, invoiceStatus?:string }) => {
-							if (IRN_GENERATEABLE_STATUSES.includes(row?.invoiceStatus)) { return row?.id; }
-							return null;
-						});
-						const filteredIds = totalIds?.filter((id) => id !== null);
-						setCheckedRows([...filteredIds]);
-					} else {
-						setIsHeaderChecked(false);
-						setCheckedRows([]);
-					}
-				}}
-			/>
-          </div>,
+		Header: <HeaderCheckbox
+			isHeaderChecked={isHeaderChecked}
+			setIsHeaderChecked={setIsHeaderChecked}
+			totalRows={totalRows}
+			IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
+			setCheckedRows={setCheckedRows}
+		/>,
 		span     : 1,
 		id       : 'checkbox',
-		accessor : (row) => {
-			const { id, invoiceStatus } = row || {};
-			return (
-				<div>
-					<Checkbox
-						disabled={!IRN_GENERATEABLE_STATUSES.includes(invoiceStatus)}
-						checked={(checkedRows || []).includes(id)}
-						onChange={() => {
-							if ((checkedRows || []).includes(id)) {
-								const index = (checkedRows || []).indexOf(id);
-								if (index > -1) { // only splice array when item is found
-									checkedRows.splice(index, 1);
-									setCheckedRows([...checkedRows]);
-								}
-							} else {
-								setCheckedRows((prev) => [...prev,
-									id]);
-							}
-						}}
-					/>
-				</div>
-			);
-		},
+		accessor : (row?:object) => (
+				<CheckboxItem
+					IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
+					checkedRows={checkedRows}
+					setCheckedRows={setCheckedRows}
+					row={row}
+				/>
+		),
 	},
 	{
 		Header   : showName && 'Name',
