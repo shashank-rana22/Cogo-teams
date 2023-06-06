@@ -1,4 +1,5 @@
 import ENTITY_MAPPING from './entityMapping';
+import LANGUAGE_OPTIONS from './languageMapping';
 
 const GLOBAL_CONSTANTS = {
 	country_entity_ids: {
@@ -170,6 +171,8 @@ GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
 		],
 
 	},
+	languages: LANGUAGE_OPTIONS,
+
 };
 
 export default GLOBAL_CONSTANTS;

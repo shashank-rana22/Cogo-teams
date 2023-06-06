@@ -50,7 +50,7 @@ function Layout({
 	);
 
 	return (
-		<div className={styles.layout}>
+		<main className={styles.layout}>
 			{totalFields.map((rowFields, i) => (
 				<div className={cl`${styles.row} form_layout_row`} key={keysForFields[i]}>
 					{rowFields.map((field) => {
@@ -58,7 +58,7 @@ function Layout({
 
 						if (type === 'fieldArray') {
 							return (
-								<div className={styles.width_100} key={field.name}>
+								<section className={styles.width_100} key={field.name}>
 									{heading ? (
 										<div className={styles.heading}>
 											{heading}
@@ -72,14 +72,15 @@ function Layout({
 										showElements={showElements}
 										formValues={formValues}
 									/>
-								</div>
+								</section>
 							);
 						}
 
 						if (type === 'edit_service_charges') {
 							return (
-								<div className={styles.width_100} key={field.name}>
+								<section className={styles.width_100} key={field.name}>
 									<EditServiceCharges
+										error={errors?.[field?.name]}
 										control={control}
 										customValues={customValues?.[field?.name]}
 										shipment_id={shipment_id}
@@ -87,7 +88,7 @@ function Layout({
 										error={errors?.[field?.name]}
 										{...field}
 									/>
-								</div>
+								</section>
 							);
 						}
 
@@ -103,7 +104,7 @@ function Layout({
 					})}
 				</div>
 			))}
-		</div>
+		</main>
 	);
 }
 export default Layout;

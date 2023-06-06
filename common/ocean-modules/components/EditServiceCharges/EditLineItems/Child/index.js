@@ -45,9 +45,9 @@ function Child({
 							name={`${name}.${index}.${controlItem?.name}`}
 							value={field?.[controlItem?.name]}
 							control={control}
-							label={controlItem.name}
-							error={error?.[controlItem.name]}
 							source="edit_line_items"
+							label={controlItem?.label}
+							error={error?.[controlItem.name]}
 						/>
 					);
 				})}

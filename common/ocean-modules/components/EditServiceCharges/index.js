@@ -7,7 +7,10 @@ import EditLineItems from './EditLineItems';
 import styles from './styles.module.css';
 
 function EditServiceCharges(props) {
-	const { controls = [], service_name = '', shipment_id = '', onOptionsChange = () => {}, value } = props || {};
+	const {
+		controls, service_name = '', customValues = {},
+		shipment_id = '', onOptionsChange = () => {}, value,
+	} = props || {};
 
 	const [q, setQ] = useState('');
 
@@ -53,7 +56,8 @@ function EditServiceCharges(props) {
 		return item;
 	});
 
-	const allOptions = useMemo(() => [...options, ...miscCharges], [miscCharges, options]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	const allOptions = useMemo(() => [...options, ...miscCharges], []);
 
 	useEffect(() => {
 		if (allOptions.length && onOptionsChange) {
@@ -67,6 +71,7 @@ function EditServiceCharges(props) {
 				<EditLineItems
 					{...props}
 					controls={finalControls}
+					customValues={customValues}
 				/>
 			) : null}
 		</div>
