@@ -4,24 +4,27 @@
 	background-color: #fff;
 }
 
-.carousel_container {
-	:global {
-		.ui_carousel_container {
-			overflow: auto;
-		}
+.container {
+	scroll-behavior: smooth;
 
+	:global {
 		.ui_carousel_arrow {
 			fill: #221f20;
 		}
 
 		.ui_carousel_next {
-			margin-right: -36px;
+			margin-right: -18px;
 			background: none;
 		}
 
 		.ui_carousel_prev {
-			margin-left: -36px;
+			margin-left: -16px;
 			background: none;
+		}
+
+		.ui_carousel_container {
+			padding: 8px;
+			overflow: scroll;
 		}
 
 		.ui_o0St8 {

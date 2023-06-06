@@ -50,8 +50,8 @@ function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCatego
 		return <CourseEmptyState activeTab={activeTab} />;
 	}
 
-	const CAROUSELDATA = (list).map((item, index) => ({
-		key    : index,
+	const CAROUSELDATA = (list).map((item) => ({
+		key    : item.id,
 		render : () => (
 			<CourseCard
 				key={item.id}
