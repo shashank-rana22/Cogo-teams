@@ -8,7 +8,7 @@ import {
 } from './styles.module.css';
 
 function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
-	const { milestone, is_sub, completed_on } = item || {};
+	const { milestone, completed_on } = item || {};
 
 	const displayCompletedDate = completed_on;
 
@@ -38,7 +38,7 @@ function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
 		<div className={container}>
 			<Tooltip content={tooltipContent} placement="top" interactive>
 				<div className={circleClass}>
-					{isCompleted && !is_sub ? <IcMTick /> : null}
+					{isCompleted ? <IcMTick /> : null}
 				</div>
 			</Tooltip>
 
