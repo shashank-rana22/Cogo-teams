@@ -396,7 +396,9 @@ export default {
 				value : 'open_side',
 			},
 		],
-		vn_entities: [],
+		entities: [
+			{ label: 'hi', value: 'hi' },
+		],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -410,6 +412,13 @@ export default {
 					'rfq_enquiries',
 					'rates_sheets',
 				],
+			},
+		},
+		account_receivables: {
+			defaulters: {
+				migration_status: {
+					show_filter: true,
+				},
 			},
 		},
 	},

@@ -144,34 +144,7 @@ const GLOBAL_CONSTANTS = {
 	regex_patterns: {
 		number: /^[+-]?\d*\.?\d+$/,
 	},
-	country_specific_data: {
-		IN: {
-			navigation: {
-				admin: {
-					account_receivables: {
-						defaulters: {
-							migration_status: {
-								show_filter: true,
-							},
-						},
-					},
-				},
-			},
-		},
-		VN: {
-			navigation: {
-				admin: {
-					account_receivables: {
-						defaulters: {
-							migration_status: {
-								show_filter: false,
-							},
-						},
-					},
-				},
-			},
-		},
-	},
+
 };
 
 export default GLOBAL_CONSTANTS;
