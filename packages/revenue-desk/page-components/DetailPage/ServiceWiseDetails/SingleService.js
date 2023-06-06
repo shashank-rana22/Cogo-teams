@@ -3,10 +3,34 @@ import { useState, useEffect } from 'react';
 
 import getSupplierPrefrencePayload from '../../../helper/getSupplierPreferencePayload';
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
+import CargoDetailPills from '../../List/Card/Body/CargoDetails/CargoDetailPills';
 
 import ExistingInventory from './ExistingInventory';
 import RatesCard from './RatesCard';
 import SelectedRatesCard from './SelectedRatesCard';
+
+const labels = [
+	'container_size',
+	'containers_count',
+	'container_type',
+	'commodity',
+	'trade_type',
+	'packages',
+	'volume',
+	'weight',
+	'price_type',
+	'haulage_type',
+	'transport_mode',
+	'cargo_weight_per_container',
+	'destination_cargo_handling_type',
+	'truck_type',
+	'trip_type',
+	'payment_term',
+	'container_load_type',
+	'contract_reference_id',
+	'awb_execution_date',
+	'truck_types',
+];
 
 function SingleService({
 	groupedServicesData,
@@ -17,8 +41,19 @@ function SingleService({
 }) {
 	const [prefrences, setPrefrences] = useState([]);
 	const [existingInventory, setExistingInventory] = useState([]);
-	const singleServiceData = groupedServicesData[0];
+
+	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
 	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({ singleServiceData });
+
+	const options = [];
+	(groupedServicesData || []).forEach((data) => {
+		options.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data });
+	});
+
+	useEffect(() => {
+		setSingleServiceData(groupedServicesData[0]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(groupedServicesData)]);
 
 	const rateCardObj = [
 		{
