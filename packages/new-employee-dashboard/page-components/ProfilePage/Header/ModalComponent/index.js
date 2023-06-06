@@ -15,6 +15,10 @@ function ModalComponent({
 }) {
 	// const { control } = formProps;
 
+	
+
+	
+
 	const finalControls = getControls(initialQuestion);
 	return (
 		<div>
@@ -39,48 +43,47 @@ function ModalComponent({
 				</div>
 
 				{Object.entries(ctcStructure).map(([key, value]) => {
-					console.log(ctcStructure?.total_targeted_compensation,'ejkfb')
-        	const { heading, yearlyValue, monthlyValue } = value;
-        	return (
-	<div className={styles.list} key={key}>
-		<div style={{ width: '60%' }}>{heading ?? '___'}</div>
-		<div style={{ width: '20%' }}>
-			{Number(yearlyValue || 0).toFixed(2) ?? '___'}
-		</div>
-		<div style={{ width: '20%' }}>
-			{(Number(monthlyValue || 0).toFixed(2)) ?? '___'}
-		</div>
-	</div>
-        	);
+					const { heading, yearlyValue, monthlyValue } = value;
+					return (
+						<div className={styles.list} key={key}>
+							<div style={{ width: '60%' }}>{heading ?? '___'}</div>
+							<div style={{ width: '20%' }}>
+								{Number(yearlyValue || 0).toFixed(2) ?? '___'}
+							</div>
+							<div style={{ width: '20%' }}>
+								{(Number(monthlyValue || 0).toFixed(2)) ?? '___'}
+							</div>
+						</div>
+					);
 				})}
 			</div>
 
 			{finalControls.map((controlItem) => {
-      	const { yearly, monthly } = controlItem;
+				const { yearly, monthly } = controlItem;
 
-      	const Element = getElementController(controlItem?.yearly.type);
+				const Element = getElementController(controlItem?.yearly.type);
 
-      	if (!Element) return null;
+				if (!Element) return null;
 
-      	return (
-	<div key={yearly.name} className={styles.control_container}>
-		<span className={styles.control_label}>{yearly.label}</span>
-		<Element
-			{...yearly}
-			size="sm"
-			key={yearly.name}
-			control={control}
-			className={styles.field_controller}
-		/>
-		<Element
-			{...monthly}
-			size="sm"
-			key={monthly.name}
-			control={control}
-			className={styles.field_controller}
-		/>
-	</div>
-      	);
+				return (
+					<div key={yearly.name} className={styles.control_container}>
+						<span className={styles.control_label}>{yearly.label}</span>
+						<Element
+							{...yearly}
+							size="sm"
+							key={yearly.name}
+							control={control}
+							className={styles.field_controller}
+						/>
+						<Element
+							{...monthly}
+							size="sm"
+							key={monthly.name}
+							control={control}
+							className={styles.field_controller}
+						/>
+					</div>
+				);
 			})}
 		</div>
 	);

@@ -84,29 +84,22 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 	return (
 
 		<>
-
 			<div className={styles.container}>
 				{employmentDetails()}
 				{' '}
-
 			</div>
 			<div
 				className={styles.extra_docs}
 			>
-
 				<div>
-
 					<div className={styles.extra_header}>Last Offer</div>
 					<PreviewDocumet
 						document_url={offer_letter?.document_url}
 						preview="true"
 					/>
 				</div>
-
 				<div>
-
 					<div className={styles.extra_header}>Last Pay Slip</div>
-
 					<PreviewDocumet
 						document_url={payslip}
 						preview="true"

@@ -1,4 +1,4 @@
-import { Button, Input } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React from 'react';
 

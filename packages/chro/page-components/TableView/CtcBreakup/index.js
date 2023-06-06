@@ -1,15 +1,11 @@
 import { startCase } from '@cogoport/utils';
 import React from 'react';
 
+import { CTC_BREAK_MAPPING } from '../../../commons/ctcbreakMapping';
+
 import styles from './styles.module.css';
 
-const CTC_BREAK_MAPPING = ['basic', 'hra', 'conveyance_allowance',
-	'special_allowance', 'food_allowance', 'fuel_allowance',
-	'telephone_allowance', 'annual_base', 'lta', 'medical_reimbursement',
-	'flexible_benefits', 'provident_fund', 'gratuity', 'medical_policy', 'retirals',
-	'variable_component', 'sub_total_monthly_gross', 'statutory_bonus', 'annual_gross_salary',
-	'incentives', 'total_targeted_compensation_no_retention', 'total_targeted_compensation',
-	'monthly_in_hand_without_tds'];
+
 
 function CtcBreakup({ metadata }) {
 	const {
@@ -53,7 +49,6 @@ function CtcBreakup({ metadata }) {
 			</div>
 
 			{CTC_BREAK_MAPPING.map((key) => {
-
       	const {
       		heading = null,
       		yearlyValue = null,
@@ -65,36 +60,37 @@ function CtcBreakup({ metadata }) {
 			<div className={styles.list} key={key}>
 				{heading ? (
 					<div style={{ width: '60%' }}>
-						{startCase(heading ?? '______')}
+						{startCase(heading ?? '___')}
 
 					</div>
 				) : null}
-				{yearlyValue != null ? (
-					<div style={{ width: '20%' }}>
-						{Number(yearlyValue || 0).toFixed(2) ?? '______'}
-					</div>
-				) : null}
+				<div style={{ width: '20%' }}>
+					{yearlyValue != null ? (
+
+						<div>{Number(yearlyValue || 0).toFixed(2) ?? '___'}</div>
+
+					) : null}
+				</div>
 				{monthlyValue != null ? (
 					<div style={{ width: '20%' }}>
-						{Number(monthlyValue || 0).toFixed(2) ?? '______'}
+						{Number(monthlyValue || 0).toFixed(2) ?? '___'}
 					</div>
 				) : null}
 			</div>
 		) : (
 			<div className={styles.list} key={key}>
 				<div style={{ width: '60%' }}>
-					{startCase(MAPPING?.[key]?.heading ?? '______')}
+					{startCase(MAPPING?.[key]?.heading || '___')}
 				</div>
 				<div style={{ width: '20%' }}>
-					{MAPPING?.[key]?.yearlyValue ?? '______'}
+					{MAPPING?.[key]?.yearlyValue || '___'}
 				</div>
 				<div style={{ width: '20%' }}>
-					{MAPPING?.[key]?.monthlyValue ?? '______'}
+					{MAPPING?.[key]?.monthlyValue || '___'}
 				</div>
 			</div>
 		)}
 	</div>
-	// <div>ok</div>
 				);
 			})}
 		</div>
