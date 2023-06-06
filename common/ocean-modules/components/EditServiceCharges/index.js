@@ -56,8 +56,7 @@ function EditServiceCharges(props) {
 		return item;
 	});
 
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	const allOptions = useMemo(() => [...options, ...miscCharges], []);
+	const allOptions = useMemo(() => [...options, ...miscCharges], [miscCharges, options]);
 
 	useEffect(() => {
 		if (allOptions.length && onOptionsChange) {

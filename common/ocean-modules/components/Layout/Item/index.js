@@ -14,10 +14,10 @@ function Item(props) {
 		span,
 		label = '',
 		error = {},
-		heading = '',
 		rules = {},
 		className = '',
 		formValues = {},
+		source = '',
 	} = props || {};
 
 	const errorOriginal = getErrorMessage({
@@ -48,6 +48,8 @@ function Item(props) {
 		};
 	}
 
+	if (!newProps.type && !newProps.showOnlyLabel) return null;
+
 	const Element = getElementController(newProps.type);
 
 	const flex = ((span || 12) / 12) * 100 - 1;
@@ -59,9 +61,8 @@ function Item(props) {
 
 	return (
 		<div className={cl`${styles.element} ${className}`} style={{ width: `${flex}%` }}>
-			{heading ? (<div className={styles.heading}>{heading}</div>) : null}
 
-			{label ? (<h4 className={styles.label}>{label}</h4>) : null}
+			{label && source !== 'edit_line_items' ? (<h4 className={styles.label}>{label}</h4>) : null}
 
 			<Element
 				size={type === 'pills' ? 'md' : 'sm'} // need to put in config
