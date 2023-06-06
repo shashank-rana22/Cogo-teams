@@ -71,11 +71,11 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 					) : null}
 				</div>
 
-				{data?.rating
+				{data?.average_rating
 					? (
 						<div className={styles.header_rating}>
 							<IcMStarfull fill="#000" />
-							<span style={{ color: '#000' }}>{data?.rating}</span>
+							<span style={{ color: '#000' }}>{data?.average_rating}</span>
 						</div>
 					)
 					: null}
