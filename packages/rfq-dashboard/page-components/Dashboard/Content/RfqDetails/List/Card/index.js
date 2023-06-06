@@ -12,7 +12,8 @@ import { getFormattedDuration } from '../../../../../../utils/getFormattedDurati
 import styles from './styles.module.css';
 
 function Card({ item, handleCheck, checkedItems }) {
-	const { stats = {} } = item;
+	const { stats = {}, live_contracts = '' } = item;
+
 	const router = useRouter();
 
 	const { port_pair_count = {} } = item;
@@ -104,7 +105,7 @@ function Card({ item, handleCheck, checkedItems }) {
 			</div>
 
 			<div className={styles.revenue_details}>
-				<ServiceStats data={stats} type="details" />
+				<ServiceStats data={stats} type="basic_details" live_contracts={live_contracts} />
 				{services ? (
 					<div className={styles.services}>
 						{(services || []).map((val) => (
