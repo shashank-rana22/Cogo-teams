@@ -7,7 +7,7 @@ const useUpdateInvoicePaymentMode = ({
 	successMessage = 'Payment mode Updated',
 }) => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : '/update_shipment_invoice_payment_mode',
+		url    : 'fcl_local/update_invoice_payment_mode',
 		method : 'POST',
 	}, { manual: true });
 

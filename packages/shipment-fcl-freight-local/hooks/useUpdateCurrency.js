@@ -4,7 +4,7 @@ import { useRequest } from '@cogoport/request';
 
 const useUpdateCurrency = ({ refetch, currency }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_invoice_currency',
+		url    : 'fcl_local/update_invoice_currency',
 		method : 'POST',
 	}, { manual: true });
 

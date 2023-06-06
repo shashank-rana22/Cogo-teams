@@ -10,7 +10,7 @@ const useGetCreditNotes = () => {
 	const { id: shipment_id = '' } = shipment_data || {};
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/list_shipment_credit_notes',
+		url    : 'fcl_local/get_credit_notes',
 		method : 'GET',
 		params : {
 			filters: {

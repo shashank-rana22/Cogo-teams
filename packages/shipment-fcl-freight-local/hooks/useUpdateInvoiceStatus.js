@@ -7,7 +7,7 @@ const useUpdateInvoiceStatus = ({
 	successMessage = 'Updated Successfully!',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_shipment_invoice_status',
+		url    : 'fcl_local/update_invoice_status',
 		method : 'POST',
 	}, { manual: true });
 

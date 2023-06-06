@@ -7,7 +7,7 @@ const useUpdateInvoiceRemarks = ({
 	successMessage = 'Your remarks have been added successfully',
 }) => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/add_shipment_invoice_combination_remarks',
+		url    : 'fcl_local/update_invoice_remarks',
 		method : 'POST',
 	}, { manual: true });
 
