@@ -29,11 +29,12 @@ export default {
 		},
 	},
 	regex: {
-		PAN           : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
+		PAN              : /^([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1})+$/g,
 		// eslint-disable-next-line max-len
-		GST           : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
-		MOBILE_NUMBER : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL         : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		GST              : /^([0]{1}[1-9]{1}|[1-2]{1}[0-9]{1}|[3]{1}[0-7]{1})([A-Za-z]{3}[PCHFATBLJGpchfatbljg]{1}[A-Za-z]{1}[0-9]{4}[A-Za-z]{1}[1-9A-Za-z]{1}[Zz]{1}[0-9A-Za-z]{1})+$/g,
+		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL            : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
@@ -198,8 +199,15 @@ export default {
 		cogo_one_shipment_agent_ids: [
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
 		],
-		so1_so2_role_id: '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
-
+		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		fortigo_network_ids : [
+			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+		],
+		fortigo_agencies_mapping: {
+			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+		},
 	},
 	options: {
 		registration_types: [
@@ -447,10 +455,9 @@ export default {
 	},
 	others: {
 		registration_number: {
-			label: 'GST',
-			pattern:
-					/\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
-			max_length: 15,
+			label      : 'GST',
+			pattern    : /\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
+			max_length : 15,
 		},
 
 		pan_number: {
