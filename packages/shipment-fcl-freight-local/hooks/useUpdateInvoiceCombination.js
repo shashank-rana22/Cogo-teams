@@ -11,12 +11,12 @@ import IsAllServicesTaken from './IsAllServicesTaken';
 const useUpdateInvoiceCombination = ({
 	refetch = () => {},
 	successMessage = 'Invoice Preference edited!',
-	servicesList,
-	selectedParties,
-	initial_service_invoice_id,
-	allServiceLineitemsCount,
-	importer_exporter_id,
-	updateExportInvoices,
+	servicesList = [],
+	selectedParties = [],
+	initial_service_invoice_id = {},
+	allServiceLineitemsCount = 0,
+	importer_exporter_id = '',
+	updateExportInvoices = '',
 }) => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -51,15 +51,12 @@ const useUpdateInvoiceCombination = ({
 				const partyServices = [];
 
 				party?.services?.map((item) => {
+					const { display_name, trade_type, serviceKey, ...rest } = item;
 					const partyService = {
-						...item,
+						...rest,
 						invoice_combination_id: updateExportInvoices
 							? initial_service_invoice_id[item?.serviceKey] || undefined
 							: undefined,
-						display_name : undefined,
-						trade_type   : undefined,
-						serviceKey   : undefined,
-						is_igst      : null,
 					};
 
 					partyServices.push(partyService);

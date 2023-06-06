@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import rawControls from './rawControls';
 
@@ -58,7 +57,6 @@ const useEditLineItems = ({
 		},
 		[setAllChargeCodes],
 	);
-
 	const controls = services.map((service, index) => ({
 		...rawControls(
 			handleChange,
@@ -81,7 +79,7 @@ const useEditLineItems = ({
 			unit             : item?.unit,
 			total            : item?.tax_total_price_discounted || 0,
 			name             : item?.name,
-			id               : uuid(),
+			id               : item?.product_code,
 		})),
 	}));
 
