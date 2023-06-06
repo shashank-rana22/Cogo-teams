@@ -22,6 +22,7 @@
     "@cogoport/shipment-air-freight-local": "workspace:1.0.0",
     "@cogoport/shipment-air-customs": "workspace:1.0.0",
     "@cogoport/shipment-domestic-air-freight": "workspace:1.0.0",
+    "@cogoport/air-modules": "workspace:1.0.0",
     "@cogoport/cogo-academy": "workspace:0.1.0",
     "@cogoport/athena-dashboard": "workspace:0.1.0",
     "@cogoport/cogo-one": "workspace:0.1.1",
