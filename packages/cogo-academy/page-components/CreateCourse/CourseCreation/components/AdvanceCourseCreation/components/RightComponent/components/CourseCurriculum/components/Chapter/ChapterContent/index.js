@@ -157,7 +157,7 @@ function ChapterContent({
 
 				if (name === 'assessment_value') {
 					return (
-						<div key={name} style={{ marginTop: '24px' }}>
+						<div key={name} className={styles.rich_text}>
 							<RichTextEditor
 								value={assessmentValue}
 								onChange={setAssessmentvalue}
@@ -184,7 +184,7 @@ function ChapterContent({
 
 				if (contentTypeWatch === 'text' && name === 'upload_presentation') {
 					return (
-						<div key={name} style={{ marginTop: '24px' }}>
+						<div key={name} className={styles.rich_text}>
 							<RichTextEditor
 								value={editorValue}
 								onChange={setEditorValue}
