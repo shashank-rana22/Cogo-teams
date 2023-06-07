@@ -21,6 +21,7 @@ import inventory_management from './config/inventory_management';
 import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
+import liabilityDashboard from './config/liability-dashboard';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
@@ -77,6 +78,7 @@ const routeConfig = {
 	...so2Surface,
 	...chakravyuh,
 	...ticketManagement,
+	...liabilityDashboard,
 };
 
 export default routeConfig;
