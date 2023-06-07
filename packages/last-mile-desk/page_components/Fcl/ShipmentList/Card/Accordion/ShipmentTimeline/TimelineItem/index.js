@@ -1,23 +1,54 @@
-import styles from './styles.module.css';
+import { Tooltip } from '@cogoport/components';
+import { IcMTick } from '@cogoport/icons-react';
+import { format } from '@cogoport/utils';
 
-function TimelineItem({ item, isLast }) {
+import {
+	container, connecting_line, circle, big,
+	display_milestone, completed, ellipsis, tooltip_content, label, value,
+} from './styles.module.css';
+
+function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
+	const { milestone, completed_on } = item || {};
+
+	const displayCompletedDate = completed_on;
+
+	let isCompleted = !!completed_on && consecutivelyCompleted;
+	isCompleted = isLast ? !!completed_on : isCompleted;
+
+	const circleClass = `${circle} ${big} ${isCompleted ? completed : ''}`;
+	const connectingLineClass = `${connecting_line} ${isCompleted ? completed : ''}`;
+
+	const tooltipContent = (
+		<div className={tooltip_content}>
+			<div className={label}>Milestone</div>
+			<div className={value}>{milestone}</div>
+
+			{displayCompletedDate ? (
+				<>
+					<div className={label}>Completed On</div>
+					<div className={value}>
+						{displayCompletedDate !== null
+						&& format(displayCompletedDate, 'dd MMM yyyy')}
+					</div>
+				</>
+			) : null}
+		</div>
+	);
 	return (
-		<div className={styles.container}>
+		<div className={container}>
+			<Tooltip content={tooltipContent} placement="top" interactive>
+				<div className={circleClass}>
+					{isCompleted ? <IcMTick /> : null}
+				</div>
+			</Tooltip>
 
-			<div className={styles.sub_container}>
-				<div className={styles.circle} />
+			{isLast ? null : <div className={connectingLineClass} />}
 
-				{isLast ? null : <div className={styles.line} />}
+			<div className={display_milestone}>
+				<div className={ellipsis}>{milestone}</div>
+				{displayCompletedDate !== null
+					&& <div className={ellipsis}>{format(displayCompletedDate, 'dd MMM yyyy')}</div>}
 			</div>
-
-			<div className={styles.label}>
-				{item.title}
-			</div>
-
-			<div className={styles.date}>
-				{new Date().toDateString().slice(4, 11)}
-			</div>
-
 		</div>
 	);
 }

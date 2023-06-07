@@ -1,45 +1,104 @@
-.sub_container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
+.container {
+	position: relative;
+	display: flex;
+	flex: 1;
+	align-items: center;
+
+	:global {
+		.tippy-box {
+			min-height: initial;
+			word-break: initial;
+			white-space: nowrap;
+		}
+	}
+}
+
+.container:last-of-type {
+	flex: none;
 }
 
 .circle {
-    background: #FFFFFF;
-    border: 1px solid #A4A4A4;   
-    height:12px;
-    border-radius:50%;
-    width:12px;
-    float: left;
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	background-color: var(--color-secondary-greyscale-5);
+	border-radius: 50%;
+	transition: all 0.2s;
 }
 
-.line {
-    text-align: center;
-    float: left;
-    width: 90px;
-    border: 1px solid #A4A4A4;
-    flex: 1;
+.circle:hover {
+	cursor: pointer;
+	transform: scale(1.2);
+}
+
+.circle.big {
+	width: 16px;
+	height: 16px;
+	margin: 0 4px;
+
+	svg {
+		@keyframes animate-circle {
+			0% { transform: scale(1); }
+			50% { transform: scale(1.4); }
+			100% { transform: scale(1); }
+		}
+	}
+}
+
+.circle.big:hover svg {
+	animation: animate-circle 0.4s linear;
+}
+
+.circle.small {
+	width: 10px;
+	height: 10px;
+}
+
+.connecting_line {
+	flex: 1;
 	height: 2px;
+	background-color: var(--color-secondary-greyscale-5);
+}
+
+.completed {
+	background-color: var(--color-accent-orange-2);
+}
+
+.display_milestone {
+	position: absolute;
+	top: 100%;
+	left: 0;
+	max-width: 100%;
+	font-size: 10px;
+	transform: translateX(-30%);
+}
+
+.container:last-of-type .display_milestone {
+	max-width: calc(100% + 54px);
+}
+
+.ellipsis {
+	max-width: 100%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.tooltip_content {
+	margin-bottom: -10px;
+	font-size: 10px;
 }
 
 .label {
-    color: #333333;
-    font-weight: 500;
-    font-size: 10px;
-    margin-top: 6px;
+	font-weight: 600;
+	color: var(--color-accent-orange-2);
 }
 
-.date {
-    font-weight: 600;
-    line-height: 21px;
-    font-size: 10px;
+.deviated {
+	color: var(--color-primary-error-red-2);
 }
 
-.date_picker{
-    width: 55px;
-    margin: 8px 0px;
-}
-
-.date_picker.react-datepicker__input-container{
-    height: 22px;
+.value {
+	margin-bottom: 10px;
+	font-weight: 600;
 }

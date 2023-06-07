@@ -1,9 +1,10 @@
 import { cl } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { useContext, useState } from 'react';
+import { useContext, useEffect, useState } from 'react';
 
 import LastMileDeskContext from '../../../../context/LastMileDeskContext';
 import getCriticalShipment from '../../../../helpers/getCriticalShipment';
+import useGetShipmentTimeLine from '../../../../hooks/useGetShipmentTimeline';
 
 import Accordion from './Accordion';
 import Body from './Body';
@@ -23,6 +24,18 @@ function Card({ item = {} }) {
 		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
 	};
 
+	const {
+		shipmentTimelineData = [],
+		shipmentTimelineLoading,
+		getShipmentTimeline = () => {},
+	} = useGetShipmentTimeLine({ item });
+
+	useEffect(() => {
+		if (open && item?.id) {
+			getShipmentTimeline();
+		}
+	}, [getShipmentTimeline, open, item?.id]);
+
 	return (
 		<div
 			className={cl`${styles.container} ${isShipmentCritical ? styles.animate_card : ''}`}
@@ -33,7 +46,12 @@ function Card({ item = {} }) {
 
 			<Body item={item} open={open} setOpen={setOpen} handleCardClick={handleCardClick} />
 
-			{open ? <Accordion /> : null}
+			{open ? (
+				<Accordion
+					shipmentTimelineData={shipmentTimelineData}
+					shipmentTimelineLoading={shipmentTimelineLoading}
+				/>
+			) : null}
 
 			<Footer />
 		</div>

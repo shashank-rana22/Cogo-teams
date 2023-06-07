@@ -1,77 +1,76 @@
 .container {
-    display: flex;
-    align-items: flex-start;
+	display: flex;
+	align-items: flex-start;
 }
 
 .left_nav_bar {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    width: 15%;
-    background: #FDFBF6;;
-    border-radius: 6px;
-    margin: 12px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	width: 15%;
+	margin: 12px;
+	background: #fdfbf6;
+	border-radius: 6px;
 }
 
 .options {
-    padding: 8px;
-    color: #221F20
+	padding: 8px;
+	color: #221f20;
 }
 
 .active {
-    color: #EE3425;
-    padding: 8px;
-    font-weight: 600;
+	padding: 8px;
+	font-weight: 600;
+	color: #ee3425;
 }
 
-.body{
-    display: flex;
-    flex-direction: column;
-    width: 100%;
+.body {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
 }
 
 .heading {
-    font-weight: 600;
-    font-size: 16px;
+	font-size: 16px;
+	font-weight: 600;
 }
 
 .content {
-    display: flex;
-    align-items: center;
-    width: 100%;
+	display: flex;
+	align-items: center;
+	width: 100%;
 }
 
 .details {
-    display: flex;
-    align-items: center;
-    width: 50%;
-    color: #333333;
-    margin: 12px;
+	display: flex;
+	align-items: center;
+	width: 50%;
+	margin: 12px;
+	color: #333;
 }
 
 .booking_note {
-    display: flex;
-    align-items: center;
-    width: 40%;
+	display: flex;
+	align-items: center;
+	width: 40%;
 }
 
 .bn_number {
-    margin: 4px;
-    color: #F68B21;
-
+	margin: 4px;
+	color: #f68b21;
 }
 
 .label {
-    color: #333333;
-    opacity: 0.7;
+	color: #333;
+	opacity: 0.7;
 }
 
 .bttn_wrap {
-    display: flex;
-    justify-content: flex-end;
-    width: 45%;
+	display: flex;
+	justify-content: flex-end;
+	width: 45%;
 }
 
 .shipment_timeline {
-    margin: 12px;
+	margin: 12px;
 }
