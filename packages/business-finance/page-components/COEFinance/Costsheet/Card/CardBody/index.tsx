@@ -86,7 +86,7 @@ export function CardBody({ charge, type }: Props) {
 					iconClassName = styles.profiticon;
 				}
 				return (
-					<div className={styles.values}>
+					<div className={styles.values} key={lineItem?.quantityActual}>
 						<div
 							className={`${styles.coloredlabel} ${
 								lineItem?.sameCurrencyDataPresent && className
