@@ -1,6 +1,8 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { isEmpty } from '@cogoport/utils';
 
+import EmptyState from '../../../common/EmptyState';
 import CommonLoader from '../../../common/Loader';
 import PreviewDocument from '../../../common/PreviewDocumet';
 import useGetEmployeeSignedDocuments from '../../hooks/useGetEmployeeSigningDocuments';
@@ -20,6 +22,10 @@ function OfferLetter() {
 
 	if (loading) {
 		return <CommonLoader />;
+	}
+
+	if (isEmpty(offer_letter)) {
+		return <EmptyState height={160} />;
 	}
 
 	return (

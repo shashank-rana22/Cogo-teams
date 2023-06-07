@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
@@ -61,6 +62,8 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 					mapping[item.name]?.mobile_number
 					|| content?.detail?.[item.name].mobile_number,
 				);
+			} else if (item?.name === 'designation') {
+				setValue(item.name, startCase(content?.detail?.[item?.name]));
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}

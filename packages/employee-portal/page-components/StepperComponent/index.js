@@ -4,7 +4,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function StepperComponent({ data }) {
-	const { progress_stats = {}, company_policy_documents } = data || {};
+	const { progress_stats = {}, company_policy_documents, signed_documents } = data || {};
 	const {
 		additional_info_added = {},
 		offer_letter_signed = {},
@@ -39,7 +39,7 @@ function StepperComponent({ data }) {
 		{
 			name      : 'documents',
 			icon      : IcMDocument,
-			is_added  : document_sign,
+			is_added  : !isEmpty(signed_documents) && document_sign,
 			sub_title : 'Signed',
 		},
 		{
