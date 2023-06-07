@@ -94,6 +94,7 @@ function BreakdownDetails({
 			Toast.error(error?.data);
 		}
 	};
+
 	let total = 0;
 
 	(rateDetails || []).forEach((item) => {
