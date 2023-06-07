@@ -82,6 +82,21 @@ function Rates({ groupedShowServicesData, serviceData }) {
 						</Modal.Footer>
 					</Modal>
 				) : null}
+			{modalStep === 2
+				? (
+					<Modal size="xl" show={modalStep === 2} onClose={() => setModalStep(0)} placement="center">
+						<Modal.Header title="PREVIEW" />
+						<Modal.Body>
+							hello
+						</Modal.Body>
+						<Modal.Footer>
+							<div className={styles.btn_container}>
+								<Button themeType="secondary" onClick={() => setModalStep(1)}>Back</Button>
+								<Button themeType="accent" onClick={() => updateTrigger()}>Submit</Button>
+							</div>
+						</Modal.Footer>
+					</Modal>
+				) : null}
 		</div>
 
 	);
