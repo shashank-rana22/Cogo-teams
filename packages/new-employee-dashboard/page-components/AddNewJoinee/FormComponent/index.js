@@ -67,8 +67,6 @@ function FormComponent({ setActivePage }) {
 		try {
 			const payload = {
 				...values,
-				performed_by_type   : 'agent',
-				performed_by_id     : '961cc7d4-53f0-4319-96e9-2a90217bdc4e',
 				mobile_number       : values?.mobile_number?.number,
 				mobile_country_code : values?.mobile_number?.country_code,
 

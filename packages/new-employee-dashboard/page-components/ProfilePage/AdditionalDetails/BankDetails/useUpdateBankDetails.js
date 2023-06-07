@@ -1,6 +1,6 @@
 import { useHarbourRequest } from '@cogoport/request';
 
-const useUpdateBankDetails = ({ id }) => {
+const useUpdateBankDetails = ({ id, getEmployeeDetails }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/update_employee_bank_details',
 		method : 'POST',
@@ -11,11 +11,11 @@ const useUpdateBankDetails = ({ id }) => {
 			await trigger({
 				data: {
 					status,
-					id                : id || undefined,
-					performed_by_id   : 'sdfghjk',
-					performed_by_type : 'sdfghjkl',
+					id: id || undefined,
+
 				},
 			});
+			getEmployeeDetails();
 		} catch (err) {
 			console.log('err', err);
 		}

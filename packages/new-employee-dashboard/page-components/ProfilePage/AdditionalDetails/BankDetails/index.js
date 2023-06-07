@@ -10,12 +10,12 @@ import useUpdateBankDetails from './useUpdateBankDetails';
 
 const MAPPING = ['bank_name', 'bank_branch_name', 'ifsc_code', 'account_holder_name', 'account_number'];
 
-function BankDetails({ profileData, getEmployeeDetailsLoading }) {
+function BankDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetails }) {
 	const { bank_details } = profileData || {};
 
 	const { id, status } = bank_details?.[0] || {};
 
-	const { updateBankDetails } = useUpdateBankDetails({ id });
+	const { updateBankDetails } = useUpdateBankDetails({ id, getEmployeeDetails });
 
 	if (getEmployeeDetailsLoading) {
 		return <CommonLoader />;

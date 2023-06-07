@@ -15,8 +15,6 @@ const useUpdateOfferLetter = ({ document_url, id, getEmployeeDetails }) => {
 					id,
 					document_url,
 					status,
-					performed_by_id   : 'ertyu',
-					performed_by_type : 'ertyui',
 
 				},
 			});

@@ -6,7 +6,7 @@ const useUpdatePartnerUser = () => {
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
 		url    : 'update_partner_user',
-	}, { manual: false });
+	}, { manual: true });
 
 	const updatePartnerUser = async ({ id }) => {
 		try {

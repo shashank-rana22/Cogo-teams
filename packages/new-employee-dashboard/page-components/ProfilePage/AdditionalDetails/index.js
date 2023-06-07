@@ -7,7 +7,7 @@ import EmploymentHistory from './EmploymentHistory';
 import Resume from './Resume';
 import styles from './styles.module.css';
 
-function AdditionalDetails({ profileData, getEmployeeDetailsLoading }) {
+function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetails }) {
 	const { progress_stats = {}, bank_details:bankDetails } = profileData || {};
 	const {
 		additional_info_added = {},
@@ -77,6 +77,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading }) {
 							<Component
 								profileData={profileData}
 								getEmployeeDetailsLoading={getEmployeeDetailsLoading}
+								getEmployeeDetails={getEmployeeDetails}
 							/>
 
 							{' '}

@@ -2,9 +2,9 @@ import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
 import PreviewDocumet from '../../../commons/PreviewDocumet';
+import useGetDocumentSigningUrl from '../../../hooks/useGetDocumentSigningUrl';
 
 import styles from './styles.module.css';
-import useGetDocumentSigningUrl from './useGetDocumentSigningUrl';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
 function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
@@ -12,7 +12,9 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 
 	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails });
 
-	const { onClickSignDocument, data:docData } = useGetDocumentSigningUrl({ id, getEmployeeDetails });
+	const { onClickSignDocument, data:docData } = useGetDocumentSigningUrl(
+		{ getEmployeeDetails, document_type: 'offer_letter' },
+	);
 
 	const { signed_document_url } = docData || {};
 
@@ -45,7 +47,7 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 						<Button
 							themeType="primary"
 							size="md"
-							onClick={onClickSignDocument}
+							onClick={() => onClickSignDocument(id)}
 						>
 							Accept
 						</Button>

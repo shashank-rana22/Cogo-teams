@@ -43,9 +43,7 @@ const useCompanyPolicyDetails = () => {
 			await trigger({
 				data: {
 					id,
-					performed_by_id   : '123',
-					performed_by_type : 'agent',
-					status            : 'inactive',
+					status: 'inactive',
 				},
 			});
 

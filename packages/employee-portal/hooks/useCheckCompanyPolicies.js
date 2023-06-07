@@ -20,10 +20,8 @@ function useCheckCompanyPolicies({
 		try {
 			await trigger({
 				data: {
-					id                : employeeId,
-					policies_data     : updatedPolicyData,
-					performed_by_id   : '5674cb',
-					performed_by_type : '2314fb',
+					id            : employeeId,
+					policies_data : updatedPolicyData,
 
 				},
 			});

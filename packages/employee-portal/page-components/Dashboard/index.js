@@ -8,14 +8,12 @@ import TabComponents from '../TabComponents';
 import styles from './styles.module.css';
 
 function Dashboard() {
-	const [informationPage, setInformationPage] = useState('day_1');
+	const [informationPage, setInformationPage] = useState('');
 
 	const { data, getEmployeeDetails } = useGetEmployeeDetails({
 		company_policy_data_required: true,
 
 	});
-
-	console.log('loldata employee', data);
 
 	const { detail } = data || {};
 	const { name } = detail || {};

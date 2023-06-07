@@ -15,8 +15,6 @@ function useCreateEmployeeDocument({ documents, getEmployeeDetails = () => {} })
 		const payload = {
 			documents          : [...newDoc],
 			employee_detail_id : id,
-			performed_by_id    : '5674cb',
-			performed_by_type  : '2314fb',
 		};
 
 		try {

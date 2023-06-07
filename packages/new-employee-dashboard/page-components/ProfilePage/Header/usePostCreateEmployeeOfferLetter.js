@@ -17,8 +17,6 @@ function usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterA
 
 			const payload = {
 				employee_detail_id : id,
-				performed_by_id    : 'user_id',
-				performed_by_type  : 'agent',
 				metadata           : combinedObject,
 				status             : 'active',
 			};

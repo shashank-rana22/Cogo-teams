@@ -7,7 +7,7 @@ import useCheckCompanyPolicies from '../../../hooks/useCheckCompanyPolicies';
 import styles from './styles.module.css';
 
 function FullView({
-	url,
+	url = '',
 	containerStyle = {},
 	id,
 	policy_data,

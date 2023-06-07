@@ -8,10 +8,8 @@ const useUpdateEmployeeDeatils = ({ id, status, getEmployeeDetails }) => {
 
 	const updateEmployeeStatus = async () => {
 		const payload = {
-			performed_by_id   : '5674cb',
-			performed_by_type : '2314fb',
 			id,
-			status            : status === 'active' ? 'inactive' : 'active',
+			status: status === 'active' ? 'inactive' : 'active',
 		};
 		try {
 			await trigger({
