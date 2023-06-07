@@ -7,9 +7,6 @@ function Body({ data }) {
 	return (
 		<div className={styles.body_container}>
 			<div className={styles.left_section}>
-				<div className={styles.text1}>
-					{data.importer_exporter?.business_name}
-				</div>
 				<div className={styles.portpair_container}>
 					<PortDetails data={data} />
 				</div>

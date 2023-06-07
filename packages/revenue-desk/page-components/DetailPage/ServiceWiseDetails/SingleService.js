@@ -3,6 +3,7 @@ import { useState, useEffect } from 'react';
 
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
 import CargoDetailPills from '../../List/Card/Body/CargoDetails/CargoDetailPills';
+import Card from '../Card';
 
 import ExistingInventory from './ExistingInventory';
 import RatesCard from './RatesCard';
@@ -73,6 +74,8 @@ function SingleService({
 					onChange={(e) => { setSingleServiceData(e); }}
 				/>
 			</div>
+
+			<Card serviceData={singleServiceData} />
 
 			{(supplierPayload?.[singleServiceData?.id] || []).length
 				? <SelectedRatesCard prefrences={supplierPayload?.[singleServiceData?.id]} /> : null}

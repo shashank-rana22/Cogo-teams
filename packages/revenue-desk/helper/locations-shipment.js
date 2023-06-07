@@ -1,7 +1,5 @@
 /* eslint-disable prefer-destructuring */
 
-import { getByKey } from '@cogoport/utils';
-
 const routeInfo = {
 	air_customs : { origin_port: 'airport', origin_pickup: 'location' },
 	fcl_customs : {
@@ -256,19 +254,9 @@ const routeInfo = {
 };
 
 const getLocationInfo = (
-	service_key,
 	data,
-	keys = { origin: null, destination: null },
 ) => {
-	if (keys?.destination || keys?.origin) {
-		const origin = getByKey(data, keys?.origin) || getByKey(data, keys?.alternateOrigin);
-
-		const destination = getByKey(data, keys?.destination) || getByKey(data, keys?.alternateDestination);
-
-		return { origin, destination };
-	}
-
-	let service_type = data?.shipment_type;
+	let service_type = data?.service_type || data?.shipment_type;
 	if (service_type?.includes('origin')) {
 		service_type = service_type.split('origin_')[1];
 	}

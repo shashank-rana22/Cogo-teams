@@ -6,7 +6,6 @@ import serviceLabelMapping from '../../helper/serviceLabelMapping';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
 import PortDetails from '../List/Card/Body/PortDetails';
 
-import Card from './Card';
 import ServiceWiseDetails from './ServiceWiseDetails';
 import styles from './styles.module.css';
 
@@ -29,7 +28,6 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 		}
 		return acc;
 	}, {});
-	const singleServiceData = servicesData?.list[0];
 	return (
 		<div className={styles.Detail_page}>
 			<div className={styles.header}>
@@ -80,9 +78,6 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 						</div>
 					</div>
 				</div>
-			</div>
-			<div className={styles.card}>
-				<Card serviceData={singleServiceData} />
 			</div>
 			<div>
 				{loading ? null

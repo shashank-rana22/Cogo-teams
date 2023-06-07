@@ -49,7 +49,7 @@ export const renderValue = (label, detail) => {
 										item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div>{values}</div>;
+								return <div key={item}>{values}</div>;
 							})}
 						</div>
 					)}
@@ -96,7 +96,7 @@ export const renderValue = (label, detail) => {
 						content={(
 							<div style={{ fontSize: '10px' }}>
 								{detail?.truck_types?.slice(1)?.map((item) => (
-									<div>{startCase(item)}</div>
+									<div key={item}>{startCase(item)}</div>
 								))}
 							</div>
 						)}

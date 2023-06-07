@@ -6,7 +6,7 @@ import getLocations from '../../../../../helper/locations-shipment';
 import styles from './styles.module.css';
 
 function PortDetails({ data }) {
-	const { origin, destination } = getLocations('shipment_type', data) || {};
+	const { origin, destination } = getLocations(data) || {};
 	const { destination_main_port, origin_main_port } = data;
 	const handleLocationDetails = (location, isSingle, icdInfo) => {
 		let show = true;

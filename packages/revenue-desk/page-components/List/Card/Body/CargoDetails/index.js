@@ -18,7 +18,12 @@ function CargoDetails({ data }) {
 	) {
 		return (
 			<div>
-				<CargoDetailPills detail={{ ...data, revert_count: serviceMapping[shipment_type][0]?.revert_count }} />
+				<CargoDetailPills detail={{
+					...data,
+					revert_count: serviceMapping[shipment_type]?.length
+						? serviceMapping[shipment_type][0]?.revert_count : undefined,
+				}}
+				/>
 				<MultiServiceDetails mainServices={serviceMapping[shipment_type]} />
 			</div>
 		);
@@ -26,7 +31,12 @@ function CargoDetails({ data }) {
 
 	return (
 		<div className={styles.cargo_detail}>
-			<CargoDetailPills detail={{ ...data, revert_count: serviceMapping[shipment_type][0]?.revert_count }} />
+			<CargoDetailPills detail={{
+				...data,
+				revert_count: serviceMapping[shipment_type]?.length
+					? serviceMapping[shipment_type][0]?.revert_count : undefined,
+			}}
+			/>
 		</div>
 	);
 }
