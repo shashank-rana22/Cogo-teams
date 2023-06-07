@@ -21,7 +21,7 @@ interface CollectionActionInterface {
 		id?:string
 		accMode?:string
 		paymentDocumentStatus?:string
-		entityType?:string
+		entityType?:number
 	}
 	refetch?:() => void
 }

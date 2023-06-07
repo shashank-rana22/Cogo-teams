@@ -17,7 +17,7 @@ export interface UploadFileInterface {
 		id?: string;
 		accMode?: string;
 		paymentDocumentStatus?: string;
-		entityType?: string;
+		entityType?: number;
 	};
 	control?:object;
 	watch?:Function;

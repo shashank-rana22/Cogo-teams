@@ -3,6 +3,10 @@ import { useRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useCallback } from 'react';
 
+const PARTY_TYPE = {
+	AP : ['self', 'collection_party'],
+	AR : ['self', 'paying_party'],
+};
 const useVender = ({ setVenderDataValue, tpId, accountMode }) => {
 	const [{ loading:venderLoading }, venderApiTrigger] = useRequest(
 		{
@@ -12,16 +16,12 @@ const useVender = ({ setVenderDataValue, tpId, accountMode }) => {
 		{ manual: true },
 	);
 	const vender = useCallback(async () => {
-		const partyType = {
-			AP : ['self', 'collection_party'],
-			AR : ['self', 'paying_party'],
-		};
 		try {
 			const resp = await venderApiTrigger({
 				params: {
 					filters: {
 						organization_trade_party_detail_id : tpId,
-						trade_party_type                   : partyType[accountMode],
+						trade_party_type                   : PARTY_TYPE[accountMode],
 					},
 				},
 			});

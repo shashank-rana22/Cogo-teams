@@ -11,10 +11,15 @@ interface SelectedInterface {
 	id?:string
 }
 interface CollectionActionInterface {
-	closePermissionModal?:any
+	closePermissionModal?:() => void
 	permissionModal?: PermissionInterface
 	refetch?: () => void
-	itemData?:any
+	itemData?:{
+		paymentCode?:string
+		accMode?:string
+		entityType?:number
+		paymentNumValue?:string
+	}
 	setSelectedId?: React.Dispatch<React.SetStateAction<SelectedInterface>>
 	setModalFinalPost?: React.Dispatch<React.SetStateAction<boolean>>
 }
@@ -118,15 +123,15 @@ const useCollectionActions = ({
 				},
 			});
 			if (resp?.data?.data === 'Success.') {
-				closePermissionModal();
 				refetch();
 				Toast.success('Post to sage successful');
 			} else {
 				Toast.error('Post to sage Failed');
 			}
 		} catch (err) {
-			closePermissionModal();
 			Toast.error(err?.error?.message || 'Something went wrong');
+		} finally {
+			closePermissionModal();
 		}
 	};
 	const finalPostFromSage = async (id:string) => {
