@@ -20,7 +20,7 @@ function CommodityMapping({ commodity_array }) {
 								key={key}
 								className={styles.tag}
 							>
-								<span key={key}>
+								<span>
 									{item[key]}
 									{' '}
 									{COMMODITY_UNITS_MAPPING[key]}
