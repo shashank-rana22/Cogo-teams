@@ -45,13 +45,13 @@ function Layout({
 			{Object.keys(totalFieldsObject).map((field) => (
 				<div className={styles.row} key={field}>
 					{totalFieldsObject[field].map((fieldsItem) => {
-						const { type, heading = '', label = '', span:fieldArraySpan } = fieldsItem;
+						const { type, heading = '', label = '', span:fieldArraySpan, name } = fieldsItem;
 						const flex = ((fieldArraySpan || 12) / 12) * 100 - 1;
 						const show = (!(totalFieldsObject[field].name in showElements)
-						|| showElements[fieldsItem.name]);
+						|| showElements[name]);
 						if (type === 'fieldArray' && show) {
 							return (
-								<div style={{ width: `${flex}%`, padding: '4px' }} key={fieldsItem.name}>
+								<div style={{ width: `${flex}%`, padding: '4px' }} key={name}>
 									<div className={styles.heading}>
 										{heading}
 									</div>
@@ -62,7 +62,7 @@ function Layout({
 
 									<FieldArray
 										{...fieldsItem}
-										error={errors[fieldsItem.name]}
+										error={errors[name]}
 										control={control}
 										showElements={showElements}
 									/>
@@ -73,7 +73,7 @@ function Layout({
 						return show ? (
 							<Item
 								control={control}
-								error={errors[fieldsItem.name]}
+								error={errors[name]}
 								{...fieldsItem}
 							/>
 						) : null;

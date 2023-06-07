@@ -3,7 +3,7 @@ import { AsyncSelectController } from '@cogoport/forms';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import { tradePartyOptions } from '../../../../../Constants';
+import { TRADE_PARTY_OPTIONS } from '../../../../../Constants';
 
 import styles from './styles.module.css';
 
@@ -14,7 +14,7 @@ function TradeParty({ value, onChange, control, valueTradeParty, setValueTradePa
 				<div className={styles.text_select}>Please Select the mode for file download</div>
 
 				<div className={styles.radio_group}>
-					<RadioGroup options={tradePartyOptions} onChange={onChange} value={value} />
+					<RadioGroup options={TRADE_PARTY_OPTIONS} onChange={onChange} value={value} />
 				</div>
 			</div>
 
@@ -58,7 +58,7 @@ function TradeParty({ value, onChange, control, valueTradeParty, setValueTradePa
 					<div className={styles.card}>
 						{' '}
 						{(valueTradeParty || []).map((item) => (
-							<div key={item} className={styles.card_name}>
+							<div key={item?.id} className={styles.card_name}>
 								{startCase(item?.legal_business_name)}
 								{item?.id && (
 									<div>

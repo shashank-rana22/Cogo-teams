@@ -23,7 +23,7 @@ interface GlobalInterface {
 
 const MAX_FILTERS_LENGTH = 3;
 
-const GET_FORMAT_DATE = (dateValue) => {
+const payloadFormatDate = (dateValue) => {
 	formatDate({
 		date       : dateValue,
 		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
@@ -66,10 +66,10 @@ const useAccountCollection = ({ entityType, currencyType }) => {
 					pageLimit             : 10,
 					startDate:
 					date?.startDate
-						? GET_FORMAT_DATE(date?.startDate) : undefined,
+						? payloadFormatDate(date?.startDate) : undefined,
 					endDate:
 					date?.endDate
-						? GET_FORMAT_DATE(date?.endDate) : undefined,
+						? payloadFormatDate(date?.endDate) : undefined,
 					query        : query || undefined,
 					entityType   : entityType || undefined,
 					currencyType : currencyType || undefined,

@@ -1,5 +1,7 @@
 import React from 'react';
 
+import Loader from '../../../../Loader';
+
 import ColumnCard from './ColumnCard';
 import RenderRibbon from './RenderRibbon';
 import styles from './styles.module.css';
@@ -24,16 +26,19 @@ interface ListInterface {
 }
 function List({ list = [], refetch, loading }:ListInterface) {
 	return (
-		<div className={styles.list}>
-			{list?.map((item) => (
-				<div className={styles.column} key={item?.id}>
-					<ColumnCard item={item} refetch={refetch} loading={loading} />
-					<div>
-						<RenderRibbon item={item} />
-					</div>
+		loading ? <Loader />
+			: (
+				<div className={styles.list}>
+					{list?.map((item) => (
+						<div className={styles.column} key={item?.id}>
+							<ColumnCard item={item} refetch={refetch} />
+							<div>
+								<RenderRibbon item={item} />
+							</div>
+						</div>
+					))}
 				</div>
-			))}
-		</div>
+			)
 	);
 }
 

@@ -13,7 +13,7 @@ import CustomTable from './common/CustomTable';
 import Header from './Header';
 import styles from './styles.module.css';
 
-const searchPlaceholder = 'Search by Customer Name / UTR No /Doc. Value';
+const SEARCH_PLACEHOLDER = 'Search by Customer Name / UTR No /Doc. Value';
 
 function OnAccountCollection() {
 	const { control, watch, formState: { errors = {} } } = useForm();
@@ -124,7 +124,7 @@ function OnAccountCollection() {
 								size="sm"
 								value={search}
 								onChange={(e: any) => setGlobalFilters((prev) => ({ ...prev, search: e }))}
-								placeholder={searchPlaceholder}
+								placeholder={SEARCH_PLACEHOLDER}
 								suffix={(
 									<div className={styles.icon_div}>
 										<IcMSearchlight height={15} width={15} />

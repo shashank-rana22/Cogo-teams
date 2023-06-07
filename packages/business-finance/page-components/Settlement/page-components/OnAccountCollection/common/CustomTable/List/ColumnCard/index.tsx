@@ -1,4 +1,4 @@
-import { Placeholder, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import CollectionActions from './CollectionActions';
@@ -12,7 +12,6 @@ const MAX_LENGTH_ECLIPSES = 12;
 
 interface ColumnCardInterface {
 	refetch?:()=> void
-	loading?:boolean
 	item?:{
 		customerName?:string
 		accCode?:string
@@ -27,7 +26,7 @@ interface ColumnCardInterface {
 	}
 }
 
-function ColumnCard({ item, refetch, loading }:ColumnCardInterface) {
+function ColumnCard({ item, refetch }:ColumnCardInterface) {
 	const {
 		customerName = '', bankName = '', accCode = '',
 		bankAccountNumber = '', orgSerialId = '', paymentNumValue = '',
@@ -39,99 +38,84 @@ function ColumnCard({ item, refetch, loading }:ColumnCardInterface) {
 			<div className={styles.flex}>
 
 				<div className={styles.customerName}>
-					{loading
-						? <Placeholder width="200px" height="30px" />
-						: <ToolTipWrapper text={customerName || '---'} maxlength={20} />}
+					<ToolTipWrapper text={customerName || '---'} maxlength={20} />
 				</div>
 
 				<div className={styles.orgSerialId}>
-					{ loading
-						? <Placeholder width="100px" height="30px" /> : orgSerialId || '---'}
+					{orgSerialId || '---'}
 
 				</div>
 
 				<div className={styles.entityType}>
-					{ loading
-						? <Placeholder width="50px" height="30px" /> : entityType || '---'}
+					{ entityType || '---'}
 				</div>
 
 				<div className={styles.accCode}>
-					{loading ? <Placeholder width="100px" height="30px" /> :	(
-						<div>
-							{calcBankLength >= MAX_BANK_LENGTH ? (
-								<Tooltip
-									placement="top"
-									content={(
-										<>
-											<div>{bankName}</div>
-											{' '}
-											A/C No. -
-											{bankAccountNumber || accCode}
-										</>
-									)}
-									interactive
-								>
-									<div>
-										{bankName.substring(0, MAX_LENGTH_ECLIPSES)}
-										...
-										<div>
-											{(bankAccountNumber || accCode).substring(0, MAX_LENGTH_ECLIPSES)}
-											...
-										</div>
-									</div>
-								</Tooltip>
-							) : (
+					<div>
+						{calcBankLength >= MAX_BANK_LENGTH ? (
+							<Tooltip
+								placement="top"
+								content={(
+									<>
+										<div>{bankName}</div>
+										{' '}
+										A/C No. -
+										{bankAccountNumber || accCode}
+									</>
+								)}
+								interactive
+							>
 								<div>
-									<div>{bankName}</div>
-									A/C No. -
-									{bankAccountNumber || accCode}
+									{bankName.substring(0, MAX_LENGTH_ECLIPSES)}
+									...
+									<div>
+										{(bankAccountNumber || accCode).substring(0, MAX_LENGTH_ECLIPSES)}
+										...
+									</div>
 								</div>
-							)}
-						</div>
-					)}
+							</Tooltip>
+						) : (
+							<div>
+								<div>{bankName}</div>
+								A/C No. -
+								{bankAccountNumber || accCode}
+							</div>
+						)}
+					</div>
 
 				</div>
 
 				<div className={styles.paymentNumValue}>
-					{ loading
-						? <Placeholder width="100px" height="30px" />
-						: <ToolTipWrapper text={paymentNumValue || '---'} maxlength={12} /> || '---'}
+					{<ToolTipWrapper text={paymentNumValue || '---'} maxlength={12} /> || '---'}
 
 				</div>
 
 				<div className={styles.amount}>
-					{loading
-						? <Placeholder width="100px" height="30px" /> : formatAmount({
-							amount,
-							currency,
-							options: {
-								style                 : 'currency',
-								currencyDisplay       : 'code',
-								maximumFractionDigits : 2,
-							},
-						}) || '---'}
+					{formatAmount({
+						amount,
+						currency,
+						options: {
+							style                 : 'currency',
+							currencyDisplay       : 'code',
+							maximumFractionDigits : 2,
+						},
+					}) || '---'}
 				</div>
 
 				<div className={styles.upload}>
-					{loading
-						? <Placeholder width="100px" height="30px" /> : <RenderUploadedBy item={item} />}
+					<RenderUploadedBy item={item} />
 				</div>
 
 				<div className={styles.utr}>
-					{loading
-						? <Placeholder width="100px" height="30px" />
-						: <ToolTipWrapper text={utr || '---'} maxlength={12} />}
+					<ToolTipWrapper text={utr || '---'} maxlength={12} />
 				</div>
 
 				<div className={styles.status}>
-					{loading
-						? <Placeholder width="100px" height="30px" /> : <RenderStatus item={item} />}
+					<RenderStatus item={item} />
 				</div>
 
 				<div className={styles.collection}>
-					{loading
-						? <Placeholder width="30px" height="30px" />
-						: <CollectionActions itemData={item} refetch={refetch} />}
+					<CollectionActions itemData={item} refetch={refetch} />
 				</div>
 
 			</div>

@@ -1,32 +1,23 @@
 import { Tooltip } from '@cogoport/components';
 
+import { getFinalDetails } from '../collectiveData';
+
 import styles from './styles.module.css';
 
 const CALC_NAME_LEN = 20;
 const AMOUNT_LENGTH = 6;
 
-interface FinalInterface {
-	name?:string
-	id?:string
-	sagePaymentNum?:string
-	platformPaymentNumber?:string
-	sageStatus?:string
-	bprNumber?:string
-	currency?:string
-	glCode?:string
-	entity?:string
-	amount?:number
-}
 interface ModalFinalInterface {
-	getFinalDetails : Array<FinalInterface>
+	sagePaymentInfo?: object
+	platformPaymentInfo?:object
 }
 
 function ModalFinalPost({
-	getFinalDetails,
+	sagePaymentInfo, platformPaymentInfo,
 }:ModalFinalInterface) {
 	return (
 		<div className={styles.card_style}>
-			{(getFinalDetails || []).map((item) => {
+			{(getFinalDetails(sagePaymentInfo, platformPaymentInfo) || []).map((item) => {
 				const {
 					name = '',
 					id = '',

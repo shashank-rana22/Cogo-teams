@@ -1,7 +1,7 @@
 import { Button, Modal, Stepper } from '@cogoport/components';
 import { useState } from 'react';
 
-import { stepperItemsDownloadFileFormat } from '../../../../Constants';
+import { STEPPER_ITEMS_DOWNLOAD_FILE_FORMAT } from '../../../../Constants';
 import useDownloadFileFormat from '../../../../hooks/useDownloadFileFormat';
 import { UploadFileInterface } from '../../interface';
 
@@ -59,7 +59,7 @@ function DownloadFileFormat({ showModal, setShowModal, control }:UploadFileInter
 					<Stepper
 						active={stepper}
 						setActive={(val:string) => { setStepper(val); }}
-						items={stepperItemsDownloadFileFormat}
+						items={STEPPER_ITEMS_DOWNLOAD_FILE_FORMAT}
 						arrowed
 					/>
 					{stepper === 'tradeParty' && (

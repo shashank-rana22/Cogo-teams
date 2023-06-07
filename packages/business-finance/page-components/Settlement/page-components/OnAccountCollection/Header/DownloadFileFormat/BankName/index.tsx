@@ -37,14 +37,6 @@ function BankName({ item, valueTradeParty, setValueTradeParty }:BankInterface) {
 		url    : 'list_cogo_entities',
 	}, { manual: true });
 
-	useEffect(() => {
-		(async () => {
-			await trigger({
-				params: { filters: { id: cogoEntityId } },
-			});
-		})();
-	}, [cogoEntityId, trigger]);
-
 	const { list } = data || [{}];
 
 	const getBankData = () => (list?.[0].bank_details || [{}]).map((itemData) => ({
@@ -61,6 +53,13 @@ function BankName({ item, valueTradeParty, setValueTradeParty }:BankInterface) {
 		id    : item?.id,
 	}));
 
+	useEffect(() => {
+		(async () => {
+			await trigger({
+				params: { filters: { id: cogoEntityId } },
+			});
+		})();
+	}, [cogoEntityId, trigger]);
 	return (
 		item?.id && (
 			<div className={styles.card_details}>

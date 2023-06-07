@@ -1,13 +1,14 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
-import { useRequest, useRequestBf } from '@cogoport/request';
+import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { isEmpty } from '@cogoport/utils';
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { useEffect, useMemo, useState } from 'react';
 
 import getControls from '../configurations/on-account-collections/manualEntryControls';
+
+import { formatPayload, powerControls } from './helper';
+import useExchangeRate from './useExchangeRate';
+import useVender from './useVender';
 
 interface SelectedInterface {
 	entityType?:string
@@ -80,40 +81,14 @@ const useCreateManualEntry = ({
 	}), [docTypeValue, entityType, isEdit, itemData]);
 	const [processedControls, setProcessedControls] = useState(controls);
 
-	const powerControls = useCallback((newControls, bankData) => newControls.map((controlValue) => {
-		const { name } = controlValue;
+	const { vender, venderLoading } = useVender({ setVenderDataValue, tpId, accountMode });
 
-		if (name === 'bankId') {
-			return {
-				...controlValue,
-				options: (bankData.bank_details || []).map((item) => ({
-					value : item.id,
-					label : `${item.beneficiary_name} (${item.account_number})`,
-				})),
-			};
-		}
-
-		if (name === 'docType') {
-			if (accountMode === 'AP') {
-				const currentOptions = [...controlValue.options];
-				const mutatedOptions = currentOptions.slice(1);
-
-				return {
-					...controlValue,
-					options: [
-						{ label: 'Payment', value: 'PAYMENT' },
-						...mutatedOptions,
-					],
-				};
-			}
-			return {
-				...controlValue,
-				options: [...controlValue.options],
-			};
-		}
-
-		return { ...controlValue };
-	}), [accountMode]);
+	const { exRateTrigger, exchangeApi, exchangeLoading } = useExchangeRate({
+		paymentDateValue,
+		fromCur,
+		toCur,
+		setValue,
+	});
 
 	const [{ loading:createLoading }, createEntryTrigger] = useRequestBf(
 		{
@@ -123,7 +98,6 @@ const useCreateManualEntry = ({
 		},
 		{ manual: true },
 	);
-
 	const [{ loading:updateLoading }, updateEntryTrigger] = useRequestBf(
 		{
 			url     : '/payments/accounts',
@@ -132,15 +106,6 @@ const useCreateManualEntry = ({
 		},
 		{ manual: true },
 	);
-
-	const [{ loading:exchangeLoading }, exRateTrigger] = useRequest(
-		{
-			url    : 'get_exchange_rate',
-			method : 'get',
-		},
-		{ manual: false, autoCancel: false },
-	);
-
 	const [{ data }, trigger] = useRequestBf(
 		{
 			url     : 'purchase/payable/bank/list',
@@ -150,72 +115,61 @@ const useCreateManualEntry = ({
 		{ manual: true },
 	);
 
-	const formatPayload = (payload) => {
-		const newPayload = { ...payload };
-
-		if (newPayload.paymentDate) {
-			newPayload.paymentDate = formatDate({
-				date       : newPayload.paymentDate,
-				dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-				formatType : 'date',
-			});
-			newPayload.uploadedBy = profileName || '';
-			newPayload.id = id;
-		}
-
-		const { ...rest } = newPayload || {};
-		return {
-			...rest,
-			tradePartyMappingId  : tradePartyMappingId || venderDataValue?.id,
-			taggedOrganizationId : taggedOrganizationId || venderDataValue?.organization_id,
-			bankAccountNumber,
-			bankName,
-			paymentCode,
-			createdBy            : profileId,
-			updatedBy            : profileId,
-			sageOrganizationId   : showBprNumber?.sage_organization_id,
-		};
-	};
 	const onError = (errs) => {
 		setErrors(errs);
 	};
 
-	const transactionDates = formatDate({
-		date       : paymentDateValue,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['yyyy-MM-dd'],
-		formatType : 'date',
-	});
+	const entityCode = watch('entityType');
+	const bankID = watch('bankId');
+	const amountReceived = watch('amount');
+	const Exchange = watch('exchangeRate');
+	const entryApi = isEdit ? updateEntryTrigger : createEntryTrigger;
+	const successMessage = isEdit ? 'Payment has been updated successfully' : 'Payment has been created successfully';
 
-	const [{ loading:venderLoading }, venderApiTrigger] = useRequest(
-		{
-			url    : 'list_organization_trade_parties',
-			method : 'get',
-		},
-		{ manual: true },
-	);
-	const vender = useCallback(async () => {
-		const partyType = {
-			AP : ['self', 'collection_party'],
-			AR : ['self', 'paying_party'],
-		};
+	let docType = '';
+	switch (paymentCode) {
+		case 'REC':
+		case 'PAY':
+			docType = 'PAYMENT';
+			break;
+		case 'CTDSP':
+		case 'CTDS':
+		case 'VTDS':
+			docType = 'TDS';
+			break;
+		default:
+			break;
+	}
+
+	const createManualEntry = async (payload, e) => {
+		e.preventDefault();
 		try {
-			const resp = await venderApiTrigger({
-				params: {
-					filters: {
-						organization_trade_party_detail_id : tpId,
-						trade_party_type                   : partyType[accountMode],
-					},
-				},
+			const rest = await entryApi({
+				data: formatPayload(
+					payload,
+					profileName,
+					id,
+					tradePartyMappingId,
+					venderDataValue,
+					taggedOrganizationId,
+					bankAccountNumber,
+					bankName,
+					paymentCode,
+					profileId,
+					showBprNumber,
+				),
 			});
-
-			if (isEmpty(resp.data.list[0])) {
-				Toast.warn('No TradeParty Exists for the Selected Organization');
+			setShowModal({ manual_entry: false });
+			if (!rest.data.isSuccess) {
+				Toast.error('Something went wrong');
+			} else {
+				Toast.success(successMessage);
+				refetch();
 			}
-			setVenderDataValue(resp.data.list[0]);
-		} catch (error) {
-			Toast.error(error?.response?.data?.message || 'Something went wrong');
+		} catch (err) {
+			Toast.error(err?.response?.data?.message || 'Something went wrong');
 		}
-	}, [accountMode, tpId, venderApiTrigger]);
+	};
 
 	useEffect(() => {
 		if (tpId && accountMode) vender();
@@ -240,21 +194,6 @@ const useCreateManualEntry = ({
 		setErrors({ ...val, ...jsonError });
 	}, [jsonErrorVal, jsonErr]);
 
-	let docType = '';
-	switch (paymentCode) {
-		case 'REC':
-		case 'PAY':
-			docType = 'PAYMENT';
-			break;
-		case 'CTDSP':
-		case 'CTDS':
-		case 'VTDS':
-			docType = 'TDS';
-			break;
-
-		default:
-			break;
-	}
 	useEffect(() => {
 		if (isEdit) {
 			controls.forEach((c) => {
@@ -264,8 +203,6 @@ const useCreateManualEntry = ({
 			setValue('docType', docType);
 		}
 	}, [controls, docType, isEdit, selectedItem, setValue, transactionDate]);
-
-	const entityCode = watch('entityType');
 
 	useEffect(() => {
 		if (entityCode && !isEdit) {
@@ -277,7 +214,13 @@ const useCreateManualEntry = ({
 		}
 	}, [entityCode, isEdit, trigger]);
 
-	const bankID = watch('bankId');
+	useEffect(() => {
+		if (Exchange > 0 || amountReceived) {
+			const total = amountReceived * (Exchange || 1) || 0.00;
+
+			setValue('ledAmount', total.toFixed(2));
+		}
+	}, [amountReceived, Exchange, setValue]);
 
 	useEffect(() => {
 		if (bankID && data) {
@@ -303,65 +246,13 @@ const useCreateManualEntry = ({
 		}
 	}, [entityCode, ledgerCurrency, setValue]);
 
-	const amountReceived = watch('amount');
-
-	const Exchange = watch('exchangeRate');
-
 	useEffect(() => {
-		if (Exchange > 0 || amountReceived) {
-			const total = amountReceived * (Exchange || 1) || 0.00;
-
-			setValue('ledAmount', total.toFixed(2));
-		}
-	}, [amountReceived, Exchange, setValue]);
-
-	useEffect(() => {
-		setProcessedControls(powerControls((controls || []), (data?.[0] || [])));
-	}, [docTypeValue, accountMode, controls, data, powerControls]);
-
-	const exchangeApi = useCallback(async () => {
-		try {
-			const exData = await exRateTrigger({
-				params: {
-					from_currency : fromCur,
-					to_currency   : toCur,
-					exchange_date : transactionDates,
-				},
-			});
-			setValue('exchangeRate', exData?.data?.toFixed(4));
-		} catch (error) {
-			Toast.error(error?.response?.data?.message || 'Something went wrong');
-		}
-	}, [exRateTrigger, fromCur, setValue, toCur, transactionDates]);
+		setProcessedControls(powerControls((controls || []), (data?.[0] || []), accountMode));
+	}, [docTypeValue, accountMode, controls, data]);
 
 	useEffect(() => {
 		if (editMode) exchangeApi();
 	}, [fromCur, toCur, paymentDateValue, editMode, exchangeApi]);
-
-	const entryApi = isEdit ? updateEntryTrigger : createEntryTrigger;
-
-	const successMessage = isEdit
-		? 'Payment has been updated successfully'
-		: 'Payment has been created successfully';
-
-	const createManualEntry = async (payload, e) => {
-		e.preventDefault();
-
-		try {
-			const rest = await entryApi({ data: formatPayload(payload) });
-
-			setShowModal({ manual_entry: false });
-
-			if (!rest.data.isSuccess) {
-				Toast.error('Something went wrong');
-			} else {
-				Toast.success(successMessage);
-				refetch();
-			}
-		} catch (err) {
-			Toast.error(err?.response?.data?.message || 'Something went wrong');
-		}
-	};
 
 	return {
 		controls : processedControls,
@@ -379,5 +270,4 @@ const useCreateManualEntry = ({
 		venderLoading,
 	};
 };
-
 export default useCreateManualEntry;

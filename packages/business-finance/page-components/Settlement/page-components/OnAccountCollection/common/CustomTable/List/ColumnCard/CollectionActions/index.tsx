@@ -6,8 +6,9 @@ import { useState } from 'react';
 import useCollectionActions from '../../../../../../../hooks/useCollectionActions';
 import ManualEntry from '../../../../../Header/ManualEntry';
 
+import { content, contentIsFinalPosted, contentIsPosted } from './collectiveData';
 import ModalFinalPost from './ModalFinalPost';
-import styles from './styles.module.css';
+import PostToSageModal from './PostToSageModal';
 
 interface PermissionInterface {
 	show?:boolean
@@ -36,8 +37,8 @@ const GET_ENTITY = [];
 Object.keys(GLOBAL_CONSTANTS.cogoport_entities).slice(0, -1).forEach((i) => { GET_ENTITY.push(Number(i)); });
 
 function checkPostedValue(STATUS) {
-	const conditionalStatus = ['POSTED', 'FINAL_POSTED'];
-	return !conditionalStatus.includes(STATUS);
+	const CONDITIONAL_STATUS = ['POSTED', 'FINAL_POSTED'];
+	return !CONDITIONAL_STATUS.includes(STATUS);
 }
 
 function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface) {
@@ -54,7 +55,6 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 			show: false,
 		});
 	};
-	const { accMode, paymentDocumentStatus, entityType, id } = itemData || {};
 
 	const {
 		entryAction,
@@ -75,12 +75,15 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 		setModalFinalPost,
 	});
 
+	const { accMode, paymentDocumentStatus, entityType, id } = itemData || {};
+
 	const closePopover = () => {
 		setSelectedId(undefined);
 		setShow(true);
 	};
 
 	const handlePermissionModal = (item, isDelete) => {
+		setSelectedId(undefined);
 		setPermissionModal({
 			show : true,
 			id   : item.id,
@@ -91,146 +94,16 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 	const handleFinalPostFromSage = () => {
 		finalPostFromSage(id);
 	};
-	const content = () => (
-		<div className={styles.container}>
-			{accMode === 'AR' && (
-				<>
-					<div className={styles.styled_text} role="presentation" onClick={closePopover}>Edit</div>
-
-					<div className={styles.hr} />
-				</>
-			)}
-
-			<div
-				className={styles.styled_text}
-				role="presentation"
-				onClick={() => handlePermissionModal(itemData, true)}
-			>
-				Delete
-			</div>
-
-			<div className={styles.hr} />
-
-			<div
-				className={styles.styled_text}
-				role="presentation"
-				onClick={() => handlePermissionModal(itemData, false)}
-			>
-				Approve
-			</div>
-		</div>
-	);
-	const contentIsPosted = () => (
-		<div className={styles.container}>
-			<div
-				className={styles.styled_text}
-				role="presentation"
-				onClick={() => handlePermissionModal(itemData, true)}
-			>
-				Delete
-			</div>
-			{GET_ENTITY.includes(entityType) && (
-				<>
-					<div className={styles.hr} />
-					<div
-						className={styles.styled_text}
-						role="presentation"
-						onClick={() => handlePermissionModal(itemData, false)}
-					>
-						Post
-					</div>
-				</>
-			)}
-		</div>
-	);
 
 	const { sagePaymentInfo = {}, platformPaymentInfo = {} } = finalSageInfoData || {};
 
-	const {
-		sage_payment_num:sagePaymentNum = '',
-		platform_payment_num:platformPaymentNumber = '',
-		bpr_number:bprNumber = '',
-		gl_code:glCode = '',
-		currency = '',
-		entity_code:entity = '',
-		amount = 0,
-		sage_status:sageStatus = '',
-		organization_name:organizationName = '',
-	} = sagePaymentInfo || {};
-
-	const {
-		sage_ref_number:sageRefNumber = '',
-		organization_name: orgNamePlatform = '',
-		payment_num_value:paymentNumValue = '',
-		sage_organization_id: bprNumberPlatForm = '',
-		acc_code:accCode = '',
-		currency: currencyPlatform = '',
-		entity_code: entityCodePlateform = '',
-		amount: amountPlatform = 0,
-		status: statusPlatform = '',
-	} = platformPaymentInfo || {};
-
-	const contentIsFinalPosted = () => (
-		<div className={styles.final_container}>
-			<Button
-				themeType="accent"
-				onClick={() => {
-					finalPostSageInfo();
-				}}
-				disabled={finalSageInfoDataLoading}
-				type="button"
-			>
-				{paymentDocumentStatus === 'FINAL_POSTED'
-					? 'Information'
-					: 'Final Post'}
-			</Button>
-		</div>
-	);
 	const handleData = (item) => {
 		setSelectedId(item?.id);
 		setSelectedItem(item);
 	};
 
-	const handlePermission = () => {
-		entryAction(permissionModal?.id);
-	};
-	const handlePermissionPostToSage = () => {
-		PostToSageAction(permissionModal?.id);
-	};
-
-	const loadingText = permissionModal.isDelete ? 'Deleting' : 'Approving';
-	const btnText = permissionModal.isDelete ? 'Delete' : 'Approve';
-
-	const isPostToSage = paymentDocumentStatus === 'APPROVED' && !permissionModal.isDelete;
-
 	const checkPosted = GET_STATUS.includes(paymentDocumentStatus);
 
-	const getFinalDetails = [
-		{
-			id   : 'SAGE',
-			name : organizationName,
-			sagePaymentNum,
-			platformPaymentNumber,
-			sageStatus,
-			bprNumber,
-			currency,
-			glCode,
-			entity,
-			amount,
-		},
-		{
-			id                    : 'Platform',
-			name                  : orgNamePlatform,
-			sagePaymentNum        : sageRefNumber,
-			platformPaymentNumber : paymentNumValue,
-			sageStatus            : statusPlatform,
-			bprNumber             : bprNumberPlatForm,
-			currency              : currencyPlatform,
-			glCode                : accCode,
-			entity                : entityCodePlateform,
-			amount                : amountPlatform,
-		},
-	];
 	const rest = { onClickOutside: () => { setSelectedId(undefined); } };
 
 	return (
@@ -238,7 +111,7 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 			{paymentDocumentStatus === 'CREATED' && (
 				<Popover
 					placement="left"
-					render={content()}
+					render={content(accMode, itemData, handlePermissionModal, closePopover)}
 					visible={selectedId === id}
 					{...rest}
 				>
@@ -260,12 +133,9 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 					size="xl"
 				>
 					<Modal.Header title="Final Post To SAGE" />
-					<ModalFinalPost
-						getFinalDetails={getFinalDetails}
-					/>
+					<ModalFinalPost sagePaymentInfo={sagePaymentInfo} platformPaymentInfo={platformPaymentInfo} />
 					<Modal.Footer>
 						{paymentDocumentStatus !== 'FINAL_POSTED' ? (
-
 							<Button
 								disabled={finalPostFromSageLoading}
 								onClick={handleFinalPostFromSage}
@@ -283,12 +153,13 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 			{checkPosted && (
 				<Popover
 					placement="left"
+					visible={selectedId === id}
 					render={
 						checkPostedValue(paymentDocumentStatus)
-							? contentIsPosted()
-							: GET_ENTITY.includes(entityType) && contentIsFinalPosted()
+							? contentIsPosted(GET_ENTITY, itemData, handlePermissionModal, entityType)
+							: GET_ENTITY.includes(entityType)
+							&& contentIsFinalPosted(finalPostSageInfo, finalSageInfoDataLoading, paymentDocumentStatus)
 					}
-					visible={selectedId === id}
 					{...rest}
 				>
 					<div>
@@ -316,40 +187,15 @@ function CollectionActions({ itemData = {}, refetch }:CollectionActionInterface)
 					show={permissionModal.show}
 					onClose={closePermissionModal}
 				>
-					<div className={styles.modal_show}>
-						<div className={styles.text_value}>
-							Are you sure you want to
-							{' '}
-							{isPostToSage ? 'Post To Sage' : btnText}
-							{' '}
-							this entry?
-						</div>
-
-						<div className={styles.flex_data}>
-							<Button
-								style={{ marginRight: '10px' }}
-								onClick={closePermissionModal}
-								disabled={isPostToSage ? postToSageLoading : loading}
-								type="button"
-								themeType="secondary"
-							>
-								Cancel
-							</Button>
-							{isPostToSage ? (
-								<Button
-									onClick={handlePermissionPostToSage}
-									disabled={postToSageLoading}
-									type="button"
-								>
-									Post To Sage
-								</Button>
-							) : (
-								<Button onClick={handlePermission} disabled={loading}>
-									{loading ? loadingText : btnText}
-								</Button>
-							)}
-						</div>
-					</div>
+					<PostToSageModal
+						entryAction={entryAction}
+						PostToSageAction={PostToSageAction}
+						permissionModal={permissionModal}
+						paymentDocumentStatus={paymentDocumentStatus}
+						closePermissionModal={closePermissionModal}
+						postToSageLoading={postToSageLoading}
+						loading={loading}
+					/>
 				</Modal>
 			)}
 		</>

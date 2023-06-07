@@ -100,12 +100,12 @@ const useCollectionActions = ({
 					},
 				};
 			await apiTrigger(apiData);
-			closePermissionModal();
 			refetch();
 			Toast.success(`${isCheck}`);
 		} catch (err) {
-			closePermissionModal();
 			Toast.error(err?.response?.data?.message);
+		} finally {
+			closePermissionModal();
 		}
 	};
 
