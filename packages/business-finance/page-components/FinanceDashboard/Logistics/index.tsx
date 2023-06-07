@@ -13,13 +13,13 @@ import TotalPayablesRecievables from './TotalPayablesRecievavles';
 import TreasuryStatistics from './TreasuryStatistics';
 
 interface ItemProps {
-	key?: string | undefined;
+	key?: string ;
 	label?: string;
 	icon?: JSX.Element;
 }
 function Logistics() {
 	const [globalFilters, setGlobalFilters] = useState({});
-	const [entityTabFilters, setEntityTabFilters] = useState();
+	const [entityTabFilters, setEntityTabFilters] = useState<string>();
 
 	const entityTab = [
 		{
@@ -56,7 +56,7 @@ function Logistics() {
 						<div
 							key={item.key}
 							onClick={() => {
-								setEntityTabFilters(item.key as undefined);
+								setEntityTabFilters(item.key);
 							}}
 							role="presentation"
 						>
