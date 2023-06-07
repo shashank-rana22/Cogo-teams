@@ -282,11 +282,11 @@ function CostSheet() {
 					</div>
 					{apiloading
             && [1, 2, 3, 4].map((item) => (
-	<Placeholder margin="20px" width="96%" height="220px" key={item}/>
+	<Placeholder margin="20px" width="96%" height="220px" key={item} />
             ))}
 					{!apiloading
             && selldata.map((charge: GenericObject) => (
-	<CardBody charge={charge} type="sell" key={charge.serviceType}/>
+	<CardBody charge={charge} type="sell" key={charge.serviceType} />
             ))}
 				</div>
 				<div className={styles.width}>
@@ -315,11 +315,11 @@ function CostSheet() {
 					</div>
 					{apiloading
             && [1, 2, 3, 4].map((item) => (
-	<Placeholder margin="20px" width="96%" height="220px" key={item}/>
+	<Placeholder margin="20px" width="96%" height="220px" key={item} />
             ))}
 					{!apiloading
             && buydata.map((charge: GenericObject) => (
-	<CardBody charge={charge} type="buy" key={charge.serviceType}/>
+	<CardBody charge={charge} type="buy" key={charge.serviceType} />
             ))}
 				</div>
 			</div>
