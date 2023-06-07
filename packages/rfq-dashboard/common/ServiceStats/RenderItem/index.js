@@ -43,9 +43,9 @@ const mapping = {
 	},
 };
 
-function RenderItem({ item = {}, data = {} }) {
+function renderItem({ item = {}, data = {} }) {
 	const key = item.key in mapping ? item.key : 'default';
 	return mapping[key]?.({ data, item });
 }
 
-export default RenderItem;
+export default renderItem;

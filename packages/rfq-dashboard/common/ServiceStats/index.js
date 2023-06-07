@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 
 import { statsConversion } from '../../configurations/stats-mapping';
 
-import RenderItem from './RenderItem';
+import renderItem from './RenderItem';
 import styles from './styles.module.css';
 
 function ServiceStats({ data = {}, source = '', type = 'basic_details', live_contracts = '' }) {
@@ -17,10 +17,12 @@ function ServiceStats({ data = {}, source = '', type = 'basic_details', live_con
 				<div key={key}>
 					<div className={styles.revenyue_profitability_utilization_name}>{STATS_MAPPING[key].label}</div>
 					<div className={styles.stats_value}>
-						<RenderItem
-							item={STATS_MAPPING[key]}
-							data={type === 'basic_details' ? { ...data, live_contracts } : data}
-						/>
+						{
+						renderItem({
+							item : STATS_MAPPING[key],
+							data : type === 'basic_details' ? { ...data, live_contracts } : data,
+						})
+					}
 					</div>
 				</div>
 			))}
