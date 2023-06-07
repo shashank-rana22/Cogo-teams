@@ -1,0 +1,37 @@
+import { useRequest } from '@cogoport/request';
+import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
+import { useEffect, useState, useCallback } from 'react';
+
+const useGetServicesQuotation = ({ defaultParams = {} }) => {
+	const [apiData, setApiData] = useState({});
+
+	const [{ loading }, trigger] = useRequest({
+		url    : '/get_shipment_services_quotation',
+		method : 'GET',
+		params : defaultParams,
+	});
+
+	const apiTrigger = useCallback(async () => {
+		try {
+			const res = await trigger();
+
+			setApiData(res.data || {});
+		} catch (err) {
+			setApiData({});
+
+			toastApiError(err);
+		}
+	}, [trigger]);
+
+	useEffect(() => {
+		apiTrigger();
+	}, [apiTrigger]);
+
+	return {
+		apiTrigger,
+		data: apiData,
+		loading,
+	};
+};
+
+export default useGetServicesQuotation;

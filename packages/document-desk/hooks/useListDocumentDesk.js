@@ -10,7 +10,7 @@ import getDocumentDeskFilters from '../helpers/getDocumentDeskFilters';
 const useListDocumentDesk = () => {
 	const documentDeskContextValues = useContext(DocumentDeskContext);
 
-	const { filters, setFilters, activeTab, stepperTab } = documentDeskContextValues || {};
+	const { filters, setFilters, activeTab, stepperTab, shipmentType } = documentDeskContextValues || {};
 	const { authParams, selected_agent_id } = useSelector(({ profile }) => profile) || {};
 
 	const { page = 1, ...restFilters } = filters || {};
@@ -73,8 +73,9 @@ const useListDocumentDesk = () => {
 			activeTab,
 			scopeFilters: newScopeFilters,
 			stepperTab,
+			shipmentType,
 		}));
-	}, [apiTrigger, filters, activeTab, authParams, selected_agent_id, stepperTab]);
+	}, [apiTrigger, filters, activeTab, authParams, selected_agent_id, stepperTab, shipmentType]);
 
 	return {
 		loading,
