@@ -22,13 +22,13 @@ export const ACTION_KEYS = {
 
 export const TICKET_SECTION_MAPPING = {
 	Open: {
-		Status: 'unresolved',
+		Statuses: 'unresolved',
 	},
 	Pending: {
 		Statuses: 'pending,reject_requested,resolve_requested',
 	},
 	Escalated: {
-		Status: 'escalated',
+		Statuses: 'escalated',
 	},
 	Closed: {
 		Statuses: 'closed,rejected,overdue',

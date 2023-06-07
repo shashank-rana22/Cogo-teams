@@ -1,8 +1,9 @@
 import { Upload, Toast } from '@cogoport/components';
 import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
-import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
+
+import uploadFile from '../../hooks/useUploadFile';
 
 import styles from './styles.module.css';
 
@@ -22,6 +23,8 @@ function CustomFileUploader(props, ref) {
 	const [urlStore, setUrlStore] = useState([]);
 	const [progress, setProgress] = useState({});
 
+	const isDefaultValues = defaultValues?.length > 0;
+
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
@@ -39,8 +42,7 @@ function CustomFileUploader(props, ref) {
 			setUrlStore(urls);
 		}
 		setLoading(false);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [defaultValues?.length > 0]);
+	}, [isDefaultValues, defaultValues, multiple]);
 
 	useEffect(() => {
 		if (multiple) {
@@ -48,13 +50,11 @@ function CustomFileUploader(props, ref) {
 		} else {
 			onChange(urlStore[0]);
 		}
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [urlStore]);
+	}, [urlStore, multiple, onChange]);
 
 	useEffect(() => {
 		handleProgress(loading);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [loading]);
+	}, [loading, handleProgress]);
 
 	const onUploadProgress = (index) => (file) => {
 		setProgress((previousProgress) => ({
@@ -68,33 +68,6 @@ function CustomFileUploader(props, ref) {
 		}));
 	};
 
-	const uploadFile = (index) => async (file) => {
-		const { data } = await request({
-			method : 'GET',
-			url    : '/get_media_upload_url',
-			params : {
-				file_name: file.name,
-			},
-		});
-
-		const { url, headers } = data;
-
-		await publicRequest({
-			url,
-			data    : file,
-			method  : 'PUT',
-			headers : {
-				...headers,
-				'Content-Type': file.type,
-			},
-			onUploadProgress: onUploadProgress(index),
-		});
-
-		const finalUrl = url.split('?')[0];
-
-		return finalUrl;
-	};
-
 	const handleChange = async (values) => {
 		try {
 			setLoading(true);
@@ -102,7 +75,7 @@ function CustomFileUploader(props, ref) {
 			if (values.length > 0) {
 				setProgress({});
 
-				const promises = values.map((value, index) => uploadFile(index)(value));
+				const promises = values.map((value, index) => uploadFile(index)(value, onUploadProgress));
 
 				const allUrls = await Promise.all(promises);
 
