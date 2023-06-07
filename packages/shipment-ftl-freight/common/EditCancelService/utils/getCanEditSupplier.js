@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const editSupplierServiceStates = ['init', 'awaiting_service_provider_confirmation', 'confirmed_by_service_provider'];
 
 const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = [
@@ -12,7 +14,7 @@ const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = [
 const serviceCompletedOrCancelled = ['completed', 'cancelled'];
 
 export default function getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder }) {
-	if (user_data?.email === 'ajeet@cogoport.com') {
+	if (user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
 		return true;
 	}
 
@@ -20,7 +22,8 @@ export default function getCanEditSupplier({ shipment_data, user_data, state, ac
 
 	const serviceInEditSupplierState = editSupplierServiceStates?.includes(state);
 
-	const oldShipmentCancellable = shipment_data?.serial_id <= 120347 && !serviceCompletedOrCancelled.includes(state);
+	const oldShipmentCancellable = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& !serviceCompletedOrCancelled.includes(state);
 
 	return userCanCancel && (serviceInEditSupplierState || oldShipmentCancellable);
 }

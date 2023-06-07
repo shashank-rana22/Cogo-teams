@@ -163,34 +163,7 @@ const GLOBAL_CONSTANTS = {
 	regex_patterns: {
 		number: /^[+-]?\d*\.?\d+$/,
 	},
-	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
-	invoice_check_id                : 120347,
-};
-
-GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
-	freight_invoice_currency: {
-		IN: [
-			GLOBAL_CONSTANTS.currency_code.INR,
-			GLOBAL_CONSTANTS.currency_code.USD,
-		],
-		GB: [
-			GLOBAL_CONSTANTS.currency_code.GBP,
-			GLOBAL_CONSTANTS.currency_code.EUR,
-			GLOBAL_CONSTANTS.currency_code.USD,
-		],
-		VN: [
-			GLOBAL_CONSTANTS.currency_code.USD,
-			GLOBAL_CONSTANTS.currency_code.VND,
-		],
-		others: [
-			GLOBAL_CONSTANTS.currency_code.USD,
-			GLOBAL_CONSTANTS.currency_code.EUR,
-			GLOBAL_CONSTANTS.currency_code.INR,
-		],
-
-	},
-	languages: LANGUAGE_OPTIONS,
-
+	languages                       : LANGUAGE_OPTIONS,
 	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
 	invoice_check_id                : 120347,
 };

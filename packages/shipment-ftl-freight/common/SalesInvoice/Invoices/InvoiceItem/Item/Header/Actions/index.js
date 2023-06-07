@@ -1,5 +1,6 @@
 import { Popover, Tooltip, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMOverflowDot,
 	IcMInfo,
@@ -41,7 +42,8 @@ function Actions({
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);

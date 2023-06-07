@@ -1,10 +1,10 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import CONSTANTS from '../../../../../../../configurations/constant.json';
 import styles from '../styles.module.css';
 
 import Actions from './Actions';
@@ -30,7 +30,7 @@ function Status({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data.email === CONSTANTS.ajeet_email;
+	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
@@ -60,7 +60,7 @@ function Status({
 	};
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > CONSTANTS.invoice_check_id || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.invoice_check_id || isAuthorized);
 
 	return (
 		<div className={styles.invoice_container}>
@@ -83,7 +83,7 @@ function Status({
 			) : null}
 
 			{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= CONSTANTS.invoice_check_id ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"

@@ -7,7 +7,6 @@ import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState, useContext, useRef } from 'react';
 
-import CONSTANTS from '../../../../../../configurations/contants.json';
 import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 import ClickableDiv from '../../../../../ClickableDiv';
 
@@ -40,7 +39,7 @@ function Header({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data.email === CONSTANTS.ajeet_email;
+	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const invoicePartyDetailsRef = useRef(null);
 
@@ -69,7 +68,8 @@ function Header({
 
 	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
 
-	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= 120347 && invoice?.status === 'reviewed'
+	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 
 	let invoiceStatus = invoicesList?.filter(
@@ -94,7 +94,7 @@ function Header({
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > 120347 || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.invoice_check_id || isAuthorized);
 
 	return (
 		<div className={styles.container}>
@@ -243,7 +243,7 @@ function Header({
 					) : null}
 
 					{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= 120347 ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"

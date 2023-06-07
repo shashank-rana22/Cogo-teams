@@ -1,10 +1,9 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
-
-import CONSTANTS from '../../../../../../../../configurations/constant.json';
 
 import EmailInfo from './Components/EmailInfo';
 import KebabContent from './Components/KebabContent';
@@ -37,7 +36,8 @@ function Actions({
 	const [showOtpModal, setShowOTPModal] = useState(false);
 	const [showExchangeRate, setExchangeRate] = useState(false);
 	const [isEditInvoice, setIsEditInvoice] = useState(false);
-	const showForOldShipments = shipment_data.serial_id <= CONSTANTS.invoice_check_id && invoice.status === 'pending';
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
