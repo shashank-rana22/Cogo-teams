@@ -25,7 +25,7 @@ const services_additional_methods = ['stakeholder', 'service_objects', 'booking_
 
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
-	const [activeTab, setActiveTab] = useState('overview');
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 

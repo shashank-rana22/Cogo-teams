@@ -1,0 +1,22 @@
+{
+  "SHIPMENT_TYPES": [
+    { "label": "FCL", "value": "fcl_freight" },
+    { "label": "LCL", "value": "lcl_freight" },
+    { "label": "FCL Local", "value": "fcl_local" }
+  ],
+  "TABS":[
+    { "label":"Knock Off Awaiting", "value": "knockoff_awaiting", "isCriticalVisible": true},
+    { "label":"Pending Knock Off", "value": "knockoff_pending", "isCriticalVisible": true },
+    { "label":"Pending Collection", "value": "collection_pending", "isCriticalVisible": true },
+    { "label":"Under Collection", "value": "under_collection", "isCriticalVisible": true,
+		"readyToCollectVisible": true },
+    { "label":"Collected", "value": "collected", "readyToCollectVisible": true },
+    { "label":"Released", "value": "released", "readyToCollectVisible": true },
+    { "label":"Surrender", "value": "surrendered", "readyToCollectVisible": true },
+    { "label":"On Hold", "value": "on_hold", "readyToCollectVisible": true }
+  ],
+  "ACCORDIAN_TABS": [
+    { "label": "Invoivces", "value": "invoices"},
+    { "label": "Tasks", "value": "tasks"}
+  ]
+}

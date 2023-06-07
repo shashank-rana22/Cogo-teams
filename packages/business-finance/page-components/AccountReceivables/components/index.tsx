@@ -7,8 +7,12 @@ import React, { useState } from 'react';
 import useListCogoEntity from '../hooks/useListCogoEntity';
 
 import Dashboard from './Dashboard';
+import Defaulters from './Defaulters';
+import Invoice from './Invoice';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
+
+const REDIRECT_TABS = ['manageBpr'];
 
 function AccountReceivables() {
 	const { push, query } = useRouter();
@@ -22,7 +26,7 @@ function AccountReceivables() {
 	const { id: partnerId } = partner || {};
 
 	const handleChange = (val:string) => {
-		if (['invoices', 'defaulters', 'manageBpr'].includes(val)) {
+		if (REDIRECT_TABS.includes(val)) {
 			window.location.href = `/${partnerId}/business-finance/account-receivables/${val}`;
 			return;
 		}
@@ -75,14 +79,14 @@ function AccountReceivables() {
 						<Dashboard entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="invoices" title="Invoices">
-						--
+						<Invoice entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="outstanding" title="Outstanding">
 						<Outstanding entityCode={entityCode} />
 					</TabPanel>
 
 					<TabPanel name="defaulters" title="Defaulters">
-						--
+						<Defaulters />
 					</TabPanel>
 					<TabPanel name="manageBpr" title="Manage BPR">
 						--

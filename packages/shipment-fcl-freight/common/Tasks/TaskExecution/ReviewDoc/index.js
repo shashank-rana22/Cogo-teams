@@ -1,5 +1,5 @@
-import { Loader, Button, Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import { Loader, Button, Toast, Textarea } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -21,7 +21,7 @@ function ReviewDoc({
 		refetch();
 	};
 
-	const { list, loading } = useListDocuments({
+	const { list = {}, loading = true } = useListDocuments({
 		defaultFilters: {
 			shipment_id: task.shipment_id, id: task.task_field_id,
 		},
@@ -33,7 +33,7 @@ function ReviewDoc({
 	let docData = {};
 	let params = {};
 
-	if (!loading && list?.list?.length) {
+	if (!loading && list.list?.length) {
 		docData = list.list[0] || {};
 		params = {
 			id                  : docData.id,
@@ -147,7 +147,7 @@ function ReviewDoc({
 			{approvalState?.ammend ? (
 				<div className={styles.remark}>
 					<div className={styles.sub_heading}>Please specify the reason for this </div>
-					<textarea
+					<Textarea
 						className="remark_text"
 						value={remarkValue}
 						onChange={(e) => setRemarkValue(e?.target?.value)}

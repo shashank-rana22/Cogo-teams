@@ -1,0 +1,19 @@
+.icon {
+	display: flex;
+	justify-content: center;
+	padding-top: 8px;
+}
+
+.container {
+	margin-top: 16px;
+	margin-bottom: 16px;
+}
+
+.delete {
+	color: #ed3726;
+	cursor: pointer;
+}
+
+.button {
+	margin-right: 12px;
+}

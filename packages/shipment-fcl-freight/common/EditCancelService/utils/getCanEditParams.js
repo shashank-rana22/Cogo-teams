@@ -1,6 +1,16 @@
-const editParamsStakeholders = ['booking_agent', 'superadmin'];
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const controlsEditableConditions = [
+const EDIT_PARAMS_STAKEHOLDERS = {
+	booking_agent: {
+		idToMatch: 'importer_exporter_id',
+	},
+	consignee_shipper_booking_agent: {
+		idToMatch: 'consignee_shipper_id',
+	},
+	superadmin: {},
+};
+
+const CONTROLS_EDITABLE_CONDITIONS = [
 	{
 		state      : ['confirmed_by_service_provider'],
 		trade_type : ['export'],
@@ -26,17 +36,21 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return false;
 	}
 
-	if (user_data?.email === 'ajeet@cogoport.com') {
+	if (user_data?.user?.id === GLOBAL_CONSTANTS.ajeet_singh_user_id) {
 		return true;
 	}
 
-	const userCanCancel = editParamsStakeholders.includes(activeStakeholder);
+	let userCanEdit = activeStakeholder in EDIT_PARAMS_STAKEHOLDERS;
+	if (userCanEdit && EDIT_PARAMS_STAKEHOLDERS[activeStakeholder]?.idToMatch) {
+		const idToMatch = shipment_data[EDIT_PARAMS_STAKEHOLDERS[activeStakeholder].idToMatch];
+		userCanEdit = idToMatch === serviceData?.importer_exporter?.id;
+	}
 
 	const showEditParamsKey = serviceData?.show_edit_params;
 
-	const isControlsEditable = controlsEditableConditions.some(
-		(conditions) => getShowCondition(shipment_data, conditions),
+	const isControlsEditable = CONTROLS_EDITABLE_CONDITIONS.some(
+		(conditions) => getShowCondition({ trade_type: shipment_data?.trade_type, ...serviceData }, conditions),
 	);
 
-	return userCanCancel && showEditParamsKey && isControlsEditable;
+	return userCanEdit && showEditParamsKey && isControlsEditable;
 }

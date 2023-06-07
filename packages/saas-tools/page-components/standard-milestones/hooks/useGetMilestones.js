@@ -50,7 +50,7 @@ const useGetMilestones = ({ sideBar }) => {
 
 	useEffect(() => {
 		getRefetch();
-	}, [getRefetch, sideBar]);
+	}, [getRefetch, sideBar, filters]);
 
 	const hookSetters = {
 		setFilters,

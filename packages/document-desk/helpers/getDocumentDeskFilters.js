@@ -1,13 +1,15 @@
-import customsMapping from '../configs/FCL_TABS/CUSTOMS_TABS';
-import exportMapping from '../configs/FCL_TABS/EXPORT_TABS';
-import importMapping from '../configs/FCL_TABS/IMPORT_TABS';
-import localMapping from '../configs/FCL_TABS/LOCAL_TABS';
+import cfsMapping from '../configs/FCL/FCL_TABS/CFS_TABS';
+import customsMapping from '../configs/FCL/FCL_TABS/CUSTOMS_TABS';
+import exportMapping from '../configs/FCL/FCL_TABS/EXPORT_TABS';
+import importMapping from '../configs/FCL/FCL_TABS/IMPORT_TABS';
+import localMapping from '../configs/FCL/FCL_TABS/LOCAL_TABS';
 
 const mapping = {
 	fcl_customs : customsMapping,
 	export      : exportMapping,
 	import      : importMapping,
 	fcl_local   : localMapping,
+	fcl_cfs     : cfsMapping,
 };
 
 const keyMapping = {

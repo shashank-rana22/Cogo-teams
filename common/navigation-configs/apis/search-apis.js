@@ -427,6 +427,24 @@ const apis = [
 		service_name : 'user',
 	},
 	{
+		api         : 'get_saas_insurance_list_commodities',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_rate',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
+		api         : 'get_saas_insurance_country_supported',
+		access_type : 'private',
+		module      : 'insurance',
+		feature     : 'insurance',
+	},
+	{
 		api          : 'get_spot_search_indicative_prices',
 		access_type  : 'private',
 		service_name : 'spot_search',
@@ -435,6 +453,12 @@ const apis = [
 		api          : 'get_spot_search_shipment_insights',
 		access_type  : 'private',
 		service_name : 'spot_search',
+	},
+	{
+		api         : 'get_saas_hs_code_list',
+		access_type : 'private',
+		module      : 'hs-code',
+		feature     : 'controlled checkout',
 	},
 ];
 export default apis;

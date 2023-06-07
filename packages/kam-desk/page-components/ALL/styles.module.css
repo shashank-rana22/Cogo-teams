@@ -1,0 +1,15 @@
+.header {
+	display: flex;
+	justify-content: space-between;
+	margin-left: 16px;
+}
+
+.filter_container {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 16px;
+}
+
+.tabs_container {
+	margin-top: 12px;
+}

@@ -38,7 +38,7 @@ function BulkUpload({
 					/>
 
 					<Breadcrumb.Item
-						style={{ color: '#221F20', fontSize: '16px' }}
+						className={styles.breadcrumb_inner_item}
 						label="Bulk Upload"
 					/>
 				</Breadcrumb>

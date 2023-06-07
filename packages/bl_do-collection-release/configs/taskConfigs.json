@@ -1,0 +1,436 @@
+{
+	"collection_pending": {
+		"steps": [
+			"Select Mode of Collection",
+			"Enter Details"
+		],
+		"initial_step": {
+			"action_text": "NEXT",
+			"final_step": false,
+			"next_step_key": "collection_mode",
+			"controls": [
+				{
+					"name": "ids",
+					"type": "checkbox_group",
+					"label": "Select BLs to collect",
+					"options": [],
+					"multiple": true
+				},
+				{
+					"name": "collection_mode",
+					"label": "Select Mode of Collection",
+					"type": "pills",
+					"span": 12,
+					"className": "custom-pills",
+					"options": [
+						{
+							"label": "Physical Handover",
+							"value": "physical_collection"
+						},
+						{
+							"label": "Delivery By Courier",
+							"value": "courier"
+						},
+						{
+							"label": "Email",
+							"value": "email"
+						}
+					],
+					"rules": {
+						"required": "Collect Mode is Required"
+					}
+				}
+			]
+			
+		},
+		"physical_collection": {
+			"action_text": "DONE",
+			"final_step": true,
+			"controls": [
+				{
+					"name": "collection_address",
+					"label": "Enter Office Address",
+					"type": "text",
+					"placeholder": "Enter your address here",
+					"rules": {
+						"required": "Address is Required"
+					}
+				},
+				{
+					"name": "name",
+					"label": "Who's Collecting?",
+					"type": "text",
+					"placeholder": "Enter Name",
+					"rules": {
+						"required": "Name is Required"
+					}
+				}
+			]
+		},
+		"courier": {
+			"action_text": "FINISH",
+			"final_step": true,
+			"controls": [
+				{
+					"name": "tracking_id",
+					"label": "Enter Tracking ID",
+					"type": "text",
+					"placeholder": "Enter tracking details here",
+					"rules": {
+						"required": "Tracking ID is Required"
+					}
+				}
+			]
+		},
+		"email": {
+			"action_text": "FINISH",
+			"final_step": true,
+			"controls": [
+				{
+					"name": "email_proof",
+					"label": "Upload Proof of Email",
+					"type": "file",
+					"span": 6,
+					"themeType": "secondary",
+					"uploadIcon": "ic-upload",
+					"multiple": true,
+					"onlyURLOnChange": true,
+					"placeholder": "Upload cancelled cheque...",
+					"accept": "image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+					"uploadType": "aws",
+					"drag": true,
+					"height": 70,
+					"rules": {
+						"required": "This is required"
+					}
+				}
+			]
+		},
+		"static_data_to_send": [
+			{
+				"key": "id",
+				"value": "update_collection_details"
+			},
+			{
+				"key": "data",
+				"value": {
+					"bl_detail": {
+						"collection_mode": "formValue,collection_mode",
+						"collection_movement_details": [{
+							"collection_address": "formValue,collection_address",
+							"name": "formValue,name",
+							"tracking_id": "formValue,tracking_id",
+							"email_proof": "formValue,email_proof"
+						}],
+						"shipment_id": "item,id",
+						"id": "formValue,ids"
+					}
+				}
+			}
+		]
+	},
+	"under_collection": {
+		"steps": [
+			"Upload Scanned Copy of Document"
+		]
+	},
+	"collected": {
+		"steps": [
+			"Select Release Mode",
+			"Enter Details"
+		],
+		"initial_step": {
+			"action_text": "NEXT",
+			"conditional_final_step": true,
+			"final_step": false,
+			"next_step_key": "delivery_mode",
+			"controls": [
+				{
+					"name": "ids",
+					"type": "checkbox_group",
+					"label": "Select Documents to Release",
+					"options": [],
+					"multiple": true
+				},
+				{
+					"name": "delivery_mode",
+					"label": "Select Release Mode",
+					"type": "pills",
+					"span": 12,
+					"className": "custom-pills",
+					"options": [
+						{
+							"label": "Physical Handover",
+							"value": "physical_handover"
+						},
+						{
+							"label": "Delivery By Courier",
+							"value": "courier"
+						}
+					],
+					"rules": {
+						"required": "Release Mode is Required"
+					}
+				}
+			]
+		},
+		"physical_handover": {
+			"action_text": "DONE",
+			"final_step": true,
+			"controls": [
+				{
+					"name": "name",
+					"label": "Who's Releasing?",
+					"type": "text",
+					"span": 4,
+					"placeholder": "Enter Name",
+					"rules": {
+						"required": "Name is Required"
+					}
+				},
+				{
+					"name": "handover_date",
+					"label": "Date of Release",
+					"type": "datepicker",
+					"rules": {
+						"required": "Date of Collection is Required"
+					}
+				}
+			]
+		},
+		"courier": {
+			"action_text": "FINISH",
+			"final_step": true,
+			"controls": [
+				{
+					"name": "tracking_id",
+					"label": "Enter Tracking ID",
+					"type": "text",
+					"span": 4,
+					"placeholder": "Enter tracking details here",
+					"rules": {
+						"required": "Tracking ID is Required"
+					}
+				}
+			]
+		},
+		"static_data_to_send": [
+			{
+				"key": "id",
+				"value": "mark_bl_released"
+			},
+			{
+				"key": "data",
+				"value": {
+					"bl_detail": {
+						"delivery_mode": "formValue,delivery_mode",
+						"delivery_movement_details": [{
+							"name": "formValue,name",
+							"handover_date": "formValue,handover_date",
+							"tracking_id": "formValue,tracking_id"
+						}],
+						"status": "ternary,formValue::delivery_mode:telex:surrender_pending:released",
+						"id": "formValue,ids"
+					}
+				}
+			}
+		]
+	},
+	"released": {
+		"steps": [
+			"Mark BL as Delivered"
+		],
+		"initial_step": {
+			"action_text": "FINISH",
+			"final_step": true,
+			"controls": [
+				{
+					"name": "ids",
+					"type": "checkbox_group",
+					"label": "Select Documents to Deliver",
+					"options": [],
+					"multiple": true
+				},
+				{
+					"name": "mark_bl_as_delivered",
+					"label": "Mark BL as Delivered",
+					"type": "datepicker",
+					"rules": {
+						"required": "Date is Required"
+					}
+				}
+			]
+		},
+		"static_data_to_send": [
+			{
+				"key": "id",
+				"value": "mark_bl_delivered"
+			},
+			{
+				"key": "data",
+				"value": {
+					"bl_detail": {
+						"status": "static,delivered",
+						"id": "formValue,ids"
+					}
+				}
+			}
+		]
+	},
+	"surrendered": {
+		"steps": [
+			"Select Surrender Mode",
+			"Enter Details",
+			"Mark as Surrendered"
+		],
+		"initial_step": {
+			"action_text": "NEXT",
+			"conditional_final_step": true,
+			"next_step_key": "surrender_mode",
+			"final_step": false,
+			"default_next": "under_surrender",
+			"controls": 
+			[	
+				{
+				"name": "ids",
+				"label": "Select Documents to Surrender",
+				"type": "checkbox_group",
+				"options": [],
+				"multiple": true
+				},
+				{
+					"name": "surrender_mode",
+					"label": "Select Surrender Mode",
+					"type": "pills",
+					"span": 12,
+					"className": "custom-pills",
+					"options": [
+						{
+							"label": "Physical Handover",
+							"value": "physical_handover"
+						},
+						{
+							"label": "Delivery By Courier",
+							"value": "courier"
+						}
+					],
+					"rules": {
+						"required": "Surrender Mode is Required"
+					}
+				}
+			]
+		},
+		"physical_handover": {
+			"action_text": "NEXT",
+			"final_step": false,
+			"default_next": "mark_as_surrendered",
+			"controls": [
+				{
+					"name": "name",
+					"label": "Who's Surrendering?",
+					"type": "text",
+					"span": 4,
+					"placeholder": "Enter Name",
+					"rules": {
+						"required": "Name is Required"
+					}
+				},
+				{
+					"name": "surrender_location",
+					"label": "Location",
+					"span": 4,
+					"type": "location-select",
+					"optionsListKey": "location",
+					"params": { "filters": { "type": ["city", "seaport", "pincode"] } },
+					"rules": {
+						"required": "Location is Required"
+					}
+				},
+				{
+					"name": "date_surrendered",
+					"label": "Date Surrendered",
+					"span": 4,
+					"type": "datepicker",
+					"usePortal": true,
+					"rules": {
+						"required": "Date Surrendered is Required"
+					}
+				}
+			]
+		},
+		"courier": {
+			"action_text": "NEXT",
+			"final_step": false,
+			"default_next": "mark_as_surrendered",
+			"controls": [
+				{
+					"name": "tracking_id",
+					"label": "Enter Tracking ID",
+					"type": "text",
+					"span": 4,
+					"placeholder": "Enter tracking details here",
+					"rules": {
+						"required": "Tracking ID is Required"
+					}
+				},
+				{
+					"name": "date_surrendered",
+					"label": "Date Surrendered",
+					"span": 4,
+					"type": "datepicker",
+					"usePortal": true,
+					"rules": {
+						"required": "Date Surrendered is Required"
+					}
+				}
+			]
+		},
+		"mark_as_surrendered": {
+			"action_text": "FINISH",
+			"final_step": true,
+			"controls": [
+				{
+					"name": "surrender_proof",
+					"label": "Upload Proof of Surrender",
+					"type": "file",
+					"span": 6,
+					"themeType": "secondary",
+					"uploadIcon": "ic-upload",
+					"multiple": true,
+					"onlyURLOnChange": true,
+					"placeholder": "Upload cancelled cheque...",
+					"accept": "image/*,.pdf,.doc,.docx,application/msword,application/vnd.openxmlformats-officedocument.wordprocessingml.document",
+					"uploadType": "aws",
+					"drag": true,
+					"height": 70,
+					"rules": {
+						"required": "This is required"
+					}
+				}
+			]
+		},
+		"static_data_to_send": [
+			{
+				"key": "id",
+				"value": "mark_bl_surrendered"
+			},
+			{
+				"key": "data",
+				"value": {
+					"bl_detail": {
+						"surrender_mode": "formValue,surrender_mode",
+						"delivery_movement_details": [{
+							"tracking_id": "formValue,tracking_id",
+							"surrender_location": "formValue,surrender_location",
+							"date_surrendered": "formValue,date_surrendered",
+							"name": "formValue,name",
+							"surrender_proof": "formValue,surrender_proof"
+						}],
+					"status": "static,surrendered",
+					"id": "formValue,ids"
+					}
+				}
+			}
+		]
+	}
+}

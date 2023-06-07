@@ -1,0 +1,161 @@
+.container {
+	padding: 10px;
+	background-color: #fff;
+	border: 1px solid#88cad1;
+	border-top: none;
+
+	.core-ui-button-root {
+		margin-left: auto;
+	}
+
+	.ui-tabs-list {
+		width: 20%;
+		padding: 12px;
+		margin: 12px;
+		border-bottom: none;
+	}
+
+	.ui-tabs-list.horizontal {
+		border-bottom: none !important;
+	}
+}
+
+.form_container {
+	width: 72%;
+	padding-left: 30px;
+	margin-bottom: 16px;
+	border-left: 1px solid rgb(216 218 227 / 50%);
+
+	.core-ui-tag-root.custom-pills {
+		padding: 18px;
+		margin-right: 10px;
+		background: transparent;
+
+		.core-ui-tag-text {
+			font-size: 12px;
+			font-weight: 500;
+			color: #8c8d96;
+			text-transform: capitalize;
+		}
+	}
+
+	.custom-pills.active {
+		.core-ui-tag-root {
+			background: #eff1ff;
+			border-color: #8b92cc;
+		}
+
+		.core-ui-tag-text {
+			color: #393f70;
+		}
+	}
+
+	.flex-wrap {
+		flex-wrap: wrap;
+	}
+
+	.admin > div {
+		margin: 0 !important;
+	}
+}
+
+.accordian_container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.link {
+	display: inline-block;
+	max-width: 230px;
+	margin-right: 5px;
+	overflow: hidden;
+	font-weight: 500;
+	color: #393f70;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.bottom_container {
+	padding: 10px 0;
+	border-top: 1px solid #d1d5e433;
+}
+
+.form_div {
+	display: flex;
+	flex-direction: column;
+	padding-left: 12px;
+}
+
+.list_container {
+	padding: 10px;
+	background-color: #fff;
+	border-top: none;
+
+	.card-list-header-root {
+		padding: 0 20px;
+		background: #393f70;
+		border-bottom: none;
+
+		.ui_table_head_row {
+			align-items: center !important;
+			padding: 8px 0 !important;
+		}
+
+		.card-list-header-title {
+			font-size: 12px;
+			font-weight: normal;
+			color: #fff;
+		}
+	}
+
+	.card-body-row {
+		margin: 0 !important;
+		cursor: initial !important;
+
+		.card-body-col {
+			font-size: 12px;
+		}
+	}
+}
+
+.service_tabs {
+	display: flex;
+	align-items: center;
+	width: 40%;
+	margin-top: 12px;
+	font-size: 12px;
+}
+
+.service_tab {
+	padding: 12px 16px;
+	margin-right: 12px;
+	font-weight: 600;
+	color: #000;
+	background-color: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+}
+
+.active.service_tab {
+	color: #ee3425;
+	background-color: #fdebe9;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 0 32px 12px 0;
+}
+
+.loading_container {
+	display: flex;
+	flex-direction: column-reverse;
+	align-items: center;
+	justify-content: center;
+	height: 24vh;
+}
+
+.loader_icon {
+	width: 50px;
+}

@@ -18,14 +18,7 @@
 
 .sid {
 	color: #f68b21;
-}
-
-.amount {
-	font-weight: 800;
-}
-
-.service {
-	font-weight: 800;
+	cursor: pointer;
 }
 
 .center {
@@ -39,6 +32,7 @@
 
 .flex {
 	display: flex;
+	align-items: center;
 }
 
 .icon_div {
@@ -59,4 +53,56 @@
 .styled_name {
 	font-size: 12px;
 	font-weight: 500;
+}
+
+.cursor {
+	cursor: pointer;
+}
+
+.tool_tip {
+	font-size: 12px;
+}
+
+.styled_pills {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: fit-content;
+	height: 16px;
+	padding: 8px 12px;
+	background-color: var(--color);
+	border-radius: 4px;
+}
+
+.style_text {
+	font-size: 10px;
+}
+
+.modal_container {
+	:global {
+		.ui_modal_body_container {
+			max-height: 600px;
+		}
+	}
+}
+
+.action_div {
+	display: flex;
+	align-items: center;
+}
+
+.icon_style {
+	width: 16px;
+	height: 16px;
+	margin: 8px 0 0 4px;
+}
+
+.div_flex {
+	display: flex;
+	align-items: center;
+	margin: 8px;
+}
+
+.margin_span {
+	margin-left: 8px;
 }

@@ -1,9 +1,9 @@
 import { Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, format } from '@cogoport/utils';
 import React from 'react';
 
-import { keyValue } from '../../../../../constants';
 import useGetGraph from '../../../../../hooks/useGetGraph';
 import ResponsiveChart from '../CardComponent/ResponsiveChart';
 
@@ -25,6 +25,8 @@ function SalesComponent({
 	const invoiceArray = [];
 	const creditNoteArray = [];
 	const revenueArray = [];
+
+	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
 	SALES_INVOICE.forEach((element) => {
 		if (element.invoiceType === 'INVOICE') {
@@ -126,7 +128,7 @@ function SalesComponent({
 									getDataFromDuration(
 										invoiceArray,
 										durations[val - 1],
-									)?.[0]?.dashboardCurrency || keyValue[entityCode],
+									)?.[0]?.dashboardCurrency || currency,
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -143,7 +145,7 @@ function SalesComponent({
 									getDataFromDuration(
 										creditNoteArray,
 										durations[val - 1],
-									)?.[0]?.dashboardCurrency || keyValue[entityCode],
+									)?.[0]?.dashboardCurrency || currency,
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -174,7 +176,7 @@ function SalesComponent({
 									getDataFromDuration(
 										revenueArray,
 										durations[val - 1],
-									)?.[0]?.dashboardCurrency || keyValue[entityCode],
+									)?.[0]?.dashboardCurrency || currency,
 									{
 										style                 : 'currency',
 										currencyDisplay       : 'code',
@@ -194,8 +196,8 @@ function SalesComponent({
 		return (
 			<div className={styles.place}>
 				{
-					[1, 2, 3, 4].map(() => (
-						<Placeholder className={styles.placeholder_container} />
+					[1, 2, 3, 4].map((item) => (
+						<Placeholder key={item} className={styles.placeholder_container} />
 					))
 				}
 			</div>

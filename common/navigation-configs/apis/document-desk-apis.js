@@ -523,5 +523,30 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_shipment_booking_confirmation_preferences',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_rate_charge_codes',
+		access_type  : 'private',
+		service_name : 'rate_sheet',
+	},
+	{
+		api          : 'list_partner_addresses',
+		access_type  : 'private',
+		service_name : 'organization',
+	},
+	{
+		api          : 'generate_bluetide_hbl',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_pending_task_authorization',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 export default apis;

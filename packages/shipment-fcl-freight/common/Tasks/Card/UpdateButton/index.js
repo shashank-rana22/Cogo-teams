@@ -1,11 +1,13 @@
 import { Button } from '@cogoport/components';
+import { ShipmentDetailContext } from '@cogoport/context';
 import { RPASearch } from '@cogoport/ocean-modules';
+import { useContext } from 'react';
 
 import styles from './styles.module.css';
 
-const disabledStakeholders = ['release_desk', 'collection_desk'];
+const DISABLE_TASK_FOR_STAKEHOLDERS = ['release_desk', 'collection_desk'];
 
-const rpaSupportedTasks = [
+const RPA_SUPPORTED_TASKS = [
 	'upload_booking_note',
 	'update_container_details',
 	'upload_draft_bill_of_lading',
@@ -18,9 +20,11 @@ function UpdateButton({
 	handleClick = () => {},
 	handleChange = () => {},
 	hideButton = false,
-	shipment_type,
 	show = false,
+	tasksList = [],
 }) {
+	const { primary_service } = useContext(ShipmentDetailContext);
+
 	if (hideButton) {
 		return null;
 	}
@@ -43,11 +47,21 @@ function UpdateButton({
 		buttonText = 'Review';
 	}
 
-	const disableTask = disabledStakeholders.includes(task?.assigned_stakeholder);
+	let disableTask = DISABLE_TASK_FOR_STAKEHOLDERS.includes(task?.assigned_stakeholder);
+
+	if (task.task === 'upload_si'
+	&& task.status === 'pending'
+	&& primary_service?.trade_type === 'export') {
+		disableTask = (tasksList || []).some(
+			(item) => item.service_type === 'fcl_freight_service'
+				&& item.status === 'pending'
+				&& item.task === 'update_container_details',
+		);
+	}
 
 	if (
-		rpaSupportedTasks.includes(task?.task)
-		&& (task?.task !== 'upload_si' || shipment_type === 'fcl_freight')
+		RPA_SUPPORTED_TASKS.includes(task.task)
+		&& (task.task !== 'upload_si')
 	) {
 		return (
 			<div className={styles.container}>

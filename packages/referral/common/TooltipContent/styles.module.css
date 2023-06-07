@@ -1,0 +1,11 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.business_name {
+	margin-top: 3px;
+	font-size: 12px;
+	font-weight: 500;
+	color: #828282;
+}
