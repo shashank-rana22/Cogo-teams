@@ -1,7 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import { getAmountInLakhCrK } from '../Logistics/getAmountInLakhCrK';
 import showInTooltop from '../utils/getOverFlowData';
 
 const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
@@ -21,7 +20,14 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 						currencyDisplay : 'code',
 					},
 				}),
-				getAmountInLakhCrK(thirtyDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
+				formatAmount({
+					amount   :	thirtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_0_30',
@@ -37,7 +43,14 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 						currencyDisplay : 'code',
 					},
 				}),
-				getAmountInLakhCrK(threeSixtyDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
+				formatAmount({
+					amount   :	threeSixtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_30_60',
@@ -53,7 +66,14 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 						currencyDisplay : 'code',
 					},
 				}),
-				getAmountInLakhCrK(sixtyDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
+				formatAmount({
+					amount   :	sixtyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_60_90',
@@ -69,7 +89,14 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 						currencyDisplay : 'code',
 					},
 				}),
-				getAmountInLakhCrK(ninetyDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
+				formatAmount({
+					amount   :	ninetyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_90_180',
@@ -85,7 +112,14 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 						currencyDisplay : 'code',
 					},
 				}),
-				getAmountInLakhCrK(oneEightyDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
+				formatAmount({
+					amount   :	oneEightyDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count__180_365',
@@ -101,7 +135,14 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 						currencyDisplay : 'code',
 					},
 				}),
-				getAmountInLakhCrK(threeSixtyPlusDayOverdue, GLOBAL_CONSTANTS.currency_code.INR),
+				formatAmount({
+					amount   :	threeSixtyPlusDayOverdue,
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}),
 			),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_365',
