@@ -1,7 +1,5 @@
 import { Button, Tooltip, CheckboxGroup, Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect, useMemo } from 'react';
 
@@ -22,11 +20,9 @@ function SelectService({
 	const [value, onChange] = useState(selected);
 	const [invoiceCurrency, setInvoiceCurrency] = useState(invoice_currency);
 
-	let options = [];
+	const options = [];
 
 	allTakenServices?.forEach((service) => {
-		const countryCode = getCountryDetails({ country_id: invoice?.billing_address?.organization_country_id });
-
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
 			const trade_type = service?.trade_type;
 
@@ -98,16 +94,6 @@ function SelectService({
 
 			options.push(servicesToPush);
 		}
-
-		options = options?.filter(
-			(opt) => !(
-				opt?.service_type === 'cargo_insurance_service'
-					&& !GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
-						.cargo_insurance.countries.includes(
-							countryCode,
-						)
-			),
-		);
 	});
 
 	const handleChange = (newValue) => {

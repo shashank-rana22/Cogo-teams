@@ -95,12 +95,9 @@ function SelectService({
 		}
 
 		options = options?.filter(
-			(opt) => !(
-				opt?.service_type === 'cargo_insurance_service'
+			(opt) => !(opt?.service_type === 'cargo_insurance_service'
 					&& !GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
-						.cargo_insurance.countries.includes(
-							countryCode,
-						)
+						.cargo_insurance.countries.includes(countryCode)
 			),
 		);
 	});
