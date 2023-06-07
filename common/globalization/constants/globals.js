@@ -2,11 +2,6 @@ import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
 
 const GLOBAL_CONSTANTS = {
-	country_ids: {
-		IN : '541d1232-58ce-4d64-83d6-556a42209eb7',
-		VN : '177fcbad-8ef7-4324-871c-6c31745f4411',
-		GB : '222d4b9d-56a8-4580-b761-a71c653263fb',
-	},
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
@@ -100,8 +95,8 @@ const GLOBAL_CONSTANTS = {
 		superadmin_id          : '5de782f6-f59d-41fc-84f4-8425dc1fa670',
 		tech_superadmin_id     : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		cogoacademy_admin_id   : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
-		ajeet_singh_user_id    : '4bafde92-a30f-44d3-ace4-584dd460143e',
 		sagar_bankar_user_id   : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
+		ajeet_singh_user_id    : '4bafde92-a30f-44d3-ace4-584dd460143e',
 		local_charge_providers : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
