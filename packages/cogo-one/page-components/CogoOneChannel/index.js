@@ -174,7 +174,7 @@ function CogoOne() {
 							setRaiseTicketModal={setRaiseTicketModal}
 							zippedTicketsData={zippedTicketsData}
 							viewType={viewType}
-							has_voice_call_access={has_voice_call_access}
+							hasVoiceCallAccess={has_voice_call_access}
 						/>
 					)}
 				</>
@@ -250,7 +250,7 @@ function CogoOne() {
 					mailProps={mailProps}
 					firestore={firestore}
 					flashMessagesLoading={flashMessagesLoading}
-					has_voice_call_access={has_voice_call_access}
+					hasVoiceCallAccess={has_voice_call_access}
 				/>
 				<div className={styles.chat_details_continer}>
 					{renderComponent()}

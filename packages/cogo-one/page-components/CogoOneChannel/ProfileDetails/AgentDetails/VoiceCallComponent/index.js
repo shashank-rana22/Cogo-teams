@@ -14,7 +14,7 @@ function VoiceCallComponent({
 	userName,
 	activeTab,
 	setModalType = () => {},
-	has_voice_call_access,
+	hasVoiceCallAccess,
 }) {
 	const dispatch = useDispatch();
 
@@ -37,7 +37,7 @@ function VoiceCallComponent({
 		});
 	};
 	const handleCall = () => {
-		if (userMobile && has_voice_call_access) {
+		if (userMobile && hasVoiceCallAccess) {
 			dispatch(
 				setProfileState({
 					is_in_voice_call          : true,
@@ -63,7 +63,7 @@ function VoiceCallComponent({
 						<div className={styles.dialer_icon_div} onClick={handleCall} role="button" tabIndex={0}>
 							<IcMCall
 								className={cl`${styles.call_icon} ${
-									(!has_voice_call_access)
+									(!hasVoiceCallAccess)
 										? styles.disable_call_icon : ''}`}
 							/>
 						</div>

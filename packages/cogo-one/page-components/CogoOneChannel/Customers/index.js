@@ -48,7 +48,7 @@ function Customers({
 	firestore,
 	viewType = '',
 	flashMessagesLoading,
-	has_voice_call_access,
+	hasVoiceCallAccess,
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
@@ -170,7 +170,7 @@ function Customers({
 					onChange={setActiveTab}
 				>
 					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
-					{has_voice_call_access && <TabPanel name="voice" title="Voice" />}
+					{hasVoiceCallAccess && <TabPanel name="voice" title="Voice" />}
 					<TabPanel name="mail" title="Mail" />
 				</Tabs>
 			</div>
