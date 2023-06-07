@@ -2329,6 +2329,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/pricing/trends',
 				possible_apis : apis.pricing_trends,
 			},
+			{
+				key           : 'chakravyuh-trends',
+				title         : 'Feedback Dashboard',
+				href          : '/v2/feedback-dashboard',
+				as            : '/v2/feedback-dashboard',
+				possible_apis : apis.pricing_trends,
+			},
 		],
 
 	},
