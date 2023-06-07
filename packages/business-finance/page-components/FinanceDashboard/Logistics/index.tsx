@@ -13,7 +13,7 @@ import TotalPayablesRecievables from './TotalPayablesRecievavles';
 import TreasuryStatistics from './TreasuryStatistics';
 
 interface ItemProps {
-	key?: string ;
+	key?: string;
 	label?: string;
 	icon?: JSX.Element;
 }
