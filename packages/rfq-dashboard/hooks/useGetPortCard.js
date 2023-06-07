@@ -41,7 +41,7 @@ const useGetPortCard = ({ props }) => {
 	} = data;
 
 	const {
-		origin_port = {}, destination_port = {}, service_type,
+		origin_port, destination_port, service_type, origin_airport = {}, destination_airport = {},
 	} = detail;
 
 	const commodity_array = COMMODITY_MAPPING.map((commodity) => ({ [commodity]: detail[commodity] }));
@@ -87,9 +87,9 @@ const useGetPortCard = ({ props }) => {
 	return {
 		loading,
 		Component,
-		origin_port,
+		origin_port      : origin_port || origin_airport,
 		service_type,
-		destination_port,
+		destination_port : destination_port || destination_airport,
 		commodity_array,
 		stats,
 		freight_price_currency,

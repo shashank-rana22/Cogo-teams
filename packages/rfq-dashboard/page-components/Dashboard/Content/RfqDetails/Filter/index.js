@@ -1,4 +1,5 @@
 import { Checkbox, Button, Select } from '@cogoport/components';
+import { IcMTick } from '@cogoport/icons-react';
 
 import { SORT_OPTIONS } from '../../../../../constants';
 import useBulkUpdateRfqState from '../../../../../hooks/useBulkUpdateRfqState';
@@ -9,7 +10,7 @@ function Filter({
 	data, filterStore, setFilterStore, checkedItems,
 	selectAll, setCheckedItems, setSelectAll, getRfqsForApproval,
 }) {
-	const { bulkUpdateRfqState, loading } = useBulkUpdateRfqState({ getRfqsForApproval });
+	const { bulkUpdateRfqState, loading } = useBulkUpdateRfqState({ getRfqsForApproval, setCheckedItems });
 
 	const handleSelectAll = () => {
 		setCheckedItems(!selectAll ? data : []);
@@ -33,6 +34,7 @@ function Filter({
 					onClick={handleApproveRfq}
 					disabled={checkedItems.length === 0 || loading}
 				>
+					<IcMTick width="22px" height="22px" />
 					Approve Selected (
 					{checkedItems.length}
 					)
