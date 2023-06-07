@@ -8,3 +8,12 @@
 	text-decoration: underline;
 	cursor: pointer;
 }
+
+.status{
+	width:fit-content;
+	padding:0px 6px;
+	border-radius: 6px;
+	color: black;
+	background-color: #FEE135;
+	margin-right: 4px;
+}

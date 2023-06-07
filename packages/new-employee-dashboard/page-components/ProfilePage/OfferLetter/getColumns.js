@@ -61,7 +61,9 @@ const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 					{item?.status === 'rejected'
 						? (
 							<div style={{ display: 'flex' }}>
-								<div>Rejected - </div>
+								<div className={styles.status} style={{ backgroundColor: '#FFCBD0' }}>Rejected</div>
+								{' '}
+								-
 
 								<Tooltip
 									interactive
@@ -76,7 +78,14 @@ const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 								</Tooltip>
 							</div>
 						)
-						: <div>{startCase(item?.status)}</div>}
+						: (
+							<div
+								className={styles.status}
+								style={{ backgroundColor: item?.status === 'active' ? '#F0EE8E' : '#82d682' }}
+							>
+								{startCase(item?.status)}
+							</div>
+						)}
 				</div>
 			),
 		},
