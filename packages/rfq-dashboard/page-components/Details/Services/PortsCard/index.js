@@ -16,7 +16,7 @@ function PortsCard(props) {
 	const {
 		loading, Component, origin_port, destination_port, commodity_array,
 		stats, freight_price_currency, freight_price_discounted,
-		total_price_discounted, showPrice, setShowPrice, id, rfq_card_loading, rate_card_details_data,
+		total_price_discounted, priceBreakDown, setPriceBreakDown, id, rfq_card_loading, rate_card_details_data,
 		rate, rate_card_details, currency_conversion, editedMargins, setEditedMargins, primaryService,
 		convenienceDetails, setConvenienceDetails, updateMargin, refetchRateCards, getRfqsForApproval,
 		margin_limit, rfq_state, iconText,
@@ -58,13 +58,13 @@ function PortsCard(props) {
 						role="presentation"
 						className={styles.down_card_button}
 						onClick={() => {
-							setShowPrice(isEmpty(showPrice) ? { rfq_rate_card_id: id } : {});
+							setPriceBreakDown(isEmpty(priceBreakDown) ? { rfq_rate_card_id: id } : {});
 						}}
 					>
-						{!isEmpty(showPrice) ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
+						{!isEmpty(priceBreakDown) ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 					</div>
 				</div>
-				{!isEmpty(showPrice) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && rate && (
+				{!isEmpty(priceBreakDown) && !rfq_card_loading && !(isEmpty(rate_card_details_data)) && rate && (
 					<BreakdownDetails
 						rate={rate}
 						detail={rate_card_details}
@@ -77,7 +77,7 @@ function PortsCard(props) {
 						updateMargin={updateMargin}
 						rfq_rate_card_id={id}
 						refetchRateCards={refetchRateCards}
-						setShowPrice={setShowPrice}
+						setPriceBreakDown={setPriceBreakDown}
 						getRfqsForApproval={getRfqsForApproval}
 						margin_limit={margin_limit}
 						rfq_state={rfq_state}

@@ -30,6 +30,6 @@
 }
 
 .errors {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	color: red;
 }

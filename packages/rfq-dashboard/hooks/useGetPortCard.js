@@ -26,7 +26,7 @@ const ICON_MAPPING = {
 const useGetPortCard = ({ props }) => {
 	const { data = {}, loading, refetchRateCards, getRfqsForApproval, rfq_state = '' } = props;
 
-	const [showPrice, setShowPrice] = useState({});
+	const [priceBreakDown, setPriceBreakDown] = useState({});
 	const [editedMargins, setEditedMargins] = useState({});
 	const [convenienceDetails, setConvenienceDetails] = useState({});
 
@@ -47,10 +47,10 @@ const useGetPortCard = ({ props }) => {
 	const commodity_array = COMMODITY_MAPPING.map((commodity) => ({ [commodity]: detail[commodity] }));
 
 	useEffect(() => {
-		if (!isEmpty(showPrice)) {
-			getRfqRateCardDetails({ rfq_rate_card_id: showPrice?.rfq_rate_card_id });
+		if (!isEmpty(priceBreakDown)) {
+			getRfqRateCardDetails({ rfq_rate_card_id: priceBreakDown?.rfq_rate_card_id });
 		}
-	}, [getRfqRateCardDetails, showPrice]);
+	}, [getRfqRateCardDetails, priceBreakDown]);
 
 	const {
 		rate = {}, detail: rate_card_details = {}, currency_conversion = {}, margin_limit = {},
@@ -95,8 +95,8 @@ const useGetPortCard = ({ props }) => {
 		freight_price_currency,
 		freight_price_discounted,
 		total_price_discounted,
-		showPrice,
-		setShowPrice,
+		priceBreakDown,
+		setPriceBreakDown,
 		id,
 		rfq_card_loading,
 		rate_card_details_data,

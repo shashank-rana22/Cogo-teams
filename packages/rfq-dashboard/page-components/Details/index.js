@@ -2,7 +2,7 @@ import { useRouter } from '@cogoport/next';
 import { useEffect } from 'react';
 
 import useGetRfqRateCards from '../../hooks/useGetRfqRateCards';
-import useListRfqs from '../../hooks/useListRfqs';
+import useListRfqs from '../../hooks/useListrfqs';
 
 import BasicDetails from './BasicDetails';
 import Graph from './Graph';
