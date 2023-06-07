@@ -23,74 +23,52 @@ export const convertCurrencyValue = (
 	return (inBase / (currencies?.[toCurrency] || 1)) * fxFees;
 };
 
+const calculateLineItemTotal = (lineItem, toCurrency, conversions) => {
+	if (lineItem.source === 'manual') {
+		return 0;
+	}
+
+	const temp = (lineItem?.total_price_discounted || 0)
+	+ Number((lineItem?.credit_amount || 0) * (lineItem?.quantity || 0) || 0);
+
+	return convertCurrencyValue(temp, lineItem?.currency, toCurrency, conversions);
+};
+
 export const displayTotal = ({
 	lineItems,
 	editedMargins,
 	conversions,
 	toCurrency,
-
 }) => {
 	let total = 0;
 
-	(lineItems || []).forEach((line_item) => {
-		if (line_item.source !== 'manual') {
-			total += convertCurrencyValue(
-				line_item?.total_buy_price === 0
-					? line_item?.total_price_discounted
-					: (line_item?.total_price_discounted || 0)
-							+ Number((line_item?.credit_amount || 0) * (line_item?.quantity || 0) || 0),
-				line_item?.currency,
-				toCurrency,
-				conversions,
-			);
-		}
+	(lineItems || []).forEach((lineItem) => {
+		total += calculateLineItemTotal(lineItem, toCurrency, conversions);
 	});
 
 	editedMargins?.forEach((editedMargin) => {
+		const matchingLineItems = (lineItems || []).filter(
+			(lineItem) => editedMargin.code === lineItem.code,
+		);
+		const { margins = [] } = matchingLineItems[0] || {};
+		const predefinedMargin = (margins || []).find(
+			(item) => item?.margin_type === 'demand',
+		);
+		const { total_margin_value = 0 } = predefinedMargin || {};
+
+		let temp = 0;
 		if (editedMargin.type === 'absolute_unit') {
-			(lineItems || [])?.forEach((lineItem) => {
-				const { margins = [] } = lineItem;
-
-				const predefined_margin = (margins || []).find(
-					(item) => item?.margin_type === 'demand',
-				);
-				const { total_margin_value = 0 } = predefined_margin || {};
-
-				if (editedMargin.code === lineItem.code) {
-					const temp =						(editedMargin.value || 0) * (lineItem?.quantity || 0)
-						- (lineItem.source !== 'manual' ? total_margin_value : 0);
-
-					total += convertCurrencyValue(
-						temp,
-						editedMargin.currency,
-						toCurrency,
-						conversions,
-					);
-				}
-			});
+			temp = (editedMargin.value || 0) * (matchingLineItems[0]?.quantity || 0) - total_margin_value;
+		} else if (editedMargin.type === 'absolute_total') {
+			temp = editedMargin.value - total_margin_value;
 		}
 
-		if (editedMargin.type === 'absolute_total') {
-			(lineItems || []).forEach((lineItem) => {
-				const { margins = [] } = lineItem;
-
-				const predefined_margin = (margins || []).find(
-					(item) => item?.margin_type === 'demand',
-				);
-				const { total_margin_value = 0 } = predefined_margin || {};
-
-				if (editedMargin.code === lineItem.code) {
-					const temp =						editedMargin.value
-						- (lineItem.source !== 'manual' ? total_margin_value : 0);
-					total += convertCurrencyValue(
-						temp,
-						editedMargin.currency,
-						toCurrency,
-						conversions,
-					);
-				}
-			});
-		}
+		total += convertCurrencyValue(
+			temp,
+			editedMargin.currency,
+			toCurrency,
+			conversions,
+		);
 	});
 
 	return total;
