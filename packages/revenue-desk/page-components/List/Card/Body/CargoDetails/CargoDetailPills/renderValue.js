@@ -1,5 +1,4 @@
-import { Tooltip, Toast, Button } from '@cogoport/components';
-import { IcMCopy } from '@cogoport/icons-react';
+import { Tooltip, Toast } from '@cogoport/components';
 import { format, startCase, upperCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -247,12 +246,6 @@ export const renderValue = (label, detail) => {
 							{' '}
 							{detail?.master_airway_bill_number || ''}
 						</span>
-						<Button
-							className="secondary sm"
-							onClick={() => copyToClipboard(detail?.master_airway_bill_number || '')}
-						>
-							<IcMCopy />
-						</Button>
 					</div>
 				);
 			}

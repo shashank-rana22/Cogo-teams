@@ -14,16 +14,6 @@ function Body({ data }) {
 			<div className={styles.middle_section}>
 				<CargoDetails data={data} />
 			</div>
-			<div className={styles.right_section}>
-				<div className={styles.sell_price}>
-					Sell Price :
-					<span style={{ fontWeight: '700', color: ' #221F20' }}>USD 700</span>
-				</div>
-				<div className={styles.kam_discount_text}>
-					KAM Discount Applied :
-					<span style={{ fontWeight: '600', color: ' #4F4F4F' }}>INR 1000</span>
-				</div>
-			</div>
 		</div>
 	);
 }

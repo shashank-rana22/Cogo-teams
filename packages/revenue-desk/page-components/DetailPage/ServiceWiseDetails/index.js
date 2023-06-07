@@ -97,7 +97,8 @@ function Rates({ groupedShowServicesData, serviceData }) {
 						<Modal.Header title="PREVIEW" />
 						<Modal.Body>
 							<div className={styles.modal_text}>
-								*You have used Revenue Desk wallet to apply discount. Please provide a reason for approving this booking at this rate.
+								*You have used Revenue Desk wallet to apply discount.
+								Please provide a reason for approving this booking at this rate.
 							</div>
 							<Checkbox
 								label="Request not serviceable"
