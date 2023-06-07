@@ -1,5 +1,5 @@
 import { Tabs, TabPanel } from '@cogoport/components';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useGetOfferLetter from '../hooks/useGetEmployeeOfferLetter';
@@ -8,7 +8,6 @@ import useProfileDetails from '../hooks/useProfileDetails';
 import AdditionalDetails from './AdditionalDetails';
 import Header from './Header';
 import CtcBreakupModal from './Header/CtcBreakupModal';
-import ViewCtcBreakup from './Header/ViewCtcBreakup';
 import OfferLetter from './OfferLetter';
 import ProfileDetails from './ProfileDetails';
 import SignedDocuments from './SignedDocuments';
@@ -43,8 +42,6 @@ function ProfilePage() {
 		offerLetterApiRefetch,
 	} = useGetOfferLetter();
 
-	const { metadata } = offerLetter || {};
-
 	const { detail = {} } = profileData || {};
 
 	return (
@@ -71,6 +68,9 @@ function ProfilePage() {
 									loading={loading}
 									getEmployeeDetails={getEmployeeDetails}
 									getEmployeeDetailsLoading={getEmployeeDetailsLoading}
+									offerLetter={offerLetter}
+									setShowCtcBreakupModal={setShowCtcBreakupModal}
+									offerLetterApiLoading={offerLetterApiLoading}
 								/>
 							</TabPanel>
 						);
@@ -79,27 +79,21 @@ function ProfilePage() {
 				</Tabs>
 			</div>
 
-			{showCtcBreakupModal && (
-				isEmpty(offerLetter)
-					? (
-						<CtcBreakupModal
-							detail={detail}
-							showCtcBreakupModal={showCtcBreakupModal}
-							setShowCtcBreakupModal={setShowCtcBreakupModal}
-							ctcStructure={ctcStructure}
-							initialQuestion={initialQuestion}
-							setInitialQuestion={setInitialQuestion}
-							formProps={formProps}
-							offerLetterApiRefetch={offerLetterApiRefetch}
-						/>
-					) : (
-						<ViewCtcBreakup
-							metadata={metadata}
-							setShowCtcBreakupModal={setShowCtcBreakupModal}
-							showCtcBreakupModal={showCtcBreakupModal}
-						/>
-					)
-			)}
+			{
+				showCtcBreakupModal && (
+					<CtcBreakupModal
+						detail={detail}
+						showCtcBreakupModal={showCtcBreakupModal}
+						setShowCtcBreakupModal={setShowCtcBreakupModal}
+						ctcStructure={ctcStructure}
+						initialQuestion={initialQuestion}
+						setInitialQuestion={setInitialQuestion}
+						formProps={formProps}
+						offerLetterApiRefetch={offerLetterApiRefetch}
+					/>
+				)
+			}
+
 		</div>
 	);
 }

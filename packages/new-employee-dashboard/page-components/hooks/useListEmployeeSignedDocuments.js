@@ -1,22 +1,25 @@
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useGetEmployeeSignedDocuments = () => {
+const useListEmployeeSignedDocuments = () => {
 	const { query } = useSelector((state) => state.general);
 	const { profile_id } = query || {};
 
 	const [{ data, loading }] = useHarbourRequest({
 		method : 'get',
-		url    : '/get_employee_signing_documents',
+		url    : '/list_employee_signed_documents',
 		params : {
-			employee_detail_id: profile_id,
+			filters: {
+				employee_detail_id : profile_id,
+				status             : ['accepted', 'active'],
+			},
 		},
 	}, { manual: false });
 
 	return {
-		data,
+		list: data?.list,
 		loading,
 	};
 };
 
-export default useGetEmployeeSignedDocuments;
+export default useListEmployeeSignedDocuments;

@@ -41,7 +41,7 @@ const consolidated_invoices = {
 			service_name : 'harbour',
 		},
 		{
-			api          : 'get_employee_signing_documents',
+			api          : 'list_employee_signed_documents',
 			access_type  : 'private',
 			service_name : 'harbour',
 		},
@@ -142,11 +142,6 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
-		// {
-		// 	api          : 'list_company_documents',
-		// 	access_type  : 'private',
-		// 	service_name : 'harbour',
-		// },
 
 		{
 			api          : 'get_employee_signing_documents',

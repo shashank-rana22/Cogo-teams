@@ -1,67 +1,49 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import EmptyState from '../../../common/EmptyState';
 import CommonLoader from '../../../common/Loader';
-import PreviewDocument from '../../../common/PreviewDocumet';
-import useGetEmployeeSignedDocuments from '../../hooks/useGetEmployeeSigningDocuments';
+import StyledTable from '../../StyledTable';
 
+import getColumns from './getColumns';
 import styles from './styles.module.css';
 
-const STATUS_MAPPING = {
-	active   : 'CHROs Approval Pending',
-	approved : 'Approved by CHRO',
-	accepted : 'Offer letter accepted',
-};
+function OfferLetter({ offerLetter, setShowCtcBreakupModal, offerLetterApiLoading }) {
+	const [viewCtcBreakupModal, setViewCtcBreakupModal] = useState(false);
 
-function OfferLetter() {
-	const { data, loading } = useGetEmployeeSignedDocuments();
-	const { offer_letter } = data || {};
-	const { signed_document_url, document_url, status, created_at } = offer_letter || {};
+	const columns = getColumns({ setViewCtcBreakupModal, viewCtcBreakupModal });
 
-	if (loading) {
+	const showAddCtcButton = (offerLetter || []).every((item) => item?.status === 'rejected');
+
+	if (offerLetterApiLoading) {
 		return <CommonLoader />;
 	}
 
-	if (isEmpty(offer_letter)) {
+	if (isEmpty(offerLetter)) {
 		return <EmptyState height={160} />;
 	}
 
 	return (
 		<div className={styles.container}>
+			{
+				showAddCtcButton && (
+					<div className={styles.button_container}>
+						<Button
+							onClick={() => setShowCtcBreakupModal(true)}
+							type="button"
+							themeType="primary"
+							style={{ marginLeft: 12 }}
+						>
+							Add ctc breakup
+						</Button>
 
-			<PreviewDocument
-				document_url={signed_document_url || document_url}
-				preview
-			/>
+					</div>
+				)
+			}
 
-			<div className={styles.content}>
-				<div style={{ fontWeight: 600, paddingBottom: 10 }}>
-					OFFER LETTER
-				</div>
-
-				<div style={{ paddingBottom: 10 }}>
-					<span className={styles.label}>
-						Created at :
-					</span>
-
-					{' '}
-					{formatDate({
-						date       : created_at,
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-						formatType : 'date',
-					})}
-				</div>
-
-				<div style={{ paddingBottom: 10 }}>
-					<span className={styles.label}>
-						Status :
-						{' '}
-					</span>
-					{STATUS_MAPPING[status]}
-				</div>
-
+			<div>
+				<StyledTable columns={columns} data={offerLetter} loading={offerLetterApiLoading} />
 			</div>
 
 		</div>

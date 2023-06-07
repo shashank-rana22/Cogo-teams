@@ -3,15 +3,17 @@ import React from 'react';
 
 import ViewCtcBreakupContent from './ViewCtcBreakupContent';
 
-function ViewCtcBreakup({ metadata, showCtcBreakupModal, setShowCtcBreakupModal }) {
+function ViewCtcBreakup({ viewCtcBreakupModal, setViewCtcBreakupModal }) {
+	const { metadata } = viewCtcBreakupModal || {};
+
 	const onClose = () => {
-		setShowCtcBreakupModal(false);
+		setViewCtcBreakupModal(null);
 	};
 
 	return (
 		<Modal
 			size="xl"
-			show={showCtcBreakupModal}
+			show={viewCtcBreakupModal?.id}
 			onClose={onClose}
 			placement="center"
 		>

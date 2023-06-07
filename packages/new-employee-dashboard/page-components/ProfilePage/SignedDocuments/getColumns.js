@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
 	{
-		Header   : 'DOCUMENT TYPE',
+		Header   : 'DOCUMENT NAME',
 		accessor : (item) => <div className={styles.name}>{item?.name || 'Aadhar Card'}</div>,
 	},
 	{

@@ -6,10 +6,8 @@ const useGetOfferLetter = () => {
 	const { profile_id } = query || {};
 
 	const params = {
-		employee_details_required : true,
-		filters                   : {
-			employee_detail_id : profile_id,
-			status             : ['active', 'approved', 'accepted'],
+		filters: {
+			employee_detail_id: profile_id,
 		},
 	};
 
@@ -19,7 +17,7 @@ const useGetOfferLetter = () => {
 		params,
 	}, { manual: false });
 
-	const offerLetter = data?.list?.[0] || {};
+	const offerLetter = data?.list;
 
 	return {
 		offerLetter,

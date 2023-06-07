@@ -79,15 +79,15 @@ function Header({
 			</div>
 
 			<div className={styles.button_container}>
-				<Button
-					onClick={() => setShowCtcBreakupModal(true)}
-					type="button"
-					themeType="secondary"
-					style={{ marginLeft: 12 }}
-					loading={isLoading || btnloading || offerLetterApiLoading}
-				>
-					{isEmpty(offerLetter) ? 'Add CTC breakup' : 'View CTC breakup'}
-				</Button>
+				{isEmpty(offerLetter) ? (
+					<Button
+						onClick={() => setShowCtcBreakupModal(true)}
+						type="button"
+						themeType="secondary"
+						style={{ marginLeft: 12 }}
+						loading={isLoading || btnloading || offerLetterApiLoading}
+					/>
+				) : null}
 
 				<Button
 					type="button"
