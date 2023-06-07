@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Button, Modal } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Modal, Checkbox, Textarea } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -14,13 +14,22 @@ function Rates({ groupedShowServicesData, serviceData }) {
 	const [inventory, setInventory] = useState([]);
 	const [activeTab, setActiveTab] = useState(tabKeys[0]);
 	const [modalStep, setModalStep] = useState(0);
-
+	const [reason, setReason] = useState(null);
+	const [othertext, setOthertext] = useState(null);
 	const { loading, updateTrigger } = useUpdateRatesPreferences({
 		supplierPayload,
 		inventory,
 		serviceData,
+		reason,
+		othertext,
 	});
-
+	const handleOnChange = (val) => {
+		if (reason === val) {
+			setReason(null);
+		} else {
+			setReason(val);
+		}
+	};
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_select_container}>
@@ -84,10 +93,48 @@ function Rates({ groupedShowServicesData, serviceData }) {
 				) : null}
 			{modalStep === 2
 				? (
-					<Modal size="xl" show={modalStep === 2} onClose={() => setModalStep(0)} placement="center">
+					<Modal size="lg" show={modalStep === 2} onClose={() => setModalStep(0)} placement="center">
 						<Modal.Header title="PREVIEW" />
 						<Modal.Body>
-							hello
+							<div className={styles.modal_text}>
+								*You have used Revenue Desk wallet to apply discount. Please provide a reason for approving this booking at this rate.
+							</div>
+							<Checkbox
+								label="Request not serviceable"
+								value="request_not_serviceable"
+								onChange={() => handleOnChange('request_not_serviceable')}
+								checked={reason === 'request_not_serviceable'}
+							/>
+							<Checkbox
+								label="Rates not available"
+								value="rates_not_available"
+								onChange={() => handleOnChange('rates_not_available')}
+								checked={reason === 'rates_not_available'}
+							/>
+							<Checkbox
+								label="No space with service provider"
+								value="no_space_with_service_provider"
+								onChange={() => handleOnChange('no_space_with_service_provider')}
+								checked={reason === 'no_space_with_service_provider'}
+							/>
+							<Checkbox
+								label="Other"
+								value="other"
+								onChange={() => handleOnChange('other')}
+								checked={reason === 'other'}
+							/>
+							{reason === 'other' && (
+								<div style={{ padding: '0 10px' }}>
+									<Textarea
+										name="a4"
+										size="sm"
+										placeholder="Other Reason"
+										value={othertext}
+										onChange={(val) => setOthertext(val)}
+									/>
+
+								</div>
+							)}
 						</Modal.Body>
 						<Modal.Footer>
 							<div className={styles.btn_container}>
