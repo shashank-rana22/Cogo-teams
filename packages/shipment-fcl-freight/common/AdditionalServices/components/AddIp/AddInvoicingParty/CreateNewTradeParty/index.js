@@ -1,5 +1,4 @@
 import { Stepper } from '@cogoport/components';
-import { useForm, useFieldArray } from '@cogoport/forms';
 import { useState } from 'react';
 
 import useCreateOrganizationTradeParty from '../../../../../../hooks/useCreateOrganizationTradeParty';
@@ -25,19 +24,9 @@ function CreateNewTradeParty({
 		{ title: 'BILLING ADDRESS', key: 'billing_address' },
 	];
 
-	const {
-		formState: { errors },
-		handleSubmit,
-		control,
-		register,
-	} = useForm();
-
 	const afterCreateTradeParty = () => {
 		setShowComponent('view_billing_addresses');
-		if (fetchOrganizationTradeParties) {
-			setShowComponent('view_billing_addresses');
-			fetchOrganizationTradeParties();
-		}
+		fetchOrganizationTradeParties();
 	};
 
 	const { apiTrigger } = useCreateOrganizationTradeParty({
@@ -74,11 +63,6 @@ function CreateNewTradeParty({
 	if (currentStep === 'billing_address') {
 		renderCurrentStepControls = (
 			<AddressForm
-				handleSubmit={handleSubmit}
-				errors={errors}
-				useFieldArray={useFieldArray}
-				control={control}
-				register={register}
 				companyDetails={filledDetails}
 				setCurrentStep={setCurrentStep}
 				showComponent={showComponent}

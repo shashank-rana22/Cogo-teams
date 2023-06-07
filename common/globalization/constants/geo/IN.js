@@ -404,6 +404,32 @@ export default {
 				value : 'open_side',
 			},
 		],
+		entities: [
+			{
+				label : '101 COGO FREIGHT PVT LTD',
+				value : '101',
+			},
+			{
+				label : '201 Cogoport Netherlands',
+				value : '201',
+			},
+			{
+				label : '301 COGOPORT PRIVATE LIMITED',
+				value : '301',
+			},
+			{
+				label : '401 Cogo Universe Pte. Ltd',
+				value : '401',
+			},
+			{
+				label : '501 Cogoport Vietnam',
+				value : '501',
+			},
+		],
+		migration_status: [
+			{ label: 'True', value: true },
+			{ label: 'False', value: false },
+		],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -417,6 +443,13 @@ export default {
 					'rfq_enquiries',
 					'rates_sheets',
 				],
+			},
+		},
+		account_receivables: {
+			defaulters: {
+				migration_status: {
+					show_filter: true,
+				},
 			},
 		},
 	},
