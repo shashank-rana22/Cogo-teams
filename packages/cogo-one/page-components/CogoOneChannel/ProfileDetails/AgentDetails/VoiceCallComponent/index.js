@@ -2,7 +2,6 @@ import { cl } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { useDispatch } from '@cogoport/store';
 import { setProfileState } from '@cogoport/store/reducers/profile';
-import { isEmpty } from '@cogoport/utils';
 
 import hideDetails from '../../../../../utils/hideDetails';
 
@@ -15,6 +14,7 @@ function VoiceCallComponent({
 	userName,
 	activeTab,
 	setModalType = () => {},
+	has_voice_call_access,
 }) {
 	const dispatch = useDispatch();
 
@@ -37,7 +37,7 @@ function VoiceCallComponent({
 		});
 	};
 	const handleCall = () => {
-		if (!isEmpty(userMobile)) {
+		if (userMobile && has_voice_call_access) {
 			dispatch(
 				setProfileState({
 					is_in_voice_call          : true,
@@ -62,8 +62,9 @@ function VoiceCallComponent({
 					<div className={styles.flex_div}>
 						<div className={styles.dialer_icon_div} onClick={handleCall} role="button" tabIndex={0}>
 							<IcMCall
-								className={cl`${
-									(isEmpty(userMobile)) ? styles.disable : styles.call_icon}`}
+								className={cl`${styles.call_icon} ${
+									(!has_voice_call_access)
+										? styles.disable_call_icon : ''}`}
 							/>
 						</div>
 						<div className={styles.call_on_div}>
@@ -71,7 +72,7 @@ function VoiceCallComponent({
 							<div className={styles.show_number}>
 								+
 								{code}
-								{' '}
+								&nbsp;
 								{code === '91' ? hideDetails({
 									data : number,
 									type : 'number',

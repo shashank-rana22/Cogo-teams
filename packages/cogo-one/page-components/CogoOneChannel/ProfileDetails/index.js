@@ -21,6 +21,7 @@ function ProfileDetails({
 	setRaiseTicketModal = () => {},
 	zippedTicketsData = {},
 	viewType = '',
+	has_voice_call_access,
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
@@ -88,6 +89,7 @@ function ProfileDetails({
 						setRaiseTicketModal={setRaiseTicketModal}
 						zippedTicketsData={zippedTicketsData}
 						quotationSentData={quotationEmailSentAt}
+						has_voice_call_access={has_voice_call_access}
 					/>
 				)}
 			</div>

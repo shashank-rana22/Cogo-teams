@@ -1,3 +1,5 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
@@ -26,6 +28,8 @@ import FeedbackModal from './FeedbackModal';
 import ProfileDetails from './ProfileDetails';
 import ReminderModal from './ReminderModal';
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
 
 function CogoOne() {
 	const {
@@ -70,6 +74,8 @@ function CogoOne() {
 	const viewType = getViewType(userRoleIds);
 
 	const isomniChannelAdmin = viewType === 'admin_view';
+
+	const { has_voice_call_access = false } = geo.others.navigations.cogo_one;
 	const {
 		loading:statusLoading,
 		updateUserStatus = () => {},
@@ -168,6 +174,7 @@ function CogoOne() {
 							setRaiseTicketModal={setRaiseTicketModal}
 							zippedTicketsData={zippedTicketsData}
 							viewType={viewType}
+							has_voice_call_access={has_voice_call_access}
 						/>
 					)}
 				</>
@@ -243,6 +250,7 @@ function CogoOne() {
 					mailProps={mailProps}
 					firestore={firestore}
 					flashMessagesLoading={flashMessagesLoading}
+					has_voice_call_access={has_voice_call_access}
 				/>
 				<div className={styles.chat_details_continer}>
 					{renderComponent()}
@@ -257,7 +265,7 @@ function CogoOne() {
 						onClick={() => window.open(ANDRIOD_APK, '_blank')}
 					>
 						<img
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg"
+							src={GLOBAL_CONSTANTS.image_url.cogo_logo_without_bg}
 							alt="bot"
 							className={styles.bot_icon_styles}
 						/>
@@ -272,12 +280,6 @@ function CogoOne() {
 						</div>
 					</div>
 				</div>
-				{showDialModal && (
-					<DialCallModal
-						setShowDialModal={setShowDialModal}
-						showDialModal={showDialModal}
-					/>
-				)}
 			</div>
 			{agentDetails && (
 				<AgentModal
@@ -301,6 +303,12 @@ function CogoOne() {
 				/>
 			)}
 			<ReminderModal firestore={firestore} agentId={userId} getAssignedChats={getAssignedChats} />
+			{showDialModal && (
+				<DialCallModal
+					setShowDialModal={setShowDialModal}
+					showDialModal={showDialModal}
+				/>
+			)}
 		</>
 	);
 }

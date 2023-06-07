@@ -26,6 +26,7 @@ function AgentDetails({
 	activeSelect,
 	setActiveSelect = () => {},
 	setShowMore = () => {},
+	has_voice_call_access,
 }) {
 	const {
 		user_id,
@@ -226,6 +227,7 @@ function AgentDetails({
 					userName={name}
 					activeTab={activeTab}
 					setModalType={setModalType}
+					has_voice_call_access={has_voice_call_access}
 				/>
 			)}
 			{(mobile_no || user_number) && (
