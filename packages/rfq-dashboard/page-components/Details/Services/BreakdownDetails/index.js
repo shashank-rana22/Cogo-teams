@@ -52,7 +52,7 @@ function BreakdownDetails({
 	updateMargin,
 	rfq_rate_card_id = '',
 	refetchRateCards,
-	setShowPrice,
+	setPriceBreakDown,
 	getRfqsForApproval,
 	margin_limit,
 	rfq_state = '',
@@ -89,7 +89,7 @@ function BreakdownDetails({
 				convenienceDetails,
 				rfq_rate_card_id,
 			});
-			setShowPrice({});
+			setPriceBreakDown({});
 			await refetchRateCards({ rfq_id });
 			await getRfqsForApproval();
 		} catch (error) {
