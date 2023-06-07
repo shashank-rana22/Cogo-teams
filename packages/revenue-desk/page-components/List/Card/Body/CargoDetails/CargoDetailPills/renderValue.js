@@ -164,6 +164,8 @@ export const renderValue = (label, detail) => {
 	};
 
 	switch (label) {
+		case 'revert_count':
+			return `${detail?.revert_count} Revert`;
 		case 'container_size':
 			if (detail.container_size.includes('HC')) {
 				return detail.container_size.replace('HC', 'ft HC');

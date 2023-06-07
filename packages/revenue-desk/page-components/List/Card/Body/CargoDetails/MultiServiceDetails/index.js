@@ -6,16 +6,11 @@ import ContainerInfo from '../CargoDetailPills';
 import styles from './styles.module.css';
 
 function MultiServiceDetails({
-	children,
 	mainServices,
-	renderBody: renderBodyProp = null,
-	showSingle = false,
-	placement = null,
-	withButton = true,
 }) {
 	const [show, setShow] = useState(false);
 
-	if (mainServices?.length <= 1 && !showSingle) {
+	if (mainServices?.length <= 1) {
 		return null;
 	}
 
@@ -31,28 +26,28 @@ function MultiServiceDetails({
 		<Popover
 			theme="light"
 			show={show}
-			placement={placement || 'bottom'}
+			placement="bottom"
 			interactive
 			onOuterClick={() => setShow(false)}
 			trigger="mouseenter"
-			content={renderBodyProp ? renderBodyProp() : renderBody()}
+			content={renderBody()}
 		>
-			{withButton ? (
-				<Button
-					style={{
-						background : 'none',
-						padding    : 2,
-						color      : '#366EFD',
-						border     : 'none',
-						height     : 'auto',
-					}}
-					onClick={() => setShow(false)}
-				>
-					{children}
-				</Button>
-			) : (
-				{ children }
-			)}
+			<Button
+				style={{
+					background : 'none',
+					padding    : 2,
+					color      : '#366EFD',
+					border     : 'none',
+					height     : 'auto',
+				}}
+				onClick={() => setShow(true)}
+			>
+				+
+				{' '}
+				{mainServices.length - 1}
+				{' '}
+				More Details
+			</Button>
 		</Popover>
 	);
 }

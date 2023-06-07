@@ -16,19 +16,17 @@ function CargoDetails({ data }) {
 		includeShipment.includes(shipment_type)
 		&& serviceMapping[shipment_type]?.length > 1
 	) {
-		<div>
-			<CargoDetailPills detail={data} />
-			<MultiServiceDetails mainServices={serviceMapping[shipment_type]}>
-				+
-				{(Number(serviceMapping[shipment_type]?.length) - 1)}
-				Details
-			</MultiServiceDetails>
-		</div>;
+		return (
+			<div>
+				<CargoDetailPills detail={{ ...data, revert_count: serviceMapping[shipment_type][0]?.revert_count }} />
+				<MultiServiceDetails mainServices={serviceMapping[shipment_type]} />
+			</div>
+		);
 	}
 
 	return (
 		<div className={styles.cargo_detail}>
-			<CargoDetailPills detail={data} />
+			<CargoDetailPills detail={{ ...data, revert_count: serviceMapping[shipment_type][0]?.revert_count }} />
 		</div>
 	);
 }

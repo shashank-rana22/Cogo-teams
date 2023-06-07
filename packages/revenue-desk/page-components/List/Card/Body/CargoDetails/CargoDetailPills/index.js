@@ -8,6 +8,7 @@ function CargoDetailPills({ detail, labels }) {
 		'container_size',
 		'containers_count',
 		'container_type',
+		'revert_count',
 		'commodity',
 		'inco_term',
 		'trucks_count',
