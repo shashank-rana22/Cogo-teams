@@ -66,11 +66,13 @@ function SingleService({
 
 	return (
 		<div>
-			<Select
-				options={options}
-				value={singleServiceData}
-				onChange={(e) => { setSingleServiceData(e); }}
-			/>
+			<div style={{ marginTop: '16px' }}>
+				<Select
+					options={options}
+					value={singleServiceData}
+					onChange={(e) => { setSingleServiceData(e); }}
+				/>
+			</div>
 
 			{(supplierPayload?.[singleServiceData?.id] || []).length
 				? <SelectedRatesCard prefrences={supplierPayload?.[singleServiceData?.id]} /> : null}
