@@ -11,18 +11,22 @@ function CommodityMapping({ commodity_array }) {
 	return (
 		<div className={styles.container}>
 			{commodity_array.map((item = {}) => (
-				<div
-					key={item}
-					className={styles.tag}
-				>
-					{Object.keys(item).map((key) => (
-						<span key={key}>
-							{item[key]}
-							{' '}
-							{COMMODITY_UNITS_MAPPING[key]}
-						</span>
+				<>
+					{Object.keys(item).map((key) => (item[key]
+						? (
+							<div
+								key={key}
+								className={styles.tag}
+							>
+								<span key={key}>
+									{item[key]}
+									{' '}
+									{COMMODITY_UNITS_MAPPING[key]}
+								</span>
+							</div>
+						) : null
 					))}
-				</div>
+				</>
 			))}
 		</div>
 	);
