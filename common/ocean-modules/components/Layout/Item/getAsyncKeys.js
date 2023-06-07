@@ -553,7 +553,7 @@ const getAsyncFields = (key) => {
 			lableKey      : 'label',
 			asyncKey      : 'list_contract_fcl_freight_services',
 			defaultParams : {
-				page_limit: 50,
+				page_limit: 10,
 			},
 		},
 		lcl_freight_contracts: {
@@ -561,15 +561,7 @@ const getAsyncFields = (key) => {
 			lableKey      : 'label',
 			asyncKey      : 'list_contract_lcl_freight_services',
 			defaultParams : {
-				page_limit: 50,
-			},
-		},
-		air_freight_contracts: {
-			valueKey      : 'value',
-			lableKey      : 'label',
-			asyncKey      : 'list_contract_air_freight_services',
-			defaultParams : {
-				page_limit: 50,
+				page_limit: 10,
 			},
 		},
 		'location-clusters': {
@@ -580,7 +572,7 @@ const getAsyncFields = (key) => {
 				filters: {
 					status: 'active',
 				},
-				page_limit: 50,
+				page_limit: 10,
 			},
 		},
 		'global-segments': {
@@ -599,7 +591,7 @@ const getAsyncFields = (key) => {
 			asyncKey      : 'get_segment_tags',
 			lableKey      : 'name',
 			defaultParams : {
-				page_limit: 50,
+				page_limit: 10,
 			},
 		},
 		'list-segments': {
