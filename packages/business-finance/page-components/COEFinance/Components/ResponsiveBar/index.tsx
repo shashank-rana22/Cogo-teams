@@ -21,14 +21,14 @@ function MyResponsiveBar({ data }) {
 
 			<ResponsiveBar
 				data={data}
-				keys={['Approved', 'Rejected']}
+				keys={['Uploaded', 'Approved', 'Rejected']}
 				indexBy="date"
 				margin={{ top: 50, right: 30, bottom: 80, left: 60 }}
-				padding={0.4}
+				padding={0.2}
 				enableGridY
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
-				colors={['#ACDADF', '#F37166']}
+				colors={['#ACDADF', '#C4DC91', '#F8AEA8']}
 				layout="vertical"
 				groupMode="grouped"
 				borderColor={{

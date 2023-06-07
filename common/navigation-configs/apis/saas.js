@@ -224,6 +224,11 @@ const saas = {
 			api         : 'get_saas_hs_code_six_digit_list',
 			access_type : 'private',
 		},
+		{
+			api          : 'get_multiple_sea_routes',
+			access_type  : 'public',
+			service_name : 'location',
+		},
 	],
 	app_saas_air_tracking: [
 		{
@@ -2349,6 +2354,17 @@ const saas = {
 			module       : 'cogo-store',
 			feature      : 'cogo-store',
 			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	app_saas_import_export_controls: [

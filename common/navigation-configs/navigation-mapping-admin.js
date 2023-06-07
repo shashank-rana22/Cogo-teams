@@ -57,6 +57,7 @@ import {
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
+	IcMBookingDesk,
 } from '@cogoport/icons-react';
 
 import apis from './apis';
@@ -1125,7 +1126,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
 			},
 			{
 				key           : 'coe-bn_salvage',
@@ -1352,8 +1353,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-kam_desk',
 				title         : 'KAM Desk',
-				href          : '/kam-desk',
-				as            : '/kam-desk',
+				href          : '/v2/kam-desk',
+				as            : '/v2/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
 				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
@@ -1732,6 +1733,14 @@ const navigationMappingAdmin = {
 				main_apis     : [],
 				possible_apis : apis.cogo_fx,
 			},
+			{
+				key           : 'transaction_setting-controlled_booking',
+				title         : 'Controlled Booking Desk',
+				icon          : IcMBookingDesk,
+				href          : '/v2/controlled-booking',
+				as            : '/v2/controlled-booking',
+				possible_apis : apis.controlled_booking,
+			},
 		],
 		module_type: 'dashboards',
 	},
@@ -1961,8 +1970,17 @@ const navigationMappingAdmin = {
 				possible_apis : apis.ticket_management,
 			},
 			{
+				key           : 'ticket_management-my_tickets',
+				title         : 'My Tickets',
+				href          : '/v2/ticket-management/my-tickets',
+				as            : '/v2/ticket-management/my-tickets',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : apis.ticket_management,
+			},
+			{
 				key           : 'ticket_management-super_admin',
-				title         : 'Super Admin',
+				title         : 'Admin Dashboard',
 				href          : '/v2/ticket-management/super-admin',
 				as            : '/v2/ticket-management/super-admin',
 				type          : 'link',
@@ -2295,6 +2313,14 @@ const navigationMappingAdmin = {
 				as            : '/v2/referral/dashboard',
 				type          : 'link',
 				possible_apis : apis.referral_dashboard,
+			},
+			{
+				key           : 'referral-simulation',
+				title         : 'Simulation',
+				href          : '/v2/referral/simulation',
+				as            : '/v2/referral/simulation',
+				type          : 'link',
+				possible_apis : apis.referral_simulation,
 			},
 		],
 	},

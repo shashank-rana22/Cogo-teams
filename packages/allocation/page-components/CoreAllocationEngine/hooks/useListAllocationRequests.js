@@ -1,13 +1,16 @@
 import { Button, Checkbox, Popover, Tooltip, Badge, Pill } from '@cogoport/components';
 import { useDebounceQuery } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useAllocationRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
-import { format, isEmpty, startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState, useEffect, useCallback, useMemo } from 'react';
 
 import Actions from '../components/AllocationRequests/List/Actions';
 import styles from '../components/AllocationRequests/List/styles.module.css';
+import REQUEST_STATUS_COLOR_MAPPING from '../constants/request-status-color-mapping';
 
 const useListAllocationRequests = () => {
 	const { profile: { authParams } } = useSelector((state) => state);
@@ -32,7 +35,6 @@ const useListAllocationRequests = () => {
 		data_required                  : true,
 		organization_sub_type_required : true,
 		filters                        : {
-			status       : 'pending',
 			service_type : 'organization',
 			q            : searchQuery || undefined,
 		},
@@ -276,10 +278,43 @@ const useListAllocationRequests = () => {
 				<div>
 					{created_at	 ? (
 						<div className={styles.created_date}>
-							{format(created_at, 'dd MMM yyyy') || '___'}
+							{formatDate({
+								date       : created_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							}) || '___'}
 
 							<div className={styles.created_time}>
-								{format(created_at, 'hh:mm aaa') || '___'}
+								{formatDate({
+									date       : created_at,
+									timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+									formatType : 'time',
+								}) || '___'}
+							</div>
+						</div>
+					) : '___'}
+				</div>
+			),
+		},
+		{
+			key      : 'updated_at',
+			Header   : 'Updated At',
+			accessor : ({ updated_at }) => (
+				<div>
+					{updated_at ? (
+						<div className={styles.created_date}>
+							{formatDate({
+								date       : updated_at,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							}) || '___'}
+
+							<div className={styles.created_time}>
+								{formatDate({
+									date       : updated_at,
+									timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+									formatType : 'time',
+								}) || '___'}
 							</div>
 						</div>
 					) : '___'}
@@ -317,10 +352,22 @@ const useListAllocationRequests = () => {
 			),
 		},
 		{
+			key      : 'status',
+			Header   : 'Status',
+			accessor : ({ status }) => (status ? (
+				<Pill
+					size="md"
+					color={REQUEST_STATUS_COLOR_MAPPING?.[status]}
+				>
+					{startCase(status)}
+				</Pill>
+			) : '___'),
+		},
+		{
 			key      : 'action',
 			Header   : 'Action',
 			accessor : (item) => {
-				const { id } = item;
+				const { id, status: requestStatus } = item;
 
 				return (
 					<div className={styles.content_container}>
@@ -342,7 +389,8 @@ const useListAllocationRequests = () => {
 						>
 							<div
 								className={styles.svg_container}
-								style={checkedRowsId.includes(id) ? { pointerEvents: 'none' } : {}}
+								style={(checkedRowsId.includes(id) || requestStatus !== 'pending')
+									? { pointerEvents: 'none' } : {}}
 							>
 								<IcMOverflowDot
 									height={16}
