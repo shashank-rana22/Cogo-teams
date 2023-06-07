@@ -1,6 +1,7 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
@@ -264,9 +265,11 @@ function CogoOne() {
 						className={styles.download_div}
 						onClick={() => window.open(ANDRIOD_APK, '_blank')}
 					>
-						<img
+						<Image
 							src={GLOBAL_CONSTANTS.image_url.cogo_logo_without_bg}
 							alt="bot"
+							height={16}
+							width={15}
 							className={styles.bot_icon_styles}
 						/>
 						<div className={styles.text_styles}>
