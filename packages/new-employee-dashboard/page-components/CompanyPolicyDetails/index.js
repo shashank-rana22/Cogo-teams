@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Pagination } from '@cogoport/components';
 import React from 'react';
 
 import EmptyState from '../../common/EmptyState';
@@ -10,7 +10,7 @@ import useCompanyPolicyDetails from './useCompanyPolicyDetails';
 
 function CompanyPolicyDetails() {
 	const {
-		columns, listLoading, list, showModal, setShowModal, refetchList,
+		columns, listLoading, list, showModal, setShowModal, refetchList, data, setPage, page,
 	} = useCompanyPolicyDetails();
 
 	return (
@@ -25,11 +25,24 @@ function CompanyPolicyDetails() {
 			</div>
 
 			{(list || []).length > 0 || listLoading ? (
-				<StyledTable
-					columns={columns}
-					data={list}
-					loading={listLoading}
-				/>
+				<>
+					<StyledTable
+						columns={columns}
+						data={list}
+						loading={listLoading}
+					/>
+
+					{data?.total_count > 10 && (
+						<div className={styles.pagination_container}>
+							<Pagination
+								totalItems={data?.total_count || 0}
+								currentPage={page || 1}
+								pageSize={data?.page_limit}
+								onPageChange={setPage}
+							/>
+						</div>
+					)}
+				</>
 			) : <EmptyState emptyText="No Company Policy Added" />}
 
 			<Modal

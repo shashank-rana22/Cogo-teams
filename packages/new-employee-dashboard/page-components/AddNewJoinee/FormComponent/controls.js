@@ -90,45 +90,58 @@ const controls = [
 			},
 		},
 	},
-
 	{
 		name        : 'hiring_manager',
-		type        : 'text',
+		type        : 'asyncSelect',
+		asyncKey    : 'partner_users_ids',
 		label       : 'Hiring Manager',
 		placeholder : 'Hiring Manager',
 		rules       : {
-			required: 'Reporting Manager is required',
+			required: 'Hiring Manager is required',
 		},
-	},
-	{
-		name        : 'hiring_manager_email',
-		type        : 'text',
-		label       : 'Hiring Manager email',
-		placeholder : 'Hiring manager email',
-		rules       : {
-			required: 'Reporting Manager is required',
+		params: {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+
+			},
+			page_limit: 100,
 		},
 	},
 	{
 		name        : 'hr_name',
-		type        : 'text',
+		type        : 'asyncSelect',
+		asyncKey    : 'partner_users_ids',
 		label       : 'HR Name',
 		placeholder : 'Enter Name',
 		rules       : {
 			required: 'name is required',
 		},
-	},
-	{
-		name        : 'hr_email',
-		label       : 'HR Email ID',
-		placeholder : 'Enter email id',
-		type        : 'text',
-		rules       : {
-			required : 'Email is required',
-			pattern  : {
-				value   : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
-				message : 'Email is invalid',
+		params: {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
 			},
+			page_limit: 100,
+		},
+	},
+
+	{
+		name        : 'hrbp',
+		type        : 'asyncSelect',
+		asyncKey    : 'partner_users_ids',
+		label       : 'HRBP',
+		placeholder : 'HRBP',
+		rules       : {
+			required: 'HRBP is required',
+		},
+		params: {
+			filters: {
+				status               : 'active',
+				partner_entity_types : ['cogoport'],
+
+			},
+			page_limit: 100,
 		},
 	},
 ];

@@ -5,6 +5,7 @@ import getColumns from './getColumns';
 
 const useCompanyPolicyDetails = () => {
 	const [showModal, setShowModal] = useState(false);
+	const [page, setPage] = useState(1);
 
 	const [{ loading = false }, trigger] = useHarbourRequest({
 		method : 'post',
@@ -24,6 +25,7 @@ const useCompanyPolicyDetails = () => {
 						filters: {
 							category : 'company_policy',
 							status   : 'active',
+							page,
 						},
 					},
 				});
@@ -31,7 +33,7 @@ const useCompanyPolicyDetails = () => {
 				console.log('error :: ', error);
 			}
 		},
-		[listTrigger],
+		[listTrigger, page],
 	);
 
 	useEffect(() => {
@@ -70,6 +72,9 @@ const useCompanyPolicyDetails = () => {
 		setShowModal,
 		refetchList : fetch,
 		listLoading,
+		page,
+		data,
+		setPage,
 	};
 };
 

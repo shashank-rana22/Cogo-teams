@@ -33,7 +33,11 @@
 	background-color: #4caf50;
 	animation: progress-animation 2s linear;
 }
-
+.pagination_container{
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+}
 @keyframes progress-animation {
 	0% {
 		width: 0%;
@@ -50,4 +54,11 @@
 	align-items: center;
 	justify-content: center;
 	width: fit-content;
+}
+
+.filter_options{
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
 }

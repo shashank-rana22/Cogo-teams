@@ -1,6 +1,6 @@
 import { Button, Toast } from '@cogoport/components';
 import {
-	InputController, SelectController, MobileNumberController, useForm, DatepickerController,
+	InputController, SelectController, MobileNumberController, useForm, DatepickerController, AsyncSelectController,
 } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMArrowBack } from '@cogoport/icons-react';
@@ -18,14 +18,15 @@ const CONTROLS_MAPPING = {
 	mobileNumber    : MobileNumberController,
 	SingleDateRange : DatepickerController,
 	select          : SelectController,
+	asyncSelect     : AsyncSelectController,
 };
 
 const PERSONAL_DETAILS_MAPPING = ['name', 'personal_email', 'mobile_number'];
 
 const EMPLOYEE_DETAILS_MAPPING = ['employee_code', 'designation', 'date_of_joining',
-	'office_location', 'cogoport_email', 'hiring_manager', 'hiring_manager_email'];
+	'office_location', 'cogoport_email'];
 
-const HR_DETAILS_MAPPING = ['hr_name', 'hr_email'];
+const HR_DETAILS_MAPPING = ['hr_name', 'hiring_manager', 'hrbp'];
 
 const SECTION_MAPPING = [
 	{
