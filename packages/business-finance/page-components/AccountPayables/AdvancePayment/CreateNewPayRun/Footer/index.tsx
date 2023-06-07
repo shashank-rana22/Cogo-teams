@@ -73,22 +73,14 @@ function Footer({
 					</div>
 					<div className={styles.amount_container}>
 						<div className={styles.amount}>
-							{viewSelectedInvoice ? formatAmount({
-								amount   : totalValue as any,
+							{ formatAmount({
+								amount   : viewSelectedInvoice ? totalValue as any : totalInvoiceAmount as any,
 								currency : selectedCurrency,
 								options  : {
 									currencyDisplay : 'code',
 									style           : 'currency',
 								},
-							})
-								: formatAmount({
-									amount   : totalInvoiceAmount as any,
-									currency : selectedCurrency,
-									options  : {
-										currencyDisplay : 'code',
-										style           : 'currency',
-									},
-								})}
+							})}
 						</div>
 					</div>
 					<div className={styles.sid_count}>

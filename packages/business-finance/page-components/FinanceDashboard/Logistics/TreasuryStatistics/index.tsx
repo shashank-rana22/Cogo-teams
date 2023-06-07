@@ -8,7 +8,6 @@ import Filter from '../../../commons/Filters';
 import useGetTreasuryStats from '../../hooks/getTreasuryData';
 import showInTooltop from '../../utils/getOverFlowData';
 import { treasuryControls } from '../controls';
-import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
@@ -137,7 +136,14 @@ function TreasuryStatistics() {
 													currencyDisplay : 'code',
 												},
 											}),
-											getAmountInLakhCrK(allocatedAmount, GLOBAL_CONSTANTS.currency_code.INR),
+											formatAmount({
+												amount   :	allocatedAmount,
+												currency : GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
 										)}
 									</>
 								)}
@@ -162,7 +168,14 @@ function TreasuryStatistics() {
 													currencyDisplay : 'code',
 												},
 											}),
-											getAmountInLakhCrK(utilizedAmount, GLOBAL_CONSTANTS.currency_code.INR),
+											formatAmount({
+												amount   :	utilizedAmount,
+												currency : GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
 										)}
 									</>
 								)}
@@ -186,7 +199,14 @@ function TreasuryStatistics() {
 													currencyDisplay : 'code',
 												},
 											}),
-											getAmountInLakhCrK(settledAmount, GLOBAL_CONSTANTS.currency_code.INR),
+											formatAmount({
+												amount   :	settledAmount,
+												currency : GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
 										)}
 									</>
 								)}
@@ -210,7 +230,14 @@ function TreasuryStatistics() {
 													currencyDisplay : 'code',
 												},
 											}),
-											getAmountInLakhCrK(UTRPendingAmount, GLOBAL_CONSTANTS.currency_code.INR),
+											formatAmount({
+												amount   :	UTRPendingAmount as any,
+												currency : GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
 										)}
 									</>
 								)}

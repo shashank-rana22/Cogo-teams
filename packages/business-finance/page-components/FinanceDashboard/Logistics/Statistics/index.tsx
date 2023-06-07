@@ -6,7 +6,6 @@ import React from 'react';
 
 import useGetTodayStats from '../../hooks/getTodayStats';
 import showInTooltop from '../../utils/getOverFlowData';
-import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
@@ -72,7 +71,14 @@ function Statistics({ globalFilters, entityTabFilters }) {
 												currencyDisplay : 'code',
 											},
 										}),
-										getAmountInLakhCrK(totalExpense, GLOBAL_CONSTANTS.currency_code.INR),
+										formatAmount({
+											amount   :	totalExpense,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
 									)}
 								</div>
 								<div className={styles.invoices_styles}>
@@ -106,7 +112,14 @@ function Statistics({ globalFilters, entityTabFilters }) {
 												currencyDisplay : 'code',
 											},
 										}),
-										getAmountInLakhCrK(totalRevenue, GLOBAL_CONSTANTS.currency_code.INR),
+										formatAmount({
+											amount   :	totalRevenue,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
 									)}
 								</div>
 								<div className={styles.invoices_styles}>
@@ -142,7 +155,14 @@ function Statistics({ globalFilters, entityTabFilters }) {
 												currencyDisplay : 'code',
 											},
 										}),
-										getAmountInLakhCrK(totalCashFlow, GLOBAL_CONSTANTS.currency_code.INR),
+										formatAmount({
+											amount   :	totalCashFlow,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
 									)}
 								</div>
 								<div className={styles.text_styles}>

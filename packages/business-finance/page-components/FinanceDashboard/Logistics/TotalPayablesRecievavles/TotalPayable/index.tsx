@@ -6,7 +6,6 @@ import React, { useState, useEffect } from 'react';
 
 import totalPayablesKeyMappings from '../../../constants/total-payables-key-mapping';
 import showInTooltop from '../../../utils/getOverFlowData';
-import { getAmountInLakhCrK } from '../../getAmountInLakhCrK';
 import styles from '../../styles.module.css';
 import ResponsivePieChart from '../ResponsivePieChart';
 
@@ -88,7 +87,14 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 										currencyDisplay : 'code',
 									},
 								}),
-								getAmountInLakhCrK(Math.abs(payNonOverdueAmount), GLOBAL_CONSTANTS.currency_code.INR),
+								formatAmount({
+									amount   :	Math.abs(payNonOverdueAmount) as any,
+									currency : GLOBAL_CONSTANTS.currency_code.INR,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								}),
 							)}
 						</span>
 						<div className={styles.icon_style}>
@@ -102,7 +108,14 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 											currencyDisplay : 'code',
 										},
 									}),
-									getAmountInLakhCrK(Math.abs(payOverdueAmount), GLOBAL_CONSTANTS.currency_code.INR),
+									formatAmount({
+										amount   :	Math.abs(payOverdueAmount) as any,
+										currency : GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}),
 								)}
 							</span>
 							<Popover
@@ -137,10 +150,14 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 											currencyDisplay : 'code',
 										},
 									}),
-									getAmountInLakhCrK(
-										Math.abs(progressPayableData),
-										GLOBAL_CONSTANTS.currency_code.INR,
-									),
+									formatAmount({
+										amount   :	Math.abs(progressPayableData) as any,
+										currency :	GLOBAL_CONSTANTS.currency_code.INR,
+										options  : {
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}),
 								)}
 							</div>
 							<span style={{ marginLeft: '5px' }}>
@@ -181,7 +198,14 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 												currencyDisplay : 'code',
 											},
 										}),
-										getAmountInLakhCrK(onAccountPayable, GLOBAL_CONSTANTS.currency_code.INR),
+										formatAmount({
+											amount   :	onAccountPayable as any,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
 									)}
 								</span>
 								<div className={styles.on_account}>On Account Payment</div>
@@ -230,7 +254,14 @@ function TotalPayable({ payablesData, payablesLoading, items }) {
 												currencyDisplay : 'code',
 											},
 										}),
-										getAmountInLakhCrK(outstandingPayable, GLOBAL_CONSTANTS.currency_code.INR),
+										formatAmount({
+											amount   :	outstandingPayable as any,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
 									)}
 								</span>
 								<div className={styles.on_account}>Outstanding</div>

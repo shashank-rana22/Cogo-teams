@@ -10,7 +10,6 @@ import totalReceivablesKeyMappings from '../../constants/total-receivables-key-m
 import useGetPayablesList from '../../hooks/getPayablesData';
 import useGetReceivablesList from '../../hooks/getReceivablesData';
 import showInTooltop from '../../utils/getOverFlowData';
-import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 import styles from '../styles.module.css';
 
 import ResponsivePieChart from './ResponsivePieChart';
@@ -123,7 +122,14 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 												currencyDisplay : 'code',
 											},
 										}),
-										getAmountInLakhCrK(nonOverdueAmount, GLOBAL_CONSTANTS.currency_code.INR),
+										formatAmount({
+											amount   :	nonOverdueAmount,
+											currency : GLOBAL_CONSTANTS.currency_code.INR,
+											options  : {
+												style           : 'currency',
+												currencyDisplay : 'code',
+											},
+										}),
 									)}
 
 								</span>
@@ -138,7 +144,14 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 													currencyDisplay : 'code',
 												},
 											}),
-											getAmountInLakhCrK(overdueAmount, GLOBAL_CONSTANTS.currency_code.INR),
+											formatAmount({
+												amount   :	overdueAmount,
+												currency : GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
 										)}
 
 									</span>
@@ -173,10 +186,14 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 													currencyDisplay : 'code',
 												},
 											}),
-											getAmountInLakhCrK(
-												Math.abs(progressDataReceivables),
-												GLOBAL_CONSTANTS.currency_code.INR,
-											),
+											formatAmount({
+												amount   :	Math.abs(progressDataReceivables) as any,
+												currency :	GLOBAL_CONSTANTS.currency_code.INR,
+												options  : {
+													style           : 'currency',
+													currencyDisplay : 'code',
+												},
+											}),
 										)}
 									</div>
 									<span style={{ marginLeft: '5px' }}>
@@ -218,10 +235,14 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 														currencyDisplay : 'code',
 													},
 												}),
-												getAmountInLakhCrK(
-													onAccountReceivable,
-													GLOBAL_CONSTANTS.currency_code.INR,
-												),
+												formatAmount({
+													amount   :	onAccountReceivable as any,
+													currency :	GLOBAL_CONSTANTS.currency_code.INR,
+													options  : {
+														style           : 'currency',
+														currencyDisplay : 'code',
+													},
+												}),
 											)}
 										</span>
 										<div className={styles.on_account}>On Account Payment</div>
@@ -270,10 +291,14 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 														currencyDisplay : 'code',
 													},
 												}),
-												getAmountInLakhCrK(
-													outstandingReceivable,
-													GLOBAL_CONSTANTS.currency_code.INR,
-												),
+												formatAmount({
+													amount   :	outstandingReceivable as any,
+													currency :	GLOBAL_CONSTANTS.currency_code.INR,
+													options  : {
+														style           : 'currency',
+														currencyDisplay : 'code',
+													},
+												}),
 											)}
 										</span>
 										<div className={styles.on_account}>Outstanding</div>
