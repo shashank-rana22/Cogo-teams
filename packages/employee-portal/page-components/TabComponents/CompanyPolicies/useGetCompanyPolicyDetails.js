@@ -6,17 +6,17 @@ const useCompanyPolicyDetails = () => {
 
 	const [{ data, loading: listLoading = false }] = useHarbourRequest({
 		method : 'get',
-		url    : '/list_document_templates',
+		url    : '/list_company_documents',
 		params : {
 			filters: {
-				template_type : 'company_policy',
-				status        : 'active',
+				category : 'company_policy',
+				status   : 'active',
 			},
 		},
 	}, { manual: false });
 
 	return {
-		list        : data?.list,
+		mainData    : data,
 		showModal,
 		setShowModal,
 		refetchList : fetch,

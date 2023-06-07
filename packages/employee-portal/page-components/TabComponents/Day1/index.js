@@ -1,13 +1,16 @@
+import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
+
+import PreviewDocumet from '../../../commons/PreviewDocumet';
 
 import styles from './styles.module.css';
 
 function Day1({ setInformationPage }) {
 	const [{ data, loading = false }, listTrigger] = useHarbourRequest({
 		method : 'get',
-		url    : '/list_document_templates',
+		url    : '/list_company_documents',
 	}, { manual: true });
 
 	const fetch = useCallback(
@@ -16,8 +19,8 @@ function Day1({ setInformationPage }) {
 				await listTrigger({
 					params: {
 						filters: {
-							template_type : 'day_1',
-							status        : 'active',
+							category : 'day_1',
+							status   : 'active',
 						},
 					},
 				});
@@ -32,6 +35,11 @@ function Day1({ setInformationPage }) {
 		fetch();
 	}, [fetch]);
 
+
+	
+
+	const { list = [] } = data || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -44,8 +52,11 @@ function Day1({ setInformationPage }) {
 				/>
 				<div className={styles.title}>DAY 1</div>
 			</div>
-			<div className={styles.ansofques}>
+			<div className={styles.rich_text}>
 				<div dangerouslySetInnerHTML={{ __html: data?.list?.[0]?.html_template || 'Day 1!' }} />
+
+
+
 			</div>
 		</div>
 	);

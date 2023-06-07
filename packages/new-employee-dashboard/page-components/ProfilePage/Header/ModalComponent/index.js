@@ -12,12 +12,9 @@ function ModalComponent({
 	setInitialQuestion,
 	// formProps,
 	control,
+	errors,
 }) {
 	// const { control } = formProps;
-
-	
-
-	
 
 	const finalControls = getControls(initialQuestion);
 	return (
@@ -68,21 +65,34 @@ function ModalComponent({
 				return (
 					<div key={yearly.name} className={styles.control_container}>
 						<span className={styles.control_label}>{yearly.label}</span>
-						<Element
-							{...yearly}
-							size="sm"
-							key={yearly.name}
-							control={control}
-							className={styles.field_controller}
-						/>
-						<Element
-							{...monthly}
-							size="sm"
-							key={monthly.name}
-							control={control}
-							className={styles.field_controller}
-						/>
+						<div>
+							<Element
+								{...yearly}
+								size="sm"
+								key={yearly.name}
+								control={control}
+								className={styles.field_controller}
+							/>
+							<div className={styles.error_message}>
+								{errors?.[controlItem?.name]?.message}
+							</div>
+						</div>
+
+						<div>
+							<Element
+								{...monthly}
+								size="sm"
+								key={monthly.name}
+								control={control}
+								className={styles.field_controller}
+							/>
+							<div className={styles.error_message}>
+								{errors?.[controlItem?.name]?.message}
+							</div>
+						</div>
+
 					</div>
+
 				);
 			})}
 		</div>

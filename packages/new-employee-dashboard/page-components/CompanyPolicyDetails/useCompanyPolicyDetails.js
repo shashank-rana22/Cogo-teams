@@ -8,12 +8,12 @@ const useCompanyPolicyDetails = () => {
 
 	const [{ loading = false }, trigger] = useHarbourRequest({
 		method : 'post',
-		url    : '/update_document_template',
+		url    : '/update_company_document',
 	}, { manual: true });
 
 	const [{ data, loading: listLoading = false }, listTrigger] = useHarbourRequest({
 		method : 'get',
-		url    : '/list_document_templates',
+		url    : '/list_company_documents',
 	}, { manual: true });
 
 	const fetch = useCallback(
@@ -22,8 +22,8 @@ const useCompanyPolicyDetails = () => {
 				await listTrigger({
 					params: {
 						filters: {
-							template_type : 'company_policy',
-							status        : 'active',
+							category : 'company_policy',
+							status   : 'active',
 						},
 					},
 				});

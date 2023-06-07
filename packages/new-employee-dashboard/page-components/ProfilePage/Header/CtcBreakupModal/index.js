@@ -18,7 +18,7 @@ export default function CtcBreakupModal({
 }) {
 	const [visible, setVisible] = useState(false);
 
-	const { handleSubmit, reset, control } = formProps;
+	const { handleSubmit, reset, control, formState: { errors } } = formProps;
 
 	const onClose = () => {
 		setShowCtcBreakupModal(false);
@@ -45,6 +45,7 @@ export default function CtcBreakupModal({
 					initialQuestion={initialQuestion}
 					setInitialQuestion={setInitialQuestion}
 					control={control}
+					errors={errors}
 				/>
 			</Modal.Body>
 

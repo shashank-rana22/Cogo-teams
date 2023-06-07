@@ -1,6 +1,5 @@
 import { Button, Loader } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { isEmpty } from '@cogoport/utils';
 
 import PreviewDocumet from '../../../commons/PreviewDocumet';
 import useGetCompanyDocument from '../../../hooks/useGetCompanyDocument';

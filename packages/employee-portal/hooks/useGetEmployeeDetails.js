@@ -10,7 +10,7 @@ function useGetEmployeeDetails({ company_policy_data_required = false }) {
 
 	const [{ loading = false, data = {} }, trigger] = useHarbourRequest({
 		method : 'GET',
-		url    : 'get_employee_details',
+		url    : '/get_employee_details',
 	}, { manual: true });
 
 	const getEmployeeDetails = useCallback(() => {

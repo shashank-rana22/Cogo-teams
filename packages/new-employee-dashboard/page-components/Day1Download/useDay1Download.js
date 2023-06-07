@@ -15,7 +15,7 @@ const useDay1Download = () => {
 
 	const [{ data, loading: listLoading = false }, listTrigger] = useHarbourRequest({
 		method : 'get',
-		url    : '/list_document_templates',
+		url    : '/list_company_documents',
 	}, { manual: true });
 
 	const fetch = useCallback(
@@ -24,8 +24,8 @@ const useDay1Download = () => {
 				await listTrigger({
 					params: {
 						filters: {
-							template_type : 'day_1',
-							status        : 'active',
+							category : 'day_1',
+							status   : 'active',
 						},
 					},
 				});
@@ -49,7 +49,7 @@ const useDay1Download = () => {
 	}, [data?.list]);
 
 	const isUpdate = !isEmpty(data?.list);
-	const url = isUpdate ? '/update_document_template' : '/create_document_template';
+	const url = isUpdate ? '/update_company_document' : '/create_company_document';
 	const [{ loading }, trigger] = useHarbourRequest({
 		url,
 		method: 'post',
@@ -69,9 +69,10 @@ const useDay1Download = () => {
 				id                : isUpdate ? data?.list[0]?.id : undefined,
 				performed_by_id   : 'qwe11e123-asdasd-12312123123qwdads-asdasdqq323',
 				performed_by_type : 'agent',
-				template_type     : 'day_1',
+				category          : 'day_1',
 				html_template     : editorValue.toString('html'),
 				name              : 'day 1 download',
+				document_type     : 'html',
 			};
 
 			await trigger({

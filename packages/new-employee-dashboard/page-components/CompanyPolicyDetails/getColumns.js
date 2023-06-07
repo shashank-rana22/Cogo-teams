@@ -15,7 +15,7 @@ const getColumns = ({ onClickViewDocument, setShowModal, onClickDeleteButton, lo
 	{
 		Header   : 'FILE',
 		accessor : (item) => {
-			const arr = item?.document_url.split('/');
+			const arr = item?.document_url?.split('/');
 			const docName = arr[arr.length - 1];
 
 			return (
