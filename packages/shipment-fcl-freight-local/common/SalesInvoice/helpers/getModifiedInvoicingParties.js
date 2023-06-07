@@ -3,7 +3,7 @@ export default function getModifiedInvoicingParties({ invoicing_parties = [] }) 
 		const ipServices = (ip?.services || []).map(
 			(service, index) => ({
 				...service,
-				serviceKey: `${service?.service_id}:${ip?.is_igst}:${ip?.id}:${index}`,
+				serviceKey: `${service?.service_id}:${ip?.id}:${index}`,
 			}),
 		);
 

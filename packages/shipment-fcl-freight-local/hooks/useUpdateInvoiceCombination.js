@@ -71,7 +71,7 @@ const useUpdateInvoiceCombination = ({
 
 			await trigger({
 				data: {
-					shipment_id          : shipment_data.id,
+					shipment_id          : shipment_data?.id,
 					invoice_combinations : finalParties,
 					performed_by_org_id  : importer_exporter_id,
 				},

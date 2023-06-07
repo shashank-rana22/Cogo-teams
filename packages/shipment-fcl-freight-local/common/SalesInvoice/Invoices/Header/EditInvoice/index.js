@@ -85,6 +85,7 @@ function EditInvoice({
 					size="md"
 					themeType="secondary"
 					onClick={onClose}
+					disabled={loading}
 				>
 					Cancel
 				</Button>

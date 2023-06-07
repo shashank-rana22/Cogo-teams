@@ -10,18 +10,17 @@ const geo = getGeoConstants();
 
 const useEditInvoicePref = ({
 	shipment_data = {},
-	servicesList,
+	servicesList = [],
 	invoicing_parties = [],
 	refetch = () => {},
 }) => {
 	const { importer_exporter_id = '' } = shipment_data;
 	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
-		const { invoice_currency, is_igst } = p || {};
+		const { invoice_currency } = p || {};
 		const allServices = (p?.services || []).map((service) => ({
 			...service,
 			invoice_currency,
-			is_igst,
 		}));
 		allServiceLineitems.push(...allServices);
 	});

@@ -1,9 +1,13 @@
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useContext } from 'react';
 
-const useUpdateCurrencyConversion = ({ refetch = () => {}, setOpen = () => {} }) => {
+const useUpdateCurrencyConversion = ({
+	refetch = () => {}, setOpen = () => {},
+	successMessage = 'Rate Added Successfully!',
+}) => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const [{ loading }, trigger] = useRequest({
@@ -35,11 +39,11 @@ const useUpdateCurrencyConversion = ({ refetch = () => {}, setOpen = () => {} })
 					updated_currency_conversion_rate : exchangeCurrencyHash,
 				},
 			});
-			Toast.success('Rate Added Successfully!');
+			Toast.success(successMessage);
 			refetch();
 			setOpen(false);
 		} catch (err) {
-			console.log(err);
+			Toast.error(getApiError(err?.response?.data));
 		}
 	};
 
