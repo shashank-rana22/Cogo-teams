@@ -1,4 +1,3 @@
-/* eslint-disable react/jsx-indent */
 import { Pill, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
@@ -93,12 +92,12 @@ const completedColumn = ({
 		span     : 1,
 		id       : 'checkbox',
 		accessor : (row?:object) => (
-				<CheckboxItem
-					IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
-					checkedRows={checkedRows}
-					setCheckedRows={setCheckedRows}
-					row={row}
-				/>
+			<CheckboxItem
+				IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
+				checkedRows={checkedRows}
+				setCheckedRows={setCheckedRows}
+				row={row}
+			/>
 		),
 	},
 	{
