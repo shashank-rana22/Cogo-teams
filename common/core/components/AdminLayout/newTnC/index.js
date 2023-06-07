@@ -1,9 +1,8 @@
 import { Modal, Checkbox, Button } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useUpdatePartnerUser from '../Announcements/hooks/useUpdatePartnerUser';
-
 import styles from './styles.module.css';
+import useUpdatePartnerUser from './useUpdatePartnerUser';
 
 function TnC({ partner_user_id }) {
 	const [disabled, setDisabled] = useState(true);
