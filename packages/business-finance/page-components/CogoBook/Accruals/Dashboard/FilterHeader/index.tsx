@@ -3,10 +3,33 @@ import { AsyncSelectController } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
+interface DashboardFilterInterface {
+	month?:string
+	year?:string
+}
+interface FilterHeaderInterface {
+	setDashboardFilters?: React.Dispatch<React.SetStateAction<DashboardFilterInterface>>
+	dashboardFilters?:DashboardFilterInterface
+	GetMonthDetails?: {
+		value?: string;
+		label?: string;
+	}
+	GetYearDetails?:string
+	optionsMonth: {
+		value: string;
+		label: string;
+	}[]
+	optionsYear: () => {
+		value: string;
+		label: string;
+	}[]
+	control: object
+}
+
 function FilterHeader({
 	dashboardFilters, setDashboardFilters,
 	GetYearDetails, optionsYear, GetMonthDetails, optionsMonth, control,
-}) {
+}:FilterHeaderInterface) {
 	return (
 		<div className={styles.container}>
 
@@ -22,7 +45,7 @@ function FilterHeader({
 				/>
 				<Select
 					value={dashboardFilters?.month || GetMonthDetails?.value}
-					onChange={(val:string) => { setDashboardFilters((prev) => ({ ...prev, month: val })); }}
+					onChange={(val) => { setDashboardFilters((prev) => ({ ...prev, month: val })); }}
 					placeholder="Month"
 					options={optionsMonth}
 					isClearable

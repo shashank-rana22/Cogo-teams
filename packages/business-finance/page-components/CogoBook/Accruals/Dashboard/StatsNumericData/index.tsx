@@ -4,7 +4,26 @@ import { IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function StatsNumericData({ statsData, statsLoading }) {
+interface StatsDataInterface {
+	bookedShipmentCount?: number
+	accruedShipmentCount?: number
+	bookedProfitPercentage?: number
+	bookedProfit?: number
+	actualProfit?: number
+	actualProfitPercentage?: number
+	variance?: number
+	variancePercentage?: number
+	varianceExpense?: number
+	varianceIncome?: number
+	expenseCurrency?: string
+	varianceCurrency?: string
+}
+interface NumericInterface {
+	statsData?:StatsDataInterface
+	statsLoading?: boolean
+}
+
+function StatsNumericData({ statsData, statsLoading }:NumericInterface) {
 	const {
 		bookedShipmentCount = 0,
 		accruedShipmentCount = 0,

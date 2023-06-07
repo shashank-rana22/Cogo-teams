@@ -4,7 +4,7 @@ import { getAmountInLakhCrK } from './getAmountInLakhCrK';
 import { getAmountLineChartInLakh } from './getAmountLineChartInLakh';
 import styles from './styles.module.css';
 
-function MonthBarChart({ monthlyData, COLORS }) {
+function MonthBarChart({ monthlyData }) {
 	return (
 		<div className={styles.container}>
 			<ResponsiveBar
@@ -16,7 +16,7 @@ function MonthBarChart({ monthlyData, COLORS }) {
 				enableLabel={false}
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
-				colors={COLORS}
+				colors={['#ADCC6A', '#57C6D1']}
 				enableGridY
 				layout="vertical"
 				groupMode="grouped"

@@ -22,7 +22,7 @@ const GetYearDetails = optionsYear()?.[0]?.value;
 const COLORS = ['#57C6D1', '#ADCC6A'];
 
 interface DashboardFilterInterface {
-	month?:number
+	month?:string
 	year?:string
 }
 
@@ -163,7 +163,7 @@ function Dashboard() {
 					</div>
 
 					<Pill size="md" color="green">
-						{`Month : ${optionsMonth[month - 1]?.label || GetMonthDetails?.label}`}
+						{`Month : ${optionsMonth[Number(month) - 1]?.label || GetMonthDetails?.label}`}
 					</Pill>
 				</div>
 
@@ -260,7 +260,7 @@ function Dashboard() {
 					<div className={styles.hr_statistics} />
 
 					<div>
-						<MonthBarChart monthlyData={monthlyDataValue} COLORS={COLORS} />
+						<MonthBarChart monthlyData={monthlyDataValue} />
 					</div>
 
 				</div>
