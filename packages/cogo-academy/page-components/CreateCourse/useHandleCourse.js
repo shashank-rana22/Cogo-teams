@@ -55,6 +55,7 @@ const useHandleCourse = ({ ref, courseActiveTab }) => {
 				params,
 				setFilters,
 				filters,
+				activeTab,
 			},
 		},
 		students: {
@@ -77,6 +78,7 @@ const useHandleCourse = ({ ref, courseActiveTab }) => {
 				params        : studentListParams,
 				setFilters,
 				filters,
+				activeTab,
 			},
 		},
 	};

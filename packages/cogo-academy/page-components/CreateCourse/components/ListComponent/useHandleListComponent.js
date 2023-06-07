@@ -19,7 +19,6 @@ const useHandleListComponent = ({ activeTab, fetchList, setParams, params }) => 
 	const router = useRouter();
 
 	const [courseId, setCourseId] = useState('');
-	const [studentId, setStudentId] = useState('');
 	const [showModal, setShowModal] = useState(false);
 
 	const {
@@ -37,21 +36,14 @@ const useHandleListComponent = ({ activeTab, fetchList, setParams, params }) => 
 			params,
 			updateApi : deleteCourse,
 		},
-		students: {
-			loading: false,
-			router,
-			setShowModal,
-			setStudentId,
-			setParams,
-			params,
-		},
+		students: {},
 	};
 
 	const columns = columnsMapping[activeTab]({ ...propsMapping[activeTab] });
 
 	const deleteFunctionMapping = {
 		courses  : { function: deleteCourse, params: { id: courseId, status: 'inactive' } },
-		students : { function: deleteCourse, params: { id: studentId, status: 'inactive' } },
+		students : {},
 	};
 
 	const { function: deleteApi, params: deleteApiParams } = deleteFunctionMapping[activeTab];

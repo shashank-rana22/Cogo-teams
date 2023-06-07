@@ -11,40 +11,6 @@ const handleOpenCourse = ({ id, router, view }) => {
 	}
 };
 
-export function StudentButtons({ item, setStudentId, setShowModal, loading }) {
-	return (
-		<div className={styles.container}>
-			<Tooltip
-				className={styles.tooltip_pad}
-				content={(
-					<div className={styles.options}>
-						<Button
-							loading={loading}
-							type="button"
-							themeType="accent"
-							className={styles.btn}
-							onClick={() => {
-								setStudentId(item.id);
-								setShowModal(true);
-							}}
-						>
-							<IcMDelete />
-							<div>
-								Delete
-							</div>
-						</Button>
-					</div>
-				)}
-				trigger="click"
-				placement="left"
-				interactive="true"
-			>
-				<IcMOverflowDot style={{ cursor: 'pointer' }} />
-			</Tooltip>
-		</div>
-	);
-}
-
 export function CourseButtons({
 	loading,
 	id,

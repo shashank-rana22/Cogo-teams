@@ -7,7 +7,9 @@ import FilterContent from './FilterContent';
 import styles from './styles.module.css';
 import useHandleSearchFilter from './useHandleSearchFilter';
 
-function SearchFilter({ debounceQuery, input, setInput, setParams, params, setFilters, filters }, ref) {
+function SearchFilter({
+	debounceQuery, input, setInput, setParams, params, setFilters, filters, activeTab,
+}, ref) {
 	const {
 		showFilter,
 		setShowFilter,
@@ -57,33 +59,35 @@ function SearchFilter({ debounceQuery, input, setInput, setParams, params, setFi
 					</Button>
 				</div>
 
-				<Popover
-					placement="left"
-					caret={false}
-					onClickOutside={() => setShowFilter(false)}
-					visible={showFilter}
-					content={(
-						<FilterContent
-							control={control}
-							handleSubmit={handleSubmit}
-							setFilters={setFilters}
-							onSubmit={onSubmit}
-							onClickReset={onClickReset}
-						/>
-					)}
-				>
-					<Button
-						type="button"
-						themeType="secondary"
-						size="md"
-						onClick={() => setShowFilter(true)}
-						className={styles.filter_btn}
+				{activeTab === 'courses' ? (
+					<Popover
+						placement="left"
+						caret={false}
+						onClickOutside={() => setShowFilter(false)}
+						visible={showFilter}
+						content={(
+							<FilterContent
+								control={control}
+								handleSubmit={handleSubmit}
+								setFilters={setFilters}
+								onSubmit={onSubmit}
+								onClickReset={onClickReset}
+							/>
+						)}
 					>
-						<IcMFilter style={{ marginRight: '2px' }} />
-						Filter
-						{!isEmpty(filters) ? <div className={styles.filter_dot} /> : null}
-					</Button>
-				</Popover>
+						<Button
+							type="button"
+							themeType="secondary"
+							size="md"
+							onClick={() => setShowFilter(true)}
+							className={styles.filter_btn}
+						>
+							<IcMFilter style={{ marginRight: '2px' }} />
+							Filter
+							{!isEmpty(filters) ? <div className={styles.filter_dot} /> : null}
+						</Button>
+					</Popover>
+				) : null}
 			</div>
 		</div>
 	);

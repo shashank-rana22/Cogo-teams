@@ -9,9 +9,6 @@ function useListCogoAcademyCourses({ filters, activeTab }) {
 	const [params, setParams] = useState({
 		page                    : 1,
 		course_details_required : true,
-		filters                 : {
-			status: ['active', 'inactive'],
-		},
 	});
 
 	const [input, setInput] = useState('');

@@ -2,7 +2,7 @@ import { Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase, format, isEmpty } from '@cogoport/utils';
 
-import { StudentButtons, CourseButtons } from './components/ButtonComponent';
+import { CourseButtons } from './components/ButtonComponent';
 import SortComponent from './components/SortComponent';
 import styles from './styles.module.css';
 
@@ -18,12 +18,7 @@ const getState = ({ state, status }) => {
 	return { state: 'Draft', color: '#FEF3E9' };
 };
 
-export const studentColumns = ({
-	loading,
-	router,
-	setShowModal,
-	setStudentId,
-}) => [
+export const studentColumns = () => [
 	{
 		Header   : 'Name',
 		id       : 'name',
@@ -77,20 +72,6 @@ export const studentColumns = ({
 				%
 			</section>
 		),
-	},
-	{
-		Header   : '',
-		id       : 'options',
-		accessor : (item) => (
-			<StudentButtons
-				item={item}
-				router={router}
-				setStudentId={setStudentId}
-				setShowModal={setShowModal}
-				loading={loading}
-			/>
-		),
-
 	},
 ];
 

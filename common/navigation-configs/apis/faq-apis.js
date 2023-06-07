@@ -449,6 +449,11 @@ const faq = {
 			access_type  : 'private',
 			service_name : 'cogo_academy',
 		},
+		{
+			api          : 'update_cogo_academy_course',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
 	],
 	create_course: [
 		{
