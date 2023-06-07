@@ -9,11 +9,6 @@ const GLOBAL_CONSTANTS = {
 	platform_supported_country_codes: ['IN', 'VN'],
 
 	service_supported_countries: {
-		navigation: {
-			saas_cogo_insurance: {
-				countries: ['IN'],
-			},
-		},
 		feature_supported_service: {
 			cargo_insurance: {
 				countries: ['IN'],
