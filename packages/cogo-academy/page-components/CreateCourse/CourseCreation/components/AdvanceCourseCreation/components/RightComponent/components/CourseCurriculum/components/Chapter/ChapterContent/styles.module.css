@@ -76,3 +76,8 @@
 	font-weight: 600;
 	color: #cb6464;
 }
+
+.rich_text {
+	max-width: 800px;
+	margin-top: 24px;
+}
