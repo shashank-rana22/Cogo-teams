@@ -1,7 +1,7 @@
 import { Pagination, Tabs, TabPanel } from '@cogoport/components';
 import { useEffect } from 'react';
 
-import useListRfqs from '../../../hooks/useListRfqs';
+import useListRfqs from '../../../hooks/useListrfqs';
 
 import RfqDetails from './RfqDetails';
 import styles from './styles.module.css';
