@@ -29,7 +29,10 @@ function Filter({
 					checked={selectAll}
 					onChange={handleSelectAll}
 				/>
-				<Button onClick={handleApproveRfq} disabled={loading}>
+				<Button
+					onClick={handleApproveRfq}
+					disabled={checkedItems.length === 0 || loading}
+				>
 					Approve Selected (
 					{checkedItems.length}
 					)

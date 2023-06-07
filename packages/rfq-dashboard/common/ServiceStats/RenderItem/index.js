@@ -36,7 +36,7 @@ const mapping = {
 		);
 	},
 	live_contracts({ data, item }) {
-		return data?.[item.key];
+		return data?.[item.key] || '-';
 	},
 	default() {
 		return '-';
