@@ -38,7 +38,7 @@ const useListRfqs = ({ filterStore = {}, id = '' }) => {
 				high_profitability      : highProfitability,
 				low_profitability       : lowProfitability,
 				sub_type                : organizationSize,
-				service_type            : serviceType,
+				service_type            : serviceType || undefined,
 				status                  : 'live',
 				id                      : id || undefined,
 				promised_consolidated_profitability,
