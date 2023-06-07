@@ -4,10 +4,7 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 import SubmitSection from './SubmitSection';
 
-export default function ActionPopover({
-	item,
-	onFinalSubmit = () => {},
-}) {
+export default function ActionPopover({ item, onFinalSubmit = () => {}, updateOfferLetterLoading }) {
 	const [visible, setVisible] = useState(false);
 
 	const { id = '' } = item || {};
@@ -27,7 +24,11 @@ export default function ActionPopover({
 					/>
 				)}
 			>
-				<Button themeType="secondary" onClick={() => setVisible(() => !visible)}>
+				<Button
+					themeType="secondary"
+					onClick={() => setVisible(() => !visible)}
+					disabled={updateOfferLetterLoading}
+				>
 					Reject
 				</Button>
 			</Popover>
