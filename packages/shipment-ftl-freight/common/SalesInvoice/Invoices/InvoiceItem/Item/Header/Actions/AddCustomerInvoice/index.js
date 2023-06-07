@@ -1,4 +1,5 @@
 import { Modal, Button, Toggle } from '@cogoport/components';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { useState, useRef } from 'react';
 
 import useCreateShipmentDocument from '../../../../../../../../hooks/useCreateShipmentDocument';
@@ -102,8 +103,10 @@ function AddCustomerInvoice({
 							)}
 					</Modal.Body>
 					<Modal.Footer className={styles.button_wrapper}>
-						<Button onClick={() => setShow(false)} themeType="secondary"> Cancel</Button>
-						<Button onClick={customHandleSubmit} disabled={loading}>Submit</Button>
+						<FooterButtonWrapper>
+							<Button onClick={() => setShow(false)} themeType="secondary"> Cancel</Button>
+							<Button onClick={customHandleSubmit} disabled={loading}>Submit</Button>
+						</FooterButtonWrapper>
 					</Modal.Footer>
 				</Modal>
 			) : null}

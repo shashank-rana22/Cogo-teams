@@ -1,4 +1,5 @@
 import { Button, Textarea, Modal } from '@cogoport/components';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -43,25 +44,27 @@ function AddRemarks({
 				/>
 			</Modal.Body>
 
-			<Modal.Footer className={styles.button_div}>
-				<Button
-					themeType="secondary"
-					onClick={onClose}
-					className={styles.button_div}
-				>
-					Cancel
-				</Button>
+			<Modal.Footer>
+				<FooterButtonWrapper>
+					<Button
+						themeType="secondary"
+						onClick={onClose}
+						className={styles.button_div}
+					>
+						Cancel
+					</Button>
 
-				<Button
-					size="md"
-					onClick={() => onSubmitRemarks({
-						id      : invoice?.id,
-						remarks : remarkValue,
-					})}
-					disabled={loading || isEmpty(remarkValue)}
-				>
-					Submit
-				</Button>
+					<Button
+						size="md"
+						onClick={() => onSubmitRemarks({
+							id      : invoice?.id,
+							remarks : remarkValue,
+						})}
+						disabled={loading || isEmpty(remarkValue)}
+					>
+						Submit
+					</Button>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);

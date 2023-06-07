@@ -1,5 +1,6 @@
 import { Button, Modal, Select } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -67,23 +68,25 @@ function ChangeCurrency({
 					className={styles.select_div}
 				/>
 			</Modal.Body>
-			<Modal.Footer className={styles.button_div}>
-				<Button
-					size="md"
-					themeType="secondary"
-					onClick={() => setIsChangeCurrency(false)}
-					disabled={loading}
-				>
-					Cancel
-				</Button>
-				<Button
-					size="md"
-					themeType="primary"
-					onClick={() => onCreate(payload)}
-					disabled={loading || isEmpty(value)}
-				>
-					Confirm
-				</Button>
+			<Modal.Footer>
+				<FooterButtonWrapper>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => setIsChangeCurrency(false)}
+						disabled={loading}
+					>
+						Cancel
+					</Button>
+					<Button
+						size="md"
+						themeType="primary"
+						onClick={() => onCreate(payload)}
+						disabled={loading || isEmpty(value)}
+					>
+						Confirm
+					</Button>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);

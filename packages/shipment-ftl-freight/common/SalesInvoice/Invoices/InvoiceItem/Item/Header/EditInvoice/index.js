@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/surface-modules';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import React, { useEffect } from 'react';
 
 import editLineItemsHelper from './editLineItemsHelper';
@@ -82,22 +83,24 @@ function EditInvoice({
 			</Modal.Body>
 
 			<Modal.Footer>
-				<Button
-					size="md"
-					themeType="secondary"
-					onClick={onClose}
-				>
-					Cancel
-				</Button>
+				<FooterButtonWrapper>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={onClose}
+					>
+						Cancel
+					</Button>
 
-				<Button
-					size="md"
-					onClick={handleSubmit(onCreate)}
-					style={{ marginLeft: '16px' }}
-					disabled={loading}
-				>
-					Save
-				</Button>
+					<Button
+						size="md"
+						onClick={handleSubmit(onCreate)}
+						style={{ marginLeft: '16px' }}
+						disabled={loading}
+					>
+						Save
+					</Button>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);

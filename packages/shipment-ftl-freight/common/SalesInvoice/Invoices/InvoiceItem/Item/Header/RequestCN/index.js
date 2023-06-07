@@ -2,6 +2,7 @@ import { Modal, Button, Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/surface-modules';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useState, useContext } from 'react';
 
@@ -91,7 +92,7 @@ function RequestCN({
 
 			</Modal.Body>
 			<Modal.Footer>
-				<div className={styles.button_wrap}>
+				<FooterButtonWrapper>
 					<Button
 						themeType="secondary"
 						onClick={() => setShow(false)}
@@ -105,7 +106,7 @@ function RequestCN({
 					>
 						Request
 					</Button>
-				</div>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);

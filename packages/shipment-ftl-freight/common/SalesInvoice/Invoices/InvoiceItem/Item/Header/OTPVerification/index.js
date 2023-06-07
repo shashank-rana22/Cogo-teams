@@ -1,4 +1,5 @@
 import { Modal, Button, RadioGroup, Loader } from '@cogoport/components';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -100,22 +101,24 @@ function OTPVerification({
 						{userListInfo}
 					</Modal.Body>
 
-					<Modal.Footer className={styles.modal_footer}>
-						<Button
-							size="md"
-							themeType="secondary"
-							onClick={() => setShowOTPModal(false)}
-						>
-							Cancel
-						</Button>
+					<Modal.Footer>
+						<FooterButtonWrapper>
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => setShowOTPModal(false)}
+							>
+								Cancel
+							</Button>
 
-						<Button
-							size="md"
-							onClick={handleClick}
-							disabled={userList?.length === 0 || isEmpty(selectedUser)}
-						>
-							Send
-						</Button>
+							<Button
+								size="md"
+								onClick={handleClick}
+								disabled={userList?.length === 0 || isEmpty(selectedUser)}
+							>
+								Send
+							</Button>
+						</FooterButtonWrapper>
 					</Modal.Footer>
 				</Modal>
 			) : null}
