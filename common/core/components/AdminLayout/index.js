@@ -30,7 +30,7 @@ function AdminLayout({
 		is_in_voice_call:inCall = false, voice_call_recipient_data = {},
 	} = user_data;
 
-	const { id: partner_id = '', partner_user_id = '', is_joining_tnc_accepted = '' } = partner || {};
+	const { id: partner_id = '', partner_user_id = '', is_joining_tnc_accepted = '' } = partnerData || {};
 
 	const {
 		pinListLoading = false,

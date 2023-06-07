@@ -10,7 +10,7 @@ const controls = [
 	},
 	{
 		name        : 'personal_email',
-		label       : 'Employee Email ID',
+		label       : 'Personal Email ID',
 		placeholder : 'Enter a valid email id',
 		type        : 'text',
 		rules       : {
