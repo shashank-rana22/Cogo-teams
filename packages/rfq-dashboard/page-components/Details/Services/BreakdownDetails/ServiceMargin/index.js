@@ -28,6 +28,33 @@ function ServiceTotalAmountContainer({ item, totalDisplayString, fclLocalEmpty }
 	);
 }
 
+const renderServiceType = ({ serviceDetails, primaryService, item }) => {
+	const serviceName = item?.service_name
+		? item?.service_name
+		: item.service_type;
+	if (item.service_type === 'fcl_freight') {
+		return shippingLine(item?.service_type, primaryService);
+	}
+	if (item.service_type === 'air_freight') {
+		return shippingLine(item?.service_type, primaryService);
+	}
+	if (item?.trade_type) {
+		if (item?.trade_type === 'export') {
+			return startCase(`origin_${serviceName}`);
+		}
+		if (item?.trade_type === 'import') {
+			return startCase(`destination_${serviceName}`);
+		}
+	}
+	if (
+		serviceDetails?.service_type === 'air_freight_local'
+		&& serviceDetails?.trade_type === 'domestic'
+	) {
+		return `Terminal ${startCase(serviceDetails?.terminal_charge_type)}`;
+	}
+	return startCase(serviceName || '');
+};
+
 function ServiceMargin({
 	item,
 	editedMargins,
@@ -36,33 +63,6 @@ function ServiceMargin({
 	totalDisplay,
 	setEditedMargins = () => {},
 }) {
-	const renderServiceType = (itm, serviceDetails) => {
-		const serviceName = item.service_name
-			? item?.service_name
-			: item.service_type;
-		if (item.service_type === 'fcl_freight') {
-			return shippingLine(itm?.service_type, primaryService);
-		}
-		if (item.service_type === 'air_freight') {
-			return shippingLine(itm?.service_type, primaryService);
-		}
-		if (item?.trade_type) {
-			if (item?.trade_type === 'export') {
-				return startCase(`origin_${serviceName}`);
-			}
-			if (item?.trade_type === 'import') {
-				return startCase(`destination_${serviceName}`);
-			}
-		}
-		if (
-			serviceDetails?.service_type === 'air_freight_local'
-			&& serviceDetails?.trade_type === 'domestic'
-		) {
-			return `Terminal ${startCase(serviceDetails?.terminal_charge_type)}`;
-		}
-		return startCase(serviceName || '');
-	};
-
 	const service_details = detail?.service_details?.[item?.id];
 
 	const totalDisplayString = formatAmount({
@@ -85,7 +85,9 @@ function ServiceMargin({
 	return (
 		<div className={styles.container}>
 			<div className={styles.service_line}>
-				<div className={styles.service_title}>{renderServiceType(item, service_details)}</div>
+				<div className={styles.service_title}>
+					{renderServiceType({ item, service_details, primaryService })}
+				</div>
 				<ServiceTotalAmountContainer
 					item={item}
 					totalDisplayString={totalDisplayString}
