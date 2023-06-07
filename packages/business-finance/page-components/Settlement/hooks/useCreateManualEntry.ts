@@ -31,7 +31,7 @@ const useCreateManualEntry = ({
 	itemData,
 }) => {
 	const [errors, setErrors] = useState({});
-	const profile = useSelector((state:any) => state.profile || {});
+	const profile = useSelector((state:{ profile?:{ user?:{ id?:string, name?:string } } }) => state.profile || {});
 	const { id:profileId = '', name:profileName = '' } = profile?.user || {};
 	const [editMode, setEditMode] = useState(false);
 	const [showBprNumber, setShowBprNumber] = useState({ sage_organization_id: '' });

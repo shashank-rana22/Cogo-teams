@@ -12,7 +12,7 @@ const useGetUploadFile = ({
 	toggleValue,
 	refetch,
 }:UploadInterface) => {
-	const { user_data:userData } = useSelector(({ profile }:any) => ({
+	const { user_data:userData } = useSelector(({ profile }:{ profile?:{ user?:{ name?:string, id?:string } } }) => ({
 		user_data: profile?.user || {},
 	}));
 

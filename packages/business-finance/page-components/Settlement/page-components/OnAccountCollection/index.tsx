@@ -123,7 +123,7 @@ function OnAccountCollection() {
 								name="q"
 								size="sm"
 								value={search}
-								onChange={(e: any) => setGlobalFilters((prev) => ({ ...prev, search: e }))}
+								onChange={(val: string) => setGlobalFilters((prev) => ({ ...prev, search: val }))}
 								placeholder={SEARCH_PLACEHOLDER}
 								suffix={(
 									<div className={styles.icon_div}>

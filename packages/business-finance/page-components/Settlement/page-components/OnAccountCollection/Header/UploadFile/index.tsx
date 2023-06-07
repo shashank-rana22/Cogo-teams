@@ -28,7 +28,7 @@ function UploadFile({ showModal, setShowModal, refetch }:UploadFileInterface) {
 			result = 'payments';
 	}
 
-	const onChangeToggle = (event:any) => {
+	const onChangeToggle = (event:{ target?:{ checked?:boolean } }) => {
 		setToggleValue((event.target.checked ? 'AR' : 'AP'));
 	};
 

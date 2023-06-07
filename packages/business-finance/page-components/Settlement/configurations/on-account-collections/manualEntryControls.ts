@@ -153,7 +153,6 @@ interface ControlInterface {
 		transactionDate?:Date
 		payMode?:string
 	}
-	setBankDetails?: React.Dispatch<React.SetStateAction<any>>
 	docTypeValue?:string
 	setShowBprNumber?: React.Dispatch<React.SetStateAction<{
 		sage_organization_id: string;

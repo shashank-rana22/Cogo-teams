@@ -4,7 +4,7 @@ import { useRequestBf } from '@cogoport/request';
 import { ModalInterface } from '../page-components/OnAccountCollection/interface';
 
 interface DownloadFileInterface {
-	formattedData?:any
+	formattedData?:object
 	value?: string
 	setShowModal?: React.Dispatch<React.SetStateAction<ModalInterface>>
 }
