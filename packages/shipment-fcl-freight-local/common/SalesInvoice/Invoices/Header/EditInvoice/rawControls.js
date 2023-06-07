@@ -101,7 +101,7 @@ const rawControls = (
 			label  : 'Amount (Tax Excl.)',
 			type   : 'static',
 			name   : 'total',
-			render : (item) => <div style={{ marginTop: '5px' }} className="amount-excl">{item?.total}</div>,
+			render : (item) => <div style={{ marginLeft: '25px' }} className="amount-excl">{item?.total}</div>,
 			span   : 2,
 		},
 	],
