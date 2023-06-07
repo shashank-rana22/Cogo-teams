@@ -22,6 +22,16 @@ const useUpdateRatesPreferences = ({
 			const splitableBookingdocs = [];
 			const mergeableBookingdocs = [];
 
+			const service_providers = [];
+			(supplierPayload?.[service_id] || []).forEach((provider) => {
+				service_providers.push({
+					priority : provider?.priority,
+					rate_id  : provider?.rate_id,
+					id       : provider?.id,
+					booking_confirmation_status:
+					data?.service_type === 'air_freight_service' ? 'pending' : undefined,
+				});
+			});
 			(inventory?.[service_id] || []).forEach((docs) => {
 				const doc_object = {};
 
@@ -56,7 +66,7 @@ const useUpdateRatesPreferences = ({
 			const final_payload = {
 				is_final                  : true,
 				shipment_id,
-				service_providers         : supplierPayload?.[service_id],
+				service_providers,
 				booking_confirmation_docs : bookingConformationDocs,
 				service_id                : service_id || undefined,
 				service_type              : service_type || undefined,

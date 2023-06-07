@@ -1,6 +1,6 @@
 import Docs from './Docs';
 
-function ExistingInventory({ docs, loading, prefrences, setPrefrences }) {
+function ExistingInventory({ docs, loading, prefrences, setPrefrences, serviceId }) {
 	const hasExistingRates = () => {
 		if (!loading) {
 			let hasdata = false;
@@ -16,7 +16,14 @@ function ExistingInventory({ docs, loading, prefrences, setPrefrences }) {
 		return true;
 	};
 	return (
-		hasExistingRates() && <Docs data={docs} preferences={prefrences} setPreferences={setPrefrences} />
+		hasExistingRates() && (
+			<Docs
+				data={docs}
+				preferences={prefrences}
+				setPreferences={setPrefrences}
+				serviceId={serviceId}
+			/>
+		)
 	);
 }
 export default ExistingInventory;

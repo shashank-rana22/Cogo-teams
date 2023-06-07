@@ -1,7 +1,6 @@
 import { Select } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-import getSupplierPrefrencePayload from '../../../helper/getSupplierPreferencePayload';
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
 import CargoDetailPills from '../../List/Card/Body/CargoDetails/CargoDetailPills';
 
@@ -42,8 +41,6 @@ function SingleService({
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
 	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({ singleServiceData });
 
-	const [existingInventory, setExistingInventory] = useState([]);
-
 	const options = [];
 	(groupedServicesData || []).forEach((data) => {
 		options.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data });
@@ -67,11 +64,6 @@ function SingleService({
 		},
 	];
 
-	useEffect(() => {
-		setInventory({ ...inventory, [singleServiceData?.id]: existingInventory });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(existingInventory)]);
-
 	return (
 		<div>
 			<div style={{ marginTop: '16px' }}>
@@ -87,8 +79,9 @@ function SingleService({
 			<ExistingInventory
 				docs={ratesData?.eligible_booking_document?.docs}
 				loading={ratesLoading}
-				prefrences={existingInventory}
-				setPrefrences={setExistingInventory}
+				prefrences={inventory}
+				setPrefrences={setInventory}
+				serviceId={singleServiceData?.id}
 			/>
 			{rateCardObj.map((item) => (
 				<RatesCard

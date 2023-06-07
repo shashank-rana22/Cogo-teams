@@ -13,7 +13,7 @@ const columns = [
 	'Sailing Date',
 	'Booking Party',
 ];
-function InventoryCard({ type, data: details, preferences, setPreferences, expanded }) {
+function InventoryCard({ type, data: details, preferences, setPreferences, expanded, serviceId }) {
 	const key = type[1];
 	const rowKeyMapping = {
 		splitable_booking_notes: getRows({
@@ -56,10 +56,10 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 
 	const handlePreference = (row_id, istype) => {
 		const allIds = getAllIds(row_id, istype);
-		if (preferences.length) {
-			const foundItem = (preferences || []).find((obj) => obj?.id === row_id);
+		if (preferences?.[serviceId].length || []) {
+			const foundItem = (preferences?.[serviceId] || []).find((obj) => obj?.id === row_id);
 			if (foundItem) {
-				const oldItems = preferences;
+				const oldItems = preferences?.[serviceId];
 				const newItems = [];
 				oldItems.forEach((item) => {
 					if (item?.id !== row_id) {
@@ -67,27 +67,27 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 					}
 				});
 				if (newItems.length) {
-					setPreferences([...newItems]);
+					setPreferences({ ...preferences, [serviceId]: [...newItems] });
 				} else {
-					setPreferences([]);
+					setPreferences({ ...preferences, [serviceId]: [] });
 				}
 			} else {
-				const newList = preferences;
-				preferences.push({
+				const newList = preferences?.[serviceId] || [];
+				newList.push({
 					id    : row_id,
 					type  : istype,
 					allid : allIds,
 				});
-				setPreferences([...newList]);
+				setPreferences({ ...preferences, [serviceId]: [...newList] });
 			}
 		} else {
-			const newList = preferences;
-			preferences.push({
+			const newList = preferences?.[serviceId];
+			newList.push({
 				id    : row_id,
 				type  : istype,
 				allid : allIds,
 			});
-			setPreferences([...newList]);
+			setPreferences({ ...preferences, [serviceId]: [...newList] });
 		}
 	};
 
@@ -101,7 +101,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 			onClick={() => handlePreference(element?.id, key)}
 		>
 			<div className={styles.td}>
-				<PriorityNumber data={preferences} id={element?.id} showPriority={false} />
+				<PriorityNumber data={preferences?.[serviceId]} id={element?.id} showPriority={false} />
 			</div>
 
 			{(element?.rowData || []).map((value) => (
@@ -120,7 +120,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 			onClick={() => handlePreference(element?.id, key)}
 		>
 			<div className={styles.select_container}>
-				<PriorityNumber data={preferences} id={element?.id} showPriority={false} />
+				<PriorityNumber data={preferences?.[serviceId]} id={element?.id} showPriority={false} />
 			</div>
 
 			{element?.childrens?.[0].map((childval) => (
