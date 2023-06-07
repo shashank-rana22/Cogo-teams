@@ -1,6 +1,6 @@
 import { RadioGroup, Chips, SingleDateRange, Tags } from '@cogoport/components';
 
-import { statusOptions, tradeOptions, shipmentSourceOptions } from '../../helper/filterOptionMapping';
+import { statusOptions, tradeOptions, shipmentSourceOptions, rdStatusOptions } from '../../helper/filterOptionMapping';
 import getFiltersTagsArray from '../../helper/getFiltersTagsArray';
 
 import FilterLocation from './FilterLocation';
@@ -78,6 +78,25 @@ function Filters({ filters, setFilters }) {
 							});
 						}}
 						value={filters?.state}
+						className={styles.radiogrp}
+					/>
+				</div>
+			</div>
+			<div className={styles.sub_section}>
+				<div className={styles.sub_heading}>
+					RD Status
+				</div>
+				<div>
+					<RadioGroup
+						options={rdStatusOptions}
+						onChange={(val) => {
+							setFilters({
+								...filters,
+								rd_state : val,
+								page     : 1,
+							});
+						}}
+						value={filters?.rd_state}
 						className={styles.radiogrp}
 					/>
 				</div>

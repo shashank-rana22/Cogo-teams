@@ -2,6 +2,7 @@ import { startCase, format } from '@cogoport/utils';
 
 const getFiltersTagsArray = (filters) => {
 	const shipmentStatusArray = [];
+	const rdStatusArray = [];
 	const tradeTypeArray = [];
 	const shipmentSourceArray = [];
 	const departureDateArray = [];
@@ -10,6 +11,14 @@ const getFiltersTagsArray = (filters) => {
 		shipmentStatusArray.push({
 			key     	: '1',
 			children : `${startCase(filters?.state)} Shipment`,
+			color    : '#F3FAFA',
+			closable : true,
+		});
+	}
+	if (filters?.rd_state) {
+		rdStatusArray.push({
+			key     	: '1',
+			children : `${startCase(filters?.rd_state)} Shipment`,
 			color    : '#F3FAFA',
 			closable : true,
 		});
@@ -54,6 +63,7 @@ const getFiltersTagsArray = (filters) => {
 		shipmentSourceArray,
 		departureDateArray,
 		createdDateArray,
+		rdStatusArray,
 	};
 };
 export default getFiltersTagsArray;

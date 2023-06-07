@@ -21,6 +21,17 @@ export const statusOptions = [
 	},
 ];
 
+export const rdStatusOptions = [
+	{
+		value : 'Active',
+		label : 'active',
+	},
+	{
+		value : 'Completed',
+		label : 'Completed',
+	},
+];
+
 export const tradeOptions = [
 	{ label: 'Import', value: 'import' }, { label: 'Export', value: 'export' },
 ];
