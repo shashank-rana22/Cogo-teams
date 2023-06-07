@@ -1,3 +1,5 @@
+import { Fragment } from 'react';
+
 import styles from './styles.module.css';
 
 const COMMODITY_UNITS_MAPPING = {
@@ -11,7 +13,7 @@ function CommodityMapping({ commodity_array }) {
 	return (
 		<div className={styles.container}>
 			{commodity_array.map((item = {}) => (
-				<>
+				<Fragment key={`${item}`}>
 					{Object.keys(item).map((key) => (item[key]
 						? (
 							<div
@@ -26,7 +28,7 @@ function CommodityMapping({ commodity_array }) {
 							</div>
 						) : null
 					))}
-				</>
+				</Fragment>
 			))}
 		</div>
 	);
