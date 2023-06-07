@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
+import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useContext } from 'react';
 
@@ -86,7 +86,7 @@ const useUpdateInvoiceCombination = ({
 			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
-			toastApiError(err?.data);
+			Toast.error(getApiError(err?.response?.data));
 		}
 	};
 

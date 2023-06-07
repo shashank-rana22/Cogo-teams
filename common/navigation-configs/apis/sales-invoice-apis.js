@@ -24,6 +24,12 @@ const apis = [
 		feature      : 'sales_invoice',
 	},
 	{
+		api          : 'update_invoice_line_items',
+		access_type  : 'private',
+		service_name : 'bookings',
+		feature      : 'sales_invoice',
+	},
+	{
 		api          : 'get_credit_notes',
 		access_type  : 'private',
 		service_name : 'bookings',

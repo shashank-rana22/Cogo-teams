@@ -1,4 +1,5 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMInfo,
 	IcCError,
@@ -8,12 +9,12 @@ import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import CONSTANTS from '../../../../../../../../../configurations/constant.json';
 import useUpdateInvoiceStatus from '../../../../../../../../../hooks/useUpdateInvoiceStatus';
 import styles from '../styles.module.css';
 
 import KebabContent from './KebabContent';
 
+const EditInvoice = dynamic(() => import('../../../../../../Header/EditInvoice'), { ssr: false });
 const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
 const OTPVerification = dynamic(() => import('../OTPVerification'), { ssr: false });
@@ -31,13 +32,15 @@ function Actions({
 	salesInvoicesRefetch = () => {},
 	bfInvoice = {},
 }) {
+	const [isEditInvoice, setIsEditInvoice] = useState(false);
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setOTPModal] = useState(false);
-	const showForOldShipments =	shipment_data.serial_id <= CONSTANTS.invoice_check_id && invoice.status === 'pending';
+	const showForOldShipments =	shipment_data.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
@@ -175,9 +178,20 @@ function Actions({
 						setIsChangeCurrency={setIsChangeCurrency}
 						setShowAddRemarks={setShowAddRemarks}
 						setShowChangePaymentMode={setShowChangePaymentMode}
+						setIsEditInvoice={setIsEditInvoice}
 					/>
 				</div>
 			</div>
+
+			{(invoice.services || []).length && isEditInvoice ? (
+				<EditInvoice
+					show={isEditInvoice}
+					onClose={() => setIsEditInvoice(false)}
+					invoice={invoice}
+					refetch={handleRefetch}
+					shipment_data={shipment_data}
+				/>
+			) : null}
 
 			{showReview ? (
 				<ReviewServices

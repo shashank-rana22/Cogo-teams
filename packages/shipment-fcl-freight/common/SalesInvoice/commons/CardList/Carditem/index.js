@@ -1,5 +1,4 @@
 import { Placeholder } from '@cogoport/components';
-import React from 'react';
 
 import getValue from '../../../../../utils/getValue';
 

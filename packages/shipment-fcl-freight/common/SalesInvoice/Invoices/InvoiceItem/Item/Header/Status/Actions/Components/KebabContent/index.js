@@ -1,9 +1,10 @@
 import { Popover, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot, IcMInfo } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import CONSTANTS from '../../../../../../../../../../configurations/constant.json';
 import styles from '../../styles.module.css';
 
 function KebabContent({
@@ -14,9 +15,12 @@ function KebabContent({
 	setIsChangeCurrency = () => {},
 	setShowAddRemarks = () => {},
 	setShowChangePaymentMode = () => {},
+	setIsEditInvoice = () => {},
 }) {
+	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
-	const showForOldShipments = shipment_data.serial_id <= CONSTANTS.invoice_check_id && invoice.status === 'pending';
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
@@ -41,11 +45,28 @@ function KebabContent({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
+	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
+		|| user_data?.user?.id === GLOBAL_CONSTANTS.ajeet_singh_user_id;
+
 	const content = (
 		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
 					<div>
+						{editInvoicesVisiblity ? (
+							<div>
+								<div
+									role="button"
+									tabIndex={0}
+									className={styles.text}
+									onClick={() => handleClick(setIsEditInvoice)}
+								>
+									Edit Invoice
+								</div>
+								<div className={styles.line} />
+
+							</div>
+						) : null}
 						<div
 							role="button"
 							tabIndex={0}
