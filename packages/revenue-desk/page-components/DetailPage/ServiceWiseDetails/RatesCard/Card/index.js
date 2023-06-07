@@ -35,7 +35,6 @@ function Card({ data, setPrefrences, prefrences, rate_key, serviceId }) {
 		>
 			<div className={styles.left_section_container}>
 				{rate_key ? <IcMDrag /> : <PriorityNumber data={prefrences?.[serviceId]} id={data?.id} showPriority />}
-
 			</div>
 			<div className={styles.line} />
 			<div className={styles.right_section_container}>
