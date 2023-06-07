@@ -12,11 +12,14 @@ const useListRfqs = ({ filterStore = {}, id = '' }) => {
 
 	const [page, setPage] = useState(1);
 
+	const sort_by = (['oldest', 'newest'].includes(sortBy)) ? 'created_at' : undefined;
 	let sort_type;
-	let sort_by;
-	if (sortBy) {
-		sort_by = (['oldest', 'newest'].includes(sortBy)) ? 'created_at' : 'promised_consolidated_profitability';
-		sort_type = ['profitability_low', 'oldest'].includes(sortBy) ? 'asc' : 'desc';
+	let promised_consolidated_profitability;
+
+	if (sort_by) {
+		sort_type = sort_by === 'oldest' ? 'asc' : 'desc';
+	} else {
+		promised_consolidated_profitability = sortBy === 'profitability_low' ? 'asc' : 'desc';
 	}
 
 	const [{ loading, data }, trigger] = useRequest({
@@ -38,6 +41,7 @@ const useListRfqs = ({ filterStore = {}, id = '' }) => {
 				service_type            : serviceType,
 				status                  : 'live',
 				id                      : id || undefined,
+				promised_consolidated_profitability,
 			},
 			page,
 		},
