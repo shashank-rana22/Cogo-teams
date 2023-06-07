@@ -32,12 +32,7 @@ function VendorDetails({
 					rel="noreferrer"
 				>
 					{shortName}
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg"
-						alt=""
-						width="20"
-						height="20"
-					/>
+					<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/download-icon.svg" alt="" />
 				</a>
 			);
 		}
