@@ -12,8 +12,8 @@ function Filter({
 	const { bulkUpdateRfqState, loading } = useBulkUpdateRfqState({ getRfqsForApproval });
 
 	const handleSelectAll = () => {
-		setSelectAll((prevSelectAll) => !prevSelectAll);
 		setCheckedItems(!selectAll ? data : []);
+		setSelectAll((prevSelectAll) => !prevSelectAll);
 	};
 
 	const handleApproveRfq = () => {
