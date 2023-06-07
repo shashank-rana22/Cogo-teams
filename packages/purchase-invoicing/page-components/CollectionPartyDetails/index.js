@@ -2,6 +2,7 @@ import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMUpload } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, startCase } from '@cogoport/utils';
@@ -19,8 +20,6 @@ import InvoicesUploaded from '../InvoicesUploaded';
 import styles from './styles.module.css';
 
 const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
-
-const AJEET_EMAIL_ID = 'ajeet@cogoport.com';
 
 const STAKE_HOLDER_TYPES = [
 	'superadmin',
@@ -40,11 +39,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
 	);
-	const {
-		user,
-	} = useSelector(({ profile }) => ({
-		user: profile,
-	}));
+	const { user } = useSelector(({ profile }) => ({ user: profile }));
 
 	const geo = getGeoConstants();
 
@@ -201,7 +196,8 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 				/>
 				<span className={styles.headings}>Live Invoice</span>
 				<div className={styles.buttoncontailner}>
-					{(showUpload || user?.email === AJEET_EMAIL_ID) && !airServiceProviderConfirmation ? (
+					{(showUpload || user?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id)
+					&& !airServiceProviderConfirmation ? (
 						<Button
 							size="md"
 							themeType="secondary"
@@ -210,7 +206,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 						>
 							{isJobClosed ? 'Upload Credit Note' : 'Upload Invoice'}
 						</Button>
-					) : null}
+						) : null}
 					{disableInvoice ? (
 						<div className="upload-tooltip">{errorMsg}</div>
 					) : null}
