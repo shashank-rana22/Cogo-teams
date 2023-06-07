@@ -183,7 +183,6 @@ GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
 			GLOBAL_CONSTANTS.currency_code.EUR,
 			GLOBAL_CONSTANTS.currency_code.INR,
 		],
-
 	},
 };
 
