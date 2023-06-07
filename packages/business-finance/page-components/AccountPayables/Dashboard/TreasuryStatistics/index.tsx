@@ -1,5 +1,4 @@
-import { Placeholder, Tooltip } from '@cogoport/components';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { Placeholder } from '@cogoport/components';
 import React from 'react';
 
 import Filter from '../../../commons/Filters';
@@ -7,6 +6,7 @@ import useGetTreasuryStats from '../hooks/useGetTreasuryStats';
 
 import { monthControls } from './monthControls';
 import styles from './styles.module.css';
+import TooltipAmount from './TooltipAmount';
 
 interface ItemProps {
 	activeEntity:string,
@@ -89,35 +89,8 @@ function TreasuryStatistics({ activeEntity }:ItemProps) {
 					</div>
 					{loading ? <Placeholder className={styles.loader} />
 						: (
-							<Tooltip
-								content={
-								formatAmount({
-									amount  : allocatedAmount,
-									currency,
-									options : {
-										currencyDisplay : 'code',
-										style           : 'currency',
-									},
-								})
-								}
-								placement="top"
-								interactive
-							>
-								<div className={styles.value}>
-									{' '}
-									{formatAmount({
-										amount  : allocatedAmount,
-										currency,
-										options : {
-											currencyDisplay : 'code',
-											style           : 'currency',
-											notation        : 'compact',
-											compactDisplay  : 'short',
+							<TooltipAmount amount={allocatedAmount} currencyType={currency} />
 
-										},
-									})}
-								</div>
-							</Tooltip>
 						)}
 				</div>
 				<div className={styles.vr} />
@@ -128,35 +101,7 @@ function TreasuryStatistics({ activeEntity }:ItemProps) {
 						</div>
 						{loading ? <Placeholder className={styles.loader} />
 							: (
-								<Tooltip
-									content={
-									formatAmount({
-										amount  : item.amount,
-										currency,
-										options : {
-											currencyDisplay : 'code',
-											style           : 'currency',
-										},
-									})
-									}
-									placement="top"
-									interactive
-								>
-									<div className={styles.value}>
-										{' '}
-										{formatAmount({
-											amount  : item?.amount,
-											currency,
-											options : {
-												currencyDisplay : 'code',
-												style           : 'currency',
-												notation        : 'compact',
-												compactDisplay  : 'short',
-
-											},
-										})}
-									</div>
-								</Tooltip>
+								<TooltipAmount amount={item.amount} currencyType={currency} />
 							)}
 					</div>
 				))}

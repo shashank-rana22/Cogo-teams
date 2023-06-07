@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
@@ -24,7 +25,7 @@ function AmountWithCurrency({ item, field }: PropsType) {
 
 	const formattedAmount = formatAmount({
 		amount   :	grandTotal as any,
-		currency :	billCurrency || currency || 'INR',
+		currency :	billCurrency || currency || GLOBAL_CONSTANTS.currency_code.INR,
 		options  : {
 			style           : 'currency',
 			currencyDisplay : 'code',
