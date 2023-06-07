@@ -6,7 +6,6 @@ const GLOBAL_CONSTANTS = {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		VN : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 	},
-
 	platform_supported_country_codes: ['IN', 'VN'],
 
 	currency_code: {
@@ -84,6 +83,7 @@ const GLOBAL_CONSTANTS = {
 		tech_superadmin_id     : '381b9d1d-e005-4cc0-9844-a5f1636e71b1',
 		cogoacademy_admin_id   : '13cb3b79-95c2-49ca-9ebd-8c3ee1996981',
 		sagar_bankar_user_id   : 'd7d62f21-c148-4f7c-9aa1-d916897aed91',
+		ajeet_singh_user_id    : '4bafde92-a30f-44d3-ace4-584dd460143e',
 		local_charge_providers : {
 			IN : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
 			GB : '5eef8dfe-c485-414a-bbcb-82a8388539e3',
@@ -144,6 +144,32 @@ const GLOBAL_CONSTANTS = {
 
 	regex_patterns: {
 		number: /^[+-]?\d*\.?\d+$/,
+	},
+	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
+	invoice_check_id                : 120347,
+};
+
+GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
+	freight_invoice_currency: {
+		IN: [
+			GLOBAL_CONSTANTS.currency_code.INR,
+			GLOBAL_CONSTANTS.currency_code.USD,
+		],
+		GB: [
+			GLOBAL_CONSTANTS.currency_code.GBP,
+			GLOBAL_CONSTANTS.currency_code.EUR,
+			GLOBAL_CONSTANTS.currency_code.USD,
+		],
+		VN: [
+			GLOBAL_CONSTANTS.currency_code.USD,
+			GLOBAL_CONSTANTS.currency_code.VND,
+		],
+		others: [
+			GLOBAL_CONSTANTS.currency_code.USD,
+			GLOBAL_CONSTANTS.currency_code.EUR,
+			GLOBAL_CONSTANTS.currency_code.INR,
+		],
+
 	},
 	languages: LANGUAGE_OPTIONS,
 

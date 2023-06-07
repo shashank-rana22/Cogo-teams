@@ -17,7 +17,7 @@
 
 .label {
 	margin: 16px 0 8px 10px;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	line-height: 24px;
 	color: _grey.primary_text;
 }
@@ -25,12 +25,12 @@
 .divider {
 	height: 1px;
 	margin: 16px 0;
-	background: #d6d6d6;
+	background-color: #d6d6d6;
 }
 
 .info {
 	padding: 10px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-style: italic;
 	font-weight: normal;
 	font-stretch: normal;
@@ -43,11 +43,11 @@
 	padding: 5px 11px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	line-height: 14px;
 	color: #000;
 	cursor: pointer;
-	background: #9befa8;
+	background-color: #9befa8;
 	border-radius: 4px;
 	outline: none;
 }
@@ -57,11 +57,11 @@
 	padding: 5px 11px;
 	margin-right: 10px;
 	margin-bottom: 10px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	line-height: 14px;
 	color: #000;
 	cursor: pointer;
-	background: #f2f2f2;
+	background-color: #f2f2f2;
 	border-radius: 4px;
 	outline: none;
 }
