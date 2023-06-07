@@ -66,8 +66,6 @@ function BreakdownDetails({
 	rateDetails.splice(0, 1);
 	rateDetails.splice(rateDetails.length - 1, 1);
 
-	let total = 0;
-
 	const { totalAmount } = getTotalMarginSum({
 		editedMargins,
 		currency_conversion: conversions,
@@ -96,6 +94,7 @@ function BreakdownDetails({
 			Toast.error(error?.data);
 		}
 	};
+	let total = 0;
 
 	(rateDetails || []).forEach((item) => {
 		total += currencyConversion({ item, editedMargins, conversions, rate }).totalValue;
