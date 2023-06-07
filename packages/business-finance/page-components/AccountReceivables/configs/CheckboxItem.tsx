@@ -9,11 +9,8 @@ function CheckboxItem({
 	const { id, invoiceStatus } = row || {};
 	const handleChange = () => {
 		if ((checkedRows || []).includes(id)) {
-			const index = (checkedRows || []).indexOf(id);
-			if (index > -1) { // only splice array when item is found
-				checkedRows.splice(index, 1);
-				setCheckedRows([...checkedRows]);
-			}
+			const filteredRows = (checkedRows || []).filter((rowId?:string) => rowId !== id);
+			setCheckedRows([...filteredRows]);
 		} else {
 			setCheckedRows((prev:string[]) => [...prev,
 				id]);
