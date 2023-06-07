@@ -1,0 +1,43 @@
+.container {
+	/* box-shadow: 0 0 8px rgb(98 127 172 / 10%); */
+}
+
+.label {
+	margin-bottom: 8px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.control_container {
+	position: relative;
+	z-index: 1;
+	padding: 12px;
+	padding-bottom: 20px;
+	border-bottom: 1px solid #e0e0e0;
+
+	:global {
+		.ui_chips_container {
+			flex-wrap: wrap;
+		}
+
+		.ui_chip_container {
+			min-width: unset;
+			font-size: 14px;
+		}
+
+		.ui_checkbox_group_container {
+			flex-wrap: wrap;
+			padding: unset;
+
+			.ui_checkbox_container {
+				padding-top: unset;
+				padding-left: unset;
+			}
+		}
+	}
+
+	&:last-child {
+		border-bottom: 0;
+	}
+}
