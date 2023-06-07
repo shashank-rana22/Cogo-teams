@@ -42,7 +42,6 @@ function SingleService({
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
 	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({ singleServiceData });
 
-	// const [prefrences, setPrefrences] = useState(supplierPayload?.[singleServiceData?.id] || []);
 	const [existingInventory, setExistingInventory] = useState([]);
 
 	const options = [];
@@ -68,21 +67,6 @@ function SingleService({
 		},
 	];
 
-	// const { service_providers = [] } = getSupplierPrefrencePayload({
-	// 	currentRates : ratesData?.flashed_rates?.list,
-	// 	systemRates  : ratesData?.system_rates,
-	// 	prefrences,
-	// });
-
-	// useEffect(() => {
-	// 	setSupplierPayload({
-	// 		...supplierPayload,
-	// 		[singleServiceData?.id]:
-	//         service_providers || [],
-	// 	});
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [JSON.stringify(prefrences)]);
-
 	useEffect(() => {
 		setInventory({ ...inventory, [singleServiceData?.id]: existingInventory });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -90,11 +74,13 @@ function SingleService({
 
 	return (
 		<div>
-			<Select
-				options={options}
-				value={singleServiceData}
-				onChange={(e) => { setSingleServiceData(e); }}
-			/>
+			<div style={{ marginTop: '16px' }}>
+				<Select
+					options={options}
+					value={singleServiceData}
+					onChange={(e) => { setSingleServiceData(e); }}
+				/>
+			</div>
 
 			{(supplierPayload?.[singleServiceData?.id] || []).length
 				? <SelectedRatesCard prefrences={supplierPayload?.[singleServiceData?.id]} /> : null}

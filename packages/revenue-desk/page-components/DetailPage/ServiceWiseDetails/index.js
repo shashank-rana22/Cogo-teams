@@ -1,9 +1,10 @@
-import { Tabs, TabPanel, Button } from '@cogoport/components';
+import { Tabs, TabPanel, Button, Modal } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useUpdateRatesPreferences from '../../../hooks/useUpdateRatesPreferences';
 
+import PreviewSelectedCards from './PreviewSelectedCards';
 import SingleService from './SingleService';
 import styles from './styles.module.css';
 
@@ -12,6 +13,7 @@ function Rates({ groupedShowServicesData, serviceData }) {
 	const [supplierPayload, setSupplierPayload] = useState({});
 	const [inventory, setInventory] = useState([]);
 	const [activeTab, setActiveTab] = useState(tabKeys[0]);
+	const [modalStep, setModalStep] = useState(0);
 
 	const { loading, updateTrigger } = useUpdateRatesPreferences({
 		supplierPayload,
@@ -27,11 +29,10 @@ function Rates({ groupedShowServicesData, serviceData }) {
 					<Button
 						size="md"
 						themeType="primary"
-						onClick={() => updateTrigger()}
+						onClick={() => setModalStep(1)}
 						disabled={loading}
 					>
 						Save preference
-
 					</Button>
 				</div>
 			</div>
@@ -52,7 +53,37 @@ function Rates({ groupedShowServicesData, serviceData }) {
 					</TabPanel>
 				))}
 			</Tabs>
+			{modalStep === 1
+				? (
+					<Modal size="xl" show={modalStep === 1} onClose={() => setModalStep(0)} placement="center">
+						<Modal.Header title="PREVIEW" />
+						<Modal.Body>
+							<Tabs
+								activeTab={activeTab}
+								themeType="secondary"
+								onChange={setActiveTab}
+							>
+								{tabKeys.map((singleTab) => (
+									<TabPanel
+										name={singleTab}
+										title={startCase(singleTab.replace('_service', ''))}
+										key={singleTab}
+									>
+										<PreviewSelectedCards
+											groupedServicesData={groupedShowServicesData[activeTab]}
+											supplierPayload={supplierPayload}
+										/>
+									</TabPanel>
+								))}
+							</Tabs>
+						</Modal.Body>
+						<Modal.Footer>
+							<Button themeType="accent" onClick={() => setModalStep(2)}>Save Preference</Button>
+						</Modal.Footer>
+					</Modal>
+				) : null}
 		</div>
+
 	);
 }
 
