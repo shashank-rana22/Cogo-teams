@@ -6,14 +6,17 @@ function useGetShipmentTimeLine({ itemData }) {
 	const { id } = itemData || {};
 
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/get_container_timeline',
+		url    : 'fcl_freight/get_timeline',
 		method : 'get',
 	}, { manual: true, autoCancel: false });
 
 	const getShipmentTimeline = useCallback((async () => {
 		try {
 			await trigger({
-				params: { shipment_id: id },
+				params: { 
+					shipment_id: id ,
+					container_timeline:true
+				},
 			});
 		} catch (e) {
 			Toast.error(e.message);
