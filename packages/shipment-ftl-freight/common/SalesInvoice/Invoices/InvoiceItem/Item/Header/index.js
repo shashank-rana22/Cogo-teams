@@ -13,6 +13,7 @@ import ClickableDiv from '../../../../../ClickableDiv';
 
 import Actions from './Actions';
 import CNNullify from './CNNullify';
+import OTPVerification from './OTPVerification';
 import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
@@ -36,6 +37,7 @@ function Header({
 }) {
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
+	const [showOtpModal, setShowOTPModal] = useState(false);
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
@@ -263,6 +265,15 @@ function Header({
 						</Button>
 					) : null}
 
+					{invoice?.status === 'reviewed' ? (
+						<Button
+							size="sm"
+							onClick={() => setShowOTPModal(true)}
+						>
+							Send OTP for Approval
+						</Button>
+					) : null}
+
 					{invoice?.is_revoked && invoice?.status !== 'revoked' ? (
 						<div className={styles.info_container}>Requested for Revoke</div>
 					) : null}
@@ -281,6 +292,16 @@ function Header({
 			</div>
 
 			{open ? <div>{children}</div> : null}
+
+			{showOtpModal ? (
+				<OTPVerification
+					showOtpModal={showOtpModal}
+					setShowOTPModal={setShowOTPModal}
+					invoice={invoice}
+					refetch={salesInvoicesRefetch}
+					shipment_data={shipment_data}
+				/>
+			) : null}
 
 			<CNNullify
 				askNullify={askNullify}

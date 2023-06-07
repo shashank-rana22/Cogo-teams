@@ -1,4 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { isEmpty } from '@cogoport/utils';
 import { useMemo, useRef } from 'react';
 
@@ -9,7 +10,6 @@ import { formControls } from '../commons/controls/formControls';
 import { getFormatValue } from '../commons/utils/getFormatValue';
 
 import Form from './Form';
-import styles from './styles..module.css';
 import { useFillFormData } from './utils/useFillFormData';
 
 function UpdateCustomerInvoice(props) {
@@ -85,7 +85,7 @@ function UpdateCustomerInvoice(props) {
 					? <Form defaultValues={defaultValues} finalControls={finalControls} ref={formRef} /> : null}
 			</Modal.Body>
 			<Modal.Footer>
-				<div className={styles.button_wrapper}>
+				<FooterButtonWrapper>
 					<Button
 						themeType="secondary"
 						onClick={() => closeModal()}
@@ -95,7 +95,7 @@ function UpdateCustomerInvoice(props) {
 					<Button onClick={handleFormSubmit}>
 						Submit
 					</Button>
-				</div>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);

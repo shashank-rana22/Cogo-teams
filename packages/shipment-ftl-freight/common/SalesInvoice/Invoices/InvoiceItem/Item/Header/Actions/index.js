@@ -21,6 +21,8 @@ const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
 
+const CUSTOMER_INVOICE_STATUSES = ['reviewed', 'approved'];
+
 function Actions({
 	invoice = {},
 	bfInvoiceRefetch = () => {},
@@ -174,10 +176,10 @@ function Actions({
 						>
 							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
 								&nbsp;
-							{['reviewed', 'approved'].includes(invoice?.status) ? '/Generate' : ''}
+							{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? '/Generate' : ''}
 							Customer Invoice
 						</ClickableDiv>
-						{['reviewed', 'approved'].includes(invoice?.status) ? (
+						{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? (
 							<ClickableDiv
 								className={styles.text}
 								onClick={() => { setShow(false); setUpdateCustomerInvoice(true); }}
@@ -188,7 +190,7 @@ function Actions({
 					</div>
 				</div>
 			))}
-			{['reviewed', 'approved'].includes(invoice?.status) ? (
+			{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? (
 				<div>
 					<div className={styles.line} />
 					<ClickableDiv

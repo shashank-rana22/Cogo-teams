@@ -94,7 +94,7 @@ function OTPVerification({
 					show={showOtpModal}
 					onClose={() => setShowOTPModal(false)}
 				>
-					<Modal.Header title="Select user to send OTP" />
+					<Modal.Header title="Select User To Send OTP" />
 
 					<Modal.Body className={styles.body}>
 						{userListInfo}

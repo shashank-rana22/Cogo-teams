@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/surface-modules';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { useMemo, useEffect, useState } from 'react';
 
 import useCreateShipmentFortigoTripDetail from '../../../../../../../../hooks/useCreateShipmentFortigoTripDetail';
@@ -76,8 +77,10 @@ function FillCustomerPortalData({
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={closeModal} themeType="secondary" disabled={loading}>Cancel</Button>
-				<Button onClick={handleSubmit(onSubmit)} disabled={loading}>Submit</Button>
+				<FooterButtonWrapper>
+					<Button onClick={closeModal} themeType="secondary" disabled={loading}>Cancel</Button>
+					<Button onClick={handleSubmit(onSubmit)} disabled={loading}>Submit</Button>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);
