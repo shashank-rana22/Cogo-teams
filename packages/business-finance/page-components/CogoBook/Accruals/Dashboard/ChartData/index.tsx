@@ -1,4 +1,5 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
+import { Placeholder } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 
 import styles from './styles.module.css';
@@ -7,7 +8,6 @@ function ChartData({
 	expenseBookedSum, expenseAccruedSum, expenseCurrency, incomeBookedSum, incomeAccruedSum,
 	incomeCurrency, statsLoading, COLORS, data, dataExpense,
 }) {
-	console.log(statsLoading, 'statsLoading');
 	function CenteredMetric({ centerX, centerY }) {
 		return (
 			<text
@@ -66,14 +66,16 @@ function ChartData({
 				<div className={styles.booked_data}>
 					Booked Income
 					<div className={styles.amount_data}>
-						{getFormattedPrice(incomeBookedSum, incomeCurrency) || 0.00}
+						{ statsLoading ? <Placeholder height="20px" width="80px" />
+							: getFormattedPrice(incomeBookedSum, incomeCurrency) || 0.00}
 					</div>
 				</div>
 
 				<div>
 					Accrued Income
 					<div className={styles.amount_data}>
-						{getFormattedPrice(incomeAccruedSum, incomeCurrency) || 0.00}
+						{statsLoading ? <Placeholder height="20px" width="80px" />
+							: getFormattedPrice(incomeAccruedSum, incomeCurrency) || 0.00}
 					</div>
 				</div>
 
@@ -98,14 +100,16 @@ function ChartData({
 				<div className={styles.booked_data}>
 					Booked Expense
 					<div className={styles.amount_data}>
-						{getFormattedPrice(expenseBookedSum, expenseCurrency) || 0.00}
+						{ statsLoading ? <Placeholder height="20px" width="80px" />
+							: getFormattedPrice(expenseBookedSum, expenseCurrency) || 0.00}
 					</div>
 				</div>
 
 				<div>
 					Accrued Expense
 					<div className={styles.amount_data}>
-						{getFormattedPrice(expenseAccruedSum, expenseCurrency) || 0.00}
+						{ statsLoading ? <Placeholder height="20px" width="80px" />
+							: getFormattedPrice(expenseAccruedSum, expenseCurrency) || 0.00}
 					</div>
 				</div>
 

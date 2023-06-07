@@ -9,9 +9,9 @@ const useMonthlyTrendStats = ({ month, year, entityCode }) => {
 		trigger,
 	] = useRequestBf(
 		{
-			url     : '/pnl/dashboard/shipment-statistics',
+			url     : '/pnl/dashboard/monthly-trends',
 			method  : 'get',
-			authKey : 'get_pnl_dashboard_shipment_statistics',
+			authKey : 'get_pnl_dashboard_monthly_trends',
 		},
 		{ manual: true },
 	);

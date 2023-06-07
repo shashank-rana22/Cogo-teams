@@ -1,11 +1,10 @@
-import { Popover } from '@cogoport/components';
+import { Placeholder, Popover } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
 function StatsNumericData({ statsData, statsLoading }) {
-	console.log({ statsLoading, statsData }, 'StatsData');
 	const {
 		bookedShipmentCount = 0,
 		accruedShipmentCount = 0,
@@ -112,7 +111,11 @@ function StatsNumericData({ statsData, statsLoading }) {
 			<div className={styles.numeric_data}>
 				{MappingData.map((item) => (
 					<div key={item?.id} className={styles.item}>
-						<div className={styles.value_data}>{item?.value}</div>
+						<div className={styles.value_data}>
+							{statsLoading ? <Placeholder height="50px" width="40px" />
+								: item?.value}
+
+						</div>
 						<div className={styles.label}>{item?.label}</div>
 					</div>
 				))}
@@ -122,13 +125,18 @@ function StatsNumericData({ statsData, statsLoading }) {
 					{' '}
 					Booked Profit :
 					{' '}
-					<span className={styles.percentage}>{`${bookedProfitPercentage.toFixed(2)} %`}</span>
+					<span className={styles.percentage}>
+						{ statsLoading
+							? <Placeholder height="20px" width="40px" /> : `${bookedProfitPercentage.toFixed(2)} %`}
+
+					</span>
 					{' '}
 					| Actual Profit :
 					{' '}
 					<span className={styles.percentage}>
 						{' '}
-						{`${actualProfitPercentage.toFixed(2)} %`}
+						{ statsLoading
+							? <Placeholder height="20px" width="40px" /> : `${actualProfitPercentage.toFixed(2)} %`}
 						{' '}
 					</span>
 					<Popover placement="bottom" render={contentProfit}>
@@ -142,7 +150,8 @@ function StatsNumericData({ statsData, statsLoading }) {
 					{' '}
 					<span className={styles.percentage}>
 						{' '}
-						{`${variancePercentage.toFixed(2)} %`}
+						{ statsLoading
+							? <Placeholder height="20px" width="40px" /> : `${variancePercentage.toFixed(2)} %`}
 					</span>
 					<Popover placement="bottom" render={contentVariance}>
 						<div className={styles.icon_arrow}><IcMArrowRotateDown /></div>

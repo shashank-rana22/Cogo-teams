@@ -4,42 +4,25 @@ import { getAmountInLakhCrK } from './getAmountInLakhCrK';
 import { getAmountLineChartInLakh } from './getAmountLineChartInLakh';
 import styles from './styles.module.css';
 
-const barData = [
-	{
-		id    : 'Income Accrued',
-		label : 'Income Accrued',
-		value : 12,
-		color : '#57C6D1',
-	},
-	{
-		id    : 'Income Booked',
-		label : 'Income Booked',
-		value : 12,
-		color : '#ADCC6A',
-	},
-];
-function MonthBarChart() {
+function MonthBarChart({ monthlyData, COLORS }) {
 	return (
 		<div className={styles.container}>
 			<ResponsiveBar
-				data={barData}
-				keys={['income', 'expense']}
-				indexBy="month"
-				margin={{ top: 250, right: 30, bottom: 0, left: 30 }}
-				padding={0.3}
+				data={monthlyData}
+				keys={['Booked', 'Accrued']}
+				indexBy="Month"
+				margin={{ top: 100, right: 30, bottom: 80, left: 60 }}
+				padding={0.8}
+				enableLabel={false}
 				valueScale={{ type: 'linear' }}
 				indexScale={{ type: 'band', round: true }}
-				colors={['#DDEBC0', '#ACDADF']}
+				colors={COLORS}
 				enableGridY
-				enableLabel
 				layout="vertical"
 				groupMode="grouped"
-				borderColor={{
-					from: 'color', modifiers: [['darker',	1.6]],
-				}}
 				axisTop={null}
 				axisRight={null}
-				innerPadding={8}
+				innerPadding={10}
 				axisBottom={{
 					tickSize: 0, tickPadding: 20, tickRotation: 0,
 				}}
@@ -48,11 +31,6 @@ function MonthBarChart() {
 					tickPadding  : -10,
 					tickRotation : 0,
 					format       : (value) => `${getAmountInLakhCrK(value, 'INR')}`,
-				}}
-				labelSkipWidth={36}
-				labelSkipHeight={12}
-				labelTextColor={{
-					from: 'color', modifiers: [['darker',	1]],
 				}}
 				layers={['grid', 'axes', 'bars', 'markers', 'legends',
 					({ bars }) => (

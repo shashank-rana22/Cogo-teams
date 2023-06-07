@@ -1,4 +1,4 @@
-import { Pill, Popover, Tooltip } from '@cogoport/components';
+import { Pill, Popover, Toggle, Tooltip } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
@@ -21,31 +21,38 @@ const GetYearDetails = optionsYear()?.[0]?.value;
 
 const COLORS = ['#57C6D1', '#ADCC6A'];
 
+interface DashboardFilterInterface {
+	month?:number
+	year?:string
+}
+
 function Dashboard() {
 	const { control, watch } = useForm();
 
 	const entityCode = watch('entityCode');
 
-	const [dashboardFilters, setDashboardFilters] = useState({ month: '', year: '' });
+	const [dashboardFilters, setDashboardFilters] = useState<DashboardFilterInterface>();
+
+	const [toggle, setToggle] = useState(false);
+
+	const { month, year } = dashboardFilters || {};
 
 	const { statsData = {}, statsLoading } = useShipmentIdStats({
-		month : dashboardFilters?.month,
-		year  : dashboardFilters?.year,
+		month : month || GetMonthDetails?.value,
+		year  : year || GetYearDetails,
 		entityCode,
 	});
 
 	const { shipmentViewData = {}, shipmentViewLoading } = useShipmentViewStats({
-		month : dashboardFilters?.month,
-		year  : dashboardFilters?.year,
+		month : month || GetMonthDetails?.value,
+		year  : year || GetYearDetails,
 		entityCode,
 	});
-	const { monthlyData = {}, monthlyLoading } = useMonthlyTrendStats({
-		month : dashboardFilters?.month,
-		year  : dashboardFilters?.year,
+	const { monthlyData = [] } = useMonthlyTrendStats({
+		month : month || GetMonthDetails?.value,
+		year  : year || GetYearDetails,
 		entityCode,
 	});
-
-	console.log({ monthlyData, monthlyLoading }, 'monthlyData');
 
 	const {
 		expenseBookedSum = 0,
@@ -93,8 +100,6 @@ function Dashboard() {
 		sixtyOneToNinetyDays = 0,
 	} = shipmentViewData;
 
-	console.log(shipmentViewLoading, 'shipmentViewLoading');
-
 	const reportMonth = [
 		{ id: '1', days: '0 - 15 Days Left', shipmentId: zeroToFifteenDays },
 		{ id: '2', days: '15 - 30 Days Left', shipmentId: sixteenToThirtyDays },
@@ -109,6 +114,20 @@ function Dashboard() {
 			</div>
 		))
 	);
+
+	const monthlyDataValue = (monthlyData || [{}]).map((item) => {
+		const {
+			incomeAccruedSum:incomeAccrued, incomeBookedSum:incomeBooked,
+			incomeCurrency:currencyIncome, expenseAccruedSum:expenseAccrued,
+			expenseBookedSum:expenseBooked, expenseCurrency:currencyExpense, periodName,
+		} = item || {};
+		return {
+			Month    : periodName,
+			Booked   : toggle ? expenseBooked : incomeBooked,
+			Accrued  : toggle ? expenseAccrued : incomeAccrued,
+			currency : toggle ? currencyExpense : currencyIncome,
+		};
+	});
 
 	return (
 		<div>
@@ -144,7 +163,7 @@ function Dashboard() {
 					</div>
 
 					<Pill size="md" color="green">
-						{`Month : ${GetMonthDetails?.label}`}
+						{`Month : ${optionsMonth[month - 1]?.label || GetMonthDetails?.label}`}
 					</Pill>
 				</div>
 
@@ -199,7 +218,7 @@ function Dashboard() {
 
 				<div className={styles.hr_statistics} />
 
-				<SIDView reportMonth={reportMonth} />
+				<SIDView reportMonth={reportMonth} shipmentViewLoading={shipmentViewLoading} />
 
 			</div>
 
@@ -226,13 +245,22 @@ function Dashboard() {
 								</div>
 							</Tooltip>
 						</div>
+						<div>
+							<Toggle
+								name="toggle"
+								size="md"
+								onLabel="Expense"
+								offLabel="Income"
+								onChange={() => { setToggle(!toggle); }}
+							/>
 
+						</div>
 					</div>
 
 					<div className={styles.hr_statistics} />
 
 					<div>
-						<MonthBarChart />
+						<MonthBarChart monthlyData={monthlyDataValue} COLORS={COLORS} />
 					</div>
 
 				</div>

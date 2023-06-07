@@ -1,8 +1,9 @@
+import { Placeholder } from '@cogoport/components';
 import { IcMArrowRight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function SIDView({ reportMonth }) {
+function SIDView({ reportMonth, shipmentViewLoading }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.shipment_days}>
@@ -22,7 +23,11 @@ function SIDView({ reportMonth }) {
 						<div className={styles.id_show}>
 							<div className={styles.id_data}>Shipment ID’s</div>
 							:
-							<div className={styles.id_color_data}>{item?.shipmentId}</div>
+							<div className={styles.id_color_data}>
+								{ shipmentViewLoading
+									? <Placeholder height="20px" width="60px" /> : item?.shipmentId}
+
+							</div>
 						</div>
 					</div>
 				))}
