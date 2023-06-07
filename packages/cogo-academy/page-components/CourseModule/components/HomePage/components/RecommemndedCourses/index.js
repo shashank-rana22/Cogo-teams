@@ -1,21 +1,15 @@
 import { Carousel } from '@cogoport/components';
-import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import EmptyState from '../../../../commons/EmptyState';
 import LoadingState from '../../../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../../../configs/BUTTON_CONTENT_MAPPING';
-import GET_LINK_MAPPING from '../../../../configs/GET_LINK_MAPPING';
 import CourseCard from '../../../CourseCard';
 
 import styles from './styles.module.css';
 import useListCourseUserMappings from './useListCourseUserMappings';
 
 function RecommendedComponents({ user_id, ongoingCategories = {} }) {
-	const router = useRouter();
-
-	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
-
 	const { data = {}, loading, fetchList } = useListCourseUserMappings({ user_id, ongoingCategories });
 
 	if (loading || !ongoingCategories.loaded) {
@@ -39,7 +33,6 @@ function RecommendedComponents({ user_id, ongoingCategories = {} }) {
 				key={item.id}
 				data={item}
 				buttonContent={BUTTON_CONTENT_MAPPING[item.state] || BUTTON_CONTENT_MAPPING.default}
-				handleClick={GET_LINK_MAPPINGS[item.state] || GET_LINK_MAPPINGS.default}
 				fetchList={fetchList}
 			/>
 		),

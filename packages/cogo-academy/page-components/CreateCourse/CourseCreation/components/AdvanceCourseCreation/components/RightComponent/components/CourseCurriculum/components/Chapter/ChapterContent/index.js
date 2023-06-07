@@ -77,7 +77,7 @@ function ChapterContent({
 
 									return (
 										<div
-											key={name}
+											key={subControlName}
 											className={`${styles.form_group} ${styles[subControlName]}`}
 										>
 											<div

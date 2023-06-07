@@ -2,60 +2,15 @@ import { Pill, Carousel } from '@cogoport/components';
 import { IcMStarfull } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
-
-const formatTime = (time, type) => (
-	<div>
-		{Math.floor(time / 60)}
-		&nbsp;
-		<b>Hour</b>
-		&nbsp;
-		{(time % 60)}
-		&nbsp;
-		<b>Min</b>
-		&nbsp;
-		{type}
-	</div>
-);
-
-const getModulesCount = ({ course_modules = [], type }) => {
-	if (type === 'modules') {
-		return course_modules.length;
-	}
-
-	if (type === 'sub_modules') {
-		let finalValue = 0;
-
-		course_modules.forEach((item) => {
-			finalValue += (item.course_sub_modules || []).length;
-		});
-
-		return finalValue;
-	}
-
-	let chaptersCount = 0;
-
-	course_modules.forEach((modules) => {
-		const { course_sub_modules = [] } = modules || {};
-
-		course_sub_modules.forEach((subModule) => {
-			chaptersCount += (subModule.course_sub_module_chapters || []).length;
-		});
-	});
-
-	return chaptersCount;
-};
+import useHandleCourseDetails from './useHandleCourseDetails';
 
 function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
-	const CAROUSELDATA = instructorData?.map((item, index) => ({
-		key    : `${index}${JSON.stringify(item)}`,
-		render : () => (
-			<div>
-				<div className={styles.box}>{item.name}</div>
-				<div className={styles.box}>{item.mobile_number}</div>
-				<div className={styles.box}>{item.email}</div>
-			</div>
-		),
-	}));
+	const {
+		MAPPING,
+		getModulesCount,
+		FormatTime,
+		CAROUSELDATA,
+	} = useHandleCourseDetails({ instructorData });
 
 	return (
 		<div className={styles.container}>
@@ -107,6 +62,7 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 			<div className={styles.card_display}>
 				<div className={styles.card} style={{ width: '38%' }}>
 					<div className={styles.card_title}>Course Details</div>
+
 					<div className={styles.card_details}>
 						<div>
 							<img
@@ -114,23 +70,21 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 								alt="resume.png"
 							/>
 						</div>
+
 						<div>
-							<div>
-								{data?.course_stats?.modules_count
-								|| getModulesCount({ course_modules: data?.course_modules, type: 'modules' })}
-								&nbsp;Modules
-							</div>
-							<div>
-								{data?.course_stats?.sub_modules_count
-								|| getModulesCount({ course_modules: data?.course_modules, type: 'sub_modules' })}
-								&nbsp;Sub Modules
-							</div>
-							<div>
-								{data?.course_stats?.course_sub_module_chapters_count
-								|| getModulesCount({ course_modules: data?.course_modules, type: 'chapters' })}
-								&nbsp;Chapters
-							</div>
+							{Object.entries(MAPPING).map(([key, value]) => {
+								const { label, apiKey } = value;
+
+								return (
+									<div key={key}>
+										{data?.course_stats?.[apiKey]
+										|| getModulesCount({ course_modules: data?.course_modules, type: 'modules' })}
+										{label}
+									</div>
+								);
+							})}
 						</div>
+
 						<div>
 							<div>
 								{data?.course_stats?.graded_tests}
@@ -145,32 +99,42 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 					</div>
 				</div>
 
-				{viewType !== 'preview' ? (
-					<div className={styles.card} style={{ width: '30%' }}>
-						<div className={styles.card_title}>Estimated Completion</div>
-						<div className={styles.card_details}>
+				<div className={styles.card} style={{ width: '30%' }}>
+					<div className={styles.card_title}>Estimated Completion</div>
+					<div className={styles.card_details}>
+						<div>
+							<img
+								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/back_in_time.png"
+								alt="resume.png"
+							/>
+						</div>
+
+						<div>
 							<div>
-								<img
-									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/back_in_time.png"
-									alt="resume.png"
-								/>
-							</div>
-							<div>
-								<div>
-									{data?.course_completion_duration?.course_completion_value}
+								{data?.course_completion_duration?.course_completion_value}
+								{data?.course_completion_duration?.course_completion_value}
 								&nbsp;
-									{data?.course_completion_duration?.course_completion_unit}
-								</div>
-								<div>
-									{formatTime(data?.course_content_stats?.video_duration, 'Videos')}
-								</div>
-								<div>
-									{formatTime(data?.course_content_stats?.reading_duration, 'Reading')}
-								</div>
+								{data?.course_completion_duration?.course_completion_unit}
 							</div>
+
+							{viewType !== 'preview' ? (
+								<>
+									<FormatTime value={data?.course_content_stats?.video_duration} type="Videos" />
+
+									<FormatTime value={data?.course_content_stats?.reading_duration} type="Reading" />
+								</>
+							) : (
+								<>
+									{data?.course_content_duration_value}
+									{' '}
+									{data?.course_content_duration_unit}
+									{' '}
+									duration
+								</>
+							)}
 						</div>
 					</div>
-				) : null}
+				</div>
 
 				{viewType !== 'preview' ? (
 					<div className={styles.card} style={{ width: '30%' }}>
@@ -195,21 +159,6 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 					</div>
 				) : null}
 			</div>
-
-			{/* <div className={styles.bottom_box}>
-				<div>
-					Complete in &nbsp;
-					{data?.course_completion_duration?.course_completion_value}
-					&nbsp;
-					{data?.course_completion_duration?.course_completion_unit}
-					&nbsp;to Get Certification
-				</div>
-				<Pill color="green">
-					On or Before
-					{' '}
-					{format(data?.course_end_date || '', 'dd MMMM YYYY')}
-				</Pill>
-			</div> */}
 		</div>
 	);
 }

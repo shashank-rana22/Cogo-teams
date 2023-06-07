@@ -28,6 +28,7 @@ function ModuleContent({
 	showTestData,
 	showFeedback,
 	course_id,
+	courseState,
 }) {
 	const {
 		name,
@@ -59,6 +60,10 @@ function ModuleContent({
 		chapter_content,
 	});
 
+	const { course_details = {}, test_completed = false } = data;
+
+	const { feedback, name: courseName, tests = [] } = course_details;
+
 	if (loading) {
 		return <LoadingState />;
 	}
@@ -68,12 +73,14 @@ function ModuleContent({
 			<div className={styles.container}>
 				<CompletionAndFeedback
 					course_id={course_id}
-					feedbackData={data?.course_details?.feedback}
-					name={data?.course_details?.name}
+					feedbackData={feedback}
+					name={courseName}
 				/>
 			</div>
 		);
 	}
+
+	console.log('tests', tests);
 
 	if (showTestData) {
 		return (
@@ -94,28 +101,28 @@ function ModuleContent({
 						<div className={styles.data_box}>
 							<div className={styles.data_display}>
 								<span>No of Questions</span>
-								<b>{data?.course_details?.tests[0]?.total_questions || 0}</b>
+								<b>{tests[0]?.total_questions || 0}</b>
 							</div>
 
 							<div className={styles.data_display}>
 								<span>Duration</span>
 								<b>
-									{formatTime(data?.course_details?.tests[0]?.test_duration)}
+									{formatTime(tests[0]?.test_duration)}
 								</b>
 							</div>
 
 							<div className={styles.data_display}>
 								<span>Attempts</span>
-								<b>{data?.course_details?.tests[0]?.maximum_attempts}</b>
+								<b>{tests[0]?.maximum_attempts}</b>
 							</div>
 
 							<div className={styles.data_display}>
 								<span>Required Pass %</span>
-								<b>{data?.course_details?.tests[0]?.cut_off_percentage}</b>
+								<b>{tests[0]?.cut_off_percentage}</b>
 							</div>
 						</div>
 
-						{data?.test_completed ? (
+						{test_completed ? (
 							<Button
 								type="button"
 								themeType="tertiary"
@@ -141,7 +148,7 @@ function ModuleContent({
 			<div className={styles.header}>
 				<div className={styles.name}>{name}</div>
 
-				{viewType !== 'preview' ? (
+				{viewType !== 'preview' && courseState !== 'completed' ? (
 					<div className={styles.btn_container}>
 						{!hideBtn(data, 'prev', indexes) && (
 							<Button

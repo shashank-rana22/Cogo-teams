@@ -92,14 +92,22 @@
 	white-space: nowrap;
 }
 
-.pill {
-	display: flex;
-	flex-wrap: wrap;
-	margin: 10px 16px;
-}
-
 .pagination_container {
 	display: flex;
 	flex-direction: row;
 	justify-content: flex-end;
+}
+
+.chips_container {
+	display: flex;
+	flex-wrap: wrap;
+	margin: 10px 16px;
+
+	:global {
+		.ui_tags_container {
+			display: flex;
+			flex-wrap: wrap;
+			gap: 8px;
+		}
+	}
 }

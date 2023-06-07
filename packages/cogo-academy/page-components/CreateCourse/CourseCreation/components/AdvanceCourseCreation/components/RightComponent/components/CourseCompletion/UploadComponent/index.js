@@ -26,7 +26,7 @@ function UploadComponent({ errors, control }) {
 
 				if (type === 'groupSelect') {
 					return (
-						<div className={`${styles.group_container} ${styles[name]}`}>
+						<div key={name} className={`${styles.group_container} ${styles[name]}`}>
 							{subControls.map((subControlItem) => {
 								const {
 									name:subControlName,

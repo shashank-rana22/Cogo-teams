@@ -2,12 +2,14 @@ import { Pill } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
 
+import GET_LINK_MAPPING from '../../../../../../configs/GET_LINK_MAPPING';
+
 import styles from './styles.module.css';
 
 function CategoryCard({ item }) {
 	const router = useRouter();
 
-	const { cogo_academy_course = {} } = item || {};
+	const { cogo_academy_course = {}, state = 'default' } = item || {};
 
 	const { name, faq_topics = [], id = '' } = cogo_academy_course || {};
 
@@ -17,7 +19,7 @@ function CategoryCard({ item }) {
 		<div
 			role="presentation"
 			className={styles.outer_container}
-			onClick={() => router.push(`/learning/course/introduction?course_id=${id}`)}
+			onClick={() => router.push(GET_LINK_MAPPING({ state, course_id: id }))}
 		>
 			<div className={styles.container}>
 				<div className={styles.title}>{name}</div>

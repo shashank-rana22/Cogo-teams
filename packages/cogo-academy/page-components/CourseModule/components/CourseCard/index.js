@@ -2,6 +2,7 @@ import { Pill, Button, Tooltip, ProgressBar } from '@cogoport/components';
 import { IcMStarfull, IcMBookmark, IcMFolder, IcCWaitForSometime } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
+import GET_LINK_MAPPING from '../../configs/GET_LINK_MAPPING';
 import useUpdateUserCourse from '../../hooks/useUpdateUserCourse';
 import toFixed from '../../utils/toFixed';
 
@@ -26,7 +27,6 @@ function ToolTipContent({ faq_topics }) {
 function CourseCard({
 	data = {},
 	buttonContent = {},
-	handleClick = () => {},
 	fetchList,
 	viewType = '',
 }) {
@@ -203,7 +203,7 @@ function CourseCard({
 						themeType="secondary"
 						className={`${styles.btn} primary_button`}
 						onClick={() => {
-							handleClick(course_id);
+							router.push(GET_LINK_MAPPING({ state, course_id }));
 						}}
 					>
 						<div className={styles.btn_text}>{primaryBtnText}</div>

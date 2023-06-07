@@ -13,13 +13,16 @@ function useListCourseUserMappings({ activeTab, inputValue, selected, currentCat
 	const finalPayload = useMemo(() => ({
 		page    : page || 1,
 		filters : {
-			status: 'active',
+			status       : 'active',
+			course_state : 'published',
 			user_id,
 			...MAPPING[activeTab],
-			course_category_id:
-			(currentCategory === 'all_courses' || currentCategory === undefined) ? null : [`${currentCategory}`],
-			faq_topic_id : selected === '' ? null : selected,
-			q            : inputValue,
+			...(!inputValue ? {
+				course_category_id:
+				(currentCategory && currentCategory !== 'all_courses') ? [currentCategory] : undefined,
+				...(selected ? { faq_topic_id: selected } : null),
+			} : {}),
+			q: inputValue,
 		},
 		page_limit: page_limit || 10000000000000,
 	}), [page, user_id, activeTab, currentCategory, selected, inputValue, page_limit]);

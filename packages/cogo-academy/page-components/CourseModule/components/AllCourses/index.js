@@ -1,56 +1,35 @@
-import { Pagination } from '@cogoport/components';
+import { Chips, Pagination } from '@cogoport/components';
 import { IcMTick } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
 
 import LoadingState from '../../commons/LoadingState';
 import BUTTON_CONTENT_MAPPING from '../../configs/BUTTON_CONTENT_MAPPING';
-import GET_LINK_MAPPING from '../../configs/GET_LINK_MAPPING';
-import useListCourseUserMappings from '../../hooks/useListCourseUserMappings';
 import CourseCard from '../CourseCard';
 
-import TagsSelect from './components/TagsSelect';
 import styles from './styles.module.css';
+import useHandleAllCourses from './useHandleAllCourses';
+
+const MAPPING = ['completed', 'ongoing', 'mandatory'];
 
 function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inputValue }) {
-	const { user:{ id: user_id } } = useSelector((state) => state.profile);
-
-	const router = useRouter();
-
-	const [activeTab, setActiveTab] = useState();
-
-	const [selected, setSelected] = useState('');
-	const [page, setPage] = useState(1);
-
-	const page_limit = 12;
-
-	const clickOptions = (active, category, select) => {
-		setActiveTab(active);
-		setCurrentCategory(category);
-		setSelected(select);
-	};
-
 	const {
-		data = {},
+		categoryTopics,
+		clickOptions,
 		loading,
 		fetchList,
-	} = useListCourseUserMappings({
-		activeTab,
-		inputValue,
+		data,
+		setPage,
 		selected,
-		currentCategory,
-		page_limit,
+		setSelected,
+		activeTab,
 		page,
-		user_id,
-	});
-
-	const GET_LINK_MAPPINGS = GET_LINK_MAPPING({ router });
+	} = useHandleAllCourses({ inputValue, currentCategory, courseCategories, setCurrentCategory });
 
 	if (loading) {
-		return <LoadingState rowsCount={7} />;
+		return <LoadingState rowsCount={6} />;
 	}
+
+	const { total_count = 0, page_limit = 12, list = [] } = data || {};
 
 	return (
 		<div className={styles.container}>
@@ -58,30 +37,17 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 				<div className={styles.main_heading}>All Courses</div>
 
 				<div className={styles.btn_container}>
-					<div
-						role="presentation"
-						onClick={() => clickOptions('completed', 'all_courses', '')}
-						className={`${styles.btn} ${activeTab === 'completed' ? styles.btn_active : null}`}
-					>
-						{activeTab === 'completed' ? <IcMTick height="20px" width="20px" /> : null}
-						Completed
-					</div>
-					<div
-						role="presentation"
-						onClick={() => clickOptions('ongoing', 'all_courses', '')}
-						className={`${styles.btn} ${activeTab === 'ongoing' ? styles.btn_active : null}`}
-					>
-						{activeTab === 'ongoing' ? <IcMTick height="20px" width="20px" /> : null}
-						Ongoing
-					</div>
-					<div
-						role="presentation"
-						onClick={() => clickOptions('mandatory', 'all_courses', '')}
-						className={`${styles.btn} ${activeTab === 'mandatory' ? styles.btn_active : null}`}
-					>
-						{activeTab === 'mandatory' ? <IcMTick height="20px" width="20px" /> : null}
-						Mandatory
-					</div>
+					{MAPPING.map((item) => (
+						<div
+							key={item}
+							role="presentation"
+							onClick={() => clickOptions(item, 'all_courses', '')}
+							className={`${styles.btn} ${activeTab === item ? styles.btn_active : null}`}
+						>
+							{activeTab === item ? <IcMTick height="20px" width="20px" /> : null}
+							{startCase(item)}
+						</div>
+					))}
 				</div>
 			</div>
 
@@ -110,42 +76,35 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 				</div>
 			) : null}
 
-			<div className={styles.pill}>
-				{courseCategories?.map((category) => {
-					if (currentCategory === category.id) {
-						return (
-							<TagsSelect
-								key={category.id}
-								category={category}
-								selected={selected}
-								setSelected={setSelected}
-							/>
-						);
-					}
-
-					return null;
-				})}
-			</div>
+			{!inputValue ? (
+				<div className={styles.chips_container}>
+					<Chips
+						enableMultiSelect
+						items={categoryTopics}
+						selectedItems={selected}
+						onItemChange={setSelected}
+					/>
+				</div>
+			) : null}
 
 			<div className={styles.carousel_container}>
-				{(data.list || []).map((item) => (
+				{list.map((item) => (
 					<CourseCard
 						viewType="all_courses"
 						key={item.id}
 						data={item}
 						buttonContent={BUTTON_CONTENT_MAPPING[item.state] || BUTTON_CONTENT_MAPPING.default}
-						handleClick={GET_LINK_MAPPINGS[item.state] || GET_LINK_MAPPINGS.default}
 						fetchList={fetchList}
 					/>
 				))}
 			</div>
 
-			{data?.total_count > 12 && (
+			{total_count > 12 && (
 				<div className={styles.pagination_container}>
 					<Pagination
-						totalItems={data?.total_count || 0}
+						totalItems={total_count}
 						currentPage={page || 1}
-						pageSize={data?.page_limit}
+						pageSize={page_limit}
 						onPageChange={setPage}
 					/>
 				</div>

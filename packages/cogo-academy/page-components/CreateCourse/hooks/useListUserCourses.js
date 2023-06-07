@@ -29,7 +29,7 @@ function useListUserCourses({ filters, activeTab }) {
 					...params,
 					filters: {
 						...params.filters,
-						q: query,
+						user_name: query,
 						...filters,
 					},
 				},

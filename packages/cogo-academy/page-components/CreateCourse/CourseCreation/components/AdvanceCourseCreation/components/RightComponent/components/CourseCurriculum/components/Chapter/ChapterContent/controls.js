@@ -133,7 +133,10 @@ const controls = [
 				elementType : 'number',
 				type        : 'number',
 				placeholder : 'Select',
-				rules       : { required: { value: true, message: 'This is required' } },
+				rules       : {
+					required : { value: true, message: 'This is required' },
+					validate : (value) => (!Number.isInteger(Number(value)) ? 'This should be integer' : true),
+				},
 			},
 		],
 	},

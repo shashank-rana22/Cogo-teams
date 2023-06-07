@@ -15,9 +15,7 @@ function CompletionAndFeedback({ course_id, feedbackData, name }) {
 
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.congrats}>
-
 				<div>
 					<img
 						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/completed_course_confetti.svg"
@@ -81,9 +79,7 @@ function CompletionAndFeedback({ course_id, feedbackData, name }) {
 				}}
 			>
 				Submit
-
 			</Button>
-
 		</div>
 	);
 }

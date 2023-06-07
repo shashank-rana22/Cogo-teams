@@ -20,7 +20,7 @@ const useHandleCourse = ({ ref, courseActiveTab }) => {
 		input,
 		setInput,
 		total_count:courseCount,
-	} = useListCogoAcademyCourses({ filters });
+	} = useListCogoAcademyCourses({ filters, activeTab });
 
 	const {
 		data: studentData,

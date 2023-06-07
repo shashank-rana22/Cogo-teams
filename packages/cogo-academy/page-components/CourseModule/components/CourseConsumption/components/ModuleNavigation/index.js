@@ -109,7 +109,6 @@ function ModuleNavigation({
 											)}
 
 										<div className={styles.name}>{subModule.name}</div>
-
 									</div>
 								)}
 							>

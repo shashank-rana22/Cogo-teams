@@ -68,7 +68,7 @@ function PublishCourse({ data = {}, id = '' }, ref) {
 
 				if (type === 'groupSelect') {
 					return (
-						<div className={styles.group_container}>
+						<div key={name} className={styles.group_container}>
 							{subControls.map((subControlItem) => {
 								const {
 									name:subControlName,

@@ -16,6 +16,7 @@ function useListCourseUserMappings({ user_id, ongoingCategories }) {
 						status             : 'active',
 						user_id,
 						course_category_id : ongoingCategories.data,
+						course_state       : 'published',
 					},
 				},
 			});
