@@ -1,3 +1,4 @@
+import Header from '../../common/Header';
 import Loader from '../../common/Loader';
 import useListDocumentDesk from '../../hooks/useListDocumentDesk';
 
@@ -13,10 +14,12 @@ function Fcl() {
 
 	return (
 		<div>
-			<div className={styles.header}>
-				<h1>Document Desk</h1>
+			<div>
+				<Header />
 
-				<Filters />
+				<div className={styles.filters}>
+					<Filters />
+				</div>
 			</div>
 
 			<AppliedFilters />

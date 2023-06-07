@@ -8,7 +8,8 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 function Layout({
-	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
+	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {},
+	shipment_id = '', disabledProps = false,
 }) {
 	const totalFields = [];
 
@@ -49,15 +50,15 @@ function Layout({
 	);
 
 	return (
-		<div className={styles.layout}>
+		<main className={styles.layout}>
 			{totalFields.map((rowFields, i) => (
 				<div className={cl`${styles.row} form_layout_row`} key={keysForFields[i]}>
 					{rowFields.map((field) => {
-						const { type, heading = '' } = field || {};
+						const { type, heading = '', name = '' } = field || {};
 
 						if (type === 'fieldArray') {
 							return (
-								<div className={styles.width_100} key={field.name}>
+								<section className={styles.width_100} key={field.name}>
 									{heading ? (
 										<div className={styles.heading}>
 											{heading}
@@ -66,25 +67,27 @@ function Layout({
 
 									<FieldArray
 										{...field}
-										error={errors?.[field?.name]}
+										error={errors?.[name]}
 										control={control}
 										showElements={showElements}
 										formValues={formValues}
 									/>
-								</div>
+								</section>
 							);
 						}
 
 						if (type === 'edit_service_charges') {
 							return (
-								<div className={styles.width_100} key={field.name}>
+								<section className={styles.width_100} key={field.name}>
 									<EditServiceCharges
+										error={errors?.[field?.name]}
 										control={control}
 										customValues={customValues?.[field?.name]}
 										shipment_id={shipment_id}
+										disabledProps={disabledProps}
 										{...field}
 									/>
-								</div>
+								</section>
 							);
 						}
 
@@ -92,7 +95,7 @@ function Layout({
 							<Item
 								key={field.name}
 								control={control}
-								error={errors?.[field?.name]}
+								error={errors?.[name]}
 								formValues={formValues}
 								{...field}
 							/>
@@ -100,7 +103,7 @@ function Layout({
 					})}
 				</div>
 			))}
-		</div>
+		</main>
 	);
 }
 export default Layout;
