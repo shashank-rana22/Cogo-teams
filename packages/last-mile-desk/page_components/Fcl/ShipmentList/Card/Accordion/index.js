@@ -24,12 +24,10 @@ function Accordion({ shipmentTimelineData, shipmentTimelineLoading }) {
 
 				</div>
 
-				<div className={styles.shipment_timeline}>
-					<ShipmentTimeline
-						shipmentTimelineData={shipmentTimelineData}
-						shipmentTimelineLoading={shipmentTimelineLoading}
-					/>
-				</div>
+				<ShipmentTimeline
+					shipmentTimelineData={shipmentTimelineData}
+					shipmentTimelineLoading={shipmentTimelineLoading}
+				/>
 			</div>
 		</div>
 	);

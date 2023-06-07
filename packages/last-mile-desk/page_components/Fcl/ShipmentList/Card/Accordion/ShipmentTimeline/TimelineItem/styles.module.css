@@ -21,7 +21,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	background-color: var(--color-secondary-greyscale-5);
+	border: 2px solid var(--color-secondary-greyscale-5);
 	border-radius: 50%;
 	transition: all 0.2s;
 }
@@ -32,9 +32,8 @@
 }
 
 .circle.big {
-	width: 16px;
-	height: 16px;
-	margin: 0 4px;
+	width: 14px;
+	height: 14px;
 
 	svg {
 		@keyframes animate-circle {
@@ -61,7 +60,12 @@
 }
 
 .completed {
-	background-color: var(--color-accent-orange-2);
+	background-color: #6fa5ab;
+	border: none;
+}
+
+.completed_line {
+	background-color: #88cad1;
 }
 
 .display_milestone {
@@ -79,9 +83,21 @@
 
 .ellipsis {
 	max-width: 100%;
+	margin-top: 8px;
 	overflow: hidden;
+	font-size: 10px;
+	color: #333;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+	opacity: 0.7;
+}
+
+.date_style {
+	max-width: 100%;
+	margin-top: 4px;
+	font-size: 12px;
+	font-weight: 600;
+	color: #333;
 }
 
 .tooltip_content {
