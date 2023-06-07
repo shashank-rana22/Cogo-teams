@@ -1,0 +1,27 @@
+.container{
+    display: flex;
+    background: #f8f2e7;
+    border-radius: 6px;
+    padding: 6px 12px;
+    margin-bottom: 8px;
+    align-items: center;
+}
+.port_info{
+    display: flex;
+}
+.port_code{
+    font-size: 12px;
+	font-weight: bold;
+	line-height: 16px;
+	color: #333;
+	letter-spacing: 0.02em;
+    margin: 0;
+}
+.tags{
+    margin-left: 8px;
+}
+.vertical_line{
+    border: 1px solid #edd7a9;
+    height: 16px;
+    margin: 0px 12px;
+}

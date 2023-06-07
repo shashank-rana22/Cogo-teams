@@ -3,3 +3,9 @@
     font-weight: 600;
     font-style: normal;
 }
+.list_panel{
+    background: #fff;
+    border-radius: 6px;
+    width:50%;
+    padding:4px 8px;
+}

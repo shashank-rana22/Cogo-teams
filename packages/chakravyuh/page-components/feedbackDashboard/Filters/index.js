@@ -9,7 +9,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Filters({ filters, setFilters = () => {} }) {
+function Filters({ filters, setFilters }) {
 	const type = ['country', 'trade', 'seaport'];
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
 		params   : { filters: { type } },
@@ -31,11 +31,12 @@ function Filters({ filters, setFilters = () => {} }) {
 					<p className={styles.label}>Origin</p>
 					<Select
 						placeholder="Origin"
+						{...originLocationOptions}
 						isClearable
 						value={filters?.origin_location_id}
-						{...originLocationOptions}
 						onChange={(value) => {
-							setFilters((prev) => ({ ...prev, origin_location_id: value, page: 1 }));
+							setFilters({ ...filters, origin_location_id: value, page: 1 });
+							// setFilters((prev) => ({ ...prev, origin_location_id: value, page: 1 }));
 						}}
 					/>
 				</div>
