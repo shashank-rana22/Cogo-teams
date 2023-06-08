@@ -13,7 +13,8 @@ export default function getCanEditSupplier({ shipment_data, user_data, state, st
 
 	const serviceInEditSupplierState = editSupplierServiceStates?.includes(state);
 
-	const oldShipmentEditable = shipment_data?.serial_id <= 120347 && !serviceCompletedOrCancelled.includes(state);
+	const oldShipmentEditable = shipment_data?.serial_id <= CONSTANTS.invoice_check_id
+	&& !serviceCompletedOrCancelled.includes(state);
 
 	return isStakeholderAllowed && (serviceInEditSupplierState || oldShipmentEditable);
 }

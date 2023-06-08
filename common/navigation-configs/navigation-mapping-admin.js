@@ -1126,7 +1126,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
 			},
 			{
 				key           : 'coe-bn_salvage',
@@ -2313,6 +2313,14 @@ const navigationMappingAdmin = {
 				as            : '/v2/referral/dashboard',
 				type          : 'link',
 				possible_apis : apis.referral_dashboard,
+			},
+			{
+				key           : 'referral-simulation',
+				title         : 'Simulation',
+				href          : '/v2/referral/simulation',
+				as            : '/v2/referral/simulation',
+				type          : 'link',
+				possible_apis : apis.referral_simulation,
 			},
 		],
 	},
