@@ -10,10 +10,12 @@ import controls from './controls';
 import { extraDocsControls } from './extraDocsControls';
 import styles from './styles.module.css';
 
-function EmploymentHistory({ getEmployeeDetails, data: info }) {
+function EmploymentHistory({ getEmployeeDetails, data }) {
 	const { handleSubmit, control, setValue, formState: { errors }, watch } = useForm();
 
-	const id = info?.detail?.id;
+	const { detail } = data || {};
+
+	const { id, employee_experience_details } = detail || {};
 
 	const paySlip = watch('salary_slip');
 	const offerLetter = watch('offer_letter');
@@ -35,12 +37,12 @@ function EmploymentHistory({ getEmployeeDetails, data: info }) {
 	};
 
 	useEffect(() => {
-		setValue('employment_history', info?.detail?.employee_experience_details.map((item) => ({
+		setValue('employment_history', employee_experience_details.map((item) => ({
 			...item,
 			started_at : new Date(item.started_at),
 			ended_at   : new Date(item.ended_at),
 		})));
-	}, [info, setValue]);
+	}, [employee_experience_details, setValue]);
 
 	return (
 		<>
