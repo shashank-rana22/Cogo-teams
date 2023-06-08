@@ -493,6 +493,28 @@ function asyncQuotaList() {
 	};
 }
 
+function asyncFortigoLocations() {
+	return {
+		labelKey    : 'location_name',
+		valueKey    : 'id',
+		endpoint    : 'list_shipment_fortigo_trip_locations',
+		initialCall : true,
+	};
+}
+
+function asyncOrganizationBranches() {
+	return {
+		valueKey      : 'id',
+		labelKey      : 'branch_name',
+		endpoint      : 'list_organization_branches',
+		initialCall   : true,
+		defaultParams : {
+			filters    : { status: 'active' },
+			page_limit : 10,
+		},
+	};
+}
+
 function asyncListFAQTopics() {
 	return {
 		labelKey    : 'display_name',
@@ -590,6 +612,8 @@ export {
 	asyncPlanPricingList,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncFortigoLocations,
+	asyncOrganizationBranches,
 	asyncListFAQTopics,
 	asyncListFAQTags,
 	asyncListCourseCategories,

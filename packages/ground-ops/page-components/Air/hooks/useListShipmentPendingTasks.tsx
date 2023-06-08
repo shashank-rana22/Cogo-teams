@@ -3,6 +3,22 @@ import { useRequestAir } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect, useCallback } from 'react';
 
+const URL_MAPPING = {
+	new_awb          : 'list',
+	approval_pending : 'list',
+	approved_awb     : 'list',
+	final_awb        : 'list',
+	amendment        : 'amend/list',
+};
+
+const AUTH_KEY_MAPPING = {
+	new_awb          : 'get_air_coe_pending_tasks_list',
+	approval_pending : 'get_air_coe_pending_tasks_list',
+	approved_awb     : 'get_air_coe_pending_tasks_list',
+	final_awb        : 'get_air_coe_pending_tasks_list',
+	amendment        : 'get_air_coe_pending_tasks_amend_list',
+};
+
 const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relevantToMe }) => {
 	const {
 		user_data: userData,
@@ -16,9 +32,9 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
-			url     : '/air-coe/pending-tasks/list',
+			url     : `/air-coe/pending-tasks/${URL_MAPPING[activeTab]}`,
 			method  : 'get',
-			authKey : 'get_air_coe_pending_tasks_list',
+			authKey : `${AUTH_KEY_MAPPING[activeTab]}`,
 		},
 		{ manual: true },
 	);
@@ -50,6 +66,13 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 					assignedStakeholder : 'service_ops2_docs',
 					status              : 'pending',
 					task                : ['upload_airway_bill'],
+				},
+				amendment: {
+					assignedStakeholder : 'service_ops2_docs',
+					status              : 'pending',
+					task                : ['amend_draft_airway_bill', 'amend_draft_house_airway_bill'],
+					documentType        : ['draft_airway_bill', 'draft_house_airway_bill'],
+					documentState       : 'document_amendment_requested',
 				},
 			};
 			if (searchValue) {

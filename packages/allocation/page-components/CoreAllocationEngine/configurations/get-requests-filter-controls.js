@@ -13,6 +13,22 @@ const controls = [
 			{ value: 'portfolio_manager', label: 'Portfolio Manager' },
 		],
 	},
+	{
+		name    : 'status',
+		type    : 'chips',
+		label   : 'Request Status',
+		options : [
+			{ value: 'pending', label: 'Pending' },
+			{ value: 'approved', label: 'Approved' },
+			{ value: 'rejected', label: 'Rejected' },
+		],
+	},
+	{
+		name                  : 'created_at',
+		type                  : 'dateRangePicker',
+		label                 : 'Requested At',
+		isPreviousDaysAllowed : true,
+	},
 ];
 
 export default controls;

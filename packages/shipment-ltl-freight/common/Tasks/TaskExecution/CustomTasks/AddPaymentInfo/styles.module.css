@@ -1,0 +1,33 @@
+.container {
+	.upload-area {
+		height: 70px !important;
+	}
+
+	.core-ui-select-root {
+		.core-ui-select__control {
+			height: 45px;
+			border-color: #cbcff5;
+
+			&:hover {
+				border: 1.5px solid #5936f0;
+			}
+		}
+	}
+}
+
+.loading_container {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+
+	:global {
+		.ui_button_container:first-child {
+			margin-right: 8px;
+		}
+	}
+}

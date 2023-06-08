@@ -30,7 +30,7 @@
 .main {
 	display: flex;
 	flex-direction: column;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 500;
 	color: #393f70;
 	letter-spacing: 0.04em;
@@ -38,7 +38,7 @@
 
 .upload_info {
 	padding-top: 5px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 400;
 	color: #1c1a1a;
 	letter-spacing: 0.02em;
@@ -66,13 +66,13 @@
 
 .action {
 	padding: 12px 24px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	font-weight: 400;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 
 	&:hover {
 		cursor: pointer;
-		background: #f2f2f291;
+		background-color: #f2f2f291;
 	}
 }
 
