@@ -26,7 +26,8 @@ const useOtpInputEvents = ({
 
 			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
-			const nextOtpInputElementToFocus = otpInputElementsRef.current[currentFocusedOtpInputElementIndex - VARIABLE_STATE];
+			const nextOtpInputElementToFocus = otpInputElementsRef.current[currentFocusedOtpInputElementIndex
+				- VARIABLE_STATE];
 			nextOtpInputElementToFocus?.focus();
 
 			return;
@@ -68,7 +69,8 @@ const useOtpInputEvents = ({
 			setOtp((previousState) => {
 				for (let i = 0; i < otpLength; i += VARIABLE_STATE) {
 					if (i >= currentFocusedOtpInputElementIndex) {
-						NEW_STATE_VALUES[`otp-${i + VARIABLE_STATE}`] = content[i - currentFocusedOtpInputElementIndex] || '';
+						NEW_STATE_VALUES[`otp-${i + VARIABLE_STATE}`] = content[i
+							- currentFocusedOtpInputElementIndex] || '';
 					}
 				}
 

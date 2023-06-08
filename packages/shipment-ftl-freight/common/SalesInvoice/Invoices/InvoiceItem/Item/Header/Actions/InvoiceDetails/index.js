@@ -22,6 +22,10 @@ function InvoiceDetails({
 	setAddCustomerInvoice = () => {},
 	setUpdateCustomerInvoice = () => {},
 	setFillCustomerData = () => {},
+	setIsEditInvoice = () => {},
+	setIsChangeCurrency = () => {},
+	setShowAddRemarks = () => {},
+	setShowChangePaymentMode = () => {},
 }) {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 

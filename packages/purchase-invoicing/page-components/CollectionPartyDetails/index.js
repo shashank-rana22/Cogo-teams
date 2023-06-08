@@ -45,12 +45,8 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 		(service) => service?.service_type,
 	);
 	const { user } = useSelector(({ profile }) => ({ user: profile }));
-
 	const geo = getGeoConstants();
-
-	const {
-		shipment_data,
-	} = useContext(ShipmentDetailContext);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const serviceProviderConfirmation = (collectionParty.service_charges || []).find(
 		(item) => STATE.includes(item?.detail?.state),
@@ -144,9 +140,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 				</div>
 			</div>
 			<div className={styles.invoices}>
-				<div>
-					Total Invoice Value -
-				</div>
+				<div>Total Invoice Value -</div>
 				<div className={styles.value}>
 					<ToolTipWrapper
 						text={getFormattedAmount(

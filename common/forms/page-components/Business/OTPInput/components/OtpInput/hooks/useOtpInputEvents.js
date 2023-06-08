@@ -4,6 +4,8 @@ import { Toast } from '@cogoport/components';
 import { useRef, useEffect, useCallback } from 'react';
 
 const NEW_STATE_VALUES = {};
+const INITIAL_STATE = 0;
+const VARIABLE_STATE = 1;
 
 const useOtpInputEvents = ({
 	otpLength = 0,
@@ -26,7 +28,7 @@ const useOtpInputEvents = ({
 
 			const currentFocusedOtpInputElementIndex =	otpInputElementsRef.current.indexOf(event.target);
 
-			const nextOtpInputElementToFocus =	otpInputElementsRef.current[currentFocusedOtpInputElementIndex - 1];
+			const nextOtpInputElementToFocus =	otpInputElementsRef.current[currentFocusedOtpInputElementIndex - VARIABLE_STATE];
 			nextOtpInputElementToFocus?.focus();
 
 			return;
@@ -61,14 +63,14 @@ const useOtpInputEvents = ({
 				content = window.clipboardData.getData('Text');
 			}
 
-			content = content.replace(/[^0-9]/g, '').substring(0, otpLength);
+			content = content.replace(/[^0-9]/g, '').substring(INITIAL_STATE, otpLength);
 
 			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
 			setOtp((previousState) => {
-				for (let i = 0; i < otpLength; i += 1) {
+				for (let i = INITIAL_STATE; i < otpLength; i += VARIABLE_STATE) {
 					if (i >= currentFocusedOtpInputElementIndex) {
-						NEW_STATE_VALUES[`otp-${i + 1}`] = content[i - currentFocusedOtpInputElementIndex] || '';
+						NEW_STATE_VALUES[`otp-${i + VARIABLE_STATE}`] = content[i - currentFocusedOtpInputElementIndex] || '';
 					}
 				}
 

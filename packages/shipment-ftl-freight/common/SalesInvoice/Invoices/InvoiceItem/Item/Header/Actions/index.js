@@ -91,6 +91,10 @@ function Actions({
 					setAddCustomerInvoice={setAddCustomerInvoice}
 					setUpdateCustomerInvoice={setUpdateCustomerInvoice}
 					setFillCustomerData={setFillCustomerData}
+					setIsEditInvoice={setIsEditInvoice}
+					setIsChangeCurrency={setIsChangeCurrency}
+					setShowAddRemarks={setShowAddRemarks}
+					setShowChangePaymentMode={setShowChangePaymentMode}
 				/>
 			</div>
 

@@ -14,6 +14,8 @@ import styles from './styles.module.css';
 
 const INITIAL_STATE = 0;
 const INITIAL_STATE_ROWS = 1;
+const TOTAL_STAKEHOLDERS_LENGTH = 2;
+const TOTAL_ROWS = 5;
 const KEY_CODE = [13, 8, 46];
 
 const shipmentChatStakeholders = [
@@ -112,7 +114,7 @@ function Details({
 	const { loading, handleSendMsg } = useCreateMessage({ payload: createMsgPayload, refetch });
 
 	const onCreateMessage = () => {
-		if (payloadData?.visible_to_stakeholders?.length < 2) {
+		if (payloadData?.visible_to_stakeholders?.length < TOTAL_STAKEHOLDERS_LENGTH) {
 			Toast.error('Please tag appropriate stakeholder');
 		} else {
 			handleSendMsg();
@@ -125,7 +127,7 @@ function Details({
 
 	const contentData = formValues?.message?.split('\n').length;
 	const handleClick = (e) => {
-		if (KEY_CODE.includes(e.keyCode) && e.shiftKey && rows < 5) {
+		if (KEY_CODE.includes(e.keyCode) && e.shiftKey && rows < TOTAL_ROWS) {
 			setRows(contentData + INITIAL_STATE_ROWS);
 		}
 		if (KEY_CODE.includes(e.keyCode) && !e.shiftKey) {
