@@ -16,6 +16,7 @@ function CtcBreakup({ metadata }) {
 		sign_on_bonus_monthly,
 		sign_on_bonus_yearly,
 	} = metadata;
+
 	const MAPPING = {
 		joining_bonus_monthly: {
 			heading      : 'Joining Bonus',
