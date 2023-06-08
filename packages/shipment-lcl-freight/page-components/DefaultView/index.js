@@ -1,8 +1,9 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { dynamic } from '@cogoport/next';
 import { ShipmentChat } from '@cogoport/shipment-chat';
-import { useContext, useState } from 'react';
+import { useRouter } from 'next/router';
+import { useContext, useState, useCallback } from 'react';
 
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
@@ -53,18 +54,26 @@ function DefaultView() {
 		timeline            : !!features.includes('timeline'),
 	};
 
+	const router = useRouter();
+
+	const handleVersionChange = useCallback(() => {
+		const newHref = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipment_data?.id}`;
+		window.location.replace(newHref);
+		window.sessionStorage.setItem('prev_nav', newHref);
+	}, [router?.query?.partner_id, shipment_data?.id]);
+
 	return (
 		<div>
 			<div className={styles.top_header}>
 				<ShipmentInfo />
 
 				<div className={styles.toggle_chat}>
-					{/* <Toggle
+					<Toggle
 						size="md"
 						onLabel="Old"
 						offLabel="New"
 						onChange={handleVersionChange}
-					/> */}
+					/>
 					{conditionMapping.chat ? <ShipmentChat /> : null}
 				</div>
 			</div>
