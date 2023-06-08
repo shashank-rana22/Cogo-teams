@@ -3,6 +3,7 @@ import { useRef, useEffect, useCallback } from 'react';
 
 const INITIAL_STATE = 1;
 const NEW_STATE_VALUES = {};
+const VARIABLE_STATE = 0;
 
 const useOtpInputEvents = ({
 	otpLength = 0,
@@ -60,7 +61,7 @@ const useOtpInputEvents = ({
 				content = window.clipboardData.getData('Text');
 			}
 
-			content = content.replace(/[^0-9]/g, '').substring(0, otpLength);
+			content = content.replace(/[^0-9]/g, '').substring(VARIABLE_STATE, otpLength);
 
 			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 

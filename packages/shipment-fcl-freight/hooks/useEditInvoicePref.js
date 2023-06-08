@@ -171,7 +171,7 @@ const useEditInvoicePref = ({
 							&& EXPORT_SERVICES_TYPES === isBasicFreightInvService.service_type,
 					);
 
-					if (party?.services?.length > 1 && BFLineItem) {
+					if (party?.services?.length > TOTAL_LENGTH && BFLineItem) {
 						isBasicFreight = true;
 					}
 				});
