@@ -15,8 +15,10 @@ function InvoiceItem({
 	salesInvoicesRefetch = () => {},
 	refetchCN = () => {},
 }) {
+	const { total_outstanding_amount = 0 } = org_outstanding || {};
+
 	const outStanding = formatAmount({
-		amount   : org_outstanding?.total_outstanding_amount || 0,
+		amount   : total_outstanding_amount,
 		currency : org_outstanding?.currency,
 		options  : {
 			style                 : 'currency',

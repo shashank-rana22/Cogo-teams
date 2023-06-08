@@ -1,20 +1,21 @@
+const UPDATED_OBJ = {};
+
 const updateFormValueOfCreditNote = ({ formValues }) => {
-	const updatedObj = {};
 	Object.entries(formValues).forEach(([key, value]) => {
 		switch (key) {
 			case 'remarks':
 			case 'uploadDocument':
-				updatedObj[key] = value;
+				UPDATED_OBJ[key] = value;
 				break;
 			default:
-				updatedObj[key] = value.map((_item) => ({
+				UPDATED_OBJ[key] = value.map((_item) => ({
 					..._item,
 					total: _item.price_discounted * _item.quantity,
 				}));
 				break;
 		}
 	});
-	return updatedObj;
+	return UPDATED_OBJ;
 };
 
 export default updateFormValueOfCreditNote;

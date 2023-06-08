@@ -63,7 +63,7 @@ function Actions({
 						<div>
 							<div
 								role="button"
-								tabIndex={INITIAL_STATE}
+								tabIndex={0}
 								className={styles.text}
 								onClick={() => handleClick(setIsEditInvoice)}
 							>
@@ -75,7 +75,7 @@ function Actions({
 					<div>
 						<div
 							role="button"
-							tabIndex={INITIAL_STATE}
+							tabIndex={0}
 							className={styles.text}
 							onClick={() => handleClick(setIsChangeCurrency)}
 						>
@@ -85,7 +85,7 @@ function Actions({
 					</div>
 					<div
 						role="button"
-						tabIndex={INITIAL_STATE}
+						tabIndex={0}
 						className={styles.text}
 						onClick={() => handleClick(setShowAddRemarks)}
 					>
@@ -95,7 +95,7 @@ function Actions({
 						<div className={styles.line} />
 						<div
 							role="button"
-							tabIndex={INITIAL_STATE}
+							tabIndex={0}
 							className={styles.text}
 							onClick={() => handleClick(setShowChangePaymentMode)}
 						>
@@ -109,7 +109,7 @@ function Actions({
 					{commonActions ? <div className={styles.line} /> : null}
 					<div
 						role="button"
-						tabIndex={INITIAL_STATE}
+						tabIndex={0}
 						className={styles.text}
 						onClick={() => window.open(url, '_blank')}
 					>
@@ -133,7 +133,7 @@ function Actions({
 				>
 					<div
 						role="button"
-						tabIndex={INITIAL_STATE}
+						tabIndex={0}
 						className={styles.icon_more_wrapper}
 						onClick={() => setShow(!show)}
 					>

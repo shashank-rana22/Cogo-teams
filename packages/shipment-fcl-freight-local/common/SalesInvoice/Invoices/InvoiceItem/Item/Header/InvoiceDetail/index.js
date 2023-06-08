@@ -67,7 +67,7 @@ function InvoiceDetail({
 				<div
 					className={cl`${styles.so_number} ${!isEmpty(bfInvoice) ? styles.active : ''}`}
 					role="button"
-					tabIndex={INITIAL_STATE}
+					tabIndex={0}
 					onClick={() => (!isEmpty(bfInvoice)
 						? handleDownload(
 							bfInvoice?.invoicePdfUrl || bfInvoice?.proformaPdfUrl,

@@ -134,7 +134,7 @@ function Item({
 					<div
 						onClick={() => setOpen('edit')}
 						role="button"
-						tabIndex={INITIAL_STATE}
+						tabIndex={0}
 						className={styles.actions}
 					>
 						<IcMEdit />
@@ -146,7 +146,7 @@ function Item({
 			<section
 				className={styles.rotate_icon}
 				onClick={() => setOpen(open !== 'line_items' ? 'line_items' : false)}
-				tabIndex={INITIAL_STATE}
+				tabIndex={0}
 				role="button"
 				style={{ height: `${billingPartyHeightRef.current?.offsetHeight}px` }}
 			>

@@ -11,6 +11,8 @@ import RequestCN from './RequestCN';
 import Status from './Status';
 import styles from './styles.module.css';
 
+const INITIAL_STATE = 0;
+
 function Header({
 	children = null,
 	invoice = {},
@@ -36,7 +38,7 @@ function Header({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
 			|| item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[0]?.status;
+	)?.[INITIAL_STATE]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';

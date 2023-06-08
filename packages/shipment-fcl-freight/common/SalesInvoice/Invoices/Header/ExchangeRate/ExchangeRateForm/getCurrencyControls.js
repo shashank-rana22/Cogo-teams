@@ -1,6 +1,9 @@
+const TEN_PERCENT = 0.1;
+const DEFAULT_VALUES = {};
+
 function validateExchangeRate(value, AVAILABLE_CURRENCY_CONVERSION, currency) {
 	const initialConversion = AVAILABLE_CURRENCY_CONVERSION?.[currency];
-	const ten_percent_initial = initialConversion * 0.1;
+	const ten_percent_initial = initialConversion * TEN_PERCENT;
 	const ten_less = initialConversion - ten_percent_initial;
 	const ten_more = initialConversion + ten_percent_initial;
 	if (value < ten_less) {
@@ -62,9 +65,8 @@ export const getCurrencyControls = ({
 			],
 		}),
 	);
-	const defaultValues = {};
 	controls.forEach((ctrl) => {
-		defaultValues[ctrl.name] = ctrl.value;
+		DEFAULT_VALUES[ctrl.name] = ctrl.value;
 	});
-	return { controls, defaultValues };
+	return { controls, DEFAULT_VALUES };
 };

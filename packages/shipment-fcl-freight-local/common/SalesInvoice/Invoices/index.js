@@ -13,6 +13,9 @@ import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
 
+const INITIAL_STATE = 0;
+const TOTAL_COUNT = 1;
+
 function Invoices({
 	invoiceData = {},
 	groupedInvoices = {},
@@ -20,7 +23,7 @@ function Invoices({
 	salesInvoicesRefetch = () => {},
 	isIRNGenerated = false,
 }) {
-	const { outstanding_by_reg_num } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
+	const { OUTSTANDING_BY_REG_NUM } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
 	const { salesList : invoicesList, refetch: bfInvoiceRefetch } = useListBfSalesInvoices();
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const totals = invoiceData?.invoicing_party_wise_total;
@@ -29,10 +32,10 @@ function Invoices({
 		(item) => item?.status,
 	);
 
-	let count = 0;
+	let count = INITIAL_STATE;
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
-			count += 1;
+			count += TOTAL_COUNT;
 		}
 	});
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
@@ -70,7 +73,7 @@ function Invoices({
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 						isIRNGenerated={isIRNGenerated}
-						org_outstanding={outstanding_by_reg_num[item]}
+						org_outstanding={OUTSTANDING_BY_REG_NUM[item]}
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						refetchCN={cnRefetch}
 					/>

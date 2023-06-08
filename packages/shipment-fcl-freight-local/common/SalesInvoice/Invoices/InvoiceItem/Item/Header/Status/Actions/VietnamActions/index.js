@@ -24,6 +24,7 @@ const ChangePaymentMode = dynamic(() => import('../ChangePaymentMode'), { ssr: f
 const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: false });
 
 const INITIAL_STATE = 0;
+const INVOICE_SERIAL_ID_LENGTH = 8;
 
 function Actions({
 	invoice = {},
@@ -59,7 +60,7 @@ function Actions({
 	const invoice_serial_id = invoice.serial_id.toString() || '';
 	const firstChar = invoice_serial_id[INITIAL_STATE];
 
-	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < 8;
+	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < INVOICE_SERIAL_ID_LENGTH;
 
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {

@@ -69,7 +69,7 @@ const rawControls = (
 			),
 			placeholder : 'Enter alias name/code',
 			rules       : {
-				validate: (v) => v?.length >= 3 || isEmpty(v) || `Characters should be >= ${CHAR_LIMIT}`,
+				validate: (v) => v?.length >= CHAR_LIMIT || isEmpty(v) || `Characters should be >= ${CHAR_LIMIT}`,
 			},
 			disabled : handleDisableCond(charge, isFclFreight, shipment_data),
 			span     : 2,
@@ -101,7 +101,7 @@ const rawControls = (
 			span        : 1.5,
 			rules       : {
 				required : 'Price is Required',
-				validate : (v) => v > 0 || `Price must be greater than ${INITIAL_STATE}`,
+				validate : (v) => v > INITIAL_STATE || `Price must be greater than ${INITIAL_STATE}`,
 			},
 			disabled: handleDisableCond(charge, isFclFreight, shipment_data),
 		},

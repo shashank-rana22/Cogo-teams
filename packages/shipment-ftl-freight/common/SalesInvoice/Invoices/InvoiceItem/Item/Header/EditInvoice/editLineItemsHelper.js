@@ -10,6 +10,9 @@ const TRADE_MAPPING = {
 	export : 'Origin',
 };
 const INITIAL_STATE = 0;
+const LABELS = {};
+const CHARGECODES = {};
+const CUSTOM_VALUES = {};
 
 const useEditLineItems = ({
 	invoice = {},
@@ -109,7 +112,6 @@ const useEditLineItems = ({
 
 	const formValues = watch();
 
-	const customValues = {};
 	const prepareFormValues = () => {
 		const allFormValues = { ...formValues };
 		(Object.keys(formValues) || []).forEach((key) => {
@@ -127,11 +129,10 @@ const useEditLineItems = ({
 	};
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	const labels = {};
 	Object.keys(controls?.[0]).forEach((key) => {
-		customValues[key] = {
+		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
-			label      : labels[key],
+			label      : LABELS[key],
 			id         : key,
 		};
 	});
@@ -143,10 +144,9 @@ const useEditLineItems = ({
 				const currentService = services.find(
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
 				);
-				const chargeCodes = {};
 				(allChargeCodes[currentService?.service_type] || []).forEach(
 					(chgCode) => {
-						chargeCodes[chgCode.code] = chgCode;
+						CHARGECODES[chgCode.code] = chgCode;
 					},
 				);
 				const service = {
@@ -155,7 +155,7 @@ const useEditLineItems = ({
 					line_items   : (values?.[key] || []).map((line_item) => ({
 						code             : line_item?.code,
 						alias            : line_item?.alias,
-						name             : chargeCodes[line_item?.code]?.name || line_item?.name,
+						name             : CHARGECODES[line_item?.code]?.name || line_item?.name,
 						currency         : line_item?.currency,
 						price_discounted : Number(line_item?.price_discounted),
 						quantity         : Number(line_item?.quantity),
@@ -185,7 +185,7 @@ const useEditLineItems = ({
 		handleSubmit,
 		controls,
 		loading,
-		customValues,
+		customValues: CUSTOM_VALUES,
 		errors,
 		control,
 		setValue,

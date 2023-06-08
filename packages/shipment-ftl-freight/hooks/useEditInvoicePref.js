@@ -14,6 +14,8 @@ const ALL_SERVICE_LINE_ITEMS = [];
 const INITIAL_SERVICE_INVOICE_ID = {};
 const INITIAL_STATE = 0;
 const TOTAL_LENGTH = 1;
+const PARTY_SERVICES = [];
+const FINAL_PARTIES = [];
 
 const isAllServicesTaken = (
 	servicesList,
@@ -246,11 +248,7 @@ const useEditInvoicePref = ({
 				(party) => !!party.services.length || typeof party.id === 'string',
 			);
 
-			const finalParties = [];
-
 			filteredParties.forEach((party) => {
-				const partyServices = [];
-
 				party?.services?.map((item) => {
 					const xyz = {
 						...item,
@@ -263,13 +261,13 @@ const useEditInvoicePref = ({
 						is_igst      : null,
 					};
 
-					partyServices.push(xyz);
-					return partyServices;
+					PARTY_SERVICES.push(xyz);
+					return PARTY_SERVICES;
 				});
 
 				const partyDetails = {
 					...party,
-					services: partyServices,
+					services: PARTY_SERVICES,
 				};
 
 				if (
@@ -278,16 +276,16 @@ const useEditInvoicePref = ({
 				) {
 					if (typeof partyDetails.id === 'number') {
 						delete partyDetails.id;
-						finalParties.push(partyDetails);
+						FINAL_PARTIES.push(partyDetails);
 					} else {
-						finalParties.push(partyDetails);
+						FINAL_PARTIES.push(partyDetails);
 					}
 				}
 			});
 
 			const payload = {
 				shipment_id          : shipment_data.id,
-				invoice_combinations : finalParties,
+				invoice_combinations : FINAL_PARTIES,
 				performed_by_org_id  : importer_exporter_id,
 			};
 

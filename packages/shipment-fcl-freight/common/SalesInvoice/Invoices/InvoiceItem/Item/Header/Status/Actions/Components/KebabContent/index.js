@@ -7,6 +7,8 @@ import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
+const INITIAL_STATE = 0;
+
 function KebabContent({
 	invoice = {},
 	shipment_data = {},
@@ -121,7 +123,7 @@ function KebabContent({
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-			{(!disableAction || invoice.exchange_rate_document?.length > 0)
+			{(!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive

@@ -10,6 +10,8 @@ import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
+const INITIAL_STATE = 0;
+
 function Actions({
 	invoice = {},
 	shipment_data = {},
@@ -121,7 +123,7 @@ function Actions({
 
 	return (
 		<div className={styles.actions_wrap}>
-			{!disableAction || invoice.exchange_rate_document?.length > 0 ? (
+			{!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE ? (
 				<Popover
 					interactive
 					placement="bottom"

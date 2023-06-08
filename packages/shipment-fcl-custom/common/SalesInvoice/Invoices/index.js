@@ -23,7 +23,7 @@ function Invoices({
 	isCustomer = false,
 	isIRNGenerated = false,
 }) {
-	const { outstanding_by_reg_num } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
+	const { OUTSTANDING_BY_REG_NUM } = useOrgOutStanding({ org_reg_nums: Object.keys(groupedInvoices || {}) });
 	const { salesList : invoicesList, refetch: bfInvoiceRefetch } = useListBfSalesInvoices();
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const totals = invoiceData?.invoicing_party_wise_total;
@@ -74,7 +74,7 @@ function Invoices({
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 						isIRNGenerated={isIRNGenerated}
-						org_outstanding={outstanding_by_reg_num[item]}
+						org_outstanding={OUTSTANDING_BY_REG_NUM[item]}
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						refetchCN={cnRefetch}
 					/>
