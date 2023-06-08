@@ -192,6 +192,7 @@ const navigationMappingAdmin = {
 			...apis.checkout_promotions,
 			...apis.export_factoring,
 			...apis.app_saas_cogo_subscription,
+			...apis.sales_dashboard,
 
 		],
 		main_apis: [
@@ -1431,6 +1432,7 @@ const navigationMappingAdmin = {
 			...apis.cogopoints,
 			...apis.checkout_promotions,
 			...apis.export_factoring,
+			...apis.sales_dashboard,
 		],
 		module_type: 'crm',
 	},
