@@ -24,7 +24,6 @@ const controls = () => ([
 		type        : 'input',
 		placeholder : 'Employee Code',
 		disabled    : true,
-		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'designation',
@@ -104,7 +103,6 @@ const controls = () => ([
 		type        : 'email',
 		placeholder : 'Cogoport Email Id',
 		disabled    : true,
-		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'hiring_manager',
@@ -112,7 +110,6 @@ const controls = () => ([
 		type        : 'input',
 		placeholder : 'Hiring Manager Name',
 		disabled    : true,
-		// rules       : { required: 'This is required' },
 	},
 ]);
 

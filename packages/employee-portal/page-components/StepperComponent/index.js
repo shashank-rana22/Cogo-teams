@@ -4,7 +4,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 function StepperComponent({ data, loading }) {
-	const { progress_stats = {}, company_policy_documents, signed_documents } = data || {};
+	const { progress_stats = {}, company_policy_data, signed_documents } = data || {};
 	const {
 		additional_info_added = {},
 		offer_letter_signed = {},
@@ -45,7 +45,7 @@ function StepperComponent({ data, loading }) {
 		{
 			name      : 'company_policies',
 			icon      : IcMDocument,
-			is_added  : !isEmpty(company_policy_documents) && company_policies_read?.company_policies_read,
+			is_added  : !isEmpty(company_policy_data) && company_policies_read?.company_policies_read,
 			sub_title : 'Read',
 		},
 	];
