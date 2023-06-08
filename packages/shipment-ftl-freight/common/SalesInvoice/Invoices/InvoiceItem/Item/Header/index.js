@@ -11,8 +11,8 @@ import ClickableDiv from '../../../../../ClickableDiv';
 
 import Actions from './Actions';
 import CNNullify from './CNNullify';
-import styles from './styles.module.css';
 import InvoiceInfo from './InvoiceInfo';
+import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
 const INITIAL_STATE = 0;
@@ -65,7 +65,7 @@ function Header({
 	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
 	&& invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
-		
+
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
@@ -136,12 +136,12 @@ function Header({
 						) : null}
 				</div>
 
-				<InvoiceInfo 
-				invoice={invoice}
-				handleClick={handleClick}
-				invoiceStatus={invoiceStatus}
-				showIrnTriggerForOldShipments={showIrnTriggerForOldShipments}
-				bfInvoice={bfInvoice}
+				<InvoiceInfo
+					invoice={invoice}
+					handleClick={handleClick}
+					invoiceStatus={invoiceStatus}
+					showIrnTriggerForOldShipments={showIrnTriggerForOldShipments}
+					bfInvoice={bfInvoice}
 				/>
 
 				<div className={styles.invoice_container}>

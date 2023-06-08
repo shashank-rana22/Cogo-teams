@@ -9,9 +9,9 @@ import EditInvoice from '../EditInvoice';
 import AddCustomerInvoice from './AddCustomerInvoice';
 import ExchangeRateModal from './ExchangeRateModal';
 import FillCustomerPortalData from './FillCustomerPortalData';
+import InvoiceDetails from './InvoiceDetails';
 import styles from './styles.module.css';
 import UpdateCustomerInvoice from './UpdateCustomerInvoice';
-import InvoiceDetails from './InvoiceDetails';
 
 const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
@@ -82,16 +82,16 @@ function Actions({
 				</div>
 
 				<InvoiceDetails
-				invoice={invoice}
-				isAuthorized={isAuthorized}
-				disableAction={disableAction}
-				setShow={setShow}
-				show={show}
-				setExchangeRate={setExchangeRate}
-				setAddCustomerInvoice={setAddCustomerInvoice}
-				setUpdateCustomerInvoice={setUpdateCustomerInvoice}
-				setFillCustomerData={setFillCustomerData}
-				 />
+					invoice={invoice}
+					isAuthorized={isAuthorized}
+					disableAction={disableAction}
+					setShow={setShow}
+					show={show}
+					setExchangeRate={setExchangeRate}
+					setAddCustomerInvoice={setAddCustomerInvoice}
+					setUpdateCustomerInvoice={setUpdateCustomerInvoice}
+					setFillCustomerData={setFillCustomerData}
+				/>
 			</div>
 
 			{(invoice.services || []).length && isEditInvoice ? (

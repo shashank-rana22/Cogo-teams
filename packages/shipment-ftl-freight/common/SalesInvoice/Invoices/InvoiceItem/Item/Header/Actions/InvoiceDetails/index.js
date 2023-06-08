@@ -6,6 +6,7 @@ import {
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
+
 import ClickableDiv from '../../../../../../../ClickableDiv';
 import styles from '../styles.module.css';
 
@@ -15,16 +16,16 @@ function InvoiceDetails({
 	invoice = {},
 	isAuthorized = false,
 	disableAction = false,
-	setShow=() =>{},
+	setShow = () => {},
 	show = false,
-	setExchangeRate=()=>{},
-	setAddCustomerInvoice=()=>{},
-	setUpdateCustomerInvoice=()=>{},
-	setFillCustomerData=()=>{},
+	setExchangeRate = () => {},
+	setAddCustomerInvoice = () => {},
+	setUpdateCustomerInvoice = () => {},
+	setFillCustomerData = () => {},
 }) {
-    const { shipment_data } = useContext(ShipmentDetailContext);
+	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const editInvoicesVisiblity =(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
+	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
 	|| isAuthorized;
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
@@ -36,7 +37,7 @@ function InvoiceDetails({
 		</div>
 	);
 
-	const handleClick = (setState=()=>{}) => {
+	const handleClick = (setState = () => {}) => {
 		setShow(false);
 		setState(true);
 	};
@@ -143,8 +144,8 @@ function InvoiceDetails({
 	);
 
 	return (
-				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-					{(!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE)
+		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
+			{(!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive
@@ -161,22 +162,22 @@ function InvoiceDetails({
 								<IcMOverflowDot />
 							</ClickableDiv>
 						</Popover>
-						)
-						: (
-							<div className={styles.empty_div} />
-						)}
+				)
+				: (
+					<div className={styles.empty_div} />
+				)}
 
-					{!isEmpty(invoice.remarks) ? (
-						<Tooltip
-							placement="bottom"
-							content={remarkRender()}
-						>
-							<div className={styles.icon_more_wrapper}>
-								<IcMInfo fill="#DDEBC0" />
-							</div>
-						</Tooltip>
-					) : null}
-				</div>
+			{!isEmpty(invoice.remarks) ? (
+				<Tooltip
+					placement="bottom"
+					content={remarkRender()}
+				>
+					<div className={styles.icon_more_wrapper}>
+						<IcMInfo fill="#DDEBC0" />
+					</div>
+				</Tooltip>
+			) : null}
+		</div>
 	);
 }
 
