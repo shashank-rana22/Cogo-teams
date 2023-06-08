@@ -900,6 +900,36 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
+			api          : 'check_partner_user_offboarding_eligibility',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_partner_user_taggings',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'offboard_partner_user',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'bulk_update_partner_user_taggings',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'transfer_accounts',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'transfer_shipments',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'get_partner_user_rm_mapping',
 			access_type  : 'private',
 			service_name : 'partner',
