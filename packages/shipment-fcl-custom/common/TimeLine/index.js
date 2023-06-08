@@ -27,6 +27,8 @@ function Timeline() {
 	const totalItems = (timelineData || []).length;
 	const mapKeys = useMemo(() => Array(totalItems).fill(null).map(() => Math.random()), [totalItems]);
 
+	const endValue = 1;
+
 	let consecutivelyCompleted = true;
 
 	if (isGettingShipment || loading) {
@@ -49,7 +51,7 @@ function Timeline() {
 							key={mapKeys[index]}
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
-							isLast={totalItems === index + 1}
+							isLast={totalItems === index + endValue}
 						/>
 					);
 				})}

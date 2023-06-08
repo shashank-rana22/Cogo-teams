@@ -32,10 +32,10 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	ACTION_BUTTONS[0].show = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
-	ACTION_BUTTONS[1].show = getCanCancelService({ state, stakeholderConfig });
+	ACTION_BUTTONS.supplierEdit = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
+	ACTION_BUTTONS.CancelService = getCanCancelService({ state, stakeholderConfig });
 
-	if (!ACTION_BUTTONS.some((actionButton) => actionButton.show)) {
+	if (!ACTION_BUTTONS.supplierEdit && !ACTION_BUTTONS.CancelService) {
 		return null;
 	}
 
