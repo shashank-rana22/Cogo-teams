@@ -9,9 +9,7 @@ function CommodityMapping({ commodity_array }) {
 					className={styles.tag}
 					key={item}
 				>
-					<span>
-						{item}
-					</span>
+					{item}
 				</div>
 
 			))}

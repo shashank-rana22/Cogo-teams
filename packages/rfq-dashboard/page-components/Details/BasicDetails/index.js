@@ -2,6 +2,7 @@ import { IcMProfile } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import ServiceStats from '../../../common/ServiceStats';
+import { getFormattedDuration } from '../../../utils/getFormattedDuration';
 
 import Empty from './Empty';
 import Loader from './Loader';
@@ -64,7 +65,10 @@ function BasicDetails({ data = {}, details_loading }) {
 						<div className={styles.last_shipment_section}>
 							<div className={styles.tag_prefix_name}>Last Shipment: </div>
 							<div className={styles.tag_suffix_name}>
-								{importer_exporter?.bookings_completed_last_date}
+								{getFormattedDuration(importer_exporter?.bookings_completed_last_date)}
+								{' '}
+								{' '}
+								Ago
 							</div>
 						</div>
 					) : null
