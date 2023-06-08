@@ -7,12 +7,12 @@ import useGetDocumentSigningUrl from '../../../hooks/useGetDocumentSigningUrl';
 import styles from './styles.module.css';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
-function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
+function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployeeDetailsLoading }) {
 	const { id, document_url, status, signed_document_url:detail_signed_document_url } = data?.offer_letter || {};
 
-	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails });
+	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails, setInformationPage });
 
-	const { onClickSignDocument, data:docData } = useGetDocumentSigningUrl(
+	const { onClickSignDocument, data:docData, loading } = useGetDocumentSigningUrl(
 		{ getEmployeeDetails, document_type: 'offer_letter' },
 	);
 
@@ -38,7 +38,8 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 							<Button
 								themeType="secondary"
 								size="md"
-								onClick={() => updateData({ status: 'rejected' })}
+								onClick={() => updateData({ status: 'rejected_by_user' })}
+								loading={getEmployeeDetailsLoading || loading}
 							>
 								Reject
 							</Button>
@@ -48,6 +49,7 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 							themeType="primary"
 							size="md"
 							onClick={() => onClickSignDocument(id)}
+							loading={getEmployeeDetailsLoading || loading}
 						>
 							Accept
 						</Button>

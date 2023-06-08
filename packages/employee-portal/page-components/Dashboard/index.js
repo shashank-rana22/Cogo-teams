@@ -32,6 +32,7 @@ function Dashboard() {
 				informationPage={informationPage}
 				setInformationPage={setInformationPage}
 				getEmployeeDetails={getEmployeeDetails}
+				getEmployeeDetailsLoading={loading}
 			/>
 		</div>
 	);
