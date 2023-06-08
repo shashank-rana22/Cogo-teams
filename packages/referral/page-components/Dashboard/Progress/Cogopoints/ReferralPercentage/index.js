@@ -1,6 +1,4 @@
-import React from "react";
-
-import styles from "./styles.module.css";
+import styles from './styles.module.css';
 
 const DEFAULT_COUNT = 0;
 const TOTAL_PERCENTAGE = 100;
@@ -18,11 +16,12 @@ function ReferralPercentage({ data = {} }) {
 	return (
 		<div className={styles.container}>
 			{(eachPercentage || []).map((type) => {
-				const { color = "", percentage = "", id = "" } = type || {};
+				const { color = '', percentage = '', id = '' } = type || {};
 				return (
 					<div className={styles.pair} key={id}>
 						<div className={styles.circle} style={{ background: `${color}` }} />
-						<div className={styles.name}>{percentage}%</div>
+						<div className={styles.name}>{percentage}
+							%</div>
 					</div>
 				);
 			})}
