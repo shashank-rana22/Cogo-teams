@@ -1,12 +1,11 @@
-import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDocument, IcMEyeopen } from '@cogoport/icons-react';
+import { IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
+const getColumns = ({ onClickViewDocument }) => [
 	{
 		Header   : 'DOCUMENT NAME',
 		accessor : (item) => <div className={styles.name}>{startCase(item?.name)}</div>,
@@ -14,17 +13,20 @@ const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
 	{
 		Header   : 'FILE',
 		accessor : (item) => (
-			<div style={{ display: 'flex', alignItems: 'center' }}>
-				<IcMDocument width={14} height={14} />
-				<div style={{ margin: '0 4px' }}>
-					{item?.signed_document_url || item?.document_url}
+			<div
+				role="presentation"
+				className={styles.view_container}
+				onClick={() => onClickViewDocument({ url: item?.signed_document_url || item?.document_url })}
+			>
+				<div style={{ margin: '0 4px', textDecoration: 'underLine' }}>
+					View
 				</div>
 
 				<IcMEyeopen
 					width={14}
 					height={14}
 					style={{ cursor: 'pointer' }}
-					onClick={() => onClickViewDocument({ url: item?.signed_document_url || item?.document_url })}
+
 				/>
 			</div>
 		),
@@ -42,13 +44,9 @@ const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
 		),
 	},
 	{
-		Header   : 'ACTION/STATUS',
+		Header   : 'STATUS',
 		accessor : (item) => (
-			<div>
-				{item?.status === 'pending'
-					? <Button onClick={() => setShowModal(true)} size="sm">Review &amp; Approve</Button>
-					: <div>{startCase(item?.status) || 'Approved'}</div>}
-			</div>
+			<div>{startCase(item?.status)}</div>
 		),
 	},
 ];

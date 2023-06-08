@@ -16,3 +16,10 @@
 	font-weight: 900;
 	color: #221f20;
 }
+
+.view_container{
+	display: flex;
+	align-items: center;
+	width:fit-content;
+	cursor: pointer;
+}
