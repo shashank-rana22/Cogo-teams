@@ -24,8 +24,6 @@ function UploadComponent({ errors, control }) {
 
 				const Element = getFieldController(type);
 
-				if (!Element) return null;
-
 				if (type === 'groupSelect') {
 					return (
 						<div key={name} className={`${styles.group_container} ${styles[name]}`}>
