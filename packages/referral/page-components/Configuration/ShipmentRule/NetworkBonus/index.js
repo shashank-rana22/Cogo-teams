@@ -6,6 +6,10 @@ import { INCENTIVE_OPTIONS, TOTAL_INCENTIVE } from '../../../../constants/config
 
 import styles from './styles.module.css';
 
+const DEFAULT_MAX_VALUE = 100;
+const DEFAULT_MIN_VALUE = 8;
+const DEFAULT_VALUE = 0;
+
 function NetworkBonus({ errors, control, formValues, isEdit }) {
 	const {
 		network_bonus_max_incentive_type,
@@ -44,8 +48,8 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 								size="sm"
 								type="number"
 								disabled={isEdit}
-								max={exceed_limit ? 100 : 8}
-								min={0}
+								max={exceed_limit ? DEFAULT_MAX_VALUE : DEFAULT_MIN_VALUE}
+								min={DEFAULT_VALUE}
 								placeholder="Enter value"
 								rules={{ required: true }}
 							/>

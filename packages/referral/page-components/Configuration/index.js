@@ -7,11 +7,13 @@ import ShipmentRule from './ShipmentRule';
 import styles from './styles.module.css';
 import SubscriptionRule from './SubscriptionRule';
 
+const DEFAULT_VALUE = 0;
+
 function Configuration() {
 	const { configData = [], loading = false } = useGetReferralConfig();
-	const kycData = configData.filter((item) => item?.event === 'kyc_verified')[0];
-	const shipmentData = configData.filter((item) => item?.event === 'shipment')[0];
-	const subscriptionData = configData.filter((item) => item?.event === 'subscription')[0];
+	const kycData = configData.filter((item) => item?.event === 'kyc_verified')[DEFAULT_VALUE];
+	const shipmentData = configData.filter((item) => item?.event === 'shipment')[DEFAULT_VALUE];
+	const subscriptionData = configData.filter((item) => item?.event === 'subscription')[DEFAULT_VALUE];
 
 	return (
 		<div>

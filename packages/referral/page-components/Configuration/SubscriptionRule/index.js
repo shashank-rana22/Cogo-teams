@@ -13,6 +13,9 @@ import ReferralBonus from './ReferralBonus';
 import RemainingBonus from './RemainingBonus';
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+const DEFAULT_PERCENTAGE_VALUE = 100;
+
 function SubscriptionRule({ subscriptionData = {}, dataLoading = false }) {
 	const {
 		control,
@@ -42,8 +45,8 @@ function SubscriptionRule({ subscriptionData = {}, dataLoading = false }) {
 
 	const handleSave = async (values) => {
 		const { remaining_bonus } = values;
-		const totalPercentage = remaining_bonus.reduce((acc, curr) => acc + Number(curr.percentage), 0);
-		if (totalPercentage > 100) {
+		const totalPercentage = remaining_bonus.reduce((acc, curr) => acc + Number(curr.percentage), DEFAULT_VALUE);
+		if (totalPercentage > DEFAULT_PERCENTAGE_VALUE) {
 			Toast.error('Total Percentage should not exceed 100');
 		} else {
 			const payload = payloadFormat('subscription', values);

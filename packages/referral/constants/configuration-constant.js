@@ -1,3 +1,6 @@
+const DEFAULT_ARRAY_VALUE= 39;
+const INDEX_VALUE = 2;
+
 export const OVERALL_LIMIT = [
 	{ label: '%', value: 'percentage' },
 	{ label: 'Fixed', value: 'fixed' },
@@ -34,9 +37,9 @@ export const BONUS_TYPE = [
 ];
 
 const getNodeOptions = () => {
-	const options = [...Array(39).keys()].map((i) => {
-		const label = `N-${i + 2}`;
-		const value = Number(`-${i + 2}`);
+	const options = [...Array(DEFAULT_ARRAY_VALUE).keys()].map((i) => {
+		const label = `N-${i + INDEX_VALUE}`;
+		const value = Number(`-${i + INDEX_VALUE}`);
 		return { label, value };
 	});
 

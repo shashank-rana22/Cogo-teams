@@ -7,6 +7,10 @@ import { BONUS_TYPE, NODE_OPTIONS } from '../../../../constants/configuration-co
 
 import styles from './styles.module.css';
 
+const DEFAULT_LENGTH = 1;
+const DEFAULT_VALUE = 0;
+const DEFAULT_PERCENTAGE_VALUE = 100;
+
 function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 	const { fields, append, remove } = useFieldArray({
 		control,
@@ -17,9 +21,9 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 
 	const handleAppend = async () => {
 		const isValid = await trigger('remaining_bonus');
-		const totalPercentage = remaining_bonus.reduce((acc, curr) => acc + Number(curr.percentage), 0);
+		const totalPercentage = remaining_bonus.reduce((acc, curr) => acc + Number(curr.percentage), DEFAULT_VALUE);
 
-		if (isValid && totalPercentage < 100) {
+		if (isValid && totalPercentage < DEFAULT_PERCENTAGE_VALUE) {
 			append({ type: 'fixed' });
 		}
 	};
@@ -100,7 +104,7 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 									? 'max % for each node' : '% of remaining network bonus' }
 							</div>
 						</div>
-						{fields.length !== 1 && (
+						{fields.length !== DEFAULT_LENGTH && (
 							<ButtonIcon
 								size="xl"
 								disabled={isEdit}
@@ -111,7 +115,7 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 						)}
 					</div>
 					<div>
-						{fields.length - 1 === index
+						{fields.length - DEFAULT_LENGTH === index
                         && <Button disabled={isEdit} onClick={handleAppend}>+ Add</Button>}
 					</div>
 				</>
