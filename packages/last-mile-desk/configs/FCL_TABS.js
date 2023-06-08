@@ -1,6 +1,8 @@
 import { addDays } from '@cogoport/utils';
 
 const TODAY = new Date();
+const TWO_DAYS = 2;
+const ZERO_DAYS = 0;
 
 const FCL_TABS = [
 	'vessel_departed',
@@ -71,23 +73,23 @@ export const TABWISE_FILTERS = {
 		],
 	},
 	service_completed: {
-		service_state: 'completed',
-		state: 'in_progress',
+		service_state : 'completed',
+		state         : 'in_progress',
 	},
 	completed: {
 		state: 'completed',
 	},
 	cancelled: {
 		state: 'cancelled',
-	}
+	},
 };
 
 export const CRITICAL_TABS = {
 	vessel_departed           : { schedule_arrival_less_than: TODAY },
-	vessel_arrived            : { schedule_arrival_less_than: addDays(TODAY, 2) },
-	container_gated_out       : { detention_days: 2 },
-	awaiting_container_return : { detention_days: 2 },
-	container_returned        : { detention_days: 0 },
+	vessel_arrived            : { schedule_arrival_less_than: addDays(TODAY, TWO_DAYS) },
+	container_gated_out       : { detention_days: TWO_DAYS },
+	awaiting_container_return : { detention_days: TWO_DAYS },
+	container_returned        : { detention_days: ZERO_DAYS },
 };
 
 export default FCL_TABS;

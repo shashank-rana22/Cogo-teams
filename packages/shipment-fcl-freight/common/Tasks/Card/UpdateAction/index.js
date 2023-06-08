@@ -23,13 +23,13 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 
 	const { servicesList: services } = useContext(ShipmentDetailContext);
 
-	const isMainServiceCancelled = false;
-	const requiredServiceArr = [];
+	const MAIN_SERVICE_CANCELLED_CHECK = false;
+	const REQUIRED_SERVICE_ARR = [];
 
 	(task.task_field_ids || []).forEach((id) => {
 		(services || []).forEach((serviceObj) => {
 			if (serviceObj.id === id) {
-				requiredServiceArr.push(serviceObj);
+				REQUIRED_SERVICE_ARR.push(serviceObj);
 			}
 		});
 	});
@@ -110,7 +110,7 @@ function UpdateAction({ task = {}, hideThreeDots = false }) {
 					}
 					className={styles.action}
 				>
-					{!isMainServiceCancelled && !hideThreeDots ? (
+					{!MAIN_SERVICE_CANCELLED_CHECK && !hideThreeDots ? (
 						<IcMOverflowDot className={styles.overflow_icon} />
 					) : (
 						<div className={styles.overflow_div} />
