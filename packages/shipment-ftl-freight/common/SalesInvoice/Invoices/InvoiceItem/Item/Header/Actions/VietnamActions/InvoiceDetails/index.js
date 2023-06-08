@@ -17,11 +17,11 @@ function InvoiceDetails({
 	setSendEmail = () => {},
 	setShow = () => {},
 	show = () => {},
-    setIsChangeCurrency=()=>{},
-    setShowAddRemarks=()=>{},
-    setShowChangePaymentMode=()=>{},
+	setIsChangeCurrency = () => {},
+	setShowAddRemarks = () => {},
+	setShowChangePaymentMode = () => {},
 }) {
-    const handleClick = (setState = () => {}) => {
+	const handleClick = (setState = () => {}) => {
 		setShow(false);
 		setState(true);
 	};
@@ -80,81 +80,81 @@ function InvoiceDetails({
 	);
 
 	return (
-				<div className={styles.actions_wrap}>
-					<div className={styles.email_wrapper}>
-						<IcMEmail
-							onClick={() => handleClick(setSendEmail)}
-						/>
+		<div className={styles.actions_wrap}>
+			<div className={styles.email_wrapper}>
+				<IcMEmail
+					onClick={() => handleClick(setSendEmail)}
+				/>
 
-						<Tooltip
-							placement="bottom"
-							theme="light"
-							content={(
-								<div className={styles.tooltip_child}>
-									<div className={styles.flex_row}>
-										Proforma email sent :
-										&nbsp;
-										{invoice.proforma_email_count || INITIAL_STATE}
-									</div>
+				<Tooltip
+					placement="bottom"
+					theme="light"
+					content={(
+						<div className={styles.tooltip_child}>
+							<div className={styles.flex_row}>
+								Proforma email sent :
+								&nbsp;
+								{invoice.proforma_email_count || INITIAL_STATE}
+							</div>
 
-									<div className={cl`${styles.flex_row} ${styles.margin}`}>
-										Live email sent:
-										&nbsp;
-										{invoice.sales_email_count || INITIAL_STATE}
-									</div>
-									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
-										<div className={cl`${styles.flex_row} ${styles.margin}`}>
-											UTR Number:
-											&nbsp;
-											{invoice?.sales_utr?.utr_number || ''}
-										</div>
-										<div className={cl`${styles.flex_row} ${styles.margin}`}>
-											Status:
-											&nbsp;
-											{invoice?.sales_utr?.status || ''}
-										</div>
-									</div>
+							<div className={cl`${styles.flex_row} ${styles.margin}`}>
+								Live email sent:
+								&nbsp;
+								{invoice.sales_email_count || INITIAL_STATE}
+							</div>
+							<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
+								<div className={cl`${styles.flex_row} ${styles.margin}`}>
+									UTR Number:
+									&nbsp;
+									{invoice?.sales_utr?.utr_number || ''}
 								</div>
-							)}
-						>
-							<div className={styles.icon_div}>
-								<IcMInfo />
+								<div className={cl`${styles.flex_row} ${styles.margin}`}>
+									Status:
+									&nbsp;
+									{invoice?.sales_utr?.status || ''}
+								</div>
 							</div>
-						</Tooltip>
-					</div>
-
-					{!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE ? (
-						<Popover
-							interactive
-							placement="bottom"
-							visible={show}
-							content={content}
-							theme="light"
-							onClickOutside={() => setShow(false)}
-						>
-							<ClickableDiv
-								className={styles.icon_more_wrapper}
-								onClick={() => setShow(!show)}
-							>
-								<IcMOverflowDot />
-							</ClickableDiv>
-						</Popover>
-					) : (
-						<div className={styles.empty_div} />
+						</div>
 					)}
+				>
+					<div className={styles.icon_div}>
+						<IcMInfo />
+					</div>
+				</Tooltip>
+			</div>
 
-					{!isEmpty(invoice.remarks) ? (
-						<Tooltip
-							placement="bottom"
-							theme="light-border"
-							content={remarkRender}
-						>
-							<div className={styles.icon_more_wrapper}>
-								<IcMInfo fill="yellow" />
-							</div>
-						</Tooltip>
-					) : null}
-				</div>
+			{!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE ? (
+				<Popover
+					interactive
+					placement="bottom"
+					visible={show}
+					content={content}
+					theme="light"
+					onClickOutside={() => setShow(false)}
+				>
+					<ClickableDiv
+						className={styles.icon_more_wrapper}
+						onClick={() => setShow(!show)}
+					>
+						<IcMOverflowDot />
+					</ClickableDiv>
+				</Popover>
+			) : (
+				<div className={styles.empty_div} />
+			)}
+
+			{!isEmpty(invoice.remarks) ? (
+				<Tooltip
+					placement="bottom"
+					theme="light-border"
+					content={remarkRender}
+				>
+					<div className={styles.icon_more_wrapper}>
+						<IcMInfo fill="yellow" />
+					</div>
+				</Tooltip>
+			) : null}
+		</div>
 	);
 }
 

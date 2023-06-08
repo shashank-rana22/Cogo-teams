@@ -1,6 +1,6 @@
 import { Button, Popover, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import {IcCError} from '@cogoport/icons-react';
+import { IcCError } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -146,10 +146,10 @@ function Actions({
 					setShow={setShow}
 					show={show}
 					setIsChangeCurrency={setIsChangeCurrency}
-    setShowAddRemarks={setShowAddRemarks}
-    setShowChangePaymentMode={setShowChangePaymentMode}
+					setShowAddRemarks={setShowAddRemarks}
+					setShowChangePaymentMode={setShowChangePaymentMode}
 				/>
-				
+
 			</div>
 			{showReview ? (
 				<ReviewServices
