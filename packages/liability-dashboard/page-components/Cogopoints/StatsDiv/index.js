@@ -20,7 +20,8 @@ function StatsDiv({
 				if (access.includes(activeHeaderTab)) {
 					return (
 						<div
-							className={cl`${activeStatsCard === name ? styles.active_stats_div : styles.stats_div}`}
+							className={cl`${styles.stats_div}
+							${activeStatsCard === name ? styles.active_stats_div : ''}`}
 							key={name}
 							role="presentation"
 							onClick={() => handleChange(name)}
