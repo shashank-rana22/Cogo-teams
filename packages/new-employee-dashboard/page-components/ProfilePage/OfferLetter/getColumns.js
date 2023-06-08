@@ -70,7 +70,7 @@ const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 									theme="light"
 									content={(
 										<div className={styles.mobile_number}>
-											{item?.rejection_reason}
+											{item?.rejection_reason || '-'}
 										</div>
 									)}
 								>
