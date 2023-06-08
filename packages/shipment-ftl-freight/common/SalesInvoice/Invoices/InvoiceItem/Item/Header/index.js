@@ -14,6 +14,7 @@ import ClickableDiv from '../../../../../ClickableDiv';
 import Actions from './Actions';
 import CNNullify from './CNNullify';
 import OTPVerification from './OTPVerification';
+import ReviewServices from './ReviewServices';
 import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
@@ -24,6 +25,7 @@ const API_SUCCESS_MESSAGE = {
 };
 
 const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
+const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 
 function Header({
 	children = null,
@@ -37,9 +39,11 @@ function Header({
 }) {
 	const [open, setOpen] = useState(false);
 	const [askNullify, setAskNullify] = useState(false);
+	const [showReview, setShowReview] = useState(false);
 	const [showOtpModal, setShowOTPModal] = useState(false);
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
+	const showForOldShipments = shipment_data.serial_id <= CONSTANTS.invoice_check_id && invoice.status === 'pending';
 
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
 	const isAuthorized = user_data.email === CONSTANTS.ajeet_email;
@@ -69,7 +73,7 @@ function Header({
 		bfInvoiceRefetch();
 	};
 
-	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
+	const { apiTrigger = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
 
 	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= 120347 && invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
@@ -84,7 +88,7 @@ function Header({
 	}
 
 	const handleClick = (type) => {
-		updateInvoiceStatus({
+		apiTrigger({
 			payload: {
 				id     : invoice?.id,
 				status : type,
@@ -97,6 +101,36 @@ function Header({
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > 120347 || isAuthorized);
+
+	const invoice_serial_id = invoice?.serial_id?.toString() || '';
+	const firstChar = invoice_serial_id[0];
+
+	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < 8;
+
+	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
+	|| isEmpty(invoiceData.invoice_trigger_date);
+
+	let disableAction = showForOldShipments
+		? isIRNGenerated
+		: disableActionCondition;
+
+	if (invoice.status === 'amendment_requested') {
+		disableAction = false;
+	}
+
+	let disableMarkAsReviewed = disableAction;
+	if (showForOldShipments) {
+		disableMarkAsReviewed = isIRNGenerated && isInvoiceBefore20Aug2022;
+	}
+
+	const isEmptyInvoicesList = isEmpty(invoicesList);
+	const isShipmentCompleted = shipment_data.state === 'completed';
+	const isTaxMechanismGoodsTransportAgency = invoiceData.invoicing_parties?.[0]?.billing_address?.tax_mechanism
+	=== 'goods_transport_agency';
+	const deliveryDatePresent = shipment_data.all_services?.[0]?.delivery_date;
+
+	disableMarkAsReviewed = !isEmptyInvoicesList && !isShipmentCompleted
+		&& !(deliveryDatePresent || isTaxMechanismGoodsTransportAgency);
 
 	return (
 		<div className={styles.container}>
@@ -236,11 +270,9 @@ function Header({
 						<Actions
 							invoice={invoice}
 							bfInvoiceRefetch={bfInvoiceRefetch}
-							invoiceData={invoiceData}
-							isIRNGenerated={isIRNGenerated}
 							salesInvoicesRefetch={salesInvoicesRefetch}
-							bfInvoice={bfInvoice}
 							isAuthorized={isAuthorized}
+							disableAction={disableAction}
 						/>
 					) : null}
 
@@ -274,6 +306,17 @@ function Header({
 						</Button>
 					) : null}
 
+					{!INVOICE_STATUS.includes(invoice.status) ? (
+						<Button
+							size="sm"
+							onClick={() => setShowReview(true)}
+							themeType="accent"
+							disabled={disableMarkAsReviewed || invoice?.is_eta_etd}
+						>
+							Mark as Reviewed
+						</Button>
+					) : null}
+
 					{invoice?.is_revoked && invoice?.status !== 'revoked' ? (
 						<div className={styles.info_container}>Requested for Revoke</div>
 					) : null}
@@ -300,6 +343,15 @@ function Header({
 					invoice={invoice}
 					refetch={salesInvoicesRefetch}
 					shipment_data={shipment_data}
+				/>
+			) : null}
+
+			{showReview ? (
+				<ReviewServices
+					showReview={showReview}
+					setShowReview={setShowReview}
+					invoice={invoice}
+					refetch={salesInvoicesRefetch}
 				/>
 			) : null}
 

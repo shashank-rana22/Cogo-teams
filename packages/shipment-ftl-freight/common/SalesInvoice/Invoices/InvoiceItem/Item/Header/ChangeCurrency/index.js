@@ -10,7 +10,6 @@ import INVOICE_CURRENCY_MAPPINGS from '../../../../../helpers/invoiceCurrencyMap
 import styles from './styles.module.css';
 
 function ChangeCurrency({
-	isChangeCurrency = false,
 	setIsChangeCurrency = () => {},
 	invoice = {},
 	refetch = () => {},
@@ -52,7 +51,7 @@ function ChangeCurrency({
 	return (
 		<Modal
 			className={styles.form}
-			show={isChangeCurrency}
+			show
 			closeOnOuterClick={false}
 			showCloseIcon={false}
 		>

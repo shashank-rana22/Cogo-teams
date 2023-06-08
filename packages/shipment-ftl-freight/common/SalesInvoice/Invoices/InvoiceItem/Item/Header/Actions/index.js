@@ -9,14 +9,14 @@ import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import ClickableDiv from '../../../../../../ClickableDiv';
-import EditInvoice from '../EditInvoice';
 
-import AddCustomerInvoice from './AddCustomerInvoice';
-import ExchangeRateModal from './ExchangeRateModal';
-import FillCustomerPortalData from './FillCustomerPortalData';
 import styles from './styles.module.css';
-import UpdateCustomerInvoice from './UpdateCustomerInvoice';
 
+const AddCustomerInvoice = dynamic(() => import('./AddCustomerInvoice'), { ssr: false });
+const ExchangeRateModal = dynamic(() => import('./ExchangeRateModal'), { ssr: false });
+const FillCustomerPortalData = dynamic(() => import('./FillCustomerPortalData'), { ssr: false });
+const UpdateCustomerInvoice = dynamic(() => import('./UpdateCustomerInvoice'), { ssr: false });
+const EditInvoice = dynamic(() => import('../EditInvoice'), { ssr: false });
 const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
@@ -26,10 +26,9 @@ const CUSTOMER_INVOICE_STATUSES = ['reviewed', 'approved'];
 function Actions({
 	invoice = {},
 	bfInvoiceRefetch = () => {},
-	invoiceData = {},
-	isIRNGenerated = false,
 	salesInvoicesRefetch = () => {},
 	isAuthorized = false,
+	disableAction = false,
 }) {
 	const [show, setShow] = useState(false);
 	const [isEditInvoice, setIsEditInvoice] = useState(false);
@@ -42,19 +41,6 @@ function Actions({
 	const [showExchangeRate, setExchangeRate] = useState(false);
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
-
-	const showForOldShipments = shipment_data.serial_id <= 120347 && invoice.status === 'pending';
-
-	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
-	|| isEmpty(invoiceData.invoice_trigger_date);
-
-	let disableAction = showForOldShipments
-		? isIRNGenerated
-		: disableActionCondition;
-
-	if (invoice.status === 'amendment_requested') {
-		disableAction = false;
-	}
 
 	const handleClickCurrency = () => {
 		setIsChangeCurrency(true);
@@ -100,7 +86,7 @@ function Actions({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
-	const editInvoicesVisiblity =	(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
+	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
 	|| isAuthorized;
 
 	const content = (
@@ -278,7 +264,6 @@ function Actions({
 
 			{isChangeCurrency ? (
 				<ChangeCurrency
-					isChangeCurrency={isChangeCurrency}
 					setIsChangeCurrency={setIsChangeCurrency}
 					invoice={invoice}
 					refetch={handleRefetch}
@@ -287,7 +272,6 @@ function Actions({
 
 			{showExchangeRate ? (
 				<ExchangeRateModal
-					showExchangeRate={showExchangeRate}
 					setExchangeRate={setExchangeRate}
 					invoice={invoice}
 				/>

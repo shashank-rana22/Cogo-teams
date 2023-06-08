@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import useUpdateInvoiceStatus from '../../../../../../../hooks/useUpdateInvoiceStatus';
+import useUpdateShipmentInvoiceStatus from '../../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 
 import Confirmation from './Confirmation';
 import LinersExchangeRateConfirm from './LinersExchangeRate';
@@ -24,12 +24,14 @@ function ReviewServices({
 		refetch();
 	};
 
-	const { loading, apiTrigger } = useUpdateInvoiceStatus({ refetch: refetchAfterCall });
+	const { loading, apiTrigger } = useUpdateShipmentInvoiceStatus({ refetch: refetchAfterCall });
 
 	const handleUpdate = () => {
 		apiTrigger({
-			id     : invoice?.id,
-			status : value ? 'reviewed' : undefined,
+			payload: {
+				id     : invoice?.id,
+				status : value ? 'reviewed' : undefined,
+			},
 		});
 	};
 
