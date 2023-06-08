@@ -22,7 +22,7 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 		selected,
 		setSelected,
 		activeTab,
-		page,
+		page = 1,
 	} = useHandleAllCourses({ inputValue, currentCategory, courseCategories, setCurrentCategory });
 
 	if (loading) {
@@ -99,11 +99,11 @@ function AllCourses({ currentCategory, setCurrentCategory, courseCategories, inp
 				))}
 			</div>
 
-			{total_count > 12 && (
+			{total_count > page_limit && (
 				<div className={styles.pagination_container}>
 					<Pagination
 						totalItems={total_count}
-						currentPage={page || 1}
+						currentPage={page}
 						pageSize={page_limit}
 						onPageChange={setPage}
 					/>
