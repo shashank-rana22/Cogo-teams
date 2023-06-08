@@ -45,7 +45,6 @@ function CargoDetailPills({ detail, labels }) {
 						</div>
 					);
 				}
-
 				return null;
 			})}
 		</div>

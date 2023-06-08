@@ -1,15 +1,19 @@
-import { Pill } from '@cogoport/components';
+import { Pill, TabPanel, Tabs } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import iconMapping from '../../helper/iconMapping';
 import serviceLabelMapping from '../../helper/serviceLabelMapping';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
 import PortDetails from '../List/Card/Body/PortDetails';
 
+import QuotationDetails from './QuotationDetails';
 import ServiceWiseDetails from './ServiceWiseDetails';
 import styles from './styles.module.css';
+import TransactionInsights from './TransactionInsights';
 
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
+	const [activeTabPanel, setActiveTabPanel] = useState('transaction_insights');
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
 
 	const excludedServices = [
@@ -79,6 +83,33 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 					</div>
 				</div>
 			</div>
+
+			<div style={{ margin: 20 }}>
+				<Tabs
+					activeTab={activeTabPanel}
+					fullWidth
+					themeType="primary"
+					onChange={setActiveTabPanel}
+				>
+					<TabPanel name="transaction_insights" title="Transaction Insights">
+						<div>
+							{['air_freight', 'lcl_freight', 'fcl_freight'].includes(
+								itemData?.shipment_type,
+							) ? (
+								<TransactionInsights itemData={itemData} />
+								) : null}
+
+						</div>
+					</TabPanel>
+					<TabPanel name="view_quotation" title="View Quotation">
+						<div><QuotationDetails itemData={itemData} /></div>
+					</TabPanel>
+					<TabPanel name="last_shipment_detail" title="Customer Last Shipment Details">
+						<div>Coming Soon!</div>
+					</TabPanel>
+				</Tabs>
+			</div>
+
 			<div>
 				{loading ? null
 					: (

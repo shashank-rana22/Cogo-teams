@@ -1,0 +1,26 @@
+.maincontainer{
+    display: flex;
+	padding-top: 16px;
+    background-color: #fff;
+    margin: 20px;
+}
+
+.container{
+    display: flex;
+	justify-content: center;
+	align-items: center;
+	background: #f7f7fc;
+	flex-basis: 20%;
+	height: 70px;
+}
+
+.insightContainer{
+    display: flex;
+	flex-basis: 40%;
+	justify-content: space-between;
+}
+
+.line{
+    border-right: 1px solid #E0E0E0;
+	padding: 8px;
+}

@@ -67,7 +67,7 @@ function SingleService({
 
 	return (
 		<div>
-			<div style={{ marginTop: '16px' }}>
+			<div style={{ margin: '16px 0' }}>
 				<Select
 					options={options}
 					value={singleServiceData}

@@ -1,0 +1,15 @@
+.table_container{
+    font-size: 20px;
+    width:640px;
+    :global{
+        .ui_table_head_cell{
+            font-size: 18px !important;
+            font-weight: 600;
+        }
+
+        .ui_table_body_cell{
+            font-size: 14px !important;
+            font-weight: 500;
+        }
+    }
+}
