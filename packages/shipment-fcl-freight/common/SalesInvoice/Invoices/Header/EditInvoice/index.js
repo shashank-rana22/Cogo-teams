@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
@@ -8,7 +9,6 @@ import { useEffect } from 'react';
 import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const geo = getGeoConstants();
 const INITIAL_STATE = 0;

@@ -47,7 +47,7 @@ const rawControls = (
 			span        : 2,
 			handleChange,
 			placeholder : 'select line item',
-			rules: { required: 'Required' },
+			rules       : { required: 'Required' },
 		},
 		{
 
@@ -63,7 +63,7 @@ const rawControls = (
 			rules       : {
 				validate: (v) => v?.length >= CHAR_LIMIT || isEmpty(v) || `Characters should be >= ${CHAR_LIMIT}`,
 			},
-			span     : 2,
+			span: 2,
 		},
 		{
 			label   : 'Unit',
