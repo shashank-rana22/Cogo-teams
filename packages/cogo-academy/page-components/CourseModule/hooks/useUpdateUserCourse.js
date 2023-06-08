@@ -9,7 +9,7 @@ const useUpdateUserCourse = ({ fetchList }) => {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateUserCourse = useCallback(async (course_user_mapping_id, saved) => {
+	const updateUserCourse = useCallback(async ({ course_user_mapping_id, saved }) => {
 		try {
 			await trigger({
 				params: {
