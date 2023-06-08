@@ -4,11 +4,11 @@ import { useHarbourRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
 function useCreateEmployeeDocument({ documents, getEmployeeDetails = () => {} }) {
-	const api = isEmpty(documents) ? '/create_employee_document' : '/update_employee_document';
+	const url = isEmpty(documents) ? '/create_employee_document' : '/update_employee_document';
 
 	const [{ loading }, trigger] = useHarbourRequest({
-		url    : api,
-		method : 'POST',
+		url,
+		method: 'POST',
 	}, { manual: true });
 
 	const createEmployeeDocument = async ({ id, newDoc }) => {
