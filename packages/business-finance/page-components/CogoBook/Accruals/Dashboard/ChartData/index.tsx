@@ -4,7 +4,7 @@ import { getFormattedPrice } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
-interface ChartDataInterface{
+interface ChartDataInterface {
 	expenseBookedSum?: number
 	expenseAccruedSum?: number
 	expenseCurrency?: string

@@ -3,12 +3,12 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-interface MonthInterface{
+interface MonthInterface {
 	id?:string
 	days?:string
 	shipmentId?:string
 }
-interface SIDViewInterface{
+interface SIDViewInterface {
 	reportMonth?: Array<MonthInterface>
 	shipmentViewLoading?: boolean
 }

@@ -5,9 +5,9 @@ import { getAmountLineChartInLakh } from './getAmountLineChartInLakh';
 import styles from './styles.module.css';
 
 export interface BarDatum {
-    [key: string]: string | number;
+	[key: string]: string | number;
 }
-interface MonthlyBarChartInterface{
+interface MonthlyBarChartInterface {
 	monthlyData?: Array<BarDatum>
 }
 function MonthBarChart({ monthlyData }:MonthlyBarChartInterface) {
