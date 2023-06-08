@@ -1,14 +1,33 @@
-import React from 'react';
+import { Input, Pagination } from '@cogoport/components';
+import { IcMCross, IcMSearchdark } from '@cogoport/icons-react';
+import React, { useState } from 'react';
 
+import StyledTable from '../../commons/styledTable';
+import useGetOrganizationList from '../../hooks/useGetOrganizationList';
+
+import { manageBprColumn } from './Config/manageBprColumn';
 import SearchCard from './SearchCard';
 import styles from './styles.module.css';
 
 function ManageBpr() {
+	const [pagination, setPagination] = useState({
+		page      : 1,
+		pageLimit : 10,
+	});
+	const { bprLoading, bprData, onQueryChange, refetch, searchQuery } = useGetOrganizationList({
+		pagination,
+	});
+
+	const { list = [], pageNo = 0, totalRecords = 0 } = bprData || {};
+
+	const columns = manageBprColumn({
+		refetch,
+	});
 	return (
 		<div>
-			<SearchCard />
-			<div className={styles.SearchBox}>
-				<div>
+			<SearchCard refetch={refetch} />
+			<div className={styles.search_box}>
+				<div style={{ width: '24%' }}>
 					<Input
 						prefix={(
 							<IcMSearchdark
@@ -18,31 +37,33 @@ function ManageBpr() {
 						suffix={(
 							<IcMCross
 								onClick={() => onQueryChange('')}
-								style={{ cursor: 'pointer', marginTop: '5px' }}
+								style={{ cursor: 'pointer' }}
 							/>
 						)}
-						style={{ marginRight: '10px', height: '30px' }}
-						onChange={(e) => {
-							setPagination(1);
-							onQueryChange(e.target.value);
+						style={{ height: '40px' }}
+						onChange={(value) => {
+							setPagination((prev) => ({ ...prev, page: 1 }));
+							onQueryChange(value);
 						}}
 						value={searchQuery}
-						placeholder="Search"
+						placeholder="Search by serial id / business name "
 						type="text"
-						size="lg"
 					/>
 				</div>
 			</div>
-			<BprList list={bprData?.list} bprLoading={bprLoading} refetch={refetch} />
 
-			<Pagination
-				className="xl"
-				pageRange={bprData?.totalPages}
-				pageLimit={10}
-				total={bprData?.totalRecords}
-				pagination={pagination}
-				setPagination={setPagination}
-			/>
+			<StyledTable data={list} columns={columns} loading={bprLoading} />
+
+			<div className={styles.pagination_container}>
+				<Pagination
+					type="table"
+					currentPage={pageNo}
+					totalItems={totalRecords}
+					pageSize={pagination.pageLimit}
+					onPageChange={(val) => setPagination({ ...pagination, page: val })}
+				/>
+
+			</div>
 		</div>
 	);
 }

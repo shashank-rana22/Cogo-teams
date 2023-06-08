@@ -1,37 +1,52 @@
-import { useRequest } from '@cogo/commons/hooks';
-import useSearchQuery from '@cogo/project-partner/page-components/outstanding/helpers/debounce';
-import { useEffect, useState } from 'react';
+import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import { useRequestBf } from '@cogoport/request';
+import { useCallback, useEffect, useState } from 'react';
 
-const useGetOrganizationList = ({ pagination }) => {
-	const { query, debounceQuery } = useSearchQuery();
+interface GetOrgParams {
+	page : number,
+	pageLimit : number
+}
+
+interface Pagination {
+	pagination : GetOrgParams
+}
+
+const useGetOrganizationList = ({ pagination } : Pagination) => {
+	const { page = 1, pageLimit = 10 } = pagination || {};
+	const { query, debounceQuery } = useDebounceQuery();
+
 	const [searchQuery, setSearchQuery] = useState();
-	const { loading, data, trigger } = useRequest(
-		'get',
-		true,
-		'business_finance',
+
+	const [
+		{ data, loading },
+		trigger,
+	] = useRequestBf(
 		{
-			authkey: 'get_payments_defaulters_list',
+			url     : '/payments/defaulters/list',
+			method  : 'get',
+			authKey : 'get_payments_defaulters_list',
 		},
-	)('/payments/defaulters/list');
+		{ manual: true },
+	);
 
 	const onQueryChange = (value) => {
 		debounceQuery(value);
 		setSearchQuery(value);
 	};
 
-	const refetch = async () => {
+	const refetch = useCallback(async () => {
 		trigger({
 			params: {
-				q         : query,
-				page      : pagination,
-				pageLimit : 10,
+				q: query || undefined,
+				page,
+				pageLimit,
 			},
 		});
-	};
+	}, [page, pageLimit, query, trigger]);
 
 	useEffect(() => {
 		refetch();
-	}, [pagination, query]);
+	}, [pagination, query, refetch]);
 
 	return {
 		bprLoading : loading,

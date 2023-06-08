@@ -1,15 +1,25 @@
-import { useRequest } from '@cogo/commons/hooks';
-import { toast } from '@cogoport/front/components';
+import { Toast } from '@cogoport/components';
+import { useRequestBf } from '@cogoport/request';
+
+interface SaveVerified {
+	setOrgData : Function,
+	refetch : Function
+}
 
 const useSaveVerifiedOrganization = ({
-	setOrgData,
-	refetch,
-	setInputName,
-	setInputSerialId,
-}) => {
-	const { trigger, loading } = useRequest('post', false, 'business_finance', {
-		authkey: 'post_payments_defaulters',
-	})('/payments/defaulters');
+	setOrgData, refetch,
+} : SaveVerified) => {
+	const [
+		{ loading },
+		trigger,
+	] = useRequestBf(
+		{
+			url     : '/payments/defaulters',
+			method  : 'post',
+			authKey : 'post_payments_defaulters',
+		},
+		{ manual: true },
+	);
 
 	const createBpr = async (
 		tradePartyDetailSerialId,
@@ -20,13 +30,11 @@ const useSaveVerifiedOrganization = ({
 			const resp = await trigger({
 				data: { tradePartyDetailSerialId, businessName, tradePartyDetailId },
 			});
-			toast.success(resp?.data?.message || 'Data save successfully in list');
-			refetch?.();
-			setOrgData?.();
-			setInputName('');
-			setInputSerialId('');
+			Toast.success(resp?.data?.message || 'Data save successfully in list');
+			refetch();
+			setOrgData({});
 		} catch (err) {
-			toast.error(err?.error?.message || 'Failed to save data');
+			Toast.error(err?.response?.data?.message || 'Failed to save data');
 		}
 	};
 	return {

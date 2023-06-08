@@ -1,89 +1,73 @@
-import { Input } from '@cogoport/components';
-import { SelectController } from '@cogoport/forms';
-import { IcMSearchlight } from '@cogoport/icons-react';
+import { Button } from '@cogoport/components';
+import { AsyncSelect } from '@cogoport/forms';
 import React, { useState } from 'react';
+
+import useSaveVerifiedOrganization from '../../../hooks/useSaveVerifiedOrganization';
 
 import styles from './styles.module.css';
 
-function SearchCard() {
-	const [orgData, setOrgData] = useState();
-	const {
-		inputSerialId,
-		setInputSerialId,
-		handleKeyDown,
-		setInputName,
-		inputName,
-	} = useGetOrganizationVerify({
-		setOrgData,
-	});
+interface OrgData {
+	serial_id: number,
+	legal_business_name: string,
+	id: string
+}
 
-	const { createBpr, loadingOnSave } = useSaveVerifiedOrganization({
-		setInputSerialId,
-		setInputName,
-		refetch,
-		setOrgData,
-	});
+interface SearchCardParams {
+	refetch : Function
+}
+
+function SearchCard({ refetch } : SearchCardParams) {
+	const [orgData, setOrgData] = useState<OrgData>();
+	const { createBpr, loadingOnSave } = useSaveVerifiedOrganization({ setOrgData, refetch });
 
 	return (
 		<div>
-			{' '}
 			<div className={styles.card}>
-				<div className={styles.Heading}>Manage BPR</div>
+				<div className={styles.heading}>Manage BPR</div>
 
 				<div className={styles.SearchContainer}>
 					<div className={styles.SearchBySerialId}>
-						<Input
-							size="md"
-							value={inputSerialId}
-							onChange={(event) => {
-								setInputSerialId(event.target.value);
+						<AsyncSelect
+							name="id"
+							asyncKey="list_trade_parties"
+							valueKey="id"
+							initialCall={false}
+							onChange={(value, obj) => {
+								setOrgData(obj);
 							}}
-							placeholder="Search by serial id"
-							onKeyDown={handleKeyDown}
-							suffix={<IcMSearchlight />}
-						/>
-					</div>
-
-					<div className={styles.SearchByName}>
-						<SelectController
-							{...fields.businessName}
-							value={inputName}
-							theme="admin"
-							handleChange={(event) => {
-								setInputName(event?.target?.value);
-								setOrgData(event);
-								setInputSerialId('');
-							}}
+							value={orgData?.id}
+							placeholder="Search by serial id / business name"
+							size="sm"
+							isClearable
 						/>
 					</div>
 				</div>
 
 				{orgData && (
-					<DetailsCard>
-						<SubContainer>
-							<IdContainer>
-								<LabelText>Serial Id</LabelText>
-								<ValueText>{orgData?.serial_id}</ValueText>
-							</IdContainer>
-							<NameContainer>
-								<LabelText>Bussiness Name</LabelText>
-								<ValueText>{orgData?.legal_business_name}</ValueText>
-							</NameContainer>
+					<div className={styles.details_card}>
+						<div className={styles.sub_container}>
+							<div className={styles.id_container}>
+								<div className={styles.label_text}>Serial Id</div>
+								<div className={styles.value_text}>{orgData?.serial_id}</div>
+							</div>
+							<div className={styles.name_container}>
+								<div className={styles.label_text}>Bussiness Name</div>
+								<div className={styles.value_text}>{orgData?.legal_business_name}</div>
+							</div>
 
 							<Button
 								disabled={loadingOnSave}
 								size="md"
-								type="submit"
 								onClick={() => createBpr(
-                        		orgData?.serial_id,
-                        		orgData?.legal_business_name,
-                        		orgData?.id,
+									orgData?.serial_id,
+									orgData?.legal_business_name,
+									orgData?.id,
 								)}
 							>
 								SAVE BPR
 							</Button>
-						</SubContainer>
-					</DetailsCard>
+						</div>
+					</div>
 				)}
 			</div>
 
