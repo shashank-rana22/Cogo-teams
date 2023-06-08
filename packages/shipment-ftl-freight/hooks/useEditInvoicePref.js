@@ -17,6 +17,7 @@ const TOTAL_LENGTH = 1;
 const PARTY_SERVICES = [];
 const FINAL_PARTIES = [];
 const NOT_TAKEN = [];
+const NEW_SELECTED_PARTIES = [];
 
 const isAllServicesTaken = (
 	servicesList,
@@ -140,17 +141,16 @@ const useEditInvoicePref = ({
 		)?.id;
 
 		if (currentInvoiceIndex >= INITIAL_STATE) {
-			const newSelectParties = [];
 			selectedParties.forEach((party) => {
 				const updateParty = { ...party };
 				updateParty.services = (party.services || []).filter(
 					(serviceItem) => !newServices.includes(serviceItem?.serviceKey),
 				);
-				newSelectParties.push(updateParty);
+				NEW_SELECTED_PARTIES.push(updateParty);
 			});
 
 			let isBasicFreightInvService = {};
-			newSelectParties[currentInvoiceIndex].services = newServices?.map(
+			NEW_SELECTED_PARTIES[currentInvoiceIndex].services = newServices?.map(
 				(service) => {
 					const itemsService = ALL_SERVICE_LINE_ITEMS.find(
 						(item) => item.serviceKey === service,
@@ -189,11 +189,11 @@ const useEditInvoicePref = ({
 					};
 				},
 			);
-			newSelectParties[currentInvoiceIndex].invoice_currency = new_ic;
+			NEW_SELECTED_PARTIES[currentInvoiceIndex].invoice_currency = new_ic;
 
-			let finalNewSelectParties = [...newSelectParties];
+			let finalNewSelectParties = [...NEW_SELECTED_PARTIES];
 			if (finalNewSelectParties?.length > TOTAL_LENGTH) {
-				finalNewSelectParties = (newSelectParties || []).filter(
+				finalNewSelectParties = (NEW_SELECTED_PARTIES || []).filter(
 					(party) => !isEmpty(party?.services),
 				);
 			}

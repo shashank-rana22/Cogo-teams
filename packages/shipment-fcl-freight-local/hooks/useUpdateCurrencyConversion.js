@@ -18,19 +18,19 @@ const useUpdateCurrencyConversion = ({
 	});
 
 	const handleFormSubmit = async (value) => {
-		const exchangeCurrencyHash = {};
+		const EXCHANGE_CURRENCY_HASH = {};
 		const currencyData = value;
 
 		Object.keys(value || {}).forEach((val) => {
 			const key = `${currencyData[val]?.[INITIAL_STATE]?.from_currency}_${currencyData?.[val]?.[INITIAL_STATE]
 				?.to_currency}`;
 			if (currencyData?.[val]?.[INITIAL_STATE]?.exchange_rate) {
-				exchangeCurrencyHash[key] = Number(
+				EXCHANGE_CURRENCY_HASH[key] = Number(
 					currencyData?.[val]?.[INITIAL_STATE]?.exchange_rate,
 				);
 			}
 		});
-		if (Object.keys(exchangeCurrencyHash).length === INITIAL_STATE) {
+		if (Object.keys(EXCHANGE_CURRENCY_HASH).length === INITIAL_STATE) {
 			Toast.error('Please fill atleast one field !');
 			return;
 		}
@@ -39,7 +39,7 @@ const useUpdateCurrencyConversion = ({
 			await trigger({
 				data: {
 					shipment_id                      : shipment_data.id,
-					updated_currency_conversion_rate : exchangeCurrencyHash,
+					updated_currency_conversion_rate : EXCHANGE_CURRENCY_HASH,
 				},
 			});
 			Toast.success(successMessage);

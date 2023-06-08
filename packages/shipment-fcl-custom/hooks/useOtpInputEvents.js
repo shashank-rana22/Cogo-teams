@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRef, useEffect, useCallback } from 'react';
 
 const EVENTS = ['keydown', 'paste'];
+const NEW_STATE_VALUES = {};
 
 const useOtpInputEvents = ({
 	otpLength = 0,
@@ -63,17 +64,15 @@ const useOtpInputEvents = ({
 			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
 			setOtp((previousState) => {
-				const newStateValues = {};
-
 				for (let i = 0; i < otpLength; i += 1) {
 					if (i >= currentFocusedOtpInputElementIndex) {
-						newStateValues[`otp-${i + 1}`] = content[i - currentFocusedOtpInputElementIndex] || '';
+						NEW_STATE_VALUES[`otp-${i + 1}`] = content[i - currentFocusedOtpInputElementIndex] || '';
 					}
 				}
 
 				return {
 					...previousState,
-					...newStateValues,
+					...NEW_STATE_VALUES,
 				};
 			});
 		} catch (error) {
