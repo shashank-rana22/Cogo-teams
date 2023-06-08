@@ -23,7 +23,7 @@
         "role": "sales"
     },
     "edit_supplier": true,
-    "cancel_service": true,
+    "cancel_service": false,
     "additional_services": {
         "action_buttons": {
             "reallocate": false,
