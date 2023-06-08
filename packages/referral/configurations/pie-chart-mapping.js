@@ -24,6 +24,7 @@ const pieChartMapping = (alloted = {}) => {
 		},
 	];
 
+
 	return {
 		detailsPieChart,
 	};
