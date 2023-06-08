@@ -1,0 +1,10 @@
+.list_middle_part {
+  display: flex;
+  justify-content: space-between;
+  padding: 8px;
+  width: 40%;
+}
+.service_icon {
+  display: flex;
+  flex-direction: column;
+}
