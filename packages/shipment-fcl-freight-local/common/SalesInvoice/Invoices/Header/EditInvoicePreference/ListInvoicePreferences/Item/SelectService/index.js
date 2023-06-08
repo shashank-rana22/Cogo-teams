@@ -10,6 +10,8 @@ import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';
 
+const INITIAL_STATE = 0;
+
 function SelectService({
 	invoice = {},
 	handleServiceChange = () => {},
@@ -31,7 +33,7 @@ function SelectService({
 			const tradeType = service?.trade_type === 'export' ? 'Origin' : 'Destination';
 
 			const invoiceAmount = formatAmount({
-				amount   : service?.service_total_discounted || 0,
+				amount   : service?.service_total_discounted || INITIAL_STATE,
 				currency : service?.service_total_currency,
 				options  : {
 					style           : 'currency',
@@ -86,7 +88,7 @@ function SelectService({
 						</div>
 					</Tooltip>
 				),
-				isTaxable : service?.tax_total > 0,
+				isTaxable : service?.tax_total > INITIAL_STATE,
 				value     : id,
 				...service,
 			};

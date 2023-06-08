@@ -9,17 +9,17 @@ import styles from './styles.module.css';
 
 function CurrencyExchangeForm({
 	invoiceCurrency = '',
-	differentCurrenciesHash = {},
+	DIFFERENT_CURRENCIES_HASH = {},
 	setOpen = () => {},
-	availableCurrencyConversions = {},
+	AVAILABLE_CURRENCY_CONVERSION = {},
 	open = false,
 	handleFormSubmit = () => {},
 	loading = false,
 }) {
 	const { controls, defaultValues } = getCurrencyControls({
 		invoiceCurrency,
-		differentCurrenciesHash,
-		availableCurrencyConversions,
+		DIFFERENT_CURRENCIES_HASH,
+		AVAILABLE_CURRENCY_CONVERSION,
 	});
 
 	const {

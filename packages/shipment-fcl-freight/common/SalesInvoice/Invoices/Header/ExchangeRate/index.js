@@ -24,12 +24,12 @@ function ExchangeRate({
 
 	const {
 		handleFormSubmit,
-		differentCurrenciesHash,
-		availableCurrencyConversions,
+		DIFFERENT_CURRENCIES_HASH,
+		AVAILABLE_CURRENCY_CONVERSION,
 		loading,
 	} = useHelper({ invoiceCurrency, refetch: refetchAfterApiCall, shipment_id });
 
-	if (Object.keys(differentCurrenciesHash || {}).length === 0) {
+	if (Object.keys(DIFFERENT_CURRENCIES_HASH || {}).length === 0) {
 		return null;
 	}
 
@@ -51,11 +51,11 @@ function ExchangeRate({
 			{open ? (
 				<CurrencyExchangeForm
 					invoiceCurrency={invoiceCurrency}
-					differentCurrenciesHash={differentCurrenciesHash}
+					DIFFERENT_CURRENCIES_HASH={DIFFERENT_CURRENCIES_HASH}
 					handleFormSubmit={handleFormSubmit}
 					setOpen={setOpen}
 					shipment_id={shipment_id}
-					availableCurrencyConversions={availableCurrencyConversions}
+					AVAILABLE_CURRENCY_CONVERSION={AVAILABLE_CURRENCY_CONVERSION}
 					open={open}
 					loading={loading}
 				/>
