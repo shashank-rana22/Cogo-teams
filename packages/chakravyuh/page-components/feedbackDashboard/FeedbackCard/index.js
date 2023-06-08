@@ -6,7 +6,16 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function FeedbackCard({ data = {} }) {
-	const { origin_port = {}, destination_port = {}, container_size, container_type, commodity } = data;
+	const {
+		origin_port = {},
+		destination_port = {},
+		container_size,
+		container_type,
+		commodity,
+		deviation,
+		old_price,
+		new_price,
+	} = data;
 
 	const items = [
 		{
@@ -30,36 +39,52 @@ function FeedbackCard({ data = {} }) {
 	];
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.port_info}>
-				<Tooltip
-					content={(
-						<div>{origin_port.display_name}</div>
-					)}
-					placement="top"
-				>
-					<p className={styles.port_code}>{origin_port.port_code || origin_port.inttra_code}</p>
-				</Tooltip>
-				<IcMPortArrow style={{ margin: '0px 12px' }} />
-				<Tooltip
-					content={(
-						<div>
-							{destination_port.display_name}
-						</div>
-					)}
-					placement="top"
-				>
-					<p className={styles.port_code}>
-						{destination_port.port_code || destination_port.inttra_code}
-					</p>
-				</Tooltip>
+		<div className={styles.box}>
+			<div className={styles.container}>
+				<div className={styles.port_info}>
+					<Tooltip
+						content={(
+							<div>{origin_port.display_name}</div>
+						)}
+						placement="top"
+					>
+						<p className={styles.port_code}>{origin_port.port_code || origin_port.inttra_code}</p>
+					</Tooltip>
+					<IcMPortArrow style={{ margin: '0px 12px' }} />
+					<Tooltip
+						content={(
+							<div>
+								{destination_port.display_name}
+							</div>
+						)}
+						placement="top"
+					>
+						<p className={styles.port_code}>
+							{destination_port.port_code || destination_port.inttra_code}
+						</p>
+					</Tooltip>
+				</div>
+				{/* <div className={styles.vertical_line} /> */}
+				<div className={styles.tags}>
+					<Tags
+						size="sm"
+						items={items.filter((item) => item.children != null)}
+					/>
+				</div>
 			</div>
-			<div className={styles.vertical_line} />
-			<div className={styles.tags}>
-				<Tags
-					size="sm"
-					items={items.filter((item) => item.children != null)}
-				/>
+			<div className={styles.sub_container}>
+				<div>
+					<p className={styles.label}>Disliked rate</p>
+					{old_price}
+				</div>
+				<div>
+					<p className={styles.label}>Rate added</p>
+					{new_price}
+				</div>
+				<div>
+					<p className={styles.label}>Deviation</p>
+					{deviation}
+				</div>
 			</div>
 		</div>
 	);

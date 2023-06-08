@@ -13,13 +13,19 @@ const useGetFeedbackList = ({ filters, setFilters }) => {
 		url    : 'list_fcl_freight_rate_feedbacks',
 		method : 'GET',
 		params : {
-			filters: finalFilters,
+			filters                  : finalFilters,
 			page,
+			booking_details_required : true,
+			is_dashboard             : true,
 		},
 	}, { manual: true });
 
 	const getFeedbackList = async () => {
-		await trigger();
+		try {
+			await trigger();
+		} catch (err) {
+			console.log(err);
+		}
 	};
 
 	useEffect(() => {
