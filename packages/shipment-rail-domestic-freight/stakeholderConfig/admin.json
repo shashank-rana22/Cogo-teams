@@ -1,13 +1,10 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails"],  
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails","tracking","purchase"],  
     "shipment_info":{},
-    "shipment_header": {
-        "add_po_number": true
-    },
     "timeline": {
         "can_edit": true
     },
-    "default_tab":"tasks",
+    "default_tab":"documents",
     "overview":{
         "tab_title":"Overview"
     },
@@ -16,6 +13,9 @@
         "show_booking_req":true,
         "checked_show_my_tasks":false,
         "is_task_assigned":false
+    },
+    "purchase":{
+        "tab_title":"Purchase Invoice"
     },
     "documents":{
         "tab_title":"Documents",
@@ -26,7 +26,9 @@
     },
     "cancel_shipment": {
         "can_cancel": true,
-        "role": "sales"
+        "list_reasons": {
+            "stakeholder_type": ["superadmin"]
+        }
     },
     "edit_supplier": true,
     "cancel_service": true,
@@ -37,10 +39,9 @@
         "action_buttons": {
             "reallocate": false,
             "review_comments": false
-        },
-        "add_rate": {
-            "status::amendment_requested_by_importer_exporter": false,
-            "status::cancelled_by_supplier": false
         }
+    },
+    "tracking":{
+        "tab_title":"Tracking"
     }
 }
