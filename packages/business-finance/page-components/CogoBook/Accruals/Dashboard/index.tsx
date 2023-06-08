@@ -1,4 +1,4 @@
-import { Pill, Popover, Toggle, Tooltip } from '@cogoport/components';
+import { Pill, Popover, Toast, Toggle, Tooltip } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMInfo } from '@cogoport/icons-react';
 import { useState } from 'react';
@@ -60,7 +60,7 @@ function Dashboard() {
 		expenseCurrency,
 		incomeBookedSum = 0,
 		incomeAccruedSum = 0,
-		incomeCurrency = 0,
+		incomeCurrency,
 	} = statsData;
 
 	const data = [
@@ -109,7 +109,7 @@ function Dashboard() {
 
 	const renderDownloadReport = (
 		reportMonth.map((item) => (
-			<div key={item?.id} className={styles.days_show}>
+			<div key={item?.id} className={styles.days_show} onClick={() => { Toast.default('Coming Soon'); }}>
 				{item?.days}
 			</div>
 		))

@@ -1,11 +1,33 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
-import { useCallback, useEffect } from 'react';
+import { useState, useCallback, useEffect } from 'react';
+
+interface StatsDataInterface {
+	bookedShipmentCount?: number
+	accruedShipmentCount?: number
+	bookedProfitPercentage?: number
+	bookedProfit?: number
+	actualProfit?: number
+	actualProfitPercentage?: number
+	variance?: number
+	variancePercentage?: number
+	varianceExpense?: number
+	varianceIncome?: number
+	expenseCurrency?: string
+	expenseBookedSum?: number
+	expenseAccruedSum?: number
+	incomeBookedSum?: number
+	incomeAccruedSum?: number
+	incomeCurrency?: string
+	varianceCurrency?: string
+}
 
 const useShipmentIdStats = ({ month, year, entityCode }) => {
+	const [statsData, setStatsData] = useState<StatsDataInterface>({});
+
 	const [
-		{ data:statsData, loading:statsLoading },
+		{ data, loading:statsLoading },
 		trigger,
 	] = useRequestBf(
 		{
@@ -18,16 +40,18 @@ const useShipmentIdStats = ({ month, year, entityCode }) => {
 
 	const refetch = useCallback(async () => {
 		try {
-			await trigger({
+			const resp = await trigger({
 				params: {
 					Year       : year || undefined,
 					Month      : month || undefined,
 					entityCode : entityCode || Object.keys(GLOBAL_CONSTANTS.cogoport_entities)[2],
 				},
 			});
+			setStatsData(resp?.data);
 		} catch (error) {
 			if (error?.response?.data?.message) {
 				Toast.error(error?.response?.data?.message);
+				setStatsData({});
 			}
 		}
 	}, [entityCode, month, trigger, year]);
