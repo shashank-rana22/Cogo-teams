@@ -38,6 +38,7 @@ function CtcBreakup({ metadata }) {
 			monthlyValue : sign_on_bonus_monthly,
 		},
 	};
+
 	return (
 		<div className={styles.table_container}>
 			<div className={styles.heading}>
