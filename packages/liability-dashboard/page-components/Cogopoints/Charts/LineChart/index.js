@@ -4,7 +4,7 @@ import React from 'react';
 function LineChart() {
 	const data = [
 		{
-			id    : 'earned',
+			id    : 'Earned',
 			color : 'hsl(155, 70%, 50%)',
 			data  : [
 				{
@@ -35,7 +35,7 @@ function LineChart() {
 			],
 		},
 		{
-			id    : 'estimated',
+			id    : 'Estimated',
 			color : 'hsl(8, 70%, 50%)',
 			data  : [
 				{
@@ -65,7 +65,7 @@ function LineChart() {
 	return (
 		<ResponsiveLine
 			data={data}
-			margin={{ top: 10, right: 40, bottom: 45, left: 60 }}
+			margin={{ top: 30, right: 40, bottom: 45, left: 60 }}
 			xScale={{ type: 'point' }}
 			xFormat=" >-"
 			yScale={{
@@ -101,7 +101,32 @@ function LineChart() {
 			pointBorderColor={{ from: 'serieColor' }}
 			pointLabelYOffset={-12}
 			useMesh
-			legends={[]}
+			legends={[
+				{
+					anchor            : 'top',
+					direction         : 'row',
+					justify           : false,
+					translateX        : 10,
+					translateY        : -34,
+					itemsSpacing      : 0,
+					itemDirection     : 'left-to-right',
+					itemWidth         : 100,
+					itemHeight        : 27,
+					itemOpacity       : 0.75,
+					symbolSize        : 12,
+					symbolShape       : 'circle',
+					symbolBorderColor : 'rgba(0, 0, 0, .5)',
+					effects           : [
+						{
+							on    : 'hover',
+							style : {
+								itemBackground : 'rgba(0, 0, 0, .03)',
+								itemOpacity    : 1,
+							},
+						},
+					],
+				},
+			]}
 		/>
 	);
 }

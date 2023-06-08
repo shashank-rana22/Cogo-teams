@@ -44,3 +44,5 @@ export const STATS_CARDS = [
 		access : ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
 	},
 ];
+
+export const NETWORK_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg';

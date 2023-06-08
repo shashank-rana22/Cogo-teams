@@ -2,7 +2,7 @@ import { ResponsivePie } from '@cogoport/charts/pie';
 import { Image } from '@cogoport/next';
 
 import pieChartData from '../../../../configuration/pie-chart-data';
-import { NETWORK_EMPTY_STATE } from '../../../../constanst';
+import { NETWORK_EMPTY_STATE } from '../../../../constants';
 
 function PieChart() {
 	const { data } = pieChartData();
