@@ -33,7 +33,7 @@ function ModuleNavigation({
 
 	const { name = '', tests = [] } = course_details;
 
-	const setStates = (feedback, test, Chapter) => {
+	const setStates = ({ feedback, test, Chapter }) => {
 		setShowFeedback(feedback);
 		setShowTestData(test);
 		setChapter(Chapter);
@@ -130,7 +130,7 @@ function ModuleNavigation({
 					tabIndex="0"
 					onClick={() => {
 						if (all_chapters_completed || test_completed) {
-							setStates(false, true, {});
+							setStates({ feedback: false, test: true, Chapter: {} });
 						}
 					}}
 				>
@@ -152,7 +152,7 @@ function ModuleNavigation({
 				tabIndex="0"
 				onClick={() => {
 					if (test_completed || isEmpty(test_mapping || {})) {
-						setStates(true, false, {});
+						setStates({ feedback: true, test: false, Chapter: {} });
 					}
 				}}
 			>
