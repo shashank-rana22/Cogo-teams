@@ -22,8 +22,8 @@ importers:
         version: 18.2.0(react@18.2.0)
     devDependencies:
       '@cogoport/eslint-config':
-        specifier: ^1.1.0
-        version: 1.1.0(eslint@8.42.0)
+        specifier: 1.1.0-beta.9
+        version: 1.1.0-beta.9(eslint@8.42.0)
       '@cogoport/stylelint-config':
         specifier: ^1.0.3
         version: 1.0.3(stylelint@14.16.1)
@@ -33,6 +33,9 @@ importers:
       eslint:
         specifier: ^8.35.0
         version: 8.42.0
+      eslint-plugin-custom-rules:
+        specifier: link:node_modules/@cogoport/eslint-config/packages/eslint
+        version: link:node_modules/@cogoport/eslint-config/packages/eslint
       fs-extra:
         specifier: ^11.1.0
         version: 11.1.1
@@ -3929,8 +3932,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config@1.1.0(eslint@8.42.0):
-    resolution: {integrity: sha512-Nor3Hc4gRnMuKjbCM547z5FRxWaHV0a4a82Fkx9H7T8GWf+A1xw4r710BMsd/VxQ8SquSC1O+cjo8LePIXBjcg==}
+  /@cogoport/eslint-config@1.1.0-beta.9(eslint@8.42.0):
+    resolution: {integrity: sha512-3s/vokp3CLBp1dT5y2p6ypTkqkHeHhPQuJZ2GWyRQvKeFP59kd8+Nsr3bg32SdPO2feZoyaYBxkFg8P0ADVVYg==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:

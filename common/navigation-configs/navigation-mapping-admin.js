@@ -2314,6 +2314,14 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				possible_apis : apis.referral_dashboard,
 			},
+			{
+				key           : 'referral-simulation',
+				title         : 'Simulation',
+				href          : '/v2/referral/simulation',
+				as            : '/v2/referral/simulation',
+				type          : 'link',
+				possible_apis : apis.referral_simulation,
+			},
 		],
 	},
 	chakravyuh: {
