@@ -62,6 +62,7 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 
 	if (informationPage) {
 		const PageComponent = MAPPING[informationPage]?.component;
+
 		return (
 			<PageComponent
 				setInformationPage={setInformationPage}
@@ -82,8 +83,7 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 		<div className={styles.container}>
 			<div className={styles.header}>Meanwhile, get started with</div>
 			<div style={{ display: 'flex', flexWrap: 'wrap' }}>
-				{
-				(Object.keys(MAPPING)).map((item) => (
+				{(Object.keys(MAPPING)).map((item) => (
 					<div
 						key={item}
 						role="presentation"
@@ -109,10 +109,8 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 						</div>
 
 					</div>
-				))
-			}
+				))}
 			</div>
-
 		</div>
 	);
 }
