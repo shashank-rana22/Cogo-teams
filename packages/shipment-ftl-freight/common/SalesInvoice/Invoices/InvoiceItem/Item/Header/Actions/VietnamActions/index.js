@@ -1,4 +1,4 @@
-import { Button, Popover, Tooltip, cl } from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
@@ -100,8 +100,6 @@ function Actions({
 							</div>
 			) : null
 	);
-
-	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	return (
 		<div className={styles.container}>

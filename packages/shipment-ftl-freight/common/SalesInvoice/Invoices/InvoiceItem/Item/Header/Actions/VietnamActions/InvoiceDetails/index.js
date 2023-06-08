@@ -6,8 +6,8 @@ import {
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
-import ClickableDiv from '../../../../../../../ClickableDiv';
-import styles from '../styles.module.css';
+import ClickableDiv from '../../../../../../../../ClickableDiv';
+import styles from '../../styles.module.css';
 
 const INITIAL_STATE = 0;
 
