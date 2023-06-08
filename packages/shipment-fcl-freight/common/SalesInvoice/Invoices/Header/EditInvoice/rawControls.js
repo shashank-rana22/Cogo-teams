@@ -2,9 +2,13 @@ import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
+const SERIAL_ID = 130000;
+const CHAR_LIMIT = 3;
+const INITIAL_STATE = 0;
+
 const handleDisableCond = (charge, isAdminSuperAdmin, shipment_data) => {
 	const disable =	charge?.service_type === 'fcl_freight_service' && !isAdminSuperAdmin
-	&& shipment_data?.serial_id > 130000;
+	&& shipment_data?.serial_id > SERIAL_ID;
 
 	return disable;
 };
@@ -67,7 +71,7 @@ const rawControls = (
 			),
 			placeholder : 'Enter alias name/code',
 			rules       : {
-				validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
+				validate: (v) => v?.length >= CHAR_LIMIT || isEmpty(v) || `Characters should be >= ${CHAR_LIMIT}`,
 			},
 			disabled : handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
 			span     : 2,
@@ -100,7 +104,7 @@ const rawControls = (
 			span        : 1.5,
 			rules       : {
 				required : 'Price is Required',
-				validate : (v) => v > 0 || 'Price must be greater than 0',
+				validate : (v) => v > 0 || `Price must be greater than ${INITIAL_STATE}`,
 			},
 			disabled: handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
 		},

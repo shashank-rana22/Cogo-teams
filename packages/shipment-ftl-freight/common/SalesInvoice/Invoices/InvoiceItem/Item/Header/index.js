@@ -15,7 +15,8 @@ import CNNullify from './CNNullify';
 import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
-
+const INITIAL_STATE = 0;
+const CREDIT_SOURCE_CUTOFF = 2;
 const API_SUCCESS_MESSAGE = {
 	reviewed : 'Invoice sent for approval to customer!',
 	approved : 'Invoice approved!,',
@@ -52,7 +53,7 @@ function Header({
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === live_invoice_number,
-	)?.[0];
+	)?.[INITIAL_STATE];
 
 	const showCN = BF_INVOICE_STATUS.includes(
 		bfInvoice?.status,
@@ -75,7 +76,7 @@ function Header({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[0]?.status;
+	)?.[INITIAL_STATE]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
@@ -205,13 +206,14 @@ function Header({
 						{invoice?.payment_mode === 'credit' ? (
 							<div>
 								<div className={styles.info_container}>
-									{startCase(creditSource?.slice(0, -2))}
+									{startCase(creditSource?.slice(INITIAL_STATE, -CREDIT_SOURCE_CUTOFF))}
 								</div>
 
 								<div className={styles.payment_method}>
 									{startCase(
 										`${
-											creditSource?.[(creditSource?.length ?? 0) - 2]
+											creditSource?.[(creditSource?.length ?? INITIAL_STATE)
+												- CREDIT_SOURCE_CUTOFF]
 										} deferred payment`,
 									)}
 								</div>

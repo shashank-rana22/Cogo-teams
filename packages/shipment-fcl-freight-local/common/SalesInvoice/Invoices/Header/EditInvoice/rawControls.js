@@ -2,6 +2,9 @@ import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
+const CHAR_LIMIT = 3;
+const INITIAL_STATE = 0;
+
 const rawControls = (
 	handleChange,
 	charge,
@@ -57,7 +60,7 @@ const rawControls = (
 			),
 			placeholder : 'Enter alias name/code',
 			rules       : {
-				validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
+				validate: (v) => v?.length >= CHAR_LIMIT || isEmpty(v) || `Characters should be >= ${CHAR_LIMIT}`,
 			},
 			span: 2,
 		},
@@ -86,7 +89,7 @@ const rawControls = (
 			span        : 1.5,
 			rules       : {
 				required : 'Price is Required',
-				validate : (v) => v > 0 || 'Price must be greater than 0',
+				validate : (v) => v > INITIAL_STATE || `Price must be greater than ${INITIAL_STATE}`,
 			},
 		},
 		{

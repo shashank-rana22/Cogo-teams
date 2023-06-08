@@ -8,6 +8,11 @@ import useUpdateInvoiceCombination from './useUpdateInvoiceCombination';
 
 const geo = getGeoConstants();
 
+const ALL_SERVICE_LINE_ITEMS = [];
+const INITIAL_SERVICE_INVOICE_ID = {};
+const INITIAL_STATE = 0;
+const TOTAL_LENGTH = 1;
+
 const useEditInvoicePref = ({
 	shipment_data = {},
 	servicesList = [],
@@ -15,21 +20,19 @@ const useEditInvoicePref = ({
 	refetch = () => {},
 }) => {
 	const { importer_exporter_id = '' } = shipment_data;
-	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
 		const { invoice_currency } = p || {};
 		const allServices = (p?.services || []).map((service) => ({
 			...service,
 			invoice_currency,
 		}));
-		allServiceLineitems.push(...allServices);
+		ALL_SERVICE_LINE_ITEMS.push(...allServices);
 	});
 
 	const formattedIps = formatIps(invoicing_parties || []);
-	const initial_service_invoice_id = {};
 	formattedIps?.forEach((ip) => {
 		ip?.services?.forEach((service) => {
-			initial_service_invoice_id[service?.serviceKey] = ip?.id;
+			INITIAL_SERVICE_INVOICE_ID[service?.serviceKey] = ip?.id;
 		});
 	});
 
@@ -82,7 +85,7 @@ const useEditInvoicePref = ({
 			(party) => party.id === inv.id,
 		);
 
-		if (currentInvoiceIndex >= 0) {
+		if (currentInvoiceIndex >= INITIAL_STATE) {
 			const newSelectParties = [];
 			selectedParties.forEach((party) => {
 				const updateParty = { ...party };
@@ -94,12 +97,12 @@ const useEditInvoicePref = ({
 
 			newSelectParties[currentInvoiceIndex].services = newServices?.map(
 				(service) => {
-					const itemsService = allServiceLineitems.find(
+					const itemsService = ALL_SERVICE_LINE_ITEMS.find(
 						(item) => item.serviceKey === service,
 					);
 
 					const currentService = invoicing_parties?.services?.find(
-						(serv) => serv?.id === service?.split(':')?.[0],
+						(serv) => serv?.id === service?.split(':')?.[INITIAL_STATE],
 					);
 
 					let serviceType = currentService?.service_type;
@@ -123,7 +126,7 @@ const useEditInvoicePref = ({
 			newSelectParties[currentInvoiceIndex].invoice_currency = new_ic;
 
 			let finalNewSelectParties = [...newSelectParties];
-			if (finalNewSelectParties?.length > 1) {
+			if (finalNewSelectParties?.length > TOTAL_LENGTH) {
 				finalNewSelectParties = (newSelectParties || []).filter(
 					(party) => !isEmpty(party?.services),
 				);
@@ -134,8 +137,8 @@ const useEditInvoicePref = ({
 	const { handleEditPreferences, loading } = useUpdateInvoiceCombination({
 		servicesList,
 		selectedParties,
-		initial_service_invoice_id,
-		allServiceLineitemsCount: allServiceLineitems.length,
+		INITIAL_SERVICE_INVOICE_ID,
+		allServiceLineitemsCount: ALL_SERVICE_LINE_ITEMS.length,
 		refetch,
 		importer_exporter_id,
 	});

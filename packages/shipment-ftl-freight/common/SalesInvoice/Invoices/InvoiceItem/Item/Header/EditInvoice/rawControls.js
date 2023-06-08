@@ -2,9 +2,12 @@ import FTL_UNITS from '@cogoport/surface-modules/contants/FTL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-const handleDisableCond = (charge, isFclFreight, shipment_data) => {
-	const disable =	!isFclFreight && shipment_data?.serial_id > 130000;
+const SERIAL_ID = 130000;
+const CHAR_LIMIT = 3;
+const INITIAL_STATE = 0;
 
+const handleDisableCond = (charge, isFclFreight, shipment_data) => {
+	const disable =	!isFclFreight && shipment_data?.serial_id > SERIAL_ID;
 	return disable;
 };
 
@@ -66,7 +69,7 @@ const rawControls = (
 			),
 			placeholder : 'Enter alias name/code',
 			rules       : {
-				validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
+				validate: (v) => v?.length >= 3 || isEmpty(v) || `Characters should be >= ${CHAR_LIMIT}`,
 			},
 			disabled : handleDisableCond(charge, isFclFreight, shipment_data),
 			span     : 2,
@@ -98,7 +101,7 @@ const rawControls = (
 			span        : 1.5,
 			rules       : {
 				required : 'Price is Required',
-				validate : (v) => v > 0 || 'Price must be greater than 0',
+				validate : (v) => v > 0 || `Price must be greater than ${INITIAL_STATE}`,
 			},
 			disabled: handleDisableCond(charge, isFclFreight, shipment_data),
 		},

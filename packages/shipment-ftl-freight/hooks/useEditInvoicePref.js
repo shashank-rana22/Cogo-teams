@@ -10,6 +10,10 @@ import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed
 import incoTermMapping from '../configurations/inco-term-mapping.json';
 
 const geo = getGeoConstants();
+const ALL_SERVICE_LINE_ITEMS = [];
+const INITIAL_SERVICE_INVOICE_ID = {};
+const INITIAL_STATE = 0;
+const TOTAL_LENGTH = 1;
 
 const isAllServicesTaken = (
 	servicesList,
@@ -59,7 +63,6 @@ const useEditInvoicePref = ({
 	shipment_data = {},
 	refetch = () => {},
 }) => {
-	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
 		const { invoice_currency, is_igst } = p || {};
 		const allServices = (p?.services || []).map((service) => ({
@@ -67,16 +70,15 @@ const useEditInvoicePref = ({
 			invoice_currency,
 			is_igst,
 		}));
-		allServiceLineitems.push(...allServices);
+		ALL_SERVICE_LINE_ITEMS.push(...allServices);
 	});
 
-	const allServiceLineitemsCount = allServiceLineitems.length;
+	const allServiceLineitemsCount = ALL_SERVICE_LINE_ITEMS.length;
 
 	const formattedIps = formatIps(invoicing_parties || []);
-	const initial_service_invoice_id = {};
 	formattedIps?.forEach((ip) => {
 		ip?.services?.forEach((service) => {
-			initial_service_invoice_id[service?.serviceKey] = ip?.id;
+			INITIAL_SERVICE_INVOICE_ID[service?.serviceKey] = ip?.id;
 		});
 	});
 
@@ -135,7 +137,7 @@ const useEditInvoicePref = ({
 			(party) => party.id === inv.id,
 		)?.id;
 
-		if (currentInvoiceIndex >= 0) {
+		if (currentInvoiceIndex >= INITIAL_STATE) {
 			const newSelectParties = [];
 			selectedParties.forEach((party) => {
 				const updateParty = { ...party };
@@ -148,7 +150,7 @@ const useEditInvoicePref = ({
 			let isBasicFreightInvService = {};
 			newSelectParties[currentInvoiceIndex].services = newServices?.map(
 				(service) => {
-					const itemsService = allServiceLineitems.find(
+					const itemsService = ALL_SERVICE_LINE_ITEMS.find(
 						(item) => item.serviceKey === service,
 					);
 
@@ -161,7 +163,7 @@ const useEditInvoicePref = ({
 					}
 
 					const currentService = invoicing_parties?.services?.find(
-						(serv) => serv?.id === service?.split(':')?.[0],
+						(serv) => serv?.id === service?.split(':')?.[INITIAL_STATE],
 					);
 
 					let serviceType = currentService?.service_type;
@@ -188,7 +190,7 @@ const useEditInvoicePref = ({
 			newSelectParties[currentInvoiceIndex].invoice_currency = new_ic;
 
 			let finalNewSelectParties = [...newSelectParties];
-			if (finalNewSelectParties?.length > 1) {
+			if (finalNewSelectParties?.length > TOTAL_LENGTH) {
 				finalNewSelectParties = (newSelectParties || []).filter(
 					(party) => !isEmpty(party?.services),
 				);
@@ -253,7 +255,7 @@ const useEditInvoicePref = ({
 					const xyz = {
 						...item,
 						invoice_combination_id: updateExportInvoices
-							? initial_service_invoice_id[item?.serviceKey] || undefined
+							? INITIAL_SERVICE_INVOICE_ID[item?.serviceKey] || undefined
 							: undefined,
 						display_name : undefined,
 						trade_type   : undefined,

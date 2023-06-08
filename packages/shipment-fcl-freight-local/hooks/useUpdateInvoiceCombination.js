@@ -8,6 +8,9 @@ import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed
 
 import IsAllServicesTaken from './IsAllServicesTaken';
 
+const FINAL_PARTIES = [];
+const PARTY_SERVICES = [];
+
 const useUpdateInvoiceCombination = ({
 	refetch = () => {},
 	successMessage = 'Invoice Preference edited!',
@@ -40,22 +43,18 @@ const useUpdateInvoiceCombination = ({
 				(party) => !!party.services.length || typeof party.id === 'string',
 			);
 
-			const finalParties = [];
-
 			filteredParties.forEach((party) => {
-				const partyServices = [];
-
 				party?.services?.map((item) => {
 					const { display_name, trade_type, serviceKey, ...rest } = item;
 					const partyService = { ...rest };
 
-					partyServices.push(partyService);
-					return partyServices;
+					PARTY_SERVICES.push(partyService);
+					return PARTY_SERVICES;
 				});
 
 				const partyDetails = {
 					...party,
-					services: partyServices,
+					services: PARTY_SERVICES,
 				};
 
 				if (
@@ -65,14 +64,14 @@ const useUpdateInvoiceCombination = ({
 					if (typeof partyDetails.id === 'number') {
 						delete partyDetails.id;
 					}
-					finalParties.push(partyDetails);
+					FINAL_PARTIES.push(partyDetails);
 				}
 			});
 
 			await trigger({
 				data: {
 					shipment_id          : shipment_data?.id,
-					invoice_combinations : finalParties,
+					invoice_combinations : FINAL_PARTIES,
 					performed_by_org_id  : importer_exporter_id,
 				},
 			});

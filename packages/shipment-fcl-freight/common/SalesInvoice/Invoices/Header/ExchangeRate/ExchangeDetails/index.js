@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
+const STATE = 2;
+
 function ExchangeDetails({
 	children = null,
 	AVAILABLE_CURRENCY_CONVERSION = {},
@@ -20,7 +22,7 @@ function ExchangeDetails({
 					{' '}
 					1 =
 					{' '}
-					{`${Number(AVAILABLE_CURRENCY_CONVERSION[key])?.toFixed(2)}`}
+					{`${Number(AVAILABLE_CURRENCY_CONVERSION[key])?.toFixed(STATE)}`}
 					{' '}
 					{`${invoiceCurrency}`}
 				</div>

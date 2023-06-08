@@ -11,6 +11,10 @@ import useUpdateInvoiceCombination from './useUpdateInvoiceCombination';
 const EXPORT_SERVICES_TYPES = 'fcl_freight_service';
 
 const geo = getGeoConstants();
+const ALL_SERVICE_LINE_ITEMS = [];
+const INITIAL_SERVICE_INVOICE_ID = {};
+const INITIAL_STATE = 0;
+const TOTAL_LENGTH = 1;
 
 const useEditInvoicePref = ({
 	shipment_data = {},
@@ -20,7 +24,6 @@ const useEditInvoicePref = ({
 }) => {
 	const { inco_term = '', importer_exporter_id = '' } = shipment_data;
 	const updateExportInvoices = incoTermMapping[inco_term] === 'export';
-	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
 		const { invoice_currency, is_igst } = p || {};
 		const allServices = (p?.services || []).map((service) => ({
@@ -28,14 +31,13 @@ const useEditInvoicePref = ({
 			invoice_currency,
 			is_igst,
 		}));
-		allServiceLineitems.push(...allServices);
+		ALL_SERVICE_LINE_ITEMS.push(...allServices);
 	});
 
 	const formattedIps = formatIps(invoicing_parties || []);
-	const initial_service_invoice_id = {};
 	formattedIps?.forEach((ip) => {
 		ip?.services?.forEach((service) => {
-			initial_service_invoice_id[service?.serviceKey] = ip?.id;
+			INITIAL_SERVICE_INVOICE_ID[service?.serviceKey] = ip?.id;
 		});
 	});
 
@@ -92,7 +94,7 @@ const useEditInvoicePref = ({
 			(party) => party.id === inv.id,
 		)?.id;
 
-		if (currentInvoiceIndex >= 0) {
+		if (currentInvoiceIndex >= INITIAL_STATE) {
 			const newSelectParties = [];
 			selectedParties.forEach((party) => {
 				const updateParty = { ...party };
@@ -105,7 +107,7 @@ const useEditInvoicePref = ({
 			let isBasicFreightInvService = {};
 			newSelectParties[currentInvoiceIndex].services = newServices?.map(
 				(service) => {
-					const itemsService = allServiceLineitems.find(
+					const itemsService = ALL_SERVICE_LINE_ITEMS.find(
 						(item) => item.serviceKey === service,
 					);
 
@@ -118,7 +120,7 @@ const useEditInvoicePref = ({
 					}
 
 					const currentService = invoicing_parties?.services?.find(
-						(serv) => serv?.id === service?.split(':')?.[0],
+						(serv) => serv?.id === service?.split(':')?.[INITIAL_STATE],
 					);
 
 					let serviceType = currentService?.service_type;
@@ -145,7 +147,7 @@ const useEditInvoicePref = ({
 			newSelectParties[currentInvoiceIndex].invoice_currency = new_ic;
 
 			let finalNewSelectParties = [...newSelectParties];
-			if (finalNewSelectParties?.length > 1) {
+			if (finalNewSelectParties?.length > TOTAL_LENGTH) {
 				finalNewSelectParties = (newSelectParties || []).filter(
 					(party) => !isEmpty(party?.services),
 				);
@@ -159,7 +161,7 @@ const useEditInvoicePref = ({
 				(service) => service?.is_igst,
 			);
 			const uniq_igst_val = new Set(igstArray || []);
-			const allowServiceMerge = uniq_igst_val?.length === 1;
+			const allowServiceMerge = uniq_igst_val?.length === TOTAL_LENGTH;
 
 			let isBasicFreight = false;
 			if (!isEmpty(isBasicFreightInvService)) {
@@ -188,8 +190,8 @@ const useEditInvoicePref = ({
 	const { handleEditPreferences, loading } = useUpdateInvoiceCombination({
 		servicesList,
 		selectedParties,
-		initial_service_invoice_id,
-		allServiceLineitemsCount: allServiceLineitems.length,
+		INITIAL_SERVICE_INVOICE_ID,
+		allServiceLineitemsCount: ALL_SERVICE_LINE_ITEMS.length,
 		refetch,
 		importer_exporter_id,
 		updateExportInvoices,

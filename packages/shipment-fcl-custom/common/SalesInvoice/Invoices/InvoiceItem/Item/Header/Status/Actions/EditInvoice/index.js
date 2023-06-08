@@ -10,6 +10,7 @@ import Info from './Info';
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();
+const SERIAL_ID = 130000;
 
 function EditInvoice({
 	show = 'false',
@@ -43,7 +44,7 @@ function EditInvoice({
 		info: <Info />,
 	});
 
-	const disabledProps = !isAdminSuperAdmin && shipment_data?.serial_id > 130000;
+	const disabledProps = !isAdminSuperAdmin && shipment_data?.serial_id > SERIAL_ID;
 
 	const formValues = watch();
 
