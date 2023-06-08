@@ -9,7 +9,7 @@ const CREDIT_SOURCE_CUTOFF = 2;
 
 function InvoiceInfo({
 	invoice = {},
-    handleClick=()=>{},
+    handleClick = () => {},
     invoiceStatus = '',
     showIrnTriggerForOldShipments = false,
     bfInvoice= {},
