@@ -4,7 +4,7 @@ const DEFAULT_LIMIT_VALUE = 8;
 
 export const setFormValues = (values, setValue) => {
 	const {
-		event_types, overall_limit_type, overall_limit, 
+		event_types, overall_limit_type, overall_limit,
 		event_threshold_limit, referral_bonus,
 		network_bonus, threshold_transacting_user,
 	} = values || {};
@@ -18,11 +18,11 @@ export const setFormValues = (values, setValue) => {
 	} = referral_bonus || {};
 
 	const {
-		maximum_incentive : network_max, 
+		maximum_incentive : network_max,
 		minimum_incentive : network_min,
-		max_incentive_type: network_bonus_max_incentive_type, 
+		max_incentive_type: network_bonus_max_incentive_type,
 		min_incentive_type: network_bonus_min_incentive_type,
-		total_incentive_type: network_bonus_total_incentive_type, 
+		total_incentive_type: network_bonus_total_incentive_type,
 		total_incentive : network_incentive,
 		level_bonus_criterias,
 	} = network_bonus || {};

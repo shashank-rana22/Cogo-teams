@@ -4,11 +4,9 @@ const isLastLevel = (type, start, end) => {
 	if (type === 'fixed') {
 		return Number(start);
 	}
-
 	if (end === 'master_node') {
 		return undefined;
 	}
-
 	return Number(end);
 };
 
@@ -29,12 +27,18 @@ const getFormattedPayload = (val) => {
 
 export const payloadFormat = (event, values) => {
 	const {
-		event_types, overall_limit_type, overall_limit, event_threshold_limit,
-		referral_bonus_total_incentive_type, referral_bonus_total_incentive_value,
-		referral_bonus_max_incentive_value, referral_bonus_min_incentive_type, referral_bonus_min_incentive_value,
-		referral_bonus_max_incentive_type, network_bonus_total_incentive_type, exceed_allowed, remaining_bonus,
-		network_bonus_min_incentive_type, network_bonus_min_incentive_value,
-		network_bonus_max_incentive_type, network_bonus_max_incentive_value, threshold_transacting_user,
+		event_types, overall_limit_type,
+		overall_limit, event_threshold_limit,
+		referral_bonus_total_incentive_type,
+		referral_bonus_total_incentive_value,
+		referral_bonus_max_incentive_value,
+		referral_bonus_min_incentive_type, referral_bonus_min_incentive_value,
+		referral_bonus_max_incentive_type,
+		network_bonus_total_incentive_type, exceed_allowed, remaining_bonus,
+		network_bonus_min_incentive_type,
+		network_bonus_min_incentive_value,
+		network_bonus_max_incentive_type,
+		network_bonus_max_incentive_value, threshold_transacting_user,
 	} = values;
 
 	const payload = {
@@ -56,7 +60,7 @@ export const payloadFormat = (event, values) => {
 		},
 		network_bonus: {
 			total_incentive_type : network_bonus_total_incentive_type,
-			total_incentive      : network_bonus_total_incentive_type === 'none' 
+			total_incentive      : network_bonus_total_incentive_type === 'none'
 				? DEFAULT_VALUE : Number(exceed_allowed),
 			min_incentive_type   : network_bonus_min_incentive_type,
 			minimum_incentive    : network_bonus_min_incentive_type === 'none'
