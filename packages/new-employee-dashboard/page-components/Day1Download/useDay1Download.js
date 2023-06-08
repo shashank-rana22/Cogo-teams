@@ -89,6 +89,8 @@ const useDay1Download = () => {
 		editorValue,
 		setEditorValue,
 		onClickUpdate,
+		listLoading,
+		loading,
 	};
 };
 

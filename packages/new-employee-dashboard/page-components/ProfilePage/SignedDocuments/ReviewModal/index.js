@@ -1,4 +1,4 @@
-import { Modal, Button } from '@cogoport/components';
+import { Modal } from '@cogoport/components';
 import React from 'react';
 
 import PreviewDocumet from '../../../../common/PreviewDocumet';

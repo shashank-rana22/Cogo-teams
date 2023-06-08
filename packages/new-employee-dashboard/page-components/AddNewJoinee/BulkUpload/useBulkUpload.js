@@ -1,7 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 
 const SAMPLE_DOCUMENT_URL = `https://cogoport-production.sgp1.digitaloceanspaces.com

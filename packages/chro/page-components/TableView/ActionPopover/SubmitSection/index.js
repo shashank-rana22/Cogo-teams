@@ -31,7 +31,6 @@ export default function SubmitSection({
 					size="lg"
 					placeholder="Provide Reason"
 				/>
-				{/* {console.log('finalReview', !!finalReview)} */}
 				{!finalReview ? (
 					<p className={styles.error}>
 						Required field
