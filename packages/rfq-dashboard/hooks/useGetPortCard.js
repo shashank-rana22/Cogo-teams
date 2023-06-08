@@ -2,11 +2,10 @@ import { IcCFcl, IcCLcl, IcCAir } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import getInfo from '../utils/getInfo';
+
 import useGetRfqRateCardDetails from './useGetRfqRateCardDetails';
 import useUpdateRfqRateMargin from './useUpdateRfqRateMargin';
-
-const COMMODITY_MAPPING = ['cargo_weight_per_container', 'commodity',
-	'container_size', 'container_type', 'containers_count'];
 
 const ICON_MAPPING = {
 	fcl_freight: {
@@ -37,15 +36,18 @@ const useGetPortCard = ({ props }) => {
 
 	const {
 		detail = {}, freight_price_currency = '', freight_price_discounted = '',
-		total_price_discounted = '', id = '', stats = {},
+		total_price_discounted = '', id = '', stats = {}, rfq_search: { search_params },
 	} = data;
 
 	const {
 		origin_port, destination_port, service_type, origin_airport = {}, destination_airport = {},
 	} = detail;
 
-	const commodity_array = COMMODITY_MAPPING.map((commodity) => ({ [commodity]: detail[commodity] }));
+	const services = search_params[`${service_type}_services_attributes`];
 
+	const INITIAL_SERVICE = 0;
+
+	const commodity_array = getInfo(services[INITIAL_SERVICE] || {}).map((serviceData) => serviceData?.valueText);
 	useEffect(() => {
 		if (!isEmpty(priceBreakDown)) {
 			getRfqRateCardDetails({ rfq_rate_card_id: priceBreakDown?.rfq_rate_card_id });

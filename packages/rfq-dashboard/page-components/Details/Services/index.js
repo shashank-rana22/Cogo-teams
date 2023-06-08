@@ -10,7 +10,7 @@ import ToApproveModal from './ToApproveModal';
 
 const TITLE_MAPPING = {
 	auto_approved          : 'Remaining Port Pairs',
-	requested_for_approval : 'Request For Approvalss',
+	requested_for_approval : 'Request For Approvals',
 };
 
 function Services({ loading, rate_card_list_object = {}, refetchRateCards, getRfqsForApproval, rfq_state = '' }) {

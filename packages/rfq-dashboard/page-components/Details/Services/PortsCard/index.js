@@ -31,7 +31,7 @@ function PortsCard(props) {
 							<>
 								<div className={styles.service}>
 									{Component && <Component className={styles.icmfcl_icon} />}
-									<span className={styles.service_type}>{iconText}</span>
+									<span className={`${styles[iconText]}`}>{iconText}</span>
 								</div>
 								<div className={styles.ports_tags_container}>
 									<div className={styles.location_box}>
