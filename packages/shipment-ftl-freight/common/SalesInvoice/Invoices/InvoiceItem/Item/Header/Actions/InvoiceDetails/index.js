@@ -125,7 +125,7 @@ function InvoiceDetails({
 						{['reviewed', 'approved'].includes(invoice?.status) ? (
 							<ClickableDiv
 								className={styles.text}
-								onClick={() => { setShow(false); setUpdateCustomerInvoice(true); }}
+								onClick={() => handleClick(setUpdateCustomerInvoice)}
 							>
 								Update Customer Invoice
 							</ClickableDiv>
@@ -138,7 +138,7 @@ function InvoiceDetails({
 					<div className={styles.line} />
 					<ClickableDiv
 						className={styles.text}
-						onClick={() => { setShow(false); setFillCustomerData(true); }}
+						onClick={() => handleClick(setFillCustomerData)}
 					>
 						Fill Shipment Data For Customer Portal
 					</ClickableDiv>

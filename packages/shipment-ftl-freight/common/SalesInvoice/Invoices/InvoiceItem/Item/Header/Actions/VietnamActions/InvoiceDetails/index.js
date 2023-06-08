@@ -1,5 +1,4 @@
 import { Popover, Tooltip, cl } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMOverflowDot,
 	IcMInfo,
@@ -14,22 +13,18 @@ const INITIAL_STATE = 0;
 
 function InvoiceDetails({
 	invoice = {},
-	shipment_data = {},
-	invoiceData = {},
-	isIRNGenerated = false,
-    setSendEmail=() => {},
-    setShow=() => {},
-    show=() => {},
+	disableAction = false,
+	setSendEmail = () => {},
+	setShow = () => {},
+	show = () => {},
+    setIsChangeCurrency=()=>{},
+    setShowAddRemarks=()=>{},
+    setShowChangePaymentMode=()=>{},
 }) {
-	const showForOldShipments =	shipment_data.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
-	&& invoice.status === 'pending';
-
-	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
-	|| isEmpty(invoiceData.invoice_trigger_date);
-
-	let disableAction = showForOldShipments
-		? isIRNGenerated
-		: disableActionCondition;
+    const handleClick = (setState = () => {}) => {
+		setShow(false);
+		setState(true);
+	};
 
 	const remarkRender = (
 		<div className={styles.remark_container}>
@@ -47,7 +42,7 @@ function InvoiceDetails({
 					<div>
 						<ClickableDiv
 							className={styles.text}
-							onClick={handleClickCurrency}
+							onClick={() => handleClick(setIsChangeCurrency)}
 						>
 							Change Currency
 						</ClickableDiv>
@@ -55,7 +50,7 @@ function InvoiceDetails({
 					</div>
 					<ClickableDiv
 						className={styles.text}
-						onClick={handleClickRemarks}
+						onClick={() => handleClick(setShowAddRemarks)}
 					>
 						Add Remarks
 					</ClickableDiv>
@@ -63,7 +58,7 @@ function InvoiceDetails({
 						<div className={styles.line} />
 						<ClickableDiv
 							className={styles.text}
-							onClick={handleChangePayment}
+							onClick={() => handleClick(setShowChangePaymentMode)}
 						>
 							Change Payment Mode
 						</ClickableDiv>
@@ -85,13 +80,10 @@ function InvoiceDetails({
 	);
 
 	return (
-		<div className={styles.container}>
-			<div className={styles.main_container}>
-				jj
 				<div className={styles.actions_wrap}>
 					<div className={styles.email_wrapper}>
 						<IcMEmail
-							onClick={() => setSendEmail(true)}
+							onClick={() => handleClick(setSendEmail)}
 						/>
 
 						<Tooltip
@@ -163,8 +155,6 @@ function InvoiceDetails({
 						</Tooltip>
 					) : null}
 				</div>
-			</div>
-		</div>
 	);
 }
 

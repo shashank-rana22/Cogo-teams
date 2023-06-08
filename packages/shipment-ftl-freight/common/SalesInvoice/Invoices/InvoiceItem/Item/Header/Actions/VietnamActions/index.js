@@ -1,18 +1,13 @@
 import { Button, Popover, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import {
-	IcMOverflowDot,
-	IcMInfo,
-	IcCError,
-	IcMEmail,
-} from '@cogoport/icons-react';
+import {IcCError} from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../hooks/useUpdateInvoiceStatus';
-import ClickableDiv from '../../../../../../../ClickableDiv';
 import styles from '../styles.module.css';
+
 import InvoiceDetails from './InvoiceDetails';
 
 const AddRemarks = dynamic(() => import('../../AddRemarks'), { ssr: false });
@@ -76,28 +71,6 @@ function Actions({
 	const { updateInvoiceStatus = () => {}, loading } = useUpdateInvoiceStatus({
 		refetch: refetchAfterCall,
 	});
-
-	const handleClickCurrency = () => {
-		setIsChangeCurrency(true);
-		setShow(false);
-	};
-
-	const handleClickRemarks = () => {
-		setShow(false);
-		setShowAddRemarks(true);
-	};
-
-	const handleChangePayment = () => {
-		setShow(false);
-		setShowChangePaymentMode(true);
-	};
-
-	const remarkRender = (
-		<div className={styles.remark_container}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
 
 	const handleRefetch = () => {
 		refetch();
@@ -164,16 +137,18 @@ function Actions({
 						</Tooltip>
 					) : null}
 				</div>
-				<InvoiceDetails 
-				invoice={invoice}
-				shipment_data={shipment_data}
-				invoiceData={invoiceData}
-				isIRNGenerated={isIRNGenerated}
-				setSendEmail={setSendEmail}
-				setShow={setShow}
-				show={show}
+				<InvoiceDetails
+					invoice={invoice}
+					shipment_data={shipment_data}
+					disableAction={disableAction}
+					setSendEmail={setSendEmail}
+					setShow={setShow}
+					show={show}
+					setIsChangeCurrency={setIsChangeCurrency}
+    setShowAddRemarks={setShowAddRemarks}
+    setShowChangePaymentMode={setShowChangePaymentMode}
 				/>
-				</div>
+			</div>
 			{showReview ? (
 				<ReviewServices
 					showReview={showReview}
