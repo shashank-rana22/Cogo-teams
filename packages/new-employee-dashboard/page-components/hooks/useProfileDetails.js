@@ -13,7 +13,7 @@ import {
 const useProfileDetails = () => {
 	const { query } = useSelector((state) => state.general);
 	const { profile_id } = query || {};
-
+	const [error, setError] = useState(false);
 	const [ctcStructure, setCtcStructure] = useState({
 		basic                : { heading: 'Basic', yearlyValue: 0, monthlyValue: 0 },
 		hra                  : { heading: 'HRA', yearlyValue: 0, monthlyValue: 0 },
@@ -195,6 +195,8 @@ const useProfileDetails = () => {
 		setInitialQuestion,
 		formProps,
 		getEmployeeDetails,
+		error,
+		setError,
 	};
 };
 
