@@ -1,6 +1,7 @@
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
+import LoadingState from '../../../../commons/LoadingState';
 import useGetUserCourse from '../../hooks/useGetUserCourse';
 import Header from '../Header';
 
@@ -25,7 +26,7 @@ function CourseIntroduction() {
 	const { data, loading } = useGetUserCourse({ course_id, user_id });
 
 	if (loading) {
-		return null;
+		return <LoadingState rowsCount={6} />;
 	}
 
 	return (

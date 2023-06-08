@@ -47,7 +47,7 @@ function SubModuleContent({
 					className={`${styles.chapter_container} 
 								${currChapter.id === chapter.id && styles.active}`}
 					onClick={() => {
-						setStates({feedback: false, test:false, Chapter: currChapter})
+						setStates({ feedback: false, test: false, Chapter: currChapter });
 						setIndexes({
 							moduleIndex,
 							subModuleIndex,

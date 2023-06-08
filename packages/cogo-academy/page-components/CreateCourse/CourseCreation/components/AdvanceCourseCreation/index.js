@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function AdvanceCourseCreation({ id, mode }) {
 	const [activeTab, setActiveTab] = useState('overview');
 
-	const { data, loading, getCogoAcademyCourse } = useGetCogoAcademyCourse(id);
+	const { data, loading, getCogoAcademyCourse } = useGetCogoAcademyCourse({ id });
 
 	const { state } = data || {};
 

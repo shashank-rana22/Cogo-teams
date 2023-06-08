@@ -29,8 +29,8 @@ function CompletionAndFeedback({ course_id, feedbackData = {}, name }) {
 		<div className={styles.container}>
 			<div className={styles.congrats}>
 				<Image
-					width={20}
-					height={20}
+					width={732}
+					height={150}
 					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/completed_course_confetti.svg"
 					alt="course_completion.png"
 				/>
