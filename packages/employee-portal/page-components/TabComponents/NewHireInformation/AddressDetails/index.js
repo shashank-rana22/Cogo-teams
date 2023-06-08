@@ -1,14 +1,16 @@
 import { Button, Checkbox } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import { useEffect, useState } from 'react';
+import { useEffect, useState, useMemo } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
-import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails';
 
 import controls from './controls';
 import permanent_controls from './controls_permanent';
 import styles from './styles.module.css';
+
+const CURRENT_ADDRESS_MAPPING = [
+	'current_city', 'current_country', 'current_pincode', 'current_state', 'current_address'];
 
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
@@ -20,15 +22,21 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 
 	const { handleSubmit, control, formState: { errors }, setValue, getValues } = useForm();
 
-	const { permanent_address, present_address } = content?.detail || {};
+	const { permanent_address, present_address, id } = content?.detail || {};
+
+	const { city, country, pincode, state, address:presentAddress } = present_address || {};
+
+	const {
+		city:permanentCity,
+		country:permanentCountry,
+		pincode:permanentPincode,
+		state:permanentState,
+		address:permanentAddress,
+	} = permanent_address || {};
 
 	const controlsvalue = controls({ content });
 
 	const permanentcontrols = permanent_controls({ content });
-
-	const { data: info } = useGetEmployeeDetails({});
-
-	const id = info?.detail?.id;
 
 	const { updateEmployeeDetails, loading } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
@@ -36,40 +44,59 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 		updateEmployeeDetails({ data: values, formType: 'address_details' });
 	};
 
+	const ADDRESS_MAPPING = useMemo(() => ({
+		current_city      : city,
+		current_country   : country,
+		current_pincode   : pincode,
+		current_state     : state,
+		current_address   : presentAddress,
+		permanent_city    : permanentCity,
+		permanent_country : permanentCountry,
+		permanent_pincode : permanentPincode,
+		permanent_state   : permanentState,
+		permanent_address : permanentAddress,
+	}), [city,
+		country,
+		permanentAddress,
+		permanentCity, permanentCountry, permanentPincode, permanentState, pincode, presentAddress, state]);
+
 	useEffect(() => {
-		setValue('current_city', present_address?.city);
-		setValue('current_country', present_address?.country);
-		setValue('current_pincode', present_address?.pincode);
-		setValue('current_state', present_address?.state);
-		setValue('current_address', present_address?.address);
-		setValue('permanent_city', permanent_address?.city);
-		setValue('permanent_country', permanent_address?.country);
-		setValue('permanent_pincode', permanent_address?.pincode);
-		setValue('permanent_state', permanent_address?.state);
-		setValue('permanent_address', permanent_address?.address);
-	}, [present_address, permanent_address, setValue]);
+		Object.keys(ADDRESS_MAPPING).map((element) => (
+			setValue(element, ADDRESS_MAPPING[element])
+		));
+	}, [ADDRESS_MAPPING, setValue]);
 
 	const handleAddressChange = () => {
 		setAddress((prev) => !prev);
 		const getControlvalues = getValues();
 
+		const {
+			permanent_city,
+			permanent_country, permanent_pincode, permanent_state, permanent_address:getValuePermanentAdd,
+		}	= getControlvalues || {};
+
+		const GETVALUES_MAPPING = {
+			current_city      : permanent_city,
+			current_country   : permanent_country,
+			current_pincode   : permanent_pincode,
+			current_state     : permanent_state,
+			current_address   : getValuePermanentAdd,
+			permanent_city,
+			permanent_country,
+			permanent_pincode,
+			permanent_state,
+			permanent_address : getValuePermanentAdd,
+
+		};
+
 		if (address === false) {
-			setValue('current_city', getControlvalues?.permanent_city);
-			setValue('current_country', getControlvalues?.permanent_country);
-			setValue('current_pincode', getControlvalues?.permanent_pincode);
-			setValue('current_state', getControlvalues?.permanent_state);
-			setValue('current_address', getControlvalues?.permanent_address);
-			setValue('permanent_city', getControlvalues?.permanent_city);
-			setValue('permanent_country', getControlvalues?.permanent_country);
-			setValue('permanent_pincode', getControlvalues?.permanent_pincode);
-			setValue('permanent_state', getControlvalues?.permanent_state);
-			setValue('permanent_address', getControlvalues?.permanent_address);
+			Object.keys(GETVALUES_MAPPING).map((element) => (
+				setValue(element, GETVALUES_MAPPING[element])
+			));
 		} else {
-			setValue('current_city', present_address?.city);
-			setValue('current_country', present_address?.country);
-			setValue('current_pincode', present_address?.pincode);
-			setValue('current_state', present_address?.state);
-			setValue('current_address', present_address?.address);
+			CURRENT_ADDRESS_MAPPING.map((element) => (
+				setValue(element, ADDRESS_MAPPING[element])
+			));
 		}
 	};
 
@@ -80,6 +107,7 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 					<div className={styles.address}>
 						Permanent Address
 					</div>
+
 					<div className={styles.container}>
 						{permanentcontrols?.map((controlItem) => {
 							const { type, label, name: controlName } = controlItem || {};
