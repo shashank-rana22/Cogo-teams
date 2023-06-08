@@ -24,7 +24,12 @@ harbourRequest.interceptors.request.use((oldConfig) => {
 
 	const token = getCookie(process.env.NEXT_PUBLIC_AUTH_TOKEN_NAME);
 
-	const authorizationparameters = getAuthorizationParams(store, newConfig.url);
+	let authorizationparameters = null;
+	if (oldConfig?.customAuthParams) {
+		authorizationparameters = oldConfig?.customAuthParams;
+	} else {
+		authorizationparameters = getAuthorizationParams(store, newConfig.url);
+	}
 
 	const apiPath =	newConfig.url.split('/')[1] || newConfig.url.split('/')[0];
 
