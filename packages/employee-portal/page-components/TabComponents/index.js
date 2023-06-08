@@ -1,5 +1,6 @@
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
+// import { useEffect } from 'react';
 
 import AdditionalInformation from './AdditionalInformation';
 import CompanyPolicies from './CompanyPolicies';
@@ -21,6 +22,12 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 
 	const signDocEnableContd = offer_letter_signed?.get_offer_letter_signed
 	&& Object.keys(additional_info_added).every((key) => (additional_info_added[key]));
+
+	// useEffect(() => {
+	// 	if (!informationPage) {
+	// 		getEmployeeDetails();
+	// 	}
+	// }, []);
 
 	const MAPPING = {
 		new_hire_information: {

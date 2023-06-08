@@ -33,7 +33,7 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 
 	useEffect(() => {
 		MAPPING.map((element) => (
-			setValue(element, bank_details?.[0][element])
+			setValue(element, bank_details?.[0]?.[element])
 		));
 	}, [bank_details, setValue]);
 
