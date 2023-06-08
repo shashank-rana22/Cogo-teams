@@ -64,6 +64,8 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 				);
 			} else if (item?.name === 'designation') {
 				setValue(item.name, startCase(content?.detail?.[item?.name]));
+			} else if (item?.name === 'hiring_manager') {
+				setValue(item.name, startCase(content?.detail?.[item?.name]?.userName));
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}
