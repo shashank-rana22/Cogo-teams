@@ -17,7 +17,7 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		mobile_number,
 		permanent_address, present_address, cogoport_email, date_of_birth,
 		date_of_joining, designation, emergency_contact_details,
-		employee_code, hiring_manager, hiring_manager_email,
+		employee_code, hiring_manager, hr, hrbp,
 	} = detail || {};
 
 	const { address = '', city = '', country = '', pincode = '', state = '' } = permanent_address || {};
@@ -52,9 +52,13 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		date_of_joining           : formatdate({ date: date_of_joining }),
 		designation               : startCase(designation),
 		employee_code,
-		hiring_manager            : startCase(hiring_manager),
-		hiring_manager_email,
+		hiring_manager            : startCase(hiring_manager?.userName),
+		hiring_manager_email      : hiring_manager?.userEmail,
 		emergency_contact_details : emergencyContactDetails,
+		HR_name                   : startCase(hr?.userName),
+		HR_email                  : hr?.userEmail,
+		HRBP_name                 : startCase(hrbp?.userName),
+		HRBP_email                : hrbp?.userEmail,
 	};
 
 	if (getEmployeeDetailsLoading) {
