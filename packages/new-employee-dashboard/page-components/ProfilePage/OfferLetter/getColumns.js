@@ -6,6 +6,12 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 import ViewCtcBreakup from './ViewCtcBreakup';
 
+const COLOR_MAPPING = {
+	accepted : '#82d682',
+	active   : '#F0EE8E',
+	approved : '#FAD1A5',
+};
+
 const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 	const onClickView = (item) => {
 		if (item?.status === 'accepted') {
@@ -81,7 +87,7 @@ const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 						: (
 							<div
 								className={styles.status}
-								style={{ backgroundColor: item?.status === 'active' ? '#F0EE8E' : '#82d682' }}
+								style={{ backgroundColor: COLOR_MAPPING[item?.status] }}
 							>
 								{startCase(item?.status)}
 							</div>
