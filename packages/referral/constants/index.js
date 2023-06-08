@@ -106,6 +106,12 @@ export const BUSINESS_REWARDS_OPTIONS = [
 	},
 ];
 
+export const USER_AVATAR = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp';
+
+export const MAX_LEVEL = 30;
+export const REVENUE_START_PRICE = 5000;
+export const REVENUE_END_PRICE = 200000;
+
 export const SUB_TITLE_OPTIONS = [
 	{
 		title : 'Pending',

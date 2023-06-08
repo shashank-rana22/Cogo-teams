@@ -1,0 +1,46 @@
+.container {
+	display: flex;
+	flex-direction: column;
+	width: 100%;
+	padding: 10px;
+	margin-bottom: 20px;
+	border: 1px solid #ded7fc;
+	border-radius: 4px;
+}
+
+.select_wrap {
+	width: 30%;
+	margin-left: 10px;
+}
+
+.label {
+	margin-bottom: 10px;
+	margin-left: 5px;
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 16px;
+	color: #333;
+}
+
+.value {
+	margin-left: 5px;
+	font-size: 12px;
+	font-weight: 400;
+}
+
+.mode_wrapper {
+	margin-bottom: 10px;
+	margin-left: 12px;
+}
+
+.button_wrap {
+	display: flex;
+	justify-content: flex-end;
+	margin-right: 5px;
+}
+
+.flex_row {
+	display: flex;
+	margin-top: 12px;
+	margin-right: 20px;
+}

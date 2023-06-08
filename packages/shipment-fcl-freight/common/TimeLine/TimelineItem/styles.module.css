@@ -69,7 +69,7 @@
 	top: 100%;
 	left: 0;
 	max-width: 100%;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	transform: translateX(-30%);
 }
 
@@ -87,7 +87,7 @@
 .tooltip_content {
 	padding: 8px;
 	margin-bottom: -10px;
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 }
 
 .label {
