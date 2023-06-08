@@ -31,13 +31,9 @@ function HeaderComponent({ name }) {
 			</div>
 
 			<div className={styles.main_text}>
-				<div>
-					Amitabh Shankar
-				</div>
+				<div>Amitabh Shankar</div>
 
-				<div>
-					CEO - Logistics Cogoport
-				</div>
+				<div>CEO - Logistics Cogoport</div>
 			</div>
 		</div>
 	);
