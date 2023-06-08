@@ -2,10 +2,9 @@ import { IcMArrowNext } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import AdditionalInformation from './AdditionalInformation';
-// import CogoAcademy from './CogoAcademy';
 import CompanyPolicies from './CompanyPolicies';
 import Day1 from './Day1';
-import Maps from './Maps';
+// import Maps from './Maps';
 import NewHireInformation from './NewHireInformation';
 import OfferLetter from './OfferLetter';
 import SignYourDocuments from './SignYourDocuments';
@@ -36,14 +35,14 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 		},
 
 		additional_information: {
-			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
+			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
 			component : AdditionalInformation,
 			enable    : offer_letter_signed?.get_offer_letter_signed,
 
 		},
 
 		sign_your_docs: {
-			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
+			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 			component : SignYourDocuments,
 			enable    : signDocEnableContd,
 		},
@@ -60,11 +59,11 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 			enable    : signDocEnableContd && company_policies_read?.company_policies_read,
 		},
 
-		maps: {
-			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
-			component : Maps,
-			enable    : signDocEnableContd && company_policies_read?.company_policies_read,
-		},
+		// maps: {
+		// 	icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
+		// 	component : Maps,
+		// 	enable    : signDocEnableContd && company_policies_read?.company_policies_read,
+		// },
 
 	};
 

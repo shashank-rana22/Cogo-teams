@@ -88,7 +88,6 @@ function useUpdateEmployeeDetails({
 			getEmployeeDetails();
 			Toast.success('Details have been saved successfully!');
 		} catch (err) {
-			console.log('err', err);
 			Toast.error(
 				getApiErrorString(err?.response?.data) || 'Something went wrong',
 			);

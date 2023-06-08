@@ -1,9 +1,6 @@
-import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
-
-import PreviewDocumet from '../../../commons/PreviewDocumet';
 
 import styles from './styles.module.css';
 
@@ -35,11 +32,6 @@ function Day1({ setInformationPage }) {
 		fetch();
 	}, [fetch]);
 
-
-	
-
-	const { list = [] } = data || {};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -54,8 +46,6 @@ function Day1({ setInformationPage }) {
 			</div>
 			<div className={styles.rich_text}>
 				<div dangerouslySetInnerHTML={{ __html: data?.list?.[0]?.html_template || 'Day 1!' }} />
-
-
 
 			</div>
 		</div>

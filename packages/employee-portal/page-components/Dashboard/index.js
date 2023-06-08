@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function Dashboard() {
 	const [informationPage, setInformationPage] = useState('');
 
-	const { data, getEmployeeDetails } = useGetEmployeeDetails({
+	const { data, getEmployeeDetails, loading } = useGetEmployeeDetails({
 		company_policy_data_required: true,
 
 	});
@@ -23,7 +23,7 @@ function Dashboard() {
 			{!informationPage && (
 				<div>
 					<HeaderComponent name={name} />
-					<StepperComponent informationPage={informationPage} data={data} />
+					<StepperComponent informationPage={informationPage} data={data} loading={loading} />
 				</div>
 			)}
 
