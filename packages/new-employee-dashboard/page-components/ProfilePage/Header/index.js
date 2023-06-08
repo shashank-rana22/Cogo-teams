@@ -2,7 +2,7 @@ import { Avatar, Button, Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import useUpdateEmployeeDeatils from '../../hooks/useUpdateEmployeeDetails';
 

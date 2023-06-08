@@ -29,7 +29,6 @@ function ModalComponent({
 						type="number"
 						className={styles.field}
 					/>
-					{console.log('error', error)}
 					{error ? <div className={styles.error}>Required field</div> : null}
 				</div>
 
