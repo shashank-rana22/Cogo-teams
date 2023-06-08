@@ -8,10 +8,11 @@ function ReferralPercentage({ data = [] }) {
 		(total, item) => total + (item?.value || DEFAULT_COUNT),
 		DEFAULT_COUNT
 	);
+	
 	const eachPercentage = (data || []).map((item) => ({
 		...item,
 		percentage: Math.round((item.value / totalCount) * TOTAL_PERCENTAGE),
-	}));
+	  }));
 
 	return (
 		<div className={styles.container}>
@@ -32,4 +33,3 @@ function ReferralPercentage({ data = [] }) {
 }
 
 export default ReferralPercentage;
-
