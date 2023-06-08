@@ -18,9 +18,9 @@ const pieChartMapping = (alloted = {}) => {
 
 	const detailsPieChart = [
 		{
-			title:  'Allotted',
-			data:  allottedData,
-			total_count:  handleValues(totalAllotedCogoppoints),
+			title : 'Allotted',
+			data : allottedData,
+			total_count : handleValues(totalAllotedCogoppoints),
 		},
 	];
 

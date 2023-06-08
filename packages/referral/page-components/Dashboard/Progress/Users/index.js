@@ -1,6 +1,9 @@
 import SemiPieChart from '../../../../common/SemiPieCharts';
+
 import getFormatedChartData from '../../../../utils/getFormatedChartData';
+
 import StatusDetails from './StatusDetails';
+
 import styles from './styles.module.css';
 
 function Users({ userData = {} }) {
