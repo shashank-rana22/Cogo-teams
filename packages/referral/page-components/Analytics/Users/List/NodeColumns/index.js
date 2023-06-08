@@ -1,5 +1,7 @@
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+
 function NodeColumns({ index = 0, item = {}, type = '' }) {
 	const { cogopoints = {} } = item || {};
 	const {
@@ -25,7 +27,7 @@ function NodeColumns({ index = 0, item = {}, type = '' }) {
 	return (
 		subTitleOptions.map((node) => (
 			<div className={styles.node} key={node.name}>
-				{index === 0 ? (
+				{index === DEFAULT_VALUE ? (
 					<div className={styles.node_title}>
 						{node.title}
 					</div>

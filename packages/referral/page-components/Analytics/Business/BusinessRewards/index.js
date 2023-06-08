@@ -8,6 +8,8 @@ import useGetReferralBusinessAnalytics from '../../../../hooks/useGetReferralBus
 import BusinessRewardStats from './BusinessRewardStats';
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+
 function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () => {}, selectedDate = {} }) {
 	const { data: businessData = {}, loading = false } = useGetReferralBusinessAnalytics({
 		selectedDate,
@@ -32,7 +34,7 @@ function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () =
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
 		}),
-		y: data[item] || 0,
+		y: data[item] || DEFAULT_VALUE,
 	}));
 
 	const graphData = [

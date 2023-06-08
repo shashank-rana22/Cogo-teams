@@ -9,6 +9,10 @@ import useGetReferralTransactions from '../../../hooks/useGetReferralTransaction
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+const DEFAULT_ARRAY_VALUE = 4;
+const DEFAULT_PAGE_LIMIT = 10;
+
 const func = () => {};
 function ActivityModal({
 	activityModal = false, setActivityModal = func,
@@ -117,7 +121,7 @@ function ActivityModal({
 		if (transactionsLoading) {
 			return (
 				<>
-					{[...Array(4)].map((itm) => (
+					{[...Array(DEFAULT_ARRAY_VALUE)].map((itm) => (
 						<LoadingState key={itm} />
 					))}
 				</>
@@ -149,9 +153,9 @@ function ActivityModal({
 						type="number"
 						disabled={transactionsLoading}
 						className={styles.pagination_container}
-						currentPage={page || 0}
-						totalItems={total_count || 0}
-						pageSize={page_limit || 10}
+						currentPage={page || DEFAULT_VALUE}
+						totalItems={total_count || DEFAULT_VALUE}
+						pageSize={page_limit || DEFAULT_PAGE_LIMIT}
 						onPageChange={setPagination}
 					/>
 				</Modal.Footer>

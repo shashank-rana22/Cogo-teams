@@ -2,6 +2,10 @@ import { FIRST_LEVEL_DATA, SECOUND_LEVEL_DATA, THIRD_LEVEL_DATA } from '../const
 
 import { handleValues } from './handleValue';
 
+const DEFAULT_INDEX_VALUE = 1;
+const DEFAULT_LENGTH_VALUE = 10;
+const DEFAULT_NETWORK_LENGTH_VALUE = 20;
+
 export const formatData = (data) => {
 	const keys = Object.keys(data || {});
 	let details = [];
@@ -9,7 +13,7 @@ export const formatData = (data) => {
 		details = [
 			...details,
 			{
-				x : `L${index + 1}`,
+				x : `L${index + DEFAULT_INDEX_VALUE}`,
 				y : handleValues(data?.[key]),
 			},
 		];
@@ -19,9 +23,9 @@ export const formatData = (data) => {
 
 export const getUserLevel = (networkLength) => {
 	let userLevel = [];
-	if (networkLength <= 10) {
+	if (networkLength <= DEFAULT_LENGTH_VALUE) {
 		userLevel = FIRST_LEVEL_DATA;
-	} else if (networkLength <= 20) {
+	} else if (networkLength <= DEFAULT_NETWORK_LENGTH_VALUE) {
 		userLevel = SECOUND_LEVEL_DATA;
 	} else {
 		userLevel = THIRD_LEVEL_DATA;

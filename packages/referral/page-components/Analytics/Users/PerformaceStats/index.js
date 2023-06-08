@@ -12,6 +12,8 @@ import NetworkStats from '../NetworkStats';
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+
 function PerformanceStats({ selectedDate = {} }) {
 	const [filterType, setFilterType] = useState('invited');
 
@@ -27,7 +29,7 @@ function PerformanceStats({ selectedDate = {} }) {
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 			formatType : 'date',
 		}),
-		y: statsData[item] || 0,
+		y: statsData[item] || DEFAULT_VALUE,
 	}));
 
 	const graphData = [

@@ -12,6 +12,10 @@ import useGetReferrerNetworkNode from '../../../../hooks/useGetReferrerNetworkNo
 import NetWorkCommission from './NetWorkCommission';
 import styles from './styles.module.css';
 
+const DEFAULT_SLICE_VALUE = -6;
+const DEFAULT_LENGTH_VALUE = 1;
+const DEFAULT_VALUE = 0;
+
 function UserNetworkModal({
 	setUserModal = () => {},
 	userModal,
@@ -51,9 +55,9 @@ function UserNetworkModal({
 		networkCogopointEstimated,
 	});
 
-	const lastUserId = id.slice(-6).toUpperCase();
+	const lastUserId = id.slice(DEFAULT_SLICE_VALUE).toUpperCase();
 
-	const orgCount = organization.length - 1;
+	const orgCount = organization.length - DEFAULT_LENGTH_VALUE;
 
 	return (
 
@@ -94,10 +98,10 @@ function UserNetworkModal({
 						placement="bottom"
 					>
 						<div className={styles.user_details}>
-							{startCase(organization?.[0])}
+							{startCase(organization?.[DEFAULT_VALUE])}
 
 							<span className={styles.more}>
-								{organization.length > 1 && `+${orgCount} More`}
+								{organization.length > DEFAULT_LENGTH_VALUE && `+${orgCount} More`}
 							</span>
 						</div>
 					</Tooltip>

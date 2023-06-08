@@ -7,6 +7,11 @@ import { useState } from 'react';
 import DirectNode from './DirectNode';
 import styles from './styles.module.css';
 
+const DEFAULT_COUNT = 0;
+const DEFAULT_LENGTH = 1;
+const DEFAULT_SLICE_VALUE = -6;
+const DEFAULT_SUBSTRING_VALUE = 2;
+
 function RenderForeignObjectNode({
 	nodeDatum,
 	toggleNode,
@@ -32,23 +37,23 @@ function RenderForeignObjectNode({
 
 	const topPerformer = topPerformerId === topUser;
 
-	const orgCount = organization.length - 1;
+	const orgCount = organization.length - DEFAULT_LENGTH;
 
 	const checkActiveNode = nodeData?.referee_id === nodeDatum?.referee_id;
 
-	const { total = 0 } = cogopoints || {};
+	const { total = DEFAULT_COUNT } = cogopoints || {};
 
 	const {
-		total_child_count: totalChildCount = 0,
+		total_child_count: totalChildCount = DEFAULT_COUNT,
 		referee_id = '',
 		status = '',
 	} = referralData || {};
 
-	const firstTwoLetters = userData?.name.substring(0, 2);
+	const firstTwoLetters = userData?.name.substring(DEFAULT_COUNT, DEFAULT_SUBSTRING_VALUE);
 
 	const avatarContent = firstTwoLetters?.toUpperCase();
 
-	const lastUserId = referee_id?.slice(-6).toUpperCase();
+	const lastUserId = referee_id?.slice(DEFAULT_SLICE_VALUE).toUpperCase();
 
 	const handleFunc = () => {
 		handleConnections(nodeDatum, toggleNode);
@@ -103,7 +108,7 @@ function RenderForeignObjectNode({
 							className={styles.cogopoints_img}
 						/>
 						{' '}
-						<div className={styles.cogopoints_count}>{userCogopoints || 0}</div>
+						<div className={styles.cogopoints_count}>{userCogopoints || DEFAULT_COUNT}</div>
 					</div>
 				</div>
 			</foreignObject>

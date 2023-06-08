@@ -9,8 +9,10 @@ import useGetReferralBusinessAnalytics from '../../../../hooks/useGetReferralBus
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+
 const renderSliceTooltip = ({ slice }) => {
-	const { data } = slice?.points?.[0] || {};
+	const { data } = slice?.points?.[DEFAULT_VALUE] || {};
 	return (
 		<div className={styles.tooltip_div}>
 			<div className={styles.title}>
@@ -50,7 +52,7 @@ function BusinessStats({ businessFilterType = {}, setBusinessFilterType = () => 
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
 			formatType : 'date',
 		}),
-		y: data[item] || 0,
+		y: data[item] || DEFAULT_VALUE,
 	}));
 
 	const graphData = [
