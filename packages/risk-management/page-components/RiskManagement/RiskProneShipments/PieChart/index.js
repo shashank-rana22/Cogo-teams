@@ -4,32 +4,21 @@ import React from 'react';
 
 import Loader from '../../common/Loader';
 
+import BlDoData from './BlDoData';
 import getFormatedData from './getFormatedData';
 import styles from './styles.module.css';
 
 function PieChart({ activeTab, chartData, loading }) {
 	const { stats } = chartData || {};
-	const {
-		CONTAINER_MOVEMENT_MAPPING, LATE_COLLECTION_MAPPING,
-		tabData, colors,
-	} = getFormatedData(stats);
-	const {
-		container_movement_count = '',
-		bl_do_release_count = '', both_count = '', late_collection_stats, late_release_stats,
-	} = stats || {};
-	const { late_collection_total = '' } = late_collection_stats || {};
-
-	const { late_release_total = '', payment_not_received = '' } = late_release_stats || {};
-
+	const { CONTAINER_MOVEMENT_MAPPING, tabData, colors } = getFormatedData(stats);
+	const { container_movement_count = '', bl_do_release_count = '', both_count = '' } = stats || {};
 	const tabCounts = {
 		container_movement : container_movement_count,
 		bl_do              : bl_do_release_count,
 		both               : both_count,
 	};
 	const centroidValue = tabCounts[activeTab] || '';
-
 	const data = tabData[activeTab] || [];
-
 	function CenteredMetric({ centerX, centerY }) {
 		return (
 			<text
@@ -93,63 +82,12 @@ function PieChart({ activeTab, chartData, loading }) {
 					</div>
 				)
 			)}
-
 			{activeTab === 'bl_do' && (
 				loading ? <Loader />
-					:				(
-						<div className={styles.bl_do_container}>
-							<div>
-								<div className={styles.bl_square1} />
-								<div className={styles.sub_container}>
-
-									<div className={styles.label}>
-										Late collection :
-									</div>
-									<div className={styles.value}>
-										{late_collection_total || '-'}
-									</div>
-								</div>
-								{LATE_COLLECTION_MAPPING.map((item) => (
-									<div className={styles.sub_container} key={item.value}>
-										<div className={styles.point} />
-										<div>
-											{item.label}
-											{' '}
-											{ item.value || '-'}
-										</div>
-									</div>
-								))}
-							</div>
-							<div className={styles.bl_do_container}>
-								<div>
-									<div className={styles.bl_square5} />
-									<div className={styles.sub_container}>
-										<div className={styles.label}>
-											Late Release :
-										</div>
-										<div className={styles.value}>
-											{late_release_total || '-'}
-										</div>
-									</div>
-
-									<div className={styles.sub_container}>
-										<div className={styles.point} />
-										<div>
-											Customer - Payment Not Received :
-											{'  '}
-											{ payment_not_received || '-'}
-										</div>
-									</div>
-
-								</div>
-							</div>
-						</div>
-					)
+					:				(<BlDoData stats={stats} />)
 			)}
-
 			<div className={styles.side_container} />
 		</div>
 	);
 }
-
 export default PieChart;

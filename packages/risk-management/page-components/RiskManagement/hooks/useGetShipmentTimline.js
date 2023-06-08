@@ -13,9 +13,9 @@ function useGetShipmentTimeLine({ itemData }) {
 	const getShipmentTimeline = useCallback((async () => {
 		try {
 			await trigger({
-				params: { 
-					shipment_id: id ,
-					container_timeline:true
+				params: {
+					shipment_id        : id,
+					container_timeline : true,
 				},
 			});
 		} catch (e) {

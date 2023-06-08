@@ -8,7 +8,7 @@ function Loader() {
 		<div>
 
 			<div className={styles.flex_row}>
-				{Array(5).fill().map((_,index) => (
+				{Array(5).fill().map((_, index) => (
 					<div className={styles.percent} key={index}>
 						<Placeholder className={styles.loader} />
 					</div>

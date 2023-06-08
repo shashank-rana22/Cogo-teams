@@ -34,11 +34,11 @@ const useGetListRiskProne = ({ activeTab }) => {
 							risk_sub_reason     : reason,
 							q                   : query || undefined,
 							hs_code             : hsCode,
-							alarm_attributes:[
+							alarm_attributes    : [
 								{
-									risk_type:activeTab
-								}
-							]
+									risk_type: activeTab,
+								},
+							],
 						},
 						risk_type          : activeTab,
 						sort_by            : 'created_at',
