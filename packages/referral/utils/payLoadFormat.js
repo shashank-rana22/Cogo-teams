@@ -1,5 +1,4 @@
 const DEFAULT_VALUE = 0;
-const DEFAULT_LIMIT_VALUE = 8;
 
 const isLastLevel = (type, start, end) => {
 	if (type === 'fixed') {
@@ -72,7 +71,7 @@ export const payloadFormat = (event, values) => {
 	return payload;
 };
 
-const remainingBonusFieldArray = (val) => {
+export const remainingBonusFieldArray = (val) => {
 	const fieldArray = val?.map((item) => ({
 		...item,
 		end_level: item?.is_last_level === true ? 'master_node' : item?.end_level,
@@ -80,5 +79,3 @@ const remainingBonusFieldArray = (val) => {
 
 	return fieldArray;
 };
-
-

@@ -1,3 +1,7 @@
+import { remainingBonusFieldArray } from "./payLoadFormat";
+
+const DEFAULT_LIMIT_VALUE = 8;
+
 export const setFormValues = (values, setValue) => {
 	const {
 		event_types, overall_limit_type, overall_limit, event_threshold_limit, referral_bonus,
