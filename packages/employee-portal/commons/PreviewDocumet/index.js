@@ -27,7 +27,6 @@ function PreviewDocumet({
 				>
 					<a href={document_url}>
 						{document_header}
-
 					</a>
 				</object>
 				{
@@ -48,7 +47,6 @@ function PreviewDocumet({
 					)
 				}
 			</div>
-
 		</div>
 	);
 }
