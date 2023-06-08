@@ -2100,7 +2100,11 @@ const navigationMappingAdmin = {
 				as            : '/v2/learning',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : [...apis.create_faq, ...apis.create_test_set],
+				possible_apis : [
+					...apis.create_faq,
+					...apis.create_test_set,
+					...apis.list_courses,
+				],
 			},
 			{
 				key           : 'cogo_academy-faq',
@@ -2129,6 +2133,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.announcements,
+			},
+			{
+				key           : 'cogo_academy-course',
+				title         : 'Course Module',
+				href          : '/v2/learning/course',
+				as            : '/v2/learning/course',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : [...apis.create_course, ...apis.course_module],
 			},
 		],
 		module_type: 'crm',
