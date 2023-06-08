@@ -62,9 +62,7 @@ function ActionsToShow({
 					RE-REQUEST BUY PRICE
 				</Button>
 				<Button
-					onClick={() => {
-						handleSubmit(onAddRate)();
-					}}
+					onClick={handleSubmit(onAddRate)}
 					disabled={loading}
 				>
 					RE-ADJUST SELL PRICE
@@ -74,14 +72,12 @@ function ActionsToShow({
 	}
 
 	if (status?.status === 'cancelled_by_supplier'
-		&& ['booking_desk_manager', 'booking_desk'].includes(activeStakeholder)
+		&& ['booking_desk_manager', 'booking_desk', 'so1_so2_ops'].includes(activeStakeholder)
 	) {
 		return (
 			<div className={styles.button_container}>
 				<Button
-					onClick={() => {
-						onCancel();
-					}}
+					onClick={onCancel}
 					disabled={loading}
 					themeType="secondary"
 				>

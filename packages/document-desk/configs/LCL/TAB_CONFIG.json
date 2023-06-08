@@ -1,0 +1,44 @@
+{
+    "export":[
+        {
+            "label":"In Progress",
+            "value":"in_progress"
+        },
+        {
+            "label":"Completed",
+            "value":"completed"
+        },
+        {
+            "label":"Cancelled",
+            "value":"cancelled"
+        }
+    ],
+    "import":[
+        {
+            "label":"In Progress",
+            "value":"in_progress"
+        },
+        {
+            "label":"Completed",
+            "value":"completed"
+        },
+        {
+            "label":"Cancelled",
+            "value":"cancelled"
+        }
+    ],
+    "lcl_customs":[
+        {
+            "label":"In Progress",
+            "value":"in_progress"
+        },
+        {
+            "label":"Completed",
+            "value":"completed"
+        },
+        {
+            "label":"Cancelled",
+            "value":"cancelled"
+        }
+    ]
+}

@@ -43,7 +43,10 @@ function OptionsComponent({ control, controls, register, name, errors, mode, isN
 	return (
 		<>
 			{fields.map((field, index) => (
-				<div key={field.id} className={styles.option_container}>
+				<div
+					key={field.id}
+					className={styles.option_container}
+				>
 					<div className={styles.alphabet_container}>{alphabets[index]}</div>
 
 					<InputController

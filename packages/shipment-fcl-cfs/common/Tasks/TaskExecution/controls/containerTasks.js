@@ -1,0 +1,15 @@
+export const containerIncludingTasks = [
+	'mark_containers_on_the_way_to_cfs',
+	'mark_vessel_arrived_at_origin',
+	'mark_offloaded',
+	'update_container_offloaded_at',
+	'update_containers_arrived_cfs_at',
+	'update_empty_container_returned_at',
+	'update_container_destuffed_at_cfs',
+	'mark_container_stuffed',
+	'mark_containers_destuffed_at',
+	'mark_container_picked_up',
+	'mark_container_gated_in_at_cfs',
+	'mark_container_gated_out_from_cfs',
+	'mark_container_gated_in_port',
+];

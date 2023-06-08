@@ -13,7 +13,9 @@ const tabs = [
 	},
 ];
 
-function GenerateHeader({ setGenerate, setEdit, category, activeCategory, setActiveCategory, awbNumber, serialId }) {
+function GenerateHeader({
+	setGenerate, setEdit, category, activeCategory, setActiveCategory, awbNumber, serialId, editCopies,
+}) {
 	return (
 		<div>
 			<div className={styles.top_flex}>
@@ -55,7 +57,7 @@ function GenerateHeader({ setGenerate, setEdit, category, activeCategory, setAct
 				</table>
 
 			</div>
-			{category === 'hawb' && (
+			{(category === 'hawb' && !editCopies) && (
 				<div className={styles.flex}>
 					{tabs.map((tab) => (
 						<div

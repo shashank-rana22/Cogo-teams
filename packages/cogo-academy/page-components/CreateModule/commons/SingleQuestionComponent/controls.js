@@ -44,8 +44,8 @@ const getControls = ({ mode }) => [
 				name    : 'is_correct',
 				type    : 'chips',
 				options : [
-					{ value: 'true', label: 'True', disabled: mode === 'view' },
-					{ value: 'false', label: 'False', disabled: mode === 'view' },
+					{ value: 'true', label: 'Correct', disabled: mode === 'view' },
+					{ value: 'false', label: 'Incorrect', disabled: mode === 'view' },
 				],
 				value    : 'false',
 				rules    : { required: 'Required' },

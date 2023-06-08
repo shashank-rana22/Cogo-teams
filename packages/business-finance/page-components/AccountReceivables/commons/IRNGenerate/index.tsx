@@ -1,5 +1,5 @@
 import { Popover, Button, Modal, Textarea } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
@@ -7,6 +7,7 @@ import { useState } from 'react';
 import useFinanceReject from '../../hooks/useFinanceReject';
 import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
 import useGetRefresh from '../../hooks/useGetRefresh';
+import usePostToSage from '../../hooks/usePostToSage';
 import useUploadeInvoice from '../../hooks/useUploadInvoice';
 
 import FinalPostModal from './FinalPostModal';
@@ -18,6 +19,8 @@ type Itemdata = {
 	invoiceStatus?: string
 	entityCode?: number
 	daysLeftForAutoIrnGeneration?: string
+	isFinalPosted?:boolean
+	invoiceType?:string
 };
 interface IRNGeneration {
 	itemData?: Itemdata
@@ -29,6 +32,8 @@ const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 const POSTED_STATUS = ['POSTED'];
 
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
+
+const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
 
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
 
@@ -42,7 +47,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 
 	const [visible, setVisible] = useState(false);
 
-	const { invoiceStatus = '', entityCode = '' } = itemData || {};
+	const { invoiceStatus = '', entityCode = '', isFinalPosted = false, invoiceType = '' } = itemData || {};
 
 	const { partner = {} } = profile;
 
@@ -55,7 +60,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		textValue,
 		refetch,
 	});
-
+	const { postToSage, loading:showPostLoading } = usePostToSage(id);
 	const {
 		generateIrn, loading, finalPostFromSage, finalPostLoading, getSageInvoiceData, sageInvoiceData,
 		sageInvoiceLoading,
@@ -91,6 +96,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		getSageInvoiceData();
 		setVisible(!visible);
 	};
+	const showPost = ['REIMBURSEMENT', 'REIMBURSEMENT_CREDIT_NOTE'].includes(invoiceType);
 
 	const content = () => (
 		<div>
@@ -118,7 +124,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 				<div
 					className={styles.generate_container}
 				>
-					{INVOICE_STATUS.includes(invoiceStatus) && (
+					{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
 						<Button
 							size="sm"
 							disabled={loading}
@@ -136,64 +142,11 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 								disabled={finalPostLoading}
 								onClick={() => handleFinalpost()}
 							>
-								<div className={styles.button_style}>Final Post</div>
-							</Button>
-						</div>
-					)}
-					{INVOICE_STATUS.includes(invoiceStatus) && (
-						<div className={styles.button_container}>
-							<Button
-								size="sm"
-								disabled={loading}
-								onClick={() => financeRejected()}
-							>
-								<div className={styles.button_style}>Finance Reject</div>
-							</Button>
-						</div>
-					)}
-					{openReject && (
-						<Modal
-							show={openReject}
-							onClose={() => {
-								setOpenReject(false);
-							}}
-						>
-
-							<Modal.Header title="Remarks*" />
-							<Modal.Body>
-
-								<Textarea
-									size="md"
-									value={textValue}
-									onChange={onChange}
-									style={{ height: '100px' }}
-								/>
-
-							</Modal.Body>
-							<Modal.Footer>
-								<div className={styles.button_val}>
-									<div className={styles.style_cancel}>
-										<Button
-											className="secondary sm"
-											onClick={() => {
-												setOpenReject(false);
-											}}
-										>
-											Cancel
-										</Button>
-									</div>
-									<Button
-										className="primary sm"
-										disabled={!textValue || loadingReject}
-										onClick={() => {
-											financeReject();
-										}}
-									>
-										Reject
-									</Button>
+								<div className={styles.button_style}>
+									{isFinalPosted ? 'Information' : 'Final Post'}
 								</div>
-							</Modal.Footer>
-						</Modal>
+							</Button>
+						</div>
 					)}
 
 					{IRN_FAILED_STATUS.includes(invoiceStatus) && (
@@ -207,7 +160,15 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 							</Button>
 						</div>
 					)}
-
+					{(SHOW_POST_TO_SAGE.includes(invoiceStatus) && showPost) && (
+						<Button
+							disabled={showPostLoading}
+							size="sm"
+							onClick={postToSage}
+						>
+							Post to Sage
+						</Button>
+					)}
 					<FinalPostModal
 						finalPostToSageModal={finalPostToSageModal}
 						setFinalPostToSageModal={setFinalPostToSageModal}
@@ -215,18 +176,79 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						sageInvoiceData={sageInvoiceData}
 						sageInvoiceLoading={sageInvoiceLoading}
 						finalPostLoading={finalPostLoading}
+						isFinalPosted={isFinalPosted}
 					/>
 
 				</div>
 			)}
+			{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
+				<div className={styles.button_container}>
+					<Button
+						size="sm"
+						disabled={loading}
+						onClick={() => financeRejected()}
+					>
+						<div className={styles.button_style}>Finance Reject</div>
+					</Button>
+				</div>
+			)}
+			{openReject && (
+				<Modal
+					show={openReject}
+					onClose={() => {
+						setOpenReject(false);
+					}}
+				>
+
+					<Modal.Header title="Remarks*" />
+					<Modal.Body>
+
+						<Textarea
+							size="md"
+							value={textValue}
+							onChange={onChange}
+							style={{ height: '100px' }}
+						/>
+
+					</Modal.Body>
+					<Modal.Footer>
+						<div className={styles.button_val}>
+							<div className={styles.style_cancel}>
+								<Button
+									className="secondary sm"
+									onClick={() => {
+										setOpenReject(false);
+									}}
+								>
+									Cancel
+								</Button>
+							</div>
+							<Button
+								className="primary sm"
+								disabled={!textValue || loadingReject}
+								onClick={() => {
+									financeReject();
+								}}
+							>
+								Reject
+							</Button>
+						</div>
+					</Modal.Footer>
+				</Modal>
+			)}
 		</div>
 	);
+
+	const rest = {
+		onClickOutside: () => setVisible(false),
+	};
 
 	return (
 		<Popover
 			placement="left"
 			render={content()}
 			visible={visible}
+			{...rest}
 		>
 
 			<IcMOverflowDot
