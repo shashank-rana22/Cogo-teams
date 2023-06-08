@@ -87,7 +87,7 @@ function DirectNode(
 								<div className={`${styles.company_name} ${organization?.length > DEFAULT_LIST_LENGTH
 									? styles.user_org_name : styles.full_width}`}
 								>
-									{startCase(organization?.[0] || '\u00A0')}
+									{startCase(organization?.[DEFAULT_CHILD_COUNT] || '\u00A0')}
 								</div>
 								{organization?.length > DEFAULT_LIST_LENGTH && (
 									<div className={styles.more}>

@@ -1,11 +1,14 @@
-const getFormatedChartData = (
+
+const DEFAULT_COUNT = 0;
+
+const getFormatedChartData = ({
 	userData = {},
 	alloted = {},
 
-) => {
-	const { kyc_verified: allotedKyc = 0, shipment = 0, subscription = 0 } = alloted;
+}) => {
+	const { kyc_verified: allotedKyc = DEFAULT_COUNT, shipment = DEFAULT_COUNT, subscription = DEFAULT_COUNT } = alloted;
 
-	const { affiliate = 0, invited = 0, kyc_verified = 0, signed_up = 0 } = userData;
+	const { affiliate = DEFAULT_COUNT, invited = DEFAULT_COUNT, kyc_verified = DEFAULT_COUNT, signed_up = DEFAULT_COUNT} = userData;
 
 	const allottedData = [
 		{

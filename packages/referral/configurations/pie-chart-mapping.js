@@ -17,9 +17,9 @@ const pieChartMapping = (
 
 	const {
 		allottedData = [],
-	} = getFormatedChartData(
+	} = getFormatedChartData({
 		alloted,
-	);
+});
 
 	const detailsPieChart = [
 		{

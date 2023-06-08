@@ -7,7 +7,7 @@ import StatusDetails from './StatusDetails';
 import styles from './styles.module.css';
 
 function Users({ userData = {} }) {
-	const { usersData = [] } = getFormatedChartData(userData);
+	const { usersData = [] } = getFormatedChartData({userData});
 	return (
 		<>
 			<div className={styles.title}>USERS</div>
