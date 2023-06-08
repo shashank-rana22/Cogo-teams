@@ -30,6 +30,7 @@ const getControls = () => {
 					GLOBAL_CONSTANTS.currency_code.EUR,
 					GLOBAL_CONSTANTS.currency_code.INR,
 					GLOBAL_CONSTANTS.currency_code.GBP,
+					GLOBAL_CONSTANTS.currency_code.VND,
 				].map((currencyCode) => ({
 					label : currencyCode,
 					value : currencyCode,
