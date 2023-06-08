@@ -15,7 +15,6 @@ const controls = [
 		},
 		verification_key: 'aadhaar_card',
 	},
-
 	{
 		name             : 'aadhaar_card',
 		label            : 'Upload Your Aadhaar Card',
@@ -23,9 +22,7 @@ const controls = [
 		accept           : '.pdf',
 		rules            : { required: 'This is required' },
 		verification_key : 'aadhaar_card',
-
 	},
-
 	{
 		name        : 'pan_card_number',
 		label       : 'Pan Card Number',
@@ -40,7 +37,6 @@ const controls = [
 		},
 		verification_key: 'pan_card',
 	},
-
 	{
 		name             : 'pan_card',
 		label            : 'Upload Your Pan Card',
@@ -48,9 +44,7 @@ const controls = [
 		accept           : '.pdf',
 		rules            : { required: 'This is required' },
 		verification_key : 'pan_card',
-
 	},
-
 	{
 		name        : 'passport_number',
 		label       : 'Passport Number',
@@ -64,16 +58,13 @@ const controls = [
 		},
 		verification_key: 'passport',
 	},
-
 	{
 		name             : 'passport',
 		label            : 'Upload Your Passport',
 		accept           : '.pdf',
 		type             : 'fileUpload',
 		verification_key : 'passport',
-
 	},
-
 	{
 		name             : 'driving_license_number',
 		label            : 'Driving License Number',
@@ -81,7 +72,6 @@ const controls = [
 		placeholder      : 'Driving License Number',
 		verification_key : 'driving_license',
 	},
-
 	{
 		name             : 'driving_license',
 		label            : 'Upload Your Driving License',
@@ -89,7 +79,6 @@ const controls = [
 		type             : 'fileUpload',
 		verification_key : 'driving_license',
 	},
-
 ];
 
 export default controls;

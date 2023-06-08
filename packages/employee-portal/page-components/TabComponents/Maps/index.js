@@ -34,7 +34,7 @@ function Maps({ setInformationPage }) {
 					const el = { ...controlItem };
 					const Element = getFieldController(el.type);
 
-					if (!Element) { return null; }
+					if (!Element) return null;
 
 					return (
 						<div key={el.name}>
