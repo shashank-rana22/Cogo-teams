@@ -18,7 +18,7 @@ function EmploymentHistory({ getEmployeeDetails, data: info }) {
 	const paySlip = watch('salary_slip');
 	const offerLetter = watch('offer_letter');
 
-	const { loading, updateEmployeeDetails } =	useUpdateEmployeeDetails({
+	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({
 		id,
 		getEmployeeDetails,
 		offerLetter,
