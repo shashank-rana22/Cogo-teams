@@ -10,6 +10,8 @@ import OtpInput from './OtpInput';
 import styles from './styles.module.css';
 
 const OTP_LENGTH = 4;
+const INITIAL_STATE = 0;
+const INITIAL_INDEX = 1;
 
 function OTPVerification({
 	showOtpModal = false,
@@ -59,12 +61,12 @@ function OTPVerification({
 		if (!isEmpty(selectedUser)) {
 			const payload = {
 				invoice_id : invoice?.id,
-				user_id    : selectedUser?.split('_')?.[0],
+				user_id    : selectedUser?.split('_')?.[INITIAL_STATE],
 			};
 			await sendOtpForInvoiceApproval(payload);
 		}
 	};
-	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[1]} registered mobile number`;
+	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[INITIAL_INDEX]} registered mobile number`;
 
 	let userListInfo = null;
 	if (loading) {
@@ -73,7 +75,7 @@ function OTPVerification({
 				<Loader />
 			</div>
 		);
-	} else if (userList?.length === 0 && !loading) {
+	} else if (userList?.length === INITIAL_STATE && !loading) {
 		userListInfo = <div className={styles.no_data}>No verified user exists!</div>;
 	} else {
 		(
@@ -113,7 +115,7 @@ function OTPVerification({
 						<Button
 							size="md"
 							onClick={handleClick}
-							disabled={userList?.length === 0 || isEmpty(selectedUser)}
+							disabled={userList?.length === INITIAL_STATE || isEmpty(selectedUser)}
 						>
 							Send
 						</Button>

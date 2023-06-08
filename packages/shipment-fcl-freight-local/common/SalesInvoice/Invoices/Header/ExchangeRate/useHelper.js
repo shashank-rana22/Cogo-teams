@@ -5,24 +5,23 @@ import useUpdateCurrencyConversion from '../../../../../hooks/useUpdateCurrencyC
 const INITIAL_STATE = 0;
 const CURRENCY_CONVERSION_FACTOR = 1;
 const DIFFERENT_CURRENCIES_HASH = {};
+const OBJ = {};
+const AVAILABLE_CURRENCY_CONVERSION = {};
 
 const useHelper = ({ invoiceCurrency = '', refetch = () => {} }) => {
 	const { currencyConversionData } = useListCurrencyConversion();
 	const { quotationData } = useGetShipmentQuotation({ invoiceCurrency });
 	const { handleFormSubmit, loading } = useUpdateCurrencyConversion({ refetch });
 
-	const obj = {};
-	const AVAILABLE_CURRENCY_CONVERSION = {};
-
 	(quotationData?.service_charges || []).forEach((service) => {
 		(service?.line_items || [])?.forEach((line_item) => {
-			if (!obj[line_item?.currency] && line_item?.currency !== invoiceCurrency) {
+			if (!OBJ[line_item?.currency] && line_item?.currency !== invoiceCurrency) {
 				DIFFERENT_CURRENCIES_HASH[line_item?.currency] = {
 					from_currency : line_item?.currency,
 					to_currency   : invoiceCurrency,
 				};
 			}
-			obj[line_item?.currency] = true;
+			OBJ[line_item?.currency] = true;
 		});
 	});
 
