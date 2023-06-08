@@ -38,10 +38,7 @@ function FullView({
 					await updateEmployeeDetails();
 					openDocument();
 				}}
-				style={{
-					borderRadius: 4,
-
-				}}
+				style={{ borderRadius: 4 }}
 			>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					{id in policy_data ? 'Already Viewed' : 'Preview'}
