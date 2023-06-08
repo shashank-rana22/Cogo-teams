@@ -39,6 +39,7 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 			await trigger({
 				data: payload,
 			});
+
 			Toast.success('Your Report Was Submitted Successfully...');
 			setShowErrorModal(false);
 		} catch (error) {
