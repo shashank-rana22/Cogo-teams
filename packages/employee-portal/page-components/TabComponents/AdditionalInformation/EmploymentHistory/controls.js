@@ -33,9 +33,9 @@ const getControls = [{
 		},
 		{
 			name        : 'description',
-			label       : 'Description',
+			label       : 'Designation',
 			type        : 'textarea',
-			placeholder : 'Description',
+			placeholder : 'Designation',
 		},
 		{
 			name        : 'skills',

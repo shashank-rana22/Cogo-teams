@@ -48,6 +48,7 @@ function EducationalQualification({ getEmployeeDetails, data: info }) {
 
 						);
 					}
+
 					return (
 						<div key={controlItem}>
 							EducationalQualification
