@@ -9,6 +9,27 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+
+const sourceTypes = [
+	{
+		label:'Spot Rates',
+		value:'spot_rates'
+	},
+	{
+		label:'Spot Booking',
+		value:'spot_booking'
+	},
+	{
+		label:'Predicted',
+		value:'predicted'
+	},
+	{
+		label:'Promotional',
+		value:'promotional'
+	},
+]
+
+
 function Filters({ filters, setFilters }) {
 	const type = ['country', 'trade', 'seaport'];
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
@@ -35,8 +56,7 @@ function Filters({ filters, setFilters }) {
 						isClearable
 						value={filters?.origin_location_id}
 						onChange={(value) => {
-							setFilters({ ...filters, origin_location_id: value, page: 1 });
-							// setFilters((prev) => ({ ...prev, origin_location_id: value, page: 1 }));
+							setFilters((prev) => ({ ...prev, origin_location_id: value, page: 1 }));
 						}}
 					/>
 				</div>
@@ -85,6 +105,18 @@ function Filters({ filters, setFilters }) {
 						value={filters?.container_type}
 						onChange={(value) => {
 							setFilters((prev) => ({ ...prev, container_type: value, page: 1 }));
+						}}
+					/>
+				</div>
+				<div className={styles.filter}>
+					<p className={styles.label}>Source</p>
+					<Select
+						placeholder="Source"
+						isClearable
+						options={sourceTypes}
+						value={filters?.source}
+						onChange={(value) => {
+							setFilters((prev) => ({ ...prev, source: value, page: 1 }));
 						}}
 					/>
 				</div>

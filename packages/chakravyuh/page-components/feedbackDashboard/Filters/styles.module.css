@@ -19,12 +19,12 @@
 
 }
 .filter{
-    width: 200px;
+    width: 180px;
     margin-right: 24px;
 }
 
 .link_text{
-    margin: 36px 0px 0px 12px;
+    margin-top: 36px;
     text-decoration: underline;
     cursor: pointer;
 }
