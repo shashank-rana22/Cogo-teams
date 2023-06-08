@@ -32,13 +32,14 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	ACTION_BUTTONS.supplierEdit = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
-	ACTION_BUTTONS.CancelService = getCanCancelService({ state, stakeholderConfig });
+	ACTION_BUTTONS.supplier_reallocation = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
+	ACTION_BUTTONS.cancel = getCanCancelService({ state, stakeholderConfig });
 
 	if (!ACTION_BUTTONS.supplierEdit && !ACTION_BUTTONS.CancelService) {
 		return null;
 	}
-	const content = ACTION_BUTTONS.map(({ label, value, show }) => (show ? (
+
+	const content = ACTION_BUTTONS.map(({ label, value }) => (ACTION_BUTTONS[value] ? (
 		<div
 			key={value}
 			role="button"
