@@ -10,12 +10,9 @@ function ModalComponent({
 	ctcStructure,
 	initialQuestion,
 	setInitialQuestion,
-	// formProps,
 	control,
 	errors,
 }) {
-	// const { control } = formProps;
-
 	const finalControls = getControls(initialQuestion);
 	return (
 		<div>
@@ -28,7 +25,7 @@ function ModalComponent({
 					value={initialQuestion}
 					onChange={(e) => setInitialQuestion(e)}
 					type="number"
-					className={styles.field_controller}
+					className={styles.field}
 				/>
 			</div>
 
@@ -64,8 +61,8 @@ function ModalComponent({
 
 				return (
 					<div key={yearly.name} className={styles.control_container}>
-						<span className={styles.control_label}>{yearly.label}</span>
-						<div>
+						<span className={styles.label}>{yearly.label}</span>
+						<div style={{ marginRight: '4px' }}>
 							<Element
 								{...yearly}
 								size="sm"
@@ -73,8 +70,8 @@ function ModalComponent({
 								control={control}
 								className={styles.field_controller}
 							/>
-							<div className={styles.error_message}>
-								{errors?.[controlItem?.name]?.message}
+							<div className={styles.error}>
+								{errors?.[controlItem?.yearly?.name]?.message}
 							</div>
 						</div>
 
@@ -86,8 +83,8 @@ function ModalComponent({
 								control={control}
 								className={styles.field_controller}
 							/>
-							<div className={styles.error_message}>
-								{errors?.[controlItem?.name]?.message}
+							<div className={styles.error}>
+								{errors?.[controlItem?.monthly?.name]?.message}
 							</div>
 						</div>
 

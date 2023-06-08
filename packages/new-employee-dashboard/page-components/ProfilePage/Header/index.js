@@ -86,7 +86,9 @@ function Header({
 						themeType="secondary"
 						style={{ marginLeft: 12 }}
 						loading={isLoading || btnloading || offerLetterApiLoading}
-					/>
+					>
+						Add CTC Breakup
+					</Button>
 				) : null}
 
 				<Button

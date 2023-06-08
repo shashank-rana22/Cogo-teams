@@ -5,8 +5,6 @@ import { CTC_BREAK_MAPPING } from '../../../commons/ctcbreakMapping';
 
 import styles from './styles.module.css';
 
-
-
 function CtcBreakup({ metadata }) {
 	const {
 		joining_bonus_yearly,

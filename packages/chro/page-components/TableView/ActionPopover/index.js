@@ -21,6 +21,7 @@ export default function ActionPopover({ item, onFinalSubmit = () => {}, updateOf
 						employeeId={id}
 						setVisible={setVisible}
 						onFinalSubmit={onFinalSubmit}
+						updateOfferLetterLoading={updateOfferLetterLoading}
 					/>
 				)}
 			>
