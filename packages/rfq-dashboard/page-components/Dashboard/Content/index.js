@@ -48,7 +48,7 @@ function Content(props) {
 						className="md"
 						totalItems={data?.total_count || 0}
 						currentPage={page || 1}
-						pageSize={data?.page_limit}
+						pageSize={data?.page_limit || 0}
 						onPageChange={setPage}
 						type="table"
 					/>

@@ -41,10 +41,22 @@
 	}
 }
 
-.service_type {
+.FCL {
 	font-size: 14px;
 	font-weight: 600;
 	color: #356efd;
+}
+
+.LCL {
+	font-size: 14px;
+	font-weight: 600;
+	color: #65acf7;
+}
+
+.AIR {
+	font-size: 14px;
+	font-weight: 600;
+	color: #ef9b9b;
 }
 
 .ports_tags_container {
