@@ -73,7 +73,6 @@ const controls = [
 			required: 'Location is required',
 		},
 	},
-
 	{
 		name        : 'cogoport_email',
 		label       : 'Cogoport Email ID',
@@ -121,7 +120,6 @@ const controls = [
 			page_limit: 100,
 		},
 	},
-
 	{
 		name        : 'hrbp_id',
 		type        : 'asyncSelect',
