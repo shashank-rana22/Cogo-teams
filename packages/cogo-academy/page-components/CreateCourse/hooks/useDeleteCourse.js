@@ -14,7 +14,7 @@ const useDeleteCourse = ({ fetchList, setShowModal }) => {
 
 			setShowModal(false);
 
-			await fetchList();
+			fetchList();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
