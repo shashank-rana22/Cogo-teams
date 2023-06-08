@@ -1,6 +1,8 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
+import CampaignManagement from './components/CampaignManagement'
+import ExceptionsManagement from './components/ExceptionsManagement'
 import styles from './styles.module.css';
 
 function Dunnings() {
@@ -32,10 +34,10 @@ function Dunnings() {
 						name="campaign-management"
 						title="Campaign Management"
 					>
-						Campaign Management
+						<CampaignManagement/>
 					</TabPanel>
 					<TabPanel name="exceptions-management" title="Exceptions Management">
-					Exceptions Management
+					<ExceptionsManagement/>
 					</TabPanel>
 				</Tabs>
 			</div>
