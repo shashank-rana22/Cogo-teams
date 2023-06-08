@@ -2,6 +2,7 @@
 	display: flex;
 	padding: 10px;
 	margin-bottom: 8px;
+	cursor: pointer;
 	background: #fff;
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(98 127 172 / 10%);

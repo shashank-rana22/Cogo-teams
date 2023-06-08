@@ -18,19 +18,27 @@ function Filters({ formProps }) {
 					if (!Element) return null;
 
 					return (
-						<div
-							key={controlItem.name}
-							className={styles.control_container}
-						>
-							{el.label && <div className={styles.label}>{el.label}</div>}
-							<Element
-								{...el}
-								size="sm"
-								key={el.name}
-								control={control}
-								id={`${el.name}_input`}
-							/>
-						</div>
+						<>
+							{el.name === 'start_date'
+								? (
+									<div className={styles.date_text}>
+										Filter by Created Date
+									</div>
+								) : null}
+							<div
+								key={controlItem.name}
+								className={styles.control_container}
+							>
+								{el.label && <div className={styles.label}>{el.label}</div>}
+								<Element
+									{...el}
+									size="sm"
+									key={el.name}
+									control={control}
+									id={`${el.name}_input`}
+								/>
+							</div>
+						</>
 					);
 				})}
 			</form>
