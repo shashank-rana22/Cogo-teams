@@ -113,7 +113,7 @@ function CourseCard({
 					role="button"
 					tabIndex="0"
 					onClick={() => {
-						updateUserCourse(data?.id, is_saved);
+						updateUserCourse({ course_user_mapping_id: data?.id, saved: is_saved });
 					}}
 				>
 					<div className={is_saved ? styles.saved_div : styles.not_saved}>
