@@ -6,11 +6,19 @@ import ScoreTrendChart from '../../../../common/ScoreTrendChart';
 
 import styles from './styles.module.css';
 
+const CONSTANTS = {
+	TREND_BREAK_POINT                 : 0,
+	MIN_STAKEHOLDERS                  : 0,
+	FIRST_INDEX                       : 0,
+	MIN_STAKEHOLDER_TO_RENDER_TOOLTIP : 1,
+};
+
 const getLeaderBoardColumns = ({ setScoreTrendIds }) => [
 	{
 		Header   : 'Position',
 		accessor : ({ current_position, previous_position }) => {
-			const trend = (!current_position || !previous_position) ? 0 : current_position - previous_position;
+			const trend = (!current_position || !previous_position)
+				? CONSTANTS.TREND_BREAK_POINT : current_position - previous_position;
 
 			const val = Math.abs(trend);
 
@@ -25,15 +33,15 @@ const getLeaderBoardColumns = ({ setScoreTrendIds }) => [
 								width={12}
 								style={{
 									marginRight : '4px',
-									color       : (trend < 0
+									color       : (trend < CONSTANTS.TREND_BREAK_POINT
 										? '#34C759' : '#ED3726'),
-									transform: (trend < 0
+									transform: (trend < CONSTANTS.TREND_BREAK_POINT
 										? 'rotate(0deg)' : 'rotate(-180deg)'),
 								}}
 							/>
 						) : ''}
 
-						{(val !== 0) ? val : ''}
+						{(val !== CONSTANTS.TREND_BREAK_POINT) ? val : ''}
 					</div>
 				</div>
 			);
@@ -45,13 +53,14 @@ const getLeaderBoardColumns = ({ setScoreTrendIds }) => [
 			<div
 				className={styles.score_trend}
 				role="presentation"
-				onClick={setScoreTrendIds({
+				onClick={() => setScoreTrendIds({
 					service_id      : item.service_id,
 					service_user_id : item.service_user_id,
 					service_type    : item.service_type,
 				})}
 			>
-				<ScoreTrendChart item={item} />
+				{}
+				<ScoreTrendChart trend={item.trend} data={item.data} />
 			</div>
 		),
 	},
@@ -75,23 +84,23 @@ const getLeaderBoardColumns = ({ setScoreTrendIds }) => [
 		Header   : 'ALLOCATED KAM',
 		accessor : ({ stakeholder_name = [] }) => {
 			const totalStakeholders = stakeholder_name?.length;
-			if (totalStakeholders === 0) {
+			if (totalStakeholders === CONSTANTS.MIN_STAKEHOLDERS) {
 				return '-';
 			}
 
 			const renderToolTip = stakeholder_name?.map((stakeholder) => `${startCase(stakeholder)}
-			${totalStakeholders > 1 ? ', ' : ''}`);
+			${totalStakeholders > CONSTANTS.MIN_STAKEHOLDER_TO_RENDER_TOOLTIP ? ', ' : ''}`);
 
 			return (
 				<Tooltip content={renderToolTip} placement="bottom">
 					<div>
-						{stakeholder_name?.[0] || '-'}
+						{stakeholder_name?.[CONSTANTS.FIRST_INDEX] || '-'}
 					</div>
-					{totalStakeholders > 1 && (
+					{totalStakeholders > CONSTANTS.MIN_STAKEHOLDER_TO_RENDER_TOOLTIP && (
 						<strong>
 							(+
 							{' '}
-							{totalStakeholders - 1}
+							{totalStakeholders - CONSTANTS.MIN_STAKEHOLDER_TO_RENDER_TOOLTIP}
 							)
 						</strong>
 					)}

@@ -18,7 +18,7 @@ function Leaderboard(props) {
 		getNextPage = () => {},
 	} = props;
 
-	const [showTrendIds, setScoreTrendIds] = useState({});
+	const [scoreTrendIds, setScoreTrendIds] = useState({});
 
 	if (isEmpty(leaderboardList) && !leaderboardLoading) {
 		return (
@@ -56,10 +56,12 @@ function Leaderboard(props) {
 				/>
 			</div>
 
-			<ScoreTrendModal
-				showTrendIds={showTrendIds}
-				setScoreTrendIds={setScoreTrendIds}
-			/>
+			{!isEmpty(scoreTrendIds) && (
+				<ScoreTrendModal
+					scoreTrendIds={scoreTrendIds}
+					setScoreTrendIds={setScoreTrendIds}
+				/>
+			)}
 		</>
 	);
 }

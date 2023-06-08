@@ -1,19 +1,19 @@
 import { Modal } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 
-import ScoreTrendChart from '../../../common/ScoreTrendChart';
+import useGetEngagementScoringGraphStats from '../../../hooks/useGetEngagementScoringGraphStats';
 
 function ScoreTrendModal(props) {
-	const { showTrendIds, setScoreTrendIds } = props;
+	const { scoreTrendIds, setScoreTrendIds } = props;
 
-	if (isEmpty(showTrendIds)) {
-		return null;
-	}
+	const { data } = useGetEngagementScoringGraphStats({ scoreTrendIds });
+
+	console.log('data :: ', data);
 
 	return (
 		<Modal
 			size="lg"
-			show={!isEmpty(showTrendIds)}
+			show={!isEmpty(scoreTrendIds)}
 			onClose={() => setScoreTrendIds({})}
 			closeOnOuterClick
 			showCloseIcon
@@ -22,7 +22,7 @@ function ScoreTrendModal(props) {
 			<Modal.Header title="Engagement Score percentile vs time" />
 
 			<Modal.Body>
-				<ScoreTrendChart />
+				<p>Hello</p>
 			</Modal.Body>
 		</Modal>
 	);
