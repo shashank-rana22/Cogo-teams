@@ -91,7 +91,7 @@ const controls = [
 		},
 	},
 	{
-		name        : 'hiring_manager',
+		name        : 'hiring_manager_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
 		label       : 'Hiring Manager',
@@ -109,7 +109,7 @@ const controls = [
 		},
 	},
 	{
-		name        : 'hr_name',
+		name        : 'hr_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
 		label       : 'HR Name',
@@ -127,7 +127,7 @@ const controls = [
 	},
 
 	{
-		name        : 'hrbp',
+		name        : 'hrbp_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
 		label       : 'HRBP',
