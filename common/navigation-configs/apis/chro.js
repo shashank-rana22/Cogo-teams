@@ -10,7 +10,6 @@ const chro = [
 		access_type  : 'private',
 		service_name : 'harbour',
 	},
-
 ];
 
 export default chro;

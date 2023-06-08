@@ -1820,7 +1820,7 @@ importers:
   packages/unified-dashboard:
     specifiers:
       '@cogoport/charts': ^1.0.3
-      '@cogoport/components': ^1.0.420
+      '@cogoport/components': ^1.0.418
       '@cogoport/forms': workspace:^0.1.0
       '@cogoport/globalization': workspace:^0.0.1
       '@cogoport/icons-react': ^1.0.73

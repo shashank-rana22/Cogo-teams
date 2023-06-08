@@ -13,18 +13,14 @@ function useCreateEmployeeBankDetails({ bank_details, getEmployeeDetails }) {
 		method : 'POST',
 	}, { manual: true });
 
-	const createEmployeeBankDetails = async ({ data, id }) => {
+	const createEmployeeBankDetails = async ({ values, id }) => {
 		try {
 			await trigger({
 				data: {
+					...values,
 					id                  : bankDetailId || undefined,
-					ifsc_code           : data?.ifsc_code,
-					account_holder_name : data?.account_holder_name,
-					bank_name           : data?.bank_name,
-					bank_branch_name    : data?.branch_name,
-					account_number      : data?.bank_account_number,
-					cancelled_check_url : data?.cancelled_cheque?.finalUrl,
-					status              : data?.status || 'active',
+					cancelled_check_url : values?.cancelled_check_url?.finalUrl,
+					status              : values?.status || 'active',
 					employee_detail_id  : id,
 				},
 			});

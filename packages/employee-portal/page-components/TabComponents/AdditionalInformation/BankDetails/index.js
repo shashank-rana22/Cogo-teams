@@ -8,15 +8,15 @@ import useCreateEmployeeBankDetails from '../../../../hooks/useCreateEmployeeBan
 import controls from './controls';
 import styles from './styles.module.css';
 
+const MAPPING = [
+	'ifsc_code',
+	'account_holder_name',
+	'bank_name', 'bank_branch_name', 'account_number', 'cancelled_check_url'];
+
 function BankDetails({ getEmployeeDetails, data: info }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
 	const { bank_details = [], detail } = info || {};
-
-	const {
-		account_holder_name, account_number, bank_branch_name,
-		bank_name, cancelled_check_url, ifsc_code,
-	} = bank_details?.[0] || {};
 
 	const { id } = detail || {};
 
@@ -28,18 +28,14 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 	};
 
 	const onSubmit = (values) => {
-		createEmployeeBankDetails({ data: values, id });
+		createEmployeeBankDetails({ values, id });
 	};
 
 	useEffect(() => {
-		setValue('ifsc_code', ifsc_code);
-		setValue('account_holder_name', account_holder_name);
-		setValue('bank_name', bank_name);
-		setValue('branch_name', bank_branch_name);
-		setValue('bank_account_number', account_number);
-		setValue('cancelled_cheque', cancelled_check_url);
-	}, [account_holder_name,
-		account_number, bank_branch_name, bank_details, bank_name, cancelled_check_url, ifsc_code, setValue]);
+		MAPPING.map((element) => (
+			setValue(element, bank_details?.[0][element])
+		));
+	}, [bank_details, setValue]);
 
 	return (
 		<div className={styles.whole_container}>

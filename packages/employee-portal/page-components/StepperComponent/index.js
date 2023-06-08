@@ -3,7 +3,7 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function StepperComponent({ data }) {
+function StepperComponent({ data, loading }) {
 	const { progress_stats = {}, company_policy_documents, signed_documents } = data || {};
 	const {
 		additional_info_added = {},
@@ -33,7 +33,7 @@ function StepperComponent({ data }) {
 		{
 			name      : 'additional_info',
 			icon      : IcMDocument,
-			is_added  : Object.keys(additional_info_added).every((key) => (additional_info_added[key])),
+			is_added  : !loading && Object.keys(additional_info_added).every((key) => (additional_info_added[key])),
 			sub_title : 'Added',
 		},
 		{
@@ -48,8 +48,8 @@ function StepperComponent({ data }) {
 			is_added  : !isEmpty(company_policy_documents) && company_policies_read?.company_policies_read,
 			sub_title : 'Read',
 		},
-
 	];
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>

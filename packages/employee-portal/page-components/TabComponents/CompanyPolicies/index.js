@@ -4,7 +4,6 @@ import { IcMArrowBack } from '@cogoport/icons-react';
 import PreviewDocumet from '../../../commons/PreviewDocumet';
 
 import styles from './styles.module.css';
-import useCompanyPolicyDetails from './useGetCompanyPolicyDetails';
 
 function checkIfObjectContainsAllIDs(policies_data, companyPolicyIds) {
 	return companyPolicyIds.every((id) => id in policies_data);
@@ -19,11 +18,6 @@ const handleChange = (checked = false) => {
 };
 
 function CompanyPolicies({ setInformationPage, getEmployeeDetails, data }) {
-	// const { mainData } = useCompanyPolicyDetails();  
-	// Todo discuss if this is needed when we have data from top level
-
-	console.log('listk', data);
-
 	const { company_policy_data : list, detail } = data || {};
 	const { policies_data, id:employeeId } = detail || {};
 
@@ -54,6 +48,7 @@ function CompanyPolicies({ setInformationPage, getEmployeeDetails, data }) {
 							<div className={styles.header_wrapper}>
 								{name}
 							</div>
+
 							<PreviewDocumet
 								document_url={document_url}
 								preview

@@ -1,11 +1,21 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
-import { useRequest } from '@cogoport/request';
+import { useHarbourRequest } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
+
+import getCustomAuthParams from './getCustomAuthParams';
 
 const useUpdatePartnerUser = () => {
-	const [{ loading }, trigger] = useRequest({
-		method : 'post',
-		url    : 'update_partner_user',
+	const profile = useSelector((state) => state.profile || {});
+	const { permissions_navigations = {} } = profile || {};
+
+	const url = '/update_partner_user';
+	const customAuthParams = getCustomAuthParams({ permissions_navigations, url });
+
+	const [{ loading }, trigger] = useHarbourRequest({
+		method: 'post',
+		url,
+		customAuthParams,
 	}, { manual: true });
 
 	const updatePartnerUser = async ({ id }) => {

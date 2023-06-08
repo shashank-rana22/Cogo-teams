@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
 	{
 		Header   : 'DOCUMENT NAME',
-		accessor : (item) => <div className={styles.name}>{item?.name || 'Aadhar Card'}</div>,
+		accessor : (item) => <div className={styles.name}>{startCase(item?.name)}</div>,
 	},
 	{
 		Header   : 'FILE',
@@ -17,9 +17,9 @@ const getColumns = ({ onClickViewDocument, setShowModal = () => {} }) => [
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<IcMDocument width={14} height={14} />
 				<div style={{ margin: '0 4px' }}>
-					{item?.signed_document_url || item?.document_url || 'Aadhar Card'}
-
+					{item?.signed_document_url || item?.document_url}
 				</div>
+
 				<IcMEyeopen
 					width={14}
 					height={14}

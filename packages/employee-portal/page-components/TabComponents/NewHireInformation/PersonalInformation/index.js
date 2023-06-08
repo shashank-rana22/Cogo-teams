@@ -4,7 +4,6 @@ import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import getElementController from '../../../../configs/getElementController';
-import useGetEmployeeDetails from '../../../../hooks/useGetEmployeeDetails';
 import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails';
 
 import controls from './controls';
@@ -20,9 +19,7 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 
 	const controlsvalue = controls({ content });
 
-	const { data: info } = useGetEmployeeDetails({});
-
-	const id = info?.detail?.id;
+	const id = content?.detail?.id;
 
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
@@ -64,6 +61,8 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 				);
 			} else if (item?.name === 'designation') {
 				setValue(item.name, startCase(content?.detail?.[item?.name]));
+			} else if (item?.name === 'hiring_manager') {
+				setValue(item.name, startCase(content?.detail?.[item?.name]?.userName));
 			} else {
 				setValue(item.name, content?.detail?.[item?.name]);
 			}

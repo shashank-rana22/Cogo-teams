@@ -16,6 +16,7 @@ function CtcBreakup({ metadata }) {
 		sign_on_bonus_monthly,
 		sign_on_bonus_yearly,
 	} = metadata;
+
 	const MAPPING = {
 		joining_bonus_monthly: {
 			heading      : 'Joining Bonus',
@@ -38,6 +39,7 @@ function CtcBreakup({ metadata }) {
 			monthlyValue : sign_on_bonus_monthly,
 		},
 	};
+
 	return (
 		<div className={styles.table_container}>
 			<div className={styles.heading}>
@@ -47,48 +49,49 @@ function CtcBreakup({ metadata }) {
 			</div>
 
 			{CTC_BREAK_MAPPING.map((key) => {
-      	const {
-      		heading = null,
-      		yearlyValue = null,
-      		monthlyValue = null,
-      	} = metadata[key] || {};
-      	return (
-	<div key={key}>
-		{heading != null ? (
-			<div className={styles.list} key={key}>
-				{heading ? (
-					<div style={{ width: '60%' }}>
-						{startCase(heading ?? '___')}
+				const {
+					heading = null,
+					yearlyValue = null,
+					monthlyValue = null,
+				} = metadata[key] || {};
 
+				return (
+					<div key={key}>
+						{heading != null ? (
+							<div className={styles.list} key={key}>
+								{heading ? (
+									<div style={{ width: '60%' }}>
+										{startCase(heading ?? '___')}
+
+									</div>
+								) : null}
+								<div style={{ width: '20%' }}>
+									{yearlyValue != null ? (
+
+										<div>{Number(yearlyValue || 0).toFixed(2) ?? '___'}</div>
+
+									) : null}
+								</div>
+								{monthlyValue != null ? (
+									<div style={{ width: '20%' }}>
+										{Number(monthlyValue || 0).toFixed(2) ?? '___'}
+									</div>
+								) : null}
+							</div>
+						) : (
+							<div className={styles.list} key={key}>
+								<div style={{ width: '60%' }}>
+									{startCase(MAPPING?.[key]?.heading || '___')}
+								</div>
+								<div style={{ width: '20%' }}>
+									{MAPPING?.[key]?.yearlyValue || '___'}
+								</div>
+								<div style={{ width: '20%' }}>
+									{MAPPING?.[key]?.monthlyValue || '___'}
+								</div>
+							</div>
+						)}
 					</div>
-				) : null}
-				<div style={{ width: '20%' }}>
-					{yearlyValue != null ? (
-
-						<div>{Number(yearlyValue || 0).toFixed(2) ?? '___'}</div>
-
-					) : null}
-				</div>
-				{monthlyValue != null ? (
-					<div style={{ width: '20%' }}>
-						{Number(monthlyValue || 0).toFixed(2) ?? '___'}
-					</div>
-				) : null}
-			</div>
-		) : (
-			<div className={styles.list} key={key}>
-				<div style={{ width: '60%' }}>
-					{startCase(MAPPING?.[key]?.heading || '___')}
-				</div>
-				<div style={{ width: '20%' }}>
-					{MAPPING?.[key]?.yearlyValue || '___'}
-				</div>
-				<div style={{ width: '20%' }}>
-					{MAPPING?.[key]?.monthlyValue || '___'}
-				</div>
-			</div>
-		)}
-	</div>
 				);
 			})}
 		</div>
