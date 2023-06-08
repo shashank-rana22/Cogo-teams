@@ -1,9 +1,7 @@
 .container {
 	display: flex;
 	justify-content: space-between;
-	margin-top: 16px;
-	margin-bottom: 16px;
-
+	margin: 16px 0px;
 	@media (max-width: 1068px) {
 		display: flex;
 		flex-direction: column;

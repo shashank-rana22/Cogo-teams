@@ -28,8 +28,8 @@ function ShipmentId({ data, loading, filters, setFilters, activeTab }) {
 		if (loading) {
 			return (
 				<div style={{ marginTop: '10px' }}>
-					{[1, 2, 3, 4, 5].map((item) => (
-						<div key={item.id}>
+					{Array(5).fill().map((_,index) => (
+						<div key={index}>
 							<LoadingState />
 						</div>
 					))}

@@ -10,7 +10,7 @@ function Header({ data, loading }) {
 		ongoing_shipments = '', risk_prone_shipments = '', container_movement_count = '',
 		bl_do_release_count = '', both_count = '', risk_free_shipments = '',
 	} = stats || {};
-	const CONTAINER_MAPPING = [
+	const TAB_MAPPING = [
 		{
 			label : 'Container Movement',
 			value : container_movement_count,
@@ -57,7 +57,7 @@ function Header({ data, loading }) {
 					</div>
 				</div>
 				<div className={styles.vr} />
-				{CONTAINER_MAPPING.map((item) => (
+				{TAB_MAPPING.map((item) => (
 					<div className={styles.sub_container} key={item.label}>
 						<div className={styles.release_count}>
 							{loading ? <Placeholder className={styles.loader} />

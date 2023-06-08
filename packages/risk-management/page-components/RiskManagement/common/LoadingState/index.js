@@ -10,14 +10,22 @@ function LoadingState() {
 				<div className={styles.details}>
 					<Placeholder />
 				</div>
-				{ [1, 2, 3, 4, 5].map((item) => (
-					<div className={styles.flex_row} key={item.id}>
+				{ Array(5).fill().map((_,index) => (
+					<div className={styles.flex_row} key={index}>
 						<div className={styles.percent}>
 							<Placeholder />
 							<Placeholder />
 						</div>
 					</div>
 				))}
+			</div>
+			<div className={styles.container}>
+				<div className={styles.details}>
+						<Placeholder />
+				</div>
+				<div className={styles.details}>
+						<Placeholder />
+				</div>
 			</div>
 		</div>
 	);

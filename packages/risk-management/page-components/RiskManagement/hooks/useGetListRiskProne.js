@@ -23,7 +23,7 @@ const useGetListRiskProne = ({ activeTab }) => {
 		debounceQuery(search);
 	}, [debounceQuery, search]);
 
-	const getDahboardData = useCallback(() => {
+	const getDashboardData = useCallback(() => {
 		(async () => {
 			try {
 				await trigger({
@@ -55,13 +55,13 @@ const useGetListRiskProne = ({ activeTab }) => {
 	}, [trigger, originValue, destinationValue, reason, query, activeTab, pageIndex, hsCode]);
 
 	useEffect(() => {
-		getDahboardData();
-	}, [getDahboardData]);
+		getDashboardData();
+	}, [getDashboardData]);
 
 	return {
 		data,
 		loading,
-		getDahboardData,
+		getDashboardData,
 		filters,
 		setFilters,
 	};
