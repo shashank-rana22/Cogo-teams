@@ -19,7 +19,7 @@ interface ItemProps {
 }
 function Logistics() {
 	const [globalFilters, setGlobalFilters] = useState({});
-	const [entityTabFilters, setEntityTabFilters] = useState('all');
+	const [entityTabFilters, setEntityTabFilters] = useState<string>();
 
 	const entityTab = [
 		{
