@@ -2,14 +2,8 @@ import FTL_UNITS from '@cogoport/surface-modules/contants/FTL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-const SERIAL_ID = 130000;
 const CHAR_LIMIT = 3;
 const INITIAL_STATE = 0;
-
-const handleDisableCond = (charge, isFclFreight, shipment_data) => {
-	const disable =	!isFclFreight && shipment_data?.serial_id > SERIAL_ID;
-	return disable;
-};
 
 const rawControls = (
 	handleChange,
@@ -53,8 +47,6 @@ const rawControls = (
 			span        : 2,
 			handleChange,
 			placeholder : 'select line item',
-			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data),
 			rules: { required: 'Required' },
 		},
 		{
@@ -71,7 +63,6 @@ const rawControls = (
 			rules       : {
 				validate: (v) => v?.length >= CHAR_LIMIT || isEmpty(v) || `Characters should be >= ${CHAR_LIMIT}`,
 			},
-			disabled : handleDisableCond(charge, isFclFreight, shipment_data),
 			span     : 2,
 		},
 		{
@@ -90,8 +81,6 @@ const rawControls = (
 			placeholder    : 'Select Currency',
 			rules          : { required: 'currency is required' },
 			span           : 1.5,
-			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data),
 		},
 		{
 			label       : 'Price',
@@ -103,7 +92,6 @@ const rawControls = (
 				required : 'Price is Required',
 				validate : (v) => v > INITIAL_STATE || `Price must be greater than ${INITIAL_STATE}`,
 			},
-			disabled: handleDisableCond(charge, isFclFreight, shipment_data),
 		},
 		{
 			label       : 'Quantity',
@@ -112,8 +100,6 @@ const rawControls = (
 			placeholder : 'enter quantity',
 			rules       : { required: 'Required', min: 1 },
 			span        : 1,
-			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data),
 		},
 		{
 			label  : 'Amount (Tax Excl.)',

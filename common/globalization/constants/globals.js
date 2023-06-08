@@ -156,6 +156,7 @@ const GLOBAL_CONSTANTS = {
 	languages                       : LANGUAGE_OPTIONS,
 	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
 	invoice_check_id                : 120347,
+	serial_check_id:130000, //for Edit Invoice in FCL Freight shipment having FCL Main Freight
 };
 
 GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {

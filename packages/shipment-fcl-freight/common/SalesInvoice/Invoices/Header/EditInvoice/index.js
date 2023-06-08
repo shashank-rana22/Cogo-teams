@@ -8,10 +8,9 @@ import { useEffect } from 'react';
 import editLineItems from './editLineItems';
 import Info from './Info';
 import styles from './styles.module.css';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const geo = getGeoConstants();
-
-const SERIAL_ID = 130000;
 const INITIAL_STATE = 0;
 
 function EditInvoice({
@@ -47,7 +46,7 @@ function EditInvoice({
 	});
 
 	const disabledProps = controls?.[INITIAL_STATE]?.service_name === 'fcl_freight_service' && !isAdminSuperAdmin
-	&& shipment_data?.serial_id > SERIAL_ID;
+	&& shipment_data?.serial_id > GLOBAL_CONSTANTS.serial_check_id;
 
 	const formValues = watch();
 
