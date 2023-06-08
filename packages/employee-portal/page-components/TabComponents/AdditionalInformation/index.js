@@ -9,9 +9,7 @@ import styles from './styles.module.css';
 
 function AdditionalInformation({ setInformationPage, data, getEmployeeDetails }) {
 	const { progress_stats = {}, bank_details:bankDetails } = data || {};
-	const {
-		additional_info_added = {},
-	} = progress_stats;
+	const { additional_info_added = {} } = progress_stats;
 
 	const {
 		bank_details = false,

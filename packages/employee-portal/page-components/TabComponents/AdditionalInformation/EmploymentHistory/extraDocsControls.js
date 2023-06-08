@@ -1,7 +1,7 @@
 export const extraDocsControls = [
 	{
 		name   : 'offer_letter',
-		label  : 'Upload Previous Offer letter ',
+		label  : 'Upload Previous Offer letter',
 		type   : 'fileUpload',
 		accept : '.pdf',
 		rules  : { required: 'Previous Offer letter is required' },
@@ -13,5 +13,4 @@ export const extraDocsControls = [
 		accept : '.pdf',
 		rules  : { required: 'Latest salary slip is required' },
 	},
-
 ];
