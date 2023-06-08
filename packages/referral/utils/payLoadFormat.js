@@ -62,8 +62,8 @@ export const payloadFormat = (event, values) => {
 			total_incentive_type : network_bonus_total_incentive_type,
 			total_incentive      : network_bonus_total_incentive_type === 'none'
 				? DEFAULT_VALUE : Number(exceed_allowed),
-			min_incentive_type   : network_bonus_min_incentive_type,
-			minimum_incentive    : network_bonus_min_incentive_type === 'none'
+			min_incentive_type : network_bonus_min_incentive_type,
+			minimum_incentive  : network_bonus_min_incentive_type === 'none'
 				? DEFAULT_VALUE : Number(network_bonus_min_incentive_value),
 			max_incentive_type : network_bonus_max_incentive_type,
 			maximum_incentive  : network_bonus_max_incentive_type === 'none'
