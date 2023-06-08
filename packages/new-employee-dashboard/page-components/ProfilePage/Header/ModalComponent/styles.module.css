@@ -19,14 +19,31 @@
 }
 
 .control_label {
-	width: 130%;
+	width: 40%;
+}
+
+.label {
+	width: 60%;
 }
 
 .field_controller {
-	width: 60%;
+	width: 100%;
+	margin: 0 8px;
+}
+
+.field {
+	width: 50%;
 	margin: 0 8px;
 }
 
 .table_container {
 	margin: 20px 0 24px;
+}
+
+.error {
+	padding-left: 8px;
+	margin: 0;
+	font-size: 12px;
+	line-height: 16px;
+	color: #cb6464;
 }

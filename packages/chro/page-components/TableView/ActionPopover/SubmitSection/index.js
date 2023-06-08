@@ -7,8 +7,18 @@ export default function SubmitSection({
 	employeeId = '',
 	setVisible = () => {},
 	onFinalSubmit = () => {},
+	updateOfferLetterLoading = false,
 }) {
 	const [finalReview, setFinalReview] = useState('');
+
+	const onConfirm = () => {
+		onFinalSubmit({
+			id               : employeeId,
+			status           : 'rejected',
+			rejection_reason : finalReview,
+		});
+		setVisible(false);
+	};
 
 	return (
 		<div className={styles.popover_inner}>
@@ -21,6 +31,12 @@ export default function SubmitSection({
 					size="lg"
 					placeholder="Provide Reason"
 				/>
+				{/* {console.log('finalReview', !!finalReview)} */}
+				{!finalReview ? (
+					<p className={styles.error}>
+						Required field
+					</p>
+				) : null}
 			</div>
 
 			<div
@@ -34,6 +50,7 @@ export default function SubmitSection({
 					className={styles.button_submit}
 					themeType="secondary"
 					onClick={() => setVisible(false)}
+					disabled={updateOfferLetterLoading}
 				>
 					Cancel
 				</Button>
@@ -41,11 +58,8 @@ export default function SubmitSection({
 				<Button
 					className={styles.button_submit}
 					themeType="primary"
-					onClick={() => onFinalSubmit({
-						id               : employeeId,
-						status           : 'rejected',
-						rejection_reason : finalReview,
-					})}
+					onClick={() => (finalReview ? onConfirm() : null)}
+					loading={updateOfferLetterLoading}
 				>
 					Confirm
 				</Button>
