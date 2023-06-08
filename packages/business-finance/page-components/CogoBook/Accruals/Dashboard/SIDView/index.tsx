@@ -3,7 +3,17 @@ import { IcMArrowRight } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function SIDView({ reportMonth, shipmentViewLoading }) {
+interface MonthInterface{
+	id?:string
+	days?:string
+	shipmentId?:string
+}
+interface SIDViewInterface{
+	reportMonth?: Array<MonthInterface>
+	shipmentViewLoading?: boolean
+}
+
+function SIDView({ reportMonth, shipmentViewLoading }:SIDViewInterface) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.shipment_days}>

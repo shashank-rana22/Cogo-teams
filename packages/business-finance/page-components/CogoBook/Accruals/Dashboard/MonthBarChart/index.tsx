@@ -4,7 +4,13 @@ import { getAmountInLakhCrK } from './getAmountInLakhCrK';
 import { getAmountLineChartInLakh } from './getAmountLineChartInLakh';
 import styles from './styles.module.css';
 
-function MonthBarChart({ monthlyData }) {
+export interface BarDatum {
+    [key: string]: string | number;
+}
+interface MonthlyBarChartInterface{
+	monthlyData?: Array<BarDatum>
+}
+function MonthBarChart({ monthlyData }:MonthlyBarChartInterface) {
 	return (
 		<div className={styles.container}>
 			<ResponsiveBar

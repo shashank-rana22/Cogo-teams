@@ -4,10 +4,22 @@ import { getFormattedPrice } from '@cogoport/forms';
 
 import styles from './styles.module.css';
 
+interface ChartDataInterface{
+	expenseBookedSum?: number
+	expenseAccruedSum?: number
+	expenseCurrency?: string
+	incomeBookedSum?: number
+	incomeAccruedSum?: number
+	incomeCurrency?: string
+	statsLoading?: boolean
+	COLORS?: Array<string>
+	data?: Array<object>
+	dataExpense?: Array<object>
+}
 function ChartData({
 	expenseBookedSum, expenseAccruedSum, expenseCurrency, incomeBookedSum, incomeAccruedSum,
 	incomeCurrency, statsLoading, COLORS, data, dataExpense,
-}) {
+}:ChartDataInterface) {
 	function CenteredMetric({ centerX, centerY }) {
 		return (
 			<text
