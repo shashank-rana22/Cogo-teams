@@ -8,6 +8,9 @@ import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';
 
+const OPTIONS = [];
+const INITIAL_STATE = 0;
+
 function SelectService({
 	invoice = {},
 	handleServiceChange = () => {},
@@ -19,8 +22,6 @@ function SelectService({
 
 	const [value, onChange] = useState(selected);
 	const [invoiceCurrency, setInvoiceCurrency] = useState(invoice_currency);
-
-	const options = [];
 
 	allTakenServices?.forEach((service) => {
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
@@ -84,12 +85,12 @@ function SelectService({
 						</div>
 					</Tooltip>
 				),
-				isTaxable : service?.tax_total > 0,
+				isTaxable : service?.tax_total > INITIAL_STATE,
 				value     : id,
 				...service,
 			};
 
-			options.push(servicesToPush);
+			OPTIONS.push(servicesToPush);
 		}
 	});
 
@@ -122,7 +123,7 @@ function SelectService({
 			/>
 
 			<CheckboxGroup
-				options={options}
+				options={OPTIONS}
 				onChange={handleChange}
 				value={value}
 			/>

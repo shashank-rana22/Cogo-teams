@@ -12,6 +12,9 @@ import MessageContainer from './MessageContainer';
 import SendTo from './SendTo';
 import styles from './styles.module.css';
 
+const INITIAL_STATE = 0;
+const KEY_CODE = [13, 8, 46];
+
 const shipmentChatStakeholders = [
 	'service_ops1',
 	'service_ops2',
@@ -42,7 +45,7 @@ function Details({
 	const { msgContent } = useFireBase({ id });
 
 	const isStakeholder = shipmentChatStakeholders.includes(
-		channelData?.stakeholder_types?.[0],
+		channelData?.stakeholder_types?.[INITIAL_STATE],
 	);
 
 	const formValues = {
@@ -57,7 +60,7 @@ function Details({
 	// formatting Data for hooks
 	const stakeholder = stakeHolderView.split(' ');
 	const stakeholderArray = (stakeholder || []).map((item) => item.replace('@', ''));
-	const conditionArr = stakeholderArray.length && stakeholderArray[0] !== '' ? [...stakeholderArray] : [];
+	const conditionArr = stakeholderArray.length && stakeholderArray[INITIAL_STATE] !== '' ? [...stakeholderArray] : [];
 	const filteredArr = (conditionArr || []).map((item) => {
 		if (item === '') {
 			return null;
@@ -73,17 +76,19 @@ function Details({
 	};
 
 	let visible_to_stakeholders = isStakeholder
-		? [...filteredArr, channelData?.stakeholder_types?.[0]]
+		? [...filteredArr, channelData?.stakeholder_types?.[INITIAL_STATE]]
 		: [...filteredArr];
 
 	visible_to_stakeholders = visible_to_stakeholders?.filter((item) => shipmentChatStakeholders.includes(item));
 
 	const GroupChannel = filteredArr.length
 		? {
-			created_by_stakeholder: channelData?.stakeholder_types?.[0], source_id: sourceId, visible_to_stakeholders,
+			created_by_stakeholder : channelData?.stakeholder_types?.[INITIAL_STATE],
+			source_id              : sourceId,
+			visible_to_stakeholders,
 		}
 		: {
-			created_by_stakeholder : channelData?.stakeholder_types?.[0],
+			created_by_stakeholder : channelData?.stakeholder_types?.[INITIAL_STATE],
 			source_id              : sourceId,
 			visible_to_user_ids    : subscribedUsers,
 		};
@@ -119,15 +124,15 @@ function Details({
 
 	const contentData = formValues?.message?.split('\n').length;
 	const handleClick = (e) => {
-		if (e.keyCode === 13 && e.shiftKey && rows < 5) {
+		if (KEY_CODE.includes(e.keyCode) && e.shiftKey && rows < 5) {
 			setRows(contentData + 1);
 		}
-		if (e.keyCode === 13 && !e.shiftKey) {
+		if (KEY_CODE.includes(e.keyCode) && !e.shiftKey) {
 			onCreateMessage();
 			reset();
 			setRows(1);
 		}
-		if (contentData > 1 && (e.keyCode === 8 || e.keyCode === 46)) {
+		if (contentData > 1 && KEY_CODE.includes(e.keyCode)) {
 			setRows(contentData - 1);
 		}
 	};
@@ -210,7 +215,7 @@ function Details({
 						<div
 							className={styles.send}
 							role="button"
-							tabIndex={0}
+							tabIndex={INITIAL_STATE}
 							onClick={!loading ? onCreateMessage : null}
 						>
 							<IcMSend style={{ width: '2em', height: '2em', fill: '#303b67' }} />

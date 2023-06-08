@@ -1,3 +1,6 @@
+const INITIAL_LINE_ITEMS = [];
+const LINE_ITEM_ARRAY = [];
+
 const formatCreditNoteData = ({
 	data = {},
 	servicesIDs = [],
@@ -5,20 +8,16 @@ const formatCreditNoteData = ({
 	invoiceData = {},
 	isEdit,
 }) => {
-	const initialLineItems = [];
-
 	invoiceData?.invoicing_parties?.forEach((party) => {
 		party?.services?.forEach((service) => {
 			service?.line_items?.forEach((item) => {
 				const obj = { ...(item || {}) };
 				obj.service_id = service?.service_id;
 
-				initialLineItems.push(obj);
+				INITIAL_LINE_ITEMS.push(obj);
 			});
 		});
 	});
-
-	const lineItemArray = [];
 
 	let checkError = {};
 
@@ -29,7 +28,7 @@ const formatCreditNoteData = ({
 					const serviceDetails = invoice?.services
 						?.filter((item) => (item?.id || item?.service_id) === key)?.[0];
 
-					const initialData = initialLineItems
+					const initialData = INITIAL_LINE_ITEMS
 						?.filter((li) => li?.code === line_item?.code)
 						?.find((lineitem) => lineitem.service_id === key);
 
@@ -70,7 +69,7 @@ const formatCreditNoteData = ({
 						service_type : serviceDetails?.service_type,
 					};
 
-					lineItemArray.push(newLineItem);
+					LINE_ITEM_ARRAY.push(newLineItem);
 				} else {
 					const arr = checkError[key] ? checkError[key] : [];
 
@@ -82,7 +81,7 @@ const formatCreditNoteData = ({
 
 	const submit_data = {
 		id                     : isEdit ? invoice?.id : undefined,
-		line_items             : lineItemArray,
+		line_items             : LINE_ITEM_ARRAY,
 		remarks                : data?.remarks ? [data?.remarks] : undefined,
 		invoice_combination_id : invoice?.id,
 		shipment_id            : invoice?.shipment_id,

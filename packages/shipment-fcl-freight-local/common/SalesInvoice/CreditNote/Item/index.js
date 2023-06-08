@@ -21,6 +21,7 @@ const CN_STATUS_MAPPING = {
 	rejected         : 'rejected',
 	finance_rejected : 'finance_rejected',
 };
+const INITIAL_STATE = 0;
 
 function Item({
 	item = {},
@@ -36,16 +37,16 @@ function Item({
 	const itemStatus = item?.status;
 
 	const prevData = {
-		remarks       : item?.remarks?.[0] || '',
+		remarks       : item?.remarks?.[INITIAL_STATE] || '',
 		document_urls : item?.document_urls || [],
 	};
 
 	const bfInvoice = invoicesList.filter((ele) => ele?.proformaNumber === item?.cn_number);
 
 	const handleDownload = () => {
-		const cnLink = bfInvoice[0]?.invoicePdfUrl
-			? bfInvoice[0]?.invoicePdfUrl
-			: bfInvoice[0]?.proformaPdfUrl;
+		const cnLink = bfInvoice[INITIAL_STATE]?.invoicePdfUrl
+			? bfInvoice[INITIAL_STATE]?.invoicePdfUrl
+			: bfInvoice[INITIAL_STATE]?.proformaPdfUrl;
 
 		window.open(cnLink);
 	};
@@ -133,7 +134,7 @@ function Item({
 					<div
 						onClick={() => setOpen('edit')}
 						role="button"
-						tabIndex={0}
+						tabIndex={INITIAL_STATE}
 						className={styles.actions}
 					>
 						<IcMEdit />
@@ -145,7 +146,7 @@ function Item({
 			<section
 				className={styles.rotate_icon}
 				onClick={() => setOpen(open !== 'line_items' ? 'line_items' : false)}
-				tabIndex={0}
+				tabIndex={INITIAL_STATE}
 				role="button"
 				style={{ height: `${billingPartyHeightRef.current?.offsetHeight}px` }}
 			>

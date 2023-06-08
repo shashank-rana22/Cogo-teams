@@ -23,6 +23,7 @@ const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
 const INITIAL_STATE = 1;
 const LENGTH_COUNT = 0;
 const MAX_LEN = 25;
+const SERVICE_COUNT = 2;
 
 const STAKE_HOLDER_TYPES = [
 	'superadmin',
@@ -109,7 +110,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 		errorMsg = 'LR task not completed';
 
 		if (
-			tdata?.list?.length === 0
+			tdata?.list?.length === LENGTH_COUNT
 			&& geo.uuid.fortigo_network_ids.includes(shipment_data?.importer_exporter_id)
 		) {
 			disableInvoice = true;
@@ -129,7 +130,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 					<span className={styles.spankey}>Services :</span>
 					<ToolTipWrapper
 						text={services}
-						maxlength={2}
+						maxlength={SERVICE_COUNT}
 						render
 						content={(
 							<>
@@ -137,8 +138,8 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 							</>
 						)}
 					>
-						{serviceswrapper(services?.slice(0, 2) || [])}
-						{services.length > 2 ? '...' : ''}
+						{serviceswrapper(services?.slice(LENGTH_COUNT, SERVICE_COUNT) || [])}
+						{services.length > SERVICE_COUNT ? '...' : ''}
 					</ToolTipWrapper>
 				</div>
 			</div>
@@ -157,7 +158,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 					<span className={styles.paddingleft}>
 						{' '}
 						- (
-						{collectionParty?.collection_parties?.length || 0}
+						{collectionParty?.collection_parties?.length || LENGTH_COUNT}
 						)
 					</span>
 				</div>
@@ -218,7 +219,10 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 				<div className={styles.totalamount}>
 					Total With TAX
 					<span className={styles.amount}>
-						{getFormattedAmount(collectionParty?.net_total || 0, collectionParty?.net_total_price_currency)}
+						{getFormattedAmount(
+							collectionParty?.net_total || LENGTH_COUNT,
+							collectionParty?.net_total_price_currency,
+						)}
 					</span>
 				</div>
 				{open ? (

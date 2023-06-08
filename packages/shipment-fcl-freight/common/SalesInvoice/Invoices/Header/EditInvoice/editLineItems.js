@@ -2,7 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import rawControls from './rawControls';
 
@@ -10,6 +9,7 @@ const TRADE_MAPPING = {
 	import : 'Destination',
 	export : 'Origin',
 };
+const INITIAL_STATE = 0;
 
 const useEditLineItems = ({
 	invoice = {},
@@ -43,7 +43,7 @@ const useEditLineItems = ({
 				defaultValues[control.name] = control.value.map((value) => {
 					const fieldValue = {};
 					control.controls.forEach((subControl) => {
-						fieldValue[subControl.name] = value[subControl.name] || 0;
+						fieldValue[subControl.name] = value[subControl.name] || INITIAL_STATE;
 					});
 
 					return fieldValue;
@@ -72,20 +72,37 @@ const useEditLineItems = ({
 			TRADE_MAPPING,
 		),
 		onOptionsChange : handleOptionsChange,
-		value           : (service?.line_items || []).map((item) => ({
-			code             : item?.code,
-			alias            : item?.alias,
-			sac_code         : item?.hsn_code || 'NA',
-			currency         : item?.currency,
-			price_discounted : item?.price_discounted || '0',
-			quantity         : item?.quantity || 0,
-			exchange_rate    : item?.exchange_rate || 1,
-			tax_percent      : item?.tax_percent || 0,
-			unit             : item?.unit,
-			total            : item?.tax_total_price_discounted || 0,
-			name             : item?.name,
-			id               : uuid(),
-		})),
+		value           : (service?.line_items || []).map((item) => {
+			const {
+				alias,
+				code,
+				hsn_code = 'NA',
+				currency,
+				price_discounted = 0,
+				quantity = 0,
+				exchange_rate = 1,
+				tax_percent = 0,
+				unit,
+				tax_total_price_discounted = 0,
+				name,
+				product_code,
+			} = item || {};
+
+			return {
+				alias,
+				code,
+				sac_code : hsn_code,
+				currency,
+				price_discounted,
+				quantity,
+				exchange_rate,
+				tax_percent,
+				unit,
+				total    : tax_total_price_discounted,
+				name,
+				id       : product_code,
+			};
+		}),
 	}));
 
 	const defaultValues = generateDefaultValues({ values: controls });
@@ -150,22 +167,16 @@ const useEditLineItems = ({
 				payload.push(service);
 			});
 
-			const res = await trigger({
+			await trigger({
 				data: {
 					quotations             : payload,
 					shipment_id            : shipment_data?.id,
 					invoice_combination_id : invoice?.id || undefined,
 				},
 			});
-			if (!res.hasError) {
-				Toast.success('Line Items updated successfully!');
-				if (refetch) {
-					refetch();
-				}
-				if (onClose) {
-					onClose();
-				}
-			}
+			Toast.success('Line Items updated successfully!');
+			refetch();
+			onClose();
 		} catch (err) {
 			Toast.error(err?.data?.invoices);
 		}

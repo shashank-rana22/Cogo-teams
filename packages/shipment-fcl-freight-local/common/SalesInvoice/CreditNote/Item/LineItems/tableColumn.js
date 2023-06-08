@@ -2,6 +2,8 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getServiceNameforTableColumn from '../../../helpers/getServiceNameforTableColumn';
 
+const INITIAL_STATE = 0;
+
 export const tableColumn = ({ serviceItem = {} }) => {
 	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, serviceItem?.trade_type);
 
@@ -19,7 +21,7 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : 'Rate',
 			render : (item) => formatAmount({
-				amount   : item?.price_discounted || 0,
+				amount   : item?.price_discounted || INITIAL_STATE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -30,13 +32,13 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		},
 		{
 			label  : 'Quantity',
-			render : (item) => item?.quantity || 0,
+			render : (item) => item?.quantity || INITIAL_STATE,
 			span   : 1.2,
 		},
 		{
 			label  : 'Discount',
 			render : (item) => formatAmount({
-				amount   : item?.discount_price || 0,
+				amount   : item?.discount_price || INITIAL_STATE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -49,7 +51,7 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : 'Exc. Rate',
 			render : (item) => formatAmount({
-				amount   : item?.exchange_rate || 0,
+				amount   : item?.exchange_rate || INITIAL_STATE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -61,7 +63,7 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : 'Tax Amt.',
 			render : (item) => `${formatAmount({
-				amount   : item?.tax_price_discounted || 0,
+				amount   : item?.tax_price_discounted || INITIAL_STATE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'currency',
@@ -75,7 +77,7 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : 'Amt. with Tax',
 			render : (item) => formatAmount({
-				amount   : item?.tax_total_price_discounted || 0,
+				amount   : item?.tax_total_price_discounted || INITIAL_STATE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'currency',
