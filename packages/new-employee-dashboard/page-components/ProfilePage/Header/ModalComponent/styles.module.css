@@ -18,7 +18,7 @@
 }
 
 .control_label {
-	width: 40%;
+	width: 50%;
 }
 
 .label {
@@ -31,7 +31,7 @@
 }
 
 .field {
-	width: 50%;
+	width: 100%;
 	margin: 0 8px;
 }
 
@@ -48,7 +48,14 @@
 }
 
 .header_field {
-	display: "flex";
+	display: flex;
 	align-items: "center";
-	justify-content: "space-between";
+	justify-content: space-between;
+	width: 100%;
+}
+
+.field_heading {
+	justify-content: flex-end;
+	width: 50%;
+	margin: 0 8px;
 }

@@ -34,6 +34,8 @@ function ProfilePage() {
 		formProps = {},
 		getEmployeeDetails,
 		getEmployeeDetailsLoading,
+		error = false,
+		setError = () => {},
 	} = useProfileDetails();
 
 	const {
@@ -90,6 +92,8 @@ function ProfilePage() {
 						setInitialQuestion={setInitialQuestion}
 						formProps={formProps}
 						offerLetterApiRefetch={offerLetterApiRefetch}
+						error={error}
+						setError={setError}
 					/>
 				)
 			}

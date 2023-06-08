@@ -15,6 +15,7 @@ export default function SubmitSection({
 	offerLetterApiRefetch,
 	handleSubmit,
 	reset,
+	setError,
 }) {
 	const {
 		loading,
@@ -22,10 +23,14 @@ export default function SubmitSection({
 	} = usePostCreateEmployeeOfferLetter({ setShowCtcBreakupModal, offerLetterApiRefetch });
 
 	const onSubmit = (values) => {
-		onFinalSubmit(values, ctcStructure, initialQuestion, detail?.id);
-		setVisible(false);
-		setInitialQuestion('');
-		reset();
+		if (initialQuestion) {
+			onFinalSubmit(values, ctcStructure, initialQuestion, detail?.id);
+			setVisible(false);
+			setInitialQuestion('');
+			reset();
+		} else {
+			setError(true);
+		}
 	};
 	const onClose = () => {
 		setVisible(false);

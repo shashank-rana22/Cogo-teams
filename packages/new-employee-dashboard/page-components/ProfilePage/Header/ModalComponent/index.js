@@ -1,5 +1,4 @@
 import { Input } from '@cogoport/components';
-import React from 'react';
 
 import getControls from '../../../../utils/ctc-modal-form-controls';
 import { getElementController } from '../../../../utils/get-element-controls';
@@ -11,22 +10,28 @@ function ModalComponent({
 	initialQuestion,
 	setInitialQuestion,
 	control,
-	errors,
+	error,
 }) {
 	const finalControls = getControls(initialQuestion);
 	return (
 		<div>
-			<div className={styles.header_field} >
+			<div className={styles.header_field}>
 				<div className={styles.control_label}>
 					Input Target Annual Gross Salary (Fixed component)
 				</div>
-				<Input
-					placeholder="Set Offered CTC"
-					value={initialQuestion}
-					onChange={(e) => setInitialQuestion(e)}
-					type="number"
-					className={styles.field}
-				/>
+				<div className={styles.field_heading}>
+					<Input
+						placeholder="Set Offered CTC"
+						value={initialQuestion}
+						onChange={(e) => {
+							setInitialQuestion(e);
+						}}
+						type="number"
+						className={styles.field}
+					/>
+					{error ? <div className={styles.error}>Required field</div> : null}
+				</div>
+
 			</div>
 
 			<div className={styles.table_container}>
@@ -70,9 +75,7 @@ function ModalComponent({
 								control={control}
 								className={styles.field_controller}
 							/>
-							<div className={styles.error}>
-								{errors?.[controlItem?.yearly?.name]?.message}
-							</div>
+
 						</div>
 
 						<div style={{ marginRight: '4px', width: '40%' }}>
@@ -83,9 +86,7 @@ function ModalComponent({
 								control={control}
 								className={styles.field_controller}
 							/>
-							<div className={styles.error}>
-								{errors?.[controlItem?.monthly?.name]?.message}
-							</div>
+
 						</div>
 
 					</div>

@@ -17,6 +17,7 @@ function useCreateEmployeeDetails({ id, getEmployeeDetails }) {
 					status             : data?.status || 'active',
 				},
 			});
+
 			getEmployeeDetails();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');

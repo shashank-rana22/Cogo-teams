@@ -13,6 +13,7 @@ import useUpdateOfferLetter from './useUpdateOfferLetter';
 
 function TableView({ search, activeTab }) {
 	const [ctcBreakup, setCtcBreakup] = useState();
+	const [error, setError] = useState(false);
 
 	const { data = {}, onPageChange, loading, refetch } = useGetTableView({ search, activeTab });
 
@@ -88,6 +89,8 @@ function TableView({ search, activeTab }) {
 						{ctcBreakup?.status === 'active' ? (
 							<>
 								<ActionPopover
+									error={error}
+									setError={setError}
 									item={ctcBreakup}
 									onFinalSubmit={onFinalSubmit}
 									updateOfferLetterLoading={updateOfferLetterLoading}
