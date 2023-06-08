@@ -16,7 +16,9 @@ const INITIAL_STATE = 0;
 const INITIAL_STATE_ROWS = 1;
 const TOTAL_STAKEHOLDERS_LENGTH = 2;
 const TOTAL_ROWS = 5;
-const KEY_CODE = [13, 8, 46];
+const ENTER_KEY = 13;
+const DELETE_KEY_1  = 46;
+const DELETE_KEY_2= 8;
 
 const shipmentChatStakeholders = [
 	'service_ops1',
@@ -127,15 +129,15 @@ function Details({
 
 	const contentData = formValues?.message?.split('\n').length;
 	const handleClick = (e) => {
-		if (KEY_CODE.includes(e.keyCode) && e.shiftKey && rows < TOTAL_ROWS) {
+		if (e.keyCode === ENTER_KEY && e.shiftKey && rows < TOTAL_ROWS) {
 			setRows(contentData + INITIAL_STATE_ROWS);
 		}
-		if (KEY_CODE.includes(e.keyCode) && !e.shiftKey) {
+		if (e.keyCode === ENTER_KEY && !e.shiftKey) {
 			onCreateMessage();
 			reset();
 			setRows(INITIAL_STATE_ROWS);
 		}
-		if (contentData > INITIAL_STATE_ROWS && KEY_CODE.includes(e.keyCode)) {
+		if (contentData > INITIAL_STATE_ROWS && (e.keyCode === DELETE_KEY_2 || e.keyCode === DELETE_KEY_1)) {
 			setRows(contentData - INITIAL_STATE_ROWS);
 		}
 	};
