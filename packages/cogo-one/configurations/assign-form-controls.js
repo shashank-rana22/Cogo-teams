@@ -1,3 +1,20 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
+const entityOptions = Object.values(GLOBAL_CONSTANTS.cogoport_entities || {}).map(
+	(eachEntity) => {
+		const { id = '', icon:Icon, name = '' } = eachEntity;
+		return {
+			label: (
+				<span>
+					{name}
+					<Icon style={{ margin: '5px 0 0 10px' }} />
+				</span>
+			),
+			value: id,
+		};
+	},
+);
+
 const controls = {
 
 	assign_user: {
@@ -46,5 +63,42 @@ const controls = {
 		],
 
 	},
+	assign_entity: {
+		name        : 'assign_entity',
+		type        : 'select',
+		placeholder : 'select Entity',
+		options     : entityOptions,
+		rules       : { required: 'This is required' },
+	},
+	assign_role: {
+		name        : 'assign_role',
+		type        : 'select',
+		placeholder : 'select Role',
+		options     : [
+			{
+				label : 'Supply Agent',
+				value : 'supply',
+			},
+			{
+				label : 'Support Agent',
+				value : 'support',
+			},
+		],
+		rules: { required: 'This is required' },
+	},
 };
+
+export const ASSIGN_TYPE_OPTIONS = [{
+	label : 'Assign User',
+	value : 'assign_user',
+},
+{
+	label : 'Assign on Shipment/Invoice',
+	value : 'assign_on_shipment_invoice',
+},
+{
+	label : 'Assign on Entity/Team',
+	value : 'assign_on_entity',
+}];
+
 export default controls;

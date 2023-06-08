@@ -13,6 +13,7 @@ import { useState, useEffect, useMemo, useRef, useCallback } from 'react';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { PAGE_LIMIT } from '../constants';
+import filterAndSortFlashMessages from '../helpers/filterAndSortFlashMessages';
 import getFireStoreQuery from '../helpers/getFireStoreQuery';
 import sortChats from '../helpers/sortChats';
 
@@ -357,10 +358,6 @@ const useListChats = ({
 		}
 	};
 
-	const sortedFlashMessages = Object.keys(flashMessagesData || {})
-		.sort((a, b) => Number(b.updated_at || 0) - Number(a.updated_at || 0))
-		.map((sortedkeys) => flashMessagesData[sortedkeys]);
-
 	const getAssignedChats = useCallback(async () => {
 		const assignedChatsQuery = query(
 			omniChannelCollection,
@@ -376,7 +373,7 @@ const useListChats = ({
 			messagesList      : sortedUnpinnedList || [],
 			unReadChatsCount  : listData?.unReadChatsCount,
 			sortedPinnedChatList,
-			flashMessagesList : sortedFlashMessages || [],
+			flashMessagesList : filterAndSortFlashMessages(flashMessagesData) || [],
 		},
 		setActiveMessage,
 		activeMessageCard: activeCardData,
