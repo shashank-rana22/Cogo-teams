@@ -1,4 +1,5 @@
 import { Button, RatingComponent, Textarea } from '@cogoport/components';
+import { Image } from '@cogoport/next';
 import { useState } from 'react';
 
 import useCreateCourseFeedback from '../../hooks/useCourseFeedback';
@@ -27,12 +28,12 @@ function CompletionAndFeedback({ course_id, feedbackData = {}, name }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.congrats}>
-				<div>
-					<img
-						src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/completed_course_confetti.svg"
-						alt="course_completion.png"
-					/>
-				</div>
+				<Image
+					width={20}
+					height={20}
+					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/completed_course_confetti.svg"
+					alt="course_completion.png"
+				/>
 
 				<div className={styles.congrats_text}>
 					<h2>Congratulations!</h2>

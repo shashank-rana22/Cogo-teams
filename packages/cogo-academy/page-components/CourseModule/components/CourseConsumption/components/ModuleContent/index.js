@@ -45,7 +45,7 @@ function ModuleContent({
 	const {
 		onClickNextChapter,
 		onClickPreviousChapter,
-		formatTime,
+		FormatTime,
 		handleChange,
 		SOURCE_MAPPING,
 		onClickVisitTest,
@@ -115,7 +115,7 @@ function ModuleContent({
 							<div className={styles.data_display}>
 								<span>Duration</span>
 								<b>
-									{formatTime(test_duration)}
+									<FormatTime test_duration={test_duration} />
 								</b>
 							</div>
 

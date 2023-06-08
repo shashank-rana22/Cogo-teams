@@ -8,11 +8,13 @@ import CategoriesCard from './component/CategoriesCard';
 import styles from './styles.module.css';
 
 function CategoryCard({ courseCategoryData = {}, categoryLoading, setCurrentCategory }) {
+	const { list = [] } = courseCategoryData || {};
+
 	if (categoryLoading) {
 		return <LoadingState rowsCount={2} />;
 	}
 
-	if (isEmpty(courseCategoryData.list || [])) {
+	if (isEmpty(list)) {
 		return (
 			<EmptyState
 				emptyText="Categories not found"
@@ -21,7 +23,7 @@ function CategoryCard({ courseCategoryData = {}, categoryLoading, setCurrentCate
 		);
 	}
 
-	const CAROUSELDATA = (courseCategoryData?.list || []).map((item) => ({
+	const CAROUSELDATA = (list).map((item) => ({
 		key    : item?.id,
 		render : () => (
 			<CategoriesCard

@@ -12,6 +12,10 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 	}, { manual: true });
 
 	const onSubmit = async (values) => {
+		const { description, error_screenshot_url = {} } = values || {};
+
+		const { finalUrl = '' } = error_screenshot_url || {};
+
 		const payload = {
 			user_id       : '20f59087-12cf-4e6d-8463-27d41e23da6f',
 			type          : 'platform_notification',
@@ -20,8 +24,8 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 			template_name : 'api_error_request_response',
 			provider_name : 'cogoport',
 			variables     : {
-				description       : values?.description,
-				image_url         : values?.error_screenshot_url?.finalUrl || '',
+				description,
+				image_url         : finalUrl,
 				status_code       : 1,
 				session_data      : '',
 				requested_payload : '',

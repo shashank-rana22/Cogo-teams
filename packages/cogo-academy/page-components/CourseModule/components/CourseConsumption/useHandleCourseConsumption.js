@@ -39,9 +39,8 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 
 	const [currentCategory, setCurrentCategory] = useState('all_courses');
 
-	const { moduleIndex, subModuleIndex, chapterIndex, isNew = false } = indexes;
-	const [showTestData, setShowTestData] = useState();
-	const [showFeedback, setShowFeedback] = useState();
+	const [showTestData, setShowTestData] = useState(false);
+	const [showFeedback, setShowFeedback] = useState(false);
 
 	const {
 		data = {},
@@ -73,6 +72,8 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 	} = finalData || {};
 
 	const { courseProgressUpdateLoading, updateCourseProgress } = useUpdateUserCourseProgress({ course_id, user_id });
+
+	const { moduleIndex, subModuleIndex, chapterIndex, isNew = false } = indexes;
 
 	useEffect(() => {
 		if (!isEmpty(finalData) && !isEmpty(indexes)) {

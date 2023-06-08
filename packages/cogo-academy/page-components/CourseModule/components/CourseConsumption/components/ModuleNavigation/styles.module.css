@@ -23,6 +23,7 @@
 
 .container {
 	width: 30%;
+	overflow: auto;
 
 	:global {
 		.ui_accordion_container {

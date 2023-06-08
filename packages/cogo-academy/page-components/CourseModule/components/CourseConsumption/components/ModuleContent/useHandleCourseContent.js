@@ -6,17 +6,19 @@ import getChapter from '../../utils/getChapter';
 
 const TIME_UNIT_VALUE = 60;
 
-const formatTime = (time) => (
-	<div>
-		{Math.floor(time / TIME_UNIT_VALUE)}
+function FormatTime({ test_duration = 0 }) {
+	return (
+		<div>
+			{Math.floor(test_duration / TIME_UNIT_VALUE)}
 		&nbsp;
-		<b>Hour</b>
+			<b>Hour</b>
 		&nbsp;
-		{time % TIME_UNIT_VALUE}
+			{test_duration % TIME_UNIT_VALUE}
 		&nbsp;
-		<b>Min</b>
-	</div>
-);
+			<b>Min</b>
+		</div>
+	);
+}
 
 const useHandleCourseContent = ({
 	updateCourseProgress,
@@ -114,7 +116,7 @@ const useHandleCourseContent = ({
 	return {
 		onClickNextChapter,
 		onClickPreviousChapter,
-		formatTime,
+		FormatTime,
 		handleChange,
 		SOURCE_MAPPING,
 		onClickVisitTest,

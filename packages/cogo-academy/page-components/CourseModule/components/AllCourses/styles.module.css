@@ -107,7 +107,6 @@
 		.ui_tags_container {
 			display: flex;
 			flex-wrap: wrap;
-			gap: 8px;
 		}
 	}
 }

@@ -43,12 +43,12 @@ function CourseCard({
 	const {
 		cogo_academy_course = {},
 		cogo_academy_course_id: course_id = '',
-		user_progress,
+		user_progress = 0,
 		state,
 		modules_count = 0,
 		average_rating = 0,
 		is_saved = false,
-	} = data;
+	} = data || {};
 
 	const {
 		faq_topics = [],
@@ -57,7 +57,7 @@ function CourseCard({
 		course_categories = [],
 		thumbnail_url = '',
 		course_completion_duration = {},
-	} = cogo_academy_course;
+	} = cogo_academy_course || {};
 
 	const { course_completion_unit, course_completion_value } = course_completion_duration;
 
@@ -65,11 +65,7 @@ function CourseCard({
 
 	const { updateUserCourse } = useUpdateUserCourse({ fetchList });
 
-	let finalUserProgress = user_progress;
-
-	if (finalUserProgress > MAXIMUM_PROGRESS_PRECENTAGE) {
-		finalUserProgress = MAXIMUM_PROGRESS_PRECENTAGE;
-	}
+	const finalUserProgress = Math.min(user_progress, MAXIMUM_PROGRESS_PRECENTAGE);
 
 	return (
 		<div className={`${styles.container} ${styles[viewType]}`}>

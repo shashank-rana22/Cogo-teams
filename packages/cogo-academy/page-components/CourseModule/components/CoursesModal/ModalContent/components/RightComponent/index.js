@@ -6,7 +6,7 @@ import LoadingState from '../../../../../commons/LoadingState';
 import CategoryCard from './CategoryCard';
 import styles from './styles.module.css';
 
-const CARDS_TO_SHOW = 2;
+const CARDS_TO_SHOW = 8;
 
 function RightComponent({ data = {}, listLoading = false, setShowCoursesModal = () => {} }) {
 	const router = useRouter();

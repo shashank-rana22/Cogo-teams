@@ -12,7 +12,7 @@ const useUpdateCourseFeedback = () => {
 		method : 'POST',
 	}, { manual: true });
 
-	const updateCourseFeedback = async ({ rating, remark, feedback_id }) => {
+	const updateCourseFeedback = async ({ rating = 0, remark = '', feedback_id = '' }) => {
 		try {
 			await trigger({
 				params: {

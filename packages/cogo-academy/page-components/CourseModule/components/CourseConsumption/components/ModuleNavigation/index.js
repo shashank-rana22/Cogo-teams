@@ -23,7 +23,13 @@ function ModuleNavigation({
 	showFeedback,
 	setShowFeedback,
 }) {
-	const { course_details = {}, all_chapters_completed = false, test_completed = false, test_mapping = {} } = data;
+	const {
+		course_details = {},
+		all_chapters_completed = false,
+		test_completed = false,
+		test_mapping = {},
+		course_modules = [],
+	} = data;
 
 	const { name = '', tests = [] } = course_details;
 
@@ -41,7 +47,7 @@ function ModuleNavigation({
 		<div className={styles.container}>
 			<h3 className={styles.course_name}>{name}</h3>
 
-			{(data.course_modules || []).map((module, moduleIndex) => (
+			{course_modules.map((module, moduleIndex) => (
 				<Accordion
 					key={module.id}
 					type="text"

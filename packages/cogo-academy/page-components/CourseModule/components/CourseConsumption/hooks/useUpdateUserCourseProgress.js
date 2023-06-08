@@ -4,7 +4,6 @@ import { useRequest } from '@cogoport/request';
 
 const useUpdateUserCourseProgress = ({ course_id, user_id }) => {
 	const [{ loading: courseProgressUpdateLoading }, trigger] = useRequest({
-
 		url    : '/update_user_course_progress',
 		method : 'POST',
 	}, { manual: true });

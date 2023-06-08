@@ -1,5 +1,6 @@
 import { Pill, Carousel } from '@cogoport/components';
 import { IcMStarfull } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
 import useHandleCourseDetails from './useHandleCourseDetails';
@@ -90,7 +91,9 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 
 					<div className={styles.card_details}>
 						<div>
-							<img
+							<Image
+								width={60}
+								height={60}
 								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/resume.png"
 								alt="resume.png"
 							/>
@@ -128,7 +131,9 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 					<div className={styles.card_title}>Estimated Completion</div>
 					<div className={styles.card_details}>
 						<div>
-							<img
+							<Image
+								width={60}
+								height={60}
 								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/back_in_time.png"
 								alt="resume.png"
 							/>
@@ -165,7 +170,9 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 						<div className={styles.card_title}>Course Creator</div>
 						<div className={styles.card_details}>
 							<div>
-								<img
+								<Image
+									width={60}
+									height={60}
 									src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/tutor.png"
 									alt="resume.png"
 								/>
