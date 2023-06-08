@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	line-height: 14px;
 	color: #393f70;
@@ -17,9 +17,9 @@
 }
 
 .task_action {
-	font-size: 10px;
+	font-size: var(--font-size-sm);
 	line-height: 16px;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 	text-align: center;
 	cursor: pointer;
 

@@ -14,7 +14,11 @@ const referral = {
 		navigation : 'referral-referral_configuration',
 		isMainNav  : true,
 	},
-
+	'/[partner_id]/referral/simulation': {
+		layoutType : 'no_header',
+		navigation : 'referral-simulation',
+		isMainNav  : true,
+	},
 };
 
 module.exports = referral;

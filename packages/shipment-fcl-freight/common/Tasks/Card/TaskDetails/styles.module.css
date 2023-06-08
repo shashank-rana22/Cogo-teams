@@ -49,10 +49,10 @@
 	align-items: center;
 	padding: 2px 8px;
 	margin-right: 10px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: var(--color-primary-error-red-2);
-	background: #fff1f3;
+	background-color: #fff1f3;
 	border-radius: 16px;
 
 	& > svg {
@@ -65,10 +65,10 @@
 	display: flex;
 	align-items: center;
 	padding: 2px 8px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: #027a48;
-	background: #ecfdf3;
+	background-color: #ecfdf3;
 	border-radius: 16px;
 
 	& > svg {

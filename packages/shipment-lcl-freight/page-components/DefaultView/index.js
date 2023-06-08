@@ -17,21 +17,35 @@ const DocumentHoldDetails = dynamic(() => import('../DocumentHoldDetails'), { ss
 const TAB_MAPPING = {
 	overview  : dynamic(() => import('../Overview'), { ssr: false }),
 	tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
+	purchase  : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
 	documents : dynamic(() => import('../Documents'), { ssr: false }),
 	emails    : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
 };
 
 function DefaultView() {
-	const { shipment_data = {}, stakeholderConfig = {} } = useContext(ShipmentDetailContext) || {};
+	const { shipment_data = {}, stakeholderConfig = {}, servicesList = [] } = useContext(ShipmentDetailContext) || {};
 
 	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
 	const [activeTab, setActiveTab] = useState(default_tab);
 
 	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
+	const tabProps = {
+		emails: {
+			source           : 'cogo_rpa',
+			filters          : { q: shipment_data?.serial_id },
+			pre_subject_text : `${shipment_data?.serial_id}`,
+		},
+		purchase: {
+			servicesData : servicesList,
+			shipmentData : shipment_data,
+		},
+	};
+
 	const conditionMapping = {
 		shipment_info       : !!features.includes('shipment_info'),
 		shipment_header     : !!features.includes('shipment_header'),
+		purchase            : !!features.includes('purchase'),
 		poc_sop             : !!(features.includes('poc') || features.includes('sop')),
 		chat                : !!features.includes('chat'),
 		cancelDetails       : !!(features.includes('cancel_details') && shipment_data?.state === 'cancelled'),
@@ -76,7 +90,7 @@ function DefaultView() {
 				>
 					{tabs.map((t) => (
 						<TabPanel name={t} key={t} title={stakeholderConfig[t]?.tab_title}>
-							{TAB_MAPPING[t]()}
+							{TAB_MAPPING[t](tabProps[t] || {})}
 						</TabPanel>
 					))}
 				</Tabs>

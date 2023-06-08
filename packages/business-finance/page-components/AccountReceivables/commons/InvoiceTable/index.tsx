@@ -1,8 +1,9 @@
-import { Pagination } from '@cogoport/components';
-import React from 'react';
+import { Button, Pagination } from '@cogoport/components';
+import React, { useState } from 'react';
 
 import Filters from '../../../commons/Filters';
 import completedColumn from '../../configs/Completed_table';
+import useBulkIrnGenerate from '../../hooks/useBulkIrnGenerate';
 import useGetOutstandingCard from '../../hooks/useGetoutstandingCard';
 import { INVOICE_FILTER } from '../../Utils/invoicelistFilter';
 import FilterModal from '../FilterModal';
@@ -21,6 +22,9 @@ const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
 
 function InvoiceTable({ organizationId, entityCode, showName }: Props) {
+	const [checkedRows, setCheckedRows] = useState([]);
+	const [isHeaderChecked, setIsHeaderChecked] = useState(false);
+
 	const {
 		listData,
 		clearInvoiceFilters,
@@ -32,6 +36,16 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		sort,
 		setSort,
 	} = useGetOutstandingCard(organizationId, entityCode);
+
+	const {
+		bulkIrnGenerate,
+		bulkIrnLoading,
+	} = useBulkIrnGenerate({
+		getOrganizationInvoices,
+		checkedRows,
+		setCheckedRows,
+		setIsHeaderChecked,
+	});
 
 	const { list : invoiceList = [], page: pageInvoiceList, totalRecords: recordInvoiceList } = listData || {};
 
@@ -50,7 +64,7 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 	const sortStyleDueDateDesc = sortType === 'desc' && sortBy === 'dueDate' ? ORANGE : GREY;
 
 	const columns = completedColumn({
-		refetch: getOrganizationInvoices,
+		refetch   : getOrganizationInvoices,
 		showName,
 		setSort,
 		sortStyleGrandTotalAsc,
@@ -61,7 +75,13 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 		sortStyleDueDateDesc,
 		invoiceFilters,
 		setinvoiceFilters,
+		checkedRows,
+		setCheckedRows,
+		totalRows : listData?.list || [],
+		isHeaderChecked,
+		setIsHeaderChecked,
 	});
+
 	return (
 		<div>
 			{' '}
@@ -86,6 +106,15 @@ function InvoiceTable({ organizationId, entityCode, showName }: Props) {
 				</div>
 				<div className={styles.filter_container}>
 
+					{checkedRows?.length > 0 ? (
+						<Button
+							style={{ marginRight: '20px' }}
+							onClick={bulkIrnGenerate}
+							loading={bulkIrnLoading}
+						>
+							Bulk IRN Generate
+						</Button>
+					) : null}
 					<div
 						className={styles.send_report}
 						onClick={() => { sendReport(); }}

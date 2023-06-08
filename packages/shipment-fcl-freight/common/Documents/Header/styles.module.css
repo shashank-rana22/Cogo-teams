@@ -2,7 +2,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	font-size: 16px;
+	font-size: var(--font-size-xl);
 	font-weight: 500;
 }
 
@@ -41,12 +41,12 @@
 }
 
 .select {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 }
 
 .upload {
 	margin-left: 12px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	color: red;
 }
