@@ -34,6 +34,7 @@
     "@cogoport/my-incident": "workspace:0.1.0",
     "@cogoport/my-profile": "workspace:0.1.0",
     "@cogoport/employee-portal": "workspace:0.1.0",
+    "@cogoport/rfq-dashboard": "workspace:0.1.0",
     "@cogoport/navigation-configs": "workspace:0.1.0",
     "@cogoport/next": "workspace:0.1.0",
     "@cogoport/globalization": "workspace:^0.0.1",

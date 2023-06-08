@@ -1,5 +1,6 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import getPrice from '@cogoport/forms/utils/get-formatted-price';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 import { CSSProperties } from 'react';
@@ -129,7 +130,7 @@ const listFunctions = ({ refetch }) => ({
 			<div>
 				{formatDate({
 					date       : row?.invoiceDate,
-					dateFormat : 'dd MMM yy',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 					formatType : 'date',
 				})}
 
@@ -141,7 +142,7 @@ const listFunctions = ({ refetch }) => ({
 			<div>
 				{formatDate({
 					date       : row?.dueDate,
-					dateFormat : 'dd MMM yy',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 					formatType : 'date',
 				})}
 			</div>

@@ -8372,7 +8372,12 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
-
+		{
+			api         : 'post_sales_invoice_bulk_irn_generate',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
 	],
 	incident_controller: [
 		{
@@ -12335,6 +12340,13 @@ const partner = {
 		},
 		{
 			api          : 'list_referral_transactions',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
+	referral_simulation: [
+		{
+			api          : 'get_referral_simulation',
 			access_type  : 'private',
 			service_name : 'referral',
 		},
