@@ -130,14 +130,9 @@ export const ctcModalLessControls = (ctcInput, data = {}) => {
         / 12,
 		},
 		statutory_bonus: {
-			heading: 'Statutory Bonus [D]',
-			yearlyValue:
-			statutorySum(basicYearlyValue),
-			// basicYearlyValue / 12 > 21000	?
-			// 0 : basicYearlyValue / 12 < 21000 && basicYearlyValue / 12 > 9056 ? 754 * 12 : 754 * 12,
-			monthlyValue: statutorySum(basicYearlyValue) / 12,
-			// (basicYearlyValue / 12 > 21000 ?
-		// 0 : basicYearlyValue / 12 < 21000 && basicYearlyValue / 12 > 9056	? 754 * 12	: 754 * 12) / 12,
+			heading      : 'Statutory Bonus [D]',
+			yearlyValue  : statutorySum(basicYearlyValue),
+			monthlyValue : statutorySum(basicYearlyValue) / 12,
 		},
 		annual_gross_salary: {
 			heading: 'Annual Gross Salary [A + B + C + D]',
@@ -148,8 +143,7 @@ export const ctcModalLessControls = (ctcInput, data = {}) => {
         + sum
         + flexible_benefit_sum
 		+ statutorySum(basicYearlyValue),
-			// (basicYearlyValue / 12 > 21000 ?
-			//  0 : basicYearlyValue / 12 < 21000 && basicYearlyValue / 12 > 9056 ? 754 * 12 : 754 * 12),
+
 			monthlyValue:
         (Math.round((basicYearlyValue / 12 < 15000	? 0.1301 * basicYearlyValue	: 1950 * 12)
             + 0.0483 * basicYearlyValue
@@ -187,9 +181,6 @@ export const ctcModalLessControls = (ctcInput, data = {}) => {
         + sum
         + flexible_benefit_sum
         + statutorySum(basicYearlyValue)
-
-        // (basicYearlyValue / 12 > 21000
-        // ? 0 : basicYearlyValue / 12 < 21000 && basicYearlyValue / 12 > 9056	? 754 * 12 : 754 * 12)
 		),
 
 			monthlyValue: (ctcInput * variable_split) / 12 + Number(data?.monthlyJoiningBonus || 0)
@@ -203,9 +194,6 @@ export const ctcModalLessControls = (ctcInput, data = {}) => {
         + sum
         + flexible_benefit_sum
         +		statutorySum(basicYearlyValue)
-
-			// (basicYearlyValue / 12 > 21000 ?
-			// 0 : basicYearlyValue / 12 < 21000 && basicYearlyValue / 12 > 9056	? 754 * 12	: 754 * 12)
 
 			)
       / 12
@@ -223,10 +211,7 @@ export const ctcModalLessControls = (ctcInput, data = {}) => {
 			)
         + sum
         + flexible_benefit_sum
-        +				statutorySum(basicYearlyValue)
-			// (basicYearlyValue / 12 > 21000
-			//  ? 0 : basicYearlyValue / 12 < 21000 && basicYearlyValue / 12 > 9056	? 754 * 12	: 754 * 12)
-			)
+        +				statutorySum(basicYearlyValue))
       / 12 - Math.round(
 				basicYearlyValue / 12 < 15000 ? 0.1301 * basicYearlyValue : 1950 * 12,
 			) / 12 - (0.0483 * basicYearlyValue) / 12 - 1800 - 200 - 200,
@@ -289,8 +274,6 @@ export const ctcModalControls = (ctcInput, data = {}) => {
         + 0.0483 * basicYearlyValue
         + 2400
         + 	statutorySum(basicYearlyValue)
-		// (basicYearlyValue / 12 > 21000
-		// ? 0 : basicYearlyValue / 12 < 21000 && basicYearlyValue / 12 > 9056 ? 754 * 12 : 754 * 12)
 
       );
 	} else {

@@ -16,7 +16,7 @@ function ModalComponent({
 	const finalControls = getControls(initialQuestion);
 	return (
 		<div>
-			<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+			<div className={styles.header_field} >
 				<div className={styles.control_label}>
 					Input Target Annual Gross Salary (Fixed component)
 				</div>
@@ -62,7 +62,7 @@ function ModalComponent({
 				return (
 					<div key={yearly.name} className={styles.control_container}>
 						<span className={styles.label}>{yearly.label}</span>
-						<div style={{ marginRight: '4px' }}>
+						<div style={{ marginRight: '4px', width: '40%' }}>
 							<Element
 								{...yearly}
 								size="sm"
@@ -75,7 +75,7 @@ function ModalComponent({
 							</div>
 						</div>
 
-						<div>
+						<div style={{ marginRight: '4px', width: '40%' }}>
 							<Element
 								{...monthly}
 								size="sm"
