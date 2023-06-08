@@ -116,8 +116,6 @@ const useGetStep3Data = ({
 					unit     : line_item.unit,
 				})),
 			};
-
-			return quotation;
 		});
 
 		const checkSum = checkLineItemsSum(quotation);
