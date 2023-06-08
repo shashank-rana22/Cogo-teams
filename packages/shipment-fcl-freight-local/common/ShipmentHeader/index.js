@@ -19,6 +19,8 @@ function ShipmentHeader() {
 
 	const { shipment_data, primary_service, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);
 
+	const { shipment_header = {} } = stakeholderConfig || {};
+
 	const user_data = useSelector((({ profile }) => profile?.user));
 
 	const { po_number, importer_exporter = {} } = shipment_data || {};
@@ -54,21 +56,26 @@ function ShipmentHeader() {
 					</div>
 				</Tooltip>
 
-				{po_number ? (
-					<div className={styles.po_number}>
-						PO Number:&nbsp;
-						{po_number}
+				{ shipment_header?.add_po_number ? (
+					<div>
+						{po_number ? (
+							<div className={styles.po_number}>
+								PO Number:&nbsp;
+								{po_number}
+							</div>
+						) : (
+							<div
+								className={styles.button}
+								role="button"
+								tabIndex={0}
+								onClick={() => setShowModal('add_po_number')}
+							>
+								Add PO Number
+							</div>
+						)}
 					</div>
-				) : (
-					<div
-						className={styles.button}
-						role="button"
-						tabIndex={0}
-						onClick={() => setShowModal('add_po_number')}
-					>
-						Add PO Number
-					</div>
-				)}
+				) : null}
+
 			</div>
 
 			<div className={styles.port_details}>
