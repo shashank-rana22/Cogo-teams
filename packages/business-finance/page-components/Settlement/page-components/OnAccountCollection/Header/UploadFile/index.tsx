@@ -9,7 +9,7 @@ import { UploadFileInterface } from '../../interface';
 
 import styles from './styles.module.css';
 
-const Success = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/approval animation';
+const SUCCESS = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/approval animation';
 
 function UploadFile({ showModal, setShowModal, refetch }:UploadFileInterface) {
 	const [toggleValue, setToggleValue] = useState('AP');
@@ -201,7 +201,7 @@ function UploadFile({ showModal, setShowModal, refetch }:UploadFileInterface) {
 							<div className={styles.success}>
 								<img
 									className={styles.img_height}
-									src={Success}
+									src={SUCCESS}
 									alt="No Data"
 								/>
 								<div className={styles.uploaded}>

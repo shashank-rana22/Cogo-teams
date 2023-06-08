@@ -23,6 +23,11 @@ interface ColumnCardInterface {
 		utr?:string
 		entityType?:string
 		currency?:string
+		id?:string
+		paymentDocumentStatus?:string
+		accMode?:string
+		paymentCode?:string
+		sageOrganizationId?:string
 	}
 }
 

@@ -15,10 +15,21 @@ interface CollectionActionInterface {
 	permissionModal?: PermissionInterface
 	refetch?: () => void
 	itemData?:{
-		paymentCode?:string
-		accMode?:string
-		entityType?:number
+		customerName?:string
+		accCode?:string
+		bankAccountNumber?:string
+		orgSerialId?:string
+		bankName?:string
 		paymentNumValue?:string
+		amount?:string
+		utr?:string
+		entityType?:string
+		currency?:string
+		id?:string
+		paymentDocumentStatus?:string
+		accMode?:string
+		paymentCode?:string
+		sageOrganizationId?:string
 	}
 	setSelectedId?: React.Dispatch<React.SetStateAction<SelectedInterface>>
 	setModalFinalPost?: React.Dispatch<React.SetStateAction<boolean>>

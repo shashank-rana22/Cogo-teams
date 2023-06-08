@@ -18,10 +18,21 @@ interface PermissionInterface {
 
 interface CollectionActionInterface {
 	itemData?:{
+		customerName?:string
+		accCode?:string
+		bankAccountNumber?:string
+		orgSerialId?:string
+		bankName?:string
+		paymentNumValue?:string
+		amount?:string
+		utr?:string
+		entityType?:string
+		currency?:string
 		id?:string
-		accMode?:string
 		paymentDocumentStatus?:string
-		entityType?:number
+		accMode?:string
+		paymentCode?:string
+		sageOrganizationId?:string
 	}
 	refetch?:() => void
 }
