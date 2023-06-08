@@ -1,0 +1,19 @@
+.header {
+	flex-direction: column;
+	margin-bottom: 20px;
+	margin-left: 4px;
+	font-size: 20px;
+	font-style: normal;
+	font-weight: 600;
+}
+
+.tab_panel_dashboard {
+	background-color: red;
+}
+
+.tabs_container {
+	button {
+		background: white;
+		border-right: 1px solid #e0e0e0;
+	}
+}
