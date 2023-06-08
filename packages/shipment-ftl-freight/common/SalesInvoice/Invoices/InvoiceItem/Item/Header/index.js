@@ -62,6 +62,10 @@ function Header({
 
 	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
 
+	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& invoice?.status === 'reviewed'
+		&& !isEmpty(invoice?.data);
+		
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
