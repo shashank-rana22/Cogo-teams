@@ -1,59 +1,59 @@
 import { startCase, upperCase } from '@cogoport/utils';
 
 const dataFormat = (item, data) => {
-	if (item.value === 'container_size') {
+	if (item?.value === 'container_size') {
 		return {
-			valueKey  : item.key,
+			valueKey  : item?.key,
 			valueText : `${data[item.value]} FT`,
 			value     : item.value,
 		};
 	}
-	if (item.value === 'containers_count') {
+	if (item?.value === 'containers_count') {
 		return {
-			valueKey  : item.key,
+			valueKey  : item?.key,
 			valueText : `${data[item.value]} Container`,
 			value     : item.value,
 		};
 	}
-	if (item.value === 'inco_term') {
+	if (item?.value === 'inco_term') {
 		return {
-			valueKey  : item.key,
+			valueKey  : item?.key,
 			valueText : `${upperCase(data[item.value])}`,
 			value     : item.value,
 		};
 	}
-	if (item.value === 'volume') {
+	if (item?.value === 'volume') {
 		return {
-			valueKey  : item.key,
+			valueKey  : item?.key,
 			valueText : `${data[item.value]} cbm`,
 			value     : item.value,
 		};
 	}
-	if (item.value === 'weight') {
+	if (item?.value === 'weight') {
 		return {
-			valueKey  : item.key,
+			valueKey  : item?.key,
 			valueText : `${data[item.value]} kg`,
 			value     : item.value,
 		};
 	}
-	if (item.value === 'cargo_weight_per_container') {
+	if (item?.value === 'cargo_weight_per_container') {
 		return {
-			valueKey  : item.key,
+			valueKey  : item?.key,
 			valueText : `${data[item.value]} MT`,
 			value     : item.value,
 		};
 	}
-	if (item.value === 'packages_count') {
+	if (item?.value === 'packages_count') {
 		return {
-			valueKey  : item.key,
+			valueKey  : item?.key,
 			valueText : `${data[item.value]} pkg`,
 			value     : item.value,
 		};
 	}
 	return {
-		valueKey  : item.key,
-		valueText : startCase(data[item.value]),
-		value     : item.value,
+		valueKey  : item?.key,
+		valueText : startCase(data[item?.value]),
+		value     : item?.value,
 	};
 };
 
