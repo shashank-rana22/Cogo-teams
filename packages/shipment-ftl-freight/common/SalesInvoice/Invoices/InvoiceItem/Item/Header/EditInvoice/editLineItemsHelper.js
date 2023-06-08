@@ -13,6 +13,9 @@ const INITIAL_STATE = 0;
 const LABELS = {};
 const CHARGECODES = {};
 const CUSTOM_VALUES = {};
+const FIELD_VALUE = {};
+const DEFAULT_VALUES = {};
+const PAYLOAD = [];
 
 const useEditLineItems = ({
 	invoice = {},
@@ -38,22 +41,19 @@ const useEditLineItems = ({
 	};
 
 	const generateDefaultValues = ({ values }) => {
-		const defaultValues = {};
-
 		values.forEach((control) => {
 			if (control.type === 'edit_service_charges') {
-				defaultValues[control.name] = control.value.map((value) => {
-					const fieldValue = {};
+				DEFAULT_VALUES[control.name] = control.value.map((value) => {
 					control.controls.forEach((subControl) => {
-						fieldValue[subControl.name] = value[subControl.name] || INITIAL_STATE;
+						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_STATE;
 					});
 
-					return fieldValue;
+					return FIELD_VALUE;
 				});
 			}
 		});
 
-		return defaultValues;
+		return DEFAULT_VALUES;
 	};
 
 	const handleOptionsChange = useCallback(
@@ -120,7 +120,7 @@ const useEditLineItems = ({
 					...value,
 					tax      : selectedCodes[value.code]?.tax_percent || 'NA',
 					sac_code : selectedCodes[value.code]?.sac || 'NA',
-					total    : (value?.price_discounted || 0) * (value?.quantity || 0),
+					total    : (value?.price_discounted || INITIAL_STATE) * (value?.quantity || INITIAL_STATE),
 				}));
 			}
 		});
@@ -129,7 +129,7 @@ const useEditLineItems = ({
 	};
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	Object.keys(controls?.[0]).forEach((key) => {
+	Object.keys(controls?.[INITIAL_STATE]).forEach((key) => {
 		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
 			label      : LABELS[key],
@@ -139,7 +139,6 @@ const useEditLineItems = ({
 
 	const onCreate = async (values) => {
 		try {
-			const payload = [];
 			Object.keys(values).forEach((key) => {
 				const currentService = services.find(
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
@@ -162,12 +161,12 @@ const useEditLineItems = ({
 						unit             : line_item?.unit,
 					})),
 				};
-				payload.push(service);
+				PAYLOAD.push(service);
 			});
 
 			await trigger({
 				data: {
-					quotations             : payload,
+					quotations             : PAYLOAD,
 					shipment_id            : shipment_data?.id,
 					invoice_combination_id : invoice?.id || undefined,
 				},

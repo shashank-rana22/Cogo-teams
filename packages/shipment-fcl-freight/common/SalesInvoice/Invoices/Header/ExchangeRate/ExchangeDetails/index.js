@@ -4,6 +4,7 @@ import { useState } from 'react';
 import styles from './styles.module.css';
 
 const STATE = 2;
+const TOTAL_LENGTH = 1;
 
 function ExchangeDetails({
 	children = null,
@@ -32,7 +33,7 @@ function ExchangeDetails({
 
 	return (
 		<div>
-			{currencyConversions?.length > 1 ? (
+			{currencyConversions?.length > TOTAL_LENGTH ? (
 				<Popover
 					theme="light"
 					show={show}

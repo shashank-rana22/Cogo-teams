@@ -22,6 +22,8 @@ const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
 
+const INITIAL_STATE = 0;
+
 function Actions({
 	invoice = {},
 	bfInvoiceRefetch = () => {},
@@ -231,7 +233,7 @@ function Actions({
 
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 
-					{(!disableAction || invoice.exchange_rate_document?.length > 0)
+					{(!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive

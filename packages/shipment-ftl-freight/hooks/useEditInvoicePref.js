@@ -16,6 +16,7 @@ const INITIAL_STATE = 0;
 const TOTAL_LENGTH = 1;
 const PARTY_SERVICES = [];
 const FINAL_PARTIES = [];
+const NOT_TAKEN = [];
 
 const isAllServicesTaken = (
 	servicesList,
@@ -44,19 +45,18 @@ const isAllServicesTaken = (
 	}
 
 	let isAllMainServicesTaken = true;
-	const notTaken = [];
 
 	mainServices.forEach((service) => {
 		if (!allServicesTaken.includes(service.id)) {
 			isAllMainServicesTaken = false;
-			notTaken.push(service.service_type);
+			NOT_TAKEN.push(service.service_type);
 		}
 	});
 
 	if (allServicesTaken.length !== allServiceLineitemsCount) {
 		isAllMainServicesTaken = false;
 	}
-	return { isAllMainServicesTaken, notTaken };
+	return { isAllMainServicesTaken, NOT_TAKEN };
 };
 
 const useEditInvoicePref = ({
@@ -206,7 +206,7 @@ const useEditInvoicePref = ({
 				(service) => service?.is_igst,
 			);
 			const uniq_igst_val = new Set(igstArray || []);
-			const allowServiceMerge = uniq_igst_val?.length === 1;
+			const allowServiceMerge = uniq_igst_val?.length === TOTAL_LENGTH;
 
 			let isBasicFreight = false;
 			if (!isEmpty(isBasicFreightInvService)) {
@@ -215,7 +215,7 @@ const useEditInvoicePref = ({
 						(service) => service.serviceKey === isBasicFreightInvService.serviceKey,
 					);
 
-					if (party?.services?.length > 1 && BFLineItem) {
+					if (party?.services?.length > TOTAL_LENGTH && BFLineItem) {
 						isBasicFreight = true;
 					}
 				});

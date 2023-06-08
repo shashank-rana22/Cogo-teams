@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 const geo = getGeoConstants();
 
 const SERIAL_ID = 130000;
+const INITIAL_STATE = 0;
 
 function EditInvoice({
 	show = 'false',
@@ -45,7 +46,7 @@ function EditInvoice({
 		info: <Info />,
 	});
 
-	const disabledProps = controls?.[0]?.service_name === 'fcl_freight_service' && !isAdminSuperAdmin
+	const disabledProps = controls?.[INITIAL_STATE]?.service_name === 'fcl_freight_service' && !isAdminSuperAdmin
 	&& shipment_data?.serial_id > SERIAL_ID;
 
 	const formValues = watch();

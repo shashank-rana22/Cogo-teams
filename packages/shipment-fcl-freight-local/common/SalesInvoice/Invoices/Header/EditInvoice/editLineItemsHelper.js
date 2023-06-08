@@ -10,11 +10,18 @@ const TRADE_MAPPING = {
 	export : 'Origin',
 };
 const INITIAL_STATE = 0;
+const LABELS = {};
+const CHARGECODES = {};
+const CUSTOM_VALUES = {};
+const FIELD_VALUE = {};
+const DEFAULT_VALUES = {};
+const PAYLOAD = [];
 
 const useEditLineItems = ({
 	invoice = {},
 	onClose = () => {},
 	refetch = () => {},
+	isAdminSuperAdmin = false,
 	shipment_data = {},
 	info,
 }) => {
@@ -35,22 +42,19 @@ const useEditLineItems = ({
 	};
 
 	const generateDefaultValues = ({ values }) => {
-		const defaultValues = {};
-
 		values.forEach((control) => {
 			if (control.type === 'edit_service_charges') {
-				defaultValues[control.name] = control.value.map((value) => {
-					const fieldValue = {};
+				DEFAULT_VALUES[control.name] = control.value.map((value) => {
 					control.controls.forEach((subControl) => {
-						fieldValue[subControl.name] = value[subControl.name] || INITIAL_STATE;
+						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_STATE;
 					});
 
-					return fieldValue;
+					return FIELD_VALUE;
 				});
 			}
 		});
 
-		return defaultValues;
+		return DEFAULT_VALUES;
 	};
 
 	const handleOptionsChange = useCallback(
@@ -59,11 +63,13 @@ const useEditLineItems = ({
 		},
 		[setAllChargeCodes],
 	);
+
 	const controls = services.map((service, index) => ({
 		...rawControls(
 			handleChange,
 			service,
 			info,
+			isAdminSuperAdmin,
 			shipment_data,
 			index,
 			TRADE_MAPPING,
@@ -108,7 +114,6 @@ const useEditLineItems = ({
 
 	const formValues = watch();
 
-	const customValues = {};
 	const prepareFormValues = () => {
 		const allFormValues = { ...formValues };
 		(Object.keys(formValues) || []).forEach((key) => {
@@ -117,7 +122,7 @@ const useEditLineItems = ({
 					...value,
 					tax      : selectedCodes[value.code]?.tax_percent || 'NA',
 					sac_code : selectedCodes[value.code]?.sac || 'NA',
-					total    : (value?.price_discounted || 0) * (value?.quantity || 0),
+					total    : (value?.price_discounted || INITIAL_STATE) * (value?.quantity || INITIAL_STATE),
 				}));
 			}
 		});
@@ -126,26 +131,23 @@ const useEditLineItems = ({
 	};
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	const labels = {};
-	Object.keys(controls?.[0]).forEach((key) => {
-		customValues[key] = {
+	Object.keys(controls?.[INITIAL_STATE]).forEach((key) => {
+		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
-			label      : labels[key],
+			label      : LABELS[key],
 			id         : key,
 		};
 	});
 
 	const onCreate = async (values) => {
 		try {
-			const payload = [];
 			Object.keys(values).forEach((key) => {
 				const currentService = services.find(
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
 				);
-				const chargeCodes = {};
 				(allChargeCodes[currentService?.service_type] || []).forEach(
 					(chgCode) => {
-						chargeCodes[chgCode.code] = chgCode;
+						CHARGECODES[chgCode.code] = chgCode;
 					},
 				);
 				const service = {
@@ -154,19 +156,19 @@ const useEditLineItems = ({
 					line_items   : (values?.[key] || []).map((line_item) => ({
 						code             : line_item?.code,
 						alias            : line_item?.alias,
-						name             : chargeCodes[line_item?.code]?.name || line_item?.name,
+						name             : CHARGECODES[line_item?.code]?.name || line_item?.name,
 						currency         : line_item?.currency,
 						price_discounted : Number(line_item?.price_discounted),
 						quantity         : Number(line_item?.quantity),
 						unit             : line_item?.unit,
 					})),
 				};
-				payload.push(service);
+				PAYLOAD.push(service);
 			});
 
 			await trigger({
 				data: {
-					quotations             : payload,
+					quotations             : PAYLOAD,
 					shipment_id            : shipment_data?.id,
 					invoice_combination_id : invoice?.id || undefined,
 				},
@@ -184,7 +186,7 @@ const useEditLineItems = ({
 		handleSubmit,
 		controls,
 		loading,
-		customValues,
+		CUSTOM_VALUES,
 		errors,
 		control,
 		setValue,

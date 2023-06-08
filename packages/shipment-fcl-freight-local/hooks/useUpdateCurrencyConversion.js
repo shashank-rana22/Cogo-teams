@@ -4,6 +4,8 @@ import { getApiError } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useContext } from 'react';
 
+const INITIAL_STATE = 0;
+
 const useUpdateCurrencyConversion = ({
 	refetch = () => {}, setOpen = () => {},
 	successMessage = 'Rate Added Successfully!',
@@ -20,14 +22,15 @@ const useUpdateCurrencyConversion = ({
 		const currencyData = value;
 
 		Object.keys(value || {}).forEach((val) => {
-			const key = `${currencyData[val]?.[0]?.from_currency}_${currencyData?.[val]?.[0]?.to_currency}`;
-			if (currencyData?.[val]?.[0]?.exchange_rate) {
+			const key = `${currencyData[val]?.[INITIAL_STATE]?.from_currency}_${currencyData?.[val]?.[INITIAL_STATE]
+				?.to_currency}`;
+			if (currencyData?.[val]?.[INITIAL_STATE]?.exchange_rate) {
 				exchangeCurrencyHash[key] = Number(
-					currencyData?.[val]?.[0]?.exchange_rate,
+					currencyData?.[val]?.[INITIAL_STATE]?.exchange_rate,
 				);
 			}
 		});
-		if (Object.keys(exchangeCurrencyHash).length === 0) {
+		if (Object.keys(exchangeCurrencyHash).length === INITIAL_STATE) {
 			Toast.error('Please fill atleast one field !');
 			return;
 		}

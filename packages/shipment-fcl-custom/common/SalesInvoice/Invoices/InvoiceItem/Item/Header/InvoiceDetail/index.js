@@ -129,7 +129,7 @@ function InvoiceDetail({
 						<div className={styles.payment_method}>
 							{startCase(
 								`${
-									creditSource?.[(creditSource?.length ?? 0) - LIMIT]
+									creditSource?.[(creditSource?.length ?? INITIAL_STATE) - LIMIT]
 								} deferred payment`,
 							)}
 						</div>

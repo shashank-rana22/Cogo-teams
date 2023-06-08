@@ -1,3 +1,7 @@
+const INITIAL_LINE_ITEMS = [];
+const LINE_ITEM_ARRAY = [];
+const INITIAL_STATE = 0;
+
 const formatCreditNoteData = ({
 	data = {},
 	servicesIDs = [],
@@ -5,8 +9,6 @@ const formatCreditNoteData = ({
 	invoiceData = {},
 	isEdit,
 }) => {
-	const INITIAL_LINE_ITEMS = [];
-
 	invoiceData?.invoicing_parties?.forEach((party) => {
 		party?.services?.forEach((service) => {
 			service?.line_items?.forEach((item) => {
@@ -18,8 +20,6 @@ const formatCreditNoteData = ({
 		});
 	});
 
-	const LINE_ITEM_ARRAY = [];
-
 	let checkError = {};
 
 	(Object.keys(data) || []).forEach((key) => {
@@ -27,7 +27,7 @@ const formatCreditNoteData = ({
 			(data[key] || []).forEach((line_item) => {
 				if (line_item?.is_checked === true || isEdit) {
 					const serviceDetails = invoice?.services
-						?.filter((item) => (item?.id || item?.service_id) === key)?.[0];
+						?.filter((item) => (item?.id || item?.service_id) === key)?.[INITIAL_STATE];
 
 					const initialData = INITIAL_LINE_ITEMS
 						?.filter((li) => li?.code === line_item?.code)

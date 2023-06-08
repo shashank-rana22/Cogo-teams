@@ -104,7 +104,7 @@ const rawControls = (
 			span        : 1.5,
 			rules       : {
 				required : 'Price is Required',
-				validate : (v) => v > 0 || `Price must be greater than ${INITIAL_STATE}`,
+				validate : (v) => v > INITIAL_STATE || `Price must be greater than ${INITIAL_STATE}`,
 			},
 			disabled: handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
 		},

@@ -82,7 +82,7 @@ export const InvoiceTable = (serviceItem = {}) => {
 					currencyDisplay       : 'code',
 					maximumFractionDigits : 2,
 				},
-			})} (${item?.tax_percent || 0}%)`,
+			})} (${item?.tax_percent || INITIAL_STATE}%)`,
 			span: 1,
 		},
 		{

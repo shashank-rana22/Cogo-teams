@@ -3,14 +3,15 @@ import { useState, useEffect, useImperativeHandle, useRef, useCallback } from 'r
 import useKey from './useKey';
 import useOtpInputEvents from './useOtpInputEvents';
 
-const getInitialOtpValues = (otpLength) => {
-	const hash = {};
+const INITIAL_STATE = 1;
+const HASH = {};
 
-	for (let i = 0; i < otpLength; i += 1) {
-		hash[`otp-${i + 1}`] = '';
+const getInitialOtpValues = (otpLength) => {
+	for (let i = 0; i < otpLength; i += INITIAL_STATE) {
+		HASH[`otp-${i + INITIAL_STATE}`] = '';
 	}
 
-	return hash;
+	return HASH;
 };
 
 const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
@@ -32,13 +33,13 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 		let isAllOtpInputValuePresent = true;
 		let value = '';
 
-		for (let i = 0; i < otpLength; i += 1) {
-			if (!values[`otp-${i + 1}`]) {
+		for (let i = 0; i < otpLength; i += INITIAL_STATE) {
+			if (!values[`otp-${i + INITIAL_STATE}`]) {
 				isAllOtpInputValuePresent = false;
 				break;
 			}
 
-			value += values[`otp-${i + 1}`];
+			value += values[`otp-${i + INITIAL_STATE}`];
 		}
 
 		onChange(isAllOtpInputValuePresent ? value : '');
@@ -46,7 +47,7 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 
 	useEffect(() => {
 		otpInputElementsRef.current.forEach((element) => {
-			element.setAttribute('maxlength', 1);
+			element.setAttribute('maxlength', INITIAL_STATE);
 			element.setAttribute('inputmode', 'numeric');
 		});
 	}, [values]);
@@ -54,14 +55,14 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 	const handleChange = (index) => (event) => {
 		setValues((previousState) => ({
 			...previousState,
-			[`otp-${index + 1}`]: event,
+			[`otp-${index + INITIAL_STATE}`]: event,
 		}));
 
 		if (isBackSpacePressed) {
 			return;
 		}
 
-		const nextOtpInputElement = otpInputElementsRef.current[index + 1];
+		const nextOtpInputElement = otpInputElementsRef.current[index + INITIAL_STATE];
 		nextOtpInputElement?.focus();
 	};
 
