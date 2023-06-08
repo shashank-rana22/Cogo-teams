@@ -2355,6 +2355,17 @@ const saas = {
 			feature      : 'cogo-store',
 			service_name : 'cogopoint',
 		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
 	],
 	app_saas_import_export_controls: [
 		{

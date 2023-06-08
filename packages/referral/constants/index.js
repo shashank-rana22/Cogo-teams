@@ -57,3 +57,7 @@ export const NETWORK_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_partne
 export const NETWORK_LOADER = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif';
 
 export const USER_AVATAR = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp';
+
+export const MAX_LEVEL = 30;
+export const REVENUE_START_PRICE = 5000;
+export const REVENUE_END_PRICE = 200000;
