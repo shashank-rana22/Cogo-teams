@@ -3,6 +3,13 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
 
+const SORT_MAPPING = {
+	oldest             : 'asc',
+	newest             : 'desc',
+	profitability_low  : 'asc',
+	profitability_high : 'desc',
+};
+
 const useListRfqs = ({ filterStore = {}, id = '' }) => {
 	const {
 		endDate, highProfitability,
@@ -12,14 +19,17 @@ const useListRfqs = ({ filterStore = {}, id = '' }) => {
 
 	const [page, setPage] = useState(1);
 
-	const sort_by = (['oldest', 'newest'].includes(sortBy)) ? 'created_at' : undefined;
+	let sort_by;
 	let sort_type;
 	let promised_consolidated_profitability;
 
-	if (sort_by) {
-		sort_type = sort_by === 'oldest' ? 'asc' : 'desc';
-	} else {
-		promised_consolidated_profitability = sortBy === 'profitability_low' ? 'asc' : 'desc';
+	if (sortBy) {
+		if (['oldest', 'newest'].includes(sortBy)) {
+			sort_by = 'created_at';
+			sort_type = SORT_MAPPING[sortBy];
+		} else {
+			promised_consolidated_profitability = SORT_MAPPING[sortBy];
+		}
 	}
 
 	const [{ loading, data }, trigger] = useRequest({
