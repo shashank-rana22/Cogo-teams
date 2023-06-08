@@ -109,7 +109,7 @@ function Dashboard() {
 
 	const renderDownloadReport = (
 		reportMonth.map((item) => (
-			<div key={item?.id} className={styles.days_show} onClick={() => { Toast.default('Coming Soon'); }}>
+			<div key={item?.id} className={styles.days_show} onClick={() => { Toast.default('Coming Soon'); }} role="presentation">
 				{item?.days}
 			</div>
 		))

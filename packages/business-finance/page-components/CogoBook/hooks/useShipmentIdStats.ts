@@ -63,6 +63,7 @@ const useShipmentIdStats = ({ month, year, entityCode }) => {
 	return {
 		statsData,
 		statsLoading,
+		data,
 	};
 };
 export default useShipmentIdStats;
