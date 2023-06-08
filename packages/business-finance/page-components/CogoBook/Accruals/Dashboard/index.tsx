@@ -154,9 +154,11 @@ function Dashboard() {
 						<Tooltip
 							content={(
 								<div className={styles.font_size_tooltip}>
-									Fuck
+									Current month statistics
 									<br />
-									You
+									of booked and accrued income
+									<br />
+									and expense
 								</div>
 							)}
 							placement="top"
@@ -197,20 +199,6 @@ function Dashboard() {
 
 					<div className={styles.sid_view}>
 						3 Months SID View
-						<Tooltip
-							content={(
-								<div className={styles.font_size_tooltip}>
-									Fuck
-									<br />
-									You
-								</div>
-							)}
-							placement="top"
-						>
-							<div className={styles.info_icon_container}>
-								<IcMInfo />
-							</div>
-						</Tooltip>
 					</div>
 
 					<Popover placement="bottom" caret={false} render={renderDownloadReport}>
@@ -238,9 +226,9 @@ function Dashboard() {
 							<Tooltip
 								content={(
 									<div className={styles.font_size_tooltip}>
-										Fuck
+										Month wise view of booked and
 										<br />
-										You
+										accrued income and expense
 									</div>
 								)}
 								placement="top"
