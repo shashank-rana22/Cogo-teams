@@ -7,7 +7,7 @@ export default function SubmitSection({
 	employeeId = '',
 	setVisible = () => {},
 	onFinalSubmit = () => {},
-	updateOfferLetterLoading = () => {},
+	updateOfferLetterLoading = false,
 }) {
 	const [finalReview, setFinalReview] = useState('');
 

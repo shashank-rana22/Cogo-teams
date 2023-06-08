@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import styles from './styles.module.css';
 import SubmitSection from './SubmitSection';
 
-export default function ActionPopover({ item, onFinalSubmit = () => {}, updateOfferLetterLoading }) {
+export default function ActionPopover({ item, onFinalSubmit = () => {}, updateOfferLetterLoading = false }) {
 	const [visible, setVisible] = useState(false);
 
 	const { id = '' } = item || {};
