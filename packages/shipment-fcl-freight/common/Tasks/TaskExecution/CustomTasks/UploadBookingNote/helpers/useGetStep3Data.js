@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 
 import useGetShipmentServicesQuotation from '../../../../../../hooks/useGetShipmentServicesQuotation';
-import useUpdateShipmentBuyQuotations from '../../../../../../hooks/useUpdateShipmentBuyQuotations';
+import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotations';
 import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import checkLineItemsSum from './checkLineItemSum';
@@ -46,7 +46,7 @@ const useGetStep3Data = ({
 			service_detail_required : true,
 		},
 	});
-	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateShipmentBuyQuotations({});
+	const { apiTrigger:updateBuyQuotationTrigger } = useUpdateBuyQuotations({});
 
 	const { apiTrigger:updateTask } = useUpdateShipmentPendingTask({
 		refetch: () => {

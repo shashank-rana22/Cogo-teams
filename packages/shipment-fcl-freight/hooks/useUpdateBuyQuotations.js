@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdateShipmentBuyQuotations = ({
+const useUpdateBuyQuotations = ({
 	refetch = () => {},
 	successMessage = 'Updated Successfully!',
 }) => {
@@ -31,4 +31,4 @@ const useUpdateShipmentBuyQuotations = ({
 	};
 };
 
-export default useUpdateShipmentBuyQuotations;
+export default useUpdateBuyQuotations;
