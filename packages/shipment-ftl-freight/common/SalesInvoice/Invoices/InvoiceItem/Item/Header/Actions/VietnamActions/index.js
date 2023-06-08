@@ -137,6 +137,7 @@ function Actions({
 						</Tooltip>
 					) : null}
 				</div>
+
 				<InvoiceDetails
 					invoice={invoice}
 					shipment_data={shipment_data}
@@ -148,6 +149,7 @@ function Actions({
     setShowAddRemarks={setShowAddRemarks}
     setShowChangePaymentMode={setShowChangePaymentMode}
 				/>
+				
 			</div>
 			{showReview ? (
 				<ReviewServices
