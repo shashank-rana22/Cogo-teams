@@ -58,34 +58,9 @@ function Actions({
 		disableAction = false;
 	}
 
-	const handleClickCurrency = () => {
-		setIsChangeCurrency(true);
+	const handleClick = (setState=()=>{}) => {
 		setShow(false);
-	};
-
-	const handleClickRemarks = () => {
-		setShow(false);
-		setShowAddRemarks(true);
-	};
-
-	const handleChangePayment = () => {
-		setShow(false);
-		setShowChangePaymentMode(true);
-	};
-
-	const handleClickInvoice = () => {
-		setShow(false);
-		setIsEditInvoice(true);
-	};
-
-	const handleCustomerInvoice = () => {
-		setShow(false);
-		setAddCustomerInvoice(true);
-	};
-
-	const handleExchangeRateModal = () => {
-		setShow(false);
-		setExchangeRate(true);
+		setState(true);
 	};
 
 	const remarkRender = () => (
@@ -113,7 +88,7 @@ function Actions({
 						<div style={{ width: '100%' }}>
 							<ClickableDiv
 								className={styles.text}
-								onClick={handleClickInvoice}
+								onClick={() => handleClick(setIsEditInvoice)}
 							>
 								Edit Invoices
 
@@ -125,7 +100,7 @@ function Actions({
 					<div>
 						<ClickableDiv
 							className={styles.text}
-							onClick={handleClickCurrency}
+							onClick={() => handleClick(setIsChangeCurrency)}
 						>
 							Change Currency
 						</ClickableDiv>
@@ -134,7 +109,7 @@ function Actions({
 
 					<ClickableDiv
 						className={styles.text}
-						onClick={handleClickRemarks}
+						onClick={() => handleClick(setShowAddRemarks)}
 					>
 						Add Remarks
 					</ClickableDiv>
@@ -144,7 +119,7 @@ function Actions({
 							<div className={styles.line} />
 							<ClickableDiv
 								className={styles.text}
-								onClick={handleChangePayment}
+								onClick={() => handleClick(setShowChangePaymentMode)}
 							>
 								Change Payment Mode
 							</ClickableDiv>
@@ -164,7 +139,7 @@ function Actions({
 					</ClickableDiv>
 					<div className={styles.line} />
 					<ClickableDiv
-						onClick={handleExchangeRateModal}
+						onClick={() => handleClick(setExchangeRate)}
 						className={styles.text}
 					>
 						Exchange Rate Sheet
@@ -174,7 +149,7 @@ function Actions({
 						<div className={styles.line} />
 						<ClickableDiv
 							className={styles.text}
-							onClick={handleCustomerInvoice}
+							onClick={() => handleClick(setAddCustomerInvoice)}
 						>
 							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
 								&nbsp;
