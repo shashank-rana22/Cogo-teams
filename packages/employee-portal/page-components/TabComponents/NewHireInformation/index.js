@@ -10,14 +10,13 @@ import styles from './styles.module.css';
 
 function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }) {
 	const { progress_stats = {}, documents } = data || {};
-	const {
-		personal_details = {},
-	} = progress_stats;
+	const { personal_details = {} } = progress_stats;
 	const {
 		address_details = false,
 		identification_documents = false,
 		personal_information = false,
 	} = personal_details;
+
 	const content_mapping = [
 		{
 			name        : 'personal_information',
@@ -63,8 +62,8 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 				/>
 				<div className={styles.title}>NEW HIRE INFORMATION</div>
 			</div>
-			<div className={styles.subcontainer}>
 
+			<div className={styles.subcontainer}>
 				{content_mapping.map((item) => {
 					const { content: Component, isCompleted, name } = item;
 
@@ -95,7 +94,6 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 						</div>
 					);
 				})}
-
 			</div>
 		</div>
 	);

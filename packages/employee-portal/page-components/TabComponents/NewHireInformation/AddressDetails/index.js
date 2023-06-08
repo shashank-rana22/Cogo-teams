@@ -195,7 +195,6 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 					Save
 				</Button>
 			</div>
-
 		</div>
 	);
 }

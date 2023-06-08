@@ -18,6 +18,7 @@ const useUpdateOfferLetter = ({ document_url, id, getEmployeeDetails, setInforma
 
 				},
 			});
+
 			getEmployeeDetails();
 			Toast.success('Offer Letter rejected successfully');
 			setInformationPage('');
