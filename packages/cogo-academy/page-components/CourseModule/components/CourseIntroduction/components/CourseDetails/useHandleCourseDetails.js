@@ -1,20 +1,6 @@
 import styles from './styles.module.css';
 
-function FormatTime({ value = 0, type }) {
-	return (
-		<div>
-			{Math.floor(value / 60)}
-		&nbsp;
-			<b>Hour</b>
-		&nbsp;
-			{(value % 60)}
-		&nbsp;
-			<b>Min</b>
-		&nbsp;
-			{type}
-		</div>
-	);
-}
+const TIME_UNIT_VALUE = 60;
 
 const MAPPING = {
 	modules: {
@@ -30,6 +16,22 @@ const MAPPING = {
 		apiKey : 'course_sub_module_chapters_count',
 	},
 };
+
+function FormatTime({ value = 0, type }) {
+	return (
+		<div>
+			{Math.floor(value / TIME_UNIT_VALUE)}
+		&nbsp;
+			<b>Hour</b>
+		&nbsp;
+			{(value % TIME_UNIT_VALUE)}
+		&nbsp;
+			<b>Min</b>
+		&nbsp;
+			{type}
+		</div>
+	);
+}
 
 const useHandleCourseDetails = ({ instructorData }) => {
 	const getModulesCount = ({ course_modules = [], type }) => {

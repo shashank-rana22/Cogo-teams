@@ -1,3 +1,6 @@
+const COMPLETION_VALUE_COUNT = 12;
+const VALUE_TO_INDEX_DIFF = 1;
+
 export const controls = [
 	{
 		label : 'Course Completion Message',
@@ -167,9 +170,9 @@ export const selectControls = [
 				name        : 'course_completion_value',
 				type        : 'select',
 				placeholder : 'Select',
-				options     : [...Array(12).keys()].map((value) => ({
-					label : (value + 1).toString(),
-					value : (value + 1).toString(),
+				options     : [...Array(COMPLETION_VALUE_COUNT).keys()].map((value) => ({
+					label : (value + VALUE_TO_INDEX_DIFF).toString(),
+					value : (value + VALUE_TO_INDEX_DIFF).toString(),
 				})),
 				rules: { required: { value: true, message: 'This is required' } },
 			},

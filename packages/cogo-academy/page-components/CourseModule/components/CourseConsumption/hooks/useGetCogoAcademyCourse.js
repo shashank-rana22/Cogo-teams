@@ -1,14 +1,15 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 const useGetCogoAcademyCourse = ({ id }) => {
 	const [courseData, setCourseData] = useState({});
+
 	const [{ loading: courseLoading }, trigger] = useRequest({
 		url    : '/get_cogo_academy_course',
 		method : 'GET',
-		params : {
-			id,
-		},
+		params : { id },
 	}, { manual: false });
 
 	const getCourse = useCallback(async () => {
@@ -18,9 +19,9 @@ const useGetCogoAcademyCourse = ({ id }) => {
 
 			setCourseData(data);
 		} catch (error) {
-			// if (error.response?.data) {
-			// 	Toast.error(getApiErrorString(error.response?.data));
-			// }
+			if (error.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 	}, [id, trigger]);
 

@@ -8,6 +8,8 @@ import SubModuleContent from '../SubModuleContent';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
+const INDEX_TO_VALUE_DIF = 1;
+
 function ModuleNavigation({
 	data = {},
 	loading,
@@ -25,8 +27,6 @@ function ModuleNavigation({
 
 	const { name = '', tests = [] } = course_details;
 
-	// const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration;
-
 	const setStates = (feedback, test, Chapter) => {
 		setShowFeedback(feedback);
 		setShowTestData(test);
@@ -39,21 +39,7 @@ function ModuleNavigation({
 
 	return (
 		<div className={styles.container}>
-			<div>
-				<h3 className={styles.course_name}>{name}</h3>
-
-				{/* <div className={styles.duration}>
-					Complete in
-					{' '}
-					{course_completion_value}
-					{' '}
-					{course_completion_unit}
-					s
-					{' '}
-					to Get Certification
-					<Pill size="md" color="#C4DC91">On or Before 30 June, 2023</Pill>
-				</div> */}
-			</div>
+			<h3 className={styles.course_name}>{name}</h3>
 
 			{(data.course_modules || []).map((module, moduleIndex) => (
 				<Accordion
@@ -64,70 +50,67 @@ function ModuleNavigation({
 					title={(
 						<div className={styles.flex}>
 							<div className={styles.number}>
-								<div className={styles.index}>{moduleIndex + 1}</div>
+								<div className={styles.index}>{moduleIndex + INDEX_TO_VALUE_DIF}</div>
 							</div>
 							<div className={styles.name}>{module.name}</div>
 						</div>
 					)}
 				>
-					<div>
-						{(module.course_sub_modules || []).map((subModule, subModuleIndex) => (
-							<Accordion
-								key={subModule.id}
-								type="text"
-								className={styles.submodule_accordion}
-								isOpen={subModuleIndex === indexes.subModuleIndex}
-								title={(
-									<div
-										className={styles.flex}
-									>
-										{isSubModuleComplete(moduleIndex, subModuleIndex, data)
-											? (
-												<>
-													<IcMFtick
-														fill="#849E4C"
-														width={28}
-														height={28}
-														className={styles.icon}
-													/>
-													<div className={styles.indexes}>
-														{' '}
-														{moduleIndex + 1}
-														.
-														{subModuleIndex + 1}
-													</div>
-
-												</>
-											) : (
-												<div className={styles.number}>
-													<div className={styles.index}>
-														{moduleIndex + 1}
-														.
-														{subModuleIndex + 1}
-													</div>
+					{(module.course_sub_modules || []).map((subModule, subModuleIndex) => (
+						<Accordion
+							key={subModule.id}
+							type="text"
+							className={styles.submodule_accordion}
+							isOpen={subModuleIndex === indexes.subModuleIndex}
+							title={(
+								<div
+									className={styles.flex}
+								>
+									{isSubModuleComplete(moduleIndex, subModuleIndex, data)
+										? (
+											<>
+												<IcMFtick
+													fill="#849E4C"
+													width={28}
+													height={28}
+													className={styles.icon}
+												/>
+												<div className={styles.indexes}>
+													{' '}
+													{moduleIndex + INDEX_TO_VALUE_DIF}
+													.
+													{subModuleIndex + INDEX_TO_VALUE_DIF}
 												</div>
-											)}
 
-										<div className={styles.name}>{subModule.name}</div>
-									</div>
-								)}
-							>
-								<SubModuleContent
-									key={subModule.id}
-									id={subModule.id}
-									data={subModule.course_sub_module_chapters}
-									moduleIndex={moduleIndex}
-									subModuleIndex={subModuleIndex}
-									setIndexes={setIndexes}
-									chapter={chapter}
-									setChapter={setChapter}
-									setStates={setStates}
-								/>
-							</Accordion>
-						))}
-					</div>
+											</>
+										) : (
+											<div className={styles.number}>
+												<div className={styles.index}>
+													{moduleIndex + INDEX_TO_VALUE_DIF}
+													.
+													{subModuleIndex + INDEX_TO_VALUE_DIF}
+												</div>
+											</div>
+										)}
+
+									<div className={styles.name}>{subModule.name}</div>
+								</div>
+							)}
+						>
+							<SubModuleContent
+								key={subModule.id}
+								id={subModule.id}
+								data={subModule.course_sub_module_chapters}
+								moduleIndex={moduleIndex}
+								subModuleIndex={subModuleIndex}
+								setIndexes={setIndexes}
+								chapter={chapter}
+								setChapter={setChapter}
+								setStates={setStates}
+							/>
+						</Accordion>
+					))}
 				</Accordion>
-
 			))}
 
 			{(!isEmpty(tests)) ? (
@@ -175,8 +158,6 @@ function ModuleNavigation({
 
 				<div className={styles.text}>Course Completion</div>
 			</div>
-			;
-
 		</div>
 	);
 }

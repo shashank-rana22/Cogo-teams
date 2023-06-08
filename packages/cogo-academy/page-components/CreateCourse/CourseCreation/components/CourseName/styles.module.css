@@ -18,3 +18,9 @@
 	right: 24px;
 	bottom: 24px;
 }
+
+.error_message {
+	font-size: 12px;
+	font-weight: 400;
+	color: #cb6464;
+}

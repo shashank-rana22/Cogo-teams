@@ -20,6 +20,7 @@ function CourseCreation() {
 		course_name       : '',
 		course_categories : [],
 	});
+	const [errors, setErrors] = useState({});
 
 	const COMPONENT_MAPPING = {
 		course_name: {
@@ -28,6 +29,8 @@ function CourseCreation() {
 				setActiveStepper,
 				setCourseData,
 				courseData,
+				setErrors,
+				errors,
 			},
 		},
 		course_topics: {
@@ -36,6 +39,8 @@ function CourseCreation() {
 				setActiveStepper,
 				courseData,
 				setCourseData,
+				errors,
+				setErrors,
 			},
 		},
 	};

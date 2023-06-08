@@ -6,7 +6,9 @@ import LoadingState from '../../../../../commons/LoadingState';
 import CategoryCard from './CategoryCard';
 import styles from './styles.module.css';
 
-function RightComponent({ data = {}, listLoading, setShowCoursesModal }) {
+const CARDS_TO_SHOW = 2;
+
+function RightComponent({ data = {}, listLoading = false, setShowCoursesModal = () => {} }) {
 	const router = useRouter();
 
 	const { list = [] } = data || {};
@@ -18,11 +20,11 @@ function RightComponent({ data = {}, listLoading, setShowCoursesModal }) {
 	return (
 		<div className={styles.container}>
 			{list.map((item, index) => {
-				if (index > 8) {
+				if (index > CARDS_TO_SHOW) {
 					return null;
 				}
 
-				if (index === 8) {
+				if (index === CARDS_TO_SHOW) {
 					return (
 						<div
 							key={item.id}

@@ -6,6 +6,10 @@ import GET_LINK_MAPPING from '../../../../../../configs/GET_LINK_MAPPING';
 
 import styles from './styles.module.css';
 
+const TOPICS_TO_SHOW = 2;
+
+const INDEX_VALUE_DIFF = 1;
+
 function CategoryCard({ item }) {
 	const router = useRouter();
 
@@ -26,7 +30,7 @@ function CategoryCard({ item }) {
 
 				<div>
 					{topicsArr.map((topic, index) => {
-						if (index && topicsArr.length > 2) {
+						if (index && topicsArr.length > TOPICS_TO_SHOW) {
 							return null;
 						}
 
@@ -42,8 +46,8 @@ function CategoryCard({ item }) {
 						);
 					})}
 
-					{topicsArr.length > 2 ? (
-						<Pill color="#EBEBEB">{`+${topicsArr.length - 1} More`}</Pill>
+					{topicsArr.length > TOPICS_TO_SHOW ? (
+						<Pill color="#EBEBEB">{`+${topicsArr.length - INDEX_VALUE_DIFF} More`}</Pill>
 					) : null}
 				</div>
 			</div>

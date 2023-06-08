@@ -6,12 +6,23 @@ import useUpdateCourseFeedback from '../../hooks/useUpdateCourseFeedback';
 
 import styles from './styles.module.css';
 
-function CompletionAndFeedback({ course_id, feedbackData, name }) {
-	const [starRating, setStarRating] = useState(feedbackData?.rating || 0);
-	const [feedback, setFeedback] = useState(feedbackData?.remark || '');
+function CompletionAndFeedback({ course_id, feedbackData = {}, name }) {
+	const { rating = 0, remark = '', id = '' } = feedbackData || {};
+
+	const [starRating, setStarRating] = useState(rating);
+	const [feedback, setFeedback] = useState(remark);
 
 	const { loading, createCourseFeedback } = useCreateCourseFeedback({ course_id });
 	const { updateCourseFeedbackLoading, updateCourseFeedback } = useUpdateCourseFeedback();
+
+	const onClickSubmit = () => {
+		if (id) {
+			updateCourseFeedback({ rating: starRating, remark: feedback, feedback_id: id });
+			return;
+		}
+
+		createCourseFeedback({ rating: starRating, remark: feedback });
+	};
 
 	return (
 		<div className={styles.container}>
@@ -55,11 +66,12 @@ function CompletionAndFeedback({ course_id, feedbackData, name }) {
 			</div>
 
 			<div className={styles.remarks}>Remarks (If Any) :</div>
+
 			<Textarea
 				name="feedback"
 				size="md"
 				value={feedback}
-				onChange={(value) => setFeedback(value)}
+				onChange={setFeedback}
 				placeholder="Please write your feedback here..."
 				rows={8}
 				cols={10}
@@ -69,14 +81,8 @@ function CompletionAndFeedback({ course_id, feedbackData, name }) {
 				size="md"
 				themeType="primary"
 				className={styles.btn}
-				loading={feedbackData?.id ? updateCourseFeedbackLoading : loading}
-				onClick={() => {
-					if (feedbackData?.id) {
-						updateCourseFeedback({ rating: starRating, remark: feedback, feedback_id: feedbackData?.id });
-					} else {
-						createCourseFeedback({ rating: starRating, remark: feedback });
-					}
-				}}
+				loading={updateCourseFeedbackLoading || loading}
+				onClick={onClickSubmit}
 			>
 				Submit
 			</Button>

@@ -4,13 +4,12 @@ import BUTTON_CONTENT_MAPPING from '../../../../configs/BUTTON_CONTENT_MAPPING';
 import useListCourseUserMappings from '../../../../hooks/useListCourseUserMappings';
 import CourseCard from '../../../CourseCard';
 
-const useHandleSimilarCourses = ({ course_details }) => {
+const useHandleSimilarCourses = ({ course_details = {} }) => {
 	const { user:{ id: user_id } } = useSelector((state) => state.profile);
 
-	const topics = [];
-	course_details?.faq_topics?.map((item) => (
-		topics.push(item?.id)
-	));
+	const { faq_topics = [] } = course_details || {};
+
+	const topics = faq_topics?.map((item) => item?.id);
 
 	const {
 		data = {},

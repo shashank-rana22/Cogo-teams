@@ -8,13 +8,21 @@ import toFixed from '../../utils/toFixed';
 
 import styles from './styles.module.css';
 
-function ToolTipContent({ faq_topics }) {
+const MAXIMUM_PROGRESS_PRECENTAGE = 100;
+
+const MAX_ITEMS_TO_SHOW = 2;
+
+const ROUND_OF_DIGITS = 2;
+
+const SINGULAR_VALUE = 1;
+
+function ToolTipContent({ faq_topics = [] }) {
 	return (
 		<>
-			{(faq_topics || []).map((item, index) => {
+			{faq_topics.map((item, index) => {
 				const { id, display_name } = item;
 
-				return index >= 1 ? (
+				return index >= SINGULAR_VALUE ? (
 					<Pill key={id} size="md" color="#EBEBEB">
 						{display_name}
 					</Pill>
@@ -38,6 +46,8 @@ function CourseCard({
 		user_progress,
 		state,
 		modules_count = 0,
+		average_rating = 0,
+		is_saved = false,
 	} = data;
 
 	const {
@@ -57,8 +67,8 @@ function CourseCard({
 
 	let finalUserProgress = user_progress;
 
-	if (finalUserProgress > 100) {
-		finalUserProgress = 100;
+	if (finalUserProgress > MAXIMUM_PROGRESS_PRECENTAGE) {
+		finalUserProgress = MAXIMUM_PROGRESS_PRECENTAGE;
 	}
 
 	return (
@@ -70,9 +80,10 @@ function CourseCard({
 				<div className={styles.topics_rating_container}>
 					<div className={styles.topics}>
 						{faq_topics.map((topic, index) => {
-							if (index > 0 && faq_topics.length > 2) {
+							if (index && faq_topics.length > MAX_ITEMS_TO_SHOW) {
 								return null;
 							}
+
 							const { id, display_name } = topic;
 							return (
 								<Pill key={id} size="md" color="#EBEBEB">
@@ -81,41 +92,41 @@ function CourseCard({
 							);
 						})}
 
-						{faq_topics.length > 2 ? (
+						{faq_topics.length > MAX_ITEMS_TO_SHOW ? (
 							<Tooltip
 								interactive
 								content={<ToolTipContent faq_topics={faq_topics} />}
 								placement="top"
 								className={styles.tooltip}
 							>
-								<Pill color="#EBEBEB">{`+${faq_topics.length - 1} More`}</Pill>
+								<Pill color="#EBEBEB">{`+${faq_topics.length - SINGULAR_VALUE} More`}</Pill>
 							</Tooltip>
 						) : null}
 					</div>
 
-					{data?.average_rating ? (
+					{average_rating ? (
 						<div className={styles.rating}>
 							<IcMStarfull style={{ marginRight: '6px' }} fill="#fcdc00" />
-							<span style={{ color: '#fcdc00' }}>{data?.average_rating}</span>
+							<span style={{ color: '#fcdc00' }}>{average_rating}</span>
 						</div>
 					) : null}
 				</div>
 
 				<div
-					className={data?.is_saved ? styles.saved : styles.save}
+					className={is_saved ? styles.saved : styles.save}
 					role="button"
 					tabIndex="0"
 					onClick={() => {
-						updateUserCourse(data?.id, data?.is_saved);
+						updateUserCourse(data?.id, is_saved);
 					}}
 				>
-					<div className={data?.is_saved ? styles.saved_div : styles.not_saved}>
+					<div className={is_saved ? styles.saved_div : styles.not_saved}>
 						<IcMBookmark
-							fill={data?.is_saved ? '#000' : '#fff'}
+							fill={is_saved ? '#000' : '#fff'}
 							style={{ marginRight: '6px' }}
 						/>
 
-						<div>{data?.is_saved ? 'Saved' : 'Save'}</div>
+						<div>{is_saved ? 'Saved' : 'Save'}</div>
 					</div>
 				</div>
 			</div>
@@ -123,7 +134,7 @@ function CourseCard({
 			<div className={styles.details}>
 				<div className={styles.categories_container}>
 					{course_categories.map((topic, index) => {
-						if (index > 1 && course_categories.length > 2) {
+						if (index > SINGULAR_VALUE && course_categories.length > MAX_ITEMS_TO_SHOW) {
 							return null;
 						}
 						const { id, display_name } = topic;
@@ -134,7 +145,7 @@ function CourseCard({
 						);
 					})}
 
-					{course_categories.length > 2 ? (
+					{course_categories.length > MAX_ITEMS_TO_SHOW ? (
 						<div className={`${styles.category_name} ${styles.more}`}>
 							<Tooltip
 								interactive
@@ -142,7 +153,7 @@ function CourseCard({
 								placement="top"
 								className={styles.tooltip}
 							>
-								{`+${course_categories.length - 2} More`}
+								{`+${course_categories.length - MAX_ITEMS_TO_SHOW} More`}
 							</Tooltip>
 						</div>
 					) : null}
@@ -155,10 +166,10 @@ function CourseCard({
 					{state === 'ongoing' ? (
 						<>
 							<div className={styles.remaining_text}>
-								{toFixed(100 - Number(finalUserProgress), 2)}
+								{toFixed(MAXIMUM_PROGRESS_PRECENTAGE - Number(finalUserProgress), ROUND_OF_DIGITS)}
 								% Remaining
 							</div>
-							<ProgressBar progress={toFixed(finalUserProgress, 2)} uploadText=" " />
+							<ProgressBar progress={toFixed(finalUserProgress, ROUND_OF_DIGITS)} uploadText=" " />
 						</>
 					) : null}
 
@@ -169,7 +180,7 @@ function CourseCard({
 								{modules_count}
 								{' '}
 								Module
-								{modules_count === 1 ? '' : 's'}
+								{modules_count === SINGULAR_VALUE ? '' : 's'}
 							</div>
 						</div>
 
@@ -179,7 +190,7 @@ function CourseCard({
 								{course_completion_value}
 								{' '}
 								{course_completion_unit}
-								{course_completion_value === 1 ? '' : 's'}
+								{course_completion_value === SINGULAR_VALUE ? '' : 's'}
 							</div>
 						</div>
 					</div>

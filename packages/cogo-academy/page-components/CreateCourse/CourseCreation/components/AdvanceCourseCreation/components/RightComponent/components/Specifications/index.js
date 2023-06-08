@@ -113,7 +113,6 @@ function Specifications({ data = {}, id = '', activeTab = '', mode = '', state }
 							<ModalComponent show={showModal[name]} setShow={setShowModal} from={name} />
 
 							<div className={styles.input_group}>
-
 								<Element
 									{...controlItem}
 									key={name}

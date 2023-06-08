@@ -2,8 +2,9 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 
-const useCreateCourse = () => {
+const useCreateCourse = ({ setErrors }) => {
 	const router = useRouter();
 
 	const [{ loading }, trigger] = useRequest({
@@ -12,11 +13,18 @@ const useCreateCourse = () => {
 	}, { manual: true });
 
 	const createCourse = async ({ courseData = {} }) => {
+		const { course_name, course_categories = [] } = courseData;
+
+		if (isEmpty(course_categories)) {
+			setErrors((prev) => ({ ...prev, course_categories: 'This is Required' }));
+			return;
+		}
+
 		try {
 			const res = await trigger({
 				data: {
-					name         : courseData.course_name,
-					category_ids : courseData.course_categories,
+					name         : course_name,
+					category_ids : course_categories,
 				},
 			});
 

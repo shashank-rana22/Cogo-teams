@@ -10,6 +10,8 @@ import ChapterContent from './ChapterContent';
 import styles from './styles.module.css';
 import useHandleChapter from './useHandleChapter';
 
+const VALUE_TO_INDEX_DIFF = 1;
+
 function Chapter({
 	subModule,
 	handleDragStart,
@@ -55,7 +57,7 @@ function Chapter({
 	return (
 		<div style={{ padding: '16px 20px' }}>
 			{subModuleChapters.map((child, index) => (
-				<div className={styles.child_accordian}>
+				<div key={child.id} className={styles.child_accordian}>
 					<Accordion
 						type="text"
 						isOpen={child.isNew}
@@ -88,7 +90,7 @@ function Chapter({
 							>
 								<IcMDrag className={styles.icon} />
 								<div className={`${styles.left} ${styles.flex}`}>
-									{`Chapter ${index + 1}:`}
+									{`Chapter ${index + VALUE_TO_INDEX_DIFF}:`}
 									{' '}
 									<b className={styles.name}>{child.name}</b>
 								</div>
@@ -145,7 +147,7 @@ function Chapter({
 					className={styles.button}
 					themeType="secondary"
 					onClick={addNewChapter}
-					disabled={subModuleChapters[subModuleChapters.length - 1].isNew}
+					disabled={subModuleChapters[subModuleChapters.length - VALUE_TO_INDEX_DIFF].isNew}
 				>
 					+ Chapter
 				</Button>

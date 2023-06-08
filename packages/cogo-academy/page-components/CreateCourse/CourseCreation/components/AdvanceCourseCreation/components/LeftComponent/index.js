@@ -9,6 +9,8 @@ import styles from './styles.module.css';
 
 const STATE_MAPPING = ['overview', 'specification', 'curriculum', 'completion', 'audience', 'pre_publish'];
 
+const VALUE_TO_INDEX_DIFF = 1;
+
 function LeftComponent({ activeTab, setActiveTab, getCogoAcademyCourse, id, state }) {
 	const { loading, updateCourse } = useUpdateCourse({
 		getCogoAcademyCourse,
@@ -55,7 +57,7 @@ function LeftComponent({ activeTab, setActiveTab, getCogoAcademyCourse, id, stat
 							className={`${styles.ind_container} ${activeTab === key && styles.active_tab}`}
 						>
 							<div className={styles.number}>
-								<div className={styles.index}>{index + 1}</div>
+								<div className={styles.index}>{index + VALUE_TO_INDEX_DIFF}</div>
 							</div>
 							<div>{title}</div>
 						</div>
@@ -72,7 +74,7 @@ function LeftComponent({ activeTab, setActiveTab, getCogoAcademyCourse, id, stat
 							title={(
 								<div className={styles.flex}>
 									<div className={styles.number}>
-										<div className={styles.index}>{index + 1}</div>
+										<div className={styles.index}>{index + VALUE_TO_INDEX_DIFF}</div>
 									</div>
 									<div>{title}</div>
 								</div>

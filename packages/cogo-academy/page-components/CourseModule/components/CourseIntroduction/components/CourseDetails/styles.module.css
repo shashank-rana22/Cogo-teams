@@ -3,13 +3,12 @@
 	background-color: #fff;
 }
 
-#bold {
+.bold {
 	margin-bottom: 0;
 }
 
 .header {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: center;
 }
@@ -24,7 +23,6 @@
 
 .header_rating {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 }
 
@@ -39,7 +37,6 @@
 
 .bottom_box {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 	padding: 12px 24px;
@@ -50,7 +47,6 @@
 
 .card_display {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
@@ -72,7 +68,6 @@
 
 .card_details {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	justify-content: space-around;
 }

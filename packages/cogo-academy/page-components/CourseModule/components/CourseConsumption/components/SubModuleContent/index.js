@@ -11,12 +11,20 @@ import toFixed from '../../../../utils/toFixed';
 
 import styles from './styles.module.css';
 
-const ICON_MAPPING = {
-	document     : <IcMDocument width={14} height={14} fill="white" />,
-	video        : <IcMVideoCall width={14} height={14} fill="white" />,
-	presentation : <IcMPpt width={14} height={14} fill="white" />,
-	text         : <IcMText width={14} height={14} fill="white" />,
+const ICON_PROPS = {
+	width  : 14,
+	height : 14,
+	fill   : '#fff',
 };
+
+const ICON_MAPPING = {
+	document     : <IcMDocument {...ICON_PROPS} />,
+	video        : <IcMVideoCall {...ICON_PROPS} />,
+	presentation : <IcMPpt {...ICON_PROPS} />,
+	text         : <IcMText {...ICON_PROPS} />,
+};
+
+const ROUNDOFF_VALUE = 0;
 
 function SubModuleContent({
 	data = [],
@@ -82,7 +90,7 @@ function SubModuleContent({
 					)}
 
 					<div className={styles.duration}>
-						{toFixed(currChapter.completion_duration_value, 0)}
+						{toFixed(currChapter.completion_duration_value, ROUNDOFF_VALUE)}
 						{' mins'}
 					</div>
 				</div>

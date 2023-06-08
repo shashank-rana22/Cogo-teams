@@ -9,12 +9,8 @@
 .form_group {
 	margin-bottom: 32px;
 
-	&.course_title {
-		width: 64%;
-	}
-
-	&.course_categories {
-		width: 34%;
+	&.name {
+		width: 100%;
 	}
 
 	&.instructor_ids {

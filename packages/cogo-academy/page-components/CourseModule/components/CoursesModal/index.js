@@ -24,6 +24,7 @@ function CoursesModal({
 			onClose={() => setShowCoursesModal(false)}
 		>
 			<Modal.Header title="Courses" />
+
 			<ModalContent
 				finalCourseCategories={courseCategories}
 				loading={loading}

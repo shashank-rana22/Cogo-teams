@@ -4,13 +4,11 @@
 
 .question {
 	display: flex;
-	flex-direction: row;
 	font-weight: 600;
 }
 
 .answer {
 	display: flex;
-	flex-direction: row;
 }
 
 .flex {

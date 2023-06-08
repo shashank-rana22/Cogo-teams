@@ -1,5 +1,4 @@
 import { InputController, UploadController } from '@cogoport/forms';
-import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -11,6 +10,7 @@ function ModalContent({ control }) {
 				{' '}
 				<span style={{ color: 'red' }}>*</span>
 			</div>
+
 			<InputController
 				control={control}
 				name="description"
@@ -18,13 +18,13 @@ function ModalContent({ control }) {
 				placeholder="Enter Your Issue"
 				className={styles.input}
 			/>
+
 			<div>Upload Screenshot :</div>
 			<UploadController
 				name="error_screenshot_url"
 				control={control}
 				accept=".png"
 			/>
-
 		</div>
 	);
 }

@@ -1,6 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import { getFieldController } from '../../../../../commons/getFieldController';
@@ -14,6 +15,8 @@ function CourseCategories({
 	setActiveStepper,
 	courseData,
 	setCourseData,
+	setErrors,
+	errors: courseErrors,
 }) {
 	const [show, setShow] = useState(false);
 
@@ -27,7 +30,7 @@ function CourseCategories({
 	const {
 		createCourse,
 		loading: createCourseLoading,
-	} = useCreateCourse();
+	} = useCreateCourse({ setErrors });
 
 	const handlePreviousState = () => {
 		setActiveStepper('course_name');
@@ -65,6 +68,11 @@ function CourseCategories({
 					asyncKey="list_course_categories"
 					initialCall
 				/>
+				{courseErrors?.course_categories && isEmpty(courseData.course_categories) ? (
+					<div className={styles.error_message}>
+						**This is Required
+					</div>
+				) : null}
 			</div>
 
 			<div className={styles.footer}>
@@ -88,7 +96,6 @@ function CourseCategories({
 						loading={createCourseLoading}
 					>
 						Create Course
-
 					</Button>
 				</div>
 			</div>

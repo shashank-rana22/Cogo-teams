@@ -17,6 +17,8 @@ const CERTIFICATE_MAPPING = [
 	'signing_authority_user_id',
 ];
 
+const FIRST_INDEX = 0;
+
 const useHandleCourseCompletion = ({ data, ref, state, id, activeTab }) => {
 	const {
 		control,
@@ -94,7 +96,7 @@ const useHandleCourseCompletion = ({ data, ref, state, id, activeTab }) => {
 			const { course_completion_unit, course_completion_value } = course_completion_duration || {};
 
 			if (!isEmpty(course_certificates)) {
-				const certificateData = course_certificates[0];
+				const certificateData = course_certificates[FIRST_INDEX];
 
 				CERTIFICATE_MAPPING.forEach((item) => {
 					if (certificateData[item] && !isEmpty(certificateData[item])) {
@@ -108,8 +110,8 @@ const useHandleCourseCompletion = ({ data, ref, state, id, activeTab }) => {
 					setValue(item, data[item]);
 				}
 
-				if (item === 'test_id' && !isEmpty(tests[0])) {
-					setValue('test_id', tests[0].id);
+				if (item === 'test_id' && !isEmpty(tests[FIRST_INDEX])) {
+					setValue('test_id', tests[FIRST_INDEX].id);
 				}
 			});
 

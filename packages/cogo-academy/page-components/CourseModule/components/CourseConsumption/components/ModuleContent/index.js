@@ -10,6 +10,8 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 import useHandleCourseContent from './useHandleCourseContent';
 
+const TEST_INDEX = 0;
+
 function ModuleContent({
 	data = {},
 	loading,
@@ -58,6 +60,7 @@ function ModuleContent({
 		setEditorError,
 		setEditorValue,
 		chapter_content,
+		TEST_INDEX,
 	});
 
 	const { course_details = {}, test_completed = false } = data;
@@ -80,7 +83,12 @@ function ModuleContent({
 		);
 	}
 
-	console.log('tests', tests);
+	const {
+		total_questions = 0,
+		test_duration = 0,
+		cut_off_percentage = 0,
+		maximum_attempts = 1,
+	} = tests[TEST_INDEX] || {};
 
 	if (showTestData) {
 		return (
@@ -101,24 +109,24 @@ function ModuleContent({
 						<div className={styles.data_box}>
 							<div className={styles.data_display}>
 								<span>No of Questions</span>
-								<b>{tests[0]?.total_questions || 0}</b>
+								<b>{total_questions}</b>
 							</div>
 
 							<div className={styles.data_display}>
 								<span>Duration</span>
 								<b>
-									{formatTime(tests[0]?.test_duration)}
+									{formatTime(test_duration)}
 								</b>
 							</div>
 
 							<div className={styles.data_display}>
 								<span>Attempts</span>
-								<b>{tests[0]?.maximum_attempts}</b>
+								<b>{maximum_attempts}</b>
 							</div>
 
 							<div className={styles.data_display}>
 								<span>Required Pass %</span>
-								<b>{tests[0]?.cut_off_percentage}</b>
+								<b>{cut_off_percentage}</b>
 							</div>
 						</div>
 

@@ -9,7 +9,7 @@ import useListCourseUserMappings from '../../../../../hooks/useListCourseUserMap
 import CourseCard from '../../../../CourseCard';
 
 function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCategories }) {
-	const { data = {}, loading, fetchList } = useListCourseUserMappings({ activeTab, user_id });
+	const { data = {}, loading, fetchList } = useListCourseUserMappings({ activeTab, user_id, setOngoingCategories });
 
 	const { list = [] } = data;
 
@@ -31,7 +31,7 @@ function CourseContent({ activeTab, user_id, setOngoingCategories, ongoingCatego
 			});
 		}
 
-		if (!loading && activeTab === 'ongoing' && isEmpty(list)) {
+		if (!loading && activeTab === 'ongoing' && isEmpty(list) && !ongoingCategories.loaded) {
 			setOngoingCategories({ loaded: true, data: [] });
 		}
 	}, [activeTab, list, loading, ongoingCategories.loaded, setOngoingCategories]);

@@ -4,7 +4,11 @@ import { IcMStarfull } from '@cogoport/icons-react';
 import styles from './styles.module.css';
 import useHandleCourseDetails from './useHandleCourseDetails';
 
-function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
+const FIRST_INDEX = 0;
+
+const INDEX_TO_VALUE_DIFF = 1;
+
+function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) {
 	const {
 		MAPPING,
 		getModulesCount,
@@ -12,25 +16,46 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 		CAROUSELDATA,
 	} = useHandleCourseDetails({ instructorData });
 
+	const {
+		name = '',
+		average_rating = 0,
+		description = '',
+		course_categories = [],
+		course_objectives = [],
+		course_stats = {},
+		course_modules = [],
+		course_completion_rewards_details = [],
+		course_completion_duration = {},
+		course_content_stats = {},
+		course_content_duration_value = 0,
+		course_content_duration_unit = '',
+	} = data || {};
+
+	const { graded_tests = 0, practice_tests = 0 } = course_stats || {};
+
+	const { video_duration = 0, reading_duration = 0 } = course_content_stats || {};
+
+	const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.header_description}>
-					<h1 id={styles.bold}>{data?.name}</h1>
+					<h1 className={styles.bold}>{name}</h1>
 					{viewType !== 'preview' ? (
 						<div>
 							by
 							{' '}
-							{instructorData?.[0]?.name}
+							{instructorData?.[FIRST_INDEX]?.name}
 						</div>
 					) : null}
 				</div>
 
-				{data?.average_rating
+				{average_rating
 					? (
 						<div className={styles.header_rating}>
 							<IcMStarfull fill="#000" />
-							<span style={{ color: '#000' }}>{data?.average_rating}</span>
+							<span style={{ color: '#000' }}>{average_rating}</span>
 						</div>
 					)
 					: null}
@@ -38,10 +63,10 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 
 			<div className={styles.description}>
 				<b>About the course &nbsp;:&nbsp;</b>
-				{data?.description}
+				{description}
 			</div>
 
-			{data?.course_categories?.map((item) => (
+			{course_categories?.map((item) => (
 				<Pill key={item.id} color="green">
 					{item.display_name}
 				</Pill>
@@ -50,9 +75,9 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 			<div className={styles.instructions}>
 				<div className={styles.instruction_head}><b>In this course, you will learn (Objectives)</b></div>
 
-				{data?.course_objectives?.map((item, index) => (
+				{course_objectives?.map((item, index) => (
 					<div key={item}>
-						{index + 1}
+						{index + INDEX_TO_VALUE_DIFF}
 						.&nbsp;
 						{ item }
 					</div>
@@ -77,8 +102,8 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 
 								return (
 									<div key={key}>
-										{data?.course_stats?.[apiKey]
-										|| getModulesCount({ course_modules: data?.course_modules, type: 'modules' })}
+										{course_stats?.[apiKey]
+										|| getModulesCount({ course_modules, type: 'modules' })}
 										{label}
 									</div>
 								);
@@ -87,14 +112,14 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 
 						<div>
 							<div>
-								{data?.course_stats?.graded_tests}
+								{graded_tests}
 								&nbsp;Graded Test
 							</div>
 							<div>
-								{data?.course_stats?.practice_tests}
+								{practice_tests}
 								&nbsp;Practice Tests
 							</div>
-							<div><b>{data?.course_completion_rewards_details?.[0]}</b></div>
+							<div><b>{course_completion_rewards_details?.[FIRST_INDEX]}</b></div>
 						</div>
 					</div>
 				</div>
@@ -111,23 +136,22 @@ function CourseDetails({ data, instructorData = [], viewType = 'normal' }) {
 
 						<div>
 							<div>
-								{data?.course_completion_duration?.course_completion_value}
-								{data?.course_completion_duration?.course_completion_value}
+								{course_completion_value}
 								&nbsp;
-								{data?.course_completion_duration?.course_completion_unit}
+								{course_completion_unit}
 							</div>
 
 							{viewType !== 'preview' ? (
 								<>
-									<FormatTime value={data?.course_content_stats?.video_duration} type="Videos" />
+									<FormatTime value={video_duration} type="Videos" />
 
-									<FormatTime value={data?.course_content_stats?.reading_duration} type="Reading" />
+									<FormatTime value={reading_duration} type="Reading" />
 								</>
 							) : (
 								<>
-									{data?.course_content_duration_value}
+									{course_content_duration_value}
 									{' '}
-									{data?.course_content_duration_unit}
+									{course_content_duration_unit}
 									{' '}
 									duration
 								</>

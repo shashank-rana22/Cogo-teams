@@ -1,20 +1,35 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 import styles from './styles.module.css';
 
-function CategoriesCard({ data, setCurrentCategory }) {
-	const router = useRouter();
+const TOOLTIP_START_VALUE = 1;
 
-	const allpills = (item) => (
-		<div key={item?.topic_id}>
-			{item?.map((tag, i) => (i >= 1 ? (
-				<Pill>{tag?.topic_name}</Pill>
-			) : null))}
+const MIN_TOPICS_LENGTH = 2;
+
+const TOPIC_INDEX_START = 0;
+
+const TOPIC_INDEX_END = 1;
+
+function TooltipContent({ item = [] }) {
+	return (
+		<div>
+			{item.map((tag, i) => {
+				if (i >= TOOLTIP_START_VALUE) {
+					return <Pill key={tag?.topic_name}>{tag?.topic_name}</Pill>;
+				}
+
+				return null;
+			})}
 		</div>
 	);
+}
+
+function CategoriesCard({ data = {}, setCurrentCategory }) {
+	const router = useRouter();
+
+	const { display_name = '', topics = [], id = '', course_count = 0 } = data;
 
 	return (
 		<div
@@ -22,42 +37,47 @@ function CategoriesCard({ data, setCurrentCategory }) {
 			role="button"
 			tabIndex="0"
 			onClick={() => {
-				setCurrentCategory(data?.id);
+				setCurrentCategory(id);
 				router.push('/learning/course?viewType=all_courses');
 			}}
 		>
-			<div className={styles.title}>{startCase(data?.display_name)}</div>
+			<div className={styles.title}>{startCase(display_name)}</div>
 
 			<div className={styles.details}>
-
 				<div className={styles.image_box} />
+
 				<div>
 					<div className={styles.pill_box}>
-						{data?.topics?.slice(0, 1).map((item) => (
-							<Pill size="md" className={styles.pill}>
+						{topics?.slice(TOPIC_INDEX_START, TOPIC_INDEX_END).map((item) => (
+							<Pill
+								key={item?.topic_name}
+								size="md"
+								className={styles.pill}
+							>
 								{item?.topic_name}
 							</Pill>
 						))}
 
-						{data?.topics?.length > 2 ? (
+						{topics?.length > MIN_TOPICS_LENGTH ? (
 							<Tooltip
-								content={allpills(data?.topics)}
+								content={<TooltipContent item={topics} />}
 								placement="right"
 								theme="light"
 								styles={{ marginBottom: '24px' }}
 							>
 								<Pill>
 									+
-									{data.topics.length - 1}
+									{data.topics.length - TOPIC_INDEX_END}
 									{' '}
 									Topics
 								</Pill>
 							</Tooltip>
 						)
-							:						null}
+							: null}
 					</div>
+
 					<div className={styles.courses}>
-						{data?.course_count}
+						{course_count}
 						{' '}
 						Courses
 					</div>

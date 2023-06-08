@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
 const useReportError = ({ setShowErrorModal = () => {} }) => {
-	const { handleSubmit, control, watch, formState: { errors } } = useForm();
+	const { handleSubmit, control, formState: { errors } } = useForm();
 
 	const [{ loading : feedbackLoading }, trigger] = useRequest({
 		url    : '/create_communication',

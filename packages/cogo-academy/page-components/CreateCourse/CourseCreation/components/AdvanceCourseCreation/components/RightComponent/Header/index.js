@@ -132,6 +132,10 @@ function Header({
 								funcProps = {},
 							} = buttonControls || {};
 
+							if (state === 'published' && buttonText === 'Publish') {
+								return null;
+							}
+
 							return (
 								<Button
 									key={buttonText}

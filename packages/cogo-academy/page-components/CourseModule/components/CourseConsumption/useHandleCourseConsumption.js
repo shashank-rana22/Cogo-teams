@@ -77,17 +77,25 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 	useEffect(() => {
 		if (!isEmpty(finalData) && !isEmpty(indexes)) {
 			setChapter(
-				course_modules?.[moduleIndex]?.course_sub_modules[
-					subModuleIndex
-				]?.course_sub_module_chapters[chapterIndex],
+				course_modules?.[moduleIndex]?.course_sub_modules[subModuleIndex]
+					?.course_sub_module_chapters[chapterIndex],
 			);
 
 			if (all_chapters_completed && test_completed && isNew) {
 				setShowFeedback(true);
 			}
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [finalData]);
+	}, [
+		all_chapters_completed,
+		chapterIndex,
+		course_modules,
+		finalData,
+		indexes,
+		isNew,
+		moduleIndex,
+		subModuleIndex,
+		test_completed,
+	]);
 
 	useEffect(() => {
 		if (

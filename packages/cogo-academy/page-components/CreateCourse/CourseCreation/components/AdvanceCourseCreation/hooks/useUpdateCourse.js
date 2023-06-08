@@ -35,8 +35,8 @@ const useUpdateCourse = ({ data, setActiveTab, activeTab, getCogoAcademyCourse, 
 
 			if (buttonType === 'publish') {
 				router.push(
-					'/learning/course',
-					'/learning/course',
+					'/learning?activeTab=course_module',
+					'/learning?activeTab=course_module',
 				);
 			}
 		} catch (error) {

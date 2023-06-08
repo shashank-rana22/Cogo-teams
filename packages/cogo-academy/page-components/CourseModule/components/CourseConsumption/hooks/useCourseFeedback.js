@@ -7,7 +7,6 @@ const useCreateCourseFeedback = ({ course_id }) => {
 	const router = useRouter();
 
 	const [{ loading }, trigger] = useRequest({
-
 		url    : '/create_course_feedback',
 		method : 'POST',
 	}, { manual: true });

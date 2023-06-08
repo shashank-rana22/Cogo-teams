@@ -1,8 +1,22 @@
 import { useRouter } from '@cogoport/next';
 
-// eslint-disable-next-line max-len
-import downloadFileFromUrl from '../../../../../CreateCourse/CourseCreation/components/AdvanceCourseCreation/utils/downloadFileFromUrl';
+import downloadFileFromUrl from
+	'../../../../../CreateCourse/CourseCreation/components/AdvanceCourseCreation/utils/downloadFileFromUrl';
 import getChapter from '../../utils/getChapter';
+
+const TIME_UNIT_VALUE = 60;
+
+const formatTime = (time) => (
+	<div>
+		{Math.floor(time / TIME_UNIT_VALUE)}
+		&nbsp;
+		<b>Hour</b>
+		&nbsp;
+		{time % TIME_UNIT_VALUE}
+		&nbsp;
+		<b>Min</b>
+	</div>
+);
 
 const useHandleCourseContent = ({
 	updateCourseProgress,
@@ -14,6 +28,7 @@ const useHandleCourseContent = ({
 	setEditorError,
 	setEditorValue,
 	chapter_content,
+	TEST_INDEX,
 }) => {
 	const router = useRouter();
 
@@ -22,25 +37,13 @@ const useHandleCourseContent = ({
 		setEditorValue(value);
 	};
 
-	const formatTime = (time) => (
-		<div>
-			{Math.floor(time / 60)}
-			&nbsp;
-			<b>Hour</b>
-			&nbsp;
-			{time % 60}
-			&nbsp;
-			<b>Min</b>
-		</div>
-	);
-
 	const openInNewTab = (url) => {
 		window.open(url, '_blank', 'noopener,noreferrer');
 	};
 
 	const onClickVisitTest = () => {
 		router.push(
-			`/learning/tests/${data?.course_details?.tests[0]?.id}?from=${data?.course_details?.id}`,
+			`/learning/tests/${data?.course_details?.tests[TEST_INDEX]?.id}?from=${data?.course_details?.id}`,
 		);
 	};
 
