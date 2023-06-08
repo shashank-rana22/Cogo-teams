@@ -8,7 +8,10 @@ const FCL_TABS = [
 	'container_gated_out',
 	'awaiting_container_return',
 	'container_returned',
-	'completed'];
+	'service_completed',
+	'completed',
+	'cancelled',
+];
 
 export const TABWISE_FILTERS = {
 	vessel_departed: {
@@ -67,9 +70,16 @@ export const TABWISE_FILTERS = {
 			'shipment_received',
 		],
 	},
+	service_completed: {
+		service_state: 'completed',
+		state: 'in_progress',
+	},
 	completed: {
 		state: 'completed',
 	},
+	cancelled: {
+		state: 'cancelled',
+	}
 };
 
 export const CRITICAL_TABS = {
