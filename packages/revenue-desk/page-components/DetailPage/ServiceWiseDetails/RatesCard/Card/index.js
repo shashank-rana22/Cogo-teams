@@ -1,4 +1,4 @@
-import { IcMProfile, IcMDrag, IcMAirport, IcMShip } from '@cogoport/icons-react';
+import { IcMDrag, IcMAirport, IcMShip } from '@cogoport/icons-react';
 
 import PriorityNumber from './PriorityNumber';
 import styles from './styles.module.css';
@@ -46,7 +46,7 @@ function Card({ data, setPrefrences, prefrences, rate_key, serviceId }) {
 						<div>
 							{data?.airline ? (
 								<div style={{ display: 'flex', alignItems: 'center' }}>
-									{(data?.airline?.logo_url !== null)
+									{(data?.airline?.logo_url)
 										? (
 											<img
 												src={data?.airline?.logo_url}
@@ -60,10 +60,11 @@ function Card({ data, setPrefrences, prefrences, rate_key, serviceId }) {
 										{data?.airline?.business_name}
 									</div>
 								</div>
-							)
-								: (
+							) : null}
+							{data?.shipping_line
+								? (
 									<div style={{ display: 'flex', alignItems: 'center' }}>
-										{data?.shipping_line?.logo_url !== null
+										{data?.shipping_line?.logo_url
 											? (
 												<img
 													src={data?.shipping_line?.logo_url}
@@ -76,13 +77,7 @@ function Card({ data, setPrefrences, prefrences, rate_key, serviceId }) {
 											{data?.shipping_line?.business_name}
 										</div>
 									</div>
-								)}
-						</div>
-					</div>
-					<div className={styles.upper_right_section}>
-						<IcMProfile />
-						<div className={styles.supply_agent_text}>
-							Supply Agent : Himali Saini
+								) : null}
 						</div>
 					</div>
 				</div>
@@ -129,14 +124,6 @@ function Card({ data, setPrefrences, prefrences, rate_key, serviceId }) {
 							<span style={{ fontSize: '20px', fontWeight: '700', color: '#221F20' }}>
 								USD 370
 							</span>
-						</div>
-					</div>
-					<div className={styles.last_section}>
-						<div>
-							Preferred Service Provider
-						</div>
-						<div>
-							Additional Revert Available
 						</div>
 					</div>
 				</div>
