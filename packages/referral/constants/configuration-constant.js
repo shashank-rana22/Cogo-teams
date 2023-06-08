@@ -1,4 +1,4 @@
-const DEFAULT_ARRAY_VALUE= 39;
+const DEFAULT_ARRAY_VALUE = 39;
 const INDEX_VALUE = 2;
 
 export const OVERALL_LIMIT = [

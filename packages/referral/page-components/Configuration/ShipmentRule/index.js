@@ -4,7 +4,8 @@ import { IcCFtick, IcMEdit } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import useCreateReferralConfig from '../../../hooks/useCreateReferralConfig';
-import { payloadFormat, setFormValues } from '../../../utils/payLoadFormat';
+import { payloadFormat } from '../../../utils/payLoadFormat';
+import { setFormValues } from '../../../utils/setFormValueFormat';
 
 import GlobalRule from './GlobalRule';
 import NetworkBonus from './NetworkBonus';
