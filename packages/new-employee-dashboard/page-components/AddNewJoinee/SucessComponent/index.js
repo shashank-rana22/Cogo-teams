@@ -51,7 +51,6 @@ function SuccessComponent({ activePage }) {
 					Go To Dashboard
 				</Button>
 			</div>
-
 		</div>
 	);
 }

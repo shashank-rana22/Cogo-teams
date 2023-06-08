@@ -34,13 +34,11 @@ const SECTION_MAPPING = [
 		containerStyle : styles.personal_details_container,
 		fields         : PERSONAL_DETAILS_MAPPING,
 	},
-
 	{
 		header         : 'Employment Details',
 		containerStyle : styles.employement_details_container,
 		fields         : EMPLOYEE_DETAILS_MAPPING,
 	},
-
 	{
 		header         : 'HR Details',
 		containerStyle : styles.hr_details_container,
@@ -159,7 +157,6 @@ function FormComponent({ setActivePage }) {
 					</Button>
 				</div>
 			</div>
-
 		</div>
 	);
 }
