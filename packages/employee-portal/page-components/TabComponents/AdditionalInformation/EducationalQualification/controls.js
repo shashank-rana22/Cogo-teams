@@ -1,23 +1,26 @@
+const EDUCATION_LEVEL_OPTIONS = [
+	{ label: '10th', value: '10th' },
+	{ label: '12th', value: '12th' },
+	{ label: 'B.Tech', value: 'B.Tech' },
+	{ label: 'M.Tech', value: 'M.Tech' },
+	{ label: 'MBA', value: 'MBA' },
+	{ label: 'B.Sc', value: 'B.Sc' },
+	{ label: 'M.Sc', value: 'M.Sc' },
+	{ label: 'B.Com', value: 'M.Com' },
+	{ label: 'BCA', value: 'BCA' },
+	{ label: 'MCA', value: 'MCA' },
+	{ label: 'Diploma', value: 'Diploma' },
+];
+
 const getControls = [{
 	name     : 'education_qualifications',
 	type     : 'fieldArray',
 	controls : [
 		{
-			name    : 'type',
-			label   : 'Education Level',
-			type    : 'createselect',
-			options : [{ label: '10th', value: '10th' },
-				{ label: '12th', value: '12th' },
-				{ label: 'B.Tech', value: 'B.Tech' },
-				{ label: 'M.Tech', value: 'M.Tech' },
-				{ label: 'MBA', value: 'MBA' },
-				{ label: 'B.Sc', value: 'B.Sc' },
-				{ label: 'M.Sc', value: 'M.Sc' },
-				{ label: 'B.Com', value: 'M.Com' },
-				{ label: 'BCA', value: 'BCA' },
-				{ label: 'MCA', value: 'MCA' },
-				{ label: 'Diploma', value: 'Diploma' },
-			],
+			name        : 'type',
+			label       : 'Education Level',
+			type        : 'createselect',
+			options     : EDUCATION_LEVEL_OPTIONS,
 			placeholder : 'Degree',
 			style       : {
 				width: '60%',

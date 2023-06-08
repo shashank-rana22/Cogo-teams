@@ -42,6 +42,7 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 			<div className={styles.introductory_text}>
 				Please update your bank details here !
 			</div>
+
 			<div className={styles.container}>
 				{controls?.map((controlItem) => {
 					const { type, label, name: controlName } = controlItem || {};
