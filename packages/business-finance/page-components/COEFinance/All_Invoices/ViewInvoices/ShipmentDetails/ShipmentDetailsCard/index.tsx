@@ -75,6 +75,9 @@ function ShipmentDetailsCard({
 		shipmentType = '',
 		reasonForCN = '',
 		outstandingDocument = '',
+		paymentType = '',
+		isIncedental = '',
+
 	} = billAdditionalObject || {};
 
 	const [DetailsCard, setDetailsCard] = useState([
@@ -732,7 +735,27 @@ function ShipmentDetailsCard({
 													<span>{reasonForCN}</span>
 												</div>
 											)}
+											{shipmentType === 'ftl_freight'
+											&& (billType === 'BILL' || billType === 'purforma_invoice') && 	paymentType
+											&& (
+												<div className={styles.margin_bottom}>
+													Payment Type-
+													{' '}
+													<span>{paymentType}</span>
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
+											&& billType === 'BILL' && 		isIncedental
+											&& (
+												<div className={styles.margin_bottom}>
+													Is Incedental-
+													{' '}
+													<span>{isIncedental}</span>
+												</div>
+											)}
+
 										</div>
+
 									</div>
 								)}
 							</>

@@ -70,6 +70,8 @@ interface BillAdditionalObjectInterface {
 	shipmentType?: string;
 	reasonForCN? : string;
 	outstandingDocument? : string;
+	paymentType? : string;
+	isIncedental? : string;
 }
 export interface DataInterface {
 	job?: JobInterface;
