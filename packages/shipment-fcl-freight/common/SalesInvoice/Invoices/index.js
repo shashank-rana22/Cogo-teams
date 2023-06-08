@@ -42,7 +42,7 @@ function Invoices({
 	}
 
 	const showForOldShipments = invoiceData?.invoice_trigger_date
-	&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& !invoiceStatuses.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;

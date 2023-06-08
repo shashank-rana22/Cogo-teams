@@ -26,14 +26,13 @@ function InvoicingPartyDetail({
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
 	}
-
 	return (
 		<div className={styles.invoice_party_details} ref={invoicePartyDetailsRef}>
 			<div className={styles.invoice_party_name}>
 				{billing_address?.name || billing_address?.business_name}
 			</div>
 
-			{!GLOBAL_CONSTANTS.restricted_country_id_invoicing.includes(shipment_data?.entity_id) ? (
+			{!GLOBAL_CONSTANTS.features.freight_sales_invoice.restricted_entity_ids.includes(shipment_data?.entity_id) ? (
 				<div className={styles.gst}>
 					<div className={styles.label}>GST Number :</div>
 					<Tooltip

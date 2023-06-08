@@ -33,7 +33,7 @@ function InvoiceDetail({
 		window.open(invoiceLink);
 	};
 
-	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 

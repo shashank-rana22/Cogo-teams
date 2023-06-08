@@ -19,7 +19,7 @@ function KebabContent({
 }) {
 	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
-	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)

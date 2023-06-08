@@ -69,7 +69,7 @@ function Header({
 
 	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
 
-	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= 120347 && invoice?.status === 'reviewed'
+	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id && invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 
 	let invoiceStatus = invoicesList?.filter(
@@ -94,7 +94,7 @@ function Header({
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > 120347 || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized);
 
 	return (
 		<div className={styles.container}>
@@ -243,7 +243,7 @@ function Header({
 					) : null}
 
 					{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= 120347 ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"

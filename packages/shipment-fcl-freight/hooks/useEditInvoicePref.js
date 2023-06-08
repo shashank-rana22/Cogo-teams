@@ -1,10 +1,10 @@
 import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import formatIps from '../common/SalesInvoice/helpers/format-ips';
-import incoTermMapping from '../configurations/inco-term-mapping.json';
 
 import useUpdateInvoiceCombination from './useUpdateInvoiceCombination';
 
@@ -19,7 +19,7 @@ const useEditInvoicePref = ({
 	refetch = () => {},
 }) => {
 	const { inco_term = '', importer_exporter_id = '' } = shipment_data;
-	const updateExportInvoices = incoTermMapping[inco_term] === 'export';
+	const updateExportInvoices = getTradeTypeByIncoTerm(shipment_data?.inco_term) === 'export';
 	const allServiceLineitems = [];
 	invoicing_parties?.forEach((p) => {
 		const { invoice_currency, is_igst } = p || {};
