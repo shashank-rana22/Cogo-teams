@@ -1,0 +1,16 @@
+.position {
+	display: flex;
+}
+
+.position_trend {
+	display: flex;
+	align-items: center;
+	margin-left: 12px;
+}
+
+.score_trend {
+	display: flex;
+	align-items: center;
+	min-width: 120px;
+	cursor: pointer;
+}

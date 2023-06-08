@@ -4,6 +4,10 @@
 	color: #4f4f4f;
 }
 
+.table_container {
+	margin: 16px 0;
+}
+
 .table {
 	background-color: #fff;
 

@@ -1,21 +1,12 @@
-import { ResponsiveLine } from '@cogoport/charts/line';
 import { Tooltip } from '@cogoport/components';
 import { IcMUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-const getColor = ({ current_position, previous_position }) => {
-	if (!current_position || !previous_position) return '#13c0d4';
+import ScoreTrendChart from '../../../../common/ScoreTrendChart';
 
-	const trend = current_position - previous_position;
+import styles from './styles.module.css';
 
-	if (trend === 0) {
-		return '#13c0d4';
-	}
-
-	return (trend < 0 ? '#34C759' : '#ED3726');
-};
-
-const leaderboardColumns = [
+const getLeaderBoardColumns = ({ setScoreTrendIds }) => [
 	{
 		Header   : 'Position',
 		accessor : ({ current_position, previous_position }) => {
@@ -24,10 +15,10 @@ const leaderboardColumns = [
 			const val = Math.abs(trend);
 
 			return (
-				<div style={{ display: 'flex' }}>
+				<div className={styles.position}>
 					{ current_position || '-'}
 
-					<div style={{ marginLeft: '12px', display: 'flex', alignItems: 'center' }}>
+					<div className={styles.position_trend}>
 						{val ? (
 							<IcMUp
 								height={12}
@@ -51,41 +42,18 @@ const leaderboardColumns = [
 	{
 		Header   : 'Score Trend',
 		accessor : (item) => (
-			<div style={{ width: '120px', height: '40px', display: 'flex', padding: '8px 0' }}>
-				<ResponsiveLine
-					data={[item] || []}
-					width={100}
-					height={20}
-					colors={getColor(item)}
-					xScale={{ type: 'point' }}
-					yScale={{
-						type    : 'linear',
-						min     : 'auto',
-						max     : 'auto',
-						stacked : true,
-						reverse : false,
-					}}
-					axisTop={null}
-					axisRight={null}
-					axisBottom={null}
-					axisLeft={null}
-					enableGridX={false}
-					enableGridY={false}
-					lineWidth={1}
-					enablePoints={false}
-					pointSize={2}
-					pointColor={{ theme: 'background' }}
-					pointBorderColor={{ from: 'serieColor' }}
-					pointLabelYOffset={-12}
-					areaOpacity={0}
-					isInteractive={false}
-					enableCrosshair={false}
-					legends={[]}
-					animate={false}
-				/>
+			<div
+				className={styles.score_trend}
+				role="presentation"
+				onClick={setScoreTrendIds({
+					service_id      : item.service_id,
+					service_user_id : item.service_user_id,
+					service_type    : item.service_type,
+				})}
+			>
+				<ScoreTrendChart item={item} />
 			</div>
-		)
-		,
+		),
 	},
 	{
 		Header   : 'WARMTH',
@@ -135,4 +103,4 @@ const leaderboardColumns = [
 
 ];
 
-export default leaderboardColumns;
+export default getLeaderBoardColumns;

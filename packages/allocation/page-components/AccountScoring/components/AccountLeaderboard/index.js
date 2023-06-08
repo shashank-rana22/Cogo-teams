@@ -1,7 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import { useEffect } from 'react';
 
-import leaderboardColumns from '../../constants/get-leaderboard-columns';
 import useGetAccountDistributionGraph from '../../hooks/useGetAccountDistributionGraph';
 import useGetEngagementScoringLeaderboard from '../../hooks/useGetEngagementScoringLeaderboard';
 
@@ -71,7 +70,6 @@ function AccountLeaderboard() {
 			/>
 
 			<Leaderboard
-				columns={leaderboardColumns}
 				leaderboardList={leaderboardList}
 				leaderboardLoading={leaderboardLoading}
 				page={page}

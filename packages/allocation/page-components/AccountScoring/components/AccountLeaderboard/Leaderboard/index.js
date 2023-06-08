@@ -1,15 +1,24 @@
 import { Table, Pagination } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
+import { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
+import ScoreTrendModal from '../ScoreTrendModal';
 
+import getLeaderBoardColumns from './LeaderboardListColumns';
 import styles from './styles.module.css';
 
 function Leaderboard(props) {
 	const {
-		columns = [],
-		leaderboardList, leaderboardLoading, page = 0, page_limit = 0, total_count = 0, getNextPage = () => {},
+		leaderboardList,
+		leaderboardLoading,
+		page = 0,
+		page_limit = 0,
+		total_count = 0,
+		getNextPage = () => {},
 	} = props;
+
+	const [showTrendIds, setScoreTrendIds] = useState({});
 
 	if (isEmpty(leaderboardList) && !leaderboardLoading) {
 		return (
@@ -28,10 +37,10 @@ function Leaderboard(props) {
 	return (
 		<>
 			<div className={styles.header_text}>Leaderboard List</div>
-			<div style={{ margin: '16px 0px' }}>
+			<div className={styles.table_container}>
 				<Table
 					className={styles.table}
-					columns={columns}
+					columns={getLeaderBoardColumns({ setScoreTrendIds })}
 					data={leaderboardList}
 					loading={leaderboardLoading}
 				/>
@@ -46,6 +55,11 @@ function Leaderboard(props) {
 					onPageChange={getNextPage}
 				/>
 			</div>
+
+			<ScoreTrendModal
+				showTrendIds={showTrendIds}
+				setScoreTrendIds={setScoreTrendIds}
+			/>
 		</>
 	);
 }
