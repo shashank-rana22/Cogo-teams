@@ -1,4 +1,4 @@
-import { isEmpty } from "@cogoport/utils";
+import { isEmpty } from '@cogoport/utils';
 
 const MESSAGE = [];
 

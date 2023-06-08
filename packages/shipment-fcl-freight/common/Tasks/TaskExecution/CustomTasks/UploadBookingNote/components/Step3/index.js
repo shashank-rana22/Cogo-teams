@@ -4,6 +4,8 @@ import { Layout } from '@cogoport/ocean-modules';
 
 import styles from './styles.module.css';
 
+const SECOND_STEP = 2;
+
 function Step3({ data, setStep, shipment_id }) {
 	const { finalControls, DEFAULT_VALUES, onSubmit = () => {} } = data || {};
 
@@ -17,11 +19,14 @@ function Step3({ data, setStep, shipment_id }) {
 		const allFormValues = { ...formValues };
 		(Object.keys(formValues) || []).forEach((key) => {
 			if (key && formValues[key]) {
-				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
-					...value,
-					total    : (value.price || 0) * (value.quantity || 0),
-					currency : 'INR',
-				}));
+				allFormValues[key] = (allFormValues[key] || []).map((value) =>{
+					const { price = 0, quantity = 0 } = value;
+					return {
+						...value,
+						total    : price * quantity,
+						currency : 'INR',
+					}
+				}) 
 			}
 		});
 
@@ -48,7 +53,7 @@ function Step3({ data, setStep, shipment_id }) {
 			/>
 
 			<div className={styles.button_container}>
-				<Button themeType="secondary" onClick={() => setStep(2)}>Back</Button>
+				<Button themeType="secondary" onClick={() => setStep(SECOND_STEP)}>Back</Button>
 
 				<Button themeType="primary" onClick={handleSubmit(onSubmit)}>Submit</Button>
 			</div>
