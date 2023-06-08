@@ -13,6 +13,7 @@ import SendTo from './SendTo';
 import styles from './styles.module.css';
 
 const INITIAL_STATE = 0;
+const INITIAL_STATE_ROWS = 1;
 const KEY_CODE = [13, 8, 46];
 
 const shipmentChatStakeholders = [
@@ -38,7 +39,7 @@ function Details({
 	const [textContent, setTextContent] = useState('');
 	const [showImpMsg, setShowImpMsg] = useState(false);
 	const [selectedFile, setSelectedFile] = useState([]);
-	const [rows, setRows] = useState(1);
+	const [rows, setRows] = useState(INITIAL_STATE_ROWS);
 
 	const { data, loadingChannel } = get;
 	const { channelData, primaryService } = data || {};
@@ -125,15 +126,15 @@ function Details({
 	const contentData = formValues?.message?.split('\n').length;
 	const handleClick = (e) => {
 		if (KEY_CODE.includes(e.keyCode) && e.shiftKey && rows < 5) {
-			setRows(contentData + 1);
+			setRows(contentData + INITIAL_STATE_ROWS);
 		}
 		if (KEY_CODE.includes(e.keyCode) && !e.shiftKey) {
 			onCreateMessage();
 			reset();
-			setRows(1);
+			setRows(INITIAL_STATE_ROWS);
 		}
-		if (contentData > 1 && KEY_CODE.includes(e.keyCode)) {
-			setRows(contentData - 1);
+		if (contentData > INITIAL_STATE_ROWS && KEY_CODE.includes(e.keyCode)) {
+			setRows(contentData - INITIAL_STATE_ROWS);
 		}
 	};
 

@@ -13,6 +13,7 @@ import useQuestionList from './useQuestionList';
 const INITIAL_STATE = 0;
 const TOTAL_COUNT = 10;
 const TOTAL_FAQ_LENGTH = 3;
+const INITIAL_PAGE = 1;
 
 function QuestionList({
 	search = '',
@@ -143,7 +144,7 @@ function QuestionList({
 							<Pagination
 								className="md"
 								totalItems={pageData?.total_count || INITIAL_STATE}
-								currentPage={page || 1}
+								currentPage={page || INITIAL_PAGE}
 								pageSize={pageData?.page_limit}
 								onPageChange={setPage}
 							/>

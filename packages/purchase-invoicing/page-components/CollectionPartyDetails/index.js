@@ -24,6 +24,7 @@ const INITIAL_STATE = 1;
 const LENGTH_COUNT = 0;
 const MAX_LEN = 25;
 const SERVICE_COUNT = 2;
+const SERVICES_LIST = [];
 
 const STAKE_HOLDER_TYPES = [
 	'superadmin',
@@ -95,10 +96,9 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 		shipment_data,
 	});
 
-	const servicesList = [];
 	(servicesData || []).forEach((element) => {
 		if (element?.is_active === true) {
-			servicesList.push(element);
+			SERVICES_LIST.push(element);
 		}
 	});
 
