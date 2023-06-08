@@ -36,9 +36,6 @@ const controls = [
 		type        : 'text',
 		label       : 'Employee ID',
 		placeholder : 'Employee Id',
-		rules       : {
-			required: 'Employee Code is required',
-		},
 	},
 	{
 		name        : 'designation',
@@ -83,8 +80,7 @@ const controls = [
 		placeholder : 'Enter a valid email id',
 		type        : 'text',
 		rules       : {
-			required : 'Email is required',
-			pattern  : {
+			pattern: {
 				value   : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 				message : 'Email is invalid',
 			},
