@@ -1,6 +1,5 @@
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-// import { useEffect } from 'react';
 
 import AdditionalInformation from './AdditionalInformation';
 import CompanyPolicies from './CompanyPolicies';
@@ -11,7 +10,7 @@ import OfferLetter from './OfferLetter';
 import SignYourDocuments from './SignYourDocuments';
 import styles from './styles.module.css';
 
-function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails }) {
+function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails, getEmployeeDetailsLoading }) {
 	const { offer_letter, progress_stats } = data || {};
 
 	const {
@@ -22,12 +21,6 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 
 	const signDocEnableContd = offer_letter_signed?.get_offer_letter_signed
 	&& Object.keys(additional_info_added).every((key) => (additional_info_added[key]));
-
-	// useEffect(() => {
-	// 	if (!informationPage) {
-	// 		getEmployeeDetails();
-	// 	}
-	// }, []);
 
 	const MAPPING = {
 		new_hire_information: {
@@ -81,6 +74,7 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 				setInformationPage={setInformationPage}
 				data={data}
 				getEmployeeDetails={getEmployeeDetails}
+				getEmployeeDetailsLoading={getEmployeeDetailsLoading}
 			/>
 		);
 	}

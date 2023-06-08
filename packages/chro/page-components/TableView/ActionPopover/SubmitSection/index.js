@@ -8,6 +8,8 @@ export default function SubmitSection({
 	setVisible = () => {},
 	onFinalSubmit = () => {},
 	updateOfferLetterLoading = false,
+	error = false,
+	setError = () => {},
 }) {
 	const [finalReview, setFinalReview] = useState('');
 
@@ -31,7 +33,7 @@ export default function SubmitSection({
 					size="lg"
 					placeholder="Provide Reason"
 				/>
-				{!finalReview ? (
+				{error ? (
 					<p className={styles.error}>
 						Required field
 					</p>
@@ -57,7 +59,7 @@ export default function SubmitSection({
 				<Button
 					className={styles.button_submit}
 					themeType="primary"
-					onClick={() => (finalReview ? onConfirm() : null)}
+					onClick={() => (finalReview ? onConfirm() : setError(true))}
 					loading={updateOfferLetterLoading}
 				>
 					Confirm
