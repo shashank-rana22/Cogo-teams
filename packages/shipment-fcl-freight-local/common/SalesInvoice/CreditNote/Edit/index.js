@@ -15,6 +15,8 @@ import formatCreditNoteData from '../helpers/format-credit-note-data';
 import Form from './Form';
 import styles from './styles.module.css';
 
+const TOTAL_LENGTH = 0;
+
 function Edit({
 	setOpen = () => { },
 	CN_STATUS_MAPPING,
@@ -67,7 +69,7 @@ function Edit({
 			isEdit  : true,
 		});
 
-		if (submit_data?.line_items?.length === 0) {
+		if (submit_data?.line_items?.length === TOTAL_LENGTH) {
 			Toast.error('Line Items is required');
 			return;
 		}

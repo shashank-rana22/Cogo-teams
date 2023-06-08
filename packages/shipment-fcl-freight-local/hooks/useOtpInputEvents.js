@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRef, useEffect, useCallback } from 'react';
 
+const INITIAL_STATE = 1;
+
 const useOtpInputEvents = ({
 	otpLength = 0,
 	setOtp = () => {},
@@ -21,7 +23,8 @@ const useOtpInputEvents = ({
 
 			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
-			const nextOtpInputElementToFocus = otpInputElementsRef.current[currentFocusedOtpInputElementIndex - 1];
+			const nextOtpInputElementToFocus = otpInputElementsRef.current[currentFocusedOtpInputElementIndex
+				- INITIAL_STATE];
 			nextOtpInputElementToFocus?.focus();
 
 			return;
@@ -63,9 +66,10 @@ const useOtpInputEvents = ({
 			setOtp((previousState) => {
 				const newStateValues = {};
 
-				for (let i = 0; i < otpLength; i += 1) {
+				for (let i = 0; i < otpLength; i += INITIAL_STATE) {
 					if (i >= currentFocusedOtpInputElementIndex) {
-						newStateValues[`otp-${i + 1}`] = content[i - currentFocusedOtpInputElementIndex] || '';
+						newStateValues[`otp-${i + INITIAL_STATE}`] = content[i
+							- currentFocusedOtpInputElementIndex] || '';
 					}
 				}
 

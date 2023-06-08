@@ -189,7 +189,7 @@ function Details({
 
 						<div className={styles.attached_container}>
 							{(formValues?.file || []).map((url) => (
-								<div className={styles.attached_doc}>
+								<div className={styles.attached_doc} key={url}>
 									<IcMDocument style={{ marginRight: '4px' }} />
 									{url?.split('/').pop()}
 								</div>

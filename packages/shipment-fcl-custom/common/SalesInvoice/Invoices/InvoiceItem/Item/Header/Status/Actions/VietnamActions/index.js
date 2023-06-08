@@ -22,6 +22,9 @@ const AmendmentReasons = dynamic(() => import('../AmendmentReasons'), { ssr: fal
 const ChangePaymentMode = dynamic(() => import('../ChangePaymentMode'), { ssr: false });
 const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: false });
 
+const INITIAL_STATE = 0;
+const LENGTH_CUTOFF = 8;
+
 function Actions({
 	invoice = {},
 	refetch = () => {},
@@ -53,9 +56,9 @@ function Actions({
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice.serial_id.toString() || '';
-	const firstChar = invoice_serial_id[0];
+	const firstChar = invoice_serial_id[INITIAL_STATE];
 
-	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < 8;
+	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < LENGTH_CUTOFF;
 
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {
@@ -140,13 +143,13 @@ function Actions({
 									<div className={styles.flex_row}>
 										Proforma email sent :
 										&nbsp;
-										{invoice.proforma_email_count || 0}
+										{invoice.proforma_email_count || INITIAL_STATE}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
 										&nbsp;
-										{invoice.sales_email_count || 0}
+										{invoice.sales_email_count || INITIAL_STATE}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>

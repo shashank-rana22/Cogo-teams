@@ -6,6 +6,8 @@ import {
 
 import styles from '../../styles.module.css';
 
+const INITIAL_STATE = 0;
+
 function EmailInfo({
 	invoice = {},
 	setSendEmail = () => {},
@@ -25,13 +27,13 @@ function EmailInfo({
 									<div className={styles.flex_row}>
 										Proforma email sent :
 										&nbsp;
-										{invoice.proforma_email_count || 0}
+										{invoice.proforma_email_count || INITIAL_STATE}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
 										&nbsp;
-										{invoice.sales_email_count || 0}
+										{invoice.sales_email_count || INITIAL_STATE}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>

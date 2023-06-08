@@ -20,6 +20,9 @@ import InvoicesUploaded from '../InvoicesUploaded';
 import styles from './styles.module.css';
 
 const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
+const INITIAL_STATE = 1;
+const LENGTH_COUNT = 0;
+const MAX_LEN = 25;
 
 const STAKE_HOLDER_TYPES = [
 	'superadmin',
@@ -34,7 +37,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
-	const [step, setStep] = useState(1);
+	const [step, setStep] = useState(INITIAL_STATE);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -70,7 +73,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 				<span key={ser}>
 					{startCase(ser)}
 					{' '}
-					{(services).length - 1 === i ? '' : ', '}
+					{(services).length - INITIAL_STATE === i ? '' : ', '}
 				</span>
 			))}
 		</>
@@ -78,7 +81,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 
 	const onClose = () => {
 		setUploadInvoiceUrl('');
-		setStep(1);
+		setStep(INITIAL_STATE);
 		setOpenComparision(false);
 	};
 
@@ -101,7 +104,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 	if (shipment_type === 'ftl_freight') {
 		disableInvoice = !shipment_data?.all_services?.some(
 			(item) => item?.service_type === 'ftl_freight_service'
-				&& (item?.lr_numbers || []).length > 0,
+				&& (item?.lr_numbers || []).length > LENGTH_COUNT,
 		);
 		errorMsg = 'LR task not completed';
 
@@ -149,7 +152,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 							collectionParty.invoice_total,
 							collectionParty.invoice_currency,
 						)}
-						maxlength={25}
+						maxlength={MAX_LEN}
 					/>
 					<span className={styles.paddingleft}>
 						{' '}

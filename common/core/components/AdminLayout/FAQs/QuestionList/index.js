@@ -51,7 +51,7 @@ function QuestionList({
 	const allpills = (item) => (
 		<div>
 			{item?.faq_tags?.map((faqtag, i) => (i >= 3 ? (
-				<Pill size="md" className={styles.pill}>
+				<Pill size="md" className={styles.pill} key={faqtag.display_name}>
 					{(faqtag.display_name).toUpperCase()}
 				</Pill>
 			) : null))}
@@ -64,7 +64,7 @@ function QuestionList({
 		return (
 			<div style={{ display: 'flex' }}>
 				{item?.faq_tags?.slice(0, 3).map((faqtag) => (
-					<Pill size="md" className={styles.pill}>
+					<Pill size="md" className={styles.pill} key={faqtag.display_name}>
 						{(faqtag.display_name).toUpperCase()}
 					</Pill>
 				))}
@@ -121,7 +121,7 @@ function QuestionList({
 									<div className={styles.pill_container}>
 										{item?.faq_tags.length <= 3
 											? item?.faq_tags?.map((faqtag) => (
-												<Pill size="md" className={styles.pill}>
+												<Pill size="md" className={styles.pill} key={faqtag.display_name}>
 													{(faqtag.display_name).toUpperCase()}
 												</Pill>
 											))

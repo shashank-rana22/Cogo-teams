@@ -24,12 +24,12 @@ function SelectService({
 
 	allTakenServices?.forEach((service) => {
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
+			const { service_total_discounted = 0 } = service || {};
 			const trade_type = service?.trade_type;
 
 			const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
-
 			const invoiceAmount = formatAmount({
-				amount   : service?.service_total_discounted || 0,
+				amount   : service_total_discounted,
 				currency : service?.service_total_currency,
 				options  : {
 					style           : 'currency',
