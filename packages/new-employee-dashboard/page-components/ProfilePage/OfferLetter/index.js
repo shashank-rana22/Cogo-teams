@@ -21,7 +21,11 @@ function OfferLetter({ offerLetter, setShowCtcBreakupModal, offerLetterApiLoadin
 	}
 
 	if (isEmpty(offerLetter)) {
-		return <EmptyState height={160} />;
+		return (
+			<div className={styles.container}>
+				<EmptyState height={160} />
+			</div>
+		);
 	}
 
 	return (
