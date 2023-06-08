@@ -5,9 +5,9 @@ import { Layout } from '@cogoport/ocean-modules';
 import styles from './styles.module.css';
 
 function Step3({ data, setStep, shipment_id }) {
-	const { finalControls, defaultValues, onSubmit = () => {} } = data || {};
+	const { finalControls, DEFAULT_VALUES, onSubmit = () => {} } = data || {};
 
-	const formProps = useForm({ defaultValues });
+	const formProps = useForm({ defaultValues: DEFAULT_VALUES });
 	const { control, handleSubmit, formState:{ errors = {} } = {}, watch } = formProps || {};
 
 	const customValues = {};

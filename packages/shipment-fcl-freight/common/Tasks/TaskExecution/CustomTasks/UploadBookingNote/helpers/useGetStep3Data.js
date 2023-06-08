@@ -14,13 +14,16 @@ const TRADE_MAPPING = {
 	undefined : '',
 };
 
+const SERVICE_IDS = [];
+const DEFAULT_VALUES = {};
+const HTTP_SUCCESS_CODE = 200;
+
 const useGetStep3Data = ({
 	servicesList = [], shipment_data, onCancel, task,
 	taskListRefetch = () => {}, primary_service,
 }) => {
 	const { trade_type } = primary_service || {};
 
-	const service_ids = [];
 	let notMainService = false;
 
 	(servicesList || []).forEach((serviceObj) => {
@@ -29,20 +32,20 @@ const useGetStep3Data = ({
 			&& trade_type === 'import' && serviceObj.trade_type === 'export')
 		) {
 			notMainService = true;
-			service_ids.push(serviceObj.id);
+			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
 
 	(servicesList || []).forEach((serviceObj) => {
 		if (!notMainService) {
-			service_ids.push(serviceObj.id);
+			SERVICE_IDS.push(serviceObj.id);
 		}
 	});
 
 	const { data:servicesQuotation, loading:serviceQuotationLoading } = useGetShipmentServicesQuotation({
 		defaultParams: {
 			shipment_id             : shipment_data?.id,
-			service_ids,
+			SERVICE_IDS,
 			service_detail_required : true,
 		},
 	});
@@ -85,10 +88,9 @@ const useGetStep3Data = ({
 		handleChange,
 
 	}));
-	const defaultValues = {};
 
 	service_charges.forEach((service_charge) => {
-		defaultValues[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
+		DEFAULT_VALUES[service_charge?.id] = service_charge?.line_items?.map((line_item) => ({
 			code     : line_item?.code,
 			currency : line_item?.currency,
 			price    : line_item?.price,
@@ -126,7 +128,7 @@ const useGetStep3Data = ({
 			try {
 				const res = await updateBuyQuotationTrigger({ ...quotation });
 
-				if (res?.status === 200) {
+				if (res?.status === HTTP_SUCCESS_CODE) {
 					await updateTask({ id: task?.id });
 				}
 			} catch (err) {
@@ -141,7 +143,7 @@ const useGetStep3Data = ({
 		finalControls,
 		onSubmit,
 		serviceQuotationLoading,
-		defaultValues,
+		DEFAULT_VALUES,
 	};
 };
 
