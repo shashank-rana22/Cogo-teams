@@ -1,28 +1,30 @@
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-// import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+import { useSelector } from '@cogoport/store';
 
 import CogoPoints from './Cogopoints';
 
 function Index() {
-	const { query } = useRouter();
-	console.log('>>>>>> ~ query :', query);
-	const [activeTab, setActiveTab] = useState('cogopoint');
-	// const partnerId = useSelector((s) => s?.profile?.partner?.id);
+	const router = useRouter();
+	const { asPath } = router;
 
-	// const handleTabChange = (tab) => {
-	// 	if (tab === 'promotion') {
-	// 		window.location.href = `/${partnerId}/liability-dashboard/${tab}`;
-	// 	}
-	// };
+	const pathCheck = asPath.includes('/liability-dashboard/cogopoint');
+
+	const activeTab = pathCheck && 'cogopoint';
+
+	const partnerId = useSelector((s) => s?.profile?.partner?.id);
+
+	const handleTabChange = (tab) => {
+		if (tab === 'promotion') {
+			window.location.href = `/${partnerId}/liability-dashboard`;
+		}
+	};
 
 	return (
 		<Tabs
 			activeTab={activeTab}
 			themeType="primary"
-			onChange={setActiveTab}
-			// onChange={(tab) => { handleTabChange(tab); }}
+			onChange={(tab) => { handleTabChange(tab); }}
 		>
 			<TabPanel name="promotion" title="Promotions" />
 
