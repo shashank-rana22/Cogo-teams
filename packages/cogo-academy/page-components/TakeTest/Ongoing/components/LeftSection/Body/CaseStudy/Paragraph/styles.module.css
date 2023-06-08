@@ -13,6 +13,11 @@
 	color: #4f4f4f;
 	background: #fff;
 	border-radius: 6px;
+
+	img{
+		max-width: 20vw;
+		max-height: 200px;
+	}
 }
 
 .header {

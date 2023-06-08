@@ -37,10 +37,14 @@ function QuestionForm({
 	listSetQuestions,
 	editorValue,
 	setEditorValue,
+	questionEditorValue,
+	setQuestionEditorValue,
 	subjectiveEditorValue,
 	setSubjectiveEditorValue = () => {},
 	uploadable,
 	setUploadable,
+	caseStudyQuestionEditorValue,
+	setCaseStudyQuestionEditorValue,
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
 		const hash = {};
@@ -71,6 +75,11 @@ function QuestionForm({
 			...prev,
 			[`case_questions_${index + 1}_explanation`]: RichTextEditor.createEmptyValue(),
 		}));
+
+		setQuestionEditorValue((prev) => ({
+			...prev,
+			[`case_questions_${index + 1}`]: RichTextEditor.createEmptyValue(),
+		}));
 	};
 
 	if (isEmpty(fields) && editDetails.question_type !== 'case_study') {
@@ -80,17 +89,70 @@ function QuestionForm({
 			...prev,
 			question_0_explanation: RichTextEditor.createEmptyValue(),
 		}));
+
+		setQuestionEditorValue((prev) => ({
+			...prev,
+			question_0: RichTextEditor.createEmptyValue(),
+		}));
 	}
 
 	const handleDeleteNewObject = (index) => {
 		remove(index, 1);
 
-		setEditorValue((prev) => ({ ...prev, [`case_questions_${index}_explanation`]: undefined }));
+		// setEditorValue((prev) => ({ ...prev, [`case_questions_${index}_explanation`]: undefined }));
+
+		setEditorValue((prev) => {
+			const updatedObj = { ...prev };
+			const keys = Object.keys(updatedObj);
+
+			// Remove the item at the specified index
+			delete updatedObj[`case_questions_${index}_explanation`];
+
+			// Move the below index values up by updating the keys
+			for (let i = index + 1; i < keys.length; i += 1) {
+				const currentKey = keys[i];
+				const newKey = `case_questions_${i - 1}_explanation`;
+				updatedObj[newKey] = updatedObj[currentKey];
+				delete updatedObj[currentKey];
+			}
+
+			return updatedObj;
+		});
+		// setEditorValue((prev) => {
+		// 	const obj = prev;
+		// 	delete obj[`case_questions_${index}_explanation`];
+		// 	return obj;
+		// });
+		// setQuestionEditorValue((prev) => ({ ...prev, [`case_questions_${index}`]: undefined }));
+
+		// setQuestionEditorValue((prev) => {
+		// 	const obj = prev;
+		// 	delete obj[`case_questions_${index}`];
+		// 	return obj;
+		// });
+
+		setQuestionEditorValue((prev) => {
+			const updatedObj = { ...prev };
+			const keys = Object.keys(updatedObj);
+
+			// Remove the item at the specified index
+			delete updatedObj[`case_questions_${index}`];
+
+			// Move the below index values up by updating the keys
+			for (let i = index + 1; i < keys.length; i += 1) {
+				const currentKey = keys[i];
+				const newKey = `case_questions_${i - 1}`;
+				updatedObj[newKey] = updatedObj[currentKey];
+				delete updatedObj[currentKey];
+			}
+
+			return updatedObj;
+		});
 	};
 
 	return (
 		<div key={questionTypeWatch} className={styles.container}>
-			{fields.map((field, index) => (
+			{fields?.map((field, index) => (
 				<div key={field.id} className={styles.field_container}>
 					<div className={styles.question_container}>
 						<SingleQuestionComponent
@@ -112,6 +174,8 @@ function QuestionForm({
 							questionTypeWatch={questionTypeWatch}
 							editorValue={editorValue}
 							setEditorValue={setEditorValue}
+							questionEditorValue={questionEditorValue}
+							setQuestionEditorValue={setQuestionEditorValue}
 							subjectiveEditorValue={subjectiveEditorValue}
 							setSubjectiveEditorValue={setSubjectiveEditorValue}
 							uploadable={uploadable}
@@ -119,6 +183,8 @@ function QuestionForm({
 							name={NAME_ARRAY_MAPPING[questionTypeWatch]}
 							errors={questionTypeWatch === 'stand_alone'
 								? errors.question?.[index] : errors?.case_questions?.[index]}
+							caseStudyQuestionEditorValue={caseStudyQuestionEditorValue}
+							setCaseStudyQuestionEditorValue={setCaseStudyQuestionEditorValue}
 						/>
 
 						{fields.length > 1 && field?.isNew ? (

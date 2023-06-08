@@ -34,6 +34,7 @@ function useUpdateStandAloneTestQuestion({
 	listSetQuestions,
 	editDetails,
 	editorValue = {},
+	questionEditorValue = {},
 	uploadable,
 	setQuestionDetails = () => {},
 }) {
@@ -58,6 +59,7 @@ function useUpdateStandAloneTestQuestion({
 				testQuestionId,
 				editDetails,
 				editorValue,
+				questionEditorValue,
 				uploadable,
 			});
 

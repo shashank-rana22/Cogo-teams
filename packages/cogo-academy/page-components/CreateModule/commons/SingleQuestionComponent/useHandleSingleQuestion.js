@@ -20,6 +20,10 @@ function useHandleSingleQuestion({
 	questionTypeWatch,
 	editorValue,
 	setEditorValue,
+	questionEditorValue,
+	setQuestionEditorValue,
+	caseStudyQuestionEditorValue,
+	setCaseStudyQuestionEditorValue = () => {},
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
 		const hash = {};
@@ -43,13 +47,49 @@ function useHandleSingleQuestion({
 		editDetails,
 		index,
 		editorValue,
+		questionEditorValue,
+		caseStudyQuestionEditorValue,
+		setCaseStudyQuestionEditorValue,
 	});
 
 	const handleDelete = () => {
 		if (field.isNew) {
 			remove(index, 1);
 
-			setEditorValue((prev) => ({ ...prev, [`case_questions_${index}_explanation`]: undefined }));
+			setEditorValue((prev) => {
+				const updatedObj = { ...prev };
+				const keys = Object.keys(updatedObj);
+
+				delete updatedObj[`case_questions_${index}_explanation`];
+
+				for (let i = index + 1; i < keys.length; i += 1) {
+					const currentKey = keys[i];
+					const newKey = `case_questions_${i - 1}_explanation`;
+					updatedObj[newKey] = updatedObj[currentKey];
+					delete updatedObj[currentKey];
+				}
+
+				return updatedObj;
+			});
+
+			setQuestionEditorValue((prev) => {
+				const updatedObj = { ...prev };
+				const keys = Object.keys(updatedObj);
+
+				delete updatedObj[`case_questions_${index}`];
+
+				for (let i = index + 1; i < keys.length; i += 1) {
+					const currentKey = keys[i];
+					const newKey = `case_questions_${i - 1}`;
+					updatedObj[newKey] = updatedObj[currentKey];
+					delete updatedObj[currentKey];
+				}
+
+				return updatedObj;
+			});
+
+			console.log('editorValue:: ', editorValue);
+			console.log('questionEditorValue', questionEditorValue);
 		} else {
 			updateCaseStudyQuestion({
 				action              : 'delete',
@@ -78,6 +118,14 @@ function useHandleSingleQuestion({
 		}
 	};
 
+	const handleChangeQuestionEditor = (value) => {
+		if (questionTypeWatch === 'case_study') {
+			setQuestionEditorValue((prev) => ({ ...prev, [`case_questions_${index}`]: value }));
+		} else {
+			setQuestionEditorValue({ question_0: value });
+		}
+	};
+
 	return {
 		handleUpdateCaseStudyQuestion,
 		handleDelete,
@@ -86,6 +134,7 @@ function useHandleSingleQuestion({
 		editorValue,
 		setEditorValue,
 		handleChangeEditorValue,
+		handleChangeQuestionEditor,
 	};
 }
 

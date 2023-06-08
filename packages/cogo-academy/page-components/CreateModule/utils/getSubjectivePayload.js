@@ -1,9 +1,12 @@
+import { isEmpty } from '@cogoport/utils';
+
 const getSubjectivePayload = ({
 	action = '',
 	values,
 	questionSetId,
 	testQuestionId = '',
 	editDetails = {},
+	questionEditorValue = {},
 	subjectiveEditorValue = {},
 	uploadable = false,
 }) => {
@@ -13,7 +16,6 @@ const getSubjectivePayload = ({
 
 	const {
 		difficulty_level,
-		question_text,
 		character_limit,
 	} = subjective?.[0] || {};
 
@@ -27,9 +29,10 @@ const getSubjectivePayload = ({
 		question_type,
 		topic,
 		difficulty_level,
-		question_text,
+		...(!isEmpty(questionEditorValue)
+			? { question_text: questionEditorValue?.question_0.toString('html') } : {}),
 		character_limit,
-		answers              : [{
+		answers: [{
 			test_question_answer_id : test_question_answers?.[0]?.id,
 			answer_text             : subjectiveEditorValue.toString('html'),
 			is_correct              : true,

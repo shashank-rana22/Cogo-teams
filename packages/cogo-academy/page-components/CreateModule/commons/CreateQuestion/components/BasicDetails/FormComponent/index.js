@@ -23,12 +23,17 @@ function FormComponent({
 	setAllKeysSaved,
 	setShowForm,
 	listSetQuestions,
+	caseStudyQuestionEditorValue,
+	setCaseStudyQuestionEditorValue,
 }) {
 	const {
 		controls,
 		closeForm,
 		handleUpdateCaseStudy,
 		loading,
+		RichTextEditor,
+		editorValue,
+		setEditorValue,
 	} = useHandleBasicDetails({
 		setEditDetails,
 		setAllKeysSaved,
@@ -98,13 +103,31 @@ function FormComponent({
 
 					<div style={{ marginBottom: '16px' }}>
 
-						<TextAreaController
+						{/* <TextAreaController
 							control={control}
 							{...((controls || []).find((item) => item.name === 'question_text'))}
-						/>
+						/> */}
+						<div>
+							<RichTextEditor
+								value={caseStudyQuestionEditorValue}
+								onChange={((val) => { setCaseStudyQuestionEditorValue(val); })}
+								required
+								id="body-text"
+								name="bodyText"
+								type="string"
+								multiline
+								variant="filled"
+								placeholder="Type Case..."
+								rootStyle={{
+									zIndex    : 0,
+									position  : 'relative',
+									minHeight : '200px',
+								}}
+							/>
+						</div>
 						{errors?.question_text ? <div className={styles.error_msg}>This is required</div> : null}
 
-						<Button
+						{/* <Button
 							className={styles.save_btn}
 							themeType="primary"
 							size="sm"
@@ -113,7 +136,7 @@ function FormComponent({
 							onClick={() => handleUpdateCaseStudy()}
 						>
 							save
-						</Button>
+						</Button> */}
 					</div>
 
 				</>

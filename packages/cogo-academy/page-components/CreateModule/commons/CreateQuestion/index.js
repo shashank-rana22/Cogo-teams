@@ -37,6 +37,10 @@ function CreateQuestion({
 		register,
 		editorValue,
 		setEditorValue,
+		questionEditorValue,
+		setQuestionEditorValue,
+		caseStudyQuestionEditorValue,
+		setCaseStudyQuestionEditorValue,
 		updateStandAloneLoading,
 		subjectiveEditorValue,
 		setSubjectiveEditorValue = () => {},
@@ -74,6 +78,8 @@ function CreateQuestion({
 					listSetQuestions={listSetQuestions}
 					questionSetId={questionSetId}
 					mode={mode}
+					caseStudyQuestionEditorValue={caseStudyQuestionEditorValue}
+					setCaseStudyQuestionEditorValue={setCaseStudyQuestionEditorValue}
 				/>
 
 				<div key={questionTypeWatch} className={styles.question_form}>
@@ -94,10 +100,14 @@ function CreateQuestion({
 						listSetQuestions={listSetQuestions}
 						editorValue={editorValue}
 						setEditorValue={setEditorValue}
+						questionEditorValue={questionEditorValue}
+						setQuestionEditorValue={setQuestionEditorValue}
 						subjectiveEditorValue={subjectiveEditorValue}
 						setSubjectiveEditorValue={setSubjectiveEditorValue}
 						uploadable={uploadable}
 						setUploadable={setUploadable}
+						caseStudyQuestionEditorValue={caseStudyQuestionEditorValue}
+						setCaseStudyQuestionEditorValue={setCaseStudyQuestionEditorValue}
 					/>
 				</div>
 

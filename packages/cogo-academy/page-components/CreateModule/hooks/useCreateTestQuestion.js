@@ -17,7 +17,9 @@ function useCreateTestQuestion({
 	questionSetId,
 	listSetQuestions,
 	editorValue = {},
+	questionEditorValue = {},
 	subjectiveEditorValue = '',
+	caseStudyQuestionEditorValue,
 	setUploadable,
 	uploadable,
 }) {
@@ -45,7 +47,9 @@ function useCreateTestQuestion({
 			questionSetId,
 			type: question_type,
 			editorValue,
+			questionEditorValue,
 			subjectiveEditorValue,
+			caseStudyQuestionEditorValue,
 			uploadable,
 			setUploadable,
 		});

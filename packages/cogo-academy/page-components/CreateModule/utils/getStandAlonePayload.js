@@ -9,13 +9,13 @@ const getStandAlonePayload = ({
 	questionSetId,
 	editDetails = {},
 	editorValue = {},
+	questionEditorValue = {},
 }) => {
 	const { question = [], topic } = values || {};
 
 	const {
 		question_type,
 		difficulty_level,
-		question_text,
 		options = [],
 	} = question?.[0] || {};
 
@@ -54,7 +54,8 @@ const getStandAlonePayload = ({
 		question_type,
 		topic,
 		difficulty_level,
-		question_text,
+		...(!isEmpty(questionEditorValue)
+			? { question_text: questionEditorValue?.question_0.toString('html') } : {}),
 		...(!isEmpty(editorValue) ? { explanation: [editorValue?.question_0_explanation.toString('html')] } : {}),
 		answers,
 	};

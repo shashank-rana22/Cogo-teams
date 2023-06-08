@@ -25,6 +25,12 @@ const useCreateQuestion = ({
 }) => {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
 	const [uploadable, setUploadable] = useState(false);
+	const [questionEditorValue, setQuestionEditorValue] = useState(
+		questionTypeWatch === 'case_study'
+			? { case_questions_0: RichTextEditor.createEmptyValue() }
+			: { question_0: RichTextEditor.createEmptyValue() },
+	);
+	const [caseStudyQuestionEditorValue, setCaseStudyQuestionEditorValue] = useState(RichTextEditor.createEmptyValue());
 	const [editorValue, setEditorValue] = useState(
 		questionTypeWatch === 'stand_alone'
 			? { question_0_explanation: RichTextEditor.createEmptyValue() }
@@ -60,8 +66,10 @@ const useCreateQuestion = ({
 		questionSetId,
 		listSetQuestions,
 		editorValue,
+		questionEditorValue,
 		subjectiveEditorValue,
 		setSubjectiveEditorValue,
+		caseStudyQuestionEditorValue,
 		uploadable,
 		setUploadable,
 	});
@@ -76,6 +84,7 @@ const useCreateQuestion = ({
 		listSetQuestions,
 		editDetails,
 		editorValue,
+		questionEditorValue,
 		uploadable,
 	});
 
@@ -145,6 +154,9 @@ const useCreateQuestion = ({
 			setEditorValue(watchQuestionType === 'stand_alone'
 				? { question_0_explanation: RichTextEditor.createEmptyValue() }
 				: { case_questions_0_explanation: RichTextEditor.createEmptyValue() });
+			setQuestionEditorValue(watchQuestionType === 'case_study'
+				? { case_questions_0: RichTextEditor.createEmptyValue() }
+				: { question_0: RichTextEditor.createEmptyValue() });
 		}
 	}, [editDetails, watchQuestionType]);
 
@@ -155,7 +167,9 @@ const useCreateQuestion = ({
 
 		if (question_type === 'case_study') {
 			setValue('question_type', question_type);
-			setValue('question_text', question_text);
+			setCaseStudyQuestionEditorValue(isEmpty(question_text)
+				? RichTextEditor.createEmptyValue()
+				: RichTextEditor?.createValueFromString((question_text || ''), 'html'));
 			setValue('difficulty_level', difficulty_level);
 
 			test_case_study_questions.forEach((caseStudyQuestion, index) => {
@@ -178,6 +192,13 @@ const useCreateQuestion = ({
 						: RichTextEditor?.createValueFromString((indExplanation?.[0] || ''), 'html'),
 				}));
 
+				setQuestionEditorValue((prev) => ({
+					...prev,
+					[`case_questions_${index}`]: isEmpty(indQuestionText)
+						? RichTextEditor.createEmptyValue()
+						: RichTextEditor?.createValueFromString((indQuestionText || ''), 'html'),
+				}));
+
 				indTestQuestionAnswers.forEach((answer, answerIndex) => {
 					const { answer_text, is_correct } = answer || {};
 
@@ -189,10 +210,17 @@ const useCreateQuestion = ({
 			});
 		} else if (question_type === 'subjective') {
 			setValue('question_type', question_type);
-			setValue('subjective.0.question_text', question_text);
+			// setValue('subjective.0.question_text', question_text);
 			setValue('subjective.0.difficulty_level', difficulty_level);
 			setValue('subjective.0.character_limit', character_limit);
 			setUploadable(allow_file_upload);
+
+			setQuestionEditorValue((prev) => ({
+				...prev,
+				question_0: isEmpty(question_text)
+					? RichTextEditor.createEmptyValue()
+					: RichTextEditor?.createValueFromString((question_text || ''), 'html'),
+			}));
 
 			setSubjectiveEditorValue(isEmpty(test_question_answers)
 				? RichTextEditor.createEmptyValue()
@@ -203,13 +231,20 @@ const useCreateQuestion = ({
 			setValue('question_type', 'stand_alone');
 			setValue(`${childKey}.question_type`, question_type);
 			setValue(`${childKey}.difficulty_level`, difficulty_level);
-			setValue(`${childKey}.question_text`, question_text);
+			// setValue(`${childKey}.question_text`, question_text);
 
 			setEditorValue((prev) => ({
 				...prev,
 				question_0_explanation: isEmpty(explanation)
 					? RichTextEditor.createEmptyValue()
 					: RichTextEditor?.createValueFromString((explanation?.[0] || ''), 'html'),
+			}));
+
+			setQuestionEditorValue((prev) => ({
+				...prev,
+				question_0: isEmpty(question_text)
+					? RichTextEditor.createEmptyValue()
+					: RichTextEditor?.createValueFromString((question_text || ''), 'html'),
 			}));
 
 			test_question_answers.forEach((answer, index) => {
@@ -245,6 +280,10 @@ const useCreateQuestion = ({
 		onSubmit,
 		editorValue,
 		setEditorValue,
+		questionEditorValue,
+		setQuestionEditorValue,
+		caseStudyQuestionEditorValue,
+		setCaseStudyQuestionEditorValue,
 		updateStandAloneLoading,
 		subjectiveEditorValue,
 		setSubjectiveEditorValue,

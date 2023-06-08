@@ -15,6 +15,7 @@ function getPayload({
 	index,
 	subjectiveEditorValue,
 	uploadable,
+	caseStudyQuestionEditorValue,
 	...commonProps
 }) {
 	const payloadPropsMapping = {
@@ -25,6 +26,7 @@ function getPayload({
 			editType,
 			caseStudyQuestionId,
 			index,
+			caseStudyQuestionEditorValue,
 			...commonProps,
 		},
 		subjective: {

@@ -1,8 +1,14 @@
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 
 import useUpdateCaseStudy from '../../../../hooks/useUpdateCaseStudy';
 
 import getControls from './controls';
+
+let RichTextEditor;
+if (typeof window !== 'undefined') {
+	// eslint-disable-next-line global-require
+	RichTextEditor = require('react-rte').default;
+}
 
 const useHandleBasicDetails = ({
 	setEditDetails,
@@ -17,6 +23,7 @@ const useHandleBasicDetails = ({
 	setShowForm,
 	listSetQuestions,
 }) => {
+	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 	const controls = useMemo(() => getControls({ mode }), [mode]);
 
 	const {
@@ -67,6 +74,9 @@ const useHandleBasicDetails = ({
 		loading,
 		controls,
 		closeForm,
+		RichTextEditor,
+		editorValue,
+		setEditorValue,
 	};
 };
 

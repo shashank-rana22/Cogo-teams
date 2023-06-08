@@ -17,7 +17,7 @@ const getControls = ({ mode }) => [
 			{ value: 'case_study', label: 'Case Study' },
 			{ value: 'subjective', label: 'Subjective' },
 		],
-		disabled : mode !== 'new',
+		disabled : mode === 'view',
 		multiple : false,
 	},
 	{

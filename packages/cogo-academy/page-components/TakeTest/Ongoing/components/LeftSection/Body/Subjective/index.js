@@ -65,7 +65,7 @@ function Subjective({
 
 			<div className={styles.subjective_part}>
 				<div className={styles.question_01}>
-					<div className={styles.text}>{question_text}</div>
+					<div className={styles.text} dangerouslySetInnerHTML={{ __html: question_text }} />
 				</div>
 
 				<div>

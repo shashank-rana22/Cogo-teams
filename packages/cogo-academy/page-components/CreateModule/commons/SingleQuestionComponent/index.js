@@ -26,10 +26,14 @@ function SingleQuestionComponent({
 	mode,
 	editorValue,
 	setEditorValue,
+	questionEditorValue,
+	setQuestionEditorValue = () => {},
 	subjectiveEditorValue,
 	setUploadable = () => {},
 	uploadable,
 	setSubjectiveEditorValue = () => {},
+	caseStudyQuestionEditorValue,
+	setCaseStudyQuestionEditorValue = () => {},
 	...restProps
 }) {
 	const {
@@ -38,6 +42,7 @@ function SingleQuestionComponent({
 		loading,
 		NAME_CONTROL_MAPPING,
 		handleChangeEditorValue,
+		handleChangeQuestionEditor,
 	} = useHandleSingleQuestion({
 		mode,
 		editDetails,
@@ -46,24 +51,31 @@ function SingleQuestionComponent({
 		questionTypeWatch,
 		editorValue,
 		setEditorValue,
+		questionEditorValue,
+		setQuestionEditorValue,
+		caseStudyQuestionEditorValue,
+		setCaseStudyQuestionEditorValue,
 		...restProps,
 	});
 
 	return (
 		<div className={styles.container}>
+
 			<div
 				className={`${styles.first_row} ${
 					errors?.question_text ? styles.question_text_err : null
 				} ${errors?.question_type ? styles.question_type_err : null}`}
 			>
-				<InputController
+				{/* <InputController
 					className={`${
 						errors?.question_text ? styles.question_text_err : null
 					} ${styles.input_container}`}
 					{...NAME_CONTROL_MAPPING.question_text}
 					control={control}
 					name={`${name}.${index}.question_text`}
-				/>
+				/> */}
+
+				<h3>Question: </h3>
 
 				{questionTypeWatch !== 'subjective' && (
 					<SelectController
@@ -78,6 +90,23 @@ function SingleQuestionComponent({
 					/>
 				)}
 			</div>
+
+			<RichTextEditor
+				value={questionTypeWatch === 'case_study'
+					? questionEditorValue[`case_questions_${index}`] : questionEditorValue.question_0}
+				onChange={handleChangeQuestionEditor}
+				required
+				id="question-text"
+				name="questionText"
+				multiline
+				variant="filled"
+				placeholder="Type Question Here..."
+				rootStyle={{
+					zIndex    : 0,
+					position  : 'relative',
+					minHeight : '200px',
+				}}
+			/>
 
 			{questionTypeWatch !== 'subjective' ? (
 				<OptionsComponent

@@ -12,9 +12,8 @@ function CaseQuestion({ item, from, caseToShow, setQuestionToShow, setCaseToShow
 					role="presentation"
 					onClick={() => setQuestionToShow(id)}
 					className={`${styles.question_text} ${(from === 'tooltip') ? styles.question_text_content : null}`}
-				>
-					{item?.question_text}
-				</div>
+					dangerouslySetInnerHTML={{ __html: item?.question_text }}
+				/>
 
 				{from !== 'tooltip' ? (
 					<div
@@ -39,9 +38,8 @@ function CaseQuestion({ item, from, caseToShow, setQuestionToShow, setCaseToShow
 					<div
 						className={styles.text}
 						key={caseStudyQuestion.id}
-					>
-						{caseStudyQuestion.question_text}
-					</div>
+						dangerouslySetInnerHTML={{ __html: caseStudyQuestion?.question_text }}
+					/>
 				))
 				: null}
 		</div>

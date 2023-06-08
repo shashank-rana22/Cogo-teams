@@ -72,7 +72,7 @@ function BasicDetailsForm({
 			setValue(item, data?.[item]);
 		});
 
-		setValue('cogo_entity_id', cogo_entity_object.id);
+		setValue('cogo_entity_id', cogo_entity_object?.id);
 
 		setShowForm(true);
 	};

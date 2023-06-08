@@ -71,9 +71,7 @@ function SingleQuestion({
 					overflowY: 'scroll',
 				} : {}}
 			>
-				<div className={styles.question}>
-					{question_text}
-				</div>
+				<div className={styles.question} dangerouslySetInnerHTML={{ __html: question_text }} />
 
 				<Element
 					options={answerOptions}

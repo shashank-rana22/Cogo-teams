@@ -59,7 +59,11 @@ const useGetTableColumns = ({
 					}}
 				>
 					{item?.question_type !== 'case_study'
-						? item?.question_text
+						? (
+							<div
+								dangerouslySetInnerHTML={{ __html: item?.question_text }}
+							/>
+						)
 						: (
 							<CaseQuestion
 								item={item}

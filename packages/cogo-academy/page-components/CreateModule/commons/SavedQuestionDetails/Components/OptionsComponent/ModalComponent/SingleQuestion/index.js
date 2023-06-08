@@ -26,7 +26,20 @@ function SingleQuestion({ data, primary_question_type, case_index, length }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.question_text}>{`Q. ${question_text}`}</div>
+			<div>
+				<div className={styles.question_text}>
+					Q.
+					{' '}
+					<span
+						dangerouslySetInnerHTML={{ __html: question_text }}
+					/>
+
+				</div>
+				{/* <div
+					className={styles.question_text}
+					dangerouslySetInnerHTML={{ __html: question_text }}
+				/> */}
+			</div>
 
 			<div className={styles.question_container}>
 				<div className={styles.question_type}>
