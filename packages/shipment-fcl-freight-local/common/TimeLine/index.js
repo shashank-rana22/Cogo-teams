@@ -5,6 +5,8 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
 
+const END_VALUE = 1;
+
 function Timeline() {
 	const {
 		shipment_data,
@@ -26,8 +28,6 @@ function Timeline() {
 
 	const totalItems = (timelineData || []).length;
 	const mapKeys = useMemo(() => Array(totalItems).fill(null).map(() => Math.random()), [totalItems]);
-
-	const endValue = 1;
 
 	let consecutivelyCompleted = true;
 
@@ -51,7 +51,7 @@ function Timeline() {
 							key={mapKeys[index]}
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
-							isLast={totalItems === index + endValue}
+							isLast={totalItems === index + END_VALUE}
 						/>
 					);
 				})}
