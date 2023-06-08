@@ -16,17 +16,17 @@ const getFormatedChartData = ({ userData = {}, alloted = {} }) => {
 
 	const allottedData = [
 		{
-			id : 'subscription',
+			id    : 'subscription',
 			value : subscription,
 			color : '#FCDC00',
 		},
 		{
-			id : 'kyc',
+			id    : 'kyc',
 			value : allotedKyc,
 			color : '#ABCD62',
 		},
 		{
-			id : 'shipment',
+			id    : 'shipment',
 			value : shipment,
 			color : '#88CAD1',
 		},
@@ -34,25 +34,25 @@ const getFormatedChartData = ({ userData = {}, alloted = {} }) => {
 
 	const usersData = [
 		{
-			id : 'invited_user',
+			id    : 'invited_user',
 			label : 'Invited User',
 			value : invited,
 			color : '#7278AD',
 		},
 		{
-			id : 'signed_up_user',
+			id    : 'signed_up_user',
 			label : 'Signed Up User',
 			value : signed_up,
 			color : '#888FD1',
 		},
 		{
-			id : 'kyc_registered_user',
+			id    : 'kyc_registered_user',
 			label : 'KYC Registered User',
 			value : kyc_verified,
 			color : '#ABB0DE',
 		},
 		{
-			id : 'affiliate_user',
+			id    : 'affiliate_user',
 			label : 'Affiliate User',
 			value : affiliate,
 			color : '#CED1ED',
