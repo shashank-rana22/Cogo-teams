@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const controls = () => ([
 	{
 		name        : 'name',
@@ -37,7 +39,7 @@ const controls = () => ([
 		name                  : 'date_of_birth',
 		label                 : 'Date of Birth',
 		type                  : 'date-select',
-		placeholder           : 'DD/MM/YYYY',
+		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 		isPreviousDaysAllowed : true,
 		rules                 : { required: 'This is required' },
 	},
@@ -45,7 +47,7 @@ const controls = () => ([
 		name                  : 'date_of_joining',
 		label                 : 'Date of Joining',
 		type                  : 'date-select',
-		placeholder           : 'DD/MM/YYYY',
+		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 		disable               : true,
 		isPreviousDaysAllowed : true,
 		rules                 : { required: 'This is required' },
@@ -54,7 +56,7 @@ const controls = () => ([
 		name                  : 'created_at',
 		label                 : 'Date of Creation',
 		type                  : 'date-select',
-		placeholder           : 'DD/MM/YYYY',
+		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 		disable               : true,
 		isPreviousDaysAllowed : true,
 		rules                 : { required: 'This is required' },
@@ -63,7 +65,7 @@ const controls = () => ([
 		name                  : 'updated_at',
 		label                 : 'Last Updated',
 		type                  : 'date-select',
-		placeholder           : 'DD/MM/YYYY',
+		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 		disable               : true,
 		isPreviousDaysAllowed : true,
 		rules                 : { required: 'This is required' },
@@ -84,11 +86,12 @@ const controls = () => ([
 		rules       : { required: 'This is required' },
 	},
 	{
-		name   : 'passport_size_photo_url',
-		label  : 'Passport Size Photograph',
-		type   : 'fileUpload',
-		accept : '.png,.jpg,.jpeg,',
-		rules  : { required: 'This is required' },
+		name    : 'passport_size_photo_url',
+		label   : 'Passport Size Photograph',
+		type    : 'fileUpload',
+		accept  : '.png,.jpg,.jpeg,',
+		maxSize : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
+		rules   : { required: 'This is required' },
 	},
 	{
 		name        : 'emergency_contact_details',
