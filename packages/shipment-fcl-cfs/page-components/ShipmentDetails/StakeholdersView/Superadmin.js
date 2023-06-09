@@ -2,6 +2,7 @@ import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 // import { ShipmentChat } from '@cogoport/shipment-chat';
+import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
 import { useMemo, useState, useEffect } from 'react';
@@ -10,6 +11,7 @@ import CancelDetails from '../../../common/CancelDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -20,6 +22,8 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
+
+const SHIPMENT_STATUS_CODE = 403;
 
 function Superadmin({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -56,7 +60,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
+	if (!shipment_data && ![SHIPMENT_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -76,7 +80,7 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+	if (getShipmentStatusCode === SHIPMENT_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>
@@ -120,6 +124,14 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 
 						<TabPanel name="timeline_and_tasks" title="Timeline and Tasks">
 							<Tasks />
+						</TabPanel>
+
+						<TabPanel name="invoice_and_quotation" title="Sales Invoice">
+							<SalesInvoice />
+						</TabPanel>
+
+						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
+							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
