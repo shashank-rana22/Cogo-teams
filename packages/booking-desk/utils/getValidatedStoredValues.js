@@ -11,13 +11,13 @@ export default function getValidatedStoredValues() {
 
 	let { stepperTab, segmentedTab, activeTab } = storedValues?.tabState || {};
 
-	if (!SHIPMENT_TYPES.some((shipmentType) => shipmentType === stepperTab)) {
+	if (!SHIPMENT_TYPES.includes(stepperTab)) {
 		stepperTab = 'fcl_freight';
 	}
 
 	const segmentedTabs = Object.keys(TABS_CONFIG[stepperTab].segmented_tabs);
 
-	if (!segmentedTabs.some((tab) => tab === segmentedTab)) {
+	if (!segmentedTabs.includes(segmentedTab)) {
 		[segmentedTab] = segmentedTabs;
 	}
 

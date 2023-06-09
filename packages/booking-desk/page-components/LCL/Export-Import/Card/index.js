@@ -12,19 +12,19 @@ import CargoDetails from './CargoDetails';
 
 export default function Card({ item = {}, couldBeCardsCritical = false, activeTab = '' }) {
 	const router = useRouter();
+	const handleCardClick = (e) => {
+		window.location.href = e.target.href;
 
-	const clickCard = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+		window.sessionStorage.setItem('prev_nav', e.target.href);
+		window.location.href = e.target.href;
 	};
+	const criticalClass = couldBeCardsCritical && isCardCritical({ item }) ? styles.critical_card : '';
 
 	return (
-		<div
-			role="button"
-			tabIndex={0}
-			onClick={clickCard}
-			className={`${styles.card} ${
-				couldBeCardsCritical && isCardCritical({ item, activeTab }) ? styles.critical_card : ''
-			}`}
+		<a
+			href={`${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`}
+			className={`${styles.card} ${criticalClass}`}
+			onClick={handleCardClick}
 		>
 			<CardHeader item={item} />
 
@@ -47,6 +47,6 @@ export default function Card({ item = {}, couldBeCardsCritical = false, activeTa
 					{format(item.approved_at, 'dd MMM yyyy | hh:mm aaa')}
 				</div>
 			) : null}
-		</div>
+		</a>
 	);
 }

@@ -64,7 +64,7 @@ export default function LclDesk() {
 
 			<Tabs tabs={tabs} />
 
-			<ResolvedList tabs={tabs} />
+			{ResolvedList ? <ResolvedList tabs={tabs} /> : null}
 		</>
 	);
 }

@@ -6,16 +6,18 @@ import BookingDeskContext from '../../context/BookingDeskContext';
 import styles from './styles.module.css';
 
 export default function Tabs({ tabs = [] }) {
-	const { tabState, setTabState, filters, setFilters } = useContext(BookingDeskContext);
+	const { tabState: { activeTab } = {}, setTabState, filters, setFilters } = useContext(BookingDeskContext) || {};
 	const { isCriticalOn, ...rest } = filters;
-
-	const { activeTab } = tabState;
 
 	const couldBeCardsCritical = !!tabs.find(
 		(tab) => tab.name === activeTab,
 	)?.isCriticalVisible;
 
 	const handleActiveTabChange = (val) => {
+		if (val === activeTab) {
+			return;
+		}
+
 		const is_critical_visible = !!tabs.find((tab) => tab.name === val)
 			.isCriticalVisible;
 

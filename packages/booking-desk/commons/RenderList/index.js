@@ -8,7 +8,7 @@ import List from './List';
 import styles from './styles.module.css';
 
 export default function RenderList({ tabs = [], Card, apiPrefix = '' }) {
-	const { activeTab } = useContext(BookingDeskContext);
+	const { tabState: { activeTab } = {} } = useContext(BookingDeskContext) || {};
 
 	const { loading, data } = useListBookingDeskShipments({ prefix: apiPrefix });
 

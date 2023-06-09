@@ -11,19 +11,19 @@ import CargoDetails from './CargoDetails';
 
 export default function Card({ item = {}, couldBeCardsCritical = false }) {
 	const router = useRouter();
-	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`;
+	const handleCardClick = (e) => {
+		window.location.href = e.target.href;
 
-		window.sessionStorage.setItem('prev_nav', newUrl);
-		window.location.href = newUrl;
+		window.sessionStorage.setItem('prev_nav', e.target.href);
+		window.location.href = e.target.href;
 	};
+	const criticalClass = couldBeCardsCritical && isCardCritical({ item }) ? styles.critical_card : '';
 
 	return (
-		<div
-			role="button"
-			tabIndex={0}
+		<a
+			href={`${window.location.origin}/${router?.query?.partner_id}/shipments/${item?.id}`}
+			className={`${styles.card} ${criticalClass}`}
 			onClick={handleCardClick}
-			className={`${styles.card} ${couldBeCardsCritical && isCardCritical({ item }) ? styles.critical_card : ''}`}
 		>
 			<CardHeader item={item} />
 
@@ -38,6 +38,6 @@ export default function Card({ item = {}, couldBeCardsCritical = false }) {
 
 				<CargoDetails cargo_details={item?.cargo_details || []} />
 			</div>
-		</div>
+		</a>
 	);
 }

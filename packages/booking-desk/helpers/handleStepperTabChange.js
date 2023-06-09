@@ -1,7 +1,7 @@
 import TABS_CONFIG from '../config/TABS_CONFIG';
 
 export default function handleStepperTabChange(props) {
-	const { filters, setFilters, tabState, setTabState, newStepperTab } = props;
+	const { filters, setFilters, tabState, setTabState, newStepperTab } = props || {};
 
 	if (newStepperTab === tabState.stepperTab) {
 		return;
@@ -11,13 +11,13 @@ export default function handleStepperTabChange(props) {
 
 	let { segmentedTab, activeTab } = tabState || {};
 
-	const newSegmentedTabs = Object.keys(TABS_CONFIG[newStepperTab].segmented_tabs);
+	const newSegmentedTabs = Object.keys(TABS_CONFIG[newStepperTab].segmented_tabs || {});
 
 	if (!newSegmentedTabs.includes(segmentedTab)) {
 		[segmentedTab] = newSegmentedTabs;
 	}
 
-	const { tabs } = TABS_CONFIG[newStepperTab].segmented_tabs[segmentedTab];
+	const { tabs } = TABS_CONFIG[newStepperTab].segmented_tabs[segmentedTab] || {};
 
 	const [defaultActiveTab] = tabs;
 	const { name: defualtTab, isCriticalVisible } = (tabs || []).find(

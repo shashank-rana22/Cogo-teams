@@ -20,14 +20,14 @@ const renderCargoPills = (cargo_detail) => (
 		: null))
 );
 
+function BnExpiry({ activeTab, item = {} }) {
+	return activeTab === 'container_pick_up' && item?.bn_expiry
+		? <Pill>{`BN Expiry : ${format(item.bn_expiry, 'dd MMM yyyy')}`}</Pill>
+		: null;
+}
+
 export default function CargoDetails({ cargo_details, item = {}, activeTab = '' }) {
 	const [firstCargoDetails, ...restCargoDetails] = cargo_details || [];
-
-	function BnExpiry() {
-		return activeTab === 'container_pick_up' && item?.bn_expiry
-			? <Pill>{`BN Expiry : ${format(item.bn_expiry, 'dd MMM yyyy')}`}</Pill>
-			: null;
-	}
 
 	const mapKeys = useMemo(
 		() => Array(restCargoDetails.length)
@@ -39,7 +39,7 @@ export default function CargoDetails({ cargo_details, item = {}, activeTab = '' 
 		<div className={styles.cargo_details_container}>
 			{firstCargoDetails ? renderCargoPills(firstCargoDetails) : null}
 
-			<BnExpiry />
+			<BnExpiry activeTab={activeTab} item={item} />
 
 			{!isEmpty(restCargoDetails) ? (
 				<Tooltip

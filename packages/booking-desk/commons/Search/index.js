@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import BookingDeskContext from '../../context/BookingDeskContext';
 
 export default function Search() {
-	const { filters, setFilters } = useContext(BookingDeskContext);
+	const { filters = {}, setFilters = () => {} } = useContext(BookingDeskContext) || {};
 
 	return (
 		<Input

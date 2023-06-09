@@ -1,7 +1,7 @@
 import TABS_CONFIG from '../config/TABS_CONFIG';
 
 export default function handleSegmentedTabChange(props) {
-	const { filters, setFilters, tabState, setTabState, newSegmentedTab } = props;
+	const { filters = {}, setFilters, tabState = {}, setTabState, newSegmentedTab } = props || {};
 
 	if (newSegmentedTab === tabState.segmentedTab) {
 		return;
@@ -12,7 +12,7 @@ export default function handleSegmentedTabChange(props) {
 	const { stepperTab } = tabState || {};
 	let { activeTab } = tabState || {};
 
-	const { tabs } = TABS_CONFIG[stepperTab].segmented_tabs[newSegmentedTab];
+	const { tabs } = TABS_CONFIG[stepperTab].segmented_tabs[newSegmentedTab] || {};
 
 	const [defaultActiveTab] = tabs;
 	const { name: defualtTab, isCriticalVisible } = (tabs || []).find(

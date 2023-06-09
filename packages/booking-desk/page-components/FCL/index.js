@@ -66,7 +66,7 @@ export default function FclDesk() {
 
 			<Tabs tabs={tabs} />
 
-			<ResolvedList tabs={tabs} />
+			{ResolvedList ? <ResolvedList tabs={tabs} /> : null}
 		</>
 	);
 }

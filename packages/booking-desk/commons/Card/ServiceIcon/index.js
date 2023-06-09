@@ -10,7 +10,7 @@ const CLASS_NAMES = {
 export default function ServiceIcon({ Icon, text }) {
 	return (
 		<div className={`${styles.icon_container} ${styles[CLASS_NAMES[text]]}`}>
-			<Icon />
+			{Icon ? <Icon /> : null}
 
 			<div className={styles.icon_text}>
 				{text}

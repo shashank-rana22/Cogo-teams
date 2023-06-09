@@ -1,5 +1,5 @@
 import { IcCFfcl } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { Link } from '@cogoport/next';
 import { format } from '@cogoport/utils';
 
 import CardHeader from '../../../../commons/Card/CardHeader';
@@ -11,20 +11,13 @@ import styles from '../../card.module.css';
 import CargoDetails from './CargoDetails';
 
 export default function Card({ item = {}, couldBeCardsCritical = false, activeTab = '' }) {
-	const router = useRouter();
-
-	const clickCard = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
-	};
+	const criticalClass = couldBeCardsCritical && isCardCritical({ item, activeTab }) ? styles.critical_card : '';
 
 	return (
-		<div
-			role="button"
-			tabIndex={0}
-			onClick={clickCard}
-			className={`${styles.card} ${
-				couldBeCardsCritical && isCardCritical({ item, activeTab }) ? styles.critical_card : ''
-			}`}
+		<Link
+			href="/booking/fcl/[shipment_id]"
+			as={`/booking/fcl/${item.id}`}
+			className={`${styles.card} ${criticalClass}`}
 		>
 			<CardHeader item={item} />
 
@@ -47,6 +40,6 @@ export default function Card({ item = {}, couldBeCardsCritical = false, activeTa
 					{format(item.approved_at, 'dd MMM yyyy | hh:mm aaa')}
 				</div>
 			) : null}
-		</div>
+		</Link>
 	);
 }

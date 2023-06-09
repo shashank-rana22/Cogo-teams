@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 export default function List({ data, Card, couldBeCardsCritical = false }) {
 	const { filters, setFilters, tabState: { activeTab } = {} } = useContext(BookingDeskContext) || {};
-	const { list = [], total } = data;
+	const { list = [], total } = data || {};
 
 	const renderPagination = (
 		<Pagination
@@ -28,12 +28,14 @@ export default function List({ data, Card, couldBeCardsCritical = false }) {
 
 				<div className={styles.list_container}>
 					{list.map((item) => (
-						<Card
-							key={item?.id}
-							item={item}
-							couldBeCardsCritical={couldBeCardsCritical}
-							activeTab={activeTab}
-						/>
+						Card ? (
+							<Card
+								key={item?.id}
+								item={item}
+								couldBeCardsCritical={couldBeCardsCritical}
+								activeTab={activeTab}
+							/>
+						) : null
 					))}
 
 				</div>
