@@ -6,7 +6,7 @@ import Dashboard from './Dashboard';
 import ShipmentView from './ShipmentView';
 import styles from './styles.module.css';
 
-const tabs = [
+const TABS = [
 	{
 		key   : 'dashboard',
 		label : 'Dashboard',
@@ -56,7 +56,7 @@ function Accruals() {
 
 					<div className={styles.flex}>
 
-						{tabs.map((tab) => (
+						{TABS.map((tab) => (
 							<div
 								key={tab.key}
 								onClick={() => {

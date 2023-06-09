@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const getAmountInLakhCrK = (value:number, currency:string) => {
 	const val = value;
 
@@ -19,7 +21,7 @@ const getAmountInLakhCrK = (value:number, currency:string) => {
 		formatedAmount = `${(val / 1000).toFixed(2)} K`;
 	}
 
-	return `${currency || 'INR'} ${formatedAmount}`;
+	return `${currency || GLOBAL_CONSTANTS.currency_code?.INR} ${formatedAmount}`;
 };
 
 export { getAmountInLakhCrK };

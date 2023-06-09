@@ -2,7 +2,7 @@
 	display: flex;
 	padding: 8px;
 	margin: 24px 0;
-	background: #fff;
+	background: var(--color-secondary-5);
 	border: 1px solid #e0e0e0;
 	border-radius: 8px;
 }
@@ -23,7 +23,7 @@
 .days_left {
 	display: flex;
 	align-items: center;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	text-decoration: underline;
 }

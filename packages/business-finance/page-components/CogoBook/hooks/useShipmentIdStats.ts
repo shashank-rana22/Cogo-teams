@@ -22,8 +22,13 @@ interface StatsDataInterface {
 	incomeCurrency?: string
 	varianceCurrency?: string
 }
+interface StatsInterface {
+	month?:string
+	year?:string
+	entityCode?:string
+}
 
-const useShipmentIdStats = ({ month, year, entityCode }) => {
+const useShipmentIdStats = ({ month, year, entityCode }:StatsInterface) => {
 	const [statsData, setStatsData] = useState<StatsDataInterface>({});
 
 	const [

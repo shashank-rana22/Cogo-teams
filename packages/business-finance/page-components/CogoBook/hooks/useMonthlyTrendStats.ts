@@ -3,7 +3,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useMonthlyTrendStats = ({ month, year, entityCode }) => {
+interface MonthlyStatsInterface {
+	month?:string
+	year?:string
+	entityCode?:string
+}
+const useMonthlyTrendStats = ({ month, year, entityCode }:MonthlyStatsInterface) => {
 	const [
 		{ data:monthlyData, loading:monthlyLoading },
 		trigger,

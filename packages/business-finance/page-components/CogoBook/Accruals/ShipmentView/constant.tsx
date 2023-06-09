@@ -11,13 +11,13 @@ const currentYear = new Date().getFullYear();
 const newArray = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
 
 export const optionsYear = () => (newArray || [{}]).map((item) => (
-	{ value: item.toString(), label: item.toString() }));
+	{ value: item?.toString(), label: item?.toString() }));
 
 const getMonth = GLOBAL_CONSTANTS.months;
 
 export const optionsMonth = (getMonth || [{}]).map((item: string, index: number) => {
 	const count = index + 1;
-	const options = { value: count.toString(), label: item };
+	const options = { value: count?.toString(), label: item };
 	return options;
 });
 

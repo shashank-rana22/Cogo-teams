@@ -1,6 +1,6 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
@@ -27,11 +27,7 @@ function ChartData({
 				y={centerY}
 				textAnchor="middle"
 				dominantBaseline="central"
-				style={{
-					fontSize   : '12px',
-					fontWeight : 600,
-
-				}}
+				className={styles.style_component_text}
 			>
 				Income
 			</text>
@@ -46,11 +42,7 @@ function ChartData({
 				y={centerY}
 				textAnchor="middle"
 				dominantBaseline="central"
-				style={{
-					fontSize   : '12px',
-					fontWeight : 600,
-
-				}}
+				className={styles.style_component_text}
 			>
 				Expense
 			</text>
@@ -79,7 +71,7 @@ function ChartData({
 					Booked Income
 					<div className={styles.amount_data}>
 						{ statsLoading ? <Placeholder height="20px" width="80px" />
-							: getFormattedPrice(incomeBookedSum, incomeCurrency) || 0.00}
+							: formatAmount({ amount: incomeBookedSum.toString(), currency: incomeCurrency }) || 0.00}
 					</div>
 				</div>
 
@@ -87,7 +79,7 @@ function ChartData({
 					Accrued Income
 					<div className={styles.amount_data}>
 						{statsLoading ? <Placeholder height="20px" width="80px" />
-							: getFormattedPrice(incomeAccruedSum, incomeCurrency) || 0.00}
+							: formatAmount({ amount: incomeAccruedSum.toString(), currency: incomeCurrency }) || 0.00}
 					</div>
 				</div>
 
@@ -113,7 +105,7 @@ function ChartData({
 					Booked Expense
 					<div className={styles.amount_data}>
 						{ statsLoading ? <Placeholder height="20px" width="80px" />
-							: getFormattedPrice(expenseBookedSum, expenseCurrency) || 0.00}
+							: formatAmount({ amount: expenseBookedSum.toString(), currency: expenseCurrency }) || 0.00}
 					</div>
 				</div>
 
@@ -121,7 +113,7 @@ function ChartData({
 					Accrued Expense
 					<div className={styles.amount_data}>
 						{ statsLoading ? <Placeholder height="20px" width="80px" />
-							: getFormattedPrice(expenseAccruedSum, expenseCurrency) || 0.00}
+							: formatAmount({ amount: expenseAccruedSum.toString(), currency: expenseCurrency }) || 0.00}
 					</div>
 				</div>
 

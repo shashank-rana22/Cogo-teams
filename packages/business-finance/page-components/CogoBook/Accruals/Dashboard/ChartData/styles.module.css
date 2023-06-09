@@ -3,7 +3,7 @@
 	width: 50%;
 	height: 132px;
 	padding: 12px 24px;
-	background: #fff;
+	background: var(--color-secondary-5);
 	border: 1px solid hsl(0deg 0% 88%);
 	border-radius: 8px;
 }
@@ -24,4 +24,9 @@
 
 .booked_data {
 	width: 130px;
+}
+
+.style_component_text {
+	font-size: var(--font-size-md);
+	font-weight: 600;
 }

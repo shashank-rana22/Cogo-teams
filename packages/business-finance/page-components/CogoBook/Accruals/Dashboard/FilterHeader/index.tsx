@@ -1,5 +1,6 @@
 import { Select } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import styles from './styles.module.css';
 
@@ -10,11 +11,11 @@ interface DashboardFilterInterface {
 interface FilterHeaderInterface {
 	setDashboardFilters?: React.Dispatch<React.SetStateAction<DashboardFilterInterface>>
 	dashboardFilters?:DashboardFilterInterface
-	GetMonthDetails?: {
+	GET_MONTH_DETAILS?: {
 		value?: string;
 		label?: string;
 	}
-	GetYearDetails?:string
+	GET_YEAR_DETAILS?:string
 	optionsMonth: {
 		value: string;
 		label: string;
@@ -28,14 +29,14 @@ interface FilterHeaderInterface {
 
 function FilterHeader({
 	dashboardFilters, setDashboardFilters,
-	GetYearDetails, optionsYear, GetMonthDetails, optionsMonth, control,
+	GET_YEAR_DETAILS, optionsYear, GET_MONTH_DETAILS, optionsMonth, control,
 }:FilterHeaderInterface) {
 	return (
 		<div className={styles.container}>
 
 			<div className={styles.select_container}>
 				<Select
-					value={dashboardFilters?.year || GetYearDetails}
+					value={dashboardFilters?.year || GET_YEAR_DETAILS}
 					onChange={(val:string) => { setDashboardFilters((prev) => ({ ...prev, year: val })); }}
 					placeholder="Year"
 					options={optionsYear()}
@@ -44,7 +45,7 @@ function FilterHeader({
 					size="sm"
 				/>
 				<Select
-					value={dashboardFilters?.month || GetMonthDetails?.value}
+					value={dashboardFilters?.month || GET_MONTH_DETAILS?.value}
 					onChange={(val) => { setDashboardFilters((prev) => ({ ...prev, month: val })); }}
 					placeholder="Month"
 					options={optionsMonth}
@@ -60,7 +61,7 @@ function FilterHeader({
 						renderLabel={(item) => (`${item?.business_name}(${item?.entity_code})`)}
 						placeholder="Entity"
 						labelKey="entity_code"
-						finalValue="301"
+						finalValue={Object.keys(GLOBAL_CONSTANTS.cogoport_entities)[2]}
 						initialCall
 						rules={{ required: true }}
 						isClearable

@@ -10,14 +10,15 @@ import { optionsMonth, optionsYear } from '../ShipmentView/constant';
 
 import ChartData from './ChartData';
 import FilterHeader from './FilterHeader';
+import { data, dataExpense, reportMonth } from './helper';
 import MonthBarChart from './MonthBarChart';
 import SIDView from './SIDView';
 import StatsNumericData from './StatsNumericData';
 import styles from './styles.module.css';
 
-const GetMonthDetails = optionsMonth.filter((i) => i.value === new Date().getMonth().toString())?.[0];
+const GET_MONTH_DETAILS = optionsMonth.filter((i) => i.value === new Date().getMonth().toString())?.[0];
 
-const GetYearDetails = optionsYear()?.[0]?.value;
+const GET_YEAR_DETAILS = optionsYear()?.[0]?.value;
 
 const COLORS = ['#57C6D1', '#ADCC6A'];
 
@@ -38,19 +39,19 @@ function Dashboard() {
 	const { month, year } = dashboardFilters || {};
 
 	const { statsData = {}, statsLoading } = useShipmentIdStats({
-		month : month || GetMonthDetails?.value,
-		year  : year || GetYearDetails,
+		month : month || GET_MONTH_DETAILS?.value,
+		year  : year || GET_YEAR_DETAILS,
 		entityCode,
 	});
 
 	const { shipmentViewData = {}, shipmentViewLoading } = useShipmentViewStats({
-		month : month || GetMonthDetails?.value,
-		year  : year || GetYearDetails,
+		month : month || GET_MONTH_DETAILS?.value,
+		year  : year || GET_YEAR_DETAILS,
 		entityCode,
 	});
 	const { monthlyData = [] } = useMonthlyTrendStats({
-		month : month || GetMonthDetails?.value,
-		year  : year || GetYearDetails,
+		month : month || GET_MONTH_DETAILS?.value,
+		year  : year || GET_YEAR_DETAILS,
 		entityCode,
 	});
 
@@ -63,52 +64,8 @@ function Dashboard() {
 		incomeCurrency,
 	} = statsData;
 
-	const data = [
-		{
-			id    : 'Income Accrued',
-			label : 'Income Accrued',
-			value : incomeAccruedSum,
-			color : '#57C6D1',
-		},
-		{
-			id    : 'Income Booked',
-			label : 'Income Booked',
-			value : incomeBookedSum,
-			color : '#ADCC6A',
-		},
-	];
-
-	const dataExpense = [
-		{
-			id    : 'Expense Accrued',
-			label : 'Expense Accrued',
-			value : expenseAccruedSum,
-			color : '#57C6D1',
-		},
-		{
-			id    : 'Expense Booked',
-			label : 'Expense Booked',
-			value : expenseBookedSum,
-			color : '#ADCC6A',
-		},
-	];
-
-	const {
-		zeroToFifteenDays = 0,
-		sixteenToThirtyDays = 0,
-		thirtyOneToSixtyDays = 0,
-		sixtyOneToNinetyDays = 0,
-	} = shipmentViewData;
-
-	const reportMonth = [
-		{ id: '1', days: '0 - 15 Days Left', shipmentId: zeroToFifteenDays },
-		{ id: '2', days: '15 - 30 Days Left', shipmentId: sixteenToThirtyDays },
-		{ id: '3', days: '1 - 2 Month Left', shipmentId: thirtyOneToSixtyDays },
-		{ id: '4', days: '2 - 3 Month Left', shipmentId: sixtyOneToNinetyDays },
-	];
-
 	const renderDownloadReport = (
-		reportMonth.map((item) => (
+		reportMonth(shipmentViewData).map((item) => (
 			<div
 				key={item?.id}
 				className={styles.days_show}
@@ -140,8 +97,8 @@ function Dashboard() {
 			<FilterHeader
 				setDashboardFilters={setDashboardFilters}
 				dashboardFilters={dashboardFilters}
-				GetMonthDetails={GetMonthDetails}
-				GetYearDetails={GetYearDetails}
+				GET_MONTH_DETAILS={GET_MONTH_DETAILS}
+				GET_YEAR_DETAILS={GET_YEAR_DETAILS}
 				optionsMonth={optionsMonth}
 				optionsYear={optionsYear}
 				control={control}
@@ -155,9 +112,7 @@ function Dashboard() {
 							content={(
 								<div className={styles.font_size_tooltip}>
 									Current month statistics
-									<br />
 									of booked and accrued income
-									<br />
 									and expense
 								</div>
 							)}
@@ -170,7 +125,7 @@ function Dashboard() {
 					</div>
 
 					<Pill size="md" color="green">
-						{`Month : ${optionsMonth[Number(month) - 1]?.label || GetMonthDetails?.label}`}
+						{`Month : ${optionsMonth[Number(month) - 1]?.label || GET_MONTH_DETAILS?.label}`}
 					</Pill>
 				</div>
 
@@ -187,8 +142,8 @@ function Dashboard() {
 						incomeCurrency={incomeCurrency}
 						statsLoading={statsLoading}
 						COLORS={COLORS}
-						data={data}
-						dataExpense={dataExpense}
+						data={data(incomeAccruedSum, incomeBookedSum)}
+						dataExpense={dataExpense(expenseAccruedSum, expenseBookedSum)}
 					/>
 				</div>
 			</div>
@@ -211,7 +166,7 @@ function Dashboard() {
 
 				<div className={styles.hr_statistics} />
 
-				<SIDView reportMonth={reportMonth} shipmentViewLoading={shipmentViewLoading} />
+				<SIDView reportMonth={reportMonth(shipmentViewData)} shipmentViewLoading={shipmentViewLoading} />
 
 			</div>
 
@@ -227,7 +182,6 @@ function Dashboard() {
 								content={(
 									<div className={styles.font_size_tooltip}>
 										Month wise view of booked and
-										<br />
 										accrued income and expense
 									</div>
 								)}

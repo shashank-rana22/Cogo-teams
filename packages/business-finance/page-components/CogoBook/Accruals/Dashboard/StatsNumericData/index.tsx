@@ -1,5 +1,5 @@
 import { Placeholder, Popover } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateDown } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
@@ -65,20 +65,32 @@ function StatsNumericData({ statsData, statsLoading }:NumericInterface) {
 	}];
 
 	const getRenderProfitData = [
-		{ label: 'Booked Profit', amount: getFormattedPrice(bookedProfit, expenseCurrency) || 0.00 },
-		{ label: 'Actual Profit ', amount: getFormattedPrice(actualProfit, expenseCurrency) || 0.00 },
-		{ label: 'Variance', amount: getFormattedPrice(variance, expenseCurrency) || 0.00 },
+		{
+			label  : 'Booked Profit',
+			amount : formatAmount({
+				amount   : bookedProfit.toString(),
+				currency : expenseCurrency,
+			}) || 0.00,
+		},
+		{
+			label  : 'Actual Profit ',
+			amount : formatAmount({
+				amount   : actualProfit.toString(),
+				currency : expenseCurrency,
+			}) || 0.00,
+		},
+		{ label: 'Variance', amount: formatAmount({ amount: variance.toString(), currency: expenseCurrency }) || 0.00 },
 	];
 
 	const getRenderVarianceData = [
 		{
 			label  : 'Expense Variation',
-			amount : getFormattedPrice(varianceExpense, varianceCurrency) || 0.00,
+			amount : formatAmount({ amount: varianceExpense.toString(), currency: varianceCurrency }) || 0.00,
 			color  : '#EE3425',
 		},
 		{
 			label  : 'Income Variation',
-			amount : getFormattedPrice(varianceIncome, varianceCurrency) || 0.00,
+			amount : formatAmount({ amount: varianceIncome.toString(), currency: varianceCurrency }) || 0.00,
 			color  : '#849E4C',
 		},
 	];

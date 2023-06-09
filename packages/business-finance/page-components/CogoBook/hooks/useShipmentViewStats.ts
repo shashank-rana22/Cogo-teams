@@ -3,7 +3,12 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-const useShipmentViewStats = ({ year, month, entityCode }) => {
+interface ShipmentInterface {
+	month?:string
+	year?:string
+	entityCode?:string
+}
+const useShipmentViewStats = ({ year, month, entityCode }:ShipmentInterface) => {
 	const [
 		{ data:shipmentViewData, loading:shipmentViewLoading },
 		trigger,
