@@ -1,49 +1,48 @@
-.row{
-	align-items: center;
-	padding: 10px 0px;
+.row {
 	display: flex;
+	align-items: center;
+	padding: 10px 0;
 }
 
-.container{
-    border-bottom: 1px solid #e0e0e0;
+.container {
+	border-bottom: 1px solid #e0e0e0;
 
 	&:last-child {
 		border-bottom: unset;
 	}
 }
 
-.convenience_label{
+.convenience_label {
 	width: 38%;
 }
 
-.shipment_tags{
+.shipment_tags {
 	display: flex;
 	margin-top: 5px;
 }
 
-.service_title{
-	font-weight: 500;
+.service_title {
+	width: 85.5%;
+	overflow: hidden;
 	font-size: 14px;
+	font-weight: 500;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow: hidden;
-	width: 85.5%;
-
 }
 
-.service_total_amount{
-	color: #849E4C;
+.service_total_amount {
 	width: 14.5%;
 	margin-top: 15px 0 0 12px;
+	color: #849e4c;
 }
 
-.service_line{
-	margin-top: 15px;
+.service_line {
 	display: flex;
 	justify-content: space-between;
-	margin-right:25px
+	margin-top: 15px;
+	margin-right: 25px;
 }
 
-.local_rate{
+.local_rate {
 	margin: 10px 0;
 }
