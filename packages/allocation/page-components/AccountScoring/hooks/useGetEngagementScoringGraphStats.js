@@ -23,7 +23,7 @@ const useGetEngagementScoringGraphStats = (props) => {
 		method  : 'GET',
 		authkey : 'get_allocation_engagement_scoring_score_graph',
 		params,
-	}, { manual: false });
+	}, { manual: true });
 
 	useEffect(() => {
 		if (duration !== 'custom') {
@@ -35,7 +35,7 @@ const useGetEngagementScoringGraphStats = (props) => {
 	}, [duration]);
 
 	useEffect(() => {
-		if (!(isEmpty(scoreTrendIds))) {
+		if (!(isEmpty(scoreTrendIds)) && !(isEmpty(dateRange))) {
 			setParams((pv) => ({
 				...pv,
 				service_id,
