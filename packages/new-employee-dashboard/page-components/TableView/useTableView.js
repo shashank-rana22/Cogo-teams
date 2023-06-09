@@ -19,7 +19,6 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 
 	const fetch = useCallback(
 		async () => {
-			console.log('active', activeTab);
 			try {
 				await trigger({
 					params: {
