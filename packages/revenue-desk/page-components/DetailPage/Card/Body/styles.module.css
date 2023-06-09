@@ -2,6 +2,8 @@
 	display: flex;
 	width: 100%;
 	border-bottom: 1px dashed #bdbdbd;
+	padding: 12px;
+	align-items: center;
 }
 
 .heading_container {
@@ -24,13 +26,25 @@
 .left_section {
 	width: 35%;
 	padding: 0 14px;
-	border-right: 1px dashed #bdbdbd;
+	display: flex;
+	align-items: center;
 }
 
 .middle_section {
+	border-left: 1px dashed #bdbdbd;
 	flex: 1;
+	border-right: 1px dashed #bdbdbd;
 }
 
-.portpair_container {
-	padding-top: 20px;
+.text1{
+	font-weight: 500;
+	font-size: 18px;
+	color: #4F4F4F;
+	padding: 20px;
+}
+
+.text2{
+	font-weight: 600;
+	font-size: 18px;
+	color: #221F20;
 }

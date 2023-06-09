@@ -5,15 +5,16 @@ import { useState } from 'react';
 import iconMapping from '../../helper/iconMapping';
 import serviceLabelMapping from '../../helper/serviceLabelMapping';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
-import PortDetails from '../List/Card/Body/PortDetails';
 
 import QuotationDetails from './QuotationDetails';
 import ServiceWiseDetails from './ServiceWiseDetails';
+import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
 
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
-	const [activeTabPanel, setActiveTabPanel] = useState('transaction_insights');
+	const [activeTabPanel, setActiveTabPanel] = useState('view_quotation');
+	const [priceData, setPriceData] = useState({});
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
 
 	const excludedServices = [
@@ -61,7 +62,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 						</Pill>
 					</div>
 					<div className={styles.port_pair_container}>
-						<PortDetails data={itemData} />
+						{itemData?.importer_exporter?.business_name}
 					</div>
 				</div>
 
@@ -83,14 +84,24 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 					</div>
 				</div>
 			</div>
+			<div className={styles.card_container}>
+				<ShipmentCard itemData={itemData} priceData={priceData} />
+			</div>
 
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTabPanel}
-					fullWidth
-					themeType="primary"
+					themeType="secondary"
 					onChange={setActiveTabPanel}
 				>
+					<TabPanel name="view_quotation" title="View Quotation">
+						<div>
+							<QuotationDetails
+								itemData={itemData}
+								setPriceData={setPriceData}
+							/>
+						</div>
+					</TabPanel>
 					<TabPanel name="transaction_insights" title="Transaction Insights">
 						<div>
 							{['air_freight', 'lcl_freight', 'fcl_freight'].includes(
@@ -100,9 +111,6 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 								) : null}
 
 						</div>
-					</TabPanel>
-					<TabPanel name="view_quotation" title="View Quotation">
-						<div><QuotationDetails itemData={itemData} /></div>
 					</TabPanel>
 					<TabPanel name="last_shipment_detail" title="Customer Last Shipment Details">
 						<div>Coming Soon!</div>
@@ -117,6 +125,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							shipmentData={itemData}
 							groupedShowServicesData={groupedShowServicesData}
 							serviceData={servicesData?.list}
+							priceData={priceData}
 						/>
 					)}
 

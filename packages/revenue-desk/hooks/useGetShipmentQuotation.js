@@ -20,9 +20,9 @@ const useGetShipmentQuotation = ({ shipmentData }) => {
 	useEffect(() => {
 		getQuotation();
 	}, []);
-	const service_charges = data?.service_charges || [];
+
 	return {
-		service_charges,
+		data,
 		loading,
 	};
 };

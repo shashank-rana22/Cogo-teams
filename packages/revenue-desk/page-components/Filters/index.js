@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function Filters({ filters, setFilters }) {
 	const {
 		shipmentStatusArray, tradeTypeArray, rdStatusArray,
-		shipmentSourceArray, departureDateArray, createdDateArray,
+		shipmentSourceArray, departureDateArray, createdDateArray, cargoDateArray,
 	} = getFiltersTagsArray(filters);
 	return (
 		<div className={styles.filter}>
@@ -64,6 +64,15 @@ function Filters({ filters, setFilters }) {
 						items={createdDateArray}
 						onItemsChange={() => {
 							setFilters({ ...filters, created_date: '' });
+						}}
+						size="md"
+					/>
+				</div>
+				<div className={styles.date_tag_container}>
+					<Tags
+						items={cargoDateArray}
+						onItemsChange={() => {
+							setFilters({ ...filters, cargo_readiness_date: '' });
 						}}
 						size="md"
 					/>
@@ -174,20 +183,25 @@ function Filters({ filters, setFilters }) {
 						/>
 					</div>
 				</div>
-				{/* <div className={styles.date_subsection}>
-					<div className={styles.date_text}>
-						Cargo Readiness Date
-					</div>
-					<div>
-						<SingleDateRange
-							placeholder="Enter Date"
-							dateFormat="MM/dd/yyyy"
-							name="date"
-							onChange={(val) => setFilters({ ...filters, cargo_readiness_date: val, page: 1 })}
-							value={filters?.cargo_readiness_date}
-						/>
-					</div>
-				</div> */}
+				{(filters?.service === 'fcl_freight')
+					? (
+						<div className={styles.date_subsection}>
+							<div className={styles.date_text}>
+								Cargo Readiness Date
+							</div>
+							<div>
+								<SingleDateRange
+									isPreviousDaysAllowed
+									placeholder="Enter Date"
+									dateFormat="MM/dd/yyyy"
+									name="date"
+									onChange={(val) => setFilters({ ...filters, cargo_readiness_date: val, page: 1 })}
+									value={filters?.cargo_readiness_date}
+								/>
+							</div>
+						</div>
+					) : null}
+
 			</div>
 
 		</div>

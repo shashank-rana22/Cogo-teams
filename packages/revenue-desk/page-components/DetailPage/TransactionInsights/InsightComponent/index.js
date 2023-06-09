@@ -33,16 +33,8 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 	const {
 		trade_type = '',
 		shipment_type = '',
-		destination_airport = {},
-		origin_airport = {},
-		origin_port = {},
-		destination_port = {},
-	} = data;
 
-	const { port_code: desAirPortCode = '' } = destination_airport || {};
-	const { port_code: orgAirPortCode = '' } = origin_airport || {};
-	const { port_code: orgFclPortCode = '' } = origin_port || {};
-	const { port_code: desFclPortCode = '' } = destination_port || {};
+	} = data;
 
 	const {
 		name = '',
@@ -52,78 +44,70 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 		total_shipment_count = 0,
 	} = insightData;
 	return (
-		<div className={styles.mainContainer}>
-			<div className={styles.container}>
+		<div className={styles.single_column}>
+			<div className={styles.heading}>
 				{name ? (
 					<div style={{ display: 'flex' }}>
-						<div className={styles.text}>
+						<div>
 							{KEY_MAPPING[type]}
-							{' '}
 							:
 						</div>
-						{' '}
 						<Tooltip content={name}>
 							<div className={styles.text}>
-								{' '}
 								{name}
 							</div>
 						</Tooltip>
-					</div>
-				) : null}
 
-				{total_shipment_count ? (
-					<div style={{ display: 'flex' }}>
-						<div className={styles.text}>Total Transactions :</div>
-						{' '}
-						<div className={styles.text}>{total_shipment_count}</div>
 					</div>
 				) : null}
 			</div>
-
-			<div className={styles.subContainer}>
-				{service_shipment_count ? (
-					<div style={{ display: 'flex' }}>
-						{getOrdinalNumber(service_shipment_count)}
-						<div className={styles.bold}>
-							{' '}
-							{LABEL_MAPPING[shipment_type]}
-						</div>
+			<div className={styles.single_box}>
+				<div style={{ display: 'flex' }}>
+					{getOrdinalNumber(service_shipment_count)}
+					<div style={{ marginLeft: '5px' }}>
+						{LABEL_MAPPING[shipment_type]}
+						{' '}
+						Transaction
 					</div>
-				) : null}
-
+				</div>
+			</div>
+			<div className={styles.single_box}>
 				{!['ftl_freight', 'ltl_freight'].includes(shipment_type)
-				&& service_trade_type_shipment_count ? (
-					<div style={{ display: 'flex' }}>
-						{getOrdinalNumber(service_trade_type_shipment_count)}
-						{' '}
-						{LABEL_MAPPING[shipment_type]}
-						{' '}
-						<div className={styles.bold}>
-							{' '}
-							{trade_type.toUpperCase()}
+					? (
+						<div style={{ display: 'flex' }}>
+							{getOrdinalNumber(service_trade_type_shipment_count)}
+							<div style={{ marginLeft: '5px' }}>
+								{LABEL_MAPPING[shipment_type]}
+							</div>
+							<div style={{ marginLeft: '5px' }}>
+								{trade_type.toUpperCase() || incoTermMapping[data?.inco_term].toUpperCase()}
+								{' '}
+								Transaction
+							</div>
 						</div>
-					</div>
 					) : null}
+			</div>
+			<div className={styles.port_pair_container}>
 
-				{service_port_pair_shipment_count ? (
-					<div style={{ display: 'flex' }}>
-						{getOrdinalNumber(service_port_pair_shipment_count)}
-						{' '}
+				<div style={{ display: 'flex' }}>
+					{getOrdinalNumber(service_port_pair_shipment_count)}
+					<div style={{ marginLeft: '5px' }}>
 						{LABEL_MAPPING[shipment_type]}
-						-
+					</div>
+					<div style={{ marginLeft: '5px' }}>
 						{trade_type.toUpperCase() || incoTermMapping[data?.inco_term].toUpperCase()}
 						{' '}
-						-
-						<div className={styles.bold}>
-							{orgAirPortCode || orgFclPortCode}
-							{' '}
-							-
-							{' '}
-							{desAirPortCode || desFclPortCode}
-						</div>
+						Transaction
 					</div>
-				) : null}
+				</div>
+
 			</div>
+			<div className={styles.single_box}>
+				<div style={{ display: 'flex' }}>
+					<div>{total_shipment_count}</div>
+				</div>
+			</div>
+
 		</div>
 	);
 }

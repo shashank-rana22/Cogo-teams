@@ -3,7 +3,7 @@ import PortDetails from '../../../List/Card/Body/PortDetails';
 
 import styles from './styles.module.css';
 
-function Body({ data }) {
+function Body({ data, price }) {
 	return (
 		<div className={styles.body_container}>
 			<div className={styles.left_section}>
@@ -13,6 +13,12 @@ function Body({ data }) {
 			</div>
 			<div className={styles.middle_section}>
 				<CargoDetails data={data} />
+			</div>
+			<div className={styles.text1}>
+				Sell Price
+				<div className={styles.text2}>
+					{price}
+				</div>
 			</div>
 		</div>
 	);

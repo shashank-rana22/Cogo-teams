@@ -9,7 +9,7 @@ import PreviewSelectedCards from './PreviewSelectedCards';
 import SingleService from './SingleService';
 import styles from './styles.module.css';
 
-function Rates({ groupedShowServicesData, serviceData, shipmentData }) {
+function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }) {
 	const tabKeys = Object?.keys(groupedShowServicesData || {});
 	const [supplierPayload, setSupplierPayload] = useState({});
 	const [showCancelModal, setshowCancelModal] = useState(false);
@@ -66,6 +66,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData }) {
 							setSupplierPayload={setSupplierPayload}
 							inventory={inventory}
 							setInventory={setInventory}
+							price={priceData[startCase(singleTab)]}
 						/>
 					</TabPanel>
 				))}

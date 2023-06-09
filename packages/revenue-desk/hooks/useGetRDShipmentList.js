@@ -26,10 +26,11 @@ const useGetRDShipmentList = () => {
 		try {
 			await trigger({
 				params: {
-					filters   : { ...requiredFilterChange, page: undefined, sort_by: undefined, sort_type: undefined },
-					page      : requiredFilterChange?.page,
-					sort_by   : requiredFilterChange?.sort_by || undefined,
-					sort_type : requiredFilterChange?.sort_type || undefined,
+					filters            : { ...requiredFilterChange, page: undefined, sort_by: undefined, sort_type: undefined },
+					page               : requiredFilterChange?.page,
+					sort_by            : requiredFilterChange?.sort_by || undefined,
+					sort_type          : requiredFilterChange?.sort_type || undefined,
+					additional_methods : ['pagination'],
 				},
 			});
 		} catch (err) {
@@ -38,25 +39,27 @@ const useGetRDShipmentList = () => {
 	};
 
 	const requiredFilterChange = {
-		origin_location_id      : filters?.origin_location_id || undefined,
-		destination_location_id : filters?.destination_location_id || undefined,
-		origin_port_id          : filters?.origin_port_id || undefined,
-		destination_port_id     : filters?.destination_port_id || undefined,
-		origin_airport_id       : filters?.origin_airport_id || undefined,
-		destination_airport_id  : filters?.destination_airport_id || undefined,
-		port_id                 : filters?.port_id || undefined,
-		airpot_id               : filters?.airpot_id || undefined,
-		trade_type              : filters?.trade_type || undefined,
-		state                   : shipmentStatusMapping[filters?.state] || undefined,
-		source                  : filters?.source || undefined,
-		departure_start_date    : filters?.departure_date?.startDate || undefined,
-		departure_end_date      : filters?.departure_date?.endDate || undefined,
-		created_at_start_date   : filters?.created_date?.startDate || undefined,
-		created_at_end_date     : filters?.created_date?.endDate || undefined,
-		page                    : filters?.page,
-		q                       : filters?.q || undefined,
-		sort_type               : filters?.sort_by.split('_').pop() || undefined,
-		sort_by                 : filters?.sort_by.split('_').slice(0, 2).join('_') || undefined,
+		origin_location_id              : filters?.origin_location_id || undefined,
+		destination_location_id         : filters?.destination_location_id || undefined,
+		origin_port_id                  : filters?.origin_port_id || undefined,
+		destination_port_id             : filters?.destination_port_id || undefined,
+		origin_airport_id               : filters?.origin_airport_id || undefined,
+		destination_airport_id          : filters?.destination_airport_id || undefined,
+		port_id                         : filters?.port_id || undefined,
+		airpot_id                       : filters?.airpot_id || undefined,
+		trade_type                      : filters?.trade_type || undefined,
+		state                           : shipmentStatusMapping[filters?.state] || undefined,
+		source                          : filters?.source || undefined,
+		schedule_departure_greater_than : filters?.departure_date?.startDate || undefined,
+		schedule_departure_less_than    : filters?.departure_date?.endDate || undefined,
+		created_at_greater_than         : filters?.created_date?.startDate || undefined,
+		created_at_less_than            : filters?.created_date?.endDate || undefined,
+		page                            : filters?.page,
+		q                               : filters?.q || undefined,
+		sort_type                       : filters?.sort_by.split('_').pop() || undefined,
+		sort_by                         : filters?.sort_by.split('_').slice(0, 2).join('_') || undefined,
+		cargo_readiness_greater_than    : filters?.cargo_readiness_date?.startDate || undefined,
+		cargo_readiness_less_than       : filters?.cargo_readiness_date?.endDate || undefined,
 
 	};
 	useEffect(() => {

@@ -50,7 +50,6 @@ function Header({ data }) {
 			<div style={{ color: 'red', display: 'flex', alignItems: 'center' }}>
 				<IcMTimer fill="red" width="15" height="15" />
 				<div style={{ marginLeft: '3px' }}>
-
 					{format(data?.confirmed_by_importer_exporter_at, 'hh')}
 					{' '}
 					Hrs :

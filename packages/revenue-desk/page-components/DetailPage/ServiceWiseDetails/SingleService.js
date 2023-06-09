@@ -38,6 +38,7 @@ function SingleService({
 	setSupplierPayload,
 	inventory,
 	setInventory,
+	price,
 }) {
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
 	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({ singleServiceData });
@@ -75,7 +76,7 @@ function SingleService({
 				/>
 			</div>
 
-			<Card serviceData={singleServiceData} />
+			<Card serviceData={singleServiceData} price={price} />
 
 			{(supplierPayload?.[singleServiceData?.id] || []).length
 				? <SelectedRatesCard prefrences={supplierPayload?.[singleServiceData?.id]} /> : null}

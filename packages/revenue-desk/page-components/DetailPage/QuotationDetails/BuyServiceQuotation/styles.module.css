@@ -1,15 +1,27 @@
 .table_container{
     font-size: 20px;
-    width:640px;
+    width:40vw;
 
     :global{
         .ui_table_head_cell{
-            font-size: 18px !important;
             font-weight: 600;
+            font-size: 14px;
+            color: #4F4F4F;
+            padding: 10px 14px;
         }
         .ui_table_body_cell{
             font-size: 14px !important;
             font-weight: 500;
         }
+        .ui_table_container{
+            padding: 0 !important;
+        }
     }
+}
+
+.text2{
+    font-weight: 600;
+    font-size: 16px;
+    color: #EE3425;
+    margin-bottom: 10px;
 }

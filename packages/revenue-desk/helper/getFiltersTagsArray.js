@@ -7,6 +7,7 @@ const getFiltersTagsArray = (filters) => {
 	const shipmentSourceArray = [];
 	const departureDateArray = [];
 	const createdDateArray = [];
+	const cargoDateArray = [];
 	if (filters?.state) {
 		shipmentStatusArray.push({
 			key     	: '1',
@@ -57,6 +58,15 @@ const getFiltersTagsArray = (filters) => {
 			closable : true,
 		});
 	}
+	if (filters?.cargo_readiness_date?.startDate || filters?.cargo_readiness_date?.endDate) {
+		cargoDateArray.push({
+			key     	: '2',
+			children : `Cargo Date : ${format(filters?.cargo_readiness_date?.startDate, 'dd MMM YYYY')} -
+			${format(filters?.cargo_readiness_date?.endDate, 'dd MMM YYYY')}`,
+			color    : '#F3FAFA',
+			closable : true,
+		});
+	}
 	return {
 		shipmentStatusArray,
 		tradeTypeArray,
@@ -64,6 +74,7 @@ const getFiltersTagsArray = (filters) => {
 		departureDateArray,
 		createdDateArray,
 		rdStatusArray,
+		cargoDateArray,
 	};
 };
 export default getFiltersTagsArray;

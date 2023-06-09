@@ -11,8 +11,9 @@ function BuyServiceQuotation({ shipmentData = {} }) {
 		{ Header: 'Services Charge', accessor: 'total_price_discounted' },
 		{ Header: 'Source', accessor: 'source' },
 	];
-	const { service_charges, loading } = useGetBuyQuotation({ shipmentData });
-	const data = (service_charges || [])
+	const { data, loading } = useGetBuyQuotation({ shipmentData });
+	const service_charges = data?.service_charges || [];
+	const chargesData = (service_charges || [])
 		.filter((item) => item.service_type)
 		.map(
 			({ service_type, total_price, source, currency }) => ({
@@ -22,7 +23,19 @@ function BuyServiceQuotation({ shipmentData = {} }) {
 			}),
 		);
 	return (
-		<Table columns={columns} data={data} loading={loading} className={styles.table_container} />
+		<>
+			<div className={styles.text2}>
+				Complete Buy Quotation
+				{' '}
+				:
+				{' '}
+				{data?.net_total_price_currency}
+				{' '}
+				{data?.net_pre_tax_total}
+			</div>
+			<Table columns={columns} data={chargesData} loading={loading} className={styles.table_container} />
+		</>
+
 	);
 }
 export default BuyServiceQuotation;
