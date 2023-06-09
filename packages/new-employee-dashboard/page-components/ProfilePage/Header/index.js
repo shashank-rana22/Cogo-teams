@@ -28,7 +28,7 @@ function Header({
 	const isLoading = loading || isEmpty(detail || {}) || false;
 
 	const offer_letter_active = (offerLetter || []).find((element) => (
-		['approved', 'active','accepted'].includes(element?.status)
+		['approved', 'active', 'accepted'].includes(element?.status)
 	));
 
 	return (
@@ -83,7 +83,7 @@ function Header({
 			</div>
 
 			<div className={styles.button_container}>
-				{(status === 'active' && isEmpty(offer_letter_active) )? (
+				{(status === 'active' && isEmpty(offer_letter_active)) ? (
 					<Button
 						onClick={() => setShowCtcBreakupModal(true)}
 						type="button"
