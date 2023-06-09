@@ -105,8 +105,11 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 
 								return (
 									<div key={key}>
-										{course_stats?.[apiKey]
-										|| getModulesCount({ course_modules, type: 'modules' })}
+										<b>
+											{course_stats?.[apiKey]
+										|| getModulesCount({ course_modules, type: key })}
+										</b>
+										{' '}
 										{label}
 									</div>
 								);

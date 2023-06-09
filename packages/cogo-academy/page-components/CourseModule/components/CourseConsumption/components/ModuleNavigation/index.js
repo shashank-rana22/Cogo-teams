@@ -22,6 +22,7 @@ function ModuleNavigation({
 	showTestData,
 	showFeedback,
 	setShowFeedback,
+	viewType = '',
 }) {
 	const {
 		course_details = {},
@@ -142,28 +143,30 @@ function ModuleNavigation({
 				</div>
 			) : null}
 
-			<div
-				className={`${
-					test_completed || isEmpty(test_mapping || {})
-						? styles.box_active
-						: styles.box_deactive
-				} ${showFeedback ? styles.box_selected : styles.box_notselected}`}
-				role="button"
-				tabIndex="0"
-				onClick={() => {
-					if (test_completed || isEmpty(test_mapping || {})) {
-						setStates({ feedback: true, test: false, Chapter: {} });
-					}
-				}}
-			>
-				{all_chapters_completed && (test_completed || isEmpty(test_mapping || {})) ? (
-					<IcMUnlock height={20} width={20} />
-				) : (
-					<IcMLock height={20} width={20} />
-				)}
+			{viewType !== 'preview' ? (
+				<div
+					className={`${
+						all_chapters_completed && (test_completed || isEmpty(test_mapping || {}))
+							? styles.box_active
+							: styles.box_deactive
+					} ${showFeedback ? styles.box_selected : styles.box_notselected}`}
+					role="button"
+					tabIndex="0"
+					onClick={() => {
+						if (all_chapters_completed && (test_completed || isEmpty(test_mapping || {}))) {
+							setStates({ feedback: true, test: false, Chapter: {} });
+						}
+					}}
+				>
+					{all_chapters_completed && (test_completed || isEmpty(test_mapping || {})) ? (
+						<IcMUnlock height={20} width={20} />
+					) : (
+						<IcMLock height={20} width={20} />
+					)}
 
-				<div className={styles.text}>Course Completion</div>
-			</div>
+					<div className={styles.text}>Course Completion</div>
+				</div>
+			) : null}
 		</div>
 	);
 }
