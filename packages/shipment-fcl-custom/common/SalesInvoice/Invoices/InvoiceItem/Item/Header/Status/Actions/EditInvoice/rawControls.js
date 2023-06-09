@@ -7,7 +7,7 @@ const INITIAL_STATE = 0;
 const LENGTH_CUTOFF = 3;
 
 const handleDisableCond = (charge, isAdminSuperAdmin, shipment_data) => {
-	const disable =	 !isAdminSuperAdmin	&& shipment_data?.serial_id > SERIAL_ID;
+	const disable =	 !isAdminSuperAdmin && shipment_data?.serial_id > SERIAL_ID;
 	return disable;
 };
 
