@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useCommonCreateApi = ({ getCourseModuleDetails }) => {
+const useCommonCreateApi = ({ getCourseModuleDetails, setOpenDetails, moduleId, subModuleId }) => {
 	const [{ loading: loadingModule }, triggerModule] = useRequest({
 		method : 'post',
 		url    : '/create_course_module',
@@ -31,6 +31,10 @@ const useCommonCreateApi = ({ getCourseModuleDetails }) => {
 			await triggerToUse({ data: values });
 
 			await refetchApi();
+
+			if (type === 'chapter') {
+				setOpenDetails({ module: moduleId, sub_module: subModuleId });
+			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}

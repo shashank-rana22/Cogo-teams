@@ -23,6 +23,8 @@ function Chapter({
 	setGetSubModuleRefetch,
 	showButtons,
 	state,
+	setOpenDetails,
+	moduleId,
 }) {
 	const {
 		chapterLoading,
@@ -44,6 +46,8 @@ function Chapter({
 		getSubModuleRefetch,
 		setGetSubModuleRefetch,
 		showButtons,
+		setOpenDetails,
+		moduleId,
 	});
 
 	if (getCourseSubModuleLoading || deleteLoading) {

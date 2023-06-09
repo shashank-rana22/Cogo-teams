@@ -129,7 +129,7 @@ function CourseConsumption({
 							onClick={() => setShowCourse(false)}
 							themeType="accent"
 						>
-							Show curicclum
+							Show curriculum
 						</Button>
 
 						<Button
