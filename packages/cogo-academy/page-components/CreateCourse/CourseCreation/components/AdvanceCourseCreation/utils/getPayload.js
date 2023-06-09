@@ -90,6 +90,7 @@ const getChapterPayload = ({
 				media_url : upload_file.finalUrl,
 				type      : 'downloadable_resource',
 				name      : upload_file.fileName,
+				status    : 'active',
 			},
 		];
 	}
@@ -99,7 +100,7 @@ const getChapterPayload = ({
 
 		external_link.forEach((item) => {
 			if (!isEmpty(item.media_url)) {
-				chapter_attachments.push({ ...item, type: 'external_link' });
+				chapter_attachments.push({ ...item, type: 'external_link', status: 'active' });
 			}
 		});
 	}

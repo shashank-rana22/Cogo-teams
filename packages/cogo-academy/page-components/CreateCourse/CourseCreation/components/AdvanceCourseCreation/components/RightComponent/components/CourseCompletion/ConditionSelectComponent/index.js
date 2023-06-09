@@ -18,8 +18,10 @@ function ConditionSelectComponent({
 	setMultiSelectedEdit,
 	watch,
 }) {
-	const courseCriteria = watch('completion_criteria');
-	const courseReward = watch('course_completion_rewards_details');
+	const {
+		completion_criteria:courseCriteria,
+		course_completion_rewards_details:courseReward,
+	} = watch();
 
 	return (
 		<div className={styles.container}>

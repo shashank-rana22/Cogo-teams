@@ -1,10 +1,11 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 
 const useReportError = ({ setShowErrorModal = () => {} }) => {
-	const { handleSubmit, control, watch, formState: { errors } } = useForm();
+	const { handleSubmit, control, formState: { errors } } = useForm();
 
 	const [{ loading : feedbackLoading }, trigger] = useRequest({
 		url    : '/create_communication',
@@ -12,16 +13,20 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 	}, { manual: true });
 
 	const onSubmit = async (values) => {
+		const { description, error_screenshot_url = {} } = values || {};
+
+		const { finalUrl = '' } = error_screenshot_url || {};
+
 		const payload = {
-			user_id       : '20f59087-12cf-4e6d-8463-27d41e23da6f',
+			user_id       : GLOBAL_CONSTANTS.uuid.cogo_course_notification_id,
 			type          : 'platform_notification',
 			service       : 'user',
-			service_id    : '97dcd57c-d263-496f-9f59-7a7aef400d34',
+			service_id    : GLOBAL_CONSTANTS.uuid.cogo_course_notification_id,
 			template_name : 'api_error_request_response',
 			provider_name : 'cogoport',
 			variables     : {
-				description       : values?.description,
-				image_url         : values?.error_screenshot_url?.finalUrl || '',
+				description,
+				image_url         : finalUrl,
 				status_code       : 1,
 				session_data      : '',
 				requested_payload : '',
@@ -34,6 +39,7 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 			await trigger({
 				data: payload,
 			});
+
 			Toast.success('Your Report Was Submitted Successfully...');
 			setShowErrorModal(false);
 		} catch (error) {
@@ -44,10 +50,10 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 	const reportError = async () => {
 		try {
 			const payload = {
-				user_id       : '20f59087-12cf-4e6d-8463-27d41e23da6f',
+				user_id       : GLOBAL_CONSTANTS.uuid.cogo_course_notification_id,
 				type          : 'platform_notification',
 				service       : 'user',
-				service_id    : '97dcd57c-d263-496f-9f59-7a7aef400d34',
+				service_id    : GLOBAL_CONSTANTS.uuid.cogo_course_notification_id,
 				template_name : 'api_error_request_response',
 				provider_name : 'cogoport',
 				variables     : {

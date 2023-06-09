@@ -1,4 +1,4 @@
-import { IcMArrowRight, IcMDownload } from '@cogoport/icons-react';
+import { IcMArrowRight } from '@cogoport/icons-react';
 
 const BUTTON_CONTENT_MAPPING = {
 	default: {

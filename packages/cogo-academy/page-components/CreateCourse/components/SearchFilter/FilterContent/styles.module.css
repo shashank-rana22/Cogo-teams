@@ -1,7 +1,7 @@
 .filter_container {
 	:global {
-		.ui_select_container {
-			width: 220px;
+		.ui_multiselect_container {
+			width: 240px;
 		}
 	}
 }

@@ -3,15 +3,12 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback, useEffect } from 'react';
 
-function useListCogoAcademyCourses({ filters }) {
+function useListCogoAcademyCourses({ filters, activeTab }) {
 	const { query, debounceQuery } = useDebounceQuery();
 
 	const [params, setParams] = useState({
 		page                    : 1,
 		course_details_required : true,
-		filters                 : {
-			status: ['active', 'inactive'],
-		},
 	});
 
 	const [input, setInput] = useState('');
@@ -40,8 +37,10 @@ function useListCogoAcademyCourses({ filters }) {
 	}, [query, params, filters, trigger]);
 
 	useEffect(() => {
-		fetchList();
-	}, [fetchList]);
+		if (activeTab === 'courses') {
+			fetchList();
+		}
+	}, [activeTab, fetchList]);
 
 	return {
 		data,

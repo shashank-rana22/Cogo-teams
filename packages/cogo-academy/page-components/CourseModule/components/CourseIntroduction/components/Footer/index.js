@@ -7,18 +7,30 @@ import useUpdateUserCourseProgress from '../../../CourseConsumption/hooks/useUpd
 
 import styles from './styles.module.css';
 
+const FIRST_INDEX = 0;
+
 export function Footer({ course_id, user_id, data = {} }) {
 	const router = useRouter();
 
-	const { course_details = {} } = data;
+	const { course_details = {}, course_modules = [] } = data;
 
 	const { created_at = '', updated_at = '' } = course_details;
 
-	console.log('data', data);
 	const {
 		courseProgressUpdateLoading : loading,
 		updateCourseProgress,
 	} = useUpdateUserCourseProgress({ course_id, user_id });
+
+	const onClickBeginCourse = async () => {
+		await updateCourseProgress({
+			next_chapter_id: course_modules?.[FIRST_INDEX]
+				.course_sub_modules?.[FIRST_INDEX].course_sub_module_chapters?.[FIRST_INDEX].id,
+
+			next_chapter_state: 'ongoing',
+		});
+
+		router.push(`/learning/course/${course_id}`);
+	};
 
 	return (
 		<div className={styles.container}>
@@ -44,16 +56,9 @@ export function Footer({ course_id, user_id, data = {} }) {
 				className={styles.btn}
 				themeType="accent"
 				size="lg"
+				type="button"
 				loading={loading}
-				onClick={() => {
-					router.push(`/learning/course/${course_id}`);
-					updateCourseProgress({
-						next_chapter_id: data?.course_modules?.[0]
-							.course_sub_modules?.[0].course_sub_module_chapters?.[0].id,
-
-						next_chapter_state: 'ongoing',
-					});
-				}}
+				onClick={onClickBeginCourse}
 			>
 				Begin Course
 			</Button>

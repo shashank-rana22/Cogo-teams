@@ -1,12 +1,16 @@
+const COUNT_VALUE = 1;
+
 const notCompletedChapter = (data = {}, indexes = {}, setIndexes = () => {}) => {
 	let count = 0;
 
-	data?.course_modules.forEach((module, modIndex) => {
+	const { course_modules = [] } = data || {};
+
+	course_modules.forEach((module, modIndex) => {
 		module.course_sub_modules.forEach((subModule, subModIndex) => {
 			subModule.course_sub_module_chapters.forEach((chapter, chapIndex) => {
 				if (chapter.user_progress_state !== 'completed') {
-					count += 1;
-					if (count === 1) {
+					count += COUNT_VALUE;
+					if (count === COUNT_VALUE) {
 						setIndexes({
 							moduleIndex    : modIndex,
 							subModuleIndex : subModIndex,
@@ -20,7 +24,7 @@ const notCompletedChapter = (data = {}, indexes = {}, setIndexes = () => {}) => 
 
 	const { moduleIndex, subModuleIndex, chapterIndex } = indexes;
 
-	return data?.course_modules[moduleIndex]
+	return course_modules[moduleIndex]
 		?.course_sub_modules[subModuleIndex]?.course_sub_module_chapters[chapterIndex];
 };
 

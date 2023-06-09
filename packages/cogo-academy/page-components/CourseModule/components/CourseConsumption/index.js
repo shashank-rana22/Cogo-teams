@@ -46,6 +46,10 @@ function CourseConsumption({
 		return <EmptyState />;
 	}
 
+	const { course_user_mapping = {} } = finalData || {};
+
+	const { state: courseState = '' } = course_user_mapping || {};
+
 	return (
 		<>
 			{viewType !== 'preview' ? (
@@ -70,7 +74,6 @@ function CourseConsumption({
 						showTestData={showTestData}
 						showFeedback={showFeedback}
 						setShowFeedback={setShowFeedback}
-						redirect_chapter_details={finalData?.redirect_chapter_details || {}}
 					/>
 
 					<ModuleContent
@@ -93,11 +96,12 @@ function CourseConsumption({
 						showFeedback={showFeedback}
 						setShowFeedback={setShowFeedback}
 						course_id={course_id}
+						courseState={courseState}
 
 					/>
 				</div>
 
-				{viewType !== 'preview' && !(showFeedback || showTestData) ? (
+				{viewType !== 'preview' && courseState !== 'completed' && !(showFeedback || showTestData) ? (
 					<Footer
 						course_id={course_id}
 						data={finalData}
@@ -112,6 +116,8 @@ function CourseConsumption({
 						setEditorValue={setEditorValue}
 						setEditorError={setEditorError}
 						setChapter={setChapter}
+						setShowTestData={setShowTestData}
+						setShowFeedback={setShowFeedback}
 					/>
 				) : null}
 

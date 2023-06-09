@@ -192,6 +192,7 @@ const navigationMappingAdmin = {
 			...apis.checkout_promotions,
 			...apis.export_factoring,
 			...apis.app_saas_cogo_subscription,
+			...apis.sales_dashboard,
 
 		],
 		main_apis: [
@@ -1126,7 +1127,7 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
-				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback],
+				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
 			},
 			{
 				key           : 'coe-bn_salvage',
@@ -1353,8 +1354,8 @@ const navigationMappingAdmin = {
 			{
 				key           : 'coe-kam_desk',
 				title         : 'KAM Desk',
-				href          : '/kam-desk',
-				as            : '/kam-desk',
+				href          : '/v2/kam-desk',
+				as            : '/v2/kam-desk',
 				type          : 'link',
 				main_apis     : ['list_kam_desk_shipments'],
 				possible_apis : [...apis.kam_desk, ...apis.search, ...apis.cogolens],
@@ -1431,6 +1432,7 @@ const navigationMappingAdmin = {
 			...apis.cogopoints,
 			...apis.checkout_promotions,
 			...apis.export_factoring,
+			...apis.sales_dashboard,
 		],
 		module_type: 'crm',
 	},
@@ -2042,6 +2044,16 @@ const navigationMappingAdmin = {
 		possible_apis : apis.manage_rfq,
 		module_type   : 'dashboards',
 	},
+	rfq_dashboard: {
+		key           : 'rfq_dashboard',
+		title         : 'RFQ Dashboard',
+		href          : '/v2/rfq-dashboard',
+		as            : '/v2/rfq-dashboard',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.rfq_dashboard,
+		module_type   : 'dashboards',
+	},
 	contract_rates: {
 		key       : 'contract_rates',
 		title     : 'Contract Rates',
@@ -2326,6 +2338,14 @@ const navigationMappingAdmin = {
 				as            : '/v2/referral/dashboard',
 				type          : 'link',
 				possible_apis : apis.referral_dashboard,
+			},
+			{
+				key           : 'referral-simulation',
+				title         : 'Simulation',
+				href          : '/v2/referral/simulation',
+				as            : '/v2/referral/simulation',
+				type          : 'link',
+				possible_apis : apis.referral_simulation,
 			},
 		],
 	},

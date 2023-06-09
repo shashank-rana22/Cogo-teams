@@ -14,7 +14,7 @@ function ShipmentView({ row }) {
 	return (
 		<div className={styles.field_pair}>
 
-			{(getByKey(row, 'sidNo') as string).length > CHECK_MAX_VALUE ? (
+			{(getByKey(row, 'sidNo') as string)?.length > CHECK_MAX_VALUE ? (
 				<Tooltip
 					interactive
 					placement="top"
@@ -49,7 +49,7 @@ function ShipmentView({ row }) {
 					</div>
 				)}
 
-			{startCase(getByKey(row, 'serviceType') as string).length > CHECK_MAX_VALUE ? (
+			{startCase(getByKey(row, 'serviceType') as string)?.length > CHECK_MAX_VALUE ? (
 				<Tooltip
 					interactive
 					placement="top"

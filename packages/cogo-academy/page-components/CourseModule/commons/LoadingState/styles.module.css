@@ -1,6 +1,7 @@
 .card_container {
-	padding: 10px 12px;
+	padding: 20px;
 	margin-top: 10px;
+	cursor: pointer;
 	background: rgb(255 255 255 / 70%);
 	border: 1px solid #e0e0e0;
 	border-radius: 6px;

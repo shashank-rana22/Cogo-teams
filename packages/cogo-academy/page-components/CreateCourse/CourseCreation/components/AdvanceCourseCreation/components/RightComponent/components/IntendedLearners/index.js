@@ -40,6 +40,7 @@ function IntendedLearners({ id, data = {}, activeTab, getCogoAcademyCourse, stat
 				if (name === 'upload_excel') {
 					return (
 						<ExcelComponent
+							key={name}
 							Element={Element}
 							name={name}
 							label={label}

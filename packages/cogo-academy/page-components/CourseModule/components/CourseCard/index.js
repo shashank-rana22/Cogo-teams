@@ -2,18 +2,27 @@ import { Pill, Button, Tooltip, ProgressBar } from '@cogoport/components';
 import { IcMStarfull, IcMBookmark, IcMFolder, IcCWaitForSometime } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 
+import GET_LINK_MAPPING from '../../configs/GET_LINK_MAPPING';
 import useUpdateUserCourse from '../../hooks/useUpdateUserCourse';
 import toFixed from '../../utils/toFixed';
 
 import styles from './styles.module.css';
 
-function ToolTipContent({ faq_topics }) {
+const MAXIMUM_PROGRESS_PRECENTAGE = 100;
+
+const MAX_ITEMS_TO_SHOW = 2;
+
+const ROUND_OF_DIGITS = 2;
+
+const SINGULAR_VALUE = 1;
+
+function ToolTipContent({ faq_topics = [] }) {
 	return (
 		<>
-			{(faq_topics || []).map((item, index) => {
+			{faq_topics.map((item, index) => {
 				const { id, display_name } = item;
 
-				return index >= 1 ? (
+				return index >= SINGULAR_VALUE ? (
 					<Pill key={id} size="md" color="#EBEBEB">
 						{display_name}
 					</Pill>
@@ -26,7 +35,6 @@ function ToolTipContent({ faq_topics }) {
 function CourseCard({
 	data = {},
 	buttonContent = {},
-	handleClick = () => {},
 	fetchList,
 	viewType = '',
 }) {
@@ -35,10 +43,12 @@ function CourseCard({
 	const {
 		cogo_academy_course = {},
 		cogo_academy_course_id: course_id = '',
-		user_progress,
+		user_progress = 0,
 		state,
 		modules_count = 0,
-	} = data;
+		average_rating = 0,
+		is_saved = false,
+	} = data || {};
 
 	const {
 		faq_topics = [],
@@ -47,7 +57,7 @@ function CourseCard({
 		course_categories = [],
 		thumbnail_url = '',
 		course_completion_duration = {},
-	} = cogo_academy_course;
+	} = cogo_academy_course || {};
 
 	const { course_completion_unit, course_completion_value } = course_completion_duration;
 
@@ -55,11 +65,7 @@ function CourseCard({
 
 	const { updateUserCourse } = useUpdateUserCourse({ fetchList });
 
-	let finalUserProgress = user_progress;
-
-	if (finalUserProgress > 100) {
-		finalUserProgress = 100;
-	}
+	const finalUserProgress = Math.min(user_progress, MAXIMUM_PROGRESS_PRECENTAGE);
 
 	return (
 		<div className={`${styles.container} ${styles[viewType]}`}>
@@ -70,9 +76,10 @@ function CourseCard({
 				<div className={styles.topics_rating_container}>
 					<div className={styles.topics}>
 						{faq_topics.map((topic, index) => {
-							if (index > 0 && faq_topics.length > 2) {
+							if (index && faq_topics.length > MAX_ITEMS_TO_SHOW) {
 								return null;
 							}
+
 							const { id, display_name } = topic;
 							return (
 								<Pill key={id} size="md" color="#EBEBEB">
@@ -81,41 +88,41 @@ function CourseCard({
 							);
 						})}
 
-						{faq_topics.length > 2 ? (
+						{faq_topics.length > MAX_ITEMS_TO_SHOW ? (
 							<Tooltip
 								interactive
 								content={<ToolTipContent faq_topics={faq_topics} />}
 								placement="top"
 								className={styles.tooltip}
 							>
-								<Pill color="#EBEBEB">{`+${faq_topics.length - 1} More`}</Pill>
+								<Pill color="#EBEBEB">{`+${faq_topics.length - SINGULAR_VALUE} More`}</Pill>
 							</Tooltip>
 						) : null}
 					</div>
 
-					{data?.average_rating ? (
+					{average_rating ? (
 						<div className={styles.rating}>
 							<IcMStarfull style={{ marginRight: '6px' }} fill="#fcdc00" />
-							<span style={{ color: '#fcdc00' }}>{data?.average_rating}</span>
+							<span style={{ color: '#fcdc00' }}>{average_rating}</span>
 						</div>
 					) : null}
 				</div>
 
 				<div
-					className={data?.is_saved ? styles.saved : styles.save}
+					className={is_saved ? styles.saved : styles.save}
 					role="button"
 					tabIndex="0"
 					onClick={() => {
-						updateUserCourse(data?.id, data?.is_saved);
+						updateUserCourse({ course_user_mapping_id: data?.id, saved: is_saved });
 					}}
 				>
-					<div className={data?.is_saved ? styles.saved_div : styles.not_saved}>
+					<div className={is_saved ? styles.saved_div : styles.not_saved}>
 						<IcMBookmark
-							fill={data?.is_saved ? '#000' : '#fff'}
+							fill={is_saved ? '#000' : '#fff'}
 							style={{ marginRight: '6px' }}
 						/>
 
-						<div>{data?.is_saved ? 'Saved' : 'Save'}</div>
+						<div>{is_saved ? 'Saved' : 'Save'}</div>
 					</div>
 				</div>
 			</div>
@@ -123,7 +130,7 @@ function CourseCard({
 			<div className={styles.details}>
 				<div className={styles.categories_container}>
 					{course_categories.map((topic, index) => {
-						if (index > 1 && course_categories.length > 2) {
+						if (index > SINGULAR_VALUE && course_categories.length > MAX_ITEMS_TO_SHOW) {
 							return null;
 						}
 						const { id, display_name } = topic;
@@ -134,7 +141,7 @@ function CourseCard({
 						);
 					})}
 
-					{course_categories.length > 2 ? (
+					{course_categories.length > MAX_ITEMS_TO_SHOW ? (
 						<div className={`${styles.category_name} ${styles.more}`}>
 							<Tooltip
 								interactive
@@ -142,7 +149,7 @@ function CourseCard({
 								placement="top"
 								className={styles.tooltip}
 							>
-								{`+${course_categories.length - 2} More`}
+								{`+${course_categories.length - MAX_ITEMS_TO_SHOW} More`}
 							</Tooltip>
 						</div>
 					) : null}
@@ -155,10 +162,10 @@ function CourseCard({
 					{state === 'ongoing' ? (
 						<>
 							<div className={styles.remaining_text}>
-								{toFixed(100 - Number(finalUserProgress), 2)}
+								{toFixed(MAXIMUM_PROGRESS_PRECENTAGE - Number(finalUserProgress), ROUND_OF_DIGITS)}
 								% Remaining
 							</div>
-							<ProgressBar progress={toFixed(finalUserProgress, 2)} uploadText=" " />
+							<ProgressBar progress={toFixed(finalUserProgress, ROUND_OF_DIGITS)} uploadText=" " />
 						</>
 					) : null}
 
@@ -169,7 +176,7 @@ function CourseCard({
 								{modules_count}
 								{' '}
 								Module
-								{modules_count === 1 ? '' : 's'}
+								{modules_count === SINGULAR_VALUE ? '' : 's'}
 							</div>
 						</div>
 
@@ -179,7 +186,7 @@ function CourseCard({
 								{course_completion_value}
 								{' '}
 								{course_completion_unit}
-								{course_completion_value === 1 ? '' : 's'}
+								{course_completion_value === SINGULAR_VALUE ? '' : 's'}
 							</div>
 						</div>
 					</div>
@@ -203,7 +210,7 @@ function CourseCard({
 						themeType="secondary"
 						className={`${styles.btn} primary_button`}
 						onClick={() => {
-							handleClick(course_id);
+							router.push(GET_LINK_MAPPING({ state, course_id }));
 						}}
 					>
 						<div className={styles.btn_text}>{primaryBtnText}</div>

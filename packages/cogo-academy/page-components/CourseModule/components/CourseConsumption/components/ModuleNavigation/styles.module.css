@@ -23,6 +23,7 @@
 
 .container {
 	width: 30%;
+	overflow: auto;
 
 	:global {
 		.ui_accordion_container {
@@ -42,13 +43,6 @@
 		.ui_accordion_content {
 			padding-left: 64px;
 			background-color: #fff;
-
-			/* background: #FFF;
-
-      &:hover{
-        background: #FFFCE6;
-        cursor: pointer;
-      } */
 		}
 	}
 }
@@ -116,7 +110,6 @@
 
 .box_active {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	padding: 12px 24px;
 	margin-bottom: 10px;
@@ -130,12 +123,11 @@
 }
 
 .box_notselected {
-	background: white;
+	background: #fff;
 }
 
 .box_deactive {
 	display: flex;
-	flex-direction: row;
 	align-items: center;
 	padding: 12px 24px;
 	margin-bottom: 10px;

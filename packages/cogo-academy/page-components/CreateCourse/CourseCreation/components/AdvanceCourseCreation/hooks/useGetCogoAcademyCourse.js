@@ -1,6 +1,6 @@
 import { useRequest } from '@cogoport/request';
 
-const useGetCogoAcademyCourse = (id) => {
+const useGetCogoAcademyCourse = ({ id }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_cogo_academy_course',
 		method : 'GET',

@@ -7,6 +7,10 @@ import useGetUserSubmissionStats from '../hooks/useGetUserSubmissionStats';
 
 import styles from './styles.module.css';
 
+const TIME_UNIT = 60;
+
+const TIME_MAX_LENGTH = 2;
+
 function Completion() {
 	const {
 		query: { test_id, from },
@@ -29,11 +33,15 @@ function Completion() {
 		total_questions,
 	} = data?.data || {};
 
-	const hours = Math.floor(parseInt(time_taken, 10) / 60);
+	const hours = Math.floor(parseInt(time_taken, 10) / TIME_UNIT);
 
-	const remainingMinutes = parseInt(time_taken, 10) % 60;
+	const remainingMinutes = parseInt(time_taken, 10) % TIME_UNIT;
 
-	const formattedTime = `${hours.toString().padStart(2, '0')} : ${remainingMinutes.toString().padStart(2, '0')} hr`;
+	const formattedTime = `${hours
+		.toString()
+		.padStart(TIME_MAX_LENGTH, '0')} : ${remainingMinutes
+		.toString()
+		.padStart(TIME_MAX_LENGTH, '0')} hr`;
 
 	const STATS_MAPPING = {
 		answered: {
@@ -89,7 +97,7 @@ function Completion() {
 						const { title, value } = stats_data;
 
 						return (
-							<div className={styles.content}>
+							<div key={title} className={styles.content}>
 								<div className={styles.label}>
 									{title}
 								</div>

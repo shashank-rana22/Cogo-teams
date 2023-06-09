@@ -4,11 +4,19 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const ContentType_Mapping = {
-	document     : <IcMDocument width="24px" height="24px" fill="#fff" />,
-	video        : <IcMVideoCall width="24px" height="24px" fill="#fff" />,
-	presentation : <IcMPpt width="24px" height="24px" fill="#fff" />,
-	text         : <IcMText width="24px" height="24px" fill="#fff" />,
+const INDEX_TO_VALUE_DIFF = 1;
+
+const ICON_PROPS = {
+	width  : 24,
+	height : 24,
+	fill   : '#fff',
+};
+
+const CONTENT_TYPE_MAPPING = {
+	document     : <IcMDocument {...ICON_PROPS} />,
+	video        : <IcMVideoCall {...ICON_PROPS} />,
+	presentation : <IcMPpt {...ICON_PROPS} />,
+	text         : <IcMText {...ICON_PROPS} />,
 };
 
 function CourseCurriculum({ data = {} }) {
@@ -27,7 +35,7 @@ function CourseCurriculum({ data = {} }) {
 									<div className={styles.light}>
 										Module
 										{' '}
-										{index + 1}
+										{index + INDEX_TO_VALUE_DIFF}
 										.&nbsp;
 									</div>
 									<div>{item.name}</div>
@@ -60,7 +68,7 @@ function CourseCurriculum({ data = {} }) {
 											<div className={styles.light}>
 												Sub Module
 												{' '}
-												{subIndex + 1}
+												{subIndex + INDEX_TO_VALUE_DIFF}
 												.&nbsp;
 											</div>
 											<div>{subItem.name}</div>
@@ -71,7 +79,7 @@ function CourseCurriculum({ data = {} }) {
 									{ subItem?.course_sub_module_chapters?.map((itemChapter) => (
 										<div className={styles.databox} key={itemChapter?.id}>
 											<div className={styles.databox_image}>
-												{ContentType_Mapping[itemChapter?.content_type]}
+												{CONTENT_TYPE_MAPPING[itemChapter?.content_type]}
 											</div>
 											<div className={styles.databox_content}>
 												{itemChapter?.name}
@@ -86,7 +94,7 @@ function CourseCurriculum({ data = {} }) {
 				</div>
 			))}
 
-			{!isEmpty(course_details.tests || {}) ? (
+			{!isEmpty(course_details.tests || []) ? (
 				<div className={styles.bottom_box}>
 					<div>
 						Course Completion Test

@@ -1,32 +1,51 @@
-const getChapter = ({ data = {}, indexes, state = 'curr', setIndexes = () => {} }) => {
+const WRONG_INDEX_VALUE = -1;
+
+const INITIAL_INDEX_VALUE = 0;
+
+const INDEX_INCREMENT_VALUE = 1;
+
+const getChapter = ({
+	data = {},
+	indexes,
+	state = 'curr',
+	setIndexes = () => {},
+}) => {
 	let { moduleIndex, subModuleIndex, chapterIndex } = indexes;
 
+	const { course_modules = [] } = data || {};
+
 	if (state === 'prev') {
-		chapterIndex -= 1;
+		chapterIndex -= INDEX_INCREMENT_VALUE;
 
-		if (chapterIndex === -1) {
-			subModuleIndex -= 1;
+		if (chapterIndex === WRONG_INDEX_VALUE) {
+			subModuleIndex -= INDEX_INCREMENT_VALUE;
 
-			if (subModuleIndex === -1) {
-				moduleIndex -= 1;
-				subModuleIndex = (data?.course_modules?.[moduleIndex]?.course_sub_modules?.length || 0) - 1;
+			if (subModuleIndex === WRONG_INDEX_VALUE) {
+				moduleIndex -= INDEX_INCREMENT_VALUE;
+				subModuleIndex = (course_modules[moduleIndex]?.course_sub_modules || []).length
+					- INDEX_INCREMENT_VALUE;
 			}
 
-			chapterIndex = (data?.course_modules?.[moduleIndex]
-				?.course_sub_modules?.[subModuleIndex]?.course_sub_module_chapters?.length || 0) - 1;
+			chapterIndex = (course_modules[moduleIndex]?.course_sub_modules?.[subModuleIndex]
+				?.course_sub_module_chapters.length || []) - INDEX_INCREMENT_VALUE;
 		}
 	} else if (state === 'next') {
-		chapterIndex += 1;
+		chapterIndex += INDEX_INCREMENT_VALUE;
 
-		if (chapterIndex === data?.course_modules?.[moduleIndex]
-			?.course_sub_modules?.[subModuleIndex]?.course_sub_module_chapters?.length) {
-			chapterIndex = 0;
-			subModuleIndex += 1;
+		if (
+			chapterIndex
+			=== course_modules[moduleIndex]?.course_sub_modules?.[subModuleIndex]
+				?.course_sub_module_chapters?.length
+		) {
+			chapterIndex = INITIAL_INDEX_VALUE;
+			subModuleIndex += INDEX_INCREMENT_VALUE;
 
-			if (subModuleIndex === data?.course_modules?.[moduleIndex]
-				?.course_sub_modules?.length) {
-				subModuleIndex = 0;
-				moduleIndex += 1;
+			if (
+				subModuleIndex
+				=== course_modules[moduleIndex]?.course_sub_modules?.length
+			) {
+				subModuleIndex = INITIAL_INDEX_VALUE;
+				moduleIndex += INDEX_INCREMENT_VALUE;
 			}
 		}
 	}
@@ -37,8 +56,8 @@ const getChapter = ({ data = {}, indexes, state = 'curr', setIndexes = () => {} 
 		chapterIndex,
 	});
 
-	const chapterContent = data?.course_modules?.[moduleIndex]
-		?.course_sub_modules?.[subModuleIndex]?.course_sub_module_chapters?.[chapterIndex];
+	const chapterContent = data?.course_modules[moduleIndex]?.course_sub_modules?.[subModuleIndex]
+		?.course_sub_module_chapters?.[chapterIndex];
 
 	return chapterContent;
 };

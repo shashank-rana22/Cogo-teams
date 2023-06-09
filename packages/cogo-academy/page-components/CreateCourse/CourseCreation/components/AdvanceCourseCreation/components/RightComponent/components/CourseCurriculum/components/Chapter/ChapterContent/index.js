@@ -47,7 +47,7 @@ function ChapterContent({
 				<div className={styles.error_text}>
 					** This course is currently published,
 					{' '}
-					{completed_user_count || 0}
+					{completed_user_count}
 					{' '}
 					users have already completed this chapter, editing this will effect them
 				</div>
@@ -77,7 +77,7 @@ function ChapterContent({
 
 									return (
 										<div
-											key={name}
+											key={subControlName}
 											className={`${styles.form_group} ${styles[subControlName]}`}
 										>
 											<div

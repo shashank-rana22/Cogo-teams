@@ -23,6 +23,10 @@ function FilterContent({
 
 				const Element = getFieldController(type);
 
+				if (!Element) {
+					return null;
+				}
+
 				return (
 					<div key={name}>
 						<div className={styles.title}>{label}</div>

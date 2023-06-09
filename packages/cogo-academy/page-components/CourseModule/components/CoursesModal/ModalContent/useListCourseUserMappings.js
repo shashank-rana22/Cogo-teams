@@ -18,9 +18,10 @@ function useListCourseUserMappings({ user_id }) {
 			trigger({
 				params: {
 					filters: {
-						status: 'active',
+						status       : 'active',
 						user_id,
 						course_category_id,
+						course_state : 'published',
 					},
 				},
 			});

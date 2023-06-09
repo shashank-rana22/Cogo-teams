@@ -6,18 +6,9 @@ const controls = [
 		subControls : [
 			{
 				label : 'Confirm Course Title',
-				name  : 'course_title',
+				name  : 'name',
 				type  : 'text',
 				rules : { required: { value: true, message: 'This is required' } },
-			},
-			{
-				label    : 'Confirm Course Categories',
-				name     : 'course_categories',
-				type     : 'asyncSelect',
-				asyncKey : 'list_course_categories',
-				multiple : true,
-				options  : [],
-				rules    : { required: { value: true, message: 'This is required' } },
 			},
 		],
 	},

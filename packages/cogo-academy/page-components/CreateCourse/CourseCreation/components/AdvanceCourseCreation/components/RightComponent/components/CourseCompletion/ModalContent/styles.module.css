@@ -4,7 +4,6 @@
 
 .button_container {
 	display: flex;
-	gap: 10px;
 	justify-content: flex-end;
 }
 
@@ -27,4 +26,8 @@
 	top: 12px;
 	right: 12px;
 	cursor: pointer;
+}
+
+.action_buttons {
+	margin-left: 10px;
 }

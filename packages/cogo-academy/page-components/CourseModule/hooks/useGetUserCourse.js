@@ -15,14 +15,18 @@ const useGetUserCourse = ({ course_id, user_id, viewType }) => {
 
 	const getUserCourse = useCallback(async () => {
 		try {
-			await trigger({
+			const res = await trigger({
 				params: {
 					course_id,
 					user_id,
 				},
 			});
+
+			return res;
 		} catch (error) {
 			Toast.error(getApiErrorString(error));
+
+			return { hasError: true, data: { all_chapters_completed: false } };
 		}
 	}, [trigger, user_id, course_id]);
 

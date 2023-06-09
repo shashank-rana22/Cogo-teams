@@ -8,7 +8,7 @@ const useListCourseCategory = () => {
 		url    : '/list_course_categories',
 		method : 'GET',
 		params : {
-			page_limit           : 100000000000000,
+			page_limit           : 1000,
 			filters              : { user_id },
 			topics_data_required : true,
 			status               : 'active',
@@ -21,7 +21,7 @@ const useListCourseCategory = () => {
 		{
 			display_name       : 'All Courses',
 			name               : 'all_courses',
-			id                 : 'all_courses', // new Date().getTime(),
+			id                 : 'all_courses',
 			is_course_category : false,
 		},
 		...(list || []),

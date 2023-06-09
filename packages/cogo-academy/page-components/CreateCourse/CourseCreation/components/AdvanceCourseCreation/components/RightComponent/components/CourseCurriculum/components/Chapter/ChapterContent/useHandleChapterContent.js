@@ -13,6 +13,8 @@ if (typeof window !== 'undefined') {
 
 const MAPPING = ['name', 'description', 'content_type', 'completion_duration_value', 'completion_duration_unit'];
 
+const FIRST_INDEX = 0;
+
 const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, index, state }) => {
 	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 	const [assessmentValue, setAssessmentvalue] = useState(RichTextEditor.createEmptyValue());
@@ -70,13 +72,13 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 		}
 
 		if (!isEmpty(chapter_attachments)) {
-			const { type, media_url } = chapter_attachments[0] || {};
+			const { type, media_url } = chapter_attachments[FIRST_INDEX] || {};
 
 			if (type === 'downloadable_resource') {
 				setValue('additional_resources', false);
 				setValue('upload_file', media_url);
 			} else {
-				chapter_attachments.forEach((item, itemIndex) => {
+				chapter_attachments.filter((item) => item.status === 'active').forEach((item, itemIndex) => {
 					const childKey = `external_link.${itemIndex}`;
 
 					setValue(`${childKey}.name`, item.name);
@@ -109,7 +111,7 @@ const useHandleChapterContent = ({ chapterContent, onSaveChapter, subModuleId, i
 		const { chapter_attachments = [] } = chapterContent || {};
 
 		if (!isEmpty(chapter_attachments)) {
-			const { type, name: additional_resources_title, media_url } = chapter_attachments[0] || {};
+			const { type, name: additional_resources_title, media_url } = chapter_attachments[FIRST_INDEX] || {};
 
 			if (type === 'downloadable_resource' && !additionalResourcesWatch) {
 				setValue('additional_resources', false);

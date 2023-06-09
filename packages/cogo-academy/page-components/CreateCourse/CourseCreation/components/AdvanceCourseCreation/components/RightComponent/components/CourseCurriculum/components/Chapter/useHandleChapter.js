@@ -8,6 +8,8 @@ import useCommonUpdateApi from '../../../../../../hooks/useCommonUpdateApi';
 import useGetCourseSubModule from '../../../../../../hooks/useGetCourseSubModule';
 import getPayload from '../../../../../../utils/getPayload';
 
+const MINIMUM_CHAPTERS = 1;
+
 const useHandleChapter = ({
 	subModule,
 	getLoading,
@@ -74,7 +76,7 @@ const useHandleChapter = ({
 	};
 
 	const deleteChapter = ({ child, length }) => {
-		if (length === 1) {
+		if (length === MINIMUM_CHAPTERS) {
 			Toast.error('cannot delete as there should be atleast one chapter');
 			return;
 		}

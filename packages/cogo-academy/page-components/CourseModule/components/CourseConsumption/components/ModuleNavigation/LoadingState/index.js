@@ -1,9 +1,11 @@
 import { Placeholder } from '@cogoport/components';
 
+const NUMBER_OF_ROWS = 7;
+
 function LoadingState() {
 	return (
 		<div>
-			{[...Array(7).keys()].map((key) => (
+			{[...Array(NUMBER_OF_ROWS).keys()].map((key) => (
 				<Placeholder
 					key={key}
 					height="40px"

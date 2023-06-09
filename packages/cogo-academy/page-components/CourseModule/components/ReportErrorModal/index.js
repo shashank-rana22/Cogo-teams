@@ -30,6 +30,7 @@ function CoursesModal({
 				<Button
 					size="md"
 					themeType="primary"
+					type="button"
 					onClick={handleSubmit(onSubmit)}
 					loading={feedbackLoading}
 				>

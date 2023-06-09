@@ -11,6 +11,8 @@ import controls from './controls';
 import styles from './styles.module.css';
 import useHandleModule from './useHandleModule';
 
+const INDEX_TO_VALUE_DIFF = 1;
+
 function ModuleComponent({
 	module,
 	handleDragStart,
@@ -73,7 +75,7 @@ function ModuleComponent({
 					<div className={styles.edit_text}>
 						Edit - Module
 						{' '}
-						{nodeIndex + 1}
+						{nodeIndex + INDEX_TO_VALUE_DIFF}
 					</div>
 				) : null}
 
@@ -163,7 +165,7 @@ function ModuleComponent({
 					>
 						<IcMDrag className={styles.icon} />
 						<div className={`${styles.left} ${styles.flex}`}>
-							{`Module ${nodeIndex + 1}:`}
+							{`Module ${nodeIndex + INDEX_TO_VALUE_DIFF}:`}
 							{' '}
 							<b className={styles.name}>{module.name}</b>
 						</div>

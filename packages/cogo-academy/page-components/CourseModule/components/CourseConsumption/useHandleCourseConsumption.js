@@ -34,13 +34,13 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 		moduleIndex    : 0,
 		subModuleIndex : 0,
 		chapterIndex   : 0,
+		isNew          : true,
 	});
 
 	const [currentCategory, setCurrentCategory] = useState('all_courses');
 
-	const { moduleIndex, subModuleIndex, chapterIndex } = indexes;
-	const [showTestData, setShowTestData] = useState();
-	const [showFeedback, setShowFeedback] = useState();
+	const [showTestData, setShowTestData] = useState(false);
+	const [showFeedback, setShowFeedback] = useState(false);
 
 	const {
 		data = {},
@@ -63,32 +63,67 @@ const useHandleCourseConsumption = ({ courseData, courseLoading, trigger, viewTy
 
 	const { finalData = {}, finalLoading, refetchApi } =	MAPPING[viewType] || MAPPING.normal;
 
+	const {
+		all_chapters_completed = false,
+		test_mapping = {},
+		test_completed = false,
+		redirect_chapter_details = {},
+		course_modules = [],
+	} = finalData || {};
+
 	const { courseProgressUpdateLoading, updateCourseProgress } = useUpdateUserCourseProgress({ course_id, user_id });
 
+	const { moduleIndex, subModuleIndex, chapterIndex, isNew = false } = indexes;
+
 	useEffect(() => {
-		if (!isEmpty(finalData)) {
+		if (!isEmpty(finalData) && !isEmpty(indexes)) {
 			setChapter(
-				finalData?.course_modules?.[moduleIndex]?.course_sub_modules[
-					subModuleIndex
-				]?.course_sub_module_chapters[chapterIndex],
+				course_modules?.[moduleIndex]?.course_sub_modules[subModuleIndex]
+					?.course_sub_module_chapters[chapterIndex],
 			);
-			if (finalData?.all_chapters_completed
-				&& finalData?.test_completed) {
+
+			if (all_chapters_completed && test_completed && isNew) {
 				setShowFeedback(true);
 			}
 		}
-		// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [finalData]);
-
-	const { redirect_chapter_details = {} } = finalData;
+	}, [
+		all_chapters_completed,
+		chapterIndex,
+		course_modules,
+		finalData,
+		indexes,
+		isNew,
+		moduleIndex,
+		subModuleIndex,
+		test_completed,
+	]);
 
 	useEffect(() => {
-		if (!isEmpty(redirect_chapter_details) && viewType !== 'preview') {
-			const values = getIndex({ redirect_chapter_details, course_modules: finalData.course_modules });
+		if (
+			!isEmpty(redirect_chapter_details)
+			&& viewType !== 'preview'
+			&& isNew
+		) {
+			const values = getIndex({
+				redirect_chapter_details,
+				course_modules,
+			});
 
 			setIndexes(values);
 		}
-	}, [finalData, redirect_chapter_details, viewType]);
+	}, [course_modules, isNew, redirect_chapter_details, viewType]);
+
+	useEffect(() => {
+		if (isNew && all_chapters_completed && (!isEmpty(test_mapping || {}) && !test_completed)) {
+			setShowTestData(true);
+			setChapter({});
+		}
+
+		if (isNew && all_chapters_completed && (test_completed || isEmpty(test_mapping || {}))) {
+			setShowFeedback(true);
+			setChapter({});
+		}
+	}, [all_chapters_completed, test_completed, test_mapping, isNew]);
 
 	return {
 		finalData,
