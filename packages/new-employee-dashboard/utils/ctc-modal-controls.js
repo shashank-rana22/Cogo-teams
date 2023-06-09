@@ -175,14 +175,14 @@ export const ctcModalLessControls = (ctcInput, data = {}) => {
         (ctcInput * variable_split)
         + (Number(data?.yearlyJoiningBonus || 0)
         + Number(data?.yearlySignInBonus || 0))
-		+		(Math.round((basicYearlyValue / 12 < 15000	? 0.1301 * basicYearlyValue	: 1950 * 12)
+		+		(Math.round((basicYearlyValue / 12 < 15000 ? 0.1301 * basicYearlyValue : 1950 * 12)
             + 0.0483 * basicYearlyValue
             + 2400)
         + sum
         + flexible_benefit_sum
         + statutorySum(basicYearlyValue)
 		),
-
+		
 			monthlyValue: (ctcInput * variable_split) / 12 + Number(data?.monthlyJoiningBonus || 0)
       + Number(data?.monthlySignInBonus || 0) + (Math.round(
 				(basicYearlyValue / 12 < 15000

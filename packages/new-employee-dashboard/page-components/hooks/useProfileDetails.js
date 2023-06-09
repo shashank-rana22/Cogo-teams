@@ -136,8 +136,6 @@ const useProfileDetails = () => {
 	const monthlySignInBonus = watch('sign_on_bonus_monthly');
 
 	useEffect(() => {
-		// const data = getValues();
-
 		const data = {
 			yearlyJoiningBonus,
 			monthlyJoiningBonus,
@@ -166,7 +164,7 @@ const useProfileDetails = () => {
 		progress_stats_required : true,
 		offer_letter_required   : true,
 	};
-
+	
 	const [{ loading, data }, trigger] = useHarbourRequest(
 		{
 			method : 'GET',
