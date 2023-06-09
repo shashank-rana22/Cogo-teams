@@ -1,94 +1,96 @@
-const getControls = () => {
-	const controls = [
+import { asyncFieldsTicketTypes, asyncFieldsOrganizations, asyncFieldsOrganizationUser } from '@cogoport/forms';
+import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
+import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
+
+const useRaiseTicketcontrols = ({ watchOrgId }) => {
+	const ticketTypeOptions = useGetAsyncTicketOptions({ ...asyncFieldsTicketTypes() });
+	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
+	const organizationUserOptions = useGetAsyncOptions({
+		...asyncFieldsOrganizationUser(),
+		params: {
+			filters: { organization_id: watchOrgId },
+		},
+		valueKey: 'user_id',
+	});
+
+	return [
 		{
-			label       : 'Select issue type',
-			name        : 'issue_type',
-			type        : 'select',
-			placeholder : 'Select Type',
-			isClearable : true,
-			rules       : {
-				required: true,
-			},
-			optionsListKey : 'list_ticket_types',
-			theme          : 'admin',
-			className      : 'primary md',
+			...(ticketTypeOptions || {}),
+			label          : 'Select issue type',
+			name           : 'issue_type',
+			type           : 'select',
+			placeholder    : 'Select Type',
+			isClearable    : true,
+			rules          : { required: true },
 			defaultOptions : true,
 			showOptional   : false,
 		},
 		{
-			name        : 'profitability',
-			label       : 'Profitability (%)',
-			type        : 'slider',
-			min         : 0,
-			max         : 100,
-			step        : 1,
-			sliderWidth : 300,
+			label       : 'Describe Issue',
+			name        : 'additional_information',
+			type        : 'textarea',
+			placeholder : 'Enter Comments',
+			theme       : 'admin',
+			className   : 'primary md',
 		},
 		{
-			name     : 'organization_size',
-			label    : 'Organization Size',
-			type     : 'chips',
-			multiple : true,
-			options  : [
-				{
-					label : 'Long Tail',
-					value : 'long_tail',
-				},
-				{
-					label : 'Enterprise',
-					value : 'enterprise',
-				},
-				{
-					label : 'SME',
-					value : 'sme',
-				},
-				{
-					label : 'Channel Partner',
-					value : 'channel_partner',
-				},
-				{
-					label : 'Mid Size',
-					value : 'mid_size',
-				},
-			],
+			...(organizationOptions || {}),
+			label          : 'On behalf of',
+			name           : 'organization_id',
+			type           : 'select',
+			placeholder    : 'Select Organization',
+			isClearable    : true,
+			theme          : 'admin',
+			className      : 'primary md',
+			rules          : { required: true },
+			defaultOptions : true,
+			showOptional   : true,
 		},
 		{
-			name    : 'service_type',
-			label   : 'Service Type',
-			type    : 'chips',
-			options : [
-				{
-					label : 'FCL',
-					value : 'fcl_freight',
-				},
-				{
-					label : 'LCL',
-					value : 'lcl_freight',
-				},
-				{
-					label : 'AIR',
-					value : 'air_freight',
-				},
-			],
-		},
-		{
-			name                  : 'start_date',
-			label                 : 'Start Date',
-			type                  : 'datePicker',
-			placeholder           : 'select start date',
-			isPreviousDaysAllowed : true,
-			maxDate               : new Date(),
-		},
-		{
-			name                  : 'end_date',
-			label                 : 'End Date',
-			type                  : 'datePicker',
-			placeholder           : 'select end date',
-			isPreviousDaysAllowed : true,
-			maxDate               : new Date(),
+			...(organizationUserOptions || {}),
+			label        : 'Select User',
+			name         : 'user_id',
+			type         : 'select',
+			placeholder  : 'Select User',
+			isClearable  : true,
+			rules        : { required: true },
+			theme        : 'admin',
+			className    : 'primary md',
+			showOptional : true,
 
-		}];
-	return controls;
+		},
+		{
+			label       : 'Priority',
+			name        : 'priority',
+			type        : 'select',
+			value       : 'medium',
+			placeholder : 'Select Type',
+			options     : [
+				{
+					label : 'Medium',
+					value : 'medium',
+				}, {
+					label : 'low',
+					value : 'Low',
+				}, {
+					label : 'High',
+					value : 'high',
+				},
+			],
+			theme        : 'admin',
+			className    : 'primary md',
+			showOptional : false,
+		},
+		{
+			label        : 'Upload Supporting Documents',
+			name         : 'file_url',
+			type         : 'uploader',
+			multiple     : true,
+			theme        : 'admin',
+			className    : 'primary md',
+			showOptional : false,
+		},
+	];
 };
 
-export default getControls;
+export default useRaiseTicketcontrols;
