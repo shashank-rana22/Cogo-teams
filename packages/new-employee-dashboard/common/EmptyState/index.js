@@ -1,3 +1,5 @@
+import { Image } from '@cogoport/next';
+
 import styles from './styles.module.css';
 
 function EmptyState({
@@ -9,7 +11,7 @@ function EmptyState({
 }) {
 	return (
 		<div className={`${styles.container} ${styles[flexDirection]}`}>
-			<img
+			<Image
 				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man"
 				width={width}
 				height={height}

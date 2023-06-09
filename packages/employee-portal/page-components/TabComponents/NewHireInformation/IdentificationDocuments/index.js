@@ -79,7 +79,7 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 			return {
 				document_type   : item,
 				id              : component[item]?.id,
-				document_number : values?.[docNumber] || undefined,
+				document_number : values?.[docNumber].toUpperCase() || undefined,
 				document_url    : values?.[item]?.finalUrl || undefined,
 				status          : 'active',
 			};

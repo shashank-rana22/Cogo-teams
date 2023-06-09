@@ -3,12 +3,12 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 
-const INDEX_VALUE = 0;
+const DEFAULT_INDEX_VALUE = 0;
 
 function useCreateEmployeeBankDetails({ bank_details, getEmployeeDetails }) {
 	const api = isEmpty(bank_details) ? '/create_employee_bank_details' : '/update_employee_bank_details';
 
-	const { id :bankDetailId = '' } = bank_details?.[INDEX_VALUE] || {};
+	const { id :bankDetailId = '' } = bank_details?.[DEFAULT_INDEX_VALUE] || {};
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : api,
@@ -32,6 +32,7 @@ function useCreateEmployeeBankDetails({ bank_details, getEmployeeDetails }) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
 	};
+
 	return {
 		loading,
 		createEmployeeBankDetails,
