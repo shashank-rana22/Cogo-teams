@@ -105,19 +105,25 @@ const creditNoteControls = ({
 				price_discounted = 0, quantity = 0,
 				exchange_rate = 1, tax_percent = 0,
 				tax_total_price_discounted = 0,
+				is_checked,
+				code,
+				hsn_code = 'NA',
+				currency,
+				unit,
+				name
 			} = item || {};
 			return ({
-				is_checked : item?.is_checked,
-				code       : item?.code,
-				sac_code   : item?.hsn_code || 'NA',
-				currency   : item?.currency,
+				is_checked,
+				code,
+				currency,
+				unit,
+				name,
+				sac_code   : hsn_code,
 				price_discounted,
 				quantity,
 				exchange_rate,
 				tax_percent,
-				unit       : item?.unit,
 				total      : tax_total_price_discounted,
-				name       : item?.name,
 			});
 		}),
 	}));

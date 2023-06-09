@@ -38,7 +38,7 @@ const useUpdateCurrencyConversion = ({
 		try {
 			await trigger({
 				data: {
-					shipment_id                      : shipment_data.id,
+					shipment_id                      : shipment_data?.id,
 					updated_currency_conversion_rate : EXCHANGE_CURRENCY_HASH,
 				},
 			});
