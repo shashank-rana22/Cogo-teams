@@ -1,4 +1,4 @@
-import PATTERNS from '../../../../commons/patterns';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const controls = [
 	{
@@ -9,7 +9,7 @@ const controls = [
 		rules       : {
 			required : 'This is required',
 			pattern  : {
-				value   : PATTERNS.AADHAR_NUMBER,
+				value   : GLOBAL_CONSTANTS.regex_patterns?.aadhar_number,
 				message : 'Enter valid Adhar card number',
 			},
 		},
@@ -31,7 +31,7 @@ const controls = [
 		rules       : {
 			required : 'This is required',
 			pattern  : {
-				value   : PATTERNS.PAN_NUMBER,
+				value   : GLOBAL_CONSTANTS.regex_patterns?.pan_number,
 				message : 'Enter valid Pan card number',
 			},
 		},
@@ -52,7 +52,7 @@ const controls = [
 		placeholder : 'Passport Number',
 		rules       : {
 			pattern: {
-				value   : PATTERNS.PASSPORT_NUMBER,
+				value   : GLOBAL_CONSTANTS.regex_patterns?.passport_number,
 				message : 'Enter valid Passport number',
 			},
 		},

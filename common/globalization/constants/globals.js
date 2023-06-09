@@ -149,8 +149,12 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
-		number: /^[+-]?\d*\.?\d+$/,
+		number          : /^[+-]?\d*\.?\d+$/,
+		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
+		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
 	},
+
 	languages                       : LANGUAGE_OPTIONS,
 	currency_conversion_constant    : 0.04,
 	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
