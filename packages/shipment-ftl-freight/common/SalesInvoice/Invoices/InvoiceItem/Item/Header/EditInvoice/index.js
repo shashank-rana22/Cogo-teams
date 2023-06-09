@@ -9,7 +9,6 @@ import Info from './Info';
 import styles from './styles.module.css';
 
 function EditInvoice({
-	show = 'false',
 	onClose,
 	invoice = {},
 	refetch = () => {},
@@ -48,9 +47,9 @@ function EditInvoice({
 
 	return (
 		<Modal
+			show
 			size="xl"
 			onClose={onClose}
-			show={show}
 			closeOnOuterClick={false}
 		>
 			<Modal.Header title="Edit Invoice" />

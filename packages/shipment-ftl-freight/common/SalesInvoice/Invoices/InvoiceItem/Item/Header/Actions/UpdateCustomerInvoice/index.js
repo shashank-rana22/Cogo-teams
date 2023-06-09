@@ -14,8 +14,7 @@ import { useFillFormData } from './utils/useFillFormData';
 
 function UpdateCustomerInvoice(props) {
 	const {
-		show = false,
-		closeModal = () => {},
+		setShowModal = () => {},
 		shipmentData = {},
 		invoice = {},
 		refetch = () => {},
@@ -53,7 +52,7 @@ function UpdateCustomerInvoice(props) {
 
 	const callback = () => {
 		refetch();
-		closeModal();
+		setShowModal(false);
 	};
 
 	const { apiTrigger } = useCreateShipmentFortigoTripDetail({ refetch: callback });
@@ -76,20 +75,19 @@ function UpdateCustomerInvoice(props) {
 	return (
 		<Modal
 			size="xl"
-			show={show}
+			show
 			closeOnOuterClick={false}
 			showCloseIcon={false}
 		>
 			<Modal.Header title="Update Customer Invoice" />
 			<Modal.Body>
-				{!isEmpty(defaultValues?.rate)
-					? <Form defaultValues={defaultValues} finalControls={finalControls} ref={formRef} /> : null}
+				<Form defaultValues={defaultValues} finalControls={finalControls} ref={formRef} />
 			</Modal.Body>
 			<Modal.Footer>
 				<FooterButtonWrapper>
 					<Button
 						themeType="secondary"
-						onClick={() => closeModal()}
+						onClick={() => setShowModal(false)}
 					>
 						Cancel
 					</Button>

@@ -10,6 +10,7 @@ import React, { useState, useContext } from 'react';
 
 import ClickableDiv from '../../../../../../ClickableDiv';
 
+import KebabContent from './KebalContent';
 import styles from './styles.module.css';
 
 const AddCustomerInvoice = dynamic(() => import('./AddCustomerInvoice'), { ssr: false });
@@ -21,8 +22,6 @@ const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
 
-const CUSTOMER_INVOICE_STATUSES = ['reviewed', 'approved'];
-
 function Actions({
 	invoice = {},
 	bfInvoiceRefetch = () => {},
@@ -31,19 +30,12 @@ function Actions({
 	disableAction = false,
 }) {
 	const [show, setShow] = useState(false);
-	const [isEditInvoice, setIsEditInvoice] = useState(false);
-	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
-	const [showAddRemarks, setShowAddRemarks] = useState(false);
-	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
-	const [addCustomerInvoice, setAddCustomerInvoice] = useState(false);
-	const [updateCustomerInvoice, setUpdateCustomerInvoice] = useState(false);
-	const [fillCustomerData, setFillCustomerData] = useState(false);
-	const [showExchangeRate, setExchangeRate] = useState(false);
+	const [showModal, setShowModal] = useState();
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const handleSetter = (setter = () => {}) => {
-		setter(true);
+	const handleSetter = (selected_modal) => {
+		setShowModal(selected_modal);
 		setShow(false);
 	};
 
@@ -64,106 +56,40 @@ function Actions({
 	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
 	|| isAuthorized;
 
-	const content = (
-		<div className={styles.dialog_box}>
-			{commonActions ? (
-				<>
-					{editInvoicesVisiblity ? (
-						<div style={{ width: '100%' }}>
-							<ClickableDiv
-								className={styles.text}
-								onClick={() => handleSetter(setIsEditInvoice)}
-							>
-								Edit Invoices
+	const modalComponents = {
+		change_currency: <ChangeCurrency
+			setShowModal={setShowModal}
+			invoice={invoice}
+			refetch={handleRefetch}
+		/>,
+		rate_sheet   : <ExchangeRateModal setShowModal={setShowModal} invoice={invoice} />,
+		add_remark   : <AddRemarks setShowModal={setShowModal} invoice={invoice} refetch={handleRefetch} />,
+		payment_mode : <ChangePaymentMode
+			setShowModal={setShowModal}
+			invoice={invoice}
+			refetch={handleRefetch}
+		/>,
+		update_customer_invoice: <UpdateCustomerInvoice
+			setShowModal={setShowModal}
+			refetch={handleRefetch}
+			shipmentData={shipment_data}
+			invoice={invoice}
+		/>,
+		fill_portal_data: <FillCustomerPortalData
+			setShowModal={setShowModal}
+			handleRefetch={handleRefetch}
+			shipmentData={shipment_data}
+			invoice={invoice}
+		/>,
+		add_customer_invoice: <AddCustomerInvoice
+			setShowModal={setShowModal}
+			handleRefetch={handleRefetch}
+			invoice={invoice}
+			shipmentData={shipment_data}
+		/>,
+	};
 
-							</ClickableDiv>
-							<div className={styles.line} />
-						</div>
-					) : null}
-
-					<div>
-						<ClickableDiv
-							className={styles.text}
-							onClick={() => handleSetter(setIsChangeCurrency)}
-						>
-							Change Currency
-						</ClickableDiv>
-						<div className={styles.line} />
-					</div>
-
-					<ClickableDiv
-						className={styles.text}
-						onClick={() => handleSetter(setShowAddRemarks)}
-					>
-						Add Remarks
-					</ClickableDiv>
-
-					{invoice?.billing_address?.trade_party_type === 'self' ? (
-						<div>
-							<div className={styles.line} />
-							<ClickableDiv
-								className={styles.text}
-								onClick={() => handleSetter(setShowChangePaymentMode)}
-							>
-								Change Payment Mode
-							</ClickableDiv>
-						</div>
-					) : null}
-				</>
-			) : null}
-
-			{(invoice.exchange_rate_document || []).map((url) => (
-				<div key={url}>
-					{commonActions ? <div className={styles.line} /> : null}
-					<ClickableDiv
-						className={styles.text}
-						onClick={() => window.open(url, '_blank')}
-					>
-						Exchange Rate Document
-					</ClickableDiv>
-					<div className={styles.line} />
-					<ClickableDiv
-						onClick={() => handleSetter(setExchangeRate)}
-						className={styles.text}
-					>
-						Exchange Rate Sheet
-
-					</ClickableDiv>
-					<div>
-						<div className={styles.line} />
-						<ClickableDiv
-							className={styles.text}
-							onClick={() => handleSetter(setAddCustomerInvoice)}
-						>
-							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
-								&nbsp;
-							{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? '/Generate' : ''}
-							Customer Invoice
-						</ClickableDiv>
-						{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? (
-							<ClickableDiv
-								className={styles.text}
-								onClick={() => handleSetter(setUpdateCustomerInvoice)}
-							>
-								Update Customer Invoice
-							</ClickableDiv>
-						) : null}
-					</div>
-				</div>
-			))}
-			{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? (
-				<div>
-					<div className={styles.line} />
-					<ClickableDiv
-						className={styles.text}
-						onClick={() => handleSetter(setFillCustomerData)}
-					>
-						Fill Shipment Data For Customer Portal
-					</ClickableDiv>
-				</div>
-			) : null}
-		</div>
-	);
+	const modalComponent = modalComponents[showModal];
 
 	return (
 		<div className={styles.container}>
@@ -186,7 +112,14 @@ function Actions({
 							interactive
 							placement="bottom"
 							visible={show}
-							content={content}
+							content={(
+								<KebabContent
+									handleSetter={handleSetter}
+									commonActions={commonActions}
+									editInvoicesVisiblity={editInvoicesVisiblity}
+									invoice={invoice}
+								/>
+							)}
 							theme="light"
 							onClickOutside={() => setShow(false)}
 						>
@@ -215,80 +148,16 @@ function Actions({
 				</div>
 			</div>
 
-			{(invoice.services || []).length && isEditInvoice ? (
+			{(invoice.services || []).length && showModal === 'edit_invoice' ? (
 				<EditInvoice
-					show={isEditInvoice}
-					onClose={() => setIsEditInvoice(false)}
+					onClose={() => setShowModal(false)}
 					invoice={invoice}
 					refetch={handleRefetch}
 					shipment_data={shipment_data}
 				/>
 			) : null}
 
-			{isChangeCurrency ? (
-				<ChangeCurrency
-					setIsChangeCurrency={setIsChangeCurrency}
-					invoice={invoice}
-					refetch={handleRefetch}
-				/>
-			) : null}
-
-			{showExchangeRate ? (
-				<ExchangeRateModal
-					setExchangeRate={setExchangeRate}
-					invoice={invoice}
-				/>
-			) : null}
-
-			{showAddRemarks ? (
-				<AddRemarks
-					showAddRemarks={showAddRemarks}
-					setShowAddRemarks={setShowAddRemarks}
-					invoice={invoice}
-					refetch={handleRefetch}
-				/>
-			) : null}
-
-			{showChangePaymentMode ? (
-				<ChangePaymentMode
-					show={showChangePaymentMode}
-					setShow={setShowChangePaymentMode}
-					invoice={invoice}
-					refetch={handleRefetch}
-				/>
-			) : null}
-
-			{updateCustomerInvoice ? (
-				<UpdateCustomerInvoice
-					show={updateCustomerInvoice}
-					setShow={setUpdateCustomerInvoice}
-					closeModal={() => setUpdateCustomerInvoice(false)}
-					refetch={handleRefetch}
-					shipmentData={shipment_data}
-					invoice={invoice}
-				/>
-			) : null}
-
-			{fillCustomerData ? (
-				<FillCustomerPortalData
-					show={fillCustomerData}
-					closeModal={() => setFillCustomerData(false)}
-					handleRefetch={handleRefetch}
-					shipmentData={shipment_data}
-					invoice={invoice}
-				/>
-			) : null}
-
-			{addCustomerInvoice ? (
-				<AddCustomerInvoice
-					show={addCustomerInvoice}
-					setShow={setAddCustomerInvoice}
-					closeModal={() => setAddCustomerInvoice(false)}
-					handleRefetch={handleRefetch}
-					invoice={invoice}
-					shipmentData={shipment_data}
-				/>
-			) : null}
+			{modalComponent}
 
 		</div>
 	);

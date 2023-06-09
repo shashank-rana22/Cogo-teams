@@ -8,7 +8,7 @@ import fields from './fields';
 import styles from './styles.module.css';
 
 function ExchangeRateModal({
-	setExchangeRate = () => {},
+	setShowModal = () => {},
 	invoice = {},
 }) {
 	const { loading, data } = useGetAllExchangeRates({
@@ -33,7 +33,7 @@ function ExchangeRateModal({
 	}
 
 	const onClose = () => {
-		setExchangeRate(false);
+		setShowModal(false);
 	};
 
 	return (

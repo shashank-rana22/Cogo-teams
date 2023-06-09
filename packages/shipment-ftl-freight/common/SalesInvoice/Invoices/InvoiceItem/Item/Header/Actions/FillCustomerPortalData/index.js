@@ -14,8 +14,7 @@ import getFieldLikeControls from './utils/getFieldLikeControls';
 import { getFormatPrefillValues } from './utils/getFormatPrefillValues';
 
 function FillCustomerPortalData({
-	show = false,
-	closeModal = () => {},
+	setShowModal = () => {},
 	shipmentData = {},
 	invoice = {},
 }) {
@@ -63,7 +62,7 @@ function FillCustomerPortalData({
 
 	return (
 		<Modal
-			show={show}
+			show
 			closeOnOuterClick={false}
 			showCloseIcon={false}
 			size="xl"
@@ -78,7 +77,7 @@ function FillCustomerPortalData({
 			</Modal.Body>
 			<Modal.Footer>
 				<FooterButtonWrapper>
-					<Button onClick={closeModal} themeType="secondary" disabled={loading}>Cancel</Button>
+					<Button onClick={() => setShowModal(false)} themeType="secondary" disabled={loading}>Cancel</Button>
 					<Button onClick={handleSubmit(onSubmit)} disabled={loading}>Submit</Button>
 				</FooterButtonWrapper>
 			</Modal.Footer>

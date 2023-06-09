@@ -8,8 +8,7 @@ import useUpdateInvoiceRemarks from '../../../../../../../hooks/useUpdateInvoice
 import styles from './styles.module.css';
 
 function AddRemarks({
-	showAddRemarks = false,
-	setShowAddRemarks = () => {},
+	setShowModal = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
@@ -17,7 +16,7 @@ function AddRemarks({
 
 	const onClose = () => {
 		setRemarkValue(invoice?.remarks);
-		setShowAddRemarks(false);
+		setShowModal(false);
 	};
 
 	const refetchAfterCall = () => {
@@ -30,7 +29,7 @@ function AddRemarks({
 	});
 
 	return (
-		<Modal onClose={onClose} show={showAddRemarks} width={600}>
+		<Modal onClose={onClose} show width={600} closeOnOuterClick={false}>
 			<Modal.Header title="Invoice Remarks" />
 
 			<Modal.Body>

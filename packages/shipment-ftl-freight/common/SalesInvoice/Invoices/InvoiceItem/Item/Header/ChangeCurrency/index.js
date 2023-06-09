@@ -10,12 +10,12 @@ import INVOICE_CURRENCY_MAPPINGS from '../../../../../helpers/invoiceCurrencyMap
 import styles from './styles.module.css';
 
 function ChangeCurrency({
-	setIsChangeCurrency = () => {},
+	setShowModal = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
 	const onClose = () => {
-		setIsChangeCurrency(false);
+		setShowModal(false);
 	};
 	const [value, setValue] = useState('');
 
@@ -72,7 +72,7 @@ function ChangeCurrency({
 					<Button
 						size="md"
 						themeType="secondary"
-						onClick={() => setIsChangeCurrency(false)}
+						onClick={() => setShowModal(false)}
 						disabled={loading}
 					>
 						Cancel
