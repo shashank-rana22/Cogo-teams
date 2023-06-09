@@ -81,6 +81,10 @@ const TABS_CONFIG = {
 				title : 'FCL CFS',
 				tabs  : FCL_COMMON_TABS,
 			},
+			custom: {
+				title : 'FCL Custom',
+				tabs  : FCL_COMMON_TABS,
+			},
 		},
 	},
 

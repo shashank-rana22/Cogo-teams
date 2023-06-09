@@ -18,6 +18,7 @@ const RESOLVE_DESK = {
 	import : dynamic(() => import('./Export-Import'), { ssr: false }),
 	local  : dynamic(() => import('./FCL-Local'), { ssr: false }),
 	cfs    : dynamic(() => import('./FCL-CFS'), { ssr: false }),
+	custom : dynamic(() => import('./FCL-Custom'), { ssr: false }),
 };
 
 const STEPPER_TAB_OPTIONS = Object.entries(TABS_CONFIG).map(([key, obj]) => ({

@@ -1,14 +1,14 @@
 {
-	"zero":						0,
-	"one":						1,
-	"two":						2,
-	"three":					3,
-	"four":						4,
-	"twenty_three":				23,
-	"fifty_nine":				59,
-	"sixty":					60,
-	"chargable_weight_factor":	166.67,
-	"six_hundred":				600,
-	"tripple_nine":				999,
-	"thousand":					1000
+	"zero": 0,
+	"one": 1,
+	"two": 2,
+	"three": 3,
+	"four": 4,
+	"twenty_three": 23,
+	"fifty_nine": 59,
+	"sixty": 60,
+	"chargable_weight_factor": 166.67,
+	"six_hundred": 600,
+	"tripple_nine": 999,
+	"thousand": 1000
 }
