@@ -33,7 +33,7 @@
 	width: 2px;
 	height: 22px;
 	margin: 0 16px;
-	background: #e0e0e0;
+	background: var(--color-secondary-greyscale-5);
 	border-radius: 28px;
 }
 
