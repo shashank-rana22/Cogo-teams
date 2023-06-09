@@ -1,6 +1,4 @@
 import { startCase } from '@cogoport/utils';
-import React from 'react';
-
 import { renderValue } from '../../../CargoDetails/RenderCargoPills/renderValue';
 
 import styles from './styles.module.css';

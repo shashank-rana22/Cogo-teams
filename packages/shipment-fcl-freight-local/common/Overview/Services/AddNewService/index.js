@@ -1,5 +1,5 @@
 import { IcMPlus } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import Form from './Form';
 import styles from './styles.module.css';

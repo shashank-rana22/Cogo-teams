@@ -1,5 +1,4 @@
 import { MultiSelect } from '@cogoport/components';
-import React from 'react';
 import { Controller } from 'react-hook-form';
 
 function MultiSelectController(props) {

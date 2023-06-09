@@ -1,5 +1,5 @@
 import { Input, Select } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import styles from './styles.module.css';
 

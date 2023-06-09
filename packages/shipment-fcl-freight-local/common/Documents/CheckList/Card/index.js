@@ -1,5 +1,4 @@
 import { saveAs } from 'file-saver';
-import React from 'react';
 
 import Content from './Content';
 

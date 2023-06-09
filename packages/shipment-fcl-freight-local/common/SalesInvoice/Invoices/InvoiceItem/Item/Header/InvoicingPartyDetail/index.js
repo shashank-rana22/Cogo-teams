@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import React, { useContext, useRef } from 'react';
+import { useContext, useRef } from 'react';
 
 import styles from '../styles.module.css';
 

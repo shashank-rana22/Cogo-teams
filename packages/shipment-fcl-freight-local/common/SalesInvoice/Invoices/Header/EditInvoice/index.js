@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/ocean-modules';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import editLineItemsHelper from './editLineItemsHelper';
 import Info from './Info';

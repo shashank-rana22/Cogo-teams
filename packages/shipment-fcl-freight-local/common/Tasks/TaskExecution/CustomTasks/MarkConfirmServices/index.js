@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import EditRate from './EditRate';
 import formatRate from './helper/formatRate';

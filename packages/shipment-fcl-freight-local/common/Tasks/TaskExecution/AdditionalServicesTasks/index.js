@@ -1,6 +1,6 @@
 import { Loader } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import React, { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
 import AddRate from '../../../AdditionalServices/components/AddRate';

@@ -1,6 +1,6 @@
 import { RadioGroup, Pill, Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
-import React, { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 

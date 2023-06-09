@@ -1,6 +1,6 @@
 import { Button, Checkbox, Input } from '@cogoport/components';
 import { Layout } from '@cogoport/ocean-modules';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useContainerDetails from '../../../../../../hooks/useContainerDetails';
 import TaskContainer from '../../common/TaskContainer';

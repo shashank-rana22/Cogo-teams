@@ -1,5 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useUpdateInvoiceStatus from '../../../../../../../../../hooks/useUpdateInvoiceStatus';
 

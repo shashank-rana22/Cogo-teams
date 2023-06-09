@@ -1,6 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo, IcMArrowRotateDown } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 import styles from './styles.module.css';
 

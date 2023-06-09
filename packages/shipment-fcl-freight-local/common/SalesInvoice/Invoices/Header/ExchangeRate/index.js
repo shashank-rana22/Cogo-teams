@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import CurrencyExchangeForm from './ExchangeRateForm/CurrencyExchangeForm';
 import styles from './styles.module.css';

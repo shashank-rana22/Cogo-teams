@@ -1,5 +1,5 @@
 import { Input, Button, Loader, Modal } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useUpdateShipmentContainerDetails from '../../../../hooks/useUpdateShipmentContainerDetails';
 

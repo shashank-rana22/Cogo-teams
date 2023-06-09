@@ -4,7 +4,7 @@ import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import useUpdateShipmentCreditNote from '../../../../hooks/useUpdateShipmentCreditNote';
 import creditNoteControls from '../../helpers/creditNoteControls';

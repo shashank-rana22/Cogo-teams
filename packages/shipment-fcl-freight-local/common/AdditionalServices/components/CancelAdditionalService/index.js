@@ -1,5 +1,5 @@
 import { Textarea, Button, Modal } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
 

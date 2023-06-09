@@ -1,5 +1,5 @@
 import { InputController, TextAreaController, UploadController, useForm } from '@cogoport/forms';
-import React, { forwardRef, useImperativeHandle } from 'react';
+import { forwardRef, useImperativeHandle } from 'react';
 
 import styles from './styles.module.css';
 

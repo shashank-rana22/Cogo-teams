@@ -1,7 +1,7 @@
 import { Button, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-import React, { useState, useContext } from 'react';
+import  { useState, useContext } from 'react';
 
 import useListBillOfLadings from '../../../hooks/useListBillOfLadings';
 

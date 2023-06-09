@@ -1,5 +1,5 @@
 import { RadioGroup } from '@cogoport/components';
-import React, { useState } from 'react';
+import  { useState } from 'react';
 
 import InvoicingParties from './InvoicingParties';
 

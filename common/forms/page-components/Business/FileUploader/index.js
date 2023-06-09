@@ -2,7 +2,7 @@ import { Upload, Toast } from '@cogoport/components';
 import { IcMDocument, IcMCloudUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 

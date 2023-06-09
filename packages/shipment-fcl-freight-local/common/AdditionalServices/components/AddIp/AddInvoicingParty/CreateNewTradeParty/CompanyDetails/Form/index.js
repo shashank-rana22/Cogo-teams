@@ -1,5 +1,5 @@
 import { UploadController, AsyncSelectController, SelectController, InputController } from '@cogoport/forms';
-import React, { useEffect } from 'react';
+import { useEffect } from 'react';
 
 import controls from './controls';
 import styles from './styles.module.css';

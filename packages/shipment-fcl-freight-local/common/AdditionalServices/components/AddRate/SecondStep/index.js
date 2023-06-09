@@ -1,6 +1,5 @@
 import { Button, Textarea } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 import styles from './styles.module.css';
 
