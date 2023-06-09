@@ -10157,6 +10157,16 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
+		{
+			api          : 'get_reportees_budget_allocation_details',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'transfer_promotion_budget',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
 	],
 	cogo_assured: [
 		{

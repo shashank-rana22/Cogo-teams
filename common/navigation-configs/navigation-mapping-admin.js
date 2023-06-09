@@ -192,6 +192,7 @@ const navigationMappingAdmin = {
 			...apis.checkout_promotions,
 			...apis.export_factoring,
 			...apis.app_saas_cogo_subscription,
+			...apis.sales_dashboard,
 
 		],
 		main_apis: [
@@ -1440,6 +1441,7 @@ const navigationMappingAdmin = {
 			...apis.cogopoints,
 			...apis.checkout_promotions,
 			...apis.export_factoring,
+			...apis.sales_dashboard,
 		],
 		module_type: 'crm',
 	},
@@ -2051,6 +2053,16 @@ const navigationMappingAdmin = {
 		possible_apis : apis.manage_rfq,
 		module_type   : 'dashboards',
 	},
+	rfq_dashboard: {
+		key           : 'rfq_dashboard',
+		title         : 'RFQ Dashboard',
+		href          : '/v2/rfq-dashboard',
+		as            : '/v2/rfq-dashboard',
+		type          : 'link',
+		main_apis     : [],
+		possible_apis : apis.rfq_dashboard,
+		module_type   : 'dashboards',
+	},
 	contract_rates: {
 		key       : 'contract_rates',
 		title     : 'Contract Rates',
@@ -2099,7 +2111,11 @@ const navigationMappingAdmin = {
 				as            : '/v2/learning',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : [...apis.create_faq, ...apis.create_test_set],
+				possible_apis : [
+					...apis.create_faq,
+					...apis.create_test_set,
+					...apis.list_courses,
+				],
 			},
 			{
 				key           : 'cogo_academy-faq',
@@ -2128,6 +2144,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.announcements,
+			},
+			{
+				key           : 'cogo_academy-course',
+				title         : 'Course Module',
+				href          : '/v2/learning/course',
+				as            : '/v2/learning/course',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : [...apis.create_course, ...apis.course_module],
 			},
 		],
 		module_type: 'crm',

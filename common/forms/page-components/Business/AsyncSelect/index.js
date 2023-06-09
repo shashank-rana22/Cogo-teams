@@ -38,6 +38,10 @@ import {
 	asyncCommoditiesList,
 	asyncFortigoLocations,
 	asyncOrganizationBranches,
+	asyncListFAQTopics,
+	asyncListFAQTags,
+	asyncListCourseCategories,
+	asyncListTests,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -94,6 +98,10 @@ const keyAsyncFieldsParamsMapping = {
 	hs_code_list                         : asyncCommoditiesList,
 	list_shipment_fortigo_trip_locations : asyncFortigoLocations,
 	list_organization_branches           : asyncOrganizationBranches,
+	faq_topics                           : asyncListFAQTopics,
+	faq_tags                             : asyncListFAQTags,
+	list_course_categories               : asyncListCourseCategories,
+	list_tests                           : asyncListTests,
 };
 
 function AsyncSelect(props) {
