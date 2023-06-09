@@ -6,6 +6,9 @@ import { startCase } from '@cogoport/utils';
 import ActionPopover from './ActionPopover';
 import styles from './styles.module.css';
 
+const LAKHS_CONVERSION_NUMBER = 100000;
+const VARIABLE_PAY_THRESHOLD = 0;
+
 const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab, updateOfferLetterLoading }) => [
 	{
 		Header   : 'NAME & EMAIL',
@@ -51,16 +54,17 @@ const getColumns = ({ setCtcBreakup, onFinalSubmit = () => {}, activeTab, update
 
 			const variable_pay = (Number(joining_bonus_yearly)
 				+ Number(retention_bonus_yearly)
-				+ Number(performance_linked_variable_yearly) + Number(sign_on_bonus_yearly)) || 0;
+				+ Number(performance_linked_variable_yearly) + Number(sign_on_bonus_yearly)) || VARIABLE_PAY_THRESHOLD;
 
 			return (
 				<div>
 					Rs.
 					{' '}
-					{init / 100000}
+					{init / LAKHS_CONVERSION_NUMBER}
 					{' '}
 					LPA (fixed)
-					{variable_pay > 0 ? ` + Rs. ${variable_pay / 100000} LPA (variable)`
+					{variable_pay > VARIABLE_PAY_THRESHOLD
+						? ` + Rs. ${variable_pay / LAKHS_CONVERSION_NUMBER} LPA (variable)`
 						: null}
 				</div>
 			);

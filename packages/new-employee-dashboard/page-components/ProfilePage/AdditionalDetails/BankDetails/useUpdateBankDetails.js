@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
 const useUpdateBankDetails = ({ id, getEmployeeDetails }) => {
@@ -14,10 +16,10 @@ const useUpdateBankDetails = ({ id, getEmployeeDetails }) => {
 					id: id || undefined,
 				},
 			});
-			
+
 			getEmployeeDetails();
 		} catch (err) {
-			console.log('err', err);
+			Toast.error(getApiErrorString(err?.response?.data));
 		}
 	};
 

@@ -6,6 +6,8 @@ import { useEffect, useCallback } from 'react';
 
 import styles from './styles.module.css';
 
+const INDEX = 0;
+
 function Day1({ setInformationPage }) {
 	const [{ data }, listTrigger] = useHarbourRequest({
 		method : 'get',
@@ -49,7 +51,7 @@ function Day1({ setInformationPage }) {
 				<div className={styles.title}>DAY 1</div>
 			</div>
 			<div className={styles.rich_text}>
-				<div dangerouslySetInnerHTML={{ __html: data?.list?.[0]?.html_template || 'Day 1!' }} />
+				<div dangerouslySetInnerHTML={{ __html: data?.list?.[INDEX]?.html_template || 'Day 1!' }} />
 
 			</div>
 		</div>

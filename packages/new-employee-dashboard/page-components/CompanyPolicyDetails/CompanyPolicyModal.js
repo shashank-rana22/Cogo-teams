@@ -1,15 +1,18 @@
-import { Button } from '@cogoport/components';
+import { Button, Toast } from '@cogoport/components';
 import { useForm, InputController, UploadController } from '@cogoport/forms';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
+const ARRAY_LENGTH = 0;
+
 function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
 	const { handleSubmit, control, formState: { errors }, reset, setValue } = useForm();
 
-	const isUpdate = (Object.keys(showModal || {}) || []).length > 0;
+	const isUpdate = (Object.keys(showModal || {}) || []).length > ARRAY_LENGTH;
 
 	const url = isUpdate ? '/update_company_document' : '/create_company_document';
 
@@ -36,7 +39,7 @@ function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
 			reset();
 			setShowModal(false);
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

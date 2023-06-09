@@ -3,6 +3,9 @@ import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const OPACITY_VALUE = 1;
+const NON_OPACITY_VALUE = 0.5;
+
 function StepperComponent({ data, loading }) {
 	const { progress_stats = {}, company_policy_data, signed_documents } = data || {};
 	const {
@@ -62,7 +65,11 @@ function StepperComponent({ data, loading }) {
 					const TickIcon = is_added ? IcCFtick : IcMFtick;
 
 					return (
-						<div key={name} className={styles.single_card} style={{ opacity: is_added ? 1 : 0.5 }}>
+						<div
+							key={name}
+							className={styles.single_card}
+							style={{ opacity: is_added ? OPACITY_VALUE : NON_OPACITY_VALUE }}
+						>
 							<div className={styles.tick_icon}>
 								<TickIcon width={24} height={24} />
 							</div>

@@ -7,6 +7,9 @@ import getAuthorizationParams from './get-final-authpipe';
 import getMicroServiceName from './get-microservice-name';
 import { getCookie } from './getCookieFromCtx';
 
+const FIRST_INDEX_NEW_CONFIG_SPLIT = 1;
+const INDEX_NEW_CONFIG_SPLIT = 0;
+
 const customSerializer = (params) => {
 	const paramsStringify = qs.stringify(params, {
 		arrayFormat   : 'brackets',
@@ -31,7 +34,8 @@ harbourRequest.interceptors.request.use((oldConfig) => {
 		authorizationparameters = getAuthorizationParams(store, newConfig.url);
 	}
 
-	const apiPath =	newConfig.url.split('/')[1] || newConfig.url.split('/')[0];
+	const apiPath =	newConfig.url.split('/')[FIRST_INDEX_NEW_CONFIG_SPLIT]
+	|| newConfig.url.split('/')[INDEX_NEW_CONFIG_SPLIT];
 
 	const serviceName = microServices[apiPath];
 

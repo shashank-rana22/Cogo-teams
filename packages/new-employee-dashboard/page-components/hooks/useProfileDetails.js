@@ -10,6 +10,8 @@ import {
 	ctcModalLessControls,
 } from '../../utils/ctc-modal-controls';
 
+const CTC_THRESHOLD = 600000;
+
 const useProfileDetails = () => {
 	const { query } = useSelector((state) => state.general);
 	const { profile_id } = query || {};
@@ -147,7 +149,7 @@ const useProfileDetails = () => {
 			monthlySignInBonus,
 		};
 
-		if (initialQuestion >= 600000) {
+		if (initialQuestion >= CTC_THRESHOLD) {
 			const ctcInfo = ctcModalControls(initialQuestion, data);
 			setCtcStructure(ctcInfo.controls);
 		} else {
@@ -164,7 +166,7 @@ const useProfileDetails = () => {
 		progress_stats_required : true,
 		offer_letter_required   : true,
 	};
-	
+
 	const [{ loading, data }, trigger] = useHarbourRequest(
 		{
 			method : 'GET',

@@ -1,10 +1,15 @@
 import { CogoMaps, L, Marker, Popup } from '@cogoport/maps';
 import { useEffect, useState } from 'react';
 
-const center = [19.1176, 72.8714];
+const X_CENTER = 19.1176;
+const Y_CENTER = 72.8714;
+const ICON_SIZE = 50;
+const center = [X_CENTER, Y_CENTER];
+const NUMBER = 10;
+
 const icon = new L.Icon({
 	iconUrl  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
-	iconSize : [50, 50],
+	iconSize : [ICON_SIZE, ICON_SIZE],
 });
 
 function Map() {
@@ -24,7 +29,7 @@ function Map() {
 
 	useEffect(() => {
 		if (map) {
-			map.flyTo(center, 10);
+			map.flyTo(center, NUMBER);
 		}
 	}, [map]);
 

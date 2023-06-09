@@ -9,6 +9,8 @@ import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails
 import controls from './controls';
 import styles from './styles.module.css';
 
+const EMERGENCY_CONTACT_NUMBER_INDEX = 0;
+
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
 	return rest;
@@ -35,8 +37,10 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 			},
 			emergency_contact_details: {
 				mobile_number: {
-					number       : content?.detail?.emergency_contact_details?.[0]?.mobile_number,
-					country_code : content?.detail?.emergency_contact_details?.[0]?.mobile_country_code || +91,
+					number: content?.detail?.emergency_contact_details?.
+						[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_number,
+					country_code: content?.detail?.emergency_contact_details?.
+						[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_country_code || '+91',
 				},
 			},
 		};

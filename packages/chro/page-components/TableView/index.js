@@ -11,6 +11,13 @@ import styles from './styles.module.css';
 import useGetTableView from './useGetTableView';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
+const DIVISION_NUMBER = 100000;
+const INITIAL_TOTAL_COUNT = 0;
+const INITIAL_PAGE = 1;
+const PAGE_LIMIT = 10;
+const VARIABLE_PAY_THRESHOLD = 0;
+const ARRAY_LENGTH = 1;
+
 function TableView({ search, activeTab }) {
 	const [ctcBreakup, setCtcBreakup] = useState();
 	const [error, setError] = useState(false);
@@ -35,9 +42,9 @@ function TableView({ search, activeTab }) {
 
 	const variable_pay = (Number(joining_bonus_yearly)
 				+ Number(retention_bonus_yearly)
-				+ Number(performance_linked_variable_yearly)) || 0;
+				+ Number(performance_linked_variable_yearly)) || VARIABLE_PAY_THRESHOLD;
 
-	if ((list || []).length < 1 && !loading) {
+	if ((list || []).length < ARRAY_LENGTH && !loading) {
 		return (
 			<EmptyState
 				flexDirection="column"
@@ -54,9 +61,9 @@ function TableView({ search, activeTab }) {
 				<div className={styles.pagination_container}>
 					<Pagination
 						type="table"
-						currentPage={page || 1}
-						totalItems={total_count || 0}
-						pageSize={page_limit || 10}
+						currentPage={page || INITIAL_PAGE}
+						totalItems={total_count || INITIAL_TOTAL_COUNT}
+						pageSize={page_limit || PAGE_LIMIT}
 						onPageChange={onPageChange}
 					/>
 				</div>
@@ -76,10 +83,11 @@ function TableView({ search, activeTab }) {
 					<span style={{ fontWeight: 600 }}>
 						Rs.
 						{' '}
-						{init / 100000}
+						{init / DIVISION_NUMBER}
 						{' '}
 						LPA (fixed)
-						{variable_pay > 0 ? ` + Rs. ${variable_pay / 100000} LPA (variable)`
+						{variable_pay > VARIABLE_PAY_THRESHOLD
+							? ` + Rs. ${variable_pay / DIVISION_NUMBER} LPA (variable)`
 							: null}
 					</span>
 					<CtcBreakup metadata={metadata} />

@@ -8,6 +8,8 @@ import useCreateEmployeeBankDetails from '../../../../hooks/useCreateEmployeeBan
 import controls from './controls';
 import styles from './styles.module.css';
 
+const INDEX_VALUE = 0;
+
 const MAPPING = [
 	'ifsc_code',
 	'account_holder_name',
@@ -33,7 +35,7 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 
 	useEffect(() => {
 		MAPPING.map((element) => (
-			setValue(element, bank_details?.[0]?.[element])
+			setValue(element, bank_details?.[INDEX_VALUE]?.[element])
 		));
 	}, [bank_details, setValue]);
 

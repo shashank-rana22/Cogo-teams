@@ -6,6 +6,8 @@ import CommonLoader from '../../../../common/Loader';
 
 import styles from './styles.module.css';
 
+const EMERGENCY_CONTACT_NUMBER_INDEX = 0;
+
 function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 	const { detail } = profileData || {};
 
@@ -31,8 +33,8 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 	const mobileNumber = `${mobile_country_code} ${mobile_number}`;
 
 	const emergencyContactDetails = !isEmpty(emergency_contact_details)
-		? `${emergency_contact_details?.[0]?.mobile_country_code}
-	${emergency_contact_details?.[0]?.mobile_number}` : '-';
+		? `${emergency_contact_details?.[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_country_code}
+	${emergency_contact_details?.[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_number}` : '-';
 
 	const formatdate = ({ date }) => formatDate({
 		date,

@@ -5,6 +5,9 @@ import { CTC_BREAK_MAPPING } from '../../../commons/ctcbreakMapping';
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+const TOFIXED_NUMBER = 2;
+
 function CtcBreakup({ metadata }) {
 	const {
 		joining_bonus_yearly,
@@ -68,13 +71,15 @@ function CtcBreakup({ metadata }) {
 								<div style={{ width: '20%' }}>
 									{yearlyValue != null ? (
 
-										<div>{Number(yearlyValue || 0).toFixed(2) ?? '___'}</div>
+										<div>
+											{Number(yearlyValue || DEFAULT_VALUE).toFixed(TOFIXED_NUMBER) ?? '___'}
+										</div>
 
 									) : null}
 								</div>
 								{monthlyValue != null ? (
 									<div style={{ width: '20%' }}>
-										{Number(monthlyValue || 0).toFixed(2) ?? '___'}
+										{Number(monthlyValue || DEFAULT_VALUE).toFixed(TOFIXED_NUMBER) ?? '___'}
 									</div>
 								) : null}
 							</div>

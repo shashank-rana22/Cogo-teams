@@ -8,12 +8,14 @@ import PreviewDocumet from '../../../../common/PreviewDocumet';
 import styles from './styles.module.css';
 import useUpdateBankDetails from './useUpdateBankDetails';
 
+const BANK_DETAILS_INDEX = 0;
+
 const MAPPING = ['bank_name', 'bank_branch_name', 'ifsc_code', 'account_holder_name', 'account_number'];
 
 function BankDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetails }) {
 	const { bank_details } = profileData || {};
 
-	const { id, status } = bank_details?.[0] || {};
+	const { id, status } = bank_details?.[BANK_DETAILS_INDEX] || {};
 
 	const { updateBankDetails } = useUpdateBankDetails({ id, getEmployeeDetails });
 
@@ -35,7 +37,7 @@ function BankDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetail
 								{startCase(element)}
 							</div>
 							<div className={styles.value}>
-								{bank_details?.[0]?.[element]}
+								{bank_details?.[BANK_DETAILS_INDEX]?.[element]}
 							</div>
 						</div>
 					))}
@@ -45,7 +47,7 @@ function BankDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetail
 					<div className={styles.label}>
 						Cancelled Cheque
 					</div>
-					<PreviewDocumet document_url={bank_details?.[0]?.cancelled_check_url} preview />
+					<PreviewDocumet document_url={bank_details?.[BANK_DETAILS_INDEX]?.cancelled_check_url} preview />
 				</div>
 			</div>
 

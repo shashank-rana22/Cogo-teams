@@ -9,6 +9,11 @@ import styles from './styles.module.css';
 import useRejectAction from './useRejectAction';
 import useTableView from './useTableView';
 
+const TOTAL_COUNT = 10;
+const INITIAL_TOTAL_COUNT = 0;
+const INITIAL_PAGE = 1;
+const ARRAY_LENGTH = 0;
+
 function TableView({ search, setSearch }) {
 	const { btnloading, updateEmployeeStatus } = useRejectAction();
 
@@ -42,7 +47,7 @@ function TableView({ search, setSearch }) {
 				</div>
 			</div>
 
-			{(list || []).length > 0 || loading ? (
+			{(list || []).length > ARRAY_LENGTH || loading ? (
 				<>
 					<StyledTable
 						columns={columns}
@@ -50,11 +55,11 @@ function TableView({ search, setSearch }) {
 						loading={loading}
 					/>
 
-					{data?.total_count > 10 && (
+					{data?.total_count > TOTAL_COUNT && (
 						<div className={styles.pagination_container}>
 							<Pagination
-								totalItems={data?.total_count || 0}
-								currentPage={page || 1}
+								totalItems={data?.total_count || INITIAL_TOTAL_COUNT}
+								currentPage={page || INITIAL_PAGE}
 								pageSize={data?.page_limit}
 								onPageChange={setPage}
 							/>

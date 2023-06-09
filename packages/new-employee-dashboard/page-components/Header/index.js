@@ -8,8 +8,8 @@ function Header() {
 	const router = useRouter();
 
 	const onClickAddNewJoinee = () => {
-		const href = '/new-employee-dashboard/add';
-		router.push(href, href);
+		const HREF = '/new-employee-dashboard/add';
+		router.push(HREF, HREF);
 	};
 
 	return (

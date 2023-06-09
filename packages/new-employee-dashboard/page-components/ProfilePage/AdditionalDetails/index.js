@@ -7,6 +7,8 @@ import EmploymentHistory from './EmploymentHistory';
 import Resume from './Resume';
 import styles from './styles.module.css';
 
+const BANK_DETAILS_INDEX = 0;
+
 function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetails }) {
 	const { progress_stats = {}, bank_details:bankDetails } = profileData || {};
 	const { additional_info_added = {} } = progress_stats;
@@ -45,7 +47,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 			return <Pill color="green">Completed</Pill>;
 		}
 
-		if (bankDetails?.[0]?.status === 'active' && name === 'bank_details') {
+		if (bankDetails?.[BANK_DETAILS_INDEX]?.status === 'active' && name === 'bank_details') {
 			return <Pill color="orange">Approval pending</Pill>;
 		}
 

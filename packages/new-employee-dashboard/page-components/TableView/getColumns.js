@@ -5,6 +5,8 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const NUMBER = 100;
+
 const COLOR_MAPPING = {
 	active           : '#f1ee8e',
 	rejected_by_user : '#bdbdbd',
@@ -60,7 +62,7 @@ const getColumns = ({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, 
 						</div>
 					</div>
 					<div>
-						{Math.round(progress_percentage * 100) / 100}
+						{Math.round(progress_percentage * NUMBER) / NUMBER}
 						% complete
 					</div>
 				</div>

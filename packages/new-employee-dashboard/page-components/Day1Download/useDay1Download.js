@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useCallback, useEffect } from 'react';
@@ -8,6 +10,8 @@ if (typeof window !== 'undefined') {
 	// eslint-disable-next-line global-require, import/no-unresolved
 	RichTextEditor = require('react-rte').default;
 }
+
+const FIRST_INDEX = 0;
 
 const useDay1Download = () => {
 	const [editorError, setEditorError] = useState(false);
@@ -30,7 +34,7 @@ const useDay1Download = () => {
 					},
 				});
 			} catch (error) {
-				console.log('error :: ', error);
+				Toast.error(getApiErrorString(error?.response?.data));
 			}
 		},
 		[listTrigger],
@@ -43,7 +47,7 @@ const useDay1Download = () => {
 	useEffect(() => {
 		if (!isEmpty(data?.list)) {
 			setEditorValue(
-				RichTextEditor?.createValueFromString((data?.list?.[0]?.html_template || ''), 'html'),
+				RichTextEditor?.createValueFromString((data?.list?.[FIRST_INDEX]?.html_template || ''), 'html'),
 			);
 		}
 	}, [data?.list]);
@@ -66,7 +70,7 @@ const useDay1Download = () => {
 
 		try {
 			const payload = {
-				id            : isUpdate ? data?.list[0]?.id : undefined,
+				id            : isUpdate ? data?.list[FIRST_INDEX]?.id : undefined,
 				category      : 'day_1',
 				html_template : editorValue.toString('html'),
 				name          : 'day 1 download',
@@ -77,7 +81,7 @@ const useDay1Download = () => {
 				data: payload,
 			});
 		} catch (error) {
-			console.log('error :: ', error);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 
