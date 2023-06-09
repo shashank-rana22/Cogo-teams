@@ -130,6 +130,7 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 									control={control}
 									key={controlName}
 									className={styles[`element_${controlName}`]}
+
 								/>
 
 								{errors[controlName]?.message
