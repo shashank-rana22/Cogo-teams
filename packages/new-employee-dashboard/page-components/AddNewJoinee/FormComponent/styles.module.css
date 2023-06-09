@@ -23,8 +23,7 @@
 }
 
 .label {
-	padding-top: 8px;
-	padding-bottom: 6px;
+	padding: 8px 0 6px;
 }
 
 .single_field {
@@ -33,14 +32,13 @@
 }
 
 .seperator {
-	padding-bottom: 30px;
+	padding: 0 0 30px;
 	margin-bottom: 8px;
 	border-bottom: 1px dashed #cedcde;
 }
 
 .form_header {
-	padding-top: 18px;
-	padding-bottom: 10px;
+	padding: 18px 0 10px;
 	font-size: 14px;
 	font-weight: 800;
 }

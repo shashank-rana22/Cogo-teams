@@ -34,7 +34,9 @@ const useCompanyPolicyDetails = () => {
 					},
 				});
 			} catch (error) {
-				Toast.error(getApiErrorString(error?.response?.data));
+				if (error?.response) {
+					Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+				}
 			}
 		},
 		[listTrigger, page],
@@ -55,7 +57,9 @@ const useCompanyPolicyDetails = () => {
 
 			fetch();
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	};
 

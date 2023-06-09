@@ -19,7 +19,9 @@ const useUpdateBankDetails = ({ id, getEmployeeDetails }) => {
 
 			getEmployeeDetails();
 		} catch (err) {
-			Toast.error(getApiErrorString(err?.response?.data));
+			if (err?.response) {
+				Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
+			}
 		}
 	};
 

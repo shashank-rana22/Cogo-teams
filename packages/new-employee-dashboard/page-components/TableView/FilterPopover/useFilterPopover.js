@@ -7,15 +7,8 @@ const useFilterPopover = ({ setFilters }) => {
 	const { control, handleSubmit, reset } = useForm();
 
 	const onSubmit = (values) => {
-		let filterApplied = false;
-
-		if (values?.roles) {
-			filterApplied = true;
-		}
-
-		if (values?.joining_date?.startDate || values?.joining_date?.endDate) {
-			filterApplied = true;
-		}
+		const { roles, joining_date } = values;
+  		const filterApplied = Boolean(roles || (joining_date?.startDate || joining_date?.endDate));
 
 		if (!filterApplied) {
 			setShowFilter(false);

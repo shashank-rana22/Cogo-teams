@@ -7,7 +7,6 @@ import { useState, useCallback, useEffect } from 'react';
 let RichTextEditor;
 
 if (typeof window !== 'undefined') {
-	// eslint-disable-next-line global-require, import/no-unresolved
 	RichTextEditor = require('react-rte').default;
 }
 

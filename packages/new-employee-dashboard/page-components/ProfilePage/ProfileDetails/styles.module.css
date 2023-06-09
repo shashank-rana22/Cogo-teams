@@ -22,6 +22,5 @@
 .status {
 	display: flex;
 	flex-basis: 80%;
-	flex-direction: row;
 	align-items: center;
 }

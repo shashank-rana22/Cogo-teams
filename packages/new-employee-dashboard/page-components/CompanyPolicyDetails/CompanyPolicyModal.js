@@ -39,7 +39,9 @@ function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
 			reset();
 			setShowModal(false);
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.response?.data));
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	};
 

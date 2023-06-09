@@ -13,16 +13,13 @@
 .per_container {
 	width: 44%;
 	padding: 16px;
-	margin-right: 26px;
-	margin-bottom: 22px;
-	margin-left: 26px;
+	margin: 0 26px 22px;
 	border: 1px solid #ffea9a;
 	border-radius: 6px;
 }
 
 .label_value_container {
-	padding-right: 20px;
-	padding-bottom: 16px;
+	padding: 0 20px 0 16px;
 }
 
 .top_bar {
