@@ -15,3 +15,13 @@
 		right: 0;
 	}
 }
+
+.input_container {
+	width: 24%;
+}
+
+.search_icon_style {
+	width: 20px;
+	height: 20px;
+	margin-top: 5px;
+}

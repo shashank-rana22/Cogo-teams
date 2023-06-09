@@ -7,13 +7,13 @@
 	justify-content: center;
 	margin-top: 12px;
 	margin-bottom: 12px;
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 }
 
 .name {
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: bold;
-	color: #e15151;
+	color: var(--color-accent-orange-2);
 }
 
 .modal_body {

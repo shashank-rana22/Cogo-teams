@@ -27,11 +27,11 @@ function ManageBpr() {
 		<div>
 			<SearchCard refetch={refetch} />
 			<div className={styles.search_box}>
-				<div style={{ width: '24%' }}>
+				<div className={styles.input_container}>
 					<Input
 						prefix={(
 							<IcMSearchdark
-								style={{ width: '20px', height: '20px', marginTop: '5px' }}
+								className={styles.search_icon_style}
 							/>
 						)}
 						suffix={(

@@ -16,7 +16,7 @@ interface RemoveBprParams {
 }
 
 function RemoveBpr({ refetch, row } : RemoveBprParams) {
-	const { id = '', businessName = '' } = row || {};
+	const { id = '', businessName = 'N/A' } = row || {};
 	const [showModal, setShowModal] = useState(false);
 	const { dataRemove, loadingOnDelete } = useRemoveBpr({ refetch, id });
 

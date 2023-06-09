@@ -48,11 +48,11 @@ function SearchCard({ refetch } : SearchCardParams) {
 						<div className={styles.sub_container}>
 							<div className={styles.id_container}>
 								<div className={styles.label_text}>Serial Id</div>
-								<div className={styles.value_text}>{orgData?.serial_id}</div>
+								<div className={styles.value_text}>{orgData?.serial_id || 'N/A'}</div>
 							</div>
 							<div className={styles.name_container}>
 								<div className={styles.label_text}>Bussiness Name</div>
-								<div className={styles.value_text}>{orgData?.legal_business_name}</div>
+								<div className={styles.value_text}>{orgData?.legal_business_name || 'N/A'}</div>
 							</div>
 
 							<Button

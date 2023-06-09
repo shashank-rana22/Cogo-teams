@@ -4,7 +4,7 @@
 	padding: 26px;
 	margin-top: 16px;
 	margin-bottom: 8px;
-	background-color: #ffff;
+	background-color: var(--color-secondary-5);
 	border-radius: 20px;
 	box-shadow: 0 0 5px rgb(0 0 0 / 50%);
 }
@@ -61,17 +61,16 @@
 
 .label_text {
 	margin-bottom: 6px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	line-height: 14px;
-	color: #828282;
+	color: var(--color-secondary-greyscale-3);
 }
 
 .value_text {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 500;
 	line-height: 14px;
-	color: #000;
 }
 
 .name_container {
