@@ -3,10 +3,10 @@ const NAVIGATION = 'employee_portal';
 const API_INDEX = 0;
 const FIRST_INDEX = 1;
 
-const getCustomAuthParams = ({ permissions_navigations, url }) => {
+const getCustomAuthParams = ({ permissions_navigations, URL }) => {
 	const navigationData = permissions_navigations[NAVIGATION] || {};
 
-	const apiName = url.split('/')?.[FIRST_INDEX] || url;
+	const apiName = URL?.split('/')?.[FIRST_INDEX] || URL;
 
 	const apiData = navigationData?.[apiName] || [];
 

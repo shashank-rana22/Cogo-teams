@@ -27,6 +27,10 @@ function Header({
 
 	const isLoading = loading || isEmpty(detail || {}) || false;
 
+	const offer_letter_active = (offerLetter || []).find((element) => (
+		['approved', 'active','accepted'].includes(element?.status)
+	));
+
 	return (
 		<div className={styles.container}>
 			<div>
@@ -79,7 +83,7 @@ function Header({
 			</div>
 
 			<div className={styles.button_container}>
-				{isEmpty(offerLetter) ? (
+				{(status === 'active' && isEmpty(offer_letter_active) )? (
 					<Button
 						onClick={() => setShowCtcBreakupModal(true)}
 						type="button"

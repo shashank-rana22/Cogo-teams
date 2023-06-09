@@ -21,29 +21,14 @@ function OfferLetter({ offerLetter, setShowCtcBreakupModal, offerLetterApiLoadin
 	if (isEmpty(offerLetter)) {
 		return (
 			<div className={styles.container}>
-				<EmptyState height={160} />
+				
 			</div>
 		);
 	}
 
 	return (
 		<div className={styles.container}>
-			{showAddCtcButton && (
-				<div className={styles.button_container}>
-					<Button
-						onClick={() => setShowCtcBreakupModal(true)}
-						type="button"
-						themeType="primary"
-						style={{ marginLeft: 12 }}
-					>
-						Add ctc breakup
-					</Button>
-				</div>
-			)}
-
-			<div>
-				<StyledTable columns={columns} data={offerLetter} loading={offerLetterApiLoading} />
-			</div>
+			<StyledTable columns={columns} data={offerLetter} loading={offerLetterApiLoading} />
 		</div>
 	);
 }

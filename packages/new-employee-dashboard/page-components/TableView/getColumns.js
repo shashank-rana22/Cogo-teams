@@ -9,9 +9,9 @@ const NUMBER = 100;
 const PROGRESS_PERCENTAGE = 0;
 
 const COLOR_MAPPING = {
-	active           : '#f1ee8e',
-	rejected_by_user : '#bdbdbd',
-	inactive         : '#ffcbd1',
+	active           : '#ddebc0',
+	rejected_by_user : '#ffcbd1',
+	inactive         : '#f1ee8e',
 };
 
 const getColumns = ({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, fetch }) => [
@@ -93,7 +93,7 @@ const getColumns = ({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, 
 							onClick={() => {
 								updateEmployeeStatus(id, 'active', fetch).then(() => fetch());
 							}}
-							themeType="tertiary"
+							themeType="secondary"
 						>
 							Re-Apply
 						</Button>
