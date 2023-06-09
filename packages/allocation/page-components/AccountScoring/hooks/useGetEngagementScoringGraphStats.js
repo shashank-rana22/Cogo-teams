@@ -23,7 +23,7 @@ const useGetEngagementScoringGraphStats = (props) => {
 		method  : 'GET',
 		authkey : 'get_allocation_engagement_scoring_score_graph',
 		params,
-	}, { manual: true });
+	}, { manual: false });
 
 	useEffect(() => {
 		if (duration !== 'custom') {
@@ -36,13 +36,14 @@ const useGetEngagementScoringGraphStats = (props) => {
 
 	useEffect(() => {
 		if (!(isEmpty(scoreTrendIds)) && !(isEmpty(dateRange))) {
+			// console.log('Hello');
 			setParams((pv) => ({
 				...pv,
 				service_id,
 				service_user_id,
 				service_type,
-				from_date : dateRange.startDate,
-				to_date   : dateRange.endDate,
+				from_date : dateRange.startDate || new Date(),
+				to_date   : dateRange.endDate || new Date(),
 			}));
 		}
 	}, [scoreTrendIds, service_id, service_type, service_user_id, dateRange]);

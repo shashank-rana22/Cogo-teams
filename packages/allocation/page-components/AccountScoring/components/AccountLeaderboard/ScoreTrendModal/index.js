@@ -30,27 +30,34 @@ function ScoreTrendModal(props) {
 			animate
 			scroll={false}
 		>
-			<Modal.Header title="Engagement Score percentile vs time" />
+			<Modal.Header className={styles.header} title="Engagement Score percentile vs time" />
 
 			<Modal.Body>
-				<div>
-					<Select
-						value={duration}
-						onChange={setDuration}
-						options={DURATION_OPTIONS}
-						placeholder="Select Duration"
-					/>
+				<div className={styles.filter_container}>
+					<div className={styles.control_container}>
+						<label className={styles.label}>Duration</label>
 
-					<DateRangepicker
-						value={dateRange}
-						onChange={(temp) => setDateRange((pv) => ({
-							startDate : temp.startDate || pv.startDate,
-							endDate   : temp.endDate || pv.endDate,
-						}))}
-						isPreviousDaysAllowed
-						maxDate={new Date()}
-						disable={duration !== 'custom'}
-					/>
+						<div className={styles.select_container}>
+							<Select
+								value={duration}
+								onChange={setDuration}
+								options={DURATION_OPTIONS}
+								placeholder="Select Duration"
+							/>
+						</div>
+					</div>
+
+					<div className={styles.control_container}>
+						<label className={styles.label}>Date Range</label>
+
+						<DateRangepicker
+							value={dateRange}
+							onChange={setDateRange}
+							isPreviousDaysAllowed
+							maxDate={new Date()}
+							disable={duration !== 'custom'}
+						/>
+					</div>
 				</div>
 
 				<div className={styles.score_graph}>

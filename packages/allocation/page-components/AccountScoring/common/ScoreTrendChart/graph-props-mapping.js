@@ -15,7 +15,7 @@ const GRAPH_PROPS_MAPPING = {
 	},
 	modal: {
 		margin: {
-			top    : 10,
+			top    : 40,
 			right  : 10,
 			bottom : 80,
 			left   : 80,
