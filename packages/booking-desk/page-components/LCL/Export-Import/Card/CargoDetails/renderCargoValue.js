@@ -2,12 +2,14 @@ import { startCase, upperCase } from '@cogoport/utils';
 
 import NUMERICAL_VALUES from '../../../../../config/NUMERICAL_VALUES.json';
 
-export const renderValue = (label, value) => {
+export const renderValue = (label, value, allDetails) => {
 	switch (label) {
-		case 'container_size': { return value.includes('HC') ? value.replace('HC', 'ft HC') : `${value}ft`; }
-		case 'containers_count': { return `${value} Container${value > NUMERICAL_VALUES.one ? 's' : ''}`; }
 		case 'inco_term': { return `Inco - ${upperCase(value)}`; }
-		case 'cargo_weight_per_container': { return `${value} MT`; }
+		case 'weight': { return `${value} kgs`; }
+		case 'volume': { return ` ${value} cbm ${`, Chargeable Weight: ${Math.max(
+			value * NUMERICAL_VALUES.chargable_weight_factor,
+			allDetails?.weight,
+		).toFixed(NUMERICAL_VALUES.two)} kg`}`; }
 		default: { return startCase(value); }
 	}
 };

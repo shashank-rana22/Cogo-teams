@@ -3,14 +3,14 @@
         "task_attributes":[
             {
                 "task": "mark_confirmed",
-                "state": "shipment_received",
-                "status": "completed"
-            },
-            {
-                "task": "mark_confirmed",
                 "state": "awaiting_service_provider_confirmation",
                 "status": "pending",
                 "assigned_stakeholder": "service_ops1"
+            },
+            {
+                "task": "mark_confirmed",
+                "state": "shipment_received",
+                "status": "completed"
             }
         ],
         "booking_preference":true
@@ -18,18 +18,23 @@
     "upload_bn": {
         "task_attributes":[
             {
-                "task": "upload_booking_note",
-                "status": "pending"
-            },   
-            {
                 "task": "mark_confirmed",
                 "state": "awaiting_service_provider_confirmation",
                 "status": "completed"
-            }
+            },
+            {
+                "task": "upload_booking_note",
+                "status": "pending"
+            }   
         ]
     },
     "amend_bn": {
         "task_attributes":[
+            {
+                "task": "mark_confirmed",
+                "state": "awaiting_service_provider_confirmation",
+                "status": "completed"
+            },
             {
                 "task": "upload_booking_note",
                 "status": "completed"
@@ -37,11 +42,6 @@
             {
                 "task": "amend_booking_note",
                 "status": "pending"
-            },
-            {
-                "task": "mark_confirmed",
-                "state": "awaiting_service_provider_confirmation",
-                "status": "completed"
             }
         ]
     },

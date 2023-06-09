@@ -1,6 +1,5 @@
-import { IcCFfcl } from '@cogoport/icons-react';
+import { IcCFlcl } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
-import { format } from '@cogoport/utils';
 
 import CardHeader from '../../../../commons/Card/CardHeader';
 import PortDetails from '../../../../commons/Card/PortDetails/DualLocation';
@@ -10,7 +9,7 @@ import styles from '../../card.module.css';
 
 import CargoDetails from './CargoDetails';
 
-export default function Card({ item = {}, couldBeCardsCritical = false, activeTab = '' }) {
+export default function Card({ item = {}, couldBeCardsCritical = false }) {
 	const router = useRouter();
 	const handleCardClick = (e) => {
 		window.location.href = e.target.href;
@@ -33,20 +32,12 @@ export default function Card({ item = {}, couldBeCardsCritical = false, activeTa
 
 				<div className={styles.separator} />
 
-				<PortDetails data={item} icon={{ Icon: IcCFfcl, text: 'FCL' }} />
+				<PortDetails data={item} icon={{ Icon: IcCFlcl, text: 'LCL' }} />
 
 				<div className={styles.separator} />
 
-				<CargoDetails cargo_details={item?.cargo_details || []} activeTab={activeTab} item={item} />
+				<CargoDetails cargo_details={item} />
 			</div>
-
-			{item?.approved_at ? (
-				<div className={styles.card_footer}>
-					Approved by RD at:
-					{' '}
-					{format(item.approved_at, 'dd MMM yyyy | hh:mm aaa')}
-				</div>
-			) : null}
 		</a>
 	);
 }

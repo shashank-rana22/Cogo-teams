@@ -1,6 +1,6 @@
 .card {
-	display: block;
 	position: relative;
+	display: block;
 	border-radius: 4px;
 	box-shadow: 0 0 6px 2px rgb(68 68 68 / 20%);
 

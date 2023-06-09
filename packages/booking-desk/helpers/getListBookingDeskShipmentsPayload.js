@@ -32,6 +32,9 @@ const SHIPMENT_STATES = {
 	],
 	cancelled: ['cancelled'],
 };
+
+const TRADE_TYPES = ['import', 'export'];
+
 SHIPMENT_STATES.completed = [...SHIPMENT_STATES.in_progress, 'completed'];
 
 const SHIPMENT_SPECIFIC_PAYLOAD = {
@@ -72,6 +75,7 @@ export default function getListBookingDeskShipmentsPayload({
 			...(selected_agent_id && { stakeholder_id: selected_agent_id }),
 			...(isCriticalVisible && isCriticalOn ? criticalPayload : {}),
 			...(q && { q }),
+			...(TRADE_TYPES.includes(segmentedTab) && { trade_type: segmentedTab }),
 		},
 		page,
 		additional_methods : ['pagination'],
