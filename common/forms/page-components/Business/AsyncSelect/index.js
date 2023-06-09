@@ -63,6 +63,8 @@ import {
  * getModifiedOptions
  */
 
+const INDEX = 0;
+const SLICE_VALUE = -1;
 const keyAsyncFieldsParamsMapping = {
 	organizations                        : asyncFieldsOrganizations,
 	organization_users                   : asyncFieldsOrganizationUser,
@@ -140,14 +142,14 @@ function AsyncSelect(props) {
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
 		let selectedValue;
 		if (multiple) {
-			selectedValue = rest.value.slice(-1);
+			selectedValue = rest.value.slice(SLICE_VALUE);
 		} else {
 			selectedValue = rest.value;
 		}
 
 		const selectedOption = getAsyncOptionsProps.options.filter((option) => option.id === selectedValue);
 
-		getSelectedOption(selectedOption[0]);
+		getSelectedOption(selectedOption[INDEX]);
 	}
 
 	const Element = multiple ? MultiSelect : Select;
