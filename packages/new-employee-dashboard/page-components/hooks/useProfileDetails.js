@@ -6,9 +6,9 @@ import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
 import {
-	ctcModalControls,
-	ctcModalLessControls,
+	ctcModalControls
 } from '../../utils/ctc-modal-controls';
+import {ctcModalLessControls} from '../../utils/ctc-modal-less-controls';
 
 const useProfileDetails = () => {
 	const { query } = useSelector((state) => state.general);
