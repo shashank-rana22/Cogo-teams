@@ -33,23 +33,20 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 				},
 			};
 
-			const promise = request({
-				method : 'POST',
-				url    : '/create_communication',
-				data   : payload,
-			});
-
-			acc.push(promise);
-
-			return acc;
+			return [
+				...acc,
+				request({
+					method : 'POST',
+					url    : '/create_communication',
+					data   : payload,
+				}),
+			];
 		}, []);
 
 		try {
 			await Promise.all(promises);
 
-			Toast.success(
-				'Issue has been noted',
-			);
+			Toast.success('Issue has been noted');
 
 			setShowErrorModal(false);
 		} catch (error) {
