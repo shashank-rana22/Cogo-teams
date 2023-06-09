@@ -1,9 +1,14 @@
 {
-    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails"],  
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails","purchase"],
+    
     "shipment_info":{},
+    "shipment_header" : {
+        "can_add_po_number": true
+    },
     "timeline": {
         "can_edit": true
     },
+
     "default_tab":"tasks",
     "overview":{
         "tab_title":"Overview"
@@ -14,6 +19,9 @@
         "checked_show_my_tasks":false,
         "is_task_assigned":false
     },
+    "purchase":{
+        "tab_title":"Purchase Invoice"
+    },
     "documents":{
         "tab_title":"Documents",
         "default_wallet":"trade_documents"
@@ -21,6 +29,7 @@
     "emails":{
         "tab_title":"Emails"
     },
+
     "cancel_shipment": {
         "can_cancel": true,
         "list_reasons": {
@@ -32,6 +41,7 @@
     "edit_params": {
         "can_edit": true
     },
+
     "additional_services": {
         "action_buttons": {
             "reallocate": false,

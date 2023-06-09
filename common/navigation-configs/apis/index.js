@@ -37,9 +37,11 @@ import pms from './port-management';
 import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
 import rfq from './rfq-apis';
+import rfq_dashboard from './rfq-dashboard-apis';
 import saas from './saas';
 import saas_subscription from './saas-subscription';
 import saas_tools from './saas-tools';
+import sales_invoice from './sales-invoice-apis';
 import search from './search-apis';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
@@ -119,6 +121,7 @@ const apis = {
 	...allocation,
 	manage_rfq,
 	app_manage_rfq,
+	rfq_dashboard,
 	bl_do_collection_release,
 	kam_desk,
 	document_desk,
@@ -139,6 +142,7 @@ const apis = {
 	booking_desk,
 	poc,
 	...athena_dashboard,
+	sales_invoice,
 	...saas_subscription,
 	...chakravyuh,
 };

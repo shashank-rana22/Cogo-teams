@@ -6,6 +6,7 @@ export { default as MultiselectController } from './page-components/Controlled/M
 export { default as ChipsController } from './page-components/Controlled/ChipsController';
 export { default as DatepickerController } from './page-components/Controlled/DatepickerController';
 export { default as InputController } from './page-components/Controlled/InputController';
+export { default as InputGroupController } from './page-components/Controlled/InputGroupController';
 export { default as MobileNumberController } from './page-components/Controlled/MobileNumberController';
 export { default as UploadController } from './page-components/Controlled/UploadController';
 export { default as PillsController } from './page-components/Controlled/PillsController';
@@ -25,6 +26,7 @@ export { default as CreatableSelectController } from './page-components/Controll
 export { default as CreatableMultiSelectController } from './page-components/Controlled/CreatableMultiSelectController';
 export { default as CountrySelectController } from './page-components/Controlled/CountrySelectController';
 export { default as ToggleController } from './page-components/Controlled/ToggleController';
+export { default as RangeSliderController } from './page-components/Controlled/RangeSliderController';
 export { default as SingleDateRangeController } from './page-components/Controlled/SingleDateRangeController';
 export { default as AsyncSelect } from './page-components/Business/AsyncSelect';
 

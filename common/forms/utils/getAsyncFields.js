@@ -493,6 +493,84 @@ function asyncQuotaList() {
 	};
 }
 
+function asyncFortigoLocations() {
+	return {
+		labelKey    : 'location_name',
+		valueKey    : 'id',
+		endpoint    : 'list_shipment_fortigo_trip_locations',
+		initialCall : true,
+	};
+}
+
+function asyncOrganizationBranches() {
+	return {
+		valueKey      : 'id',
+		labelKey      : 'branch_name',
+		endpoint      : 'list_organization_branches',
+		initialCall   : true,
+		defaultParams : {
+			filters    : { status: 'active' },
+			page_limit : 10,
+		},
+	};
+}
+
+function asyncListFAQTopics() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_topics',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListFAQTags() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_tags',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListCourseCategories() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_course_categories',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListTests() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_tests',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -534,4 +612,10 @@ export {
 	asyncPlanPricingList,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
+	asyncFortigoLocations,
+	asyncOrganizationBranches,
+	asyncListFAQTopics,
+	asyncListFAQTags,
+	asyncListCourseCategories,
+	asyncListTests,
 };
