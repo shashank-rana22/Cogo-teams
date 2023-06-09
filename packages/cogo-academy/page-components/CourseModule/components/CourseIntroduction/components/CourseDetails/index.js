@@ -64,7 +64,7 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 			</div>
 
 			<div className={styles.description}>
-				<b>About the course &nbsp;:&nbsp;</b>
+				<strong>About the course &nbsp;:&nbsp;</strong>
 				{description}
 			</div>
 
@@ -75,7 +75,9 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 			))}
 
 			<div className={styles.instructions}>
-				<div className={styles.instruction_head}><b>In this course, you will learn (Objectives)</b></div>
+				<div className={styles.instruction_head}>
+					<strong>In this course, you will learn (Objectives)</strong>
+				</div>
 
 				{course_objectives?.map((item, index) => (
 					<div key={item}>
@@ -106,10 +108,10 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 
 								return (
 									<div key={key}>
-										<b>
+										<strong>
 											{course_stats?.[apiKey]
 										|| getModulesCount({ course_modules, type: key })}
-										</b>
+										</strong>
 										{' '}
 										{label}
 									</div>
@@ -126,7 +128,7 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 								{practice_tests}
 								&nbsp;Practice Tests
 							</div>
-							<div><b>{course_completion_rewards_details?.[FIRST_INDEX]}</b></div>
+							<div><strong>{course_completion_rewards_details?.[FIRST_INDEX]}</strong></div>
 						</div>
 					</div>
 				</div>
