@@ -2,8 +2,6 @@ import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
 
-const VN_ENTITY_CODE = 501;
-
 const GLOBAL_CONSTANTS = {
 	country_entity_ids: {
 		IN : '6fd98605-9d5d-479d-9fac-cf905d292b88',
@@ -131,12 +129,6 @@ const GLOBAL_CONSTANTS = {
 		outgoing_orange_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
 		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
 
-	},
-
-	features: {
-		freight_sales_invoice: {
-			restricted_entity_ids: ENTITY_MAPPING[VN_ENTITY_CODE].id,
-		},
 	},
 
 	options: {
