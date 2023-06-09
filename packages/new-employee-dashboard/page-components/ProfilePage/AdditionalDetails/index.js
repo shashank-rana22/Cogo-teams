@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetails }) {
 	const { progress_stats = {}, bank_details:bankDetails } = profileData || {};
 	const { additional_info_added = {} } = progress_stats;
-	
+
 	const {
 		bank_details = false,
 		educational_qualification = false,
@@ -18,7 +18,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 		resume = false,
 	} = additional_info_added;
 
-	const data = [
+	const COMPONENT_MAPPING = [
 		{
 			name        : 'employment_history',
 			content     : EmploymentHistory,
@@ -54,7 +54,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 
 	return (
 		<div className={styles.container}>
-			{data.map((item) => {
+			{COMPONENT_MAPPING.map((item) => {
 				const { content: Component, isCompleted, name } = item;
 
 				return (

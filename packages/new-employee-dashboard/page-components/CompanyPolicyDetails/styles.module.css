@@ -28,3 +28,9 @@
 	flex-direction: row;
 	justify-content: flex-start;
 }
+
+.view_text{
+	margin:0px 4px;
+	text-decoration: underline;
+	cursor: pointer;
+}

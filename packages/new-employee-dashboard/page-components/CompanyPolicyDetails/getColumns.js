@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMDocument, IcMEyeopen, IcMDelete } from '@cogoport/icons-react';
+import { IcMEyeopen, IcMDelete } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
@@ -12,26 +12,26 @@ const getColumns = ({ onClickViewDocument, setShowModal, onClickDeleteButton, lo
 			<div className={styles.name}>{item?.name || '-'}</div>
 		),
 	},
+
 	{
 		Header   : 'FILE',
-		accessor : (item) => {
-			const arr = item?.document_url?.split('/');
-			const docName = arr[arr.length - 1];
+		accessor : (item) => (
+			<div
+				role="presentation"
+				style={{ display: 'flex', alignItems: 'center' }}
+				onClick={() => onClickViewDocument(item?.document_url)}
+			>
+				<div className={styles.view_text}>View PDF</div>
+				<IcMEyeopen
+					width={14}
+					height={14}
+					style={{ cursor: 'pointer' }}
 
-			return (
-				<div style={{ display: 'flex', alignItems: 'center' }}>
-					<IcMDocument width={14} height={14} />
-					<div style={{ margin: '0 4px' }}>{docName || 'View PDF'}</div>
-					<IcMEyeopen
-						width={14}
-						height={14}
-						style={{ cursor: 'pointer' }}
-						onClick={() => onClickViewDocument(item?.document_url)}
-					/>
-				</div>
-			);
-		},
+				/>
+			</div>
+		),
 	},
+
 	{
 		Header   : 'UPLOAD DATE',
 		accessor : (item) => (
@@ -44,6 +44,7 @@ const getColumns = ({ onClickViewDocument, setShowModal, onClickDeleteButton, lo
 			</div>
 		),
 	},
+
 	{
 		Header   : 'UPLOAD/DELETE',
 		accessor : (item) => (
