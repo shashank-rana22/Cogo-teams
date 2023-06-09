@@ -1,6 +1,6 @@
+import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
-import CURRENCY_CODE from './currencyCode'
 
 const GLOBAL_CONSTANTS = {
 	country_entity_ids: {
@@ -9,8 +9,8 @@ const GLOBAL_CONSTANTS = {
 	},
 	platform_supported_country_codes: ['IN', 'VN'],
 
-	currency_code : CURRENCY_CODE,
-	currency_locale: {
+	currency_code   : CURRENCY_CODE,
+	currency_locale : {
 		INR : 'en-IN',
 		USD : 'en-US',
 		VND : 'vi-VN',
@@ -125,12 +125,11 @@ const GLOBAL_CONSTANTS = {
 
 	},
 
-	features:{
-		freight_sales_invoice:{
-			restricted_entity_ids: [ENTITY_MAPPING[501].id] 
-		}
+	features: {
+		freight_sales_invoice: {
+			restricted_entity_ids: [ENTITY_MAPPING[501].id],
+		},
 	},
-
 
 	options: {
 		upload_file_size: {
@@ -139,44 +138,44 @@ const GLOBAL_CONSTANTS = {
 			'15MB' : '15728640',
 		},
 		freight_invoice_currency: {
-			IN: [CURRENCY_CODE.INR, CURRENCY_CODE.USD],
-			GB: [CURRENCY_CODE.GBP, CURRENCY_CODE.EUR, CURRENCY_CODE.USD],
-			VN: [CURRENCY_CODE.USD, CURRENCY_CODE.VND],
-			OTHERS: [CURRENCY_CODE.USD,CURRENCY_CODE.EUR,CURRENCY_CODE.INR],
+			IN     : [CURRENCY_CODE.INR, CURRENCY_CODE.USD],
+			GB     : [CURRENCY_CODE.GBP, CURRENCY_CODE.EUR, CURRENCY_CODE.USD],
+			VN     : [CURRENCY_CODE.USD, CURRENCY_CODE.VND],
+			OTHERS : [CURRENCY_CODE.USD, CURRENCY_CODE.EUR, CURRENCY_CODE.INR],
 		},
-		inco_term:{
-			cif : {
-				trade_type : 'export'
+		inco_term: {
+			cif: {
+				trade_type: 'export',
 			},
-			cfr : {
-				trade_type : 'export'
+			cfr: {
+				trade_type: 'export',
 			},
-			cpt : {
-				trade_type : 'export'
+			cpt: {
+				trade_type: 'export',
 			},
-			cip : {
-				trade_type : 'export'
+			cip: {
+				trade_type: 'export',
 			},
-			dat : {
-				trade_type : 'export'
+			dat: {
+				trade_type: 'export',
 			},
-			dap : {
-				trade_type : 'export'
+			dap: {
+				trade_type: 'export',
 			},
-			ddp : {
-				trade_type : 'export'
+			ddp: {
+				trade_type: 'export',
 			},
-			fob : {
-				trade_type : 'import'
+			fob: {
+				trade_type: 'import',
 			},
-			exw : {
-				trade_type : 'import'
+			exw: {
+				trade_type: 'import',
 			},
-			fca : {
-				trade_type : 'import'
+			fca: {
+				trade_type: 'import',
 			},
-			fas : {
-				trade_type : 'import'
+			fas: {
+				trade_type: 'import',
 			},
 		},
 	},
@@ -185,12 +184,12 @@ const GLOBAL_CONSTANTS = {
 		number: /^[+-]?\d*\.?\d+$/,
 	},
 
-	languages : LANGUAGE_OPTIONS,
+	languages: LANGUAGE_OPTIONS,
 
-	others : {
-		old_shipment_serial_id : 120347
-	}
-	
+	others: {
+		old_shipment_serial_id: 120347,
+	},
+
 };
 
 export default GLOBAL_CONSTANTS;
