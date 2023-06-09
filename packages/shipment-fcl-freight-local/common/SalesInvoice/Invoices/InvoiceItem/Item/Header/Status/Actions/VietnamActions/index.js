@@ -131,48 +131,6 @@ function Actions({
 						</Tooltip>
 					) : null}
 				</div>
-				<div className={styles.actions_wrap}>
-					<div className={styles.email_wrapper}>
-						<IcMEmail
-							onClick={() => setSendEmail(true)}
-						/>
-
-						<Tooltip
-							placement="bottom"
-							theme="light"
-							content={(
-								<div className={styles.tooltip_child}>
-									<div className={styles.flex_row}>
-										Proforma email sent :
-										&nbsp;
-										{invoice.proforma_email_count || INITIAL_STATE}
-									</div>
-
-									<div className={cl`${styles.flex_row} ${styles.margin}`}>
-										Live email sent:
-										&nbsp;
-										{invoice.sales_email_count || INITIAL_STATE}
-									</div>
-									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
-										<div className={cl`${styles.flex_row} ${styles.margin}`}>
-											UTR Number:
-											&nbsp;
-											{invoice?.sales_utr?.utr_number || ''}
-										</div>
-										<div className={cl`${styles.flex_row} ${styles.margin}`}>
-											Status:
-											&nbsp;
-											{invoice?.sales_utr?.status || ''}
-										</div>
-									</div>
-								</div>
-							)}
-						>
-							<div className={styles.icon_div}>
-								<IcMInfo />
-							</div>
-						</Tooltip>
-					</div>
 					<KebabContent
 						invoice={invoice}
 						shipment_data={shipment_data}
@@ -183,7 +141,6 @@ function Actions({
 						setShowChangePaymentMode={setShowChangePaymentMode}
 						setIsEditInvoice={setIsEditInvoice}
 					/>
-				</div>
 			</div>
 
 			{(invoice.services || []).length && isEditInvoice ? (

@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 const useOrgOutStanding = ({ org_reg_nums }) => {
 	const [{ loading, data: proformaData }, trigger] = useRequest({
-		url    : 'list_sage_ar_outstandings',
+		url    : '/list_sage_ar_outstandings',
 		method : 'GET',
 		params : {
 			filters: {

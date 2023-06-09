@@ -38,7 +38,7 @@ function KebabContent({
 		setShow(false);
 	};
 
-	const remarkRender = () => (
+	const remark_container = () => (
 		<div className={styles.remarkcontainer}>
 			<div className={styles.title}>Invoice Remarks</div>
 			<div className={styles.value}>{invoice.remarks}</div>
@@ -149,7 +149,7 @@ function KebabContent({
 			{!isEmpty(invoice.remarks) ? (
 				<Tooltip
 					placement="bottom"
-					content={remarkRender()}
+					content={remark_container()}
 				>
 					<div className={styles.icon_more_wrapper}>
 						<IcMInfo fill="#DDEBC0" />

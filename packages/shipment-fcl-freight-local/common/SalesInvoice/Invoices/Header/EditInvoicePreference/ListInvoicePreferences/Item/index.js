@@ -30,7 +30,7 @@ function Item({
 		id = '',
 	} = invoice || {};
 
-	const open = openedService && openedService?.id === id;
+	const open = openedService?.id === id;
 
 	const handleServiceToggle = () => {
 		setOpenedService(open ? null : invoice);
