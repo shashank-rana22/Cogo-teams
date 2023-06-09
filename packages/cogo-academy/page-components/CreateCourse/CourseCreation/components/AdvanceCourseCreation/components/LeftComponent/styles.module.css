@@ -1,0 +1,55 @@
+.ind_container {
+	display: flex;
+	align-items: center;
+	padding: 12px 24px;
+	margin: 12px 0;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 4px;
+	box-shadow: 0 0 4px rgb(98 127 172 / 20%);
+
+	&.active_tab {
+		background: #f7faef;
+	}
+}
+
+.item {
+	margin: 12px 0;
+
+	&.active_tab {
+		:global {
+			.ui_accordion_header {
+				background: #f7faef;
+			}
+		}
+	}
+}
+
+.child_container {
+	margin: 6px 0;
+	cursor: pointer;
+
+	&.active {
+		font-weight: 800;
+	}
+}
+
+.number {
+	width: 12px;
+	height: 12px;
+	margin-right: 12px;
+	font-size: 10px;
+	color: #000;
+	text-align: center;
+	border: 1px solid #221f20;
+	border-radius: 50%;
+}
+
+.index {
+	margin-top: -2px;
+}
+
+.flex {
+	display: flex;
+	align-items: center;
+}

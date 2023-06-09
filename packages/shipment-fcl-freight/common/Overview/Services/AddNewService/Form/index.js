@@ -92,8 +92,8 @@ function Form({
 						</div>
 					) : null}
 
-					{startCase(upsellableService?.trade_type)}
-					{' '}
+					{startCase(upsellableService.trade_type)}
+					&nbsp;
 					{startCase(service)}
 				</div>
 			)}
