@@ -2,7 +2,12 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useGetIrnGeneration = ({ id, refetch }) => {
+interface IrnGenerationProps {
+	id?: string,
+	refetch?: Function
+}
+
+const useGetIrnGeneration = ({ id, refetch }: IrnGenerationProps) => {
 	const { profile = {} } = useSelector((state) => state || {});
 
 	const { user = {} } = profile;

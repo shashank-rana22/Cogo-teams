@@ -12,7 +12,7 @@ function UtrNumber({ eventData }) {
 		const { paymentInfoRec } = data || [];
 
 		return (paymentInfoRec || []).map((dataItem) => (
-			<div className={styles.container} key={dataItem.documentNumber}>
+			<div className={styles.container}>
 				<div className={styles.sub_container}>
 					{dataItem.sourceType}
 					{' '}

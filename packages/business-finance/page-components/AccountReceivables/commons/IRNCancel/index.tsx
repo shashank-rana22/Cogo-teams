@@ -22,7 +22,7 @@ function IRNCancel({ itemData }) {
 		? irnGeneratedAt + TIME_VALUE >= Date.now()
 		: false;
 
-	const { postToSage, loading } = usePostToSage({ id });
+	const { postToSage, loading } = usePostToSage(id);
 
 	const { labels } = CogoportEntity[entityCode] || {};
 
