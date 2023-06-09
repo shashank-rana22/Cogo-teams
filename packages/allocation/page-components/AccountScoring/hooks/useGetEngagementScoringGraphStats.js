@@ -1,17 +1,58 @@
 import { useAllocationRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
+import { useState, useEffect } from 'react';
+
+const INITAIL_SET_DURATION = 60;
+const MILISECONDS_IN_ONE_DAY = 86400000;
 
 const useGetEngagementScoringGraphStats = (props) => {
 	const { scoreTrendIds } = props;
+
+	const {
+		service_id,
+		service_type,
+		service_user_id,
+	} = scoreTrendIds;
+
+	const [duration, setDuration] = useState(INITAIL_SET_DURATION);
+	const [dateRange, setDateRange] = useState({});
+	const [params, setParams] = useState({});
 
 	const [{ data }] = useAllocationRequest({
 		url     : 'engagement_scoring_score_graph',
 		method  : 'GET',
 		authkey : 'get_allocation_engagement_scoring_score_graph',
-		params  : scoreTrendIds,
+		params,
 	}, { manual: false });
+
+	useEffect(() => {
+		if (duration !== 'custom') {
+			setDateRange({
+				startDate : new Date(Date.now() - (duration * MILISECONDS_IN_ONE_DAY)),
+				endDate   : new Date(),
+			});
+		}
+	}, [duration]);
+
+	useEffect(() => {
+		if (!(isEmpty(scoreTrendIds))) {
+			setParams((pv) => ({
+				...pv,
+				service_id,
+				service_user_id,
+				service_type,
+				from_date : dateRange.startDate,
+				to_date   : dateRange.endDate,
+			}));
+		}
+	}, [scoreTrendIds, service_id, service_type, service_user_id, dateRange]);
 
 	return {
 		data,
+		duration,
+		setDuration,
+		dateRange,
+		setDateRange,
 	};
 };
 
