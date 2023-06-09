@@ -1,16 +1,16 @@
 import styles from './styles.module.css';
 
 interface DataInterface {
-	data: {
-		cancelledEInvoiceDetails: AggreementFile;
+	data?: {
+		cancelledEInvoiceDetails?: AggreementFile;
 	}
 }
 
 interface AggreementFile {
-	agreementNumber: string;
-	agreementDate: string;
-	agreementDocument: string;
-	eInvoiceForm04: string;
+	agreementNumber?: string;
+	agreementDate?: string;
+	agreementDocument?: string;
+	eInvoiceForm04?: string;
 }
 
 function CancellationAgreement({ data }: DataInterface) {

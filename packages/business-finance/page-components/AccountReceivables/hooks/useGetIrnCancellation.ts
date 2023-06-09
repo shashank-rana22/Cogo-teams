@@ -9,9 +9,9 @@ interface IrnCancellationProps {
 	},
 }
 interface Values {
-	Agreement_number?: string;
-	Agreement_date?: string;
-	Agreement_pdf_file?: AgreementPdfFile;
+	AgreementNumber?: string;
+	AgreementDate?: string;
+	AgreementPdfFile?: AgreementPdfFile;
 }
 
 interface AgreementPdfFile {
@@ -32,16 +32,15 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal, response }: IrnCa
 	);
 
 	const { remarks } = response || {};
-	
 	const onSubmit = async (values: Values) => {
-		const { Agreement_number, Agreement_date , Agreement_pdf_file } = values || {};
-		const { finalUrl } = Agreement_pdf_file || {};
+		const { AgreementNumber, AgreementDate, AgreementPdfFile } = values || {};
+		const { finalUrl } = AgreementPdfFile || {};
 		try {
 			const payload = {
-				cancelReason      : remarks || undefined,
-				agreementNumber   : Agreement_number || undefined,
-				agreementDate     : Agreement_date || undefined,
-				agreementDocument : finalUrl || undefined,
+				cancelReason     : remarks || undefined,
+				agreementNumber  : AgreementNumber || undefined,
+				agreementDate    : AgreementDate || undefined,
+				agrDmentDocument : finalUrl || undefined,
 			};
 			const resp = await cancelIrnApi({
 				data: payload,
