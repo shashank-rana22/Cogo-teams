@@ -8,7 +8,10 @@ import CardList from './CardList';
 import SelectFilter from './SelectFilter';
 import styles from './styles.module.css';
 
-function ShipmentId({ data, loading, filters, setFilters, activeTab }) {
+function ShipmentId({
+	data, loading, filters, setFilters, activeTab,
+	getDashboardData, getDahboardStatsData,
+}) {
 	const { search } = filters || {};
 	const { list = [], total_count, page_limit } = data || {};
 	const [searchInput, setSearchInput] = useState(null);
@@ -50,6 +53,8 @@ function ShipmentId({ data, loading, filters, setFilters, activeTab }) {
 			<CardList
 				itemData={item}
 				key={item?.serial_id}
+				getDashboardData={getDashboardData}
+				getDahboardStatsData={getDahboardStatsData}
 			/>
 		));
 	};

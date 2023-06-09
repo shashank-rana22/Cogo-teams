@@ -42,6 +42,6 @@
 .point {
 	width: 4px;
 	height: 4px;
-	background-color: #000;
+	background: #000;
 	border-radius: 4px;
 }

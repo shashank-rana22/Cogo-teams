@@ -9,10 +9,11 @@ import styles from './styles.module.css';
 function RiskMangement() {
 	const [activeTab, setActiveTab] = useState('container_movement');
 
-	const { data, loading, filters, setFilters } = useGetListRiskProne({ activeTab });
+	const { data, loading, filters, setFilters, getDashboardData } = useGetListRiskProne({ activeTab });
 	const {
 		statsData,
 		statsLoading,
+		getDahboardStatsData,
 	} = useGetRiskProneStats();
 
 	return (
@@ -31,6 +32,8 @@ function RiskMangement() {
 				setActiveTab={setActiveTab}
 				filters={filters}
 				setFilters={setFilters}
+				getDashboardData={getDashboardData}
+				getDahboardStatsData={getDahboardStatsData}
 			/>
 		</div>
 	);

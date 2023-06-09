@@ -1,15 +1,19 @@
+import { Button } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import CardItem from './CardItem';
 import CargoDetails from './CargoDetails';
+import ResolveModal from './ResolveModal';
 import ShipmentTimline from './ShipmentTimeline';
 import styles from './styles.module.css';
 
-function CardList({ itemData }) {
+function CardList({ itemData, getDashboardData, getDahboardStatsData }) {
 	const { trade_type, cargo_details = [], importer_exporter } = itemData || {};
 	const { business_name } = importer_exporter || {};
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
+	const [showResolveModal, setShowResolveModal] = useState(false);
+
 	const handleClick = () => {
 		setIsAccordionActive(!isAccordionActive);
 	};
@@ -27,11 +31,21 @@ function CardList({ itemData }) {
 							{business_name}
 						</div>
 						<div className={styles.bottom_vr} />
-						<div>
+						<div className={styles.resolve}>
 							<CargoDetails cargo_details={cargo_details} />
+							<Button size="sm" themeType="primary" onClick={() => { setShowResolveModal(true); }}>Resolve</Button>
 						</div>
 					</div>
 				</div>
+				{showResolveModal && (
+					<ResolveModal
+						showResolveModal={showResolveModal}
+						setShowResolveModal={setShowResolveModal}
+						itemData={itemData}
+						getDashboardData={getDashboardData}
+						getDahboardStatsData={getDahboardStatsData}
+					/>
+				)}
 				<div className={styles.hr} />
 
 				<div>

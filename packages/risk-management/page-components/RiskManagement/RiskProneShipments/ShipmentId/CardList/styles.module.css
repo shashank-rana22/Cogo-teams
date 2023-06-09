@@ -93,3 +93,14 @@
 .main_div {
 	margin-top: 16px;
 }
+
+.resolve {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 54%;
+
+	@media (max-width: 1068px) {
+		width: 100%;
+	}
+}

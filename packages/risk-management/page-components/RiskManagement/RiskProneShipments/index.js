@@ -6,7 +6,8 @@ import ShipmentId from './ShipmentId';
 import styles from './styles.module.css';
 
 function RiskProneShipments({
-	data, statsData, statsLoading, loading, activeTab, setActiveTab, filters, setFilters,
+	data, statsData, statsLoading, loading, activeTab,
+	setActiveTab, filters, setFilters, getDashboardData, getDahboardStatsData,
 }) {
 	const { stats } = statsData || {};
 	const {
@@ -47,6 +48,8 @@ function RiskProneShipments({
 					filters={filters}
 					setFilters={setFilters}
 					activeTab={activeTab}
+					getDashboardData={getDashboardData}
+					getDahboardStatsData={getDahboardStatsData}
 				/>
 			</div>
 		</div>

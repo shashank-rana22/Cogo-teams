@@ -17,6 +17,12 @@ const apis = [
 		feature      : 'risk_management',
 		service_name : 'bookings',
 	},
+	{
+		api          : 'update_shipment_risk_resolution',
+		access_type  : 'private',
+		feature      : 'risk_management',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

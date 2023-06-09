@@ -94,7 +94,7 @@
 	font-size: 16px;
 	font-weight: 500;
 	color: #333;
-	text-decoration-line: underline;
+	text-decoration: underline;
 }
 
 .origin_text {
@@ -103,7 +103,7 @@
 	font-size: 12px;
 	font-weight: 500;
 	color: #333;
-	text-decoration-line: underline;
+	text-decoration: underline;
 }
 
 .origin_bottom {
@@ -112,7 +112,7 @@
 	font-size: 12px;
 	font-weight: 600;
 	color: #333;
-	text-decoration-line: underline;
+	text-decoration: underline;
 }
 
 .not_picked {

@@ -7,10 +7,10 @@ const getFormatedData = (stats) => {
 
 	const { late_release_total = '' } = late_release_stats || {};
 	const {
-		gated_in_at_vessel_departure = '', pick_up_and_not_gated_in = '',
+		gated_in_at_vessel_departure = '', pick_up_and_not_gated_in = '', cargo_value_fraud = '',
 		vessel_arrived_but_not_gated_out = '', container_not_picked_up = '', gated_out_but_not_returned = '',
 	} = container_stats || {};
-	const colors = ['#EE3425', '#F8AEA8', '#F37166', '#BF291E', '#FFD1CC'];
+	const colors = ['#EE3425', '#F8AEA8', '#F37166', '#BF291E', '#FFD1CC', '#FBD1A6'];
 	const CONTAINER_MOVEMENT_MAPPING = [
 		{
 			id    : 'Container Not Picked Up',
@@ -41,6 +41,12 @@ const getFormatedData = (stats) => {
 			label : 'Gated out + not returned :',
 			value : gated_out_but_not_returned,
 			color : ' #FFD1CC',
+		},
+		{
+			id    : 'Cargo Value Fraud',
+			label : 'Cargo Value Fraud : ',
+			value : cargo_value_fraud,
+			color : '#FBD1A6',
 		},
 	];
 	const LATE_COLLECTION_MAPPING = [

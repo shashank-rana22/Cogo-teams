@@ -8,6 +8,7 @@ import renderTooltip from '../../../../common/renderTooltip';
 import styles from './styles.module.css';
 
 const MAX_LENGTH = 16;
+const COMMODITY_VALUE_LENGTH = 40;
 function CardItem({ itemData }) {
 	const {
 		serial_id = '', origin_port = {}, destination_port = {},
@@ -73,7 +74,7 @@ function CardItem({ itemData }) {
 					<div className={styles.commodity_text}>
 						Commodity :
 						{' '}
-						{commodity || '-'}
+						{renderTooltip(commodity || '-', COMMODITY_VALUE_LENGTH)}
 					</div>
 					<div className={styles.commodity_text}>
 						Cargo Value :

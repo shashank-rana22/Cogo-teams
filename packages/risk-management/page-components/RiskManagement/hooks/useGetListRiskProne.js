@@ -40,7 +40,6 @@ const useGetListRiskProne = ({ activeTab }) => {
 								},
 							],
 						},
-						risk_type          : activeTab,
 						sort_by            : 'created_at',
 						sort_type          : 'desc',
 						additional_methods : ['pagination'],
