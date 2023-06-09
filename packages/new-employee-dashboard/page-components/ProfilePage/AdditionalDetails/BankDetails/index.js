@@ -29,8 +29,7 @@ function BankDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetail
 		<div>
 			<div className={styles.container}>
 				<div className={styles.top_bar}>
-					{
-					(MAPPING || []).map((element) => (
+					{(MAPPING || []).map((element) => (
 						<div key={element}>
 							<div className={styles.label}>
 								{startCase(element)}
@@ -39,9 +38,7 @@ function BankDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetail
 								{bank_details?.[0]?.[element]}
 							</div>
 						</div>
-					))
-				}
-
+					))}
 				</div>
 
 				<div className={styles.cancelled_cheque}>
@@ -50,11 +47,9 @@ function BankDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetail
 					</div>
 					<PreviewDocumet document_url={bank_details?.[0]?.cancelled_check_url} preview />
 				</div>
-
 			</div>
 
-			{
-			status === 'active'
+			{status === 'active'
 				? (
 					<div className={styles.button_container}>
 						<div style={{ paddingRight: 16 }}>
@@ -75,11 +70,8 @@ function BankDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetail
 							Approve
 						</Button>
 					</div>
-				) : null
-}
-
+				) : null}
 		</div>
-
 	);
 }
 

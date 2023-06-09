@@ -20,21 +20,7 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
-		{
-			api          : 'create_document_template',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'update_document_template',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
-		{
-			api          : 'list_document_templates',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
+
 		{
 			api          : 'bulk_upload_employee_details',
 			access_type  : 'private',
@@ -122,11 +108,7 @@ const consolidated_invoices = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
-		{
-			api          : 'list_document_templates',
-			access_type  : 'private',
-			service_name : 'hrms',
-		},
+
 		{
 			api          : 'update_employee_offer_letter',
 			access_type  : 'private',

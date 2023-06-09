@@ -95,6 +95,7 @@ const GLOBAL_CONSTANTS = {
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
 			'ebafce31-75ef-4865-9060-775574e9606f',
 		],
+		cogo_course_notification_id: '97dcd57c-d263-496f-9f59-7a7aef400d34',
 	},
 	view_key_mappings: {
 		sales_team_members_view          : 'sales_agent_id',
@@ -115,8 +116,13 @@ const GLOBAL_CONSTANTS = {
 		eclamation_svg            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg',
 		cart_png                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cart_icon.png',
 		saas_subscription_loading : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
-		email_svg                 : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg',
-		platform_chat_svg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg',
+		rfq_loading               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
+		empty_port                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
+		empty_chart:
+		'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
+		empty_customer_card : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-state-file.svg',
+		email_svg           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/email.svg',
+		platform_chat_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg',
 		platform_notification_svg:
 			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg',
 		missed_call_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
@@ -145,6 +151,8 @@ const GLOBAL_CONSTANTS = {
 	regex_patterns: {
 		number: /^[+-]?\d*\.?\d+$/,
 	},
+	languages                       : LANGUAGE_OPTIONS,
+	currency_conversion_constant    : 0.04,
 	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
 	invoice_check_id                : 120347,
 };
@@ -171,7 +179,6 @@ GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
 		],
 
 	},
-	languages: LANGUAGE_OPTIONS,
 
 };
 

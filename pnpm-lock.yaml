@@ -4,14 +4,15 @@ importers:
 
   .:
     specifiers:
-      '@cogoport/eslint-config': ^1.1.0
+      '@cogoport/eslint-config': 1.1.0-beta.9
       '@cogoport/maps': ^1.0.3
       '@cogoport/stylelint-config': ^1.0.3
       '@sentry/nextjs': ^7.44.1
       '@svgr/webpack': ^6.5.1
       axios-hooks: ^4.0.0
-      eslint: ^8.36.0
-      fs-extra: ^11.1.1
+      eslint: ^8.35.0
+      eslint-plugin-custom-rules: link:node_modules/@cogoport/eslint-config/packages/eslint
+      fs-extra: ^11.1.0
       git-precommit-checks: ^3.1.0
       husky: ^8.0.3
       next: 13.1.6
@@ -29,10 +30,11 @@ importers:
       next: 13.1.6_react-dom@18.2.0
       react-dom: 18.2.0
     devDependencies:
-      '@cogoport/eslint-config': 1.1.0_eslint@8.41.0
+      '@cogoport/eslint-config': 1.1.0-beta.9_eslint@8.41.0
       '@cogoport/stylelint-config': 1.0.3_stylelint@14.16.1
       '@svgr/webpack': 6.5.1
       eslint: 8.41.0
+      eslint-plugin-custom-rules: link:node_modules/@cogoport/eslint-config/packages/eslint
       fs-extra: 11.1.1
       git-precommit-checks: 3.1.0
       husky: 8.0.3
@@ -85,6 +87,7 @@ importers:
       '@cogoport/performance-management': workspace:1.0.0
       '@cogoport/referral': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
+      '@cogoport/rfq-dashboard': workspace:0.1.0
       '@cogoport/saas-subscription': workspace:0.1.0
       '@cogoport/saas-tools': workspace:0.1.0
       '@cogoport/scope-select': workspace:0.1.0
@@ -158,6 +161,7 @@ importers:
       '@cogoport/performance-management': link:../packages/performance-management
       '@cogoport/referral': link:../packages/referral
       '@cogoport/request': link:../common/request
+      '@cogoport/rfq-dashboard': link:../packages/rfq-dashboard
       '@cogoport/saas-subscription': link:../packages/saas-subscription
       '@cogoport/saas-tools': link:../packages/saas-tools
       '@cogoport/scope-select': link:../common/scope-select
@@ -238,7 +242,7 @@ importers:
 
   common/forms:
     specifiers:
-      '@cogoport/components': ^1.0.395
+      '@cogoport/components': ^1.0.412
       '@cogoport/globalization': workspace:*
       '@cogoport/icons-react': ^1.0.73
       '@cogoport/request': workspace:0.1.0
@@ -1316,6 +1320,38 @@ importers:
       '@cogoport/utils': 1.2.10
       react: 18.2.0
       react-d3-tree: 3.6.1_react@18.2.0
+
+  packages/rfq-dashboard:
+    specifiers:
+      '@cogoport/charts': ^1.0.3
+      '@cogoport/components': ^1.0.412
+      '@cogoport/constants': workspace:^0.1.0
+      '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': workspace:^0.0.1
+      '@cogoport/icons-react': ^1.0.68
+      '@cogoport/next': workspace:0.1.0
+      '@cogoport/request': workspace:0.1.0
+      '@cogoport/store': workspace:0.1.0
+      '@cogoport/utils': ^1.2.10
+      firebase: ^9.21.0
+      react: 18.2.0
+      stylelint: ^14.16.1
+      uuid: ^9.0.0
+    dependencies:
+      '@cogoport/charts': 1.0.3_react@18.2.0
+      '@cogoport/components': 1.0.423_guhuyhrafl7yprlcl7n6dekiki
+      '@cogoport/constants': link:../../common/constants
+      '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
+      '@cogoport/icons-react': 1.0.75_react@18.2.0
+      '@cogoport/next': link:../../common/next
+      '@cogoport/request': link:../../common/request
+      '@cogoport/store': link:../../common/store
+      '@cogoport/utils': 1.2.10
+      firebase: 9.22.1
+      react: 18.2.0
+      stylelint: 14.16.1
+      uuid: 9.0.0
 
   packages/saas-subscription:
     specifiers:
@@ -3376,8 +3412,8 @@ packages:
       - sass
     dev: false
 
-  /@cogoport/eslint-config/1.1.0_eslint@8.41.0:
-    resolution: {integrity: sha512-Nor3Hc4gRnMuKjbCM547z5FRxWaHV0a4a82Fkx9H7T8GWf+A1xw4r710BMsd/VxQ8SquSC1O+cjo8LePIXBjcg==}
+  /@cogoport/eslint-config/1.1.0-beta.9_eslint@8.41.0:
+    resolution: {integrity: sha512-3s/vokp3CLBp1dT5y2p6ypTkqkHeHhPQuJZ2GWyRQvKeFP59kd8+Nsr3bg32SdPO2feZoyaYBxkFg8P0ADVVYg==}
     peerDependencies:
       eslint: ^8.23.0
     dependencies:

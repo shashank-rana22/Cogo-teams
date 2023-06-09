@@ -8,10 +8,12 @@ import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails
 import controls from './controls';
 import styles from './styles.module.css';
 
-function EducationalQualification({ getEmployeeDetails, data: info }) {
+function EducationalQualification({ getEmployeeDetails, data }) {
 	const { handleSubmit, control, setValue } = useForm();
 
-	const id = info?.detail?.id;
+	const { detail } = data || {};
+
+	const { id, employee_education_details } = detail || {};
 
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
@@ -20,19 +22,21 @@ function EducationalQualification({ getEmployeeDetails, data: info }) {
 	};
 
 	useEffect(() => {
-		setValue('education_qualifications', info?.detail?.employee_education_details.map((item) => ({
+		setValue('education_qualifications', employee_education_details.map((item) => ({
 			...item,
-			started_at : new Date(item.started_at),
-			ended_at   : new Date(item.ended_at),
+			started_at : new Date(item?.started_at),
+			ended_at   : new Date(item?.ended_at),
 		})));
-	}, [info, setValue]);
+	}, [employee_education_details, setValue]);
 
 	return (
 		<div className={styles.whole_container}>
+
 			<div className={styles.introductory_text}>
 				Tell us about your educational history, starting with your highest level of education and including any
 				ongoing studies.
 			</div>
+
 			<div className={styles.container}>
 				{controls?.map((controlItem) => {
 					const { type, name: controlName } = controlItem || {};
@@ -49,6 +53,7 @@ function EducationalQualification({ getEmployeeDetails, data: info }) {
 
 						);
 					}
+
 					return (
 						<div key={controlItem}>
 							EducationalQualification

@@ -55,6 +55,7 @@ function StepperComponent({ data, loading }) {
 			<div className={styles.header}>
 				Your progress so far -
 			</div>
+
 			<div className={styles.flex_wrapper}>
 				{ MAPPING.map((element) => {
 					const { name, is_added, icon:Icon, sub_title } = element || {};

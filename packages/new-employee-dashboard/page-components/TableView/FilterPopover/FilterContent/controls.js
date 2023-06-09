@@ -1,17 +1,19 @@
+const ROLE_OPIONS = [
+	{ value: 'software_development_engineer_1', label: 'Software Development Engineer - I' },
+	{ value: 'business_analyst', label: 'Business Analyst' },
+	{ value: 'product_analyst', label: 'Product Analyst' },
+	{ value: 'business_consultant', label: 'Business Consultant' },
+];
+
 const controls = [
 	{
-		name        : 'roles',
-		label       : 'ROLES',
-		placeholder : 'Select Role',
-		type        : 'select',
-		isClearable : true,
-		options     : [
-			{ value: 'software_development_engineer_1', label: 'Software Development Engineer - I' },
-			{ value: 'business_analyst', label: 'Business Analyst' },
-			{ value: 'product_analyst', label: 'Product Analyst' },
-			{ value: 'business_consultant', label: 'Business Consultant' },
-		],
-		defaultOptions: true,
+		name           : 'roles',
+		label          : 'ROLES',
+		placeholder    : 'Select Role',
+		type           : 'select',
+		isClearable    : true,
+		options        : ROLE_OPIONS,
+		defaultOptions : true,
 	},
 	{
 		name           : 'joining_date',

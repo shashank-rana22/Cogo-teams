@@ -39,8 +39,7 @@ function CompanyPolicies({ setInformationPage, getEmployeeDetails, data }) {
 			</div>
 
 			<div className={styles.flex_wrapper}>
-				{
-				(list || []).map((element) => {
+				{(list || []).map((element) => {
 					const { document_url, id, name } = element || {};
 
 					return (
@@ -60,8 +59,7 @@ function CompanyPolicies({ setInformationPage, getEmployeeDetails, data }) {
 
 						</div>
 					);
-				})
-			}
+				})}
 			</div>
 
 			<div className={styles.submit}>

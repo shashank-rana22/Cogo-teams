@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState } from 'react';
 
@@ -13,7 +15,6 @@ const useUpdateEmployeeDocuments = ({ getEmployeeDetails }) => {
 	const updateEmployeeDocument = async ({ data }) => {
 		const payload = {
 			documents: [{ ...data }],
-
 		};
 
 		try {
@@ -23,7 +24,7 @@ const useUpdateEmployeeDocuments = ({ getEmployeeDetails }) => {
 			getEmployeeDetails();
 			setShowRejectPopover(null);
 		} catch (err) {
-			// Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
+			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
 	};
 

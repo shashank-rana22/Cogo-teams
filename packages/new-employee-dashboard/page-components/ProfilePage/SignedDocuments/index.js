@@ -1,23 +1,20 @@
-import React, { useState } from 'react';
+import React from 'react';
 
 import EmptyState from '../../../common/EmptyState';
 import useListEmployeeSignedDocuments from '../../hooks/useListEmployeeSignedDocuments';
 import StyledTable from '../../StyledTable';
 
 import getColumns from './getColumns';
-import ReviewModal from './ReviewModal';
 import styles from './styles.module.css';
 
 function SignedDocuments() {
 	const onClickViewDocument = ({ url }) => {
-		window.open(url || 'https://www.africau.edu/images/default/sample.pdf', '_blank');
+		window.open(url || '', '_blank');
 	};
 
 	const { list = [], loading } = useListEmployeeSignedDocuments();
 
-	const [showModal, setShowModal] = useState(false);
-
-	const columns = getColumns({ onClickViewDocument, setShowModal });
+	const columns = getColumns({ onClickViewDocument });
 
 	return (
 		<div className={styles.container}>
@@ -30,8 +27,6 @@ function SignedDocuments() {
 						textSize={20}
 					/>
 				)}
-
-			<ReviewModal showModal={showModal} setShowModal={setShowModal} />
 		</div>
 	);
 }

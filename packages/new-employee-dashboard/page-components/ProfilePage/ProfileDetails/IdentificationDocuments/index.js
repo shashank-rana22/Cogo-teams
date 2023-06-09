@@ -22,9 +22,7 @@ function IdentificationDocuments({ mainApiLoading, profileData, getEmployeeDetai
 		loading,
 	} = useUpdateEmployeeDocuments({ getEmployeeDetails });
 
-	if (getEmployeeDetailsLoading) {
-		return <CommonLoader />;
-	}
+	if (getEmployeeDetailsLoading) return <CommonLoader />;
 
 	if (isEmpty(documents)) {
 		return <EmptyState emptyText="Identification documents not found" />;
@@ -32,86 +30,76 @@ function IdentificationDocuments({ mainApiLoading, profileData, getEmployeeDetai
 
 	return (
 		<div className={styles.container}>
-			{
-				(documents || []).map((doc) => {
-					const { document_type, document_url, id, status } = doc || {};
-					if (IDENTIFICATION_DOCUMENT_EXCLUSION_LIST.includes(document_type)) {
-						return null;
-					}
+			{(documents || []).map((doc) => {
+				const { document_type, document_url, id, status } = doc || {};
+				if (IDENTIFICATION_DOCUMENT_EXCLUSION_LIST.includes(document_type)) {
+					return null;
+				}
 
-					return (
-						<div className={styles.card_wrapper} key={id}>
-							<div className={styles.tick_content}>
-								<div className={styles.header}>{startCase(document_type)}</div>
-								{
-									['rejected', 'approved'].includes(status) ? (
-										<div
-											className={styles.verified_text}
-											style={{ backgroundColor: status === 'approved' ? '#c4dc91' : '#f8aea8' }}
-										>
-											{startCase(status)}
-										</div>
-									) : null
-								}
+				return (
+					<div className={styles.card_wrapper} key={id}>
+						<div className={styles.tick_content}>
+							<div className={styles.header}>{startCase(document_type)}</div>
+							{['rejected', 'approved'].includes(status) ? (
+								<div
+									className={styles.verified_text}
+									style={{ backgroundColor: status === 'approved' ? '#c4dc91' : '#f8aea8' }}
+								>
+									{startCase(status)}
+								</div>
+							) : null}
+						</div>
 
-							</div>
+						<PreviewDocumet
+							document_header={startCase(document_type)}
+							document_url={document_url}
+							preview="true"
+						/>
 
-							<PreviewDocumet
-								document_header={startCase(document_type)}
-								document_url={document_url}
-								preview="true"
-							/>
+						{!['rejected', 'approved'].includes(status) ? (
+							<div className={styles.button_container}>
+								<div>
+									<Popover
+										placement="top"
+										caret={false}
+										render={(
+											<div style={{ width: 360 }}>
+												<RejectPopoverContent
+													id={id}
+													onClickSubmitButton={onClickSubmitButton}
+													inputValue={inputValue}
+													setInputValue={setInputValue}
+													setShowRejectPopover={setShowRejectPopover}
 
-							{
-							!['rejected', 'approved'].includes(status) ? (
-								<div className={styles.button_container}>
-									<div>
-
-										<Popover
-											placement="top"
-											caret={false}
-											render={(
-												<div style={{ width: 360 }}>
-													<RejectPopoverContent
-														id={id}
-														onClickSubmitButton={onClickSubmitButton}
-														inputValue={inputValue}
-														setInputValue={setInputValue}
-														setShowRejectPopover={setShowRejectPopover}
-
-													/>
-												</div>
-											)}
-											interactive
-											visible={showRejectPopover === id}
-										>
-											<Button
-												onClick={() => setShowRejectPopover(id)}
-												loading={loading || mainApiLoading}
-											>
-												Reject
-											</Button>
-										</Popover>
-									</div>
-
-									<div className={styles.approve_btn}>
+												/>
+											</div>
+										)}
+										interactive
+										visible={showRejectPopover === id}
+									>
 										<Button
-											onClick={() => onClickApproveButton(id)}
+											onClick={() => setShowRejectPopover(id)}
 											loading={loading || mainApiLoading}
 										>
-											Approve
+											Reject
 										</Button>
-									</div>
+									</Popover>
 								</div>
-							) : null
-      }
-						</div>
-					);
-				})
-			}
 
+								<div className={styles.approve_btn}>
+									<Button
+										onClick={() => onClickApproveButton(id)}
+										loading={loading || mainApiLoading}
+									>
+										Approve
+									</Button>
+								</div>
+							</div>
+						) : null}
+					</div>
+				);
+			})}
 		</div>
-
 	);
 }
 

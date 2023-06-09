@@ -16,9 +16,7 @@ function OfferLetter({ offerLetter, setShowCtcBreakupModal, offerLetterApiLoadin
 
 	const showAddCtcButton = (offerLetter || []).every((item) => item?.status === 'rejected');
 
-	if (offerLetterApiLoading) {
-		return <CommonLoader />;
-	}
+	if (offerLetterApiLoading) return <CommonLoader />;
 
 	if (isEmpty(offerLetter)) {
 		return (
@@ -30,26 +28,22 @@ function OfferLetter({ offerLetter, setShowCtcBreakupModal, offerLetterApiLoadin
 
 	return (
 		<div className={styles.container}>
-			{
-				showAddCtcButton && (
-					<div className={styles.button_container}>
-						<Button
-							onClick={() => setShowCtcBreakupModal(true)}
-							type="button"
-							themeType="primary"
-							style={{ marginLeft: 12 }}
-						>
-							Add ctc breakup
-						</Button>
-
-					</div>
-				)
-			}
+			{showAddCtcButton && (
+				<div className={styles.button_container}>
+					<Button
+						onClick={() => setShowCtcBreakupModal(true)}
+						type="button"
+						themeType="primary"
+						style={{ marginLeft: 12 }}
+					>
+						Add ctc breakup
+					</Button>
+				</div>
+			)}
 
 			<div>
 				<StyledTable columns={columns} data={offerLetter} loading={offerLetterApiLoading} />
 			</div>
-
 		</div>
 	);
 }

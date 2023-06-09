@@ -16,8 +16,8 @@ const formatData = (data, pendingTask, services) => {
 
 	const modifiedSIData = (data.documents || []).map((item) => ({
 		document_type : 'si',
-		document_url  : item?.url?.fileName,
-		file_name     : item?.url?.fileUrl,
+		document_url  : item?.url?.fileUrl,
+		file_name     : item?.url?.fileName,
 		data          : {
 			description : item?.description || undefined,
 			url         : item?.url?.fileUrl,

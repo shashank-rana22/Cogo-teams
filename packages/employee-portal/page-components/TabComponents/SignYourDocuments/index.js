@@ -66,7 +66,6 @@ function SignYourDocuments({ setInformationPage, data }) {
 									</Button>
 								)}
 							</div>
-
 						</div>
 					))}
 				</div>

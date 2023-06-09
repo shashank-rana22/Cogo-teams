@@ -18,10 +18,7 @@ function FullView({ url, containerStyle = {} }) {
 		<div className={styles.container} style={{ ...containerStyle }}>
 			<Button
 				onClick={() => openDocument()}
-				style={{
-					borderRadius: 4,
-
-				}}
+				style={{ borderRadius: 4 }}
 			>
 				<div style={{ display: 'flex', alignItems: 'center' }}>
 					Preview

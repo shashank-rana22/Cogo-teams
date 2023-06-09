@@ -34,9 +34,7 @@ function FilterPopover({ filters, setFilters }) {
 			<div
 				role="presentation"
 				className={styles.filters}
-				onClick={() => {
-					setShowFilter((pv) => !pv);
-				}}
+				onClick={() => setShowFilter((pv) => !pv)}
 			>
 				<div className={styles.filter_text}>
 					{!isEmpty(filters) ? <div className={styles.dot} /> : null}

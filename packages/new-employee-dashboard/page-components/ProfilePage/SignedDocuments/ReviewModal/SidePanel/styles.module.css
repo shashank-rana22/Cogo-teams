@@ -1,7 +1,0 @@
-.side_container {
-	display: flex;
-	flex-direction: column;
-	justify-content: space-between;
-	width: 280px;
-	margin: 0 0 0 8px;
-}

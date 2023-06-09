@@ -24,7 +24,6 @@ function AnimatedTick() {
 					points="90,50 60,83 40.8,67.5 "
 				/>
 			</svg>
-
 		</div>
 	);
 }

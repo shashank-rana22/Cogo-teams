@@ -1,0 +1,24 @@
+.container {
+	height: 84vh;
+	overflow: hidden;
+	background: #fff;
+}
+
+.stepper_container {
+	padding: 12px;
+	background: #f9f9f9;
+
+	:global {
+		.ui_stepper_container {
+			margin: auto;
+			background: #f9f9f9;
+		}
+	}
+}
+
+.component_container {
+	position: relative;
+	display: flex;
+	align-items: center;
+	height: 76vh;
+}

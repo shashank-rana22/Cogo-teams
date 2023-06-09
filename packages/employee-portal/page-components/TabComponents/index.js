@@ -1,6 +1,5 @@
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-// import { useEffect } from 'react';
 
 import AdditionalInformation from './AdditionalInformation';
 import CompanyPolicies from './CompanyPolicies';
@@ -11,7 +10,7 @@ import OfferLetter from './OfferLetter';
 import SignYourDocuments from './SignYourDocuments';
 import styles from './styles.module.css';
 
-function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails }) {
+function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails, getEmployeeDetailsLoading }) {
 	const { offer_letter, progress_stats } = data || {};
 
 	const {
@@ -22,12 +21,6 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 
 	const signDocEnableContd = offer_letter_signed?.get_offer_letter_signed
 	&& Object.keys(additional_info_added).every((key) => (additional_info_added[key]));
-
-	// useEffect(() => {
-	// 	if (!informationPage) {
-	// 		getEmployeeDetails();
-	// 	}
-	// }, []);
 
 	const MAPPING = {
 		new_hire_information: {
@@ -40,47 +33,42 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 			component : OfferLetter,
 			enable    : !isEmpty(offer_letter),
 		},
-
 		additional_information: {
 			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
 			component : AdditionalInformation,
 			enable    : offer_letter_signed?.get_offer_letter_signed,
-
 		},
-
 		sign_your_docs: {
 			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 			component : SignYourDocuments,
 			enable    : signDocEnableContd,
 		},
-
 		company_policies: {
 			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
 			component : CompanyPolicies,
 			enable    : signDocEnableContd && documents_signed?.documents_signed,
-
 		},
 		day_1: {
 			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
 			component : Day1,
 			enable    : signDocEnableContd && company_policies_read?.company_policies_read,
 		},
-
 		// maps: {
 		// 	icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
 		// 	component : Maps,
 		// 	enable    : signDocEnableContd && company_policies_read?.company_policies_read,
 		// },
-
 	};
 
 	if (informationPage) {
 		const PageComponent = MAPPING[informationPage]?.component;
+
 		return (
 			<PageComponent
 				setInformationPage={setInformationPage}
 				data={data}
 				getEmployeeDetails={getEmployeeDetails}
+				getEmployeeDetailsLoading={getEmployeeDetailsLoading}
 			/>
 		);
 	}
@@ -95,8 +83,7 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 		<div className={styles.container}>
 			<div className={styles.header}>Meanwhile, get started with</div>
 			<div style={{ display: 'flex', flexWrap: 'wrap' }}>
-				{
-				(Object.keys(MAPPING)).map((item) => (
+				{(Object.keys(MAPPING)).map((item) => (
 					<div
 						key={item}
 						role="presentation"
@@ -122,10 +109,8 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 						</div>
 
 					</div>
-				))
-			}
+				))}
 			</div>
-
 		</div>
 	);
 }

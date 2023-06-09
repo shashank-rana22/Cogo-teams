@@ -32,6 +32,7 @@ export default function SubmitSection({
 			setError(true);
 		}
 	};
+	
 	const onClose = () => {
 		setVisible(false);
 	};

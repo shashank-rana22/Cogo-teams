@@ -35,7 +35,6 @@ function PreviewDocument({ document_header, height = '200px', width = '200px', p
 					)
 				}
 			</div>
-
 		</div>
 	);
 }

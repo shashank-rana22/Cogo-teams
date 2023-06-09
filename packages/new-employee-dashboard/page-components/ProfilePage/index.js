@@ -48,7 +48,6 @@ function ProfilePage() {
 
 	return (
 		<div className={styles.container}>
-
 			<Header
 				detail={detail}
 				loading={loading}
@@ -60,8 +59,7 @@ function ProfilePage() {
 
 			<div className={styles.tab_container}>
 				<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
-					{
-					Object.keys(TABS_MAPPING).map((tab) => {
+					{Object.keys(TABS_MAPPING).map((tab) => {
 						const Component = TABS_MAPPING[tab];
 						return (
 							<TabPanel name={tab} title={startCase(tab)} key={tab}>
@@ -76,28 +74,24 @@ function ProfilePage() {
 								/>
 							</TabPanel>
 						);
-					})
-					}
+					})}
 				</Tabs>
 			</div>
 
-			{
-				showCtcBreakupModal && (
-					<CtcBreakupModal
-						detail={detail}
-						showCtcBreakupModal={showCtcBreakupModal}
-						setShowCtcBreakupModal={setShowCtcBreakupModal}
-						ctcStructure={ctcStructure}
-						initialQuestion={initialQuestion}
-						setInitialQuestion={setInitialQuestion}
-						formProps={formProps}
-						offerLetterApiRefetch={offerLetterApiRefetch}
-						error={error}
-						setError={setError}
-					/>
-				)
-			}
-
+			{showCtcBreakupModal && (
+				<CtcBreakupModal
+					detail={detail}
+					showCtcBreakupModal={showCtcBreakupModal}
+					setShowCtcBreakupModal={setShowCtcBreakupModal}
+					ctcStructure={ctcStructure}
+					initialQuestion={initialQuestion}
+					setInitialQuestion={setInitialQuestion}
+					formProps={formProps}
+					offerLetterApiRefetch={offerLetterApiRefetch}
+					error={error}
+					setError={setError}
+				/>
+			)}
 		</div>
 	);
 }
