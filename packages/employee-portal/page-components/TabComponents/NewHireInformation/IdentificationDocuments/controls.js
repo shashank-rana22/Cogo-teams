@@ -1,4 +1,4 @@
-import patterns from '../../../../commons/patterns';
+import PATTERNS from '../../../../commons/patterns';
 
 const controls = [
 	{
@@ -9,7 +9,7 @@ const controls = [
 		rules       : {
 			required : 'This is required',
 			pattern  : {
-				value   : patterns.AADHAR_NUMBER,
+				value   : PATTERNS.AADHAR_NUMBER,
 				message : 'Enter valid Adhar card number',
 			},
 		},
@@ -31,7 +31,7 @@ const controls = [
 		rules       : {
 			required : 'This is required',
 			pattern  : {
-				value   : patterns.PAN_NUMBER,
+				value   : PATTERNS.PAN_NUMBER,
 				message : 'Enter valid Pan card number',
 			},
 		},
@@ -52,7 +52,7 @@ const controls = [
 		placeholder : 'Passport Number',
 		rules       : {
 			pattern: {
-				value   : patterns.PASSPORT_NUMBER,
+				value   : PATTERNS.PASSPORT_NUMBER,
 				message : 'Enter valid Passport number',
 			},
 		},

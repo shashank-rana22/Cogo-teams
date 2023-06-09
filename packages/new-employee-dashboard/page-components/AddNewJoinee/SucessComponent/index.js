@@ -16,8 +16,8 @@ function SuccessComponent({ activePage }) {
 	const { name, employee_code } = detail || {};
 
 	const onClickGoToDashboard = () => {
-		const href = '/new-employee-dashboard';
-		router.push(href, href);
+		const HREF = '/new-employee-dashboard';
+		router.push(HREF, HREF);
 	};
 
 	if (loading) {

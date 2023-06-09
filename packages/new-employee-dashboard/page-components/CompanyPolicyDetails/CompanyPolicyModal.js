@@ -10,7 +10,9 @@ function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
 	const { handleSubmit, control, formState: { errors }, reset, setValue } = useForm();
 
 	const isUpdate = (Object.keys(showModal || {}) || []).length > 0;
+
 	const url = isUpdate ? '/update_company_document' : '/create_company_document';
+
 	const [{ loading }, trigger] = useHarbourRequest({
 		url,
 		method: 'post',
@@ -95,7 +97,7 @@ function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
 					onClick={handleSubmit(onSubmit)}
 					loading={loading}
 				>
-					{isUpdate ? <div>Update</div> : <div>Create</div>}
+					{isUpdate ? 'Update' : 'Create'}
 				</Button>
 			</div>
 		</form>
