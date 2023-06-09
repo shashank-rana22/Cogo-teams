@@ -9,6 +9,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const TYPE = ['country', 'trade', 'seaport'];
+
 const sourceTypes = [
 	{
 		label : 'Predicted',
@@ -28,14 +30,13 @@ const getCommodityOptions = (container_type) => {
 };
 
 function Filters({ filters, setFilters }) {
-	const type = ['country', 'trade', 'seaport'];
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type } },
+		params   : { filters: { TYPE } },
 		includes : { default_params_required: true },
 		labelKey : 'display_name',
 	}));
 	const originDestinationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type } },
+		params   : { filters: { TYPE } },
 		labelKey : 'display_name',
 	}));
 
