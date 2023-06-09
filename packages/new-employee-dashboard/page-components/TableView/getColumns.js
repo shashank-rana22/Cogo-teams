@@ -31,7 +31,7 @@ const getColumns = ({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, 
 	},
 	{
 		Header   : 'REPORTING MANAGER',
-		accessor : (item) => <div>{item?.hiring_manager || '-'}</div>,
+		accessor : (item) => <div>{item?.hiring_manager?.userName || '-'}</div>,
 	},
 	{
 		Header   : 'DATE OF JOINING',
