@@ -28,6 +28,8 @@ function ModuleComponent({
 	finalData,
 	showButtons,
 	state,
+	openDetails = {},
+	setOpenDetails = () => [],
 }) {
 	const {
 		deleteModule,
@@ -153,7 +155,7 @@ function ModuleComponent({
 		<div className={styles.child_accordian}>
 			<Accordion
 				type="text"
-				isOpen={isEmpty(module.course_sub_modules || [])}
+				isOpen={isEmpty(module.course_sub_modules || []) || openDetails?.module === module.id}
 				title={(
 					<div
 						key={module.id}
@@ -199,6 +201,8 @@ function ModuleComponent({
 						setGetSubModuleRefetch={setGetSubModuleRefetch}
 						showButtons={showButtons}
 						state={state}
+						setOpenDetails={setOpenDetails}
+						openDetails={openDetails}
 					/>
 				)}
 			</Accordion>

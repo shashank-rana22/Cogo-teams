@@ -10,6 +10,8 @@ import controls from './controls';
 import styles from './styles.module.css';
 import useHandleSubModuleComponent from './useHandleSubModuleComponent';
 
+const VALUE_TO_INDEX_DIFF = 1;
+
 function SubModuleComponent({
 	subModule,
 	handleDragStart,
@@ -28,6 +30,9 @@ function SubModuleComponent({
 	courseSubModule,
 	showButtons,
 	state,
+	setOpenDetails,
+	moduleId,
+	openDetails,
 }) {
 	const {
 		handleSubmit,
@@ -73,7 +78,7 @@ function SubModuleComponent({
 					<div className={styles.edit_text}>
 						Edit - Sub Module
 						{' '}
-						{nodeIndex + 1}
+						{nodeIndex + VALUE_TO_INDEX_DIFF}
 					</div>
 				) : null}
 
@@ -149,6 +154,7 @@ function SubModuleComponent({
 		<div className={styles.child_accordian}>
 			<Accordion
 				type="text"
+				isOpen={openDetails.sub_module === subModule.id}
 				title={(
 					<div
 						key={subModule.id}
@@ -168,7 +174,7 @@ function SubModuleComponent({
 					>
 						<IcMDrag className={styles.icon} />
 						<div className={`${styles.left} ${styles.flex}`}>
-							{`Sub Module ${nodeIndex + 1}:`}
+							{`Sub Module ${nodeIndex + VALUE_TO_INDEX_DIFF}:`}
 							{' '}
 							<b className={styles.name}>{subModule.name}</b>
 						</div>
@@ -200,6 +206,8 @@ function SubModuleComponent({
 						setGetSubModuleRefetch={setGetSubModuleRefetch}
 						showButtons={showButtons}
 						state={state}
+						setOpenDetails={setOpenDetails}
+						moduleId={moduleId}
 					/>
 				)}
 			</Accordion>
