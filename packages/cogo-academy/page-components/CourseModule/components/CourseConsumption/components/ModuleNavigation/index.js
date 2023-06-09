@@ -150,8 +150,7 @@ function ModuleNavigation({
 					className={`${showFeedbackPage ? styles.box_active : styles.box_deactive} ${
 						showFeedback ? styles.box_selected : styles.box_notselected
 					}`}
-					role="button"
-					tabIndex="0"
+					role="presentation"
 					onClick={() => {
 						if (showFeedbackPage) {
 							setStates({ feedback: true, test: false, Chapter: {} });

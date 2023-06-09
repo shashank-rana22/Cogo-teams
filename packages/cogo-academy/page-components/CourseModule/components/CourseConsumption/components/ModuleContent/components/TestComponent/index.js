@@ -18,10 +18,10 @@ function TestComponent({ tests = [], FormatTime, test_completed = false, onClick
 
 			<div className={styles.instruction}>
 				<div className={styles.description_box}>
-					<b>
+					<strong>
 						There is a timed test you need to Pass in order to complete this
 						course.
-					</b>
+					</strong>
 					&nbsp; It has been designed specifically to gauge your learnings
 					from the course.
 				</div>
@@ -30,24 +30,24 @@ function TestComponent({ tests = [], FormatTime, test_completed = false, onClick
 					<div className={styles.data_box}>
 						<div className={styles.data_display}>
 							<span>No of Questions</span>
-							<b>{total_questions}</b>
+							<strong>{total_questions}</strong>
 						</div>
 
 						<div className={styles.data_display}>
 							<span>Duration</span>
-							<b>
+							<strong>
 								<FormatTime test_duration={test_duration} />
-							</b>
+							</strong>
 						</div>
 
 						<div className={styles.data_display}>
 							<span>Attempts</span>
-							<b>{maximum_attempts}</b>
+							<strong>{maximum_attempts}</strong>
 						</div>
 
 						<div className={styles.data_display}>
 							<span>Required Pass %</span>
-							<b>{cut_off_percentage}</b>
+							<strong>{cut_off_percentage}</strong>
 						</div>
 					</div>
 
