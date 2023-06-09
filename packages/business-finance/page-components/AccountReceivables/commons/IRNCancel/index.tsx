@@ -30,20 +30,18 @@ function IRNCancel({ itemData }) {
 
 	const content = () => (
 		<div className={styles.container}>
-			{ isAfterADay && (
-				<Button
-					size="sm"
-					onClick={() => {
-						setShowCancellationModal(true);
-						setShow(false);
-					}}
-					style={{ marginBottom: '8px' }}
-				>
-					Cancel
-					{' '}
-					{IRNLabel}
-				</Button>
-			)}
+			<Button
+				size="sm"
+				onClick={() => {
+					setShowCancellationModal(true);
+					setShow(false);
+				}}
+				style={{ marginBottom: '8px' }}
+			>
+				Cancel
+				{' '}
+				{IRNLabel}
+			</Button>
 			{(['IRN_GENERATED', 'FAILED'].includes(invoiceStatus)) && (
 				<Button
 					disabled={loading}

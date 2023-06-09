@@ -6,6 +6,14 @@ import useGetIrnCancellation from '../../hooks/useGetIrnCancellation';
 
 import styles from './styles.module.css';
 
+interface MappedValues {
+	AGREEMENT_NUMBER: { message: string };
+	AGREEMENT_PDF_FILE: { message: string };
+	AGREEMENT_DATE: { message: string };
+	E_INVOICE_DATE: { message: string };
+	CANCELLATION_REASON: { message: string };
+}
+
 function CancellationModal({
 	itemData,
 	showCancellationModal,
@@ -29,18 +37,20 @@ function CancellationModal({
 	});
 
 	const mapping: Record<string, { key: string }> = {
-		Agreement_number: { key: 'AGREEMENT_NUMBER' },
-		Agreement_pdf_file: { key: 'AGREEMENT_PDF_FILE' },
-		Agreement_date: { key: 'AGREEMENT_DATE' },
-		E_invoice_date: { key: 'E_INVOICE_DATE' },
-		Cancellation_reason: { key: 'CANCELLATION_REASON' },
+		Agreement_number    : { key: 'AGREEMENT_NUMBER' },
+		Agreement_pdf_file  : { key: 'AGREEMENT_PDF_FILE' },
+		Agreement_date      : { key: 'AGREEMENT_DATE' },
+		E_invoice_date      : { key: 'E_INVOICE_DATE' },
+		Cancellation_reason : { key: 'CANCELLATION_REASON' },
 	};
 
-	const mappedValues: Record<string, { message: string }> = Object.entries(mapping).reduce((result, [property, {key}]) => {
+	const mappedValues: MappedValues = Object.entries(mapping).reduce((result, [property, { key }]) => {
 		const { message = '' } = errorVal?.[property] || {};
-		result[key] = { message };
-		return result; 
-	}, {});
+		return {
+			...result,
+			[key as keyof MappedValues]: { message },
+		};
+	}, {} as MappedValues);
 
 	const {
 		AGREEMENT_NUMBER = { message: '' },
@@ -48,7 +58,7 @@ function CancellationModal({
 		AGREEMENT_DATE = { message: '' },
 		E_INVOICE_DATE = { message: '' },
 		CANCELLATION_REASON = { message: '' },
-	  } = mappedValues;
+	} = mappedValues;
 
 	const { message: E_INVOICE_DATE_MESSAGE = '' } = E_INVOICE_DATE;
 	const { message: AGREEMENT_NUMBER_MESSAGE = '' } = AGREEMENT_NUMBER;
