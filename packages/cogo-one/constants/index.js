@@ -298,3 +298,8 @@ export const ACCEPT_FILE_MAPPING = {
 	default : '.png, .pdf, .jpg, .jpeg, .doc, .docx, .csv, .svg, .gif, .mp4, .xlsx',
 	zalo    : '.png, .pdf, .jpg, .jpeg, .csv, .svg',
 };
+
+export const AGENT_TYPE_MAPPING = {
+	importer_exporter : 'support',
+	service_provider  : 'supply',
+};
