@@ -17,6 +17,14 @@ import styles from './styles.module.css';
 import Timeline from './Timeline';
 import UtrNumber from './UTRNumber';
 
+const INVOICE_DATA_MAPPING = [
+	{ id: '1', label: 'POC' },
+	{ id: '2', label: 'Timeline' },
+	{ id: '3', label: 'UTR Number' },
+	{ id: '4', label: 'Cancellation Agreement' },
+];
+
+
 function InvoiceDetails({ item }) {
 	const { loading, data, getInvoiceDetailsApi } = useInvoiceDetails({
 		id: item?.id,
@@ -38,13 +46,6 @@ function InvoiceDetails({ item }) {
 			[key]: !previousActions[key],
 		}));
 	};
-
-	const INVOICE_DATA_MAPPING = [
-		{ id: '1', label: 'POC' },
-		{ id: '2', label: 'Timeline' },
-		{ id: '3', label: 'UTR Number' },
-		{ id: '4', label: 'Cancellation Agreement' },
-	];
 
 	return (
 		<>

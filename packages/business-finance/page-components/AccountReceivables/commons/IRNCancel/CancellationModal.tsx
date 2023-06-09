@@ -28,12 +28,27 @@ function CancellationModal({
 		response,
 	});
 
+	const mapping: Record<string, { key: string }> = {
+		Agreement_number: { key: 'AGREEMENT_NUMBER' },
+		Agreement_pdf_file: { key: 'AGREEMENT_PDF_FILE' },
+		Agreement_date: { key: 'AGREEMENT_DATE' },
+		E_invoice_date: { key: 'E_INVOICE_DATE' },
+		Cancellation_reason: { key: 'CANCELLATION_REASON' },
+	};
+
+	const mappedValues: Record<string, { message: string }> = Object.entries(mapping).reduce((result, [property, {key}]) => {
+		const { message = '' } = errorVal?.[property] || {};
+		result[key] = { message };
+		return result; 
+	}, {});
+
 	const {
-		Agreement_number: AGREEMENT_NUMBER = {}, Agreement_pdf_file: AGREEMENT_PDF_FILE = {},
-		Agreement_date: AGREEMENT_DATE = {},
-		E_invoice_date: E_INVOICE_DATE = {},
-		Cancellation_reason: CANCELLATION_REASON = {},
-	} = errorVal;
+		AGREEMENT_NUMBER = { message: '' },
+		AGREEMENT_PDF_FILE = { message: '' },
+		AGREEMENT_DATE = { message: '' },
+		E_INVOICE_DATE = { message: '' },
+		CANCELLATION_REASON = { message: '' },
+	  } = mappedValues;
 
 	const { message: E_INVOICE_DATE_MESSAGE = '' } = E_INVOICE_DATE;
 	const { message: AGREEMENT_NUMBER_MESSAGE = '' } = AGREEMENT_NUMBER;

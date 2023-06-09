@@ -2,9 +2,20 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
 interface IrnCancellationProps {
-	id?: string,
-	setShowCancellationModal?: (p: boolean)=> void,
-	response:any,
+	id?: string;
+	setShowCancellationModal?: (p: boolean)=> void;
+	response?: {
+		remarks?: string;
+	},
+}
+interface Values {
+	Agreement_number?: string;
+	Agreement_date?: string;
+	Agreement_pdf_file?: AgreementPdfFile;
+}
+
+interface AgreementPdfFile {
+	finalUrl?: string;
 }
 
 const useGetIrnCancellation = ({ id, setShowCancellationModal, response }: IrnCancellationProps) => {
@@ -20,13 +31,17 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal, response }: IrnCa
 		{ manual: true },
 	);
 
-	const onSubmit = async (values) => {
+	const { remarks } = response || {};
+	
+	const onSubmit = async (values: Values) => {
+		const { Agreement_number, Agreement_date , Agreement_pdf_file } = values || {};
+		const { finalUrl } = Agreement_pdf_file || {};
 		try {
 			const payload = {
-				cancelReason      : response?.remarks || undefined,
-				agreementNumber   : values?.Agreement_number || undefined,
-				agreementDate     : values?.Agreement_date || undefined,
-				agreementDocument : values?.Agreement_pdf_file?.finalUrl || undefined,
+				cancelReason      : remarks || undefined,
+				agreementNumber   : Agreement_number || undefined,
+				agreementDate     : Agreement_date || undefined,
+				agreementDocument : finalUrl || undefined,
 			};
 			const resp = await cancelIrnApi({
 				data: payload,

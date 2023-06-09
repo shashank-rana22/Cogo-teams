@@ -5,7 +5,7 @@ interface PostToSage {
 	id?: string,
 }
 
-const usePostToSage = ({id}: PostToSage) => {
+const usePostToSage = ({ id }: PostToSage) => {
 	const [
 		{ data, loading },
 		trigger,

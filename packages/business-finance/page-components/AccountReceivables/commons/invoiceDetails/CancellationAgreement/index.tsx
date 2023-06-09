@@ -1,7 +1,33 @@
+import { getDate } from 'date-fns';
 import styles from './styles.module.css';
 
-function CancellationAgreement({ data }) {
+interface DataInterface {
+	data: {
+		cancelledEInvoiceDetails: AggreementFile;
+	}
+}
+
+interface AggreementFile {
+	agreementNumber: string;
+	agreementDate: string;
+	agreementDocument: string;
+	eInvoiceForm04: string;
+}
+
+function CancellationAgreement({ data }: DataInterface) {
 	const { cancelledEInvoiceDetails } = data || {};
+
+	const { agreementNumber, agreementDate, agreementDocument, eInvoiceForm04} = cancelledEInvoiceDetails || {};
+
+	const dynamicDataVariables = [
+		{ label: 'Agreement No. - ', value: agreementNumber},
+		{ label: 'Agreement Date -', value: agreementDate},
+	]
+
+	const dynamicDataUrl = [
+		{label: 'Agreement Proof -', value: agreementDocument},
+		{label: 'Form 04 -', value: eInvoiceForm04},
+	];
 
 	if (cancelledEInvoiceDetails === undefined) {
 		return (
@@ -11,24 +37,18 @@ function CancellationAgreement({ data }) {
 
 	return (
 		<div className={styles.container}>
-			<div className={styles.sub_container}>
-				Agreement No. -
-				<span className={styles.span_style}>{cancelledEInvoiceDetails?.agreementNumber}</span>
-			</div>
-			<div className={styles.sub_container}>
-				Agreement Date -
-				<span className={styles.span_style}>{cancelledEInvoiceDetails?.agreementDate}</span>
-			</div>
-			<div className={styles.sub_container}>
-				Agreement Proof -
-				<a className={styles.span_style} href={cancelledEInvoiceDetails?.agreementDocument}>
-					View Documnet
-				</a>
-			</div>
-			<div className={styles.sub_container}>
-				Form 04 -
-				<a className={styles.span_style} href={cancelledEInvoiceDetails?.eInvoiceForm04}>View Document</a>
-			</div>
+			{dynamicDataVariables.map(({label, value}) => (
+				<div key={label} className={styles.sub_container}>
+					{label}
+					<span className={styles.span_style}>{value}</span>
+				</div>
+			))}
+			{dynamicDataUrl.map(({label, value})=> (
+				<div key={label} className={styles.sub_container}>
+					{label}
+					<a className={styles.span_style} href={value}>View Documnet</a>
+				</div>
+			))}
 		</div>
 	);
 }
