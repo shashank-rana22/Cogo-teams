@@ -3,24 +3,24 @@ import { useForm } from '@cogoport/forms';
 import React, { useEffect, useState } from 'react';
 
 import Layout from '../../commons/Layout';
-import { NestedObj } from '../../commons/List/Interfaces';
 import awbControls from '../../configurations/edit-awb-controls';
 
 import styles from './styles.module.css';
 
-interface Props {
-	setShowEdit?: Function;
-	item?: NestedObj;
-	editAwbNumber?: Function;
-	loading?: boolean;
-}
+const AWB_ZERO_INDEX = 0;
+const AWB_THIRD_INDEX = 3;
+const AWB_FOURTH_INDEX = 4;
+const AWB_EIGHTH_INDEX = 8;
+const CHECK_LENGTH_FOUR = 4;
+const CHECK_LENGTH_FIVE = 5;
+const CHECK_LENGTH_NINE = 9;
 
 function EditAwbNumber({
 	setShowEdit = () => {},
 	item = {},
 	editAwbNumber = () => {},
 	loading,
-}:Props) {
+}) {
 	const [serviceProviderData, setServiceProviderData] = useState({});
 
 	const { control, handleSubmit, setValue, watch, formState:{ errors } } = useForm();
@@ -44,17 +44,17 @@ function EditAwbNumber({
 	useEffect(() => {
 		if (awbNumber) {
 			let number = awbNumber;
-			if (awbNumber.length === 4) {
-				number = `${awbNumber.slice(0, 3)}-${awbNumber.slice(3)}`;
+			if (awbNumber.length === CHECK_LENGTH_FOUR) {
+				number = `${awbNumber.slice(AWB_ZERO_INDEX, AWB_THIRD_INDEX)}-${awbNumber.slice(AWB_THIRD_INDEX)}`;
 			}
-			if (awbNumber.length === 5 && awbNumber[4] === '-') {
-				number = `${awbNumber.slice(0, 3)}`;
+			if (awbNumber.length === CHECK_LENGTH_FIVE && awbNumber[AWB_FOURTH_INDEX] === '-') {
+				number = `${awbNumber.slice(AWB_ZERO_INDEX, AWB_THIRD_INDEX)}`;
 			}
-			if (awbNumber.length === 9 && awbNumber[8] !== '-') {
-				number = `${awbNumber.slice(0, 8)}-${awbNumber.slice(8)}`;
+			if (awbNumber.length === CHECK_LENGTH_NINE && awbNumber[AWB_EIGHTH_INDEX] !== '-') {
+				number = `${awbNumber.slice(AWB_ZERO_INDEX, AWB_EIGHTH_INDEX)}-${awbNumber.slice(AWB_EIGHTH_INDEX)}`;
 			}
-			if (awbNumber.length === 9 && awbNumber[8] === '-') {
-				number = `${awbNumber.slice(0, 8)}`;
+			if (awbNumber.length === CHECK_LENGTH_NINE && awbNumber[AWB_EIGHTH_INDEX] === '-') {
+				number = `${awbNumber.slice(AWB_ZERO_INDEX, AWB_EIGHTH_INDEX)}`;
 			}
 			setValue('awb_number', number);
 		}

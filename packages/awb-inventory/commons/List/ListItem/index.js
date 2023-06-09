@@ -1,25 +1,20 @@
-import React, { ReactNode } from 'react';
+import React from 'react';
 
-import { FieldType, FunctionObjects, NestedObj } from '../Interfaces';
+import CONSTANTS from '../../../configurations/constants';
 
 import getValue from './getValue';
 import styles from './styles.module.css';
 
-export interface Props {
-	fields: FieldType[];
-	singleitem?: NestedObj;
-	functions?: FunctionObjects;
-	isMobile?: boolean;
-}
-
 const INCLUDE_LINE_SEPARATION = ['booking_mode', 'poc_email', 'lms_password'];
+
+const { DEFAULT_SPAN } = CONSTANTS;
 
 function CardItem({
 	fields,
 	singleitem,
 	functions = {},
 	isMobile = false,
-}:Props) {
+}) {
 	return (
 		<div>
 			<section className={styles.list_container}>
@@ -28,7 +23,7 @@ function CardItem({
 						isMobile ? styles.is_mobile : ''
 					}`}
 				>
-					{fields.map((field:FieldType) => {
+					{fields.map((field) => {
 						const itemStyle = field.styles || {};
 						return (
 							<>
@@ -37,9 +32,9 @@ function CardItem({
 										isMobile ? styles.is_mobile : ''
 									}`}
 									style={{
-										'--span': (field.span || 1),
+										'--span': (field.span || DEFAULT_SPAN),
 										...itemStyle,
-									} as React.CSSProperties}
+									}}
 									key={field.key}
 								>
 									{isMobile && (
@@ -54,7 +49,7 @@ function CardItem({
 											field,
 											functions,
 											'-',
-										) as ReactNode }
+										) }
 									</div>
 
 								</div>

@@ -5,11 +5,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface Props {
-	setShow?: Function;
-}
-
-function Header({ setShow = () => {} }:Props) {
+function Header({ setShow = () => {} }) {
 	return (
 		<header className={styles.header_container}>
 			<div className={styles.heading}>AWB Inventory</div>

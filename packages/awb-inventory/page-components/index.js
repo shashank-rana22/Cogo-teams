@@ -3,6 +3,7 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
+import CONSTANTS from '../configurations/constants';
 import tabs from '../configurations/tabs';
 import useGetAwbList from '../hooks/useGetAwbList';
 
@@ -14,9 +15,7 @@ import Filters from './Filters';
 import Header from './Header';
 import styles from './styles.module.css';
 
-interface Profile {
-	profile?: { authParams:{ awb_inventory:string } }
-}
+const { START_PAGE } = CONSTANTS;
 
 const TABS_COMPONENT_MAPPING = {
 	awb_number        : AwbNumber,
@@ -34,7 +33,7 @@ function AwbInventory() {
 	const [activeTab, setActiveTab] = useState('awb_number');
 	const [show, setShow] = useState(false);
 	const ActiveTabComponent = TABS_COMPONENT_MAPPING[activeTab] || null;
-	const profile:Profile = useSelector((state) => state);
+	const profile = useSelector((state) => state);
 
 	const { profile: { authParams } } = profile || {};
 
@@ -54,10 +53,10 @@ function AwbInventory() {
 
 	useEffect(() => {
 		setFinalList([]);
-		if (page === 1) {
+		if (page === START_PAGE) {
 			awbList();
 		} else {
-			setPage(1);
+			setPage(START_PAGE);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(authParams)]);

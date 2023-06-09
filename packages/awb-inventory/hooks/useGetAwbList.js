@@ -2,8 +2,18 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
+import CONSTANTS from '../configurations/constants';
+
+const STATUS_MAPPING = {
+	awb_number        : 'available',
+	awb_number_used   : 'used',
+	awb_number_cancel : 'cancelled',
+};
+
+const { START_PAGE } = CONSTANTS;
+
 const useGetAwbList = (activeTab) => {
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(START_PAGE);
 	const [finalList, setFinalList] = useState([]);
 	const [qfilter, setQfilter] = useState('');
 	const [filters, setFilters] = useState({});
@@ -14,16 +24,11 @@ const useGetAwbList = (activeTab) => {
 
 	const awbList = useCallback(() => {
 		(async () => {
-			const statusMapping = {
-				awb_number        : 'available',
-				awb_number_used   : 'used',
-				awb_number_cancel : 'cancelled',
-			};
 			try {
 				await trigger({
 					params: {
 						filters: {
-							status : statusMapping[activeTab],
+							status : STATUS_MAPPING[activeTab],
 							...filters,
 							q      : query,
 						},
@@ -43,13 +48,13 @@ const useGetAwbList = (activeTab) => {
 
 	useEffect(() => {
 		setFinalList([]);
-		setPage(1);
+		setPage(START_PAGE);
 		setQfilter('');
 	}, [activeTab]);
 
 	useEffect(() => {
 		setFinalList([]);
-		setPage(1);
+		setPage(START_PAGE);
 	}, [filters, query]);
 
 	useEffect(() => {

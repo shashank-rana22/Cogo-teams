@@ -9,6 +9,16 @@ import useGetAWBPrefix from '../../hooks/useGetAWBPrefix';
 
 import styles from './styles.module.css';
 
+const AWB_ZERO_INDEX = 0;
+const AWB_THIRD_INDEX = 3;
+const AWB_FOURTH_INDEX = 4;
+const AWB_EIGHTH_INDEX = 8;
+const AWB_NINETH_INDEX = 9;
+const CHECK_LENGTH_FOUR = 4;
+const CHECK_LENGTH_FIVE = 5;
+const CHECK_LENGTH_NINE = 9;
+const CHECK_LENGTH_TEN = 10;
+
 function AddAwbNumber({
 	setShow,
 	awbList,
@@ -59,21 +69,21 @@ function AddAwbNumber({
 
 	useEffect(() => {
 		let awbNumber = firstAwbNumber;
-		if (firstAwbNumber.length === 4) {
-			awbNumber = `${firstAwbNumber.slice(0, 3)}-${firstAwbNumber.slice(
-				3,
+		if (firstAwbNumber.length === CHECK_LENGTH_FOUR) {
+			awbNumber = `${firstAwbNumber.slice(AWB_ZERO_INDEX, AWB_THIRD_INDEX)}-${firstAwbNumber.slice(
+				AWB_THIRD_INDEX,
 			)}`;
 		}
-		if (firstAwbNumber.length === 5 && firstAwbNumber[4] === '-') {
-			awbNumber = `${firstAwbNumber.slice(0, 3)}`;
+		if (firstAwbNumber.length === CHECK_LENGTH_FIVE && firstAwbNumber[AWB_FOURTH_INDEX] === '-') {
+			awbNumber = `${firstAwbNumber.slice(AWB_ZERO_INDEX, AWB_THIRD_INDEX)}`;
 		}
-		if (firstAwbNumber.length === 9) {
-			awbNumber = `${firstAwbNumber.slice(0, 8)}-${firstAwbNumber.slice(
-				8,
+		if (firstAwbNumber.length === CHECK_LENGTH_NINE) {
+			awbNumber = `${firstAwbNumber.slice(AWB_ZERO_INDEX, AWB_EIGHTH_INDEX)}-${firstAwbNumber.slice(
+				AWB_EIGHTH_INDEX,
 			)}`;
 		}
-		if (firstAwbNumber.length === 10 && firstAwbNumber[9] === '-') {
-			awbNumber = `${firstAwbNumber.slice(0, 8)}`;
+		if (firstAwbNumber.length === CHECK_LENGTH_TEN && firstAwbNumber[AWB_NINETH_INDEX] === '-') {
+			awbNumber = `${firstAwbNumber.slice(AWB_ZERO_INDEX, AWB_EIGHTH_INDEX)}`;
 		}
 		setValue('first_awb_number', awbNumber);
 	// eslint-disable-next-line react-hooks/exhaustive-deps

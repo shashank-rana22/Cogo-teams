@@ -1,8 +1,12 @@
-const checkValidation = (value = '') => {
-	const awbDigits = value.slice(3, 12).replace(/-/g, '');
-	const lastDigits = Number(value[12]);
+const REMAINDER_CHECK_DIGIT = 7;
+const LAST_DIGIT_VALUE = 12;
+const AWB_FIRST_THREE_DIGIT = 3;
 
-	const remainder = Number(awbDigits) % 7;
+const checkValidation = (value = '') => {
+	const awbDigits = value.slice(AWB_FIRST_THREE_DIGIT, LAST_DIGIT_VALUE).replace(/-/g, '');
+	const lastDigits = Number(value[LAST_DIGIT_VALUE]);
+
+	const remainder = Number(awbDigits) % REMAINDER_CHECK_DIGIT;
 
 	if (value.trim() === '') {
 		return 'Cannot be Empty';

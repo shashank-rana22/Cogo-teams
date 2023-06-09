@@ -1,38 +1,43 @@
 import React from 'react';
 
+import CONSTANTS from '../../configurations/constants';
+
 import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
+const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
+const ZERO_SPAN = 0;
+
 function Layout({
 	control, fields, showElements = {}, errors,
 }) {
-	let rowWiseFields = [];
-	const totalFields = [];
+	let ROW_WISE_FIELDS = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	(fields || []).forEach((field) => {
 		if (!(field.name in showElements) || showElements[field.name]) {
-			span += field.span || 12;
-			if (span === 12) {
-				rowWiseFields.push(field);
-				totalFields.push(rowWiseFields);
-				rowWiseFields = [];
-				span = 0;
-			} else if (span < 12) {
-				rowWiseFields.push(field);
+			span += field.span || TOTAL_SPAN;
+			if (span === TOTAL_SPAN) {
+				ROW_WISE_FIELDS.push(field);
+				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
+				ROW_WISE_FIELDS = [];
+				span = ZERO_SPAN;
+			} else if (span < TOTAL_SPAN) {
+				ROW_WISE_FIELDS.push(field);
 			} else {
-				totalFields.push(rowWiseFields);
-				rowWiseFields = [];
-				rowWiseFields.push(field);
+				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
+				ROW_WISE_FIELDS = [];
+				ROW_WISE_FIELDS.push(field);
 				span = field.span;
 			}
 		}
 	});
-	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+	if (ROW_WISE_FIELDS.length) {
+		TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 	}
 
-	const totalFieldsObject = { ...totalFields };
+	const totalFieldsObject = { ...TOTAL_FIELDS };
 
 	return (
 		<div className={styles.layout}>
@@ -40,7 +45,7 @@ function Layout({
 				<div className={styles.row} key={field}>
 					{totalFieldsObject[field].map((fieldsItem) => {
 						const { type, heading = '', label = '', span:fieldArraySpan } = fieldsItem;
-						const flex = ((fieldArraySpan || 12) / 12) * 100 - 1;
+						const flex = ((fieldArraySpan || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
 						const show = (!(totalFieldsObject[field].name in showElements)
 						|| showElements[fieldsItem.name]);
 						if (type === 'fieldArray' && show) {

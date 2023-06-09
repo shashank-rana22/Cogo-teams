@@ -4,19 +4,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-interface Props {
-	setShowConfirm?: Function;
-	editAwbNumber?: Function;
-	loading?: boolean;
-	status?: string;
-}
-
 function ConfirmDelete({
 	setShowConfirm = () => {},
 	editAwbNumber = () => {},
 	loading,
 	status,
-}:Props) {
+}) {
 	const confirmMessage = status === 'available' ? 'delete' : 'recover';
 	const updateStatus = status === 'available' ? 'cancelled' : 'available';
 	return (

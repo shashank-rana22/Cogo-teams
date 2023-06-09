@@ -1,5 +1,7 @@
 import checkValidation from '../helper/checkValidation';
 
+const ALLOWED_TOTAL_AWB_ALLOTED = 200;
+
 const awbControls = ({
 	setServiceProviderData,
 	serviceProviderData,
@@ -64,7 +66,7 @@ const awbControls = ({
 		placeholder : 'Enter',
 		rules       : {
 			required : true,
-			validate : (value) => (value > 200 ? 'Cannot be more than 200' : true),
+			validate : (value) => (value > ALLOWED_TOTAL_AWB_ALLOTED ? 'Cannot be more than 200' : true),
 		},
 	},
 	{

@@ -1,16 +1,14 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-interface Props {
-	item?: any;
-	awbList?: Function;
-	setShowEdit?: Function;
-	setPage?: Function;
-	setFinalList?: Function;
-	setQfilter?: Function;
-	setShowConfirm?: Function;
-	page?: number;
-}
+import CONSTANTS from '../configurations/constants';
+
+const TOAST_MESSAGE = {
+	cancelled : 'AWB Number is successfully deleted.',
+	available : 'AWB Number is successfully recovered.',
+};
+
+const { START_PAGE } = CONSTANTS;
 
 const useEditAwbNumber = ({
 	item = {},
@@ -21,7 +19,7 @@ const useEditAwbNumber = ({
 	setQfilter,
 	setShowConfirm = () => {},
 	page,
-}:Props) => {
+}) => {
 	const { id = '' } = item;
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_awb_inventory',
@@ -29,11 +27,6 @@ const useEditAwbNumber = ({
 	});
 
 	const editAwbNumber = async (finalData) => {
-		const toastMessage = {
-			cancelled : 'AWB Number is successfully deleted.',
-			available : 'AWB Number is successfully recovered.',
-		};
-
 		const payload = {
 			id,
 			...finalData,
@@ -43,17 +36,17 @@ const useEditAwbNumber = ({
 				data: payload,
 			});
 			Toast.success(
-				toastMessage[finalData?.status]
+				TOAST_MESSAGE[finalData?.status]
 					|| 'AWB Number is successfully updated.',
 			);
 			setShowConfirm(false);
 			setFinalList([]);
 			setQfilter('');
 			setShowEdit(false);
-			if (page === 1) {
+			if (page === START_PAGE) {
 				awbList();
 			} else {
-				setPage(1);
+				setPage(START_PAGE);
 			}
 		} catch (error) {
 			const { data = {} } = error;

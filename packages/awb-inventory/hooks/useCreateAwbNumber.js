@@ -1,6 +1,10 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
+import CONSTANTS from '../configurations/constants';
+
+const { START_PAGE } = CONSTANTS;
+
 const useCreateAwbNumber = (
 	setShow,
 	awbList,
@@ -27,10 +31,10 @@ const useCreateAwbNumber = (
 			setFinalList([]);
 			setActiveTab('awb_number');
 			setShow(false);
-			if (page === 1) {
+			if (page === START_PAGE) {
 				awbList();
 			} else {
-				setPage(1);
+				setPage(START_PAGE);
 			}
 		} catch (error) {
 			const { data = {} } = error;
