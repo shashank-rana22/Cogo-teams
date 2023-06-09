@@ -12,9 +12,9 @@ const useReportError = ({ setShowErrorModal = () => {} }) => {
 
 		const { finalUrl = '' } = error_screenshot_url || {};
 
-		const { cogo_course_notification_ids } = GLOBAL_CONSTANTS.uuid;
+		const { cogo_course_notification_user_ids } = GLOBAL_CONSTANTS.uuid;
 
-		const promises = cogo_course_notification_ids.reduce((acc, id) => {
+		const promises = cogo_course_notification_user_ids.reduce((acc, id) => {
 			const payload = {
 				type          : 'platform_notification',
 				service       : 'user',
