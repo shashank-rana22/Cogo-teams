@@ -1,8 +1,6 @@
 import { Tooltip, Popover } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { IcMCall, IcMOverflowDot } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import { useState, useContext } from 'react';
 
@@ -10,20 +8,14 @@ import styles from './styles.module.css';
 import UnableToDoTask from './UnableToDoTask';
 import UpdateAssignedStakeholder from './UpdateAssignedStakeholder';
 
-const geo = getGeoConstants();
-
 function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {} }) {
-	const { partner } = useSelector(({ profile }) => ({
-		partner: (profile || {}).partner || {},
-	}));
-
 	const [showAction, setShowAction] = useState(false);
 	const [showUnableTo, setShowUnableTo] = useState(false);
 	const [showAdmin, setShowAdmin] = useState(false);
 
-	const { servicesList: services } = useContext(ShipmentDetailContext);
+	const { servicesList: services, stakeholderConfig = {} } = useContext(ShipmentDetailContext);
+	const canReassignTask = !!stakeholderConfig?.tasks?.can_reassign_task;
 
-	const MAIN_SERVICE_CANCELLED_CHECK = false;
 	const REQUIRED_SERVICE_ARR = [];
 
 	(task.task_field_ids || []).forEach((id) => {
@@ -33,13 +25,6 @@ function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {} }) 
 			}
 		});
 	});
-
-	const canReassignTask = partner?.user_role_ids?.some((ele) => [
-		geo.uuid.super_admin_id,
-		geo.uuid.prod_process_owner,
-		geo.uuid.admin_id,
-		geo.uuid.tech_super_admin_id,
-	].includes(ele));
 
 	return (
 		<div className={styles.container}>
@@ -110,10 +95,10 @@ function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {} }) 
 					}
 					className={styles.action}
 				>
-					{!MAIN_SERVICE_CANCELLED_CHECK && !hideThreeDots ? (
-						<IcMOverflowDot className={styles.overflow_icon} />
-					) : (
+					{hideThreeDots ? (
 						<div className={styles.overflow_div} />
+					) : (
+						<IcMOverflowDot className={styles.overflow_icon} />
 					)}
 				</div>
 			</Popover>
