@@ -1,17 +1,15 @@
 import {
-	InputController,
-	ChipsController,
-	DatepickerController,
-	RangeSliderController,
-	CheckboxGroupController,
+	UploadController,
+	CreatableMultiSelectController, TextAreaController,
+	SelectController,
 } from '@cogoport/forms';
 
 const controlTypeControllerMapping = {
-	text       : InputController,
-	chips      : ChipsController,
-	datePicker : DatepickerController,
-	checkbox   : CheckboxGroupController,
-	slider     : RangeSliderController,
+	select             : SelectController,
+	textarea           : TextAreaController,
+	'creatable-select' : CreatableMultiSelectController,
+	uploader           : UploadController,
+
 };
 
 export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;

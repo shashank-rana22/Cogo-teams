@@ -3,6 +3,7 @@ import { useForm } from '@cogoport/forms';
 import { useState } from 'react';
 
 import FilterTicketsSection from '../../common/FilterTicketsSection';
+import useRaiseTicket from '../../hooks/useRaiseTicket';
 
 import RaiseTickets from './RaiseTickets';
 import StatsSection from './StatsSection';
@@ -10,11 +11,11 @@ import styles from './styles.module.css';
 
 function MyTickets() {
 	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
-	const { control, handleSubmit } = useForm();
+	const { raiseTickets, loading } = useRaiseTicket({ setShowRaiseTicket });
 
-	const handleRaiseTicket = (val) => {
-		console.log('val:', val);
-	};
+	const { control, handleSubmit, watch, formState: { errors } } = useForm();
+	const watchOrgId = watch('organization_id');
+	const watchUserId = watch('user_id');
 
 	return (
 		<div>
@@ -33,17 +34,18 @@ function MyTickets() {
 				closeOnOuterClick={() => setShowRaiseTicket(false)}
 				onClose={() => setShowRaiseTicket(false)}
 			>
-				<form onSubmit={handleSubmit(handleRaiseTicket)}>
+				<form onSubmit={handleSubmit(raiseTickets)}>
 					<Modal.Header title="Raise Ticket" style={{ padding: 8 }} />
 					<Modal.Body className={styles.preview_modal_body}>
-						<RaiseTickets control={control} />
+						<RaiseTickets
+							control={control}
+							errors={errors}
+							watchOrgId={watchOrgId}
+							watchUserId={watchUserId}
+						/>
 					</Modal.Body>
 					<Modal.Footer style={{ padding: 12 }}>
-						<Button
-							size="md"
-							themeType="accent"
-							type="submit"
-						>
+						<Button size="md" type="submit" loading={loading}>
 							Submit
 						</Button>
 					</Modal.Footer>

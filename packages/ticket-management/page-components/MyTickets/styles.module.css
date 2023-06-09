@@ -14,7 +14,7 @@
 .styled_ui_modal_dialog {
 	:global {
 		.ui_modal_body_container {
-			max-height: 100vh;
+			max-height: 80vh;
 		}
 	}
 }
