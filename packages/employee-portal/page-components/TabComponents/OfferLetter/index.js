@@ -38,7 +38,7 @@ function OfferLetter({ setInformationPage, data, getEmployeeDetails }) {
 							<Button
 								themeType="secondary"
 								size="md"
-								onClick={() => updateData({ status: 'rejected' })}
+								onClick={() => updateData({ status: 'rejected_by_user' })}
 							>
 								Reject
 							</Button>

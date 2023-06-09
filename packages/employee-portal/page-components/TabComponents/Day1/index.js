@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
@@ -5,7 +7,7 @@ import { useEffect, useCallback } from 'react';
 import styles from './styles.module.css';
 
 function Day1({ setInformationPage }) {
-	const [{ data, loading = false }, listTrigger] = useHarbourRequest({
+	const [{ data }, listTrigger] = useHarbourRequest({
 		method : 'get',
 		url    : '/list_company_documents',
 	}, { manual: true });
@@ -22,7 +24,9 @@ function Day1({ setInformationPage }) {
 					},
 				});
 			} catch (error) {
-				console.log('error :: ', error);
+				if (error?.response) {
+					Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+				}
 			}
 		},
 		[listTrigger],

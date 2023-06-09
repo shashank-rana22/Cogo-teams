@@ -39,6 +39,7 @@ function EducationalQualification({ getEmployeeDetails, data: info }) {
 					if (type === 'fieldArray') {
 						return (
 							<FieldArray
+								{...controlItem}
 								Array
 								name="education_qualifications"
 								control={control}

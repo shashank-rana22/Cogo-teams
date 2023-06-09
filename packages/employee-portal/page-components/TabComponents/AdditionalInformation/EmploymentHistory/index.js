@@ -97,15 +97,16 @@ function EmploymentHistory({ getEmployeeDetails, data: info }) {
 				</div>
 			</div>
 
-			<Button
-				size="md"
-				type="button"
-				className={styles.button}
-				loading={loading}
-				onClick={handleSubmit(onSubmit)}
-			>
-				Save
-			</Button>
+			<div className={styles.button}>
+				<Button
+					size="md"
+					type="button"
+					loading={loading}
+					onClick={handleSubmit(onSubmit)}
+				>
+					Save
+				</Button>
+			</div>
 		</>
 	);
 }

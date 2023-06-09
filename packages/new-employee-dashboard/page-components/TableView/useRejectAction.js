@@ -1,12 +1,14 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useUpdateEmployeeDeatils = ({ id, status, getEmployeeDetails = () => {} }) => {
+const useRejectAction = () => {
 	const [{ btnloading }, trigger] = useHarbourRequest({
 		url    : '/update_employee_detail',
 		method : 'POST',
 	}, { manual: true });
 
-	const updateEmployeeStatus = async () => {
+	const updateEmployeeStatus = async (id, status, fetch) => {
 		const payload = {
 			id,
 			status: status === 'active' ? 'inactive' : 'active',
@@ -15,16 +17,17 @@ const useUpdateEmployeeDeatils = ({ id, status, getEmployeeDetails = () => {} })
 			await trigger({
 				data: payload,
 			});
-			getEmployeeDetails(id);
+			fetch();
 		} catch (err) {
-			// Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
+			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
 	};
 
 	return {
 		btnloading,
 		updateEmployeeStatus,
+		trigger,
 	};
 };
 
-export default useUpdateEmployeeDeatils;
+export default useRejectAction;

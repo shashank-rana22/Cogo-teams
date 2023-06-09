@@ -138,15 +138,19 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 						</div>
 					);
 				})}
-				<Button
-					size="md"
-					type="button"
-					className={styles.button}
-					onClick={handleSubmit(onSubmit)}
-					loading={loading}
-				>
-					Save
-				</Button>
+
+				<div className={styles.button}>
+
+					<Button
+						size="md"
+						type="button"
+						onClick={handleSubmit(onSubmit)}
+						loading={loading}
+					>
+						Save
+					</Button>
+				</div>
+
 			</div>
 		</div>
 	);
