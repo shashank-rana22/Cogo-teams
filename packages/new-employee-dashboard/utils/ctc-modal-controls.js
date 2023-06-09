@@ -1,4 +1,3 @@
-/* eslint-disable max-lines-per-function */
 const FIXED_SPLIT = 1;
 const CTC_CONST_1 = 1;
 const CTC_CONST_0_4 = 0.4;
@@ -37,10 +36,7 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 	const conveyanceYearlyValue = CTC_CONST_1600 * CTC_CONST_12;
 	const foodAllowanceYearlyValue = CTC_CONST_2200 * CTC_CONST_12;
 	const fuelAllowanceYearlyValue = CTC_CONST_2700 * CTC_CONST_12;
-	const telephoneAllowanceYearlyValue = Math.max(
-		CTC_CONST_0_015 * ctcInput,
-		CTC_CONST_500 * CTC_CONST_12,
-	);
+	const telephoneAllowanceYearlyValue = Math.max(CTC_CONST_0_015 * ctcInput, CTC_CONST_500 * CTC_CONST_12);
 	const flexible_benefit_sum = CTC_CONST_0_0833 * basicYearlyValue + CTC_CONST_15000;
 	const statutorySum = (inputVal) => {
 		if (inputVal / CTC_CONST_12 > CTC_CONST_21000) {
@@ -54,44 +50,28 @@ export const ctcModalControls = (ctcInput, data = {}) => {
 		}
 		return CTC_CONST_754 * CTC_CONST_12;
 	};
-
 	let result;
 	if (
 		ctcInput
-      - (basicYearlyValue
-        + hraYearlyValue
-        + conveyanceYearlyValue
-        + foodAllowanceYearlyValue
-        + fuelAllowanceYearlyValue
-        + telephoneAllowanceYearlyValue
-        + CTC_CONST_0_0833 * basicYearlyValue
-        + CTC_CONST_15000
-        + Math.round(calculateValue(basicYearlyValue))
-        + CTC_CONST_0_0483 * basicYearlyValue
+      - (basicYearlyValue + hraYearlyValue + conveyanceYearlyValue + foodAllowanceYearlyValue
+		+ fuelAllowanceYearlyValue + telephoneAllowanceYearlyValue + CTC_CONST_0_0833 * basicYearlyValue
+        + CTC_CONST_15000 + Math.round(calculateValue(basicYearlyValue)) + CTC_CONST_0_0483 * basicYearlyValue
         + statutorySum(basicYearlyValue))
     > CTC_CONST_0
 	) {
 		result = ctcInput
-      - (basicYearlyValue
-        + hraYearlyValue
-        + conveyanceYearlyValue
-        + foodAllowanceYearlyValue
-        + fuelAllowanceYearlyValue
-        + telephoneAllowanceYearlyValue
-        + flexible_benefit_sum
-        + Math.round(calculateValue(basicYearlyValue))
+      - (basicYearlyValue + hraYearlyValue + conveyanceYearlyValue + foodAllowanceYearlyValue
+        + fuelAllowanceYearlyValue + telephoneAllowanceYearlyValue
+		+ flexible_benefit_sum + Math.round(calculateValue(basicYearlyValue))
         + CTC_CONST_0_0483 * basicYearlyValue
-        + CTC_CONST_2400
-        + statutorySum(basicYearlyValue));
+        + CTC_CONST_2400 + statutorySum(basicYearlyValue));
 	} else {
 		result = CTC_CONST_0;
 	}
 
 	const specialAllowanceYearlyValue = result;
 
-	const sum = basicYearlyValue
-    + hraYearlyValue
-    + conveyanceYearlyValue
+	const sum = basicYearlyValue + hraYearlyValue + conveyanceYearlyValue
     + specialAllowanceYearlyValue
     + foodAllowanceYearlyValue
     + fuelAllowanceYearlyValue
