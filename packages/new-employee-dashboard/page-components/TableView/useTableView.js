@@ -49,7 +49,11 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 		router.push(`/new-employee-dashboard/${id}`, `/new-employee-dashboard/${id}`);
 	};
 
-	const columns = getColumns({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, fetch });
+	let columns = getColumns({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, fetch });
+
+	if( activeTab !== 'rejected_by_user') {
+		columns = columns.slice(0,6);
+	}
 
 	return {
 		columns,
