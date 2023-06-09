@@ -69,7 +69,6 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 								<div className={styles.status}>
 									<div className={styles.accordion_title}>{startCase(name)}</div>
 									{renderPills({ isCompleted, name })}
-
 								</div>
 							)}
 						>
@@ -78,9 +77,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 								getEmployeeDetailsLoading={getEmployeeDetailsLoading}
 								getEmployeeDetails={getEmployeeDetails}
 							/>
-
 							{' '}
-
 						</Accordion>
 					</div>
 				);
