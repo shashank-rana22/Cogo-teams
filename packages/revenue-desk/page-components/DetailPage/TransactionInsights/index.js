@@ -13,17 +13,13 @@ function TransactionInsights({ itemData }) {
 	return (
 		<div className={styles.maincontainer}>
 			{['kam_insights', 'customer_insights'].map((type) => (
-				<>
-					<div className={styles.insightContainer}>
-						<InsightComponent
-							key={type}
-							type={type}
-							insightData={insightsData?.[type]}
-							data={itemData}
-						/>
-					</div>
-					<div className={styles.line} />
-				</>
+				<div className={styles.insightContainer} key={type}>
+					<InsightComponent
+						type={type}
+						insightData={insightsData?.[type]}
+						data={itemData}
+					/>
+				</div>
 			))}
 		</div>
 	);

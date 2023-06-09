@@ -5,7 +5,7 @@ const useGetShipmentQuotation = ({ shipmentData }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/get_shipment_quotation',
-	}, { manual: false });
+	}, { manual: true });
 	const getQuotation = async () => {
 		try {
 			await trigger({

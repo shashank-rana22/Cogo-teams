@@ -4,13 +4,15 @@ import { useState } from 'react';
 
 import useUpdateRatesPreferences from '../../../hooks/useUpdateRatesPreferences';
 
+import CancellationModal from './CancellationModal';
 import PreviewSelectedCards from './PreviewSelectedCards';
 import SingleService from './SingleService';
 import styles from './styles.module.css';
 
-function Rates({ groupedShowServicesData, serviceData }) {
+function Rates({ groupedShowServicesData, serviceData, shipmentData }) {
 	const tabKeys = Object?.keys(groupedShowServicesData || {});
 	const [supplierPayload, setSupplierPayload] = useState({});
+	const [showCancelModal, setshowCancelModal] = useState(false);
 	const [inventory, setInventory] = useState([]);
 	const [activeTab, setActiveTab] = useState(tabKeys[0]);
 	const [modalStep, setModalStep] = useState(0);
@@ -34,7 +36,13 @@ function Rates({ groupedShowServicesData, serviceData }) {
 		<div className={styles.container}>
 			<div className={styles.button_select_container}>
 				<div className={styles.button_container}>
-					<Button size="md" themeType="secondary">Cancel Booking</Button>
+					<Button
+						size="md"
+						themeType="secondary"
+						onClick={() => setshowCancelModal(true)}
+					>
+						Cancel Booking
+					</Button>
 					<Button
 						size="md"
 						themeType="primary"
@@ -62,6 +70,13 @@ function Rates({ groupedShowServicesData, serviceData }) {
 					</TabPanel>
 				))}
 			</Tabs>
+			{showCancelModal ? (
+				<CancellationModal
+					shipmentData={shipmentData}
+					showCancelModal={showCancelModal}
+					setshowCancelModal={setshowCancelModal}
+				/>
+			) : null}
 			{modalStep === 1
 				? (
 					<Modal size="xl" show={modalStep === 1} onClose={() => setModalStep(0)} placement="center">

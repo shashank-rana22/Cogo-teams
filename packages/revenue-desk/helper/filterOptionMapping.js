@@ -23,11 +23,11 @@ export const statusOptions = [
 
 export const rdStatusOptions = [
 	{
-		value : 'Active',
-		label : 'active',
+		value : 'active',
+		label : 'Active',
 	},
 	{
-		value : 'Completed',
+		value : 'completed',
 		label : 'Completed',
 	},
 ];

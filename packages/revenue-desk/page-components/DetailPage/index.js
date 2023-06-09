@@ -84,7 +84,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 				</div>
 			</div>
 
-			<div style={{ margin: 20 }}>
+			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTabPanel}
 					fullWidth
@@ -114,6 +114,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 				{loading ? null
 					: (
 						<ServiceWiseDetails
+							shipmentData={itemData}
 							groupedShowServicesData={groupedShowServicesData}
 							serviceData={servicesData?.list}
 						/>

@@ -12,7 +12,7 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData } = {}) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/list_revenue_desk_available_rates',
-	}, { manual: false });
+	}, { manual: true });
 	const ListRevenueAvailableRates = async () => {
 		try {
 			await trigger({

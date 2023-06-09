@@ -184,6 +184,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'update_shipment',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

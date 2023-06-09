@@ -18,7 +18,7 @@ const getFiltersTagsArray = (filters) => {
 	if (filters?.rd_state) {
 		rdStatusArray.push({
 			key     	: '1',
-			children : `${startCase(filters?.rd_state)} Shipment`,
+			children : `${startCase(filters?.rd_state)} RD Status`,
 			color    : '#F3FAFA',
 			closable : true,
 		});

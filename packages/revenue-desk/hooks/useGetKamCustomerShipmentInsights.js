@@ -5,7 +5,7 @@ const useGetKamCustomerShipmentInsights = ({ shipmentId }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/get_shipment_transaction_insights',
-	}, { manual: false });
+	}, { manual: true });
 
 	const listKamCustomerInsights = async () => {
 		try {

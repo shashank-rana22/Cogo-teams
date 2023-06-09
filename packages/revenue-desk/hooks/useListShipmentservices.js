@@ -5,7 +5,7 @@ const useListShipmentServices = ({ shipmentId } = {}) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/list_shipment_services',
-	}, { manual: false });
+	}, { manual: true });
 
 	const fetchShipmentsServices = async () => {
 		try {

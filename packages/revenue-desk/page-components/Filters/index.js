@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function Filters({ filters, setFilters }) {
 	const {
-		shipmentStatusArray, tradeTypeArray,
+		shipmentStatusArray, tradeTypeArray, rdStatusArray,
 		shipmentSourceArray, departureDateArray, createdDateArray,
 	} = getFiltersTagsArray(filters);
 	return (
@@ -28,6 +28,15 @@ function Filters({ filters, setFilters }) {
 						items={tradeTypeArray}
 						onItemsChange={() => {
 							setFilters({ ...filters, trade_type: '' });
+						}}
+						size="md"
+					/>
+				</div>
+				<div className={styles.tag_container}>
+					<Tags
+						items={rdStatusArray}
+						onItemsChange={() => {
+							setFilters({ ...filters, rd_state: '' });
 						}}
 						size="md"
 					/>
