@@ -17,7 +17,7 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 		personal_information = false,
 	} = personal_details;
 
-	const content_mapping = [
+	const CONTENT_MAPPING = [
 		{
 			name        : 'personal_information',
 			content     : PersonalInformation,
@@ -64,7 +64,7 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 			</div>
 
 			<div className={styles.subcontainer}>
-				{content_mapping.map((item) => {
+				{CONTENT_MAPPING.map((item) => {
 					const { content: Component, isCompleted, name } = item;
 
 					return (

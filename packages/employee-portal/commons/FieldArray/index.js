@@ -22,13 +22,14 @@ function FieldArray(props) {
 		name,
 	});
 
-	const childEmptyValues = {};
+	const CHILD_EMPTYVALUES = {};
+
 	controls.forEach((controlItem) => {
-		childEmptyValues[controlItem.name] = '';
+		CHILD_EMPTYVALUES[controlItem.name] = '';
 	});
 
 	if (isEmpty(fields)) {
-		fields.push(childEmptyValues);
+		fields.push(CHILD_EMPTYVALUES);
 	}
 
 	return (
@@ -52,7 +53,7 @@ function FieldArray(props) {
 			{showButtons && !disabled ? (
 				<Button
 					themeType="secondary"
-					onClick={() => append(childEmptyValues)}
+					onClick={() => append(CHILD_EMPTYVALUES)}
 					style={{ margin: '16px 0px' }}
 				>
 					+ Add

@@ -18,7 +18,7 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 		resume = false,
 	} = additional_info_added;
 
-	const content_mapping = [
+	const CONTENT_MAPPING = [
 		{
 			title       : 'EMPLOYMENT HISTORY',
 			content     : EmploymentHistory,
@@ -68,7 +68,7 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 			</div>
 
 			<div className={styles.subcontainer}>
-				{content_mapping.map((item) => {
+				{CONTENT_MAPPING.map((item) => {
 					const { content: Component, isCompleted, key } = item;
 
 					return (

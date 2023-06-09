@@ -1,3 +1,10 @@
+const ROLE_OPIONS = [
+	{ value: 'software_development_engineer_1', label: 'Software Development Engineer - I' },
+	{ value: 'business_analyst', label: 'Business Analyst' },
+	{ value: 'product_analyst', label: 'Product Analyst' },
+	{ value: 'business_consultant', label: 'Business Consultant' },
+];
+
 const controls = [
 	{
 		name        : 'name',
@@ -42,13 +49,8 @@ const controls = [
 		type        : 'select',
 		label       : 'Role',
 		placeholder : 'Role',
-		options     : [
-			{ value: 'software_development_engineer_1', label: 'Software Development Engineer - I' },
-			{ value: 'business_analyst', label: 'Business Analyst' },
-			{ value: 'product_analyst', label: 'Product Analyst' },
-			{ value: 'business_consultant', label: 'Business Consultant' },
-		],
-		rules: {
+		options     : ROLE_OPIONS,
+		rules       : {
 			required: 'Role is required',
 		},
 	},

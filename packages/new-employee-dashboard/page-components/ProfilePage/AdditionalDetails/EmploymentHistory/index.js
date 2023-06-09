@@ -93,7 +93,6 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 						preview="true"
 					/>
 				</div>
-				
 				<div>
 					<div className={styles.extra_header}>Last Pay Slip</div>
 					<PreviewDocumet

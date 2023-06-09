@@ -16,9 +16,7 @@ const removeTypeField = (controlItem) => {
 function Resume({ getEmployeeDetails, data: info }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
-	const component = 'resume';
-
-	const { loading, createEmployeeDocument } = useCreateEmployeeDocument({ component, getEmployeeDetails });
+	const { loading, createEmployeeDocument } = useCreateEmployeeDocument({ getEmployeeDetails });
 
 	const id = info?.detail?.id;
 
