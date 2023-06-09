@@ -74,6 +74,7 @@ function CourseConsumption({
 						showTestData={showTestData}
 						showFeedback={showFeedback}
 						setShowFeedback={setShowFeedback}
+						viewType={viewType}
 					/>
 
 					<ModuleContent
