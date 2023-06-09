@@ -48,6 +48,7 @@ function Card({ item = {} }) {
 
 			{open ? (
 				<Accordion
+					item={item}
 					shipmentTimelineData={shipmentTimelineData}
 					shipmentTimelineLoading={shipmentTimelineLoading}
 				/>
