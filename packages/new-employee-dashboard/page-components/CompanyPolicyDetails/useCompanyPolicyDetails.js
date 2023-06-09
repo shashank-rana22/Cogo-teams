@@ -1,13 +1,15 @@
-import { useHarbourRequest } from '@cogoport/request';
-import { useState, useEffect, useCallback } from 'react';
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useHarbourRequest } from '@cogoport/request';
+import { useState, useEffect, useCallback } from 'react';
 
 import getColumns from './getColumns';
 
+const INITIAL_PAGE = 1;
+
 const useCompanyPolicyDetails = () => {
 	const [showModal, setShowModal] = useState(false);
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(INITIAL_PAGE);
 
 	const [{ loading = false }, trigger] = useHarbourRequest({
 		method : 'post',

@@ -9,12 +9,12 @@ const useUpdatePartnerUser = () => {
 	const profile = useSelector((state) => state.profile || {});
 	const { permissions_navigations = {} } = profile || {};
 
-	const url = '/update_partner_user';
-	const customAuthParams = getCustomAuthParams({ permissions_navigations, url });
+	const URL = '/update_partner_user';
+	const customAuthParams = getCustomAuthParams({ permissions_navigations, URL });
 
 	const [{ loading }, trigger] = useHarbourRequest({
-		method: 'post',
-		url,
+		method : 'post',
+		url    : URL,
 		customAuthParams,
 	}, { manual: true });
 

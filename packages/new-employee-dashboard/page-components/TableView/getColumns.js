@@ -5,6 +5,9 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
+const NUMBER = 100;
+const PROGRESS_PERCENTAGE = 0;
+
 const COLOR_MAPPING = {
 	active           : '#f1ee8e',
 	rejected_by_user : '#bdbdbd',
@@ -48,7 +51,7 @@ const getColumns = ({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, 
 	{
 		Header   : 'PROFILE COMPLETION',
 		accessor : (item) => {
-			const progress_percentage = item?.progress?.progress_percentage || 0;
+			const progress_percentage = item?.progress?.progress_percentage || PROGRESS_PERCENTAGE;
 			return (
 				<div className={styles.profile_completion}>
 					<div className={styles.animate}>
@@ -60,7 +63,7 @@ const getColumns = ({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, 
 						</div>
 					</div>
 					<div>
-						{Math.round(progress_percentage * 100) / 100}
+						{Math.round(progress_percentage * NUMBER) / NUMBER}
 						% complete
 					</div>
 				</div>

@@ -6,10 +6,12 @@ import { useEffect, useCallback, useState } from 'react';
 
 import getColumns from './getColumns';
 
+const INITIAL_PAGE = 1;
+
 const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('active');
-	const [page, setPage] = useState(1);
+	const [page, setPage] = useState(INITIAL_PAGE);
 	const [filters, setFilters] = useState();
 
 	const [{ loading, data }, trigger] = useHarbourRequest({

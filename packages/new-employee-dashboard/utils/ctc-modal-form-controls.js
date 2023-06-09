@@ -1,3 +1,5 @@
+const NUMBER = 600000;
+
 const controls = [
 	{
 		yearly: {
@@ -91,7 +93,7 @@ const lessControls = [
 ];
 
 const getControls = (type) => {
-	if (Number(type) > 600000) {
+	if (Number(type) > NUMBER) {
 		return controls;
 	}
 	return lessControls;

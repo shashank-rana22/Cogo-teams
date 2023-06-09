@@ -8,6 +8,11 @@ import CompanyPolicyModal from './CompanyPolicyModal';
 import styles from './styles.module.css';
 import useCompanyPolicyDetails from './useCompanyPolicyDetails';
 
+const TOTAL_COUNT = 10;
+const INITIAL_TOTAL_COUNT = 0;
+const INITIAL_PAGE = 1;
+const ARRAY_LENGTH = 0;
+
 function CompanyPolicyDetails() {
 	const {
 		columns, listLoading, list, showModal, setShowModal, refetchList, data, setPage, page,
@@ -24,7 +29,7 @@ function CompanyPolicyDetails() {
 				</Button>
 			</div>
 
-			{(list || []).length > 0 || listLoading ? (
+			{(list || []).length > ARRAY_LENGTH || listLoading ? (
 				<>
 					<StyledTable
 						columns={columns}
@@ -32,11 +37,11 @@ function CompanyPolicyDetails() {
 						loading={listLoading}
 					/>
 
-					{data?.total_count > 10 && (
+					{data?.total_count > TOTAL_COUNT && (
 						<div className={styles.pagination_container}>
 							<Pagination
-								totalItems={data?.total_count || 0}
-								currentPage={page || 1}
+								totalItems={data?.total_count || INITIAL_TOTAL_COUNT}
+								currentPage={page || INITIAL_PAGE}
 								pageSize={data?.page_limit}
 								onPageChange={setPage}
 							/>

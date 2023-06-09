@@ -4,6 +4,8 @@ import { getFieldController } from '../../getFieldController';
 
 import styles from './styles.module.css';
 
+const REMOVE_INDEX = 1;
+
 function Child(props) {
 	const {
 		controls,
@@ -52,7 +54,7 @@ function Child(props) {
 				{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 					<IcMDelete
 						className={`form-fieldArray-${name}-remove`}
-						onClick={() => remove(index, 1)}
+						onClick={() => remove(index, REMOVE_INDEX)}
 						style={{
 							height    : '20px',
 							width     : '20px',

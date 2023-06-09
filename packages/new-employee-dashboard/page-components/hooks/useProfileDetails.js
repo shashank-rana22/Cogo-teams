@@ -5,10 +5,10 @@ import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-import {
-	ctcModalControls
-} from '../../utils/ctc-modal-controls';
-import {ctcModalLessControls} from '../../utils/ctc-modal-less-controls';
+import { ctcModalControls } from '../../utils/ctc-modal-controls';
+import { ctcModalLessControls } from '../../utils/ctc-modal-less-controls';
+
+const CTC_THRESHOLD = 600000;
 
 const useProfileDetails = () => {
 	const { query } = useSelector((state) => state.general);
@@ -147,7 +147,7 @@ const useProfileDetails = () => {
 			monthlySignInBonus,
 		};
 
-		if (initialQuestion >= 600000) {
+		if (initialQuestion >= CTC_THRESHOLD) {
 			const ctcInfo = ctcModalControls(initialQuestion, data);
 			setCtcStructure(ctcInfo.controls);
 		} else {
@@ -164,7 +164,7 @@ const useProfileDetails = () => {
 		progress_stats_required : true,
 		offer_letter_required   : true,
 	};
-	
+
 	const [{ loading, data }, trigger] = useHarbourRequest(
 		{
 			method : 'GET',

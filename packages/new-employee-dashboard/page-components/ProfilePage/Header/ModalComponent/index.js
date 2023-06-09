@@ -5,6 +5,9 @@ import { getElementController } from '../../../../utils/get-element-controls';
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 0;
+const TOFIXED_NUMBER = 2;
+
 function ModalComponent({
 	ctcStructure,
 	initialQuestion,
@@ -47,10 +50,10 @@ function ModalComponent({
 						<div className={styles.list} key={key}>
 							<div style={{ width: '60%' }}>{heading ?? '___'}</div>
 							<div style={{ width: '20%' }}>
-								{Number(yearlyValue || 0).toFixed(2) ?? '___'}
+								{Number(yearlyValue || DEFAULT_VALUE).toFixed(TOFIXED_NUMBER) ?? '___'}
 							</div>
 							<div style={{ width: '20%' }}>
-								{(Number(monthlyValue || 0).toFixed(2)) ?? '___'}
+								{(Number(monthlyValue || DEFAULT_VALUE).toFixed(TOFIXED_NUMBER)) ?? '___'}
 							</div>
 						</div>
 					);

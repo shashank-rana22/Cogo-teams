@@ -7,6 +7,8 @@ import StyledTable from '../../StyledTable';
 import getColumns from './getColumns';
 import styles from './styles.module.css';
 
+const ARRAY_LENGTH = 0;
+
 function SignedDocuments() {
 	const onClickViewDocument = ({ url }) => {
 		window.open(url || '', '_blank');
@@ -18,7 +20,7 @@ function SignedDocuments() {
 
 	return (
 		<div className={styles.container}>
-			{(list || []).length > 0 || loading
+			{(list || []).length > ARRAY_LENGTH || loading
 				? <StyledTable columns={columns} data={list} loading={loading} />
 				: (
 					<EmptyState
