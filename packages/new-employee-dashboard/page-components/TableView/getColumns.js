@@ -88,9 +88,7 @@ const getColumns = ({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, 
 						<Button
 							loading={btnloading}
 							onClick={() => {
-								console.log('lol', item);
 								updateEmployeeStatus(id, 'active', fetch).then(() => fetch());
-								// fetch();
 							}}
 							themeType="tertiary"
 						>
