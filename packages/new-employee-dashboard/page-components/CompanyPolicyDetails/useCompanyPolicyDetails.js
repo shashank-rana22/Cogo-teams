@@ -1,5 +1,7 @@
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 
 import getColumns from './getColumns';
 
@@ -30,7 +32,9 @@ const useCompanyPolicyDetails = () => {
 					},
 				});
 			} catch (error) {
-				console.log('error :: ', error);
+				if (error?.response) {
+					Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+				}
 			}
 		},
 		[listTrigger, page],
@@ -51,7 +55,9 @@ const useCompanyPolicyDetails = () => {
 
 			fetch();
 		} catch (error) {
-			console.log('error :: ', error);
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	};
 

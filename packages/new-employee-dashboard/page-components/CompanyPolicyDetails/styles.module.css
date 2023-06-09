@@ -29,8 +29,8 @@
 	justify-content: flex-start;
 }
 
-.view_text{
-	margin:0px 4px;
+.view_text {
+	margin: 0 4px;
 	text-decoration: underline;
 	cursor: pointer;
 }

@@ -3,7 +3,8 @@ import { useForm, InputController, UploadController } from '@cogoport/forms';
 import { useHarbourRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect } from 'react';
-
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import styles from './styles.module.css';
 
 function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
@@ -36,7 +37,9 @@ function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
 			reset();
 			setShowModal(false);
 		} catch (error) {
-			console.log('error :: ', error);
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	};
 

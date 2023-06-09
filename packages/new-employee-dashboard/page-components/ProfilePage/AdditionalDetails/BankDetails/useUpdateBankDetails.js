@@ -1,4 +1,6 @@
 import { useHarbourRequest } from '@cogoport/request';
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 
 const useUpdateBankDetails = ({ id, getEmployeeDetails }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
@@ -17,7 +19,9 @@ const useUpdateBankDetails = ({ id, getEmployeeDetails }) => {
 			
 			getEmployeeDetails();
 		} catch (err) {
-			console.log('err', err);
+			if (error?.response) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	};
 
