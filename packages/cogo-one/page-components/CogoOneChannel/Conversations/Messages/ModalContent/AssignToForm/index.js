@@ -24,7 +24,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 		},
 	});
 
-	const { assignChat = () => { }, support_agent_id = null } = data || {};
+	const { assignChat = () => {}, support_agent_id = null } = data || {};
 
 	const listAgentsOptions = useGetAsyncOptions(
 		merge(asyncFieldsListAgents(), { params: { filters: { status: 'active' } } }),
