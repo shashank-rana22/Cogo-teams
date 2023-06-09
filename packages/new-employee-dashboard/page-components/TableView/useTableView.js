@@ -6,7 +6,7 @@ import { useEffect, useCallback, useState } from 'react';
 
 import getColumns from './getColumns';
 
-const useTableView = ({ search }) => {
+const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('active');
 	const [page, setPage] = useState(1);
@@ -19,6 +19,7 @@ const useTableView = ({ search }) => {
 
 	const fetch = useCallback(
 		async () => {
+			console.log('active', activeTab);
 			try {
 				await trigger({
 					params: {
@@ -47,7 +48,7 @@ const useTableView = ({ search }) => {
 		router.push(`/new-employee-dashboard/${id}`, `/new-employee-dashboard/${id}`);
 	};
 
-	const columns = getColumns({ onClickNewJoinerColumn });
+	const columns = getColumns({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, fetch });
 
 	return {
 		columns,
@@ -60,6 +61,7 @@ const useTableView = ({ search }) => {
 		setPage,
 		filters,
 		setFilters,
+		fetch,
 	};
 };
 

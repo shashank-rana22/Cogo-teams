@@ -15,7 +15,6 @@ const useUpdateEmployeeDocuments = ({ getEmployeeDetails }) => {
 	const updateEmployeeDocument = async ({ data }) => {
 		const payload = {
 			documents: [{ ...data }],
-
 		};
 
 		try {

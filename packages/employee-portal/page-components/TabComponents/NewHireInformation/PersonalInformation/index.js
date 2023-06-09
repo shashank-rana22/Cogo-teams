@@ -101,16 +101,19 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 					);
 				})}
 			</div>
+			<div className={styles.button}>
+				<Button
+					size="md"
+					type="button"
+					loading={loading}
+					onClick={
+					handleSubmit(onSubmit)
+					}
+				>
+					Save
+				</Button>
+			</div>
 
-			<Button
-				size="md"
-				type="button"
-				className={styles.button}
-				loading={loading}
-				onClick={handleSubmit(onSubmit)}
-			>
-				Save
-			</Button>
 		</div>
 	);
 }

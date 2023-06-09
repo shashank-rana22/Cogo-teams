@@ -34,8 +34,8 @@ const controls = () => ([
 		placeholder : 'Address',
 		rules       : { required: 'This is required' },
 		style       : {
-			width  : '210%',
-			height : '120%',
+			width  : '27vw',
+			height : '10vh',
 		},
 	},
 ]);

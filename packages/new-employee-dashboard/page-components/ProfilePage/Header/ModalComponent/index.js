@@ -13,6 +13,7 @@ function ModalComponent({
 	error,
 }) {
 	const finalControls = getControls(initialQuestion);
+
 	return (
 		<div>
 			<div className={styles.header_field}>
@@ -31,7 +32,6 @@ function ModalComponent({
 					/>
 					{error ? <div className={styles.error}>Required field</div> : null}
 				</div>
-
 			</div>
 
 			<div className={styles.table_container}>
@@ -75,7 +75,6 @@ function ModalComponent({
 								control={control}
 								className={styles.field_controller}
 							/>
-
 						</div>
 
 						<div style={{ marginRight: '4px', width: '40%' }}>
@@ -86,11 +85,8 @@ function ModalComponent({
 								control={control}
 								className={styles.field_controller}
 							/>
-
 						</div>
-
 					</div>
-
 				);
 			})}
 		</div>

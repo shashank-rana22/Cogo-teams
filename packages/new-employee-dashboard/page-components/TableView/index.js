@@ -6,12 +6,15 @@ import StyledTable from '../StyledTable';
 
 import FilterPopover from './FilterPopover';
 import styles from './styles.module.css';
+import useRejectAction from './useRejectAction';
 import useTableView from './useTableView';
 
 function TableView({ search, setSearch }) {
+	const { btnloading, updateEmployeeStatus } = useRejectAction();
+
 	const {
 		columns, loading, list, setActiveTab, activeTab, data, setPage, page, filters, setFilters,
-	} = useTableView({ search });
+	} = useTableView({ search, btnloading, updateEmployeeStatus });
 
 	return (
 		<div className={styles.container}>
@@ -24,6 +27,7 @@ function TableView({ search, setSearch }) {
 				>
 					<TabPanel name="active" title="Active" />
 					<TabPanel name="inactive" title="Inactive" />
+					<TabPanel name="rejected_by_user" title="Rejected By User" />
 				</Tabs>
 
 				<div className={styles.filter_options}>

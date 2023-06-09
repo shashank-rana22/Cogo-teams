@@ -27,7 +27,6 @@ function SignedDocuments() {
 						textSize={20}
 					/>
 				)}
-
 		</div>
 	);
 }
