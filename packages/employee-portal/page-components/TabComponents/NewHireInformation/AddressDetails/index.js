@@ -20,7 +20,7 @@ const removeTypeField = (controlItem) => {
 function AddressDetails({ data:content, getEmployeeDetails }) {
 	const [address, setAddress] = useState(false);
 
-	const { handleSubmit, control, formState: { errors }, setValues, getValues } = useForm();
+	const { handleSubmit, control, formState: { errors }, setValue, getValues } = useForm();
 
 	const { permanent_address, present_address, id } = content?.detail || {};
 
@@ -61,12 +61,10 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 		permanentCity, permanentCountry, permanentPincode, permanentState, pincode, presentAddress, state]);
 
 	useEffect(() => {
-		let temp = {};
-		Object.keys(ADDRESS_MAPPING).forEach((element) => {
-			temp = { ...temp, element: ADDRESS_MAPPING[element] };
-		});
-		setValues(temp);
-	}, [ADDRESS_MAPPING, setValues]);
+		Object.keys(ADDRESS_MAPPING).map((element) => (
+			setValue(element, ADDRESS_MAPPING[element])
+		));
+	}, [ADDRESS_MAPPING, setValue]);
 
 	const handleAddressChange = () => {
 		setAddress((prev) => !prev);
@@ -90,17 +88,15 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 			permanent_address : getValuePermanentAdd,
 		};
 
-		let temp = {};
 		if (address === false) {
-			Object.keys(GETVALUES_MAPPING).forEach((element) => {
-				temp = { ...temp, element: GETVALUES_MAPPING[element] };
-			});
+			Object.keys(GETVALUES_MAPPING).map((element) => (
+				setValue(element, GETVALUES_MAPPING[element])
+			));
 		} else {
-			CURRENT_ADDRESS_MAPPING.forEach((element) => {
-				temp = { ...temp, element: ADDRESS_MAPPING[element] };
-			});
+			CURRENT_ADDRESS_MAPPING.map((element) => (
+				setValue(element, ADDRESS_MAPPING[element])
+			));
 		}
-		setValues(temp);
 	};
 
 	return (
