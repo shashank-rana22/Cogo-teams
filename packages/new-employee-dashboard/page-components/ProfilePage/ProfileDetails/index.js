@@ -18,7 +18,7 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 		personal_information = false,
 	} = personal_details;
 
-	const data = [
+	const MAPPING = [
 		{
 			name        : 'personal_information',
 			content     : PersonalInformation,
@@ -48,7 +48,7 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 
 	return (
 		<div className={styles.container}>
-			{data.map((item) => {
+			{MAPPING.map((item) => {
 				const { content: Component, isCompleted, name } = item;
 
 				return (

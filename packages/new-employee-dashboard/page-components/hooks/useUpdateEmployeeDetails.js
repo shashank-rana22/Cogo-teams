@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
 const useUpdateEmployeeDeatils = ({ id, status, getEmployeeDetails }) => {
@@ -11,13 +13,15 @@ const useUpdateEmployeeDeatils = ({ id, status, getEmployeeDetails }) => {
 			id,
 			status: status === 'active' ? 'inactive' : 'active',
 		};
+
 		try {
 			await trigger({
 				data: payload,
 			});
+
 			getEmployeeDetails(id);
 		} catch (err) {
-			// Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
+			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}
 	};
 

@@ -1,3 +1,5 @@
+import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
@@ -31,7 +33,7 @@ const useTableView = ({ search }) => {
 					},
 				});
 			} catch (error) {
-				console.log('error :: ', error);
+				Toast.error(getApiErrorString(error.response?.data));
 			}
 		},
 		[activeTab, search, trigger, page, filters],
