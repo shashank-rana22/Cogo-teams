@@ -72,7 +72,6 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 					status              : 'pending',
 					task                : ['amend_draft_airway_bill', 'amend_draft_house_airway_bill'],
 					documentType        : ['draft_airway_bill', 'draft_house_airway_bill'],
-					documentState       : 'document_amendment_requested',
 				},
 			};
 			if (searchValue) {

@@ -326,13 +326,6 @@ const allocation = {
 			feature      : 'kam_expertise',
 			service_name : 'allocation',
 		},
-		{
-			api          : 'post_allocation_kam_expertise_rule_status_change',
-			access_type  : 'private',
-			feature      : 'kam_expertise',
-			service_name : 'allocation',
-		},
-
 	],
 	crm_feedback_dashboard: [
 		{

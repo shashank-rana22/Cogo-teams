@@ -89,20 +89,10 @@ function List({
 						rowStyle={rowStyle}
 					/>
 				))}
-
-				{!(list?.length > 0) && 	(
-					<div className={styles.no_data}>
-						<img
-							style={{ width: '24%', margin: '8%' }}
-							src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/no ressult found.svg"
-							alt="no data"
-						/>
-					</div>
-				)}
 			</div>
 			{showPagination && (
 				<div>
-					{itemData?.totalRecords ? (
+					{itemData?.totalRecords && (
 						<div className={styles.pagination_container}>
 							<Pagination
 								type="table"
@@ -112,7 +102,7 @@ function List({
 								onPageChange={handlePageChange}
 							/>
 						</div>
-					) : null}
+					)}
 				</div>
 			)}
 		</section>

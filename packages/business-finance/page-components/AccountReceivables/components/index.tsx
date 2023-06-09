@@ -7,12 +7,11 @@ import React, { useState } from 'react';
 import useListCogoEntity from '../hooks/useListCogoEntity';
 
 import Dashboard from './Dashboard';
-import Defaulters from './Defaulters';
 import Invoice from './Invoice';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
 
-const REDIRECT_TABS = ['manageBpr'];
+const REDIRECT_TABS = ['defaulters', 'manageBpr'];
 
 function AccountReceivables() {
 	const { push, query } = useRouter();
@@ -86,7 +85,7 @@ function AccountReceivables() {
 					</TabPanel>
 
 					<TabPanel name="defaulters" title="Defaulters">
-						<Defaulters />
+						--
 					</TabPanel>
 					<TabPanel name="manageBpr" title="Manage BPR">
 						--

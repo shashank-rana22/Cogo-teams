@@ -48,7 +48,6 @@ function Events() {
 			list,
 			paginationData,
 			getNextPage,
-			listRefetch,
 		},
 		[POST_EVENT]: {
 			eventListData,
