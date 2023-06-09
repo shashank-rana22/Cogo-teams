@@ -3,6 +3,8 @@ import { Tooltip, Pill } from '@cogoport/components';
 import { renderValue } from './renderCargoValue';
 import styles from './styles.module.css';
 
+const CARGO_DETAILS_LENGHTH = 0;
+const CARGO_DETAILS_LENGHTH_GREATER_THAN_ONE = 1;
 const labels = ['container_size', 'container_type', 'commodity',
 	'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type'];
 
@@ -23,7 +25,7 @@ export default function CargoDetails({ cargo_details }) {
 		<div className={styles.cargo_details_container}>
 			{firstCargoDetails ? renderCargoPills(firstCargoDetails) : null}
 
-			{restCargoDetails.length > 0 ? (
+			{restCargoDetails.length > CARGO_DETAILS_LENGHTH ? (
 				<Tooltip
 					content={(
 						<div>
@@ -43,7 +45,7 @@ export default function CargoDetails({ cargo_details }) {
 						{restCargoDetails.length}
 						{' '}
 						Detail
-						{restCargoDetails.length > 1 ? 's' : ''}
+						{restCargoDetails.length > CARGO_DETAILS_LENGHTH_GREATER_THAN_ONE ? 's' : ''}
 					</div>
 				</Tooltip>
 			) : null}

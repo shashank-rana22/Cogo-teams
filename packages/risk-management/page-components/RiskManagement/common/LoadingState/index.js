@@ -3,6 +3,8 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const ARRAY_LENGTH = 5;
+
 function LoadingState() {
 	return (
 		<div className={styles.main_container}>
@@ -10,8 +12,8 @@ function LoadingState() {
 				<div className={styles.details}>
 					<Placeholder />
 				</div>
-				{ Array(5).fill().map((_, index) => (
-					<div className={styles.flex_row} key={index}>
+				{ Array(ARRAY_LENGTH).fill().map((item) => (
+					<div className={styles.flex_row} key={item}>
 						<div className={styles.percent}>
 							<Placeholder />
 							<Placeholder />

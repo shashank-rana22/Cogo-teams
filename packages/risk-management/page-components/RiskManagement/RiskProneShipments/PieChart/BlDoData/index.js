@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 
 function BlDoData({ stats }) {
 	const {
-		 LATE_COLLECTION_MAPPING,
+		LATE_COLLECTION_MAPPING,
 	} = getFormatedData(stats);
 	const { late_collection_stats, late_release_stats } = stats || {};
 	const { late_collection_total = '' } = late_collection_stats || {};

@@ -11,7 +11,10 @@ function ResolveModal({
 }) {
 	const [remarks, setRemarks] = useState('');
 
-	const { onResolveMark, resolveLoading } = useGetResolve({ itemData, remarks, getDashboardData, getDahboardStatsData });
+	const {
+		onResolveMark,
+		resolveLoading,
+	} = useGetResolve({ itemData, remarks, getDashboardData, getDahboardStatsData });
 
 	return (
 		<div className={styles.container}>
@@ -30,10 +33,20 @@ function ResolveModal({
 					/>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button themeType="secondary" style={{ marginRight: '8px' }} onClick={() => { setShowResolveModal(false); }}>
+					<Button
+						themeType="secondary"
+						style={{ marginRight: '8px' }}
+						onClick={() => { setShowResolveModal(false); }}
+					>
 						Cancel
 					</Button>
-					<Button disabled={remarks === '' || resolveLoading} onClick={() => { onResolveMark(); }}>Resolve</Button>
+					<Button
+						disabled={remarks === '' || resolveLoading}
+						onClick={() => { onResolveMark(); }}
+					>
+						Resolve
+
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>

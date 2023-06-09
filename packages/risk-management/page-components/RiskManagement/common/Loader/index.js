@@ -3,13 +3,14 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const ARRAY_LENGTH = 5;
 function Loader() {
 	return (
 		<div>
 
 			<div className={styles.flex_row}>
-				{Array(5).fill().map((_, index) => (
-					<div className={styles.percent} key={index}>
+				{Array(ARRAY_LENGTH).fill().map((item) => (
+					<div className={styles.percent} key={item}>
 						<Placeholder className={styles.loader} />
 					</div>
 				))}

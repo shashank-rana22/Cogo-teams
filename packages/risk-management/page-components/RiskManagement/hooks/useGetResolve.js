@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
+const DEFAULT_INDEX = 0;
 const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsData }) => {
 	const { id, reason } = itemData || {};
 	const [{ loading, data }, trigger] = useRequest({
@@ -21,9 +22,9 @@ const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsDa
 			getDashboardData();
 			getDahboardStatsData();
 		} catch (e) {
-			Toast.error(e?.response?.data?.id[0]);
+			Toast.error(e?.response?.data?.id[DEFAULT_INDEX]);
 		}
-	}), [id, trigger, remarks]);
+	}), [trigger, id, reason, remarks, getDashboardData, getDahboardStatsData]);
 
 	return {
 

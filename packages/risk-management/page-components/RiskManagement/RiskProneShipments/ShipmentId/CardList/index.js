@@ -23,7 +23,7 @@ function CardList({ itemData, getDashboardData, getDahboardStatsData }) {
 				<div className={styles.trade}>
 					{startCase(trade_type)}
 				</div>
-				  <CardItem itemData={itemData} />
+				<CardItem itemData={itemData} />
 				<div>
 					<div className={styles.hr} />
 					<div className={styles.cargo_container}>
@@ -33,7 +33,14 @@ function CardList({ itemData, getDashboardData, getDahboardStatsData }) {
 						<div className={styles.bottom_vr} />
 						<div className={styles.resolve}>
 							<CargoDetails cargo_details={cargo_details} />
-							<Button size="sm" themeType="primary" onClick={() => { setShowResolveModal(true); }}>Resolve</Button>
+							<Button
+								size="sm"
+								themeType="primary"
+								onClick={() => { setShowResolveModal(true); }}
+							>
+								Resolve
+
+							</Button>
 						</div>
 					</div>
 				</div>

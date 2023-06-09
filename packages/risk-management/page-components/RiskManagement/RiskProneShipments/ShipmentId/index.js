@@ -8,6 +8,9 @@ import CardList from './CardList';
 import SelectFilter from './SelectFilter';
 import styles from './styles.module.css';
 
+const ARRAY_LENGTH = 5;
+const DEFAULT_MAX_LENGTH = 0;
+
 function ShipmentId({
 	data, loading, filters, setFilters, activeTab,
 	getDashboardData, getDahboardStatsData,
@@ -31,15 +34,15 @@ function ShipmentId({
 		if (loading) {
 			return (
 				<div style={{ marginTop: '10px' }}>
-					{Array(5).fill().map((_, index) => (
-						<div key={index}>
+					{Array(ARRAY_LENGTH).fill().map((item) => (
+						<div key={item}>
 							<LoadingState />
 						</div>
 					))}
 				</div>
 			);
 		}
-		if (list.length === 0) {
+		if (list.length === DEFAULT_MAX_LENGTH) {
 			return (
 				<div className={styles.no_data}>
 					<img
@@ -82,7 +85,7 @@ function ShipmentId({
 			<div>
 				{handleShipmentView()}
 			</div>
-			{list.length > 0 && (
+			{list.length > DEFAULT_MAX_LENGTH && (
 				<div className={styles.pagination}>
 					<Pagination
 						type="number"

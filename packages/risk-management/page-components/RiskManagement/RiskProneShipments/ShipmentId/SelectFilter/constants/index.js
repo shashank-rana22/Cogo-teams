@@ -19,6 +19,10 @@ export const CONTAINER_REASON_OPTIONS = [
 		label : 'Container Gated Out But Not Returned',
 		value : 'container_gated_out_but_not_returned',
 	},
+	{
+		label : 'Cargo Value Fraud',
+		value : 'cargo_value_fraud',
+	},
 ];
 export const BL_DO_REASON_OPTIONS = [
 	{
