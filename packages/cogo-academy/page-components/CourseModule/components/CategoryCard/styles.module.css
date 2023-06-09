@@ -1,0 +1,34 @@
+.carousel_container {
+	margin: 24px 12px;
+
+	:global {
+		.ui_carousel_container {
+			position: relative;
+			display: flex;
+			flex-wrap: wrap;
+		}
+
+		.ui_o0St8 {
+			width: fit-content;
+
+			:hover {
+				cursor: pointer;
+				background: #fffce6;
+			}
+		}
+
+		.ui_carousel_arrow {
+			fill: #221f20;
+		}
+
+		.ui_carousel_next {
+			margin-right: -16px;
+			background: none;
+		}
+
+		.ui_carousel_prev {
+			margin-left: -30px;
+			background: none;
+		}
+	}
+}
