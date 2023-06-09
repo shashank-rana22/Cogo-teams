@@ -32,8 +32,6 @@ function Invoices({
 		(item) => item?.status,
 	);
 
-	console.log('outstanding_by_reg_num', OUTSTANDING_BY_REG_NUM);
-
 	let count = 0;
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
