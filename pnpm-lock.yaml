@@ -83,6 +83,7 @@ importers:
       '@cogoport/referral': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/rfq-dashboard': workspace:0.1.0
+      '@cogoport/risk-management': workspace:0.1.0
       '@cogoport/saas-subscription': workspace:0.1.0
       '@cogoport/saas-tools': workspace:0.1.0
       '@cogoport/scope-select': workspace:0.1.0
@@ -154,6 +155,7 @@ importers:
       '@cogoport/referral': link:../packages/referral
       '@cogoport/request': link:../common/request
       '@cogoport/rfq-dashboard': link:../packages/rfq-dashboard
+      '@cogoport/risk-management': link:../packages/risk-management
       '@cogoport/saas-subscription': link:../packages/saas-subscription
       '@cogoport/saas-tools': link:../packages/saas-tools
       '@cogoport/scope-select': link:../common/scope-select
@@ -1287,7 +1289,7 @@ importers:
       react-hook-form: ^7.43.3
     dependencies:
       '@cogoport/charts': 1.0.3_react@18.2.0
-      '@cogoport/components': 1.0.423_bvndx25e6xzzvw2huczbxa5ppu
+      '@cogoport/components': 1.0.425_bvndx25e6xzzvw2huczbxa5ppu
       '@cogoport/constants': link:../../common/constants
       '@cogoport/forms': link:../../common/forms
       '@cogoport/icons-react': 1.0.77_react@18.2.0
@@ -1298,9 +1300,9 @@ importers:
       '@cogoport/store': link:../../common/store
       '@cogoport/utils': 1.2.10
       react: 18.2.0
-      react-hook-form: 7.43.9_react@18.2.0
+      react-hook-form: 7.44.3_react@18.2.0
     devDependencies:
-      '@types/react': 18.2.6
+      '@types/react': 18.2.9
 
   packages/saas-subscription:
     specifiers:

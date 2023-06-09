@@ -21,7 +21,7 @@ const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsDa
 			getDashboardData();
 			getDahboardStatsData();
 		} catch (e) {
-			Toast.error(e.message);
+			Toast.error(e?.response?.data?.id[0]);
 		}
 	}), [id, trigger, remarks]);
 
