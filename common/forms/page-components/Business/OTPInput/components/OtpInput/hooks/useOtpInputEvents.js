@@ -26,9 +26,9 @@ const useOtpInputEvents = ({
 				return;
 			}
 
-			const currentFocusedOtpInputElementIndex =	otpInputElementsRef.current.indexOf(event.target);
+			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
-			const nextOtpInputElementToFocus =	otpInputElementsRef
+			const nextOtpInputElementToFocus = otpInputElementsRef
 				.current[currentFocusedOtpInputElementIndex - VARIABLE_STATE];
 			nextOtpInputElementToFocus?.focus();
 
