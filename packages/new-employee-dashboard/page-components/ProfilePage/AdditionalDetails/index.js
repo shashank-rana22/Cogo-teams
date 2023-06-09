@@ -9,9 +9,8 @@ import styles from './styles.module.css';
 
 function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetails }) {
 	const { progress_stats = {}, bank_details:bankDetails } = profileData || {};
-	const {
-		additional_info_added = {},
-	} = progress_stats;
+	const { additional_info_added = {} } = progress_stats;
+	
 	const {
 		bank_details = false,
 		educational_qualification = false,
