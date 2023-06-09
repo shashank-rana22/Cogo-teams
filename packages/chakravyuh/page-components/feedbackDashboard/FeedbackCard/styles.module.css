@@ -9,7 +9,7 @@
     align-items: center;
     justify-content: space-between;
 }
-.port_info{
+.flex{
     display: flex;
 }
 .port_code{
@@ -19,14 +19,6 @@
 	color: #333;
 	letter-spacing: 0.02em;
     margin: 0;
-}
-.tags{
-    
-}
-.vertical_line{
-    border: 1px solid #edd7a9;
-    height: 16px;
-    margin: 0px 12px;
 }
 .label{
     color: #4f4f4f;

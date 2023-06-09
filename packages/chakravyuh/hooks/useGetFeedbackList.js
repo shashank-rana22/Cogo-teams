@@ -3,20 +3,23 @@ import { useEffect } from 'react';
 
 const useGetFeedbackList = ({ filters, setFilters }) => {
 	const { page, ...restFilters } = filters;
-	const finalFilters = {};
+	const FINAL_FILTERS = {};
 	Object.keys(restFilters).forEach((key) => {
 		if (restFilters[key]) {
-			finalFilters[key] = restFilters[key];
+			if (key === 'dataRange') {
+				FINAL_FILTERS.validity_start_greater_than = restFilters[key].startDate || undefined;
+				FINAL_FILTERS.validity_end_less_than = restFilters[key].endDate || undefined;
+			} else { FINAL_FILTERS[key] = restFilters[key]; }
 		}
 	});
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_fcl_freight_rate_feedbacks',
 		method : 'GET',
 		params : {
-			filters                  : finalFilters,
+			filters                  : FINAL_FILTERS,
 			page,
 			booking_details_required : true,
-			is_dashboard             : true,
+			is_dashboard_required    : true,
 		},
 	}, { manual: true });
 

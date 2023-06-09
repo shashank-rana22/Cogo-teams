@@ -5,16 +5,23 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const DECIMAL_POSITION = 2;
+
 function FeedbackCard({ data = {} }) {
 	const {
 		origin_port = {},
 		destination_port = {},
-		container_size,
-		container_type,
-		commodity,
+		container_size = '',
+		container_type = '',
+		commodity = '',
 		deviation,
 		old_price,
 		new_price,
+		performed_by = {},
+		closed_by = {},
+		source = '',
+		preferred_freight_rate,
+		preferred_freight_rate_currency = '',
 	} = data;
 
 	const items = [
@@ -38,10 +45,15 @@ function FeedbackCard({ data = {} }) {
 		},
 	];
 
+	const checkNumber = (val) => {
+		if (Number.isNaN(Number(val))) { return 'Not Available'; }
+		return Number(val).toFixed(DECIMAL_POSITION);
+	};
+
 	return (
 		<div className={styles.box}>
 			<div className={styles.container}>
-				<div className={styles.port_info}>
+				<div className={styles.flex}>
 					<Tooltip
 						content={(
 							<div>{origin_port.display_name}</div>
@@ -64,8 +76,15 @@ function FeedbackCard({ data = {} }) {
 						</p>
 					</Tooltip>
 				</div>
-				{/* <div className={styles.vertical_line} /> */}
-				<div className={styles.tags}>
+				{source
+					? (
+						<div className={styles.flex}>
+							<p>Source: </p>
+					&nbsp;
+							{startCase(source)}
+						</div>
+					) : null}
+				<div>
 					<Tags
 						size="sm"
 						items={items.filter((item) => item.children != null)}
@@ -75,15 +94,29 @@ function FeedbackCard({ data = {} }) {
 			<div className={styles.sub_container}>
 				<div>
 					<p className={styles.label}>Disliked rate</p>
-					{old_price}
+					{Number(old_price).toFixed(DECIMAL_POSITION)}
+				</div>
+				<div>
+					<p className={styles.label}>Disliked by</p>
+					{performed_by?.name || ''}
 				</div>
 				<div>
 					<p className={styles.label}>Rate added</p>
-					{new_price}
+					{checkNumber(new_price)}
 				</div>
 				<div>
-					<p className={styles.label}>Deviation</p>
-					{deviation}
+					<p className={styles.label}>Rate added by</p>
+					{closed_by?.name || ''}
+				</div>
+				<div>
+					<p className={styles.label}>Preffered rate</p>
+					{checkNumber(preferred_freight_rate)}
+					&nbsp;
+					{preferred_freight_rate_currency}
+				</div>
+				<div>
+					<p className={styles.label}>Deviation&nbsp;&#40;&#37;&#41;</p>
+					{checkNumber(deviation)}
 				</div>
 			</div>
 		</div>

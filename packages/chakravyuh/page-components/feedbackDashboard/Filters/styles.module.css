@@ -4,25 +4,21 @@
     background: #fff;
     margin-bottom: 16px;
 }
-
 .filter_heading{
     font-size: 14px;
     color: #4f4f4f;
     font-weight: 600;
 }
-
 .flex{
     display: flex;
 }
-
-.label{
-
-}
 .filter{
     width: 180px;
-    margin-right: 24px;
+    margin-right: 8px;
+    :last-child{
+        margin-right: 0px;
+    }
 }
-
 .link_text{
     margin-top: 36px;
     text-decoration: underline;

@@ -1,4 +1,4 @@
-import { Select } from '@cogoport/components';
+import { DateRangepicker, Select } from '@cogoport/components';
 import commodityOptions from '@cogoport/constants/commodity-types.json';
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
@@ -9,26 +9,16 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-
 const sourceTypes = [
 	{
-		label:'Spot Rates',
-		value:'spot_rates'
+		label : 'Predicted',
+		value : 'predicted',
 	},
 	{
-		label:'Spot Booking',
-		value:'spot_booking'
+		label : 'Spot Search',
+		value : 'spot_search',
 	},
-	{
-		label:'Predicted',
-		value:'predicted'
-	},
-	{
-		label:'Promotional',
-		value:'promotional'
-	},
-]
-
+];
 
 function Filters({ filters, setFilters }) {
 	const type = ['country', 'trade', 'seaport'];
@@ -49,7 +39,7 @@ function Filters({ filters, setFilters }) {
 			</p>
 			<div className={styles.flex}>
 				<div className={styles.filter}>
-					<p className={styles.label}>Origin</p>
+					<p>Origin</p>
 					<Select
 						placeholder="Origin"
 						{...originLocationOptions}
@@ -61,7 +51,7 @@ function Filters({ filters, setFilters }) {
 					/>
 				</div>
 				<div className={styles.filter}>
-					<p className={styles.label}>Destination</p>
+					<p>Destination</p>
 					<Select
 						placeholder="Destination"
 						isClearable
@@ -73,7 +63,7 @@ function Filters({ filters, setFilters }) {
 					/>
 				</div>
 				<div className={styles.filter}>
-					<p className={styles.label}>Commodity</p>
+					<p>Commodity</p>
 					<Select
 						placeholder="Commodity"
 						isClearable
@@ -85,7 +75,7 @@ function Filters({ filters, setFilters }) {
 					/>
 				</div>
 				<div className={styles.filter}>
-					<p className={styles.label}>Container Size</p>
+					<p>Container Size</p>
 					<Select
 						placeholder="Container Size"
 						isClearable
@@ -97,7 +87,7 @@ function Filters({ filters, setFilters }) {
 					/>
 				</div>
 				<div className={styles.filter}>
-					<p className={styles.label}>Container Type</p>
+					<p>Container Type</p>
 					<Select
 						placeholder="Container Type"
 						isClearable
@@ -108,8 +98,8 @@ function Filters({ filters, setFilters }) {
 						}}
 					/>
 				</div>
-				<div className={styles.filter}>
-					<p className={styles.label}>Source</p>
+				<div className={styles.filter} style={{ width: '120px' }}>
+					<p>Source</p>
 					<Select
 						placeholder="Source"
 						isClearable
@@ -120,6 +110,19 @@ function Filters({ filters, setFilters }) {
 						}}
 					/>
 				</div>
+
+				<div className={styles.filter}>
+					<p>Date</p>
+					<DateRangepicker
+						value={filters?.dataRange}
+						onChange={(value) => {
+							setFilters((prev) => ({ ...prev, dataRange: value, page: 1 }));
+						}}
+						isPreviousDaysAllowed
+						maxDate={new Date()}
+					/>
+				</div>
+
 				<p
 					role="presentation"
 					className={styles.link_text}
@@ -127,7 +130,7 @@ function Filters({ filters, setFilters }) {
 						setFilters({ page: 1 });
 					}}
 				>
-					clear all filters
+					clear filters
 				</p>
 			</div>
 		</div>
