@@ -12,7 +12,8 @@ function CogoPoints() {
 	const [activeHeaderTab, setActiveHeaderTab] = useState('overall');
 	const [activeStatsCard, setActiveStatsCard] = useState('liability_point_value');
 
-	const { data, loading } = useGetCogopointStats({ activeHeaderTab });
+	const { statsData = {}, loading } = useGetCogopointStats({ activeHeaderTab });
+	const { data = {}, credit_data = {} } = statsData || {};
 	return (
 		<>
 			<HeaderTab activeHeaderTab={activeHeaderTab} setActiveHeaderTab={setActiveHeaderTab} />
@@ -30,7 +31,7 @@ function CogoPoints() {
 							<LineChart />
 						</div>
 						<div className={styles.pie_chart}>
-							<PieChart />
+							<PieChart credit_data={credit_data} />
 						</div>
 					</div>
 				</>

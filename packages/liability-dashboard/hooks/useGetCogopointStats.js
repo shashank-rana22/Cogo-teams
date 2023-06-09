@@ -22,7 +22,7 @@ const useGetCogopointStats = ({ activeHeaderTab = '' }) => {
 	}, [getCogopointStats]);
 
 	return {
-		data,
+		statsData: data,
 		loading,
 	};
 };
