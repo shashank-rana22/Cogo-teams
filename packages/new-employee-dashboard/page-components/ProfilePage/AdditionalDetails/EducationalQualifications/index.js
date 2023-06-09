@@ -99,8 +99,6 @@ function EducationalQualifications({ profileData, getEmployeeDetailsLoading }) {
 	return (
 		<div className={styles.container}>
 			{educationDetails()}
-			{' '}
-
 		</div>
 	);
 }

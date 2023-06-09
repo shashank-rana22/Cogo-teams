@@ -9,9 +9,8 @@ import styles from './styles.module.css';
 
 function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetails }) {
 	const { progress_stats = {}, bank_details:bankDetails } = profileData || {};
-	const {
-		additional_info_added = {},
-	} = progress_stats;
+	const { additional_info_added = {} } = progress_stats;
+	
 	const {
 		bank_details = false,
 		educational_qualification = false,
@@ -70,7 +69,6 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 								<div className={styles.status}>
 									<div className={styles.accordion_title}>{startCase(name)}</div>
 									{renderPills({ isCompleted, name })}
-
 								</div>
 							)}
 						>
@@ -79,9 +77,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 								getEmployeeDetailsLoading={getEmployeeDetailsLoading}
 								getEmployeeDetails={getEmployeeDetails}
 							/>
-
 							{' '}
-
 						</Accordion>
 					</div>
 				);

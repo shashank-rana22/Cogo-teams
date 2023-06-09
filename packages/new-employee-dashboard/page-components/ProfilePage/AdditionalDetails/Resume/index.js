@@ -20,12 +20,10 @@ function Resume({ profileData, getEmployeeDetailsLoading }) {
 	}
 
 	return (
-
 		<div className={styles.card_wrapper}>
 			<div className={styles.header}>Resume</div>
 			<PreviewDocumet document_header="Resume" document_url={resumeDoc?.document_url} preview />
 		</div>
-
 	);
 }
 

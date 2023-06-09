@@ -12,9 +12,9 @@ const useUpdateBankDetails = ({ id, getEmployeeDetails }) => {
 				data: {
 					status,
 					id: id || undefined,
-
 				},
 			});
+			
 			getEmployeeDetails();
 		} catch (err) {
 			console.log('err', err);

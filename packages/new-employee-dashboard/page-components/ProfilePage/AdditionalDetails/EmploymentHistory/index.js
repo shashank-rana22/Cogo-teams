@@ -31,14 +31,12 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 
 		return (
 			<div key={`{${company_name}_${started_at}}`} className={styles.per_container}>
-
 				<div className={styles.header}>
 					{company_name}
 				</div>
 
 				<div className={styles.top_bar}>
 					<div className={styles.label_value_container}>
-
 						<span style={{ paddingRight: 8 }}>
 							{formatdate({ date: started_at }) }
 						</span>
@@ -46,15 +44,14 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 						<span style={{ paddingLeft: 8 }}>
 							{formatdate({ date: ended_at }) }
 						</span>
-
 					</div>
-
 				</div>
 
 				<div className={styles.label_value_container}>
 					<div className={styles.label}>
 						Description
 					</div>
+
 					<div className={styles.value}>
 						{description || '-'}
 					</div>
@@ -64,30 +61,28 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 					<div className={styles.label}>
 						Skills
 					</div>
+
 					<div className={styles.skills_value}>
 						{!isEmpty(skills) ? renderSkills({ skills }) : '-'}
 					</div>
 				</div>
-
 			</div>
 		);
 	});
 
-	if (getEmployeeDetailsLoading) {
-		return <CommonLoader />;
-	}
+	if (getEmployeeDetailsLoading) return <CommonLoader />;
 
 	if (isEmpty(employee_experience_details)) {
 		return <EmptyState emptyText="Employment history not found" />;
 	}
 
 	return (
-
 		<>
 			<div className={styles.container}>
 				{employmentDetails()}
 				{' '}
 			</div>
+
 			<div
 				className={styles.extra_docs}
 			>
@@ -98,6 +93,7 @@ function EmploymentHistory({ profileData, getEmployeeDetailsLoading }) {
 						preview="true"
 					/>
 				</div>
+				
 				<div>
 					<div className={styles.extra_header}>Last Pay Slip</div>
 					<PreviewDocumet

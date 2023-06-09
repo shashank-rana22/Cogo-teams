@@ -66,13 +66,11 @@ const useDay1Download = () => {
 
 		try {
 			const payload = {
-				id                : isUpdate ? data?.list[0]?.id : undefined,
-				performed_by_id   : 'qwe11e123-asdasd-12312123123qwdads-asdasdqq323',
-				performed_by_type : 'agent',
-				category          : 'day_1',
-				html_template     : editorValue.toString('html'),
-				name              : 'day 1 download',
-				document_type     : 'html',
+				id            : isUpdate ? data?.list[0]?.id : undefined,
+				category      : 'day_1',
+				html_template : editorValue.toString('html'),
+				name          : 'day 1 download',
+				document_type : 'html',
 			};
 
 			await trigger({
