@@ -138,16 +138,16 @@ function GenerateMAWB({
 
 	useEffect(() => {
 		if (activeCategory === 'hawb') {
-			const dataList = [];
+			const DATA_LIST = [];
 			(hawbDataList?.data?.shipmentPendingTasks || []).forEach((hawbItem) => {
 				const pushData = {
 					id         : hawbItem?.documentId,
 					documentNo : hawbItem?.documentData?.document_number,
 					isNew      : false,
 				};
-				dataList.push(pushData);
+				DATA_LIST.push(pushData);
 			});
-			setHawbDetails(dataList);
+			setHawbDetails(DATA_LIST);
 		}
 	}, [activeCategory, hawbListLoading]);
 
