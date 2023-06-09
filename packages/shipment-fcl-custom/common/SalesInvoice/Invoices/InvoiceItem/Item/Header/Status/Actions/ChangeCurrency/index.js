@@ -23,7 +23,7 @@ function ChangeCurrency({
 
 	const currencyOptionsOld =	GLOBAL_CONSTANTS.options.freight_invoice_currency?.[
 		invoice?.country_code || geo.country.currency.code
-	] || GLOBAL_CONSTANTS.options.freight_invoice_currency.OTHERS
+	] || GLOBAL_CONSTANTS.options.freight_invoice_currency.OTHERS;
 
 	const currencyOptions = currencyOptionsOld.map((item) => ({
 		label : item,

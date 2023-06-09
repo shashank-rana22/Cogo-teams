@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from "@cogoport/globalization/constants/globals";
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const serviceCancellationStates = ['init', 'awaiting_service_provider_confirmation', 'confirmed_by_service_provider'];
 
@@ -11,7 +11,8 @@ export default function getCanCancelService({ shipment_data, user_data, state, a
 	if (user_data?.email === 'ajeet@cogoport.com') {
 		return true;
 	}
-	if (shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id && !serviceCompletedOrCancelled.includes(state)) {
+	if (shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+		&& !serviceCompletedOrCancelled.includes(state)) {
 		return true;
 	}
 

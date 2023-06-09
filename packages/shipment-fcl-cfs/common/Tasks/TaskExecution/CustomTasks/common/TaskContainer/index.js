@@ -12,8 +12,8 @@ function TaskContainer({
 	actions,
 	shipment_data = {},
 }) {
-	const trade_type = getTradeTypeByIncoTerm(shipment_data?.inco_term)
-	
+	const trade_type = getTradeTypeByIncoTerm(shipment_data?.inco_term);
+
 	const taskName = taskDisplayNames(trade_type)[pendingTask?.task]?.display_name
 		|| startCase(pendingTask?.task || '');
 

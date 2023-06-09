@@ -5,8 +5,9 @@ import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import CONSTANTS from '../../../../../../../../../../configurations/constant.json';
 import styles from '../../styles.module.css';
+
+const EMPTY_ARRAY_LENGTH = 0;
 
 function KebabContent({
 	invoice = {},
@@ -20,7 +21,8 @@ function KebabContent({
 	setIsEditInvoice = () => {},
 }) {
 	const [show, setShow] = useState(false);
-	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id && invoice.status === 'pending';
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	&& invoice.status === 'pending';
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 
@@ -133,7 +135,7 @@ function KebabContent({
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-			{(!disableAction || invoice.exchange_rate_document?.length > 0)
+			{(!disableAction || invoice.exchange_rate_document?.length > EMPTY_ARRAY_LENGTH)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive

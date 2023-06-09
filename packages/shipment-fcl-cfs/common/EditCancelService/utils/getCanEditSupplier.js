@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from "@cogoport/globalization/constants/globals";
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const EDIT_SUPPLIER_SERVICE_STATES = ['init',
 	'awaiting_service_provider_confirmation', 'confirmed_by_service_provider'];

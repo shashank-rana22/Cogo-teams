@@ -22,6 +22,10 @@ const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
 
+const EMPTY_ARRAY_LENGTH = 0;
+
+const DISABLE_STATUS = ['reviewed', 'approved'];
+// eslint-disable-next-line max-lines-per-function
 function Actions({
 	invoice = {},
 	bfInvoiceRefetch = () => {},
@@ -42,9 +46,10 @@ function Actions({
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id && invoice.status === 'pending';
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	&& invoice.status === 'pending';
 
-	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
+	const disableActionCondition = DISABLE_STATUS.includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
 
 	let disableAction = showForOldShipments
@@ -175,10 +180,10 @@ function Actions({
 						>
 							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
 								&nbsp;
-							{['reviewed', 'approved'].includes(invoice?.status) ? '/Generate' : ''}
+							{DISABLE_STATUS.includes(invoice?.status) ? '/Generate' : ''}
 							Customer Invoice
 						</ClickableDiv>
-						{['reviewed', 'approved'].includes(invoice?.status) ? (
+						{DISABLE_STATUS.includes(invoice?.status) ? (
 							<ClickableDiv
 								className={styles.text}
 								onClick={() => { setShow(false); setUpdateCustomerInvoice(true); }}
@@ -189,7 +194,7 @@ function Actions({
 					</div>
 				</div>
 			))}
-			{['reviewed', 'approved'].includes(invoice?.status) ? (
+			{DISABLE_STATUS.includes(invoice?.status) ? (
 				<div>
 					<div className={styles.line} />
 					<ClickableDiv
@@ -230,7 +235,7 @@ function Actions({
 
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
 
-					{(!disableAction || invoice.exchange_rate_document?.length > 0)
+					{(!disableAction || invoice.exchange_rate_document?.length > EMPTY_ARRAY_LENGTH)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive

@@ -1,8 +1,8 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import useGetCreditNotes from '../../../hooks/useGetCreditNotes';
 import useListBfSalesInvoices from '../../../hooks/useListBfSalesInvoices';
 import useOrgOutStanding from '../../../hooks/useOrgOutStanding';
@@ -12,6 +12,8 @@ import POST_REVIEWED_INVOICES from '../helpers/post-reviewed-sales-invoices';
 import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
+
+const INCREMENT_IN_COUNT_BY = 1;
 
 function Invoices({
 	invoiceData = {},
@@ -33,7 +35,7 @@ function Invoices({
 	let count = 0;
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
-			count += 1;
+			count += INCREMENT_IN_COUNT_BY;
 		}
 	});
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);

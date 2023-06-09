@@ -7,8 +7,9 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import CONSTANTS from '../../../../../../../../../../configurations/constant.json';
 import styles from '../../styles.module.css';
+
+const EMPTY_ARRAY_LENGTH = 0;
 
 function Actions({
 	invoice = {},
@@ -20,7 +21,8 @@ function Actions({
 	setShowChangePaymentMode = () => {},
 }) {
 	const [show, setShow] = useState(false);
-	const showForOldShipments =	shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id && invoice.status === 'pending';
+	const showForOldShipments =	shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
@@ -101,7 +103,7 @@ function Actions({
 
 	return (
 		<div className={styles.actions_wrap}>
-			{!disableAction || invoice.exchange_rate_document?.length > 0 ? (
+			{!disableAction || invoice.exchange_rate_document?.length > EMPTY_ARRAY_LENGTH ? (
 				<Popover
 					interactive
 					placement="bottom"

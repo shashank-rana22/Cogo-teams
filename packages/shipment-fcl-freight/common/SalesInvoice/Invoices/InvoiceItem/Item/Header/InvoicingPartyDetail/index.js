@@ -5,6 +5,8 @@ import React, { useContext, useRef } from 'react';
 
 import styles from '../styles.module.css';
 
+const FIRST_ELEM = 0;
+
 function InvoicingPartyDetail({
 	invoice = {},
 	invoicesList = [],
@@ -21,7 +23,7 @@ function InvoicingPartyDetail({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[0]?.status;
+	)?.[FIRST_ELEM]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
@@ -33,26 +35,27 @@ function InvoicingPartyDetail({
 				{billing_address?.name || billing_address?.business_name}
 			</div>
 
-			{!GLOBAL_CONSTANTS.features.freight_sales_invoice.restricted_entity_ids.includes(shipment_data?.entity_id) ? (
-				<div className={styles.gst}>
-					<div className={styles.label}>GST Number :</div>
-					<Tooltip
-						theme="light"
-						placement="bottom"
-						content={(
-							<div className={styles.tooltip_div}>
-								{billing_address?.address}
-							</div>
-						)}
-					>
-						<div
-							className={styles.gst_number}
+			{!GLOBAL_CONSTANTS.features.freight_sales_invoice.restricted_entity_ids.includes(shipment_data?.entity_id)
+				? (
+					<div className={styles.gst}>
+						<div className={styles.label}>GST Number :</div>
+						<Tooltip
+							theme="light"
+							placement="bottom"
+							content={(
+								<div className={styles.tooltip_div}>
+									{billing_address?.address}
+								</div>
+							)}
 						>
-							{billing_address?.tax_number}
-						</div>
-					</Tooltip>
-				</div>
-			) : null}
+							<div
+								className={styles.gst_number}
+							>
+								{billing_address?.tax_number}
+							</div>
+						</Tooltip>
+					</div>
+				) : null}
 		</div>
 	);
 }
