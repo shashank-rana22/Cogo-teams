@@ -112,7 +112,6 @@ const useEditInvoicePref = ({
 
 					return {
 						serviceKey   : service,
-						is_igst      : itemsService?.is_igst || null,
 						service_type : serviceType,
 						service_id   : currentService?.id || itemsService?.service_id,
 						trade_type   : currentService?.trade_type || itemsService?.trade_type,
