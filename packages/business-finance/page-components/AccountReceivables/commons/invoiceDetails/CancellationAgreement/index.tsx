@@ -13,21 +13,21 @@ function CancellationAgreement({ data }) {
 		<div className={styles.container}>
 			<div className={styles.sub_container}>
 				Agreement No. -
-				<span style={{ fontWeight: 600 }}>{cancelledEInvoiceDetails?.agreementNumber}</span>
+				<span className={styles.span_style}>{cancelledEInvoiceDetails?.agreementNumber}</span>
 			</div>
 			<div className={styles.sub_container}>
 				Agreement Date -
-				<span style={{ fontWeight: 600 }}>{cancelledEInvoiceDetails?.agreementDate}</span>
+				<span className={styles.span_style}>{cancelledEInvoiceDetails?.agreementDate}</span>
 			</div>
 			<div className={styles.sub_container}>
 				Agreement Proof -
-				<a style={{ fontWeight: 600 }} href={cancelledEInvoiceDetails?.agreementDocument}>
+				<a className={styles.span_style} href={cancelledEInvoiceDetails?.agreementDocument}>
 					View Documnet
 				</a>
 			</div>
 			<div className={styles.sub_container}>
 				Form 04 -
-				<a style={{ fontWeight: 600 }} href={cancelledEInvoiceDetails?.eInvoiceForm04}>View Document</a>
+				<a className={styles.span_style} href={cancelledEInvoiceDetails?.eInvoiceForm04}>View Document</a>
 			</div>
 		</div>
 	);
