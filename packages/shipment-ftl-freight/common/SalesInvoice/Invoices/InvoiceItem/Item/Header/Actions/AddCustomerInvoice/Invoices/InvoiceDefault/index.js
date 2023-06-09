@@ -11,7 +11,7 @@ function InvoiceDefault({
 	importerExporterId = '',
 	customData = {},
 }) {
-	const { lineItems = [], lineItemsKeysMapping = {} } = getLineItems({
+	const { lineItems = [], LINE_ITEMS_KEY_MAPPINGS = {} } = getLineItems({
 		customData,
 	});
 
@@ -208,7 +208,7 @@ function InvoiceDefault({
 
 				{lineItems.map((lineItem) => (
 					<tr key={lineItem?.id}>
-						{Object.keys(lineItemsKeysMapping).map((key) => (
+						{Object.keys(LINE_ITEMS_KEY_MAPPINGS).map((key) => (
 							<td
 								style={{
 									padding       : '1px',

@@ -1,6 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
 import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
-import { isEmpty } from '@cogoport/utils';
 import { useMemo, useRef } from 'react';
 
 import useCreateShipmentFortigoTripDetail from '../../../../../../../../hooks/useCreateShipmentFortigoTripDetail';

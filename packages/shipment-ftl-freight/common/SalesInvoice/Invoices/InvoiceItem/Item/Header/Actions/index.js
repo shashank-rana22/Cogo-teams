@@ -105,8 +105,7 @@ function Actions({
 				</div>
 
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-
-					{(!disableAction || invoice.exchange_rate_document?.length > 0)
+					{(!disableAction || !isEmpty(invoice.exchange_rate_document))
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive

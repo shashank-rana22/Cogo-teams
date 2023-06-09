@@ -56,7 +56,7 @@ function RequestCN({
 			invoiceData,
 		});
 
-		if (submit_data?.line_items?.length === 0) {
+		if (isEmpty(submit_data?.line_items)) {
 			Toast.error('Line Items is required');
 		}
 		let isError = false;
