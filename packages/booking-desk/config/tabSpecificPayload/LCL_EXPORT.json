@@ -2,7 +2,7 @@
     "place_booking": {
         "task_attributes": [
             {
-                "task": "mark_confirmed",
+                "task": "confirm_booking",
                 "state": "shipment_received",
                 "status": "completed"
             },
@@ -17,7 +17,7 @@
     "completed": {
         "task_attributes": [
             {
-                "task": "update_container_details",
+                "task": "update_carrier_booking_reference_number",
                 "status": "completed"
             }
         ]
