@@ -1,0 +1,13 @@
+.filter_body{
+    background-color: white;
+    padding: 20px;
+    margin: 20px 0px;
+    display: flex;
+    justify-content: space-between;
+}
+
+.filter_section{
+    width: 26%;
+    display: flex;
+    justify-content: space-around;
+}

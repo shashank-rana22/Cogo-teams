@@ -1,9 +1,20 @@
-import React from 'react'
+import React, { useState } from 'react';
+
+import FilterHeaders from './FilterHeaders';
 
 function CampaignManagement() {
-  return (
-    <div>CampaignManagement</div>
-  )
+	const [globalFilters, setGlobalFilters] = useState({});
+
+	return (
+		<div>
+			<div>
+				<FilterHeaders
+					globalFilters={globalFilters}
+					setGlobalFilters={setGlobalFilters}
+				/>
+			</div>
+		</div>
+	);
 }
 
 export default CampaignManagement;

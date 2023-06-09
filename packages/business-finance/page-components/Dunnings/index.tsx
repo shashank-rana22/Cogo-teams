@@ -1,14 +1,15 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
-import CampaignManagement from './components/CampaignManagement'
-import ExceptionsManagement from './components/ExceptionsManagement'
+
+import CampaignManagement from './components/CampaignManagement';
+import ExceptionsManagement from './components/ExceptionsManagement';
 import styles from './styles.module.css';
 
 function Dunnings() {
-	const { query, push } = useRouter();	
+	const { query, push } = useRouter();
 
-	const [activeTab, setActiveTab] = useState(query?.active_tab|| 'campaign-management');
+	const [activeTab, setActiveTab] = useState(query?.active_tab || 'campaign-management');
 	const handleTabChange = (tab:string) => {
 		setActiveTab(tab);
 		push(
@@ -16,11 +17,11 @@ function Dunnings() {
 			`/business-finance/dunnings/${tab}`,
 		);
 	};
-	
+
 	return (
 		<div>
 			<div className={styles.header}>
-			Dunning
+				Dunning
 			</div>
 			<div className={styles.tabs_container}>
 				<Tabs
@@ -34,10 +35,10 @@ function Dunnings() {
 						name="campaign-management"
 						title="Campaign Management"
 					>
-						<CampaignManagement/>
+						<CampaignManagement />
 					</TabPanel>
 					<TabPanel name="exceptions-management" title="Exceptions Management">
-					<ExceptionsManagement/>
+						<ExceptionsManagement />
 					</TabPanel>
 				</Tabs>
 			</div>
