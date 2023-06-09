@@ -39,8 +39,6 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 
 	const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration || {};
 
-	console.log('instructorData', instructorData, CAROUSELDATA);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
