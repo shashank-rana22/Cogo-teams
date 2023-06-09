@@ -25,7 +25,7 @@ function Timeline() {
 	const showEditScheduleIcon = canEditSchedule({ primary_service, activeStakeholder });
 
 	const filteredTimelineData = (timelineData || []).filter(
-		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
+		(timelineItem) => !timelineItem.service_type || ((shipment_data?.services || []).includes(timelineItem?.service_type) && timelineItem?.is_icd)
 	);
 
 	const totalItems = (timelineData || []).length;

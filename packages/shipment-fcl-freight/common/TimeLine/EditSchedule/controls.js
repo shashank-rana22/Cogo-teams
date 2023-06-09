@@ -3,8 +3,10 @@ import { getDate } from '../utils/getDate';
 import { getDisplayDate } from '../utils/getDisplayDate';
 
 const controls = ({ primary_service, departureDate, timelineData = [] }) => {
-	const disabledState = primary_service?.state === 'vessel_arrived'
-		|| !TIMELINE_EDITABLE.primary_service.state.includes(primary_service?.state);
+	const { state, origin_port, destination_port } = primary_service || {};
+
+	const disabledState = state === 'vessel_arrived'
+		|| !TIMELINE_EDITABLE.primary_service.state.includes(state);
 
 	let deviated_departure;
 	let deviated_arrival;
@@ -18,7 +20,7 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 			}
 		}
 	});
-
+	console.log({origin_port, destination_port})
 	const finalControls = [
 		{ name: 'bn_expiry', label: 'BN expiry date' },
 		{ name: 'tr_cutoff', label: 'TR cutoff date' },
@@ -42,6 +44,14 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 			minDate : departureDate,
 			disable : false,
 		},
+		...(origin_port?.is_icd ? [{
+			name: 'departed_from_icd_port_at',
+			label: 'Departure from ICD Port date',
+		}] : []),
+		...(destination_port?.is_icd ? [{
+			name: 'arrived_at_destination_icd_at',
+			label: 'Arrived At ICD Port date',
+		}] : [])
 	];
 
 	const defaultValues = {};
