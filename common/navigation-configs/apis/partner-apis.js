@@ -9546,6 +9546,11 @@ const partner = {
 	],
 	templates: [
 		{
+			api          : 'list_nearest_available_location',
+			access_type  : 'private',
+			service_name : 'location',
+		},
+		{
 			api          : 'update_communication_whatsapp_template',
 			access_type  : 'private',
 			service_name : 'communication',
