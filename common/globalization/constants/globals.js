@@ -142,7 +142,8 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
-		number: /^[+-]?\d*\.?\d+$/,
+		number      : /^[+-]?\d*\.?\d+$/,
+		white_space : /\s+/,
 	},
 };
 

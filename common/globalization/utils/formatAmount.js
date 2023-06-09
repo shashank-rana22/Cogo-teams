@@ -5,7 +5,7 @@ import GLOBAL_CONSTANTS from '../constants/globals';
 
 const geo = getGeoConstants();
 
-const currencyMapping = {
+const LOCALE_CURRENCY_ABBR_MAPPING = {
 	'vi-VN': {
 		Tr : 'M',
 		T  : 'B',
@@ -42,15 +42,15 @@ const getCurrencyLocale = ({ currency }) => {
 };
 
 const formatCurrency = ({ amount, locale, options }) => {
-	if (!(locale in currencyMapping) || !(options?.notation === 'compact')) {
+	if (!(locale in LOCALE_CURRENCY_ABBR_MAPPING) || !(options?.notation === 'compact')) {
 		return amount;
 	}
 
 	let formattedAmount = amount;
 
-	const splittedAmount = formattedAmount.split(/\s+/);
+	const splittedAmount = formattedAmount.split(GLOBAL_CONSTANTS.regex_patterns.white_space);
 
-	Object.entries(currencyMapping[locale]).forEach(([current, newVal]) => {
+	Object.entries(LOCALE_CURRENCY_ABBR_MAPPING[locale]).forEach(([current, newVal]) => {
 		if (splittedAmount.includes(current)) {
 			formattedAmount = amount.replace(current, newVal);
 		}
