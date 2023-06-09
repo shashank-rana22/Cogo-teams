@@ -35,7 +35,8 @@ function UpdateCustomerInvoice(props) {
 
 	const finalControls = useMemo(() => Object.values(formControls).flat(), []);
 
-	const shipperTradePartyPanNumber = tradePartnerData?.list?.[0]?.trade_partner_details?.registration_number;
+	const [firstElement = {}] = tradePartnerData?.list || [];
+	const { trade_partner_details: { registration_number: shipperTradePartyPanNumber } = {} } = firstElement;
 
 	const { data: customData } = useGetShipmentFortigoTripDetail({
 		defaultParams: {

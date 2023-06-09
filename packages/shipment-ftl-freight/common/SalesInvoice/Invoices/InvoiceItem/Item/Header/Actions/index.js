@@ -42,34 +42,9 @@ function Actions({
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const handleClickCurrency = () => {
-		setIsChangeCurrency(true);
+	const handleSetter = (setter = () => {}) => {
+		setter(true);
 		setShow(false);
-	};
-
-	const handleClickRemarks = () => {
-		setShow(false);
-		setShowAddRemarks(true);
-	};
-
-	const handleChangePayment = () => {
-		setShow(false);
-		setShowChangePaymentMode(true);
-	};
-
-	const handleClickInvoice = () => {
-		setShow(false);
-		setIsEditInvoice(true);
-	};
-
-	const handleCustomerInvoice = () => {
-		setShow(false);
-		setAddCustomerInvoice(true);
-	};
-
-	const handleExchangeRateModal = () => {
-		setShow(false);
-		setExchangeRate(true);
 	};
 
 	const remarkRender = () => (
@@ -97,7 +72,7 @@ function Actions({
 						<div style={{ width: '100%' }}>
 							<ClickableDiv
 								className={styles.text}
-								onClick={handleClickInvoice}
+								onClick={() => handleSetter(setIsEditInvoice)}
 							>
 								Edit Invoices
 
@@ -109,7 +84,7 @@ function Actions({
 					<div>
 						<ClickableDiv
 							className={styles.text}
-							onClick={handleClickCurrency}
+							onClick={() => handleSetter(setIsChangeCurrency)}
 						>
 							Change Currency
 						</ClickableDiv>
@@ -118,7 +93,7 @@ function Actions({
 
 					<ClickableDiv
 						className={styles.text}
-						onClick={handleClickRemarks}
+						onClick={() => handleSetter(setShowAddRemarks)}
 					>
 						Add Remarks
 					</ClickableDiv>
@@ -128,7 +103,7 @@ function Actions({
 							<div className={styles.line} />
 							<ClickableDiv
 								className={styles.text}
-								onClick={handleChangePayment}
+								onClick={() => handleSetter(setShowChangePaymentMode)}
 							>
 								Change Payment Mode
 							</ClickableDiv>
@@ -148,7 +123,7 @@ function Actions({
 					</ClickableDiv>
 					<div className={styles.line} />
 					<ClickableDiv
-						onClick={handleExchangeRateModal}
+						onClick={() => handleSetter(setExchangeRate)}
 						className={styles.text}
 					>
 						Exchange Rate Sheet
@@ -158,7 +133,7 @@ function Actions({
 						<div className={styles.line} />
 						<ClickableDiv
 							className={styles.text}
-							onClick={handleCustomerInvoice}
+							onClick={() => handleSetter(setAddCustomerInvoice)}
 						>
 							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
 								&nbsp;
@@ -168,7 +143,7 @@ function Actions({
 						{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? (
 							<ClickableDiv
 								className={styles.text}
-								onClick={() => { setShow(false); setUpdateCustomerInvoice(true); }}
+								onClick={() => handleSetter(setUpdateCustomerInvoice)}
 							>
 								Update Customer Invoice
 							</ClickableDiv>
@@ -181,7 +156,7 @@ function Actions({
 					<div className={styles.line} />
 					<ClickableDiv
 						className={styles.text}
-						onClick={() => { setShow(false); setFillCustomerData(true); }}
+						onClick={() => handleSetter(setFillCustomerData)}
 					>
 						Fill Shipment Data For Customer Portal
 					</ClickableDiv>
@@ -201,18 +176,6 @@ function Actions({
 							</div>
 						) : null}
 					</div>
-
-					{/* {invoice?.status === 'amendment_requested' ? (
-						<Tooltip
-							placement="bottom"
-							theme="light"
-							content={<AmendmentReasons invoice={invoice} />}
-						>
-							<div className={styles.icon_info_wrapper}>
-								<IcCError width={17} height={17} />
-							</div>
-						</Tooltip>
-					) : null} */}
 				</div>
 
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
