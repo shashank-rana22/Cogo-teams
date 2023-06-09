@@ -1,4 +1,5 @@
 import { Loader, Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import EmptyState from '../../common/EmptyState';
@@ -20,20 +21,22 @@ function FeedbackDashboard() {
 				<Filters filters={filters} setFilters={setFilters} />
 			</div>
 			<div className={styles.container}>
-				<Pagination
-					type="table"
-					currentPage={page}
-					totalItems={data?.total_count}
-					pageSize={data?.page_limit}
-					onPageChange={(newPage) => {
-						setFilters((prev) => ({ ...prev, page: newPage }));
-					}}
-				/>
+				{!isEmpty(list) && (
+					<Pagination
+						type="table"
+						currentPage={page}
+						totalItems={data?.total_count}
+						pageSize={data?.page_limit}
+						onPageChange={(newPage) => {
+							setFilters((prev) => ({ ...prev, page: newPage }));
+						}}
+					/>
+				)}
 				<div className={styles.list_panel}>
 					<div>
 						{loading ? <Loader /> : null}
 					</div>
-					{(!loading && !list.length) ? <EmptyState />
+					{(!loading && isEmpty(list)) ? <EmptyState />
 						: (
 							<>
 								{list.map((item) => <FeedbackCard data={item} key={item.id} />)}

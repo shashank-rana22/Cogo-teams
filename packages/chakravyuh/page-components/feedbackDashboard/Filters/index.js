@@ -1,10 +1,10 @@
 import { DateRangepicker, Select } from '@cogoport/components';
-import commodityOptions from '@cogoport/constants/commodity-types.json';
 import containerSizes from '@cogoport/constants/container-sizes.json';
 import containerTypes from '@cogoport/constants/container-types.json';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsLocations } from '@cogoport/forms/utils/getAsyncFields';
-import { merge } from '@cogoport/utils';
+import { FREIGHT_CONTAINER_COMMODITY_MAPPINGS } from '@cogoport/globalization/constants/commodities';
+import { merge, startCase } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -20,6 +20,13 @@ const sourceTypes = [
 	},
 ];
 
+const getCommodityOptions = (container_type) => {
+	const commodities = container_type
+		? FREIGHT_CONTAINER_COMMODITY_MAPPINGS[container_type] : Object.values(FREIGHT_CONTAINER_COMMODITY_MAPPINGS)
+			.flat();
+	return commodities.map((value) => ({ label: startCase(value), value }));
+};
+
 function Filters({ filters, setFilters }) {
 	const type = ['country', 'trade', 'seaport'];
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
@@ -31,6 +38,8 @@ function Filters({ filters, setFilters }) {
 		params   : { filters: { type } },
 		labelKey : 'display_name',
 	}));
+
+	const commodityOptions = getCommodityOptions(filters?.container_type);
 
 	return (
 		<div className={styles.container}>
@@ -68,9 +77,9 @@ function Filters({ filters, setFilters }) {
 						placeholder="Commodity"
 						isClearable
 						options={commodityOptions}
-						value={filters?.commodity_type}
+						value={filters?.commodity}
 						onChange={(value) => {
-							setFilters((prev) => ({ ...prev, commodity_type: value, page: 1 }));
+							setFilters((prev) => ({ ...prev, commodity: value, page: 1 }));
 						}}
 					/>
 				</div>

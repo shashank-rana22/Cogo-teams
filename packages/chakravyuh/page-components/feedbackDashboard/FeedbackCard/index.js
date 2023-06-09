@@ -7,13 +7,17 @@ import styles from './styles.module.css';
 
 const DECIMAL_POSITION = 2;
 
+const INFO_KEYS = ['container_type', 'container_size', 'commodity'];
+
+const checkNumber = (val) => {
+	if (Number.isNaN(Number(val))) { return 'Not Available'; }
+	return Number(val).toFixed(DECIMAL_POSITION);
+};
+
 function FeedbackCard({ data = {} }) {
 	const {
 		origin_port = {},
 		destination_port = {},
-		container_size = '',
-		container_type = '',
-		commodity = '',
 		deviation,
 		old_price,
 		new_price,
@@ -24,31 +28,12 @@ function FeedbackCard({ data = {} }) {
 		preferred_freight_rate_currency = '',
 	} = data;
 
-	const items = [
-		{
-			children : startCase(container_type),
-			disabled : false,
-			color    : '#cdf7d4',
-			tooltip  : false,
-		},
-		{
-			children : `${container_size}`,
-			disabled : false,
-			color    : '#cdf7d4',
-			tooltip  : false,
-		},
-		{
-			children : startCase(commodity),
-			disabled : false,
-			color    : '#cdf7d4',
-			tooltip  : false,
-		},
-	];
-
-	const checkNumber = (val) => {
-		if (Number.isNaN(Number(val))) { return 'Not Available'; }
-		return Number(val).toFixed(DECIMAL_POSITION);
-	};
+	const items = INFO_KEYS.map((key) => ({
+		children : startCase(data[key]),
+		disabled : false,
+		color    : '#cdf7d4',
+		tooltip  : false,
+	}));
 
 	return (
 		<div className={styles.box}>
@@ -62,17 +47,17 @@ function FeedbackCard({ data = {} }) {
 					>
 						<p className={styles.port_code}>{origin_port.port_code || origin_port.inttra_code}</p>
 					</Tooltip>
-					<IcMPortArrow style={{ margin: '0px 12px' }} />
+					<IcMPortArrow style={{ margin: '0 12px' }} />
 					<Tooltip
 						content={(
 							<div>
-								{destination_port.display_name}
+								{destination_port?.display_name}
 							</div>
 						)}
 						placement="top"
 					>
 						<p className={styles.port_code}>
-							{destination_port.port_code || destination_port.inttra_code}
+							{destination_port?.port_code || destination_port?.inttra_code}
 						</p>
 					</Tooltip>
 				</div>
@@ -109,7 +94,7 @@ function FeedbackCard({ data = {} }) {
 					{closed_by?.name || ''}
 				</div>
 				<div>
-					<p className={styles.label}>Preffered rate</p>
+					<p className={styles.label}>Preferred rate</p>
 					{checkNumber(preferred_freight_rate)}
 					&nbsp;
 					{preferred_freight_rate_currency}
