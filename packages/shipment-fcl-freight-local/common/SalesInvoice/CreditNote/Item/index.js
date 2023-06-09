@@ -6,7 +6,7 @@ import {
 	IcMEdit,
 } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import Edit from '../Edit';
 import ReviewCN from '../Review';

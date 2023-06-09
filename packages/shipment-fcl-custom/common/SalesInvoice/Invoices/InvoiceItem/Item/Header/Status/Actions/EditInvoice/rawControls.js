@@ -1,13 +1,13 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-const SERIAL_ID = 130000;
 const INITIAL_STATE = 0;
 const LENGTH_CUTOFF = 3;
 
 const handleDisableCond = (charge, isAdminSuperAdmin, shipment_data) => {
-	const disable =	 !isAdminSuperAdmin	&& shipment_data?.serial_id > SERIAL_ID;
+	const disable =	 !isAdminSuperAdmin	&& shipment_data?.serial_id > GLOBAL_CONSTANTS.serial_check_id;
 	return disable;
 };
 
