@@ -1,4 +1,4 @@
-import { FIRST_LEVEL_DATA, SECOUND_LEVEL_DATA, THIRD_LEVEL_DATA } from '../constants';
+import { FIRST_LEVEL_DATA, SECOND_LEVEL_DATA, THIRD_LEVEL_DATA } from '../constants';
 
 import { handleValues } from './handleValue';
 
@@ -26,7 +26,7 @@ export const getUserLevel = (networkLength) => {
 	if (networkLength <= DEFAULT_LENGTH_VALUE) {
 		userLevel = FIRST_LEVEL_DATA;
 	} else if (networkLength <= DEFAULT_NETWORK_LENGTH_VALUE) {
-		userLevel = SECOUND_LEVEL_DATA;
+		userLevel = SECOND_LEVEL_DATA;
 	} else {
 		userLevel = THIRD_LEVEL_DATA;
 	}

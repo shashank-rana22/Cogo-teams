@@ -1,7 +1,7 @@
 import getFormatedChartData from '../utils/getFormatedChartData';
 import { handleValues } from '../utils/handleValue';
 
-const pieChartMapping = (alloted = {}) => {
+const pieChartMapping = ({ alloted = {} }) => {
 	const chartCount = () => {
 		let totalCount = 0;
 		Object.values(alloted).forEach((value) => {

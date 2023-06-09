@@ -29,7 +29,7 @@ export const ACTIVITY_STATUS = {
 
 export const FIRST_LEVEL_DATA = ['L1', 'L2', 'L3', 'L4', 'L5', 'L6', 'L7'];
 
-export const SECOUND_LEVEL_DATA = ['L1', 'L3', 'L6', 'L9', 'L12', 'L15', 'L17', 'L19'];
+export const SECOND_LEVEL_DATA = ['L1', 'L3', 'L6', 'L9', 'L12', 'L15', 'L17', 'L19'];
 
 export const THIRD_LEVEL_DATA = ['L1', 'L10', 'L20', 'L30', 'L40', 'L50', 'L60'];
 
@@ -105,8 +105,6 @@ export const BUSINESS_REWARDS_OPTIONS = [
 		name  : 'subscription',
 	},
 ];
-
-export const USER_AVATAR = 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp';
 
 export const MAX_LEVEL = 30;
 export const REVENUE_START_PRICE = 5000;
