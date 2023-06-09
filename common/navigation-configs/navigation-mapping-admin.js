@@ -204,6 +204,7 @@ const navigationMappingAdmin = {
 			...apis.checkout_promotions,
 			...apis.export_factoring,
 			...apis.app_saas_cogo_subscription,
+			...apis.sales_dashboard,
 
 		],
 		main_apis: [
@@ -1443,6 +1444,7 @@ const navigationMappingAdmin = {
 			...apis.cogopoints,
 			...apis.checkout_promotions,
 			...apis.export_factoring,
+			...apis.sales_dashboard,
 		],
 		module_type: 'crm',
 	},
@@ -2112,7 +2114,11 @@ const navigationMappingAdmin = {
 				as            : '/v2/learning',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : [...apis.create_faq, ...apis.create_test_set],
+				possible_apis : [
+					...apis.create_faq,
+					...apis.create_test_set,
+					...apis.list_courses,
+				],
 			},
 			{
 				key           : 'cogo_academy-faq',
@@ -2141,6 +2147,15 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.announcements,
+			},
+			{
+				key           : 'cogo_academy-course',
+				title         : 'Course Module',
+				href          : '/v2/learning/course',
+				as            : '/v2/learning/course',
+				type          : 'link',
+				main_apis     : [],
+				possible_apis : [...apis.create_course, ...apis.course_module],
 			},
 		],
 		module_type: 'crm',
