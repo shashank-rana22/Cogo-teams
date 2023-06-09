@@ -24,7 +24,6 @@ const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 			Header   : 'DOCUMENT TYPE',
 			accessor : () => <div className={styles.name}>Offer letter</div>,
 		},
-
 		{
 			Header   : 'UPLOAD DATE',
 			accessor : (item) => (
@@ -37,7 +36,6 @@ const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 				</div>
 			),
 		},
-
 		{
 			Header   : 'View',
 			accessor : (item) => (
@@ -59,7 +57,6 @@ const getColumns = ({ setViewCtcBreakupModal, viewCtcBreakupModal }) => {
 				</div>
 			),
 		},
-
 		{
 			Header   : 'ACTION/STATUS',
 			accessor : (item) => (

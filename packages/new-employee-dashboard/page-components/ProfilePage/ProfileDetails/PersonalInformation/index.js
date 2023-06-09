@@ -61,29 +61,24 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		HRBP_email                : hrbp?.userEmail,
 	};
 
-	if (getEmployeeDetailsLoading) {
-		return <CommonLoader />;
-	}
+	if (getEmployeeDetailsLoading) return <CommonLoader />;
 
 	return (
 		<div className={styles.container}>
-			{
-				((Object.keys(MAPPING)) || []).map((element) => (
-					<div key={element} className={styles.flex_wrapper}>
-						<div className={styles.label}>
-							{startCase(element)}
-							{' '}
-						</div>
-
-						<div>
-							{' '}
-							{MAPPING?.[element]
-								|| detail?.[element]?.mobile_number || detail?.[element]?.mobile_country_code || '-'}
-						</div>
+			{((Object.keys(MAPPING)) || []).map((element) => (
+				<div key={element} className={styles.flex_wrapper}>
+					<div className={styles.label}>
+						{startCase(element)}
+						{' '}
 					</div>
-				))
-			}
 
+					<div>
+						{' '}
+						{MAPPING?.[element]
+							|| detail?.[element]?.mobile_number || detail?.[element]?.mobile_country_code || '-'}
+					</div>
+				</div>
+			))}
 		</div>
 	);
 }
