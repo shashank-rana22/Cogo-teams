@@ -3,34 +3,37 @@ import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-const useRaiseTicket = ({ setShowRaiseTicket }) => {
+const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 	const { profile } = useSelector((state) => state);
 
 	const [{ loading }, trigger] = useTicketsRequest({
-		url     : '/ticket', // default_types
-		method  : 'post', // get
-		authkey : 'post_tickets_ticket', // get_tickets_default_types
+		url     : '/ticket',
+		method  : 'post',
+		authkey : 'post_tickets_ticket',
 	}, { manual: true });
-
-	// payload: Qfilter
 
 	const raiseTickets = async (val) => {
 		const {
 			issue_type,
 			additional_information,
-			file_url,
+			organization_id,
+			user_id,
 			priority,
+			file_url,
+			...rest
 		} = val || {};
 
-		let additionalData = {};
+		const additionalData = {};
+
+		const selectedServices = Object.fromEntries(
+			Object.entries(rest).filter(([key]) => additionalInfo.includes(key)),
+		);
 
 		const urlData = (file_url || []).map((item) => item?.url);
 
-		if (!isEmpty(val.organization_id)) {
-			additionalData = {
-				OrganizationID : val.organization_id,
-				UserID         : val.user_id,
-			};
+		if (!isEmpty(organization_id)) {
+			additionalData.OrganizationID = organization_id;
+			additionalData.UserID = user_id;
 		}
 
 		try {
@@ -42,7 +45,7 @@ const useRaiseTicket = ({ setShowRaiseTicket }) => {
 					Subcategory : '',
 					Priority    : priority,
 					Usertype    : 'ticket_user',
-					Data        : { Attachment: urlData || [] },
+					Data        : { Attachment: urlData || [], ...selectedServices },
 					Type        : issue_type,
 					Description : additional_information,
 					...additionalData,

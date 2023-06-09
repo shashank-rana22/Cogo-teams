@@ -10,12 +10,18 @@ import StatsSection from './StatsSection';
 import styles from './styles.module.css';
 
 function MyTickets() {
-	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
-	const { raiseTickets, loading } = useRaiseTicket({ setShowRaiseTicket });
+	const [additionalInfo, setAdditionalInfo] = useState();
 
-	const { control, handleSubmit, watch, formState: { errors } } = useForm();
+	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
+	const { raiseTickets, loading } = useRaiseTicket({ setShowRaiseTicket, additionalInfo });
+
+	const { control, handleSubmit, watch, formState: { errors }, reset } = useForm();
 	const watchOrgId = watch('organization_id');
-	const watchUserId = watch('user_id');
+
+	const handleClose = () => {
+		reset();
+		setShowRaiseTicket(false);
+	};
 
 	return (
 		<div>
@@ -31,19 +37,22 @@ function MyTickets() {
 				size="sm"
 				show={showRaiseTicket}
 				className={styles.styled_ui_modal_dialog}
-				closeOnOuterClick={() => setShowRaiseTicket(false)}
-				onClose={() => setShowRaiseTicket(false)}
+				closeOnOuterClick={handleClose}
+				onClose={handleClose}
 			>
 				<form onSubmit={handleSubmit(raiseTickets)}>
 					<Modal.Header title="Raise Ticket" style={{ padding: 8 }} />
+
 					<Modal.Body className={styles.preview_modal_body}>
 						<RaiseTickets
-							control={control}
 							errors={errors}
+							control={control}
 							watchOrgId={watchOrgId}
-							watchUserId={watchUserId}
+							additionalInfo={additionalInfo}
+							setAdditionalInfo={setAdditionalInfo}
 						/>
 					</Modal.Body>
+
 					<Modal.Footer style={{ padding: 12 }}>
 						<Button size="md" type="submit" loading={loading}>
 							Submit

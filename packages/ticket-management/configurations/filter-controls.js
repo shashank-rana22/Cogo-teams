@@ -2,7 +2,7 @@ import { asyncFieldsTicketTypes, asyncFieldsOrganizations, asyncFieldsOrganizati
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import useGetAsyncTicketOptions from '@cogoport/forms/hooks/useGetAsyncTicketOptions';
 
-const useRaiseTicketcontrols = ({ watchOrgId }) => {
+const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 	const ticketTypeOptions = useGetAsyncTicketOptions({ ...asyncFieldsTicketTypes() });
 	const organizationOptions = useGetAsyncOptions({ ...asyncFieldsOrganizations() });
 	const organizationUserOptions = useGetAsyncOptions({
@@ -21,9 +21,10 @@ const useRaiseTicketcontrols = ({ watchOrgId }) => {
 			type           : 'select',
 			placeholder    : 'Select Type',
 			isClearable    : true,
-			rules          : { required: true },
+			// rules          : { required: true },
 			defaultOptions : true,
 			showOptional   : false,
+			onChange       : (_, val) => setAdditionalInfo(val?.AdditionalInfo),
 		},
 		{
 			label       : 'Describe Issue',
@@ -81,15 +82,15 @@ const useRaiseTicketcontrols = ({ watchOrgId }) => {
 			className    : 'primary md',
 			showOptional : false,
 		},
-		{
-			label        : 'Upload Supporting Documents',
-			name         : 'file_url',
-			type         : 'uploader',
-			multiple     : true,
-			theme        : 'admin',
-			className    : 'primary md',
-			showOptional : false,
-		},
+		// {
+		// 	label        : 'Upload Supporting Documents',
+		// 	name         : 'file_url',
+		// 	type         : 'uploader',
+		// 	multiple     : true,
+		// 	theme        : 'admin',
+		// 	className    : 'primary md',
+		// 	showOptional : false,
+		// },
 	];
 };
 

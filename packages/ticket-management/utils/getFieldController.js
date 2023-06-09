@@ -1,4 +1,5 @@
 import {
+	InputController,
 	UploadController,
 	CreatableMultiSelectController, TextAreaController,
 	SelectController,
@@ -9,6 +10,7 @@ const controlTypeControllerMapping = {
 	textarea           : TextAreaController,
 	'creatable-select' : CreatableMultiSelectController,
 	uploader           : UploadController,
+	text               : InputController,
 
 };
 

@@ -5,10 +5,20 @@ import { getFieldController } from '../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-function RaiseTickets({ control, errors, watchOrgId, watchUserId }) {
+function RaiseTickets({ control, errors, watchOrgId, additionalInfo, setAdditionalInfo }) {
+	const additionalControls = (additionalInfo || []).map((item) => ({
+		label        : item,
+		name         : item,
+		type         : 'text',
+		placeholder  : `add ${item}`,
+		showOptional : false,
+	}));
+
+	const controls = useRaiseTicketcontrols({ watchOrgId, setAdditionalInfo }).concat(additionalControls);
+
 	return (
 		<div>
-			{useRaiseTicketcontrols({ watchOrgId, watchUserId }).map((controlItem) => {
+			{controls.map((controlItem) => {
 				const el = { ...controlItem };
 				const Element = getFieldController(el.type);
 
