@@ -1,6 +1,7 @@
 import { Pill, Carousel } from '@cogoport/components';
 import { IcMStarfull } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 import useHandleCourseDetails from './useHandleCourseDetails';
@@ -37,6 +38,8 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 	const { video_duration = 0, reading_duration = 0 } = course_content_stats || {};
 
 	const { course_completion_value = 0, course_completion_unit = '' } = course_completion_duration || {};
+
+	console.log('instructorData', instructorData, CAROUSELDATA);
 
 	return (
 		<div className={styles.container}>
@@ -149,7 +152,7 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 								{course_completion_unit}
 							</div>
 
-							{viewType !== 'preview' ? (
+							{!isEmpty(course_content_stats) ? (
 								<>
 									<FormatTime value={video_duration} type="Videos" />
 
@@ -168,7 +171,7 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 					</div>
 				</div>
 
-				{viewType !== 'preview' ? (
+				{!isEmpty(instructorData) && !isEmpty(CAROUSELDATA) ? (
 					<div className={styles.card} style={{ width: '30%' }}>
 						<div className={styles.card_title}>Course Creator</div>
 						<div className={styles.card_details}>
@@ -180,6 +183,7 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 									alt="resume.png"
 								/>
 							</div>
+
 							<div className={styles.carasol}>
 								<Carousel
 									slides={CAROUSELDATA}
