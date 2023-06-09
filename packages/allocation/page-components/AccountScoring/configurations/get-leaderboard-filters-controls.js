@@ -1,11 +1,30 @@
 const controls = [
 	{
-		name                  : 'date',
-		label                 : 'Select Date',
-		type                  : 'datePicker',
-		dateFormat            : 'dd-MMMM-yyyy',
-		isPreviousDaysAllowed : true,
-		isClearable           : true,
+		name        : 'warmth',
+		label       : 'Warmth',
+		type        : 'multiSelect',
+		placeholder : 'Select Warmth',
+		options     : [
+			{ label: 'Ice Cold', value: 'ice_cold' },
+			{ label: 'Cold', value: 'cold' },
+			{ label: 'Warm', value: 'warm' },
+			{ label: 'Hot', value: 'hot' },
+			{ label: 'Flaming Hot', value: 'flaming_hot' },
+		],
+		isClearable: true,
+	},
+	{
+		name        : 'segment',
+		label       : 'Segment',
+		type        : 'multiSelect',
+		placeholder : 'Select Segment',
+		options     : [
+			{ label: 'Long Tail', value: 'long_tail' },
+			{ label: 'Mid Size', value: 'mid_size' },
+			{ label: 'Enterprise', value: 'enterprise' },
+			{ label: 'Channel Partner', value: 'channel_partner' },
+		],
+		isClearable: true,
 	},
 	{
 		name        : 'service',
@@ -30,6 +49,15 @@ const controls = [
 		disabled    : true,
 	},
 	{
+		name        : 'role_id',
+		label       : 'Role',
+		placeholder : 'Select Role',
+		type        : 'asyncSelect',
+		asyncKey    : 'partner_roles',
+		initialCall : false,
+		isClearable : true,
+	},
+	{
 		name        : 'organization',
 		label       : 'Account/Serial ID',
 		placeholder : 'Select Account/Serial ID',
@@ -47,6 +75,14 @@ const controls = [
 			},
 		},
 		isClearable: true,
+	},
+	{
+		name                  : 'date',
+		label                 : 'Select Date',
+		type                  : 'datePicker',
+		dateFormat            : 'dd-MMMM-yyyy',
+		isPreviousDaysAllowed : true,
+		isClearable           : true,
 	},
 ];
 export default controls;

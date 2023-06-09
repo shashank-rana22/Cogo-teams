@@ -1,7 +1,9 @@
 .form_container {
 	display: flex;
+	flex-wrap: wrap;
 	align-items: center;
-	padding: 16px 16px 16px 0;
+	justify-content: space-between;
+	padding: 16px 0;
 
 	@media (max-width: 576px) {
 		flex-direction: column;
@@ -9,11 +11,13 @@
 }
 
 .form_group {
-	flex-basis: 22%;
-	margin-right: 24px;
+	flex-basis: 1;
+	width: 200px;
+	margin: 0 4px;
 
 	@media (max-width: 576px) {
-		padding-top: 20px;
+		width: 100%;
+		margin-top: 20px;
 	}
 }
 

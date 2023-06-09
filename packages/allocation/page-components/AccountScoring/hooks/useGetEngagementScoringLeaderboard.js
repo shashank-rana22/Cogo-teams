@@ -11,7 +11,7 @@ function useGetEngagementScoringLeaderboard() {
 		params,
 	}, { manual: false });
 
-	const { list = [], page = 1, page_limit = 0, total_count = 0 } = data || {};
+	const { list = [], ...paginationData } = data || {};
 
 	const getNextPage = (newPage) => {
 		setParams((previousParams) => {
@@ -29,9 +29,7 @@ function useGetEngagementScoringLeaderboard() {
 		leaderboardLoading   : loading,
 		leaderboardList      : list,
 		setLeaderboardParams : setParams,
-		page,
-		page_limit,
-		total_count,
+		paginationData,
 		getNextPage,
 	};
 }
