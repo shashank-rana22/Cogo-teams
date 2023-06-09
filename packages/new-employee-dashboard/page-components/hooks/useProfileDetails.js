@@ -5,10 +5,8 @@ import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useState, useEffect } from 'react';
 
-import {
-	ctcModalControls
-} from '../../utils/ctc-modal-controls';
-import {ctcModalLessControls} from '../../utils/ctc-modal-less-controls';
+import { ctcModalControls } from '../../utils/ctc-modal-controls';
+import { ctcModalLessControls } from '../../utils/ctc-modal-less-controls';
 
 const CTC_THRESHOLD = 600000;
 
