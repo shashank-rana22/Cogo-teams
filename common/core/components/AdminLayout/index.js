@@ -10,6 +10,13 @@ import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
 import VoiceCall from './VoiceCall';
 
+const WHITE_BACKGROUND_MAPPING = [
+	'/[partner_id]/learning/course',
+	'/[partner_id]/learning/course/[course_id]',
+	'/[partner_id]/learning/course/introduction',
+	'/[partner_id]/learning/course/preview',
+];
+
 function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
 }) {
@@ -19,8 +26,10 @@ function AdminLayout({
 
 	const {
 		user_data,
-	} = useSelector(({ profile }) => ({
-		user_data: profile || {},
+		pathname,
+	} = useSelector(({ profile, general }) => ({
+		user_data : profile || {},
+		pathname  : general.pathname,
 	}));
 
 	const {
@@ -42,6 +51,7 @@ function AdminLayout({
 		<div className={cl`
 			${styles.container} 
 			${showTopbar ? styles.has_topbar : ''} 
+			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}
 			${showNavbar ? styles.has_navbar : ''}`}
 		>
 			<main className={styles.children_container}>{children}</main>
