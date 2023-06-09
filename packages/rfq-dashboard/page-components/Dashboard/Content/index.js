@@ -26,7 +26,7 @@ function Content(props) {
 	const {
 		listPlatformConfigConstants,
 		data : platformData, loading : platformLoading,
-	} = useListPlatformConfigConstants();
+	} = useListPlatformConfigConstants({ setValue });
 
 	const {
 		updatePlatformConfigMapping,
@@ -43,8 +43,6 @@ function Content(props) {
 	const handleProfitability = () => {
 		const profitability = getValues('minimum_profitability');
 
-		listPlatformConfigConstants();
-
 		const id = platformData?.list?.[INITIAL_ELEMENT]
 			.platform_config_constant_mappings?.[INITIAL_ELEMENT]?.id;
 
@@ -56,7 +54,6 @@ function Content(props) {
 			},
 		};
 		updatePlatformConfigMapping({ payload });
-		setValue('minimum_profitability', null);
 		setShowModal(false);
 	};
 
@@ -80,7 +77,14 @@ function Content(props) {
 					))}
 				</Tabs>
 				<div className={styles.settings}>
-					<IcMSettings onClick={() => setShowModal(true)} width="25px" height="25px" />
+					<IcMSettings
+						onClick={() => {
+							listPlatformConfigConstants();
+							setShowModal(true);
+						}}
+						width="25px"
+						height="25px"
+					/>
 					<Modal size="sm" show={showModal} onClose={() => setShowModal(false)}>
 						<Modal.Header title="Setting" />
 						<Modal.Body>
