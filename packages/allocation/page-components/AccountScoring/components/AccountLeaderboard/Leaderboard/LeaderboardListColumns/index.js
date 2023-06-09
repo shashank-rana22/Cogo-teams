@@ -59,8 +59,7 @@ const getLeaderBoardColumns = ({ setScoreTrendIds }) => [
 					service_type    : item.service_type,
 				})}
 			>
-				{}
-				<ScoreTrendChart trend={item.trend} data={item.data} />
+				<ScoreTrendChart trend={item.trend} data={item.data} source="leaderboard" />
 			</div>
 		),
 	},

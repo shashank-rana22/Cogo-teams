@@ -456,7 +456,11 @@ const allocation = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
-
+		{
+			api          : 'get_allocation_engagement_scoring_score_graph',
+			access_type  : 'private',
+			service_name : 'allocation',
+		},
 	],
 };
 
