@@ -5,6 +5,8 @@ import React, { useContext, useRef } from 'react';
 
 import styles from '../styles.module.css';
 
+const FIRST_ELEM = 0;
+
 function InvoicingPartyDetail({
 	invoice = {},
 	invoicesList = [],
@@ -21,7 +23,7 @@ function InvoicingPartyDetail({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[0]?.status;
+	)?.[FIRST_ELEM]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
