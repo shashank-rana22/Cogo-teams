@@ -1,0 +1,87 @@
+.module {
+	position: relative;
+	align-items: center;
+
+	&.new {
+		padding-bottom: 8px;
+	}
+
+	&.flex {
+		display: flex;
+	}
+
+	&.edit {
+		padding: 20px;
+		background-color: #f9f5ec;
+		border-radius: 6px;
+	}
+
+	.cross_icon {
+		position: absolute;
+		top: 8px;
+		right: 8px;
+		cursor: pointer;
+	}
+}
+
+.edit_text {
+	margin-bottom: 20px;
+	margin-left: 6px;
+	font-weight: 600;
+}
+
+.left {
+	margin-left: 20px;
+}
+
+.flex {
+	display: flex;
+}
+
+.name {
+	margin-left: 4px;
+}
+
+.icon {
+	cursor: pointer;
+}
+
+.select_container {
+	&.description {
+		margin-top: 16px;
+	}
+}
+
+.button_container {
+	position: absolute;
+	right: 20px;
+	bottom: 0;
+	display: flex;
+	align-items: center;
+	margin-bottom: 16px;
+
+	&.new {
+		margin-bottom: 4px;
+	}
+}
+
+.input_container {
+	width: 100%;
+	margin-bottom: 44px;
+}
+
+.error_message {
+	font-size: 12px;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.child_accordian {
+	:global {
+		.ui_accordion_content {
+			padding: unset;
+			margin: unset;
+			background-color: #fff;
+		}
+	}
+}
