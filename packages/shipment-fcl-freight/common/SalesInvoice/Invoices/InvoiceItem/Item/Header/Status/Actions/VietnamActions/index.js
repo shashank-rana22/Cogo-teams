@@ -25,7 +25,7 @@ const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: fal
 
 const DEFAULT_COUNT = 0;
 const INVOICE_SERIAL_ID_LESS_THAN = 8;
-const FIRST_ELEM = 0;
+const INVOICE_SERIAL_FIRST_CHAR = 0;
 
 function Actions({
 	invoice = {},
@@ -59,7 +59,7 @@ function Actions({
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice.serial_id.toString() || '';
-	const firstChar = invoice_serial_id[FIRST_ELEM];
+	const firstChar = invoice_serial_id[INVOICE_SERIAL_FIRST_CHAR];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < INVOICE_SERIAL_ID_LESS_THAN;
 

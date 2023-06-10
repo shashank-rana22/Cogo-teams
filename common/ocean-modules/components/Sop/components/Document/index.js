@@ -3,6 +3,8 @@ import { useState } from 'react';
 import Details from './Details';
 import DocumentForm from './DocumentForm';
 
+const DOCUMENT_FIRST = 0;
+
 function Document({
 	data = [],
 	shipment_ids = {},
@@ -10,7 +12,7 @@ function Document({
 	auditsTrigger = () => {},
 	primary_service = {},
 }) {
-	const { sop_detail = {}, id:instruction_id } = data[0] || {};
+	const { sop_detail = {}, id:instruction_id } = data[DOCUMENT_FIRST] || {};
 
 	const [showForm, setShowForm] = useState(false);
 

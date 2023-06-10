@@ -8,6 +8,8 @@ import getExternalPocData from '../../../helpers/getExternalPocData';
 import Card from './Card';
 import styles from './styles.module.css';
 
+const POC_FIRST = 0;
+
 function External({ tradePartnersData = {}, setAddPoc = () => {}, rolesPermission = {} }) {
 	const { external_poc_details: { poc_data = [] } = {} } = tradePartnersData || {};
 	const [showDetail, setShowDetail] = useState({});
@@ -18,7 +20,7 @@ function External({ tradePartnersData = {}, setAddPoc = () => {}, rolesPermissio
 		import : externalData.import || [],
 		export : externalData.export || [],
 	};
-	const { organization_branch_name = '' } = poc_data[0] || {};
+	const { organization_branch_name = '' } = poc_data[POC_FIRST] || {};
 
 	const addPermission = {
 		import : !!rolesPermission?.add_external_import_poc,

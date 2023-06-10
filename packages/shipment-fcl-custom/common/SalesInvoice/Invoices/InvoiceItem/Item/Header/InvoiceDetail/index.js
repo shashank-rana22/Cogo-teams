@@ -7,7 +7,9 @@ import React, { useContext } from 'react';
 
 import styles from '../styles.module.css';
 
-const FIRST_ELEM = 0;
+const INVOICE_LIST_FIRST = 0;
+
+const CREDIT_SOURCE_FIRST = 0;
 
 const SLICE_CREDIT_UPTO = -2;
 
@@ -33,7 +35,7 @@ function InvoiceDetail({
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === live_invoice_number,
-	)?.[FIRST_ELEM];
+	)?.[INVOICE_LIST_FIRST];
 
 	const handleDownload = (invoiceLink) => {
 		window.open(invoiceLink);
@@ -46,7 +48,7 @@ function InvoiceDetail({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[FIRST_ELEM]?.status;
+	)?.[INVOICE_LIST_FIRST]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
@@ -126,12 +128,12 @@ function InvoiceDetail({
 				{invoice?.payment_mode === 'credit' ? (
 					<div>
 						<div className={styles.info_container}>
-							{startCase(creditSource?.slice(FIRST_ELEM, SLICE_CREDIT_UPTO))}
+							{startCase(creditSource?.slice(CREDIT_SOURCE_FIRST, SLICE_CREDIT_UPTO))}
 						</div>
 
 						<div className={styles.payment_method}>
 							{startCase(
-								`${creditSource?.[(creditSource?.length ?? FIRST_ELEM) - CREDIT_INDEX_OFFSET]}
+								`${creditSource?.[(creditSource?.length ?? CREDIT_SOURCE_FIRST) - CREDIT_INDEX_OFFSET]}
 								 deferred payment`,
 							)}
 						</div>

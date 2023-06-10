@@ -10,7 +10,7 @@ import useUpdateInvoiceCombination from './useUpdateInvoiceCombination';
 
 const EXPORT_SERVICES_TYPES = 'fcl_freight_service';
 
-const FIRST_ELEM = 0;
+const SERVICE_KEY_SPLIT_FIRST = 0;
 
 const INVOICE_INDEX_GREATER_THAN = 0;
 
@@ -126,7 +126,7 @@ const useEditInvoicePref = ({
 					}
 
 					const currentService = invoicing_parties?.services?.find(
-						(serv) => serv?.id === service?.split(':')?.[FIRST_ELEM],
+						(serv) => serv?.id === service?.split(':')?.[SERVICE_KEY_SPLIT_FIRST],
 					);
 
 					let serviceType = currentService?.service_type;

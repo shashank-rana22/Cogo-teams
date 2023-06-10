@@ -31,15 +31,15 @@ function Internal({ data = [], setAddPoc = () => { }, loading = false, rolesPerm
 
 					<div>
 						{Object.keys(internalData).map((key) => (
-							<div className={styles.service_container}>
+							<div className={styles.service_container} key={key}>
 								<div className={styles.service_name}>{startCase(key)}</div>
+
 								<div>
 									<Stakeholders
 										data={internalData[key]}
 										setAddPoc={setAddPoc}
 										rolesPermission={rolesPermission}
 									/>
-
 								</div>
 							</div>
 						))}

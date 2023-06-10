@@ -5,6 +5,8 @@ import getServiceValues from '../helpers/get-service-values';
 
 import useGetControls from './useServiceUpsellControlsList';
 
+const SERVICE_KEY_SPLIT_FIRST = 0;
+
 const formatControls = (controls, service) => controls?.map((control) => {
 	if (control?.options && control?.name !== 'location_id') {
 		return {
@@ -27,7 +29,7 @@ function useServiceUpsellControls({
 }) {
 	const newServices = services.map((item) => ({
 		...item,
-		service_type: item?.service_type?.split('_service')?.[0],
+		service_type: item?.service_type?.split('_service')?.[SERVICE_KEY_SPLIT_FIRST],
 	}));
 	const { serviceWiseControls = {} } = useGetControls({ truckTypeToggle });
 

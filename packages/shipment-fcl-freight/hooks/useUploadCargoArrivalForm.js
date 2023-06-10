@@ -10,6 +10,8 @@ import { useRef } from 'react';
 import compareCargoArrivalData from '../utils/compareCargoArrivalData';
 import formatCargoArrivalData from '../utils/formatCargoArrivalData';
 
+const FIRST_DETAIL = 0;
+
 const cargoArrivalData = {
 	notify_party      : '',
 	consignee         : '',
@@ -98,24 +100,24 @@ const useUploadCargoArrivalForm = ({
 			? summary?.origin_port?.display_name || '' : '',
 		pan            : summary?.registration_number || '',
 		packages_count : summary?.packages_count ? String(summary?.packages_count) : '',
-		notify_party   : notify_party_details?.[0]?.company_name,
+		notify_party   : notify_party_details?.[FIRST_DETAIL]?.company_name,
 		consignee      : summary?.consignee_details?.company_name || summary?.consignee_detail?.company_name || '',
 		shipper        : summary?.consignee_details?.company_name || summary?.consignee_detail?.company_name || '',
 		containers     : [
 			{
-				...(cargoArrivalData?.containers?.[0] || {}),
+				...(cargoArrivalData?.containers?.[FIRST_DETAIL] || {}),
 				marks_and_number : 'Nm',
 				container_no     : container_numbers.join(', ') || '',
 			},
 		],
 		shipment_details: {
 			...(cargoArrivalData?.shipment_details || {}),
-			vessel     : movement_details?.[0]?.vessel || '',
-			voyage     : movement_details?.[0]?.voyage || '',
-			obl_number : mbl_details?.[0]?.data?.document_number || '',
-			hbl_no     : hbl_details?.[0]?.data?.document_number || '',
+			vessel     : movement_details?.[FIRST_DETAIL]?.vessel || '',
+			voyage     : movement_details?.[FIRST_DETAIL]?.voyage || '',
+			obl_number : mbl_details?.[FIRST_DETAIL]?.data?.document_number || '',
+			hbl_no     : hbl_details?.[FIRST_DETAIL]?.data?.document_number || '',
 			obl_date   : formatDate({
-				date       : mbl_details?.[0]?.updated_at,
+				date       : mbl_details?.[FIRST_DETAIL]?.updated_at,
 				dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 				formatType : 'date',
 			}),

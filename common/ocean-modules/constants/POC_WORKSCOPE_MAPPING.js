@@ -1,4 +1,4 @@
-const POC_WORKSCOPE_MAPPING = {
+export default {
 	commercial_decision_maker_poc : 'Commercial Decision Maker',
 	i_work_in_operations          : 'Operations',
 	off_field_operations_poc      : 'Off Field Operations',
@@ -17,5 +17,3 @@ const POC_WORKSCOPE_MAPPING = {
 	i_am_finance_manager          : 'Finance Manager',
 	i_am_signing_authority        : 'Signing Authority',
 };
-
-export default POC_WORKSCOPE_MAPPING;

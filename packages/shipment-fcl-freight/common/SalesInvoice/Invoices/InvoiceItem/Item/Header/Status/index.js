@@ -16,7 +16,7 @@ const API_SUCCESS_MESSAGE = {
 	approved : 'Invoice approved!,',
 };
 
-const FIRST_ELEM = 0;
+const INVOICE_LIST_FIRST = 0;
 
 const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
 
@@ -36,7 +36,7 @@ function Status({
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[FIRST_ELEM];
+	)?.[INVOICE_LIST_FIRST];
 
 	const showCN = BF_INVOICE_STATUS.includes(
 		bfInvoice?.status,
@@ -45,7 +45,7 @@ function Status({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
 			|| item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[FIRST_ELEM]?.status;
+	)?.[INVOICE_LIST_FIRST]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';

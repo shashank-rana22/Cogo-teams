@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useGetSopList from '../../hooks/useGetSopList';
@@ -54,7 +55,7 @@ function SopOld({ shipment_data = {}, primary_service = {} }) {
 		);
 	}
 
-	if (!loading && !trade_partners_loading && sops.length === 0) {
+	if (!loading && !trade_partners_loading && isEmpty(sops)) {
 		content = (
 			<div className={styles.empty_state}>
 				<EmptyState

@@ -25,7 +25,7 @@ const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: fal
 const INVOICE_SERAIL_ID_LESS_THAN = 8;
 const DEFAULT_COUNT = 0;
 const EMPTY_ARRAY_LENGTH = 0;
-const FIRST_ELEM = 0;
+const INVOICE_SERIAL_FIRST_CHAR = 0;
 
 const DISABLE_STATUS = ['reviewed', 'approved'];
 const REVIEW_STATUS = ['reviewed', 'approved', 'revoked'];
@@ -42,14 +42,17 @@ function Actions({
 	bfInvoice = {},
 }) {
 	const [show, setShow] = useState(false);
+	const [showModal, setShowModal] = useState(false);
+
 	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
 	const [showReview, setShowReview] = useState(false);
 	const [showAddRemarks, setShowAddRemarks] = useState(false);
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setOTPModal] = useState(false);
-	const showForOldShipments =	shipment_data.serial_id
-	<= GLOBAL_CONSTANTS.others.old_shipment_serial_id && invoice.status === 'pending';
+
+	const showForOldShipments =	shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	&& invoice.status === 'pending';
 
 	const disableActionCondition = DISABLE_STATUS.includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
@@ -64,7 +67,7 @@ function Actions({
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice.serial_id.toString() || '';
-	const firstChar = invoice_serial_id[FIRST_ELEM];
+	const firstChar = invoice_serial_id[INVOICE_SERIAL_FIRST_CHAR];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < INVOICE_SERAIL_ID_LESS_THAN;
 
@@ -270,17 +273,17 @@ function Actions({
 
 			{showReview ? (
 				<ReviewServices
-					showReview={showReview}
-					setShowReview={setShowReview}
+					show={showReview}
+					setShow={setShowReview}
 					invoice={invoice}
 					refetch={handleRefetch}
 				/>
 			) : null}
 
-			{isChangeCurrency ? (
+			{showModal === 'isChangeCurrency' ? (
 				<ChangeCurrency
-					isChangeCurrency={isChangeCurrency}
-					setIsChangeCurrency={setIsChangeCurrency}
+					show={showModal}
+					setShowModal={setShowModal}
 					invoice={invoice}
 					refetch={handleRefetch}
 				/>

@@ -1,3 +1,6 @@
+const CONTAINERS_FIRST = 0;
+const CONTAINERS_MIN_LENGTH = 1;
+
 const useDefaultValues = (initialValues) => {
 	const emptyValues = {
 		consigner              : '',
@@ -33,14 +36,14 @@ const useDefaultValues = (initialValues) => {
 		...initialValues,
 	};
 
-	if (customDefaultValues?.containers?.length > 1) {
-		const newContainers = [];
+	if (customDefaultValues?.containers?.length > CONTAINERS_MIN_LENGTH) {
+		const NEW_CONTAINERS = [];
 		customDefaultValues?.containers?.forEach((element, i) => {
-			if (i > 0) {
-				newContainers.push(element);
+			if (i > CONTAINERS_FIRST) {
+				NEW_CONTAINERS.push(element);
 			}
 		});
-		customDefaultValues.containers = newContainers;
+		customDefaultValues.containers = NEW_CONTAINERS;
 	} else {
 		customDefaultValues.containers = emptyValues.containers;
 	}

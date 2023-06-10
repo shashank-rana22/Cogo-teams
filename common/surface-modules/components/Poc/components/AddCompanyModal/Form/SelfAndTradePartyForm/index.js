@@ -9,7 +9,7 @@ import {
 } from '@cogoport/forms';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
 import formValuePatterns from '../../../../../../utils/formValuePatterns';

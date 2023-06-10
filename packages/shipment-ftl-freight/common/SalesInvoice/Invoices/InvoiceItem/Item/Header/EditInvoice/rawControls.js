@@ -1,6 +1,9 @@
-import FTL_UNITS from '@cogoport/surface-modules/contants/FTL_UNITS';
+import FTL_UNITS from '@cogoport/surface-modules/constants/FTL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
+
+const PRICE_GREATER_THAN = 0;
+const MIN_ALIAS_LENGTH = 3;
 
 const handleDisableCond = (charge, isFclFreight, shipment_data) => {
 	const disable =	!isFclFreight && shipment_data?.serial_id > 130000;
@@ -66,7 +69,7 @@ const rawControls = (
 			),
 			placeholder : 'Enter alias name/code',
 			rules       : {
-				validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
+				validate: (v) => v?.length >= MIN_ALIAS_LENGTH || isEmpty(v) || 'Characters should be >= 3',
 			},
 			disabled : handleDisableCond(charge, isFclFreight, shipment_data),
 			span     : 2,
@@ -98,7 +101,7 @@ const rawControls = (
 			span        : 1.5,
 			rules       : {
 				required : 'Price is Required',
-				validate : (v) => v > 0 || 'Price must be greater than 0',
+				validate : (v) => v > PRICE_GREATER_THAN || 'Price must be greater than 0',
 			},
 			disabled: handleDisableCond(charge, isFclFreight, shipment_data),
 		},

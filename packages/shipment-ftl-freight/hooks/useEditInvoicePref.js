@@ -13,7 +13,7 @@ const geo = getGeoConstants();
 const INVOICE_INDEX_GREATER_THAN = 0;
 const UNIQ_IGST_VAL_LENGTH = 1;
 const PARTY_SERVICES_LENGTH_GREATER_THAN = 1;
-const FIRST_ELEM = 0;
+const SERVICE_KEY_SPLIT_FIRST = 0;
 
 const isAllServicesTaken = (
 	servicesList,
@@ -168,7 +168,7 @@ const useEditInvoicePref = ({
 					}
 
 					const currentService = invoicing_parties?.services?.find(
-						(serv) => serv?.id === service?.split(':')?.[FIRST_ELEM],
+						(serv) => serv?.id === service?.split(':')?.[SERVICE_KEY_SPLIT_FIRST],
 					);
 
 					let serviceType = currentService?.service_type;

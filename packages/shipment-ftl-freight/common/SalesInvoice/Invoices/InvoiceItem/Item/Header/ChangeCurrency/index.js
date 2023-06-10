@@ -9,13 +9,13 @@ import useUpdateCurrency from '../../../../../../../hooks/useUpdateCurrency';
 import styles from './styles.module.css';
 
 function ChangeCurrency({
-	isChangeCurrency = false,
-	setIsChangeCurrency = () => {},
+	show = false,
+	setShow = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
 	const onClose = () => {
-		setIsChangeCurrency(false);
+		setShow(false);
 	};
 	const [value, setValue] = useState('');
 
@@ -51,7 +51,7 @@ function ChangeCurrency({
 	return (
 		<Modal
 			className={styles.form}
-			show={isChangeCurrency}
+			show={show === 'isChangeCurrency'}
 			closeOnOuterClick={false}
 			showCloseIcon={false}
 		>
@@ -71,7 +71,7 @@ function ChangeCurrency({
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => setIsChangeCurrency(false)}
+					onClick={() => setShow(false)}
 					disabled={loading}
 				>
 					Cancel
