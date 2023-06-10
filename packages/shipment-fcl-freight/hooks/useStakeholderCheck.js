@@ -1,5 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 const FIRST_MATCHING_STAKEHOLDER = 0;
 const geo = getGeoConstants();
@@ -15,7 +16,7 @@ export const useStakeholderCheck = () => {
 		{ role_ids: geo.uuid.so_1_manager, stakeholder: 'booking_desk_manager' },
 		{ role_ids: geo.uuid.service_ops2_role_id, stakeholder: 'document_desk' },
 		{ role_ids: geo.uuid.so_2_manager, stakeholder: 'document_desk_manager' },
-		{ role_ids: [geo.uuid.super_admin_id, geo.uuid.tech_super_admin_id], stakeholder: 'superadmin' },
+		{ role_ids: geo.uuid.super_admin_id, stakeholder: 'superadmin' },
 		{ role_ids: geo.uuid.sales_role, stakeholder: 'sales_agent' },
 		{ role_ids: geo.uuid.admin_id, stakeholder: 'admin' },
 		{ role_ids: geo.uuid.costbooking_ops_role_ids, stakeholder: 'costbooking_ops' },
@@ -23,6 +24,7 @@ export const useStakeholderCheck = () => {
 		{ role_ids: [geo.uuid.lastmile_ops_id], stakeholder: 'lastmile_ops' },
 		{ role_ids: geo.uuid.lastmile_ops_manager_id, stakeholder: 'lastmile_ops_manager' },
 		{ role_ids: geo.uuid.prod_process_owner, stakeholder: 'prod_process_owner' },
+		{ role_ids: geo.uuid.tech_super_admin_id, stakeholder: 'tech_super_admin' },
 		{ role_ids: geo.uuid.so1_so2_role_id, stakeholder: 'so1_so2_ops' },
 		{
 			role_ids: [geo.uuid.coe_finance_head,
@@ -36,9 +38,8 @@ export const useStakeholderCheck = () => {
 	const matchingStakeholders = stakeholderMap
 		.filter(({ role_ids: ids }) => (role_ids || []).some((item) => ids.includes(item)));
 
-	const activeStakeholder = matchingStakeholders.length > FIRST_MATCHING_STAKEHOLDER
-		? matchingStakeholders[FIRST_MATCHING_STAKEHOLDER].stakeholder
-		: '';
+	const activeStakeholder = !isEmpty(matchingStakeholders)
+		? matchingStakeholders[FIRST_MATCHING_STAKEHOLDER].stakeholder : '';
 
 	return {
 		activeStakeholder,

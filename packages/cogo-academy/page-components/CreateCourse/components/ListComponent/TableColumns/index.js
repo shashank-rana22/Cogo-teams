@@ -6,6 +6,8 @@ import { CourseButtons } from './components/ButtonComponent';
 import SortComponent from './components/SortComponent';
 import styles from './styles.module.css';
 
+const MAX_LENGTH = 1;
+
 const getState = ({ state, status }) => {
 	if (status === 'inactive') {
 		return { state: 'Inactive', color: '#ff8888' };
@@ -65,10 +67,10 @@ export const studentColumns = () => [
 	},
 	{
 		Header   : 'Courses Completion %',
-		id       : 'subjective_questions',
-		accessor : ({ total_courses = 0, courses_completion = 0 }) => (
+		id       : 'courses_completion',
+		accessor : ({ courses_completion = 0 }) => (
 			<section>
-				{total_courses ? courses_completion / total_courses : 0}
+				{courses_completion}
 				%
 			</section>
 		),
@@ -160,7 +162,7 @@ export const courseColumns = ({
 			return (
 				<div>
 					{topicsArr.map((item, index) => {
-						if (index > 0) {
+						if (index) {
 							return null;
 						}
 
@@ -175,7 +177,10 @@ export const courseColumns = ({
 							</Pill>
 						);
 					})}
-					{topicsArr.length > 1 ? <Pill color="#F7FAEF">{`+${topicsArr.length - 1} More`}</Pill> : null}
+
+					{topicsArr.length > MAX_LENGTH
+						? <Pill color="#F7FAEF">{`+${topicsArr.length - MAX_LENGTH} More`}</Pill> : null}
+
 					<Tooltip
 						theme="light"
 						placement="bottom"
