@@ -12,11 +12,10 @@ import CargoDetails from './CargoDetails';
 export default function Card({ item = {}, couldBeCardsCritical = false }) {
 	const router = useRouter();
 	const handleCardClick = (e) => {
-		window.location.href = e.target.href;
-
-		window.sessionStorage.setItem('prev_nav', e.target.href);
-		window.location.href = e.target.href;
+		const newUrl = e.currentTarget.href;
+		window.sessionStorage.setItem('prev_nav', newUrl);
 	};
+
 	const criticalClass = couldBeCardsCritical && isCardCritical({ item }) ? styles.critical_card : '';
 
 	return (

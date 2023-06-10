@@ -7,10 +7,10 @@ import NUMERICAL_VALUES from '../../../../../config/NUMERICAL_VALUES.json';
 import { renderValue } from './renderCargoValue';
 import styles from './styles.module.css';
 
-const labels = ['container_size', 'container_type', 'commodity', 'containers_count'];
+const LABELS = ['container_size', 'container_type', 'commodity', 'containers_count'];
 
 const renderCargoPills = (cargo_detail) => (
-	labels.map((label) => (cargo_detail[label]
+	LABELS.map((label) => (cargo_detail[label]
 		? (
 			<Pill size="sm" key={label}>
 				{renderValue(label, cargo_detail[label])}
