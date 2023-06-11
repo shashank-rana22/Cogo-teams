@@ -128,6 +128,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
+												notation        : 'comapct',
 											},
 										}),
 									)}
@@ -150,6 +151,8 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 												options  : {
 													style           : 'currency',
 													currencyDisplay : 'code',
+													notation        : 'comapct',
+
 												},
 											}),
 										)}
@@ -192,6 +195,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 												options  : {
 													style           : 'currency',
 													currencyDisplay : 'code',
+													notation        : 'comapct',
 												},
 											}),
 										)}
@@ -241,6 +245,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 													options  : {
 														style           : 'currency',
 														currencyDisplay : 'code',
+														notation        : 'comapct',
 													},
 												}),
 											)}
@@ -297,6 +302,7 @@ function TotalPayablesRecievables({ globalFilters, entityTabFilters }) {
 													options  : {
 														style           : 'currency',
 														currencyDisplay : 'code',
+														notation        : 'comapct',
 													},
 												}),
 											)}

@@ -26,6 +26,7 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
 					},
 				}),
 			),
@@ -49,6 +50,8 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
+
 					},
 				}),
 			),
@@ -72,6 +75,8 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
+
 					},
 				}),
 			),
@@ -95,6 +100,8 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
+
 					},
 				}),
 			),
@@ -118,6 +125,8 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
+
 					},
 				}),
 			),
@@ -141,6 +150,8 @@ const OverallReceivablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
+
 					},
 				}),
 			),

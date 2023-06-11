@@ -11,7 +11,6 @@ import { statsTabs } from '../../constants/service_base_key_mapping';
 import useGetAccordianCardData from '../../hooks/getAccordianCardData';
 import useGetAccordianStatsData from '../../hooks/getAccordianStatsCardData';
 import showInTooltop from '../../utils/getOverFlowData';
-import { getAmountInLakhCrK } from '../getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
@@ -39,7 +38,7 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 		Ocean   : <IcMOceanSchedules height={24} width={24} />,
 	};
 
-	const [subActiveTab, setSubActiveTab] = useState<string>('overall');
+	const [subActiveTab, setSubActiveTab] = useState('overall');
 	const [viewButton, setViewButton] = useState({
 		Ocean   : false,
 		Surface : false,
@@ -114,9 +113,17 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																		currencyDisplay : 'code',
 																	},
 																}),
-																getAmountInLakhCrK(Math.abs(
-																	item.accountRec + item.accountPay,
-																), GLOBAL_CONSTANTS.currency_code.INR),
+																formatAmount({
+																	amount:	Math.abs(
+																		item.accountRec + item.accountPay,
+																	) as any,
+																	currency : GLOBAL_CONSTANTS.currency_code.INR,
+																	options  : {
+																		style           : 'currency',
+																		currencyDisplay : 'code',
+																		notation        : 'compact',
+																	},
+																}),
 															)}
 														</div>
 													</div>
@@ -141,10 +148,15 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																currencyDisplay : 'code',
 															},
 														}),
-														getAmountInLakhCrK(
-															item?.accountRec,
-															GLOBAL_CONSTANTS.currency_code.INR,
-														),
+														formatAmount({
+															amount   :	item?.accountRec,
+															currency :	GLOBAL_CONSTANTS.currency_code.INR,
+															options  : {
+																style           : 'currency',
+																currencyDisplay : 'code',
+																notation        : 'compact',
+															},
+														}),
 													)}
 												</div>
 											)}
@@ -167,10 +179,15 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																currencyDisplay : 'code',
 															},
 														}),
-														getAmountInLakhCrK(
-															Math.abs(item?.accountPay),
-															GLOBAL_CONSTANTS.currency_code.INR,
-														),
+														formatAmount({
+															amount   :	Math.abs(item?.accountPay) as any,
+															currency :	GLOBAL_CONSTANTS.currency_code.INR,
+															options  : {
+																style           : 'currency',
+																currencyDisplay : 'code',
+																notation        : 'compact',
+															},
+														}),
 													)}
 												</div>
 											)}
@@ -300,16 +317,22 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																							currencyDisplay: 'code',
 																						},
 																					}),
-																					getAmountInLakhCrK(
-																						(
+																					formatAmount({
+																						amount:	(
 																							accordianStatsData
 																								?.cardDataAr
 																|| {})[((serviceDataMapping[item?.service]
 																|| {})[val?.key] || {})?.AR]
 																|| '',
-																						GLOBAL_CONSTANTS
+																						currency:	GLOBAL_CONSTANTS
 																							.currency_code.INR,
-																					),
+																						options: {
+																							style:
+																								'currency',
+																							currencyDisplay : 'code',
+																							notation        : 'compact',
+																						},
+																					}),
 																				)}
 																			</div>
 																		</div>
@@ -331,15 +354,21 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																							currencyDisplay: 'code',
 																						},
 																					}),
-																					getAmountInLakhCrK(
-																						(
+																					formatAmount({
+																						amount:	(
 																							(accordianStatsData
 																								?.cardDataAp
 																|| {})[((serviceDataMapping[item?.service]
-																|| {})[val?.key] || {})?.AR] || '') * -1,
-																						GLOBAL_CONSTANTS
+																|| {})[val?.key] || {})?.AR] || '') * -1 as any,
+																						currency:	GLOBAL_CONSTANTS
 																							.currency_code.INR,
-																					),
+																						options: {
+																							style:
+																								'currency',
+																							currencyDisplay : 'code',
+																							notation        : 'compact',
+																						},
+																					}),
 																				)}
 																			</div>
 																		</div>
@@ -375,11 +404,17 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																		currencyDisplay: 'code',
 																	},
 																}),
-																getAmountInLakhCrK(
-																	accordianStatsData
+																formatAmount({
+																	amount:	accordianStatsData
 																		?.arData?.overdueAmount,
-																	GLOBAL_CONSTANTS.currency_code.INR,
-																),
+																	currency :	GLOBAL_CONSTANTS.currency_code.INR,
+																	options  : {
+																		style:
+																	'currency',
+																		currencyDisplay : 'code',
+																		notation        : 'compact',
+																	},
+																}),
 															)}
 														</div>
 														<div>Account Receivables</div>
@@ -433,11 +468,17 @@ function AccordianCards({ globalFilters, entityTabFilters }) {
 																		currencyDisplay: 'code',
 																	},
 																}),
-																getAmountInLakhCrK(
-																	Math.abs(accordianStatsData
-																		?.apData?.overdueAmount),
-																	GLOBAL_CONSTANTS.currency_code.INR,
-																),
+																formatAmount({
+																	amount:	Math.abs(accordianStatsData
+																		?.apData?.overdueAmount) as any,
+																	currency :	GLOBAL_CONSTANTS.currency_code.INR,
+																	options  : {
+																		style:
+																	'currency',
+																		currencyDisplay : 'code',
+																		notation        : 'compact',
+																	},
+																}),
 															)}
 														</div>
 														<div>Account Payables</div>

@@ -142,6 +142,7 @@ function TreasuryStatistics() {
 												options  : {
 													style           : 'currency',
 													currencyDisplay : 'code',
+													notation        : 'compact',
 												},
 											}),
 										)}
@@ -174,6 +175,8 @@ function TreasuryStatistics() {
 												options  : {
 													style           : 'currency',
 													currencyDisplay : 'code',
+													notation        : 'compact',
+
 												},
 											}),
 										)}
@@ -205,6 +208,8 @@ function TreasuryStatistics() {
 												options  : {
 													style           : 'currency',
 													currencyDisplay : 'code',
+													notation        : 'compact',
+
 												},
 											}),
 										)}
@@ -236,6 +241,8 @@ function TreasuryStatistics() {
 												options  : {
 													style           : 'currency',
 													currencyDisplay : 'code',
+													notation        : 'compact',
+
 												},
 											}),
 										)}

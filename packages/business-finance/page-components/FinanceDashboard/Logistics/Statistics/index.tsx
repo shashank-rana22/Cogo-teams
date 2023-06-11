@@ -77,6 +77,8 @@ function Statistics({ globalFilters, entityTabFilters }) {
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
+												notation        : 'compact',
+
 											},
 										}),
 									)}
@@ -118,6 +120,8 @@ function Statistics({ globalFilters, entityTabFilters }) {
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
+												notation        : 'compact',
+
 											},
 										}),
 									)}
@@ -161,6 +165,8 @@ function Statistics({ globalFilters, entityTabFilters }) {
 											options  : {
 												style           : 'currency',
 												currencyDisplay : 'code',
+												notation        : 'compact',
+
 											},
 										}),
 									)}

@@ -150,8 +150,12 @@ const useReceivablesDashboard = (entityCode: string) => {
 	}, [ageingBucketData, dailySalesOutstandingApi, quaterlyDataApi]);
 
 	useEffect(() => {
-		kamOutstandingTrigger();
-	}, [kamOutstandingTrigger]);
+		kamOutstandingTrigger({
+			params: {
+				entityCode: entityCode || undefined,
+			},
+		});
+	}, [kamOutstandingTrigger, entityCode]);
 
 	useEffect(() => { outstandingApi(); }, [outstandingApi]);
 

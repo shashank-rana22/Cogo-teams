@@ -26,6 +26,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
 					},
 				}),
 			),
@@ -49,6 +50,8 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
+
 					},
 				}),
 			),
@@ -73,6 +76,8 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
+
 					},
 				}),
 			),
@@ -96,6 +101,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
 					},
 				}),
 			),
@@ -119,6 +125,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
 					},
 				}),
 			),
@@ -142,6 +149,7 @@ const OverallPayablesStatsKeyMapping = ({ accordianStatsData }) => {
 					options  : {
 						style           : 'currency',
 						currencyDisplay : 'code',
+						notation        : 'compact',
 					},
 				}),
 			),
