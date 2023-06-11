@@ -7,16 +7,17 @@ const getControls = () => {
 			width     : '50%',
 			marginTop : '20px',
 		},
-		suffix: <div style={{
-			borderLeft : '1px solid #DEDEDE',
-			width      : '41px',
-			height     : '32px',
-			textAlign  : 'center',
-			paddingTop : '4px',
-		}}
-		>
-			%
-		</div>,
+		suffix:
+	<div style={{
+		borderLeft : '1px solid #DEDEDE',
+		width      : '41px',
+		height     : '32px',
+		textAlign  : 'center',
+		paddingTop : '4px',
+	}}
+	>
+		%
+	</div>,
 		rules: {
 			required: {
 				value   : true,
