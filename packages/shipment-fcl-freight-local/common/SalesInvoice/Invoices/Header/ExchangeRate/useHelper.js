@@ -30,15 +30,15 @@ const useHelper = ({ invoiceCurrency = '', refetch = () => {} }) => {
 	const updatedCurrencyConversionRate = exchangeRateApiData?.updated_currency_conversion_rate;
 	const currency_conversion_delta = exchangeRateApiData?.updated_currency_conversion_rate?.currency_conversion_delta;
 
-	LINE_ITEMSect.keys(allCurrenciesWithConversionFactor || {})?.forEach((currency) => {
+	Object.keys(allCurrenciesWithConversionFactor || {})?.forEach((currency) => {
 		if (DIFFERENT_CURRENCIES_HASH[currency]) {
 			AVAILABLE_CURRENCY_CONVERSION[currency] = allCurrenciesWithConversionFactor[currency]
 					* (CURRENCY_CONVERSION_FACTOR + currency_conversion_delta);
 		}
 	});
-	LINE_ITEMSect.keys(AVAILABLE_CURRENCY_CONVERSION || {})?.forEach((currency) => {
+	Object.keys(AVAILABLE_CURRENCY_CONVERSION || {})?.forEach((currency) => {
 		if (invoiceCurrency === updatedCurrencyConversionRate?.base_currency) {
-			LINE_ITEMSect.keys(updatedCurrencyConversionRate?.currencies || {})?.forEach(
+			Object.keys(updatedCurrencyConversionRate?.currencies || {})?.forEach(
 				(updatedCurrency) => {
 					if (currency === updatedCurrency) {
 						AVAILABLE_CURRENCY_CONVERSION[currency] = updatedCurrencyConversionRate
