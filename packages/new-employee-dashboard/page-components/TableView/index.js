@@ -13,7 +13,6 @@ import useTableView from './useTableView';
 const TOTAL_COUNT = 10;
 const INITIAL_TOTAL_COUNT = 0;
 const INITIAL_PAGE = 1;
-const ARRAY_LENGTH = 0;
 
 function TableView({ search, setSearch }) {
 	const { btnloading, updateEmployeeStatus } = useRejectAction();
@@ -48,7 +47,7 @@ function TableView({ search, setSearch }) {
 				</div>
 			</div>
 
-			{isEmpty(list || []) || loading ? (
+			{!isEmpty(list || []) || loading ? (
 				<>
 					<StyledTable
 						columns={columns}

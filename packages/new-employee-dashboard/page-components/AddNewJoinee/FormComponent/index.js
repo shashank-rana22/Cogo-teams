@@ -1,25 +1,16 @@
 import { Button, Toast } from '@cogoport/components';
-import {
-	InputController, SelectController, MobileNumberController, useForm, DatepickerController, AsyncSelectController,
-} from '@cogoport/forms';
+import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { IcMArrowBack } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 import React, { useState } from 'react';
 
+import getElementController from '../../../configs/getElementController';
 import BulkUpload from '../BulkUpload';
 
 import controls from './controls';
 import styles from './styles.module.css';
-
-const CONTROLS_MAPPING = {
-	text            : InputController,
-	mobileNumber    : MobileNumberController,
-	SingleDateRange : DatepickerController,
-	select          : SelectController,
-	asyncSelect     : AsyncSelectController,
-};
 
 const PERSONAL_DETAILS_MAPPING = ['name', 'personal_email', 'mobile_number'];
 
@@ -45,6 +36,37 @@ const SECTION_MAPPING = [
 		fields         : HR_DETAILS_MAPPING,
 	},
 ];
+
+const RenderFields = ({ show, control, errors }) => (Object.keys(controls) || []).map((controlItem) => {
+	const { name = '', label = '', type = '' } = controls[controlItem] || {};
+	if (!show.includes(name)) {
+		return null;
+	}
+	const DynamicController = getElementController(type);
+
+	return (
+		<div key={name} className={styles.single_field}>
+			<div className={styles.label}>
+				{label}
+			</div>
+
+			<div className={styles.controller_wrapper}>
+				<DynamicController
+					{...controls[controlItem]}
+					control={control}
+					name={name}
+				/>
+			</div>
+
+			{errors[name] ? (
+				<div className={styles.error_message}>
+					{' '}
+					{errors[name]?.message}
+				</div>
+			) : null}
+		</div>
+	);
+});
 
 function FormComponent({ setActivePage }) {
 	const [bulkUploadComponent, setBulkUploadComponent] = useState(false);
@@ -77,37 +99,6 @@ function FormComponent({ setActivePage }) {
 			Toast.error(getApiErrorString(error.response?.data));
 		}
 	};
-
-	const renderFields = ({ show }) => (Object.keys(controls) || []).map((controlItem) => {
-		const { name = '', label = '', type = '' } = controls[controlItem] || {};
-		if (!show.includes(name)) {
-			return null;
-		}
-		const DynamicController = CONTROLS_MAPPING[type];
-
-		return (
-			<div key={name} className={styles.single_field}>
-				<div className={styles.label}>
-					{label}
-				</div>
-
-				<div className={styles.controller_wrapper}>
-					<DynamicController
-						{...controls[controlItem]}
-						control={control}
-						name={name}
-					/>
-				</div>
-
-				{errors[name] ? (
-					<div className={styles.error_message}>
-						{' '}
-						{errors[name]?.message}
-					</div>
-				) : null}
-			</div>
-		);
-	});
 
 	if (bulkUploadComponent) {
 		return <BulkUpload setBulkUploadComponent={setBulkUploadComponent} />;
@@ -142,7 +133,7 @@ function FormComponent({ setActivePage }) {
 					<div className={styles.seperator} key={section}>
 						<div className={styles.form_header}>{section.header}</div>
 						<div className={section.containerStyle}>
-							{renderFields({ show: section.fields })}
+							<RenderFields show={section?.fields} control={control} errors={errors} />
 						</div>
 					</div>
 				))}

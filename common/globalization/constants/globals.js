@@ -35,6 +35,7 @@ const GLOBAL_CONSTANTS = {
 	formats: {
 		date: {
 			'dd/MM/yyyy'        : 'dd/MM/yyyy',
+			'DD/MM/YYYY'        : 'DD/MM/YYYY',
 			'dd MMM yyyy'       : 'dd MMM yyyy',
 			'dd MMMM yyyy'      : 'dd MMMM yyyy',
 			'eee, dd MMM, yyyy' : 'eee, dd MMM, yyyy',

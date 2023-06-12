@@ -26,7 +26,7 @@ const controls = [
 	{
 		name        : 'mobile_number',
 		label       : 'Contact Details',
-		type        : 'mobileNumber',
+		type        : 'mobile-number-select',
 		inputType   : 'number',
 		placeholder : 'Mobile Number*',
 		rules       : {
