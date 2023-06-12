@@ -25,7 +25,7 @@ function Content(props) {
 	const { getRfqsForApproval, data = {}, page, setPage, loading } = useListRfqs({ filterStore });
 	const {
 		listPlatformConfigConstants,
-		data : platformData, loading : platformLoading,
+		data : platformData,
 	} = useListPlatformConfigConstants({ setValue });
 
 	const {
@@ -117,8 +117,8 @@ function Content(props) {
 								<Button
 									onClick={handleProfitability}
 									themeType="accent"
-									loading={platformLoading || updateLoading}
-									disabled={platformLoading || updateLoading}
+									loading={updateLoading}
+									disabled={updateLoading}
 								>
 									Save
 
