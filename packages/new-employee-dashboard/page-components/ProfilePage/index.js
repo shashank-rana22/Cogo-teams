@@ -59,7 +59,7 @@ function ProfilePage() {
 
 			<div className={styles.tab_container}>
 				<Tabs activeTab={activeTab} themeType="primary" onChange={setActiveTab}>
-					{Object.keys(TABS_MAPPING).map((tab) => {
+					{(Object.keys(TABS_MAPPING) || []).map((tab) => {
 						const Component = TABS_MAPPING[tab];
 						return (
 							<TabPanel name={tab} title={startCase(tab)} key={tab}>
