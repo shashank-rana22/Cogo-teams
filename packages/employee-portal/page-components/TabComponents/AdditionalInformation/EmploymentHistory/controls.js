@@ -15,7 +15,7 @@ const getControls = [{
 			name                  : 'started_at',
 			label                 : 'Start Date',
 			type                  : 'date-select',
-			placeholder           : GLOBAL_CONSTANTS.formats.date['DD/MM/YYYY'],
+			placeholder           : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'].toUpperCase(),
 			isPreviousDaysAllowed : true,
 			rules                 : { required: 'This is required' },
 			style                 : {
@@ -26,7 +26,7 @@ const getControls = [{
 			name                  : 'ended_at',
 			label                 : 'End Date',
 			type                  : 'date-select',
-			placeholder           : GLOBAL_CONSTANTS.formats.date['DD/MM/YYYY'],
+			placeholder           : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'].toUpperCase(),
 			isPreviousDaysAllowed : true,
 			rules                 : { required: 'This is required' },
 			style                 : {
