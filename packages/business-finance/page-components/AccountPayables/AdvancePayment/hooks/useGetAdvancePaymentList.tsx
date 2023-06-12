@@ -7,7 +7,7 @@ import { useCallback, useEffect, useState } from 'react';
 import styles from './styles.module.css';
 
 interface ItemProps {
-	advanceDocumentId?:string,
+	advanceDocumentId?: string;
 }
 
 interface Target {
@@ -18,9 +18,9 @@ interface EventDataType {
 }
 
 interface NewDataListProps {
-	payableAmount:string,
-	tdsAmount:string,
-	invoiceAmount:string,
+	payableAmount: string;
+	tdsAmount: string;
+	invoiceAmount: string;
 }
 interface NestedObj {
 	[key: string]: string;
@@ -28,16 +28,18 @@ interface NestedObj {
 interface FilterProps {
 	activeEntity?: string;
 	sort: NestedObj;
-	viewSelectedInvoice?:boolean;
+	viewSelectedInvoice?: boolean;
 }
-const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:FilterProps) => {
-	const {
-		user_data:UserData,
-	} = useSelector(({ profile }) => ({
+const useGetAdvancePaymentList = ({
+	activeEntity,
+	sort,
+	viewSelectedInvoice,
+}: FilterProps) => {
+	const { user_data: UserData } = useSelector(({ profile }) => ({
 		user_data: profile || {},
 	}));
-	const { user, session_type:sessionType } = UserData;
-	const { id:userId = '', name } = user || {};
+	const { user, session_type: sessionType } = UserData;
+	const { id: userId = '', name } = user || {};
 	const [filters, setFilters] = useState({
 		search    : undefined,
 		service   : undefined,
@@ -47,9 +49,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 
 	const { search, service, pageIndex } = filters || {};
 	const { query = '', debounceQuery } = useDebounceQuery();
-	const {
-		query: urlQuery,
-	} = useSelector(({ general }) => ({
+	const { query: urlQuery } = useSelector(({ general }) => ({
 		query: general.query,
 	}));
 
@@ -63,10 +63,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 	useEffect(() => {
 		debounceQuery(search);
 	}, [debounceQuery, search]);
-	const [
-		{ data, loading },
-		trigger,
-	] = useRequestBf(
+	const [{ data, loading }, trigger] = useRequestBf(
 		{
 			url     : '/purchase/advance-document/list',
 			method  : 'get',
@@ -76,7 +73,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 	);
 
 	const [
-		{ data:selectedData, loading:selectedDataLoading },
+		{ data: selectedData, loading: selectedDataLoading },
 		addToSelectedTrigger,
 	] = useRequestBf(
 		{
@@ -88,7 +85,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 	);
 
 	const [
-		{ data:viewSelectedData, loading:viewSelectedDataLoading },
+		{ data: viewSelectedData, loading: viewSelectedDataLoading },
 		viewSelectedTrigger,
 	] = useRequestBf(
 		{
@@ -100,7 +97,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 	);
 
 	const [
-		{ data:deleteSelectedInvoice, loading:deleteSelecteInvoiceLoading },
+		{ data: deleteSelectedInvoice, loading: deleteSelecteInvoiceLoading },
 		deleteSelectedInvoiceTrigger,
 	] = useRequestBf(
 		{
@@ -115,8 +112,12 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 		const newData = { ...data };
 		const { list = [] } = newData || {};
 		if (newData.list) {
-			newData.list = list.map((item:NewDataListProps) => {
-				const { payableAmount = '', tdsAmount = '', invoiceAmount = '' } = item || {};
+			newData.list = list.map((item: NewDataListProps) => {
+				const {
+					payableAmount = '',
+					tdsAmount = '',
+					invoiceAmount = '',
+				} = item || {};
 				return {
 					...item,
 					payableValue       : payableAmount,
@@ -148,14 +149,35 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 				console.log(err?.response?.data?.message);
 			}
 		})();
-	}, [query, trigger, activeEntity, service, pageIndex, sort, entity, currency]);
+	}, [
+		query,
+		trigger,
+		activeEntity,
+		service,
+		pageIndex,
+		sort,
+		entity,
+		currency,
+	]);
 
 	useEffect(() => {
-		if (viewSelectedInvoice === false || viewSelectedInvoice === undefined) {
+		if (
+			viewSelectedInvoice === false
+			|| viewSelectedInvoice === undefined
+		) {
 			getAdvancedPayment();
 			setApiData({ list: [] });
 		}
-	}, [getAdvancedPayment, activeEntity, service, entity, query, sort, pageIndex, viewSelectedInvoice]);
+	}, [
+		getAdvancedPayment,
+		activeEntity,
+		service,
+		entity,
+		query,
+		sort,
+		pageIndex,
+		viewSelectedInvoice,
+	]);
 
 	const submitSelectedInvoices = async () => {
 		const { list = [] } = apiData || {};
@@ -173,7 +195,9 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 
 			if (checked) {
 				if (!advanceDocumentSellerBankDetail) {
-					Toast.error(`Select Bank for Invoice Number ${invoiceNumber}`);
+					Toast.error(
+						`Select Bank for Invoice Number ${invoiceNumber}`,
+					);
 					return;
 				}
 
@@ -245,15 +269,32 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 				console.log(error?.response?.data?.message);
 			}
 		})();
-	}, [viewSelectedTrigger, pageIndex, payrun, selectedPayRunId, query, activeEntity, entity, service, sort]);
+	}, [
+		viewSelectedTrigger,
+		pageIndex,
+		payrun,
+		selectedPayRunId,
+		query,
+		activeEntity,
+		entity,
+		service,
+		sort,
+	]);
 
 	useEffect(() => {
 		if (viewSelectedInvoice) {
 			getViewSelectedInvoices();
 		}
-	}, [getViewSelectedInvoices, service, query, sort, pageIndex, viewSelectedInvoice]);
+	}, [
+		getViewSelectedInvoices,
+		service,
+		query,
+		sort,
+		pageIndex,
+		viewSelectedInvoice,
+	]);
 
-	const deleteInvoices = async (id:string) => {
+	const deleteInvoices = async (id: string) => {
 		try {
 			await deleteSelectedInvoiceTrigger({
 				data: {
@@ -268,7 +309,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 		}
 	};
 
-	const onChangeTableHeaderCheckbox = (event:EventDataType) => {
+	const onChangeTableHeaderCheckbox = (event: EventDataType) => {
 		setApiData((prevData) => {
 			const { list = [] } = prevData || {};
 			const newList = list.map((item) => ({
@@ -281,10 +322,8 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 
 	const getTableHeaderCheckbox = () => {
 		const { list = [] } = apiData || {};
-		const { list:dataList = [] } = data || {};
-		const isCheckedLength = list.filter(
-			(value) => value?.checked,
-		).length;
+		const { list: dataList = [] } = data || {};
+		const isCheckedLength = list.filter((value) => value?.checked).length;
 		const isAllRowsChecked = isCheckedLength === dataList.length;
 		return (
 			<div className={styles.checkbox_style}>
@@ -296,7 +335,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 		);
 	};
 
-	const onChangeTableBodyCheckbox = (itemData:ItemProps) => {
+	const onChangeTableBodyCheckbox = (itemData: ItemProps) => {
 		const { advanceDocumentId = '' } = itemData || {};
 		setApiData((prevData) => {
 			const index = (prevData.list || []).findIndex(
@@ -316,7 +355,7 @@ const useGetAdvancePaymentList = ({ activeEntity, sort, viewSelectedInvoice }:Fi
 			return prevData;
 		});
 	};
-	const getTableBodyCheckbox = (itemData:ItemProps) => {
+	const getTableBodyCheckbox = (itemData: ItemProps) => {
 		const { advanceDocumentId = '' } = itemData || {};
 		const { list = [] } = apiData || {};
 		const isChecked = list.find(
