@@ -19,8 +19,6 @@ const getPayloadDate = (daysLater = '') => {
 	daysLaterDate.setTime(daysLaterDate.getTime() - timezoneOffset);
 	daysLaterDate.setHours(...NUMERICAL_VALUES.day_end_time);
 
-	console.log(daysLaterDate, 'day_end_time');
-
 	return daysLaterDate;
 };
 
