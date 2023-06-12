@@ -6,7 +6,7 @@ import { useContext } from 'react';
 
 import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
 
-import useIsAllServicesTaken from './useIsAllServicesTaken';
+import IsAllServicesTaken from './IsAllServicesTaken';
 
 const FINAL_PARTIES = [];
 const PARTY_SERVICES = [];
@@ -28,7 +28,7 @@ const useUpdateInvoiceCombination = ({
 
 	const handleEditPreferences = async () => {
 		try {
-			const { isAllMainServicesTaken } = useIsAllServicesTaken(
+			const { isAllMainServicesTaken } = IsAllServicesTaken(
 				servicesList,
 				selectedParties,
 				shipment_data,

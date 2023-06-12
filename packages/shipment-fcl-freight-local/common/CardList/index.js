@@ -6,6 +6,8 @@ import CardItem from './Carditem';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
+const INITIAL_STATE = 1;
+
 function List({
 	fields = [],
 	data = [],
@@ -23,7 +25,7 @@ function List({
 	const handleRender = () => {
 		if (loading) {
 			const loadingStates = Array.from({ length: numberOfLoader }, (_, i) => (
-				<LoadingState fields={fields} isLast={i === numberOfLoader - 1} key={keys[i]} />
+				<LoadingState fields={fields} isLast={i === numberOfLoader - INITIAL_STATE} key={keys[i]} />
 			));
 
 			return loadingStates;
@@ -41,7 +43,7 @@ function List({
 						item={item}
 						loading={loading}
 						fields={fields}
-						isLast={data?.length === i + 1 && !isLclManifest}
+						isLast={data?.length === i + INITIAL_STATE && !isLclManifest}
 					/>
 				))}
 			</>

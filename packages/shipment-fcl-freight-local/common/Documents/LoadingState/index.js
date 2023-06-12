@@ -4,11 +4,13 @@ import VerticleLine from '../CheckList/VerticleLine';
 
 import styles from './styles.module.css';
 
-const keys = Array(6).fill(null).map(() => Math.random());
+const TOTAL_ITERATIONS = 6;
+const keys = Array(TOTAL_ITERATIONS).fill(null).map(() => Math.random());
+const LAST_IDX = 5;
 
-const LoadingState = () => [...Array(6)].map((v, idx) => (
+const LoadingState = () => [...Array(TOTAL_ITERATIONS)].map((v, idx) => (
 	<div className={styles.single_item} key={keys?.[idx]}>
-		<VerticleLine isLast={idx === 5} />
+		<VerticleLine isLast={idx === LAST_IDX} />
 
 		<div className={styles.main}>
 			<div className={styles.heading}>

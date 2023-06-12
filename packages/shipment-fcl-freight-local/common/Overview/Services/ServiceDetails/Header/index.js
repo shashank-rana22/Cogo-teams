@@ -39,12 +39,14 @@ function Header({ serviceData = [] }) {
 							tabIndex={0}
 							onClick={() => setShowDetails({
 								...showDetails,
-								[serviceData?.[DEFAULT_VALUE]?.display_label]: !showDetails[serviceData?.[DEFAULT_VALUE]?.display_label],
+								[serviceData?.[DEFAULT_VALUE]?.display_label]:
+								 !showDetails[serviceData?.[DEFAULT_VALUE]?.display_label],
 							})}
 							className={styles.details_cta}
 						>
 
-							{ showDetails[serviceData?.[DEFAULT_VALUE]?.display_label] ? 'Hide Details' : 'View Details'}
+							{ showDetails[serviceData?.[DEFAULT_VALUE]?.display_label] 
+							? 'Hide Details' : 'View Details'}
 						</div>
 						<div className={styles.edit_cancel}>
 							<EditCancelService serviceData={serviceData?.[DEFAULT_VALUE]} />

@@ -13,7 +13,10 @@ import Loader from '../Loader';
 
 import styles from './styles.module.css';
 
-const LOADER_KEYS = Array(3).fill(null).map(() => Math.random());
+const INITIAL_STATE = 3;
+const DEFAULT_VALUE = 0;
+const TOTAL_LOADED = 2;
+const LOADER_KEYS = Array(INITIAL_STATE).fill(null).map(() => Math.random());
 
 function OrganizationDocuments({
 	forModal = false,
@@ -62,11 +65,11 @@ function OrganizationDocuments({
 
 	const contentToShow = () => {
 		if (loading) {
-			return [...Array(forModal ? 3 : 2)].map((i, index) => (
+			return [...Array(forModal ? INITIAL_STATE : TOTAL_LOADED)].map((i, index) => (
 				<Loader key={LOADER_KEYS[index]} forModal={forModal} />
 			));
 		}
-		if (!loading && data?.list?.length === 0) {
+		if (!loading && data?.list?.length === DEFAULT_VALUE) {
 			return <EmptyState />;
 		}
 		return (

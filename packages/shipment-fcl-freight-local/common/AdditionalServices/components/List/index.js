@@ -84,7 +84,7 @@ function List({ isSeller = false }) {
 
 			{totalCount > INITIAL_STATE ? (
 				<div className={styles.show_more}>
-					{pageLimit > 8
+					{pageLimit > INITIAL_STATE
 						? 	(
 							<Button
 								size="md"

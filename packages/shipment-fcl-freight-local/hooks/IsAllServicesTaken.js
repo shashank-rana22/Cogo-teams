@@ -1,6 +1,6 @@
 const NOT_TAKEN = [];
 
-const useIsAllServicesTaken = (
+const IsAllServicesTaken = (
 	servicesList = [],
 	selectedParties = [],
 	shipment_data = {},
@@ -41,4 +41,4 @@ const useIsAllServicesTaken = (
 	return { isAllMainServicesTaken, NOT_TAKEN };
 };
 
-export default useIsAllServicesTaken;
+export default IsAllServicesTaken;

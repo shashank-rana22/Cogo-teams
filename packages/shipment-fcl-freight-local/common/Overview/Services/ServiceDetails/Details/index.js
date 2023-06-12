@@ -7,16 +7,19 @@ import getConfigs from '../../configurations/get-configs';
 import Item from './Item';
 import styles from './styles.module.css';
 
+const INITIAL_STATE = 1;
+const DEFAULT_VALUE = 0;
+const SERVICE_INITIAL_KEYS = {};
+
 function Details({ serviceData = [] }) {
 	const {
 		service_type, state, free_days_demurrage_destination,
 		free_days_demurrage_origin, free_days_detention_destination, free_days_detention_origin,
-	} = serviceData[0];
+	} = serviceData[DEFAULT_VALUE];
 
-	const serviceInitialKeys = {};
 
 	(serviceData || []).forEach((data) => {
-		serviceInitialKeys[data?.container_size] = {
+		SERVICE_INITIAL_KEYS[data?.container_size] = {
 			container_size             : data?.container_size,
 			commodity                  : data?.commodity,
 			containers_count           : data?.containers_count,
@@ -26,7 +29,7 @@ function Details({ serviceData = [] }) {
 		};
 	});
 
-	const [multiServiceType, setMultiServiceType] = useState(Object.keys(serviceInitialKeys)?.[0]);
+	const [multiServiceType, setMultiServiceType] = useState(Object.keys(SERVICE_INITIAL_KEYS)?.[DEFAULT_VALUE]);
 
 	const service_items_key = getConfigs(service_type).details || {};
 
@@ -37,17 +40,17 @@ function Details({ serviceData = [] }) {
 		free_days_detention_origin,
 	};
 
-	const excludedKeys = [...Object.keys(serviceInitialKeys[(Object.keys(serviceInitialKeys)?.[0])]),
+	const excludedKeys = [...Object.keys(SERVICE_INITIAL_KEYS[(Object.keys(SERVICE_INITIAL_KEYS)?.[DEFAULT_VALUE])]),
 		...Object.keys(freeDays)];
 
-	const remainingServiceData = omit(serviceData?.[0], excludedKeys);
+	const remainingServiceData = omit(serviceData?.[DEFAULT_VALUE], excludedKeys);
 
 	return (
 		<div className={cl`${styles.container} ${styles[state]}`}>
 
-			{Object.keys(serviceInitialKeys).length > 1 ?	(
+			{Object.keys(SERVICE_INITIAL_KEYS).length > INITIAL_STATE ?	(
 				<div className={cl`${styles.multiservices_heading} ${styles[state]}`}>
-					{(Object.keys(serviceInitialKeys)).map((key) => (
+					{(Object.keys(SERVICE_INITIAL_KEYS)).map((key) => (
 						<div
 							key={key}
 							className={`${styles.mainservice_tabs} 
@@ -65,10 +68,10 @@ function Details({ serviceData = [] }) {
 
 			<div className={cl`${styles.multiservice} ${styles[state]}`}>
 				{(service_items_key || []).map((element) => (getByKey(
-					serviceInitialKeys[multiServiceType],
+					SERVICE_INITIAL_KEYS[multiServiceType],
 					element?.key,
 				) ? (
-					<Item state={state} label={element} detail={serviceInitialKeys[multiServiceType]} key={element} />
+					<Item state={state} label={element} detail={SERVICE_INITIAL_KEYS[multiServiceType]} key={element} />
 					) : null))}
 			</div>
 
