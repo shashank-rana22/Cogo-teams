@@ -1,3 +1,5 @@
+import DURATION_OPTIONS from './duration-options';
+
 const controls = [
 	{
 		name        : 'warmth',
@@ -38,6 +40,15 @@ const controls = [
 		isClearable: true,
 	},
 	{
+		name        : 'role_id',
+		label       : 'Role',
+		placeholder : 'Select Role',
+		type        : 'asyncSelect',
+		asyncKey    : 'partner_roles',
+		initialCall : false,
+		isClearable : true,
+	},
+	{
 		name        : 'user_id',
 		label       : 'KAM',
 		placeholder : 'Select KAM Agent',
@@ -47,15 +58,6 @@ const controls = [
 		initialCall : true,
 		isClearable : true,
 		disabled    : true,
-	},
-	{
-		name        : 'role_id',
-		label       : 'Role',
-		placeholder : 'Select Role',
-		type        : 'asyncSelect',
-		asyncKey    : 'partner_roles',
-		initialCall : false,
-		isClearable : true,
 	},
 	{
 		name        : 'organization',
@@ -75,6 +77,22 @@ const controls = [
 			},
 		},
 		isClearable: true,
+	},
+	{
+		name        : 'duration',
+		label       : 'Duration',
+		placeholder : 'Select Duration',
+		type        : 'select',
+		options     : DURATION_OPTIONS,
+		isClearable : true,
+	},
+	{
+		name                  : 'date_range',
+		label                 : 'Date Range',
+		type                  : 'dateRangePicker',
+		isPreviousDaysAllowed : true,
+		maxDate               : new Date(),
+		disable               : true,
 	},
 	{
 		name                  : 'date',
