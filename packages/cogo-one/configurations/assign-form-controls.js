@@ -1,5 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+const EMPTY_STRING_LENGTH = 0;
+
 const entityOptions = Object.values(GLOBAL_CONSTANTS.cogoport_entities || {}).map(
 	(eachEntity) => {
 		const { id = '', icon:Icon, name = '' } = eachEntity;
@@ -44,7 +46,7 @@ const controls = {
 		type  : 'input',
 		rules : {
 			required : true,
-			validate : (val) => (val?.trim()?.length <= 0 ? 'This cannot be Empty' : true),
+			validate : (val) => (val?.trim()?.length <= EMPTY_STRING_LENGTH ? 'This cannot be Empty' : true),
 		},
 	},
 	allow_user: {

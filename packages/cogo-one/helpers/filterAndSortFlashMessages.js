@@ -5,6 +5,7 @@ const geo = getGeoConstants();
 const countryCode = geo?.country?.code;
 const cogoEntityId = GLOBAL_CONSTANTS.country_entity_ids?.[countryCode];
 const FALLBACK_COUNTRY = 'IN';
+const FALLBACK_TIMESTAMP = 0;
 
 const checkCountrySpecificChats = (eachChat) => {
 	const { country_code = '', cogo_entity_id:leadCogoEntityId, user_details } = eachChat || {};
@@ -23,7 +24,7 @@ const checkCountrySpecificChats = (eachChat) => {
 
 const filterAndSortFlashMessages = (flashMessagesData) => Object.keys(flashMessagesData || {})
 	.filter((key) => checkCountrySpecificChats(flashMessagesData[key]))
-	.sort((a, b) => Number(b.updated_at || 0) - Number(a.updated_at || 0))
+	.sort((a, b) => Number(b.updated_at || FALLBACK_TIMESTAMP) - Number(a.updated_at || FALLBACK_TIMESTAMP))
 	.map((sortedkeys) => flashMessagesData[sortedkeys]);
 
 export default filterAndSortFlashMessages;

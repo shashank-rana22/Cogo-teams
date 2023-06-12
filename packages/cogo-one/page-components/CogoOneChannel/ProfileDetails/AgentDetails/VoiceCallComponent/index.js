@@ -7,6 +7,9 @@ import hideDetails from '../../../../../utils/hideDetails';
 
 import styles from './styles.module.css';
 
+const COUNTRY_CODE_START = 0;
+const COUNTRY_CODE_END = 2;
+
 function VoiceCallComponent({
 	userMobile = '',
 	orgId,
@@ -21,8 +24,8 @@ function VoiceCallComponent({
 	let code;
 	let number;
 	if (activeTab === 'message') {
-		code = userMobile?.slice(0, 2);
-		number = userMobile?.slice(2);
+		code = userMobile?.slice(COUNTRY_CODE_START, COUNTRY_CODE_END);
+		number = userMobile?.slice(COUNTRY_CODE_END);
 	} else {
 		code = '91';
 		number = userMobile;
