@@ -10,7 +10,7 @@ function EmailInfo({
 	invoice = {},
 	setSendEmail = () => {},
 }) {
-	const {proforma_email_count = 0, sales_email_count = 0, sales_utr} = invoice || {};
+	const { proforma_email_count = 0, sales_email_count = 0, sales_utr } = invoice || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_container}>

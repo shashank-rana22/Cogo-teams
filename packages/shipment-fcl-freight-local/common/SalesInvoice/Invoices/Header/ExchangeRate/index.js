@@ -1,10 +1,10 @@
 import { Button } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import CurrencyExchangeForm from './ExchangeRateForm/CurrencyExchangeForm';
 import styles from './styles.module.css';
 import useHelper from './useHelper';
-import { isEmpty } from '@cogoport/utils';
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 const FIRST_INDEX = 0;

@@ -26,8 +26,7 @@ function InvoiceDetails({
 		setShow(false);
 		setState(true);
 	};
-	const {proforma_email_count = 0, sales_email_count = 0, sales_utr, remarks, status, exchange_rate_document} = invoice || {};
-
+	const { proforma_email_count = 0, sales_email_count = 0, sales_utr, remarks, status, exchange_rate_document } = invoice || {};
 
 	const remarkRender = (
 		<div className={styles.remark_container}>
