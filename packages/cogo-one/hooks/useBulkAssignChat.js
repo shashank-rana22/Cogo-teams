@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-import { AGENT_TYPE_MAPPING } from '../constants';
+import { AGENT_TYPE_MAPPING } from '../constants/VIEW_TYPE_CONSTANTS';
 import getActiveCardDetails from '../utils/getActiveCardDetails';
 
 function useBulkAssignChat({ setSelectedAutoAssign = () => {}, setAutoAssignChats = () => {} }) {
