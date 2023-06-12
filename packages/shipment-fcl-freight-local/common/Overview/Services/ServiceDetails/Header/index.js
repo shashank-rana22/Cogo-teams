@@ -40,7 +40,7 @@ function Header({ serviceData = [] }) {
 							onClick={() => setShowDetails({
 								...showDetails,
 								[serviceData?.[DEFAULT_VALUE]?.display_label]:
-								 !showDetails[serviceData?.[DEFAULT_VALUE]?.display_label],
+								!showDetails[serviceData?.[DEFAULT_VALUE]?.display_label],
 							})}
 							className={styles.details_cta}
 						>
