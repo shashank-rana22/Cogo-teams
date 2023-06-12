@@ -41,12 +41,33 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 
 	const id = info?.detail?.id;
 
-	const aadhaar_card = (documents || []).find((element) => (element.document_type === 'aadhaar_card'));
-	const pan_card = (documents || []).find((element) => (element.document_type === 'pan_card'));
-	const driving_license = (documents || []).find((element) => (element.document_type === 'driving_license'));
-	const passport = (documents || []).find((element) => (element.document_type === 'passport'));
+	const component = {
+		aadhaar_card    : undefined,
+		pan_card        : undefined,
+		driving_license : undefined,
+		passport        : undefined,
+	};
 
-	const component = { aadhaar_card, driving_license, pan_card, passport };
+	(documents || []).forEach((element) => {
+		switch (element.document_type) {
+			case 'aadhaar_card':
+				component.aadhaar_card = element;
+				break;
+			case 'pan_card':
+				component.pan_card = element;
+				break;
+			case 'driving_license':
+				component.driving_license = element;
+				break;
+			case 'passport':
+				component.passport = element;
+				break;
+			default:
+				break;
+		}
+	});
+
+	const { aadhaar_card, pan_card, driving_license, passport } = component;
 
 	useEffect(() => {
 		setValue('aadhaar_card', aadhaar_card?.document_url);
@@ -57,7 +78,8 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 		setValue('pan_card_number', pan_card?.document_number);
 		setValue('passport_number', passport?.document_number);
 		setValue('driving_license_number', driving_license?.document_number);
-	}, [documents, aadhaar_card, driving_license, pan_card, passport, setValue]);
+	}, [documents,
+		setValue, aadhaar_card, pan_card, driving_license, passport?.document_url, passport?.document_number]);
 
 	const finalControls = controls.map((singleControl) => {
 		const { verification_key } = singleControl;
