@@ -7,7 +7,7 @@ import {
 } from '../configs/supply-reason-options';
 
 const controls = (state, cancelReason) => {
-	const salesOptionLimit = state === 'shipment_received' ? 6 : 5;
+	const salesOptionLimit = state === 'shipment_received' ? 7 : 6;
 	const supplyOptionsState = state === 'in_progress' ? 'in_progress' : 'not_in_progress';
 
 	return {
