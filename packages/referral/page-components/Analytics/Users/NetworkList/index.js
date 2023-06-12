@@ -4,6 +4,8 @@ import TableColumns from '../List/TableColumn';
 
 import styles from './styles.module.css';
 
+const ROW_COUNT = 10;
+
 function NetworkList({
 	setShowOptions = () => {},
 	setShowActivityModal = () => {},
@@ -20,7 +22,7 @@ function NetworkList({
 					setShowActivityModal,
 				})}
 				data={data}
-				loadingRowsCount={10}
+				loadingRowsCount={ROW_COUNT}
 				loading={loading}
 			/>
 		</div>

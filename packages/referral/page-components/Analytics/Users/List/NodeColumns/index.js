@@ -1,14 +1,14 @@
 import styles from './styles.module.css';
 
-const DEFAULT_VALUE = 0;
+const MINIMUM_VALUE = 0;
 
-function NodeColumns({ index = 0, item = {}, type = '' }) {
+function NodeColumns({ index = MINIMUM_VALUE, item = {}, type = '' }) {
 	const { cogopoints = {} } = item || {};
 	const {
-		network_cogopoint_earned = 0,
-		network_cogopoint_estimated = 0,
-		referral_cogopoint_earned = 0,
-		referral_cogopoint_estimated = 0,
+		network_cogopoint_earned = MINIMUM_VALUE,
+		network_cogopoint_estimated = MINIMUM_VALUE,
+		referral_cogopoint_earned = MINIMUM_VALUE,
+		referral_cogopoint_estimated = MINIMUM_VALUE,
 	} = cogopoints || {};
 
 	const subTitleOptions = [
@@ -27,7 +27,7 @@ function NodeColumns({ index = 0, item = {}, type = '' }) {
 	return (
 		subTitleOptions.map((node) => (
 			<div className={styles.node} key={node.name}>
-				{index === DEFAULT_VALUE ? (
+				{index === MINIMUM_VALUE ? (
 					<div className={styles.node_title}>
 						{node.title}
 					</div>

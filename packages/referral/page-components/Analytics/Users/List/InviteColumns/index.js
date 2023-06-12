@@ -2,21 +2,21 @@ import { SUB_TITLE_OPTIONS } from '../../../../../constants';
 
 import styles from './styles.module.css';
 
-const DEFAULT_VALUE = 0;
+const MIN_VALUE = 0;
 
-function InviteColumns({ index = 0, item = {} }) {
+function InviteColumns({ index = MIN_VALUE, item = {} }) {
 	const { invite_log = {} } = item || {};
 
 	return (
 		SUB_TITLE_OPTIONS.map((node) => (
 			<div className={styles.node} key={node.name}>
-				{index === DEFAULT_VALUE ? (
+				{index === MIN_VALUE ? (
 					<div className={styles.node_title}>
 						{node.title}
 					</div>
 				) : ''}
 				<div className={styles.node_count}>
-					{invite_log[node.name] || DEFAULT_VALUE}
+					{invite_log[node.name] || MIN_VALUE}
 				</div>
 			</div>
 		))

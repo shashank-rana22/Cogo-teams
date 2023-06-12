@@ -8,7 +8,7 @@ import useGetReferralBusinessAnalytics from '../../../../hooks/useGetReferralBus
 import BusinessRewardStats from './BusinessRewardStats';
 import styles from './styles.module.css';
 
-const DEFAULT_VALUE = 0;
+const MIN_VALUE = 0;
 
 function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () => {}, selectedDate = {} }) {
 	const { data: businessData = {}, loading = false } = useGetReferralBusinessAnalytics({
@@ -18,7 +18,7 @@ function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () =
 	});
 
 	const { count = {}, data = {} } = businessData || {};
-	const { kyc_verified = 0, shipment = 0, subscription = 0 } = count || {};
+	const { kyc_verified = MIN_VALUE, shipment = MIN_VALUE, subscription = MIN_VALUE } = count || {};
 	const totalBusinessReward = kyc_verified + shipment + subscription;
 
 	const formatCount = {
@@ -34,7 +34,7 @@ function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () =
 			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			formatType : 'date',
 		}),
-		y: data[item] || DEFAULT_VALUE,
+		y: data[item] || MIN_VALUE,
 	}));
 
 	const graphData = [
