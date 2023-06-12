@@ -1,10 +1,9 @@
 import { Checkbox, Pagination } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import EmptyStateDocs from '../../../../../commons/EmptyStateDocs';
-import usePostToSageBulk from '../../../../hooks/usePostToSageBulk';
 
 import Header from './Header';
 import List from './List';

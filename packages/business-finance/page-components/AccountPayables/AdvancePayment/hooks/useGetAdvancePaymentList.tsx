@@ -13,6 +13,7 @@ interface ItemProps {
 interface Target {
 	checked: boolean;
 }
+
 interface EventDataType {
 	target: Target;
 }
@@ -22,14 +23,17 @@ interface NewDataListProps {
 	tdsAmount: string;
 	invoiceAmount: string;
 }
+
 interface NestedObj {
 	[key: string]: string;
 }
+
 interface FilterProps {
 	activeEntity?: string;
 	sort: NestedObj;
 	viewSelectedInvoice?: boolean;
 }
+
 const useGetAdvancePaymentList = ({
 	activeEntity,
 	sort,
@@ -163,7 +167,7 @@ const useGetAdvancePaymentList = ({
 	useEffect(() => {
 		if (
 			viewSelectedInvoice === false
-			|| viewSelectedInvoice === undefined
+            || viewSelectedInvoice === undefined
 		) {
 			getAdvancedPayment();
 			setApiData({ list: [] });
@@ -181,7 +185,7 @@ const useGetAdvancePaymentList = ({
 
 	const submitSelectedInvoices = async () => {
 		const { list = [] } = apiData || {};
-		const selectedInvoices = [];
+		const SELECTED_INVOICES = [];
 
 		list.forEach((addToSelectdata) => {
 			const {
@@ -219,7 +223,7 @@ const useGetAdvancePaymentList = ({
 					bankId,
 				};
 
-				selectedInvoices.push({
+				SELECTED_INVOICES.push({
 					objectId   : advanceDocumentId,
 					tdsAmount  : 0,
 					payableAmount,
@@ -231,7 +235,7 @@ const useGetAdvancePaymentList = ({
 		try {
 			await addToSelectedTrigger({
 				data: {
-					list            : [...selectedInvoices],
+					list            : [...SELECTED_INVOICES],
 					id              : payrun || selectedPayRunId,
 					entityCode      : entity,
 					currencyCode    : currency,

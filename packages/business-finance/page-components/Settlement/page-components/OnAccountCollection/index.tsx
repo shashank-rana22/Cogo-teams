@@ -157,9 +157,9 @@ function OnAccountCollection() {
 								suffix={(
 									<div className={styles.icon_div}>
 										<IcMSearchlight
-										height={15}
-										width={15}
-									/>
+											height={15}
+											width={15}
+										/>
 									</div>
 								)}
 							/>

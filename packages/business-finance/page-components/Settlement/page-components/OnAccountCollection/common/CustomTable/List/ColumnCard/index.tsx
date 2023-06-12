@@ -1,6 +1,5 @@
 import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { ChangeEvent } from 'react';
 
 import CollectionActions from './CollectionActions';
 import RenderStatus from './RenderStatus';

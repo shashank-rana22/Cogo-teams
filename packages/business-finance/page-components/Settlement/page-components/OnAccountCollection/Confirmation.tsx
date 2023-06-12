@@ -1,5 +1,4 @@
 import { Button, Modal } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
 import React, { Dispatch, SetStateAction } from 'react';
 
 import styles from './styles.module.css';

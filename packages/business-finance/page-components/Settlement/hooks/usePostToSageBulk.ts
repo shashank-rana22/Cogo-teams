@@ -28,7 +28,7 @@ const usePostToSageBulk = ({ refetch, setShowConfirm }: Props) => {
 
 	const post = async (ids) => {
 		try {
-			const resp = await trigger({
+			await trigger({
 				data: {
 					ids,
 					performedBy: profileid,
