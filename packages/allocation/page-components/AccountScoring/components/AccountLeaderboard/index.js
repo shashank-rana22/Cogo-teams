@@ -14,7 +14,7 @@ function AccountLeaderboard() {
 		paginationData,
 		getNextPage,
 		control,
-		service,
+		filterControls,
 	} = useGetAccountLeaderboardData();
 
 	const { page = 0, page_limit = 0, total_count = 0 } = paginationData || {};
@@ -25,7 +25,7 @@ function AccountLeaderboard() {
 
 			<HeaderFilters
 				control={control}
-				service={service}
+				filterControls={filterControls}
 			/>
 
 			<ScoreDistributionGraph

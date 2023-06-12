@@ -1,27 +1,13 @@
 import { getFieldController } from '../../../../../common/Form/getFieldController';
-import controls from '../../../configurations/get-leaderboard-filters-controls';
 
 import styles from './styles.module.css';
 
 function HeaderFilters(props) {
-	const { control, service } = props;
-
-	const mutatedControls = controls.map((singleControl) => {
-		let newControl = { ...singleControl };
-
-		if (newControl.name === 'user_id' && service) {
-			newControl = {
-				...newControl,
-				disabled: false,
-			};
-		}
-
-		return newControl;
-	});
+	const { control, filterControls } = props;
 
 	return (
 		<div className={styles.form_container}>
-			{mutatedControls.map((filterItem) => {
+			{filterControls.map((filterItem) => {
 				const Element = getFieldController(filterItem.type);
 
 				return (
