@@ -9,6 +9,18 @@ import styles from './styles.module.css';
 
 const BANK_DETAILS_INDEX = 0;
 
+const RenderPills = ({ isCompleted = false, name = '' }) => {
+	if (isCompleted) {
+		return <Pill color="green">Completed</Pill>;
+	}
+
+	if (bankDetails?.[BANK_DETAILS_INDEX]?.status === 'active' && name === 'bank_details') {
+		return <Pill color="orange">Approval pending</Pill>;
+	}
+
+	return <Pill color="yellow">Pending</Pill>;
+};
+
 function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetails }) {
 	const { progress_stats = {}, bank_details:bankDetails } = profileData || {};
 	const { additional_info_added = {} } = progress_stats;
@@ -42,17 +54,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 			isCompleted : bank_details,
 		}];
 
-	const renderPills = ({ isCompleted, name }) => {
-		if (isCompleted) {
-			return <Pill color="green">Completed</Pill>;
-		}
-
-		if (bankDetails?.[BANK_DETAILS_INDEX]?.status === 'active' && name === 'bank_details') {
-			return <Pill color="orange">Approval pending</Pill>;
-		}
-
-		return <Pill color="yellow">Pending</Pill>;
-	};
+	
 
 	return (
 		<div className={styles.container}>
@@ -70,7 +72,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 							title={(
 								<div className={styles.status}>
 									<div className={styles.accordion_title}>{startCase(name)}</div>
-									{renderPills({ isCompleted, name })}
+									<RenderPills  name={name} isCompleted={isCompleted} />
 								</div>
 							)}
 						>

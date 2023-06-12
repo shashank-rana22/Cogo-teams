@@ -8,6 +8,13 @@ import useCreateEmployeeDocument from '../../../../hooks/useCreateEmployeeDocume
 import controls from './controls';
 import styles from './styles.module.css';
 
+const DOC_ARRAY = [
+	'aadhaar_card_number',
+	'aadhaar_card',
+	'pan_card_number',
+	'pan_card',
+]
+
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
 	return rest;
@@ -113,12 +120,7 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 									</Pill>
 								) : null}
 
-								{[
-									'aadhaar_card_number',
-									'aadhaar_card',
-									'pan_card_number',
-									'pan_card',
-								].includes(controlName) && status !== 'approved' ? (
+								{DOC_ARRAY.includes(controlName) && status !== 'approved' ? (
 									<sup className={styles.sup}>*</sup>
 									) : null}
 							</div>

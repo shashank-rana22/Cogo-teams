@@ -9,113 +9,114 @@ import { ctcModalControls } from '../../utils/ctc-modal-controls';
 import { ctcModalLessControls } from '../../utils/ctc-modal-less-controls';
 
 const CTC_THRESHOLD = 600000;
+const FIXED_ZERO = 0;
 
 const useProfileDetails = () => {
 	const { query } = useSelector((state) => state.general);
 	const { profile_id } = query || {};
 	const [error, setError] = useState(false);
 	const [ctcStructure, setCtcStructure] = useState({
-		basic                : { heading: 'Basic', yearlyValue: 0, monthlyValue: 0 },
-		hra                  : { heading: 'HRA', yearlyValue: 0, monthlyValue: 0 },
+		basic                : { heading: 'Basic', yearlyValue: FIXED_ZERO, monthlyValue: FIXED_ZERO, },
+		hra                  : { heading: 'HRA', yearlyValue: FIXED_ZERO, monthlyValue: FIXED_ZERO, },
 		conveyance_allowance : {
 			heading      : 'Conveyance Allowance',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		special_allowance: {
 			heading      : 'Special Allowance',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		food_allowance: {
 			heading      : 'Food Allowance',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		fuel_allowance: {
 			heading      : 'Fuel Allowance',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		telephone_allowance: {
 			heading      : 'Telephone Allowance',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		annual_base: {
 			heading      : 'Annual Base Salary [A]',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		lta: {
 			heading      : 'Leave Travel Allowance - LTA',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		medical_reimbursement: {
 			heading      : 'Medical Reimbursement',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		flexible_benefits: {
 			heading      : 'Flexible Benefits [B]',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		provident_fund: {
 			heading      : "Provident Fund (Employer's Contribution)",
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		gratuity: {
 			heading      : 'Gratuity (As per Act)',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		medical_policy: {
 			heading      : 'Medical Policy',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		retirals: {
 			heading      : 'Retirals [C]',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		sub_total_monthly_gross: {
 			heading      : 'Sub-Total Monthly Gross Annualized [A + B + C]',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		statutory_bonus: {
 			heading      : 'Statutory Bonus [D]',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		annual_gross_salary: {
 			heading      : 'Annual Gross Salary [ A + B + C + D]',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		incentives: {
 			heading      : 'Incentives [E]',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		variable_component: {
 			heading      : 'Variable Component [V]',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		total_targeted_compensation: {
 			heading      : 'Total Targeted Compensation [ A + B + C + D + E + V]',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 		approx_in_hand: {
 			heading      : 'Approx in Hand without TDS Deduction',
-			yearlyValue  : 0,
-			monthlyValue : 0,
+			yearlyValue  : FIXED_ZERO,
+			monthlyValue : FIXED_ZERO,
 		},
 
 	});

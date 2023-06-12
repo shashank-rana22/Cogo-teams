@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../../common/EmptyState';
@@ -9,18 +10,19 @@ import styles from './styles.module.css';
 
 const ARRAY_LENGTH = 0;
 
-function SignedDocuments() {
-	const onClickViewDocument = ({ url }) => {
-		window.open(url || '', '_blank');
-	};
+const onClickViewDocument = ({ url }) => {
+	window.open(url || '', '_blank');
+};
 
+function SignedDocuments() {
+	
 	const { list = [], loading } = useListEmployeeSignedDocuments();
 
 	const columns = getColumns({ onClickViewDocument });
 
 	return (
 		<div className={styles.container}>
-			{(list || []).length > ARRAY_LENGTH || loading
+			{isEmpty(list) || loading
 				? <StyledTable columns={columns} data={list} loading={loading} />
 				: (
 					<EmptyState

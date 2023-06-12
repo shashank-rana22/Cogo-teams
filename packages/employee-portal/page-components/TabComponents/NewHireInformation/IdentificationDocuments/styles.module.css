@@ -19,11 +19,10 @@
 
 .control {
 	width: 90%;
-	
-	:global(.ui_input_control){
+
+	:global(.ui_input_control) {
 		text-transform: uppercase;
 	}
-
 }
 
 .label {

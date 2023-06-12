@@ -8,6 +8,20 @@ import IdentificationDocuments from './IdentificationDocuments';
 import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
 
+const DOC_MAPPING = ['aadhaar_card', 'pan_card'];
+
+const renderPills = ({ name, isCompleted }) => {
+	if (isCompleted) {
+		return <Pill color="green">Completed</Pill>;
+	}
+
+	if (!isDocsApproved && name === 'identification_documents') {
+		return <Pill color="orange">Waiting for approval</Pill>;
+	}
+
+	return <Pill color="yellow">Pending</Pill>;
+};
+
 function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }) {
 	const { progress_stats = {}, documents } = data || {};
 	const { personal_details = {} } = progress_stats;
@@ -36,19 +50,7 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 	];
 
 	const isDocsApproved = (documents || []).filter((doc) => (
-		['aadhaar_card', 'pan_card'].includes(doc?.document_type))).every((ele) => (ele?.status === 'approved'));
-
-	const renderPills = ({ name, isCompleted }) => {
-		if (isCompleted) {
-			return <Pill color="green">Completed</Pill>;
-		}
-
-		if (!isDocsApproved && name === 'identification_documents') {
-			return <Pill color="orange">Waiting for approval</Pill>;
-		}
-
-		return <Pill color="yellow">Pending</Pill>;
-	};
+		DOC_MAPPING.includes(doc?.document_type))).every((ele) => (ele?.status === 'approved'));
 
 	return (
 		<div className={styles.container}>

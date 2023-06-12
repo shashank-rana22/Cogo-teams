@@ -33,7 +33,7 @@ export default function CtcBreakupModal({
 	};
 
 	const onCheck = () => {
-		setVisible(() => !visible);
+		setVisible((pv) => !pv);
 	};
 
 	return (

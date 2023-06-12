@@ -1,6 +1,6 @@
 import { IcMArrowNext } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-
+import { Image }from '@cogoport/next';
 import AdditionalInformation from './AdditionalInformation';
 import CompanyPolicies from './CompanyPolicies';
 import Day1 from './Day1';
@@ -95,7 +95,8 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 						}}
 					>
 						<div>
-							<img
+
+							<Image
 								src={MAPPING[item]?.icon}
 								alt="address icon"
 								width="60"

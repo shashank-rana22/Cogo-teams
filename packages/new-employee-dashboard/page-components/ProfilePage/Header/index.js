@@ -8,6 +8,8 @@ import useUpdateEmployeeDeatils from '../../hooks/useUpdateEmployeeDetails';
 
 import styles from './styles.module.css';
 
+const STATUS_MAPPING = ['approved','active','accepted']
+
 function Header({
 	detail,
 	loading,
@@ -28,7 +30,7 @@ function Header({
 	const isLoading = loading || isEmpty(detail || {}) || false;
 
 	const offer_letter_active = (offerLetter || []).find((element) => (
-		['approved', 'active','accepted'].includes(element?.status)
+		STATUS_MAPPING.includes(element?.status)
 	));
 
 	return (
