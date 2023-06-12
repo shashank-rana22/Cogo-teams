@@ -19,6 +19,10 @@ const ELEMENT_MAPPING = {
 	textarea       : TextAreaController,
 	'multi-select' : MultiselectController,
 	number         : InputController,
+	text           : InputController,
+	multiSelect    : MultiselectController,
+	textArea       : TextAreaController,
+	asyncSelect    : AsyncSelectController,
 };
 
 function getElementController(type) {
