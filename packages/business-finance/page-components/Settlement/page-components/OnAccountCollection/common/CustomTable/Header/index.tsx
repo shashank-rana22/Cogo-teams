@@ -23,7 +23,7 @@ interface HeaderInterface {
 	setGlobalFilters?: React.Dispatch<React.SetStateAction<GlobalInterface>>;
 	globalFilters?: GlobalInterface;
 	onChangeTableHeaderCheckbox: (event: ChangeEvent<HTMLInputElement>) => void;
-	IsAllChecked: boolean;
+	isAllChecked: boolean;
 	showHeaderCheckbox: boolean;
 	loading?: boolean;
 }
@@ -33,7 +33,7 @@ function Header(
 		setGlobalFilters,
 		globalFilters,
 		onChangeTableHeaderCheckbox,
-		IsAllChecked,
+		isAllChecked,
 		showHeaderCheckbox,
 		loading,
 	}: HeaderInterface,
@@ -44,7 +44,7 @@ function Header(
 				{showHeaderCheckbox ? (
 					<Checkbox
 						onChange={onChangeTableHeaderCheckbox}
-						checked={IsAllChecked}
+						checked={isAllChecked}
 						disabled={loading}
 					/>
 				) : null}

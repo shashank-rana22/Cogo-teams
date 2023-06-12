@@ -27,23 +27,19 @@ function Confirmation(
 			show={showConfirm}
 			placement="top"
 			closeOnOuterClick={false}
-			onClose={() => {
-            	setShowConfirm(false);
-			}}
+			onClose={() => { setShowConfirm(false); }}
 		>
 			<div className={styles.heading}>
 				You have Selected
 				{' '}
 				{unqIds?.length || 0}
 				{' '}
-				Payments. Are You Sure you want to Post?
+				Payments. Are you sure you want to post?
 			</div>
 			<div className={styles.buttons}>
 				<Button
 					themeType="secondary"
-					onClick={() => {
-                    	setShowConfirm(false);
-					}}
+					onClick={() => { setShowConfirm(false); }}
 				>
 					Cancel
 				</Button>

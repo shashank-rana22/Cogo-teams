@@ -84,9 +84,7 @@ function ColumnCard({ item, refetch, getTableBodyCheckbox }: ColumnCardInterface
 									{bankName.substring(0, MAX_LENGTH_ECLIPSES)}
 									...
 									<div>
-										{(
-                                        	bankAccountNumber || accCode
-										).substring(0, MAX_LENGTH_ECLIPSES)}
+										{(bankAccountNumber || accCode).substring(0, MAX_LENGTH_ECLIPSES)}
 										...
 									</div>
 								</div>
@@ -111,15 +109,17 @@ function ColumnCard({ item, refetch, getTableBodyCheckbox }: ColumnCardInterface
 				</div>
 
 				<div className={styles.amount}>
-					{formatAmount({
-                    	amount,
-                    	currency,
-                    	options: {
+					{formatAmount(
+						{
+							amount,
+							currency,
+							options: {
                     		style                 : 'currency',
                     		currencyDisplay       : 'code',
                     		maximumFractionDigits : 2,
                     	},
-					}) || '---'}
+						},
+					) || '---'}
 				</div>
 
 				<div className={styles.upload}>
