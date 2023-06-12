@@ -6,9 +6,9 @@ import IdentificationDocuments from './IdentificationDocuments';
 import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
 
-const DOC_MAPPING = ['aadhaar_card', 'pan_card']
+const DOC_MAPPING = ['aadhaar_card', 'pan_card'];
 
-const RenderPills = ({ name = '', isCompleted = false }) => {
+function RenderPills({ name = '', isCompleted = false, isDocsApproved }) {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
 	}
@@ -18,7 +18,7 @@ const RenderPills = ({ name = '', isCompleted = false }) => {
 	}
 
 	return <Pill color="yellow">Pending</Pill>;
-};
+}
 
 function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeDetailsLoading }) {
 	const { progress_stats = {}, documents } = profileData || {};
@@ -51,7 +51,7 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 	return (
 		<div className={styles.container}>
 			{(MAPPING || []).map((item) => {
-				const { content: Component, isCompleted, name } = item;
+				const { content: Component = null, isCompleted, name } = item || {};
 
 				return (
 					<div
@@ -65,7 +65,11 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 								<div className={styles.status}>
 									<div className={styles.accordion_title}>{startCase(name)}</div>
 
-									<RenderPills  name={name} isCompleted={isCompleted} />
+									<RenderPills
+										isDocsApproved={isDocsApproved}
+										name={name}
+										isCompleted={isCompleted}
+									/>
 
 								</div>
 							)}
