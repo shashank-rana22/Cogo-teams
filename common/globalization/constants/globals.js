@@ -138,7 +138,7 @@ const GLOBAL_CONSTANTS = {
 		incoming_green_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
 		outgoing_orange_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
 		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
-
+		destination_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
 	},
 	options: {
 		upload_file_size: {

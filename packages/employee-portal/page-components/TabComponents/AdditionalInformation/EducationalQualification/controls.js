@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const EDUCATION_LEVEL_OPTIONS = [
 	{ label: '10th', value: '10th' },
 	{ label: '12th', value: '12th' },
@@ -36,7 +38,7 @@ const getControls = [{
 			name                  : 'started_at',
 			label                 : 'Start Date',
 			type                  : 'date-select',
-			placeholder           : 'DD/MM/YYYY',
+			placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
 			rules                 : { required: 'This is required' },
 			style                 : {
@@ -47,7 +49,7 @@ const getControls = [{
 			name                  : 'ended_at',
 			label                 : 'End Date',
 			type                  : 'date-select',
-			placeholder           : 'DD/MM/YYYY',
+			placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
 			rules                 : { required: 'This is required' },
 			style                 : {
@@ -92,14 +94,14 @@ const getControls = [{
 			placeholder : 'Add Specialization',
 		},
 		{
-			name   : 'degree_proof',
-			label  : 'Upload Degree Proof',
-			type   : 'fileUpload',
-			accept : '.pdf',
-			rules  : { required: 'This is required' },
+			name    : 'degree_proof',
+			label   : 'Upload Degree Proof',
+			type    : 'fileUpload',
+			accept  : '.pdf',
+			maxSize : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
+			rules   : { required: 'This is required' },
 		},
 	],
-
 }];
 
 export default getControls;
