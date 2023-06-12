@@ -23,6 +23,7 @@ function Content(props) {
 	const { control, getValues, setValue } = useForm();
 
 	const { getRfqsForApproval, data = {}, page, setPage, loading } = useListRfqs({ filterStore });
+
 	const {
 		listPlatformConfigConstants,
 		data : platformData,
@@ -53,6 +54,7 @@ function Content(props) {
 				key_value: profitability,
 			},
 		};
+
 		updatePlatformConfigMapping({ payload });
 		setShowModal(false);
 	};
@@ -76,6 +78,7 @@ function Content(props) {
 						</TabPanel>
 					))}
 				</Tabs>
+
 				<div className={styles.settings}>
 					<IcMSettings
 						onClick={() => {
@@ -109,6 +112,7 @@ function Content(props) {
 									})
 								}
 							</div>
+
 							<div className={styles.button}>
 								<Button onClick={() => setShowModal(false)} themeType="tertiary">
 									Cancel
@@ -130,6 +134,7 @@ function Content(props) {
 				</div>
 
 			</div>
+
 			{!loading && (
 				<div className={styles.pagination_container}>
 					<Pagination
