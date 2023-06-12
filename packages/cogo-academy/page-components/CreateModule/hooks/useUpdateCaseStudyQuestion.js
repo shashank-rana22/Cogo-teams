@@ -22,8 +22,8 @@ function useUpdateCaseStudyQuestion({
 	index,
 	editorValue = {},
 	questionEditorValue = {},
+	setQuestionError = () => {},
 	caseStudyQuestionEditorValue,
-	setCaseStudyQuestionEditorValue = () => {},
 }) {
 	const [{ loading:loadingUpdate }, triggerUpdate] = useRequest({
 		method : 'post',
@@ -59,9 +59,9 @@ function useUpdateCaseStudyQuestion({
 			index,
 			editorValue,
 			questionEditorValue,
+			setQuestionError,
+			caseStudyQuestionEditorValue,
 		});
-
-		console.log(questionEditorValue, 'qev');
 
 		if (!isEmpty(hasError)) {
 			hasError.forEach((item) => {
@@ -70,8 +70,10 @@ function useUpdateCaseStudyQuestion({
 			return;
 		}
 
+		if (isEmpty(payload)) return;
+
 		const triggerToUse = triggerMapping?.[action];
-		console.log('payload', payload);
+
 		try {
 			await triggerToUse({
 				data: payload,

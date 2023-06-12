@@ -39,6 +39,8 @@ function CreateQuestion({
 		setEditorValue,
 		questionEditorValue,
 		setQuestionEditorValue,
+		questionError,
+		setQuestionError,
 		caseStudyQuestionEditorValue,
 		setCaseStudyQuestionEditorValue,
 		updateStandAloneLoading,
@@ -102,6 +104,8 @@ function CreateQuestion({
 						setEditorValue={setEditorValue}
 						questionEditorValue={questionEditorValue}
 						setQuestionEditorValue={setQuestionEditorValue}
+						questionError={questionError}
+						setQuestionError={setQuestionError}
 						subjectiveEditorValue={subjectiveEditorValue}
 						setSubjectiveEditorValue={setSubjectiveEditorValue}
 						uploadable={uploadable}

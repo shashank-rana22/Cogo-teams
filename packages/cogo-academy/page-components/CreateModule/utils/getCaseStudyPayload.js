@@ -12,6 +12,7 @@ const getCaseStudyPayload = ({
 	editDetails = {},
 	index: questionIndex = '',
 	questionEditorValue = {},
+	setQuestionError = () => {},
 	caseStudyQuestionEditorValue = {},
 	editorValue = {},
 }) => {
@@ -37,6 +38,12 @@ const getCaseStudyPayload = ({
 		const { test_case_study_questions = {} } = editDetails || {};
 
 		const { test_question_answers = [] } = test_case_study_questions?.[questionIndex] || {};
+
+		if (!questionEditorValue?.
+			[`case_questions_${questionIndex}`]?.getEditorState().getCurrentContent().hasText()) {
+			setQuestionError((prev) => ({ ...prev, [`case_questions_${questionIndex}`]: true }));
+			return {};
+		}
 
 		const answers = options.map((option, index) => {
 			const { is_correct, answer_text } = option || {};

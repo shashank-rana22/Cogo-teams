@@ -18,6 +18,7 @@ function useCreateTestQuestion({
 	listSetQuestions,
 	editorValue = {},
 	questionEditorValue = {},
+	setQuestionError,
 	subjectiveEditorValue = '',
 	caseStudyQuestionEditorValue,
 	setUploadable,
@@ -48,6 +49,7 @@ function useCreateTestQuestion({
 			type: question_type,
 			editorValue,
 			questionEditorValue,
+			setQuestionError,
 			subjectiveEditorValue,
 			caseStudyQuestionEditorValue,
 			uploadable,
@@ -60,6 +62,9 @@ function useCreateTestQuestion({
 			});
 			return;
 		}
+
+		if (isEmpty(payload)) return;
+
 		const triggerToUse = TRIGGER_MAPPING?.[question_type] || triggerNonCase;
 
 		try {

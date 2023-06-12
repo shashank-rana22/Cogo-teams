@@ -24,13 +24,23 @@ const useCreateQuestion = ({
 	listSetQuestions,
 }) => {
 	const [questionTypeWatch, setQuestionTypeWatch] = useState('stand_alone');
+
 	const [uploadable, setUploadable] = useState(false);
+
 	const [questionEditorValue, setQuestionEditorValue] = useState(
 		questionTypeWatch === 'case_study'
 			? { case_questions_0: RichTextEditor.createEmptyValue() }
 			: { question_0: RichTextEditor.createEmptyValue() },
 	);
+
+	const [questionError, setQuestionError] = useState(
+		questionTypeWatch === 'case_study'
+			? { case_questions_0: false }
+			: { question_0: false },
+	);
+
 	const [caseStudyQuestionEditorValue, setCaseStudyQuestionEditorValue] = useState(RichTextEditor.createEmptyValue());
+
 	const [editorValue, setEditorValue] = useState(
 		questionTypeWatch === 'stand_alone'
 			? { question_0_explanation: RichTextEditor.createEmptyValue() }
@@ -67,6 +77,7 @@ const useCreateQuestion = ({
 		listSetQuestions,
 		editorValue,
 		questionEditorValue,
+		setQuestionError,
 		subjectiveEditorValue,
 		setSubjectiveEditorValue,
 		caseStudyQuestionEditorValue,
@@ -85,6 +96,7 @@ const useCreateQuestion = ({
 		editDetails,
 		editorValue,
 		questionEditorValue,
+		setQuestionError,
 		uploadable,
 	});
 
@@ -282,6 +294,8 @@ const useCreateQuestion = ({
 		setEditorValue,
 		questionEditorValue,
 		setQuestionEditorValue,
+		questionError,
+		setQuestionError,
 		caseStudyQuestionEditorValue,
 		setCaseStudyQuestionEditorValue,
 		updateStandAloneLoading,

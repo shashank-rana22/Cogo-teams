@@ -16,10 +16,15 @@
 }
 
 .question_text {
-	max-width: 500px;
-	overflow: hidden;
+	max-width: 600px;
+	max-height: 300px;
+	overflow-y: scroll;
 	text-overflow: ellipsis;
 	white-space: nowrap;
+
+	img{
+		max-width: 100%;
+	}
 }
 
 .text {

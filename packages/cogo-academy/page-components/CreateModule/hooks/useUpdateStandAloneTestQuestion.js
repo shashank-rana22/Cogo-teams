@@ -35,6 +35,7 @@ function useUpdateStandAloneTestQuestion({
 	editDetails,
 	editorValue = {},
 	questionEditorValue = {},
+	setQuestionError = () => {},
 	uploadable,
 	setQuestionDetails = () => {},
 }) {
@@ -60,6 +61,7 @@ function useUpdateStandAloneTestQuestion({
 				editDetails,
 				editorValue,
 				questionEditorValue,
+				setQuestionError,
 				uploadable,
 			});
 
@@ -69,6 +71,8 @@ function useUpdateStandAloneTestQuestion({
 				});
 				return;
 			}
+
+			if (isEmpty(payload)) return;
 
 			await trigger({
 				data: payload,

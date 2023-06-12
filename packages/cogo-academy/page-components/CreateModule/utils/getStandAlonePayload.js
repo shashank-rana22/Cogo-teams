@@ -10,6 +10,7 @@ const getStandAlonePayload = ({
 	editDetails = {},
 	editorValue = {},
 	questionEditorValue = {},
+	setQuestionError = () => {},
 }) => {
 	const { question = [], topic } = values || {};
 
@@ -21,6 +22,11 @@ const getStandAlonePayload = ({
 
 	if (action === 'delete') {
 		return { id: testQuestionId, status: 'inactive' };
+	}
+
+	if (!questionEditorValue?.question_0?.getEditorState().getCurrentContent().hasText()) {
+		setQuestionError({ question_0: true });
+		return {};
 	}
 
 	const hasError = [];

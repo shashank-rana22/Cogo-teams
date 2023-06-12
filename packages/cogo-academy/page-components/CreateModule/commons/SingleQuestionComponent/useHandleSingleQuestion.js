@@ -22,12 +22,11 @@ function useHandleSingleQuestion({
 	setEditorValue,
 	questionEditorValue,
 	setQuestionEditorValue,
+	setQuestionError,
 	caseStudyQuestionEditorValue,
-	setCaseStudyQuestionEditorValue = () => {},
 }) {
 	const NAME_CONTROL_MAPPING = useMemo(() => {
 		const hash = {};
-
 		const controls = getControls({ mode });
 
 		controls.forEach((item) => {
@@ -36,6 +35,9 @@ function useHandleSingleQuestion({
 
 		return hash;
 	}, [mode]);
+
+	const STATE_FUNCTIONS = useMemo(() => [setEditorValue, setQuestionEditorValue,
+		setQuestionError], [setEditorValue, setQuestionEditorValue, setQuestionError]);
 
 	const { updateCaseStudyQuestion, loading } = useUpdateCaseStudyQuestion({
 		questionSetId,
@@ -48,48 +50,81 @@ function useHandleSingleQuestion({
 		index,
 		editorValue,
 		questionEditorValue,
+		setQuestionError,
 		caseStudyQuestionEditorValue,
-		setCaseStudyQuestionEditorValue,
 	});
 
 	const handleDelete = () => {
 		if (field.isNew) {
 			remove(index, 1);
 
-			setEditorValue((prev) => {
-				const updatedObj = { ...prev };
-				const keys = Object.keys(updatedObj);
+			STATE_FUNCTIONS.forEach((stateChanger, funcIndex) => {
+				stateChanger((prev) => {
+					const updatedObj = { ...prev };
+					const keys = Object.keys(updatedObj);
 
-				delete updatedObj[`case_questions_${index}_explanation`];
+					delete updatedObj[funcIndex === 0 ? `case_questions_${index}_explanation`
+						: `case_questions_${index}`];
 
-				for (let i = index + 1; i < keys.length; i += 1) {
-					const currentKey = keys[i];
-					const newKey = `case_questions_${i - 1}_explanation`;
-					updatedObj[newKey] = updatedObj[currentKey];
-					delete updatedObj[currentKey];
-				}
+					for (let i = index + 1; i < keys.length; i += 1) {
+						const currentKey = keys[i];
+						const newKey = funcIndex === 0 ? `case_questions_${index}_explanation`
+							: `case_questions_${index}`;
+						updatedObj[newKey] = updatedObj[currentKey];
+						delete updatedObj[currentKey];
+					}
 
-				return updatedObj;
+					return updatedObj;
+				});
 			});
 
-			setQuestionEditorValue((prev) => {
-				const updatedObj = { ...prev };
-				const keys = Object.keys(updatedObj);
+			// setEditorValue((prev) => {
+			// 	const updatedObj = { ...prev };
+			// 	const keys = Object.keys(updatedObj);
 
-				delete updatedObj[`case_questions_${index}`];
+			// 	delete updatedObj[`case_questions_${index}_explanation`];
 
-				for (let i = index + 1; i < keys.length; i += 1) {
-					const currentKey = keys[i];
-					const newKey = `case_questions_${i - 1}`;
-					updatedObj[newKey] = updatedObj[currentKey];
-					delete updatedObj[currentKey];
-				}
+			// 	for (let i = index + 1; i < keys.length; i += 1) {
+			// 		const currentKey = keys[i];
+			// 		const newKey = `case_questions_${i - 1}_explanation`;
+			// 		updatedObj[newKey] = updatedObj[currentKey];
+			// 		delete updatedObj[currentKey];
+			// 	}
 
-				return updatedObj;
-			});
+			// 	return updatedObj;
+			// });
 
-			console.log('editorValue:: ', editorValue);
-			console.log('questionEditorValue', questionEditorValue);
+			// setQuestionEditorValue((prev) => {
+			// 	const updatedObj = { ...prev };
+			// 	const keys = Object.keys(updatedObj);
+
+			// 	delete updatedObj[`case_questions_${index}`];
+
+			// 	for (let i = index + 1; i < keys.length; i += 1) {
+			// 		const currentKey = keys[i];
+			// 		const newKey = `case_questions_${i - 1}`;
+			// 		updatedObj[newKey] = updatedObj[currentKey];
+			// 		delete updatedObj[currentKey];
+			// 	}
+
+			// 	return updatedObj;
+			// });
+
+			// setQuestionError((prev) => {
+			// 	const updatedObj = { ...prev };
+			// 	const keys = Object.keys(updatedObj);
+
+			// 	delete updatedObj[`case_questions_${index}`];
+
+			// 	for (let i = index + 1; i < keys.length; i += 1) {
+			// 		const currentKey = keys[i];
+			// 		const newKey = `case_questions_${i - 1}`;
+			// 		updatedObj[newKey] = updatedObj[currentKey];
+			// 		delete updatedObj[currentKey];
+			// 	}
+
+			// 	return updatedObj;
+			// });
 		} else {
 			updateCaseStudyQuestion({
 				action              : 'delete',
@@ -121,8 +156,10 @@ function useHandleSingleQuestion({
 	const handleChangeQuestionEditor = (value) => {
 		if (questionTypeWatch === 'case_study') {
 			setQuestionEditorValue((prev) => ({ ...prev, [`case_questions_${index}`]: value }));
+			setQuestionError((prev) => ({ ...prev, [`case_questions_${index}`]: false }));
 		} else {
 			setQuestionEditorValue({ question_0: value });
+			setQuestionError({ question_0: false });
 		}
 	};
 

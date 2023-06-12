@@ -1,5 +1,5 @@
 import { Checkbox, Button } from '@cogoport/components';
-import { SelectController, InputController, ChipsController } from '@cogoport/forms';
+import { SelectController, ChipsController } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 
 import OptionsComponent from './OptionsComponent';
@@ -28,12 +28,13 @@ function SingleQuestionComponent({
 	setEditorValue,
 	questionEditorValue,
 	setQuestionEditorValue = () => {},
+	questionError,
+	setQuestionError,
 	subjectiveEditorValue,
 	setUploadable = () => {},
 	uploadable,
 	setSubjectiveEditorValue = () => {},
 	caseStudyQuestionEditorValue,
-	setCaseStudyQuestionEditorValue = () => {},
 	...restProps
 }) {
 	const {
@@ -53,8 +54,8 @@ function SingleQuestionComponent({
 		setEditorValue,
 		questionEditorValue,
 		setQuestionEditorValue,
+		setQuestionError,
 		caseStudyQuestionEditorValue,
-		setCaseStudyQuestionEditorValue,
 		...restProps,
 	});
 
@@ -66,14 +67,6 @@ function SingleQuestionComponent({
 					errors?.question_text ? styles.question_text_err : null
 				} ${errors?.question_type ? styles.question_type_err : null}`}
 			>
-				{/* <InputController
-					className={`${
-						errors?.question_text ? styles.question_text_err : null
-					} ${styles.input_container}`}
-					{...NAME_CONTROL_MAPPING.question_text}
-					control={control}
-					name={`${name}.${index}.question_text`}
-				/> */}
 
 				<h3>Question: </h3>
 
@@ -107,6 +100,10 @@ function SingleQuestionComponent({
 					minHeight : '200px',
 				}}
 			/>
+
+			{(questionTypeWatch === 'case_study'
+				? questionError[`case_questions_${index}`] : questionError.question_0)
+				&& <p className={styles.error_msg}>Question is required</p>}
 
 			{questionTypeWatch !== 'subjective' ? (
 				<OptionsComponent
@@ -170,17 +167,6 @@ function SingleQuestionComponent({
 							onChange={() => { setUploadable(!uploadable); }}
 						/>
 					</div>
-
-					{/* <div className={styles.character_limit}>
-						<div className={styles.set_limit}>Set Character Limit</div>
-
-						<InputController
-							control={control}
-							name={`${name}.${index}.character_limit`}
-							placeholder="No Limit"
-							type="number"
-						/>
-					</div> */}
 				</div>
 			)}
 

@@ -39,6 +39,8 @@ function QuestionForm({
 	setEditorValue,
 	questionEditorValue,
 	setQuestionEditorValue,
+	questionError,
+	setQuestionError,
 	subjectiveEditorValue,
 	setSubjectiveEditorValue = () => {},
 	uploadable,
@@ -55,6 +57,9 @@ function QuestionForm({
 
 		return hash;
 	}, []);
+
+	const STATE_FUNCTIONS = useMemo(() => [setEditorValue, setQuestionEditorValue,
+		setQuestionError], [setEditorValue, setQuestionEditorValue, setQuestionError]);
 
 	const fieldArrayControls = useMemo(() => NAME_CONTROL_MAPPING.case_questions, [NAME_CONTROL_MAPPING]);
 
@@ -99,54 +104,24 @@ function QuestionForm({
 	const handleDeleteNewObject = (index) => {
 		remove(index, 1);
 
-		// setEditorValue((prev) => ({ ...prev, [`case_questions_${index}_explanation`]: undefined }));
+		STATE_FUNCTIONS.forEach((stateChanger, funcIndex) => {
+			stateChanger((prev) => {
+				const updatedObj = { ...prev };
+				const keys = Object.keys(updatedObj);
 
-		setEditorValue((prev) => {
-			const updatedObj = { ...prev };
-			const keys = Object.keys(updatedObj);
+				delete updatedObj[funcIndex === 0 ? `case_questions_${index}_explanation`
+					: `case_questions_${index}`];
 
-			// Remove the item at the specified index
-			delete updatedObj[`case_questions_${index}_explanation`];
+				for (let i = index + 1; i < keys.length; i += 1) {
+					const currentKey = keys[i];
+					const newKey = funcIndex === 0 ? `case_questions_${index}_explanation`
+						: `case_questions_${index}`;
+					updatedObj[newKey] = updatedObj[currentKey];
+					delete updatedObj[currentKey];
+				}
 
-			// Move the below index values up by updating the keys
-			for (let i = index + 1; i < keys.length; i += 1) {
-				const currentKey = keys[i];
-				const newKey = `case_questions_${i - 1}_explanation`;
-				updatedObj[newKey] = updatedObj[currentKey];
-				delete updatedObj[currentKey];
-			}
-
-			return updatedObj;
-		});
-		// setEditorValue((prev) => {
-		// 	const obj = prev;
-		// 	delete obj[`case_questions_${index}_explanation`];
-		// 	return obj;
-		// });
-		// setQuestionEditorValue((prev) => ({ ...prev, [`case_questions_${index}`]: undefined }));
-
-		// setQuestionEditorValue((prev) => {
-		// 	const obj = prev;
-		// 	delete obj[`case_questions_${index}`];
-		// 	return obj;
-		// });
-
-		setQuestionEditorValue((prev) => {
-			const updatedObj = { ...prev };
-			const keys = Object.keys(updatedObj);
-
-			// Remove the item at the specified index
-			delete updatedObj[`case_questions_${index}`];
-
-			// Move the below index values up by updating the keys
-			for (let i = index + 1; i < keys.length; i += 1) {
-				const currentKey = keys[i];
-				const newKey = `case_questions_${i - 1}`;
-				updatedObj[newKey] = updatedObj[currentKey];
-				delete updatedObj[currentKey];
-			}
-
-			return updatedObj;
+				return updatedObj;
+			});
 		});
 	};
 
@@ -176,6 +151,8 @@ function QuestionForm({
 							setEditorValue={setEditorValue}
 							questionEditorValue={questionEditorValue}
 							setQuestionEditorValue={setQuestionEditorValue}
+							questionError={questionError}
+							setQuestionError={setQuestionError}
 							subjectiveEditorValue={subjectiveEditorValue}
 							setSubjectiveEditorValue={setSubjectiveEditorValue}
 							uploadable={uploadable}

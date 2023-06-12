@@ -7,6 +7,7 @@ const getSubjectivePayload = ({
 	testQuestionId = '',
 	editDetails = {},
 	questionEditorValue = {},
+	setQuestionError = () => {},
 	subjectiveEditorValue = {},
 	uploadable = false,
 }) => {
@@ -21,6 +22,11 @@ const getSubjectivePayload = ({
 
 	if (action === 'delete') {
 		return { id: testQuestionId, status: 'inactive' };
+	}
+
+	if (!questionEditorValue?.question_0?.getEditorState().getCurrentContent().hasText()) {
+		setQuestionError({ question_0: true });
+		return {};
 	}
 
 	return {
