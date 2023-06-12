@@ -10,6 +10,8 @@ import ModuleComponent from './ModuleComponent';
 import styles from './styles.module.css';
 import useHandleCourseCurriculum from './useHandleCourseCurriculum';
 
+const INDEX_TO_VALUE_DIFF = 1;
+
 function CourseCurriculum({ id, activeTab, mode, state }, ref) {
 	const {
 		handleDragStart,
@@ -23,6 +25,8 @@ function CourseCurriculum({ id, activeTab, mode, state }, ref) {
 		getSubModuleRefetch,
 		setGetSubModuleRefetch,
 		showButtons,
+		openDetails = {},
+		setOpenDetails = () => {},
 	} = useHandleCourseCurriculum({ courseId: id, activeTab, mode });
 
 	useImperativeHandle(ref, () => ({
@@ -80,6 +84,8 @@ function CourseCurriculum({ id, activeTab, mode, state }, ref) {
 							setGetSubModuleRefetch={setGetSubModuleRefetch}
 							showButtons={showButtons}
 							state={state}
+							openDetails={openDetails}
+							setOpenDetails={setOpenDetails}
 						/>
 					</div>
 				))}
@@ -90,7 +96,7 @@ function CourseCurriculum({ id, activeTab, mode, state }, ref) {
 						className={styles.button}
 						themeType="secondary"
 						onClick={() => addModule()}
-						disabled={finalData[finalData.length - 1]?.isNew}
+						disabled={finalData[finalData.length - INDEX_TO_VALUE_DIFF]?.isNew}
 					>
 						+ Module
 					</Button>
