@@ -120,7 +120,7 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 			<div key={driverType}>
 				<span className={styles.driver_type}>
 					{driverType}
-					{' '}
+					&nbsp;
 					drivers
 				</span>
 				<ul>
@@ -129,7 +129,7 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 							<div>
 								<span>
 									Driver Name:
-									{' '}
+									&nbsp;
 									{driver.driver_name || driver.name}
 								</span>
 								<div className={styles.actionRow}>
@@ -139,7 +139,7 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 									>
 										Edit Info
 									</Button>
-									{' '}
+									&nbsp;
 									<Button
 										onClick={() => {
 											setUploadProof(null);

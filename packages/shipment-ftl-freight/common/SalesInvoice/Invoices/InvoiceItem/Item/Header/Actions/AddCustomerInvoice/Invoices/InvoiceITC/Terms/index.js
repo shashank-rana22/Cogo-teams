@@ -30,92 +30,79 @@ function Terms({
 		ifsc_code = '',
 		account_number = '',
 	} = customerToBankDetails[importerExporterId] || {};
-
 	return (
 		<>
-			<div style={{
-				padding     : '0px 8px',
-				borderTop   : '0',
-				borderLeft  : '2px solid black',
-				borderRight : '2px solid black',
-			}}
-			>
-				<p style={{ margin: '0', fontSize: '12px' }}>
+			<div style={{ padding: '5px', borderWidth: '0 2px 0 2px', borderColor: 'black', borderStyle: 'solid' }}>
+				<p style={{ margin: '0' }}>
 					Certified that the particulars given above are true and correct and
 					the amount indicated represent the price actually charged and that
 					there is no flow of additional consideration directly or indirectly
 					from the buyer.
 				</p>
-				<br />
-				<p style={{ margin: '3px 0', fontSize: '12px' }}>
+				<p>
 					We hereby declare that though our aggregate turnover in any preceding
 					financial year from 2017-18 onwards is more than the aggregate
 					turnover notified under sub-rule (4) of rule 48, we are not required
 					to prepare an invoice in terms of the provisions of the said sub-rule.
 				</p>
+				<p>
+					We have taken registration under the CGST Act, 2017 and have exercised
+					the option to pay tax on services of GTA in relation to transport of
+					goods supplied by us during the Financial Year 2022-23 under forward
+					charge.
+				</p>
 				<br />
 			</div>
 			<table style={{ width: '100%', borderWidth: '0 2px 2px 2px', borderColor: 'black', borderStyle: 'solid' }}>
 				<tr>
-					<td
-						style={{
-							width   : '80%',
-							padding : '0px 8px',
-						}}
-					>
-						<u>
-							<i>Terms & Conditions:</i>
-						</u>
-						<ol>
-							<li>Payment Terms: Days Receipt of Invoice.</li>
+					<td className="noBorder" style={{ width: '70%', padding: '0 8px' }}>
+						<b>Terms &amp; Conditions:</b>
+						<ol style={{ paddingLeft: '16px' }}>
 							<li>
-								All Payments should be to the account of a
-								&nbsp;
-								{billing_address?.business_name}
-								. Bank account details:
-								<p style={{ margin: '3px 0', fontSize: '12px' }}>
-									<b>Bank Name: </b>
+								<b>Payment Terms: Immediate</b>
+							</li>
+							<li>
+								<b>
+									All Payments should be to the account of
+									&nbsp;
+									{billing_address?.business_name || ''}
+									. Bank account details:
+								</b>
+								<p>
+									<b>Bank Name:</b>
+									&nbsp;
 									{bankDetailObj?.data?.bank_name || bank_name}
 								</p>
-								<p style={{ margin: '3px 0', fontSize: '12px' }}>
+								<p>
 									<b>Bank Branch: </b>
 									{bankDetailObj?.data?.branch_name || bank_branch}
 								</p>
-								<p style={{ margin: '3px 0', fontSize: '12px' }}>
+								<p>
 									<b>IFSC Code: </b>
 									{bankDetailObj?.data?.ifsc_code || ifsc_code}
 								</p>
-								<p style={{ margin: '3px 0', fontSize: '12px' }}>
+								<p>
 									<b>Account No.: </b>
 									{bankDetailObj?.data?.bank_account_number || account_number}
 								</p>
 							</li>
 							<li>
-								Delayed payment penalty: 2% per month or part therof from the
-								date of invoice.
+								<b>
+									Delayed payment penalty: 2% per month or part therof from the
+									date of invoice.
+								</b>
 							</li>
 							<li>
-								Any part payment made against this invoice shall be treated as
-								on Account, unless the amount of invoice is paid in full
-							</li>
-							<li>
-								Payment advice should be mailed to
-								&nbsp;
-								<b>collection@4tigo.com</b>
-								.
-							</li>
-							<li>
-								Disputes, if any shall be subject to jurisdiction of Courts at
-								Bangalore.
+								<b>
+									Any part payment made against this invoice shall be treated as
+									on Account, unless the amount of invoice is paid in full
+								</b>
 							</li>
 						</ol>
 					</td>
 					<td
-						style={{
-							width     : '20%',
-							textAlign : 'center',
-							padding   : '0px 8px',
-						}}
+						className="noBorder"
+						style={{ width: '30%', textAlign: 'center', padding: '0 8px' }}
 					>
 						<h3>
 							<b>
@@ -124,9 +111,9 @@ function Terms({
 							</b>
 						</h3>
 						<img
-							alt=""
 							src={stampData}
 							style={{ width: '100px', height: 'auto' }}
+							alt=""
 						/>
 						<h3>Authorised Signatory</h3>
 					</td>

@@ -57,7 +57,7 @@ function EditInvoice({
 				<div className={styles.forms}>
 					<div className={styles.invoice_value}>
 						Invoice Value -
-						{' '}
+						&nbsp;
 						<span className={styles.amount}>
 							{formatAmount({
 								amount   : invoice?.invoicing_party_total,

@@ -102,7 +102,7 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 			<div className={styles.truck_type_heading} key={truckType}>
 				<span className={styles.truck_type}>
 					{truckType}
-					{' '}
+					&nbsp;
 					trucks
 				</span>
 				<ul>
@@ -111,7 +111,7 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 							<div className="truckBox">
 								<span>
 									Truck Number:
-									{' '}
+									&nbsp;
 									{truck.truck_number || truck?.data?.truck_number}
 								</span>
 								<div className={styles.action_row}>
@@ -121,7 +121,7 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 									>
 										Edit Info
 									</Button>
-									{' '}
+									&nbsp;
 									<Button
 										onClick={() => {
 											setUploadProof(null);
