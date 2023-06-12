@@ -2,13 +2,13 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const useUpdatePlatformConfigMapping = () => {
+const useUpdateMarginValue = () => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/update_platform_config_constant_mapping',
+		url    : '/update_margin_value',
 		method : 'POST',
 	}, { manual: true });
 
-	const updatePlatformConfigMapping = async ({ payload }) => {
+	const updateMarginValue = async ({ payload }) => {
 		try {
 			await trigger({
 				data: {
@@ -24,10 +24,10 @@ const useUpdatePlatformConfigMapping = () => {
 	};
 
 	return {
-		updatePlatformConfigMapping,
+		updateMarginValue,
 		loading,
 
 	};
 };
 
-export default useUpdatePlatformConfigMapping;
+export default useUpdateMarginValue;

@@ -1,11 +1,11 @@
-import { Pagination, Tabs, TabPanel, Modal, Button } from '@cogoport/components';
+import { Pagination, Tabs, TabPanel, Modal, Button, Placeholder } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { IcMSettings } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
 import useListPlatformConfigConstants from '../../../hooks/useListPlatformConfigConstants';
 import useListRfqs from '../../../hooks/useListRfqs';
-import useUpdatePlatformConfigMapping from '../../../hooks/useUpdatePlatformConfigMapping';
+import useUpdateMarginValue from '../../../hooks/useUpdateMarginValue';
 import { getFieldController } from '../../../utils/getFieldController';
 import getControls from '../../../utils/getSettingContols';
 
@@ -28,12 +28,13 @@ function Content(props) {
 	const {
 		listPlatformConfigConstants,
 		data : platformData,
+		loading:platformLoading,
 	} = useListPlatformConfigConstants({ setValue });
 
 	const {
-		updatePlatformConfigMapping,
+		updateMarginValue,
 		loading : updateLoading,
-	} = useUpdatePlatformConfigMapping();
+	} = useUpdateMarginValue();
 
 	useEffect(() => {
 		getRfqsForApproval();
@@ -51,12 +52,11 @@ function Content(props) {
 		const payload = {
 			id,
 			value_type : 'default',
-			value_hash : {
-				key_value: profitability,
-			},
+			key_value  : profitability,
+
 		};
 
-		updatePlatformConfigMapping({ payload });
+		updateMarginValue({ payload });
 		setShowModal(false);
 	};
 
@@ -102,8 +102,8 @@ function Content(props) {
 						<Modal.Body>
 							Set the Threshold Margin Percentage for auto approval
 							<div>
-								{
-									controls.map((controlData) => {
+								{!platformLoading
+									? controls.map((controlData) => {
 										const { type, name, arrow, style, placeholder, suffix, rules } = controlData;
 										const Element = getFieldController(type);
 										return (
@@ -118,8 +118,7 @@ function Content(props) {
 												rules={rules}
 											/>
 										);
-									})
-								}
+									}) : <Placeholder width="200px" height="40px" margin="4px" />}
 							</div>
 
 							<div className={styles.button}>

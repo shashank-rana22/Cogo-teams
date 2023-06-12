@@ -48,7 +48,7 @@ const apis = [
 		service_name : 'rfq',
 	},
 	{
-		api          : 'update_platform_config_constant_mapping',
+		api          : 'update_margin_value',
 		access_type  : 'private',
 		feature      : 'rfq',
 		service_name : 'rfq',
