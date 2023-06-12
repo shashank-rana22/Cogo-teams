@@ -1,14 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useHarbourRequest } from '@cogoport/request';
-
-const SAMPLE_DOCUMENT_URL = `https://cogoport-production.sgp1.digitaloceanspaces.com
-								/ab3309b85b52e198b4c2bb691a7fb609/new_employee_bulk_upload_sample_sheet.csv`;
 
 const useBulkUpload = () => {
 	const onClickViewSampleFile = () => {
-		window.open(SAMPLE_DOCUMENT_URL, '_blank', 'noreferrer');
+		window.open(GLOBAL_CONSTANTS.sample_document_url.new_hire_bulk_upload_url, '_blank', 'noreferrer');
 	};
 
 	const [{ loading = false }, trigger] = useHarbourRequest({
