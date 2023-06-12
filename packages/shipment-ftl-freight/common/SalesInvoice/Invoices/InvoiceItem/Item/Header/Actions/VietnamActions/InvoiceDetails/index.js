@@ -28,9 +28,10 @@ function InvoiceDetails({
 	};
 	const {
 		proforma_email_count = 0,
-		 sales_email_count = 0, sales_utr,
-		  remarks,
-		 status, exchange_rate_document,
+		sales_email_count = 0,
+		sales_utr,
+		remarks,
+		status, exchange_rate_document,
 	} = invoice || {};
 
 	const remarkRender = (
