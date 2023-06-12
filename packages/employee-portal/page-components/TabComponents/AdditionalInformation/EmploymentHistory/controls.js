@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const getControls = [{
 	name     : 'employment_history',
 	type     : 'fieldArray',
@@ -13,7 +15,7 @@ const getControls = [{
 			name                  : 'started_at',
 			label                 : 'Start Date',
 			type                  : 'date-select',
-			placeholder           : 'DD/MM/YYYY',
+			placeholder           : GLOBAL_CONSTANTS.formats.date['DD/MM/YYYY'],
 			isPreviousDaysAllowed : true,
 			rules                 : { required: 'This is required' },
 			style                 : {
@@ -24,7 +26,7 @@ const getControls = [{
 			name                  : 'ended_at',
 			label                 : 'End Date',
 			type                  : 'date-select',
-			placeholder           : 'DD/MM/YYYY',
+			placeholder           : GLOBAL_CONSTANTS.formats.date['DD/MM/YYYY'],
 			isPreviousDaysAllowed : true,
 			rules                 : { required: 'This is required' },
 			style                 : {

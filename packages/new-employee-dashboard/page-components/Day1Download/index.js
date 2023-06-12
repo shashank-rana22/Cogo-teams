@@ -1,12 +1,21 @@
 import { Button } from '@cogoport/components';
+import { dynamic } from '@cogoport/next';
 import React from 'react';
 
-import BodyTextEditor from './BodyTextEditor';
 import styles from './styles.module.css';
 import useDay1Download from './useDay1Download';
 
+const BodyTextEditor = dynamic(() => import('./BodyTextEditor'), { ssr: true });
+
 function Day1Download() {
-	const { editorError, setEditorError, editorValue, setEditorValue, onClickUpdate } = useDay1Download();
+	const {
+		editorError,
+		setEditorError,
+		editorValue,
+		setEditorValue,
+		onClickUpdate,
+		RichTextEditor,
+	} = useDay1Download();
 
 	return (
 		<div className={styles.container}>
@@ -17,6 +26,7 @@ function Day1Download() {
 					editorValue={editorValue}
 					setEditorValue={setEditorValue}
 					setEditorError={setEditorError}
+					RichTextEditor={RichTextEditor}
 				/>
 			</div>
 			{editorError && (

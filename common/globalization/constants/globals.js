@@ -35,6 +35,7 @@ const GLOBAL_CONSTANTS = {
 	formats: {
 		date: {
 			'dd/MM/yyyy'        : 'dd/MM/yyyy',
+			'DD/MM/YYYY'        : 'DD/MM/YYYY',
 			'dd MMM yyyy'       : 'dd MMM yyyy',
 			'dd MMMM yyyy'      : 'dd MMMM yyyy',
 			'eee, dd MMM, yyyy' : 'eee, dd MMM, yyyy',
@@ -52,6 +53,10 @@ const GLOBAL_CONSTANTS = {
 	},
 	payment_url: {
 		razer_pay_url: 'https://checkout.razorpay.com/v1/checkout.js',
+	},
+	sample_document_url: {
+		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com
+		/ab3309b85b52e198b4c2bb691a7fb609/new_employee_bulk_upload_sample_sheet.csv`,
 	},
 	flash_booking_charge_codes: [
 		'OTC',

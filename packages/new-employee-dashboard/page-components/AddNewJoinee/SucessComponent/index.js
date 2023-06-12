@@ -1,16 +1,25 @@
 import { Button, Loader } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { useHarbourRequest } from '@cogoport/request';
 import { startCase } from '@cogoport/utils';
 
 import AnimatedTick from '../../../common/AnimatedTick';
-import useGetEmployeeDetails from '../useGetEmployeeDetails';
 
 import styles from './styles.module.css';
 
 function SuccessComponent({ activePage }) {
 	const router = useRouter();
 
-	const { data, loading } = useGetEmployeeDetails({ activePage });
+	const [{ loading, data }] = useHarbourRequest(
+		{
+			method : 'GET',
+			url    : '/get_employee_details',
+			params : {
+				id: activePage,
+			},
+		},
+		{ manual: false },
+	);
 
 	const { detail } = data || {};
 	const { name, employee_code } = detail || {};

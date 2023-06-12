@@ -1,16 +1,10 @@
 import React from 'react';
 
-let RichTextEditor;
-
-if (typeof window !== 'undefined') {
-	// eslint-disable-next-line global-require, import/no-unresolved
-	RichTextEditor = require('react-rte').default;
-}
-
 function BodyTextEditor({
 	editorValue = '',
 	setEditorValue = () => {},
 	setEditorError = () => {},
+	RichTextEditor,
 }) {
 	const handleChange = (value) => {
 		setEditorValue(value);

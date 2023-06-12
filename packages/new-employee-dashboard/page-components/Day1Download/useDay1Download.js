@@ -93,6 +93,7 @@ const useDay1Download = () => {
 		onClickUpdate,
 		listLoading,
 		loading,
+		RichTextEditor,
 	};
 };
 
