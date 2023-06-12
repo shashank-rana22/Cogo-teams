@@ -20,7 +20,7 @@ const useListPlatformConfigConstants = ({ setValue }) => {
 				},
 			});
 			setValue('minimum_profitability', response?.data?.list?.
-				[INITIAL_ELEMENT]?.platform_config_constant_mappings?.[INITIAL_ELEMENT].value);
+				[INITIAL_ELEMENT]?.platform_config_constant_mappings?.[INITIAL_ELEMENT]?.value);
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));
