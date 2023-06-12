@@ -57,7 +57,6 @@ const getEmploymentHistoryPayload = ({ data, offerLetter, paySlip }) => ({
 		offer_letter : offerLetter?.finalUrl,
 		payslip      : paySlip?.finalUrl,
 	})),
-
 });
 
 function useUpdateEmployeeDetails({

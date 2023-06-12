@@ -8,11 +8,11 @@ import styles from './styles.module.css';
 import useUpdateOfferLetter from './useUpdateOfferLetter';
 
 function OfferLetter({ setInformationPage, data, getEmployeeDetails, getEmployeeDetailsLoading }) {
-	const { id, document_url, status, signed_document_url:detail_signed_document_url } = data?.offer_letter || {};
+	const { id, document_url, status, signed_document_url: detail_signed_document_url } = data?.offer_letter || {};
 
 	const { updateData } = useUpdateOfferLetter({ document_url, id, getEmployeeDetails, setInformationPage });
 
-	const { onClickSignDocument, data:docData, loading } = useGetDocumentSigningUrl(
+	const { onClickSignDocument, data: docData, loading } = useGetDocumentSigningUrl(
 		{ getEmployeeDetails, document_type: 'offer_letter' },
 	);
 

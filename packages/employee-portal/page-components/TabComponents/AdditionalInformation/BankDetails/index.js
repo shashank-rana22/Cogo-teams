@@ -8,7 +8,7 @@ import useCreateEmployeeBankDetails from '../../../../hooks/useCreateEmployeeBan
 import controls from './controls';
 import styles from './styles.module.css';
 
-const DEFAULT_INDEX_VALUE = 0;
+const DEFAULT_INDEX = 0;
 
 const BANK_DETAILS_MAPPING = [
 	'ifsc_code',
@@ -35,7 +35,7 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 
 	useEffect(() => {
 		(BANK_DETAILS_MAPPING || []).map((element) => (
-			setValue(element, bank_details?.[DEFAULT_INDEX_VALUE]?.[element])
+			setValue(element, bank_details?.[DEFAULT_INDEX]?.[element])
 		));
 	}, [bank_details, setValue]);
 

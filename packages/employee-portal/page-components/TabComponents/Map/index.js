@@ -26,7 +26,7 @@ const baseLayer = [
 ];
 
 function Map() {
-	const [map, setMap] = useState();
+	const [map, setMap] = useState(null);
 
 	useEffect(() => {
 		if (map) {

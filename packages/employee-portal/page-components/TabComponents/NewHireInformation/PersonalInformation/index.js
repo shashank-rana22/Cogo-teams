@@ -16,7 +16,7 @@ const removeTypeField = (controlItem) => {
 	return rest;
 };
 
-function PersonalInformation({ data:content, getEmployeeDetails }) {
+function PersonalInformation({ data: content, getEmployeeDetails }) {
 	const { handleSubmit, control, formState: { errors }, setValue } = useForm();
 
 	const controlsvalue = controls({ content });

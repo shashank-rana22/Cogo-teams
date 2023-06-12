@@ -4,11 +4,11 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useBulkUpload = () => {
-	const onClickViewSampleFile = () => {
-		window.open(GLOBAL_CONSTANTS.sample_document_url.new_hire_bulk_upload_url, '_blank', 'noreferrer');
-	};
+const onClickViewSampleFile = () => {
+	window.open(GLOBAL_CONSTANTS.sample_document_url.new_hire_bulk_upload_url, '_blank', 'noreferrer');
+};
 
+const useBulkUpload = () => {
 	const [{ loading = false }, trigger] = useHarbourRequest({
 		url    : 'bulk_upload_employee_details',
 		method : 'post',

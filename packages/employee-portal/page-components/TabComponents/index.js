@@ -12,6 +12,33 @@ import OfferLetter from './OfferLetter';
 import SignYourDocuments from './SignYourDocuments';
 import styles from './styles.module.css';
 
+const KEY_COMPONENT_MAPPING = {
+	new_hire_information: {
+		icon      : GLOBAL_CONSTANTS.image_url.document_icon_png,
+		component : NewHireInformation,
+	},
+	offer_letter: {
+		icon      : GLOBAL_CONSTANTS.image_url.books_png,
+		component : OfferLetter,
+	},
+	additional_information: {
+		icon      : GLOBAL_CONSTANTS.image_url.document_icon_png,
+		component : AdditionalInformation,
+	},
+	sign_your_docs: {
+		icon      : GLOBAL_CONSTANTS.image_url.books_png,
+		component : SignYourDocuments,
+	},
+	company_policies: {
+		icon      : GLOBAL_CONSTANTS.image_url.document_icon_png,
+		component : CompanyPolicies,
+	},
+	day_1: {
+		icon      : GLOBAL_CONSTANTS.image_url.day_one_png,
+		component : Day1,
+	},
+};
+
 function TabComponents({ data, informationPage, setInformationPage, getEmployeeDetails, getEmployeeDetailsLoading }) {
 	const { offer_letter, progress_stats } = data || {};
 
@@ -25,36 +52,12 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 	&& Object.keys(additional_info_added).every((key) => (additional_info_added[key]));
 
 	const MAPPING = {
-		new_hire_information: {
-			icon      : GLOBAL_CONSTANTS.image_url.document_icon_png,
-			component : NewHireInformation,
-			enable    : true,
-		},
-		offer_letter: {
-			icon      : GLOBAL_CONSTANTS.image_url.books_png,
-			component : OfferLetter,
-			enable    : !isEmpty(offer_letter),
-		},
-		additional_information: {
-			icon      : GLOBAL_CONSTANTS.image_url.document_icon_png,
-			component : AdditionalInformation,
-			enable    : offer_letter_signed?.get_offer_letter_signed,
-		},
-		sign_your_docs: {
-			icon      : GLOBAL_CONSTANTS.image_url.books_png,
-			component : SignYourDocuments,
-			enable    : signDocEnableContd,
-		},
-		company_policies: {
-			icon      : GLOBAL_CONSTANTS.image_url.document_icon_png,
-			component : CompanyPolicies,
-			enable    : signDocEnableContd && documents_signed?.documents_signed,
-		},
-		day_1: {
-			icon      : GLOBAL_CONSTANTS.image_url.day_one_png,
-			component : Day1,
-			enable    : signDocEnableContd && company_policies_read?.company_policies_read,
-		},
+		new_hire_information   : true,
+		offer_letter           : !isEmpty(offer_letter),
+		additional_information : offer_letter_signed?.get_offer_letter_signed,
+		sign_your_docs         : signDocEnableContd,
+		company_policies       : signDocEnableContd && documents_signed?.documents_signed,
+		day_1                  : signDocEnableContd && company_policies_read?.company_policies_read,
 		// maps: {
 		// icon: GLOBAL_CONSTANTS.image_url.map_png,
 		// 	component : Maps,
@@ -63,13 +66,13 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 	};
 
 	const onClickTiles = ({ item }) => {
-		if (MAPPING[item]?.enable) {
+		if (MAPPING[item]) {
 			setInformationPage(item);
 		}
 	};
 
 	if (informationPage) {
-		const PageComponent = MAPPING[informationPage]?.component;
+		const PageComponent = KEY_COMPONENT_MAPPING[informationPage]?.component;
 
 		return (
 			<PageComponent
@@ -92,20 +95,19 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 						className={styles.options}
 						onClick={() => onClickTiles({ item })}
 						style={{
-							opacity : MAPPING[item]?.enable ? '1' : '0.5',
-							cursor  : MAPPING[item]?.enable ? 'pointer' : 'not-allowed',
+							opacity : MAPPING[item] ? '1' : '0.5',
+							cursor  : MAPPING[item] ? 'pointer' : 'not-allowed',
 						}}
 					>
 						<div>
-
 							<Image
-								src={MAPPING[item]?.icon}
+								src={KEY_COMPONENT_MAPPING[item]?.icon}
 								alt="address icon"
 								width="60"
 								height="60"
 							/>
-							<div className={styles.card_header}>{startCase(item)}</div>
 
+							<div className={styles.card_header}>{startCase(item)}</div>
 						</div>
 						<div className={styles.arrow_wrapper}>
 							<IcMArrowNext width={20} height={20} />
