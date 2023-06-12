@@ -1,10 +1,10 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
+import { Refetch } from '../../../commons/Interfaces';
 import useRemoveBpr from '../../../hooks/useRemoveBpr';
 
 import styles from './styles.module.css';
-import { Refetch } from '../../../commons/Interfaces';
 
 interface Row {
 	id?: string;
