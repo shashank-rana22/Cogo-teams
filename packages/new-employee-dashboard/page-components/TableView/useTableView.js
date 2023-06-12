@@ -7,12 +7,14 @@ import { useEffect, useCallback, useState } from 'react';
 import getColumns from './getColumns';
 
 const INITIAL_PAGE = 1;
+const SLICE_STARTING_VALUE = 0;
+const SLICE_END_VALUE = 6;
 
 const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('active');
 	const [page, setPage] = useState(INITIAL_PAGE);
-	const [filters, setFilters] = useState();
+	const [filters, setFilters] = useState({});
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'get',
@@ -51,8 +53,8 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 
 	let columns = getColumns({ onClickNewJoinerColumn, btnloading, updateEmployeeStatus, fetch });
 
-	if( activeTab !== 'rejected_by_user') {
-		columns = columns.slice(0,6);
+	if (activeTab !== 'rejected_by_user') {
+		columns = columns.slice(SLICE_STARTING_VALUE, SLICE_END_VALUE);
 	}
 
 	return {

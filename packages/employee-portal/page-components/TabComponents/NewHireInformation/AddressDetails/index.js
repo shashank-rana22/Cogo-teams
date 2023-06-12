@@ -27,11 +27,11 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 	const { city, country, pincode, state, address:presentAddress } = present_address || {};
 
 	const {
-		city:permanentCity,
-		country:permanentCountry,
-		pincode:permanentPincode,
-		state:permanentState,
-		address:permanentAddress,
+		city: permanentCity,
+		country: permanentCountry,
+		pincode: permanentPincode,
+		state: permanentState,
+		address: permanentAddress,
 	} = permanent_address || {};
 
 	const controlsvalue = controls({ content });
@@ -86,7 +86,6 @@ function AddressDetails({ data:content, getEmployeeDetails }) {
 			permanent_pincode,
 			permanent_state,
 			permanent_address : getValuePermanentAdd,
-
 		};
 
 		if (address === false) {

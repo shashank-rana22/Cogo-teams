@@ -1,4 +1,4 @@
-import PATTERNS from '../../../../commons/patterns';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const controls = [
 	{
@@ -9,7 +9,7 @@ const controls = [
 		rules       : {
 			required : 'This is required',
 			pattern  : {
-				value   : PATTERNS.AADHAR_NUMBER,
+				value   : GLOBAL_CONSTANTS.regex_patterns?.aadhar_number,
 				message : 'Enter valid Adhar card number',
 			},
 		},
@@ -19,6 +19,7 @@ const controls = [
 		name             : 'aadhaar_card',
 		label            : 'Upload Your Aadhaar Card',
 		type             : 'fileUpload',
+		maxSize          : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
 		accept           : '.pdf',
 		rules            : { required: 'This is required' },
 		verification_key : 'aadhaar_card',
@@ -31,7 +32,7 @@ const controls = [
 		rules       : {
 			required : 'This is required',
 			pattern  : {
-				value   : PATTERNS.PAN_NUMBER,
+				value   : GLOBAL_CONSTANTS.regex_patterns?.pan_number,
 				message : 'Enter valid Pan card number',
 			},
 		},
@@ -42,6 +43,7 @@ const controls = [
 		label            : 'Upload Your Pan Card',
 		type             : 'fileUpload',
 		accept           : '.pdf',
+		maxSize          : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
 		rules            : { required: 'This is required' },
 		verification_key : 'pan_card',
 	},
@@ -52,7 +54,7 @@ const controls = [
 		placeholder : 'Passport Number',
 		rules       : {
 			pattern: {
-				value   : PATTERNS.PASSPORT_NUMBER,
+				value   : GLOBAL_CONSTANTS.regex_patterns?.passport_number,
 				message : 'Enter valid Passport number',
 			},
 		},
@@ -63,6 +65,7 @@ const controls = [
 		label            : 'Upload Your Passport',
 		accept           : '.pdf',
 		type             : 'fileUpload',
+		maxSize          : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
 		verification_key : 'passport',
 	},
 	{
@@ -78,6 +81,8 @@ const controls = [
 		accept           : '.pdf',
 		type             : 'fileUpload',
 		verification_key : 'driving_license',
+		maxSize          : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
+
 	},
 ];
 

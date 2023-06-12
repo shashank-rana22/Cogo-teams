@@ -85,7 +85,7 @@ function Header({
 			</div>
 
 			<div className={styles.button_container}>
-				{(status === 'active' && isEmpty(offer_letter_active) )? (
+				{(status === 'active' && isEmpty(offer_letter_active)) ? (
 					<Button
 						onClick={() => setShowCtcBreakupModal(true)}
 						type="button"

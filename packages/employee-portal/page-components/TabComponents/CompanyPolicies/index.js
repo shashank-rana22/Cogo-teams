@@ -11,7 +11,7 @@ function checkIfObjectContainsAllIDs(policies_data, companyPolicyIds) {
 
 const handleChange = (checked = false) => {
 	if (checked) {
-		Toast.default('You can View the Company Policies Again');
+		Toast.info('You can View the Company Policies Again');
 	} else {
 		Toast.error('Please Read all the company Policies');
 	}
@@ -19,7 +19,7 @@ const handleChange = (checked = false) => {
 
 function CompanyPolicies({ setInformationPage, getEmployeeDetails, data }) {
 	const { company_policy_data : list, detail } = data || {};
-	const { policies_data, id:employeeId } = detail || {};
+	const { policies_data, id: employeeId } = detail || {};
 
 	const companyPolicyIds = (list || []).map((element) => (element.id));
 

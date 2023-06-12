@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { CogoMaps, L, Marker, Popup } from '@cogoport/maps';
 import { useEffect, useState } from 'react';
 
@@ -8,23 +9,23 @@ const center = [X_CENTER, Y_CENTER];
 const NUMBER = 10;
 
 const icon = new L.Icon({
-	iconUrl  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
+	iconUrl  : GLOBAL_CONSTANTS.image_url.destination_icon,
 	iconSize : [ICON_SIZE, ICON_SIZE],
 });
 
-function Map() {
-	const baseLayer = [
-		{
-			name : 'Cogo Maps',
-			url  : `${process.env.NEXT_PUBLIC_MAPS_BASE_URL}/{z}/{x}/{y}.png`,
-			attribution:
-			// eslint-disable-next-line max-len
-			'<a href="https://www.cogoport.com/en/terms-and-conditions/" >& copy; Cogoport T&C </a > | < a href="https://www.cogoport.com/en/privacy-policy/" > Privacy & data protection</>',
-			minZoom : 0,
-			maxZoom : 15,
-		},
-	];
+const baseLayer = [
+	{
+		name : 'Cogo Maps',
+		url  : `${process.env.NEXT_PUBLIC_MAPS_BASE_URL}/{z}/{x}/{y}.png`,
+		attribution:
+		// eslint-disable-next-line max-len
+		'<a href="https://www.cogoport.com/en/terms-and-conditions/" >& copy; Cogoport T&C </a > | < a href="https://www.cogoport.com/en/privacy-policy/" > Privacy & data protection</>',
+		minZoom : 0,
+		maxZoom : 15,
+	},
+];
 
+function Map() {
 	const [map, setMap] = useState();
 
 	useEffect(() => {

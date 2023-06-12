@@ -6,7 +6,7 @@ import { useCallback, useMemo } from 'react';
 
 function useGetEmployeeDetails({ company_policy_data_required = false }) {
 	const { user } = useSelector((state) => state?.profile);
-	const { id:userId } = user || {};
+	const { id: userId } = user || {};
 
 	const params = useMemo(() => ({
 		user_id                 : userId,

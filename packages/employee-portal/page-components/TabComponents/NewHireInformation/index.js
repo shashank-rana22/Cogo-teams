@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 
 const DOC_MAPPING = ['aadhaar_card', 'pan_card'];
 
-const renderPills = ({ name, isCompleted }) => {
+function RenderPills({ name, isCompleted, isDocsApproved }) {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
 	}
@@ -81,8 +81,11 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 									<div className={styles.status}>
 										<div className={styles.accordion_title}>{startCase(name)}</div>
 
-										{renderPills({ isCompleted, name })}
-
+										<RenderPills
+											isCompleted={isCompleted}
+											name={name}
+											isDocsApproved={isDocsApproved}
+										/>
 									</div>
 								)}
 								animate={false}

@@ -1,12 +1,12 @@
-const COUNTRY_OPTIONS = [
-	{ label: 'India', value: 'India' },
-	{ label: 'Vietnam', value: 'Vietnam' },
-];
+// const COUNTRY_OPTIONS = [
+// 	{ label: 'India', value: 'India' },
+// 	{ label: 'Vietnam', value: 'Vietnam' },
+// ];
 
-const CITY_OPTIONS = [
-	{ label: 'India', value: 'India' },
-	{ label: 'Vietnam', value: 'Vietnam' },
-];
+// const CITY_OPTIONS = [
+// 	{ label: 'India', value: 'India' },
+// 	{ label: 'Vietnam', value: 'Vietnam' },
+// ];
 
 const controls = [
 	{
@@ -14,7 +14,7 @@ const controls = [
 		label       : 'Country',
 		type        : 'select',
 		placeholder : 'Select Country',
-		options     : COUNTRY_OPTIONS,
+		options     : [],
 		isClearable : true,
 		rules       : { required: 'Country is Required' },
 	},
@@ -23,7 +23,7 @@ const controls = [
 		label       : 'City',
 		type        : 'select',
 		placeholder : 'Select City',
-		options     : CITY_OPTIONS,
+		options     : [],
 		isClearable : true,
 		rules       : { required: 'City is Required' },
 	},
