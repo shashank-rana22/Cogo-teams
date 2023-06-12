@@ -16,6 +16,7 @@ const TAB_MAPPING = [
 	{ name: 'approval', title: 'Approval' },
 ];
 const INITIAL_ELEMENT = 0;
+const DEFAULT_PAGE = 1;
 
 function Content(props) {
 	const { activeTab, setActiveTab, filterStore } = props;
@@ -140,7 +141,7 @@ function Content(props) {
 					<Pagination
 						className="md"
 						totalItems={data?.total_count || INITIAL_ELEMENT}
-						currentPage={page || 1}
+						currentPage={page || DEFAULT_PAGE}
 						pageSize={data?.page_limit || INITIAL_ELEMENT}
 						onPageChange={setPage}
 						type="table"
