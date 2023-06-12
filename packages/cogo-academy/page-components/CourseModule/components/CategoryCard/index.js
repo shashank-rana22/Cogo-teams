@@ -1,13 +1,16 @@
-import { Carousel } from '@cogoport/components';
+import { Button, Carousel } from '@cogoport/components';
+import { IcMArrowRight } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import LoadingState from '../../../../commons/LoadingState';
-import EmptyState from '../../commons/EmptyState';
 
 import CategoriesCard from './component/CategoriesCard';
 import styles from './styles.module.css';
 
 function CategoryCard({ courseCategoryData = {}, categoryLoading, setCurrentCategory }) {
+	const router = useRouter();
+
 	const { list = [] } = courseCategoryData || {};
 
 	if (categoryLoading) {
@@ -15,12 +18,7 @@ function CategoryCard({ courseCategoryData = {}, categoryLoading, setCurrentCate
 	}
 
 	if (isEmpty(list)) {
-		return (
-			<EmptyState
-				emptyText="Categories not found"
-				flexDirection="column"
-			/>
-		);
+		return null;
 	}
 
 	const CAROUSELDATA = (list).map((item) => ({
@@ -35,15 +33,32 @@ function CategoryCard({ courseCategoryData = {}, categoryLoading, setCurrentCate
 	}));
 
 	return (
-		<div className={styles.carousel_container}>
-			<Carousel
-				size="md"
-				slides={CAROUSELDATA}
-				itemsToShow={8}
-				itemsToScroll={8}
-				showDots={false}
-				showArrow
-			/>
+		<div className={styles.container}>
+			<div className={styles.main_heading}>Explore Courses</div>
+
+			<div className={styles.category_head}>
+				<div className={styles.sub_category}>By Category</div>
+
+				<Button
+					themeType="tertiary"
+					onClick={() => router.push('/learning/course?viewType=all_courses')}
+				>
+					See All
+					{' '}
+					<IcMArrowRight />
+				</Button>
+			</div>
+
+			<div className={styles.carousel_container}>
+				<Carousel
+					size="md"
+					slides={CAROUSELDATA}
+					itemsToShow={8}
+					itemsToScroll={8}
+					showDots={false}
+					showArrow
+				/>
+			</div>
 		</div>
 	);
 }

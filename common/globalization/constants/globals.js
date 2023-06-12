@@ -100,7 +100,11 @@ const GLOBAL_CONSTANTS = {
 			'5de782f6-f59d-41fc-84f4-8425dc1fa670',
 			'ebafce31-75ef-4865-9060-775574e9606f',
 		],
-		cogo_course_notification_id: '97dcd57c-d263-496f-9f59-7a7aef400d34',
+		cogo_course_notification_user_ids: [
+			'97dcd57c-d263-496f-9f59-7a7aef400d34',
+			'20f59087-12cf-4e6d-8463-27d41e23da6f',
+		],
+
 	},
 	view_key_mappings: {
 		sales_team_members_view          : 'sales_agent_id',
