@@ -7,6 +7,8 @@ import { useState, useEffect } from 'react';
 import styles from './styles.module.css';
 
 const INITIAL_STATE = -1;
+const DEFAULT_VALUE = 0;
+const TOTAL_LOADED = 100;
 
 function FileUploader(props) {
 	const {
@@ -44,13 +46,13 @@ function FileUploader(props) {
 		}
 		setLoading(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [defaultValues?.length > 0]);
+	}, [defaultValues?.length > DEFAULT_VALUE]);
 
 	useEffect(() => {
 		if (multiple) {
 			onChange(urlStore);
 		} else {
-			onChange(urlStore[0]);
+			onChange(urlStore[DEFAULT_VALUE]);
 		}
 	}, [multiple, urlStore, onChange]);
 
@@ -59,7 +61,7 @@ function FileUploader(props) {
 			...previousProgress,
 			[`${index}`]: (() => {
 				const { loaded, total } = file;
-				const percentCompleted = Math.floor((loaded * 100) / total);
+				const percentCompleted = Math.floor((loaded * TOTAL_LOADED) / total);
 
 				return percentCompleted;
 			})(),
@@ -88,7 +90,7 @@ function FileUploader(props) {
 			onUploadProgress: onUploadProgress(index),
 		});
 
-		const finalUrl = url.split('?')[0];
+		const finalUrl = url.split('?')[DEFAULT_VALUE];
 
 		return finalUrl;
 	};
@@ -97,7 +99,7 @@ function FileUploader(props) {
 		try {
 			setLoading(true);
 
-			if (values.length > 0) {
+			if (values.length > DEFAULT_VALUE) {
 				setProgress({});
 
 				const promises = values.map((value, index) => uploadFile(index)(value));
@@ -147,7 +149,7 @@ function FileUploader(props) {
 			/>
 
 			{loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
-				<div className={styles.progress_container}>
+				<div className={styles.progress_container} key={key}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}
 					/>

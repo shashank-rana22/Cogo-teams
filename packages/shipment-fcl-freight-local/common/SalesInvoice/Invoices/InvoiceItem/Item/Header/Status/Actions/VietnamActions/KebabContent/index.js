@@ -1,18 +1,18 @@
-import { Popover, Tooltip } from '@cogoport/components';
+import { Popover, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMOverflowDot,
 	IcMInfo,
+	IcMEmail,
 } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
-
 import styles from '../../styles.module.css';
 
 const INITIAL_STATE = 0;
 
-function Actions({
+function KebabContent({
 	invoice = {},
 	shipment_data = {},
 	invoiceData = {},
@@ -21,6 +21,7 @@ function Actions({
 	setShowAddRemarks = () => {},
 	setShowChangePaymentMode = () => {},
 	setIsEditInvoice = () => {},
+	setSendEmail = () => {},
 }) {
 	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
@@ -198,4 +199,4 @@ function Actions({
 	);
 }
 
-export default Actions;
+export default KebabContent;

@@ -4,6 +4,8 @@ import getValue from '../../../utils/getValue';
 
 import styles from './styles.module.css';
 
+const STYLES_COL = { padding: '0px 4px' };
+
 function Item({
 	item = {},
 	isTotalRow = false,
@@ -12,8 +14,6 @@ function Item({
 	disabled = false,
 	isLast = false,
 }) {
-	const stylesCol = { padding: '0px 4px' };
-
 	return (
 		<div
 			style={{
@@ -33,7 +33,7 @@ function Item({
 
 				return (
 					<div
-						style={singleItem.hasStyle ? singleItem.styles : stylesCol}
+						style={singleItem.hasStyle ? singleItem.styles : STYLES_COL}
 						key={singleItem?.key}
 						className="card-body-col"
 					>

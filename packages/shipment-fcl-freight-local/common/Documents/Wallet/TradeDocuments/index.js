@@ -12,7 +12,10 @@ import Loader from '../Loader';
 
 import styles from './styles.module.css';
 
-const LOADER_KEYS = Array(3).fill(null).map(() => Math.random());
+const TOTAL_LOADED = 3;
+const LOADER_KEYS = Array(TOTAL_LOADED).fill(null).map(() => Math.random());
+const INITIAL_STATE = 2;
+const DEFAULT_VALUE = 0;
 
 function TradeDocuments({
 	forModal = false,
@@ -35,11 +38,11 @@ function TradeDocuments({
 
 	const contentToShow = () => {
 		if (loading) {
-			return [...Array(forModal ? 3 : 2)].map((i, idx) => (
+			return [...Array(forModal ? TOTAL_LOADED : INITIAL_STATE)].map((i, idx) => (
 				<Loader forModal={forModal} key={LOADER_KEYS[idx]} />
 			));
 		}
-		if (!loading && data?.list?.length === 0) {
+		if (!loading && data?.list?.length === DEFAULT_VALUE) {
 			return <EmptyState />;
 		}
 

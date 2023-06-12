@@ -4,6 +4,8 @@ import { renderValue } from '../../../CargoDetails/RenderCargoPills/renderValue'
 
 import styles from './styles.module.css';
 
+const DEFAULT_VALUE = 1;
+
 function ConatinerDetails({ containerDetails = [], cargoDetails = {} }) {
 	return (
 		<div className={styles.container}>
@@ -12,7 +14,7 @@ function ConatinerDetails({ containerDetails = [], cargoDetails = {} }) {
 					<div className={styles.container_item}>
 						<div className={styles.container_description}>
 							<div className={styles.serial_number}>
-								{index + 1}
+								{index + DEFAULT_VALUE}
 								.
 							</div>
 							<div className={styles.container_number}>{item?.container_number}</div>

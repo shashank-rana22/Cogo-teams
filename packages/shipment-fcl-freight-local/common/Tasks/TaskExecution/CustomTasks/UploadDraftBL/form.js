@@ -11,6 +11,7 @@ const CONTROL_TYPE_MAPPING = {
 };
 const TOTAL_SPAN = 12;
 const PERCENT = 100;
+const INITIAL_STATE = 1;
 
 function FormElement({ name, label, errors, type, span, ...rest }) {
 	const Element = CONTROL_TYPE_MAPPING[type];
@@ -43,7 +44,7 @@ function Form(props, ref) {
 			<div className={styles.text}>
 				{bl_type}
 				&nbsp;
-				{id + 1}
+				{id + INITIAL_STATE}
 			</div>
 			<form className={styles.form_container}>
 				{controls.map((item) => <FormElement control={control} errors={errors} {...item} key={item?.name} />)}

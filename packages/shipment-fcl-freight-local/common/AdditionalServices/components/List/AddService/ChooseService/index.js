@@ -9,6 +9,8 @@ import ServicesList from './ServicesList';
 import styles from './styles.module.css';
 import tableFields from './tableFields';
 
+const DEFAULT_VALUE = 0;
+
 function ChooseService({
 	setAddRate,
 	isSeller,
@@ -24,7 +26,7 @@ function ChooseService({
 	const tagDisplay = (item) => (
 		<div>
 			{item?.tags ? (
-				<Pill className="primary">{startCase(item?.tags?.[0])}</Pill>
+				<Pill className="primary">{startCase(item?.tags?.[DEFAULT_VALUE])}</Pill>
 			) : null}
 		</div>
 	);

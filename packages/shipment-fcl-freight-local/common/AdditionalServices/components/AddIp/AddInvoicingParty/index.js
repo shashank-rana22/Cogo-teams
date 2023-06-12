@@ -3,6 +3,8 @@ import { useState } from 'react';
 
 import InvoicingParties from './InvoicingParties';
 
+const DEFAULT_VALUE = 0;
+
 const COMPONENTS_MAPPING = {
 	invoice_to_self: {
 		label     : 'Invoice to Self',
@@ -23,7 +25,7 @@ function AddInvoicingParty({
 	primary_service = {},
 	updateInvoicingParty = () => {},
 }) {
-	const [activeComponentKey, setActiveComponentKey] = useState(() => RADIO_GROUP_OPTIONS[0].value);
+	const [activeComponentKey, setActiveComponentKey] = useState(() => RADIO_GROUP_OPTIONS[DEFAULT_VALUE].value);
 
 	const componentProps = {
 		invoice_to_self: {
