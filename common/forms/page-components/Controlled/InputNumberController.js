@@ -6,6 +6,7 @@ function InputNumberController(props) {
 	const {
 		name, control, value, rules, arrow, ...rest
 	} = props;
+
 	return (
 		<Controller
 			key={name}

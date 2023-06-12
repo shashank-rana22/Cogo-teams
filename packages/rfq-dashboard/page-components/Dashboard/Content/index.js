@@ -60,6 +60,15 @@ function Content(props) {
 		setShowModal(false);
 	};
 
+	const handleSettings = () => {
+		listPlatformConfigConstants();
+		setShowModal(true);
+	};
+
+	const handleModalClose = () => {
+		setShowModal(false);
+	};
+
 	return (
 		<div>
 			<div className={styles.container}>
@@ -83,13 +92,12 @@ function Content(props) {
 				<div className={styles.settings}>
 					<IcMSettings
 						onClick={() => {
-							listPlatformConfigConstants();
-							setShowModal(true);
+							handleSettings();
 						}}
 						width="25px"
 						height="25px"
 					/>
-					<Modal size="sm" show={showModal} onClose={() => setShowModal(false)}>
+					<Modal size="sm" show={showModal} onClose={handleModalClose}>
 						<Modal.Header title="Setting" />
 						<Modal.Body>
 							Set the Threshold Margin Percentage for auto approval
@@ -115,7 +123,7 @@ function Content(props) {
 							</div>
 
 							<div className={styles.button}>
-								<Button onClick={() => setShowModal(false)} themeType="tertiary">
+								<Button onClick={handleModalClose} themeType="tertiary">
 									Cancel
 								</Button>
 
