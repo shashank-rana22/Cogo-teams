@@ -2,6 +2,7 @@
 	display: flex;
 	align-items: center;
 	margin-top: 10px;
+	width:100%;
 
 	@media (max-width: 768px) {
 		flex-direction: column;
@@ -14,21 +15,20 @@
 	justify-content: center;
 	height: 300px;
 	padding: 10px 20px;
+	width: 60%;
 	margin-right: 10px;
 	background: #fff;
 	border-radius: 6px;
-    transition: 1s ease-in-out;
+    transition: 0.5s ease-in-out;
+
 	@media (max-width: 768px) {
 		width: 100%;
 	}
 }
 
-.has_pie_chart{
-	width: 60%;
-}
-
 .no_pie_chart{
 	width: 100%;
+	margin-right: 0px;
 }
 
 .pie_chart {
@@ -40,6 +40,7 @@
 	padding: 10px 20px;
 	background: #fff;
 	border-radius: 6px;
+
 	@media (max-width: 768px) {
 		width: 100%;
 	}

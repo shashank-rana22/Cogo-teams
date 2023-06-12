@@ -1,30 +1,34 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { startCase } from '@cogoport/utils';
 
+import { formatValue } from '../../../../utils/formatValue';
+
 import styles from './styles.module.css';
 
+const FIRST_FIELD_VALUE = 0;
+
 function LineChart({ formattedData = [], transactionType = '', currencyCode = '' }) {
-	console.log('🚀 ~ file: index.js:5 ~ LineChart ~ formattedData:', formattedData);
 	const data = [
 		{
 			id    : 'hello',
 			color : 'hsl(155, 70%, 50%)',
-			data  : formattedData.reverse(),
+			data  : formattedData,
 		},
 	];
 
 	const renderSliceTooltip = ({ slice }) => {
-		console.log('🚀 ~ file: index.js:17 ~ renderSliceTooltip ~ slice:', slice);
+		const { data: singleData } = slice?.points?.[FIRST_FIELD_VALUE] || {};
 
 		return (
 			<div className={styles.tooltip_div}>
 				<div className={styles.title}>
-					Date:
-					{/* <div className={styles.amount}>{data?.x}</div>
+					{`${startCase(transactionType)}ed Month : `}
+					<div className={styles.amount}>{singleData?.x}</div>
 				</div>
 				<div className={styles.title}>
-					Cogopoints:
-					<div className={styles.amount}>{data?.y}</div> */}
+					{`${startCase(transactionType)}ed Amount (${currencyCode}) : `}
+					:
+					<div className={styles.amount}>{singleData?.y}</div>
 				</div>
 			</div>
 		);
@@ -58,8 +62,9 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 				tickPadding    : 5,
 				tickRotation   : 0,
 				legend         : `${startCase(transactionType)}ed Amount (${currencyCode})`,
-				legendOffset   : -40,
+				legendOffset   : -50,
 				legendPosition : 'middle',
+				format         : (v) => formatValue(v),
 			}}
 			enableGridX={false}
 			enablePoints={false}
@@ -69,6 +74,7 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 			pointBorderColor={{ from: 'serieColor' }}
 			pointLabelYOffset={-12}
 			useMesh
+			enableSlices="x"
 			sliceTooltip={renderSliceTooltip}
 		/>
 	);

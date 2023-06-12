@@ -1,21 +1,23 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
 import { Image } from '@cogoport/next';
 
-import pieChartData from '../../../../configuration/pie-chart-data';
+import burntChartData from '../../../../configuration/burnt-chart-data';
+import liabilityChartData from '../../../../configuration/liability-chart-data';
 import { NETWORK_EMPTY_STATE } from '../../../../constants';
-import getFormatedPieChartData from '../../../../utils/getFormatedPieChartData';
+import { formatValue } from '../../../../utils/formatValue';
 
 function PieChart({
 	creditData = {},
 	debitData = {},
 	activeStatsCard = '',
 }) {
-	const chartData = getFormatedPieChartData({ creditData, debitData, activeStatsCard });
-	console.log('🚀 ~ file: index.js:14 ~ chartData:', chartData);
+	const { liabilityData } = liabilityChartData(creditData);
 
-	const { data } = pieChartData({ creditData, debitData, activeStatsCard });
+	const { burntData } = burntChartData(debitData);
 
-	const empotyValue = (data || []).every((item) => item.value === 0);
+	const checkActiveData = activeStatsCard === 'liability_point_value' ? liabilityData : burntData;
+
+	const empotyValue = (checkActiveData || []).every((item) => item.value === 0);
 
 	if (empotyValue) {
 		return (
@@ -30,11 +32,12 @@ function PieChart({
 
 	return (
 		<ResponsivePie
-			data={data}
+			data={checkActiveData}
 			width={440}
 			margin={{ top: 15, right: 180, bottom: 15, left: 10 }}
 			sortByValue
 			activeInnerRadiusOffset={13}
+			valueFormat={(val) => formatValue(val)}
 			activeOuterRadiusOffset={14}
 			enableArcLinkLabels={false}
 			arcLinkLabelsSkipAngle={16}

@@ -1,7 +1,5 @@
 import { format } from '@cogoport/utils';
 
-import { formatValue } from './formatValue';
-
 const getFormattedLineChartData = (data = {}) => {
 	let chartDetails = [];
 
@@ -11,8 +9,8 @@ const getFormattedLineChartData = (data = {}) => {
 		chartDetails = [
 			...chartDetails,
 			{
-				x : format((key), 'PPP').replace('1st,', ''),
-				y : formatValue(data[key]),
+				x : format((key), 'MMMM'),
+				y : Math.round(data[key]),
 			},
 		];
 	});

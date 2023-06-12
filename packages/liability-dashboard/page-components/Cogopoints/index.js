@@ -35,7 +35,7 @@ function CogoPoints() {
 
 	const formattedData = getFormattedLineChartData(credit_cogopoint_date_data);
 
-	const checkPieChart = PIE_CHART_CHECK.includes(activeStatsCard);
+	const checkPieChart = (PIE_CHART_CHECK || []).includes(activeStatsCard);
 
 	return (
 		<>
@@ -52,8 +52,9 @@ function CogoPoints() {
 
 					{topHistoryLoading ? <ChartLoadingState /> : (
 						<div className={styles.container}>
-							<div className={cl`${styles.line_chart} 
-							${checkPieChart ? styles.no_pie_chart : styles.has_pie_chart}`}
+							<div className={cl`
+			                ${styles.line_chart} 
+			                ${!checkPieChart && styles.no_pie_chart}`}
 							>
 								<LineChart
 									formattedData={formattedData}
