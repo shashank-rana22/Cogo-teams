@@ -43,7 +43,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 					Subcategory : '',
 					Priority    : priority,
 					Usertype    : 'ticket_user',
-					Data        : { Attachment: finalUrl || [], ...selectedServices },
+					Data        : { Attachment: [finalUrl] || [], ...selectedServices },
 					Type        : issue_type,
 					Description : additional_information,
 					...additionalData,

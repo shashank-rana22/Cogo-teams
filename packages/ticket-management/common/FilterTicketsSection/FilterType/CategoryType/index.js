@@ -14,13 +14,7 @@ function CategoryType(props) {
 		(item) => ({ value: item.TicketType, label: item.TicketType }),
 	);
 
-	const serviceProviderOptions = useGetAsyncOptions(
-		merge(asyncFieldsPartnerUsers(), {
-			params: {
-				filters: { kyc_status: 'verified' },
-			},
-		}),
-	);
+	const serviceProviderOptions = useGetAsyncOptions(merge(asyncFieldsPartnerUsers()));
 
 	return (
 		<div className={styles.category_container}>
