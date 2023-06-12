@@ -10,7 +10,7 @@ import ClickableDiv from '../../../../../../../../ClickableDiv';
 
 import styles from './styles.module.css';
 
-const INITIAL_STATE = 0;
+const IS_EMPTY = 0;
 
 function InvoiceDetails({
 	invoice = {},
@@ -26,15 +26,17 @@ function InvoiceDetails({
 		setShow(false);
 		setState(true);
 	};
+	const {proforma_email_count = 0, sales_email_count = 0, sales_utr, remarks, status, exchange_rate_document} = invoice || {};
+
 
 	const remarkRender = (
 		<div className={styles.remark_container}>
 			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
+			<div className={styles.value}>{remarks}</div>
 		</div>
 	);
 
-	const commonActions = invoice.status !== 'approved' && !disableAction;
+	const commonActions = status !== 'approved' && !disableAction;
 
 	const content = (
 		<div className={styles.dialog_box}>
@@ -66,7 +68,7 @@ function InvoiceDetails({
 					</div>
 				</>
 			) : null}
-			{(invoice.exchange_rate_document || []).map((url) => (
+			{(exchange_rate_document || []).map((url) => (
 				<div key={url}>
 					{commonActions ? <div className={styles.line} /> : null}
 					<ClickableDiv
@@ -79,7 +81,6 @@ function InvoiceDetails({
 			))}
 		</div>
 	);
-
 	return (
 		<div className={styles.actions_wrap}>
 			<div className={styles.email_wrapper}>
@@ -95,24 +96,24 @@ function InvoiceDetails({
 							<div className={styles.flex_row}>
 								Proforma email sent :
 								&nbsp;
-								{invoice.proforma_email_count || INITIAL_STATE}
+								{proforma_email_count}
 							</div>
 
 							<div className={cl`${styles.flex_row} ${styles.margin}`}>
 								Live email sent:
 								&nbsp;
-								{invoice.sales_email_count || INITIAL_STATE}
+								{sales_email_count}
 							</div>
 							<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 								<div className={cl`${styles.flex_row} ${styles.margin}`}>
 									UTR Number:
 									&nbsp;
-									{invoice?.sales_utr?.utr_number || ''}
+									{sales_utr?.utr_number || ''}
 								</div>
 								<div className={cl`${styles.flex_row} ${styles.margin}`}>
 									Status:
 									&nbsp;
-									{invoice?.sales_utr?.status || ''}
+									{sales_utr?.status || ''}
 								</div>
 							</div>
 						</div>
@@ -124,7 +125,7 @@ function InvoiceDetails({
 				</Tooltip>
 			</div>
 
-			{!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE ? (
+			{!disableAction || exchange_rate_document?.length > IS_EMPTY ? (
 				<Popover
 					interactive
 					placement="bottom"
@@ -144,7 +145,7 @@ function InvoiceDetails({
 				<div className={styles.empty_div} />
 			)}
 
-			{!isEmpty(invoice.remarks) ? (
+			{!isEmpty(remarks) ? (
 				<Tooltip
 					placement="bottom"
 					theme="light-border"

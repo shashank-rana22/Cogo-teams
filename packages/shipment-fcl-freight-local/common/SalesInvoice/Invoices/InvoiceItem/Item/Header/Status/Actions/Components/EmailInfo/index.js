@@ -6,12 +6,11 @@ import {
 
 import styles from '../../styles.module.css';
 
-const INITIAL_STATE = 0;
-
 function EmailInfo({
 	invoice = {},
 	setSendEmail = () => {},
 }) {
+	const {proforma_email_count = 0, sales_email_count = 0, sales_utr} = invoice || {};
 	return (
 		<div className={styles.container}>
 			<div className={styles.main_container}>
@@ -27,24 +26,24 @@ function EmailInfo({
 									<div className={styles.flex_row}>
 										Proforma email sent :
 										&nbsp;
-										{invoice.proforma_email_count || INITIAL_STATE}
+										{proforma_email_count}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
 										&nbsp;
-										{invoice.sales_email_count || INITIAL_STATE}
+										{sales_email_count}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											UTR Number:
 											&nbsp;
-											{invoice?.sales_utr?.utr_number || ''}
+											{sales_utr?.utr_number || ''}
 										</div>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
 											Status:
 											&nbsp;
-											{invoice?.sales_utr?.status || ''}
+											{sales_utr?.status || ''}
 										</div>
 									</div>
 								</div>

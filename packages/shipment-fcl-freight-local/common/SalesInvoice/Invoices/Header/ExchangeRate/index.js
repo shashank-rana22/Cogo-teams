@@ -4,9 +4,10 @@ import { useState } from 'react';
 import CurrencyExchangeForm from './ExchangeRateForm/CurrencyExchangeForm';
 import styles from './styles.module.css';
 import useHelper from './useHelper';
+import { isEmpty } from '@cogoport/utils';
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
-const INITIAL_STATE = 0;
+const FIRST_INDEX = 0;
 
 function ExchangeRate({
 	shipment_id,
@@ -16,7 +17,7 @@ function ExchangeRate({
 }) {
 	const [open, setOpen] = useState(false);
 
-	const invoiceCurrency = invoiceData?.invoicing_parties?.[INITIAL_STATE]?.invoice_currency;
+	const invoiceCurrency = invoiceData?.invoicing_parties?.[FIRST_INDEX]?.invoice_currency;
 
 	const refetchAfterApiCall = () => {
 		refetch();
@@ -25,12 +26,12 @@ function ExchangeRate({
 
 	const {
 		handleFormSubmit,
-		DIFFERENT_CURRENCIES_HASH,
+		DIFFERENT_CURRENCIES_HASH = {},
 		AVAILABLE_CURRENCY_CONVERSION,
 		loading,
 	} = useHelper({ invoiceCurrency, refetch: refetchAfterApiCall });
 
-	if (Object.keys(DIFFERENT_CURRENCIES_HASH || {}).length === INITIAL_STATE) {
+	if (isEmpty(Object.keys(DIFFERENT_CURRENCIES_HASH))) {
 		return null;
 	}
 
