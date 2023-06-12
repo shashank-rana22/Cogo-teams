@@ -1,4 +1,4 @@
-import { Button, Tooltip} from '@cogoport/components';
+import { Button, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';

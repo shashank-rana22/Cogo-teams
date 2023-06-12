@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 const STYLES_COL = { padding: '0 4px' };
 
 function Item({ item = {}, fields = [], handleClick = () => {}, loading = false }) {
-
 	return (
 		<div
 			onClick={handleClick}

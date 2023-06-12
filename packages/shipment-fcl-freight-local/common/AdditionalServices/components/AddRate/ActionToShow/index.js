@@ -22,7 +22,6 @@ function ActionsToShow({
 
 	const config = stakeholderConfig?.additional_services?.add_rate || {};
 
-
 	Object.entries(config).forEach(([key, val]) => {
 		STAKEHOLDER_ALLOWED[key?.split('::')?.[INITIAL_STATE]] = val;
 	});
