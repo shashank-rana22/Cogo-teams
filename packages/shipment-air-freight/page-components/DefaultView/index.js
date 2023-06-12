@@ -1,5 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useContext, useState } from 'react';
+import { useContext } from 'react';
 
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
@@ -10,8 +10,7 @@ import styles from './styles.module.css';
 function DefaultView() {
 	const { shipment_data = {}, stakeholderConfig = {} } = useContext(ShipmentDetailContext) || {};
 
-	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
-	const [activeTab, setActiveTab] = useState(default_tab);
+	const { features = [] } = stakeholderConfig || {};
 
 	const conditionMapping = {
 		shipment_info       : !!features.includes('shipment_info'),
