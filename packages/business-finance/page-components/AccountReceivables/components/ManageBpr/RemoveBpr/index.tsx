@@ -4,6 +4,7 @@ import React, { useState } from 'react';
 import useRemoveBpr from '../../../hooks/useRemoveBpr';
 
 import styles from './styles.module.css';
+import { Refetch } from '../../../commons/Interfaces';
 
 interface Row {
 	id?: string;
@@ -11,7 +12,7 @@ interface Row {
 }
 
 interface RemoveBprParams {
-	refetch: Function;
+	refetch: Refetch;
 	row: Row;
 }
 
@@ -50,7 +51,7 @@ function RemoveBpr({ refetch, row } : RemoveBprParams) {
 					</Button>
 					<Button
 						size="sm"
-						onClick={() => dataRemove()}
+						onClick={dataRemove}
 						loading={loadingOnDelete}
 						disabled={loadingOnDelete}
 					>

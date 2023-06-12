@@ -8,7 +8,7 @@ interface GetOrgParams {
 }
 
 interface Pagination {
-	pagination : GetOrgParams
+	pagination : GetOrgParams;
 }
 
 const useGetOrganizationList = ({ pagination } : Pagination) => {

@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { AsyncSelect } from '@cogoport/forms';
 import React, { useState } from 'react';
 
-import { RefetchInterface } from '../../../commons/Interfaces';
+import { Refetch } from '../../../commons/Interfaces';
 import useSaveVerifiedOrganization from '../../../hooks/useSaveVerifiedOrganization';
 
 import styles from './styles.module.css';
@@ -11,6 +11,10 @@ interface OrgData {
 	serial_id: number;
 	legal_business_name: string;
 	id: string;
+}
+
+interface RefetchInterface {
+	refetch: Refetch;
 }
 
 function SearchCard({ refetch } : RefetchInterface) {

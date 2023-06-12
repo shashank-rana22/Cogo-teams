@@ -20,6 +20,4 @@ export interface GenericObject {
 	[key: string]: any;
 }
 
-export interface RefetchInterface {
-	refetch:()=>void;
-}
+export type Refetch = () => void;
