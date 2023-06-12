@@ -2,7 +2,7 @@ import Body from './Body';
 import Footer from './Footer';
 import styles from './styles.module.css';
 
-function Card({ serviceData = {}, price }) {
+function SingleServiceCard({ serviceData = {}, price }) {
 	return (
 		<div className={styles.card_container}>
 			<div>
@@ -15,4 +15,4 @@ function Card({ serviceData = {}, price }) {
 	);
 }
 
-export default Card;
+export default SingleServiceCard;

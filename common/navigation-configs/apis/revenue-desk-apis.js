@@ -165,6 +165,11 @@ const apis = [
 		service_name : 'revenue_desk',
 	},
 	{
+		api          : 'get_customers_last_shipment_details',
+		access_type  : 'private',
+		service_name : 'revenue_desk',
+	},
+	{
 		api          : 'create_shipment_booking_confirmation_preference',
 		access_type  : 'private',
 		service_name : 'shipment',

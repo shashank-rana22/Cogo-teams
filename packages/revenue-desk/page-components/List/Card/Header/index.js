@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { IcMTimer } from '@cogoport/icons-react';
+import { IcCCogoassured, IcMTimer } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
 import iconMapping from '../../../../helper/iconMapping';
@@ -45,6 +45,12 @@ function Header({ data }) {
 								: startCase(data.source || '')}
 						</div>
 					</Pill>
+					{(data?.tags || []).map((i) => (
+						<Pill key={i}>{startCase(i)}</Pill>
+					))}
+					{data?.is_cogo_assured ? (
+						<IcCCogoassured />
+					) : null}
 				</div>
 			</div>
 			<div style={{ color: 'red', display: 'flex', alignItems: 'center' }}>

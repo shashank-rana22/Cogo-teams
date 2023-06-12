@@ -1,4 +1,4 @@
-import { Table } from '@cogoport/components';
+import { Placeholder, Table } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -6,13 +6,13 @@ import useGetShipmentQuotation from '../../../../hooks/useGetShipmentQuotation';
 
 import styles from './styles.module.css';
 
-function SellServiceQuotation({ shipmentData = {}, setPriceData }) {
+function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 	const columns = [
 		{ Header: 'Services', accessor: 'service_type' },
 		{ Header: 'Services Charge', accessor: 'total_price_discounted' },
 		{ Header: 'Source', accessor: 'source' },
 	];
-	const { data, loading } = useGetShipmentQuotation({ shipmentData });
+	const { data, loading } = useGetShipmentQuotation({ shipmentData, priceData });
 	const service_charges = data?.service_charges || [];
 	const chargesData = (service_charges || [])
 		.filter((item) => item.service_type)
@@ -38,10 +38,15 @@ function SellServiceQuotation({ shipmentData = {}, setPriceData }) {
 				Complete Sell Quotation
 				{' '}
 				:
-				{' '}
-				{data?.net_total_price_currency}
-				{' '}
-				{data?.net_pre_tax_total}
+				{!loading ? (
+					<div style={{ marginLeft: '5px' }}>
+						{data?.net_total_price_currency}
+						{' '}
+						{data?.net_pre_tax_total}
+					</div>
+				)
+					: <Placeholder height="25px" width="150px" />}
+
 			</div>
 			<Table columns={columns} data={chargesData} loading={loading} className={styles.table_container} />
 		</>

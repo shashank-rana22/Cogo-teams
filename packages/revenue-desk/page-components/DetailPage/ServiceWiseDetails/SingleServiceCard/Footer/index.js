@@ -27,7 +27,7 @@ function Footer({ data }) {
 		},
 		{
 			key   : 'Preferred Shipping Line',
-			value : data?.preferred_shipping_line,
+			value : data?.preferred_shipping_line?.business_name,
 		},
 	];
 	return (

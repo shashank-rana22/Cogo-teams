@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useGetShipmentQuotation = ({ shipmentData }) => {
+const useGetShipmentQuotation = ({ shipmentData, priceData }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/get_shipment_quotation',
@@ -18,7 +18,9 @@ const useGetShipmentQuotation = ({ shipmentData }) => {
 		}
 	};
 	useEffect(() => {
-		getQuotation();
+		if (priceData) {
+			getQuotation();
+		}
 	}, []);
 
 	return {

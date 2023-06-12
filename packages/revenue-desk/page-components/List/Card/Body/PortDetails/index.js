@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 function PortDetails({ data }) {
 	const { origin, destination } = getLocations(data) || {};
-	const { destination_main_port, origin_main_port } = data;
+
 	const handleLocationDetails = (location, isSingle, icdInfo) => {
 		let show = true;
 		if (!location?.port_code && !location?.postal_code) {
@@ -66,13 +66,13 @@ function PortDetails({ data }) {
 		return (
 			<div className={styles.port_pair_container}>
 				<div className={styles.origin_location_container}>
-					{handleLocationDetails(origin, false, origin_main_port)}
+					{handleLocationDetails(origin, false, data?.origin_main_port)}
 				</div>
 				<div style={{ marginRight: '10px' }}>
 					<IcMPortArrow />
 				</div>
 				<div className={styles.destination_location_container}>
-					{handleLocationDetails(destination, false, destination_main_port)}
+					{handleLocationDetails(destination, false, data?.destination_main_port)}
 				</div>
 			</div>
 		);

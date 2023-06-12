@@ -1,4 +1,4 @@
-import { Table } from '@cogoport/components';
+import { Placeholder, Table } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import useGetBuyQuotation from '../../../../hooks/useGetBuyQuotation';
@@ -28,10 +28,14 @@ function BuyServiceQuotation({ shipmentData = {} }) {
 				Complete Buy Quotation
 				{' '}
 				:
-				{' '}
-				{data?.net_total_price_currency}
-				{' '}
-				{data?.net_pre_tax_total}
+				{!loading ? (
+					<div style={{ marginLeft: '5px' }}>
+						{data?.net_total_price_currency}
+						{' '}
+						{data?.net_pre_tax_total}
+					</div>
+				)
+					: <Placeholder height="25px" width="150px" />}
 			</div>
 			<Table columns={columns} data={chargesData} loading={loading} className={styles.table_container} />
 		</>

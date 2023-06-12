@@ -6,6 +6,7 @@ import iconMapping from '../../helper/iconMapping';
 import serviceLabelMapping from '../../helper/serviceLabelMapping';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
 
+import LastShipmentDetails from './LastShipmentDetails';
 import QuotationDetails from './QuotationDetails';
 import ServiceWiseDetails from './ServiceWiseDetails';
 import ShipmentCard from './ShipmentCard';
@@ -99,6 +100,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							<QuotationDetails
 								itemData={itemData}
 								setPriceData={setPriceData}
+								priceData={priceData}
 							/>
 						</div>
 					</TabPanel>
@@ -113,7 +115,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 						</div>
 					</TabPanel>
 					<TabPanel name="last_shipment_detail" title="Customer Last Shipment Details">
-						<div>Coming Soon!</div>
+						<div><LastShipmentDetails itemData={itemData} /></div>
 					</TabPanel>
 				</Tabs>
 			</div>

@@ -1,5 +1,5 @@
-import CargoDetails from '../../../List/Card/Body/CargoDetails';
-import PortDetails from '../../../List/Card/Body/PortDetails';
+import CargoDetails from '../../../../List/Card/Body/CargoDetails';
+import PortDetails from '../../../../List/Card/Body/PortDetails';
 
 import styles from './styles.module.css';
 

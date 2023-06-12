@@ -37,3 +37,31 @@
 	justify-content: center;
 	padding: 10px 20px;
 }
+
+.port_pair_container_placeholder{
+	height:85px;
+	border-bottom: 1px solid #F2E3C3;
+	border-left: 1px solid #F2E3C3;
+	border-right: 1px solid #F2E3C3;
+	display: flex;
+	align-items: center;
+	font-weight: 600;
+	font-size: 16px;
+	color: #4F4F4F;
+	display: flex;
+	padding: 10px 20px;
+}
+
+.heading{
+	background: #FDFBF6;
+	height:44px;
+	border-bottom: 1px solid #F2E3C3;
+	font-weight: 500;
+	font-size: 16px;
+	color: #4F4F4F;
+	display: flex;
+	justify-content: center;
+	width:390px;
+	align-items: center;
+	color:#4F4F4F;
+}

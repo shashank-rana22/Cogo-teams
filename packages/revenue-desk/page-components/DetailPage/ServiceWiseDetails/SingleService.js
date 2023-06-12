@@ -3,11 +3,11 @@ import { useState, useEffect } from 'react';
 
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
 import CargoDetailPills from '../../List/Card/Body/CargoDetails/CargoDetailPills';
-import Card from '../Card';
 
 import ExistingInventory from './ExistingInventory';
 import RatesCard from './RatesCard';
 import SelectedRatesCard from './SelectedRatesCard';
+import SingleServiceCard from './SingleServiceCard';
 
 const labels = [
 	'container_size',
@@ -76,7 +76,7 @@ function SingleService({
 				/>
 			</div>
 
-			<Card serviceData={singleServiceData} price={price} />
+			<SingleServiceCard serviceData={singleServiceData} price={price} />
 
 			{(supplierPayload?.[singleServiceData?.id] || []).length
 				? <SelectedRatesCard prefrences={supplierPayload?.[singleServiceData?.id]} /> : null}
