@@ -9,6 +9,7 @@ const useHandleCourseCurriculum = ({ courseId, activeTab, mode }) => {
 	const [finalData, setFinalData] = useState([]);
 	const [draggedNode, setDraggedNode] = useState(null);
 	const [getSubModuleRefetch, setGetSubModuleRefetch] = useState(false);
+	const [openDetails, setOpenDetails] = useState({});
 
 	const showButtons = mode !== 'view';
 
@@ -99,6 +100,8 @@ const useHandleCourseCurriculum = ({ courseId, activeTab, mode }) => {
 		getSubModuleRefetch,
 		setGetSubModuleRefetch,
 		showButtons,
+		openDetails,
+		setOpenDetails,
 	};
 };
 

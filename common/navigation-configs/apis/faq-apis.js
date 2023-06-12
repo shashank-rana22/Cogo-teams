@@ -472,6 +472,11 @@ const faq = {
 			service_name : 'cogo_academy',
 		},
 		{
+			api          : 'create_faq_tag',
+			access_type  : 'private',
+			service_name : 'cogo_academy',
+		},
+		{
 			api          : 'create_cogo_academy_course',
 			access_type  : 'private',
 			service_name : 'cogo_academy',

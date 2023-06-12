@@ -17,6 +17,8 @@ const useHandleChapter = ({
 	getSubModuleRefetch,
 	setGetSubModuleRefetch,
 	showButtons,
+	setOpenDetails,
+	moduleId,
 }) => {
 	const { id } = subModule || {};
 
@@ -37,7 +39,7 @@ const useHandleChapter = ({
 	const {
 		commonCreateApi,
 		loading: createChapterLoading,
-	} = useCommonCreateApi({ getCourseModuleDetails });
+	} = useCommonCreateApi({ getCourseModuleDetails, setOpenDetails, moduleId, subModuleId: id });
 
 	const {
 		commonUpdateApi,
