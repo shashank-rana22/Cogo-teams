@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 
-const INITIAL_ELEMENT = 0;
+const FIRST_PLATFORM_CONSTANT = 0;
 
 const useListPlatformConfigConstants = ({ setValue }) => {
 	const [{ loading, data }, trigger] = useRequest({
@@ -20,7 +20,7 @@ const useListPlatformConfigConstants = ({ setValue }) => {
 				},
 			});
 			setValue('minimum_profitability', response?.data?.list?.
-				[INITIAL_ELEMENT]?.platform_config_constant_mappings?.[INITIAL_ELEMENT]?.value);
+				[FIRST_PLATFORM_CONSTANT]?.platform_config_constant_mappings?.[FIRST_PLATFORM_CONSTANT]?.value);
 		} catch (error) {
 			if (error?.response) {
 				Toast.error(getApiErrorString(error?.response?.data));
