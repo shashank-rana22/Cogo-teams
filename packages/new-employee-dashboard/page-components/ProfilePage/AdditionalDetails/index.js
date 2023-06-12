@@ -58,7 +58,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 
 	return (
 		<div className={styles.container}>
-			{COMPONENT_MAPPING.map((item) => {
+			{(COMPONENT_MAPPING || []).map((item) => {
 				const { content: Component, isCompleted, name } = item;
 
 				return (
