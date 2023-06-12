@@ -36,7 +36,7 @@ interface CustomInterface {
     loading?: boolean;
     globalFilters?: GlobalInterface;
     setGlobalFilters?: React.Dispatch<React.SetStateAction<GlobalInterface>>;
-    checkedRows?: object;
+    checkedRows?: string[];
     setCheckedRows?: React.Dispatch<React.SetStateAction<object>>;
 }
 
@@ -65,38 +65,33 @@ function CustomTable(
     const onChangeTableHeaderCheckbox = (event) => {
         event.stopPropagation();
 
-        setCheckedRows({
+        setCheckedRows([
             ...checkedRows,
-            [`page-${page}`]: event?.target?.checked
-                ? (list || [])
-                    ?.filter((item) => isCheckBoxAllowed(item))
-                    .map(({id}) => id)
-                : [],
-        });
+            ...((list || [])
+                ?.filter((item) => isCheckBoxAllowed(item))
+                .map(({id}) => id) || []),
+        ]);
     };
 
     const onChangeTableBodyCheckbox = (event, item) => {
         event.stopPropagation();
         if (event.target.checked) {
-            setCheckedRows({
-                ...checkedRows,
-                [`page-${page}`]: [
-                    ...(checkedRows?.[`page-${page}`] || []),
+            setCheckedRows([
+                    ...checkedRows,
                     item?.id,
-                ],
-            });
+                ]
+            );
         } else {
-            setCheckedRows({
-                ...checkedRows,
-                [`page-${page}`]: (checkedRows?.[`page-${page}`] || []).filter(
+            setCheckedRows([
+                ...((checkedRows || []).filter(
                     (Id) => Id !== item?.id,
-                ),
-            });
+                ) || []),
+            ]);
         }
     };
 
     const getTableBodyCheckbox = (item) => {
-        const isChecked = (checkedRows?.[`page-${page}`] || []).includes(
+        const isChecked = (checkedRows || []).includes(
             item?.id,
         );
 
@@ -108,8 +103,7 @@ function CustomTable(
         ) : null;
     };
 
-    const IsAllChecked = (checkedRows?.[`page-${page}`] || []).length
-        === (list || [])?.filter((item) => isCheckBoxAllowed(item))?.length;
+    const IsAllChecked = (list || [])?.filter((item) => isCheckBoxAllowed(item) && !checkedRows.includes(item?.id))?.length === 0;
 
     const showHeaderCheckbox = (list || [])?.filter((item) => isCheckBoxAllowed(item))?.length > 0;
 
