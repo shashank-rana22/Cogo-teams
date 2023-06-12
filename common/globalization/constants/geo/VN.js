@@ -366,6 +366,12 @@ export default {
 				value : 'open_side',
 			},
 		],
+		entities: [
+			{
+				label: '501 Cogoport Vietnam', value: '501',
+			},
+		],
+		migration_status: [],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -378,6 +384,13 @@ export default {
 					'rfq_enquiries',
 					'rates_sheets',
 				],
+			},
+		},
+		account_receivables: {
+			defaulters: {
+				migration_status: {
+					show_filter: false,
+				},
 			},
 		},
 	},

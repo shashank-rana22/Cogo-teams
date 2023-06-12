@@ -8372,7 +8372,12 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
-
+		{
+			api         : 'post_sales_invoice_bulk_irn_generate',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
 	],
 	incident_controller: [
 		{
@@ -10146,6 +10151,16 @@ const partner = {
 			api          : 'list_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'get_reportees_budget_allocation_details',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'transfer_promotion_budget',
+			access_type  : 'private',
+			service_name : 'promotion',
 		},
 	],
 	cogo_assured: [
@@ -12335,6 +12350,13 @@ const partner = {
 		},
 		{
 			api          : 'list_referral_transactions',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
+	referral_simulation: [
+		{
+			api          : 'get_referral_simulation',
 			access_type  : 'private',
 			service_name : 'referral',
 		},

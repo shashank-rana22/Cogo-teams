@@ -1,0 +1,14 @@
+.container {
+	display: flex;
+	flex-direction: column;
+}
+
+.basic_details {
+	display: flex;
+	justify-content: space-between;
+	margin-top: 20px;
+}
+
+.rfq_list {
+	margin-top: 20px;
+}
