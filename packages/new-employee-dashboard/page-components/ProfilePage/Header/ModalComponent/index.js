@@ -1,7 +1,7 @@
 import { Input } from '@cogoport/components';
 
+import getElementController from '../../../../configs/getElementController';
 import getControls from '../../../../utils/ctc-modal-form-controls';
-import { getElementController } from '../../../../utils/get-element-controls';
 
 import styles from './styles.module.css';
 

@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const controls = [
 	{
 		name        : 'ifsc_code',
@@ -35,11 +37,13 @@ const controls = [
 		rules       : { required: 'This is required' },
 	},
 	{
-		name   : 'cancelled_check_url',
-		label  : 'Upload Cancelled Cheque',
-		type   : 'fileUpload',
-		accept : '.pdf',
-		rules  : { required: 'This is required' },
+		name    : 'cancelled_check_url',
+		label   : 'Upload Cancelled Cheque',
+		type    : 'fileUpload',
+		accept  : '.pdf',
+		rules   : { required: 'This is required' },
+		maxSize : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
+
 	},
 
 ];

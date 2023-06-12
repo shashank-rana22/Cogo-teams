@@ -7,12 +7,10 @@ import React, { useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const ARRAY_LENGTH = 0;
-
 function CompanyPolicyModal({ showModal, setShowModal, refetchList }) {
 	const { handleSubmit, control, formState: { errors }, reset, setValue } = useForm();
 
-	const isUpdate = (Object.keys(showModal || {}) || []).length > ARRAY_LENGTH;
+	const isUpdate = !isEmpty(Object.keys(showModal || {}) || []);
 
 	const url = isUpdate ? '/update_company_document' : '/create_company_document';
 
