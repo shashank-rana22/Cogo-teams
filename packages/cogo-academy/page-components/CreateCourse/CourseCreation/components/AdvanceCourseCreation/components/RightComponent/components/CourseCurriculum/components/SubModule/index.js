@@ -7,6 +7,8 @@ import styles from './styles.module.css';
 import SubModuleComponent from './SubModuleComponent';
 import useHandleSubModule from './useHandleSubModule';
 
+const INDEX_TO_VALUE_DIFF = 1;
+
 function SubModule({
 	module,
 	handleDragStart,
@@ -20,6 +22,8 @@ function SubModule({
 	setGetSubModuleRefetch,
 	showButtons,
 	state,
+	setOpenDetails,
+	openDetails,
 }) {
 	const {
 		onSaveSubModule,
@@ -62,6 +66,9 @@ function SubModule({
 						courseSubModule={courseSubModule}
 						showButtons={showButtons}
 						state={state}
+						setOpenDetails={setOpenDetails}
+						moduleId={module.id}
+						openDetails={openDetails}
 					/>
 				</div>
 			))}
@@ -72,7 +79,10 @@ function SubModule({
 					className={styles.button}
 					themeType="secondary"
 					onClick={addNewCourseSubModule}
-					disabled={isEmpty(courseSubModule) || courseSubModule[courseSubModule.length - 1].isNew}
+					disabled={
+						isEmpty(courseSubModule)
+						|| courseSubModule[courseSubModule.length - INDEX_TO_VALUE_DIFF].isNew
+					}
 				>
 					+ Sub Module
 				</Button>
