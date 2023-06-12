@@ -57,6 +57,7 @@ import {
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
+	IcMAppMissions,
 	IcMBookingDesk,
 } from '@cogoport/icons-react';
 
@@ -2295,6 +2296,17 @@ const navigationMappingAdmin = {
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
+	},
+	performance_management_configuration: {
+		key           : 'performance_management_configuration',
+		title         : 'Performance Management Configuration',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : [],
+		href          : '/v2/performance-management-configuration',
+		as            : '/v2/performance-management-configuration',
+		possible_apis : [],
+		icon          : IcMAppMissions,
 	},
 	saas_subscription: {
 		key         : 'saas_subscription',

@@ -24,6 +24,7 @@ import lastMileDesk from './config/last-mile-desk';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
 import performanceManagement from './config/performance-management';
+import performanceManagementConfiguration from './config/performance-management-configuration';
 import referral from './config/referral';
 import rfqDashboard from './config/rfq-dashboard';
 import rolesAndPermissions from './config/roles-n-permission';
@@ -92,6 +93,7 @@ const routeConfig = {
 	...shipmentFtlFreight,
 	...shipmentLtlFreight,
 	...ticketManagement,
+	...performanceManagementConfiguration,
 	...rfqDashboard,
 };
 
