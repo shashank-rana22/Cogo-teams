@@ -21,9 +21,9 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 
 	const handleAppend = async () => {
 		const isValid = await trigger('remaining_bonus');
-		const totalPercentage = remaining_bonus.reduce((acc, curr) =>
-			acc + Number(curr.percentage), MINIMUM_PERCENTAGE_VALUE);
-
+		const totalPercentage = remaining_bonus.reduce((acc, curr) => acc + Number(curr.percentage),
+			MINIMUM_PERCENTAGE_VALUE);
+			
 		if (isValid && totalPercentage < MAXIMUM_PERCENTAGE_VALUE) {
 			append({ type: 'fixed' });
 		}

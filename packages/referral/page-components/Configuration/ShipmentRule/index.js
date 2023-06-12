@@ -34,6 +34,7 @@ function ShipmentRule({ shipmentData = {}, dataLoading = false }) {
 
 	const [apiState, setApiState] = useState('Created');
 	const [isEdit, setIsEdit] = useState(false);
+	
 	const { createRule = () => {}, loading = false } = useCreateReferralConfig({ apiState, setApiState, setIsEdit });
 
 	useEffect(() => {
