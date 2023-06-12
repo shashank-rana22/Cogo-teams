@@ -2340,7 +2340,7 @@ const navigationMappingAdmin = {
 				possible_apis : apis.referral_dashboard,
 			},
 			{
-				key           : 'referral-simulation',
+				key           : 'referral-referral-simulation',
 				title         : 'Simulation',
 				href          : '/v2/referral/simulation',
 				as            : '/v2/referral/simulation',
