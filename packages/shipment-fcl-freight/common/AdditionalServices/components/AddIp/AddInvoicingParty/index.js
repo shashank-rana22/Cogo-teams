@@ -14,12 +14,14 @@ const BOOKING_OPTIONS = [
 	},
 ];
 
+const BOOKING_OPTIONS_FIRST = 0;
+
 function AddInvoicingParty({
 	organizationDetails = {},
 	primary_service,
 	updateInvoicingParty = () => {},
 }) {
-	const [activeComponentKey, setActiveComponentKey] = useState(BOOKING_OPTIONS[0].value);
+	const [activeComponentKey, setActiveComponentKey] = useState(BOOKING_OPTIONS[BOOKING_OPTIONS_FIRST].value);
 
 	return (
 		<div>

@@ -7,15 +7,16 @@ import Details from '../Details';
 
 import styles from './styles.module.css';
 
+const SERVICE_DATA_FIRST_INDEX = 0;
+
 function Header({ serviceData = [] }) {
-	const { state, display_label, service_provider, payment_term } = serviceData?.[0] || {};
+	const SERVICE_DATA_FIRST = serviceData?.[SERVICE_DATA_FIRST_INDEX] || {};
+
+	const { state, display_label, service_provider, payment_term } = SERVICE_DATA_FIRST;
 
 	const [showDetails, setShowDetails] = useState({});
 
-	let statusText = startCase(state);
-	if (state === 'init') {
-		statusText = 'Not Allocated';
-	}
+	const statusText = state === 'init' ? 'Not Allocated' : startCase(state);
 
 	return (
 		<div className={cl`${styles[state]} ${styles.main_container}`}>
@@ -27,8 +28,11 @@ function Header({ serviceData = [] }) {
 
 				<div className={styles.secondary_details}>
 					<div>
-						{ payment_term ? <div className={styles.payment_term}>{payment_term}</div> : null }
-						<div className={styles.state}>{ statusText}</div>
+						{payment_term
+							? <div className={styles.payment_term}>{payment_term}</div>
+							: null }
+
+						<div className={styles.state}>{statusText}</div>
 					</div>
 
 					<div className={styles.extra_details}>
@@ -37,20 +41,22 @@ function Header({ serviceData = [] }) {
 							tabIndex={0}
 							onClick={() => setShowDetails({
 								...showDetails,
-								[serviceData?.[0]?.display_label]: !showDetails[serviceData?.[0]?.display_label],
+								[SERVICE_DATA_FIRST.display_label]: !showDetails[SERVICE_DATA_FIRST.display_label],
 							})}
 							className={styles.details_cta}
 						>
-
-							{ showDetails[serviceData?.[0]?.display_label] ? 'Hide Details' : 'View Details'}
+							{ showDetails[SERVICE_DATA_FIRST.display_label] ? 'Hide Details' : 'View Details'}
 						</div>
 						<div className={styles.edit_cancel}>
-							<EditCancelService serviceData={serviceData?.[0]} />
+							<EditCancelService serviceData={SERVICE_DATA_FIRST} />
 						</div>
 					</div>
 				</div>
 			</div>
-			{showDetails[serviceData?.[0]?.display_label] ? <Details serviceData={serviceData} /> : null}
+
+			{showDetails[SERVICE_DATA_FIRST.display_label]
+				? <Details serviceData={serviceData} />
+				: null}
 		</div>
 
 	);

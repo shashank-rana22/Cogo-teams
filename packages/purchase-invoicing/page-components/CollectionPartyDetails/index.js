@@ -73,9 +73,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 		<>
 			{(allservices || []).map((ser, i) => (
 				<span key={ser}>
-					{startCase(ser)}
-					{' '}
-					{(services).length - 1 === i ? '' : ', '}
+					{`${startCase(ser)} ${(services).length - 1 === i ? '' : ', '}`}
 				</span>
 			))}
 		</>

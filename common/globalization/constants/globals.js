@@ -187,11 +187,9 @@ const GLOBAL_CONSTANTS = {
 	regex_patterns: {
 		number: /^[+-]?\d*\.?\d+$/,
 	},
-	languages                       : LANGUAGE_OPTIONS,
-	currency_conversion_constant    : 0.04,
-	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
-	invoice_check_id                : 120347,
-	others                          : {
+	languages                    : LANGUAGE_OPTIONS,
+	currency_conversion_constant : 0.04,
+	others                       : {
 		old_shipment_serial_id: 120347,
 	},
 };

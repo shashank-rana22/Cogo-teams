@@ -6,6 +6,13 @@ import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
+const EMPTY_VALUES_LENGTH = 0;
+const URL_SPLIT_FIRST = 0;
+const FILE_NAME_IN_URL_SLICE_INDEX = -1;
+const EMPTY_DEFAULT_VALUES_LENGTH = 0;
+const URL_STORE_FIRST = 0;
+const PERCENT_FACTOR = 100;
+
 function FileUploader(props) {
 	const {
 		onChange,
@@ -24,16 +31,18 @@ function FileUploader(props) {
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
-			setFileName([{ name: defaultValues.split('/').slice(-1).join('') }]);
+			setFileName([{ name: defaultValues.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join('') }]);
 			setUrlStore([{
-				fileName : defaultValues.split('/').slice(-1).join(''),
+				fileName : defaultValues.split('/').slice(FILE_NAME_IN_URL_SLICE_INDEX).join(''),
 				finalUrl : defaultValues,
 			}]);
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
-			const names = defaultValues.map((url) => ({ name: url?.split('/')?.slice(-1)?.join('') }));
+			const names = defaultValues.map((url) => ({
+				name: url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
+			}));
 			const urls = defaultValues.map((url) => ({
-				fileName : url?.split('/')?.slice(-1)?.join(''),
+				fileName : url?.split('/')?.slice(FILE_NAME_IN_URL_SLICE_INDEX)?.join(''),
 				finalUrl : url,
 			}));
 
@@ -42,13 +51,13 @@ function FileUploader(props) {
 		}
 		setLoading(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [defaultValues?.length > 0]);
+	}, [defaultValues?.length > EMPTY_DEFAULT_VALUES_LENGTH]);
 
 	useEffect(() => {
 		if (multiple) {
 			onChange(urlStore);
 		} else {
-			onChange(urlStore[0]);
+			onChange(urlStore[URL_STORE_FIRST]);
 		}
 	}, [multiple, urlStore, onChange]);
 
@@ -57,7 +66,7 @@ function FileUploader(props) {
 			...previousProgress,
 			[`${index}`]: (() => {
 				const { loaded, total } = file;
-				const percentCompleted = Math.floor((loaded * 100) / total);
+				const percentCompleted = Math.floor((loaded * PERCENT_FACTOR) / total);
 
 				return percentCompleted;
 			})(),
@@ -86,7 +95,7 @@ function FileUploader(props) {
 			onUploadProgress: onUploadProgress(index),
 		});
 
-		const finalUrl = url.split('?')[0];
+		const finalUrl = url.split('?')[URL_SPLIT_FIRST];
 
 		return finalUrl;
 	};
@@ -95,7 +104,7 @@ function FileUploader(props) {
 		try {
 			setLoading(true);
 
-			if (values.length > 0) {
+			if (values.length > EMPTY_VALUES_LENGTH) {
 				setProgress({});
 
 				const promises = values.map((value, index) => uploadFile(index)(value));
@@ -125,7 +134,7 @@ function FileUploader(props) {
 
 	const handleDelete = (values) => {
 		setFileName(values);
-		const files = values.map((item) => item.name);
+		const files = Array.isArray(values) ? values?.map((item) => item.name) : [];
 		const newUrls = urlStore.filter((item) => files.includes(item.fileName));
 		setUrlStore(newUrls);
 	};
@@ -145,7 +154,7 @@ function FileUploader(props) {
 			/>
 
 			{loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
-				<div className={styles.progress_container}>
+				<div className={styles.progress_container} key={key}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}
 					/>

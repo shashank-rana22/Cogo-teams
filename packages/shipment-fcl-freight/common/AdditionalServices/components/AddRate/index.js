@@ -14,7 +14,9 @@ import SecondStep from './SecondStep';
 import STAKE_HOLDER_SPECIFIC_PROPS from './stakeHolderCongifs';
 import styles from './styles.module.css';
 
-const showRemarksStatus = [
+const REMARKS_FIRST = 0;
+
+const SHOW_REMARKS_STATUS = [
 	'amendment_requested_by_importer_exporter',
 	'requested_for_service_provider',
 	'cancelled_by_supplier',
@@ -125,16 +127,14 @@ function AddRate({
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>
-				{startCase(item?.name)}
-				(
-				{startCase(item?.service_type || item.service_type)}
-				)
+				{`${startCase(item?.name)} (${startCase(item?.service_type || item.service_type)})`}
 			</div>
-			{showRemarksStatus.includes(status?.status) ? (
-				<p style={{ marginTop: '8px' }}>
+
+			{SHOW_REMARKS_STATUS.includes(status?.status) ? (
+				<p className={styles.mt_8}>
 					<strong> Comment:</strong>
 					&nbsp;
-					{item?.remarks[0]}
+					{item?.remarks[REMARKS_FIRST]}
 				</p>
 			) : null}
 

@@ -5,6 +5,7 @@ import { format } from '@cogoport/utils';
 import CardHeader from '../../../commons/Card/CardHeader';
 import PortDetails from '../../../commons/Card/PortDetails/DualLocation';
 import ShipmentInfo from '../../../commons/Card/ShipmentInfo';
+import CONSTANTS from '../../../config/constants.json';
 import isCardCritical from '../../../helpers/isCardCritical';
 
 import CargoDetails from './CargoDetails';
@@ -14,7 +15,7 @@ export default function Card({ item = {}, couldBeCardsCritical = false, activeTa
 	const router = useRouter();
 
 	const clickCard = () => {
-		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}`);
+		router.push('/booking/fcl/[shipment_id]', `/booking/fcl/${item.id}?${CONSTANTS.url_navigation_params}`);
 	};
 
 	return (

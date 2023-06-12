@@ -12,6 +12,7 @@ import Loader from './Loader';
 import ServiceDetails from './ServiceDetails';
 import styles from './styles.module.css';
 
+const SERVICE_CATEGORY_FIRST = 0;
 function Services() {
 	const {
 		shipment_data,
@@ -50,7 +51,7 @@ function Services() {
 								? heading(serviceCategory) : null}
 
 							{ isKam
-							&& showTradeHeading[`${serviceCategory.split('Services')[0]}`]
+							&& showTradeHeading[`${serviceCategory.split('Services')[SERVICE_CATEGORY_FIRST]}`]
 								? heading(serviceCategory) : null}
 
 							<div className={styles.trade_services}>

@@ -9,7 +9,7 @@ import getControls from './getControls';
 import styles from './styles.module.css';
 
 const controlsMapping = { asyncSelect: AsyncSelectController, select: SelectController, number: InputController };
-
+const SERVICE_DATA_FIRST_INDEX = 0;
 function FormElement(props) {
 	const { name, type, label, errors } = props || {};
 	const Element = controlsMapping[type];
@@ -36,8 +36,7 @@ function SupplierReallocation({
 
 	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
 
-	const serviceObj = serviceData?.[0] || {};
-	const { service_type } = serviceObj || {};
+	const serviceObj = serviceData?.[SERVICE_DATA_FIRST_INDEX] || {};
 
 	const { defaultValues, controls, showAllControls } = getControls({
 		serviceObj,
@@ -67,7 +66,7 @@ function SupplierReallocation({
 		const payload = {
 			ids                 : serviceData?.map((item) => item?.id),
 			data                : { ...values },
-			service_type,
+			service_type        : serviceObj?.service_type,
 			performed_by_org_id : service_provider?.id,
 		};
 		apiTrigger(payload);
