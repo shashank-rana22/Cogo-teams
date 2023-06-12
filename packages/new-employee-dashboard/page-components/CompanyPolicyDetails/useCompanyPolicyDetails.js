@@ -7,6 +7,14 @@ import getColumns from './getColumns';
 
 const INITIAL_PAGE = 1;
 
+const onClickViewDocument = (document_url) => {
+	window.open(
+		document_url,
+		'_blank',
+		'noreferrer',
+	);
+};
+
 const useCompanyPolicyDetails = () => {
 	const [showModal, setShowModal] = useState(false);
 	const [page, setPage] = useState(INITIAL_PAGE);
@@ -61,14 +69,6 @@ const useCompanyPolicyDetails = () => {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		}
-	};
-
-	const onClickViewDocument = (document_url) => {
-		window.open(
-			document_url,
-			'_blank',
-			'noreferrer',
-		);
 	};
 
 	const columns = getColumns({ onClickViewDocument, setShowModal, onClickDeleteButton, loading });

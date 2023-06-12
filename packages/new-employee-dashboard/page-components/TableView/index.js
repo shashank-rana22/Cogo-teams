@@ -1,4 +1,5 @@
 import { Tabs, TabPanel, Input, Pagination } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import EmptyState from '../../common/EmptyState';
@@ -47,7 +48,7 @@ function TableView({ search, setSearch }) {
 				</div>
 			</div>
 
-			{(list || []).length > ARRAY_LENGTH || loading ? (
+			{isEmpty(list || []) || loading ? (
 				<>
 					<StyledTable
 						columns={columns}

@@ -8,6 +8,8 @@ import IdentificationDocuments from './IdentificationDocuments';
 import PersonalInformation from './PersonalInformation';
 import styles from './styles.module.css';
 
+const DOC_MAPPING = ['aadhaar_card', 'pan_card'];
+
 function RenderPills({ name, isCompleted, isDocsApproved }) {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
@@ -18,7 +20,7 @@ function RenderPills({ name, isCompleted, isDocsApproved }) {
 	}
 
 	return <Pill color="yellow">Pending</Pill>;
-}
+};
 
 function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }) {
 	const { progress_stats = {}, documents } = data || {};
@@ -48,7 +50,7 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 	];
 
 	const isDocsApproved = (documents || []).filter((doc) => (
-		['aadhaar_card', 'pan_card'].includes(doc?.document_type))).every((ele) => (ele?.status === 'approved'));
+		DOC_MAPPING.includes(doc?.document_type))).every((ele) => (ele?.status === 'approved'));
 
 	return (
 		<div className={styles.container}>

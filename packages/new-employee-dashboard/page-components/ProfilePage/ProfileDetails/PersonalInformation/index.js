@@ -8,6 +8,12 @@ import styles from './styles.module.css';
 
 const EMERGENCY_CONTACT_NUMBER_INDEX = 0;
 
+const formatdate = ({ date }) => formatDate({
+	date,
+	dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
+	formatType : 'date',
+});
+
 function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 	const { detail } = profileData || {};
 
@@ -36,11 +42,6 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		? `${emergency_contact_details?.[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_country_code}
 	${emergency_contact_details?.[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_number}` : '-';
 
-	const formatdate = ({ date }) => formatDate({
-		date,
-		dateFormat : GLOBAL_CONSTANTS.formats.date['dd-MM-yyyy'],
-		formatType : 'date',
-	});
 
 	const MAPPING = {
 		name                      : startCase(name),
