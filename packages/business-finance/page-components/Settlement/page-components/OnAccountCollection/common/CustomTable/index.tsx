@@ -65,12 +65,20 @@ function CustomTable(
     const onChangeTableHeaderCheckbox = (event) => {
         event.stopPropagation();
 
-        setCheckedRows([
-            ...checkedRows,
-            ...((list || [])
-                ?.filter((item) => isCheckBoxAllowed(item))
-                .map(({id}) => id) || []),
-        ]);
+        const listIds = (list || []).map(({id}) => id)
+
+        if (event.target.checked) {
+            setCheckedRows([
+                ...checkedRows,
+                ...((list || [])
+                    ?.filter((item) => isCheckBoxAllowed(item))
+                    .map(({id}) => id) || []),
+            ]);
+        } else {
+            setCheckedRows([
+                ...(checkedRows.filter((idChecked) => !(listIds || []).includes(idChecked))),
+            ]);
+        }
     };
 
     const onChangeTableBodyCheckbox = (event, item) => {
