@@ -55,9 +55,9 @@ function Card({
 					<div className={styles.priority_text}>
 						(
 						{priority}
-						{' '}
+						&nbsp;
 						Priority)
-						{' '}
+						&nbsp;
 					</div>
 
 					<div className={styles.priority_text}>
