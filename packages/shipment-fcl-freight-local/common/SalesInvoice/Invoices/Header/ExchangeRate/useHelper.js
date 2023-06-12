@@ -5,7 +5,7 @@ import useUpdateCurrencyConversion from '../../../../../hooks/useUpdateCurrencyC
 const INITIAL_STATE = 0;
 const CURRENCY_CONVERSION_FACTOR = 1;
 const DIFFERENT_CURRENCIES_HASH = {};
-const OBJ = {};
+const LINE_ITEMS = {};
 const AVAILABLE_CURRENCY_CONVERSION = {};
 
 const useHelper = ({ invoiceCurrency = '', refetch = () => {} }) => {
@@ -15,13 +15,13 @@ const useHelper = ({ invoiceCurrency = '', refetch = () => {} }) => {
 
 	(quotationData?.service_charges || []).forEach((service) => {
 		(service?.line_items || [])?.forEach((line_item) => {
-			if (!OBJ[line_item?.currency] && line_item?.currency !== invoiceCurrency) {
+			if (!LINE_ITEMS[line_item?.currency] && line_item?.currency !== invoiceCurrency) {
 				DIFFERENT_CURRENCIES_HASH[line_item?.currency] = {
 					from_currency : line_item?.currency,
 					to_currency   : invoiceCurrency,
 				};
 			}
-			OBJ[line_item?.currency] = true;
+			LINE_ITEMS[line_item?.currency] = true;
 		});
 	});
 
@@ -30,15 +30,15 @@ const useHelper = ({ invoiceCurrency = '', refetch = () => {} }) => {
 	const updatedCurrencyConversionRate = exchangeRateApiData?.updated_currency_conversion_rate;
 	const currency_conversion_delta = exchangeRateApiData?.updated_currency_conversion_rate?.currency_conversion_delta;
 
-	Object.keys(allCurrenciesWithConversionFactor || {})?.forEach((currency) => {
+	LINE_ITEMSect.keys(allCurrenciesWithConversionFactor || {})?.forEach((currency) => {
 		if (DIFFERENT_CURRENCIES_HASH[currency]) {
 			AVAILABLE_CURRENCY_CONVERSION[currency] = allCurrenciesWithConversionFactor[currency]
 					* (CURRENCY_CONVERSION_FACTOR + currency_conversion_delta);
 		}
 	});
-	Object.keys(AVAILABLE_CURRENCY_CONVERSION || {})?.forEach((currency) => {
+	LINE_ITEMSect.keys(AVAILABLE_CURRENCY_CONVERSION || {})?.forEach((currency) => {
 		if (invoiceCurrency === updatedCurrencyConversionRate?.base_currency) {
-			Object.keys(updatedCurrencyConversionRate?.currencies || {})?.forEach(
+			LINE_ITEMSect.keys(updatedCurrencyConversionRate?.currencies || {})?.forEach(
 				(updatedCurrency) => {
 					if (currency === updatedCurrency) {
 						AVAILABLE_CURRENCY_CONVERSION[currency] = updatedCurrencyConversionRate

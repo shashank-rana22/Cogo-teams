@@ -7,10 +7,10 @@ import Details from '../Details';
 
 import styles from './styles.module.css';
 
-const DEFAULT_VALUE = 0;
+const FIRST_INDEX = 0;
 
 function Header({ serviceData = [] }) {
-	const { state, display_label, service_provider, payment_term } = serviceData?.[DEFAULT_VALUE] || {};
+	const { state, display_label, service_provider, payment_term } = serviceData?.[FIRST_INDEX] || {};
 
 	const [showDetails, setShowDetails] = useState({});
 
@@ -39,22 +39,22 @@ function Header({ serviceData = [] }) {
 							tabIndex={0}
 							onClick={() => setShowDetails({
 								...showDetails,
-								[serviceData?.[DEFAULT_VALUE]?.display_label]:
-								!showDetails[serviceData?.[DEFAULT_VALUE]?.display_label],
+								[serviceData?.[FIRST_INDEX]?.display_label]:
+								!showDetails[serviceData?.[FIRST_INDEX]?.display_label],
 							})}
 							className={styles.details_cta}
 						>
 
-							{ showDetails[serviceData?.[DEFAULT_VALUE]?.display_label]
+							{ showDetails[serviceData?.[FIRST_INDEX]?.display_label]
 								? 'Hide Details' : 'View Details'}
 						</div>
 						<div className={styles.edit_cancel}>
-							<EditCancelService serviceData={serviceData?.[DEFAULT_VALUE]} />
+							<EditCancelService serviceData={serviceData?.[FIRST_INDEX]} />
 						</div>
 					</div>
 				</div>
 			</div>
-			{showDetails[serviceData?.[DEFAULT_VALUE]?.display_label] ? <Details serviceData={serviceData} /> : null}
+			{showDetails[serviceData?.[FIRST_INDEX]?.display_label] ? <Details serviceData={serviceData} /> : null}
 		</div>
 
 	);

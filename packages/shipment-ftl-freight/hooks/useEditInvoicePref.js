@@ -12,7 +12,7 @@ import incoTermMapping from '../configurations/inco-term-mapping.json';
 const geo = getGeoConstants();
 const ALL_SERVICE_LINE_ITEMS = [];
 const INITIAL_SERVICE_INVOICE_ID = {};
-const INITIAL_STATE = 0;
+const TOTAL_CURRENT_INVOICE_INDEX = 0;
 const TOTAL_LENGTH = 1;
 const PARTY_SERVICES = [];
 const FINAL_PARTIES = [];
@@ -140,7 +140,7 @@ const useEditInvoicePref = ({
 			(party) => party.id === inv.id,
 		)?.id;
 
-		if (currentInvoiceIndex >= INITIAL_STATE) {
+		if (currentInvoiceIndex >= TOTAL_CURRENT_INVOICE_INDEX) {
 			selectedParties.forEach((party) => {
 				const updateParty = { ...party };
 				updateParty.services = (party.services || []).filter(
@@ -165,7 +165,7 @@ const useEditInvoicePref = ({
 					}
 
 					const currentService = invoicing_parties?.services?.find(
-						(serv) => serv?.id === service?.split(':')?.[INITIAL_STATE],
+						(serv) => serv?.id === service?.split(':')?.[TOTAL_CURRENT_INVOICE_INDEX],
 					);
 
 					let serviceType = currentService?.service_type;

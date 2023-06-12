@@ -3,7 +3,7 @@ import { useRef, useEffect, useCallback } from 'react';
 
 const EVENTS = ['keydown', 'paste'];
 const NEW_STATE_VALUES = {};
-const INITIAL_STATE = 0;
+const FIRST_INDEX = 0;
 const VARIABLE_STATE = 1;
 
 const useOtpInputEvents = ({
@@ -62,7 +62,7 @@ const useOtpInputEvents = ({
 				content = window.clipboardData.getData('Text');
 			}
 
-			content = content.replace(/[^0-9]/g, '').substring(INITIAL_STATE, otpLength);
+			content = content.replace(/[^0-9]/g, '').substring(FIRST_INDEX, otpLength);
 
 			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 

@@ -13,7 +13,7 @@ import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
 
-const DEFAULT_COUNT = 1;
+const TOTAL_COUNT = 1;
 
 function Invoices({
 	invoiceData = {},
@@ -35,7 +35,7 @@ function Invoices({
 	let count = 0;
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
-			count += DEFAULT_COUNT;
+			count += TOTAL_COUNT;
 		}
 	});
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);

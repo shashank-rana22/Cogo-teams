@@ -6,7 +6,7 @@ import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const INITIAL_STATE = -1;
+const END_INDEX = -1;
 const DEFAULT_VALUE = 0;
 const TOTAL_LOADED = 100;
 
@@ -28,16 +28,16 @@ function FileUploader(props) {
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
-			setFileName([{ name: defaultValues.split('/').slice(INITIAL_STATE).join('') }]);
+			setFileName([{ name: defaultValues.split('/').slice(END_INDEX).join('') }]);
 			setUrlStore([{
-				fileName : defaultValues.split('/').slice(INITIAL_STATE).join(''),
+				fileName : defaultValues.split('/').slice(END_INDEX).join(''),
 				finalUrl : defaultValues,
 			}]);
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
-			const names = defaultValues.map((url) => ({ name: url?.split('/')?.slice(INITIAL_STATE)?.join('') }));
+			const names = defaultValues.map((url) => ({ name: url?.split('/')?.slice(END_INDEX)?.join('') }));
 			const urls = defaultValues.map((url) => ({
-				fileName : url?.split('/')?.slice(INITIAL_STATE)?.join(''),
+				fileName : url?.split('/')?.slice(END_INDEX)?.join(''),
 				finalUrl : url,
 			}));
 

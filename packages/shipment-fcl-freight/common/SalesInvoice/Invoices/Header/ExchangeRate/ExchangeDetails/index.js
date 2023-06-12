@@ -3,7 +3,7 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-const STATE = 2;
+const TOTAL_DECIMAL = 2;
 const TOTAL_LENGTH = 1;
 
 function ExchangeDetails({
@@ -23,7 +23,7 @@ function ExchangeDetails({
 					{' '}
 					1 =
 					{' '}
-					{`${Number(AVAILABLE_CURRENCY_CONVERSION[key])?.toFixed(STATE)}`}
+					{`${Number(AVAILABLE_CURRENCY_CONVERSION[key])?.toFixed(TOTAL_DECIMAL)}`}
 					{' '}
 					{`${invoiceCurrency}`}
 				</div>

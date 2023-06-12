@@ -5,7 +5,7 @@ import { useContext } from 'react';
 import styles from './styles.module.css';
 
 const STAKEHOLDER_ALLOWED = {};
-const INITIAL_STATE = 1;
+const FIRST_INDEX = 1;
 
 function ActionsToShow({
 	status,
@@ -23,7 +23,7 @@ function ActionsToShow({
 	const config = stakeholderConfig?.additional_services?.add_rate || {};
 
 	Object.entries(config).forEach(([key, val]) => {
-		STAKEHOLDER_ALLOWED[key?.split('::')?.[INITIAL_STATE]] = val;
+		STAKEHOLDER_ALLOWED[key?.split('::')?.[FIRST_INDEX]] = val;
 	});
 
 	const {

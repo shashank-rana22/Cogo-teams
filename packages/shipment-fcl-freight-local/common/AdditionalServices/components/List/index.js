@@ -16,8 +16,8 @@ import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
-const INITIAL_STATE = 8;
-const DEFAULT_VALUE = 16;
+const DEFAULT_PAGE_LIMIT = 8;
+const TOTAL_PAGE_LIMIT = 16;
 
 function List({ isSeller = false }) {
 	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
@@ -26,7 +26,7 @@ function List({ isSeller = false }) {
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
-	const [pageLimit, setPageLimit] = useState(INITIAL_STATE);
+	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
 
 	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
 		shipment_data,
@@ -82,14 +82,14 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
-			{totalCount > INITIAL_STATE ? (
+			{totalCount > DEFAULT_PAGE_LIMIT ? (
 				<div className={styles.show_more}>
-					{pageLimit > INITIAL_STATE
+					{pageLimit > DEFAULT_PAGE_LIMIT
 						? 	(
 							<Button
 								size="md"
 								themeType="link"
-								onClick={() => setPageLimit(INITIAL_STATE)}
+								onClick={() => setPageLimit(DEFAULT_PAGE_LIMIT)}
 							>
 								Show Less
 							</Button>
@@ -97,7 +97,7 @@ function List({ isSeller = false }) {
 							<Button
 								size="md"
 								themeType="link"
-								onClick={() => setPageLimit(DEFAULT_VALUE)}
+								onClick={() => setPageLimit(TOTAL_PAGE_LIMIT)}
 							>
 								Show More
 							</Button>

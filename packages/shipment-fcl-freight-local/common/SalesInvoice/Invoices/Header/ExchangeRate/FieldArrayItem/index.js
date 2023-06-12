@@ -9,7 +9,7 @@ function FormElement({ namePrefix, name, label, errors, value, ...rest }) {
 		<div className={styles.form_container}>
 			<div className={styles.label}>{label}</div>
 			<InputController name={fieldName} {...rest} />
-			{errors?.[name] ? <div className={styles.errors}>{errors[name].message}</div> : null}
+			{errors?.[name] ? <div className={styles.errors}>{errors[name]?.message}</div> : null}
 		</div>
 	);
 }

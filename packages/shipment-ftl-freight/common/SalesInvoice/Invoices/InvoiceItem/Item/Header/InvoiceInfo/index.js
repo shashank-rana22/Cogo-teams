@@ -5,7 +5,7 @@ import { startCase, isEmpty } from '@cogoport/utils';
 import ClickableDiv from '../../../../../../ClickableDiv';
 import styles from '../styles.module.css';
 
-const INITIAL_STATE = 0;
+const START_INDEX = 0;
 const CREDIT_SOURCE_CUTOFF = 2;
 
 function InvoiceInfo({
@@ -86,13 +86,13 @@ function InvoiceInfo({
 				{invoice?.payment_mode === 'credit' ? (
 					<div>
 						<div className={styles.info_container}>
-							{startCase(creditSource?.slice(INITIAL_STATE, -CREDIT_SOURCE_CUTOFF))}
+							{startCase(creditSource?.slice(START_INDEX, -CREDIT_SOURCE_CUTOFF))}
 						</div>
 
 						<div className={styles.payment_method}>
 							{startCase(
 								`${
-									creditSource?.[(creditSource?.length ?? INITIAL_STATE)
+									creditSource?.[(creditSource?.length ?? START_INDEX)
 												- CREDIT_SOURCE_CUTOFF]
 								} deferred payment`,
 							)}

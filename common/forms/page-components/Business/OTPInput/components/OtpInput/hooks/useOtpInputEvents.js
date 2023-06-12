@@ -4,7 +4,7 @@ import { Toast } from '@cogoport/components';
 import { useRef, useEffect, useCallback } from 'react';
 
 const NEW_STATE_VALUES = {};
-const INITIAL_STATE = 0;
+const START_INDEX = 0;
 const VARIABLE_STATE = 1;
 
 const useOtpInputEvents = ({
@@ -64,12 +64,12 @@ const useOtpInputEvents = ({
 				content = window.clipboardData.getData('Text');
 			}
 
-			content = content.replace(/[^0-9]/g, '').substring(INITIAL_STATE, otpLength);
+			content = content.replace(/[^0-9]/g, '').substring(START_INDEX, otpLength);
 
 			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
 			setOtp((previousState) => {
-				for (let i = INITIAL_STATE; i < otpLength; i += VARIABLE_STATE) {
+				for (let i = START_INDEX; i < otpLength; i += VARIABLE_STATE) {
 					if (i >= currentFocusedOtpInputElementIndex) {
 						NEW_STATE_VALUES[`otp-${i + VARIABLE_STATE}`] = content[i
 							- currentFocusedOtpInputElementIndex] || '';

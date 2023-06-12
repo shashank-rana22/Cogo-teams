@@ -8,14 +8,14 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 const INITIAL_STATE = 1;
-const DEFAULT_VALUE = 0;
+const FIRST_INDEX = 0;
 const SERVICE_INITIAL_KEYS = {};
 
 function Details({ serviceData = [] }) {
 	const {
 		service_type, state, free_days_demurrage_destination,
 		free_days_demurrage_origin, free_days_detention_destination, free_days_detention_origin,
-	} = serviceData[DEFAULT_VALUE];
+	} = serviceData[FIRST_INDEX];
 
 	(serviceData || []).forEach((data) => {
 		SERVICE_INITIAL_KEYS[data?.container_size] = {
@@ -28,7 +28,7 @@ function Details({ serviceData = [] }) {
 		};
 	});
 
-	const [multiServiceType, setMultiServiceType] = useState(Object.keys(SERVICE_INITIAL_KEYS)?.[DEFAULT_VALUE]);
+	const [multiServiceType, setMultiServiceType] = useState(Object.keys(SERVICE_INITIAL_KEYS)?.[FIRST_INDEX]);
 
 	const service_items_key = getConfigs(service_type).details || {};
 
@@ -39,10 +39,10 @@ function Details({ serviceData = [] }) {
 		free_days_detention_origin,
 	};
 
-	const excludedKeys = [...Object.keys(SERVICE_INITIAL_KEYS[(Object.keys(SERVICE_INITIAL_KEYS)?.[DEFAULT_VALUE])]),
+	const excludedKeys = [...Object.keys(SERVICE_INITIAL_KEYS[(Object.keys(SERVICE_INITIAL_KEYS)?.[FIRST_INDEX])]),
 		...Object.keys(freeDays)];
 
-	const remainingServiceData = omit(serviceData?.[DEFAULT_VALUE], excludedKeys);
+	const remainingServiceData = omit(serviceData?.[FIRST_INDEX], excludedKeys);
 
 	return (
 		<div className={cl`${styles.container} ${styles[state]}`}>

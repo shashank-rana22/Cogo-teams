@@ -10,7 +10,7 @@ const STYLES_COL = {
 	alignItems : 'center',
 	padding    : '0 4px',
 };
-const DEFAULT_VALUE = 0;
+const FIRST_INDEX = 0;
 
 function Field({
 	field = {},
@@ -37,10 +37,10 @@ function Field({
 		setShow(!show);
 	};
 
-	const sortingKey = field.sorting ? Object?.keys(field.sorting)?.[DEFAULT_VALUE] : null;
+	const sortingKey = field.sorting ? Object?.keys(field.sorting)?.[FIRST_INDEX] : null;
 
 	const showSortingType =	field.sorting && field.sorting[sortingKey]
-	&& field.sorting[sortingKey] === Object?.keys(sort)?.[DEFAULT_VALUE];
+	&& field.sorting[sortingKey] === Object?.keys(sort)?.[FIRST_INDEX];
 
 	return (
 		<div
