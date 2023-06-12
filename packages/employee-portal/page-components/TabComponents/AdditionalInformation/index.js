@@ -9,6 +9,25 @@ import styles from './styles.module.css';
 
 const DEFAULT_INDEX = 0;
 
+const KEY_CONTENT_MAPPING = {
+	employment_history: {
+		title   : 'EMPLOYMENT HISTORY',
+		content : EmploymentHistory,
+	},
+	educational_qualification: {
+		title   : 'EDUCATIONAL QUALIFICATION',
+		content : EducationalQualification,
+	},
+	resume: {
+		title   : 'RESUME',
+		content : Resume,
+	},
+	bank_details: {
+		title   : 'BANK DETAILS',
+		content : BankDetails,
+	},
+};
+
 function RenderPills({ isCompleted, key, bankDetails }) {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
@@ -22,7 +41,7 @@ function RenderPills({ isCompleted, key, bankDetails }) {
 }
 
 function AdditionalInformation({ setInformationPage, data, getEmployeeDetails }) {
-	const { progress_stats = {}, bank_details:bankDetails } = data || {};
+	const { progress_stats = {}, bank_details: bankDetails } = data || {};
 	const { additional_info_added = {} } = progress_stats;
 
 	const {
@@ -34,23 +53,18 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 
 	const CONTENT_MAPPING = [
 		{
-			title       : 'EMPLOYMENT HISTORY',
-			content     : EmploymentHistory,
+			key         : 'employment_history',
 			isCompleted : employment_history,
 		},
 		{
-			title       : 'EDUCATIONAL QUALIFICATION',
-			content     : EducationalQualification,
+			key         : 'educational_qualification',
 			isCompleted : educational_qualification,
 		},
 		{
-			title       : 'RESUME',
-			content     : Resume,
+			key         : 'resume',
 			isCompleted : resume,
 		},
 		{
-			title       : 'BANK DETAILS',
-			content     : BankDetails,
 			key         : 'bank_details',
 			isCompleted : bank_details,
 		},
@@ -71,7 +85,8 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 
 			<div className={styles.subcontainer}>
 				{CONTENT_MAPPING.map((item) => {
-					const { content: Component, isCompleted, key } = item;
+					const { isCompleted, key } = item || {};
+					const { content: Component, title } = KEY_CONTENT_MAPPING[key];
 
 					return (
 						<div
@@ -83,7 +98,7 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 								type="text"
 								title={(
 									<div className={styles.status}>
-										<div className={styles.accordion_title}>{item.title}</div>
+										<div className={styles.accordion_title}>{title}</div>
 										<RenderPills isCompleted={isCompleted} key={key} bankDetails={bankDetails} />
 									</div>
 								)}
