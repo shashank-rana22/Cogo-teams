@@ -69,7 +69,7 @@ function Invoices({
 
 	const generateInvoice = () => {
 		const html = `<html><body>${InvoiceRef.current.innerHTML}</body></html>`;
-		generatePdf({ html, scale: 0.7, callback: callbackGeneratePdf });
+		generatePdf({ html, scale: 0.6, callback: callbackGeneratePdf });
 	};
 
 	return (
