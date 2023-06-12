@@ -36,7 +36,7 @@ function Confirmation(
 				{' '}
 				{unqIds?.length || 0}
 				{' '}
-				Payments. Are You Sure you want to Post?
+				Payments. Are you sure you want to post?
 			</div>
 			<div className={styles.buttons}>
 				<Button

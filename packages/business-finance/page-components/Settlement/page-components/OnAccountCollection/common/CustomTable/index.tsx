@@ -110,7 +110,7 @@ function CustomTable(
 		) : null;
 	};
 
-	const IsAllChecked = (list || [])?.filter((item) => isCheckBoxAllowed(item)
+	const isAllChecked = (list || [])?.filter((item) => isCheckBoxAllowed(item)
 	&& !checkedRows.includes(item?.id))?.length === 0;
 
 	const showHeaderCheckbox = (list || [])?.filter((item) => isCheckBoxAllowed(item))?.length > 0;
@@ -123,7 +123,7 @@ function CustomTable(
 				setGlobalFilters={setGlobalFilters}
 				globalFilters={globalFilters}
 				onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
-				IsAllChecked={IsAllChecked}
+				isAllChecked={isAllChecked}
 				showHeaderCheckbox={showHeaderCheckbox}
 				loading={loading}
 			/>
