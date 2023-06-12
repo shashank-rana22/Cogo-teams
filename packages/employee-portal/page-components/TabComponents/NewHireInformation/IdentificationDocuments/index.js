@@ -13,7 +13,7 @@ const DOC_ARRAY = [
 	'aadhaar_card',
 	'pan_card_number',
 	'pan_card',
-]
+];
 
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
@@ -75,11 +75,7 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 
 			const checkDocument = (documents || []).find((element) => (element.document_type === item));
 
-			if (checkDocument?.status === 'approved') {
-				return null;
-			}
-
-			if (!values?.[item]?.finalUrl || !values?.[docNumber]) {
+			if (checkDocument?.status === 'approved' || !values?.[item]?.finalUrl || !values?.[docNumber]) {
 				return null;
 			}
 
@@ -122,7 +118,7 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 
 								{DOC_ARRAY.includes(controlName) && status !== 'approved' ? (
 									<sup className={styles.sup}>*</sup>
-									) : null}
+								) : null}
 							</div>
 
 							<div className={styles.control}>

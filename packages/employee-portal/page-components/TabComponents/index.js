@@ -1,6 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowNext } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { Image }from '@cogoport/next';
+
 import AdditionalInformation from './AdditionalInformation';
 import CompanyPolicies from './CompanyPolicies';
 import Day1 from './Day1';
@@ -24,37 +26,37 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 
 	const MAPPING = {
 		new_hire_information: {
-			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
+			icon      : GLOBAL_CONSTANTS.image_url.document_icon_png,
 			component : NewHireInformation,
 			enable    : true,
 		},
 		offer_letter: {
-			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
+			icon      : GLOBAL_CONSTANTS.image_url.books_png,
 			component : OfferLetter,
 			enable    : !isEmpty(offer_letter),
 		},
 		additional_information: {
-			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
+			icon      : GLOBAL_CONSTANTS.image_url.document_icon_png,
 			component : AdditionalInformation,
 			enable    : offer_letter_signed?.get_offer_letter_signed,
 		},
 		sign_your_docs: {
-			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
+			icon      : GLOBAL_CONSTANTS.image_url.books_png,
 			component : SignYourDocuments,
 			enable    : signDocEnableContd,
 		},
 		company_policies: {
-			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
+			icon      : GLOBAL_CONSTANTS.image_url.document_icon_png,
 			component : CompanyPolicies,
 			enable    : signDocEnableContd && documents_signed?.documents_signed,
 		},
 		day_1: {
-			icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
+			icon      : GLOBAL_CONSTANTS.image_url.day_one_png,
 			component : Day1,
 			enable    : signDocEnableContd && company_policies_read?.company_policies_read,
 		},
 		// maps: {
-		// 	icon      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
+		// icon: GLOBAL_CONSTANTS.image_url.map_png,
 		// 	component : Maps,
 		// 	enable    : signDocEnableContd && company_policies_read?.company_policies_read,
 		// },

@@ -139,6 +139,10 @@ const GLOBAL_CONSTANTS = {
 		outgoing_orange_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
 		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
 		destination_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
+		document_icon_png   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
+		day_one_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
+		books_png           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
+		map_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
 	},
 	options: {
 		upload_file_size: {
