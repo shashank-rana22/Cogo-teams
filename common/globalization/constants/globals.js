@@ -173,6 +173,7 @@ const GLOBAL_CONSTANTS = {
 		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
 		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
 		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
+		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
 	},
 
 	languages                       : LANGUAGE_OPTIONS,
