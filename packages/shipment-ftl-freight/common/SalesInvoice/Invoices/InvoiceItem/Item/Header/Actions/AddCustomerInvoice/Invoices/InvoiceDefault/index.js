@@ -28,7 +28,6 @@ function InvoiceDefault({
 				border="0"
 				cellPadding="0"
 				cellSpacing="0"
-				className="noBorder"
 				style={{
 					width       : '100%',
 					textAlign   : 'center',

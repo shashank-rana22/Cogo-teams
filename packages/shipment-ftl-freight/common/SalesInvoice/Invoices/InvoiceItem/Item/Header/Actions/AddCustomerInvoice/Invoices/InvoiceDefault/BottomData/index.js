@@ -21,7 +21,6 @@ function BottomData({ stampData }) {
 			</tr>
 			<tr style={{ height: '200px' }}>
 				<td
-					className="noBorder"
 					style={{
 						textAlign     : 'left',
 						width         : '65%',
@@ -63,7 +62,6 @@ function BottomData({ stampData }) {
 					</div>
 				</td>
 				<td
-					className="noBorder"
 					style={{
 						width       : '35%',
 						textAlign   : 'center',

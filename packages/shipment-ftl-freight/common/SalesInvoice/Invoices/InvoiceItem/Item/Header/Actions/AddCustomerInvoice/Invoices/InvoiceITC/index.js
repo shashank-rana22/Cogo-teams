@@ -39,7 +39,6 @@ function InvoiceITC({
 			>
 				<tr>
 					<td
-						className="borderStyle"
 						style={{
 							width     : '45%',
 							textAlign : 'center',
@@ -73,7 +72,7 @@ function InvoiceITC({
 				}}
 			>
 				<tr>
-					<td className="noBorder" style={{ width: '30%', padding: '5px' }}>
+					<td style={{ width: '30%', padding: '5px' }}>
 						<p>
 							<b>{customer_name}</b>
 						</p>
@@ -90,8 +89,8 @@ function InvoiceITC({
 							</b>
 						</p>
 					</td>
-					<td className="noBorder" style={{ width: '50%' }} />
-					<td className="noBorder" style={{ width: '20%', verticalAlign: 'top' }}>
+					<td style={{ width: '50%' }} />
+					<td style={{ width: '20%', verticalAlign: 'top' }}>
 						<br />
 						<p>
 							<b>

@@ -172,7 +172,7 @@ function TableData({ customData = {} }) {
 				<td style={{ border: '2px solid black' }} />
 			</tr>
 			<tr style={{ border: '2px solid black', textAlign: 'center' }}>
-				<td colSpan="7" className="lineItem ">
+				<td colSpan="7">
 					<b>Grand Total</b>
 				</td>
 				{extraTotalArray.map((item) => (

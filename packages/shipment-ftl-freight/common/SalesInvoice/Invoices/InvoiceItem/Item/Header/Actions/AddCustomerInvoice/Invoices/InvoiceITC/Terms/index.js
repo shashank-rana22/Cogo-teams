@@ -55,7 +55,7 @@ function Terms({
 			</div>
 			<table style={{ width: '100%', borderWidth: '0 2px 2px 2px', borderColor: 'black', borderStyle: 'solid' }}>
 				<tr>
-					<td className="noBorder" style={{ width: '70%', padding: '0 8px' }}>
+					<td style={{ width: '70%', padding: '0 8px' }}>
 						<b>Terms &amp; Conditions:</b>
 						<ol style={{ paddingLeft: '16px' }}>
 							<li>
@@ -101,7 +101,6 @@ function Terms({
 						</ol>
 					</td>
 					<td
-						className="noBorder"
 						style={{ width: '30%', textAlign: 'center', padding: '0 8px' }}
 					>
 						<h3>

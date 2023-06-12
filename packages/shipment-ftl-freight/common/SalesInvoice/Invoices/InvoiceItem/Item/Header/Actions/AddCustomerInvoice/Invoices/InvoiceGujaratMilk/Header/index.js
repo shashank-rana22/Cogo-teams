@@ -2,9 +2,9 @@ import { customerToCin } from '../../../utils/serviceDescriptionMappings';
 
 function Header({ billing_address = '', importerExporterId = '', logoData }) {
 	return (
-		<table border="0" cellPadding="0" cellSpacing="0" className="noBorder">
+		<table border="0" cellPadding="0" cellSpacing="0">
 			<tr>
-				<td className="noBorder" style={{ width: '45%', verticalAlign: 'top' }}>
+				<td style={{ width: '45%', verticalAlign: 'top' }}>
 					<p style={{ wordWrap: 'break-word' }}>
 						{billing_address?.address || ''}
 					</p>
@@ -19,7 +19,7 @@ function Header({ billing_address = '', importerExporterId = '', logoData }) {
 						www.4tigo.com
 					</p>
 				</td>
-				<td className="noBorder" style={{ width: '25%', verticalAlign: 'top' }}>
+				<td style={{ width: '25%', verticalAlign: 'top' }}>
 					<p style={{ display: 'flex' }}>
 						<b>CIN : </b>
 							&nbsp;
@@ -41,7 +41,7 @@ function Header({ billing_address = '', importerExporterId = '', logoData }) {
 						</span>
 					</p>
 				</td>
-				<td className="noBorder" style={{ width: '30%' }}>
+				<td style={{ width: '30%' }}>
 					<img
 						style={{ float: 'right', margin: '20px', height: '100px' }}
 						src={logoData}

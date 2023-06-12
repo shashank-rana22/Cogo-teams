@@ -73,7 +73,6 @@ function HeaderData({
 					</p>
 				</td>
 				<td
-					className="no-border"
 					style={{
 						borderTop     : '1px solid black',
 						padding       : '20px',
@@ -90,7 +89,6 @@ function HeaderData({
 
 				<td
 					colSpan="2"
-					className="no-border"
 					style={{
 						borderTop     : '1px solid black',
 						borderRight   : '1px solid black',

@@ -16,7 +16,6 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 		<table
 			cellPadding="0"
 			cellSpacing="0"
-			className="priceTable"
 			style={{
 				width       : '100%',
 				fontWeight  : 'bold',
@@ -58,15 +57,13 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 				}}
 				>
 					<table
-						className="no-border"
 						style={{
 							width: '100%',
 						}}
 					>
-						<tr className="no-border">
+						<tr>
 							<td
 								colSpan="2"
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -76,7 +73,6 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>Total amount before tax </b>
 							</td>
 							<td
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -86,7 +82,6 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>{invoice?.invoice_currency}</b>
 							</td>
 							<td
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -99,10 +94,9 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								</b>
 							</td>
 						</tr>
-						<tr className="no-border">
+						<tr>
 							<td
 								colSpan="2"
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -112,7 +106,6 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>IGST </b>
 							</td>
 							<td
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -122,7 +115,6 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>{invoice?.invoice_currency}</b>
 							</td>
 							<td
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -132,10 +124,9 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>{igst}</b>
 							</td>
 						</tr>
-						<tr className="no-border">
+						<tr>
 							<td
 								colSpan="2"
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -145,7 +136,6 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>SGST </b>
 							</td>
 							<td
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -155,7 +145,6 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>{invoice?.invoice_currency}</b>
 							</td>
 							<td
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -165,10 +154,9 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>{sgst}</b>
 							</td>
 						</tr>
-						<tr className="no-border">
+						<tr>
 							<td
 								colSpan="2"
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -178,7 +166,6 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>CGST </b>
 							</td>
 							<td
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -188,7 +175,6 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>{invoice?.invoice_currency}</b>
 							</td>
 							<td
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -199,12 +185,11 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 							</td>
 						</tr>
 
-						<tr className="no-border">
-							<td colSpan="2" className="no-border" style={{ verticalAlign: 'top', maxWidth: '50%' }}>
+						<tr>
+							<td colSpan="2" style={{ verticalAlign: 'top', maxWidth: '50%' }}>
 								<b>Total amount after tax</b>
 							</td>
 							<td
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',
@@ -214,7 +199,6 @@ function TotalData({ stampData = '', customData = {}, invoice = {} }) {
 								<b>{invoice?.invoice_currency}</b>
 							</td>
 							<td
-								className="no-border"
 								style={{
 									fontSize      : '12px',
 									verticalAlign : 'top',

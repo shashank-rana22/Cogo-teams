@@ -39,9 +39,9 @@ function InvoiceGujaratMilk({
 	} = getOtherData({ customData });
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif', fontSize: '12px', padding: '40px' }}>
-			<table border="0" cellPadding="0" cellSpacing="0" className="noBorder">
+			<table border="0" cellPadding="0" cellSpacing="0">
 				<tr>
-					<td className="noBorder">
+					<td>
 						<h2 style={{ marginTop: '0px', color: '#ffa500' }}>
 							<b>{billing_address?.business_name || ''}</b>
 						</h2>
@@ -53,11 +53,10 @@ function InvoiceGujaratMilk({
 				border="0"
 				cellPadding="0"
 				cellSpacing="0"
-				className="priceTable noBorder"
 				style={{ width: '100%' }}
 			>
 				<tr style={{ marginBottom: '50px' }}>
-					<td className="noBorder" style={{ width: '50%' }}>
+					<td style={{ width: '50%' }}>
 						<b>Customer:&nbsp;</b>
 						&nbsp;
 						{customer_name}
@@ -66,13 +65,12 @@ function InvoiceGujaratMilk({
 						{customer_address}
 					</td>
 					<td
-						className="noBorder"
 						style={{ width: '25%', paddingLeft: '30px' }}
 					>
 						<b>Invoice No:&nbsp; </b>
 						{invoice_no}
 					</td>
-					<td className="noBorder" style={{ width: '25%' }}>
+					<td style={{ width: '25%' }}>
 						<b>
 							Original For Recipient /
 							&nbsp;
@@ -85,11 +83,10 @@ function InvoiceGujaratMilk({
 				border="0"
 				cellPadding="0"
 				cellSpacing="0"
-				className="priceTable noBorder"
 				style={{ width: '100%' }}
 			>
 				<tr>
-					<td className="noBorder" style={{ width: '50%', verticalAlign: 'top' }}>
+					<td style={{ width: '50%', verticalAlign: 'top' }}>
 						<p style={{ wordWrap: 'break-word' }} />
 						<p>
 							<b>State Code :&nbsp;</b>
@@ -109,7 +106,6 @@ function InvoiceGujaratMilk({
 						</p>
 					</td>
 					<td
-						className="noBorder"
 						style={{ width: '50%', paddingLeft: '30px' }}
 					>
 						<p>
