@@ -6,6 +6,7 @@ import useContainerDetails from '../../../../../../hooks/useContainerDetails';
 import TaskContainer from '../../common/TaskContainer';
 
 import styles from './styles.module.css';
+const VALID_DATE_FORMATS = '03/21/2000, 2000/03/21, 3/21/2000-09:05:00, 3-21-2000-09:05:00';
 
 function TaskForm({
 	apis_data = {},
@@ -35,7 +36,6 @@ function TaskForm({
 		handleSubmit,
 	} = formProps || {};
 
-	const validDateFormats = '03/21/2000, 2000/03/21, 3/21/2000-09:05:00, 3-21-2000-09:05:00';
 
 	return (
 		<TaskContainer pendingTask={pendingTask}>
@@ -72,7 +72,7 @@ function TaskForm({
 				<div className={styles.info}>
 					Other valid date formats:
 					{' '}
-					{validDateFormats}
+					{VALID_DATE_FORMATS}
 				</div>
 			</div>
 

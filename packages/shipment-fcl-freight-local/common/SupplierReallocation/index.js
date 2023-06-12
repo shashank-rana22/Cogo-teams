@@ -9,6 +9,7 @@ import getControls from './getControls';
 import styles from './styles.module.css';
 
 const controlsMapping = { asyncSelect: AsyncSelectController, select: SelectController, number: InputController };
+const INITIAL_STATE = 0;
 
 function FormElement(props) {
 	const { name, type, label, errors } = props || {};
@@ -36,7 +37,7 @@ function SupplierReallocation({
 
 	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
 
-	const serviceObj = serviceData?.[0] || {};
+	const serviceObj = serviceData?.[INITIAL_STATE] || {};
 	const { service_type } = serviceObj || {};
 
 	const { defaultValues, controls, showAllControls } = getControls({

@@ -9,6 +9,8 @@ const REVENEUE_DESK_SERVICES = [
 	'fcl_cfs_service',
 	'haulage_freight_service',
 ];
+const INITIAL_STATE = 1;
+const MAX_STEP = 2;
 
 function MarkServiceConfirmed({
 	task = {},
@@ -20,11 +22,11 @@ function MarkServiceConfirmed({
 	refetch = () => {},
 	localService = '',
 }) {
-	const intialStep = REVENEUE_DESK_SERVICES.includes(task.service_type) ? 1 : 2;
+	const intialStep = REVENEUE_DESK_SERVICES.includes(task.service_type) ? INITIAL_STATE : MAX_STEP;
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [step, setStep] = useState(intialStep);
 
-	if (step === 1) {
+	if (step === INITIAL_STATE) {
 		return (
 			<SelectRate
 				setStep={setStep}

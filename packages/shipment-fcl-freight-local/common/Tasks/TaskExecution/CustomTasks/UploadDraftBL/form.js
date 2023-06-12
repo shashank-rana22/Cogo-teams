@@ -9,10 +9,12 @@ const CONTROL_TYPE_MAPPING = {
 	number   : InputController,
 	textarea : TextAreaController,
 };
+const TOTAL_SPAN = 12;
+const PERCENT = 100
 
 function FormElement({ name, label, errors, type, span, ...rest }) {
 	const Element = CONTROL_TYPE_MAPPING[type];
-	const widthVal = (span / 12) * 100;
+	const widthVal = (span / TOTAL_SPAN) * PERCENT;
 	return Element ? (
 		<div style={{ width: `${widthVal}%` }}>
 			<div className={styles.label}>{label}</div>
