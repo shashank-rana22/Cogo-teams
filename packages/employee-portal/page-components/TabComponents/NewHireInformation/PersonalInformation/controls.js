@@ -1,3 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 const controls = () => ([
 	{
 		name        : 'name',
@@ -84,11 +86,12 @@ const controls = () => ([
 		rules       : { required: 'This is required' },
 	},
 	{
-		name   : 'passport_size_photo_url',
-		label  : 'Passport Size Photograph',
-		type   : 'fileUpload',
-		accept : '.png,.jpg,.jpeg,',
-		rules  : { required: 'This is required' },
+		name    : 'passport_size_photo_url',
+		label   : 'Passport Size Photograph',
+		type    : 'fileUpload',
+		maxSize : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
+		accept  : '.png,.jpg,.jpeg,',
+		rules   : { required: 'This is required' },
 	},
 	{
 		name        : 'emergency_contact_details',

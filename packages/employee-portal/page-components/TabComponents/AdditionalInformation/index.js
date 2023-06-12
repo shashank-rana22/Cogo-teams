@@ -7,7 +7,19 @@ import EmploymentHistory from './EmploymentHistory';
 import Resume from './Resume';
 import styles from './styles.module.css';
 
-const INDEX = 0;
+const DEFAULT_INDEX = 0;
+
+function RenderPills({ isCompleted, key, bankDetails }) {
+	if (isCompleted) {
+		return <Pill color="green">Completed</Pill>;
+	}
+
+	if (bankDetails?.[DEFAULT_INDEX]?.status === 'active' && key === 'bank_details') {
+		return <Pill color="orange">Waiting for approval</Pill>;
+	}
+
+	return <Pill color="yellow">Pending</Pill>;
+}
 
 function AdditionalInformation({ setInformationPage, data, getEmployeeDetails }) {
 	const { progress_stats = {}, bank_details:bankDetails } = data || {};
@@ -44,18 +56,6 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 		},
 	];
 
-	const renderPills = ({ isCompleted, key }) => {
-		if (isCompleted) {
-			return <Pill color="green">Completed</Pill>;
-		}
-
-		if (bankDetails?.[INDEX]?.status === 'active' && key === 'bank_details') {
-			return <Pill color="orange">Waiting for approval</Pill>;
-		}
-
-		return <Pill color="yellow">Pending</Pill>;
-	};
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
@@ -84,7 +84,7 @@ function AdditionalInformation({ setInformationPage, data, getEmployeeDetails })
 								title={(
 									<div className={styles.status}>
 										<div className={styles.accordion_title}>{item.title}</div>
-										{renderPills({ isCompleted, key })}
+										<RenderPills isCompleted={isCompleted} key={key} bankDetails={bankDetails} />
 									</div>
 								)}
 								animate

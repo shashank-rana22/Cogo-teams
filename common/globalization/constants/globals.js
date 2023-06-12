@@ -146,10 +146,18 @@ const GLOBAL_CONSTANTS = {
 			'5MB'  : '5242880',
 			'15MB' : '15728640',
 		},
+
+		role_options: [
+			{ value: 'software_development_engineer_1', label: 'Software Development Engineer - I' },
+			{ value: 'business_analyst', label: 'Business Analyst' },
+			{ value: 'product_analyst', label: 'Product Analyst' },
+			{ value: 'business_consultant', label: 'Business Consultant' },
+		],
 	},
 
 	regex_patterns: {
 		number          : /^[+-]?\d*\.?\d+$/,
+		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
 		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
 		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,

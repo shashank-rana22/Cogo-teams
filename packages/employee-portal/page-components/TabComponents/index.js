@@ -60,6 +60,12 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 		// },
 	};
 
+	const onClickTiles = ({ item }) => {
+		if (MAPPING[item]?.enable) {
+			setInformationPage(item);
+		}
+	};
+
 	if (informationPage) {
 		const PageComponent = MAPPING[informationPage]?.component;
 
@@ -72,12 +78,6 @@ function TabComponents({ data, informationPage, setInformationPage, getEmployeeD
 			/>
 		);
 	}
-
-	const onClickTiles = ({ item }) => {
-		if (MAPPING[item]?.enable) {
-			setInformationPage(item);
-		}
-	};
 
 	return (
 		<div className={styles.container}>

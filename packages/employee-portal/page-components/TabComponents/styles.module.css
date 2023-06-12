@@ -37,7 +37,6 @@
 }
 
 .arrow_wrapper {
-	bottom: "0%";
 	display: flex;
 	align-items: flex-end;
 	justify-content: flex-end;

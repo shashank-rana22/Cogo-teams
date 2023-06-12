@@ -52,10 +52,10 @@ function PersonalInformation({ data:content, getEmployeeDetails }) {
 					mapping[item.name]
 					|| content?.detail?.[item.name],
 				);
-			} else if ((item?.name === 'date_of_birth'
-				|| item?.name === 'date_of_joining'
-				|| item?.name === 'updated_at' || item?.name === 'created_at')
-				&& content?.detail?.[item?.name]) {
+			} else if (
+				(['date_of_birth', 'date_of_joining', 'updated_at', 'created_at'].includes(item?.name))
+				&& content?.detail?.[item?.name]
+			) {
 				setValue(item.name, new Date(content?.detail?.[item?.name]));
 			} else if (item?.name === 'emergency_contact_details') {
 				setValue(

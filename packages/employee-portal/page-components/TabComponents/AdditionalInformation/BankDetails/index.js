@@ -8,9 +8,9 @@ import useCreateEmployeeBankDetails from '../../../../hooks/useCreateEmployeeBan
 import controls from './controls';
 import styles from './styles.module.css';
 
-const INDEX_VALUE = 0;
+const DEFAULT_INDEX_VALUE = 0;
 
-const MAPPING = [
+const BANK_DETAILS_MAPPING = [
 	'ifsc_code',
 	'account_holder_name',
 	'bank_name', 'bank_branch_name', 'account_number', 'cancelled_check_url'];
@@ -34,8 +34,8 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 	};
 
 	useEffect(() => {
-		MAPPING.map((element) => (
-			setValue(element, bank_details?.[INDEX_VALUE]?.[element])
+		(BANK_DETAILS_MAPPING || []).map((element) => (
+			setValue(element, bank_details?.[DEFAULT_INDEX_VALUE]?.[element])
 		));
 	}, [bank_details, setValue]);
 

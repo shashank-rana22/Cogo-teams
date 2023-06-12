@@ -7,16 +7,16 @@ const SAMPLE_DOCUMENT_URL = `https://cogoport-production.sgp1.digitaloceanspaces
 								/ab3309b85b52e198b4c2bb691a7fb609/new_employee_bulk_upload_sample_sheet.csv`;
 
 const useBulkUpload = () => {
+	const onClickViewSampleFile = () => {
+		window.open(SAMPLE_DOCUMENT_URL, '_blank', 'noreferrer');
+	};
+
 	const [{ loading = false }, trigger] = useHarbourRequest({
 		url    : 'bulk_upload_employee_details',
 		method : 'post',
 	}, { manual: true });
 
 	const { formState: { errors }, control, handleSubmit } = useForm();
-
-	const onClickViewSampleFile = () => {
-		window.open(SAMPLE_DOCUMENT_URL, '_blank', 'noreferrer');
-	};
 
 	const bulkUploadNewHire = async (val) => {
 		try {

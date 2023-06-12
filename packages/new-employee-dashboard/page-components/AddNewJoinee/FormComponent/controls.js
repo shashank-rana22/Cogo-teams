@@ -1,9 +1,4 @@
-const ROLE_OPIONS = [
-	{ value: 'software_development_engineer_1', label: 'Software Development Engineer - I' },
-	{ value: 'business_analyst', label: 'Business Analyst' },
-	{ value: 'product_analyst', label: 'Product Analyst' },
-	{ value: 'business_consultant', label: 'Business Consultant' },
-];
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const controls = [
 	{
@@ -23,7 +18,7 @@ const controls = [
 		rules       : {
 			required : 'Email is required',
 			pattern  : {
-				value   : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+				value   : GLOBAL_CONSTANTS.regex_patterns.email,
 				message : 'Email is invalid',
 			},
 		},
@@ -49,7 +44,7 @@ const controls = [
 		type        : 'select',
 		label       : 'Role',
 		placeholder : 'Role',
-		options     : ROLE_OPIONS,
+		options     : GLOBAL_CONSTANTS.options.role_options,
 		rules       : {
 			required: 'Role is required',
 		},
@@ -82,7 +77,7 @@ const controls = [
 		type        : 'text',
 		rules       : {
 			pattern: {
-				value   : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+				value   : GLOBAL_CONSTANTS.regex_patterns.email,
 				message : 'Email is invalid',
 			},
 		},
