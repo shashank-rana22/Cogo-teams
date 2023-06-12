@@ -6,9 +6,9 @@ import { INCENTIVE_OPTIONS, TOTAL_INCENTIVE } from '../../../../constants/config
 
 import styles from './styles.module.css';
 
-const DEFAULT_MAX_VALUE = 100;
-const DEFAULT_MIN_VALUE = 8;
-const DEFAULT_VALUE = 0;
+const MAXIMUM_LIMIT_VALUE = 100;
+const MINIMUM_LIMIT_VALUE = 8;
+const MINIMUM_VALUE = 0;
 
 function NetworkBonus({ errors, control, formValues, isEdit }) {
 	const {
@@ -34,7 +34,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 						rules={{ required: true }}
 						options={TOTAL_INCENTIVE}
 					/>
-					{errors.network_bonus_total_incentive_type && (
+					{errors?.network_bonus_total_incentive_type && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>
@@ -48,12 +48,12 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 								size="sm"
 								disabled={isEdit}
 								type="number"
-								max={exceed_limit ? DEFAULT_MAX_VALUE : DEFAULT_MIN_VALUE}
-								min={DEFAULT_VALUE}
+								max={exceed_limit ? MAXIMUM_LIMIT_VALUE : MINIMUM_LIMIT_VALUE}
+								min={MINIMUM_VALUE}
 								placeholder="Enter value"
 								rules={{ required: true }}
 							/>
-							{errors.exceed_allowed && (
+							{errors?.exceed_allowed && (
 								<span className={styles.error}>Required</span>
 							)}
 						</div>
@@ -82,7 +82,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 						rules={{ required: true }}
 						options={INCENTIVE_OPTIONS}
 					/>
-					{errors.network_bonus_min_incentive_type && (
+					{errors?.network_bonus_min_incentive_type && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>
@@ -99,7 +99,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 							rules={{ required: true }}
 							prefix={<IcCCogoCoin />}
 						/>
-						{errors.network_bonus_min_incentive_value && (
+						{errors?.network_bonus_min_incentive_value && (
 							<span className={styles.error}>Required</span>
 						)}
 					</div>
@@ -118,7 +118,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 						rules={{ required: true }}
 						options={INCENTIVE_OPTIONS}
 					/>
-					{errors.network_bonus_max_incentive_type && (
+					{errors?.network_bonus_max_incentive_type && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>
@@ -135,7 +135,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 							rules={{ required: true }}
 							prefix={<IcCCogoCoin />}
 						/>
-						{errors.network_bonus_max_incentive_value && (
+						{errors?.network_bonus_max_incentive_value && (
 							<span className={styles.error}>Required</span>
 						)}
 					</div>

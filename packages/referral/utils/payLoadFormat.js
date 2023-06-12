@@ -1,4 +1,4 @@
-const DEFAULT_VALUE = 0;
+const MINIMUM_NUMBER_VALUE = 0;
 
 const isLastLevel = (type, start, end) => {
 	if (type === 'fixed') {
@@ -45,29 +45,29 @@ export const payloadFormat = (event, values) => {
 		event,
 		event_types           : event === 'subscription' ? undefined : event_types,
 		overall_limit_type,
-		overall_limit         : overall_limit_type === 'none' ? DEFAULT_VALUE : Number(overall_limit),
+		overall_limit         : overall_limit_type === 'none' ? MINIMUM_NUMBER_VALUE : Number(overall_limit),
 		event_threshold_limit : Number(event_threshold_limit),
 		referral_bonus        : {
 			total_incentive_type : referral_bonus_total_incentive_type,
 			total_incentive      : referral_bonus_total_incentive_type === 'none'
-				? DEFAULT_VALUE : Number(referral_bonus_total_incentive_value),
+				? MINIMUM_NUMBER_VALUE : Number(referral_bonus_total_incentive_value),
 			min_incentive_type : referral_bonus_min_incentive_type,
 			minimum_incentive  : referral_bonus_min_incentive_type === 'none'
-				? DEFAULT_VALUE : Number(referral_bonus_min_incentive_value),
+				? MINIMUM_NUMBER_VALUE : Number(referral_bonus_min_incentive_value),
 			max_incentive_type : referral_bonus_max_incentive_type,
 			maximum_incentive  : referral_bonus_max_incentive_type === 'none'
-				? DEFAULT_VALUE : Number(referral_bonus_max_incentive_value),
+				? MINIMUM_NUMBER_VALUE : Number(referral_bonus_max_incentive_value),
 		},
 		network_bonus: {
 			total_incentive_type : network_bonus_total_incentive_type,
 			total_incentive      : network_bonus_total_incentive_type === 'none'
-				? DEFAULT_VALUE : Number(exceed_allowed),
+				? MINIMUM_NUMBER_VALUE : Number(exceed_allowed),
 			min_incentive_type : network_bonus_min_incentive_type,
 			minimum_incentive  : network_bonus_min_incentive_type === 'none'
-				? DEFAULT_VALUE : Number(network_bonus_min_incentive_value),
+				? MINIMUM_NUMBER_VALUE : Number(network_bonus_min_incentive_value),
 			max_incentive_type : network_bonus_max_incentive_type,
 			maximum_incentive  : network_bonus_max_incentive_type === 'none'
-				? DEFAULT_VALUE : Number(network_bonus_max_incentive_value),
+				? MINIMUM_NUMBER_VALUE : Number(network_bonus_max_incentive_value),
 			level_bonus_criterias: getFormattedPayload(remaining_bonus),
 		},
 		threshold_transacting_user,

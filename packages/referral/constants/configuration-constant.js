@@ -1,4 +1,4 @@
-const DEFAULT_ARRAY_VALUE = 39;
+const OPTION_VALUE = 39;
 const INDEX_VALUE = 2;
 
 export const OVERALL_LIMIT = [
@@ -37,7 +37,7 @@ export const BONUS_TYPE = [
 ];
 
 const getNodeOptions = () => {
-	const options = [...Array(DEFAULT_ARRAY_VALUE).keys()].map((i) => {
+	const options = [...Array(OPTION_VALUE).keys()].map((i) => {
 		const label = `N-${i + INDEX_VALUE}`;
 		const value = Number(`-${i + INDEX_VALUE}`);
 		return { label, value };

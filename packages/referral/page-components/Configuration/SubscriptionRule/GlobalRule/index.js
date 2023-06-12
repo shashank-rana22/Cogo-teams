@@ -27,7 +27,7 @@ function GlobalRule({ control, errors, formValues, isEdit }) {
 						rules={{ required: true }}
 						options={OVERALL_LIMIT}
 					/>
-					{errors.overall_limit_type && (
+					{errors?.overall_limit_type && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>
@@ -44,7 +44,7 @@ function GlobalRule({ control, errors, formValues, isEdit }) {
 							rules={{ required: true }}
 							prefix={overall_limit_type === 'fixed' && <IcCCogoCoin />}
 						/>
-						{errors.overall_limit && (
+						{errors?.overall_limit && (
 							<span className={styles.error}>Required</span>
 						)}
 					</div>
@@ -62,7 +62,7 @@ function GlobalRule({ control, errors, formValues, isEdit }) {
 						type="number"
 						placeholder="Enter value"
 					/>
-					{errors.event_threshold_limit && (
+					{errors?.event_threshold_limit && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>

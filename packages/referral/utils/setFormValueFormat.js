@@ -1,6 +1,6 @@
 import { remainingBonusFieldArray } from './payLoadFormat';
 
-const DEFAULT_LIMIT_VALUE = 8;
+const MINIMUM_LIMIT_VALUE = 8;
 
 export const setFormValues = (values, setValue) => {
 	const {
@@ -52,6 +52,6 @@ export const setFormValues = (values, setValue) => {
 		network_bonus_min_incentive_value    : network_min,
 		network_bonus_max_incentive_value    : network_max,
 		remaining_bonus                      : remainingBonusFieldArray(level_bonus_criterias),
-		exceed_limit                         : network_incentive > DEFAULT_LIMIT_VALUE,
+		exceed_limit                         : network_incentive > MINIMUM_LIMIT_VALUE,
 	});
 };

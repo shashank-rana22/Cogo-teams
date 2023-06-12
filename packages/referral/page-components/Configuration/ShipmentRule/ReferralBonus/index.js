@@ -30,7 +30,7 @@ function ReferralBonus({ control, errors, formValues, isEdit }) {
 						rules={{ required: true }}
 						options={TOTAL_INCENTIVE}
 					/>
-					{errors.referral_bonus_total_incentive_type && (
+					{errors?.referral_bonus_total_incentive_type && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>
@@ -46,7 +46,7 @@ function ReferralBonus({ control, errors, formValues, isEdit }) {
 							placeholder="Enter value"
 							rules={{ required: true }}
 						/>
-						{errors.referral_bonus_total_incentive_value && (
+						{errors?.referral_bonus_total_incentive_value && (
 							<span className={styles.error}>Required</span>
 						)}
 					</div>
@@ -67,7 +67,7 @@ function ReferralBonus({ control, errors, formValues, isEdit }) {
 						rules={{ required: true }}
 						options={INCENTIVE_OPTIONS}
 					/>
-					{errors.referral_bonus_min_incentive_type && (
+					{errors?.referral_bonus_min_incentive_type && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>
@@ -84,7 +84,7 @@ function ReferralBonus({ control, errors, formValues, isEdit }) {
 							rules={{ required: true }}
 							prefix={<IcCCogoCoin />}
 						/>
-						{errors.referral_bonus_min_incentive_value && (
+						{errors?.referral_bonus_min_incentive_value && (
 							<span className={styles.error}>Required</span>
 						)}
 					</div>
@@ -103,7 +103,7 @@ function ReferralBonus({ control, errors, formValues, isEdit }) {
 						rules={{ required: true }}
 						options={INCENTIVE_OPTIONS}
 					/>
-					{errors.referral_bonus_max_incentive_type && (
+					{errors?.referral_bonus_max_incentive_type && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>
@@ -120,7 +120,7 @@ function ReferralBonus({ control, errors, formValues, isEdit }) {
 							rules={{ required: true }}
 							prefix={<IcCCogoCoin />}
 						/>
-						{errors.referral_bonus_max_incentive_value && (
+						{errors?.referral_bonus_max_incentive_value && (
 							<span className={styles.error}>Required</span>
 						)}
 					</div>

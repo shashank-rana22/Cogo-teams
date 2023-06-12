@@ -21,7 +21,7 @@ function NetworkBonusCriteria({ isEdit, control, errors }) {
 								rules={{ required: true }}
 								options={NETWORK_BONUS_CRITERIA}
 							/>
-							{errors.threshold_transacting_user && (
+							{errors?.threshold_transacting_user && (
 								<span className={styles.error}>Required</span>
 							)}
 						</div>

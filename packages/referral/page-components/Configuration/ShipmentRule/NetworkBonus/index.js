@@ -34,7 +34,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 						rules={{ required: true }}
 						options={TOTAL_INCENTIVE}
 					/>
-					{errors.network_bonus_total_incentive_type && (
+					{errors?.network_bonus_total_incentive_type && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>
@@ -53,7 +53,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 								placeholder="Enter value"
 								rules={{ required: true }}
 							/>
-							{errors.exceed_allowed && (
+							{errors?.exceed_allowed && (
 								<span className={styles.error}>Required</span>
 							)}
 						</div>
@@ -82,7 +82,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 						rules={{ required: true }}
 						options={INCENTIVE_OPTIONS}
 					/>
-					{errors.network_bonus_min_incentive_type && (
+					{errors?.network_bonus_min_incentive_type && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>
@@ -99,7 +99,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 							rules={{ required: true }}
 							prefix={<IcCCogoCoin />}
 						/>
-						{errors.network_bonus_min_incentive_value && (
+						{errors?.network_bonus_min_incentive_value && (
 							<span className={styles.error}>Required</span>
 						)}
 					</div>
@@ -118,7 +118,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 						rules={{ required: true }}
 						options={INCENTIVE_OPTIONS}
 					/>
-					{errors.network_bonus_max_incentive_type && (
+					{errors?.network_bonus_max_incentive_type && (
 						<span className={styles.error}>Required</span>
 					)}
 				</div>
@@ -135,7 +135,7 @@ function NetworkBonus({ errors, control, formValues, isEdit }) {
 							rules={{ required: true }}
 							prefix={<IcCCogoCoin />}
 						/>
-						{errors.network_bonus_max_incentive_value && (
+						{errors?.network_bonus_max_incentive_value && (
 							<span className={styles.error}>Required</span>
 						)}
 					</div>
