@@ -49,11 +49,10 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 					...additionalData,
 				},
 			});
-			// listTicketApi();
 			Toast.success('Successfully Created');
 			setShowRaiseTicket(false);
 		} catch (error) {
-			Toast.error(error?.error);
+			Toast.error(error?.response?.data);
 		}
 	};
 
