@@ -10,6 +10,12 @@ import styles from './styles.module.css';
 
 const DOC_MAPPING = ['aadhaar_card', 'pan_card'];
 
+const KEY_COMPONENT_MAPPING = {
+	personal_information     : PersonalInformation,
+	identification_documents : IdentificationDocuments,
+	address_details          : AddressDetails,
+};
+
 function RenderPills({ name, isCompleted, isDocsApproved }) {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
@@ -34,17 +40,14 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 	const CONTENT_MAPPING = [
 		{
 			name        : 'personal_information',
-			content     : PersonalInformation,
 			isCompleted : personal_information,
 		},
 		{
 			name        : 'identification_documents',
-			content     : IdentificationDocuments,
 			isCompleted : identification_documents,
 		},
 		{
 			name        : 'address_details',
-			content     : AddressDetails,
 			isCompleted : address_details,
 		},
 	];
@@ -67,7 +70,8 @@ function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }
 
 			<div className={styles.subcontainer}>
 				{CONTENT_MAPPING.map((item) => {
-					const { content: Component, isCompleted, name } = item;
+					const { isCompleted, name } = item;
+					const Component = KEY_COMPONENT_MAPPING[name];
 
 					return (
 						<div

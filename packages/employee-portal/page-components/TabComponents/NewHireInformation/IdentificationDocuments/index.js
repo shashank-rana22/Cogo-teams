@@ -15,6 +15,19 @@ const DOC_ARRAY = [
 	'pan_card',
 ];
 
+const DOC_TYPE_MAPPING = ['aadhaar_card', 'pan_card', 'driving_license', 'passport'];
+
+const getDocType = ({ documents }) => {
+	let component = {};
+	(documents || []).forEach((element) => {
+		if (DOC_TYPE_MAPPING.includes(element.document_type)) {
+			component = { ...component, [element.document_type]: element };
+		}
+	});
+
+	return component;
+};
+
 const removeTypeField = (controlItem) => {
 	const { type, ...rest } = controlItem;
 	return rest;
@@ -41,33 +54,9 @@ function IdentificationDocuments({ data: info, getEmployeeDetails }) {
 
 	const id = info?.detail?.id;
 
-	const component = {
-		aadhaar_card    : undefined,
-		pan_card        : undefined,
-		driving_license : undefined,
-		passport        : undefined,
-	};
+	const component = getDocType({ documents });
 
-	(documents || []).forEach((element) => {
-		switch (element.document_type) {
-			case 'aadhaar_card':
-				component.aadhaar_card = element;
-				break;
-			case 'pan_card':
-				component.pan_card = element;
-				break;
-			case 'driving_license':
-				component.driving_license = element;
-				break;
-			case 'passport':
-				component.passport = element;
-				break;
-			default:
-				break;
-		}
-	});
-
-	const { aadhaar_card, pan_card, driving_license, passport } = component;
+	const { aadhaar_card, pan_card, driving_license, passport } = component || {};
 
 	useEffect(() => {
 		setValue('aadhaar_card', aadhaar_card?.document_url);

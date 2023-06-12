@@ -3,6 +3,7 @@ import { IcMEyeopen } from '@cogoport/icons-react';
 import React from 'react';
 
 import useCheckCompanyPolicies from '../../../hooks/useCheckCompanyPolicies';
+import openDocument from '../../../utils/openDocument';
 
 import styles from './styles.module.css';
 
@@ -22,21 +23,12 @@ function FullView({
 		employeeId,
 	});
 
-	const openDocument = () => {
-		let modifiedUrl = `https://${url}`;
-		if (url?.includes('http://') || url?.includes('https://')) {
-			modifiedUrl = url;
-		}
-
-		window.open(modifiedUrl, '_blank');
-	};
-
 	return (
 		<div className={styles.container} style={{ ...containerStyle }}>
 			<Button
 				onClick={async () => {
 					await updateEmployeeDetails();
-					openDocument();
+					openDocument({ url });
 				}}
 				style={{ borderRadius: 4 }}
 			>
