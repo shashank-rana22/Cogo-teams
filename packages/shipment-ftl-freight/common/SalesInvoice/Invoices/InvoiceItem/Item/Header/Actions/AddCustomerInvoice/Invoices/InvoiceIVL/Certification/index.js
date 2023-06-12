@@ -32,7 +32,7 @@ function Certification({
 	} = customerToBankDetails[importerExporterId] || {};
 	return (
 		<>
-			<div className="certification">
+			<div style={{ width: '99%', padding: '0px 8px', borderTop: '0' }}>
 				<p style={{ margin: '0' }}>
 					Certified that the particulars given above are true and correct and
 					the amount indicated represent the price actually charged and that
@@ -56,17 +56,16 @@ function Certification({
 			</div>
 			<div style={{ padding: '8px 8px' }}>
 				<table
-					className="noBorder"
 					style={{ width: '100%', borderTop: '1px solid black' }}
 				>
 					<tr>
-						<td className="noBorder" style={{ width: '70%' }}>
+						<td style={{ width: '70%' }}>
 							<div style={{ fontSize: '20px' }}>Terms & Conditions:</div>
 							<ol style={{ paddingLeft: '16px' }}>
-								<li> Payment Terms : Net 30 days.</li>
-								<li>
+								<li style={{ padding: '5px 0px' }}> Payment Terms : Net 30 days.</li>
+								<li style={{ padding: '5px 0px' }}>
 									All Payments should be to the account of
-									{' '}
+									&nbsp;
 									{billing_address?.business_name || '4Tigo'}
 									. Bank account
 									details:
@@ -87,29 +86,28 @@ function Certification({
 										{bankDetailObj?.data?.bank_account_number || account_number}
 									</p>
 								</li>
-								<li>
+								<li style={{ padding: '5px 0px' }}>
 									Delayed payment penalty: 2% per month or part therof from the
 									date of invoice.
 								</li>
-								<li>
+								<li style={{ padding: '5px 0px' }}>
 									Any part payment made against this invoice shall be treated as
 									on Account, unless the amount of invoice is paid in full
 								</li>
-								<li>
+								<li style={{ padding: '5px 0px' }}>
 									Payment advice should be mailed to
-									{' '}
+									&nbsp;
 									<b>collection@4tigo.com</b>
 									.
 								</li>
-								<li>
+								<li style={{ padding: '5px 0px' }}>
 									Disputes, if any shall be subject to jurisdiction of Courts at
 									Bangalore.
 								</li>
 							</ol>
 						</td>
 						<td
-							className="noBorder"
-							style={{ width: '30%', textAlign: 'center' }}
+							style={{ width: '30%', textAlign: 'center', verticalAlign: 'top' }}
 						>
 							<h3>
 								<b>
@@ -126,7 +124,7 @@ function Certification({
 						</td>
 					</tr>
 					<tr>
-						<td colSpan="2" className="noBorder">
+						<td colSpan="2">
 							<h2 style={{ textAlign: 'center', margin: '0px 0px' }}>
 								<b>
 									Our Company is registered as a Small Enterprise under the MSME
