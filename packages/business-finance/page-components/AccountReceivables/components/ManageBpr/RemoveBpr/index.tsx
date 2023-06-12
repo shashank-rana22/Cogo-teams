@@ -6,13 +6,13 @@ import useRemoveBpr from '../../../hooks/useRemoveBpr';
 import styles from './styles.module.css';
 
 interface Row {
-	id?: string,
-	businessName?: string
+	id?: string;
+	businessName?: string;
 }
 
 interface RemoveBprParams {
-	refetch: Function,
-	row: Row,
+	refetch: Function;
+	row: Row;
 }
 
 function RemoveBpr({ refetch, row } : RemoveBprParams) {

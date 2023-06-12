@@ -1,6 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { getByKey } from '@cogoport/utils';
 
+import { RefetchInterface } from '../../../commons/Interfaces';
 import RemoveBpr from '../RemoveBpr';
 
 import styles from './styles.module.css';
@@ -8,11 +9,7 @@ import styles from './styles.module.css';
 const MIN_NAME_STRING = 0;
 const MAX_NAME_STRING = 40;
 
-interface ManageBpr {
-	refetch : Function
-}
-
-export const manageBprColumn = ({ refetch } : ManageBpr) => [
+export const manageBprColumn = ({ refetch } : RefetchInterface) => [
 	{
 		Header   : 'Serail Id',
 		accessor : (row) => (

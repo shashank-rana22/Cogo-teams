@@ -3,8 +3,8 @@ import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 interface GetOrgParams {
-	page : number,
-	pageLimit : number
+	page : number;
+	pageLimit : number;
 }
 
 interface Pagination {
