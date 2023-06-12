@@ -1,4 +1,4 @@
-const NUMBER = 600000;
+const NUMBER = 590000;
 
 const controls = [
 	{
@@ -93,7 +93,7 @@ const lessControls = [
 ];
 
 const getControls = (type) => {
-	if (Number(type) > NUMBER) {
+	if (Number(type) >= NUMBER) {
 		return controls;
 	}
 	return lessControls;
