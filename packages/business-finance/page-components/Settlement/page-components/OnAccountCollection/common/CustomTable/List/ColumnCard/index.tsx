@@ -75,7 +75,7 @@ function ColumnCard({ item, refetch, getTableBodyCheckbox }: ColumnCardInterface
 										<div>{bankName}</div>
 										{' '}
 										A/C No. -
-                                        {bankAccountNumber || accCode}
+										{bankAccountNumber || accCode}
 									</>
 								)}
 								interactive
@@ -84,11 +84,11 @@ function ColumnCard({ item, refetch, getTableBodyCheckbox }: ColumnCardInterface
 									{bankName.substring(0, MAX_LENGTH_ECLIPSES)}
 									...
 									<div>
-	{(
+										{(
                                         	bankAccountNumber || accCode
-	).substring(0, MAX_LENGTH_ECLIPSES)}
-	...
-                                    </div>
+										).substring(0, MAX_LENGTH_ECLIPSES)}
+										...
+									</div>
 								</div>
 							</Tooltip>
 						) : (

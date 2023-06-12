@@ -49,7 +49,7 @@ function OnAccountCollection() {
 	};
 
 	const bulkPost = () => {
-		post([...new Set(checkedRows)]);
+		post(checkedRows?.filter((value, index, array) => array.indexOf(value) === index));
 	};
 
 	const bulkDisabled = (checkedRows)?.length < 2;

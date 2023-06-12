@@ -21,7 +21,7 @@ function Confirmation(
 		loading,
 	}: Props,
 ) {
-	const unqIds = [...new Set(checkedRows)];
+	const unqIds = checkedRows.filter((value, index, array) => array.indexOf(value) === index);
 	return (
 		<Modal
 			show={showConfirm}
