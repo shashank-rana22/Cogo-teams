@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 const DOC_MAPPING = ['aadhaar_card', 'pan_card']
 
-const RenderPills = ({ name = '', isCompleted = 'false' }) => {
+const RenderPills = ({ name = '', isCompleted = false }) => {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
 	}
