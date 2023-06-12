@@ -1,7 +1,7 @@
 import { Button, Loader } from '@cogoport/components';
 import { IcCFtick, IcMArrowBack } from '@cogoport/icons-react';
 
-import PreviewDocument from '../../../commons/PreviewDocumet';
+import PreviewDocument from '../../../commons/PreviewDocument';
 import useGetCompanyDocument from '../../../hooks/useGetCompanyDocument';
 import useGetDocumentSigningUrl from '../../../hooks/useGetDocumentSigningUrl';
 

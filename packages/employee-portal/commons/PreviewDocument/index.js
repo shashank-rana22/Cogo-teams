@@ -1,7 +1,7 @@
 import FullView from './FullView';
 import styles from './styles.module.css';
 
-function PreviewDocumet({
+function PreviewDocument({
 	document_header,
 	height = '200px', width = '200px',
 	preview = false,
@@ -51,4 +51,4 @@ function PreviewDocumet({
 	);
 }
 
-export default PreviewDocumet;
+export default PreviewDocument;

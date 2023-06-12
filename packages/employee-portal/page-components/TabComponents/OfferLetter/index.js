@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
-import PreviewDocumet from '../../../commons/PreviewDocumet';
+import PreviewDocumet from '../../../commons/PreviewDocument';
 import useGetDocumentSigningUrl from '../../../hooks/useGetDocumentSigningUrl';
 
 import styles from './styles.module.css';

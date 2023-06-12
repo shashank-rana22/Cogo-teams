@@ -1,7 +1,7 @@
 import { Checkbox, Toast } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
 
-import PreviewDocumet from '../../../commons/PreviewDocumet';
+import PreviewDocumet from '../../../commons/PreviewDocument';
 
 import styles from './styles.module.css';
 
