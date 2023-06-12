@@ -1,6 +1,7 @@
 import { IcMArrowNext } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
-import { Image }from '@cogoport/next';
+
 import AdditionalInformation from './AdditionalInformation';
 import CompanyPolicies from './CompanyPolicies';
 import Day1 from './Day1';

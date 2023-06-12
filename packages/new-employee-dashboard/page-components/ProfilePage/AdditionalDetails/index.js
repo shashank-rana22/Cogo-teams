@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 const BANK_DETAILS_INDEX = 0;
 
-const RenderPills = ({ isCompleted = false, name = '',bankDetails }) => {
+function RenderPills({ isCompleted = false, name = '', bankDetails }) {
 	if (isCompleted) {
 		return <Pill color="green">Completed</Pill>;
 	}
@@ -19,7 +19,7 @@ const RenderPills = ({ isCompleted = false, name = '',bankDetails }) => {
 	}
 
 	return <Pill color="yellow">Pending</Pill>;
-};
+}
 
 function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployeeDetails }) {
 	const { progress_stats = {}, bank_details:bankDetails } = profileData || {};
@@ -54,8 +54,6 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 			isCompleted : bank_details,
 		}];
 
-	
-
 	return (
 		<div className={styles.container}>
 			{(COMPONENT_MAPPING || []).map((item) => {
@@ -72,7 +70,7 @@ function AdditionalDetails({ profileData, getEmployeeDetailsLoading, getEmployee
 							title={(
 								<div className={styles.status}>
 									<div className={styles.accordion_title}>{startCase(name)}</div>
-									<RenderPills  name={name} isCompleted={isCompleted} bankDetails={bankDetails}/>
+									<RenderPills name={name} isCompleted={isCompleted} bankDetails={bankDetails} />
 								</div>
 							)}
 						>
