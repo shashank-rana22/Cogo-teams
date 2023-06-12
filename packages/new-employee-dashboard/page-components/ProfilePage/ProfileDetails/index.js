@@ -50,7 +50,7 @@ function ProfileDetails({ loading, profileData, getEmployeeDetails, getEmployeeD
 
 	return (
 		<div className={styles.container}>
-			{MAPPING.map((item) => {
+			{(MAPPING || []).map((item) => {
 				const { content: Component, isCompleted, name } = item;
 
 				return (
