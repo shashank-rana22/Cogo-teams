@@ -1,3 +1,5 @@
+const COLORS = ['#EE3425', '#F8AEA8', '#F37166', '#BF291E', '#FFD1CC', '#FBD1A6'];
+
 const getFormatedData = (stats) => {
 	const { container_stats, late_collection_stats, late_release_stats } = stats || {};
 	const {
@@ -10,7 +12,6 @@ const getFormatedData = (stats) => {
 		gated_in_at_vessel_departure = '', pick_up_and_not_gated_in = '', cargo_value_fraud = '',
 		vessel_arrived_but_not_gated_out = '', container_not_picked_up = '', gated_out_but_not_returned = '',
 	} = container_stats || {};
-	const colors = ['#EE3425', '#F8AEA8', '#F37166', '#BF291E', '#FFD1CC', '#FBD1A6'];
 	const CONTAINER_MOVEMENT_MAPPING = [
 		{
 			id    : 'Container Not Picked Up',
@@ -89,7 +90,7 @@ const getFormatedData = (stats) => {
 	};
 
 	return {
-		colors,
+		COLORS,
 		CONTAINER_MOVEMENT_MAPPING,
 		LATE_COLLECTION_MAPPING,
 		tabData,

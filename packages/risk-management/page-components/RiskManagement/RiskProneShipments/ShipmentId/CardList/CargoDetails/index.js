@@ -5,11 +5,11 @@ import styles from './styles.module.css';
 
 const CARGO_DETAILS_LENGHTH = 0;
 const CARGO_DETAILS_LENGHTH_GREATER_THAN_ONE = 1;
-const labels = ['container_size', 'container_type', 'commodity',
+const LABELS = ['container_size', 'container_type', 'commodity',
 	'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type'];
 
 const renderCargoPills = (cargo_detail) => (
-	labels.map((label) => (cargo_detail[label]
+	LABELS.map((label) => (cargo_detail[label]
 		? (
 			<Pill size="sm" key={label}>
 				{renderValue(label, cargo_detail[label])}

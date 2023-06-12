@@ -1,6 +1,5 @@
 import { Select } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
-import React from 'react';
 
 import { optionsMap } from './constants';
 import styles from './styles.module.css';

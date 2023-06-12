@@ -104,3 +104,15 @@
 		width: 100%;
 	}
 }
+
+.active_accordian_style {
+	max-height: 430px;
+	overflow: hidden;
+	transition: max-height 0.4s ease-in;
+}
+
+.accordian_style {
+	max-height: 0;
+	overflow: hidden;
+	transition: max-height 0.4s ease-out;
+}

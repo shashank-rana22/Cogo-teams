@@ -7,11 +7,8 @@ import {
 	display_milestone, completed, ellipsis, tooltip_content, label, value,
 } from './styles.module.css';
 
-function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
-	const { milestone, completed_on } = item || {};
-
-	const displayCompletedDate = completed_on;
-
+function TimelineItem({ item = {}, isLast = '', consecutivelyCompleted = false }) {
+	const { milestone, completed_on } = item;
 	let isCompleted = !!completed_on && consecutivelyCompleted;
 	isCompleted = isLast ? !!completed_on : isCompleted;
 
@@ -23,12 +20,12 @@ function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
 			<div className={label}>Milestone</div>
 			<div className={value}>{milestone}</div>
 
-			{displayCompletedDate ? (
+			{completed_on ? (
 				<>
 					<div className={label}>Completed On</div>
 					<div className={value}>
-						{displayCompletedDate !== null
-						&& format(displayCompletedDate, 'dd MMM yyyy')}
+						{completed_on !== null
+						&& format(completed_on, 'dd MMM yyyy')}
 					</div>
 				</>
 			) : null}
@@ -46,8 +43,8 @@ function TimelineItem({ item, isLast, consecutivelyCompleted = false }) {
 
 			<div className={display_milestone}>
 				<div className={ellipsis}>{milestone}</div>
-				{displayCompletedDate !== null
-					&& <div className={ellipsis}>{format(displayCompletedDate, 'dd MMM yyyy')}</div>}
+				{completed_on === null ? null
+					: <div className={ellipsis}>{format(completed_on, 'dd MMM yyyy')}</div>}
 			</div>
 		</div>
 	);

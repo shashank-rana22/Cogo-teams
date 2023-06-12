@@ -9,11 +9,21 @@ import styles from './styles.module.css';
 
 const MAX_LENGTH = 16;
 const COMMODITY_VALUE_LENGTH = 40;
+const RISK_CATEGORIES = {
+	1 : 'LOW',
+	2 : 'MODERATE',
+	3 : 'HIGH',
+	4 : 'VERY HIGH',
+};
+const RISK_CATEGORIES_COLOR = { 1: '#C4DC91', 2: '#FBD1A6', 3: '#F37166', 4: '#ed3726' };
 function CardItem({ itemData }) {
 	const {
 		serial_id = '', origin_port = {}, destination_port = {},
 		commodity = '', cargo_value_currency, cargo_value, reason = [],
+		criticality = '',
 	} = itemData || {};
+
+	const risk_category = RISK_CATEGORIES[criticality];
 	const { display_name = '', port_code = '' } = origin_port || {};
 	const {
 		port_code:destination_port_code, display_name:destination_port_display_name,
@@ -82,6 +92,17 @@ function CardItem({ itemData }) {
 
 					</div>
 				</div>
+				{criticality && (
+					<div className={styles.ribbons}>
+						<div
+							className={styles.ribbon}
+							style={{ background: RISK_CATEGORIES_COLOR[criticality] }}
+						>
+							{risk_category}
+
+						</div>
+					</div>
+				)}
 			</div>
 		</div>
 	);

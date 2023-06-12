@@ -12,11 +12,11 @@ const ARRAY_LENGTH = 5;
 const DEFAULT_MAX_LENGTH = 0;
 
 function ShipmentId({
-	data, loading, filters, setFilters, activeTab,
-	getDashboardData, getDahboardStatsData,
+	data = {}, loading = false, filters = '', setFilters = () => {}, activeTab = '',
+	getDashboardData = () => {}, getDahboardStatsData = () => {},
 }) {
 	const { search } = filters || {};
-	const { list = [], total_count, page_limit } = data || {};
+	const { list = [], total_count, page_limit } = data;
 	const [searchInput, setSearchInput] = useState(null);
 	const suffix = !searchInput ? (
 		<div className={styles.icon_wrapper}>
@@ -66,7 +66,7 @@ function ShipmentId({
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<div className={styles.header_text}>
-					Shipment ID
+					Shipment ID&apos;s
 				</div>
 				<div className={styles.search}>
 					<Input

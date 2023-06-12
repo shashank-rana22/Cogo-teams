@@ -4,12 +4,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header({ data, loading }) {
-	const { stats } = data || {};
+function Header({ data = {}, loading = false }) {
 	const {
 		ongoing_shipments = '', risk_prone_shipments = '', container_movement_count = '',
 		bl_do_release_count = '', both_count = '', risk_free_shipments = '',
-	} = stats || {};
+	} = data?.stats || {};
 	const TAB_MAPPING = [
 		{
 			label : 'Container Movement',

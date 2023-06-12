@@ -3,6 +3,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
+const DEFAULT_PAGE_LIMIT = 10;
 const useGetListRiskProne = ({ activeTab }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'fcl_freight/list_risk_prone_shipments',
@@ -43,7 +44,7 @@ const useGetListRiskProne = ({ activeTab }) => {
 						sort_by            : 'created_at',
 						sort_type          : 'desc',
 						additional_methods : ['pagination'],
-						page_limit         : 10,
+						page_limit         : DEFAULT_PAGE_LIMIT,
 						page               : pageIndex,
 					},
 				});

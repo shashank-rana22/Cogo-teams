@@ -6,8 +6,8 @@ import useGetResolve from '../../../../hooks/useGetResolve';
 import styles from './styles.module.css';
 
 function ResolveModal({
-	showResolveModal, setShowResolveModal, itemData, getDashboardData,
-	getDahboardStatsData,
+	showResolveModal = false, setShowResolveModal = () => {}, itemData = {}, getDashboardData = () => {},
+	getDahboardStatsData = () => {},
 }) {
 	const [remarks, setRemarks] = useState('');
 
@@ -35,6 +35,7 @@ function ResolveModal({
 				<Modal.Footer>
 					<Button
 						themeType="secondary"
+						disabled={resolveLoading}
 						style={{ marginRight: '8px' }}
 						onClick={() => { setShowResolveModal(false); }}
 					>

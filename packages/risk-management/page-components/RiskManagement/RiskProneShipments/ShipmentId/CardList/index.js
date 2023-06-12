@@ -14,9 +14,6 @@ function CardList({ itemData, getDashboardData, getDahboardStatsData }) {
 	const [isAccordionActive, setIsAccordionActive] = useState(false);
 	const [showResolveModal, setShowResolveModal] = useState(false);
 
-	const handleClick = () => {
-		setIsAccordionActive(!isAccordionActive);
-	};
 	return (
 		<div className={styles.main_div}>
 			<div className={styles.div_container}>
@@ -44,7 +41,7 @@ function CardList({ itemData, getDashboardData, getDahboardStatsData }) {
 						</div>
 					</div>
 				</div>
-				{showResolveModal && (
+				{showResolveModal ? (
 					<ResolveModal
 						showResolveModal={showResolveModal}
 						setShowResolveModal={setShowResolveModal}
@@ -52,32 +49,26 @@ function CardList({ itemData, getDashboardData, getDahboardStatsData }) {
 						getDashboardData={getDashboardData}
 						getDahboardStatsData={getDahboardStatsData}
 					/>
-				)}
+				) : null}
 				<div className={styles.hr} />
 
-				<div>
-					<div style={{
-						transition : 'max-height 0.3s ease-in-out',
-						maxHeight  : isAccordionActive ? '430px' : '0px',
-						overflow   : 'hidden',
-					}}
-					>
+				<div className={isAccordionActive ? styles.active_accordian_style : styles.accordian_style}>
+					<div>
+						<div className={styles.text}>
+							Shipment Timeline
+						</div>
 						<div>
-							<div className={styles.text}>
-								Shipment Timeline
-							</div>
-							<div>
-								<ShipmentTimline itemData={itemData} isAccordionActive={isAccordionActive} />
-							</div>
+							<ShipmentTimline itemData={itemData} isAccordionActive={isAccordionActive} />
 						</div>
 					</div>
 				</div>
+
 			</div>
 
 			<div className={styles.footer}>
 				<div
 					className={styles.footer_text}
-					onClick={handleClick}
+					onClick={() => { setIsAccordionActive(!isAccordionActive); }}
 					role="presentation"
 				>
 					{isAccordionActive ?	'Show Less' : 'Show more' }
