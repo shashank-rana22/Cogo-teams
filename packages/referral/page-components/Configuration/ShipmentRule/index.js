@@ -34,7 +34,7 @@ function ShipmentRule({ shipmentData = {}, dataLoading = false }) {
 
 	const [apiState, setApiState] = useState('Created');
 	const [isEdit, setIsEdit] = useState(false);
-	
+
 	const { createRule = () => {}, loading = false } = useCreateReferralConfig({ apiState, setApiState, setIsEdit });
 
 	useEffect(() => {
@@ -47,7 +47,10 @@ function ShipmentRule({ shipmentData = {}, dataLoading = false }) {
 
 	const handleSave = (values) => {
 		const { remaining_bonus } = values;
-		const totalPercentage = remaining_bonus.reduce((acc, curr) => acc + Number(curr.percentage), DEFAULT_VALUE);
+		const totalPercentage = remaining_bonus.reduce(
+			(acc, curr) => acc + Number(curr.percentage),
+			DEFAULT_VALUE,
+		);
 		if (totalPercentage > DEFAULT_PERCENTAGE_VALUE) {
 			Toast.error('Total Percentage should not exceed 100');
 		} else {
