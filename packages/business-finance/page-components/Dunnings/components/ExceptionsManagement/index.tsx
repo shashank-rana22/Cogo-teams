@@ -2,12 +2,17 @@ import React, { useState } from 'react';
 
 import cycleWiseExceptionTable from '../../configurations/cycle-wise-exception-table';
 import masterExceptionColumn from '../../configurations/master-exception-table';
+import useMasterException from '../../hooks/useMasterException';
 
 import StyledTable from './StyledTable';
 import styles from './styles.module.css';
 
 function ExceptionsManagement() {
-	const rest = 'loading';
+	const [filters, setFilters] = useState({});
+	const [exceptionFilter, setExceptionFilter] = useState({});
+	const [showCycleExceptions, setShowCycleExceptions] = useState(false);
+	const { data, loading, searchValue, setSearchValue } = useMasterException({ exceptionFilter });
+
 	const subTab = [
 		{
 			key   : 'masterExceptionList',
@@ -20,8 +25,8 @@ function ExceptionsManagement() {
 		},
 	];
 	const [subTabsValue, setSubTabsValue] = useState('masterExceptionList');
-	const [filters, setFilters] = useState({});
-	const [exceptionFilter, setExceptionFilter] = useState({});
+	const CYCLE_WISE_COLUMN = cycleWiseExceptionTable({ setShowCycleExceptions });
+	const rest = { loading };
 	return (
 		<div>
 			<div className={styles.flex}>
@@ -42,13 +47,16 @@ function ExceptionsManagement() {
 			</div>
 
 			<StyledTable
-				data={[]}
-				columns={subTabsValue === 'masterExceptionList' ? masterExceptionColumn() : cycleWiseExceptionTable()}
-				imageFind="FinanceDashboard"
+				data={data?.list || []}
+				columns={subTabsValue === 'masterExceptionList' ? masterExceptionColumn() : CYCLE_WISE_COLUMN}
 				{...rest}
 				exceptionFilter={exceptionFilter}
 				setExceptionFilter={setExceptionFilter}
 				subTabsValue={subTabsValue}
+				searchValue={searchValue}
+				setSearchValue={setSearchValue}
+				showCycleExceptions={showCycleExceptions}
+				setShowCycleExceptions={setShowCycleExceptions}
 			/>
 		</div>
 	);

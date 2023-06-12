@@ -1,7 +1,7 @@
 import { Button } from '@cogoport/components';
 import React from 'react';
 
-const cycleWiseExceptionTable = () => [
+const cycleWiseExceptionTable = ({ setShowCycleExceptions }) => [
 	{
 		Header   : 'Cycle Name',
 		id       : 'cycleName',
@@ -32,7 +32,14 @@ const cycleWiseExceptionTable = () => [
 		id       : 'button',
 		accessor : (row) => (
 			<div>
-				<Button>hy</Button>
+				<Button
+					size="md"
+					themeType="secondary"
+					onClick={() => { setShowCycleExceptions(true); }}
+				>
+					Manage Exceptions
+
+				</Button>
 			</div>
 
 		),

@@ -5,16 +5,18 @@ import React from 'react';
 import manageExceptionColumn from '../../../../configurations/manage-exception-table';
 
 import StyledTable from './StyledTable';
-import styles from './styles.module.css';
 
-function ManageExceptionsModal({ show, setShow }) {
+function ManageExceptionsModal({
+	showCycleExceptions,
+	setShowCycleExceptions,
+}) {
 	const onClose = () => {
-		setShow((pv) => !pv);
+		setShowCycleExceptions((pv) => !pv);
 	};
 
 	const rest = 'loading';
 	return (
-		<Modal size="lg" show={show} onClose={onClose} placement="bottom">
+		<Modal size="lg" show={showCycleExceptions} onClose={onClose} placement="bottom">
 			<Modal.Header title="Manage Exceptions" />
 			<Modal.Body>
 				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
@@ -37,7 +39,6 @@ function ManageExceptionsModal({ show, setShow }) {
 				<StyledTable
 					data={[]}
 					columns={manageExceptionColumn()}
-					imageFind="FinanceDashboard"
 					{...rest}
 				/>
 			</Modal.Body>

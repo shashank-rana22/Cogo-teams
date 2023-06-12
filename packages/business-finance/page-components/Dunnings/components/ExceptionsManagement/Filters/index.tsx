@@ -13,8 +13,17 @@ interface Props {
 	setExceptionFilter?:React.Dispatch<React.SetStateAction<object>>;
 	exceptionFilter?:object
 	subTabsValue?: string
+	searchValue?:string;
+	setSearchValue?: React.Dispatch<React.SetStateAction<string>>;
+	showCycleExceptions?: boolean;
+	setShowCycleExceptions?:React.Dispatch<React.SetStateAction<boolean>>;
 }
-function Filters({ exceptionFilter, setExceptionFilter, subTabsValue }:Props) {
+function Filters({
+	exceptionFilter, setExceptionFilter, subTabsValue, searchValue,
+	showCycleExceptions,
+	setShowCycleExceptions,
+	setSearchValue,
+}:Props) {
 	const [show, setShow] = useState(false);
 
 	return (
@@ -33,8 +42,8 @@ function Filters({ exceptionFilter, setExceptionFilter, subTabsValue }:Props) {
 				<Input
 					name="q"
 					size="sm"
-				// value={searchValue}
-				// onChange={(e: any) => setSearchValue(e)}
+					value={searchValue}
+					onChange={(e: any) => setSearchValue(e)}
 					placeholder={subTabsValue === 'masterExceptionList'
 						? 'Search By Customer Name' : 'Search By Cycle Name'}
 					suffix={(
@@ -54,9 +63,13 @@ function Filters({ exceptionFilter, setExceptionFilter, subTabsValue }:Props) {
 							Add To list
 						</Button>
 					) : ''}
-				{/* {show && <AddCustomerModal show={show} setShow={setShow} />} */}
-				{show
-				&& <ManageExceptionsModal show={show} setShow={setShow} />}
+				{show && <AddCustomerModal show={show} setShow={setShow} />}
+				{showCycleExceptions && (
+					<ManageExceptionsModal
+						showCycleExceptions={showCycleExceptions}
+						setShowCycleExceptions={setShowCycleExceptions}
+					/>
+				)}
 			</div>
 		</div>
 
