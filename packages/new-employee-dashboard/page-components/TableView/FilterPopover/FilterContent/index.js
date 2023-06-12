@@ -16,6 +16,10 @@ function FilterContent({
 			{controls.map((item) => {
 				const { label, type, name } = item || {};
 
+				if (!type) {
+					return null;
+				}
+
 				const Element = getElementController(type);
 
 				return (

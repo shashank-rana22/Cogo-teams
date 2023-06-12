@@ -14,7 +14,7 @@ const useTableView = ({ search, btnloading, updateEmployeeStatus }) => {
 	const router = useRouter();
 	const [activeTab, setActiveTab] = useState('active');
 	const [page, setPage] = useState(INITIAL_PAGE);
-	const [filters, setFilters] = useState();
+	const [filters, setFilters] = useState({});
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		method : 'get',
