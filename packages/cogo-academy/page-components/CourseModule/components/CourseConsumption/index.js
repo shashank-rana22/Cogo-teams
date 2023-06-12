@@ -74,6 +74,7 @@ function CourseConsumption({
 						showTestData={showTestData}
 						showFeedback={showFeedback}
 						setShowFeedback={setShowFeedback}
+						viewType={viewType}
 					/>
 
 					<ModuleContent
@@ -128,7 +129,7 @@ function CourseConsumption({
 							onClick={() => setShowCourse(false)}
 							themeType="accent"
 						>
-							Show curicclum
+							Show curriculum
 						</Button>
 
 						<Button

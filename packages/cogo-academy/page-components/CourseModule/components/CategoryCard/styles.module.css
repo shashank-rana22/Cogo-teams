@@ -1,5 +1,5 @@
 .carousel_container {
-	margin: 24px 12px;
+	margin: 6px;
 
 	:global {
 		.ui_carousel_container {
@@ -31,4 +31,29 @@
 			background: none;
 		}
 	}
+}
+
+.container {
+	margin-top: 40px;
+}
+
+.category_head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.main_heading {
+	margin-top: 32px;
+	margin-bottom: 20px;
+	margin-left: 8px;
+	font-size: 20px;
+	font-weight: 700;
+}
+
+.sub_category {
+	margin-left: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
 }

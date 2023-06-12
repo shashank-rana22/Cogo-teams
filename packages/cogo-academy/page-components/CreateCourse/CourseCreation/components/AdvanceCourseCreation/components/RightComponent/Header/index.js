@@ -1,23 +1,9 @@
 import { Tags, Button } from '@cogoport/components';
-import { IcMArrowRight } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
-
-import useUpdateCourse from '../../../hooks/useUpdateCourse';
 
 import MAPPING from './MAPPING';
+import ModalComponent from './ModalComponent';
 import styles from './styles.module.css';
-
-const getState = ({ state, status }) => {
-	if (status === 'inactive') {
-		return { state: 'Inactive', color: '#ff8888' };
-	}
-
-	if (state === 'published') {
-		return { state: 'Active', color: '#CFEAEC' };
-	}
-
-	return { state: 'Draft', color: '#fdd1a7' };
-};
+import useHandleHeader from './useHandleHeader';
 
 function Header({
 	activeTab,
@@ -28,81 +14,20 @@ function Header({
 	setActiveTab,
 	mode,
 }) {
-	const router = useRouter();
-
 	const { name, status = 'draft', state = '' } = data || {};
 
 	const { title, text } = MAPPING[activeTab] || {};
 
+	const {
+		getState,
+		BUTTON_MAPPING,
+		onPublishCourse,
+		loading,
+		publishData,
+		setPublishData,
+	} = useHandleHeader({ childRef, activeTab, getCogoAcademyCourse, setActiveTab, data, id });
+
 	const { state: currentState, color } = getState({ status, state });
-
-	const { loading, updateCourse } = useUpdateCourse({
-		data,
-		getCogoAcademyCourse,
-		setActiveTab,
-		activeTab,
-		changeTab: true,
-	});
-
-	const handleSubmitForm = ({ buttonType = 'save', values: payloadValues }) => {
-		childRef.current[activeTab]?.handleSubmit().then((res) => {
-			if (!res.hasError) {
-				updateCourse({
-					values            : buttonType === 'publish' ? { ...res.values, ...payloadValues } : res.values,
-					isRefetchRequired : true,
-					buttonType,
-				});
-			}
-		});
-	};
-
-	const handlePreviewCourse = () => {
-		router.push(`/learning/course/preview?course_id=${id}`);
-	};
-
-	const BUTTON_MAPPING = {
-		pre_publish: [
-			{
-				buttonText      : 'Preview',
-				themeType       : 'secondary',
-				onClickFunction : handlePreviewCourse,
-				funcProps       : {},
-			},
-			{
-				buttonText      : 'Save',
-				themeType       : 'primary',
-				onClickFunction : handleSubmitForm,
-				funcProps       : {},
-			},
-			{
-				buttonText      : 'Publish',
-				themeType       : 'accent',
-				onClickFunction : handleSubmitForm,
-				funcProps       : {
-					buttonType : 'publish',
-					values     : {
-						id,
-						state: 'published',
-					},
-				},
-			},
-		],
-		others: [
-			{
-				buttonText      : 'Preview',
-				themeType       : 'secondary',
-				onClickFunction : handlePreviewCourse,
-				funcProps       : {},
-			},
-			{
-				buttonText      : 'Next',
-				icon            : IcMArrowRight,
-				themeType       : 'accent',
-				onClickFunction : handleSubmitForm,
-				funcProps       : {},
-			},
-		],
-	};
 
 	return (
 		<>
@@ -159,6 +84,14 @@ function Header({
 				<div className={styles.title}>{title}</div>
 				<div className={styles.text}>{text}</div>
 			</div>
+
+			<ModalComponent
+				publishData={publishData}
+				setPublishData={setPublishData}
+				onPublishCourse={onPublishCourse}
+				id={id}
+				loading={loading}
+			/>
 		</>
 	);
 }
