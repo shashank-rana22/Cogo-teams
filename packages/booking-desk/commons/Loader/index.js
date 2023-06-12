@@ -1,8 +1,8 @@
 import { Placeholder } from '@cogoport/components';
 
-import NUMERICAL_VALUES from '../../config/NUMERICAL_VALUES.json';
-
 import styles from './styles.module.css';
+
+const LOADERS_COUNT = 4;
 
 function Card() {
 	return (
@@ -30,5 +30,5 @@ function Card() {
 }
 
 export default function Loader() {
-	return Array(NUMERICAL_VALUES.four).fill(null).map(() => <Card key={Math.random()} />);
+	return Array(LOADERS_COUNT).fill(null).map(() => <Card key={Math.random()} />);
 }

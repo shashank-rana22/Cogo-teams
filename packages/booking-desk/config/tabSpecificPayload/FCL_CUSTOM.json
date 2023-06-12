@@ -17,8 +17,10 @@
     "completed": {
         "task_attributes": [
             {
-                "task": "update_container_details",
-                "status": "completed"
+                "task": "mark_confirmed",
+                "state": "awaiting_service_provider_confirmation",
+                "status": "completed",
+                "assigned_stakeholder": "service_ops1"
             }
         ]
     },

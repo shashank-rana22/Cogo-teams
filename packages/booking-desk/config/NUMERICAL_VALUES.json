@@ -1,14 +1,11 @@
 {
-	"zero": 0,
-	"one": 1,
-	"two": 2,
-	"three": 3,
-	"four": 4,
-	"twenty_three": 23,
-	"fifty_nine": 59,
-	"sixty": 60,
+	"days_later_date" : {
+		"one_day_later": 1,
+		"three_days_later": 3
+	},
+	"day_end_time": [23,59,59,999],
+	"seconds_in_one_minute" : 60,
 	"chargable_weight_factor": 166.67,
-	"six_hundred": 600,
-	"tripple_nine": 999,
-	"thousand": 1000
+	"debounce_time": 600,
+	"milliseconds_in_one_second": 1000
 }

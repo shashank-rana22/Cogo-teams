@@ -1,25 +1,25 @@
 import NUMERICAL_VALUES from '../config/NUMERICAL_VALUES.json';
 import TABS_CONFIG from '../config/TABS_CONFIG';
 import FCL_CFS from '../config/tabSpecificPayload/FCL_CFS.json';
+import FCL_CUSTOM from '../config/tabSpecificPayload/FCL_CUSTOM.json';
 import FCL_EXPORT from '../config/tabSpecificPayload/FCL_EXPORT.json';
 import FCL_IMPORT from '../config/tabSpecificPayload/FCL_IMPORT.json';
 import FCL_LOCAL from '../config/tabSpecificPayload/FCL_LOCAL.json';
 import LCL_EXPORT from '../config/tabSpecificPayload/LCL_EXPORT.json';
 import LCL_IMPORT from '../config/tabSpecificPayload/LCL_IMPORT.json';
 
-const timezoneOffset = new Date().getTimezoneOffset() * NUMERICAL_VALUES.sixty * NUMERICAL_VALUES.thousand;
+const timezoneOffset = new Date().getTimezoneOffset()
+	* NUMERICAL_VALUES.seconds_in_one_minute
+	* NUMERICAL_VALUES.milliseconds_in_one_second;
 
 const getPayloadDate = (daysLater = '') => {
 	const daysLaterDate = new Date();
 
-	daysLaterDate.setDate(daysLaterDate.getDate() + NUMERICAL_VALUES[daysLater]);
+	daysLaterDate.setDate(daysLaterDate.getDate() + NUMERICAL_VALUES.days_later_date[daysLater]);
 	daysLaterDate.setTime(daysLaterDate.getTime() - timezoneOffset);
-	daysLaterDate.setHours(
-		NUMERICAL_VALUES.twenty_three,
-		NUMERICAL_VALUES.fifty_nine,
-		NUMERICAL_VALUES.fifty_nine,
-		NUMERICAL_VALUES.tripple_nine,
-	);
+	daysLaterDate.setHours(...NUMERICAL_VALUES.day_end_time);
+
+	console.log(daysLaterDate, 'day_end_time');
 
 	return daysLaterDate;
 };
@@ -42,6 +42,7 @@ const SHIPMENT_SPECIFIC_PAYLOAD = {
 	fcl_freight_import : FCL_IMPORT,
 	fcl_freight_local  : FCL_LOCAL,
 	fcl_freight_cfs    : FCL_CFS,
+	fcl_freight_custom : FCL_CUSTOM,
 	lcl_freight_export : LCL_EXPORT,
 	lcl_freight_import : LCL_IMPORT,
 };
@@ -60,8 +61,8 @@ export default function getListBookingDeskShipmentsPayload({
 
 	const tabSpecificPayload = (SHIPMENT_SPECIFIC_PAYLOAD[`${stepperTab}_${segmentedTab}`] || {})[activeTab] || {};
 
-	const threeDaysLater = getPayloadDate('three');
-	const oneDayLater = getPayloadDate('one');
+	const oneDayLater = getPayloadDate('one_day_later');
+	const threeDaysLater = getPayloadDate('three_days_later');
 
 	const criticalPayload = activeTab === 'container_pick_up'
 		? { bn_expiry_less_than: oneDayLater }

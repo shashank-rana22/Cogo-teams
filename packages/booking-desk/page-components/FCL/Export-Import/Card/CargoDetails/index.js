@@ -2,10 +2,10 @@ import { Tooltip, Pill } from '@cogoport/components';
 import { format, isEmpty } from '@cogoport/utils';
 import { useMemo } from 'react';
 
-import NUMERICAL_VALUES from '../../../../../config/NUMERICAL_VALUES.json';
-
 import { renderValue } from './renderCargoValue';
 import styles from './styles.module.css';
+
+const SINGLE_COUNT = 1;
 
 const LABELS = ['container_size', 'container_type', 'commodity',
 	'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type'];
@@ -58,7 +58,7 @@ export default function CargoDetails({ cargo_details, item = {}, activeTab = '' 
 						{restCargoDetails.length}
 						{' '}
 						Detail
-						{restCargoDetails.length > NUMERICAL_VALUES.one ? 's' : ''}
+						{restCargoDetails.length > SINGLE_COUNT ? 's' : ''}
 					</div>
 				</Tooltip>
 			) : null}

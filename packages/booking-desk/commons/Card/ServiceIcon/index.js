@@ -1,10 +1,11 @@
 import styles from './styles.module.css';
 
 const CLASS_NAMES = {
-	FCL         : 'fcl',
-	'FCL Local' : 'fcl_local',
-	LCL         : 'lcl',
-	'FCL CFS'   : 'fcl_cfs',
+	FCL          : 'red',
+	'FCL Local'  : 'red',
+	'FCL CFS'    : 'red',
+	'FCL Custom' : 'red_faded',
+	LCL          : 'red_faded',
 };
 
 export default function ServiceIcon({ Icon, text }) {
