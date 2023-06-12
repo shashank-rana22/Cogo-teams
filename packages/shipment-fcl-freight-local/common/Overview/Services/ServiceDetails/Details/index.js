@@ -17,7 +17,6 @@ function Details({ serviceData = [] }) {
 		free_days_demurrage_origin, free_days_detention_destination, free_days_detention_origin,
 	} = serviceData[DEFAULT_VALUE];
 
-
 	(serviceData || []).forEach((data) => {
 		SERVICE_INITIAL_KEYS[data?.container_size] = {
 			container_size             : data?.container_size,

@@ -45,8 +45,8 @@ function Header({ serviceData = [] }) {
 							className={styles.details_cta}
 						>
 
-							{ showDetails[serviceData?.[DEFAULT_VALUE]?.display_label] 
-							? 'Hide Details' : 'View Details'}
+							{ showDetails[serviceData?.[DEFAULT_VALUE]?.display_label]
+								? 'Hide Details' : 'View Details'}
 						</div>
 						<div className={styles.edit_cancel}>
 							<EditCancelService serviceData={serviceData?.[DEFAULT_VALUE]} />
