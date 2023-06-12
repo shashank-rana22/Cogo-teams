@@ -64,7 +64,7 @@ export default function BLDoCollectionDesk() {
 		<div className={styles.container}>
 			<Tabs
 				activeTab={stateProps.activeTab}
-				themeType="secondary"
+				themeType="primary"
 				onChange={handleTabChange}
 				fullWidth
 			>

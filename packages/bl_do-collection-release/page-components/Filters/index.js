@@ -42,9 +42,11 @@ export default function Filters({ setStateProps, stateProps }) {
 			}
 				<Select
 					value={stateProps.trade_type}
+					size="sm"
 					options={trade_type_options}
 					onChange={(val) => setStateProps({ ...stateProps, trade_type: val, page: 1 })}
 					placeholder="Trade Type"
+					className={styles.select_filter}
 				/>
 			</div>
 			<div className={styles.right_filters}>
