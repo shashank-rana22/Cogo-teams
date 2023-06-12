@@ -53,7 +53,7 @@ const controls = [
 		name                  : 'date_of_joining',
 		label                 : 'Date of joining',
 		type                  : 'SingleDateRange',
-		dateFormat            : 'dd-MMM-yyyy',
+		dateFormat            : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 		isPreviousDaysAllowed : true,
 		isClearable           : true,
 	},
