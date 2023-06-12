@@ -153,7 +153,8 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
-		number: /^[+-]?\d*\.?\d+$/,
+		number    : /^[+-]?\d*\.?\d+$/,
+		ifsc_code : /^[A-Za-z]{4}\d{7}$/,
 	},
 	languages                       : LANGUAGE_OPTIONS,
 	currency_conversion_constant    : 0.04,
