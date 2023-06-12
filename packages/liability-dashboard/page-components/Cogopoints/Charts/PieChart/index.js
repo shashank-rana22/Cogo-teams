@@ -3,9 +3,17 @@ import { Image } from '@cogoport/next';
 
 import pieChartData from '../../../../configuration/pie-chart-data';
 import { NETWORK_EMPTY_STATE } from '../../../../constants';
+import getFormatedPieChartData from '../../../../utils/getFormatedPieChartData';
 
-function PieChart() {
-	const { data } = pieChartData();
+function PieChart({
+	creditData = {},
+	debitData = {},
+	activeStatsCard = '',
+}) {
+	const chartData = getFormatedPieChartData({ creditData, debitData, activeStatsCard });
+	console.log('🚀 ~ file: index.js:14 ~ chartData:', chartData);
+
+	const { data } = pieChartData({ creditData, debitData, activeStatsCard });
 
 	const empotyValue = (data || []).every((item) => item.value === 0);
 

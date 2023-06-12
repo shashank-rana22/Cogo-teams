@@ -2,18 +2,33 @@
 	display: flex;
 	align-items: center;
 	margin-top: 10px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .line_chart {
 	display: flex;
 	align-items: center;
 	justify-content: center;
-	width: 60%;
 	height: 300px;
 	padding: 10px 20px;
 	margin-right: 10px;
 	background: #fff;
 	border-radius: 6px;
+    transition: 1s ease-in-out;
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+}
+
+.has_pie_chart{
+	width: 60%;
+}
+
+.no_pie_chart{
+	width: 100%;
 }
 
 .pie_chart {
@@ -25,4 +40,8 @@
 	padding: 10px 20px;
 	background: #fff;
 	border-radius: 6px;
+	@media (max-width: 768px) {
+		width: 100%;
+	}
+	
 }

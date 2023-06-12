@@ -1,0 +1,27 @@
+
+.container {
+	display: flex;
+	align-items: center;
+	margin-top: 10px;
+	height: 300px;
+}
+
+.line_chart {
+	width: 60%;
+	padding: 10px 20px;
+	margin-right: 10px;
+	background: #fff;
+	border-radius: 6px;
+	height: 300px;
+}
+
+.pie_chart {
+	width: 40%;
+	height: 300px;
+	padding: 10px 20px;
+
+	background: #fff;
+	border-radius: 6px;
+	height: 300px;
+
+}

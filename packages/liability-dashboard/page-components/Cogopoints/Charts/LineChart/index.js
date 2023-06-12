@@ -1,71 +1,39 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
-import React from 'react';
+import { startCase } from '@cogoport/utils';
 
-function LineChart() {
+import styles from './styles.module.css';
+
+function LineChart({ formattedData = [], transactionType = '', currencyCode = '' }) {
+	console.log('🚀 ~ file: index.js:5 ~ LineChart ~ formattedData:', formattedData);
 	const data = [
 		{
-			id    : 'Earned',
+			id    : 'hello',
 			color : 'hsl(155, 70%, 50%)',
-			data  : [
-				{
-					x : '2',
-					y : 134,
-				},
-				{
-					x : '8',
-					y : 273,
-				},
-				{
-					x : 'boat',
-					y : 13,
-				},
-				{
-					x : 'train',
-					y : 115,
-				},
-				{
-					x : 'subway',
-					y : 201,
-				},
-				{
-					x : 'bus',
-					y : 274,
-				},
-
-			],
-		},
-		{
-			id    : 'Estimated',
-			color : 'hsl(8, 70%, 50%)',
-			data  : [
-				{
-					x : '2',
-					y : 137,
-				},
-				{
-					x : '8',
-					y : 221,
-				},
-				{
-					x : 'boat',
-					y : 69,
-				},
-				{
-					x : 'train',
-					y : 103,
-				},
-				{
-					x : 'subway',
-					y : 244,
-				},
-
-			],
+			data  : formattedData.reverse(),
 		},
 	];
+
+	const renderSliceTooltip = ({ slice }) => {
+		console.log('🚀 ~ file: index.js:17 ~ renderSliceTooltip ~ slice:', slice);
+
+		return (
+			<div className={styles.tooltip_div}>
+				<div className={styles.title}>
+					Date:
+					{/* <div className={styles.amount}>{data?.x}</div>
+				</div>
+				<div className={styles.title}>
+					Cogopoints:
+					<div className={styles.amount}>{data?.y}</div> */}
+				</div>
+			</div>
+		);
+	};
+
 	return (
 		<ResponsiveLine
 			data={data}
-			margin={{ top: 30, right: 40, bottom: 45, left: 60 }}
+			margin={{ top: 10, right: 40, bottom: 45, left: 60 }}
 			xScale={{ type: 'point' }}
 			xFormat=" >-"
 			yScale={{
@@ -81,7 +49,7 @@ function LineChart() {
 				tickSize       : 5,
 				tickPadding    : 5,
 				tickRotation   : 0,
-				legend         : 'transportation',
+				legend         : `${startCase(transactionType)}ed Month`,
 				legendOffset   : 36,
 				legendPosition : 'middle',
 			}}
@@ -89,7 +57,7 @@ function LineChart() {
 				tickSize       : 5,
 				tickPadding    : 5,
 				tickRotation   : 0,
-				legend         : 'count',
+				legend         : `${startCase(transactionType)}ed Amount (${currencyCode})`,
 				legendOffset   : -40,
 				legendPosition : 'middle',
 			}}
@@ -101,32 +69,7 @@ function LineChart() {
 			pointBorderColor={{ from: 'serieColor' }}
 			pointLabelYOffset={-12}
 			useMesh
-			legends={[
-				{
-					anchor            : 'top',
-					direction         : 'row',
-					justify           : false,
-					translateX        : 10,
-					translateY        : -34,
-					itemsSpacing      : 0,
-					itemDirection     : 'left-to-right',
-					itemWidth         : 100,
-					itemHeight        : 27,
-					itemOpacity       : 0.75,
-					symbolSize        : 12,
-					symbolShape       : 'circle',
-					symbolBorderColor : 'rgba(0, 0, 0, .5)',
-					effects           : [
-						{
-							on    : 'hover',
-							style : {
-								itemBackground : 'rgba(0, 0, 0, .03)',
-								itemOpacity    : 1,
-							},
-						},
-					],
-				},
-			]}
+			sliceTooltip={renderSliceTooltip}
 		/>
 	);
 }
