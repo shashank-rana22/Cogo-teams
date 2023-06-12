@@ -11,7 +11,7 @@ function RenderViewMore({ id, dropdown, setDropdown }) {
 				>
 					View More
 					{' '}
-					<IcMArrowDown />
+					<IcMArrowDown style={{ margin: '0px 4px' }} />
 				</Button>
 			)
 				: (
@@ -21,7 +21,7 @@ function RenderViewMore({ id, dropdown, setDropdown }) {
 					>
 						View Less
 						{' '}
-						<IcMArrowUp />
+						<IcMArrowUp style={{ margin: '0px 4px' }} />
 					</Button>
 				)}
 		</div>

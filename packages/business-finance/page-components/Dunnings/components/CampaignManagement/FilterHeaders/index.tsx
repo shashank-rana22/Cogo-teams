@@ -6,7 +6,7 @@ import Filter from '../../../../commons/Filters';
 import filterControls from './filterControls';
 import styles from './styles.module.css';
 
-function FilterHeaders({ globalFilters, setGlobalFilters }) {
+function FilterHeaders({ globalFilters, setGlobalFilters, setShowCreateForm }) {
 	return (
 		<div className={styles.filter_body}>
 			<div className={styles.filter_section}>
@@ -35,6 +35,7 @@ function FilterHeaders({ globalFilters, setGlobalFilters }) {
 				<Button
 					style={{ margin: '0px 8px' }}
 					size="lg"
+					onClick={() => setShowCreateForm(true)}
 				>
 					Create New Cycle
 				</Button>

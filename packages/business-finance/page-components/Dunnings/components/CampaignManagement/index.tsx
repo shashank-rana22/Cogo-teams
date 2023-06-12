@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 
 import CustomList from '../../../commons/CustomList';
 
+import CreateCycleForm from './CreateCycleForm';
 import { dummyData } from './dummyData';
 import FilterHeaders from './FilterHeaders';
 import { listConfig } from './listConfig';
@@ -12,6 +13,7 @@ import ShowMore from './ShowMore';
 function CampaignManagement() {
 	const [globalFilters, setGlobalFilters] = useState({});
 	const [dropdown, setDropdown] = useState('');
+	const [showCreateForm, setShowCreateForm] = useState(false);
 
 	const showDropDown = (e) => <ShowMore dropdown={dropdown} rowId={e?.id} />;
 
@@ -32,6 +34,7 @@ function CampaignManagement() {
 				<FilterHeaders
 					globalFilters={globalFilters}
 					setGlobalFilters={setGlobalFilters}
+					setShowCreateForm={setShowCreateForm}
 				/>
 			</div>
 
@@ -50,6 +53,13 @@ function CampaignManagement() {
 					renderDropdown={showDropDown}
 				/>
 			</div>
+
+			{showCreateForm && (
+				<CreateCycleForm
+					showCreateForm={showCreateForm}
+					setShowCreateForm={setShowCreateForm}
+				/>
+			)}
 
 		</div>
 	);
