@@ -7,12 +7,12 @@ function AddNewJoinee() {
 	const [activePage, setActivePage] = useState('form');
 
 	const COMPONENT_MAPPING = {
-		form: <FormComponent setActivePage={setActivePage} />,
+		form: FormComponent,
 	};
 
-	const RenderedComponent = COMPONENT_MAPPING[activePage] ?? <SuccessComponent activePage={activePage} />;
+	const RenderedComponent = COMPONENT_MAPPING[activePage] ?? SuccessComponent;
 
-	return <RenderedComponent />;
+	return <RenderedComponent activePage={activePage} setActivePage={setActivePage} />;
 }
 
 export default AddNewJoinee;
