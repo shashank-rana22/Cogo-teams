@@ -6,8 +6,8 @@ import RemoveBpr from '../RemoveBpr';
 
 import styles from './styles.module.css';
 
-const MIN_NAME_STRING = 0;
-const MAX_NAME_STRING = 40;
+const START_POSITION_BUSINESS_NAME = 0;
+const END_POSITION_BUSINESS_NAME = 40;
 
 interface RefetchInterface {
 	refetch: Refetch
@@ -37,7 +37,7 @@ export const manageBprColumn = ({ refetch } : RefetchInterface) => [
 		id       : 'name',
 		accessor : (row) => (
 
-			(getByKey(row, 'businessName') as string)?.length > MAX_NAME_STRING ? (
+			(getByKey(row, 'businessName') as string)?.length > END_POSITION_BUSINESS_NAME ? (
 				<Tooltip
 					interactive
 					placement="top"
@@ -45,8 +45,8 @@ export const manageBprColumn = ({ refetch } : RefetchInterface) => [
 				>
 					<text className={styles.cursor}>
 						{`${(getByKey(row, 'businessName') as string).substring(
-							MIN_NAME_STRING,
-							MAX_NAME_STRING,
+							START_POSITION_BUSINESS_NAME,
+							END_POSITION_BUSINESS_NAME,
 						)}...`}
 					</text>
 				</Tooltip>
