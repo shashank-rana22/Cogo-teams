@@ -5,7 +5,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const DEFAULT_COUNT = 0;
+const ORGANIZATION_DATA_DEFAULT_INDEX = 0;
+const CHILD_COUNT = 0;
 
 const renderUserProfile = ({ account_type = '', checkPartner, partnerId, id }) => {
 	if (account_type === 'importer_exporter') {
@@ -30,7 +31,7 @@ function ListButtons({
 
 	const emptyOrg = isEmpty(organization_data);
 
-	const { account_type = '', tags = [], id = '' } = organization_data?.[DEFAULT_COUNT] || [];
+	const { account_type = '', tags = [], id = '' } = organization_data?.[ORGANIZATION_DATA_DEFAULT_INDEX] || [];
 	const checkPartner = (tags || []).includes('partner');
 
 	const handleNetwork = () => {
@@ -41,7 +42,7 @@ function ListButtons({
 		);
 	};
 
-	const disableButton = total_child_count === DEFAULT_COUNT;
+	const disableButton = total_child_count === CHILD_COUNT;
 
 	return (
 		<div className={styles.button_container}>

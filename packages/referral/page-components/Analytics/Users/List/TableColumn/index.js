@@ -9,7 +9,7 @@ import SignedUpColumns from '../SignedUpColumns';
 
 import styles from './styles.module.css';
 
-const DEFAULT_VALUE = 0;
+const LEVEL_DEFAULT_VALUE = 0;
 
 function TableColumns({
 	listType = '',
@@ -48,7 +48,7 @@ function TableColumns({
 			Header   : 'LEVELS',
 			accessor : (item = {}) => (
 				<div className={styles.user_name}>
-					{item?.level || DEFAULT_VALUE}
+					{item?.level || LEVEL_DEFAULT_VALUE}
 				</div>
 			),
 			conditions: ['network'],

@@ -7,10 +7,11 @@ import { useState } from 'react';
 import DirectNode from './DirectNode';
 import styles from './styles.module.css';
 
-const DEFAULT_COUNT = 0;
-const DEFAULT_LENGTH = 1;
-const DEFAULT_SLICE_VALUE = -6;
-const DEFAULT_SUBSTRING_VALUE = 2;
+const SUBSTRING_MIN_VALUE = 0;
+const ORG_COUNT_LENGTH_VALUE = 1;
+const USERID_SLICE_VALUE = -6;
+const SUBSTRING_MAX_VALUE = 2;
+const COGOPOINT_DEFAULT_VALUE = 0;
 
 function RenderForeignObjectNode({
 	nodeDatum,
@@ -37,23 +38,23 @@ function RenderForeignObjectNode({
 
 	const topPerformer = topPerformerId === topUser;
 
-	const orgCount = organization.length - DEFAULT_LENGTH;
+	const orgCount = organization.length - ORG_COUNT_LENGTH_VALUE;
 
 	const checkActiveNode = nodeData?.referee_id === nodeDatum?.referee_id;
 
-	const { total = DEFAULT_COUNT } = cogopoints || {};
+	const { total = 0 } = cogopoints || {};
 
 	const {
-		total_child_count: totalChildCount = DEFAULT_COUNT,
+		total_child_count: totalChildCount = 0,
 		referee_id = '',
 		status = '',
 	} = referralData || {};
 
-	const firstTwoLetters = userData?.name.substring(DEFAULT_COUNT, DEFAULT_SUBSTRING_VALUE);
+	const firstTwoLetters = userData?.name.substring(SUBSTRING_MIN_VALUE, SUBSTRING_MAX_VALUE);
 
 	const avatarContent = firstTwoLetters?.toUpperCase();
 
-	const lastUserId = referee_id?.slice(DEFAULT_SLICE_VALUE).toUpperCase();
+	const lastUserId = referee_id?.slice(USERID_SLICE_VALUE).toUpperCase();
 
 	const handleFunc = () => {
 		handleConnections(nodeDatum, toggleNode);
@@ -108,7 +109,7 @@ function RenderForeignObjectNode({
 							className={styles.cogopoints_img}
 						/>
 						{' '}
-						<div className={styles.cogopoints_count}>{userCogopoints || DEFAULT_COUNT}</div>
+						<div className={styles.cogopoints_count}>{userCogopoints || COGOPOINT_DEFAULT_VALUE}</div>
 					</div>
 				</div>
 			</foreignObject>

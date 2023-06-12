@@ -1,16 +1,16 @@
 import styles from './styles.module.css';
 
-const DEFAULT_COUNT = 0;
-const TOTAL_PERCENTAGE = 100;
+const REFERRAL_TOTAL_COUNT = 0;
+const REFERRAL_TOTAL_PERCENTAGE = 100;
 
 function ReferralPercentage({ data = [] }) {
 	const totalCount = data.reduce(
-		(total, item) => total + (item?.value || DEFAULT_COUNT),
-		DEFAULT_COUNT,
+		(total, item) => total + (item?.value || REFERRAL_TOTAL_COUNT),
+		REFERRAL_TOTAL_COUNT,
 	);
 	const eachPercentage = (data || []).map((item) => ({
 		...item,
-		percentage: Math.round((item.value / totalCount) * TOTAL_PERCENTAGE),
+		percentage: Math.round((item.value / totalCount) * REFERRAL_TOTAL_PERCENTAGE),
 	}));
 
 	return (

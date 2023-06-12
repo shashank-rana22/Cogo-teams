@@ -8,7 +8,7 @@ import { formatData, getUserLevel } from '../../../../utils/network-stats-helper
 
 import styles from './styles.module.css';
 
-const DEFAULT_ARRAY_VALUE = 6;
+const STATS_LOADING_COUNT = 6;
 
 function NetworkStats({ networkData = {}, statsLoading = false }) {
 	const networkLength = Object.keys(networkData).length;
@@ -41,7 +41,7 @@ function NetworkStats({ networkData = {}, statsLoading = false }) {
 		<div className={styles.container}>
 			<div className={styles.title}>Network</div>
 			{statsLoading ? (
-				[...Array(DEFAULT_ARRAY_VALUE).keys()].map((itm) => (
+				[...Array(STATS_LOADING_COUNT).keys()].map((itm) => (
 					<Placeholder className={styles.networks_skeleton} key={itm} />
 				))
 			) : (

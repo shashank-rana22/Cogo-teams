@@ -8,7 +8,7 @@ import BusinessRewards from './BusinessRewards';
 import BusinessStats from './BusinessStats';
 import styles from './styles.module.css';
 
-const DEFAULT_VALUE = 0;
+const SHIPMENT_SUBSCRIPTION_DEFAULT_NUMBER = 0;
 
 function BusinessPerformance({ selectedDate = {} }) {
 	const [businessFilterType, setBusinessFilterType] = useState({
@@ -39,7 +39,9 @@ function BusinessPerformance({ selectedDate = {} }) {
 						{shipmentIncentives.map(({ label, name }) => (
 							<div className={styles.stats_div} key={name}>
 								{loading ? <Placeholder height="30px" width="100%" /> : (
-									<div className={styles.number}>{shipment[name] || DEFAULT_VALUE}</div>
+									<div className={styles.number}>
+										{shipment[name] || SHIPMENT_SUBSCRIPTION_DEFAULT_NUMBER}
+									</div>
 								)}
 								<div className={styles.sub_text}>{label}</div>
 							</div>
@@ -52,7 +54,9 @@ function BusinessPerformance({ selectedDate = {} }) {
 						{subscriptionIncentives.map(({ label, name }) => (
 							<div className={styles.stats_div} key={name}>
 								{loading ? <Placeholder height="30px" width="100%" /> : (
-									<div className={styles.number}>{subscription[name] || DEFAULT_VALUE}</div>
+									<div className={styles.number}>
+										{subscription[name] || SHIPMENT_SUBSCRIPTION_DEFAULT_NUMBER}
+									</div>
 								)}
 								<div className={styles.sub_text}>{label}</div>
 							</div>

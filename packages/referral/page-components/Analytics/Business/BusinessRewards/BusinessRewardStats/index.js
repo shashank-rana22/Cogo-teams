@@ -4,10 +4,10 @@ import { Image } from '@cogoport/next';
 
 import styles from './styles.module.css';
 
-const DEFAULT_VALUE = 0;
+const INDEX_MIN_VALUE = 0;
 
 const renderSliceTooltip = ({ slice }) => {
-	const { data } = slice?.points?.[DEFAULT_VALUE] || {};
+	const { data } = slice?.points?.[INDEX_MIN_VALUE] || {};
 	return (
 		<div className={styles.tooltip_div}>
 			<div className={styles.title}>

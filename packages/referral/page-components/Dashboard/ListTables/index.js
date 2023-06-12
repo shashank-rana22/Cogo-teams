@@ -9,8 +9,8 @@ import styles from './styles.module.css';
 import TableColumns from './TableColumns';
 
 const func = () => {};
-const DEFAULT_VALUE = 0;
-const DEFAULT_PAGE_LIMIT = 10;
+const PAGINATION_DEFAULT_VALUE = 0;
+const PAGE_LIMIT_DEFAULT_VALUE = 10;
 
 function ListTables({
 	setActiveTab = func,
@@ -76,9 +76,9 @@ function ListTables({
 								<Pagination
 									type="table"
 									className={styles.pagination_container}
-									currentPage={page || DEFAULT_VALUE}
-									totalItems={total_count || DEFAULT_VALUE}
-									pageSize={page_limit || DEFAULT_PAGE_LIMIT}
+									currentPage={page || PAGINATION_DEFAULT_VALUE}
+									totalItems={total_count || PAGINATION_DEFAULT_VALUE}
+									pageSize={page_limit || PAGE_LIMIT_DEFAULT_VALUE}
 									onPageChange={setListPagination}
 								/>
 							</TabPanel>
