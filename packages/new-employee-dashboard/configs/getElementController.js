@@ -29,7 +29,7 @@ const ELEMENT_MAPPING = {
 };
 
 function getElementController(type) {
-	return ELEMENT_MAPPING?.[type] || SelectController;
+	return ELEMENT_MAPPING?.[type] || null;
 }
 
 export default getElementController;

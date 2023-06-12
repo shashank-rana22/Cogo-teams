@@ -16,8 +16,8 @@ const useProfileDetails = () => {
 	const { profile_id } = query || {};
 	const [error, setError] = useState(false);
 	const [ctcStructure, setCtcStructure] = useState({
-		basic                : { heading: 'Basic', yearlyValue: FIXED_ZERO, monthlyValue: FIXED_ZERO, },
-		hra                  : { heading: 'HRA', yearlyValue: FIXED_ZERO, monthlyValue: FIXED_ZERO, },
+		basic                : { heading: 'Basic', yearlyValue: FIXED_ZERO, monthlyValue: FIXED_ZERO },
+		hra                  : { heading: 'HRA', yearlyValue: FIXED_ZERO, monthlyValue: FIXED_ZERO },
 		conveyance_allowance : {
 			heading      : 'Conveyance Allowance',
 			yearlyValue  : FIXED_ZERO,

@@ -8,7 +8,7 @@ import useUpdateEmployeeDeatils from '../../hooks/useUpdateEmployeeDetails';
 
 import styles from './styles.module.css';
 
-const STATUS_MAPPING = ['approved','active','accepted']
+const STATUS_MAPPING = ['approved', 'active', 'accepted'];
 
 function Header({
 	detail,

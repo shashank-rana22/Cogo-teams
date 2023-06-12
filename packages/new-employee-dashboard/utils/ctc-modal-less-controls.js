@@ -1,239 +1,195 @@
 const FIXED_SPLIT = 1;
-const CTC_CONST_1 = 1;
-const CTC_CONST_0_4 = 0.4;
-const CTC_CONST_0_5 = 0.5;
-const CTC_CONST_6000 = 6000;
-const CTC_CONST_15000 = 15000;
-const CTC_CONST_12 = 12;
-const CTC_CONST_0_0833 = 0.0833;
-const CTC_CONST_21000 = 21000;
-const CTC_CONST_9056 = 9056;
-const CTC_CONST_754 = 754;
-const CTC_CONST_0 = 0;
-const CTC_CONST_0_1301 = 0.1301;
-const CTC_CONST_0_0483 = 0.0483;
-const CTC_CONST_2400 = 2400;
-const CTC_CONST_1950 = 1950;
-const CTC_CONST_200 = 200;
-const CTC_CONST_1800 = 1800;
 const CONVEYANCE_YEARLY_VALUE = 6000;
+const CONSTANT_ONE = 1;
+const CONSTANT_ZERO_POINT_FOUR = 0.4;
+const CONSTANT_ZERO_POINT_FIVE = 0.5;
+const CONSTANT_SIX_THOUSAND = 6000;
+const CONSTANT_FIFTEEN_THOUSAND = 15000;
+const CONSTANT_TWELVE = 12;
+const CONSTANT_ZERO_POINT_ZERO_EIGHT_THREE_THREE = 0.0833;
+const CONSTANT_TWENTY_ONE_THOUSAND = 21000;
+const CONSTANT_NINE_THOUSAND_FIFTY_SIX = 9056;
+const CONSTANT_SEVEN_FIFTY_FOUR = 754;
+const CONSTANT_ZERO = 0;
+const CONSTANT_ZERO_POINT_ONE_THREE_ZERO_ONE = 0.1301;
+const CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE = 0.0483;
+const CONSTANT_TWENTY_FOUR_HUNDRED = 2400;
+const CONSTANT_NINETEEN_FIFTY = 1950;
+const CONSTANT_TWO_HUNDRED = 200;
+const CONSTANT_EIGHTEEN_HUNDRED = 1800;
 
-const calculateResult = (basicYearlyValue) => (basicYearlyValue / CTC_CONST_12 < CTC_CONST_15000
-	? CTC_CONST_0_1301 * basicYearlyValue
-	: CTC_CONST_1950 * CTC_CONST_12);
+const calculateResult = (basicYearlyValue) => (basicYearlyValue / CONSTANT_TWELVE < CONSTANT_FIFTEEN_THOUSAND
+	? CONSTANT_ZERO_POINT_ONE_THREE_ZERO_ONE * basicYearlyValue
+	: CONSTANT_NINETEEN_FIFTY * CONSTANT_TWELVE);
 
 export const ctcModalLessControls = (ctcInput, data = {}) => {
-	const variable_split = CTC_CONST_1 - FIXED_SPLIT;
+	const variable_split = CONSTANT_ONE - FIXED_SPLIT;
 
-	const basicYearlyValue = ctcInput * CTC_CONST_0_4;
-	const hraYearlyValue = basicYearlyValue * CTC_CONST_0_5;
+	const basicYearlyValue = ctcInput * CONSTANT_ZERO_POINT_FOUR;
+	const hraYearlyValue = basicYearlyValue * CONSTANT_ZERO_POINT_FIVE;
 	const TELEPHONE_ALLOWANCE_YEARLY_VALUE = 6000;
 	const providentFunds = Math.round(calculateResult(basicYearlyValue));
-	const flexible_benefit_sum = CTC_CONST_0_0833 * ctcInput * CTC_CONST_0_4 + CTC_CONST_15000;
+	const flexible_benefit_sum = CONSTANT_ZERO_POINT_ZERO_EIGHT_THREE_THREE * ctcInput * CONSTANT_ZERO_POINT_FOUR
+	+ CONSTANT_FIFTEEN_THOUSAND;
 	const statutorySum = (inputVal) => {
-		if (inputVal / CTC_CONST_12 > CTC_CONST_21000) {
-			return CTC_CONST_0;
+		if (inputVal / CONSTANT_TWELVE > CONSTANT_TWENTY_ONE_THOUSAND) {
+			return CONSTANT_ZERO;
 		}
-		if (inputVal / CTC_CONST_12 < CTC_CONST_21000 && inputVal / CTC_CONST_12 > CTC_CONST_9056) {
-			return CTC_CONST_754 * CTC_CONST_12;
+		if (inputVal / CONSTANT_TWELVE < CONSTANT_TWENTY_ONE_THOUSAND
+		&& inputVal / CONSTANT_TWELVE > CONSTANT_NINE_THOUSAND_FIFTY_SIX) {
+			return CONSTANT_SEVEN_FIFTY_FOUR * CONSTANT_TWELVE;
 		}
-		return CTC_CONST_754 * CTC_CONST_12;
+		return CONSTANT_SEVEN_FIFTY_FOUR * CONSTANT_TWELVE;
 	};
 	const statutoryBonus = statutorySum(basicYearlyValue);
-	const specialAllowanceYearlyValue = ctcInput
-    - (basicYearlyValue
-      + hraYearlyValue
-      + CONVEYANCE_YEARLY_VALUE
-      + TELEPHONE_ALLOWANCE_YEARLY_VALUE
-      + flexible_benefit_sum
-      + providentFunds
-      + CTC_CONST_0_0483 * basicYearlyValue
-      + CTC_CONST_2400
-      + statutoryBonus);
+	const specialAllowanceYearlyValue = ctcInput - (basicYearlyValue + hraYearlyValue
+					+ CONVEYANCE_YEARLY_VALUE + TELEPHONE_ALLOWANCE_YEARLY_VALUE + flexible_benefit_sum + providentFunds
+					+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue + CONSTANT_TWENTY_FOUR_HUNDRED
+					+ statutoryBonus);
 
-	const sum = basicYearlyValue
-    + hraYearlyValue
-    + CONVEYANCE_YEARLY_VALUE
-    + specialAllowanceYearlyValue
-    + TELEPHONE_ALLOWANCE_YEARLY_VALUE;
+	const sum = basicYearlyValue + hraYearlyValue + CONVEYANCE_YEARLY_VALUE + specialAllowanceYearlyValue
+				+ TELEPHONE_ALLOWANCE_YEARLY_VALUE;
 
 	const controls = {
 		basic: {
 			heading      : 'Basic',
 			yearlyValue  : basicYearlyValue,
-			monthlyValue : basicYearlyValue / CTC_CONST_12,
+			monthlyValue : basicYearlyValue / CONSTANT_TWELVE,
 		},
 		hra: {
 			heading      : 'HRA',
 			yearlyValue  : hraYearlyValue,
-			monthlyValue : hraYearlyValue / CTC_CONST_12,
+			monthlyValue : hraYearlyValue / CONSTANT_TWELVE,
 		},
 		conveyance_allowance: {
 			heading      : 'Conveyance Allowance',
 			yearlyValue  : CONVEYANCE_YEARLY_VALUE,
-			monthlyValue : CONVEYANCE_YEARLY_VALUE / CTC_CONST_12,
+			monthlyValue : CONVEYANCE_YEARLY_VALUE / CONSTANT_TWELVE,
 		},
 		special_allowance: {
 			heading      : 'Special Allowance',
 			yearlyValue  : specialAllowanceYearlyValue,
-			monthlyValue : specialAllowanceYearlyValue / CTC_CONST_12,
+			monthlyValue : specialAllowanceYearlyValue / CONSTANT_TWELVE,
 		},
 		telephone_allowance: {
 			heading      : 'Telephone Allowance',
-			yearlyValue  : CTC_CONST_6000,
-			monthlyValue : CTC_CONST_6000 / CTC_CONST_12,
+			yearlyValue  : CONSTANT_SIX_THOUSAND,
+			monthlyValue : CONSTANT_SIX_THOUSAND / CONSTANT_TWELVE,
 		},
 
 		annual_base: {
 			heading      : 'Annual Base Salary [A]',
 			yearlyValue  : sum,
-			monthlyValue : sum / CTC_CONST_12,
+			monthlyValue : sum / CONSTANT_TWELVE,
 		},
 		lta: {
 			heading      : 'Leave Travel Allowance - LTA',
-			yearlyValue  : CTC_CONST_0_0833 * ctcInput * CTC_CONST_0_4,
-			monthlyValue : (CTC_CONST_0_0833 * ctcInput * CTC_CONST_0_4) / CTC_CONST_12,
+			yearlyValue  : CONSTANT_ZERO_POINT_ZERO_EIGHT_THREE_THREE * ctcInput * CONSTANT_ZERO_POINT_FOUR,
+			monthlyValue : (CONSTANT_ZERO_POINT_ZERO_EIGHT_THREE_THREE * ctcInput * CONSTANT_ZERO_POINT_FOUR)
+							/ CONSTANT_TWELVE,
 		},
 		medical_reimbursement: {
 			heading      : 'Medical allowance ',
-			yearlyValue  : CTC_CONST_15000,
+			yearlyValue  : CONSTANT_FIFTEEN_THOUSAND,
 			monthlyValue : 1250,
 		},
 		flexible_benefits: {
 			heading      : 'Flexible Benefits [B]',
 			yearlyValue  : flexible_benefit_sum,
-			monthlyValue : flexible_benefit_sum / CTC_CONST_12,
+			monthlyValue : flexible_benefit_sum / CONSTANT_TWELVE,
 		},
 		provident_fund: {
-			heading     : "Provident Fund (Employer's Contribution)",
-			yearlyValue : Math.round(calculateResult(basicYearlyValue)),
-			monthlyValue:
-        Math.round(calculateResult(basicYearlyValue)) / CTC_CONST_12,
+			heading      : "Provident Fund (Employer's Contribution)",
+			yearlyValue  : Math.round(calculateResult(basicYearlyValue)),
+			monthlyValue : Math.round(calculateResult(basicYearlyValue)) / CONSTANT_TWELVE,
 		},
 		gratuity: {
 			heading      : 'Gratuity (As per Act)',
-			yearlyValue  : CTC_CONST_0_0483 * basicYearlyValue,
-			monthlyValue : (CTC_CONST_0_0483 * basicYearlyValue) / CTC_CONST_12,
+			yearlyValue  : CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue,
+			monthlyValue : (CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue) / CONSTANT_TWELVE,
 		},
 		medical_policy: {
 			heading      : 'Medical Policy',
-			yearlyValue  : CTC_CONST_2400,
-			monthlyValue : CTC_CONST_200,
+			yearlyValue  : CONSTANT_TWENTY_FOUR_HUNDRED,
+			monthlyValue : CONSTANT_TWO_HUNDRED,
 		},
 		retirals: {
-			heading: 'Retirals [C]',
-			yearlyValue:
-        Math.round(calculateResult(basicYearlyValue))
-        + CTC_CONST_0_0483 * basicYearlyValue
-        + CTC_CONST_2400,
-			monthlyValue:
-        (Math.round(calculateResult(basicYearlyValue))
-          + CTC_CONST_0_0483 * basicYearlyValue
-          + CTC_CONST_2400)
-        / CTC_CONST_12,
+			heading     : 'Retirals [C]',
+			yearlyValue : Math.round(calculateResult(basicYearlyValue))
+						+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
+						+ CONSTANT_TWENTY_FOUR_HUNDRED,
+			monthlyValue: (Math.round(calculateResult(basicYearlyValue))
+						+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue + CONSTANT_TWENTY_FOUR_HUNDRED)
+						/ CONSTANT_TWELVE,
 		},
 		sub_total_monthly_gross: {
-			heading: 'Sub-Total Monthly Gross Annualized [A + B+ C]',
-			yearlyValue:
-        Math.round(calculateResult(basicYearlyValue)
-
-            + CTC_CONST_0_0483 * basicYearlyValue
-            + CTC_CONST_2400)
-        + sum
-        + flexible_benefit_sum,
-			monthlyValue:
-        (Math.round(calculateResult(basicYearlyValue)
-            + CTC_CONST_0_0483 * basicYearlyValue
-            + CTC_CONST_2400)
-          + sum
-          + flexible_benefit_sum)
-        / CTC_CONST_12,
+			heading     : 'Sub-Total Monthly Gross Annualized [A + B+ C]',
+			yearlyValue : Math.round(calculateResult(basicYearlyValue)
+					+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue + CONSTANT_TWENTY_FOUR_HUNDRED)
+					+ sum + flexible_benefit_sum,
+			monthlyValue: (Math.round(calculateResult(basicYearlyValue)
+						+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
+						+ CONSTANT_TWENTY_FOUR_HUNDRED) + sum
+						+ flexible_benefit_sum) / CONSTANT_TWELVE,
 		},
 		statutory_bonus: {
 			heading      : 'Statutory Bonus [D]',
 			yearlyValue  : statutorySum(basicYearlyValue),
-			monthlyValue : statutorySum(basicYearlyValue) / CTC_CONST_12,
+			monthlyValue : statutorySum(basicYearlyValue) / CONSTANT_TWELVE,
 		},
 		annual_gross_salary: {
-			heading: 'Annual Gross Salary [A + B + C + D]',
-			yearlyValue:
-        Math.round(calculateResult(basicYearlyValue)
-            + CTC_CONST_0_0483 * basicYearlyValue
-            + CTC_CONST_2400)
-        + sum
-        + flexible_benefit_sum
-        + statutorySum(basicYearlyValue),
-
-			monthlyValue:
-        (Math.round(calculateResult(basicYearlyValue)
-            + CTC_CONST_0_0483 * basicYearlyValue
-            + CTC_CONST_2400)
-          + sum
-          + flexible_benefit_sum
-          + statutorySum(basicYearlyValue))
-        / CTC_CONST_12,
+			heading     : 'Annual Gross Salary [A + B + C + D]',
+			yearlyValue : Math.round(calculateResult(basicYearlyValue)
+						+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
+						+ CONSTANT_TWENTY_FOUR_HUNDRED) + sum + flexible_benefit_sum
+						+ statutorySum(basicYearlyValue),
+			monthlyValue: (Math.round(calculateResult(basicYearlyValue)
+						+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
+						+ CONSTANT_TWENTY_FOUR_HUNDRED) + sum + flexible_benefit_sum + statutorySum(basicYearlyValue))
+        / CONSTANT_TWELVE,
 		},
 
 		incentives: {
-			heading: 'Incentives [E]',
-			yearlyValue:
-        Number(data?.yearlyJoiningBonus || CTC_CONST_0)
-        + Number(data?.yearlySignInBonus || CTC_CONST_0),
-			monthlyValue:
-        Number(data?.monthlyJoiningBonus || CTC_CONST_0)
-        + Number(data?.monthlySignInBonus || CTC_CONST_0),
+			heading     : 'Incentives [E]',
+			yearlyValue : Number(data?.yearlyJoiningBonus || CONSTANT_ZERO)
+						+ Number(data?.yearlySignInBonus || CONSTANT_ZERO),
+			monthlyValue: Number(data?.monthlyJoiningBonus || CONSTANT_ZERO)
+						+ Number(data?.monthlySignInBonus || CONSTANT_ZERO),
 		},
 		variable_component: {
 			heading      : 'Variable Component [V]',
 			yearlyValue  : ctcInput * variable_split,
-			monthlyValue : (ctcInput * variable_split) / CTC_CONST_12,
+			monthlyValue : (ctcInput * variable_split) / CONSTANT_TWELVE,
 		},
 
 		total_targeted_compensation: {
-			heading: 'Total Targeted Compensation [A + B + C + D + E + V]',
-			yearlyValue:
-        ctcInput * variable_split
-        + (Number(data?.yearlyJoiningBonus || CTC_CONST_0)
-          + Number(data?.yearlySignInBonus || CTC_CONST_0))
-        + (Math.round(calculateResult(basicYearlyValue)
-            + CTC_CONST_0_0483 * basicYearlyValue
-            + CTC_CONST_2400)
-          + sum
-          + flexible_benefit_sum
-          + statutorySum(basicYearlyValue)),
+			heading     : 'Total Targeted Compensation [A + B + C + D + E + V]',
+			yearlyValue : ctcInput * variable_split + (Number(data?.yearlyJoiningBonus || CONSTANT_ZERO)
+						+ Number(data?.yearlySignInBonus || CONSTANT_ZERO))
+						+ (Math.round(calculateResult(basicYearlyValue)
+						+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue
+						+ CONSTANT_TWENTY_FOUR_HUNDRED) + sum + flexible_benefit_sum + statutorySum(basicYearlyValue)),
 
-			monthlyValue:
-        (ctcInput * variable_split) / CTC_CONST_12
-        + Number(data?.monthlyJoiningBonus || CTC_CONST_0)
-        + Number(data?.monthlySignInBonus || CTC_CONST_0)
-        + (Math.round(calculateResult(basicYearlyValue)
-            + CTC_CONST_0_0483 * basicYearlyValue
-            + CTC_CONST_2400)
-          + sum
-          + flexible_benefit_sum
-          + statutorySum(basicYearlyValue))
-          / CTC_CONST_12,
+			monthlyValue: (ctcInput * variable_split) / CONSTANT_TWELVE
+						+ Number(data?.monthlyJoiningBonus || CONSTANT_ZERO)
+						+ Number(data?.monthlySignInBonus || CONSTANT_ZERO)
+						+ (Math.round(calculateResult(basicYearlyValue)
+						+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue + CONSTANT_TWENTY_FOUR_HUNDRED)
+						+ sum + flexible_benefit_sum + statutorySum(basicYearlyValue)) / CONSTANT_TWELVE,
 		},
 		monthly_in_hand_without_tds: {
-			heading: 'Monthly Approx in Hand without TDS Deduction',
-			monthlyValue:
-        (ctcInput * variable_split) / CTC_CONST_12
-        + Number(data?.monthlyJoiningBonus || CTC_CONST_0)
-        + Number(data?.monthlySignInBonus || CTC_CONST_0)
-        + (Math.round(calculateResult(basicYearlyValue)
-            + CTC_CONST_0_0483 * basicYearlyValue
-            + CTC_CONST_2400)
-          + sum
-          + flexible_benefit_sum
-          + statutorySum(basicYearlyValue))
-          / CTC_CONST_12
-        - Math.round(calculateResult(basicYearlyValue))
-          / CTC_CONST_12
-        - (CTC_CONST_0_0483 * basicYearlyValue) / CTC_CONST_12
-        - CTC_CONST_1800
-        - CTC_CONST_200
-        - CTC_CONST_200,
-			yearlyValue: null,
+			heading      : 'Monthly Approx in Hand without TDS Deduction',
+			yearlyValue  : null,
+			monthlyValue : (ctcInput * variable_split) / CONSTANT_TWELVE
+						+ Number(data?.monthlyJoiningBonus || CONSTANT_ZERO)
+						+ Number(data?.monthlySignInBonus || CONSTANT_ZERO)
+						+ (Math.round(calculateResult(basicYearlyValue)
+						+ CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue + CONSTANT_TWENTY_FOUR_HUNDRED)
+						+ sum + flexible_benefit_sum + statutorySum(basicYearlyValue)) / CONSTANT_TWELVE
+						- Math.round(calculateResult(basicYearlyValue)) / CONSTANT_TWELVE
+						- (CONSTANT_ZERO_POINT_ZERO_FOUR_EIGHT_THREE * basicYearlyValue) / CONSTANT_TWELVE
+						- CONSTANT_EIGHTEEN_HUNDRED - CONSTANT_TWO_HUNDRED - CONSTANT_TWO_HUNDRED,
+
 		},
 	};
 

@@ -20,7 +20,7 @@ function RenderPills({ name, isCompleted, isDocsApproved }) {
 	}
 
 	return <Pill color="yellow">Pending</Pill>;
-};
+}
 
 function NewHireInformation({ setInformationPage, id, data, getEmployeeDetails }) {
 	const { progress_stats = {}, documents } = data || {};

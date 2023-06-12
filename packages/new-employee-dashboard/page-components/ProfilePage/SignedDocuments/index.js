@@ -8,14 +8,11 @@ import StyledTable from '../../StyledTable';
 import getColumns from './getColumns';
 import styles from './styles.module.css';
 
-const ARRAY_LENGTH = 0;
-
 const onClickViewDocument = ({ url }) => {
 	window.open(url || '', '_blank');
 };
 
 function SignedDocuments() {
-	
 	const { list = [], loading } = useListEmployeeSignedDocuments();
 
 	const columns = getColumns({ onClickViewDocument });

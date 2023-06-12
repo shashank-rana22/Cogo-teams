@@ -42,7 +42,6 @@ function PersonalInformation({ profileData, getEmployeeDetailsLoading }) {
 		? `${emergency_contact_details?.[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_country_code}
 	${emergency_contact_details?.[EMERGENCY_CONTACT_NUMBER_INDEX]?.mobile_number}` : '-';
 
-
 	const MAPPING = {
 		name                      : startCase(name),
 		gender                    : startCase(gender) || '-',
