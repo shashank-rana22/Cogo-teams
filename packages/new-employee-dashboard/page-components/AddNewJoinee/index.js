@@ -3,16 +3,31 @@ import React, { useState } from 'react';
 import FormComponent from './FormComponent';
 import SuccessComponent from './SucessComponent';
 
+const COMPONENT_MAPPING = {
+	form    : FormComponent,
+	success : SuccessComponent,
+};
+
 function AddNewJoinee() {
 	const [activePage, setActivePage] = useState('form');
 
-	const COMPONENT_MAPPING = {
-		form: FormComponent,
+	const componentProps = {
+		form: {
+			setActivePage,
+		},
+		success: {
+			activePage,
+		},
 	};
 
-	const RenderedComponent = COMPONENT_MAPPING[activePage] ?? SuccessComponent;
+	const Component = COMPONENT_MAPPING[activePage === 'form' ? 'form' : 'success'] || null;
 
-	return <RenderedComponent activePage={activePage} setActivePage={setActivePage} />;
+	return (
+
+		Component && (
+			<Component key={activePage} {...(componentProps[activePage] || {})} />
+		)
+	);
 }
 
 export default AddNewJoinee;
