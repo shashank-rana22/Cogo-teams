@@ -110,7 +110,8 @@ function CustomTable(
 		) : null;
 	};
 
-	const IsAllChecked = (list || [])?.filter((item) => isCheckBoxAllowed(item) && !checkedRows.includes(item?.id))?.length === 0;
+	const IsAllChecked = (list || [])?.filter((item) => isCheckBoxAllowed(item)
+	&& !checkedRows.includes(item?.id))?.length === 0;
 
 	const showHeaderCheckbox = (list || [])?.filter((item) => isCheckBoxAllowed(item))?.length > 0;
 

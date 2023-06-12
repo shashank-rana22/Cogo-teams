@@ -10,7 +10,8 @@ import { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
 import { amountCollectionFilters } from '../../configurations/on-account-collections/accountCollectionFilter';
-import { MORE_FILTERS_AMOUNT_COLLECTION } from '../../configurations/on-account-collections/moreFilterAccountCollection';
+import { MORE_FILTERS_AMOUNT_COLLECTION }
+	from '../../configurations/on-account-collections/moreFilterAccountCollection';
 import useAccountCollection from '../../hooks/useAccountCollection';
 import usePostToSageBulk from '../../hooks/usePostToSageBulk';
 
@@ -100,7 +101,7 @@ function OnAccountCollection() {
 						) : null}
 						<Filter
 							controls={amountCollectionFilters({
-                            	accMode,
+								accMode,
 							})}
 							filters={globalFilters}
 							setFilters={setGlobalFilters}
@@ -129,15 +130,15 @@ function OnAccountCollection() {
 
 						<Button
 							onClick={() => {
-                            	setShowConfirm(true);
+								setShowConfirm(true);
 							}}
 							disabled={bulkDisabled}
 						>
-							Bulk PostToSage
+							Bulk Post
 						</Button>
 						<Button
 							onClick={() => {
-                            	setCheckedRows([]);
+								setCheckedRows([]);
 							}}
 							disabled={bulkDisabled}
 						>
@@ -150,8 +151,8 @@ function OnAccountCollection() {
 								size="sm"
 								value={search}
 								onChange={(val: string) => setGlobalFilters((prev) => ({
-                                	...prev,
-                                	search: val,
+									...prev,
+									search: val,
 								}))}
 								placeholder={SEARCH_PLACEHOLDER}
 								suffix={(

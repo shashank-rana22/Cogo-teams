@@ -30,6 +30,10 @@
 				height: 32px !important;
 			}
 		}
+
+		.ui_select_container {
+			width: 150px;
+		}
 	}
 }
 

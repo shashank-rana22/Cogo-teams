@@ -28,7 +28,7 @@ function Confirmation(
 			placement="top"
 			closeOnOuterClick={false}
 			onClose={() => {
-            	setShowConfirm(false);
+				setShowConfirm(false);
 			}}
 		>
 			<div className={styles.heading}>
@@ -42,7 +42,7 @@ function Confirmation(
 				<Button
 					themeType="secondary"
 					onClick={() => {
-                    	setShowConfirm(false);
+						setShowConfirm(false);
 					}}
 				>
 					Cancel
