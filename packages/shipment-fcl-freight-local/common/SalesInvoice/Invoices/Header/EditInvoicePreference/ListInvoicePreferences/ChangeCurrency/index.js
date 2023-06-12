@@ -1,4 +1,5 @@
 import { Chips } from '@cogoport/components';
+
 import getCurrencyOptions from './helpers/getCurrencyOptions';
 import styles from './styles.module.css';
 

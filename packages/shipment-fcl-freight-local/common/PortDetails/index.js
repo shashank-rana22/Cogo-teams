@@ -1,6 +1,7 @@
 import { cl, Tooltip } from '@cogoport/components';
 import { IcMPortArrow, IcMFlocalCharges } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
+
 import { getOceanLocationInfo } from '../../helpers/getOceanLocaltionInfo';
 
 import styles from './styles.module.css';

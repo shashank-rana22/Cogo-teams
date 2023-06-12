@@ -151,12 +151,12 @@ const creditNoteControls = ({
 				code,
 				name,
 				currency,
-				sac_code   : hsn_code,
+				sac_code : hsn_code,
 				price_discounted,
 				quantity,
 				exchange_rate,
 				tax_percent,
-				total      : tax_total_price_discounted,
+				total    : tax_total_price_discounted,
 			});
 		}),
 	}));

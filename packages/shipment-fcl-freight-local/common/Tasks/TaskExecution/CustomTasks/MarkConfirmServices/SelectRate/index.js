@@ -8,7 +8,7 @@ import Card from './Card';
 import SelectNormal from './SelectNormal';
 import styles from './styles.module.css';
 
-const STEP_STATE =2;
+const STEP_STATE = 2;
 function SelectRate({
 	setStep,
 	setSelectedCard,

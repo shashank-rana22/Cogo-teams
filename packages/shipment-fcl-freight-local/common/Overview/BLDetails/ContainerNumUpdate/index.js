@@ -5,6 +5,8 @@ import useUpdateShipmentContainerDetails from '../../../../hooks/useUpdateShipme
 
 import styles from './styles.module.css';
 
+const PAYLOAD = [];
+
 function ContainerNmUpdate({
 	setEditContainerNum = () => { },
 	refetch = () => { },
@@ -26,7 +28,6 @@ function ContainerNmUpdate({
 	});
 
 	const onSubmit = () => {
-		const payload = [];
 		Object.keys(containerValue || {}).forEach((key) => {
 			const reqObj = {
 				id   : key,
@@ -34,10 +35,10 @@ function ContainerNmUpdate({
 					container_number: containerValue[key],
 				},
 			};
-			payload.push(reqObj);
+			PAYLOAD.push(reqObj);
 		});
 
-		apiTrigger(payload);
+		apiTrigger(PAYLOAD);
 	};
 
 	const closeModal = () => setEditContainerNum(false);

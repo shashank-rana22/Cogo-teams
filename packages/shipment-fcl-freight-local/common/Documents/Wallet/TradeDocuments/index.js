@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf, IcMImage } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { startCase } from '@cogoport/utils';
-import  { useContext } from 'react';
+import { useContext } from 'react';
 
 import useListTradeDocuments from '../../../../hooks/useListTradeDocuments';
 import Loader from '../Loader';

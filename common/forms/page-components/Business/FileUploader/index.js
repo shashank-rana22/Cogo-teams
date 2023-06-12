@@ -6,6 +6,8 @@ import { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
+const INITIAL_STATE = -1;
+
 function FileUploader(props) {
 	const {
 		onChange,
@@ -24,16 +26,16 @@ function FileUploader(props) {
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
-			setFileName([{ name: defaultValues.split('/').slice(-1).join('') }]);
+			setFileName([{ name: defaultValues.split('/').slice(INITIAL_STATE).join('') }]);
 			setUrlStore([{
-				fileName : defaultValues.split('/').slice(-1).join(''),
+				fileName : defaultValues.split('/').slice(INITIAL_STATE).join(''),
 				finalUrl : defaultValues,
 			}]);
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
-			const names = defaultValues.map((url) => ({ name: url?.split('/')?.slice(-1)?.join('') }));
+			const names = defaultValues.map((url) => ({ name: url?.split('/')?.slice(INITIAL_STATE)?.join('') }));
 			const urls = defaultValues.map((url) => ({
-				fileName : url?.split('/')?.slice(-1)?.join(''),
+				fileName : url?.split('/')?.slice(INITIAL_STATE)?.join(''),
 				finalUrl : url,
 			}));
 

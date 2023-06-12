@@ -7,6 +7,7 @@ import {
 import { isEmpty } from '@cogoport/utils';
 
 import ClickableDiv from '../../../../../../../../ClickableDiv';
+
 import styles from './styles.module.css';
 
 const INITIAL_STATE = 0;

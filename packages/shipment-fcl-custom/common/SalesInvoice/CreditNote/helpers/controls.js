@@ -110,7 +110,7 @@ const creditNoteControls = ({
 				hsn_code = 'NA',
 				currency,
 				unit,
-				name
+				name,
 			} = item || {};
 			return ({
 				is_checked,
@@ -118,12 +118,12 @@ const creditNoteControls = ({
 				currency,
 				unit,
 				name,
-				sac_code   : hsn_code,
+				sac_code : hsn_code,
 				price_discounted,
 				quantity,
 				exchange_rate,
 				tax_percent,
-				total      : tax_total_price_discounted,
+				total    : tax_total_price_discounted,
 			});
 		}),
 	}));

@@ -119,12 +119,12 @@ function Item({
 					</div>
 
 					{itemStatus === 'pending' ? (
-							<Button
-								size="sm"
-								onClick={() => setOpen('review')}
-							>
-								Review
-							</Button>
+						<Button
+							size="sm"
+							onClick={() => setOpen('review')}
+						>
+							Review
+						</Button>
 					) : null}
 				</div>
 

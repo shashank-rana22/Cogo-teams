@@ -1,6 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-import  { useState, useEffect } from 'react';
+import { useState, useEffect } from 'react';
 
 import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';

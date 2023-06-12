@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+
 import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';

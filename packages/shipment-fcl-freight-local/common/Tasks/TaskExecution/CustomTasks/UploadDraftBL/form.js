@@ -10,7 +10,7 @@ const CONTROL_TYPE_MAPPING = {
 	textarea : TextAreaController,
 };
 const TOTAL_SPAN = 12;
-const PERCENT = 100
+const PERCENT = 100;
 
 function FormElement({ name, label, errors, type, span, ...rest }) {
 	const Element = CONTROL_TYPE_MAPPING[type];

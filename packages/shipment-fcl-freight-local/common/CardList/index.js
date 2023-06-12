@@ -1,5 +1,5 @@
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-import  { useMemo } from 'react';
+import { useMemo } from 'react';
 
 import Header from './CardHeader';
 import CardItem from './Carditem';

@@ -1,6 +1,6 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import  { useContext } from 'react';
+import { useContext } from 'react';
 
 import styles from './styles.module.css';
 

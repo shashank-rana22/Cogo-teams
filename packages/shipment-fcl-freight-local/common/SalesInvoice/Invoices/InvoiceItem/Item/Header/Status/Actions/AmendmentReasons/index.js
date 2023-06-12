@@ -1,5 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+
 import styles from './styles.module.css';
 
 function AmendmentReasons({ invoice = {} }) {

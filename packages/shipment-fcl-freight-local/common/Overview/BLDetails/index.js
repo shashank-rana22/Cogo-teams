@@ -1,7 +1,7 @@
 import { Button, Accordion } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-import  { useState, useContext } from 'react';
+import { useState, useContext } from 'react';
 
 import useListBillOfLadings from '../../../hooks/useListBillOfLadings';
 
@@ -15,6 +15,8 @@ const EMPTY_STATE_CONTENT = {
 	heading     : 'No BL Details Found!',
 	description : 'Currently BL is not uploaded from the respective stakeholder.',
 };
+const INITIAL_STATE = 0;
+const TOTAL_LENGTH = 1;
 
 function BLDetails() {
 	const [open, setOpen] = useState(false);
@@ -25,9 +27,9 @@ function BLDetails() {
 		ShipmentDetailContext,
 	);
 
-	let containersCount = 0;
+	let containersCount = INITIAL_STATE;
 	(primary_service?.cargo_details || []).forEach((container) => {
-		containersCount += container?.containers_count || 0;
+		containersCount += container?.containers_count || INITIAL_STATE;
 	});
 
 	const { list, containerDetails, refetch } = useListBillOfLadings({ shipment_data });
@@ -39,9 +41,9 @@ function BLDetails() {
 			BL and Container Details
 			<div className="bl-count">
 				(
-				{primary_service?.bls_count || 0}
+				{primary_service?.bls_count || INITIAL_STATE}
 				&nbsp;BL & &nbsp;
-				{containerDetailsArray?.length || containersCount || 0}
+				{containerDetailsArray?.length || containersCount || INITIAL_STATE}
 				&nbsp;
 				Containers
 				)
@@ -73,7 +75,7 @@ function BLDetails() {
 	return (
 		<div className={styles.container}>
 
-			{containerDetailsArray?.[0]?.container_number
+			{containerDetailsArray?.[INITIAL_STATE]?.container_number
 				? <div className={styles.button_div}>{renderButtons()}</div> : null}
 
 			<Accordion title={renderBlCount} style={{ width: '100%' }}>
@@ -87,7 +89,7 @@ function BLDetails() {
 				) : (
 					<div className={styles.manage_services_div}>
 						{(list || []).map((item) => (
-							item?.containers?.length >= 1
+							item?.containers?.length >= TOTAL_LENGTH
 								? (
 									<div
 										className={styles.service_card}

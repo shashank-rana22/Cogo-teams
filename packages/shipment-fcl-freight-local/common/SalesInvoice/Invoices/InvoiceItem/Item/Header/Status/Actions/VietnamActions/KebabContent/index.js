@@ -30,7 +30,7 @@ function Actions({
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
 
-	let disableAction = showForOldShipments? isIRNGenerated : disableActionCondition;
+	let disableAction = showForOldShipments ? isIRNGenerated : disableActionCondition;
 
 	if (invoice.status === 'amendment_requested') {
 		disableAction = false;
@@ -121,46 +121,46 @@ function Actions({
 	return (
 		<div className={styles.actions_wrap}>
 			<div className={styles.email_wrapper}>
-						<IcMEmail
-							onClick={() => setSendEmail(true)}
-						/>
+				<IcMEmail
+					onClick={() => setSendEmail(true)}
+				/>
 
-						<Tooltip
-							placement="bottom"
-							theme="light"
-							content={(
-								<div className={styles.tooltip_child}>
-									<div className={styles.flex_row}>
-										Proforma email sent :
-										&nbsp;
-										{invoice.proforma_email_count || INITIAL_STATE}
-									</div>
-
-									<div className={cl`${styles.flex_row} ${styles.margin}`}>
-										Live email sent:
-										&nbsp;
-										{invoice.sales_email_count || INITIAL_STATE}
-									</div>
-									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
-										<div className={cl`${styles.flex_row} ${styles.margin}`}>
-											UTR Number:
-											&nbsp;
-											{invoice?.sales_utr?.utr_number || ''}
-										</div>
-										<div className={cl`${styles.flex_row} ${styles.margin}`}>
-											Status:
-											&nbsp;
-											{invoice?.sales_utr?.status || ''}
-										</div>
-									</div>
-								</div>
-							)}
-						>
-							<div className={styles.icon_div}>
-								<IcMInfo />
+				<Tooltip
+					placement="bottom"
+					theme="light"
+					content={(
+						<div className={styles.tooltip_child}>
+							<div className={styles.flex_row}>
+								Proforma email sent :
+								&nbsp;
+								{invoice.proforma_email_count || INITIAL_STATE}
 							</div>
-						</Tooltip>
+
+							<div className={cl`${styles.flex_row} ${styles.margin}`}>
+								Live email sent:
+								&nbsp;
+								{invoice.sales_email_count || INITIAL_STATE}
+							</div>
+							<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
+								<div className={cl`${styles.flex_row} ${styles.margin}`}>
+									UTR Number:
+									&nbsp;
+									{invoice?.sales_utr?.utr_number || ''}
+								</div>
+								<div className={cl`${styles.flex_row} ${styles.margin}`}>
+									Status:
+									&nbsp;
+									{invoice?.sales_utr?.status || ''}
+								</div>
+							</div>
+						</div>
+					)}
+				>
+					<div className={styles.icon_div}>
+						<IcMInfo />
 					</div>
+				</Tooltip>
+			</div>
 			{!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE ? (
 				<Popover
 					interactive

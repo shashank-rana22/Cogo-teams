@@ -1,6 +1,6 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import {IcCError} from '@cogoport/icons-react';
+import { IcCError } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -127,16 +127,16 @@ function Actions({
 						</Tooltip>
 					) : null}
 				</div>
-					<KebabContent
-						invoice={invoice}
-						shipment_data={shipment_data}
-						invoiceData={invoiceData}
-						isIRNGenerated={isIRNGenerated}
-						setIsChangeCurrency={setIsChangeCurrency}
-						setShowAddRemarks={setShowAddRemarks}
-						setShowChangePaymentMode={setShowChangePaymentMode}
-						setIsEditInvoice={setIsEditInvoice}
-					/>
+				<KebabContent
+					invoice={invoice}
+					shipment_data={shipment_data}
+					invoiceData={invoiceData}
+					isIRNGenerated={isIRNGenerated}
+					setIsChangeCurrency={setIsChangeCurrency}
+					setShowAddRemarks={setShowAddRemarks}
+					setShowChangePaymentMode={setShowChangePaymentMode}
+					setIsEditInvoice={setIsEditInvoice}
+				/>
 			</div>
 
 			{(invoice.services || []).length && isEditInvoice ? (
