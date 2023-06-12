@@ -1,3 +1,11 @@
+const SUFFIX_STYLES = {
+	borderLeft : '1px solid #dedede',
+	width      : '42px',
+	height     : '32px',
+	textAlign  : 'center',
+	paddingTop : '4px',
+};
+
 const getControls = () => {
 	const controls = [{
 		name        : 'minimum_profitability',
@@ -7,18 +15,9 @@ const getControls = () => {
 			width     : '50%',
 			marginTop : '20px',
 		},
-		suffix:
-	<div style={{
-		borderLeft : '1px solid #DEDEDE',
-		width      : '41px',
-		height     : '32px',
-		textAlign  : 'center',
-		paddingTop : '4px',
-	}}
-	>
-		%
-	</div>,
-		rules: {
+
+		suffix : <div style={SUFFIX_STYLES}>%</div>,
+		rules  : {
 			required: {
 				value   : true,
 				message : 'This is required before submitting',
