@@ -69,9 +69,9 @@ const RenderFields = ({ show, control, errors }) => (Object.keys(controls) || []
 });
 
 function FormComponent({ setActivePage }) {
-	const [bulkUploadComponent, setBulkUploadComponent] = useState(false);
-
 	const router = useRouter();
+
+	const [bulkUploadComponent, setBulkUploadComponent] = useState(false);
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
