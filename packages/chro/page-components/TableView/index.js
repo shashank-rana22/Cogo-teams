@@ -18,6 +18,14 @@ const PAGE_LIMIT = 10;
 const VARIABLE_PAY_THRESHOLD = 0;
 const ARRAY_LENGTH = 1;
 
+const getVariablePay = ({
+	joining_bonus_yearly,
+	retention_bonus_yearly,
+	performance_linked_variable_yearly,
+}) => (
+	Number(joining_bonus_yearly)
+	+ Number(retention_bonus_yearly) + Number(performance_linked_variable_yearly)) || VARIABLE_PAY_THRESHOLD;
+
 function TableView({ search, activeTab }) {
 	const [ctcBreakup, setCtcBreakup] = useState();
 	const [error, setError] = useState(false);
@@ -40,9 +48,11 @@ function TableView({ search, activeTab }) {
 		retention_bonus_yearly = 0, performance_linked_variable_yearly = 0,
 	} = metadata || {};
 
-	const variable_pay = (Number(joining_bonus_yearly)
-				+ Number(retention_bonus_yearly)
-				+ Number(performance_linked_variable_yearly)) || VARIABLE_PAY_THRESHOLD;
+	const variable_pay = getVariablePay({
+		joining_bonus_yearly,
+		retention_bonus_yearly,
+		performance_linked_variable_yearly,
+	});
 
 	if ((list || []).length < ARRAY_LENGTH && !loading) {
 		return (
@@ -77,6 +87,7 @@ function TableView({ search, activeTab }) {
 				{ctcBreakup?.employee_detail?.name
 					? <Modal.Header title={`${ctcBreakup?.employee_detail?.name}`} />
 					: null}
+
 				<Modal.Body>
 					Final Compensation Offered:
 					{' '}
@@ -92,6 +103,7 @@ function TableView({ search, activeTab }) {
 					</span>
 					<CtcBreakup metadata={metadata} />
 				</Modal.Body>
+
 				<Modal.Footer>
 					<div className={styles.button_container}>
 						{ctcBreakup?.status === 'active' ? (
