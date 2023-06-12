@@ -7,11 +7,11 @@ import styles from './styles.module.css';
 
 function RaiseTickets({ control, errors, watchOrgId, additionalInfo, setAdditionalInfo }) {
 	const additionalControls = (additionalInfo || []).map((item) => ({
-		label        : item,
-		name         : item,
-		type         : 'text',
-		placeholder  : `add ${item}`,
-		showOptional : false,
+		label          : item,
+		name           : item,
+		controllerType : 'text',
+		placeholder    : `add ${item}`,
+		showOptional   : false,
 	}));
 
 	const controls = useRaiseTicketcontrols({ watchOrgId, setAdditionalInfo }).concat(additionalControls);
@@ -20,7 +20,7 @@ function RaiseTickets({ control, errors, watchOrgId, additionalInfo, setAddition
 		<div>
 			{controls.map((controlItem) => {
 				const el = { ...controlItem };
-				const Element = getFieldController(el.type);
+				const Element = getFieldController(el.controllerType);
 
 				if (!Element) return null;
 

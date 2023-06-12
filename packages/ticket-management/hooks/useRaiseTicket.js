@@ -19,7 +19,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 			organization_id,
 			user_id,
 			priority,
-			file_url,
+			file_url: { finalUrl },
 			...rest
 		} = val || {};
 
@@ -28,8 +28,6 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 		const selectedServices = Object.fromEntries(
 			Object.entries(rest).filter(([key]) => additionalInfo.includes(key)),
 		);
-
-		const urlData = (file_url || []).map((item) => item?.url);
 
 		if (!isEmpty(organization_id)) {
 			additionalData.OrganizationID = organization_id;
@@ -45,7 +43,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 					Subcategory : '',
 					Priority    : priority,
 					Usertype    : 'ticket_user',
-					Data        : { Attachment: urlData || [], ...selectedServices },
+					Data        : { Attachment: finalUrl || [], ...selectedServices },
 					Type        : issue_type,
 					Description : additional_information,
 					...additionalData,
