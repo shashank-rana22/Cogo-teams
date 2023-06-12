@@ -29,7 +29,7 @@ export interface Props {
 	renderDropdown?: (p:any) => JSX.Element | null ;
 }
 
-function List({
+function CustomList({
 	config,
 	sort,
 	setSort,
@@ -116,4 +116,4 @@ function List({
 	);
 }
 
-export default List;
+export default CustomList;
