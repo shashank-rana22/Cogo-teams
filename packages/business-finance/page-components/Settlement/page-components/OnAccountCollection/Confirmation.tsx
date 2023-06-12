@@ -22,6 +22,8 @@ function Confirmation(
         loading,
     }: Props,
 ) {
+
+    const unqIds = [...new Set(checkedRows)]
     return (
         <Modal
             show={showConfirm}
@@ -34,7 +36,7 @@ function Confirmation(
             <div className={styles.heading}>
                 You have Selected
                 {' '}
-                {checkedRows?.length || 0}
+                {unqIds?.length || 0}
                 {' '}
                 Payments. Are You Sure you want to Post?
             </div>

@@ -106,6 +106,7 @@ function CustomTable(
         return isCheckBoxAllowed(item) ? (
             <Checkbox
                 checked={isChecked}
+                disabled={loading}
                 onChange={(event) => onChangeTableBodyCheckbox(event, item)}
             />
         ) : null;
@@ -125,6 +126,7 @@ function CustomTable(
                 onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
                 IsAllChecked={IsAllChecked}
                 showHeaderCheckbox={showHeaderCheckbox}
+                loading={loading}
             />
             <List
                 list={list}

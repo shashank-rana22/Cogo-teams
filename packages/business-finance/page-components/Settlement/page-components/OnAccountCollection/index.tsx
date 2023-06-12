@@ -49,8 +49,10 @@ function OnAccountCollection() {
     };
 
     const bulkPost = () => {
-        post(checkedRows);
+        post([...new Set(checkedRows)]);
     };
+
+    const bulkDisabled = (checkedRows)?.length < 2
 
     const {accMode = '', search = ''} = globalFilters || {};
 
@@ -129,7 +131,7 @@ function OnAccountCollection() {
                             onClick={() => {
                                 setShowConfirm(true);
                             }}
-                            disabled={(checkedRows)?.length < 2}
+                            disabled={bulkDisabled}
                         >
                             Bulk PostToSage
                         </Button>
@@ -137,7 +139,7 @@ function OnAccountCollection() {
                             onClick={() => {
                                 setCheckedRows([]);
                             }}
-                            disabled={(checkedRows)?.length < 2}
+                            disabled={bulkDisabled}
                         >
                             Reset
                         </Button>
