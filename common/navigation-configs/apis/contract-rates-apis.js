@@ -784,6 +784,12 @@ const apis = [
 		feature      : 'contract_rates',
 		service_name : 'contract',
 	},
+	{
+		api: 'create_contract_additional_services',
+		access_type: 'private',
+		feature: 'contract_rates',
+		service_name: 'contract',
+	},
 ];
 
 export default apis;
