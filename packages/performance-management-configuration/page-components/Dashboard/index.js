@@ -1,7 +1,9 @@
+import Header from '../Header';
+
 function Dashboard() {
 	return (
 		<div>
-			<div>Shivam</div>
+			<Header />
 		</div>
 	);
 }
