@@ -5,6 +5,7 @@ import { format, startCase } from '@cogoport/utils';
 import incoTermMapping from '../../../helper/incoTermMapping';
 import PortDetails from '../../List/Card/Body/PortDetails';
 
+import EditSellQuotation from './EditSellQuotation';
 import styles from './styles.module.css';
 
 function ShipmentCard({ itemData, priceData }) {
@@ -65,6 +66,7 @@ function ShipmentCard({ itemData, priceData }) {
 							INR 1000
 						</span>
 					</div>
+					<EditSellQuotation data={itemData} />
 				</div>
 			</div>
 

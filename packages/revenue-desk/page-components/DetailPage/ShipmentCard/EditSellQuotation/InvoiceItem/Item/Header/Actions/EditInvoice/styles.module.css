@@ -1,0 +1,66 @@
+.container {
+	margin: -16px;
+}
+
+.invoice_value {
+	margin: 0 0 32px;
+	font-size: 18px;
+	font-weight: 500;
+	color: #333;
+
+	.amount {
+		margin-left: 4px;
+		color: #5936f0;
+	}
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+	width: 100%;
+	padding: 18px 22px 0 0;
+	border-top: 1px solid #bdaff9;
+
+	.core-ui-button-root {
+		width: 100px;
+		text-transform: capitalize;
+	}
+
+	.save {
+		margin-left: 16px;
+		border: 1px solid #393f70;
+	}
+}
+
+.forms {
+	height: 71vh;
+	padding: 30px 34px 0;
+	overflow: auto;
+
+	.core-ui-button-root {
+		padding: 4px 24px !important;
+		margin-left: 20px;
+		font-size: 10px;
+		font-weight: 500;
+		text-transform: capitalize;
+	}
+
+	.fieldArray-add-icon {
+		display: none;
+	}
+
+	.form-edit-line-items-root {
+		padding: 0 0 12px;
+		border: 1px solid #e0e0e0;
+		box-shadow: 0 0 10px rgb(0 0 0 / 15%);
+	}
+
+	.form-edit-line-items-child > div {
+		align-items: flex-start !important;
+	}
+
+	.form-edit-line-items-child .amount-excl {
+		margin: 6px;
+	}
+}

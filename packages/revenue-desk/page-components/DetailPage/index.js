@@ -80,7 +80,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							Wallet Balance
 						</div>
 						<div className={styles.price_text}>
-							USD 10000
+							-
 						</div>
 					</div>
 				</div>
