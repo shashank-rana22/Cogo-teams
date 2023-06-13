@@ -8,12 +8,15 @@ function CaseQuestion({ item, from, caseToShow, setQuestionToShow, setCaseToShow
 	return (
 		<div className={styles.flex_column}>
 			<div className={styles.flex_row}>
+
 				<div
 					role="presentation"
+					className={`${styles.question_text} 
+				${(from === 'tooltip') ? styles.question_text_content : null}`}
 					onClick={() => setQuestionToShow(id)}
-					className={`${styles.question_text} ${(from === 'tooltip') ? styles.question_text_content : null}`}
-					dangerouslySetInnerHTML={{ __html: item?.question_text }}
-				/>
+				>
+					click to see details
+				</div>
 
 				{from !== 'tooltip' ? (
 					<div
@@ -33,15 +36,24 @@ function CaseQuestion({ item, from, caseToShow, setQuestionToShow, setCaseToShow
 				) : null}
 			</div>
 
-			{item.id === caseToShow
+			{/* {item.id === caseToShow
 				? test_case_study_questions.map((caseStudyQuestion) => (
+					// <div
+					// 	className={styles.text}
+					// 	key={caseStudyQuestion.id}
+					// 	dangerouslySetInnerHTML={{ __html: caseStudyQuestion?.question_text }}
+					// />
 					<div
-						className={styles.text}
+						role="presentation"
+						onClick={() => setQuestionToShow(id)}
 						key={caseStudyQuestion.id}
-						dangerouslySetInnerHTML={{ __html: caseStudyQuestion?.question_text }}
-					/>
+						className={styles.question_text}
+					>
+						click to see details
+
+					</div>
 				))
-				: null}
+				: null} */}
 		</div>
 	);
 }

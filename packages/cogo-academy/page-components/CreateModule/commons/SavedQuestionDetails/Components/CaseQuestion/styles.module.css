@@ -1,11 +1,13 @@
 .flex_column {
 	display: flex;
 	flex-direction: column;
+	overflow-y: hidden;
 }
 
 .flex_row {
 	display: flex;
 	align-items: center;
+	overflow-y: hidden;
 }
 
 .bold {
@@ -17,14 +19,10 @@
 
 .question_text {
 	max-width: 600px;
-	max-height: 300px;
-	overflow-y: scroll;
+	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-
-	img{
-		max-width: 100%;
-	}
+	text-decoration: underline;
 }
 
 .text {

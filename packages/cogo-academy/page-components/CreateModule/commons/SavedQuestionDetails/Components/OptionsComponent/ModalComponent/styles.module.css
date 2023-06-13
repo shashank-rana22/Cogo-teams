@@ -26,6 +26,10 @@
 	position: relative;
 	padding: 10px;
 	margin-bottom: 20px;
+
+	img{
+		width: 80%;
+	}
 }
 
 .close_icon {

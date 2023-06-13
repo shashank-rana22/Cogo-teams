@@ -1,10 +1,8 @@
 .question_div {
 	max-width: 360px;
-	max-height: 60px;
 	overflow: hidden;
 	text-overflow: ellipsis;
 	white-space: nowrap;
-	overflow-y: scroll;
 }
 
 .updated_at {
@@ -32,4 +30,8 @@
 	img{
 		max-width: 100%;
 	}
+}
+
+.question_text{
+	text-decoration: underline;
 }
