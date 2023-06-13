@@ -1,33 +1,25 @@
-const DAY_START_HOUR = 0;
-const DAY_START_MINUTE = 0;
-const DAY_START_SECOND = 0;
-const DAY_END_HOUR = 23;
-const DAY_END_MINUTE = 59;
-const DAY_END_SECOND = 59;
+const DEFAULT_VALUE_FOR_RADIX_PARAMETER = 10;
 
-const setDateHours = ({ time = 'dayStartTime', date, defaultValue = true }) => {
-	let newDate = new Date(date);
+const setDateHours = ({ time = '0:0:0', date }) => {
+	const newDate = new Date(date);
 
 	if (newDate.toDateString() === 'Invalid Date') {
-		if (defaultValue) {
-			newDate = new Date();
-		} else {
-			return null;
-		}
+		return null;
 	}
 
-	switch (time) {
-		case 'dayStartTime':
-			newDate.setHours(DAY_START_HOUR, DAY_START_MINUTE, DAY_START_SECOND);
-			break;
+	let [getHour = 0, getMinute = 0, getSecond = 0] = time.split(':');
 
-		case 'dayEndTime':
-			newDate.setHours(DAY_END_HOUR, DAY_END_MINUTE, DAY_END_SECOND);
-			break;
+	getHour = parseInt(getHour, DEFAULT_VALUE_FOR_RADIX_PARAMETER);
 
-		default:
-			break;
+	getMinute = parseInt(getMinute, DEFAULT_VALUE_FOR_RADIX_PARAMETER);
+
+	getSecond = parseInt(getSecond, DEFAULT_VALUE_FOR_RADIX_PARAMETER);
+
+	if (Number.isNaN(getHour) || Number.isNaN(getMinute) || Number.isNaN(getSecond)) {
+		return null;
 	}
+
+	newDate.setHours(getHour, getMinute, getSecond);
 	return newDate;
 };
 export default setDateHours;
