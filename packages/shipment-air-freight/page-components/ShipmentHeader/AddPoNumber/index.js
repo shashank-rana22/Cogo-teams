@@ -20,7 +20,7 @@ function AddPoNumber({
 
 	const onCreate = () => {
 		updateShipment({
-			id        : shipment_data?.id,
+			id        : shipment_data.id,
 			po_number : poNumber,
 		});
 	};
@@ -38,7 +38,7 @@ function AddPoNumber({
 			<Modal.Body>
 				<Input
 					size="sm"
-					value={shipment_data?.po_number}
+					value={shipment_data.po_number}
 					placeholder="Add PO Number"
 					onChange={setPoNumber}
 				/>

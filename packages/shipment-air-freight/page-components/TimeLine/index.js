@@ -1,6 +1,6 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMEdit } from '@cogoport/icons-react';
-import { useState, useContext, useEffect, useMemo } from 'react';
+import { useState, useContext, useEffect } from 'react';
 
 import EditSchedule from './EditSchedule';
 import { canEditSchedule } from './helpers/canEditSchedule';
@@ -35,7 +35,6 @@ function Timeline() {
 	);
 
 	const totalItems = (filteredTimelineData || []).length;
-	const mapKeys = useMemo(() => Array(totalItems).fill(null).map(() => Math.random()), [totalItems]);
 
 	let consecutivelyCompleted = true;
 
@@ -56,7 +55,7 @@ function Timeline() {
 					consecutivelyCompleted = consecutivelyCompleted && timelineItem.completed_on;
 					return (
 						<TimelineItem
-							key={mapKeys[index]}
+							key={`${timelineItem.milestone}_${timelineItem.completed_on}`}
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
 							isLast={totalItems === index + ADD_ONE_INDEX}
@@ -66,7 +65,7 @@ function Timeline() {
 			</div>
 
 			{showEditScheduleIcon ? (
-				<IcMEdit onClick={() => setShowEditSchedule((p) => !p)} className={styles.edit_icon} />
+				<IcMEdit onClick={() => setShowEditSchedule((prev) => !prev)} className={styles.edit_icon} />
 			) : null}
 
 			{showEditSchedule ? (

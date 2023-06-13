@@ -1,25 +1,27 @@
-import CONSTANTS from '@cogoport/air-modules/constants/CONSTANTS';
 import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
+import CONSTANTS from '../../../constants/CONSTANTS';
 import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
 
-const { ZEROTH_INDEX, NON_EMPTY_LIST_LENGTH } = CONSTANTS;
+const { ZEROTH_INDEX } = CONSTANTS;
+
+const MAIN_SERVICES_MIN_LENGTH = 1;
 
 function MultiServiceDetailsPopover({
 	children = null,
-	mainServices,
+	mainServices = [],
 
 }) {
-	if (mainServices?.length <= NON_EMPTY_LIST_LENGTH) {
+	if (mainServices?.length <= MAIN_SERVICES_MIN_LENGTH) {
 		return null;
 	}
 
 	const renderBody = () => (
-		mainServices?.map((item, idx) => (idx !== ZEROTH_INDEX ? (
-			<div className={styles.container} key={item?.id}>
+		mainServices.map((item, idx) => (idx !== ZEROTH_INDEX ? (
+			<div className={styles.container} key={item.id}>
 				<RenderCargoPills detail={item} />
 			</div>
 		) : null)));

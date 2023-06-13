@@ -1,4 +1,4 @@
-import { cl, Tooltip } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
 import { IcMPortArrow, IcMFair } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
@@ -13,33 +13,36 @@ function PortDetails({ data = {}, primary_service = {} }) {
 
 	if (isEmpty(data)) { return null; }
 
-	const handleLocationDetails = (location) => (
-		<>
-			<div className={styles.port_code}>
-				<div className={` ${styles.code}`}>
-					(
-					{location?.port_code || location?.postal_code}
-					)
-				</div>
-
-				<div className={`${styles.country}`}>
-					{location?.country?.name}
-				</div>
-			</div>
-
-			<Tooltip
-				placement="bottom"
-				theme="light"
-				content={(
-					<div>
-						<div style={{ fontSize: '10px' }}>{location?.display_name}</div>
+	const handleLocationDetails = (location) => {
+		const { port_code, postal_code, country, display_name, name } = location || {};
+		return (
+			<>
+				<div className={styles.port_code}>
+					<div className={styles.code}>
+						(
+						{port_code || postal_code}
+						)
 					</div>
-				)}
-			>
-				<div className={cl`${styles.value}`}>{location?.name}</div>
-			</Tooltip>
-		</>
-	);
+
+					<div className={`${styles.country}`}>
+						{country?.name}
+					</div>
+				</div>
+
+				<Tooltip
+					placement="bottom"
+					theme="light"
+					content={(
+						<div>
+							<div style={{ fontSize: '10px' }}>{display_name}</div>
+						</div>
+					)}
+				>
+					<div className={styles.value}>{name}</div>
+				</Tooltip>
+			</>
+		);
+	};
 
 	const renderLocation = () => (
 		<>

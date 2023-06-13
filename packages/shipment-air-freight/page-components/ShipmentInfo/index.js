@@ -12,6 +12,8 @@ const SHIPMENT_TYPE_MAPPING = {
 	coload : 'Coload',
 };
 
+const COGO_ASSURED_IMG = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg';
+
 function ShipmentInfo() {
 	const { shipment_data, isGettingShipment } = useContext(ShipmentDetailContext);
 	const { source = '', serial_id = '', is_cogo_assured = false } = shipment_data || {};
@@ -40,7 +42,7 @@ function ShipmentInfo() {
 
 			{is_cogo_assured ? (
 				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-assured.svg"
+					src={COGO_ASSURED_IMG}
 					alt="cogo-assured"
 					height={16}
 				/>

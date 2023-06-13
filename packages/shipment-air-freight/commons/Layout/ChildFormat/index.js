@@ -1,7 +1,8 @@
-import CONSTANTS from '@cogoport/air-modules/constants/CONSTANTS';
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import React, { useEffect } from 'react';
+
+import CONSTANTS from '../../../constants/CONSTANTS';
 
 import Child from './child';
 import styles from './styles.module.css';

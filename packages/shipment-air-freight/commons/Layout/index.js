@@ -1,5 +1,6 @@
-import CONSTANTS from '@cogoport/air-modules/constants/CONSTANTS';
 import React from 'react';
+
+import CONSTANTS from '../../constants/CONSTANTS';
 
 import FieldArray from './ChildFormat';
 import Item from './Item';

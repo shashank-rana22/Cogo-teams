@@ -4,6 +4,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const CUSTOM_STYLE = { height: '14px' };
+const LOADER_COUNT = 4;
 
 function Loader() {
 	return (
@@ -24,10 +25,9 @@ function Loader() {
 					<Placeholder style={CUSTOM_STYLE} />
 				</div>
 
-				<Placeholder style={{ marginRight: '16px' }} />
-				<Placeholder style={{ marginRight: '16px' }} />
-				<Placeholder style={{ marginRight: '16px' }} />
-				<Placeholder style={{ marginRight: '16px' }} />
+				{Array.from(Array(LOADER_COUNT).keys()).map((key) => (
+					<Placeholder key={key} style={{ marginRight: '16px' }} />
+				))}
 			</div>
 
 		</div>

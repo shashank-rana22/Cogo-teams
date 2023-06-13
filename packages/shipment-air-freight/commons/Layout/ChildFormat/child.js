@@ -1,7 +1,7 @@
-import CONSTANTS from '@cogoport/air-modules/constants/CONSTANTS';
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
+import CONSTANTS from '../../../constants/CONSTANTS';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 

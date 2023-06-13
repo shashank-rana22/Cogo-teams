@@ -6,7 +6,7 @@ import useEditServiceSchedule from '../hooks/useEditServiceSchedule';
 import styles from './styles.module.css';
 
 function FormItem({ finalControl = {}, control, errors = {} }) {
-	const { name, label, lowerlabel, ...rest } = finalControl || {};
+	const { name, label, lowerlabel, ...rest } = finalControl;
 
 	const { message: errorMessage } = errors[name] || {};
 

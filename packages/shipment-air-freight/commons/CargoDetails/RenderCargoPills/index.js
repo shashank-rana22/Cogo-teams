@@ -23,7 +23,7 @@ function RenderCargoPills({ detail }) {
 				const value = renderValue(label, detail);
 				if (detail?.[label] && value) {
 					return (
-						<div className={cl` ${styles.box} `} key={label}>
+						<div className={styles.box} key={label}>
 							{value}
 						</div>
 					);

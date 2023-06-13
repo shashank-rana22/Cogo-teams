@@ -1,7 +1,8 @@
-import CONSTANTS from '@cogoport/air-modules/constants/CONSTANTS';
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
+
+import ZEROTH_INDEX from '../../../../constants/CONSTANTS';
 
 import styles from './styles.module.css';
 
@@ -11,8 +12,6 @@ const STYLES_COL = {
 	alignItems : 'center',
 	padding    : '0 4px',
 };
-
-const { ZEROTH_INDEX } = CONSTANTS;
 
 function Field({
 	field = {},
@@ -32,11 +31,11 @@ function Field({
 	const handleOnchange = (item) => {
 		const fieldType = item?.sorting.name;
 
-		setSort({
-			[fieldType]: sort?.[fieldType] === 'Asc' ? 'Desc' : 'Asc',
-		});
+		setSort((prev) => ({
+			[fieldType]: prev?.[fieldType] === 'Asc' ? 'Desc' : 'Asc',
+		}));
 
-		setShow(!show);
+		setShow((prev) => (!prev));
 	};
 
 	const sortingKey = field.sorting ? Object?.keys(field.sorting)?.[ZEROTH_INDEX] : null;
@@ -47,7 +46,7 @@ function Field({
 	return (
 		<div
 			style={field.hasStyle ? field.styles : STYLES_COL}
-			key={field?.key || field?.label}
+			key={field.key || field.label}
 		>
 			<div className={styles.card_title}>
 				{field.tooltip ? (

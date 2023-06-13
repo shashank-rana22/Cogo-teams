@@ -42,9 +42,9 @@ function ShipmentHeader() {
 					placement="bottom"
 					maxWidth="none"
 					interactive
-					content={(<div className={styles.tooltip}>{importer_exporter?.business_name}</div>)}
+					content={(<div className={styles.tooltip}>{importer_exporter.business_name}</div>)}
 				>
-					<div className={styles.business_name}>{importer_exporter?.business_name}</div>
+					<div className={styles.business_name}>{importer_exporter.business_name}</div>
 				</Tooltip>
 
 				{po_number ? (

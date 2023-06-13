@@ -28,7 +28,7 @@ function Item({
 			}`}
 		>
 			{fields.map((singleItem) => {
-				if (singleItem?.show === false) {
+				if (singleItem.show === false) {
 					return null;
 				}
 
@@ -38,16 +38,16 @@ function Item({
 						key={singleItem?.key}
 						className="card-body-col"
 					>
-						{loading ? <Placeholder width="100%" height="20px" /> : null}
+						{loading ? <Placeholder width="100%" height="10%" /> : null}
 
 						{!isTotalRow ? (
 							<div>
-								{singleItem?.render && !loading
+								{singleItem.render && !loading
 									? singleItem.render(item)
 									: null}
 							</div>
 						) : (
-							<div className={styles.total}>{item[singleItem?.name]}</div>
+							<div className={styles.total}>{item[singleItem.name]}</div>
 						)}
 
 						{!loading && !singleItem.render ? (

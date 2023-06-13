@@ -1,9 +1,9 @@
-import CONSTANTS from '@cogoport/air-modules/constants/CONSTANTS';
 import { Loader, Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { InputController, RadioGroupController, useForm } from '@cogoport/forms';
 import { useContext } from 'react';
 
+import CONSTANTS from '../../constants/CONSTANTS';
 import useListShipmentCancellationReasons from '../../hooks/useListShipmentCancellationReasons';
 import useUpdateShipment from '../../hooks/useUpdateShipment';
 

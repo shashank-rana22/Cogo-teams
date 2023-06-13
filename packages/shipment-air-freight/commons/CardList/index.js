@@ -1,5 +1,5 @@
 import EmptyState from '@cogoport/air-modules/common/EmptyState';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import Header from './CardHeader';
 import CardItem from './Carditem';
@@ -20,13 +20,10 @@ function List({
 	isAirManifest = false,
 	numberOfLoader = 10,
 }) {
-	const keys = useMemo(() => Array(fields?.length).fill(null).map(() => Math.random()), [fields?.length]);
-	const cardKeys = useMemo(() => Array(data?.length).fill(null).map(() => Math.random()), [data?.length]);
-
 	const handleRender = () => {
 		if (loading) {
-			const loadingStates = Array.from({ length: numberOfLoader }, (_, i) => (
-				<LoadingState fields={fields} isLast={i === numberOfLoader - CHECK_LAST_ARRAY} key={keys[i]} />
+			const loadingStates = Array.from(Array.from(Array(numberOfLoader).keys())).map((i) => (
+				<LoadingState fields={fields} isLast={i === numberOfLoader - CHECK_LAST_ARRAY} key={i} />
 			));
 
 			return loadingStates;
@@ -38,13 +35,13 @@ function List({
 
 		return (
 			<>
-				{(data || []).map((item, i) => (
+				{(data).map((item, i) => (
 					<CardItem
 						item={item}
 						loading={loading}
 						fields={fields}
-						isLast={data?.length === i + INCREMENT_BY_ONE && !isAirManifest}
-						key={cardKeys[i]}
+						isLast={data.length === i + INCREMENT_BY_ONE && !isAirManifest}
+						key={item.id}
 					/>
 				))}
 			</>

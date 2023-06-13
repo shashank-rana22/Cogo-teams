@@ -2,7 +2,7 @@ import TIMELINE_EDITABLE from '../config/timelineEditable.json';
 import { getDate } from '../utils/getDate';
 
 const controls = ({ primary_service, departureDate }) => {
-	const disabledState = primary_service?.state === 'vessel_arrived'
+	const disabledState = primary_service?.state === 'flight_arrived'
 		|| !TIMELINE_EDITABLE.primary_service.state.includes(primary_service?.state);
 
 	const finalControls = [

@@ -7,7 +7,6 @@
 .label.required::after {
 	position: absolute;
 	top: 0;
-	right: -10px;
 	color: #ee3426;
 	content: "*";
 }

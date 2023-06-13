@@ -1,6 +1,6 @@
-import CONSTANTS from '@cogoport/air-modules/constants/CONSTANTS';
 import React from 'react';
 
+import CONSTANTS from '../../../constants/CONSTANTS';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 

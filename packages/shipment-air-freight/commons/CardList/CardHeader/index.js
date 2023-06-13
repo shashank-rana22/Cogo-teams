@@ -1,4 +1,4 @@
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import Field from './Field';
 import styles from './styles.module.css';
@@ -9,19 +9,17 @@ function CardHeader({
 	sort = {},
 	setSort = () => {},
 }) {
-	const keys = useMemo(() => Array(fields?.length).fill(null).map(() => Math.random()), [fields?.length]);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.row}>
-				{fields?.map((field, index) => {
+				{fields?.map((field = {}) => {
 					if (field.show === false) {
 						return null;
 					}
 
 					return (
 						<Field
-							key={keys[index]}
+							key={field.name}
 							field={field}
 							showCode={showCode}
 							sort={sort}

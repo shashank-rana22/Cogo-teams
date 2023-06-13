@@ -1,6 +1,7 @@
-import CONSTANTS from '@cogoport/air-modules/constants/CONSTANTS';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useSelector } from '@cogoport/store';
+
+import CONSTANTS from '../constants/CONSTANTS';
 
 const geo = getGeoConstants();
 

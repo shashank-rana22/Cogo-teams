@@ -1,8 +1,10 @@
-import CONSTANTS from '@cogoport/air-modules/constants/CONSTANTS';
-import { Tooltip, Toast, Button } from '@cogoport/components';
+import { Tooltip, Button } from '@cogoport/components';
 import { IcMCopy } from '@cogoport/icons-react';
 import { startCase, upperCase, format } from '@cogoport/utils';
 import { v4 as uuid } from 'uuid';
+
+import CONSTANTS from '../../../constants/CONSTANTS';
+import copyToClipboard from '../../utils/copyToClipboard';
 
 import styles from './styles.module.css';
 
@@ -10,21 +12,22 @@ const {
 	ZEROTH_INDEX,
 	AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO,
 	EMPTY_LIST_LENGTH,
-	NON_EMPTY_LIST_LENGTH,
 } = CONSTANTS;
 
+const PACKAGES_MIN_LENGTH = 1;
 const REQUIRED_DECIMAL_DIGIT = 2;
 const SINGLE_PACKAGE = 1;
 
-export const renderValue = (label, detail) => {
-	const { packages = [] } = detail || {};
+export const renderValue = (label, detail = {}) => {
+	const { packages = [] } = detail;
 
 	const commodityDataDetails = detail.commodity_details?.[ZEROTH_INDEX] || {};
 
 	const valueForInput = Array.isArray(packages)
-				&& packages?.length > EMPTY_LIST_LENGTH ? packages[ZEROTH_INDEX] : null;
+				&& !!packages?.length ? packages[ZEROTH_INDEX] : null;
 
-	const chargableWeight = Math.max(detail.volume * AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO, detail?.weight);
+	const chargableWeight = Number(detail?.chargeable_weight)
+					|| Math.max(detail.volume * AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO, detail?.weight);
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -37,7 +40,7 @@ export const renderValue = (label, detail) => {
 	const volume = ` ${detail.volume} cbm`;
 
 	const packageDetails = () => {
-		if (packages?.length > NON_EMPTY_LIST_LENGTH) {
+		if (packages?.length > PACKAGES_MIN_LENGTH) {
 			return (
 				<Tooltip
 					placement="bottom"
@@ -91,16 +94,6 @@ export const renderValue = (label, detail) => {
 			)}`}
 		</div>
 	);
-
-	const copyToClipboard = async (text) => {
-		const modifiedText = text.replace(/-/g, '');
-		try {
-			await navigator.clipboard.writeText(modifiedText);
-			Toast.success('MAWB Number copied to clipboard');
-		} catch (err) {
-			Toast.error('Failed to copy MAWB Number');
-		}
-	};
 
 	switch (label) {
 		case 'airline':
@@ -179,7 +172,7 @@ export const renderValue = (label, detail) => {
 					</span>
 					<Button
 						className="secondary sm"
-						onClick={() => copyToClipboard(detail?.master_airway_bill_number || '')}
+						onClick={() => copyToClipboard(detail?.master_airway_bill_number || '', 'MAWB Number')}
 					>
 						<IcMCopy fill="#f9ae64" />
 					</Button>
