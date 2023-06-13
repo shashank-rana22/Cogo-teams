@@ -5,7 +5,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf, IcMImage, IcMOverflowDot } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { startCase } from '@cogoport/utils';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import useListOrganizationDocuments from '../../../../hooks/useListOrganizationDocuments';
 import useUpdateOrganizationDocument from '../../../../hooks/useUpdateOrganizationDocument';
@@ -13,10 +13,7 @@ import Loader from '../Loader';
 
 import styles from './styles.module.css';
 
-const TOTAL_LOADER_KEYS = 3;
-const DEFAULT_VALUE = 0;
-const TOTAL_LOADED = 2;
-const LOADER_KEYS = Array(TOTAL_LOADER_KEYS).fill(null).map(() => Math.random());
+const LOADER_KEYS = Array(3).fill(null).map(() => Math.random());
 
 function OrganizationDocuments({
 	forModal = false,
@@ -65,11 +62,11 @@ function OrganizationDocuments({
 
 	const contentToShow = () => {
 		if (loading) {
-			return [...Array(forModal ? TOTAL_LOADER_KEYS : TOTAL_LOADED)].map((i, index) => (
+			return [...Array(forModal ? 3 : 2)].map((i, index) => (
 				<Loader key={LOADER_KEYS[index]} forModal={forModal} />
 			));
 		}
-		if (!loading && data?.list?.length === DEFAULT_VALUE) {
+		if (!loading && data?.list?.length === 0) {
 			return <EmptyState />;
 		}
 		return (
