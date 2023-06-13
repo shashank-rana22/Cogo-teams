@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 
-export default function toastApiError(err) {
+const toastApiError = (err) => {
 	let message = '';
 	if (err?.response?.data) {
 		if (err.response.data?.base) {
@@ -12,4 +12,6 @@ export default function toastApiError(err) {
 		message = err.message;
 	}
 	if (message !== 'canceled') { Toast.error(message || 'Something went wrong !!'); }
-}
+};
+
+export default toastApiError;
