@@ -2,13 +2,9 @@ import { Upload, Toast } from '@cogoport/components';
 import { IcMDocument, IcMCloudUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
-
-const END_INDEX = -1;
-const DEFAULT_VALUE = 0;
-const TOTAL_LOADED = 100;
 
 function FileUploader(props) {
 	const {
@@ -28,16 +24,16 @@ function FileUploader(props) {
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
-			setFileName([{ name: defaultValues.split('/').slice(END_INDEX).join('') }]);
+			setFileName([{ name: defaultValues.split('/').slice(-1).join('') }]);
 			setUrlStore([{
-				fileName : defaultValues.split('/').slice(END_INDEX).join(''),
+				fileName : defaultValues.split('/').slice(-1).join(''),
 				finalUrl : defaultValues,
 			}]);
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
-			const names = defaultValues.map((url) => ({ name: url?.split('/')?.slice(END_INDEX)?.join('') }));
+			const names = defaultValues.map((url) => ({ name: url?.split('/')?.slice(-1)?.join('') }));
 			const urls = defaultValues.map((url) => ({
-				fileName : url?.split('/')?.slice(END_INDEX)?.join(''),
+				fileName : url?.split('/')?.slice(-1)?.join(''),
 				finalUrl : url,
 			}));
 
@@ -46,13 +42,13 @@ function FileUploader(props) {
 		}
 		setLoading(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [defaultValues?.length > DEFAULT_VALUE]);
+	}, [defaultValues?.length > 0]);
 
 	useEffect(() => {
 		if (multiple) {
 			onChange(urlStore);
 		} else {
-			onChange(urlStore[DEFAULT_VALUE]);
+			onChange(urlStore[0]);
 		}
 	}, [multiple, urlStore, onChange]);
 
@@ -61,7 +57,7 @@ function FileUploader(props) {
 			...previousProgress,
 			[`${index}`]: (() => {
 				const { loaded, total } = file;
-				const percentCompleted = Math.floor((loaded * TOTAL_LOADED) / total);
+				const percentCompleted = Math.floor((loaded * 100) / total);
 
 				return percentCompleted;
 			})(),
@@ -90,7 +86,7 @@ function FileUploader(props) {
 			onUploadProgress: onUploadProgress(index),
 		});
 
-		const finalUrl = url.split('?')[DEFAULT_VALUE];
+		const finalUrl = url.split('?')[0];
 
 		return finalUrl;
 	};
@@ -99,7 +95,7 @@ function FileUploader(props) {
 		try {
 			setLoading(true);
 
-			if (values.length > DEFAULT_VALUE) {
+			if (values.length > 0) {
 				setProgress({});
 
 				const promises = values.map((value, index) => uploadFile(index)(value));
@@ -149,7 +145,7 @@ function FileUploader(props) {
 			/>
 
 			{loading && !isEmpty(progress) && Object.keys(progress).map((key) => (
-				<div className={styles.progress_container} key={key}>
+				<div className={styles.progress_container}>
 					<IcMDocument
 						style={{ height: '30', width: '30', color: '#2C3E50' }}
 					/>
