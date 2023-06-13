@@ -1,4 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
