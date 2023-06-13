@@ -26,10 +26,10 @@
 	}
 
 	.fm_rejection_icon {
-		cursor: pointer;
-		margin-left: 10px;
 		margin-top: 5px;
+		margin-left: 10px;
 		color: #f00;
+		cursor: pointer;
 	}
 }
 
