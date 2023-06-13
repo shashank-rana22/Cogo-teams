@@ -1,0 +1,100 @@
+import { Button, Modal } from '@cogoport/components';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { useSelector } from '@cogoport/store';
+import React from 'react';
+
+import useEditLineItems from '../../../../../../../../../hooks/useEditLineItems';
+
+import Info from './Info';
+import Layout from './Layout';
+import styles from './styles.module.css';
+
+function EditInvoice({
+	show = 'false',
+	onClose,
+	invoice = {},
+	refetch = () => {},
+	shipment_data = {},
+}) {
+	const { role_ids, isMobile } = useSelector(({ profile, general }) => ({
+		role_ids : profile?.partner?.user_role_ids,
+		isMobile : general?.isMobile,
+	}));
+
+	const geo = getGeoConstants();
+
+	const isFclFreight = [geo.uuid.admin_id, geo.uuid.super_admin_id].some((ele) => role_ids?.includes(ele))
+	&& shipment_data?.shipment_type === 'fcl_freight';
+
+	const {
+		control,
+		controls,
+		loading,
+		onCreate,
+		handleSubmit,
+		// customValues,
+		onError,
+		errors,
+		isDirty,
+	} = useEditLineItems({
+		invoice,
+		onClose,
+		refetch,
+		isFclFreight,
+		shipment_data,
+		info: <Info />,
+	});
+
+	return (
+		<Modal
+			onClose={onClose}
+			show={show}
+			size="xl"
+			styles={{
+				dialog: { width: isMobile ? 360 : 1030 },
+			}}
+		>
+			<div className={styles.container}>
+				<div className={styles.forms}>
+					<div className={styles.invoice_value}>
+						Invoice Value -
+						<span className="amount">
+							{formatAmount({
+								amount   : invoice?.invoicing_party_total,
+								currency : invoice?.invoice_total_currency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 2,
+								},
+							})}
+						</span>
+					</div>
+
+					<Layout
+						control={control}
+						fields={controls}
+						errors={errors}
+					/>
+				</div>
+
+				<div className={styles.button_container}>
+					<Button className="secondary md" onClick={onClose} disabled={loading}>
+						Cancel
+					</Button>
+
+					<Button
+						className="primary md save"
+						onClick={handleSubmit(onCreate, onError)}
+						disabled={loading || !isDirty}
+					>
+						Save
+					</Button>
+				</div>
+			</div>
+		</Modal>
+	);
+}
+
+export default EditInvoice;
