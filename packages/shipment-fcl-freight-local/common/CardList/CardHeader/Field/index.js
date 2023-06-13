@@ -1,16 +1,15 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo, IcMArrowRotateDown } from '@cogoport/icons-react';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import styles from './styles.module.css';
 
-const STYLES_COL = {
+const stylesCol = {
 	display    : 'flex',
 	flex       : 1,
 	alignItems : 'center',
 	padding    : '0 4px',
 };
-const FIRST_INDEX = 0;
 
 function Field({
 	field = {},
@@ -37,14 +36,14 @@ function Field({
 		setShow(!show);
 	};
 
-	const sortingKey = field.sorting ? Object?.keys(field.sorting)?.[FIRST_INDEX] : null;
+	const sortingKey = field.sorting ? Object?.keys(field.sorting)?.[0] : null;
 
 	const showSortingType =	field.sorting && field.sorting[sortingKey]
-	&& field.sorting[sortingKey] === Object?.keys(sort)?.[FIRST_INDEX];
+	&& field.sorting[sortingKey] === Object?.keys(sort)?.[0];
 
 	return (
 		<div
-			style={field.hasStyle ? field.styles : STYLES_COL}
+			style={field.hasStyle ? field.styles : stylesCol}
 			key={field?.key || field?.label}
 		>
 			<div className={styles.card_title}>

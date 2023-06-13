@@ -1,12 +1,13 @@
 import { cl, Placeholder } from '@cogoport/components';
+import React from 'react';
 
 import getValue from '../../../../../../../../utils/getValue';
 
 import styles from './styles.module.css';
 
-const STYLES_COL = { padding: '0 4px' };
-
 function Item({ item = {}, fields = [], handleClick = () => {}, loading = false }) {
+	const stylesCol = { padding: '0 4px' };
+
 	return (
 		<div
 			onClick={handleClick}
@@ -21,7 +22,7 @@ function Item({ item = {}, fields = [], handleClick = () => {}, loading = false 
 		>
 			{fields.map((singleItem) => (
 				<div
-					style={singleItem.hasStyle ? singleItem.styles : STYLES_COL}
+					style={singleItem.hasStyle ? singleItem.styles : stylesCol}
 					key={singleItem?.key}
 				>
 					{loading && <Placeholder width="100%" height="20px" />}

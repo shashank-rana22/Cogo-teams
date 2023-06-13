@@ -1,10 +1,9 @@
 import { Placeholder } from '@cogoport/components';
+import React from 'react';
 
 import getValue from '../../../utils/getValue';
 
 import styles from './styles.module.css';
-
-const STYLES_COL = { padding: '0px 4px' };
 
 function Item({
 	item = {},
@@ -14,6 +13,8 @@ function Item({
 	disabled = false,
 	isLast = false,
 }) {
+	const stylesCol = { padding: '0px 4px' };
+
 	return (
 		<div
 			style={{
@@ -33,7 +34,7 @@ function Item({
 
 				return (
 					<div
-						style={singleItem.hasStyle ? singleItem.styles : STYLES_COL}
+						style={singleItem.hasStyle ? singleItem.styles : stylesCol}
 						key={singleItem?.key}
 						className="card-body-col"
 					>

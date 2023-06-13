@@ -1,6 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import { IcMInfo } from '@cogoport/icons-react';
 import React from 'react';
+
 import STATUS_ITEMS from '../../../constants/STATUS_ITEMS';
 
 import Item from './Item';

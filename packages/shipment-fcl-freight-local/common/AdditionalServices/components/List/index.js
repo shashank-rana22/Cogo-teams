@@ -1,7 +1,7 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
-import { useState, useContext } from 'react';
+import React, { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
@@ -16,9 +16,6 @@ import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
-const DEFAULT_PAGE_LIMIT = 8;
-const TOTAL_PAGE_LIMIT = 16;
-
 function List({ isSeller = false }) {
 	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(
 		ShipmentDetailContext,
@@ -26,7 +23,7 @@ function List({ isSeller = false }) {
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
-	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
+	const [pageLimit, setPageLimit] = useState(8);
 
 	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
 		shipment_data,
@@ -82,14 +79,14 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
-			{totalCount > DEFAULT_PAGE_LIMIT ? (
+			{totalCount > 8 ? (
 				<div className={styles.show_more}>
-					{pageLimit > DEFAULT_PAGE_LIMIT
+					{pageLimit > 8
 						? 	(
 							<Button
 								size="md"
 								themeType="link"
-								onClick={() => setPageLimit(DEFAULT_PAGE_LIMIT)}
+								onClick={() => setPageLimit(8)}
 							>
 								Show Less
 							</Button>
@@ -97,7 +94,7 @@ function List({ isSeller = false }) {
 							<Button
 								size="md"
 								themeType="link"
-								onClick={() => setPageLimit(TOTAL_PAGE_LIMIT)}
+								onClick={() => setPageLimit(16)}
 							>
 								Show More
 							</Button>
