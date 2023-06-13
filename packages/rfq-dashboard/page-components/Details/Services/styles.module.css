@@ -46,6 +46,7 @@
 .ports_section {
 	z-index: 0;
 }
-.cards{
+
+.cards {
 	overflow-y: scroll;
 }

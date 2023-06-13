@@ -1,13 +1,13 @@
-.margin_value{
-	color: #EE3425;
+.margin_value {
+	color: #ee3425;
 }
 
 .buttons_container {
 	display: flex;
 	justify-content: flex-end;
 
-	:global{
-		.ui_button_container{
+	:global {
+		.ui_button_container {
 			margin: 6px;
 		}
 	}

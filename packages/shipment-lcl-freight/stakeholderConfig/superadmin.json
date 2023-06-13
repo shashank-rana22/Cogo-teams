@@ -17,7 +17,8 @@
         "tab_title":"Timeline and Tasks",
         "show_booking_req":true,
         "checked_show_my_tasks":false,
-        "is_task_assigned":false
+        "is_task_assigned":false,
+        "can_reassign_task":true
     },
     "purchase":{
         "tab_title":"Purchase Invoice"
