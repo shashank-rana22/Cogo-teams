@@ -46,6 +46,11 @@
 			background: #abcd62;
 		}
 	}
+
+	:hover {
+		cursor: pointer;
+		background: #fffce6;
+	}
 }
 
 .saved_div {
@@ -81,6 +86,10 @@
 	height: 150px;
 	background-color: #fffce6;
 	border-radius: 12px 12px 0 0;
+
+	:hover {
+		background: unset;
+	}
 }
 
 .topics,

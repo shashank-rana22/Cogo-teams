@@ -1,6 +1,7 @@
 import { Pill, Carousel } from '@cogoport/components';
 import { IcMStarfull } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 import useHandleCourseDetails from './useHandleCourseDetails';
@@ -63,7 +64,7 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 			</div>
 
 			<div className={styles.description}>
-				<b>About the course &nbsp;:&nbsp;</b>
+				<strong>About the course &nbsp;:&nbsp;</strong>
 				{description}
 			</div>
 
@@ -74,7 +75,9 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 			))}
 
 			<div className={styles.instructions}>
-				<div className={styles.instruction_head}><b>In this course, you will learn (Objectives)</b></div>
+				<div className={styles.instruction_head}>
+					<strong>In this course, you will learn (Objectives)</strong>
+				</div>
 
 				{course_objectives?.map((item, index) => (
 					<div key={item}>
@@ -105,8 +108,11 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 
 								return (
 									<div key={key}>
-										{course_stats?.[apiKey]
-										|| getModulesCount({ course_modules, type: 'modules' })}
+										<strong>
+											{course_stats?.[apiKey]
+										|| getModulesCount({ course_modules, type: key })}
+										</strong>
+										{' '}
 										{label}
 									</div>
 								);
@@ -122,7 +128,7 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 								{practice_tests}
 								&nbsp;Practice Tests
 							</div>
-							<div><b>{course_completion_rewards_details?.[FIRST_INDEX]}</b></div>
+							<div><strong>{course_completion_rewards_details?.[FIRST_INDEX]}</strong></div>
 						</div>
 					</div>
 				</div>
@@ -146,7 +152,7 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 								{course_completion_unit}
 							</div>
 
-							{viewType !== 'preview' ? (
+							{!isEmpty(course_content_stats) ? (
 								<>
 									<FormatTime value={video_duration} type="Videos" />
 
@@ -165,7 +171,7 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 					</div>
 				</div>
 
-				{viewType !== 'preview' ? (
+				{!isEmpty(instructorData) && !isEmpty(CAROUSELDATA) ? (
 					<div className={styles.card} style={{ width: '30%' }}>
 						<div className={styles.card_title}>Course Creator</div>
 						<div className={styles.card_details}>
@@ -177,6 +183,7 @@ function CourseDetails({ data = {}, instructorData = [], viewType = 'normal' }) 
 									alt="resume.png"
 								/>
 							</div>
+
 							<div className={styles.carasol}>
 								<Carousel
 									slides={CAROUSELDATA}
