@@ -15,8 +15,9 @@ import styles from './styles.module.css';
 const TAB_MAPPING = [
 	{ name: 'approval', title: 'Approval' },
 ];
-const DEFAULT_SIZE = 0;
-const DEFAULT_PAGE = 1;
+const DEFAULT_PAGE_SIZE = 0;
+const DEFAULT_TOTAL_ITEM = 0;
+const DEFAULT_CURRENT_PAGE = 1;
 
 function Content(props) {
 	const { activeTab, setActiveTab, filterStore } = props;
@@ -46,8 +47,8 @@ function Content(props) {
 	const handleProfitability = () => {
 		const profitability = getValues('minimum_profitability');
 
-		const id = platformData?.list?.[DEFAULT_SIZE]
-			.platform_config_constant_mappings?.[DEFAULT_SIZE]?.id;
+		const id = platformData?.list?.[DEFAULT_PAGE_SIZE]
+			.platform_config_constant_mappings?.[DEFAULT_PAGE_SIZE]?.id;
 
 		const payload = {
 			id,
@@ -147,9 +148,9 @@ function Content(props) {
 				<div className={styles.pagination_container}>
 					<Pagination
 						className="md"
-						totalItems={data?.total_count || DEFAULT_SIZE}
-						currentPage={page || DEFAULT_PAGE}
-						pageSize={data?.page_limit || DEFAULT_SIZE}
+						totalItems={data?.total_count || DEFAULT_TOTAL_ITEM}
+						currentPage={page || DEFAULT_CURRENT_PAGE}
+						pageSize={data?.page_limit || DEFAULT_PAGE_SIZE}
 						onPageChange={setPage}
 						type="table"
 					/>
