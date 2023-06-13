@@ -1,7 +1,6 @@
 import { ResponsiveBar } from '@cogoport/charts/bar';
-
-import { getAmountInLakhCrK } from '../../../common/getAmountInLakhCrK';
-import { getAmountLineChartInLakh } from '../../../common/getAmountLineChartInLakh';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
@@ -37,7 +36,16 @@ function MonthBarChart({ monthlyData }:MonthlyBarChartInterface) {
 					tickSize     : 0,
 					tickPadding  : -10,
 					tickRotation : 0,
-					format       : (value) => `${getAmountInLakhCrK(value, 'INR')}`,
+					format       : (value) => `${formatAmount({
+						amount   : value,
+						currency : GLOBAL_CONSTANTS.currency_code?.INR,
+						options  : {
+							currencyDisplay : 'code',
+							style           : 'currency',
+							notation        : 'compact',
+							compactDisplay  : 'short',
+						},
+					})}`,
 				}}
 				layers={['grid', 'axes', 'bars', 'markers', 'legends',
 					({ bars }) => (
@@ -56,7 +64,15 @@ function MonthBarChart({ monthlyData }:MonthlyBarChartInterface) {
 										fill             : '#333',
 									}}
 								>
-									{getAmountLineChartInLakh(bar?.data?.value || 0)}
+									{bar?.data?.value ? formatAmount({
+										amount  : bar?.data?.value.toString(),
+										options : {
+											currencyDisplay : 'code',
+											style           : 'decimal',
+											notation        : 'compact',
+											compactDisplay  : 'short',
+										},
+									}) : null}
 								</text>
 							))}
 						</g>
