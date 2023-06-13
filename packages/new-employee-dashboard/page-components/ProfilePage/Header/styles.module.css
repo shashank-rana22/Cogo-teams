@@ -1,0 +1,27 @@
+.container {
+	display: flex;
+	justify-content: space-between;
+}
+
+.profile {
+	display: flex;
+}
+
+.name {
+	margin-top: 18px;
+	font-size: 24px;
+	font-weight: 600;
+}
+
+.role {
+	font-size: 16px;
+}
+
+.emp_code {
+	display: flex;
+	margin-top: 16px;
+}
+
+.button_container {
+	display: flex;
+}

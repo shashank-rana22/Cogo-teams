@@ -1,0 +1,41 @@
+.container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding-bottom: 16px;
+	border-bottom: 1px solid #e0e0e0;
+
+	:global {
+		.ui_input_container {
+			width: 500px;
+		}
+
+		.ui_input_control {
+			font-size: 14px !important;
+			font-weight: 400;
+		}
+	}
+}
+
+.button_container {
+	display: flex;
+	align-items: center;
+}
+
+.title {
+	padding: 10px;
+	margin-right: 24px;
+	font-size: 20px;
+	font-weight: 600;
+	cursor: pointer;
+}
+
+.profile {
+	display: flex;
+	align-items: center;
+}
+
+.centered {
+	margin: 0;
+	margin-left: 6px;
+}
