@@ -30,10 +30,10 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 	const { invoiceStatus, id, entityCode, irnGeneratedAt } = itemData || {};
 
 	const isAfterADay =	irnGeneratedAt !== null
-		? irnGeneratedAt + TIME_VALUE >= Date.now()
+		? Number(irnGeneratedAt) + TIME_VALUE >= Date.now()
 		: false;
 
-	const { postToSage, loading } = usePostToSage(id);
+	const { postToSage, loading } = usePostToSage({ id });
 
 	const { labels } = CogoportEntity[entityCode] || {};
 
