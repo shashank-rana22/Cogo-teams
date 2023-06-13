@@ -1,10 +1,9 @@
 import { startCase } from '@cogoport/utils';
+import React from 'react';
 
 import { renderValue } from '../../../CargoDetails/RenderCargoPills/renderValue';
 
 import styles from './styles.module.css';
-
-const DEFAULT_VALUE = 1;
 
 function ConatinerDetails({ containerDetails = [], cargoDetails = {} }) {
 	return (
@@ -14,7 +13,7 @@ function ConatinerDetails({ containerDetails = [], cargoDetails = {} }) {
 					<div className={styles.container_item}>
 						<div className={styles.container_description}>
 							<div className={styles.serial_number}>
-								{index + DEFAULT_VALUE}
+								{index + 1}
 								.
 							</div>
 							<div className={styles.container_number}>{item?.container_number}</div>
