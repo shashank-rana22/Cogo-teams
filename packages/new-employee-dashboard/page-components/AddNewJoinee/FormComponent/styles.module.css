@@ -1,0 +1,70 @@
+.form {
+	padding: 6px 30px;
+	margin: 20px;
+	background-color: #fff;
+}
+
+.header {
+	margin-left: 4px;
+	font-size: 18px;
+	font-weight: 700;
+}
+
+.header_flex {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.back_arrow {
+	display: flex;
+	align-items: center;
+	padding-right: 8px;
+}
+
+.label {
+	padding: 8px 0 6px;
+}
+
+.single_field {
+	width: 30%;
+	margin: 12px 32px 0 8px;
+}
+
+.seperator {
+	padding: 0 0 30px;
+	margin-bottom: 8px;
+	border-bottom: 1px dashed #cedcde;
+}
+
+.form_header {
+	padding: 18px 0 10px;
+	font-size: 14px;
+	font-weight: 800;
+}
+
+.personal_details_container {
+	display: flex;
+}
+
+.hr_details_container {
+	display: flex;
+	width: 100%;
+	border-bottom: none;
+}
+
+.employement_details_container {
+	display: flex;
+	flex-wrap: wrap;
+	width: 100%;
+}
+
+.button_container {
+	display: flex;
+	justify-content: flex-end;
+	padding: 20px;
+}
+
+.error_message {
+	color: #ee3425;
+}
