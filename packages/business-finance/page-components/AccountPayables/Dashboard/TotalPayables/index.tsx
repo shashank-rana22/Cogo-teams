@@ -68,6 +68,7 @@ function TotalPayables({
 												options : {
 													currencyDisplay : 'code',
 													style           : 'currency',
+													notation        : 'compact',
 												},
 											})}
 											<div className={styles.inline_style}>
