@@ -1,12 +1,19 @@
-import { useState } from 'react';
-
 import Header from '../../../commons/CommonHeader';
+import StyledTable from '../../../commons/StyledTable';
+
+import useSubChapter from './useSubChapter';
+
+const ADD_BUTTON_TEXT = 'Sub Chapter';
+const TABLE_EMPTY_TEXT = 'No sub chapters created yet';
 
 function SubChapter() {
-	const [search, setSearch] = useState('');
+	const { columns, search, setSearch } = useSubChapter();
+
 	return (
 		<div>
-			<Header setSearch={setSearch} search={search} label="Sub Chapter" />
+			<Header setSearch={setSearch} search={search} label={ADD_BUTTON_TEXT} />
+
+			<StyledTable columns={columns} data={[{}]} emptyText={TABLE_EMPTY_TEXT} loading={false} />
 		</div>
 	);
 }
