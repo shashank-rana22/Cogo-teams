@@ -9,7 +9,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const type = ['country', 'trade', 'seaport'];
+const type = ['seaport'];
 
 const sourceTypes = [
 	{
@@ -54,9 +54,9 @@ function Filters({ filters, setFilters }) {
 						placeholder="Origin"
 						{...originLocationOptions}
 						isClearable
-						value={filters?.origin_location_id}
+						value={filters?.origin_port_id}
 						onChange={(value) => {
-							setFilters((prev) => ({ ...prev, origin_location_id: value, page: 1 }));
+							setFilters((prev) => ({ ...prev, origin_port_id: value, page: 1 }));
 						}}
 					/>
 				</div>
@@ -66,9 +66,9 @@ function Filters({ filters, setFilters }) {
 						placeholder="Destination"
 						isClearable
 						{...originDestinationOptions}
-						value={filters?.destination_location_id}
+						value={filters?.destination_port_id}
 						onChange={(value) => {
-							setFilters((prev) => ({ ...prev, destination_location_id: value, page: 1 }));
+							setFilters((prev) => ({ ...prev, destination_port_id: value, page: 1 }));
 						}}
 					/>
 				</div>

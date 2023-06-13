@@ -10,14 +10,14 @@ const useGetFeedbackList = ({ filters, setFilters }) => {
 	Object.keys(restFilters).forEach((key) => {
 		if (restFilters[key]) {
 			if (key === 'dataRange') {
-				FINAL_FILTERS.validity_start_greater_than = restFilters[key].startDate || undefined;
-				FINAL_FILTERS.validity_end_less_than = restFilters[key].endDate || undefined;
+				FINAL_FILTERS.created_at_greater_than = restFilters[key].startDate || undefined;
+				FINAL_FILTERS.created_at_less_than = restFilters[key].endDate || undefined;
 			} else { FINAL_FILTERS[key] = restFilters[key]; }
 		}
 	});
 
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'list_fcl_freight_rate_feedbacks',
+		url    : 'list_fcl_freight_rate_deviation',
 		method : 'GET',
 		params : {
 			filters                  : FINAL_FILTERS,
