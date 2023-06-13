@@ -1,3 +1,5 @@
+import setDateHours from '@cogoport/core/helpers/setDateHours';
+
 import NUMERICAL_VALUES from '../config/NUMERICAL_VALUES.json';
 import TABS_CONFIG from '../config/TABS_CONFIG';
 import FCL_CFS from '../config/tabSpecificPayload/FCL_CFS.json';
@@ -13,11 +15,11 @@ const timezoneOffset = new Date().getTimezoneOffset()
 	* NUMERICAL_VALUES.MILLISECONDS_IN_ONE_SECOND;
 
 const getPayloadDate = (daysLater = '') => {
-	const daysLaterDate = new Date();
+	let daysLaterDate = new Date();
 
-	daysLaterDate.setDate(daysLaterDate.getDate() + NUMERICAL_VALUES.DAYS_LATER_DATE[daysLater]);
+	daysLaterDate.setDate(daysLaterDate.getDate() + NUMERICAL_VALUES.DAYS_LATER[daysLater]);
 	daysLaterDate.setTime(daysLaterDate.getTime() - timezoneOffset);
-	daysLaterDate.setHours(...NUMERICAL_VALUES.DAY_END_TIME);
+	daysLaterDate = setDateHours({ date: daysLaterDate, time: '23:59:59:999' });
 
 	return daysLaterDate;
 };
@@ -59,7 +61,7 @@ export default function getListBookingDeskShipmentsPayload({
 
 	const tabSpecificPayload = (SHIPMENT_SPECIFIC_PAYLOAD[`${stepperTab}_${segmentedTab}`] || {})[activeTab] || {};
 
-	const oneDayLater = getPayloadDate('DAYS_LATER_DATE');
+	const oneDayLater = getPayloadDate('ONE_DAY_LATER');
 	const threeDaysLater = getPayloadDate('THREE_DAYS_LATER');
 
 	const criticalPayload = activeTab === 'container_pick_up'

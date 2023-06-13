@@ -1,10 +1,12 @@
+import setDateHours from '@cogoport/core/helpers/setDateHours';
+
 import NUMERICAL_VALUES from '../config/NUMERICAL_VALUES.json';
 
 const getDaysLaterDate = (daysLater = '') => {
-	const daysLaterDate = new Date();
+	let daysLaterDate = new Date();
 
-	daysLaterDate.setDate(daysLaterDate.getDate() + NUMERICAL_VALUES.DAYS_LATER_DATE[daysLater]);
-	daysLaterDate.setHours(...NUMERICAL_VALUES.DAY_END_TIME);
+	daysLaterDate.setDate(daysLaterDate.getDate() + NUMERICAL_VALUES.DAYS_LATER[daysLater]);
+	daysLaterDate = setDateHours({ date: daysLaterDate, time: '23:59:59:999' });
 
 	return daysLaterDate;
 };
