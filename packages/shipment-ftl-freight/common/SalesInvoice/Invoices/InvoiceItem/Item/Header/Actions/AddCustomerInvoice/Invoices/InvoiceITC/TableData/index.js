@@ -5,7 +5,7 @@ import { getLineItems } from '../getLineItems';
 import { getChargesData } from '../getOtherData';
 
 function TableData({ customData = {} }) {
-	const { lineItems, lineItemsKeysMapping } = getLineItems({ customData });
+	const { lineItems, LINE_ITEMS_KEYS_MAPPING } = getLineItems({ customData });
 	const {
 		total_loading_weight = '',
 		total_charged_weight = '',
@@ -99,7 +99,7 @@ function TableData({ customData = {} }) {
 
 			{lineItems.map((lineItem) => (
 				<tr key={lineItem.id}>
-					{Object.keys(lineItemsKeysMapping).map((key) => (
+					{Object.keys(LINE_ITEMS_KEYS_MAPPING).map((key) => (
 						<td style={{ border: '2px solid black', padding: '1px' }} key={key}>
 							{lineItem[key]}
 						</td>

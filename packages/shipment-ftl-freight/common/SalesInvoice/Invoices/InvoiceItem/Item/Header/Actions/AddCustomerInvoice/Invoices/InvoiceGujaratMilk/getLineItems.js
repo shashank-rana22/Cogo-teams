@@ -1,7 +1,7 @@
 import { lineItemsHelper } from '../../utils/lineItemsHelper';
 import { customerToServiceDescription } from '../../utils/serviceDescriptionMappings';
 
-const lineItemsKeysMapping = {
+const LINE_ITEMS_KEYS_MAPPING = {
 	service_description : 'service_description',
 	description         : 'descritpion',
 	sac_code            : 'sac_code',
@@ -21,7 +21,7 @@ const lineItemsKeysMapping = {
 export const getLineItems = ({ customData = {}, importerExporterId = '' }) => {
 	const lineItems = lineItemsHelper({
 		lineItems: customData?.line_items?.line_items,
-		lineItemsKeysMapping,
+		LINE_ITEMS_KEYS_MAPPING,
 		customData,
 	});
 
@@ -31,10 +31,10 @@ export const getLineItems = ({ customData = {}, importerExporterId = '' }) => {
 		newItem.description = 'Fixed';
 	});
 
-	return { lineItems, lineItemsKeysMapping };
+	return { lineItems, LINE_ITEMS_KEYS_MAPPING };
 };
 
-const annexureKeyMappings = {
+const ANNEXURE_KEY_MAPPINGS = {
 	trip_id        : 'shipment_id',
 	truck_number   : 'truck_no',
 	from_town      : 'from_town',
@@ -51,10 +51,10 @@ export const getAnnexureData = ({ customData = {} }) => {
 		? [customData?.annexure]
 		: customData?.annexure;
 	const annexureItems = lineItemsHelper({
-		lineItems            : annexure,
-		lineItemsKeysMapping : annexureKeyMappings,
+		lineItems               : annexure,
+		LINE_ITEMS_KEYS_MAPPING : ANNEXURE_KEY_MAPPINGS,
 		customData,
 	});
 
-	return { annexureItems, annexureKeyMappings };
+	return { annexureItems, ANNEXURE_KEY_MAPPINGS };
 };

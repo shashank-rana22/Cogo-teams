@@ -2,7 +2,7 @@ import { getLineItems } from '../getLineItems';
 import { getChargesData } from '../getOtherData';
 
 function TableRow({ customData = {}, importerExporterId = '' }) {
-	const { lineItems = [], lineItemsKeysMapping = {} } = getLineItems({
+	const { lineItems = [], LINE_ITEMS_KEYS_MAPPING = {} } = getLineItems({
 		customData,
 		importerExporterId,
 	});
@@ -86,7 +86,7 @@ function TableRow({ customData = {}, importerExporterId = '' }) {
 					<td style={{ padding: '1px', border: '1px solid black', padding: '2px' }}>
 						{index + 1}
 					</td>
-					{Object.keys(lineItemsKeysMapping).map((key) => (
+					{Object.keys(LINE_ITEMS_KEYS_MAPPING).map((key) => (
 						<td
 							style={{
 								padding    : '2px',

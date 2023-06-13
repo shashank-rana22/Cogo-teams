@@ -9,7 +9,7 @@ function Annexure({
 	total = '',
 	customData = {},
 }) {
-	const { annexureKeyMappings = {}, annexureItems = [] } = getAnnexureData({
+	const { ANNEXURE_KEY_MAPPINGS = {}, annexureItems = [] } = getAnnexureData({
 		customData,
 	});
 
@@ -46,7 +46,7 @@ function Annexure({
 			</tr>
 			{annexureItems.map((annexureItem) => (
 				<tr key={annexureItem?.id} style={{ border: '2px solid black' }}>
-					{Object.keys(annexureKeyMappings).map((key) => (
+					{Object.keys(ANNEXURE_KEY_MAPPINGS).map((key) => (
 						<td style={{ padding: '1px', border: '2px solid black' }} key={key}>
 							{annexureItem[key]}
 						</td>

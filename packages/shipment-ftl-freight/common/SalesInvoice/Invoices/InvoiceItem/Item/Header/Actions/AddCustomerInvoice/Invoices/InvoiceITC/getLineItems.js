@@ -1,6 +1,6 @@
 import { lineItemsHelper } from '../../utils/lineItemsHelper';
 
-const lineItemsKeysMapping = {
+const LINE_ITEMS_KEYS_MAPPING = {
 	si_no                : 'si_no',
 	lr_number            : 'gcn_no',
 	invoice_date         : 'gcn_date',
@@ -29,9 +29,9 @@ const lineItemsKeysMapping = {
 export const getLineItems = ({ customData = {} }) => {
 	const lineItems = lineItemsHelper({
 		lineItems: customData?.line_items?.line_items,
-		lineItemsKeysMapping,
+		LINE_ITEMS_KEYS_MAPPING,
 		customData,
 	});
 
-	return { lineItems, lineItemsKeysMapping };
+	return { lineItems, LINE_ITEMS_KEYS_MAPPING };
 };

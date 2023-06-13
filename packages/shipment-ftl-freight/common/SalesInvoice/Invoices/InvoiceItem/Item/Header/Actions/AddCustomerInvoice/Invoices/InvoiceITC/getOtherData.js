@@ -1,6 +1,6 @@
 import { getOtherDataHelper } from '../../utils/getOtherDataHelper';
 
-const otherKeysMapping = {
+const OTHER_KEYS_MAPPING = {
 	customer_name           : 'customer_name',
 	customer_gstin          : 'customer_gstin',
 	customer_address        : 'customer_address',
@@ -11,13 +11,13 @@ const otherKeysMapping = {
 export const getOtherData = ({ customData = {} }) => {
 	const finalDataObj = getOtherDataHelper({
 		customData,
-		requiredKeysMapping: otherKeysMapping,
+		requiredKeysMapping: OTHER_KEYS_MAPPING,
 	});
 
 	return finalDataObj;
 };
 
-const chargesKeysMapping = {
+const CHARGES_KEYS_MAPPING = {
 	total_loading_weight       : 'total_loading_weight',
 	total_charged_weight       : 'total_charged_weight',
 	total_unloading_weight     : 'total_unloading_weight',
@@ -38,7 +38,7 @@ const chargesKeysMapping = {
 export const getChargesData = ({ customData = {} }) => {
 	const finalDataObj = getOtherDataHelper({
 		customData          : customData?.line_items,
-		requiredKeysMapping : chargesKeysMapping,
+		requiredKeysMapping : CHARGES_KEYS_MAPPING,
 	});
 	return finalDataObj;
 };

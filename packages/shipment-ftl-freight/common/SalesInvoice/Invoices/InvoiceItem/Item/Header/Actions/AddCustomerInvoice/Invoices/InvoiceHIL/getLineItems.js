@@ -1,6 +1,6 @@
 import { lineItemsHelper } from '../../utils/lineItemsHelper';
 
-const lineItemsKeysMapping = {
+const LINE_ITEMS_KEYS_MAPPING = {
 	description   : 'description',
 	sac_code      : 'sac_code',
 	trip_id       : 'shipment_id',
@@ -24,7 +24,7 @@ const lineItemsKeysMapping = {
 export const getLineItems = ({ customData = {} }) => {
 	const lineItems = lineItemsHelper({
 		lineItems: customData?.line_items?.line_items,
-		lineItemsKeysMapping,
+		LINE_ITEMS_KEYS_MAPPING,
 		customData,
 	});
 
@@ -33,5 +33,5 @@ export const getLineItems = ({ customData = {} }) => {
 		newItem.description = 'Fixed';
 	});
 
-	return { lineItems, lineItemsKeysMapping };
+	return { lineItems, LINE_ITEMS_KEYS_MAPPING };
 };

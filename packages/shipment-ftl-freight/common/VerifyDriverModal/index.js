@@ -10,7 +10,7 @@ import AddOrganizationPoc from './AddPoc';
 import useCreateOrganizationPoc from './AddPoc/hooks/useCreateOrganizationPoc';
 import styles from './styles.module.css';
 
-const SkeletonGroup = [1, 2, 3].map((item) => (
+const SkeletonGroup = ['A', 'B', 'C'].map((item) => (
 	<div key={item} height="100px" width="100%" />
 ));
 

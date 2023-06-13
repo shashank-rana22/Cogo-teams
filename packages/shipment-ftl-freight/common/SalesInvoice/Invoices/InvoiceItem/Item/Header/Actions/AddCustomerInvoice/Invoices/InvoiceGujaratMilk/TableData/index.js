@@ -14,11 +14,11 @@ function TableData({ customData = {}, importerExporterId }) {
 		total,
 	} = getChargesData({ customData });
 	const amount = finalAmountInWords(total);
-	const { lineItems = [], lineItemsKeysMapping = {} } = getLineItems({
+	const { lineItems = [], LINE_ITEMS_KEYS_MAPPING = {} } = getLineItems({
 		customData,
 		importerExporterId,
 	});
-	const { annexureItems = [], annexureKeyMappings = {} } = getAnnexureData({
+	const { annexureItems = [], ANNEXURE_KEY_MAPPINGS = {} } = getAnnexureData({
 		customData,
 	});
 	return (
@@ -60,7 +60,7 @@ function TableData({ customData = {}, importerExporterId }) {
 				</tr>
 				{annexureItems.map((lineItem) => (
 					<tr key={lineItem?.id} style={{ border: '2px solid black' }}>
-						{Object.keys(annexureKeyMappings).map((key) => (
+						{Object.keys(ANNEXURE_KEY_MAPPINGS).map((key) => (
 							<td
 								colSpan="2"
 								style={{
@@ -139,10 +139,10 @@ function TableData({ customData = {}, importerExporterId }) {
 						<td style={{ padding: '1px', border: '2px solid black' }}>
 							{index + 1}
 						</td>
-						{Object.keys(lineItemsKeysMapping).map((key, idx) => (
+						{Object.keys(LINE_ITEMS_KEYS_MAPPING).map((key, idx) => (
 							<td
 								colSpan={
-									idx === Object.keys(lineItemsKeysMapping).length - 1
+									idx === Object.keys(LINE_ITEMS_KEYS_MAPPING).length - 1
 										? '5'
 										: ''
 								}

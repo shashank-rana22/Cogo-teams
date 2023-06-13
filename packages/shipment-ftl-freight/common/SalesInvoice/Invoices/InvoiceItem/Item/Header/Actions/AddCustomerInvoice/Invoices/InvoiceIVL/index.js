@@ -17,7 +17,7 @@ function InvoiceIVL({
 }) {
 	const tradeParty = tradePartyData?.list?.[0] || {};
 	const { billing_address = {} } = invoice;
-	const { lineItems, lineItemsKeysMapping } = getLineItems({ customData });
+	const { lineItems, LINE_ITEMS_KEYS_MAPPING } = getLineItems({ customData });
 	const {
 		sub_total = '',
 		igst_amount = '',
@@ -68,7 +68,7 @@ function InvoiceIVL({
 					</tr>
 					{lineItems?.map((lineItemObj) => (
 						<tr key={lineItemObj.id} style={{ border: '2px solid black' }}>
-							{Object.keys(lineItemsKeysMapping).map((key) => (
+							{Object.keys(LINE_ITEMS_KEYS_MAPPING).map((key) => (
 								<td key={key} style={{ border: '2px solid black', padding: '1px' }}>
 									{lineItemObj[key]}
 								</td>
