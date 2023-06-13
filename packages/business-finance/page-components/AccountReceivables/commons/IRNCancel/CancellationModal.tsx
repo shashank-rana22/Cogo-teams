@@ -53,9 +53,9 @@ function CancellationModal({
 	});
 
 	const mapping: Record<string, { key: string }> = {
-		agreementNumber    : { key: 'AGREEMENT_NUMBER' },
-		agreementPdfFile  : { key: 'AGREEMENT_PDF_FILE' },
-		agreementDate      : { key: 'AGREEMENT_DATE' },
+		agreementNumber     : { key: 'AGREEMENT_NUMBER' },
+		agreementPdfFile    : { key: 'AGREEMENT_PDF_FILE' },
+		agreementDate       : { key: 'AGREEMENT_DATE' },
 		E_invoice_date      : { key: 'E_INVOICE_DATE' },
 		Cancellation_reason : { key: 'CANCELLATION_REASON' },
 	};
