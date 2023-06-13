@@ -18,7 +18,7 @@ type ItemData = {
 	id?: string;
 	invoiceNumber?: string;
 	invoiceDate?: string;
-}
+};
 interface CancelModal {
 	itemData?: ItemData;
 	showCancellationModal?: boolean;
@@ -38,14 +38,14 @@ function CancellationModal({
 		formState: { errors: errorVal },
 	} = useForm();
 
-	const {id, invoiceNumber, invoiceDate} = itemData || {};
+	const { id, invoiceNumber, invoiceDate } = itemData || {};
 
 	const [response, setResponse] = useState({
 		remarks: '',
 	});
 
 	const { onSubmit, loading } = useGetIrnCancellation({
-		id: itemData?.id,
+		id,
 		setShowCancellationModal,
 		response,
 		refetch,
@@ -93,7 +93,7 @@ function CancellationModal({
 							{IRNLabel}
 							{' '}
 							<span className={styles.styled_invoice}>
-								{itemData?.invoiceNumber}
+								{invoiceNumber}
 							</span>
 						</div>
 					)}
@@ -144,7 +144,7 @@ function CancellationModal({
 									<DatepickerController
 										control={control}
 										name="E_invoice_date"
-										value={new Date(itemData?.invoiceDate)}
+										value={new Date(invoiceDate)}
 										type="datepicker"
 										isPreviousDaysAllowed
 										placeholder="E-invoice Date"

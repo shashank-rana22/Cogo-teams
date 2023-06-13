@@ -17,7 +17,7 @@ type ItemData = {
 	invoiceStatus?: string;
 	entityCode?: number;
 	irnGeneratedAt?: string;
-}
+};
 interface INRCancel {
 	itemData?: ItemData;
 	refetch?: Function;

@@ -34,15 +34,17 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal, response, refetch
 
 	const { remarks } = response || {};
 	const onSubmit = async (values: Values) => {
-		const { Agreement_number: AgreementNumber, 
-				Agreement_date: AgreementDate, 
-				Agreement_pdf_file:AgreementPdfFile } = values || {};
+		const {
+			Agreement_number: AgreementNumber,
+			Agreement_date: AgreementDate,
+			Agreement_pdf_file:AgreementPdfFile,
+		} = values || {};
 		const { finalUrl } = AgreementPdfFile || {};
 		try {
 			const payload = {
-				cancelReason     : remarks || undefined,
-				agreementNumber  : AgreementNumber || undefined,
-				agreementDate    : AgreementDate || undefined,
+				cancelReason      : remarks || undefined,
+				agreementNumber   : AgreementNumber || undefined,
+				agreementDate     : AgreementDate || undefined,
 				agreementDocument : finalUrl || undefined,
 			};
 			const resp = await cancelIrnApi({
