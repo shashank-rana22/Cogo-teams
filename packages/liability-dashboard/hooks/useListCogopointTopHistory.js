@@ -1,6 +1,8 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
+import { EVENT_MAPPING } from '../constants';
+
 const DEFAULT_PAGE_NUMBER = 1;
 
 const useListCogopointTopHistory = ({
@@ -29,10 +31,11 @@ const useListCogopointTopHistory = ({
 					organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
 					from_date         : startDate || undefined,
 					to_date           : endDate || undefined,
+					event             : EVENT_MAPPING[activeStatsCard] || undefined,
 				},
 			},
 		});
-	}, [trigger, transactionType, pagination, startDate, endDate, activeHeaderTab, currencyCode]);
+	}, [trigger, pagination, currencyCode, transactionType, activeHeaderTab, startDate, endDate, activeStatsCard]);
 
 	useEffect(() => {
 		listCogopointTopHistory();

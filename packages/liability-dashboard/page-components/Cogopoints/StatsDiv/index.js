@@ -12,6 +12,7 @@ function StatsDiv({
 	activeHeaderTab = '',
 	data,
 	loading = false,
+	currencyCode = '',
 }) {
 	const handleChange = (val) => {
 		setActiveStatsCard(val);
@@ -33,7 +34,7 @@ function StatsDiv({
 							<div className={styles.numbers}>
 								{loading
 									? <Placeholder width={100} height={25} />
-									: data?.[name] || STATS_DEFAULT_COUNT}
+									: `${currencyCode} ${data?.[name]}` || STATS_DEFAULT_COUNT}
 							</div>
 						</div>
 					);

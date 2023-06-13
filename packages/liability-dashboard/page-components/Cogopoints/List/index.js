@@ -17,6 +17,8 @@ function List({
 	page_limit,
 	total_count,
 	setPagination = () => {},
+	currencyCode = '',
+	activeStatsCard = '',
 }) {
 	return (
 		<div className={styles.container}>
@@ -33,7 +35,7 @@ function List({
 
 				<Table
 					className={styles.table_container}
-					columns={TableColumns()}
+					columns={TableColumns({ currencyCode, activeStatsCard })}
 					data={list || []}
 					loading={loading}
 					loadingRowsCount={LOADING_COUNT}

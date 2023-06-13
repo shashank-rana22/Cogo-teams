@@ -40,7 +40,10 @@ function CogoPoints() {
 
 	const checkPieChart = (PIE_CHART_CHECK || []).includes(activeStatsCard);
 
-	useEffect(() => setSelectedDate({}), [activeHeaderTab, setSelectedDate]);
+	useEffect(() => {
+		setSelectedDate({});
+		setActiveStatsCard('liability_point_value');
+	}, [activeHeaderTab, setSelectedDate]);
 
 	return (
 		<>
@@ -58,6 +61,7 @@ function CogoPoints() {
 						activeHeaderTab={activeHeaderTab}
 						data={data}
 						loading={loading}
+						currencyCode={currencyCode}
 					/>
 
 					{topHistoryLoading ? <ChartLoadingState /> : (
@@ -92,6 +96,8 @@ function CogoPoints() {
 						page_limit={page_limit}
 						total_count={total_count}
 						setPagination={setPagination}
+						currencyCode={currencyCode}
+						activeStatsCard={activeStatsCard}
 					/>
 				</>
 			)}
