@@ -47,19 +47,19 @@ function EditInvoice({
 	});
 
 	return (
-		<Modal
-			onClose={onClose}
-			show={show}
-			size="xl"
-			styles={{
-				dialog: { width: isMobile ? 360 : 1030 },
-			}}
-		>
-			<div className={styles.container}>
-				<div className={styles.forms}>
+		<div>
+			<Modal
+				onClose={onClose}
+				show={show}
+				size="xl"
+				styles={{
+					dialog: { width: isMobile ? 360 : 1030 },
+				}}
+			>
+				<Modal.Header title={(
 					<div className={styles.invoice_value}>
 						Invoice Value -
-						<span className="amount">
+						<span>
 							{formatAmount({
 								amount   : invoice?.invoicing_party_total,
 								currency : invoice?.invoice_total_currency,
@@ -71,29 +71,35 @@ function EditInvoice({
 							})}
 						</span>
 					</div>
-
-					<Layout
-						control={control}
-						fields={controls}
-						errors={errors}
-					/>
-				</div>
-
-				<div className={styles.button_container}>
-					<Button className="secondary md" onClick={onClose} disabled={loading}>
-						Cancel
-					</Button>
-
-					<Button
-						className="primary md save"
-						onClick={handleSubmit(onCreate, onError)}
-						disabled={loading || !isDirty}
-					>
-						Save
-					</Button>
-				</div>
-			</div>
-		</Modal>
+				)}
+				/>
+				<Modal.Body>
+					<div className={styles.container}>
+						<div className={styles.forms}>
+							<Layout
+								control={control}
+								fields={controls}
+								errors={errors}
+							/>
+						</div>
+					</div>
+				</Modal.Body>
+				<Modal.Footer>
+					<div className={styles.button_container}>
+						<Button className="secondary md" onClick={onClose} disabled={loading}>
+							Cancel
+						</Button>
+						<Button
+							className="primary md save"
+							onClick={handleSubmit(onCreate, onError)}
+							disabled={loading || !isDirty}
+						>
+							Save
+						</Button>
+					</div>
+				</Modal.Footer>
+			</Modal>
+		</div>
 	);
 }
 

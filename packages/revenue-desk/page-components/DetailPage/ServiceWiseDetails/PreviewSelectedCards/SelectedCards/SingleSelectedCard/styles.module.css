@@ -29,8 +29,7 @@
 
 .upper_left_section{
     display: flex;
-    align-items: center;
-   
+    align-items: center;   
 }
 
 .upper_right_section{
@@ -83,4 +82,8 @@
 
 .label{
     align-items: center;
+}
+
+.service_provider_heading{
+    margin-right: 10px;
 }

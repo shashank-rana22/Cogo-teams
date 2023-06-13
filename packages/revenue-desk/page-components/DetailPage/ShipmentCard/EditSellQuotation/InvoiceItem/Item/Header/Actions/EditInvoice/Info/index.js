@@ -18,7 +18,7 @@ function Info() {
 				animation="scale"
 			>
 				<div className={styles.info_div}>
-					<IcMInfo fill="rgb(89, 54, 240)" />
+					<IcMInfo />
 				</div>
 			</Tooltip>
 		</div>

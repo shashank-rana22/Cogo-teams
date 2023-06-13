@@ -35,6 +35,7 @@ function RatesCard({
 						setSellRates={setSellRates}
 						sellRates={sellRates}
 						price={price}
+						prefrence_key={type}
 					/>
 				))}
 			</div>

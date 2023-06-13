@@ -17,7 +17,7 @@ function Header({
 }) {
 	const [open, setOpen] = useState(false);
 
-	const { invoice_total_currency, invoice_total_discounted, billing_address } =		invoice;
+	const { invoice_total_currency, invoice_total_discounted, billing_address } = invoice;
 
 	return (
 		<div className={styles.container}>
@@ -38,23 +38,16 @@ function Header({
 					</div>
 				) : null}
 			</div>
-
 			<div className={styles.flex_row}>
 				<div className={styles.invoce_party_details}>
 					<div className={styles.invoice_party_name}>
 						{billing_address?.name || billing_address?.business_name}
 					</div>
-
 					{shipment_data?.entity_id
 						!== GLOBAL_CONSTANTS.country_entity_ids.VN && (
 							<div className={styles.gst}>
 								<div className={styles.label}>GST Number :</div>
-
-								<Tooltip
-									theme="translucent"
-									interactive
-									content={<div className={styles.tool_tip_div}>{billing_address?.address}</div>}
-								>
+								<Tooltip content={billing_address?.address} placement="left">
 									<div className={styles.gst_number}>{billing_address?.tax_number}</div>
 								</Tooltip>
 							</div>
@@ -64,7 +57,6 @@ function Header({
 				<div className={styles.invoice_info}>
 					<div className={styles.invoice_value_container}>
 						<div className={styles.invoice_value_title}>Invoice Value - </div>
-
 						<div className={styles.invoice_value}>
 							{formatAmount({
 								amount   : invoice_total_discounted,
@@ -77,7 +69,6 @@ function Header({
 							})}
 						</div>
 					</div>
-
 					<div className={styles.payment_method}>{invoice?.payment_mode}</div>
 				</div>
 
@@ -87,7 +78,6 @@ function Header({
 							{startCase(invoice?.status)}
 						</div>
 					) : null}
-
 					<Actions
 						invoice={invoice}
 						refetch={refetch}

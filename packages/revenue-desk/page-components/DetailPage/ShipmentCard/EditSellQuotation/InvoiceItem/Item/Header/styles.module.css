@@ -36,8 +36,8 @@
 
 .label {
 	font-size: 10px;
-	font-weight: 500;
-	color: #333;
+	font-weight: 600;
+	color:#4F4F4F;
 	text-transform: capitalize;
 	white-space: nowrap;
 
@@ -47,9 +47,9 @@
 }
 
 .invoice_party_name {
-	font-size: 11px;
-	font-weight: 500;
-	color: #333;
+	font-weight: 600;
+	font-size: 12px;
+	color: #4F4F4F;
 
 	@media (max-width: 768px) {
 		width: max-content;
@@ -68,7 +68,9 @@
 
 .invoice_value_title {
 	margin-left: 25px;
-	color: #333;
+	font-weight: 500;
+	font-size: 14px;
+	color: #4F4F4F;
 
 	@media (max-width: 768px) {
 		width: 90px;
@@ -78,7 +80,9 @@
 
 .invoice_value {
 	margin-left: 4px;
-	color: #5936f0;
+	font-weight: 600;
+	font-size: 14px;
+	color: #221F20;
 
 	@media (max-width: 768px) {
 		font-size: 12px;
@@ -138,7 +142,8 @@
 .payment_method {
 	width: 19%;
 	font-size: 14px;
-	color: #333;
+	font-weight: 600;
+	color:#221F20;
 	text-align: center;
 	text-transform: capitalize;
 
@@ -154,7 +159,6 @@
 	width: 7%;
 	padding: 10px 24px;
 	cursor: pointer;
-	border-left: 1px solid #ded7fc;
 
 	@media (max-width: 768px) {
 		justify-content: flex-end;
@@ -194,6 +198,8 @@
 
 .invoice_container {
 	width: 16%;
+	display: flex;
+	justify-content: flex-end;
 
 	@media (max-width: 768px) {
 		display: none;

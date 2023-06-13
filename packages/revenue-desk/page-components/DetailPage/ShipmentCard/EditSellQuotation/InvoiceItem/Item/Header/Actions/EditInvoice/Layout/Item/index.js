@@ -35,12 +35,12 @@ function Item(props) {
 					>
 						{heading}
 					</div>
-					<h4 style={{
+					<div style={{
 						height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
 					}}
 					>
 						{label}
-					</h4>
+					</div>
 					<Element
 						{...props}
 						control={control}

@@ -1,11 +1,12 @@
 .layout {
 	display: flex;
 	flex-direction: column;
-	margin-right: 16px;
+	justify-content: space-between;
 }
 
 .row {
 	display: flex;
+	justify-content: space-between;
 	flex-wrap: wrap;
 	padding: 8px;
 }

@@ -1,8 +1,14 @@
-import { IcMAirport, IcMProfile, IcMShip } from '@cogoport/icons-react';
+import { IcMProfile } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-function SingleSelectedCard({ data, index }) {
+function SingleSelectedCard({ data, index, price, shipmentType }) {
+	const showData = (val) => val || '';
+	let profitability = 0;
+	if (data?.rowData?.total_buy_price !== 0) {
+		profitability = (Number(price?.split(' ')?.[1]) - Number(data?.rowData?.total_buy_price))
+		/ Number(data?.rowData?.total_buy_price);
+	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section_container}>
@@ -13,43 +19,12 @@ function SingleSelectedCard({ data, index }) {
 				<div className={styles.upper_section}>
 					<div className={styles.upper_left_section}>
 						<div className={styles.service_provider_heading}>
-							{data?.service_provider?.business_name}
+							{showData(data?.rowData?.service_provider?.business_name)}
 						</div>
 						<div>
-							{data?.airline ? (
-								<div style={{ display: 'flex', alignItems: 'center' }}>
-									{(data?.airline?.logo_url !== null)
-										? (
-											<img
-												src={data?.airline?.logo_url}
-												alt="logo"
-												height="30px"
-												width="50px"
-											/>
-										) : <IcMAirport height="30px" width="50px" />}
-
-									<div style={{ fontSize: '14px', fontWeight: '500', color: '#4F4F4F' }}>
-										{data?.airline?.business_name}
-									</div>
-								</div>
-							) : null}
-							{data?.shipping_line
-								? (
-									<div style={{ display: 'flex', alignItems: 'center' }}>
-										{data?.shipping_line?.logo_url !== null
-											? (
-												<img
-													src={data?.shipping_line?.logo_url}
-													alt="logo"
-													height="30px"
-													width="50px"
-												/>
-											) : <IcMShip height="30px" width="50px" />}
-										<div style={{ fontSize: '14px', fontWeight: '500' }}>
-											{data?.shipping_line?.business_name}
-										</div>
-									</div>
-								) : null}
+							{shipmentType === 'air_freight'
+								? showData(data?.rowData?.air_line)
+								: showData(data?.rowData?.shipping_line)}
 						</div>
 					</div>
 					<div className={styles.upper_right_section}>
@@ -74,12 +49,17 @@ function SingleSelectedCard({ data, index }) {
 					<div className={styles.lower_right_section}>
 						<div className={styles.label}>
 							Profitability :
-							<span style={{ fontSize: '18px', fontWeight: '500', color: '#849E4C' }}>1.1%</span>
+							<span style={{ fontSize: '18px', fontWeight: '500', color: '#849E4C' }}>
+								{Number(profitability.toFixed(4))}
+								%
+							</span>
 						</div>
 						<div className={styles.label}>
 							Total Buy Price :
 							<span style={{ fontSize: '20px', fontWeight: '700', color: '#221F20' }}>
-								USD 370
+								{data?.rowData?.currency}
+								{' '}
+								{data?.rowData?.total_buy_price}
 							</span>
 						</div>
 					</div>

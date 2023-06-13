@@ -69,12 +69,18 @@ function Child({
 						if (!Element) return null;
 						return (
 							<div key={controlItem.name} className={styles.element} style={{ width: `${flex}%` }}>
-								<h4 style={{
-									height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
-								}}
+								<div
+									style={{
+										height       : '16px',
+										marginBottom : '6px',
+										fontWeight   : '400',
+										fontSize     : '12px',
+										display      : 'flex',
+										alignItems   : 'center',
+									}}
 								>
 									{controlItem?.label}
-								</h4>
+								</div>
 								<Element
 									{...controlItem}
 									style={{ minWidth: '0px' }}
@@ -84,9 +90,8 @@ function Child({
 									control={control}
 									disabled={disabled || disable}
 									{...extraProps}
-
 								/>
-								<p style={{
+								<div style={{
 									fontStyle     : 'normal',
 									fontSize      : '12px',
 									lineHeight    : '16px',
@@ -97,8 +102,7 @@ function Child({
 								}}
 								>
 									{errorOriginal}
-
-								</p>
+								</div>
 							</div>
 						);
 					})}

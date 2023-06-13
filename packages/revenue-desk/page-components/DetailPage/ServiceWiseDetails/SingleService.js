@@ -54,7 +54,6 @@ function SingleService({
 	(groupedServicesData || []).forEach((data) => {
 		options.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data });
 	});
-
 	useEffect(() => {
 		setSingleServiceData(groupedServicesData[0]);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -66,12 +65,11 @@ function SingleService({
 	const singleServiceSellRateDetails = getSellRateDetailPayload({
 		currentFormatedrates,
 		systemFormatedRates,
-		service_providers: supplierPayload?.service_providers,
+		service_providers: supplierPayload?.[singleServiceData?.id],
 		sellRates,
 	});
-
 	useEffect(() => {
-		setSellRateDetails({ [singleServiceData?.id]: [singleServiceSellRateDetails] });
+		setSellRateDetails({ ...sellRateDetails, [singleServiceData?.id]: [singleServiceSellRateDetails] });
 	}, [JSON.stringify(singleServiceSellRateDetails)]);
 	const rateCardObj = [
 		{
@@ -98,7 +96,15 @@ function SingleService({
 			<SingleServiceCard serviceData={singleServiceData} price={price} />
 
 			{(supplierPayload?.[singleServiceData?.id] || []).length
-				? <SelectedRatesCard prefrences={supplierPayload?.[singleServiceData?.id]} /> : null}
+				? (
+					<SelectedRatesCard
+						prefrences={supplierPayload?.[singleServiceData?.id]}
+						price={price}
+						shipmentType={shipmentType}
+						setSellRates={setSellRates}
+						sellRates={sellRates}
+					/>
+				) : null}
 			<ExistingInventory
 				docs={ratesData?.eligible_booking_document?.docs}
 				loading={ratesLoading}
@@ -118,6 +124,7 @@ function SingleService({
 					setSellRates={setSellRates}
 					sellRates={sellRates}
 					price={price}
+					prefrence_key={item?.prefrence_key}
 				/>
 			))}
 		</div>

@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function Card({
 	data, setPrefrences, prefrences, rate_key, serviceId, shipmentType, setSellRates,
-	sellRates, price,
+	sellRates, price, prefrence_key, fromkey,
 }) {
 	const handlePrefrence = (rate) => {
 		const foundItem = (prefrences?.[serviceId] || []).find((obj) => obj?.rate_id === rate?.id);
@@ -26,8 +26,9 @@ function Card({
 			const priority = newList.length ? Number(newList[newList.length - 1]?.priority) + 1 : 1;
 			newList.push({
 				rate_id : rate?.id,
-				id      : rate?.service_provider?.id,
+				id      : rate?.rowData?.service_provider?.id,
 				priority,
+				key     : prefrence_key,
 				data    : rate,
 			});
 			setPrefrences({ ...prefrences, [serviceId]: [...newList] });
@@ -55,9 +56,12 @@ function Card({
 	};
 	const showData = (val) => val || '';
 	const isShowSellRate = shipmentType === 'fcl_freight';
-	const profitability = (Number(price?.split(' ')?.[1]) - Number(data?.rowData?.total_buy_price))
-	/ Number(data?.rowData?.total_buy_price);
-	console.log(profitability, 'ooooo');
+	let profitability = 0;
+	if (data?.rowData?.total_buy_price !== 0) {
+		profitability = (Number(price?.split(' ')?.[1]) - Number(data?.rowData?.total_buy_price))
+		/ Number(data?.rowData?.total_buy_price);
+	}
+
 	return (
 		<div
 			className={rate_key ? styles.selected_rate_card_container : styles.container}
@@ -72,7 +76,7 @@ function Card({
 				<div className={styles.upper_section}>
 					<div className={styles.upper_left_section}>
 						<div className={styles.service_provider_heading}>
-							{showData(data?.rowData?.service_provider)}
+							{showData(data?.rowData?.service_provider?.business_name)}
 						</div>
 						<div>
 							{shipmentType === 'air_freight'
@@ -80,6 +84,12 @@ function Card({
 								: showData(data?.rowData?.shipping_line)}
 						</div>
 					</div>
+					{rate_key ? (
+						<div>
+							<Pill size="md" color="#F2F3FA">{fromkey}</Pill>
+						</div>
+					) : null}
+
 				</div>
 				<div className={styles.lower_section}>
 					<div className={styles.first_section}>

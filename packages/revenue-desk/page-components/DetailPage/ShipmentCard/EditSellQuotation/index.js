@@ -18,20 +18,25 @@ function EditSellQuotation({ data }) {
 				show={open}
 				onClose={() => setOpen(false)}
 				interactive
+				placement="center"
+				className={styles.modal_body}
 			>
-				<div className={styles.invoice_container}>
-					{Object.keys(groupedInvoices || {}).map((item) => (
-						<InvoiceItem
-							key={item}
-							item={groupedInvoices[item]}
-							total={totals?.[item]}
-							refetch={refetch}
-							loading={invoiceLoading}
-							shipment_data={data}
-							invoiceData={invoiceData}
-						/>
-					))}
-				</div>
+				<Modal.Header title="Edit Sell Quotation" />
+				<Modal.Body size="xl" height="1000px">
+					<div className={styles.invoice_container}>
+						{Object.keys(groupedInvoices || {}).map((item) => (
+							<InvoiceItem
+								key={item}
+								item={groupedInvoices[item]}
+								total={totals?.[item]}
+								refetch={refetch}
+								loading={invoiceLoading}
+								shipment_data={data}
+								invoiceData={invoiceData}
+							/>
+						))}
+					</div>
+				</Modal.Body>
 			</Modal>
 			<div style={{ marginRight: '10px' }}>
 				<Button className="secondary lg" onClick={() => setOpen(true)}>

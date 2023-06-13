@@ -61,12 +61,12 @@ export const tableColumn = (serviceItem, shipment_data) => {
 			accessor : 'exchange_rate',
 		},
 		{
-			Header  : 'Tax Amt.',
-			accesor : 'tax_amt',
+			Header   : 'Tax Amt.',
+			accessor : 'tax_amt',
 		},
 		{
-			Header  : 'Amt. with Tax',
-			accesor : 'amt_with_tax',
+			Header   : 'Amt. with Tax',
+			accessor : 'amt_with_tax',
 		},
 	];
 };

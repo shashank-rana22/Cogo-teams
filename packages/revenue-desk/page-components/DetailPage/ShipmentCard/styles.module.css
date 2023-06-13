@@ -15,12 +15,13 @@
 .lower_section{
     display: flex;
     align-items: center;
+    justify-content: space-between;
 }
 
 .first_section{
     border-right: 1px dashed #BDBDBD;
     padding: 10px 20px;
-    width:50%;
+    width:40vw;
 }
 
 .second_section{
@@ -39,7 +40,6 @@
     font-weight: 500;
     font-size: 16px;
     color: #4F4F4F;
-    flex:1;
 }
 
 .text{

@@ -28,7 +28,7 @@ const labels = [
 	'truck_types',
 ];
 
-function PreviewSelectedCards({ supplierPayload, groupedServicesData }) {
+function PreviewSelectedCards({ supplierPayload, groupedServicesData, price, shipmentType }) {
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
 	const options = [];
 	(groupedServicesData || []).forEach((data) => {
@@ -48,9 +48,14 @@ function PreviewSelectedCards({ supplierPayload, groupedServicesData }) {
 					onChange={(e) => { setSingleServiceData(e); }}
 				/>
 			</div>
-
 			{(supplierPayload?.[singleServiceData?.id] || []).length
-				? <SelectedCards prefrences={supplierPayload?.[singleServiceData?.id]} /> : null}
+				? (
+					<SelectedCards
+						prefrences={supplierPayload?.[singleServiceData?.id]}
+						price={price}
+						shipmentType={shipmentType}
+					/>
+				) : null}
 		</div>
 	);
 }

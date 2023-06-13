@@ -103,6 +103,8 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 										<PreviewSelectedCards
 											groupedServicesData={groupedShowServicesData[previewActiveTab]}
 											supplierPayload={supplierPayload}
+											price={priceData[startCase(singleTab)]}
+											shipmentType={shipmentData?.shipment_type}
 										/>
 									</TabPanel>
 								))}

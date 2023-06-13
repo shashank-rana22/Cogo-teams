@@ -1,6 +1,9 @@
 import { Table } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
+
+import CargoDetailPills from '../../../../../../List/Card/Body/CargoDetails/CargoDetailPills';
 
 import styles from './styles.module.css';
 import { tableColumn } from './tableColumn';
@@ -13,31 +16,50 @@ function InvoiceServiceWise({ item = {}, loading = false, shipment_data }) {
 		total_price_discounted,
 		line_items = [],
 		quotation_source = '',
-		// detail = {},
+		detail = {},
 	} = item || {};
 
 	const billedItemsCode = ['BookingCONV', 'BookingNOST'];
 	let showBilledText = true;
-	(line_items || []).forEach((items) => {
-		if (!billedItemsCode.includes(items?.code)) {
+	const tableData = (line_items || []).map(({
+		name, alias, currency, price, quantity,
+		discount_price, exchange_rate, tax_price,
+		tax_percent, tax_total_price,
+		tax_total_price_discounted, code,
+	}) => {
+		if (!billedItemsCode.includes(code)) {
 			showBilledText = false;
 		}
-	});
+		return ({
+			name,
+			alias        : startCase(alias) || '---',
+			currency,
+			price,
+			quantity,
+			discount_price,
+			exchange_rate,
+			tax_amt      : `${currency} ${tax_price} (${tax_percent}%)`,
+			amt_with_tax : `${currency} ${tax_total_price || tax_total_price_discounted}`,
 
-	const renderBilledText =		showBilledText && quotation_source === 'billed_at_actuals'
+		});
+	});
+	const renderBilledText = showBilledText && quotation_source === 'billed_at_actuals'
 		? '*will be billed at actuals'
 		: null;
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.cargo_detail_pill_container}>
+				<CargoDetailPills detail={detail} />
+			</div>
 			<Table
 				loading={loading}
 				columns={tableColumn(item, shipment_data)}
-				data={line_items}
+				data={tableData}
 			/>
 
-			<div className={styles.total}>
-				<div>
+			<div className={styles.totals}>
+				<div className={styles.total_tax}>
 					Total Tax:
 					{' '}
 					{formatAmount({

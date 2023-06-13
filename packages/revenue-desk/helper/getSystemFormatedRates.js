@@ -76,7 +76,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.shipping_line =	element?.shipping_line?.business_name
 			|| element?.shipping_line?.short_name;
 		rowData.air_line = element?.airline?.business_name;
-		rowData.service_provider = element?.service_provider?.business_name;
+		rowData.service_provider = element?.service_provider;
 		rowData.buy_price = minimumRate || minRate;
 		rowData.currency = currency || currencyForAir;
 		rowData.price_type = element?.price_type;
@@ -85,6 +85,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.is_rate_expired = is_rate_expired;
 		rowData.schedule_type = schedule_type;
 		rowData.active_booking = element?.ongoing_shipment;
+		rowData.service_provider = element?.service_provider;
 		rowData.allocation_ratio = '_ _ _';
 		rowData.fullfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
 			? Number(completed_shipments)
