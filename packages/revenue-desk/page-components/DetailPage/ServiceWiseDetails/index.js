@@ -15,15 +15,18 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 	const [showCancelModal, setshowCancelModal] = useState(false);
 	const [inventory, setInventory] = useState([]);
 	const [activeTab, setActiveTab] = useState(tabKeys[0]);
+	const [previewActiveTab, setPreviewActiveTab] = useState(tabKeys[0]);
 	const [modalStep, setModalStep] = useState(0);
 	const [reason, setReason] = useState(null);
 	const [othertext, setOthertext] = useState(null);
+	const [sellRateDetails, setSellRateDetails] = useState({});
 	const { loading, updateTrigger } = useUpdateRatesPreferences({
 		supplierPayload,
 		inventory,
 		serviceData,
 		reason,
 		othertext,
+		sellRateDetails,
 	});
 	const handleOnChange = (val) => {
 		if (reason === val) {
@@ -67,6 +70,9 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 							inventory={inventory}
 							setInventory={setInventory}
 							price={priceData[startCase(singleTab)]}
+							shipmentType={shipmentData?.shipment_type}
+							setSellRateDetails={setSellRateDetails}
+							sellRateDetails={sellRateDetails}
 						/>
 					</TabPanel>
 				))}
@@ -84,9 +90,9 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 						<Modal.Header title="PREVIEW" />
 						<Modal.Body>
 							<Tabs
-								activeTab={activeTab}
+								activeTab={previewActiveTab}
 								themeType="secondary"
-								onChange={setActiveTab}
+								onChange={setPreviewActiveTab}
 							>
 								{tabKeys.map((singleTab) => (
 									<TabPanel
@@ -95,7 +101,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 										key={singleTab}
 									>
 										<PreviewSelectedCards
-											groupedServicesData={groupedShowServicesData[activeTab]}
+											groupedServicesData={groupedShowServicesData[previewActiveTab]}
 											supplierPayload={supplierPayload}
 										/>
 									</TabPanel>
@@ -117,22 +123,22 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 								Please provide a reason for approving this booking at this rate.
 							</div>
 							<Checkbox
-								label="Request not serviceable"
-								value="request_not_serviceable"
-								onChange={() => handleOnChange('request_not_serviceable')}
-								checked={reason === 'request_not_serviceable'}
+								label="To improve customer relations."
+								value="to_improve_customer_relations"
+								onChange={() => handleOnChange('to_improve_customer_relations')}
+								checked={reason === 'to_improve_customer_relations'}
 							/>
 							<Checkbox
-								label="Rates not available"
-								value="rates_not_available"
-								onChange={() => handleOnChange('rates_not_available')}
-								checked={reason === 'rates_not_available'}
+								label="To improve supplier relations"
+								value="to_improve_supplier_relations"
+								onChange={() => handleOnChange('to_improve_supplier_relations')}
+								checked={reason === 'to_improve_supplier_relations'}
 							/>
 							<Checkbox
-								label="No space with service provider"
-								value="no_space_with_service_provider"
-								onChange={() => handleOnChange('no_space_with_service_provider')}
-								checked={reason === 'no_space_with_service_provider'}
+								label="To honor platform rates."
+								value="to_honor_platform_rates"
+								onChange={() => handleOnChange('to_honor_platform_rates')}
+								checked={reason === 'to_honor_platform_rates'}
 							/>
 							<Checkbox
 								label="Other"

@@ -7,7 +7,7 @@ const useUpdateRatesPreferences = ({
 	serviceData,
 	reason,
 	othertext,
-	sellRateDetails = [],
+	sellRateDetails = {},
 }) => {
 	const apitoCall = '/create_shipment_booking_confirmation_preference';
 
@@ -73,8 +73,8 @@ const useUpdateRatesPreferences = ({
 				service_type              : service_type || undefined,
 				remarks                   : othertext !== null ? othertext : reason,
 				sell_rate_preferences:
-					service_type && service_type === 'fcl_freight_service' && sellRateDetails
-						? sellRateDetails
+					service_type && service_type === 'fcl_freight_service' && sellRateDetails?.[service_id]
+						? sellRateDetails?.[service_id]
 						: [],
 			};
 			const hasData =	supplierPayload?.[service_id]?.length || bookingConformationDocs?.length;

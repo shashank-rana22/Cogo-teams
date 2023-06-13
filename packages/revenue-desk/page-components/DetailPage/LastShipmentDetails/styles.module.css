@@ -16,6 +16,15 @@
     display: flex;
     align-items: center;
 }
+.loading_right_section{
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+.loading_section{
+    display: flex;
+    align-items: center;
+}
 .header_left_section{
     display: flex;
     align-items: center;
@@ -40,9 +49,9 @@
 }
 
 .body_right_section{
-    width:30vw;
+    width:40vw;
     display: flex;
-    flex-direction: column;
+    align-items: center;
     justify-content: space-around;
     padding: 18px 20px;
     font-weight: 400;

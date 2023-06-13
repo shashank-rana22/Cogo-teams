@@ -1,9 +1,9 @@
 export const serviceOptions = [
-	{ label: 'Fcl Freight', value: 'fcl_freight' },
+	{ label: 'FCL Freight', value: 'fcl_freight' },
 	{ label: 'Air Custom', value: 'air_customs' },
 	{ label: 'Air Freight', value: 'air_freight' },
-	{ label: 'Ftl Freight', value: 'ftl_freight' },
-	{ label: 'Ltl Freight', value: 'ltl_freight' },
+	{ label: 'FTL Freight', value: 'ftl_freight' },
+	{ label: 'LTL Freight', value: 'ltl_freight' },
 ];
 
 export const statusOptions = [
@@ -57,8 +57,8 @@ export const shipmentSourceOptions = [
 ];
 
 export const sortByOptions = [
-	{ label: 'Created At Descending', value: 'created_at_desc' },
-	{ label: 'Created At Ascending', value: 'created_at_asc' },
-	{ label: 'Schedule Departure Ascending', value: 'schedule_departure_asc' },
-	{ label: 'Schedule Departure Descending', value: 'schedule_departure_desc' },
+	{ label: 'Created at : Desc.', value: 'created_at_desc' },
+	{ label: 'Created at : Asc.', value: 'created_at_asc' },
+	{ label: 'Schedule Departure : Asc.', value: 'schedule_departure_asc' },
+	{ label: 'Schedule Departure : Desc.', value: 'schedule_departure_desc' },
 ];

@@ -23,7 +23,7 @@
 	display: flex;
 	align-items: center;
 	justify-content: space-between;
-	padding: 0 24px 12px;
+	padding: 7px 24px 12px;
 	border-bottom: 1px dashed #bdbdbd;
 }
 
@@ -43,7 +43,9 @@
 }
 
 .left_section_container {
-	width: 20px;
+	width: 25px;
+	display: flex;
+	justify-content: center;
 }
 
 .right_section_container {
@@ -58,20 +60,20 @@
 }
 
 .text1 {
-	font-size: 14px;
 	font-weight: 500;
-	color: #f37166;
+	font-size: 12px;
+	color: #6FA5AB;
 }
 
 .text2 {
-	font-size: 14px;
 	font-weight: 500;
-	color: #828282;
+	font-size: 12px;
+	color: #F37166;
 }
 
 .progress_bar_section {
 	display: flex;
-	padding: 16px 36px;
+	padding: 10px 36px;
 	border-right: 1px dashed #bdbdbd;
 }
 
@@ -79,13 +81,16 @@
 	font-size: 14px;
 	font-weight: 500;
 	color: #828282;
+	display: flex;
+	align-items: center;
+	gap:10px;
 }
 
 .first_section {
 	display: flex;
 	flex-direction: column;
-	justify-content: space-between;
-	padding: 16px 36px;
+	justify-content: center;
+	padding: 10px 36px;
 	border-right: 1px dashed #bdbdbd;
 }
 
@@ -98,4 +103,12 @@
 	font-size: 14px;
 	font-weight: 500;
 	color: #221f20;
+}
+
+.edit_price_section{
+	padding: 20px;
+	border-left: 1px dashed #bdbdbd;
+	display: flex;
+	justify-content: center;
+	flex-direction: column;
 }

@@ -1,6 +1,9 @@
 import { Select } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
+import getFormatedRates from '../../../helper/getFormatedRates';
+import getSellRateDetailPayload from '../../../helper/getSellRateDetailPayload';
+import getSystemFormatedRates from '../../../helper/getSystemFormatedRates';
 import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskAvailableRates';
 import CargoDetailPills from '../../List/Card/Body/CargoDetails/CargoDetailPills';
 
@@ -39,7 +42,11 @@ function SingleService({
 	inventory,
 	setInventory,
 	price,
+	shipmentType,
+	setSellRateDetails,
+	sellRateDetails,
 }) {
+	const [sellRates, setSellRates] = useState({});
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
 	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({ singleServiceData });
 
@@ -53,19 +60,31 @@ function SingleService({
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(groupedServicesData)]);
 
+	const currentFormatedrates = getFormatedRates('current', ratesData?.flashed_rates, singleServiceData);
+	const systemFormatedRates = getSystemFormatedRates(ratesData?.system_rates, singleServiceData);
+
+	const singleServiceSellRateDetails = getSellRateDetailPayload({
+		currentFormatedrates,
+		systemFormatedRates,
+		service_providers: supplierPayload?.service_providers,
+		sellRates,
+	});
+
+	useEffect(() => {
+		setSellRateDetails({ [singleServiceData?.id]: [singleServiceSellRateDetails] });
+	}, [JSON.stringify(singleServiceSellRateDetails)]);
 	const rateCardObj = [
 		{
 			prefrence_key : 'system',
 			type          : 'System Rates',
-			data          : ratesData?.system_rates,
+			data          : systemFormatedRates?.rows,
 		},
 		{
 			prefrence_key : 'current',
 			type          : 'Rates from Current Flash Alerts',
-			data          : ratesData?.flashed_rates,
+			data          : currentFormatedrates?.rows,
 		},
 	];
-
 	return (
 		<div>
 			<div style={{ margin: '16px 0' }}>
@@ -89,11 +108,16 @@ function SingleService({
 			/>
 			{rateCardObj.map((item) => (
 				<RatesCard
-					ratesData={item}
+					type={item?.type}
+					ratesData={item?.data}
 					key={item}
 					prefrences={supplierPayload}
 					setPrefrences={setSupplierPayload}
 					serviceId={singleServiceData?.id}
+					shipmentType={shipmentType}
+					setSellRates={setSellRates}
+					sellRates={sellRates}
+					price={price}
 				/>
 			))}
 		</div>

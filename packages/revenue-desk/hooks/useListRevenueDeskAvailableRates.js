@@ -38,6 +38,9 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData } = {}) => {
 						origin_location_id      : singleServiceData?.origin_location_id || undefined,
 						destination_location_id : singleServiceData?.destination_location_id || undefined,
 						partner_id              : user_profile?.partner_id,
+						operation_type          : singleServiceData?.operation_type || undefined,
+						stacking_type           : singleServiceData?.packages?.[0]?.handling_type || undefined,
+						shipment_type           : singleServiceData?.packages?.[0]?.packing_type || undefined,
 
 					},
 				},

@@ -1,4 +1,4 @@
-import { Select, Input, Pagination, Button } from '@cogoport/components';
+import { Select, Input, Pagination, Button, Placeholder } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
@@ -70,6 +70,21 @@ function RevenueDesk() {
 							<div className={styles.filter_heading}>
 								<div className={styles.text}>
 									Filters
+									{loading ? (
+										<Placeholder
+											height="20px"
+											width="100px"
+											margin="0px 5px"
+										/>
+									) : (
+										<div className={styles.search_text}>
+											-
+											{shipmentList?.total}
+											{' '}
+											Search Results
+										</div>
+									)}
+
 								</div>
 								<div>
 									<Button

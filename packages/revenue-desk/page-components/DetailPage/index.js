@@ -1,5 +1,6 @@
 import { Pill, TabPanel, Tabs } from '@cogoport/components';
-import { IcMArrowBack } from '@cogoport/icons-react';
+import { IcCCogoassured, IcMArrowBack } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import iconMapping from '../../helper/iconMapping';
@@ -64,6 +65,18 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 					</div>
 					<div className={styles.port_pair_container}>
 						{itemData?.importer_exporter?.business_name}
+						{(itemData?.tags || []).map((i) => (
+							<Pill key={i}>{startCase(i)}</Pill>
+						))}
+						{itemData?.is_cogo_assured ? (
+							<Pill
+								prefix={<IcCCogoassured />}
+								size="md"
+								color="#e6fae8"
+							>
+								Cogoport Assured
+							</Pill>
+						) : null}
 					</div>
 				</div>
 

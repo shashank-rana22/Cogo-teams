@@ -1,9 +1,15 @@
-import { IcMDrag, IcMAirport, IcMShip } from '@cogoport/icons-react';
+import { Pill } from '@cogoport/components';
+import { IcMDrag } from '@cogoport/icons-react';
+import { startCase, format } from '@cogoport/utils';
 
 import PriorityNumber from './PriorityNumber';
+import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
 
-function Card({ data, setPrefrences, prefrences, rate_key, serviceId }) {
+function Card({
+	data, setPrefrences, prefrences, rate_key, serviceId, shipmentType, setSellRates,
+	sellRates, price,
+}) {
 	const handlePrefrence = (rate) => {
 		const foundItem = (prefrences?.[serviceId] || []).find((obj) => obj?.rate_id === rate?.id);
 		if (foundItem) {
@@ -27,6 +33,31 @@ function Card({ data, setPrefrences, prefrences, rate_key, serviceId }) {
 			setPrefrences({ ...prefrences, [serviceId]: [...newList] });
 		}
 	};
+	const handleCardClick = (e) => {
+		e.stopPropagation();
+	};
+	const showValidity = (item) => {
+		if (item?.rowData?.is_rate_expired) {
+			return <span style={{ color: 'red' }}> (This Rate is Expired)</span>;
+		}
+
+		if (item?.rowData?.validity_end) {
+			return (
+				<span style={{ color: 'red' }}>
+					(Valid till:
+					{' '}
+					{format(data?.rowData?.validity_end, 'dd MMM YYYY')}
+					)
+				</span>
+			);
+		}
+		return null;
+	};
+	const showData = (val) => val || '';
+	const isShowSellRate = shipmentType === 'fcl_freight';
+	const profitability = (Number(price?.split(' ')?.[1]) - Number(data?.rowData?.total_buy_price))
+	/ Number(data?.rowData?.total_buy_price);
+	console.log(profitability, 'ooooo');
 	return (
 		<div
 			className={rate_key ? styles.selected_rate_card_container : styles.container}
@@ -41,91 +72,115 @@ function Card({ data, setPrefrences, prefrences, rate_key, serviceId }) {
 				<div className={styles.upper_section}>
 					<div className={styles.upper_left_section}>
 						<div className={styles.service_provider_heading}>
-							{data?.service_provider?.business_name}
+							{showData(data?.rowData?.service_provider)}
 						</div>
 						<div>
-							{data?.airline ? (
-								<div style={{ display: 'flex', alignItems: 'center' }}>
-									{(data?.airline?.logo_url)
-										? (
-											<img
-												src={data?.airline?.logo_url}
-												alt="logo"
-												height="30px"
-												width="50px"
-											/>
-										) : <IcMAirport height="30px" width="50px" />}
-
-									<div style={{ fontSize: '14px', fontWeight: '500', color: '#4F4F4F' }}>
-										{data?.airline?.business_name}
-									</div>
-								</div>
-							) : null}
-							{data?.shipping_line
-								? (
-									<div style={{ display: 'flex', alignItems: 'center' }}>
-										{data?.shipping_line?.logo_url
-											? (
-												<img
-													src={data?.shipping_line?.logo_url}
-													alt="logo"
-													height="30px"
-													width="50px"
-												/>
-											) : <IcMShip height="30px" width="50px" />}
-										<div style={{ fontSize: '14px', fontWeight: '500' }}>
-											{data?.shipping_line?.business_name}
-										</div>
-									</div>
-								) : null}
+							{shipmentType === 'air_freight'
+								? showData(data?.rowData?.air_line)
+								: showData(data?.rowData?.shipping_line)}
 						</div>
 					</div>
 				</div>
 				<div className={styles.lower_section}>
 					<div className={styles.first_section}>
 						<div className={styles.text1}>
-							Valid Till :10 June 2023
+							Active Bookings :
+							{' '}
+							{showData(data?.rowData?.active_booking)}
 						</div>
 						<div className={styles.text2}>
-							Active Bookings :10 (50 TEU)
+							{showValidity(data)}
 						</div>
+						{data?.rowData?.platform ? (
+							<div>
+								<Pill>
+									{`Reverted from ${data?.rowData?.platform} platform`}
+								</Pill>
+							</div>
+						) : null}
 					</div>
 					<div className={styles.progress_bar_section}>
 						<div style={{ marginRight: '25px' }}>
 							<div className={styles.text}>
 								Allocation Ratio
 							</div>
-							<img
-								src="
-					https://cogoport-production.sgp1.digitaloceanspaces.com/65f9e0df95910af88bd56d2c371aa159/20%25.png"
-								alt="20%"
-							/>
+							<div>
+								{data?.rowData?.allocation_ratio}
+
+							</div>
 						</div>
 						<div>
 							<div className={styles.text}>
 								Fulfillment Ratio
 							</div>
-							<img
-								src="
-					https://cogoport-production.sgp1.digitaloceanspaces.com/a14dc433cacc16d5bc1e7e08978821ae/80%25.png"
-								alt="80%"
-							/>
+							<div>
+								{data?.rowData?.fullfillment_ratio}
+								%
+							</div>
 						</div>
 					</div>
 					<div className={styles.price_section}>
 						<div className={styles.price_text}>
-							Buy Rate per Ctr  :
-							<span style={{ fontSize: '18px', fontWeight: '600', color: '#4F4F4F' }}>
-								USD 18
-							</span>
+							<div>
+								Buy Rate per Ctr  :
+								<span style={{ fontSize: '18px', fontWeight: '600', color: '#4F4F4F' }}>
+									{`${showData(data?.rowData?.currency)} ${showData(
+										data?.rowData?.buy_price,
+									)}`}
+								</span>
+							</div>
+							<div>
+								{shipmentType === 'air_freight' && (
+									<div>
+										Price Type:
+										{' '}
+										{showData(startCase(data?.rowData?.price_type))}
+									</div>
+								)}
+							</div>
+							<div>
+								{shipmentType === 'air_freight' && (
+									<div>
+										Chargeable Wt.:
+										{showData(data?.rowData?.chargeable_weight)}
+										{' '}
+										Kg
+									</div>
+								)}
+								{shipmentType === 'fcl_freight' && (
+									<div>
+										Container Count.:
+										{showData(data?.rowData?.container_count)}
+									</div>
+								)}
+							</div>
 						</div>
 						<div className={styles.price_text}>
+							<div>
+								Profitability :
+								<span style={{ color: '#849E4C' }}>
+									<div>
+										{Number(profitability.toFixed(4))}
+									</div>
+								</span>
+							</div>
 							Total Buy Price  :
-							<span style={{ fontSize: '20px', fontWeight: '700', color: '#221F20' }}>
-								USD 370
-							</span>
+							<div>
+								{data?.rowData?.currency}
+								{' '}
+								{data?.rowData?.total_buy_price}
+							</div>
 						</div>
 					</div>
+					{/* {isShowSellRate && ( */}
+					<div role="presentation" className={styles.edit_price_section} onClick={handleCardClick}>
+						<ShowSellRates
+							data={data}
+							sellRates={sellRates}
+							setSellRates={setSellRates}
+						/>
+					</div>
+					{/* )} */}
 				</div>
 			</div>
 		</div>

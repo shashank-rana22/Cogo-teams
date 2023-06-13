@@ -30,7 +30,7 @@ function Header({ data }) {
 						</div>
 					</Pill>
 				</div>
-				<div>
+				<div className={styles.pills_container}>
 					<Pill size="md" color="#F2F3FA">
 						<div style={{ color: '#7278AD' }}>
 							{startCase(data?.trade_type)
@@ -49,7 +49,14 @@ function Header({ data }) {
 						<Pill key={i}>{startCase(i)}</Pill>
 					))}
 					{data?.is_cogo_assured ? (
-						<IcCCogoassured />
+						<Pill
+							prefix={<IcCCogoassured />}
+							size="md"
+							color="#e6fae8"
+						>
+							Cogoport Assured
+						</Pill>
+
 					) : null}
 				</div>
 			</div>

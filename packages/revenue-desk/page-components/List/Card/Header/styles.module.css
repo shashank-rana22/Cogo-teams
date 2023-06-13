@@ -26,3 +26,8 @@
     align-items: center;
 
 }
+
+.pills_container{
+    display: flex;
+    align-items: center;
+}
