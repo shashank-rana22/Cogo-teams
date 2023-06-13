@@ -1,10 +1,11 @@
 import { Button } from '@cogoport/components';
 
-import SearchInput from '../../../../commons/SearchInput';
+import SearchInput from '../SearchInput';
 
 import styles from './styles.module.css';
 
-function Header({ search, setSearch }) {
+function Header({ search, setSearch, label = '' }) {
+	const placeholder = `Search for ${label}`;
 	return (
 		<div className={styles.container}>
 			<div className={styles.input_bar}>
@@ -12,12 +13,14 @@ function Header({ search, setSearch }) {
 					value={search}
 					onChange={(val) => setSearch(val)}
 					size="md"
-					placeholder="Search for Squad"
+					placeholder={placeholder}
 				/>
 			</div>
 
 			<Button>
-				Add Squad
+				Add
+				{' '}
+				{label}
 			</Button>
 		</div>
 

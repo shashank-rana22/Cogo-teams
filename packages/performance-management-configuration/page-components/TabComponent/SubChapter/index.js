@@ -1,7 +1,12 @@
+import { useState } from 'react';
+
+import Header from '../../../commons/CommonHeader';
+
 function SubChapter() {
+	const [search, setSearch] = useState('');
 	return (
 		<div>
-			SubChapter
+			<Header setSearch={setSearch} search={search} label="Sub Chapter" />
 		</div>
 	);
 }
