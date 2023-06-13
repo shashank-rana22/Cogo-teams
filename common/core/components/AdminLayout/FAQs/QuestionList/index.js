@@ -10,11 +10,6 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 import useQuestionList from './useQuestionList';
 
-const IS_EMPTY = 0;
-const TOTAL_COUNT = 10;
-const TOTAL_FAQ_LENGTH = 3;
-const INITIAL_PAGE = 1;
-
 function QuestionList({
 	search = '',
 	topic = {},
@@ -55,8 +50,8 @@ function QuestionList({
 
 	const allpills = (item) => (
 		<div>
-			{item?.faq_tags?.map((faqtag, i) => (i >= TOTAL_FAQ_LENGTH ? (
-				<Pill size="md" className={styles.pill} key={faqtag.display_name}>
+			{item?.faq_tags?.map((faqtag, i) => (i >= 3 ? (
+				<Pill size="md" className={styles.pill}>
 					{(faqtag.display_name).toUpperCase()}
 				</Pill>
 			) : null))}
@@ -64,12 +59,12 @@ function QuestionList({
 	);
 
 	const extendedPills = (item) => {
-		const REMAINING = item.faq_tags.length - TOTAL_FAQ_LENGTH;
+		const REMAINING = item.faq_tags.length - 3;
 
 		return (
 			<div style={{ display: 'flex' }}>
-				{item?.faq_tags?.slice(IS_EMPTY, TOTAL_FAQ_LENGTH).map((faqtag) => (
-					<Pill size="md" className={styles.pill} key={faqtag.display_name}>
+				{item?.faq_tags?.slice(0, 3).map((faqtag) => (
+					<Pill size="md" className={styles.pill}>
 						{(faqtag.display_name).toUpperCase()}
 					</Pill>
 				))}
@@ -93,7 +88,7 @@ function QuestionList({
 
 	return (
 		<div className={styles.containers}>
-			{list?.length > IS_EMPTY ? (
+			{list?.length > 0 ? (
 				<>
 					<div className={styles.topic_heading}>
 						Topic:
@@ -124,9 +119,9 @@ function QuestionList({
 									</div>
 
 									<div className={styles.pill_container}>
-										{item?.faq_tags.length <= TOTAL_FAQ_LENGTH
+										{item?.faq_tags.length <= 3
 											? item?.faq_tags?.map((faqtag) => (
-												<Pill size="md" className={styles.pill} key={faqtag.display_name}>
+												<Pill size="md" className={styles.pill}>
 													{(faqtag.display_name).toUpperCase()}
 												</Pill>
 											))
@@ -139,12 +134,12 @@ function QuestionList({
 						{search && <EmptySearchState search={search} source="list" />}
 					</div>
 
-					{(pageData?.total_count || IS_EMPTY) > TOTAL_COUNT ? (
+					{(pageData?.total_count || 0) > 10 ? (
 						<div className={styles.pagination_container}>
 							<Pagination
 								className="md"
-								totalItems={pageData?.total_count || IS_EMPTY}
-								currentPage={page || INITIAL_PAGE}
+								totalItems={pageData?.total_count || 0}
+								currentPage={page || 1}
 								pageSize={pageData?.page_limit}
 								onPageChange={setPage}
 							/>
