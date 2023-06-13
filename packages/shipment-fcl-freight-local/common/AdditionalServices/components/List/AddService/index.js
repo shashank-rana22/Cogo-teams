@@ -1,7 +1,7 @@
 import { Modal } from '@cogoport/components';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import useListServiceChargeCodes from '../../../../../hooks/useListServiceChargeCodes';
 import AddRate from '../../AddRate';
@@ -9,8 +9,6 @@ import AddRate from '../../AddRate';
 import ChooseService from './ChooseService';
 import styles from './styles.module.css';
 import ViewPrice from './ViewPrice';
-
-const DEFAULT_VALUE = 0;
 
 function AddService({
 	shipmentId = '',
@@ -45,7 +43,7 @@ function AddService({
 	if (filters.service_type) {
 		finalList = finalList.filter((item) => {
 			if (filters?.service_type?.includes('?')) {
-				return item.service_type === filters?.service_type?.split('?')?.[DEFAULT_VALUE];
+				return item.service_type === filters?.service_type?.split('?')?.[0];
 			}
 			return item.service_type === filters?.service_type;
 		});
