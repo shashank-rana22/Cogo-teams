@@ -14,6 +14,7 @@ function CampaignManagement() {
 	const [globalFilters, setGlobalFilters] = useState({});
 	const [dropdown, setDropdown] = useState('');
 	const [showCreateForm, setShowCreateForm] = useState(false);
+	const [formData, setFormData] = useState({});
 
 	const showDropDown = (e) => <ShowMore dropdown={dropdown} rowId={e?.id} />;
 
@@ -58,6 +59,8 @@ function CampaignManagement() {
 				<CreateCycleForm
 					showCreateForm={showCreateForm}
 					setShowCreateForm={setShowCreateForm}
+					formData={formData}
+					setFormData={setFormData}
 				/>
 			)}
 
