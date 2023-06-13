@@ -1,5 +1,5 @@
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-
+import React from 'react';
 import Header from './CardHeader';
 import CardItem from './Carditem';
 import styles from './styles.module.css';

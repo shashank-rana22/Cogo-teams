@@ -1,6 +1,6 @@
 import { useForm } from '@cogoport/forms';
 import { startCase } from '@cogoport/utils';
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useCreateShipmentAdditionalService from '../../../../hooks/useCreateShipmentAdditionalService';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
@@ -21,7 +21,6 @@ const SHOW_REMARK_STATUS = [
 	'cancelled',
 	'disputed',
 ];
-const DEFAULT_VALUE = 0;
 
 function AddRate({
 	item = {},
@@ -135,7 +134,7 @@ function AddRate({
 				<p style={{ marginTop: '8px' }}>
 					<strong> Comment:</strong>
 					&nbsp;
-					{item?.remarks[DEFAULT_VALUE]}
+					{item?.remarks[0]}
 				</p>
 			) : null}
 
