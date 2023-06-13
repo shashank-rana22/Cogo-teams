@@ -4,20 +4,20 @@ import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
 
-const INITIAL_STATE = 1;
-const DEFAULT_VALUE = 0;
+const IS_EMPTY = 1;
+const IS_EXISTS = 0;
 
 function MultiServiceDetailsPopover({
 	children,
 	mainServices,
 
 }) {
-	if (mainServices?.length <= INITIAL_STATE) {
+	if (mainServices?.length <= IS_EMPTY) {
 		return null;
 	}
 
 	const renderBody = () => (
-		mainServices?.map((item, idx) => (idx !== DEFAULT_VALUE ? (
+		mainServices?.map((item, idx) => (idx !== IS_EXISTS ? (
 			<div className={styles.container} key={item?.id}>
 				<RenderCargoPills
 					detail={item}

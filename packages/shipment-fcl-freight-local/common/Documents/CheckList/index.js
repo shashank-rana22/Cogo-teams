@@ -1,5 +1,5 @@
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import Card from './Card';
 import styles from './styles.module.css';

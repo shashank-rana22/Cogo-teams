@@ -2,7 +2,7 @@ import { saveAs } from 'file-saver';
 
 import Content from './Content';
 
-const INITIAL_STATE = -1;
+const FIRST_INDEX = -1;
 const DEFAULT_VALUE = 0;
 
 const Card = ({
@@ -25,7 +25,7 @@ const Card = ({
 	};
 
 	return (taskList || []).map((item, idx) => {
-		const docType =	item?.document_type || item?.task.split('upload_').slice(INITIAL_STATE)[DEFAULT_VALUE];
+		const docType =	item?.document_type || item?.task.split('upload_').slice(FIRST_INDEX)[DEFAULT_VALUE];
 
 		let allUploadedDocs =	(completedDocs || []).filter((doc) => doc.document_type === docType)
 			|| emailDocs.filter((doc) => doc?.entity_type === docType);
