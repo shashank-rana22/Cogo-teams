@@ -63,11 +63,20 @@ function Filters({
 							Add To list
 						</Button>
 					) : ''}
-				{show && <AddCustomerModal show={show} setShow={setShow} />}
+				{(show)
+				&& (
+					<AddCustomerModal
+						show={show}
+						setShow={setShow}
+						subTabsValue={subTabsValue}
+					/>
+				)}
+
 				{showCycleExceptions && (
 					<ManageExceptionsModal
 						showCycleExceptions={showCycleExceptions}
 						setShowCycleExceptions={setShowCycleExceptions}
+						subTabsValue={subTabsValue}
 					/>
 				)}
 			</div>

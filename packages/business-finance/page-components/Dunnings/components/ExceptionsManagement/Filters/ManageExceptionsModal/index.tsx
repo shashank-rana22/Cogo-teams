@@ -3,18 +3,24 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
 
 import manageExceptionColumn from '../../../../configurations/manage-exception-table';
+import useManageExceptionList from '../../../../hooks/useManageExceptionList';
 
 import StyledTable from './StyledTable';
 
 function ManageExceptionsModal({
 	showCycleExceptions,
 	setShowCycleExceptions,
+	subTabsValue,
 }) {
 	const onClose = () => {
 		setShowCycleExceptions((pv) => !pv);
 	};
+	const {
+		manageExceptionData,
+		manageExceptionLoading,
+	} = useManageExceptionList();
+	const rest = { loading: manageExceptionLoading };
 
-	const rest = 'loading';
 	return (
 		<Modal size="lg" show={showCycleExceptions} onClose={onClose} placement="bottom">
 			<Modal.Header title="Manage Exceptions" />
@@ -37,7 +43,7 @@ function ManageExceptionsModal({
 					</div>
 				</div>
 				<StyledTable
-					data={[]}
+					data={manageExceptionData?.list || []}
 					columns={manageExceptionColumn()}
 					{...rest}
 				/>

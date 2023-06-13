@@ -8441,6 +8441,12 @@ const partner = {
 			access_type : 'private',
 		},
 	],
+	dunnings: [
+		{
+			api         : 'list_organization_trade_party_details',
+			access_type : 'private',
+		},
+	],
 	translate: [
 		{
 			api         : 'get_translation_translate_list',

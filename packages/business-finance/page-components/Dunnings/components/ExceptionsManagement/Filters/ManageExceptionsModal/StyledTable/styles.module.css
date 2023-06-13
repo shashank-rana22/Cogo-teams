@@ -6,25 +6,32 @@
 		background-color: #ffff;
 
 		.ui_table_container {
-			background: #acdadf;
 			border: none;
 		}
 
 		.ui_table_body_cell {
 			padding: 21px 10px !important;
 			overflow: unset;
+			border-bottom: 1px solid #acdadf;
 		}
 
 		.ui_table_head_cell {
+			background: #acdadf;
 			border-bottom: 2px solid #acdadf;
 		}
 
 		.ui_table_body_row {
 			position: relative;
+			border: 1px solid #acdadf;
+			border-radius: 2px;
 		}
 
 		.ui_table_head_cell:first-child {
 			padding: 0 0 0 30px;
+		}
+
+		.ui_table_body_row:hover {
+			background-color: #f3fafa !important;
 		}
 	}
 }

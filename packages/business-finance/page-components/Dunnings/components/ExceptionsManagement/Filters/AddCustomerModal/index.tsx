@@ -1,41 +1,72 @@
-import { Modal, Button, FileSelect } from '@cogoport/components';
-import { AsyncSelectController, AsyncSelect } from '@cogoport/forms';
+import { Modal, Button } from '@cogoport/components';
+import { useForm, AsyncSelectController } from '@cogoport/forms';
+import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import React, { useState } from 'react';
 
-function AddCustomerModal({ show, setShow }) {
-	const [fileValue, setFileValue] = useState();
-	const [loading, setLoading] = useState(false);
+import useAddUploadList from '../../../../hooks/useAddUploadList';
+
+import styles from './styles.module.css';
+
+function AddCustomerModal({
+	show, setShow,
+	subTabsValue,
+
+}) {
+	const [fileValue, setFileValue] = useState('');
 	const onClose = () => {
 		setShow((pv) => !pv);
 	};
+	const { getUploadList, uploadListLoading } = useAddUploadList({ onClose, subTabsValue });
+	const { control, handleSubmit, watch } = useForm();
+
+	const selectCustomerName = watch();
+
+	const onSubmit = (data) => {
+		getUploadList(data, fileValue);
+	};
+	console.log(subTabsValue, 'subTabsValue');
+
 	return (
-		<Modal size="md" show={show} onClose={onClose} placement="bottom">
+		<Modal size="md" show={show} onClose={onClose}>
 			<Modal.Header title="Add To List - Upload List" />
 			<Modal.Body>
-				<div>
-					<FileSelect value={fileValue} onChange={setFileValue} loading={loading} />
+				<div className={styles.body_container}>
+					<div className={styles.upload}>
+						<FileUploader
+							value={fileValue}
+							onChange={(val:string) => { setFileValue(val); }}
+							showProgress
+							draggable
+							accept=".csv,.xlsx"
+						/>
+					</div>
+
+					<div className={styles.heading}>
+						Or Add Customer
+					</div>
+					<AsyncSelectController
+						control={control}
+						name="excludedRegistrationNos"
+						asyncKey="list_trade_parties"
+						placeholder="Search Customer Name"
+						valueKey="registration_number"
+						multiple
+						isClearable
+						initialCall
+						style={{ width: '50%' }}
+						rules={{ required: true }}
+					/>
 				</div>
-				Or Add Customer
-				<AsyncSelect
-					name="orgId"
-					asyncKey="list_trade_parties"
-					valueKey="id"
-					isClearable
-					initialCall
-					// onChange={(userId) => setRoleTypeId(userId)}
-					// value={roleTypeId}
-					placeholder="Search Customer Name"
-					params={{
-						sage_organization_id_required : true,
-						filters                       : {
-							status: 'active',
-						},
-					}}
-				/>
 			</Modal.Body>
 			<Modal.Footer>
 				<div style={{ margin: '6px 20px' }}>Current Data is subjected to change upon submission.</div>
-				<Button onClick={onClose}>Submit</Button>
+				<Button
+					onClick={handleSubmit(onSubmit)}
+					disabled={(!selectCustomerName?.excludedRegistrationNos?.length && !fileValue) || uploadListLoading}
+				>
+					Submit
+
+				</Button>
 			</Modal.Footer>
 		</Modal>
 	);
