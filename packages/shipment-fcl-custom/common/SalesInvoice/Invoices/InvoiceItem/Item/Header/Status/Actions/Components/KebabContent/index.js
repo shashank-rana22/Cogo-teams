@@ -50,7 +50,7 @@ function KebabContent({
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
 	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true)
-		|| user_data.email === 'ajeet@cogoport.com';
+		|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const content = (
 		<div className={styles.dialog_box}>

@@ -6,7 +6,7 @@ const EDIT_SUPPLIER_SERVICE_STATES = ['init',
 const SERVICE_COMPLETED_OR_CANCELLED = ['completed', 'cancelled'];
 
 export default function getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig }) {
-	if (user_data?.email === 'ajeet@cogoport.com') {
+	if (user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
 		return true;
 	}
 
