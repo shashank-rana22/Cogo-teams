@@ -37,7 +37,6 @@ function TruckDetail({
 		>
 			<tr>
 				<td
-					colSpan="6"
 					style={{
 						textAlign       : 'center',
 						fontSize        : '20px',
@@ -46,6 +45,7 @@ function TruckDetail({
 						margin          : '8px',
 						borderRadius    : '2px',
 					}}
+					colSpan="6"
 				>
 					TAX INVOICE
 				</td>
@@ -81,129 +81,129 @@ function TruckDetail({
 			</tr>
 			<tr style={{ border: '2px solid black' }}>
 				<td
-					style={{ padding: '4px', border: '2px solid black' }}
+					style={{ border: '2px solid black' }}
 				>
 					RECEIPIENT ADDERESS
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{receipient_address}
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					TRUCK NO.
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{truck_no}
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					TRANSPORTER PAN
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{billing_address?.registration_number}
 				</td>
 			</tr>
 			<tr style={{ border: '2px solid black' }}>
 				<td
-					style={{ padding: '4px', border: '2px solid black' }}
+					style={{ border: '2px solid black' }}
 				>
 					RECEIPIENT GSTIN NO.
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{receipient_gstin}
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					Truck Type
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{truck_type}
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					TRANSPORTER GSTIN NO.
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{billing_address?.tax_number}
 				</td>
 			</tr>
 			<tr style={{ border: '2px solid black' }}>
 				<td
-					style={{ padding: '4px', border: '2px solid black' }}
+					style={{ border: '2px solid black' }}
 				>
 					WHETHER TAX IS PAYABLE ON RCM?
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{taxPayableRCM[importerExporterId] || ''}
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					Freight Type
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					Fixed
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					TRANSPORTER VENDOR CODE
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{transporter_vendor_code}
 				</td>
 			</tr>
 			<tr style={{ border: '2px solid black' }}>
 				<td
-					style={{ padding: '4px', border: '2px solid black' }}
+					style={{ border: '2px solid black' }}
 				>
 					DESCRIPTION OF SERVICE
 					&nbsp;
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{customerToServiceDescription[importerExporterId] || ''}
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					DELIVERY MONTH
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{delivery_month}
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					BILL NO.
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{bill_no}
 				</td>
 			</tr>
 			<tr style={{ border: '2px solid black' }}>
 				<td
-					style={{ padding: '4px', border: '2px solid black' }}
+					style={{ border: '2px solid black' }}
 				>
 					SAC CODE
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{sac_code}
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					Trip ID
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{trip_id}
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					BILL DATE
 					&nbsp;
 				</td>
-				<td style={{ padding: '4px' }}>
+				<td style={{ }}>
 					{bill_date ? formatDate({ date: bill_date, formatType: 'date' }) : ''}
 				</td>
 			</tr>
 			<tr style={{ border: '2px solid black' }}>
 				<td
-					style={{ padding: '4px', border: '2px solid black' }}
+					style={{ border: '2px solid black' }}
 				>
 					State Code
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }}>
+				<td style={{ border: '2px solid black' }}>
 					{state_code}
 				</td>
-				<td style={{ padding: '4px', border: '2px solid black' }} />
-				<td style={{ padding: '4px', border: '2px solid black' }} />
-				<td style={{ padding: '4px', border: '2px solid black' }} />
-				<td style={{ padding: '4px', border: '2px solid black' }} />
+				<td style={{ border: '2px solid black' }} />
+				<td style={{ border: '2px solid black' }} />
+				<td style={{ border: '2px solid black' }} />
+				<td style={{ border: '2px solid black' }} />
 			</tr>
 			<tr>
 				<td style={{ padding: '4px' }} colSpan="6">&nbsp;</td>
