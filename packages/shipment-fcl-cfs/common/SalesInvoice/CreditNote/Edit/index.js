@@ -15,7 +15,7 @@ import formatCreditNoteData from '../helpers/format-credit-note-data';
 import Form from './Form';
 import styles from './styles.module.css';
 
-const ZERO_INDEX = 0;
+const ZERO_VALUE = 0;
 
 function Edit({
 	setOpen = () => { },
@@ -69,7 +69,7 @@ function Edit({
 			isEdit  : true,
 		});
 
-		if (submit_data?.line_items?.length === ZERO_INDEX) {
+		if (submit_data?.line_items?.length === ZERO_VALUE) {
 			Toast.error('Line Items is required');
 			return;
 		}

@@ -6,7 +6,7 @@ import getValue from '../../../../../utils/getValue';
 import styles from './styles.module.css';
 
 const SPAN_COUNT = 12;
-const MULTIPLIER = 12;
+const MULTIPLIER = 100;
 
 function Item({
 	item,

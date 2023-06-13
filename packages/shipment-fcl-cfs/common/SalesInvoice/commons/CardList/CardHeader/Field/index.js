@@ -3,7 +3,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 const SPAN_COUNT = 12;
-const MULTIPLIER = 12;
+const MULTIPLIER = 100;
 
 function Field({ field = {}, showCode = false }) {
 	const renderHeaderText = () => {
