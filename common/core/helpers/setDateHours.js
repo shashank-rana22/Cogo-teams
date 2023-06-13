@@ -1,4 +1,8 @@
 const DEFAULT_VALUE_FOR_RADIX_PARAMETER = 10;
+const START_INDEX_FOR_TIME_FORMAT = 0;
+const END_INDEX_FOR_TIME_FORMAT = 3;
+const DEFAULT_SIZE_FOR_TIME_FORMAT = 3;
+const DEFAULT_VALUE_FOR_EACH_TIME_FORMAT_ELEMENT = 0;
 
 const setDateHours = ({ time = '0:0:0', date }) => {
 	const newDate = new Date(date);
@@ -7,17 +11,17 @@ const setDateHours = ({ time = '0:0:0', date }) => {
 		return null;
 	}
 
-	let [hour = 0, minute = 0, second = 0] = time.split(':');
+	const timeSplitted = [...time.split(':'), ...Array(DEFAULT_SIZE_FOR_TIME_FORMAT)]
+		.slice(START_INDEX_FOR_TIME_FORMAT, END_INDEX_FOR_TIME_FORMAT)
+		.map((_) => parseInt(_ || DEFAULT_VALUE_FOR_EACH_TIME_FORMAT_ELEMENT, DEFAULT_VALUE_FOR_RADIX_PARAMETER));
 
-	[hour, minute, second] = [hour, minute, second].map(
-		(item) => parseInt(item, DEFAULT_VALUE_FOR_RADIX_PARAMETER),
-	);
+	const isNaN = timeSplitted.map((_) => Number.isNaN(_)).includes(NaN);
 
-	if (Number.isNaN(hour) || Number.isNaN(minute) || Number.isNaN(second)) {
-		return null;
-	}
+	if (isNaN) return null;
 
-	newDate.setHours(hour, minute, second);
+	newDate.setHours(...timeSplitted);
+
 	return newDate;
 };
+
 export default setDateHours;
