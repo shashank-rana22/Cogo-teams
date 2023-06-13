@@ -4,6 +4,7 @@ import Header from '../../../commons/CommonHeader';
 
 function Chapter() {
 	const [search, setSearch] = useState('');
+	
 	return (
 		<div>
 			<Header setSearch={setSearch} search={search} label="Chapter" />
