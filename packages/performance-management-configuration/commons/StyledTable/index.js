@@ -6,11 +6,11 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
-function StyledTable({ columns = [], data = [], loading = false }) {
+function StyledTable({ columns = [], data = [], loading = false, emptyText }) {
 	if (isEmpty(data) && !loading) {
 		return (
 			<div style={{ paddingTop: 12, paddingLeft: 6 }}>
-				<EmptyState />
+				<EmptyState emptyText={emptyText} />
 			</div>
 		);
 	}
