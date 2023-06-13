@@ -167,3 +167,7 @@
 	margin: 4px 0 0 10px;
 	cursor: pointer;
 }
+
+.full_width{
+	width: 100%;
+}

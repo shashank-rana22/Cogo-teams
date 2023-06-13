@@ -51,7 +51,7 @@ function ChangeCurrency({
 	return (
 		<Modal
 			className={styles.form}
-			show={show === 'isChangeCurrency'}
+			show={show}
 			closeOnOuterClick={false}
 			showCloseIcon={false}
 		>

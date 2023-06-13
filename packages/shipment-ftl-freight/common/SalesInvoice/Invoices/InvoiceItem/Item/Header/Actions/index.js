@@ -25,7 +25,14 @@ const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: fa
 const EMPTY_ARRAY_LENGTH = 0;
 
 const DISABLE_STATUS = ['reviewed', 'approved'];
-// eslint-disable-next-line max-lines-per-function
+
+const remarkRender = ({ invoice }) => (
+	<div className={styles.remarkcontainer}>
+		<div className={styles.title}>Invoice Remarks</div>
+		<div className={styles.value}>{invoice.remarks}</div>
+	</div>
+);
+
 function Actions({
 	invoice = {},
 	bfInvoiceRefetch = () => {},
@@ -34,68 +41,22 @@ function Actions({
 	salesInvoicesRefetch = () => {},
 	isAuthorized = false,
 }) {
-	const [show, setShow] = useState(false);
-	const [isEditInvoice, setIsEditInvoice] = useState(false);
-	const [isChangeCurrency, setIsChangeCurrency] = useState(false);
-	const [showAddRemarks, setShowAddRemarks] = useState(false);
-	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
-	const [addCustomerInvoice, setAddCustomerInvoice] = useState(false);
-	const [updateCustomerInvoice, setUpdateCustomerInvoice] = useState(false);
-	const [fillCustomerData, setFillCustomerData] = useState(false);
-	const [showExchangeRate, setExchangeRate] = useState(false);
-
 	const { shipment_data } = useContext(ShipmentDetailContext);
+	const [show, setShow] = useState(false);
+	const [showModal, setShowModal] = useState(false);
 
 	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
 
-	const disableActionCondition = DISABLE_STATUS.includes(invoice.status)
-	|| isEmpty(invoiceData.invoice_trigger_date);
+	const disableActionCondition = DISABLE_STATUS.includes(invoice.status) || isEmpty(invoiceData.invoice_trigger_date);
 
-	let disableAction = showForOldShipments
-		? isIRNGenerated
-		: disableActionCondition;
+	let disableAction = showForOldShipments ? isIRNGenerated : disableActionCondition;
+	disableAction = invoice.status === 'amendment_requested' ? false : disableAction;
 
-	if (invoice.status === 'amendment_requested') {
-		disableAction = false;
-	}
-
-	const handleClickCurrency = () => {
-		setIsChangeCurrency(true);
+	const handleShowModal = (type) => {
 		setShow(false);
+		setShowModal(type);
 	};
-
-	const handleClickRemarks = () => {
-		setShow(false);
-		setShowAddRemarks(true);
-	};
-
-	const handleChangePayment = () => {
-		setShow(false);
-		setShowChangePaymentMode(true);
-	};
-
-	const handleClickInvoice = () => {
-		setShow(false);
-		setIsEditInvoice(true);
-	};
-
-	const handleCustomerInvoice = () => {
-		setShow(false);
-		setAddCustomerInvoice(true);
-	};
-
-	const handleExchangeRateModal = () => {
-		setShow(false);
-		setExchangeRate(true);
-	};
-
-	const remarkRender = () => (
-		<div className={styles.remarkcontainer}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
 
 	const handleRefetch = () => {
 		bfInvoiceRefetch();
@@ -104,40 +65,29 @@ function Actions({
 
 	const commonActions = invoice.status !== 'approved' && !disableAction;
 
-	const editInvoicesVisiblity =	(shipment_data?.is_cogo_assured !== true && !invoice?.is_igst)
-	|| isAuthorized;
+	const editInvoicesVisiblity = (shipment_data?.is_cogo_assured !== true && !invoice?.is_igst) || isAuthorized;
 
 	const content = (
 		<div className={styles.dialog_box}>
 			{commonActions ? (
 				<>
 					{editInvoicesVisiblity ? (
-						<div style={{ width: '100%' }}>
-							<ClickableDiv
-								className={styles.text}
-								onClick={handleClickInvoice}
-							>
+						<div className={styles.full_width}>
+							<ClickableDiv className={styles.text} onClick={() => handleShowModal('isEditInvoice')}>
 								Edit Invoices
-
 							</ClickableDiv>
 							<div className={styles.line} />
 						</div>
 					) : null}
 
 					<div>
-						<ClickableDiv
-							className={styles.text}
-							onClick={handleClickCurrency}
-						>
+						<ClickableDiv className={styles.text} onClick={() => handleShowModal('isChangeCurrency')}>
 							Change Currency
 						</ClickableDiv>
 						<div className={styles.line} />
 					</div>
 
-					<ClickableDiv
-						className={styles.text}
-						onClick={handleClickRemarks}
-					>
+					<ClickableDiv className={styles.text} onClick={() => handleShowModal('showAddRemarks')}>
 						Add Remarks
 					</ClickableDiv>
 
@@ -146,7 +96,7 @@ function Actions({
 							<div className={styles.line} />
 							<ClickableDiv
 								className={styles.text}
-								onClick={handleChangePayment}
+								onClick={() => handleShowModal('showChangePaymentMode')}
 							>
 								Change Payment Mode
 							</ClickableDiv>
@@ -158,35 +108,27 @@ function Actions({
 			{(invoice.exchange_rate_document || []).map((url) => (
 				<div key={url}>
 					{commonActions ? <div className={styles.line} /> : null}
-					<ClickableDiv
-						className={styles.text}
-						onClick={() => window.open(url, '_blank')}
-					>
+					<ClickableDiv className={styles.text} onClick={() => window.open(url, '_blank')}>
 						Exchange Rate Document
 					</ClickableDiv>
-					<div className={styles.line} />
-					<ClickableDiv
-						onClick={handleExchangeRateModal}
-						className={styles.text}
-					>
-						Exchange Rate Sheet
 
+					<div className={styles.line} />
+
+					<ClickableDiv onClick={() => handleShowModal('showExchangeRate')} className={styles.text}>
+						Exchange Rate Sheet
 					</ClickableDiv>
+
 					<div>
 						<div className={styles.line} />
-						<ClickableDiv
-							className={styles.text}
-							onClick={handleCustomerInvoice}
-						>
-							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
-								&nbsp;
-							{DISABLE_STATUS.includes(invoice?.status) ? '/Generate' : ''}
-							Customer Invoice
+						<ClickableDiv className={styles.text} onClick={() => handleShowModal('addCustomerInvoice')}>
+							{`${isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'} ${
+								DISABLE_STATUS.includes(invoice?.status) ? '/Generate' : ''}Customer Invoice`}
 						</ClickableDiv>
+
 						{DISABLE_STATUS.includes(invoice?.status) ? (
 							<ClickableDiv
 								className={styles.text}
-								onClick={() => { setShow(false); setUpdateCustomerInvoice(true); }}
+								onClick={() => handleShowModal('updateCustomerInvoice')}
 							>
 								Update Customer Invoice
 							</ClickableDiv>
@@ -197,10 +139,7 @@ function Actions({
 			{DISABLE_STATUS.includes(invoice?.status) ? (
 				<div>
 					<div className={styles.line} />
-					<ClickableDiv
-						className={styles.text}
-						onClick={() => { setShow(false); setFillCustomerData(true); }}
-					>
+					<ClickableDiv className={styles.text} onClick={() => handleShowModal('fillCustomerData')}>
 						Fill Shipment Data For Customer Portal
 					</ClickableDiv>
 				</div>
@@ -219,22 +158,9 @@ function Actions({
 							</div>
 						) : null}
 					</div>
-
-					{/* {invoice?.status === 'amendment_requested' ? (
-						<Tooltip
-							placement="bottom"
-							theme="light"
-							content={<AmendmentReasons invoice={invoice} />}
-						>
-							<div className={styles.icon_info_wrapper}>
-								<IcCError width={17} height={17} />
-							</div>
-						</Tooltip>
-					) : null} */}
 				</div>
 
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-
 					{(!disableAction || invoice.exchange_rate_document?.length > EMPTY_ARRAY_LENGTH)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
@@ -245,10 +171,7 @@ function Actions({
 							theme="light"
 							onClickOutside={() => setShow(false)}
 						>
-							<ClickableDiv
-								className={styles.icon_more_wrapper}
-								onClick={() => setShow(!show)}
-							>
+							<ClickableDiv className={styles.icon_more_wrapper} onClick={() => setShow(!show)}>
 								<IcMOverflowDot />
 							</ClickableDiv>
 						</Popover>
@@ -258,10 +181,7 @@ function Actions({
 						)}
 
 					{!isEmpty(invoice.remarks) ? (
-						<Tooltip
-							placement="bottom"
-							content={remarkRender()}
-						>
+						<Tooltip placement="bottom" content={remarkRender({ invoice })}>
 							<div className={styles.icon_more_wrapper}>
 								<IcMInfo fill="#DDEBC0" />
 							</div>
@@ -270,83 +190,82 @@ function Actions({
 				</div>
 			</div>
 
-			{(invoice.services || []).length && isEditInvoice ? (
+			{(invoice.services || []).length && showModal === 'isEditInvoice' ? (
 				<EditInvoice
-					show={isEditInvoice}
-					onClose={() => setIsEditInvoice(false)}
+					show={showModal === 'isEditInvoice'}
+					onClose={() => setShowModal(false)}
 					invoice={invoice}
 					refetch={handleRefetch}
 					shipment_data={shipment_data}
 				/>
 			) : null}
 
-			{isChangeCurrency ? (
+			{showModal === 'isChangeCurrency' ? (
 				<ChangeCurrency
-					isChangeCurrency={isChangeCurrency}
-					setIsChangeCurrency={setIsChangeCurrency}
+					show={showModal === 'isChangeCurrency'}
+					setShow={setShowModal}
 					invoice={invoice}
 					refetch={handleRefetch}
 				/>
 			) : null}
 
-			{showExchangeRate ? (
+			{showModal === 'showExchangeRate' ? (
 				<ExchangeRateModal
-					showExchangeRate={showExchangeRate}
-					setExchangeRate={setExchangeRate}
+					setShow={setShowModal}
 					invoice={invoice}
+					show={showModal === 'showExchangeRate'}
 				/>
 			) : null}
 
-			{showAddRemarks ? (
+			{showModal === 'showAddRemarks' ? (
 				<AddRemarks
-					showAddRemarks={showAddRemarks}
-					setShowAddRemarks={setShowAddRemarks}
+					show={showModal === 'showAddRemarks'}
+					setShow={setShowModal}
 					invoice={invoice}
 					refetch={handleRefetch}
 				/>
 			) : null}
 
-			{showChangePaymentMode ? (
+			{showModal === 'showChangePaymentMode' ? (
 				<ChangePaymentMode
-					show={showChangePaymentMode}
-					setShow={setShowChangePaymentMode}
+					show={showModal === 'showChangePaymentMode'}
+					setShow={setShowModal}
 					invoice={invoice}
 					refetch={handleRefetch}
 				/>
 			) : null}
 
-			{updateCustomerInvoice ? (
+			{showModal === 'updateCustomerInvoice' ? (
 				<UpdateCustomerInvoice
-					show={updateCustomerInvoice}
-					setShow={setUpdateCustomerInvoice}
-					closeModal={() => setUpdateCustomerInvoice(false)}
+					show={showModal === 'updateCustomerInvoice'}
+					setShow={setShowModal}
+					closeModal={() => setShowModal(false)}
 					refetch={handleRefetch}
 					shipmentData={shipment_data}
 					invoice={invoice}
 				/>
 			) : null}
 
-			{fillCustomerData ? (
+			{showModal === 'fillCustomerData' ? (
 				<FillCustomerPortalData
-					show={fillCustomerData}
-					closeModal={() => setFillCustomerData(false)}
+					show={showModal === 'fillCustomerData'}
+					closeModal={() => setShowModal(false)}
 					handleRefetch={handleRefetch}
 					shipmentData={shipment_data}
 					invoice={invoice}
 				/>
 			) : null}
 
-			{addCustomerInvoice ? (
+			{showModal === 'addCustomerInvoice' ? (
 				<AddCustomerInvoice
-					show={addCustomerInvoice}
-					setShow={setAddCustomerInvoice}
-					closeModal={() => setAddCustomerInvoice(false)}
+					show={showModal === 'addCustomerInvoice'}
+					setShow={setShowModal}
+					closeModal={() => setShowModal(false)}
 					handleRefetch={handleRefetch}
 					invoice={invoice}
 					shipmentData={shipment_data}
 				/>
 			) : null}
-
 		</div>
 	);
 }

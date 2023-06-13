@@ -29,7 +29,7 @@ function EditLineItems({
 
 	const isBas = (value || []).some((lineItem) => lineItem?.code === 'BAS');
 
-	const disableAddLineItem =	(service_name === 'subsidiary_service' && value.length > VALUE_LENGTH_GREATER_THAN)
+	const disableAddLineItem = (service_name === 'subsidiary_service' && value.length > VALUE_LENGTH_GREATER_THAN)
 		|| (isBas && BAS_DISABLED_SERVICE.includes(service_name)
 		&& getTradeTypeByIncoTerm(incoTerm) === 'export') || disableServiceEdit;
 

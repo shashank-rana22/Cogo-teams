@@ -9,7 +9,7 @@ const MIN_MAIN_SERVICE_LENGTH = 1;
 const MAIN_SERVIEC_FIRST = 0;
 
 function MultiServiceDetailsPopover({
-	children = {},
+	children = null,
 	mainServices = [],
 }) {
 	const keysForServices = useMemo(
