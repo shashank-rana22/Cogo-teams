@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 const currentYear = new Date().getFullYear();
 const newArray = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
 
-export const optionsYear = () => (newArray || [{}]).map((item) => (
+export const optionsYear = (newArray || [{}]).map((item) => (
 	{ value: item?.toString(), label: item?.toString() }));
 
 const getMonth = GLOBAL_CONSTANTS.months;

@@ -4,6 +4,11 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import styles from './styles.module.css';
 
+type Options = {
+	value: string;
+	label: string;
+};
+
 interface DashboardFilterInterface {
 	month?:string
 	year?:string
@@ -11,19 +16,10 @@ interface DashboardFilterInterface {
 interface FilterHeaderInterface {
 	setDashboardFilters?: React.Dispatch<React.SetStateAction<DashboardFilterInterface>>
 	dashboardFilters?:DashboardFilterInterface
-	GET_MONTH_DETAILS?: {
-		value?: string;
-		label?: string;
-	}
+	GET_MONTH_DETAILS?: Options
 	GET_YEAR_DETAILS?:string
-	optionsMonth: {
-		value: string;
-		label: string;
-	}[]
-	optionsYear: () => {
-		value: string;
-		label: string;
-	}[]
+	optionsMonth: Options[]
+	optionsYear: Options[]
 	control: object
 }
 
@@ -39,7 +35,7 @@ function FilterHeader({
 					value={dashboardFilters?.year || GET_YEAR_DETAILS}
 					onChange={(val:string) => { setDashboardFilters((prev) => ({ ...prev, year: val })); }}
 					placeholder="Year"
-					options={optionsYear()}
+					options={optionsYear}
 					isClearable
 					style={{ width: '110px' }}
 					size="sm"

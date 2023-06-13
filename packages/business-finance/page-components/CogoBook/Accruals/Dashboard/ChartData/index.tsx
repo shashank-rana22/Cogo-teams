@@ -5,22 +5,22 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import styles from './styles.module.css';
 
 interface ChartDataInterface {
-	expenseBookedSum?: number
-	expenseAccruedSum?: number
-	expenseCurrency?: string
-	incomeBookedSum?: number
-	incomeAccruedSum?: number
-	incomeCurrency?: string
-	statsLoading?: boolean
-	COLORS?: Array<string>
-	data?: Array<object>
-	dataExpense?: Array<object>
+	expenseBookedSum?: number;
+	expenseAccruedSum?: number;
+	expenseCurrency?: string;
+	incomeBookedSum?: number;
+	incomeAccruedSum?: number;
+	incomeCurrency?: string;
+	statsLoading?: boolean;
+	COLORS?: Array<string>;
+	data?: Array<object>;
+	dataExpense?: Array<object>;
 }
 function ChartData({
 	expenseBookedSum, expenseAccruedSum, expenseCurrency, incomeBookedSum, incomeAccruedSum,
 	incomeCurrency, statsLoading, COLORS, data, dataExpense,
 }:ChartDataInterface) {
-	function CenteredMetric({ centerX, centerY }) {
+	function CenteredMetric({ centerX, centerY }:{ centerX?:number, centerY?:number }) {
 		return (
 			<text
 				x={centerX}
@@ -35,7 +35,7 @@ function ChartData({
 		);
 	}
 
-	function CenteredMetricExpense({ centerX, centerY }) {
+	function CenteredMetricExpense({ centerX, centerY }:{ centerX?:number, centerY?:number }) {
 		return (
 			<text
 				x={centerX}
@@ -71,7 +71,7 @@ function ChartData({
 					Booked Income
 					<div className={styles.amount_data}>
 						{ statsLoading ? <Placeholder height="20px" width="80px" />
-							: formatAmount({ amount: incomeBookedSum.toString(), currency: incomeCurrency }) || 0.00}
+							: formatAmount({ amount: incomeBookedSum?.toString(), currency: incomeCurrency }) || 0.00}
 					</div>
 				</div>
 
@@ -79,7 +79,7 @@ function ChartData({
 					Accrued Income
 					<div className={styles.amount_data}>
 						{statsLoading ? <Placeholder height="20px" width="80px" />
-							: formatAmount({ amount: incomeAccruedSum.toString(), currency: incomeCurrency }) || 0.00}
+							: formatAmount({ amount: incomeAccruedSum?.toString(), currency: incomeCurrency }) || 0.00}
 					</div>
 				</div>
 
@@ -105,7 +105,7 @@ function ChartData({
 					Booked Expense
 					<div className={styles.amount_data}>
 						{ statsLoading ? <Placeholder height="20px" width="80px" />
-							: formatAmount({ amount: expenseBookedSum.toString(), currency: expenseCurrency }) || 0.00}
+							: formatAmount({ amount: expenseBookedSum?.toString(), currency: expenseCurrency }) || 0.00}
 					</div>
 				</div>
 
@@ -113,7 +113,10 @@ function ChartData({
 					Accrued Expense
 					<div className={styles.amount_data}>
 						{ statsLoading ? <Placeholder height="20px" width="80px" />
-							: formatAmount({ amount: expenseAccruedSum.toString(), currency: expenseCurrency }) || 0.00}
+							: formatAmount({
+								amount   : expenseAccruedSum?.toString(),
+								currency : expenseCurrency,
+							}) || 0.00}
 					</div>
 				</div>
 

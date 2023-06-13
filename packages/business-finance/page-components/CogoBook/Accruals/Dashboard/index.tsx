@@ -18,7 +18,7 @@ import styles from './styles.module.css';
 
 const GET_MONTH_DETAILS = optionsMonth.filter((i) => i.value === new Date().getMonth().toString())?.[0];
 
-const GET_YEAR_DETAILS = optionsYear()?.[0]?.value;
+const GET_YEAR_DETAILS = optionsYear?.[0]?.value;
 
 const COLORS = ['#57C6D1', '#ADCC6A'];
 

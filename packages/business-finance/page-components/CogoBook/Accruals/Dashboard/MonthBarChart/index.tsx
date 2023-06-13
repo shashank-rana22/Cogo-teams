@@ -1,7 +1,8 @@
 import { ResponsiveBar } from '@cogoport/charts/bar';
 
-import { getAmountInLakhCrK } from './getAmountInLakhCrK';
-import { getAmountLineChartInLakh } from './getAmountLineChartInLakh';
+import { getAmountInLakhCrK } from '../../../common/getAmountInLakhCrK';
+import { getAmountLineChartInLakh } from '../../../common/getAmountLineChartInLakh';
+
 import styles from './styles.module.css';
 
 export interface BarDatum {
@@ -55,7 +56,7 @@ function MonthBarChart({ monthlyData }:MonthlyBarChartInterface) {
 										fill             : '#333',
 									}}
 								>
-									{getAmountLineChartInLakh(bar.data.value)}
+									{getAmountLineChartInLakh(bar?.data?.value || 0)}
 								</text>
 							))}
 						</g>

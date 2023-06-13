@@ -1,7 +1,8 @@
-import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
+
+import toastApiError from '../../commons/toastApiError';
 
 interface MonthlyStatsInterface {
 	month?:string
@@ -31,9 +32,7 @@ const useMonthlyTrendStats = ({ month, year, entityCode }:MonthlyStatsInterface)
 				},
 			});
 		} catch (error) {
-			if (error?.response?.data?.message) {
-				Toast.error(error?.response?.data?.message);
-			}
+			toastApiError(error);
 		}
 	}, [entityCode, month, trigger, year]);
 

@@ -1,7 +1,8 @@
-import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 import { useState, useCallback, useEffect } from 'react';
+
+import toastApiError from '../../commons/toastApiError';
 
 interface StatsDataInterface {
 	bookedShipmentCount?: number
@@ -54,10 +55,8 @@ const useShipmentIdStats = ({ month, year, entityCode }:StatsInterface) => {
 			});
 			setStatsData(resp?.data);
 		} catch (error) {
-			if (error?.response?.data?.message) {
-				Toast.error(error?.response?.data?.message);
-				setStatsData({});
-			}
+			toastApiError(error);
+			setStatsData({});
 		}
 	}, [entityCode, month, trigger, year]);
 

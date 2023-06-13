@@ -68,29 +68,35 @@ function StatsNumericData({ statsData, statsLoading }:NumericInterface) {
 		{
 			label  : 'Booked Profit',
 			amount : formatAmount({
-				amount   : bookedProfit.toString(),
+				amount   : bookedProfit.toString() || '0.00',
 				currency : expenseCurrency,
-			}) || 0.00,
+			}),
 		},
 		{
 			label  : 'Actual Profit ',
 			amount : formatAmount({
-				amount   : actualProfit.toString(),
+				amount   : actualProfit.toString() || '0.00',
 				currency : expenseCurrency,
-			}) || 0.00,
+			}),
 		},
-		{ label: 'Variance', amount: formatAmount({ amount: variance.toString(), currency: expenseCurrency }) || 0.00 },
+		{
+			label  : 'Variance',
+			amount : formatAmount({
+				amount   : variance.toString() || '0.00',
+				currency : expenseCurrency,
+			}),
+		},
 	];
 
 	const getRenderVarianceData = [
 		{
 			label  : 'Expense Variation',
-			amount : formatAmount({ amount: varianceExpense.toString(), currency: varianceCurrency }) || 0.00,
+			amount : formatAmount({ amount: varianceExpense.toString() || '0.00', currency: varianceCurrency }),
 			color  : '#EE3425',
 		},
 		{
 			label  : 'Income Variation',
-			amount : formatAmount({ amount: varianceIncome.toString(), currency: varianceCurrency }) || 0.00,
+			amount : formatAmount({ amount: varianceIncome.toString() || '0.00', currency: varianceCurrency }),
 			color  : '#849E4C',
 		},
 	];
@@ -158,7 +164,7 @@ function StatsNumericData({ statsData, statsLoading }:NumericInterface) {
 					{' '}
 					<span className={styles.percentage}>
 						{ statsLoading
-							? <Placeholder height="20px" width="40px" /> : `${bookedProfitPercentage.toFixed(2)} %`}
+							? <Placeholder height="20px" width="40px" /> : `${bookedProfitPercentage?.toFixed(2)} %`}
 
 					</span>
 					{' '}
@@ -167,7 +173,7 @@ function StatsNumericData({ statsData, statsLoading }:NumericInterface) {
 					<span className={styles.percentage}>
 						{' '}
 						{ statsLoading
-							? <Placeholder height="20px" width="40px" /> : `${actualProfitPercentage.toFixed(2)} %`}
+							? <Placeholder height="20px" width="40px" /> : `${actualProfitPercentage?.toFixed(2)} %`}
 						{' '}
 					</span>
 					<Popover placement="bottom" render={contentProfit}>
@@ -182,7 +188,7 @@ function StatsNumericData({ statsData, statsLoading }:NumericInterface) {
 					<span className={styles.percentage}>
 						{' '}
 						{ statsLoading
-							? <Placeholder height="20px" width="40px" /> : `${variancePercentage.toFixed(2)} %`}
+							? <Placeholder height="20px" width="40px" /> : `${variancePercentage?.toFixed(2)} %`}
 					</span>
 					<Popover placement="bottom" render={contentVariance}>
 						<div className={styles.icon_arrow}><IcMArrowRotateDown /></div>
