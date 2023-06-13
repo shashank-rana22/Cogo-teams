@@ -19,6 +19,9 @@ import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDef
 
 import styles from './styles.module.css';
 
+const FIRST_ORG_TRADE_PARTY_INDEX = 0;
+
+const PINCODE_FROM_ADDRESS_SPLIT_INDEX = 1;
 function SelfAndTradePartyForm({
 	companyType = '',
 	tradePartyType = '',
@@ -44,7 +47,7 @@ function SelfAndTradePartyForm({
 
 	const { trade_party_id, address } = watch() || {};
 
-	const firstTradeParty = list?.[0]?.id;
+	const firstTradeParty = list?.[FIRST_ORG_TRADE_PARTY_INDEX]?.id;
 
 	useEffect(() => {
 		if (companyType === 'self') {
@@ -61,7 +64,7 @@ function SelfAndTradePartyForm({
 	}, [trade_party_id, list, setValue, resetField]);
 
 	useEffect(() => {
-		setValue('pincode', address?.split('::')?.[1]);
+		setValue('pincode', address?.split('::')?.[PINCODE_FROM_ADDRESS_SPLIT_INDEX]);
 	}, [address, setValue]);
 
 	const company_options = getCompanyNameOptions(list);

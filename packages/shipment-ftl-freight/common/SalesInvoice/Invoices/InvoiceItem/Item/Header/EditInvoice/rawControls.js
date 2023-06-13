@@ -5,12 +5,6 @@ import { startCase, isEmpty } from '@cogoport/utils';
 const PRICE_GREATER_THAN = 0;
 const MIN_ALIAS_LENGTH = 3;
 
-const handleDisableCond = (charge, isFclFreight, shipment_data) => {
-	const disable =	!isFclFreight && shipment_data?.serial_id > 130000;
-
-	return disable;
-};
-
 const rawControls = (
 	handleChange,
 	charge,
@@ -54,7 +48,7 @@ const rawControls = (
 			handleChange,
 			placeholder : 'select line item',
 			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data),
+				!isFclFreight,
 			rules: { required: 'Required' },
 		},
 		{
@@ -71,7 +65,7 @@ const rawControls = (
 			rules       : {
 				validate: (v) => v?.length >= MIN_ALIAS_LENGTH || isEmpty(v) || 'Characters should be >= 3',
 			},
-			disabled : handleDisableCond(charge, isFclFreight, shipment_data),
+			disabled : !isFclFreight,
 			span     : 2,
 		},
 		{
@@ -91,7 +85,7 @@ const rawControls = (
 			rules          : { required: 'currency is required' },
 			span           : 1.5,
 			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data),
+				!isFclFreight,
 		},
 		{
 			label       : 'Price',
@@ -103,7 +97,7 @@ const rawControls = (
 				required : 'Price is Required',
 				validate : (v) => v > PRICE_GREATER_THAN || 'Price must be greater than 0',
 			},
-			disabled: handleDisableCond(charge, isFclFreight, shipment_data),
+			disabled: !isFclFreight,
 		},
 		{
 			label       : 'Quantity',
@@ -113,7 +107,7 @@ const rawControls = (
 			rules       : { required: 'Required', min: 1 },
 			span        : 1,
 			disabled:
-				handleDisableCond(charge, isFclFreight, shipment_data),
+				!isFclFreight,
 		},
 		{
 			label  : 'Amount (Tax Excl.)',

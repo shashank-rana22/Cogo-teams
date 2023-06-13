@@ -85,11 +85,11 @@
 	cursor: pointer;
 }
 
-.errors{
-	font-size      : var(--font-size-md);
-	line-height    : 16px;
-	letter-spacing : 0.02em;
-	padding-left   : 4px;
-	margin        : 0px;
-	color         : #cb6464;
+.errors {
+	padding-left: 4px;
+	margin: 0;
+	font-size: var(--font-size-md);
+	line-height: 16px;
+	color: #cb6464;
+	letter-spacing: 0.02em;
 }

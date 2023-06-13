@@ -1,7 +1,7 @@
 import { TextAreaController } from '@cogoport/forms';
 
 import styles from './styles.module.css';
-import TABLE_DETAIL_CONTROLS from './tableDetailControls';
+import TABLE_DETAIL_CONTROLS from './TableDetailControls';
 
 const getTableDetails = ({ service_type, control, setValue = () => {} }) => {
 	const TABLE_DETAILS = TABLE_DETAIL_CONTROLS[service_type]?.length
