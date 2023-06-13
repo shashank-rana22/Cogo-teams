@@ -1,8 +1,9 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const getMonth = GLOBAL_CONSTANTS.months;
-export const optionsMonth = (getMonth || [{}]).map((item: string, index: number) => {
-	const count = index + 1;
+const INCREASE_COUNT = 1;
+export const optionsMonth = (getMonth || [{}]).map((item, index) => {
+	const count = index + INCREASE_COUNT;
 	const options = { value: count?.toString(), label: item };
 	return options;
 });
@@ -22,4 +23,10 @@ export const optionsGSTIN = (entityVal) => {
 		return entity301GSTIN.map((item) => ({ value: item, label: item }));
 	}
 	return [];
+};
+
+export 	const getSupplierData = (item) => {
+	const { value } = item || {};
+	return [{ heading: 'Supplier Name :', value: 'Customer Name Here pvt ltd...' },
+		{ heading: 'GSTIN  :', value: '685Y48399201020489493' }];
 };

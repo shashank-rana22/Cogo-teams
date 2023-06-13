@@ -1,0 +1,34 @@
+.breadcrumb {
+  text-decoration: underline;
+  :global {
+    .ui_s6nmK {
+      cursor: pointer !important;
+    }
+  }
+}
+.back_button {
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+.go_back {
+  text-decoration: underline;
+  margin-left: 8px;
+  font-weight: 600;
+}
+.supplier_card {
+  background: #f3fafa;
+  border: 1px solid #88cad1;
+  border-radius: 8px;
+  padding: 16px 24px;
+  align-items: center;
+  display: flex;
+  margin: 16px 0px;
+}
+.name_value {
+  display: flex;
+  width: 40%;
+}
+.value_data {
+  font-weight: 600;
+}

@@ -4,16 +4,7 @@ import { optionEntity, optionsGSTIN, optionsMonth } from '../helper';
 
 import styles from './styles.module.css';
 
-interface HeaderInterface {
-	setFilters?: React.Dispatch<React.SetStateAction<object>>
-	filters?:{
-		month?:string
-		entity?:string
-		gstin?:string
-	}
-}
-
-function HeaderOutward({ filters, setFilters }:HeaderInterface) {
+function HeaderOutward({ filters, setFilters }) {
 	return (
 		<div className={styles.header_container}>
 			<div>

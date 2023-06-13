@@ -24,7 +24,7 @@ const tabsKeyComponentMapping = {
 
 function Compliance() {
 	const { query, push } = useRouter();
-	const [activeTab, setActiveTab] = useState<string>(query?.active_tab?.toString() || 'dashboard');
+	const [activeTab, setActiveTab] = useState(query?.active_tab || 'dashboard');
 
 	const tabComponentProps = {
 		dashboard: {
@@ -35,7 +35,7 @@ function Compliance() {
 		},
 	};
 	const ActiveTabComponent = tabsKeyComponentMapping[activeTab] || null;
-	const onChange = (view:string) => {
+	const onChange = (view) => {
 		setActiveTab(view);
 		push(
 			'/business-finance/compliance/[active_tab]',
@@ -53,7 +53,7 @@ function Compliance() {
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTab}
-					onChange={(tab:string) => onChange(tab)}
+					onChange={(tab) => onChange(tab)}
 					fullWidth
 					themeType="primary"
 				>

@@ -25,7 +25,7 @@ function Register() {
 	const { query, push } = useRouter();
 	const { sub_active_tab:queryValue } = query || {};
 	const [filters, setFilters] = useState({});
-	const [subActiveTab, setSubActiveTab] = useState<string>(queryValue?.toString() || 'outward');
+	const [subActiveTab, setSubActiveTab] = useState(queryValue || 'outward');
 	const tabComponentProps = {
 		outward: {
 			filters,
