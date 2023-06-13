@@ -6,8 +6,15 @@ import {
 	supply_sub_reasons,
 } from '../configs/supply-reason-options';
 
+const CANCEL_WHILE_EXPLORING_REASON = {
+	label : 'I was just exploring',
+	value : 'i_was_just_exploring',
+};
+
 const controls = (state, cancelReason) => {
-	const salesOptionLimit = state === 'shipment_received' ? 7 : 6;
+	const SALES_OPTION_REASONS = state === 'shipment_received'
+		? [...sales_reason_options, CANCEL_WHILE_EXPLORING_REASON]
+		: [...sales_reason_options];
 	const supplyOptionsState = state === 'in_progress' ? 'in_progress' : 'not_in_progress';
 
 	return {
@@ -17,7 +24,7 @@ const controls = (state, cancelReason) => {
 				label     : 'Please select a reason for cancelling the shipment',
 				type      : 'radio',
 				className : 'width_100',
-				options   : sales_reason_options.slice(0, salesOptionLimit),
+				options   : SALES_OPTION_REASONS,
 				rules     : {
 					required: {
 						value   : true,

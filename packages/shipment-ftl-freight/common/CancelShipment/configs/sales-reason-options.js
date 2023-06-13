@@ -23,9 +23,5 @@ const sales_reason_options = [
 		label : 'Contracted Fleet Unavailable',
 		value : 'contracted_fleet_unavailable',
 	},
-	{
-		label : 'I was just exploring',
-		value : 'i_was_just_exploring',
-	},
 ];
 export default sales_reason_options;
