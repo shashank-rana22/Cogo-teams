@@ -7,6 +7,7 @@ interface IrnCancellationProps {
 	response?: {
 		remarks?: string;
 	},
+	refetch?: Function;
 }
 interface Values {
 	AgreementNumber?: string;
@@ -18,7 +19,7 @@ interface AgreementPdfFile {
 	finalUrl?: string;
 }
 
-const useGetIrnCancellation = ({ id, setShowCancellationModal, response }: IrnCancellationProps) => {
+const useGetIrnCancellation = ({ id, setShowCancellationModal, response, refetch }: IrnCancellationProps) => {
 	const [
 		{ loading },
 		cancelIrnApi,
@@ -33,14 +34,16 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal, response }: IrnCa
 
 	const { remarks } = response || {};
 	const onSubmit = async (values: Values) => {
-		const { AgreementNumber, AgreementDate, AgreementPdfFile } = values || {};
+		const { Agreement_number: AgreementNumber, 
+				Agreement_date: AgreementDate, 
+				Agreement_pdf_file:AgreementPdfFile } = values || {};
 		const { finalUrl } = AgreementPdfFile || {};
 		try {
 			const payload = {
 				cancelReason     : remarks || undefined,
 				agreementNumber  : AgreementNumber || undefined,
 				agreementDate    : AgreementDate || undefined,
-				agrDmentDocument : finalUrl || undefined,
+				agreementDocument : finalUrl || undefined,
 			};
 			const resp = await cancelIrnApi({
 				data: payload,
@@ -49,6 +52,7 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal, response }: IrnCa
 				Toast.success('IRN Cancelled Successfully');
 				setShowCancellationModal(false);
 			}
+			refetch();
 		} catch (err) {
 			Toast.error(err?.error?.message || 'Something went wrong');
 		}

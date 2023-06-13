@@ -7,24 +7,38 @@ import useGetIrnCancellation from '../../hooks/useGetIrnCancellation';
 import styles from './styles.module.css';
 
 interface MappedValues {
-	AGREEMENT_NUMBER: { message: string };
-	AGREEMENT_PDF_FILE: { message: string };
-	AGREEMENT_DATE: { message: string };
-	E_INVOICE_DATE: { message: string };
-	CANCELLATION_REASON: { message: string };
+	AGREEMENT_NUMBER?: { message: string };
+	AGREEMENT_PDF_FILE?: { message: string };
+	AGREEMENT_DATE?: { message: string };
+	E_INVOICE_DATE?: { message: string };
+	CANCELLATION_REASON?: { message: string };
 }
 
+type ItemData = {
+	id?: string;
+	invoiceNumber?: string;
+	invoiceDate?: string;
+}
+interface CancelModal {
+	itemData?: ItemData;
+	showCancellationModal?: boolean;
+	setShowCancellationModal?: Function;
+	IRNLabel?: string;
+}
 function CancellationModal({
 	itemData,
 	showCancellationModal,
 	setShowCancellationModal,
 	IRNLabel,
-}) {
+	refetch,
+}: CancelModal) {
 	const {
 		handleSubmit,
 		control,
 		formState: { errors: errorVal },
 	} = useForm();
+
+	const {id, invoiceNumber, invoiceDate} = itemData || {};
 
 	const [response, setResponse] = useState({
 		remarks: '',
@@ -34,6 +48,7 @@ function CancellationModal({
 		id: itemData?.id,
 		setShowCancellationModal,
 		response,
+		refetch,
 	});
 
 	const mapping: Record<string, { key: string }> = {
