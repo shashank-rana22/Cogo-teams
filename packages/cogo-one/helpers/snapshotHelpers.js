@@ -7,7 +7,7 @@ import {
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { PAGE_LIMIT } from '../constants';
-import { HIDE_FLASH_MESSAGES_FOR } from '../constants/VIEW_TYPE_CONSTANTS';
+import { HIDE_FLASH_MESSAGES_FOR } from '../constants/viewTypeConstants';
 
 const LAST_INDEX = 1;
 const FALLBACK_VALUE = 0;
