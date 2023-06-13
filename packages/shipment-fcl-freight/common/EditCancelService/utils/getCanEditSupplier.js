@@ -1,4 +1,4 @@
-import CONSTANTS from '../../../configurations/constant.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const EDIT_SUPPLIER_SERVICE_STATES = [
 	'init',
@@ -19,7 +19,7 @@ const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = [
 const SERVICE_COMPLETED_OR_CANCELLED = ['completed', 'cancelled'];
 
 export default function getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder }) {
-	if (user_data?.email === CONSTANTS.ajeet_email) {
+	if (user_data?.user?.id === GLOBAL_CONSTANTS.ajeet_singh_user_id) {
 		return true;
 	}
 
@@ -27,7 +27,7 @@ export default function getCanEditSupplier({ shipment_data, user_data, state, ac
 
 	const serviceInEditSupplierState = EDIT_SUPPLIER_SERVICE_STATES?.includes(state);
 
-	const oldShipmentEditable = shipment_data?.serial_id <= CONSTANTS.invoice_check_id
+	const oldShipmentEditable = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
 	&& !SERVICE_COMPLETED_OR_CANCELLED.includes(state);
 
 	return isStakeholderAllowed && (serviceInEditSupplierState || oldShipmentEditable);
