@@ -12,7 +12,7 @@
 	gap: 4px;
 	padding: 16px 0 4px;
 	font-size: var(--font-size-md);
-	color: var(--color-secondary-black-4);
+	color: var(--color-secondary-4);
 }
 
 .span_style_label {
@@ -21,6 +21,6 @@
 
 .span_style_value {
 	font-weight: 600;
-	cursor: pointer;
 	color: #f68b21;
+	cursor: pointer;
 }

@@ -10,9 +10,9 @@ interface IrnCancellationProps {
 	refetch?: Function;
 }
 interface Values {
-	Agreement_number?: string;
-	Agreement_date?: string;
-	Agreement_pdf_file?: AgreementPdfFile;
+	agreementNumber?: string;
+	agreementDate?: string;
+	agreementPdfFile?: AgreementPdfFile;
 }
 
 interface AgreementPdfFile {
@@ -35,16 +35,16 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal, response, refetch
 	const { remarks } = response || {};
 	const onSubmit = async (values: Values) => {
 		const {
-			Agreement_number,
-			Agreement_date,
-			Agreement_pdf_file,
+			agreementNumber,
+			agreementDate,
+			agreementPdfFile,
 		} = values || {};
-		const { finalUrl } = Agreement_pdf_file || {};
+		const { finalUrl } = agreementPdfFile || {};
 		try {
 			const payload = {
 				cancelReason      : remarks || undefined,
-				agreementNumber   : Agreement_number || undefined,
-				agreementDate     : Agreement_date || undefined,
+				agreementNumber   : agreementNumber || undefined,
+				agreementDate     : agreementDate || undefined,
 				agreementDocument : finalUrl || undefined,
 			};
 			const resp = await cancelIrnApi({

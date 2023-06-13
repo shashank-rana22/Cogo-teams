@@ -16,13 +16,13 @@ import ShipmentView from './ShipmentView';
 import SortHeaderInvoice from './SortHeaderInvoice';
 import styles from './styles.module.css';
 
-const status = {
+const STATUS = {
 	UNPAID           : '#FEF1DF',
 	'PARTIALLY PAID' : '#D9EAFD',
 	PAID             : '#CDF7D4',
 };
 
-const invoiceType = {
+const INVOICE_TYPE = {
 	REIMBURSEMENT : '#FEF1DF',
 	CREDIT_NOTE   : '#D9EAFD',
 	INVOICE       : '#CDF7D4',
@@ -165,7 +165,7 @@ const completedColumn = ({
 							</div>
 						)}
 					<div>
-						<Pill size="sm" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
+						<Pill size="sm" color={INVOICE_TYPE[(getByKey(row, 'invoiceType') as string)]}>
 
 							{row?.eInvoicePdfUrl ? 'E INVOICE' : startCase(getByKey(row, 'invoiceType') as string)}
 
@@ -215,7 +215,7 @@ const completedColumn = ({
 				<div
 					className={styles.styled_pills}
 					style={{
-						'--color': status[(getByKey(row, 'status') as string)],
+						'--color': STATUS[(getByKey(row, 'status') as string)],
 					} as CSSProperties}
 				>
 

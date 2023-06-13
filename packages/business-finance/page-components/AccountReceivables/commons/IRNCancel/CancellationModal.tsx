@@ -53,9 +53,9 @@ function CancellationModal({
 	});
 
 	const mapping: Record<string, { key: string }> = {
-		Agreement_number    : { key: 'AGREEMENT_NUMBER' },
-		Agreement_pdf_file  : { key: 'AGREEMENT_PDF_FILE' },
-		Agreement_date      : { key: 'AGREEMENT_DATE' },
+		agreementNumber    : { key: 'AGREEMENT_NUMBER' },
+		agreementPdfFile  : { key: 'AGREEMENT_PDF_FILE' },
+		agreementDate      : { key: 'AGREEMENT_DATE' },
 		E_invoice_date      : { key: 'E_INVOICE_DATE' },
 		Cancellation_reason : { key: 'CANCELLATION_REASON' },
 	};
@@ -109,7 +109,7 @@ function CancellationModal({
 									</div>
 									<InputController
 										control={control}
-										name="Agreement_number"
+										name="agreementNumber"
 										placeholder="Agreement Number"
 										type="number"
 										rules={{ required: 'Agreement Number is required' }}
@@ -127,7 +127,7 @@ function CancellationModal({
 									</div>
 									<DatepickerController
 										control={control}
-										name="Agreement_date"
+										name="agreementDate"
 										type="datepicker"
 										isPreviousDaysAllowed
 										placeholder="Agreement Date"
@@ -164,7 +164,7 @@ function CancellationModal({
 									<div className={styles.lable_style}>Agreement Proof *</div>
 									<UploadController
 										control={control}
-										name="Agreement_pdf_file"
+										name="agreementPdfFile"
 										rules={{
 											required: 'Agreement pdf file is required',
 										}}
