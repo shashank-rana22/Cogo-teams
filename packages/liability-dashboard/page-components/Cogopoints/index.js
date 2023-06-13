@@ -24,7 +24,7 @@ function CogoPoints() {
 	const currencyCode = geo.country.currency.code;
 	const transactionType = activeStatsCard === 'liability_point_value' ? 'credit' : 'debit';
 
-	const { statsData = {}, loading = false } = useGetCogopointStats({ activeHeaderTab, selectedDate });
+	const { statsData = {}, loading = false } = useGetCogopointStats({ activeHeaderTab, selectedDate, currencyCode });
 
 	const { data = {}, credit_data = {}, debit_data = {} } = statsData || {};
 
@@ -32,7 +32,7 @@ function CogoPoints() {
 		topHistoryData = {},
 		topHistoryLoading = false,
 		setPagination = () => {},
-	} = useListCogopointTopHistory({ transactionType, selectedDate, activeStatsCard });
+	} = useListCogopointTopHistory({ transactionType, selectedDate, activeStatsCard, activeHeaderTab, currencyCode });
 
 	const { credit_cogopoint_date_data = {}, list = [], page, page_limit, total_count } = topHistoryData;
 

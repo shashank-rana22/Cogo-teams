@@ -29,17 +29,17 @@ export const STATS_CARDS = [
 		access : ['overall', 'importer_exporter', 'channel_partner'],
 	},
 	{
-		label  : 'Burnt Thru Shipments',
+		label  : 'Burnt (Shipments)',
 		name   : 'shipment_burnt_point_value',
 		access : ['overall', 'importer_exporter', 'channel_partner'],
 	},
 	{
-		label  : 'Burnt Thru Subscriptions',
+		label  : 'Burnt (Subscriptions)',
 		name   : 'saas_subscription_burnt_point_value',
 		access : ['overall', 'importer_exporter', 'channel_partner'],
 	},
 	{
-		label  : 'Burnt Thru Cogostore',
+		label  : 'Burnt (Cogostore)',
 		name   : 'cogostore_burnt_point_value',
 		access : ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
 	},
