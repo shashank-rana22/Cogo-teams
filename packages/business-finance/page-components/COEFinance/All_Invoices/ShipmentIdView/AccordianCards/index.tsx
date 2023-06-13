@@ -94,7 +94,7 @@ function AccordianCards({
 								</div>
 								<div className={styles.expense_value_text}>
 									{formatAmount({
-										amount   :	expenseTotalAmount as any,
+										amount   :	expenseTotalAmount as string,
 										currency :	GLOBAL_CONSTANTS.currency_code.INR,
 										options  : {
 											style           : 'currency',
