@@ -12,7 +12,7 @@ import MessageContainer from './MessageContainer';
 import SendTo from './SendTo';
 import styles from './styles.module.css';
 
-const INITIAL_STATE = 0;
+const IS_STAKEHOLDER = 0;
 const INITIAL_STATE_ROWS = 1;
 const TOTAL_STAKEHOLDERS_LENGTH = 2;
 const TOTAL_ROWS = 5;
@@ -50,7 +50,7 @@ function Details({
 	const { msgContent } = useFireBase({ id });
 
 	const isStakeholder = shipmentChatStakeholders.includes(
-		channelData?.stakeholder_types?.[INITIAL_STATE],
+		channelData?.stakeholder_types?.[IS_STAKEHOLDER],
 	);
 
 	const formValues = {
@@ -65,7 +65,7 @@ function Details({
 	// formatting Data for hooks
 	const stakeholder = stakeHolderView.split(' ');
 	const stakeholderArray = (stakeholder || []).map((item) => item.replace('@', ''));
-	const conditionArr = stakeholderArray.length && stakeholderArray[INITIAL_STATE] !== '' ? [...stakeholderArray] : [];
+	const conditionArr = stakeholderArray.length && stakeholderArray[IS_STAKEHOLDER] !== '' ? [...stakeholderArray] : [];
 	const filteredArr = (conditionArr || []).map((item) => {
 		if (item === '') {
 			return null;
@@ -81,19 +81,19 @@ function Details({
 	};
 
 	let visible_to_stakeholders = isStakeholder
-		? [...filteredArr, channelData?.stakeholder_types?.[INITIAL_STATE]]
+		? [...filteredArr, channelData?.stakeholder_types?.[IS_STAKEHOLDER]]
 		: [...filteredArr];
 
 	visible_to_stakeholders = visible_to_stakeholders?.filter((item) => shipmentChatStakeholders.includes(item));
 
 	const GroupChannel = filteredArr.length
 		? {
-			created_by_stakeholder : channelData?.stakeholder_types?.[INITIAL_STATE],
+			created_by_stakeholder : channelData?.stakeholder_types?.[IS_STAKEHOLDER],
 			source_id              : sourceId,
 			visible_to_stakeholders,
 		}
 		: {
-			created_by_stakeholder : channelData?.stakeholder_types?.[INITIAL_STATE],
+			created_by_stakeholder : channelData?.stakeholder_types?.[IS_STAKEHOLDER],
 			source_id              : sourceId,
 			visible_to_user_ids    : subscribedUsers,
 		};

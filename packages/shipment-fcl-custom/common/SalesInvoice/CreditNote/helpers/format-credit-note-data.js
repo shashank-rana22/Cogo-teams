@@ -1,6 +1,6 @@
 const INITIAL_LINE_ITEMS = [];
 const LINE_ITEM_ARRAY = [];
-const FIRST_INDEX = 0;
+const FIRST_INDEX_OF_SERVICE_DETAILS = 0;
 
 const formatCreditNoteData = ({
 	data = {},
@@ -27,7 +27,7 @@ const formatCreditNoteData = ({
 			(data[key] || []).forEach((line_item) => {
 				if (line_item?.is_checked === true || isEdit) {
 					const serviceDetails = invoice?.services
-						?.filter((item) => (item?.id || item?.service_id) === key)?.[FIRST_INDEX];
+						?.filter((item) => (item?.id || item?.service_id) === key)?.[FIRST_INDEX_OF_SERVICE_DETAILS];
 
 					const initialData = INITIAL_LINE_ITEMS
 						?.filter((li) => li?.code === line_item?.code)

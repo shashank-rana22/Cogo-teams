@@ -9,7 +9,7 @@ import ChangeCurrency from '../../ChangeCurrency';
 import styles from './styles.module.css';
 
 const OPTIONS = [];
-const INITIAL_STATE = 0;
+const INITIAL_STATE_OF_TAX_TOTAL = 0;
 
 function SelectService({
 	invoice = {},
@@ -85,7 +85,7 @@ function SelectService({
 						</div>
 					</Tooltip>
 				),
-				isTaxable : service?.tax_total > INITIAL_STATE,
+				isTaxable : service?.tax_total > INITIAL_STATE_OF_TAX_TOTAL,
 				value     : id,
 				...service,
 			};

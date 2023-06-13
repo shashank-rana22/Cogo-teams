@@ -20,7 +20,7 @@ const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: fa
 const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
-const FIRST_CHAR = 0;
+const FIRST_CHAR_OF_INVOICE_SERIAL_ID = 0;
 const LENGTH_CUTOFF = 8;
 
 function Actions({
@@ -54,7 +54,7 @@ function Actions({
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
-	const firstChar = invoice_serial_id[FIRST_CHAR];
+	const firstChar = invoice_serial_id[FIRST_CHAR_OF_INVOICE_SERIAL_ID];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < LENGTH_CUTOFF;
 

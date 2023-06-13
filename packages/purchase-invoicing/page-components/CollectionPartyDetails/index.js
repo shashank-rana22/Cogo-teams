@@ -20,7 +20,7 @@ import InvoicesUploaded from '../InvoicesUploaded';
 import styles from './styles.module.css';
 
 const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
-const INITIAL_STATE = 1;
+const INITIAL_STATE_OF_STEP = 1;
 const LENGTH_COUNT = 0;
 const MAX_LEN = 25;
 const SERVICE_COUNT = 2;
@@ -39,7 +39,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
-	const [step, setStep] = useState(INITIAL_STATE);
+	const [step, setStep] = useState(INITIAL_STATE_OF_STEP);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -71,7 +71,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 				<span key={ser}>
 					{startCase(ser)}
 					{' '}
-					{(services).length - INITIAL_STATE === i ? '' : ', '}
+					{(services).length - INITIAL_STATE_OF_STEP === i ? '' : ', '}
 				</span>
 			))}
 		</>
@@ -79,7 +79,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 
 	const onClose = () => {
 		setUploadInvoiceUrl('');
-		setStep(INITIAL_STATE);
+		setStep(INITIAL_STATE_OF_STEP);
 		setOpenComparision(false);
 	};
 

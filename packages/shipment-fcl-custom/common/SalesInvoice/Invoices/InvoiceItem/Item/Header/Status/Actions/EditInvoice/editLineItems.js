@@ -9,7 +9,7 @@ const TRADE_MAPPING = {
 	import : 'Destination',
 	export : 'Origin',
 };
-const INITIAL_STATE = 0;
+const INITIAL_STATE_OF_FIELD_VALUE = 0;
 const LABELS = {};
 const CHARGECODES = {};
 const CUSTOM_VALUES = {};
@@ -46,7 +46,7 @@ const useEditLineItems = ({
 			if (control.type === 'edit_service_charges') {
 				DEFAULT_VALUES[control.name] = control.value.map((value) => {
 					control.controls.forEach((subControl) => {
-						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_STATE;
+						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_STATE_OF_FIELD_VALUE;
 					});
 
 					return FIELD_VALUE;
@@ -122,7 +122,7 @@ const useEditLineItems = ({
 					...value,
 					tax      : selectedCodes[value.code]?.tax_percent || 'NA',
 					sac_code : selectedCodes[value.code]?.sac || 'NA',
-					total    : (value?.price_discounted || INITIAL_STATE) * (value?.quantity || INITIAL_STATE),
+					total    : (value?.price_discounted || INITIAL_STATE_OF_FIELD_VALUE) * (value?.quantity || INITIAL_STATE_OF_FIELD_VALUE),
 				}));
 			}
 		});
@@ -131,7 +131,7 @@ const useEditLineItems = ({
 	};
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	Object.keys(controls?.[INITIAL_STATE]).forEach((key) => {
+	Object.keys(controls?.[INITIAL_STATE_OF_FIELD_VALUE]).forEach((key) => {
 		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
 			label      : LABELS[key],

@@ -10,6 +10,7 @@ import Info from './Info';
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();
+
 function EditInvoice({
 	show = 'false',
 	onClose,

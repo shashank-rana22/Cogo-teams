@@ -12,7 +12,7 @@ const API_SUCCESS_MESSAGE = {
 	approved : 'Invoice approved!,',
 };
 
-const INITIAL_STATE = 0;
+const INITIAL_STATE_OF_INVOICE_STATUS = 0;
 const LIMIT = 2;
 
 function InvoiceDetail({
@@ -30,7 +30,7 @@ function InvoiceDetail({
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === live_invoice_number,
-	)?.[INITIAL_STATE];
+	)?.[INITIAL_STATE_OF_INVOICE_STATUS];
 
 	const handleDownload = (invoiceLink) => {
 		window.open(invoiceLink);
@@ -43,7 +43,7 @@ function InvoiceDetail({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[INITIAL_STATE]?.status;
+	)?.[INITIAL_STATE_OF_INVOICE_STATUS]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
@@ -123,13 +123,13 @@ function InvoiceDetail({
 				{invoice?.payment_mode === 'credit' ? (
 					<div>
 						<div className={styles.info_container}>
-							{startCase(creditSource?.slice(INITIAL_STATE, -LIMIT))}
+							{startCase(creditSource?.slice(INITIAL_STATE_OF_INVOICE_STATUS, -LIMIT))}
 						</div>
 
 						<div className={styles.payment_method}>
 							{startCase(
 								`${
-									creditSource?.[(creditSource?.length ?? INITIAL_STATE) - LIMIT]
+									creditSource?.[(creditSource?.length ?? INITIAL_STATE_OF_INVOICE_STATUS) - LIMIT]
 								} deferred payment`,
 							)}
 						</div>
