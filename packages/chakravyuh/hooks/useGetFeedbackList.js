@@ -20,10 +20,8 @@ const useGetFeedbackList = ({ filters, setFilters }) => {
 		url    : 'list_fcl_freight_rate_deviation',
 		method : 'GET',
 		params : {
-			filters                  : FINAL_FILTERS,
+			filters: FINAL_FILTERS,
 			page,
-			booking_details_required : true,
-			is_dashboard_required    : true,
 		},
 	}, { manual: true });
 
