@@ -18,7 +18,7 @@ export default function useCallApi({
 			clearTimeout(debounceQuery.current.timerId);
 
 			debounceQuery.current.q = filters.q;
-			debounceQuery.current.timerId = setTimeout(listShipments, NUMERICAL_VALUES.debounce_time);
+			debounceQuery.current.timerId = setTimeout(listShipments, NUMERICAL_VALUES.API_DEBOUNCE_TIME);
 		} else {
 			listShipments();
 		}

@@ -5,7 +5,7 @@ import { useMemo } from 'react';
 import { renderValue } from './renderCargoValue';
 import styles from './styles.module.css';
 
-const SINGLE_COUNT = 1;
+const MINIMUM_COUNT_FOR_PLURAL = 1;
 
 const LABELS = ['container_size', 'container_type', 'commodity', 'containers_count'];
 
@@ -51,7 +51,7 @@ export default function CargoDetails({ cargo_details }) {
 						{restCargoDetails.length}
 						{' '}
 						Detail
-						{restCargoDetails.length > SINGLE_COUNT ? 's' : ''}
+						{restCargoDetails.length > MINIMUM_COUNT_FOR_PLURAL ? 's' : ''}
 					</div>
 				</Tooltip>
 			) : null}

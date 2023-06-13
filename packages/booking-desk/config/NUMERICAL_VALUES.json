@@ -1,11 +1,18 @@
 {
-	"days_later_date" : {
-		"one_day_later": 1,
-		"three_days_later": 3
+	"MINIMUM_COUNT_FOR_PLURAL": 1,
+
+	"DAYS_LATER_DATE" : {
+		"DAYS_LATER_DATE": 1,
+		"THREE_DAYS_LATER": 3
 	},
-	"day_end_time": [23,59,59,999],
-	"seconds_in_one_minute" : 60,
-	"chargable_weight_factor": 166.67,
-	"debounce_time": 600,
-	"milliseconds_in_one_second": 1000
+
+	"DAY_END_TIME": [23,59,59,999],
+
+	"SECONDS_IN_ONE_MINUTE" : 60,
+
+	"CHARGABLE_WEIGHT_FACTOR": 166.67,
+
+	"API_DEBOUNCE_TIME": 600,
+
+	"MILLISECONDS_IN_ONE_SECOND": 1000
 }

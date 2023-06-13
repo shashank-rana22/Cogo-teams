@@ -9,7 +9,7 @@ export const renderValue = (label, value, allDetails) => {
 		case 'inco_term': { return `Inco - ${upperCase(value)}`; }
 		case 'weight': { return `${value} kgs`; }
 		case 'volume': { return ` ${value} cbm ${`, Chargeable Weight: ${Math.max(
-			value * NUMERICAL_VALUES.chargable_weight_factor,
+			value * NUMERICAL_VALUES.CHARGABLE_WEIGHT_FACTOR,
 			allDetails?.weight,
 		).toFixed(PRECISION_LENGTH)} kg`}`; }
 		default: { return startCase(value); }

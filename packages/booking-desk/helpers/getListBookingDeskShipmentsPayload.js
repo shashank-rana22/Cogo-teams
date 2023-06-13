@@ -9,15 +9,15 @@ import LCL_EXPORT from '../config/tabSpecificPayload/LCL_EXPORT.json';
 import LCL_IMPORT from '../config/tabSpecificPayload/LCL_IMPORT.json';
 
 const timezoneOffset = new Date().getTimezoneOffset()
-	* NUMERICAL_VALUES.seconds_in_one_minute
-	* NUMERICAL_VALUES.milliseconds_in_one_second;
+	* NUMERICAL_VALUES.SECONDS_IN_ONE_MINUTE
+	* NUMERICAL_VALUES.MILLISECONDS_IN_ONE_SECOND;
 
 const getPayloadDate = (daysLater = '') => {
 	const daysLaterDate = new Date();
 
-	daysLaterDate.setDate(daysLaterDate.getDate() + NUMERICAL_VALUES.days_later_date[daysLater]);
+	daysLaterDate.setDate(daysLaterDate.getDate() + NUMERICAL_VALUES.DAYS_LATER_DATE[daysLater]);
 	daysLaterDate.setTime(daysLaterDate.getTime() - timezoneOffset);
-	daysLaterDate.setHours(...NUMERICAL_VALUES.day_end_time);
+	daysLaterDate.setHours(...NUMERICAL_VALUES.DAY_END_TIME);
 
 	return daysLaterDate;
 };
@@ -59,8 +59,8 @@ export default function getListBookingDeskShipmentsPayload({
 
 	const tabSpecificPayload = (SHIPMENT_SPECIFIC_PAYLOAD[`${stepperTab}_${segmentedTab}`] || {})[activeTab] || {};
 
-	const oneDayLater = getPayloadDate('one_day_later');
-	const threeDaysLater = getPayloadDate('three_days_later');
+	const oneDayLater = getPayloadDate('DAYS_LATER_DATE');
+	const threeDaysLater = getPayloadDate('THREE_DAYS_LATER');
 
 	const criticalPayload = activeTab === 'container_pick_up'
 		? { bn_expiry_less_than: oneDayLater }
