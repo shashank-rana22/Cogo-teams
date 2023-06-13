@@ -9,8 +9,8 @@ import getPayload from '../helpers/getListBookingDeskShipmentsPayload';
 
 import useCallApi from './useCallApi';
 
-const DEFAULT_TOTAL_COUNT = 0;
-const DEFAULT_TOTAL_PAGE = 0;
+const DEFAULT_TOTAL_COUNT_FOR_PAGINATION = 0;
+const DEFAULT_TOTAL_PAGE_FOR_PAGINATION = 0;
 const PAGE_ONE = 1;
 
 const EMPTY_DATA = { list: [], total: 0, total_page: 0 };
@@ -50,8 +50,8 @@ export default function useListBookingDeskShipments({ prefix }) {
 	return {
 		data: {
 			list       : data.list || [],
-			total      : data.total_count || DEFAULT_TOTAL_COUNT,
-			total_page : data.total || DEFAULT_TOTAL_PAGE,
+			total      : data.total_count || DEFAULT_TOTAL_COUNT_FOR_PAGINATION,
+			total_page : data.total || DEFAULT_TOTAL_PAGE_FOR_PAGINATION,
 		},
 		loading,
 		refetch: listShipments,

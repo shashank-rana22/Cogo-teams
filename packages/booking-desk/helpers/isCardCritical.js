@@ -15,7 +15,7 @@ export default function isCritical({ item = {}, activeTab = '' }) {
 	const departDate = item.schedule_departure || item.selected_schedule_departure;
 	const bnExpiryDate = new Date(item?.bn_expiry);
 
-	const oneDayLater = getDaysLaterDate('DAYS_LATER_DATE');
+	const oneDayLater = getDaysLaterDate('ONE_DAY_LATER');
 	const threeDaysLater = getDaysLaterDate('THREE_DAYS_LATER');
 
 	let critical = false;
