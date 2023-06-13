@@ -1,7 +1,6 @@
 import { Tooltip, Button } from '@cogoport/components';
 import { IcMCopy } from '@cogoport/icons-react';
 import { startCase, upperCase, format } from '@cogoport/utils';
-import { v4 as uuid } from 'uuid';
 
 import CONSTANTS from '../../../constants/CONSTANTS';
 import copyToClipboard from '../../utils/copyToClipboard';
@@ -47,12 +46,13 @@ export const renderValue = (label, detail = {}) => {
 					theme="light"
 					content={(
 						<div style={{ fontSize: '10px' }}>
-							{(packages || []).map((item) => {
+							{(packages || []).map((item, index) => {
 								const values = item
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								return <div key={uuid()}>{values}</div>;
+								// eslint-disable-next-line react/no-array-index-key
+								return <div key={index}>{values}</div>;
 							})}
 						</div>
 					)}

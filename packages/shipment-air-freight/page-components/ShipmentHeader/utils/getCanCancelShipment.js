@@ -12,9 +12,6 @@ const serviceCancellationStates = [
 	'init',
 	'awaiting_service_provider_confirmation',
 	'confirmed_by_service_provider',
-	'containers_gated_in',
-	'cargo_carted_in',
-	'container_departed',
 	'cancelled',
 ];
 
