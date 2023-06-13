@@ -25,7 +25,7 @@ export const getOtherData = ({ customData = {} }) => {
 	return finalDataObj;
 };
 
-const chargesKeysMapping = {
+const CHARGES_KEYS_MAPPING = {
 	total_value_of_supply : 'total_value_of_supply',
 	total_taxable_value   : 'total_taxable_value',
 	total_discount        : 'total_discount',
@@ -38,7 +38,7 @@ const chargesKeysMapping = {
 export const getChargesData = ({ customData = {} }) => {
 	const finalDataObj = getOtherDataHelper({
 		customData          : customData?.line_items,
-		requiredKeysMapping : chargesKeysMapping,
+		requiredKeysMapping : CHARGES_KEYS_MAPPING,
 	});
 
 	return finalDataObj;

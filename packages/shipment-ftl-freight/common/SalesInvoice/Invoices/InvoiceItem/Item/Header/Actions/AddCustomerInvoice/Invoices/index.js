@@ -65,8 +65,6 @@ function Invoices({
 
 	const Component = getComponentMapping(finalRegistrationNumber);
 
-	console.log({ finalRegistrationNumber });
-
 	const generateInvoice = () => {
 		const html = `<html><body>${InvoiceRef.current.innerHTML}</body></html>`;
 		generatePdf({ html, scale: 0.6, callback: callbackGeneratePdf });
