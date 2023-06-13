@@ -12,7 +12,7 @@ interface AggreementFile {
 	agreementNumber?: string;
 	agreementDate?: string;
 	agreementDocument?: string;
-	eInvoiceForm04?: string;
+	einvoiceForm04?: string;
 }
 
 function CancellationAgreement({ data }: DataInterface) {
@@ -24,7 +24,7 @@ function CancellationAgreement({ data }: DataInterface) {
 		);
 	}
 
-	const { agreementNumber, agreementDate, agreementDocument, eInvoiceForm04 } = cancelledEInvoiceDetails || {};
+	const { agreementNumber, agreementDate, agreementDocument, einvoiceForm04 } = cancelledEInvoiceDetails || {};
 
 	const dynamicDataVariables = [
 		{ label: 'Agreement No. -', value: agreementNumber },
@@ -33,7 +33,7 @@ function CancellationAgreement({ data }: DataInterface) {
 
 	const dynamicDataUrl = [
 		{ label: 'Agreement Proof -', value: agreementDocument },
-		{ label: 'Form 04 -', value: eInvoiceForm04 },
+		{ label: 'Form 04 -', value: einvoiceForm04 },
 	];
 
 	return (
