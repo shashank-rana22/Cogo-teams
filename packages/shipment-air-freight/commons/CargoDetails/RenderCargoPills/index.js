@@ -1,5 +1,3 @@
-import { cl } from '@cogoport/components';
-
 import { renderValue } from './renderValue';
 import styles from './styles.module.css';
 
