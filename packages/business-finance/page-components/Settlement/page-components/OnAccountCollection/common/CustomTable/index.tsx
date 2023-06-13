@@ -54,7 +54,7 @@ function CustomTable(
 	const GET_STATUS = ['POSTED', 'APPROVED', 'POSTING_FAILED'];
 
 	const GET_ENTITY = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).filter(
-		(key) => GLOBAL_CONSTANTS.cogoport_entities?.[key]?.post_to_sage_allowed,
+		(key) => GLOBAL_CONSTANTS.cogoport_entities?.[key]?.feature_supported?.includes('post_to_sage'),
 	);
 
 	const isCheckBoxAllowed = (item) => GET_STATUS.includes(item?.paymentDocumentStatus)
