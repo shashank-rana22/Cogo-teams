@@ -1,10 +1,10 @@
 const DEFAULT_VALUE_FOR_RADIX_PARAMETER = 10;
 const START_INDEX_FOR_TIME_FORMAT = 0;
-const END_INDEX_FOR_TIME_FORMAT = 3;
-const DEFAULT_SIZE_FOR_TIME_FORMAT = 3;
+const END_INDEX_FOR_TIME_FORMAT = 4;
+const DEFAULT_SIZE_FOR_TIME_FORMAT = 4;
 const DEFAULT_VALUE_FOR_EACH_TIME_FORMAT_ELEMENT = 0;
 
-const setDateHours = ({ time = '0:0:0', date }) => {
+const setDateHours = ({ time = '0:0:0:0', date }) => {
 	const newDate = new Date(date);
 
 	if (newDate.toDateString() === 'Invalid Date') {
