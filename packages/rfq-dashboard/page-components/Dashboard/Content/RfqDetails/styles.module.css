@@ -1,0 +1,11 @@
+.container {
+	width: 950px;
+	margin-top: 12px;
+}
+
+.emptycontainer {
+	width: 950px;
+	height: 620px;
+	margin-top: 12px;
+	background-color: white;
+}
