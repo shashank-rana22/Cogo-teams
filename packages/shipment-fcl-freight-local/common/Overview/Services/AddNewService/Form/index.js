@@ -9,8 +9,6 @@ import Footer from '../Footer';
 
 import styles from './styles.module.css';
 
-const TOTAL_LENGTH = 0;
-
 function Form({ upsellableService = {}, closeModal = () => {} }) {
 	const { shipment_data, servicesList } = useContext(ShipmentDetailContext);
 
@@ -43,7 +41,7 @@ function Form({ upsellableService = {}, closeModal = () => {} }) {
 			/>
 
 			<Modal.Body>
-				{ controls.length === TOTAL_LENGTH ? (
+				{ controls.length === 0 ? (
 					<div> Are you sure you want to upsell this service?</div>
 				) : null }
 

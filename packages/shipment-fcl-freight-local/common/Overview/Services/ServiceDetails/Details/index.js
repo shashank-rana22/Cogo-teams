@@ -1,6 +1,6 @@
 import { cl } from '@cogoport/components';
 import { getByKey, omit } from '@cogoport/utils';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import getConfigs from '../../configurations/get-configs';
 
