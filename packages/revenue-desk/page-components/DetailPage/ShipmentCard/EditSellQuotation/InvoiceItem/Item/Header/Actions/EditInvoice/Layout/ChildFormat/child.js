@@ -44,7 +44,7 @@ function Child({
 	return (
 		<div className={styles.fieldarray} key={field.id}>
 			{totalFields.map((fields) => (
-				<div className={styles.row}>
+				<div key={fields[0]?.name} className={styles.row}>
 					{fields.map((controlItem) => {
 						const Element = getElementController(controlItem.type);
 
@@ -57,11 +57,18 @@ function Child({
 						if (controlItem.customProps?.options) {
 							extraProps.options = controlItem.customProps.options[index];
 						}
-						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
+						if (controlItem.customProps?.disabled) {
+							extraProps.disabled = controlItem.customProps.disabled[index];
+						}
+						const disable = (index < noDeleteButtonTill
+							&& controlItem.name === 'code') || controlItem.disabled;
 						const flex = ((controlItem?.span || 12) / 12) * 100;
+						if (controlItem.type === 'static') {
+							return controlItem.render();
+						}
 						if (!Element) return null;
 						return (
-							<div className={styles.element} style={{ width: `${flex}%` }}>
+							<div key={controlItem.name} className={styles.element} style={{ width: `${flex}%` }}>
 								<h4 style={{
 									height: '16px', marginBottom: '6px', fontWeight: '400', fontSize: '12px',
 								}}
@@ -70,13 +77,13 @@ function Child({
 								</h4>
 								<Element
 									{...controlItem}
-									{...extraProps}
 									style={{ minWidth: '0px' }}
 									key={`${name}.${index}.${controlItem.name}`}
 									name={`${name}.${index}.${controlItem.name}`}
 									index={index}
 									control={control}
 									disabled={disabled || disable}
+									{...extraProps}
 
 								/>
 								<p style={{

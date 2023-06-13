@@ -1,5 +1,10 @@
 import {
-	InputController, PillsController, SelectController, DatepickerController,
+	InputController,
+	PillsController,
+	SelectController,
+	DatepickerController,
+	SingleDateRangeController,
+	AsyncSelectController,
 } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
@@ -16,6 +21,9 @@ const getElementController = (type = 'text') => {
 		case 'select':
 			return SelectController;
 
+		case 'async_select':
+			return AsyncSelectController;
+
 		case 'file':
 			return UploadController;
 
@@ -24,6 +32,9 @@ const getElementController = (type = 'text') => {
 
 		case 'date_picker':
 			return DatepickerController;
+
+		case 'date_range_picker':
+			return SingleDateRangeController;
 
 		case 'departure_date':
 			return DepartureDateSelectController;

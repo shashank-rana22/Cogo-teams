@@ -2,10 +2,23 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import rawControls from '../helper/sell_quotations_controls';
+
+const getDefaultValues = (oldfields) => {
+	const defaultValues = {};
+	const newfields = oldfields.map((field) => {
+		const { value, ...rest } = field;
+		if (field.type === 'fieldArray') {
+			defaultValues[field.name] = value || [];
+		} else {
+			defaultValues[field.name] = value || '';
+		}
+		return rest;
+	});
+	return { defaultValues, fields: newfields };
+};
 
 const useEditLineItems = ({
 	invoice,
@@ -41,6 +54,7 @@ const useEditLineItems = ({
 		import : 'Destination',
 		export : 'Origin',
 	};
+
 	const controls = services.map((service, index) => ({
 		...rawControls(
 			{
@@ -69,62 +83,32 @@ const useEditLineItems = ({
 		})),
 	}));
 
+	const { defaultValues, fields } = getDefaultValues(controls);
 	const {
 		watch,
 		handleSubmit,
 		control,
 		formState: { isDirty },
-	} = useForm();
+	} = useForm({ defaultValues });
 
 	const formValues = watch();
 
-	// const labels = {};
-	// const customValues = {};
-	// const prepareFormValues = () => {
-	// 	const allFormValues = { ...formValues };
-	// 	(Object.keys(formValues) || []).forEach((key) => {
-	// 		if (key && formValues[key]) {
-	// 			allFormValues[key] = (allFormValues[key] || []).map((value) => ({
-	// 				...value,
-	// 				total: (value.price_discounted || 0) * (value.quantity || 0),
-	// 			}));
-	// 		}
-	// 	});
-
-	// 	return allFormValues;
-	// };
-
-	// const newFormValues = prepareFormValues(selectedCodes, formValues);
-	// // Object.keys(fields).forEach((key) => {
-	// // 	customValues[key] = {
-	// // 		formValues : newFormValues[key],
-	// // 		label      : labels[key],
-	// // 		id         : key,
-	// // 	};
-	// // });
-
-	controls.forEach((ctrl) => {
-		if (ctrl.controls) {
-			ctrl.controls.forEach((childCtrl) => {
+	const newFields = fields.map((ctrl) => {
+		const newCtrl = { ...ctrl };
+		if (ctrl.type === 'fieldArray') {
+			newCtrl.controls = ctrl.controls.map((childCtrl) => {
 				const tempChildCtrl = childCtrl;
-				if (childCtrl.name === 'unit') {
-					const unitOptions = {};
-					(formValues[ctrl.name] || []).forEach((item, i) => {
-						const chargeCodes = {};
-						(allChargeCodes[ctrl.service_name] || []).forEach((chgCode) => {
-							chargeCodes[chgCode.code] = chgCode;
-						});
-						unitOptions[i] = (
-							chargeCodes[item.code]?.units || ['per_container']
-						).map((unit) => ({
-							label : startCase(unit),
-							value : unit,
-						}));
+				if (childCtrl.name === 'price_discounted') {
+					const disabled = {};
+					(formValues[ctrl.name] || []).forEach((val, idx) => {
+						disabled[idx] = val.code !== 'BAS';
 					});
-					tempChildCtrl.options = unitOptions;
+					tempChildCtrl.customProps = { disabled };
 				}
+				return tempChildCtrl;
 			});
 		}
+		return newCtrl;
 	});
 
 	const onCreate = async (values) => {
@@ -189,8 +173,8 @@ const useEditLineItems = ({
 	return {
 		onCreate,
 		handleSubmit,
-		controls,
-		loading: lineItemApiLoading,
+		controls : newFields,
+		loading  : lineItemApiLoading,
 		sendWhatsappCounterPriceLoading,
 		// customValues,
 		onError,

@@ -34,13 +34,16 @@ function Layout({
 	return (
 		<div className={styles.layout}>
 			{totalFields.map((field) => (
-				<div className={styles.row}>
+				<div key={field.name} className={styles.row}>
 					{field.map((fieldsItem) => {
 						const { type, heading = '' } = fieldsItem;
 						const show = (!(field.name in showElements) || showElements[fieldsItem.name]);
+						if (!type && heading) {
+							return <h4 key={heading} className={styles.empty_field}>{heading }</h4>;
+						}
 						if (type === 'fieldArray' && show) {
 							return (
-								<div style={{ width: '100%' }}>
+								<div key={fieldsItem.name} style={{ width: '100%' }}>
 									<div className={styles.heading}>
 										{heading}
 									</div>
