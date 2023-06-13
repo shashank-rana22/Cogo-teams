@@ -2328,7 +2328,7 @@ const navigationMappingAdmin = {
 		main_apis     : [],
 		href          : '/v2/performance-management-configuration',
 		as            : '/v2/performance-management-configuration',
-		possible_apis : [],
+		possible_apis : apis.performance_management_configuration,
 		icon          : IcMAppMissions,
 	},
 	chro: {

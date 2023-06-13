@@ -32,7 +32,6 @@ const getAuthorizationParams = (store, url) => {
 			if (!isMain) {
 				return null;
 			}
-
 			return authorizationparameters;
 		}
 		return null;

@@ -2,8 +2,6 @@ import { Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React from 'react';
 
-import styles from './styles.module.css';
-
 function SearchInput({
 	value = '',
 	onChange = () => {},
@@ -11,7 +9,7 @@ function SearchInput({
 	size = 'lg',
 }) {
 	return (
-		<section className={styles.container}>
+		<section>
 			<Input
 				prefix={<IcMSearchlight />}
 				value={value}

@@ -4,7 +4,7 @@ import SearchInput from '../SearchInput';
 
 import styles from './styles.module.css';
 
-function Header({ search, setSearch, label = '' }) {
+function Header({ search, setSearch, label = '', onClickAddButton = () => {} }) {
 	const placeholder = `Search for ${label}`;
 	return (
 		<div className={styles.container}>
@@ -17,7 +17,7 @@ function Header({ search, setSearch, label = '' }) {
 				/>
 			</div>
 
-			<Button>
+			<Button onClick={onClickAddButton}>
 				Add
 				{' '}
 				{label}

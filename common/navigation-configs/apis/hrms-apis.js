@@ -1,4 +1,4 @@
-const consolidated_invoices = {
+const hrms = {
 	new_employee_dashboard: [
 		{
 			api          : 'create_employee_detail',
@@ -130,6 +130,14 @@ const consolidated_invoices = {
 			service_name : 'hrms',
 		},
 	],
+	performance_management_configuration: [
+		{
+			api          : 'list_partner_users',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+
+	],
 };
 
-export default consolidated_invoices;
+export default hrms;
