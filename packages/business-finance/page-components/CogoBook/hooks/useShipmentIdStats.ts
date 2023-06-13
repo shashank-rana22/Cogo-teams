@@ -50,7 +50,7 @@ const useShipmentIdStats = ({ month, year, entityCode }:StatsInterface) => {
 				params: {
 					Year       : year || undefined,
 					Month      : month || undefined,
-					entityCode : entityCode || Object.keys(GLOBAL_CONSTANTS.cogoport_entities)[2],
+					entityCode : entityCode || undefined,
 				},
 			});
 			setStatsData(resp?.data);
