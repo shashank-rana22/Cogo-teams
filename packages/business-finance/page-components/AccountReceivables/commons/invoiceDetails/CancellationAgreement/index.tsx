@@ -1,3 +1,5 @@
+import { Button } from '@cogoport/components';
+
 import styles from './styles.module.css';
 
 interface DataInterface {
@@ -25,13 +27,13 @@ function CancellationAgreement({ data }: DataInterface) {
 	const { agreementNumber, agreementDate, agreementDocument, eInvoiceForm04 } = cancelledEInvoiceDetails || {};
 
 	const dynamicDataVariables = [
-		{ label: 'Agreement No. -', value: agreementNumber || '-' },
-		{ label: 'Agreement Date -', value: agreementDate || '-' },
+		{ label: 'Agreement No. -', value: agreementNumber },
+		{ label: 'Agreement Date -', value: agreementDate },
 	];
 
 	const dynamicDataUrl = [
-		{ label: 'Agreement Proof -', value: agreementDocument || '-' },
-		{ label: 'Form 04 -', value: eInvoiceForm04 || '-' },
+		{ label: 'Agreement Proof -', value: agreementDocument },
+		{ label: 'Form 04 -', value: eInvoiceForm04 },
 	];
 
 	return (
@@ -39,13 +41,22 @@ function CancellationAgreement({ data }: DataInterface) {
 			{dynamicDataVariables.map(({ label, value }) => (
 				<div key={label} className={styles.sub_container}>
 					{label}
-					<span className={styles.span_style}>{value}</span>
+					<span className={styles.span_style_label}>{value}</span>
 				</div>
 			))}
 			{dynamicDataUrl.map(({ label, value }) => (
 				<div key={label} className={styles.sub_container}>
 					{label}
-					<a className={styles.span_style} href={value}>View Documnet</a>
+					{ value
+						&& (
+							<Button
+								className={styles.span_style_value}
+								themeType="link"
+								onClick={() => window.open(value)}
+							>
+								View Documnet
+							</Button>
+						) }
 				</div>
 			))}
 		</div>

@@ -133,7 +133,7 @@ const completedColumn = ({
 		accessor : (row) => (
 			(
 				<div className={styles.fieldPair}>
-					{(getDocumentNumber({ itemData: row }) as string).length > 10 ? (
+					{(getDocumentNumber({ itemData: row }) as string)?.length > 10 ? (
 						<Tooltip
 							interactive
 							placement="top"

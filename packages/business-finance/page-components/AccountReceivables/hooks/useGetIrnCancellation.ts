@@ -3,7 +3,7 @@ import { useRequestBf } from '@cogoport/request';
 
 interface IrnCancellationProps {
 	id?: string;
-	setShowCancellationModal?: (p: boolean)=> void;
+	setShowCancellationModal?: Function;
 	response?: {
 		remarks?: string;
 	},

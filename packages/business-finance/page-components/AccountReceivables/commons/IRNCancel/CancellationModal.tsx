@@ -24,6 +24,7 @@ interface CancelModal {
 	showCancellationModal?: boolean;
 	setShowCancellationModal?: Function;
 	IRNLabel?: string;
+	refetch?: Function;
 }
 function CancellationModal({
 	itemData,

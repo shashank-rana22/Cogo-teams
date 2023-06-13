@@ -15,6 +15,12 @@
 	color: var(--color-secondary-black-4);
 }
 
-.span_style {
+.span_style_label {
 	font-weight: 600;
 }
+
+.span_style_value {
+	cursor: pointer;
+	font-weight: 600;
+	color: #F68B21;
+};
