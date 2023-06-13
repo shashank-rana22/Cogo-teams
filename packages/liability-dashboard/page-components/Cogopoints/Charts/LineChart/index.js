@@ -10,14 +10,14 @@ const FIRST_FIELD_VALUE = 0;
 function LineChart({ formattedData = [], transactionType = '', currencyCode = '' }) {
 	const data = [
 		{
-			id    : 'hello',
+			id    : 'amount',
 			color : 'hsl(155, 70%, 50%)',
 			data  : formattedData,
 		},
 	];
 
-	const renderSliceTooltip = ({ slice }) => {
-		const { data: singleData } = slice?.points?.[FIRST_FIELD_VALUE] || {};
+	const renderSliceTooltip = ({ slice = {} }) => {
+		const { data: singleData = {} } = slice?.points?.[FIRST_FIELD_VALUE] || {};
 
 		return (
 			<div className={styles.tooltip_div}>
@@ -75,7 +75,7 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 			pointLabelYOffset={-12}
 			useMesh
 			enableSlices="x"
-			sliceTooltip={renderSliceTooltip}
+			sliceTooltip={(item) => renderSliceTooltip(item)}
 		/>
 	);
 }
