@@ -2,7 +2,7 @@ import { Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { Layout } from '@cogoport/ocean-modules';
 import { startCase } from '@cogoport/utils';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
 import Footer from '../Footer';

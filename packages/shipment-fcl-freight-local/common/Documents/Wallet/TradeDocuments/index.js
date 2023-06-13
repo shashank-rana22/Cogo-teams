@@ -5,17 +5,14 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMPdf, IcMImage } from '@cogoport/icons-react';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { startCase } from '@cogoport/utils';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import useListTradeDocuments from '../../../../hooks/useListTradeDocuments';
 import Loader from '../Loader';
 
 import styles from './styles.module.css';
 
-const TOTAL_LOADED = 3;
-const LOADER_KEYS = Array(TOTAL_LOADED).fill(null).map(() => Math.random());
-const INITIAL_STATE = 2;
-const DEFAULT_VALUE = 0;
+const LOADER_KEYS = Array(3).fill(null).map(() => Math.random());
 
 function TradeDocuments({
 	forModal = false,
@@ -38,11 +35,11 @@ function TradeDocuments({
 
 	const contentToShow = () => {
 		if (loading) {
-			return [...Array(forModal ? TOTAL_LOADED : INITIAL_STATE)].map((i, idx) => (
+			return [...Array(forModal ? 3 : 2)].map((i, idx) => (
 				<Loader forModal={forModal} key={LOADER_KEYS[idx]} />
 			));
 		}
-		if (!loading && data?.list?.length === DEFAULT_VALUE) {
+		if (!loading && data?.list?.length === 0) {
 			return <EmptyState />;
 		}
 
