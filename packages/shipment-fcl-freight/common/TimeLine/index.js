@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useState, useContext, useEffect } from 'react';
@@ -8,6 +9,7 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
 
+const NEXT_INDEX = 1;
 function Timeline() {
 	const {
 		shipment_data, primary_service, timelineLoading : loading, isGettingShipment,
@@ -24,19 +26,17 @@ function Timeline() {
 
 	const showEditScheduleIcon = canEditSchedule({ primary_service, activeStakeholder });
 
-	const filteredTimelineData = (timelineData || []).filter(
-		(timelineItem) => !timelineItem.service_type || ((shipment_data?.services || []).includes(timelineItem?.service_type) && timelineItem?.is_icd)
-	);
+	const filteredTimelineData = (timelineData || [])
+		.filter((timelineItem) => !timelineItem.service_type
+		|| ((shipment_data?.services || []).includes(timelineItem?.service_type) && timelineItem?.is_icd));
 
 	const totalItems = (timelineData || []).length;
 	let consecutivelyCompleted = true;
 
 	if (isGettingShipment || loading) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.list_container}>
-					<Loader />
-				</div>
+			<div className={cl`${styles.container} ${styles.list_container}`}>
+				<Loader />
 			</div>
 		);
 	}
@@ -50,7 +50,7 @@ function Timeline() {
 						<TimelineItem
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
-							isLast={totalItems === index + 1}
+							isLast={totalItems === index + NEXT_INDEX}
 							key={timelineItem.milestone}
 						/>
 					);
