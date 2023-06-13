@@ -1,4 +1,4 @@
-import { Tabs, TabPanel } from '@cogoport/components';
+import { Tabs, TabPanel, DateRangepicker } from '@cogoport/components';
 
 import { HEADER_TAB_OPTIONS } from '../../../constants';
 
@@ -7,6 +7,8 @@ import styles from './styles.module.css';
 function HeaderTab({
 	activeHeaderTab = '',
 	setActiveHeaderTab = () => {},
+	setSelectedDate = () => {},
+	selectedDate = {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -20,6 +22,13 @@ function HeaderTab({
 					<TabPanel name={name} title={title} key={name} />
 				))}
 			</Tabs>
+			<DateRangepicker
+				name="date"
+				onChange={setSelectedDate}
+				value={selectedDate}
+				className={styles.date_picker}
+				isPreviousDaysAllowed
+			/>
 		</div>
 	);
 }

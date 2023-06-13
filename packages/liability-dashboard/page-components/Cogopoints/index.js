@@ -15,10 +15,10 @@ import List from './List';
 import StatsDiv from './StatsDiv';
 import styles from './styles.module.css';
 
-function CogoPoints({ setSelectedDate = () => {}, selectedDate = {} }) {
-	console.log('selectedDate:', selectedDate);
+function CogoPoints() {
 	const [activeHeaderTab, setActiveHeaderTab] = useState('overall');
 	const [activeStatsCard, setActiveStatsCard] = useState('liability_point_value');
+	const [selectedDate, setSelectedDate] = useState({});
 
 	const geo = getGeoConstants();
 	const currencyCode = geo.country.currency.code;
@@ -47,6 +47,8 @@ function CogoPoints({ setSelectedDate = () => {}, selectedDate = {} }) {
 			<HeaderTab
 				activeHeaderTab={activeHeaderTab}
 				setActiveHeaderTab={setActiveHeaderTab}
+				selectedDate={selectedDate}
+				setSelectedDate={setSelectedDate}
 			/>
 			{activeHeaderTab && (
 				<>

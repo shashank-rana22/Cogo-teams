@@ -133,6 +133,7 @@ const GLOBAL_CONSTANTS = {
 		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
 		line_chart_img      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
 		pie_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
+		empty_state         : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg',
 	},
 	options: {
 		upload_file_size: {

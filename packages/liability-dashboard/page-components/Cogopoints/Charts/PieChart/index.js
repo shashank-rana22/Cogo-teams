@@ -1,9 +1,9 @@
 import { ResponsivePie } from '@cogoport/charts/pie';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 
 import burntChartData from '../../../../configuration/burnt-chart-data';
 import liabilityChartData from '../../../../configuration/liability-chart-data';
-import { NETWORK_EMPTY_STATE } from '../../../../constants';
 import { formatValue } from '../../../../utils/formatValue';
 
 function PieChart({
@@ -22,7 +22,7 @@ function PieChart({
 	if (emptyValue) {
 		return (
 			<Image
-				src={NETWORK_EMPTY_STATE}
+				src={GLOBAL_CONSTANTS.image_url.empty_state}
 				alt="empty-state"
 				width={150}
 				height={150}

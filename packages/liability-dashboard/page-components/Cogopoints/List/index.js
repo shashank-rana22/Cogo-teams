@@ -1,5 +1,6 @@
 import { Table, Pagination } from '@cogoport/components';
-// import { Image } from '@cogoport/next';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -17,17 +18,12 @@ function List({
 		<div className={styles.container}>
 			{isEmpty(list) && !loading ? (
 				<figure className={styles.empty_state}>
-					{/* <Image
-						src={LIST_EMPTY_STATE}
+					<Image
+						src={GLOBAL_CONSTANTS.image_url.empty_state}
 						alt="Empty State"
-						width={300}
+						width={200}
 						height={250}
-					/> */}
-					<figcaption
-						className={styles.empty_state_text}
-					>
-						No Data Found
-					</figcaption>
+					/>
 				</figure>
 			) : (
 

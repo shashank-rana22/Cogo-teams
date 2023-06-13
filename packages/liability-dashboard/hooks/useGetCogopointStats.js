@@ -15,8 +15,8 @@ const useGetCogopointStats = ({ activeHeaderTab = '', selectedDate = {} }) => {
 			params: {
 				currency          : GLOBAL_CONSTANTS.currency_code.INR,
 				organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
-				start_date        : startDate,
-				end_date          : endDate,
+				start_date        : startDate || undefined,
+				end_date          : endDate || undefined,
 			},
 		});
 	}, [trigger, activeHeaderTab, startDate, endDate]);

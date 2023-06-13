@@ -17,8 +17,8 @@ const useListCogopointTopHistory = ({ transactionType = '', selectedDate = {}, a
 				credit_cogopoint_date_data_required : true,
 				page                                : pagination,
 				filters                             : {
-					from_date : startDate,
-					to_date   : endDate,
+					from_date : startDate || undefined,
+					to_date   : endDate || undefined,
 				},
 			},
 		});
