@@ -1,11 +1,9 @@
 import { Input, Button, Loader, Modal } from '@cogoport/components';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import useUpdateShipmentContainerDetails from '../../../../hooks/useUpdateShipmentContainerDetails';
 
 import styles from './styles.module.css';
-
-const PAYLOAD = [];
 
 function ContainerNmUpdate({
 	setEditContainerNum = () => { },
@@ -28,6 +26,7 @@ function ContainerNmUpdate({
 	});
 
 	const onSubmit = () => {
+		const payload = [];
 		Object.keys(containerValue || {}).forEach((key) => {
 			const reqObj = {
 				id   : key,
@@ -35,10 +34,10 @@ function ContainerNmUpdate({
 					container_number: containerValue[key],
 				},
 			};
-			PAYLOAD.push(reqObj);
+			payload.push(reqObj);
 		});
 
-		apiTrigger(PAYLOAD);
+		apiTrigger(payload);
 	};
 
 	const closeModal = () => setEditContainerNum(false);

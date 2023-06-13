@@ -1,16 +1,14 @@
 import { cl } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
-import { useState } from 'react';
+import React, { useState } from 'react';
 
 import EditCancelService from '../../../../EditCancelService';
 import Details from '../Details';
 
 import styles from './styles.module.css';
 
-const FIRST_INDEX = 0;
-
 function Header({ serviceData = [] }) {
-	const { state, display_label, service_provider, payment_term } = serviceData?.[FIRST_INDEX] || {};
+	const { state, display_label, service_provider, payment_term } = serviceData?.[0] || {};
 
 	const [showDetails, setShowDetails] = useState({});
 
@@ -39,22 +37,20 @@ function Header({ serviceData = [] }) {
 							tabIndex={0}
 							onClick={() => setShowDetails({
 								...showDetails,
-								[serviceData?.[FIRST_INDEX]?.display_label]:
-								!showDetails[serviceData?.[FIRST_INDEX]?.display_label],
+								[serviceData?.[0]?.display_label]: !showDetails[serviceData?.[0]?.display_label],
 							})}
 							className={styles.details_cta}
 						>
 
-							{ showDetails[serviceData?.[FIRST_INDEX]?.display_label]
-								? 'Hide Details' : 'View Details'}
+							{ showDetails[serviceData?.[0]?.display_label] ? 'Hide Details' : 'View Details'}
 						</div>
 						<div className={styles.edit_cancel}>
-							<EditCancelService serviceData={serviceData?.[FIRST_INDEX]} />
+							<EditCancelService serviceData={serviceData?.[0]} />
 						</div>
 					</div>
 				</div>
 			</div>
-			{showDetails[serviceData?.[FIRST_INDEX]?.display_label] ? <Details serviceData={serviceData} /> : null}
+			{showDetails[serviceData?.[0]?.display_label] ? <Details serviceData={serviceData} /> : null}
 		</div>
 
 	);
