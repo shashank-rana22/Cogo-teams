@@ -4,7 +4,10 @@ import { HEADER_TAB_OPTIONS } from '../../../constants';
 
 import styles from './styles.module.css';
 
-function HeaderTab({ activeHeaderTab = '', setActiveHeaderTab = () => {} }) {
+function HeaderTab({
+	activeHeaderTab = '',
+	setActiveHeaderTab = () => {},
+}) {
 	return (
 		<div className={styles.container}>
 			<Tabs

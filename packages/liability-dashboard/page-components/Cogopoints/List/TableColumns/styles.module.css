@@ -1,0 +1,15 @@
+.user_name {
+	font-weight: 600;
+}
+
+.user_type {
+	display: flex;
+	justify-content: center;
+}
+
+.earned_value {
+	display: flex;
+	justify-content: center;
+	width: 100%;
+	font-weight: 600;
+}

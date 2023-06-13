@@ -17,9 +17,9 @@ function PieChart({
 
 	const checkActiveData = activeStatsCard === 'liability_point_value' ? liabilityData : burntData;
 
-	const empotyValue = (checkActiveData || []).every((item) => item.value === 0);
+	const emptyValue = (checkActiveData || []).every((item) => item.value === 0);
 
-	if (empotyValue) {
+	if (emptyValue) {
 		return (
 			<Image
 				src={NETWORK_EMPTY_STATE}
