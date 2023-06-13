@@ -57,6 +57,7 @@ import {
 	IcMActivePlans,
 	IcMExportfile,
 	IcMAirSchedules,
+	IcMFsoppoc,
 	IcMBookingDesk,
 } from '@cogoport/icons-react';
 
@@ -83,7 +84,18 @@ const navigationMappingAdmin = {
 		type          : 'link',
 		icon          : IcMDashboard,
 		main_apis     : [],
-		possible_apis : [],
+		possible_apis : apis.employee_portal,
+		module_type   : 'dashboards',
+	},
+	employee_portal: {
+		key           : 'employee_portal',
+		title         : 'Profile Details',
+		href          : '/v2/employee-portal',
+		as            : '/v2/employee-portal',
+		type          : 'link',
+		icon          : IcMProfile,
+		main_apis     : [],
+		possible_apis : apis.employee_portal,
 		module_type   : 'dashboards',
 	},
 	channel_partner_dashboard: {
@@ -2293,6 +2305,17 @@ const navigationMappingAdmin = {
 			},
 		],
 	},
+	new_employee_dashboard: {
+		key           : 'new_employee_dashboard',
+		title         : 'New Hire Dashboard',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		href          : '/v2/new-employee-dashboard',
+		as            : '/v2/new-employee-dashboard',
+		main_apis     : [],
+		possible_apis : apis.new_employee_dashboard,
+		icon          : IcMDashboard,
+	},
 	ingestion: {
 		key           : 'ingestion',
 		title         : 'Ingestion',
@@ -2303,6 +2326,17 @@ const navigationMappingAdmin = {
 		as            : '/v2/ingestion',
 		possible_apis : apis.ingestion,
 		icon          : IcMActivePlans,
+	},
+	chro: {
+		key           : 'chro',
+		title         : 'CHRO CTC Approvals',
+		isSubNavs     : false,
+		module_type   : 'dashboards',
+		main_apis     : [],
+		href          : '/v2/chro',
+		as            : '/v2/chro',
+		possible_apis : apis.chro,
+		icon          : IcMFsoppoc,
 	},
 	saas_subscription: {
 		key         : 'saas_subscription',
