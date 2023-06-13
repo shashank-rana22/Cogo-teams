@@ -36,7 +36,7 @@ export const getRedirectNavMapping = (allNavs) => {
 	});
 
 	if (navToRedirect === false) {
-		return { navToRedirect: { href: '/', as: '/' }, version: 'v1' };
+		return { navToRedirect: { href: '/', as: '/' }, version: 'v2' };
 	}
 	const version = (navToRedirect.href || '').includes('v2') ? 'v2' : 'v1';
 

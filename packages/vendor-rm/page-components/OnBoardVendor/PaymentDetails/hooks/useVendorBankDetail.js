@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { asyncFieldsLocations, useForm, useGetAsyncOptions } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import useRequest from '@cogoport/request/hooks/useRequest';
 import { useSelector } from '@cogoport/store';
 import { isEmpty, merge } from '@cogoport/utils';
@@ -51,7 +52,7 @@ function useVendorBankDetail({
 	}, { manual: true });
 
 	const setIfscCode = useCallback(async () => {
-		const regex = /^[A-Za-z]{4}\d{7}$/;
+		const regex = GLOBAL_CONSTANTS.regex_patterns.ifsc_code;
 
 		if (ifscCode?.match(regex)) {
 			try {
@@ -135,7 +136,8 @@ function useVendorBankDetail({
 				setValue(`${field.name}`, payment_details?.[field.name]);
 			}
 		});
-	}, [payment_details, setValue, vendorInformation, controls]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [payment_details, setValue, vendorInformation]);
 
 	return {
 		controls : newControls,

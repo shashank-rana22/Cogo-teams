@@ -7,17 +7,19 @@ import {
 	SelectController,
 	useForm,
 } from '@cogoport/forms';
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 
 import POC_WORKSCOPE_MAPPING from '../../../../../../contants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
-import formValuePatterns from '../../../../../../utils/formValuePatterns';
 import getCompanyAddressOptions from '../../../../helpers/getCompanyAddressOptions';
 import getCompanyNameOptions from '../../../../helpers/getCompanyNameOptions';
 import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDefaultParams';
 
 import styles from './styles.module.css';
+
+const geo = getGeoConstants();
 
 function SelfAndTradePartyForm({
 	companyType = '',
@@ -168,7 +170,7 @@ function SelfAndTradePartyForm({
 										size="sm"
 										rules={{
 											pattern: {
-												value   : formValuePatterns.EMAIL,
+												value   : geo.regex.EMAIL,
 												message : 'Enter valid email',
 											},
 										}}
