@@ -1,5 +1,4 @@
 import { Placeholder } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowRotateLeft,
@@ -24,7 +23,7 @@ function InvoiceDetails({ item }) {
 
 	const [showDetailsCard, setShowDetailsCard] = useState(false);
 
-	const [dropDownData, setDropDownData] = useState<object>({});
+	const [dropDownData, setDropDownData] = useState({});
 
 	const handleShow = () => {
 		setShowDetailsCard(true);
@@ -114,7 +113,7 @@ function InvoiceDetails({ item }) {
 													{
 														formatAmount({
 															amount   : data?.summary?.grandTotal,
-															currency : GLOBAL_CONSTANTS.currency_code.INR,
+															currency : data?.summary?.currency,
 															options  : {
 																currencyDisplay       : 'code',
 																maximumFractionDigits : 0,
@@ -130,7 +129,7 @@ function InvoiceDetails({ item }) {
 													{
 														formatAmount({
 															amount   : data?.summary?.ledgerTotal,
-															currency : GLOBAL_CONSTANTS.currency_code.INR,
+															currency : data?.summary?.ledgerCurrency,
 															options  : {
 																currencyDisplay       : 'code',
 																maximumFractionDigits : 0,
@@ -146,7 +145,7 @@ function InvoiceDetails({ item }) {
 													{
 														formatAmount({
 															amount   : data?.summary?.balanceAmount,
-															currency : GLOBAL_CONSTANTS.currency_code.INR,
+															currency : data?.summary?.currency,
 															options  : {
 																currencyDisplay       : 'code',
 																maximumFractionDigits : 0,
