@@ -1,15 +1,13 @@
 import { Pill, Placeholder } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { startCase } from '@cogoport/utils';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import FilterService from './FilterServices';
 import Price from './Price';
 import ServicesList from './ServicesList';
 import styles from './styles.module.css';
 import tableFields from './tableFields';
-
-const DEFAULT_VALUE = 0;
 
 function ChooseService({
 	setAddRate,
@@ -26,7 +24,7 @@ function ChooseService({
 	const tagDisplay = (item) => (
 		<div>
 			{item?.tags ? (
-				<Pill className="primary">{startCase(item?.tags?.[DEFAULT_VALUE])}</Pill>
+				<Pill className="primary">{startCase(item?.tags?.[0])}</Pill>
 			) : null}
 		</div>
 	);
