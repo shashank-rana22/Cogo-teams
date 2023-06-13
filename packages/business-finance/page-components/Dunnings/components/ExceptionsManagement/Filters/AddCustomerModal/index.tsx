@@ -1,30 +1,30 @@
 import { Modal, Button } from '@cogoport/components';
-import { useForm, AsyncSelectController } from '@cogoport/forms';
+import { AsyncSelectController } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import React, { useState } from 'react';
-
-import useAddUploadList from '../../../../hooks/useAddUploadList';
 
 import styles from './styles.module.css';
 
 function AddCustomerModal({
-	show, setShow,
-	subTabsValue,
-
+	show,
+	onClose,
+	watch,
+	control,
+	handleSubmit,
+	getUploadList,
+	uploadListLoading,
 }) {
 	const [fileValue, setFileValue] = useState('');
-	const onClose = () => {
-		setShow((pv) => !pv);
-	};
-	const { getUploadList, uploadListLoading } = useAddUploadList({ onClose, subTabsValue });
-	const { control, handleSubmit, watch } = useForm();
 
 	const selectCustomerName = watch();
 
 	const onSubmit = (data) => {
 		getUploadList(data, fileValue);
 	};
-	console.log(subTabsValue, 'subTabsValue');
+	const TRADE_PARTY_PARAMS = {
+		filters: { status: 'active', account_type: 'importer_exporter' },
+
+	};
 
 	return (
 		<Modal size="md" show={show} onClose={onClose}>
@@ -55,6 +55,7 @@ function AddCustomerModal({
 						initialCall
 						style={{ width: '50%' }}
 						rules={{ required: true }}
+						params={TRADE_PARTY_PARAMS}
 					/>
 				</div>
 			</Modal.Body>

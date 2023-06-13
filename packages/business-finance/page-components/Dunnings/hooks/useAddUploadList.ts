@@ -2,7 +2,7 @@ import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { useCallback } from 'react';
 
-const useAddUploadList = ({ onClose, subTabsValue }) => {
+const useAddUploadList = ({ onClose, subTabsValue, setShowCycleExceptions }) => {
 	const { profile } = useSelector((store) => store);
 
 	const [{ loading:uploadListLoading }, trigger] = useRequestBf(
@@ -13,7 +13,7 @@ const useAddUploadList = ({ onClose, subTabsValue }) => {
 		},
 		{ manual: true },
 	);
-
+	const PROFILE_ID = profile?.user?.id;
 	const getUploadList = useCallback((data, fileValue) => {
 		(async () => {
 			try {
@@ -22,11 +22,13 @@ const useAddUploadList = ({ onClose, subTabsValue }) => {
 						excludedRegistrationNos : data.excludedRegistrationNos,
 						exceptionType           : subTabsValue === 'masterExceptionList' ? 'MASTER' : 'CYCLE_WISE',
 						exceptionFile           : fileValue,
-						actionType              : 'UPLOADE',
-						createdBy               : profile?.user?.id,
+						actionType              : 'UPLOAD',
+						createdBy               : PROFILE_ID,
+						cycleId                 : 'be',
 					},
 				});
 				onClose();
+				setShowCycleExceptions(false);
 			} catch (error) {
 				console.log(error);
 			}

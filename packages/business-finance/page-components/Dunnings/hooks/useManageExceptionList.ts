@@ -24,14 +24,15 @@ const useManageExceptionList = () => {
 			try {
 				await trigger({
 					params: {
-						cycleId: 'be',
+						cycleId : 'be',
+						query   : query || undefined,
 					},
 				});
 			} catch (error) {
 				console.log(error);
 			}
 		})();
-	}, [trigger]);
+	}, [trigger, query]);
 
 	useEffect(() => {
 		getManageExceptionList();

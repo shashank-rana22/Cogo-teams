@@ -1,3 +1,4 @@
+import { Pagination } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import cycleWiseExceptionTable from '../../configurations/cycle-wise-exception-table';
@@ -27,6 +28,9 @@ function ExceptionsManagement() {
 	const [subTabsValue, setSubTabsValue] = useState('masterExceptionList');
 	const CYCLE_WISE_COLUMN = cycleWiseExceptionTable({ setShowCycleExceptions });
 	const rest = { loading };
+	const { list, pageNo = 0, totalPages = 0, totalRecords } = data || {};
+	console.log(filters, 'filters');
+
 	return (
 		<div>
 			<div className={styles.flex}>
@@ -47,7 +51,7 @@ function ExceptionsManagement() {
 			</div>
 
 			<StyledTable
-				data={data?.list || []}
+				data={list || []}
 				columns={subTabsValue === 'masterExceptionList' ? masterExceptionColumn() : CYCLE_WISE_COLUMN}
 				{...rest}
 				exceptionFilter={exceptionFilter}
@@ -58,6 +62,17 @@ function ExceptionsManagement() {
 				showCycleExceptions={showCycleExceptions}
 				setShowCycleExceptions={setShowCycleExceptions}
 			/>
+			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+				<Pagination
+					type="table"
+					currentPage={pageNo}
+					totalItems={totalRecords}
+					pageSize={totalPages}
+					onPageChange={(pageValue: number) => {
+						setFilters((p) => ({ ...p, pageIndex: pageValue }));
+					}}
+				/>
+			</div>
 		</div>
 	);
 }

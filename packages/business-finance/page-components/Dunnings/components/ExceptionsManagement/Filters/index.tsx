@@ -1,9 +1,11 @@
 import { Button, Input } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import Filter from '../../../../commons/Filters';
 import { exceptionMasterFilters, exceptionCycleWiseFilters } from '../../../configurations/exceptions-filters';
+import useAddUploadList from '../../../hooks/useAddUploadList';
 
 import AddCustomerModal from './AddCustomerModal';
 import ManageExceptionsModal from './ManageExceptionsModal';
@@ -25,6 +27,15 @@ function Filters({
 	setSearchValue,
 }:Props) {
 	const [show, setShow] = useState(false);
+	const onClose = () => {
+		setShow((pv) => !pv);
+	};
+	const { getUploadList, uploadListLoading } = useAddUploadList({ onClose, subTabsValue, setShowCycleExceptions });
+	const { control, handleSubmit, watch } = useForm();
+
+	// const onSubmit = (data) => {
+	// 	getUploadList(data, fileValue);
+	// };
 
 	return (
 
@@ -67,16 +78,23 @@ function Filters({
 				&& (
 					<AddCustomerModal
 						show={show}
-						setShow={setShow}
-						subTabsValue={subTabsValue}
+						onClose={onClose}
+						watch={watch}
+						control={control}
+						handleSubmit={handleSubmit}
+						getUploadList={getUploadList}
+						uploadListLoading={uploadListLoading}
 					/>
 				)}
 
 				{showCycleExceptions && (
 					<ManageExceptionsModal
+						setShow={setShow}
 						showCycleExceptions={showCycleExceptions}
 						setShowCycleExceptions={setShowCycleExceptions}
-						subTabsValue={subTabsValue}
+						handleSubmit={handleSubmit}
+						getUploadList={getUploadList}
+						uploadListLoading={uploadListLoading}
 					/>
 				)}
 			</div>
