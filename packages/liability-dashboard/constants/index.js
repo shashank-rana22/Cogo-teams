@@ -45,6 +45,4 @@ export const STATS_CARDS = [
 	},
 ];
 
-export const NETWORK_EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg';
-
 export const PIE_CHART_CHECK = ['liability_point_value', 'total_burnt_point_value'];

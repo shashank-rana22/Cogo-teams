@@ -6,6 +6,10 @@ import { isEmpty } from '@cogoport/utils';
 import styles from './styles.module.css';
 import TableColumns from './TableColumns';
 
+const PAGE_COUNT = 0;
+const PAGE_LIMIT = 10;
+const LOADING_COUNT = 10;
+
 function List({
 	list = [],
 	loading = false,
@@ -32,15 +36,15 @@ function List({
 					columns={TableColumns()}
 					data={list || []}
 					loading={loading}
-					loadingRowsCount={10}
+					loadingRowsCount={LOADING_COUNT}
 				/>
 			)}
 			<Pagination
 				type="table"
 				className={styles.pagination_container}
-				currentPage={page || 0}
-				totalItems={total_count || 0}
-				pageSize={page_limit || 10}
+				currentPage={page || PAGE_COUNT}
+				totalItems={total_count || PAGE_COUNT}
+				pageSize={page_limit || PAGE_LIMIT}
 				onPageChange={setPagination}
 			/>
 		</div>
