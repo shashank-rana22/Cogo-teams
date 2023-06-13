@@ -1,23 +1,21 @@
 import { Tooltip } from '@cogoport/components';
+import React from 'react';
 
 import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
-
-const IS_EMPTY = 1;
-const IS_EXISTS = 0;
 
 function MultiServiceDetailsPopover({
 	children,
 	mainServices,
 
 }) {
-	if (mainServices?.length <= IS_EMPTY) {
+	if (mainServices?.length <= 1) {
 		return null;
 	}
 
 	const renderBody = () => (
-		mainServices?.map((item, idx) => (idx !== IS_EXISTS ? (
+		mainServices?.map((item, idx) => (idx !== 0 ? (
 			<div className={styles.container} key={item?.id}>
 				<RenderCargoPills
 					detail={item}

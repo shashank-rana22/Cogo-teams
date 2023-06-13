@@ -1,9 +1,7 @@
 import { saveAs } from 'file-saver';
+import React from 'react';
 
 import Content from './Content';
-
-const FIRST_INDEX = -1;
-const DEFAULT_VALUE = 0;
 
 const Card = ({
 	taskList = [],
@@ -25,12 +23,12 @@ const Card = ({
 	};
 
 	return (taskList || []).map((item, idx) => {
-		const docType =	item?.document_type || item?.task.split('upload_').slice(FIRST_INDEX)[DEFAULT_VALUE];
+		const docType =	item?.document_type || item?.task.split('upload_').slice(-1)[0];
 
 		let allUploadedDocs =	(completedDocs || []).filter((doc) => doc.document_type === docType)
 			|| emailDocs.filter((doc) => doc?.entity_type === docType);
 
-		if (allUploadedDocs.length === DEFAULT_VALUE) {
+		if (allUploadedDocs.length === 0) {
 			allUploadedDocs = [{}];
 		}
 

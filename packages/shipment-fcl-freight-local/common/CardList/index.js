@@ -1,12 +1,10 @@
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
-import { useMemo } from 'react';
+import React, { useMemo } from 'react';
 
 import Header from './CardHeader';
 import CardItem from './Carditem';
 import LoadingState from './LoadingState';
 import styles from './styles.module.css';
-
-const DEFAULT_VALUE = 1;
 
 function List({
 	fields = [],
@@ -25,7 +23,7 @@ function List({
 	const handleRender = () => {
 		if (loading) {
 			const loadingStates = Array.from({ length: numberOfLoader }, (_, i) => (
-				<LoadingState fields={fields} isLast={i === numberOfLoader - DEFAULT_VALUE} key={keys[i]} />
+				<LoadingState fields={fields} isLast={i === numberOfLoader - 1} key={keys[i]} />
 			));
 
 			return loadingStates;
@@ -43,7 +41,7 @@ function List({
 						item={item}
 						loading={loading}
 						fields={fields}
-						isLast={data?.length === i + DEFAULT_VALUE && !isLclManifest}
+						isLast={data?.length === i + 1 && !isLclManifest}
 					/>
 				))}
 			</>

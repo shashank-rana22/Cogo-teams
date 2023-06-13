@@ -5,6 +5,7 @@ import {
 	TextAreaController, UploadController,
 } from '@cogoport/forms';
 import { IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
+import React from 'react';
 
 import mobileCountryCodeOptions from '../getCountryCode';
 import styles from '../styles.module.css';
