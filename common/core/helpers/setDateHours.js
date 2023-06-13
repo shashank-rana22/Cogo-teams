@@ -15,7 +15,7 @@ const setDateHours = ({ time = '0:0:0:0', date }) => {
 		.slice(START_INDEX_FOR_TIME_FORMAT, END_INDEX_FOR_TIME_FORMAT)
 		.map((_) => parseInt(_ || DEFAULT_VALUE_FOR_EACH_TIME_FORMAT_ELEMENT, DEFAULT_VALUE_FOR_RADIX_PARAMETER));
 
-	const isNaN = timeSplitted.map((_) => Number.isNaN(_)).includes(NaN);
+	const isNaN = timeSplitted.some((_) => Number.isNaN(_));
 
 	if (isNaN) return null;
 
