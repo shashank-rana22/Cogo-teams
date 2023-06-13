@@ -8,6 +8,9 @@ import AsyncGstListController from '../CreateNewBillingAddress/AsyncGstListContr
 import Form from './Form';
 import styles from './styles.module.css';
 
+const POC_DETAILS_DEFAULT_VALUES = [{ name: '', email: '', mobile_country_code: '', mobile_number: '' }];
+const ADDRESSES_FIRST = 0;
+
 function AddressForm({
 	registrationNumber,
 	companyDetails = {},
@@ -31,7 +34,7 @@ function AddressForm({
 		formState: { errors },
 	} = useForm({
 		defaultValues: {
-			poc_details: [{ name: '', email: '', mobile_country_code: '', mobile_number: '' }],
+			poc_details: POC_DETAILS_DEFAULT_VALUES,
 		},
 	});
 
@@ -41,7 +44,7 @@ function AddressForm({
 		business_name = '',
 	} = data || {};
 
-	const { firstPincode, firstAddress } = addresses?.[0] || {};
+	const { firstPincode, firstAddress } = addresses?.[ADDRESSES_FIRST] || {};
 
 	useEffect(() => {
 		setValue('name', trade_name || business_name || '');

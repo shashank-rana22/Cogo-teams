@@ -1,9 +1,9 @@
-import FTL_UNITS from '@cogoport/surface-modules/contants/FTL_UNITS';
+import FTL_UNITS from '@cogoport/surface-modules/constants/FTL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-const CHAR_LIMIT = 3;
-const INITIAL_STATE = 0;
+const PRICE_GREATER_THAN = 0;
+const MIN_ALIAS_LENGTH = 3;
 
 const rawControls = (
 	handleChange,
@@ -47,7 +47,9 @@ const rawControls = (
 			span        : 2,
 			handleChange,
 			placeholder : 'select line item',
-			rules       : { required: 'Required' },
+			disabled:
+				!isFclFreight,
+			rules: { required: 'Required' },
 		},
 		{
 
@@ -61,9 +63,10 @@ const rawControls = (
 			),
 			placeholder : 'Enter alias name/code',
 			rules       : {
-				validate: (v) => v?.length >= CHAR_LIMIT || isEmpty(v) || `Characters should be >= ${CHAR_LIMIT}`,
+				validate: (v) => v?.length >= MIN_ALIAS_LENGTH || isEmpty(v) || 'Characters should be >= 3',
 			},
-			span: 2,
+			disabled : !isFclFreight,
+			span     : 2,
 		},
 		{
 			label   : 'Unit',
@@ -81,6 +84,8 @@ const rawControls = (
 			placeholder    : 'Select Currency',
 			rules          : { required: 'currency is required' },
 			span           : 1.5,
+			disabled:
+				!isFclFreight,
 		},
 		{
 			label       : 'Price',
@@ -90,8 +95,9 @@ const rawControls = (
 			span        : 1.5,
 			rules       : {
 				required : 'Price is Required',
-				validate : (v) => v > INITIAL_STATE || `Price must be greater than ${INITIAL_STATE}`,
+				validate : (v) => v > PRICE_GREATER_THAN || 'Price must be greater than 0',
 			},
+			disabled: !isFclFreight,
 		},
 		{
 			label       : 'Quantity',
@@ -100,6 +106,8 @@ const rawControls = (
 			placeholder : 'enter quantity',
 			rules       : { required: 'Required', min: 1 },
 			span        : 1,
+			disabled:
+				!isFclFreight,
 		},
 		{
 			label  : 'Amount (Tax Excl.)',

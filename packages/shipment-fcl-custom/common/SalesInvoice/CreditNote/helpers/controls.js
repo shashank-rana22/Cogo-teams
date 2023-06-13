@@ -1,7 +1,13 @@
-import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 
 import { handleServiceType } from './handleServiceType';
+
+const DEFAULT_PRICE = 0;
+const DEFAULT_QUANTITY = 0;
+const DEFAULT_EXCHANGE_RATE = 1;
+const DEFAULT_TAX_PERCENT = 0;
+const DEFAULT_TOTAL = 0;
 
 const commonControls = (service) => [
 	{

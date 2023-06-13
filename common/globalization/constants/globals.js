@@ -1,3 +1,4 @@
+import CURRENCY_CODE from './currencyCode';
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
 
@@ -8,27 +9,8 @@ const GLOBAL_CONSTANTS = {
 	},
 	platform_supported_country_codes: ['IN', 'VN'],
 
-	service_supported_countries: {
-		feature_supported_service: {
-			cargo_insurance: {
-				countries: ['IN'],
-			},
-		},
-	},
-
-	currency_code: {
-		INR : 'INR',
-		USD : 'USD',
-		EUR : 'EUR',
-		GBP : 'GBP',
-		AED : 'AED',
-		VND : 'VND',
-		HKD : 'HKD',
-		JPY : 'JPY',
-		SGD : 'SGD',
-		CAD : 'CAD',
-	},
-	currency_locale: {
+	currency_code   : CURRENCY_CODE,
+	currency_locale : {
 		INR : 'en-IN',
 		USD : 'en-US',
 		VND : 'vi-VN',
@@ -160,11 +142,53 @@ const GLOBAL_CONSTANTS = {
 		books_png           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 		map_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
 	},
+
 	options: {
 		upload_file_size: {
 			'1MB'  : '1048576',
 			'5MB'  : '5242880',
 			'15MB' : '15728640',
+		},
+		freight_invoice_currency: {
+			IN     : [CURRENCY_CODE.INR, CURRENCY_CODE.USD],
+			GB     : [CURRENCY_CODE.GBP, CURRENCY_CODE.EUR, CURRENCY_CODE.USD],
+			VN     : [CURRENCY_CODE.USD, CURRENCY_CODE.VND],
+			OTHERS : [CURRENCY_CODE.USD, CURRENCY_CODE.EUR, CURRENCY_CODE.INR],
+		},
+		inco_term: {
+			cif: {
+				trade_type: 'export',
+			},
+			cfr: {
+				trade_type: 'export',
+			},
+			cpt: {
+				trade_type: 'export',
+			},
+			cip: {
+				trade_type: 'export',
+			},
+			dat: {
+				trade_type: 'export',
+			},
+			dap: {
+				trade_type: 'export',
+			},
+			ddp: {
+				trade_type: 'export',
+			},
+			fob: {
+				trade_type: 'import',
+			},
+			exw: {
+				trade_type: 'import',
+			},
+			fca: {
+				trade_type: 'import',
+			},
+			fas: {
+				trade_type: 'import',
+			},
 		},
 
 		role_options: [
@@ -183,34 +207,10 @@ const GLOBAL_CONSTANTS = {
 		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
 	},
-
-	languages                       : LANGUAGE_OPTIONS,
-	currency_conversion_constant    : 0.04,
-	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
-	invoice_check_id                : 120347,
-	serial_check_id                 : 130000, // for Edit Invoice in FCL Freight shipment having FCL Main Freight
-};
-
-GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
-	freight_invoice_currency: {
-		IN: [
-			GLOBAL_CONSTANTS.currency_code.INR,
-			GLOBAL_CONSTANTS.currency_code.USD,
-		],
-		GB: [
-			GLOBAL_CONSTANTS.currency_code.GBP,
-			GLOBAL_CONSTANTS.currency_code.EUR,
-			GLOBAL_CONSTANTS.currency_code.USD,
-		],
-		VN: [
-			GLOBAL_CONSTANTS.currency_code.USD,
-			GLOBAL_CONSTANTS.currency_code.VND,
-		],
-		others: [
-			GLOBAL_CONSTANTS.currency_code.USD,
-			GLOBAL_CONSTANTS.currency_code.EUR,
-			GLOBAL_CONSTANTS.currency_code.INR,
-		],
+	languages                    : LANGUAGE_OPTIONS,
+	currency_conversion_constant : 0.04,
+	others                       : {
+		old_shipment_serial_id: 120347,
 	},
 };
 

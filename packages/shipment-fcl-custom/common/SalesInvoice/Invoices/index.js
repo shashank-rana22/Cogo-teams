@@ -13,7 +13,7 @@ import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
 
-const TOTAL_COUNT = 1;
+const INCREMENT_IN_COUNT_BY = 1;
 
 function Invoices({
 	invoiceData = {},
@@ -35,7 +35,7 @@ function Invoices({
 	let count = 0;
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
-			count += TOTAL_COUNT;
+			count += INCREMENT_IN_COUNT_BY;
 		}
 	});
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
@@ -44,7 +44,7 @@ function Invoices({
 	}
 
 	const showForOldShipments = invoiceData?.invoice_trigger_date
-	&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& !invoiceStatuses.some((ele) => ['reviewed', 'approved'].includes(ele));
 
 	disableAction = showForOldShipments ? false : disableAction;

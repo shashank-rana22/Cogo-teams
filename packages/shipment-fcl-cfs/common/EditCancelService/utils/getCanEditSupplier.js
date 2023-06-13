@@ -17,7 +17,7 @@ export default function getCanEditSupplier({ shipment_data, user_data, state, ac
 
 	const serviceInEditSupplierState = EDIT_SUPPLIER_SERVICE_STATES?.includes(state);
 
-	const oldShipmentCancellable = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	const oldShipmentCancellable = shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& !SERVICE_COMPLETED_OR_CANCELLED.includes(state);
 
 	return userCanCancel && (serviceInEditSupplierState || oldShipmentCancellable);

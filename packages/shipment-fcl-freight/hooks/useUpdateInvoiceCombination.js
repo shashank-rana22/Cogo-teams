@@ -48,18 +48,20 @@ const useUpdateInvoiceCombination = ({
 				(party) => !!party.services.length || typeof party.id === 'string',
 			);
 
+			const FINAL_PARTIES = [];
+
 			filteredParties.forEach((party) => {
-				party?.services?.map((item) => {
+				const PARTY_SERVICES = party?.services?.map((item) => {
 					const { display_name, trade_type, serviceKey, is_igst, ...rest } = item;
-					const partyService = {
+
+					return ({
 						...rest,
 						invoice_combination_id: updateExportInvoices
 							? INITIAL_SERVICE_INVOICE_ID[item?.serviceKey] || undefined
 							: undefined,
-					};
-					PARTY_SERVICES.push(partyService);
-					return PARTY_SERVICES;
+					});
 				});
+
 				const partyDetails = {
 					...party,
 					services: PARTY_SERVICES,

@@ -1,12 +1,14 @@
+const CONTAINERS_FIRST = 0;
+
 export const formmatedValues = (initialValues) => {
-	const formatValues = {};
+	const FORMAT_VALUES = {};
 
 	Object.keys(initialValues || {}).forEach((key) => {
 		if (key === 'containers') {
-			const obj = initialValues.containers?.[0] || {};
+			const obj = initialValues.containers?.[CONTAINERS_FIRST] || {};
 
 			Object.keys(obj || {}).forEach((val) => {
-				formatValues[val] = obj[val];
+				FORMAT_VALUES[val] = obj[val];
 			});
 		}
 
@@ -14,12 +16,12 @@ export const formmatedValues = (initialValues) => {
 			const obj = initialValues.shipment_details || {};
 
 			Object.keys(obj || {}).forEach((val) => {
-				formatValues[val] = obj[val];
+				FORMAT_VALUES[val] = obj[val];
 			});
 		} else {
-			formatValues[key] = initialValues?.[key];
+			FORMAT_VALUES[key] = initialValues?.[key];
 		}
 	});
 
-	return formatValues;
+	return FORMAT_VALUES;
 };

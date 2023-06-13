@@ -9,6 +9,7 @@ import ServicesList from './ServicesList';
 import styles from './styles.module.css';
 import tableFields from './tableFields';
 
+const ITEM_TAGS_FIRST = 0;
 function ChooseService({
 	setAddRate,
 	isSeller,
@@ -24,7 +25,7 @@ function ChooseService({
 	const tagDisplay = (item) => (
 		<div>
 			{item?.tags ? (
-				<Pill className="primary">{startCase(item?.tags?.[0])}</Pill>
+				<Pill className="primary">{startCase(item?.tags?.[ITEM_TAGS_FIRST])}</Pill>
 			) : null}
 		</div>
 	);

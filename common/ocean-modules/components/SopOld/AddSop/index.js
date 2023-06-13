@@ -14,6 +14,9 @@ const SOP_TYPE_OPTIONS = [
 	{ label: 'For Booking Party', value: 'for_booking_party' },
 ];
 
+const INSTRUCTIONS_FIRST = 0;
+const SOP_TYPE_FIRST = 0;
+
 function AddSop({
 	setSopAddForm = () => {},
 	setReload = () => {},
@@ -22,7 +25,7 @@ function AddSop({
 	primary_service,
 	shipment_data,
 }) {
-	const [sopType, setSopType] = useState(SOP_TYPE_OPTIONS[0]?.value);
+	const [sopType, setSopType] = useState(SOP_TYPE_OPTIONS[SOP_TYPE_FIRST]?.value);
 	const [formHeading, setFormHeading] = useState('');
 	const [errors, setErrors] = useState({});
 	const [hasData, sethasData] = useState(false);
@@ -58,7 +61,7 @@ function AddSop({
 		const { instruction_items = {}, heading = {}, conditions = {} } = formValues;
 		let hasIntructions = false;
 		if (instruction_items.length) {
-			if (instruction_items[0].instruction || instruction_items[0].file) {
+			if (instruction_items[INSTRUCTIONS_FIRST].instruction || instruction_items[INSTRUCTIONS_FIRST].file) {
 				hasIntructions = true;
 			}
 		}

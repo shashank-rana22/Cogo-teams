@@ -19,12 +19,16 @@ import InvoicesUploaded from '../InvoicesUploaded';
 
 import styles from './styles.module.css';
 
+const EMPTY_TRADE_PARTY_LENGTH = 0;
+const SERVICE_WRAPPER_LAST_INDEX = 2;
+const SERVICE_WRAPPER_START_INDEX = 0;
+const DEFAULT_COLECTION_PARTY_COUNT = 0;
+const DEFAULT_STEP = 1;
+const DEFAULT_NET_TOTAL = 0;
+
 const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
-const INITIAL_STATE_OF_STEP = 1;
-const LENGTH_COUNT = 0;
-const MAX_LEN = 25;
-const SERVICE_COUNT = 2;
-const SERVICES_LIST = [];
+
+const LAST_INDEX = 1;
 
 const STAKE_HOLDER_TYPES = [
 	'superadmin',
@@ -39,7 +43,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 	const [uploadInvoiceUrl, setUploadInvoiceUrl] = useState('');
 	const [openComparision, setOpenComparision] = useState(false);
 	const [open, setOpen] = useState(false);
-	const [step, setStep] = useState(INITIAL_STATE_OF_STEP);
+	const [step, setStep] = useState(DEFAULT_STEP);
 
 	const services = (collectionParty?.services || []).map(
 		(service) => service?.service_type,
@@ -69,9 +73,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 		<>
 			{(allservices || []).map((ser, i) => (
 				<span key={ser}>
-					{startCase(ser)}
-					{' '}
-					{(services).length - INITIAL_STATE_OF_STEP === i ? '' : ', '}
+					{`${startCase(ser)} ${(services).length - LAST_INDEX === i ? '' : ', '}`}
 				</span>
 			))}
 		</>
@@ -79,7 +81,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 
 	const onClose = () => {
 		setUploadInvoiceUrl('');
-		setStep(INITIAL_STATE_OF_STEP);
+		setStep(DEFAULT_STEP);
 		setOpenComparision(false);
 	};
 
@@ -92,6 +94,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 		shipment_data,
 	});
 
+	const SERVICES_LIST = [];
 	(servicesData || []).forEach((element) => {
 		if (element?.is_active === true) {
 			SERVICES_LIST.push(element);
@@ -101,12 +104,12 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 	if (shipment_type === 'ftl_freight') {
 		disableInvoice = !shipment_data?.all_services?.some(
 			(item) => item?.service_type === 'ftl_freight_service'
-				&& (item?.lr_numbers || []).length > LENGTH_COUNT,
+				&& (item?.lr_numbers || []).length,
 		);
 		errorMsg = 'LR task not completed';
 
 		if (
-			tdata?.list?.length === LENGTH_COUNT
+			tdata?.list?.length === EMPTY_TRADE_PARTY_LENGTH
 			&& geo.uuid.fortigo_network_ids.includes(shipment_data?.importer_exporter_id)
 		) {
 			disableInvoice = true;
@@ -134,8 +137,11 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 							</>
 						)}
 					>
-						{serviceswrapper(services?.slice(LENGTH_COUNT, SERVICE_COUNT) || [])}
-						{services.length > SERVICE_COUNT ? '...' : ''}
+						{serviceswrapper(services?.slice(
+							SERVICE_WRAPPER_START_INDEX,
+							SERVICE_WRAPPER_LAST_INDEX,
+						) || [])}
+						{services.length > SERVICE_WRAPPER_LAST_INDEX ? '...' : ''}
 					</ToolTipWrapper>
 				</div>
 			</div>
@@ -150,22 +156,14 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 						maxlength={MAX_LEN}
 					/>
 					<span className={styles.paddingleft}>
-						{' '}
-						- (
-						{collectionParty?.collection_parties?.length || LENGTH_COUNT}
-						)
+						{`- (${collectionParty?.collection_parties?.length || DEFAULT_COLECTION_PARTY_COUNT})`}
 					</span>
 				</div>
 			</div>
 			<div className={styles.lineitems}>
 				<div>
-					No. Of Line Items -
-					{' '}
-					{collectionParty?.total_line_items}
-					{' '}
-					| Locked -
-					{' '}
-					{ collectionParty?.locked_line_items}
+					{`No. Of Line Items 
+					- ${collectionParty?.total_line_items} | Locked - ${collectionParty?.locked_line_items}`}
 				</div>
 			</div>
 			<div className={styles.mode}>
@@ -214,7 +212,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 					Total With TAX
 					<span className={styles.amount}>
 						{getFormattedAmount(
-							collectionParty?.net_total || LENGTH_COUNT,
+							collectionParty?.net_total || DEFAULT_NET_TOTAL,
 							collectionParty?.net_total_price_currency,
 						)}
 					</span>
@@ -223,9 +221,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 					<Modal
 						show={open}
 						size="sm"
-						onClose={() => {
-							setOpen(false);
-						}}
+						onClose={() => { setOpen(false); }}
 					>
 						<Modal.Header title="Upload Scan of Invoice" />
 						<Modal.Body>

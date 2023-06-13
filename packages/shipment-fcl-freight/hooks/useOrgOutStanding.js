@@ -37,7 +37,7 @@ const useOrgOutStanding = ({ org_reg_nums }) => {
 	return {
 		handleOutstandings,
 		loading,
-		OUTSTANDING_BY_REG_NUM,
+		outstanding_by_reg_num: OUTSTANDING_BY_REG_NUM,
 	};
 };
 

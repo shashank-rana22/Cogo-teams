@@ -6,13 +6,16 @@ import Frontside from './Frontside';
 import styles from './styles.module.css';
 import useDefaultValues from './useDefaultValues';
 
+const CONTAINERS_MIN_LENGTH = 1;
+const CONTAINERS_FIRST = 0;
+
 function BluetideHBL({ mode = 'read', initialValues = {}, watermark = null }, ref) {
 	const [addAnnexure, setaddAnnexure] = useState(false);
-	const containerCountMoreThan1 = (initialValues?.containers || []).length > 1;
+	const containerCountMoreThan1 = (initialValues?.containers || []).length > CONTAINERS_MIN_LENGTH;
 
 	const { customDefaultValues } = useDefaultValues(initialValues);
 
-	const defaultValues = { ...customDefaultValues, ...initialValues?.containers?.[0] };
+	const defaultValues = { ...customDefaultValues, ...initialValues?.containers?.[CONTAINERS_FIRST] };
 
 	const { control, handleSubmit } = useForm({ defaultValues });
 

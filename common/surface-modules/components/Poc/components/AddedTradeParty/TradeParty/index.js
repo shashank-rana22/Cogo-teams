@@ -3,11 +3,13 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../constants/POC_WORKSCOPE_MAPPING';
 import Card from '../../Card';
 
 import LabelValue from './LabelValue';
 import styles from './styles.module.css';
+
+const ADDRESS_FIRST = 0;
 
 function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc = () => {}, rolesPermission = {} }) {
 	const [show, setShow] = useState({});
@@ -23,7 +25,7 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 		trade_party_type = '',
 		trade_party_id = '',
 	} = data;
-	const { address:first_address = '' } = address[0] || {};
+	const { address:first_address = '' } = address[ADDRESS_FIRST] || {};
 
 	const mapping = {
 		Name         : poc_data?.name || '',

@@ -7,7 +7,7 @@ import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
-const INITIAL_STATE = 0;
+const EMPTY_ARRAY_LENGTH = 0;
 
 function KebabContent({
 	invoice = {},
@@ -21,7 +21,7 @@ function KebabContent({
 }) {
 	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
-	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
@@ -123,7 +123,7 @@ function KebabContent({
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-			{(!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE)
+			{(!disableAction || invoice.exchange_rate_document?.length > EMPTY_ARRAY_LENGTH)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive

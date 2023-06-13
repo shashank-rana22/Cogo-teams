@@ -3,6 +3,7 @@ import Watermark from '../../../commons/Watermark';
 import styles from './styles.module.css';
 import { SECTION_THREE_MAPPINGSS, SECTION_ONE_CHILD_1_MAPPINGS } from './templateConfig';
 
+const CONTAINERS_FIRST = 0;
 function Read({
 	defaultValues = {},
 }) {
@@ -129,11 +130,11 @@ function Read({
 						</thead>
 						<tbody>
 							<tr>
-								<td>{defaultValues?.containers?.[0]?.container_number || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.marks_and_number || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.package_description || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.gross_weight || ''}</td>
-								<td>{defaultValues?.containers?.[0]?.measurement || ''}</td>
+								<td>{defaultValues?.containers?.[CONTAINERS_FIRST]?.container_number || ''}</td>
+								<td>{defaultValues?.containers?.[CONTAINERS_FIRST]?.marks_and_number || ''}</td>
+								<td>{defaultValues?.containers?.[CONTAINERS_FIRST]?.package_description || ''}</td>
+								<td>{defaultValues?.containers?.[CONTAINERS_FIRST]?.gross_weight || ''}</td>
+								<td>{defaultValues?.containers?.[CONTAINERS_FIRST]?.measurement || ''}</td>
 							</tr>
 						</tbody>
 					</table>

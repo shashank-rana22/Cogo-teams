@@ -27,6 +27,7 @@ const IsAllServicesTaken = (
 	}
 
 	let isAllMainServicesTaken = true;
+	const NOT_TAKEN = [];
 
 	mainServices.forEach((service) => {
 		if (!allServicesTaken.includes(service.id)) {
@@ -38,7 +39,7 @@ const IsAllServicesTaken = (
 	if (allServicesTaken.length !== allServiceLineitemsCount) {
 		isAllMainServicesTaken = false;
 	}
-	return { isAllMainServicesTaken, NOT_TAKEN };
+	return { isAllMainServicesTaken, notTaken: NOT_TAKEN };
 };
 
 export default IsAllServicesTaken;

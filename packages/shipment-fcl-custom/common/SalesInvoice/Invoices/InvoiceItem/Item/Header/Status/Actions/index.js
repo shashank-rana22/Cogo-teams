@@ -20,8 +20,8 @@ const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: fa
 const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: false });
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
-const FIRST_CHAR_OF_INVOICE_SERIAL_ID = 0;
-const LENGTH_CUTOFF = 8;
+const INVOICE_SERIAL_FIRST_CHAR = 0;
+const INVOICE_SERIAL_ID_LESS_THAN = 8;
 
 function Actions({
 	invoice = {},
@@ -38,7 +38,7 @@ function Actions({
 	const [showOtpModal, setShowOTPModal] = useState(false);
 	const [showExchangeRate, setExchangeRate] = useState(false);
 	const [isEditInvoice, setIsEditInvoice] = useState(false);
-	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
@@ -54,9 +54,9 @@ function Actions({
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
-	const firstChar = invoice_serial_id[FIRST_CHAR_OF_INVOICE_SERIAL_ID];
+	const firstChar = invoice_serial_id[INVOICE_SERIAL_FIRST_CHAR];
 
-	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < LENGTH_CUTOFF;
+	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < INVOICE_SERIAL_ID_LESS_THAN;
 
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {

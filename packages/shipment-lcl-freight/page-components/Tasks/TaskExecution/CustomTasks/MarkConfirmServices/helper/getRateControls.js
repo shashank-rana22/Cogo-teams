@@ -1,7 +1,8 @@
-import LCL_UNITS from '@cogoport/ocean-modules/contants/LCL_UNITS';
+import LCL_UNITS from '@cogoport/ocean-modules/constants/LCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase } from '@cogoport/utils';
 
+const FIRST_SERVICE_DETAIL = 0;
 const getRateControls = ({ service_charge, shipment_data, handleChange }) => {
 	const { id, service_type, service_detail, trade_type } = service_charge || {};
 	return {
@@ -10,7 +11,7 @@ const getRateControls = ({ service_charge, shipment_data, handleChange }) => {
 		service_name : service_type,
 		shipment_id  : shipment_data?.id,
 		showButtons  : service_type !== 'subsidiary_service',
-		cargoDetails : service_detail?.[0],
+		cargoDetails : service_detail?.[FIRST_SERVICE_DETAIL],
 		value        : [{
 			code     : '',
 			currency : '',

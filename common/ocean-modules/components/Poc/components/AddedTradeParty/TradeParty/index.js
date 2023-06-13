@@ -3,11 +3,13 @@ import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../constants/POC_WORKSCOPE_MAPPING';
 import Card from '../../Card';
 
 import LabelValue from './LabelValue';
 import styles from './styles.module.css';
+
+const ADDRESS_FIRST = 0;
 
 function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc = () => {}, rolesPermission = {} }) {
 	const [show, setShow] = useState({});
@@ -15,15 +17,12 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 	const editPermission = rolesPermission?.can_edit || [];
 
 	const {
-		trade_partner_details:{
-			business_name = '',
-			poc_data = {},
-		} = {},
+		trade_partner_details:{ business_name = '', poc_data = {} } = {},
 		address = [],
 		trade_party_type = '',
 		trade_party_id = '',
 	} = data;
-	const { address:first_address = '' } = address[0] || {};
+	const { address:first_address = '' } = address[ADDRESS_FIRST] || {};
 
 	const mapping = {
 		Name         : poc_data?.name || '',
@@ -35,6 +34,15 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 
 	const editAction = () => {
 		setAddCompany({ trade_party_type });
+	};
+
+	const handleAddPoc = () => {
+		setAddPoc({
+			poc_type: 'tradeParty',
+			business_name,
+			trade_party_type,
+			trade_party_id,
+		});
 	};
 
 	return (
@@ -51,14 +59,7 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 							? (
 								<Button
 									size="sm"
-									onClick={() => {
-										setAddPoc({
-											poc_type: 'tradeParty',
-											business_name,
-											trade_party_type,
-											trade_party_id,
-										});
-									}}
+									onClick={handleAddPoc}
 									themeType="accent"
 								>
 									+ ADD POC
@@ -80,7 +81,13 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 				{!isEmpty(poc_data) && show[title]
 					? (
 						<div className={styles.detail_card}>
-							{Object.keys(mapping).map((key) => <LabelValue label={key} value={mapping[key]} />)}
+							{Object.keys(mapping).map((key) => (
+								<LabelValue
+									label={key}
+									value={mapping[key]}
+									key={key}
+								/>
+							))}
 						</div>
 					) : null}
 			</div>

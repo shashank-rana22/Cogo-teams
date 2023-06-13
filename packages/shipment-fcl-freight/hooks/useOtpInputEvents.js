@@ -6,6 +6,10 @@ const NEW_STATE_VALUES = {};
 const FIRST_INDEX = 0;
 const VARIABLE_STATE = 1;
 
+const INCREMENT_IN_OPT_LOOP = 1;
+
+const CONTENT_SUBSTRING_INDEX = 0;
+
 const useOtpInputEvents = ({
 	otpLength = 0,
 	setOtp = () => {},
@@ -26,8 +30,8 @@ const useOtpInputEvents = ({
 
 			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
-			const nextOtpInputElementToFocus = otpInputElementsRef.current[currentFocusedOtpInputElementIndex
-				- VARIABLE_STATE];
+			const nextOtpInputElementToFocus = otpInputElementsRef.current[
+				currentFocusedOtpInputElementIndex - INCREMENT_IN_OPT_LOOP];
 			nextOtpInputElementToFocus?.focus();
 
 			return;
@@ -62,15 +66,17 @@ const useOtpInputEvents = ({
 				content = window.clipboardData.getData('Text');
 			}
 
-			content = content.replace(/[^0-9]/g, '').substring(FIRST_INDEX, otpLength);
+			content = content.replace(/[^0-9]/g, '').substring(CONTENT_SUBSTRING_INDEX, otpLength);
 
 			const currentFocusedOtpInputElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
 			setOtp((previousState) => {
-				for (let i = 0; i < otpLength; i += VARIABLE_STATE) {
+				const NEW_STATE_VALUES = {};
+
+				for (let i = 0; i < otpLength; i += INCREMENT_IN_OPT_LOOP) {
 					if (i >= currentFocusedOtpInputElementIndex) {
-						NEW_STATE_VALUES[`otp-${i + VARIABLE_STATE}`] = content[i
-							- currentFocusedOtpInputElementIndex] || '';
+						NEW_STATE_VALUES[`otp-${i
+							+ INCREMENT_IN_OPT_LOOP}`] = content[i - currentFocusedOtpInputElementIndex] || '';
 					}
 				}
 

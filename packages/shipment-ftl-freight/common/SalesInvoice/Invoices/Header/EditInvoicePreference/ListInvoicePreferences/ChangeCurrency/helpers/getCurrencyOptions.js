@@ -1,13 +1,12 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-
-import INVOICE_CURRENCY_MAPPINGS from '../../../../../../helpers/invoiceCurrencyMapping';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const geo = getGeoConstants();
 
 const getCurrencyOptions = (invoice) => {
-	const currencyOptionsOld =	INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.[
+	const currencyOptionsOld =	GLOBAL_CONSTANTS.options.freight_invoice_currency?.[
 		invoice?.country_code || geo.country.code
-	] || INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.others;
+	] || GLOBAL_CONSTANTS.options.freight_invoice_currency.OTHERS;
 
 	const currencyOptions = currencyOptionsOld.map((item) => ({
 		key      : item,

@@ -22,7 +22,7 @@ export default function getCanCancelShipment({ shipment_data, user_data, activeS
 
 	const isStakeholderAllowed = SHIPMENT_CANCELLATION_STAKEHOLDERS.includes(activeStakeholder);
 
-	const allowedEmail = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
+	const allowedUser = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
-	return isShipmentInCancellationState && (isStakeholderAllowed || allowedEmail);
+	return isShipmentInCancellationState && (isStakeholderAllowed || allowedUser);
 }

@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
 import { useRequest } from '@cogoport/request';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { isEmpty } from '@cogoport/utils';
@@ -7,17 +8,12 @@ import { useState } from 'react';
 
 import formatIps from '../common/SalesInvoice/helpers/format-ips';
 import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed-sales-invoices';
-import incoTermMapping from '../configurations/inco-term-mapping.json';
 
 const geo = getGeoConstants();
-const ALL_SERVICE_LINE_ITEMS = [];
-const INITIAL_SERVICE_INVOICE_ID = {};
-const TOTAL_CURRENT_INVOICE_INDEX = 0;
-const TOTAL_LENGTH = 1;
-const PARTY_SERVICES = [];
-const FINAL_PARTIES = [];
-const NOT_TAKEN = [];
-const NEW_SELECTED_PARTIES = [];
+const INVOICE_INDEX_GREATER_THAN = 0;
+const UNIQ_IGST_VAL_LENGTH = 1;
+const PARTY_SERVICES_LENGTH_GREATER_THAN = 1;
+const SERVICE_KEY_SPLIT_FIRST = 0;
 
 const isAllServicesTaken = (
 	servicesList,
@@ -46,6 +42,7 @@ const isAllServicesTaken = (
 	}
 
 	let isAllMainServicesTaken = true;
+	const NOT_TAKEN = [];
 
 	mainServices.forEach((service) => {
 		if (!allServicesTaken.includes(service.id)) {
@@ -57,15 +54,17 @@ const isAllServicesTaken = (
 	if (allServicesTaken.length !== allServiceLineitemsCount) {
 		isAllMainServicesTaken = false;
 	}
-	return { isAllMainServicesTaken, NOT_TAKEN };
+	return { isAllMainServicesTaken, notTaken: NOT_TAKEN };
 };
 
+// eslint-disable-next-line max-lines-per-function
 const useEditInvoicePref = ({
 	servicesList,
 	invoicing_parties = [],
 	shipment_data = {},
 	refetch = () => {},
 }) => {
+	const ALL_SERVICE_LINE_ITEMS = [];
 	invoicing_parties?.forEach((p) => {
 		const { invoice_currency, is_igst } = p || {};
 		const allServices = (p?.services || []).map((service) => ({
@@ -79,6 +78,9 @@ const useEditInvoicePref = ({
 	const allServiceLineitemsCount = ALL_SERVICE_LINE_ITEMS.length;
 
 	const formattedIps = formatIps(invoicing_parties || []);
+
+	const INITIAL_SERVICE_INVOICE_ID = {};
+
 	formattedIps?.forEach((ip) => {
 		ip?.services?.forEach((service) => {
 			INITIAL_SERVICE_INVOICE_ID[service?.serviceKey] = ip?.id;
@@ -92,7 +94,7 @@ const useEditInvoicePref = ({
 		importer_exporter_id,
 	} = shipment_data;
 
-	const updateExportInvoices = incoTermMapping[inco_term] === 'export';
+	const updateExportInvoices = getTradeTypeByIncoTerm(inco_term) === 'export';
 
 	const endPoint = updateExportInvoices ? '/update_shipment_export_invoice_combination'
 		: '/update_shipment_invoice_combination';
@@ -140,17 +142,18 @@ const useEditInvoicePref = ({
 			(party) => party.id === inv.id,
 		)?.id;
 
-		if (currentInvoiceIndex >= TOTAL_CURRENT_INVOICE_INDEX) {
+		if (currentInvoiceIndex >= INVOICE_INDEX_GREATER_THAN) {
+			const NEW_SELECT_PARTIES = [];
 			selectedParties.forEach((party) => {
 				const updateParty = { ...party };
 				updateParty.services = (party.services || []).filter(
 					(serviceItem) => !newServices.includes(serviceItem?.serviceKey),
 				);
-				NEW_SELECTED_PARTIES.push(updateParty);
+				NEW_SELECT_PARTIES.push(updateParty);
 			});
 
 			let isBasicFreightInvService = {};
-			NEW_SELECTED_PARTIES[currentInvoiceIndex].services = newServices?.map(
+			NEW_SELECT_PARTIES[currentInvoiceIndex].services = newServices?.map(
 				(service) => {
 					const itemsService = ALL_SERVICE_LINE_ITEMS.find(
 						(item) => item.serviceKey === service,
@@ -165,7 +168,7 @@ const useEditInvoicePref = ({
 					}
 
 					const currentService = invoicing_parties?.services?.find(
-						(serv) => serv?.id === service?.split(':')?.[TOTAL_CURRENT_INVOICE_INDEX],
+						(serv) => serv?.id === service?.split(':')?.[SERVICE_KEY_SPLIT_FIRST],
 					);
 
 					let serviceType = currentService?.service_type;
@@ -189,11 +192,11 @@ const useEditInvoicePref = ({
 					};
 				},
 			);
-			NEW_SELECTED_PARTIES[currentInvoiceIndex].invoice_currency = new_ic;
+			NEW_SELECT_PARTIES[currentInvoiceIndex].invoice_currency = new_ic;
 
-			let finalNewSelectParties = [...NEW_SELECTED_PARTIES];
-			if (finalNewSelectParties?.length > TOTAL_LENGTH) {
-				finalNewSelectParties = (NEW_SELECTED_PARTIES || []).filter(
+			let finalNewSelectParties = [...NEW_SELECT_PARTIES];
+			if (finalNewSelectParties?.length > PARTY_SERVICES_LENGTH_GREATER_THAN) {
+				finalNewSelectParties = (NEW_SELECT_PARTIES || []).filter(
 					(party) => !isEmpty(party?.services),
 				);
 			}
@@ -206,7 +209,7 @@ const useEditInvoicePref = ({
 				(service) => service?.is_igst,
 			);
 			const uniq_igst_val = new Set(igstArray || []);
-			const allowServiceMerge = uniq_igst_val?.length === TOTAL_LENGTH;
+			const allowServiceMerge = uniq_igst_val?.length === UNIQ_IGST_VAL_LENGTH;
 
 			let isBasicFreight = false;
 			if (!isEmpty(isBasicFreightInvService)) {
@@ -215,7 +218,7 @@ const useEditInvoicePref = ({
 						(service) => service.serviceKey === isBasicFreightInvService.serviceKey,
 					);
 
-					if (party?.services?.length > TOTAL_LENGTH && BFLineItem) {
+					if (party?.services?.length > PARTY_SERVICES_LENGTH_GREATER_THAN && BFLineItem) {
 						isBasicFreight = true;
 					}
 				});
@@ -248,7 +251,11 @@ const useEditInvoicePref = ({
 				(party) => !!party.services.length || typeof party.id === 'string',
 			);
 
+			const FINAL_PARTIES = [];
+
 			filteredParties.forEach((party) => {
+				const PARTY_SERVICES = [];
+
 				party?.services?.map((item) => {
 					const xyz = {
 						...item,

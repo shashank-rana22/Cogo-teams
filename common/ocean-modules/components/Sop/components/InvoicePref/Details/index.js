@@ -9,6 +9,8 @@ const INVOICE_COLUMNS = [
 	['Billing Party Address', 'Name', 'Contact Number'],
 ];
 
+const INVOICE_COLUMN_FIRST = 0;
+
 function Details({ data = [], setShowForm = () => {} }) {
 	const mapping = (val) => ({
 		Service                 : startCase(val.invoice_preference_service || ''),
@@ -43,8 +45,8 @@ function Details({ data = [], setShowForm = () => {} }) {
 						>
 							Add
 						</Button>
-
 					</div>
+
 					<div>
 						<Button
 							onClick={() => setShowForm('edit')}
@@ -53,22 +55,23 @@ function Details({ data = [], setShowForm = () => {} }) {
 						>
 							Edit
 						</Button>
-
 					</div>
 				</div>
 			</div>
 
 			<div>
-				{!data?.length ? <div className={styles.no_data}>No data available</div>
+				{isEmpty(data)
+					? <div className={styles.no_data}>No data available</div>
 					: data.map((item) => {
 						const mapping_data = mapping(item?.sop_detail || {});
 
 						return (
-							<div className={styles.each_pref}>
+							<div className={styles.each_pref} key={item?.id}>
 								{INVOICE_COLUMNS.map((col) => (
-									<div className={styles.columns}>
+									<div className={styles.columns} key={col?.[INVOICE_COLUMN_FIRST]}>
 										{col.map((key) => (
 											<LabelValue
+												key={key}
 												label={key}
 												value={mapping_data[key]}
 											/>
