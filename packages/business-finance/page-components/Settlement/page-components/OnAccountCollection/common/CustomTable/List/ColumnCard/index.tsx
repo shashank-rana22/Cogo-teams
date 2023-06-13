@@ -9,6 +9,7 @@ import ToolTipWrapper from './ToolTipWrapper';
 
 const MAX_BANK_LENGTH = 12;
 const MAX_LENGTH_ECLIPSES = 12;
+const MAX_LENGTH_VISIBLE=12
 
 interface ColumnCardInterface {
 	refetch?: () => void;
@@ -105,7 +106,7 @@ function ColumnCard({ item, refetch, getTableBodyCheckbox }: ColumnCardInterface
 					{(
 						<ToolTipWrapper
 							text={paymentNumValue || '---'}
-							maxlength={12}
+							maxlength={MAX_LENGTH_VISIBLE}
 						/>
 					) || '---'}
 				</div>

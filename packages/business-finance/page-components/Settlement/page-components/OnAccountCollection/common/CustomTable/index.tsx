@@ -54,7 +54,7 @@ function CustomTable(
 	const GET_STATUS = ['POSTED', 'APPROVED', 'POSTING_FAILED'];
 
 	const GET_ENTITY = Object.keys(GLOBAL_CONSTANTS.cogoport_entities).filter(
-		(entity) => entity !== '501',
+		(key) => GLOBAL_CONSTANTS.cogoport_entities?.[key]?.post_to_sage_allowed,
 	);
 
 	const isCheckBoxAllowed = (item) => GET_STATUS.includes(item?.paymentDocumentStatus)
@@ -110,10 +110,10 @@ function CustomTable(
 		) : null;
 	};
 
-	const isAllChecked = (list || [])?.filter((item) => isCheckBoxAllowed(item)
-	&& !checkedRows.includes(item?.id))?.length === 0;
+	const isAllChecked = isEmpty((list || [])?.filter((item) => isCheckBoxAllowed(item)
+	&& !checkedRows.includes(item?.id)));
 
-	const showHeaderCheckbox = (list || [])?.filter((item) => isCheckBoxAllowed(item))?.length > 0;
+	const showHeaderCheckbox = !isEmpty((list || [])?.filter((item) => isCheckBoxAllowed(item)));
 
 	return isEmpty(list) ? (
 		<EmptyStateDocs />

@@ -20,7 +20,7 @@ const usePostToSageBulk = ({ refetch, setShowConfirm }: Props) => {
 	const [{ loading }, trigger] = useRequestBf(
 		{
 			url     : '/payments/accounts/bulk-post-to-sage',
-			authKey : 'post_accounts_bulk_post_to_sage',
+			authKey : 'post_payments_accounts_bulk_post_to_sage',
 			method  : 'post',
 		},
 		{ manual: true },

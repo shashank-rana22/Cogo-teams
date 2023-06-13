@@ -8743,6 +8743,12 @@ const partner = {
 			feature     : 'onAccount',
 		},
 		{
+			api         : 'post_payments_accounts_bulk_post_to_sage',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
 			api         : 'post_payments_accounts',
 			access_type : 'private',
 			module      : 'onAccount',
