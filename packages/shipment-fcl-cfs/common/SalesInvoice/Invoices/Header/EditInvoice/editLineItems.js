@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
+import { v4 as uuid } from 'uuid';
 
 import rawControls from './rawControls';
 
@@ -86,7 +87,7 @@ const useEditLineItems = ({
 			unit             : item?.unit,
 			total            : item?.tax_total_price_discounted || ZERO_VALUE,
 			name             : item?.name,
-			id               : item?.product_code,
+			id               : uuid(),
 		})),
 	}));
 
@@ -96,7 +97,7 @@ const useEditLineItems = ({
 
 	const formValues = watch();
 
-	const CUSTOM_VALUES = {};
+	const CUSTOM_VALUE = {};
 	const prepareFormValues = () => {
 		const allFormValues = { ...formValues };
 		(Object.keys(formValues) || []).forEach((key) => {
@@ -116,7 +117,7 @@ const useEditLineItems = ({
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
 	const LABELS = {};
 	Object.keys(controls?.[ZERO_VALUE]).forEach((key) => {
-		CUSTOM_VALUES[key] = {
+		CUSTOM_VALUE[key] = {
 			formValues : newFormValues[key],
 			label      : LABELS[key],
 			id         : key,
@@ -152,16 +153,22 @@ const useEditLineItems = ({
 				PAYLOAD.push(service);
 			});
 
-			await trigger({
+			const res = await trigger({
 				data: {
 					quotations             : PAYLOAD,
 					shipment_id            : shipment_data?.id,
 					invoice_combination_id : invoice?.id || undefined,
 				},
 			});
-			Toast.success('Line Items updated successfully!');
-			refetch();
-			onClose();
+			if (!res.hasError) {
+				Toast.success('Line Items updated successfully!');
+				if (refetch) {
+					refetch();
+				}
+				if (onClose) {
+					onClose();
+				}
+			}
 		} catch (err) {
 			Toast.error(err?.data?.invoices);
 		}
@@ -172,7 +179,7 @@ const useEditLineItems = ({
 		handleSubmit,
 		controls,
 		loading,
-		CUSTOM_VALUES,
+		CUSTOM_VALUE,
 		errors,
 		control,
 		setValue,

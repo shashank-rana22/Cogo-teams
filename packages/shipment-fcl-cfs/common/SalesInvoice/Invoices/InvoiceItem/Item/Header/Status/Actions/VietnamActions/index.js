@@ -22,7 +22,7 @@ const AmendmentReasons = dynamic(() => import('../AmendmentReasons'), { ssr: fal
 const ChangePaymentMode = dynamic(() => import('../ChangePaymentMode'), { ssr: false });
 const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: false });
 
-const ZERO_INDEX = 0;
+const ZERO_VALUE = 0;
 const MAX_INVOICE_SERIAL_ID = 8;
 
 function Actions({
@@ -55,7 +55,7 @@ function Actions({
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice.serial_id.toString() || '';
-	const firstChar = invoice_serial_id[ZERO_INDEX];
+	const firstChar = invoice_serial_id[ZERO_VALUE];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < MAX_INVOICE_SERIAL_ID;
 
@@ -142,13 +142,13 @@ function Actions({
 									<div className={styles.flex_row}>
 										Proforma email sent :
 										&nbsp;
-										{invoice.proforma_email_count || ZERO_INDEX}
+										{invoice.proforma_email_count || ZERO_VALUE}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
 										&nbsp;
-										{invoice.sales_email_count || ZERO_INDEX}
+										{invoice.sales_email_count || ZERO_VALUE}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>

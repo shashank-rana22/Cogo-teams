@@ -6,7 +6,7 @@ import {
 
 import styles from '../../styles.module.css';
 
-const ZERO_INDEX = 0;
+const ZERO_VALUE = 0;
 
 function EmailInfo({
 	invoice = {},
@@ -27,13 +27,13 @@ function EmailInfo({
 									<div className={styles.flex_row}>
 										Proforma email sent :
 										&nbsp;
-										{invoice.proforma_email_count || ZERO_INDEX}
+										{invoice.proforma_email_count || ZERO_VALUE}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
 										&nbsp;
-										{invoice.sales_email_count || ZERO_INDEX}
+										{invoice.sales_email_count || ZERO_VALUE}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>

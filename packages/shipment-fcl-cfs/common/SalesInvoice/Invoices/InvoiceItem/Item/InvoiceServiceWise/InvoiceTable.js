@@ -2,7 +2,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getServiceNameforTableColumn from '../../../../helpers/getServiceNameforTableColumn';
 
-const ZERO_INDEX = 0;
+const ZERO_VALUE = 0;
 
 export const InvoiceTable = (serviceItem = {}) => {
 	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, serviceItem?.trade_type);
@@ -26,7 +26,7 @@ export const InvoiceTable = (serviceItem = {}) => {
 		{
 			label  : 'Rate',
 			render : (item) => formatAmount({
-				amount   : item?.price_discounted || ZERO_INDEX,
+				amount   : item?.price_discounted || ZERO_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -38,7 +38,7 @@ export const InvoiceTable = (serviceItem = {}) => {
 		{
 			label  : 'Quantity',
 			render : (item) => formatAmount({
-				amount   : item?.quantity || ZERO_INDEX,
+				amount   : item?.quantity || ZERO_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -50,7 +50,7 @@ export const InvoiceTable = (serviceItem = {}) => {
 		{
 			label  : 'Discount',
 			render : (item) => formatAmount({
-				amount   : item?.discount_price || ZERO_INDEX,
+				amount   : item?.discount_price || ZERO_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -63,7 +63,7 @@ export const InvoiceTable = (serviceItem = {}) => {
 		{
 			label  : 'Exc. Rate',
 			render : (item) => formatAmount({
-				amount   : item?.exchange_rate || ZERO_INDEX,
+				amount   : item?.exchange_rate || ZERO_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -75,20 +75,20 @@ export const InvoiceTable = (serviceItem = {}) => {
 		{
 			label  : 'Tax Amt.',
 			render : (item) => `${formatAmount({
-				amount   : item?.tax_price_discounted || ZERO_INDEX,
+				amount   : item?.tax_price_discounted || ZERO_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'code',
 					maximumFractionDigits : 2,
 				},
-			})} (${item?.tax_percent || ZERO_INDEX}%)`,
+			})} (${item?.tax_percent || ZERO_VALUE}%)`,
 			span: 1,
 		},
 		{
 			label  : 'Amt. with Tax',
 			render : (item) => formatAmount({
-				amount   : item?.tax_total_price_discounted || ZERO_INDEX,
+				amount   : item?.tax_total_price_discounted || ZERO_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'currency',

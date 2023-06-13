@@ -23,7 +23,7 @@ const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: fals
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 
 const ZERO_INDEX = 0;
-const MAX_INVOICE_SERIAL_LENGTH = 8;
+const MAX_INVOICE_SERIAL_ID_LENGTH = 8;
 
 function Actions({
 	invoice = {},
@@ -57,7 +57,7 @@ function Actions({
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[ZERO_INDEX];
 
-	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < MAX_INVOICE_SERIAL_LENGTH;
+	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < MAX_INVOICE_SERIAL_ID_LENGTH;
 
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {
