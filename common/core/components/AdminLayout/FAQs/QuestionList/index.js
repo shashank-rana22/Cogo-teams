@@ -10,7 +10,7 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 import useQuestionList from './useQuestionList';
 
-const TOTAL_LENGTH = 0;
+const IS_EMPTY = 0;
 const TOTAL_COUNT = 10;
 const TOTAL_FAQ_LENGTH = 3;
 const INITIAL_PAGE = 1;
@@ -68,7 +68,7 @@ function QuestionList({
 
 		return (
 			<div style={{ display: 'flex' }}>
-				{item?.faq_tags?.slice(TOTAL_LENGTH, TOTAL_FAQ_LENGTH).map((faqtag) => (
+				{item?.faq_tags?.slice(IS_EMPTY, TOTAL_FAQ_LENGTH).map((faqtag) => (
 					<Pill size="md" className={styles.pill} key={faqtag.display_name}>
 						{(faqtag.display_name).toUpperCase()}
 					</Pill>
@@ -93,7 +93,7 @@ function QuestionList({
 
 	return (
 		<div className={styles.containers}>
-			{list?.length > TOTAL_LENGTH ? (
+			{list?.length > IS_EMPTY ? (
 				<>
 					<div className={styles.topic_heading}>
 						Topic:
@@ -139,11 +139,11 @@ function QuestionList({
 						{search && <EmptySearchState search={search} source="list" />}
 					</div>
 
-					{(pageData?.total_count || TOTAL_LENGTH) > TOTAL_COUNT ? (
+					{(pageData?.total_count || IS_EMPTY) > TOTAL_COUNT ? (
 						<div className={styles.pagination_container}>
 							<Pagination
 								className="md"
-								totalItems={pageData?.total_count || TOTAL_LENGTH}
+								totalItems={pageData?.total_count || IS_EMPTY}
 								currentPage={page || INITIAL_PAGE}
 								pageSize={pageData?.page_limit}
 								onPageChange={setPage}
