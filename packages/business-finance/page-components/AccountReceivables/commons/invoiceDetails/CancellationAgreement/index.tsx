@@ -16,23 +16,23 @@ interface AggreementFile {
 function CancellationAgreement({ data }: DataInterface) {
 	const { cancelledEInvoiceDetails } = data || {};
 
-	const { agreementNumber, agreementDate, agreementDocument, eInvoiceForm04 } = cancelledEInvoiceDetails || {};
-
-	const dynamicDataVariables = [
-		{ label: 'Agreement No. - ', value: agreementNumber },
-		{ label: 'Agreement Date -', value: agreementDate },
-	];
-
-	const dynamicDataUrl = [
-		{ label: 'Agreement Proof -', value: agreementDocument },
-		{ label: 'Form 04 -', value: eInvoiceForm04 },
-	];
-
 	if (cancelledEInvoiceDetails === undefined) {
 		return (
 			<div>Cancellation Aggreement Does Not Exist</div>
 		);
 	}
+
+	const { agreementNumber, agreementDate, agreementDocument, eInvoiceForm04 } = cancelledEInvoiceDetails || {};
+
+	const dynamicDataVariables = [
+		{ label: 'Agreement No. -', value: agreementNumber || '-' },
+		{ label: 'Agreement Date -', value: agreementDate || '-' },
+	];
+
+	const dynamicDataUrl = [
+		{ label: 'Agreement Proof -', value: agreementDocument || '-' },
+		{ label: 'Form 04 -', value: eInvoiceForm04 || '-' },
+	];
 
 	return (
 		<div className={styles.container}>

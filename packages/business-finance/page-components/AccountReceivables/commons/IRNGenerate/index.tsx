@@ -12,22 +12,24 @@ import FinalPostModal from './FinalPostModal';
 import styles from './styles.module.css';
 
 type Itemdata = {
-	id?: string
-	invoiceStatus?: string
-	entityCode?: number
-	daysLeftForAutoIrnGeneration?: string
-	isFinalPosted?:boolean
-	invoiceType?:string
+	id?: string;
+	invoiceStatus?: string;
+	entityCode?: number;
+	daysLeftForAutoIrnGeneration?: string;
+	isFinalPosted?:boolean;
+	invoiceType?:string;
 };
 interface IRNGeneration {
-	itemData?: Itemdata
-	refetch?: Function
+	itemData?: Itemdata;
+	refetch?: Function;
 }
+
 const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 const POSTED_STATUS = ['POSTED'];
 const IRN_FAILED_STATUS = ['IRN_FAILED'];
 const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
+
 function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const [openReject, setOpenReject] = useState(false);
 	const [textValue, setTextValue] = useState('');
