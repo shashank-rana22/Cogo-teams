@@ -1,11 +1,8 @@
 import { Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { useContext } from 'react';
+import React, { useContext } from 'react';
 
 import styles from './styles.module.css';
-
-const STAKEHOLDER_ALLOWED = {};
-const FIRST_INDEX = 1;
 
 function ActionsToShow({
 	status,
@@ -22,8 +19,10 @@ function ActionsToShow({
 
 	const config = stakeholderConfig?.additional_services?.add_rate || {};
 
+	const stakeholderAllowed = {};
+
 	Object.entries(config).forEach(([key, val]) => {
-		STAKEHOLDER_ALLOWED[key?.split('::')?.[FIRST_INDEX]] = val;
+		stakeholderAllowed[key?.split('::')?.[1]] = val;
 	});
 
 	const {
@@ -53,7 +52,7 @@ function ActionsToShow({
 
 	if (
 		status?.status === 'amendment_requested_by_importer_exporter'
-		&& !!STAKEHOLDER_ALLOWED.amendment_requested_by_importer_exporter
+		&& !!stakeholderAllowed.amendment_requested_by_importer_exporter
 	) {
 		return (
 			<div className={styles.button_container}>
@@ -84,7 +83,7 @@ function ActionsToShow({
 	}
 
 	if (status?.status === 'cancelled_by_supplier'
-		&& !!STAKEHOLDER_ALLOWED.cancelled_by_supplier
+		&& !!stakeholderAllowed.cancelled_by_supplier
 	) {
 		return (
 			<div className={styles.button_container}>
