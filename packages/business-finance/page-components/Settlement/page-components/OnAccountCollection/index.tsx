@@ -22,7 +22,7 @@ import styles from './styles.module.css';
 
 const SEARCH_PLACEHOLDER = 'Search by Customer Name / UTR No /Doc. Value';
 
-const CAN_BULK_POST=2
+const CAN_BULK_POST = 2;
 function OnAccountCollection() {
 	const {
 		control,

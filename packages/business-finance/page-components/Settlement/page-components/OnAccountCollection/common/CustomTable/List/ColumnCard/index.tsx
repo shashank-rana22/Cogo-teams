@@ -9,7 +9,7 @@ import ToolTipWrapper from './ToolTipWrapper';
 
 const MAX_BANK_LENGTH = 12;
 const MAX_LENGTH_ECLIPSES = 12;
-const MAX_LENGTH_VISIBLE=12
+const MAX_LENGTH_VISIBLE = 12;
 
 interface ColumnCardInterface {
 	refetch?: () => void;
