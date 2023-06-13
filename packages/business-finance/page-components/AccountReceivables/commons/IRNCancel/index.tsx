@@ -33,9 +33,6 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 		? irnGeneratedAt + TIME_VALUE >= Date.now()
 		: false;
 
-	console.log(irnGeneratedAt, 'irnGeneratedAt');
-	console.log(TIME_VALUE, 'TIME_VALUE');
-
 	const { postToSage, loading } = usePostToSage(id);
 
 	const { labels } = CogoportEntity[entityCode] || {};
