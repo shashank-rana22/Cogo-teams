@@ -29,6 +29,7 @@ import rfqDashboard from './config/rfq-dashboard';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
+import serviceDiscovery from './config/service-discovery';
 import shipmentFclCfs from './config/shipment-fcl-cfs';
 import shipmentFclCustom from './config/shipment-fcl-custom';
 import shipmentFclFreight from './config/shipment-fcl-freight';
@@ -93,6 +94,7 @@ const routeConfig = {
 	...shipmentLtlFreight,
 	...ticketManagement,
 	...rfqDashboard,
+	...serviceDiscovery,
 };
 
 export default routeConfig;

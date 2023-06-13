@@ -203,6 +203,17 @@ const navigationMappingAdmin = {
 		],
 		module_type: 'crm',
 	},
+	service_discovery: {
+		key           : 'service_discovery',
+		title         : 'Service Discovery',
+		href          : '/service_discovery',
+		as            : '/service_discovery',
+		type          : 'link',
+		icon          : IcMFinanceDashboard,
+		possible_apis : [],
+		main_apis     : [],
+		module_type   : 'dashboards',
+	},
 	supply_crm: {
 		key           : 'supply_crm',
 		title         : 'Supply CRM',
