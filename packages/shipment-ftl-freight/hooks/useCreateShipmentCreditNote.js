@@ -8,9 +8,6 @@ import formatCreditNoteData from '../common/SalesInvoice/CreditNote/helpers/form
 const useCreateShipmentCreditNote = ({
 	refetch = () => {},
 	successMessage = 'Credit Note Created Successfully!!',
-	servicesIDs = [],
-	invoice = {},
-	invoiceData = {},
 }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/create_shipment_credit_note',
@@ -29,33 +26,8 @@ const useCreateShipmentCreditNote = ({
 		}
 	};
 
-	const onCreate = async (data) => {
-		const { submit_data, checkError } = formatCreditNoteData({
-			data,
-			servicesIDs,
-			invoice,
-			invoiceData,
-		});
-
-		if (submit_data?.line_items?.length === 0) {
-			Toast.error('Line Items is required');
-		}
-		let isError = false;
-		Object.keys(checkError).forEach((key) => {
-			checkError[key].forEach((t) => {
-				if (!isEmpty(t)) {
-					isError = true;
-				}
-			});
-		});
-
-		if (isError === false) {
-			await apiTrigger(submit_data);
-		}
-	};
-
 	return {
-		onCreate,
+		apiTrigger,
 		loading,
 	};
 };

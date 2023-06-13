@@ -118,7 +118,12 @@ function FileUploader(props) {
 					});
 					setFileName((prev) => {
 						if (prev === null) return values;
-						return [...prev, ...values];
+						
+						const prevValue = prev?.target?.value
+						const finalPrevValue= Array.isArray(prevValue) || typeof prevValue === 'object' ? prevValue : [prevValue||'']
+						const t=[...finalPrevValue, ...values] 
+						console.log({t})
+						return t;
 					});
 				} else {
 					setUrlStore(allUrls);
