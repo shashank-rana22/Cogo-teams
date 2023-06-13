@@ -100,7 +100,6 @@ const rawControls = (charge, isEdit) => ({
 						value : 'true',
 					},
 				],
-				themeType : 'primary lg',
 				span      : 1,
 			},
 			...commonControls(charge, isEdit),

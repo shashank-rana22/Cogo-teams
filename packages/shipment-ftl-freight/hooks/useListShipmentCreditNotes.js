@@ -3,7 +3,7 @@ import { useRequest } from '@cogoport/request';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
 import { useEffect, useContext, useCallback, useState } from 'react';
 
-const useGetShipmentCreditNotes = () => {
+const useListShipmentCreditNotes = () => {
 	const { shipment_data } = useContext(ShipmentDetailContext);
 	const [apiData, setApiData] = useState({});
 
@@ -16,6 +16,7 @@ const useGetShipmentCreditNotes = () => {
 			filters: {
 				shipment_id,
 			},
+			combination_data_required: true
 		},
 	}, { manual: true });
 
@@ -38,4 +39,4 @@ const useGetShipmentCreditNotes = () => {
 		cnRefetch : getCreditNoteList,
 	};
 };
-export default useGetShipmentCreditNotes;
+export default useListShipmentCreditNotes;
