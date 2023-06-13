@@ -10,7 +10,7 @@
 .sub_container {
 	display: flex;
 	gap: 4px;
-	padding: 4px 4px;
+	padding: 4px;
 	font-size: var(--font-size-md);
 }
 
