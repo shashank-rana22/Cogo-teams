@@ -8,7 +8,7 @@ import TabComponents from '../TabComponents';
 import styles from './styles.module.css';
 
 function Dashboard() {
-	const [informationPage, setInformationPage] = useState('additional_information');
+	const [informationPage, setInformationPage] = useState();
 
 	const { data, getEmployeeDetails, loading } = useGetEmployeeDetails({
 		company_policy_data_required: true,
