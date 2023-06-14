@@ -5,7 +5,7 @@ import { formatValue, statsPercentageValue } from '../../../utils/formatValue';
 
 import styles from './styles.module.css';
 
-const STATS_DEFAULT_COUNT = 0;
+const STATS_COUNT = 0;
 
 function StatsDiv({
 	setActiveStatsCard = () => {},
@@ -37,10 +37,12 @@ function StatsDiv({
 								<div className={styles.numbers}>
 									{loading
 										? <Placeholder width={100} height={25} />
-										: `${currencyCode} ${formatValue(data?.[name])}` || STATS_DEFAULT_COUNT}
+										: `${currencyCode} ${formatValue(data?.[name] || STATS_COUNT)}`}
 								</div>
 								{showStats && (
-									<div className={styles.numbers}>{statsPercentageValue({ data, name })}</div>
+									<div className={styles.numbers}>
+										{statsPercentageValue({ data, name }) || STATS_COUNT}
+									</div>
 								)}
 							</div>
 						</div>

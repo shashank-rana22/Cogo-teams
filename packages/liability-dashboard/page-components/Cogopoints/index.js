@@ -113,6 +113,7 @@ function CogoPoints() {
 						activeStatsCard={activeStatsCard}
 						setSelectOrganization={setSelectOrganization}
 						selectOrganization={selectOrganization}
+						activeHeaderTab={activeHeaderTab}
 					/>
 				</>
 			)}
