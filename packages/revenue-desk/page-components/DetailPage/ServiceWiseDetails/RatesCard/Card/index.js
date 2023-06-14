@@ -144,26 +144,26 @@ function Card({
 								{data?.rowData?.destination_locals_price}
 							</div>
 							<div>
-								{shipmentType === 'air_freight' ? (
+								{serviceData?.shipment_type === 'air_freight' ? (
 									<div>
 										Buy Rate Per Kg:
 										<span style={{ fontSize: '18px', fontWeight: '600', color: '#4F4F4F' }}>
-									{`${showData(data?.rowData?.currency)} ${showData(
-										data?.rowData?.buy_price,
-									)}`}
-								</span>
+											{`${showData(data?.rowData?.currency)} ${showData(
+												data?.rowData?.buy_price,
+											)}`}
+										</span>
 									</div>
-								):null}
-								{shipmentType === 'fcl_freight' ? (
+								) : null}
+								{serviceData?.shipment_type === 'fcl_freight' ? (
 									<div>
 										Buy Rate Per Contr.:
 										<span style={{ fontSize: '18px', fontWeight: '600', color: '#4F4F4F' }}>
-									{`${showData(data?.rowData?.currency)} ${showData(
-										data?.rowData?.buy_price,
-									)}`}
-								</span>
+											{`${showData(data?.rowData?.currency)} ${showData(
+												data?.rowData?.buy_price,
+											)}`}
+										</span>
 									</div>
-								):null}
+								) : null}
 							</div>
 							<div>
 								{serviceData?.service_type === 'air_freight_service' && (
