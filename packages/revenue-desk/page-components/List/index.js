@@ -14,7 +14,7 @@ function List({ shipmentList, loading, setShowDetailPage }) {
 			{!loading && (shipmentList || []).length ? (shipmentList || []).map((item) => (
 				<Card
 					item={item}
-					key={item}
+					key={item?.id}
 					loading={loading}
 					setShowDetailPage={setShowDetailPage}
 				/>

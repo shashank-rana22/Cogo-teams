@@ -10,7 +10,7 @@ function ServiceWiseStakeHolder({ data, serviceType }) {
 			</div>
 
 			{(data || []).map((item) => (
-				<div key={item} className={styles.container}>
+				<div key={item?.id} className={styles.container}>
 					<div className={styles.text}>
 						{startCase(item?.stakeholder_type)}
 						{' '}

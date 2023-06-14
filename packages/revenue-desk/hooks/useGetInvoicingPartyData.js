@@ -35,11 +35,11 @@ const useGetInvoicingPartyData = ({ data, open }) => {
 	);
 
 	useEffect(() => {
-		if (!isEmpty(data) && data?.importer_exporter_id) {
+		if (!isEmpty(data) && data?.importer_exporter_id && open) {
 			getData();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(data)]);
+	}, [JSON.stringify(data), open]);
 
 	return {
 		invoiceLoading,

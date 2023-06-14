@@ -26,10 +26,14 @@ function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 		sell_price: `${data?.net_total_price_currency} ${data?.net_pre_tax_total}`,
 	};
 	useEffect(() => {
-		(chargesData || []).forEach((item) => {
-			updatedPriceData[item.service_type] = item.total_price_discounted;
-		});
-		setPriceData(updatedPriceData);
+		if (!priceData) {
+			(chargesData || []).forEach((item) => {
+				updatedPriceData[item.service_type] = item.total_price_discounted;
+			});
+			setPriceData(updatedPriceData);
+		}
+
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [service_charges]);
 
 	return (

@@ -64,7 +64,11 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 				onChange={setActiveTab}
 			>
 				{tabKeys.map((singleTab) => (
-					<TabPanel name={singleTab} title={startCase(singleTab.replace('_service', ''))} key={singleTab}>
+					<TabPanel
+						name={singleTab}
+						title={startCase(singleTab.replace('_service', ''))}
+						key={singleTab}
+					>
 						<SingleService
 							groupedServicesData={groupedShowServicesData[activeTab]}
 							supplierPayload={supplierPayload}
