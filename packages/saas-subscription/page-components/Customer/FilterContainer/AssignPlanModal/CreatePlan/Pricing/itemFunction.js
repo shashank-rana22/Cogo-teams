@@ -34,7 +34,7 @@ const itemFunction = ({
     <Checkbox
       checked={item?.[config?.key]}
       onChange={() => {
-        setUpdatePricing((prev) => getCheck(prev, item));
+        setUpdatePricing((prev) => getCheck({prev, item}));
         setFrequencyPeriod(item?.period);
       }}
     />

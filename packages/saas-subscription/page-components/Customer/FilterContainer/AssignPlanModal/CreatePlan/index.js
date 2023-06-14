@@ -5,11 +5,11 @@ import { useForm, useFieldArray } from "@cogoport/forms";
 import Item from "./Item";
 import { Button, Modal, Select, cl } from "@cogoport/components";
 import addonConfig from "../../../../../configuration/addonConfig";
-import { useState,useEffect } from "react";
+import { useState, useEffect } from "react";
 import Pricing from "./Pricing";
 import { planConfig } from "../../../../../configuration/planConfig";
 import useCreatePlan from "../../../../../hooks/useCreatePlan";
-
+import {startCase} from '@cogoport/utils'
 const CreatePlan = ({ closeModal }) => {
   const [defaultCurrency, setDefaultCurrency] = useState("");
 
@@ -56,14 +56,13 @@ const CreatePlan = ({ closeModal }) => {
   return (
     <form>
       <Modal.Body>
-        {" "}
         <div className={styles.container}>
           {createPlanControl.map((element) => {
             const { name, label, type } = element;
             if (type === "pricing") {
               return (
-                <div className={styles.content_body}>
-                  <h3>{name.charAt(0).toUpperCase() + name.slice(1)}</h3>
+                <div className={styles.content_body} key={name}>
+                  <h3>{startCase(name)}</h3>
                   <div className={cl`${styles.card_header} ${styles.flex_box}`}>
                     {element?.config?.map((config) => (
                       <div
@@ -101,7 +100,7 @@ const CreatePlan = ({ closeModal }) => {
               };
               return (
                 <div className={styles.content_body}>
-                  <h3>{name.charAt(0).toUpperCase() + name.slice(1)}</h3>
+                  <h3>{startCase(name)}</h3>
                   <div className={styles.table}>
                     <div
                       className={cl`${styles.card_header} ${styles.flex_box}`}

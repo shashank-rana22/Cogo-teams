@@ -13,11 +13,11 @@ const getKey = ({ name, index, getValues }) => {
 };
 
 function Item({
-  info,
-  controls,
+  info={},
+  controls=[],
   control,
-  remove,
-  errors,
+  remove=()=>{},
+  errors={},
   index,
   fields = [],
   getValues,
