@@ -5,7 +5,7 @@ import { useState } from 'react';
 import useListStakeholders from '../../hooks/useListShipmentStakeholders';
 import useListShipmentTradePartners from '../../hooks/useListShipmentTradePartners';
 
-import AddCompanyModal from './components/AddCompanyModal';
+import AddCompanyModal from '../../common/AddCompanyModal';
 import AddedTradeParty from './components/AddedTradeParty';
 import AddPocModal from './components/AddPocModal';
 import InvoicingParty from './components/InvoicingParty';

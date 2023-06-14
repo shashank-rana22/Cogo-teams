@@ -16,6 +16,12 @@ import getCriticalShipment from '../../../helpers/getCriticalShipment';
 
 import styles from './styles.module.css';
 
+const SHIPMENT_TYPE_IN_ROUTE = {
+	fcl_freight : 'fcl', 
+	fcl_freight_local: 'fcl-local', 
+	fcl_customs: 'fcl-custom'
+}
+
 function Card({ data = {} }) {
 	const router = useRouter();
 
@@ -28,7 +34,9 @@ function Card({ data = {} }) {
 	const isShipmentCritical = !!getCriticalShipment({ shipment: data, shipmentType, activeTab, stepperTab });
 
 	const handleCardClick = () => {
-		const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${data?.id}`;
+		const newUrl =  shipmentType !==  'fcl_cfs' ? 
+		`${window.location.origin}/v2/${router?.query?.partner_id}/booking/${SHIPMENT_TYPE_IN_ROUTE[shipmentType]}/${data?.id}` 
+		: `${window.location.origin}/${router?.query?.partner_id}/shipments/${SHIPMENT_TYPE_IN_ROUTE[shipmentType]}/${data?.id}`
 
 		window.sessionStorage.setItem('prev_nav', newUrl);
 		window.location.href = newUrl;

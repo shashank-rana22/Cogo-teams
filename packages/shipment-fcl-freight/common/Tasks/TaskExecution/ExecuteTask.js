@@ -1,9 +1,9 @@
 import { ShipmentDetailContext } from '@cogoport/context';
 import { useContext } from 'react';
-
+import { AddCompanyModal } from '@cogoport/ocean-modules';
 import useGetTaskConfig from '../../../hooks/useGetTaskConfig';
 import useTaskRpa from '../../../hooks/useTaskRpa';
-
+import useListShipmentTradePartners from '../../../hooks/useListShipmentTradePartners';
 import {
 	UploadBookingNote,
 	UploadCargoArrival,
@@ -19,10 +19,15 @@ import {
 import ExecuteStep from './ExecuteStep';
 import useTaskExecution from './helpers/useTaskExecution';
 
-const excludeServices = [
+const EXCLUDED_SERVICES = [
 	'fcl_freight_service',
 	'haulage_freight_service',
-];
+]; 
+
+const TRADE_PARTY_TYPE = {
+	add_consignee_details: {trade_party_type: 'consignee'},
+	add_shipper_details: {trade_party_type: 'shipper'}
+}
 
 function ExecuteTask({
 	task = {},
@@ -31,10 +36,11 @@ function ExecuteTask({
 	selectedMail = [],
 	setSelectedMail = () => {},
 }) {
-	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task });
-	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task });
-
+	const { taskConfigData = {}, loading = true } = useGetTaskConfig({ task }); 
+	const { mailLoading = true } = useTaskRpa({ setSelectedMail, task }); 
 	const { servicesList, shipment_data, primary_service } = useContext(ShipmentDetailContext);
+	const { apiTrigger, data } = useListShipmentTradePartners({shipment_id : shipment_data?.id });
+
 
 	const {
 		steps = [],
@@ -54,7 +60,7 @@ function ExecuteTask({
 	if (
 		task.service_type
 		&& task.task === 'mark_confirmed'
-		&& (!excludeServices.includes(task.service_type))
+		&& (!EXCLUDED_SERVICES.includes(task.service_type))
 	) {
 		return (
 			<MarkConfirmServices
@@ -180,6 +186,19 @@ function ExecuteTask({
 				onCancel={onCancel}
 				services={servicesList}
 				taskListRefetch={taskListRefetch}
+			/>
+		);
+	} 
+
+	if (['add_consignee_details', 'add_shipper_details'].includes(task.task)) {
+		return (
+			<AddCompanyModal
+				tradePartnersData = {data}
+				addCompany={TRADE_PARTY_TYPE[task.task]}
+				tradePartnerTrigger = {apiTrigger}
+				shipment_id={shipment_data?.id} 
+				importer_exporter_id={shipment_data?.importer_exporter_id} 
+				throughPoc = {false}
 			/>
 		);
 	}

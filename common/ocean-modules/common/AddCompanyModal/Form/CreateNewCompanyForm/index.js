@@ -9,10 +9,10 @@ import {
 import MultiSelectController from '@cogoport/forms/page-components/Controlled/MultiSelectController';
 import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../contants/POC_WORKSCOPE_MAPPING';
-import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
-import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
-import formValuePatterns from '../../../../../../utils/formValuePatterns';
+import POC_WORKSCOPE_MAPPING from '../../../../contants/POC_WORKSCOPE_MAPPING';
+import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
+import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
+import formValuePatterns from '../../../../utils/formValuePatterns';
 import getBillingAddressFromRegNum, { getAddressRespectivePincodeAndPoc } from
 	'../../helpers/getBillingAddressFromRegNum';
 

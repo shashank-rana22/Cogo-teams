@@ -10,12 +10,12 @@ import {
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../contants/POC_WORKSCOPE_MAPPING';
-import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
-import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
-import getCompanyAddressOptions from '../../../../helpers/getCompanyAddressOptions';
-import getCompanyNameOptions from '../../../../helpers/getCompanyNameOptions';
-import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDefaultParams';
+import POC_WORKSCOPE_MAPPING from '../../../../contants/POC_WORKSCOPE_MAPPING';
+import useListOrganizationTradeParties from '../../../../hooks/useListOrganizationTradeParties';
+import { convertObjectMappingToArray } from '../../../../utils/convertObjectMappingToArray';
+import getCompanyAddressOptions from '../../../../components/Poc/helpers/getCompanyAddressOptions';
+import getCompanyNameOptions from '../../../../components/Poc/helpers/getCompanyNameOptions';
+import getTradePartiesDefaultParams from '../../../../components/Poc/helpers/getTradePartiesDefaultParams';
 
 import styles from './styles.module.css';
 
