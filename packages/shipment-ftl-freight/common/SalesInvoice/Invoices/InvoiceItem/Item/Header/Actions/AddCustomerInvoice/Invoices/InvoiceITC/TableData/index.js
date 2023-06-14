@@ -60,7 +60,7 @@ function TableData({ customData = {} }) {
 			}}
 		>
 			<tr>
-				<td colSpan="10" />
+				<td aria-label="table-cell" colSpan="10" />
 				<td colSpan="3" style={{ textAlign: 'center' }}>
 					<h3 style={{
 						margin    : '10px',
@@ -72,9 +72,7 @@ function TableData({ customData = {} }) {
 						TAX INVOICE
 					</h3>
 				</td>
-				<td
-					colSpan="10"
-				/>
+				<td aria-label="table-cell" colSpan="10" />
 			</tr>
 			<tr style={{ border: '2px solid black', textAlign: 'center' }}>
 				<th style={{ border: '2px solid black' }}>SI. No.</th>
