@@ -19,13 +19,13 @@ export const HEADER_TAB_OPTIONS = [
 
 export const STATS_CARDS = [
 	{
-		label  : 'CP Liability',
+		label  : 'Cogopoint Liability',
 		name   : 'liability_point_value',
 		type   : 'cp_liability',
 		access : ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
 	},
 	{
-		label  : 'CP Burnt',
+		label  : 'Cogopoint Burnt',
 		name   : 'total_burnt_point_value',
 		type   : 'cp_burnt',
 		access : ['overall', 'importer_exporter', 'channel_partner'],

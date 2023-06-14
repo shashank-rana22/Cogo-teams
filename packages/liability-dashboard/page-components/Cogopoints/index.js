@@ -32,6 +32,8 @@ function CogoPoints() {
 		topHistoryData = {},
 		topHistoryLoading = false,
 		setPagination = () => {},
+		setSelectOrganization = () => {},
+		selectOrganization = '',
 	} = useListCogopointTopHistory({ transactionType, selectedDate, activeStatsCard, activeHeaderTab, currencyCode });
 
 	const { credit_cogopoint_date_data = {}, list = [], page, page_limit, total_count } = topHistoryData;
@@ -109,6 +111,8 @@ function CogoPoints() {
 						setPagination={setPagination}
 						currencyCode={currencyCode}
 						activeStatsCard={activeStatsCard}
+						setSelectOrganization={setSelectOrganization}
+						selectOrganization={selectOrganization}
 					/>
 				</>
 			)}

@@ -18,6 +18,7 @@ const useListCogopointTopHistory = ({
 	}, { manual: true });
 
 	const [pagination, setPagination] = useState(DEFAULT_PAGE_NUMBER);
+	const [selectOrganization, setSelectOrganization] = useState('');
 	const { startDate, endDate } = selectedDate || {};
 
 	const listCogopointTopHistory = useCallback(() => {
@@ -27,6 +28,7 @@ const useListCogopointTopHistory = ({
 				page                                : pagination,
 				currency                            : currencyCode,
 				filters                             : {
+					organization_id   : selectOrganization,
 					transaction_type  : transactionType,
 					organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
 					from_date         : startDate || undefined,
@@ -35,7 +37,11 @@ const useListCogopointTopHistory = ({
 				},
 			},
 		});
-	}, [trigger, pagination, currencyCode, transactionType, activeHeaderTab, startDate, endDate, activeStatsCard]);
+	}, [trigger,
+		pagination,
+		currencyCode,
+		transactionType,
+		activeHeaderTab, startDate, endDate, activeStatsCard, selectOrganization]);
 
 	useEffect(() => {
 		listCogopointTopHistory();
@@ -45,6 +51,8 @@ const useListCogopointTopHistory = ({
 		topHistoryData    : data,
 		topHistoryLoading : loading,
 		setPagination,
+		setSelectOrganization,
+		selectOrganization,
 	};
 };
 
