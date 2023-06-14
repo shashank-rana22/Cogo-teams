@@ -5,10 +5,9 @@ import { useForm, useFieldArray } from "@cogoport/forms";
 import Item from "./Item";
 import { Button, Modal, Select, cl } from "@cogoport/components";
 import addonConfig from "../../../../../configuration/addonConfig";
-import { useState } from "react";
+import { useState,useEffect } from "react";
 import Pricing from "./Pricing";
 import { planConfig } from "../../../../../configuration/planConfig";
-import { useEffect } from "react";
 import useCreatePlan from "../../../../../hooks/useCreatePlan";
 
 const CreatePlan = ({ closeModal }) => {
