@@ -66,6 +66,10 @@ function CogoPoints() {
 			                ${styles.line_chart} 
 			                ${!checkPieChart && styles.no_pie_chart}`}
 							>
+								<div className={styles.title}>
+									Liability Creation Trend
+								</div>
+
 								<LineChart
 									formattedData={formattedData}
 									transactionType={transactionType}
@@ -75,6 +79,11 @@ function CogoPoints() {
 
 							{checkPieChart && (
 								<div className={styles.pie_chart}>
+
+									<div className={styles.title}>
+										Cogopoint Distruibution
+									</div>
+
 									<PieChart
 										creditData={credit_data}
 										debitData={debit_data}

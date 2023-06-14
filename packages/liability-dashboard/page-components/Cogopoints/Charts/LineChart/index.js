@@ -37,7 +37,7 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 	return (
 		<ResponsiveLine
 			data={data}
-			margin={{ top: 10, right: 40, bottom: 45, left: 60 }}
+			margin={{ top: 10, right: 40, bottom: 65, left: 60 }}
 			xScale={{ type: 'point' }}
 			xFormat=" >-"
 			yScale={{
@@ -62,7 +62,7 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 				tickPadding    : 5,
 				tickRotation   : 0,
 				legend         : `${startCase(transactionType)}ed Amount (${currencyCode})`,
-				legendOffset   : -50,
+				legendOffset   : -55,
 				legendPosition : 'middle',
 				format         : (v) => formatValue(v),
 			}}

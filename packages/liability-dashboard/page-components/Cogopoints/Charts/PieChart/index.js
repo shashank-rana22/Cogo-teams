@@ -6,6 +6,8 @@ import burntChartData from '../../../../configuration/burnt-chart-data';
 import liabilityChartData from '../../../../configuration/liability-chart-data';
 import { formatValue } from '../../../../utils/formatValue';
 
+const CHECK_ALL_FIELD_VALUE = 0;
+
 function PieChart({
 	creditData = {},
 	debitData = {},
@@ -17,7 +19,7 @@ function PieChart({
 
 	const checkActiveData = activeStatsCard === 'liability_point_value' ? liabilityData : burntData;
 
-	const emptyValue = (checkActiveData || []).every((item) => item.value === 0);
+	const emptyValue = (checkActiveData || []).every((item) => item.value === CHECK_ALL_FIELD_VALUE);
 
 	if (emptyValue) {
 		return (
@@ -33,8 +35,8 @@ function PieChart({
 	return (
 		<ResponsivePie
 			data={checkActiveData}
-			width={440}
-			margin={{ top: 15, right: 180, bottom: 15, left: 10 }}
+			width={410}
+			margin={{ top: 0, right: 180, bottom: 15, left: 15 }}
 			sortByValue
 			activeInnerRadiusOffset={13}
 			valueFormat={(val) => formatValue(val)}
