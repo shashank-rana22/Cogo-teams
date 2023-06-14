@@ -11,7 +11,7 @@ const useCreateChapter = () => {
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
-		url    : '/create_chapter',
+		url    : '/create_sub_chapter',
 	}, { manual: true });
 
 	const onClickSubmitButton = async (values) => {

@@ -21,6 +21,7 @@ const useCreateChapter = () => {
 					...values,
 				},
 			});
+
 			setShowAddChapterModal(false);
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
