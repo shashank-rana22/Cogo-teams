@@ -1,0 +1,17 @@
+
+.header{
+	display:flex;
+	justify-content: space-between;
+	margin-bottom: 20px;
+}
+
+.search {
+	width: 342px;
+	padding: 0 4px;
+	margin-top: 2px;
+
+	svg {
+		margin: 2px;
+	}
+
+}

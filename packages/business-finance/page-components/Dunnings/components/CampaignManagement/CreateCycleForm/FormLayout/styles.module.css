@@ -1,0 +1,15 @@
+.frequency{
+    display: flex; 
+    width: 80%; 
+    justify-content: space-between;
+}
+
+.date{
+    width: 160px; 
+    margin-top: 12px;
+}
+
+.timezone{
+    width: 132px; 
+    margin-right: 8px;
+}
