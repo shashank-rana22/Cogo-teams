@@ -138,12 +138,26 @@ function Card({
 								{data?.rowData?.destination_locals_price}
 							</div>
 							<div>
-								Buy Rate per Ctr  :
-								<span style={{ fontSize: '18px', fontWeight: '600', color: '#4F4F4F' }}>
+								{shipmentType === 'air_freight' ? (
+									<div>
+										Buy Rate Per Kg:
+										<span style={{ fontSize: '18px', fontWeight: '600', color: '#4F4F4F' }}>
 									{`${showData(data?.rowData?.currency)} ${showData(
 										data?.rowData?.buy_price,
 									)}`}
 								</span>
+									</div>
+								):null}
+								{shipmentType === 'fcl_freight' ? (
+									<div>
+										Buy Rate Per Contr.:
+										<span style={{ fontSize: '18px', fontWeight: '600', color: '#4F4F4F' }}>
+									{`${showData(data?.rowData?.currency)} ${showData(
+										data?.rowData?.buy_price,
+									)}`}
+								</span>
+									</div>
+								):null}
 							</div>
 							<div>
 								{shipmentType === 'air_freight' && (
