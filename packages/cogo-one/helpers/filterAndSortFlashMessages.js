@@ -1,9 +1,8 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const geo = getGeoConstants();
 const countryCode = geo?.country?.code;
-const cogoEntityId = GLOBAL_CONSTANTS.country_entity_ids?.[countryCode];
+const cogoEntityId = geo?.uuid?.parent_entity_id;
 const FALLBACK_COUNTRY = 'IN';
 const FALLBACK_TIMESTAMP = 0;
 

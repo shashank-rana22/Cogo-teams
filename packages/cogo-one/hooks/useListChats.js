@@ -20,8 +20,8 @@ import {
 } from '../helpers/snapshotHelpers';
 import sortChats from '../helpers/sortChats';
 
-const BUFFER_PIXELS = 150;
-const DEFAULT_COUNT = 0;
+const MAX_DISTANCE_FROM_BOTTOM = 150;
+const DEFAULT_ASSINED_CHAT_COUNT = 0;
 
 function useListChats({
 	firestore,
@@ -199,7 +199,8 @@ function useListChats({
 	};
 
 	const handleScroll = useCallback((e) => {
-		const reachBottom = e.target.scrollHeight - (e.target.clientHeight + e.target.scrollTop) <= BUFFER_PIXELS;
+		const reachBottom = e.target.scrollHeight - (e.target.clientHeight
+			+ e.target.scrollTop) <= MAX_DISTANCE_FROM_BOTTOM;
 		if (reachBottom && !listData?.isLastPage && !loading) {
 			getPrevChats({ omniChannelCollection, omniChannelQuery, listData, setLoading, setListData });
 		}
@@ -231,7 +232,7 @@ function useListChats({
 			where('support_agent_id', '==', userId),
 		);
 		const getAssignedChatsQuery = await getDocs(assignedChatsQuery);
-		return getAssignedChatsQuery.size || DEFAULT_COUNT;
+		return getAssignedChatsQuery.size || DEFAULT_ASSINED_CHAT_COUNT;
 	}, [omniChannelCollection, userId]);
 
 	return {

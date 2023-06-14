@@ -9,7 +9,7 @@ import { FIRESTORE_PATH } from '../configurations/firebase-config';
 import { PAGE_LIMIT } from '../constants';
 import { HIDE_FLASH_MESSAGES_FOR } from '../constants/viewTypeConstants';
 
-const LAST_INDEX = 1;
+const LAST_ITEM = 1;
 const FALLBACK_VALUE = 0;
 
 export function snapshotCleaner({ ref }) {
@@ -158,7 +158,7 @@ export function mountSnapShot({
 		(querySnapshot) => {
 			const isLastPage = querySnapshot.docs.length < PAGE_LIMIT;
 			const lastMessageTimeStamp = querySnapshot
-				.docs[querySnapshot.docs.length - LAST_INDEX]?.data()?.new_message_sent_at;
+				.docs[querySnapshot.docs.length - LAST_ITEM]?.data()?.new_message_sent_at;
 			const { resultList } = dataFormatter(querySnapshot);
 			setListData((p) => ({
 				...p,
@@ -190,7 +190,7 @@ export async function getPrevChats({ omniChannelCollection, omniChannelQuery, li
 	const { resultList = {} } = dataFormatter(prevChats);
 
 	const lastMessageTimeStamp = prevChats[
-		(prevChats.length || FALLBACK_VALUE) - LAST_INDEX]?.data()?.new_message_sent_at;
+		(prevChats.length || FALLBACK_VALUE) - LAST_ITEM]?.data()?.new_message_sent_at;
 	const isLastPage = prevChats?.length < PAGE_LIMIT;
 
 	setListData((p) => ({

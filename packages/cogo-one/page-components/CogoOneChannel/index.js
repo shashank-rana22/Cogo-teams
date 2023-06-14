@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload, IcMSettings } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { initializeApp, getApp, getApps } from 'firebase/app';
 import { getAuth, signInWithCustomToken } from 'firebase/auth';
 import { getFirestore } from 'firebase/firestore';
@@ -24,8 +25,6 @@ import ModalComp from './ModalComps';
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();
-
-const ZERO_LENGTH = 0;
 
 function CogoOne() {
 	const {
@@ -77,7 +76,7 @@ function CogoOne() {
 		updateUserStatus = () => {},
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
 
-	const app = getApps().length === ZERO_LENGTH ? initializeApp(firebaseConfig) : getApp();
+	const app = isEmpty(getApps()) ? initializeApp(firebaseConfig) : getApp();
 
 	useEffect(() => {
 		if (process.env.NODE_ENV === 'production') {
