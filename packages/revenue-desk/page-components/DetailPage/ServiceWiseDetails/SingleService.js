@@ -57,6 +57,7 @@ function SingleService({
 	(groupedServicesData || []).forEach((data) => {
 		options.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data });
 	});
+
 	useEffect(() => {
 		setSingleServiceData(groupedServicesData[0]);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -64,6 +65,11 @@ function SingleService({
 
 	const currentFormatedrates = getFormatedRates('current', ratesData?.flashed_rates, singleServiceData);
 	const systemFormatedRates = getSystemFormatedRates(ratesData?.system_rates, singleServiceData);
+
+	useEffect(() => {
+		setRateOptions({ ...rateOptions, [singleServiceData?.id]: [...currentFormatedrates, ...systemFormatedRates] });
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(ratesData)]);
 
 	const singleServiceSellRateDetails = getSellRateDetailPayload({
 		currentFormatedrates,
