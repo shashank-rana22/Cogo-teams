@@ -2,8 +2,8 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import { isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
-import useListShipmentCreditNotes from '../../../hooks/useListShipmentCreditNotes';
 import useListBfSalesInvoices from '../../../hooks/useListBfSalesInvoices';
+import useListShipmentCreditNotes from '../../../hooks/useListShipmentCreditNotes';
 import useOrgOutStanding from '../../../hooks/useOrgOutStanding';
 import CreditNote from '../CreditNote';
 import POST_REVIEWED_INVOICES from '../helpers/post-reviewed-sales-invoices';
@@ -11,6 +11,8 @@ import POST_REVIEWED_INVOICES from '../helpers/post-reviewed-sales-invoices';
 import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
+
+const INCREMENTER = 1;
 
 function Invoices({
 	invoiceData = {},
@@ -32,7 +34,7 @@ function Invoices({
 	let count = 0;
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
-			count += 1;
+			count += INCREMENTER;
 		}
 	});
 	let disableAction = isEmpty(invoiceData?.invoice_trigger_date);
@@ -45,8 +47,7 @@ function Invoices({
 
 	disableAction = showForOldShipments ? false : disableAction;
 
-	const { cnRefetch,list,loading:cNLoading } = useListShipmentCreditNotes({});
-
+	const { cnRefetch, list, loading:cNLoading } = useListShipmentCreditNotes({});
 
 	return (
 		<main className={styles.container}>

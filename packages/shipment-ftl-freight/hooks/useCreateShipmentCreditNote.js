@@ -1,9 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
-import { isEmpty } from '@cogoport/utils';
-
-import formatCreditNoteData from '../common/SalesInvoice/CreditNote/helpers/format-credit-note-data';
 
 const useCreateShipmentCreditNote = ({
 	refetch = () => {},

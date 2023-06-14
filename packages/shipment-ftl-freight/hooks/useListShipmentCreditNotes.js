@@ -16,7 +16,7 @@ const useListShipmentCreditNotes = () => {
 			filters: {
 				shipment_id,
 			},
-			combination_data_required: true
+			combination_data_required: true,
 		},
 	}, { manual: true });
 

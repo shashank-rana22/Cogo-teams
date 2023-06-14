@@ -3,6 +3,9 @@ import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/con
 
 import { handleServiceType } from '../CreditNote/helpers/handleServiceType';
 
+const FALLBACK_VALUE_ZERO = 0;
+const FALLBACK_VALUE_ONE = 0;
+
 const commonControls = (handleChange, charge) => [
 	{
 		label    : handleServiceType(charge),
@@ -100,7 +103,7 @@ const rawControls = (charge, isEdit) => ({
 						value : 'true',
 					},
 				],
-				span      : 1,
+				span: 1,
 			},
 			...commonControls(charge, isEdit),
 		]
@@ -137,12 +140,12 @@ const creditNoteControls = ({
 			code             : item?.code,
 			sac_code         : item?.hsn_code || 'NA',
 			currency         : item?.currency,
-			price_discounted : item?.price_discounted || 0,
-			quantity         : item?.quantity || 0,
-			exchange_rate    : item?.exchange_rate || 1,
-			tax_percent      : item?.tax_percent || 0,
+			price_discounted : item?.price_discounted || FALLBACK_VALUE_ZERO,
+			quantity         : item?.quantity || FALLBACK_VALUE_ZERO,
+			exchange_rate    : item?.exchange_rate || FALLBACK_VALUE_ONE,
+			tax_percent      : item?.tax_percent || FALLBACK_VALUE_ZERO,
 			unit             : item?.unit,
-			total            : item?.tax_total_price_discounted || 0,
+			total            : item?.tax_total_price_discounted || FALLBACK_VALUE_ZERO,
 			name             : item?.name,
 		})),
 	}));
