@@ -59,14 +59,13 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			validity_end,
 		} = getMinRate(element?.line_items || element?.validities);
 
-		const chargeable_weight = element?.data?.chargeable_weight
-		|| element?.service?.chargeable_weight || singleServiceData?.chargeable_weight;
+		const chargeable_weight = singleServiceData?.chargeable_weight;
 		const { minRate, currencyForAir } = getMinRateForAir(element?.weight_slabs, chargeable_weight);
 		let total_buy_price = 0;
-		if (singleServiceData?.shipment_type === 'air_freight') {
+		if (singleServiceData?.service_type === 'air_freight_services') {
 			total_buy_price = Math.max(Number(minRate)
 			* Number(chargeable_weight), element?.min_price);
-		} else if (singleServiceData?.shipment_type === 'fcl_freight') {
+		} else if (singleServiceData?.shipment_type === 'fcl_freight_services') {
 			total_buy_price = Number(singleServiceData?.containers_count) * Number(minimumRate);
 		}
 		const { completed_shipments = 0, cancelled_shipments = 0 } = element;

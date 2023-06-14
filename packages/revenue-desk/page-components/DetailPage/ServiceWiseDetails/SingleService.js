@@ -44,7 +44,6 @@ function SingleService({
 	inventory,
 	setInventory,
 	price,
-	shipmentType,
 	setSellRateDetails,
 	sellRateDetails,
 	rateOptions,
@@ -109,14 +108,14 @@ function SingleService({
 			</div>
 
 			<SingleServiceCard serviceData={singleServiceData} price={price} />
-			{singleServiceData?.is_preference_set ? <PreferenceSetServiceData serviceData={singleServiceData}/> : (
+			{singleServiceData?.is_preference_set ? <PreferenceSetServiceData serviceData={singleServiceData} /> : (
 				<>
 					{(supplierPayload?.[singleServiceData?.id] || []).length
 						? (
 							<SelectedRatesCard
 								prefrences={supplierPayload?.[singleServiceData?.id]}
 								price={price}
-								shipmentType={shipmentType}
+								serviceData={singleServiceData}
 								setSellRates={setSellRates}
 								sellRates={sellRates}
 							/>
@@ -135,8 +134,7 @@ function SingleService({
 							key={item}
 							prefrences={supplierPayload}
 							setPrefrences={setSupplierPayload}
-							serviceId={singleServiceData?.id}
-							shipmentType={shipmentType}
+							serviceData={singleServiceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}
 							price={price}

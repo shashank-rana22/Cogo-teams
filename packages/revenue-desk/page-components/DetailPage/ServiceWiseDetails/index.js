@@ -74,7 +74,6 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 							inventory={inventory}
 							setInventory={setInventory}
 							price={priceData[startCase(singleTab)]}
-							shipmentType={shipmentData?.shipment_type}
 							setSellRateDetails={setSellRateDetails}
 							sellRateDetails={sellRateDetails}
 							rateOptions={rateOptions}

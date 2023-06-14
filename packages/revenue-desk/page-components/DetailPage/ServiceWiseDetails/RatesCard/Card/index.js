@@ -7,22 +7,22 @@ import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
 
 function Card({
-	data, setPrefrences, prefrences, rate_key, serviceId, shipmentType, setSellRates,
+	data, setPrefrences, prefrences, rate_key, serviceData, setSellRates,
 	sellRates, price, prefrence_key, fromkey,
 }) {
 	const handlePrefrence = (rate) => {
-		const foundItem = (prefrences?.[serviceId] || []).find((obj) => obj?.rate_id === rate?.id);
+		const foundItem = (prefrences?.[serviceData?.id] || []).find((obj) => obj?.rate_id === rate?.id);
 		if (foundItem) {
-			const oldItems = prefrences?.[serviceId];
+			const oldItems = prefrences?.[serviceData?.id];
 			const newRows = oldItems.filter((val) => val?.rate_id !== rate?.id);
 
 			if (newRows.length) {
-				setPrefrences({ ...prefrences, [serviceId]: [...newRows] });
+				setPrefrences({ ...prefrences, [serviceData?.id]: [...newRows] });
 			} else {
-				setPrefrences({ ...prefrences, [serviceId]: [] });
+				setPrefrences({ ...prefrences, [serviceData?.id]: [] });
 			}
 		} else {
-			const newList = prefrences?.[serviceId] || [];
+			const newList = prefrences?.[serviceData?.id] || [];
 			const priority = newList.length ? Number(newList[newList.length - 1]?.priority) + 1 : 1;
 			newList.push({
 				rate_id : rate?.id,
@@ -31,7 +31,7 @@ function Card({
 				key     : prefrence_key,
 				data    : rate,
 			});
-			setPrefrences({ ...prefrences, [serviceId]: [...newList] });
+			setPrefrences({ ...prefrences, [serviceData?.id]: [...newList] });
 		}
 	};
 	const handleCardClick = (e) => {
@@ -55,7 +55,7 @@ function Card({
 		return null;
 	};
 	const showData = (val) => val || '';
-	const isShowSellRate = shipmentType === 'fcl_freight';
+	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
 	let profitability = 0;
 	if (data?.rowData?.total_buy_price !== 0) {
 		profitability = (Number(price?.split(' ')?.[1]) - Number(data?.rowData?.total_buy_price))
@@ -69,7 +69,13 @@ function Card({
 			onClick={() => (!rate_key ? handlePrefrence(data) : null)}
 		>
 			<div className={styles.left_section_container}>
-				{rate_key ? <IcMDrag /> : <PriorityNumber data={prefrences?.[serviceId]} id={data?.id} showPriority />}
+				{rate_key ? <IcMDrag /> : (
+					<PriorityNumber
+						data={prefrences?.[serviceData?.id]}
+						id={data?.id}
+						showPriority
+					/>
+				)}
 			</div>
 			<div className={styles.line} />
 			<div className={styles.right_section_container}>
@@ -79,7 +85,7 @@ function Card({
 							{showData(data?.rowData?.service_provider?.business_name)}
 						</div>
 						<div>
-							{shipmentType === 'air_freight'
+							{serviceData?.service_type === 'air_freight_service'
 								? showData(data?.rowData?.air_line)
 								: showData(data?.rowData?.shipping_line)}
 						</div>
@@ -146,7 +152,7 @@ function Card({
 								</span>
 							</div>
 							<div>
-								{shipmentType === 'air_freight' && (
+								{serviceData?.service_type === 'air_freight_service' && (
 									<div>
 										Price Type:
 										{' '}
@@ -155,7 +161,7 @@ function Card({
 								)}
 							</div>
 							<div>
-								{shipmentType === 'air_freight' && (
+								{serviceData?.service_type === 'air_freight_service' && (
 									<div>
 										Chargeable Wt.:
 										{showData(data?.rowData?.chargeable_weight)}
@@ -163,7 +169,7 @@ function Card({
 										Kg
 									</div>
 								)}
-								{shipmentType === 'fcl_freight' && (
+								{serviceData?.service_type === 'fcl_freight_service' && (
 									<div>
 										Container Count.:
 										{showData(data?.rowData?.container_count)}
@@ -188,15 +194,15 @@ function Card({
 							</div>
 						</div>
 					</div>
-					{/* {isShowSellRate && ( */}
-					<div role="presentation" className={styles.edit_price_section} onClick={handleCardClick}>
-						<ShowSellRates
-							data={data}
-							sellRates={sellRates}
-							setSellRates={setSellRates}
-						/>
-					</div>
-					{/* )} */}
+					{isShowSellRate && (
+						<div role="presentation" className={styles.edit_price_section} onClick={handleCardClick}>
+							<ShowSellRates
+								data={data}
+								sellRates={sellRates}
+								setSellRates={setSellRates}
+							/>
+						</div>
+					)}
 				</div>
 			</div>
 		</div>

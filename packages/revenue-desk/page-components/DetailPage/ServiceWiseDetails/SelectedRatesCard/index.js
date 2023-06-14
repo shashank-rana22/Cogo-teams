@@ -3,7 +3,7 @@ import Card from '../RatesCard/Card';
 import styles from './styles.module.css';
 
 function SelectedRatesCard({
-	prefrences, price, shipmentType, setSellRates,
+	prefrences, price, serviceData, setSellRates,
 	sellRates,
 }) {
 	return (
@@ -31,7 +31,7 @@ function SelectedRatesCard({
 							rate_key
 							fromkey={singleItem?.key}
 							price={price}
-							shipmentType={shipmentType}
+							serviceData={serviceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}
 						/>

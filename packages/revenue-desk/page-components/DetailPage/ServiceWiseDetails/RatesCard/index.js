@@ -7,7 +7,7 @@ import Card from './Card';
 import styles from './styles.module.css';
 
 function RatesCard({
-	ratesData = [], setPrefrences, prefrences, serviceId, type, shipmentType, setSellRates,
+	ratesData = [], setPrefrences, prefrences, type, serviceData, setSellRates,
 	sellRates, price,
 }) {
 	const [showFullList, setShowFullList] = useState(false);
@@ -30,8 +30,7 @@ function RatesCard({
 						key={item}
 						prefrences={prefrences}
 						setPrefrences={setPrefrences}
-						serviceId={serviceId}
-						shipmentType={shipmentType}
+						serviceData={serviceData}
 						setSellRates={setSellRates}
 						sellRates={sellRates}
 						price={price}
