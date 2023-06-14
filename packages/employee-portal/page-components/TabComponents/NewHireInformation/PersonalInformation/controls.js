@@ -1,24 +1,41 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
+const HONORIFICS_OPTIONS = [
+	{
+		label : 'Mr.',
+		value : 'Mr.',
+	},
+	{
+		label : 'Mrs.',
+		value : 'Mrs.',
+	},
+	{
+		label : 'Ms.',
+		value : 'Ms.',
+	},
+];
+
+const RELATION_TYPE_OPTIONS = [
+	{
+		label : 'Son of',
+		value : 'Son of',
+	},
+	{
+		label : 'Daughter of',
+		value : 'Daughter of',
+	},
+	{
+		label : 'Wife of',
+		value : 'Wife of',
+	},
+];
+
 const controls = () => [
 	{
-		name    : 'name_title',
-		label   : 'Honorifics',
-		type    : 'select',
-		options : [
-			{
-				label : 'Mr.',
-				value : 'Mr.',
-			},
-			{
-				label : 'Mrs.',
-				value : 'Mrs.',
-			},
-			{
-				label : 'Ms.',
-				value : 'Ms.',
-			},
-		],
+		name        : 'name_title',
+		label       : 'Honorifics',
+		type        : 'select',
+		options     : HONORIFICS_OPTIONS,
 		placeholder : 'Honorifics',
 		rules       : { required: 'This is required' },
 	},
@@ -30,31 +47,17 @@ const controls = () => [
 		disabled    : true,
 		rules       : { required: 'This is required' },
 	},
-
 	{
 		name        : 'relation_type',
 		label       : 'Relation Type',
 		type        : 'select',
 		placeholder : 'Relation',
-		options     : [
-			{
-				label : 'Son of',
-				value : 'Son of',
-			},
-			{
-				label : 'Daughter of',
-				value : 'Daughter of',
-			},
-			{
-				label : 'Wife of',
-				value : 'Wife of',
-			},
-		],
-		rules: { required: 'This is required' },
+		options     : RELATION_TYPE_OPTIONS,
+		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'relation_person_name',
-		label       : <span>Relation Person Name</span>,
+		label       : 'Relation Person Name',
 		type        : 'input',
 		placeholder : 'Full Name',
 		rules       : { required: 'This is required' },
@@ -117,7 +120,6 @@ const controls = () => [
 		placeholder : 'Email',
 		rules       : { required: 'This is required' },
 	},
-
 	{
 		name        : 'emergency_contact_details',
 		label       : 'Emergency Contact Number',
