@@ -22,6 +22,7 @@ function List({
 	activeStatsCard = '',
 	setSelectOrganization = () => {},
 	selectOrganization = '',
+	activeHeaderTab = '',
 }) {
 	return (
 		<div className={styles.container}>
@@ -44,7 +45,7 @@ function List({
 
 				<Table
 					className={styles.table_container}
-					columns={TableColumns({ currencyCode, activeStatsCard })}
+					columns={TableColumns({ currencyCode, activeStatsCard, activeHeaderTab })}
 					data={list || []}
 					loading={loading}
 					loadingRowsCount={LOADING_COUNT}
