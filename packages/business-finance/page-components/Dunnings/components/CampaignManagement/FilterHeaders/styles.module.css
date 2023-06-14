@@ -1,13 +1,13 @@
-.filter_body{
-    background-color: white;
-    padding: 20px;
-    margin-top: 20px;
-    display: flex;
-    justify-content: space-between;
+.filter_body {
+	display: flex;
+	justify-content: space-between;
+	padding: 20px;
+	margin-top: 20px;
+	background-color: white;
 }
 
-.filter_section{
-    width: 26%;
-    display: flex;
-    justify-content: space-around;
+.filter_section {
+	display: flex;
+	justify-content: space-around;
+	width: 26%;
 }

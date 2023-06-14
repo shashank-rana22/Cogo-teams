@@ -1,6 +1,5 @@
-
-.header{
-	display:flex;
+.header {
+	display: flex;
 	justify-content: space-between;
 	margin-bottom: 20px;
 }
@@ -13,5 +12,4 @@
 	svg {
 		margin: 2px;
 	}
-
 }
