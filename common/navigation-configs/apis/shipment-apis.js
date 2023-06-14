@@ -1329,6 +1329,31 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'get_credit_notes',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'update_invoice_currency',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'update_invoice_payment_mode',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'update_invoice_remarks',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
+		api          : 'update_invoice_status',
+		access_type  : 'private',
+		service_name : 'bookings',
+	},
+	{
 		api          : 'get_timeline',
 		access_type  : 'private',
 		service_name : 'bookings',
@@ -1512,6 +1537,26 @@ const apis = [
 		api          : 'list_contracts',
 		access_type  : 'private',
 		service_name : 'contract',
+	},
+	{
+		api          : 'get_purchase_deduction_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'update_shipment_line_items_deduction',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'create_rollover_shipment',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'list_platform_config_constants',
+		access_type  : 'private',
+		service_name : 'platform_config',
 	},
 ];
 

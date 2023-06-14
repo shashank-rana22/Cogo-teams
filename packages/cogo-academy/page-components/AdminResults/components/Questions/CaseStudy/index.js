@@ -2,7 +2,7 @@ import Description from './Description';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function CaseStudy({ question_item, index = 0, test_id = '' }) {
+function CaseStudy({ question_item, index = 0, test_id = '', activeAttempt }) {
 	const {
 		topic = '',
 		question_text = '',
@@ -27,6 +27,7 @@ function CaseStudy({ question_item, index = 0, test_id = '' }) {
 				question_text={question_text}
 				id={id}
 				test_id={test_id}
+				activeAttempt={activeAttempt}
 			/>
 		</div>
 	);

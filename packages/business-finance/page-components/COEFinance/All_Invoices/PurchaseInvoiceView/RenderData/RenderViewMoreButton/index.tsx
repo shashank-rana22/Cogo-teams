@@ -20,6 +20,7 @@ interface ItemTypes {
 	billType?:string;
 	jobNumber?:string;
 	isProforma?:string;
+	jobType?:string
 }
 function RenderViewMoreButton({ itemData }: Props) {
 	const router = useRouter();
@@ -28,7 +29,7 @@ function RenderViewMoreButton({ itemData }: Props) {
 		router.push(
 			`/business-finance/coe-finance/${router.query.active_tab}/view-invoices?billId=${item?.billId}
 			&billNumber=${item?.billNumber}&orgId=${item?.organizationId}&jobNumber=${item?.jobNumber}
-			&status=${item?.status}&billType=${item?.billType}&isProforma=${item?.isProforma}`,
+			&status=${item?.status}&billType=${item?.billType}&isProforma=${item?.isProforma}&jobType=${item?.jobType}`,
 		);
 	};
 

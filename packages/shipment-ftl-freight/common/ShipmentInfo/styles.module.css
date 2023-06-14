@@ -1,0 +1,38 @@
+.container {
+	display: flex;
+	align-items: center;
+	font-size: var(--font-size-md);
+	font-weight: 600;
+	color: var(--color-secondary-greyscale-1);
+
+	.link {
+		cursor: pointer;
+
+		:hover {
+			text-decoration: underline;
+		}
+	}
+
+	.inactive {
+		> div {
+			cursor: initial;
+		}
+	}
+
+	:global {
+		.ui_pill_text {
+			white-space: nowrap;
+		}
+	}
+
+	.fm_rejection_icon {
+		margin-top: 5px;
+		margin-left: 10px;
+		color: #f00;
+		cursor: pointer;
+	}
+}
+
+.pill {
+	white-space: nowrap;
+}

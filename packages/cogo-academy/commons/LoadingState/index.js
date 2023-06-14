@@ -5,8 +5,8 @@ import styles from './styles.module.css';
 function LoadingState({ rowsCount = 5 }) {
 	return (
 		<div className={styles.list_container}>
-			{[...Array(rowsCount)].map(() => (
-				<div className={styles.card_container}>
+			{[...Array(rowsCount).keys()].map((key) => (
+				<div key={key} className={styles.card_container}>
 					<div className={styles.card}>
 
 						<div className={styles.user_information}>
