@@ -1,16 +1,11 @@
 const liabilityChartData = (creditData = {}) => {
 	const {
-		cogostore_credit_point_value = 0, one_time_credit_point_value = 0,
+		one_time_credit_point_value = 0,
 		referral_credit_point_value = 0, saas_subscription_credit_point_value
 		= 0, shipment_credit_point_value = 0,
 	} = creditData;
 
 	const liabilityData = [
-		{
-			id    : 'Cogostore Credited',
-			value : cogostore_credit_point_value,
-			color : 'hsl(231, 70%, 50%)',
-		},
 		{
 			id    : 'Shipment Credited',
 			value : shipment_credit_point_value,

@@ -71,7 +71,9 @@ function CogoPoints() {
 			                ${!checkPieChart && styles.no_pie_chart}`}
 							>
 								<div className={styles.title}>
-									Liability Creation Trend
+									{activeStatsCard === 'liability_point_value'
+										? 'Liability Creation Trend' : 'Cogopoint burnt trend'}
+
 								</div>
 
 								<LineChart
