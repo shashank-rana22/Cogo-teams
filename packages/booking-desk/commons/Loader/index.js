@@ -2,6 +2,8 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+const LOADERS_COUNT = 4;
+
 function Card() {
 	return (
 		<div className={styles.card}>
@@ -28,5 +30,5 @@ function Card() {
 }
 
 export default function Loader() {
-	return Array(4).fill(null).map(() => <Card key={Math.random()} />);
+	return Array(LOADERS_COUNT).fill(null).map(() => <Card key={Math.random()} />);
 }
