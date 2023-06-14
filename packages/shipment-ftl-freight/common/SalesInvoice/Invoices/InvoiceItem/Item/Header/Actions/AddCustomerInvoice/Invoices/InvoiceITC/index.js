@@ -90,7 +90,7 @@ function InvoiceITC({
 							</b>
 						</p>
 					</td>
-					<td style={{ width: '50%' }} />
+					<td aria-label="table-cell" style={{ width: '50%' }} />
 					<td style={{ width: '20%', verticalAlign: 'top' }}>
 						<br />
 						<p>

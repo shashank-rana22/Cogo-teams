@@ -133,6 +133,7 @@ function TableRow({ customData = {}, importerExporterId = '' }) {
 					<b>{total_value_of_supply}</b>
 				</td>
 				<td
+					aria-label="table-cell"
 					style={{
 						borderRight  : '2px solid black',
 						borderLeft   : '2px solid black',
@@ -150,6 +151,7 @@ function TableRow({ customData = {}, importerExporterId = '' }) {
 					<b>{total_cgst_amount}</b>
 				</td>
 				<td
+					aria-label="table-cell"
 					style={{
 						borderRight  : '2px solid black',
 						borderLeft   : '2px solid black',
@@ -167,6 +169,7 @@ function TableRow({ customData = {}, importerExporterId = '' }) {
 					<b>{total_sgst_amount}</b>
 				</td>
 				<td
+					aria-label="table-cell"
 					style={{
 						borderRight  : '2px solid black',
 						borderLeft   : '2px solid black',
