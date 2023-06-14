@@ -136,7 +136,16 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'partner',
 		},
-
+		{
+			api          : 'create_squad',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_tribe',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

@@ -18,6 +18,9 @@ function Tribe() {
 		setShowAddTribeModal,
 		control,
 		errors,
+		handleSubmit,
+		onClickSubmitButton,
+		loading,
 	} = useTribe();
 
 	const onClickAddButton = () => {
@@ -44,6 +47,9 @@ function Tribe() {
 						controls={controls}
 						control={control}
 						errors={errors}
+						handleSubmit={handleSubmit}
+						onClickSubmitButton={onClickSubmitButton}
+						loading={loading}
 					/>
 				) : null
 			}
