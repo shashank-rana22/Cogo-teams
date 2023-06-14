@@ -9,6 +9,9 @@ import {
 	Tooltip,
 	Datepicker,
 	SingleDateRange,
+	RadioGroup,
+	Checkbox,
+	Timepicker,
 } from '@cogoport/components';
 import AsyncSelect from '@cogoport/forms/page-components/Business/AsyncSelect';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
@@ -55,6 +58,7 @@ function Element({
 	href = '#',
 	name,
 	filters,
+	checkboxLabel = '',
 	...rest
 }: ElementProps) {
 	const [show, setShow] = useState(false);
@@ -277,6 +281,34 @@ function Element({
 						className={className}
 						value={value}
 						style={style as CSSProperties}
+						{...rest}
+					/>
+				);
+			case 'radioGroup':
+				return (
+					<RadioGroup
+						className={className}
+						style={style as CSSProperties}
+						value={value}
+						{...rest}
+					/>
+				);
+			case 'checkbox':
+				return (
+					<Checkbox
+						className={className}
+						style={style as CSSProperties}
+						value={value}
+						label={String(checkboxLabel)}
+						{...rest}
+					/>
+				);
+			case 'timepicker':
+				return (
+					<Timepicker
+						className={className}
+						style={style as CSSProperties}
+						value={value}
 						{...rest}
 					/>
 				);

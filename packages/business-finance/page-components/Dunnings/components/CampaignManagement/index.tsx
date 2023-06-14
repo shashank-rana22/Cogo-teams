@@ -14,7 +14,10 @@ function CampaignManagement() {
 	const [globalFilters, setGlobalFilters] = useState({});
 	const [dropdown, setDropdown] = useState('');
 	const [showCreateForm, setShowCreateForm] = useState(false);
-	const [formData, setFormData] = useState({});
+	const [formData, setFormData] = useState({
+		triggerType : 'oneTime',
+		frequency   : 'daily',
+	});
 
 	const showDropDown = (e) => <ShowMore dropdown={dropdown} rowId={e?.id} />;
 
