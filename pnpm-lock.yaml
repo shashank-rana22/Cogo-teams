@@ -977,6 +977,9 @@ importers:
       '@cogoport/components':
         specifier: ^1.0.390
         version: 1.0.413(@babel/core@7.21.8)(@cogoport/icons-react@1.0.71)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/core':
+        specifier: workspace:^0.1.0
+        version: link:../../common/core
       '@cogoport/icons-react':
         specifier: ^1.0.61
         version: 1.0.71(react-dom@18.2.0)(react@18.2.0)
