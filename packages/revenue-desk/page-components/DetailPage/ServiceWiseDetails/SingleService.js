@@ -108,7 +108,12 @@ function SingleService({
 			</div>
 
 			<SingleServiceCard serviceData={singleServiceData} price={price} />
-			{singleServiceData?.is_preference_set ? <PreferenceSetServiceData serviceData={singleServiceData} /> : (
+			{singleServiceData?.is_preference_set ? (
+				<PreferenceSetServiceData
+					singleServiceData={singleServiceData}
+					price={price}
+				/>
+			) : (
 				<>
 					{(supplierPayload?.[singleServiceData?.id] || []).length
 						? (

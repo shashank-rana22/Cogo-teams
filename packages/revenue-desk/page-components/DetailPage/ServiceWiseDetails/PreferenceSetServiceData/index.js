@@ -1,4 +1,5 @@
-import useListShipmentBookingConfirmationPreferences from '../../../../hooks/useListShipmentBookingConfirmationPreferences';
+import useListShipmentBookingConfirmationPreferences
+	from '../../../../hooks/useListShipmentBookingConfirmationPreferences';
 
 import Card from './Card';
 import styles from './styles.module.css';
