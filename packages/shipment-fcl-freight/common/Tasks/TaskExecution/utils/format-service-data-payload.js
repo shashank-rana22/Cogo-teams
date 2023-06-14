@@ -1,6 +1,6 @@
 import { getByKey } from '@cogoport/utils';
 
-const numberKeys = ['bls_count', 'volume', 'weight', 'packages_count'];
+const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
 
 const DEFAULT_NUMBER_VALUE = 1;
 
@@ -47,7 +47,7 @@ const formatDataForService = (
 		}
 
 		if (sendKeyObj?.source === 'formData') {
-			if (numberKeys.includes(sendKeyObj?.key)) {
+			if (NUMBER_KEYS.includes(sendKeyObj?.key)) {
 				PAYLOAD[sendKeyObj?.key] = Number(rawValues?.[sendKeyObj?.key_from_source] || DEFAULT_NUMBER_VALUE);
 			} else {
 				PAYLOAD[sendKeyObj.key] = getByKey(

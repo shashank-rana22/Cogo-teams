@@ -9,7 +9,8 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
 
-const NEXT_INDEX = 1;
+const OFFSET_TO_CHECK_LAST_INDEX = 1;
+
 function Timeline() {
 	const {
 		shipment_data, primary_service, timelineLoading : loading, isGettingShipment,
@@ -50,7 +51,7 @@ function Timeline() {
 						<TimelineItem
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
-							isLast={totalItems === index + NEXT_INDEX}
+							isLast={totalItems === index + OFFSET_TO_CHECK_LAST_INDEX}
 							key={timelineItem.milestone}
 						/>
 					);
