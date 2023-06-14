@@ -14,14 +14,13 @@ import useCreatePlan from "../../../../../hooks/useCreatePlan";
 const CreatePlan = ({ closeModal }) => {
   const [defaultCurrency, setDefaultCurrency] = useState("");
 
-  const [frequencyPeriod, setFrequencyPeriod] = useState('month');
+  const [frequencyPeriod, setFrequencyPeriod] = useState("month");
 
   const [updatePricing, setUpdatePricing] = useState(
     planConfig(defaultCurrency)
   );
 
-  const { createPlan,loading } = useCreatePlan({ closeModal });
-
+  const { createPlan, loading } = useCreatePlan({ closeModal });
 
   const {
     handleSubmit,
@@ -54,8 +53,6 @@ const CreatePlan = ({ closeModal }) => {
       prev.map((x) => ({ ...x, currency: defaultCurrency }))
     );
   }, [defaultCurrency]);
-
-
 
   return (
     <form>
@@ -177,7 +174,9 @@ const CreatePlan = ({ closeModal }) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <Button onClick={handleSubmit(onSubmit)} loading={loading}>Create</Button>
+        <Button onClick={handleSubmit(onSubmit)} loading={loading}>
+          Create
+        </Button>
       </Modal.Footer>
     </form>
   );
