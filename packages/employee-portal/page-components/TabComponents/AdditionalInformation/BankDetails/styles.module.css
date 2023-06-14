@@ -16,8 +16,8 @@
 
 .control_container {
 	display: flex;
-	width: 33%;
 	flex-flow: column wrap;
+	width: 33%;
 	margin-top: 20px;
 
 	@media (max-width: 768px) {
