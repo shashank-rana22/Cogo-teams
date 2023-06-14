@@ -10,6 +10,7 @@
   display: flex;
   align-items: center;
   cursor: pointer;
+  margin: 8px 0px;
 }
 .go_back {
   text-decoration: underline;
@@ -31,4 +32,21 @@
 }
 .value_data {
   font-weight: 600;
+}
+.filters_data {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+.table_body {
+  :global {
+    .ui_table_head_row {
+      .ui_table_head_cell:nth-child(5) {
+        border-right: 1px solid #d9d9d9;
+      }
+      .ui_table_head_cell:nth-child(7) {
+        border-left: 1px solid #d9d9d9;
+      }
+    }
+  }
 }
