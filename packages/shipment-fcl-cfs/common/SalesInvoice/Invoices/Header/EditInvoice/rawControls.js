@@ -2,13 +2,13 @@ import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-const MIN_SERIAL_ID = 130000;
-const ZERO_VALUE = 1;
-const THREE_VALUE = 3;
+const MAX_ALLOWED_SERIAL_ID = 130000;
+const PRICE_LOWER_LIMIT = 1;
+const MIN_TEXT_LENGTH = 3;
 
 const handleDisableCond = (charge, isAdminSuperAdmin, shipment_data) => {
 	const disable =	charge?.service_type === 'fcl_cfs_service' && !isAdminSuperAdmin
-	&& shipment_data?.serial_id > MIN_SERIAL_ID;
+	&& shipment_data?.serial_id > MAX_ALLOWED_SERIAL_ID;
 
 	return disable;
 };
@@ -71,7 +71,7 @@ const rawControls = (
 			),
 			placeholder : 'Enter alias name/code',
 			rules       : {
-				validate: (v) => v?.length >= THREE_VALUE || isEmpty(v) || 'Characters should be >= 3',
+				validate: (v) => v?.length >= MIN_TEXT_LENGTH || isEmpty(v) || 'Characters should be >= 3',
 			},
 			disabled : handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
 			span     : 2,
@@ -104,7 +104,7 @@ const rawControls = (
 			span        : 1.5,
 			rules       : {
 				required : 'Price is Required',
-				validate : (v) => v > ZERO_VALUE || 'Price must be greater than 0',
+				validate : (v) => v > PRICE_LOWER_LIMIT || 'Price must be greater than 0',
 			},
 			disabled: handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
 		},

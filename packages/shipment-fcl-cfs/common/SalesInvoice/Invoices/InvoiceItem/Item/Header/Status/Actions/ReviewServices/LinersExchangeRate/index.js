@@ -5,8 +5,8 @@ import React from 'react';
 
 import styles from '../styles.module.css';
 
-const ZERO_INDEX = 0;
-const FIRST_INDEX = 1;
+const FIRST_ELEMENT = 0;
+const SECOND_ELEMENT = 1;
 
 function LinersExchangeRateConfirm({
 	invoice = {},
@@ -35,10 +35,10 @@ function LinersExchangeRateConfirm({
 
 					{Object.keys(invoice?.exchange_rates)?.map((item) => (
 						<div key={item} className={cl`${styles.flex} ${styles.row}`}>
-							<div className={styles.title}>{item?.split('_')?.[ZERO_INDEX]}</div>
+							<div className={styles.title}>{item?.split('_')?.[FIRST_ELEMENT]}</div>
 							<div className={styles.line} />
 
-							<div className={styles.title}>{item?.split('_')?.[FIRST_INDEX]}</div>
+							<div className={styles.title}>{item?.split('_')?.[SECOND_ELEMENT]}</div>
 							<div className={cl`${styles.line} ${styles.arrow}`} />
 
 							<div className={cl`${styles.title} ${styles.value}`}>

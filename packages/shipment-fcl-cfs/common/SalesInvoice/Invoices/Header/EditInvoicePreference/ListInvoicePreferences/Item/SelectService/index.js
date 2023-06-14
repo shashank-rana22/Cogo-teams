@@ -11,6 +11,7 @@ import ChangeCurrency from '../../ChangeCurrency';
 import styles from './styles.module.css';
 
 const ZERO_VALUE = 0;
+const TAX_THRESHOLD = 0;
 
 function SelectService({
 	invoice = {},
@@ -90,7 +91,7 @@ function SelectService({
 						</div>
 					</Tooltip>
 				),
-				isTaxable : service?.tax_total > ZERO_VALUE,
+				isTaxable : service?.tax_total > TAX_THRESHOLD,
 				value     : id,
 				...service,
 			};

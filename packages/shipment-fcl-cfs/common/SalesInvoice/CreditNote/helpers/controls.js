@@ -4,7 +4,7 @@ import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/conve
 import { handleServiceType } from './handleServiceType';
 
 const ZERO_VALUE = 0;
-const VALUE_ONE = 1;
+const ONE_VALUE = 1;
 
 const commonControls = (service) => [
 	{
@@ -110,7 +110,7 @@ const creditNoteControls = ({
 			currency         : item?.currency,
 			price_discounted : item?.price_discounted || ZERO_VALUE,
 			quantity         : item?.quantity || ZERO_VALUE,
-			exchange_rate    : item?.exchange_rate || VALUE_ONE,
+			exchange_rate    : item?.exchange_rate || ONE_VALUE,
 			tax_percent      : item?.tax_percent || ZERO_VALUE,
 			unit             : item?.unit,
 			total            : item?.tax_total_price_discounted || ZERO_VALUE,

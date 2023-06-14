@@ -11,7 +11,8 @@ import styles from './styles.module.css';
 
 const OTP_LENGTH = 4;
 const ZERO_VALUE = 0;
-const FIRST_INDEX = 1;
+const FIRST_ELEMENT = 0;
+const SECOND_ELEMENT = 1;
 
 function OTPVerification({
 	showOtpModal = false,
@@ -61,12 +62,12 @@ function OTPVerification({
 		if (!isEmpty(selectedUser)) {
 			const payload = {
 				invoice_id : invoice?.id,
-				user_id    : selectedUser?.split('_')?.[ZERO_VALUE],
+				user_id    : selectedUser?.split('_')?.[FIRST_ELEMENT],
 			};
 			await sendOtpForInvoiceApproval(payload);
 		}
 	};
-	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[FIRST_INDEX]} registered mobile number`;
+	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[SECOND_ELEMENT]} registered mobile number`;
 
 	let userListInfo = null;
 	if (loading) {

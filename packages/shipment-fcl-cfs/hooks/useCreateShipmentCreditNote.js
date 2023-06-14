@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import formatCreditNoteData from '../common/SalesInvoice/CreditNote/helpers/format-credit-note-data';
 
-const ZERO_INDEX = 0;
+const EMPTY_VALUE = 0;
 
 const useCreateShipmentCreditNote = ({
 	refetch = () => {},
@@ -39,7 +39,7 @@ const useCreateShipmentCreditNote = ({
 			invoiceData,
 		});
 
-		if (submit_data?.line_items?.length === ZERO_INDEX) {
+		if (submit_data?.line_items?.length === EMPTY_VALUE) {
 			Toast.error('Line Items is required');
 		}
 		let isError = false;

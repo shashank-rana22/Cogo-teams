@@ -3,7 +3,7 @@ import { ShipmentDetailContext } from '@cogoport/context';
 import React, { useState, useContext } from 'react';
 
 import useEditInvoicePref from '../../../../../hooks/useEditInvoicePref';
-// import AddInvoicingParty from '../../../../AdditionalServices/components/AddIp/AddInvoicingParty';
+import AddInvoicingParty from '../../../../AdditionalServices/components/AddIp/AddInvoicingParty';
 import getModifiedInvoicingParties from '../../../helpers/getModifiedInvoicingParties';
 
 import ListInvoicePreferences from './ListInvoicePreferences';
@@ -28,12 +28,12 @@ function EditInvoicePreference({
 		setShow(false);
 	};
 
-	// const { importer_exporter_id, country_id, is_tax_applicable } = shipment_data || {};
+	const { importer_exporter_id, country_id, is_tax_applicable } = shipment_data || {};
 
 	const {
 		selectedParties = [],
 		setSelectedParties = () => {},
-		// handleInvoicingPartyAdd = () => {},
+		handleInvoicingPartyAdd = () => {},
 		handleEditPreferences = () => {},
 		...rest
 	} = useEditInvoicePref({
@@ -43,11 +43,11 @@ function EditInvoicePreference({
 		refetch           : refetchAfterApiCall,
 	});
 
-	// const organizationDetails = {
-	// 	id                : importer_exporter_id || undefined,
-	// 	country_id        : country_id || undefined,
-	// 	is_tax_applicable : is_tax_applicable ?? true,
-	// };
+	const organizationDetails = {
+		id                : importer_exporter_id || undefined,
+		country_id        : country_id || undefined,
+		is_tax_applicable : is_tax_applicable ?? true,
+	};
 
 	const handleClose = () => {
 		setSelectedParties(rest?.formattedIps);
@@ -124,7 +124,7 @@ function EditInvoicePreference({
 							<Modal.Body>
 								<div className={styles.form}>
 									<div>Adding Invoicing Party Comming Soon....</div>
-									{/* <AddInvoicingParty
+									<AddInvoicingParty
 										shipmentData={shipment_data}
 										organizationDetails={organizationDetails}
 										updateInvoicingParty={(ip) => {
@@ -132,7 +132,7 @@ function EditInvoicePreference({
 											setAddInvoicingParty(false);
 										}}
 										primary_service={shipment_data?.shipment_type}
-									/> */}
+									/>
 								</div>
 							</Modal.Body>
 						</Modal>

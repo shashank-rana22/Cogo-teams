@@ -12,7 +12,7 @@ import styles from './styles.module.css';
 const geo = getGeoConstants();
 
 const ZERO_INDEX = 0;
-const MIN_SERIAL_ID = 130000;
+const MAX_BOUNDARY_VALUE = 130000;
 
 function EditInvoice({
 	show = 'false',
@@ -47,7 +47,7 @@ function EditInvoice({
 	});
 
 	const disabledProps = controls?.[ZERO_INDEX]?.service_name === 'fcl_cfs_service' && !isAdminSuperAdmin
-	&& shipment_data?.serial_id > MIN_SERIAL_ID;
+	&& shipment_data?.serial_id > MAX_BOUNDARY_VALUE;
 
 	const formValues = watch();
 

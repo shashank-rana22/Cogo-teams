@@ -6,7 +6,8 @@ import FieldArrayItem from '../FieldArrayItem';
 
 import { getCurrencyControls } from './getCurrencyControls';
 
-const ZERO = 0;
+const ZERO_INDEX = 0;
+const EMPTY_VALUE = 0;
 
 function CurrencyExchangeForm({
 	invoiceCurrency = '',
@@ -34,14 +35,15 @@ function CurrencyExchangeForm({
 		const currencyData = value;
 
 		Object.keys(value || {}).forEach((val) => {
-			const key = `${currencyData[val]?.[ZERO]?.from_currency}_${currencyData?.[val]?.[ZERO]?.to_currency}`;
-			if (currencyData?.[val]?.[ZERO]?.exchange_rate) {
+			const key = `
+			${currencyData[val]?.[ZERO_INDEX]?.from_currency}_${currencyData?.[val]?.[ZERO_INDEX]?.to_currency}`;
+			if (currencyData?.[val]?.[ZERO_INDEX]?.exchange_rate) {
 				EXCHANGE_CURRENCY_HASH[key] = Number(
-					currencyData?.[val]?.[ZERO]?.exchange_rate,
+					currencyData?.[val]?.[ZERO_INDEX]?.exchange_rate,
 				);
 			}
 		});
-		if (Object.keys(EXCHANGE_CURRENCY_HASH).length === ZERO) {
+		if (Object.keys(EXCHANGE_CURRENCY_HASH).length === EMPTY_VALUE) {
 			Toast.error('Please fill atleast one field !');
 		}
 		handleFormSubmit(EXCHANGE_CURRENCY_HASH);

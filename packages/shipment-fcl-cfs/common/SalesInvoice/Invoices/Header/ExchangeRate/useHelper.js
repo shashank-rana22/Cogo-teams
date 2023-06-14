@@ -3,7 +3,7 @@ import useListCurrencyConversion from '../../../../../hooks/useListCurrencyConve
 import useUpdateCurrencyConversion from '../../../../../hooks/useUpdateCurrencyConversion';
 
 const ZERO_INDEX = 0;
-const ONE_VALUE = 1;
+const OFFSET_VALUE = 1;
 
 const useHelper = ({ invoiceCurrency = '', refetch = () => {}, shipment_id = '' }) => {
 	const { currencyConversionData } = useListCurrencyConversion({ shipment_id });
@@ -34,7 +34,7 @@ const useHelper = ({ invoiceCurrency = '', refetch = () => {}, shipment_id = '' 
 	Object.keys(allCurrenciesWithConversionFactor || {})?.forEach((currency) => {
 		if (DIFFERENT_CURRENCIES_HASH[currency]) {
 			AVAILABLE_CURRENCY_CONVERSIONS[currency] = allCurrenciesWithConversionFactor[currency]
-					* (ONE_VALUE + currency_conversion_delta);
+					* (OFFSET_VALUE + currency_conversion_delta);
 		}
 	});
 	Object.keys(AVAILABLE_CURRENCY_CONVERSIONS || {})?.forEach((currency) => {

@@ -22,6 +22,7 @@ const AmendmentReasons = dynamic(() => import('../AmendmentReasons'), { ssr: fal
 const ChangePaymentMode = dynamic(() => import('../ChangePaymentMode'), { ssr: false });
 const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: false });
 
+const FIRST_CHARACTER_INDEX = 0;
 const ZERO_VALUE = 0;
 const MAX_INVOICE_SERIAL_ID = 8;
 
@@ -55,7 +56,7 @@ function Actions({
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice.serial_id.toString() || '';
-	const firstChar = invoice_serial_id[ZERO_VALUE];
+	const firstChar = invoice_serial_id[FIRST_CHARACTER_INDEX];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < MAX_INVOICE_SERIAL_ID;
 

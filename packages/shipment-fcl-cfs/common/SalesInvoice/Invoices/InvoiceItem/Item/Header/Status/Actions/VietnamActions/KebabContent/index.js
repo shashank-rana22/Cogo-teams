@@ -9,7 +9,7 @@ import React, { useState } from 'react';
 import CONSTANTS from '../../../../../../../../../../configurations/constant.json';
 import styles from '../../styles.module.css';
 
-const ZERO_VALUE = 0;
+const EMPTY_VALUE = 0;
 
 function Actions({
 	invoice = {},
@@ -102,7 +102,7 @@ function Actions({
 
 	return (
 		<div className={styles.actions_wrap}>
-			{!disableAction || invoice.exchange_rate_document?.length > ZERO_VALUE ? (
+			{!disableAction || invoice.exchange_rate_document?.length > EMPTY_VALUE ? (
 				<Popover
 					interactive
 					placement="bottom"
