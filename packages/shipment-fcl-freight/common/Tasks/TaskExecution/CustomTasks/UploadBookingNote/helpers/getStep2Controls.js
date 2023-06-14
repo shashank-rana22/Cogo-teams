@@ -1,3 +1,5 @@
+import { getDate } from "../../../../../TimeLine/utils/getDate";
+
 export const bookingNoteNumberControls = [
 	{
 		name        : 'document_number',
@@ -96,7 +98,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'VGM Cut-off is required' },
-			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+			validate : (v) => (getDate(v) === null
 				? 'VGM Cut-off is required'
 				: true),
 		},
@@ -112,7 +114,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'SI Cut-off is required' },
-			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+			validate : (v) => (getDate(v) === null
 				? 'S/I Cut-off is required'
 				: true),
 		},
@@ -128,7 +130,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'Document Cut-off is required' },
-			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+			validate : (v) => (getDate(v) === null
 				? 'Document Cut-off is required'
 				: true),
 		},
@@ -144,7 +146,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'Gate-in Cut-off is required' },
-			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+			validate : (v) => (getDate(v) === null
 				? 'Gate-in Cut-off is required'
 				: true),
 		},
@@ -160,7 +162,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'Booking Note Expiry is required' },
-			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+			validate : (v) => (getDate(v) === null
 				? 'Booking Note Expiry is required'
 				: true),
 		},
@@ -176,7 +178,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'TR Cut-off is required' },
-			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+			validate : (v) => (getDate(v) === null
 				? 'TR Cut-off is required'
 				: true),
 		},
