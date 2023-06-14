@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState, useMemo } from 'react';
 
@@ -6,7 +7,6 @@ import useGetProcess from './useGetProcess';
 import useGetListDocuments from './useListDocuments';
 
 const DOC_TYPE_SLICE_INDEX = -1;
-const FIRST_DOC_TYPE = 0;
 const TASK_CONFIG_FLAT_DEPTH = 2;
 
 const DOC_TASKS = ['upload_document', 'approve_document', 'amend_document'];
@@ -52,7 +52,7 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 	});
 
 	const getDocType = useMemo(() => (task) => task?.split('upload_')
-		?.slice(DOC_TYPE_SLICE_INDEX)?.[FIRST_DOC_TYPE], []);
+		?.slice(DOC_TYPE_SLICE_INDEX)?.[GLOBAL_CONSTANTS.zeroth_index], []);
 
 	const taskConfigsForAllShipmentTasks = useMemo(() => (taskConfigs || [])
 		.map(({ states }) => states?.map(({ configs }) => configs?.filter(

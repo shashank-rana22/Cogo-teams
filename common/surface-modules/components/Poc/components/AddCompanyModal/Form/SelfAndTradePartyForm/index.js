@@ -7,6 +7,7 @@ import {
 	SelectController,
 	useForm,
 } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 
 import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
@@ -18,8 +19,6 @@ import getCompanyNameOptions from '../../../../helpers/getCompanyNameOptions';
 import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDefaultParams';
 
 import styles from './styles.module.css';
-
-const FIRST_ORG_TRADE_PARTY_INDEX = 0;
 
 const PINCODE_FROM_ADDRESS_SPLIT_INDEX = 1;
 function SelfAndTradePartyForm({
@@ -47,7 +46,7 @@ function SelfAndTradePartyForm({
 
 	const { trade_party_id, address } = watch() || {};
 
-	const firstTradeParty = list?.[FIRST_ORG_TRADE_PARTY_INDEX]?.id;
+	const firstTradeParty = list?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
 	useEffect(() => {
 		if (companyType === 'self') {

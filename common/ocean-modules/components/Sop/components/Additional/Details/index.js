@@ -1,9 +1,9 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase, format } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const DOCUMENTS_FIRST = 0;
 function Details({
 	data = [],
 	setShowForm = () => {},
@@ -23,8 +23,11 @@ function Details({
 
 	function documentValue({ vals = [] }) {
 		return !isEmpty(vals) ? (
-			<Button onClick={() => window.open(vals?.[DOCUMENTS_FIRST]?.url || vals, '_blank')} themeType="link">
-				{vals?.[DOCUMENTS_FIRST]?.name || 'Click to Preview'}
+			<Button
+				onClick={() => window.open(vals?.[GLOBAL_CONSTANTS.zeroth_index]?.url || vals, '_blank')}
+				themeType="link"
+			>
+				{vals?.[GLOBAL_CONSTANTS.zeroth_index]?.name || 'Click to Preview'}
 			</Button>
 		) : null;
 	}

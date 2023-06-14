@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -7,10 +8,8 @@ import Details from '../Details';
 
 import styles from './styles.module.css';
 
-const SERVICE_DATA_FIRST_INDEX = 0;
-
 function Header({ serviceData = [] }) {
-	const SERVICE_DATA_FIRST = serviceData?.[SERVICE_DATA_FIRST_INDEX] || {};
+	const SERVICE_DATA_FIRST = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const { state, display_label, service_provider, payment_term } = SERVICE_DATA_FIRST;
 

@@ -1,8 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import FTL_UNITS from '@cogoport/surface-modules/constants/FTL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/convertObjectMappingToArray';
 import { startCase } from '@cogoport/utils';
 
-const FIRST_SERVICE_DETAIL = 0;
 const getEditQuotationControls = ({ service_charge, shipment_data, handleChange }) => {
 	const { id, service_type, service_detail, trade_type } = service_charge || {};
 	return {
@@ -11,7 +11,7 @@ const getEditQuotationControls = ({ service_charge, shipment_data, handleChange 
 		service_name : service_type,
 		shipment_id  : shipment_data?.id,
 		showButtons  : service_type !== 'subsidiary_service',
-		cargoDetails : service_detail?.[FIRST_SERVICE_DETAIL],
+		cargoDetails : service_detail?.[GLOBAL_CONSTANTS.zeroth_index],
 		value        : [{
 			code     : '',
 			currency : '',

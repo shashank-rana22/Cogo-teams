@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
 import { useRequest } from '@cogoport/request';
 import toastApiError from '@cogoport/surface-modules/utils/toastApiError';
@@ -13,7 +14,6 @@ const geo = getGeoConstants();
 const INVOICE_INDEX_GREATER_THAN = 0;
 const UNIQ_IGST_VAL_LENGTH = 1;
 const PARTY_SERVICES_LENGTH_GREATER_THAN = 1;
-const SERVICE_KEY_SPLIT_FIRST = 0;
 
 const isAllServicesTaken = (
 	servicesList,
@@ -168,7 +168,7 @@ const useEditInvoicePref = ({
 					}
 
 					const currentService = invoicing_parties?.services?.find(
-						(serv) => serv?.id === service?.split(':')?.[SERVICE_KEY_SPLIT_FIRST],
+						(serv) => serv?.id === service?.split(':')?.[GLOBAL_CONSTANTS.zeroth_index],
 					);
 
 					let serviceType = currentService?.service_type;

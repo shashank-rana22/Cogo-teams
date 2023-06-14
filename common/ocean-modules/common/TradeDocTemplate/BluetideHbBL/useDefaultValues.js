@@ -1,4 +1,4 @@
-const CONTAINERS_FIRST = 0;
+const INDEX_FOR_DEFAULT_CONTAINERS_AS_ARRAY_GREATER_THAN = 0;
 const CONTAINERS_MIN_LENGTH = 1;
 
 const useDefaultValues = (initialValues) => {
@@ -39,7 +39,7 @@ const useDefaultValues = (initialValues) => {
 	if (customDefaultValues?.containers?.length > CONTAINERS_MIN_LENGTH) {
 		const NEW_CONTAINERS = [];
 		customDefaultValues?.containers?.forEach((element, i) => {
-			if (i > CONTAINERS_FIRST) {
+			if (i > INDEX_FOR_DEFAULT_CONTAINERS_AS_ARRAY_GREATER_THAN) {
 				NEW_CONTAINERS.push(element);
 			}
 		});

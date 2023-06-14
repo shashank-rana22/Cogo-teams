@@ -1,11 +1,11 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import MultiServiceDetailsPopover from './MultiServiceDetailsPopover';
 import RenderCargoPills from './RenderCargoPills';
 import styles from './styles.module.css';
 
 const MIN_CARGO_DETAIL_LENGTH_FOR_MULTI_SERVICE_POPOVER = 1;
-const CARGO_DETAIL_FIRST = 0;
 
 function CargoDetails({ primary_service = {} }) {
 	return (
@@ -14,7 +14,7 @@ function CargoDetails({ primary_service = {} }) {
 				<>
 					<RenderCargoPills detail={{
 						...primary_service,
-						...primary_service?.cargo_details?.[CARGO_DETAIL_FIRST],
+						...primary_service?.cargo_details?.[GLOBAL_CONSTANTS.zeroth_index],
 					} || {}}
 					/>
 
@@ -34,7 +34,10 @@ function CargoDetails({ primary_service = {} }) {
 				</>
 			) : (
 				<RenderCargoPills
-					detail={{ ...primary_service, ...primary_service?.cargo_details?.[CARGO_DETAIL_FIRST] } || {}}
+					detail={{
+						...primary_service,
+						...primary_service?.cargo_details?.[GLOBAL_CONSTANTS.zeroth_index],
+					} || {}}
 				/>
 			)}
 		</div>

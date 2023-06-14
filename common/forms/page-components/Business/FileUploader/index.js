@@ -1,4 +1,5 @@
 import { Upload, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMCloudUpload } from '@cogoport/icons-react';
 import { publicRequest, request } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
@@ -6,9 +7,7 @@ import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const URL_SPLIT_FIRST = 0;
 const FILE_NAME_IN_URL_SLICE_INDEX = -1;
-const URL_STORE_FIRST = 0;
 const PERCENT_FACTOR = 100;
 
 function FileUploader(props) {
@@ -55,7 +54,7 @@ function FileUploader(props) {
 		if (multiple) {
 			onChange(urlStore);
 		} else {
-			onChange(urlStore[URL_STORE_FIRST]);
+			onChange(urlStore[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	}, [multiple, urlStore, onChange]);
 
@@ -93,7 +92,7 @@ function FileUploader(props) {
 			onUploadProgress: onUploadProgress(index),
 		});
 
-		const finalUrl = url.split('?')[URL_SPLIT_FIRST];
+		const finalUrl = url.split('?')[GLOBAL_CONSTANTS.zeroth_index];
 
 		return finalUrl;
 	};
@@ -116,7 +115,11 @@ function FileUploader(props) {
 					});
 					setFileName((prev) => {
 						if (prev === null) return values;
-						return [...prev, ...values];
+						let prevValue = [];
+
+						if (typeof prev !== 'object' || !Array.isArray(prev)) { prevValue = prev?.target?.value || []; }
+
+						return [...prevValue, ...values];
 					});
 				} else {
 					setUrlStore(allUrls);

@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import React, { useMemo } from 'react';
 
@@ -12,7 +13,6 @@ const EMPTY_SPAN = 0;
 const ELEMENTS_INCR_BY = 1;
 const INDEX_INCR_BY = 1;
 const REMOVE_UPTO_INDEX = 1;
-const DOCUMENTS_FIRST = 0;
 const PERCENT_FACTOR = 100;
 
 const ASYNC_SELECT_TYPE = ['select', 'creatable-select', 'location-select'];
@@ -61,9 +61,9 @@ function Child({
 		[TOTAL_FIELDS.length],
 	);
 
-	if (formValues?.documents?.[DOCUMENTS_FIRST]?.url?.fileName === ''
-	|| formValues?.documents_commercial_invoice?.[DOCUMENTS_FIRST]?.url?.fileName === ''
-	|| formValues?.documents_packing_list?.[DOCUMENTS_FIRST]?.url?.fileName === '') {
+	if (formValues?.documents?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === ''
+	|| formValues?.documents_commercial_invoice?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === ''
+	|| formValues?.documents_packing_list?.[GLOBAL_CONSTANTS.zeroth_index]?.url?.fileName === '') {
 		const elements = document.querySelectorAll('.ui_upload_filesuccess_container');
 
 		for (let i = 0; i < elements.length; i += ELEMENTS_INCR_BY) {

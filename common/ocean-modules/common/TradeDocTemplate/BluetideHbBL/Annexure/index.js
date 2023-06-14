@@ -12,7 +12,7 @@ const KEYS = ['container_number',
 	'gross_weight',
 	'measurement'];
 
-const FIELD_FIRST = 0;
+const NOT_SHOW_REMOVE_INDEX = 0;
 const MODE_READ = 'read';
 
 function Annexure({
@@ -101,7 +101,7 @@ function Annexure({
 											</td>
 										))}
 
-										{index !== FIELD_FIRST
+										{index !== NOT_SHOW_REMOVE_INDEX
 											? (
 												<IcMCross
 													type="button"

@@ -207,6 +207,7 @@ const GLOBAL_CONSTANTS = {
 		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
 	},
+	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
 	others                       : {

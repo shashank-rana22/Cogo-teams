@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -8,8 +9,6 @@ const INVOICE_COLUMNS = [
 	['Billing Party Name', 'Invoicing Party', 'Email'],
 	['Billing Party Address', 'Name', 'Contact Number'],
 ];
-
-const INVOICE_COLUMN_FIRST = 0;
 
 function Details({ data = [], setShowForm = () => {} }) {
 	const mapping = (val) => ({
@@ -68,7 +67,7 @@ function Details({ data = [], setShowForm = () => {} }) {
 						return (
 							<div className={styles.each_pref} key={item?.id}>
 								{INVOICE_COLUMNS.map((col) => (
-									<div className={styles.columns} key={col?.[INVOICE_COLUMN_FIRST]}>
+									<div className={styles.columns} key={col?.[GLOBAL_CONSTANTS.zeroth_index]}>
 										{col.map((key) => (
 											<LabelValue
 												key={key}
