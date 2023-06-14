@@ -6616,6 +6616,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'create_outbound_voice_call',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -10181,6 +10186,16 @@ const partner = {
 			api          : 'list_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'get_reportees_budget_allocation_details',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'transfer_promotion_budget',
+			access_type  : 'private',
+			service_name : 'promotion',
 		},
 	],
 	cogo_assured: [
