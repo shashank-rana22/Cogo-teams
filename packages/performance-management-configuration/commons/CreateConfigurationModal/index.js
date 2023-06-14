@@ -28,7 +28,7 @@ const RenderModalBody = ({ controls, control }) => (controls || []).map((control
 	);
 });
 
-function AddSquadTribeModal({
+function CreateConfigurationModal({
 	showModal,
 	setShowModal,
 	label = '',
@@ -68,4 +68,4 @@ function AddSquadTribeModal({
 	);
 }
 
-export default AddSquadTribeModal;
+export default CreateConfigurationModal;

@@ -1,7 +1,7 @@
 import { Pagination } from '@cogoport/components';
 
-import AddSquadTribeModal from '../../../commons/AddSquadTribeModal';
 import Header from '../../../commons/CommonHeader';
+import CreateConfigurationModal from '../../../commons/CreateConfigurationModal';
 import PACKAGE_CONSTANTS from '../../../commons/packageConstants';
 import StyledTable from '../../../commons/StyledTable';
 
@@ -55,7 +55,7 @@ function Squad() {
 
 			{
 				showAddSquadModal ? (
-					<AddSquadTribeModal
+					<CreateConfigurationModal
 						showModal={showAddSquadModal}
 						setShowModal={setShowAddSquadModal}
 						label={ADD_BUTTON_LABEL}
