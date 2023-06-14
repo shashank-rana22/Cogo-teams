@@ -1,4 +1,8 @@
-import { getDate } from "../../../../../TimeLine/utils/getDate";
+import { getDate } from '../../../../../TimeLine/utils/getDate';
+
+const validateDate = (date, message) => (getDate(date) === null
+	? message
+	: true);
 
 export const bookingNoteNumberControls = [
 	{
@@ -98,9 +102,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'VGM Cut-off is required' },
-			validate : (v) => (getDate(v) === null
-				? 'VGM Cut-off is required'
-				: true),
+			validate : (v) => (validateDate(v, 'VGM Cut-off is required')),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -114,9 +116,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'SI Cut-off is required' },
-			validate : (v) => (getDate(v) === null
-				? 'S/I Cut-off is required'
-				: true),
+			validate : (v) => (validateDate(v, 'S/I Cut-off is required')),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -130,9 +130,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'Document Cut-off is required' },
-			validate : (v) => (getDate(v) === null
-				? 'Document Cut-off is required'
-				: true),
+			validate : (v) => (validateDate(v, 'Document Cut-off is required')),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -146,9 +144,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'Gate-in Cut-off is required' },
-			validate : (v) => (getDate(v) === null
-				? 'Gate-in Cut-off is required'
-				: true),
+			validate : (v) => (validateDate(v, 'Gate-in Cut-off is required')),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -162,9 +158,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'Booking Note Expiry is required' },
-			validate : (v) => (getDate(v) === null
-				? 'Booking Note Expiry is required'
-				: true),
+			validate : (v) => (validateDate(v, 'Booking Note Expiry is required')),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -178,9 +172,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'TR Cut-off is required' },
-			validate : (v) => (getDate(v) === null
-				? 'TR Cut-off is required'
-				: true),
+			validate : (v) => (validateDate(v, 'TR Cut-off is required')),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
