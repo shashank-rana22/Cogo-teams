@@ -38,23 +38,25 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_select_container}>
-				<div className={styles.button_container}>
-					<Button
-						size="md"
-						themeType="secondary"
-						onClick={() => setshowCancelModal(true)}
-					>
-						Cancel Booking
-					</Button>
-					<Button
-						size="md"
-						themeType="primary"
-						onClick={() => setModalStep(1)}
-						disabled={loading}
-					>
-						Save preference
-					</Button>
-				</div>
+				{!['completed', 'cancelled'].includes(shipmentData?.state) ? (
+					<div className={styles.button_container}>
+						<Button
+							size="md"
+							themeType="secondary"
+							onClick={() => setshowCancelModal(true)}
+						>
+							Cancel Booking
+						</Button>
+						<Button
+							size="md"
+							themeType="primary"
+							onClick={() => setModalStep(1)}
+							disabled={loading}
+						>
+							Save preference
+						</Button>
+					</div>
+				) : null}
 			</div>
 			<Tabs
 				activeTab={activeTab}

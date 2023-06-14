@@ -8,8 +8,6 @@ import {
 } from '@cogoport/forms';
 import UploadController from '@cogoport/forms/page-components/Controlled/UploadController';
 
-import DepartureDateSelectController from './DepartureDateSelect/index';
-
 const getElementController = (type = 'text') => {
 	switch (type) {
 		case 'text':
@@ -35,9 +33,6 @@ const getElementController = (type = 'text') => {
 
 		case 'date_range_picker':
 			return SingleDateRangeController;
-
-		case 'departure_date':
-			return DepartureDateSelectController;
 
 		default:
 			return null;

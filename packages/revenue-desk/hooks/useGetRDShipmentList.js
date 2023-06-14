@@ -26,7 +26,12 @@ const useGetRDShipmentList = () => {
 		try {
 			await trigger({
 				params: {
-					filters            : { ...requiredFilterChange, page: undefined, sort_by: undefined, sort_type: undefined },
+					filters: {
+						...requiredFilterChange,
+						page      : undefined,
+						sort_by   : undefined,
+						sort_type : undefined,
+					},
 					page               : requiredFilterChange?.page,
 					sort_by            : requiredFilterChange?.sort_by || undefined,
 					sort_type          : requiredFilterChange?.sort_type || undefined,
@@ -55,6 +60,7 @@ const useGetRDShipmentList = () => {
 		created_at_greater_than         : filters?.created_date?.startDate || undefined,
 		created_at_less_than            : filters?.created_date?.endDate || undefined,
 		page                            : filters?.page,
+		rd_state                        : filters?.rd_state || undefined,
 		q                               : filters?.q || undefined,
 		sort_type                       : filters?.sort_by.split('_').pop() || undefined,
 		sort_by                         : filters?.sort_by.split('_').slice(0, 2).join('_') || undefined,

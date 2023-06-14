@@ -39,6 +39,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 		}
 		return acc;
 	}, {});
+
 	return (
 		<div className={styles.Detail_page}>
 			<div className={styles.header}>

@@ -15,6 +15,7 @@ const useListShipmentServices = ({ shipmentId } = {}) => {
 					tasks_messages_count_required : false,
 					pagination_data_required      : false,
 					service_stakeholder_required  : true,
+					preference_set_data_required  : true,
 				},
 			});
 		} catch (err) {

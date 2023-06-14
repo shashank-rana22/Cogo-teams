@@ -87,6 +87,10 @@ const useUpdateRatesPreferences = ({
 				);
 			}
 		});
+		if (!allPromises.length) {
+			Toast.error('Nothing To Save Preference For!');
+			return;
+		}
 
 		const result = await Promise.all(allPromises);
 

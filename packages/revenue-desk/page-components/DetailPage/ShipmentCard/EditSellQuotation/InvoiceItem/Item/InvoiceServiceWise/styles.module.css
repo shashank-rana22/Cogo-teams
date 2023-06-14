@@ -52,7 +52,7 @@
 	margin-left: 5px;
 	font-size: 14px;
 	font-weight: 600;
-	color: #221F20;
+	color: #221f20;
 }
 
 .totals {
@@ -75,8 +75,8 @@
 .total_tax {
 	min-width: 12%;
 	margin-left: 16px;
-	font-weight: 600;
 	font-size: 14px;
+	font-weight: 600;
 	color: #828282;
 
 	@media (max-width: 768px) {
@@ -90,6 +90,7 @@
 	font-size: 14px;
 	color: #cb6464;
 }
-.cargo_detail_pill_container{
+
+.cargo_detail_pill_container {
 	padding: 10px;
 }

@@ -33,7 +33,6 @@ function EditInvoice({
 		loading,
 		onCreate,
 		handleSubmit,
-		// customValues,
 		onError,
 		errors,
 		isDirty,
