@@ -102,7 +102,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'VGM Cut-off is required' },
-			validate : (v) => (validateDate(v, 'VGM Cut-off is required')),
+			validate : (v) => validateDate(v, 'VGM Cut-off is required'),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -116,7 +116,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'SI Cut-off is required' },
-			validate : (v) => (validateDate(v, 'S/I Cut-off is required')),
+			validate : (v) => validateDate(v, 'S/I Cut-off is required'),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -130,7 +130,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'Document Cut-off is required' },
-			validate : (v) => (validateDate(v, 'Document Cut-off is required')),
+			validate : (v) => validateDate(v, 'Document Cut-off is required'),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -144,7 +144,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'Gate-in Cut-off is required' },
-			validate : (v) => (validateDate(v, 'Gate-in Cut-off is required')),
+			validate : (v) => validateDate(v, 'Gate-in Cut-off is required'),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -158,7 +158,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'Booking Note Expiry is required' },
-			validate : (v) => (validateDate(v, 'Booking Note Expiry is required')),
+			validate : (v) => validateDate(v, 'Booking Note Expiry is required'),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -172,7 +172,7 @@ export const mainControls = ({ departureDate }) => [
 		span           : 6,
 		rules          : {
 			required : { value: true, message: 'TR Cut-off is required' },
-			validate : (v) => (validateDate(v, 'TR Cut-off is required')),
+			validate : (v) => validateDate(v, 'TR Cut-off is required'),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
