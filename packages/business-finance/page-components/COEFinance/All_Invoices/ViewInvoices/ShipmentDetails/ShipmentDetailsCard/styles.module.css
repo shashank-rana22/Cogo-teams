@@ -119,3 +119,19 @@
 .bold_data {
 	font-weight: 600;
 }
+.values {
+	display: flex;
+}
+
+.advanced_amount{
+	margin-bottom: 8px;
+	display: flex;
+}
+
+.text_decoration {
+	width: 100px;
+	overflow: hidden;
+	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}

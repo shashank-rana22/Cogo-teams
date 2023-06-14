@@ -7,6 +7,7 @@ import {
 	Textarea,
 	Checkbox,
 } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
 import { IcCFtick, IcMCrossInCircle, IcMInfo } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -14,6 +15,7 @@ import React, { useState } from 'react';
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
+import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import isDisabled from '../../../../utils/isDisabled';
 
 import LineItemCard from './lineItemCard/index';
@@ -77,6 +79,8 @@ function ShipmentDetailsCard({
 		outstandingDocument = '',
 		paymentType = '',
 		isIncedental = '',
+		advancedAmount = 0,
+		advancedAmountCurrency = '',
 
 	} = billAdditionalObject || {};
 
@@ -163,6 +167,7 @@ function ShipmentDetailsCard({
 
 	return (
 		<div>
+
 			{showLineItem ? (
 				<LineItemCard
 					lineItems={lineItems}
@@ -744,6 +749,27 @@ function ShipmentDetailsCard({
 													<span>{paymentType}</span>
 												</div>
 											)}
+											{shipmentType === 'ftl_freight'
+											&& (billType === 'BILL' || billType === 'purforma_invoice')
+												&& !!advancedAmount
+											&& (
+												<div className={styles.advanced_amount}>
+													Advanced Amount -
+													{' '}
+													<div className={styles.text_decoration}>
+
+														<div className={styles.values}>
+															{showOverflowingNumber(getFormattedPrice(
+																advancedAmount,
+																advancedAmountCurrency,
+															) || 0, 10)}
+														</div>
+
+													</div>
+
+												</div>
+											)}
+
 											{shipmentType === 'ftl_freight'
 											&& billType === 'BILL' && 		isIncedental
 											&& (

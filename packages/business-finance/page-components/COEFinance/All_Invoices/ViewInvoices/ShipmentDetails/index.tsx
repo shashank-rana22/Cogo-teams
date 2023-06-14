@@ -72,6 +72,8 @@ interface BillAdditionalObjectInterface {
 	outstandingDocument? : string;
 	paymentType? : string;
 	isIncedental? : string;
+	advancedAmount? : number;
+	advancedAmountCurrency? : string;
 }
 export interface DataInterface {
 	job?: JobInterface;
