@@ -718,7 +718,7 @@ function ShipmentDetailsCard({
 											{shipmentType === 'ftl_freight' && outstandingDocument
 											&& (
 												<div className={styles.document}>
-													Outstanding Purforma Approval -
+													Outstanding Proforma Approval -
 													{' '}
 													<Button
 														className={styles.button}
