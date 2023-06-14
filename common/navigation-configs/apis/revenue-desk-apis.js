@@ -199,6 +199,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'list_shipment_stakeholders',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;

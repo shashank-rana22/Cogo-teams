@@ -6,7 +6,7 @@
 }
 
 .filter {
-	width: 350px;
+	width: 22vw;
 	max-height: 1100px;
 	padding-bottom: 4px;
 	margin-top: 8px;
@@ -16,7 +16,7 @@
 
 .cardlist {
 	width: 100%;
-	/* margin-left: 24%; */
+	flex: 1;
 }
 
 .body {
@@ -33,20 +33,6 @@
 	width: 200px;
 }
 
-.left_section {
-	position: absolute;
-	width: 325px;
-	max-height: 800px;
-	padding-bottom: 4px;
-	margin-top: 8px;
-	background: #fff;
-    border-radius: 8px;
-}
-
-.left_section.fixed {
-	position: fixed;
-	transform: translateY(-125px);
-}
 .select_outer_container{
 	display: flex;
 	justify-content: space-between;
@@ -76,4 +62,8 @@
 	color: #4F4F4F;
 	margin-top: 2px;
 	margin-left: 3px;
+}
+
+.service_outer_container{
+	width:23vw;
 }

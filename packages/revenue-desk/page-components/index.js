@@ -29,7 +29,7 @@ function RevenueDesk() {
 				<div>
 					<div className={styles.heading}>Revenue Desk</div>
 					<div className={styles.sub_section}>
-						<div style={{ width: '24%' }}>
+						<div className={styles.service_outer_container}>
 							<div className={styles.service_container}>
 								<Select
 									placeholder="Select Service"
@@ -40,7 +40,6 @@ function RevenueDesk() {
 								/>
 							</div>
 						</div>
-
 						<div className={styles.select_outer_container}>
 							<div className={styles.select_container}>
 								<Select
@@ -79,7 +78,7 @@ function RevenueDesk() {
 									) : (
 										<div className={styles.search_text}>
 											-
-											{shipmentList?.total}
+											{shipmentList?.total || 0}
 											{' '}
 											Search Results
 										</div>
