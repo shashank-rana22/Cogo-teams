@@ -9713,6 +9713,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'communication',
 		},
+		{
+			api          : 'get_template_group_tags',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
 	],
 	cogopoints: [
 		{
