@@ -1,22 +1,34 @@
 import { Button, Input, Popover, Tooltip } from '@cogoport/components';
-import { AsyncSelectController, SelectController, useForm } from '@cogoport/forms';
+import {
+	AsyncSelectController,
+	SelectController,
+	useForm,
+} from '@cogoport/forms';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { IcMRefresh, IcMSearchlight } from '@cogoport/icons-react';
+import { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
 import { amountCollectionFilters } from '../../configurations/on-account-collections/accountCollectionFilter';
-import { MORE_FILTERS_AMOUNT_COLLECTION } from
-	'../../configurations/on-account-collections/moreFilterAccountCollection';
+import { MORE_FILTERS_AMOUNT_COLLECTION }
+	from '../../configurations/on-account-collections/moreFilterAccountCollection';
 import useAccountCollection from '../../hooks/useAccountCollection';
+import usePostToSageBulk from '../../hooks/usePostToSageBulk';
 
 import CustomTable from './common/CustomTable';
+import Confirmation from './Confirmation';
 import Header from './Header';
 import styles from './styles.module.css';
 
 const SEARCH_PLACEHOLDER = 'Search by Customer Name / UTR No /Doc. Value';
 
+const CAN_BULK_POST = 2;
 function OnAccountCollection() {
-	const { control, watch, formState: { errors = {} } } = useForm();
+	const {
+		control,
+		watch,
+		formState: { errors = {} },
+	} = useForm();
 	const entityType = watch('entityCode');
 	const currencyType = watch('currency');
 	const {
@@ -27,11 +39,22 @@ function OnAccountCollection() {
 		clearFilters,
 		refetch,
 	} = useAccountCollection({ entityType, currencyType });
+	const [checkedRows, setCheckedRows] = useState([]);
+	const [showConfirm, setShowConfirm] = useState(false);
 
-	const onPageChange = (val:number) => {
-		setGlobalFilters((prev) => ({ ...prev, page: val }
-		));
+	const { post, loading: postloading } = usePostToSageBulk({
+		refetch, setShowConfirm,
+	});
+
+	const onPageChange = (val: number) => {
+		setGlobalFilters((prev) => ({ ...prev, page: val }));
 	};
+
+	const bulkPost = () => {
+		post(checkedRows?.filter((value, index, array) => array.indexOf(value) === index));
+	};
+
+	const bulkDisabled = (checkedRows)?.length < CAN_BULK_POST;
 
 	const { accMode = '', search = '' } = globalFilters || {};
 
@@ -46,9 +69,7 @@ function OnAccountCollection() {
 				isClearable
 			/>
 			{errors?.currency ? (
-				<div className={styles.errors}>
-					* Required
-				</div>
+				<div className={styles.errors}>* Required</div>
 			) : null}
 			<Filter
 				controls={MORE_FILTERS_AMOUNT_COLLECTION}
@@ -60,7 +81,6 @@ function OnAccountCollection() {
 
 	return (
 		<div>
-
 			<Header refetch={clearFilters} control={control} />
 
 			<div className={styles.container}>
@@ -70,7 +90,7 @@ function OnAccountCollection() {
 							control={control}
 							name="entityCode"
 							asyncKey="list_cogo_entity"
-							renderLabel={(item) => (`${item?.entity_code} - ${item?.business_name}`)}
+							renderLabel={(item) => `${item?.entity_code} - ${item?.business_name}`}
 							placeholder="Select Entity"
 							labelKey="entity_code"
 							initialCall
@@ -78,9 +98,7 @@ function OnAccountCollection() {
 							isClearable
 						/>
 						{errors?.entityCode ? (
-							<div className={styles.errors}>
-								* Required
-							</div>
+							<div className={styles.errors}>* Required</div>
 						) : null}
 						<Filter
 							controls={amountCollectionFilters({
@@ -92,22 +110,15 @@ function OnAccountCollection() {
 					</div>
 
 					<div className={styles.filter_search_more_filters}>
-						<Popover
-							placement="bottom"
-							render={content}
-						>
+						<Popover placement="bottom" render={content}>
 							<Button themeType="secondary" size="md">
 								<div className={styles.more_filter_div}>
 									+ More Filters
 								</div>
 							</Button>
 						</Popover>
-
 						<div>
-							<Tooltip
-								placement="top"
-								content="RELOAD"
-							>
+							<Tooltip placement="top" content="RELOAD">
 								<Button
 									themeType="secondary"
 									onClick={() => refetch()}
@@ -118,22 +129,53 @@ function OnAccountCollection() {
 							</Tooltip>
 						</div>
 
+						<Button
+							onClick={() => {
+								setShowConfirm(true);
+							}}
+							disabled={bulkDisabled}
+						>
+							Bulk Post
+						</Button>
+						<Button
+							onClick={() => {
+								setCheckedRows([]);
+							}}
+							disabled={bulkDisabled}
+						>
+							Reset
+						</Button>
+
 						<div className={styles.filter_search}>
 							<Input
 								name="q"
 								size="sm"
 								value={search}
-								onChange={(val: string) => setGlobalFilters((prev) => ({ ...prev, search: val }))}
+								onChange={(val: string) => setGlobalFilters((prev) => ({
+									...prev,
+									search: val,
+								}))}
 								placeholder={SEARCH_PLACEHOLDER}
 								suffix={(
 									<div className={styles.icon_div}>
-										<IcMSearchlight height={15} width={15} />
+										<IcMSearchlight
+											height={15}
+											width={15}
+										/>
 									</div>
 								)}
 							/>
 						</div>
 					</div>
 				</div>
+
+				<Confirmation
+					showConfirm={showConfirm}
+					setShowConfirm={setShowConfirm}
+					bulkPost={bulkPost}
+					checkedRows={checkedRows}
+					loading={postloading}
+				/>
 
 				<CustomTable
 					data={data}
@@ -142,10 +184,12 @@ function OnAccountCollection() {
 					loading={loading}
 					setGlobalFilters={setGlobalFilters}
 					globalFilters={globalFilters}
+					checkedRows={checkedRows}
+					setCheckedRows={setCheckedRows}
 				/>
 			</div>
-
 		</div>
 	);
 }
+
 export default OnAccountCollection;
