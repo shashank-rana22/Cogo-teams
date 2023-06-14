@@ -1,48 +1,51 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useState } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 
 import getColumns from './getColumns';
 
+const DEFAULT_PAGE = 1;
+
 const useSquad = () => {
 	const [search, setSearch] = useState('');
-	const [showAddSquadModal, setShowAddSquadModal] = useState(false);
+	const [page, setPage] = useState(DEFAULT_PAGE);
 
-	const { control, formState: { errors }, handleSubmit } = useForm();
-
-	const columns = getColumns();
-
-	const [{ loading }, trigger] = useHarbourRequest({
-		method : 'post',
-		url    : '/create_squad',
+	const [{ loading, data }, trigger] = useHarbourRequest({
+		url    : '/list_all_squads',
+		method : 'GET',
 	}, { manual: true });
 
-	const onClickSubmitButton = async (values) => {
-		try {
-			await trigger({
-				data: {
-					...values,
-				},
-			});
-			setShowAddSquadModal(false);
-		} catch (err) {
-			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
-		}
-	};
+	const fetch = useCallback(
+		async () => {
+			try {
+				await trigger({
+					params: {
+						page    : !search ? page : DEFAULT_PAGE,
+						filters : { q: search || undefined },
+					},
+				});
+			} catch (error) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
+		},
+		[page, search, trigger],
+	);
+
+	useEffect(() => {
+		fetch();
+	}, [fetch, page]);
+
+	const columns = getColumns();
 
 	return {
 		columns,
 		search,
 		setSearch,
-		showAddSquadModal,
-		setShowAddSquadModal,
-		control,
-		errors,
-		onClickSubmitButton,
+		page,
+		setPage,
+		data,
 		loading,
-		handleSubmit,
 	};
 };
 
