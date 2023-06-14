@@ -1,21 +1,18 @@
-import { format } from '@cogoport/utils';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 
+const INDEX_VALUE = 0;
 const getFormattedLineChartData = (data = {}) => {
-	let chartDetails = [];
+	const newData = Object.keys(data || {}).map((item) => ({
+		x: formatDate({
+			date       : item,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM'],
+			formatType : 'date',
+		}),
+		y: data[item] || INDEX_VALUE,
+	}));
 
-	const keys = Object.keys(data || {});
-
-	keys.forEach((key) => {
-		chartDetails = [
-			...chartDetails,
-			{
-				x : format((key), 'MMMM'),
-				y : Math.round(data[key]),
-			},
-		];
-	});
-
-	return chartDetails;
+	return newData;
 };
 
 export default getFormattedLineChartData;
