@@ -109,15 +109,15 @@ function TableData({ customData = {}, importerExporterId = '' }) {
 					<td style={{ border: '2px solid black' }}>
 						<b>{total_taxable_value}</b>
 					</td>
-					<td />
+					<td aria-label="table-cell" />
 					<td style={{ border: '2px solid black' }}>
 						<b>{total_cgst_amount}</b>
 					</td>
-					<td />
+					<td aria-label="table-cell" />
 					<td style={{ border: '2px solid black' }}>
 						<b>{total_sgst_amount}</b>
 					</td>
-					<td />
+					<td aria-label="table-cell" />
 					<td style={{ border: '2px solid black' }}>
 						<b>{total_igst_amount}</b>
 					</td>

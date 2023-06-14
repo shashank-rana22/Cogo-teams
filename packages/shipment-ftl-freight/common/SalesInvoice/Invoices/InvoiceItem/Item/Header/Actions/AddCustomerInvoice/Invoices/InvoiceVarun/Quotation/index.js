@@ -74,7 +74,7 @@ function Quotation({ customData = {} }) {
 				<td style={{ border: '2px solid black' }} colSpan="8">
 					<b>TOTAL</b>
 				</td>
-				<td />
+				<td aria-label="table-cell" />
 				<td style={{ border: '2px solid black' }}>{total_converted}</td>
 				<td style={{ border: '2px solid black' }}>{total_empty_quantity}</td>
 				<td style={{ border: '2px solid black' }}>{total_weight}</td>
@@ -108,8 +108,9 @@ function Quotation({ customData = {} }) {
 				</td>
 			</tr>
 			<tr style={{ border: '2px solid black' }}>
-				<td colSpan="11" />
+				<td aria-label="table-cell" colSpan="11" />
 				<td
+					aria-label="table-cell"
 					colSpan="4"
 					style={{
 						borderTop   : '2px solid black',

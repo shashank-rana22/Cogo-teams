@@ -116,13 +116,13 @@ function TableData({ customData = {} }) {
 				<td colSpan="7" style={{ border: '2px solid black' }}>
 					<b>TOTAL</b>
 				</td>
-				<td style={{ border: '2px solid black' }} />
-				<td style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 				<td style={{ border: '2px solid black' }}>{total_loading_weight}</td>
 				<td style={{ border: '2px solid black' }}>{total_charged_weight}</td>
 				<td style={{ border: '2px solid black' }}>{total_unloading_weight}</td>
 				{extraAmountArray.map((item) => (
-					<td key={item?.id} style={{ border: '2px solid black' }} />
+					<td aria-label="table-cell" key={item?.id} style={{ border: '2px solid black' }} />
 				))}
 				<td style={{ border: '2px solid black' }}>{total_freight_amount}</td>
 				<td style={{ border: '2px solid black' }}>{total_detention_at_factory}</td>
@@ -135,57 +135,57 @@ function TableData({ customData = {} }) {
 					<b>Tax</b>
 				</td>
 				{extraTaxArray.map((item) => (
-					<td key={item?.id} style={{ border: '2px solid black' }} />
+					<td aria-label="table-cell" key={item?.id} style={{ border: '2px solid black' }} />
 				))}
 				<td style={{ border: '2px solid black' }}>
 					<b>CGST</b>
 				</td>
-				<td style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 				<td style={{ border: '2px solid black' }}>
 					{cgst}
 					&nbsp;
 					%
 				</td>
-				<td style={{ border: '2px solid black' }} />
-				<td style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 				<td style={{ border: '2px solid black' }}>
 					<b>{cgst_amount}</b>
 				</td>
-				<td style={{ border: '2px solid black' }} />
-				<td style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 			</tr>
 			<tr style={{ border: '2px solid black', textAlign: 'center' }}>
-				<td colSpan="7" style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" colSpan="7" style={{ border: '2px solid black' }} />
 				{extraTaxArray.map((item) => (
-					<td key={item?.id} style={{ border: '2px solid black' }} />
+					<td aria-label="table-cell" key={item?.id} style={{ border: '2px solid black' }} />
 				))}
 				<td style={{ border: '2px solid black' }}>
 					<b>SGST</b>
 				</td>
-				<td style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 				<td style={{ border: '2px solid black' }}>
 					{sgst}
 					&nbsp;
 					%
 				</td>
-				<td style={{ border: '2px solid black' }} />
-				<td style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 				<td style={{ border: '2px solid black' }}>
 					<b>{sgst_amount}</b>
 				</td>
-				<td style={{ border: '2px solid black' }} />
-				<td style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 			</tr>
 			<tr style={{ border: '2px solid black', textAlign: 'center' }}>
 				<td colSpan="7">
 					<b>Grand Total</b>
 				</td>
 				{extraTotalArray.map((item) => (
-					<td key={item?.id} style={{ border: '2px solid black' }} />
+					<td aria-label="table-cell" key={item?.id} style={{ border: '2px solid black' }} />
 				))}
 				<td style={{ border: '2px solid black' }}>{grand_total}</td>
-				<td style={{ border: '2px solid black' }} />
-				<td style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 			</tr>
 		</table>
 	);

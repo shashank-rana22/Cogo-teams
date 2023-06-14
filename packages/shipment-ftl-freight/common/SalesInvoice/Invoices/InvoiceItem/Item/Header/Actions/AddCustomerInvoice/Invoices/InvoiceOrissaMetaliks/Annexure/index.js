@@ -73,7 +73,7 @@ function Annexure({
 					<b>TOTAL</b>
 				</td>
 				<td style={{ border: '2px solid black', padding: '0 8px' }}>{total_weight}</td>
-				<td />
+				<td aria-label="table-cell" />
 				<td style={{ border: '2px solid black', padding: '0 8px' }}>{total}</td>
 			</tr>
 		</table>

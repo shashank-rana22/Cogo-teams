@@ -129,7 +129,7 @@ function InvoiceOrissaMetaliks({
 							{customer_gstin}
 						</b>
 					</td>
-					<td style={{ border: '1px solid black', padding: '2px' }} />
+					<td aria-label="table-cell" style={{ border: '1px solid black', padding: '2px' }} />
 					<td style={{ border: '1px solid black', padding: '2px' }}>
 						<b>State Code</b>
 					</td>

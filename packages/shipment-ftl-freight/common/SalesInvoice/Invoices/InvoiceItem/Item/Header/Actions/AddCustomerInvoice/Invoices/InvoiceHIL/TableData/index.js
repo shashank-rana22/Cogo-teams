@@ -135,12 +135,16 @@ function TableData({ customData = {}, importerExporterId = '' }) {
 						<b>TOTAL</b>
 					</td>
 					{extraArray.map((item) => (
-						<td key={item?.id} style={{ borderRight: '1px solid black', padding: '0px 8px' }} />
+						<td
+							key={item?.id}
+							aria-label="table-cell"
+							style={{ borderRight: '1px solid black', padding: '0px 8px' }}
+						/>
 					))}
 					<td style={{ borderRight: '1px solid black', padding: '0px 8px' }}>{total_weight}</td>
-					<td style={{ borderRight: '1px solid black', padding: '0px 8px' }} />
+					<td aria-label="table-cell" style={{ borderRight: '1px solid black', padding: '0px 8px' }} />
 					<td style={{ borderRight: '1px solid black', padding: '0px 8px' }}>{total_freight_amount}</td>
-					<td style={{ borderRight: '1px solid black', padding: '0px 8px' }} />
+					<td aria-label="table-cell" style={{ borderRight: '1px solid black', padding: '0px 8px' }} />
 					<td style={{ borderRight: '1px solid black', padding: '0px 8px' }}>{total_igst_amount}</td>
 					<td style={{ borderRight: '1px solid black', padding: '0px 8px' }}>{total_others_amount}</td>
 					<td

@@ -97,8 +97,9 @@ function Quotation({ customData = {} }) {
 				</td>
 			</tr>
 			<tr style={{ border: '2px solid black', borderTop: 'none' }}>
-				<td colSpan="6" className="noBorder" />
+				<td aria-label="table-cell" colSpan="6" className="noBorder" />
 				<td
+					aria-label="table-cell"
 					colSpan="4"
 					className="noBorder"
 					style={{

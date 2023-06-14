@@ -151,6 +151,7 @@ function TableData({
 						</div>
 					</td>
 					<td
+						aria-label="table-cell"
 						style={{
 							width      : '40%',
 							textAlign  : 'center',
@@ -176,6 +177,7 @@ function TableData({
 						</div>
 					</td>
 					<td
+						aria-label="table-cell"
 						style={{
 							width      : '40%',
 							textAlign  : 'center',
@@ -201,6 +203,7 @@ function TableData({
 						</div>
 					</td>
 					<td
+						aria-label="table-cell"
 						style={{
 							width      : '40%',
 							textAlign  : 'center',
@@ -226,6 +229,7 @@ function TableData({
 						</div>
 					</td>
 					<td
+						aria-label="table-cell"
 						style={{
 							width      : '40%',
 							textAlign  : 'center',

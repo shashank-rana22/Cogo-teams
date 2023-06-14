@@ -200,10 +200,10 @@ function TruckDetail({
 				<td style={{ border: '2px solid black' }}>
 					{state_code}
 				</td>
-				<td style={{ border: '2px solid black' }} />
-				<td style={{ border: '2px solid black' }} />
-				<td style={{ border: '2px solid black' }} />
-				<td style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+				<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 			</tr>
 			<tr>
 				<td style={{ padding: '4px' }} colSpan="6">&nbsp;</td>

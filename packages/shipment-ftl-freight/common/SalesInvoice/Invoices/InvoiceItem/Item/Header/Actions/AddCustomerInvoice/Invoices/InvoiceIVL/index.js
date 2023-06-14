@@ -77,27 +77,27 @@ function InvoiceIVL({
 						</tr>
 					))}
 					<tr style={{ border: '2px solid black' }}>
-						<td colSpan="15" style={{ border: '2px solid black' }} />
+						<td aria-label="table-cell" colSpan="15" style={{ border: '2px solid black' }} />
 						<td style={{ border: '2px solid black' }}>
 							<b>Sub Total</b>
 						</td>
-						<td style={{ border: '2px solid black' }} />
-						<td style={{ border: '2px solid black' }} />
+						<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+						<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 						<td style={{ border: '2px solid black' }}>
 							<b>{sub_total}</b>
 						</td>
 					</tr>
 					<tr style={{ border: '2px solid black' }}>
-						<td style={{ border: '2px solid black' }} colSpan="13" />
+						<td aria-label="table-cell" style={{ border: '2px solid black' }} colSpan="13" />
 						<td style={{ border: '2px solid black' }}>
 							<b>
 								IGST @ %
 								{igst}
 							</b>
 						</td>
-						<td style={{ border: '2px solid black' }} />
-						<td style={{ border: '2px solid black' }} />
-						<td style={{ border: '2px solid black' }} />
+						<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+						<td aria-label="table-cell" style={{ border: '2px solid black' }} />
+						<td aria-label="table-cell" style={{ border: '2px solid black' }} />
 						<td style={{ border: '2px solid black' }}>
 							<b />
 						</td>
