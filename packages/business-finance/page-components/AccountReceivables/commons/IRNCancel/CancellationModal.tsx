@@ -205,9 +205,7 @@ function CancellationModal({
 								</Button>
 							</div>
 							<Button
-								onClick={() => {
-									setShowCancellationModal(false);
-								}}
+								onClick={() => setShowCancellationModal(false)}
 							>
 								Cancel
 							</Button>
