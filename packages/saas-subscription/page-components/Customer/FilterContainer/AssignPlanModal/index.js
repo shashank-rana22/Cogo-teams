@@ -3,9 +3,10 @@ import { Button, Modal } from '@cogoport/components';
 import assignPlanControl from '../../../../configuration/assignPlanControl';
 import useAssignPlan from '../../../../hooks/useAssignPlan';
 import { getFieldController } from '../../../../utils/getFieldController';
-
+import {useState} from 'react'
 import styles from './styles.module.css';
-
+import {Tabs,TabPanel} from '@cogoport/components';
+import CreatePlan from './CreatePlan'
 function AssignPlanModal({ openPlanModal, setOpenPlanModal, refectUserList }) {
 	const {
 		formHook,
@@ -13,13 +14,20 @@ function AssignPlanModal({ openPlanModal, setOpenPlanModal, refectUserList }) {
 		loading,
 		closeModal,
 	} = useAssignPlan({ setOpenPlanModal, refectUserList });
-
+    const [activeTab,setActiveTab]=useState('select')
 	const { handleSubmit, control, formState:{ errors } } = formHook;
 
 	return (
-		<Modal show={openPlanModal} onClose={closeModal}>
-			<Modal.Header title="Assign Plan" />
-			<Modal.Body>
+		<Modal show={openPlanModal} onClose={closeModal} size='lg' >
+			<Modal.Header title='Assign Plan'/>
+			<Tabs
+				activeTab={activeTab}
+				fullWidth
+		        themeType="secondary"
+				onChange={setActiveTab}
+			>
+				<TabPanel name="select" title="Select Existing Plan" >
+				<Modal.Body>
 				{assignPlanControl.map((element) => {
 					const { name, label, type } = element;
 					const Element = getFieldController(type);
@@ -50,6 +58,13 @@ function AssignPlanModal({ openPlanModal, setOpenPlanModal, refectUserList }) {
 					Assign
 				</Button>
 			</Modal.Footer>
+				</TabPanel>
+
+				<TabPanel name="create" title="Create New Plan">
+					<CreatePlan closeModal={closeModal}/>
+				</TabPanel>
+			</Tabs>
+			
 		</Modal>
 	);
 }
