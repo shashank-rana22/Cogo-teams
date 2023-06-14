@@ -12,6 +12,7 @@ import styles from './styles.module.css';
 function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }) {
 	const tabKeys = Object?.keys(groupedShowServicesData || {});
 	const [supplierPayload, setSupplierPayload] = useState({});
+	const [rateOptions, setRateOptions] = useState({});
 	const [showCancelModal, setshowCancelModal] = useState(false);
 	const [inventory, setInventory] = useState([]);
 	const [activeTab, setActiveTab] = useState(tabKeys[0]);
@@ -79,6 +80,8 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 							shipmentType={shipmentData?.shipment_type}
 							setSellRateDetails={setSellRateDetails}
 							sellRateDetails={sellRateDetails}
+							rateOptions={rateOptions}
+							setRateOptions={setRateOptions}
 						/>
 					</TabPanel>
 				))}
