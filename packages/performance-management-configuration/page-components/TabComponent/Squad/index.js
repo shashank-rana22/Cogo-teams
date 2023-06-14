@@ -1,20 +1,20 @@
-import { useForm } from '@cogoport/forms';
-import { useState } from 'react';
-
 import AddSquadTribeModal from '../../../commons/AddSquadTribeModal';
 import Header from '../../../commons/CommonHeader';
+import StyledTable from '../../../commons/StyledTable';
 
-// import styles from './styles.module.css';
 import controls from './controls';
-import TableComponent from './TableComponent';
+import useSquad from './useSquad';
+
+const ADD_BUTTON_LABEL = 'Squad';
+const TABLE_EMPTY_TEXT = 'No Squad created yet';
 
 function Squad() {
-	const [search, setSearch] = useState('');
-	const [showAddSquadModal, setShowAddSquadModal] = useState(false);
-
-	const { control, formState } = useForm();
-
-	const { errors } = formState;
+	const {
+		search, setSearch, showAddSquadModal, setShowAddSquadModal, columns, control, errors,
+		onClickSubmitButton,
+		loading,
+		handleSubmit,
+	} = useSquad();
 
 	const onClickAddButton = () => {
 		setShowAddSquadModal(true);
@@ -22,18 +22,27 @@ function Squad() {
 
 	return (
 		<div>
-			<Header search={search} setSearch={setSearch} label="Squad" onClickAddButton={onClickAddButton} />
-			<TableComponent />
+			<Header
+				search={search}
+				setSearch={setSearch}
+				label={ADD_BUTTON_LABEL}
+				onClickAddButton={onClickAddButton}
+			/>
+
+			<StyledTable columns={columns} data={[{}]} emptyText={TABLE_EMPTY_TEXT} loading={false} />
 
 			{
 				showAddSquadModal ? (
 					<AddSquadTribeModal
 						showModal={showAddSquadModal}
 						setShowModal={setShowAddSquadModal}
-						label="Squad"
+						label={ADD_BUTTON_LABEL}
 						controls={controls}
 						control={control}
 						errors={errors}
+						onClickSubmitButton={onClickSubmitButton}
+						loading={loading}
+						handleSubmit={handleSubmit}
 					/>
 				) : null
 			}

@@ -4,12 +4,11 @@ import getElementController from '../../configs/getElementController';
 
 import styles from './styles.module.css';
 
-const renderModalBody = ({ controls, control }) => (controls || []).map((controlItem) => {
+const RenderModalBody = ({ controls, control }) => (controls || []).map((controlItem) => {
 	const { type, label: controlLabel, name } = controlItem || {};
 
-	if (!type) {
-		return null;
-	}
+	if (!type) return null;
+
 	const DynamicController = getElementController(type);
 
 	return (
@@ -25,12 +24,20 @@ const renderModalBody = ({ controls, control }) => (controls || []).map((control
 					name={name}
 				/>
 			</div>
-
 		</div>
 	);
 });
 
-function AddSquadTribeModal({ showModal, setShowModal, label = '', controls, control }) {
+function AddSquadTribeModal({
+	showModal,
+	setShowModal,
+	label = '',
+	controls,
+	control,
+	onClickSubmitButton = () => {},
+	loading,
+	handleSubmit,
+}) {
 	const title = `Add ${label}`;
 
 	return (
@@ -44,11 +51,17 @@ function AddSquadTribeModal({ showModal, setShowModal, label = '', controls, con
 				<Modal.Header title={title} />
 
 				<Modal.Body>
-					{renderModalBody({ controls, control })}
+					<RenderModalBody controls={controls} control={control} />
 				</Modal.Body>
 
 				<Modal.Footer>
-					<Button themeType="primary">Submit</Button>
+					<Button
+						themeType="primary"
+						onClick={handleSubmit(onClickSubmitButton)}
+						loading={loading}
+					>
+						Submit
+					</Button>
 				</Modal.Footer>
 			</Modal>
 		</div>
