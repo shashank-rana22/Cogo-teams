@@ -34,7 +34,8 @@
 
 .id_show {
 	display: flex;
-	gap: 4px;
+	align-items: center;
+	justify-content: space-between;
 }
 
 .id_color_data {

@@ -16,7 +16,8 @@
 
 .item {
 	display: flex;
-	gap: 24px;
+	justify-content: space-between;
+	width: 25%;
 }
 
 .value_data {
@@ -29,6 +30,7 @@
 }
 
 .percentage {
+	margin: 0 4px;
 	color: #29cc6a;
 }
 
@@ -40,7 +42,6 @@
 
 .profit_bar {
 	display: flex;
-	gap: 4px;
 	align-items: center;
 }
 
@@ -55,16 +56,16 @@
 }
 
 .amount {
+	margin-left: 2px;
 	font-weight: 600;
 }
 
 .flex_data {
 	display: flex;
-	gap: 4px;
+	margin: 0 0 8px;
 }
 
 .profit {
 	display: flex;
 	flex-direction: column;
-	gap: 16px;
 }
