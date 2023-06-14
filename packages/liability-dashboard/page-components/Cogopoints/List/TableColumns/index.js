@@ -95,6 +95,15 @@ function TableColumns({ currencyCode = '', activeStatsCard = '' }) {
 			conditions: ['liability_point_value'],
 		},
 		{
+			Header   : `One Time (${currencyCode})`,
+			accessor : (item = {}) => (
+				<div className={styles.earned_value}>
+					{item?.one_time_point_value || EARNED_VALUE}
+				</div>
+			),
+			conditions: ['liability_point_value'],
+		},
+		{
 			Header   : `Cogostore (${currencyCode})`,
 			accessor : (item = {}) => (
 				<div className={styles.earned_value}>

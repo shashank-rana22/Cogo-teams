@@ -3,6 +3,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 
+import Header from './Header';
 import styles from './styles.module.css';
 import TableColumns from './TableColumns';
 
@@ -19,9 +20,17 @@ function List({
 	setPagination = () => {},
 	currencyCode = '',
 	activeStatsCard = '',
+	setSelectOrganization = () => {},
+	selectOrganization = '',
 }) {
 	return (
 		<div className={styles.container}>
+			<Header
+				setSelectOrganization={setSelectOrganization}
+				selectOrganization={selectOrganization}
+				activeStatsCard={activeStatsCard}
+				setPagination={setPagination}
+			/>
 			{isEmpty(list) && !loading ? (
 				<figure className={styles.empty_state}>
 					<Image
