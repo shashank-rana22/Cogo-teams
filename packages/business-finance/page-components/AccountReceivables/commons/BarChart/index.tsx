@@ -2,7 +2,7 @@ import { BarDatum, ResponsiveBar } from '@cogoport/charts/bar';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
-const tooltTipStyle = {
+const TOOL_TIPS_STYLE = {
 	fontSize     : '10px',
 	background   : '#eee',
 	padding      : '5px',
@@ -42,7 +42,7 @@ function BarChart({
 	margin = {},
 	dsoResponse = false,
 }: BarchartProps) {
-	const axisPadding = {
+	const AXIS_PADDING = {
 		tickSize    : 0,
 		tickPadding : 12,
 		fill        : 'red',
@@ -58,7 +58,7 @@ function BarChart({
 				colors={dsoResponse ? ['#DDEBC0'] : ['#FFD555']}
 				layout="vertical"
 				enableGridY={!!dsoResponse}
-				axisLeft={axisPadding}
+				axisLeft={AXIS_PADDING}
 				padding={0.5}
 				maxValue="auto"
 				minValue="auto"
@@ -69,7 +69,7 @@ function BarChart({
 				innerPadding={0}
 				label=""
 				tooltip={({ label, value }) => (
-					<strong style={tooltTipStyle}>
+					<strong style={TOOL_TIPS_STYLE}>
 						{label?.split('-')[0]}
 						{' '}
 						:

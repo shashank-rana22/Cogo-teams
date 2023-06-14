@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useViewSelect from '../../hooks/useViewSelect';
-import { bookedColumn, column, monthData } from '../constant';
+import { bookedColumn, column, MONTH_DATA } from '../constant';
 import Footer from '../ShipmentView/Footer';
 
 import styles from './styles.module.css';
@@ -165,7 +165,7 @@ function ViewSelectedInvoice() {
 
 						<div className={styles.card_div} style={{ width: '140px' }}>
 							Month -
-							{monthData[month]}
+							{MONTH_DATA[month]}
 						</div>
 
 						{startDate &&	(

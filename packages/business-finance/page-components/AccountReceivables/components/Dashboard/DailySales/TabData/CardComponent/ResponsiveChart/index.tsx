@@ -4,7 +4,6 @@ import { Loader } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
-import getAmountInLakhCrK from '../../../../../../../commons/getAmountInLakhCrK';
 import EmptyState from '../../../../../../commons/EmptyStateDocs';
 
 import styles from './styles.module.css';
@@ -25,15 +24,15 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 
 	const { currency } = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode] || {};
 
-	const AmountData = [];
-	const CountData = [];
+	const AMOUNT_DATA = [];
+	const COUNT_DATA = [];
 
 	(data || []).forEach((item) => {
-		AmountData.push({
+		AMOUNT_DATA.push({
 			x : item.date,
 			y : item.Amount,
 		});
-		CountData.push({
+		COUNT_DATA.push({
 			x : item.date,
 			y : item.Count,
 		});
@@ -42,18 +41,18 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 	const finalData = [
 		{
 			id   : 'Amount',
-			data : AmountData,
+			data : AMOUNT_DATA,
 		},
 		{
 			id   : 'Count',
-			data : CountData,
+			data : COUNT_DATA,
 		},
 	];
 
 	const formatdata = showCount ? finalData : [
 		{
 			id   : 'Amount',
-			data : AmountData,
+			data : AMOUNT_DATA,
 		},
 	];
 
@@ -96,7 +95,14 @@ function ResponsiveChart({ data = [], loadingData, entityCode, showCount = true 
 						legend         : 'Amount',
 						legendOffset   : -84,
 						legendPosition : 'middle',
-						format         : (value) => getAmountInLakhCrK(value),
+						format         : (value) => formatAmount({
+							amount  :	value as any,
+							currency,
+							options : {
+								currencyDisplay : 'code',
+								style           : 'currency',
+							},
+						}),
 					}}
 					pointSize={5}
 					pointBorderWidth={2}

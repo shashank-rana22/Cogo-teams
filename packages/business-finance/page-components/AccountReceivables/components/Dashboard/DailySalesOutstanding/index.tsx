@@ -35,7 +35,7 @@ function DailySalesOutstanding({
 		graphView   : 'normalView',
 	});
 
-	const margin = {
+	const MARGIN = {
 		top    : 10,
 		right  : 0,
 		bottom : 30,
@@ -52,7 +52,7 @@ function DailySalesOutstanding({
 		);
 	}
 
-	const arrayMonths = [];
+	const ARRAY_MONTHS = [];
 
 	const d = new Date();
 
@@ -77,7 +77,7 @@ function DailySalesOutstanding({
 
 	(dailySalesOutstandingData || []).forEach((element) => {
 		if (newArray.includes(element?.month)) {
-			arrayMonths.push(element);
+			ARRAY_MONTHS.push(element);
 		}
 	});
 
@@ -153,7 +153,7 @@ function DailySalesOutstanding({
 				<div style={{ marginTop }}>
 					<div style={{ display: 'flex', justifyContent: 'space-evenly' }}>
 						{ params.quarterView === 'normalView' && params.graphView !== 'graphView' && (
-							(arrayMonths || []).map((item) => (
+							(ARRAY_MONTHS || []).map((item) => (
 								<div
 									key={item.month}
 									className={styles.price_container}
@@ -222,7 +222,7 @@ function DailySalesOutstanding({
 					<div className={styles.vertical_bar_graph}>
 						<BarChart
 							currencyType={dailySalesOutstandingData[0]?.currency || GLOBAL_CONSTANTS.currency_code.INR}
-							margin={margin}
+							margin={MARGIN}
 							data={dailySalesOutstandingData || []}
 							dsoResponse
 						/>

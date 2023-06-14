@@ -24,7 +24,7 @@ export function CardBody({ charge, type }: Props) {
 	};
 	const { serviceType, lineItems = [] } = charge || {};
 	const hidden = lineItems.length < 2 ? styles.hidden : '';
-	const borderColor = '#6CC077';
+	const BORDER_COLOR = '#6CC077';
 	function ToolTipContent(quotation, actual) {
 		return (
 			<div className={styles.content}>
@@ -47,7 +47,7 @@ export function CardBody({ charge, type }: Props) {
 			className={`${showFullDetails ? styles.card : styles.custompadding} ${
 				lineItems.length < 2 ? styles.padding : ''
 			}`}
-			style={{ '--bordercolor': borderColor } as React.CSSProperties}
+			style={{ '--bordercolor': BORDER_COLOR } as React.CSSProperties}
 		>
 			<div className={styles.layout}>
 				<div

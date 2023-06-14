@@ -9,6 +9,8 @@ import { SERVICE } from '../../../../../constants';
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
+const ZERO = 0;
+
 function PromocodeThumbnail({ list = [] }) {
 	const colors = [
 		'rgba(204, 197, 249, 0.8) rgba(195, 216, 254, 0.6)',
@@ -19,7 +21,7 @@ function PromocodeThumbnail({ list = [] }) {
 	const getCardColor = (index) => colors[index % colors.length];
 
 	// eslint-disable-next-line max-len
-	const defaultImage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg';
+	const DEFAULT_IMAGE = 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg';
 
 	return (
 		<div className={styles.thumbnail_container}>
@@ -34,28 +36,28 @@ function PromocodeThumbnail({ list = [] }) {
 
 						<img
 							className={styles.promo_image}
-							src={isEmpty(thumbnail_image) ? defaultImage : thumbnail_image}
+							src={isEmpty(thumbnail_image) ? DEFAULT_IMAGE : thumbnail_image}
 							alt="promotion"
 						/>
 
 						<div className={styles.promocode_description}>
 							<div className={styles.promodiscount}>
-								{promotion_discounts?.[0]?.unit !== 'percentage'
-						|| promotion_discounts?.[0]?.unit !== 'by_unit_percentage'
+								{promotion_discounts?.[ZERO]?.unit !== 'percentage'
+						|| promotion_discounts?.[ZERO]?.unit !== 'by_unit_percentage'
 									? `${formatAmount({
-										amount   :	promotion_discounts?.[0]?.value || 0,
-										currency :	promotion_discounts?.[0]?.amount_currency
+										amount   :	promotion_discounts?.[ZERO]?.value || ZERO,
+										currency :	promotion_discounts?.[ZERO]?.amount_currency
 										|| GLOBAL_CONSTANTS.currency_code.INR,
 										options: {
 											currencyDisplay : 'code',
 											style           : 'currency',
 										},
 									})}`
-									: `${promotion_discounts?.[0]?.value} %`}
+									: `${promotion_discounts?.[ZERO]?.value} %`}
 								{' '}
 								Off On
 								{' '}
-								{SERVICE[promotion_discounts?.[0]?.service_type
+								{SERVICE[promotion_discounts?.[ZERO]?.service_type
 								]}
 							</div>
 
@@ -79,7 +81,7 @@ function PromocodeThumbnail({ list = [] }) {
 						<div className={styles.holes_lower} />
 						<div className={styles.promo_code}>
 							<div className={styles.promocode_name}>
-								{codes?.[0]?.promocode}
+								{codes?.[ZERO]?.promocode}
 							</div>
 						</div>
 					</div>

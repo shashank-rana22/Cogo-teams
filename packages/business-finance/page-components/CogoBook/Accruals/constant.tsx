@@ -11,7 +11,7 @@ import { ColumnInterface } from './interface';
 import styles from './styles.module.css';
 import DeleteModal from './ViewSelectedInvoice/DeleteModal';
 
-export const monthData = {
+export const MONTH_DATA = {
 	1  : 'January',
 	2  : 'February',
 	3  : 'March',

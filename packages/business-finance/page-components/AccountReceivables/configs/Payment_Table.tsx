@@ -7,7 +7,7 @@ import { GenericObject } from '../commons/Interfaces';
 import SortHeader from './SortHeader';
 import styles from './styles.module.css';
 
-const invoiceStatus = {
+const INVOICE_STATUS = {
 	UNUTILIZED       : '#fcedbf',
 	UTILIZED         : '#a1f0ae',
 	PARTIAL_UTILIZED : '#b8debe',
@@ -132,7 +132,7 @@ const PaymentList = ({ paymentFilters, setPaymentFilters, setOrderBy, sortStyleD
 		Header   : 'Utilized status',
 		accessor : (row) => (
 			<div>
-				<Pill size="md" color={invoiceStatus[(getByKey(row, 'utilizationStatus') as string)]}>
+				<Pill size="md" color={INVOICE_STATUS[(getByKey(row, 'utilizationStatus') as string)]}>
 					{startCase(getByKey(row, 'utilizationStatus') as string)}
 				</Pill>
 			</div>

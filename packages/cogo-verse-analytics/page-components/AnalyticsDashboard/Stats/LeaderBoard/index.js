@@ -8,6 +8,10 @@ import { handleValues } from '../../../../utils/handleValues';
 
 import styles from './styles.module.css';
 
+const FOUR = 4;
+const ZERO = 0;
+const THREE = 3;
+
 function LeaderBoard(props = {}) {
 	const {
 		stats = {},
@@ -23,7 +27,7 @@ function LeaderBoard(props = {}) {
 				style           : 'currency',
 			},
 		});
-		return ((amount.substring(4)).split('.'))[0];
+		return ((amount.substring(FOUR)).split('.'))[ZERO];
 	};
 	return (
 		<div className={styles.user_leaderboard}>
@@ -33,7 +37,7 @@ function LeaderBoard(props = {}) {
 				<div className={styles.leaderboard_header}>Intent Leaderboard</div>
 				{' '}
 				<div
-					className={INTENT_LEADERBOARD.length > 3
+					className={INTENT_LEADERBOARD.length > THREE
 						? cl`${styles.leaderboard_content} 
                 			${styles.inner_shadow}`
 						: styles.leaderboard_content}
@@ -85,7 +89,7 @@ function LeaderBoard(props = {}) {
 								<div className={styles.user_status_num}>
 									{
 										!statsLoading
-											? handleValues(statsData[valueKey] || 0)
+											? handleValues(statsData[valueKey] || ZERO)
 											: (
 												<Placeholder
 													className={styles.placeholder_element}
