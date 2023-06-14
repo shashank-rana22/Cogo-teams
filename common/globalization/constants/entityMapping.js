@@ -16,7 +16,6 @@ const ENTITY_MAPPING = {
 		labels            : {
 			irn_label: 'IRN',
 		},
-		post_to_sage_allowed: true,
 	},
 	201: {
 		country_code      : 'NL',
@@ -28,7 +27,6 @@ const ENTITY_MAPPING = {
 		labels            : {
 			irn_label: 'IRN',
 		},
-		post_to_sage_allowed: true,
 	},
 	301: {
 		country_code      : 'IN',
@@ -40,7 +38,6 @@ const ENTITY_MAPPING = {
 		labels            : {
 			irn_label: 'IRN',
 		},
-		post_to_sage_allowed: true,
 	},
 	401: {
 		country_code      : 'SG',
@@ -52,7 +49,6 @@ const ENTITY_MAPPING = {
 		labels            : {
 			irn_label: 'IRN',
 		},
-		post_to_sage_allowed: true,
 	},
 	501: {
 		country_code      : 'VN',
