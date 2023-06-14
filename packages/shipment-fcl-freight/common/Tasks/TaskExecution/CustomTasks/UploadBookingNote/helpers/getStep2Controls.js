@@ -95,11 +95,10 @@ export const mainControls = ({ departureDate }) => [
 		showTimeSelect : true,
 		span           : 6,
 		rules          : {
-			required: { value: true, message: 'VGM Cut-off is required' },
-			validate: (v) =>
-				new Date(v).toDateString() === 'Invalid Date'
-					? 'VGM Cut-off is required'
-					: true,
+			required : { value: true, message: 'VGM Cut-off is required' },
+			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+				? 'VGM Cut-off is required'
+				: true),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -112,11 +111,10 @@ export const mainControls = ({ departureDate }) => [
 		showTimeSelect : true,
 		span           : 6,
 		rules          : {
-			required: { value: true, message: 'SI Cut-off is required' },
-			validate: (v) =>
-				new Date(v).toDateString() === 'Invalid Date'
-					? 'S/I Cut-off is required'
-					: true,
+			required : { value: true, message: 'SI Cut-off is required' },
+			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+				? 'S/I Cut-off is required'
+				: true),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -129,11 +127,10 @@ export const mainControls = ({ departureDate }) => [
 		showTimeSelect : true,
 		span           : 6,
 		rules          : {
-			required: { value: true, message: 'Document Cut-off is required' },
-			validate: (v) =>
-				new Date(v).toDateString() === 'Invalid Date'
-					? 'Document Cut-off is required'
-					: true,
+			required : { value: true, message: 'Document Cut-off is required' },
+			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+				? 'Document Cut-off is required'
+				: true),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -146,11 +143,10 @@ export const mainControls = ({ departureDate }) => [
 		showTimeSelect : true,
 		span           : 6,
 		rules          : {
-			required: { value: true, message: 'Gate-in Cut-off is required' },
-			validate: (v) =>
-				new Date(v).toDateString() === 'Invalid Date'
-					? 'Gate-in Cut-off is required'
-					: true,
+			required : { value: true, message: 'Gate-in Cut-off is required' },
+			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+				? 'Gate-in Cut-off is required'
+				: true),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -163,11 +159,10 @@ export const mainControls = ({ departureDate }) => [
 		showTimeSelect : true,
 		span           : 6,
 		rules          : {
-			required: { value: true, message: 'Booking Note Expiry is required' },
-			validate: (v) =>
-				new Date(v).toDateString() === 'Invalid Date'
-					? 'Booking Note Expiry is required'
-					: true,
+			required : { value: true, message: 'Booking Note Expiry is required' },
+			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+				? 'Booking Note Expiry is required'
+				: true),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
@@ -180,11 +175,10 @@ export const mainControls = ({ departureDate }) => [
 		showTimeSelect : true,
 		span           : 6,
 		rules          : {
-			required: { value: true, message: 'TR Cut-off is required' },
-			validate: (v) =>
-				new Date(v).toDateString() === 'Invalid Date'
-					? 'TR Cut-off is required'
-					: true,
+			required : { value: true, message: 'TR Cut-off is required' },
+			validate : (v) => (new Date(v).toDateString() === 'Invalid Date'
+				? 'TR Cut-off is required'
+				: true),
 		},
 		size                  : 'sm',
 		isPreviousDaysAllowed : true,
