@@ -22,7 +22,7 @@ function Terms({
 		return acc;
 	}, []);
 
-	const bankDetailObj = bankDetailsArray?.[0] || {};
+	const [bankDetailObj] = bankDetailsArray || [];
 
 	const {
 		bank_name = '',

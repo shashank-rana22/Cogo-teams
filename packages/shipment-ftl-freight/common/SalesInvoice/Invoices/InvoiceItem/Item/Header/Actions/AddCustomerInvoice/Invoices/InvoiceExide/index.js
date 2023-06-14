@@ -31,7 +31,9 @@ function InvoiceExide({
 		consignee_address = '',
 		consignee_gstin = '',
 	} = getOtherData({ customData });
-	const tradeParty = tradePartyData?.list?.[0] || {};
+
+	const [tradeParty] = tradePartyData?.list || [];
+
 	const { billing_address = {} } = invoice;
 	return (
 		<div style={{ fontFamily: 'Arial, sans-serif', fontSize: '12px', padding: '40px' }}>

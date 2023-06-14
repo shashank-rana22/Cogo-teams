@@ -12,7 +12,7 @@ function InvoiceVarun({
 	customData = {},
 	importerExporterId = '',
 }) {
-	const tradeParty = tradePartyData?.list?.[0] || {};
+	const [tradeParty] = tradePartyData?.list || [];
 
 	const bankDetails = (tradeParty?.documents || []).filter(
 		(item) => item?.document_type === 'bank_account_details',
@@ -28,7 +28,7 @@ function InvoiceVarun({
 		return acc;
 	}, []);
 
-	const bankDetailObj = bankDetailsArray?.[0] || {};
+	const [bankDetailObj] = bankDetailsArray || [];
 
 	const { billing_address = {} } = invoice;
 

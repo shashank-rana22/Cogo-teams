@@ -15,7 +15,9 @@ function InvoiceGujaratMilk({
 	importerExporterId = '',
 }) {
 	const { billing_address = {} } = invoice;
-	const tradeParty = tradePartyData?.list?.[0] || {};
+
+	const [tradeParty] = tradePartyData?.list || [];
+
 	const {
 		customer_name = '',
 		customer_address = '',

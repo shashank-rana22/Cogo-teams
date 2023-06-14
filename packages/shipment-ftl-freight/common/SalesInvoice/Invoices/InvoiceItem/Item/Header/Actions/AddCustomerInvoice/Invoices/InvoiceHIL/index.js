@@ -25,7 +25,8 @@ function InvoiceHIL({
 		invoice_date = '',
 		description_of_service = '',
 	} = getOtherData({ customData });
-	const tradeParty = tradePartyData?.list?.[0] || {};
+
+	const [tradeParty] = tradePartyData?.list || [];
 
 	const { billing_address = {} } = invoice;
 	return (

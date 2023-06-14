@@ -11,6 +11,7 @@ const ROW_HEADERS = [
 	'Discount',
 	'Taxable Value',
 ];
+const OFFSET_VALUE = 1;
 
 function TableData({ customData = {}, importerExporterId = '' }) {
 	const { lineItems = [], LINE_ITEMS_KEY_MAPPING = {} } = getLineItems({
@@ -78,7 +79,7 @@ function TableData({ customData = {}, importerExporterId = '' }) {
 				{lineItems.map((lineItem, index) => (
 					<tr key={lineItem?.id} style={{ border: '2px solid black' }}>
 						<td style={{ padding: '1px', border: '2px solid black' }}>
-							{index + 1}
+							{index + OFFSET_VALUE}
 						</td>
 						{Object.keys(LINE_ITEMS_KEY_MAPPING).map((key) => (
 							<td

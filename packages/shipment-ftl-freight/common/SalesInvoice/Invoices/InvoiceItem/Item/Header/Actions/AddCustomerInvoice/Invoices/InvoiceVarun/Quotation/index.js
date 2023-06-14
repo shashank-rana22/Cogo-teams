@@ -21,6 +21,7 @@ const TABLE_HEADER = [
 	'Others',
 	'VALUE OF SUPPLY',
 ];
+const OFFSET_VALUE = 1;
 
 function Quotation({ customData = {} }) {
 	const { lineItems = [], LINE_ITEMS_KEYS_MAPPING = {} } = getLineItems({
@@ -59,7 +60,7 @@ function Quotation({ customData = {} }) {
 			{lineItems.map((lineItem, index) => (
 				<tr key={lineItem?.id} style={{ border: '2px solid black' }}>
 					<td style={{ padding: '4px', border: '2px solid black' }}>
-						{index + 1}
+						{index + OFFSET_VALUE}
 					</td>
 					{Object.keys(LINE_ITEMS_KEYS_MAPPING).map((key) => (
 						<td style={{ padding: '4px', border: '2px solid black' }} key={key}>

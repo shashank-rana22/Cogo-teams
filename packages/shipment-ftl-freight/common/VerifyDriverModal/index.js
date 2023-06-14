@@ -14,8 +14,10 @@ const SkeletonGroup = ['A', 'B', 'C'].map((item) => (
 	<div key={item} height="100px" width="100%" />
 ));
 
+const FIRST_INDEX = 0;
+
 function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
-	const organizationId = driverList[0]?.service_provider_id;
+	const organizationId = driverList[FIRST_INDEX]?.service_provider_id;
 	const [showInternal, setShowInternalInternal] = useState(false);
 	const [showInternalUploadDoc, setShowInternalInternalUploadDoc] = useState(false);
 	const [uploadProof, setUploadProof] = useState(null);

@@ -14,6 +14,8 @@ const SkeletonGroup = ['A', 'B', 'C'].map((item) => (
 	<div key={item} height="100px" width="100%" />
 ));
 
+const FIRST_INDEX = 0;
+
 function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 	const [showInternal, setShowInternal] = useState(false);
 	const [showUploadDoc, setShowUploadDoc] = useState(false);
@@ -27,7 +29,7 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 		[truckList],
 	);
 
-	const organizationId = truckList[0]?.service_provider_id;
+	const organizationId = truckList[FIRST_INDEX]?.service_provider_id;
 	const { data: verifiedTruckList, getData: getVerifiedTruckList } = useListOrganizationAssets({
 		id: organizationId,
 		truckNumbers,

@@ -4,6 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { getAnnexureData } from '../getLineItems';
 import { getAnnexureTotalData } from '../getOtherData';
 
+const OFFSET_VALUE = 1;
+
 function Annexure({ customData = {}, invoice_no = '', invoice_date = '' }) {
 	const { ANNEXURE_KEY_MAPPINGS = {}, annexureItems = [] } = getAnnexureData({
 		customData,
@@ -64,7 +66,7 @@ function Annexure({ customData = {}, invoice_no = '', invoice_date = '' }) {
 			{annexureItems.map((lineItem, index) => (
 				<tr key={lineItem?.id} style={{ border: '2px solid black' }}>
 					<td style={{ padding: '1px', border: '2px solid black' }}>
-						{index + 1}
+						{index + OFFSET_VALUE}
 					</td>
 					{Object.keys(ANNEXURE_KEY_MAPPINGS).map((key) => (
 						<td

@@ -15,7 +15,8 @@ function InvoiceIVL({
 	customData = {},
 	importerExporterId = '',
 }) {
-	const tradeParty = tradePartyData?.list?.[0] || {};
+	const [tradeParty] = tradePartyData?.list || [];
+
 	const { billing_address = {} } = invoice;
 	const { lineItems, LINE_ITEMS_KEYS_MAPPING } = getLineItems({ customData });
 	const {
