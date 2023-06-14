@@ -1,11 +1,13 @@
-import { Tabs, TabPanel, Button, Modal, Checkbox, Textarea } from '@cogoport/components';
+import { Tabs, TabPanel, Button } from '@cogoport/components';
+import { IcCFtick } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useUpdateRatesPreferences from '../../../hooks/useUpdateRatesPreferences';
 
 import CancellationModal from './CancellationModal';
-import PreviewSelectedCards from './PreviewSelectedCards';
+import PreviewModal from './PreviewModal';
+import ReasonModal from './ReasonModal';
 import SingleService from './SingleService';
 import styles from './styles.module.css';
 
@@ -15,7 +17,6 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 	const [showCancelModal, setshowCancelModal] = useState(false);
 	const [inventory, setInventory] = useState([]);
 	const [activeTab, setActiveTab] = useState(tabKeys[0]);
-	const [previewActiveTab, setPreviewActiveTab] = useState(tabKeys[0]);
 	const [modalStep, setModalStep] = useState(0);
 	const [reason, setReason] = useState(null);
 	const [othertext, setOthertext] = useState(null);
@@ -28,13 +29,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 		othertext,
 		sellRateDetails,
 	});
-	const handleOnChange = (val) => {
-		if (reason === val) {
-			setReason(null);
-		} else {
-			setReason(val);
-		}
-	};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_select_container}>
@@ -64,7 +59,12 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 				onChange={setActiveTab}
 			>
 				{tabKeys.map((singleTab) => (
-					<TabPanel name={singleTab} title={startCase(singleTab.replace('_service', ''))} key={singleTab}>
+					<TabPanel
+						name={singleTab}
+						title={startCase(singleTab.replace('_service', ''))}
+						key={singleTab}
+						icon={groupedShowServicesData?.[singleTab]?.[0]?.is_preference_set ? <IcCFtick /> : null}
+					>
 						<SingleService
 							groupedServicesData={groupedShowServicesData[activeTab]}
 							supplierPayload={supplierPayload}
@@ -88,88 +88,27 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 			) : null}
 			{modalStep === 1
 				? (
-					<Modal size="xl" show={modalStep === 1} onClose={() => setModalStep(0)} placement="center">
-						<Modal.Header title="PREVIEW" />
-						<Modal.Body>
-							<Tabs
-								activeTab={previewActiveTab}
-								themeType="secondary"
-								onChange={setPreviewActiveTab}
-							>
-								{tabKeys.map((singleTab) => (
-									<TabPanel
-										name={singleTab}
-										title={startCase(singleTab.replace('_service', ''))}
-										key={singleTab}
-									>
-										<PreviewSelectedCards
-											groupedServicesData={groupedShowServicesData[previewActiveTab]}
-											supplierPayload={supplierPayload}
-											price={priceData[startCase(singleTab)]}
-											shipmentType={shipmentData?.shipment_type}
-										/>
-									</TabPanel>
-								))}
-							</Tabs>
-						</Modal.Body>
-						<Modal.Footer>
-							<Button themeType="accent" onClick={() => setModalStep(2)}>Save Preference</Button>
-						</Modal.Footer>
-					</Modal>
+					<PreviewModal
+						modalStep={modalStep}
+						setModalStep={setModalStep}
+						tabKeys={tabKeys}
+						groupedShowServicesData={groupedShowServicesData}
+						supplierPayload={supplierPayload}
+						priceData={priceData}
+						shipmentData={shipmentData}
+					/>
 				) : null}
 			{modalStep === 2
 				? (
-					<Modal size="lg" show={modalStep === 2} onClose={() => setModalStep(0)} placement="center">
-						<Modal.Header title="PREVIEW" />
-						<Modal.Body>
-							<div className={styles.modal_text}>
-								*You have used Revenue Desk wallet to apply discount.
-								Please provide a reason for approving this booking at this rate.
-							</div>
-							<Checkbox
-								label="To improve customer relations."
-								value="to_improve_customer_relations"
-								onChange={() => handleOnChange('to_improve_customer_relations')}
-								checked={reason === 'to_improve_customer_relations'}
-							/>
-							<Checkbox
-								label="To improve supplier relations"
-								value="to_improve_supplier_relations"
-								onChange={() => handleOnChange('to_improve_supplier_relations')}
-								checked={reason === 'to_improve_supplier_relations'}
-							/>
-							<Checkbox
-								label="To honor platform rates."
-								value="to_honor_platform_rates"
-								onChange={() => handleOnChange('to_honor_platform_rates')}
-								checked={reason === 'to_honor_platform_rates'}
-							/>
-							<Checkbox
-								label="Other"
-								value="other"
-								onChange={() => handleOnChange('other')}
-								checked={reason === 'other'}
-							/>
-							{reason === 'other' && (
-								<div style={{ padding: '0 10px' }}>
-									<Textarea
-										name="a4"
-										size="sm"
-										placeholder="Other Reason"
-										value={othertext}
-										onChange={(val) => setOthertext(val)}
-									/>
-
-								</div>
-							)}
-						</Modal.Body>
-						<Modal.Footer>
-							<div className={styles.btn_container}>
-								<Button themeType="secondary" onClick={() => setModalStep(1)}>Back</Button>
-								<Button themeType="accent" onClick={() => updateTrigger()}>Submit</Button>
-							</div>
-						</Modal.Footer>
-					</Modal>
+					<ReasonModal
+						modalStep={modalStep}
+						setModalStep={setModalStep}
+						updateTrigger={updateTrigger}
+						reason={reason}
+						setReason={setReason}
+						othertext={othertext}
+						setOthertext={setOthertext}
+					/>
 				) : null}
 		</div>
 

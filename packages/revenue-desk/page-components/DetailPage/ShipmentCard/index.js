@@ -1,4 +1,4 @@
-import { Pill, Placeholder } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import { IcMTimer } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
@@ -57,9 +57,7 @@ function ShipmentCard({ itemData, priceData }) {
 					<div className={styles.sell_price_text}>
 						Sell Price :
 						<span style={{ fontWeight: '700', color: '#221F20' }}>
-							{priceData === undefined
-								? <Placeholder height="20px" width="100px" margin="0px 0px 20px 0px" />
-								: priceData?.sell_price}
+							{priceData?.sell_price}
 						</span>
 					</div>
 					<div className={styles.kamdiscount_text}>

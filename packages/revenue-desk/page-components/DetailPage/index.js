@@ -1,4 +1,4 @@
-import { Button, Modal, Pill, TabPanel, Tabs } from '@cogoport/components';
+import { Pill, TabPanel, Tabs } from '@cogoport/components';
 import { IcCCogoassured, IcMArrowBack, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -8,18 +8,15 @@ import serviceLabelMapping from '../../helper/serviceLabelMapping';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
 
 import LastShipmentDetails from './LastShipmentDetails';
-import POCDetails from './POCDetails';
+import PocSopModal from './PocSopModal';
 import QuotationDetails from './QuotationDetails';
 import ServiceWiseDetails from './ServiceWiseDetails';
 import ShipmentCard from './ShipmentCard';
-import SopRevenueDesk from './SopRevenueDesk';
 import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
 
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 	const [showDetail, setShowDetail] = useState(true);
-	const [showPocSop, setShowPocSop] = useState(false);
-	const [activePocTab, setActivePocTab] = useState('poc');
 	const [activeTabPanel, setActiveTabPanel] = useState('view_quotation');
 	const [priceData, setPriceData] = useState({});
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
@@ -104,7 +101,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 						</div>
 					</div>
 					<div>
-						<Button size="md" themeType="secondary" onClick={() => setShowPocSop(true)}>POC & SOP</Button>
+						<PocSopModal itemData={itemData} />
 					</div>
 				</div>
 
@@ -219,23 +216,6 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 						/>
 					)}
 			</div>
-			<Modal size="xl" show={showPocSop === true} onClose={() => setShowPocSop(false)} placement="center">
-				<Modal.Body>
-					<Tabs
-						activeTab={activePocTab}
-						themeType="primary"
-						fullWidth
-						onChange={setActivePocTab}
-					>
-						<TabPanel name="poc" title="POC">
-							<div><POCDetails shipmentData={itemData} /></div>
-						</TabPanel>
-						<TabPanel name="sop" title="SOP">
-							<div><SopRevenueDesk data={itemData} /></div>
-						</TabPanel>
-					</Tabs>
-				</Modal.Body>
-			</Modal>
 
 		</div>
 	);
