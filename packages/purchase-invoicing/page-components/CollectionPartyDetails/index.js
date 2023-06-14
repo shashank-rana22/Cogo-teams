@@ -129,7 +129,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 					<span className={styles.spankey}>Services :</span>
 					<ToolTipWrapper
 						text={services}
-						maxlength={SERVICE_COUNT}
+						maxlength={SERVICE_WRAPPER_LAST_INDEX}
 						render
 						content={(
 							<>

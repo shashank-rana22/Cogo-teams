@@ -14,6 +14,7 @@ import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
 
 const INCREMENT_IN_COUNT_BY_FOR_POST_REVIEW_STATUS = 1;
+const START_COUNT = 0;
 
 function Invoices({
 	invoiceData = {},
@@ -32,7 +33,7 @@ function Invoices({
 		(item) => item?.status,
 	);
 
-	let count = INITIAL_STATE;
+	let count = START_COUNT;
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
 			count += INCREMENT_IN_COUNT_BY_FOR_POST_REVIEW_STATUS;
@@ -74,7 +75,7 @@ function Invoices({
 						invoiceData={invoiceData}
 						invoicesList={invoicesList}
 						isIRNGenerated={isIRNGenerated}
-						org_outstanding={OUTSTANDING_BY_REG_NUM[item]}
+						org_outstanding={OUTSTANDING_BY_REG_NUM?.[item]}
 						salesInvoicesRefetch={salesInvoicesRefetch}
 						refetchCN={cnRefetch}
 					/>
