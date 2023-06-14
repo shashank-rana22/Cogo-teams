@@ -7195,6 +7195,18 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_pnl_dashboard_job_closure_details',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_shipment_statistics',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_monthly_trends',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_cogo_entities',
 			access_type  : 'private',
 			service_name : 'partner',
