@@ -66,11 +66,6 @@ function SingleService({
 	const currentFormatedrates = getFormatedRates('current', ratesData?.flashed_rates, singleServiceData);
 	const systemFormatedRates = getSystemFormatedRates(ratesData?.system_rates, singleServiceData);
 
-	useEffect(() => {
-		setRateOptions({ ...rateOptions, [singleServiceData?.id]: [...currentFormatedrates, ...systemFormatedRates] });
-	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [JSON.stringify(ratesData)]);
-
 	const singleServiceSellRateDetails = getSellRateDetailPayload({
 		currentFormatedrates,
 		systemFormatedRates,
@@ -78,7 +73,7 @@ function SingleService({
 		sellRates,
 	});
 	useEffect(() => {
-		setSellRateDetails({ ...sellRateDetails, [singleServiceData?.id]: [singleServiceSellRateDetails] });
+		setSellRateDetails({ ...sellRateDetails, [singleServiceData?.id]: singleServiceSellRateDetails });
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(singleServiceSellRateDetails)]);
 	const rateCardObj = [
