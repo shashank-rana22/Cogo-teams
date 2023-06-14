@@ -167,7 +167,6 @@ function ShipmentDetailsCard({
 
 	return (
 		<div>
-
 			{showLineItem ? (
 				<LineItemCard
 					lineItems={lineItems}
@@ -781,7 +780,6 @@ function ShipmentDetailsCard({
 											)}
 
 										</div>
-
 									</div>
 								)}
 							</>
