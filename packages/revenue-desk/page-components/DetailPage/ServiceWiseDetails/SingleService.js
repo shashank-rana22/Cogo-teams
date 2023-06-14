@@ -86,48 +86,54 @@ function SingleService({
 	];
 	return (
 		<div>
+
 			<div style={{ margin: '16px 0' }}>
-				<Select
-					options={options}
-					value={singleServiceData}
-					onChange={(e) => { setSingleServiceData(e); }}
-				/>
+				{options.length > 2 && (
+					<Select
+						options={options}
+						value={singleServiceData}
+						onChange={(e) => { setSingleServiceData(e); }}
+					/>
+				)}
 			</div>
 
 			<SingleServiceCard serviceData={singleServiceData} price={price} />
-
-			{(supplierPayload?.[singleServiceData?.id] || []).length
-				? (
-					<SelectedRatesCard
-						prefrences={supplierPayload?.[singleServiceData?.id]}
-						price={price}
-						shipmentType={shipmentType}
-						setSellRates={setSellRates}
-						sellRates={sellRates}
+			{singleServiceData?.is_preference_set ? <>Pref Set</> : (
+				<>
+					{(supplierPayload?.[singleServiceData?.id] || []).length
+						? (
+							<SelectedRatesCard
+								prefrences={supplierPayload?.[singleServiceData?.id]}
+								price={price}
+								shipmentType={shipmentType}
+								setSellRates={setSellRates}
+								sellRates={sellRates}
+							/>
+						) : null}
+					<ExistingInventory
+						docs={ratesData?.eligible_booking_document?.docs}
+						loading={ratesLoading}
+						prefrences={inventory}
+						setPrefrences={setInventory}
+						serviceId={singleServiceData?.id}
 					/>
-				) : null}
-			<ExistingInventory
-				docs={ratesData?.eligible_booking_document?.docs}
-				loading={ratesLoading}
-				prefrences={inventory}
-				setPrefrences={setInventory}
-				serviceId={singleServiceData?.id}
-			/>
-			{rateCardObj.map((item) => (
-				<RatesCard
-					type={item?.type}
-					ratesData={item?.data}
-					key={item}
-					prefrences={supplierPayload}
-					setPrefrences={setSupplierPayload}
-					serviceId={singleServiceData?.id}
-					shipmentType={shipmentType}
-					setSellRates={setSellRates}
-					sellRates={sellRates}
-					price={price}
-					prefrence_key={item?.prefrence_key}
-				/>
-			))}
+					{rateCardObj.map((item) => (
+						<RatesCard
+							type={item?.type}
+							ratesData={item?.data}
+							key={item}
+							prefrences={supplierPayload}
+							setPrefrences={setSupplierPayload}
+							serviceId={singleServiceData?.id}
+							shipmentType={shipmentType}
+							setSellRates={setSellRates}
+							sellRates={sellRates}
+							price={price}
+							prefrence_key={item?.prefrence_key}
+						/>
+					))}
+				</>
+			)}
 		</div>
 
 	);
