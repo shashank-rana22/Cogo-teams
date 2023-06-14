@@ -73,8 +73,8 @@ const useAccountCollection = ({ entityType, currencyType }) => {
 					query        : query || undefined,
 					entityType   : entityType || undefined,
 					currencyType : currencyType || undefined,
-					sortBy,
-					sortType,
+					sortBy       : sortBy || undefined,
+					sortType     : sortBy ? sortType : undefined,
 				},
 			});
 		} catch (error) {

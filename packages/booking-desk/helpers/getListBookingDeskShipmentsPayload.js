@@ -1,10 +1,30 @@
-import TABS_CONFIG from '../config/TABS_CONFIG.json';
-import FCL from '../config/tabSpecificPayload/FCL.json';
-import FCL_CFS from '../config/tabSpecificPayload/FCL_CFS.json';
-import FCL_Local from '../config/tabSpecificPayload/FCL_LOCAL.json';
-import LCL from '../config/tabSpecificPayload/LCL.json';
+import setDateHours from '@cogoport/core/helpers/setDateHours';
 
-const shipmentStates = {
+import NUMERICAL_VALUES from '../config/NUMERICAL_VALUES.json';
+import TABS_CONFIG from '../config/TABS_CONFIG';
+import FCL_CFS from '../config/tabSpecificPayload/FCL_CFS.json';
+import FCL_CUSTOM from '../config/tabSpecificPayload/FCL_CUSTOM.json';
+import FCL_EXPORT from '../config/tabSpecificPayload/FCL_EXPORT.json';
+import FCL_IMPORT from '../config/tabSpecificPayload/FCL_IMPORT.json';
+import FCL_LOCAL from '../config/tabSpecificPayload/FCL_LOCAL.json';
+import LCL_EXPORT from '../config/tabSpecificPayload/LCL_EXPORT.json';
+import LCL_IMPORT from '../config/tabSpecificPayload/LCL_IMPORT.json';
+
+const timezoneOffset = new Date().getTimezoneOffset()
+	* NUMERICAL_VALUES.SECONDS_IN_ONE_MINUTE
+	* NUMERICAL_VALUES.MILLISECONDS_IN_ONE_SECOND;
+
+const getPayloadDate = (daysLater = '') => {
+	let daysLaterDate = new Date();
+
+	daysLaterDate.setDate(daysLaterDate.getDate() + NUMERICAL_VALUES.DAYS_LATER[daysLater]);
+	daysLaterDate.setTime(daysLaterDate.getTime() - timezoneOffset);
+	daysLaterDate = setDateHours({ date: daysLaterDate, time: '23:59:59:999' });
+
+	return daysLaterDate;
+};
+
+const SHIPMENT_STATES = {
 	in_progress: [
 		'shipment_received',
 		'confirmed_by_importer_exporter',
@@ -12,55 +32,37 @@ const shipmentStates = {
 	],
 	cancelled: ['cancelled'],
 };
-shipmentStates.completed = [...shipmentStates.in_progress, 'completed'];
 
-const shipmentSpecificPayload = {
-	fcl_freight       : FCL,
-	fcl_freight_local : FCL_Local,
-	lcl_freight       : LCL,
-	fcl_cfs           : FCL_CFS,
+const TRADE_TYPES = ['import', 'export'];
+
+SHIPMENT_STATES.completed = [...SHIPMENT_STATES.in_progress, 'completed'];
+
+const SHIPMENT_SPECIFIC_PAYLOAD = {
+	fcl_freight_export : FCL_EXPORT,
+	fcl_freight_import : FCL_IMPORT,
+	fcl_freight_local  : FCL_LOCAL,
+	fcl_freight_cfs    : FCL_CFS,
+	fcl_freight_custom : FCL_CUSTOM,
+	lcl_freight_export : LCL_EXPORT,
+	lcl_freight_import : LCL_IMPORT,
 };
-
-const timezoneOffset = new Date().getTimezoneOffset() * 60 * 1000;
 
 export default function getListBookingDeskShipmentsPayload({
 	filters = {},
-	activeTab = '',
+	tabState = {},
 	selected_agent_id = '',
 }) {
-	const { isCriticalOn, page, q, shipment_type, ...restFilters } = filters;
+	const { isCriticalOn, page, q, ...restFilters } = filters;
+	const { stepperTab, segmentedTab, activeTab } = tabState;
 
-	const tabSpecificPayload = shipmentSpecificPayload[shipment_type][activeTab];
-	const otherFilters = tabSpecificPayload.other || {};
-	const combinedTradeTypeSpecific = { task_attributes: [] };
-
-	let payloadKey = [];
-	if (filters.trade_type) {
-		payloadKey.push(filters.trade_type, 'common');
-	} else {
-		payloadKey = ['import', 'common'];
-	}
-
-	payloadKey.forEach((key) => {
-		if (key in tabSpecificPayload) {
-			combinedTradeTypeSpecific.task_attributes = [
-				...combinedTradeTypeSpecific.task_attributes,
-				...(tabSpecificPayload[key]?.task_attributes || {}),
-			];
-		}
-	});
-
-	const tabs = TABS_CONFIG[shipment_type];
+	const { tabs } = TABS_CONFIG[stepperTab].segmented_tabs[segmentedTab] || {};
 
 	const isCriticalVisible = tabs.find((tab) => tab.name === activeTab).isCriticalVisible || false;
 
-	const threeDaysLater = new Date();
-	threeDaysLater.setDate(threeDaysLater.getDate() + 3);
-	threeDaysLater.setTime(threeDaysLater.getTime() - timezoneOffset);
+	const tabSpecificPayload = (SHIPMENT_SPECIFIC_PAYLOAD[`${stepperTab}_${segmentedTab}`] || {})[activeTab] || {};
 
-	const oneDayLater = new Date();
-	oneDayLater.setDate(oneDayLater.getDate() + 1);
-	oneDayLater.setHours(23, 59, 59, 999);
+	const oneDayLater = getPayloadDate('ONE_DAY_LATER');
+	const threeDaysLater = getPayloadDate('THREE_DAYS_LATER');
 
 	const criticalPayload = activeTab === 'container_pick_up'
 		? { bn_expiry_less_than: oneDayLater }
@@ -68,15 +70,13 @@ export default function getListBookingDeskShipmentsPayload({
 
 	const payload = {
 		filters: {
-			state: shipmentStates[activeTab] || shipmentStates.in_progress,
-			...(combinedTradeTypeSpecific || {}),
-			...(otherFilters || {}),
-			...(selected_agent_id && { stakeholder_id: selected_agent_id }),
-			...(isCriticalVisible
-				&& isCriticalOn
-				? criticalPayload : {}),
-			...(q && { q }),
 			...restFilters,
+			state: SHIPMENT_STATES[activeTab] || SHIPMENT_STATES.in_progress,
+			...tabSpecificPayload,
+			...(selected_agent_id && { stakeholder_id: selected_agent_id }),
+			...(isCriticalVisible && isCriticalOn ? criticalPayload : {}),
+			...(q && { q }),
+			...(TRADE_TYPES.includes(segmentedTab) && { trade_type: segmentedTab }),
 		},
 		page,
 		additional_methods : ['pagination'],

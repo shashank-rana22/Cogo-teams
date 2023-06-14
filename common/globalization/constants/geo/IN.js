@@ -15,7 +15,7 @@ export default {
 		amount: {
 			scope: {
 				admin: {
-					locale: 'en-US',
+					locale: 'en-IN',
 				},
 			},
 			options: {},
