@@ -119,13 +119,15 @@
 .bold_data {
 	font-weight: 600;
 }
+
 .values {
 	display: flex;
 }
 
-.advanced_amount{
-	margin-bottom: 8px;
+.advanced_amount {
 	display: flex;
+	margin-bottom: 8px;
+
 }
 
 .text_decoration {
