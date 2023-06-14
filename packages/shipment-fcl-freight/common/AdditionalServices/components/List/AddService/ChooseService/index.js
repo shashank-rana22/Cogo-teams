@@ -1,5 +1,6 @@
 import { Pill, Placeholder } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
@@ -9,7 +10,6 @@ import ServicesList from './ServicesList';
 import styles from './styles.module.css';
 import tableFields from './tableFields';
 
-const ITEM_TAGS_FIRST = 0;
 function ChooseService({
 	setAddRate,
 	isSeller,
@@ -25,7 +25,7 @@ function ChooseService({
 	const tagDisplay = (item) => (
 		<div>
 			{item?.tags ? (
-				<Pill className="primary">{startCase(item?.tags?.[ITEM_TAGS_FIRST])}</Pill>
+				<Pill className="primary">{startCase(item?.tags?.[GLOBAL_CONSTANTS.zeroth_index])}</Pill>
 			) : null}
 		</div>
 	);

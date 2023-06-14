@@ -4,7 +4,7 @@ import { useEffect, useState, useCallback } from 'react';
 import toastApiError from '../utils/toastApiError';
 
 const VALUE_KEY = 'id';
-const VALUE_KEY_INDEX_GREATER_THAN = 0;
+const VALUE_KEY_INDEX_GREATER_THAN_FOR_SELECTED_MAILS = 0;
 
 const SELECTED_OPTION_INDEX_GREATER_THAN = -1;
 
@@ -63,14 +63,14 @@ const useGetMails = ({
 		} else if (index > SELECTED_OPTION_INDEX_GREATER_THAN) {
 			const newVal = values.filter((item) => item !== selectedOption);
 			const selectedOptionList = options.filter(
-				(item) => newVal.indexOf(item[VALUE_KEY]) >= VALUE_KEY_INDEX_GREATER_THAN,
+				(item) => newVal.indexOf(item[VALUE_KEY]) >= VALUE_KEY_INDEX_GREATER_THAN_FOR_SELECTED_MAILS,
 			);
 			onChange(newVal, selectedOptionList);
 			setSelectedMails(selectedOptionList);
 		} else {
 			const newVal = [...(values || []), selectedOption];
 			const selectedOptionList = options.filter(
-				(item) => newVal.indexOf(item[VALUE_KEY]) >= VALUE_KEY_INDEX_GREATER_THAN,
+				(item) => newVal.indexOf(item[VALUE_KEY]) >= VALUE_KEY_INDEX_GREATER_THAN_FOR_SELECTED_MAILS,
 			);
 			onChange(newVal, selectedOptionList);
 			setSelectedMails(selectedOptionList);

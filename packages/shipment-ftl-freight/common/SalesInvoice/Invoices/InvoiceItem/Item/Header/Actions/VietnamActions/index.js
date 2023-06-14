@@ -25,8 +25,6 @@ const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: fal
 
 const INVOICE_SERAIL_ID_LESS_THAN = 8;
 const DEFAULT_COUNT = 0;
-const EMPTY_ARRAY_LENGTH = 0;
-const INVOICE_SERIAL_FIRST_CHAR = 0;
 
 const DISABLE_STATUS = ['reviewed', 'approved'];
 const REVIEW_STATUS = ['reviewed', 'approved', 'revoked'];
@@ -86,7 +84,7 @@ function Actions({
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice.serial_id.toString() || '';
-	const firstChar = invoice_serial_id[INVOICE_SERIAL_FIRST_CHAR];
+	const firstChar = invoice_serial_id[GLOBAL_CONSTANTS.zeroth_index];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < INVOICE_SERAIL_ID_LESS_THAN;
 
@@ -220,7 +218,7 @@ function Actions({
 						</Tooltip>
 					</div>
 
-					{!disableAction || invoice.exchange_rate_document?.length > EMPTY_ARRAY_LENGTH ? (
+					{!disableAction || invoice.exchange_rate_document?.length ? (
 						<Popover
 							interactive
 							placement="bottom"

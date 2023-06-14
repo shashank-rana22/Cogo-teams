@@ -21,7 +21,6 @@ const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: fals
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 
 const INVOICE_SERIAL_ID_LESS_THAN = 8;
-const INVOICE_SERIAL_FIRST_CHAR = 0;
 
 function Actions({
 	invoice = {},
@@ -53,7 +52,7 @@ function Actions({
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
-	const firstChar = invoice_serial_id[INVOICE_SERIAL_FIRST_CHAR];
+	const firstChar = invoice_serial_id[GLOBAL_CONSTANTS.zeroth_index];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < INVOICE_SERIAL_ID_LESS_THAN;
 

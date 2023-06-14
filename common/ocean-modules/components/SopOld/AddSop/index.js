@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { RadioGroupController, useForm, MultiselectController, InputController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState, useEffect } from 'react';
 
 import useAddSopData from '../../../hooks/useAddSopData';
@@ -14,9 +15,6 @@ const SOP_TYPE_OPTIONS = [
 	{ label: 'For Booking Party', value: 'for_booking_party' },
 ];
 
-const INSTRUCTIONS_FIRST = 0;
-const SOP_TYPE_FIRST = 0;
-
 function AddSop({
 	setSopAddForm = () => {},
 	setReload = () => {},
@@ -25,7 +23,7 @@ function AddSop({
 	primary_service,
 	shipment_data,
 }) {
-	const [sopType, setSopType] = useState(SOP_TYPE_OPTIONS[SOP_TYPE_FIRST]?.value);
+	const [sopType, setSopType] = useState(SOP_TYPE_OPTIONS[GLOBAL_CONSTANTS.zeroth_index]?.value);
 	const [formHeading, setFormHeading] = useState('');
 	const [errors, setErrors] = useState({});
 	const [hasData, sethasData] = useState(false);
@@ -61,7 +59,8 @@ function AddSop({
 		const { instruction_items = {}, heading = {}, conditions = {} } = formValues;
 		let hasIntructions = false;
 		if (instruction_items.length) {
-			if (instruction_items[INSTRUCTIONS_FIRST].instruction || instruction_items[INSTRUCTIONS_FIRST].file) {
+			if (instruction_items[GLOBAL_CONSTANTS.zeroth_index].instruction
+				|| instruction_items[GLOBAL_CONSTANTS.zeroth_index].file) {
 				hasIntructions = true;
 			}
 		}

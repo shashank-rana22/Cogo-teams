@@ -2,8 +2,6 @@ import { Toast } from '@cogoport/components';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
-const UPDATA_DATA_EMPTY_LENGTH = 0;
-
 const useUpdateShipmentContainerDetails = ({
 	refetch = () => {},
 	successMessage = 'Updated Successfully!',
@@ -14,7 +12,7 @@ const useUpdateShipmentContainerDetails = ({
 	});
 
 	const apiTrigger = async (update_data) => {
-		if (update_data?.length !== UPDATA_DATA_EMPTY_LENGTH) {
+		if (update_data?.length) {
 			try {
 				await trigger({ data: { update_data } });
 

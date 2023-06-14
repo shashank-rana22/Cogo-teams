@@ -1,9 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import Details from './Details';
 import DocumentForm from './DocumentForm';
-
-const DOCUMENT_FIRST = 0;
 
 function Document({
 	data = [],
@@ -12,7 +11,7 @@ function Document({
 	auditsTrigger = () => {},
 	primary_service = {},
 }) {
-	const { sop_detail = {}, id:instruction_id } = data[DOCUMENT_FIRST] || {};
+	const { sop_detail = {}, id:instruction_id } = data[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const [showForm, setShowForm] = useState(false);
 

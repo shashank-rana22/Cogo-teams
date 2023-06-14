@@ -1,4 +1,5 @@
 import { RadioGroup } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useState } from 'react';
 
 import InvoicingParties from './InvoicingParties';
@@ -14,14 +15,12 @@ const BOOKING_OPTIONS = [
 	},
 ];
 
-const BOOKING_OPTIONS_FIRST = 0;
-
 function AddInvoicingParty({
 	organizationDetails = {},
 	primary_service,
 	updateInvoicingParty = () => {},
 }) {
-	const [activeComponentKey, setActiveComponentKey] = useState(BOOKING_OPTIONS[BOOKING_OPTIONS_FIRST].value);
+	const [activeComponentKey, setActiveComponentKey] = useState(BOOKING_OPTIONS[GLOBAL_CONSTANTS.zeroth_index].value);
 
 	return (
 		<div>

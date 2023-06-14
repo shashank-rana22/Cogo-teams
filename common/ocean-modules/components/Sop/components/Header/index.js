@@ -4,7 +4,6 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 
 import { header_container, label, value, last_update_details } from './styles.module.css';
 
-const AUDITS_FIRST = 0;
 function Header({
 	setShowHistory = () => {},
 	showHistory = false,
@@ -12,7 +11,7 @@ function Header({
 }) {
 	const { list = [] } = auditsData;
 
-	const latestUpdate = list?.[AUDITS_FIRST] || {};
+	const latestUpdate = list?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	return (
 		<div className={header_container}>

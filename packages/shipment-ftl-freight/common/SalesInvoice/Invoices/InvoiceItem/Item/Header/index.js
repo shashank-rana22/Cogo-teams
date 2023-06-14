@@ -16,7 +16,6 @@ import InvoiceInfo from './InvoiceInfo';
 import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
-const INVOICE_LIST_FIRST = 0;
 
 const SLICE_SOURCE_INDEX = -2;
 
@@ -60,7 +59,7 @@ function Header({
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === live_invoice_number,
-	)?.[INVOICE_LIST_FIRST];
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const showCN = BF_INVOICE_STATUS.includes(
 		bfInvoice?.status,
@@ -79,7 +78,7 @@ function Header({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[INVOICE_LIST_FIRST]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') { invoiceStatus = 'IRN GENERATED';	}
 

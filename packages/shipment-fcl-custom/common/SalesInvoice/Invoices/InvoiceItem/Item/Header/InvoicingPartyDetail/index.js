@@ -1,11 +1,10 @@
 import { Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React, { useContext, useRef } from 'react';
 
 import styles from '../styles.module.css';
-
-const INVOICE_LIST_FIRST = 0;
 
 function InvoicingPartyDetail({
 	invoice = {},
@@ -23,7 +22,7 @@ function InvoicingPartyDetail({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[INVOICE_LIST_FIRST]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';

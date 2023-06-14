@@ -1,8 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase } from '@cogoport/utils';
 
-const SERVICE_DETAIL_FIRST = 0;
 const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 	const { id, service_type, service_detail, trade_type } = service_charge || {};
 	return {
@@ -11,7 +11,7 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 		service_name : service_type,
 		shipment_id  : shipment_data?.id,
 		showButtons  : service_type !== 'subsidiary_service',
-		cargoDetails : service_detail?.[SERVICE_DETAIL_FIRST],
+		cargoDetails : service_detail?.[GLOBAL_CONSTANTS.zeroth_index],
 		value        : [{
 			code     : '',
 			currency : '',

@@ -1,11 +1,11 @@
-const CONTAINERS_FIRST = 0;
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 export const formmatedValues = (initialValues) => {
 	const FORMAT_VALUES = {};
 
 	Object.keys(initialValues || {}).forEach((key) => {
 		if (key === 'containers') {
-			const obj = initialValues.containers?.[CONTAINERS_FIRST] || {};
+			const obj = initialValues.containers?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 			Object.keys(obj || {}).forEach((val) => {
 				FORMAT_VALUES[val] = obj[val];

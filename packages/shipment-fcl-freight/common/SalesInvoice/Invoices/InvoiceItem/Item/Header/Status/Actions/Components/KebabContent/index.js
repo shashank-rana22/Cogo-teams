@@ -7,8 +7,6 @@ import React, { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
-const EMPTY_ARRAY_LENGTH = 0;
-
 function KebabContent({
 	invoice = {},
 	shipment_data = {},
@@ -123,7 +121,7 @@ function KebabContent({
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-			{(!disableAction || invoice.exchange_rate_document?.length > EMPTY_ARRAY_LENGTH)
+			{(!disableAction || invoice.exchange_rate_document?.length)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive

@@ -1,11 +1,10 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect } from 'react';
 
 import getServiceValues from '../helpers/get-service-values';
 
 import useGetControls from './useServiceUpsellControlsList';
-
-const SERVICE_KEY_SPLIT_FIRST = 0;
 
 const formatControls = (controls, service) => controls?.map((control) => {
 	if (control?.options && control?.name !== 'location_id') {
@@ -29,7 +28,7 @@ function useServiceUpsellControls({
 }) {
 	const newServices = services.map((item) => ({
 		...item,
-		service_type: item?.service_type?.split('_service')?.[SERVICE_KEY_SPLIT_FIRST],
+		service_type: item?.service_type?.split('_service')?.[GLOBAL_CONSTANTS.zeroth_index],
 	}));
 	const { serviceWiseControls = {} } = useGetControls({ truckTypeToggle });
 

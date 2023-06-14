@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -8,8 +9,6 @@ import Card from '../../Card';
 
 import LabelValue from './LabelValue';
 import styles from './styles.module.css';
-
-const ADDRESS_FIRST = 0;
 
 function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc = () => {}, rolesPermission = {} }) {
 	const [show, setShow] = useState({});
@@ -22,7 +21,7 @@ function TradeParty({ data = {}, title = '', setAddCompany = () => {}, setAddPoc
 		trade_party_type = '',
 		trade_party_id = '',
 	} = data;
-	const { address:first_address = '' } = address[ADDRESS_FIRST] || {};
+	const { address:first_address = '' } = address[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const mapping = {
 		Name         : poc_data?.name || '',

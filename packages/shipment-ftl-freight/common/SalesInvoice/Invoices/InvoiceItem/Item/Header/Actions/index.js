@@ -21,8 +21,6 @@ const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
 
-const EMPTY_ARRAY_LENGTH = 0;
-
 const DISABLE_STATUS = ['reviewed', 'approved'];
 
 const remarkRender = ({ invoice }) => (
@@ -160,7 +158,7 @@ function Actions({
 				</div>
 
 				<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-					{(!disableAction || invoice.exchange_rate_document?.length > EMPTY_ARRAY_LENGTH)
+					{(!disableAction || invoice.exchange_rate_document?.length)
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive
