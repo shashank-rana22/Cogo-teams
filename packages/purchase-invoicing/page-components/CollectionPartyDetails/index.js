@@ -25,6 +25,7 @@ const SERVICE_WRAPPER_START_INDEX = 0;
 const DEFAULT_COLECTION_PARTY_COUNT = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
+const MAX_LEN = 25;
 
 const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
 
