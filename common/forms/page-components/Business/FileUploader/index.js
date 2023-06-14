@@ -6,10 +6,8 @@ import React, { useState, useEffect } from 'react';
 
 import styles from './styles.module.css';
 
-const EMPTY_VALUES_LENGTH = 0;
 const URL_SPLIT_FIRST = 0;
 const FILE_NAME_IN_URL_SLICE_INDEX = -1;
-const EMPTY_DEFAULT_VALUES_LENGTH = 0;
 const URL_STORE_FIRST = 0;
 const PERCENT_FACTOR = 100;
 
@@ -51,7 +49,7 @@ function FileUploader(props) {
 		}
 		setLoading(false);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [defaultValues?.length > EMPTY_DEFAULT_VALUES_LENGTH]);
+	}, [!isEmpty(defaultValues)]);
 
 	useEffect(() => {
 		if (multiple) {
@@ -104,7 +102,7 @@ function FileUploader(props) {
 		try {
 			setLoading(true);
 
-			if (values.length > EMPTY_VALUES_LENGTH) {
+			if (values?.length) {
 				setProgress({});
 
 				const promises = values.map((value, index) => uploadFile(index)(value));
