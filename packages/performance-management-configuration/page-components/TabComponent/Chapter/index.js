@@ -17,7 +17,7 @@ const DEFAULT_TOTAL_COUNT = 10;
 
 function Chapter() {
 	const {
-		columns, search, setSearch, data, loading:listApiLoading,
+		columns, search, setSearch, data, loading: listApiLoading,
 		page, setPage,
 	} = useChapter();
 
@@ -59,21 +59,19 @@ function Chapter() {
 				</div>
 			)}
 
-			{
-				showAddChapterModal ? (
-					<CreateConfigurationModal
-						showModal={showAddChapterModal}
-						setShowModal={setShowAddChapterModal}
-						label={ADD_BUTTON_LABEL}
-						controls={controls}
-						control={control}
-						errors={errors}
-						onClickSubmitButton={onClickSubmitButton}
-						loading={loading}
-						handleSubmit={handleSubmit}
-					/>
-				) : null
-			}
+			{showAddChapterModal ? (
+				<CreateConfigurationModal
+					showModal={showAddChapterModal}
+					setShowModal={setShowAddChapterModal}
+					label={ADD_BUTTON_LABEL}
+					controls={controls}
+					control={control}
+					errors={errors}
+					onClickSubmitButton={onClickSubmitButton}
+					loading={loading}
+					handleSubmit={handleSubmit}
+				/>
+			) : null}
 		</div>
 	);
 }

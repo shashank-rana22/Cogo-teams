@@ -5,7 +5,6 @@ const controls = [
 		type        : 'input',
 		placeholder : 'Enter squad name',
 	},
-
 	{
 		name        : 'squad_leader_id',
 		label       : 'Squad leader',
@@ -24,7 +23,6 @@ const controls = [
 			},
 		},
 	},
-
 	{
 		name        : 'employee_ids',
 		type        : 'asyncSelect',
@@ -44,7 +42,6 @@ const controls = [
 			page_limit: 100,
 		},
 	},
-
 ];
 
 export default controls;

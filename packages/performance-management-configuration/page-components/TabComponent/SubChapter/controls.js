@@ -1,21 +1,20 @@
 const controls = [
 	{
-		name        : 'chapter_name',
-		label       : 'Chapter Name',
+		name        : 'sub_chapter_name',
+		label       : 'Sub-Chapter Name',
 		type        : 'input',
-		placeholder : 'Enter chapter name',
+		placeholder : 'Enter subchapter name',
 	},
-
 	{
-		name        : 'chapter_leader_id',
-		label       : 'Chapter leader',
-		placeholder : 'Select Chapter leader',
+		name        : 'sub_chapter_leader_id',
+		label       : 'Sub-Chapter leader',
+		placeholder : 'Select sub-chapter leader',
 		type        : 'asyncSelect',
 		initialCall : false,
 		asyncKey    : 'partner_users',
 		valueKey    : 'user_id',
 		rules       : {
-			required: 'Chapter leader is required',
+			required: 'Sub-chapter leader is required',
 		},
 		params: {
 			filters: {
@@ -24,27 +23,24 @@ const controls = [
 			},
 		},
 	},
-
 	{
-		name        : 'sub_chapter_ids',
+		name        : 'employee_ids',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
-		label       : 'Sub chapter',
-		placeholder : 'Sub chapter',
+		label       : 'Employees',
+		placeholder : 'Employees',
 		multiple    : true,
 		rules       : {
-			required: 'Sub chapters are required',
+			required: 'Employees are required',
 		},
 		params: {
 			filters: {
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
-
 			},
 			page_limit: 100,
 		},
 	},
-
 ];
 
 export default controls;
