@@ -26,6 +26,15 @@ interface CancelModal {
 	IRNLabel?: string;
 	refetch?: Function;
 }
+
+const mapping: Record<string, { key: string }> = {
+	agreementNumber     : { key: 'AGREEMENT_NUMBER' },
+	agreementPdfFile    : { key: 'AGREEMENT_PDF_FILE' },
+	agreementDate       : { key: 'AGREEMENT_DATE' },
+	E_invoice_date      : { key: 'E_INVOICE_DATE' },
+	Cancellation_reason : { key: 'CANCELLATION_REASON' },
+};
+
 function CancellationModal({
 	itemData,
 	showCancellationModal,
@@ -51,14 +60,6 @@ function CancellationModal({
 		response,
 		refetch,
 	});
-
-	const mapping: Record<string, { key: string }> = {
-		agreementNumber     : { key: 'AGREEMENT_NUMBER' },
-		agreementPdfFile    : { key: 'AGREEMENT_PDF_FILE' },
-		agreementDate       : { key: 'AGREEMENT_DATE' },
-		E_invoice_date      : { key: 'E_INVOICE_DATE' },
-		Cancellation_reason : { key: 'CANCELLATION_REASON' },
-	};
 
 	const mappedValues: MappedValues = Object.entries(mapping).reduce((result, [property, { key }]) => {
 		const { message = '' } = errorVal?.[property] || {};
