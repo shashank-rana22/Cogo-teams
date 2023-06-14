@@ -7,28 +7,32 @@ const controls = ({ primary_service, departureDate }) => {
 
 	const finalControls = [
 		{
-			name    : 'schedule_departure',
-			label   : 'Actual time of departure',
-			maxDate : null,
+			name                  : 'schedule_departure',
+			label                 : 'Actual time of departure',
+			maxDate               : null,
+			disable               : disabledState,
+			dateFormat            : 'MMM dd, yyyy, hh:mm:ss aaa',
+			placeholder           : 'Select Date',
+			isPreviousDaysAllowed : true,
+			showTimeSelect        : true,
 		},
 		{
-			name    : 'schedule_arrival',
-			label   : 'Actual time of arrival',
-			maxDate : null,
-			minDate : departureDate,
-			disable : false,
+			name                  : 'schedule_arrival',
+			label                 : 'Actual time of arrival',
+			maxDate               : null,
+			minDate               : departureDate,
+			disable               : disabledState,
+			dateFormat            : 'MMM dd, yyyy, hh:mm:ss aaa',
+			placeholder           : 'Select Date',
+			isPreviousDaysAllowed : true,
+			showTimeSelect        : true,
 		},
 	];
 
 	const DEFAULT_VALUES = {};
 
-	finalControls.forEach((control, index) => {
-		const { name, disable = disabledState } = control;
-		finalControls[index].disable = disable;
-		finalControls[index].dateFormat = 'MMM dd, yyyy, hh:mm:ss aaa';
-		finalControls[index].placeholder = 'Select Date';
-		finalControls[index].isPreviousDaysAllowed = true;
-		finalControls[index].showTimeSelect = true;
+	finalControls.forEach((control) => {
+		const { name } = control;
 		DEFAULT_VALUES[name] = getDate(primary_service?.[name]);
 	});
 

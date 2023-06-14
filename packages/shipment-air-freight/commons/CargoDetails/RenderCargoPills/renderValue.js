@@ -1,4 +1,5 @@
-import { Tooltip, Button } from '@cogoport/components';
+import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCopy } from '@cogoport/icons-react';
 import { startCase, upperCase, format, isEmpty } from '@cogoport/utils';
 
@@ -6,11 +7,6 @@ import CONSTANTS from '../../../constants/CONSTANTS';
 import copyToClipboard from '../../utils/copyToClipboard';
 
 import styles from './styles.module.css';
-
-const {
-	ZEROTH_INDEX,
-	AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO,
-} = CONSTANTS;
 
 const PACKAGES_MIN_LENGTH = 1;
 const REQUIRED_DECIMAL_DIGIT = 2;
@@ -27,13 +23,13 @@ export const renderValue = (label, detail = {}) => {
 		master_airway_bill_number, house_airway_bill_number, commodity_details, commodity_type, commodity_sub_type,
 	} = detail;
 
-	const commodityDataDetails = commodity_details?.[ZEROTH_INDEX] || {};
+	const commodityDataDetails = commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const valueForInput = Array.isArray(packages)
-				&& !isEmpty(packages) ? packages[ZEROTH_INDEX] : null;
+				&& !isEmpty(packages) ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 	const chargableWeight = Number(chargeable_weight)
-					|| Math.max(volume * AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO, weight);
+					|| Math.max(volume * CONSTANTS.AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO, weight);
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -53,13 +49,12 @@ export const renderValue = (label, detail = {}) => {
 					theme="light"
 					content={(
 						<div style={{ fontSize: '10px' }}>
-							{(packages || []).map((item, index) => {
+							{(packages || []).map((item) => {
 								const values = item
 									? `${item.packages_count} Pkg, (${item?.length}cm X ${item?.width
 									}cm X ${item?.height}cm), ${startCase(item?.packing_type)}`
 									: '';
-								// eslint-disable-next-line react/no-array-index-key
-								return <div key={index}>{values}</div>;
+								return <div key={JSON.stringify(item)}>{values}</div>;
 							})}
 						</div>
 					)}
@@ -174,12 +169,13 @@ export const renderValue = (label, detail = {}) => {
 						{' '}
 						{master_airway_bill_number || ''}
 					</span>
-					<Button
-						className="secondary"
+					<div
+						className="mawb_copy"
 						onClick={() => copyToClipboard(master_airway_bill_number || '', 'MAWB Number')}
+						role="presentation"
 					>
 						<IcMCopy fill="#f9ae64" />
-					</Button>
+					</div>
 				</div>
 			);
 		case 'house_airway_bill_number':

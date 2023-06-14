@@ -8,7 +8,7 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
 
-const ADD_ONE_INDEX = 1;
+const ADD_INDEX_TO_TIMELINE = 1;
 
 function Timeline() {
 	const [showEditSchedule, setShowEditSchedule] = useState(false);
@@ -58,7 +58,7 @@ function Timeline() {
 							key={`${timelineItem.milestone}_${timelineItem.completed_on}`}
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
-							isLast={totalItems === index + ADD_ONE_INDEX}
+							isLast={totalItems === index + ADD_INDEX_TO_TIMELINE}
 						/>
 					);
 				})}

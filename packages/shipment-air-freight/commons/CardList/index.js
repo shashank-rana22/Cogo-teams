@@ -7,7 +7,7 @@ import LoadingState from './LoadingState';
 import styles from './styles.module.css';
 
 const INCREMENT_BY_ONE = 1;
-const CHECK_LAST_ARRAY = 1;
+const DECREMENT_LOADER = 1;
 
 function List({
 	fields = [],
@@ -23,7 +23,7 @@ function List({
 	const handleRender = () => {
 		if (loading) {
 			const loadingStates = Array.from(Array.from(Array(numberOfLoader).keys())).map((i) => (
-				<LoadingState fields={fields} isLast={i === numberOfLoader - CHECK_LAST_ARRAY} key={i} />
+				<LoadingState fields={fields} isLast={i === numberOfLoader - DECREMENT_LOADER} key={i} />
 			));
 
 			return loadingStates;

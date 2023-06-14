@@ -12,17 +12,11 @@
 	display: flex;
 
 	:global {
-		.ui_button_container {
-			min-width: auto;
-			height: auto;
-			padding: 0;
+		.mawb_copy {
+			display: flex;
+			align-items: center;
 			margin: 0 4px;
-			background: transparent;
-			border: none;
-
-			&:hover {
-				background: transparent;
-			}
+			cursor: pointer;
 		}
 	}
 }

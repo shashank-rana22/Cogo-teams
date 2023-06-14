@@ -11,8 +11,6 @@ import {
 export default function TimelineItem({ item, isLast = false, consecutivelyCompleted = false }) {
 	const { milestone, is_sub, completed_on, actual_completed_on } = item || {};
 
-	const displayCompletedDate = completed_on;
-
 	let isCompleted = !!completed_on && consecutivelyCompleted;
 	isCompleted = isLast ? !!completed_on : isCompleted;
 
@@ -24,11 +22,11 @@ export default function TimelineItem({ item, isLast = false, consecutivelyComple
 			<div className={label}>Milestone</div>
 			<div className={value}>{milestone}</div>
 
-			{displayCompletedDate ? (
+			{completed_on ? (
 				<>
 					<div className={label}>Completed On</div>
 					<div className={value}>
-						{getDisplayDate({ date: displayCompletedDate, formatType: 'dateTime' })}
+						{getDisplayDate({ date: completed_on, formatType: 'dateTime' })}
 					</div>
 				</>
 			) : null}
@@ -57,7 +55,7 @@ export default function TimelineItem({ item, isLast = false, consecutivelyComple
 			{!is_sub || isLast ? (
 				<div className={display_milestone}>
 					<div className={ellipsis}>{milestone}</div>
-					<div className={ellipsis}>{getDisplayDate({ date: displayCompletedDate })}</div>
+					<div className={ellipsis}>{getDisplayDate({ date: completed_on })}</div>
 				</div>
 			) : null}
 		</div>

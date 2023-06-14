@@ -7,9 +7,9 @@ import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
 
-const ONE_ELEMENT = 1;
+const NO_OF_ELEMENTS_TO_BE_REMOVED = 1;
 
-const { TOTAL_SPAN, NO_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
+const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
 
 function Child({
 	controls,
@@ -27,19 +27,14 @@ function Child({
 	const TOTAL_FIELDS = [];
 	let span = 0;
 	controls.forEach((fields) => {
-		span += fields.span || TOTAL_SPAN;
-		if (span === TOTAL_SPAN) {
-			ROW_WISE_FIELDS.push(fields);
-			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
-			ROW_WISE_FIELDS = [];
-			span = NO_SPAN;
-		} else if (span < TOTAL_SPAN) {
-			ROW_WISE_FIELDS.push(fields);
-		} else {
+		if ((span + fields.span) > TOTAL_SPAN) {
 			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 			ROW_WISE_FIELDS = [];
 			ROW_WISE_FIELDS.push(fields);
 			span = fields.span;
+		} else {
+			ROW_WISE_FIELDS.push(fields);
+			span += fields.span;
 		}
 	});
 	if (ROW_WISE_FIELDS.length) {
@@ -50,7 +45,7 @@ function Child({
 
 	return (
 		<div className={styles.fieldarray} key={field?.id}>
-			{Object.keys(totalFieldsObject).map((key) => (
+			{Object.entries(totalFieldsObject).map((key) => (
 				<div className={styles.row} key={key}>
 					{totalFieldsObject[key].map((controlItem) => {
 						const Element = getElementController(controlItem.type);
@@ -93,7 +88,7 @@ function Child({
 						{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 							<IcMDelete
 								className={`form-fieldArray-${name}-remove ${styles.delete_icon}`}
-								onClick={() => remove(index, ONE_ELEMENT)}
+								onClick={() => remove(index, NO_OF_ELEMENTS_TO_BE_REMOVED)}
 							/>
 						) : null}
 					</div>

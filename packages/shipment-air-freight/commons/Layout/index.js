@@ -6,7 +6,7 @@ import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
-const { TOTAL_SPAN, NO_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
+const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
 
 function Layout({
 	control, fields, showElements = {}, errors,
@@ -16,19 +16,14 @@ function Layout({
 	let span = 0;
 	(fields || []).forEach((field) => {
 		if (!(field.name in showElements) || showElements[field.name]) {
-			span += field.span || TOTAL_SPAN;
-			if (span === TOTAL_SPAN) {
-				ROW_WISE_FIELDS.push(field);
+			if ((span + fields.span) > TOTAL_SPAN) {
 				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 				ROW_WISE_FIELDS = [];
-				span = NO_SPAN;
-			} else if (span < TOTAL_SPAN) {
-				ROW_WISE_FIELDS.push(field);
+				ROW_WISE_FIELDS.push(fields);
+				span = fields.span;
 			} else {
-				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
-				ROW_WISE_FIELDS = [];
-				ROW_WISE_FIELDS.push(field);
-				span = field.span;
+				ROW_WISE_FIELDS.push(fields);
+				span += fields.span;
 			}
 		}
 	});

@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
-import ZEROTH_INDEX from '../../../constants/CONSTANTS';
 import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
@@ -18,7 +18,7 @@ function MultiServiceDetailsPopover({
 	}
 
 	const renderBody = () => (
-		mainServices.map((item, idx) => (idx !== ZEROTH_INDEX ? (
+		mainServices.map((item, idx) => (idx !== GLOBAL_CONSTANTS.zeroth_index ? (
 			<div className={styles.container} key={item.id}>
 				<RenderCargoPills detail={item} />
 			</div>

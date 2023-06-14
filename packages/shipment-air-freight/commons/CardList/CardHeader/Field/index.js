@@ -1,8 +1,7 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMInfo, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useState } from 'react';
-
-import ZEROTH_INDEX from '../../../../constants/CONSTANTS';
 
 import styles from './styles.module.css';
 
@@ -30,8 +29,8 @@ function Field({
 		return label;
 	};
 
-	const handleOnchange = (item) => {
-		const fieldType = item?.sorting.name;
+	const handleOnChange = () => {
+		const fieldType = field.sorting?.name;
 
 		setSort((prev) => ({
 			[fieldType]: prev?.[fieldType] === 'Asc' ? 'Desc' : 'Asc',
@@ -40,10 +39,10 @@ function Field({
 		setShow((prev) => (!prev));
 	};
 
-	const sortingKey = sorting ? Object?.keys(sorting)?.[ZEROTH_INDEX] : null;
+	const sortingKey = sorting ? Object?.keys(sorting)?.[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 	const showSortingType =	sorting && sorting[sortingKey]
-	&& sorting[sortingKey] === Object?.keys(sort)?.[ZEROTH_INDEX];
+	&& sorting[sortingKey] === Object?.keys(sort)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	return (
 		<div
@@ -65,7 +64,7 @@ function Field({
 				{sorting && (
 					<IcMArrowRotateDown
 						className={`${styles.caret} ${(showSortingType && show) ? styles.caret_up : ''}`}
-						onClick={() => handleOnchange(field)}
+						onClick={() => handleOnChange()}
 					/>
 				)}
 			</div>
