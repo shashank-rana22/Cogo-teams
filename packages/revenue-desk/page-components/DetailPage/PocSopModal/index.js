@@ -1,8 +1,8 @@
 import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
+import { Sop, SopOld } from '@cogoport/ocean-modules';
 import { useState } from 'react';
 
 import POCDetails from './POCDetails';
-import SopRevenueDesk from './SopRevenueDesk';
 
 function PocSopModal({ itemData }) {
 	const [activePocTab, setActivePocTab] = useState('poc');
@@ -22,7 +22,9 @@ function PocSopModal({ itemData }) {
 							<div><POCDetails shipmentData={itemData} /></div>
 						</TabPanel>
 						<TabPanel name="sop" title="SOP">
-							<div><SopRevenueDesk data={itemData} /></div>
+							{['fcl_freight', 'lcl_freight'].includes(itemData?.shipment_type)
+								? <div><Sop shipment_data={itemData} /></div>
+								: <div><SopOld shipment_data={itemData} /></div>}
 						</TabPanel>
 					</Tabs>
 				</Modal.Body>
