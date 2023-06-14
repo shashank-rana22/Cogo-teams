@@ -9,6 +9,8 @@ import useUpdateBookingPreferences
 
 import styles from './styles.module.css';
 
+const STEP_VALUE = 2;
+
 const getBuyPrice = (dataObj, source) => {
 	if (source === 'system_rate') {
 		const firstvalidty = dataObj?.validities?.[0] || {};
@@ -51,7 +53,7 @@ function Card({
 
 		setSelectedCard(item);
 
-		setStep(2);
+		setStep(STEP_VALUE);
 	};
 
 	return (

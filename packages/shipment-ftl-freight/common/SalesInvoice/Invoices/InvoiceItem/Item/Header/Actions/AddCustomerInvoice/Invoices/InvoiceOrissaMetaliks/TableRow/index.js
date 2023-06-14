@@ -83,8 +83,8 @@ function TableRow({ customData = {}, importerExporterId = '' }) {
 			</tr>
 			{lineItems.map((lineItem, index) => (
 				<tr key={lineItem?.id} style={{ border: '1px solid black', padding: '2px' }}>
-					<td style={{ padding: '1px', border: '1px solid black', padding: '2px' }}>
-						{index + 1}
+					<td style={{ border: '1px solid black', padding: '2px' }}>
+						{index + +('1')}
 					</td>
 					{Object.keys(LINE_ITEMS_KEYS_MAPPING).map((key) => (
 						<td

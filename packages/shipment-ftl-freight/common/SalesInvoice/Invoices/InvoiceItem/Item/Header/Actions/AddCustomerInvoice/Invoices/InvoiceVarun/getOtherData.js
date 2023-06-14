@@ -19,6 +19,9 @@ const OTHER_KEYS_MAPPING = {
 	tax_payable_on_rcm      : 'tax_payable',
 };
 
+const TARGET_LENGTH = 2;
+const MONTH_OFFSET = 1;
+
 export const getOtherData = ({ customData = {} }) => {
 	const finalDataObj = getOtherDataHelper({
 		customData,
@@ -30,7 +33,7 @@ export const getOtherData = ({ customData = {} }) => {
 		: '';
 
 	finalDataObj.delivery_month = del_date
-		? `${((del_date.getMonth() + 1) || '')?.toString()?.padStart(2, '0')}/${del_date
+		? `${((del_date.getMonth() + MONTH_OFFSET) || '')?.toString()?.padStart(TARGET_LENGTH, '0')}/${del_date
 			?.getFullYear()
 			?.toString()}`
 		: '';

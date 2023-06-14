@@ -86,7 +86,7 @@ function Annexure({ customData = {}, invoice_no = '', invoice_date = '' }) {
 					<b style={{ textAlign: 'center' }}>TOTAL:</b>
 				</td>
 				{Object.entries(annexureData).map(([key, value]) => (
-					<td key={key} style={{ textAlign: 'center', border: '2px solid black', textAlign: 'center' }}>
+					<td key={key} style={{ textAlign: 'center', border: '2px solid black' }}>
 						{value}
 					</td>
 				))}

@@ -1,5 +1,7 @@
 import formatDate from '@cogoport/globalization/utils/formatDate';
 
+const INDEX_OFFSET = 1;
+
 export const lineItemsHelper = ({
 	lineItems = [],
 	LINE_ITEMS_KEYS_MAPPING = {},
@@ -21,7 +23,7 @@ export const lineItemsHelper = ({
 				lineItemObj[key] = lineItem?.[value] ?? '';
 			}
 		});
-		lineItemObj.si_no = index + 1;
+		lineItemObj.si_no = index + INDEX_OFFSET;
 		return lineItemObj;
 	});
 

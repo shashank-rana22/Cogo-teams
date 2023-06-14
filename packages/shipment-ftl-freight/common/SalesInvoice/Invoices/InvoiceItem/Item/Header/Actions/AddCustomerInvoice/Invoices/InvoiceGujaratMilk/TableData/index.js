@@ -137,12 +137,12 @@ function TableData({ customData = {}, importerExporterId }) {
 				{lineItems.map((lineItem, index) => (
 					<tr key={lineItem?.id} style={{ border: '2px solid black' }}>
 						<td style={{ padding: '1px', border: '2px solid black' }}>
-							{index + 1}
+							{index + (+'1')}
 						</td>
 						{Object.keys(LINE_ITEMS_KEYS_MAPPING).map((key, idx) => (
 							<td
 								colSpan={
-									idx === Object.keys(LINE_ITEMS_KEYS_MAPPING).length - 1
+									idx === Object.keys(LINE_ITEMS_KEYS_MAPPING).length - (+'1')
 										? '5'
 										: ''
 								}

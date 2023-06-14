@@ -95,7 +95,13 @@ function Terms({
 						</ol>
 					</td>
 					<td
-						style={{ width: '30%', textAlign: 'center', verticalAlign: 'top', padding: '0 8px', maxWidth: '50%' }}
+						style={{
+							width         : '30%',
+							textAlign     : 'center',
+							verticalAlign : 'top',
+							padding       : '0 8px',
+							maxWidth      : '50%',
+						}}
 					>
 						<h3>
 							<b>

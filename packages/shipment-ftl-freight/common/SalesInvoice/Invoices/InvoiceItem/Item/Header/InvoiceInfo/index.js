@@ -11,7 +11,10 @@ import Actions from '../Actions';
 import styles from './styles.module.css';
 
 const MAXIMUM_FRACTION_DIGIT = 2;
+const OFFSET_VALUE = 2;
 const END_INDEX = -2;
+const START_INDEX = 0;
+const FALLBACK_VALUE = 0;
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 const MINIMUM_ALLOWED_SERIAL_ID = 120347;
 const API_SUCCESS_MESSAGE = {
@@ -129,13 +132,13 @@ function InvoiceInfo({
 					{invoice?.payment_mode === 'credit' ? (
 						<div>
 							<div className={styles.info_container}>
-								{startCase(creditSource?.slice(0, END_INDEX))}
+								{startCase(creditSource?.slice(START_INDEX, END_INDEX))}
 							</div>
 
 							<div className={styles.payment_method}>
 								{startCase(
 									`${
-										creditSource?.[(creditSource?.length ?? 0) - 2]
+										creditSource?.[(creditSource?.length ?? FALLBACK_VALUE) - OFFSET_VALUE]
 									} deferred payment`,
 								)}
 							</div>

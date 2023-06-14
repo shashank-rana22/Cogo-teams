@@ -5,6 +5,9 @@ import { finalAmountInWords } from '../../../utils/numToWords';
 import { getLineItems } from '../getLineItems';
 import { getChargesData } from '../getOtherData';
 
+const ARRAY_LENGTH = 8;
+const FILL_VALUE = 1;
+
 function TableData({ customData = {}, importerExporterId = '' }) {
 	const { lineItems = [], LINE_ITEMS_KEYS_MAPPING = {} } = getLineItems({
 		customData,
@@ -20,8 +23,8 @@ function TableData({ customData = {}, importerExporterId = '' }) {
 	const amount = finalAmountInWords(total);
 
 	const extraArray = useMemo(
-		() => Array(8)
-			.fill(1)
+		() => Array(ARRAY_LENGTH)
+			.fill(FILL_VALUE)
 			.map((item) => ({ id: uuid(), value: item })),
 		[],
 	);
@@ -110,7 +113,7 @@ function TableData({ customData = {}, importerExporterId = '' }) {
 				{lineItems.map((lineItem, index) => (
 					<tr key={lineItem?.id} style={{ border: '1px solid black' }}>
 						<td style={{ borderRight: '1px solid black', padding: '0px 8px' }}>
-							{index + 1}
+							{index + +('1')}
 						</td>
 						{Object.keys(LINE_ITEMS_KEYS_MAPPING).map((key) => (
 							<td

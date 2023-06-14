@@ -4,6 +4,11 @@ import { v4 as uuid } from 'uuid';
 import { getLineItems } from '../getLineItems';
 import { getChargesData } from '../getOtherData';
 
+const ARRAY_LENGTH_EIGHT = 8;
+const ARRAY_LENGTH_THIRTEEN = 8;
+const ARRAY_LENGTH_SIX = 8;
+const FILL_VALUE = 1;
+
 function TableData({ customData = {} }) {
 	const { lineItems, LINE_ITEMS_KEYS_MAPPING } = getLineItems({ customData });
 	const {
@@ -23,16 +28,16 @@ function TableData({ customData = {} }) {
 	} = getChargesData({ customData });
 
 	const { extraTaxArray, extraTotalArray, extraAmountArray } = useMemo(() => {
-		const otherTaxArray = Array(8)
-			.fill(1)
+		const otherTaxArray = Array(ARRAY_LENGTH_EIGHT)
+			.fill(FILL_VALUE)
 			.map((item) => ({ id: uuid(), value: item }));
 
-		const otherTotalArray = Array(13)
-			.fill(1)
+		const otherTotalArray = Array(ARRAY_LENGTH_THIRTEEN)
+			.fill(FILL_VALUE)
 			.map((item) => ({ id: uuid(), value: item }));
 
-		const otherAmountArray = Array(6)
-			.fill(1)
+		const otherAmountArray = Array(ARRAY_LENGTH_SIX)
+			.fill(FILL_VALUE)
 			.map((item) => ({ id: uuid(), value: item }));
 
 		return {
