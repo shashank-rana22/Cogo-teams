@@ -25,7 +25,7 @@ interface Props {
 	item: ListItem;
 }
 
-const deafultVal = {
+const DEFAULT_VAL = {
 	status          : '',
 	id              : '',
 	jvNum           : '',
@@ -38,7 +38,7 @@ const deafultVal = {
 	ledCurrency     : '',
 };
 
-function Details({ item = deafultVal }: Props) {
+function Details({ item = DEFAULT_VAL }: Props) {
 	const { data: list = [], loading } = useGetJvLineItems({ parentJVId: item?.id });
 	const listTotal = list?.length;
 
