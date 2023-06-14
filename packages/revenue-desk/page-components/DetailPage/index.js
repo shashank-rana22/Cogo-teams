@@ -1,5 +1,5 @@
-import { Pill, TabPanel, Tabs } from '@cogoport/components';
-import { IcCCogoassured, IcMArrowBack } from '@cogoport/icons-react';
+import { Button, Modal, Pill, TabPanel, Tabs } from '@cogoport/components';
+import { IcCCogoassured, IcMArrowBack, IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -8,17 +8,21 @@ import serviceLabelMapping from '../../helper/serviceLabelMapping';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
 
 import LastShipmentDetails from './LastShipmentDetails';
+import POCDetails from './POCDetails';
 import QuotationDetails from './QuotationDetails';
 import ServiceWiseDetails from './ServiceWiseDetails';
 import ShipmentCard from './ShipmentCard';
+import SopRevenueDesk from './SopRevenueDesk';
 import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
 
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
+	const [showDetail, setShowDetail] = useState(true);
+	const [showPocSop, setShowPocSop] = useState(false);
+	const [activePocTab, setActivePocTab] = useState('poc');
 	const [activeTabPanel, setActiveTabPanel] = useState('view_quotation');
 	const [priceData, setPriceData] = useState({});
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
-
 	const excludedServices = [
 		'fcl_freight_local_service',
 		'lcl_freight_local_service',
@@ -80,23 +84,29 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 					</div>
 				</div>
 
-				<div className={styles.wallet_container}>
-					<div>
-						<img
-							src="
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<div className={styles.wallet_container}>
+						<div>
+							<img
+								src="
                     https://cogoport-production.sgp1.digitaloceanspaces.com/1b40f946b221e5c1c03e3563ded91913/Vector.png"
-							alt="wallet"
-						/>
+								alt="wallet"
+							/>
+						</div>
+						<div className={styles.text_container}>
+							<div className={styles.wallet_text}>
+								Wallet Balance
+							</div>
+							<div className={styles.price_text}>
+								-
+							</div>
+						</div>
 					</div>
-					<div className={styles.text_container}>
-						<div className={styles.wallet_text}>
-							Wallet Balance
-						</div>
-						<div className={styles.price_text}>
-							-
-						</div>
+					<div>
+						<Button size="md" themeType="secondary" onClick={() => setShowPocSop(true)}>POC & SOP</Button>
 					</div>
 				</div>
+
 			</div>
 			<div className={styles.card_container}>
 				<ShipmentCard itemData={itemData} priceData={priceData} />
@@ -109,26 +119,90 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 					onChange={setActiveTabPanel}
 				>
 					<TabPanel name="view_quotation" title="View Quotation">
-						<div>
-							<QuotationDetails
-								itemData={itemData}
-								setPriceData={setPriceData}
-								priceData={priceData}
-							/>
-						</div>
+						{showDetail === true ? (
+							<div>
+								<QuotationDetails
+									itemData={itemData}
+									setPriceData={setPriceData}
+									priceData={priceData}
+								/>
+								<div
+									role="presentation"
+									className={styles.show_detail_tab}
+									onClick={() => setShowDetail(false)}
+								>
+									Hide Details
+									{' '}
+									<IcMArrowUp />
+								</div>
+							</div>
+						) : (
+							<div
+								role="presentation"
+								className={styles.show_detail_tab}
+								onClick={() => setShowDetail(true)}
+							>
+								Show more
+								{' '}
+								<IcMArrowDown />
+							</div>
+						)}
 					</TabPanel>
 					<TabPanel name="transaction_insights" title="Transaction Insights">
-						<div>
-							{['air_freight', 'lcl_freight', 'fcl_freight'].includes(
-								itemData?.shipment_type,
-							) ? (
-								<TransactionInsights itemData={itemData} />
-								) : null}
-
-						</div>
+						{showDetail === true ? (
+							<div>
+								{['air_freight', 'lcl_freight', 'fcl_freight'].includes(
+									itemData?.shipment_type,
+								) ? (
+									<TransactionInsights itemData={itemData} />
+									) : null}
+								<div
+									role="presentation"
+									className={styles.show_detail_tab}
+									onClick={() => setShowDetail(false)}
+								>
+									Hide Details
+									{' '}
+									<IcMArrowUp />
+								</div>
+							</div>
+						) : (
+							<div
+								role="presentation"
+								className={styles.show_detail_tab}
+								onClick={() => setShowDetail(true)}
+							>
+								Show more
+								{' '}
+								<IcMArrowDown />
+							</div>
+						)}
 					</TabPanel>
 					<TabPanel name="last_shipment_detail" title="Customer Last Shipment Details">
-						<div><LastShipmentDetails itemData={itemData} /></div>
+						{showDetail === true ? (
+							<div>
+								<LastShipmentDetails itemData={itemData} />
+								<div
+									role="presentation"
+									className={styles.show_detail_tab}
+									onClick={() => setShowDetail(false)}
+								>
+									Hide Details
+									{' '}
+									<IcMArrowUp />
+								</div>
+							</div>
+						) : (
+							<div
+								role="presentation"
+								className={styles.show_detail_tab}
+								onClick={() => setShowDetail(true)}
+							>
+								Show more
+								{' '}
+								<IcMArrowDown />
+							</div>
+						)}
 					</TabPanel>
 				</Tabs>
 			</div>
@@ -143,8 +217,25 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							priceData={priceData}
 						/>
 					)}
-
 			</div>
+			<Modal size="xl" show={showPocSop === true} onClose={() => setShowPocSop(false)} placement="center">
+				<Modal.Body>
+					<Tabs
+						activeTab={activePocTab}
+						themeType="primary"
+						fullWidth
+						onChange={setActivePocTab}
+					>
+						<TabPanel name="poc" title="POC">
+							<div><POCDetails shipmentData={itemData} /></div>
+						</TabPanel>
+						<TabPanel name="sop" title="SOP">
+							<div><SopRevenueDesk data={itemData} /></div>
+						</TabPanel>
+					</Tabs>
+				</Modal.Body>
+			</Modal>
+
 		</div>
 	);
 }
