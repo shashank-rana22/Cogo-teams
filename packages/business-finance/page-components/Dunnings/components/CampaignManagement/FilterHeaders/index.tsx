@@ -6,7 +6,13 @@ import Filter from '../../../../commons/Filters';
 import filterControls from './filterControls';
 import styles from './styles.module.css';
 
-function FilterHeaders({ globalFilters, setGlobalFilters, setShowCreateForm }) {
+interface Props {
+	globalFilters?:{ search?:string },
+	setGlobalFilters?:(p: object) => void,
+	setShowCreateForm?:Function,
+}
+
+function FilterHeaders({ globalFilters, setGlobalFilters, setShowCreateForm }:Props) {
 	return (
 		<div className={styles.filter_body}>
 			<div className={styles.filter_section}>

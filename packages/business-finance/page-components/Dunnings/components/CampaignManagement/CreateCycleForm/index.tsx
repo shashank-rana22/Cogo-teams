@@ -6,7 +6,14 @@ import FormLayout from './FormLayout';
 import MailView from './MailView';
 import styles from './styles.module.css';
 
-function CreateCycleForm({ showCreateForm, setShowCreateForm, formData, setFormData }) {
+interface Props {
+	showCreateForm?:boolean,
+	setShowCreateForm?:Function,
+	formData?:object,
+	setFormData?:(p:object)=>void,
+}
+
+function CreateCycleForm({ showCreateForm, setShowCreateForm, formData, setFormData }:Props) {
 	const DEFAULT_STEP = 1;
 	const EXCLUDE_STEP = 2;
 	const MAIL_STEP = 3;

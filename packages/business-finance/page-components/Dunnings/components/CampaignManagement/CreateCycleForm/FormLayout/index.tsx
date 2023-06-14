@@ -6,7 +6,23 @@ import { MONTH_DAYS, WEEK_OPTIONS } from '../../constants';
 import { controls } from './controls';
 import styles from './styles.module.css';
 
-function FormLayout({ formData, setFormData }) {
+interface FormData {
+	triggerType?:string,
+	frequency?:string,
+	weekDay?:string,
+	monthDate?:string,
+	timezone?:string,
+	time?:Date,
+}
+
+interface Props {
+	formData?:FormData,
+	setFormData?:(p:object)=>void
+}
+
+function FormLayout({ formData, setFormData }:Props) {
+	const { triggerType, frequency, weekDay, monthDate, timezone, time } = formData || {};
+
 	const handleTabChange = (val?:string) => {
 		if (val === 'daily') {
 			setFormData({
@@ -39,11 +55,11 @@ function FormLayout({ formData, setFormData }) {
 			/>
 			<div>
 				<div className={styles.frequency}>
-					{formData?.triggerType === 'periodic' && (
+					{triggerType === 'periodic' && (
 						<div>
 							<h3>Frequency</h3>
 							<Tabs
-								activeTab={formData?.frequency}
+								activeTab={frequency}
 								themeType="primary"
 								onChange={(e?:string) => handleTabChange(e)}
 							>
@@ -55,7 +71,7 @@ function FormLayout({ formData, setFormData }) {
 											size="md"
 											items={WEEK_OPTIONS}
 											enableMultiSelect
-											selectedItems={formData?.weekDay || []}
+											selectedItems={weekDay || []}
 											onItemChange={(val?:string) => setFormData({
 												...formData,
 												weekDay: val,
@@ -66,7 +82,7 @@ function FormLayout({ formData, setFormData }) {
 
 								<TabPanel name="monthly" title="Monthly">
 									<Select
-										value={formData?.monthDate}
+										value={monthDate}
 										onChange={(e) => setFormData({ ...formData, monthDate: e })}
 										placeholder="Select Date"
 										options={MONTH_DAYS}
@@ -81,7 +97,7 @@ function FormLayout({ formData, setFormData }) {
 						<h4>Select Time Slot</h4>
 						<div style={{ display: 'flex' }}>
 							<Select
-								value={formData?.timezone}
+								value={timezone}
 								onChange={(e) => setFormData({ ...formData, timezone: e })}
 								placeholder="Timezone"
 								options={[
@@ -97,7 +113,7 @@ function FormLayout({ formData, setFormData }) {
 							<Timepicker
 								name="date"
 								onChange={(e) => setFormData({ ...formData, time: e })}
-								value={formData?.time}
+								value={time}
 								use12hourformat
 							/>
 						</div>

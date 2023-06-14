@@ -1,6 +1,11 @@
 import MailTemplate from '../MailTemplate';
 
-function MailView({ formData, setFormData }) {
+interface Props {
+	formData?:object,
+	setFormData?:(p:object)=>void,
+}
+
+function MailView({ formData, setFormData }:Props) {
 	return (
 		<div>
 

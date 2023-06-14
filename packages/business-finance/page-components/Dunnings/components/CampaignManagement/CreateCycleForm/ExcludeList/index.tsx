@@ -8,7 +8,12 @@ import { config } from './config';
 import { dummyData } from './dummyData';
 import styles from './styles.module.css';
 
-function ExcludeList({ uncheckedRows, setUncheckedRows }) {
+interface Props {
+	uncheckedRows?:string[],
+	setUncheckedRows?:Function
+}
+
+function ExcludeList({ uncheckedRows, setUncheckedRows }:Props) {
 	const [search, setSearch] = useState('');
 
 	return (
