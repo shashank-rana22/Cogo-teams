@@ -33,7 +33,7 @@ export default function useEditServiceSchedule({ setShow = () => {} }) {
 
 			const NEW_DEFAULT_VALUES = {};
 
-			finalControls.forEach(({ name }) => {
+			(finalControls || []).forEach(({ name }) => {
 				NEW_DEFAULT_VALUES[name] = (name === 'schedule_arrival'
 					? formValues?.[name] < schedule_departure
 					: formValues?.[name] > schedule_departure)

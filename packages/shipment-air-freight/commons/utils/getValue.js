@@ -13,13 +13,15 @@ const getValue = (itemData, itemField, functions, emptyState) => {
 		return emptyState || '';
 	}
 
-	let val = getByKey(itemData, itemField.key || '');
+	const { key, func } = itemField || {};
 
-	if (itemField.func) {
-		if (functions[itemField.func]) {
-			val = functions[itemField.func](itemData, itemField);
-		} else if (ACTIONS[itemField.func]) {
-			val = ACTIONS[itemField.func](val);
+	let val = getByKey(itemData, key || '');
+
+	if (func) {
+		if (functions[func]) {
+			val = functions[func](itemData, itemField);
+		} else if (ACTIONS[func]) {
+			val = ACTIONS[func](val);
 		}
 	}
 

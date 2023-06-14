@@ -57,7 +57,7 @@ export default function CancelShipment({ setShow }) {
 					rules={{ required: 'Cancellation reason is required' }}
 				/>
 				{errors?.cancellation_reason
-					? <div className={styles.error_message}>{errors.cancellation_reason.message}</div>
+					? <div className={styles.error_message}>{errors.cancellation_reason?.message}</div>
 					: null}
 
 				<div className={styles.label}>Remarks</div>
@@ -68,7 +68,7 @@ export default function CancelShipment({ setShow }) {
 					size="sm"
 				/>
 				{errors?.remarks
-					? <div className={styles.error_message}>{errors.remarks.message}</div>
+					? <div className={styles.error_message}>{errors.remarks?.message}</div>
 					: null}
 			</Modal.Body>
 		);

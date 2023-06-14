@@ -10,7 +10,7 @@ const STYLES_COL = { padding: '0px 4px' };
 function Item({
 	item = {},
 	isTotalRow = false,
-	fields,
+	fields = [],
 	loading = false,
 	disabled = false,
 	isLast = false,

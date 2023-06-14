@@ -49,7 +49,7 @@ function Child({
 	const totalFieldsObject = { ...TOTAL_FIELDS };
 
 	return (
-		<div className={styles.fieldarray} key={field.id}>
+		<div className={styles.fieldarray} key={field?.id}>
 			{Object.keys(totalFieldsObject).map((key) => (
 				<div className={styles.row} key={key}>
 					{totalFieldsObject[key].map((controlItem) => {

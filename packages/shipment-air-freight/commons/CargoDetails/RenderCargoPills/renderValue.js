@@ -1,6 +1,6 @@
 import { Tooltip, Button } from '@cogoport/components';
 import { IcMCopy } from '@cogoport/icons-react';
-import { startCase, upperCase, format } from '@cogoport/utils';
+import { startCase, upperCase, format, isEmpty } from '@cogoport/utils';
 
 import CONSTANTS from '../../../constants/CONSTANTS';
 import copyToClipboard from '../../utils/copyToClipboard';
@@ -10,7 +10,6 @@ import styles from './styles.module.css';
 const {
 	ZEROTH_INDEX,
 	AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO,
-	EMPTY_LIST_LENGTH,
 } = CONSTANTS;
 
 const PACKAGES_MIN_LENGTH = 1;
@@ -18,15 +17,23 @@ const REQUIRED_DECIMAL_DIGIT = 2;
 const SINGLE_PACKAGE = 1;
 
 export const renderValue = (label, detail = {}) => {
-	const { packages = [] } = detail;
+	const {
+		packages = [], chargeable_weight, volume, weight, commodity,
+		airline = {}, packages_count, trade_type, payment_term,
+		inco_term, price_type, service_type, source, schedule_departure,
+		selected_schedule_departure, selected_schedule_arrival, schedule_arrival,
+		booking_note_deadline, bl_category, bl_type, cargo_readiness_date,
+		supplier_poc, shipper_details, buy_quotation_agreed_rates, hs_code = {},
+		master_airway_bill_number, house_airway_bill_number, commodity_details, commodity_type, commodity_sub_type,
+	} = detail;
 
-	const commodityDataDetails = detail.commodity_details?.[ZEROTH_INDEX] || {};
+	const commodityDataDetails = commodity_details?.[ZEROTH_INDEX] || {};
 
 	const valueForInput = Array.isArray(packages)
-				&& !!packages?.length ? packages[ZEROTH_INDEX] : null;
+				&& !isEmpty(packages) ? packages[ZEROTH_INDEX] : null;
 
-	const chargableWeight = Number(detail?.chargeable_weight)
-					|| Math.max(detail.volume * AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO, detail?.weight);
+	const chargableWeight = Number(chargeable_weight)
+					|| Math.max(volume * AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO, weight);
 
 	const dimension = valueForInput?.length
 		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
@@ -36,7 +43,7 @@ export const renderValue = (label, detail = {}) => {
 		? `${valueForInput.packages_count} Pkg, ${dimension} ${startCase(valueForInput?.packing_type)}`
 		: '';
 
-	const volume = ` ${detail.volume} cbm`;
+	const vol = ` ${volume} cbm`;
 
 	const packageDetails = () => {
 		if (packages?.length > PACKAGES_MIN_LENGTH) {
@@ -66,17 +73,20 @@ export const renderValue = (label, detail = {}) => {
 		return `Package: ${inputValue}`;
 	};
 
-	const formatPocData = (pocDetails) => (
-		<div>
-			<div>{pocDetails?.name}</div>
+	const formatPocData = (pocDetails) => {
+		const { name, mobile_country_code, mobile_number, email } = pocDetails || {};
+		return (
 			<div>
-				{pocDetails?.mobile_country_code}
-				-
-				{pocDetails?.mobile_number}
+				<div>{name}</div>
+				<div>
+					{mobile_country_code}
+					-
+					{mobile_number}
+				</div>
+				<div>{email}</div>
 			</div>
-			<div>{pocDetails?.email}</div>
-		</div>
-	);
+		);
+	};
 
 	const formatShipperDetails = (shipperDetails) => (
 		<div>
@@ -87,99 +97,93 @@ export const renderValue = (label, detail = {}) => {
 
 	const commodityDetails = () => (
 		<div>
-			{`${startCase(detail?.commodity)}, ${startCase(
-				commodityDataDetails?.commodity_type || detail?.commodity_type,
+			{`${startCase(commodity)}, ${startCase(
+				commodityDataDetails?.commodity_type || commodity_type,
 			)}, ${startCase(
-				commodityDataDetails?.commodity_subtype || detail?.commodity_sub_type,
+				commodityDataDetails?.commodity_subtype || commodity_sub_type,
 			)}`}
 		</div>
 	);
 
 	switch (label) {
 		case 'airline':
-			return `Airline : ${detail?.airline?.business_name || ''}`;
+			return `Airline : ${airline.business_name || ''}`;
 		case 'packages_count':
-			if (!detail.packages_count) {
+			if (!packages_count) {
 				return null;
 			}
 
-			if (detail.packages_count === SINGLE_PACKAGE) {
+			if (packages_count === SINGLE_PACKAGE) {
 				return '1 Package';
 			}
 
-			return `${detail.packages_count} Packages`;
+			return `${packages_count} Packages`;
 		case 'price_type':
-			return `Price Type: ${startCase(detail?.price_type || '')}`;
+			return `Price Type: ${startCase(price_type || '')}`;
 		case 'trade_type':
-			return startCase(detail.trade_type || '');
+			return startCase(trade_type || '');
 		case 'commodity':
 			return commodityDetails();
 		case 'payment_term':
-			return startCase(detail.payment_term || '');
+			return startCase(payment_term || '');
 		case 'inco_term':
-			return `Inco - ${upperCase(detail.inco_term || '')}`;
+			return `Inco - ${upperCase(inco_term || '')}`;
 		case 'packages':
-			if (packages?.length === EMPTY_LIST_LENGTH) {
+			if (isEmpty(packages)) {
 				return null;
 			}
 			return packageDetails();
 
 		case 'volume':
-			return ` ${volume} ${detail.service_type === 'ftl_freight_service'
-				|| detail.service_type === 'haulage_freight_service'
+			return ` ${vol} ${service_type === 'ftl_freight_service'
+				|| service_type === 'haulage_freight_service'
 				? ''
 				: `, Chargeable Weight: ${chargableWeight.toFixed(REQUIRED_DECIMAL_DIGIT)} kg`
 			}`;
 		case 'weight':
-			return ` ${detail.weight} kgs`;
+			return ` ${weight} kgs`;
 		case 'source':
-			return detail?.source === 'direct'
+			return source === 'direct'
 				? 'Sell Without Buy'
-				: startCase(detail.source || '');
-		case 'state':
-			return startCase(detail.state || '');
+				: startCase(source || '');
 		case 'schedule_departure':
-			return format(detail?.schedule_departure || detail?.selected_schedule_departure, 'dd MMM yyyy');
+			return format(schedule_departure || selected_schedule_departure, 'dd MMM yyyy');
 		case 'schedule_arrival':
-			return format(detail?.schedule_arrival || detail?.selected_schedule_arrival, 'dd MMM yyyy');
-		case 'bn_expiry':
-			return format(detail?.bn_expiry, 'dd MMM yyyy');
+			return format(schedule_arrival || selected_schedule_arrival, 'dd MMM yyyy');
 		case 'booking_note_deadline':
-			return format(detail?.booking_note_deadline, 'dd MMM yyyy - hh:mm aaa');
+			return format(booking_note_deadline, 'dd MMM yyyy - hh:mm aaa');
 		case 'bl_category':
-			return upperCase(detail.bl_category);
+			return upperCase(bl_category);
 		case 'bl_type':
-			return upperCase(detail.bl_type);
+			return upperCase(bl_type);
 		case 'cargo_readiness_date':
-			return format(detail?.cargo_readiness_date, 'dd MMM yyyy');
+			return format(cargo_readiness_date, 'dd MMM yyyy');
 		case 'supplier_poc':
-			return formatPocData(detail?.supplier_poc || {});
+			return formatPocData(supplier_poc || {});
 		case 'shipper_details':
-			return formatShipperDetails(detail?.shipper_details || {});
+			return formatShipperDetails(shipper_details || {});
 		case 'buy_quotation_agreed_rates':
-			return `${detail?.buy_quotation_agreed_rates.toFixed(REQUIRED_DECIMAL_DIGIT)} USD`;
+			return `${buy_quotation_agreed_rates?.toFixed(REQUIRED_DECIMAL_DIGIT)} USD`;
 		case 'hs_code':
-			return `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`;
-		case 'delivery_date':
-			return format(detail?.delivery_date, 'dd MMM yyyy');
+			return `${hs_code?.hs_code} - ${hs_code?.name}`;
 		case 'master_airway_bill_number':
 			return (
 				<div className={styles.mawb_container}>
 					<span>
 						MAWB Number:
 						{' '}
-						{detail?.master_airway_bill_number || ''}
+						{master_airway_bill_number || ''}
 					</span>
 					<Button
-						className="secondary sm"
-						onClick={() => copyToClipboard(detail?.master_airway_bill_number || '', 'MAWB Number')}
+						className="secondary"
+						onClick={() => copyToClipboard(master_airway_bill_number || '', 'MAWB Number')}
 					>
 						<IcMCopy fill="#f9ae64" />
 					</Button>
 				</div>
 			);
 		case 'house_airway_bill_number':
-			return `HAWB Number: ${detail?.house_airway_bill_number || ''}`;
+			return `HAWB Number: ${house_airway_bill_number || ''}`;
 		default:
 			return detail[label] || null;
 	}

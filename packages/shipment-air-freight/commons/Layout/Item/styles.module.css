@@ -3,10 +3,6 @@
 	max-height: 44px;
 }
 
-.item {
-	height: 100%;
-}
-
 .element {
 	:global {
 		.ui_input_container {

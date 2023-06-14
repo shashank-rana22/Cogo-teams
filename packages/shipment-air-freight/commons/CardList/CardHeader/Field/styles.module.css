@@ -11,15 +11,12 @@
 	}
 }
 
-.caret_up {
+.caret {
 	max-width: 12px;
 	margin-left: 5px;
 	cursor: pointer;
-	transform: rotate(180deg);
 }
 
-.caret_down {
-	max-width: 12px;
-	margin-left: 5px;
-	cursor: pointer;
+.caret_up {
+	transform: rotate(180deg);
 }

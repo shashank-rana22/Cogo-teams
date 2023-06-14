@@ -46,7 +46,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 
 	const renderLocation = () => (
 		<>
-			<div className={styles.flex_row_origin}>
+			<div className={styles.origin_details}>
 				{handleLocationDetails(origin_airport)}
 			</div>
 
@@ -54,7 +54,7 @@ function PortDetails({ data = {}, primary_service = {} }) {
 				<IcMPortArrow className="core_ui_icon" />
 			</div>
 
-			<div className={styles.flex_row_destination}>
+			<div className={styles.deatination_details}>
 				{handleLocationDetails(destination_airport)}
 			</div>
 		</>

@@ -2,14 +2,17 @@ import { Toast } from '@cogoport/components';
 
 export default function toastApiError(err) {
 	let message = '';
-	if (err?.response?.data) {
-		if (err.response.data?.base) {
-			message = err.response.data.base;
-		} else if (err.response.data.message) {
-			message = err.response.data.message;
+
+	const { response = {}, message: msg } = err || {};
+	const { data } = response;
+	if (data) {
+		if (data?.base) {
+			message = data.base;
+		} else if (data.message) {
+			message = data.message;
 		}
-	} else if (err?.message) {
-		message = err.message;
+	} else if (msg) {
+		message = msg;
 	}
 	if (message !== 'canceled') { Toast.error(message || 'Something went wrong !!'); }
 }

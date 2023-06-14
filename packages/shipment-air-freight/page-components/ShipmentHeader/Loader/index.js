@@ -3,7 +3,6 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const CUSTOM_STYLE = { height: '14px' };
 const LOADER_COUNT = 4;
 
 function Loader() {
@@ -16,13 +15,13 @@ function Loader() {
 				<Placeholder className="circle" width="45px" height="45px" />
 
 				<div className={styles.ports}>
-					<Placeholder style={{ ...CUSTOM_STYLE, margin: '0 0 10px 0' }} />
-					<Placeholder style={CUSTOM_STYLE} />
+					<Placeholder height="14px" style={{ margin: '0 0 10px 0' }} />
+					<Placeholder height="14px" />
 				</div>
 
 				<div className={cl` ${styles.ports} ${styles.destination}`}>
-					<Placeholder style={{ ...CUSTOM_STYLE, margin: '0 0 10px 0' }} />
-					<Placeholder style={CUSTOM_STYLE} />
+					<Placeholder height="14px" style={{ margin: '0 0 10px 0' }} />
+					<Placeholder height="14px" />
 				</div>
 
 				{Array.from(Array(LOADER_COUNT).keys()).map((key) => (

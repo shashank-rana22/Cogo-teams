@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 import getCanCancelShipment from './utils/getCanCancelShipment';
 
 function ShipmentHeader() {
-	const [showModal, setShowModal] = useState(false);
+	const [showModal, setShowModal] = useState();
 	const [showPopover, setShowPopover] = useState(false);
 
 	const { shipment_data, primary_service, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);

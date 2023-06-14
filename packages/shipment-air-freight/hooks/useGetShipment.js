@@ -15,6 +15,8 @@ export default function useGetShipment({ defaultParams = {}, defaultFilters = {}
 		},
 	}, { manual: true });
 
+	const { documents, primary_service_detail, summary, document_delay_status, booking_note_details } = data || {};
+
 	const getShipment = useCallback(async () => {
 		try {
 			await trigger();
@@ -29,12 +31,12 @@ export default function useGetShipment({ defaultParams = {}, defaultFilters = {}
 
 	return {
 		isGettingShipment,
-		refetch               : getShipment,
-		documents             : data?.documents,
-		primary_service       : data?.primary_service_detail,
-		shipment_data         : data?.summary,
-		document_delay_status : data?.document_delay_status,
-		booking_note_details  : data?.booking_note_details,
+		refetch         : getShipment,
+		documents,
+		primary_service : primary_service_detail,
+		shipment_data   : summary,
+		document_delay_status,
+		booking_note_details,
 		data,
 	};
 }

@@ -11,11 +11,13 @@ import TimelineItem from './TimelineItem';
 const ADD_ONE_INDEX = 1;
 
 function Timeline() {
+	const [showEditSchedule, setShowEditSchedule] = useState(false);
+
 	const {
 		shipment_data,
 		primary_service,
 		stakeholderConfig,
-		timelineData,
+		timelineData = [],
 		timelineLoading: loading,
 		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
@@ -26,11 +28,9 @@ function Timeline() {
 		}
 	}, [getShipmentTimeline, shipment_data?.id]);
 
-	const [showEditSchedule, setShowEditSchedule] = useState(false);
-
 	const showEditScheduleIcon = canEditSchedule({ primary_service, stakeholderConfig });
 
-	const filteredTimelineData = (timelineData || []).filter(
+	const filteredTimelineData = (timelineData).filter(
 		(timelineItem) => !(shipment_data?.services || []).includes(timelineItem.service_type),
 	);
 

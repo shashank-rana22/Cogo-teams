@@ -21,11 +21,13 @@ function Field({
 }) {
 	const [show, setShow] = useState(false);
 
+	const { name, sorting, label, key, hasStyle } = field;
+
 	const renderHeaderText = () => {
-		if (showCode && field.name) {
-			return field.name;
+		if (showCode && name) {
+			return name;
 		}
-		return field.label;
+		return label;
 	};
 
 	const handleOnchange = (item) => {
@@ -38,21 +40,21 @@ function Field({
 		setShow((prev) => (!prev));
 	};
 
-	const sortingKey = field.sorting ? Object?.keys(field.sorting)?.[ZEROTH_INDEX] : null;
+	const sortingKey = sorting ? Object?.keys(sorting)?.[ZEROTH_INDEX] : null;
 
-	const showSortingType =	field.sorting && field.sorting[sortingKey]
-	&& field.sorting[sortingKey] === Object?.keys(sort)?.[ZEROTH_INDEX];
+	const showSortingType =	sorting && sorting[sortingKey]
+	&& sorting[sortingKey] === Object?.keys(sort)?.[ZEROTH_INDEX];
 
 	return (
 		<div
-			style={field.hasStyle ? field.styles : STYLES_COL}
-			key={field.key || field.label}
+			style={hasStyle ? field.styles : STYLES_COL}
+			key={key || label}
 		>
 			<div className={styles.card_title}>
 				{field.tooltip ? (
 					<Tooltip theme="light" content={field.tooltip} placement="top">
 						<span>
-							{field.label}
+							{label}
 							<IcMInfo />
 						</span>
 					</Tooltip>
@@ -60,9 +62,9 @@ function Field({
 					renderHeaderText()
 				)}
 
-				{field.sorting && (
+				{sorting && (
 					<IcMArrowRotateDown
-						className={(showSortingType && show) ? styles.caret_up : styles.caret_down}
+						className={`${styles.caret} ${(showSortingType && show) ? styles.caret_up : ''}`}
 						onClick={() => handleOnchange(field)}
 					/>
 				)}

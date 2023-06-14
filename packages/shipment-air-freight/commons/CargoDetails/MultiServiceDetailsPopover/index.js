@@ -1,12 +1,10 @@
 import { Tooltip } from '@cogoport/components';
 import React from 'react';
 
-import CONSTANTS from '../../../constants/CONSTANTS';
+import ZEROTH_INDEX from '../../../constants/CONSTANTS';
 import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
-
-const { ZEROTH_INDEX } = CONSTANTS;
 
 const MAIN_SERVICES_MIN_LENGTH = 1;
 

@@ -1,7 +1,7 @@
 import { renderValue } from './renderValue';
 import styles from './styles.module.css';
 
-const labels = [
+const LABELS = [
 	'airline',
 	'commodity',
 	'inco_term',
@@ -9,7 +9,18 @@ const labels = [
 	'packages',
 	'volume',
 	'weight',
+	'source',
 	'price_type',
+	'bl_type',
+	'bl_category',
+	'schedule_arrival',
+	'schedule_departure',
+	'booking_note_deadline',
+	'hs_code',
+	'cargo_readiness_date',
+	'supplier_poc',
+	'shipper_details',
+	'buy_quotation_agreed_rates',
 	'master_airway_bill_number',
 	'house_airway_bill_number',
 ];
@@ -17,7 +28,7 @@ const labels = [
 function RenderCargoPills({ detail }) {
 	return (
 		<>
-			{labels.map((label) => {
+			{LABELS.map((label) => {
 				const value = renderValue(label, detail);
 				if (detail?.[label] && value) {
 					return (
