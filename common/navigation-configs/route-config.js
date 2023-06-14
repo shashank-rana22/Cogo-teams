@@ -7,6 +7,7 @@ import bnSalvage from './config/bn-salvage';
 import bookingDesk from './config/booking-desk';
 import businessFinance from './config/business-finance';
 import chakravyuh from './config/chakravyuh';
+import chro from './config/chro';
 import cogoAcademy from './config/cogo-academy';
 import cogoOne from './config/cogo-one';
 import cogoVerseAnalytics from './config/cogo-verse-analytics';
@@ -14,6 +15,7 @@ import contracts from './config/contracts';
 import controlledBooking from './config/controlled-booking';
 import costBookingDesk from './config/cost-booking-desk';
 import documentDesk from './config/document-desk';
+import employeePortal from './config/employee-portal';
 import enrichment from './config/enrichment';
 import groundOps from './config/ground-ops';
 import ingestion from './config/ingestion';
@@ -23,9 +25,11 @@ import kamMonitoring from './config/kam-monitoring';
 import lastMileDesk from './config/last-mile-desk';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
+import newEmployeeDashboard from './config/new-employee-dashboard';
 import performanceManagement from './config/performance-management';
 import referral from './config/referral';
 import revenueDesk from './config/revenue-desk';
+import rfqDashboard from './config/rfq-dashboard';
 import rolesAndPermissions from './config/roles-n-permission';
 import saasSubscription from './config/saas-subscription';
 import saasTools from './config/saas-tools';
@@ -64,6 +68,7 @@ const routeConfig = {
 	...inventory_management,
 	...kamMonitoring,
 	...performanceManagement,
+	...employeePortal,
 	...shipmentFclFreight,
 	...shipmentFclCfs,
 	...shipmentLclFreight,
@@ -81,8 +86,10 @@ const routeConfig = {
 	...airRepository,
 	...documentDesk,
 	...ingestion,
+	...newEmployeeDashboard,
 	...blDoCollectionRelease,
 	...saasTools,
+	...chro,
 	...controlledBooking,
 	...saasSubscription,
 	...so2Surface,
@@ -93,6 +100,7 @@ const routeConfig = {
 	...shipmentFtlFreight,
 	...shipmentLtlFreight,
 	...ticketManagement,
+	...rfqDashboard,
 };
 
 export default routeConfig;

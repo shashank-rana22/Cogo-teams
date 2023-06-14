@@ -1,0 +1,64 @@
+.select_mode {
+	display: flex;
+	align-items: center;
+	padding: 0 24px;
+	margin: 20px;
+	border: 1px solid var(--color-tertiary-blue-2);
+	border-radius: 8px;
+}
+
+.radio_group {
+	border-left: 1px solid var(--color-tertiary-blue-2);
+}
+
+.text_select {
+	padding-right: 20px;
+}
+
+.trade_party {
+	margin: 20px;
+}
+
+.trade_party_value {
+	margin-bottom: 8px;
+}
+
+.async_controller {
+	width: 45%;
+	margin-bottom: 8px;
+}
+
+.list_data {
+	margin-bottom: 8px;
+	font-weight: 600;
+}
+
+.card_list_details {
+	box-shadow: 0 0 16px rgb(98 127 172 / 20%);
+}
+
+.name_heading {
+	padding: 12px 16px;
+	border-bottom: 1px solid #e0e0e0;
+}
+
+.card {
+	display: flex;
+	flex-direction: column;
+	gap: 12px;
+	height: 250px;
+	padding: 12px 16px;
+}
+
+.card_name {
+	display: flex;
+	justify-content: space-between;
+	width: 100%;
+}
+
+.icon_delete {
+	width: 15px;
+	height: 15px;
+	color: var(--color-primary-error-red-1);
+	cursor: pointer;
+}
