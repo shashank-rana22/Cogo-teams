@@ -71,7 +71,7 @@ interface BillAdditionalObjectInterface {
 	reasonForCN? : string;
 	outstandingDocument? : string;
 	paymentType? : string;
-	isIncedental? : string;
+	isIncidental? : string;
 	advancedAmount? : number;
 	advancedAmountCurrency? : string;
 }

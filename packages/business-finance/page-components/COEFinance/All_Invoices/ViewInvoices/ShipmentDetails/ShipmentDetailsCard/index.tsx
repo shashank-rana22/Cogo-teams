@@ -78,7 +78,7 @@ function ShipmentDetailsCard({
 		reasonForCN = '',
 		outstandingDocument = '',
 		paymentType = '',
-		isIncedental = '',
+		isIncidental = '',
 		advancedAmount = 0,
 		advancedAmountCurrency = '',
 
@@ -737,7 +737,7 @@ function ShipmentDetailsCard({
 												<div className={styles.margin_bottom}>
 													Reason For CN -
 													{' '}
-													<span>{reasonForCN}</span>
+													<span>{startCase(reasonForCN)}</span>
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
@@ -746,7 +746,7 @@ function ShipmentDetailsCard({
 												<div className={styles.margin_bottom}>
 													Payment Type-
 													{' '}
-													<span>{paymentType}</span>
+													<span>{startCase(paymentType)}</span>
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
@@ -771,12 +771,12 @@ function ShipmentDetailsCard({
 											)}
 
 											{shipmentType === 'ftl_freight'
-											&& billType === 'BILL' && 		isIncedental
+											&& billType === 'BILL' && 		isIncidental
 											&& (
 												<div className={styles.margin_bottom}>
-													Is Incedental-
+													Is Incidental-
 													{' '}
-													<span>{isIncedental}</span>
+													<span>{startCase(isIncidental)}</span>
 												</div>
 											)}
 
