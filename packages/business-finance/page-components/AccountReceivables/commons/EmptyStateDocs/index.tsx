@@ -1,8 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import styles from './styles.module.css';
 
-const NODATA_IMAGE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg';
+const { nodata_image: NODATA_IMAGE } = GLOBAL_CONSTANTS.image_url || {};
+
 function EmptyStateDocs({ text = 'No Data Found' }) {
 	return (
 		<div className={styles.container}>
