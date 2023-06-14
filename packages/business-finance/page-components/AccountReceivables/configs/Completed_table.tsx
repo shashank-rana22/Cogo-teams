@@ -10,23 +10,25 @@ import RenderIRNGenerated from '../commons/RenderIRNGenerated';
 import RibbonRender from '../commons/RibbonRender';
 import { getDocumentNumber, getDocumentUrl } from '../Utils/getDocumentNumber';
 
+import CheckboxItem from './CheckboxItem';
+import HeaderCheckbox from './HeaderCheckbox';
 import ShipmentView from './ShipmentView';
 import SortHeaderInvoice from './SortHeaderInvoice';
 import styles from './styles.module.css';
 
-const status = {
+const STATUS = {
 	UNPAID           : '#FEF1DF',
 	'PARTIALLY PAID' : '#D9EAFD',
 	PAID             : '#CDF7D4',
 };
 
-const invoiceType = {
+const INVOICE_TYPE = {
 	REIMBURSEMENT : '#FEF1DF',
 	CREDIT_NOTE   : '#D9EAFD',
 	INVOICE       : '#CDF7D4',
 };
 
-const invoiceStatus = {
+const INVOICE_STATUS_MAPPING = {
 	DRAFT            : '#fcedbf',
 	POSTED           : '#a1f0ae',
 	FINANCE_ACCEPTED : '#CDF7D4',
@@ -37,6 +39,8 @@ const invoiceStatus = {
 	IRN_CANCELLED    : '#fbc5b0',
 	FINANCE_REJECTED : '#f9ac98',
 };
+
+const IRN_GENERATEABLE_STATUSES = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 
 interface InvoiceTable {
 	refetch?: Function,
@@ -50,6 +54,11 @@ interface InvoiceTable {
 	sortStyleDueDateDesc?: string,
 	invoiceFilters?: object,
 	setinvoiceFilters?: (p:object) => void,
+	checkedRows?:object[],
+	setCheckedRows?:Function,
+	totalRows?:object[],
+	isHeaderChecked?:boolean,
+	setIsHeaderChecked?:Function,
 }
 const MIN_NAME_STRING = 0;
 const MAX_NAME_STRING = 12;
@@ -66,8 +75,31 @@ const completedColumn = ({
 	sortStyleDueDateDesc,
 	invoiceFilters,
 	setinvoiceFilters,
+	checkedRows,
+	setCheckedRows,
+	totalRows,
+	isHeaderChecked,
+	setIsHeaderChecked,
 }: InvoiceTable) => [
-
+	{
+		Header: <HeaderCheckbox
+			isHeaderChecked={isHeaderChecked}
+			setIsHeaderChecked={setIsHeaderChecked}
+			totalRows={totalRows}
+			IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
+			setCheckedRows={setCheckedRows}
+		/>,
+		span     : 1,
+		id       : 'checkbox',
+		accessor : (row?:object) => (
+			<CheckboxItem
+				IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
+				checkedRows={checkedRows}
+				setCheckedRows={setCheckedRows}
+				row={row}
+			/>
+		),
+	},
 	{
 		Header   : showName && 'Name',
 		id       : 'name',
@@ -101,7 +133,7 @@ const completedColumn = ({
 		accessor : (row) => (
 			(
 				<div className={styles.fieldPair}>
-					{(getDocumentNumber({ itemData: row }) as string).length > 10 ? (
+					{(getDocumentNumber({ itemData: row }) as string)?.length > 10 ? (
 						<Tooltip
 							interactive
 							placement="top"
@@ -133,7 +165,7 @@ const completedColumn = ({
 							</div>
 						)}
 					<div>
-						<Pill size="sm" color={invoiceType[(getByKey(row, 'invoiceType') as string)]}>
+						<Pill size="sm" color={INVOICE_TYPE[(getByKey(row, 'invoiceType') as string)]}>
 
 							{row?.eInvoicePdfUrl ? 'E INVOICE' : startCase(getByKey(row, 'invoiceType') as string)}
 
@@ -183,7 +215,7 @@ const completedColumn = ({
 				<div
 					className={styles.styled_pills}
 					style={{
-						'--color': status[(getByKey(row, 'status') as string)],
+						'--color': STATUS[(getByKey(row, 'status') as string)],
 					} as CSSProperties}
 				>
 
@@ -311,7 +343,7 @@ const completedColumn = ({
 			<div
 				className={styles.styled_pills}
 				style={{
-					'--color': invoiceStatus[(getByKey(row, 'invoiceStatus') as string)],
+					'--color': INVOICE_STATUS_MAPPING[(getByKey(row, 'invoiceStatus') as string)],
 				} as CSSProperties}
 			>
 				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (

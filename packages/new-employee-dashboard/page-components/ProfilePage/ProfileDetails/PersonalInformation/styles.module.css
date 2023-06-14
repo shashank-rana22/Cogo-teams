@@ -1,0 +1,21 @@
+.flex_wrapper {
+	min-width: 250px;
+	padding-right: 14px;
+	padding-bottom: 8px;
+}
+
+.value {
+	font-size: 13;
+	font-weight: 600;
+}
+
+.label {
+	padding-top: 20px;
+	padding-bottom: 4px;
+	color: #828282;
+}
+
+.container {
+	display: flex;
+	flex-wrap: wrap;
+}
