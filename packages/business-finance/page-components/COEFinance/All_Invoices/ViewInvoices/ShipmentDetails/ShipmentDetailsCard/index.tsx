@@ -741,7 +741,7 @@ function ShipmentDetailsCard({
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
-											&& (billType === 'BILL' || billType === 'purforma_invoice') && 	paymentType
+											&& billType === 'BILL'  && 	paymentType
 											&& (
 												<div className={styles.margin_bottom}>
 													Payment Type-
@@ -750,7 +750,7 @@ function ShipmentDetailsCard({
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
-											&& (billType === 'BILL' || billType === 'purforma_invoice')
+											&& billType === 'BILL' 
 												&& !!advancedAmount
 											&& (
 												<div className={styles.advanced_amount}>
