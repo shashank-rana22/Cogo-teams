@@ -26,7 +26,7 @@ export const getLineItems = ({ customData = {}, importerExporterId = '' }) => {
 
 	lineItems.forEach((item) => {
 		const newItem = item;
-		newItem.service_description =			customerToServiceDescription[importerExporterId] || '';
+		newItem.service_description = customerToServiceDescription[importerExporterId] || '';
 		newItem.description = 'Fixed';
 	});
 
