@@ -11,7 +11,6 @@ const controls = [
 		label       : 'Squad leader',
 		placeholder : 'Select Squad leader',
 		type        : 'asyncSelect',
-		multiple    : true,
 		initialCall : false,
 		asyncKey    : 'partner_users',
 		valueKey    : 'user_id',

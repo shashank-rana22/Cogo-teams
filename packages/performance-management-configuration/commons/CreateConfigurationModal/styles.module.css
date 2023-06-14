@@ -2,3 +2,7 @@
     padding: 8px 0px;
     font-weight: 600;
 }
+
+.error_message {
+	color: #ee3425;
+}

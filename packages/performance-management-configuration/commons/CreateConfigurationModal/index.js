@@ -4,7 +4,7 @@ import getElementController from '../../configs/getElementController';
 
 import styles from './styles.module.css';
 
-const RenderModalBody = ({ controls, control }) => (controls || []).map((controlItem) => {
+const RenderModalBody = ({ controls, control, errors }) => (controls || []).map((controlItem) => {
 	const { type, label: controlLabel, name } = controlItem || {};
 
 	if (!type) return null;
@@ -24,6 +24,13 @@ const RenderModalBody = ({ controls, control }) => (controls || []).map((control
 					name={name}
 				/>
 			</div>
+
+			{errors[name] ? (
+				<div className={styles.error_message}>
+					{' '}
+					{errors[name]?.message}
+				</div>
+			) : null}
 		</div>
 	);
 });
@@ -37,6 +44,7 @@ function CreateConfigurationModal({
 	onClickSubmitButton = () => {},
 	loading,
 	handleSubmit,
+	errors,
 }) {
 	return (
 		<div>
@@ -49,7 +57,7 @@ function CreateConfigurationModal({
 				<Modal.Header title={`Add ${label}`} />
 
 				<Modal.Body>
-					<RenderModalBody controls={controls} control={control} />
+					<RenderModalBody controls={controls} control={control} errors={errors} />
 				</Modal.Body>
 
 				<Modal.Footer>

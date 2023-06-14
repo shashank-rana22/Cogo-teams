@@ -1,40 +1,39 @@
 const controls = [
 	{
-		name        : 'tribe_name',
-		label       : 'Tribe Name',
+		name        : 'chapter_name',
+		label       : 'Chapter Name',
 		type        : 'input',
-		placeholder : 'Enter Tribe name',
-
+		placeholder : 'Enter squad name',
 	},
 
 	{
-		name        : 'tribe_leader_id',
+		name        : 'chapter_leader_id',
+		label       : 'Chapter leader',
+		placeholder : 'Select Chapter leader',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
-		label       : 'Tribe leader',
-		placeholder : 'Tribe leader',
+		initialCall : false,
+		asyncKey    : 'partner_users',
+		valueKey    : 'user_id',
 		rules       : {
-			required: 'Tribe leader is required',
+			required: 'Chapter leader is required',
 		},
 		params: {
 			filters: {
 				status               : 'active',
 				partner_entity_types : ['cogoport'],
-
 			},
-			page_limit: 100,
 		},
 	},
 
 	{
-		name        : 'squad_ids',
+		name        : 'sub_chapter_ids',
 		type        : 'asyncSelect',
 		asyncKey    : 'partner_users_ids',
-		label       : 'Squads',
-		placeholder : 'Squads',
+		label       : 'Sub chapter',
+		placeholder : 'Sub chapter',
 		multiple    : true,
 		rules       : {
-			required: 'Squads are required',
+			required: 'Sub chapters are required',
 		},
 		params: {
 			filters: {
