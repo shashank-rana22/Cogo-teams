@@ -24,7 +24,7 @@ function CogoPoints() {
 	const currencyCode = geo.country.currency.code;
 	const transactionType = activeStatsCard === 'liability_point_value' ? 'credit' : 'debit';
 
-	const { statsData = {}, loading = false } = useGetCogopointStats({ activeHeaderTab, selectedDate });
+	const { statsData = {}, loading = false } = useGetCogopointStats({ activeHeaderTab, selectedDate, currencyCode });
 
 	const { data = {}, credit_data = {}, debit_data = {} } = statsData || {};
 
@@ -32,7 +32,7 @@ function CogoPoints() {
 		topHistoryData = {},
 		topHistoryLoading = false,
 		setPagination = () => {},
-	} = useListCogopointTopHistory({ transactionType, selectedDate, activeStatsCard });
+	} = useListCogopointTopHistory({ transactionType, selectedDate, activeStatsCard, activeHeaderTab, currencyCode });
 
 	const { credit_cogopoint_date_data = {}, list = [], page, page_limit, total_count } = topHistoryData;
 
@@ -40,7 +40,10 @@ function CogoPoints() {
 
 	const checkPieChart = (PIE_CHART_CHECK || []).includes(activeStatsCard);
 
-	useEffect(() => setSelectedDate({}), [activeHeaderTab, setSelectedDate]);
+	useEffect(() => {
+		setSelectedDate({});
+		setActiveStatsCard('liability_point_value');
+	}, [activeHeaderTab, setSelectedDate]);
 
 	return (
 		<>
@@ -58,6 +61,7 @@ function CogoPoints() {
 						activeHeaderTab={activeHeaderTab}
 						data={data}
 						loading={loading}
+						currencyCode={currencyCode}
 					/>
 
 					{topHistoryLoading ? <ChartLoadingState /> : (
@@ -101,6 +105,8 @@ function CogoPoints() {
 						page_limit={page_limit}
 						total_count={total_count}
 						setPagination={setPagination}
+						currencyCode={currencyCode}
+						activeStatsCard={activeStatsCard}
 					/>
 				</>
 			)}

@@ -1,10 +1,9 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetCogopointStats = ({ activeHeaderTab = '', selectedDate = {} }) => {
+const useGetCogopointStats = ({ activeHeaderTab = '', selectedDate = {}, currencyCode = '' }) => {
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/get_cogopoint_stats',
+		url    : '/get_cogopoint_liability_stats',
 		method : 'get',
 	}, { manual: true });
 
@@ -13,13 +12,13 @@ const useGetCogopointStats = ({ activeHeaderTab = '', selectedDate = {} }) => {
 	const getCogopointStats = useCallback(() => {
 		trigger({
 			params: {
-				currency          : GLOBAL_CONSTANTS.currency_code.INR,
+				currency          : currencyCode,
 				organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
 				start_date        : startDate || undefined,
 				end_date          : endDate || undefined,
 			},
 		});
-	}, [trigger, activeHeaderTab, startDate, endDate]);
+	}, [trigger, activeHeaderTab, startDate, endDate, currencyCode]);
 
 	useEffect(() => {
 		getCogopointStats();

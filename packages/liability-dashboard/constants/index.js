@@ -21,28 +21,51 @@ export const STATS_CARDS = [
 	{
 		label  : 'CP Liability',
 		name   : 'liability_point_value',
+		type   : 'cp_liability',
 		access : ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
 	},
 	{
 		label  : 'CP Burnt',
 		name   : 'total_burnt_point_value',
+		type   : 'cp_burnt',
 		access : ['overall', 'importer_exporter', 'channel_partner'],
 	},
 	{
-		label  : 'Burnt Thru Shipments',
+		label  : 'Burnt (Shipments)',
 		name   : 'shipment_burnt_point_value',
+		type   : 'shipment',
 		access : ['overall', 'importer_exporter', 'channel_partner'],
 	},
 	{
-		label  : 'Burnt Thru Subscriptions',
+		label  : 'Burnt (Subscriptions)',
 		name   : 'saas_subscription_burnt_point_value',
+		type   : 'subscription',
 		access : ['overall', 'importer_exporter', 'channel_partner'],
 	},
 	{
-		label  : 'Burnt Thru Cogostore',
+		label  : 'Burnt (Cogostore)',
 		name   : 'cogostore_burnt_point_value',
+		type   : 'cogostore',
 		access : ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
 	},
 ];
 
 export const PIE_CHART_CHECK = ['liability_point_value', 'total_burnt_point_value'];
+
+export const EVENT_MAPPING = {
+	shipment_burnt_point_value          : 'shipment',
+	saas_subscription_burnt_point_value : 'saas_subscription',
+	cogostore_burnt_point_value         : 'cogostore',
+};
+
+export const USER_TYPE_COLOR_MAPPING = {
+	channel_partner   : '#c4dc91',
+	importer_exporter : '#fef199',
+	affiliate         : '#f8aea8',
+};
+
+export const USER_TYPE_MAPPING = {
+	channel_partner   : 'CP',
+	importer_exporter : '#IE',
+	affiliate         : 'Affiliate',
+};

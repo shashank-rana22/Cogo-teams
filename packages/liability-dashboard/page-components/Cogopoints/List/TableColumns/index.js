@@ -1,23 +1,13 @@
 import { Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
+import { USER_TYPE_COLOR_MAPPING, USER_TYPE_MAPPING } from '../../../../constants';
+
 import styles from './styles.module.css';
 
 const EARNED_VALUE = 0;
 
-const USER_TYPE_COLOR_MAPPING = {
-	channel_partner   : '#c4dc91',
-	importer_exporter : '#fef199',
-	affiliate         : '#f8aea8',
-};
-
-const USER_TYPE_MAPPING = {
-	channel_partner   : 'CP',
-	importer_exporter : '#IE',
-	affiliate         : 'Affiliate',
-};
-
-function TableColumns() {
+function TableColumns({ currencyCode = '', activeStatsCard = '' }) {
 	const columns = [
 		{
 			Header   : 'Name',
@@ -26,6 +16,11 @@ function TableColumns() {
 					{startCase(item?.user_name)}
 				</div>
 			),
+			conditions: ['liability_point_value',
+				'total_burnt_point_value',
+				'shipment_burnt_point_value',
+				'saas_subscription_burnt_point_value',
+				'cogostore_burnt_point_value'],
 		},
 		{
 			Header   : 'Organisation Name',
@@ -34,6 +29,11 @@ function TableColumns() {
 					{startCase(item?.organization_name)}
 				</div>
 			),
+			conditions: ['liability_point_value',
+				'total_burnt_point_value',
+				'shipment_burnt_point_value',
+				'saas_subscription_burnt_point_value',
+				'cogostore_burnt_point_value'],
 		},
 		{
 			Header   : 'User Type',
@@ -42,42 +42,72 @@ function TableColumns() {
 					{startCase(USER_TYPE_MAPPING[item?.organization_type])}
 				</Pill>
 			),
+			conditions: ['liability_point_value',
+				'total_burnt_point_value',
+				'shipment_burnt_point_value',
+				'saas_subscription_burnt_point_value', 'cogostore_burnt_point_value'],
 		},
 		{
-			Header   : 'TOTAL',
+			Header   : `Total (${currencyCode})`,
 			accessor : (item = {}) => (
 				<div className={styles.user_name}>
 					{item?.total_value || EARNED_VALUE}
 				</div>
 			),
+			conditions: ['liability_point_value',
+				'total_burnt_point_value',
+				'shipment_burnt_point_value',
+				'saas_subscription_burnt_point_value', 'cogostore_burnt_point_value'],
 		},
 		{
-			Header   : 'Shipments',
+			Header   : `Shipment (${currencyCode})`,
 			accessor : (item = {}) => (
 				<div className={styles.earned_value}>
-					{startCase(item?.shipment_point_value) || EARNED_VALUE}
+					{item?.shipment_point_value || EARNED_VALUE}
 				</div>
 			),
+			conditions: ['liability_point_value',
+				'total_burnt_point_value',
+				'shipment_burnt_point_value',
+				'saas_subscription_burnt_point_value',
+				'cogostore_burnt_point_value'],
 		},
 		{
-			Header   : 'Subscriptions',
+			Header   : `Subscription (${currencyCode})`,
 			accessor : (item = {}) => (
 				<div className={styles.earned_value}>
-					{startCase(item?.saas_subscription_point_value) || EARNED_VALUE}
+					{item?.saas_subscription_point_value || EARNED_VALUE}
 				</div>
 			),
+			conditions: ['liability_point_value',
+				'total_burnt_point_value',
+				'shipment_burnt_point_value',
+				'saas_subscription_burnt_point_value',
+				'cogostore_burnt_point_value'],
 		},
 		{
-			Header   : 'Referrals',
+			Header   : `Referral (${currencyCode})`,
 			accessor : (item = {}) => (
 				<div className={styles.earned_value}>
-					{startCase(item?.referral_point_value) || EARNED_VALUE}
+					{item?.referral_point_value || EARNED_VALUE}
 				</div>
 			),
+			conditions: ['liability_point_value'],
+		},
+		{
+			Header   : `Cogostore (${currencyCode})`,
+			accessor : (item = {}) => (
+				<div className={styles.earned_value}>
+					{item?.cogostore_point_value || EARNED_VALUE}
+				</div>
+			),
+			conditions: ['total_burnt_point_value',
+				'shipment_burnt_point_value',
+				'saas_subscription_burnt_point_value',
+				'cogostore_burnt_point_value'],
 		},
 	];
-
-	return columns;
+	return columns.filter((item) => item.conditions.includes(activeStatsCard));
 }
 
 export default TableColumns;

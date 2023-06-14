@@ -1,28 +1,41 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-const useListCogopointTopHistory = ({ transactionType = '', selectedDate = {}, activeStatsCard = '' }) => {
+import { EVENT_MAPPING } from '../constants';
+
+const DEFAULT_PAGE_NUMBER = 1;
+
+const useListCogopointTopHistory = ({
+	transactionType = '',
+	selectedDate = {},
+	activeStatsCard = '',
+	activeHeaderTab = '',
+	currencyCode = '',
+}) => {
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/list_cogopoint_top_history',
 		method : 'get',
 	}, { manual: true });
 
-	const [pagination, setPagination] = useState(1);
+	const [pagination, setPagination] = useState(DEFAULT_PAGE_NUMBER);
 	const { startDate, endDate } = selectedDate || {};
 
 	const listCogopointTopHistory = useCallback(() => {
 		trigger({
 			params: {
-				transaction_type                    : transactionType,
 				credit_cogopoint_date_data_required : true,
 				page                                : pagination,
+				currency                            : currencyCode,
 				filters                             : {
-					from_date : startDate || undefined,
-					to_date   : endDate || undefined,
+					transaction_type  : transactionType,
+					organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
+					from_date         : startDate || undefined,
+					to_date           : endDate || undefined,
+					event             : EVENT_MAPPING[activeStatsCard] || undefined,
 				},
 			},
 		});
-	}, [trigger, transactionType, pagination, startDate, endDate]);
+	}, [trigger, pagination, currencyCode, transactionType, activeHeaderTab, startDate, endDate, activeStatsCard]);
 
 	useEffect(() => {
 		listCogopointTopHistory();
