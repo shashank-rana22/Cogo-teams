@@ -24,7 +24,12 @@ function CancellationAgreement({ data }: DataInterface) {
 		);
 	}
 
-	const { agreementNumber, agreementDate, agreementDocument, einvoiceForm04 } = cancelledEInvoiceDetails || {};
+	const {
+		agreementNumber = '',
+		agreementDate = '',
+		agreementDocument = '',
+		einvoiceForm04 = '',
+	} = cancelledEInvoiceDetails || {};
 
 	const dynamicDataVariables = [
 		{ label: 'Agreement No. -', value: agreementNumber },
