@@ -88,6 +88,7 @@ function ProfileDetails({
 						setRaiseTicketModal={setRaiseTicketModal}
 						zippedTicketsData={zippedTicketsData}
 						quotationSentData={quotationEmailSentAt}
+						viewType={viewType}
 					/>
 				)}
 			</div>
@@ -98,12 +99,13 @@ function ProfileDetails({
 				openNewTab={openNewTab}
 				loading={loading}
 				disableQuickActions={disableQuickActions}
-				documents_count={documents_count}
+				documentsCount={documents_count}
 				activeMessageCard={activeMessageCard}
 				activeVoiceCard={activeVoiceCard}
 				activeTab={activeTab}
 				quotationEmailSentAt={quotationEmailSentAt}
 				orgId={orgId}
+				viewType={viewType}
 			/>
 		</div>
 	);

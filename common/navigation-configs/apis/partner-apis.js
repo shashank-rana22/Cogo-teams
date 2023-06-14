@@ -12131,6 +12131,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'voice_call',
 		},
+		{
+			api          : 'list_shipment_flash_booking_rates',
+			access_type  : 'private',
+			service_name : 'shipment',
+		},
 	],
 	analytics_dashboard: [
 		{

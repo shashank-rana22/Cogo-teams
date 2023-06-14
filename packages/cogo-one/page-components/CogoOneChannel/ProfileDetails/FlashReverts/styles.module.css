@@ -1,0 +1,31 @@
+.container {
+	height: 100%;
+}
+
+.header_flex {
+	display: flex;
+	align-items: center;
+	height: 15%;
+}
+
+.each_filter {
+	width: 30%;
+	padding: 20px;
+	margin-left: 10px;
+	color: #4f4f4f;
+	text-align: center;
+	cursor: pointer;
+	background: #fff;
+	border-radius: 6px;
+	box-shadow: 0 0 4px 0 #627fac33;
+}
+
+.on_loading {
+	cursor: not-allowed;
+}
+
+.list {
+	height: 75%;
+	overflow-x: hidden;
+	overflow-y: auto;
+}

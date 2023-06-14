@@ -76,7 +76,6 @@ function CogoOne() {
 	} = useCreateUserInactiveStatus({ fetchworkPrefernce, setOpenModal });
 
 	const app = getApps().length === 0 ? initializeApp(firebaseConfig) : getApp();
-
 	useEffect(() => {
 		if (process.env.NODE_ENV === 'production') {
 			const auth = getAuth();
