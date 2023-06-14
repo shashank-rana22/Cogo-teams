@@ -53,21 +53,19 @@ function Squad() {
 				</div>
 			)}
 
-			{
-				showAddSquadModal ? (
-					<CreateConfigurationModal
-						showModal={showAddSquadModal}
-						setShowModal={setShowAddSquadModal}
-						label={ADD_BUTTON_LABEL}
-						controls={controls}
-						control={control}
-						errors={errors}
-						onClickSubmitButton={onClickSubmitButton}
-						loading={loading}
-						handleSubmit={handleSubmit}
-					/>
-				) : null
-			}
+			{showAddSquadModal ? (
+				<CreateConfigurationModal
+					showModal={showAddSquadModal}
+					setShowModal={setShowAddSquadModal}
+					label={ADD_BUTTON_LABEL}
+					controls={controls}
+					control={control}
+					errors={errors}
+					onClickSubmitButton={onClickSubmitButton}
+					loading={loading}
+					handleSubmit={handleSubmit}
+				/>
+			) : null}
 		</div>
 	);
 }

@@ -171,6 +171,16 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'create_chapter',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'create_sub_chapter',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 
