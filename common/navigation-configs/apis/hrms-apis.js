@@ -146,6 +146,31 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'create_tribe',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_tribes',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_squads',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_chapters',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'list_all_sub_chapters',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

@@ -38,8 +38,6 @@ function CreateConfigurationModal({
 	loading,
 	handleSubmit,
 }) {
-	const title = `Add ${label}`;
-
 	return (
 		<div>
 			<Modal
@@ -48,7 +46,7 @@ function CreateConfigurationModal({
 				onClose={() => setShowModal(false)}
 				placement="center"
 			>
-				<Modal.Header title={title} />
+				<Modal.Header title={`Add ${label}`} />
 
 				<Modal.Body>
 					<RenderModalBody controls={controls} control={control} />
