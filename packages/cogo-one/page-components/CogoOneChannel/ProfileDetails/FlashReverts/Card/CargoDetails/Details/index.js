@@ -3,13 +3,9 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { differenceInDays } from '@cogoport/utils';
 import React from 'react';
 
-import styles from './styles.module.css';
+import { DETENTION_INFO_KEY_MAPPING } from '../../../../../../../constants/flashRatesMapping';
 
-const DETENTION_INFO_KEY_MAPPING = {
-	air_freight : { label: 'Destination Detention Storage Free Hours', key: 'destination_storage_free_days' },
-	lcl_freight : { label: 'Destination Detention Storage Free Days', key: 'destination_storage_free_days' },
-	default     : { label: 'Destination Detention Free Days', key: 'free_days_detention_destination' },
-};
+import styles from './styles.module.css';
 
 function Details({ serviceType, serviceDetails }) {
 	const {
@@ -20,11 +16,11 @@ function Details({ serviceType, serviceDetails }) {
 		service,
 	} = serviceDetails || {};
 
-	const { label, key } = DETENTION_INFO_KEY_MAPPING[serviceType || 'default'];
+	const { label, key } = DETENTION_INFO_KEY_MAPPING[serviceType] || DETENTION_INFO_KEY_MAPPING.default;
 
 	const INFO_MAPPING = [
 		{
-			key   : 'Cargo Ready',
+			label : 'Cargo Ready',
 			value : formatDate({
 				date       : cargo_readiness_date,
 				formatType : 'date',
@@ -32,7 +28,7 @@ function Details({ serviceType, serviceDetails }) {
 			}),
 		},
 		{
-			key   : 'Expected Departure',
+			label : 'Expected Departure',
 			value : formatDate({
 				date       : schedule_departure || selected_schedule_departure,
 				formatType : 'date',
@@ -40,8 +36,8 @@ function Details({ serviceType, serviceDetails }) {
 			}),
 		},
 		{
-			key   : label,
-			value : serviceDetails?.[key] || '0',
+			label,
+			value: serviceDetails?.[key] || '0',
 		},
 	];
 
@@ -50,14 +46,26 @@ function Details({ serviceType, serviceDetails }) {
 		new Date(selected_schedule_departure || new Date()),
 	);
 
-	const { refer_temprature, refer_humidity } = service || {};
-
-	const shipment_type = service?.number_of_stops ? 'Indirect Shipment'
+	const shipmentType = service?.number_of_stops ? 'Indirect Shipment'
 		: 'Direct Shipment';
 
 	return (
 		<div className={styles.container}>
-			ss
+			{INFO_MAPPING.map((eachItem) => (
+				<div key={eachItem?.label} className={styles.label}>
+					{eachItem?.label}
+					-
+					<span>{eachItem?.value}</span>
+				</div>
+			))}
+			<div className={styles.label}>
+				Transit Time-
+				<span>{transitTime}</span>
+			</div>
+			<div className={styles.label}>
+				Shipment Type-
+				<span>{shipmentType}</span>
+			</div>
 		</div>
 	);
 }

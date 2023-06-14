@@ -65,3 +65,33 @@ export const SERVICES_WITH_DETAILS = [
 	'lcl_freight_service',
 	'air_freight_service',
 ];
+
+export const DETENTION_INFO_KEY_MAPPING = {
+	air_freight : { label: 'Destination Detention Storage Free Hours', key: 'destination_storage_free_days' },
+	lcl_freight : { label: 'Destination Detention Storage Free Days', key: 'destination_storage_free_days' },
+	default     : { label: 'Destination Detention Free Days', key: 'free_days_detention_destination' },
+};
+
+export const SERVICE_LABEL_MAPPING = [
+	'airline',
+	'container_size',
+	'containers_count',
+	'container_type',
+	'commodity',
+	'inco_term',
+	'trucks_count',
+	'trade_type',
+	'packages',
+	'volume',
+	'weight',
+	'master_airway_bill_number',
+	'house_airway_bill_number',
+	'haulage_type',
+	'transport_mode',
+	'cargo_weight_per_container',
+	'destination_cargo_handling_type',
+	'truck_type',
+	'trip_type',
+	'lr_number',
+	'commodity_description',
+];
