@@ -9,51 +9,62 @@ import ToolTipWrapper from './ToolTipWrapper';
 
 const MAX_BANK_LENGTH = 12;
 const MAX_LENGTH_ECLIPSES = 12;
+const MAX_LENGTH_VISIBLE = 12;
 
 interface ColumnCardInterface {
-	refetch?:()=> void
-	item?:{
-		customerName?:string
-		accCode?:string
-		bankAccountNumber?:string
-		orgSerialId?:string
-		bankName?:string
-		paymentNumValue?:string
-		amount?:string
-		utr?:string
-		entityType?:string
-		currency?:string
-		id?:string
-		paymentDocumentStatus?:string
-		accMode?:string
-		paymentCode?:string
-		sageOrganizationId?:string
-	}
+	refetch?: () => void;
+	item?: {
+		customerName?: string;
+		accCode?: string;
+		bankAccountNumber?: string;
+		orgSerialId?: string;
+		bankName?: string;
+		paymentNumValue?: string;
+		amount?: string;
+		utr?: string;
+		entityType?: string;
+		currency?: string;
+		id?: string;
+		paymentDocumentStatus?: string;
+		accMode?: string;
+		paymentCode?: string;
+		sageOrganizationId?: string;
+	};
+	getTableBodyCheckbox: (val: object) => JSX.Element;
 }
 
-function ColumnCard({ item, refetch }:ColumnCardInterface) {
+function ColumnCard({ item, refetch, getTableBodyCheckbox }: ColumnCardInterface) {
 	const {
-		customerName = '', bankName = '', accCode = '',
-		bankAccountNumber = '', orgSerialId = '', paymentNumValue = '',
-		amount = '', utr = '', entityType = '', currency = '',
+		customerName = '',
+		bankName = '',
+		accCode = '',
+		bankAccountNumber = '',
+		orgSerialId = '',
+		paymentNumValue = '',
+		amount = '',
+		utr = '',
+		entityType = '',
+		currency = '',
 	} = item || {};
 	const calcBankLength = bankName.length;
+
 	return (
 		<div>
 			<div className={styles.flex}>
+				<div className={styles.checkbox}>
+					{getTableBodyCheckbox(item)}
+				</div>
 
 				<div className={styles.customerName}>
-					<ToolTipWrapper text={customerName || '---'} maxlength={20} />
+					<ToolTipWrapper
+						text={customerName || '---'}
+						maxlength={20}
+					/>
 				</div>
 
-				<div className={styles.orgSerialId}>
-					{orgSerialId || '---'}
+				<div className={styles.orgSerialId}>{orgSerialId || '---'}</div>
 
-				</div>
-
-				<div className={styles.entityType}>
-					{ entityType || '---'}
-				</div>
+				<div className={styles.entityType}>{entityType || '---'}</div>
 
 				<div className={styles.accCode}>
 					<div>
@@ -74,7 +85,9 @@ function ColumnCard({ item, refetch }:ColumnCardInterface) {
 									{bankName.substring(0, MAX_LENGTH_ECLIPSES)}
 									...
 									<div>
-										{(bankAccountNumber || accCode).substring(0, MAX_LENGTH_ECLIPSES)}
+										{(
+											bankAccountNumber || accCode
+										).substring(0, MAX_LENGTH_ECLIPSES)}
 										...
 									</div>
 								</div>
@@ -87,12 +100,15 @@ function ColumnCard({ item, refetch }:ColumnCardInterface) {
 							</div>
 						)}
 					</div>
-
 				</div>
 
 				<div className={styles.paymentNumValue}>
-					{<ToolTipWrapper text={paymentNumValue || '---'} maxlength={12} /> || '---'}
-
+					{(
+						<ToolTipWrapper
+							text={paymentNumValue || '---'}
+							maxlength={MAX_LENGTH_VISIBLE}
+						/>
+					) || '---'}
 				</div>
 
 				<div className={styles.amount}>
@@ -122,7 +138,6 @@ function ColumnCard({ item, refetch }:ColumnCardInterface) {
 				<div className={styles.collection}>
 					<CollectionActions itemData={item} refetch={refetch} />
 				</div>
-
 			</div>
 		</div>
 	);
