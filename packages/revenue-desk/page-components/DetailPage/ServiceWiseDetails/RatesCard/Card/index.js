@@ -124,13 +124,19 @@ function Card({
 								Fulfillment Ratio
 							</div>
 							<div>
-								{data?.rowData?.fullfillment_ratio}
+								{data?.rowData?.fulfillment_ratio}
 								%
 							</div>
 						</div>
 					</div>
 					<div className={styles.price_section}>
 						<div className={styles.price_text}>
+							<div>
+								Origin Local Price:
+								{data?.rowData?.origin_locals_price}
+								Destination Local Price:
+								{data?.rowData?.destination_locals_price}
+							</div>
 							<div>
 								Buy Rate per Ctr  :
 								<span style={{ fontSize: '18px', fontWeight: '600', color: '#4F4F4F' }}>

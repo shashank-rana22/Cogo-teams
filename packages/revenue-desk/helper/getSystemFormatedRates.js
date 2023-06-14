@@ -86,13 +86,16 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.schedule_type = schedule_type;
 		rowData.active_booking = element?.ongoing_shipment;
 		rowData.service_provider = element?.service_provider;
-		rowData.allocation_ratio = '_ _ _';
-		rowData.fullfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
+		rowData.allocation_ratio = undefined;
+		rowData.fulfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
 			? Number(completed_shipments)
 			/ (Number(completed_shipments) + Number(cancelled_shipments)) : 0;
-		rowData.reliability_ratio = '_ _ _';
 		rowData.total_buy_price = total_buy_price || 0;
 		rowData.validity_end = validity_end || element?.validity_end;
+		rowData.origin_locals_price = element?.origin_locals?.total_price;
+		rowData.origin_locals_currency = element?.origin_locals?.total_price_currency;
+		rowData.destination_locals_price = element?.destination_locals?.total_price;
+		rowData.destination_locals_currency = element?.destination_locals?.total_price_currency;
 		rowData.origin_main_port_id =			element?.origin_main_port_id && element?.origin_main_port_id !== 'None'
 			? element?.origin_main_port_id
 			: null;

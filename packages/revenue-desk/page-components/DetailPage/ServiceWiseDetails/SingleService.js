@@ -1,6 +1,7 @@
 import { Select } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
+import getAvailableRatesDetails from '../../../helper/getAvailableRatesDetails';
 import getFormatedRates from '../../../helper/getFormatedRates';
 import getSellRateDetailPayload from '../../../helper/getSellRateDetailPayload';
 import getSystemFormatedRates from '../../../helper/getSystemFormatedRates';
@@ -65,10 +66,11 @@ function SingleService({
 
 	const currentFormatedrates = getFormatedRates('current', ratesData?.flashed_rates, singleServiceData);
 	const systemFormatedRates = getSystemFormatedRates(ratesData?.system_rates, singleServiceData);
-	// useEffect(() => {
-	// 	setRateOptions({ ...rateOptions, [singleServiceData?.id]: [...currentFormatedrates, ...systemFormatedRates] });
-	// // eslint-disable-next-line react-hooks/exhaustive-deps
-	// }, [JSON.stringify(ratesData)]);
+	const availableRatesForRD = getAvailableRatesDetails({ currentFormatedrates, systemFormatedRates });
+	useEffect(() => {
+		setRateOptions({ ...rateOptions, [singleServiceData?.id]: availableRatesForRD });
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [JSON.stringify(availableRatesForRD)]);
 
 	const singleServiceSellRateDetails = getSellRateDetailPayload({
 		currentFormatedrates,
@@ -76,6 +78,7 @@ function SingleService({
 		service_providers: supplierPayload?.[singleServiceData?.id],
 		sellRates,
 	});
+
 	useEffect(() => {
 		setSellRateDetails({ ...sellRateDetails, [singleServiceData?.id]: singleServiceSellRateDetails });
 	// eslint-disable-next-line react-hooks/exhaustive-deps

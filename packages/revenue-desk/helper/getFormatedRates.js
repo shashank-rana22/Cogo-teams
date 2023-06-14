@@ -51,20 +51,24 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.buy_price = rate;
 			rowData.total_buy_price = total_buy_price;
 			rowData.active_booking = element?.ongoing_shipment;
+			rowData.service_provider = element?.service_provider;
 			rowData.currency = currency;
 			rowData.is_rate_expired = is_rate_expired;
 			rowData.via_route = element?.destination_main_port?.name;
 			rowData.schedule_type = schedule_type;
-			rowData.allocation_ratio = '_ _ _';
-			rowData.fullfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
+			rowData.allocation_ratio = undefined;
+			rowData.fulfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
 				? Number(completed_shipments)
 			/ (Number(completed_shipments) + Number(cancelled_shipments)) : 0;
-			rowData.reliability_ratio = '_ _ _';
 			rowData.remarks = element?.remarks;
 			rowData.shipment_id = element?.shipment_id;
 			rowData.preferred_shipping_line_id = element?.shipping_line_id;
 			rowData.expiration_time = element?.expiration_time;
 			rowData.platform = element?.platform;
+			rowData.origin_locals_price = element?.origin_locals?.total_price;
+			rowData.origin_locals_currency = element?.origin_locals?.total_price_currency;
+			rowData.destination_locals_price = element?.destination_locals?.total_price;
+			rowData.destination_locals_currency = element?.destination_locals?.total_price_currency;
 			row.rowData = rowData;
 			rows.push(row);
 		});

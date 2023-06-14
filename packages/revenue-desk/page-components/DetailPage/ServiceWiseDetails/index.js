@@ -29,6 +29,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 		reason,
 		othertext,
 		sellRateDetails,
+		rateOptions,
 	});
 
 	return (
