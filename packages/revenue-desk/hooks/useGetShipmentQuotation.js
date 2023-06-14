@@ -18,9 +18,9 @@ const useGetShipmentQuotation = ({ shipmentData, priceData }) => {
 		}
 	};
 	useEffect(() => {
-		if (!priceData) {
-			getQuotation();
-		}
+		// if (!priceData) {
+		getQuotation();
+		// }
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
 

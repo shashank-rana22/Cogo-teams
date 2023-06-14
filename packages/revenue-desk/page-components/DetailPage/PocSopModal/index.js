@@ -1,8 +1,8 @@
 import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
 import { useState } from 'react';
 
-import POCDetails from '../POCDetails';
-import SopRevenueDesk from '../SopRevenueDesk';
+import POCDetails from './POCDetails';
+import SopRevenueDesk from './SopRevenueDesk';
 
 function PocSopModal({ itemData }) {
 	const [activePocTab, setActivePocTab] = useState('poc');

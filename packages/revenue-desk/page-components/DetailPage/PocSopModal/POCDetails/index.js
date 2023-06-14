@@ -1,4 +1,4 @@
-import useListInternalStakeholders from '../../../hooks/useListInternalStakeholders';
+import useListInternalStakeholders from '../../../../hooks/useListInternalStakeholders';
 
 import ServiceWiseStakeHolder from './ServiceWiseStakeHolder';
 
