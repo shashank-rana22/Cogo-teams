@@ -110,6 +110,7 @@ function Edit({
 			/>
 
 			<Modal.Body>
+				<div />
 				<div className={styles.title}>
 					<b>
 						{`SID ${shipment_data?.serial_id} - Invoice number -`}
