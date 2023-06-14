@@ -17,7 +17,7 @@ function Body({ data, price }) {
 			<div className={styles.text1}>
 				Sell Price
 				<div className={styles.text2}>
-					{price}
+					{price || 0}
 				</div>
 			</div>
 		</div>

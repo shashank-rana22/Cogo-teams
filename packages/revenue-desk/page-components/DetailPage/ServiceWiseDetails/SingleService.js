@@ -8,6 +8,7 @@ import useListRevenueDeskAvailableRates from '../../../hooks/useListRevenueDeskA
 import CargoDetailPills from '../../List/Card/Body/CargoDetails/CargoDetailPills';
 
 import ExistingInventory from './ExistingInventory';
+import PreferenceSetServiceData from './PreferenceSetServiceData';
 import RatesCard from './RatesCard';
 import SelectedRatesCard from './SelectedRatesCard';
 import SingleServiceCard from './SingleServiceCard';
@@ -45,6 +46,8 @@ function SingleService({
 	shipmentType,
 	setSellRateDetails,
 	sellRateDetails,
+	rateOptions,
+	setRateOptions,
 }) {
 	const [sellRates, setSellRates] = useState({});
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
@@ -98,7 +101,7 @@ function SingleService({
 			</div>
 
 			<SingleServiceCard serviceData={singleServiceData} price={price} />
-			{singleServiceData?.is_preference_set ? <>Pref Set</> : (
+			{singleServiceData?.is_preference_set ? <PreferenceSetServiceData /> : (
 				<>
 					{(supplierPayload?.[singleServiceData?.id] || []).length
 						? (
