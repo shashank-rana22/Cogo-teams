@@ -15,7 +15,7 @@ const groupByRegistrationNum = (invoices) => {
 	return groupByOrgInvoices;
 };
 
-const useGetInvoicingPartyData = ({ data }) => {
+const useGetInvoicingPartyData = ({ data, open }) => {
 	const [{ data: invoiceData, loading: invoiceLoading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/get_shipment_invoice_preference',

@@ -50,9 +50,10 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData } = {}) => {
 		}
 	};
 	useEffect(() => {
-		if (singleServiceData) {
+		if (singleServiceData && !singleServiceData?.is_preference_set) {
 			ListRevenueAvailableRates();
 		}
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [singleServiceData]);
 	return {
 		loading,

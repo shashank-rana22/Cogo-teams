@@ -97,8 +97,7 @@ const rawControls = (
 				placeholder : 'enter price',
 				span        : 1.5,
 				rules       : {
-					required : 'Required',
-					validate : (v) => v > 0 || 'Price must be greater than 0',
+					required: 'Required',
 				},
 				disabled: true,
 			},

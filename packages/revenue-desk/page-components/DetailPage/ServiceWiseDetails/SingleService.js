@@ -70,6 +70,7 @@ function SingleService({
 	});
 	useEffect(() => {
 		setSellRateDetails({ ...sellRateDetails, [singleServiceData?.id]: [singleServiceSellRateDetails] });
+	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(singleServiceSellRateDetails)]);
 	const rateCardObj = [
 		{

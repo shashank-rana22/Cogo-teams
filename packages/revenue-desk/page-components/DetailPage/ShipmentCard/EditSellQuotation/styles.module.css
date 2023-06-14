@@ -1,8 +1,6 @@
-
-.modal_body{
-
-	:global{
-		.ui_modal_body_container{
+.modal_body {
+	:global {
+		.ui_modal_body_container {
 			max-height: 600px !important;
 		}
 	}

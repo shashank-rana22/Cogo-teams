@@ -176,7 +176,6 @@ const useEditLineItems = ({
 		controls : newFields,
 		loading  : lineItemApiLoading,
 		sendWhatsappCounterPriceLoading,
-		// customValues,
 		onError,
 		errors,
 		isDirty,

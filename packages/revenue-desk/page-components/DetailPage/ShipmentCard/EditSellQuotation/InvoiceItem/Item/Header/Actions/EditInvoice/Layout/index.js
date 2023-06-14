@@ -1,7 +1,6 @@
 import React from 'react';
 
 import FieldArray from './ChildFormat';
-import Item from './Item';
 import styles from './styles.module.css';
 
 function Layout({
@@ -59,16 +58,7 @@ function Layout({
 								</div>
 							);
 						}
-						return show
-							? (
-								<Item
-									control={control}
-									error={errors[fieldsItem.name]}
-									{...fieldsItem}
-								/>
-
-							)
-							: null;
+						return null;
 					})}
 				</div>
 			))}

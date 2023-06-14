@@ -8,7 +8,7 @@ import styles from './styles.module.css';
 
 function EditSellQuotation({ data }) {
 	const [open, setOpen] = useState(false);
-	const { invoiceLoading, invoiceData, groupedInvoices, refetch } =		useGetInvoicingPartyData({ data });
+	const { invoiceLoading, invoiceData, groupedInvoices, refetch } =		useGetInvoicingPartyData({ data, open });
 	const totals = invoiceData?.invoicing_party_wise_total;
 
 	return (
