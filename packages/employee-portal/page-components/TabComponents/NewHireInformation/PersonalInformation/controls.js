@@ -1,12 +1,62 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const controls = () => ([
+const controls = () => [
+	{
+		name    : 'name_title',
+		label   : 'Honorifics',
+		type    : 'select',
+		options : [
+			{
+				label : 'Mr.',
+				value : 'Mr.',
+			},
+			{
+				label : 'Mrs.',
+				value : 'Mrs.',
+			},
+			{
+				label : 'Ms.',
+				value : 'Ms.',
+			},
+		],
+		placeholder : 'Honorifics',
+		rules       : { required: 'This is required' },
+	},
 	{
 		name        : 'name',
 		label       : 'Name',
 		type        : 'input',
 		placeholder : 'First Name',
 		disabled    : true,
+		rules       : { required: 'This is required' },
+	},
+
+	{
+		name        : 'relation_type',
+		label       : 'Relation Type',
+		type        : 'select',
+		placeholder : 'Relation',
+		options     : [
+			{
+				label : 'Son of',
+				value : 'Son of',
+			},
+			{
+				label : 'Daughter of',
+				value : 'Daughter of',
+			},
+			{
+				label : 'Wife of',
+				value : 'Wife of',
+			},
+		],
+		rules: { required: 'This is required' },
+	},
+	{
+		name        : 'relation_person_name',
+		label       : <span>Relation Person Name</span>,
+		type        : 'input',
+		placeholder : 'Full Name',
 		rules       : { required: 'This is required' },
 	},
 	{
@@ -39,7 +89,7 @@ const controls = () => ([
 		name                  : 'date_of_birth',
 		label                 : 'Date of Birth',
 		type                  : 'date-select',
-		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'].toUpperCase(),
 		isPreviousDaysAllowed : true,
 		rules                 : { required: 'This is required' },
 	},
@@ -47,25 +97,7 @@ const controls = () => ([
 		name                  : 'date_of_joining',
 		label                 : 'Date of Joining',
 		type                  : 'date-select',
-		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-		disable               : true,
-		isPreviousDaysAllowed : true,
-		rules                 : { required: 'This is required' },
-	},
-	{
-		name                  : 'created_at',
-		label                 : 'Date of Creation',
-		type                  : 'date-select',
-		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-		disable               : true,
-		isPreviousDaysAllowed : true,
-		rules                 : { required: 'This is required' },
-	},
-	{
-		name                  : 'updated_at',
-		label                 : 'Last Updated',
-		type                  : 'date-select',
-		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+		placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'].toUpperCase(),
 		disable               : true,
 		isPreviousDaysAllowed : true,
 		rules                 : { required: 'This is required' },
@@ -85,6 +117,14 @@ const controls = () => ([
 		placeholder : 'Email',
 		rules       : { required: 'This is required' },
 	},
+
+	{
+		name        : 'emergency_contact_details',
+		label       : 'Emergency Contact Number',
+		type        : 'mobilenumber',
+		placeholder : 'Number',
+		rules       : { required: 'This is required' },
+	},
 	{
 		name    : 'passport_size_photo_url',
 		label   : 'Passport Size Photograph',
@@ -92,13 +132,6 @@ const controls = () => ([
 		accept  : '.png,.jpg,.jpeg,',
 		maxSize : GLOBAL_CONSTANTS.options.upload_file_size['5MB'],
 		rules   : { required: 'This is required' },
-	},
-	{
-		name        : 'emergency_contact_details',
-		label       : 'Emergency Contact Number',
-		type        : 'mobilenumber',
-		placeholder : 'Number',
-		rules       : { required: 'This is required' },
 	},
 	{
 		name        : 'cogoport_email',
@@ -114,6 +147,6 @@ const controls = () => ([
 		placeholder : 'Hiring Manager Name',
 		disabled    : true,
 	},
-]);
+];
 
 export default controls;
