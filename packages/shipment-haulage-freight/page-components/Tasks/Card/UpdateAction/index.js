@@ -13,18 +13,19 @@ function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {} }) 
 	const [showUnableTo, setShowUnableTo] = useState(false);
 	const [showAdmin, setShowAdmin] = useState(false);
 
-	const { servicesList: services } = useContext(ShipmentDetailContext);
+	const { servicesList: services, stakeholderConfig = {} } = useContext(ShipmentDetailContext);
 
-	const isMainServiceCancelled = false;
-	const requiredServiceArr = [];
+	const REQUIRED_SERVICE_ARR = [];
 
 	(task.task_field_ids || []).forEach((id) => {
 		(services || []).forEach((serviceObj) => {
 			if (serviceObj.id === id) {
-				requiredServiceArr.push(serviceObj);
+				REQUIRED_SERVICE_ARR.push(serviceObj);
 			}
 		});
 	});
+
+	const canReassignTask = !!stakeholderConfig?.tasks?.can_reassign_task;
 
 	return (
 		<div className={styles.container}>
@@ -73,18 +74,19 @@ function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {} }) 
 							Unable to do Task
 						</div>
 
-						<div
-							className={styles.task_action}
-							onClick={() => {
-								setShowAction(false);
-								setShowAdmin(true);
-							}}
-							role="button"
-							tabIndex={0}
-						>
-							Change Owner
-						</div>
-
+						{canReassignTask ? (
+							<div
+								className={styles.task_action}
+								onClick={() => {
+									setShowAction(false);
+									setShowAdmin(true);
+								}}
+								role="button"
+								tabIndex={0}
+							>
+								Change Owner
+							</div>
+						) : null}
 					</>
 				)}
 			>
@@ -94,10 +96,10 @@ function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {} }) 
 					}
 					className={styles.action}
 				>
-					{!isMainServiceCancelled && !hideThreeDots ? (
-						<IcMOverflowDot className={styles.overflow_icon} />
-					) : (
+					{ hideThreeDots ? (
 						<div className={styles.overflow_div} />
+					) : (
+						<IcMOverflowDot className={styles.overflow_icon} />
 					)}
 				</div>
 			</Popover>
