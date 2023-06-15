@@ -74,7 +74,7 @@
 }
 
 .container:last-of-type .display_milestone {
-	max-width: calc(100% + 54px);
+	max-width: calc(98% + 54px);
 }
 
 .ellipsis {

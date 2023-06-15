@@ -8,7 +8,7 @@ export default function toastApiError(err) {
 	if (data) {
 		if (data?.base) {
 			message = data.base;
-		} else if (data.message) {
+		} else if (data?.message) {
 			message = data.message;
 		}
 	} else if (msg) {

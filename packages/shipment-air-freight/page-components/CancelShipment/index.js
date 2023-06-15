@@ -1,16 +1,52 @@
-import { Loader, Button, Modal } from '@cogoport/components';
+import { cl, Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
-import { InputController, RadioGroupController, useForm } from '@cogoport/forms';
+import {
+	DatepickerController,
+	InputController,
+	SelectController,
+	RadioGroupController,
+	useForm,
+	AsyncSelectController,
+} from '@cogoport/forms';
 import { useContext } from 'react';
 
-import CONSTANTS from '../../constants/CONSTANTS';
-import useListShipmentCancellationReasons from '../../hooks/useListShipmentCancellationReasons';
+import controls from '../../configurations/shipment-cancel-controls';
 import useUpdateShipment from '../../hooks/useUpdateShipment';
 
 import getCancelShipmentPayload from './getCancelShipmentPayload';
+import getShowElements from './getShowElements';
 import styles from './styles.module.css';
 
-const { EMPTY_LIST_LENGTH } = CONSTANTS;
+const CONTROL_TYPE_MAPPING = {
+	radio        : RadioGroupController,
+	datepicker   : DatepickerController,
+	text         : InputController,
+	select       : SelectController,
+	number       : InputController,
+	async_select : AsyncSelectController,
+};
+
+function FormElement({ name, label, show, errors, type, ...rest }) {
+	if (name === 'better_quotation_label' && show) {
+		return (
+			<div className={cl`${styles.form_element} ${styles[rest.className]}`}>
+				{label ? <div className={styles.label}>{label}</div> : null}
+			</div>
+		);
+	}
+
+	const Element = CONTROL_TYPE_MAPPING[type];
+
+	return Element && show ? (
+		<div className={cl`${styles.form_element} ${styles[rest.className]}`}>
+			{label ? <div className={styles.label}>{label}</div> : null}
+
+			<Element name={name} type={type} {...rest} />
+
+			{errors[name] ? <div className={styles.error_msg}>{errors[name].message}</div> : null}
+		</div>
+	) : null;
+}
 
 export default function CancelShipment({ setShow }) {
 	const closeModal = () => setShow(false);
@@ -20,59 +56,23 @@ export default function CancelShipment({ setShow }) {
 		successMessage : 'Shipment has been cancelled!!',
 	});
 
-	const { shipment_data, stakeholderConfig = {}, activeStakeholder } = useContext(ShipmentDetailContext);
+	const { shipment_data, stakeholderConfig = {} } = useContext(ShipmentDetailContext);
 	const { id } = shipment_data || {};
 
-	const { reasonsLoading, reasons = [] } = useListShipmentCancellationReasons({
-		defaultFilters: {
-			shipment_type    : 'lcl_freight',
-			stakeholder_type : stakeholderConfig?.cancel_shipment?.list_reasons?.stakeholder_type
-			|| [activeStakeholder],
-		},
-		defaultParams: {
-			shipment_id          : id,
-			options_key_required : true,
-		},
-	});
+	const role = stakeholderConfig?.cancel_shipment?.role || '';
 
-	const { control, formState: { errors }, handleSubmit } = useForm();
+	const { control, formState: { errors }, watch, handleSubmit } = useForm();
+
+	const formValues = watch();
+	const { cancellation_reason } = formValues;
 
 	const onSubmit = (data) => {
 		updateShipment(getCancelShipmentPayload(data, id));
 	};
 
-	let modalBody = null;
-	if (reasonsLoading) {
-		modalBody = <Loader />;
-	} else if (!reasonsLoading && reasons.length === EMPTY_LIST_LENGTH) {
-		modalBody = <div className={styles.no_reasons_found}>No cancellation reasons found...</div>;
-	} else {
-		modalBody = (
-			<Modal.Body>
-				<strong>Please select a reason for cancelling the shipment</strong>
-				<RadioGroupController
-					name="cancellation_reason"
-					control={control}
-					options={reasons}
-					rules={{ required: 'Cancellation reason is required' }}
-				/>
-				{errors?.cancellation_reason
-					? <div className={styles.error_message}>{errors.cancellation_reason?.message}</div>
-					: null}
+	const modifiedControls = controls(shipment_data?.state, cancellation_reason)[role] || [];
 
-				<div className={styles.label}>Remarks</div>
-				<InputController
-					name="remarks"
-					control={control}
-					rules={{ required: 'Remarks is required' }}
-					size="sm"
-				/>
-				{errors?.remarks
-					? <div className={styles.error_message}>{errors.remarks?.message}</div>
-					: null}
-			</Modal.Body>
-		);
-	}
+	const showElements = getShowElements(formValues) || {};
 
 	return (
 		<Modal
@@ -85,7 +85,19 @@ export default function CancelShipment({ setShow }) {
 		>
 			<Modal.Header title="CANCEL SHIPMENT" />
 
-			{modalBody}
+			<Modal.Body className={styles.form_container}>
+				{modifiedControls?.length
+					? (modifiedControls || []).map((ctrl) => (
+						<FormElement
+							key={ctrl.name}
+							show={showElements[ctrl.name]}
+							control={control}
+							errors={errors}
+							{...ctrl}
+						/>
+					))
+					: <div className={styles.no_reasons_found}>No cancellation reasons found...</div> }
+			</Modal.Body>
 
 			<Modal.Footer className={styles.modal_footer}>
 				<Button
@@ -97,7 +109,7 @@ export default function CancelShipment({ setShow }) {
 				</Button>
 
 				<Button
-					disabled={updateShipmentLoading || reasonsLoading || reasons.length === EMPTY_LIST_LENGTH}
+					disabled={updateShipmentLoading}
 					onClick={handleSubmit(onSubmit)}
 				>
 					Submit
