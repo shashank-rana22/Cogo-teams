@@ -75,11 +75,11 @@ function AmountBoxes({ activeEntity }:ItemProps) {
 												amount  : accountPayables,
 												currency,
 												options : {
-													currencyDisplay : 'code',
-													style           : 'currency',
-													notation        : 'compact',
-													compactDisplay  : 'short',
-
+													currencyDisplay       : 'code',
+													style                 : 'currency',
+													notation              : 'compact',
+													compactDisplay        : 'short',
+													minimumFractionDigits : 2,
 												},
 											})}
 										</div>
@@ -130,10 +130,11 @@ function AmountBoxes({ activeEntity }:ItemProps) {
 														amount  : item?.amount,
 														currency,
 														options : {
-															currencyDisplay : 'code',
-															style           : 'currency',
-															notation        : 'compact',
-															compactDisplay  : 'short',
+															currencyDisplay       : 'code',
+															style                 : 'currency',
+															notation              : 'compact',
+															compactDisplay        : 'short',
+															minimumFractionDigits : 2,
 
 														},
 													})

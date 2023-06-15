@@ -161,10 +161,11 @@ function BarChart({ data }:ItemProps) {
 											amount  : bar.data.value as any,
 											currency,
 											options : {
-												currencyDisplay : 'code',
-												style           : 'currency',
-												notation        : 'compact',
-												compactDisplay  : 'short',
+												currencyDisplay       : 'code',
+												style                 : 'currency',
+												notation              : 'compact',
+												compactDisplay        : 'short',
+												minimumFractionDigits : 2,
 											},
 										})}
 									</text>
