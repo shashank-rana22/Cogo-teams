@@ -120,6 +120,7 @@ export default {
 		],
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
+		finops_manager            : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		service_ops2_role_id      : [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
