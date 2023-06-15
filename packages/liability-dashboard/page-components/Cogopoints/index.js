@@ -15,10 +15,16 @@ import List from './List';
 import StatsDiv from './StatsDiv';
 import styles from './styles.module.css';
 
+const START_MONTH = 0;
+const START_DAY = 1;
+
 function CogoPoints() {
 	const [activeHeaderTab, setActiveHeaderTab] = useState('overall');
 	const [activeStatsCard, setActiveStatsCard] = useState('liability_point_value');
-	const [selectedDate, setSelectedDate] = useState({});
+	const [selectedDate, setSelectedDate] = useState({
+		startDate : new Date(new Date().getFullYear(), START_MONTH, START_DAY),
+		endDate   : new Date(),
+	});
 
 	const geo = getGeoConstants();
 	const currencyCode = geo.country.currency.code;
@@ -43,9 +49,8 @@ function CogoPoints() {
 	const checkPieChart = (PIE_CHART_CHECK || []).includes(activeStatsCard);
 
 	useEffect(() => {
-		setSelectedDate({});
 		setActiveStatsCard('liability_point_value');
-	}, [activeHeaderTab, setSelectedDate]);
+	}, [activeHeaderTab]);
 
 	return (
 		<>
