@@ -1,5 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import styles from './styles.module.css';
@@ -47,15 +47,37 @@ function SageDetailsCard({ InvoiceInfo }) {
 		},
 		{
 			key   : 'Tax Amount',
-			value : getFormattedPrice(TaxAmount || CHECK_MIN_TOOL_TIP, currency || '') || '-',
+			value : formatAmount({
+				amount   : TaxAmount || CHECK_MIN_TOOL_TIP,
+				currency : currency || '',
+				options  : {
+					currencyDisplay : 'code',
+					style           : 'currency',
+				},
+			}) || '-',
+
 		},
 		{
 			key   : 'Total Amount',
-			value : getFormattedPrice(GrandTotal || CHECK_MIN_TOOL_TIP, currency || '') || '-',
+			value : formatAmount({
+				amount   : GrandTotal || CHECK_MIN_TOOL_TIP,
+				currency : currency || '',
+				options  : {
+					currencyDisplay : 'code',
+					style           : 'currency',
+				},
+			}) || '-',
 		},
 		{
 			key   : 'Ledger Amount',
-			value : getFormattedPrice(LedgerTotal || CHECK_MIN_TOOL_TIP, currency || '') || '-',
+			value : formatAmount({
+				amount   : LedgerTotal || CHECK_MIN_TOOL_TIP,
+				currency : currency || '',
+				options  : {
+					currencyDisplay : 'code',
+					style           : 'currency',
+				},
+			}) || '-',
 		},
 	];
 

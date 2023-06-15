@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -7,6 +8,9 @@ import { SERVICE } from '../../../../../constants';
 
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
+
+const FIRST_ITEM = 0;
+const DEFAULT_IMAGE = GLOBAL_CONSTANTS.image_url.promocode_thumbnail;
 
 function PromocodeThumbnail({ list = [] }) {
 	const colors = [
@@ -17,42 +21,42 @@ function PromocodeThumbnail({ list = [] }) {
 
 	const getCardColor = (index) => colors[index % colors.length];
 
-	// eslint-disable-next-line max-len
-	const defaultImage = 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg';
-
 	return (
 		<div className={styles.thumbnail_container}>
 			{(list || []).map((item, index) => {
 				const { promotion_discounts, terms_and_conditions, thumbnail_image, codes } = item || [];
+
 				return (
 					<div
+						key={promotion_discounts[index].id}
 						className={styles.container}
 						style={{ backgroundColor: getCardColor(index) }}
 					>
 
 						<img
 							className={styles.promo_image}
-							src={isEmpty(thumbnail_image) ? defaultImage : thumbnail_image}
+							src={isEmpty(thumbnail_image) ? DEFAULT_IMAGE : thumbnail_image}
 							alt="promotion"
 						/>
 
 						<div className={styles.promocode_description}>
 							<div className={styles.promodiscount}>
-								{promotion_discounts?.[0]?.unit !== 'percentage'
-						|| promotion_discounts?.[0]?.unit !== 'by_unit_percentage'
-									? `${getFormattedPrice(
-										promotion_discounts?.[0]?.value || 0,
-										promotion_discounts?.[0]?.amount_currency || 'INR',
-										{
-											currencyDisplay: 'code',
+								{promotion_discounts?.[FIRST_ITEM]?.unit !== 'percentage'
+						|| promotion_discounts?.[FIRST_ITEM]?.unit !== 'by_unit_percentage'
+									? `${formatAmount({
+										amount   :	promotion_discounts?.[FIRST_ITEM]?.value || FIRST_ITEM,
+										currency :	promotion_discounts?.[FIRST_ITEM]?.amount_currency
+										|| GLOBAL_CONSTANTS.currency_code.INR,
+										options: {
+											currencyDisplay : 'code',
+											style           : 'currency',
 										},
-										'en-Us',
-									)}`
-									: `${promotion_discounts?.[0]?.value} %`}
+									})}`
+									: `${promotion_discounts?.[FIRST_ITEM]?.value} %`}
 								{' '}
 								Off On
 								{' '}
-								{SERVICE[promotion_discounts?.[0]?.service_type
+								{SERVICE[promotion_discounts?.[FIRST_ITEM]?.service_type
 								]}
 							</div>
 
@@ -76,7 +80,7 @@ function PromocodeThumbnail({ list = [] }) {
 						<div className={styles.holes_lower} />
 						<div className={styles.promo_code}>
 							<div className={styles.promocode_name}>
-								{codes?.[0]?.promocode}
+								{codes?.[FIRST_ITEM]?.promocode}
 							</div>
 						</div>
 					</div>
