@@ -48,6 +48,8 @@ function CogoPoints() {
 
 	const checkPieChart = (PIE_CHART_CHECK || []).includes(activeStatsCard);
 
+	const checkPieChartDataInMainTab = (PIE_CHART_CHECK || []).includes(activeHeaderTab);
+
 	useEffect(() => {
 		setActiveStatsCard('liability_point_value');
 	}, [activeHeaderTab]);
@@ -75,7 +77,7 @@ function CogoPoints() {
 						<div className={styles.container}>
 							<div className={cl`
 			                ${styles.line_chart} 
-			                ${(!checkPieChart && activeHeaderTab !== 'affiliate') && styles.no_pie_chart}`}
+			                ${(!checkPieChart || checkPieChartDataInMainTab) && styles.no_pie_chart}`}
 							>
 								<div className={styles.title}>
 									{activeStatsCard === 'liability_point_value'

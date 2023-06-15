@@ -6,6 +6,8 @@ import burntChartData from '../../../../configuration/burnt-chart-data';
 import liabilityChartData from '../../../../configuration/liability-chart-data';
 import { formatValue } from '../../../../utils/formatValue';
 
+import styles from './styles.module.css';
+
 const CHECK_ALL_FIELD_VALUE = 0;
 
 function PieChart({
@@ -23,12 +25,15 @@ function PieChart({
 
 	if (emptyValue) {
 		return (
-			<Image
-				src={GLOBAL_CONSTANTS.image_url.empty_list_state}
-				alt="empty-state"
-				width={150}
-				height={150}
-			/>
+			<div className={styles.empty_state}>
+				<Image
+					src={GLOBAL_CONSTANTS.image_url.empty_list_state}
+					alt="empty-state"
+					width={150}
+					height={150}
+				/>
+			</div>
+
 		);
 	}
 
