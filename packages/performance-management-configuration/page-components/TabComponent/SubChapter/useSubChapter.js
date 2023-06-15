@@ -11,6 +11,7 @@ const useSubChapter = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
+	const [showUpdateSubChapterModal, setShowUpdateSubChapterModal] = useState();
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		url    : '/list_all_sub_chapters',
@@ -42,7 +43,7 @@ const useSubChapter = () => {
 		fetchList();
 	}, [fetchList, page]);
 
-	const columns = getColumns({ setShowDeleteModal });
+	const columns = getColumns({ setShowDeleteModal, setShowUpdateSubChapterModal });
 
 	return {
 		columns,
@@ -57,6 +58,8 @@ const useSubChapter = () => {
 		deleteLoading,
 		setShowDeleteModal,
 		showDeleteModal,
+		setShowUpdateSubChapterModal,
+		showUpdateSubChapterModal,
 	};
 };
 

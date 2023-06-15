@@ -10,14 +10,17 @@ import controls from './controls';
 import styles from './styles.module.css';
 import useCreateTribe from './useCreateTribe';
 import useTribe from './useTribe';
+import useUpdateTribe from './useUpdateTribe';
 
 const ADD_BUTTON_LABEL = 'Tribe';
 const TABLE_EMPTY_TEXT = 'No Tribe created yet';
+const MODAL_TYPE_UPDATE = 'Update';
+const MODAL_TYPE_ADD = 'Add';
 
 function Tribe() {
 	const {
 		search, setSearch, columns, loading:listApiLoading, data, page, setPage, fetchList, showDeleteModal,
-		setShowDeleteModal, deleteLoading, deleteTribe,
+		setShowDeleteModal, deleteLoading, deleteTribe, setShowUpdateTribeModal, showUpdateTribeModal,
 	} = useTribe();
 
 	const { list = [], ...paginationData } = data || {};
@@ -27,12 +30,21 @@ function Tribe() {
 	const {
 		showAddTribeModal,
 		setShowAddTribeModal,
-		control,
-		errors,
-		handleSubmit,
+		control :CreateControl,
+		errors: CreateErrors,
 		onClickSubmitButton,
-		loading,
+		loading:CreateLoading,
+		handleSubmit:CreateHandleSubmit,
 	} = useCreateTribe({ fetchList });
+
+	const {
+		control: UpdateControl,
+		errors: UpdateErrors,
+		onClickUpdateButton,
+		loading: UpdateLoading,
+		handleSubmit: UpdateHandleSubmit,
+		setValue,
+	} = useUpdateTribe({ fetchList, setShowUpdateTribeModal, showUpdateTribeModal });
 
 	const onClickAddButton = () => {
 		setShowAddTribeModal(true);
@@ -60,21 +72,36 @@ function Tribe() {
 				</div>
 			)}
 
-			{
-				showAddTribeModal ? (
-					<CreateConfigurationModal
-						showModal={showAddTribeModal}
-						setShowModal={setShowAddTribeModal}
-						label={ADD_BUTTON_LABEL}
-						controls={controls}
-						control={control}
-						errors={errors}
-						handleSubmit={handleSubmit}
-						onClickSubmitButton={onClickSubmitButton}
-						loading={loading}
-					/>
-				) : null
-			}
+			{showAddTribeModal ? (
+				<CreateConfigurationModal
+					showModal={showAddTribeModal}
+					setShowModal={setShowAddTribeModal}
+					label={ADD_BUTTON_LABEL}
+					controls={controls}
+					control={CreateControl}
+					errors={CreateErrors}
+					onClickSubmitButton={onClickSubmitButton}
+					loading={CreateLoading}
+					handleSubmit={CreateHandleSubmit}
+					Type={MODAL_TYPE_ADD}
+				/>
+			) : null}
+
+			{showUpdateTribeModal ? (
+				<CreateConfigurationModal
+					showModal={showUpdateTribeModal}
+					setShowModal={setShowUpdateTribeModal}
+					label={ADD_BUTTON_LABEL}
+					controls={controls}
+					control={UpdateControl}
+					errors={UpdateErrors}
+					onClickSubmitButton={onClickUpdateButton}
+					loading={UpdateLoading}
+					handleSubmit={UpdateHandleSubmit}
+					Type={MODAL_TYPE_UPDATE}
+					setValue={setValue}
+				/>
+			) : null}
 
 			{showDeleteModal ? (
 				<DeleteConfigurationModal

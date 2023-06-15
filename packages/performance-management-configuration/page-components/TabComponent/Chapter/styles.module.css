@@ -7,3 +7,8 @@
   border-radius: 4px;
   background: var(--color-tertiary-success-green-3);
 }
+
+.pill_box {
+  display: flex;
+  flex-wrap: wrap;
+}

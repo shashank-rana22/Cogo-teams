@@ -9,16 +9,18 @@ import StyledTable from '../../../commons/StyledTable';
 import controls from './controls';
 import styles from './styles.module.css';
 import useCreateSquad from './useCreateSquad';
-// import useDeleteSquad from './useDeleteSquad';
 import useSquad from './useSquad';
+import useUpdateSquad from './useUpdateSquad';
 
 const ADD_BUTTON_LABEL = 'Squad';
 const TABLE_EMPTY_TEXT = 'No Squad created yet';
+const MODAL_TYPE_UPDATE = 'Update';
+const MODAL_TYPE_ADD = 'Add';
 
 function Squad() {
 	const {
 		search, setSearch, columns, loading:listApiLoading, data, page, setPage, setShowDeleteModal,
-		showDeleteModal, deleteSquad, deleteLoading, fetchList,
+		showDeleteModal, deleteSquad, deleteLoading, fetchList, setShowUpdateSquadModal, showUpdateSquadModal,
 	} = useSquad();
 
 	const { list = [], ...paginationData } = data || {};
@@ -26,11 +28,23 @@ function Squad() {
 	const { total_count, page_limit } = paginationData || {};
 
 	const {
-		showAddSquadModal, setShowAddSquadModal, control, errors,
+		showAddSquadModal,
+		setShowAddSquadModal,
+		control :CreateControl,
+		errors: CreateErrors,
 		onClickSubmitButton,
-		loading,
-		handleSubmit,
+		loading:CreateLoading,
+		handleSubmit:CreateHandleSubmit,
 	} = useCreateSquad({ fetchList });
+
+	const {
+		control: UpdateControl,
+		errors: UpdateErrors,
+		onClickUpdateButton,
+		loading: UpdateLoading,
+		handleSubmit: UpdateHandleSubmit,
+		setValue,
+	} = useUpdateSquad({ fetchList, setShowUpdateSquadModal, showUpdateSquadModal });
 
 	const onClickAddButton = () => {
 		setShowAddSquadModal(true);
@@ -64,11 +78,28 @@ function Squad() {
 					setShowModal={setShowAddSquadModal}
 					label={ADD_BUTTON_LABEL}
 					controls={controls}
-					control={control}
-					errors={errors}
+					control={CreateControl}
+					errors={CreateErrors}
 					onClickSubmitButton={onClickSubmitButton}
-					loading={loading}
-					handleSubmit={handleSubmit}
+					loading={CreateLoading}
+					handleSubmit={CreateHandleSubmit}
+					Type={MODAL_TYPE_ADD}
+				/>
+			) : null}
+
+			{showUpdateSquadModal ? (
+				<CreateConfigurationModal
+					showModal={showUpdateSquadModal}
+					setShowModal={setShowUpdateSquadModal}
+					label={ADD_BUTTON_LABEL}
+					controls={controls}
+					control={UpdateControl}
+					errors={UpdateErrors}
+					onClickSubmitButton={onClickUpdateButton}
+					loading={UpdateLoading}
+					handleSubmit={UpdateHandleSubmit}
+					Type={MODAL_TYPE_UPDATE}
+					setValue={setValue}
 				/>
 			) : null}
 

@@ -9,18 +9,22 @@ import controls from './controls';
 import styles from './styles.module.css';
 import useChapter from './useChapter';
 import useCreateChapter from './useCreateChapter';
+import useUpdateChapter from './useUpdateChapter';
 
 const ADD_BUTTON_LABEL = 'Chapter';
 const TABLE_EMPTY_TEXT = 'No Chapters created yet';
 const DEFAULT_TOTAL_ITEMS = 0;
 const DEFAULT_CURRENT_PAGE = 1;
 const DEFAULT_TOTAL_COUNT = 10;
+const MODAL_TYPE_UPDATE = 'Update';
+const MODAL_TYPE_ADD = 'Add';
 
 function Chapter() {
 	const {
 		columns, search, setSearch, data, loading: listApiLoading,
 		page, setPage, fetchList, showDeleteModal, setShowDeleteModal,
-		deleteChapter, deleteLoading,
+		deleteChapter, deleteLoading, showUpdateChapterModal,
+		setShowUpdateChapterModal,
 	} = useChapter();
 
 	const { list = [], ...paginationData } = data || {};
@@ -34,6 +38,15 @@ function Chapter() {
 		loading,
 		handleSubmit,
 	} = useCreateChapter({ fetchList });
+
+	const {
+		control: UpdateControl,
+		errors: UpdateErrors,
+		onClickUpdateButton,
+		loading: UpdateLoading,
+		handleSubmit: UpdateHandleSubmit,
+		setValue,
+	} = useUpdateChapter({ fetchList, setShowUpdateChapterModal, showUpdateChapterModal });
 
 	const onClickAddButton = () => {
 		setShowAddChapterModal(true);
@@ -72,6 +85,23 @@ function Chapter() {
 					onClickSubmitButton={onClickSubmitButton}
 					loading={loading}
 					handleSubmit={handleSubmit}
+					Type={MODAL_TYPE_ADD}
+				/>
+			) : null}
+
+			{showUpdateChapterModal ? (
+				<CreateConfigurationModal
+					showModal={showUpdateChapterModal}
+					setShowModal={setShowUpdateChapterModal}
+					label={ADD_BUTTON_LABEL}
+					controls={controls}
+					control={UpdateControl}
+					errors={UpdateErrors}
+					onClickSubmitButton={onClickUpdateButton}
+					loading={UpdateLoading}
+					handleSubmit={UpdateHandleSubmit}
+					Type={MODAL_TYPE_UPDATE}
+					setValue={setValue}
 				/>
 			) : null}
 

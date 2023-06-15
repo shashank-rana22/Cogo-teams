@@ -1,3 +1,4 @@
+import { Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
@@ -5,7 +6,29 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const getColumns = ({ setShowDeleteModal }) => (
+const TOOLTIP_START_VALUE = 3;
+
+const MIN_SQUADS_LENGTH = 3;
+
+const SQUAD_INDEX_START = 0;
+
+const SQUAD_INDEX_END = 3;
+
+function TooltipContent({ item = [] }) {
+	return (
+		<div>
+			{item.map((tag, i) => {
+				if (i >= TOOLTIP_START_VALUE) {
+					return <Pill key={tag?.name}>{startCase(tag?.squad_name)}</Pill>;
+				}
+
+				return null;
+			})}
+		</div>
+	);
+}
+
+const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => (
 	[
 		{
 			Header   : 'Tribe NAME',
@@ -16,13 +39,41 @@ const getColumns = ({ setShowDeleteModal }) => (
 		{
 			Header   : 'Tribe LEADER',
 			accessor : (item) => (
-				<div>{item?.tribe_leader || '-'}</div>
+				<div>{startCase(item?.tribe_leader?.name) || '-'}</div>
 			),
 		},
+
 		{
 			Header   : 'SQUADS',
 			accessor : (item) => (
-				<div>{item?.name || '-'}</div>
+				<div className={styles.pill_box}>
+					{item?.squads?.slice(SQUAD_INDEX_START, SQUAD_INDEX_END).map((singleSQUAD) => (
+						<Pill
+							key={singleSQUAD?.squad_name}
+							size="md"
+							className={styles.pill}
+						>
+							{startCase(singleSQUAD?.squad_name)}
+						</Pill>
+					))}
+
+					{item?.squads?.length > MIN_SQUADS_LENGTH ? (
+						<Tooltip
+							content={<TooltipContent item={item?.squads} />}
+							placement="right"
+							theme="light"
+							styles={{ marginBottom: '24px' }}
+						>
+							<Pill>
+								+
+								{item.squads.length - SQUAD_INDEX_END}
+								{' '}
+								Squads
+							</Pill>
+						</Tooltip>
+					)
+						: null}
+				</div>
 			),
 		},
 		{
@@ -58,7 +109,12 @@ const getColumns = ({ setShowDeleteModal }) => (
 						style={{ cursor: 'pointer' }}
 						onClick={() => setShowDeleteModal(item.id)}
 					/>
-					<IcMEdit width={16} height={16} style={{ marginLeft: 12, cursor: 'pointer' }} />
+					<IcMEdit
+						width={16}
+						height={16}
+						style={{ marginLeft: 12, cursor: 'pointer' }}
+						onClick={() => setShowUpdateTribeModal(item)}
+					/>
 				</div>
 			),
 		},
