@@ -1,6 +1,8 @@
+import { Tabs, TabPanel } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { dynamic } from '@cogoport/next';
 import { ShipmentChat } from '@cogoport/shipment-chat';
-import { useContext } from 'react';
+import { useContext, useState } from 'react';
 
 import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
@@ -12,10 +14,20 @@ import TimeLine from '../TimeLine';
 
 import styles from './styles.module.css';
 
+const TAB_MAPPING = {
+	overview : dynamic(() => import('../Overview'), { ssr: false }),
+	// tasks     : dynamic(() => import('../Tasks'), { ssr: false }),
+	// documents : dynamic(() => import('../Documents'), { ssr: false }),
+	emails   : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
+};
+
 function DefaultView() {
 	const { shipment_data = {}, stakeholderConfig = {} } = useContext(ShipmentDetailContext) || {};
 
-	const { features = [] } = stakeholderConfig || {};
+	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
+	const [activeTab, setActiveTab] = useState(default_tab);
+
+	const tabs = Object.keys(TAB_MAPPING).filter((t) => features.includes(t));
 
 	const conditionMapping = {
 		shipment_info       : !!features.includes('shipment_info'),
@@ -31,6 +43,15 @@ function DefaultView() {
 		<div>
 			<div className={styles.top_header}>
 				<ShipmentInfo />
+				<div className={styles.toggle_chat}>
+					{/* <Toggle
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleVersionChange}
+					/> */}
+					{conditionMapping.chat ? <ShipmentChat /> : null}
+				</div>
 			</div>
 
 			<div className={styles.header}>
@@ -39,6 +60,21 @@ function DefaultView() {
 			</div>
 
 			{conditionMapping.timeline ? <TimeLine /> : null}
+
+			<div className={styles.container}>
+				<Tabs
+					fullWidth
+					themeType="secondary"
+					activeTab={activeTab}
+					onChange={setActiveTab}
+				>
+					{tabs.map((t) => (
+						<TabPanel name={t} key={t} title={stakeholderConfig[t]?.tab_title}>
+							{TAB_MAPPING[t]()}
+						</TabPanel>
+					))}
+				</Tabs>
+			</div>
 		</div>
 	);
 }

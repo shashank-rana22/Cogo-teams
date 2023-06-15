@@ -25,7 +25,7 @@ export default function CancelShipment({ setShow }) {
 
 	const { reasonsLoading, reasons = [] } = useListShipmentCancellationReasons({
 		defaultFilters: {
-			shipment_type    : 'lcl_freight',
+			shipment_type    : 'air_freight',
 			stakeholder_type : stakeholderConfig?.cancel_shipment?.list_reasons?.stakeholder_type
 			|| [activeStakeholder],
 		},
