@@ -1,0 +1,13 @@
+.box {
+    padding: 16px;
+    width: fit-content;
+}
+
+.heading {
+    margin-bottom: 4px;
+    display: inline-block;
+    font-size: 14px;
+    color: rgb(51, 51, 51);
+    line-height: 20px;
+    font-weight: normal;
+}
