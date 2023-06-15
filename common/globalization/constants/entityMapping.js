@@ -34,7 +34,7 @@ const ENTITY_MAPPING = {
 		id                : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
 		icon              : IcCCountryIndia,
 		currency          : 'INR',
-		feature_supported : ['cogo_books', 'post_to_sage'],
+		feature_supported : ['cogo_books', 'post_to_sage', 'irn_cancel'],
 		labels            : {
 			irn_label: 'IRN',
 		},
