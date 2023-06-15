@@ -58,7 +58,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		textValue,
 		refetch,
 	});
-	const { postToSage, loading:showPostLoading } = usePostToSage(id);
+	const { postToSage, loading:showPostLoading } = usePostToSage({ id });
 	const {
 		generateIrn, loading, finalPostFromSage, finalPostLoading, getSageInvoiceData, sageInvoiceData,
 		sageInvoiceLoading,
