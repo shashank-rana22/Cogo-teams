@@ -24,9 +24,6 @@ const getControls = [{
 			type        : 'createselect',
 			options     : EDUCATION_LEVEL_OPTIONS,
 			placeholder : 'Degree',
-			style       : {
-				width: '60%',
-			},
 		},
 		{
 			name        : 'school_name',
@@ -41,9 +38,6 @@ const getControls = [{
 			placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
 			rules                 : { required: 'This is required' },
-			style                 : {
-				width: '75%',
-			},
 		},
 		{
 			name                  : 'ended_at',
@@ -52,9 +46,6 @@ const getControls = [{
 			placeholder           : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 			isPreviousDaysAllowed : true,
 			rules                 : { required: 'This is required' },
-			style                 : {
-				width: '75%',
-			},
 		},
 		{
 			name        : 'score_type',
@@ -66,10 +57,6 @@ const getControls = [{
 				{ label: 'CGPA', value: 'cgpa' },
 				{ label: 'Percentage', value: 'percentage' },
 			],
-			style: {
-				width      : '50%',
-				marginLeft : '10px',
-			},
 		},
 		{
 			name        : 'score',
@@ -77,9 +64,6 @@ const getControls = [{
 			type        : 'number',
 			placeholder : 'Enter your score',
 			rules       : { required: 'This is required' },
-			style       : {
-				width: '60%',
-			},
 		},
 		{
 			name        : 'degree',
