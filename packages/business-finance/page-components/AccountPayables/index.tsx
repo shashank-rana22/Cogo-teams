@@ -8,6 +8,7 @@ import React, { useState } from 'react';
 import AdvancePayment from './AdvancePayment';
 import Dashboard from './Dashboard';
 import useListCogoEntities from './Dashboard/hooks/useListCogoEntities';
+import Invoices from './Invoices';
 import styles from './styles.module.css';
 
 interface ItemProps {
@@ -80,7 +81,7 @@ function AccountPayables() {
 						<Dashboard activeEntity={activeEntity} />
 					</TabPanel>
 					<TabPanel name="invoices" title="INVOICES">
-						<h1>Invoices</h1>
+						<Invoices />
 					</TabPanel>
 					<TabPanel name="advance-payment" title="ADVANCE PAYMENT">
 						<AdvancePayment activeEntity={activeEntity} />

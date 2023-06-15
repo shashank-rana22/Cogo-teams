@@ -29,6 +29,7 @@ export interface Props {
 	subActiveTab?: string;
 	width?: string;
 	rowStyle?:string;
+	paginationType?: string;
 }
 
 function List({
@@ -45,7 +46,7 @@ function List({
 	showPagination = true,
 	subActiveTab,
 	width,
-	rowStyle,
+	rowStyle, paginationType = 'table',
 }: Props) {
 	const {
 		showHeader = true,
@@ -105,7 +106,7 @@ function List({
 					{itemData?.totalRecords ? (
 						<div className={styles.pagination_container}>
 							<Pagination
-								type="table"
+								type={paginationType}
 								currentPage={page}
 								totalItems={itemData?.totalRecords}
 								pageSize={pageSize}

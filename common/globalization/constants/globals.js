@@ -117,7 +117,86 @@ const GLOBAL_CONSTANTS = {
 
 	cogoport_entities: ENTITY_MAPPING,
 
-	months: ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+	months                : ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'],
+	country_specific_data : {
+		IN: {
+			registration_number: {
+				label: 'GST',
+				pattern:
+					/\d{2}[A-Za-z]{5}\d{4}[A-Za-z]{1}[A-Za-z\d]{1}[Zz]{1}[A-Za-z\d]{1}/g,
+				max_length: 15,
+			},
+			economic_zone: {
+				label: 'SEZ',
+			},
+			navigation: {
+				admin: {
+					product_code_mappings: {
+						item_taxes_tab: {
+							service_country_code: {
+								is_supported: false,
+							},
+						},
+					},
+				},
+			},
+		},
+		VN: {
+			registration_number: {
+				label      : 'VAT',
+				pattern    : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+				max_length : 15,
+			},
+			economic_zone: {
+				label: 'Non-Tariff Zone',
+			},
+			navigation: {
+				admin: {
+					product_code_mappings: {
+						item_taxes_tab: {
+							service_country_code: {
+								is_supported: true,
+							},
+						},
+					},
+				},
+			},
+		},
+	},
+	cogoport_gst_numbers: {
+		GURUGRAM : '06AAICC8838P1ZV',
+		MUMBAI   : '27AAICC8838P1ZR',
+	},
+	cargo_insurance: {
+		IN: ['fcl_freight'],
+	},
+	services: {
+		ltl_freight: {
+			params: {
+				supported_country_code: ['IN', 'VN'],
+			},
+		},
+		ftl_freight: {
+			params: {
+				supported_country_code: ['IN', 'VN'],
+			},
+		},
+	},
+	service_supported_countries: {
+		navigation: {
+			saas_cogo_insurance: {
+				countries: ['IN'],
+			},
+		},
+		feature_supported_service: {
+			cargo_insurance: {
+				countries: ['IN'],
+			},
+			ftl_flash_booking: {
+				currency: 'INR',
+			},
+		},
+	},
 
 	image_url: {
 		general_icon              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/General.svg',
