@@ -10,48 +10,58 @@ import Header from './Header';
 import QuestionsList from './QuestionsList';
 
 const ZERO_INDEX = 0;
+const FIRST_INDEX = 1;
+const SECOND_INDEX = 2;
 
-const getTabPermission = ({ navigation, apiName }) => navigation?.[apiName][ZERO_INDEX]?.type === 'allowed';
+const getTabPermission = ({ navigation, apiName, tabName }) => {
+	const isAllowed = navigation?.[apiName][ZERO_INDEX]?.type === 'allowed';
+	return { tabName, isAllowed };
+};
 
 function ControlCenter() {
-	const { profile:{ permissions_navigations } } = useSelector((state) => state);
-
 	const { query, push } = useRouter();
+
+	const { permissions_navigations = {} } = useSelector((state) => state.profile);
 
 	const { activeTab: currentActiveTab, testModuleTab, courseActiveTab } = query || {};
 
-	const isManagFaqTabAllowed = getTabPermission(
+	const allTabsPermissionsMappings = [
 		{
 			navigation : permissions_navigations?.['cogo_academy-create_faq'],
 			apiName    : 'create_question_answer_set',
+			tabName    : 'manage_faq',
 		},
-	);
-
-	const isTestModuleTabAllowed = getTabPermission(
 		{
 			navigation : permissions_navigations?.['cogo_academy-create_faq'],
 			apiName    : 'create_test',
+			tabName    : 'test_module',
 		},
-	);
-
-	const isCourseModuleTabAllowed = getTabPermission(
 		{
 			navigation : permissions_navigations?.['cogo_academy-course'],
 			apiName    : 'create_cogo_academy_course',
+			tabName    : 'course_module',
 		},
-	);
+	];
 
-	const tabPermissions = {
-		manage_faq    : isManagFaqTabAllowed,
-		test_module   : isTestModuleTabAllowed,
-		course_module : isCourseModuleTabAllowed,
-	};
+	const tabPermissions = allTabsPermissionsMappings.map((item) => {
+		const { navigation, apiName, tabName } = item;
 
-	const defaultActiveTab = Object.keys(tabPermissions).find((item) => tabPermissions[item]);
+		return getTabPermission(
+			{
+				navigation,
+				apiName,
+				tabName,
+			},
+		);
+	});
 
-	const [activeTab, setActiveTab] = useState(currentActiveTab || defaultActiveTab);
+	const defaultActiveTab = tabPermissions.find((item) => item.isAllowed);
 
-	const isConfigurationAllowed = isTestModuleTabAllowed && isManagFaqTabAllowed && isCourseModuleTabAllowed;
+	const [activeTab, setActiveTab] = useState(currentActiveTab || defaultActiveTab.tabName);
+
+	const isConfigurationAllowed = tabPermissions[ZERO_INDEX]?.isAllowed
+	&& tabPermissions[FIRST_INDEX]?.isAllowed
+	&& tabPermissions[SECOND_INDEX]?.isAllowed;
 
 	const handleChangeTab = (val) => {
 		push(`/learning?activeTab=${val}`);
@@ -71,19 +81,19 @@ function ControlCenter() {
 				onChange={handleChangeTab}
 				fullWidth
 			>
-				{isManagFaqTabAllowed && (
+				{tabPermissions[ZERO_INDEX]?.isAllowed && (
 					<TabPanel name="manage_faq" title="Manage FAQ">
 						<QuestionsList />
 					</TabPanel>
 				)}
 
-				{ isTestModuleTabAllowed && (
+				{ tabPermissions[FIRST_INDEX]?.isAllowed && (
 					<TabPanel name="test_module" title="Test Module">
 						<HomePage testModuleTab={testModuleTab} />
 					</TabPanel>
 				)}
 
-				{isCourseModuleTabAllowed && (
+				{tabPermissions[SECOND_INDEX]?.isAllowed && (
 					<TabPanel name="course_module" title="Course Module">
 						<CreateCourse courseActiveTab={courseActiveTab} />
 					</TabPanel>
