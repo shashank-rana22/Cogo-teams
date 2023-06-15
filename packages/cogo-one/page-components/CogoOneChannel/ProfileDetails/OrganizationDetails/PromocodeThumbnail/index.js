@@ -10,6 +10,7 @@ import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
 const ZERO = 0;
+const DEFAULT_IMAGE = GLOBAL_CONSTANTS.image_url.promocode_thumbnail;
 
 function PromocodeThumbnail({ list = [] }) {
 	const colors = [
@@ -20,16 +21,14 @@ function PromocodeThumbnail({ list = [] }) {
 
 	const getCardColor = (index) => colors[index % colors.length];
 
-	// eslint-disable-next-line max-len
-	const DEFAULT_IMAGE = 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg';
-
 	return (
 		<div className={styles.thumbnail_container}>
 			{(list || []).map((item, index) => {
 				const { promotion_discounts, terms_and_conditions, thumbnail_image, codes } = item || [];
+
 				return (
 					<div
-						key={item}
+						key={promotion_discounts[index].id}
 						className={styles.container}
 						style={{ backgroundColor: getCardColor(index) }}
 					>

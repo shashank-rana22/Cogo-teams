@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import React from 'react';
 
 import styles from './styles.module.css';
 
@@ -12,6 +13,7 @@ function TooltipAmount({ amount, currencyType }) {
 				options  : {
 					currencyDisplay : 'code',
 					style           : 'currency',
+
 				},
 			})}
 			placement="top"
@@ -23,10 +25,10 @@ function TooltipAmount({ amount, currencyType }) {
 					amount   : amount as any,
 					currency : currencyType,
 					options  : {
-						currencyDisplay : 'code',
-						style           : 'currency',
-						notation        : 'compact',
-						compactDisplay  : 'short',
+						currencyDisplay       : 'code',
+						style                 : 'currency',
+						notation              : 'compact',
+						minimumFractionDigits : 2,
 					},
 				})}
 			</div>
