@@ -1,9 +1,14 @@
 import { ShipmentDetailContext } from '@cogoport/context';
+import { ShipmentChat } from '@cogoport/shipment-chat';
 import { useContext } from 'react';
 
+import PocSop from '../PocSop';
 import ShipmentHeader from '../ShipmentHeader';
 import ShipmentInfo from '../ShipmentInfo';
 import TimeLine from '../TimeLine';
+// import ShipmentHeader from '../ShipmentHeader';
+// import ShipmentInfo from '../ShipmentInfo';
+// import TimeLine from '../TimeLine';
 
 import styles from './styles.module.css';
 
@@ -30,6 +35,7 @@ function DefaultView() {
 
 			<div className={styles.header}>
 				{conditionMapping.shipment_header ? <ShipmentHeader /> : null}
+				{conditionMapping.poc_sop ? <PocSop /> : null}
 			</div>
 
 			{conditionMapping.timeline ? <TimeLine /> : null}
