@@ -1,34 +1,59 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
+import { startCase } from '@cogoport/utils';
+
+import styles from './styles.module.css';
+
 const getColumns = () => (
 	[
 		{
-			Header   : 'NAME',
+			Header   : 'Tribe NAME',
 			accessor : (item) => (
-				<div role="presentation">
-					<div>{item?.name || 'Name'}</div>
+				<div>{startCase(item?.tribe_name) || '-'}</div>
+			),
+		},
+		{
+			Header   : 'Tribe LEADER',
+			accessor : (item) => (
+				<div>{item?.tribe_leader || '-'}</div>
+			),
+		},
+		{
+			Header   : 'EMPLOYEES',
+			accessor : (item) => (
+				<div>{item?.name || '-'}</div>
+			),
+		},
+		{
+			Header   : 'LAST UPDATED AT',
+			accessor : (item) => (
+				<div>
+					{formatDate({
+						date       : item?.updated_at,
+						formatType : 'date',
+						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					})}
 				</div>
 			),
 		},
 		{
-			Header   : 'Squad',
+			Header   : 'STATUS',
 			accessor : (item) => (
-				<div role="presentation">
-					<div>{item?.name || 'Name'}</div>
+				<div
+					className={styles.status}
+					style={{ background: item?.status === 'inactive' ? '#f8aea8' : '' }}
+				>
+					{startCase(item?.status) || '-'}
 				</div>
 			),
 		},
 		{
-			Header   : 'Tribe',
+			Header   : 'ACTION',
 			accessor : (item) => (
-				<div role="presentation">
-					<div>{item?.name || 'Name'}</div>
-				</div>
-			),
-		},
-		{
-			Header   : 'Chapter',
-			accessor : (item) => (
-				<div role="presentation">
-					<div>{item?.name || 'Name'}</div>
+				<div>
+					<IcMDelete width={16} height={16} style={{ cursor: 'pointer' }} />
+					<IcMEdit width={16} height={16} style={{ marginLeft: 12, cursor: 'pointer' }} />
 				</div>
 			),
 		},
