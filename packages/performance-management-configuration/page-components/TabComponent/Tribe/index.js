@@ -2,6 +2,7 @@ import { Pagination } from '@cogoport/components';
 
 import Header from '../../../commons/CommonHeader';
 import CreateConfigurationModal from '../../../commons/CreateConfigurationModal';
+import DeleteConfigurationModal from '../../../commons/DeleteConfigurationModal';
 import PACKAGE_CONSTANTS from '../../../commons/packageConstants';
 import StyledTable from '../../../commons/StyledTable';
 
@@ -15,7 +16,8 @@ const TABLE_EMPTY_TEXT = 'No Tribe created yet';
 
 function Tribe() {
 	const {
-		search, setSearch, columns, loading:listApiLoading, data, page, setPage, fetchList,
+		search, setSearch, columns, loading:listApiLoading, data, page, setPage, fetchList, showDeleteModal,
+		setShowDeleteModal, deleteLoading, deleteTribe,
 	} = useTribe();
 
 	const { list = [], ...paginationData } = data || {};
@@ -73,6 +75,16 @@ function Tribe() {
 					/>
 				) : null
 			}
+
+			{showDeleteModal ? (
+				<DeleteConfigurationModal
+					showModal={showDeleteModal}
+					setShowModal={setShowDeleteModal}
+					onClickButton={deleteTribe}
+					loading={deleteLoading}
+					label={ADD_BUTTON_LABEL}
+				/>
+			) : null}
 		</div>
 	);
 }

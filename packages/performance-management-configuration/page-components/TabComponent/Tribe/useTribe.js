@@ -4,12 +4,14 @@ import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 import getColumns from './getColumns';
+import useDeleteTribe from './useDeleteTribe';
 
 const DEFAULT_PAGE = 1;
 
 const useTribe = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
+	const [showDeleteModal, setShowDeleteModal] = useState('');
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		url    : '/list_all_tribes',
@@ -36,7 +38,13 @@ const useTribe = () => {
 		fetchList();
 	}, [fetchList, page]);
 
-	const columns = getColumns();
+	const { deleteTribe, loading: deleteLoading } = useDeleteTribe({
+		fetchList,
+		setShowDeleteModal,
+		showDeleteModal,
+	});
+
+	const columns = getColumns({ setShowDeleteModal });
 
 	return {
 		columns,
@@ -47,6 +55,10 @@ const useTribe = () => {
 		data,
 		loading,
 		fetchList,
+		deleteTribe,
+		deleteLoading,
+		showDeleteModal,
+		setShowDeleteModal,
 	};
 };
 

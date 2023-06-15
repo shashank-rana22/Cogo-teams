@@ -186,6 +186,46 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'delete_squad',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_squad',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'delete_tribe',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_tribe',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'delete_chapter',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_chapter',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'delete_sub_chapter',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'update_sub_chapter',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

@@ -3,12 +3,14 @@ import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
 import getColumns from './getColumns';
+import useDeleteChapter from './useDeleteChapter';
 
 const DEFAULT_PAGE = 1;
 
 const useChapter = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
+	const [showDeleteModal, setShowDeleteModal] = useState('');
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		url    : '/list_all_chapters',
@@ -30,11 +32,17 @@ const useChapter = () => {
 		[page, trigger],
 	);
 
+	const { deleteChapter, loading: deleteLoading } = useDeleteChapter({
+		fetchList,
+		setShowDeleteModal,
+		showDeleteModal,
+	});
+
 	useEffect(() => {
 		fetchList();
 	}, [fetchList, page]);
 
-	const columns = getColumns();
+	const columns = getColumns({ setShowDeleteModal });
 
 	return {
 		columns,
@@ -45,6 +53,10 @@ const useChapter = () => {
 		page,
 		setPage,
 		fetchList,
+		deleteChapter,
+		deleteLoading,
+		showDeleteModal,
+		setShowDeleteModal,
 	};
 };
 

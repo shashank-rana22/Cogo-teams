@@ -21,6 +21,8 @@ const useCreateTribe = ({ fetchList }) => {
 					...values,
 				},
 			});
+
+			Toast.success('Successfully Created');
 			setShowAddTribeModal(false);
 			fetchList();
 		} catch (err) {

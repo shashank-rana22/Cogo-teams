@@ -2,6 +2,7 @@ import { Pagination } from '@cogoport/components';
 
 import Header from '../../../commons/CommonHeader';
 import CreateConfigurationModal from '../../../commons/CreateConfigurationModal';
+import DeleteConfigurationModal from '../../../commons/DeleteConfigurationModal';
 import StyledTable from '../../../commons/StyledTable';
 
 import controls from './controls';
@@ -19,7 +20,7 @@ const ADD_BUTTON_LABEL = 'Sub-Chapter';
 function SubChapter() {
 	const {
 		columns, search, setSearch, data, loading: listLoading,
-		page, setPage, fetchList,
+		page, setPage, fetchList, setShowDeleteModal, showDeleteModal, deleteSubChapter, deleteLoading,
 	} = useSubChapter();
 
 	const { list = [], ...paginationData } = data || {};
@@ -71,6 +72,16 @@ function SubChapter() {
 					onClickSubmitButton={onClickSubmitButton}
 					loading={loading}
 					handleSubmit={handleSubmit}
+				/>
+			) : null}
+
+			{showDeleteModal ? (
+				<DeleteConfigurationModal
+					showModal={showDeleteModal}
+					setShowModal={setShowDeleteModal}
+					onClickButton={deleteSubChapter}
+					loading={deleteLoading}
+					label={ADD_BUTTON_LABEL}
 				/>
 			) : null}
 		</div>

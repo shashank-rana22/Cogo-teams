@@ -2,12 +2,14 @@ import { Pagination } from '@cogoport/components';
 
 import Header from '../../../commons/CommonHeader';
 import CreateConfigurationModal from '../../../commons/CreateConfigurationModal';
+import DeleteConfigurationModal from '../../../commons/DeleteConfigurationModal';
 import PACKAGE_CONSTANTS from '../../../commons/packageConstants';
 import StyledTable from '../../../commons/StyledTable';
 
 import controls from './controls';
 import styles from './styles.module.css';
 import useCreateSquad from './useCreateSquad';
+// import useDeleteSquad from './useDeleteSquad';
 import useSquad from './useSquad';
 
 const ADD_BUTTON_LABEL = 'Squad';
@@ -15,7 +17,8 @@ const TABLE_EMPTY_TEXT = 'No Squad created yet';
 
 function Squad() {
 	const {
-		search, setSearch, columns, loading:listApiLoading, data, page, setPage, fetchList,
+		search, setSearch, columns, loading:listApiLoading, data, page, setPage, setShowDeleteModal,
+		showDeleteModal, deleteSquad, deleteLoading, fetchList,
 	} = useSquad();
 
 	const { list = [], ...paginationData } = data || {};
@@ -66,6 +69,16 @@ function Squad() {
 					onClickSubmitButton={onClickSubmitButton}
 					loading={loading}
 					handleSubmit={handleSubmit}
+				/>
+			) : null}
+
+			{showDeleteModal ? (
+				<DeleteConfigurationModal
+					showModal={showDeleteModal}
+					setShowModal={setShowDeleteModal}
+					onClickButton={deleteSquad}
+					loading={deleteLoading}
+					label={ADD_BUTTON_LABEL}
 				/>
 			) : null}
 		</div>

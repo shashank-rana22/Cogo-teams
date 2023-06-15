@@ -2,6 +2,7 @@ import { Pagination } from '@cogoport/components';
 
 import Header from '../../../commons/CommonHeader';
 import CreateConfigurationModal from '../../../commons/CreateConfigurationModal';
+import DeleteConfigurationModal from '../../../commons/DeleteConfigurationModal';
 import StyledTable from '../../../commons/StyledTable';
 
 import controls from './controls';
@@ -18,7 +19,8 @@ const DEFAULT_TOTAL_COUNT = 10;
 function Chapter() {
 	const {
 		columns, search, setSearch, data, loading: listApiLoading,
-		page, setPage, fetchList,
+		page, setPage, fetchList, showDeleteModal, setShowDeleteModal,
+		deleteChapter, deleteLoading,
 	} = useChapter();
 
 	const { list = [], ...paginationData } = data || {};
@@ -70,6 +72,16 @@ function Chapter() {
 					onClickSubmitButton={onClickSubmitButton}
 					loading={loading}
 					handleSubmit={handleSubmit}
+				/>
+			) : null}
+
+			{showDeleteModal ? (
+				<DeleteConfigurationModal
+					showModal={showDeleteModal}
+					setShowModal={setShowDeleteModal}
+					onClickButton={deleteChapter}
+					loading={deleteLoading}
+					label={ADD_BUTTON_LABEL}
 				/>
 			) : null}
 		</div>

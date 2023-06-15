@@ -5,7 +5,7 @@ import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const getColumns = () => (
+const getColumns = ({ setShowDeleteModal }) => (
 	[
 		{
 			Header   : 'Tribe NAME',
@@ -52,7 +52,12 @@ const getColumns = () => (
 			Header   : 'ACTION',
 			accessor : (item) => (
 				<div>
-					<IcMDelete width={16} height={16} style={{ cursor: 'pointer' }} />
+					<IcMDelete
+						width={16}
+						height={16}
+						style={{ cursor: 'pointer' }}
+						onClick={() => setShowDeleteModal(item.id)}
+					/>
 					<IcMEdit width={16} height={16} style={{ marginLeft: 12, cursor: 'pointer' }} />
 				</div>
 			),
