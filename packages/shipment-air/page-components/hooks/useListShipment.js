@@ -6,12 +6,13 @@ const SHIPMENT_STATE_MAPPINGS = {
 	completed : ['completed'],
 	cancelled : ['cancelled'],
 };
-const useListShipment = ({ serviceActiveTab, shipmentStateTab }) => {
+const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_shipments',
 		method : 'GET',
 		params : {
 			page    : 1,
+			q       : searchQuery,
 			filters : {
 				state         : SHIPMENT_STATE_MAPPINGS[shipmentStateTab],
 				shipment_type : serviceActiveTab,
@@ -20,10 +21,16 @@ const useListShipment = ({ serviceActiveTab, shipmentStateTab }) => {
 	}, { manual: true });
 
 	const apiTrigger = async () => {
+		const params = {
+			page    : 1,
+			q       : searchQuery,
+			filters : {
+				state         : SHIPMENT_STATE_MAPPINGS[shipmentStateTab],
+				shipment_type : serviceActiveTab,
+			},
+		};
 		try {
-			 await trigger({
-
-			});
+			 await trigger({ params });
 		} catch (err) {
 
 		}
@@ -31,7 +38,7 @@ const useListShipment = ({ serviceActiveTab, shipmentStateTab }) => {
 
 	useEffect(() => {
 		apiTrigger();
-	}, [serviceActiveTab, shipmentStateTab]);
+	}, [serviceActiveTab, shipmentStateTab, searchQuery]);
 
 	return {
 		loading,

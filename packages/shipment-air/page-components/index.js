@@ -1,3 +1,4 @@
+import { useDebounceQuery } from '@cogoport/forms';
 import { useState } from 'react';
 
 import Body from './components/Body';
@@ -9,9 +10,9 @@ function ShipmentAir() {
 
 	const [shipmentStateTab, setShipmentStateTab] = useState('ongoing');
 
-	const { data } = useListShipment({ serviceActiveTab, shipmentStateTab });
+	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
-	console.log(data, serviceActiveTab, shipmentStateTab, 'data1');
+	const { data } = useListShipment({ serviceActiveTab, shipmentStateTab, searchQuery });
 	return (
 		<div>
 			<h1>
@@ -22,6 +23,7 @@ function ShipmentAir() {
 				setServiceActiveTab={setServiceActiveTab}
 				shipmentStateTab={shipmentStateTab}
 				setShipmentStateTab={setShipmentStateTab}
+				debounceQuery={debounceQuery}
 			/>
 			<Body data={data} />
 		</div>

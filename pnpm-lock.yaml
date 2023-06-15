@@ -1850,6 +1850,9 @@ importers:
       '@cogoport/request':
         specifier: workspace:0.1.0
         version: link:../../common/request
+      '@cogoport/scope-select':
+        specifier: workspace:*
+        version: link:../../common/scope-select
       '@cogoport/store':
         specifier: workspace:0.1.0
         version: link:../../common/store

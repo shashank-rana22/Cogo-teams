@@ -1,7 +1,21 @@
-.header_footer_part{
-    display:flex;
-    justify-content: space-between;
+.header_footer_part {
+  display: flex;
+  justify-content: space-between;
+  margin-top: 18px;
 }
-.filter_icon{
 
+.header_footer_filter_part {
+  display: flex;
+  justify-content: space-between;
+  .ui_button_container {
+    margin-right: 8px;
+  }
+}
+
+.icon_wrapper {
+  font-size: 20px;
+  margin: 4px;
+}
+.scope_select_wrapper {
+  margin-right: 8px;
 }
