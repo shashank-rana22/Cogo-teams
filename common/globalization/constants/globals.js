@@ -181,6 +181,7 @@ const GLOBAL_CONSTANTS = {
 	currency_conversion_constant    : 0.04,
 	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
 	invoice_check_id                : 120347,
+	zeroth_index                    : 0,
 };
 
 GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
