@@ -10,11 +10,26 @@ import Header from './Header';
 import QuestionsList from './QuestionsList';
 
 const ZERO_INDEX = 0;
-const FIRST_INDEX = 1;
-const SECOND_INDEX = 2;
+
+const KEYS_MAPPING = ['manage_faq', 'test_module', 'course_module'];
+
+const TABS_MAPPING = {
+	manage_faq: {
+		title     : 'Manage FAQ',
+		component : QuestionsList,
+	},
+	test_module: {
+		title     : 'Test Module',
+		component : HomePage,
+	},
+	course_module: {
+		title     : 'Course Module',
+		component : CreateCourse,
+	},
+};
 
 const getTabPermission = ({ navigation, apiName, tabName }) => {
-	const isAllowed = navigation?.[apiName][ZERO_INDEX]?.type === 'allowed';
+	const isAllowed = navigation?.[apiName][ZERO_INDEX]?.type !== 'none';
 	return { tabName, isAllowed };
 };
 
@@ -59,9 +74,20 @@ function ControlCenter() {
 
 	const [activeTab, setActiveTab] = useState(currentActiveTab || defaultActiveTab.tabName);
 
-	const isConfigurationAllowed = tabPermissions[ZERO_INDEX]?.isAllowed
-	&& tabPermissions[FIRST_INDEX]?.isAllowed
-	&& tabPermissions[SECOND_INDEX]?.isAllowed;
+	const isConfigurationAllowed = tabPermissions.every((item) => item.isAllowed);
+
+	const tabPropsMapping = {
+		manage_faq    : {},
+		test_module   : { testModuleTab },
+		course_module : { courseActiveTab },
+	};
+
+	const COMPONENT_MAPPING = KEYS_MAPPING.map((element, index) => (
+		{
+			name      : element,
+			isAllowed : tabPermissions[index]?.isAllowed,
+		}
+	));
 
 	const handleChangeTab = (val) => {
 		push(`/learning?activeTab=${val}`);
@@ -81,24 +107,29 @@ function ControlCenter() {
 				onChange={handleChangeTab}
 				fullWidth
 			>
-				{tabPermissions[ZERO_INDEX]?.isAllowed && (
-					<TabPanel name="manage_faq" title="Manage FAQ">
-						<QuestionsList />
-					</TabPanel>
-				)}
+				{COMPONENT_MAPPING.map((item) => {
+					const { name, isAllowed } = item;
 
-				{ tabPermissions[FIRST_INDEX]?.isAllowed && (
-					<TabPanel name="test_module" title="Test Module">
-						<HomePage testModuleTab={testModuleTab} />
-					</TabPanel>
-				)}
+					const activeComponentProps = tabPropsMapping[name];
 
-				{tabPermissions[SECOND_INDEX]?.isAllowed && (
-					<TabPanel name="course_module" title="Course Module">
-						<CreateCourse courseActiveTab={courseActiveTab} />
-					</TabPanel>
-				)}
+					const { title, component: ActiveComponent } = TABS_MAPPING[name];
 
+					if (!isAllowed) {
+						return null;
+					}
+
+					return (
+
+						<TabPanel
+							name={name}
+							title={title}
+							key={name}
+						>
+							<ActiveComponent {...activeComponentProps} />
+						</TabPanel>
+
+					);
+				})}
 			</Tabs>
 		</div>
 	);
