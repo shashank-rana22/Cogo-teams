@@ -12,8 +12,8 @@ const controls = [
 		placeholder : 'Select Chapter leader',
 		type        : 'asyncSelect',
 		initialCall : false,
-		asyncKey    : 'partner_users',
-		valueKey    : 'user_id',
+		asyncKey    : 'list_employees',
+		valueKey    : 'id',
 		rules       : {
 			required: 'Chapter leader is required',
 		},

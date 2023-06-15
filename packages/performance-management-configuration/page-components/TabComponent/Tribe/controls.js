@@ -10,7 +10,7 @@ const controls = [
 	{
 		name        : 'tribe_leader_id',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_employees',
 		label       : 'Tribe leader',
 		placeholder : 'Tribe leader',
 		rules       : {

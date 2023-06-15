@@ -11,8 +11,8 @@ const controls = [
 		placeholder : 'Select sub-chapter leader',
 		type        : 'asyncSelect',
 		initialCall : false,
-		asyncKey    : 'partner_users',
-		valueKey    : 'user_id',
+		asyncKey    : 'list_employees',
+		valueKey    : 'id',
 		rules       : {
 			required: 'Sub-chapter leader is required',
 		},
