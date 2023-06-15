@@ -20,19 +20,17 @@ function ControlCenter() {
 
 	const { activeTab: currentActiveTab, testModuleTab, courseActiveTab } = query || {};
 
-	const [activeTab, setActiveTab] = useState(currentActiveTab || 'manage_faq');
+	const isManagFaqTabAllowed = getTabPermission(
+		{
+			navigation : permissions_navigations?.['cogo_academy-create_faq'],
+			apiName    : 'create_question_answer_set',
+		},
+	);
 
 	const isTestModuleTabAllowed = getTabPermission(
 		{
 			navigation : permissions_navigations?.['cogo_academy-create_faq'],
 			apiName    : 'create_test',
-		},
-	);
-
-	const isManagFaqTabAllowed = getTabPermission(
-		{
-			navigation : permissions_navigations?.['cogo_academy-create_faq'],
-			apiName    : 'create_question_answer_set',
 		},
 	);
 
@@ -42,6 +40,16 @@ function ControlCenter() {
 			apiName    : 'create_cogo_academy_course',
 		},
 	);
+
+	const tabPermissions = {
+		manage_faq    : isManagFaqTabAllowed,
+		test_module   : isTestModuleTabAllowed,
+		course_module : isCourseModuleTabAllowed,
+	};
+
+	const defaultActiveTab = Object.keys(tabPermissions).find((item) => tabPermissions[item]);
+
+	const [activeTab, setActiveTab] = useState(currentActiveTab || defaultActiveTab);
 
 	const isConfigurationAllowed = isTestModuleTabAllowed && isManagFaqTabAllowed && isCourseModuleTabAllowed;
 
