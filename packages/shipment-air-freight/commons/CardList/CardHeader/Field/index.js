@@ -64,7 +64,7 @@ function Field({
 				{sorting && (
 					<IcMArrowRotateDown
 						className={`${styles.caret} ${(showSortingType && show) ? styles.caret_up : ''}`}
-						onClick={() => handleOnChange()}
+						onClick={handleOnChange}
 					/>
 				)}
 			</div>

@@ -25,7 +25,8 @@
         "can_cancel": true,
         "list_reasons": {
             "stakeholder_type": ["admin"]
-        }
+        },
+        "role": "sales"
     },
     "edit_supplier": false,
     "cancel_service": false,

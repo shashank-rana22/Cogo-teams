@@ -8,20 +8,19 @@ import CargoDetails from '../../commons/CargoDetails';
 import PortDetails from '../../commons/PortDetails';
 import CancelShipment from '../CancelShipment';
 
-import AddPoNumber from './AddPoNumber';
 import Loader from './Loader';
 import styles from './styles.module.css';
 import getCanCancelShipment from './utils/getCanCancelShipment';
 
 function ShipmentHeader() {
-	const [showModal, setShowModal] = useState();
+	const [showModal, setShowModal] = useState(false);
 	const [showPopover, setShowPopover] = useState(false);
 
 	const { shipment_data, primary_service, isGettingShipment, stakeholderConfig } = useContext(ShipmentDetailContext);
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 
-	const { po_number, importer_exporter = {} } = shipment_data || {};
+	const { importer_exporter = {} } = shipment_data || {};
 
 	if (isGettingShipment) {
 		return <Loader />;
@@ -46,22 +45,6 @@ function ShipmentHeader() {
 				>
 					<div className={styles.business_name}>{importer_exporter.business_name}</div>
 				</Tooltip>
-
-				{po_number ? (
-					<div className={styles.po_number}>
-						PO Number:&nbsp;
-						{po_number}
-					</div>
-				) : (
-					<div
-						className={styles.button}
-						role="button"
-						tabIndex={0}
-						onClick={() => setShowModal('add_po_number')}
-					>
-						Add PO Number
-					</div>
-				)}
 			</div>
 
 			<div className={styles.port_details}>
@@ -76,8 +59,7 @@ function ShipmentHeader() {
 						visible={showPopover}
 						render={(
 							<div
-								role="button"
-								tabIndex={0}
+								role="presentation"
 								className={styles.cancel_button}
 								onClick={() => { setShowModal('cancel_shipment'); setShowPopover(false); }}
 							>
@@ -90,13 +72,6 @@ function ShipmentHeader() {
 						<IcMOverflowDot className={styles.three_dot_icon} onClick={() => setShowPopover((p) => !p)} />
 					</Popover>
 				) : null}
-
-			{showModal === 'add_po_number' ? (
-				<AddPoNumber
-					setShow={setShowModal}
-					shipment_data={shipment_data}
-				/>
-			) : null}
 
 			{showModal === 'cancel_shipment' ? (
 				<CancelShipment setShow={setShowModal} />
