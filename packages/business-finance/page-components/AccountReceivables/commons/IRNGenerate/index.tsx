@@ -75,6 +75,9 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		setUploadInvoice,
 		partner,
 	});
+	const UPLOAD_INVOICE = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported
+		?.includes('upload_invoice');
+
 	const financeRejected = () => {
 		setOpenReject(!openReject);
 	};
@@ -91,8 +94,8 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const showPost = ['REIMBURSEMENT', 'REIMBURSEMENT_CREDIT_NOTE'].includes(invoiceType);
 	const content = () => (
 		<div>
-			{partnerId === GLOBAL_CONSTANTS.country_entity_ids.VN ? (
-				<div>
+			<div>
+				{ UPLOAD_INVOICE && (
 					<div className={styles.generate_container}>
 						<Button
 							size="sm"
@@ -101,75 +104,74 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						>
 							Upload E-invoice
 						</Button>
+						{uploadInvoice ? (
+							<InvoiceModal
+								uploadInvoice={uploadInvoice}
+								setUploadInvoice={setUploadInvoice}
+								uploadEInvoice={uploadEInvoice}
+								loading={invoiceLoading}
+							/>
+						) : null}
 					</div>
-					{uploadInvoice ? (
-						<InvoiceModal
-							uploadInvoice={uploadInvoice}
-							setUploadInvoice={setUploadInvoice}
-							uploadEInvoice={uploadEInvoice}
-							loading={invoiceLoading}
-						/>
-					) : null}
-				</div>
-			) : (
-				<div
-					className={styles.generate_container}
-				>
-					{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
+				)}
+			</div>
+			<div
+				className={styles.generate_container}
+			>
+				{(INVOICE_STATUS.includes(invoiceStatus) && !UPLOAD_INVOICE && !showPost) && (
+					<Button
+						size="sm"
+						disabled={loading}
+						onClick={() => generateIrn()}
+					>
+						Generate
+						{' '}
+						{IrnLabel}
+					</Button>
+				)}
+				{POSTED_STATUS.includes(invoiceStatus) && (
+					<div className={styles.button_container}>
 						<Button
 							size="sm"
-							disabled={loading}
-							onClick={() => generateIrn()}
+							disabled={finalPostLoading}
+							onClick={() => handleFinalpost()}
 						>
-							Generate
-							{' '}
-							{IrnLabel}
+							<div className={styles.button_style}>
+								{isFinalPosted ? 'Information' : 'Final Post'}
+							</div>
 						</Button>
-					)}
-					{POSTED_STATUS.includes(invoiceStatus) && (
-						<div className={styles.button_container}>
-							<Button
-								size="sm"
-								disabled={finalPostLoading}
-								onClick={() => handleFinalpost()}
-							>
-								<div className={styles.button_style}>
-									{isFinalPosted ? 'Information' : 'Final Post'}
-								</div>
-							</Button>
-						</div>
-					)}
-					{IRN_FAILED_STATUS.includes(invoiceStatus) && (
-						<div className={styles.button_container}>
-							<Button
-								size="sm"
-								disabled={loadingOnRefresh}
-								onClick={refresh}
-							>
-								<div className={styles.button_style}>Refresh</div>
-							</Button>
-						</div>
-					)}
-					{(SHOW_POST_TO_SAGE.includes(invoiceStatus) && showPost) && (
+					</div>
+				)}
+				{IRN_FAILED_STATUS.includes(invoiceStatus) && (
+					<div className={styles.button_container}>
 						<Button
-							disabled={showPostLoading}
 							size="sm"
-							onClick={postToSage}
+							disabled={loadingOnRefresh}
+							onClick={refresh}
 						>
-							Post to Sage
+							<div className={styles.button_style}>Refresh</div>
 						</Button>
-					)}
-					<FinalPostModal
-						finalPostToSageModal={finalPostToSageModal}
-						setFinalPostToSageModal={setFinalPostToSageModal}
-						finalPostFromSage={finalPostFromSage}
-						sageInvoiceData={sageInvoiceData}
-						sageInvoiceLoading={sageInvoiceLoading}
-						finalPostLoading={finalPostLoading}
-						isFinalPosted={isFinalPosted}
-					/>
-				</div>
-			)}
+					</div>
+				)}
+				{(SHOW_POST_TO_SAGE.includes(invoiceStatus) && showPost) && (
+					<Button
+						disabled={showPostLoading}
+						size="sm"
+						onClick={postToSage}
+					>
+						Post to Sage
+					</Button>
+				)}
+				<FinalPostModal
+					finalPostToSageModal={finalPostToSageModal}
+					setFinalPostToSageModal={setFinalPostToSageModal}
+					finalPostFromSage={finalPostFromSage}
+					sageInvoiceData={sageInvoiceData}
+					sageInvoiceLoading={sageInvoiceLoading}
+					finalPostLoading={finalPostLoading}
+					isFinalPosted={isFinalPosted}
+				/>
+			</div>
 			{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
 				<div className={styles.button_container}>
 					<Button

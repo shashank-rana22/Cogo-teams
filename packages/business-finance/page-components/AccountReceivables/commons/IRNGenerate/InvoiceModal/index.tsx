@@ -23,9 +23,9 @@ function InvoiceModal({
 		formState: { errors: errorVal },
 	} = useForm();
 
-	const onSubmit = (value) => {
-		uploadEInvoice(value);
-	};
+	// const onSubmit = (value) => {
+	// 	uploadEInvoice(value);
+	// };
 
 	const {
 		E_invoice_date : E_INVOICE_DATE = {}, E_invoice_due_date : E_INVOICE_DUE_DATE = {},
@@ -48,7 +48,11 @@ function InvoiceModal({
 			<Modal.Header
 				title="Upload E-invoice Document"
 			/>
-			<form onSubmit={handleSubmit(onSubmit)}>
+			<form onSubmit={(event) => {
+				event.preventDefault();
+				handleSubmit(uploadEInvoice());
+			}}
+			>
 				<Modal.Body>
 					<div>
 

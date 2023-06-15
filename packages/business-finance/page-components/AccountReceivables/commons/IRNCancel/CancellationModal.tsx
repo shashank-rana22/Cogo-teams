@@ -1,4 +1,5 @@
 import { Textarea, Button, RadioGroup, Modal } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { IRN_CANCEL_OPTIONS } from '../../constants';
@@ -73,7 +74,7 @@ function CancellationModal({
 									cancelIrn(response);
 								}}
 								disabled={
-							response.value === '' || response.remarks === '' || loading
+							isEmpty(response.value) || isEmpty(response.remarks) || loading
 						}
 							>
 								Confirm
