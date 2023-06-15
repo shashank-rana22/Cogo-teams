@@ -18,7 +18,7 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
-		api          : 'update_shipment_risk_resolution',
+		api          : 'update_shipment_risk_assessment',
 		access_type  : 'private',
 		feature      : 'risk_management',
 		service_name : 'shipment',
