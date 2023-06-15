@@ -12,7 +12,7 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 		{
 			id    : 'amount',
 			color : 'hsl(155, 70%, 50%)',
-			data  : formattedData,
+			data  : formattedData.slice().reverse(),
 		},
 	];
 
@@ -42,7 +42,7 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 			xFormat=" >-"
 			yScale={{
 				type    : 'linear',
-				min     : 'auto',
+				min     : 0,
 				stacked : true,
 				reverse : false,
 			}}
@@ -53,7 +53,6 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 				tickSize       : 5,
 				tickPadding    : 5,
 				tickRotation   : 0,
-				legend         : `${startCase(transactionType)}ed Month`,
 				legendOffset   : 36,
 				legendPosition : 'middle',
 			}}
@@ -76,7 +75,9 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 			useMesh
 			enableSlices="x"
 			sliceTooltip={(item) => renderSliceTooltip(item)}
+
 		/>
+
 	);
 }
 
