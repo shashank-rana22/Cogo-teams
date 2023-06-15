@@ -16,7 +16,7 @@ const useTribe = () => {
 		method : 'GET',
 	}, { manual: true });
 
-	const fetch = useCallback(
+	const fetchList = useCallback(
 		async () => {
 			try {
 				await trigger({
@@ -33,8 +33,8 @@ const useTribe = () => {
 	);
 
 	useEffect(() => {
-		fetch();
-	}, [fetch, page]);
+		fetchList();
+	}, [fetchList, page]);
 
 	const columns = getColumns();
 
@@ -46,6 +46,7 @@ const useTribe = () => {
 		setPage,
 		data,
 		loading,
+		fetchList,
 	};
 };
 
