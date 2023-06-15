@@ -6,7 +6,6 @@ const filterControls = [
 		placeholder : 'Service',
 		type        : 'select',
 		span        : 5,
-		style       : { width: '200px' },
 		options     : SERVICE_OPTIONS,
 	},
 	{
@@ -14,7 +13,6 @@ const filterControls = [
 		placeholder : 'Cycle Status',
 		type        : 'select',
 		span        : 5,
-		style       : { width: '200px' },
 		options     : CYCLE_OPTIONS,
 
 	},
