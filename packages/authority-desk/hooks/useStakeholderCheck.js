@@ -1,11 +1,10 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 
 const geo = getGeoConstants();
 
-const FIRST_INDEX = 0;
-
-const NIL_LENGTH = 0;
+const DEFAULT_INDEX_OF_MATCHING_ROLE_IDS = 0;
 
 export const useStakeholderCheck = () => {
 	const { role_ids } = useSelector(({ profile }) => ({
@@ -29,8 +28,8 @@ export const useStakeholderCheck = () => {
 	const matching_role_ids = role_ids_map
 		.filter(({ role_ids: ids }) => (role_ids || []).some((item) => ids.includes(item)));
 
-	const activeRole = matching_role_ids?.length > NIL_LENGTH
-		? matching_role_ids?.[FIRST_INDEX].role
+	const activeRole = !isEmpty(matching_role_ids)
+		? matching_role_ids?.[DEFAULT_INDEX_OF_MATCHING_ROLE_IDS].role
 		: 'kam';
 
 	return { role: activeRole };
