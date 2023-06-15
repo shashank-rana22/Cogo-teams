@@ -13,71 +13,61 @@ const DEFAULT_INDEX = 0;
 
 const TABS_MAPPING = {
 	manage_faq: {
-		title       : 'Manage FAQ',
-		component   : QuestionsList,
-		mainApiName : 'create_question_answer_set',
+		title: 'Manage FAQ',
+		component: QuestionsList,
+		mainApiName: 'create_question_answer_set',
+		permission_navigation_key: 'cogo_academy-create_faq'
 	},
 	test_module: {
-		title       : 'Test Module',
-		component   : HomePage,
-		mainApiName : 'create_test',
+		title: 'Test Module',
+		component: HomePage,
+		mainApiName: 'create_test',
+		permission_navigation_key: 'cogo_academy-create_faq'
 	},
 	course_module: {
-		title       : 'Course Module',
-		component   : CreateCourse,
-		mainApiName : 'create_cogo_academy_course',
+		title: 'Course Module',
+		component: CreateCourse,
+		mainApiName: 'create_cogo_academy_course',
+		permission_navigation_key: 'cogo_academy-course'
 	},
 };
 
-const getTabPermission = ({ navigation, apiName, tabName }) => {
-	const isAllowed = navigation?.[apiName][DEFAULT_INDEX]?.type !== 'none';
-	return { tabName, isAllowed };
+const getTabPermissions = ({ permissions_navigations }) => {
+	return Object.entries(TABS_MAPPING).reduce((acc, [tabKey, item]) => {
+		const { permission_navigation_key, mainApiName } = item;
+
+		const navigation = permissions_navigations?.[permission_navigation_key];
+
+		return {
+			...acc,
+			[tabKey]: {
+				tabName: tabKey,
+				isAllowed: navigation?.[mainApiName][DEFAULT_INDEX]?.type !== 'none',
+			}
+		};
+	}, {});
 };
 
 function ControlCenter() {
 	const { query, push } = useRouter();
+	const { activeTab: currentActiveTab, testModuleTab, courseActiveTab } = query || {};
 
 	const { permissions_navigations = {} } = useSelector((state) => state.profile);
 
-	const { activeTab: currentActiveTab, testModuleTab, courseActiveTab } = query || {};
+	const tabPermissions = getTabPermissions({ permissions_navigations });
+	const tabPermissionsValues = Object.values(tabPermissions);
 
-	const ALL_TABS_PERMISSION_MAPPING = {
-		manage_faq    : permissions_navigations?.['cogo_academy-create_faq'],
-		test_module   : permissions_navigations?.['cogo_academy-create_faq'],
-		course_module : permissions_navigations?.['cogo_academy-course'],
-	};
-
-	const tabPermissions = Object.keys(ALL_TABS_PERMISSION_MAPPING).map((key) => {
-		const navigation = ALL_TABS_PERMISSION_MAPPING[key];
-		const mainApiName = TABS_MAPPING[key]?.mainApiName || '';
-
-		return getTabPermission(
-			{
-				navigation,
-				apiName : mainApiName,
-				tabName : key,
-			},
-		);
+	const [activeTab, setActiveTab] = useState(() => {
+		return currentActiveTab || tabPermissionsValues.find(item => item.isAllowed)?.tabName;
 	});
 
-	const defaultActiveTab = tabPermissions.find((item) => item.isAllowed);
-
-	const [activeTab, setActiveTab] = useState(currentActiveTab || defaultActiveTab.tabName);
-
-	const isConfigurationAllowed = tabPermissions.every((item) => item.isAllowed);
+	const isConfigurationAllowed = tabPermissionsValues.every((item) => item.isAllowed);
 
 	const tabPropsMapping = {
-		manage_faq    : {},
-		test_module   : { testModuleTab },
-		course_module : { courseActiveTab },
+		manage_faq: {},
+		test_module: { testModuleTab },
+		course_module: { courseActiveTab },
 	};
-
-	const COMPONENT_MAPPING = Object.keys(TABS_MAPPING).map((element, index) => (
-		{
-			name      : element,
-			isAllowed : tabPermissions[index]?.isAllowed,
-		}
-	));
 
 	const handleChangeTab = (val) => {
 		push(`/learning?activeTab=${val}`);
@@ -87,9 +77,7 @@ function ControlCenter() {
 
 	return (
 		<div>
-			<Header
-				isConfigurationAllowed={isConfigurationAllowed}
-			/>
+			<Header isConfigurationAllowed={isConfigurationAllowed} />
 
 			<Tabs
 				activeTab={activeTab}
@@ -97,25 +85,21 @@ function ControlCenter() {
 				onChange={handleChangeTab}
 				fullWidth
 			>
-				{COMPONENT_MAPPING.map((item) => {
-					const { name, isAllowed } = item;
+				{Object.entries(TABS_MAPPING).map(([tabKey, item]) => {
+					const { title, component: Component } = item;
 
-					const activeComponentProps = tabPropsMapping[name];
+					const { isAllowed } = tabPermissions[tabKey];
 
-					const { title, component: ActiveComponent } = TABS_MAPPING[name];
-
-					if (!isAllowed) {
-						return null;
-					}
+					if (!isAllowed) return null;
 
 					return (
 
 						<TabPanel
-							name={name}
+							key={tabKey}
+							name={tabKey}
 							title={title}
-							key={name}
 						>
-							<ActiveComponent {...activeComponentProps} />
+							<Component key={tabKey} {...(tabPropsMapping[tabKey] || {})} />
 						</TabPanel>
 
 					);
