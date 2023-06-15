@@ -5,7 +5,14 @@ import { useRequest } from '@cogoport/request';
 
 import CURRENT_TO_NEXT_MAPPING from '../components/RightComponent/Header/CURRENT_TO_NEXT_MAPPING';
 
-const useUpdateCourse = ({ data, setActiveTab, activeTab, getCogoAcademyCourse, changeTab = true }) => {
+const useUpdateCourse = ({
+	data,
+	setActiveTab,
+	activeTab,
+	getCogoAcademyCourse,
+	changeTab = true,
+	setPublishData = () => {},
+}) => {
 	const router = useRouter();
 
 	const [{ loading }, trigger] = useRequest({
@@ -13,17 +20,24 @@ const useUpdateCourse = ({ data, setActiveTab, activeTab, getCogoAcademyCourse, 
 		method : 'POST',
 	}, { manual: true });
 
-	const updateCourse = async ({ values, isRefetchRequired = true, buttonType = 'save' }) => {
+	const updateCourse = async ({
+		values = {},
+		isRefetchRequired = true,
+		buttonType = 'save',
+	}) => {
 		try {
+			let finalValues = values;
+
 			if (activeTab === 'audience') {
 				const audiences = values?.audiences?.map((audience) => audience.id);
 				const inactive_audience_ids = data?.course_audience_mappings
-					?.map((audience) => audience.faq_audience_id)?.filter((id) => !audiences.includes(id));
+					?.map((audience) => audience.faq_audience_id)
+					?.filter((id) => !audiences.includes(id));
 
-				await trigger({ data: { ...values, inactive_audience_ids } });
-			} else {
-				await trigger({ data: values });
+				finalValues = { ...values, inactive_audience_ids };
 			}
+
+			await trigger({ data: finalValues });
 
 			if (isRefetchRequired) {
 				await getCogoAcademyCourse();
@@ -34,6 +48,8 @@ const useUpdateCourse = ({ data, setActiveTab, activeTab, getCogoAcademyCourse, 
 			}
 
 			if (buttonType === 'publish') {
+				setPublishData({});
+
 				router.push(
 					'/learning?activeTab=course_module',
 					'/learning?activeTab=course_module',

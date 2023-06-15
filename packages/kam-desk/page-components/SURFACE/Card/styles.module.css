@@ -39,6 +39,7 @@
 }
 
 .pill_container {
+	display: flex;
 	width: 24%;
 }
 
@@ -64,4 +65,8 @@
 			font-size: var(--font-size-sm);
 		}
 	}
+}
+
+.rejection_tooltip {
+	font-size: 12px;
 }

@@ -1,7 +1,7 @@
-.box{
-    background: #f2f2f2;
-	border-radius: 4px;
-	margin-right: 8px;
+.box {
 	padding: 4px;
+	margin-right: 8px;
 	font-size: 10px;
+	background: #f2f2f2;
+	border-radius: 4px;
 }
