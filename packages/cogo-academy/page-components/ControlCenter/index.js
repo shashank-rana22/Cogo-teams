@@ -1,5 +1,6 @@
 import { TabPanel, Tabs } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import CreateCourse from '../CreateCourse';
@@ -8,27 +9,41 @@ import HomePage from '../CreateModule/components/HomePage';
 import Header from './Header';
 import QuestionsList from './QuestionsList';
 
-const TABS_MAPPING = {
-	manage_faq: {
-		title     : 'Manage FAQ',
-		component : QuestionsList,
-	},
-	test_module: {
-		title     : 'Test Module',
-		component : HomePage,
-	},
-	course_module: {
-		title     : 'Course Module',
-		component : CreateCourse,
-	},
-};
+const ZERO_INDEX = 0;
+
+const getTabPermission = ({ navigation, apiName }) => navigation?.[apiName][ZERO_INDEX]?.type === 'allowed';
 
 function ControlCenter() {
+	const { profile:{ permissions_navigations } } = useSelector((state) => state);
+
 	const { query, push } = useRouter();
 
 	const { activeTab: currentActiveTab, testModuleTab, courseActiveTab } = query || {};
 
 	const [activeTab, setActiveTab] = useState(currentActiveTab || 'manage_faq');
+
+	const isTestModuleTabAllowed = getTabPermission(
+		{
+			navigation : permissions_navigations?.['cogo_academy-create_faq'],
+			apiName    : 'create_test',
+		},
+	);
+
+	const isManagFaqTabAllowed = getTabPermission(
+		{
+			navigation : permissions_navigations?.['cogo_academy-create_faq'],
+			apiName    : 'create_question_answer_set',
+		},
+	);
+
+	const isCourseModuleTabAllowed = getTabPermission(
+		{
+			navigation : permissions_navigations?.['cogo_academy-course'],
+			apiName    : 'create_cogo_academy_course',
+		},
+	);
+
+	const isConfigurationAllowed = isTestModuleTabAllowed && isManagFaqTabAllowed && isCourseModuleTabAllowed;
 
 	const handleChangeTab = (val) => {
 		push(`/learning?activeTab=${val}`);
@@ -36,15 +51,11 @@ function ControlCenter() {
 		setActiveTab(val);
 	};
 
-	const tabPropsMapping = {
-		manage_faq    : {},
-		test_module   : { testModuleTab },
-		course_module : { courseActiveTab },
-	};
-
 	return (
 		<div>
-			<Header />
+			<Header
+				isConfigurationAllowed={isConfigurationAllowed}
+			/>
 
 			<Tabs
 				activeTab={activeTab}
@@ -52,16 +63,24 @@ function ControlCenter() {
 				onChange={handleChangeTab}
 				fullWidth
 			>
-				{Object.keys(TABS_MAPPING).map((item) => {
-					const activeComponentProps = tabPropsMapping[item];
-					const { title, component: ActiveComponent } = TABS_MAPPING[item];
+				{isManagFaqTabAllowed && (
+					<TabPanel name="manage_faq" title="Manage FAQ">
+						<QuestionsList />
+					</TabPanel>
+				)}
 
-					return (
-						<TabPanel key={item} name={item} title={title}>
-							<ActiveComponent {...activeComponentProps} />
-						</TabPanel>
-					);
-				})}
+				{ isTestModuleTabAllowed && (
+					<TabPanel name="test_module" title="Test Module">
+						<HomePage testModuleTab={testModuleTab} />
+					</TabPanel>
+				)}
+
+				{isCourseModuleTabAllowed && (
+					<TabPanel name="course_module" title="Course Module">
+						<CreateCourse courseActiveTab={courseActiveTab} />
+					</TabPanel>
+				)}
+
 			</Tabs>
 		</div>
 	);
