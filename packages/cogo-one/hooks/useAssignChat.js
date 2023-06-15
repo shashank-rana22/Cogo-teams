@@ -23,33 +23,22 @@ function useAssignChat({
 	}, { manual: true, autoCancel: false });
 
 	const addToGroup = async () => {
-		try {
-			console.log('addToGroup');
-			const roomRef = doc(
-				firestore,
-				`${FIRESTORE_PATH[channel_type]}/${id}`,
-			);
-			console.log('roomRef', roomRef);
-			const { group_members = [] } = activeMessageCard || [];
-			console.log('group_members', group_members);
+		const roomRef = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${id}`,
+		);
 
-			await updateDoc(roomRef, {
-				// group_members: [...new Set([...group_members, profile.id])],
-				group_members: [1],
+		const { group_members = [] } = activeMessageCard || [];
 
-			});
-		} catch (err) {
-			console.warn(err);
-		}
-		console.log('updated Doc');
-		return null;
+		await updateDoc(roomRef, {
+			group_members: [...new Set([...group_members, profile.user.id])],
+
+		});
 	};
 
 	const assignChat = async (payload, callbackFun = () => {}) => {
 		try {
-			console.log('payload.assignType', payload);
 			if (payload.assignType === 'add_to_group') {
-				console.log('addToGroupssss');
 				await addToGroup();
 			} else {
 				await trigger({
@@ -68,10 +57,10 @@ function useAssignChat({
 				});
 				callbackFun();
 			}
-			// if (!canMessageOnBotSession) {
-			closeModal();
-			Toast.success('Successfully Assigned');
-			// }
+			if (!canMessageOnBotSession) {
+				closeModal();
+				Toast.success('Successfully Assigned');
+			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		} finally {
