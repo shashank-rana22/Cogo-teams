@@ -5,12 +5,14 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		let is_rate_expired = null;
 		let schedule_type = null;
 		let validity_end = null;
+		let unit=null;
 		if (rates?.length) {
 			let min = rates[0]?.price;
 			currency = rates[0]?.currency;
 			is_rate_expired = rates[0]?.is_rate_expired;
 			schedule_type = rates[0]?.schedule_type;
 			validity_end = rates[0]?.validity_end;
+			unit=rates[0]?.unit;
 			rates.forEach((rate) => {
 				if (rate?.price < min) {
 					min = rate?.price;
@@ -18,6 +20,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 					is_rate_expired = rate?.is_rate_expired;
 					schedule_type = rate?.schedule_type;
 					validity_end = rate?.validity_end;
+					unit=rate?.unit;
 				}
 			});
 			minimumRate = min;
@@ -28,11 +31,13 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			is_rate_expired,
 			schedule_type,
 			validity_end,
+			unit
 		};
 	};
 	const getMinRateForAir = (rates, chargeable_weight) => {
 		let minRate = null;
 		let currencyForAir = null;
+		let unitForAir=null;
 		if (rates?.length) {
 			minRate = rates[0]?.tariff_price;
 			currencyForAir = rates[0]?.currency;
@@ -40,12 +45,14 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 				if (chargeable_weight >= rate?.lower_limit) {
 					minRate = rate?.tariff_price;
 					currencyForAir = rate?.currency;
+					unitForAir=rate?.unit;
 				}
 			});
 		}
 		return {
 			minRate,
 			currencyForAir,
+			unitForAir
 		};
 	};
 
@@ -57,10 +64,12 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			is_rate_expired,
 			schedule_type,
 			validity_end,
+			unit
 		} = getMinRate(element?.line_items || element?.validities);
+		console.log(minimumRate,unit,'unitunit')
 
 		const chargeable_weight = singleServiceData?.chargeable_weight;
-		const { minRate, currencyForAir } = getMinRateForAir(element?.weight_slabs, chargeable_weight);
+		const { minRate, currencyForAir,unitForAir } = getMinRateForAir(element?.weight_slabs, chargeable_weight);
 		let total_buy_price = 0;
 		if (singleServiceData?.service_type === 'air_freight_services') {
 			total_buy_price = Math.max(Number(minRate)
@@ -83,6 +92,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.container_count = singleServiceData?.containers_count;
 		rowData.is_rate_expired = is_rate_expired;
 		rowData.schedule_type = schedule_type;
+		rowData.unit=unit || unitForAir;
 		rowData.active_booking = element?.ongoing_shipment;
 		rowData.service_provider = element?.service_provider;
 		rowData.allocation_ratio = undefined;

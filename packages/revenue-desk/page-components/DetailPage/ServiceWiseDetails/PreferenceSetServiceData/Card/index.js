@@ -2,6 +2,7 @@ import { Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 function Card({ singleRateCardData, index, singleServiceData, price }) {
 	const total_buy_price = Number(singleServiceData?.chargeable_weight)
@@ -14,12 +15,12 @@ function Card({ singleRateCardData, index, singleServiceData, price }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>
-				{index + 1}
+				{index + 1}.
 			</div>
 			<div className={styles.right_section}>
 				<div className={styles.upper_section}>
 					<div className={styles.upper_left_section}>
-						<div>
+						<div className={styles.service_provider_text}>
 							{singleRateCardData?.data?.[0]?.service_provider?.business_name}
 						</div>
 						<div>
@@ -33,15 +34,11 @@ function Card({ singleRateCardData, index, singleServiceData, price }) {
 				</div>
 				<div className={styles.lower_section}>
 					<div className={styles.first_section}>
-						{
-                                singleRateCardData?.buy_rate_preferences?.active_bookings ? (
-	<div className={styles.active_booking_label}>
-		Active Bookings :
-		{' '}
-		{singleRateCardData?.buy_rate_preferences?.active_bookings }
-	</div>
-                                ) : null
-                            }
+						<div className={styles.active_booking_label}>
+							Active Bookings :
+							{' '}
+							{singleRateCardData?.buy_rate_preferences?.active_bookings }
+						</div>       
 					</div>
 					<div className={styles.second_section}>
 						<div>
@@ -89,18 +86,28 @@ function Card({ singleRateCardData, index, singleServiceData, price }) {
 
 					</div>
 					<div className={styles.forth_section}>
-						<div>
-							Chargeable Weight :
-							{' '}
-							{singleServiceData?.chargeable_weight}
-						</div>
-						<div>
+						<div className={styles.probabilty_container}>
 							Total Buy Price :
-							{total_buy_price}
+							<div className={styles.total_price_text}>
+								{/* {
+									formatAmount({
+										total_buy_price,
+										currency,
+										options: {
+											style                 : 'currency',
+											currencyDisplay       : 'code',
+											maximumFractionDigits : 2,
+										},
+									})
+								} */}
+								{total_buy_price}
+							</div>
 						</div>
-						<div>
+						<div className={styles.probabilty_container}>
 							Probabilty:
-							{Number(profitability).toFixed(4)}
+							<div className={styles.profit_text}>
+								{Number(profitability).toFixed(4)}
+							</div>
 						</div>
 					</div>
 				</div>

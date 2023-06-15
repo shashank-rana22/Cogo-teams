@@ -78,6 +78,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 							sellRateDetails={sellRateDetails}
 							rateOptions={rateOptions}
 							setRateOptions={setRateOptions}
+							shipmentData={shipmentData}
 						/>
 					</TabPanel>
 				))}

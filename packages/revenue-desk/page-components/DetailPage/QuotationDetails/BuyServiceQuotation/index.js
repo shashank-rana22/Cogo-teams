@@ -4,6 +4,7 @@ import { startCase } from '@cogoport/utils';
 import useGetBuyQuotation from '../../../../hooks/useGetBuyQuotation';
 
 import styles from './styles.module.css';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 function BuyServiceQuotation({ shipmentData = {} }) {
 	const columns = [
@@ -18,7 +19,15 @@ function BuyServiceQuotation({ shipmentData = {} }) {
 		.map(
 			({ service_type, total_price, source, currency }) => ({
 				service_type           : startCase(service_type),
-				total_price_discounted : `${currency} ${total_price}`,
+				total_price_discounted :formatAmount({
+											amount   : total_price,
+											currency : currency,
+											options  : {
+												style                 : 'currency',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : 2,
+											},
+										}),						
 				source                 : startCase(source),
 			}),
 		);
@@ -30,9 +39,15 @@ function BuyServiceQuotation({ shipmentData = {} }) {
 				:
 				{!loading ? (
 					<div style={{ marginLeft: '5px' }}>
-						{data?.net_total_price_currency}
-						{' '}
-						{data?.net_pre_tax_total}
+						{formatAmount({
+									amount   : data?.net_pre_tax_total,
+									currency : data?.net_total_price_currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+						})}
 					</div>
 				)
 					: <Placeholder height="25px" width="150px" />}

@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import useGetShipmentQuotation from '../../../../hooks/useGetShipmentQuotation';
 
 import styles from './styles.module.css';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 	const columns = [
@@ -18,22 +19,28 @@ function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 		.filter((item) => item.service_type)
 		.map(({ service_type, total_price_discounted, source, currency }) => ({
 			service_type           : startCase(service_type),
-			total_price_discounted : `${currency} ${total_price_discounted}`,
+			total_price_discounted : formatAmount({
+											amount   : total_price_discounted,
+											currency : currency,
+											options  : {
+												style                 : 'currency',
+												currencyDisplay       : 'code',
+												maximumFractionDigits : 2,
+											},
+										}),
 			source                 : startCase(source),
 		}));
-
-	const updatedPriceData = {
-		sell_price: `${data?.net_total_price_currency} ${data?.net_pre_tax_total}`,
-	};
+	const updatedPriceData={};
 	useEffect(() => {
-		if (priceData) {
-			(chargesData || []).forEach((item) => {
-				updatedPriceData[item.service_type] = item.total_price_discounted;
-			});
-			setPriceData(updatedPriceData);
-		}
+				(chargesData || []).forEach((item) => {
+					updatedPriceData[item.service_type] = item.total_price_discounted;
+				});
+				if(data?.net_total_price_currency){
+					updatedPriceData['sell_price']=`${data?.net_total_price_currency} ${data?.net_pre_tax_total}`
+				}
+				setPriceData(updatedPriceData);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [service_charges]);
+	}, [JSON.stringify(data)]);
 
 	return (
 		<>
@@ -43,9 +50,15 @@ function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 				:
 				{!loading ? (
 					<div style={{ marginLeft: '5px' }}>
-						{data?.net_total_price_currency}
-						{' '}
-						{data?.net_pre_tax_total}
+						{formatAmount({
+									amount   : data?.net_pre_tax_total,
+									currency : data?.net_total_price_currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+						})}
 					</div>
 				)
 					: <Placeholder height="25px" width="150px" />}

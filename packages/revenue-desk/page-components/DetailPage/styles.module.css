@@ -100,7 +100,7 @@
 .tabs_container{
     background-color: #fff;
     margin:16px;
-    padding: 24px;
+    padding: 24px 24px 0;
 }
 
 .show_detail_tab{
@@ -115,6 +115,7 @@
     align-items: center;
     color: #221F20;
     cursor: pointer;
+    margin:0 -24px;
 }
 
 

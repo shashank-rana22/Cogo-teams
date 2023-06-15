@@ -61,7 +61,6 @@ function Card({
 		profitability = (Number(price?.split(' ')?.[1]) - Number(data?.rowData?.total_buy_price))
 		/ Number(data?.rowData?.total_buy_price);
 	}
-
 	return (
 		<div
 			className={rate_key ? styles.selected_rate_card_container : styles.container}
@@ -138,32 +137,20 @@ function Card({
 					<div className={styles.price_section}>
 						<div className={styles.price_text}>
 							<div>
-								Origin Local Price:
-								{data?.rowData?.origin_locals_price}
-								Destination Local Price:
-								{data?.rowData?.destination_locals_price}
-							</div>
-							<div>
-								{serviceData?.shipment_type === 'air_freight' ? (
-									<div>
-										Buy Rate Per Kg:
-										<span style={{ fontSize: '18px', fontWeight: '600', color: '#4F4F4F' }}>
-											{`${showData(data?.rowData?.currency)} ${showData(
-												data?.rowData?.buy_price,
-											)}`}
-										</span>
+								{
+									data?.rowData?.origin_locals_price ?
+									<div>Origin Local Price:
+									{data?.rowData?.origin_locals_price}
 									</div>
-								) : null}
-								{serviceData?.shipment_type === 'fcl_freight' ? (
-									<div>
-										Buy Rate Per Contr.:
-										<span style={{ fontSize: '18px', fontWeight: '600', color: '#4F4F4F' }}>
-											{`${showData(data?.rowData?.currency)} ${showData(
-												data?.rowData?.buy_price,
-											)}`}
-										</span>
+									:null
+								}
+								{
+									data?.rowData?.origin_locals_price ?
+									<div>Destination Local Price:
+									{data?.rowData?.destination_locals_price}
 									</div>
-								) : null}
+									:null
+								}
 							</div>
 							<div>
 								{serviceData?.service_type === 'air_freight_service' && (
@@ -171,22 +158,6 @@ function Card({
 										Price Type:
 										{' '}
 										{showData(startCase(data?.rowData?.price_type))}
-									</div>
-								)}
-							</div>
-							<div>
-								{serviceData?.service_type === 'air_freight_service' && (
-									<div>
-										Chargeable Wt.:
-										{showData(data?.rowData?.chargeable_weight)}
-										{' '}
-										Kg
-									</div>
-								)}
-								{serviceData?.service_type === 'fcl_freight_service' && (
-									<div>
-										Container Count.:
-										{showData(data?.rowData?.container_count)}
 									</div>
 								)}
 							</div>
@@ -216,7 +187,7 @@ function Card({
 								setSellRates={setSellRates}
 							/>
 						</div>
-					)}
+					)} 
 				</div>
 			</div>
 		</div>

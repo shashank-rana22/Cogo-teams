@@ -37,6 +37,18 @@ function ReasonModal({ modalStep, setModalStep, updateTrigger, reason, setReason
 					checked={reason === 'to_honor_platform_rates'}
 				/>
 				<Checkbox
+					label="To honor contract booking."
+					value="to_honor_contract_booking"
+					onChange={() => handleOnChange('to_honor_contract_booking')}
+					checked={reason === 'to_honor_contract_booking'}
+				/>
+				<Checkbox
+					label="overall profitable but individual service loss."
+					value="overall_profitable_but_individual_service_loss"
+					onChange={() => handleOnChange('overall_profitable_but_individual_service_loss')}
+					checked={reason === 'overall_profitable_but_individual_service_loss'}
+				/>
+				<Checkbox
 					label="Other"
 					value="other"
 					onChange={() => handleOnChange('other')}

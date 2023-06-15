@@ -48,6 +48,7 @@ function SingleService({
 	sellRateDetails,
 	rateOptions,
 	setRateOptions,
+	shipmentData
 }) {
 	const [sellRates, setSellRates] = useState({});
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
@@ -112,6 +113,7 @@ function SingleService({
 				<PreferenceSetServiceData
 					singleServiceData={singleServiceData}
 					price={price}
+					shipmentData={shipmentData}
 				/>
 			) : (
 				<>

@@ -1,10 +1,10 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useListShipmentBookingConfirmationPreferences = ({ singleServiceData,shipmentData } = {}) => {
+const useListRevenueDeskShowedRates = ({ singleServiceData,shipmentData } = {}) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
-		url    : '/list_shipment_booking_confirmation_preferences',
+		url    : '/list_revenue_desk_showed_rates',
 	}, { manual: true });
 
 	const getList = async () => {
@@ -27,4 +27,4 @@ const useListShipmentBookingConfirmationPreferences = ({ singleServiceData,shipm
 		loading,
 	};
 };
-export default useListShipmentBookingConfirmationPreferences;
+export default useListRevenueDeskShowedRates;

@@ -7,12 +7,12 @@ const getFormatedRates = (type, data, singleServiceData) => {
 		let rate = null;
 		let is_rate_expired = null;
 		let schedule_type = null;
+		let unit=null;
 		(line_items || []).forEach((row) => {
 			if (GLOBAL_CONSTANTS.flash_booking_charge_codes.includes(row.code)) {
 				rate = row?.price;
 				currency = row?.currency;
-				is_rate_expired = rate?.is_rate_expired;
-				schedule_type = rate?.schedule_type;
+				unit=row?.unit;
 			}
 		});
 		return {
@@ -20,12 +20,14 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rate,
 			is_rate_expired,
 			schedule_type,
+			unit
 		};
 	};
 
 	if (type === 'present' || type === 'current') {
 		(data || []).forEach((element) => {
-			const { rate, currency, is_rate_expired, schedule_type } = getRateAndCurrency(element?.line_items);
+			const { rate, currency,unit } = getRateAndCurrency(element?.line_items);
+			console.log(unit,'ggggggg')
 			const chargeable_weight = element?.data?.chargeable_weight
 			|| element?.service?.chargeable_weight || singleServiceData?.chargeable_weight;
 			const { completed_shipments = 0, cancelled_shipments = 0 } = element;
@@ -53,9 +55,8 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.active_booking = element?.ongoing_shipment;
 			rowData.service_provider = element?.service_provider;
 			rowData.currency = currency;
-			rowData.is_rate_expired = is_rate_expired;
 			rowData.via_route = element?.destination_main_port?.name;
-			rowData.schedule_type = schedule_type;
+			rowData.unit=unit;
 			rowData.allocation_ratio = undefined;
 			rowData.fulfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
 				? Number(completed_shipments)

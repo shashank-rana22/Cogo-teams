@@ -1,4 +1,4 @@
-import { Pill } from '@cogoport/components';
+import { Pill, Placeholder } from '@cogoport/components';
 import { IcMTimer } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
@@ -7,6 +7,7 @@ import PortDetails from '../../List/Card/Body/PortDetails';
 
 import EditSellQuotation from './EditSellQuotation';
 import styles from './styles.module.css';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 function ShipmentCard({ itemData, priceData }) {
 	return (
@@ -59,8 +60,16 @@ function ShipmentCard({ itemData, priceData }) {
 						{' '}
 						<span style={{ fontWeight: '700', color: '#221F20' }}>
 							{!priceData?.sell_price
-								? 0
-								: priceData?.sell_price}
+								? <Placeholder width="150px" height="25px"/>
+								: formatAmount({
+									amount   : priceData?.sell_price?.split(' ')?.[1],
+									currency : priceData?.sell_price?.split(' ')?.[0],
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
 						</span>
 					</div>
 					<div className={styles.kamdiscount_text}>

@@ -4,20 +4,27 @@
     background: #F3FAFA;
     border: 1px solid #88CAD1;
     margin-bottom: 10px;
+    display: flex;
+    align-items: center;
 }
 
 .upper_section{
     display: flex;
     justify-content: space-between;
     align-items: center;
+    border-bottom: 1px dashed #ACDADF;
+    padding: 10px;
+
 }
 .upper_left_section{
     display: flex;
     align-items: center;
+    
 }
 
 .lower_section{
     display: flex;
+    justify-content: space-between;
 }
 
 .active_booking_label{
@@ -35,11 +42,74 @@
 }
 .price_text{
     font-weight: 500;
-    font-size: 10px;
+    font-size: 12px;
     color: #4F4F4F;
 }
 .forth_section{
     font-weight: 500;
     font-size: 12px;
     color: #4F4F4F;
+}
+
+.left_section{
+    width:25px;
+    display: flex;
+    justify-content: center;
+}
+.right_section{
+    border-left: 1px solid #ACDADF;
+    flex:1;
+}
+.first_section{
+    border-right:  1px dashed #ACDADF;
+    width:20vw;
+    display: flex;
+ 
+    justify-content: center;
+    align-items: center;
+}
+.second_section{
+    border-right:  1px dashed #ACDADF;
+    width:20vw;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+}
+.third_section{
+    border-right:  1px dashed #ACDADF;
+    width:20vw;
+    display: flex;
+    flex-direction: column;
+    justify-content: start;
+    padding: 5px;
+}
+.forth_section{
+    width:20vw;
+    display: flex;
+    justify-content: center;
+    flex-direction: column;
+    font-weight: 500;
+    font-size: 12px;
+    color: #4F4F4F;
+    padding: 5px;
+}
+.profit_text{
+    font-weight: 600;   
+    font-size: 14px;
+    color: #849E4C;
+}
+.probabilty_container{
+    display: flex;
+    align-items: center;
+}
+.total_price_text{
+    font-weight: 700;
+    font-size: 16px;
+    color: #221F20;
+}
+.service_provider_text{
+    font-weight: 600;
+    font-size: 14px;
+    color: #221F20;
+    margin-right: 20px;
 }

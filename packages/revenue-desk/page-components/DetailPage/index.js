@@ -18,7 +18,7 @@ import TransactionInsights from './TransactionInsights';
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 	const [showDetail, setShowDetail] = useState(true);
 	const [activeTabPanel, setActiveTabPanel] = useState('view_quotation');
-	const [priceData, setPriceData] = useState({});
+	const [priceData, setPriceData] = useState(null);
 	const { data: servicesData, loading } = useListShipmentServices({ shipmentId: itemData?.id });
 	const excludedServices = [
 		'fcl_freight_local_service',

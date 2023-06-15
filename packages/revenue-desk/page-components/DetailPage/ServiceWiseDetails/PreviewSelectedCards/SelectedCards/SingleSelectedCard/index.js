@@ -31,12 +31,6 @@ function SingleSelectedCard({ data, index, price, shipmentType }) {
 						<div className={styles.tag}>
 							KAM Selected Rate
 						</div>
-						<div className={styles.agent_container}>
-							<IcMProfile />
-							<div className={styles.supply_agent_text}>
-								Supply Agent : Himali Saini
-							</div>
-						</div>
 					</div>
 				</div>
 				<div className={styles.lower_section}>
