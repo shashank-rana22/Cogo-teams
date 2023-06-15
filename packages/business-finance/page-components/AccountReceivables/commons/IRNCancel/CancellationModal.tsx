@@ -47,9 +47,7 @@ function CancellationModal({
 						<RadioGroup
 							options={IRN_CANCEL_OPTIONS}
 							value={response?.value}
-							onChange={(e) => {
-								setResponse((r) => ({ ...r, value: e }));
-							}}
+							onChange={(e) => setResponse((r) => ({ ...r, value: e }))}
 						/>
 					</div>
 					<div>
@@ -58,9 +56,7 @@ function CancellationModal({
 						</div>
 						<Textarea
 							value={response?.remarks}
-							onChange={(e) => {
-								setResponse((r) => ({ ...r, remarks: e }));
-							}}
+							onChange={(e) => setResponse((r) => ({ ...r, remarks: e }))}
 							placeholder="Not more than 100 characters"
 						/>
 					</div>
@@ -70,9 +66,7 @@ function CancellationModal({
 					<div className={styles.confirm_button}>
 						<div className={styles.styled_button}>
 							<Button
-								onClick={() => {
-									cancelIrn(response);
-								}}
+								onClick={() => cancelIrn(response)}
 								disabled={
 							isEmpty(response.value) || isEmpty(response.remarks) || loading
 						}
@@ -81,9 +75,7 @@ function CancellationModal({
 							</Button>
 						</div>
 						<Button
-							onClick={() => {
-								setShowCancellationModal(false);
-							}}
+							onClick={() => setShowCancellationModal(false)}
 						>
 							Cancel
 						</Button>
