@@ -12,7 +12,6 @@ function Dashboard() {
 
 	const { data, getEmployeeDetails, loading } = useGetEmployeeDetails({
 		company_policy_data_required: true,
-
 	});
 
 	const { detail } = data || {};
@@ -23,7 +22,11 @@ function Dashboard() {
 			{!informationPage && (
 				<div>
 					<HeaderComponent name={name} />
-					<StepperComponent informationPage={informationPage} data={data} loading={loading} />
+					<StepperComponent
+						informationPage={informationPage}
+						data={data}
+						loading={loading}
+					/>
 				</div>
 			)}
 
