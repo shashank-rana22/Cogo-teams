@@ -60,7 +60,7 @@ function Details({ serviceType, serviceDetails }) {
 			))}
 			<div className={styles.label}>
 				Transit Time-
-				<span>{transitTime}</span>
+				<span>{`${transitTime} Days`}</span>
 			</div>
 			<div className={styles.label}>
 				Shipment Type-

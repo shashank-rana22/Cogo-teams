@@ -3,20 +3,8 @@ import { Pill } from '@cogoport/components';
 import { SERVICES_WITH_DETAILS, SERVICE_LABEL_MAPPING } from '../../../../../../constants/flashRatesMapping';
 
 import Details from './Details';
-import RENDER_VALUE_MAPPING from './renderValueMapping';
+import { RENDER_VALUE_MAPPING, formatServiceDetails } from './detailsHelperFuncs';
 import styles from './styles.module.css';
-
-const formatServiceDetails = (details) => {
-	const { service_type, services } = details || {};
-
-	const isLTL = service_type === 'ltl_freight_service'
-		|| services?.includes('ltl_freight_service');
-
-	const isAir = service_type === 'air_freight_service'
-		|| service_type === 'domestic_air_freight_service';
-
-	return { ...details, isAir, isLTL };
-};
 
 function CargoDetails({ item }) {
 	const { service_type, service } = item || {};

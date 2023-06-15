@@ -1,13 +1,15 @@
 import CargoDetails from './CargoDetails';
+import PriceDetails from './PriceDetails';
 import RouteDetails from './RouteDetails';
 import styles from './styles.module.css';
 
-function Card({ data = {} }) {
+function Card({ list, activeTab }) {
 	return (
-		(data.list || []).map((item) => (
+		(list || []).map((item) => (
 			<div className={styles.container} key={item?.id}>
 				<RouteDetails item={item} />
 				<CargoDetails item={item} />
+				<PriceDetails item={item} activeTab={activeTab} />
 			</div>
 		))
 	);

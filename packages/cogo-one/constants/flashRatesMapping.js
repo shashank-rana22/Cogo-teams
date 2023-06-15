@@ -95,3 +95,27 @@ export const SERVICE_LABEL_MAPPING = [
 	'lr_number',
 	'commodity_description',
 ];
+
+export const UNITS_MAPPING = {
+	fcl_freight_service     : '/Cont',
+	fcl_customs_service     : '/Cont',
+	fcl_cfs_service         : '/Cont',
+	air_freight_service     : '/Kg',
+	air_customs_service     : '/Kg',
+	lcl_freight_service     : '/CBM',
+	lcl_customs_service     : '/CBM',
+	haulage_freight_service : '/Cont',
+	trailer_freigth_service : '/Truck',
+	ltl_freight_service     : '/Truck',
+	ftl_freight_service     : '/Truck',
+};
+
+export const STATUS_PENDING = ['not_reverted', 'awaiting_response'];
+export const ORG_RESPONDED = ['booking_won', 'booking_lost', 'awaiting_confirmation'];
+
+export const REVERT_STATUS_LABEL_MAPPING = {
+	booking_won           : 'Booking Won',
+	booking_lost          : 'Booking Lost',
+	not_reverted          : 'Not Reverted',
+	awaiting_confirmation : 'Awaiting Response',
+};

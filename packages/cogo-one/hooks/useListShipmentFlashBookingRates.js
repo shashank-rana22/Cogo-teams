@@ -16,12 +16,14 @@ const PAYLOAD_MAPPING = {
 		is_reverted    : false,
 	},
 };
+const INITIAL_PAGE = 1;
 
 const useListShipmentFlashBookingRates = ({
 	orgId = '',
 // accountType = ''
 }) => {
 	const [activeTab, setActiveTab] = useState('win_bookings');
+	const [pagination, setPagination] = useState(INITIAL_PAGE);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipment_flash_booking_rates',
@@ -40,6 +42,7 @@ const useListShipmentFlashBookingRates = ({
 			},
 			shipment_flash_booking_tag_required : true,
 			is_indicative_price_required        : true,
+			page                                : pagination,
 			sort_by                             : 'created_at',
 			sort_type                           : 'desc',
 		};
@@ -51,7 +54,7 @@ const useListShipmentFlashBookingRates = ({
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [activeTab, orgId, trigger]);
+	}, [activeTab, orgId, pagination, trigger]);
 
 	useEffect(() => {
 		shipmentFlashBookingRates();
@@ -61,6 +64,8 @@ const useListShipmentFlashBookingRates = ({
 		data,
 		loading,
 		setActiveTab,
+		activeTab,
+		setPagination,
 	};
 };
 

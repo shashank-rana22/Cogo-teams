@@ -8,17 +8,19 @@ const CHECK_IF_COUNT_MORE_THAN_ONE = 1;
 const MIN_VOLUME = 1;
 const VOLUME_MULTIPLY = 166.67;
 const TO_FIXED_2 = 2;
-const EXTRA_COUNT = 1;
+const INCREASE_INDEX_BY = 1;
 const LAST_INDEX = 1;
 const FIRST_INDEX = 0;
+const NO_VOLUME_SERVICE_TYPES = ['ftl_freight_service', 'haulage_freight_service'];
+const AIR_TYPE_SERVICES = ['air_freight_service', 'domestic_air_freight_service'];
 
 function FormatCertificate({ certificates }) {
 	return (
 		<div>
-			{(certificates || []).map((item, key) => (
+			{(certificates || []).map((item, index) => (
 				<a href={item} target="_blank" rel="noreferrer" key={item}>
 					Click to view certificate
-					{key + EXTRA_COUNT}
+					{index + INCREASE_INDEX_BY}
 					<IcMOpenlink />
 					<br />
 				</a>
@@ -50,7 +52,7 @@ function FormatShipperDetails({ shipperDetails }) {
 	);
 }
 
-const RENDER_VALUE_MAPPING = {
+export const RENDER_VALUE_MAPPING = {
 	container_size: (detail) => {
 		if (detail.container_size?.includes('HC')) {
 			return detail.container_size.replace('HC', 'ft HC');
@@ -119,26 +121,21 @@ const RENDER_VALUE_MAPPING = {
 		return `Package: ${inputValue}`;
 	},
 	volume: (detail) => {
-		const { chargable_weight, weight, volume, isLTL } = detail || {};
+		const { chargable_weight, weight, volume, isLTL, service_type } = detail || {};
 
-		const calcVolume = ` ${volume} ${isLTL ? 'cc' : 'cbm'}`;
+		const calcVolume = volume && `${volume} ${isLTL ? 'cc' : 'cbm'}`;
 
 		const chargableWeight = isLTL
-			? chargable_weight || weight
+			? (chargable_weight || weight)
 			: Math.max((volume || MIN_VOLUME) * VOLUME_MULTIPLY, weight);
 
-		return ` ${calcVolume} ${
-			detail.service_type === 'ftl_freight_service'
-				|| detail.service_type === 'haulage_freight_service'
-				? ''
-				: `, Chargable Weight: ${chargableWeight.toFixed(TO_FIXED_2)} kg`
-		}`;
+		const chargableText = (chargableWeight && !NO_VOLUME_SERVICE_TYPES.includes(service_type))
+			? `, Chargable Weight: ${chargableWeight?.toFixed(TO_FIXED_2) || ''} kg` : '';
+
+		return `${calcVolume || ''} ${chargableText}`;
 	},
 	lr_number: (detail) => {
-		const { service_type, services, lr_number } = detail || {};
-
-		const isLTL = service_type === 'ltl_freight_service'
-		|| services?.includes('ltl_freight_service');
+		const { lr_number, isLTL } = detail || {};
 
 		return isLTL ? `Docket Number : ${lr_number || ''}` : '';
 	},
@@ -245,4 +242,14 @@ const RENDER_VALUE_MAPPING = {
 	buy_quotation_agreed_rates : (detail) => `${detail?.buy_quotation_agreed_rates.toFixed(TO_FIXED_2)} USD`,
 	hs_code                    : (detail) => `${detail?.hs_code?.hs_code} - ${detail?.hs_code?.name}`,
 };
-export default RENDER_VALUE_MAPPING;
+
+export function formatServiceDetails(details) {
+	const { service_type, services } = details || {};
+
+	const isLTL = service_type === 'ltl_freight_service'
+		|| services?.includes('ltl_freight_service');
+
+	const isAir = AIR_TYPE_SERVICES.includes(service_type);
+
+	return { ...details, isAir, isLTL };
+}
