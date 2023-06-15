@@ -12,17 +12,27 @@ const { cogoport_entities: CogoportEntity } = GLOBAL_CONSTANTS || {};
 
 const TIME_VALUE = 86400000;
 
-function IRNCancel({ itemData }) {
+type ItemData = {
+	id?: string;
+	invoiceStatus?: string;
+	entityCode?: number;
+	irnGeneratedAt?: string;
+};
+interface INRCancel {
+	itemData?: ItemData;
+}
+
+function IRNCancel({ itemData }: INRCancel) {
 	const [showCancellationModal, setShowCancellationModal] = useState(false);
 	const [show, setShow] = useState(false);
 
 	const { invoiceStatus, id, entityCode, irnGeneratedAt = '' } = itemData || {};
 
 	const isAfterADay =	irnGeneratedAt !== null
-		? irnGeneratedAt + TIME_VALUE >= Date.now()
+		? Number(irnGeneratedAt) + TIME_VALUE >= Date.now()
 		: false;
 
-	const { postToSage, loading } = usePostToSage(id);
+	const { postToSage, loading } = usePostToSage({ id });
 
 	const { labels } = CogoportEntity[entityCode] || {};
 
