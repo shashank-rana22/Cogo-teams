@@ -27,8 +27,8 @@
 }
 
 .tds {
-	flex: 1;
-	width: calc(1*(100 / 12));
+	flex: 0.8;
+	width: calc(0.8*(100 / 12));
 }
 
 .nostro {

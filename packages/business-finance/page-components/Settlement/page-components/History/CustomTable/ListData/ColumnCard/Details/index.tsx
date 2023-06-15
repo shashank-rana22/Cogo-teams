@@ -3,12 +3,13 @@ import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { INVOICE_STATUS, INVOICE_STATUS_MAPPING } from '../../../../../../Constants';
 import useHistorySingleDataList from '../../../../../../hooks/useHistorySingleDataList';
 import Loader from '../../../../../Loader';
 
+import InformationModal from './InformationModal';
 import LineItemsHeader from './LineItemsHeader';
 import styles from './styles.module.css';
 
@@ -45,7 +46,8 @@ const DEFAULT_VALUE = {
 };
 
 function Details({ item = DEFAULT_VALUE }: Props) {
-	const { documentNo = '', accountType = '' } = item || {};
+	const { id = '', documentNo = '', accountType = '' } = item || {};
+	const [showModal, setShowModal] = useState(false);
 
 	const {
 		data,
@@ -54,6 +56,13 @@ function Details({ item = DEFAULT_VALUE }: Props) {
 		getHistoryChild,
 		loading,
 	} = useHistorySingleDataList(documentNo, accountType);
+
+	// const {
+	// 	generateIrn, finalPostFromSage, finalPostLoading, getSageInvoiceData, sageInvoiceData,
+	// 	sageInvoiceLoading,
+	// } = useGetIrnGeneration({
+	// 	id,
+	// });
 
 	const { list = [] } = data || {};
 
@@ -69,16 +78,21 @@ function Details({ item = DEFAULT_VALUE }: Props) {
 			<div className={styles.actions_container}>
 				{' '}
 
-				<Button size="sm">
-					Edit
-				</Button>
-				<Button size="sm">
-					Delete
-				</Button>
-
-				<Button size="sm">
-					Post to SAGE
-				</Button>
+				<div>
+					<Button size="sm" disabled>
+						Edit
+					</Button>
+				</div>
+				<div className={styles.margin_left}>
+					<Button size="sm" disabled>
+						Delete
+					</Button>
+				</div>
+				<div className={styles.margin_left}>
+					<Button size="sm">
+						Post to SAGE
+					</Button>
+				</div>
 
 			</div>
 			<div className={styles.table}>
@@ -148,9 +162,17 @@ function Details({ item = DEFAULT_VALUE }: Props) {
 								{singleitem?.accMode}
 							</div>
 						</div>
+						<InformationModal
+							id={singleitem?.id}
+							showModal={showModal}
+							setShowModal={setShowModal}
+						/>
 					</div>
+
 				))}
+
 			</div>
+
 		</div>
 	);
 }

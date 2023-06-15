@@ -30,18 +30,18 @@
 }
 
 .sid {
-	flex: 0.5;
-	width: calc(0.5*(100 / 12));
+	flex: 0.6;
+	width: calc(0.6*(100 / 12));
 }
 
 .settled_amount {
-	flex: 1;
-	width: calc(1*(100 / 12));
+	flex: 0.8;
+	width: calc(0.8*(100 / 12));
 }
 
 .doc_amount {
-	flex: 1;
-	width: calc(1*(100 / 12));
+	flex: 1.2;
+	width: calc(1.2*(100 / 12));
 }
 
 .tds {
@@ -65,13 +65,13 @@
 }
 
 .status {
-	flex: 1;
-	width: calc(1*(100 / 12));
+	flex: 1.2;
+	width: calc(1.2*(100 / 12));
 }
 
 .settlemet_status {
-	flex: 1;
-	width: calc(1*(100 / 12));
+	flex: 0.8;
+	width: calc(0.8*(100 / 12));
 }
 
 .ribbon {
@@ -107,4 +107,8 @@
 	display: flex;
 	justify-content: flex-end;
 	margin: 12px 0;
+}
+
+.margin_left {
+	margin-left: 12px;
 }

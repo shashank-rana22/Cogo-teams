@@ -11,7 +11,8 @@ const useHistorySingleDataList = (documentNo, accountType) => {
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : '/payments/settlement',
+			// url     : '/payments/settlement',
+			url     : 'https://api.stage.cogoport.io/payments/settlement',
 			authKey : 'get_payments_settlement',
 			method  : 'get',
 		},

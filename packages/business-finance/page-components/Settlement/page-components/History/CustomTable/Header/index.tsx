@@ -63,7 +63,7 @@ function Header({ setFilters, filters }:Props) {
 						onClick={() => {
 							setFilters((prev) => ({
 								...prev,
-								sortBy   : 'transactionDate',
+								sortBy   : 'lastEditedDate',
 								sortType : 'Asc',
 								page     : 1,
 							}));
@@ -77,7 +77,7 @@ function Header({ setFilters, filters }:Props) {
 						onClick={() => {
 							setFilters((prev) => ({
 								...prev,
-								sortBy   : 'transactionDate',
+								sortBy   : 'lastEditedDate',
 								sortType : 'Desc',
 								page     : 1,
 							}));

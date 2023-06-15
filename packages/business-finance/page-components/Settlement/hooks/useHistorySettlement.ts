@@ -12,14 +12,15 @@ const useHistorySettlemet = () => {
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			url     : '/payments/settlement/history',
+			// url     : '/payments/settlement/history',
+			url     : 'https://api.stage.cogoport.io/payments/settlement/history',
 			authKey : 'get_payments_settlement_history',
 			method  : 'get',
 		},
 		{ manual: true },
 	);
 
-	const { query, date, accountType, orgId = '', page = 1 } = filters;
+	const { query, date, accountType, orgId = '', page = 1, sortBy, sortType } = filters;
 
 	console.log('filters', filters);
 
@@ -51,6 +52,8 @@ const useHistorySettlemet = () => {
 					query     : search !== '' ? search : undefined,
 					page,
 					pageLimit : 10,
+					sortBy    : sortBy || undefined,
+					sortType  : sortType || undefined,
 					// ...sort,
 				},
 			});
@@ -67,7 +70,7 @@ const useHistorySettlemet = () => {
 		if (Object.keys(filters).length > 1) {
 			refetch();
 		}
-	}, [orgId, accountType, date, search, page]);
+	}, [orgId, accountType, date, search, page, sortBy, sortType]);
 
 	return {
 		filters,

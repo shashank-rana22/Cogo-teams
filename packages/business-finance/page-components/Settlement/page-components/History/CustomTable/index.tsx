@@ -51,7 +51,7 @@ function CustomTable({ data = {}, onPageChange, loading, refetch, setFilters, fi
 		<div className={styles.table}>
 			<Header setFilters={setFilters} filters={filters} />
 			{loading ? <Loader /> : <ListData list={list} refetch={refetch} /> }
-			{	!isEmpty(list)
+			{!isEmpty(list)
 				? (
 					<Pagination
 						className={styles.pagination}
