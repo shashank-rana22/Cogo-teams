@@ -76,7 +76,7 @@ function AccountReceivables() {
 					</TabPanel>
 
 					<TabPanel name="defaulters" title="Defaulters">
-						<Defaulters />
+						<Defaulters entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="manageBpr" title="Manage BPR">
 						<ManageBpr />

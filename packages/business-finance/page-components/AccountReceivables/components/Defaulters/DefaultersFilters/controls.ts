@@ -10,25 +10,12 @@ export const defaultersControls = ({ globalFilters }) => {
 
 	const MIGRATE_STATUS:Options[] | any = geo.options.migration_status;
 	const INVOICE_STATUSES:Options[] | any = geo.options.invoice_status;
-	const ENTITY_OPTIONS:Options[] | any = geo.options.entities;
 
-	const { migrated, cogoEntity, invoiceStatus } = globalFilters || {};
+	const { migrated, invoiceStatus } = globalFilters || {};
 
 	const isMigratedAllowed = geo.navigations.account_receivables.defaulters.migration_status.show_filter;
 
 	const basicControls = [
-		{
-			name        : 'cogoEntity',
-			value       : cogoEntity,
-			type        : 'select',
-			placeholder : 'Entity',
-			options     : ENTITY_OPTIONS,
-			span        : 1,
-			size        : 'sm',
-			style       : { width: '128px' },
-			selectWidth : '128px',
-			isClearable : true,
-		},
 		{
 			name        : 'invoiceStatus',
 			value       : invoiceStatus,
