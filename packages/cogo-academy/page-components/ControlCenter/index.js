@@ -15,16 +15,19 @@ const KEYS_MAPPING = ['manage_faq', 'test_module', 'course_module'];
 
 const TABS_MAPPING = {
 	manage_faq: {
-		title     : 'Manage FAQ',
-		component : QuestionsList,
+		title       : 'Manage FAQ',
+		component   : QuestionsList,
+		mainApiName : 'create_question_answer_set',
 	},
 	test_module: {
-		title     : 'Test Module',
-		component : HomePage,
+		title       : 'Test Module',
+		component   : HomePage,
+		mainApiName : 'create_test',
 	},
 	course_module: {
-		title     : 'Course Module',
-		component : CreateCourse,
+		title       : 'Course Module',
+		component   : CreateCourse,
+		mainApiName : 'create_cogo_academy_course',
 	},
 };
 
@@ -40,32 +43,21 @@ function ControlCenter() {
 
 	const { activeTab: currentActiveTab, testModuleTab, courseActiveTab } = query || {};
 
-	const allTabsPermissionsMappings = [
-		{
-			navigation : permissions_navigations?.['cogo_academy-create_faq'],
-			apiName    : 'create_question_answer_set',
-			tabName    : 'manage_faq',
-		},
-		{
-			navigation : permissions_navigations?.['cogo_academy-create_faq'],
-			apiName    : 'create_test',
-			tabName    : 'test_module',
-		},
-		{
-			navigation : permissions_navigations?.['cogo_academy-course'],
-			apiName    : 'create_cogo_academy_course',
-			tabName    : 'course_module',
-		},
-	];
+	const ALL_TABS_PERMISSION_MAPPING = {
+		manage_faq    : permissions_navigations?.['cogo_academy-create_faq'],
+		test_module   : permissions_navigations?.['cogo_academy-create_faq'],
+		course_module : permissions_navigations?.['cogo_academy-course'],
+	};
 
-	const tabPermissions = allTabsPermissionsMappings.map((item) => {
-		const { navigation, apiName, tabName } = item;
+	const tabPermissions = Object.keys(ALL_TABS_PERMISSION_MAPPING).map((key) => {
+		const navigation = ALL_TABS_PERMISSION_MAPPING[key];
+		const mainApiName = TABS_MAPPING[key]?.mainApiName || '';
 
 		return getTabPermission(
 			{
 				navigation,
-				apiName,
-				tabName,
+				apiName : mainApiName,
+				tabName : key,
 			},
 		);
 	});
