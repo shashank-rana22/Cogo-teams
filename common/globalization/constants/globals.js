@@ -194,6 +194,7 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 	],
+	zeroth_index: 0,
 };
 
 GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {

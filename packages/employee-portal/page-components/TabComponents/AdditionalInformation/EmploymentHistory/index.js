@@ -10,6 +10,12 @@ import controls from './controls';
 import { extraDocsControls } from './extraDocsControls';
 import styles from './styles.module.css';
 
+const FORM_TYPE_EMPLOYMENT_HISTORY = 'employment_history';
+const CONTROL_TYPE_FIELD_ARRAY = 'fieldArray';
+
+const WATCH_SALARY_SLIP = 'salary_slip';
+const WATCH_OFFER_LETTER = 'offer_letter';
+
 function EmploymentHistory({ getEmployeeDetails, data }) {
 	const { handleSubmit, control, setValue, formState: { errors }, watch } = useForm();
 
@@ -17,8 +23,8 @@ function EmploymentHistory({ getEmployeeDetails, data }) {
 
 	const { id, employee_experience_details } = detail || {};
 
-	const paySlip = watch('salary_slip');
-	const offerLetter = watch('offer_letter');
+	const paySlip = watch(WATCH_SALARY_SLIP);
+	const offerLetter = watch(WATCH_OFFER_LETTER);
 
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({
 		id,
@@ -28,7 +34,7 @@ function EmploymentHistory({ getEmployeeDetails, data }) {
 	});
 
 	const onSubmit = (values) => {
-		updateEmployeeDetails({ data: values, formType: 'employment_history' });
+		updateEmployeeDetails({ data: values, formType: FORM_TYPE_EMPLOYMENT_HISTORY });
 	};
 
 	const removeTypeField = (controlItem) => {
@@ -37,7 +43,7 @@ function EmploymentHistory({ getEmployeeDetails, data }) {
 	};
 
 	useEffect(() => {
-		setValue('employment_history', employee_experience_details.map((item) => ({
+		setValue(FORM_TYPE_EMPLOYMENT_HISTORY, employee_experience_details?.map((item) => ({
 			...item,
 			started_at : new Date(item.started_at),
 			ended_at   : new Date(item.ended_at),
@@ -53,11 +59,11 @@ function EmploymentHistory({ getEmployeeDetails, data }) {
 				{controls?.map((controlItem) => {
 					const { type, name: controlName } = controlItem || {};
 
-					if (type === 'fieldArray') {
+					if (type === CONTROL_TYPE_FIELD_ARRAY) {
 						return (
 							<FieldArray
 								Array
-								name="employment_history"
+								name={FORM_TYPE_EMPLOYMENT_HISTORY}
 								control={control}
 								controls={controlItem?.controls}
 								key={controlName}
