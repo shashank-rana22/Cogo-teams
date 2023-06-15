@@ -12,6 +12,8 @@ import AccordianTimeline from './AccordianTimeline';
 import styles from './styles.module.css';
 import CustomTasks from './Tasks';
 
+const TASK_DEFAULT_LENGTH = 0;
+const NEXT_INDEX = 1;
 export default function AccordionContent({
 	stateProps = {},
 	item = {},
@@ -22,13 +24,18 @@ export default function AccordionContent({
 	refetch = () => {},
 	showDeliveryOrderTask = false,
 	showInvoiceAndTask,
+	showTask,
 }) {
 	const [myForm, setMyForm] = useState({});
 	const [currentStep, setCurrentStep] = useState({
 		text  : 'initial_step',
 		count : 0,
 	});
-	const [activeAccordionTab, setActiveAccordionTab] = useState('invoice');
+	let activeAcrd = 'invoice';
+	if (showTask) {
+		activeAcrd = 'tasks';
+	}
+	const [activeAccordionTab, setActiveAccordionTab] = useState(activeAcrd);
 
 	const formRef = useRef(null);
 
@@ -64,7 +71,7 @@ export default function AccordionContent({
 				const next_step_key = currentConfig?.next_step_key;
 				setCurrentStep((p) => ({
 					text  : myForm?.[next_step_key] || currentConfig?.default_next,
-					count : p.count + 1,
+					count : p.count + NEXT_INDEX,
 				}));
 			}
 		}
@@ -90,7 +97,7 @@ export default function AccordionContent({
 			);
 		}
 
-		if (tasks?.length === 0) {
+		if (tasks?.length === TASK_DEFAULT_LENGTH) {
 			return (
 				<div>
 					<EmptyState
@@ -142,9 +149,24 @@ export default function AccordionContent({
 			</>
 		);
 	};
-
+	if (showTask) {
+		return (
+			<div className={styles.container}>
+				<Tabs
+					className="horizontal two"
+					activeTab={activeAccordionTab}
+					onChange={setActiveAccordionTab}
+				>
+					<TabPanel name="tasks" title="Tasks">
+						{renderTask()}
+					</TabPanel>
+				</Tabs>
+			</div>
+		);
+	}
 	return (
 		<div className={styles.container}>
+
 			{!showInvoiceAndTask ? (
 				<div className={styles.list_container}>
 					<Table columns={columns} data={tableData} />

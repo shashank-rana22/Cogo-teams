@@ -1,18 +1,23 @@
 import { cl, Tooltip } from '@cogoport/components';
 
+import renderTooltip from '../../renderTooltip';
+
 import BLPopver from './BLPopover';
 import ExtraDetails from './ExtraDetails';
 import SPPopver from './SPPopover';
 import styles from './styles.module.css';
 
+const MAX_LENGTH = 32;
+const DEFAULT_INDEX = 0;
+const FIRST_INDEX = 1;
 export default function ServiceProvider({ item = {}, stateProps = {} }) {
 	const isFclLocal = stateProps.shipment_type === 'fcl_local';
 	const docs = stateProps.activeTab === 'bl' ? item.bill_of_ladings : item.delivery_orders;
-	const docsLength = docs?.length || 0;
-	const remainLength = docsLength > 1 ? docsLength - 1 : 0;
+	const docsLength = docs?.length || DEFAULT_INDEX;
+	const remainLength = docsLength > FIRST_INDEX ? docsLength - FIRST_INDEX : DEFAULT_INDEX;
 	const doc_number = stateProps.activeTab === 'bl'
-		? docs?.[0]?.bl_number
-		: docs?.[0]?.do_number;
+		? docs?.[DEFAULT_INDEX]?.bl_number
+		: docs?.[DEFAULT_INDEX]?.do_number;
 
 	return (
 		<div className={styles.container}>
@@ -21,22 +26,9 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 					<div className={styles.grey}>
 						Service Provider
 					</div>
-					<div>
-						<Tooltip
-							interactive
-							content={(
-								<div>
-									{' '}
-									{isFclLocal ? item.local_service?.service_provider?.business_name
-										: item.freight_service?.service_provider?.business_name}
-								</div>
-							)}
-						>
-							<div className={styles.details}>
-								{isFclLocal ? item.local_service?.service_provider?.business_name
-									: item.freight_service?.service_provider?.business_name}
-							</div>
-						</Tooltip>
+					<div className={styles.details}>
+						{renderTooltip(isFclLocal ? item?.local_service?.service_provider?.business_name
+							: item?.freight_service?.service_provider?.business_name, MAX_LENGTH)}
 
 					</div>
 				</div>
@@ -60,47 +52,56 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 				</div>
 			</div>
 			<div className={styles.col}>
-				<div className={styles.lower_left}>
+				<div className={cl`${styles.left}`}>
 					<div className={styles.grey}>
 						Customer
 					</div>
 					<div className={styles.details}>
-						{item.customer?.business_name}
+						{renderTooltip(item.customer?.business_name, MAX_LENGTH)}
 					</div>
 				</div>
-				<div className={styles.lower_right}>
+				<div className={styles.right}>
 					<div>
 						<div className={styles.grey}>
 							{stateProps.activeTab.toUpperCase()}
 							{' '}
 							Details
 						</div>
-						{docsLength > 0 ? (
+						{docsLength > DEFAULT_INDEX ? (
 							<div className={cl`${styles.details} ${styles.service_provider_details}`}>
-								<Tooltip
-									interactive
-									placement="top"
-									caret={false}
-									content={(
-										<BLPopver
-											blDetails={item?.bill_of_ladings}
-											bl_do={stateProps.activeTab}
-										/>
-									)}
-								>
-									<div className={styles.tooltip_container}>
-										{doc_number}
-										{' '}
-										{remainLength ? (
-											<div>
-												{remainLength}
+								{remainLength
+									? (
+										<Tooltip
+											interactive
+											maxWidth={500}
+											placement="top"
+											caret={false}
+											content={(
+												<BLPopver
+													blDetails={item?.bill_of_ladings}
+													bl_do={stateProps.activeTab}
+												/>
+											)}
+										>
+											<div className={styles.tooltip_container}>
+												{doc_number}
 												{' '}
-												+ More
-												{' '}
+												{remainLength ? (
+													<div className={styles.more_item}>
+														{remainLength}
+														{' '}
+														+ More
+														{' '}
+													</div>
+												) : null}
 											</div>
-										) : null}
-									</div>
-								</Tooltip>
+										</Tooltip>
+									)
+									:								(
+										<div className={styles.tooltip_container}>
+											{doc_number}
+										</div>
+									)}
 							</div>
 						) : (
 							<div>
@@ -112,10 +113,12 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 							</div>
 						)}
 					</div>
-					<div>
-						<ExtraDetails stateProps={stateProps} item={item} />
-					</div>
+
 				</div>
+
+			</div>
+			<div>
+				<ExtraDetails stateProps={stateProps} item={item} />
 			</div>
 		</div>
 	);

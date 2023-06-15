@@ -8,6 +8,7 @@ import ClickableDiv from '../../ClickableDiv';
 
 import styles from './styles.module.css';
 
+const DEFAULT_INDEX = 1;
 const iconMapping = {
 	fcl_freight : IcMFfcl,
 	lcl_freight : IcMFlcl,
@@ -19,7 +20,7 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 
 	const handleClick = useCallback(() => {
 		const path = router.asPath.split('/');
-		const newPathname = `/${path[1]}/shipments/${item.id}`;
+		const newPathname = `/${path[DEFAULT_INDEX]}/shipments/${item.id}`;
 		window.location.replace(newPathname);
 	}, [router.asPath, item.id]);
 
@@ -31,7 +32,7 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 				<div
 					className={styles.sid}
 				>
-					SID :
+					SID :&nbsp;
 					<ClickableDiv onClick={handleClick}>
 						<div className={styles.id}>
 							{' '}
@@ -40,7 +41,7 @@ export default function ShipmentDetails({ item = {}, stateProps = {} }) {
 					</ClickableDiv>
 				</div>
 
-				<div className={cl`${styles.tag_container} ${styles.col}`}>
+				<div className={styles.bottom}>
 					<div>
 						{' '}
 						<Element width={24} height={24} fill="red" />

@@ -6,6 +6,7 @@ import EmptyState from '../EmptyState';
 
 import styles from './styles.module.css';
 
+const DEFAULT_LENGTH = 0;
 export default function List({
 	data = {},
 	stateProps = {},
@@ -29,7 +30,7 @@ export default function List({
 	);
 
 	return (
-		list.length === 0 ? <EmptyState /> : (
+		list.length === DEFAULT_LENGTH ? <EmptyState /> : (
 			<div className={styles.container}>
 				{renderPagination}
 				<div className={styles.list_container}>

@@ -3,19 +3,16 @@
 	align-items: center;
 	justify-content: space-between;
 	width: 100%;
-	margin: 4px 0;
+	margin: 12px 0;
 
 	:global {
 		.ui_select_container {
 			width: 24%;
 		}
 	}
-	@media(max-width:1068px){
-		flex-direction: column;
-	}
 }
 .select_filter {
-	min-width: 100px;
+	max-width: 120px;
 }
 
 .right_filters {
@@ -27,9 +24,11 @@
 .service_tabs {
 	display: flex;
 	align-items: center;
-	width: 40%;
-	margin-top: 12px;
+	width: 68%;
 	font-size: 12px;
+	@media(max-width:1068px){
+		width: 100%;
+	}
 }
 
 .service_tab {
@@ -70,4 +69,12 @@
 
 .scope_container {
 	margin-left: 8px;
+}
+.ready_to_collect {
+	display: flex;
+	align-items: center;
+	margin-left: 12px;
+}
+.text {
+	font-weight: 600;
 }

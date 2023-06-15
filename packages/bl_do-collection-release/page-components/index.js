@@ -1,6 +1,7 @@
-import { Tabs, TabPanel, cl } from '@cogoport/components';
+import { Tabs, TabPanel, cl, Toggle } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { useSelector } from '@cogoport/store';
-import { useState } from 'react';
+import { useState, useCallback } from 'react';
 import { v4 as uuid } from 'uuid';
 
 import ClickableDiv from '../commons/ClickableDiv';
@@ -22,22 +23,41 @@ const deskMapping = {
 
 export default function BLDoCollectionDesk() {
 	const [stateProps, setStateProps] = useState({
-		activeTab     : 'bl',
-		shipment_type : 'fcl_freight',
-		inner_tab     : 'knockoff_awaiting',
-		trade_type    : 'export',
-		q             : '',
-		page          : 1,
+		activeTab        : 'bl',
+		shipment_type    : 'fcl_freight',
+		inner_tab        : 'knockoff_awaiting',
+		trade_type       : 'export',
+		ready_to_collect : false,
+		ready_to_release : false,
+		q                : '',
+		page             : 1,
 	});
 
 	const profile = useSelector((state) => state.profile || {});
 	const Desk = deskMapping[stateProps.shipment_type];
 
+	const router = useRouter();
+
+	const handleVersionChange = useCallback(() => {
+		const newPathname = `${router.asPath}`;
+		window.location.replace(newPathname);
+	}, [router.asPath]);
+
 	const handleTabChange = (val) => {
 		if (val === 'bl') {
-			setStateProps({ ...stateProps, activeTab: val, page: 1, trade_type: 'export' });
+			setStateProps({
+				...stateProps,
+				activeTab  : val,
+				page       : 1,
+				trade_type : 'export',
+			});
 		} else {
-			setStateProps({ ...stateProps, activeTab: val, page: 1, trade_type: 'import' });
+			setStateProps({
+				...stateProps,
+				activeTab  : val,
+				page       : 1,
+				trade_type : 'import',
+			});
 		}
 	};
 
@@ -46,7 +66,13 @@ export default function BLDoCollectionDesk() {
 			{
 			TAB_CONFIG.TABS.map((item) => (
 				<ClickableDiv
-					onClick={() => setStateProps({ ...stateProps, inner_tab: item.value, page: 1 })}
+					onClick={() => setStateProps({
+						...stateProps,
+						ready_to_collect : false,
+						ready_to_release : false,
+						inner_tab        : item.value,
+						page             : 1,
+					})}
 					key={uuid()}
 				>
 					<div className={cl`${stateProps.inner_tab === item.value ? styles.active : ''} 
@@ -62,6 +88,19 @@ export default function BLDoCollectionDesk() {
 
 	return (
 		<div className={styles.container}>
+			<div className={styles.header_container}>
+				<div className={styles.header_text}>
+					BL/DO Collection Release
+				</div>
+				<div>
+					<Toggle
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleVersionChange}
+					/>
+				</div>
+			</div>
 			<Tabs
 				activeTab={stateProps.activeTab}
 				themeType="primary"
@@ -73,8 +112,8 @@ export default function BLDoCollectionDesk() {
 					title="Bill Of Ladings"
 				>
 					<div className={styles.outer_tab}>
-						<Filters stateProps={stateProps} setStateProps={setStateProps} />
 						{renderFilters}
+						<Filters stateProps={stateProps} setStateProps={setStateProps} />
 						<Desk setStateProps={setStateProps} stateProps={stateProps} />
 					</div>
 				</TabPanel>
@@ -83,8 +122,8 @@ export default function BLDoCollectionDesk() {
 					title="Delivery Orders"
 				>
 					<div className={styles.outer_tab}>
-						<Filters stateProps={stateProps} setStateProps={setStateProps} />
 						{renderFilters}
+						<Filters stateProps={stateProps} setStateProps={setStateProps} />
 						<Desk setStateProps={setStateProps} stateProps={stateProps} />
 					</div>
 				</TabPanel>

@@ -21,12 +21,14 @@
 .id {
 	color: #f68b21;
 	text-decoration: underline;
+	margin-left: 2px;
 }
 
 .container {
 	&.col {
 		display: flex;
 		flex-direction: column;
+		margin-left: -40px;
 	}
 
 	&.shipment_details {
@@ -65,6 +67,7 @@
 }
 
 .red {
+	margin-left: 16px;
 	color: var(--color-primary-error-red-2);
 }
 
@@ -82,4 +85,9 @@
 	&.bold {
 		font-weight: 500;
 	}
+}
+
+.bottom{
+	display: flex;
+	align-items: center;
 }
