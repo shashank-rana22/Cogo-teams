@@ -44,7 +44,7 @@ function CogoPoints() {
 
 	const { credit_cogopoint_date_data = {}, list = [], page, page_limit, total_count } = topHistoryData;
 
-	const formattedData = getFormattedLineChartData(credit_cogopoint_date_data);
+	const formattedData = getFormattedLineChartData({ data: credit_cogopoint_date_data, selectedDate });
 
 	const checkPieChart = (PIE_CHART_CHECK || []).includes(activeStatsCard);
 
@@ -75,7 +75,7 @@ function CogoPoints() {
 						<div className={styles.container}>
 							<div className={cl`
 			                ${styles.line_chart} 
-			                ${!checkPieChart && styles.no_pie_chart}`}
+			                ${(!checkPieChart && activeHeaderTab !== 'affiliate') && styles.no_pie_chart}`}
 							>
 								<div className={styles.title}>
 									{activeStatsCard === 'liability_point_value'
@@ -90,7 +90,7 @@ function CogoPoints() {
 								/>
 							</div>
 
-							{checkPieChart && (
+							{(checkPieChart && activeHeaderTab !== 'affiliate') && (
 								<div className={styles.pie_chart}>
 
 									<div className={styles.title}>

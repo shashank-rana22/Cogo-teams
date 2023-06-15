@@ -13,9 +13,9 @@ function Header({
 	return (
 		<div className={styles.header_div}>
 			{activeStatsCard === 'liability_point_value' ? (
-				<div className={styles.title}>Top Cogopoint Earners</div>
+				<div className={styles.title}>Cogopoint Earners</div>
 			) : (
-				<div className={styles.title}>Top Cogopoint Users</div>
+				<div className={styles.title}>Cogopoint Users</div>
 			)}
 			<AsyncSelect
 				name="id"

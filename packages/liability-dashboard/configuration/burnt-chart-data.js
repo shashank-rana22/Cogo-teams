@@ -1,9 +1,8 @@
 const burntChartData = (debitData = {}) => {
 	const {
-		cogostore_burnt_point_value = 0, one_time_burnt_point_value = 0,
-		saas_subscription_burnt_point_value
-		= 0, shipment_burnt_point_value
-		= 0,
+		cogostore_burnt_point_value = 0,
+		saas_subscription_burnt_point_value = 0,
+		shipment_burnt_point_value = 0,
 	} = debitData;
 
 	const burntData = [
@@ -22,12 +21,6 @@ const burntChartData = (debitData = {}) => {
 			value : saas_subscription_burnt_point_value,
 			color : 'hsl(291, 70%, 50%)',
 		},
-		{
-			id    : 'Onen Time Burnt',
-			value : one_time_burnt_point_value,
-			color : 'hsl(276, 70%, 50%)',
-		},
-
 	];
 
 	return { burntData };

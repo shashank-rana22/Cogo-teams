@@ -1,5 +1,5 @@
-import { Pill } from '@cogoport/components';
-import { startCase } from '@cogoport/utils';
+import { Pill, Tooltip } from '@cogoport/components';
+import { getByKey, startCase } from '@cogoport/utils';
 
 import { USER_TYPE_COLOR_MAPPING, USER_TYPE_MAPPING } from '../../../../constants';
 
@@ -12,9 +12,15 @@ function TableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 		{
 			Header   : 'Name',
 			accessor : (item = {}) => (
-				<div className={styles.user_name}>
-					{startCase(item?.user_name)}
-				</div>
+				<Tooltip
+					content={startCase(getByKey(item, 'user_name'))}
+					placement="bottom"
+				>
+					<div className={styles.user_name}>
+						{startCase(item?.user_name)}
+					</div>
+
+				</Tooltip>
 			),
 			conditions: ['liability_point_value',
 				'total_burnt_point_value',
@@ -26,9 +32,14 @@ function TableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 		{
 			Header   : 'Organisation Name',
 			accessor : (item = {}) => (
-				<div className={styles.user_name}>
-					{startCase(item?.organization_name) || '--'}
-				</div>
+				<Tooltip
+					content={startCase(getByKey(item, 'organization_name'))}
+					placement="bottom"
+				>
+					<div className={styles.user_name}>
+						{startCase(item?.organization_name) || '--'}
+					</div>
+				</Tooltip>
 			),
 			conditions: ['liability_point_value',
 				'total_burnt_point_value',

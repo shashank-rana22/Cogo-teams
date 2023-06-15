@@ -1,5 +1,9 @@
 .user_name {
+	max-width: 80%;
+	overflow: hidden;
 	font-weight: 600;
+	text-overflow: ellipsis;
+	white-space: nowrap;
 }
 
 .user_type {

@@ -40,6 +40,7 @@ const GLOBAL_CONSTANTS = {
 			'eee, dd MMM, yyyy' : 'eee, dd MMM, yyyy',
 			'yyyy-MM-dd'        : 'yyyy-MM-dd',
 			'MMM yyyy'          : 'MMM yyyy',
+			'dd MMM'            : 'dd MMM',
 		},
 		time: {
 			'hh:mm aaa' : 'hh:mm aaa',
@@ -149,7 +150,7 @@ const GLOBAL_CONSTANTS = {
 		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
 		line_chart_img      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/stats-line.svg',
 		pie_chart_img       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/pie-chart.svg',
-		empty_state         : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg',
+		empty_list_state    : 'https://cdn.cogoport.io/cms-prod/cogo_partner/vault/original/empty_item.svg',
 		destination_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
 		document_icon_png   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
 		day_one_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',

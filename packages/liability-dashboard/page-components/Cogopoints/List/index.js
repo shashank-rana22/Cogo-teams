@@ -35,7 +35,7 @@ function List({
 			{isEmpty(list) && !loading ? (
 				<figure className={styles.empty_state}>
 					<Image
-						src={GLOBAL_CONSTANTS.image_url.empty_state}
+						src={GLOBAL_CONSTANTS.image_url.empty_list_state}
 						alt="Empty State"
 						width={200}
 						height={250}
