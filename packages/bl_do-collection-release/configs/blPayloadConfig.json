@@ -48,9 +48,6 @@
               {"task": "knockoff_invoices", "status": "pending"}]
               }
           }
-        },
-        "bl":{
-          "filters": {}
         }
     },
     "knockoff_pending": {
@@ -70,7 +67,7 @@
           },
           "import": {
             "filters": {
-              "task_attributes": [{"task": "knockoff_invoices", "status": "pending"}]
+              "task_attributes": [{"task": "knockoff_bl_invoices", "status": "pending"}]
             }
           }
       },
@@ -94,9 +91,6 @@
             "filters": {
             }
           }
-      },
-      "bl":{
-        "filters": {}
       }
     },
     "collection_pending":{
@@ -131,9 +125,6 @@
           "import": {
             "filters": {}
           }
-      },
-      "bl":{
-        "filters": {}
       }
     },
     "under_collection":{
@@ -180,9 +171,6 @@
             "task_attributes": [{"task": "upload_delivery_order", "status": "pending"}]
           }
         }
-      },
-      "bl":{
-        "filters": {}
       }
     },
     "collected": {
@@ -190,9 +178,11 @@
         "filters": {
           "collected": true,
           "state": ["confirmed_by_importer_exporter", "in_progress", "shipment_received"],
+          "bl_status": ["uploaded", "approved", "eligible", "ineligible", "requested", "release_pending"],
           "task_attributes": [{"task": ["upload_bill_of_lading", "generate_do_noc_certificate"], "status": "completed"}]
         },
-        "additional_methods": ["pagination", "seller"]
+        "additional_methods": ["pagination", "seller"],
+        "ready_to_release_filter":{"bl_status": ["release_pending"]}
       },
       "fcl_freight": {
         "export": {
@@ -217,17 +207,13 @@
           "import": {
             "filters": {}
           }
-      },
-      "bl":{
-        "filters": {
-          "bl_status": ["uploaded", "approved", "eligible", "ineligible", "requested", "release_pending"]
-        },
-        "ready_to_release_filter":{"bl_status": ["release_pending"]}
       }
     },
     "released": {
       "common":{
-        "filters": {},
+        "filters": {
+          "bl_status": ["released", "delivered"]
+        },
         "additional_methods": ["pagination", "buyer"]
       },
       "fcl_freight": {
@@ -253,16 +239,13 @@
           "import": {
             "filters": {}
           }
-      },
-      "bl":{
-        "filters": {
-          "bl_status": ["released", "delivered"]
-        }
       }
     },
     "surrendered": {
       "common":{
-        "filters": {},
+        "filters": {
+          "bl_status": ["surrendered", "surrender_pending"]
+        },
         "additional_methods": ["pagination", "seller"]
       },
       "fcl_freight": {
@@ -288,16 +271,13 @@
           "import": {
             "filters": {}
           }
-      },
-      "bl":{
-        "filters": {
-          "bl_status": ["surrendered", "surrender_pending"]
-        }
       }
     },
     "on_hold": {
       "common":{
-        "filters": {},
+        "filters": {
+          "bl_status": ["hold"]
+        },
         "additional_methods": ["pagination", "seller"]
       },
       "fcl_freight": {
@@ -323,11 +303,6 @@
           "import": {
             "filters": {}
           }
-      },
-      "bl":{
-        "filters": {
-          "bl_status": ["hold"]
-        }
       }
     }
   }

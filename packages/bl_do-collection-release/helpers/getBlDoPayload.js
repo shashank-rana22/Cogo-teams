@@ -19,14 +19,13 @@ export default function getBlDoPayload({ stateProps = {} }) {
 		filters: shipmentTypeFilters, ...shipmentTypePayload
 	} = payload[stateProps.shipment_type][stateProps.trade_type];
 
-	const { filters: bldoFilters, ready_to_release_filter, ...bldoPayload } = payload[stateProps.activeTab];
+	const { ready_to_release_filter, ...bldoPayload } = payload[stateProps.activeTab];
 
 	const filters = {
 		...commonFilters,
 		...shipmentTypeFilters,
 		...(ready_to_collect ? ready_to_collect_filters : {}),
 		...(ready_to_release ? ready_to_release_filter : {}),
-		...(ready_to_collect || ready_to_release ? {} : bldoFilters),
 		trade_type : trade_type.length ? trade_type : undefined,
 		q          : q.length ? q : undefined,
 	};
