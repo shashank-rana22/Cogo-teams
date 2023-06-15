@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 import TimelineItem from './TimeLineItem';
 
 const CONSECUTIVELY_COMPLETED = true;
-const NEXT_INDEX = 1;
+const NEXT_INDEX_TIMELINE_DATA = 1;
 function ShipmentTimeline({ itemData, isAccordionActive }) {
 	const {
 		shipmentTimelineData = [],
@@ -25,7 +25,7 @@ function ShipmentTimeline({ itemData, isAccordionActive }) {
 		<div className={styles.div_container}>
 			<div className={styles.container}>
 				{shipmentTimelineLoading ? <ShipmentLoader /> : shipmentTimelineData.map((item, index) => {
-					const isLast = shipmentTimelineData.length === (index + NEXT_INDEX);
+					const isLast = shipmentTimelineData.length === (index + NEXT_INDEX_TIMELINE_DATA);
 					return (
 						<TimelineItem
 							key={item.id}

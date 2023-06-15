@@ -15,4 +15,5 @@
 .more_details {
 	font-size: var(--font-size-sm);
 	color: #f68b21;
+	cursor: pointer;
 }

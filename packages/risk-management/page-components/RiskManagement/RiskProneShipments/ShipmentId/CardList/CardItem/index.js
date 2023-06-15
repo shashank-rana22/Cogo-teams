@@ -7,7 +7,7 @@ import renderTooltip from '../../../../common/renderTooltip';
 
 import styles from './styles.module.css';
 
-const MAX_LENGTH = 16;
+const SHOW_TOOLTIP_MAX_LENGTH = 16;
 const COMMODITY_VALUE_LENGTH = 40;
 const RISK_CATEGORIES = {
 	1 : 'LOW',
@@ -46,7 +46,7 @@ function CardItem({ itemData }) {
 							{port_code}
 						</div>
 						<div className={styles.origin_bottom}>
-							{renderTooltip(display_name, MAX_LENGTH)}
+							{renderTooltip(display_name, SHOW_TOOLTIP_MAX_LENGTH)}
 						</div>
 					</div>
 				</div>
@@ -59,7 +59,7 @@ function CardItem({ itemData }) {
 							{destination_port_code}
 						</div>
 						<div className={styles.origin_bottom}>
-							{renderTooltip(destination_port_display_name, MAX_LENGTH)}
+							{renderTooltip(destination_port_display_name, SHOW_TOOLTIP_MAX_LENGTH)}
 						</div>
 					</div>
 				</div>

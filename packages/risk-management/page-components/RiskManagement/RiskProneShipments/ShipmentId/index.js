@@ -1,5 +1,6 @@
 import { Input, Pagination } from '@cogoport/components';
 import { IcMCross, IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import LoadingState from '../../common/LoadingState';
@@ -9,7 +10,6 @@ import SelectFilter from './SelectFilter';
 import styles from './styles.module.css';
 
 const ARRAY_LENGTH = 5;
-const DEFAULT_MAX_LENGTH = 0;
 
 function ShipmentId({
 	data = {}, loading = false, filters = '', setFilters = () => {}, activeTab = '',
@@ -42,7 +42,7 @@ function ShipmentId({
 				</div>
 			);
 		}
-		if (list.length === DEFAULT_MAX_LENGTH) {
+		if (isEmpty(list)) {
 			return (
 				<div className={styles.no_data}>
 					<img
@@ -85,7 +85,7 @@ function ShipmentId({
 			<div>
 				{handleShipmentView()}
 			</div>
-			{list.length > DEFAULT_MAX_LENGTH && (
+			{!isEmpty(list) && (
 				<div className={styles.pagination}>
 					<Pagination
 						type="number"
