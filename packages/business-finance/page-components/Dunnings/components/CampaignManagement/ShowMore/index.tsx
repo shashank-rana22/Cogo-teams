@@ -6,7 +6,7 @@ function ShowMore({ dropdown, rowId }) {
 		return (
 			<div className={styles.dropdown_container_visible}>
 				<div className={styles.data_container}>
-					<div style={{ width: '20%' }}>
+					<div>
 						<div>
 							<div className={styles.heading}>Service Type</div>
 							<div>XXXX</div>
@@ -15,7 +15,7 @@ function ShowMore({ dropdown, rowId }) {
 						</div>
 					</div>
 
-					<div style={{ width: '80%' }}>
+					<div>
 						<div>
 							<PieData />
 						</div>
