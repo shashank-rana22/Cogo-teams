@@ -20,8 +20,8 @@ const sales_reason_options = [
 		value : 'shipment_parameters_changed',
 	},
 	{
-		label : 'I was just exploring',
-		value : 'i_was_just_exploring',
+		label : 'Contracted Fleet Unavailable',
+		value : 'contracted_fleet_unavailable',
 	},
 ];
 export default sales_reason_options;
