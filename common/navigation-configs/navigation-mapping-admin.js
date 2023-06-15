@@ -318,9 +318,11 @@ const navigationMappingAdmin = {
 		as            : '/schedules',
 		type          : 'link',
 		icon          : IcMDashboard,
-		possible_apis : [],
+		possible_apis : [
+			...apis.schedules
+		],
 		main_apis     : [],
-		module_type   : 'schedules',
+		module_type   : 'dashboards',
 	},
 	okam_dashboard: {
 		key           : 'okam_dashboard',

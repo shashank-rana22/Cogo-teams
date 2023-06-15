@@ -1,0 +1,13 @@
+.table {
+	width: 100%;
+}
+
+.th {
+	background-color: rgb(247 250 208);
+
+	/* border: 1px solid black; */
+}
+
+.td {
+	text-align: center;
+}

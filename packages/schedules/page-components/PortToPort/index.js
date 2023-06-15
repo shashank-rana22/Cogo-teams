@@ -1,8 +1,5 @@
-function PortToPort() {
-	return (
-		<>
-			Port to Port
-		</>
-	);
+const PortToPort = () =>{
+    return (<>Port to Port
+    </>);
 }
 export default PortToPort;

@@ -48,6 +48,7 @@ import tech_ops from './tech-ops-apis';
 import techops_dashboard from './techops_dashboard';
 import tools from './tools';
 import vendor_rm_apis from './vendor_rm_apis';
+import schedules from './schedules-apis'
 
 const apis = {
 	search: search.map((api) => ({
@@ -141,6 +142,7 @@ const apis = {
 	...athena_dashboard,
 	...saas_subscription,
 	...chakravyuh,
+	schedules
 };
 
 export default apis;

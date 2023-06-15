@@ -11,7 +11,11 @@ const welcome = {
 		navigation : 'schedules',
 		isMainNav  : true,
 	},
-	'/[partner_id]/schedules/port-to-pair': {
+	'/[partner_id]/schedules/port-to-port': {
+		navigation : 'schedules',
+		isMainNav  : true,
+	},
+	'/[partner_id]/schedules/ocean-schedule-coverage': {
 		navigation : 'schedules',
 		isMainNav  : true,
 	},
