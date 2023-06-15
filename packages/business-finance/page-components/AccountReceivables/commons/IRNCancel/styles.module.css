@@ -4,13 +4,14 @@
 	width: max-content;
 	margin: 8px;
 }
+
 .div_container {
 	display: flex;
 }
 
 .styled_button {
-	margin-bottom: 8px;
 	margin-right: 4px;
+	margin-bottom: 8px;
 }
 
 .cancel_modal {
