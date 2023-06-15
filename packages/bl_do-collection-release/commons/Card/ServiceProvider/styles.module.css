@@ -1,8 +1,8 @@
 .container {
 	display: flex;
 	flex-direction: column;
-	width: 50%;
 	justify-content: center;
+	width: 50%;
 
 	* {
 		font-size: 12px;
@@ -22,7 +22,7 @@
 
 .left {
 	width: 56%;
-	padding: 0px 16px 4px 8px;
+	padding: 0 16px 4px 8px;
 }
 
 .right {
@@ -49,20 +49,20 @@
 }
 
 .tooltip_container {
+	display: flex;
 	color: var(--color-accent-orange-2);
 	text-decoration: underline;
-	display: flex;
 }
 
 .tooltip {
 	max-width: none !important;
 }
 
-.more_item{
-	background:  #FDEBE9;
+.more_item {
 	width: fit-content;
-	border-radius: 4px;
-	padding: 0px 4px;
+	padding: 0 4px;
 	margin-left: 4px;
-	color: #000000;
+	color: #000;
+	background: #fdebe9;
+	border-radius: 4px;
 }

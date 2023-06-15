@@ -4,17 +4,17 @@
 	&.main {
 		position: relative;
 		z-index: 2;
-		overflow: auto;
 		margin: 4px;
+		overflow: auto;
 		border-radius: 4px;
 	}
 
 	&.header {
 		display: flex;
 		justify-content: space-around;
-		padding:4px;
-		border-radius: 4px;
+		padding: 4px;
 		background: #fef6df;
+		border-radius: 4px;
 	}
 
 	&.card {
@@ -30,16 +30,17 @@
 
 .text {
 	&.bl_number {
+		margin-right: 12px;
 		font-weight: 500;
 		color: #da9a3b;
-		margin-right: 12px;
 	}
 
 	&.title {
-		margin-right: 12px;
 		min-width: 136px;
+		margin-right: 12px;
 	}
 }
-.item_content{
+
+.item_content {
 	min-width: 150px;
 }

@@ -11,6 +11,7 @@
 		}
 	}
 }
+
 .select_filter {
 	max-width: 120px;
 }
@@ -26,20 +27,21 @@
 	align-items: center;
 	width: 68%;
 	font-size: 12px;
-	@media(max-width:1068px){
+
+	@media (max-width: 1068px) {
 		width: 100%;
 	}
 }
 
 .service_tab {
-	padding: 8px;
 	display: flex;
 	justify-content: center;
 	min-width: 100px;
+	padding: 8px;
 	margin-right: 12px;
 	font-weight: 600;
-	cursor: pointer;
 	color: #000;
+	cursor: pointer;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
@@ -70,11 +72,13 @@
 .scope_container {
 	margin-left: 8px;
 }
+
 .ready_to_collect {
 	display: flex;
 	align-items: center;
 	margin-left: 12px;
 }
+
 .text {
 	font-weight: 600;
 }

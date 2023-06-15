@@ -34,10 +34,10 @@
 
 .service_tab {
 	padding: 8px 16px;
-	cursor: pointer;
 	margin-right: 12px;
 	font-weight: 600;
 	color: #000;
+	cursor: pointer;
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
@@ -69,14 +69,16 @@
 	display: flex;
 	flex-direction: column;
 }
-.header_text{
-	font-weight: 600;
-	font-size: 20px;
-	color: #333333;
+
+.header_text {
 	margin-bottom: 12px;
+	font-size: 20px;
+	font-weight: 600;
+	color: #333;
 }
-.header_container{
+
+.header_container {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 }
