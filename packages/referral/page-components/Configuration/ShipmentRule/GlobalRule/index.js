@@ -1,8 +1,9 @@
 import { InputController, SelectController, MultiselectController } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCCogoCoin } from '@cogoport/icons-react';
 import React from 'react';
 
-import { OVERALL_LIMIT, SHIPMENT_TYPE } from '../../../../constants/configuration-constant';
+import { OVERALL_LIMIT } from '../../../../constants/configuration-constant';
 
 import styles from './styles.module.css';
 
@@ -60,7 +61,7 @@ function GlobalRule({ control, errors, formValues, isEdit }) {
 						size="sm"
 						disabled={isEdit}
 						rules={{ required: true }}
-						options={SHIPMENT_TYPE}
+						options={GLOBAL_CONSTANTS.shipment_types}
 					/>
 					{errors?.event_types && (
 						<span className={styles.error}>Required</span>

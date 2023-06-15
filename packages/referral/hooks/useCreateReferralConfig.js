@@ -7,7 +7,7 @@ const useCreateReferralConfig = ({ apiState = '', setApiState = () => {}, setIsE
 
 	const { user = {} } = profile;
 
-	const { id:user_id, session_type: userType = '' } = user;
+	const { id: user_id, session_type: userType = '' } = user;
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',

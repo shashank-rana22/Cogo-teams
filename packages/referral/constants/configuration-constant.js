@@ -1,24 +1,10 @@
-const OPTION_VALUE = 39;
-const INDEX_VALUE = 2;
+const NETWORK_LEVEL = 39;
+const LOWEST_NETWORK_LEVEL = 2;
 
 export const OVERALL_LIMIT = [
 	{ label: '%', value: 'percentage' },
 	{ label: 'Fixed', value: 'fixed' },
 	{ label: 'None', value: 'none' },
-];
-
-export const SHIPMENT_TYPE = [
-	{ value: 'fcl_freight', label: 'FCL' },
-	{ value: 'lcl_freight', label: 'LCL' },
-	{ value: 'air_freight', label: 'AIR' },
-	{ value: 'trailer_freight', label: 'Container Transportation' },
-	{ value: 'ftl_freight', label: 'FTL' },
-	{ value: 'ltl_freight', label: 'LTL' },
-	{ value: 'haulage_freight', label: 'Rail Haulage' },
-	{ value: 'fcl_customs', label: 'FCL Customs' },
-	{ value: 'lcl_customs', label: 'LCL Customs' },
-	{ value: 'air_customs', label: 'AIR Customs' },
-	{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 ];
 
 export const INCENTIVE_OPTIONS = [
@@ -37,9 +23,9 @@ export const BONUS_TYPE = [
 ];
 
 const getNodeOptions = () => {
-	const options = [...Array(OPTION_VALUE).keys()].map((i) => {
-		const label = `N-${i + INDEX_VALUE}`;
-		const value = Number(`-${i + INDEX_VALUE}`);
+	const options = [...Array(NETWORK_LEVEL).keys()].map((i) => {
+		const label = `N-${i + LOWEST_NETWORK_LEVEL}`;
+		const value = Number(`-${i + LOWEST_NETWORK_LEVEL}`);
 		return { label, value };
 	});
 

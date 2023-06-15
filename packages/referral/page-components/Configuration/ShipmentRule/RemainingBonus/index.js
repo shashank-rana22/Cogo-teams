@@ -34,8 +34,8 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 	return (
 		<div>
 			{fields.map((field, index) => (
-				<>
-					<div className={styles.content} key={field.id}>
+				<React.Fragment key={field.id}>
+					<div className={styles.content}>
 						<div className={styles.wrap}>
 							<div className={styles.input_controller}>
 								<SelectController
@@ -121,7 +121,7 @@ function RemainingBonus({ control, formValues, errors, trigger, isEdit }) {
 						{fields.length - FIELD_LENGTH === index
                         && <Button disabled={isEdit} onClick={handleAppend}>+ Add</Button>}
 					</div>
-				</>
+				</React.Fragment>
 			))}
 		</div>
 	);
