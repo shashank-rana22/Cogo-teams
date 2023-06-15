@@ -1,4 +1,4 @@
-import { Button, cl, Popover } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { IcMProfile, IcMRefresh } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
@@ -8,6 +8,7 @@ import HeaderName from '../../../../../common/HeaderName';
 
 import Assignes from './Assignes';
 import TagsPopOver from './HeaderFuncs';
+import RightButton from './RightButton';
 import ShowContent from './ShowContent';
 import styles from './styles.module.css';
 
@@ -94,119 +95,6 @@ function Header({
 		};
 		requestForAssignChat(payload);
 	};
-	const renderPopoverOption = () => (
-		<div className={styles.button_container}>
-			<Button
-				themeType="secondary"
-				size="md"
-				disabled={disableButton}
-				className={styles.styled_buttons}
-				onClick={() => assignButtonAction('stop_and_assign')}
-				loading={assignLoading && disableButton === 'stop_and_assign'}
-			>
-				Assign to me
-			</Button>
-			<Button
-				themeType="secondary"
-				size="md"
-				disabled={disableButton}
-				className={styles.styled_buttons}
-				onClick={() => assignButtonAction('auto_assign')}
-				loading={assignLoading && disableButton === 'auto_assign'}
-			>
-				Auto Assign
-			</Button>
-			<Button
-				themeType="secondary"
-				size="md"
-				disabled={disableButton}
-				className={styles.styled_button}
-				onClick={() => assignButtonAction('assign')}
-				loading={assignLoading && disableButton === 'assign'}
-			>
-				Assign
-			</Button>
-		</div>
-	);
-
-	const renderRightButton = () => {
-		const hasAnyRequests = !!agent_id;
-		if (canMessageOnBotSession) {
-			return (
-				<Button
-					themeType="secondary"
-					size="md"
-					disabled
-					className={styles.styled_button}
-				>
-					Assign
-				</Button>
-			);
-		}
-		if (!showBotMessages) {
-			return (
-				<Button
-					themeType="secondary"
-					size="md"
-					className={styles.styled_button}
-					disabled={!hasPermissionToEdit}
-					onClick={openAssignModal}
-				>
-					Assign
-				</Button>
-			);
-		}
-		if (isomniChannelAdmin && !hasAnyRequests) {
-			return (
-				<Popover
-					placement="bottom"
-					trigger="click"
-					render={renderPopoverOption()}
-					visible={openPopover}
-					onClickOutside={() => setOpenPopover(false)}
-				>
-					<Button
-						themeType="secondary"
-						size="md"
-						className={styles.styled_button}
-						onClick={() => setOpenPopover(true)}
-					>
-						Assign To
-					</Button>
-				</Popover>
-			);
-		}
-		if (isomniChannelAdmin && hasAnyRequests) {
-			return (
-				<Button
-					themeType="secondary"
-					size="md"
-					className={styles.styled_button}
-					onClick={() => assignButtonAction('approve_request')}
-					loading={assignLoading}
-				>
-					Assign to
-					{' '}
-					{agent_name}
-				</Button>
-			);
-		}
-		if (!isomniChannelAdmin) {
-			return (
-				<Button
-					themeType="secondary"
-					size="md"
-					disabled={hasAnyRequests}
-					className={styles.styled_button}
-					onClick={requestAssignPaylod}
-					loading={requestAssignLoading}
-				>
-					{hasAnyRequests ? 'Requested' : 'Request for Assign'}
-				</Button>
-			);
-		}
-		return null;
-	};
 
 	const handleUpdateUser = () => {
 		if (!updateRoomLoading) {
@@ -250,7 +138,23 @@ function Header({
 							/>
 						</div>
 					)}
-					<div>{renderRightButton()}</div>
+					<RightButton
+						agent_id={agent_id}
+						canMessageOnBotSession={canMessageOnBotSession}
+						showBotMessages={showBotMessages}
+						hasPermissionToEdit={hasPermissionToEdit}
+						openAssignModal={openAssignModal}
+						isomniChannelAdmin={isomniChannelAdmin}
+						disableButton={disableButton}
+						assignButtonAction={assignButtonAction}
+						assignLoading={assignLoading}
+						openPopover={openPopover}
+						setOpenPopover={setOpenPopover}
+						agent_name={agent_name}
+						requestAssignPaylod={requestAssignPaylod}
+						requestAssignLoading={requestAssignLoading}
+					/>
+
 					{isomniChannelAdmin && channel_type === 'whatsapp' && (
 						<div
 							role="button"

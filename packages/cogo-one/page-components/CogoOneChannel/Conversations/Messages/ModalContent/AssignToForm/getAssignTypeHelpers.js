@@ -85,4 +85,8 @@ export const ASSIGN_TYPE_PAYLOAD_MAPPING = {
 		is_allowed_to_chat : val?.allow_user !== 'observe',
 	}),
 
+	add_to_group: () => ({
+		assignType: 'add_to_group',
+	}),
+
 };

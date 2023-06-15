@@ -90,12 +90,15 @@ function Messages({
 
 	const { assignChat = () => {}, loading: assignLoading } = useAssignChat({
 		messageFireBaseDoc,
+		channel_type,
+		firestore,
 		closeModal,
 		activeMessageCard,
 		formattedData,
 		setDisableButton,
 		canMessageOnBotSession,
 	});
+	// console.log('activeMessageCard', activeMessageCard);
 
 	const {
 		getNextData = () => {},
@@ -220,6 +223,7 @@ function Messages({
 					)}
 					<ActiveModalComp
 						data={openModal?.data || {}}
+						activeMessageCard={activeMessageCard}
 						assignLoading={assignLoading}
 						loading={loading}
 					/>

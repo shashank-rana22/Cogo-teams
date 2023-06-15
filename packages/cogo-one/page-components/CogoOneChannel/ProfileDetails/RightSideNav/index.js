@@ -25,7 +25,7 @@ function RightSideNav({
 	viewType,
 
 }) {
-	console.log('documentsCount:', documentsCount);
+	// console.log('documentsCount:', documentsCount);
 	const dispatch = useDispatch();
 	const { profileData } = useSelector(({ profile }) => ({
 		profileData: profile,

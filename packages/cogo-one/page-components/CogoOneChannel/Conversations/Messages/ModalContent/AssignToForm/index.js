@@ -5,6 +5,7 @@ import {
 } from '@cogoport/forms';
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
+import { useSelector } from '@cogoport/store';
 import { merge } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -16,6 +17,8 @@ import styles from './styles.module.css';
 const DEFAULT_ASSIGN_TYPE = 'assign_user';
 
 function AssignToForm({ data = {}, assignLoading = false }) {
+	const { profile = {} } = useSelector((state) => state);
+	const { role_functions } = profile.auth_role_data;
 	const [assignType, setAssignType] = useState(DEFAULT_ASSIGN_TYPE);
 	const { handleSubmit, control, watch, reset, formState: { errors } } = useForm({
 		defaultValues: {
@@ -43,7 +46,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 
 	const createSubmit = (val) => {
 		const getPayload = ASSIGN_TYPE_PAYLOAD_MAPPING[assignType];
-		assignChat(getPayload?.(val) || {});
+		return assignChat(getPayload(val) || {});
 	};
 
 	const assignTypeComp = getAssignTypeComp({
@@ -53,29 +56,33 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 		watchCondtion,
 		assignType,
 	});
+	const OBSERVABLE_ASSIGNEE_TYPES = ['assign_user', 'assign_on_entity'];
 
 	return (
 		<form className={styles.container} onSubmit={handleSubmit(createSubmit)}>
 			{ASSIGN_TYPE_OPTIONS.map((eachAssignOption) => {
-				const { label = '', value = '' } = eachAssignOption;
+				const { label = '', value = '', agent_types = [], hasComp = true } = eachAssignOption;
 				const isChecked = value === assignType;
-				return (
-					<div key={value}>
-						<div className={styles.controller_div}>
-							<Radio
-								name={value}
-								label={label}
-								key={value}
-								onChange={() => setAssignType(value)}
-								checked={isChecked}
-							/>
+				if (agent_types.find((x) => role_functions.includes(x))) {
+					return (
+						<div key={value}>
+							<div className={styles.controller_div}>
+								<Radio
+									name={value}
+									label={label}
+									key={value}
+									onChange={() => setAssignType(value)}
+									checked={isChecked}
+								/>
+							</div>
+							{(isChecked && hasComp) && assignTypeComp}
 						</div>
-						{isChecked && assignTypeComp}
-					</div>
-				);
+					);
+				}
+				return null;
 			})}
 
-			{support_agent_id && (
+			{(support_agent_id && OBSERVABLE_ASSIGNEE_TYPES.includes(assignType)) && (
 				<div className={styles.allowed_div}>
 					<div className={styles.label}>Allow the user to</div>
 					<div>
@@ -83,6 +90,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 					</div>
 				</div>
 			)}
+
 			<div className={styles.button_container}>
 				<Button size="md" themeType="tertiary" onClick={resetForm}>
 					reset
@@ -93,7 +101,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 					loading={assignLoading}
 					type="submit"
 				>
-					Assign
+					Submit
 				</Button>
 			</div>
 

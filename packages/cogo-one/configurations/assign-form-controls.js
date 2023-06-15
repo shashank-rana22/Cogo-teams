@@ -91,16 +91,20 @@ const controls = {
 };
 
 export const ASSIGN_TYPE_OPTIONS = [{
-	label : 'Assign User',
-	value : 'assign_user',
+	label       : 'Assign User',
+	value       : 'assign_user',
+	agent_types : ['sales', 'supply'],
 },
 {
-	label : 'Assign on Shipment/Invoice',
-	value : 'assign_on_shipment_invoice',
+	label       : 'Add myself to group',
+	value       : 'add_to_group',
+	agent_types : ['supply'],
+	hasComp     : false,
 },
 {
-	label : 'Assign on Entity/Team',
-	value : 'assign_on_entity',
+	label       : 'Assign to Team',
+	value       : 'assign_on_entity',
+	agent_types : ['sales', 'supply'],
 }];
 
 export default controls;
