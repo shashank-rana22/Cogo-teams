@@ -1,7 +1,6 @@
 import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
-// import { ShipmentChat } from '@cogoport/shipment-chat';
 import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
@@ -96,8 +95,6 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 			<div>
 				<div className={styles.top_header}>
 					<ShipmentInfo />
-
-					{/* <ShipmentChat /> */}
 
 				</div>
 
