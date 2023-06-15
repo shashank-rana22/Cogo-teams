@@ -1,4 +1,5 @@
 import { Pill, Popover } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 import getPillsFormat from '../../../helpers/getPillsFormat';
 
@@ -8,10 +9,12 @@ import styles from './styles.module.css';
 const KEY_FROM_ITEM = ['inco_term', 'trade_type', 'free_days_detention_destination', 'container_size', 'container_type',
 	'commodity', 'inco_term', 'containers_count', 'cargo_weight_per_container', 'destination_cargo_handling_type'];
 
+const MINIMUM_COUNT_FOR_PLURAL = 1;
+
 function CargoPills({ data = {} }) {
 	const { cargo_details = [] } = data || {};
 
-	const initialPills = cargo_details?.[0] || {};
+	const [initialPills = {}, ...restPills] = cargo_details;
 
 	KEY_FROM_ITEM.forEach((itemKey) => {
 		if (data?.[itemKey]) {
@@ -20,20 +23,21 @@ function CargoPills({ data = {} }) {
 	});
 
 	return (
-		<div className={styles.container}>
+		<div className={styles.container} style={data?.fm_rejection_reason ? { flex: 1 } : {}}>
 			{getPillsFormat(initialPills)?.map((pill) => (
 				<Pill key={pill}>{pill}</Pill>
 			))}
 
-			{cargo_details?.length > 1 ? (
+			{!isEmpty(restPills) ? (
 				<div className={styles.popover_container}>
 					<Popover
-						render={<PopoverContent list={cargo_details?.slice(1)} />}
+						render={<PopoverContent list={restPills} />}
 						placement="bottom"
 						trigger="mouseenter"
 					>
 						<div className={styles.popover_button_content}>
-							{`+${cargo_details.length - 1} Detail${cargo_details.length > 2 ? 's' : ''}`}
+							{`+${restPills?.length} 
+							Detail${cargo_details.length > MINIMUM_COUNT_FOR_PLURAL ? 's' : ''}`}
 						</div>
 					</Popover>
 				</div>

@@ -1,5 +1,6 @@
-import { Placeholder, Breadcrumb, Pill } from '@cogoport/components';
+import { Placeholder, Breadcrumb, Pill, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { IcMAlert } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
@@ -38,6 +39,16 @@ function ShipmentInfo() {
 				/>
 			) : null}
 
+			{shipment_data?.fm_rejection_reason ? (
+				<Tooltip
+					placement="top"
+					content={<div>{shipment_data?.fm_rejection_reason}</div>}
+				>
+					<span className={styles.fm_rejection_icon}>
+						<IcMAlert width={15} height={15} />
+					</span>
+				</Tooltip>
+			) : null}
 		</div>
 	);
 }

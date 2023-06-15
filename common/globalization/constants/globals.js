@@ -159,6 +159,7 @@ const GLOBAL_CONSTANTS = {
 		cogopoint_image     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogopoints.svg',
 		network_loader      : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/cogoport-loading.gif',
 		user_avatar         : 'https://cdn.cogoport.io/cms-prod/cogo_public/vault/original/avatar-placeholder.webp',
+		nodata_image       	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
 	},
 	options: {
 		upload_file_size: {
