@@ -4,8 +4,8 @@ import useListShipmentBookingConfirmationPreferences
 import Card from './Card';
 import styles from './styles.module.css';
 
-function PreferenceSetServiceData({ serviceData }) {
-	const { data:allPreferenceCardsData, loading } = useListShipmentBookingConfirmationPreferences({ serviceData });
+function PreferenceSetServiceData({ singleServiceData }) {
+	const { data:allPreferenceCardsData, loading } = useListShipmentBookingConfirmationPreferences({ singleServiceData });
 	return (
 		<div className={styles.container}>
 			{(allPreferenceCardsData || [])?.map((item, index) => (
