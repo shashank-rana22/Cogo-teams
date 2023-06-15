@@ -20,7 +20,7 @@ const getColumns = () => (
 			),
 		},
 		{
-			Header   : 'EMPLOYEES',
+			Header   : 'SQUADS',
 			accessor : (item) => (
 				<div>{item?.name || '-'}</div>
 			),
