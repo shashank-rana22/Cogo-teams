@@ -11,11 +11,18 @@ import React, { useState } from 'react';
 
 import useInvoiceDetails from '../../hooks/useGetinvoiceTimeline';
 
+import CancellationAgreement from './CancellationAgreement';
 import Poc from './POC';
 import styles from './styles.module.css';
 import Timeline from './Timeline';
 import UtrNumber from './UTRNumber';
 
+const INVOICE_DATA_MAPPING = [
+	{ id: '1', label: 'POC' },
+	{ id: '2', label: 'Timeline' },
+	{ id: '3', label: 'UTR Number' },
+	{ id: '4', label: 'Cancellation Agreement' },
+];
 function InvoiceDetails({ item }) {
 	const { loading, data, getInvoiceDetailsApi } = useInvoiceDetails({
 		id: item?.id,
@@ -38,12 +45,6 @@ function InvoiceDetails({ item }) {
 		}));
 	};
 
-	const INVOICE_DATA_MAPPING = [
-		{ id: '1', label: 'POC' },
-		{ id: '2', label: 'Timeline' },
-		{ id: '3', label: 'UTR Number' },
-	];
-
 	return (
 		<>
 			<div
@@ -52,11 +53,9 @@ function InvoiceDetails({ item }) {
 				onClick={handleShow}
 				role="presentation"
 			>
-
 				<div>
 					<IcMOverview width={24} height={24} />
 				</div>
-
 			</div>
 			{showDetailsCard && (
 				<>
@@ -203,6 +202,9 @@ function InvoiceDetails({ item }) {
 															)}
 															{label === 'UTR Number' && (
 																<UtrNumber eventData={data} />
+															)}
+															{label === 'Cancellation Agreement' && (
+																<CancellationAgreement data={data} />
 															)}
 														</div>
 													</div>
