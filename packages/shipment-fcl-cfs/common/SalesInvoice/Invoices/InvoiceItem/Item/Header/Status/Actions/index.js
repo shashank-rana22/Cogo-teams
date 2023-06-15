@@ -53,7 +53,6 @@ function Actions({
 		disableAction = false;
 	}
 
-	// HARD CODING STARTS
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
 	const firstChar = invoice_serial_id[ZERO_INDEX];
 
@@ -63,7 +62,6 @@ function Actions({
 	if (showForOldShipments) {
 		disableMarkAsReviewed = isIRNGenerated && isInvoiceBefore20Aug2022;
 	}
-	// HARD CODING ENDS
 
 	return (
 		<div className={styles.container}>

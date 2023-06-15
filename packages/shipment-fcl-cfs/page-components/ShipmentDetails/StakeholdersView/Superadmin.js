@@ -34,7 +34,6 @@ function Superadmin({ get = {}, activeStakeholder = '' }) {
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
 		additional_methods: SERVICE_ADDITIONAL_METHODS,
-		activeStakeholder,
 	});
 
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });

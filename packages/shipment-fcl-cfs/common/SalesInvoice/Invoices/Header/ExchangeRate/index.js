@@ -31,9 +31,9 @@ function ExchangeRate({
 		loading,
 	} = useHelper({ invoiceCurrency, refetch: refetchAfterApiCall, shipment_id });
 
-	// if (Object.keys(differentCurrenciesHash || {}).length === ZERO_INDEX) {
-	// 	return null;
-	// }
+	if (Object.keys(differentCurrenciesHash || {}).length === ZERO_INDEX) {
+		return null;
+	}
 
 	const disableStateInvoices = invoiceData?.invoicing_parties?.every((item) => INVOICE_STATUS.includes(item?.status));
 	const disableBtn = disableAction || disableStateInvoices;

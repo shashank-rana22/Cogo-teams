@@ -1,16 +1,19 @@
 import { Tabs, TabPanel, Loader, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
+import { Tracking } from '@cogoport/ocean-modules';
+import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { useRouter } from 'next/router';
-import { useMemo, useState, useEffect } from 'react';
+import React, { useMemo, useState, useEffect } from 'react';
 
 import CancelDetails from '../../../common/CancelDetails';
 import DocumentHoldDetails from '../../../common/DocumentHoldDetails';
 import Documents from '../../../common/Documents';
 import Overview from '../../../common/Overview';
 import PocSop from '../../../common/PocSop';
+import SalesInvoice from '../../../common/SalesInvoice';
 import ShipmentHeader from '../../../common/ShipmentHeader';
 import ShipmentInfo from '../../../common/ShipmentInfo';
 import Tasks from '../../../common/Tasks';
@@ -20,19 +23,19 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 
 import styles from './styles.module.css';
 
-const SERVICES_ADDTIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
+
 const SHIPMENT_STATUS_CODE = 403;
 
-function BookingDesk({ get = {}, activeStakeholder = '' }) {
+function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
-
-	const [activeTab, setActiveTab] = useState('overview');
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
-		additional_methods: SERVICES_ADDTIONAL_METHODS,
+		additional_methods: services_additional_methods,
 	});
 
 	const { getTimeline = {} } = useGetTimeLine({ shipment_data });
@@ -70,8 +73,7 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 						className={styles.refresh}
 					>
 						<IcMRefresh />
-						&nbsp;
-						Refresh
+						&nbsp;Refresh
 					</Button>
 				</div>
 			</div>
@@ -89,6 +91,26 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
+	if (!shipment_data) {
+		return (
+			<div className={styles.shipment_not_found}>
+				<div className={styles.section}>
+					<h1 className={styles.error}>404</h1>
+
+					<div className={styles.page}>Ooops!!! The page you are looking for is not found</div>
+
+					<Button
+						onClick={() => router.reload()}
+						className={styles.refresh}
+					>
+						<IcMRefresh />
+						&nbsp;Refresh
+					</Button>
+				</div>
+			</div>
+		);
+	}
+
 	return (
 		<ShipmentDetailContext.Provider value={contextValues}>
 			<div>
@@ -98,7 +120,7 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 					<ShipmentChat />
 				</div>
 
-				<CancelDetails />
+				{shipment_data?.state === 'cancelled' ? <CancelDetails /> : null}
 
 				<DocumentHoldDetails />
 
@@ -125,6 +147,14 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 							<Tasks />
 						</TabPanel>
 
+						<TabPanel name="invoice_and_quotation" title="Sales Invoice">
+							<SalesInvoice />
+						</TabPanel>
+
+						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
+							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
+						</TabPanel>
+
 						<TabPanel name="documents" title="Documents">
 							<Documents />
 						</TabPanel>
@@ -136,6 +166,10 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 								pre_subject_text={`${shipment_data?.serial_id}`}
 							/>
 						</TabPanel>
+
+						<TabPanel name="tracking" title="Tracking">
+							<Tracking shipmentData={shipment_data} />
+						</TabPanel>
 					</Tabs>
 				</div>
 			</div>
@@ -143,4 +177,4 @@ function BookingDesk({ get = {}, activeStakeholder = '' }) {
 	);
 }
 
-export default BookingDesk;
+export default BookingAgent;
