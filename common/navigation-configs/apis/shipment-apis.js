@@ -1558,6 +1558,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'platform_config',
 	},
+	{
+		api          : 'get_shipment_eway_bill_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
