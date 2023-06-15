@@ -21,6 +21,12 @@ function EditPrice({
 	const { price } = item || {};
 
 	const [inputValue, setInputValue] = useState(price);
+
+	const onSubmit = () => {
+		setUpdatePricing((prev) => updatePrice({ prev, item, inputValue }));
+		setIsEditPrice(false);
+	};
+
 	if (isEditPrice) {
 		return (
 			<div className={styles.input_box_container}>
@@ -36,10 +42,7 @@ function EditPrice({
 					width={20}
 					height={20}
 					fill="#4bb543"
-					onClick={() => {
-						setUpdatePricing((prev) => updatePrice({ prev, item, inputValue }));
-						setIsEditPrice(false);
-					}}
+					onClick={() => onSubmit()}
 				/>
 				<IcMCross
 					className={styles.icon}

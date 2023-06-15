@@ -5,6 +5,11 @@ import { getCheck } from '../../../../../../utils/getCheck';
 
 import EditPrice from './EditPrice';
 
+const onCheck = ({ setUpdatePricing, setFrequencyPeriod, item }) => {
+	setUpdatePricing((prev) => getCheck({ prev, item }));
+	setFrequencyPeriod(item?.period);
+};
+
 const itemFunction = ({
 	isEditPrice,
 	setIsEditPrice,
@@ -35,10 +40,7 @@ const itemFunction = ({
 	renderCheck: (item, config) => (
 		<Checkbox
 			checked={item?.[config?.key]}
-			onChange={() => {
-				setUpdatePricing((prev) => getCheck({ prev, item }));
-				setFrequencyPeriod(item?.period);
-			}}
+			onChange={() => onCheck({ setUpdatePricing, setFrequencyPeriod, item })}
 		/>
 	),
 });

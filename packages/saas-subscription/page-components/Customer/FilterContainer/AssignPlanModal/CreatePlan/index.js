@@ -58,7 +58,7 @@ function CreatePlan({ closeModal }) {
 		<form>
 			<Modal.Body>
 				<div className={styles.container}>
-					{createPlanControl.map((element) => {
+					{(createPlanControl || []).map((element) => {
 						const { name, label, type } = element;
 						if (type === 'pricing') {
 							return (

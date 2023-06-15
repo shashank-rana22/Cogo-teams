@@ -31,7 +31,7 @@ function AssignPlanModal({ openPlanModal, setOpenPlanModal, refectUserList }) {
 			>
 				<TabPanel name="select" title="Select Existing Plan">
 					<Modal.Body>
-						{assignPlanControl.map((element) => {
+						{(assignPlanControl || []).map((element) => {
 							const { name, label, type } = element;
 							const Element = getFieldController(type);
 							return (
