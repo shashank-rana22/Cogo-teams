@@ -1,7 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import React, { useState } from 'react';
 
-import ExcludeList from './ExcludeList';
+import ExcludeListView from './ExcludeListView';
 import FormLayout from './FormLayout';
 import MailView from './MailView';
 import styles from './styles.module.css';
@@ -44,7 +44,7 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, formData, setFormD
 			formData={formData}
 			setFormData={setFormData}
 		/>,
-		2: <ExcludeList
+		2: <ExcludeListView
 			uncheckedRows={uncheckedRows}
 			setUncheckedRows={setUncheckedRows}
 		/>,

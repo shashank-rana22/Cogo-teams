@@ -2,9 +2,8 @@ import { Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { useState } from 'react';
 
-import StyledTable from '../../../../../AccountReceivables/commons/styledTable';
+import ExcludeList from '../../../commonComponents/ExcludeList';
 
-import { config } from './config';
 import { dummyData } from './dummyData';
 import styles from './styles.module.css';
 
@@ -13,7 +12,7 @@ interface Props {
 	setUncheckedRows?:Function
 }
 
-function ExcludeList({ uncheckedRows, setUncheckedRows }:Props) {
+function ExcludeListView({ uncheckedRows, setUncheckedRows }:Props) {
 	const [search, setSearch] = useState('');
 
 	return (
@@ -39,12 +38,11 @@ function ExcludeList({ uncheckedRows, setUncheckedRows }:Props) {
 				</div>
 			</div>
 			<div>
-				<StyledTable
-					data={dummyData.list}
-					columns={config({
-						uncheckedRows,
-						setUncheckedRows,
-					})}
+
+				<ExcludeList
+					list={dummyData?.list}
+					uncheckedRows={uncheckedRows}
+					setUncheckedRows={setUncheckedRows}
 				/>
 
 			</div>
@@ -52,4 +50,4 @@ function ExcludeList({ uncheckedRows, setUncheckedRows }:Props) {
 	);
 }
 
-export default ExcludeList;
+export default ExcludeListView;
