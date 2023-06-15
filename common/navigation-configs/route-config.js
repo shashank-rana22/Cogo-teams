@@ -22,6 +22,7 @@ import ingestion from './config/ingestion';
 import inventory_management from './config/inventory_management';
 import kamDesk from './config/kam-desk';
 import kamMonitoring from './config/kam-monitoring';
+import kraAssignment from './config/kra-assignment';
 import lastMileDesk from './config/last-mile-desk';
 import myIncident from './config/my-incident';
 import myProfile from './config/my-profile';
@@ -100,6 +101,7 @@ const routeConfig = {
 	...shipmentLtlFreight,
 	...ticketManagement,
 	...performanceManagementConfiguration,
+	...kraAssignment,
 	...rfqDashboard,
 };
 
