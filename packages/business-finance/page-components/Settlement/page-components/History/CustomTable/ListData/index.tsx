@@ -5,15 +5,16 @@ import styles from './styles.module.css';
 
 interface ListItem {
 	id: string;
-	jvNum: string;
-	category: string;
+	documentValue: string;
+	documentAmount: number;
+	settledAmount: number;
+	balanceAmount: number;
 	transactionDate: string;
+	lastEditedDate: string;
 	currency: string;
-	entityCode: string;
-	jvCodeNum: string;
-	exchangeRate: string;
-	ledCurrency: string;
-	status: string;
+	documentNo: string;
+	accountType: string;
+	accMode: string;
 }
 interface Props {
 	list: ListItem[];

@@ -1,89 +1,158 @@
-// import React from 'react';
+import { Button, Pill } from '@cogoport/components';
+import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
+import React from 'react';
 
-// import useGetJvLineItems from '../../../../../hooks/useGetJvLineItems';
-// import Loader from '../../../../../page-components/Loader';
-// import getFormattedAmount from '../../../../Utils/getFormattedAmount';
-// import ToolTipWrapper from '../ToolTipWrapper';
+import { INVOICE_STATUS, INVOICE_STATUS_MAPPING } from '../../../../../../Constants';
+import useHistorySingleDataList from '../../../../../../hooks/useHistorySingleDataList';
+import Loader from '../../../../../Loader';
 
-// import LineItemsHeader from './LineItemsHeader';
-// import styles from './styles.module.css';
+import LineItemsHeader from './LineItemsHeader';
+import styles from './styles.module.css';
 
-// interface ListItem {
-// 	id: string;
-// 	jvNum: string;
-// 	category: string;
-// 	transactionDate: string;
-// 	currency: string;
-// 	entityCode: string;
-// 	jvCodeNum: string;
-// 	exchangeRate: string;
-// 	ledCurrency: string;
-// 	status: string;
-// }
+interface ListItem {
+	id: string;
+	documentValue: string;
+	documentAmount: number;
+	settledAmount: number;
+	balanceAmount: number;
+	transactionDate: string;
+	lastEditedDate: string;
+	currency: string;
+	documentNo: string;
+	accountType: string;
+	accMode: string;
 
-// interface Props {
-// 	item: ListItem;
-// }
+}
 
-// const deafultVal = {
-// 	status          : '',
-// 	id              : '',
-// 	jvNum           : '',
-// 	category        : '',
-// 	transactionDate : '',
-// 	currency        : '',
-// 	entityCode      : '',
-// 	jvCodeNum       : '',
-// 	exchangeRate    : '',
-// 	ledCurrency     : '',
-// };
+interface Props {
+	item: ListItem;
+}
 
-// function Details({ item = deafultVal }: Props) {
-// 	const { data: list = [], loading } = useGetJvLineItems({ parentJVId: item?.id });
-// 	const listTotal = list?.length;
+const DEFAULT_VALUE = {
+	id              : '',
+	documentValue   : '',
+	documentAmount  : 0,
+	settledAmount   : 0,
+	balanceAmount   : 0,
+	transactionDate : '',
+	lastEditedDate  : '',
+	currency        : '',
+	documentNo      : '',
+	accountType     : '',
+};
 
-// 	if (loading) {
-// 		return <Loader />;
-// 	}
+function Details({ item = DEFAULT_VALUE }: Props) {
+	const { documentNo = '', accountType = '' } = item || {};
 
-// 	return (
-// 		<div className={styles.details}>
-// 			<div className={styles.line} />
-// 			<div className={styles.table}>
-// 				<LineItemsHeader />
-// 				{list.map((singleitem, index) => (
-// 					<div
-// 						className={`${styles.col} ${listTotal - 1 === index ? styles.islast : ''}`}
-// 						key={singleitem?.id}
-// 					>
-// 						<div className={styles.entity}>{singleitem?.entityCode}</div>
-// 						<div className={styles.jvmode}>{singleitem?.accMode || 'N/A'}</div>
-// 						<div className={styles.businesss}>
-// 							<ToolTipWrapper text={singleitem?.tradePartyName || '--'} maxlength={30} />
-// 						</div>
-// 						<div className={`${styles.type} ${singleitem?.type === 'DEBIT'
-// 							? styles.debit : styles.credit}`}
-// 						>
-// 							{singleitem?.type || '--'}
-// 						</div>
-// 						<div className={styles.glcode}>{singleitem?.glCode || '--'}</div>
-// 						<div className={styles.legamount}>
-// 							{getFormattedAmount({
-// 								amount   : (singleitem?.ledAmount || 0),
-// 								currency : singleitem?.ledCurrency,
-// 							})}
-// 						</div>
-// 						<div className={styles.amount}>
-// 							{getFormattedAmount({
-// 								amount   : (singleitem?.amount || 0),
-// 								currency : singleitem?.currency,
-// 							})}
-// 						</div>
-// 					</div>
-// 				))}
-// 			</div>
-// 		</div>
-// 	);
-// }
+	const {
+		data,
+		globalFilters,
+		setGlobalFilters,
+		getHistoryChild,
+		loading,
+	} = useHistorySingleDataList(documentNo, accountType);
 
-// export default Details;
+	const { list = [] } = data || {};
+
+	const listTotal = list?.length;
+
+	if (loading) {
+		return <Loader />;
+	}
+
+	return (
+		<div className={styles.details}>
+			<div className={styles.line} />
+			<div className={styles.actions_container}>
+				{' '}
+
+				<Button size="sm">
+					Edit
+				</Button>
+				<Button size="sm">
+					Delete
+				</Button>
+
+				<Button size="sm">
+					Post to SAGE
+				</Button>
+
+			</div>
+			<div className={styles.table}>
+				<LineItemsHeader />
+				{list.map((singleitem, index) => (
+					<div
+						className={`${styles.col} ${listTotal - 1 === index ? styles.islast : ''}`}
+						key={singleitem?.id}
+					>
+						<div className={styles.doc_number}>{singleitem?.documentValue}</div>
+						<div className={styles.sid}>{singleitem?.sid || '-'}</div>
+						<div className={styles.doc_amount}>
+							{
+                                getFormattedPrice(singleitem?.documentAmount, singleitem?.currency) || '-'
+                            }
+						</div>
+						<div className={styles.settled_amount}>
+							{ getFormattedPrice(
+								singleitem?.settledAmount,
+								singleitem?.currency,
+							) || '-'}
+						</div>
+						<div className={styles.tds}>
+							{ getFormattedPrice(
+								singleitem?.tds,
+								singleitem?.currency,
+							) || '-'}
+						</div>
+						<div className={styles.nostro}>
+
+							{ getFormattedPrice(
+								singleitem?.nostro,
+								singleitem?.currency,
+							) || '-'}
+						</div>
+						<div className={styles.current_balance}>
+
+							{getFormattedPrice(
+								singleitem?.currentBalance,
+								singleitem?.currency,
+							) || '-'}
+						</div>
+						<div className={styles.doc_date}>
+							{singleitem?.transactionDate
+								? formatDate({
+									date       : singleitem?.transactionDate,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMMM yyyy'],
+									formatType : 'date',
+								})
+								: '--'}
+						</div>
+						<div className={styles.status}>
+							<Pill size="sm" color={INVOICE_STATUS[singleitem?.status]}>
+								{startCase(singleitem?.status)}
+							</Pill>
+						</div>
+						<div className={styles.settlemet_status}>
+							<Pill size="sm" color={INVOICE_STATUS_MAPPING[singleitem?.settlementStatus]}>
+								{startCase(singleitem?.settlementStatus)}
+							</Pill>
+						</div>
+						<div className={styles.ribbon_render}>
+							<div
+								className={styles.ribbon}
+								style={{ background: singleitem?.accMode === 'AP' ? '#ee3425' : '#f68b21' }}
+							>
+								{singleitem?.accMode}
+							</div>
+						</div>
+					</div>
+				))}
+			</div>
+		</div>
+	);
+}
+
+export default Details;
