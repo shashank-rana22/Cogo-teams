@@ -13,19 +13,22 @@ export default function getBlDoPayload({ stateProps = {} }) {
 
 	const payload = payloadConfig[stateProps.inner_tab];
 
-	const { filters: commonFilters, ready_to_collect_filters, ...commonRestPayload } = payload.common;
+	const {
+		filters: commonFilters,
+		ready_to_collect_filters, all_status_filter, ready_to_release_filter, ...commonRestPayload
+	} = payload.common;
 
 	const {
 		filters: shipmentTypeFilters, ...shipmentTypePayload
 	} = payload[stateProps.shipment_type][stateProps.trade_type];
 
-	const { ready_to_release_filter, ...bldoPayload } = payload[stateProps.activeTab];
+	const { ...bldoPayload } = payload[stateProps.activeTab] || {};
 
 	const filters = {
 		...commonFilters,
 		...shipmentTypeFilters,
 		...(ready_to_collect ? ready_to_collect_filters : {}),
-		...(ready_to_release ? ready_to_release_filter : {}),
+		...(ready_to_release ? ready_to_release_filter : all_status_filter),
 		trade_type : trade_type.length ? trade_type : undefined,
 		q          : q.length ? q : undefined,
 	};
