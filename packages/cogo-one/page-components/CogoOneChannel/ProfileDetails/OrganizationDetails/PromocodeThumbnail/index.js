@@ -9,7 +9,7 @@ import { SERVICE } from '../../../../../constants';
 import styles from './styles.module.css';
 import TermsAndConditions from './TermsAndConditions';
 
-const ZERO = 0;
+const FIRST_ITEM = 0;
 const DEFAULT_IMAGE = GLOBAL_CONSTANTS.image_url.promocode_thumbnail;
 
 function PromocodeThumbnail({ list = [] }) {
@@ -41,22 +41,22 @@ function PromocodeThumbnail({ list = [] }) {
 
 						<div className={styles.promocode_description}>
 							<div className={styles.promodiscount}>
-								{promotion_discounts?.[ZERO]?.unit !== 'percentage'
-						|| promotion_discounts?.[ZERO]?.unit !== 'by_unit_percentage'
+								{promotion_discounts?.[FIRST_ITEM]?.unit !== 'percentage'
+						|| promotion_discounts?.[FIRST_ITEM]?.unit !== 'by_unit_percentage'
 									? `${formatAmount({
-										amount   :	promotion_discounts?.[ZERO]?.value || ZERO,
-										currency :	promotion_discounts?.[ZERO]?.amount_currency
+										amount   :	promotion_discounts?.[FIRST_ITEM]?.value || FIRST_ITEM,
+										currency :	promotion_discounts?.[FIRST_ITEM]?.amount_currency
 										|| GLOBAL_CONSTANTS.currency_code.INR,
 										options: {
 											currencyDisplay : 'code',
 											style           : 'currency',
 										},
 									})}`
-									: `${promotion_discounts?.[ZERO]?.value} %`}
+									: `${promotion_discounts?.[FIRST_ITEM]?.value} %`}
 								{' '}
 								Off On
 								{' '}
-								{SERVICE[promotion_discounts?.[ZERO]?.service_type
+								{SERVICE[promotion_discounts?.[FIRST_ITEM]?.service_type
 								]}
 							</div>
 
@@ -80,7 +80,7 @@ function PromocodeThumbnail({ list = [] }) {
 						<div className={styles.holes_lower} />
 						<div className={styles.promo_code}>
 							<div className={styles.promocode_name}>
-								{codes?.[ZERO]?.promocode}
+								{codes?.[FIRST_ITEM]?.promocode}
 							</div>
 						</div>
 					</div>
