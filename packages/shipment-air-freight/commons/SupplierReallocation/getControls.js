@@ -1,6 +1,5 @@
 import { isEmpty } from '@cogoport/utils';
 
-const SPLIT_SERVICE_INDEX = 2;
 const SPLICE_FIRST_PARAMETER = 0;
 const SPLICE_SECOND_PARAMETER = 1;
 
@@ -32,7 +31,8 @@ export default function getControls({
 				filters: {
 					account_type : 'service_provider',
 					kyc_status   : 'verified',
-					service      : (service_type || '').split('_', SPLIT_SERVICE_INDEX).join('_'),
+					status       : 'active',
+					service      : shipment_type,
 				},
 			},
 			size  : 'sm',

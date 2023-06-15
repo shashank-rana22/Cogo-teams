@@ -37,7 +37,7 @@ function Item({
 	ACTION_BUTTONS[ASSIGN_AT_ZERO_INDEX].show = status?.status === 'approved';
 	ACTION_BUTTONS[ASSIGN_AT_FIRST_INDEX].show = SERVICE_CANCEL_STATE.includes(item?.state);
 
-	const serviceData = services?.filter((service) => service?.service_type === item?.name);
+	const serviceData = services?.filter((service) => service?.service_name === item?.name);
 
 	const price = isSeller ? item?.buy_price : item?.price;
 
