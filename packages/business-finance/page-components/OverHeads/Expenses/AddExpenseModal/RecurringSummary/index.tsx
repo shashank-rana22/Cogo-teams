@@ -1,11 +1,11 @@
 /* eslint-disable react/jsx-closing-tag-location */
 import { Placeholder } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../commons/utils/formatDate';
-import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 import { SummaryInterface } from '../../../commons/Interfaces';
 import { DURATION_MAPPING } from '../../../constants/DURATION_MAPPING';
 import { officeLocations } from '../../../utils/officeLocations';
@@ -15,48 +15,48 @@ import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 import styles from './styles.module.css';
 
 interface SummaryElemet {
-	title?:string,
-	value?:any,
+	title?: string,
+	value?: any,
 }
 interface Entity {
-	entity_code?:number | string,
+	entity_code?: number | string,
 }
 
 interface Data {
 	vendorName?: string,
 	transactionDate?: Date,
-	paymentMode?:string,
-	uploadedInvoice?:string,
-	periodOfTransaction?:string,
-	expenseCategory?:string,
-	expenseSubCategory?:string,
-	branch?:any,
-	entityObject?:Entity,
-	invoiceDate?:Date,
-	stakeholderName?:string,
-	invoiceCurrency?:string,
-	vendorID?:number | string,
+	paymentMode?: string,
+	uploadedInvoice?: string,
+	periodOfTransaction?: string,
+	expenseCategory?: string,
+	expenseSubCategory?: string,
+	branch?: any,
+	entityObject?: Entity,
+	invoiceDate?: Date,
+	stakeholderName?: string,
+	invoiceCurrency?: string,
+	vendorID?: number | string,
 	payableAmount?: number,
 	startDate?: Date,
 	endDate?: Date,
 	repeatEvery?: string,
-	agreementNumber?:number,
-	currency?:string,
+	agreementNumber?: number,
+	currency?: string,
 }
 
 interface Props {
 	expenseData?: Data,
-	setExpenseData?:(p:any)=>void,
-	rowData?:SummaryInterface,
+	setExpenseData?: (p: any) => void,
+	rowData?: SummaryInterface,
 }
 
-function Summary({ expenseData, setExpenseData, rowData }:Props) {
+function Summary({ expenseData, setExpenseData, rowData }: Props) {
 	const { entityObject, branch } = expenseData || {};
-	const { entity_code:entityCode } = entityObject || {};
-	const { name:branchName } = branch || {};
+	const { entity_code: entityCode } = entityObject || {};
+	const { name: branchName } = branch || {};
 
 	const {
-		category, subCategory:expenseSubCategory, startDate, endDate,
+		category, subCategory: expenseSubCategory, startDate, endDate,
 		repeatFrequency, businessName, agreementNumber, branchId,
 	} = rowData || {};
 
@@ -65,10 +65,10 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 		stakeholderName,
 		vendorID,
 		payableAmount,
-		invoiceCurrency:currency,
+		invoiceCurrency: currency,
 	} = expenseData || {};
 
-	const { stakeholdersData, loading:stakeholdersLoading } = useGetStakeholders(category);
+	const { stakeholdersData, loading: stakeholdersLoading } = useGetStakeholders(category);
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
@@ -77,7 +77,7 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 	useEffect(() => {
 		if (stakeholdersData) {
 			const { userEmail, userId, userName } = stakeholdersData || {};
-			setExpenseData((prev:object) => ({
+			setExpenseData((prev: object) => ({
 				...prev,
 				stakeholderEmail : userEmail,
 				stakeholderId    : userId,
@@ -88,7 +88,7 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 
 	useEffect(() => {
 		if (tradePartyData?.length > 0) {
-			setExpenseData((prev:object) => ({
+			setExpenseData((prev: object) => ({
 				...prev,
 				tradeParty: tradePartyData?.[0],
 			}));
@@ -98,9 +98,9 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 	useEffect(() => {
 		if (branchId) {
 			// eslint-disable-next-line max-len
-			const branchData = officeLocations?.filter((location:any) => JSON.parse(location?.value)?.branchId === branchId);
+			const branchData = officeLocations?.filter((location: any) => JSON.parse(location?.value)?.branchId === branchId);
 			if (branchData?.length > 0) {
-				setExpenseData((p:object) => ({ ...p, branch: JSON.parse(branchData[0]?.value || '{}') }));
+				setExpenseData((p: object) => ({ ...p, branch: JSON.parse(branchData[0]?.value || '{}') }));
 			}
 		}
 	}, [branchId, setExpenseData]);
@@ -137,7 +137,14 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 			title : 'Payable Amount',
 			value : (currency && payableAmount) ? (
 				<div>
-					{getFormattedPrice(payableAmount, currency)}
+					{formatAmount({
+						amount  : payableAmount as any,
+						currency,
+						options : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 				</div>
 			) : '-',
 		},
@@ -190,9 +197,9 @@ function Summary({ expenseData, setExpenseData, rowData }:Props) {
 		},
 	];
 
-	const renderSummary = (summary:SummaryElemet[]) => (
+	const renderSummary = (summary: SummaryElemet[]) => (
 		<div style={{ display: 'flex' }}>
-			{summary?.map((item:SummaryElemet) => (
+			{summary?.map((item: SummaryElemet) => (
 				<div key={item.title} className={styles.section}>
 					<div className={styles.title}>{item.title}</div>
 					<div className={styles.value}>{item.value}</div>
