@@ -5,6 +5,7 @@ import { getFieldController } from '../../../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
+const START_VALUE = 1;
 const getKey = ({ name, index, getValues }) => {
 	if (name === 'addonName') {
 		return getValues(`addons[${index}]`);
@@ -49,14 +50,14 @@ function Item({
 					</div>
 				);
 			})}
-			{fields.length > 1 && (
+			{fields.length > START_VALUE && (
 				<div className={styles.icon_container} role="presentation">
 					<IcMDelete
 						fill="#e63946"
 						className={styles.delete_icon}
 						width={20}
 						height={20}
-						onClick={() => remove(index, 1)}
+						onClick={() => remove(index, START_VALUE)}
 					/>
 				</div>
 			)}
