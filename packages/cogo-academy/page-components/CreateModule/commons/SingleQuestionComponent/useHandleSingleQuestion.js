@@ -77,54 +77,6 @@ function useHandleSingleQuestion({
 					return updatedObj;
 				});
 			});
-
-			// setEditorValue((prev) => {
-			// 	const updatedObj = { ...prev };
-			// 	const keys = Object.keys(updatedObj);
-
-			// 	delete updatedObj[`case_questions_${index}_explanation`];
-
-			// 	for (let i = index + 1; i < keys.length; i += 1) {
-			// 		const currentKey = keys[i];
-			// 		const newKey = `case_questions_${i - 1}_explanation`;
-			// 		updatedObj[newKey] = updatedObj[currentKey];
-			// 		delete updatedObj[currentKey];
-			// 	}
-
-			// 	return updatedObj;
-			// });
-
-			// setQuestionEditorValue((prev) => {
-			// 	const updatedObj = { ...prev };
-			// 	const keys = Object.keys(updatedObj);
-
-			// 	delete updatedObj[`case_questions_${index}`];
-
-			// 	for (let i = index + 1; i < keys.length; i += 1) {
-			// 		const currentKey = keys[i];
-			// 		const newKey = `case_questions_${i - 1}`;
-			// 		updatedObj[newKey] = updatedObj[currentKey];
-			// 		delete updatedObj[currentKey];
-			// 	}
-
-			// 	return updatedObj;
-			// });
-
-			// setQuestionError((prev) => {
-			// 	const updatedObj = { ...prev };
-			// 	const keys = Object.keys(updatedObj);
-
-			// 	delete updatedObj[`case_questions_${index}`];
-
-			// 	for (let i = index + 1; i < keys.length; i += 1) {
-			// 		const currentKey = keys[i];
-			// 		const newKey = `case_questions_${i - 1}`;
-			// 		updatedObj[newKey] = updatedObj[currentKey];
-			// 		delete updatedObj[currentKey];
-			// 	}
-
-			// 	return updatedObj;
-			// });
 		} else {
 			updateCaseStudyQuestion({
 				action              : 'delete',

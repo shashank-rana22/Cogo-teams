@@ -1,5 +1,4 @@
-import { Button } from '@cogoport/components';
-import { TextAreaController, ChipsController } from '@cogoport/forms';
+import { ChipsController } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 
 import getElementController from '../../../../../../../configs/getElementController';
@@ -102,11 +101,6 @@ function FormComponent({
 					</div>
 
 					<div style={{ marginBottom: '16px' }}>
-
-						{/* <TextAreaController
-							control={control}
-							{...((controls || []).find((item) => item.name === 'question_text'))}
-						/> */}
 						<div>
 							<RichTextEditor
 								value={caseStudyQuestionEditorValue}

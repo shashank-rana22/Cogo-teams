@@ -89,3 +89,19 @@
 	color: #221f20;
 	text-decoration-line: underline;
 }
+
+.question_text {
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+	
+	img{
+		max-width: 80%;
+	}
+
+	@media (max-width: 768px) {
+		img{
+			max-width: 100%;
+		}
+	}
+}

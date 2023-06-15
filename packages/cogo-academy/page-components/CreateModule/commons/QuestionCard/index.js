@@ -71,7 +71,8 @@ function QuestionCard({
 						{index + 1}
 					</div>
 					<div style={{ display: 'flex', justifyContent: 'space-between', width: '100%' }}>
-						<div className={styles.question_text}>{question}</div>
+						<div className={styles.question_text} dangerouslySetInnerHTML={{ __html: question }} />
+						{/* <div className={styles.question_text}>{question}</div> */}
 						{question_type === 'case_study' ? (
 
 							<Popover placement="bottom" trigger="mouseenter" caret={false} render={case_study}>
