@@ -9,9 +9,7 @@ import HomePage from '../CreateModule/components/HomePage';
 import Header from './Header';
 import QuestionsList from './QuestionsList';
 
-const ZERO_INDEX = 0;
-
-const KEYS_MAPPING = ['manage_faq', 'test_module', 'course_module'];
+const DEFAULT_INDEX = 0;
 
 const TABS_MAPPING = {
 	manage_faq: {
@@ -32,7 +30,7 @@ const TABS_MAPPING = {
 };
 
 const getTabPermission = ({ navigation, apiName, tabName }) => {
-	const isAllowed = navigation?.[apiName][ZERO_INDEX]?.type !== 'none';
+	const isAllowed = navigation?.[apiName][DEFAULT_INDEX]?.type !== 'none';
 	return { tabName, isAllowed };
 };
 
@@ -74,7 +72,7 @@ function ControlCenter() {
 		course_module : { courseActiveTab },
 	};
 
-	const COMPONENT_MAPPING = KEYS_MAPPING.map((element, index) => (
+	const COMPONENT_MAPPING = Object.keys(TABS_MAPPING).map((element, index) => (
 		{
 			name      : element,
 			isAllowed : tabPermissions[index]?.isAllowed,
