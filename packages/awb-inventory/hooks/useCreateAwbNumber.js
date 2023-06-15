@@ -1,7 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
-import CONSTANTS from '../configurations/constants';
+import CONSTANTS from '../constants/constants';
 
 const { START_PAGE } = CONSTANTS;
 

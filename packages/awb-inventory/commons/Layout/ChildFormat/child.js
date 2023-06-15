@@ -1,14 +1,13 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
-import CONSTANTS from '../../../configurations/constants';
+import CONSTANTS from '../../../constants/constants';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
 
 const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
-const ZERO_SPAN = 0;
 const FIRST_INDEX = 1;
 
 function Child({
@@ -29,17 +28,13 @@ function Child({
 	controls.forEach((fields) => {
 		span += fields.span || TOTAL_SPAN;
 		if (span === TOTAL_SPAN) {
-			ROW_WISE_FIELDS.push(fields);
-			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
-			ROW_WISE_FIELDS = [];
-			span = ZERO_SPAN;
-		} else if (span < TOTAL_SPAN) {
-			ROW_WISE_FIELDS.push(fields);
-		} else {
 			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 			ROW_WISE_FIELDS = [];
 			ROW_WISE_FIELDS.push(fields);
 			span = fields.span;
+		} else {
+			ROW_WISE_FIELDS.push(fields);
+			span += fields.span;
 		}
 	});
 	if (ROW_WISE_FIELDS.length) {

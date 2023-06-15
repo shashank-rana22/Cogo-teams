@@ -2,7 +2,7 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
-import CONSTANTS from '../configurations/constants';
+import CONSTANTS from '../constants/constants';
 
 const STATUS_MAPPING = {
 	awb_number        : 'available',

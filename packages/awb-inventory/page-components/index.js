@@ -3,8 +3,8 @@ import { IcMSearchlight } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import React, { useState, useEffect } from 'react';
 
-import CONSTANTS from '../configurations/constants';
 import tabs from '../configurations/tabs';
+import CONSTANTS from '../constants/constants';
 import useGetAwbList from '../hooks/useGetAwbList';
 
 import AddAwbNumber from './AddAwbNumber';

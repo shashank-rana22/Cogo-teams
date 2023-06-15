@@ -2,7 +2,7 @@ import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import React, { useEffect } from 'react';
 
-import CONSTANTS from '../../../configurations/constants';
+import CONSTANTS from '../../../constants/constants';
 
 import Child from './child';
 import styles from './styles.module.css';

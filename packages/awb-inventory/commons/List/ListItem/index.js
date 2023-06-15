@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CONSTANTS from '../../../configurations/constants';
+import CONSTANTS from '../../../constants/constants';
 
 import getValue from './getValue';
 import styles from './styles.module.css';

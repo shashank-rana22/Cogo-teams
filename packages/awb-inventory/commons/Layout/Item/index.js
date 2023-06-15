@@ -1,6 +1,6 @@
 import React from 'react';
 
-import CONSTANTS from '../../../configurations/constants';
+import CONSTANTS from '../../../constants/constants';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 

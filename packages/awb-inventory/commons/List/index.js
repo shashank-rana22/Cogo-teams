@@ -3,7 +3,7 @@ import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, useCallback } from 'react';
 import InfiniteScroll from 'react-infinite-scroller';
 
-import CONSTANTS from '../../configurations/constants';
+import CONSTANTS from '../../constants/constants';
 
 import EmptyState from './EmptyState';
 import ListHeader from './ListHeader';
