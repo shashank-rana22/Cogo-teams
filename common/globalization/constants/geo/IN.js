@@ -15,7 +15,7 @@ export default {
 		amount: {
 			scope: {
 				admin: {
-					locale: 'en-US',
+					locale: 'en-IN',
 				},
 			},
 			options: {},
@@ -473,6 +473,9 @@ export default {
 		navigations: {
 			onboard_vendor: {
 				validate_registration: true,
+			},
+			cogo_one: {
+				has_voice_call_access: true,
 			},
 		},
 	},

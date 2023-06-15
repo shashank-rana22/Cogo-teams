@@ -6586,6 +6586,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'create_outbound_voice_call',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -7187,6 +7192,18 @@ const partner = {
 		},
 		{
 			api         : 'get_pnl_statement_salary',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_job_closure_details',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_shipment_statistics',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_monthly_trends',
 			access_type : 'private',
 		},
 		{
@@ -8738,6 +8755,12 @@ const partner = {
 		},
 		{
 			api         : 'put_payments_accounts',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
+			api         : 'post_payments_accounts_bulk_post_to_sage',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
