@@ -1,6 +1,14 @@
-import payloadConfig from '../configs/payloadConfig.json';
+// import payloadConfig from '../configs/payloadConfig.json';
+import blPayloadConfig from '../configs/blPayloadConfig.json';
+import doPayloadConfig from '../configs/doPayloadConfig.json';
 
 export default function getBlDoPayload({ stateProps = {} }) {
+	let payloadConfig = {};
+	if (stateProps.activeTab === 'bl') {
+		payloadConfig = blPayloadConfig;
+	} else if (stateProps.activeTab === 'do') {
+		payloadConfig = doPayloadConfig;
+	}
 	const { trade_type, page, q, ready_to_collect, ready_to_release } = stateProps;
 
 	const payload = payloadConfig[stateProps.inner_tab];
