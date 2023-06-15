@@ -17,7 +17,7 @@ function VendorsList({ activeEntity }:ItemProps) {
 	const [showVendorsList, setShowVendorsList] = useState(undefined);
 
 	const { data, loading } = useGetBySupplier({ showVendorsList, activeEntity });
-	const { list = [] } = data || {};
+	const { list = [], currency } = data || {};
 
 	return (
 		<div className={styles.container}>
@@ -54,7 +54,7 @@ function VendorsList({ activeEntity }:ItemProps) {
 					/>
 				</div>
 			</div>
-			<StyledTable data={list} columns={VendorsColumn} loading={loading} />
+			<StyledTable data={list} columns={VendorsColumn(currency)} loading={loading} />
 		</div>
 	);
 }
