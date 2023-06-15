@@ -3,6 +3,10 @@ import { useSelector } from '@cogoport/store';
 
 const geo = getGeoConstants();
 
+const FIRST_INDEX = 0;
+
+const NIL_LENGTH = 0;
+
 export const useStakeholderCheck = () => {
 	const { role_ids } = useSelector(({ profile }) => ({
 		role_ids: profile?.partner?.user_role_ids,
@@ -25,8 +29,8 @@ export const useStakeholderCheck = () => {
 	const matching_role_ids = role_ids_map
 		.filter(({ role_ids: ids }) => (role_ids || []).some((item) => ids.includes(item)));
 
-	const activeRole = matching_role_ids?.length > 0
-		? matching_role_ids?.[0].role
+	const activeRole = matching_role_ids?.length > NIL_LENGTH
+		? matching_role_ids?.[FIRST_INDEX].role
 		: 'kam';
 
 	return { role: activeRole };
