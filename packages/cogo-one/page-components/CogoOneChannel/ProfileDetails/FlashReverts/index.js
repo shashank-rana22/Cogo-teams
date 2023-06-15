@@ -1,11 +1,13 @@
 import { Pagination, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Image } from '@cogoport/next';
+import { useState } from 'react';
 
 import REVERT_RATE_FILTERS from '../../../../constants/revertRatesFIlterMapping';
 import useListShipmentFlashBookingRates from '../../../../hooks/useListShipmentFlashBookingRates';
 
 import Card from './Card';
+import RevertModal from './RevertModal';
 import styles from './styles.module.css';
 
 const INITIAL_PAGE = 1;
@@ -17,6 +19,8 @@ const loader = (
 );
 
 export default function FlashReverts({ orgId = '', accountType = '' }) {
+	const [modalState, setModalState] = useState({ isOpen: true, data: {} });
+
 	const {
 		data,
 		loading,
@@ -46,7 +50,16 @@ export default function FlashReverts({ orgId = '', accountType = '' }) {
 					</div>
 				))}
 			</div>
-			<div className={styles.list}>{loading ? loader : <Card list={list} activeTab={activeTab} />}</div>
+			<div className={styles.list}>
+				{loading ? loader : (
+					<Card
+						list={list}
+						activeTab={activeTab}
+						setModalState={setModalState}
+					/>
+				)}
+
+			</div>
 			{!loading && (
 				<Pagination
 					type="compact"
@@ -57,6 +70,7 @@ export default function FlashReverts({ orgId = '', accountType = '' }) {
 					onPageChange={setPagination}
 				/>
 			)}
+			{modalState?.isOpen && <RevertModal modalState={modalState} setModalState={setModalState} />}
 		</div>
 	);
 }

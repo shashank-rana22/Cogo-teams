@@ -1,0 +1,20 @@
+.container {
+	padding: 10px;
+}
+
+.each_element {
+	width: 100%;
+	margin: 10px 0;
+}
+
+.label_styles {
+	margin-bottom: 5px;
+	color: #4f4f4f;
+}
+
+.error_text {
+	height: 10px;
+	margin-top: 2px;
+	color: #ee3425;
+	text-align: center;
+}
