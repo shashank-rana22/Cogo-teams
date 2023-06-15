@@ -48,7 +48,7 @@ const format = ({ locale, amount, options, currency }) => new Intl.NumberFormat(
  *  @property {String}            [currency]
  *  @property {Object}            [options]
  */
-const formatAmount = ({ amount = '', currency, options = {} }) => {
+const formatAmount = ({ amount = '', currency = '', options = {} }) => {
 	if (!isAmountValid({ amount })) {
 		return null;
 	}
