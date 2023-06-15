@@ -6,7 +6,8 @@
 	width: 132px;
 	height: 132px;
 	margin: 8px 52px;
-
+	
+	
 	.center_info {
 		position: absolute;
 		top: 50%;
@@ -16,4 +17,21 @@
 		text-align: center;
 		transform: translate(-50%, -50%);
 	}
+	
+	svg{
+				animation-name: rotate;
+				animation-duration: 1s;
+				animation-iteration-count: 1;
+	}
 }
+
+
+@keyframes rotate {
+	0% {
+	  transform: rotate(0);
+	}
+	100% {
+	  transform: rotate(360deg);
+	}
+  }
+
