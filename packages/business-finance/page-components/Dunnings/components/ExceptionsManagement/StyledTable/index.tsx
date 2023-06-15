@@ -11,7 +11,8 @@ function StyledTable({
 	id, className, columns, data, setExceptionFilter, exceptionFilter, subTabsValue, searchValue,
 	showCycleExceptions,
 	setShowCycleExceptions,
-	setSearchValue, ...rest
+	setSearchValue,
+	...rest
 }:TableListProps) {
 	const { loading } = rest || {};
 

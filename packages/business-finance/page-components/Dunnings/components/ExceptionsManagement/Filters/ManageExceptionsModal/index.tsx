@@ -1,11 +1,9 @@
 import { Modal, Button, Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import React from 'react';
+import React, { useState } from 'react';
 
-import manageExceptionColumn from '../../../../configurations/manage-exception-table';
 import useManageExceptionList from '../../../../hooks/useManageExceptionList';
-
-import StyledTable from './StyledTable';
+import ExcludeList from '../../../commonComponents/ExcludeList';
 
 function ManageExceptionsModal({
 	showCycleExceptions,
@@ -18,22 +16,24 @@ function ManageExceptionsModal({
 	const onClose = () => {
 		setShowCycleExceptions((pv) => !pv);
 	};
+	const [uncheckedRows, setUncheckedRows] = useState([]);
+	const [manageExceptionFilter, setManageExceptionFilter] = useState({});
 	const {
 		manageExceptionData,
 		manageExceptionLoading,
 		searchValue,
 		setSearchValue,
-	} = useManageExceptionList();
-	const rest = { loading: manageExceptionLoading };
+	} = useManageExceptionList({ manageExceptionFilter });
 
 	const onSubmit = (data) => {
 		getUploadList(data);
 	};
 	return (
-		<Modal size="lg" show={showCycleExceptions} onClose={onClose} placement="bottom">
+		<Modal size="lg" show={showCycleExceptions} onClose={onClose} placement="center">
 			<Modal.Header title="Manage Exceptions" />
 			<Modal.Body>
-				<div style={{ display: 'flex', justifyContent: 'space-between' }}>
+
+				<div style={{ display: 'flex', justifyContent: 'space-between', margin: '0 20px' }}>
 					<Button
 						size="md"
 						themeType="secondary"
@@ -57,19 +57,31 @@ function ManageExceptionsModal({
 						/>
 					</div>
 				</div>
-				<StyledTable
-					data={manageExceptionData?.list || []}
-					columns={manageExceptionColumn()}
-					{...rest}
+
+				<ExcludeList
+					data={manageExceptionData || {}}
+					uncheckedRows={uncheckedRows}
+					setUncheckedRows={setUncheckedRows}
+					loading={manageExceptionLoading}
+					setFilters={setManageExceptionFilter}
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				<div style={{ margin: '6px 20px' }}>
-					2 Customers unselected and to be removed from this cycle upon submission
-				</div>
+				{ uncheckedRows?.length > 0 ? (
+					<div style={{ margin: '6px 20px' }}>
+						{uncheckedRows?.length}
+						{' '}
+						Customers unselected and to be removed from this cycle upon submission
+					</div>
+				) : (
+					<div style={{ margin: '6px 20px' }}>
+						Exclude customers you do not want in this cycle by unselecting them.
+					</div>
+				)}
 				<Button
 				// onClick={onClose}
 					onClick={handleSubmit(onSubmit)}
+					disabled={uploadListLoading}
 				>
 					Save & Update List
 

@@ -1,9 +1,12 @@
-import { Tooltip } from '@cogoport/components';
+import { Tooltip, Toggle } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
+import { IcMDelete } from '@cogoport/icons-react';
+
+import GetSortingData from '../components/ExceptionsManagement/sorting';
 
 import styles from './styles.module.css';
 
-const masterExceptionColumn = () => [
+const masterExceptionColumn = ({ sort, setSort }) => [
 	{
 		Header   : 'Customer Name',
 		id       : 'name',
@@ -44,7 +47,7 @@ const masterExceptionColumn = () => [
 		),
 	},
 	{
-		Header   : 'Credit Days',
+		Header   : <GetSortingData sort={sort} setSort={setSort} headerName="Credit Days" />,
 		id       : 'creditDays',
 		accessor : (row) => (
 			<div className={styles.text}>
@@ -53,7 +56,7 @@ const masterExceptionColumn = () => [
 		),
 	},
 	{
-		Header   : 'Credit Amount',
+		Header   : <GetSortingData sort={sort} setSort={setSort} headerName="Credit Amount" />,
 		id       : 'creditAmount',
 		accessor : (row) => (
 			<div className={styles.text}>
@@ -70,7 +73,7 @@ const masterExceptionColumn = () => [
 		),
 	},
 	{
-		Header   : 'Total Due',
+		Header   : <GetSortingData sort={sort} setSort={setSort} headerName="Total Due" />,
 		id       : 'totalDueAmount',
 		accessor : (row) => (
 			<div className={styles.text}>
@@ -85,7 +88,24 @@ const masterExceptionColumn = () => [
 				})}
 			</div>
 		),
-
+	},
+	{
+		Header   : '',
+		id       : 'toggle',
+		accessor : () => (
+			<div>
+				<Toggle name="a1" size="md" showOnOff disabled={false} />
+			</div>
+		),
+	},
+	{
+		Header   : '',
+		id       : 'delete',
+		accessor : () => (
+			<div>
+				<IcMDelete width={24} height={24} color="#2C3E50" />
+			</div>
+		),
 	},
 ];
 

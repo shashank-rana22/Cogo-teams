@@ -9,51 +9,54 @@ import StyledTable from './StyledTable';
 import styles from './styles.module.css';
 
 function ExceptionsManagement() {
-	const [filters, setFilters] = useState({});
 	const [exceptionFilter, setExceptionFilter] = useState({});
 	const [showCycleExceptions, setShowCycleExceptions] = useState(false);
-	const { data, loading, searchValue, setSearchValue } = useMasterException({ exceptionFilter });
-
+	const [sort, setSort] = useState({});
+	const [subTabsValue, setSubTabsValue] = useState('masterExceptionList');
+	const {
+		data, loading, searchValue,
+		setSearchValue,
+		cycleWiseData,
+	} = useMasterException({ exceptionFilter, sort, subTabsValue });
 	const subTab = [
 		{
 			key   : 'masterExceptionList',
 			label : 'Master Exception List',
-			badge : '21',
 		},
 		{
 			key   : 'cycleWiseExceptionList',
 			label : 'Cycle Wise Exception List',
 		},
 	];
-	const [subTabsValue, setSubTabsValue] = useState('masterExceptionList');
+
 	const CYCLE_WISE_COLUMN = cycleWiseExceptionTable({ setShowCycleExceptions });
+	const MASTER_COLUMN = masterExceptionColumn({ sort, setSort });
 	const rest = { loading };
-	const { list, pageNo = 0, totalPages = 0, totalRecords } = data || {};
-	console.log(filters, 'filters');
+	const { list, pageNo = 0, totalRecords } = data || {};
+	const { list:cycleList, pageNo :cyclePageNo = 0, totalRecords:cycleTotalRecords } = cycleWiseData || {};
 
 	return (
 		<div>
 			<div className={styles.flex}>
-				{subTab.map((item) => (
+				{subTab?.map((item) => (
 					<div
 						key={item.key}
 						onClick={() => {
-							setFilters((p) => ({ ...p, pageIndex: 1 })); setSubTabsValue(item.key);
+							setExceptionFilter((p) => ({ ...p, pageIndex: 1 })); setSubTabsValue(item.key);
 						}}
 						role="presentation"
 					>
 						<div className={item.key === subTabsValue ? styles.sub_container_click : styles.sub_container}>
 							{item?.label}
-							<span>{item?.badge}</span>
+							<span>{subTabsValue === 'masterExceptionList' ? totalRecords : cycleTotalRecords}</span>
 						</div>
 					</div>
 				))}
 			</div>
 
 			<StyledTable
-				data={list || []}
-				columns={subTabsValue === 'masterExceptionList' ? masterExceptionColumn() : CYCLE_WISE_COLUMN}
-				{...rest}
+				data={subTabsValue === 'masterExceptionList' ? list || [] : cycleList || []}
+				columns={subTabsValue === 'masterExceptionList' ? MASTER_COLUMN : CYCLE_WISE_COLUMN}
 				exceptionFilter={exceptionFilter}
 				setExceptionFilter={setExceptionFilter}
 				subTabsValue={subTabsValue}
@@ -61,15 +64,16 @@ function ExceptionsManagement() {
 				setSearchValue={setSearchValue}
 				showCycleExceptions={showCycleExceptions}
 				setShowCycleExceptions={setShowCycleExceptions}
+				{...rest}
 			/>
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 				<Pagination
 					type="table"
-					currentPage={pageNo}
-					totalItems={totalRecords}
-					pageSize={totalPages}
+					currentPage={subTabsValue === 'masterExceptionList' ? pageNo : cyclePageNo}
+					totalItems={subTabsValue === 'masterExceptionList' ? totalRecords : cycleTotalRecords}
+					pageSize={10}
 					onPageChange={(pageValue: number) => {
-						setFilters((p) => ({ ...p, pageIndex: pageValue }));
+						setExceptionFilter((p) => ({ ...p, pageIndex: pageValue }));
 					}}
 				/>
 			</div>

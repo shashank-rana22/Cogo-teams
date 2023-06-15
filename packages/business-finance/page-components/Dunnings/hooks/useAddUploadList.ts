@@ -13,6 +13,7 @@ const useAddUploadList = ({ onClose, subTabsValue, setShowCycleExceptions }) => 
 		},
 		{ manual: true },
 	);
+
 	const PROFILE_ID = profile?.user?.id;
 	const getUploadList = useCallback((data, fileValue) => {
 		(async () => {
@@ -33,7 +34,7 @@ const useAddUploadList = ({ onClose, subTabsValue, setShowCycleExceptions }) => 
 				console.log(error);
 			}
 		})();
-	}, [trigger]);
+	}, [trigger, PROFILE_ID, onClose, setShowCycleExceptions, subTabsValue]);
 
 	return {
 

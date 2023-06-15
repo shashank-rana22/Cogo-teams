@@ -27,6 +27,7 @@ function Filters({
 	setSearchValue,
 }:Props) {
 	const [show, setShow] = useState(false);
+
 	const onClose = () => {
 		setShow((pv) => !pv);
 	};

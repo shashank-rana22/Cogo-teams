@@ -2,7 +2,7 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const useManageExceptionList = () => {
+const useManageExceptionList = ({ manageExceptionFilter }) => {
 	const [searchValue, setSearchValue] = useState<string>('');
 
 	const [{ data:manageExceptionData, loading:manageExceptionLoading }, trigger] = useRequestBf(

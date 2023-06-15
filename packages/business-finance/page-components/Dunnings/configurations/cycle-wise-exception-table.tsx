@@ -4,13 +4,13 @@ import React from 'react';
 const cycleWiseExceptionTable = ({ setShowCycleExceptions }) => [
 	{
 		Header   : 'Cycle Name',
-		id       : 'cycleName',
-		accessor : 'cycleName',
+		id       : 'name',
+		accessor : 'name',
 	},
 	{
 		Header   : 'Type',
-		id       : 'type',
-		accessor : 'type',
+		id       : 'cycleType',
+		accessor : 'cycleType',
 	},
 	{
 		Header   : 'Frequency',
@@ -19,13 +19,13 @@ const cycleWiseExceptionTable = ({ setShowCycleExceptions }) => [
 	},
 	{
 		Header   : 'Created On',
-		id       : 'createdOn',
-		accessor : 'createdOn',
+		id       : 'createdAt',
+		accessor : 'createdAt',
 	},
 	{
 		Header   : 'Last Edited On',
-		id       : 'lastEditedOn',
-		accessor : 'lastEditedOn',
+		id       : 'updatedAt',
+		accessor : 'updatedAt',
 	},
 	{
 		Header   : '',
