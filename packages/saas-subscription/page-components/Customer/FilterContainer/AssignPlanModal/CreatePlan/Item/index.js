@@ -5,7 +5,8 @@ import { getFieldController } from '../../../../../../utils/getFieldController';
 
 import styles from './styles.module.css';
 
-const START_VALUE = 1;
+const SHOW_DELETE_BUTTON = 1;
+
 const getKey = ({ name, index, getValues }) => {
 	if (name === 'addonName') {
 		return getValues(`addons[${index}]`);
@@ -17,7 +18,7 @@ function Item({
 	info = {},
 	controls = [],
 	control,
-	remove = () => {},
+	remove = () => { },
 	errors = {},
 	index,
 	fields = [],
@@ -37,7 +38,7 @@ function Item({
 						{errors?.[index]?.[field?.name] && (
 							<p className={styles.error}>
 								{errors?.[index]?.[field?.name]?.message
-                  || errors?.[index]?.[field?.name]?.type}
+									|| errors?.[index]?.[field?.name]?.type}
 							</p>
 						)}
 						<Element
@@ -50,14 +51,14 @@ function Item({
 					</div>
 				);
 			})}
-			{fields.length > START_VALUE && (
+			{fields.length > SHOW_DELETE_BUTTON && (
 				<div className={styles.icon_container} role="presentation">
 					<IcMDelete
 						fill="#e63946"
 						className={styles.delete_icon}
 						width={20}
 						height={20}
-						onClick={() => remove(index, START_VALUE)}
+						onClick={() => remove(index, SHOW_DELETE_BUTTON)}
 					/>
 				</div>
 			)}
