@@ -10,7 +10,7 @@ const controls = [
 		label       : 'Squad leader',
 		placeholder : 'Select Squad leader',
 		type        : 'asyncSelect',
-		initialCall : false,
+		// initialCall : false,
 		asyncKey    : 'partner_users',
 		valueKey    : 'user_id',
 		rules       : {
@@ -26,7 +26,7 @@ const controls = [
 	{
 		name        : 'employee_ids',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_employees',
 		label       : 'Employees',
 		placeholder : 'Employees',
 		multiple    : true,
@@ -35,8 +35,7 @@ const controls = [
 		},
 		params: {
 			filters: {
-				status               : 'active',
-				partner_entity_types : ['cogoport'],
+				status: 'active',
 
 			},
 			page_limit: 100,

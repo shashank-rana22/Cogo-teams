@@ -26,7 +26,7 @@ const controls = [
 	{
 		name        : 'employee_ids',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_employees',
 		label       : 'Employees',
 		placeholder : 'Employees',
 		multiple    : true,

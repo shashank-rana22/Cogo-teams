@@ -14,7 +14,9 @@ const ADD_BUTTON_LABEL = 'Squad';
 const TABLE_EMPTY_TEXT = 'No Squad created yet';
 
 function Squad() {
-	const { search, setSearch, columns, loading:listApiLoading, data, page, setPage } = useSquad();
+	const {
+		search, setSearch, columns, loading:listApiLoading, data, page, setPage, fetchList,
+	} = useSquad();
 
 	const { list = [], ...paginationData } = data || {};
 
@@ -25,7 +27,7 @@ function Squad() {
 		onClickSubmitButton,
 		loading,
 		handleSubmit,
-	} = useCreateSquad();
+	} = useCreateSquad({ fetchList });
 
 	const onClickAddButton = () => {
 		setShowAddSquadModal(true);

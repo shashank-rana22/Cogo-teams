@@ -18,7 +18,7 @@ const DEFAULT_TOTAL_COUNT = 10;
 function Chapter() {
 	const {
 		columns, search, setSearch, data, loading: listApiLoading,
-		page, setPage,
+		page, setPage, fetchList,
 	} = useChapter();
 
 	const { list = [], ...paginationData } = data || {};
@@ -31,7 +31,7 @@ function Chapter() {
 		onClickSubmitButton,
 		loading,
 		handleSubmit,
-	} = useCreateChapter();
+	} = useCreateChapter({ fetchList });
 
 	const onClickAddButton = () => {
 		setShowAddChapterModal(true);

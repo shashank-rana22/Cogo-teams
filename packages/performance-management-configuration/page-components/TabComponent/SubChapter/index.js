@@ -19,7 +19,7 @@ const ADD_BUTTON_LABEL = 'Sub-Chapter';
 function SubChapter() {
 	const {
 		columns, search, setSearch, data, loading: listLoading,
-		page, setPage,
+		page, setPage, fetchList,
 	} = useSubChapter();
 
 	const { list = [], ...paginationData } = data || {};
@@ -32,7 +32,7 @@ function SubChapter() {
 		onClickSubmitButton,
 		loading,
 		handleSubmit,
-	} = useCreateChapter();
+	} = useCreateChapter({ fetchList });
 
 	const onClickAddButton = () => {
 		setShowAddChapterModal(true);

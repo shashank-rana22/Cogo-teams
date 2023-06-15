@@ -28,7 +28,7 @@ const controls = [
 	{
 		name        : 'sub_chapter_ids',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_sub_chapters',
 		label       : 'Sub chapter',
 		placeholder : 'Sub chapter',
 		multiple    : true,

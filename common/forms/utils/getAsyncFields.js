@@ -571,6 +571,48 @@ function asyncListTests() {
 	};
 }
 
+function asyncListEmployees() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_employee_details',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListSquad() {
+	return {
+		labelKey    : 'squad_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_squads',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListSubChapters() {
+	return {
+		labelKey    : 'sub_chapter_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_sub_chapters',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -618,4 +660,7 @@ export {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncListEmployees,
+	asyncListSquad,
+	asyncListSubChapters,
 };

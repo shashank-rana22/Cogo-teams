@@ -4,7 +4,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useCreateChapter = () => {
+const useCreateChapter = ({ fetchList }) => {
 	const [showAddChapterModal, setShowAddChapterModal] = useState(false);
 
 	const { control, formState: { errors }, handleSubmit } = useForm();
@@ -23,6 +23,7 @@ const useCreateChapter = () => {
 			});
 
 			setShowAddChapterModal(false);
+			fetchList();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
 		}

@@ -29,7 +29,7 @@ const controls = [
 	{
 		name        : 'squad_ids',
 		type        : 'asyncSelect',
-		asyncKey    : 'partner_users_ids',
+		asyncKey    : 'list_squads',
 		label       : 'Squads',
 		placeholder : 'Squads',
 		multiple    : true,

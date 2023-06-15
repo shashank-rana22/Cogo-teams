@@ -15,7 +15,7 @@ const useSubChapter = () => {
 		method : 'GET',
 	}, { manual: true });
 
-	const fetch = useCallback(
+	const fetchList = useCallback(
 		async () => {
 			try {
 				await trigger({
@@ -31,8 +31,8 @@ const useSubChapter = () => {
 	);
 
 	useEffect(() => {
-		fetch();
-	}, [fetch, page]);
+		fetchList();
+	}, [fetchList, page]);
 
 	const columns = getColumns();
 
@@ -44,6 +44,7 @@ const useSubChapter = () => {
 		loading,
 		page,
 		setPage,
+		fetchList,
 	};
 };
 

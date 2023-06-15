@@ -14,7 +14,9 @@ const ADD_BUTTON_LABEL = 'Tribe';
 const TABLE_EMPTY_TEXT = 'No Tribe created yet';
 
 function Tribe() {
-	const { search, setSearch, columns, loading:listApiLoading, data, page, setPage } = useTribe();
+	const {
+		search, setSearch, columns, loading:listApiLoading, data, page, setPage, fetchList,
+	} = useTribe();
 
 	const { list = [], ...paginationData } = data || {};
 
@@ -28,7 +30,7 @@ function Tribe() {
 		handleSubmit,
 		onClickSubmitButton,
 		loading,
-	} = useCreateTribe();
+	} = useCreateTribe({ fetchList });
 
 	const onClickAddButton = () => {
 		setShowAddTribeModal(true);
