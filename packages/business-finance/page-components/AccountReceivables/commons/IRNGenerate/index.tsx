@@ -73,7 +73,7 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const { uploadEInvoice, loading: invoiceLoading } = useUploadeInvoice({
 		id,
 		setUploadInvoice,
-		partner,
+		partnerId,
 	});
 	const UPLOAD_INVOICE = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported
 		?.includes('upload_invoice');
@@ -104,14 +104,14 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 						>
 							Upload E-invoice
 						</Button>
-						{uploadInvoice ? (
+						{uploadInvoice && (
 							<InvoiceModal
 								uploadInvoice={uploadInvoice}
 								setUploadInvoice={setUploadInvoice}
 								uploadEInvoice={uploadEInvoice}
 								loading={invoiceLoading}
 							/>
-						) : null}
+						)}
 					</div>
 				)}
 			</div>
