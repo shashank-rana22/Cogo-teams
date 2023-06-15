@@ -39,6 +39,8 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 			return 'BILL';
 		} if (filters?.billType === 'CREDIT_NOTE') {
 			return 'CREDIT_NOTE';
+		} if (filters?.billType === 'CONSOLIDATED') {
+			return 'BILL';
 		} if (filters?.billType === 'REIMBURSEMENT') {
 			return 'REIMBURSEMENT';
 		}
@@ -47,6 +49,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 
 	const showbillType = filters?.billType === 'PURCHASE' ? 'false' : undefined;
 	const showProforma = filters?.billType === 'PROFORMA' ? true : undefined;
+	const showConsolidated = filters?.billType === 'CONSOLIDATED' ? 'CONSOLIDATED' :undefined;
 
 	const billDatesStartFilters = 	(filters?.billDate?.startDate === undefined
 		|| filters?.billDate?.startDate === null)
@@ -107,6 +110,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 				updatedDateTo   : updatedToData,
 				urgencyTag      : filters?.urgencyTag || undefined,
 				billType        : showFilter(),
+				jobType			: showConsolidated,
 				proforma        : showbillType || showProforma,
 				status:
                     currentTab !== 'ALL' && currentTab !== 'Urgency_tag' ? currentTab : undefined,
