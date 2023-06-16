@@ -1,9 +1,10 @@
 import { Select } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-import CargoDetailPills from '../../../List/Card/Body/CargoDetails/CargoDetailPills';
+
 
 import SelectedCards from './SelectedCards';
+import CargoDetailPills from '../../../../List/Card/Body/CargoDetails/CargoDetailPills';
 
 const labels = [
 	'container_size',

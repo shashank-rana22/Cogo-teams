@@ -1,8 +1,8 @@
 import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
+import PreviewSelectedCards from './PreviewSelectedCards';
 
-import PreviewSelectedCards from '../PreviewSelectedCards';
 
 function PreviewModal({
 	modalStep, setModalStep, tabKeys,

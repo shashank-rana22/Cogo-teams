@@ -27,19 +27,11 @@ const getFormatedRates = (type, data, singleServiceData) => {
 	if (type === 'present' || type === 'current') {
 		(data || []).forEach((element) => {
 			const { rate, currency,unit } = getRateAndCurrency(element?.line_items);
-			console.log(unit,'ggggggg')
 			const chargeable_weight = element?.data?.chargeable_weight
 			|| element?.service?.chargeable_weight || singleServiceData?.chargeable_weight;
 			const { completed_shipments = 0, cancelled_shipments = 0 } = element;
 			const row = {};
 			const rowData = {};
-			let total_buy_price = 0;
-			if (singleServiceData?.shipment_type === 'air_freight') {
-				total_buy_price = Number(rate) * Number(chargeable_weight);
-			} else if (singleServiceData?.shipment_type === 'fcl_freight') {
-				total_buy_price = Number(singleServiceData?.containers_count) * Number(rate);
-			}
-
 			row.id = element?.id;
 			rowData.shipping_line = element?.reverted_shipping_line?.business_name
 				|| element?.shipping_line?.business_name
@@ -51,7 +43,8 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.container_count = singleServiceData?.containers_count;
 			rowData.service_provider = element?.service_provider?.business_name;
 			rowData.buy_price = rate;
-			rowData.total_buy_price = total_buy_price;
+			rowData.total_buy_price = element?.reverted_total_buy_price || 0;
+			rowData.total_buy_currency=element?.currency;
 			rowData.active_booking = element?.ongoing_shipment;
 			rowData.service_provider = element?.service_provider;
 			rowData.currency = currency;

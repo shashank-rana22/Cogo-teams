@@ -29,7 +29,6 @@
 
 .lower_section {
 	display: flex;
-	justify-content: space-between;
 }
 
 .upper_left_section {
@@ -57,6 +56,8 @@
 	font-size: 10px;
 	font-weight: 400;
 	color: #828282;
+	display: flex;
+	justify-content: center;
 }
 
 .text1 {
@@ -75,6 +76,7 @@
 	display: flex;
 	/* padding: 10px 36px; */
 	border-right: 1px dashed #bdbdbd;
+	padding:10px 16px;
 }
 
 .price_text_section {
@@ -85,6 +87,7 @@
 	gap:10px;
 }
 .total_price_section{
+	padding: 0px 16px;
 	font-size: 14px;
 	font-weight: 500;
 	color: #828282;
@@ -97,26 +100,31 @@
 	display: flex;
 	flex-direction: column;
 	justify-content: center;
-	padding: 10px 36px;
+	width: 20%;
+	padding: 10px 16px;
 	border-right: 1px dashed #bdbdbd;
 }
 
 .price_section {
-	padding: 8px;
+	padding: 8px 20px;
 	display: flex;
 	flex-direction: column;
 	font-weight: 500;
 	font-size: 12px;
-	color: #4F4F4F;
+	color: #828282;
 	justify-content: center;
 	border-right: 1px dashed #bdbdbd;
 }
-
+.price_value{
+	font-weight: 600;
+	color: #221f20;
+}
 .service_provider_heading {
 	margin-right: 38px;
 	font-size: 14px;
 	font-weight: 500;
 	color: #221f20;
+	
 }
 
 .edit_price_section{
@@ -124,6 +132,7 @@
 	border-left: 1px dashed #bdbdbd;
 	display: flex;
 	justify-content: center;
+	max-width:12%;
 	flex-direction: column;
 }
 
@@ -131,6 +140,12 @@
 	:global{
 		.ui_progressbar_container{
 			width:140px;
+			
+			.ui_progressbar_filename{
+				position:absolute;
+				padding-left: 52px;
+				font-size: 12px;
+			}
 		}
 		.ui_progressbar_bar{
 			height:20px;
@@ -141,7 +156,12 @@
 		}
 	}
 }
+.edit_price_heading{
+	font-size: 12px;
+	margin-left: 4px;
+	padding-bottom: 4px;
 
+}
 .positive_profit{
 	font-weight: 600;
 	font-size: 14px;	

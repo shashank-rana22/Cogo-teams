@@ -107,7 +107,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 				</div>
 
 			</div>
-			{itemData?.state==='Cancelled'?<CancelledShipmentCard itemData={itemData} />:null}
+			{itemData?.state==='cancelled'?<CancelledShipmentCard itemData={itemData} />:null}
 			<div className={styles.card_container}>
 				<ShipmentCard itemData={itemData} priceData={priceData} />
 			</div>

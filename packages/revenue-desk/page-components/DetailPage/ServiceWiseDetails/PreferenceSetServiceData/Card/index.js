@@ -5,12 +5,10 @@ import styles from './styles.module.css';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 function Card({ singleRateCardData, index, singleServiceData, price }) {
-	const total_buy_price = Number(singleServiceData?.chargeable_weight)
-     * Number(singleRateCardData?.buy_rate_preferences?.buy_price);
 	let profitability = 0;
-	if (total_buy_price !== 0) {
-		profitability = (Number(price?.split(' ')?.[1]) - Number(total_buy_price))
-		/ Number(total_buy_price);
+	if (data?.rowData?.total_buy_price !== 0) {
+		profitability = (Number(parseFloat(price?.replace(/[^0-9.-]+/g, ''))) - Number(singleRateCardData?.buy_rate_preferences?.total_buy_price))
+		/ Number(singleRateCardData?.buy_rate_preferences?.total_buy_price);
 	}
 	return (
 		<div className={styles.container}>
@@ -68,38 +66,36 @@ function Card({ singleRateCardData, index, singleServiceData, price }) {
 						</div>
 						{
                                 singleRateCardData?.buy_rate_preferences?.origin_local_buy_price ? (
-	<div className={styles.price_text}>
-		Origin Local Price :
-		{singleRateCardData?.buy_rate_preferences?.origin_local_buy_price}
-	</div>
+								<div className={styles.price_text}>
+									Origin Local Price :
+									{singleRateCardData?.buy_rate_preferences?.origin_local_buy_price}
+								</div>
                                 ) : null
                             }
 						{
                                 singleRateCardData?.buy_rate_preferences?.destination_local_buy_price
                                 	? (
-	<div className={styles.price_text}>
-		Destination Local Price :
-		{singleRateCardData?.buy_rate_preferences?.destination_local_buy_price}
-	</div>
+									<div className={styles.price_text}>
+										Destination Local Price :
+										{singleRateCardData?.buy_rate_preferences?.destination_local_buy_price}
+									</div>
                                 	) : null
-                            }
+                        }
 
 					</div>
 					<div className={styles.forth_section}>
 						<div className={styles.probabilty_container}>
 							Total Buy Price :
 							<div className={styles.total_price_text}>
-								{/* {
-									formatAmount({
-										total_buy_price,
-										currency,
-										options: {
-											style                 : 'currency',
-											currencyDisplay       : 'code',
-											maximumFractionDigits : 2,
-										},
-									})
-								} */}
+										{formatAmount({
+												amount   :netTotalBuyPrice,
+												currency :data?.rowData?.total_buy_currency,
+												options  : {
+													style                 : 'currency',
+													currencyDisplay       : 'code',
+													maximumFractionDigits : 2,
+												},
+										})}
 								{total_buy_price}
 							</div>
 						</div>
