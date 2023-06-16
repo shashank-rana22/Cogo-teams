@@ -12,6 +12,10 @@ interface AddUploadInterface {
 	uncheckedRows?: Array<string>;
 }
 
+interface Profile {
+	profile?: { user: { id: string } }
+}
+
 const useAddUploadList = ({
 	onClose,
 	subTabsValue,
@@ -19,7 +23,8 @@ const useAddUploadList = ({
 	cycleListId,
 	uncheckedRows = [],
 }:AddUploadInterface) => {
-	const { profile } = useSelector((store) => store);
+	const profile: Profile = useSelector((state) => state);
+	const { profile: { user } } = profile || {};
 	const SUB_TABS_VALUES = subTabsValue === 'masterExceptionList';
 	const [{ loading:uploadListLoading }, trigger] = useRequestBf(
 		{
@@ -29,7 +34,8 @@ const useAddUploadList = ({
 		},
 		{ manual: true },
 	);
-	const PROFILE_ID = profile?.user?.id;
+
+	const PROFILE_ID = user?.id;
 	const UN_CHECKED_DATA = uncheckedRows.length > 0;
 
 	const getUploadList = useCallback((data, fileValue) => {

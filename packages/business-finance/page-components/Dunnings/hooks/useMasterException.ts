@@ -14,11 +14,17 @@ interface Props {
 	exceptionFilter?: ExceptionFiltersInterface;
 	subTabsValue?: string;
 }
+
+interface Profile {
+	profile?: { user: { id: string } }
+}
+
 const useMasterException = ({ exceptionFilter, subTabsValue }:Props) => {
 	const [searchValue, setSearchValue] = useState('');
 	const { category = '', creditDays = 0, cycleStatus = '', pageIndex } = exceptionFilter || {};
-	const { profile } = useSelector((state) => state);
-	const PROFILE_ID = profile?.user?.id;
+	const profile: Profile = useSelector((state) => state);
+	const { profile: { user } } = profile || {};
+	const PROFILE_ID = user?.id;
 
 	const [sort, setSort] = useState({
 		sortType : '',
