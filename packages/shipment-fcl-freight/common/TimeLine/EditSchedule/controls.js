@@ -20,7 +20,7 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 			}
 		}
 	});
-	console.log({origin_port, destination_port})
+
 	const finalControls = [
 		{ name: 'bn_expiry', label: 'BN expiry date' },
 		{ name: 'tr_cutoff', label: 'TR cutoff date' },
@@ -49,25 +49,26 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 			label: 'Departure from ICD Port date',
 		}] : []),
 		...(destination_port?.is_icd ? [{
-			name: 'arrived_at_destination_icd_at',
-			label: 'Arrived At ICD Port date',
-		}] : [])
+			name  : 'arrived_at_destination_icd_at',
+			label : 'Arrived At ICD Port date',
+		}] : []),
 	];
 
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
 	finalControls.forEach((control, index) => {
-		const { name, maxDate = departureDate, disable = disabledState } = control;
+		const { name, maxDate = departureDate, disable = disabledState } = control || {};
 		finalControls[index].maxDate = maxDate;
 		finalControls[index].disable = disable;
 		finalControls[index].dateFormat = 'MMM dd, yyyy, hh:mm:ss aaa';
 		finalControls[index].placeholder = 'Select Date';
 		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].showTimeSelect = true;
-		defaultValues[name] = getDate(primary_service?.[name]);
+
+		DEFAULT_VALUES[name] = getDate(primary_service?.[name]);
 	});
 
-	return { finalControls, defaultValues };
+	return { finalControls, defaultValues: DEFAULT_VALUES };
 };
 
 export default controls;
