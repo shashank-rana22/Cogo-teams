@@ -28,7 +28,7 @@ function TooltipContent({ item = [] }) {
 	);
 }
 
-const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => [
+const getColumns = ({ setShowDeleteModal, setShowTribeModal }) => [
 	{
 		Header   : 'TRIBE NAME',
 		accessor : (item) => <div>{startCase(item?.tribe_name) || '-'}</div>,
@@ -110,7 +110,7 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => [
 					width={16}
 					height={16}
 					style={{ marginLeft: 12, cursor: 'pointer' }}
-					onClick={() => setShowUpdateTribeModal(item)}
+					onClick={() => setShowTribeModal(item)}
 				/>
 			</div>
 		) : (

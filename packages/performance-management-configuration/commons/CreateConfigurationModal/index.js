@@ -44,7 +44,7 @@ function CreateConfigurationModal({
 	Type,
 	setValue,
 }) {
-	// console.log(showModal);
+	console.log(showModal);
 
 	useEffect(() => {
 		if (!isEmpty(showModal) && Type === 'Update') {

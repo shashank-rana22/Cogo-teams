@@ -20,11 +20,11 @@ const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
 
 function Tribe() {
-	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
 
 	const {
 		search, setSearch, columns, loading:listApiLoading, data, page, setPage, fetchList, showDeleteModal,
-		setShowDeleteModal, deleteLoading, deleteTribe, setShowUpdateTribeModal, showUpdateTribeModal,
+		setShowDeleteModal, deleteLoading, deleteTribe, setShowTribeModal, showTribeModal,
 		activeTab, setActiveTab,
 	} = useTribe();
 
@@ -33,19 +33,18 @@ function Tribe() {
 	const { total_count, page_limit } = paginationData || {};
 
 	const {
-		showAddTribeModal,
-		setShowAddTribeModal,
 		onClickSubmitButton,
 		loading:CreateLoading,
-	} = useCreateTribe({ fetchList });
+	} = useCreateTribe({ fetchList, setShowTribeModal });
 
 	const {
 		onClickUpdateButton,
 		loading: UpdateLoading,
-	} = useUpdateTribe({ fetchList, setShowUpdateTribeModal, showUpdateTribeModal });
+	} = useUpdateTribe({ fetchList, setShowTribeModal, showTribeModal });
 
 	const onClickAddButton = () => {
-		setShowAddTribeModal(true);
+		setShowTribeModal('add');
+		reset();
 	};
 
 	return (
@@ -73,33 +72,18 @@ function Tribe() {
 				</div>
 			)}
 
-			{showAddTribeModal ? (
+			{showTribeModal ? (
 				<CreateConfigurationModal
-					showModal={showAddTribeModal}
-					setShowModal={setShowAddTribeModal}
+					showModal={showTribeModal}
+					setShowModal={setShowTribeModal}
 					label={ADD_BUTTON_LABEL}
 					controls={controls}
 					control={control}
 					errors={errors}
-					onClickSubmitButton={onClickSubmitButton}
-					loading={CreateLoading}
+					onClickSubmitButton={showTribeModal === 'add' ? onClickSubmitButton : onClickUpdateButton}
+					loading={showTribeModal === 'add' ? CreateLoading : UpdateLoading}
 					handleSubmit={handleSubmit}
-					Type={MODAL_TYPE_ADD}
-				/>
-			) : null}
-
-			{showUpdateTribeModal ? (
-				<CreateConfigurationModal
-					showModal={showUpdateTribeModal}
-					setShowModal={setShowUpdateTribeModal}
-					label={ADD_BUTTON_LABEL}
-					controls={controls}
-					control={control}
-					errors={errors}
-					onClickSubmitButton={onClickUpdateButton}
-					loading={UpdateLoading}
-					handleSubmit={handleSubmit}
-					Type={MODAL_TYPE_UPDATE}
+					Type={showTribeModal === 'add' ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 				/>
 			) : null}

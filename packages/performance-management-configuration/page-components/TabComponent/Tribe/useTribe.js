@@ -12,7 +12,7 @@ const useTribe = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
-	const [showUpdateTribeModal, setShowUpdateTribeModal] = useState();
+	const [showTribeModal, setShowTribeModal] = useState();
 	const [activeTab, setActiveTab] = useState('active');
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
@@ -47,7 +47,7 @@ const useTribe = () => {
 		showDeleteModal,
 	});
 
-	const columns = getColumns({ setShowDeleteModal, setShowUpdateTribeModal });
+	const columns = getColumns({ setShowDeleteModal, setShowTribeModal });
 
 	return {
 		columns,
@@ -62,8 +62,8 @@ const useTribe = () => {
 		deleteLoading,
 		showDeleteModal,
 		setShowDeleteModal,
-		showUpdateTribeModal,
-		setShowUpdateTribeModal,
+		showTribeModal,
+		setShowTribeModal,
 		activeTab,
 		setActiveTab,
 	};
