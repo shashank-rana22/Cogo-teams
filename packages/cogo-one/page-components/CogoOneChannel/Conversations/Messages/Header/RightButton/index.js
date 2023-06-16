@@ -5,7 +5,7 @@ import styles from '../styles.module.css';
 import PopoverOptions from './PopoverOptions';
 
 function RightButton({
-	agent_id,
+	hasRequests,
 	canMessageOnBotSession,
 	showBotMessages,
 	hasPermissionToEdit,
@@ -16,11 +16,10 @@ function RightButton({
 	assignLoading,
 	openPopover,
 	setOpenPopover,
-	agent_name,
 	requestAssignPaylod,
 	requestAssignLoading,
+	isGroupFormed,
 }) {
-	const hasAnyRequests = !!agent_id;
 	if (canMessageOnBotSession) {
 		return (
 			<Button
@@ -33,20 +32,19 @@ function RightButton({
 			</Button>
 		);
 	}
-	if (!showBotMessages) {
+	if (!showBotMessages && hasPermissionToEdit) {
 		return (
 			<Button
 				themeType="secondary"
 				size="md"
 				className={styles.styled_button}
-				disabled={!hasPermissionToEdit}
 				onClick={openAssignModal}
 			>
 				Assign
 			</Button>
 		);
 	}
-	if (isomniChannelAdmin && !hasAnyRequests) {
+	if (isomniChannelAdmin && !hasRequests) {
 		return (
 			<Popover
 				placement="bottom"
@@ -72,36 +70,30 @@ function RightButton({
 			</Popover>
 		);
 	}
-	if (isomniChannelAdmin && hasAnyRequests) {
+
+	if (!isomniChannelAdmin && !isGroupFormed) {
 		return (
 			<Button
 				themeType="secondary"
 				size="md"
-				className={styles.styled_button}
-				onClick={() => assignButtonAction('approve_request')}
-				loading={assignLoading}
-			>
-				Assign to
-				{' '}
-				{agent_name}
-			</Button>
-		);
-	}
-	if (!isomniChannelAdmin) {
-		return (
-			<Button
-				themeType="secondary"
-				size="md"
-				disabled={hasAnyRequests}
 				className={styles.styled_button}
 				onClick={requestAssignPaylod}
 				loading={requestAssignLoading}
 			>
-				{hasAnyRequests ? 'Requested' : 'Request for Assign'}
+				Request for Assign
 			</Button>
 		);
 	}
-	return null;
+	return (
+		<Button
+			themeType="secondary"
+			size="md"
+			className={styles.styled_button}
+			disabled
+		>
+			Assign
+		</Button>
+	);
 }
 
 export default RightButton;

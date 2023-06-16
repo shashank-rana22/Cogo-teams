@@ -2,7 +2,9 @@ import { orderBy, where } from 'firebase/firestore';
 
 const BULK_ASSIGN_SEEN_MINUTES = 15;
 
-const getMainQuery = (userId, type, isObserver) => {
+const HIDE_MAIN_QUERY_FOR_SUB_TABS = ['groups', 'contacts'];
+
+const getMainQuery = ({ userId, type, isObserver }) => {
 	switch (type) {
 		case 'admin_view':
 			return [];
@@ -16,7 +18,7 @@ const getMainQuery = (userId, type, isObserver) => {
 	}
 };
 
-const getSessionQuery = (viewType, showBotMessages, tab) => {
+const getSessionQuery = ({ viewType, showBotMessages, tab }) => {
 	if (viewType === 'shipment_view' || tab === 'contacts') {
 		return where('session_type', 'in', ['bot', 'admin']);
 	}
@@ -24,7 +26,7 @@ const getSessionQuery = (viewType, showBotMessages, tab) => {
 		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
 };
 
-const getTabQuery = (tab, userId) => {
+const getTabQuery = ({ tab, userId }) => {
 	switch (tab) {
 		case 'groups':
 			return [where('group_members', 'array-contains', userId)];
@@ -47,9 +49,10 @@ function getFireStoreQuery({
 
 	const isObserver = ['adminSession', 'botSession'].includes(appliedFilters?.observer) || false;
 
-	const mainQuery = getMainQuery(userId, viewType, isObserver);
+	const mainQuery = HIDE_MAIN_QUERY_FOR_SUB_TABS.includes(activeSubTab)
+		? [] : getMainQuery({ userId, type: viewType, isObserver });
 
-	const sessionTypeQuery = getSessionQuery(viewType, showBotMessages, activeSubTab);
+	const sessionTypeQuery = getSessionQuery({ viewType, showBotMessages, tab: activeSubTab });
 
 	Object.keys(appliedFilters).forEach((item) => {
 		if (item === 'channels') {
@@ -117,7 +120,7 @@ function getFireStoreQuery({
 		}
 	});
 
-	const tabQuery = getTabQuery(activeSubTab, userId);
+	const tabQuery = getTabQuery({ tab: activeSubTab, userId });
 
 	const firestoreQuery = [
 		...queryFilters,
