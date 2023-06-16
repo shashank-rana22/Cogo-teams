@@ -13,6 +13,8 @@ import ExecutiveSummary from './ExecutiveSummary';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
+const LINK_BEFORE_QUERY_PARAMS = 0;
+
 function AgentDetails({
 	activeMessageCard = {},
 	activeTab,
@@ -26,6 +28,7 @@ function AgentDetails({
 	activeSelect,
 	setActiveSelect = () => {},
 	setShowMore = () => {},
+	hasVoiceCallAccess = false,
 }) {
 	const {
 		user_id,
@@ -106,7 +109,7 @@ function AgentDetails({
 	};
 
 	const handleClick = () => {
-		const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[0];
+		const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[LINK_BEFORE_QUERY_PARAMS];
 		navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
 		Toast.success('Copied!!!');
 	};
@@ -226,6 +229,7 @@ function AgentDetails({
 					userName={name}
 					activeTab={activeTab}
 					setModalType={setModalType}
+					hasVoiceCallAccess={hasVoiceCallAccess}
 				/>
 			)}
 			{(mobile_no || user_number) && (
