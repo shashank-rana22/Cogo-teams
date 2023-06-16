@@ -68,9 +68,7 @@ function CancelIrn({
 						<div className={styles.styled_button}>
 							<Button
 								type="submit"
-								onClick={() => {
-									onSubmit(response);
-								}}
+								onClick={() => onSubmit(response)}
 								disabled={
 							response.value === '' || response.remarks === '' || loading
 						}
@@ -80,9 +78,7 @@ function CancelIrn({
 						</div>
 						<Button
 							type="button"
-							onClick={() => {
-								setShowCancellationModal(false);
-							}}
+							onClick={() => setShowCancellationModal(false)}
 						>
 							Cancel
 						</Button>

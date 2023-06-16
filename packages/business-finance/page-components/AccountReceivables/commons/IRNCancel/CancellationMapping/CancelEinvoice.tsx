@@ -74,7 +74,9 @@ function CancelEinvoice({
 					title={(
 						<div className={styles.cancel_invoice}>
 							Cancel
+							{' '}
 							{IRNLabel}
+							{' '}
 							<span className={styles.styled_invoice}>
 								{invoiceNumber}
 							</span>
@@ -164,9 +166,7 @@ function CancelEinvoice({
 										size="md"
 										name="Cancellation_reason"
 										value={response?.remarks}
-										onChange={(event) => {
-											setResponse((r) => ({ ...r, remarks: event }));
-										}}
+										onChange={(event) => setResponse((r) => ({ ...r, remarks: event }))}
 									/>
 									{CANCELLATION_REASON && (
 										<span className={styles.errors}>
