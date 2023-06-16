@@ -5,14 +5,16 @@ import { startCase } from '@cogoport/utils';
 
 const getEditQuotationControls = ({ service_charge, shipment_data, handleChange }) => {
 	const { id, service_type, service_detail, trade_type } = service_charge || {};
+
 	return {
-		type         : 'edit_service_charges',
-		name         : id,
-		service_name : service_type,
-		shipment_id  : shipment_data?.id,
-		showButtons  : service_type !== 'subsidiary_service',
-		cargoDetails : service_detail?.[GLOBAL_CONSTANTS.zeroth_index],
-		value        : [{
+		type             : 'edit_service_charges',
+		name             : id,
+		service_name     : service_type,
+		shipment_id      : shipment_data?.id,
+		showAddButtons   : service_type !== 'subsidiary_service',
+		showDeleteButton : service_type !== 'subsidiary_service',
+		cargoDetails     : service_detail?.[GLOBAL_CONSTANTS.zeroth_index],
+		value            : [{
 			code     : '',
 			currency : '',
 			price    : '',
