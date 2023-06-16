@@ -1,7 +1,9 @@
+import styles from './styles.module.css';
+
 function Inward() {
 	return (
-		<div>
-			<div>Coming Soon</div>
+		<div className={styles.inward_container}>
+			<img src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/coming.gif" alt="coming soon" />
 		</div>
 	);
 }

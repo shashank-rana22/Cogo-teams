@@ -25,8 +25,42 @@ export const optionsGSTIN = (entityVal) => {
 	return [];
 };
 
-export 	const getSupplierData = (item) => {
-	const { value } = item || {};
-	return [{ heading: 'Supplier Name :', value: 'Customer Name Here pvt ltd...' },
-		{ heading: 'GSTIN  :', value: '685Y48399201020489493' }];
-};
+export 	const getSupplierData = (supplierName, suppGstIn, entityCode) => [
+	{ heading: 'Supplier Name :', value: supplierName || '--' },
+	{ heading: 'GSTIN  :', value: suppGstIn || '--' },
+	{ heading: 'Entity :', value: entityCode || '--' },
+];
+
+const YEAR_MINS = 1;
+const YEAR_MINS_TWO = 2;
+const YEAR_MINS_THREE = 3;
+
+const currentYear = new Date().getFullYear();
+const newArray = [currentYear, currentYear - YEAR_MINS, currentYear - YEAR_MINS_TWO, currentYear - YEAR_MINS_THREE];
+
+export const optionsYear = (newArray || [{}]).map((item) => (
+	{ value: item.toString(), label: item.toString() }));
+
+const GET_ZERO = 0;
+const GET_ONE = 1;
+const GET_TWO = 2;
+function generateLastThreeFinancialYears() {
+	const FINANCIAL_YEARS = [];
+
+	const yearRange = [GET_ZERO, GET_ONE, GET_TWO];
+	yearRange.forEach((i) => {
+		const startYear = currentYear - i;
+		const endYear = startYear + GET_ONE;
+
+		const financialYear = {
+			value : startYear,
+			label : `${startYear}-${endYear.toString().substr(-GET_TWO)}`,
+		};
+
+		FINANCIAL_YEARS.push(financialYear);
+	});
+
+	return FINANCIAL_YEARS;
+}
+
+export const lastThreeFinancialYears = generateLastThreeFinancialYears();

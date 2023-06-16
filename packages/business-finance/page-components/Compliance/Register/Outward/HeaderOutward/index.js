@@ -1,10 +1,10 @@
 import { Button, Select } from '@cogoport/components';
 
-import { optionEntity, optionsGSTIN, optionsMonth } from '../helper';
+import { optionEntity, optionsGSTIN, optionsMonth, optionsYear } from '../helper';
 
 import styles from './styles.module.css';
 
-function HeaderOutward({ filters, setFilters }) {
+function HeaderOutward({ filters, setFilters, exportTrigger, loading }) {
 	return (
 		<div className={styles.header_container}>
 			<div>
@@ -15,7 +15,7 @@ function HeaderOutward({ filters, setFilters }) {
 					placeholder="Select Entity"
 					options={optionEntity}
 					isClearable
-					style={{ width: '300px' }}
+					style={{ width: '250px' }}
 					size="sm"
 				/>
 			</div>
@@ -23,12 +23,12 @@ function HeaderOutward({ filters, setFilters }) {
 			<div>
 				<div className={styles.filter_heading}>GSTIN</div>
 				<Select
-					value={filters?.gstin}
-					onChange={(val) => { setFilters((prev) => ({ ...prev, gstin: val })); }}
+					value={filters?.gstIn}
+					onChange={(val) => { setFilters((prev) => ({ ...prev, gstIn: val })); }}
 					placeholder="Choose"
 					options={optionsGSTIN(filters?.entity)}
 					isClearable
-					style={{ width: '300px' }}
+					style={{ width: '250px' }}
 					size="sm"
 				/>
 			</div>
@@ -41,13 +41,26 @@ function HeaderOutward({ filters, setFilters }) {
 					placeholder="Period"
 					options={optionsMonth}
 					isClearable
-					style={{ width: '150px' }}
+					style={{ width: '120px' }}
 					size="sm"
 				/>
 			</div>
 
 			<div>
-				<Button>Export </Button>
+				<div className={styles.filter_heading}>Year</div>
+				<Select
+					value={filters?.year}
+					onChange={(val) => { setFilters((prev) => ({ ...prev, year: val })); }}
+					placeholder="Year"
+					options={optionsYear}
+					isClearable
+					style={{ width: '100px' }}
+					size="sm"
+				/>
+			</div>
+
+			<div>
+				<Button loading={loading} onClick={exportTrigger}>Export </Button>
 			</div>
 		</div>
 	);
