@@ -3,12 +3,10 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useDeleteSquad = ({ fetchList, setDeleteShowModal, showDeleteModal }) => {
-	const { profile = {} } = useSelector((state) => state);
+const useDeleteSquad = ({ fetchList, setShowDeleteModal, showDeleteModal }) => {
+	const { user = {} } = useSelector((state) => state.profile);
 
-	const { user = {} } = profile;
-
-	const { id: user_id } = user;
+	const { id: user_id } = user || {};
 
 	const [{ loading }, trigger] = useHarbourRequest(
 		{
@@ -29,7 +27,7 @@ const useDeleteSquad = ({ fetchList, setDeleteShowModal, showDeleteModal }) => {
 				data: payload,
 			});
 			Toast.success('Successfully Deleted');
-			setDeleteShowModal(false);
+			setShowDeleteModal(false);
 			fetchList();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));

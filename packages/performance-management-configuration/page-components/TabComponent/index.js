@@ -22,6 +22,7 @@ function TabComponent() {
 			<Tabs
 				activeTab={activeTab}
 				themeType="primary"
+				fullWidth
 				onChange={setActiveTab}
 				style={{ marginBottom: 6 }}
 			>

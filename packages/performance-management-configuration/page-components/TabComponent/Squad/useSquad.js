@@ -13,6 +13,7 @@ const useSquad = () => {
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
 	const [showUpdateSquadModal, setShowUpdateSquadModal] = useState();
+	const [activeTab, setActiveTab] = useState('active');
 
 	const [{ loading, data }, trigger] = useHarbourRequest(
 		{
@@ -22,21 +23,21 @@ const useSquad = () => {
 		{ manual: true },
 	);
 
-	const fetchList = useCallback(
-		async () => {
-			try {
-				await trigger({
-					params: {
-						page    : !search ? page : DEFAULT_PAGE,
-						filters : { q: search || undefined },
-					},
-				});
-			} catch (error) {
-				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
-			}
-		},
-		[page, search, trigger],
-	);
+	const fetchList = useCallback(async () => {
+		try {
+			await trigger({
+				params: {
+					page    : !search ? page : DEFAULT_PAGE,
+					filters : { q: search || undefined },
+					status  : activeTab,
+				},
+			});
+		} catch (error) {
+			Toast.error(
+				getApiErrorString(error?.response?.data) || 'Something went wrong',
+			);
+		}
+	}, [page, search, trigger, activeTab]);
 	const { deleteSquad, loading: deleteLoading } = useDeleteSquad({
 		fetchList,
 		setShowDeleteModal,
@@ -63,6 +64,8 @@ const useSquad = () => {
 		setShowDeleteModal,
 		showUpdateSquadModal,
 		setShowUpdateSquadModal,
+		activeTab,
+		setActiveTab,
 	};
 };
 

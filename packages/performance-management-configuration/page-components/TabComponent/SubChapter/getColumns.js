@@ -1,4 +1,4 @@
-import { Pill, Tooltip } from '@cogoport/components';
+import { Button, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
@@ -59,9 +59,11 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSubChapterModal }) => (
 					{item?.employees?.length > MIN_EMPLOYEES_LENGTH ? (
 						<Tooltip
 							content={<TooltipContent item={item?.employees} />}
-							placement="right"
+							placement="left"
 							theme="light"
-							styles={{ marginBottom: '24px' }}
+							interactive
+							caret
+							styles={{ marginBottom: '24px', width: 'fit-content', height: '200px' }}
 						>
 							<Pill>
 								+
@@ -102,20 +104,24 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSubChapterModal }) => (
 		{
 			Header   : 'ACTION',
 			accessor : (item) => (
-				<div>
-					<IcMDelete
-						width={16}
-						height={16}
-						style={{ cursor: 'pointer' }}
-						onClick={() => setShowDeleteModal(item.id)}
-					/>
-					<IcMEdit
-						width={16}
-						height={16}
-						style={{ marginLeft: 12, cursor: 'pointer' }}
-						onClick={() => setShowUpdateSubChapterModal(item)}
-					/>
-				</div>
+				item?.status === 'active'
+					? (
+						<div className={styles.button}>
+							<IcMDelete
+								width={16}
+								height={16}
+								style={{ cursor: 'pointer' }}
+								onClick={() => setShowDeleteModal(item.id)}
+							/>
+							<IcMEdit
+								width={16}
+								height={16}
+								style={{ marginLeft: 12, cursor: 'pointer' }}
+								onClick={() => setShowUpdateSubChapterModal(item)}
+							/>
+						</div>
+					)
+					:			<Button themeType="secondary">Re Apply</Button>
 			),
 		},
 	]

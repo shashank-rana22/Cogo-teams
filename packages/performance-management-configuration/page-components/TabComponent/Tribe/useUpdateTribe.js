@@ -14,20 +14,31 @@ const useUpdateTribe = ({ fetchList, setShowUpdateTribeModal, showUpdateTribeMod
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
-		url    : '/update_squad',
+		url    : '/update_tribe',
 	}, { manual: true });
 
 	const onClickUpdateButton = async (values) => {
+		const { squad_ids, ...rest } = values;
+		const ARRAY_OF_IDS = showUpdateTribeModal.squads.map((obj) => obj.id);
+
+		const squads_added = (squad_ids || []).filter(
+			(id) => !(ARRAY_OF_IDS || []).includes(id),
+		);
+		const squads_removed = (ARRAY_OF_IDS || []).filter(
+			(id) => !(squad_ids || []).includes(id),
+		);
 		try {
 			await trigger({
 				data: {
-					...values,
+					...rest,
 					tribe_id          : showUpdateTribeModal?.id,
 					performed_by_id   : user_id,
 					performed_by_type : 'user',
+					squads_added,
+					squads_removed,
 				},
 			});
-			Toast.success('Successfully Created');
+			Toast.success('Successfully Updated');
 			setShowUpdateTribeModal(false);
 			fetchList();
 		} catch (err) {

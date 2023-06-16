@@ -13,6 +13,7 @@ const useTribe = () => {
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
 	const [showUpdateTribeModal, setShowUpdateTribeModal] = useState();
+	const [activeTab, setActiveTab] = useState('active');
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		url    : '/list_all_tribes',
@@ -26,13 +27,14 @@ const useTribe = () => {
 					params: {
 						page    : !search ? page : DEFAULT_PAGE,
 						filters : { q: search || undefined },
+						status  : activeTab,
 					},
 				});
 			} catch (error) {
 				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
 			}
 		},
-		[page, search, trigger],
+		[page, search, trigger, activeTab],
 	);
 
 	useEffect(() => {
@@ -62,6 +64,8 @@ const useTribe = () => {
 		setShowDeleteModal,
 		showUpdateTribeModal,
 		setShowUpdateTribeModal,
+		activeTab,
+		setActiveTab,
 	};
 };
 

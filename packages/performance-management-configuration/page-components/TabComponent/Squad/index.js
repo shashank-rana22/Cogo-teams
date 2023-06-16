@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
+import ActiveInactiveTabs from '../../../commons/ActiveInactiveTabs';
 import Header from '../../../commons/CommonHeader';
 import CreateConfigurationModal from '../../../commons/CreateConfigurationModal';
 import DeleteConfigurationModal from '../../../commons/DeleteConfigurationModal';
@@ -21,6 +22,8 @@ function Squad() {
 	const {
 		search, setSearch, columns, loading:listApiLoading, data, page, setPage, setShowDeleteModal,
 		showDeleteModal, deleteSquad, deleteLoading, fetchList, setShowUpdateSquadModal, showUpdateSquadModal,
+		activeTab, setActiveTab,
+
 	} = useSquad();
 
 	const { list = [], ...paginationData } = data || {};
@@ -52,6 +55,8 @@ function Squad() {
 
 	return (
 		<div>
+			<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
 			<Header
 				search={search}
 				setSearch={setSearch}

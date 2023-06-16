@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useDeleteSubChapter = ({ fetchList, setDeleteShowModal, showDeleteModal }) => {
+const useDeleteSubChapter = ({ fetchList, setShowDeleteModal, showDeleteModal }) => {
 	const { profile = {} } = useSelector((state) => state);
 
 	const { user = {} } = profile;
@@ -30,7 +30,7 @@ const useDeleteSubChapter = ({ fetchList, setDeleteShowModal, showDeleteModal })
 			});
 			Toast.success('Successfully Deleted');
 
-			setDeleteShowModal(false);
+			setShowDeleteModal(false);
 			fetchList();
 		} catch (error) {
 			Toast.error(getApiErrorString(error.response?.data));

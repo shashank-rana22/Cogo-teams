@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
+import ActiveInactiveTabs from '../../../commons/ActiveInactiveTabs';
 import Header from '../../../commons/CommonHeader';
 import CreateConfigurationModal from '../../../commons/CreateConfigurationModal';
 import DeleteConfigurationModal from '../../../commons/DeleteConfigurationModal';
@@ -21,6 +22,7 @@ function Tribe() {
 	const {
 		search, setSearch, columns, loading:listApiLoading, data, page, setPage, fetchList, showDeleteModal,
 		setShowDeleteModal, deleteLoading, deleteTribe, setShowUpdateTribeModal, showUpdateTribeModal,
+		activeTab, setActiveTab,
 	} = useTribe();
 
 	const { list = [], ...paginationData } = data || {};
@@ -52,6 +54,9 @@ function Tribe() {
 
 	return (
 		<div className={styles.container}>
+
+			<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
 			<Header
 				setSearch={setSearch}
 				search={search}
