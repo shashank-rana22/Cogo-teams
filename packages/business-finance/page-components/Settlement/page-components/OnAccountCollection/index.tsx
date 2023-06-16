@@ -22,7 +22,6 @@ import styles from './styles.module.css';
 
 const SEARCH_PLACEHOLDER = 'Search by Customer Name / UTR No /Doc. Value';
 
-const CAN_BULK_POST = 2;
 function OnAccountCollection() {
 	const {
 		control,
@@ -53,8 +52,6 @@ function OnAccountCollection() {
 	const bulkPost = () => {
 		post(checkedRows?.filter((value, index, array) => array.indexOf(value) === index));
 	};
-
-	const bulkDisabled = (checkedRows)?.length < CAN_BULK_POST;
 
 	const { accMode = '', search = '' } = globalFilters || {};
 
@@ -133,7 +130,6 @@ function OnAccountCollection() {
 							onClick={() => {
 								setShowConfirm(true);
 							}}
-							disabled={bulkDisabled}
 						>
 							Bulk Post
 						</Button>
@@ -141,7 +137,6 @@ function OnAccountCollection() {
 							onClick={() => {
 								setCheckedRows([]);
 							}}
-							disabled={bulkDisabled}
 						>
 							Reset
 						</Button>

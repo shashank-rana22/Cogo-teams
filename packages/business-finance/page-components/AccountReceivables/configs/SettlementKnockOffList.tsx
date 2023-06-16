@@ -1,5 +1,5 @@
 import { Pill } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase, format, getByKey } from '@cogoport/utils';
 
 import { INVOICE_STATUS } from '../constants';
@@ -36,10 +36,14 @@ const SettlementKnockOffList = () => [
 
 			<div className={styles.amount}>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'documentAmount') as number,
-						getByKey(row, 'currency') as string,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'documentAmount') as any,
+						currency :	getByKey(row, 'currency'),
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
@@ -51,10 +55,14 @@ const SettlementKnockOffList = () => [
 		accessor : (row) => (
 			<div className={styles.amount}>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'settledAmount') as number,
-						getByKey(row, 'currency') as string,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'settledAmount') as any,
+						currency :	getByKey(row, 'currency'),
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
@@ -67,10 +75,14 @@ const SettlementKnockOffList = () => [
 
 			<div className={styles.amount}>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'tds') as number,
-						getByKey(row, 'currency') as string,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'tds') as any,
+						currency :	getByKey(row, 'currency'),
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
@@ -83,10 +95,14 @@ const SettlementKnockOffList = () => [
 
 			<div className={styles.amount}>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'nostroAmount') as number,
-						getByKey(row, 'currency') as string,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'nostroAmount') as any,
+						currency :	getByKey(row, 'currency'),
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
@@ -99,10 +115,14 @@ const SettlementKnockOffList = () => [
 
 			<div className={styles.amount}>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'balanceAmount') as number,
-						getByKey(row, 'currency') as string,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'balanceAmount') as any,
+						currency :	getByKey(row, 'currency'),
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
