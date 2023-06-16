@@ -19,7 +19,7 @@ const PAYLOAD_MAPPING = {
 
 const useListShipmentFlashBookingRates = ({
 	orgId = '',
-	accountType = '',
+	hasFlashBookings = false,
 }) => {
 	const [activeTab, setActiveTab] = useState('win_bookings');
 
@@ -29,7 +29,7 @@ const useListShipmentFlashBookingRates = ({
 	}, { manual: true });
 
 	const shipmentFlashBookingRates = useCallback(async ({ page }) => {
-		if (!orgId || accountType !== 'service_provider') {
+		if (!hasFlashBookings) {
 			return;
 		}
 
@@ -52,14 +52,14 @@ const useListShipmentFlashBookingRates = ({
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [activeTab, orgId, trigger, accountType]);
+	}, [activeTab, orgId, trigger, hasFlashBookings]);
 
 	useEffect(() => {
 		shipmentFlashBookingRates({ page: 1 });
 	}, [shipmentFlashBookingRates]);
 
 	return {
-		data,
+		data: (!loading && hasFlashBookings) ? data : {},
 		loading,
 		setActiveTab,
 		activeTab,

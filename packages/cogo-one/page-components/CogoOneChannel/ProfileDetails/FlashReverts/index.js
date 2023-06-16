@@ -1,6 +1,8 @@
 import { Pagination, cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { IcMServices } from '@cogoport/icons-react';
 import { Image } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import REVERT_RATE_FILTERS from '../../../../constants/revertRatesFIlterMapping';
@@ -16,6 +18,12 @@ const loader = (
 	</div>
 );
 
+const emptyState = (
+	<div className={styles.loader_div}>
+		<Image src={GLOBAL_CONSTANTS.image_url.empty_state} height={100} width={150} />
+	</div>
+);
+
 export default function FlashReverts({
 	orgId = '',
 	activeVoiceCard,
@@ -25,15 +33,26 @@ export default function FlashReverts({
 
 	const userId = formattedMessageData?.user_id || activeVoiceCard?.user_id;
 
+	const hasFlashBookings = orgId && formattedMessageData?.account_type === 'service_provider';
+
 	const {
 		data,
 		loading,
 		setActiveTab,
 		activeTab,
 		shipmentFlashBookingRates,
-	} = useListShipmentFlashBookingRates({ orgId, accountType: formattedMessageData?.account_type });
+	} = useListShipmentFlashBookingRates({ orgId, hasFlashBookings });
 
 	const { list = [], page = 1, page_limit = 10, total_count = '' } = data || {};
+
+	if (!hasFlashBookings) {
+		return (
+			<div className={styles.loader_div}>
+				<IcMServices className={styles.icon} />
+				<text>User is Not a Service Provider</text>
+			</div>
+		);
+	}
 
 	return (
 		<div className={styles.container}>
@@ -61,7 +80,7 @@ export default function FlashReverts({
 						setModalState={setModalState}
 					/>
 				)}
-
+				{!loading && isEmpty(list) && emptyState}
 			</div>
 			{!loading && (
 				<Pagination
