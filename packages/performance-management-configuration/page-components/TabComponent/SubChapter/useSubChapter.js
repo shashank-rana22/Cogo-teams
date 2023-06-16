@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -26,12 +27,16 @@ const useSubChapter = () => {
 				await trigger({
 					params: {
 						page    : !search ? page : DEFAULT_PAGE,
-						filters : { q: search || undefined },
-						status  : activeTab,
+						filters : {
+							q      : search || undefined,
+							status : activeTab,
+						},
 					},
 				});
 			} catch (error) {
-				Toast.error(error?.data);
+				if (error?.response?.data) {
+					Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+				}
 			}
 		},
 		[page, trigger, search, activeTab],

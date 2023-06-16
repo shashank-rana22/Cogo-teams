@@ -29,14 +29,16 @@ const useSquad = () => {
 			await trigger({
 				params: {
 					page    : !search ? page : DEFAULT_PAGE,
-					filters : { q: search || undefined },
-					status  : activeTab,
+					filters : {
+						q      : search || undefined,
+						status : activeTab,
+					},
 				},
 			});
 		} catch (error) {
-			Toast.error(
-				getApiErrorString(error?.response?.data) || 'Something went wrong',
-			);
+			if (error?.response?.data) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	}, [page, search, trigger, activeTab]);
 	const { deleteSquad, loading: deleteLoading } = useDeleteSquad({

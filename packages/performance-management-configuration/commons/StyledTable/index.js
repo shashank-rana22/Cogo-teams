@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 function StyledTable({ columns = [], data = [], loading = false, emptyText }) {
 	if (isEmpty(data) && !loading) {
 		return (
-			<div style={{ paddingTop: 12, paddingLeft: 6 }}>
+			<div style={{ paddingTop: 6, paddingLeft: 6 }}>
 				<EmptyState emptyText={emptyText} />
 			</div>
 		);
