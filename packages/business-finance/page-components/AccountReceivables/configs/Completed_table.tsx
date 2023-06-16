@@ -1,8 +1,7 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import getPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMInfo, IcMOverview, IcMProvision } from '@cogoport/icons-react';
 import { format, getByKey, startCase } from '@cogoport/utils';
-import { CSSProperties } from 'react';
 
 import InvoiceDetails from '../commons/invoiceDetails';
 import Remarks from '../commons/Remarks';
@@ -16,13 +15,13 @@ import ShipmentView from './ShipmentView';
 import SortHeaderInvoice from './SortHeaderInvoice';
 import styles from './styles.module.css';
 
-const status = {
+const STATUS = {
 	UNPAID           : '#FEF1DF',
 	'PARTIALLY PAID' : '#D9EAFD',
 	PAID             : '#CDF7D4',
 };
 
-const invoiceType = {
+const INVOICE_TYPE = {
 	REIMBURSEMENT : '#FEF1DF',
 	CREDIT_NOTE   : '#D9EAFD',
 	INVOICE       : '#CDF7D4',
@@ -43,22 +42,22 @@ const INVOICE_STATUS_MAPPING = {
 const IRN_GENERATEABLE_STATUSES = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
 
 interface InvoiceTable {
-	refetch?: Function;
-	showName?: boolean;
-	setSort?: (p: object) => void;
-	sortStyleGrandTotalAsc?: string;
-	sortStyleGrandTotalDesc?: string;
-	sortStyleInvoiceDateAsc?: string;
-	sortStyleInvoiceDateDesc?: string;
-	sortStyleDueDateAsc?: string;
-	sortStyleDueDateDesc?: string;
-	invoiceFilters?: object;
-	setinvoiceFilters?: (p: object) => void;
-	checkedRows?: object[];
-	setCheckedRows?: Function;
-	totalRows?: object[];
-	isHeaderChecked?: boolean;
-	setIsHeaderChecked?: Function;
+	refetch?: Function,
+	showName?: boolean,
+	setSort?: (p: object)=>void,
+	sortStyleGrandTotalAsc?: string,
+	sortStyleGrandTotalDesc?: string,
+	sortStyleInvoiceDateAsc?: string,
+	sortStyleInvoiceDateDesc?: string,
+	sortStyleDueDateAsc?: string,
+	sortStyleDueDateDesc?: string,
+	invoiceFilters?: object,
+	setinvoiceFilters?: (p:object) => void,
+	checkedRows?:object[],
+	setCheckedRows?:Function,
+	totalRows?:object[],
+	isHeaderChecked?:boolean,
+	setIsHeaderChecked?:Function,
 }
 const MIN_NAME_STRING = 0;
 const MAX_NAME_STRING = 12;
@@ -82,18 +81,16 @@ const completedColumn = ({
 	setIsHeaderChecked,
 }: InvoiceTable) => [
 	{
-		Header: (
-			<HeaderCheckbox
-				isHeaderChecked={isHeaderChecked}
-				setIsHeaderChecked={setIsHeaderChecked}
-				totalRows={totalRows}
-				IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
-				setCheckedRows={setCheckedRows}
-			/>
-		),
+		Header: <HeaderCheckbox
+			isHeaderChecked={isHeaderChecked}
+			setIsHeaderChecked={setIsHeaderChecked}
+			totalRows={totalRows}
+			IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
+			setCheckedRows={setCheckedRows}
+		/>,
 		span     : 1,
 		id       : 'checkbox',
-		accessor : (row?: object) => (
+		accessor : (row?:object) => (
 			<CheckboxItem
 				IRN_GENERATEABLE_STATUSES={IRN_GENERATEABLE_STATUSES}
 				checkedRows={checkedRows}
@@ -105,92 +102,92 @@ const completedColumn = ({
 	{
 		Header   : showName && 'Name',
 		id       : 'name',
-		accessor : (row) => showName
-			&& ((getByKey(row, 'organizationName') as string).length
-			> MAX_NAME_STRING ? (
-				<Tooltip
-					interactive
-					placement="top"
-					content={(
-						<div className={styles.tool_tip}>
+		accessor : (row) => (
+			showName
+			&& (
+				(getByKey(row, 'organizationName') as string).length > MAX_NAME_STRING ? (
+					<Tooltip
+						interactive
+						placement="top"
+						content={<div className={styles.tool_tip}>{getByKey(row, 'organizationName') as string}</div>}
+					>
+						<text className={styles.cursor}>
+							{`${(getByKey(row, 'organizationName') as string).substring(
+								MIN_NAME_STRING,
+								MAX_NAME_STRING,
+							)}...`}
+						</text>
+					</Tooltip>
+				)
+					: (
+						<div>
 							{getByKey(row, 'organizationName') as string}
 						</div>
-					)}
-				>
-					<text className={styles.cursor}>
-						{`${(
-							getByKey(row, 'organizationName') as string
-						).substring(MIN_NAME_STRING, MAX_NAME_STRING)}...`}
-					</text>
-				</Tooltip>
-				) : (
-					<div>{getByKey(row, 'organizationName') as string}</div>
-				)),
+					)
+			)
+		),
 	},
 	{
 		Header   : 'Invoice Number',
 		accessor : (row) => (
-			<div className={styles.fieldPair}>
-				{(getDocumentNumber({ itemData: row }) as string).length
-				> 10 ? (
-					<Tooltip
-						interactive
-						placement="top"
-						content={(
-							<div className={styles.tool_tip}>
+			(
+				<div className={styles.fieldPair}>
+					{(getDocumentNumber({ itemData: row }) as string)?.length > 10 ? (
+						<Tooltip
+							interactive
+							placement="top"
+							content={(
+								<div className={styles.tool_tip}>
+									{getDocumentNumber({ itemData: row }) as string}
+								</div>
+							)}
+						>
+							<text
+								className={styles.link}
+								onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+								role="presentation"
+							>
+								{`${(getDocumentNumber({ itemData: row }) as string).substring(
+									0,
+									10,
+								)}...`}
+							</text>
+						</Tooltip>
+					)
+						: (
+							<div
+								className={styles.link}
+								onClick={() => window.open(getDocumentUrl({ itemData: row }) as string, '_blank')}
+								role="presentation"
+							>
 								{getDocumentNumber({ itemData: row }) as string}
 							</div>
 						)}
-					>
-						<text
-							className={styles.link}
-							onClick={() => window.open(
-								getDocumentUrl({ itemData: row }) as string,
-								'_blank',
-							)}
-							role="presentation"
-						>
-							{`${(
-								getDocumentNumber({ itemData: row }) as string
-							).substring(0, 10)}...`}
-						</text>
-					</Tooltip>
-					) : (
-						<div
-							className={styles.link}
-							onClick={() => window.open(
-								getDocumentUrl({ itemData: row }) as string,
-								'_blank',
-							)}
-							role="presentation"
-						>
-							{getDocumentNumber({ itemData: row }) as string}
-						</div>
-					)}
-				<div>
-					<Pill
-						size="sm"
-						color={
-							invoiceType[getByKey(row, 'invoiceType') as string]
-						}
-					>
-						{row?.eInvoicePdfUrl
-							? 'E INVOICE'
-							: startCase(getByKey(row, 'invoiceType') as string)}
-					</Pill>
+					<div>
+						<Pill size="sm" color={INVOICE_TYPE[(getByKey(row, 'invoiceType') as string)]}>
+
+							{row?.eInvoicePdfUrl ? 'E INVOICE' : startCase(getByKey(row, 'invoiceType') as string)}
+
+						</Pill>
+					</div>
 				</div>
-			</div>
+			)
 		),
 		id: 'invoice_number',
+
 	},
 	{
 		Header   : 'SID',
-		accessor : (row) => <ShipmentView row={row} />,
+		accessor : (row) => (
+			<ShipmentView row={row} />
+		),
 	},
 	{
 		Header: () => (
 			<div className={styles.flex}>
-				<div>Invoice Amount</div>
+				<div>
+					Invoice Amount
+				</div>
 				<SortHeaderInvoice
 					invoiceFilter={invoiceFilters}
 					setInvoiceFilter={setinvoiceFilters}
@@ -202,50 +199,55 @@ const completedColumn = ({
 			</div>
 		),
 		accessor: (row) => (
+
 			<div className={styles.fieldPair}>
 				<div>
 					<div>
-						{getPrice(
-							getByKey(row, 'invoiceAmount') as number,
-							getByKey(row, 'invoiceCurrency') as string,
-						)}
+						{
+						formatAmount({
+							amount   : getByKey(row, 'invoiceAmount') as any,
+							currency : getByKey(row, 'invoiceCurrency') as string,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})
+					}
 					</div>
 				</div>
 
 				<div
 					className={styles.styled_pills}
-					style={
-						{
-							'--color':
-								status[getByKey(row, 'status') as string],
-						} as CSSProperties
-					}
+					style={{
+						'--color': STATUS[(getByKey(row, 'status') as string)],
+					} as any}
 				>
-					{startCase(getByKey(row, 'status') as string).length
-					> 10 ? (
+
+					{startCase(getByKey(row, 'status') as string).length > 10 ? (
 						<Tooltip
 							interactive
 							placement="top"
 							content={(
 								<div className={styles.tool_tip}>
-									{startCase(
-										getByKey(row, 'status') as string,
-									)}
+									{startCase(getByKey(row, 'status') as string)}
 								</div>
 							)}
 						>
 							<text className={styles.style_text}>
-								{`${startCase(
-									getByKey(row, 'status') as string,
-								).substring(0, 10)}...`}
+								{`${startCase(getByKey(row, 'status') as string).substring(
+									0,
+									10,
+								)}...`}
 							</text>
 						</Tooltip>
-						) : (
+					)
+						: (
 							<div className={styles.style_text}>
 								{startCase(getByKey(row, 'status') as string)}
 							</div>
 						)}
 				</div>
+
 			</div>
 		),
 		id: 'invoice_amount',
@@ -255,10 +257,16 @@ const completedColumn = ({
 		accessor : (row) => (
 			<div>
 				<div>
-					{getPrice(
-						getByKey(row, 'ledgerAmount') as number,
-						getByKey(row, 'ledgerCurrency') as string,
-					)}
+					{
+					formatAmount({
+						amount   : getByKey(row, 'ledgerAmount') as any,
+						currency : getByKey(row, 'ledgerCurrency') as string,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})
+					}
 				</div>
 			</div>
 		),
@@ -268,10 +276,17 @@ const completedColumn = ({
 		accessor : (row) => (
 			<div>
 				<div>
-					{getPrice(
-						getByKey(row, 'balanceAmount') as number,
-						getByKey(row, 'invoiceCurrency') as string,
-					)}
+					{
+						formatAmount({
+							amount   : getByKey(row, 'balanceAmount') as any,
+							currency : getByKey(row, 'invoiceCurrency') as string,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})
+					}
+
 				</div>
 			</div>
 		),
@@ -279,7 +294,9 @@ const completedColumn = ({
 	{
 		Header: () => (
 			<div className={styles.flex}>
-				<div>Invoice Date</div>
+				<div>
+					Invoice Date
+				</div>
 				<SortHeaderInvoice
 					invoiceFilter={invoiceFilters}
 					setInvoiceFilter={setinvoiceFilters}
@@ -292,22 +309,19 @@ const completedColumn = ({
 		),
 		accessor: (row) => (
 			<div>
-				<div>
-					{format(
-						getByKey(row, 'invoiceDate') as Date,
-						'dd MMM yy',
-						{},
-						false,
-					)}
-				</div>
+				<div>{format(getByKey(row, 'invoiceDate') as Date, 'dd MMM yy', {}, false)}</div>
+
 			</div>
 		),
 		id: 'invoice_date',
+
 	},
 	{
 		Header: () => (
 			<div className={styles.flex}>
-				<div>Due Date</div>
+				<div>
+					Due Date
+				</div>
 				<SortHeaderInvoice
 					invoiceFilter={invoiceFilters}
 					setInvoiceFilter={setinvoiceFilters}
@@ -320,129 +334,121 @@ const completedColumn = ({
 		),
 		accessor: (row) => (
 			<div>
-				<div>
-					{format(
-						getByKey(row, 'dueDate') as Date,
-						'dd MMM yy',
-						{},
-						false,
-					)}
-				</div>
+				<div>{format(getByKey(row, 'dueDate') as Date, 'dd MMM yy', {}, false)}</div>
+
 			</div>
 		),
 		id: 'due_date',
+
 	},
 
 	{
 		Header   : 'Overdue',
-		accessor : (row) => <div>{getByKey(row, 'overDueDays') as number}</div>,
+		accessor : (row) => (
+			<div>
+				{getByKey(row, 'overDueDays') as number}
+			</div>
+		),
 	},
 
 	{
 		Header   : 'Proforma Status',
 		accessor : (row) => (
+
 			<div
 				className={styles.styled_pills}
-				style={
-					{
-						'--color':
-							INVOICE_STATUS_MAPPING[
-								getByKey(row, 'invoiceStatus') as string
-							],
-					} as CSSProperties
-				}
+				style={{
+					'--color': INVOICE_STATUS_MAPPING[(getByKey(row, 'invoiceStatus') as string)],
+				} as any}
 			>
-				{row?.isFinalPosted ? (
-					<text className={styles.style_text}>FINAL POSTED</text>
-				) : (
+				{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
 					<div>
-						{startCase(getByKey(row, 'invoiceStatus') as string)
-							.length > 10 ? (
-								<Tooltip
-									interactive
-									placement="top"
-									content={(
-										<div className={styles.tool_tip}>
-											{row?.eInvoicePdfUrl
-												? 'E INVOICE GENERATED'
-												: startCase(
-													getByKey(
-														row,
-														'invoiceStatus',
-													) as string,
-											  )}
-										</div>
-									)}
-								>
-									<text className={styles.style_text}>
+						{(startCase(getByKey(row, 'invoiceStatus') as string)).length > 10 ? (
+							<Tooltip
+								interactive
+								placement="top"
+								content={(
+									<div
+										className={styles.tool_tip}
+									>
 										{row?.eInvoicePdfUrl
-											? `${'E INVOICE GENERATED'.substring(
-												0,
-												10,
-										  )}...`
-											: `${startCase(
-												getByKey(
-													row,
-													'invoiceStatus',
-												) as string,
-										  ).substring(0, 10)}...`}
-									</text>
-								</Tooltip>
-							) : (
+											? 'E INVOICE GENERATED'
+											: startCase(getByKey(row, 'invoiceStatus') as string)}
+
+									</div>
+								)}
+							>
+								<text className={styles.style_text}>
+									{row?.eInvoicePdfUrl
+										? `${'E INVOICE GENERATED'.substring(
+											0,
+											10,
+										)}...`
+										: `${startCase(getByKey(row, 'invoiceStatus') as string).substring(
+											0,
+											10,
+										)}...`}
+
+								</text>
+							</Tooltip>
+						)
+							: (
 								<div className={styles.style_text}>
-									{startCase(
-										getByKey(row, 'invoiceStatus') as string,
-									)}
+									{startCase(getByKey(row, 'invoiceStatus') as string)}
 								</div>
 							)}
 					</div>
 				)}
 			</div>
+
 		),
 	},
 
 	{
-		Header: (
-			<div className={styles.action_div}>
-				<span>Actions</span>
-				{' '}
-				<Tooltip
-					placement="top"
-					content={(
-						<div>
-							<div className={styles.div_flex}>
-								<IcMProvision
-									height={24}
-									width={24}
-									color="#F68B21"
-								/>
-								<span className={styles.margin_span}>
-									Remarks
-								</span>
-							</div>
-							<div className={styles.div_flex}>
-								<IcMOverview
-									width={24}
-									height={24}
-									color="#F68B21"
-								/>
-								<span className={styles.margin_span}>
-									Invoice TimeLine
-								</span>
-							</div>
-						</div>
-					)}
-				>
-					<IcMInfo className={styles.icon_style} />
-				</Tooltip>
-			</div>
-		),
+		Header:
+	<div className={styles.action_div}>
+		<span>
+			Actions
+		</span>
+		{' '}
+		<Tooltip
+			placement="top"
+			content={(
+				<div>
+					<div className={styles.div_flex}>
+						<IcMProvision
+							height={24}
+							width={24}
+							color="#F68B21"
+						/>
+						<span className={styles.margin_span}>
+							Remarks
+						</span>
+					</div>
+					<div className={styles.div_flex}>
+						<IcMOverview width={24} height={24} color="#F68B21" />
+						<span className={styles.margin_span}>
+							Invoice TimeLine
+						</span>
+					</div>
+				</div>
+
+			)}
+		>
+			<IcMInfo className={styles.icon_style} />
+		</Tooltip>
+	</div>,
 		id       : 'remarks',
 		accessor : (row) => (
 			<div style={{ display: 'flex', alignItems: 'center' }}>
 				<Remarks itemData={row} />
-				<InvoiceDetails item={row} />
-				<RenderIRNGenerated itemData={row} refetch={refetch} />
+				<InvoiceDetails
+					item={row}
+				/>
+				<RenderIRNGenerated
+					itemData={row}
+					refetch={refetch}
+				/>
 			</div>
 		),
 	},
@@ -455,6 +461,7 @@ const completedColumn = ({
 			</div>
 		),
 	},
+
 ];
 
 export default completedColumn;

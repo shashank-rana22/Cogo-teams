@@ -18,9 +18,6 @@ const getControls = [{
 			placeholder           : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'].toUpperCase(),
 			isPreviousDaysAllowed : true,
 			rules                 : { required: 'This is required' },
-			style                 : {
-				width: '70%',
-			},
 		},
 		{
 			name                  : 'ended_at',
@@ -29,9 +26,6 @@ const getControls = [{
 			placeholder           : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'].toUpperCase(),
 			isPreviousDaysAllowed : true,
 			rules                 : { required: 'This is required' },
-			style                 : {
-				width: '70%',
-			},
 		},
 		{
 			name        : 'description',

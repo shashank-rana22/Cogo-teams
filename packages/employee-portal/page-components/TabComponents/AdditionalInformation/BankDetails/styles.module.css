@@ -4,6 +4,10 @@
 	justify-content: space-around;
 	width: 100%;
 	border-radius: 6px;
+
+	@media (max-width: 768px) {
+		flex-flow: column wrap;
+	}
 }
 
 .sup {
@@ -12,9 +16,13 @@
 
 .control_container {
 	display: flex;
-	flex: 33.33%;
 	flex-flow: column wrap;
+	width: 33%;
 	margin-top: 20px;
+
+	@media (max-width: 768px) {
+		width: 100%;
+	}
 }
 
 .control {
