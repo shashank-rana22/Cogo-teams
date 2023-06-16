@@ -73,7 +73,7 @@ request.interceptors.request.use((oldConfig) => {
 	}
 
 	if (serviceName === 'bookings') {
-		newConfig.baseURL = 'http://10.10.13.233:4001/';
+		newConfig.baseURL = 'http://10.10.13.226:5002/';
 	}
 	return {
 		...newConfig,

@@ -3,6 +3,7 @@
     border: 1px solid #EE3425;
     border-radius: 4px;
     padding: 20px;
+    margin: 10px 16px;
 }
 .text1{
     font-weight: 600;
@@ -16,4 +17,6 @@
     font-weight: 500;
     font-size: 16px;
     color:#EE3425;
+    gap: 5px;
+    margin-left: 25px;
 }
