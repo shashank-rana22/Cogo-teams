@@ -1,8 +1,10 @@
 import React from 'react';
 
+import SpotSearch from './Spot-Search';
+
 function ServiceDiscovery() {
 	return (
-		<div>ServiceDiscovery</div>
+		<SpotSearch />
 	);
 }
 

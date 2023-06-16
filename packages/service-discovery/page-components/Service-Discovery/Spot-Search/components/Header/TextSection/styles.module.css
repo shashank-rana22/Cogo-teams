@@ -1,0 +1,12 @@
+.container{
+
+}
+.back_button{
+    font-size: 26px;
+    margin-bottom: 8px;
+    cursor: pointer;
+}
+.text{  
+    font-size: 44px;
+    color: #221F20;
+}

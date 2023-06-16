@@ -1,0 +1,22 @@
+.container{
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+}
+.heading{
+    font-weight: 600;
+    font-size: 18px;
+    color: #000000;
+}
+.route_form{
+    width:60%;
+}
+.search_button{
+    margin-right: 100px;
+
+    :global{
+        .ui_button_container{
+            width:200px;
+        }
+    }
+}

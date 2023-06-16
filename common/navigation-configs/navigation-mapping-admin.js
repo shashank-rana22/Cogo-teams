@@ -210,7 +210,7 @@ const navigationMappingAdmin = {
 		as            : '/service_discovery',
 		type          : 'link',
 		icon          : IcMFinanceDashboard,
-		possible_apis : [],
+		possible_apis : [...apis.search, ...apis.sales_dashboard],
 		main_apis     : [],
 		module_type   : 'dashboards',
 	},
