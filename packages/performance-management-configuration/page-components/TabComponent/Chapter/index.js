@@ -20,13 +20,13 @@ const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
 
 function Chapter() {
-	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
 
 	const {
 		columns, search, setSearch, data, loading: listApiLoading,
 		page, setPage, fetchList, showDeleteModal, setShowDeleteModal,
-		deleteChapter, deleteLoading, showUpdateChapterModal,
-		setShowUpdateChapterModal, setActiveTab, activeTab,
+		deleteChapter, deleteLoading, showChapterModal,
+		setShowChapterModal, setActiveTab, activeTab,
 	} = useChapter();
 
 	const { list = [], ...paginationData } = data || {};
@@ -34,19 +34,18 @@ function Chapter() {
 	const { total_count, page_limit } = paginationData || {};
 
 	const {
-		showAddChapterModal,
-		setShowAddChapterModal = () => {},
 		onClickSubmitButton,
-		loading,
-	} = useCreateChapter({ fetchList });
+		loading:CreateLoading,
+	} = useCreateChapter({ fetchList, setShowChapterModal });
 
 	const {
 		onClickUpdateButton,
 		loading: UpdateLoading,
-	} = useUpdateChapter({ fetchList, setShowUpdateChapterModal, showUpdateChapterModal });
+	} = useUpdateChapter({ fetchList, setShowChapterModal, showChapterModal });
 
 	const onClickAddButton = () => {
-		setShowAddChapterModal(true);
+		setShowChapterModal('add');
+		reset();
 	};
 
 	return (
@@ -73,33 +72,18 @@ function Chapter() {
 				</div>
 			)}
 
-			{showAddChapterModal ? (
+			{showChapterModal ? (
 				<CreateConfigurationModal
-					showModal={showAddChapterModal}
-					setShowModal={setShowAddChapterModal}
+					showModal={showChapterModal}
+					setShowModal={setShowChapterModal}
 					label={ADD_BUTTON_LABEL}
 					controls={controls}
 					control={control}
 					errors={errors}
-					onClickSubmitButton={onClickSubmitButton}
-					loading={loading}
+					onClickSubmitButton={showChapterModal === 'add' ? onClickSubmitButton : onClickUpdateButton}
+					loading={showChapterModal === 'add' ? CreateLoading : UpdateLoading}
 					handleSubmit={handleSubmit}
-					Type={MODAL_TYPE_ADD}
-				/>
-			) : null}
-
-			{showUpdateChapterModal ? (
-				<CreateConfigurationModal
-					showModal={showUpdateChapterModal}
-					setShowModal={setShowUpdateChapterModal}
-					label={ADD_BUTTON_LABEL}
-					controls={controls}
-					control={control}
-					errors={errors}
-					onClickSubmitButton={onClickUpdateButton}
-					loading={UpdateLoading}
-					handleSubmit={handleSubmit}
-					Type={MODAL_TYPE_UPDATE}
+					Type={showChapterModal === 'add' ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 				/>
 			) : null}
