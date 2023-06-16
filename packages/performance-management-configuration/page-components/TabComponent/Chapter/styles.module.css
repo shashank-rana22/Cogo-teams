@@ -23,6 +23,9 @@
 }
 
 .pill_box{
+	display: flex;
+	flex-flow: row wrap;
+	width: 300px;
 	:global{
 		.tippy-box{
 			max-height: 400px;
