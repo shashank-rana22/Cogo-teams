@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+// import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState } from 'react';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 const useCreateTribe = ({ fetchList }) => {
 	const [showAddTribeModal, setShowAddTribeModal] = useState(false);
 
-	const { control, formState: { errors }, handleSubmit } = useForm();
+	// const { control, formState: { errors }, handleSubmit } = useForm();
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
@@ -33,9 +33,6 @@ const useCreateTribe = ({ fetchList }) => {
 	return {
 		showAddTribeModal,
 		setShowAddTribeModal,
-		control,
-		errors,
-		handleSubmit,
 		onClickSubmitButton,
 		loading,
 	};

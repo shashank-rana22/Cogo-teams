@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 
 import ActiveInactiveTabs from '../../../commons/ActiveInactiveTabs';
 import Header from '../../../commons/CommonHeader';
@@ -22,6 +23,8 @@ const MODAL_TYPE_ADD = 'Add';
 const ADD_BUTTON_LABEL = 'Sub Chapter';
 
 function SubChapter() {
+	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
+
 	const {
 		columns,
 		search,
@@ -46,20 +49,13 @@ function SubChapter() {
 	const {
 		showAddChapterModal,
 		setShowAddChapterModal = () => {},
-		control,
-		errors,
 		onClickSubmitButton,
 		loading,
-		handleSubmit,
 	} = useCreateChapter({ fetchList });
 
 	const {
-		control: UpdateControl,
-		errors: UpdateErrors,
 		onClickUpdateButton,
 		loading: UpdateLoading,
-		handleSubmit: UpdateHandleSubmit,
-		setValue,
 	} = useUpdateSubChapter({
 		fetchList,
 		setShowUpdateSubChapterModal,
@@ -119,11 +115,11 @@ function SubChapter() {
 					showModal={showUpdateSubChapterModal}
 					setShowModal={setShowUpdateSubChapterModal}
 					controls={controls}
-					control={UpdateControl}
-					errors={UpdateErrors}
+					control={control}
+					errors={errors}
 					onClickSubmitButton={onClickUpdateButton}
 					loading={UpdateLoading}
-					handleSubmit={UpdateHandleSubmit}
+					handleSubmit={handleSubmit}
 					Type={MODAL_TYPE_UPDATE}
 					setValue={setValue}
 					label={ADD_BUTTON_LABEL}

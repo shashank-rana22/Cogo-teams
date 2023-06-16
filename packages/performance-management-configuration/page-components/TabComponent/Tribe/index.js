@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 
 import ActiveInactiveTabs from '../../../commons/ActiveInactiveTabs';
 import Header from '../../../commons/CommonHeader';
@@ -19,6 +20,8 @@ const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
 
 function Tribe() {
+	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
+
 	const {
 		search, setSearch, columns, loading:listApiLoading, data, page, setPage, fetchList, showDeleteModal,
 		setShowDeleteModal, deleteLoading, deleteTribe, setShowUpdateTribeModal, showUpdateTribeModal,
@@ -32,20 +35,13 @@ function Tribe() {
 	const {
 		showAddTribeModal,
 		setShowAddTribeModal,
-		control :CreateControl,
-		errors: CreateErrors,
 		onClickSubmitButton,
 		loading:CreateLoading,
-		handleSubmit:CreateHandleSubmit,
 	} = useCreateTribe({ fetchList });
 
 	const {
-		control: UpdateControl,
-		errors: UpdateErrors,
 		onClickUpdateButton,
 		loading: UpdateLoading,
-		handleSubmit: UpdateHandleSubmit,
-		setValue,
 	} = useUpdateTribe({ fetchList, setShowUpdateTribeModal, showUpdateTribeModal });
 
 	const onClickAddButton = () => {
@@ -83,11 +79,11 @@ function Tribe() {
 					setShowModal={setShowAddTribeModal}
 					label={ADD_BUTTON_LABEL}
 					controls={controls}
-					control={CreateControl}
-					errors={CreateErrors}
+					control={control}
+					errors={errors}
 					onClickSubmitButton={onClickSubmitButton}
 					loading={CreateLoading}
-					handleSubmit={CreateHandleSubmit}
+					handleSubmit={handleSubmit}
 					Type={MODAL_TYPE_ADD}
 				/>
 			) : null}
@@ -98,11 +94,11 @@ function Tribe() {
 					setShowModal={setShowUpdateTribeModal}
 					label={ADD_BUTTON_LABEL}
 					controls={controls}
-					control={UpdateControl}
-					errors={UpdateErrors}
+					control={control}
+					errors={errors}
 					onClickSubmitButton={onClickUpdateButton}
 					loading={UpdateLoading}
-					handleSubmit={UpdateHandleSubmit}
+					handleSubmit={handleSubmit}
 					Type={MODAL_TYPE_UPDATE}
 					setValue={setValue}
 				/>

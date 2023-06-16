@@ -1,13 +1,10 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState } from 'react';
 
 const useCreateSquad = ({ fetchList }) => {
 	const [showAddSquadModal, setShowAddSquadModal] = useState(false);
-
-	const { control, formState: { errors }, handleSubmit } = useForm();
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
@@ -32,11 +29,8 @@ const useCreateSquad = ({ fetchList }) => {
 	return {
 		showAddSquadModal,
 		setShowAddSquadModal,
-		control,
-		errors,
 		onClickSubmitButton,
 		loading,
-		handleSubmit,
 	};
 };
 

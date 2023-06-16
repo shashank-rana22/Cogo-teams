@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+// import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
@@ -10,7 +10,7 @@ const useUpdateTribe = ({ fetchList, setShowUpdateTribeModal, showUpdateTribeMod
 	const { user = {} } = profile;
 
 	const { id: user_id } = user;
-	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
+	// const { control, formState: { errors }, handleSubmit, setValue } = useForm();
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
@@ -47,12 +47,12 @@ const useUpdateTribe = ({ fetchList, setShowUpdateTribeModal, showUpdateTribeMod
 	};
 
 	return {
-		control,
-		errors,
+		// control,
+		// errors,
 		onClickUpdateButton,
 		loading,
-		handleSubmit,
-		setValue,
+		// handleSubmit,
+		// setValue,
 	};
 };
 
