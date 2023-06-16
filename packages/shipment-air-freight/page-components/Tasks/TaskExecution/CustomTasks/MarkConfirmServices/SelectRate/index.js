@@ -5,7 +5,6 @@ import useListBookingPreferences
 	from '../../../../../../hooks/useListBookingPreferences';
 
 import Card from './Card';
-// import SelectNormal from './SelectNormal';
 import styles from './styles.module.css';
 
 const CONFIRM_RATE_STEP = 2;
@@ -72,6 +71,7 @@ function SelectRate({
 						setSelectedCard={setSelectedCard}
 						updateConfirmation={updateConfirmation}
 						serviceProvidersData={SERVICE_PROVIDERS_DATA}
+						task={task}
 					/>
 				))}
 			</div>

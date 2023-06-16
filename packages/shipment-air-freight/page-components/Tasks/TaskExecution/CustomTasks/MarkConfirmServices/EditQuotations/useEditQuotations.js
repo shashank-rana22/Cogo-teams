@@ -1,5 +1,6 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import useGetServicesQuotation from '../../../../../../hooks/useGetServicesQuotation';
@@ -14,10 +15,11 @@ const TRADE_MAPPING = {
 	undefined : '',
 };
 const OK_RESPONSE_STATUS = 200;
-
+const BASIC_CHARGE_CODE = ['BAS', 'BASNO'];
 const useEditQuotations = ({
-	servicesList = [], shipment_data = {}, onCancel, task,
+	servicesList = [], shipment_data = {}, onCancel = () => {}, task = {},
 	taskListRefetch = () => {},
+	selectedCard = {},
 }) => {
 	const [allChargeCodes, setAllChargeCodes] = useState({});
 	const SERVICE_IDS = [];
@@ -106,14 +108,26 @@ const useEditQuotations = ({
 	const onSubmit = async (values) => {
 		const QUOTATIONS = [];
 
+		const SELECTED_PRIORITY_LINE_ITEM = selectedCard?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.line_items || [];
+
+		const BASIC_LINE_ITEM = SELECTED_PRIORITY_LINE_ITEM.find(
+			(lineItem) => BASIC_CHARGE_CODE.includes(lineItem.code),
+		) || {};
+
 		Object.keys(values).forEach((key) => {
 			const items = values[key];
-
+			const SERVICE = (service_charges || []).find(
+				(charge) => charge?.id === key,
+			);
 			const newQuote = {
 				id         : key,
 				service_id : (service_charges || []).find((charge) => charge?.id === key)
 					?.service_id,
-				line_items: items.map((line_item) => ({
+				service_type: SERVICE?.service_type,
+				is_minimum_price_shipment:
+				SERVICE?.service_detail?.[GLOBAL_CONSTANTS.zeroth_index]?.is_minimum_price_shipment,
+				min_price  : BASIC_LINE_ITEM.min_price,
+				line_items : items.map((line_item) => ({
 					code     : line_item.code,
 					currency : line_item.currency,
 					name     : chargeCodes?.[line_item?.code] || '',

@@ -1,4 +1,4 @@
-import { toast } from '@cogoport/components';
+import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
@@ -69,7 +69,7 @@ function useStepExecution({
 			&& !getApisData?.list_platform_config_constants?.[GLOBAL_CONSTANTS.zeroth_index]
 				?.platform_config_constant_mappings[GLOBAL_CONSTANTS.zeroth_index]?.value[shipment_data?.airline_id]
 		) {
-			toast.info(
+			Toast.info(
 				'AWB stock is not available, please contact to inventory manager',
 			);
 		}

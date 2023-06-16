@@ -1,5 +1,4 @@
 import { Tooltip, Button } from '@cogoport/components';
-// import { startCase, isEmpty } from '@cogoport/utils';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import getBuyPrice from '../../../utils/getBuyPrice';
@@ -52,12 +51,12 @@ function ListItem({
 					</div>
 				</div>
 				<div>
-					<div className={styles.heading}>Commodity</div>
-					<div className={styles.sub_heading}>{data?.service?.commodity || '-'}</div>
-				</div>
-				<div>
 					<div className={styles.heading}>Gross Weight</div>
 					<div className={styles.sub_heading}>{data?.service?.weight || '-'}</div>
+				</div>
+				<div>
+					<div className={styles.heading}>Commodity</div>
+					<div className={styles.sub_heading}>{data?.service?.commodity || '-'}</div>
 				</div>
 				<div>
 					<div className={styles.heading}>Price Type</div>
@@ -67,6 +66,14 @@ function ListItem({
 					<div className={styles.heading}>Buy Price</div>
 					<div className={styles.sub_heading}>{getBuyPrice(data, item.source) || '-'}</div>
 				</div>
+				{item?.source === 'flash_booking' && (
+					<div>
+						<div className={styles.heading}>Min. Price</div>
+						<div className={styles.sub_heading}>
+							{data?.service?.is_minimum_price_shipment ? 'Yes' : 'No'}
+						</div>
+					</div>
+				)}
 				{data?.data?.rate_procurement_proof_url
 				&& item?.source === 'flash_booking'
 				&& (

@@ -1,24 +1,13 @@
-import { RPASearch } from '@cogoport/air-modules';
 import { Button } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
 const disabledStakeholders = ['release_desk', 'collection_desk'];
 
-const rpaSupportedTasks = [
-	'upload_booking_note',
-	'update_container_details',
-	'upload_draft_bill_of_lading',
-	'upload_bill_of_lading',
-	'upload_si',
-];
-
 function UpdateButton({
 	task = {},
 	handleClick = () => {},
-	handleChange = () => {},
 	hideButton = false,
-	show = false,
 	disabledTaskButton,
 }) {
 	if (hideButton) {
@@ -44,23 +33,6 @@ function UpdateButton({
 	}
 
 	const disableTask = disabledStakeholders.includes(task?.assigned_stakeholder) || disabledTaskButton;
-
-	if (rpaSupportedTasks.includes(task.task)) {
-		return (
-			<div className={styles.container}>
-				<RPASearch
-					onManualUpload={() => handleClick(task)}
-					multiple
-					entity_type={task?.task}
-					onUpload={handleChange}
-				>
-					<Button className={styles.upload_button}>
-						{!show ? buttonText : 'Close'}
-					</Button>
-				</RPASearch>
-			</div>
-		);
-	}
 
 	return (
 		<div className={styles.container}>

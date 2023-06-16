@@ -13,6 +13,7 @@ import styles from './styles.module.css';
 import useUpdateServiceProvider from './updateServiceProviderFunc';
 
 const EXPORT_INCOTERMS = ['ddp', 'dap', 'dat', 'cpt', 'cip', 'cif', 'cfr'];
+
 function EditRate({
 	task = {},
 	servicesList = [],
@@ -21,6 +22,7 @@ function EditRate({
 	refetch = () => {},
 	formattedRate = {},
 	localService = '',
+	selectedCard = {},
 }) {
 	const [errors, setError] = useState({});
 
@@ -147,6 +149,7 @@ function EditRate({
 		taskListRefetch: refetch,
 		formattedRate,
 		trade_type,
+		selectedCard,
 	});
 	useEffect(() => {
 		let airlineName;

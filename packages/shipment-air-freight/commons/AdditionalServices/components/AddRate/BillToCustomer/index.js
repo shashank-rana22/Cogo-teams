@@ -6,7 +6,7 @@ import styles from './styles.module.css';
 function BillToCustomer({ updateResponse, onCancel = () => {}, onBillToCustomer = () => {} }) {
 	const [modeOfReview, setModeOfReview] = useState('bill');
 
-	const { updateBillingInfo } = updateResponse || {};
+	const { updateBillingInfo, loading } = updateResponse || {};
 
 	const options = [
 		{ label: 'Bill to Customer', value: 'bill' },
@@ -37,6 +37,7 @@ function BillToCustomer({ updateResponse, onCancel = () => {}, onBillToCustomer 
 							onCancel();
 						}
 					}}
+					disabled={loading}
 				>
 					{modeOfReview === 'bill' ? 'Add Sell Price' : 'Submit'}
 				</Button>

@@ -37,6 +37,7 @@ function Card({
 	setStep = () => {},
 	setSelectedCard = () => {},
 	serviceProvidersData = [],
+	task = {},
 }) {
 	const dataArr = Array.isArray(item?.data) ? item?.data : [item?.data];
 
@@ -91,30 +92,35 @@ function Card({
 											|| dataObj?.airline?.business_name}
 							</div>
 						</div>
-						<div>
-							<div className={styles.heading}>Chargeable Wt.</div>
-							<div className={styles.sub_heading}>
-								{`${
-									dataObj?.data?.chargeable_weight
+						{item?.source === 'flash_booking' && task?.service_type === 'air_freight_service' && (
+							<>
+								<div>
+									<div className={styles.heading}>Chargeable Wt.</div>
+									<div className={styles.sub_heading}>
+										{`${
+											dataObj?.data?.chargeable_weight
 													|| dataObj?.service?.chargeable_weight
 													|| '--'
-								} Kg`}
-							</div>
-						</div>
-						<div>
-							<div className={styles.heading}>Price Type</div>
-							<div className={styles.sub_heading}>
-								{startCase(dataObj?.data?.price_type) || '--'}
-							</div>
-						</div>
-						<div>
-							<div className={styles.heading}>Min. Price</div>
-							<div className={styles.sub_heading}>
-								{dataObj?.service?.is_minimum_price_shipment
-									? 'Yes'
-									: 'No'}
-							</div>
-						</div>
+										} Kg`}
+									</div>
+								</div>
+								<div>
+									<div className={styles.heading}>Price Type</div>
+									<div className={styles.sub_heading}>
+										{startCase(dataObj?.data?.price_type) || '--'}
+									</div>
+								</div>
+								<div>
+									<div className={styles.heading}>Min. Price</div>
+									<div className={styles.sub_heading}>
+										{dataObj?.service?.is_minimum_price_shipment
+											? 'Yes'
+											: 'No'}
+									</div>
+								</div>
+							</>
+						)}
+
 						<div>
 							<div className={styles.heading}>Source of Rate</div>
 

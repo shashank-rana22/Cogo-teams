@@ -6,6 +6,7 @@ import SelectRate from './SelectRate';
 import styles from './styles.module.css';
 
 const LIST_PREFERENCE_RATE_STEP = 1;
+const CONFIRM_PREFERENCE_RATE_STEP = 2;
 function MarkServiceConfirmed({
 	task = {},
 	servicesList = [],
@@ -16,7 +17,8 @@ function MarkServiceConfirmed({
 	refetch = () => {},
 	localService = '',
 }) {
-	const intialStep = ['air_freight_service'].includes(task.service_type) ? 1 : 2;
+	const intialStep = ['air_freight_service'].includes(task.service_type)
+		? LIST_PREFERENCE_RATE_STEP : CONFIRM_PREFERENCE_RATE_STEP;
 	const [selectedCard, setSelectedCard] = useState(null);
 	const [step, setStep] = useState(intialStep);
 
@@ -48,6 +50,7 @@ function MarkServiceConfirmed({
 				refetch={refetch}
 				localService={localService}
 				formattedRate={formattedRate}
+				selectedCard={selectedCard}
 			/>
 		</div>
 	);

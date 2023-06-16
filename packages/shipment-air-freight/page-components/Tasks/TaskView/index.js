@@ -86,18 +86,6 @@ function TaskView() {
 			}
 		}
 
-		if (
-			element?.shipment_type === 'fcl_freight'
-				&& element?.task === 'upload_si'
-				&& element?.status === 'pending'
-				&& shipment_data?.main_service_trade_type === 'export'
-		) {
-			element.disabled = (tasksList || []).some(
-				(task) => task.service_type === 'fcl_freight_service'
-						&& task.status === 'pending'
-						&& task.task === 'update_container_details',
-			);
-		}
 		return element;
 	});
 	handleDisableTaskButton();
