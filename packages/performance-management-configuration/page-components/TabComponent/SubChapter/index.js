@@ -68,14 +68,16 @@ function SubChapter() {
 
 	return (
 		<div>
-			<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+			<div className={styles.header}>
+				<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
-			<Header
-				setSearch={setSearch}
-				search={search}
-				label={ADD_BUTTON_TEXT}
-				onClickAddButton={onClickAddButton}
-			/>
+				<Header
+					setSearch={setSearch}
+					search={search}
+					label={ADD_BUTTON_TEXT}
+					onClickAddButton={onClickAddButton}
+				/>
+			</div>
 
 			<StyledTable
 				columns={columns}

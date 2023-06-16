@@ -51,14 +51,16 @@ function Squad() {
 
 	return (
 		<div>
-			<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+			<div className={styles.header}>
+				<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
-			<Header
-				search={search}
-				setSearch={setSearch}
-				label={ADD_BUTTON_LABEL}
-				onClickAddButton={onClickAddButton}
-			/>
+				<Header
+					setSearch={setSearch}
+					search={search}
+					label={ADD_BUTTON_LABEL}
+					onClickAddButton={onClickAddButton}
+				/>
+			</div>
 
 			<StyledTable columns={columns} data={list} emptyText={TABLE_EMPTY_TEXT} loading={listApiLoading} />
 

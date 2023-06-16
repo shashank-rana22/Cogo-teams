@@ -52,13 +52,16 @@ function Chapter() {
 	return (
 		<div>
 
-			<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-			<Header
-				setSearch={setSearch}
-				search={search}
-				label={ADD_BUTTON_LABEL}
-				onClickAddButton={onClickAddButton}
-			/>
+			<div className={styles.header}>
+				<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
+				<Header
+					setSearch={setSearch}
+					search={search}
+					label={ADD_BUTTON_LABEL}
+					onClickAddButton={onClickAddButton}
+				/>
+			</div>
 
 			<StyledTable columns={columns} data={list} emptyText={TABLE_EMPTY_TEXT} loading={listApiLoading} />
 

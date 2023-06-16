@@ -19,6 +19,7 @@ const TABS_MAPPING = {
 
 function TabComponent() {
 	const [activeTab, setActiveTab] = useState('squad');
+
 	return (
 		<div className={styles.container}>
 			<Tabs
