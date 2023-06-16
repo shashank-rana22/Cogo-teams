@@ -84,6 +84,7 @@ function Header({
 									serviceActiveTab={serviceActiveTab}
 									setFilters={setFilters}
 									filters={filters}
+									setFilterPopover={setFilterPopover}
 								/>
 							)}
 							visible={filterPopover}

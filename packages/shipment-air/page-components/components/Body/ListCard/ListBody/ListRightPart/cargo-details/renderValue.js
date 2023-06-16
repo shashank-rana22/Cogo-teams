@@ -70,13 +70,12 @@ const renderValue = (props = '', item = {}) => {
 						{' '}
 						{item?.master_airway_bill_number || ''}
 					</span>
-					<Button
-						className="secondary sm"
-						themeType="secondary"
+					<div
+						aria-hidden="true"
 						onClick={() => copyToClipboard(item?.master_airway_bill_number || '')}
 					>
 						<IcMCopy />
-					</Button>
+					</div>
 				</div>
 			);
 

@@ -7,7 +7,7 @@ import getFilterControls from '../../../utils/getControls';
 
 import styles from './styles.module.css';
 
-function Filter({ serviceActiveTab = 'air_freight', setFilters = () => {}, filters = {} }) {
+function Filter({ serviceActiveTab = 'air_freight', setFilters = () => {}, setFilterPopover }) {
 	const getControls = getFilterControls({ serviceActiveTab });
 
 	const { formState:{ errors }, control, reset, getValues } = useForm({ getControls });
@@ -19,6 +19,7 @@ function Filter({ serviceActiveTab = 'air_freight', setFilters = () => {}, filte
 
 	const handleApplyFilters = () => {
 		setFilters(getValues());
+		setFilterPopover(false);
 	};
 
 	useEffect(() => {

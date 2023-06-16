@@ -12,7 +12,7 @@ function ShipmentAir() {
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
-	const { data, filters, setFilters } = useListShipment({ serviceActiveTab, shipmentStateTab, searchQuery });
+	const { data, filters, setFilters, loading, setPage } = useListShipment({ serviceActiveTab, shipmentStateTab, searchQuery });
 	return (
 		<div>
 			<h1>
@@ -28,7 +28,7 @@ function ShipmentAir() {
 				filters={filters}
 			/>
 
-			<Body data={data} />
+			<Body data={data} loading={loading} setPage={setPage} />
 		</div>
 	);
 }

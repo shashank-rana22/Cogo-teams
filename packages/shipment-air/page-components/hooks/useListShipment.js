@@ -8,11 +8,12 @@ const SHIPMENT_STATE_MAPPINGS = {
 };
 const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) => {
 	const [filters, setFilters] = useState({});
+	const [page, setPage] = useState(1);
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_shipments',
 		method : 'GET',
 		params : {
-			page    : 1,
+			page,
 			q       : searchQuery,
 			filters : {
 				state         : SHIPMENT_STATE_MAPPINGS[shipmentStateTab],
@@ -23,7 +24,7 @@ const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) =>
 
 	const apiTrigger = async () => {
 		const params = {
-			page    : 1,
+			page,
 			q       : searchQuery,
 			filters : {
 				state         : SHIPMENT_STATE_MAPPINGS[shipmentStateTab],
@@ -40,7 +41,7 @@ const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) =>
 
 	useEffect(() => {
 		apiTrigger();
-	}, [serviceActiveTab, shipmentStateTab, searchQuery, filters]);
+	}, [serviceActiveTab, shipmentStateTab, searchQuery, filters, page]);
 
 	return {
 		loading,
@@ -48,6 +49,7 @@ const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) =>
 		apiTrigger,
 		setFilters,
 		data,
+		setPage,
 
 	};
 };

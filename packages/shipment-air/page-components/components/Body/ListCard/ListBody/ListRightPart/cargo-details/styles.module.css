@@ -10,4 +10,8 @@
       border: "none";
     }
   }
+  .ui_button_container {
+    height: 0px;
+    border: none;
+  }
 }
