@@ -109,7 +109,7 @@ function FilterModal({ filters = {}, setFilters = () => { } }) {
 					<IcMFilter />
 				</span>
 				{Object.keys(filters)?.filter((key) => ((key !== 'category')
-					&& (!isEmpty(filters?.[key])))?.length > FILTER_LENGTH)
+					&& (!isEmpty(filters?.[key])))).length > FILTER_LENGTH
 					&& <IcCRedCircle height={8} width={8} />}
 			</div>
 		</div>
