@@ -98,7 +98,6 @@ function Messages({
 		setDisableButton,
 		canMessageOnBotSession,
 	});
-	// console.log('activeMessageCard', activeMessageCard);
 
 	const {
 		getNextData = () => {},

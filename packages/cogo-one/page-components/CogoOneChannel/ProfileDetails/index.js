@@ -22,6 +22,7 @@ function ProfileDetails({
 	zippedTicketsData = {},
 	viewType = '',
 	hasVoiceCallAccess,
+	firestore,
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
@@ -91,6 +92,7 @@ function ProfileDetails({
 						quotationSentData={quotationEmailSentAt}
 						viewType={viewType}
 						hasVoiceCallAccess={hasVoiceCallAccess}
+						firestore={firestore}
 					/>
 				)}
 			</div>

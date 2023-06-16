@@ -28,12 +28,22 @@ function useAssignChat({
 			`${FIRESTORE_PATH[channel_type]}/${id}`,
 		);
 
-		const { group_members = [] } = activeMessageCard || [];
+		const { requested_group_members = [], group_members = [] } = activeMessageCard || [];
+
+		if (group_members.includes(profile.user.id)) {
+			Toast.warn('You are alredy in group');
+			return;
+		}
+
+		if (requested_group_members.includes(profile.user.id)) {
+			Toast.warn('You have alredy sent request');
+			return;
+		}
 
 		await updateDoc(roomRef, {
-			group_members: [...new Set([...group_members, profile.user.id])],
-
+			requested_group_members: [...new Set([...requested_group_members, profile.user.id])],
 		});
+		Toast.success('Successfully Sent Request');
 	};
 
 	const assignChat = async (payload, callbackFun = () => {}) => {
@@ -56,10 +66,14 @@ function useAssignChat({
 					},
 				});
 				callbackFun();
+
+				if (!canMessageOnBotSession) {
+					Toast.success('Successfully Assigned');
+				}
 			}
+
 			if (!canMessageOnBotSession) {
 				closeModal();
-				Toast.success('Successfully Assigned');
 			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

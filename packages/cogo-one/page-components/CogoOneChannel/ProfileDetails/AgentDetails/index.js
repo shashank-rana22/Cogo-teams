@@ -1,20 +1,23 @@
-import { Avatar, Pill, Placeholder, Toast } from '@cogoport/components';
+import { Pill, Placeholder, Toast } from '@cogoport/components';
 import { IcMCall, IcCWhatsapp } from '@cogoport/icons-react';
 import { isEmpty, snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
+import useGetPartnerUsers from '../../../../hooks/useGetPartnerUsers';
 import useGetUser from '../../../../hooks/useGetUser';
-import hideDetails from '../../../../utils/hideDetails';
+import useGroupChat from '../../../../hooks/useGroupChat';
 
 import ConversationContainer from './ConversationContainer';
 import ExecutiveSummary from './ExecutiveSummary';
+import GroupMembers from './GroupMembers';
+import GroupMembersRequests from './GroupMembersRequests';
+import Profile from './Profile';
 import styles from './styles.module.css';
 import VoiceCallComponent from './VoiceCallComponent';
 
 const LINK_BEFORE_QUERY_PARAMS = 0;
-
 function AgentDetails({
 	activeMessageCard = {},
 	activeTab,
@@ -29,6 +32,7 @@ function AgentDetails({
 	setActiveSelect = () => {},
 	setShowMore = () => {},
 	hasVoiceCallAccess = false,
+	firestore,
 }) {
 	const {
 		user_id,
@@ -41,7 +45,13 @@ function AgentDetails({
 		channel_type = '',
 		user_type, id = '',
 	} = formattedMessageData || {};
-
+	const { partner_users } = useGetPartnerUsers({ activeMessageCard });
+	console.log('partner_users', partner_users);
+	const {
+		deleteGroupMember,
+		approveGroupRequest,
+		deleteGroupRequest,
+	} = useGroupChat({ activeMessageCard, firestore });
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
 		name         : '',
@@ -49,13 +59,11 @@ function AgentDetails({
 		number       : '',
 	});
 	const [showError, setShowError] = useState(false);
-
 	const {
 		user_data = {},
 		user_number = '',
 		organization_id: voiceOrgId = '',
 	} = activeVoiceCard || {};
-
 	const DATA_MAPPING = {
 		voice: {
 			userId        : user_data?.id,
@@ -76,11 +84,8 @@ function AgentDetails({
 	};
 
 	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
-
 	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({ updateLeaduser, setShowError, sender });
-
 	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
-
 	const { mobile_verified, whatsapp_verified } = userData || {};
 
 	const VERIFICATION_STATUS = [
@@ -97,7 +102,6 @@ function AgentDetails({
 			prefixIcon : <IcCWhatsapp />,
 		},
 	];
-
 	const handleSubmit = async () => {
 		if (!isEmpty(profileValue?.name) && !isEmpty(profileValue?.number)) {
 			await leadUserProfile({ profileValue });
@@ -107,13 +111,11 @@ function AgentDetails({
 			setShowError(true);
 		}
 	};
-
 	const handleClick = () => {
 		const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[LINK_BEFORE_QUERY_PARAMS];
 		navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
 		Toast.success('Copied!!!');
 	};
-
 	const handleSummary = () => {
 		setShowMore(true);
 		setActiveSelect('user_activity');
@@ -137,7 +139,6 @@ function AgentDetails({
 			</>
 		);
 	}
-
 	return (
 		<>
 			<div className={styles.top_div}>
@@ -152,40 +153,7 @@ function AgentDetails({
 					</div>
 				)}
 			</div>
-			<div className={styles.content}>
-				<Avatar
-					src="https://www.w3schools.com/howto/img_avatar.png"
-					alt="img"
-					disabled={false}
-					className={styles.user_div}
-				/>
-
-				<div className={styles.details}>
-					{loading ? (
-						<>
-							<Placeholder
-								height="13px"
-								width="120px"
-								margin="0px 0px 10px 0px"
-							/>
-							<Placeholder
-								height="13px"
-								width="120px"
-								margin="0px 0px 0px 0px"
-							/>
-						</>
-					) : (
-						<>
-							<div className={styles.name}>
-								{name || 'unknown user'}
-							</div>
-							<div className={styles.email}>
-								{userEmail ? hideDetails({ data: userEmail, type: 'mail' }) : ''}
-							</div>
-						</>
-					)}
-				</div>
-			</div>
+			<Profile loading={loading} name={name} userEmail={userEmail} />
 			{(leadUserId || userId) && (
 				<div className={styles.verification_pills}>
 					{VERIFICATION_STATUS.map((item, index) => {
@@ -232,6 +200,17 @@ function AgentDetails({
 					hasVoiceCallAccess={hasVoiceCallAccess}
 				/>
 			)}
+			<GroupMembers
+				deleteGroupMember={deleteGroupMember}
+				group_members={activeMessageCard.group_members}
+				partner_users={partner_users}
+			/>
+			<GroupMembersRequests
+				deleteGroupRequest={deleteGroupRequest}
+				approveGroupRequest={approveGroupRequest}
+				group_members={activeMessageCard.requested_group_members}
+				partner_users={partner_users}
+			/>
 			{(mobile_no || user_number) && (
 				<>
 					<div className={styles.conversation_title}>Other Channels</div>
@@ -247,7 +226,6 @@ function AgentDetails({
 					/>
 				</>
 			)}
-
 			<ExecutiveSummary
 				handleSummary={handleSummary}
 				mobile_no={mobile_no}
