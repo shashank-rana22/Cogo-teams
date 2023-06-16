@@ -1,4 +1,5 @@
-import getFormattedPrice from '../../commons/utils/getFormattedPrice';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 const totalPayablesKeyMappings = ({ payablesData }) => {
 	const {
@@ -7,38 +8,80 @@ const totalPayablesKeyMappings = ({ payablesData }) => {
 	} = payablesData || {};
 	return [
 		{
-			label     : '0-30 Days ',
-			valueKey  : getFormattedPrice(Math.abs(thirtyDayOverdue), 'INR'),
+			label    : '0-30 Days ',
+			valueKey : formatAmount({
+				amount   : Math.abs(thirtyDayOverdue) as any,
+				currency : GLOBAL_CONSTANTS.currency_code.INR,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_0_30',
 		},
 		{
-			label     : '30-60 Days ',
-			valueKey  : getFormattedPrice(Math.abs(threeSixtyDayOverdue), 'INR'),
+			label    : '30-60 Days ',
+			valueKey : formatAmount({
+				amount   :	Math.abs(threeSixtyDayOverdue) as any,
+				currency : GLOBAL_CONSTANTS.currency_code.INR,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_30_60',
 		},
 		{
-			label     : '60-90 Days ',
-			valueKey  : getFormattedPrice(Math.abs(sixtyDayOverdue), 'INR'),
+			label    : '60-90 Days ',
+			valueKey : formatAmount({
+				amount   :	Math.abs(sixtyDayOverdue) as any,
+				currency : GLOBAL_CONSTANTS.currency_code.INR,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_60_90',
 		},
 		{
-			label     : '90-180 Days ',
-			valueKey  : getFormattedPrice(Math.abs(ninetyDayOverdue), 'INR'),
+			label    : '90-180 Days ',
+			valueKey : formatAmount({
+				amount   :	Math.abs(ninetyDayOverdue) as any,
+				currency : GLOBAL_CONSTANTS.currency_code.INR,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_90_180',
 		},
 		{
-			label     : '180-365 Days',
-			valueKey  : getFormattedPrice(Math.abs(oneEightyDayOverdue), 'INR'),
+			label    : '180-365 Days',
+			valueKey : formatAmount({
+				amount   :	Math.abs(oneEightyDayOverdue) as any,
+				currency : GLOBAL_CONSTANTS.currency_code.INR,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
 			textColor : '#cb6464',
 			countKey  : 'pan_count__180_365',
 		},
 		{
-			label     : '365+ Days ',
-			valueKey  : getFormattedPrice(Math.abs(threeSixtyPlusDayOverdue), 'INR'),
+			label    : '365+ Days ',
+			valueKey : formatAmount({
+				amount   :	Math.abs(threeSixtyPlusDayOverdue) as any,
+				currency : GLOBAL_CONSTANTS.currency_code.INR,
+				options  : {
+					style           : 'currency',
+					currencyDisplay : 'code',
+				},
+			}),
 			textColor : '#cb6464',
 			countKey  : 'pan_count_365',
 		},
