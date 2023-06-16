@@ -34,7 +34,7 @@ const ENTITY_MAPPING = {
 		id                : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
 		icon              : IcCCountryIndia,
 		currency          : 'INR',
-		feature_supported : ['cogo_books', 'post_to_sage', 'irn_cancel'],
+		feature_supported : ['cogo_books', 'post_to_sage', 'irn_cancel', 'radio_mapping'],
 		labels            : {
 			irn_label: 'IRN',
 		},
@@ -56,7 +56,7 @@ const ENTITY_MAPPING = {
 		id                : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 		icon              : IcCCountryVietnam,
 		currency          : 'VND',
-		feature_supported : ['cogo_books', 'irn_cancel'],
+		feature_supported : ['cogo_books', 'irn_cancel', 'text_mapping'],
 		labels            : {
 			irn_label: 'E-invoice',
 		},

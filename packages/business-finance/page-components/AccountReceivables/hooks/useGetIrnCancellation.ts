@@ -1,25 +1,31 @@
 import { Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
 
 interface IrnCancellationProps {
 	id?: string;
+	entityCode?: string;
 	setShowCancellationModal?: Function;
-	response?: {
-		remarks?: string;
-	},
 	refetch?: Function;
 }
 interface Values {
 	agreementNumber?: string;
 	agreementDate?: string;
 	agreementPdfFile?: AgreementPdfFile;
+	remarks?: string;
+	value?: string;
 }
 
 interface AgreementPdfFile {
 	finalUrl?: string;
 }
 
-const useGetIrnCancellation = ({ id, setShowCancellationModal, response, refetch }: IrnCancellationProps) => {
+const useGetIrnCancellation = ({
+	id,
+	setShowCancellationModal,
+	refetch,
+	entityCode,
+}: IrnCancellationProps) => {
 	const [
 		{ loading },
 		cancelIrnApi,
@@ -32,23 +38,37 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal, response, refetch
 		{ manual: true },
 	);
 
-	const { remarks } = response || {};
+	const RADIO_GROUP = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('radio_mapping');
+
+	const TEXT_AREA = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('text_mapping');
+
 	const onSubmit = async (values: Values) => {
 		const {
 			agreementNumber,
 			agreementDate,
 			agreementPdfFile,
+			remarks,
+			value,
 		} = values || {};
 		const { finalUrl } = agreementPdfFile || {};
+
 		try {
-			const payload = {
-				cancelReason      : remarks || undefined,
-				agreementNumber   : agreementNumber || undefined,
-				agreementDate     : agreementDate || undefined,
-				agreementDocument : finalUrl || undefined,
-			};
+			let PAYLOAD = {};
+			if (TEXT_AREA) {
+				PAYLOAD = {
+					cancelReason      : remarks || undefined,
+					agreementNumber   : agreementNumber || undefined,
+					agreementDate     : agreementDate || undefined,
+					agreementDocument : finalUrl || undefined,
+				};
+			} else if (RADIO_GROUP) {
+				PAYLOAD = {
+					cancelReason   : value,
+					cancelReminder : remarks,
+				};
+			}
 			const resp = await cancelIrnApi({
-				data: payload,
+				data: PAYLOAD,
 			});
 			if (resp.status === 200) {
 				Toast.success('IRN Cancelled Successfully');

@@ -43,7 +43,7 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 
 	const content = () => (
 		<div className={styles.container}>
-			{ isAfterADay && GET_ENTITY && (
+			{ GET_ENTITY && (
 				<Button
 					size="sm"
 					onClick={() => {
