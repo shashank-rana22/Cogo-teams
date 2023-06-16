@@ -2,6 +2,7 @@ import { Button, cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
@@ -12,7 +13,6 @@ import ClickableDiv from '../../../../../ClickableDiv';
 
 import Actions from './Actions';
 import CNNullify from './CNNullify';
-import InvoiceInfo from './InvoiceInfo';
 import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
@@ -89,8 +89,14 @@ function Header({
 		});
 	};
 
+	const handleDownload = (invoiceLink) => {
+		window.open(invoiceLink);
+	};
+
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized);
+
+	const creditSource = invoice?.credit_option?.credit_source?.split('_');
 
 	return (
 		<div className={styles.container}>

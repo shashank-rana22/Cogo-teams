@@ -9,7 +9,7 @@ const SHOW_EDIT_SUPPLIER_STAKEHOLDERS = ['superadmin', 'booking_desk', 'document
 const SERVICE_COMPLETED_OR_CANCELLED = ['completed', 'cancelled'];
 
 export default function getCanEditSupplier({ shipment_data, user_data, state, activeStakeholder }) {
-	if (user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
+	if (user_data?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id) {
 		return true;
 	}
 
