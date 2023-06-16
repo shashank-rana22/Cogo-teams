@@ -1,7 +1,8 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import TabSelect from '../../../../../commons/TabSelect/index';
-import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice';
 import { toTitleCase } from '../../../../utils/getFormattedData';
 
 import styles from './styles.module.css';
@@ -42,10 +43,14 @@ function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 						Discount Applied (KAM) :
 					</div>
 					<div className={styles.value_text}>
-						{getFormattedPrice(
-							discountAppliedKam,
-							'INR',
-						)}
+						{formatAmount({
+							amount   :	discountAppliedKam as any,
+							currency :	GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 				</div>
 				<div className={styles.discount}>
@@ -53,10 +58,14 @@ function CardHeader({ amountTab, setAmountTab, itemData }: PropsType) {
 						Discount Applied (Revenue Desk) :
 					</div>
 					<div className={styles.value_text}>
-						{getFormattedPrice(
-							discountAppliedRevenueDesk,
-							'INR',
-						) || ' -'}
+						{formatAmount({
+							amount   :	discountAppliedRevenueDesk as any,
+							currency :	GLOBAL_CONSTANTS.currency_code.INR,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						}) || ' -'}
 					</div>
 				</div>
 			</div>
