@@ -15,6 +15,8 @@ import styles from './styles.module.css';
 const TAB_MAPPING = [
 	{ name: 'approval', title: 'Approval' },
 ];
+
+const ICON_SIZE = 25;
 const DEFAULT_PAGE_SIZE = 0;
 const DEFAULT_TOTAL_ITEM = 0;
 const DEFAULT_CURRENT_PAGE = 1;
@@ -48,7 +50,7 @@ function Content(props) {
 		const profitability = getValues('minimum_profitability');
 
 		const id = platformData?.list?.[DEFAULT_PAGE_SIZE]
-			.platform_config_constant_mappings?.[DEFAULT_PAGE_SIZE]?.id;
+			?.platform_config_constant_mappings?.[DEFAULT_PAGE_SIZE]?.id;
 
 		const payload = {
 			id,
@@ -95,8 +97,8 @@ function Content(props) {
 						onClick={() => {
 							handleSettings();
 						}}
-						width="25px"
-						height="25px"
+						width={ICON_SIZE}
+						height={ICON_SIZE}
 					/>
 					<Modal size="sm" show={showModal} onClose={handleModalClose}>
 						<Modal.Header title="Setting" />
