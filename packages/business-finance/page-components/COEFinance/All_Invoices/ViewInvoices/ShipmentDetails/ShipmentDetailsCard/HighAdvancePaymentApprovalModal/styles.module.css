@@ -1,0 +1,66 @@
+.current_payment_row {
+    display: flex;
+    margin-bottom: 2rem;
+
+    .current_payment_cols {
+        display: flex;
+        flex-direction: column;
+        width: 100%;
+    
+        .heading{
+            white-space: nowrap;
+            color: #6A6A6A;
+        }
+
+        .value {
+            font-weight: 500;
+            color: #221F20;
+        }
+    }
+}
+
+.payment_history_heading {
+    font-weight: 600;
+    color: #231F20;
+}
+
+.payment_history_list {
+    border: 1px solid #f3f3f3;
+    border-radius: 5px;
+    margin-block: 1rem;
+
+    .row {
+        display: grid;
+        grid-template-columns: repeat(6, 1fr);
+        font-size: 12px;
+        text-transform: capitalize;
+        color: #333333;
+        padding-inline: 10px;
+
+        .col {
+            flex: 1;
+            padding-block: 0.5rem;
+        }
+    }
+
+    .row:not(:first-of-type):nth-of-type(odd) {
+        background: #FBFAF9;
+    }
+
+    .heading_row {
+        font-weight: 600;
+        color: #C26D1A;
+        background: #FFFAEE;
+    }
+}
+
+.user_input_row {
+    display: flex;
+    margin-block: 1rem;
+
+     > .item {
+        flex-grow: 0;
+        flex: 0.35;
+        margin-inline: 5px
+    }
+}

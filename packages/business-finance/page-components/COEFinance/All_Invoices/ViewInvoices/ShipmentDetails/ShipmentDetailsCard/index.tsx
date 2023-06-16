@@ -18,6 +18,7 @@ import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
 import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import isDisabled from '../../../../utils/isDisabled';
 
+import HighAmountRequestModal from './HighAdvancePaymentApprovalModal';
 import LineItemCard from './lineItemCard/index';
 import styles from './styles.module.css';
 
@@ -46,6 +47,7 @@ function ShipmentDetailsCard({
 	const [rejected, setRejected] = useState([]);
 	const [showLineItem, setShowLineItem] = useState(false);
 	const [showRejected, setShowRejected] = useState({});
+	const [showHighAdvanceModal, setShowHighAdvancedModal] = useState(false);
 	const {
 		lineItems, buyerDetail, sellerBankDetail, sellerDetail, bill, billAdditionalObject,
 	} = data || {};
@@ -56,7 +58,10 @@ function ShipmentDetailsCard({
 		registrationNumber: registrationNumberBuyer = '',
 		taxNumber: taxNumberBuyer = '',
 	} = buyerDetail || {};
-	const { organizationName = '', taxNumber = '', registrationNumber = '' } = sellerDetail || {};
+	const {
+		organizationName = '', taxNumber = '', registrationNumber = '',
+		organizationId: sellerOrganizationId,
+	} = sellerDetail || {};
 	const {
 		bankName = '',
 		accountNumber = '',
@@ -70,7 +75,9 @@ function ShipmentDetailsCard({
 		status = '',
 		placeOfSupply = '',
 		billType = '',
-		isProforma,
+		isProforma = false,
+		billDocumentUrl,
+		grandTotal,
 	} = bill || {};
 
 	const {
@@ -79,9 +86,9 @@ function ShipmentDetailsCard({
 		outstandingDocument = '',
 		paymentType = '',
 		isIncidental = '',
-		advancedAmount = 0,
 		advancedAmountCurrency = '',
-
+		serialId = '',
+		advancedAmount = '0',
 	} = billAdditionalObject || {};
 
 	const [DetailsCard, setDetailsCard] = useState([
@@ -141,9 +148,9 @@ function ShipmentDetailsCard({
 		}));
 	};
 
-	const viewDocument = (document) => {
-		window.open(document);
-	};
+	// const viewDocument = (document) => {
+	// 	window.open(document);
+	// };
 	const onClose = () => {
 		if (Object.keys(showRejected).includes('1')) {
 			setRemarksVal({ ...remarksVal, collectionPartyRemark: null });
@@ -167,6 +174,19 @@ function ShipmentDetailsCard({
 
 	return (
 		<div>
+			<HighAmountRequestModal
+				invoiceData={{
+					invoiceNumber       : billNumber,
+					serialNumber        : serialId,
+					invoiceUploadDate   : billDate,
+					invoice             : billDocumentUrl,
+					totalInvoiceValue   : grandTotal,
+					advancedAmountValue : advancedAmount,
+					outstandingDocument,
+					sellerOrganizationId,
+				}}
+				modalData={{ show: showHighAdvanceModal, hide: () => setShowHighAdvancedModal(false) }}
+			/>
 			{showLineItem ? (
 				<LineItemCard
 					lineItems={lineItems}
@@ -636,6 +656,8 @@ function ShipmentDetailsCard({
                         }
 											>
 												{label}
+												{' '}
+												Invoice Details
 												<div
 													style={{ justifyContent: 'center', display: 'flex' }}
 												>
@@ -717,17 +739,29 @@ function ShipmentDetailsCard({
 											{shipmentType === 'ftl_freight' && outstandingDocument
 											&& (
 												<div className={styles.document}>
-													Outstanding Proforma Approval -
+													Advance amount -
+													{((+advancedAmount / +grandTotal) * 100).toFixed(2)}
+													%
 													{' '}
-													<Button
-														className={styles.button}
-														onClick={() => {
-															viewDocument(outstandingDocument);
-														}}
-													>
-														View
+													(
+													{advancedAmount}
+													/
+													{grandTotal}
+													)
 
-													</Button>
+													{!!outstandingDocument && (
+														<Button
+															className={styles.button}
+															onClick={() => {
+																// viewDocument(outstandingDocument);
+																setShowHighAdvancedModal(true);
+															}}
+														>
+															View
+
+														</Button>
+													)}
+
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'

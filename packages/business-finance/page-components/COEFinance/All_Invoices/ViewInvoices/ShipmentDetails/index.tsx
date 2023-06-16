@@ -72,8 +72,9 @@ interface BillAdditionalObjectInterface {
 	outstandingDocument? : string;
 	paymentType? : string;
 	isIncidental? : string;
-	advancedAmount? : number;
 	advancedAmountCurrency? : string;
+	serialId?: string,
+	advancedAmount?: string,
 }
 export interface DataInterface {
 	job?: JobInterface;
@@ -84,6 +85,7 @@ export interface DataInterface {
 	sellerDetail?: SellerDetailInterface;
 	bill: BillInterface;
 	consolidatedShipmentIds:Array<string>;
+	organizationId?: string
 }
 
 interface ShipmentDetailsInterface {
@@ -97,6 +99,7 @@ interface ShipmentDetailsInterface {
 	lineItem?: boolean;
 	status: string;
 	jobType?:string;
+	organizationId?: string,
 }
 function ShipmentDetails({
 	data,
