@@ -24,7 +24,7 @@ function Squad() {
 	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
 
 	const {
-		search, setSearch, columns, loading:listApiLoading, data, page, setPage, setShowDeleteModal,
+		search, setSearch, columns, loading: listApiLoading, data, page, setPage, setShowDeleteModal,
 		showDeleteModal, deleteSquad, deleteLoading, fetchList, setShowSquadModal, showSquadModal,
 		activeTab, setActiveTab,
 

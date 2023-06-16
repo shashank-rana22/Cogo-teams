@@ -4,16 +4,17 @@
 .active {
 	width: fit-content;
 	padding: 0 6px;
-	border-radius: 4px;
 	background: var(--color-tertiary-success-green-3);
-  }
-  .inactive {
-	  width: fit-content;
-	  padding: 0 6px;
-	  border-radius: 4px;
-	  background: var(--color-primary-error-red-4);
-  }
-  
+	border-radius: 4px;
+}
+
+.inactive {
+	width: fit-content;
+	padding: 0 6px;
+	background: var(--color-primary-error-red-4);
+	border-radius: 4px;
+}
+
 .pagination_container {
 	display: flex;
 	justify-content: flex-start;
@@ -22,20 +23,21 @@
 	padding-bottom: 20px;
 }
 
-.pill_box{
+.pill_box {
 	display: flex;
 	flex-flow: row wrap;
 	width: 300px;
-	:global{
-		.tippy-box{
+
+	:global {
+		.tippy-box {
 			max-height: 400px;
 			overflow-y: scroll;
 		}
 	}
 }
 
-.button{
+.button {
 	display: flex;
 	align-items: center;
 	margin-left: 20px;
-  }
+}

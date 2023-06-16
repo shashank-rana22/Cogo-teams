@@ -17,10 +17,10 @@
 
 		.ui_table_body_cell {
 			flex-wrap: wrap;
+			width: auto;
 			padding: 12px 8px;
 			background: #fff;
 			background-color: #fff;
-			width: auto;
 		}
 
 		.ui_table_body_row {
