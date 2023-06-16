@@ -2,25 +2,25 @@ import { Button } from '@cogoport/components';
 
 import styles from './PostToSageModal/styles.module.css';
 
-export 	const getFinalDetails = (sagePaymentInfo, platformPaymentInfo) => {
+export const getFinalDetails = (sagePaymentInfo, platformPaymentInfo) => {
 	const {
-		sage_payment_num:sagePaymentNum = '',
-		platform_payment_num:platformPaymentNumber = '',
-		bpr_number:bprNumber = '',
-		gl_code:glCode = '',
+		sage_payment_num: sagePaymentNum = '',
+		platform_payment_num: platformPaymentNumber = '',
+		bpr_number: bprNumber = '',
+		gl_code: glCode = '',
 		currency = '',
-		entity_code:entity = '',
+		entity_code: entity = '',
 		amount = 0,
-		sage_status:sageStatus = '',
-		organization_name:organizationName = '',
+		sage_status: sageStatus = '',
+		organization_name: organizationName = '',
 	} = sagePaymentInfo || {};
 
 	const {
-		sage_ref_number:sageRefNumber = '',
+		sage_ref_number: sageRefNumber = '',
 		organization_name: orgNamePlatform = '',
-		payment_num_value:paymentNumValue = '',
+		payment_num_value: paymentNumValue = '',
 		sage_organization_id: bprNumberPlatForm = '',
-		acc_code:accCode = '',
+		acc_code: accCode = '',
 		currency: currencyPlatform = '',
 		entity_code: entityCodePlateform = '',
 		amount: amountPlatform = 0,
@@ -54,7 +54,11 @@ export 	const getFinalDetails = (sagePaymentInfo, platformPaymentInfo) => {
 	];
 };
 
-export 	const contentIsFinalPosted = (finalPostSageInfo, finalSageInfoDataLoading, paymentDocumentStatus) => (
+export const contentIsFinalPosted = (
+	finalPostSageInfo,
+	finalSageInfoDataLoading,
+	paymentDocumentStatus,
+) => (
 	<div className={styles.final_container}>
 		<Button
 			themeType="accent"
@@ -71,7 +75,12 @@ export 	const contentIsFinalPosted = (finalPostSageInfo, finalSageInfoDataLoadin
 	</div>
 );
 
-export 	const contentIsPosted = (GET_ENTITY, itemData, handlePermissionModal, entityType) => (
+export const contentIsPosted = (
+	GET_ENTITY,
+	itemData,
+	handlePermissionModal,
+	entityType,
+) => (
 	<div className={styles.container}>
 		<div
 			className={styles.styled_text}
@@ -95,11 +104,22 @@ export 	const contentIsPosted = (GET_ENTITY, itemData, handlePermissionModal, en
 	</div>
 );
 
-export 	const content = (accMode, itemData, handlePermissionModal, closePopover) => (
+export const content = (
+	accMode,
+	itemData,
+	handlePermissionModal,
+	closePopover,
+) => (
 	<div className={styles.container}>
 		{accMode === 'AR' && (
 			<>
-				<div className={styles.styled_text} role="presentation" onClick={closePopover}>Edit</div>
+				<div
+					className={styles.styled_text}
+					role="presentation"
+					onClick={closePopover}
+				>
+					Edit
+				</div>
 
 				<div className={styles.hr} />
 			</>
