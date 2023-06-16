@@ -10230,11 +10230,6 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'promotion',
 		},
-		{
-			api          : 'bulk_transfer_promotion_budget',
-			access_type  : 'private',
-			service_name : 'promotion',
-		},
 	],
 	cogo_assured: [
 		{
