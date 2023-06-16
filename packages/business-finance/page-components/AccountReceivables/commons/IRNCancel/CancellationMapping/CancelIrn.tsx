@@ -5,7 +5,7 @@ import { IRN_CANCEL_OPTIONS } from '../../../constants';
 import useGetIrnCancellation from '../../../hooks/useGetIrnCancellation';
 import styles from '../styles.module.css';
 
-function RadioGroupIN({
+function CancelIrn({
 	itemData,
 	showCancellationModal,
 	setShowCancellationModal,
@@ -93,4 +93,4 @@ function RadioGroupIN({
 	);
 }
 
-export default RadioGroupIN;
+export default CancelIrn;

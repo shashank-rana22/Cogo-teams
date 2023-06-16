@@ -1,7 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-import RadioGroupIN from './CancellationMapping/RadioGroupIN';
-import TextAreaVN from './CancellationMapping/TextAreaVN';
+import CancelEinvoice from './CancellationMapping/CancelEinvoice';
+import CancelIrn from './CancellationMapping/CancelIrn';
 
 type Item = {
 	entityCode?: number;
@@ -23,15 +23,16 @@ function CancellationModal({
 }: CancelModal) {
 	const { entityCode } = itemData || {};
 
-	const RADIO_GROUP = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('radio_mapping');
+	const CANCEL_IRN = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('cancel_irn');
 
-	const TEXT_AREA = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('text_mapping');
+	const CANCEL_EINVOICE =	 GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
+		?.feature_supported?.includes('cancel_e_invoice');
 
 	return (
 		<div>
-			{ RADIO_GROUP
+			{ CANCEL_IRN
 			&& (
-				<RadioGroupIN
+				<CancelIrn
 					itemData={itemData}
 					showCancellationModal={showCancellationModal}
 					setShowCancellationModal={setShowCancellationModal}
@@ -39,9 +40,9 @@ function CancellationModal({
 					entityCode={entityCode}
 				/>
 			)}
-			{ TEXT_AREA
+			{ CANCEL_EINVOICE
 			&& (
-				<TextAreaVN
+				<CancelEinvoice
 					itemData={itemData}
 					showCancellationModal={showCancellationModal}
 					setShowCancellationModal={setShowCancellationModal}

@@ -21,7 +21,7 @@ const mapping: Record<string, { key: string }> = {
 	Cancellation_reason : { key: 'CANCELLATION_REASON' },
 };
 
-function TextAreaVN({
+function CancelEinvoice({
 	itemData,
 	showCancellationModal,
 	setShowCancellationModal,
@@ -199,4 +199,4 @@ function TextAreaVN({
 		</Modal>
 	);
 }
-export default TextAreaVN;
+export default CancelEinvoice;
