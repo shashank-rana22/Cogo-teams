@@ -8,6 +8,9 @@ import getCreateInstructionParams from '../helpers/getCreateInstructionParams';
 import categoryOptions from './categoryOptions';
 import styles from './styles.module.css';
 
+const OFFSET_INDEX_FOR_DELETE = 0;
+const PLUS_ICON_DIMENSION = 16;
+
 const EMPTY_VALUES = {
 	category : '',
 	remarks  : '',
@@ -91,7 +94,7 @@ function AdditionalForm({
 								control={control}
 							/>
 						</div>
-						{index !== 0 && (
+						{index !== OFFSET_INDEX_FOR_DELETE ? (
 							<div>
 								<Button
 									type="button"
@@ -105,7 +108,7 @@ function AdditionalForm({
 								</Button>
 
 							</div>
-						)}
+						) : null}
 					</div>
 				))}
 
@@ -115,7 +118,7 @@ function AdditionalForm({
 						themeType="tertiary"
 					>
 						<div className={styles.add_content}>
-							<IcMPlusInCircle height={16} width={16} />
+							<IcMPlusInCircle height={PLUS_ICON_DIMENSION} width={PLUS_ICON_DIMENSION} />
 							&nbsp;
 							Add
 						</div>
@@ -141,12 +144,10 @@ function AdditionalForm({
 							disabled={createLoading}
 						>
 							Submit
-
 						</Button>
 					</div>
 				</div>
 			</form>
-
 		</div>
 	);
 }
