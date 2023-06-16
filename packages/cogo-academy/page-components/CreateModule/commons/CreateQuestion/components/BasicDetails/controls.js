@@ -17,7 +17,7 @@ const getControls = ({ mode }) => [
 			{ value: 'case_study', label: 'Case Study' },
 			{ value: 'subjective', label: 'Subjective' },
 		],
-		disabled : mode !== 'new',
+		disabled : mode === 'view',
 		multiple : false,
 	},
 	{
@@ -32,14 +32,7 @@ const getControls = ({ mode }) => [
 		rules    : { required: 'Required' },
 		multiple : false,
 	},
-	{
-		name        : 'question_text',
-		type        : 'textarea',
-		placeholder : 'Type Case...',
-		disabled    : mode === 'view',
-		rules       : { required: 'This is required' },
-		rows        : 4,
-	},
+
 ];
 
 export default getControls;

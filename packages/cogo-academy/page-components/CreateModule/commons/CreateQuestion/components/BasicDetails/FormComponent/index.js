@@ -122,7 +122,7 @@ function FormComponent({
 						</div>
 						{errors?.question_text ? <div className={styles.error_msg}>This is required</div> : null}
 
-						{mode === 'edit' && (
+						{(!isNewQuestion || mode === 'edit') && (
 							<Button
 								className={styles.save_btn}
 								themeType="primary"
