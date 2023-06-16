@@ -1,5 +1,5 @@
 import { RadioGroup, Modal, Button, Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCError } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import { useState } from 'react';
@@ -75,10 +75,14 @@ function Footer({
 				<div className={styles.title}>Expense</div>
 				<div className={styles.div_currency}>
 					<div className={styles.currency_value}>
-						{getFormattedPrice(
-							totalIExpense.toFixed(2),
+						{formatAmount({
+							amount  :	totalIExpense.toFixed(2),
 							currency,
-						) || 'INR 0'}
+							options : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						}) }
 					</div>
 
 				</div>
@@ -88,10 +92,14 @@ function Footer({
 				<div className={styles.title}>Income</div>
 				<div className={styles.div_currency}>
 					<div className={styles.currency_value}>
-						{getFormattedPrice(
-							totalIncome.toFixed(2),
+						{formatAmount({
+							amount  :	totalIncome.toFixed(2),
 							currency,
-						) || 'INR 0'}
+							options : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						}) }
 					</div>
 
 				</div>
