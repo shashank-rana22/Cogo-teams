@@ -12,6 +12,12 @@ const API_SUCCESS_MESSAGE = {
 	approved : 'Invoice approved!,',
 };
 
+const CREDIT_SOURCE_FIRST = 0;
+
+const SLICE_CREDIT_UPTO = -2;
+
+const CREDIT_INDEX_OFFSET = 2;
+
 function InvoiceDetail({
 	invoice = {},
 	invoicesList = [],
@@ -27,20 +33,20 @@ function InvoiceDetail({
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === live_invoice_number,
-	)?.[0];
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const handleDownload = (invoiceLink) => {
 		window.open(invoiceLink);
 	};
 
-	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[0]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
@@ -120,13 +126,13 @@ function InvoiceDetail({
 				{invoice?.payment_mode === 'credit' ? (
 					<div>
 						<div className={styles.info_container}>
-							{startCase(creditSource?.slice(0, -2))}
+							{startCase(creditSource?.slice(CREDIT_SOURCE_FIRST, SLICE_CREDIT_UPTO))}
 						</div>
 
 						<div className={styles.payment_method}>
 							{startCase(
 								`${
-									creditSource?.[(creditSource?.length ?? 0) - 2]
+									creditSource?.[(creditSource?.length ?? CREDIT_SOURCE_FIRST) - CREDIT_INDEX_OFFSET]
 								} deferred payment`,
 							)}
 						</div>
