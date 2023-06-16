@@ -13,10 +13,10 @@ function ShowSellRates({
 
 	const sellPrice = `${buy_price * SELL_RATE_INCREASE_BY}`;
 	return (
-		<div>
-			<div>{currency || ''}</div>
+		<div style={{display:'flex',alignItems:'center'}}>
+			<div style={{fontSize:'16px',fontWeight:'700',color:'#221F20',marginRight:'5px'}}>{currency || ''}</div>
 			<Input
-				size="md"
+				size="sm"
 				value={
 					sellRates[id] || sellRates[id] === '' ? sellRates[id] : sellPrice
 				}

@@ -14,6 +14,7 @@ import ServiceWiseDetails from './ServiceWiseDetails';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
+import CancelledShipmentCard from './CancelledShipmentCard';
 
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 	const [showDetail, setShowDetail] = useState(true);
@@ -106,10 +107,10 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 				</div>
 
 			</div>
+			{itemData?.state==='Cancelled'?<CancelledShipmentCard itemData={itemData} />:null}
 			<div className={styles.card_container}>
 				<ShipmentCard itemData={itemData} priceData={priceData} />
 			</div>
-
 			<div className={styles.tabs_container}>
 				<Tabs
 					activeTab={activeTabPanel}

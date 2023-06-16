@@ -41,7 +41,6 @@ function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 				setPriceData(updatedPriceData);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(data)]);
-
 	return (
 		<>
 			<div className={styles.text1}>

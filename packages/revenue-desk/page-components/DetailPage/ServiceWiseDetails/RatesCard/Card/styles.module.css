@@ -11,8 +11,8 @@
 .selected_rate_card_container {
 	display: flex;
 	align-items: center;
-	padding: 16px 20px 0;
-	margin: 24px 0;
+	padding: 5px 5px 0;
+	margin: 14px 0;
 	background-color: #f3fafa;
 	border: 1px solid #88cad1;
 	border-radius: 4px;
@@ -73,17 +73,24 @@
 
 .progress_bar_section {
 	display: flex;
-	padding: 10px 36px;
+	/* padding: 10px 36px; */
 	border-right: 1px dashed #bdbdbd;
 }
 
-.price_text {
+.price_text_section {
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
+	align-items: center;
+	gap:10px;
+}
+.total_price_section{
 	font-size: 14px;
 	font-weight: 500;
 	color: #828282;
 	display: flex;
-	align-items: center;
-	gap:10px;
+	flex-direction: column;
+	justify-content: center;
 }
 
 .first_section {
@@ -96,6 +103,13 @@
 
 .price_section {
 	padding: 8px;
+	display: flex;
+	flex-direction: column;
+	font-weight: 500;
+	font-size: 12px;
+	color: #4F4F4F;
+	justify-content: center;
+	border-right: 1px dashed #bdbdbd;
 }
 
 .service_provider_heading {
@@ -111,4 +125,36 @@
 	display: flex;
 	justify-content: center;
 	flex-direction: column;
+}
+
+.progress_bar_container{
+	:global{
+		.ui_progressbar_container{
+			width:140px;
+		}
+		.ui_progressbar_bar{
+			height:20px;
+		}
+		.ui_progressbar_progress{
+			height:20px;
+			background-color: #DDEBC0;
+		}
+	}
+}
+
+.positive_profit{
+	font-weight: 600;
+	font-size: 14px;	
+	color:#849E4C
+}
+
+.negative_profit{
+	font-weight: 600;
+	font-size: 14px;	
+	color:#EE3425
+}
+.total_price_text{
+	font-weight: 700;
+	font-size: 16px;
+	color: #221F20;
 }

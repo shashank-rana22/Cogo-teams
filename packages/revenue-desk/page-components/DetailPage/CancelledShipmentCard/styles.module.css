@@ -1,0 +1,19 @@
+.container{
+    background-color: #FFF7F7;
+    border: 1px solid #EE3425;
+    border-radius: 4px;
+    padding: 20px;
+}
+.text1{
+    font-weight: 600;
+    font-size: 22px;
+    color:#EE3425;
+    align-items: center;
+    display: flex;
+    gap: 5px;
+}
+.text2{
+    font-weight: 500;
+    font-size: 16px;
+    color:#EE3425;
+}

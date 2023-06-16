@@ -73,10 +73,18 @@ function ShipmentCard({ itemData, priceData }) {
 						</span>
 					</div>
 					<div className={styles.kamdiscount_text}>
-						KAM Discount Applied :
+						{itemData?.promotion_category === 'marketing' ? 'MARKETING' : 'KAM'} Discount Applied :
 						{' '}
 						<span>
-							INR 1000
+								{formatAmount({
+									amount   : itemData?.discount_amount,
+									currency :itemData?.discount_amount_currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									}}
+								)}
 						</span>
 					</div>
 				</div>

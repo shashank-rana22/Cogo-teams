@@ -34,28 +34,6 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			unit
 		};
 	};
-	const getMinRateForAir = (rates, chargeable_weight) => {
-		let minRate = null;
-		let currencyForAir = null;
-		let unitForAir=null;
-		if (rates?.length) {
-			minRate = rates[0]?.tariff_price;
-			currencyForAir = rates[0]?.currency;
-			rates.forEach((rate) => {
-				if (chargeable_weight >= rate?.lower_limit) {
-					minRate = rate?.tariff_price;
-					currencyForAir = rate?.currency;
-					unitForAir=rate?.unit;
-				}
-			});
-		}
-		return {
-			minRate,
-			currencyForAir,
-			unitForAir
-		};
-	};
-
 	const rows = [];
 	(data || []).forEach((element) => {
 		const {
@@ -66,17 +44,8 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			validity_end,
 			unit
 		} = getMinRate(element?.line_items || element?.validities);
-		console.log(minimumRate,unit,'unitunit')
 
 		const chargeable_weight = singleServiceData?.chargeable_weight;
-		const { minRate, currencyForAir,unitForAir } = getMinRateForAir(element?.weight_slabs, chargeable_weight);
-		let total_buy_price = 0;
-		if (singleServiceData?.service_type === 'air_freight_services') {
-			total_buy_price = Math.max(Number(minRate)
-			* Number(chargeable_weight), element?.min_price);
-		} else if (singleServiceData?.shipment_type === 'fcl_freight_services') {
-			total_buy_price = Number(singleServiceData?.containers_count) * Number(minimumRate);
-		}
 		const { completed_shipments = 0, cancelled_shipments = 0 } = element;
 		const row = {};
 		const rowData = {};
@@ -85,27 +54,28 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			|| element?.shipping_line?.short_name;
 		rowData.air_line = element?.airline?.business_name;
 		rowData.service_provider = element?.service_provider;
-		rowData.buy_price = minimumRate || minRate;
-		rowData.currency = currency || currencyForAir;
+		rowData.buy_price = minimumRate;
+		rowData.currency = currency;
 		rowData.price_type = element?.price_type;
 		rowData.chargeable_weight = chargeable_weight;
 		rowData.container_count = singleServiceData?.containers_count;
 		rowData.is_rate_expired = is_rate_expired;
 		rowData.schedule_type = schedule_type;
-		rowData.unit=unit || unitForAir;
+		rowData.unit=unit;
 		rowData.active_booking = element?.ongoing_shipment;
 		rowData.service_provider = element?.service_provider;
 		rowData.allocation_ratio = undefined;
 		rowData.fulfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
 			? Number(completed_shipments)
 			/ (Number(completed_shipments) + Number(cancelled_shipments)) : 0;
-		rowData.total_buy_price = total_buy_price || 0;
+		rowData.total_buy_price = element?.total_price || 0;
+		rowData.total_buy_currency=element?.total_price_currency;
 		rowData.validity_end = validity_end || element?.validity_end;
 		rowData.origin_locals_price = element?.origin_locals?.total_price;
 		rowData.origin_locals_currency = element?.origin_locals?.total_price_currency;
 		rowData.destination_locals_price = element?.destination_locals?.total_price;
 		rowData.destination_locals_currency = element?.destination_locals?.total_price_currency;
-		rowData.origin_main_port_id =			element?.origin_main_port_id && element?.origin_main_port_id !== 'None'
+		rowData.origin_main_port_id =element?.origin_main_port_id && element?.origin_main_port_id !== 'None'
 			? element?.origin_main_port_id
 			: null;
 		rowData.destination_main_port_id =			element?.destination_main_port_id
