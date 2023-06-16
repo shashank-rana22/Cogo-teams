@@ -1,11 +1,11 @@
 import { Pill, ProgressBar } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMDrag } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
 import PriorityNumber from './PriorityNumber';
 import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 function Card({
 	data, setPrefrences, prefrences, rate_key, serviceData, setSellRates,
@@ -116,12 +116,12 @@ function Card({
 						) : null}
 					</div>
 					<div className={styles.progress_bar_section}>
-						<div style={{ marginRight: '25px' }}>
+						<div style={{ marginRight: '20px' }}>
 							<div className={styles.text}>
 								Allocation Ratio
 							</div>
 							<div className={styles.progress_bar_container}>
-								<ProgressBar progress={Number(data?.rowData?.allocation_ratio)*100 || Number(.2)*100}uploadText=" done" />
+								<ProgressBar progress={Number(data?.rowData?.allocation_ratio) * 100 || Number(0.2) * 100} uploadText=" " />
 							</div>
 						</div>
 						<div>
@@ -129,95 +129,113 @@ function Card({
 								Fulfillment Ratio
 							</div>
 							<div className={styles.progress_bar_container}>
-								<ProgressBar progress={Number(data?.rowData?.fulfillment_ratio)*100} uploadText=" done" />
+								<ProgressBar progress={Number(data?.rowData?.fulfillment_ratio) * 100} uploadText=" " />
 							</div>
 						</div>
 					</div>
 					<div className={styles.price_section}>
-						<div style={{display:'flex'}}>
+						<div style={{ display: 'flex' }}>
 							<div>
 								{startCase(serviceData?.service_type)}
-								{' '}: {' '}
+								{' '}
+								:
+								&nbsp;
 							</div>
-							<div>
+							<div className={styles.price_value}>
 								{formatAmount({
-										amount   :data?.rowData?.total_buy_price,
-										currency :data?.rowData?.total_buy_currency,
-										options  : {
-											style                 : 'currency',
-											currencyDisplay       : 'code',
-											maximumFractionDigits : 2,
-										},
+									amount   : data?.rowData?.total_buy_price,
+									currency : data?.rowData?.total_buy_currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
 								})}
 							</div>
 						</div>
 						<div>
 							{
-								data?.rowData?.origin_locals_price ?
-								<div>Origin Local Price : {' '}
-									{formatAmount({
-											amount   :data?.rowData?.origin_locals_price,
-											currency :data?.rowData?.origin_locals_price_currency,
-											options  : {
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-												maximumFractionDigits : 2,
-											},
-									})}
-								</div>
-								:null
+								data?.rowData?.origin_locals_price
+									? (
+										<div style={{ display: 'flex' }}>
+											Origin Local Price :
+											&nbsp;
+											<div className={styles.price_value}>
+												{formatAmount({
+													amount   : data?.rowData?.origin_locals_price,
+													currency : data?.rowData?.origin_locals_price_currency,
+													options  : {
+														style                 : 'currency',
+														currencyDisplay       : 'code',
+														maximumFractionDigits : 2,
+													},
+												})}
+											</div>
+										</div>
+									)
+									: null
 							}
 							{
-								data?.rowData?.origin_locals_price ?
-								<div>Destination Local Price : {' '}
-								{formatAmount({
-											amount   :data?.rowData?.destination_locals_price,
-											currency :data?.rowData?.destination_locals_price_currency,
-											options  : {
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-												maximumFractionDigits : 2,
-											},
-								})}
-								</div>
-								:null
+								data?.rowData?.origin_locals_price
+									? (
+										<div style={{ display: 'flex' }}>
+											Destination Local Price :
+											&nbsp;
+											<div className={styles.price_value}>
+												{formatAmount({
+													amount   : data?.rowData?.destination_locals_price,
+													currency : data?.rowData?.destination_locals_price_currency,
+													options  : {
+														style                 : 'currency',
+														currencyDisplay       : 'code',
+														maximumFractionDigits : 2,
+													},
+												})}
+
+											</div>
+
+										</div>
+									)
+									: null
 							}
 						</div>
 					</div>
 					<div className={styles.total_price_section}>
-							<div style={{display:'flex'}}>
-								Total Buy Price :
-								<div className={styles.total_price_text}>
-									{formatAmount({
-												amount   :data?.rowData?.total_buy_price,
-												currency :data?.rowData?.total_buy_currency,
-												options  : {
-													style                 : 'currency',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : 2,
-												},
-										})}
-								</div>
-									
+						<div style={{ display: 'flex' }}>
+							Total Buy Price : &nbsp;
+							<div className={styles.total_price_text}>
+								{formatAmount({
+									amount   : data?.rowData?.total_buy_price,
+									currency : data?.rowData?.total_buy_currency,
+									options  : {
+										style                 : 'currency',
+										currencyDisplay       : 'code',
+										maximumFractionDigits : 2,
+									},
+								})}
 							</div>
-							<div style={{display:'flex'}}>
-								Profitability :
-								<div className={Number(profitability)>0 ? styles.positive_profit : styles.negative_profit }>
-										{(Number(profitability)*100).toFixed(2)}%
-								</div>
+
+						</div>
+						<div style={{ display: 'flex' }}>
+							Profitability : &nbsp;
+							<div className={Number(profitability) > 0 ? styles.positive_profit : styles.negative_profit}>
+								{(Number(profitability) * 100).toFixed(2)}
+								%
 							</div>
+						</div>
 					</div>
 					{isShowSellRate && (
-					<div role="presentation" className={styles.edit_price_section} onClick={handleCardClick}>
+						<div role="presentation" className={styles.edit_price_section} onClick={handleCardClick}>
+							<div className={styles.edit_price_heading}>Sell Rate / Contr.</div>
 							<ShowSellRates
 								data={data}
 								sellRates={sellRates}
 								setSellRates={setSellRates}
 							/>
-					</div>
-					 )}  
+						</div>
+					)}
 				</div>
-				
+
 			</div>
 		</div>
 	);
