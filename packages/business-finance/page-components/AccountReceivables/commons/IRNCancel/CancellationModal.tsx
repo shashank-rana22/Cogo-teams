@@ -4,7 +4,7 @@ import RadioGroupIN from './CancellationMapping/RadioGroupIN';
 import TextAreaVN from './CancellationMapping/TextAreaVN';
 
 type Item = {
-	entityCode?: string;
+	entityCode?: number;
 };
 interface CancelModal {
 	itemData?: Item;

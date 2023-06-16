@@ -46,6 +46,7 @@ function TextAreaVN({
 		setShowCancellationModal,
 		refetch,
 		entityCode,
+		responseRemark: response,
 	});
 
 	const mappedValues: MappedValues = Object.entries(mapping).reduce((result, [property, { key }]) => {

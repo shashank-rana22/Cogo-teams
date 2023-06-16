@@ -7,6 +7,9 @@ interface IrnCancellationProps {
 	entityCode?: string;
 	setShowCancellationModal?: Function;
 	refetch?: Function;
+	responseRemark?: {
+		remarks?: string;
+	};
 }
 interface Values {
 	agreementNumber?: string;
@@ -25,6 +28,7 @@ const useGetIrnCancellation = ({
 	setShowCancellationModal,
 	refetch,
 	entityCode,
+	responseRemark,
 }: IrnCancellationProps) => {
 	const [
 		{ loading },
@@ -42,6 +46,8 @@ const useGetIrnCancellation = ({
 
 	const TEXT_AREA = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('text_mapping');
 
+	const { remarks: remarkEntry } = responseRemark;
+
 	const onSubmit = async (values: Values) => {
 		const {
 			agreementNumber,
@@ -56,7 +62,7 @@ const useGetIrnCancellation = ({
 			let PAYLOAD = {};
 			if (TEXT_AREA) {
 				PAYLOAD = {
-					cancelReason      : remarks || undefined,
+					cancelReason      : remarkEntry || undefined,
 					agreementNumber   : agreementNumber || undefined,
 					agreementDate     : agreementDate || undefined,
 					agreementDocument : finalUrl || undefined,
