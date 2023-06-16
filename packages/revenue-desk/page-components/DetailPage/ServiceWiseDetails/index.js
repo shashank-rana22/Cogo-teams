@@ -31,7 +31,6 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 		sellRateDetails,
 		rateOptions,
 	});
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_select_container}>

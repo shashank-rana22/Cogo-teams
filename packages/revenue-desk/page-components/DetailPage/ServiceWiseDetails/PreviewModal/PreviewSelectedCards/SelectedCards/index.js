@@ -4,7 +4,7 @@ function SelectedCards({ prefrences, price, shipmentType }) {
 	return (
 		<div>
 			{prefrences?.map((Singleitem, index) => (
-				<div key={Singleitem}>
+				<div key={Singleitem?.id}>
 					<SingleSelectedCard
 						data={Singleitem?.data}
 						index={index}

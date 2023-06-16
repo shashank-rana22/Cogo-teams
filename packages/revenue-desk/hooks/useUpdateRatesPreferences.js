@@ -30,8 +30,7 @@ const useUpdateRatesPreferences = ({
 					priority : provider?.priority,
 					rate_id  : provider?.rate_id,
 					id       : provider?.id,
-					booking_confirmation_status:
-					data?.service_type === 'air_freight_service' ? 'pending' : undefined,
+					booking_confirmation_status:data?.service_type === 'air_freight_service' ? 'pending' : undefined,
 				});
 			});
 			(inventory?.[service_id] || []).forEach((docs) => {

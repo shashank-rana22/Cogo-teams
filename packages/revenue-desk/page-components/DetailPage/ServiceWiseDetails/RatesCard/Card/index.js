@@ -62,6 +62,13 @@ function Card({
 		profitability = (Number(parseFloat(price?.replace(/[^0-9.-]+/g, ''))) - Number(data?.rowData?.total_buy_price))
 		/ Number(data?.rowData?.total_buy_price);
 	}
+	let netTotalBuyPrice=Number(data?.rowData?.total_buy_price);
+	if(data?.rowData?.origin_locals_price ){
+		netTotalBuyPrice+=Number(data?.rowData?.origin_locals_price)
+	}
+	if(data?.rowData?.destination_locals_price ){
+		netTotalBuyPrice+=Number(data?.rowData?.destination_locals_price)
+	}
 	return (
 		<div
 			className={rate_key ? styles.selected_rate_card_container : styles.container}
@@ -189,7 +196,7 @@ function Card({
 								Total Buy Price :
 								<div className={styles.total_price_text}>
 									{formatAmount({
-												amount   :data?.rowData?.total_buy_price,
+												amount   :netTotalBuyPrice,
 												currency :data?.rowData?.total_buy_currency,
 												options  : {
 													style                 : 'currency',
