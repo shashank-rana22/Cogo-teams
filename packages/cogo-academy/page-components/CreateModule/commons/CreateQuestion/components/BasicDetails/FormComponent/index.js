@@ -1,3 +1,4 @@
+import { Button } from '@cogoport/components';
 import { ChipsController } from '@cogoport/forms';
 import { IcMCrossInCircle } from '@cogoport/icons-react';
 
@@ -31,8 +32,6 @@ function FormComponent({
 		handleUpdateCaseStudy,
 		loading,
 		RichTextEditor,
-		editorValue,
-		setEditorValue,
 	} = useHandleBasicDetails({
 		setEditDetails,
 		setAllKeysSaved,
@@ -45,6 +44,8 @@ function FormComponent({
 		setValue,
 		setShowForm,
 		listSetQuestions,
+		caseStudyQuestionEditorValue,
+		setCaseStudyQuestionEditorValue,
 	});
 
 	return (
@@ -121,16 +122,18 @@ function FormComponent({
 						</div>
 						{errors?.question_text ? <div className={styles.error_msg}>This is required</div> : null}
 
-						{/* <Button
-							className={styles.save_btn}
-							themeType="primary"
-							size="sm"
-							loading={loading}
-							type="submit"
-							onClick={() => handleUpdateCaseStudy()}
-						>
-							save
-						</Button> */}
+						{mode === 'edit' && (
+							<Button
+								className={styles.save_btn}
+								themeType="primary"
+								size="sm"
+								loading={loading}
+								type="button"
+								onClick={() => handleUpdateCaseStudy()}
+							>
+								Update
+							</Button>
+						)}
 					</div>
 
 				</>

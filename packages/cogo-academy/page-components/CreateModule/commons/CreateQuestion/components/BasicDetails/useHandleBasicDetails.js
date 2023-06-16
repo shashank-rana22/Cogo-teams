@@ -1,4 +1,4 @@
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 
 import useUpdateCaseStudy from '../../../../hooks/useUpdateCaseStudy';
 
@@ -22,8 +22,9 @@ const useHandleBasicDetails = ({
 	setValue,
 	setShowForm,
 	listSetQuestions,
+	caseStudyQuestionEditorValue,
+	setCaseStudyQuestionEditorValue,
 }) => {
-	const [editorValue, setEditorValue] = useState(RichTextEditor.createEmptyValue());
 	const controls = useMemo(() => getControls({ mode }), [mode]);
 
 	const {
@@ -40,12 +41,12 @@ const useHandleBasicDetails = ({
 
 	const handleUpdateCaseStudy = () => {
 		const formValues = getValues();
-		const { topic, question_text, question_type, difficulty_level } = formValues || {};
+		const { topic, question_type, difficulty_level } = formValues || {};
 
 		updateCaseStudy({
 			values: {
 				topic,
-				question_text,
+				question_text: caseStudyQuestionEditorValue.toString('html'),
 				question_type,
 				difficulty_level,
 			},
@@ -59,7 +60,7 @@ const useHandleBasicDetails = ({
 
 		setValue('topic', topic);
 		setValue('difficulty_level', difficulty_level);
-		setValue('question_text', question_text);
+		setCaseStudyQuestionEditorValue(RichTextEditor?.createValueFromString((question_text || ''), 'html'));
 
 		setValue(
 			'question_type',
@@ -75,8 +76,6 @@ const useHandleBasicDetails = ({
 		controls,
 		closeForm,
 		RichTextEditor,
-		editorValue,
-		setEditorValue,
 	};
 };
 
