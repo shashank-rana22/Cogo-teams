@@ -1,11 +1,11 @@
 import { Placeholder, Table } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import useGetShipmentQuotation from '../../../../hooks/useGetShipmentQuotation';
 
 import styles from './styles.module.css';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 	const columns = [
@@ -17,28 +17,29 @@ function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 	const service_charges = data?.service_charges || [];
 	const chargesData = (service_charges || [])
 		.filter((item) => item.service_type)
-		.map(({ service_type, total_price_discounted, source, currency }) => ({
+		.map(({ service_type, total_price_discounted, source, currency, service_id }) => ({
 			service_type           : startCase(service_type),
 			total_price_discounted : formatAmount({
-											amount   : total_price_discounted,
-											currency : currency,
-											options  : {
-												style                 : 'currency',
-												currencyDisplay       : 'code',
-												maximumFractionDigits : 2,
-											},
-										}),
-			source                 : startCase(source),
+				amount  : total_price_discounted,
+				currency,
+				options : {
+					style                 : 'currency',
+					currencyDisplay       : 'code',
+					maximumFractionDigits : 2,
+				},
+			}),
+			source: startCase(source),
+			service_id,
 		}));
-	const updatedPriceData={};
+	const updatedPriceData = {};
 	useEffect(() => {
-				(chargesData || []).forEach((item) => {
-					updatedPriceData[item.service_type] = item.total_price_discounted;
-				});
-				if(data?.net_total_price_currency){
-					updatedPriceData['sell_price']=`${data?.net_total_price_currency} ${data?.net_pre_tax_total}`
-				}
-				setPriceData(updatedPriceData);
+		(chargesData || []).forEach((item) => {
+			updatedPriceData[item.service_id] = item.total_price_discounted;
+		});
+		if (data?.net_total_price_currency) {
+			updatedPriceData.sell_price = `${data?.net_total_price_currency} ${data?.net_pre_tax_total}`;
+		}
+		setPriceData(updatedPriceData);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(data)]);
 	return (
@@ -50,13 +51,13 @@ function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 				{!loading ? (
 					<div style={{ marginLeft: '5px' }}>
 						{formatAmount({
-									amount   : data?.net_pre_tax_total,
-									currency : data?.net_total_price_currency,
-									options  : {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 2,
-									},
+							amount   : data?.net_pre_tax_total,
+							currency : data?.net_total_price_currency,
+							options  : {
+								style                 : 'currency',
+								currencyDisplay       : 'code',
+								maximumFractionDigits : 2,
+							},
 						})}
 					</div>
 				)

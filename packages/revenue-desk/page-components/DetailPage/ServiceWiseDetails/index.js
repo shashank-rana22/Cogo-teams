@@ -72,7 +72,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 							setSupplierPayload={setSupplierPayload}
 							inventory={inventory}
 							setInventory={setInventory}
-							price={priceData[startCase(singleTab)]}
+							priceData={priceData}
 							setSellRateDetails={setSellRateDetails}
 							sellRateDetails={sellRateDetails}
 							rateOptions={rateOptions}
