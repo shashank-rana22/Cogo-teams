@@ -17,7 +17,7 @@ function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 	const service_charges = data?.service_charges || [];
 	const chargesData = (service_charges || [])
 		.filter((item) => item.service_type)
-		.map(({ service_type, total_price_discounted, source, currency }) => ({
+		.map(({ service_type, total_price_discounted, source, currency, service_id }) => ({
 			service_type           : startCase(service_type),
 			total_price_discounted : formatAmount({
 				amount  : total_price_discounted,
@@ -29,11 +29,12 @@ function SellServiceQuotation({ shipmentData = {}, setPriceData, priceData }) {
 				},
 			}),
 			source: startCase(source),
+			service_id,
 		}));
 	const updatedPriceData = {};
 	useEffect(() => {
 		(chargesData || []).forEach((item) => {
-			updatedPriceData[item.service_type] = item.total_price_discounted;
+			updatedPriceData[item.service_id] = item.total_price_discounted;
 		});
 		if (data?.net_total_price_currency) {
 			updatedPriceData.sell_price = `${data?.net_total_price_currency} ${data?.net_pre_tax_total}`;

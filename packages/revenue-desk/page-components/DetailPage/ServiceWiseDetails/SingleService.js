@@ -43,12 +43,12 @@ function SingleService({
 	setSupplierPayload,
 	inventory,
 	setInventory,
-	price,
+	priceData,
 	setSellRateDetails,
 	sellRateDetails,
 	rateOptions,
 	setRateOptions,
-	shipmentData
+	shipmentData,
 }) {
 	const [sellRates, setSellRates] = useState({});
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
@@ -108,11 +108,11 @@ function SingleService({
 				)}
 			</div>
 
-			<SingleServiceCard serviceData={singleServiceData} price={price} />
+			<SingleServiceCard serviceData={singleServiceData} price={priceData?.[singleServiceData?.id]} />
 			{singleServiceData?.is_preference_set ? (
 				<PreferenceSetServiceData
 					singleServiceData={singleServiceData}
-					price={price}
+					price={priceData?.[singleServiceData?.id]}
 					shipmentData={shipmentData}
 				/>
 			) : (
@@ -121,7 +121,7 @@ function SingleService({
 						? (
 							<SelectedRatesCard
 								prefrences={supplierPayload?.[singleServiceData?.id]}
-								price={price}
+								price={priceData?.[singleServiceData?.id]}
 								serviceData={singleServiceData}
 								setSellRates={setSellRates}
 								sellRates={sellRates}
@@ -144,7 +144,7 @@ function SingleService({
 							serviceData={singleServiceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}
-							price={price}
+							price={priceData?.[singleServiceData?.id]}
 							prefrence_key={item?.prefrence_key}
 						/>
 					))}
