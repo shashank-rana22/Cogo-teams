@@ -6,7 +6,7 @@ const MAX_SERIAL_ID = 130000;
 const PRICE_LOWER_LIMIT = 0;
 const MIN_TEXT_LENGTH = 3;
 
-const handleDisableCondion = (charge, isAdminSuperAdmin, shipment_data) => {
+const handleDisableCondion = (isAdminSuperAdmin, shipment_data) => {
 	const disable =	 !isAdminSuperAdmin	&& shipment_data?.serial_id > MAX_SERIAL_ID;
 
 	return disable;
@@ -55,7 +55,7 @@ const rawControls = (
 			handleChange,
 			placeholder : 'select line item',
 			disabled:
-				handleDisableCondion(charge, isAdminSuperAdmin, shipment_data),
+				handleDisableCondion(isAdminSuperAdmin, shipment_data),
 			rules: { required: 'Required' },
 		},
 		{
@@ -72,7 +72,7 @@ const rawControls = (
 			rules       : {
 				validate: (v) => v?.length >= MIN_TEXT_LENGTH || isEmpty(v) || 'Characters should be >= 3',
 			},
-			disabled : handleDisableCondion(charge, isAdminSuperAdmin, shipment_data),
+			disabled : handleDisableCondion(isAdminSuperAdmin, shipment_data),
 			span     : 2,
 		},
 		{
@@ -80,7 +80,7 @@ const rawControls = (
 			type     : 'select',
 			name     : 'unit',
 			options  : convertObjectMappingToArray(FCL_UNITS),
-			disabled : handleDisableCondion(charge, isAdminSuperAdmin, shipment_data),
+			disabled : handleDisableCondion(isAdminSuperAdmin, shipment_data),
 			span     : 2,
 		},
 		{
@@ -93,7 +93,7 @@ const rawControls = (
 			rules          : { required: 'currency is required' },
 			span           : 1.5,
 			disabled:
-			handleDisableCondion(charge, isAdminSuperAdmin, shipment_data),
+			handleDisableCondion(isAdminSuperAdmin, shipment_data),
 		},
 		{
 			label       : 'Price',
@@ -105,7 +105,7 @@ const rawControls = (
 				required : 'Price is Required',
 				validate : (v) => v > PRICE_LOWER_LIMIT || 'Price must be greater than 0',
 			},
-			disabled: handleDisableCondion(charge, isAdminSuperAdmin, shipment_data),
+			disabled: handleDisableCondion(isAdminSuperAdmin, shipment_data),
 		},
 		{
 			label       : 'Quantity',
@@ -115,7 +115,7 @@ const rawControls = (
 			rules       : { required: 'Required', min: 1 },
 			span        : 1,
 			disabled:
-			handleDisableCondion(charge, isAdminSuperAdmin, shipment_data),
+			handleDisableCondion(isAdminSuperAdmin, shipment_data),
 		},
 		{
 			label  : 'Amount (Tax Excl.)',
