@@ -1,6 +1,6 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { IcMEdit } from '@cogoport/icons-react';
+import { IcMSettings } from '@cogoport/icons-react';
 
 const itemFunction = ({ setEditModal }) => ({
 	renderId: (item) => {
@@ -25,7 +25,7 @@ const itemFunction = ({ setEditModal }) => ({
 		return (
 			<span>
 				{end_date ? formatDate({
-					data       : end_date,
+					date       : end_date,
 					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 					formatType : 'date',
 				}) : '--'}
@@ -38,7 +38,9 @@ const itemFunction = ({ setEditModal }) => ({
 	},
 	renderEdit: (item) => (
 		<span>
-			<IcMEdit
+			<IcMSettings
+				width={16}
+				height={16}
 				style={{ cursor: 'pointer' }}
 				onClick={() => setEditModal(() => ({ info: item, open: true }))}
 			/>
