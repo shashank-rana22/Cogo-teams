@@ -27,6 +27,7 @@ function TooltipContent({ item = [] }) {
 		</div>
 	);
 }
+
 const getColumns = ({ setShowDeleteModal, setShowUpdateChapterModal }) => (
 	[
 		{

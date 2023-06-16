@@ -3,6 +3,7 @@ import { Pagination } from '@cogoport/components';
 import Header from '../../../commons/CommonHeader';
 import CreateConfigurationModal from '../../../commons/CreateConfigurationModal';
 import DeleteConfigurationModal from '../../../commons/DeleteConfigurationModal';
+import PACKAGE_CONSTANTS from '../../../commons/packageConstants';
 import StyledTable from '../../../commons/StyledTable';
 
 import controls from './controls';
@@ -13,9 +14,6 @@ import useUpdateChapter from './useUpdateChapter';
 
 const ADD_BUTTON_LABEL = 'Chapter';
 const TABLE_EMPTY_TEXT = 'No Chapters created yet';
-const DEFAULT_TOTAL_ITEMS = 0;
-const DEFAULT_CURRENT_PAGE = 1;
-const DEFAULT_TOTAL_COUNT = 10;
 const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
 
@@ -28,6 +26,8 @@ function Chapter() {
 	} = useChapter();
 
 	const { list = [], ...paginationData } = data || {};
+
+	const { total_count, page_limit } = paginationData || {};
 
 	const {
 		showAddChapterModal,
@@ -63,12 +63,12 @@ function Chapter() {
 
 			<StyledTable columns={columns} data={list} emptyText={TABLE_EMPTY_TEXT} loading={listApiLoading} />
 
-			{paginationData?.total_count > DEFAULT_TOTAL_COUNT && (
+			{total_count > PACKAGE_CONSTANTS.pagination_data.default_total_count && (
 				<div className={styles.pagination_container}>
 					<Pagination
-						totalItems={paginationData?.total_count || DEFAULT_TOTAL_ITEMS}
-						currentPage={page || DEFAULT_CURRENT_PAGE}
-						pageSize={paginationData?.page_limit}
+						totalItems={total_count || PACKAGE_CONSTANTS.pagination_data.default_total_items}
+						currentPage={page || PACKAGE_CONSTANTS.pagination_data.default_current_page}
+						pageSize={page_limit}
 						onPageChange={setPage}
 					/>
 				</div>
