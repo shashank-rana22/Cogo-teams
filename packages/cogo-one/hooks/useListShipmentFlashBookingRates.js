@@ -3,9 +3,10 @@ import { useState, useCallback, useEffect } from 'react';
 
 const PAYLOAD_MAPPING = {
 	reverted_bookings: {
-		status         : 'active',
-		shipment_state : ['confirmed_by_importer_exporter'],
-		is_reverted    : true,
+		status                                   : 'active',
+		shipment_state                           : ['confirmed_by_importer_exporter'],
+		is_reverted                              : true,
+		booking_confirmation_preferences_not_set : true,
 	},
 	closed_bookings: {
 		shipment_state: ['confirmed_by_importer_exporter', 'in_progress', 'completed'],
