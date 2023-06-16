@@ -1,7 +1,7 @@
 import { cl } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-
+import { Image } from '@cogoport/next';
 import MessageBody from './MessageBody';
 import styles from './styles.module.css';
 import TimeLine from './TimeLine';
@@ -28,7 +28,7 @@ function TicketComment({
 		return (
 			<div className={cl`${!isCurrentUser ? styles.agent_message_flex : ''}`}>
 				{!isCurrentUser && (
-					<img
+					<Image
 						src={GLOBAL_CONSTANTS.image_url?.[isAgent ? 'bot_icon' : 'user_avatar']}
 						alt="agent"
 						width={20}

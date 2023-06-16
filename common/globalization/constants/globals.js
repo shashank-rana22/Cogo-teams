@@ -214,6 +214,7 @@ const GLOBAL_CONSTANTS = {
 		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
 		url_match: 'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
+		image_extension : /\.(jpg|jpeg|png|gif|svg)$/i,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,
