@@ -1349,6 +1349,11 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
+		api          : 'get_new_sell_data',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
 		api          : 'update_invoice_status',
 		access_type  : 'private',
 		service_name : 'bookings',
@@ -1560,6 +1565,11 @@ const apis = [
 	},
 	{
 		api          : 'get_shipment_eway_bill_details',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
+	{
+		api          : 'get_shipment_ftl_freight_spot_rate',
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
