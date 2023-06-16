@@ -4,7 +4,7 @@ import styles from './styles.module.css';
 
 const TOTAL_SPAN = 12;
 const FLEX_HUNDRED = 100;
-const FLEX_ONE = 100;
+const FLEX_ONE = 1;
 
 function Header({ controls = [] }) {
 	const keys = useMemo(

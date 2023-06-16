@@ -1,4 +1,5 @@
 /* eslint-disable no-mixed-spaces-and-tabs */
+import toastApiError from '@cogoport/air-modules/utils/toastApiError';
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
@@ -102,7 +103,7 @@ const useUpdateServiceProvider = ({
 					Toast.success('Services Successfully Allocated !');
 				}
 			} catch (err) {
-				Toast.error(JSON.stringify(err?.data));
+				toastApiError(err);
 			}
 		}
 	};

@@ -8,7 +8,7 @@ const getErrorMessage = (props) => {
 	const ERROR_MESSAGE = [];
 
 	if (error) {
-		if (rules?.required && error?.type === 'required') {
+		if ((rules?.required || rules?.required?.value) && error?.type === 'required') {
 			ERROR_MESSAGE.push(error?.message || `${label} is Required`);
 		}
 		if ((rules?.min || rules?.min === MIN_RULE) && error?.type === 'min') {

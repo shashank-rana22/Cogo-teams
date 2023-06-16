@@ -12,7 +12,13 @@ import formFieldsCheck from '../utils/formFieldCheck';
 import formatForPayload from '../utils/fromat-payload';
 import getRpaMappings from '../utils/get-rpa-mappings';
 
-const REFETCH_SHIPMENT = ['confirm_booking', 'mark_confirmed'];
+const REFETCH_SHIPMENT = [
+	'confirm_booking',
+	'mark_confirmed',
+	'update_airway_bil_number',
+	'upload_airway_bill',
+	'upload_export_cargo_tracking_slip',
+];
 
 function useHandleSubmit({
 	finalConfig = {},
@@ -30,7 +36,7 @@ function useHandleSubmit({
 	services = {},
 }) {
 	const [isLoading, setIsLoading] = useState();
-	const [responseError, setResponseError] = useState(false);
+
 	const [{ loading }, trigger] = useRequest({
 		url    : finalConfig.end_point || 'update_shipment_pending_task',
 		method : 'POST',
@@ -113,9 +119,8 @@ function useHandleSubmit({
 					mainAirFreight?.shipment_id,
 					mainAirFreight?.service_provider_id,
 					createAwbInventoryTrigger,
-					setResponseError,
 				);
-				if (responseError && awb_response) {
+				if (awb_response?.base) {
 					setIsLoading(false);
 					return;
 				}

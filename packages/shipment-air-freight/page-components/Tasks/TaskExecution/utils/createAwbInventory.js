@@ -6,7 +6,6 @@ const createAwbInventory = async (
 	shipment_id,
 	service_provider_id,
 	createAwbInventoryTrigger,
-	setResponseError,
 ) => {
 	let responseAwbInventory = {};
 	try {
@@ -22,10 +21,8 @@ const createAwbInventory = async (
 			},
 		});
 		responseAwbInventory = res;
-		setResponseError(false);
 	} catch (error) {
 		responseAwbInventory = error?.response?.data;
-		setResponseError(true);
 		toastApiError(error);
 	}
 	return responseAwbInventory;

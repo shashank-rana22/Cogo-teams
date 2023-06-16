@@ -102,7 +102,7 @@ export const renderValue = (label, detail = {}) => {
 
 	switch (label) {
 		case 'airline':
-			return `Airline : ${airline.business_name || ''}`;
+			return `Airline : ${airline?.business_name || ''}`;
 		case 'packages_count':
 			if (!packages_count) {
 				return null;

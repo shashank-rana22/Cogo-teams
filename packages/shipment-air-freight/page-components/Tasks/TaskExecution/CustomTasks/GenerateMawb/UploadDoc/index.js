@@ -1,7 +1,6 @@
+import Layout from '@cogoport/air-modules/components/Layout';
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-
-import Layout from '../../../../../../commons/Layout';
 
 import controls from './controls';
 import styles from './styles.module.css';

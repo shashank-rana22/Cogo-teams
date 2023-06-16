@@ -75,7 +75,7 @@ function ExecuteTask({
 			/>
 		);
 	}
-	if (task.task === 'upload_mawb_freight_certificate') {
+	if (task?.task === 'upload_mawb_freight_certificate') {
 		return (
 			<GenerateMawb
 				pendingTask={task}
