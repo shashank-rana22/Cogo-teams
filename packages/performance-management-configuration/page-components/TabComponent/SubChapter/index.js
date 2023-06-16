@@ -23,7 +23,7 @@ const MODAL_TYPE_ADD = 'Add';
 const ADD_BUTTON_LABEL = 'Sub Chapter';
 
 function SubChapter() {
-	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
 
 	const {
 		columns,
@@ -38,8 +38,8 @@ function SubChapter() {
 		showDeleteModal,
 		deleteSubChapter,
 		deleteLoading,
-		setShowUpdateSubChapterModal,
-		showUpdateSubChapterModal,
+		setShowSubChapterModal,
+		showSubChapterModal,
 		activeTab,
 		setActiveTab,
 	} = useSubChapter();
@@ -47,23 +47,22 @@ function SubChapter() {
 	const { list = [], ...paginationData } = data || {};
 
 	const {
-		showAddChapterModal,
-		setShowAddChapterModal = () => {},
 		onClickSubmitButton,
-		loading,
-	} = useCreateChapter({ fetchList });
+		loading:CreateLoading,
+	} = useCreateChapter({ fetchList, setShowSubChapterModal });
 
 	const {
 		onClickUpdateButton,
 		loading: UpdateLoading,
 	} = useUpdateSubChapter({
 		fetchList,
-		setShowUpdateSubChapterModal,
-		showUpdateSubChapterModal,
+		setShowSubChapterModal,
+		showSubChapterModal,
 	});
 
 	const onClickAddButton = () => {
-		setShowAddChapterModal(true);
+		setShowSubChapterModal('add');
+		reset();
 	};
 
 	return (
@@ -95,32 +94,17 @@ function SubChapter() {
 				</div>
 			)}
 
-			{showAddChapterModal ? (
+			{showSubChapterModal ? (
 				<CreateConfigurationModal
-					showModal={showAddChapterModal}
-					setShowModal={setShowAddChapterModal}
+					showModal={showSubChapterModal}
+					setShowModal={setShowSubChapterModal}
 					controls={controls}
 					control={control}
 					errors={errors}
-					onClickSubmitButton={onClickSubmitButton}
-					loading={loading}
+					onClickSubmitButton={showSubChapterModal === 'add' ? onClickSubmitButton : onClickUpdateButton}
+					loading={showSubChapterModal === 'add' ? CreateLoading : UpdateLoading}
 					handleSubmit={handleSubmit}
-					Type={MODAL_TYPE_ADD}
-					label={ADD_BUTTON_LABEL}
-				/>
-			) : null}
-
-			{showUpdateSubChapterModal ? (
-				<CreateConfigurationModal
-					showModal={showUpdateSubChapterModal}
-					setShowModal={setShowUpdateSubChapterModal}
-					controls={controls}
-					control={control}
-					errors={errors}
-					onClickSubmitButton={onClickUpdateButton}
-					loading={UpdateLoading}
-					handleSubmit={handleSubmit}
-					Type={MODAL_TYPE_UPDATE}
+					Type={showSubChapterModal === 'add' ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 					label={ADD_BUTTON_LABEL}
 				/>

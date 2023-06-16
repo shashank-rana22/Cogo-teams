@@ -72,21 +72,6 @@ function Squad() {
 				</div>
 			)}
 
-			{/* {showAddSquadModal ? (
-				<CreateConfigurationModal
-					showModal={showAddSquadModal}
-					setShowModal={setShowAddSquadModal}
-					label={ADD_BUTTON_LABEL}
-					controls={controls}
-					control={control}
-					errors={errors}
-					onClickSubmitButton={onClickSubmitButton}
-					loading={CreateLoading}
-					handleSubmit={handleSubmit}
-					Type={MODAL_TYPE_ADD}
-				/>
-			) : null} */}
-
 			{showSquadModal ? (
 				<CreateConfigurationModal
 					showModal={showSquadModal}

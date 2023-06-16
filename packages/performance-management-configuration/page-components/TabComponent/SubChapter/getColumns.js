@@ -28,7 +28,7 @@ function TooltipContent({ item = [] }) {
 	);
 }
 
-const getColumns = ({ setShowDeleteModal, setShowUpdateSubChapterModal }) => [
+const getColumns = ({ setShowDeleteModal, setShowSubChapterModal }) => [
 	{
 		Header   : 'SUB CHAPTER NAME',
 		accessor : (item) => <div>{startCase(item?.sub_chapter_name) || '-'}</div>,
@@ -112,7 +112,7 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSubChapterModal }) => [
 					width={16}
 					height={16}
 					style={{ marginLeft: 12, cursor: 'pointer' }}
-					onClick={() => setShowUpdateSubChapterModal(item)}
+					onClick={() => setShowSubChapterModal(item)}
 				/>
 			</div>
 		) : (
