@@ -29,7 +29,7 @@ function SupplierInformation({ data, loading }) {
 					)}
 				</div>
 				<div className={styles.verifieddata}>
-				{kycStatus === 'verified' ? <IcCFtick /> : <IcCFcrossInCircle />}
+					{kycStatus === 'verified' ? <IcCFtick /> : <IcCFcrossInCircle />}
 					{loading ? <Placeholder height="10px" width="30px" /> : kycStatus}
 				</div>
 			</div>

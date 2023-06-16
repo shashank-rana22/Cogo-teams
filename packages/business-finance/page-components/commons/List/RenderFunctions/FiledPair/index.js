@@ -1,7 +1,7 @@
 import { getByKey, isEmpty, startCase } from '@cogoport/utils';
 import React from 'react';
 
-import getFormattedAmount from '../../../../Settlement/commons/Utils/getFormattedAmount';
+import getFormattedAmount from '../../../../Settlement/commons/Utils/getFormattedAmount.ts';
 
 import styled from './styles.module.css';
 
@@ -25,7 +25,14 @@ function FieldPair({ itemData, field }) {
 		} if (type === 'serviceType') {
 			return (<div>{startCase(getByKey(itemData, key))}</div>);
 		} if (type === 'amount') {
-			return (<div>{getFormattedAmount({ amount: getByKey(itemData, key), currency: getByKey(itemData, currencyKey) })}</div>);
+			return (
+				<div>
+					{getFormattedAmount({
+						amount   : getByKey(itemData, key),
+						currency : getByKey(itemData, currencyKey),
+					})}
+				</div>
+			);
 		}
 		return (<div>{getByKey(itemData, key)}</div>);
 	};
