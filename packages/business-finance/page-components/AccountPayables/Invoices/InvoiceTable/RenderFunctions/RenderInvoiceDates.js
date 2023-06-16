@@ -11,18 +11,18 @@ const DATES = [
 	{ label: 'Upload Date', key: 'uploadBillDate' },
 ];
 
-export function RenderInvoiceDates({ itemData, field = {} }) {
+export function RenderInvoiceDates({ itemData }) {
 	return (
 		<div>
 			{DATES?.map((date) => (
-				<div className={date?.bold ? styles?.bold : ''}>
+				<div className={date?.bold ? styles?.bold : ''} key={date?.key}>
 					<span>{date?.label}</span>
 					<span className={styles.val}>
 						:
 						{formatDate({
-            	date       : getByKey(itemData, date?.key),
-            	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-            	formatType : 'date',
+							date       : getByKey(itemData, date?.key),
+							dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+							formatType : 'date',
 						})}
 					</span>
 				</div>

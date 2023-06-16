@@ -2,12 +2,15 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+const ZERO = 0;
+const LENGTH_PLACEHOLDER = 8;
+
 function RemarkContent({ remarkData = {}, remarkLoading = false }) {
 	const { list = [] } = remarkData || {};
 
-	if (remarkLoading) return [1, 2, 3, 4, 5, 6, 7, 8].map((i) => <Placeholder key={i} />);
+	if (remarkLoading) return Array.from(Array(LENGTH_PLACEHOLDER).keys()).map((i) => <Placeholder key={i} />);
 
-	if (list.length > 0) {
+	if (list.length > ZERO) {
 		return (
 			<div className={styles.container}>
 				<div className={styles.styledheading}>Remarks History</div>

@@ -5,10 +5,6 @@ import {
 	IcMFeuro,
 	IcMFpound,
 	IcMFsingaporeDollar,
-	IcCCountryIndia,
-	IcCCountrySingapore,
-	IcCCountryNetherland,
-	IcCCountryVietnam,
 	IcMFdong,
 } from '@cogoport/icons-react';
 
@@ -19,14 +15,6 @@ const CURRENCY_ICON_MAPPING = {
 	[GLOBAL_CONSTANTS.currency_code.GBP] : IcMFpound,
 	[GLOBAL_CONSTANTS.currency_code.EUR] : IcMFeuro,
 	[GLOBAL_CONSTANTS.currency_code.VND] : IcMFdong,
-};
-
-const ENTITY_ICON_MAPPING = {
-	101 : IcCCountryIndia,
-	201 : IcCCountryNetherland,
-	301 : IcCCountryIndia,
-	401 : IcCCountrySingapore,
-	501 : IcCCountryVietnam,
 };
 
 const getContentMapping = ({ width, height, mapping }) => Object.entries(mapping).reduce((pv, [key, Icon]) => ({
@@ -41,7 +29,7 @@ const CURRENCY_DATA_MAPPING = getContentMapping({
 });
 
 export const CURRENCY_DATA = Object.keys(CURRENCY_DATA_MAPPING).map(
-	(currency, index) => ({
+	(currency) => ({
 		id   : currency,
 		icon : CURRENCY_DATA_MAPPING[currency],
 		text : currency,

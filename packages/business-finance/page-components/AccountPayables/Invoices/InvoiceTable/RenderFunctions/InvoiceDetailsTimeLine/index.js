@@ -137,7 +137,7 @@ function InvoiceDetailsTimeLine({ item }) {
 											</div>
 											<div className={styles.flex}>
 												{DETAILS?.map((detail) => (
-													<div className={styles.supplier_data_body}>
+													<div className={styles.supplier_data_body} key={detail.key}>
 														<div>{detail?.label}</div>
 														<div>
 															{getFormattedPrice(
@@ -200,7 +200,10 @@ function InvoiceDetailsTimeLine({ item }) {
 																/>
 															)}
 															{label === 'Invoice Timeline' && (
-																<InvoiceTimeLine data={timeLineDetails} loading={timeLineDetailsLoading} />
+																<InvoiceTimeLine
+																	data={timeLineDetails}
+																	loading={timeLineDetailsLoading}
+																/>
 															)}
 															{label === 'Supplier Information' && (
 																<SupplierInformation

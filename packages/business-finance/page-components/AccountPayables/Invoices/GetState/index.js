@@ -52,17 +52,13 @@ function GetState({ show, setShow }) {
 									disabled={loading}
 									className={styles.marginRight}
 									themeType="secondary"
-									onClick={() => {
-                        	setShow(false);
-									}}
+									onClick={() => {setShow(false);}}
 								>
 									Cancel
 								</Button>
 								<Button
 									disabled={loading || isDisable}
-									onClick={() => {
-                        	onSubmit(values);
-									}}
+									onClick={() => {onSubmit(values);}}
 								>
 									Search
 								</Button>
@@ -76,15 +72,11 @@ function GetState({ show, setShow }) {
 								<Button
 									className={styles.marginRight}
 									themeType="secondary"
-									onClick={() => {
-                        	setShow(false);
-									}}
+									onClick={() => {setShow(false);}}
 								>
 									Close
 								</Button>
-								<Button onClick={() => {
-                        	setData([]);
-								}}
+								<Button onClick={() => {setData([]);}}
 								>
 									Back
 								</Button>

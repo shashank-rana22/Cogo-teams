@@ -15,7 +15,7 @@ const goTo = (href) => {
 };
 
 function SupplierInformation({ data, loading }) {
-	const { name = '', serialId = '', kycStatus = '', businessAddressProofUrl = '', panUrl = '' } =		data || {};
+	const { name = '', serialId = '', kycStatus = '', businessAddressProofUrl = '', panUrl = '' } = data || {};
 
 	return (
 		<div className={styles.container}>
@@ -29,7 +29,7 @@ function SupplierInformation({ data, loading }) {
 					)}
 				</div>
 				<div className={styles.verifieddata}>
-					{kycStatus === 'verified' ? <IcCFtick /> : <IcCFcrossInCircle />}
+				{kycStatus === 'verified' ? <IcCFtick /> : <IcCFcrossInCircle />}
 					{loading ? <Placeholder height="10px" width="30px" /> : kycStatus}
 				</div>
 			</div>
@@ -38,17 +38,16 @@ function SupplierInformation({ data, loading }) {
 				<div className={styles.wrapper}>
 					{businessAddressProofUrl && (
 						<div
-							className={
-							styles.documentcontainer
-						}
+							className={styles.documentcontainer}
 							onClick={() => goTo(businessAddressProofUrl)}
+							role="presentation"
 						>
 							<IcMDocument />
 							ADDRESS PROOF
 						</div>
 					)}
 					{panUrl && (
-						<div className={styles.documentcontainer} onClick={() => goTo(panUrl)}>
+						<div className={styles.documentcontainer} onClick={() => goTo(panUrl)} role="presentation">
 							<IcMCreditCard width="20px" height="20px" />
 							PAN PROOF
 						</div>

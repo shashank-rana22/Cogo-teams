@@ -1,6 +1,5 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
 
 function useGetActions({ itemData = {} }) {
 	const { id = '' } = itemData || {};

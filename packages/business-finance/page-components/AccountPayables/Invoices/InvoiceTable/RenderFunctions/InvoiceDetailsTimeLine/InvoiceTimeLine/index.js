@@ -4,32 +4,35 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcCFtick, IcCSendEmail } from '@cogoport/icons-react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useMemo } from 'react';
 
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();
 
+const ZERO = 0;
+const FIRST = 1;
+
 function InvoiceTimeLine({ data, loading }) {
 	const [complete, setComplete] = useState(false);
 
-	const timeLine = data || [{}];
+	const timeLine = useMemo(() => data || [{}], [data]);
 
 	const gettimeLineData = () => {
-		if (timeLine[0]?.eventName === 'POSTED') {
-			return timeLine?.slice(1, timeLine.length);
+		if (timeLine[ZERO]?.eventName === 'POSTED') {
+			return timeLine?.slice(FIRST, timeLine.length);
 		}
 
 		return timeLine;
 	};
 
 	useEffect(() => {
-		setComplete(timeLine[0]?.eventName === 'POSTED');
-	}, []);
+		setComplete(timeLine[ZERO]?.eventName === 'POSTED');
+	}, [timeLine]);
 
-	const dateWithTimeForPaymentDueDate =		timeLine[0]?.paymentDueDate?.split(' ') || '';
+	const dateWithTimeForPaymentDueDate = timeLine[ZERO]?.paymentDueDate?.split(' ') || '';
 
-	const dateWithTimeForPosted = timeLine[0]?.occurredAt?.split(' ') || '';
+	const dateWithTimeForPosted = timeLine[ZERO]?.occurredAt?.split(' ') || '';
 
 	const timeLineInitialStage = () => {
 		if (loading) {
@@ -43,30 +46,30 @@ function InvoiceTimeLine({ data, loading }) {
 			);
 		}
 
-		if (data?.length === 0) {
+		if (data?.length === ZERO) {
 			return <div>TimeLine Does Not Exist</div>;
 		}
 
 		return (
 			<div className={styles.subcontainer}>
-				{['FULL', 'OVERPAID'].includes(timeLine[0]?.eventName) ? null : (
+				{['FULL', 'OVERPAID'].includes(timeLine[ZERO]?.eventName) ? null : (
 					<div className={styles.datecontainer}>
-						{dateWithTimeForPaymentDueDate[0]}
+						{dateWithTimeForPaymentDueDate[ZERO]}
 						<div>
 							{
-							formatDate({
-								date       : (new Date(timeLine[0]?.paymentDueDate)),
-								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
-								formatType : 'dateTime',
-								separator  : '/',
-							})
-}
+								formatDate({
+									date       : (new Date(timeLine[ZERO]?.paymentDueDate)),
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+									timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
+									formatType : 'dateTime',
+									separator  : '/',
+								})
+							}
 						</div>
 					</div>
 				)}
 				<div className={styles.dullcircle} />
-				{['FULL', 'OVERPAID'].includes(timeLine[0]?.eventName) ? null : (
+				{['FULL', 'OVERPAID'].includes(timeLine[ZERO]?.eventName) ? null : (
 					<div className={styles.eventcontainer}>PAYMENT DUE</div>
 				)}
 			</div>
@@ -75,13 +78,13 @@ function InvoiceTimeLine({ data, loading }) {
 
 	return (
 		<div className={styles.container}>
-			{timeLine[0]?.eventName === 'POSTED' ? (
+			{timeLine[ZERO]?.eventName === 'POSTED' ? (
 				<div className={styles.subcontainer}>
 					<div className={styles.datecontainer}>
-						{dateWithTimeForPosted[0]}
+						{dateWithTimeForPosted[ZERO]}
 						<div>
 							{formatDate({
-								date       : new Date(timeLine[0]?.occurredAt),
+								date       : new Date(timeLine[ZERO]?.occurredAt),
 								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
 								timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm aaa'],
 								formatType : 'dateTime',
@@ -134,7 +137,7 @@ function InvoiceTimeLine({ data, loading }) {
 						) : (
 							<div className={styles.subcontainer}>
 								<div className={styles.datecontainer}>
-									{dateWithTime[0]}
+									{dateWithTime[ZERO]}
 									<div>
 										{formatDate({
 											date       : occurredAt,

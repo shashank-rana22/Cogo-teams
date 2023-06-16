@@ -2,16 +2,19 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-import toastApiError from '../../../commons/toastApiError';
+import toastApiError from '../../../commons/toastApiError.ts';
+
+const FIRST = 1;
+const SECOND = 2;
 
 function formatToTimeStamp(dateString) {
 	const date = new Date(dateString);
 	const year = date.getFullYear();
-	const month = String(date.getMonth() + 1).padStart(2, '0');
-	const day = String(date.getDate()).padStart(2, '0');
-	const hours = String(date.getHours()).padStart(2, '0');
-	const minutes = String(date.getMinutes()).padStart(2, '0');
-	const seconds = String(date.getSeconds()).padStart(2, '0');
+	const month = String(date.getMonth() + FIRST).padStart(SECOND, '0');
+	const day = String(date.getDate()).padStart(SECOND, '0');
+	const hours = String(date.getHours()).padStart(SECOND, '0');
+	const minutes = String(date.getMinutes()).padStart(SECOND, '0');
+	const seconds = String(date.getSeconds()).padStart(SECOND, '0');
 	const timestamp = `${year}-${month}-${day}T${hours}:${minutes}:${seconds}`;
 	return timestamp;
 }
@@ -67,7 +70,7 @@ function useGetBillsList({ activeTab }) {
 						endDate            : endDate ? formatToTimeStamp(endDate) : undefined,
 						fromBillDate       : fromBillDate ? formatToTimeStamp(fromBillDate) : undefined,
 						toBillDate         : toBillDate ? formatToTimeStamp(toBillDate) : undefined,
-						fromUploadBillDate : toBillDate ? formatToTimeStamp(toBillDate) : undefined,
+						fromUploadBillDate : toBillDate ? formatToTimeStamp(fromUploadBillDate) : undefined,
 						toUploadBillDate   : toUploadBillDate ? formatToTimeStamp(toUploadBillDate) : undefined,
 					},
 				});
@@ -80,7 +83,7 @@ function useGetBillsList({ activeTab }) {
 			invoiceView, category, dueDateSortType, serviceType, startDate,
 			endDate, fromBillDate,
 			toBillDate, fromUploadBillDate,
-			toUploadBillDate, activeTab],
+			toUploadBillDate, activeTab, billsTrigger],
 	);
 
 	useEffect(() => {

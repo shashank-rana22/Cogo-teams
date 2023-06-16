@@ -4,14 +4,15 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const ZERO = 0;
+
 export function RenderToolTip({ itemData, field = {} }) {
 	const { maxLength } = field || {};
 	const content = getByKey(itemData, field?.key) || '';
-	console.log(content, 'content');
 	if (content?.length > maxLength) {
 		return (
 			<Tooltip interactive placement="top" content={content}>
-				<div className={styles.value}>{`${content.substring(0, maxLength)}...`}</div>
+				<div className={styles.value}>{`${content.substring(ZERO, maxLength)}...`}</div>
 			</Tooltip>
 		);
 	}

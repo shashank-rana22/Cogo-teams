@@ -1,6 +1,8 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
+const PATH = process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL;
+
 const useGetDownloadReport = ({ size, globalFilters }) => {
 	const [
 		{ loading },
@@ -30,7 +32,7 @@ const useGetDownloadReport = ({ size, globalFilters }) => {
 				},
 			});
 			const { data = {} } = resp || {};
-			const downloadFile = `${process.env.NEXT_PUBLIC_BUSINESS_FINANCE_BASE_URL}/purchase/download/document?id=${data}`;
+			const downloadFile = `${PATH}/purchase/download/document?id=${data}`;
 			if (data) window.open(downloadFile);
 		} catch (e) {
 			Toast.error(e?.error?.message || 'Failed to Download');

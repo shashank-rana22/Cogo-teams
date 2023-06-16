@@ -3,18 +3,17 @@ import { IcMFilter, IcCRedCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import Filter from '../../../commons/Filters';
+import Filter from '../../../commons/Filters/index.tsx';
 import { moreFilters } from '../configurations/moreFiltersconfig';
 import { CURRENCY_DATA } from '../Constants';
 
 import styles from './styles.module.css';
 
-function FilterModal({ filters = {}, setFilters = () => {}, activeTab }) {
+const FILTER_LENGTH = 3;
+
+function FilterModal({ filters = {}, setFilters = () => { } }) {
 	const [showModal, setShowModal] = useState(false);
 	const [modalFilters, setModalFilters] = useState({});
-
-	console.log(modalFilters, filters, 'modalFilters');
-
 	const { currency = '' } = modalFilters || {};
 
 	const handleClose = () => {
@@ -31,11 +30,7 @@ function FilterModal({ filters = {}, setFilters = () => {}, activeTab }) {
 				onClose={handleClose}
 			>
 				<Modal.Header
-					title={
-						(
-							<div className={styles.heading_container}>FILTERS</div>
-					)
-					}
+					title={(<div className={styles.heading_container}>FILTERS</div>)}
 				/>
 
 				<Modal.Body>
@@ -45,7 +40,9 @@ function FilterModal({ filters = {}, setFilters = () => {}, activeTab }) {
 							const { icon, text } = item;
 							return (
 								<div
-									className={`${styles.currency_values} ${currency === text ? styles.selected : styles.unselected}`}
+									className={`${styles.currency_values} 
+									${currency === text ? styles.selected : styles.unselected}`}
+									key={text}
 									onClick={() => {
 										if (currency === text) {
 											setModalFilters({ ...modalFilters, currency: undefined, pageIndex: 1 });
@@ -111,7 +108,9 @@ function FilterModal({ filters = {}, setFilters = () => {}, activeTab }) {
 				<span className={styles.icon}>
 					<IcMFilter />
 				</span>
-				{Object.keys(filters)?.filter((key) => (key !== 'category') && (!isEmpty(filters?.[key])))?.length > 3 && <IcCRedCircle height={8} width={8} />}
+				{Object.keys(filters)?.filter((key) => ((key !== 'category')
+					&& (!isEmpty(filters?.[key])))?.length > FILTER_LENGTH)
+					&& <IcCRedCircle height={8} width={8} />}
 			</div>
 		</div>
 	);

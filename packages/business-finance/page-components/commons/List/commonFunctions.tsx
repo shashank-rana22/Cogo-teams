@@ -15,7 +15,13 @@ const commonFunctions = (functions :{ functions?:FunctionObjects }) => {
 			<FieldPair itemData={itemData} field={field} />
 		),
 		renderAmount: (itemData, field) => (
-			<div>{getFormattedAmount({ amount: getByKey(itemData, field?.key), currency: getByKey(itemData, field?.currencyKey) })}</div>
+			<div>
+				{getFormattedAmount({
+					amount   : getByKey(itemData, field?.key),
+					currency : getByKey(itemData, field?.currencyKey),
+				})}
+
+			</div>
 		),
 		...(functions || {}),
 

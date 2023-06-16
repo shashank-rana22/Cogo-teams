@@ -4,13 +4,13 @@ import { getByKey } from '@cogoport/utils';
 import getCountryDetails from './getCountryDetails';
 
 const getDetails = ({
-	country_id,
+	country_id = '',
 	accessor = '',
 	accessorType = '',
 	isDefaultData = true,
 }) => {
 	const countryDetails = getCountryDetails({
-        	country_id,
+		country_id,
 	}) || {};
 
 	const countryCode = countryDetails.country_code;
@@ -27,28 +27,28 @@ const getDetails = ({
 };
 
 function CountrySpecificData({
-	country_id,
+	country_id = '',
 	accessor = '',
 	accessorType = '',
-	isDefaultData,
+	isDefaultData = true,
 }) {
 	return (
 		<>
 			{getDetails({
-            	country_id,
-            	accessor,
-            	accessorType,
-            	isDefaultData,
+				country_id,
+				accessor,
+				accessorType,
+				isDefaultData,
 			})}
 		</>
 	);
 }
 
 const getCountrySpecificData = ({
-	country_id,
+	country_id = '',
 	accessor = '',
 	accessorType = '',
-	isDefaultData,
+	isDefaultData = true,
 }) => getDetails({
 	country_id,
 	accessor,

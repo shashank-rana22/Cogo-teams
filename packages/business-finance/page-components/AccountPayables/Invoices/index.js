@@ -3,9 +3,9 @@ import { IcMSearchdark } from '@cogoport/icons-react';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
-import Filter from '../../commons/Filters';
-import List from '../../commons/List';
-import EmptyState from '../../commons/StyledTable/EmptyState';
+import Filter from '../../commons/Filters/index.tsx';
+import List from '../../commons/List/index.tsx';
+import EmptyState from '../../commons/StyledTable/EmptyState/index.tsx';
 
 import { invoiceFilters } from './configurations';
 import GetState from './GetState';
@@ -27,6 +27,10 @@ const TABS = [
 	{ label: 'Disputed', value: 'disputed' },
 	{ label: 'Not Due', value: 'notDue' },
 ];
+
+const ZERO = 0;
+const ONE = 1;
+
 function Invoices() {
 	const { query } = useRouter();
 	const [activeTab, setActiveTab] = useState('all');
@@ -70,7 +74,16 @@ function Invoices() {
 	return (
 		<div>
 			<div className={styles.statscontainer}>
-				{TABS.map(({ label, value }) => (<TabStat name={label} isActive={activeTab === value} value={value} number={stats?.[value]} setActiveTab={setActiveTab} />))}
+				{TABS.map(({ label, value }) => (
+					<TabStat
+						name={label}
+						isActive={activeTab === value}
+						key={value}
+						value={value}
+						number={stats?.[value]}
+						setActiveTab={setActiveTab}
+					/>
+				))}
 			</div>
 			<div className={styles.filters}>
 				<div className={styles.filtercontainer}>
@@ -86,7 +99,14 @@ function Invoices() {
 						onChange={handleVersionChange}
 					/>
 					<Button onClick={() => { setShow(true); }} className={styles.button}>Get State</Button>
-					<Button onClick={generateInvoice} className={styles.button} disabled={generating}>{generating ? 'Generating' : 'Download'}</Button>
+					<Button
+						onClick={generateInvoice}
+						className={styles.button}
+						disabled={generating}
+					>
+						{generating ? 'Generating' : 'Download'}
+
+					</Button>
 					<div className={styles.search}>
 						<Input
 							name="search"
@@ -104,7 +124,7 @@ function Invoices() {
 				</div>
 			</div>
 			<div className={styles.list_container}>
-				{(list?.length > 0 || billsLoading) ? (
+				{(list?.length > ZERO || billsLoading) ? (
 					<List
 						itemData={billsData}
 						loading={billsLoading}
@@ -112,18 +132,18 @@ function Invoices() {
 						functions={functions}
 						sort={orderBy}
 						setSort={setOrderBy}
-						page={billsFilters?.pageIndex || 1}
+						page={billsFilters?.pageIndex || ONE}
 						pageSize={10}
 						handlePageChange={(val) => setBillsFilters({
-                            	...billsFilters,
-                            	pageIndex: val,
+							...billsFilters,
+							pageIndex: val,
 						})}
 						rowStyle="border"
 						showPagination
 						paginationType="number"
 					/>
 				)
-                	: <EmptyState imageFind="NoInoiceFound" imgHeight="imageHeight" />}
+					: <EmptyState imageFind="NoInoiceFound" imgHeight="imageHeight" />}
 			</div>
 			{show ? <GetState show={show} setShow={setShow} /> : null}
 		</div>
