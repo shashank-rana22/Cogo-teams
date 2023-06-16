@@ -3,9 +3,10 @@ import { useState, useCallback, useEffect } from 'react';
 
 const PAYLOAD_MAPPING = {
 	reverted_bookings: {
-		status         : 'active',
-		shipment_state : ['confirmed_by_importer_exporter'],
-		is_reverted    : true,
+		status                                   : 'active',
+		shipment_state                           : ['confirmed_by_importer_exporter'],
+		is_reverted                              : true,
+		booking_confirmation_preferences_not_set : true,
 	},
 	closed_bookings: {
 		shipment_state: ['confirmed_by_importer_exporter', 'in_progress', 'completed'],
@@ -16,22 +17,20 @@ const PAYLOAD_MAPPING = {
 		is_reverted    : false,
 	},
 };
-const INITIAL_PAGE = 1;
 
 const useListShipmentFlashBookingRates = ({
 	orgId = '',
-// accountType = ''
+	hasFlashBookings = false,
 }) => {
 	const [activeTab, setActiveTab] = useState('win_bookings');
-	const [pagination, setPagination] = useState(INITIAL_PAGE);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipment_flash_booking_rates',
 		method : 'get',
 	}, { manual: true });
 
-	const shipmentFlashBookingRates = useCallback(async () => {
-		if (!orgId) {
+	const shipmentFlashBookingRates = useCallback(async ({ page }) => {
+		if (!hasFlashBookings) {
 			return;
 		}
 
@@ -42,7 +41,7 @@ const useListShipmentFlashBookingRates = ({
 			},
 			shipment_flash_booking_tag_required : true,
 			is_indicative_price_required        : true,
-			page                                : pagination,
+			page,
 			sort_by                             : 'created_at',
 			sort_type                           : 'desc',
 		};
@@ -54,18 +53,18 @@ const useListShipmentFlashBookingRates = ({
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [activeTab, orgId, pagination, trigger]);
+	}, [activeTab, orgId, trigger, hasFlashBookings]);
 
 	useEffect(() => {
-		shipmentFlashBookingRates();
+		shipmentFlashBookingRates({ page: 1 });
 	}, [shipmentFlashBookingRates]);
 
 	return {
-		data,
+		data: (!loading && hasFlashBookings) ? data : {},
 		loading,
 		setActiveTab,
 		activeTab,
-		setPagination,
+		shipmentFlashBookingRates,
 	};
 };
 

@@ -119,3 +119,5 @@ export const REVERT_STATUS_LABEL_MAPPING = {
 	not_reverted          : 'Not Reverted',
 	awaiting_confirmation : 'Awaiting Response',
 };
+
+export const REVERTABLE_SERVICES = ['fcl_freight_service', 'lcl_freight_service'];

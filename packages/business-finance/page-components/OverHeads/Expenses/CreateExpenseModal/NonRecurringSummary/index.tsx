@@ -1,49 +1,49 @@
 /* eslint-disable react/jsx-indent */
 import { Placeholder } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase } from '@cogoport/utils';
 import { useEffect } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../../commons/utils/formatDate';
-import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 import useGetStakeholders from '../../hooks/useGetStakeholders';
 import useGetTradePartyDetails from '../../hooks/useGetTradePartyDetails';
 
 import styles from './styles.module.css';
 
 interface Entity {
-	entity_code?:number | string,
+	entity_code?: number | string,
 }
 
 interface Summary {
-	title?:string,
-	value?:any,
+	title?: string,
+	value?: any,
 }
 
 interface Data {
 	vendorName?: string,
 	transactionDate?: Date,
-	paymentMode?:string,
-	uploadedInvoice?:string,
-	periodOfTransaction?:string,
-	expenseCategory?:string,
-	expenseSubCategory?:string,
-	branch?:string,
-	entityObject?:Entity,
-	invoiceDate?:Date,
-	totalPayable?:number | string,
-	stakeholderName?:string,
-	invoiceCurrency?:string,
-	vendorID?:number | string,
-	payableAmount?:number,
+	paymentMode?: string,
+	uploadedInvoice?: string,
+	periodOfTransaction?: string,
+	expenseCategory?: string,
+	expenseSubCategory?: string,
+	branch?: string,
+	entityObject?: Entity,
+	invoiceDate?: Date,
+	totalPayable?: number | string,
+	stakeholderName?: string,
+	invoiceCurrency?: string,
+	vendorID?: number | string,
+	payableAmount?: number,
 }
 
 interface Props {
 	nonRecurringData?: Data,
-	setNonRecurringData?:(obj)=>void,
+	setNonRecurringData?: (obj) => void,
 }
 
-function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
+function NonRecurringSummary({ nonRecurringData, setNonRecurringData }: Props) {
 	const {
 		periodOfTransaction,
 		vendorName,
@@ -61,7 +61,7 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 		vendorID,
 	} = nonRecurringData || {};
 
-	const { stakeholdersData, loading:stakeholderLoading } = useGetStakeholders(expenseCategory);
+	const { stakeholdersData, loading: stakeholderLoading } = useGetStakeholders(expenseCategory);
 	const { tradePartyData } = useGetTradePartyDetails(vendorID);
 
 	const splitArray = (uploadedInvoice || '').toString().split('/') || [];
@@ -70,7 +70,7 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 	useEffect(() => {
 		if (stakeholdersData) {
 			const { userEmail, userId, userName } = stakeholdersData || {};
-			setNonRecurringData((prev:object) => ({
+			setNonRecurringData((prev: object) => ({
 				...prev,
 				stakeholderEmail : userEmail,
 				stakeholderId    : userId,
@@ -81,7 +81,7 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 
 	useEffect(() => {
 		if (tradePartyData?.length > 0) {
-			setNonRecurringData((prev:object) => ({
+			setNonRecurringData((prev: object) => ({
 				...prev,
 				tradeParty: tradePartyData?.[0],
 			}));
@@ -117,14 +117,21 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 		{
 			title : 'Payable Amount',
 			value : <div>
-                {getFormattedPrice(payableAmount, invoiceCurrency) || '-'}
+				{formatAmount({
+					amount   : payableAmount as any,
+					currency : invoiceCurrency,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				}) || '-'}
            </div>,
 		},
 		{
 			title : 'Expense Date',
 			value : <div>
-{invoiceDate
-	? formatDate(invoiceDate, 'dd/MMM/yy', {}, false) : '-'}
+				{invoiceDate
+					? formatDate(invoiceDate, 'dd/MMM/yy', {}, false) : '-'}
            </div>,
 		},
 		{
@@ -172,15 +179,15 @@ function NonRecurringSummary({ nonRecurringData, setNonRecurringData }:Props) {
 		},
 	];
 
-	const renderSummaryData = (summary:Summary[]) => (
-				<div style={{ display: 'flex' }}>
-								{summary?.map((item:Summary) => (
-									<div key={item.title} className={styles.section}>
-										<div className={styles.title}>{item.title}</div>
-										<div className={styles.value}>{item.value}</div>
-									</div>
-								))}
+	const renderSummaryData = (summary: Summary[]) => (
+		<div style={{ display: 'flex' }}>
+			{summary?.map((item: Summary) => (
+				<div key={item.title} className={styles.section}>
+					<div className={styles.title}>{item.title}</div>
+					<div className={styles.value}>{item.value}</div>
 				</div>
+			))}
+		</div>
 	);
 
 	return (

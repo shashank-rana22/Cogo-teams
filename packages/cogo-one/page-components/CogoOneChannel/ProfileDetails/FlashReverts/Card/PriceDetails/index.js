@@ -1,7 +1,7 @@
 import REVERTED_PRICE_MAPPING from './RevertedPriceMapping';
 import styles from './styles.module.css';
 
-function PriceDetails({ item, activeTab }) {
+function PriceDetails({ item, activeTab, setModalState }) {
 	const ActiveComp = REVERTED_PRICE_MAPPING[activeTab] || null;
 	if (!ActiveComp) {
 		return null;
@@ -9,7 +9,7 @@ function PriceDetails({ item, activeTab }) {
 
 	return (
 		<div className={styles.container}>
-			<ActiveComp item={item} setRevertModalData={() => {}} />
+			<ActiveComp item={item} setModalState={setModalState} />
 		</div>
 	);
 }

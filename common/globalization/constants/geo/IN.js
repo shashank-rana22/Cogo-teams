@@ -476,7 +476,8 @@ export default {
 				validate_registration: true,
 			},
 			cogo_one: {
-				has_voice_call_access: true,
+				has_voice_call_access : true,
+				default_country_code  : 'IN',
 			},
 		},
 	},
