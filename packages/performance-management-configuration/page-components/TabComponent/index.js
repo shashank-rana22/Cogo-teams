@@ -38,7 +38,6 @@ function TabComponent() {
 						);
 					})
 				}
-
 			</Tabs>
 		</div>
 	);
