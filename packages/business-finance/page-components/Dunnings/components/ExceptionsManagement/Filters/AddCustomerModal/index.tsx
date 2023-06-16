@@ -7,6 +7,11 @@ import { AddCustomerInterface } from '../../Interfaces';
 
 import styles from './styles.module.css';
 
+const TRADE_PARTY_PARAMS = {
+	filters: { status: 'active', account_type: 'importer_exporter' },
+
+};
+
 function AddCustomerModal({
 	show,
 	setShow,
@@ -22,10 +27,6 @@ function AddCustomerModal({
 
 	const onSubmit = (data) => {
 		getUploadList(data, fileValue);
-	};
-	const TRADE_PARTY_PARAMS = {
-		filters: { status: 'active', account_type: 'importer_exporter' },
-
 	};
 
 	return (

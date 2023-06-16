@@ -34,15 +34,15 @@ export interface FilterProps {
 
 export interface AddCustomerInterface {
 	show?: boolean;
-	setShow?: () => void;
-	watch?: UseFormWatch<FieldValues>;
-	control?: Control<FieldValues, any>;
+	setShow?: Function;
+	control?: object;
+	watch?: Function;
 	handleSubmit?: UseFormHandleSubmit<FieldValues, undefined>;
 	uploadListLoading?: boolean;
 	getUploadList?: Function;
 }
 export interface ManageExceptionInterface {
-	setShow?: React.Dispatch<React.SetStateAction<boolean>>;
+	setShow?: Function;
 	showCycleExceptions?: boolean;
 	setShowCycleExceptions?: React.Dispatch<React.SetStateAction<boolean>>;
 	handleSubmit?: UseFormHandleSubmit<FieldValues, undefined>;
