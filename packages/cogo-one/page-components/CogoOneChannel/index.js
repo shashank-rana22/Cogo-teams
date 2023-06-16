@@ -60,14 +60,15 @@ function CogoOne() {
 
 	const [modalType, setModalType] = useState({ type: null, data: {} });
 
-	const { userRoleIds, userId, token, emailAddress } = useSelector(({ profile, general }) => ({
+	const { userRoleIds, userId, token, emailAddress, authRoleData } = useSelector(({ profile, general }) => ({
 		userRoleIds  : profile.partner?.user_role_ids || [],
 		userId       : profile?.user?.id,
 		token        : general.firestoreToken,
 		emailAddress : profile?.user?.email,
+		authRoleData : profile?.auth_role_data,
 	}));
 
-	const viewType = getViewType(userRoleIds);
+	const viewType = getViewType({ userRoleIds, userId, authRoleData });
 
 	const isomniChannelAdmin = viewType === 'admin_view';
 

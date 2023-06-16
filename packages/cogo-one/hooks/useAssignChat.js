@@ -22,12 +22,12 @@ function useAssignChat({
 		method : 'post',
 	}, { manual: true, autoCancel: false });
 
-	const addToGroup = async () => {
-		const roomRef = doc(
-			firestore,
-			`${FIRESTORE_PATH[channel_type]}/${id}`,
-		);
+	const roomRef = doc(
+		firestore,
+		`${FIRESTORE_PATH[channel_type]}/${id}`,
+	);
 
+	const addToGroup = async () => {
 		const { requested_group_members = [], group_members = [] } = activeMessageCard || [];
 
 		if (group_members.includes(profile.user.id)) {
@@ -44,6 +44,13 @@ function useAssignChat({
 			requested_group_members: [...new Set([...requested_group_members, profile.user.id])],
 		});
 		Toast.success('Successfully Sent Request');
+	};
+
+	const updateRequestsOfRoom = async () => {
+		await updateDoc(roomRef, {
+			has_requested_by: {},
+		});
+		Toast.info('Request dissmissed');
 	};
 
 	const assignChat = async (payload, callbackFun = () => {}) => {
@@ -81,9 +88,11 @@ function useAssignChat({
 			setDisableButton('');
 		}
 	};
+
 	return {
 		assignChat,
 		loading,
+		updateRequestsOfRoom,
 	};
 }
 export default useAssignChat;

@@ -88,7 +88,7 @@ function Messages({
 		formattedData,
 	});
 
-	const { assignChat = () => {}, loading: assignLoading } = useAssignChat({
+	const { assignChat = () => {}, loading: assignLoading, updateRequestsOfRoom } = useAssignChat({
 		messageFireBaseDoc,
 		channel_type,
 		firestore,
@@ -168,6 +168,7 @@ function Messages({
 					requestForAssignChat={requestForAssignChat}
 					requestAssignLoading={requestAssignLoading}
 					canMessageOnBotSession={canMessageOnBotSession}
+					updateRequestsOfRoom={updateRequestsOfRoom}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations
