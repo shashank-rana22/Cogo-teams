@@ -415,6 +415,10 @@ export default {
 			onboard_vendor: {
 				validate_registration: false,
 			},
+			cogo_one: {
+				has_voice_call_access : false,
+				default_country_code  : 'IN',
+			},
 		},
 	},
 };
