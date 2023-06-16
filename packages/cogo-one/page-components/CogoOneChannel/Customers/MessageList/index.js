@@ -63,7 +63,7 @@ function MessageList(messageProps) {
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	const isFlashMessagesEmpty = isEmpty(flashMessagesList) || false;
 
-	const canShowCarousel = showCarousel
+	const canShowCarousel = viewType !== 'shipment_view' && showCarousel
 	&& showCarousel !== 'in_timeout' && !isFlashMessagesEmpty && !flashMessagesLoading;
 
 	const getListHeightStyles = () => {

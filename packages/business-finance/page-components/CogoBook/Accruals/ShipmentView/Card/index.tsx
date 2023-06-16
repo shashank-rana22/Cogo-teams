@@ -137,7 +137,7 @@ function Card({
 						value={filters?.year}
 						onChange={(val:string) => { setFilters((prev) => ({ ...prev, year: val })); }}
 						placeholder="Year"
-						options={optionsYear()}
+						options={optionsYear}
 						isClearable
 						style={{ width: '110px' }}
 						size="sm"

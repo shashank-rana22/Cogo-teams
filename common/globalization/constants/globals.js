@@ -43,6 +43,10 @@ const GLOBAL_CONSTANTS = {
 	payment_url: {
 		razer_pay_url: 'https://checkout.razorpay.com/v1/checkout.js',
 	},
+	sample_document_url: {
+		new_hire_bulk_upload_url: `https://cogoport-production.sgp1.digitaloceanspaces.com
+		/ab3309b85b52e198b4c2bb691a7fb609/new_employee_bulk_upload_sample_sheet.csv`,
+	},
 	flash_booking_charge_codes: [
 		'OTC',
 		'BAS',
@@ -110,7 +114,7 @@ const GLOBAL_CONSTANTS = {
 		eclamation_svg            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/white_exclamation.svg',
 		cart_png                  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cart_icon.png',
 		saas_subscription_loading : 'https://cdn.cogoport.io/cms-prod/cogo_app/vault/original/loading.svg',
-		rfq_loading               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
+		empty_state               : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man',
 		empty_port                : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
 		empty_chart:
 		'https://cogoport-testing.sgp1.digitaloceanspaces.com/e3d9b8569d67ea2cfe336581fd4d7c14/empty_3.svg',
@@ -119,20 +123,27 @@ const GLOBAL_CONSTANTS = {
 		platform_chat_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg',
 		platform_notification_svg:
 			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg',
-		missed_call_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
-		not_connected_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
-		outgoing_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
-		incoming_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
-		empty_chat_jpg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
-		admin_logo_svg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg',
-		bot_logo_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
-		reply_icon_png      : 'https://cdn-icons-png.flaticon.com/512/1933/1933011.png',
-		reply_all_icon_png  : 'https://cdn-icons-png.flaticon.com/512/747/747334.png',
-		forward_icon_png    : 'https://cdn-icons-png.flaticon.com/512/60/60546.png',
-		incoming_green_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
-		outgoing_orange_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
-		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
-
+		missed_call_svg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
+		not_connected_svg    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
+		outgoing_svg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
+		incoming_svg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
+		empty_chat_jpg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
+		admin_logo_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg',
+		bot_logo_svg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
+		reply_icon_png       : 'https://cdn-icons-png.flaticon.com/512/1933/1933011.png',
+		reply_all_icon_png   : 'https://cdn-icons-png.flaticon.com/512/747/747334.png',
+		forward_icon_png     : 'https://cdn-icons-png.flaticon.com/512/60/60546.png',
+		incoming_green_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
+		outgoing_orange_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
+		missed_call_red_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
+		destination_icon     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
+		document_icon_png    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
+		day_one_png          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
+		books_png            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
+		map_png              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
+		nodata_image        	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		promocode_thumbnail  : 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
+		cogo_logo_without_bg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg',
 	},
 
 	options: {
@@ -182,15 +193,54 @@ const GLOBAL_CONSTANTS = {
 				trade_type: 'import',
 			},
 		},
+		role_options: [
+			{ value: 'software_development_engineer_1', label: 'Software Development Engineer - I' },
+			{ value: 'business_analyst', label: 'Business Analyst' },
+			{ value: 'product_analyst', label: 'Product Analyst' },
+			{ value: 'business_consultant', label: 'Business Consultant' },
+		],
 	},
 
 	regex_patterns: {
-		number: /^[+-]?\d*\.?\d+$/,
+		white_space     : /\s+/,
+		number          : /^[+-]?\d*\.?\d+$/,
+		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
+		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
+		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
+		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
 	},
-	languages                    : LANGUAGE_OPTIONS,
-	currency_conversion_constant : 0.04,
-	others                       : {
+	others : {
 		old_shipment_serial_id: 120347,
+	},
+	languages                       : LANGUAGE_OPTIONS,
+	currency_conversion_constant    : 0.04,
+	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
+	invoice_check_id                : 120347,
+	zeroth_index                    : 0,
+};
+
+GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
+	freight_invoice_currency: {
+		IN: [
+			GLOBAL_CONSTANTS.currency_code.INR,
+			GLOBAL_CONSTANTS.currency_code.USD,
+		],
+		GB: [
+			GLOBAL_CONSTANTS.currency_code.GBP,
+			GLOBAL_CONSTANTS.currency_code.EUR,
+			GLOBAL_CONSTANTS.currency_code.USD,
+		],
+		VN: [
+			GLOBAL_CONSTANTS.currency_code.USD,
+			GLOBAL_CONSTANTS.currency_code.VND,
+		],
+		others: [
+			GLOBAL_CONSTANTS.currency_code.USD,
+			GLOBAL_CONSTANTS.currency_code.EUR,
+			GLOBAL_CONSTANTS.currency_code.INR,
+		],
+
 	},
 };
 
