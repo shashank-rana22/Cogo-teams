@@ -141,6 +141,9 @@ const GLOBAL_CONSTANTS = {
 		day_one_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
 		books_png           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 		map_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
+		nodata_image       	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		promocode_thumbnail:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
 	},
 
 	options: {
@@ -200,6 +203,7 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
+		white_space     : /\s+/,
 		number          : /^[+-]?\d*\.?\d+$/,
 		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
@@ -213,6 +217,7 @@ const GLOBAL_CONSTANTS = {
 	others                       : {
 		old_shipment_serial_id: 120347,
 	},
+
 };
 
 export default GLOBAL_CONSTANTS;
