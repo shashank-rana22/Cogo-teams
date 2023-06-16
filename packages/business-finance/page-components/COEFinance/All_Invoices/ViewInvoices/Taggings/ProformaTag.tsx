@@ -1,7 +1,7 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
 
 import { formatDate } from '../../../../commons/utils/formatDate';
-import getFormattedPrice from '../../../../commons/utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
@@ -37,15 +37,15 @@ export function ProformaTagCards({
 					</span>
 				</div>
 				<div>
-					{getFormattedPrice(
-						newItem?.amount,
-						newItem?.billCurrency,
-						{
+					{formatAmount({
+						amount   : newItem?.amount as any,
+						currency :	newItem?.billCurrency,
+						options  :	{
 							style                 : 'currency',
 							currencyDisplay       : 'code',
 							maximumFractionDigits : 2,
 						},
-					)}
+					})}
 					{' '}
 					| Line Items (
 					{newItem?.lineItemCount}

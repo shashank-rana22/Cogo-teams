@@ -1485,6 +1485,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'update_subscription_payment_status',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
 	],
 	app_saas_insurance: [
 		{
