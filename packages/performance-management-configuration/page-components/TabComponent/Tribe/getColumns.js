@@ -58,21 +58,21 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => (
 					))}
 
 					{item?.squads?.length > MIN_SQUADS_LENGTH ? (
-						<Tooltip
-							content={<TooltipContent item={item?.squads} />}
-							placement="left"
-							theme="light"
-							interactive
-							caret
-							styles={{ marginBottom: '24px' }}
-						>
-							<Pill>
+						<Pill>
+							<Tooltip
+								content={<TooltipContent item={item?.squads} />}
+								placement="right"
+								theme="light"
+								interactive
+								caret
+								styles={{ marginBottom: '24px' }}
+							>
 								+
 								{item.squads.length - SQUAD_INDEX_END}
 								{' '}
 								Squads
-							</Pill>
-						</Tooltip>
+							</Tooltip>
+						</Pill>
 					)
 						: null}
 				</div>

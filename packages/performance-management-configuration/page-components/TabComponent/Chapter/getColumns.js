@@ -57,21 +57,21 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateChapterModal }) => (
 					))}
 
 					{item?.sub_chapters?.length > MIN_SUB_CHAPTERS_LENGTH ? (
-						<Tooltip
-							content={<TooltipContent item={item?.sub_chapters} />}
-							placement="left"
-							theme="light"
-							caret
-							interactive
-							styles={{ marginBottom: '24px' }}
-						>
-							<Pill>
+						<Pill>
+							<Tooltip
+								content={<TooltipContent item={item?.sub_chapters} />}
+								placement="right"
+								theme="light"
+								caret
+								interactive
+								styles={{ marginBottom: '24px' }}
+							>
 								+
 								{item.sub_chapters.length - SUB_CHAPTER_INDEX_END}
 								{' '}
 								SUB_CHAPTERS
-							</Pill>
-						</Tooltip>
+							</Tooltip>
+						</Pill>
 					)
 						: null}
 				</div>
