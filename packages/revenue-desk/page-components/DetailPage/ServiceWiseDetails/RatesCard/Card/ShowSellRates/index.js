@@ -13,8 +13,17 @@ function ShowSellRates({
 
 	const sellPrice = `${buy_price * SELL_RATE_INCREASE_BY}`;
 	return (
-		<div style={{display:'flex',alignItems:'center'}}>
-			<div style={{fontSize:'16px',fontWeight:'700',color:'#221F20',marginRight:'5px'}}>{currency || ''}</div>
+		<div style={{ display: 'flex', alignItems: 'center' }}>
+			<div style={{
+				fontSize    : '16px',
+				fontWeight  : '700',
+				color       : '#221F20',
+				marginRight : '5px',
+			}}
+			>
+				{currency || ''}
+
+			</div>
 			<Input
 				size="sm"
 				value={

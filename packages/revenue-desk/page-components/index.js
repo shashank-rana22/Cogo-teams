@@ -78,7 +78,7 @@ function RevenueDesk() {
 									) : (
 										<div className={styles.search_text}>
 											-
-											{shipmentList?.total || 0}
+											{shipmentList?.total_count || 0}
 											{' '}
 											Search Results
 										</div>
@@ -115,7 +115,7 @@ function RevenueDesk() {
 							type="table"
 							currentPage={filters?.page}
 							pageSize={10}
-							totalItems={shipmentList?.total}
+							totalItems={shipmentList?.total_count}
 							onPageChange={(val) => {
 								setFilters({ ...filters, page: val });
 							}}

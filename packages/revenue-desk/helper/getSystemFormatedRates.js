@@ -1,4 +1,5 @@
 const getSystemFormatedRates = (data, singleServiceData) => {
+	const container_count = singleServiceData?.container_count || 1;
 	const rows = [];
 	(data || []).forEach((element) => {
 		const { completed_shipments = 0, cancelled_shipments = 0 } = element;
@@ -13,11 +14,13 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.container_count = singleServiceData?.containers_count;
 		rowData.active_booking = element?.ongoing_shipment;
 		rowData.allocation_ratio = undefined;
+		rowData.buy_price = Number(element?.total_price) / Number(container_count);
 		rowData.fulfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
 			? Number(completed_shipments)
 			/ (Number(completed_shipments) + Number(cancelled_shipments)) : 0;
 		rowData.total_buy_price = element?.total_price || 0;
 		rowData.total_buy_currency = element?.total_price_currency;
+		rowData.currency = element?.total_price_currency;
 		rowData.validity_end = element?.validity_end;
 		rowData.origin_locals_price = element?.origin_locals?.total_price;
 		rowData.origin_locals_currency = element?.origin_locals?.total_price_currency;
