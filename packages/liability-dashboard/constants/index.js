@@ -50,7 +50,7 @@ export const STATS_CARDS = [
 	},
 ];
 
-export const PIE_CHART_CHECK = ['liability_point_value', 'total_burnt_point_value'];
+export const PIE_CHART_CHECK = ['liability_point_value', 'total_burnt_point_value', 'affiliate'];
 
 export const EVENT_MAPPING = {
 	shipment_burnt_point_value          : 'shipment',
