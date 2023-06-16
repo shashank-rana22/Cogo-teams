@@ -46,7 +46,6 @@ function AgentDetails({
 		user_type, id = '',
 	} = formattedMessageData || {};
 	const { partner_users } = useGetPartnerUsers({ activeMessageCard });
-	console.log('partner_users', partner_users);
 	const {
 		deleteGroupMember,
 		approveGroupRequest,
