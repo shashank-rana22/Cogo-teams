@@ -26,6 +26,8 @@ function AccountPayables() {
 
 	const entity = getEntityCode(partnerId);
 
+	const FILTER_TABS = ['dashboard', 'advance-payment'];
+
 	const handleTabChange = (v:string) => {
 		if (['invoices', 'payruns', 'outstanding', 'treasury-chest'].includes(v)) {
 			window.location.href = `/${partnerId}/business-finance/account-payables/${v}`;
@@ -58,15 +60,17 @@ function AccountPayables() {
 				{loading ? <Placeholder className={styles.loader} />
 					: (
 						<div>
-							<Select
-								name="activeEntity"
-								value={activeEntity}
-								onChange={(entityVal: string) => setActiveEntity(entityVal)}
-								placeholder="Select Entity"
-								options={EntityOptions}
-								size="sm"
-								style={{ width: '284px' }}
-							/>
+							{FILTER_TABS?.includes(activePayables) ? (
+								<Select
+									name="activeEntity"
+									value={activeEntity}
+									onChange={(entityVal: string) => setActiveEntity(entityVal)}
+									placeholder="Select Entity"
+									options={EntityOptions}
+									size="sm"
+									style={{ width: '284px' }}
+								/>
+							) : null}
 						</div>
 					)}
 			</div>

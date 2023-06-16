@@ -29,7 +29,7 @@ export interface Props {
 	subActiveTab?: string;
 	width?: string;
 	rowStyle?:string;
-	paginationType?: string;
+	paginationType?: 'number' | 'table' | 'page' | 'compact';
 }
 
 function List({

@@ -14,17 +14,17 @@ function RemarkContent({ remarkData = {}, remarkLoading = false }) {
 				<div className={styles.history_tl_container}>
 					<ul className={styles.tl}>
 						{(list || []).map(({ remarks = '', createdAt = '' }) => (
-					<li key={remarks}>
-							<div className={styles.flex}>
-								<div className={styles.flexcol}>
+							<li key={remarks}>
+								<div className={styles.flex}>
+									<div className={styles.flexcol}>
 										<span>{createdAt}</span>
 									</div>
-								<div className={styles.minwidth}>
+									<div className={styles.minwidth}>
 										<span>{remarks}</span>
 									</div>
-							</div>
-						</li>
-				))}
+								</div>
+							</li>
+						))}
 					</ul>
 				</div>
 			</div>

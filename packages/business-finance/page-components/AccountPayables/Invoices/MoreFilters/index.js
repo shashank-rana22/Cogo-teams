@@ -48,9 +48,9 @@ function FilterModal({ filters = {}, setFilters = () => {}, activeTab }) {
 									className={`${styles.currency_values} ${currency === text ? styles.selected : styles.unselected}`}
 									onClick={() => {
 										if (currency === text) {
-											setModalFilters({ ...modalFilters, currency: undefined });
+											setModalFilters({ ...modalFilters, currency: undefined, pageIndex: 1 });
 										} else {
-											setModalFilters({ ...modalFilters, currency: text });
+											setModalFilters({ ...modalFilters, currency: text, pageIndex: 1 });
 										}
 									}}
 									role="presentation"

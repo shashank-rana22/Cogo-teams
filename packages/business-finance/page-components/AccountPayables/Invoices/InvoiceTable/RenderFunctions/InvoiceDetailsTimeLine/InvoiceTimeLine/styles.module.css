@@ -4,6 +4,10 @@
 	padding: 0 40px;
 }
 
+.complete {
+	background: #67c676;
+}
+
 .complete:nth-child(2) {
 	background-image: linear-gradient(#e0e0e0, #67c676);
 }
@@ -24,10 +28,6 @@
 
 .pending {
 	background-image: linear-gradient(#e0e0e0, #67c676);
-}
-
-.complete {
-	background: #67c676;
 }
 
 .linecontainer {

@@ -98,7 +98,7 @@ export const ALL_INVOICE_CONFIG = {
 		{
 			label   : 'Invoice Dates',
 			key     : 'invoice_dates',
-			sorting : { name: 'approvedAtSortType' },
+			sorting : { name: 'dueDateSortType' },
 			span    : 1.8,
 			func    : 'renderInvoiceDates',
 		},

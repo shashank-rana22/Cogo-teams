@@ -1,5 +1,6 @@
-import { Select, TabPanel, Tabs, Placeholder, Input } from '@cogoport/components';
+import { Button, Input, Toggle } from '@cogoport/components';
 import { IcMSearchdark } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import Filter from '../../commons/Filters';
@@ -7,7 +8,9 @@ import List from '../../commons/List';
 import EmptyState from '../../commons/StyledTable/EmptyState';
 
 import { invoiceFilters } from './configurations';
+import GetState from './GetState';
 import useGetBillsList from './hooks/useGetBillsList';
+import useGetDownloadReport from './hooks/useGetDownloadReport';
 import { RenderAction } from './InvoiceTable/RenderFunctions/RenderAction';
 import { RenderInvoiceDates } from './InvoiceTable/RenderFunctions/RenderInvoiceDates';
 import { RenderToolTip } from './InvoiceTable/RenderFunctions/RenderToolTip';
@@ -25,7 +28,9 @@ const TABS = [
 	{ label: 'Not Due', value: 'notDue' },
 ];
 function Invoices() {
+	const { query } = useRouter();
 	const [activeTab, setActiveTab] = useState('all');
+	const [show, setShow] = useState(false);
 
 	const {
 		billsData,
@@ -36,7 +41,16 @@ function Invoices() {
 		setOrderBy,
 	} = useGetBillsList({ activeTab });
 
-	const { stats = {}, list = [], pageIndex } = billsData || {};
+	const { stats = {}, list = [] } = billsData || {};
+
+	const { generateInvoice, loading: generating } = useGetDownloadReport({
+		size          : stats?.all,
+		globalFilters : billsFilters,
+	});
+
+	const handleVersionChange = () => {
+		window.location.href = `/${query.partner_id}/business-finance/account-payables/invoices`;
+	};
 
 	const functions = {
 		renderToolTip: (itemData, field) => (
@@ -64,12 +78,21 @@ function Invoices() {
 					<FilterModal filters={billsFilters} setFilters={setBillsFilters} activeTab={activeTab} />
 				</div>
 				<div className={styles.search_filter}>
+					<Toggle
+						name="toggle"
+						size="md"
+						onLabel="Old"
+						offLabel="New"
+						onChange={handleVersionChange}
+					/>
+					<Button onClick={() => { setShow(true); }} className={styles.button}>Get State</Button>
+					<Button onClick={generateInvoice} className={styles.button} disabled={generating}>{generating ? 'Generating' : 'Download'}</Button>
 					<div className={styles.search}>
 						<Input
 							name="search"
 							size="sm"
 							value={billsFilters?.search || ''}
-							onChange={(val) => setBillsFilters((p) => ({ ...p, search: val }))}
+							onChange={(val) => setBillsFilters((p) => ({ ...p, search: val, pageIndex: 1 }))}
 							placeholder="Search By Name/Invoice Number/Sid"
 							suffix={(
 								<div style={{ margin: '4px', display: 'flex' }}>
@@ -81,7 +104,7 @@ function Invoices() {
 				</div>
 			</div>
 			<div className={styles.list_container}>
-				{(list?.length > 0) ? (
+				{(list?.length > 0 || billsLoading) ? (
 					<List
 						itemData={billsData}
 						loading={billsLoading}
@@ -102,6 +125,7 @@ function Invoices() {
 				)
                 	: <EmptyState imageFind="NoInoiceFound" imgHeight="imageHeight" />}
 			</div>
+			{show ? <GetState show={show} setShow={setShow} /> : null}
 		</div>
 	);
 }
