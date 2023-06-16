@@ -1,40 +1,27 @@
 import { Popover, Button, Modal, Textarea } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { useState } from 'react';
 
 import useFinanceReject from '../../hooks/useFinanceReject';
 import useGetIrnGeneration from '../../hooks/useGetIrnGeneration';
 import useGetRefresh from '../../hooks/useGetRefresh';
 import usePostToSage from '../../hooks/usePostToSage';
-import useUploadeInvoice from '../../hooks/useUploadInvoice';
 
 import FinalPostModal from './FinalPostModal';
-import InvoiceModal from './InvoiceModal';
 import styles from './styles.module.css';
 
 type Itemdata = {
-	id?: string
-	invoiceStatus?: string
-	entityCode?: number
-	daysLeftForAutoIrnGeneration?: string
-	isFinalPosted?:boolean
-	invoiceType?:string
-};
-
-interface Partner {
 	id?: string;
-}
-interface Profile {
-	partner?: Partner;
-}
+	invoiceStatus?: string;
+	entityCode?: number;
+	daysLeftForAutoIrnGeneration?: string;
+	isFinalPosted?:boolean;
+	invoiceType?:string;
+};
 interface IRNGeneration {
-	itemData?: Itemdata
-	refetch?: Function
-}
-interface RootState {
-	profile?: Profile;
+	itemData?: Itemdata;
+	refetch?: Function;
 }
 
 const INVOICE_STATUS = ['FINANCE_ACCEPTED', 'IRN_FAILED'];
@@ -43,15 +30,11 @@ const IRN_FAILED_STATUS = ['IRN_FAILED'];
 const SHOW_POST_TO_SAGE = ['FINANCE_ACCEPTED'];
 const { cogoport_entities : CogoportEntity } = GLOBAL_CONSTANTS || {};
 function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
-	const { profile = {} }: RootState = useSelector((state) => state);
-	const [uploadInvoice, setUploadInvoice] = useState(false);
 	const [openReject, setOpenReject] = useState(false);
 	const [textValue, setTextValue] = useState('');
 	const [finalPostToSageModal, setFinalPostToSageModal] = useState(false);
 	const [visible, setVisible] = useState(false);
 	const { invoiceStatus = '', entityCode = '', isFinalPosted = false, invoiceType = '' } = itemData || {};
-	const { partner = {} }: Profile = profile;
-	const { id: partnerId = '' }: Partner = partner;
 	const { id = '' } = itemData;
 	const { financeReject, loading: loadingReject } = useFinanceReject({
 		id,
@@ -70,13 +53,6 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 		id,
 		refetch,
 	});
-	const { uploadEInvoice, loading: invoiceLoading } = useUploadeInvoice({
-		id,
-		setUploadInvoice,
-		partnerId,
-	});
-	const UPLOAD_INVOICE = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported
-		?.includes('upload_invoice');
 
 	const financeRejected = () => {
 		setOpenReject(!openReject);
@@ -94,31 +70,10 @@ function IRNGenerate({ itemData = {}, refetch }: IRNGeneration) {
 	const showPost = ['REIMBURSEMENT', 'REIMBURSEMENT_CREDIT_NOTE'].includes(invoiceType);
 	const content = () => (
 		<div>
-			<div>
-				{ UPLOAD_INVOICE && (
-					<div className={styles.generate_container}>
-						<Button
-							size="sm"
-							disabled={loading}
-							onClick={() => setUploadInvoice(true)}
-						>
-							Upload E-invoice
-						</Button>
-						{uploadInvoice && (
-							<InvoiceModal
-								uploadInvoice={uploadInvoice}
-								setUploadInvoice={setUploadInvoice}
-								uploadEInvoice={uploadEInvoice}
-								loading={invoiceLoading}
-							/>
-						)}
-					</div>
-				)}
-			</div>
 			<div
 				className={styles.generate_container}
 			>
-				{(INVOICE_STATUS.includes(invoiceStatus) && !UPLOAD_INVOICE && !showPost) && (
+				{(INVOICE_STATUS.includes(invoiceStatus) && !showPost) && (
 					<Button
 						size="sm"
 						disabled={loading}

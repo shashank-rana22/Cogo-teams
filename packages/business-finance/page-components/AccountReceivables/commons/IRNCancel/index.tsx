@@ -20,13 +20,14 @@ type ItemData = {
 };
 interface INRCancel {
 	itemData?: ItemData;
+	refetch?: Function;
 }
 
-function IRNCancel({ itemData }: INRCancel) {
+function IRNCancel({ itemData, refetch }: INRCancel) {
 	const [showCancellationModal, setShowCancellationModal] = useState(false);
 	const [show, setShow] = useState(false);
 
-	const { invoiceStatus, id, entityCode, irnGeneratedAt = '' } = itemData || {};
+	const { invoiceStatus, id, entityCode, irnGeneratedAt } = itemData || {};
 
 	const isAfterADay =	irnGeneratedAt !== null
 		? Number(irnGeneratedAt) + TIME_VALUE >= Date.now()
@@ -94,6 +95,8 @@ function IRNCancel({ itemData }: INRCancel) {
 						itemData={itemData}
 						showCancellationModal={showCancellationModal}
 						setShowCancellationModal={setShowCancellationModal}
+						IRNLabel={IRNLabel}
+						refetch={refetch}
 					/>
 				)}
 			</div>
