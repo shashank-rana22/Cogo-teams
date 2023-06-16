@@ -66,6 +66,6 @@ export const USER_TYPE_COLOR_MAPPING = {
 
 export const USER_TYPE_MAPPING = {
 	channel_partner   : 'CP',
-	importer_exporter : '#IE',
+	importer_exporter : 'IE',
 	affiliate         : 'Affiliate',
 };

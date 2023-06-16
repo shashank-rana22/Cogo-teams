@@ -27,7 +27,6 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 				</div>
 				<div className={styles.title}>
 					{`${startCase(transactionType)}ed Amount (${currencyCode}) : `}
-					:
 					<div className={styles.amount}>{singleData?.y}</div>
 				</div>
 			</div>

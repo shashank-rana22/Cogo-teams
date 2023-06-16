@@ -17,7 +17,7 @@ function TableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					placement="bottom"
 				>
 					<div className={styles.user_name}>
-						{startCase(item?.user_name)}
+						{startCase(getByKey(item, 'user_name'))}
 					</div>
 
 				</Tooltip>
@@ -37,7 +37,7 @@ function TableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					placement="bottom"
 				>
 					<div className={styles.user_name}>
-						{startCase(item?.organization_name) || '--'}
+						{startCase(getByKey(item, 'organization_name')) || '--'}
 					</div>
 				</Tooltip>
 			),
