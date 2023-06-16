@@ -1,7 +1,7 @@
+import { Layout } from '@cogoport/air-modules';
 import { InputController, useForm } from '@cogoport/forms';
 import { useImperativeHandle, forwardRef } from 'react';
 
-import Layout from '../../../commons/Layout';
 import getControls from '../utils/getControls';
 
 import styles from './styles.module.css';

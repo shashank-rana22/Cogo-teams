@@ -12,7 +12,7 @@ const useUpdateShipmentContainerDetails = ({
 	});
 
 	const apiTrigger = async (update_data) => {
-		if (update_data?.length !== 0) {
+		if (update_data?.length) {
 			try {
 				await trigger({ data: { update_data } });
 
