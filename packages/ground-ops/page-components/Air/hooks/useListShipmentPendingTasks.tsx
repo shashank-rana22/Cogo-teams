@@ -28,10 +28,8 @@ const useListShipmentPendingTasks = ({ activeTab = 'new_awb', filter = {}, relev
 	}));
 
 	const [searchValue, setSearchValue] = useState('');
-	console.log("searchValue:", searchValue)
 	const [page, setPage] = useState(1);
 	const { query = '', debounceQuery } = useDebounceQuery();
-	console.log("query:", query)
 
 	const [{ data = {}, loading }, trigger] = useRequestAir(
 		{
