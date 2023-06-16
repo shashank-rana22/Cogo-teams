@@ -32,7 +32,6 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 
 	const common = {
 		commodity : commodity !== 'all_commodity' ? commodity : 'general',
-		commodity_details,
 		volume    : Number(volume),
 		weight    : Number(weight),
 		status    : 'active',
@@ -41,6 +40,7 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 
 	const common2 = {
 		packages,
+		commodity_details,
 		packages_count: Number(packages_count || SINGLE_PACKAGE),
 	};
 
@@ -71,8 +71,8 @@ const formatDataForSingleService = ({ rawParams = {} }) => {
 		return [{
 			destination_location_id : formValues?.location_id,
 			origin_country_id,
-			commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,
 			...common,
+			commodity               : HAZ_CLASSES.includes(commodity) ? commodity : null,
 			packages                : formValues?.packages?.map((obj) => formattedAsNumberData(obj)),
 		}];
 	}
