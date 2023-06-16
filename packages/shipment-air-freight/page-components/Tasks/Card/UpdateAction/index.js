@@ -19,7 +19,8 @@ function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {}, se
 		if (service?.service_type === 'air_freight_service' && service.state === 'cancelled') {
 			isMainServiceCancelled = true;
 		}
-	})(task.task_field_ids || []).forEach((id) => {
+	});
+	(task.task_field_ids || []).forEach((id) => {
 		(services || []).forEach((serviceObj) => {
 			if (serviceObj.id === id) {
 				REQUIRED_SERVICE_ARRAY.push(serviceObj);
