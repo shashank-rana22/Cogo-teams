@@ -25,10 +25,14 @@ const getSessionQuery = (viewType, showBotMessages, tab) => {
 };
 
 const getTabQuery = (tab, userId) => {
-	if (tab === 'groups') {
-		return [where('group_members', 'array-contains', userId)];
+	switch (tab) {
+		case 'groups':
+			return [where('group_members', 'array-contains', userId)];
+		case 'contacts':
+			return [where('user_details.account_type', '==', 'service_provider')];
+		default:
+			return [];
 	}
-	return [];
 };
 
 function getFireStoreQuery({
