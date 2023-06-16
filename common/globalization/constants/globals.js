@@ -1,3 +1,4 @@
+/* eslint-disable max-len */
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
 
@@ -153,6 +154,7 @@ const GLOBAL_CONSTANTS = {
 		books_png           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 		map_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
 		nodata_image       	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		promocode_thumbnail : 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
 	},
 	options: {
 		upload_file_size: {
@@ -170,6 +172,7 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
+		white_space     : /\s+/,
 		number          : /^[+-]?\d*\.?\d+$/,
 		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,

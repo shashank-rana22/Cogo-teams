@@ -2,24 +2,11 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 
 interface IrnCancellationProps {
-	id?: string;
-	setShowCancellationModal?: Function;
-	response?: {
-		remarks?: string;
-	},
-	refetch?: Function;
-}
-interface Values {
-	agreementNumber?: string;
-	agreementDate?: string;
-	agreementPdfFile?: AgreementPdfFile;
+	id?: string,
+	setShowCancellationModal?: (p: boolean)=> void,
 }
 
-interface AgreementPdfFile {
-	finalUrl?: string;
-}
-
-const useGetIrnCancellation = ({ id, setShowCancellationModal, response, refetch }: IrnCancellationProps) => {
+const useGetIrnCancellation = ({ id, setShowCancellationModal }: IrnCancellationProps) => {
 	const [
 		{ loading },
 		cancelIrnApi,
@@ -32,20 +19,11 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal, response, refetch
 		{ manual: true },
 	);
 
-	const { remarks } = response || {};
-	const onSubmit = async (values: Values) => {
-		const {
-			agreementNumber,
-			agreementDate,
-			agreementPdfFile,
-		} = values || {};
-		const { finalUrl } = agreementPdfFile || {};
+	const cancelIrn = async (response) => {
 		try {
 			const payload = {
-				cancelReason      : remarks || undefined,
-				agreementNumber   : agreementNumber || undefined,
-				agreementDate     : agreementDate || undefined,
-				agreementDocument : finalUrl || undefined,
+				cancelReason   : response?.value,
+				cancelReminder : response?.remarks,
 			};
 			const resp = await cancelIrnApi({
 				data: payload,
@@ -54,14 +32,13 @@ const useGetIrnCancellation = ({ id, setShowCancellationModal, response, refetch
 				Toast.success('IRN Cancelled Successfully');
 				setShowCancellationModal(false);
 			}
-			refetch();
 		} catch (err) {
 			Toast.error(err?.error?.message || 'Something went wrong');
 		}
 	};
 
 	return {
-		onSubmit,
+		cancelIrn,
 		loading,
 	};
 };
