@@ -7,6 +7,7 @@ import {
 	STATUS_PENDING,
 	ORG_RESPONDED,
 	REVERT_STATUS_LABEL_MAPPING,
+	REVERTABLE_SERVICES,
 } from '../../../../../../../constants/flashRatesMapping';
 import PriceRange from '../PriceRange';
 
@@ -14,7 +15,7 @@ import styles from './styles.module.css';
 
 const geo = getGeoConstants();
 
-function WinBooking({ item, setRevertModalData = () => {}, type = '' }) {
+function WinBooking({ item, setModalState = () => {}, type = '' }) {
 	return (
 		<div className={styles.rate_revert_flex}>
 			<div className={styles.price_label}>
@@ -23,9 +24,10 @@ function WinBooking({ item, setRevertModalData = () => {}, type = '' }) {
 			</div>
 			{type !== 'closed_booking' && (
 				<Button
-					onClick={() => setRevertModalData({ open: true, data: { ...item } })}
+					onClick={() => setModalState({ isOpen: true, data: { ...item } })}
 					themeType="primary"
 					size="sm"
+					disabled={!REVERTABLE_SERVICES.includes(item?.service_type)}
 				>
 					Revert
 				</Button>

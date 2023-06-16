@@ -18,6 +18,14 @@ function Details({ serviceType, serviceDetails }) {
 
 	const { label, key } = DETENTION_INFO_KEY_MAPPING[serviceType] || DETENTION_INFO_KEY_MAPPING.default;
 
+	const transitTime = differenceInDays(
+		new Date(selected_schedule_arrival || new Date()),
+		new Date(selected_schedule_departure || new Date()),
+	);
+
+	const shipmentType = service?.number_of_stops ? 'Indirect Shipment'
+		: 'Direct Shipment';
+
 	const INFO_MAPPING = [
 		{
 			label : 'Cargo Ready',
@@ -39,15 +47,15 @@ function Details({ serviceType, serviceDetails }) {
 			label,
 			value: serviceDetails?.[key] || '0',
 		},
+		{
+			label : 'Transit Time',
+			value : `${transitTime} Days`,
+		},
+		{
+			label : 'Shipment Type',
+			value : shipmentType,
+		},
 	];
-
-	const transitTime = differenceInDays(
-		new Date(selected_schedule_arrival || new Date()),
-		new Date(selected_schedule_departure || new Date()),
-	);
-
-	const shipmentType = service?.number_of_stops ? 'Indirect Shipment'
-		: 'Direct Shipment';
 
 	return (
 		<div className={styles.container}>
@@ -58,14 +66,6 @@ function Details({ serviceType, serviceDetails }) {
 					<span>{eachItem?.value}</span>
 				</div>
 			))}
-			<div className={styles.label}>
-				Transit Time-
-				<span>{`${transitTime} Days`}</span>
-			</div>
-			<div className={styles.label}>
-				Shipment Type-
-				<span>{shipmentType}</span>
-			</div>
 		</div>
 	);
 }

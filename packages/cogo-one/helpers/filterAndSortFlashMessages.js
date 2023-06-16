@@ -1,22 +1,22 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 
-const FALLBACK_COUNTRY = 'IN';
 const FALLBACK_TIMESTAMP = 0;
 
 const getGeoKeys = () => {
 	const geo = getGeoConstants();
 	return {
-		countryCode  : geo.country.code,
-		cogoEntityId : geo.uuid.parent_entity_id,
+		countryCode         : geo.country.code,
+		cogoEntityId        : geo.uuid.parent_entity_id,
+		fallBackCountryCode : geo.others.navigations.cogo_one.default_country_code,
 	};
 };
 
-const checkCountrySpecificChats = ({ eachChat, countryCode, cogoEntityId }) => {
+const checkCountrySpecificChats = ({ eachChat, countryCode, cogoEntityId, fallBackCountryCode }) => {
 	const { country_code = '', cogo_entity_id:leadCogoEntityId, user_details } = eachChat || {};
 	const { cogo_entity_id = '' } = user_details || {};
 
 	if (!(cogo_entity_id || leadCogoEntityId || country_code)) {
-		return countryCode === FALLBACK_COUNTRY;
+		return countryCode === fallBackCountryCode;
 	}
 
 	return (
@@ -27,9 +27,14 @@ const checkCountrySpecificChats = ({ eachChat, countryCode, cogoEntityId }) => {
 };
 
 const filterAndSortFlashMessages = (flashMessagesData) => {
-	const { countryCode, cogoEntityId } = getGeoKeys();
+	const { countryCode, cogoEntityId, fallBackCountryCode } = getGeoKeys();
 	return Object.keys(flashMessagesData || {})
-		.filter((key) => checkCountrySpecificChats({ eachChat: flashMessagesData[key], countryCode, cogoEntityId }))
+		.filter((key) => checkCountrySpecificChats({
+			eachChat: flashMessagesData[key],
+			countryCode,
+			cogoEntityId,
+			fallBackCountryCode,
+		}))
 		.sort((a, b) => Number(b.updated_at || FALLBACK_TIMESTAMP) - Number(a.updated_at || FALLBACK_TIMESTAMP))
 		.map((sortedkeys) => flashMessagesData[sortedkeys]);
 };
