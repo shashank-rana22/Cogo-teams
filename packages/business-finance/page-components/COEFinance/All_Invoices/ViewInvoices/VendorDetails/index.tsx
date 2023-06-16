@@ -4,7 +4,7 @@ import {
 	Tooltip,
 
 } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcCFtick,
 	IcMInfo,
@@ -122,10 +122,14 @@ function VendorDetail({
 						<div className={styles.text_decoration}>
 							{!apiLoading ? (
 								<div className={styles.values}>
-									{showOverflowingNumber(getFormattedPrice(
-										accountPayables,
-										ledCurrency,
-									) || 0, 10)}
+									{showOverflowingNumber(formatAmount({
+										amount   :	accountPayables,
+										currency :	ledCurrency,
+										options  :	{
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || 0, 10)}
 								</div>
 							) : (
 								<div>
@@ -152,10 +156,14 @@ function VendorDetail({
 						<div className={styles.text_decoration}>
 							{!apiLoading ? (
 								<div className={styles.values}>
-									{showOverflowingNumber(getFormattedPrice(
-										accountReceivable,
-										ledCurrency,
-									) || 0, 10)}
+									{showOverflowingNumber(formatAmount({
+										amount   :	accountReceivable,
+										currency :	ledCurrency,
+										options  :	{
+											style           : 'currency',
+											currencyDisplay : 'code',
+										},
+									}) || 0, 10)}
 								</div>
 							) : (
 								<div>

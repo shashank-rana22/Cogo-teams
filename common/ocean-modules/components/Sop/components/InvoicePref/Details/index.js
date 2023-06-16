@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
@@ -43,8 +44,8 @@ function Details({ data = [], setShowForm = () => {} }) {
 						>
 							Add
 						</Button>
-
 					</div>
+
 					<div>
 						<Button
 							onClick={() => setShowForm('edit')}
@@ -53,22 +54,23 @@ function Details({ data = [], setShowForm = () => {} }) {
 						>
 							Edit
 						</Button>
-
 					</div>
 				</div>
 			</div>
 
 			<div>
-				{!data?.length ? <div className={styles.no_data}>No data available</div>
+				{isEmpty(data)
+					? <div className={styles.no_data}>No data available</div>
 					: data.map((item) => {
 						const mapping_data = mapping(item?.sop_detail || {});
 
 						return (
-							<div className={styles.each_pref}>
+							<div className={styles.each_pref} key={item?.id}>
 								{INVOICE_COLUMNS.map((col) => (
-									<div className={styles.columns}>
+									<div className={styles.columns} key={col?.[GLOBAL_CONSTANTS.zeroth_index]}>
 										{col.map((key) => (
 											<LabelValue
+												key={key}
 												label={key}
 												value={mapping_data[key]}
 											/>

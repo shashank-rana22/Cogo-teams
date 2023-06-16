@@ -18,9 +18,7 @@ const useUpdateShipmentOperatingProcedure = ({
 		},
 	}, { manual: true });
 
-	const successMessage = `SuccessFully ${
-		sopData?.is_pinned ? 'Unpinned' : 'Pinned'
-	}`;
+	const successMessage = `SuccessFully ${sopData?.is_pinned ? 'Unpinned' : 'Pinned'}`;
 
 	const upatePinnedStatus = async () => {
 		if (!updatePermission) {

@@ -97,7 +97,6 @@ function HowItWorks({ setTask }) {
 					Cancel
 				</Button>
 			</div>
-
 		</div>
 	);
 }

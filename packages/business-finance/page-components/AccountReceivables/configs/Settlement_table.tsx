@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format, getByKey } from '@cogoport/utils';
 
 interface SettlementProps {
@@ -28,10 +28,14 @@ const SettlementList = ({
 
 			<div>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'documentAmount') as number,
-						getByKey(row, 'currency') as string,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'documentAmount') as any,
+						currency :	getByKey(row, 'currency'),
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
@@ -44,10 +48,14 @@ const SettlementList = ({
 
 			<div>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'settledAmount') as number,
-						getByKey(row, 'currency') as string,
-					)}
+					{formatAmount({
+						amount   :	getByKey(row, 'settledAmount') as any,
+						currency :	getByKey(row, 'currency'),
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
@@ -60,10 +68,14 @@ const SettlementList = ({
 
 			<div>
 				<div>
-					{getFormattedPrice(
-						getByKey(row, 'balanceAmount') as number,
-						getByKey(row, 'currency') as string,
-					)}
+					{formatAmount({
+						amount   : getByKey(row, 'balanceAmount') as any,
+						currency : getByKey(row, 'currency'),
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>

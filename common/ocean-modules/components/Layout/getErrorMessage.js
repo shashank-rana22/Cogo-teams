@@ -1,38 +1,36 @@
+const DEFAULT_MIN = 0;
+
 const getErrorMessage = (props) => {
-	const { error = {}, rules = {}, label = '' } = props;
+	const { error = {}, rules = {}, label = '' } = props || {};
 
 	if (error?.message) return error.message;
 
-	const errorMessage = [];
+	const ERROR_MESSAGES = [];
 
 	if (error) {
 		if (rules?.required && error?.type === 'required') {
-			errorMessage.push(error?.message || `${label} is Required`);
+			ERROR_MESSAGES.push(error?.message || `${label} is Required`);
 		}
-		if ((rules?.min || rules?.min === 0) && error?.type === 'min') {
-			errorMessage.push(
-				`${label} cannot be less than ${rules.min}`,
-			);
+
+		if ((rules?.min || rules?.min === DEFAULT_MIN) && error?.type === 'min') {
+			ERROR_MESSAGES.push(`${label} cannot be less than ${rules.min}`);
 		}
+
 		if (rules?.max && error?.type === 'max') {
-			errorMessage.push(
-				`${label} cannot be greater than ${rules.max}`,
-			);
+			ERROR_MESSAGES.push(`${label} cannot be greater than ${rules.max}`);
 		}
+
 		if (rules?.minLength && error?.type === 'minLength') {
-			errorMessage.push(
-				`${label} should be ${rules.minLength} character(s) long`,
-			);
+			ERROR_MESSAGES.push(`${label} should be ${rules.minLength} character(s) long`);
 		}
+
 		if (rules?.maxLength && error?.type === 'maxLength') {
-			errorMessage.push(
-				`${label} should be less than ${rules.maxLength}`,
-			);
+			ERROR_MESSAGES.push(`${label} should be less than ${rules.maxLength}`);
 		}
 	}
 
-	if (errorMessage.length) {
-		return errorMessage.join(' ,');
+	if (ERROR_MESSAGES.length) {
+		return ERROR_MESSAGES.join(' ,');
 	}
 
 	return error?.message;

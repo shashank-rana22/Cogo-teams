@@ -1,8 +1,8 @@
 import { Pill, Tooltip } from '@cogoport/components';
-import getPrice from '@cogoport/forms/utils/get-formatted-price';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import { CSSProperties } from 'react';
 
 import showOverflowingNumber from '../../../../commons/showOverflowingNumber';
 import InvoiceDetails from '../../../commons/invoiceDetails';
@@ -61,10 +61,14 @@ const listFunctions = ({ refetch }) => ({
 		<div className={styles.fieldPair}>
 			<div>
 				<div>
-					{getPrice(
-						row?.invoiceAmount,
-						row?.invoiceCurrency,
-					)}
+					{formatAmount({
+						amount   :	row?.invoiceAmount,
+						currency :	row?.invoiceCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					})}
 
 				</div>
 			</div>
@@ -73,7 +77,7 @@ const listFunctions = ({ refetch }) => ({
 				className={styles.styled_pills}
 				style={{
 					'--color': STATUS_MAPPING[row?.status],
-				} as CSSProperties}
+				} as any}
 			>
 
 				{row?.status?.length > 10 ? (
@@ -105,10 +109,14 @@ const listFunctions = ({ refetch }) => ({
 	showLedgerAmount: (row) => (
 		<div>
 			<div>
-				{getPrice(
-					row?.ledgerAmount,
-					row?.ledgerCurrency,
-				)}
+				{formatAmount({
+					amount   :	row?.ledgerAmount,
+					currency :	row?.ledgerCurrency,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				})}
 
 			</div>
 		</div>
@@ -116,10 +124,14 @@ const listFunctions = ({ refetch }) => ({
 	showBalanceAmount: (row) => (
 		<div>
 			<div>
-				{getPrice(
-					row?.balanceAmount,
-					row?.invoiceCurrency,
-				)}
+				{formatAmount({
+					amount   :	row?.balanceAmount,
+					currency :	row?.invoiceCurrency,
+					options  : {
+						style           : 'currency',
+						currencyDisplay : 'code',
+					},
+				})}
 
 			</div>
 		</div>
@@ -129,7 +141,7 @@ const listFunctions = ({ refetch }) => ({
 			<div>
 				{formatDate({
 					date       : row?.invoiceDate,
-					dateFormat : 'dd MMM yy',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 					formatType : 'date',
 				})}
 
@@ -141,7 +153,7 @@ const listFunctions = ({ refetch }) => ({
 			<div>
 				{formatDate({
 					date       : row?.dueDate,
-					dateFormat : 'dd MMM yy',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 					formatType : 'date',
 				})}
 			</div>
@@ -153,7 +165,7 @@ const listFunctions = ({ refetch }) => ({
 			className={styles.styled_pills}
 			style={{
 				'--color': INVOICE_STATUS_MAPPING[row?.invoiceStatus],
-			} as CSSProperties}
+			} as any}
 		>
 			{row?.isFinalPosted ? <text className={styles.style_text}>FINAL POSTED</text> : (
 				<div>
