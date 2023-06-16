@@ -1,8 +1,5 @@
-import { Toggle, Button } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
-import { useState, useContext } from 'react';
+import { Toggle } from '@cogoport/components';
 
-import BookingRequirements from './BookingRequirements';
 import styles from './styles.module.css';
 
 function Header({
@@ -12,13 +9,7 @@ function Header({
 	setHideCompletedTasks = () => {},
 	showMyTasks = true,
 	setShowMyTasks = () => {},
-	shipment_data = {},
-	servicesList = [],
 }) {
-	const { stakeholderConfig : { tasks = {} } = {} } = useContext(ShipmentDetailContext);
-	const bookingReqCond = !!(tasks.show_booking_req && shipment_data?.state !== 'shipment_received');
-	const [showBookingReq, setShowBookingReq] = useState(false);
-
 	return (
 		<div className={styles.container}>
 			<div className={styles.top_panel}>
@@ -48,30 +39,6 @@ function Header({
 				</div>
 			</div>
 
-			{bookingReqCond
-				? (
-					<div className={styles.booking_req_heading}>
-						<div>Booking Requirements</div>
-						<Button
-							size="sm"
-							themeType="linkUi"
-							onClick={() => setShowBookingReq(!showBookingReq)}
-						>
-							<div className={styles.booking_req_button_text}>View</div>
-						</Button>
-					</div>
-				)
-				: null}
-
-			{showBookingReq
-				? (
-					<BookingRequirements
-						showBookingReq={showBookingReq}
-						setShowBookingReq={setShowBookingReq}
-						servicesList={servicesList}
-					/>
-				)
-				: null}
 		</div>
 	);
 }

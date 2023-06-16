@@ -14,8 +14,10 @@ const TRADE_MAPPING = {
 	export    : 'Origin',
 	undefined : '',
 };
-const OK_RESPONSE_STATUS = 200;
 const BASIC_CHARGE_CODE = ['BAS', 'BASNO'];
+
+const OK_RESPONSE_STATUS = 200;
+
 const useEditQuotations = ({
 	servicesList = [], shipment_data = {}, onCancel = () => {}, task = {},
 	taskListRefetch = () => {},

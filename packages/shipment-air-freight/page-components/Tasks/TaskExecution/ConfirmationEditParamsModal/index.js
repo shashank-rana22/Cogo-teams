@@ -29,7 +29,7 @@ function ConfirmationEditParamsModal({
 		formState: { errors },
 	} = useForm({ controls });
 
-	const { loading = false, updateBookingParameter } =		useUpdateInternationalAirShipmentBookingParameter({
+	const { loading = false, updateBookingParameter } =	useUpdateInternationalAirShipmentBookingParameter({
 		services,
 		shipment_data,
 		setShowEditParamsModal,

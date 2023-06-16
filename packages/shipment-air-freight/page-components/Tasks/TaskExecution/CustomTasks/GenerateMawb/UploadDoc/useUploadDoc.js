@@ -14,6 +14,8 @@ const useUploadDocument = ({
 	});
 
 	const uploadDocument = async (values) => {
+		console.log(values, 'hello');
+		console.log(shipment_data, 'hello data');
 		const document_number = shipment_data?.booking_reference_number;
 		const payload = {
 			id   : task?.id,

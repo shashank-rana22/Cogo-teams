@@ -65,13 +65,13 @@ const getServicesData = ({ values, services }) => {
 		}
 
 		PAYLOAD_SERVICES.push({
-			service_id   : detail?.id,
-			service_type : detail?.service_type,
-			BOOKING_PARAMS,
+			service_id     : detail?.id,
+			service_type   : detail?.service_type,
+			booking_params : BOOKING_PARAMS,
 		});
 	});
 	return {
-		PAYLOAD_SERVICES,
+		payloadServices: PAYLOAD_SERVICES,
 		canUpdate,
 	};
 };
@@ -156,7 +156,7 @@ function useUpdateInternationalAirShipmentBookingParameter({
 			);
 			setShowEditParamsModal(false);
 		} catch (error) {
-			toastApiError(error?.data || 'Something went wrong please try again');
+			toastApiError(error || 'Something went wrong please try again');
 		}
 	};
 
