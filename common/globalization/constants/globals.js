@@ -1,5 +1,4 @@
 import CURRENCY_CODE from './currencyCode';
-/* eslint-disable max-len */
 import ENTITY_MAPPING from './entityMapping';
 import LANGUAGE_OPTIONS from './languageMapping';
 
@@ -143,7 +142,8 @@ const GLOBAL_CONSTANTS = {
 		books_png           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
 		map_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
 		nodata_image       	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
-		promocode_thumbnail : 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
+		promocode_thumbnail:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
 	},
 
 	options: {
@@ -216,13 +216,8 @@ const GLOBAL_CONSTANTS = {
 	currency_conversion_constant : 0.04,
 	others                       : {
 		old_shipment_serial_id: 120347,
+	},
 
-	languages                       : LANGUAGE_OPTIONS,
-	currency_conversion_constant    : 0.04,
-	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
-	invoice_check_id                : 120347,
-	zeroth_index                    : 0,
-}
 };
 
 export default GLOBAL_CONSTANTS;
