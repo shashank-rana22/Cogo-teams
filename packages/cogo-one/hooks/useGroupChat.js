@@ -1,5 +1,4 @@
 import { Toast } from '@cogoport/components';
-import { useSelector } from '@cogoport/store';
 import { updateDoc, doc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
@@ -8,7 +7,6 @@ function useGroupChat({
 	activeMessageCard = {},
 	firestore,
 }) {
-	const { profile = {} } = useSelector((state) => state);
 	const { channel_type, id } = activeMessageCard || {};
 	const MAX_GROUP_MEMBERS_ALLOWED = 3;
 
@@ -42,7 +40,7 @@ function useGroupChat({
 
 		await updateDoc(roomRef, {
 			requested_group_members : requested_group_members.filter((x) => x !== user_id),
-			group_members           : [...new Set([...group_members, profile.user.id])],
+			group_members           : [...new Set([...group_members, user_id])],
 		});
 
 		Toast.success('Request approved.');

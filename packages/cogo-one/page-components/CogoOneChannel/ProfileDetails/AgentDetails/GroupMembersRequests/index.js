@@ -9,6 +9,7 @@ function GroupMembersRequests({
 	approveGroupRequest = () => {},
 	group_members = [],
 	partner_users = [],
+	hasAccessToEditGroup = false,
 }) {
 	const members = partner_users.filter((x) => group_members.includes(x.user_id));
 
@@ -17,6 +18,7 @@ function GroupMembersRequests({
 			{!isEmpty(members) && <div className={styles.conversation_title}>Group Requests</div>}
 			{members.map((user) => (
 				<div className={styles.content} key={user}>
+					{console.log('GroupMembersRequests user.user_id', user.user_id)}
 					<Avatar
 						src="https://www.w3schools.com/howto/img_avatar.png"
 						alt="img"
@@ -33,10 +35,16 @@ function GroupMembersRequests({
 							{user.email}
 						</div>
 					</div>
-					<div className={styles.mark_status}>
-						<IcCFtick className={styles.icon} onClick={() => approveGroupRequest(user.user_id)} />
-						<IcCFcrossInCircle className={styles.icon} onClick={() => deleteGroupRequest(user.user_id)} />
-					</div>
+					{hasAccessToEditGroup
+					&& (
+						<div className={styles.mark_status}>
+							<IcCFtick className={styles.icon} onClick={() => approveGroupRequest(user.user_id)} />
+							<IcCFcrossInCircle
+								className={styles.icon}
+								onClick={() => deleteGroupRequest(user.user_id)}
+							/>
+						</div>
+					)}
 				</div>
 			))}
 		</div>

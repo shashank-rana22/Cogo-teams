@@ -23,6 +23,7 @@ function ProfileDetails({
 	viewType = '',
 	hasVoiceCallAccess,
 	firestore,
+	userId = '',
 }) {
 	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
 
@@ -93,6 +94,7 @@ function ProfileDetails({
 						viewType={viewType}
 						hasVoiceCallAccess={hasVoiceCallAccess}
 						firestore={firestore}
+						userId={userId}
 					/>
 				)}
 			</div>

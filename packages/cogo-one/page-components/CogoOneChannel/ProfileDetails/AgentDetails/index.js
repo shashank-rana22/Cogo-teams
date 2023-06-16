@@ -33,6 +33,7 @@ function AgentDetails({
 	setShowMore = () => {},
 	hasVoiceCallAccess = false,
 	firestore,
+	userId: agentId,
 }) {
 	const {
 		user_id,
@@ -51,6 +52,9 @@ function AgentDetails({
 		approveGroupRequest,
 		deleteGroupRequest,
 	} = useGroupChat({ activeMessageCard, firestore });
+	const hasAccessToEditGroup = activeMessageCard.group_members?.includes(agentId)
+	|| activeMessageCard.support_agent_id === agentId;
+
 	const [showAddNumber, setShowAddNumber] = useState(false);
 	const [profileValue, setProfilevalue] = useState({
 		name         : '',
@@ -203,12 +207,14 @@ function AgentDetails({
 				deleteGroupMember={deleteGroupMember}
 				group_members={activeMessageCard.group_members}
 				partner_users={partner_users}
+				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 			<GroupMembersRequests
 				deleteGroupRequest={deleteGroupRequest}
 				approveGroupRequest={approveGroupRequest}
 				group_members={activeMessageCard.requested_group_members}
 				partner_users={partner_users}
+				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 			{(mobile_no || user_number) && (
 				<>
