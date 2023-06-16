@@ -1,8 +1,8 @@
 import { Modal, Pagination, Placeholder } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCCogoCoin } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { format, startCase, isEmpty } from '@cogoport/utils';
-import Image from 'next/image';
 
 import { ACTIVITY_STATUS } from '../../../constants';
 import useGetReferralTransactions from '../../../hooks/useGetReferralTransactions';

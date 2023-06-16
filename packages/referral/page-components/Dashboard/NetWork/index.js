@@ -1,8 +1,7 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
+import { useRouter, Image } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
-import Image from 'next/image';
 import React, { useState } from 'react';
 
 import NetworkChart from '../../../common/NetworkChart';

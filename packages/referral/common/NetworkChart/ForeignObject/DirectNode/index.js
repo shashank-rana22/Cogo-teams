@@ -1,8 +1,8 @@
 import { cl, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowDown } from '@cogoport/icons-react';
+import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import Image from 'next/image';
 import React from 'react';
 
 import { USER_STATUS_MAPPING, USER_STATUS_COLOUR } from '../../../../constants';

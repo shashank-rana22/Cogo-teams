@@ -1,7 +1,7 @@
 import { Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { startCase } from '@cogoport/utils';
-import Image from 'next/image';
 import { useState } from 'react';
 
 import DirectNode from './DirectNode';

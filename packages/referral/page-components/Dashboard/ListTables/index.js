@@ -1,7 +1,7 @@
 import { Tabs, TabPanel, Pagination, Table } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { Image } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import Image from 'next/image';
 
 import tableTabs from '../../../configurations/table-tabs';
 
