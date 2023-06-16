@@ -1,5 +1,4 @@
 import { Tooltip } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import React from 'react';
 
 import RenderCargoPills from '../RenderCargoPills';
@@ -7,6 +6,7 @@ import RenderCargoPills from '../RenderCargoPills';
 import styles from './styles.module.css';
 
 const MAIN_SERVICES_MIN_LENGTH = 1;
+const CHECK_FIRST_ITEM_OF_PACKAGE = 0;
 
 function MultiServiceDetailsPopover({
 	children = null,
@@ -18,7 +18,7 @@ function MultiServiceDetailsPopover({
 	}
 
 	const renderBody = () => (
-		mainServices.map((item, idx) => (idx !== GLOBAL_CONSTANTS.zeroth_index ? (
+		mainServices.map((item, idx) => (idx !== CHECK_FIRST_ITEM_OF_PACKAGE ? (
 			<div className={styles.container} key={item.id}>
 				<RenderCargoPills detail={item} />
 			</div>

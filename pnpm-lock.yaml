@@ -1497,6 +1497,7 @@ importers:
       '@cogoport/icons-react': ^1.0.51
       '@cogoport/navigation-configs': workspace:^0.1.0
       '@cogoport/next': workspace:0.1.0
+      '@cogoport/purchase-invoicing': workspace:^0.1.0
       '@cogoport/request': workspace:0.1.0
       '@cogoport/shipment-chat': workspace:^0.1.0
       '@cogoport/shipment-mails': workspace:^0.1.0
@@ -1512,6 +1513,7 @@ importers:
       '@cogoport/icons-react': 1.0.79_react@18.2.0
       '@cogoport/navigation-configs': link:../../common/navigation-configs
       '@cogoport/next': link:../../common/next
+      '@cogoport/purchase-invoicing': link:../purchase-invoicing
       '@cogoport/request': link:../../common/request
       '@cogoport/shipment-chat': link:../../common/shipment-chat
       '@cogoport/shipment-mails': link:../../common/shipment-mails
