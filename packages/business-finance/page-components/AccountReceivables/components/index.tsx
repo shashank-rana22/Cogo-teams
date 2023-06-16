@@ -1,34 +1,25 @@
 import { TabPanel, Tabs, Select, Placeholder } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import { useSelector } from '@cogoport/store';
 import { upperCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useListCogoEntity from '../hooks/useListCogoEntity';
 
 import Dashboard from './Dashboard';
+import Defaulters from './Defaulters';
 import Invoice from './Invoice';
+import ManageBpr from './ManageBpr';
 import Outstanding from './Outstanding';
 import styles from './styles.module.css';
 
-const REDIRECT_TABS = ['defaulters', 'manageBpr'];
-
 function AccountReceivables() {
 	const { push, query } = useRouter();
-	const [receivables, setReceivables] = useState<string>(query.active_tab || 'dashboard');
+	const [receivables, setReceivables] = useState(query.active_tab || 'dashboard');
 	const { loading, EntityData = [] } = useListCogoEntity();
 
 	const [entityCode, setEntityCode] = useState('301');
 
-	const profile = useSelector((state) => state);
-	const { profile:{ partner } } = profile || {};
-	const { id: partnerId } = partner || {};
-
 	const handleChange = (val:string) => {
-		if (REDIRECT_TABS.includes(val)) {
-			window.location.href = `/${partnerId}/business-finance/account-receivables/${val}`;
-			return;
-		}
 		setReceivables(val);
 		push(
 			'/business-finance/account-receivables/[active_tab]',
@@ -85,10 +76,10 @@ function AccountReceivables() {
 					</TabPanel>
 
 					<TabPanel name="defaulters" title="Defaulters">
-						--
+						<Defaulters entityCode={entityCode} />
 					</TabPanel>
 					<TabPanel name="manageBpr" title="Manage BPR">
-						--
+						<ManageBpr />
 					</TabPanel>
 				</Tabs>
 			</div>

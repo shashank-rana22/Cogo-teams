@@ -5,10 +5,18 @@ import React, { useState } from 'react';
 
 import AnnouncementModal from './Announcements/AnnouncementModal';
 import Navbar from './Navbar';
+import TnC from './newTnC';
 import styles from './styles.module.css';
 import Topbar from './Topbar';
 import useFetchPinnedNavs from './useFetchPinnedNavs';
 import VoiceCall from './VoiceCall';
+
+const WHITE_BACKGROUND_MAPPING = [
+	'/[partner_id]/learning/course',
+	'/[partner_id]/learning/course/[course_id]',
+	'/[partner_id]/learning/course/introduction',
+	'/[partner_id]/learning/course/preview',
+];
 
 function AdminLayout({
 	children = null, showTopbar = true, topbar = {}, showNavbar = false, navbar = {},
@@ -19,15 +27,20 @@ function AdminLayout({
 
 	const {
 		user_data,
-	} = useSelector(({ profile }) => ({
-		user_data: profile || {},
+		pathname,
+	} = useSelector(({ profile, general }) => ({
+		user_data : profile || {},
+		pathname  : general.pathname,
 	}));
 
 	const {
 		user: { id: user_id = '' },
-		partner: { id: partner_id = '', partner_user_id = '' },
+		partner: partnerData,
 		is_in_voice_call:inCall = false, voice_call_recipient_data = {},
 	} = user_data;
+
+	const { id: partner_id = '', partner_user_id = '', is_joining_tnc_accepted = '' } = partnerData || {};
+
 	const {
 		pinListLoading = false,
 	} = useFetchPinnedNavs({ user_id, partner_id, setPinnedNavKeys, setAnnouncements });
@@ -38,10 +51,14 @@ function AdminLayout({
 
 	const { partner = [], pinnedNavs = [] } = nav_items || {};
 
+	const isTnCModalVisible = Object.keys(partnerData).includes('is_joining_tnc_accepted')
+									&& is_joining_tnc_accepted === false;
+
 	return (
 		<div className={cl`
 			${styles.container} 
 			${showTopbar ? styles.has_topbar : ''} 
+			${WHITE_BACKGROUND_MAPPING.includes(pathname) && styles.white_bg}
 			${showNavbar ? styles.has_navbar : ''}`}
 		>
 			<main className={styles.children_container}>{children}</main>
@@ -76,6 +93,8 @@ function AdminLayout({
 				inCall={inCall}
 			/>
 			<AnnouncementModal data={announcements} />
+
+			{isTnCModalVisible ? <TnC partner_user_id={partner_user_id} /> : null}
 		</div>
 	);
 }

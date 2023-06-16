@@ -1,12 +1,11 @@
 import { Modal } from '@cogoport/components';
 import { AsyncSelectController, RadioGroupController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { Layout } from '@cogoport/ocean-modules';
+import { Layout, useShipmentBack } from '@cogoport/ocean-modules';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
-import useShipmentBack from '../../../../../hooks/useShipmentBack';
 import Footer from '../Footer';
 
 import styles from './styles.module.css';
@@ -75,6 +74,7 @@ function Form({
 		<Modal
 			show
 			onClose={closeModal}
+			size="lg"
 			showCloseIcon={!haveToUpsell}
 			closeOnOuterClick={false}
 			className={styles.custom_modal}
@@ -92,8 +92,8 @@ function Form({
 						</div>
 					) : null}
 
-					{startCase(upsellableService?.trade_type)}
-					{' '}
+					{startCase(upsellableService.trade_type)}
+					&nbsp;
 					{startCase(service)}
 				</div>
 			)}

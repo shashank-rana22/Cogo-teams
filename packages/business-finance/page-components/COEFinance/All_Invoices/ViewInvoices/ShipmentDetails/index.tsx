@@ -1,10 +1,10 @@
-import { Loader, Placeholder, Pill } from '@cogoport/components';
+import { Loader, Placeholder, Pill, Popover } from '@cogoport/components';
 import {
 	IcMArrowRotateDown,
 	IcMArrowRotateUp,
 	IcADocumentTemplates,
 } from '@cogoport/icons-react';
-import { startCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import { RemarksValInterface } from '../../../../commons/Interfaces/index';
@@ -70,6 +70,10 @@ interface BillAdditionalObjectInterface {
 	shipmentType?: string;
 	reasonForCN? : string;
 	outstandingDocument? : string;
+	paymentType? : string;
+	isIncidental? : string;
+	advancedAmount? : number;
+	advancedAmountCurrency? : string;
 }
 export interface DataInterface {
 	job?: JobInterface;
@@ -79,6 +83,7 @@ export interface DataInterface {
 	sellerBankDetail?: SellerBankDetailInterface;
 	sellerDetail?: SellerDetailInterface;
 	bill: BillInterface;
+	consolidatedShipmentIds:Array<string>;
 }
 
 interface ShipmentDetailsInterface {
@@ -91,6 +96,7 @@ interface ShipmentDetailsInterface {
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	lineItem?: boolean;
 	status: string;
+	jobType?:string;
 }
 function ShipmentDetails({
 	data,
@@ -102,13 +108,15 @@ function ShipmentDetails({
 	setLineItem,
 	lineItem,
 	status,
+	jobType,
 }: ShipmentDetailsInterface) {
 	const [showDetails, setShowDetails] = useState(false);
 	const [showDocuments, setShowDocuments] = useState(false);
 	const [showVariance, setShowVariance] = useState(false);
 	const [itemCheck, setItemCheck] = useState(false);
+	const [showConsolidatedSID, setShowConsolidatedSID] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
-	const { job } = data || {};
+	const { job, consolidatedShipmentIds = [] } = data || {};
 	const { jobNumber } = job || {};
 	const { varianceFullData, loading } = useGetVariance({ collectionPartyId });
 	const { data: shipmentData, loading:loadingShipment } = useListShipment(jobNumber);
@@ -136,11 +144,44 @@ function ShipmentDetails({
 		}
 		return <div>NO DATA FOUND</div>;
 	};
+	const rest = { onClickOutside: () => { setShowConsolidatedSID(false); } };
 
+	const getConsolidatedSID = () => {
+		if (isEmpty(consolidatedShipmentIds)) {
+			return (
+				<div>
+					Not Available
+				</div>
+			);
+		}
+		return (
+			<div>
+				{consolidatedShipmentIds.map((item:string) => (
+					<div key={item} className={styles.sid_div}>
+						<div>
+							SID
+						</div>
+						<div>
+							-
+						</div>
+						<div>
+							{item}
+						</div>
+					</div>
+				))}
+			</div>
+		);
+	};
+	const handleConsolidatedSID = () => {
+		setShowConsolidatedSID(!showConsolidatedSID);
+	};
+	const jobTypeValue = jobType?.toLowerCase();
 	return (
 		<div className={styles.container}>
 			<h3>
-				Shipment Details
+				{startCase(jobTypeValue)}
+				{' '}
+				Details
 				{' '}
 				{jobNumber && (
 					<span>
@@ -156,101 +197,104 @@ function ShipmentDetails({
 
 			<div className={styles.small_hr} />
 
-			<div className={styles.card}>
-				<div
-					className={styles.card_upper}
-					onClick={() => {
-						setShowDetails(!showDetails);
-					}}
-					role="presentation"
-				>
-					<div className={styles.sub_container}>
-						Details
-						<div className={styles.tags_container}>
-							{getPills()}
-						</div>
-						{dataWallet?.list?.[0] && (
-							<div className={styles.data}>
-								<div className={styles.kam_data}>KAM -</div>
-								<div>
-									{agentData?.name}
+			{jobType === 'SHIPMENT' && (
+				<>
+					<div className={styles.card}>
+						<div
+							className={styles.card_upper}
+							onClick={() => {
+								setShowDetails(!showDetails);
+							}}
+							role="presentation"
+						>
+							<div className={styles.sub_container}>
+								Details
+								<div className={styles.tags_container}>
+									{getPills()}
+								</div>
+								{dataWallet?.list?.[0] && (
+									<div className={styles.data}>
+										<div className={styles.kam_data}>KAM -</div>
+										<div>
+											{agentData?.name}
                   &nbsp;(
-									{agentRoleData?.name}
-									)
-								</div>
-								<div className={styles.kam_data}>Wallet Usage - </div>
-								<div>
-									{amountCurrency || 'USD'}
+											{agentRoleData?.name}
+											)
+										</div>
+										<div className={styles.kam_data}>Wallet Usage - </div>
+										<div>
+											{amountCurrency || ''}
 
-									{amount || 0}
-								</div>
+											{amount || 0}
+										</div>
+									</div>
+								)}
 							</div>
-						)}
+
+							<div
+								className={styles.caret}
+								onClick={() => {
+									setShowDetails(!showDetails);
+								}}
+								role="presentation"
+							>
+								{showDetails ? (
+									<IcMArrowRotateUp height="17px" width="17px" />
+								) : (
+									<IcMArrowRotateDown height="17px" width="17px" />
+								)}
+							</div>
+						</div>
+						{showDetails && <div className={styles.hr} />}
+						<div className={styles.details}>
+							{showDetails && (
+								<Details
+									orgId={orgId}
+									dataList={dataList}
+									shipmentId={shipmentId}
+								/>
+							)}
+						</div>
 					</div>
 
 					<div
-						className={styles.caret}
-						onClick={() => {
-							setShowDetails(!showDetails);
-						}}
-						role="presentation"
-					>
-						{showDetails ? (
-							<IcMArrowRotateUp height="17px" width="17px" />
-						) : (
-							<IcMArrowRotateDown height="17px" width="17px" />
-						)}
-					</div>
-				</div>
-				{showDetails && <div className={styles.hr} />}
-				<div className={styles.details}>
-					{showDetails && (
-						<Details
-							orgId={orgId}
-							dataList={dataList}
-							shipmentId={shipmentId}
-						/>
-					)}
-				</div>
-			</div>
-
-			<div
-				className={styles.card}
-				onClick={() => {
-					setShowDocuments(!showDocuments);
-				}}
-				role="presentation"
-			>
-				<div className={styles.card_upper}>
-					<div className={styles.sub_container}>
-						Shipment Documents
-						<IcADocumentTemplates height="17px" width="17px" />
-						{loadingShipment && (
-							<Loader />
-						)}
-					</div>
-
-					<div
-						className={styles.caret}
+						className={styles.card}
 						onClick={() => {
 							setShowDocuments(!showDocuments);
 						}}
 						role="presentation"
 					>
-						{showDocuments ? (
-							<IcMArrowRotateUp height="17px" width="17px" />
-						) : (
-							<IcMArrowRotateDown height="17px" width="17px" />
-						)}
-					</div>
-				</div>
-				{showDocuments && <div className={styles.hr} />}
-				<div className={styles.documents}>
-					{showDocuments && <Documents shipmentId={shipmentId} />}
-					{' '}
-				</div>
-			</div>
+						<div className={styles.card_upper}>
+							<div className={styles.sub_container}>
+								Shipment Documents
+								<IcADocumentTemplates height="17px" width="17px" />
+								{loadingShipment && (
+									<Loader />
+								)}
+							</div>
 
+							<div
+								className={styles.caret}
+								onClick={() => {
+									setShowDocuments(!showDocuments);
+								}}
+								role="presentation"
+							>
+								{showDocuments ? (
+									<IcMArrowRotateUp height="17px" width="17px" />
+								) : (
+									<IcMArrowRotateDown height="17px" width="17px" />
+								)}
+							</div>
+						</div>
+						{showDocuments && <div className={styles.hr} />}
+						<div className={styles.documents}>
+							{showDocuments && <Documents shipmentId={shipmentId} />}
+							{' '}
+						</div>
+					</div>
+				</>
+			)}
 			<div>
 				{collectionPartyId ? (
 					<div className={styles.variance}>
@@ -274,6 +318,35 @@ function ShipmentDetails({
 						)}
 					</div>
 				) : null}
+				{jobType === 'CONSOLIDATED'
+				&& (
+					<div className={styles.show_consolidated}>
+						<Popover
+							placement="bottom"
+							caret
+							visible={showConsolidatedSID}
+							render={getConsolidatedSID()}
+							{...rest}
+						>
+							<div
+								className={styles.consolidated_sid}
+								onClick={() => {
+									handleConsolidatedSID();
+								}}
+								role="presentation"
+							>
+								<div className={styles.consolidated_text}>
+									Consolidated SID
+								</div>
+
+								<div className={styles.consolidated_icon}>
+									{showConsolidatedSID ? <IcMArrowRotateUp height={20} width={20} />
+										: <IcMArrowRotateDown height={20} width={20} />}
+								</div>
+							</div>
+						</Popover>
+					</div>
+				)}
 				<POC itemData={data} />
 			</div>
 

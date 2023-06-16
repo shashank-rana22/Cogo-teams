@@ -1,0 +1,42 @@
+.container {
+	scroll-behavior: smooth;
+	margin-top: 40px;
+
+	:global {
+		.ui_carousel_arrow {
+			fill: #221f20;
+		}
+
+		.ui_carousel_next {
+			margin-right: -18px;
+			background: none;
+		}
+
+		.ui_carousel_prev {
+			margin-left: -16px;
+			background: none;
+		}
+
+		.ui_carousel_container {
+			padding: 8px;
+			overflow: scroll;
+		}
+
+		.ui_o0St8 {
+			width: unset;
+		}
+	}
+}
+
+.category_head {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.sub_category {
+	margin-left: 8px;
+	font-size: 16px;
+	font-weight: 600;
+	color: #6fa5ab;
+}
