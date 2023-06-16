@@ -3,6 +3,11 @@ import React, { useState } from 'react';
 
 import useUpdateInvoicePaymentMode from '../../../../../../../../hooks/useUpdateInvoicePaymentMode';
 
+const PAYMENT_MAPPING = {
+	credit : { label: 'Cash', value: 'cash' },
+	cash   : { label: 'Deferred Payment', value: 'credit' },
+};
+
 function ChangePaymentMode({
 	show = false,
 	setShow = () => {},
@@ -12,14 +17,9 @@ function ChangePaymentMode({
 	const [check, setCheck] = useState(!invoice?.paymentMode);
 	const [value, setValue] = useState('');
 
-	const optionsToShow = {
-		credit : { label: 'Cash', value: 'cash' },
-		cash   : { label: 'Deferred Payment', value: 'credit' },
-	};
+	const options = [PAYMENT_MAPPING.cash, PAYMENT_MAPPING.credit];
 
-	const options = [optionsToShow.cash, optionsToShow.credit];
-
-	const paymentMode = invoice?.payment_mode ? optionsToShow[invoice?.payment_mode]?.value : value;
+	const paymentMode = invoice?.payment_mode ? PAYMENT_MAPPING[invoice?.payment_mode]?.value : value;
 
 	const payload = { id: invoice?.id, payment_mode: paymentMode };
 
@@ -42,7 +42,7 @@ function ChangePaymentMode({
 			<Modal.Body>
 				{invoice?.payment_mode ? (
 					<Radio
-						label={optionsToShow[invoice?.payment_mode]?.label}
+						label={PAYMENT_MAPPING[invoice?.payment_mode]?.label}
 						checked={check}
 						onChange={() => setCheck(!check)}
 					/>

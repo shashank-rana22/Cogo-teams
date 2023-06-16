@@ -1,4 +1,4 @@
-const POC_PROCESS_MAPPING = {
+export default {
 	export: {
 		order_placement                            : 'Order Placement',
 		additional_information_for_booking         : 'Additional information for booking',
@@ -59,5 +59,3 @@ const POC_PROCESS_MAPPING = {
 		destination_ltl_transportation         : 'Destination LTL Transportation',
 	},
 };
-
-export default POC_PROCESS_MAPPING;
