@@ -1,15 +1,13 @@
 import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequestBf } from '@cogoport/request';
+import { useState } from 'react';
 
 interface IrnCancellationProps {
 	id?: string;
 	entityCode?: string;
 	setShowCancellationModal?: Function;
 	refetch?: Function;
-	responseRemark?: {
-		remarks?: string;
-	};
 }
 interface Values {
 	agreementNumber?: string;
@@ -28,8 +26,11 @@ const useGetIrnCancellation = ({
 	setShowCancellationModal,
 	refetch,
 	entityCode,
-	responseRemark,
 }: IrnCancellationProps) => {
+	const [response, setResponse] = useState({
+		remarks	: '',
+		value  	: '',
+	});
 	const [
 		{ loading },
 		cancelIrnApi,
@@ -51,8 +52,6 @@ const useGetIrnCancellation = ({
 			agreementNumber,
 			agreementDate,
 			agreementPdfFile,
-			remarks,
-			value,
 		} = values || {};
 		const { finalUrl } = agreementPdfFile || {};
 
@@ -60,15 +59,15 @@ const useGetIrnCancellation = ({
 			let PAYLOAD = {};
 			if (TEXT_AREA) {
 				PAYLOAD = {
-					cancelReason      : responseRemark?.remarks || undefined,
+					cancelReason      : response?.remarks || undefined,
 					agreementNumber   : agreementNumber || undefined,
 					agreementDate     : agreementDate || undefined,
 					agreementDocument : finalUrl || undefined,
 				};
 			} else if (RADIO_GROUP) {
 				PAYLOAD = {
-					cancelReason   : value,
-					cancelReminder : remarks,
+					cancelReason   : response?.value,
+					cancelReminder : response?.remarks,
 				};
 			}
 			const resp = await cancelIrnApi({
@@ -87,6 +86,8 @@ const useGetIrnCancellation = ({
 	return {
 		onSubmit,
 		loading,
+		setResponse,
+		response,
 	};
 };
 

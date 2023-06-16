@@ -1,5 +1,5 @@
 import { Textarea, Button, RadioGroup, Modal } from '@cogoport/components';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { IRN_CANCEL_OPTIONS } from '../../../constants';
 import useGetIrnCancellation from '../../../hooks/useGetIrnCancellation';
@@ -12,12 +12,7 @@ function RadioGroupIN({
 	refetch,
 	entityCode,
 }) {
-	const [response, setResponse] = useState({
-		value   : '',
-		remarks : '',
-	});
-
-	const { onSubmit, loading } = useGetIrnCancellation({
+	const { onSubmit, loading, response, setResponse } = useGetIrnCancellation({
 		id: itemData?.id,
 		setShowCancellationModal,
 		refetch,
@@ -41,8 +36,7 @@ function RadioGroupIN({
 				/>
 
 				<Modal.Body>
-
-					<div className={styles.Radiodiv}>
+					<div>
 						<div className={styles.styled_reason}>
 							Reason
 						</div>
@@ -73,6 +67,7 @@ function RadioGroupIN({
 					<div className={styles.confirm_button}>
 						<div className={styles.styled_button}>
 							<Button
+								type="submit"
 								onClick={() => {
 									onSubmit(response);
 								}}
@@ -84,6 +79,7 @@ function RadioGroupIN({
 							</Button>
 						</div>
 						<Button
+							type="button"
 							onClick={() => {
 								setShowCancellationModal(false);
 							}}

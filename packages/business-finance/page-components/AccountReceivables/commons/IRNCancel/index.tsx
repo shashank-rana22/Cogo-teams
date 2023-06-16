@@ -43,9 +43,10 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 
 	const content = () => (
 		<div className={styles.container}>
-			{ GET_ENTITY && (
+			{ isAfterADay && GET_ENTITY && (
 				<Button
 					size="sm"
+					type="button"
 					onClick={() => {
 						setShowCancellationModal(true);
 						setShow(false);
@@ -61,6 +62,7 @@ function IRNCancel({ itemData, refetch }: INRCancel) {
 				<Button
 					disabled={loading}
 					size="sm"
+					type="button"
 					onClick={postToSage}
 				>
 					Post to Sage

@@ -1,6 +1,6 @@
 import { Textarea, Button, Modal } from '@cogoport/components';
 import { InputController, DatepickerController, UploadController, useForm } from '@cogoport/forms';
-import React, { useState } from 'react';
+import React from 'react';
 
 import useGetIrnCancellation from '../../../hooks/useGetIrnCancellation';
 import styles from '../styles.module.css';
@@ -37,16 +37,11 @@ function TextAreaVN({
 
 	const { id, invoiceNumber, invoiceDate } = itemData || {};
 
-	const [response, setResponse] = useState({
-		remarks: '',
-	});
-
-	const { onSubmit, loading } = useGetIrnCancellation({
+	const { onSubmit, loading, response, setResponse } = useGetIrnCancellation({
 		id,
 		setShowCancellationModal,
 		refetch,
 		entityCode,
-		responseRemark: response,
 	});
 
 	const mappedValues: MappedValues = Object.entries(mapping).reduce((result, [property, { key }]) => {
@@ -192,6 +187,7 @@ function TextAreaVN({
 								</Button>
 							</div>
 							<Button
+								type="button"
 								onClick={() => setShowCancellationModal(false)}
 							>
 								Cancel
