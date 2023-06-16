@@ -7,6 +7,10 @@
 	margin: 16px 16px 16px 24px;
 	background: #fff;
 	border-radius: 6px;
+
+	img{
+		width: 80%;
+	}
 }
 
 .question_card {

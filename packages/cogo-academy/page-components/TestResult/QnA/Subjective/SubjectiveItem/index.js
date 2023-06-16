@@ -39,10 +39,6 @@ function SubjectiveItem({ data, index, view, user_id, test_id, status, activeAtt
 					<div
 						dangerouslySetInnerHTML={{ __html: question }}
 					/>
-					{/* Q
-					{index}
-					{'  '}
-					{question} */}
 				</div>
 
 				<div className={styles.question_type}>Subjective Question</div>
