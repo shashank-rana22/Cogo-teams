@@ -27,8 +27,9 @@
 }
 
 .tabs {
-	margin: 0 -10px 15px;
+	margin: 0 -10px 0px;
 }
+
 
 .styled_toggle {
 	:global {

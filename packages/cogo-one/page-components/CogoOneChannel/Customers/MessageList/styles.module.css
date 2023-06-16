@@ -122,7 +122,9 @@
 }
 
 .tabs {
-	margin: 0 -10px 15px;
+	margin: 0px -10px 15px 20px;
+	border-left: 1px solid #e0e0e0;
+	padding-top: 10px;
 }
 
 .user_activity {

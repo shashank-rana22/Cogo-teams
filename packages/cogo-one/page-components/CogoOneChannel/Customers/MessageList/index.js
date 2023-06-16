@@ -1,4 +1,4 @@
-import { Input, Popover, cl } from '@cogoport/components';
+import { Input, Popover, cl, Tabs, TabPanel } from '@cogoport/components';
 import {
 	IcMFilter,
 	IcMSearchlight,
@@ -49,6 +49,7 @@ function MessageList(messageProps) {
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [showCarousel, setShowCarousel] = useState(false);
+	const [activeTab, setActiveTab] = useState('all');
 	const handleCheckedChats = (item, id) => {
 		if (id in selectedAutoAssign) {
 			setSelectedAutoAssign((p) => {
@@ -103,6 +104,18 @@ function MessageList(messageProps) {
 
 	return (
 		<>
+			<div className={styles.tabs}>
+				<Tabs
+					activeTab={activeTab}
+					fullWidth
+					themeType="secondary"
+					onChange={setActiveTab}
+				>
+					<TabPanel name="all" title="All" />
+					<TabPanel name="groups" title="Groups" />
+					<TabPanel name="contacts" title="Contacts" />
+				</Tabs>
+			</div>
 			<FlashUserChats
 				flashMessagesList={flashMessagesList}
 				activeCardId={activeCardId}
