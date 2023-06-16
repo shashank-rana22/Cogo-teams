@@ -1,4 +1,5 @@
 import { Pill, Placeholder } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMTimer } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
@@ -7,7 +8,6 @@ import PortDetails from '../../List/Card/Body/PortDetails';
 
 import EditSellQuotation from './EditSellQuotation';
 import styles from './styles.module.css';
-import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 function ShipmentCard({ itemData, priceData }) {
 	return (
@@ -56,11 +56,10 @@ function ShipmentCard({ itemData, priceData }) {
 				</div>
 				<div className={styles.last_section}>
 					<div className={styles.sell_price_text}>
-						Sell Price :
-						{' '}
-						<span style={{ fontWeight: '700', color: '#221F20' }}>
+						Sell Price:
+						<span style={{ fontWeight: '700', color: '#221F20', marginLeft: '2px' }}>
 							{!priceData?.sell_price
-								? <Placeholder width="150px" height="25px"/>
+								? <Placeholder width="150px" height="25px" />
 								: formatAmount({
 									amount   : priceData?.sell_price?.split(' ')?.[1],
 									currency : priceData?.sell_price?.split(' ')?.[0],
@@ -73,18 +72,20 @@ function ShipmentCard({ itemData, priceData }) {
 						</span>
 					</div>
 					<div className={styles.kamdiscount_text}>
-						{itemData?.promotion_category === 'marketing' ? 'MARKETING' : 'KAM'} Discount Applied :
+						{itemData?.promotion_category === 'marketing' ? 'MARKETING' : 'KAM'}
+						{' '}
+						Discount Applied :
 						{' '}
 						<span>
-								{formatAmount({
-									amount   : itemData?.discount_amount,
-									currency :itemData?.discount_amount_currency,
-									options  : {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 2,
-									}}
-								)}
+							{formatAmount({
+								amount   : itemData?.discount_amount,
+								currency : itemData?.discount_amount_currency,
+								options  : {
+									style                 : 'currency',
+									currencyDisplay       : 'code',
+									maximumFractionDigits : 2,
+								},
+							})}
 						</span>
 					</div>
 				</div>
