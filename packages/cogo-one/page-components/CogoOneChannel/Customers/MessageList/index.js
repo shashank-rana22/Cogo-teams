@@ -5,6 +5,7 @@ import {
 	IcMArrowRotateRight,
 	IcMArrowRotateDown,
 } from '@cogoport/icons-react';
+import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -102,21 +103,29 @@ function MessageList(messageProps) {
 	}, [showBotMessages, appliedFilters]);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
+	const { profile = {} } = useSelector((state) => state);
+	const { role_functions } = profile.auth_role_data;
+
+	const isSupply = role_functions.includes('supply');
 
 	return (
 		<>
-			<div className={styles.tabs}>
-				<Tabs
-					activeTab={activeTab}
-					fullWidth
-					themeType="secondary"
-					onChange={setActiveTab}
-				>
-					<TabPanel name="all" title="All" />
-					<TabPanel name="groups" title="Groups" />
-					<TabPanel name="contacts" title="Contacts" />
-				</Tabs>
-			</div>
+			{isSupply
+			&& (
+				<div className={styles.tabs}>
+					<Tabs
+						activeTab={activeTab}
+						fullWidth
+						themeType="secondary"
+						onChange={setActiveTab}
+					>
+						<TabPanel name="all" title="All" />
+						<TabPanel name="groups" title="Groups" />
+						<TabPanel name="contacts" title="Contacts" />
+					</Tabs>
+				</div>
+			)}
+
 			<FlashUserChats
 				flashMessagesList={flashMessagesList}
 				activeCardId={activeCardId}
