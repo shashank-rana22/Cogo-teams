@@ -21,18 +21,17 @@ export const renderValue = (label, detail = {}) => {
 
 	const commodityDataDetails = commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const valueForInput = Array.isArray(packages)
-				&& !isEmpty(packages) ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
+	const valueForInput = (Array.isArray(packages) && !isEmpty(packages) && packages[GLOBAL_CONSTANTS.zeroth_index]) || {};
 
 	const chargableWeight = Number(chargeable_weight)
 					|| Math.max(volume * CONSTANTS.AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO, weight);
 
-	const dimension = valueForInput?.length
-		? `${valueForInput?.length}cm X ${valueForInput?.width}cm X ${valueForInput?.height}cm,`
+	const dimension = valueForInput.length
+		? `${valueForInput.length}cm X ${valueForInput.width}cm X ${valueForInput.height}cm,`
 		: '';
 
 	const inputValue = valueForInput
-		? `${valueForInput.packages_count} Pkg, ${dimension} ${startCase(valueForInput?.packing_type)}`
+		? `${valueForInput.packages_count} Pkg, ${dimension} ${startCase(valueForInput.packing_type)}`
 		: '';
 
 	const vol = ` ${volume} cbm`;

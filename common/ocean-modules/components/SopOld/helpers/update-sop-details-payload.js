@@ -4,30 +4,31 @@ const updateSopPayload = async ({
 	originalData,
 	sopID,
 }) => {
-	const allPromises = [];
+	const ALL_PROMISES = [];
 
 	Object.keys(sopCardRef.current || {}).forEach((key) => {
 		const data = sopCardRef.current[key];
 		if (data) {
 			const { getFileValue } = data;
 
-			allPromises.push(getFileValue());
+			ALL_PROMISES.push(getFileValue());
 		}
 	});
 
-	const values = await Promise.all(allPromises);
+	const values = await Promise.all(ALL_PROMISES);
 
 	const newBlocks = blocks;
 	const getAllLiks = (data) => {
-		const urls = [];
+		const URLS = [];
+
 		(data || []).forEach((file_row) => {
 			if (file_row?.url) {
-				urls.push(file_row?.url);
+				URLS.push(file_row?.url);
 			}
 		});
-		return urls;
+		return URLS;
 	};
-	const updateStats = [];
+	const UPDATE_STATS = [];
 
 	values.forEach((elememt) => {
 		const object = newBlocks.find((obj) => obj.id === elememt.fileValue.id);
@@ -41,10 +42,10 @@ const updateSopPayload = async ({
 		}
 	});
 
-	const update_payload = [];
+	const UPDATE_PAYLOAD = [];
 
 	(newBlocks || []).forEach((row, index) => {
-		const elememt = {};
+		const ELEMENT = {};
 		const instruction = row.mainData;
 		const originalInstruction = originalData[index]?.mainData;
 
@@ -67,7 +68,7 @@ const updateSopPayload = async ({
 			}
 
 			if (instruction?.instruction !== originalInstruction?.instruction) {
-				elememt.instruction = instruction.instruction;
+				ELEMENT.instruction = instruction.instruction;
 				isadded = true;
 			}
 			if (instruction?.url_links?.length) {
@@ -76,24 +77,24 @@ const updateSopPayload = async ({
 						instruction.url_links.length
 						!== originalInstruction.url_links.length
 					) {
-						elememt.url_links = instruction?.url_links;
+						ELEMENT.url_links = instruction?.url_links;
 						isadded = true;
 					}
 				} else {
-					elememt.url_links = instruction?.url_links;
+					ELEMENT.url_links = instruction?.url_links;
 					isadded = true;
 				}
 			}
 			if (instruction.status !== originalInstruction?.status) {
-				elememt.status = instruction?.status;
+				ELEMENT.status = instruction?.status;
 				isadded = true;
 			}
 			updateStatsObject.updatable = oldUpdatable;
 
 			if (isadded) {
-				if (elememt) {
-					elememt.id = instruction?.id;
-					update_payload.push(elememt);
+				if (ELEMENT) {
+					ELEMENT.id = instruction?.id;
+					UPDATE_PAYLOAD.push(ELEMENT);
 				}
 			}
 			const object = newBlocks.find((obj) => obj.id === row.id);
@@ -102,35 +103,36 @@ const updateSopPayload = async ({
 			let newUpdatable = false;
 
 			if (instruction?.instruction) {
-				elememt.instruction = instruction.instruction;
+				ELEMENT.instruction = instruction.instruction;
 				newUpdatable = true;
 			}
 			if (instruction?.url_links?.length) {
-				elememt.url_links = instruction?.url_links;
+				ELEMENT.url_links = instruction?.url_links;
 				newUpdatable = true;
 			}
 			if (instruction?.status === 'active') {
-				elememt.status = instruction?.status;
+				ELEMENT.status = instruction?.status;
 			}
 
 			const object = newBlocks.find((obj) => obj.id === row.id);
 			object.updatable = newUpdatable;
 			updateStatsObject.updatable = newUpdatable;
-			if (Object.keys(elememt).length) {
-				update_payload.push(elememt);
+			if (Object.keys(ELEMENT).length) {
+				UPDATE_PAYLOAD.push(ELEMENT);
 			}
 		}
 
-		updateStats.push(updateStatsObject);
+		UPDATE_STATS.push(updateStatsObject);
 	});
 
 	const finalPayload = {
-		sop_instructions : update_payload,
+		sop_instructions : UPDATE_PAYLOAD,
 		procedure_id     : sopID,
 	};
 
 	let updatable = true;
-	(updateStats || []).forEach((stats) => {
+
+	(UPDATE_STATS || []).forEach((stats) => {
 		if (stats?.updatable === false) {
 			updatable = stats?.updatable;
 		}
@@ -139,7 +141,7 @@ const updateSopPayload = async ({
 	return {
 		finalPayload,
 		updatable,
-		updateStats,
+		updateStats: UPDATE_STATS,
 		newBlocks,
 	};
 };

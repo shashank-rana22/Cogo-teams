@@ -1,4 +1,5 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMInfo,
 	IcCError,
@@ -8,7 +9,6 @@ import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
-import CONSTANTS from '../../../../../../../../../configurations/constant.json';
 import useUpdateInvoiceStatus from '../../../../../../../../../hooks/useUpdateInvoiceStatus';
 import styles from '../styles.module.css';
 
@@ -21,6 +21,9 @@ const ReviewServices = dynamic(() => import('../ReviewServices'), { ssr: false }
 const AmendmentReasons = dynamic(() => import('../AmendmentReasons'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('../ChangePaymentMode'), { ssr: false });
 const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: false });
+
+const DEFAULT_COUNT = 0;
+const INVOICE_SERIAL_ID_LESS_THAN = 8;
 
 function Actions({
 	invoice = {},
@@ -37,7 +40,8 @@ function Actions({
 	const [showChangePaymentMode, setShowChangePaymentMode] = useState(false);
 	const [sendEmail, setSendEmail] = useState(false);
 	const [showOtpModal, setOTPModal] = useState(false);
-	const showForOldShipments =	shipment_data.serial_id <= CONSTANTS.invoice_check_id && invoice.status === 'pending';
+	const showForOldShipments =	shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	&& invoice.status === 'pending';
 
 	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
@@ -52,9 +56,9 @@ function Actions({
 
 	// HARD CODING STARTS
 	const invoice_serial_id = invoice.serial_id.toString() || '';
-	const firstChar = invoice_serial_id[0];
+	const firstChar = invoice_serial_id[GLOBAL_CONSTANTS.zeroth_index];
 
-	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < 8;
+	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < INVOICE_SERIAL_ID_LESS_THAN;
 
 	let disableMarkAsReviewed = disableAction;
 	if (showForOldShipments) {
@@ -139,13 +143,13 @@ function Actions({
 									<div className={styles.flex_row}>
 										Proforma email sent :
 										&nbsp;
-										{invoice.proforma_email_count || 0}
+										{invoice.proforma_email_count || DEFAULT_COUNT}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
 										&nbsp;
-										{invoice.sales_email_count || 0}
+										{invoice.sales_email_count || DEFAULT_COUNT}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>
