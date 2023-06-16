@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
 import React from 'react';
@@ -5,7 +6,6 @@ import React from 'react';
 import Content from './Content';
 
 const TASK_INDEX_SLICE_FOR_DOC_TYPE = -1;
-const TASK_SLICE_ARRAY_FIRST = 0;
 
 const Card = ({
 	taskList,
@@ -28,7 +28,7 @@ const Card = ({
 
 	return (taskList || []).map((item, idx) => {
 		const docType =	item?.document_type
-		|| item?.task?.split('upload_')?.slice(TASK_INDEX_SLICE_FOR_DOC_TYPE)[TASK_SLICE_ARRAY_FIRST];
+		|| item?.task?.split('upload_')?.slice(TASK_INDEX_SLICE_FOR_DOC_TYPE)[GLOBAL_CONSTANTS.zeroth_index];
 
 		let allUploadedDocs = (completedDocs || []).filter((doc) => doc.document_type === docType)
 			|| emailDocs.filter((doc) => doc?.entity_type === docType);

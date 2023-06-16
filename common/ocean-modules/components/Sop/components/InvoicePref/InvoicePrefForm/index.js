@@ -1,5 +1,6 @@
 import { Button, Loader, Toast } from '@cogoport/components';
 import { SelectController, useFieldArray, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete, IcMPlusInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -22,8 +23,6 @@ const EMPTY_VALUES = {
 	invoice_preference_contact_no   : '',
 	invoice_preference_country_code : '',
 };
-
-const OPERATING_PROCEDURE_FIRST = 0;
 
 function Error(key, errors) {
 	const [object, index, keyName] = (key || '').split('.');
@@ -81,7 +80,7 @@ function InvoicePrefForm({
 
 	const defaultValue = EMPTY_VALUES;
 	if (showForm === 'edit') {
-		const { sop_detail = {} } = data?.[OPERATING_PROCEDURE_FIRST] || {};
+		const { sop_detail = {} } = data?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 		Object.keys(defaultValue).forEach((key) => { defaultValue[key] = sop_detail[key] || ''; });
 	}
 

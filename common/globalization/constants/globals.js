@@ -123,27 +123,27 @@ const GLOBAL_CONSTANTS = {
 		platform_chat_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformchat.svg',
 		platform_notification_svg:
 			'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/platformnotification.svg',
-		missed_call_svg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
-		not_connected_svg    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
-		outgoing_svg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
-		incoming_svg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
-		empty_chat_jpg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
-		admin_logo_svg       : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg',
-		bot_logo_svg         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
-		reply_icon_png       : 'https://cdn-icons-png.flaticon.com/512/1933/1933011.png',
-		reply_all_icon_png   : 'https://cdn-icons-png.flaticon.com/512/747/747334.png',
-		forward_icon_png     : 'https://cdn-icons-png.flaticon.com/512/60/60546.png',
-		incoming_green_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
-		outgoing_orange_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
-		missed_call_red_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
-		destination_icon     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
-		document_icon_png    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
-		day_one_png          : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
-		books_png            : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
-		map_png              : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
-		nodata_image        	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
-		promocode_thumbnail  : 'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
-		cogo_logo_without_bg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-logo-without-bg',
+		missed_call_svg     : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/misscall.svg',
+		not_connected_svg   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/disconnected.svg',
+		outgoing_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoingcall.svg',
+		incoming_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incomingcall.svg',
+		empty_chat_jpg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/empty-chat.jpg',
+		admin_logo_svg      : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/admin_icon.svg',
+		bot_logo_svg        : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/cogo-icon-notification.svg',
+		reply_icon_png      : 'https://cdn-icons-png.flaticon.com/512/1933/1933011.png',
+		reply_all_icon_png  : 'https://cdn-icons-png.flaticon.com/512/747/747334.png',
+		forward_icon_png    : 'https://cdn-icons-png.flaticon.com/512/60/60546.png',
+		incoming_green_svg  : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/incoming-call-green.png',
+		outgoing_orange_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/outgoing-call-orange.png',
+		missed_call_red_svg : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/missed-call-red.png',
+		destination_icon    : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/destination-icon.svg',
+		document_icon_png   : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 180.png',
+		day_one_png         : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 181.png',
+		books_png           : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 182.png',
+		map_png             : 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/image 183.png',
+		nodata_image       	: 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-empty-doc.svg',
+		promocode_thumbnail:
+		'https://cogoport-production.sgp1.digitaloceanspaces.com/eb9c91d9226c746eee7eb971c0dfdfeb/Group.svg',
 	},
 
 	options: {
@@ -210,38 +210,13 @@ const GLOBAL_CONSTANTS = {
 		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
 	},
-	others : {
+	zeroth_index                 : 0,
+	languages                    : LANGUAGE_OPTIONS,
+	currency_conversion_constant : 0.04,
+	others                       : {
 		old_shipment_serial_id: 120347,
 	},
-	languages                       : LANGUAGE_OPTIONS,
-	currency_conversion_constant    : 0.04,
-	restricted_country_id_invoicing : ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
-	invoice_check_id                : 120347,
-	zeroth_index                    : 0,
-};
 
-GLOBAL_CONSTANTS.INVOICE_CURRENCY_MAPPINGS = {
-	freight_invoice_currency: {
-		IN: [
-			GLOBAL_CONSTANTS.currency_code.INR,
-			GLOBAL_CONSTANTS.currency_code.USD,
-		],
-		GB: [
-			GLOBAL_CONSTANTS.currency_code.GBP,
-			GLOBAL_CONSTANTS.currency_code.EUR,
-			GLOBAL_CONSTANTS.currency_code.USD,
-		],
-		VN: [
-			GLOBAL_CONSTANTS.currency_code.USD,
-			GLOBAL_CONSTANTS.currency_code.VND,
-		],
-		others: [
-			GLOBAL_CONSTANTS.currency_code.USD,
-			GLOBAL_CONSTANTS.currency_code.EUR,
-			GLOBAL_CONSTANTS.currency_code.INR,
-		],
-
-	},
 };
 
 export default GLOBAL_CONSTANTS;

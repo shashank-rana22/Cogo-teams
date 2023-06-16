@@ -5,7 +5,6 @@ import { useSelector } from '@cogoport/store';
 import { startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
 
-import CONSTANTS from '../../../../../../../configurations/constant.json';
 import styles from '../styles.module.css';
 
 import Actions from './Actions';
@@ -19,8 +18,6 @@ const API_SUCCESS_MESSAGE = {
 
 const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
 
-const INVOICE_LIST_FIRST = 0;
-
 function Status({
 	invoice = {},
 	invoiceData = {},
@@ -33,11 +30,11 @@ function Status({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data.email === CONSTANTS.ajeet_email;
+	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[INVOICE_LIST_FIRST];
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const showCN = BF_INVOICE_STATUS.includes(
 		bfInvoice?.status,
@@ -46,7 +43,7 @@ function Status({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
 			|| item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[INVOICE_LIST_FIRST]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';

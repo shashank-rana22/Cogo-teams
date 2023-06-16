@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
@@ -13,8 +14,6 @@ import RenderAddRateForm from './RenderAddRateForm';
 import SecondStep from './SecondStep';
 import STAKE_HOLDER_SPECIFIC_PROPS from './stakeHolderCongifs';
 import styles from './styles.module.css';
-
-const REMARKS_FIRST = 0;
 
 const SHOW_REMARKS_STATUS = [
 	'amendment_requested_by_importer_exporter',
@@ -134,7 +133,7 @@ function AddRate({
 				<p className={styles.mt_8}>
 					<strong> Comment:</strong>
 					&nbsp;
-					{item?.remarks[REMARKS_FIRST]}
+					{item?.remarks[GLOBAL_CONSTANTS.zeroth_index]}
 				</p>
 			) : null}
 

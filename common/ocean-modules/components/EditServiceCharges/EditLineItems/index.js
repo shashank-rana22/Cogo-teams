@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import getTradeTypeByIncoTerm from '@cogoport/globalization/utils/getTradeTypeByIncoTerm';
 
 import CargoDetails from '../../../common/CargoDetails';
@@ -8,8 +9,7 @@ import Child from './Child';
 import Header from './Header';
 import styles from './styles.module.css';
 
-const CONTROLS_FIRST = 0;
-const VALUE_LENGTH_GREATER_THAN = 1;
+const VALUE_LENGTH_GREATER_THAN_FOR_DISABLE_LINE_ITEM = 1;
 const BAS_DISABLED_SERVICE = ['fcl_freight_service', 'lcl_freight_service'];
 
 function EditLineItems({
@@ -25,11 +25,13 @@ function EditLineItems({
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
 
-	const disableServiceEdit = disabledProps && controls?.[CONTROLS_FIRST]?.label === 'Fcl Freight Service';
+	const disableServiceEdit = disabledProps
+	&& controls?.[GLOBAL_CONSTANTS.zeroth_index]?.label === 'Fcl Freight Service';
 
 	const isBas = (value || []).some((lineItem) => lineItem?.code === 'BAS');
 
-	const disableAddLineItem =	(service_name === 'subsidiary_service' && value.length > VALUE_LENGTH_GREATER_THAN)
+	const disableAddLineItem = (service_name === 'subsidiary_service'
+	&& value.length > VALUE_LENGTH_GREATER_THAN_FOR_DISABLE_LINE_ITEM)
 		|| (isBas && BAS_DISABLED_SERVICE.includes(service_name)
 		&& getTradeTypeByIncoTerm(incoTerm) === 'export') || disableServiceEdit;
 

@@ -8,7 +8,6 @@ import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState, useContext, useRef } from 'react';
 
-import CONSTANTS from '../../../../../../configurations/constants.json';
 import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 import ClickableDiv from '../../../../../ClickableDiv';
 
@@ -17,7 +16,6 @@ import CNNullify from './CNNullify';
 import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
-const INVOICE_LIST_FIRST = 0;
 
 const SLICE_SOURCE_INDEX = -2;
 
@@ -53,7 +51,7 @@ function Header({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data.email === CONSTANTS.ajeet_email;
+	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const invoicePartyDetailsRef = useRef(null);
 
@@ -61,7 +59,7 @@ function Header({
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === live_invoice_number,
-	)?.[INVOICE_LIST_FIRST];
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const showCN = BF_INVOICE_STATUS.includes(
 		bfInvoice?.status,
@@ -84,7 +82,7 @@ function Header({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[INVOICE_LIST_FIRST]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') { invoiceStatus = 'IRN GENERATED';	}
 

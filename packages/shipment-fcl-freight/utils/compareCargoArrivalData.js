@@ -1,5 +1,4 @@
-const OBJ1_KEY_FIRST = 0;
-const OBJ2_KEY_FIRST = 0;
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const compareCargoArrivalData = (obj1, obj2) => {
 	let check = true;
@@ -13,9 +12,9 @@ const compareCargoArrivalData = (obj1, obj2) => {
 			});
 		}
 		if (key === 'containers') {
-			const obj = obj1[key]?.[OBJ1_KEY_FIRST];
+			const obj = obj1[key]?.[GLOBAL_CONSTANTS.zeroth_index];
 			Object.keys(obj || {}).forEach((key2) => {
-				if (obj[key2] !== obj2?.[key]?.[OBJ2_KEY_FIRST]?.[key2]) {
+				if (obj[key2] !== obj2?.[key]?.[GLOBAL_CONSTANTS.zeroth_index]?.[key2]) {
 					check = false;
 				}
 			});

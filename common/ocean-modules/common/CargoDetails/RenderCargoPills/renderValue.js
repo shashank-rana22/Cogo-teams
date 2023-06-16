@@ -7,7 +7,6 @@ import { isEmpty, startCase, upperCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 const VOLUME_FACTOR = 166.67;
-const PACKAGES_FIRST = 0;
 const PACKAGES_LENGTH_GREATER_THAN = 1;
 const INCR_CERTIFICATE_BY = 1;
 const CONTAINERS_COUNT = 1;
@@ -82,7 +81,7 @@ const formatCertificate = (certificates) => (
 export const renderValue = (label, detail) => {
 	const { packages = [] } = detail || {};
 
-	const valueForInput = Array.isArray(packages) && packages?.length ? packages[PACKAGES_FIRST] : null;
+	const valueForInput = Array.isArray(packages) && packages?.length ? packages[GLOBAL_CONSTANTS.zeroth_index] : null;
 
 	const chargableWeight = Math.max(detail.volume * VOLUME_FACTOR, detail?.weight);
 

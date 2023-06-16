@@ -1,4 +1,5 @@
 import { Button, Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
@@ -9,8 +10,6 @@ import CreateNewTradeParty from '../CreateNewTradeParty';
 
 import InvoicingPartyItem from './InvoicingPartyItem';
 import styles from './styles.module.css';
-
-const TAX_MECHANISM_FIRST = 0;
 
 const TRADE_PARTY_TYPE = {
 	key   : 'paying_party',
@@ -114,7 +113,7 @@ function InvoicingParties({
 				organization_id,
 				organization_country_id : invoicingParty.country_id,
 				tax_number,
-				tax_mechanism           : tax_mechanism?.[TAX_MECHANISM_FIRST]?.mechanism_type,
+				tax_mechanism           : tax_mechanism?.[GLOBAL_CONSTANTS.zeroth_index]?.mechanism_type,
 				address,
 				pincode,
 				is_sez                  : !!is_sez,

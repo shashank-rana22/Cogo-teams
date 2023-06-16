@@ -1,9 +1,10 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+
 import Watermark from '../../../commons/Watermark';
 
 import styles from './styles.module.css';
 import { SECTION_THREE_MAPPINGSS, SECTION_ONE_CHILD_1_MAPPINGS } from './templateConfig';
 
-const CONTAINERS_FIRST = 0;
 function Read({
 	defaultValues = {},
 }) {
@@ -130,11 +131,27 @@ function Read({
 						</thead>
 						<tbody>
 							<tr>
-								<td>{defaultValues?.containers?.[CONTAINERS_FIRST]?.container_number || ''}</td>
-								<td>{defaultValues?.containers?.[CONTAINERS_FIRST]?.marks_and_number || ''}</td>
-								<td>{defaultValues?.containers?.[CONTAINERS_FIRST]?.package_description || ''}</td>
-								<td>{defaultValues?.containers?.[CONTAINERS_FIRST]?.gross_weight || ''}</td>
-								<td>{defaultValues?.containers?.[CONTAINERS_FIRST]?.measurement || ''}</td>
+								<td>
+									{defaultValues?.containers?.[GLOBAL_CONSTANTS.zeroth_index]?.container_number
+								|| ''}
+								</td>
+
+								<td>
+									{defaultValues?.containers?.[GLOBAL_CONSTANTS.zeroth_index]?.marks_and_number
+								|| ''}
+								</td>
+
+								<td>
+									{defaultValues?.containers?.[GLOBAL_CONSTANTS.zeroth_index]?.package_description
+								|| ''}
+								</td>
+
+								<td>
+									{defaultValues?.containers?.[GLOBAL_CONSTANTS.zeroth_index]?.gross_weight
+								|| ''}
+								</td>
+
+								<td>{defaultValues?.containers?.[GLOBAL_CONSTANTS.zeroth_index]?.measurement || ''}</td>
 							</tr>
 						</tbody>
 					</table>

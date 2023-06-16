@@ -54,7 +54,7 @@ const useGetSopList = ({
 		},
 	};
 
-	const Defaultconditions = [
+	const defaultconditions = [
 		{
 			key   : 'shipment_id_or_nil',
 			value : shipment_data?.id,
@@ -75,12 +75,13 @@ const useGetSopList = ({
 		{ key: 'commodity_or_nil', value: conditions.commodity.data },
 	];
 
-	const defaultFilter = {
-		organization_id: importer_exporter_id,
-	};
+	const defaultFilter = { organization_id: importer_exporter_id };
+
 	const CUSTOM_FILTER = {};
-	const isDomestic = conditions.destination.data === conditions.origin.data;
-	Defaultconditions.forEach((condition) => {
+
+	const isDomestic = conditions?.destination?.data === conditions?.origin?.data;
+
+	defaultconditions.forEach((condition) => {
 		defaultFilter[condition.key] = condition.value || null;
 		CUSTOM_FILTER[condition.key] = condition.value || null;
 	});

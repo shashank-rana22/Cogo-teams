@@ -1,5 +1,6 @@
 import { Button, Checkbox } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect } from 'react';
 
 import useGetBusiness from '../../../../../../hooks/useGetBusiness';
@@ -9,7 +10,6 @@ import Form from './Form';
 import styles from './styles.module.css';
 
 const POC_DETAILS_DEFAULT_VALUES = [{ name: '', email: '', mobile_country_code: '', mobile_number: '' }];
-const ADDRESSES_FIRST = 0;
 
 function AddressForm({
 	registrationNumber,
@@ -44,7 +44,7 @@ function AddressForm({
 		business_name = '',
 	} = data || {};
 
-	const { firstPincode, firstAddress } = addresses?.[ADDRESSES_FIRST] || {};
+	const { firstPincode, firstAddress } = addresses?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	useEffect(() => {
 		setValue('name', trade_name || business_name || '');

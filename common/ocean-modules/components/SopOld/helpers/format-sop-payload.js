@@ -1,5 +1,3 @@
-const SOP_INSTRUCTIONS_GREATER_THAN = 0;
-
 const getSopPayload = (
 	formValues,
 	trade_partners_details,
@@ -81,7 +79,7 @@ const getSopPayload = (
 	return {
 		shipment_payload : shipmentPayload,
 		booking_party_payload,
-		status           : SOP_INSTRUCTIONS?.length > SOP_INSTRUCTIONS_GREATER_THAN,
+		status           : !!SOP_INSTRUCTIONS?.length,
 	};
 };
 export default getSopPayload;

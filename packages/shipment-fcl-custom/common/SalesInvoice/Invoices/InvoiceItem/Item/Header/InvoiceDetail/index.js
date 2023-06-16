@@ -7,8 +7,6 @@ import React, { useContext } from 'react';
 
 import styles from '../styles.module.css';
 
-const INVOICE_LIST_FIRST = 0;
-
 const CREDIT_SOURCE_FIRST = 0;
 
 const SLICE_CREDIT_UPTO = -2;
@@ -35,7 +33,7 @@ function InvoiceDetail({
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === live_invoice_number,
-	)?.[INVOICE_LIST_FIRST];
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const handleDownload = (invoiceLink) => {
 		window.open(invoiceLink);
@@ -48,7 +46,7 @@ function InvoiceDetail({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[INVOICE_LIST_FIRST]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
