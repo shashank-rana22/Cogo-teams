@@ -31,7 +31,9 @@ const useEmployeeDetails = () => {
 				},
 			});
 		} catch (error) {
-			Toast.error(getApiErrorString(error.response?.data));
+			if (error.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 	}, [page, search, trigger]);
 
