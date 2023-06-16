@@ -7,7 +7,7 @@ const getGeoKeys = () => {
 	return {
 		countryCode         : geo.country.code,
 		cogoEntityId        : geo.uuid.parent_entity_id,
-		fallBackCountryCode : geo.others.navigations.cogo_one.fall_back_country_code,
+		fallBackCountryCode : geo.others.navigations.cogo_one.default_country_code,
 	};
 };
 
