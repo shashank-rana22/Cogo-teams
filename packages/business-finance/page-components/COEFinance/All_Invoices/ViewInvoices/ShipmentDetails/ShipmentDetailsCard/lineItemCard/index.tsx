@@ -6,6 +6,8 @@ import {
 	Modal,
 	Textarea,
 } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcCFtick,
 	IcMOverflowDot,
@@ -17,7 +19,6 @@ import converter from 'number-to-words';
 import React, { useEffect, useState } from 'react';
 
 import List from '../../../../../../commons/List/index';
-import getFormattedPrice from '../../../../../../commons/utils/getFormattedPrice';
 import {
 	LINE_ITEMS,
 	LINE_ITEMS_CHECK,
@@ -227,18 +228,26 @@ function LineItemCard({
 
 						<div className={styles.amount}>
 							<div className={styles.border}>
-								{getFormattedPrice(
-									bill?.taxTotal || '0',
-									bill?.billCurrency || 'INR',
-								)}
+								{formatAmount({
+									amount   :	bill?.taxTotal || '0',
+									currency :	bill?.billCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 							</div>
 						</div>
 						<div className={styles.amount_right}>
 							<div className={styles.border_right}>
-								{getFormattedPrice(
-									bill?.grandTotal || '0',
-									bill?.billCurrency || 'INR',
-								)}
+								{formatAmount({
+									amount   :	bill?.grandTotal || '0',
+									currency :	bill?.billCurrency || GLOBAL_CONSTANTS.currency_code.INR,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 							</div>
 						</div>
 					</div>
