@@ -31,13 +31,14 @@
 
 	:global {
 		.ui_tab_active {
-			box-shadow: 0px -2px 0px 2px var(--color-primary-error-red-2);
+			box-shadow: inset 0px 1px 1px  var(--color-primary-error-red-2);
 			border-bottom: 0px !important;
 		}
 
 		.ui_tab_container{
 			padding: 5px;
 			border-bottom: 1px solid var(--color-primary-error-red-2);
+			height: 30px;
 		}
 
 		.ui_tab_list_container{
