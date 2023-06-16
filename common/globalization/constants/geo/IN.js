@@ -474,6 +474,10 @@ export default {
 			onboard_vendor: {
 				validate_registration: true,
 			},
+			cogo_one: {
+				has_voice_call_access : true,
+				default_country_code  : 'IN',
+			},
 		},
 	},
 };
