@@ -1,11 +1,13 @@
-/* eslint-disable no-magic-numbers */
 import { asyncFieldsOperators, asyncFieldsOrganizationUsers, useGetAsyncOptions } from '@cogoport/forms';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { addDays } from '@cogoport/utils';
 
+const MIN_DAYS_FOR_VALIDITY = 3;
+const NEGATIVE_VALUE = 0;
+
 const SERVICE_CONTROLS_MAPPING = {
-	fcl_freight_service: ['sourced_by_id', 'shipping_line_id', 'validity_end', 'remarks',
-		'currency', 'price', 'supplier_contract_no'],
+	fcl_freight_service: ['sourced_by_id', 'shipping_line_id', 'validity_end', 'remarks', 'currency', 'price',
+		'supplier_contract_no'],
 	air_freight_service     : ['sourced_by_id', 'validity_end', 'remarks', 'currency', 'price', 'supplier_contract_no'],
 	lcl_freight_service     : [],
 	ltl_freight_service     : [],
@@ -16,8 +18,20 @@ const SERVICE_CONTROLS_MAPPING = {
 	fcl_customs_service     : [],
 };
 
-const useGetRevertFormControls = ({ chargeableWeight = 0, priceType = 0, serviceType = '' }) => {
-	const organizationUsers = useGetAsyncOptions({ ...asyncFieldsOrganizationUsers(), initialCall: true });
+const useGetRevertFormControls = ({ data }) => {
+	const { service_type, service_provider_id } = data || {};
+
+	const organizationUsers = useGetAsyncOptions({
+		...asyncFieldsOrganizationUsers(),
+		initialCall : true,
+		params      : {
+			filters: {
+				status          : 'active',
+				organization_id : service_provider_id,
+
+			},
+		},
+	});
 
 	const shippingLines = useGetAsyncOptions({
 		...asyncFieldsOperators(),
@@ -33,11 +47,10 @@ const useGetRevertFormControls = ({ chargeableWeight = 0, priceType = 0, service
 	const airLines = useGetAsyncOptions({
 		...asyncFieldsOperators(),
 		params: {
-			filters     : { operator_type: 'airline', status: 'active' },
-			page_limit  : 100,
-			sort_by     : 'short_name',
-			sort_type   : 'asc',
-			initialCall : true,
+			filters    : { operator_type: 'airline', status: 'active' },
+			page_limit : 100,
+			sort_by    : 'short_name',
+			sort_type  : 'asc',
 		},
 	});
 
@@ -74,7 +87,7 @@ const useGetRevertFormControls = ({ chargeableWeight = 0, priceType = 0, service
 			controlType : 'input',
 			type        : 'number',
 			placeholder : 'Enter Chargeable Weight',
-			value       : chargeableWeight,
+			value       : 0,
 			rules       : { required: 'Chargeable Weight is required' },
 		},
 		{
@@ -109,7 +122,7 @@ const useGetRevertFormControls = ({ chargeableWeight = 0, priceType = 0, service
 			type        : 'number',
 			rules       : {
 				required : 'Minimum Price is required',
-				validate : (value) => (value < 0 ? 'Cannot be Negative' : true),
+				validate : (value) => (value < NEGATIVE_VALUE ? 'Cannot be Negative' : true),
 			},
 		},
 		{
@@ -122,7 +135,6 @@ const useGetRevertFormControls = ({ chargeableWeight = 0, priceType = 0, service
 			],
 			placeholder : 'Select Price Type',
 			rules       : { required: true },
-			value       : priceType,
 		},
 		{
 			name        : 'operation_type',
@@ -158,9 +170,9 @@ const useGetRevertFormControls = ({ chargeableWeight = 0, priceType = 0, service
 			name        : 'validity_end',
 			label       : 'Validity End',
 			controlType : 'datepicker',
-			minDate     : addDays(new Date(), 3),
+			minDate     : addDays(new Date(), MIN_DAYS_FOR_VALIDITY),
 			placeholder : 'Select a date',
-			rules       : { required: chargeableWeight < 500 },
+
 		},
 		{
 			name        : 'rate_procurement_proof',
@@ -183,7 +195,7 @@ const useGetRevertFormControls = ({ chargeableWeight = 0, priceType = 0, service
 		},
 	];
 
-	return controls.filter((item) => SERVICE_CONTROLS_MAPPING[serviceType]?.includes(item.name));
+	return controls.filter((item) => SERVICE_CONTROLS_MAPPING[service_type]?.includes(item.name));
 };
 
 export default useGetRevertFormControls;

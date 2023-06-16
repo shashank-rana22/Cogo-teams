@@ -31,7 +31,25 @@ const formatLineItems = ({ lineItems, values }) => {
 	}).filter((eachitem) => !!eachitem) || [];
 };
 
-const useRevertPrice = ({ item, setModalState }) => {
+const formatFirstLineItem = ({ lineItems, values }) => {
+	const [firstItem] = lineItems || [];
+	const quantity = Number(values?.chargeable_weight) || firstItem.quantity;
+	const tax_price = (Number(values?.price
+					|| NUMBER_FALLBACK) * (firstItem.tax_percent || NUMBER_FALLBACK)) / PERCENTAGE;
+	return [
+		{
+			...firstItem,
+			quantity,
+			price           : Number(values.price) || NUMBER_FALLBACK,
+			total_price     : Number(values.price || NUMBER_FALLBACK) * (quantity || MINIMUM_PRICE),
+			tax_price,
+			tax_total_price : tax_price * (quantity || MINIMUM_PRICE),
+			currency        : values?.currency,
+		},
+	];
+};
+
+const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates }) => {
 	const [{ loading }, trigger] = useRequest({
 		url    : '/update_shipment_flash_booking_rate',
 		method : 'post',
@@ -44,21 +62,7 @@ const useRevertPrice = ({ item, setModalState }) => {
 			let lineItemsParams = formatLineItems({ lineItems: line_items, values });
 
 			if (isEmpty(lineItemsParams) && !isEmpty(line_items)) {
-				const [firstItem] = line_items || [];
-				const quantity = Number(values?.chargeable_weight) || firstItem.quantity;
-				const tax_price = (Number(values?.price
-					|| NUMBER_FALLBACK) * (firstItem.tax_percent || NUMBER_FALLBACK)) / PERCENTAGE;
-				lineItemsParams = [
-					{
-						...firstItem,
-						quantity,
-						price           : Number(values.price) || NUMBER_FALLBACK,
-						total_price     : Number(values.price || NUMBER_FALLBACK) * (quantity || MINIMUM_PRICE),
-						tax_price,
-						tax_total_price : tax_price * (quantity || MINIMUM_PRICE),
-						currency        : values?.currency,
-					},
-				];
+				lineItemsParams = formatFirstLineItem({ lineItems: line_items, values });
 			}
 
 			if (isEmpty(lineItemsParams)) {
@@ -82,15 +86,17 @@ const useRevertPrice = ({ item, setModalState }) => {
 					sourced_by_id        : values.sourced_by_id,
 					remarks              : values.remarks || undefined,
 					rate_procurement_proof_url:
-							values.rate_procurement_proof.url || undefined,
+							values.rate_procurement_proof?.url || undefined,
 					chargeable_weight: Number(values?.chargeable_weight) || undefined,
 				},
 			});
 
 			Toast.success('Price successfully reverted.');
+			shipmentFlashBookingRates({ page: 1 });
 			setModalState({ isOpen: false, data: {} });
 		} catch (error) {
-			Toast.error(getApiErrorString(error?.data));
+			console.log('error:', error);
+			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
 

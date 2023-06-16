@@ -1,13 +1,7 @@
-import useGetRevertFormControls from '../../../../../../configurations/revert-form-controls';
-
 import { getFieldController } from './form-helpers';
 import styles from './styles.module.css';
 
-function Form({ control, item, errors }) {
-	const controls = useGetRevertFormControls({
-		serviceType: item?.service_type,
-	});
-
+function Form({ control, controls, errors }) {
 	return (
 		<div className={styles.container}>
 			{controls.map((eachControl) => {

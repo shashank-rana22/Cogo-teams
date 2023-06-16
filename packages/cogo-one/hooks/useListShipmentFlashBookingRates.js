@@ -16,22 +16,20 @@ const PAYLOAD_MAPPING = {
 		is_reverted    : false,
 	},
 };
-const INITIAL_PAGE = 1;
 
 const useListShipmentFlashBookingRates = ({
 	orgId = '',
-// accountType = ''
+	accountType = '',
 }) => {
 	const [activeTab, setActiveTab] = useState('win_bookings');
-	const [pagination, setPagination] = useState(INITIAL_PAGE);
 
 	const [{ loading, data }, trigger] = useRequest({
 		url    : '/list_shipment_flash_booking_rates',
 		method : 'get',
 	}, { manual: true });
 
-	const shipmentFlashBookingRates = useCallback(async () => {
-		if (!orgId) {
+	const shipmentFlashBookingRates = useCallback(async ({ page }) => {
+		if (!orgId || accountType !== 'service_provider') {
 			return;
 		}
 
@@ -42,7 +40,7 @@ const useListShipmentFlashBookingRates = ({
 			},
 			shipment_flash_booking_tag_required : true,
 			is_indicative_price_required        : true,
-			page                                : pagination,
+			page,
 			sort_by                             : 'created_at',
 			sort_type                           : 'desc',
 		};
@@ -54,10 +52,10 @@ const useListShipmentFlashBookingRates = ({
 		} catch (error) {
 			console.log('error:', error);
 		}
-	}, [activeTab, orgId, pagination, trigger]);
+	}, [activeTab, orgId, trigger, accountType]);
 
 	useEffect(() => {
-		shipmentFlashBookingRates();
+		shipmentFlashBookingRates({ page: 1 });
 	}, [shipmentFlashBookingRates]);
 
 	return {
@@ -65,7 +63,7 @@ const useListShipmentFlashBookingRates = ({
 		loading,
 		setActiveTab,
 		activeTab,
-		setPagination,
+		shipmentFlashBookingRates,
 	};
 };
 

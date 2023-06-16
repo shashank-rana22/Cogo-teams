@@ -7,6 +7,7 @@ import {
 	STATUS_PENDING,
 	ORG_RESPONDED,
 	REVERT_STATUS_LABEL_MAPPING,
+	REVERTABLE_SERVICES,
 } from '../../../../../../../constants/flashRatesMapping';
 import PriceRange from '../PriceRange';
 
@@ -26,6 +27,7 @@ function WinBooking({ item, setModalState = () => {}, type = '' }) {
 					onClick={() => setModalState({ isOpen: true, data: { ...item } })}
 					themeType="primary"
 					size="sm"
+					disabled={!REVERTABLE_SERVICES.includes(item?.service_type)}
 				>
 					Revert
 				</Button>

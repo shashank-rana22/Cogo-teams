@@ -10,24 +10,28 @@ import Card from './Card';
 import RevertModal from './RevertModal';
 import styles from './styles.module.css';
 
-const INITIAL_PAGE = 1;
-
 const loader = (
 	<div className={styles.loader_div}>
 		<Image src={GLOBAL_CONSTANTS.image_url.saas_subscription_loading} height={50} width={50} />
 	</div>
 );
 
-export default function FlashReverts({ orgId = '', accountType = '' }) {
-	const [modalState, setModalState] = useState({ isOpen: true, data: {} });
+export default function FlashReverts({
+	orgId = '',
+	activeVoiceCard,
+	formattedMessageData,
+}) {
+	const [modalState, setModalState] = useState({ isOpen: false, data: {} });
+
+	const userId = formattedMessageData?.user_id || activeVoiceCard?.user_id;
 
 	const {
 		data,
 		loading,
 		setActiveTab,
 		activeTab,
-		setPagination,
-	} = useListShipmentFlashBookingRates({ orgId, accountType });
+		shipmentFlashBookingRates,
+	} = useListShipmentFlashBookingRates({ orgId, accountType: formattedMessageData?.account_type });
 
 	const { list = [], page = 1, page_limit = 10, total_count = '' } = data || {};
 
@@ -43,7 +47,6 @@ export default function FlashReverts({ orgId = '', accountType = '' }) {
 						${loading ? styles.on_loading : ''} ${eachItem.value === activeTab ? styles.selected_tab : ''}`}
 						onClick={() => {
 							setActiveTab(eachItem.value);
-							setPagination(INITIAL_PAGE);
 						}}
 					>
 						{eachItem.title}
@@ -67,10 +70,17 @@ export default function FlashReverts({ orgId = '', accountType = '' }) {
 					currentPage={page}
 					totalItems={total_count}
 					pageSize={page_limit}
-					onPageChange={setPagination}
+					onPageChange={(val) => shipmentFlashBookingRates({ page: val })}
 				/>
 			)}
-			{modalState?.isOpen && <RevertModal modalState={modalState} setModalState={setModalState} />}
+			{modalState?.isOpen && (
+				<RevertModal
+					modalState={modalState}
+					setModalState={setModalState}
+					userId={userId}
+					shipmentFlashBookingRates={shipmentFlashBookingRates}
+				/>
+			)}
 		</div>
 	);
 }
