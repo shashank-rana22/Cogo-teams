@@ -18,7 +18,7 @@ const useDraftBLHelper = ({
 	const { submitShipmentMapping } = useUpdateShipmentCogoid();
 
 	const [{ loading }, trigger] = useRequest({
-		url    : '/create_shipment_document',
+		url    : 'fcl_freight/create_document',
 		method : 'POST',
 	}, { manual: true });
 
@@ -70,7 +70,7 @@ const useDraftBLHelper = ({
 				document_type      : 'draft_bill_of_lading',
 				service_id         : pendingTask?.service_id,
 				service_type       : pendingTask.service_type,
-				pending_task_id    : pendingTask?.id,
+				task_id    		   : pendingTask?.id,
 				documents          : values.map((value) => ({
 					file_name    : value?.url?.fileName,
 					document_url : value?.url?.finalUrl,

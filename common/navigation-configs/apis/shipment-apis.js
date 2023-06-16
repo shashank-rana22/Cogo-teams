@@ -1553,6 +1553,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'shipment',
 	},
+	{
+		api          : 'create_document',
+		access_type  : 'private',
+		service_name : 'shipment',
+	}
 ];
 
 export default apis;
