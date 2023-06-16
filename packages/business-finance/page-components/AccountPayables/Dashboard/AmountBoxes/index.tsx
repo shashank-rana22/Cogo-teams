@@ -1,10 +1,9 @@
 import { Placeholder, Tooltip } from '@cogoport/components';
-import getFormattedPrice from '@cogoport/forms/utils/get-formatted-price';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
 import useGetInvoiceAmount from '../hooks/useGetInvoiceAmount';
-import { getAmountInLakhCrK } from '../utils/getAmountInLakhCrK';
 
 import styles from './styles.module.css';
 
@@ -55,18 +54,34 @@ function AmountBoxes({ activeEntity }:ItemProps) {
 					{loading ? <Placeholder className={styles.loader} />
 						: (
 							<div className={styles.sub_container}>
-								<div className={styles.label_text}>
-									{currency}
-								</div>
+
 								<div className={styles.value_text}>
 
 									<Tooltip
-										content={getFormattedPrice(accountPayables, currency) || ''}
+										content={formatAmount({
+											amount  : accountPayables,
+											currency,
+											options : {
+												currencyDisplay : 'code',
+												style           : 'currency',
+
+											},
+										}) || ''}
 										placement="top"
 										interactive
 									>
 										<div>
-											{getAmountInLakhCrK(accountPayables)}
+											{formatAmount({
+												amount  : accountPayables,
+												currency,
+												options : {
+													currencyDisplay       : 'code',
+													style                 : 'currency',
+													notation              : 'compact',
+													compactDisplay        : 'short',
+													minimumFractionDigits : 2,
+												},
+											})}
 										</div>
 									</Tooltip>
 								</div>
@@ -90,21 +105,40 @@ function AmountBoxes({ activeEntity }:ItemProps) {
 				</div>
 
 				{MAPPING_DATA.map((item) => (
-					<div className={styles.box}>
+					<div className={styles.box} key={item as any}>
 						{loading ? <Placeholder className={styles.loader} />
 							: (
 								<div className={styles.sub_container}>
-									<div className={styles.label_text}>
-										{currency}
-									</div>
+
 									<div className={styles.value_text}>
 										<Tooltip
-											content={getFormattedPrice(item?.amount, currency) || ''}
+											content={formatAmount({
+												amount  : item?.amount,
+												currency,
+												options : {
+													currencyDisplay : 'code',
+													style           : 'currency',
+
+												},
+											}) || ''}
 											placement="top"
 											interactive
 										>
 											<div>
-												{getAmountInLakhCrK(item?.amount)}
+												{
+													formatAmount({
+														amount  : item?.amount,
+														currency,
+														options : {
+															currencyDisplay       : 'code',
+															style                 : 'currency',
+															notation              : 'compact',
+															compactDisplay        : 'short',
+															minimumFractionDigits : 2,
+
+														},
+													})
+												}
 											</div>
 										</Tooltip>
 									</div>

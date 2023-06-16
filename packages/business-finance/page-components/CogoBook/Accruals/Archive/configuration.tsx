@@ -1,5 +1,5 @@
 import { Button, Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMUnlock, IcMLock, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 
@@ -38,7 +38,18 @@ export const ARCHIVE_MONTH_BOOKED = [
 		id       : 'expenseBooked',
 		Cell     : ({ row: { original } }) => {
 			const { expenseBooked, expenseCurrency } = original || {};
-			return <span>{getFormattedPrice(expenseBooked, expenseCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	expenseBooked,
+						currency : expenseCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -47,7 +58,18 @@ export const ARCHIVE_MONTH_BOOKED = [
 		id       : 'incomeBooked',
 		Cell     : ({ row: { original } }) => {
 			const { incomeBooked, incomeCurrency } = original || {};
-			return <span>{getFormattedPrice(incomeBooked, incomeCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	incomeBooked,
+						currency : incomeCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -85,8 +107,14 @@ export const ARCHIVE_MONTH_BOOKED = [
 							Amount :
 							{' '}
 							<span className={styles.amount}>
-								{getFormattedPrice((actualExpense
-								- (expenseBooked + expenseAccrued)), expenseCurrency)}
+								{formatAmount({
+									amount   :	(actualExpense - (expenseBooked + expenseAccrued)) as any,
+									currency : expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 
 							</span>
 						</div>
@@ -97,8 +125,14 @@ export const ARCHIVE_MONTH_BOOKED = [
 							Amount :
 							{' '}
 							<span className={styles.amount}>
-								{getFormattedPrice((actualIncome - (
-									incomeBooked + incomeAccrued)), expenseCurrency)}
+								{formatAmount({
+									amount   :	(actualIncome - (incomeBooked + incomeAccrued)) as any,
+									currency : expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 
 							</span>
 						</div>
@@ -152,7 +186,18 @@ export const ARCHIVE_DECLARED = (
 		id       : 'expenseBooked',
 		Cell     : ({ row: { original } }) => {
 			const { expenseBooked, expenseCurrency } = original || {};
-			return <span>{getFormattedPrice(expenseBooked, expenseCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	expenseBooked,
+						currency : expenseCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -161,7 +206,18 @@ export const ARCHIVE_DECLARED = (
 		id       : 'expenseAccrued',
 		Cell     : ({ row: { original } }) => {
 			const { expenseAccrued, expenseCurrency } = original || {};
-			return <span>{getFormattedPrice(expenseAccrued, expenseCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	expenseAccrued,
+						currency : expenseCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -170,7 +226,19 @@ export const ARCHIVE_DECLARED = (
 		id       : 'incomeBooked',
 		Cell     : ({ row: { original } }) => {
 			const { incomeBooked, incomeCurrency } = original || {};
-			return <span>{getFormattedPrice(incomeBooked, incomeCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	incomeBooked,
+						currency : incomeCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -179,7 +247,18 @@ export const ARCHIVE_DECLARED = (
 		id       : 'incomeAccrued',
 		Cell     : ({ row: { original } }) => {
 			const { incomeAccrued, incomeCurrency } = original || {};
-			return <span>{getFormattedPrice(incomeAccrued, incomeCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	incomeAccrued,
+						currency : incomeCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -252,7 +331,18 @@ export const ARCHIVE_MONTH_ACCRUED = [
 		id       : 'expenseAccrued',
 		Cell     : ({ row: { original } }) => {
 			const { expenseAccrued, expenseCurrency } = original || {};
-			return <span>{getFormattedPrice(expenseAccrued, expenseCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	expenseAccrued,
+						currency : expenseCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -261,7 +351,18 @@ export const ARCHIVE_MONTH_ACCRUED = [
 		id       : 'incomeAccrued',
 		Cell     : ({ row: { original } }) => {
 			const { incomeAccrued, incomeCurrency } = original || {};
-			return <span>{getFormattedPrice(incomeAccrued, incomeCurrency) || '-' }</span>;
+			return (
+				<span>
+					{formatAmount({
+						amount   :	incomeAccrued,
+						currency : incomeCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
+				</span>
+			);
 		},
 	},
 	{
@@ -299,8 +400,16 @@ export const ARCHIVE_MONTH_ACCRUED = [
 							Amount :
 							{' '}
 							<span className={styles.amount}>
-								{getFormattedPrice((actualExpense
-								- (expenseBooked + expenseAccrued)), expenseCurrency)}
+
+								{formatAmount({
+									amount:	(
+										actualExpense - (expenseBooked + expenseAccrued)) as any,
+									currency : expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 
 							</span>
 						</div>
@@ -311,8 +420,14 @@ export const ARCHIVE_MONTH_ACCRUED = [
 							Amount :
 							{' '}
 							<span className={styles.amount}>
-								{getFormattedPrice((actualIncome - (
-									incomeBooked + incomeAccrued)), expenseCurrency)}
+								{formatAmount({
+									amount   :	(actualIncome - (incomeBooked + incomeAccrued)) as any,
+									currency :	expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 
 							</span>
 						</div>
