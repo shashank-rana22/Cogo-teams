@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
+import ActiveInactiveTabs from '../../../commons/ActiveInactiveTabs';
 import Header from '../../../commons/CommonHeader';
 import CreateConfigurationModal from '../../../commons/CreateConfigurationModal';
 import DeleteConfigurationModal from '../../../commons/DeleteConfigurationModal';
@@ -22,9 +23,22 @@ const ADD_BUTTON_LABEL = 'Sub Chapter';
 
 function SubChapter() {
 	const {
-		columns, search, setSearch, data, loading: listLoading,
-		page, setPage, fetchList, setShowDeleteModal, showDeleteModal, deleteSubChapter, deleteLoading,
-		setShowUpdateSubChapterModal, showUpdateSubChapterModal,
+		columns,
+		search,
+		setSearch,
+		data,
+		loading: listLoading,
+		page,
+		setPage,
+		fetchList,
+		setShowDeleteModal,
+		showDeleteModal,
+		deleteSubChapter,
+		deleteLoading,
+		setShowUpdateSubChapterModal,
+		showUpdateSubChapterModal,
+		activeTab,
+		setActiveTab,
 	} = useSubChapter();
 
 	const { list = [], ...paginationData } = data || {};
@@ -46,7 +60,11 @@ function SubChapter() {
 		loading: UpdateLoading,
 		handleSubmit: UpdateHandleSubmit,
 		setValue,
-	} = useUpdateSubChapter({ fetchList, setShowUpdateSubChapterModal, showUpdateSubChapterModal });
+	} = useUpdateSubChapter({
+		fetchList,
+		setShowUpdateSubChapterModal,
+		showUpdateSubChapterModal,
+	});
 
 	const onClickAddButton = () => {
 		setShowAddChapterModal(true);
@@ -54,6 +72,8 @@ function SubChapter() {
 
 	return (
 		<div>
+			<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
 			<Header
 				setSearch={setSearch}
 				search={search}
@@ -61,7 +81,12 @@ function SubChapter() {
 				onClickAddButton={onClickAddButton}
 			/>
 
-			<StyledTable columns={columns} data={list} emptyText={TABLE_EMPTY_TEXT} loading={listLoading} />
+			<StyledTable
+				columns={columns}
+				data={list}
+				emptyText={TABLE_EMPTY_TEXT}
+				loading={listLoading}
+			/>
 
 			{paginationData?.total_count > DEFAULT_TOTAL_COUNT && (
 				<div className={styles.pagination_container}>

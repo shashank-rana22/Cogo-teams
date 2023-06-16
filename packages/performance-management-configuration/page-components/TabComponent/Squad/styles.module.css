@@ -1,14 +1,38 @@
 .container {
 }
 
-.status {
+.active {
   width: fit-content;
   padding: 0 6px;
   border-radius: 4px;
   background: var(--color-tertiary-success-green-3);
 }
-
-.pill_box {
-  display: flex;
-  flex-wrap: wrap;
+.inactive {
+	width: fit-content;
+	padding: 0 6px;
+	border-radius: 4px;
+	background: var(--color-primary-error-red-4);
 }
+
+.pagination_container {
+	display: flex;
+	justify-content: flex-start;
+	width: 100%;
+	padding-right: 20px;
+	padding-bottom: 20px;
+}
+
+.pill_box{
+	:global{
+		.tippy-box{
+			max-height: 400px;
+			overflow-y: scroll;
+		}
+	}
+}
+
+.button{
+	display: flex;
+	align-items: center;
+	margin-left: 20px;
+  }

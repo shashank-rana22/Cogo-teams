@@ -1,5 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
+import ActiveInactiveTabs from '../../../commons/ActiveInactiveTabs';
 import Header from '../../../commons/CommonHeader';
 import CreateConfigurationModal from '../../../commons/CreateConfigurationModal';
 import DeleteConfigurationModal from '../../../commons/DeleteConfigurationModal';
@@ -22,7 +23,7 @@ function Chapter() {
 		columns, search, setSearch, data, loading: listApiLoading,
 		page, setPage, fetchList, showDeleteModal, setShowDeleteModal,
 		deleteChapter, deleteLoading, showUpdateChapterModal,
-		setShowUpdateChapterModal,
+		setShowUpdateChapterModal, setActiveTab, activeTab,
 	} = useChapter();
 
 	const { list = [], ...paginationData } = data || {};
@@ -54,6 +55,8 @@ function Chapter() {
 
 	return (
 		<div>
+
+			<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 			<Header
 				setSearch={setSearch}
 				search={search}

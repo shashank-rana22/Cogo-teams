@@ -12,6 +12,7 @@ const useChapter = () => {
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
 	const [showUpdateChapterModal, setShowUpdateChapterModal] = useState();
+	const [activeTab, setActiveTab] = useState('active');
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		url    : '/list_all_chapters',
@@ -23,14 +24,16 @@ const useChapter = () => {
 			try {
 				await trigger({
 					params: {
-						page,
+						page    : !search ? page : DEFAULT_PAGE,
+						filters : { q: search || undefined },
+						status  : activeTab,
 					},
 				});
 			} catch (error) {
 				Toast.error(error?.data);
 			}
 		},
-		[page, trigger],
+		[page, trigger, search, activeTab],
 	);
 
 	const { deleteChapter, loading: deleteLoading } = useDeleteChapter({
@@ -60,6 +63,8 @@ const useChapter = () => {
 		setShowDeleteModal,
 		showUpdateChapterModal,
 		setShowUpdateChapterModal,
+		activeTab,
+		setActiveTab,
 	};
 };
 

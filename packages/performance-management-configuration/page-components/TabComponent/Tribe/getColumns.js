@@ -1,4 +1,4 @@
-import { Pill, Tooltip } from '@cogoport/components';
+import { Button, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
@@ -31,13 +31,13 @@ function TooltipContent({ item = [] }) {
 const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => (
 	[
 		{
-			Header   : 'Tribe NAME',
+			Header   : 'TRIBE NAME',
 			accessor : (item) => (
 				<div>{startCase(item?.tribe_name) || '-'}</div>
 			),
 		},
 		{
-			Header   : 'Tribe LEADER',
+			Header   : 'TRIBE LEADER',
 			accessor : (item) => (
 				<div>{startCase(item?.tribe_leader?.name) || '-'}</div>
 			),
@@ -60,8 +60,10 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => (
 					{item?.squads?.length > MIN_SQUADS_LENGTH ? (
 						<Tooltip
 							content={<TooltipContent item={item?.squads} />}
-							placement="right"
+							placement="left"
 							theme="light"
+							interactive
+							caret
 							styles={{ marginBottom: '24px' }}
 						>
 							<Pill>
@@ -91,31 +93,34 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => (
 		{
 			Header   : 'STATUS',
 			accessor : (item) => (
-				<div
-					className={styles.status}
-					style={{ background: item?.status === 'inactive' ? '#f8aea8' : '' }}
+				<Pill
+					className={item?.status === 'active' ? styles.active : styles.inactive}
 				>
 					{startCase(item?.status) || '-'}
-				</div>
+				</Pill>
 			),
 		},
 		{
 			Header   : 'ACTION',
 			accessor : (item) => (
-				<div>
-					<IcMDelete
-						width={16}
-						height={16}
-						style={{ cursor: 'pointer' }}
-						onClick={() => setShowDeleteModal(item.id)}
-					/>
-					<IcMEdit
-						width={16}
-						height={16}
-						style={{ marginLeft: 12, cursor: 'pointer' }}
-						onClick={() => setShowUpdateTribeModal(item)}
-					/>
-				</div>
+				item?.status === 'active'
+					? (
+						<div className={styles.button}>
+							<IcMDelete
+								width={16}
+								height={16}
+								style={{ cursor: 'pointer' }}
+								onClick={() => setShowDeleteModal(item.id)}
+							/>
+							<IcMEdit
+								width={16}
+								height={16}
+								style={{ marginLeft: 12, cursor: 'pointer' }}
+								onClick={() => setShowUpdateTribeModal(item)}
+							/>
+						</div>
+					)
+					:			<Button themeType="secondary">Re Apply</Button>
 			),
 		},
 	]

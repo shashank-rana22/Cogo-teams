@@ -1,4 +1,4 @@
-import { Pill, Tooltip } from '@cogoport/components';
+import { Button, Pill, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
@@ -41,21 +41,20 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
 		Header   : 'EMPLOYEES',
 		accessor : (item) => (
 			<div className={styles.pill_box}>
-				{item?.employees?.slice(EMPLOYEE_INDEX_START, EMPLOYEE_INDEX_END).map((singleEmplyee) => (
-					<Pill
-						key={singleEmplyee?.name}
-						size="md"
-						className={styles.pill}
-					>
-						{singleEmplyee?.name}
-					</Pill>
-				))}
+				{item?.employees?.slice(EMPLOYEE_INDEX_START, EMPLOYEE_INDEX_END)
+					.map((singleEmplyee) => (
+						<Pill key={singleEmplyee?.name} size="md" className={styles.pill}>
+							{singleEmplyee?.name}
+						</Pill>
+					))}
 
 				{item?.employees?.length > MIN_EMPLOYEES_LENGTH ? (
 					<Tooltip
 						content={<TooltipContent item={item?.employees} />}
-						placement="right"
+						placement="left"
 						theme="light"
+						interactive
+						caret
 						styles={{ marginBottom: '24px' }}
 					>
 						<Pill>
@@ -65,8 +64,7 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
 							EMPLOYEES
 						</Pill>
 					</Tooltip>
-				)
-					: null}
+				) : null}
 			</div>
 		),
 	},
@@ -85,31 +83,36 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
 	{
 		Header   : 'STATUS',
 		accessor : (item) => (
-			<div
-				className={styles.status}
-				style={{ background: item?.status === 'inactive' ? '#f8aea8' : '' }}
+			<Pill
+				className={item?.status === 'active' ? styles.active : styles.inactive}
 			>
 				{startCase(item?.status) || '-'}
-			</div>
+			</Pill>
 		),
 	},
 	{
 		Header   : 'ACTION',
 		accessor : (item) => (
-			<div>
-				<IcMDelete
-					width={16}
-					height={16}
-					style={{ cursor: 'pointer' }}
-					onClick={() => setShowDeleteModal(item.id)}
-				/>
-				<IcMEdit
-					width={16}
-					height={16}
-					style={{ marginLeft: 12, cursor: 'pointer' }}
-					onClick={() => setShowUpdateSquadModal(item)}
-				/>
-			</div>
+
+			item?.status === 'active'
+				? (
+					<div className={styles.button}>
+						<IcMDelete
+							width={16}
+							height={16}
+							style={{ cursor: 'pointer' }}
+							onClick={() => setShowDeleteModal(item.id)}
+						/>
+						<IcMEdit
+							width={16}
+							height={16}
+							style={{ marginLeft: 12, cursor: 'pointer' }}
+							onClick={() => setShowUpdateSquadModal(item)}
+						/>
+					</div>
+				)
+				:			<Button themeType="secondary">Re Apply</Button>
+
 		),
 	},
 ];

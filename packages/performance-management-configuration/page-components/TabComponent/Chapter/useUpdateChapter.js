@@ -18,16 +18,28 @@ const useUpdateChapter = ({ fetchList, setShowUpdateChapterModal, showUpdateChap
 	}, { manual: true });
 
 	const onClickUpdateButton = async (values) => {
+		const { sub_chapter_ids, ...rest } = values;
+		const ARRAY_OF_IDS = showUpdateChapterModal.sub_chapters.map((obj) => obj.id);
+
+		const sub_chapters_added = (sub_chapter_ids || []).filter(
+			(id) => !(ARRAY_OF_IDS || []).includes(id),
+		);
+		const sub_chapters_removed = (ARRAY_OF_IDS || []).filter(
+			(id) => !(sub_chapter_ids || []).includes(id),
+		);
+
 		try {
 			await trigger({
 				data: {
-					...values,
+					...rest,
 					chapter_id        : showUpdateChapterModal?.id,
 					performed_by_id   : user_id,
 					performed_by_type : 'user',
+					sub_chapters_added,
+					sub_chapters_removed,
 				},
 			});
-			Toast.success('Successfully Created');
+			Toast.success('Successfully Updated');
 			setShowUpdateChapterModal(false);
 			fetchList();
 		} catch (err) {
