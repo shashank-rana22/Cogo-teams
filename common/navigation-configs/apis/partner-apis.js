@@ -10162,6 +10162,11 @@ const partner = {
 			service_name : 'promotion',
 		},
 		{
+			api          : 'update_agent_budget_allocation_status',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
 			api          : 'update_promotion_rule',
 			access_type  : 'private',
 			service_name : 'promotion',

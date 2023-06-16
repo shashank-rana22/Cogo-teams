@@ -5,6 +5,7 @@ import { format } from '@cogoport/utils';
 import CardHeader from '../../../../commons/Card/CardHeader';
 import PortDetails from '../../../../commons/Card/PortDetails/DualLocation';
 import ShipmentInfo from '../../../../commons/Card/ShipmentInfo';
+import CONSTANTS from '../../../../config/constants.json';
 import isCardCritical from '../../../../helpers/isCardCritical';
 import styles from '../../card.module.css';
 
@@ -16,7 +17,7 @@ export default function Card({ item = {}, couldBeCardsCritical = false, activeTa
 	return (
 		<Link
 			href="/booking/fcl/[shipment_id]"
-			as={`/booking/fcl/${item.id}`}
+			as={`/booking/fcl/${item.id}?${CONSTANTS.url_navigation_params}`}
 			className={`${styles.card} ${criticalClass}`}
 		>
 			<CardHeader item={item} />

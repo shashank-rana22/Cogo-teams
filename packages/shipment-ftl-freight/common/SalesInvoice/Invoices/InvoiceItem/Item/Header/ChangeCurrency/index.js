@@ -1,29 +1,29 @@
 import { Button, Modal, Select } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateCurrency from '../../../../../../../hooks/useUpdateCurrency';
-import INVOICE_CURRENCY_MAPPINGS from '../../../../../helpers/invoiceCurrencyMapping';
 
 import styles from './styles.module.css';
 
 function ChangeCurrency({
-	isChangeCurrency = false,
-	setIsChangeCurrency = () => {},
+	show = false,
+	setShow = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
 	const onClose = () => {
-		setIsChangeCurrency(false);
+		setShow(false);
 	};
 	const [value, setValue] = useState('');
 
 	const geo = getGeoConstants();
 
-	const currencyOptionsOld =	INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.[
+	const currencyOptionsOld =	GLOBAL_CONSTANTS.options.freight_invoice_currency?.[
 		invoice?.country_code || geo.country.currency.code
-	] || INVOICE_CURRENCY_MAPPINGS?.freight_invoice_currency?.others;
+	] || GLOBAL_CONSTANTS.options.freight_invoice_currency.OTHERS;
 
 	const currencyOptions = currencyOptionsOld.map((item) => ({
 		label : item,
@@ -51,7 +51,7 @@ function ChangeCurrency({
 	return (
 		<Modal
 			className={styles.form}
-			show={isChangeCurrency}
+			show={show}
 			closeOnOuterClick={false}
 			showCloseIcon={false}
 		>
@@ -71,7 +71,7 @@ function ChangeCurrency({
 				<Button
 					size="md"
 					themeType="secondary"
-					onClick={() => setIsChangeCurrency(false)}
+					onClick={() => setShow(false)}
 					disabled={loading}
 				>
 					Cancel
