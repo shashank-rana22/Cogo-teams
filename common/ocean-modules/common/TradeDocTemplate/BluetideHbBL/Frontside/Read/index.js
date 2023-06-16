@@ -41,7 +41,7 @@ function Read({
 		);
 	}
 
-	const {container_number = '', marks_and_number = '', package_description= '', gross_weight='', measurement = ''} = defaultValues?.containers?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+	const { container_number = '', marks_and_number = '', package_description = '', gross_weight ='', measurement = '' } = defaultValues?.containers?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	return (
 		<main className={styles.main}>
