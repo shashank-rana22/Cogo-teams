@@ -28,26 +28,23 @@ function TooltipContent({ item = [] }) {
 	);
 }
 
-const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => (
-	[
-		{
-			Header   : 'TRIBE NAME',
-			accessor : (item) => (
-				<div>{startCase(item?.tribe_name) || '-'}</div>
-			),
-		},
-		{
-			Header   : 'TRIBE LEADER',
-			accessor : (item) => (
-				<div>{startCase(item?.tribe_leader?.name) || '-'}</div>
-			),
-		},
+const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => [
+	{
+		Header   : 'TRIBE NAME',
+		accessor : (item) => <div>{startCase(item?.tribe_name) || '-'}</div>,
+	},
+	{
+		Header   : 'TRIBE LEADER',
+		accessor : (item) => <div>{startCase(item?.tribe_leader?.name) || '-'}</div>,
+	},
 
-		{
-			Header   : 'SQUADS',
-			accessor : (item) => (
-				<div className={styles.pill_box}>
-					{item?.squads?.slice(SQUAD_INDEX_START, SQUAD_INDEX_END).map((singleSQUAD) => (
+	{
+		Header   : 'SQUADS',
+		accessor : (item) => (
+			<div className={styles.pill_box}>
+				{item?.squads
+					?.slice(SQUAD_INDEX_START, SQUAD_INDEX_END)
+					.map((singleSQUAD) => (
 						<Pill
 							key={singleSQUAD?.squad_name}
 							size="md"
@@ -57,73 +54,69 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => (
 						</Pill>
 					))}
 
-					{item?.squads?.length > MIN_SQUADS_LENGTH ? (
-						<Pill>
-							<Tooltip
-								content={<TooltipContent item={item?.squads} />}
-								placement="right"
-								theme="light"
-								interactive
-								caret
-								styles={{ marginBottom: '24px' }}
-							>
-								+
-								{item.squads.length - SQUAD_INDEX_END}
-								{' '}
-								Squads
-							</Tooltip>
-						</Pill>
-					)
-						: null}
-				</div>
-			),
-		},
-		{
-			Header   : 'LAST UPDATED AT',
-			accessor : (item) => (
-				<div>
-					{formatDate({
-						date       : item?.updated_at,
-						formatType : 'date',
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-					})}
-				</div>
-			),
-		},
-		{
-			Header   : 'STATUS',
-			accessor : (item) => (
-				<Pill
-					className={item?.status === 'active' ? styles.active : styles.inactive}
-				>
-					{startCase(item?.status) || '-'}
-				</Pill>
-			),
-		},
-		{
-			Header   : 'ACTION',
-			accessor : (item) => (
-				item?.status === 'active'
-					? (
-						<div className={styles.button}>
-							<IcMDelete
-								width={16}
-								height={16}
-								style={{ cursor: 'pointer' }}
-								onClick={() => setShowDeleteModal(item.id)}
-							/>
-							<IcMEdit
-								width={16}
-								height={16}
-								style={{ marginLeft: 12, cursor: 'pointer' }}
-								onClick={() => setShowUpdateTribeModal(item)}
-							/>
-						</div>
-					)
-					:			<Button themeType="secondary">Re Apply</Button>
-			),
-		},
-	]
-);
+				{item?.squads?.length > MIN_SQUADS_LENGTH ? (
+					<Pill>
+						<Tooltip
+							content={<TooltipContent item={item?.squads} />}
+							placement="right"
+							theme="light"
+							interactive
+							caret
+							styles={{ marginBottom: '24px' }}
+						>
+							+
+							{item.squads.length - SQUAD_INDEX_END}
+							{' '}
+							Squads
+						</Tooltip>
+					</Pill>
+				) : null}
+			</div>
+		),
+	},
+	{
+		Header   : 'LAST UPDATED AT',
+		accessor : (item) => (
+			<div>
+				{formatDate({
+					date       : item?.updated_at,
+					formatType : 'date',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				})}
+			</div>
+		),
+	},
+	{
+		Header   : 'STATUS',
+		accessor : (item) => (
+			<Pill
+				className={item?.status === 'active' ? styles.active : styles.inactive}
+			>
+				{startCase(item?.status) || '-'}
+			</Pill>
+		),
+	},
+	{
+		Header   : 'ACTION',
+		accessor : (item) => (item?.status === 'active' ? (
+			<div className={styles.button}>
+				<IcMDelete
+					width={16}
+					height={16}
+					style={{ cursor: 'pointer' }}
+					onClick={() => setShowDeleteModal(item.id)}
+				/>
+				<IcMEdit
+					width={16}
+					height={16}
+					style={{ marginLeft: 12, cursor: 'pointer' }}
+					onClick={() => setShowUpdateTribeModal(item)}
+				/>
+			</div>
+		) : (
+			<Button themeType="secondary">Restore</Button>
+		)),
+	},
+];
 
 export default getColumns;

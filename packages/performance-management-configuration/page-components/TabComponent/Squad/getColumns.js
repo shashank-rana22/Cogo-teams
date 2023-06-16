@@ -41,7 +41,8 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
 		Header   : 'EMPLOYEES',
 		accessor : (item) => (
 			<div className={styles.pill_box}>
-				{item?.employees?.slice(EMPLOYEE_INDEX_START, EMPLOYEE_INDEX_END)
+				{item?.employees
+					?.slice(EMPLOYEE_INDEX_START, EMPLOYEE_INDEX_END)
 					.map((singleEmplyee) => (
 						<Pill key={singleEmplyee?.name} size="md" className={styles.pill}>
 							{singleEmplyee?.name}
@@ -92,28 +93,24 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
 	},
 	{
 		Header   : 'ACTION',
-		accessor : (item) => (
-
-			item?.status === 'active'
-				? (
-					<div className={styles.button}>
-						<IcMDelete
-							width={16}
-							height={16}
-							style={{ cursor: 'pointer' }}
-							onClick={() => setShowDeleteModal(item.id)}
-						/>
-						<IcMEdit
-							width={16}
-							height={16}
-							style={{ marginLeft: 12, cursor: 'pointer' }}
-							onClick={() => setShowUpdateSquadModal(item)}
-						/>
-					</div>
-				)
-				:			<Button themeType="secondary">Re Apply</Button>
-
-		),
+		accessor : (item) => (item?.status === 'active' ? (
+			<div className={styles.button}>
+				<IcMDelete
+					width={16}
+					height={16}
+					style={{ cursor: 'pointer' }}
+					onClick={() => setShowDeleteModal(item.id)}
+				/>
+				<IcMEdit
+					width={16}
+					height={16}
+					style={{ marginLeft: 12, cursor: 'pointer' }}
+					onClick={() => setShowUpdateSquadModal(item)}
+				/>
+			</div>
+		) : (
+			<Button themeType="secondary">Restore</Button>
+		)),
 	},
 ];
 
