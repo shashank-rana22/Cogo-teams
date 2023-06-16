@@ -17,18 +17,6 @@
 	box-shadow: 0 0 8px rgb(0 0 0 / 20%);
 }
 
-.loader {
-	display: flex;
-	flex-direction: column-reverse;
-	align-items: center;
-	justify-content: center;
-	height: 100vh;
-}
-
-.loader_icon {
-	width: 50px;
-}
-
 .page {
 	font-size: 20px;
 	font-weight: 600;
