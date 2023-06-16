@@ -70,8 +70,7 @@ function Card({
 		netTotalBuyPrice+=Number(data?.rowData?.destination_locals_price)
 	}
 	return (
-		<div
-			className={rate_key ? styles.selected_rate_card_container : styles.container}
+		<div className={rate_key ? styles.selected_rate_card_container : styles.container}
 			role="presentation"
 			onClick={() => (!rate_key ? handlePrefrence(data) : null)}
 		>
@@ -259,6 +258,7 @@ function Card({
 
 			</div>
 		</div>
+	</div>
 	);
 }
 export default Card;
