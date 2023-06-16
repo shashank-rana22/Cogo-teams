@@ -3,6 +3,7 @@ import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import Chapter from './Chapter';
+import Employees from './Employees';
 import Squad from './Squad';
 import styles from './styles.module.css';
 import SubChapter from './SubChapter';
@@ -13,6 +14,7 @@ const TABS_MAPPING = {
 	tribe       : Tribe,
 	chapter     : Chapter,
 	sub_chapter : SubChapter,
+	employees   : Employees,
 };
 
 function TabComponent() {
