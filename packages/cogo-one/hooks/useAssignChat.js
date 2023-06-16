@@ -9,7 +9,7 @@ function useAssignChat({
 	setDisableButton = () => {},
 	canMessageOnBotSession = false,
 }) {
-	const { user_id, lead_user_id, organization_id, mobile_no, sender = null } = formattedData || {};
+	const { user_id, lead_user_id, organization_id, mobile_no, sender = null, cogo_entity_id } = formattedData || {};
 	const { channel_type, id } = activeMessageCard || {};
 	const [{ loading }, trigger] = useRequest({
 		url    : '/assign_chat',
@@ -27,6 +27,7 @@ function useAssignChat({
 					whatsapp_number_eformat : mobile_no,
 					organization_id,
 					sender,
+					cogo_entity_id          : cogo_entity_id || undefined,
 					...payload,
 
 				},
