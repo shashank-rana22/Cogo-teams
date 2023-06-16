@@ -21,6 +21,7 @@ const DEFAULT_TOTAL_COUNT = 10;
 const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
 const ADD_BUTTON_LABEL = 'Sub Chapter';
+const FUNCTION_ADD = 'add';
 
 function SubChapter() {
 	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
@@ -61,7 +62,7 @@ function SubChapter() {
 	});
 
 	const onClickAddButton = () => {
-		setShowSubChapterModal('add');
+		setShowSubChapterModal(FUNCTION_ADD);
 		reset();
 	};
 
@@ -101,10 +102,11 @@ function SubChapter() {
 					controls={controls}
 					control={control}
 					errors={errors}
-					onClickSubmitButton={showSubChapterModal === 'add' ? onClickSubmitButton : onClickUpdateButton}
-					loading={showSubChapterModal === 'add' ? CreateLoading : UpdateLoading}
+					onClickSubmitButton={showSubChapterModal === FUNCTION_ADD
+						? onClickSubmitButton : onClickUpdateButton}
+					loading={showSubChapterModal === FUNCTION_ADD ? CreateLoading : UpdateLoading}
 					handleSubmit={handleSubmit}
-					Type={showSubChapterModal === 'add' ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
+					Type={showSubChapterModal === FUNCTION_ADD ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 					label={ADD_BUTTON_LABEL}
 				/>

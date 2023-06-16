@@ -1,11 +1,8 @@
 import { Toast } from '@cogoport/components';
-// import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
 const useCreateTribe = ({ fetchList, setShowTribeModal }) => {
-	// const { control, formState: { errors }, handleSubmit } = useForm();
-
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/create_tribe',

@@ -5,12 +5,8 @@ import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
 const useUpdateTribe = ({ fetchList, setShowTribeModal, showTribeModal }) => {
-	const { profile = {} } = useSelector((state) => state);
-
-	const { user = {} } = profile;
-
+	const { user = {} } = useSelector((state) => state.profile);
 	const { id: user_id } = user;
-	// const { control, formState: { errors }, handleSubmit, setValue } = useForm();
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',

@@ -18,6 +18,7 @@ const ADD_BUTTON_LABEL = 'Chapter';
 const TABLE_EMPTY_TEXT = 'No Chapters created yet';
 const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
+const FUNCTION_ADD = 'add';
 
 function Chapter() {
 	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
@@ -44,7 +45,7 @@ function Chapter() {
 	} = useUpdateChapter({ fetchList, setShowChapterModal, showChapterModal });
 
 	const onClickAddButton = () => {
-		setShowChapterModal('add');
+		setShowChapterModal(FUNCTION_ADD);
 		reset();
 	};
 
@@ -80,10 +81,10 @@ function Chapter() {
 					controls={controls}
 					control={control}
 					errors={errors}
-					onClickSubmitButton={showChapterModal === 'add' ? onClickSubmitButton : onClickUpdateButton}
-					loading={showChapterModal === 'add' ? CreateLoading : UpdateLoading}
+					onClickSubmitButton={showChapterModal === FUNCTION_ADD ? onClickSubmitButton : onClickUpdateButton}
+					loading={showChapterModal === FUNCTION_ADD ? CreateLoading : UpdateLoading}
 					handleSubmit={handleSubmit}
-					Type={showChapterModal === 'add' ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
+					Type={showChapterModal === FUNCTION_ADD ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 				/>
 			) : null}

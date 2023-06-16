@@ -6,13 +6,14 @@ import getColumns from './getColumns';
 import useDeleteChapter from './useDeleteChapter';
 
 const DEFAULT_PAGE = 1;
+const DEFAULT_ACTIVE_TAB = 'active';
 
 const useChapter = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
 	const [showChapterModal, setShowChapterModal] = useState();
-	const [activeTab, setActiveTab] = useState('active');
+	const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		url    : '/list_all_chapters',

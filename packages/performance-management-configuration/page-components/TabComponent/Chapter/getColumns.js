@@ -7,12 +7,10 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 const TOOLTIP_START_VALUE = 3;
-
 const MIN_SUB_CHAPTERS_LENGTH = 3;
-
 const SUB_CHAPTER_INDEX_START = 0;
-
 const SUB_CHAPTER_INDEX_END = 3;
+const STATUS_TYPE_ACTIVE = 'active';
 
 function TooltipContent({ item = [] }) {
 	return (
@@ -89,7 +87,7 @@ const getColumns = ({ setShowDeleteModal, setShowChapterModal }) => [
 		Header   : 'STATUS',
 		accessor : (item) => (
 			<Pill
-				className={item?.status === 'active' ? styles.active : styles.inactive}
+				className={item?.status === STATUS_TYPE_ACTIVE ? styles.active : styles.inactive}
 			>
 				{startCase(item?.status) || '-'}
 			</Pill>
@@ -97,7 +95,7 @@ const getColumns = ({ setShowDeleteModal, setShowChapterModal }) => [
 	},
 	{
 		Header   : 'ACTION',
-		accessor : (item) => (item?.status === 'active' ? (
+		accessor : (item) => (item?.status === STATUS_TYPE_ACTIVE ? (
 			<div className={styles.button}>
 				<IcMDelete
 					width={16}

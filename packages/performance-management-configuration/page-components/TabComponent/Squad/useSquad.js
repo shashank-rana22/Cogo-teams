@@ -7,13 +7,14 @@ import getColumns from './getColumns';
 import useDeleteSquad from './useDeleteSquad';
 
 const DEFAULT_PAGE = 1;
+const DEFAULT_ACTIVE_TAB = 'active';
 
 const useSquad = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
 	const [showSquadModal, setShowSquadModal] = useState(false);
-	const [activeTab, setActiveTab] = useState('active');
+	const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);
 
 	const [{ loading, data }, trigger] = useHarbourRequest(
 		{

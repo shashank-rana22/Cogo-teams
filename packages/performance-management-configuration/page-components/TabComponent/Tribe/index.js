@@ -18,6 +18,7 @@ const ADD_BUTTON_LABEL = 'Tribe';
 const TABLE_EMPTY_TEXT = 'No Tribe created yet';
 const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
+const FUNCTION_ADD = 'add';
 
 function Tribe() {
 	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
@@ -43,7 +44,7 @@ function Tribe() {
 	} = useUpdateTribe({ fetchList, setShowTribeModal, showTribeModal });
 
 	const onClickAddButton = () => {
-		setShowTribeModal('add');
+		setShowTribeModal(FUNCTION_ADD);
 		reset();
 	};
 
@@ -80,10 +81,10 @@ function Tribe() {
 					controls={controls}
 					control={control}
 					errors={errors}
-					onClickSubmitButton={showTribeModal === 'add' ? onClickSubmitButton : onClickUpdateButton}
-					loading={showTribeModal === 'add' ? CreateLoading : UpdateLoading}
+					onClickSubmitButton={showTribeModal === FUNCTION_ADD ? onClickSubmitButton : onClickUpdateButton}
+					loading={showTribeModal === FUNCTION_ADD ? CreateLoading : UpdateLoading}
 					handleSubmit={handleSubmit}
-					Type={showTribeModal === 'add' ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
+					Type={showTribeModal === FUNCTION_ADD ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 				/>
 			) : null}

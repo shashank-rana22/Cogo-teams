@@ -6,6 +6,8 @@ import getElementController from '../../configs/getElementController';
 
 import styles from './styles.module.css';
 
+const CHECK_USE_TYPE_UPDATE = 'Update';
+
 const RenderModalBody = ({ controls, control, errors }) => (controls || []).map((controlItem) => {
 	const { type, label: controlLabel, name } = controlItem || {};
 
@@ -44,10 +46,10 @@ function CreateConfigurationModal({
 	Type,
 	setValue,
 }) {
-	console.log(showModal);
+	// console.log(showModal);
 
 	useEffect(() => {
-		if (!isEmpty(showModal) && Type === 'Update') {
+		if (!isEmpty(showModal) && Type === CHECK_USE_TYPE_UPDATE) {
 			if (showModal?.squad_name) {
 				const ARRAY_OF_IDS = showModal.employees.map((obj) => obj.id);
 

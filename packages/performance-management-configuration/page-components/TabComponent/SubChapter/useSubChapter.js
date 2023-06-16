@@ -6,13 +6,14 @@ import getColumns from './getColumns';
 import useDeleteSubChapter from './useDeleteSubChapter';
 
 const DEFAULT_PAGE = 1;
+const DEFAULT_ACTIVE_TAB = 'active';
 
 const useSubChapter = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
 	const [showSubChapterModal, setShowSubChapterModal] = useState();
-	const [activeTab, setActiveTab] = useState('active');
+	const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		url    : '/list_all_sub_chapters',

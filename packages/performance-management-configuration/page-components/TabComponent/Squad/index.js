@@ -18,6 +18,7 @@ const ADD_BUTTON_LABEL = 'Squad';
 const TABLE_EMPTY_TEXT = 'No Squad created yet';
 const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
+const FUNCTION_ADD = 'add';
 
 function Squad() {
 	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
@@ -44,7 +45,7 @@ function Squad() {
 	} = useUpdateSquad({ fetchList, setShowSquadModal, showSquadModal });
 
 	const onClickAddButton = () => {
-		setShowSquadModal('add');
+		setShowSquadModal(FUNCTION_ADD);
 		reset();
 	};
 
@@ -80,10 +81,10 @@ function Squad() {
 					controls={controls}
 					control={control}
 					errors={errors}
-					onClickSubmitButton={showSquadModal === 'add' ? onClickSubmitButton : onClickUpdateButton}
-					loading={showSquadModal === 'add' ? CreateLoading : UpdateLoading}
+					onClickSubmitButton={showSquadModal === FUNCTION_ADD ? onClickSubmitButton : onClickUpdateButton}
+					loading={showSquadModal === FUNCTION_ADD ? CreateLoading : UpdateLoading}
 					handleSubmit={handleSubmit}
-					Type={showSquadModal === 'add' ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
+					Type={showSquadModal === FUNCTION_ADD ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 				/>
 			) : null}
