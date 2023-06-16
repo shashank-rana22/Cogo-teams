@@ -35,6 +35,7 @@ function CogoOne() {
 	const { status = '' } = agentStatus || {};
 
 	const [activeTab, setActiveTab] = useState('message');
+	const [activeSubTab, setActiveSubTab] = useState('all');
 	const [toggleStatus, setToggleStatus] = useState(false);
 	const [activeVoiceCard, setActiveVoiceCard] = useState({});
 	const [searchValue, setSearchValue] = useState('');
@@ -127,6 +128,7 @@ function CogoOne() {
 		searchValue,
 		viewType,
 		setShowFeedback,
+		activeSubTab,
 	});
 
 	const { zippedTicketsData = {}, refetchTickets = () => {} } = useGetTicketsData({
@@ -145,7 +147,7 @@ function CogoOne() {
 		if (isomniChannelAdmin) {
 			setAppliedFilters({});
 		}
-	}, [activeTab, setActiveCard, showBotMessages, setFirstMount, setAppliedFilters, isomniChannelAdmin]);
+	}, [activeTab, activeSubTab, setActiveCard, showBotMessages, setFirstMount, setAppliedFilters, isomniChannelAdmin]);
 
 	useEffect(() => {
 		setToggleStatus(status === 'active');
@@ -175,6 +177,8 @@ function CogoOne() {
 					filterVisible={filterVisible}
 					activeTab={activeTab}
 					setActiveTab={setActiveTab}
+					activeSubTab={activeSubTab}
+					setActiveSubTab={setActiveSubTab}
 					setToggleStatus={setToggleStatus}
 					toggleStatus={toggleStatus}
 					chatsData={chatsData}

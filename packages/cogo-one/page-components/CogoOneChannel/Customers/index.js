@@ -49,6 +49,8 @@ function Customers({
 	viewType = '',
 	flashMessagesLoading,
 	hasVoiceCallAccess,
+	activeSubTab,
+	setActiveSubTab = () => {},
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
@@ -179,7 +181,12 @@ function Customers({
 				</Tabs>
 			</div>
 			{Component && (
-				<Component key={activeTab} {...(componentProps[activeTab] || {})} />
+				<Component
+					key={activeTab}
+					activeTab={activeSubTab}
+					setActiveTab={setActiveSubTab}
+					{...(componentProps[activeTab] || {})}
+				/>
 			)}
 
 			{openModal && (

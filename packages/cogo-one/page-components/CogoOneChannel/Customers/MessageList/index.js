@@ -43,13 +43,14 @@ function MessageList(messageProps) {
 		viewType = '',
 		flashMessagesList = [],
 		flashMessagesLoading = false,
+		activeTab = 'all',
+		setActiveTab,
 	} = messageProps;
 
 	const [openPinnedChats, setOpenPinnedChats] = useState(true);
 	const [autoAssignChats, setAutoAssignChats] = useState(true);
 	const [selectedAutoAssign, setSelectedAutoAssign] = useState({});
 	const [showCarousel, setShowCarousel] = useState(false);
-	const [activeTab, setActiveTab] = useState('all');
 	const handleCheckedChats = (item, id) => {
 		if (id in selectedAutoAssign) {
 			setSelectedAutoAssign((p) => {

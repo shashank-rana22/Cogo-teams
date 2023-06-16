@@ -1,5 +1,7 @@
 import { orderBy, where } from 'firebase/firestore';
 
+const BULK_ASSIGN_SEEN_MINUTES = 15;
+
 const getMainQuery = (userId, type, isObserver) => {
 	switch (type) {
 		case 'admin_view':
@@ -14,12 +16,19 @@ const getMainQuery = (userId, type, isObserver) => {
 	}
 };
 
-const getSessionQuery = (viewType, showBotMessages) => {
-	if (viewType === 'shipment_view') {
+const getSessionQuery = (viewType, showBotMessages, tab) => {
+	if (viewType === 'shipment_view' || tab === 'contacts') {
 		return where('session_type', 'in', ['bot', 'admin']);
 	}
 	return showBotMessages
 		? where('session_type', '==', 'bot') : where('session_type', '==', 'admin');
+};
+
+const getTabQuery = (tab, userId) => {
+	if (tab === 'groups') {
+		return [where('group_members', 'array-contains', userId)];
+	}
+	return [];
 };
 
 function getFireStoreQuery({
@@ -28,6 +37,7 @@ function getFireStoreQuery({
 	isomniChannelAdmin = false,
 	showBotMessages = false,
 	viewType,
+	activeSubTab,
 }) {
 	let queryFilters = [];
 
@@ -35,7 +45,7 @@ function getFireStoreQuery({
 
 	const mainQuery = getMainQuery(userId, viewType, isObserver);
 
-	const sessionTypeQuery = getSessionQuery(viewType, showBotMessages);
+	const sessionTypeQuery = getSessionQuery(viewType, showBotMessages, activeSubTab);
 
 	Object.keys(appliedFilters).forEach((item) => {
 		if (item === 'channels') {
@@ -51,7 +61,7 @@ function getFireStoreQuery({
 				];
 			} else if (appliedFilters[item] === 'seen_by_user') {
 				const currentTime = new Date();
-				currentTime.setMinutes(currentTime.getMinutes() - 15);
+				currentTime.setMinutes(currentTime.getMinutes() - BULK_ASSIGN_SEEN_MINUTES);
 				const epochTimestamp = currentTime.getTime();
 
 				queryFilters = [
@@ -103,7 +113,15 @@ function getFireStoreQuery({
 		}
 	});
 
-	const firestoreQuery = [...queryFilters, ...mainQuery, sessionTypeQuery, orderBy('new_message_sent_at', 'desc')];
+	const tabQuery = getTabQuery(activeSubTab, userId);
+
+	const firestoreQuery = [
+		...queryFilters,
+		...mainQuery,
+		sessionTypeQuery,
+		...tabQuery,
+		orderBy('new_message_sent_at', 'desc'),
+	];
 
 	return firestoreQuery;
 }
