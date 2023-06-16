@@ -4,14 +4,6 @@ import incoTermMapping from '../../../../helper/incoTermMapping';
 
 import styles from './styles.module.css';
 
-const LABEL_MAPPING = {
-	fcl_freight : 'FCL',
-	lcl_freight : 'LCL',
-	air_freight : 'AIR',
-	ftl_freight : 'FTL',
-	ltl_freight : 'LTL',
-};
-
 const KEY_MAPPING = {
 	kam_insights      : 'KAM / Sales Agent',
 	customer_insights : 'Customer',
@@ -65,8 +57,6 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 				<div style={{ display: 'flex' }}>
 					{getOrdinalNumber(service_shipment_count)}
 					<div style={{ marginLeft: '5px' }}>
-						{LABEL_MAPPING[shipment_type]}
-						{' '}
 						Transaction
 					</div>
 				</div>
@@ -76,9 +66,6 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 					? (
 						<div style={{ display: 'flex' }}>
 							{getOrdinalNumber(service_trade_type_shipment_count)}
-							<div style={{ marginLeft: '5px' }}>
-								{LABEL_MAPPING[shipment_type]}
-							</div>
 							<div style={{ marginLeft: '5px' }}>
 								{trade_type.toUpperCase() || incoTermMapping[data?.inco_term].toUpperCase()}
 								{' '}
@@ -91,9 +78,6 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 
 				<div style={{ display: 'flex' }}>
 					{getOrdinalNumber(service_port_pair_shipment_count)}
-					<div style={{ marginLeft: '5px' }}>
-						{LABEL_MAPPING[shipment_type]}
-					</div>
 					<div style={{ marginLeft: '5px' }}>
 						{trade_type.toUpperCase() || incoTermMapping[data?.inco_term].toUpperCase()}
 						{' '}
