@@ -30,7 +30,7 @@ function useHandleSubmit({
 	services = {},
 }) {
 	const [isLoading, setIsLoading] = useState();
-
+	const [responseError, setResponseError] = useState(false);
 	const [{ loading }, trigger] = useRequest({
 		url    : finalConfig.end_point || 'update_shipment_pending_task',
 		method : 'POST',
@@ -113,8 +113,9 @@ function useHandleSubmit({
 					mainAirFreight?.shipment_id,
 					mainAirFreight?.service_provider_id,
 					createAwbInventoryTrigger,
+					setResponseError,
 				);
-				if (awb_response?.base) {
+				if (responseError && awb_response) {
 					setIsLoading(false);
 					return;
 				}
