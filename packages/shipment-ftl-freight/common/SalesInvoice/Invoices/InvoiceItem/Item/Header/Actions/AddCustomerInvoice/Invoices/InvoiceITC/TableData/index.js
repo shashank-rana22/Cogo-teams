@@ -1,5 +1,4 @@
 import React, { useMemo } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import { getLineItems } from '../getLineItems';
 import { getChargesData } from '../getOtherData';
@@ -7,7 +6,6 @@ import { getChargesData } from '../getOtherData';
 const ARRAY_LENGTH_FOR_TAX = 8;
 const ARRAY_LENGTH_FOR_OTHER_TOTAL = 13;
 const ARRAY_LENGTH_FOR_OTHER_AMOUNT = 6;
-const FILL_VALUE = 1;
 
 function TableData({ customData = {} }) {
 	const { lineItems, LINE_ITEMS_KEYS_MAPPING } = getLineItems({ customData });
@@ -28,17 +26,14 @@ function TableData({ customData = {} }) {
 	} = getChargesData({ customData });
 
 	const { extraTaxArray, extraTotalArray, extraAmountArray } = useMemo(() => {
-		const otherTaxArray = Array(ARRAY_LENGTH_FOR_TAX)
-			.fill(FILL_VALUE)
-			.map((item) => ({ id: uuid(), value: item }));
+		const otherTaxArray = [...Array(ARRAY_LENGTH_FOR_TAX).keys()]
+			.map((item) => ({ id: item, value: item }));
 
-		const otherTotalArray = Array(ARRAY_LENGTH_FOR_OTHER_TOTAL)
-			.fill(FILL_VALUE)
-			.map((item) => ({ id: uuid(), value: item }));
+		const otherTotalArray = [...Array(ARRAY_LENGTH_FOR_OTHER_TOTAL).keys()]
+			.map((item) => ({ id: item, value: item }));
 
-		const otherAmountArray = Array(ARRAY_LENGTH_FOR_OTHER_AMOUNT)
-			.fill(FILL_VALUE)
-			.map((item) => ({ id: uuid(), value: item }));
+		const otherAmountArray = [...Array(ARRAY_LENGTH_FOR_OTHER_AMOUNT).keys()]
+			.map((item) => ({ id: item, value: item }));
 
 		return {
 			extraTaxArray    : otherTaxArray,

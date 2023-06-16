@@ -1,12 +1,10 @@
 import React, { useMemo } from 'react';
-import { v4 as uuid } from 'uuid';
 
 import { finalAmountInWords } from '../../../utils/numToWords';
 import { getLineItems } from '../getLineItems';
 import { getChargesData } from '../getOtherData';
 
 const ARRAY_LENGTH = 8;
-const FILL_VALUE = 1;
 
 function TableData({ customData = {}, importerExporterId = '' }) {
 	const { lineItems = [], LINE_ITEMS_KEYS_MAPPING = {} } = getLineItems({
@@ -22,12 +20,7 @@ function TableData({ customData = {}, importerExporterId = '' }) {
 	} = getChargesData({ customData });
 	const amount = finalAmountInWords(total);
 
-	const extraArray = useMemo(
-		() => Array(ARRAY_LENGTH)
-			.fill(FILL_VALUE)
-			.map((item) => ({ id: uuid(), value: item })),
-		[],
-	);
+	const extraArray = useMemo(() => [...Array(ARRAY_LENGTH).keys()].map((item) => ({ id: item, value: item })), []);
 
 	return (
 		<>

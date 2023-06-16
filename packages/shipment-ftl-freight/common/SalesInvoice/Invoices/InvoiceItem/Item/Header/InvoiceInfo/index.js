@@ -1,5 +1,6 @@
 import { Button, cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { isEmpty, startCase } from '@cogoport/utils';
 import React, { useContext } from 'react';
@@ -12,11 +13,10 @@ import styles from './styles.module.css';
 
 const MAXIMUM_FRACTION_DIGIT = 2;
 const OFFSET_VALUE = 2;
-const END_INDEX = -2;
-const START_INDEX = 0;
+const END_INDEX_FOR_CREDIT_SOURCE = -2;
+const START_INDEX_FOR_CREDIT_SOURCE = 0;
 const FALLBACK_VALUE = 0;
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
-const MINIMUM_ALLOWED_SERIAL_ID = 120347;
 const API_SUCCESS_MESSAGE = {
 	reviewed : 'Invoice sent for approval to customer!',
 	approved : 'Invoice approved!,',
@@ -46,7 +46,7 @@ function InvoiceInfo({
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
-	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= MINIMUM_ALLOWED_SERIAL_ID
+	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
 	&& invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 
@@ -132,7 +132,10 @@ function InvoiceInfo({
 					{invoice?.payment_mode === 'credit' ? (
 						<div>
 							<div className={styles.info_container}>
-								{startCase(creditSource?.slice(START_INDEX, END_INDEX))}
+								{startCase(creditSource?.slice(
+									START_INDEX_FOR_CREDIT_SOURCE,
+									END_INDEX_FOR_CREDIT_SOURCE,
+								))}
 							</div>
 
 							<div className={styles.payment_method}>
@@ -168,7 +171,7 @@ function InvoiceInfo({
 				) : null}
 
 				{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= MINIMUM_ALLOWED_SERIAL_ID ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"

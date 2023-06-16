@@ -1,7 +1,6 @@
 import { customerToBankDetails } from '../../../utils/serviceDescriptionMappings';
 
 const BANK_VERIFICATION_STATUSES = ['pending', 'verified'];
-const FIRST_INDEX = 0;
 
 function Terms({
 	stampData = '',
@@ -23,7 +22,7 @@ function Terms({
 		return acc;
 	}, []);
 
-	const bankDetailObj = bankDetailsArray?.[FIRST_INDEX] || {};
+	const [bankDetailObj] = bankDetailsArray || [];
 
 	const {
 		bank_name = '',

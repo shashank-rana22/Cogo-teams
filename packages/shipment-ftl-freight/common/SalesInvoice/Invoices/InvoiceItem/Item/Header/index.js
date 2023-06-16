@@ -16,9 +16,7 @@ import ReviewServices from './ReviewServices';
 import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
-const DEFAULT_VALUE = 0;
 const MIN_SERIAL_ID_LENGTH = 8;
-const MINIMUM_ALLOWED_SERIAL_ID = 120347;
 
 const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
 
@@ -52,7 +50,7 @@ function Header({
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === live_invoice_number,
-	)?.[DEFAULT_VALUE];
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const showCN = BF_INVOICE_STATUS.includes(
 		bfInvoice?.status,
@@ -61,17 +59,17 @@ function Header({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[DEFAULT_VALUE]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
 	}
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > MINIMUM_ALLOWED_SERIAL_ID || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.invoice_check_id || isAuthorized);
 
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
-	const firstChar = invoice_serial_id[DEFAULT_VALUE];
+	const firstChar = invoice_serial_id[GLOBAL_CONSTANTS.zeroth_index];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < MIN_SERIAL_ID_LENGTH;
 
@@ -95,7 +93,7 @@ function Header({
 	const isShipmentCompleted = shipment_data.state === 'completed';
 	const {
 		invoicing_parties: {
-			[DEFAULT_VALUE]: {
+			[GLOBAL_CONSTANTS.zeroth_index]: {
 				billing_address: { tax_mechanism },
 			},
 		},
@@ -103,7 +101,7 @@ function Header({
 
 	const isTaxMechanismGoodsTransportAgency = tax_mechanism === 'goods_transport_agency';
 
-	const deliveryDatePresent = shipment_data.all_services?.[DEFAULT_VALUE]?.delivery_date;
+	const deliveryDatePresent = shipment_data.all_services?.[GLOBAL_CONSTANTS.zeroth_index]?.delivery_date;
 
 	disableMarkAsReviewed = !isEmptyInvoicesList && !isShipmentCompleted
 		&& !(deliveryDatePresent || isTaxMechanismGoodsTransportAgency);

@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useMemo, useState, useEffect, useContext, useCallback } from 'react';
 
 import useCreateCustomerInvoice from '../../hooks/useCreateCustomerInvoice';
@@ -14,8 +15,6 @@ const SkeletonGroup = ['A', 'B', 'C'].map((item) => (
 	<div key={item} height="100px" width="100%" />
 ));
 
-const FIRST_INDEX = 0;
-
 function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 	const [showInternal, setShowInternal] = useState(false);
 	const [showUploadDoc, setShowUploadDoc] = useState(false);
@@ -29,7 +28,7 @@ function VerifyAssetModal({ truckList = [], setShow = () => {} }) {
 		[truckList],
 	);
 
-	const organizationId = truckList[FIRST_INDEX]?.service_provider_id;
+	const organizationId = truckList[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id;
 	const { data: verifiedTruckList, getData: getVerifiedTruckList } = useListOrganizationAssets({
 		id: organizationId,
 		truckNumbers,

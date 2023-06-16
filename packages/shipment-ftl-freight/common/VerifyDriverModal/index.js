@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useMemo, useState, useEffect, useContext, useCallback } from 'react';
 
 import useCreateCustomerInvoice from '../../hooks/useCreateCustomerInvoice';
@@ -14,10 +15,8 @@ const SkeletonGroup = ['A', 'B', 'C'].map((item) => (
 	<div key={item} height="100px" width="100%" />
 ));
 
-const FIRST_INDEX = 0;
-
 function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
-	const organizationId = driverList[FIRST_INDEX]?.service_provider_id;
+	const organizationId = driverList[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id;
 	const [showInternal, setShowInternalInternal] = useState(false);
 	const [showInternalUploadDoc, setShowInternalInternalUploadDoc] = useState(false);
 	const [uploadProof, setUploadProof] = useState(null);

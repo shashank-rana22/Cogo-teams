@@ -16,7 +16,7 @@ const TABLE_HEADERS = [
 	'Remark',
 ];
 
-function ChildTableData({ LINE_ITEMS_KEYS_MAPPING, lineItems = [] }) {
+function ChildTableData({ LINE_ITEMS_KEYS_MAPPING = {}, lineItems = [] }) {
 	return (
 		<div
 			style={{ padding: '8px 8px', borderLeft: '2px solid black', borderRight: '2px solid black' }}
