@@ -92,12 +92,11 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateChapterModal }) => (
 		{
 			Header   : 'STATUS',
 			accessor : (item) => (
-				<div
-					className={styles.status}
-					style={{ background: item?.status === 'inactive' ? '#f8aea8' : '' }}
+				<Pill
+					className={item?.status === 'active' ? styles.active : styles.inactive}
 				>
 					{startCase(item?.status) || '-'}
-				</div>
+				</Pill>
 			),
 		},
 		{
