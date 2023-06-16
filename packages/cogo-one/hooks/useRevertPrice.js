@@ -95,7 +95,6 @@ const useRevertPrice = ({ item, setModalState, shipmentFlashBookingRates }) => {
 			shipmentFlashBookingRates({ page: 1 });
 			setModalState({ isOpen: false, data: {} });
 		} catch (error) {
-			console.log('error:', error);
 			Toast.error(getApiErrorString(error?.response?.data));
 		}
 	};
