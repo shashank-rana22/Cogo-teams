@@ -16,7 +16,7 @@ function PreferenceSetServiceData({ singleServiceData, price, shipmentData }) {
 		shipmentData,
 	});
 	const formatedData = getFormatedPreferenceSetData({ allPreferenceCardsData });
-	const formaredAvailableRatesData = getFormatedNotPreferenceData({ ratesDataNotPrefered });
+	const formaredAvailableRatesData = getFormatedNotPreferenceData({ ratesDataNotPrefered, singleServiceData });
 	return (
 		<div className={styles.container}>
 			<div className={styles.heading}>Preference Set</div>
@@ -25,7 +25,7 @@ function PreferenceSetServiceData({ singleServiceData, price, shipmentData }) {
 			))}
 			<div className={styles.heading}>Available Rates At that Time of Setting Preference</div>
 			{(formaredAvailableRatesData?.rows || [])?.map((item) => (
-				<Card data={item} rate_key serviceData={singleServiceData} price={price} key={item?.id}/>
+				<Card data={item} rate_key serviceData={singleServiceData} price={price} key={item?.id} />
 			))}
 		</div>
 	);

@@ -1,7 +1,6 @@
 const getFormatedRates = (type, data, singleServiceData) => {
 	const rows = [];
-	console.log(singleServiceData, 'singleServiceData');
-	const container_count = singleServiceData?.container_count || 1;
+	const container_count = singleServiceData?.containers_count || 1;
 	if (type === 'present' || type === 'current') {
 		(data || []).forEach((element) => {
 			const { completed_shipments = 0, cancelled_shipments = 0 } = element;

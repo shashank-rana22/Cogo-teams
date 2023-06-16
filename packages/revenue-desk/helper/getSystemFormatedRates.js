@@ -1,5 +1,5 @@
 const getSystemFormatedRates = (data, singleServiceData) => {
-	const container_count = singleServiceData?.container_count || 1;
+	const container_count = singleServiceData?.containers_count || 1;
 	const rows = [];
 	(data || []).forEach((element) => {
 		const { completed_shipments = 0, cancelled_shipments = 0 } = element;

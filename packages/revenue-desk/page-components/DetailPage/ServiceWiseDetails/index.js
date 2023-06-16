@@ -31,6 +31,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 		sellRateDetails,
 		rateOptions,
 	});
+	console.log(tabKeys, 'fffff',supplierPayload);
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_select_container}>
@@ -114,7 +115,6 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 					/>
 				) : null}
 		</div>
-
 	);
 }
 

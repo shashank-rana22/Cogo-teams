@@ -223,8 +223,6 @@ function Card({
 								data={data}
 								sellRates={sellRates}
 								setSellRates={setSellRates}
-								buyPricePerContainer={buyPricePerContainer}
-								currency={data?.rowData?.total_buy_currency}
 							/>
 						</div>
 					)}

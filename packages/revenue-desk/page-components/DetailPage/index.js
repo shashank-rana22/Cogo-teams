@@ -7,6 +7,7 @@ import iconMapping from '../../helper/iconMapping';
 import serviceLabelMapping from '../../helper/serviceLabelMapping';
 import useListShipmentServices from '../../hooks/useListShipmentservices';
 
+import CancelledShipmentCard from './CancelledShipmentCard';
 import LastShipmentDetails from './LastShipmentDetails';
 import PocSopModal from './PocSopModal';
 import QuotationDetails from './QuotationDetails';
@@ -14,7 +15,6 @@ import ServiceWiseDetails from './ServiceWiseDetails';
 import ShipmentCard from './ShipmentCard';
 import styles from './styles.module.css';
 import TransactionInsights from './TransactionInsights';
-import CancelledShipmentCard from './CancelledShipmentCard';
 
 function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 	const [showDetail, setShowDetail] = useState(true);
@@ -107,7 +107,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 				</div>
 
 			</div>
-			{itemData?.state==='cancelled'?<CancelledShipmentCard itemData={itemData} />:null}
+			{itemData?.state === 'cancelled' ? <CancelledShipmentCard itemData={itemData} /> : null}
 			<div className={styles.card_container}>
 				<ShipmentCard itemData={itemData} priceData={priceData} />
 			</div>
