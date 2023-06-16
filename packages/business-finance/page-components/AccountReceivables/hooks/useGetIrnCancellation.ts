@@ -46,8 +46,6 @@ const useGetIrnCancellation = ({
 
 	const TEXT_AREA = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('text_mapping');
 
-	const { remarks: remarkEntry } = responseRemark;
-
 	const onSubmit = async (values: Values) => {
 		const {
 			agreementNumber,
@@ -62,7 +60,7 @@ const useGetIrnCancellation = ({
 			let PAYLOAD = {};
 			if (TEXT_AREA) {
 				PAYLOAD = {
-					cancelReason      : remarkEntry || undefined,
+					cancelReason      : responseRemark?.remarks || undefined,
 					agreementNumber   : agreementNumber || undefined,
 					agreementDate     : agreementDate || undefined,
 					agreementDocument : finalUrl || undefined,
