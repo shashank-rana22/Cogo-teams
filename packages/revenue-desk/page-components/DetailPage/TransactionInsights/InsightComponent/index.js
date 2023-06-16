@@ -1,7 +1,5 @@
 import { Tooltip } from '@cogoport/components';
 
-import incoTermMapping from '../../../../helper/incoTermMapping';
-
 import styles from './styles.module.css';
 
 const KEY_MAPPING = {
@@ -23,9 +21,7 @@ const getOrdinalNumber = (number) => {
 
 function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 	const {
-		trade_type = '',
 		shipment_type = '',
-
 	} = data;
 
 	const {
@@ -67,8 +63,6 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 						<div style={{ display: 'flex' }}>
 							{getOrdinalNumber(service_trade_type_shipment_count)}
 							<div style={{ marginLeft: '5px' }}>
-								{trade_type.toUpperCase() || incoTermMapping[data?.inco_term].toUpperCase()}
-								{' '}
 								Transaction
 							</div>
 						</div>
@@ -79,8 +73,6 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 				<div style={{ display: 'flex' }}>
 					{getOrdinalNumber(service_port_pair_shipment_count)}
 					<div style={{ marginLeft: '5px' }}>
-						{trade_type.toUpperCase() || incoTermMapping[data?.inco_term].toUpperCase()}
-						{' '}
 						Transaction
 					</div>
 				</div>
