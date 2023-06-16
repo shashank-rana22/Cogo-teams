@@ -1,11 +1,8 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useState } from 'react';
 
-const useCreateSquad = ({ fetchList }) => {
-	const [showAddSquadModal, setShowAddSquadModal] = useState(false);
-
+const useCreateSquad = ({ fetchList, setShowUpdateSquadModal }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/create_squad',
@@ -19,7 +16,7 @@ const useCreateSquad = ({ fetchList }) => {
 				},
 			});
 			Toast.success('Successfully Created');
-			setShowAddSquadModal(false);
+			setShowUpdateSquadModal(false);
 			fetchList();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
@@ -27,8 +24,6 @@ const useCreateSquad = ({ fetchList }) => {
 	};
 
 	return {
-		showAddSquadModal,
-		setShowAddSquadModal,
 		onClickSubmitButton,
 		loading,
 	};

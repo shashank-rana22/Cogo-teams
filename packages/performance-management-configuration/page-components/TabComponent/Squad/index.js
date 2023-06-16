@@ -20,11 +20,11 @@ const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
 
 function Squad() {
-	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
+	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
 
 	const {
 		search, setSearch, columns, loading:listApiLoading, data, page, setPage, setShowDeleteModal,
-		showDeleteModal, deleteSquad, deleteLoading, fetchList, setShowUpdateSquadModal, showUpdateSquadModal,
+		showDeleteModal, deleteSquad, deleteLoading, fetchList, setShowSquadModal, showSquadModal,
 		activeTab, setActiveTab,
 
 	} = useSquad();
@@ -34,19 +34,18 @@ function Squad() {
 	const { total_count, page_limit } = paginationData || {};
 
 	const {
-		showAddSquadModal,
-		setShowAddSquadModal,
 		onClickSubmitButton,
 		loading:CreateLoading,
-	} = useCreateSquad({ fetchList });
+	} = useCreateSquad({ fetchList, setShowSquadModal });
 
 	const {
 		onClickUpdateButton,
 		loading: UpdateLoading,
-	} = useUpdateSquad({ fetchList, setShowUpdateSquadModal, showUpdateSquadModal });
+	} = useUpdateSquad({ fetchList, setShowSquadModal, showSquadModal });
 
 	const onClickAddButton = () => {
-		setShowAddSquadModal(true);
+		setShowSquadModal('add');
+		reset();
 	};
 
 	return (
@@ -73,7 +72,7 @@ function Squad() {
 				</div>
 			)}
 
-			{showAddSquadModal ? (
+			{/* {showAddSquadModal ? (
 				<CreateConfigurationModal
 					showModal={showAddSquadModal}
 					setShowModal={setShowAddSquadModal}
@@ -86,20 +85,20 @@ function Squad() {
 					handleSubmit={handleSubmit}
 					Type={MODAL_TYPE_ADD}
 				/>
-			) : null}
+			) : null} */}
 
-			{showUpdateSquadModal ? (
+			{showSquadModal ? (
 				<CreateConfigurationModal
-					showModal={showUpdateSquadModal}
-					setShowModal={setShowUpdateSquadModal}
+					showModal={showSquadModal}
+					setShowModal={setShowSquadModal}
 					label={ADD_BUTTON_LABEL}
 					controls={controls}
 					control={control}
 					errors={errors}
-					onClickSubmitButton={onClickUpdateButton}
-					loading={UpdateLoading}
+					onClickSubmitButton={showSquadModal === 'add' ? onClickSubmitButton : onClickUpdateButton}
+					loading={showSquadModal === 'add' ? CreateLoading : UpdateLoading}
 					handleSubmit={handleSubmit}
-					Type={MODAL_TYPE_UPDATE}
+					Type={showSquadModal === 'add' ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 				/>
 			) : null}

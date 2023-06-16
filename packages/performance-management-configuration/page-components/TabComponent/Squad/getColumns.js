@@ -28,7 +28,7 @@ function TooltipContent({ item = [] }) {
 	);
 }
 
-const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
+const getColumns = ({ setShowDeleteModal, setShowSquadModal }) => [
 	{
 		Header   : 'SQUAD NAME',
 		accessor : (item) => <div>{item?.squad_name || '-'}</div>,
@@ -105,7 +105,7 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
 					width={16}
 					height={16}
 					style={{ marginLeft: 12, cursor: 'pointer' }}
-					onClick={() => setShowUpdateSquadModal(item)}
+					onClick={() => setShowSquadModal(item)}
 				/>
 			</div>
 		) : (

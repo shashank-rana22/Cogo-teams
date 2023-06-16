@@ -12,7 +12,7 @@ const useSquad = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
-	const [showUpdateSquadModal, setShowUpdateSquadModal] = useState();
+	const [showSquadModal, setShowSquadModal] = useState(false);
 	const [activeTab, setActiveTab] = useState('active');
 
 	const [{ loading, data }, trigger] = useHarbourRequest(
@@ -48,7 +48,7 @@ const useSquad = () => {
 		fetchList();
 	}, [fetchList, page]);
 
-	const columns = getColumns({ setShowDeleteModal, setShowUpdateSquadModal });
+	const columns = getColumns({ setShowDeleteModal, setShowSquadModal });
 
 	return {
 		columns,
@@ -62,8 +62,8 @@ const useSquad = () => {
 		deleteLoading,
 		showDeleteModal,
 		setShowDeleteModal,
-		showUpdateSquadModal,
-		setShowUpdateSquadModal,
+		showSquadModal,
+		setShowSquadModal,
 		activeTab,
 		setActiveTab,
 	};

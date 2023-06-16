@@ -3,7 +3,7 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useUpdateSquad = ({ fetchList, setShowUpdateSquadModal, showUpdateSquadModal }) => {
+const useUpdateSquad = ({ fetchList, setShowSquadModal, showSquadModal }) => {
 	const { profile = {} } = useSelector((state) => state);
 
 	const { user = {} } = profile;
@@ -17,7 +17,7 @@ const useUpdateSquad = ({ fetchList, setShowUpdateSquadModal, showUpdateSquadMod
 
 	const onClickUpdateButton = async (values) => {
 		const { employee_ids, ...rest } = values;
-		const ARRAY_OF_IDS = showUpdateSquadModal.employees.map((obj) => obj.id);
+		const ARRAY_OF_IDS = showSquadModal.employees.map((obj) => obj.id);
 
 		const employees_added = (employee_ids || []).filter(
 			(id) => !(ARRAY_OF_IDS || []).includes(id),
@@ -29,7 +29,7 @@ const useUpdateSquad = ({ fetchList, setShowUpdateSquadModal, showUpdateSquadMod
 			await trigger({
 				data: {
 					...rest,
-					squad_id          : showUpdateSquadModal?.id,
+					squad_id          : showSquadModal?.id,
 					performed_by_id   : user_id,
 					performed_by_type : 'user',
 					employees_added,
@@ -37,7 +37,7 @@ const useUpdateSquad = ({ fetchList, setShowUpdateSquadModal, showUpdateSquadMod
 				},
 			});
 			Toast.success('Successfully Updated');
-			setShowUpdateSquadModal(false);
+			setShowSquadModal(false);
 			fetchList();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
