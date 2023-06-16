@@ -1563,6 +1563,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'platform_config',
 	},
+	{
+		api          : 'get_shipment_ftl_freight_spot_rate',
+		access_type  : 'private',
+		service_name : 'shipment',
+	},
 ];
 
 export default apis;
