@@ -41,11 +41,12 @@
 	align-items: center;
 	margin-left: 20px;
 }
+
 .header {
 	display: flex;
 	flex-direction: row;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 	margin: 12px 0;
 
 	:global {
@@ -53,5 +54,4 @@
 			height: 42px;
 		}
 	}
-	
-  }
+}

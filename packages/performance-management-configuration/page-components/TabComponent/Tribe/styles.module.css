@@ -2,53 +2,54 @@
 }
 
 .active {
-  width: fit-content;
-  padding: 0 6px;
-  background: var(--color-tertiary-success-green-3);
-  border-radius: 4px;
+	width: fit-content;
+	padding: 0 6px;
+	background: var(--color-tertiary-success-green-3);
+	border-radius: 4px;
 }
 
 .inactive {
-  width: fit-content;
-  padding: 0 6px;
-  background: var(--color-primary-error-red-4);
-  border-radius: 4px;
+	width: fit-content;
+	padding: 0 6px;
+	background: var(--color-primary-error-red-4);
+	border-radius: 4px;
 }
 
 .pagination_container {
-  display: flex;
-  justify-content: flex-start;
-  width: 100%;
-  padding-right: 20px;
-  padding-bottom: 20px;
+	display: flex;
+	justify-content: flex-start;
+	width: 100%;
+	padding-right: 20px;
+	padding-bottom: 20px;
 }
 
 .pill_box {
-  display: flex;
-  flex-flow: row wrap;
-  width: 300px;
+	display: flex;
+	flex-flow: row wrap;
+	width: 300px;
 
-  :global {
-    .tippy-box {
-      max-height: 400px;
-      overflow-y: scroll;
-    }
-  }
+	:global {
+		.tippy-box {
+			max-height: 400px;
+			overflow-y: scroll;
+		}
+	}
 }
 
 .button {
-  display: flex;
-  align-items: center;
-  margin-left: 20px;
+	display: flex;
+	align-items: center;
+	margin-left: 20px;
 }
 
 .header {
-  display: flex;
-  flex-direction: row;
-  justify-content: space-between;
-  align-items: center;
-  margin: 12px 0;
-  :global {
+	display: flex;
+	flex-direction: row;
+	align-items: center;
+	justify-content: space-between;
+	margin: 12px 0;
+
+	:global {
 		.ui_input_container {
 			height: 42px;
 		}
