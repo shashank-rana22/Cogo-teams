@@ -1,6 +1,5 @@
 import CargoDetails from './cargo-details';
 import styles from './styles.module.css';
-// import ServiceDetails from './MultiServiceDetails';
 
 function ListRightPart({ item = {} }) {
 	return (

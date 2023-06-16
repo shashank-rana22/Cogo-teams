@@ -8,6 +8,7 @@ const SERVICE_WISE_LABELS = {
 		'volume',
 		'weight',
 		'price_type',
+		'bl_category',
 		'master_airway_bill_number',
 		'house_airway_bill_number',
 		'payment_term',

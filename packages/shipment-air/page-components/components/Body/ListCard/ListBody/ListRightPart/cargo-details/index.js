@@ -10,12 +10,17 @@ function CargoDetails({ item = {} }) {
 
 	return (
 		<>
-			{(SERVICE_WISE_LABELS[shipment_type] || []).map((label) => (
-				<Pill key={label}>
-					{renderValue(label, item)}
-				</Pill>
+			{(SERVICE_WISE_LABELS[shipment_type] || []).map((label) => {
+				if (item?.[label] && renderValue(label, item)) {
+					return (
+						<Pill key={label}>
+							{renderValue(label, item)}
+						</Pill>
+					);
+				}
+				return null;
+			})}
 
-			))}
 		</>
 	);
 }
