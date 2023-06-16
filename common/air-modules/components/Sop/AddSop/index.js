@@ -59,7 +59,8 @@ function AddSop({
 		const { instruction_items = {}, heading = {}, conditions = {} } = formValues;
 		let hasIntructions = false;
 		if (instruction_items.length) {
-			if (instruction_items[ZEROTH_INDEX].instruction || instruction_items[ZEROTH_INDEX].file) {
+			if (instruction_items[GLOBAL_CONSTANTS.zeroth_index].instruction
+				|| instruction_items[GLOBAL_CONSTANTS.zeroth_index].file) {
 				hasIntructions = true;
 			}
 		}

@@ -63,7 +63,8 @@ function EditServiceCharges(props) {
 		if (allOptions.length && onOptionsChange) {
 			onOptionsChange({ [service_name]: allOptions });
 		}
-	}, [allOptions, onOptionsChange, service_name]);
+	// eslint-disable-next-line react-hooks/exhaustive-deps
+	}, [allOptions.length]);
 
 	return (
 		<div>
