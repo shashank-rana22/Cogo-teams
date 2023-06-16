@@ -1,18 +1,17 @@
 .tooltip_text {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 	word-break: break-word;
 	word-wrap: break-word;
-	white-space: pre-wrap;
 }
 
 .text {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }
 
 .customer_name {
 	margin-left: 24px;
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }

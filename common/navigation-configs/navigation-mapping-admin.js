@@ -884,7 +884,7 @@ const navigationMappingAdmin = {
 				as            : '/v2/business-finance/dunnings/campaign-management',
 				type          : 'link',
 				main_apis     : [],
-				possible_apis : apis.dunnings,
+				possible_apis : apis.business_finance_dunnings,
 			},
 			{
 				key           : 'business_finance-manual_invoice',

@@ -3,17 +3,19 @@ import { AsyncSelectController } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
 import React, { useState } from 'react';
 
+import { AddCustomerInterface } from '../../Interfaces';
+
 import styles from './styles.module.css';
 
 function AddCustomerModal({
 	show,
-	onClose,
+	setShow,
 	watch,
 	control,
 	handleSubmit,
 	getUploadList,
 	uploadListLoading,
-}) {
+}:AddCustomerInterface) {
 	const [fileValue, setFileValue] = useState('');
 
 	const selectCustomerName = watch();
@@ -27,7 +29,7 @@ function AddCustomerModal({
 	};
 
 	return (
-		<Modal size="md" show={show} onClose={onClose}>
+		<Modal size="md" show={show} onClose={() => setShow(false)}>
 			<Modal.Header title="Add To List - Upload List" />
 			<Modal.Body>
 				<div className={styles.body_container}>

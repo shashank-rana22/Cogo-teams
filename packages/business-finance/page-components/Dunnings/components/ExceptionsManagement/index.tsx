@@ -5,40 +5,68 @@ import cycleWiseExceptionTable from '../../configurations/cycle-wise-exception-t
 import masterExceptionColumn from '../../configurations/master-exception-table';
 import useMasterException from '../../hooks/useMasterException';
 
-import StyledTable from './StyledTable';
+import ExceptionList from './ExceptionList';
 import styles from './styles.module.css';
+
+const SUB_TAB = [
+	{
+		key   : 'masterExceptionList',
+		label : 'Master Exception List',
+	},
+	{
+		key   : 'cycleWiseExceptionList',
+		label : 'Cycle Wise Exception List',
+	},
+];
 
 function ExceptionsManagement() {
 	const [exceptionFilter, setExceptionFilter] = useState({});
 	const [showCycleExceptions, setShowCycleExceptions] = useState(false);
-	const [sort, setSort] = useState({});
 	const [subTabsValue, setSubTabsValue] = useState('masterExceptionList');
+	const [cycleListId, setCycleListId] = useState();
 	const {
-		data, loading, searchValue,
+		data,
+		masterExceptionLoading,
+		searchValue,
 		setSearchValue,
 		cycleWiseData,
-	} = useMasterException({ exceptionFilter, sort, subTabsValue });
-	const subTab = [
-		{
-			key   : 'masterExceptionList',
-			label : 'Master Exception List',
-		},
-		{
-			key   : 'cycleWiseExceptionList',
-			label : 'Cycle Wise Exception List',
-		},
-	];
+		deleteMasterException,
+		deleteMasterLoading,
+		sort,
+		setSort,
+		cycleWiseLoading,
+	} = useMasterException({ exceptionFilter, subTabsValue });
 
-	const CYCLE_WISE_COLUMN = cycleWiseExceptionTable({ setShowCycleExceptions });
-	const MASTER_COLUMN = masterExceptionColumn({ sort, setSort });
+	const CYCLE_WISE_COLUMN = cycleWiseExceptionTable({
+		sort,
+		setSort,
+		exceptionFilter,
+		setExceptionFilter,
+		setShowCycleExceptions,
+		setCycleListId,
+	});
+	const MASTER_COLUMN = masterExceptionColumn({
+		sort,
+		setSort,
+		deleteMasterException,
+		deleteMasterLoading,
+		exceptionFilter,
+		setExceptionFilter,
+	});
+	const SUB_TABS_VALUE = subTabsValue === 'masterExceptionList';
+
+	const loading = SUB_TABS_VALUE ? masterExceptionLoading : cycleWiseLoading;
 	const rest = { loading };
-	const { list, pageNo = 0, totalRecords } = data || {};
-	const { list:cycleList, pageNo :cyclePageNo = 0, totalRecords:cycleTotalRecords } = cycleWiseData || {};
+	const { list = [], pageNo = 0, totalRecords } = data || {};
+	const { list:cycleList = [], pageNo :cyclePageNo = 0, totalRecords:cycleTotalRecords } = cycleWiseData || {};
+
+	const finalTotalRecords = totalRecords > 0 ? totalRecords : list.length;
+	const finalCycleTotalRecords = cycleTotalRecords > 0 ? cycleTotalRecords : cycleList.length;
 
 	return (
 		<div>
 			<div className={styles.flex}>
-				{subTab?.map((item) => (
+				{SUB_TAB?.map((item) => (
 					<div
 						key={item.key}
 						onClick={() => {
@@ -48,15 +76,14 @@ function ExceptionsManagement() {
 					>
 						<div className={item.key === subTabsValue ? styles.sub_container_click : styles.sub_container}>
 							{item?.label}
-							<span>{subTabsValue === 'masterExceptionList' ? totalRecords : cycleTotalRecords}</span>
 						</div>
 					</div>
 				))}
 			</div>
 
-			<StyledTable
-				data={subTabsValue === 'masterExceptionList' ? list || [] : cycleList || []}
-				columns={subTabsValue === 'masterExceptionList' ? MASTER_COLUMN : CYCLE_WISE_COLUMN}
+			<ExceptionList
+				data={SUB_TABS_VALUE ? list || [] : cycleList || []}
+				columns={SUB_TABS_VALUE ? MASTER_COLUMN : CYCLE_WISE_COLUMN}
 				exceptionFilter={exceptionFilter}
 				setExceptionFilter={setExceptionFilter}
 				subTabsValue={subTabsValue}
@@ -64,13 +91,15 @@ function ExceptionsManagement() {
 				setSearchValue={setSearchValue}
 				showCycleExceptions={showCycleExceptions}
 				setShowCycleExceptions={setShowCycleExceptions}
+				cycleListId={cycleListId}
 				{...rest}
 			/>
-			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
+
+			<div className={styles.pagination}>
 				<Pagination
 					type="table"
-					currentPage={subTabsValue === 'masterExceptionList' ? pageNo : cyclePageNo}
-					totalItems={subTabsValue === 'masterExceptionList' ? totalRecords : cycleTotalRecords}
+					currentPage={SUB_TABS_VALUE ? pageNo : cyclePageNo}
+					totalItems={SUB_TABS_VALUE ? finalTotalRecords : finalCycleTotalRecords}
 					pageSize={10}
 					onPageChange={(pageValue: number) => {
 						setExceptionFilter((p) => ({ ...p, pageIndex: pageValue }));

@@ -1,12 +1,31 @@
+import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { useCallback, useEffect, useState } from 'react';
 
-const useMasterException = ({ exceptionFilter, sort, subTabsValue }) => {
-	const [searchValue, setSearchValue] = useState<string>('');
-	const { category = '', creditDays = 0 } = exceptionFilter || {};
+interface ExceptionFiltersInterface {
+	category?: string;
+	creditDays?: string ;
+	cycleStatus?: string;
+	pageIndex?: number;
+}
+interface Props {
+	exceptionFilter?: ExceptionFiltersInterface;
+	subTabsValue?: string;
+}
+const useMasterException = ({ exceptionFilter, subTabsValue }:Props) => {
+	const [searchValue, setSearchValue] = useState('');
+	const { category = '', creditDays = 0, cycleStatus = '', pageIndex } = exceptionFilter || {};
+	const { profile } = useSelector((state) => state);
+	const PROFILE_ID = profile?.user?.id;
 
-	const [{ data, loading }, trigger] = useRequestBf(
+	const [sort, setSort] = useState({
+		sortType : '',
+		sortBy   : '',
+	});
+
+	const [{ data, loading:masterExceptionLoading }, trigger] = useRequestBf(
 		{
 			url     : '/payments/dunning/master-exceptions',
 			method  : 'get',
@@ -25,15 +44,13 @@ const useMasterException = ({ exceptionFilter, sort, subTabsValue }) => {
 	const [{ loading: deleteMasterLoading }, deleteMasterApi] = useRequestBf(
 		{
 			url     : '/payments/dunning/delete-master-exception',
-			method  : 'psot',
+			method  : 'post',
 			authKey : 'get_payments_dunning_delete_master_exception',
 		},
 		{ manual: true },
 	);
 	const { query = '', debounceQuery } = useDebounceQuery();
-	// const SORT_KEY = Object.keys(sort);
-	// const SORT_VALUE = Object.values(sort);
-	// const sortingHandle = sort === 'Asc' || sort === 'Desc';
+
 	useEffect(() => {
 		debounceQuery(searchValue);
 	}, [searchValue, debounceQuery]);
@@ -46,45 +63,51 @@ const useMasterException = ({ exceptionFilter, sort, subTabsValue }) => {
 						segmentation : category || undefined,
 						creditDays   : creditDays ? parseInt(creditDays, 10) : undefined,
 						query        : query || undefined,
-						pageIndex    : exceptionFilter?.pageIndex,
-						// sortType     : SORT_KEY || undefined,
-						// sortBy       : SORT_VALUE || undefined,
+						pageIndex,
+						sortBy       : sort?.sortBy || undefined,
+						sortType     : sort?.sortType || undefined,
 					},
 				});
 			} catch (error) {
 				console.log(error);
 			}
 		})();
-	}, [category, creditDays, query, exceptionFilter, trigger]);
+	}, [category, creditDays, query, sort?.sortBy, pageIndex, sort?.sortType, trigger]);
 
 	const getCycleWiseList = useCallback(() => {
 		(async () => {
 			try {
 				await cycleWiseApi({
 					params: {
-						query     : query || undefined,
-						pageIndex : exceptionFilter?.pageIndex,
+						query       : query || undefined,
+						pageIndex,
+						cycleStatus : cycleStatus || undefined,
+						sortBy      : sort?.sortBy || undefined,
+						sortType    : sort?.sortType || undefined,
 					},
 				});
 			} catch (error) {
 				console.log(error);
 			}
 		})();
-	}, [query, exceptionFilter, cycleWiseApi]);
+	}, [query, pageIndex, sort?.sortBy, sort?.sortType, cycleStatus, cycleWiseApi]);
 
-	const deleteMasterException = useCallback(() => {
+	const deleteMasterException = useCallback((id, type) => {
 		(async () => {
 			try {
 				await deleteMasterApi({
 					params: {
-
+						id,
+						actionType : type,
+						updatedBy  : PROFILE_ID,
 					},
 				});
+				getMasterList();
 			} catch (error) {
-				console.log(error);
+				Toast.error(error?.message || 'Something went wrong');
 			}
 		})();
-	}, [deleteMasterApi]);
+	}, [deleteMasterApi, getMasterList, PROFILE_ID]);
 
 	useEffect(() => {
 		if (subTabsValue === 'masterExceptionList') {
@@ -96,13 +119,17 @@ const useMasterException = ({ exceptionFilter, sort, subTabsValue }) => {
 
 	return {
 		data,
-		loading,
+		masterExceptionLoading,
 		getMasterList,
 		cycleWiseData,
 		cycleWiseLoading,
 		getCycleWiseList,
 		searchValue,
 		setSearchValue,
+		deleteMasterLoading,
+		deleteMasterException,
+		sort,
+		setSort,
 
 	};
 };

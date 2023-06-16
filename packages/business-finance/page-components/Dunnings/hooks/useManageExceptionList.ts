@@ -2,9 +2,13 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-const useManageExceptionList = ({ manageExceptionFilter }) => {
-	const [searchValue, setSearchValue] = useState<string>('');
-
+interface Props {
+	manageExceptionFilter?: { pageIndex?: number };
+	cycleListId?: string;
+}
+const useManageExceptionList = ({ manageExceptionFilter, cycleListId }:Props) => {
+	const [searchValue, setSearchValue] = useState('');
+	const { pageIndex = 1 } = manageExceptionFilter || {};
 	const [{ data:manageExceptionData, loading:manageExceptionLoading }, trigger] = useRequestBf(
 		{
 			url     : '/payments/dunning/cycle-exception',
@@ -24,19 +28,17 @@ const useManageExceptionList = ({ manageExceptionFilter }) => {
 			try {
 				await trigger({
 					params: {
-						cycleId : 'be',
+						cycleId : cycleListId || undefined,
 						query   : query || undefined,
+						pageIndex,
 					},
 				});
 			} catch (error) {
 				console.log(error);
 			}
 		})();
-	}, [trigger, query]);
+	}, [trigger, cycleListId, query, pageIndex]);
 
-	useEffect(() => {
-		getManageExceptionList();
-	}, [getManageExceptionList]);
 	return {
 		manageExceptionData,
 		manageExceptionLoading,

@@ -3,7 +3,7 @@
 		padding: 24px 16px;
 		margin-bottom: 0 !important;
 		overflow: unset;
-		background-color: #ffff;
+		background-color: var(--color-secondary-5);
 
 		.ui_table_container {
 			border: none;
@@ -12,36 +12,27 @@
 		.ui_table_body_cell {
 			padding: 21px 10px !important;
 			overflow: unset;
-			border-bottom: 1px solid #acdadf;
 		}
 
 		.ui_table_head_cell {
-			background: #acdadf;
-			border-bottom: 2px solid #acdadf;
+			border-bottom: 1px solid var(--color-accent-orange-2);
 		}
 
 		.ui_table_body_row {
 			position: relative;
-			border: 1px solid #acdadf;
-			border-radius: 2px;
 		}
 
 		.ui_table_head_cell:first-child {
 			padding: 0 0 0 30px;
-		}
-
-		.ui_table_body_row:hover {
-			background-color: #f3fafa !important;
 		}
 	}
 }
 
 .container {
 	padding: 100px 0;
-	margin-top: -16px;
 	margin-bottom: 16px;
 	text-align: center;
-	background-color: #fff;
+	background-color: var(--color-secondary-5);
 }
 
 .img_height {

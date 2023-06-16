@@ -6,37 +6,41 @@ import React, { useState } from 'react';
 import Filter from '../../../../commons/Filters';
 import { exceptionMasterFilters, exceptionCycleWiseFilters } from '../../../configurations/exceptions-filters';
 import useAddUploadList from '../../../hooks/useAddUploadList';
+import { FilterProps } from '../Interfaces';
 
 import AddCustomerModal from './AddCustomerModal';
 import ManageExceptionsModal from './ManageExceptionsModal';
 import styles from './styles.module.css';
 
-interface Props {
-	setExceptionFilter?:React.Dispatch<React.SetStateAction<object>>;
-	exceptionFilter?:object
-	subTabsValue?: string
-	searchValue?:string;
-	setSearchValue?: React.Dispatch<React.SetStateAction<string>>;
-	showCycleExceptions?: boolean;
-	setShowCycleExceptions?:React.Dispatch<React.SetStateAction<boolean>>;
-}
 function Filters({
-	exceptionFilter, setExceptionFilter, subTabsValue, searchValue,
+	exceptionFilter,
+	setExceptionFilter,
+	subTabsValue,
+	searchValue,
 	showCycleExceptions,
 	setShowCycleExceptions,
 	setSearchValue,
-}:Props) {
+	cycleListId,
+}:FilterProps) {
 	const [show, setShow] = useState(false);
+	const [uncheckedRows, setUncheckedRows] = useState([]);
+
+	const { control, handleSubmit, watch, reset } = useForm();
 
 	const onClose = () => {
-		setShow((pv) => !pv);
+		setShow(false);
+		setShowCycleExceptions(false);
+		reset();
+		setUncheckedRows([]);
 	};
-	const { getUploadList, uploadListLoading } = useAddUploadList({ onClose, subTabsValue, setShowCycleExceptions });
-	const { control, handleSubmit, watch } = useForm();
 
-	// const onSubmit = (data) => {
-	// 	getUploadList(data, fileValue);
-	// };
+	const { getUploadList, uploadListLoading } = useAddUploadList({
+		onClose,
+		subTabsValue,
+		setShowCycleExceptions,
+		cycleListId,
+		uncheckedRows,
+	});
 
 	return (
 
@@ -79,7 +83,7 @@ function Filters({
 				&& (
 					<AddCustomerModal
 						show={show}
-						onClose={onClose}
+						setShow={setShow}
 						watch={watch}
 						control={control}
 						handleSubmit={handleSubmit}
@@ -96,6 +100,9 @@ function Filters({
 						handleSubmit={handleSubmit}
 						getUploadList={getUploadList}
 						uploadListLoading={uploadListLoading}
+						cycleListId={cycleListId}
+						uncheckedRows={uncheckedRows}
+						setUncheckedRows={setUncheckedRows}
 					/>
 				)}
 			</div>

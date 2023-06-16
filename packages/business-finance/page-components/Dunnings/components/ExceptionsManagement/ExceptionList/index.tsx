@@ -1,17 +1,25 @@
 import { Table } from '@cogoport/components';
 import React from 'react';
 
-import { TableListProps } from '../../../commons/Interfaces';
 import Filters from '../Filters';
+import { TableListProps } from '../Interfaces';
 
 import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
-function StyledTable({
-	id, className, columns, data, setExceptionFilter, exceptionFilter, subTabsValue, searchValue,
+function ExceptionList({
+	id,
+	className,
+	columns,
+	data,
+	setExceptionFilter,
+	exceptionFilter,
+	subTabsValue,
+	searchValue,
 	showCycleExceptions,
 	setShowCycleExceptions,
 	setSearchValue,
+	cycleListId,
 	...rest
 }:TableListProps) {
 	const { loading } = rest || {};
@@ -26,6 +34,7 @@ function StyledTable({
 				setSearchValue={setSearchValue}
 				showCycleExceptions={showCycleExceptions}
 				setShowCycleExceptions={setShowCycleExceptions}
+				cycleListId={cycleListId}
 			/>
 			<Table
 				columns={columns}
@@ -42,4 +51,4 @@ function StyledTable({
 	);
 }
 
-export default StyledTable;
+export default ExceptionList;

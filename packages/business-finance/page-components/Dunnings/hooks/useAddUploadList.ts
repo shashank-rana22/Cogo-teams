@@ -1,10 +1,26 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { isEmpty } from '@cogoport/utils';
 import { useCallback } from 'react';
 
-const useAddUploadList = ({ onClose, subTabsValue, setShowCycleExceptions }) => {
-	const { profile } = useSelector((store) => store);
+interface AddUploadInterface {
+	onClose?: () => void;
+	subTabsValue?: string;
+	setShowCycleExceptions?: React.Dispatch<React.SetStateAction<boolean>>;
+	cycleListId?: string;
+	uncheckedRows?: Array<string>;
+}
 
+const useAddUploadList = ({
+	onClose,
+	subTabsValue,
+	setShowCycleExceptions,
+	cycleListId,
+	uncheckedRows = [],
+}:AddUploadInterface) => {
+	const { profile } = useSelector((store) => store);
+	const SUB_TABS_VALUES = subTabsValue === 'masterExceptionList';
 	const [{ loading:uploadListLoading }, trigger] = useRequestBf(
 		{
 			url     : '/payments/dunning/create-exceptions',
@@ -13,28 +29,31 @@ const useAddUploadList = ({ onClose, subTabsValue, setShowCycleExceptions }) => 
 		},
 		{ manual: true },
 	);
-
 	const PROFILE_ID = profile?.user?.id;
+	const UN_CHECKED_DATA = uncheckedRows.length > 0;
+
 	const getUploadList = useCallback((data, fileValue) => {
 		(async () => {
 			try {
 				await trigger({
 					data: {
-						excludedRegistrationNos : data.excludedRegistrationNos,
-						exceptionType           : subTabsValue === 'masterExceptionList' ? 'MASTER' : 'CYCLE_WISE',
-						exceptionFile           : fileValue,
-						actionType              : 'UPLOAD',
-						createdBy               : PROFILE_ID,
-						cycleId                 : 'be',
+						excludedRegistrationNos: !isEmpty(data.excludedRegistrationNos)
+							? data.excludedRegistrationNos : uncheckedRows,
+						exceptionType : SUB_TABS_VALUES ? 'MASTER' : 'CYCLE_WISE',
+						exceptionFile : fileValue,
+						actionType    : UN_CHECKED_DATA ? 'DELETE' : 'UPLOAD',
+						createdBy     : PROFILE_ID,
+						cycleId       : SUB_TABS_VALUES ? undefined : cycleListId || undefined,
 					},
 				});
 				onClose();
 				setShowCycleExceptions(false);
 			} catch (error) {
-				console.log(error);
+				Toast.error(error?.message);
 			}
 		})();
-	}, [trigger, PROFILE_ID, onClose, setShowCycleExceptions, subTabsValue]);
+	}, [trigger, PROFILE_ID, onClose, setShowCycleExceptions, SUB_TABS_VALUES,
+		uncheckedRows, UN_CHECKED_DATA, cycleListId]);
 
 	return {
 

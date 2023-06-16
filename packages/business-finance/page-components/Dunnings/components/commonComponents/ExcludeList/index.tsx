@@ -5,8 +5,21 @@ import StyledTable from '../../../../AccountReceivables/commons/styledTable';
 import { config } from './config';
 import styles from './styles.module.css';
 
-function ExcludeList({ data, uncheckedRows, setUncheckedRows, loading, setFilters }) {
-	const { list = [], pageNo = 0, totalPages = 0, totalRecords } = data || {};
+export interface ListDataProps {
+	list: object[];
+	pageNo?: number;
+	totalRecords?: number;
+}
+interface ExcludeListInterface {
+	data?: ListDataProps;
+	uncheckedRows?: string[];
+	setUncheckedRows?: React.Dispatch<React.SetStateAction<string[]>>;
+	loading?: boolean;
+	setFilters?: React.Dispatch<React.SetStateAction<object>>;
+}
+
+function ExcludeList({ data, uncheckedRows, setUncheckedRows, loading, setFilters }:ExcludeListInterface) {
+	const { list = [], pageNo = 0, totalRecords } = data || {};
 	return (
 		<>
 			<div className={styles.table}>
@@ -24,7 +37,7 @@ function ExcludeList({ data, uncheckedRows, setUncheckedRows, loading, setFilter
 					type="table"
 					currentPage={pageNo}
 					totalItems={totalRecords}
-					pageSize={totalPages}
+					pageSize={10}
 					onPageChange={(pageValue: number) => {
 						setFilters((p) => ({ ...p, pageIndex: pageValue }));
 					}}

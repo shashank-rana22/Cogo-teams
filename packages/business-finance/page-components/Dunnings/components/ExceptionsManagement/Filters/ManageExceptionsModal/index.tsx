@@ -1,9 +1,10 @@
 import { Modal, Button, Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 
 import useManageExceptionList from '../../../../hooks/useManageExceptionList';
 import ExcludeList from '../../../commonComponents/ExcludeList';
+import { ManageExceptionInterface } from '../../Interfaces';
 
 function ManageExceptionsModal({
 	showCycleExceptions,
@@ -12,24 +13,35 @@ function ManageExceptionsModal({
 	handleSubmit,
 	getUploadList,
 	uploadListLoading,
-}) {
-	const onClose = () => {
-		setShowCycleExceptions((pv) => !pv);
-	};
-	const [uncheckedRows, setUncheckedRows] = useState([]);
+	cycleListId,
+	uncheckedRows,
+	setUncheckedRows,
+}:ManageExceptionInterface) {
 	const [manageExceptionFilter, setManageExceptionFilter] = useState({});
 	const {
 		manageExceptionData,
 		manageExceptionLoading,
 		searchValue,
 		setSearchValue,
-	} = useManageExceptionList({ manageExceptionFilter });
+		getManageExceptionList,
+	} = useManageExceptionList({ manageExceptionFilter, cycleListId });
 
 	const onSubmit = (data) => {
 		getUploadList(data);
 	};
+	const showAddCustomerModal = uncheckedRows.length > 0;
+
+	useEffect(() => {
+		getManageExceptionList();
+	}, [getManageExceptionList, showCycleExceptions]);
+
 	return (
-		<Modal size="lg" show={showCycleExceptions} onClose={onClose} placement="center">
+		<Modal
+			size="lg"
+			show={showCycleExceptions}
+			onClose={() => { setShowCycleExceptions(false); setUncheckedRows([]); }}
+			placement="center"
+		>
 			<Modal.Header title="Manage Exceptions" />
 			<Modal.Body>
 
@@ -38,6 +50,7 @@ function ManageExceptionsModal({
 						size="md"
 						themeType="secondary"
 						onClick={() => setShow(true)}
+						disabled={showAddCustomerModal}
 					>
 						+ Add New Customer
 
@@ -79,7 +92,6 @@ function ManageExceptionsModal({
 					</div>
 				)}
 				<Button
-				// onClick={onClose}
 					onClick={handleSubmit(onSubmit)}
 					disabled={uploadListLoading}
 				>

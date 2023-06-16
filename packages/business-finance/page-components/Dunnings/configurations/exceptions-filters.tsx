@@ -55,11 +55,11 @@ export const exceptionCycleWiseFilters = [
 		options     : [
 			{
 				label : 'ACTIVE',
-				value : 'active',
+				value : 'ACTIVE',
 			},
 			{
 				label : 'INACTIVE',
-				value : 'inactive',
+				value : 'INACTIVE',
 			},
 		],
 
