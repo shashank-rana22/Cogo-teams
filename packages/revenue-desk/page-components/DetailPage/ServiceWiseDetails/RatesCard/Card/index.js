@@ -62,13 +62,6 @@ function Card({
 		profitability = (Number(parseFloat(price?.replace(/[^0-9.-]+/g, ''))) - Number(data?.rowData?.total_buy_price))
 		/ Number(data?.rowData?.total_buy_price);
 	}
-	let netTotalBuyPrice=Number(data?.rowData?.total_buy_price);
-	if(data?.rowData?.origin_locals_price ){
-		netTotalBuyPrice+=Number(data?.rowData?.origin_locals_price)
-	}
-	if(data?.rowData?.destination_locals_price ){
-		netTotalBuyPrice+=Number(data?.rowData?.destination_locals_price)
-	}
 	return (
 		<div className={rate_key ? styles.selected_rate_card_container : styles.container}
 			role="presentation"
@@ -98,7 +91,7 @@ function Card({
 					</div>
 					{rate_key ? (
 						<div>
-							<Pill size="md" color="#F2F3FA">{fromkey}</Pill>
+							<Pill size="md" color="#F2F3FA">{startCase(fromkey || data?.rowData?.source)}</Pill>
 						</div>
 					) : null}
 
@@ -135,7 +128,7 @@ function Card({
 								Fulfillment Ratio
 							</div>
 							<div className={styles.progress_bar_container}>
-								<ProgressBar progress={Number(data?.rowData?.fulfillment_ratio) * 100} uploadText=" " />
+								<ProgressBar progress={Number(data?.rowData?.fulfillment_ratio) * 100} uploadText=" "/>
 							</div>
 						</div>
 					</div>
@@ -206,36 +199,7 @@ function Card({
 							}
 						</div>
 					</div>
-					<div className={styles.total_price_section}>
-							<div style={{display:'flex'}}>
-								Total Buy Price :
-								<div className={styles.total_price_text}>
-									{formatAmount({
-												amount   :netTotalBuyPrice,
-												currency :data?.rowData?.total_buy_currency,
-												options  : {
-													style                 : 'currency',
-													currencyDisplay       : 'code',
-													maximumFractionDigits : 2,
-												},
-										})}
-								</div>
-									
-						<div style={{ display: 'flex' }}>
-							Total Buy Price : &nbsp;
-							<div className={styles.total_price_text}>
-								{formatAmount({
-									amount   : data?.rowData?.total_buy_price,
-									currency : data?.rowData?.total_buy_currency,
-									options  : {
-										style                 : 'currency',
-										currencyDisplay       : 'code',
-										maximumFractionDigits : 2,
-									},
-								})}
-							</div>
-
-						</div>
+					<div className={styles.total_price_section}>							
 						<div style={{ display: 'flex' }}>
 							Profitability : &nbsp;
 							<div className={Number(profitability) > 0 ? styles.positive_profit : styles.negative_profit}>
@@ -258,7 +222,6 @@ function Card({
 
 			</div>
 		</div>
-	</div>
 	);
 }
 export default Card;

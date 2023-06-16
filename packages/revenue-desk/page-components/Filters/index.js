@@ -11,6 +11,7 @@ function Filters({ filters, setFilters }) {
 		shipmentStatusArray, tradeTypeArray, rdStatusArray,
 		shipmentSourceArray, departureDateArray, createdDateArray, cargoDateArray,
 	} = getFiltersTagsArray(filters);
+	
 	return (
 		<div className={styles.filter}>
 			<div className={styles.tag_outer_container}>
@@ -111,6 +112,7 @@ function Filters({ filters, setFilters }) {
 							setFilters({
 								...filters,
 								rd_state : val,
+								state : val === 'active' ? 'active' : filters?.state,
 								page     : 1,
 							});
 						}}

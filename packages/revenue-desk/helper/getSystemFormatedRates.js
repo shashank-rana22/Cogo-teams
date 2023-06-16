@@ -63,7 +63,6 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.schedule_type = schedule_type;
 		rowData.unit=unit;
 		rowData.active_booking = element?.ongoing_shipment;
-		rowData.service_provider = element?.service_provider;
 		rowData.allocation_ratio = undefined;
 		rowData.fulfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
 			? Number(completed_shipments)

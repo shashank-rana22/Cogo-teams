@@ -10,13 +10,6 @@ function SingleSelectedCard({ data, index, price, shipmentType }) {
 		profitability = (Number(parseFloat(price?.replace(/[^0-9.-]+/g, ''))) - Number(data?.rowData?.total_buy_price))
 		/ Number(data?.rowData?.total_buy_price);
 	}
-	let netTotalBuyPrice=Number(data?.rowData?.total_buy_price);
-	if(data?.rowData?.origin_locals_price ){
-		netTotalBuyPrice+=Number(data?.rowData?.origin_locals_price)
-	}
-	if(data?.rowData?.destination_locals_price ){
-		netTotalBuyPrice+=Number(data?.rowData?.destination_locals_price)
-	}
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section_container}>
@@ -59,7 +52,7 @@ function SingleSelectedCard({ data, index, price, shipmentType }) {
 								Total Buy Price :
 								<div className={styles.total_price_text}>
 									{formatAmount({
-												amount   :netTotalBuyPrice,
+												amount   :data?.rowData?.total_buy_price ,
 												currency :data?.rowData?.total_buy_currency,
 												options  : {
 													style                 : 'currency',
