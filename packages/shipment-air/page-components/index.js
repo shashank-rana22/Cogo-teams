@@ -12,11 +12,11 @@ function ShipmentAir() {
 
 	const { debounceQuery, query: searchQuery } = useDebounceQuery();
 
-	const { data } = useListShipment({ serviceActiveTab, shipmentStateTab, searchQuery });
+	const { data, filters, setFilters } = useListShipment({ serviceActiveTab, shipmentStateTab, searchQuery });
 	return (
 		<div>
 			<h1>
-				Air Bookings
+				Air Bookings Desk
 			</h1>
 			<Header
 				serviceActiveTab={serviceActiveTab}
@@ -24,7 +24,10 @@ function ShipmentAir() {
 				shipmentStateTab={shipmentStateTab}
 				setShipmentStateTab={setShipmentStateTab}
 				debounceQuery={debounceQuery}
+				setFilters={setFilters}
+				filters={filters}
 			/>
+
 			<Body data={data} />
 		</div>
 	);

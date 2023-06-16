@@ -4,6 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCopy } from '@cogoport/icons-react';
 import { startCase, upperCase } from '@cogoport/utils';
 
+import styles from './styles.module.css';
+
 const renderValue = (props = '', item = {}) => {
 	const {
 		airline = {},
@@ -62,7 +64,7 @@ const renderValue = (props = '', item = {}) => {
 		case 'master_airway_bill_number':
 
 			return (
-				<>
+				<div className={styles.mawb_container}>
 					<span>
 						MAWB Number:
 						{' '}
@@ -70,11 +72,12 @@ const renderValue = (props = '', item = {}) => {
 					</span>
 					<Button
 						className="secondary sm"
+						themeType="secondary"
 						onClick={() => copyToClipboard(item?.master_airway_bill_number || '')}
 					>
 						<IcMCopy />
 					</Button>
-				</>
+				</div>
 			);
 
 		case 'awb_execution_date':

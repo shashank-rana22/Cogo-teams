@@ -1,0 +1,13 @@
+.mawb_container {
+  display: flex;
+  svg {
+    padding: 0px;
+    background-color: transparent;
+    color: red;
+    height: 16px;
+    :hover {
+      background-color: none;
+      border: "none";
+    }
+  }
+}

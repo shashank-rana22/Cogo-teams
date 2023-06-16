@@ -1832,6 +1832,9 @@ importers:
 
   packages/shipment-air:
     dependencies:
+      '@cogoport/air-modules':
+        specifier: workspace:1.0.0
+        version: link:../../common/air-modules
       '@cogoport/components':
         specifier: ^1.0.322
         version: 1.0.423(@babel/core@7.22.1)(@cogoport/icons-react@1.0.76)(react-dom@18.2.0)(react@18.2.0)

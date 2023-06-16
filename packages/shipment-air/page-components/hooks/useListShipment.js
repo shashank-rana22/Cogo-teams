@@ -1,5 +1,5 @@
 import { useRequest } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 const SHIPMENT_STATE_MAPPINGS = {
 	ongoing   : ['shipment_received', 'confirmed_by_importer_exporter', 'in_progress'],
@@ -7,6 +7,7 @@ const SHIPMENT_STATE_MAPPINGS = {
 	cancelled : ['cancelled'],
 };
 const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) => {
+	const [filters, setFilters] = useState({});
 	const [{ loading, data }, trigger] = useRequest({
 		url    : 'list_shipments',
 		method : 'GET',
@@ -27,6 +28,7 @@ const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) =>
 			filters : {
 				state         : SHIPMENT_STATE_MAPPINGS[shipmentStateTab],
 				shipment_type : serviceActiveTab,
+				...filters,
 			},
 		};
 		try {
@@ -38,11 +40,13 @@ const useListShipment = ({ serviceActiveTab, shipmentStateTab, searchQuery }) =>
 
 	useEffect(() => {
 		apiTrigger();
-	}, [serviceActiveTab, shipmentStateTab, searchQuery]);
+	}, [serviceActiveTab, shipmentStateTab, searchQuery, filters]);
 
 	return {
 		loading,
+		filters,
 		apiTrigger,
+		setFilters,
 		data,
 
 	};
