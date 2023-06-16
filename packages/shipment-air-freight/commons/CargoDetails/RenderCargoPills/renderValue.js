@@ -21,7 +21,8 @@ export const renderValue = (label, detail = {}) => {
 
 	const commodityDataDetails = commodity_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 
-	const valueForInput = (Array.isArray(packages) && !isEmpty(packages) && packages[GLOBAL_CONSTANTS.zeroth_index]) || {};
+	const valueForInput = (Array.isArray(packages) && !isEmpty(packages) && packages[GLOBAL_CONSTANTS.zeroth_index])
+	|| {};
 
 	const chargableWeight = Number(chargeable_weight)
 					|| Math.max(volume * CONSTANTS.AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO, weight);
