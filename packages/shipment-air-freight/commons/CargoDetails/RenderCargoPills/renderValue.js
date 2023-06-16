@@ -14,12 +14,8 @@ const SINGLE_PACKAGE = 1;
 
 export const renderValue = (label, detail = {}) => {
 	const {
-		packages = [], chargeable_weight, volume, weight, commodity,
-		airline = {}, packages_count, trade_type, payment_term,
-		inco_term, price_type, service_type, source, schedule_departure,
-		selected_schedule_departure, selected_schedule_arrival, schedule_arrival,
-		booking_note_deadline, bl_category, bl_type, cargo_readiness_date,
-		supplier_poc, shipper_details, buy_quotation_agreed_rates, hs_code = {},
+		packages = [], chargeable_weight, volume, weight, commodity, airline = {}, packages_count, trade_type,
+		payment_term, inco_term, price_type, service_type, source, bl_category, cargo_readiness_date,
 		master_airway_bill_number, house_airway_bill_number, commodity_details, commodity_type, commodity_sub_type,
 	} = detail;
 
@@ -67,28 +63,6 @@ export const renderValue = (label, detail = {}) => {
 		}
 		return `Package: ${inputValue}`;
 	};
-
-	const formatPocData = (pocDetails) => {
-		const { name, mobile_country_code, mobile_number, email } = pocDetails || {};
-		return (
-			<div>
-				<div>{name}</div>
-				<div>
-					{mobile_country_code}
-					-
-					{mobile_number}
-				</div>
-				<div>{email}</div>
-			</div>
-		);
-	};
-
-	const formatShipperDetails = (shipperDetails) => (
-		<div>
-			<div>{shipperDetails?.name}</div>
-			<div>{shipperDetails?.address}</div>
-		</div>
-	);
 
 	const commodityDetails = () => (
 		<div>
@@ -141,26 +115,12 @@ export const renderValue = (label, detail = {}) => {
 			return source === 'direct'
 				? 'Sell Without Buy'
 				: startCase(source || '');
-		case 'schedule_departure':
-			return format(schedule_departure || selected_schedule_departure, 'dd MMM yyyy');
-		case 'schedule_arrival':
-			return format(schedule_arrival || selected_schedule_arrival, 'dd MMM yyyy');
-		case 'booking_note_deadline':
-			return format(booking_note_deadline, 'dd MMM yyyy - hh:mm aaa');
 		case 'bl_category':
 			return upperCase(bl_category);
-		case 'bl_type':
-			return upperCase(bl_type);
 		case 'cargo_readiness_date':
 			return format(cargo_readiness_date, 'dd MMM yyyy');
-		case 'supplier_poc':
-			return formatPocData(supplier_poc || {});
-		case 'shipper_details':
-			return formatShipperDetails(shipper_details || {});
-		case 'buy_quotation_agreed_rates':
-			return `${buy_quotation_agreed_rates?.toFixed(REQUIRED_DECIMAL_DIGIT)} USD`;
-		case 'hs_code':
-			return `${hs_code?.hs_code} - ${hs_code?.name}`;
+		case 'is_minimum_price_shipment':
+			return 'Min. Price';
 		case 'master_airway_bill_number':
 			return (
 				<div className={styles.mawb_container}>

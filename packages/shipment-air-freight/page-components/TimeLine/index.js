@@ -22,12 +22,6 @@ function Timeline() {
 		getShipmentTimeline,
 	} = useContext(ShipmentDetailContext);
 
-	useEffect(() => {
-		if (shipment_data?.id) {
-			getShipmentTimeline();
-		}
-	}, [getShipmentTimeline, shipment_data?.id]);
-
 	const showEditScheduleIcon = canEditSchedule({ primary_service, stakeholderConfig });
 
 	const filteredTimelineData = (timelineData).filter(
@@ -37,6 +31,12 @@ function Timeline() {
 	const totalItems = (filteredTimelineData || []).length;
 
 	let consecutivelyCompleted = true;
+
+	useEffect(() => {
+		if (shipment_data?.id) {
+			getShipmentTimeline();
+		}
+	}, [getShipmentTimeline, shipment_data?.id]);
 
 	if (loading) {
 		return (

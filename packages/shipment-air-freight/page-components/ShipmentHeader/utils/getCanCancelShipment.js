@@ -1,7 +1,5 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const { vinod_talapa_user_id } = GLOBAL_CONSTANTS.uuid;
-
 const SHIPMENT_CANCELLATION_STATES = [
 	'shipment_received',
 	'confirmed_by_importer_exporter',
@@ -22,7 +20,7 @@ export default function getCanCancelShipment({ shipment_data, primary_service, u
 
 	const isStakeholderAllowed = !!stakeholderConfig?.cancel_shipment?.can_cancel;
 
-	const allowedId = user_data?.id === vinod_talapa_user_id;
+	const allowedId = user_data?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id;
 
 	return isShipmentInCancellationState && isServiceInCancellationState && (isStakeholderAllowed || allowedId);
 }
