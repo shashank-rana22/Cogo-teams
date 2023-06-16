@@ -43,9 +43,10 @@ const useGetIrnCancellation = ({
 		{ manual: true },
 	);
 
-	const RADIO_GROUP = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('radio_mapping');
+	const CANCEL_IRN = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('cancel_irn');
 
-	const TEXT_AREA = GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]?.feature_supported?.includes('text_mapping');
+	const CANCEL_EINVOICE =	 GLOBAL_CONSTANTS.cogoport_entities?.[entityCode]
+		?.feature_supported?.includes('cancel_e_invoice');
 
 	const onSubmit = async (values: Values) => {
 		const {
@@ -57,14 +58,14 @@ const useGetIrnCancellation = ({
 
 		try {
 			let PAYLOAD = {};
-			if (TEXT_AREA) {
+			if (CANCEL_EINVOICE) {
 				PAYLOAD = {
 					cancelReason      : response?.remarks || undefined,
 					agreementNumber   : agreementNumber || undefined,
 					agreementDate     : agreementDate || undefined,
 					agreementDocument : finalUrl || undefined,
 				};
-			} else if (RADIO_GROUP) {
+			} else if (CANCEL_IRN) {
 				PAYLOAD = {
 					cancelReason   : response?.value,
 					cancelReminder : response?.remarks,
