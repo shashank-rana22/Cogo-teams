@@ -93,11 +93,12 @@ export default function Filters({ setStateProps, stateProps }) {
 			</div>
 			<div className={styles.right_filters}>
 				<Input
-					placeholder="Search SID"
+					placeholder={stateProps.activeTab === 'bl' ? 'Search by SID, BL No.' : 'Search by SID'}
 					type="search"
 					size="sm"
 					value={stateProps.q}
 					onChange={(val) => setStateProps({ ...stateProps, q: val })}
+					className={styles.search_filter}
 				/>
 				<div className={styles.scope_container}>
 					<ScopeSelect size="md" showChooseAgent={false} />

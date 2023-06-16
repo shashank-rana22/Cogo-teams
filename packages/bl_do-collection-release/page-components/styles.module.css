@@ -41,6 +41,10 @@
 	background-color: #fff;
 	border-radius: 6px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
+
+	@media (max-width: 1068px) {
+		padding: 6px;
+	}
 }
 
 .active.service_tab {

@@ -10,6 +10,10 @@
 			width: 24%;
 		}
 	}
+
+	@media (max-width: 868px) {
+		flex-direction: column;
+	}
 }
 
 .select_filter {
@@ -20,6 +24,10 @@
 	display: flex;
 	align-items: center;
 	justify-content: flex-end;
+
+	@media (max-width: 868px) {
+		margin-top: 8px;
+	}
 }
 
 .service_tabs {
@@ -81,4 +89,9 @@
 
 .text {
 	font-weight: 600;
+}
+
+.search_filter {
+	min-width: 200px;
+	margin-left: 4px;
 }
