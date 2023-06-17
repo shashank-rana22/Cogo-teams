@@ -23,7 +23,6 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 	const STEP_CHANGE = 1;
 
 	const [formData, setFormData] = useState({
-		triggerType   : 'oneTime',
 		frequency     : 'DAILY',
 		severityLevel : '1',
 		timezone      : 'IST',

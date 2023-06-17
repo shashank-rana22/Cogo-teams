@@ -14,14 +14,20 @@ interface FormData {
 	monthDay?:string,
 	timezone?:string,
 	time?:Date,
+	isAllCreditControllers?:boolean,
+	creditController?:string[],
+	oneTimeDate?:Date,
 }
 
 interface Props {
 	formData?:FormData,
-	setFormData?:(p:object)=>void
+	setFormData?:(p:object)=>void,
+	isEditMode?:boolean,
+	cycleData?:object,
 }
 
-function FormLayout({ formData, setFormData }:Props) {
+function FormLayout({ formData, setFormData, isEditMode=false }:Props) {
+	
 	const {
 		triggerType, frequency, weekDay, monthDay, timezone, time, isAllCreditControllers, creditController, oneTimeDate,
 	} = formData || {};
@@ -60,13 +66,13 @@ function FormLayout({ formData, setFormData }:Props) {
 	return (
 		<div>
 			<Filter
-				controls={controls({ formData, setFormData })}
+				controls={controls({ formData, setFormData,isEditMode })}
 				filters={formData}
 				setFilters={setFormData}
 			/>
 			<div>
 				<div className={styles.frequency}>
-					{triggerType === 'periodic' && (
+					{triggerType === 'periodic'  && (
 						<div>
 							<h3>Frequency</h3>
 							<Tabs
@@ -105,7 +111,7 @@ function FormLayout({ formData, setFormData }:Props) {
 							</Tabs>
 						</div>
 					)}
-					{triggerType === 'oneTime' && (
+					{triggerType !== 'periodic'  && (
 						<div>
 							<h4>Select Date</h4>
 							<Datepicker

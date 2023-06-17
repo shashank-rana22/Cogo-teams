@@ -1,3 +1,4 @@
+import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -24,11 +25,12 @@ function useUpdateStatus() {
 				data: {
 					id,
 					updatedBy: profile?.user?.id,
-					status,
+					isDunningCycleActive: status,
 				},
 			 });
-		} catch (err) {
-			console.log('err-', err);
+		} catch (e) {
+			Toast.error(e?.response?.data?.message || 'Something went wrong');
+
 		}
 	};
 

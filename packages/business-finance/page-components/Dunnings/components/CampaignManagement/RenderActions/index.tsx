@@ -2,18 +2,28 @@ import { Toggle } from '@cogoport/components';
 import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
+import useUpdateStatus from '../hooks/useUpdateStatus';
 
 interface Props {
 	setActionModal?:Function,
 	rowData?:{ isDunningCycleActive?:boolean, id?:string },
-
 }
 
 function RenderActions({ setActionModal, rowData }:Props) {
 	const { isDunningCycleActive = false } = rowData || {};
+    const {changeStatus, loading } = useUpdateStatus();
+
 	return (
 		<div style={{ display: 'flex' }}>
-			<Toggle name="isDunningCycleActive" size="md" showOnOff disabled={false} checked={isDunningCycleActive} />
+			<Toggle 
+			name="isDunningCycleActive" 
+			size="md" 
+			showOnOff 
+			disabled={loading} 
+			onChange={()=>changeStatus({id:rowData?.id, status: !isDunningCycleActive})}
+			checked={isDunningCycleActive} 
+			/>
+
 			<button
 				className={styles.btn}
 				aria-label="edit"

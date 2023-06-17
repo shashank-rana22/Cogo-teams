@@ -2,7 +2,9 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import { SERVICE_OPTIONS } from '../../constants';
 
-export const controls = ({ formData, setFormData }) => {
+export const controls = ({ formData, setFormData,isEditMode =false}) => {
+
+
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
 
 	const entityOptions = Object.keys(entityData).map((entity) => ({
@@ -23,6 +25,13 @@ export const controls = ({ formData, setFormData }) => {
 		}
 	));
 
+	const TRIGGER_TYPE_MAPPING = {
+		'ONE_TIME': 'oneTime',
+		'PERIODIC':'periodic',
+		'oneTime':'oneTime',
+		'periodic':'periodic',
+	}
+
 	return [
 		{
 			label   : '',
@@ -34,6 +43,8 @@ export const controls = ({ formData, setFormData }) => {
 					type        : 'input',
 					prefix      : null,
 					placeholder : 'Insert Cycle Name',
+					value: formData?.cycleName || formData?.name,
+					disabled: isEditMode,
 					span        : 12,
 				},
 			],
@@ -42,8 +53,9 @@ export const controls = ({ formData, setFormData }) => {
 			label   : 'Cycle Type',
 			name    : 'cycleType',
 			type    : 'radioGroup',
+			value: !isEditMode ? formData?.cycleType : formData?.dunningCycleType,
 			span    : 12,
-			options : [
+					options : [
 				{ name: 'SOA', value: 'SOA', label: 'SOA' },
 				{ name: 'WIS', value: 'WIS', label: 'WIS' },
 				{ name: 'BALANCE_CONFIRMATION', value: 'BALANCE_CONFIRMATION', label: 'Balance Confirmation' },
@@ -52,16 +64,19 @@ export const controls = ({ formData, setFormData }) => {
 		{
 			label   : 'Cogo Entity',
 			name    : 'cogoEntityDetails',
-			type    : 'radioGroup',
-			span    : 12,
+			placeholder: isEditMode ? 'Entity' : 'Select cogo entity',
+			type    : 'select',
 			options : entityOptions,
+			disabled: isEditMode,
+			span    : 12,
 		},
 		{
 			name          : 'isAllCreditControllers',
 			type          : 'checkbox',
 			checkboxLabel : 'Select All Credit Contollers',
 			checked       : formData?.isAllCreditControllers,
-			onChange      : (e:{ target?:{ checked?:boolean } }) => {
+					disabled: isEditMode,
+					onChange      : (e:{ target?:{ checked?:boolean } }) => {
 				if (e?.target?.checked) {
 					setFormData({ ...formData, isAllCreditControllers: true });
 				} else {
@@ -80,6 +95,7 @@ export const controls = ({ formData, setFormData }) => {
 					type    : 'multiSelect',
 					prefix  : () => {},
 					span    : 2,
+					disabled: isEditMode,
 					options : SERVICE_OPTIONS,
 				},
 				{
@@ -96,7 +112,7 @@ export const controls = ({ formData, setFormData }) => {
 					labelKey     : 'credit_controller_name',
 					valueKey     : 'credit_controller_id',
 					initialCall  : true,
-					disabled     : formData?.isAllCreditControllers,
+					disabled     : formData?.isAllCreditControllers || isEditMode,
 					span         : 3,
 					style        : { width: '270px' },
 				},
@@ -104,6 +120,8 @@ export const controls = ({ formData, setFormData }) => {
 					label   : 'Ageing Bucket',
 					name    : 'ageingBucket',
 					type    : 'select',
+					value: !isEditMode ? formData?.ageingBucket : formData?.filters?.ageingBucket,
+					disabled: isEditMode,
 					span    : 2,
 					options : [
 						{ label: '1-30 Days', value: 'AB_1_30' },
@@ -128,15 +146,17 @@ export const controls = ({ formData, setFormData }) => {
 					type        : 'select',
 					span        : 1,
 					options     : currencyOptions,
-					value       : JSON.parse(formData?.cogoEntityDetails || '{}')?.currency,
+					value       : !isEditMode ? JSON.parse(formData?.cogoEntityDetails || '{}')?.currency : formData?.filters?.dueOutstandingCurrency,
 					disabled    : true,
 				},
 				{
 					name               : 'totalDueOutstanding',
 					placeholder        : 'Insert Amount',
 					type               : 'input',
+					value: !isEditMode ? formData?.totalDueOutstanding : formData?.filters?.totalDueOutstanding,
 					onlyNumbersAllowed : true,
 					prefix             : null,
+					disabled: isEditMode,
 					span               : 9,
 				},
 			],
@@ -145,8 +165,17 @@ export const controls = ({ formData, setFormData }) => {
 			label        : 'Trigger Type',
 			name         : 'triggerType',
 			type         : 'radioGroup',
+			value: !isEditMode ? (formData?.triggerType || 'oneTime') : TRIGGER_TYPE_MAPPING[formData?.triggerTypeData],
+			onChange: (value:string)=>{
+				if(isEditMode){
+					console.log({value});
+					
+					setFormData({...formData,triggerTypeData:value})
+				}else{
+					setFormData({...formData,triggerType:value})
+				}
+			},
 			span         : 12,
-			defaultValue : 'oneTime',
 			options      : [
 				{ name: 'oneTime', value: 'oneTime', label: 'One Time' },
 				{ name: 'periodic', value: 'periodic', label: 'Periodic' },
