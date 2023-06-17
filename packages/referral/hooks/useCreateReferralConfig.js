@@ -11,7 +11,7 @@ const useCreateReferralConfig = ({ apiState = '', setApiState = () => {}, setIsE
 
 	const [{ loading }, trigger] = useRequest({
 		method : 'post',
-		url    : 'create_referral_configuration',
+		url    : '/create_referral_configuration',
 	}, { manual: true });
 
 	const createRule = (payload) => {
