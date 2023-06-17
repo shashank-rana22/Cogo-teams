@@ -3,12 +3,13 @@ import { updateDoc, doc } from 'firebase/firestore';
 
 import { FIRESTORE_PATH } from '../configurations/firebase-config';
 
+const MAX_GROUP_MEMBERS_ALLOWED = 3;
+
 function useGroupChat({
 	activeMessageCard = {},
 	firestore,
 }) {
 	const { channel_type, id } = activeMessageCard || {};
-	const MAX_GROUP_MEMBERS_ALLOWED = 3;
 
 	const deleteGroupRequest = async (user_id) => {
 		const roomRef = doc(
