@@ -1,6 +1,7 @@
 import { Modal, Button } from '@cogoport/components';
 import { AsyncSelectController } from '@cogoport/forms';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import { IcMDownload } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
 import { AddCustomerInterface } from '../../Interfaces';
@@ -11,6 +12,8 @@ const TRADE_PARTY_PARAMS = {
 	filters: { status: 'active', account_type: 'importer_exporter' },
 
 };
+const SAMPLE_PDF_URL = 'https://cogoport-production.sgp1.digitaloceanspaces.com/'
++ '45773ab4048f606ce6ef06fa1d083352/Book%201%20-%20Copy.xlsx';
 
 function AddCustomerModal({
 	show,
@@ -42,6 +45,16 @@ function AddCustomerModal({
 							draggable
 							accept=".csv,.xlsx"
 						/>
+						<div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
+							<p style={{ marginRight: '4px', marginBottom: '2px' }}>Sample</p>
+							<IcMDownload
+								width={16}
+								height={16}
+								cursor="pointer"
+								onClick={() => window.open(SAMPLE_PDF_URL, '_blank')}
+
+							/>
+						</div>
 					</div>
 
 					<div className={styles.heading}>
