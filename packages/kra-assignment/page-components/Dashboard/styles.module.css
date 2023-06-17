@@ -1,0 +1,32 @@
+.header{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.redirect{
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.section{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+.section_left{
+    width: 70%;
+    padding: 10px;
+}
+
+.section_right{
+    width: 30%;
+    background-color: white;
+}
+
+.table_display{
+    margin: 20px 0;
+}
