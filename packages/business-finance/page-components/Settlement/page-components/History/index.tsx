@@ -1,4 +1,4 @@
-import { Input } from '@cogoport/components';
+import { Checkbox, Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -13,30 +13,83 @@ import SelectState from './SelectState';
 import styles from './styles.module.css';
 
 function History() {
-	// const [show, setShow] = useState(false);
+	const [checkedRows, setCheckedRows] = useState({});
 
-	const { data, loading, refetch, filters, setFilters, apiData, setApiData } = useHistorySettlemet();
-
-	const { list = [] } = apiData || {};
+	const { loading, filters, setFilters, apiData } = useHistorySettlemet();
 
 	const onPageChange = (val:number) => {
 		setFilters({ ...filters, page: val });
 	};
 
-	const onClose = () => {
-		setShow(false);
+	const onChangeTableHeaderCheckbox = (event) => {
+		event.stopPropagation();
+
+		const listIds = (apiData?.list || []).map(({ id }) => id);
+
+		if (event.target.checked) {
+			const filterData = (apiData?.list || [])
+				?.filter((item) => item?.notPostedSettlementIds?.length > 0);
+
+			const NEW_CHECKED = {};
+			filterData.forEach((item) => { NEW_CHECKED[item?.id] = item.notPostedSettlementIds; });
+			setCheckedRows({
+				...checkedRows,
+				...NEW_CHECKED,
+			});
+		} else {
+			const NEW_UNCHECK = { ...checkedRows };
+
+			listIds.forEach((id) => {
+				if (Object.keys(NEW_UNCHECK).includes(id)) {
+					delete NEW_UNCHECK[id];
+				}
+			});
+			setCheckedRows({
+				...NEW_UNCHECK,
+			});
+		}
 	};
-	console.log('data', data);
 
-	console.log('apiData', apiData);
+	const onChangeTableBodyCheckbox = (event, item) => {
+		event.stopPropagation();
+		if (event.target.checked) {
+			setCheckedRows({
+				...checkedRows,
+				[item?.id]: item?.notPostedSettlementIds,
+			});
+		} else {
+			const NEW_REMOVE_CHECK = { ...checkedRows };
+			delete NEW_REMOVE_CHECK[item?.id];
+			setCheckedRows({
+				...(NEW_REMOVE_CHECK),
+			});
+		}
+	};
 
-	// const { list = [], pageNo = 1, totalRecords = 0 } = (data as DataInterface || {});
+	const getTableBodyCheckbox = (item) => {
+		const isChecked = (Object.keys(checkedRows) || []).includes(
+			item?.id,
+		);
 
-	// if (isEmpty(list)) {
-	// 	return (
-	// 		<SelectState />
-	// 	);
-	// }
+		return item?.notPostedSettlementIds?.length ? (
+			<Checkbox
+				checked={isChecked}
+				disabled={loading}
+				onChange={(event) => onChangeTableBodyCheckbox(event, item)}
+			/>
+		) : (
+			<Checkbox
+				disabled
+			/>
+		);
+	};
+
+	const isAllChecked = isEmpty((apiData?.list || [])?.filter((item) => item?.notPostedSettlementIds?.length > 0
+	&& !Object.keys(checkedRows).includes(item?.id)));
+
+	const showHeaderCheckbox = !isEmpty((apiData?.list || [])?.filter(
+		(item) => item?.notPostedSettlementIds?.length > 0,
+	));
 
 	return (
 		<div>
@@ -55,9 +108,14 @@ function History() {
 				data={apiData}
 				filters={filters}
 				setFilters={setFilters}
-				refetch={refetch}
 				loading={loading}
 				onPageChange={onPageChange}
+				isAllChecked={isAllChecked}
+				showHeaderCheckbox={showHeaderCheckbox}
+				getTableBodyCheckbox={getTableBodyCheckbox}
+				onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
+				checkedRows={checkedRows}
+
 			/>
 			{!apiData?.list && !loading && <SelectState />}
 			{!loading && apiData?.list?.length <= 0 && <EmptyStateDocs />}

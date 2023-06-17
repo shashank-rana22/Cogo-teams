@@ -3,13 +3,13 @@ import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import { INVOICE_STATUS, INVOICE_STATUS_MAPPING } from '../../../../../../Constants';
 import useHistorySingleDataList from '../../../../../../hooks/useHistorySingleDataList';
+import usePostSettlementToSage from '../../../../../../hooks/usePostSettlementToSage';
 import Loader from '../../../../../Loader';
 
-import InformationModal from './InformationModal';
 import LineItemsHeader from './LineItemsHeader';
 import styles from './styles.module.css';
 
@@ -25,6 +25,8 @@ interface ListItem {
 	documentNo: string;
 	accountType: string;
 	accMode: string;
+	notPostedSettlementIds : Array<number>;
+	ledCurrency: string;
 
 }
 
@@ -33,36 +35,30 @@ interface Props {
 }
 
 const DEFAULT_VALUE = {
-	id              : '',
-	documentValue   : '',
-	documentAmount  : 0,
-	settledAmount   : 0,
-	balanceAmount   : 0,
-	transactionDate : '',
-	lastEditedDate  : '',
-	currency        : '',
-	documentNo      : '',
-	accountType     : '',
+	id                     : '',
+	documentValue          : '',
+	documentAmount         : 0,
+	settledAmount          : 0,
+	balanceAmount          : 0,
+	transactionDate        : '',
+	lastEditedDate         : '',
+	currency               : '',
+	documentNo             : '',
+	accountType            : '',
+	accMode                : '',
+	notPostedSettlementIds : [],
+	ledCurrency            : '',
+
 };
 
 function Details({ item = DEFAULT_VALUE }: Props) {
-	const { id = '', documentNo = '', accountType = '' } = item || {};
-	const [showModal, setShowModal] = useState(false);
-
+	const { documentNo = '', accountType = '', notPostedSettlementIds = [], ledCurrency = '' } = item || {};
 	const {
 		data,
-		globalFilters,
-		setGlobalFilters,
-		getHistoryChild,
 		loading,
 	} = useHistorySingleDataList(documentNo, accountType);
 
-	// const {
-	// 	generateIrn, finalPostFromSage, finalPostLoading, getSageInvoiceData, sageInvoiceData,
-	// 	sageInvoiceLoading,
-	// } = useGetIrnGeneration({
-	// 	id,
-	// });
+	const { loading: bulkPostToSageLoading, bulkPostToSageAction } = usePostSettlementToSage();
 
 	const { list = [] } = data || {};
 
@@ -89,11 +85,15 @@ function Details({ item = DEFAULT_VALUE }: Props) {
 					</Button>
 				</div>
 				<div className={styles.margin_left}>
-					<Button size="sm">
-						Post to SAGE
+					<Button
+						size="sm"
+						onClick={() => bulkPostToSageAction(notPostedSettlementIds)}
+						disabled={bulkPostToSageLoading || !notPostedSettlementIds.length
+							|| ledCurrency === GLOBAL_CONSTANTS.currency_code.VND}
+					>
+						Post Settlement to SAGE
 					</Button>
 				</div>
-
 			</div>
 			<div className={styles.table}>
 				<LineItemsHeader />
@@ -162,15 +162,8 @@ function Details({ item = DEFAULT_VALUE }: Props) {
 								{singleitem?.accMode}
 							</div>
 						</div>
-						<InformationModal
-							id={singleitem?.id}
-							showModal={showModal}
-							setShowModal={setShowModal}
-						/>
 					</div>
-
 				))}
-
 			</div>
 
 		</div>

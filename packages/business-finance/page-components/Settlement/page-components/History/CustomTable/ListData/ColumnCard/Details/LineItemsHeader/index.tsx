@@ -15,7 +15,6 @@ function LineItemsHeader() {
 			<div className={styles.doc_date}>Document Date</div>
 			<div className={styles.status}>Status</div>
 			<div className={styles.settlemet_status}>Settlement Status</div>
-
 		</div>
 	);
 }

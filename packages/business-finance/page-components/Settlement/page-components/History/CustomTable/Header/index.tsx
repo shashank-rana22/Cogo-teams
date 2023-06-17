@@ -1,3 +1,4 @@
+import { Checkbox } from '@cogoport/components';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React from 'react';
 
@@ -6,11 +7,27 @@ import styles from './styles.module.css';
 interface Props {
 	setFilters: React.Dispatch<React.SetStateAction<{}>>;
 	filters: { sortType? :string };
+	loading: boolean;
+	showHeaderCheckbox: boolean;
+	isAllChecked: boolean;
+	onChangeTableHeaderCheckbox: (event: object) => void;
 }
 
-function Header({ setFilters, filters }:Props) {
+function Header({
+	setFilters, filters,
+	isAllChecked, onChangeTableHeaderCheckbox, showHeaderCheckbox, loading,
+}:Props) {
 	return (
 		<div className={styles.header}>
+			<div className={styles.checkbox}>
+				{showHeaderCheckbox ? (
+					<Checkbox
+						onChange={onChangeTableHeaderCheckbox}
+						checked={isAllChecked}
+						disabled={loading}
+					/>
+				) : null}
+			</div>
 			<div className={styles.refnumb}>
 				REF. NUMBER
 			</div>

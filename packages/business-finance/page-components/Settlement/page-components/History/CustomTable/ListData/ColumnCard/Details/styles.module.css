@@ -112,3 +112,8 @@
 .margin_left {
 	margin-left: 12px;
 }
+
+.action_button {
+	flex: 0.6;
+	width: calc(0.6*(100 / 12));
+}

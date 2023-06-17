@@ -15,16 +15,25 @@ interface ListItem {
 	documentNo: string;
 	accountType: string;
 	accMode: string;
+	notPostedSettlementIds : Array<number>;
+	ledCurrency: string;
 }
 interface Props {
 	list: ListItem[];
-	refetch: () => void;
+	getTableBodyCheckbox: (item: object) => React.JSX.Element;
+
 }
 
-function ListData({ list = [], refetch }:Props) {
+function ListData({ list = [], getTableBodyCheckbox }:Props) {
 	return (
 		<div className={styles.list}>
-			{(list || []).map((item) => (<ColumnCard key={item?.id} item={item} refetch={refetch} />))}
+			{(list || []).map((item) => (
+				<ColumnCard
+					key={item?.id}
+					item={item}
+					getTableBodyCheckbox={getTableBodyCheckbox}
+				/>
+			))}
 		</div>
 	);
 }

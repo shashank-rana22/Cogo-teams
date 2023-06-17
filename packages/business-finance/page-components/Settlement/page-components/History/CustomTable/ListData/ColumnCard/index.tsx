@@ -19,14 +19,17 @@ interface ListItem {
 	documentNo: string;
 	accountType: string;
 	accMode: string;
+	notPostedSettlementIds : Array<number>;
+	ledCurrency: string;
 }
 
 interface Props {
 	item: ListItem;
-	refetch: () => void;
+	getTableBodyCheckbox: (item: object) => React.JSX.Element;
+
 }
 
-function ColumnCard({ item, refetch }: Props) {
+function ColumnCard({ item, getTableBodyCheckbox }: Props) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const Icon = showDetails ? IcMArrowRotateUp : IcMArrowRotateDown;
@@ -34,6 +37,7 @@ function ColumnCard({ item, refetch }: Props) {
 	return (
 		<div className={styles.column}>
 			<div className={styles.flex}>
+				<div>{getTableBodyCheckbox(item)}</div>
 				<div className={styles.refnumb}>{item?.documentValue}</div>
 				<div className={styles.amount}>
 					{	getFormattedPrice(
@@ -88,16 +92,6 @@ function ColumnCard({ item, refetch }: Props) {
 
 			</div>
 			{showDetails ? <Details item={item} /> : null}
-			{/* {showConfirm ? (
-				<ConfirmationModal
-					showConfirm={showConfirm}
-					setShowConfirm={setShowConfirm}
-					post={post}
-					item={item}
-					deleteJv={deleteJv}
-					loading={postloading || deleteloading}
-				/>
-			) : null} */}
 		</div>
 	);
 }

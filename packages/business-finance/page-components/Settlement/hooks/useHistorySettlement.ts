@@ -12,8 +12,7 @@ const useHistorySettlemet = () => {
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
-			// url     : '/payments/settlement/history',
-			url     : 'https://api.stage.cogoport.io/payments/settlement/history',
+			url     : '/payments/settlement/history',
 			authKey : 'get_payments_settlement_history',
 			method  : 'get',
 		},
@@ -22,14 +21,11 @@ const useHistorySettlemet = () => {
 
 	const { query, date, accountType, orgId = '', page = 1, sortBy, sortType } = filters;
 
-	console.log('filters', filters);
-
 	useEffect(() => {
 		debounceQuery(query);
 	}, [debounceQuery, query]);
 
 	const refetch = async () => {
-		console.log('good');
 		try {
 			const res = await trigger({
 				params: {
@@ -54,15 +50,12 @@ const useHistorySettlemet = () => {
 					pageLimit : 10,
 					sortBy    : sortBy || undefined,
 					sortType  : sortType || undefined,
-					// ...sort,
 				},
 			});
 			setApiData(res.data);
 		} catch (error) {
 			setApiData({});
 			console.log(error);
-
-			// toast.error('Someting went wrong, we are working on it!');
 		}
 	};
 
@@ -76,7 +69,6 @@ const useHistorySettlemet = () => {
 		filters,
 		setFilters,
 		data,
-		refetch,
 		loading,
 		setApiData,
 		apiData,
