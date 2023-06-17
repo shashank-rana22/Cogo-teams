@@ -6,6 +6,7 @@ import {
 } from '@cogoport/forms';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { IcMRefresh, IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import Filter from '../../../commons/Filters';
@@ -130,6 +131,7 @@ function OnAccountCollection() {
 							onClick={() => {
 								setShowConfirm(true);
 							}}
+							disabled={isEmpty(checkedRows)}
 						>
 							Bulk Post
 						</Button>

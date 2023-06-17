@@ -1,13 +1,12 @@
-import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
-const handleDisableCond = (charge, isAdminSuperAdmin, shipment_data) => {
-	const disable =	charge?.service_type === 'fcl_freight_service' && !isAdminSuperAdmin
-	&& shipment_data?.serial_id > 130000;
+const MIN_ALIAS_LENGTH = 3;
+const PRICE_GREATER_THAN = 0;
 
-	return disable;
-};
+const handleDisableCond = (charge, isAdminSuperAdmin) => charge?.service_type === 'fcl_freight_service'
+&& !isAdminSuperAdmin;
 
 const rawControls = (
 	handleChange,
@@ -52,7 +51,7 @@ const rawControls = (
 			handleChange,
 			placeholder : 'select line item',
 			disabled:
-				handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
+				handleDisableCond(charge, isAdminSuperAdmin),
 			rules: { required: 'Required' },
 		},
 		{
@@ -67,9 +66,9 @@ const rawControls = (
 			),
 			placeholder : 'Enter alias name/code',
 			rules       : {
-				validate: (v) => v?.length >= 3 || isEmpty(v) || 'Characters should be >= 3',
+				validate: (v) => v?.length >= MIN_ALIAS_LENGTH || isEmpty(v) || 'Characters should be >= 3',
 			},
-			disabled : handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
+			disabled : handleDisableCond(charge, isAdminSuperAdmin),
 			span     : 2,
 		},
 		{
@@ -77,7 +76,7 @@ const rawControls = (
 			type     : 'select',
 			name     : 'unit',
 			options  : convertObjectMappingToArray(FCL_UNITS),
-			disabled : handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
+			disabled : handleDisableCond(charge, isAdminSuperAdmin),
 			span     : 2,
 		},
 		{
@@ -90,7 +89,7 @@ const rawControls = (
 			rules          : { required: 'currency is required' },
 			span           : 1.5,
 			disabled:
-				handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
+				handleDisableCond(charge, isAdminSuperAdmin),
 		},
 		{
 			label       : 'Price',
@@ -100,9 +99,9 @@ const rawControls = (
 			span        : 1.5,
 			rules       : {
 				required : 'Price is Required',
-				validate : (v) => v > 0 || 'Price must be greater than 0',
+				validate : (v) => v > PRICE_GREATER_THAN || 'Price must be greater than 0',
 			},
-			disabled: handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
+			disabled: handleDisableCond(charge, isAdminSuperAdmin),
 		},
 		{
 			label       : 'Quantity',
@@ -112,7 +111,7 @@ const rawControls = (
 			rules       : { required: 'Required', min: 1 },
 			span        : 1,
 			disabled:
-				handleDisableCond(charge, isAdminSuperAdmin, shipment_data),
+				handleDisableCond(charge, isAdminSuperAdmin),
 		},
 		{
 			label  : 'Amount (Tax Excl.)',
