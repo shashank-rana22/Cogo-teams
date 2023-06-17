@@ -110,6 +110,8 @@ function Customers({
 		viewType,
 		flashMessagesList,
 		flashMessagesLoading,
+		activeTab    : activeSubTab,
+		setActiveTab : setActiveSubTab,
 	};
 
 	const voiceProps = {
@@ -183,8 +185,6 @@ function Customers({
 			{Component && (
 				<Component
 					key={activeTab}
-					activeTab={activeSubTab}
-					setActiveTab={setActiveSubTab}
 					{...(componentProps[activeTab] || {})}
 				/>
 			)}

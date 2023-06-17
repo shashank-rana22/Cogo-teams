@@ -39,6 +39,7 @@ function Header({
 	requestAssignLoading = false,
 	canMessageOnBotSession = false,
 	updateRequestsOfRoom,
+	addToGroup,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
 	const [openPopover, setOpenPopover] = useState(false);
@@ -64,6 +65,7 @@ function Header({
 	const isGroupFormed = !isEmpty(group_members);
 
 	const openAssignModal = () => {
+		setOpenPopover(false);
 		setOpenModal({
 			type : 'assign',
 			data : {
@@ -165,6 +167,7 @@ function Header({
 							requestAssignPaylod={requestAssignPaylod}
 							requestAssignLoading={requestAssignLoading}
 							isGroupFormed={isGroupFormed}
+							addToGroup={addToGroup}
 						/>
 						{isomniChannelAdmin && channel_type === 'whatsapp' && (
 							<div

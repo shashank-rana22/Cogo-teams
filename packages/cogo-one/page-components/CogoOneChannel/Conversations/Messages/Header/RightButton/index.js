@@ -19,6 +19,7 @@ function RightButton({
 	requestAssignPaylod,
 	requestAssignLoading,
 	isGroupFormed,
+	addToGroup,
 }) {
 	if (canMessageOnBotSession) {
 		return (
@@ -34,14 +35,44 @@ function RightButton({
 	}
 	if (!showBotMessages && hasPermissionToEdit) {
 		return (
-			<Button
-				themeType="secondary"
-				size="md"
-				className={styles.styled_button}
-				onClick={openAssignModal}
+			<Popover
+				placement="bottom"
+				trigger="click"
+				render={(
+					<>
+						<Button
+							themeType="secondary"
+							size="md"
+							className={styles.popover_button}
+							onClick={openAssignModal}
+						>
+							Assign
+						</Button>
+						<Button
+							themeType="secondary"
+							size="md"
+							className={styles.popover_button}
+							onClick={() => {
+								addToGroup();
+								setOpenPopover(false);
+							}}
+						>
+							Add me to Group
+						</Button>
+					</>
+				)}
+				visible={openPopover}
+				onClickOutside={() => setOpenPopover(false)}
 			>
-				Assign
-			</Button>
+				<Button
+					themeType="secondary"
+					size="md"
+					className={styles.styled_button}
+					onClick={() => setOpenPopover(true)}
+				>
+					Assign
+				</Button>
+			</Popover>
 		);
 	}
 	if (isomniChannelAdmin && !hasRequests) {

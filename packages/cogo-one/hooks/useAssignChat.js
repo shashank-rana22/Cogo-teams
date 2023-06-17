@@ -55,28 +55,24 @@ function useAssignChat({
 
 	const assignChat = async (payload, callbackFun = () => {}) => {
 		try {
-			if (payload.assignType === 'add_to_group') {
-				await addToGroup();
-			} else {
-				await trigger({
-					data: {
-						channel                 : channel_type,
-						channel_chat_id         : id,
-						user_id                 : user_id || undefined,
-						lead_user_id            : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
-						whatsapp_number_eformat : mobile_no,
-						organization_id,
-						sender,
-						cogo_entity_id          : cogo_entity_id || undefined,
-						...payload,
+			await trigger({
+				data: {
+					channel                 : channel_type,
+					channel_chat_id         : id,
+					user_id                 : user_id || undefined,
+					lead_user_id            : (!(user_id) && lead_user_id) ? lead_user_id : undefined,
+					whatsapp_number_eformat : mobile_no,
+					organization_id,
+					sender,
+					cogo_entity_id          : cogo_entity_id || undefined,
+					...payload,
 
-					},
-				});
-				callbackFun();
+				},
+			});
+			callbackFun();
 
-				if (!canMessageOnBotSession) {
-					Toast.success('Successfully Assigned');
-				}
+			if (!canMessageOnBotSession) {
+				Toast.success('Successfully Assigned');
 			}
 
 			if (!canMessageOnBotSession) {
@@ -93,6 +89,7 @@ function useAssignChat({
 		assignChat,
 		loading,
 		updateRequestsOfRoom,
+		addToGroup,
 	};
 }
 export default useAssignChat;

@@ -5,7 +5,6 @@ import {
 	IcMArrowRotateRight,
 	IcMArrowRotateDown,
 } from '@cogoport/icons-react';
-import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -18,6 +17,9 @@ import AutoAssignComponent from './AutoAssignComponent';
 import FlashUserChats from './FlashUserChats';
 import MessageCardData from './MessageCardData';
 import styles from './styles.module.css';
+
+const GROUP_TABS_VIEW_ACCESS = ['admin_view', 'supply_view'];
+const FLASH_MESSAGES_VIEW_ACCESS = ['admin_view', 'kam_view'];
 
 function MessageList(messageProps) {
 	const {
@@ -66,7 +68,7 @@ function MessageList(messageProps) {
 	const isPinnedChatEmpty = isEmpty(sortedPinnedChatList) || false;
 	const isFlashMessagesEmpty = isEmpty(flashMessagesList) || false;
 
-	const canShowCarousel = viewType !== 'shipment_view' && showCarousel
+	const canShowCarousel = FLASH_MESSAGES_VIEW_ACCESS.includes(viewType) && showCarousel
 	&& showCarousel !== 'in_timeout' && !isFlashMessagesEmpty && !flashMessagesLoading;
 
 	const getListHeightStyles = () => {
@@ -103,14 +105,10 @@ function MessageList(messageProps) {
 	}, [showBotMessages, appliedFilters]);
 
 	const ActiveIcon = openPinnedChats ? IcMArrowRotateDown : IcMArrowRotateRight;
-	const { profile = {} } = useSelector((state) => state);
-	const { role_functions } = profile.auth_role_data;
-
-	const isSupply = role_functions.includes('supply');
 
 	return (
 		<>
-			{isSupply
+			{GROUP_TABS_VIEW_ACCESS.includes(viewType)
 			&& (
 				<div className={styles.tabs}>
 					<Tabs

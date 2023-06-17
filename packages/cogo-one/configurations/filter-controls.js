@@ -7,8 +7,9 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 	);
 	const HIDE_CONTROLS_MAPPING = {
 		admin_view    : ['observer'],
-		kam           : ['assigned_to', 'assigned_agent'],
+		kam_view      : ['assigned_to', 'assigned_agent'],
 		shipment_view : ['assigned_to', 'assigned_agent', 'observer'],
+		supply_view   : ['observer', 'chat_tags'],
 	};
 	const extraStatusOptions = (showBotMessages && isomniChannelAdmin) ? 	[{
 		label : 'Seen By User',
@@ -156,8 +157,8 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 		},
 	];
 
-	const newControls = controls.filter((item) => !(HIDE_CONTROLS_MAPPING[viewType || 'kam'])
-		.includes(item?.name));
+	const newControls = controls.filter((item) => !(HIDE_CONTROLS_MAPPING[viewType] || HIDE_CONTROLS_MAPPING.kam_view)
+		?.includes(item?.name));
 	return newControls;
 };
 
