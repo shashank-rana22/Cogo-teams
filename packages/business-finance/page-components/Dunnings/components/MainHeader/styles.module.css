@@ -23,7 +23,7 @@
 }
 
 .active_card{
-    background: linear-gradient(225deg, rgb(205 75 75) 0%, rgba(243,113,102,1) 35%, rgb(255 169 169) 100%);
+    background: linear-gradient(357deg, rgb(205 75 75) 0%, rgba(243,113,102,1) 35%, rgb(255 169 169) 100%);
     border: 1px solid  var(--color-primary-error-red-3);
     border-radius: 12px;
     height: 92px;

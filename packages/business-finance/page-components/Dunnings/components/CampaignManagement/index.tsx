@@ -3,27 +3,58 @@ import React, { useState } from 'react';
 import CustomList from '../../../commons/CustomList';
 
 import CreateCycleForm from './CreateCycleForm';
-import { dummyData } from './dummyData';
 import FilterHeaders from './FilterHeaders';
 import { listConfig } from './listConfig';
 import RenderActions from './RenderActions';
 import RenderViewMore from './RenderViewMore';
 import ShowMore from './ShowMore';
+import useListDunningCycle from './hooks/useListDunningCycle';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import ActionModal from './ActionModal';
 
 function CampaignManagement() {
-	const [globalFilters, setGlobalFilters] = useState({});
+	const [globalFilters, setGlobalFilters] = useState({
+		page: 1,
+	});
 	const [dropdown, setDropdown] = useState('');
 	const [showCreateForm, setShowCreateForm] = useState(false);
-	const [formData, setFormData] = useState({
-		triggerType   : 'oneTime',
-		frequency     : 'daily',
-		severityLevel : 'low',
+	const [actionModal, setActionModal] = useState({
+		visible:false,
+		action:'',
+		id:null,
 	});
+	
+	const {data, loading,getDunningList} = useListDunningCycle({globalFilters,setGlobalFilters});
+	
 
 	const showDropDown = (e) => <ShowMore dropdown={dropdown} rowId={e?.id} />;
 
 	const functions = () => ({
-		renderActions :	() => <RenderActions />,
+		renderFrequency: ({scheduleRule})=>(
+              <div>{(scheduleRule?.dunningExecutionFrequency || '').replaceAll('_',' ')}</div>
+		),
+		renderCreatedOn:({createdAt})=>(
+		<div>
+                           {formatDate({
+								date       : createdAt,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+					formatType : 'dateTime',
+				})}
+		</div>
+		),
+		renderUpdatedAt:({updatedAt})=>(
+			<div>
+							   {formatDate({
+									date       : updatedAt,
+									dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+						timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+						formatType : 'dateTime',
+					})}
+			</div>
+			),
+		renderActions :	({id}) => <RenderActions setActionModal={setActionModal} id={id}/>,
 		viewMore      : ({ id }) => (
 			<RenderViewMore
 				id={id}
@@ -46,15 +77,15 @@ function CampaignManagement() {
 			<div style={{ background: 'white' }}>
 				<CustomList
 					config={listConfig()}
-					itemData={dummyData}
-					// loading={loading || recurringListLoading}
+					itemData={data}
+					loading={loading }
 					functions={functions()}
-					// page={expenseFilters.pageIndex || 1}
-					// pageSize={expenseFilters.pageSize}
-					// handlePageChange={(pageValue:number) => {
-					// 	setExpenseFilters((p) => ({ ...p, pageIndex: pageValue }));
-					// }}
-					// showPagination
+					page={globalFilters.page || 1}
+					pageSize={10}
+					handlePageChange={(pageValue:number) => {
+						setGlobalFilters((p) => ({ ...p, page: pageValue }));
+					}}
+					showPagination
 					renderDropdown={showDropDown}
 				/>
 			</div>
@@ -63,10 +94,15 @@ function CampaignManagement() {
 				<CreateCycleForm
 					showCreateForm={showCreateForm}
 					setShowCreateForm={setShowCreateForm}
-					formData={formData}
-					setFormData={setFormData}
+					getDunningList={getDunningList}
 				/>
 			)}
+
+			{actionModal?.visible && <ActionModal 
+			actionModal={actionModal}
+			setActionModal={setActionModal}
+			getDunningList={getDunningList}
+			/>}
 
 		</div>
 	);

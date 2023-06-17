@@ -9,90 +9,70 @@ function PieData() {
 			data: [
 				{
 					id    : 'a',
-					label : 'red',
 					value : 30,
-					color : 'blue',
 				},
 				{
 					id    : 'b',
-					label : 'let',
 					value : 60,
-					color : '',
 				},
 			],
-			label      : 'Demo Rate',
+			label      : 'Rate',
 			percentage : 'X%',
 		},
 		{
 			data: [
 				{
 					id    : 'a',
-					label : 'red',
 					value : 50,
-					color : 'blue',
 				},
 				{
 					id    : 'b',
-					label : 'let',
 					value : 50,
-					color : '',
 				},
 			],
-			label      : 'Demo Rate',
+			label      : 'Rate',
 			percentage : 'X%',
 		},
 		{
 			data: [
 				{
 					id    : 'a',
-					label : 'red',
 					value : 30,
-					color : 'blue',
 				},
 				{
 					id    : 'b',
-					label : 'let',
 					value : 60,
-					color : '',
 				},
 			],
-			label      : 'Demo Rate',
+			label      : 'Rate',
 			percentage : 'X%',
 		},
 		{
 			data: [
 				{
 					id    : 'a',
-					label : 'red',
 					value : 30,
-					color : 'blue',
 				},
 				{
 					id    : 'b',
-					label : 'let',
 					value : 60,
-					color : '',
 				},
 			],
-			label      : 'Demo Rate',
+			label      : 'Rate',
 			percentage : 'X%',
 		},
 		{
 			data: [
 				{
 					id    : 'a',
-					label : 'red',
 					value : 30,
-					color : 'blue',
 				},
 				{
 					id    : 'b',
-					label : 'let',
 					value : 60,
-					color : '',
 				},
 			],
-			label      : 'Demo Rate',
+			label      : 'Rate',
 			percentage : 'X%',
 		},
 

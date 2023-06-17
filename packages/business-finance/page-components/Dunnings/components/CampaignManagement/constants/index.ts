@@ -1,11 +1,11 @@
 export const SERVICE_OPTIONS = [
 
-	{ label: 'FCL Freight', value: 'fcl_freight' },
-	{ label: 'LCL Freight', value: 'lcl_freight' },
-	{ label: 'FTL Freight', value: 'ftl_freight' },
-	{ label: 'LTL Freight', value: 'ltl_freight' },
-	{ label: 'Air Freight', value: 'air_freight' },
-	{ label: 'Haulage', value: 'haulage_freight' },
+	{ label: 'FCL Freight', value: 'FCL_FREIGHT' },
+	{ label: 'LCL Freight', value: 'LCL_FREIGHT' },
+	{ label: 'FTL Freight', value: 'FTL_FREIGHT' },
+	{ label: 'LTL Freight', value: 'LTL_FREIGHT' },
+	{ label: 'Air Freight', value: 'AIR_FREIGHT' },
+	{ label: 'Haulage', value: 'HAULAGE_FREIGHT' },
 ];
 
 export const CYCLE_OPTIONS = [
@@ -17,49 +17,62 @@ export const CYCLE_OPTIONS = [
 	},
 ];
 
+export const CYCLE_TYPE = [
+	{
+		label: 'SOA', value: 'SOA',
+	},
+	{
+		label: 'WIS', value: 'WIS',
+	},
+	{
+		label: 'Balance Confirmation',
+		value: 'BALANCE_CONFIRMATION', 
+	}
+]
+
 export const MONTH_DAYS = Array(28).fill(null).map((item, index) => (
 	{ label: String(index + 1), value: String(index + 1) }
 ));
 
 export const WEEK_OPTIONS = [
 	{
-		key      : 'monday',
+		key      : 'MONDAY',
 		children : 'Monday',
 		suffix   : null,
 		tooltip  : false,
 	},
 	{
-		key      : 'tuesday',
+		key      : 'TUESDAY',
 		children : 'Tuesday',
 		suffix   : null,
 		tooltip  : false,
 	},
 	{
-		key      : 'wednesday',
+		key      : 'WEDNESDAY',
 		children : 'Wednesday',
 		suffix   : null,
 		tooltip  : false,
 	},
 	{
-		key      : 'thursday',
+		key      : 'THURSDAY',
 		children : 'Thursday',
 		suffix   : null,
 		tooltip  : false,
 	},
 	{
-		key      : 'friday',
+		key      : 'FRIDAY',
 		children : 'Friday',
 		suffix   : null,
 		tooltip  : false,
 	},
 	{
-		key      : 'saturday',
+		key      : 'SATURDAY',
 		children : 'Saturday',
 		suffix   : null,
 		tooltip  : false,
 	},
 	{
-		key      : 'sunday',
+		key      : 'SUNDAY',
 		children : 'Sunday',
 		suffix   : null,
 		tooltip  : false,

@@ -7,7 +7,7 @@ import filterControls from './filterControls';
 import styles from './styles.module.css';
 
 interface Props {
-	globalFilters?:{ search?:string },
+	globalFilters?:{ search?:string, page?:number | string },
 	setGlobalFilters?:(p: object) => void,
 	setShowCreateForm?:Function,
 }

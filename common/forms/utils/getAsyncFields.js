@@ -595,6 +595,15 @@ function asyncListDunningTemplates() {
 	};
 }
 
+function asyncListCreditControllers() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'payments/dunning/credit-controllers',
+		initialCall : true,
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -644,4 +653,5 @@ export {
 	asyncListCourseCategories,
 	asyncListTests,
 	asyncListDunningTemplates,
+	asyncListCreditControllers,
 };

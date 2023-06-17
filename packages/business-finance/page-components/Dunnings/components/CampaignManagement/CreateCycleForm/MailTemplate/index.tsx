@@ -26,15 +26,15 @@ function MailTemplate({ formData, setFormData }:Props) {
 						options={[
 							{
 								label : 'Low',
-								value : 'low',
+								value : '1',
 							},
 							{
 								label : 'Medium',
-								value : 'medium',
+								value : '2',
 							},
 							{
 								label : 'High',
-								value : 'high',
+								value : '3',
 							}]}
 						activeTab={formData?.severityLevel}
 						setActiveTab={(val:string) => { setFormData({ ...formData, severityLevel: val }); }}

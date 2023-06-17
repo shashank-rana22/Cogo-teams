@@ -1,16 +1,17 @@
-import { Chips, Select, TabPanel, Tabs, Timepicker } from '@cogoport/components';
+import { Chips, Datepicker, Select, TabPanel, Tabs, Timepicker } from '@cogoport/components';
 
 import Filter from '../../../../../commons/Filters';
 import { MONTH_DAYS, WEEK_OPTIONS } from '../../constants';
 
 import { controls } from './controls';
 import styles from './styles.module.css';
+import { useEffect } from 'react';
 
 interface FormData {
 	triggerType?:string,
 	frequency?:string,
 	weekDay?:string,
-	monthDate?:string,
+	monthDay?:string,
 	timezone?:string,
 	time?:Date,
 }
@@ -21,30 +22,41 @@ interface Props {
 }
 
 function FormLayout({ formData, setFormData }:Props) {
-	const { triggerType, frequency, weekDay, monthDate, timezone, time } = formData || {};
+	const { triggerType, frequency, weekDay, monthDay, timezone, time, isAllCreditControllers,creditController,oneTimeDate } = formData || {};
 
 	const handleTabChange = (val?:string) => {
-		if (val === 'daily') {
+		if (val === 'DAILY') {
 			setFormData({
 				...formData,
-				weekDay   : null,
-				monthDate : null,
+				weekDay   : undefined,
+				monthDay : undefined,
 				frequency : val,
 			});
-		} else if (val === 'weekly') {
+		} else if (val === 'WEEKLY') {
 			setFormData({
 				...formData,
-				monthDate : null,
+				monthDay : undefined,
+				oneTimeDate:undefined,
 				frequency : val,
 			});
-		} else if (val === 'monthly') {
+		} else if (val === 'MONTHLY') {
 			setFormData({
 				...formData,
-				weekDay   : null,
+				weekDay   : undefined,
+				oneTimeDate:undefined,
 				frequency : val,
 			});
 		}
 	};
+
+	useEffect(()=>{
+		if(isAllCreditControllers && creditController){
+			setFormData({...formData, creditController:null});
+		}	
+	
+	},[isAllCreditControllers])
+
+	
 
 	return (
 		<div>
@@ -63,16 +75,15 @@ function FormLayout({ formData, setFormData }:Props) {
 								themeType="primary"
 								onChange={(e?:string) => handleTabChange(e)}
 							>
-								<TabPanel name="daily" title="Daily">
+								<TabPanel name="DAILY" title="Daily">
 									<div className={styles.empty_space} />
 								</TabPanel>
 
-								<TabPanel name="weekly" title="Weekly">
+								<TabPanel name="WEEKLY" title="Weekly">
 									<div style={{ marginTop: '12px' }}>
 										<Chips
 											size="md"
 											items={WEEK_OPTIONS}
-											enableMultiSelect
 											selectedItems={weekDay || []}
 											onItemChange={(val?:string) => setFormData({
 												...formData,
@@ -82,11 +93,11 @@ function FormLayout({ formData, setFormData }:Props) {
 									</div>
 								</TabPanel>
 
-								<TabPanel name="monthly" title="Monthly">
+								<TabPanel name="MONTHLY" title="Monthly">
 									<Select
-										value={monthDate}
-										onChange={(e) => setFormData({ ...formData, monthDate: e })}
-										placeholder="Select Date"
+										value={monthDay}
+										onChange={(day) => setFormData({ ...formData, monthDay: day })}
+										placeholder="Select Day"
 										options={MONTH_DAYS}
 										className={styles.date}
 										size="sm"
@@ -95,10 +106,20 @@ function FormLayout({ formData, setFormData }:Props) {
 							</Tabs>
 						</div>
 					)}
+					{triggerType === 'oneTime' && <div>
+					<h4>Select Date</h4>
+					<Datepicker
+		placeholder="Enter Date"
+		dateFormat="MM/dd/yyyy"
+		name="date"
+		onChange={(date)=>setFormData({...formData,oneTimeDate:date})}
+		value={oneTimeDate}
+	/>
+					</div>}
 					<div>
 						<h4>Select Time Slot</h4>
 						<div style={{ display: 'flex' }}>
-							<Select
+						         	<Select
 								value={timezone}
 								onChange={(e) => setFormData({ ...formData, timezone: e })}
 								placeholder="Timezone"
@@ -109,6 +130,9 @@ function FormLayout({ formData, setFormData }:Props) {
 									{
 										label: 'GMT', value: 'GMT',
 									},
+									{
+			                             label: 'VNM',value :'VNM',
+									} 
 								]}
 								className={styles.timezone}
 							/>

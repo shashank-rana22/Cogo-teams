@@ -32,23 +32,26 @@ export const listConfig = () => ({
 		},
 		{
 			label : 'Type',
-			key   : 'Type',
+			key   : 'dunningCycleType',
 			span  : 1.6,
 		},
 		{
 			label : 'Frequency',
 			key   : 'Frequency',
+			func: 'renderFrequency',
 			span  : 1.6,
 		},
 		{
 			label : 'Created On',
 			key   : 'CreatedOn',
+			func: 'renderCreatedOn',
 			span  : 1.6,
 		},
 
 		{
 			label : 'Last Edited On',
 			key   : 'LastEditedOn',
+			func: 'renderUpdatedAt',
 			span  : 1.6,
 		},
 		{

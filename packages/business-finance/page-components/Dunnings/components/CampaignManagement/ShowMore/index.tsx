@@ -9,9 +9,9 @@ function ShowMore({ dropdown, rowId }) {
 					<div>
 						<div>
 							<div className={styles.heading}>Service Type</div>
-							<div>XXXX</div>
+							<div>----</div>
 							<div className={styles.heading}>Cogo Entity</div>
-							<div>XXXX</div>
+							<div>----</div>
 						</div>
 					</div>
 

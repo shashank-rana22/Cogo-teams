@@ -5,11 +5,18 @@ import { SERVICE_OPTIONS } from '../../constants';
 export const controls = ({ formData, setFormData }) => {
 	const entityData = GLOBAL_CONSTANTS.cogoport_entities;
 
-	const entityOptions = Object.keys(entityData).map((entity) => ({
+	const entityOptions = Object.keys(entityData).map((entity) => {
+		return ({
 		label : `${entity} (${entityData[entity].currency})`,
 		name  : entity,
-		value : entity,
-	}));
+		value : JSON.stringify({
+			id: entityData[entity].id,
+		    currency:entityData[entity].currency,
+		}),
+	})});
+	
+
+	
 
 	const currencyData = GLOBAL_CONSTANTS.currency_code;
 
@@ -31,7 +38,6 @@ export const controls = ({ formData, setFormData }) => {
 					type        : 'input',
 					prefix      : null,
 					placeholder : 'Insert Cycle Name',
-					// rules       : { required: 'Required' },
 					span        : 12,
 				},
 			],
@@ -42,14 +48,14 @@ export const controls = ({ formData, setFormData }) => {
 			type    : 'radioGroup',
 			span    : 12,
 			options : [
-				{ name: 'soa', value: 'soa', label: 'SOA' },
-				{ name: 'wis', value: 'wis', label: 'WIS' },
-				{ name: 'balanceConfirmation', value: 'balanceConfirmation', label: 'Balance Confirmation' },
+				{ name: 'SOA', value: 'SOA', label: 'SOA' },
+				{ name: 'WIS', value: 'WIS', label: 'WIS' },
+				{ name: 'BALANCE_CONFIRMATION', value: 'BALANCE_CONFIRMATION', label: 'Balance Confirmation' },
 			],
 		},
 		{
 			label   : 'Cogo Entity',
-			name    : 'cogoEntity',
+			name    : 'cogoEntityDetails',
 			type    : 'radioGroup',
 			span    : 12,
 			options : entityOptions,
@@ -59,7 +65,7 @@ export const controls = ({ formData, setFormData }) => {
 			type          : 'checkbox',
 			checkboxLabel : 'Select All Credit Contollers',
 			checked       : formData?.isAllCreditControllers,
-			onChange      : (e) => {
+			onChange      : (e:{target?:{checked?:boolean}}) => {
 				if (e?.target?.checked) {
 					setFormData({ ...formData, isAllCreditControllers: true });
 				} else {
@@ -75,17 +81,25 @@ export const controls = ({ formData, setFormData }) => {
 				{
 					label   : 'Service Type',
 					name    : 'serviceType',
-					type    : 'select',
+					type    : 'multiSelect',
+					prefix: ()=>{},
 					span    : 2,
 					options : SERVICE_OPTIONS,
 				},
 				{
-					label       : 'Credit Controller',
 					name        : 'creditController',
+					label       : 'Credit Controller',
 					placeholder : formData?.isAllCreditControllers ? 'All Credit Controllers Selected'
-						: 'Select',
-					type     : 'select',
-					options  : [],
+					: 'Select',
+					type        : 'asyncSelect',
+					value: formData?.creditController,
+					authKey: 'get_payments_dunning_credit_controllers',
+					microService: 'business_finance',
+					multiple    : true,
+					asyncKey    : 'list_credit_controllers',	
+					labelKey:'credit_controller_name',
+					valueKey: 'credit_controller_id',
+					initialCall : true,
 					disabled : formData?.isAllCreditControllers,
 					span     : 3,
 					style    : { width: '270px' },
@@ -113,14 +127,16 @@ export const controls = ({ formData, setFormData }) => {
 			span              : 12,
 			groupBy           : [
 				{
-					name        : 'totalDueOutstandingGreaterThanCurrency',
+					name        : 'dueOutstandingCurrency',
 					placeholder : 'Currency',
 					type        : 'select',
 					span        : 1,
 					options     : currencyOptions,
+					value: JSON.parse(formData?.cogoEntityDetails || '{}')?.currency,
+					disabled: true,
 				},
 				{
-					name               : 'totalDueOutstandingGreaterThanAmount',
+					name               : 'totalDueOutstanding',
 					placeholder        : 'Insert Amount',
 					type               : 'input',
 					onlyNumbersAllowed : true,
