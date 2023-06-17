@@ -46,157 +46,228 @@ importers:
       turbo: 1.10.3
 
   cogo-control:
-    specifiers:
-      '@cogoport/access-management': workspace:0.1.0
-      '@cogoport/air-repository': workspace:0.1.0
-      '@cogoport/allocation': workspace:0.1.0
-      '@cogoport/athena-dashboard': workspace:0.1.0
-      '@cogoport/authentication': workspace:0.1.0
-      '@cogoport/authority-desk': workspace:0.1.0
-      '@cogoport/bl_do-collection-release': workspace:0.1.0
-      '@cogoport/bn-salvage': workspace:0.1.0
-      '@cogoport/booking-desk': workspace:0.1.0
-      '@cogoport/business-finance': workspace:0.1.0
-      '@cogoport/chakravyuh': workspace:0.1.0
-      '@cogoport/chro': workspace:0.1.0
-      '@cogoport/cogo-academy': workspace:0.1.0
-      '@cogoport/cogo-one': workspace:0.1.1
-      '@cogoport/cogo-verse-analytics': workspace:0.1.0
-      '@cogoport/components': ^1.0.359
-      '@cogoport/contracts': workspace:0.1.0
-      '@cogoport/controlled-booking': workspace:0.1.0
-      '@cogoport/core': workspace:0.1.0
-      '@cogoport/cost-booking-desk': workspace:0.1.0
-      '@cogoport/document-desk': workspace:0.1.0
-      '@cogoport/employee-portal': workspace:0.1.0
-      '@cogoport/enrichment': workspace:0.1.0
-      '@cogoport/forms': workspace:0.1.0
-      '@cogoport/globalization': workspace:^0.0.1
-      '@cogoport/ground-ops': workspace:0.1.0
-      '@cogoport/icons-react': ^1.0.58
-      '@cogoport/ingestion': workspace:0.1.0
-      '@cogoport/kam-desk': workspace:0.1.0
-      '@cogoport/last-mile-desk': workspace:0.1.0
-      '@cogoport/locations': workspace:0.1.0
-      '@cogoport/my-incident': workspace:0.1.0
-      '@cogoport/my-profile': workspace:0.1.0
-      '@cogoport/navigation-configs': workspace:0.1.0
-      '@cogoport/new-employee-dashboard': workspace:0.1.0
-      '@cogoport/next': workspace:0.1.0
-      '@cogoport/ocean-modules': workspace:0.1.0
-      '@cogoport/performance-management': workspace:1.0.0
-      '@cogoport/referral': workspace:0.1.0
-      '@cogoport/request': workspace:0.1.0
-      '@cogoport/rfq-dashboard': workspace:0.1.0
-      '@cogoport/saas-subscription': workspace:0.1.0
-      '@cogoport/saas-tools': workspace:0.1.0
-      '@cogoport/scope-select': workspace:0.1.0
-      '@cogoport/shipment-chat': workspace:0.1.0
-      '@cogoport/shipment-fcl-cfs': workspace:0.1.0
-      '@cogoport/shipment-fcl-custom': workspace:0.1.0
-      '@cogoport/shipment-fcl-freight': workspace:0.1.0
-      '@cogoport/shipment-fcl-freight-local': workspace:0.1.0
-      '@cogoport/shipment-ftl-freight': workspace:0.1.0
-      '@cogoport/shipment-haulage-freight': workspace:0.1.0
-      '@cogoport/shipment-lcl-freight': workspace:0.1.0
-      '@cogoport/shipment-ltl-freight': workspace:0.1.0
-      '@cogoport/shipment-mails': workspace:0.1.0
-      '@cogoport/shipment-rail-domestic-freight': workspace:0.1.0
-      '@cogoport/so2-surface': workspace:0.1.0
-      '@cogoport/store': workspace:0.1.0
-      '@cogoport/supply-dashboards': workspace:0.1.0
-      '@cogoport/surface-modules': workspace:0.1.0
-      '@cogoport/ticket-management': workspace:0.1.1
-      '@cogoport/translate': workspace:0.1.0
-      '@cogoport/unified-dashboard': workspace:^0.1.0
-      '@cogoport/utils': ^1.2.6
-      '@cogoport/vendor-rm': workspace:0.1.0
-      '@cogoport/welcome': workspace:0.1.0
-      '@next/bundle-analyzer': ^13.2.3
-      '@types/node': ^18.14.5
-      '@types/react': ^18.0.28
-      next: 13.1.6
-      react: 18.2.0
-      react-dom: 18.2.0
-      react-redux: ^8.0.5
-      typescript: ^4.9.5
     dependencies:
-      '@cogoport/access-management': link:../packages/access-management
-      '@cogoport/air-repository': link:../packages/air-repository
-      '@cogoport/allocation': link:../packages/allocation
-      '@cogoport/athena-dashboard': link:../packages/athena-dashboard
-      '@cogoport/authentication': link:../packages/authentication
-      '@cogoport/authority-desk': link:../packages/authority-desk
-      '@cogoport/bl_do-collection-release': link:../packages/bl_do-collection-release
-      '@cogoport/bn-salvage': link:../packages/bn-salvage
-      '@cogoport/booking-desk': link:../packages/booking-desk
-      '@cogoport/business-finance': link:../packages/business-finance
-      '@cogoport/chakravyuh': link:../packages/chakravyuh
-      '@cogoport/chro': link:../packages/chro
-      '@cogoport/cogo-academy': link:../packages/cogo-academy
-      '@cogoport/cogo-one': link:../packages/cogo-one
-      '@cogoport/cogo-verse-analytics': link:../packages/cogo-verse-analytics
-      '@cogoport/components': 1.0.427_yxzcqxti2prv6cnmywwm54f2cq
-      '@cogoport/contracts': link:../packages/contracts
-      '@cogoport/controlled-booking': link:../packages/controlled-booking
-      '@cogoport/core': link:../common/core
-      '@cogoport/cost-booking-desk': link:../packages/cost-booking-desk
-      '@cogoport/document-desk': link:../packages/document-desk
-      '@cogoport/employee-portal': link:../packages/employee-portal
-      '@cogoport/enrichment': link:../packages/enrichment
-      '@cogoport/forms': link:../common/forms
-      '@cogoport/globalization': link:../common/globalization
-      '@cogoport/ground-ops': link:../packages/ground-ops
-      '@cogoport/icons-react': 1.0.79_biqbaboplfbrettd7655fr4n2y
-      '@cogoport/ingestion': link:../packages/ingestion
-      '@cogoport/kam-desk': link:../packages/kam-desk
-      '@cogoport/last-mile-desk': link:../packages/last-mile-desk
-      '@cogoport/locations': link:../packages/locations
-      '@cogoport/my-incident': link:../packages/my-incident
-      '@cogoport/my-profile': link:../packages/my-profile
-      '@cogoport/navigation-configs': link:../common/navigation-configs
-      '@cogoport/new-employee-dashboard': link:../packages/new-employee-dashboard
-      '@cogoport/next': link:../common/next
-      '@cogoport/ocean-modules': link:../common/ocean-modules
-      '@cogoport/performance-management': link:../packages/performance-management
-      '@cogoport/referral': link:../packages/referral
-      '@cogoport/request': link:../common/request
-      '@cogoport/rfq-dashboard': link:../packages/rfq-dashboard
-      '@cogoport/saas-subscription': link:../packages/saas-subscription
-      '@cogoport/saas-tools': link:../packages/saas-tools
-      '@cogoport/scope-select': link:../common/scope-select
-      '@cogoport/shipment-chat': link:../common/shipment-chat
-      '@cogoport/shipment-fcl-cfs': link:../packages/shipment-fcl-cfs
-      '@cogoport/shipment-fcl-custom': link:../packages/shipment-fcl-custom
-      '@cogoport/shipment-fcl-freight': link:../packages/shipment-fcl-freight
-      '@cogoport/shipment-fcl-freight-local': link:../packages/shipment-fcl-freight-local
-      '@cogoport/shipment-ftl-freight': link:../packages/shipment-ftl-freight
-      '@cogoport/shipment-haulage-freight': link:../packages/shipment-haulage-freight
-      '@cogoport/shipment-lcl-freight': link:../packages/shipment-lcl-freight
-      '@cogoport/shipment-ltl-freight': link:../packages/shipment-ltl-freight
-      '@cogoport/shipment-mails': link:../common/shipment-mails
-      '@cogoport/shipment-rail-domestic-freight': link:../packages/shipment-rail-domestic-freight
-      '@cogoport/so2-surface': link:../packages/so2-surface
-      '@cogoport/store': link:../common/store
-      '@cogoport/supply-dashboards': link:../packages/supply-dashboards
-      '@cogoport/surface-modules': link:../common/surface-modules
-      '@cogoport/ticket-management': link:../packages/ticket-management
-      '@cogoport/translate': link:../packages/Translation
-      '@cogoport/unified-dashboard': link:../packages/unified-dashboard
-      '@cogoport/utils': 1.2.10
-      '@cogoport/vendor-rm': link:../packages/vendor-rm
-      '@cogoport/welcome': link:../packages/welcome
-      '@next/bundle-analyzer': 13.4.5
-      '@types/node': 18.16.17
-      '@types/react': 18.2.11
-      next: 13.1.6_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-redux: 8.0.7_qov4cjxi5tqn7nekji4kvvduvu
-      typescript: 4.9.5
+      '@cogoport/access-management':
+        specifier: workspace:0.1.0
+        version: link:../packages/access-management
+      '@cogoport/air-repository':
+        specifier: workspace:0.1.0
+        version: link:../packages/air-repository
+      '@cogoport/allocation':
+        specifier: workspace:0.1.0
+        version: link:../packages/allocation
+      '@cogoport/athena-dashboard':
+        specifier: workspace:0.1.0
+        version: link:../packages/athena-dashboard
+      '@cogoport/authentication':
+        specifier: workspace:0.1.0
+        version: link:../packages/authentication
+      '@cogoport/authority-desk':
+        specifier: workspace:0.1.0
+        version: link:../packages/authority-desk
+      '@cogoport/bl_do-collection-release':
+        specifier: workspace:0.1.0
+        version: link:../packages/bl_do-collection-release
+      '@cogoport/bn-salvage':
+        specifier: workspace:0.1.0
+        version: link:../packages/bn-salvage
+      '@cogoport/booking-desk':
+        specifier: workspace:0.1.0
+        version: link:../packages/booking-desk
+      '@cogoport/business-finance':
+        specifier: workspace:0.1.0
+        version: link:../packages/business-finance
+      '@cogoport/chakravyuh':
+        specifier: workspace:0.1.0
+        version: link:../packages/chakravyuh
+      '@cogoport/chro':
+        specifier: workspace:0.1.0
+        version: link:../packages/chro
+      '@cogoport/cogo-academy':
+        specifier: workspace:0.1.0
+        version: link:../packages/cogo-academy
+      '@cogoport/cogo-one':
+        specifier: workspace:0.1.1
+        version: link:../packages/cogo-one
+      '@cogoport/cogo-verse-analytics':
+        specifier: workspace:0.1.0
+        version: link:../packages/cogo-verse-analytics
+      '@cogoport/components':
+        specifier: ^1.0.359
+        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/contracts':
+        specifier: workspace:0.1.0
+        version: link:../packages/contracts
+      '@cogoport/controlled-booking':
+        specifier: workspace:0.1.0
+        version: link:../packages/controlled-booking
+      '@cogoport/core':
+        specifier: workspace:0.1.0
+        version: link:../common/core
+      '@cogoport/cost-booking-desk':
+        specifier: workspace:0.1.0
+        version: link:../packages/cost-booking-desk
+      '@cogoport/document-desk':
+        specifier: workspace:0.1.0
+        version: link:../packages/document-desk
+      '@cogoport/employee-portal':
+        specifier: workspace:0.1.0
+        version: link:../packages/employee-portal
+      '@cogoport/enrichment':
+        specifier: workspace:0.1.0
+        version: link:../packages/enrichment
+      '@cogoport/forms':
+        specifier: workspace:0.1.0
+        version: link:../common/forms
+      '@cogoport/globalization':
+        specifier: workspace:^0.0.1
+        version: link:../common/globalization
+      '@cogoport/ground-ops':
+        specifier: workspace:0.1.0
+        version: link:../packages/ground-ops
+      '@cogoport/icons-react':
+        specifier: ^1.0.58
+        version: 1.0.79(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/ingestion':
+        specifier: workspace:0.1.0
+        version: link:../packages/ingestion
+      '@cogoport/kam-desk':
+        specifier: workspace:0.1.0
+        version: link:../packages/kam-desk
+      '@cogoport/last-mile-desk':
+        specifier: workspace:0.1.0
+        version: link:../packages/last-mile-desk
+      '@cogoport/locations':
+        specifier: workspace:0.1.0
+        version: link:../packages/locations
+      '@cogoport/my-incident':
+        specifier: workspace:0.1.0
+        version: link:../packages/my-incident
+      '@cogoport/my-profile':
+        specifier: workspace:0.1.0
+        version: link:../packages/my-profile
+      '@cogoport/navigation-configs':
+        specifier: workspace:0.1.0
+        version: link:../common/navigation-configs
+      '@cogoport/new-employee-dashboard':
+        specifier: workspace:0.1.0
+        version: link:../packages/new-employee-dashboard
+      '@cogoport/next':
+        specifier: workspace:0.1.0
+        version: link:../common/next
+      '@cogoport/ocean-modules':
+        specifier: workspace:0.1.0
+        version: link:../common/ocean-modules
+      '@cogoport/performance-management':
+        specifier: workspace:1.0.0
+        version: link:../packages/performance-management
+      '@cogoport/referral':
+        specifier: workspace:0.1.0
+        version: link:../packages/referral
+      '@cogoport/request':
+        specifier: workspace:0.1.0
+        version: link:../common/request
+      '@cogoport/rfq-dashboard':
+        specifier: workspace:0.1.0
+        version: link:../packages/rfq-dashboard
+      '@cogoport/saas-subscription':
+        specifier: workspace:0.1.0
+        version: link:../packages/saas-subscription
+      '@cogoport/saas-tools':
+        specifier: workspace:0.1.0
+        version: link:../packages/saas-tools
+      '@cogoport/scope-select':
+        specifier: workspace:0.1.0
+        version: link:../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:0.1.0
+        version: link:../common/shipment-chat
+      '@cogoport/shipment-fcl-cfs':
+        specifier: workspace:0.1.0
+        version: link:../packages/shipment-fcl-cfs
+      '@cogoport/shipment-fcl-custom':
+        specifier: workspace:0.1.0
+        version: link:../packages/shipment-fcl-custom
+      '@cogoport/shipment-fcl-freight':
+        specifier: workspace:0.1.0
+        version: link:../packages/shipment-fcl-freight
+      '@cogoport/shipment-fcl-freight-local':
+        specifier: workspace:0.1.0
+        version: link:../packages/shipment-fcl-freight-local
+      '@cogoport/shipment-ftl-freight':
+        specifier: workspace:0.1.0
+        version: link:../packages/shipment-ftl-freight
+      '@cogoport/shipment-haulage-freight':
+        specifier: workspace:0.1.0
+        version: link:../packages/shipment-haulage-freight
+      '@cogoport/shipment-lcl-freight':
+        specifier: workspace:0.1.0
+        version: link:../packages/shipment-lcl-freight
+      '@cogoport/shipment-ltl-freight':
+        specifier: workspace:0.1.0
+        version: link:../packages/shipment-ltl-freight
+      '@cogoport/shipment-mails':
+        specifier: workspace:0.1.0
+        version: link:../common/shipment-mails
+      '@cogoport/shipment-rail-domestic-freight':
+        specifier: workspace:0.1.0
+        version: link:../packages/shipment-rail-domestic-freight
+      '@cogoport/so2-surface':
+        specifier: workspace:0.1.0
+        version: link:../packages/so2-surface
+      '@cogoport/store':
+        specifier: workspace:0.1.0
+        version: link:../common/store
+      '@cogoport/supply-dashboards':
+        specifier: workspace:0.1.0
+        version: link:../packages/supply-dashboards
+      '@cogoport/surface-modules':
+        specifier: workspace:0.1.0
+        version: link:../common/surface-modules
+      '@cogoport/ticket-management':
+        specifier: workspace:0.1.1
+        version: link:../packages/ticket-management
+      '@cogoport/translate':
+        specifier: workspace:0.1.0
+        version: link:../packages/Translation
+      '@cogoport/unified-dashboard':
+        specifier: workspace:^0.1.0
+        version: link:../packages/unified-dashboard
+      '@cogoport/utils':
+        specifier: ^1.2.6
+        version: 1.2.10
+      '@cogoport/vendor-rm':
+        specifier: workspace:0.1.0
+        version: link:../packages/vendor-rm
+      '@cogoport/welcome':
+        specifier: workspace:0.1.0
+        version: link:../packages/welcome
+      '@next/bundle-analyzer':
+        specifier: ^13.2.3
+        version: 13.4.5
+      '@types/node':
+        specifier: ^18.14.5
+        version: 18.16.18
+      '@types/react':
+        specifier: ^18.0.28
+        version: 18.2.12
+      next:
+        specifier: 13.1.6
+        version: 13.1.6(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-redux:
+        specifier: ^8.0.5
+        version: 8.1.0(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0)
+      typescript:
+        specifier: ^4.9.5
+        version: 4.9.5
 
-  common/constants:
-    specifiers: {}
+  common/constants: {}
 
   common/context:
     specifiers:
@@ -442,11 +513,21 @@ importers:
       react-dom: 18.2.0
       react-redux: ^8.0.5
     dependencies:
-      '@reduxjs/toolkit': 1.9.5_mdrgh7pftervsmldwkouzrv5ry
-      next: 13.1.6_biqbaboplfbrettd7655fr4n2y
-      react: 18.2.0
-      react-dom: 18.2.0_react@18.2.0
-      react-redux: 8.0.7_y5i3epb5s5mvtsle7yzcmg2qze
+      '@reduxjs/toolkit':
+        specifier: ^1.9.3
+        version: 1.9.5(react-redux@8.1.0)(react@18.2.0)
+      next:
+        specifier: 13.1.6
+        version: 13.1.6(@babel/core@7.22.5)(react-dom@18.2.0)(react@18.2.0)
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-dom:
+        specifier: 18.2.0
+        version: 18.2.0(react@18.2.0)
+      react-redux:
+        specifier: ^8.0.5
+        version: 8.1.0(@reduxjs/toolkit@1.9.5)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
 
   common/surface-modules:
     specifiers:
@@ -503,7 +584,9 @@ importers:
       '@cogoport/utils': 1.2.10
       react: 18.2.0
     devDependencies:
-      '@types/react': 18.2.11
+      '@types/react':
+        specifier: ^18.0.28
+        version: 18.2.12
 
   packages/access-management:
     specifiers:
@@ -755,8 +838,12 @@ importers:
       react: 18.2.0
       react-grid-layout: 1.3.4_react@18.2.0
     devDependencies:
-      '@types/file-saver': 2.0.5
-      '@types/react': 18.2.11
+      '@types/file-saver':
+        specifier: ^2.0.5
+        version: 2.0.5
+      '@types/react':
+        specifier: ^18.0.28
+        version: 18.2.12
 
   packages/chakravyuh:
     specifiers:
@@ -1189,7 +1276,9 @@ importers:
       '@cogoport/utils': 1.2.10
       react: 18.2.0
     devDependencies:
-      '@types/react': 18.2.11
+      '@types/react':
+        specifier: ^18.0.28
+        version: 18.2.12
 
   packages/my-profile:
     specifiers:
@@ -1389,61 +1478,93 @@ importers:
       '@cogoport/utils': ^1.2.10
       react: 18.2.0
     dependencies:
-      '@cogoport/components': 1.0.427_dmzrg5ztbnoymspucwsgrw37ia
-      '@cogoport/forms': link:../../common/forms
-      '@cogoport/icons-react': 1.0.79_react@18.2.0
-      '@cogoport/request': link:../../common/request
-      '@cogoport/store': link:../../common/store
-      '@cogoport/utils': 1.2.10
-      react: 18.2.0
+      '@cogoport/components':
+        specifier: ^1.0.410
+        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/forms':
+        specifier: workspace:^0.1.0
+        version: link:../../common/forms
+      '@cogoport/icons-react':
+        specifier: ^1.0.68
+        version: 1.0.79(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/request':
+        specifier: workspace:^0.1.0
+        version: link:../../common/request
+      '@cogoport/store':
+        specifier: workspace:^0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.10
+        version: 1.2.10
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
 
   packages/shipment-fcl-cfs:
-    specifiers:
-      '@cogoport/components': ^1.0.395
-      '@cogoport/constants': workspace:^0.1.0
-      '@cogoport/context': workspace:^0.1.0
-      '@cogoport/forms': workspace:^0.1.0
-      '@cogoport/globalization': workspace:^0.0.1
-      '@cogoport/icons-react': ^1.0.60
-      '@cogoport/maps': ^1.0.2
-      '@cogoport/navigation-configs': workspace:^0.1.0
-      '@cogoport/next': workspace:^0.1.0
-      '@cogoport/ocean-modules': workspace:^0.1.0
-      '@cogoport/purchase-invoicing': workspace:^0.1.0
-      '@cogoport/request': workspace:^0.1.0
-      '@cogoport/scope-select': workspace:^0.1.0
-      '@cogoport/shipment-chat': workspace:^0.1.0
-      '@cogoport/shipment-mails': workspace:^0.1.0
-      '@cogoport/store': workspace:^0.1.0
-      '@cogoport/utils': ^1.2.6
-      file-saver: ^2.0.5
-      prop-types: ^15.8.1
-      react: 18.2.0
-      react-hook-form: ^7.43.3
-      uuid: ^9.0.0
     dependencies:
-      '@cogoport/components': 1.0.427_dmzrg5ztbnoymspucwsgrw37ia
-      '@cogoport/constants': link:../../common/constants
-      '@cogoport/context': link:../../common/context
-      '@cogoport/forms': link:../../common/forms
-      '@cogoport/globalization': link:../../common/globalization
-      '@cogoport/icons-react': 1.0.79_react@18.2.0
-      '@cogoport/maps': 1.0.3_bsu6urv6jm3npkveoaymjbpkh4
-      '@cogoport/navigation-configs': link:../../common/navigation-configs
-      '@cogoport/next': link:../../common/next
-      '@cogoport/ocean-modules': link:../../common/ocean-modules
-      '@cogoport/purchase-invoicing': link:../purchase-invoicing
-      '@cogoport/request': link:../../common/request
-      '@cogoport/scope-select': link:../../common/scope-select
-      '@cogoport/shipment-chat': link:../../common/shipment-chat
-      '@cogoport/shipment-mails': link:../../common/shipment-mails
-      '@cogoport/store': link:../../common/store
-      '@cogoport/utils': 1.2.10
-      file-saver: 2.0.5
-      prop-types: 15.8.1
-      react: 18.2.0
-      react-hook-form: 7.44.3_react@18.2.0
-      uuid: 9.0.0
+      '@cogoport/components':
+        specifier: ^1.0.395
+        version: 1.0.427(@babel/core@7.22.5)(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/constants':
+        specifier: workspace:^0.1.0
+        version: link:../../common/constants
+      '@cogoport/context':
+        specifier: workspace:^0.1.0
+        version: link:../../common/context
+      '@cogoport/forms':
+        specifier: workspace:^0.1.0
+        version: link:../../common/forms
+      '@cogoport/globalization':
+        specifier: workspace:^0.0.1
+        version: link:../../common/globalization
+      '@cogoport/icons-react':
+        specifier: ^1.0.60
+        version: 1.0.79(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/maps':
+        specifier: ^1.0.2
+        version: 1.0.3(@cogoport/icons-react@1.0.79)(react-dom@18.2.0)(react@18.2.0)
+      '@cogoport/navigation-configs':
+        specifier: workspace:^0.1.0
+        version: link:../../common/navigation-configs
+      '@cogoport/next':
+        specifier: workspace:^0.1.0
+        version: link:../../common/next
+      '@cogoport/ocean-modules':
+        specifier: workspace:^0.1.0
+        version: link:../../common/ocean-modules
+      '@cogoport/request':
+        specifier: workspace:^0.1.0
+        version: link:../../common/request
+      '@cogoport/scope-select':
+        specifier: workspace:^0.1.0
+        version: link:../../common/scope-select
+      '@cogoport/shipment-chat':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-chat
+      '@cogoport/shipment-mails':
+        specifier: workspace:^0.1.0
+        version: link:../../common/shipment-mails
+      '@cogoport/store':
+        specifier: workspace:^0.1.0
+        version: link:../../common/store
+      '@cogoport/utils':
+        specifier: ^1.2.6
+        version: 1.2.10
+      file-saver:
+        specifier: ^2.0.5
+        version: 2.0.5
+      prop-types:
+        specifier: ^15.8.1
+        version: 15.8.1
+      react:
+        specifier: 18.2.0
+        version: 18.2.0
+      react-hook-form:
+        specifier: ^7.43.3
+        version: 7.44.3(react@18.2.0)
+      uuid:
+        specifier: ^9.0.0
+        version: 9.0.0
 
   packages/shipment-fcl-custom:
     specifiers:
@@ -3415,18 +3536,18 @@ packages:
     peerDependencies:
       eslint: ^8.23.0
     dependencies:
-      '@typescript-eslint/eslint-plugin': 5.59.9_3i5bqcvz3xm47mwpahnwyqmg7m
-      '@typescript-eslint/parser': 5.59.9_kigkzfftsmftz3xok324pyvzui
+      '@typescript-eslint/eslint-plugin': 5.59.11(@typescript-eslint/parser@5.59.11)(eslint@8.42.0)(typescript@4.9.5)
+      '@typescript-eslint/parser': 5.59.11(eslint@8.42.0)(typescript@4.9.5)
       eslint: 8.42.0
-      eslint-config-airbnb: 19.0.4_73sbnz5dtee5vgkzyutel3qqoe
-      eslint-config-airbnb-base: 15.0.0_tq6ygtwx4bb2ckurswcawqxsem
-      eslint-config-airbnb-typescript: 17.0.0_wvreivwdxhtvuyvy5c4eyucazi
-      eslint-import-resolver-custom-alias: 1.3.2_5rfvta7qn57kxm7ir36ta6fixq
-      eslint-plugin-cypress: 2.13.3_eslint@8.42.0
-      eslint-plugin-import: 2.27.5_4sfevs3vpuvadhjdwbsynzgtpy
-      eslint-plugin-jsx-a11y: 6.7.1_eslint@8.42.0
-      eslint-plugin-react: 7.32.2_eslint@8.42.0
-      eslint-plugin-react-hooks: 4.6.0_eslint@8.42.0
+      eslint-config-airbnb: 19.0.4(eslint-plugin-import@2.27.5)(eslint-plugin-jsx-a11y@6.7.1)(eslint-plugin-react-hooks@4.6.0)(eslint-plugin-react@7.32.2)(eslint@8.42.0)
+      eslint-config-airbnb-base: 15.0.0(eslint-plugin-import@2.27.5)(eslint@8.42.0)
+      eslint-config-airbnb-typescript: 17.0.0(@typescript-eslint/eslint-plugin@5.59.11)(@typescript-eslint/parser@5.59.11)(eslint-plugin-import@2.27.5)(eslint@8.42.0)
+      eslint-import-resolver-custom-alias: 1.3.2(eslint-plugin-import@2.27.5)
+      eslint-plugin-cypress: 2.13.3(eslint@8.42.0)
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.59.11)(eslint@8.42.0)
+      eslint-plugin-jsx-a11y: 6.7.1(eslint@8.42.0)
+      eslint-plugin-react: 7.32.2(eslint@8.42.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.42.0)
     optionalDependencies:
       react: 18.2.0
       typescript: 4.9.5
@@ -5784,20 +5905,7 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /@react-spring/web/9.4.5_react@18.2.0:
-    resolution: {integrity: sha512-NGAkOtKmOzDEctL7MzRlQGv24sRce++0xAY7KlcxmeVkR7LRSGkoXHaIfm9ObzxPMcPHQYQhf3+X9jepIFNHQA==}
-    peerDependencies:
-      react: ^16.8.0  || >=17.0.0 || >=18.0.0
-      react-dom: ^16.8.0  || >=17.0.0 || >=18.0.0
-    dependencies:
-      '@react-spring/animated': 9.4.5_react@18.2.0
-      '@react-spring/core': 9.4.5_react@18.2.0
-      '@react-spring/shared': 9.4.5_react@18.2.0
-      '@react-spring/types': 9.4.5
-      react: 18.2.0
-    dev: false
-
-  /@reduxjs/toolkit/1.9.5_mdrgh7pftervsmldwkouzrv5ry:
+  /@reduxjs/toolkit@1.9.5(react-redux@8.1.0)(react@18.2.0):
     resolution: {integrity: sha512-Rt97jHmfTeaxL4swLRNPD/zV4OxTes4la07Xc4hetpUW/vc75t5m1ANyxG6ymnEQ2FsLQsoMlYB2vV1sO3m8tQ==}
     peerDependencies:
       react: ^16.9.0 || ^17.0.0 || ^18
@@ -5810,7 +5918,7 @@ packages:
     dependencies:
       immer: 9.0.21
       react: 18.2.0
-      react-redux: 8.0.7_y5i3epb5s5mvtsle7yzcmg2qze
+      react-redux: 8.1.0(@reduxjs/toolkit@1.9.5)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1)
       redux: 4.2.1
       redux-thunk: 2.4.2_redux@4.2.1
       reselect: 4.1.8
@@ -6338,16 +6446,16 @@ packages:
   /@types/minimist/1.2.2:
     resolution: {integrity: sha512-jhuKLIRrhvCPLqwPcx6INqmKeiA5EWrsCOPhrlFSrbrmU4ZMPjj5Ul/oLCMDO98XRUIwVm78xICz4EPCektzeQ==}
 
-  /@types/node/16.18.35:
-    resolution: {integrity: sha512-yqU2Rf94HFZqgHf6Tuyc/IqVD0l3U91KjvypSr1GtJKyrnl6L/kfnxVqN4QOwcF5Zx9tO/HKK+fozGr5AtqA+g==}
+  /@types/node@16.18.36:
+    resolution: {integrity: sha512-8egDX8dE50XyXWH6C6PRCNkTP106DuUrvdrednFouDSmCi7IOvrqr0frznfZaHifHH/3aq/7a7v9N4wdXMqhBQ==}
     dev: false
 
-  /@types/node/18.16.17:
-    resolution: {integrity: sha512-QAkjjRA1N7gPJeAP4WLXZtYv6+eMXFNviqktCDt4GLcmCugMr5BcRHfkOjCQzvCsnMp+L79a54zBkbw356xv9Q==}
+  /@types/node@18.16.18:
+    resolution: {integrity: sha512-/aNaQZD0+iSBAGnvvN2Cx92HqE5sZCPZtx2TsK+4nvV23fFe09jVDvpArXr2j9DnYlzuU9WuoykDDc6wqvpNcw==}
     dev: false
 
-  /@types/node/20.3.0:
-    resolution: {integrity: sha512-cumHmIAf6On83X7yP+LrsEyUOf/YlociZelmpRYaGFydoaPdxdt80MAbu6vWerQT2COCp2nPvHdsbD7tHn/YlQ==}
+  /@types/node@20.3.1:
+    resolution: {integrity: sha512-EhcH/wvidPy1WeML3TtYFGR83UzjxeWRen9V402T8aUGYsCHOmfoisV3ZSg03gAFIbLq8TnWOJ0f4cALtnSEUg==}
     dev: false
 
   /@types/normalize-package-data/2.4.1:
@@ -6392,8 +6500,8 @@ packages:
       '@types/react': 18.2.11
     dev: false
 
-  /@types/react/18.2.11:
-    resolution: {integrity: sha512-+hsJr9hmwyDecSMQAmX7drgbDpyE+EgSF6t7+5QEBAn1tQK7kl1vWZ4iRf6SjQ8lk7dyEULxUmZOIpN0W5baZA==}
+  /@types/react@18.2.12:
+    resolution: {integrity: sha512-ndmBMLCgn38v3SntMeoJaIrO6tGHYKMEBohCUmw8HoLLQdRMOIGXfeYaBTLe2lsFaSB3MOK1VXscYFnmLtTSmw==}
     dependencies:
       '@types/prop-types': 15.7.5
       '@types/scheduler': 0.16.3
@@ -6432,8 +6540,8 @@ packages:
     resolution: {integrity: sha512-EwmlvuaxPNej9+T4v5AuBPJa2x2UOJVdjCtDHgcDqitUeOtjnJKJ+apYjVcAoBEMjKW1VVFGZLUb5+qqa09XFA==}
     dev: false
 
-  /@typescript-eslint/eslint-plugin/5.59.9_3i5bqcvz3xm47mwpahnwyqmg7m:
-    resolution: {integrity: sha512-4uQIBq1ffXd2YvF7MAvehWKW3zVv/w+mSfRAu+8cKbfj3nwzyqJLNcZJpQ/WZ1HLbJDiowwmQ6NO+63nCA+fqA==}
+  /@typescript-eslint/eslint-plugin@5.59.11(@typescript-eslint/parser@5.59.11)(eslint@8.42.0)(typescript@4.9.5):
+    resolution: {integrity: sha512-XxuOfTkCUiOSyBWIvHlUraLw/JT/6Io1365RO6ZuI88STKMavJZPNMU0lFcUTeQXEhHiv64CbxYxBNoDVSmghg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       '@typescript-eslint/parser': ^5.0.0
@@ -6444,10 +6552,10 @@ packages:
         optional: true
     dependencies:
       '@eslint-community/regexpp': 4.5.1
-      '@typescript-eslint/parser': 5.59.9_kigkzfftsmftz3xok324pyvzui
-      '@typescript-eslint/scope-manager': 5.59.9
-      '@typescript-eslint/type-utils': 5.59.9_kigkzfftsmftz3xok324pyvzui
-      '@typescript-eslint/utils': 5.59.9_kigkzfftsmftz3xok324pyvzui
+      '@typescript-eslint/parser': 5.59.11(eslint@8.42.0)(typescript@4.9.5)
+      '@typescript-eslint/scope-manager': 5.59.11
+      '@typescript-eslint/type-utils': 5.59.11(eslint@8.42.0)(typescript@4.9.5)
+      '@typescript-eslint/utils': 5.59.11(eslint@8.42.0)(typescript@4.9.5)
       debug: 4.3.4
       eslint: 8.42.0
       grapheme-splitter: 1.0.4
@@ -6460,8 +6568,8 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/parser/5.59.9_kigkzfftsmftz3xok324pyvzui:
-    resolution: {integrity: sha512-FsPkRvBtcLQ/eVK1ivDiNYBjn3TGJdXy2fhXX+rc7czWl4ARwnpArwbihSOHI2Peg9WbtGHrbThfBUkZZGTtvQ==}
+  /@typescript-eslint/parser@5.59.11(eslint@8.42.0)(typescript@4.9.5):
+    resolution: {integrity: sha512-s9ZF3M+Nym6CAZEkJJeO2TFHHDsKAM3ecNkLuH4i4s8/RCPnF5JRip2GyviYkeEAcwGMJxkqG9h2dAsnA1nZpA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -6470,9 +6578,9 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/scope-manager': 5.59.9
-      '@typescript-eslint/types': 5.59.9
-      '@typescript-eslint/typescript-estree': 5.59.9_typescript@4.9.5
+      '@typescript-eslint/scope-manager': 5.59.11
+      '@typescript-eslint/types': 5.59.11
+      '@typescript-eslint/typescript-estree': 5.59.11(typescript@4.9.5)
       debug: 4.3.4
       eslint: 8.42.0
       typescript: 4.9.5
@@ -6480,16 +6588,16 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/scope-manager/5.59.9:
-    resolution: {integrity: sha512-8RA+E+w78z1+2dzvK/tGZ2cpGigBZ58VMEHDZtpE1v+LLjzrYGc8mMaTONSxKyEkz3IuXFM0IqYiGHlCsmlZxQ==}
+  /@typescript-eslint/scope-manager@5.59.11:
+    resolution: {integrity: sha512-dHFOsxoLFtrIcSj5h0QoBT/89hxQONwmn3FOQ0GOQcLOOXm+MIrS8zEAhs4tWl5MraxCY3ZJpaXQQdFMc2Tu+Q==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       '@typescript-eslint/types': 5.59.9
       '@typescript-eslint/visitor-keys': 5.59.9
     dev: true
 
-  /@typescript-eslint/type-utils/5.59.9_kigkzfftsmftz3xok324pyvzui:
-    resolution: {integrity: sha512-ksEsT0/mEHg9e3qZu98AlSrONAQtrSTljL3ow9CGej8eRo7pe+yaC/mvTjptp23Xo/xIf2mLZKC6KPv4Sji26Q==}
+  /@typescript-eslint/type-utils@5.59.11(eslint@8.42.0)(typescript@4.9.5):
+    resolution: {integrity: sha512-LZqVY8hMiVRF2a7/swmkStMYSoXMFlzL6sXV6U/2gL5cwnLWQgLEG8tjWPpaE4rMIdZ6VKWwcffPlo1jPfk43g==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: '*'
@@ -6498,8 +6606,8 @@ packages:
       typescript:
         optional: true
     dependencies:
-      '@typescript-eslint/typescript-estree': 5.59.9_typescript@4.9.5
-      '@typescript-eslint/utils': 5.59.9_kigkzfftsmftz3xok324pyvzui
+      '@typescript-eslint/typescript-estree': 5.59.11(typescript@4.9.5)
+      '@typescript-eslint/utils': 5.59.11(eslint@8.42.0)(typescript@4.9.5)
       debug: 4.3.4
       eslint: 8.42.0
       tsutils: 3.21.0_typescript@4.9.5
@@ -6508,13 +6616,13 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/types/5.59.9:
-    resolution: {integrity: sha512-uW8H5NRgTVneSVTfiCVffBb8AbwWSKg7qcA4Ot3JI3MPCJGsB4Db4BhvAODIIYE5mNj7Q+VJkK7JxmRhk2Lyjw==}
+  /@typescript-eslint/types@5.59.11:
+    resolution: {integrity: sha512-epoN6R6tkvBYSc+cllrz+c2sOFWkbisJZWkOE+y3xHtvYaOE6Wk6B8e114McRJwFRjGvYdJwLXQH5c9osME/AA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dev: true
 
-  /@typescript-eslint/typescript-estree/5.59.9_typescript@4.9.5:
-    resolution: {integrity: sha512-pmM0/VQ7kUhd1QyIxgS+aRvMgw+ZljB3eDb+jYyp6d2bC0mQWLzUDF+DLwCTkQ3tlNyVsvZRXjFyV0LkU/aXjA==}
+  /@typescript-eslint/typescript-estree@5.59.11(typescript@4.9.5):
+    resolution: {integrity: sha512-YupOpot5hJO0maupJXixi6l5ETdrITxeo5eBOeuV7RSKgYdU3G5cxO49/9WRnJq9EMrB7AuTSLH/bqOsXi7wPA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       typescript: '*'
@@ -6534,8 +6642,8 @@ packages:
       - supports-color
     dev: true
 
-  /@typescript-eslint/utils/5.59.9_kigkzfftsmftz3xok324pyvzui:
-    resolution: {integrity: sha512-1PuMYsju/38I5Ggblaeb98TOoUvjhRvLpLa1DoTOFaLWqaXl/1iQ1eGurTXgBY58NUdtfTXKP5xBq7q9NDaLKg==}
+  /@typescript-eslint/utils@5.59.11(eslint@8.42.0)(typescript@4.9.5):
+    resolution: {integrity: sha512-didu2rHSOMUdJThLk4aZ1Or8IcO3HzCw/ZvEjTTIfjIrcdd5cvSIwwDy2AOlE7htSNp7QIZ10fLMyRCveesMLg==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     peerDependencies:
       eslint: ^6.0.0 || ^7.0.0 || ^8.0.0
@@ -6543,9 +6651,9 @@ packages:
       '@eslint-community/eslint-utils': 4.4.0_eslint@8.42.0
       '@types/json-schema': 7.0.12
       '@types/semver': 7.5.0
-      '@typescript-eslint/scope-manager': 5.59.9
-      '@typescript-eslint/types': 5.59.9
-      '@typescript-eslint/typescript-estree': 5.59.9_typescript@4.9.5
+      '@typescript-eslint/scope-manager': 5.59.11
+      '@typescript-eslint/types': 5.59.11
+      '@typescript-eslint/typescript-estree': 5.59.11(typescript@4.9.5)
       eslint: 8.42.0
       eslint-scope: 5.1.1
       semver: 7.5.1
@@ -6554,8 +6662,8 @@ packages:
       - typescript
     dev: true
 
-  /@typescript-eslint/visitor-keys/5.59.9:
-    resolution: {integrity: sha512-bT7s0td97KMaLwpEBckbzj/YohnvXtqbe2XgqNvTl6RJVakY5mvENOTPvw5u66nljfZxthESpDozs86U+oLY8Q==}
+  /@typescript-eslint/visitor-keys@5.59.11:
+    resolution: {integrity: sha512-KGYniTGG3AMTuKF9QBD7EIrvufkB6O6uX3knP73xbKLMpH+QRPcgnCxjWXSHjMRuOxFLovljqQgQpR0c7GvjoA==}
     engines: {node: ^12.22.0 || ^14.17.0 || >=16.0.0}
     dependencies:
       '@typescript-eslint/types': 5.59.9
@@ -6637,8 +6745,8 @@ packages:
   /argparse/2.0.1:
     resolution: {integrity: sha512-8+9WqebbFzpX9OR+Wa6O29asIogeRMzcGtAINdpMHHyAg10f05aSFVBbcEqGf/PXw1EjAZ+q2/bEBg3DvurK3Q==}
 
-  /aria-query/5.1.3:
-    resolution: {integrity: sha512-R5iJ5lkuHybztUfuOAznmboyjWq8O6sqNqtK7CLOqdydi54VNbORp49mb14KbWgG1QD3JFO9hJdZ+y4KutfdOQ==}
+  /aria-query@5.2.1:
+    resolution: {integrity: sha512-7uFg4b+lETFgdaJyETnILsXgnnzVnkHcgRbwbPwevm5x/LmUlt3MjczMRe1zg824iBgXZNRPTBftNYyRSKLp2g==}
     dependencies:
       deep-equal: 2.2.1
     dev: true
@@ -6794,8 +6902,8 @@ packages:
       - debug
     dev: false
 
-  /axobject-query/3.1.1:
-    resolution: {integrity: sha512-goKlv8DZrK9hUh975fnHzhNIO4jUnFCfv/dszV5VwUGDFjI6vQ2VwoyjYjYNEbBE8AH87TduWP5uyDR1D+Iteg==}
+  /axobject-query@3.2.1:
+    resolution: {integrity: sha512-jsyHu61e6N4Vbz/v18DHwWYKK0bSWLqn47eeDSKPB7m8tqMHF9YJ+mhIk2lVteyZrY8tnSj/jHOv4YiTCuCJgg==}
     dependencies:
       deep-equal: 2.2.1
     dev: true
@@ -6891,16 +6999,15 @@ packages:
     dependencies:
       fill-range: 7.0.1
 
-  /browserslist/4.21.7:
-    resolution: {integrity: sha512-BauCXrQ7I2ftSqd2mvKHGo85XR0u7Ru3C/Hxsy/0TkfCtjrmAbPdzLGasmoiBxplpDXlPvdjX9u7srIMfgasNA==}
+  /browserslist@4.21.8:
+    resolution: {integrity: sha512-j+7xYe+v+q2Id9qbBeCI8WX5NmZSRe8es1+0xntD/+gaWXznP8tFEkv5IgSaHf5dS1YwVMbX/4W6m937mj+wQw==}
     engines: {node: ^6 || ^7 || ^8 || ^9 || ^10 || ^11 || ^12 || >=13.7}
     hasBin: true
     dependencies:
       caniuse-lite: 1.0.30001502
       electron-to-chromium: 1.4.427
       node-releases: 2.0.12
-      update-browserslist-db: 1.0.11_browserslist@4.21.7
-    dev: true
+      update-browserslist-db: 1.0.11(browserslist@4.21.8)
 
   /btoa/1.2.1:
     resolution: {integrity: sha512-SB4/MIGlsiVkMcHmT+pSmIPoNDoHg+7cMzmt3Uxt628MTz2487DKSqK/fuhFBrkuqrYv5UCEnACpF4dTFNKc/g==}
@@ -7521,30 +7628,7 @@ packages:
       regexp.prototype.flags: 1.5.0
     dev: false
 
-  /deep-equal/2.2.1:
-    resolution: {integrity: sha512-lKdkdV6EOGoVn65XaOsPdH4rMxTZOnmFyuIkMjM1i5HHCbfjC97dawgTAy0deYNfuqUqW+Q5VrVaQYtUpSd6yQ==}
-    dependencies:
-      array-buffer-byte-length: 1.0.0
-      call-bind: 1.0.2
-      es-get-iterator: 1.1.3
-      get-intrinsic: 1.2.1
-      is-arguments: 1.1.1
-      is-array-buffer: 3.0.2
-      is-date-object: 1.0.5
-      is-regex: 1.1.4
-      is-shared-array-buffer: 1.0.2
-      isarray: 2.0.5
-      object-is: 1.1.5
-      object-keys: 1.1.1
-      object.assign: 4.1.4
-      regexp.prototype.flags: 1.5.0
-      side-channel: 1.0.4
-      which-boxed-primitive: 1.0.2
-      which-collection: 1.0.1
-      which-typed-array: 1.1.9
-    dev: true
-
-  /deep-is/0.1.4:
+  /deep-is@0.1.4:
     resolution: {integrity: sha512-oIPzksmTg4/MriiaYGO+okXDT7ztn/w3Eptv/+gSIdMdKsJo0u4CfYNFJPy+4SKMuCqGw2wxnA+URMg3t8a/bQ==}
 
   /deepmerge/4.3.1:
@@ -7768,9 +7852,8 @@ packages:
       safe-buffer: 5.2.1
     dev: false
 
-  /electron-to-chromium/1.4.427:
-    resolution: {integrity: sha512-HK3r9l+Jm8dYAm1ctXEWIC+hV60zfcjS9UA5BDlYvnI5S7PU/yytjpvSrTNrSSRRkuu3tDyZhdkwIczh+0DWaw==}
-    dev: true
+  /electron-to-chromium@1.4.428:
+    resolution: {integrity: sha512-L7uUknyY286of0AYC8CKfgWstD0Smk2DvHDi9F0GWQhSH90Bzi7iDrmCbZKz75tYJxeGSAc7TYeKpmbjMDoh1w==}
 
   /emoji-regex/8.0.0:
     resolution: {integrity: sha512-MSjYzcWNOA0ewAHpz0MxpYFvwg6yjy1NG3xteoqz644VCo/RPgnr1/GGt+ic3iJTzQ8Eu3TdM14SawnVUmGE6A==}
@@ -7850,21 +7933,7 @@ packages:
       which-typed-array: 1.1.9
     dev: true
 
-  /es-get-iterator/1.1.3:
-    resolution: {integrity: sha512-sPZmqHBe6JIiTfN5q2pEi//TwxmAFHwj/XEuYjTuse78i8KxaqMTTzxPoFKuzRpDpTJ+0NAbpfenkmH2rePtuw==}
-    dependencies:
-      call-bind: 1.0.2
-      get-intrinsic: 1.2.1
-      has-symbols: 1.0.3
-      is-arguments: 1.1.1
-      is-map: 2.0.2
-      is-set: 2.0.2
-      is-string: 1.0.7
-      isarray: 2.0.5
-      stop-iteration-iterator: 1.0.0
-    dev: true
-
-  /es-set-tostringtag/2.0.1:
+  /es-set-tostringtag@2.0.1:
     resolution: {integrity: sha512-g3OMbtlwY3QewlqAiMLI47KywjWZoEytKr8pf6iTC8uJq5bIAH52Z9pnQ8pVL6whrCto53JZDuUIsifGeLorTg==}
     engines: {node: '>= 0.4'}
     dependencies:
@@ -7930,13 +7999,13 @@ packages:
     dependencies:
       confusing-browser-globals: 1.0.11
       eslint: 8.42.0
-      eslint-plugin-import: 2.27.5_4sfevs3vpuvadhjdwbsynzgtpy
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.59.11)(eslint@8.42.0)
       object.assign: 4.1.4
       object.entries: 1.1.6
       semver: 6.3.0
     dev: true
 
-  /eslint-config-airbnb-typescript/17.0.0_wvreivwdxhtvuyvy5c4eyucazi:
+  /eslint-config-airbnb-typescript@17.0.0(@typescript-eslint/eslint-plugin@5.59.11)(@typescript-eslint/parser@5.59.11)(eslint-plugin-import@2.27.5)(eslint@8.42.0):
     resolution: {integrity: sha512-elNiuzD0kPAPTXjFWg+lE24nMdHMtuxgYoD30OyMD6yrW1AhFZPAg27VX7d3tzOErw+dgJTNWfRSDqEcXb4V0g==}
     peerDependencies:
       '@typescript-eslint/eslint-plugin': ^5.13.0
@@ -7944,11 +8013,11 @@ packages:
       eslint: ^7.32.0 || ^8.2.0
       eslint-plugin-import: ^2.25.3
     dependencies:
-      '@typescript-eslint/eslint-plugin': 5.59.9_3i5bqcvz3xm47mwpahnwyqmg7m
-      '@typescript-eslint/parser': 5.59.9_kigkzfftsmftz3xok324pyvzui
+      '@typescript-eslint/eslint-plugin': 5.59.11(@typescript-eslint/parser@5.59.11)(eslint@8.42.0)(typescript@4.9.5)
+      '@typescript-eslint/parser': 5.59.11(eslint@8.42.0)(typescript@4.9.5)
       eslint: 8.42.0
-      eslint-config-airbnb-base: 15.0.0_tq6ygtwx4bb2ckurswcawqxsem
-      eslint-plugin-import: 2.27.5_4sfevs3vpuvadhjdwbsynzgtpy
+      eslint-config-airbnb-base: 15.0.0(eslint-plugin-import@2.27.5)(eslint@8.42.0)
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.59.11)(eslint@8.42.0)
     dev: true
 
   /eslint-config-airbnb/19.0.4_73sbnz5dtee5vgkzyutel3qqoe:
@@ -7962,11 +8031,11 @@ packages:
       eslint-plugin-react-hooks: ^4.3.0
     dependencies:
       eslint: 8.42.0
-      eslint-config-airbnb-base: 15.0.0_tq6ygtwx4bb2ckurswcawqxsem
-      eslint-plugin-import: 2.27.5_4sfevs3vpuvadhjdwbsynzgtpy
-      eslint-plugin-jsx-a11y: 6.7.1_eslint@8.42.0
-      eslint-plugin-react: 7.32.2_eslint@8.42.0
-      eslint-plugin-react-hooks: 4.6.0_eslint@8.42.0
+      eslint-config-airbnb-base: 15.0.0(eslint-plugin-import@2.27.5)(eslint@8.42.0)
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.59.11)(eslint@8.42.0)
+      eslint-plugin-jsx-a11y: 6.7.1(eslint@8.42.0)
+      eslint-plugin-react: 7.32.2(eslint@8.42.0)
+      eslint-plugin-react-hooks: 4.6.0(eslint@8.42.0)
       object.assign: 4.1.4
       object.entries: 1.1.6
     dev: true
@@ -7976,7 +8045,7 @@ packages:
     peerDependencies:
       eslint-plugin-import: '>=2.2.0'
     dependencies:
-      eslint-plugin-import: 2.27.5_4sfevs3vpuvadhjdwbsynzgtpy
+      eslint-plugin-import: 2.27.5(@typescript-eslint/parser@5.59.11)(eslint@8.42.0)
       glob-parent: 6.0.2
       resolve: 1.22.2
     dev: true
@@ -7991,7 +8060,7 @@ packages:
       - supports-color
     dev: true
 
-  /eslint-module-utils/2.8.0_z6h35y2edcwahhgxs7hcukw54e:
+  /eslint-module-utils@2.8.0(@typescript-eslint/parser@5.59.11)(eslint-import-resolver-node@0.3.7)(eslint@8.42.0):
     resolution: {integrity: sha512-aWajIYfsqCKRDgUfjEXNN/JlrzauMuSEy5sbd7WXbtW3EH6A6MpwEh42c7qD+MqQo9QMJ6fWLAeIJynx0g6OAw==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -8012,7 +8081,7 @@ packages:
       eslint-import-resolver-webpack:
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.59.9_kigkzfftsmftz3xok324pyvzui
+      '@typescript-eslint/parser': 5.59.11(eslint@8.42.0)(typescript@4.9.5)
       debug: 3.2.7
       eslint: 8.42.0
       eslint-import-resolver-node: 0.3.7
@@ -8029,7 +8098,7 @@ packages:
       globals: 11.12.0
     dev: true
 
-  /eslint-plugin-import/2.27.5_4sfevs3vpuvadhjdwbsynzgtpy:
+  /eslint-plugin-import@2.27.5(@typescript-eslint/parser@5.59.11)(eslint@8.42.0):
     resolution: {integrity: sha512-LmEt3GVofgiGuiE+ORpnvP+kAm3h6MLZJ4Q5HCyHADofsb4VzXFsRiWj3c0OFiV+3DWFh0qg3v9gcPlfc3zRow==}
     engines: {node: '>=4'}
     peerDependencies:
@@ -8039,7 +8108,7 @@ packages:
       '@typescript-eslint/parser':
         optional: true
     dependencies:
-      '@typescript-eslint/parser': 5.59.9_kigkzfftsmftz3xok324pyvzui
+      '@typescript-eslint/parser': 5.59.11(eslint@8.42.0)(typescript@4.9.5)
       array-includes: 3.1.6
       array.prototype.flat: 1.3.1
       array.prototype.flatmap: 1.3.1
@@ -8047,7 +8116,7 @@ packages:
       doctrine: 2.1.0
       eslint: 8.42.0
       eslint-import-resolver-node: 0.3.7
-      eslint-module-utils: 2.8.0_z6h35y2edcwahhgxs7hcukw54e
+      eslint-module-utils: 2.8.0(@typescript-eslint/parser@5.59.11)(eslint-import-resolver-node@0.3.7)(eslint@8.42.0)
       has: 1.0.3
       is-core-module: 2.12.1
       is-glob: 4.0.3
@@ -9017,11 +9086,7 @@ packages:
     dependencies:
       is-extglob: 2.1.1
 
-  /is-map/2.0.2:
-    resolution: {integrity: sha512-cOZFQQozTha1f4MxLFzlgKYPTyj26picdZTx82hbc/Xf4K/tZOOXSCkMvU4pKioRXGDLJRn0GM7Upe7kR721yg==}
-    dev: true
-
-  /is-negative-zero/2.0.2:
+  /is-negative-zero@2.0.2:
     resolution: {integrity: sha512-dqJvarLawXsFbNDeJW7zAz8ItJ9cd28YufuuFzh0G8pNHjJMnY08Dv7sYX2uF5UpQOwieAeOExEYAWWfu7ZZUA==}
     engines: {node: '>= 0.4'}
     dev: true
@@ -9063,11 +9128,7 @@ packages:
       call-bind: 1.0.2
       has-tostringtag: 1.0.0
 
-  /is-set/2.0.2:
-    resolution: {integrity: sha512-+2cnTEZeY5z/iXGbLhPrOAaK/Mau5k5eXq9j14CpRTftq0pAJu2MwVRSZhyZWBzx3o6X795Lz6Bpb6R0GKf37g==}
-    dev: true
-
-  /is-shared-array-buffer/1.0.2:
+  /is-shared-array-buffer@1.0.2:
     resolution: {integrity: sha512-sqN2UDu1/0y6uvXyStCOzyhAjCSlHceFoMKJW8W9EU9cvic/QdsZ0kEU93HEy3IUEFZIiH/3w+AH/UQbPHNdhA==}
     dependencies:
       call-bind: 1.0.2
@@ -9109,35 +9170,20 @@ packages:
       has-tostringtag: 1.0.0
     dev: true
 
-  /is-weakmap/2.0.1:
-    resolution: {integrity: sha512-NSBR4kH5oVj1Uwvv970ruUkCV7O1mzgVFO4/rev2cLRda9Tm9HrL70ZPut4rOHgY0FNrUu9BCbXA2sdQ+x0chA==}
-    dev: true
-
-  /is-weakref/1.0.2:
+  /is-weakref@1.0.2:
     resolution: {integrity: sha512-qctsuLZmIQ0+vSSMfoVvyFe2+GSEvnmZ2ezTup1SBse9+twCCeial6EEi3Nc2KFcf6+qz2FBPnjXsk8xhKSaPQ==}
     dependencies:
       call-bind: 1.0.2
     dev: true
 
-  /is-weakset/2.0.2:
-    resolution: {integrity: sha512-t2yVvttHkQktwnNNmBQ98AhENLdPUTDTE21uPqAQ0ARwQfGeQKRVS0NNurH7bTf7RrvcVn1OOge45CnBeHCSmg==}
-    dependencies:
-      call-bind: 1.0.2
-      get-intrinsic: 1.2.1
-    dev: true
-
-  /is-wsl/2.2.0:
+  /is-wsl@2.2.0:
     resolution: {integrity: sha512-fKzAra0rGJUUBwGBgNkHZuToZcn+TtXHpeCgmkMJMMYx1sQDYaCSyjJBSCa2nH1DGm7s3n1oBnohoVTBaN7Lww==}
     engines: {node: '>=8'}
     dependencies:
       is-docker: 2.2.1
     dev: true
 
-  /isarray/2.0.5:
-    resolution: {integrity: sha512-xHjhDr3cNBK0BzdUJSPXZntQUx/mwMS5Rw4A7lPJ90XGAO6ISP/ePDNuo0vhqOZU+UD5JoodwCAAoZQd3FeAKw==}
-    dev: true
-
-  /isexe/2.0.0:
+  /isexe@2.0.0:
     resolution: {integrity: sha512-RHxMLp9lnKHGHRng9QFhRCMbYAcVpn69smSGcq3f36xjgVVWThj4qqLbTLlq7Ssj8B+fIQ1EuCEGI2lKsyQeIw==}
 
   /jerrypick/1.1.1:
@@ -10408,34 +10454,34 @@ packages:
     peerDependencies:
       postcss: ^8.4
     dependencies:
-      '@csstools/postcss-cascade-layers': 3.0.1_postcss@8.4.24
-      '@csstools/postcss-color-function': 2.2.3_postcss@8.4.24
-      '@csstools/postcss-color-mix-function': 1.0.3_postcss@8.4.24
-      '@csstools/postcss-font-format-keywords': 2.0.2_postcss@8.4.24
-      '@csstools/postcss-gradients-interpolation-method': 3.0.6_postcss@8.4.24
-      '@csstools/postcss-hwb-function': 2.2.2_postcss@8.4.24
-      '@csstools/postcss-ic-unit': 2.0.4_postcss@8.4.24
-      '@csstools/postcss-is-pseudo-class': 3.2.1_postcss@8.4.24
-      '@csstools/postcss-logical-float-and-clear': 1.0.1_postcss@8.4.24
-      '@csstools/postcss-logical-resize': 1.0.1_postcss@8.4.24
-      '@csstools/postcss-logical-viewport-units': 1.0.3_postcss@8.4.24
-      '@csstools/postcss-media-minmax': 1.0.3_postcss@8.4.24
-      '@csstools/postcss-media-queries-aspect-ratio-number-values': 1.0.3_postcss@8.4.24
-      '@csstools/postcss-nested-calc': 2.0.2_postcss@8.4.24
-      '@csstools/postcss-normalize-display-values': 2.0.1_postcss@8.4.24
-      '@csstools/postcss-oklab-function': 2.2.3_postcss@8.4.24
-      '@csstools/postcss-progressive-custom-properties': 2.3.0_postcss@8.4.24
-      '@csstools/postcss-relative-color-syntax': 1.0.1_postcss@8.4.24
-      '@csstools/postcss-scope-pseudo-class': 2.0.2_postcss@8.4.24
-      '@csstools/postcss-stepped-value-functions': 2.1.1_postcss@8.4.24
-      '@csstools/postcss-text-decoration-shorthand': 2.2.4_postcss@8.4.24
-      '@csstools/postcss-trigonometric-functions': 2.1.1_postcss@8.4.24
-      '@csstools/postcss-unset-value': 2.0.1_postcss@8.4.24
-      autoprefixer: 10.4.14_postcss@8.4.24
-      browserslist: 4.21.7
-      css-blank-pseudo: 5.0.2_postcss@8.4.24
-      css-has-pseudo: 5.0.2_postcss@8.4.24
-      css-prefers-color-scheme: 8.0.2_postcss@8.4.24
+      '@csstools/postcss-cascade-layers': 3.0.1(postcss@8.4.24)
+      '@csstools/postcss-color-function': 2.2.3(postcss@8.4.24)
+      '@csstools/postcss-color-mix-function': 1.0.3(postcss@8.4.24)
+      '@csstools/postcss-font-format-keywords': 2.0.2(postcss@8.4.24)
+      '@csstools/postcss-gradients-interpolation-method': 3.0.6(postcss@8.4.24)
+      '@csstools/postcss-hwb-function': 2.2.2(postcss@8.4.24)
+      '@csstools/postcss-ic-unit': 2.0.4(postcss@8.4.24)
+      '@csstools/postcss-is-pseudo-class': 3.2.1(postcss@8.4.24)
+      '@csstools/postcss-logical-float-and-clear': 1.0.1(postcss@8.4.24)
+      '@csstools/postcss-logical-resize': 1.0.1(postcss@8.4.24)
+      '@csstools/postcss-logical-viewport-units': 1.0.3(postcss@8.4.24)
+      '@csstools/postcss-media-minmax': 1.0.3(postcss@8.4.24)
+      '@csstools/postcss-media-queries-aspect-ratio-number-values': 1.0.3(postcss@8.4.24)
+      '@csstools/postcss-nested-calc': 2.0.2(postcss@8.4.24)
+      '@csstools/postcss-normalize-display-values': 2.0.1(postcss@8.4.24)
+      '@csstools/postcss-oklab-function': 2.2.3(postcss@8.4.24)
+      '@csstools/postcss-progressive-custom-properties': 2.3.0(postcss@8.4.24)
+      '@csstools/postcss-relative-color-syntax': 1.0.1(postcss@8.4.24)
+      '@csstools/postcss-scope-pseudo-class': 2.0.2(postcss@8.4.24)
+      '@csstools/postcss-stepped-value-functions': 2.1.1(postcss@8.4.24)
+      '@csstools/postcss-text-decoration-shorthand': 2.2.4(postcss@8.4.24)
+      '@csstools/postcss-trigonometric-functions': 2.1.1(postcss@8.4.24)
+      '@csstools/postcss-unset-value': 2.0.1(postcss@8.4.24)
+      autoprefixer: 10.4.14(postcss@8.4.24)
+      browserslist: 4.21.8
+      css-blank-pseudo: 5.0.2(postcss@8.4.24)
+      css-has-pseudo: 5.0.2(postcss@8.4.24)
+      css-prefers-color-scheme: 8.0.2(postcss@8.4.24)
       cssdb: 7.6.0
       postcss: 8.4.24
       postcss-attribute-case-insensitive: 6.0.2_postcss@8.4.24
@@ -10873,20 +10919,8 @@ packages:
       react-dom: 18.2.0_react@18.2.0
     dev: false
 
-  /react-quill/2.0.0_react@18.2.0:
-    resolution: {integrity: sha512-4qQtv1FtCfLgoD3PXAur5RyxuUbPXQGOHgTlFie3jtxp43mXDtzCKaOgQ3mLyZfi1PUlyjycfivKelFhy13QUg==}
-    peerDependencies:
-      react: ^16 || ^17 || ^18
-      react-dom: ^16 || ^17 || ^18
-    dependencies:
-      '@types/quill': 1.3.10
-      lodash: 4.17.21
-      quill: 1.3.7
-      react: 18.2.0
-    dev: false
-
-  /react-redux/8.0.7_qov4cjxi5tqn7nekji4kvvduvu:
-    resolution: {integrity: sha512-1vRQuCQI5Y2uNmrMXg81RXKiBHY3jBzvCvNmZF437O/Z9/pZ+ba2uYHbemYXb3g8rjsacBGo+/wmfrQKzMhJsg==}
+  /react-redux@8.1.0(@reduxjs/toolkit@1.9.5)(react-dom@18.2.0)(react@18.2.0)(redux@4.2.1):
+    resolution: {integrity: sha512-CtHZzAOxi7GQvTph4dVLWwZHAWUjV2kMEQtk50OrN8z3gKxpWg3Tz7JfDw32N3Rpd7fh02z73cF6yZkK467gbQ==}
     peerDependencies:
       '@reduxjs/toolkit': ^1 || ^2.0.0-beta.0
       '@types/react': ^16.8 || ^17.0 || ^18.0
@@ -10911,7 +10945,6 @@ packages:
     dependencies:
       '@babel/runtime': 7.22.5
       '@types/hoist-non-react-statics': 3.3.1
-      '@types/react': 18.2.11
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
       react: 18.2.0
@@ -10920,8 +10953,8 @@ packages:
       use-sync-external-store: 1.2.0_react@18.2.0
     dev: false
 
-  /react-redux/8.0.7_y5i3epb5s5mvtsle7yzcmg2qze:
-    resolution: {integrity: sha512-1vRQuCQI5Y2uNmrMXg81RXKiBHY3jBzvCvNmZF437O/Z9/pZ+ba2uYHbemYXb3g8rjsacBGo+/wmfrQKzMhJsg==}
+  /react-redux@8.1.0(@types/react@18.2.12)(react-dom@18.2.0)(react@18.2.0):
+    resolution: {integrity: sha512-CtHZzAOxi7GQvTph4dVLWwZHAWUjV2kMEQtk50OrN8z3gKxpWg3Tz7JfDw32N3Rpd7fh02z73cF6yZkK467gbQ==}
     peerDependencies:
       '@reduxjs/toolkit': ^1 || ^2.0.0-beta.0
       '@types/react': ^16.8 || ^17.0 || ^18.0
@@ -10945,7 +10978,6 @@ packages:
         optional: true
     dependencies:
       '@babel/runtime': 7.22.5
-      '@reduxjs/toolkit': 1.9.5_mdrgh7pftervsmldwkouzrv5ry
       '@types/hoist-non-react-statics': 3.3.1
       '@types/use-sync-external-store': 0.0.3
       hoist-non-react-statics: 3.3.2
@@ -11363,14 +11395,7 @@ packages:
       type-fest: 0.7.1
     dev: false
 
-  /stop-iteration-iterator/1.0.0:
-    resolution: {integrity: sha512-iCGQj+0l0HOdZ2AEeBADlsRC+vsnDsZsbdSiH1yNSjcfKM7fdpCMfqAL/dwF5BLiw/XhRft/Wax6zQbhq2BcjQ==}
-    engines: {node: '>= 0.4'}
-    dependencies:
-      internal-slot: 1.0.5
-    dev: true
-
-  /stream-events/1.0.5:
+  /stream-events@1.0.5:
     resolution: {integrity: sha512-E1GUzBSgvct8Jsb3v2X15pjzN1tYebtbLaMg+eBOUOAxgbLoSbT2NS91ckc5lJD1KfLjId+jXJRgo0qnV5Nerg==}
     dependencies:
       stubs: 3.0.0
@@ -12007,7 +12032,7 @@ packages:
     engines: {node: '>= 10.0.0'}
     dev: true
 
-  /update-browserslist-db/1.0.11_browserslist@4.21.7:
+  /update-browserslist-db@1.0.11(browserslist@4.21.8):
     resolution: {integrity: sha512-dCwEFf0/oT85M1fHBg4F0jtLwJrutGoHSQXCh7u4o2t1drG+c0a9Flnqww6XUKSfQMPpJBRjU8d4RXB09qtvaA==}
     hasBin: true
     peerDependencies:
@@ -12123,16 +12148,7 @@ packages:
       is-symbol: 1.0.4
     dev: true
 
-  /which-collection/1.0.1:
-    resolution: {integrity: sha512-W8xeTUwaln8i3K/cY1nGXzdnVZlidBcagyNFtBdD5kxnb4TvGKR7FfSIS3mYpwWS1QUCutfKz8IY8RjftB0+1A==}
-    dependencies:
-      is-map: 2.0.2
-      is-set: 2.0.2
-      is-weakmap: 2.0.1
-      is-weakset: 2.0.2
-    dev: true
-
-  /which-typed-array/1.1.9:
+  /which-typed-array@1.1.9:
     resolution: {integrity: sha512-w9c4xkx6mPidwp7180ckYWfMmvxpjlZuIudNtDf4N/tTAUB8VJbX25qZoAsrtGuYNnGw3pa0AXgbGKRB8/EceA==}
     engines: {node: '>= 0.4'}
     dependencies:
