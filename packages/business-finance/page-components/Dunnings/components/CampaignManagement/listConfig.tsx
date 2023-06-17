@@ -38,20 +38,20 @@ export const listConfig = () => ({
 		{
 			label : 'Frequency',
 			key   : 'Frequency',
-			func: 'renderFrequency',
+			func  : 'renderFrequency',
 			span  : 1.6,
 		},
 		{
 			label : 'Created On',
 			key   : 'CreatedOn',
-			func: 'renderCreatedOn',
+			func  : 'renderCreatedOn',
 			span  : 1.6,
 		},
 
 		{
 			label : 'Last Edited On',
 			key   : 'LastEditedOn',
-			func: 'renderUpdatedAt',
+			func  : 'renderUpdatedAt',
 			span  : 1.6,
 		},
 		{

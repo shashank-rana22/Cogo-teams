@@ -7,7 +7,7 @@ const filterControls = [
 		type        : 'select',
 		span        : 3,
 		options     : SERVICE_OPTIONS,
-		isClearable: true,
+		isClearable : true,
 	},
 	{
 		name        : 'cycleStatus',
@@ -15,7 +15,7 @@ const filterControls = [
 		type        : 'select',
 		span        : 3,
 		options     : CYCLE_OPTIONS,
-		isClearable: true,
+		isClearable : true,
 	},
 	{
 		name        : 'dunningCycleType',
@@ -23,7 +23,7 @@ const filterControls = [
 		type        : 'select',
 		span        : 3,
 		options     : CYCLE_TYPE,
-		isClearable: true,
+		isClearable : true,
 	},
 ];
 

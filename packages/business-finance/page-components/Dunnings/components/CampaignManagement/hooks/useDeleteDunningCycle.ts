@@ -1,10 +1,10 @@
-import { Toast } from "@cogoport/components";
-import { useRequestBf } from "@cogoport/request";
-import { useSelector } from "@cogoport/store";
+import { Toast } from '@cogoport/components';
+import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
-function useDeleteDunningCycle({id,getDunningList,setActionModal}){
-    const {
-        profile,
+function useDeleteDunningCycle({ id, getDunningList, setActionModal }) {
+	const {
+		profile,
 	} = useSelector((state:any) => state);
 
 	const [
@@ -19,27 +19,25 @@ function useDeleteDunningCycle({id,getDunningList,setActionModal}){
 		{ manual: true },
 	);
 
-
 	const deleteCycle = async () => {
 		try {
 			 await trigger({
-				params:{
-				id: id,
-                updatedBy: profile?.user?.id,
-				}
+				params: {
+					id,
+					updatedBy: profile?.user?.id,
+				},
 			 });
-			 Toast.success('Cycle Deleted Successfully')
+			 Toast.success('Cycle Deleted Successfully');
 			 getDunningList();
-			 setActionModal((p)=>({
-				visible:false,
-				action:'',
-				id:null,
+			 setActionModal((p) => ({
+				visible : false,
+				action  : '',
+				id      : null,
 			 }));
-		} catch (err) { 
+		} catch (err) {
 			console.log(err?.response?.data?.message || 'Something went wrong !');
 		}
 	};
-
 
 	return {
 		deleteCycle,
@@ -47,4 +45,4 @@ function useDeleteDunningCycle({id,getDunningList,setActionModal}){
 	};
 }
 
-export default useDeleteDunningCycle
+export default useDeleteDunningCycle;

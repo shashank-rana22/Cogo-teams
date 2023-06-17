@@ -1,11 +1,11 @@
 import { Chips, Datepicker, Select, TabPanel, Tabs, Timepicker } from '@cogoport/components';
+import { useEffect } from 'react';
 
 import Filter from '../../../../../commons/Filters';
 import { MONTH_DAYS, WEEK_OPTIONS } from '../../constants';
 
 import { controls } from './controls';
 import styles from './styles.module.css';
-import { useEffect } from 'react';
 
 interface FormData {
 	triggerType?:string,
@@ -22,41 +22,40 @@ interface Props {
 }
 
 function FormLayout({ formData, setFormData }:Props) {
-	const { triggerType, frequency, weekDay, monthDay, timezone, time, isAllCreditControllers,creditController,oneTimeDate } = formData || {};
+	const {
+		triggerType, frequency, weekDay, monthDay, timezone, time, isAllCreditControllers, creditController, oneTimeDate,
+	} = formData || {};
 
 	const handleTabChange = (val?:string) => {
 		if (val === 'DAILY') {
 			setFormData({
 				...formData,
 				weekDay   : undefined,
-				monthDay : undefined,
+				monthDay  : undefined,
 				frequency : val,
 			});
 		} else if (val === 'WEEKLY') {
 			setFormData({
 				...formData,
-				monthDay : undefined,
-				oneTimeDate:undefined,
-				frequency : val,
+				monthDay    : undefined,
+				oneTimeDate : undefined,
+				frequency   : val,
 			});
 		} else if (val === 'MONTHLY') {
 			setFormData({
 				...formData,
-				weekDay   : undefined,
-				oneTimeDate:undefined,
-				frequency : val,
+				weekDay     : undefined,
+				oneTimeDate : undefined,
+				frequency   : val,
 			});
 		}
 	};
 
-	useEffect(()=>{
-		if(isAllCreditControllers && creditController){
-			setFormData({...formData, creditController:null});
-		}	
-	
-	},[isAllCreditControllers])
-
-	
+	useEffect(() => {
+		if (isAllCreditControllers && creditController) {
+			setFormData({ ...formData, creditController: null });
+		}
+	}, [isAllCreditControllers]);
 
 	return (
 		<div>
@@ -106,20 +105,22 @@ function FormLayout({ formData, setFormData }:Props) {
 							</Tabs>
 						</div>
 					)}
-					{triggerType === 'oneTime' && <div>
-					<h4>Select Date</h4>
-					<Datepicker
-		placeholder="Enter Date"
-		dateFormat="MM/dd/yyyy"
-		name="date"
-		onChange={(date)=>setFormData({...formData,oneTimeDate:date})}
-		value={oneTimeDate}
-	/>
-					</div>}
+					{triggerType === 'oneTime' && (
+						<div>
+							<h4>Select Date</h4>
+							<Datepicker
+								placeholder="Enter Date"
+								dateFormat="MM/dd/yyyy"
+								name="date"
+								onChange={(date) => setFormData({ ...formData, oneTimeDate: date })}
+								value={oneTimeDate}
+							/>
+						</div>
+					)}
 					<div>
 						<h4>Select Time Slot</h4>
 						<div style={{ display: 'flex' }}>
-						         	<Select
+							<Select
 								value={timezone}
 								onChange={(e) => setFormData({ ...formData, timezone: e })}
 								placeholder="Timezone"
@@ -131,8 +132,8 @@ function FormLayout({ formData, setFormData }:Props) {
 										label: 'GMT', value: 'GMT',
 									},
 									{
-			                             label: 'VNM',value :'VNM',
-									} 
+			                             label: 'VNM', value: 'VNM',
+									},
 								]}
 								className={styles.timezone}
 							/>

@@ -1,11 +1,11 @@
 import { Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
-import {  useState } from 'react';
+import { useState } from 'react';
 
-
-import styles from './styles.module.css';
 import useGetCustomerList from '../../hooks/useGetCustomerList';
+
 import ExcludeList from './ExcludeList';
+import styles from './styles.module.css';
 
 interface Props {
 	uncheckedRows?:string[],
@@ -13,10 +13,10 @@ interface Props {
 	formData?:object,
 }
 
-function ExcludeListView({ uncheckedRows, setUncheckedRows,formData }:Props) {
+function ExcludeListView({ uncheckedRows, setUncheckedRows, formData }:Props) {
 	const [search, setSearch] = useState();
 	const [page, setPage] = useState(1);
-    const {customerList, loading} = useGetCustomerList({formData,search,page,setPage});
+	const { customerList, loading } = useGetCustomerList({ formData, search, page, setPage });
 
 	return (
 		<div>

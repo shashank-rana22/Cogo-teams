@@ -25,10 +25,10 @@ export const CYCLE_TYPE = [
 		label: 'WIS', value: 'WIS',
 	},
 	{
-		label: 'Balance Confirmation',
-		value: 'BALANCE_CONFIRMATION', 
-	}
-]
+		label : 'Balance Confirmation',
+		value : 'BALANCE_CONFIRMATION',
+	},
+];
 
 export const MONTH_DAYS = Array(28).fill(null).map((item, index) => (
 	{ label: String(index + 1), value: String(index + 1) }

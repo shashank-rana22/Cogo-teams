@@ -12476,28 +12476,28 @@ const partner = {
 		},
 
 	],
-	business_finance_dunnings:[
+	business_finance_dunnings: [
 		{
-			api          : 'get_payments_dunning_credit_controllers',
-			access_type  : 'private',
+			api         : 'get_payments_dunning_credit_controllers',
+			access_type : 'private',
 		},
 		{
 			api         : 'post_payments_dunning_cycle',
-			access_type: 'private',
+			access_type : 'private',
 		},
 		{
-			api : 'get__payments_dunning_list_dunning_cycle_execution',
-			access_type: 'private',
+			api         : 'get__payments_dunning_list_dunning_cycle_execution',
+			access_type : 'private',
 		},
 		{
-			api: 'delete_payments_dunning_delete_dunning_cycle',
-			access_type: 'private',
+			api         : 'delete_payments_dunning_delete_dunning_cycle',
+			access_type : 'private',
 		},
 		{
-			api: 'payments_dunning_customer_outstanding_and_on_account',
-			access_type:'private',
-		}
-	]
+			api         : 'payments_dunning_customer_outstanding_and_on_account',
+			access_type : 'private',
+		},
+	],
 };
 
 export default partner;

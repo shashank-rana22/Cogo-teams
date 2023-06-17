@@ -3,23 +3,25 @@ import { IcMDelete, IcMEdit } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 
-interface Props{
+interface Props {
 	setActionModal?:Function,
-	rowData?:{isDunningCycleActive?:boolean,id?:string},
-	
+	rowData?:{ isDunningCycleActive?:boolean, id?:string },
+
 }
 
-function RenderActions({setActionModal,rowData}:Props) {
-	const { isDunningCycleActive=false} = rowData || {};
+function RenderActions({ setActionModal, rowData }:Props) {
+	const { isDunningCycleActive = false } = rowData || {};
 	return (
 		<div style={{ display: 'flex' }}>
 			<Toggle name="isDunningCycleActive" size="md" showOnOff disabled={false} checked={isDunningCycleActive} />
-			<button className={styles.btn} aria-label="edit"
-			 onClick={()=>setActionModal({
-				visible:true,
-				action: 'edit',
-				rowData:rowData,
-			})}
+			<button
+				className={styles.btn}
+				aria-label="edit"
+				onClick={() => setActionModal({
+			 	visible : true,
+			 	action  : 'edit',
+			 	rowData,
+			 })}
 			>
 				<IcMEdit
 					height={15}
@@ -27,12 +29,14 @@ function RenderActions({setActionModal,rowData}:Props) {
 				/>
 
 			</button>
-			<button className={styles.btn} aria-label="delete" 
-			 onClick={()=>setActionModal({
-				visible:true,
-				action: 'delete',
-				rowData:rowData,
-			})}
+			<button
+				className={styles.btn}
+				aria-label="delete"
+				onClick={() => setActionModal({
+			 	visible : true,
+			 	action  : 'delete',
+			 	rowData,
+			 })}
 			>
 				<IcMDelete
 					height={15}

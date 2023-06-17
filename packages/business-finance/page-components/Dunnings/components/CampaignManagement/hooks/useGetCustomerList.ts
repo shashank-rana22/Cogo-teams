@@ -2,10 +2,10 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useEffect } from 'react';
 
-
-const useGetCustomerList = ({formData,search,page,setPage}) => {
-	const {cogoEntityDetails,creditController,serviceType,
-		ageingBucket,totalDueOutstanding,
+const useGetCustomerList = ({ formData, search, page, setPage }) => {
+	const {
+		cogoEntityDetails, creditController, serviceType,
+		ageingBucket, totalDueOutstanding,
 		dueOutstandingCurrency,
 	} = formData || {};
 	const [
@@ -20,7 +20,7 @@ const useGetCustomerList = ({formData,search,page,setPage}) => {
 		{ manual: true },
 	);
 
-	const {query = '', debounceQuery } = useDebounceQuery();
+	const { query = '', debounceQuery } = useDebounceQuery();
 
 	useEffect(() => {
 		debounceQuery(search);
@@ -30,25 +30,25 @@ const useGetCustomerList = ({formData,search,page,setPage}) => {
 	const getCustomerList = async () => {
 		try {
 			 await trigger({
-				params:{
-					query:search || undefined,
-					cogoEntityId: JSON.parse(cogoEntityDetails || '{}')?.id,
-					serviceTypes:serviceType,
-					creditControllerIds:creditController,
-					ageingBucket:ageingBucket,
-					totalDueOutstanding:totalDueOutstanding,
-					dueOutstandingCurrency:JSON.parse(cogoEntityDetails || '{}')?.currency,
-					pageIndex: page,
-				}
+				params: {
+					query                  : search || undefined,
+					cogoEntityId           : JSON.parse(cogoEntityDetails || '{}')?.id,
+					serviceTypes           : serviceType,
+					creditControllerIds    : creditController,
+					ageingBucket,
+					totalDueOutstanding,
+					dueOutstandingCurrency : JSON.parse(cogoEntityDetails || '{}')?.currency,
+					pageIndex              : page,
+				},
 			 });
 		} catch (err) {
-			console.log('err-',err);
+			console.log('err-', err);
 		}
 	};
 
-	useEffect(()=>{
+	useEffect(() => {
 		getCustomerList();
-	},[query,page])
+	}, [query, page]);
 
 	return {
 		customerList,

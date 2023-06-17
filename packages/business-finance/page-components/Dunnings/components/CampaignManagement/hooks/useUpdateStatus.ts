@@ -1,9 +1,9 @@
-import { useRequestBf } from "@cogoport/request";
-import { useSelector } from "@cogoport/store";
+import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 
-function useUpdateStatus(){
-    const {
-        profile,
+function useUpdateStatus() {
+	const {
+		profile,
 	} = useSelector((state:any) => state);
 
 	const [
@@ -18,24 +18,19 @@ function useUpdateStatus(){
 		{ manual: true },
 	);
 
-
-
-
-	const changeStatus = async ({id,status}) => {
+	const changeStatus = async ({ id, status }) => {
 		try {
 			 await trigger({
-				data:{
-                    id: id,
-                    updatedBy: profile?.user?.id,
-                    status: status,
-				}
+				data: {
+					id,
+					updatedBy: profile?.user?.id,
+					status,
+				},
 			 });
 		} catch (err) {
-			console.log('err-',err);
+			console.log('err-', err);
 		}
 	};
-
-	
 
 	return {
 		changeStatus,
