@@ -22,7 +22,7 @@ function CampaignManagement() {
 	const [actionModal, setActionModal] = useState({
 		visible:false,
 		action:'',
-		id:null,
+		rowData:null,
 	});
 	
 	const {data, loading,getDunningList} = useListDunningCycle({globalFilters,setGlobalFilters});
@@ -54,7 +54,7 @@ function CampaignManagement() {
 					})}
 			</div>
 			),
-		renderActions :	({id}) => <RenderActions setActionModal={setActionModal} id={id}/>,
+		renderActions :	(rowData) => <RenderActions setActionModal={setActionModal} rowData={rowData}/>,
 		viewMore      : ({ id }) => (
 			<RenderViewMore
 				id={id}

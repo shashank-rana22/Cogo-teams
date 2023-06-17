@@ -5,18 +5,20 @@ import styles from './styles.module.css';
 
 interface Props{
 	setActionModal?:Function,
-	id?:string,
+	rowData?:{isDunningCycleActive?:boolean,id?:string},
+	
 }
 
-function RenderActions({setActionModal,id}:Props) {
+function RenderActions({setActionModal,rowData}:Props) {
+	const { isDunningCycleActive=false} = rowData || {};
 	return (
 		<div style={{ display: 'flex' }}>
-			<Toggle name="isActive" size="md" showOnOff disabled={false} checked />
+			<Toggle name="isDunningCycleActive" size="md" showOnOff disabled={false} checked={isDunningCycleActive} />
 			<button className={styles.btn} aria-label="edit"
 			 onClick={()=>setActionModal({
 				visible:true,
 				action: 'edit',
-				id:id,
+				rowData:rowData,
 			})}
 			>
 				<IcMEdit
@@ -29,7 +31,7 @@ function RenderActions({setActionModal,id}:Props) {
 			 onClick={()=>setActionModal({
 				visible:true,
 				action: 'delete',
-				id:id,
+				rowData:rowData,
 			})}
 			>
 				<IcMDelete
