@@ -1,4 +1,4 @@
-import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import FCL_CFS_UNITS from '@cogoport/ocean-modules/constants/FCL_CFS_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
@@ -79,7 +79,7 @@ const rawControls = (
 			label    : 'Unit',
 			type     : 'select',
 			name     : 'unit',
-			options  : convertObjectMappingToArray(FCL_UNITS),
+			options  : convertObjectMappingToArray(FCL_CFS_UNITS),
 			disabled : handleDisableCondion(isAdminSuperAdmin, shipment_data),
 			span     : 2,
 		},
@@ -93,7 +93,7 @@ const rawControls = (
 			rules          : { required: 'currency is required' },
 			span           : 1.5,
 			disabled:
-			handleDisableCondion(isAdminSuperAdmin, shipment_data),
+			handleDisableCondion(charge, isAdminSuperAdmin, shipment_data),
 		},
 		{
 			label       : 'Price',
@@ -105,7 +105,7 @@ const rawControls = (
 				required : 'Price is Required',
 				validate : (v) => v > PRICE_LOWER_LIMIT || 'Price must be greater than 0',
 			},
-			disabled: handleDisableCondion(isAdminSuperAdmin, shipment_data),
+			disabled: handleDisableCondion(charge, isAdminSuperAdmin, shipment_data),
 		},
 		{
 			label       : 'Quantity',
@@ -115,7 +115,7 @@ const rawControls = (
 			rules       : { required: 'Required', min: 1 },
 			span        : 1,
 			disabled:
-			handleDisableCondion(isAdminSuperAdmin, shipment_data),
+			handleDisableCondion(charge, isAdminSuperAdmin, shipment_data),
 		},
 		{
 			label  : 'Amount (Tax Excl.)',
