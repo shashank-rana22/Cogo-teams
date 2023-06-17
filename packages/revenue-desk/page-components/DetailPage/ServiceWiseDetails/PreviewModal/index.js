@@ -5,17 +5,19 @@ import { useState } from 'react';
 import PreviewSelectedCards from './PreviewSelectedCards';
 
 function PreviewModal({
-	modalStep, setModalStep, tabKeys,
+	modalStep, setModalStep,
 	groupedShowServicesData, supplierPayload, priceData, shipmentData,
 }) {
 	const newFilteredGroupedShowServicesData = {};
 	Object.entries(groupedShowServicesData).forEach(([serviceType, serviceData]) => {
 		newFilteredGroupedShowServicesData[serviceType] = serviceData.filter(
-			(service) => supplierPayload.hasOwnProperty(service.id),
+			(service) => supplierPayload.hasOwnProperty(service.id) && (supplierPayload[service.id] || []).length,
 		);
 	});
-
-	const [previewActiveTab, setPreviewActiveTab] = useState(tabKeys[0]);
+	const previewTabsKey = Object.keys(newFilteredGroupedShowServicesData).filter(
+		(serviceType) => newFilteredGroupedShowServicesData[serviceType].length > 0,
+	);
+	const [previewActiveTab, setPreviewActiveTab] = useState(previewTabsKey[0]);
 	return (
 		<>
 			{' '}
@@ -27,7 +29,7 @@ function PreviewModal({
 						themeType="secondary"
 						onChange={setPreviewActiveTab}
 					>
-						{tabKeys.map((singleTab) => (
+						{previewTabsKey.map((singleTab) => (
 							<TabPanel
 								name={singleTab}
 								title={startCase(singleTab.replace('_service', ''))}

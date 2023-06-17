@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function Card({
 	data, setPrefrences, prefrences, rate_key, serviceData, setSellRates,
-	sellRates, price, prefrence_key, fromkey, priority_key,
+	sellRates, prefrence_key, fromkey, priority_key,
 }) {
 	const handlePrefrence = (rate) => {
 		const foundItem = (prefrences?.[serviceData?.id] || []).find((obj) => obj?.rate_id === rate?.id);
@@ -57,17 +57,7 @@ function Card({
 	};
 	const showData = (val) => val || '';
 	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
-	let profitability = 0;
 	const updated_at = data?.rowData?.updated_at;
-
-	if (data?.rowData?.total_buy_price !== 0) {
-		profitability = (Number(parseFloat(price?.replace(/[^0-9.-]+/g, ''))) - Number(data?.rowData?.total_buy_price))
-		/ Number(data?.rowData?.total_buy_price);
-	}
-	let buyPricePerContainer = 0;
-	if (serviceData?.containers_count !== 0) {
-		buyPricePerContainer = Number(data?.rowData?.total_buy_price) / Number(serviceData?.containers_count);
-	}
 	return (
 		<div
 			className={rate_key ? styles.selected_rate_card_container : styles.container}
@@ -221,8 +211,10 @@ function Card({
 					<div className={styles.total_price_section}>
 						<div style={{ display: 'flex' }}>
 							Profitability : &nbsp;
-							<div className={Number(profitability) > 0 ? styles.positive_profit : styles.negative_profit}>
-								{(Number(profitability) * 100).toFixed(2)}
+							<div className={Number(data?.rowData?.profit_percentage) > 0
+								? styles.positive_profit : styles.negative_profit}
+							>
+								{Number(data?.rowData?.profit_percentage).toFixed(2)}
 								%
 							</div>
 						</div>

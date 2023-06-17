@@ -104,7 +104,6 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 					<PreviewModal
 						modalStep={modalStep}
 						setModalStep={setModalStep}
-						tabKeys={tabKeys}
 						groupedShowServicesData={groupedShowServicesData}
 						supplierPayload={supplierPayload}
 						priceData={priceData}

@@ -144,7 +144,6 @@ function SingleService({
 							serviceData={singleServiceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}
-							price={priceData?.[singleServiceData?.id]}
 							prefrence_key={item?.prefrence_key}
 						/>
 					))}

@@ -14,6 +14,7 @@ const getFormatedNotPreferenceData = ({ ratesDataNotPrefered, singleServiceData 
 		rowData.allocation_ratio = element?.allocation_ratio || 0;
 		rowData.sell_price_per_container = Number(element?.buy_price) / Number(container_count);
 		rowData.sell_price_currency = element?.buy_price_currency;
+		rowData.profit_percentage = element?.profit_percentage || 0;
 		rowData.active_booking = element?.active_bookings || 0;
 		rowData.source = element?.source || undefined;
 		rowData.api = 'showed_rates';
