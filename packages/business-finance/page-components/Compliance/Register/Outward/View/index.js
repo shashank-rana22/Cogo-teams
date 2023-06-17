@@ -8,9 +8,9 @@ import StyledTable from '../../../../commons/StyledTable/index.tsx';
 import useViewDataList from '../../../hooks/useViewDataList';
 import { getSupplierData } from '../helper';
 
-import ViewColumn from './ ViewColumn';
 import filterControls from './filterControls';
 import styles from './styles.module.css';
+import ViewColumn from './ViewColumn';
 
 const EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
 const PAGE = 1;
