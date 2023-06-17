@@ -31,9 +31,11 @@ const useOceanRoute = ({
 				if (res.data?.length) {
 					containerNumbers.current?.forEach((c) => {
 						const container = res?.data?.filter((r) => r.container_no === c);
-						if (container.length > 0) {
+
+						if (!isEmpty(container)) {
 							const test_points = container?.map((a) => a.data).flat();
 							const pre_points = test_points.filter((point) => point);
+
 							setMapPoints((prevPoints) => [
 								...prevPoints,
 								{
