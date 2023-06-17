@@ -9,6 +9,7 @@ import useGetPartnerUsers from '../../../../hooks/useGetPartnerUsers';
 import useGetUser from '../../../../hooks/useGetUser';
 import useGroupChat from '../../../../hooks/useGroupChat';
 
+import AddGroupMember from './AddGroupMember';
 import ConversationContainer from './ConversationContainer';
 import ExecutiveSummary from './ExecutiveSummary';
 import GroupMembers from './GroupMembers';
@@ -216,6 +217,7 @@ function AgentDetails({
 				partner_users={partner_users}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
+			{hasAccessToEditGroup && <AddGroupMember /> }
 			{(mobile_no || user_number) && (
 				<>
 					<div className={styles.conversation_title}>Other Channels</div>
