@@ -31,7 +31,17 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 		sellRateDetails,
 		rateOptions,
 	});
-	console.log(tabKeys, 'fffff',supplierPayload);
+
+	const check = (items) => {
+		const ZERO = 0;
+		let pref = items.length > ZERO;
+		items?.forEach((item) => {
+			if (!item?.is_preference_set) pref = false;
+		});
+		return pref;
+	};
+
+	console.log(tabKeys, 'fffff', supplierPayload);
 	return (
 		<div className={styles.container}>
 			<div className={styles.button_select_container}>
@@ -65,7 +75,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 						name={singleTab}
 						title={startCase(singleTab.replace('_service', ''))}
 						key={singleTab}
-						icon={groupedShowServicesData?.[singleTab]?.[0]?.is_preference_set ? <IcCFtick /> : null}
+						icon={check(groupedShowServicesData?.[singleTab]) ? <IcCFtick /> : null}
 					>
 						<SingleService
 							groupedServicesData={groupedShowServicesData[activeTab]}

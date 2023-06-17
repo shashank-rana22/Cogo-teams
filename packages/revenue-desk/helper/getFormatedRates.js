@@ -35,6 +35,7 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.origin_locals_currency = element?.origin_locals?.total_price_currency;
 			rowData.destination_locals_price = element?.destination_locals?.total_price;
 			rowData.destination_locals_currency = element?.destination_locals?.total_price_currency;
+			rowData.updated_at = element?.updated_at;
 			row.rowData = rowData;
 			rows.push(row);
 		});

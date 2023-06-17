@@ -29,6 +29,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.origin_main_port_id = element?.origin_main_port_id && element?.origin_main_port_id !== 'None'
 			? element?.origin_main_port_id
 			: null;
+		rowData.updated_at = element?.updated_at;
 		rowData.destination_main_port_id =			element?.destination_main_port_id
 			&& element?.destination_main_port_id !== 'None'
 			? element?.destination_main_port_id

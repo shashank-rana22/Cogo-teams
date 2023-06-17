@@ -58,6 +58,8 @@ function Card({
 	const showData = (val) => val || '';
 	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
 	let profitability = 0;
+	const updated_at = data?.rowData?.updated_at;
+
 	if (data?.rowData?.total_buy_price !== 0) {
 		profitability = (Number(parseFloat(price?.replace(/[^0-9.-]+/g, ''))) - Number(data?.rowData?.total_buy_price))
 		/ Number(data?.rowData?.total_buy_price);
@@ -92,6 +94,15 @@ function Card({
 							{serviceData?.service_type === 'air_freight_service'
 								? showData(data?.rowData?.air_line)
 								: showData(data?.rowData?.shipping_line)}
+						</div>
+						<div>
+							{updated_at ? (
+								<div className={styles.updated_at}>
+									Last updated :
+									{' '}
+									{format(updated_at, 'dd MMM yy')}
+								</div>
+							) : null}
 						</div>
 					</div>
 					{rate_key ? (
