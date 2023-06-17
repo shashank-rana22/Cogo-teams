@@ -35,25 +35,6 @@ function CaseQuestion({ item, from, caseToShow, setQuestionToShow, setCaseToShow
 					</div>
 				) : null}
 			</div>
-
-			{/* {item.id === caseToShow
-				? test_case_study_questions.map((caseStudyQuestion) => (
-					// <div
-					// 	className={styles.text}
-					// 	key={caseStudyQuestion.id}
-					// 	dangerouslySetInnerHTML={{ __html: caseStudyQuestion?.question_text }}
-					// />
-					<div
-						role="presentation"
-						onClick={() => setQuestionToShow(id)}
-						key={caseStudyQuestion.id}
-						className={styles.question_text}
-					>
-						click to see details
-
-					</div>
-				))
-				: null} */}
 		</div>
 	);
 }

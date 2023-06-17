@@ -222,7 +222,6 @@ const useCreateQuestion = ({
 			});
 		} else if (question_type === 'subjective') {
 			setValue('question_type', question_type);
-			// setValue('subjective.0.question_text', question_text);
 			setValue('subjective.0.difficulty_level', difficulty_level);
 			setValue('subjective.0.character_limit', character_limit);
 			setUploadable(allow_file_upload);
@@ -243,7 +242,6 @@ const useCreateQuestion = ({
 			setValue('question_type', 'stand_alone');
 			setValue(`${childKey}.question_type`, question_type);
 			setValue(`${childKey}.difficulty_level`, difficulty_level);
-			// setValue(`${childKey}.question_text`, question_text);
 
 			setEditorValue((prev) => ({
 				...prev,

@@ -75,7 +75,6 @@ const getCaseStudyPayload = ({
 	const questions = case_questions.map((item, caseQuestionIndex) => {
 		const {
 			question_type: indQuestionType,
-			// question_text: indQuestionText,
 			options,
 		} = item || {};
 
