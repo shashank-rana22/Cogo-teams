@@ -6,6 +6,7 @@ import AdvanceSecurityDepositRefund from '../Modals/AdvanceSecurityDepositRefund
 import BankDetails from '../Modals/BankDetails';
 import ICJVModal from '../Modals/ICJV_Modal';
 import JvModal from '../Modals/JvModal';
+import PaymentConfirmation from '../Modals/PaymentConfirmation';
 import RequestCN from '../Modals/RequestCN';
 import SettlementModal from '../Modals/SettlementModal';
 import SezApproval from '../Modals/SezApproval';
@@ -198,6 +199,7 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 				journalVoucherRequest,
 				interCompanyJournalVoucherRequest,
 				sezRequest,
+				paymentConfirmationRequest,
 				advanceSecurityDeposit,
 				advanceSecurityDepositRefund,
 			} = row.data || {};
@@ -279,6 +281,15 @@ export const columns = ({ setIsAscendingActive, setFilters, isAscendingActive, g
 					{requestType === 'SEZ_APPROVAL' && (
 						<SezApproval
 							sezRequest={sezRequest}
+							organization={organization}
+							isEditable={false}
+							remark={remark}
+						/>
+					)}
+					{requestType === 'PAYMENT_CONFIRMATION_APPROVAL' && (
+						<PaymentConfirmation
+							row={row}
+							paymentConfirmationRequest={paymentConfirmationRequest}
 							organization={organization}
 							isEditable={false}
 							remark={remark}

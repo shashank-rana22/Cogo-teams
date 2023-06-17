@@ -7,6 +7,7 @@ import BankDetails from '../Modals/BankDetails';
 import ConcorModal from '../Modals/ConcorModal';
 import ICJVModal from '../Modals/ICJV_Modal';
 import JvModal from '../Modals/JvModal';
+import PaymentConfirmation from '../Modals/PaymentConfirmation';
 import RequestCN from '../Modals/RequestCN';
 import SettlementModal from '../Modals/SettlementModal';
 import SezApproval from '../Modals/SezApproval';
@@ -169,6 +170,7 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 				interCompanyJournalVoucherRequest,
 				concorPdaApprovalRequest,
 				sezRequest,
+				paymentConfirmationRequest,
 				advanceSecurityDeposit,
 				advanceSecurityDepositRefund,
 			} = data || {};
@@ -246,6 +248,17 @@ export const requestColumn = ({ setIsAscendingActive, setFilters, isAscendingAct
 								organization={organization}
 								id={id}
 								refetch={getIncidentData}
+							/>
+						)
+					}
+					{
+						type === 'PAYMENT_CONFIRMATION_APPROVAL' && (
+							<PaymentConfirmation
+								paymentConfirmationRequest={paymentConfirmationRequest}
+								organization={organization}
+								id={id}
+								refetch={getIncidentData}
+								row={row}
 							/>
 						)
 					}
