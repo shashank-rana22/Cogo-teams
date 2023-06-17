@@ -8,8 +8,10 @@ const removeTypeField = (element) => {
 	return rest;
 };
 
-function RenderFields({ control, errors }) {
+function RenderFields({ control, errors, watch }) {
 	const controls = getControls({});
+	const watchTargetEnteredManually = watch('is_target_entered_manually');
+
 	return (
 		<div className={styles.form}>
 			{(controls || []).map((formControl) => {
@@ -20,6 +22,10 @@ function RenderFields({ control, errors }) {
 				return (subControls || []).map((subControlItem) => {
 					const { name, type, label } = subControlItem || {};
 					const DynamicController = getElementController(type);
+
+					if (name === 'is_target_achieved_manually' && watchTargetEnteredManually !== 'yes') {
+						return null;
+					}
 
 					return (
 						<div key={name} className={styles.form_container}>
@@ -54,11 +60,11 @@ function RenderFields({ control, errors }) {
 	);
 }
 
-function EndComponent({ control, errors }) {
+function EndComponent({ control, errors, watch }) {
 	return (
 
 		<div className={styles.render_form}>
-			<RenderFields control={control} errors={errors} />
+			<RenderFields control={control} errors={errors} watch={watch} />
 		</div>
 
 	);

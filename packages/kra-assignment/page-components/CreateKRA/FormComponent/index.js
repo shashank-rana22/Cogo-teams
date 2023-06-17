@@ -75,15 +75,15 @@ function FormComponent() {
 				<DropDownComponent
 					control={control}
 					errors={errors}
-					watch={watch}
 					setSelectedValue={setSelectedValue}
 					showSelectedValue={showSelectedValue}
 				/>
 			</div>
 
 			<div>
-				<EndComponent control={control} errors={errors} />
+				<EndComponent control={control} errors={errors} watch={watch} />
 			</div>
+
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
 				<Button onClick={handleSubmit(onClickSubmitButton)}>Submit</Button>
 			</div>
