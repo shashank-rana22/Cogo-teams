@@ -1,4 +1,3 @@
-import { Loader } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -7,7 +6,7 @@ import Header from './components/Header';
 import ModeSelection from './components/ModeSelection';
 import OtherServices from './components/OtherServices';
 import Routes from './components/Routes';
-import SalesDashboard from './components/SalesDashboard';
+// import SalesDashboard from './components/SalesDashboard';
 import useCreateSearch from './hooks/useCreateSearch';
 import styles from './styles.module.css';
 
@@ -20,15 +19,6 @@ function SpotSearch() {
 	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
 
 	const { createSearch, data, loading } = useCreateSearch();
-
-	if (loading) {
-		return (
-			<div className={styles.loading}>
-				<span className={styles.loading_text}>Looking for Rates</span>
-				<Loader themeType="primary" style={{ width: 30, background: '#000000' }} />
-			</div>
-		);
-	}
 
 	return (
 		<div className={styles.container}>
@@ -68,9 +58,9 @@ function SpotSearch() {
 				</div>
 			) : null}
 
-			<div className={styles.sales_dashboard}>
+			{/* <div className={styles.sales_dashboard}>
 				<SalesDashboard />
-			</div>
+			</div> */}
 
 			<div className={styles.other_services}>
 				<OtherServices

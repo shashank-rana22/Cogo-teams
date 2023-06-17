@@ -18,7 +18,7 @@ function Routes({
 	createSearch,
 	createSearchLoading,
 }) {
-	const buttonDisabled = !location.origin || !location.destination;
+	const buttonDisabled = !location?.origin || !location?.destination;
 
 	const service_type = mode.mode_value;
 

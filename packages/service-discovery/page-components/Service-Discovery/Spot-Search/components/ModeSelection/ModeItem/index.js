@@ -10,7 +10,7 @@ function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedSe
 		if (selectedMode.mode_value === value) setSelectedMode({});
 		else setSelectedMode({ mode_label: label, mode_value: value });
 		setSelectedService(null);
-		setLocation({});
+		setLocation(null);
 	};
 
 	return (

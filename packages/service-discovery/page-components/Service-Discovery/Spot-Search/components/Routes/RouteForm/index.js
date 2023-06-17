@@ -1,42 +1,42 @@
 import { AsyncSelect } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
+// import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+// import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 
 import getFormControls from './getControls';
 import styles from './styles.module.css';
 
 const singleLocationServices = ['fcl_freight_local'];
 
-const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_entity_ids;
+// const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_entity_ids;
 
 const LABEL_MAPPING = {
 	fcl_freight: {
 		origin      : 'Origin Point',
-		destination : 'Origin Point',
+		destination : 'Destination Point',
 	},
 	lcl_freight: {
 		origin      : 'Origin Point',
-		destination : 'Origin Point',
+		destination : 'Destination Point',
 	},
 	air_freight: {
 		origin      : 'Origin Point',
-		destination : 'Origin Point',
+		destination : 'Destination Point',
 	},
 	ftl_freight: {
 		origin      : 'Origin Point',
-		destination : 'Origin Point',
+		destination : 'Destination Point',
 	},
 	ltl_freight: {
 		origin      : 'Origin Point',
-		destination : 'Origin Point',
+		destination : 'Destination Point',
 	},
 	trailer_freight: {
 		origin      : 'Origin Point',
-		destination : 'Origin Point',
+		destination : 'Destination Point',
 	},
 	haulage_freight: {
 		origin      : 'Origin Point',
-		destination : 'Origin Point',
+		destination : 'Destination Point',
 	},
 };
 
@@ -98,7 +98,7 @@ function RouteForm({ mode = {}, setLocation, location }) {
 
 				<AsyncSelect
 					{...originControls}
-					value={location.origin}
+					value={location?.origin}
 					onChange={(val) => setLocation((prev) => ({ ...prev, origin: val }))}
 				/>
 
@@ -111,25 +111,9 @@ function RouteForm({ mode = {}, setLocation, location }) {
 					<div className={styles.required_mark}>*</div>
 				</div>
 
-				{/* <LocationSelect
-							{...controlItem}
-							name={name}
-							label={label}
-							control={control}
-							role="button"
-							aria-label="input"
-							caret={false}
-							handleChange={(obj) => {
-								setLocation((pv) => ({
-									...pv,
-									origin: obj,
-								}));
-							}}
-						/> */}
-
 				<AsyncSelect
 					{...destinationControls}
-					value={location.destination}
+					value={location?.destination}
 					onChange={(val) => setLocation((prev) => ({ ...prev, destination: val }))}
 				/>
 

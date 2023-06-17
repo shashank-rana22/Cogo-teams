@@ -1,0 +1,19 @@
+.label_container{
+    display: flex;
+    align-items: center;
+}
+.label_icon{
+    margin-right:10px;
+    font-size:18px;
+}
+.name_container{
+    display: flex;
+    flex-direction:column;
+    gap:8px;
+}
+.label_name{
+    margin-right:4px;
+}
+.sub_label{
+    font-size:12px;
+}

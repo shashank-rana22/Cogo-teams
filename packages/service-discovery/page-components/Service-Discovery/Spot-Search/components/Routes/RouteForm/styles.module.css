@@ -1,6 +1,7 @@
 .container{
     margin-top:20px;
     display:flex;
+    align-items: flex-end;
     gap:5%;
 }
 .form_item{
@@ -15,26 +16,9 @@
     color: #000000;
     display: flex;
 }
-.label_container{
-    display: flex;
-    align-items: center;
-}
-.label_icon{
-    margin-right:10px;
-    font-size:18px;
-}
-.name_container{
-    display: flex;
-    flex-direction:column;
-    gap:8px;
-}
-.label_name{
-    margin-right:4px;
-}
-.sub_label{
-    font-size:12px;
-}
 .required_mark{
     color: #e74c3c;
     margin-left: 4px;
+}
+.arrow_container{
 }
