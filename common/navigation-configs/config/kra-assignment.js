@@ -3,6 +3,10 @@ const kraAssignment = {
 		navigation : 'kra_assignment',
 		isMainNav  : true,
 	},
+	'/[partner_id]/kra-assignment/create': {
+		navigation: 'kra_assignment',
+
+	},
 };
 
 export default kraAssignment;

@@ -613,6 +613,34 @@ function asyncListSubChapters() {
 	};
 }
 
+function asyncListTribes() {
+	return {
+		labelKey    : 'tribe_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_tribes',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListChapter() {
+	return {
+		labelKey    : 'chapter_name',
+		valueKey    : 'id',
+		endpoint    : 'list_all_chapters',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -663,4 +691,6 @@ export {
 	asyncListEmployees,
 	asyncListSquad,
 	asyncListSubChapters,
+	asyncListTribes,
+	asyncListChapter,
 };

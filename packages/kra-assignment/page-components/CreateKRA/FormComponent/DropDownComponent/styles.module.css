@@ -1,0 +1,25 @@
+.form{
+    padding-top:10px;
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.label{
+    font-weight: 600;
+    padding:8px 4px
+}
+
+.form_container{
+    padding-right: 20px;
+    width: 18%;
+}
+
+.show_selected_values{
+    background-color: rgb(193, 233, 233);
+    margin:30px 0px;
+    padding:10px;
+    border-radius: 6px;
+    min-height: 230px;
+    border:1px solid steelblue
+}
+

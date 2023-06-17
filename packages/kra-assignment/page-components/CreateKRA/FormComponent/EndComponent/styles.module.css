@@ -1,0 +1,13 @@
+.label{
+    font-weight: 600;
+    padding:4px 4px
+}
+
+.form{
+    display: flex;
+    flex-wrap: wrap;
+}
+
+.form_container{
+    padding-right: 15px;
+}
