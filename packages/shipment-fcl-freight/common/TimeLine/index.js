@@ -8,6 +8,8 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
 
+const TIMELINE_NEXT_INDEX = 1;
+
 function Timeline() {
 	const {
 		shipment_data, primary_service, timelineLoading : loading, isGettingShipment,
@@ -50,7 +52,7 @@ function Timeline() {
 						<TimelineItem
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
-							isLast={totalItems === index + 1}
+							isLast={totalItems === index + TIMELINE_NEXT_INDEX}
 							key={timelineItem.milestone}
 						/>
 					);

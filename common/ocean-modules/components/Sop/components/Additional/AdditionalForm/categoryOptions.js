@@ -1,4 +1,4 @@
-const categoryOptions = [
+export default [
 	{
 		label : 'Document',
 		value : 'document',
@@ -20,4 +20,3 @@ const categoryOptions = [
 		value : 'others',
 	},
 ];
-export default categoryOptions;

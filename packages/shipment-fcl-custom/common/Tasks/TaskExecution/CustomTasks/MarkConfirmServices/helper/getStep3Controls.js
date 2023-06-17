@@ -1,4 +1,5 @@
-import FCL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase } from '@cogoport/utils';
 
@@ -10,7 +11,7 @@ const getStep3Controls = ({ service_charge, shipment_data, handleChange }) => {
 		service_name : service_type,
 		shipment_id  : shipment_data?.id,
 		showButtons  : service_type !== 'subsidiary_service',
-		cargoDetails : service_detail?.[0],
+		cargoDetails : service_detail?.[GLOBAL_CONSTANTS.zeroth_index],
 		value        : [{
 			code     : '',
 			currency : '',

@@ -87,13 +87,14 @@ export function mountPinnedSnapShot({
 	const snapshotRef = pinSnapshotListener;
 	snapshotCleaner({ ref: pinSnapshotListener });
 
+	setListData((p) => ({ ...p, pinnedMessagesData: {} }));
+
 	if (activeSubTab !== 'all') {
 		return;
 	}
 	if (viewType === 'shipment_view') {
 		return;
 	}
-	setListData((p) => ({ ...p, pinnedMessagesData: {} }));
 
 	if (canShowPinnedChats) {
 		setLoading(true);
