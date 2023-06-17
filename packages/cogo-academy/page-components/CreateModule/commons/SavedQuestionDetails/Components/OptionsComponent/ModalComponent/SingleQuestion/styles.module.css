@@ -33,7 +33,7 @@
 	border-radius: 6px;
 
 	img{
-		width: 70%;
+		max-width: 70%;
 	}
 }
 
