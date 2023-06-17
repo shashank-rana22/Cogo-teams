@@ -3,6 +3,10 @@ import { useState, useEffect, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
+const DEFAULT_PAGE_LIMIT = 50;
+const DEFAULT_SORT_BY = 'created_at';
+const DEFAULT_SORT_TYPE = 'desc';
+
 const useListStakeholders = ({ shipment_id = '' }) => {
 	const [apiData, setApiData] = useState({});
 
@@ -12,9 +16,9 @@ const useListStakeholders = ({ shipment_id = '' }) => {
 			filters: {
 				shipment_id,
 			},
-			page_limit : 50,
-			sort_by    : 'created_at',
-			sort_type  : 'desc',
+			page_limit : DEFAULT_PAGE_LIMIT,
+			sort_by    : DEFAULT_SORT_BY,
+			sort_type  : DEFAULT_SORT_TYPE,
 		},
 	}, { manual: true });
 

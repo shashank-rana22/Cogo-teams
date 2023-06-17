@@ -9,6 +9,11 @@
 	display: flex;
 }
 
+.styled_button {
+	margin-right: 4px;
+	margin-bottom: 8px;
+}
+
 .cancel_modal {
 	display: flex;
 	flex-direction: column;
@@ -22,8 +27,6 @@
 }
 
 .cancel_invoice {
-	margin-bottom: 12px;
-	font-size: 20px;
 	font-weight: bold;
 }
 
@@ -42,10 +45,6 @@
 .confirm_button {
 	display: flex;
 	margin-top: 12px;
-}
-
-.styled_button {
-	margin-right: 12px;
 }
 
 .styled_invoice {

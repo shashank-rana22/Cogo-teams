@@ -26,6 +26,7 @@ export { default as CreatableSelectController } from './page-components/Controll
 export { default as CreatableMultiSelectController } from './page-components/Controlled/CreatableMultiSelectController';
 export { default as CountrySelectController } from './page-components/Controlled/CountrySelectController';
 export { default as ToggleController } from './page-components/Controlled/ToggleController';
+export { default as RangeSliderController } from './page-components/Controlled/RangeSliderController';
 export { default as SingleDateRangeController } from './page-components/Controlled/SingleDateRangeController';
 export { default as AsyncSelect } from './page-components/Business/AsyncSelect';
 
@@ -36,4 +37,5 @@ export { default as useDebounceQuery } from './hooks/useDebounceQuery';
 export { default as getApiError } from './utils/getApiError';
 export { default as handleError } from './utils/handleError';
 export { default as getFormattedPrice } from './utils/get-formatted-price';
+export { default as InputNumberController } from './page-components/Controlled/InputNumberController';
 export * from './utils/getAsyncFields';
