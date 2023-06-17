@@ -3,13 +3,14 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedService }) {
+function ModeItem({ data = {}, selectedMode = {}, setSelectedMode, setSelectedService, setLocation }) {
 	const { label, value, icon, is_available } = data;
 
 	const handleClick = () => {
 		if (selectedMode.mode_value === value) setSelectedMode({});
 		else setSelectedMode({ mode_label: label, mode_value: value });
 		setSelectedService(null);
+		setLocation({});
 	};
 
 	return (

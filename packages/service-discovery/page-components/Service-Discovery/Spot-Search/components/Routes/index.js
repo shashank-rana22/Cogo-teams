@@ -2,18 +2,27 @@ import { Button } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
-import useCreateSearch from '../../hooks/useCreateSearch';
 import getDefaultPayload from '../../utils/getDefaultPayload';
 
 import RouteForm from './RouteForm';
 import styles from './styles.module.css';
 
-function Locations({ mode = {}, location = {}, setLocation = () => {}, handleSubmit, errors, organisation }) {
+function Routes({
+	mode = {},
+	location = {},
+	setLocation = () => {},
+	handleSubmit,
+	errors,
+	organization,
+	watch,
+	createSearch,
+	createSearchLoading,
+}) {
 	const buttonDisabled = !location.origin || !location.destination;
 
 	const service_type = mode.mode_value;
 
-	const { createSearch, data, loading } = useCreateSearch();
+	const formValues = watch();
 
 	const onClickSearch = () => {
 		if (!isEmpty(errors)) {
@@ -25,7 +34,10 @@ function Locations({ mode = {}, location = {}, setLocation = () => {}, handleSub
 			destination : location.destination,
 		});
 
-		createSearch({ action: 'default', values: { default_payload, service_type, ...organisation } });
+		createSearch({
+			action : 'default',
+			values : { default_payload, service_type, ...organization, ...formValues },
+		});
 	};
 
 	return (
@@ -47,7 +59,7 @@ function Locations({ mode = {}, location = {}, setLocation = () => {}, handleSub
 					themeType="accent"
 					disabled={buttonDisabled}
 					onClick={handleSubmit(onClickSearch)}
-					loading={loading}
+					loading={createSearchLoading}
 				>
 					Find Rates
 
@@ -58,4 +70,4 @@ function Locations({ mode = {}, location = {}, setLocation = () => {}, handleSub
 	);
 }
 
-export default Locations;
+export default Routes;

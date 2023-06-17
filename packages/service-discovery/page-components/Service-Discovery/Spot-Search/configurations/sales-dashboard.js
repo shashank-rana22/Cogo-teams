@@ -5,7 +5,7 @@ import salesQuotations from './sales-quotations.json';
 import salesSpotSearches from './sales-spot-searches.json';
 import salesShipments from './shipments.json';
 
-const salesDashboard = [
+export const salesDashboard = [
 	salesSpotSearches,
 	salesQuotations,
 	salesShipments,
@@ -13,5 +13,3 @@ const salesDashboard = [
 	missingRates,
 	allocationRequests,
 ];
-
-export default salesDashboard;

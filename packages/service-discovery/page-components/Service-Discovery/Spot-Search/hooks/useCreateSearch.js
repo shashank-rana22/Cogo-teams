@@ -13,21 +13,21 @@ const useCreateSearch = () => {
 			let payload = {};
 
 			if (action === 'default') {
-				const { default_payload, organisation_branch_id, organisation_id, service_type, user_id } = values;
+				const { default_payload, organization_branch_id, organization_id, service_type, user_id } = values;
 
 				payload = {
 					...default_payload,
-					importer_exporter_branch_id : organisation_branch_id,
-					importer_exporter_id        : organisation_id,
+					importer_exporter_branch_id : organization_branch_id,
+					importer_exporter_id        : organization_id,
 					source                      : 'platform',
 					search_type                 : service_type,
 					user_id,
 				};
 			}
 
-			await trigger({ data: payload });
+			const res = await trigger({ data: payload });
 
-			Toast.success(data?.id);
+			Toast.success(res?.data?.id);
 		} catch (err) {
 			if (err.response?.data) {
 				Toast.error(getApiErrorString(err.response?.data));

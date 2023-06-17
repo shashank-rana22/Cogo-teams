@@ -1,9 +1,52 @@
-import { IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
+import { IcCError, IcCFcrossInCircle, IcCFtick, IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
 
-const getFormControls = ({ organisation = '', setOrganisation = () => {}, setValue }) => {
+import styles from './styles.module.css';
+
+const KYC_ICON_MAPPING = {
+	pending_from_user: (
+		<IcCError width={16} height={16} style={{ marginTop: 2 }} />
+	),
+	pending_verification: (
+		<IcCError width={16} height={16} style={{ marginTop: 2 }} />
+	),
+	verified : <IcCFtick width={20} height={20} />,
+	rejected : (
+		<IcCFcrossInCircle width={16} height={16} style={{ marginTop: 2 }} />
+	),
+};
+
+function getOrganizationOption({ item }) {
+	const getAccountType = () => {
+		if (item.account_type === 'service_provider') return 'LSP';
+		if ((item.tags || []).includes('partner')) return 'CP';
+		return 'IE';
+	};
+
+	return (
+		<div className={styles.option_container}>
+			<div className={styles.option_name_container}>
+				<div className={styles.business_name}>{item.business_name}</div>
+
+				<div className={styles.trade_name}>{item.trade_name}</div>
+			</div>
+
+			<div className={styles.icn_container}>
+				<div className={styles.account_type}>
+					{getAccountType()}
+				</div>
+
+				<div className={styles.icon}>
+					{KYC_ICON_MAPPING[item.kyc_status]}
+				</div>
+			</div>
+		</div>
+	);
+}
+
+const getFormControls = ({ organization = '', setOrganization = () => {}, setValue }) => {
 	const controls = [
 		{
-			name        : 'organisation',
+			name        : 'organization_id',
 			type        : 'async-select',
 			label       : 'Select an organisation',
 			placeholder : 'Select Organisation',
@@ -25,13 +68,14 @@ const getFormControls = ({ organisation = '', setOrganisation = () => {}, setVal
 					organization_branch_ids = '',
 					business_name = '',
 				} = obj;
-				setOrganisation({
-					organisation_id        : id,
-					organisation_branch_id : organization_branch_ids?.[0],
+				setOrganization({
+					organization_id        : id,
+					organization_branch_id : organization_branch_ids?.[0],
 					business_name,
 				});
 				setValue('user_id', undefined);
 			},
+			renderLabel : (item) => <>{getOrganizationOption({ item })}</>,
 			prefix      : <IcMManufacturing fontSize={16} />,
 			isClearable : true,
 		},
@@ -45,24 +89,14 @@ const getFormControls = ({ organisation = '', setOrganisation = () => {}, setVal
 			valueKey    : 'user_id',
 			initialCall : true,
 			rules       : { required: 'User name is required' },
-			onChange    : (val, obj = {}) => {
-				const {
-					user_id = '',
-				} = obj;
-				setOrganisation((prev) => ({
-					...prev,
-					user_id,
-				}));
-			},
-			params: {
+			params      : {
 				filters: {
 					status                 : 'active',
-					organization_id        : organisation?.organisation_id,
-					organization_branch_id : organisation?.organisation_branch_id,
+					organization_id        : organization?.organization_id,
+					organization_branch_id : organization?.organization_branch_id,
 				},
 			},
-			prefix      : <IcMProfile fontSize={16} />,
-			isClearable : true,
+			prefix: <IcMProfile fontSize={16} />,
 		},
 	];
 	return controls;

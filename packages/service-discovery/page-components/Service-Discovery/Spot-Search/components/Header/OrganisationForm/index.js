@@ -5,8 +5,8 @@ import getElementController from '../../../configurations/getElementController';
 import getFormControls from './getControls';
 import styles from './styles.module.css';
 
-function OrganisationForm({ organisation = '', setOrganisation = () => {}, control, errors, setValue }) {
-	const controls = getFormControls({ organisation, setOrganisation, setValue });
+function OrganisationForm({ organization = '', setOrganization = () => {}, control, errors, setValue }) {
+	const controls = getFormControls({ organization, setOrganization, setValue });
 
 	return (
 		<div className={styles.container}>

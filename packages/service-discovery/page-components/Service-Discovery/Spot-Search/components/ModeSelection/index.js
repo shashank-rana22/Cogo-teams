@@ -9,6 +9,7 @@ function ModeSelection({
 	selectedMode = {},
 	setSelectedMode = () => {},
 	setSelectedService = () => {},
+	setLocation = () => {},
 }) {
 	return (
 		<div className={styles.container}>
@@ -22,6 +23,7 @@ function ModeSelection({
 						selectedMode={selectedMode}
 						setSelectedMode={setSelectedMode}
 						setSelectedService={setSelectedService}
+						setLocation={setLocation}
 					/>
 				))}
 			</div>

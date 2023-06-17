@@ -1,0 +1,38 @@
+.container{
+    background: #F3FAFA;
+	border: 1px solid #E5F4F5;
+	border-radius: 4px;
+	padding: 6px 8px;
+	display: flex;
+	justify-content: space-between;
+	align-items: flex-end;
+	margin-right: 24px;
+	margin-top: 6px;
+	cursor: pointer;
+
+
+	&.active {
+		border-color: #88CAD1;
+		background: #E1F1F3;
+	}
+}
+.text{
+	margin-right: 10px;
+	margin-left: 10px;
+	color: #000000;
+
+	&.active {
+		color: #000000;
+		font-weight: bold;
+	}
+
+	
+}
+.sub {
+	color: #828282;
+	margin-right: 16px;
+}
+
+.margin {
+	margin-right: 16px;
+}
