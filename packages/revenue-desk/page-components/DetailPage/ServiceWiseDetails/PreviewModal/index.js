@@ -1,13 +1,20 @@
 import { Button, Modal, TabPanel, Tabs } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
-import PreviewSelectedCards from './PreviewSelectedCards';
 
+import PreviewSelectedCards from './PreviewSelectedCards';
 
 function PreviewModal({
 	modalStep, setModalStep, tabKeys,
 	groupedShowServicesData, supplierPayload, priceData, shipmentData,
 }) {
+	const newFilteredGroupedShowServicesData = {};
+	Object.entries(groupedShowServicesData).forEach(([serviceType, serviceData]) => {
+		newFilteredGroupedShowServicesData[serviceType] = serviceData.filter(
+			(service) => supplierPayload.hasOwnProperty(service.id),
+		);
+	});
+
 	const [previewActiveTab, setPreviewActiveTab] = useState(tabKeys[0]);
 	return (
 		<>
@@ -27,7 +34,7 @@ function PreviewModal({
 								key={singleTab}
 							>
 								<PreviewSelectedCards
-									groupedServicesData={groupedShowServicesData[previewActiveTab]}
+									groupedServicesData={newFilteredGroupedShowServicesData[previewActiveTab]}
 									supplierPayload={supplierPayload}
 									price={priceData[startCase(singleTab)]}
 									shipmentType={shipmentData?.shipment_type}

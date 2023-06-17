@@ -57,7 +57,7 @@ function ShipmentCard({ itemData, priceData }) {
 				<div className={styles.last_section}>
 					<div className={styles.sell_price_text}>
 						Sell Price:
-						<span style={{ fontWeight: '700', color: '#221F20', marginLeft: '2px' }}>
+						<span style={{ fontWeight: '700', color: '#221F20', marginLeft: '3px' }}>
 							{!priceData?.sell_price
 								? <Placeholder width="150px" height="25px" />
 								: formatAmount({
