@@ -15,23 +15,23 @@ export const getAddressRespectivePincodeAndPoc = ({ data, address = '' }) => {
 };
 
 const getBillingAddressFromRegNum = ({ data }) => {
-	const formttedData = [];
+	const FORMATTED_DATA = [];
 	data?.map((item) => {
 		const billingArray = item?.billing_addresses?.map((address) => ({
 			...address,
 			business_name: item?.business_name,
 		}));
-		return formttedData.push(...billingArray);
+		return FORMATTED_DATA.push(...billingArray);
 	});
 
-	const addressOptions = formttedData?.map((item) => ({
+	const addressOptions = FORMATTED_DATA?.map((item) => ({
 		label : item?.address,
 		value : item?.address,
 
 	}));
 
 	return {
-		formttedData,
+		formttedData: FORMATTED_DATA,
 		addressOptions,
 	};
 };
