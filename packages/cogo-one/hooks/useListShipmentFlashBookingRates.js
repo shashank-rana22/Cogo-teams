@@ -3,18 +3,18 @@ import { useState, useCallback, useEffect } from 'react';
 
 const PAYLOAD_MAPPING = {
 	reverted_bookings: {
-		status                                   : 'active',
-		shipment_state                           : ['confirmed_by_importer_exporter'],
-		is_reverted                              : true,
-		booking_confirmation_preferences_not_set : true,
+		status         : 'active',
+		shipment_state : ['confirmed_by_importer_exporter'],
+		is_reverted    : true,
 	},
 	closed_bookings: {
 		shipment_state: ['confirmed_by_importer_exporter', 'in_progress', 'completed'],
 	},
 	win_bookings: {
-		status         : 'active',
-		shipment_state : ['confirmed_by_importer_exporter'],
-		is_reverted    : false,
+		status                                   : 'active',
+		shipment_state                           : ['confirmed_by_importer_exporter'],
+		is_reverted                              : false,
+		booking_confirmation_preferences_not_set : true,
 	},
 };
 
@@ -51,7 +51,7 @@ const useListShipmentFlashBookingRates = ({
 				params,
 			});
 		} catch (error) {
-			console.log('error:', error);
+			console.error('error:', error);
 		}
 	}, [activeTab, orgId, trigger, hasFlashBookings]);
 
