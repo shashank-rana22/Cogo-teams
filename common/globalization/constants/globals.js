@@ -217,6 +217,7 @@ const GLOBAL_CONSTANTS = {
 	others                       : {
 		old_shipment_serial_id: 120347,
 	},
+	restricted_country_id_invoicing: ['b67d40b1-616c-4471-b77b-de52b4c9f2ff'],
 
 };
 
