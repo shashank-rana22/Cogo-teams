@@ -45,8 +45,8 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 			disable : false,
 		},
 		...(origin_port?.is_icd ? [{
-			name: 'origin_icd_departed_at',
-			label: 'Departure from ICD Port date',
+			name  : 'origin_icd_departed_at',
+			label : 'Departure from ICD Port date',
 		}] : []),
 		...(destination_port?.is_icd ? [{
 			name  : 'arrived_at_destination_icd_at',
@@ -54,7 +54,7 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		}] : []),
 	];
 
-	const defaultValues = {};
+	const DEFAULT_VALUES = {};
 
 	finalControls.forEach((control, index) => {
 		const { name, maxDate = departureDate, disable = disabledState } = control || {};
@@ -65,10 +65,10 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].showTimeSelect = true;
 
-		defaultValues[name] = getDate(primary_service?.[name]);
+		DEFAULT_VALUES[name] = getDate(primary_service?.[name]);
 	});
 
-	return { finalControls, defaultValues };
+	return { finalControls, defaultValues: DEFAULT_VALUES };
 };
 
 export default controls;
