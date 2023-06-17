@@ -3,6 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import Item from './Item';
 import styles from './styles.module.css';
 
+const DEFAULT_AMOUNT = 0;
 function InvoiceItem({
 	item = {},
 	total = {},
@@ -16,7 +17,7 @@ function InvoiceItem({
 	refetchCN = () => {},
 }) {
 	const outStanding = formatAmount({
-		amount   : org_outstanding?.total_outstanding_amount || 0,
+		amount   : org_outstanding?.total_outstanding_amount || DEFAULT_AMOUNT,
 		currency : org_outstanding?.currency,
 		options  : {
 			style                 : 'currency',

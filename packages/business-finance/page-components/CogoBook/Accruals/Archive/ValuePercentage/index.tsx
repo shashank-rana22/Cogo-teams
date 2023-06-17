@@ -1,5 +1,5 @@
 import { Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
@@ -8,15 +8,25 @@ function ValuePercentage({ data, keys, flag = false }) {
 
 	const percentage = `${keys}Percentage`;
 
-	const formatted = getFormattedPrice(
-		data[keys],
-		data.incomeCurrency,
-
-	);
+	const formatted = formatAmount({
+		amount   : data[keys],
+		currency : data.incomeCurrency,
+		options  : {
+			style           : 'currency',
+			currencyDisplay : 'code',
+		},
+	});
 
 	const variance = data[keys] < 0 && data[keys];
 	const absoluteValue = Math.abs(data[keys] || 0);
-	const absVariance = getFormattedPrice(absoluteValue, expenseCurrency);
+	const absVariance = formatAmount({
+		amount   :	absoluteValue as any,
+		currency : expenseCurrency,
+		options  : {
+			style           : 'currency',
+			currencyDisplay : 'code',
+		},
+	});
 
 	const renderValue = (amt, n) => {
 		const check = keys === 'variance' ? variance : '';
