@@ -29,18 +29,18 @@ const formatDataForService = (
 	taskData,
 	serviceIdMapping,
 ) => {
-	const PAYLOAD = {};
+	const payloadObj = {};
 
 	(dataToSend || []).forEach((sendKeyObj) => {
 		if (sendKeyObj?.source === 'taskData') {
-			PAYLOAD[sendKeyObj?.key] = taskData?.[sendKeyObj?.key_from_source];
+			payloadObj[sendKeyObj?.key] = taskData?.[sendKeyObj?.key_from_source];
 		}
 
 		if (sendKeyObj?.source === 'serviceData') {
 			if (sendKeyObj.custom_service_id) {
-				PAYLOAD[sendKeyObj.key] = serviceIdMapping[`${sendKeyObj.custom_service_id}.id`];
+				payloadObj[sendKeyObj.key] = serviceIdMapping[`${sendKeyObj.custom_service_id}.id`];
 			} else {
-				PAYLOAD[sendKeyObj?.key] = taskData?.service_type
+				payloadObj[sendKeyObj?.key] = taskData?.service_type
 					? serviceIdMapping?.[`${taskData?.service_type}.id`]
 					: serviceIdMapping?.[`${taskData?.shipment_type}_service.id`];
 			}
@@ -48,9 +48,9 @@ const formatDataForService = (
 
 		if (sendKeyObj?.source === 'formData') {
 			if (NUMBER_KEYS.includes(sendKeyObj?.key)) {
-				PAYLOAD[sendKeyObj?.key] = Number(rawValues?.[sendKeyObj?.key_from_source] || DEFAULT_NUMBER_VALUE);
+				payloadObj[sendKeyObj?.key] = Number(rawValues?.[sendKeyObj?.key_from_source] || DEFAULT_NUMBER_VALUE);
 			} else {
-				PAYLOAD[sendKeyObj.key] = getByKey(
+				payloadObj[sendKeyObj.key] = getByKey(
 					rawValues,
 					sendKeyObj.key_from_source,
 					undefined,
@@ -61,7 +61,7 @@ const formatDataForService = (
 
 	const extraParams = extraParamsToMerge(rawValues);
 
-	const finalPayloadObj = { ...PAYLOAD, ...extraParams };
+	const finalPayloadObj = { ...payloadObj, ...extraParams };
 
 	return finalPayloadObj;
 };
