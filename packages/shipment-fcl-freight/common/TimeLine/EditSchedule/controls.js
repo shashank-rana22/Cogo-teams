@@ -54,7 +54,7 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		}] : []),
 	];
 
-	const DEFAULT_VALUES = {};
+	const defaultValues = {};
 
 	finalControls.forEach((control, index) => {
 		const { name, maxDate = departureDate, disable = disabledState } = control || {};
@@ -65,10 +65,10 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		finalControls[index].isPreviousDaysAllowed = true;
 		finalControls[index].showTimeSelect = true;
 
-		DEFAULT_VALUES[name] = getDate(primary_service?.[name]);
+		defaultValues[name] = getDate(primary_service?.[name]);
 	});
 
-	return { finalControls, defaultValues: DEFAULT_VALUES };
+	return { finalControls, defaultValues: defaultValues };
 };
 
 export default controls;
