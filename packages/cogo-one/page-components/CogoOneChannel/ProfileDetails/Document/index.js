@@ -18,6 +18,7 @@ function Documents({
 	activeTab,
 	customerId,
 	documents_count,
+	formattedMessageData,
 }) {
 	const [filterVisible, setFilterVisible] = useState(false);
 	const [filters, setFilters] = useState('');
@@ -107,6 +108,7 @@ function Documents({
 					userId={userId}
 					userMobile={userMobile}
 					leadUserId={leadUserId}
+					formattedMessageData={formattedMessageData}
 				/>
 
 			)}

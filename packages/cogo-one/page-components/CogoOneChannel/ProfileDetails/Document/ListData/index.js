@@ -1,23 +1,26 @@
-import { cl } from '@cogoport/components';
+import { Button, cl } from '@cogoport/components';
 import { IcMPdf } from '@cogoport/icons-react';
 import { format, startCase, isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import EmptyState from '../../../../../common/EmptyState';
 import documentTypeMapping from '../../../../../configurations/document-type-mapping';
 import documentStatus from '../DocumentStatus';
 
 import ActionsStatus from './ActionsStatus';
+import DocumentTypeSID from './DocumentTypeSID';
 import styles from './styles.module.css';
 
 function ListData({
 	userId = '', userMobile = '', leadUserId = '',
 	list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {},
-	isGstUploaded, isPanUploaded,
+	isGstUploaded, isPanUploaded, formattedMessageData,
 }) {
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
 	};
+
+	const [openModal, setOpenModal] = useState(false);
 
 	const checkStatus = (status, state) => {
 		let finalStatus = '';
@@ -53,6 +56,15 @@ function ListData({
 
 						return (
 							<>
+								{openModal && orgId && (
+									<DocumentTypeSID
+										orgId={orgId}
+										formattedMessageData={formattedMessageData}
+										openModal={openModal}
+										setOpenModal={setOpenModal}
+										document_url={document_url}
+									/>
+								)}
 								<div className={styles.activity_date}>
 									<div className={styles.dot} />
 									<div className={styles.durations}>
@@ -102,6 +114,15 @@ function ListData({
 											isPanUploaded={isPanUploaded}
 											isGstUploaded={isGstUploaded}
 										/>
+
+										{orgId && (
+											<Button
+												className={styles.tag_button}
+												onClick={() => setOpenModal(true)}
+											>
+												Tag
+											</Button>
+										)}
 
 									</div>
 								</div>

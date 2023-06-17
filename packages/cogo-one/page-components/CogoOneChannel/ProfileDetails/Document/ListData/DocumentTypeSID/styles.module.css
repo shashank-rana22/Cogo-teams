@@ -1,0 +1,16 @@
+.modal_styled {
+    :global {
+        .ui_modal_body_container {
+            height: 350px !important;
+        }
+    }
+}
+
+.error_text {
+    color: #ee3000;
+    font-size: 12px;
+}
+
+.styled_element {
+    margin-bottom: 10px;
+}

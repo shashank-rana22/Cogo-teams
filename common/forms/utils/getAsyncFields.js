@@ -571,6 +571,42 @@ function asyncListTests() {
 	};
 }
 
+function asyncListShipmentPendingTasks() {
+	return {
+		labelKey    : 'document_type',
+		valueKey    : 'document_type',
+		endpoint    : 'list_shipment_pending_tasks',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListShipments() {
+	return {
+		labelKey    : 'serial_id',
+		valueKey    : 'id',
+		endpoint    : 'list_shipments',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
+function asyncListShipmentServices() {
+	return {
+		labelKey    : 'shipment_serial_id',
+		valueKey    : 'shipment_id',
+		endpoint    : 'list_shipment_services',
+		initialCall : true,
+		params      : {
+			page_limit: 10,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -618,4 +654,7 @@ export {
 	asyncListFAQTags,
 	asyncListCourseCategories,
 	asyncListTests,
+	asyncListShipmentPendingTasks,
+	asyncListShipments,
+	asyncListShipmentServices,
 };
