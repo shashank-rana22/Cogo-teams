@@ -5,6 +5,7 @@ import cycleWiseExceptionTable from '../../configurations/cycle-wise-exception-t
 import masterExceptionColumn from '../../configurations/master-exception-table';
 import useMasterException from '../../hooks/useMasterException';
 
+import ConfirmationModal from './ConfirmationModal';
 import ExceptionList from './ExceptionList';
 import styles from './styles.module.css';
 
@@ -24,6 +25,7 @@ function ExceptionsManagement() {
 	const [showCycleExceptions, setShowCycleExceptions] = useState(false);
 	const [subTabsValue, setSubTabsValue] = useState('masterExceptionList');
 	const [cycleListId, setCycleListId] = useState();
+	const [showConfirmationModal, setShowConfirmationModal] = useState(false);
 	const {
 		data,
 		masterExceptionLoading,
@@ -35,7 +37,9 @@ function ExceptionsManagement() {
 		sort,
 		setSort,
 		cycleWiseLoading,
-	} = useMasterException({ exceptionFilter, subTabsValue });
+	} = useMasterException({ exceptionFilter, subTabsValue, setShowConfirmationModal });
+
+	const [masterListId, setMasterListId] = useState();
 
 	const CYCLE_WISE_COLUMN = cycleWiseExceptionTable({
 		sort,
@@ -52,6 +56,8 @@ function ExceptionsManagement() {
 		deleteMasterLoading,
 		exceptionFilter,
 		setExceptionFilter,
+		setShowConfirmationModal,
+		setMasterListId,
 	});
 	const SUB_TABS_VALUE = subTabsValue === 'masterExceptionList';
 
@@ -80,6 +86,17 @@ function ExceptionsManagement() {
 					</div>
 				))}
 			</div>
+
+			{(showConfirmationModal)
+				&& (
+					<ConfirmationModal
+						showConfirmationModal={showConfirmationModal}
+						setShowConfirmationModal={setShowConfirmationModal}
+						deleteMasterException={deleteMasterException}
+						deleteMasterLoading={deleteMasterLoading}
+						masterListId={masterListId}
+					/>
+				)}
 
 			<ExceptionList
 				data={SUB_TABS_VALUE ? list || [] : cycleList || []}

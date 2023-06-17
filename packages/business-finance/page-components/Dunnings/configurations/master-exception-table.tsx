@@ -8,6 +8,21 @@ import styles from './styles.module.css';
 
 const ORANGE = '#F68B21';
 const GREY = '#BDBDBD';
+
+interface Sort {
+	sortType?: string;
+	sortBy?: string;
+}
+interface MasterExceptionColumnInterface {
+	sort?: Sort;
+	setSort?: React.Dispatch<React.SetStateAction<object>>;
+	deleteMasterLoading?: boolean;
+	deleteMasterException?: any;
+	exceptionFilter?: object;
+	setExceptionFilter?: React.Dispatch<React.SetStateAction<object>>;
+	setShowConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
+	setMasterListId?: React.Dispatch<React.SetStateAction<string>>;
+}
 const masterExceptionColumn = ({
 	sort,
 	setSort,
@@ -15,7 +30,9 @@ const masterExceptionColumn = ({
 	deleteMasterLoading,
 	exceptionFilter,
 	setExceptionFilter,
-}) => {
+	setShowConfirmationModal,
+	setMasterListId,
+}:MasterExceptionColumnInterface) => {
 	const { sortType = '', sortBy = '' } = sort || {};
 	const creditDaysSortingAsc = (sortType === 'ASC' && sortBy === 'creditDays') ? ORANGE : GREY;
 	const creditDaysSortingDesc = (sortType === 'DESC' && sortBy === 'creditDays') ? ORANGE : GREY;
@@ -169,10 +186,8 @@ const masterExceptionColumn = ({
 					<Button themeType="tertiary" disabled={deleteMasterLoading}>
 						<IcMDelete
 							onClick={() => {
-								deleteMasterException(
-									row?.id,
-									'DELETE',
-								);
+								setMasterListId(row?.id);
+								setShowConfirmationModal(true);
 							}}
 							width={24}
 							height={24}

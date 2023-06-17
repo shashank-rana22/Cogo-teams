@@ -37,7 +37,7 @@ export interface AddCustomerInterface {
 	setShow?: Function;
 	control?: object;
 	watch?: Function;
-	handleSubmit?: UseFormHandleSubmit<FieldValues, undefined>;
+	handleSubmit?: Function;
 	uploadListLoading?: boolean;
 	getUploadList?: Function;
 }
@@ -45,7 +45,7 @@ export interface ManageExceptionInterface {
 	setShow?: Function;
 	showCycleExceptions?: boolean;
 	setShowCycleExceptions?: React.Dispatch<React.SetStateAction<boolean>>;
-	handleSubmit?: UseFormHandleSubmit<FieldValues, undefined>;
+	handleSubmit?: Function;
 	uploadListLoading?: boolean;
 	cycleListId?: string;
 	uncheckedRows?: Array<string>;

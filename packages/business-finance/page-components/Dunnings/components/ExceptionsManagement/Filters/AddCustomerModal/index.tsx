@@ -70,7 +70,6 @@ function AddCustomerModal({
 						isClearable
 						initialCall
 						style={{ width: '50%' }}
-						rules={{ required: true }}
 						params={TRADE_PARTY_PARAMS}
 					/>
 				</div>

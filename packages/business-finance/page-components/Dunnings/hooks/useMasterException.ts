@@ -13,13 +13,14 @@ interface ExceptionFiltersInterface {
 interface Props {
 	exceptionFilter?: ExceptionFiltersInterface;
 	subTabsValue?: string;
+	setShowConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
 }
 
 interface Profile {
 	profile?: { user: { id: string } }
 }
 
-const useMasterException = ({ exceptionFilter, subTabsValue }:Props) => {
+const useMasterException = ({ exceptionFilter, subTabsValue, setShowConfirmationModal }:Props) => {
 	const [searchValue, setSearchValue] = useState('');
 	const { category = '', creditDays = 0, cycleStatus = '', pageIndex } = exceptionFilter || {};
 	const profile: Profile = useSelector((state) => state);
@@ -109,11 +110,13 @@ const useMasterException = ({ exceptionFilter, subTabsValue }:Props) => {
 					},
 				});
 				getMasterList();
+				setShowConfirmationModal(false);
+				Toast.success('Deleted Successfully !!');
 			} catch (error) {
-				Toast.error(error?.message || 'Something went wrong');
+				Toast.error(error?.message || 'Delete Failed');
 			}
 		})();
-	}, [deleteMasterApi, getMasterList, PROFILE_ID]);
+	}, [deleteMasterApi, getMasterList, PROFILE_ID, setShowConfirmationModal]);
 
 	useEffect(() => {
 		if (subTabsValue === 'masterExceptionList') {
