@@ -68,7 +68,7 @@ const controls = ({ primary_service, departureDate, timelineData = [] }) => {
 		defaultValues[name] = getDate(primary_service?.[name]);
 	});
 
-	return { finalControls, defaultValues: defaultValues };
+	return { finalControls, defaultValues };
 };
 
 export default controls;
