@@ -4,8 +4,7 @@ import React from 'react';
 import styles from './styles.module.css';
 
 function Location(props) {
-	const { data, returnOnlyIcon } = props;
-
+	const { data = {}, returnOnlyIcon } = props;
 	const countryName = (data.country || {}).name;
 
 	let sub = null;

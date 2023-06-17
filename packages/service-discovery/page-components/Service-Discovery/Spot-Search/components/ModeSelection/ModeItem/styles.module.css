@@ -12,11 +12,10 @@
     transition: 0.5s;
 
 	&:hover {
-		/* border-top: 3px solid #FCDC00; */
-        /* margin-top: -3px; */
 
         .icon_hover{
             transition: 0.5s;
+            transform-origin: top left;
             transform: scale(1.12);
         }
 
