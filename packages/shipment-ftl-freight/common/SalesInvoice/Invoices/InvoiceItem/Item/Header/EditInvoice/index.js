@@ -8,7 +8,7 @@ import Info from './Info';
 import styles from './styles.module.css';
 
 function EditInvoice({
-	show = 'false',
+	show = false,
 	onClose,
 	invoice = {},
 	refetch = () => {},

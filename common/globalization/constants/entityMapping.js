@@ -56,7 +56,7 @@ const ENTITY_MAPPING = {
 		id                : 'b67d40b1-616c-4471-b77b-de52b4c9f2ff',
 		icon              : IcCCountryVietnam,
 		currency          : 'VND',
-		feature_supported : ['cogo_books', 'upload_invoice'],
+		feature_supported : ['cogo_books', 'freight_sales_invoice_restricted_enitity', 'upload_invoice'],
 		labels            : {
 			irn_label: 'E-invoice',
 		},
