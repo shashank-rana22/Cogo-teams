@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 
 import ActiveInactiveTabs from '../../../commons/ActiveInactiveTabs';
 import Header from '../../../commons/CommonHeader';
@@ -20,8 +21,11 @@ const DEFAULT_TOTAL_COUNT = 10;
 const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
 const ADD_BUTTON_LABEL = 'Sub Chapter';
+const FUNCTION_ADD = 'add';
 
 function SubChapter() {
+	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
+
 	const {
 		columns,
 		search,
@@ -35,8 +39,8 @@ function SubChapter() {
 		showDeleteModal,
 		deleteSubChapter,
 		deleteLoading,
-		setShowUpdateSubChapterModal,
-		showUpdateSubChapterModal,
+		setShowSubChapterModal,
+		showSubChapterModal,
 		activeTab,
 		setActiveTab,
 	} = useSubChapter();
@@ -44,42 +48,36 @@ function SubChapter() {
 	const { list = [], ...paginationData } = data || {};
 
 	const {
-		showAddChapterModal,
-		setShowAddChapterModal = () => {},
-		control,
-		errors,
 		onClickSubmitButton,
-		loading,
-		handleSubmit,
-	} = useCreateChapter({ fetchList });
+		loading:CreateLoading,
+	} = useCreateChapter({ fetchList, setShowSubChapterModal });
 
 	const {
-		control: UpdateControl,
-		errors: UpdateErrors,
 		onClickUpdateButton,
 		loading: UpdateLoading,
-		handleSubmit: UpdateHandleSubmit,
-		setValue,
 	} = useUpdateSubChapter({
 		fetchList,
-		setShowUpdateSubChapterModal,
-		showUpdateSubChapterModal,
+		setShowSubChapterModal,
+		showSubChapterModal,
 	});
 
 	const onClickAddButton = () => {
-		setShowAddChapterModal(true);
+		setShowSubChapterModal(FUNCTION_ADD);
+		reset();
 	};
 
 	return (
 		<div>
-			<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+			<div className={styles.header}>
+				<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
-			<Header
-				setSearch={setSearch}
-				search={search}
-				label={ADD_BUTTON_TEXT}
-				onClickAddButton={onClickAddButton}
-			/>
+				<Header
+					setSearch={setSearch}
+					search={search}
+					label={ADD_BUTTON_TEXT}
+					onClickAddButton={onClickAddButton}
+				/>
+			</div>
 
 			<StyledTable
 				columns={columns}
@@ -99,32 +97,18 @@ function SubChapter() {
 				</div>
 			)}
 
-			{showAddChapterModal ? (
+			{showSubChapterModal ? (
 				<CreateConfigurationModal
-					showModal={showAddChapterModal}
-					setShowModal={setShowAddChapterModal}
+					showModal={showSubChapterModal}
+					setShowModal={setShowSubChapterModal}
 					controls={controls}
 					control={control}
 					errors={errors}
-					onClickSubmitButton={onClickSubmitButton}
-					loading={loading}
+					onClickSubmitButton={showSubChapterModal === FUNCTION_ADD
+						? onClickSubmitButton : onClickUpdateButton}
+					loading={showSubChapterModal === FUNCTION_ADD ? CreateLoading : UpdateLoading}
 					handleSubmit={handleSubmit}
-					Type={MODAL_TYPE_ADD}
-					label={ADD_BUTTON_LABEL}
-				/>
-			) : null}
-
-			{showUpdateSubChapterModal ? (
-				<CreateConfigurationModal
-					showModal={showUpdateSubChapterModal}
-					setShowModal={setShowUpdateSubChapterModal}
-					controls={controls}
-					control={UpdateControl}
-					errors={UpdateErrors}
-					onClickSubmitButton={onClickUpdateButton}
-					loading={UpdateLoading}
-					handleSubmit={UpdateHandleSubmit}
-					Type={MODAL_TYPE_UPDATE}
+					Type={showSubChapterModal === FUNCTION_ADD ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 					label={ADD_BUTTON_LABEL}
 				/>

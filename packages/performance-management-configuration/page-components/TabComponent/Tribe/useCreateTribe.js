@@ -1,14 +1,8 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useState } from 'react';
 
-const useCreateTribe = ({ fetchList }) => {
-	const [showAddTribeModal, setShowAddTribeModal] = useState(false);
-
-	const { control, formState: { errors }, handleSubmit } = useForm();
-
+const useCreateTribe = ({ fetchList, setShowTribeModal }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/create_tribe',
@@ -23,7 +17,7 @@ const useCreateTribe = ({ fetchList }) => {
 			});
 
 			Toast.success('Successfully Created');
-			setShowAddTribeModal(false);
+			setShowTribeModal(false);
 			fetchList();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
@@ -31,11 +25,6 @@ const useCreateTribe = ({ fetchList }) => {
 	};
 
 	return {
-		showAddTribeModal,
-		setShowAddTribeModal,
-		control,
-		errors,
-		handleSubmit,
 		onClickSubmitButton,
 		loading,
 	};

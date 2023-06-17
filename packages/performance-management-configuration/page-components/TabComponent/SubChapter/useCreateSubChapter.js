@@ -1,14 +1,8 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
-import { useState } from 'react';
 
-const useCreateChapter = ({ fetchList }) => {
-	const [showAddChapterModal, setShowAddChapterModal] = useState(false);
-
-	const { control, formState: { errors }, handleSubmit } = useForm();
-
+const useCreateChapter = ({ fetchList, setShowSubChapterModal }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
 		url    : '/create_sub_chapter',
@@ -23,7 +17,7 @@ const useCreateChapter = ({ fetchList }) => {
 			});
 			Toast.success('Successfully Created');
 
-			setShowAddChapterModal(false);
+			setShowSubChapterModal(false);
 			fetchList();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
@@ -31,13 +25,8 @@ const useCreateChapter = ({ fetchList }) => {
 	};
 
 	return {
-		showAddChapterModal,
-		setShowAddChapterModal,
-		control,
-		errors,
 		onClickSubmitButton,
 		loading,
-		handleSubmit,
 	};
 };
 

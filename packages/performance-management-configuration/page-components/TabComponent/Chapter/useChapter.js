@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState, useEffect, useCallback } from 'react';
 
@@ -6,13 +7,14 @@ import getColumns from './getColumns';
 import useDeleteChapter from './useDeleteChapter';
 
 const DEFAULT_PAGE = 1;
+const DEFAULT_ACTIVE_TAB = 'active';
 
 const useChapter = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
-	const [showUpdateChapterModal, setShowUpdateChapterModal] = useState();
-	const [activeTab, setActiveTab] = useState('active');
+	const [showChapterModal, setShowChapterModal] = useState();
+	const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		url    : '/list_all_chapters',
@@ -25,12 +27,17 @@ const useChapter = () => {
 				await trigger({
 					params: {
 						page    : !search ? page : DEFAULT_PAGE,
-						filters : { q: search || undefined },
-						status  : activeTab,
+						filters : {
+							q      : search || undefined,
+							status : activeTab,
+						},
+
 					},
 				});
 			} catch (error) {
-				Toast.error(error?.data);
+				if (error?.response?.data) {
+					Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+				}
 			}
 		},
 		[page, trigger, search, activeTab],
@@ -46,7 +53,7 @@ const useChapter = () => {
 		fetchList();
 	}, [fetchList, page]);
 
-	const columns = getColumns({ setShowDeleteModal, setShowUpdateChapterModal });
+	const columns = getColumns({ setShowDeleteModal, setShowChapterModal });
 
 	return {
 		columns,
@@ -61,8 +68,8 @@ const useChapter = () => {
 		deleteLoading,
 		showDeleteModal,
 		setShowDeleteModal,
-		showUpdateChapterModal,
-		setShowUpdateChapterModal,
+		showChapterModal,
+		setShowChapterModal,
 		activeTab,
 		setActiveTab,
 	};

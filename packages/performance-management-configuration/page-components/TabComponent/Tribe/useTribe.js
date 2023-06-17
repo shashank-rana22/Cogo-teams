@@ -7,13 +7,14 @@ import getColumns from './getColumns';
 import useDeleteTribe from './useDeleteTribe';
 
 const DEFAULT_PAGE = 1;
+const DEFAULT_ACTIVE_TAB = 'active';
 
 const useTribe = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
-	const [showUpdateTribeModal, setShowUpdateTribeModal] = useState();
-	const [activeTab, setActiveTab] = useState('active');
+	const [showTribeModal, setShowTribeModal] = useState();
+	const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);
 
 	const [{ loading, data }, trigger] = useHarbourRequest({
 		url    : '/list_all_tribes',
@@ -26,12 +27,16 @@ const useTribe = () => {
 				await trigger({
 					params: {
 						page    : !search ? page : DEFAULT_PAGE,
-						filters : { q: search || undefined },
-						status  : activeTab,
+						filters : {
+							q      : search || undefined,
+							status : activeTab,
+						},
 					},
 				});
 			} catch (error) {
-				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+				if (error?.response?.data) {
+					Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+				}
 			}
 		},
 		[page, search, trigger, activeTab],
@@ -47,7 +52,7 @@ const useTribe = () => {
 		showDeleteModal,
 	});
 
-	const columns = getColumns({ setShowDeleteModal, setShowUpdateTribeModal });
+	const columns = getColumns({ setShowDeleteModal, setShowTribeModal });
 
 	return {
 		columns,
@@ -62,8 +67,8 @@ const useTribe = () => {
 		deleteLoading,
 		showDeleteModal,
 		setShowDeleteModal,
-		showUpdateTribeModal,
-		setShowUpdateTribeModal,
+		showTribeModal,
+		setShowTribeModal,
 		activeTab,
 		setActiveTab,
 	};

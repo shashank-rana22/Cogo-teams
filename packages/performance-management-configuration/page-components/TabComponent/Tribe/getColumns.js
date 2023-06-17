@@ -7,12 +7,10 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 const TOOLTIP_START_VALUE = 3;
-
 const MIN_SQUADS_LENGTH = 3;
-
 const SQUAD_INDEX_START = 0;
-
 const SQUAD_INDEX_END = 3;
+const STATUS_TYPE_ACTIVE = 'active';
 
 function TooltipContent({ item = [] }) {
 	return (
@@ -28,26 +26,23 @@ function TooltipContent({ item = [] }) {
 	);
 }
 
-const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => (
-	[
-		{
-			Header   : 'TRIBE NAME',
-			accessor : (item) => (
-				<div>{startCase(item?.tribe_name) || '-'}</div>
-			),
-		},
-		{
-			Header   : 'TRIBE LEADER',
-			accessor : (item) => (
-				<div>{startCase(item?.tribe_leader?.name) || '-'}</div>
-			),
-		},
+const getColumns = ({ setShowDeleteModal, setShowTribeModal }) => [
+	{
+		Header   : 'TRIBE NAME',
+		accessor : (item) => <div>{startCase(item?.tribe_name) || '-'}</div>,
+	},
+	{
+		Header   : 'TRIBE LEADER',
+		accessor : (item) => <div>{startCase(item?.tribe_leader?.name) || '-'}</div>,
+	},
 
-		{
-			Header   : 'SQUADS',
-			accessor : (item) => (
-				<div className={styles.pill_box}>
-					{item?.squads?.slice(SQUAD_INDEX_START, SQUAD_INDEX_END).map((singleSQUAD) => (
+	{
+		Header   : 'SQUADS',
+		accessor : (item) => (
+			<div className={styles.pill_box}>
+				{item?.squads
+					?.slice(SQUAD_INDEX_START, SQUAD_INDEX_END)
+					.map((singleSQUAD) => (
 						<Pill
 							key={singleSQUAD?.squad_name}
 							size="md"
@@ -57,73 +52,69 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateTribeModal }) => (
 						</Pill>
 					))}
 
-					{item?.squads?.length > MIN_SQUADS_LENGTH ? (
+				{item?.squads?.length > MIN_SQUADS_LENGTH ? (
+					<Pill>
 						<Tooltip
 							content={<TooltipContent item={item?.squads} />}
-							placement="left"
+							placement="right"
 							theme="light"
 							interactive
 							caret
 							styles={{ marginBottom: '24px' }}
 						>
-							<Pill>
-								+
-								{item.squads.length - SQUAD_INDEX_END}
-								{' '}
-								Squads
-							</Pill>
+							+
+							{item.squads.length - SQUAD_INDEX_END}
+							{' '}
+							Squads
 						</Tooltip>
-					)
-						: null}
-				</div>
-			),
-		},
-		{
-			Header   : 'LAST UPDATED AT',
-			accessor : (item) => (
-				<div>
-					{formatDate({
-						date       : item?.updated_at,
-						formatType : 'date',
-						dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-					})}
-				</div>
-			),
-		},
-		{
-			Header   : 'STATUS',
-			accessor : (item) => (
-				<Pill
-					className={item?.status === 'active' ? styles.active : styles.inactive}
-				>
-					{startCase(item?.status) || '-'}
-				</Pill>
-			),
-		},
-		{
-			Header   : 'ACTION',
-			accessor : (item) => (
-				item?.status === 'active'
-					? (
-						<div className={styles.button}>
-							<IcMDelete
-								width={16}
-								height={16}
-								style={{ cursor: 'pointer' }}
-								onClick={() => setShowDeleteModal(item.id)}
-							/>
-							<IcMEdit
-								width={16}
-								height={16}
-								style={{ marginLeft: 12, cursor: 'pointer' }}
-								onClick={() => setShowUpdateTribeModal(item)}
-							/>
-						</div>
-					)
-					:			<Button themeType="secondary">Re Apply</Button>
-			),
-		},
-	]
-);
+					</Pill>
+				) : null}
+			</div>
+		),
+	},
+	{
+		Header   : 'LAST UPDATED AT',
+		accessor : (item) => (
+			<div>
+				{formatDate({
+					date       : item?.updated_at,
+					formatType : 'date',
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+				})}
+			</div>
+		),
+	},
+	{
+		Header   : 'STATUS',
+		accessor : (item) => (
+			<Pill
+				className={item?.status === STATUS_TYPE_ACTIVE ? styles.active : styles.inactive}
+			>
+				{startCase(item?.status) || '-'}
+			</Pill>
+		),
+	},
+	{
+		Header   : 'ACTION',
+		accessor : (item) => (item?.status === STATUS_TYPE_ACTIVE ? (
+			<div className={styles.button}>
+				<IcMDelete
+					width={16}
+					height={16}
+					style={{ cursor: 'pointer' }}
+					onClick={() => setShowDeleteModal(item.id)}
+				/>
+				<IcMEdit
+					width={16}
+					height={16}
+					style={{ marginLeft: 12, cursor: 'pointer' }}
+					onClick={() => setShowTribeModal(item)}
+				/>
+			</div>
+		) : (
+			<Button themeType="secondary">Restore</Button>
+		)),
+	},
+];
 
 export default getColumns;

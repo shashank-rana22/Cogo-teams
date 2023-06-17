@@ -1,16 +1,12 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
+// import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useUpdateTribe = ({ fetchList, setShowUpdateTribeModal, showUpdateTribeModal }) => {
-	const { profile = {} } = useSelector((state) => state);
-
-	const { user = {} } = profile;
-
+const useUpdateTribe = ({ fetchList, setShowTribeModal, showTribeModal }) => {
+	const { user = {} } = useSelector((state) => state.profile);
 	const { id: user_id } = user;
-	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
@@ -19,7 +15,7 @@ const useUpdateTribe = ({ fetchList, setShowUpdateTribeModal, showUpdateTribeMod
 
 	const onClickUpdateButton = async (values) => {
 		const { squad_ids, ...rest } = values;
-		const ARRAY_OF_IDS = showUpdateTribeModal.squads.map((obj) => obj.id);
+		const ARRAY_OF_IDS = showTribeModal.squads.map((obj) => obj.id);
 
 		const squads_added = (squad_ids || []).filter(
 			(id) => !(ARRAY_OF_IDS || []).includes(id),
@@ -31,7 +27,7 @@ const useUpdateTribe = ({ fetchList, setShowUpdateTribeModal, showUpdateTribeMod
 			await trigger({
 				data: {
 					...rest,
-					tribe_id          : showUpdateTribeModal?.id,
+					tribe_id          : showTribeModal?.id,
 					performed_by_id   : user_id,
 					performed_by_type : 'user',
 					squads_added,
@@ -39,7 +35,7 @@ const useUpdateTribe = ({ fetchList, setShowUpdateTribeModal, showUpdateTribeMod
 				},
 			});
 			Toast.success('Successfully Updated');
-			setShowUpdateTribeModal(false);
+			setShowTribeModal(false);
 			fetchList();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
@@ -47,12 +43,8 @@ const useUpdateTribe = ({ fetchList, setShowUpdateTribeModal, showUpdateTribeMod
 	};
 
 	return {
-		control,
-		errors,
 		onClickUpdateButton,
 		loading,
-		handleSubmit,
-		setValue,
 	};
 };
 

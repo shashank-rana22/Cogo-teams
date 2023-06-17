@@ -5,7 +5,6 @@ import { useSelector } from '@cogoport/store';
 
 const useDeleteSquad = ({ fetchList, setShowDeleteModal, showDeleteModal }) => {
 	const { user = {} } = useSelector((state) => state.profile);
-
 	const { id: user_id } = user || {};
 
 	const [{ loading }, trigger] = useHarbourRequest(

@@ -7,13 +7,14 @@ import getColumns from './getColumns';
 import useDeleteSquad from './useDeleteSquad';
 
 const DEFAULT_PAGE = 1;
+const DEFAULT_ACTIVE_TAB = 'active';
 
 const useSquad = () => {
 	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(DEFAULT_PAGE);
 	const [showDeleteModal, setShowDeleteModal] = useState('');
-	const [showUpdateSquadModal, setShowUpdateSquadModal] = useState();
-	const [activeTab, setActiveTab] = useState('active');
+	const [showSquadModal, setShowSquadModal] = useState(false);
+	const [activeTab, setActiveTab] = useState(DEFAULT_ACTIVE_TAB);
 
 	const [{ loading, data }, trigger] = useHarbourRequest(
 		{
@@ -28,14 +29,16 @@ const useSquad = () => {
 			await trigger({
 				params: {
 					page    : !search ? page : DEFAULT_PAGE,
-					filters : { q: search || undefined },
-					status  : activeTab,
+					filters : {
+						q      : search || undefined,
+						status : activeTab,
+					},
 				},
 			});
 		} catch (error) {
-			Toast.error(
-				getApiErrorString(error?.response?.data) || 'Something went wrong',
-			);
+			if (error?.response?.data) {
+				Toast.error(getApiErrorString(error?.response?.data) || 'Something went wrong');
+			}
 		}
 	}, [page, search, trigger, activeTab]);
 	const { deleteSquad, loading: deleteLoading } = useDeleteSquad({
@@ -48,7 +51,7 @@ const useSquad = () => {
 		fetchList();
 	}, [fetchList, page]);
 
-	const columns = getColumns({ setShowDeleteModal, setShowUpdateSquadModal });
+	const columns = getColumns({ setShowDeleteModal, setShowSquadModal });
 
 	return {
 		columns,
@@ -62,8 +65,8 @@ const useSquad = () => {
 		deleteLoading,
 		showDeleteModal,
 		setShowDeleteModal,
-		showUpdateSquadModal,
-		setShowUpdateSquadModal,
+		showSquadModal,
+		setShowSquadModal,
 		activeTab,
 		setActiveTab,
 	};

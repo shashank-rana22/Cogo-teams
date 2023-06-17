@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 
 import ActiveInactiveTabs from '../../../commons/ActiveInactiveTabs';
 import Header from '../../../commons/CommonHeader';
@@ -17,13 +18,16 @@ const ADD_BUTTON_LABEL = 'Chapter';
 const TABLE_EMPTY_TEXT = 'No Chapters created yet';
 const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
+const FUNCTION_ADD = 'add';
 
 function Chapter() {
+	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
+
 	const {
 		columns, search, setSearch, data, loading: listApiLoading,
 		page, setPage, fetchList, showDeleteModal, setShowDeleteModal,
-		deleteChapter, deleteLoading, showUpdateChapterModal,
-		setShowUpdateChapterModal, setActiveTab, activeTab,
+		deleteChapter, deleteLoading, showChapterModal,
+		setShowChapterModal, setActiveTab, activeTab,
 	} = useChapter();
 
 	const { list = [], ...paginationData } = data || {};
@@ -31,38 +35,33 @@ function Chapter() {
 	const { total_count, page_limit } = paginationData || {};
 
 	const {
-		showAddChapterModal,
-		setShowAddChapterModal = () => {},
-		control,
-		errors,
 		onClickSubmitButton,
-		loading,
-		handleSubmit,
-	} = useCreateChapter({ fetchList });
+		loading:CreateLoading,
+	} = useCreateChapter({ fetchList, setShowChapterModal });
 
 	const {
-		control: UpdateControl,
-		errors: UpdateErrors,
 		onClickUpdateButton,
 		loading: UpdateLoading,
-		handleSubmit: UpdateHandleSubmit,
-		setValue,
-	} = useUpdateChapter({ fetchList, setShowUpdateChapterModal, showUpdateChapterModal });
+	} = useUpdateChapter({ fetchList, setShowChapterModal, showChapterModal });
 
 	const onClickAddButton = () => {
-		setShowAddChapterModal(true);
+		setShowChapterModal(FUNCTION_ADD);
+		reset();
 	};
 
 	return (
 		<div>
 
-			<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
-			<Header
-				setSearch={setSearch}
-				search={search}
-				label={ADD_BUTTON_LABEL}
-				onClickAddButton={onClickAddButton}
-			/>
+			<div className={styles.header}>
+				<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+
+				<Header
+					setSearch={setSearch}
+					search={search}
+					label={ADD_BUTTON_LABEL}
+					onClickAddButton={onClickAddButton}
+				/>
+			</div>
 
 			<StyledTable columns={columns} data={list} emptyText={TABLE_EMPTY_TEXT} loading={listApiLoading} />
 
@@ -77,33 +76,18 @@ function Chapter() {
 				</div>
 			)}
 
-			{showAddChapterModal ? (
+			{showChapterModal ? (
 				<CreateConfigurationModal
-					showModal={showAddChapterModal}
-					setShowModal={setShowAddChapterModal}
+					showModal={showChapterModal}
+					setShowModal={setShowChapterModal}
 					label={ADD_BUTTON_LABEL}
 					controls={controls}
 					control={control}
 					errors={errors}
-					onClickSubmitButton={onClickSubmitButton}
-					loading={loading}
+					onClickSubmitButton={showChapterModal === FUNCTION_ADD ? onClickSubmitButton : onClickUpdateButton}
+					loading={showChapterModal === FUNCTION_ADD ? CreateLoading : UpdateLoading}
 					handleSubmit={handleSubmit}
-					Type={MODAL_TYPE_ADD}
-				/>
-			) : null}
-
-			{showUpdateChapterModal ? (
-				<CreateConfigurationModal
-					showModal={showUpdateChapterModal}
-					setShowModal={setShowUpdateChapterModal}
-					label={ADD_BUTTON_LABEL}
-					controls={controls}
-					control={UpdateControl}
-					errors={UpdateErrors}
-					onClickSubmitButton={onClickUpdateButton}
-					loading={UpdateLoading}
-					handleSubmit={UpdateHandleSubmit}
-					Type={MODAL_TYPE_UPDATE}
+					Type={showChapterModal === FUNCTION_ADD ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 				/>
 			) : null}

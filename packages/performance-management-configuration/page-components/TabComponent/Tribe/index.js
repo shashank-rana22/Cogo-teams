@@ -1,4 +1,5 @@
 import { Pagination } from '@cogoport/components';
+import { useForm } from '@cogoport/forms';
 
 import ActiveInactiveTabs from '../../../commons/ActiveInactiveTabs';
 import Header from '../../../commons/CommonHeader';
@@ -17,11 +18,14 @@ const ADD_BUTTON_LABEL = 'Tribe';
 const TABLE_EMPTY_TEXT = 'No Tribe created yet';
 const MODAL_TYPE_UPDATE = 'Update';
 const MODAL_TYPE_ADD = 'Add';
+const FUNCTION_ADD = 'add';
 
 function Tribe() {
+	const { control, formState: { errors }, handleSubmit, setValue, reset } = useForm();
+
 	const {
 		search, setSearch, columns, loading:listApiLoading, data, page, setPage, fetchList, showDeleteModal,
-		setShowDeleteModal, deleteLoading, deleteTribe, setShowUpdateTribeModal, showUpdateTribeModal,
+		setShowDeleteModal, deleteLoading, deleteTribe, setShowTribeModal, showTribeModal,
 		activeTab, setActiveTab,
 	} = useTribe();
 
@@ -30,39 +34,33 @@ function Tribe() {
 	const { total_count, page_limit } = paginationData || {};
 
 	const {
-		showAddTribeModal,
-		setShowAddTribeModal,
-		control :CreateControl,
-		errors: CreateErrors,
 		onClickSubmitButton,
 		loading:CreateLoading,
-		handleSubmit:CreateHandleSubmit,
-	} = useCreateTribe({ fetchList });
+	} = useCreateTribe({ fetchList, setShowTribeModal });
 
 	const {
-		control: UpdateControl,
-		errors: UpdateErrors,
 		onClickUpdateButton,
 		loading: UpdateLoading,
-		handleSubmit: UpdateHandleSubmit,
-		setValue,
-	} = useUpdateTribe({ fetchList, setShowUpdateTribeModal, showUpdateTribeModal });
+	} = useUpdateTribe({ fetchList, setShowTribeModal, showTribeModal });
 
 	const onClickAddButton = () => {
-		setShowAddTribeModal(true);
+		setShowTribeModal(FUNCTION_ADD);
+		reset();
 	};
 
 	return (
 		<div className={styles.container}>
 
-			<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
+			<div className={styles.header}>
+				<ActiveInactiveTabs activeTab={activeTab} setActiveTab={setActiveTab} />
 
-			<Header
-				setSearch={setSearch}
-				search={search}
-				label={ADD_BUTTON_LABEL}
-				onClickAddButton={onClickAddButton}
-			/>
+				<Header
+					setSearch={setSearch}
+					search={search}
+					label={ADD_BUTTON_LABEL}
+					onClickAddButton={onClickAddButton}
+				/>
+			</div>
 
 			<StyledTable columns={columns} data={list} emptyText={TABLE_EMPTY_TEXT} loading={listApiLoading} />
 
@@ -77,33 +75,18 @@ function Tribe() {
 				</div>
 			)}
 
-			{showAddTribeModal ? (
+			{showTribeModal ? (
 				<CreateConfigurationModal
-					showModal={showAddTribeModal}
-					setShowModal={setShowAddTribeModal}
+					showModal={showTribeModal}
+					setShowModal={setShowTribeModal}
 					label={ADD_BUTTON_LABEL}
 					controls={controls}
-					control={CreateControl}
-					errors={CreateErrors}
-					onClickSubmitButton={onClickSubmitButton}
-					loading={CreateLoading}
-					handleSubmit={CreateHandleSubmit}
-					Type={MODAL_TYPE_ADD}
-				/>
-			) : null}
-
-			{showUpdateTribeModal ? (
-				<CreateConfigurationModal
-					showModal={showUpdateTribeModal}
-					setShowModal={setShowUpdateTribeModal}
-					label={ADD_BUTTON_LABEL}
-					controls={controls}
-					control={UpdateControl}
-					errors={UpdateErrors}
-					onClickSubmitButton={onClickUpdateButton}
-					loading={UpdateLoading}
-					handleSubmit={UpdateHandleSubmit}
-					Type={MODAL_TYPE_UPDATE}
+					control={control}
+					errors={errors}
+					onClickSubmitButton={showTribeModal === FUNCTION_ADD ? onClickSubmitButton : onClickUpdateButton}
+					loading={showTribeModal === FUNCTION_ADD ? CreateLoading : UpdateLoading}
+					handleSubmit={handleSubmit}
+					Type={showTribeModal === FUNCTION_ADD ? MODAL_TYPE_ADD : MODAL_TYPE_UPDATE}
 					setValue={setValue}
 				/>
 			) : null}

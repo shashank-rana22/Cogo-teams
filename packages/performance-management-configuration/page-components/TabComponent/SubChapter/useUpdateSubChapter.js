@@ -1,16 +1,11 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useUpdateSubChapter = ({ fetchList, setShowUpdateSubChapterModal, showUpdateSubChapterModal }) => {
-	const { profile = {} } = useSelector((state) => state);
-
-	const { user = {} } = profile;
-
+const useUpdateSubChapter = ({ fetchList, setShowSubChapterModal, showSubChapterModal }) => {
+	const { user = {} } = useSelector((state) => state.profile);
 	const { id: user_id } = user;
-	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
@@ -19,7 +14,7 @@ const useUpdateSubChapter = ({ fetchList, setShowUpdateSubChapterModal, showUpda
 
 	const onClickUpdateButton = async (values) => {
 		const { employee_ids, ...rest } = values;
-		const ARRAY_OF_IDS = showUpdateSubChapterModal.employees.map((obj) => obj.id);
+		const ARRAY_OF_IDS = showSubChapterModal.employees.map((obj) => obj.id);
 
 		const employees_added = (employee_ids || []).filter(
 			(id) => !(ARRAY_OF_IDS || []).includes(id),
@@ -32,7 +27,7 @@ const useUpdateSubChapter = ({ fetchList, setShowUpdateSubChapterModal, showUpda
 			await trigger({
 				data: {
 					...rest,
-					sub_chapter_id    : showUpdateSubChapterModal?.id,
+					sub_chapter_id    : showSubChapterModal?.id,
 					performed_by_id   : user_id,
 					performed_by_type : 'user',
 					employees_added,
@@ -40,7 +35,7 @@ const useUpdateSubChapter = ({ fetchList, setShowUpdateSubChapterModal, showUpda
 				},
 			});
 			Toast.success('Successfully Updated');
-			setShowUpdateSubChapterModal(false);
+			setShowSubChapterModal(false);
 			fetchList();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
@@ -48,12 +43,8 @@ const useUpdateSubChapter = ({ fetchList, setShowUpdateSubChapterModal, showUpda
 	};
 
 	return {
-		control,
-		errors,
 		onClickUpdateButton,
 		loading,
-		handleSubmit,
-		setValue,
 	};
 };
 

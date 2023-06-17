@@ -7,12 +7,10 @@ import { startCase } from '@cogoport/utils';
 import styles from './styles.module.css';
 
 const TOOLTIP_START_VALUE = 3;
-
 const MIN_EMPLOYEES_LENGTH = 3;
-
 const EMPLOYEE_INDEX_START = 0;
-
 const EMPLOYEE_INDEX_END = 3;
+const STATUS_TYPE_ACTIVE = 'active';
 
 function TooltipContent({ item = [] }) {
 	return (
@@ -28,7 +26,7 @@ function TooltipContent({ item = [] }) {
 	);
 }
 
-const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
+const getColumns = ({ setShowDeleteModal, setShowSquadModal }) => [
 	{
 		Header   : 'SQUAD NAME',
 		accessor : (item) => <div>{item?.squad_name || '-'}</div>,
@@ -41,7 +39,8 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
 		Header   : 'EMPLOYEES',
 		accessor : (item) => (
 			<div className={styles.pill_box}>
-				{item?.employees?.slice(EMPLOYEE_INDEX_START, EMPLOYEE_INDEX_END)
+				{item?.employees
+					?.slice(EMPLOYEE_INDEX_START, EMPLOYEE_INDEX_END)
 					.map((singleEmplyee) => (
 						<Pill key={singleEmplyee?.name} size="md" className={styles.pill}>
 							{singleEmplyee?.name}
@@ -49,21 +48,21 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
 					))}
 
 				{item?.employees?.length > MIN_EMPLOYEES_LENGTH ? (
-					<Tooltip
-						content={<TooltipContent item={item?.employees} />}
-						placement="left"
-						theme="light"
-						interactive
-						caret
-						styles={{ marginBottom: '24px' }}
-					>
-						<Pill>
+					<Pill>
+						<Tooltip
+							content={<TooltipContent item={item?.employees} />}
+							placement="right"
+							theme="light"
+							interactive
+							caret
+							styles={{ marginBottom: '24px' }}
+						>
 							+
 							{item.employees.length - EMPLOYEE_INDEX_END}
 							{' '}
 							EMPLOYEES
-						</Pill>
-					</Tooltip>
+						</Tooltip>
+					</Pill>
 				) : null}
 			</div>
 		),
@@ -84,7 +83,7 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
 		Header   : 'STATUS',
 		accessor : (item) => (
 			<Pill
-				className={item?.status === 'active' ? styles.active : styles.inactive}
+				className={item?.status === STATUS_TYPE_ACTIVE ? styles.active : styles.inactive}
 			>
 				{startCase(item?.status) || '-'}
 			</Pill>
@@ -92,28 +91,24 @@ const getColumns = ({ setShowDeleteModal, setShowUpdateSquadModal }) => [
 	},
 	{
 		Header   : 'ACTION',
-		accessor : (item) => (
-
-			item?.status === 'active'
-				? (
-					<div className={styles.button}>
-						<IcMDelete
-							width={16}
-							height={16}
-							style={{ cursor: 'pointer' }}
-							onClick={() => setShowDeleteModal(item.id)}
-						/>
-						<IcMEdit
-							width={16}
-							height={16}
-							style={{ marginLeft: 12, cursor: 'pointer' }}
-							onClick={() => setShowUpdateSquadModal(item)}
-						/>
-					</div>
-				)
-				:			<Button themeType="secondary">Re Apply</Button>
-
-		),
+		accessor : (item) => (item?.status === STATUS_TYPE_ACTIVE ? (
+			<div className={styles.button}>
+				<IcMDelete
+					width={16}
+					height={16}
+					style={{ cursor: 'pointer' }}
+					onClick={() => setShowDeleteModal(item.id)}
+				/>
+				<IcMEdit
+					width={16}
+					height={16}
+					style={{ marginLeft: 12, cursor: 'pointer' }}
+					onClick={() => setShowSquadModal(item)}
+				/>
+			</div>
+		) : (
+			<Button themeType="secondary">Restore</Button>
+		)),
 	},
 ];
 

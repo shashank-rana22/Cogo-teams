@@ -1,16 +1,11 @@
 import { Toast } from '@cogoport/components';
-import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-const useUpdateChapter = ({ fetchList, setShowUpdateChapterModal, showUpdateChapterModal }) => {
-	const { profile = {} } = useSelector((state) => state);
-
-	const { user = {} } = profile;
-
+const useUpdateChapter = ({ fetchList, setShowChapterModal, showChapterModal }) => {
+	const { user = {} } = useSelector((state) => state.profile);
 	const { id: user_id } = user;
-	const { control, formState: { errors }, handleSubmit, setValue } = useForm();
 
 	const [{ loading }, trigger] = useHarbourRequest({
 		method : 'post',
@@ -19,7 +14,7 @@ const useUpdateChapter = ({ fetchList, setShowUpdateChapterModal, showUpdateChap
 
 	const onClickUpdateButton = async (values) => {
 		const { sub_chapter_ids, ...rest } = values;
-		const ARRAY_OF_IDS = showUpdateChapterModal.sub_chapters.map((obj) => obj.id);
+		const ARRAY_OF_IDS = showChapterModal.sub_chapters.map((obj) => obj.id);
 
 		const sub_chapters_added = (sub_chapter_ids || []).filter(
 			(id) => !(ARRAY_OF_IDS || []).includes(id),
@@ -32,7 +27,7 @@ const useUpdateChapter = ({ fetchList, setShowUpdateChapterModal, showUpdateChap
 			await trigger({
 				data: {
 					...rest,
-					chapter_id        : showUpdateChapterModal?.id,
+					chapter_id        : showChapterModal?.id,
 					performed_by_id   : user_id,
 					performed_by_type : 'user',
 					sub_chapters_added,
@@ -40,7 +35,7 @@ const useUpdateChapter = ({ fetchList, setShowUpdateChapterModal, showUpdateChap
 				},
 			});
 			Toast.success('Successfully Updated');
-			setShowUpdateChapterModal(false);
+			setShowChapterModal(false);
 			fetchList();
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data) || 'Something went wrong');
@@ -48,12 +43,8 @@ const useUpdateChapter = ({ fetchList, setShowUpdateChapterModal, showUpdateChap
 	};
 
 	return {
-		control,
-		errors,
 		onClickUpdateButton,
 		loading,
-		handleSubmit,
-		setValue,
 	};
 };
 
