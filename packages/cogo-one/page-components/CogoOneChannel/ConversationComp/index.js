@@ -43,6 +43,7 @@ function ConversationsComp({
 						viewType={viewType}
 						hasVoiceCallAccess={hasVoiceCallAccess}
 						firestore={firestore}
+						userId={userId}
 					/>
 				)}
 			</>

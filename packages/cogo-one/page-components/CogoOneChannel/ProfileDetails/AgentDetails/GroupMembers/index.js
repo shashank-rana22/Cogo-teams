@@ -4,7 +4,10 @@ import { isEmpty } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-function GroupMembers({ group_members = [], partner_users = [], deleteGroupMember = () => {} }) {
+function GroupMembers({
+	group_members = [], partner_users = [], deleteGroupMember = () => {},
+	hasAccessToEditGroup = false,
+}) {
 	const members = partner_users.filter((x) => group_members.includes(x.user_id));
 	return (
 		<div>
@@ -27,9 +30,15 @@ function GroupMembers({ group_members = [], partner_users = [], deleteGroupMembe
 							{user.email}
 						</div>
 					</div>
-					<div className={styles.mark_status}>
-						<IcCFcrossInCircle className={styles.icon} onClick={() => deleteGroupMember(user.user_id)} />
-					</div>
+					{hasAccessToEditGroup
+						&& (
+							<div className={styles.mark_status}>
+								<IcCFcrossInCircle
+									className={styles.icon}
+									onClick={() => deleteGroupMember(user.user_id)}
+								/>
+							</div>
+						)}
 				</div>
 			))}
 		</div>
