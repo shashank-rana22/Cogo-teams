@@ -96,7 +96,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 			<div className={styles.hr} />
 			<div className={styles.width_container}>
 				{types?.map((party) => (
-					<div className={styles.style_margin_top}>
+					<div className={styles.style_margin_top} key={party}>
 						<div className={styles.styled_tag}>{startCase(party)}</div>
 					</div>
 				))}
@@ -199,7 +199,7 @@ function OutstandingList({ item, entityCode }: OutstandingListProps) {
 					</div>
 					<div className={styles.category_container}>
 						{CARD_DETAILS.map((it) => (
-							<div className={styles.sub_category_container}>
+							<div className={styles.sub_category_container} key={it?.label}>
 								<div className={styles.tag_text}>
 									{it.label}
 									:
