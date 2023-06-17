@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function Card({
 	data, setPrefrences, prefrences, rate_key, serviceData, setSellRates,
-	sellRates, price, prefrence_key, fromkey,
+	sellRates, price, prefrence_key, fromkey, priority_key,
 }) {
 	const handlePrefrence = (rate) => {
 		const foundItem = (prefrences?.[serviceData?.id] || []).find((obj) => obj?.rate_id === rate?.id);
@@ -62,13 +62,18 @@ function Card({
 		profitability = (Number(parseFloat(price?.replace(/[^0-9.-]+/g, ''))) - Number(data?.rowData?.total_buy_price))
 		/ Number(data?.rowData?.total_buy_price);
 	}
+	let buyPricePerContainer = 0;
+	if (serviceData?.containers_count !== 0) {
+		buyPricePerContainer = Number(data?.rowData?.total_buy_price) / Number(serviceData?.containers_count);
+	}
 	return (
-		<div className={rate_key ? styles.selected_rate_card_container : styles.container}
+		<div
+			className={rate_key ? styles.selected_rate_card_container : styles.container}
 			role="presentation"
 			onClick={() => (!rate_key ? handlePrefrence(data) : null)}
 		>
 			<div className={styles.left_section_container}>
-				{rate_key ? <IcMDrag /> : (
+				{rate_key ? (priority_key ? `${data?.rowData?.priority}.` : <IcMDrag />) : (
 					<PriorityNumber
 						data={prefrences?.[serviceData?.id]}
 						id={data?.id}
@@ -120,7 +125,10 @@ function Card({
 								Allocation Ratio
 							</div>
 							<div className={styles.progress_bar_container}>
-								<ProgressBar progress={Number(data?.rowData?.allocation_ratio) * 100 || Number(0.2) * 100} uploadText=" " />
+								<ProgressBar
+									progress={Number(data?.rowData?.allocation_ratio) * 100 || Number(0.2) * 100}
+									uploadText=" "
+								/>
 							</div>
 						</div>
 						<div>
@@ -128,7 +136,7 @@ function Card({
 								Fulfillment Ratio
 							</div>
 							<div className={styles.progress_bar_container}>
-								<ProgressBar progress={Number(data?.rowData?.fulfillment_ratio) * 100} uploadText=" "/>
+								<ProgressBar progress={Number(data?.rowData?.fulfillment_ratio) * 100} uploadText=" " />
 							</div>
 						</div>
 					</div>
@@ -199,7 +207,7 @@ function Card({
 							}
 						</div>
 					</div>
-					<div className={styles.total_price_section}>							
+					<div className={styles.total_price_section}>
 						<div style={{ display: 'flex' }}>
 							Profitability : &nbsp;
 							<div className={Number(profitability) > 0 ? styles.positive_profit : styles.negative_profit}>
@@ -224,4 +232,5 @@ function Card({
 		</div>
 	);
 }
+
 export default Card;

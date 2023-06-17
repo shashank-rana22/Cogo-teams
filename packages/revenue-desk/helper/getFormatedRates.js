@@ -1,6 +1,6 @@
 const getFormatedRates = (type, data, singleServiceData) => {
 	const rows = [];
-
+	const container_count = singleServiceData?.containers_count || 1;
 	if (type === 'present' || type === 'current') {
 		(data || []).forEach((element) => {
 			const { completed_shipments = 0, cancelled_shipments = 0 } = element;
@@ -13,10 +13,12 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.air_line =				element?.reverted_airline?.business_name
 				|| element?.airline?.business_name;
 			rowData.price_type = element?.data?.price_type;
-			rowData.container_count = singleServiceData?.containers_count;
+			rowData.container_count = container_count;
 			rowData.service_provider = element?.service_provider?.business_name;
+			rowData.buy_price = Number(element?.reverted_total_buy_price) / Number(container_count);
 			rowData.total_buy_price = element?.reverted_total_buy_price || 0;
 			rowData.total_buy_currency = element?.currency;
+			rowData.currency = element?.currency;
 			rowData.active_booking = element?.ongoing_shipment;
 			rowData.service_provider = element?.service_provider;
 			rowData.via_route = element?.destination_main_port?.name;

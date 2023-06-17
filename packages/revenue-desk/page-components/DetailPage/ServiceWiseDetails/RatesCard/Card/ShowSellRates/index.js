@@ -9,24 +9,54 @@ function ShowSellRates({
 }) {
 	const { rowData = {}, id = '' } = data || {};
 
-	const { currency = '', buy_price = 0 } = rowData;
+	const { currency = '', buy_price = 0, sell_price_per_container = 0, sell_price_currency = '', api = '' } = rowData;
 
-	const sellPrice = `${buy_price * SELL_RATE_INCREASE_BY}`;
+	const sellPrice = api === 'showed_rates' ? Number(sell_price_per_container) * Number(SELL_RATE_INCREASE_BY)
+		: Number(buy_price) * Number(SELL_RATE_INCREASE_BY);
 	return (
-		<div style={{display:'flex',alignItems:'center'}}>
-			<div style={{fontSize:'16px',fontWeight:'700',color:'#221F20',marginRight:'5px'}}>{currency || ''}</div>
-			<Input
-				size="sm"
-				value={
-					sellRates[id] || sellRates[id] === '' ? sellRates[id] : sellPrice
-				}
-				onChange={(e) => {
-					setSellRates((prev) => ({
-						...prev,
-						[id]: e,
-					}));
-				}}
-			/>
+		<div>
+			{api ? 	(
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<div style={{
+						fontSize    : '16px',
+						fontWeight  : '700',
+						color       : '#221F20',
+						marginRight : '5px',
+					}}
+					>
+						{sell_price_currency || ''}
+					</div>
+					<Input
+						size="sm"
+						value={api === 'showed_rates' ? sellPrice : sell_price_per_container}
+						disable
+					/>
+				</div>
+			) : (
+				<div style={{ display: 'flex', alignItems: 'center' }}>
+					<div style={{
+						fontSize    : '16px',
+						fontWeight  : '700',
+						color       : '#221F20',
+						marginRight : '5px',
+					}}
+					>
+						{currency || ''}
+					</div>
+					<Input
+						size="sm"
+						value={
+						sellRates[id] || sellRates[id] === '' ? sellRates[id] : sellPrice
+					}
+						onChange={(e) => {
+							setSellRates((prev) => ({
+								...prev,
+								[id]: e,
+							}));
+						}}
+					/>
+				</div>
+			)}
 		</div>
 	);
 }
