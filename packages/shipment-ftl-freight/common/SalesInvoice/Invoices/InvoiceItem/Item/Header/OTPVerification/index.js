@@ -10,13 +10,13 @@ import useVerifyInvoiceOtp from '../../../../../../../hooks/useVerifyInvoiceOtp'
 import OtpInput from './OtpInput';
 import styles from './styles.module.css';
 
+const USER_SPLIT_MOBILE_INDEX = 1;
+const USER_SPLIT_ID_INDEX = 0;
 const OTP_LENGTH = 4;
-const FIRST_ELEMENT_OF_ARRAY = 0;
-const ACCESSING_SECOND_VALUE = 1;
 
 function OTPVerification({
-	showOtpModal = false,
-	setShowOTPModal = () => {},
+	show = false,
+	setShow = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
@@ -28,7 +28,7 @@ function OTPVerification({
 
 	const refetchAfterVerifydOtpApiCall = () => {
 		setModalIsOpen(false);
-		setShowOTPModal(false);
+		setShow(false);
 		refetch();
 	};
 
@@ -62,12 +62,12 @@ function OTPVerification({
 		if (!isEmpty(selectedUser)) {
 			const payload = {
 				invoice_id : invoice?.id,
-				user_id    : selectedUser?.split('_')?.[FIRST_ELEMENT_OF_ARRAY],
+				user_id    : selectedUser?.split('_')?.[USER_SPLIT_ID_INDEX],
 			};
 			await sendOtpForInvoiceApproval(payload);
 		}
 	};
-	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[ACCESSING_SECOND_VALUE]} registered mobile number`;
+	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[USER_SPLIT_MOBILE_INDEX]} registered mobile number`;
 
 	let userListInfo = null;
 	if (loading) {
@@ -92,10 +92,10 @@ function OTPVerification({
 
 	return (
 		<div>
-			{showOtpModal ? (
+			{show ? (
 				<Modal
-					show={showOtpModal}
-					onClose={() => setShowOTPModal(false)}
+					show={show}
+					onClose={() => setShow(false)}
 				>
 					<Modal.Header title="Select User To Send OTP" />
 
@@ -127,7 +127,7 @@ function OTPVerification({
 
 			{modalIsOpen ? (
 				<Modal
-					show={showOtpModal}
+					show={show}
 					onClose={() => setModalIsOpen(false)}
 					className={styles.otp_modal}
 				>

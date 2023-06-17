@@ -1,4 +1,4 @@
-import TRADE_PARTY_MAPPING from '../../../../contants/TRADE_PARTY_MAPPING';
+import TRADE_PARTY_MAPPING from '../../../../constants/TRADE_PARTY_MAPPING';
 
 import TradeParty from './TradeParty';
 
@@ -20,6 +20,7 @@ function AddedTradeParty({
 		const trade_party_data = list.find((i) => i.trade_party_type === item);
 		return (
 			<TradeParty
+				key={item}
 				data={trade_party_data}
 				title={TRADE_PARTY_MAPPING[item]}
 				setAddCompany={setAddCompany}

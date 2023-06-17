@@ -22,6 +22,13 @@ const AddRemarks = dynamic(() => import('../AddRemarks'), { ssr: false });
 const ChangeCurrency = dynamic(() => import('../ChangeCurrency'), { ssr: false });
 const ChangePaymentMode = dynamic(() => import('./ChangePaymentMode'), { ssr: false });
 
+const remarkRender = ({ invoice }) => (
+	<div className={styles.remarkcontainer}>
+		<div className={styles.title}>Invoice Remarks</div>
+		<div className={styles.value}>{invoice.remarks}</div>
+	</div>
+);
+
 function Actions({
 	invoice = {},
 	bfInvoiceRefetch = () => {},
@@ -39,13 +46,6 @@ function Actions({
 		setShow(false);
 	};
 
-	const remarkRender = () => (
-		<div className={styles.remarkcontainer}>
-			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
-		</div>
-	);
-
 	const handleRefetch = () => {
 		bfInvoiceRefetch();
 		salesInvoicesRefetch();
@@ -57,31 +57,31 @@ function Actions({
 	|| isAuthorized;
 
 	const modalComponents = {
-		change_currency: <ChangeCurrency
+		changeCurrency: <ChangeCurrency
 			setShowModal={setShowModal}
 			invoice={invoice}
 			refetch={handleRefetch}
 		/>,
-		rate_sheet   : <ExchangeRateModal setShowModal={setShowModal} invoice={invoice} />,
-		add_remark   : <AddRemarks setShowModal={setShowModal} invoice={invoice} refetch={handleRefetch} />,
-		payment_mode : <ChangePaymentMode
+		rateSheet   : <ExchangeRateModal setShowModal={setShowModal} invoice={invoice} />,
+		addRemark   : <AddRemarks setShowModal={setShowModal} invoice={invoice} refetch={handleRefetch} />,
+		paymentMode : <ChangePaymentMode
 			setShowModal={setShowModal}
 			invoice={invoice}
 			refetch={handleRefetch}
 		/>,
-		update_customer_invoice: <UpdateCustomerInvoice
+		updateCustomerInvoice: <UpdateCustomerInvoice
 			setShowModal={setShowModal}
 			refetch={handleRefetch}
 			shipmentData={shipment_data}
 			invoice={invoice}
 		/>,
-		fill_portal_data: <FillCustomerPortalData
+		fillPortalData: <FillCustomerPortalData
 			setShowModal={setShowModal}
 			handleRefetch={handleRefetch}
 			shipmentData={shipment_data}
 			invoice={invoice}
 		/>,
-		add_customer_invoice: <AddCustomerInvoice
+		addCustomerInvoice: <AddCustomerInvoice
 			setShowModal={setShowModal}
 			handleRefetch={handleRefetch}
 			invoice={invoice}
@@ -122,10 +122,7 @@ function Actions({
 							theme="light"
 							onClickOutside={() => setShow(false)}
 						>
-							<ClickableDiv
-								className={styles.icon_more_wrapper}
-								onClick={() => setShow(!show)}
-							>
+							<ClickableDiv className={styles.icon_more_wrapper} onClick={() => setShow(!show)}>
 								<IcMOverflowDot />
 							</ClickableDiv>
 						</Popover>
@@ -135,10 +132,7 @@ function Actions({
 						)}
 
 					{!isEmpty(invoice.remarks) ? (
-						<Tooltip
-							placement="bottom"
-							content={remarkRender()}
-						>
+						<Tooltip placement="bottom" content={remarkRender({ invoice })}>
 							<div className={styles.icon_more_wrapper}>
 								<IcMInfo fill="#DDEBC0" />
 							</div>
@@ -147,8 +141,9 @@ function Actions({
 				</div>
 			</div>
 
-			{(invoice.services || []).length && showModal === 'edit_invoice' ? (
+			{(invoice.services || []).length && showModal === 'isEditInvoice' ? (
 				<EditInvoice
+					show={showModal === 'isEditInvoice'}
 					onClose={() => setShowModal(false)}
 					invoice={invoice}
 					refetch={handleRefetch}

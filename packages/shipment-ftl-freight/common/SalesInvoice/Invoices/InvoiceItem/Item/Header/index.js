@@ -1,12 +1,12 @@
 import { cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState, useContext, useRef } from 'react';
 
-import CONSTANTS from '../../../../../../configurations/contants.json';
 import ClickableDiv from '../../../../../ClickableDiv';
 
 import CNNullify from './CNNullify';
@@ -19,6 +19,11 @@ const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
 const MIN_SERIAL_ID_LENGTH = 8;
 
 const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
+const RESTRICTED_ENTITY_IDS = [];
+
+Object.entries(ENTITY_MAPPING).forEach(([, value]) => (
+	value?.feature_supported?.includes('freight_sales_invoice_restricted_enitity')
+		? RESTRICTED_ENTITY_IDS.push(value.id) : null));
 
 function Header({
 	children = null,
@@ -36,10 +41,11 @@ function Header({
 	const [showOtpModal, setShowOTPModal] = useState(false);
 
 	const { shipment_data } = useContext(ShipmentDetailContext);
-	const showForOldShipments = shipment_data.serial_id <= CONSTANTS.invoice_check_id && invoice.status === 'pending';
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+		&& invoice.status === 'pending';
 
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data.email === CONSTANTS.ajeet_email;
+	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const invoicePartyDetailsRef = useRef(null);
 
@@ -61,9 +67,7 @@ function Header({
 			|| item?.proformaNumber === live_invoice_number,
 	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
-	if (invoiceStatus === 'POSTED') {
-		invoiceStatus = 'IRN GENERATED';
-	}
+	if (invoiceStatus === 'POSTED') { invoiceStatus = 'IRN GENERATED';	}
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
 	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.invoice_check_id || isAuthorized);
@@ -133,27 +137,26 @@ function Header({
 						{billing_address?.name || billing_address?.business_name}
 					</div>
 
-					{shipment_data?.entity_id
-						!== GLOBAL_CONSTANTS.country_entity_ids.VN ? (
-							<div className={styles.gst}>
-								<div className={styles.label}>GST Number :</div>
-								<Tooltip
-									theme="light"
-									placement="bottom"
-									content={(
-										<div className={styles.tooltip_div}>
-											{billing_address?.address}
-										</div>
-									)}
-								>
-									<div
-										className={styles.gst_number}
-									>
-										{billing_address?.tax_number}
+					{!RESTRICTED_ENTITY_IDS.includes(shipment_data?.entity_id) ? (
+						<div className={styles.gst}>
+							<div className={styles.label}>GST Number :</div>
+							<Tooltip
+								theme="light"
+								placement="bottom"
+								content={(
+									<div className={styles.tooltip_div}>
+										{billing_address?.address}
 									</div>
-								</Tooltip>
-							</div>
-						) : null}
+								)}
+							>
+								<div
+									className={styles.gst_number}
+								>
+									{billing_address?.tax_number}
+								</div>
+							</Tooltip>
+						</div>
+					) : null}
 				</div>
 
 				<InvoiceInfo
@@ -174,10 +177,7 @@ function Header({
 				<ClickableDiv
 					className={styles.icon_wrapper}
 					onClick={() => setOpen(!open)}
-					style={{
-						height:
-						`${invoicePartyDetailsRef.current?.offsetHeight}px`,
-					}}
+					style={{ height: `${invoicePartyDetailsRef.current?.offsetHeight}px` }}
 				>
 					{open ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 				</ClickableDiv>
