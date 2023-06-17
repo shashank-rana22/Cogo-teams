@@ -116,12 +116,15 @@ const useEditLineItems = ({
 		const allFormValues = { ...formValues };
 		(Object.keys(formValues) || []).forEach((key) => {
 			if (key && formValues?.[key]) {
-				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
-					...value,
-					tax      : selectedCodes[value.code]?.tax_percent || 'NA',
-					sac_code : selectedCodes[value.code]?.sac || 'NA',
-					total    : (value?.price_discounted || INITIAL_STATE) * (value?.quantity || INITIAL_STATE),
-				}));
+				allFormValues[key] = (allFormValues[key] || []).map((value) => {
+					const { price_discounted = 0, quantity = 0, code, ...rest } = value || {};
+					return {
+						...rest,
+						tax      : selectedCodes[code]?.tax_percent || 'NA',
+						sac_code : selectedCodes[code]?.sac || 'NA',
+						total    : price_discounted * quantity,
+					};
+				});
 			}
 		});
 
