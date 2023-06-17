@@ -8,6 +8,14 @@ import InitialMessage from './initialMessage';
 import styles from './styles.module.css';
 import TicketComment from './TicketComment';
 
+const EMPTY_ELEMENT = 9;
+const SECOND_ELEMENT = 2;
+const FIRST_ELEMENT = 0;
+const ARRAY_LENGTH = 10;
+const WINDOW_TOP = 0;
+const DEFAULT_COUNT = 0;
+const ADD_COUNT = 0;
+
 function ChatBody({
 	listData = {},
 	chatLoading = false,
@@ -25,9 +33,9 @@ function ChatBody({
 	const { Name: reviewerName = '' } = user || {};
 
 	const handleScroll = (e) => {
-		const bottom = e.target.scrollTop === 0;
+		const bottom = e.target.scrollTop === WINDOW_TOP;
 		if (!last && bottom && !chatLoading) {
-			getTicketActivity((page || 0) + 1);
+			getTicketActivity((page || DEFAULT_COUNT) + ADD_COUNT);
 		}
 	};
 
@@ -44,16 +52,16 @@ function ChatBody({
 	return (
 		<div className={styles.container} ref={messageRef} onScroll={handleScroll}>
 			{chatLoading
-				&& [...Array(9).keys()].map((key, idx) => (
+				&& [...Array(EMPTY_ELEMENT).keys()].map((key, idx) => (
 					<div
 						key={key}
-						className={cl`${idx % 2 !== 0 ? styles.right_align : ''}`}
+						className={cl`${idx % SECOND_ELEMENT !== FIRST_ELEMENT ? styles.right_align : ''}`}
 					>
 						<Placeholder className={styles.loading_skeleton} />
 					</div>
 				))}
 
-			{(last || (items || []).length < 10) && !detailsLoading && (
+			{(last || (items || []).length < ARRAY_LENGTH) && !detailsLoading && (
 				<InitialMessage ticketData={ticketData} userId={userId} />
 			)}
 

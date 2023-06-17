@@ -6,6 +6,8 @@ import useUpdateTicketFeedback from '../../../../hooks/useUpdateTicketFeedback';
 
 import styles from './styles.module.css';
 
+const MIN_LENGTH_CHECK = 0;
+
 function RateTicket({
 	id = '',
 	ticketRating = 0,
@@ -24,7 +26,7 @@ function RateTicket({
 
 	return (
 		<div className={styles.container} key={ticketRating}>
-			{ticketRating === 0 ? (
+			{ticketRating === MIN_LENGTH_CHECK ? (
 				<>
 					<div className={styles.rating_text}>
 						Was your issue resolved?
@@ -35,7 +37,7 @@ function RateTicket({
 							totalStars={5}
 							value={rating}
 							onChange={setRating}
-							disabled={updateLoading || ticketRating > 0}
+							disabled={updateLoading || ticketRating > MIN_LENGTH_CHECK}
 						/>
 					</div>
 					<div className={styles.button_container}>

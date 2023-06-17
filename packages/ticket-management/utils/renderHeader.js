@@ -20,11 +20,11 @@ function getRenderHeader({
 		reopened             : `This ticket has been reopened by ${name}`,
 	};
 
-	if (type === 'escalated' ) {
+	if (type === 'escalated') {
 		const types = {
-			system: `This ticket has been escalated to ${reviewerName}`,
-			user: `${name} has escalated this ticket to ${oldReviewerName}`,
-		}
+			system : `This ticket has been escalated to ${reviewerName}`,
+			user   : `${name} has escalated this ticket to ${oldReviewerName}`,
+		};
 
 		return types[userType];
 	}

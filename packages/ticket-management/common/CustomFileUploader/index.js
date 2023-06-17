@@ -7,6 +7,11 @@ import uploadFile from '../../hooks/useUploadFile';
 
 import styles from './styles.module.css';
 
+const MIN_LENGTH_CHECK = 0;
+const FIRST_ELEMENT = 0;
+const LAST_ELEMENT = -1;
+const TOTAL_PERCENT = 100;
+
 function CustomFileUploader(props, ref) {
 	const {
 		onChange,
@@ -23,20 +28,24 @@ function CustomFileUploader(props, ref) {
 	const [urlStore, setUrlStore] = useState([]);
 	const [progress, setProgress] = useState({});
 
-	const isDefaultValues = defaultValues?.length > 0;
+	const isDefaultValues = defaultValues?.length > MIN_LENGTH_CHECK;
 
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
-			setFileName([{ name: defaultValues.split('/').slice(-1).join('') }]);
+			setFileName([{ name: defaultValues.split('/').slice(LAST_ELEMENT).join('') }]);
 			setUrlStore([{
-				fileName : defaultValues.split('/').slice(-1).join(''),
+				fileName : defaultValues.split('/').slice(LAST_ELEMENT).join(''),
 				finalUrl : defaultValues,
 			}]);
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
-			const names = defaultValues.map((url) => ({ name: url.split('/').slice(-1).join('') }));
-			const urls = defaultValues.map((url) => ({ fileName: url.split('/').slice(-1).join(''), finalUrl: url }));
+			const names = defaultValues.map((url) => ({ name: url.split('/').slice(LAST_ELEMENT).join('') }));
+			const urls = defaultValues.map((url) => ({
+				fileName: url.split('/')
+					.slice(LAST_ELEMENT).join(''),
+				finalUrl: url,
+			}));
 
 			setFileName(names);
 			setUrlStore(urls);
@@ -48,7 +57,7 @@ function CustomFileUploader(props, ref) {
 		if (multiple) {
 			onChange(urlStore);
 		} else {
-			onChange(urlStore[0]);
+			onChange(urlStore[FIRST_ELEMENT]);
 		}
 	}, [urlStore, multiple, onChange]);
 
@@ -61,7 +70,7 @@ function CustomFileUploader(props, ref) {
 			...previousProgress,
 			[`${index}`]: (() => {
 				const { loaded, total } = file;
-				const percentCompleted = Math.floor((loaded * 100) / total);
+				const percentCompleted = Math.floor((loaded * TOTAL_PERCENT) / total);
 
 				return percentCompleted;
 			})(),
@@ -72,7 +81,7 @@ function CustomFileUploader(props, ref) {
 		try {
 			setLoading(true);
 
-			if (values.length > 0) {
+			if (values.length > MIN_LENGTH_CHECK) {
 				setProgress({});
 
 				const promises = values.map((value, index) => uploadFile(index)(value, onUploadProgress));

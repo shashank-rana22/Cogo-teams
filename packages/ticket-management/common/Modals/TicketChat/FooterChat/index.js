@@ -1,4 +1,5 @@
 import { Textarea } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMSend,
 	IcMAttach,
@@ -8,11 +9,13 @@ import {
 } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useRef } from 'react';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import CustomFileUploader from '../../../CustomFileUploader';
 
 import styles from './styles.module.css';
+
+const FIRST_ELEMENT = 0;
+const LAST_ELEMENT = 0;
 
 function FooterChat({
 	setMessage = () => {},
@@ -42,7 +45,7 @@ function FooterChat({
 
 	if (file) {
 		const urlArray = decodeURI(file)?.split('/');
-		fileName = urlArray[(urlArray?.length || 0) - 1] || '';
+		fileName = urlArray[(urlArray?.length || FIRST_ELEMENT) - LAST_ELEMENT] || '';
 	}
 
 	useEffect(() => {

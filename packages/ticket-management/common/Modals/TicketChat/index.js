@@ -12,6 +12,10 @@ import ModalHeader from './ModalHeader';
 import styles from './styles.module.css';
 import TicketSummary from './TicketSummary';
 
+const WINDOW_TOP = 5;
+const FIRST_ELEMENT = 0;
+const TIMEOUT_COUNT = 300;
+
 const chatBodyHeight = (rating, ticketExists, status, file, uploading) => {
 	if (!ticketExists) {
 		return '100%';
@@ -37,11 +41,11 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 				const { scrollHeight, clientHeight } = messageRef.current;
 				const maxScrollTop = scrollHeight - clientHeight;
 				messageRef.current.scrollTo({
-					top      : maxScrollTop + 5,
+					top      : maxScrollTop + WINDOW_TOP,
 					behavior : 'smooth',
 				});
 			}
-		}, 300);
+		}, TIMEOUT_COUNT);
 	};
 
 	const {
@@ -73,7 +77,7 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 			total_pages : 0,
 		});
 		getTicketDetails();
-		getTicketActivity(0);
+		getTicketActivity(FIRST_ELEMENT);
 	};
 
 	const isEmptyChat = isEmpty(listData?.items || {});

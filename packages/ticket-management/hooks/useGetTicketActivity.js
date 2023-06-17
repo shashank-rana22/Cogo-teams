@@ -1,6 +1,8 @@
 import { useTicketsRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
+const FIRST_ELEMENT = 0;
+
 const useGetTicketActivity = ({ ticketId }) => {
 	const [{ loading }, trigger] = useTicketsRequest({
 		url     : '/activities',
@@ -49,7 +51,7 @@ const useGetTicketActivity = ({ ticketId }) => {
 				page        : 0,
 				total_pages : 0,
 			});
-			getTicketActivity(0);
+			getTicketActivity(FIRST_ELEMENT);
 		}
 	}, [ticketId, getTicketActivity]);
 

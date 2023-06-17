@@ -206,15 +206,16 @@ const GLOBAL_CONSTANTS = {
 	},
 
 	regex_patterns: {
-		number: /^[+-]?\d*\.?\d+$/,
+		number          : /^[+-]?\d*\.?\d+$/,
 		white_space     : /\s+/,
 		email           : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
 		pan_number      : /[A-Za-z]{5}\d{4}[A-Za-z]{1}/g,
 		aadhar_number   : /^[1-9]{1}[0-9]{11}$/g,
 		passport_number : /^[A-PR-WY][1-9]\d\s?\d{4}[1-9]$/,
 		ifsc_code       : /^[A-Za-z]{4}\d{7}$/,
-		url_match: 'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
-		image_extension : /\.(jpg|jpeg|png|gif|svg)$/i,
+		url_match:
+		'https?:\\/\\/(www\\.)?[-a-zA-Z0-9@:%._+~#=]{1,256}\\.[a-zA-Z0-9()]{1,6}\\b([-a-zA-Z0-9()@:%_+.~#?&//=]*)',
+		image_extension: /\.(jpg|jpeg|png|gif|svg)$/i,
 	},
 	zeroth_index                 : 0,
 	languages                    : LANGUAGE_OPTIONS,

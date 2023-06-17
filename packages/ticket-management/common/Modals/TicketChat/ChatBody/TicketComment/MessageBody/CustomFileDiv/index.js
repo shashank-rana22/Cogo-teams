@@ -5,9 +5,12 @@ import { MESSAGE_MAPPING } from '../../../../../../../constants';
 import fileViewMapping from './fileViewMapping';
 import styles from './styles.module.css';
 
+const MIN_LENGTH_CHECK = 0;
+const LAST_ELEMENT = 1;
+
 function ShowFile({ messageType = '', mediaUrl = '' }) {
 	const urlArray = decodeURI(mediaUrl)?.split('/');
-	const fileNameFromUrl = urlArray[(urlArray?.length || 0) - 1] || '';
+	const fileNameFromUrl = urlArray[(urlArray?.length || MIN_LENGTH_CHECK) - LAST_ELEMENT] || '';
 	const [fileName = '', extension = ''] = fileNameFromUrl.split('.') || [];
 
 	return (

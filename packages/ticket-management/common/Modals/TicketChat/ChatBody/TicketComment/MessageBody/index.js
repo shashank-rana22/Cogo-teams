@@ -6,6 +6,9 @@ import getUrlFormatedText from '../../../../../../utils/getUrlFormatedText';
 import CustomFileDiv from './CustomFileDiv';
 import styles from './styles.module.css';
 
+const MIN_LENGTH_CHECK = 0;
+const LAST_ELEMENT = 1;
+
 function ShowMessage({ message = '', restData = {} }) {
 	let newMessage = message.replace('<', '&lt;');
 
@@ -24,7 +27,7 @@ function MessageBody({ message = '', mediaUrls = [], restData }) {
 			<div>
 				{(mediaUrls || []).map((mediaUrl = '') => {
 					const urlArray = decodeURI(mediaUrl)?.split('/');
-					const fileName = urlArray[(urlArray?.length || 0) - 1] || '';
+					const fileName = urlArray[(urlArray?.length || MIN_LENGTH_CHECK) - LAST_ELEMENT] || '';
 					const { fileType } = getFileAttributes({ fileName });
 
 					return (

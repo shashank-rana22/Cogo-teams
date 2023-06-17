@@ -1,5 +1,7 @@
 import { publicRequest, request } from '@cogoport/request';
 
+const FIRST_ELEMENT = 0;
+
 const uploadFile = (index) => async (value, onUploadProgress) => {
 	const { data } = await request({
 		method : 'GET',
@@ -22,7 +24,7 @@ const uploadFile = (index) => async (value, onUploadProgress) => {
 		onUploadProgress: onUploadProgress(index),
 	});
 
-	const finalUrl = url.split('?')[0];
+	const finalUrl = url.split('?')[FIRST_ELEMENT];
 
 	return finalUrl;
 };
