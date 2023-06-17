@@ -25,6 +25,8 @@
 .section_right{
     width: 30%;
     background-color: white;
+    margin-top: 14px;
+    padding: 8px;
 }
 
 .table_display{

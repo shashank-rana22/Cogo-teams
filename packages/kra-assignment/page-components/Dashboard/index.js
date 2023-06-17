@@ -4,6 +4,7 @@ import React from 'react';
 
 import AccordianDisplay from './components/AccordianDisplay';
 import FiltersDisplay from './components/FilterDisplay';
+import KRATable from './components/KRATable';
 import TableDisplay from './components/TablesDisplay';
 import styles from './styles.module.css';
 import useGetUnassignedEmployee from './useGetUnassignedEmployees';
@@ -57,7 +58,7 @@ function Dashboard() {
 				</div>
 
 				<div className={styles.section_right}>
-					sadfg
+					<KRATable />
 				</div>
 
 			</div>

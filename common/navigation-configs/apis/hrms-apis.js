@@ -272,6 +272,11 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_kra',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 
 	],
 };
