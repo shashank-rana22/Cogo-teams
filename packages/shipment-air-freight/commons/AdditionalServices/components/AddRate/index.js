@@ -35,6 +35,7 @@ function AddRate({
 	source = '',
 	isSeller = false,
 	task = {},
+	closeModal = () => {},
 }) {
 	const [billToCustomer, setBillToCustomer] = useState(false);
 	const [showSecondStep, setSecondStep] = useState(false);
@@ -75,6 +76,7 @@ function AddRate({
 		setAddRate(false);
 		setShowChargeCodes(false);
 		setAddSellPrice(false);
+		closeModal();
 		onCancel();
 		refetch();
 	};

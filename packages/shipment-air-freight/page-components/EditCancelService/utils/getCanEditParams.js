@@ -1,15 +1,15 @@
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
-const { vinod_talapa_user_id } = GLOBAL_CONSTANTS.uuid;
-
 const controlsEditableConditions = [
 	{
-		state      : ['confirmed_by_service_provider', 'cargo_carted_in', 'cargo_stuffed'],
-		trade_type : ['export'],
+		state: ['confirmed_by_service_provider', 'cargo_handed_over_at_origin',
+			'flight_departed', 'flight_arrived', 'cargo_handed_over_at_destination', 'completed'],
+		trade_type: ['export'],
 	},
 	{
-		state      : ['confirmed_by_service_provider', 'cargo_carted_in', 'cargo_stuffed', 'vessel_departed'],
-		trade_type : ['import'],
+		state: ['confirmed_by_service_provider', 'cargo_handed_over_at_origin',
+			'flight_departed', 'flight_arrived', 'cargo_handed_over_at_destination', 'completed'],
+		trade_type: ['import'],
 	},
 ];
 
@@ -22,7 +22,7 @@ export default function getCanEditParams({ shipment_data, user_data, serviceData
 		return false;
 	}
 
-	if (user_data?.id === vinod_talapa_user_id) {
+	if (user_data?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id) {
 		return true;
 	}
 
