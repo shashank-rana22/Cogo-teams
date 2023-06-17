@@ -35,7 +35,7 @@ function UpdateAction({ task = {}, hideThreeDots = false, refetch = () => {}, se
 					? startCase(task?.updated_by?.name)
 					: startCase(task?.stakeholder?.name)}
 
-				{task?.assigned_stakeholder === 'system' && startCase(task?.assigned_stakeholder)}
+				{` (${startCase(task?.assigned_stakeholder)})`}
 			</div>
 
 			{task?.stakeholder?.mobile_number ? (
