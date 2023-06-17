@@ -7,15 +7,15 @@ const formatRates = ({ selectedRate, service_type_prop, servicesList }) => {
 
 	const primary_service = (servicesList || []).find(
 		(service) => service.service_type === service_type,
-	);
+	) || {};
 	const origin_local = (servicesList || []).find(
 		(service) => service.service_type === 'air_freight_local_service'
 			&& service.trade_type === 'export',
-	);
+	) || {};
 	const destination_local = (servicesList || []).find(
 		(service) => service.service_type === 'air_freight_local_service'
 			&& service.trade_type === 'export',
-	);
+	) || {};
 
 	if (
 		service_type === 'air_freight_service'

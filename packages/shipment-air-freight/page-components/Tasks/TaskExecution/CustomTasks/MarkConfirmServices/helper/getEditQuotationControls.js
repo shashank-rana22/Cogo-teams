@@ -3,6 +3,8 @@ import { convertObjectMappingToArray } from '@cogoport/air-modules/utils/convert
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
+const DEFAULT_VALUE_FOR_NULL_HANDLING = 0;
+const DECIMAL_PLACE = 6;
 const getEditQuotationControls = ({ service_charge, shipment_data, handleChange }) => {
 	const { id, service_type, service_detail, trade_type } = service_charge || {};
 
@@ -71,7 +73,7 @@ const getEditQuotationControls = ({ service_charge, shipment_data, handleChange 
 				name   : 'total',
 				size   : 'sm',
 				span   : 2,
-				render : (item) => <p>{item?.total}</p>,
+				render : (item) => <p>{(item?.total || DEFAULT_VALUE_FOR_NULL_HANDLING).toFixed(DECIMAL_PLACE)}</p>,
 			},
 		],
 
