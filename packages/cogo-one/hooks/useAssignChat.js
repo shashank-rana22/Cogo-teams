@@ -10,7 +10,6 @@ function useAssignChat({
 	closeModal = () => {},
 	activeMessageCard = {},
 	formattedData = {},
-	setDisableButton = () => {},
 	canMessageOnBotSession = false,
 	firestore,
 }) {
@@ -53,7 +52,7 @@ function useAssignChat({
 		Toast.info('Request dissmissed');
 	};
 
-	const assignChat = async (payload, callbackFun = () => {}) => {
+	const assignChat = async ({ payload, callBackFunc = () => {} }) => {
 		try {
 			await trigger({
 				data: {
@@ -69,7 +68,6 @@ function useAssignChat({
 
 				},
 			});
-			callbackFun();
 
 			if (!canMessageOnBotSession) {
 				Toast.success('Successfully Assigned');
@@ -81,7 +79,7 @@ function useAssignChat({
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));
 		} finally {
-			setDisableButton('');
+			callBackFunc();
 		}
 	};
 

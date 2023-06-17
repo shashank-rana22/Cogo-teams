@@ -33,14 +33,16 @@ function Messages({
 	const [draftMessages, setDraftMessages] = useState({});
 	const [draftUploadedFiles, setDraftUploadedFiles] = useState({});
 	const [uploading, setUploading] = useState({});
-	const [disableButton, setDisableButton] = useState('');
+
 	const { tagOptions = [] } = useListAssignedChatTags();
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
+
 	const closeModal = () => {
 		setOpenModal({ type: null, data: {} });
-		setDisableButton('');
 	};
+
 	let activeChatCollection;
+
 	const {
 		id = '',
 		channel_type = '',
@@ -95,7 +97,6 @@ function Messages({
 		closeModal,
 		activeMessageCard,
 		formattedData,
-		setDisableButton,
 		canMessageOnBotSession,
 	});
 
@@ -128,8 +129,10 @@ function Messages({
 			return callbackFunc;
 		}
 		return (scrollToBottom, val) => assignChat(
-			{ agent_id: userId, is_allowed_to_chat: true },
-			() => callbackFunc(scrollToBottom, val),
+			{
+				payload      : { agent_id: userId, is_allowed_to_chat: true },
+				callbackFunc : () => callbackFunc(scrollToBottom, val),
+			},
 		);
 	};
 
@@ -161,8 +164,6 @@ function Messages({
 					showBotMessages={showBotMessages}
 					userId={userId}
 					isomniChannelAdmin={isomniChannelAdmin}
-					setDisableButton={setDisableButton}
-					disableButton={disableButton}
 					updateRoomLoading={updateRoomLoading}
 					updateUserRoom={updateUserRoom}
 					requestForAssignChat={requestForAssignChat}
@@ -170,6 +171,7 @@ function Messages({
 					canMessageOnBotSession={canMessageOnBotSession}
 					updateRequestsOfRoom={updateRequestsOfRoom}
 					addToGroup={addToGroup}
+					viewType={viewType}
 				/>
 				<div className={styles.message_container} key={id}>
 					<MessageConversations

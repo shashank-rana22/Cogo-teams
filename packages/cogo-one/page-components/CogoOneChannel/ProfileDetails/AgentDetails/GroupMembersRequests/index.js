@@ -16,7 +16,7 @@ function GroupMembersRequests({
 	return (
 		<div>
 			{!isEmpty(members) && <div className={styles.conversation_title}>Group Requests</div>}
-			{members.map((user) => (
+			{members.map((user = {}) => (
 				<div className={styles.content} key={user}>
 					<Avatar
 						src="https://www.w3schools.com/howto/img_avatar.png"

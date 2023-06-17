@@ -46,7 +46,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 
 	const createSubmit = (val) => {
 		const getPayload = ASSIGN_TYPE_PAYLOAD_MAPPING[assignType];
-		return assignChat(getPayload(val) || {});
+		return assignChat({ payload: getPayload(val) || {} });
 	};
 
 	const assignTypeComp = getAssignTypeComp({

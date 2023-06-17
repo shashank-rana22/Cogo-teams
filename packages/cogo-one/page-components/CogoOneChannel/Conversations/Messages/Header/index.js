@@ -31,8 +31,6 @@ function Header({
 	showBotMessages = false,
 	userId = '',
 	isomniChannelAdmin = false,
-	setDisableButton = () => {},
-	disableButton = '',
 	updateRoomLoading = false,
 	updateUserRoom = () => {},
 	requestForAssignChat = () => {},
@@ -40,19 +38,15 @@ function Header({
 	canMessageOnBotSession = false,
 	updateRequestsOfRoom,
 	addToGroup,
+	viewType = '',
 }) {
 	const [isVisible, setIsVisible] = useState(false);
-	const [openPopover, setOpenPopover] = useState(false);
 	const { chat_tags = [] } = activeMessageCard || {};
 
 	const {
 		mobile_no = '',
 		channel_type,
 		has_requested_by = {},
-		lead_user_id = '',
-		user_id = '',
-		sender = '',
-		id = '',
 		group_members = [],
 	} = formattedData || {};
 
@@ -65,7 +59,6 @@ function Header({
 	const isGroupFormed = !isEmpty(group_members);
 
 	const openAssignModal = () => {
-		setOpenPopover(false);
 		setOpenModal({
 			type : 'assign',
 			data : {
@@ -75,36 +68,6 @@ function Header({
 				support_agent_id,
 			},
 		});
-	};
-
-	const assignButtonAction = (type) => {
-		setDisableButton(type);
-		if (type === 'assign') {
-			setOpenPopover(false);
-			openAssignModal();
-			return;
-		}
-		let agentIdPayload = {};
-
-		if (type === 'approve_request') {
-			agentIdPayload = { agent_id };
-		} else if (type === 'stop_and_assign') {
-			agentIdPayload = { agent_id: userId };
-		}
-
-		assignChat({ ...agentIdPayload, is_allowed_to_chat: true });
-	};
-
-	const requestAssignPaylod = () => {
-		const payload = {
-			lead_user_id    : lead_user_id || undefined,
-			user_id         : user_id || undefined,
-			sender          : sender || undefined,
-			channel         : channel_type,
-			channel_chat_id : id,
-			agent_id        : support_agent_id || undefined,
-		};
-		requestForAssignChat(payload);
 	};
 
 	const handleUpdateUser = () => {
@@ -153,21 +116,18 @@ function Header({
 							</div>
 						)}
 						<RightButton
-							hasRequests={hasRequests}
-							canMessageOnBotSession={canMessageOnBotSession}
-							showBotMessages={showBotMessages}
-							hasPermissionToEdit={hasPermissionToEdit}
+							assignChat={assignChat}
 							openAssignModal={openAssignModal}
-							isomniChannelAdmin={isomniChannelAdmin}
-							disableButton={disableButton}
-							assignButtonAction={assignButtonAction}
-							assignLoading={assignLoading}
-							openPopover={openPopover}
-							setOpenPopover={setOpenPopover}
-							requestAssignPaylod={requestAssignPaylod}
-							requestAssignLoading={requestAssignLoading}
-							isGroupFormed={isGroupFormed}
 							addToGroup={addToGroup}
+							formattedData={formattedData}
+							requestForAssignChat={requestForAssignChat}
+							userId={userId}
+							assignLoading={assignLoading}
+							requestAssignLoading={requestAssignLoading}
+							showBotMessages={showBotMessages}
+							viewType={viewType}
+							supportAgentId={support_agent_id}
+							isGroupFormed={isGroupFormed}
 						/>
 						{isomniChannelAdmin && channel_type === 'whatsapp' && (
 							<div
@@ -217,7 +177,7 @@ function Header({
 							cursor={assignLoading ? 'disabled' : 'pointer'}
 							onClick={() => {
 								if (!assignLoading) {
-									assignButtonAction('approve_request');
+									assignChat({ payload: { agent_id, is_allowed_to_chat: true } });
 								}
 							}}
 						/>

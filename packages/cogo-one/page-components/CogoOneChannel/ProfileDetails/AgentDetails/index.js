@@ -205,12 +205,7 @@ function AgentDetails({
 					hasVoiceCallAccess={hasVoiceCallAccess}
 				/>
 			)}
-			<GroupMembers
-				deleteGroupMember={deleteGroupMember}
-				group_members={activeMessageCard.group_members}
-				partner_users={partner_users}
-				hasAccessToEditGroup={hasAccessToEditGroup}
-			/>
+			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} /> }
 			<GroupMembersRequests
 				deleteGroupRequest={deleteGroupRequest}
 				approveGroupRequest={approveGroupRequest}
@@ -218,7 +213,12 @@ function AgentDetails({
 				partner_users={partner_users}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
-			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} /> }
+			<GroupMembers
+				deleteGroupMember={deleteGroupMember}
+				group_members={activeMessageCard.group_members}
+				partner_users={partner_users}
+				hasAccessToEditGroup={hasAccessToEditGroup}
+			/>
 			{(mobile_no || user_number) && (
 				<>
 					<div className={styles.conversation_title}>Other Channels</div>
