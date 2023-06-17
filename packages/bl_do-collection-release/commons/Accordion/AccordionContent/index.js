@@ -166,7 +166,6 @@ export default function AccordionContent({
 	}
 	return (
 		<div className={styles.container}>
-
 			{!showInvoiceAndTask ? (
 				<div className={styles.list_container}>
 					<Table columns={columns} data={tableData} />
