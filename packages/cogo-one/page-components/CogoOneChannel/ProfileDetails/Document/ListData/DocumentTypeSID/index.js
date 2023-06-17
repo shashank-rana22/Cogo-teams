@@ -51,7 +51,6 @@ function DocumentTypeSID({
 			className={styles.modal_styled}
 			onClose={() => setOpenModal(false)}
 			placement="center"
-			showCloseIcon={false}
 		>
 			<Modal.Header title="Document Tag" />
 			<Modal.Body>
