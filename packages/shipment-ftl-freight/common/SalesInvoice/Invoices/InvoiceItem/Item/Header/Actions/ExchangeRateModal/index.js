@@ -8,7 +8,8 @@ import fields from './fields';
 import styles from './styles.module.css';
 
 function ExchangeRateModal({
-	setExchangeRate = () => {},
+	show = false,
+	setShow = () => {},
 	invoice = {},
 }) {
 	const { loading, data } = useGetAllExchangeRates({
@@ -32,14 +33,10 @@ function ExchangeRateModal({
 		list = currencyArray.filter((item) => item?.currency.includes(q.toUpperCase()));
 	}
 
-	const onClose = () => {
-		setExchangeRate(false);
-	};
-
 	return (
 		<Modal
-			show
-			onClose={onClose}
+			show={show}
+			onClose={() => setShow(false)}
 			loading={loading}
 			showCloseIcon={false}
 			closeOnOuterClick={false}
@@ -57,7 +54,7 @@ function ExchangeRateModal({
 				<CardList fields={fields} data={list} loading={loading} />
 			</Modal.Body>
 			<Modal.Footer>
-				<Button themeType="secondary" onClick={onClose}>Close</Button>
+				<Button themeType="secondary" onClick={() => setShow(false)}>Close</Button>
 			</Modal.Footer>
 		</Modal>
 	);

@@ -1,6 +1,6 @@
 import { Tooltip, Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateUp, IcMAirport, IcMTransport, IcMShip, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
@@ -168,9 +168,9 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 
 						{outstandingLoading
 
-							? [1, 2, 3].map((item) => (
+							? [1, 2, 3].map((val) => (
 
-								<div key={item} className={styles.card}>
+								<div key={val} className={styles.card}>
 									<div className={styles.row}>
 										<Placeholder />
 
@@ -194,33 +194,35 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 											</div>
 											<div className={styles.amount_currency}>
 												<div className={styles.account_receivables_open_line}>
-													<div>
-														{item.currency}
-													</div>
 
 													<div
 														className={styles.account_receivables_amount}
 													>
 														<Tooltip content={(
 															<div>
-																{getFormattedPrice(
-																	item.amount,
-																	item.currency,
-																)}
+																{formatAmount({
+																	amount   : item.amount as any,
+																	currency : item.currency,
+																	options  : {
+																		style           : 'currency',
+																		currencyDisplay : 'code',
+																	},
+																})}
 															</div>
 														)}
 														>
 															<div className={styles.wrapper}>
-																{getFormattedPrice(
-																	item.amount,
-																	item.currency,
-																	{
+																{formatAmount({
+																	amount   : item.amount as any,
+																	currency : item.currency,
+																	options  : {
 																		notation              : 'compact',
 																		compactDisplay        : 'short',
 																		maximumFractionDigits : 2,
-																		style                 : 'decimal',
+																		style                 : 'currency',
+																		currencyDisplay       : 'code',
 																	},
-																)}
+																})}
 															</div>
 
 														</Tooltip>
@@ -282,15 +284,17 @@ function ServiceCard({ outstandingData, outstandingLoading, entityCode }: Servic
 								</div>
 								<div>
 									<div className={styles.styled_ocean_text}>
-										{getFormattedPrice(
-											item?.openInvoices,
-											item?.currency,
-											{
+										{formatAmount({
+											amount   : item?.openInvoices as any,
+											currency : item?.currency,
+											options  : {
 												notation              : 'compact',
 												compactDisplay        : 'short',
 												maximumFractionDigits : 2,
+												style                 : 'currency',
+												currencyDisplay       : 'code',
 											},
-										)}
+										})}
 
 									</div>
 								</div>

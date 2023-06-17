@@ -6,6 +6,7 @@
 
 .flex {
 	display: flex;
+	align-items: center;
 }
 
 .customerName {
@@ -48,4 +49,8 @@
 
 .collection {
 	flex: 0.4;
+}
+
+.checkbox {
+	flex: 0.2;
 }

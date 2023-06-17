@@ -1,5 +1,5 @@
 const getCompanyAddressOptions = (data = []) => {
-	const existingAddresses = {};
+	const EXISTING_ADDRESSES = {};
 	(data || []).forEach((item) => {
 		const billingAddresses = (item?.billing_addresses || []).map((address) => ({
 			label : `${address?.address}`,
@@ -9,10 +9,10 @@ const getCompanyAddressOptions = (data = []) => {
 			label : `${address?.address} `,
 			value : `${address?.address}::${address?.pincode} `,
 		}));
-		existingAddresses[item?.id] = [...billingAddresses, ...otherAddrresses];
+		EXISTING_ADDRESSES[item?.id] = [...billingAddresses, ...otherAddrresses];
 	});
 
-	return existingAddresses;
+	return EXISTING_ADDRESSES;
 };
 
 export default getCompanyAddressOptions;

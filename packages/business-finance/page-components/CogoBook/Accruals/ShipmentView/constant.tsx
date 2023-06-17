@@ -1,5 +1,6 @@
 import { Tooltip } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { format, startCase } from '@cogoport/utils';
 
 import SortIcon from '../../common/SortIcon';
@@ -9,23 +10,16 @@ import styles from './styles.module.css';
 const currentYear = new Date().getFullYear();
 const newArray = [currentYear, currentYear - 1, currentYear - 2, currentYear - 3];
 
-export const optionsYear = () => (newArray || [{}]).map((item) => (
-	{ value: item.toString(), label: item.toString() }));
+export const optionsYear = (newArray || [{}]).map((item) => (
+	{ value: item?.toString(), label: item?.toString() }));
 
-export const optionsMonth = [
-	{ value: '1', label: 'January' },
-	{ value: '2', label: 'February' },
-	{ value: '3', label: 'March' },
-	{ value: '4', label: 'April' },
-	{ value: '5', label: 'May' },
-	{ value: '6', label: 'June' },
-	{ value: '7', label: 'July' },
-	{ value: '8', label: 'August' },
-	{ value: '9', label: 'September' },
-	{ value: '10', label: 'October' },
-	{ value: '11', label: 'November' },
-	{ value: '12', label: 'December' },
-];
+const getMonth = GLOBAL_CONSTANTS.months;
+
+export const optionsMonth = (getMonth || [{}]).map((item: string, index: number) => {
+	const count = index + 1;
+	const options = { value: count?.toString(), label: item };
+	return options;
+});
 
 export const optionsShipment = [
 	{ value: 'SHIPMENT', label: 'Shipment' },
@@ -245,14 +239,28 @@ export const accrualColumn = (
 				<div className={styles.quotation_styles}>
 					<div>
 						<span>
-							{getFormattedPrice(expenseBooked, expenseCurrency)}
+							{formatAmount({
+								amount   :	expenseBooked,
+								currency : expenseCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
 						</span>
 					</div>
 
 					<div className={styles.quotation_value}>
 						Quotation :
 						{' '}
-						{getFormattedPrice(buyQuotation, buyQuotationCurrency) || 'INR 0.00'}
+						{formatAmount({
+							amount   :	buyQuotation,
+							currency : buyQuotationCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 					<div className={styles.line_value}>
 						<div className={quotationDiffProfit >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
@@ -262,7 +270,15 @@ export const accrualColumn = (
 						<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
 						{' '}
 						<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
-							{getFormattedPrice(quotationDiff, expenseCurrency) || 'INR 0.00'}
+							{formatAmount({
+								amount   :	quotationDiff as any,
+								currency : expenseCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+
+							}) }
 						</div>
 					</div>
 
@@ -296,12 +312,29 @@ export const accrualColumn = (
 
 			return (
 				<div className={styles.quotation_styles}>
-					<span>{getFormattedPrice(actualIncome, incomeCurrency)}</span>
+					<span>
+						{formatAmount({
+							amount   :	actualIncome,
+							currency : incomeCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
+
+					</span>
 
 					<div className={styles.quotation_value}>
 						Quotation :
 						{' '}
-						{getFormattedPrice(sellQuotation, sellQuotationCurrency) || 'INR 0.00'}
+						{formatAmount({
+							amount   :	sellQuotation,
+							currency : sellQuotationCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 					<div className={styles.line_value}>
 						<div className={quotationDiffProfit >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
@@ -311,7 +344,14 @@ export const accrualColumn = (
 						<div className={quotationDiffProfit >= 0 ? styles.hr_small : styles.hr_small_conditions} />
 						{' '}
 						<div className={quotationDiff >= 0 ? styles.margin_div_color : styles.margin_dif_color}>
-							{getFormattedPrice(quotationDiff, sellQuotationCurrency) || 'INR 0.00'}
+							{formatAmount({
+								amount   :	quotationDiff as any,
+								currency : sellQuotationCurrency,
+								options  : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							}) }
 						</div>
 					</div>
 				</div>
@@ -327,7 +367,14 @@ export const accrualColumn = (
 			return (
 				<div>
 					<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
-						{getFormattedPrice(quotationProfit, sellQuotationCurrency) || 'INR 0.00'}
+						{formatAmount({
+							amount   :	quotationProfit,
+							currency : sellQuotationCurrency,
+							options  : {
+								style           : 'currency',
+								currencyDisplay : 'code',
+							},
+						})}
 					</div>
 					<div className={quotationMargin >= '0' ? styles.margin_div_color : styles.margin_dif_color}>
 						{(quotationMargin || 0.00)?.toFixed(2) || '0'}
@@ -374,7 +421,17 @@ export const accrualColumn = (
 				<div>
 					<div>
 						<span className={renderClassName()}>
-							<div>{getFormattedPrice(profit, expenseCurrency) || '-' }</div>
+							<div>
+								{formatAmount({
+									amount   :	profit,
+									currency : expenseCurrency,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								}) || '-' }
+
+							</div>
 							<div>
 								{(profitPercentage || 0.00).toFixed(2)}
 								%

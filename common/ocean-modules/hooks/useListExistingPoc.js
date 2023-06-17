@@ -3,6 +3,9 @@ import { useState, useEffect, useCallback } from 'react';
 
 import toastApiError from '../utils/toastApiError';
 
+const DEFAULT_PAGE_LIMIT = 20;
+const ORG_STATUS = 'active';
+
 const useListExistingPoc = ({ organization_id = '', trade_party_type = '', trade_party_id = '' }) => {
 	const [apiList, setApiList] = useState([]);
 
@@ -11,9 +14,9 @@ const useListExistingPoc = ({ organization_id = '', trade_party_type = '', trade
 		params : {
 			filters: {
 				organization_id,
-				status: 'active',
+				status: ORG_STATUS,
 			},
-			page_limit: 20,
+			page_limit: DEFAULT_PAGE_LIMIT,
 		},
 	}, { manual: true });
 
@@ -22,8 +25,8 @@ const useListExistingPoc = ({ organization_id = '', trade_party_type = '', trade
 		params : {
 			trade_party_id,
 			object_type : trade_party_type,
-			status      : 'active',
-			page_limit  : 20,
+			status      : ORG_STATUS,
+			page_limit  : DEFAULT_PAGE_LIMIT,
 		},
 	}, { manual: true });
 
