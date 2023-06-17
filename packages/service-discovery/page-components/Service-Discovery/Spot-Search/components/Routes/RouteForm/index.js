@@ -49,9 +49,7 @@ function RouteForm({ mode = {}, setLocation, location }) {
 
 	const { origin, destination } = label;
 
-	const controls = getFormControls({ mode: mode.mode_value });
-
-	const [originControls, destinationControls] = controls;
+	const [originControls, destinationControls] = getFormControls({ mode: mode.mode_value });
 
 	// useEffect(() => {
 	// 	if (isEmpty(location.origin) && isEmpty(location.destination)) {
