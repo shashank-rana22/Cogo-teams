@@ -13,7 +13,7 @@ import styles from './styles.module.css';
 import CustomTasks from './Tasks';
 
 const TASK_DEFAULT_LENGTH = 0;
-const NEXT_INDEX = 1;
+const CURRENT_STEP_NEXT_INDEX = 1;
 export default function AccordionContent({
 	stateProps = {},
 	item = {},
@@ -71,7 +71,7 @@ export default function AccordionContent({
 				const next_step_key = currentConfig?.next_step_key;
 				setCurrentStep((p) => ({
 					text  : myForm?.[next_step_key] || currentConfig?.default_next,
-					count : p.count + NEXT_INDEX,
+					count : p.count + CURRENT_STEP_NEXT_INDEX,
 				}));
 			}
 		}

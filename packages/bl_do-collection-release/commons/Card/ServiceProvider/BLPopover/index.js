@@ -11,7 +11,7 @@ const COLLECTION_MODE = {
 	courier             : 'Delivery by Courier',
 	email               : 'Email',
 };
-const MAX_LENGTH = 12;
+const SHOW_TOOLTIP_MAX_LENGTH = 12;
 export default function BLPopver({ bl_do = '', blDetails = [] }) {
 	return (
 		<div className={cl`${styles.container} ${styles.main}`}>
@@ -25,16 +25,16 @@ export default function BLPopver({ bl_do = '', blDetails = [] }) {
 				<div className={cl`${styles.text} ${styles.title}`}>Collected By</div>
 			</div>
 			{(blDetails || []).map((item) => {
-				const { collection_details } = item || {};
-				const { name = '' } = collection_details || {};
+				const { collection_details, collection_mode = '-', bl_number = '-' } = item || {};
+				const { name = '-' } = collection_details || {};
 				return (
 					<div className={cl`${styles.container} ${styles.card}`} key={uuid()}>
-						<div className={styles.item_content}>{item?.bl_number || '-'}</div>
+						<div className={styles.item_content}>{bl_number}</div>
 						<div className={styles.item_content}>
-							{COLLECTION_MODE[item?.collection_mode] || '-'}
+							{COLLECTION_MODE[collection_mode]}
 						</div>
 						<div className={cl`${styles.text} ${styles.bl_number}`}>
-							{renderTooltip(name || '-', MAX_LENGTH)}
+							{renderTooltip(name, SHOW_TOOLTIP_MAX_LENGTH)}
 						</div>
 					</div>
 				);

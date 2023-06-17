@@ -1,4 +1,3 @@
-// import payloadConfig from '../configs/payloadConfig.json';
 import blPayloadConfig from '../configs/blPayloadConfig.json';
 import doPayloadConfig from '../configs/doPayloadConfig.json';
 

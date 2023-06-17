@@ -60,28 +60,28 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 		}
 		case 'under_collection': {
 			bill_of_ladings?.forEach((itemData) => {
-				const { collection_details } = itemData || {};
-				const { name = '', tracking_id = '' } = collection_details || {};
+				const { collection_details, collection_mode = '-' } = itemData || {};
+				const { name = '-', tracking_id = '-' } = collection_details || {};
 				renderElem = (
 					<div className={styles.collection}>
 						<div className={styles.collection_box}>
 							<div className={cl`${styles.text} ${styles.thin}`}>Collected By</div>
 
-							<div className={cl`${styles.text} ${styles.bold}`}>{name || '-'}</div>
+							<div className={cl`${styles.text} ${styles.bold}`}>{name}</div>
 						</div>
 						<div className={styles.collection_box}>
 							<div className={cl`${styles.text} ${styles.thin}`}>Collection Mode</div>
 
 							<div className={cl`${styles.text} ${styles.bold}`}>
-								{COLLECTION_MODE[itemData?.collection_mode]}
+								{COLLECTION_MODE[collection_mode]}
 							</div>
 						</div>
 
-						{itemData?.collection_mode === 'courier' ? (
+						{collection_mode === 'courier' ? (
 							<div className={styles.collection_box}>
 								<div className={cl`${styles.text} ${styles.thin}`}>Tracking Id</div>
 								<div className={cl`${styles.text} ${styles.bold}`}>
-									{itemData?.collection_mode === 'courier' ? tracking_id : null}
+									{collection_mode === 'courier' ? tracking_id : null}
 								</div>
 							</div>
 						) : null}
