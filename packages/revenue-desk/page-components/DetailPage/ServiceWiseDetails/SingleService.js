@@ -49,6 +49,8 @@ function SingleService({
 	rateOptions,
 	setRateOptions,
 	shipmentData,
+	emailModal,
+	setEmailModal,
 }) {
 	const [sellRates, setSellRates] = useState({});
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
@@ -125,6 +127,11 @@ function SingleService({
 								serviceData={singleServiceData}
 								setSellRates={setSellRates}
 								sellRates={sellRates}
+								emailModal={emailModal}
+								setEmailModal={setEmailModal}
+								singleServiceSellRateDetails={singleServiceSellRateDetails}
+								shipmentData={shipmentData}
+
 							/>
 						) : null}
 					<ExistingInventory

@@ -20,6 +20,7 @@ const getSellRateDetailPayload = ({
 				basic_freight_rate : (Number(sellRates?.[rate_id]) || Number(sellPrice)),
 				priority,
 				currency           : rate?.rowData?.currency,
+				shipping_line_name : rate?.rowData?.shipping_line,
 			};
 		},
 	);

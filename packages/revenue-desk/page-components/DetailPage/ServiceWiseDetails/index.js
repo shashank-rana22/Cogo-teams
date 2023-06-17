@@ -22,6 +22,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 	const [reason, setReason] = useState(null);
 	const [othertext, setOthertext] = useState(null);
 	const [sellRateDetails, setSellRateDetails] = useState({});
+	const [emailModal, setEmailModal] = useState(false);
 	const { loading, updateTrigger } = useUpdateRatesPreferences({
 		supplierPayload,
 		inventory,
@@ -31,7 +32,6 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 		sellRateDetails,
 		rateOptions,
 	});
-
 	const check = (items) => {
 		const ZERO = 0;
 		let pref = items.length > ZERO;
@@ -88,6 +88,8 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 							rateOptions={rateOptions}
 							setRateOptions={setRateOptions}
 							shipmentData={shipmentData}
+							emailModal={emailModal}
+							setEmailModal={setEmailModal}
 						/>
 					</TabPanel>
 				))}
@@ -99,6 +101,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 					setshowCancelModal={setshowCancelModal}
 				/>
 			) : null}
+
 			{modalStep === 1
 				? (
 					<PreviewModal
