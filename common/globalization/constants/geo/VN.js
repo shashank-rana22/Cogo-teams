@@ -104,6 +104,7 @@ export default {
 		],
 		cogo_freight_pvt_ltd_pr_supplier : '6cc6b696-60f6-480b-bcbe-92cc8e642531',
 		cogo_freight_supplier            : '5dc403b3-c1bd-4871-b8bd-35543aaadb36',
+		freight_force_org_id             : '36cee6fb-eeaf-4643-9db5-397544339635',
 		shipping_line_supply_agents      : [
 			'1e3ee025-88a2-43ea-abd5-08017f61f2d2',
 			'4248e4d4-59cf-441e-a4a8-83bb29c86bcf',

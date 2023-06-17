@@ -5,7 +5,6 @@ import React, { useState, useContext } from 'react';
 
 import useListShipmentAdditionalServices from '../../../../hooks/useListShipmentAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
-import AddIp from '../AddIp';
 import AddRate from '../AddRate';
 import Loader from '../Loader';
 
@@ -47,8 +46,7 @@ function List({ isSeller = false }) {
 
 	const updateResponse = useUpdateShipmentAdditionalService({
 		item,
-		refetch : refetchForUpdateSubService,
-		showIp  : showModal === 'ip',
+		refetch: refetchForUpdateSubService,
 	});
 
 	return (
@@ -144,14 +142,6 @@ function List({ isSeller = false }) {
 						/>
 					</Modal.Body>
 				</Modal>
-			)}
-
-			{showModal === 'ip' && (
-				<AddIp
-					shipmentData={shipment_data}
-					closeModal={closeModal}
-					updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
-				/>
 			)}
 
 			{showModal === 'charge_code' && (
