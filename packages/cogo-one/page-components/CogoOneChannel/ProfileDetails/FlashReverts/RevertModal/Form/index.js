@@ -6,7 +6,10 @@ function Form({ control, controls, errors }) {
 		<div className={styles.container}>
 			{controls.map((eachControl) => {
 				const Element = getFieldController(eachControl.controlType);
-				if (!Element) return null;
+				if (!Element) {
+					return null;
+				}
+
 				return (
 					<div className={styles.each_element} key={eachControl.name}>
 						<label className={styles.label_styles}>{eachControl?.label}</label>

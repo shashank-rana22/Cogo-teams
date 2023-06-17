@@ -169,7 +169,7 @@ const useGetRevertFormControls = ({ data }) => {
 		{
 			name        : 'validity_end',
 			label       : 'Validity End',
-			controlType : 'datepicker',
+			controlType : 'datePicker',
 			minDate     : addDays(new Date(), MIN_DAYS_FOR_VALIDITY),
 			placeholder : 'Select a date',
 
