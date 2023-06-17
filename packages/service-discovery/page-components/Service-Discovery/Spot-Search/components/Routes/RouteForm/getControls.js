@@ -1,6 +1,6 @@
 import { IcMLocation } from '@cogoport/icons-react';
 
-import CustomSelectOption from '../../../../../common/CustomSelectOption';
+import CustomSelectOption from '../../../../../../common/CustomSelectOption';
 import MODES from '../../../configurations/modes.json';
 
 const getFormControls = ({ mode = '' }) => {

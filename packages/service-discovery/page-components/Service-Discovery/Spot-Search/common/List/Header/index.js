@@ -12,7 +12,7 @@ import {
 	IconContainer,
 } from '../../../components/styles';
 import getLocalFilters from '../../../utils/get-local-filters';
-import SearchInput from '../../../../../common/SearchInput';
+import SearchInput from '../../../../../../common/SearchInput';
 
 import ExtraFilters from './ExtraFilters';
 import showElements from './showElements';

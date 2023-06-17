@@ -1,6 +1,6 @@
 import { IcMManufacturing, IcMProfile } from '@cogoport/icons-react';
 
-import CustomSelectOption from '../../../../../common/CustomSelectOption';
+import CustomSelectOption from '../../../../../../common/CustomSelectOption';
 
 const getFormControls = ({ organization = '', setOrganization = () => {}, setValue }) => {
 	const controls = [

@@ -25,6 +25,6 @@ const CONTROLLER_MAPPING = {
 	radio          : RadioGroupController,
 };
 
-const getElementController = (type = 'input') => CONTROLLER_MAPPING[type];
+const getElementController = (type = 'input') => CONTROLLER_MAPPING?.[type];
 
 export default getElementController;

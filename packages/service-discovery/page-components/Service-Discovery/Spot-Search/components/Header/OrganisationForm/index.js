@@ -1,6 +1,6 @@
 import React from 'react';
 
-import getElementController from '../../../configurations/getElementController';
+import getElementController from '../../../../../../configs/getElementController';
 
 import getFormControls from './getControls';
 import styles from './styles.module.css';
