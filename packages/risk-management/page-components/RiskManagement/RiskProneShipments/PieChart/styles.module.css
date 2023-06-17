@@ -36,11 +36,12 @@
 
 .value {
 	font-weight: 600;
+	margin-left: 2px;
 	color: var(--color-primary-error-red-2);
 }
 
 .square {
-	width: 16px;
+	width: 20px;
 	height: 7px;
 	border-radius: 4px;
 }

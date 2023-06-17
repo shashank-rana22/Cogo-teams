@@ -19,7 +19,7 @@ const RISK_CATEGORIES_COLOR = { 1: '#C4DC91', 2: '#FBD1A6', 3: '#F37166', 4: '#e
 function CardItem({ itemData }) {
 	const {
 		serial_id = '', origin_port = {}, destination_port = {},
-		commodity = '', cargo_value_currency, cargo_value, reason = [],
+		commodity_description = '', cargo_value_currency, cargo_value, reason = [],
 		criticality = '',
 	} = itemData || {};
 
@@ -84,7 +84,7 @@ function CardItem({ itemData }) {
 					<div className={styles.commodity_text}>
 						Commodity :
 						{' '}
-						{renderTooltip(commodity || '-', COMMODITY_VALUE_LENGTH)}
+						{renderTooltip(commodity_description || '-', COMMODITY_VALUE_LENGTH)}
 					</div>
 					<div className={styles.commodity_text}>
 						Cargo Value :

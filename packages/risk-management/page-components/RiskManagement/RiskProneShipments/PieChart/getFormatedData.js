@@ -3,14 +3,14 @@ const COLORS = ['#EE3425', '#F8AEA8', '#F37166', '#BF291E', '#FFD1CC', '#FBD1A6'
 const getFormatedData = (stats) => {
 	const { container_stats, late_collection_stats, late_release_stats } = stats || {};
 	const {
-		draft_bl_approval_pending = '', invoice_not_uploaded = '', late_collection = '',
-		late_collection_total = '', payment_not_done = '',
+		pending_for_draft_bl_approval = '', pending_for_invoice_upload = '', pending_for_collection = '',
+		late_collection_total = '', pending_for_payment = '',
 	} = late_collection_stats || {};
 
 	const { late_release_total = '' } = late_release_stats || {};
 	const {
-		gated_in_at_vessel_departure = '', pick_up_and_not_gated_in = '', cargo_value_fraud = '',
-		vessel_arrived_but_not_gated_out = '', container_not_picked_up = '', gated_out_but_not_returned = '',
+		container_gated_in_at_vessel_departure = '', container_picked_up_but_not_gated_in = '', cargo_value_fraud = '',
+		container_vessel_arrived_but_not_gated_out = '', container_not_picked_up = '', container_gated_out_but_not_returned = '',
 	} = container_stats || {};
 	const CONTAINER_MOVEMENT_MAPPING = [
 		{
@@ -22,25 +22,25 @@ const getFormatedData = (stats) => {
 		{
 			id    : 'Pick Up And Not Gated In',
 			label : 'Pick Up And Not Gated In :',
-			value : pick_up_and_not_gated_in,
+			value : container_picked_up_but_not_gated_in,
 			color : ' #F37166',
 		},
 		{
 			id    : 'Gated In At Vessel Dep',
 			label : 'Gated In At Vessel Dep. :',
-			value : gated_in_at_vessel_departure,
+			value : container_gated_in_at_vessel_departure,
 			color : '#F8AEA8',
 		},
 		{
 			id    : 'Vessel Arrived but not gated out',
 			label : 'Vessel Arrived but not gated out :',
-			value : vessel_arrived_but_not_gated_out,
+			value : container_vessel_arrived_but_not_gated_out,
 			color : '#BF291E',
 		},
 		{
 			id    : 'Gated out + not returned',
 			label : 'Gated out + not returned :',
-			value : gated_out_but_not_returned,
+			value : container_gated_out_but_not_returned,
 			color : ' #FFD1CC',
 		},
 		{
@@ -53,19 +53,19 @@ const getFormatedData = (stats) => {
 	const LATE_COLLECTION_MAPPING = [
 		{
 			label : 'Payment Not Done :',
-			value : payment_not_done,
+			value : pending_for_payment,
 		},
 		{
 			label : 'Draft Bl Approval Pending : ',
-			value : draft_bl_approval_pending,
+			value : pending_for_draft_bl_approval,
 		},
 		{
 			label : 'Invoice Not Uploaded : ',
-			value : invoice_not_uploaded,
+			value : pending_for_invoice_upload,
 		},
 		{
 			label : 'Late Collection :  ',
-			value : late_collection,
+			value : pending_for_collection,
 		},
 	];
 
