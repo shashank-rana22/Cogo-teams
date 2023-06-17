@@ -34,7 +34,7 @@ function useGroupChat({
 		const { requested_group_members = [], group_members = [] } = activeMessageCard || [];
 
 		if (group_members.length > MAX_GROUP_MEMBERS_ALLOWED) {
-			Toast.warn('Request approved.');
+			Toast.warn('Request cannot be approved.');
 			return;
 		}
 
@@ -61,10 +61,31 @@ function useGroupChat({
 		Toast.success('Group Member removed.');
 	};
 
+	const addGroupMember = async (user_id) => {
+		const roomRef = doc(
+			firestore,
+			`${FIRESTORE_PATH[channel_type]}/${id}`,
+		);
+
+		const { group_members = [] } = activeMessageCard || [];
+
+		if (group_members.length > MAX_GROUP_MEMBERS_ALLOWED) {
+			Toast.warn('Group member cannot be added.');
+			return;
+		}
+
+		await updateDoc(roomRef, {
+			group_members: [...new Set([...group_members, user_id])],
+		});
+
+		Toast.success('Group member added.');
+	};
+
 	return {
 		deleteGroupRequest,
 		approveGroupRequest,
 		deleteGroupMember,
+		addGroupMember,
 	};
 }
 export default useGroupChat;

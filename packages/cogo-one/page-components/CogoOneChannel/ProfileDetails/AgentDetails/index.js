@@ -52,6 +52,7 @@ function AgentDetails({
 		deleteGroupMember,
 		approveGroupRequest,
 		deleteGroupRequest,
+		addGroupMember,
 	} = useGroupChat({ activeMessageCard, firestore });
 	const hasAccessToEditGroup = activeMessageCard.group_members?.includes(agentId)
 	|| activeMessageCard.support_agent_id === agentId;
@@ -217,7 +218,7 @@ function AgentDetails({
 				partner_users={partner_users}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
-			{hasAccessToEditGroup && <AddGroupMember /> }
+			{hasAccessToEditGroup && <AddGroupMember addGroupMember={addGroupMember} /> }
 			{(mobile_no || user_number) && (
 				<>
 					<div className={styles.conversation_title}>Other Channels</div>
