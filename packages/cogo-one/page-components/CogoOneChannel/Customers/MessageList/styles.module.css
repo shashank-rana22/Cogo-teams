@@ -106,7 +106,7 @@
 }
 
 .list_container_empty_flash {
-	height: calc(100% - 150px);
+	height: calc(100% - 200px);
 }
 
 .bot_list_container {
