@@ -38,48 +38,52 @@ const useAddSopData = ({
 			: shipment_payload;
 	}
 
-	const update_payload = [];
+	const SOP_INSTRUCTIONS = [];
 	if (api === 'update') {
 		(formValues || []).forEach((row, index) => {
-			const elememt = {};
-			const instruction = row.mainData;
-			const originalInstruction = originalData[index]?.mainData;
+			const ELEMENT = {};
+
+			const instruction = row.mainData || {};
+
+			const originalInstruction = originalData[index]?.mainData || {};
+
 			let isadded = false;
+
 			if (originalData?.length >= index) {
 				if (instruction?.instruction !== originalInstruction?.instruction) {
-					elememt.instruction = instruction.instruction;
+					ELEMENT.instruction = instruction.instruction;
 					isadded = true;
 				}
 				if (instruction?.url_links !== originalInstruction?.url_links) {
-					elememt.url_links = instruction?.url_links;
+					ELEMENT.url_links = instruction?.url_links;
 					isadded = true;
 				}
 				if (instruction.status !== originalInstruction?.status) {
-					elememt.status = instruction?.status;
+					ELEMENT.status = instruction?.status;
 					isadded = true;
 				}
 				if (isadded) {
-					elememt.id = instruction?.id;
-					update_payload.push(elememt);
+					ELEMENT.id = instruction?.id;
+					SOP_INSTRUCTIONS.push(ELEMENT);
 				}
 			} else {
 				if (instruction?.instruction) {
-					elememt.instruction = instruction.instruction;
+					ELEMENT.instruction = instruction.instruction;
 				}
 				if (instruction?.url_links) {
-					elememt.url_links = instruction?.url_links;
+					ELEMENT.url_links = instruction?.url_links;
 				}
 				if (instruction?.status) {
-					elememt.status = instruction?.status;
+					ELEMENT.status = instruction?.status;
 				}
-				update_payload.push(elememt);
+				SOP_INSTRUCTIONS.push(ELEMENT);
 			}
 		});
 	}
 
 	const payload =	api === 'create'
 		? create_payload
-		: { sop_instructions: update_payload, procedure_id: sopID };
+		: { sop_instructions: SOP_INSTRUCTIONS, procedure_id: sopID };
 
 	const handleAddSop = async () => {
 		try {
