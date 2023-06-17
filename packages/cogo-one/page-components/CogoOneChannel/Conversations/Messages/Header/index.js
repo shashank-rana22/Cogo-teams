@@ -41,22 +41,6 @@ function Header({
 	viewType = '',
 }) {
 	const [isVisible, setIsVisible] = useState(false);
-	const { chat_tags = [] } = activeMessageCard || {};
-
-	const {
-		mobile_no = '',
-		channel_type,
-		has_requested_by = {},
-		group_members = [],
-	} = formattedData || {};
-
-	const { agent_id = '', agent_name = '' } = has_requested_by || {};
-
-	const hasAccessToApprove = isomniChannelAdmin || support_agent_id === userId;
-
-	const hasRequests = !!agent_id;
-
-	const isGroupFormed = !isEmpty(group_members);
 
 	const openAssignModal = () => {
 		setOpenModal({
@@ -70,11 +54,28 @@ function Header({
 		});
 	};
 
+	const { chat_tags = [] } = activeMessageCard || {};
+
+	const {
+		mobile_no = '',
+		channel_type,
+		has_requested_by = {},
+		group_members = [],
+	} = formattedData || {};
+
 	const handleUpdateUser = () => {
 		if (!updateRoomLoading) {
 			updateUserRoom(mobile_no);
 		}
 	};
+
+	const { agent_id = '', agent_name = '' } = has_requested_by || {};
+
+	const hasAccessToApprove = isomniChannelAdmin || support_agent_id === userId;
+
+	const hasRequests = !!agent_id;
+
+	const isGroupFormed = !isEmpty(group_members);
 
 	const showApprovePanel = (hasRequests && hasAccessToApprove);
 
