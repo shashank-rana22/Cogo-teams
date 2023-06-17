@@ -102,7 +102,7 @@ function GenerateMAWB({
 
 	const category = item.blCategory;
 	const mawbId = item.documentId;
-	const pendingTaskId = item?.id || item?.taskId;
+	const pendingTaskId = item?.id || item?.taskId || undefined;
 
 	const [activeCategory, setActiveCategory] = useState('mawb');
 
