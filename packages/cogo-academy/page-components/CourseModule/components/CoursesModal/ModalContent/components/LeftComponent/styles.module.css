@@ -1,0 +1,12 @@
+.ind_container {
+	display: flex;
+	align-items: center;
+	padding: 12px;
+	margin: 8px 0;
+	cursor: pointer;
+	border-radius: 6px;
+
+	&.active_tab {
+		background: #fff8c7;
+	}
+}

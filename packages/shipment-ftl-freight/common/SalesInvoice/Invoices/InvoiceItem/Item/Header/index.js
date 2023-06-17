@@ -1,5 +1,6 @@
 import { Button, cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
@@ -7,7 +8,6 @@ import { useSelector } from '@cogoport/store';
 import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState, useContext, useRef } from 'react';
 
-import CONSTANTS from '../../../../../../configurations/contants.json';
 import useUpdateShipmentInvoiceStatus from '../../../../../../hooks/useUpdateShipmentInvoiceStatus';
 import ClickableDiv from '../../../../../ClickableDiv';
 
@@ -17,12 +17,23 @@ import styles from './styles.module.css';
 
 const RESTRICT_REVOKED_STATUS = ['revoked', 'finance_rejected'];
 
+const SLICE_SOURCE_INDEX = -2;
+
+const CREDIT_INDEX_OFFSET = 2;
+
+const CREDIT_SOURCE_FIRST = 0;
+
 const API_SUCCESS_MESSAGE = {
 	reviewed : 'Invoice sent for approval to customer!',
 	approved : 'Invoice approved!,',
 };
 
 const BF_INVOICE_STATUS = ['POSTED', 'FAILED', 'IRN_GENERATED'];
+const RESTRICTED_ENTITY_IDS = [];
+
+Object.entries(ENTITY_MAPPING).forEach(([, value]) => (
+	value?.feature_supported?.includes('freight_sales_invoice_restricted_enitity')
+		? RESTRICTED_ENTITY_IDS.push(value.id) : null));
 
 function Header({
 	children = null,
@@ -40,20 +51,15 @@ function Header({
 	const { shipment_data } = useContext(ShipmentDetailContext);
 
 	const { user_data } = useSelector(({ profile }) => ({ user_data: profile || {} }));
-	const isAuthorized = user_data.email === CONSTANTS.ajeet_email;
+	const isAuthorized = user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
 
 	const invoicePartyDetailsRef = useRef(null);
 
-	const {
-		invoice_total_currency,
-		invoice_total_discounted,
-		live_invoice_number,
-		billing_address,
-	} = invoice;
+	const { invoice_total_currency, invoice_total_discounted, live_invoice_number, billing_address } = invoice;
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === live_invoice_number,
-	)?.[0];
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const showCN = BF_INVOICE_STATUS.includes(
 		bfInvoice?.status,
@@ -69,37 +75,32 @@ function Header({
 
 	const { updateInvoiceStatus = () => {} } = useUpdateShipmentInvoiceStatus({ refetch: refetchAferApiCall });
 
-	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= 120347 && invoice?.status === 'reviewed'
+	const showIrnTriggerForOldShipments = shipment_data?.serial_id
+	<= GLOBAL_CONSTANTS.others.old_shipment_serial_id && invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[0]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
-	if (invoiceStatus === 'POSTED') {
-		invoiceStatus = 'IRN GENERATED';
-	}
+	if (invoiceStatus === 'POSTED') { invoiceStatus = 'IRN GENERATED';	}
 
 	const handleClick = (type) => {
 		updateInvoiceStatus({
-			payload: {
-				id     : invoice?.id,
-				status : type,
-			},
-			message: API_SUCCESS_MESSAGE[type],
+			payload : { id: invoice?.id, status: type },
+			message : API_SUCCESS_MESSAGE[type],
 		});
 	};
 
 	const creditSource = invoice?.credit_option?.credit_source?.split('_');
 
 	const showRequestCN = showCN && !invoice.is_revoked && !RESTRICT_REVOKED_STATUS.includes(invoice.status)
-	&& (shipment_data?.serial_id > 120347 || isAuthorized);
+	&& (shipment_data?.serial_id > GLOBAL_CONSTANTS.others.old_shipment_serial_id || isAuthorized);
 
 	return (
 		<div className={styles.container}>
 			<div>
-
 				{invoice?.source === 'pass_through' ? (
 					<div className={styles.invoice_source}>
 						Source -
@@ -123,27 +124,26 @@ function Header({
 						{billing_address?.name || billing_address?.business_name}
 					</div>
 
-					{shipment_data?.entity_id
-						!== GLOBAL_CONSTANTS.country_entity_ids.VN ? (
-							<div className={styles.gst}>
-								<div className={styles.label}>GST Number :</div>
-								<Tooltip
-									theme="light"
-									placement="bottom"
-									content={(
-										<div className={styles.tooltip_div}>
-											{billing_address?.address}
-										</div>
-									)}
-								>
-									<div
-										className={styles.gst_number}
-									>
-										{billing_address?.tax_number}
+					{!RESTRICTED_ENTITY_IDS.includes(shipment_data?.entity_id) ? (
+						<div className={styles.gst}>
+							<div className={styles.label}>GST Number :</div>
+							<Tooltip
+								theme="light"
+								placement="bottom"
+								content={(
+									<div className={styles.tooltip_div}>
+										{billing_address?.address}
 									</div>
-								</Tooltip>
-							</div>
-						) : null}
+								)}
+							>
+								<div
+									className={styles.gst_number}
+								>
+									{billing_address?.tax_number}
+								</div>
+							</Tooltip>
+						</div>
+					) : null}
 				</div>
 
 				<div className={styles.invoice_info}>
@@ -151,9 +151,7 @@ function Header({
 						<ClickableDiv
 							className={cl`${styles.so_number} ${!isEmpty(bfInvoice) ? styles.active : ''}`}
 							onClick={() => (!isEmpty(bfInvoice)
-								? handleDownload(
-									bfInvoice?.invoicePdfUrl || bfInvoice?.proformaPdfUrl,
-								)
+								? handleDownload(bfInvoice?.invoicePdfUrl || bfInvoice?.proformaPdfUrl)
 								: null)}
 						>
 							{bfInvoice?.invoiceNumber
@@ -178,9 +176,7 @@ function Header({
 						</div>
 
 						{showIrnTriggerForOldShipments ? (
-							<Button
-								onClick={() => handleClick('approved')}
-							>
+							<Button onClick={() => handleClick('approved')}>
 								Generate IRN Invoice
 							</Button>
 						) : null}
@@ -205,14 +201,13 @@ function Header({
 						{invoice?.payment_mode === 'credit' ? (
 							<div>
 								<div className={styles.info_container}>
-									{startCase(creditSource?.slice(0, -2))}
+									{startCase(creditSource?.slice(CREDIT_SOURCE_FIRST, SLICE_SOURCE_INDEX))}
 								</div>
 
 								<div className={styles.payment_method}>
 									{startCase(
-										`${
-											creditSource?.[(creditSource?.length ?? 0) - 2]
-										} deferred payment`,
+										`${creditSource?.[(creditSource?.length ?? CREDIT_SOURCE_FIRST)
+											- CREDIT_INDEX_OFFSET]} deferred payment`,
 									)}
 								</div>
 							</div>
@@ -223,12 +218,11 @@ function Header({
 				</div>
 
 				<div className={styles.invoice_container}>
-					{invoice.status
-					&& RESTRICT_REVOKED_STATUS.includes(invoice.status) ? (
+					{invoice.status && RESTRICT_REVOKED_STATUS.includes(invoice.status) ? (
 						<div className={styles.invoice_status}>
 							{startCase(invoice.status)}
 						</div>
-						) : null}
+					) : null}
 
 					{!invoice.is_revoked && invoice.status !== 'finance_rejected' ? (
 						<Actions
@@ -243,7 +237,7 @@ function Header({
 					) : null}
 
 					{invoice?.status === 'reviewed'
-					&& shipment_data?.serial_id <= 120347 ? (
+					&& shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id ? (
 						<Button
 							style={{ marginTop: '4px' }}
 							size="sm"
@@ -271,10 +265,7 @@ function Header({
 				<ClickableDiv
 					className={styles.icon_wrapper}
 					onClick={() => setOpen(!open)}
-					style={{
-						height:
-						`${invoicePartyDetailsRef.current?.offsetHeight}px`,
-					}}
+					style={{ height: `${invoicePartyDetailsRef.current?.offsetHeight}px` }}
 				>
 					{open ? <IcMArrowRotateUp /> : <IcMArrowRotateDown />}
 				</ClickableDiv>

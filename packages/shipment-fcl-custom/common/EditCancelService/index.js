@@ -5,17 +5,14 @@ import { useSelector } from '@cogoport/store';
 import React, { useState, useContext } from 'react';
 
 import CancelService from '../CancelService';
-import EditParams from '../EditParams';
 import SupplierReallocation from '../SupplierReallocation';
 
 import styles from './styles.module.css';
 import getCanCancelService from './utils/getCanCancelService';
-import getCanEditParams from './utils/getCanEditParams';
 import getCanEditSupplier from './utils/getCanEditSupplier';
 
 const ACTION_BUTTONS = [
 	{ label: 'Edit', value: 'supplier_reallocation' },
-	{ label: 'Edit Params', value: 'edit_params' },
 	{ label: 'Cancel', value: 'cancel' },
 ];
 
@@ -35,15 +32,14 @@ function EditCancelService({ serviceData = {} }) {
 		setShowPopover(false);
 	};
 
-	ACTION_BUTTONS[0].show = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
-	ACTION_BUTTONS[1].show = getCanEditParams({ shipment_data, user_data, serviceData, stakeholderConfig });
-	ACTION_BUTTONS[2].show = getCanCancelService({ state, stakeholderConfig });
+	ACTION_BUTTONS.supplier_reallocation = getCanEditSupplier({ shipment_data, user_data, state, stakeholderConfig });
+	ACTION_BUTTONS.cancel = getCanCancelService({ state, stakeholderConfig });
 
-	if (!ACTION_BUTTONS.some((actionButton) => actionButton.show)) {
+	if (!ACTION_BUTTONS.supplierEdit && !ACTION_BUTTONS.CancelService) {
 		return null;
 	}
 
-	const content = ACTION_BUTTONS.map(({ label, value, show }) => (show ? (
+	const content = ACTION_BUTTONS.map(({ label, value }) => (ACTION_BUTTONS[value] ? (
 		<div
 			key={value}
 			role="button"
@@ -69,9 +65,6 @@ function EditCancelService({ serviceData = {} }) {
 
 			{showModal === 'supplier_reallocation'
 			&& <SupplierReallocation setShow={setShowModal} serviceData={servicesData} />}
-
-			{showModal === 'edit_params'
-			&& <EditParams setShow={setShowModal} serviceData={serviceData} />}
 
 			{showModal === 'cancel' && 	(
 				<CancelService
