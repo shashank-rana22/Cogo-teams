@@ -1,13 +1,37 @@
 .label{
     font-weight: 600;
-    padding:4px 4px
+    padding:4px 4px;
+    margin-top: 10px;
+
 }
 
 .form{
     display: flex;
     flex-wrap: wrap;
+    width:90%;
 }
 
 .form_container{
     padding-right: 15px;
+    :global{
+        .ui_text_area_container{
+            width:300px,
+        }
+        .ui_text_area_control{
+            width:300px,
+        }
+    }
+   
+}
+
+.controller_wrapper{
+    :global{
+        .ui_text_area_container{
+            width:300px,
+        }
+        .ui_text_area_control{
+            width:300px,
+        }
+    }
+
 }

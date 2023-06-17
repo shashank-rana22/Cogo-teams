@@ -2,15 +2,24 @@ import { Button } from '@cogoport/components';
 
 import getElementController from '../../../configs/getElementController';
 
-import controls from './controls';
+import getControls from './controls';
 import DropDownComponent from './DropDownComponent';
 import EndComponent from './EndComponent';
 import styles from './styles.module.css';
 import useCreateKRA from './useCreateKRA';
 
 function FormComponent() {
-	const { control, errors, handleSubmit, onClickSubmitButton, watch } = useCreateKRA();
+	const {
+		control,
+		errors,
+		handleSubmit,
+		onClickSubmitButton,
+		watch,
+		showSelectedValue,
+		setSelectedValue,
+	} = useCreateKRA();
 
+	const controls = getControls({ setSelectedValue });
 	return (
 		<div className={styles.container}>
 			<div>
@@ -63,7 +72,13 @@ function FormComponent() {
 			</div>
 
 			<div className={styles.form}>
-				<DropDownComponent control={control} errors={errors} watch={watch} />
+				<DropDownComponent
+					control={control}
+					errors={errors}
+					watch={watch}
+					setSelectedValue={setSelectedValue}
+					showSelectedValue={showSelectedValue}
+				/>
 			</div>
 
 			<div>

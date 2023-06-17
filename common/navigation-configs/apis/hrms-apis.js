@@ -257,6 +257,11 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'list_roles',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 
 	],
 };

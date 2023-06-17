@@ -641,6 +641,20 @@ function asyncListChapter() {
 	};
 }
 
+function asyncListRoles() {
+	return {
+		labelKey    : 'role_name',
+		valueKey    : 'id',
+		endpoint    : 'list_roles',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -693,4 +707,5 @@ export {
 	asyncListSubChapters,
 	asyncListTribes,
 	asyncListChapter,
+	asyncListRoles,
 };

@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
+import { useState } from 'react';
 
 const LENGTH_OF_ARRAY = 5;
 const INCREMENTAL_ELEMENT = 1;
@@ -27,6 +28,7 @@ const getPayload = (values) => {
 };
 
 const useCreateKRA = () => {
+	const [showSelectedValue, setSelectedValue] = useState({});
 	const { control, handleSubmit, formState: { errors }, watch } = useForm();
 
 	const [{ loading }, trigger] = useHarbourRequest(
@@ -39,6 +41,7 @@ const useCreateKRA = () => {
 
 	const onClickSubmitButton = async (values) => {
 		const payload = getPayload(values);
+
 		try {
 			await trigger({
 				data: payload,
@@ -48,7 +51,16 @@ const useCreateKRA = () => {
 		}
 	};
 
-	return { control, errors, handleSubmit, onClickSubmitButton, loading, watch };
+	return {
+		control,
+		errors,
+		handleSubmit,
+		onClickSubmitButton,
+		loading,
+		watch,
+		showSelectedValue,
+		setSelectedValue,
+	};
 };
 
 export default useCreateKRA;

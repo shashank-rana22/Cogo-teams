@@ -1,4 +1,4 @@
-const controls = [
+const getControls = ({ setSelectedValue }) => ([
 	{
 		group       : 'top_controls',
 		subControls : [
@@ -30,10 +30,25 @@ const controls = [
 		subControls : [
 			{
 				name        : 'role_ids',
-				type        : 'multiSelect',
-				label       : 'Role',
-				placeholder : 'Select Role',
-				options     : [{ label: 'role', value: 'role' }, { label: 'Role', value: 'Role' }],
+				type        : 'asyncSelect',
+				asyncKey    : 'list_roles',
+				label       : 'Roles',
+				placeholder : 'Roles',
+				multiple    : true,
+				onChange    : (_, e) => {
+					setSelectedValue((pv) => ({
+						...pv,
+						role_ids: e,
+					}));
+				},
+				params: {
+					filters: {
+						status               : 'active',
+						partner_entity_types : ['cogoport'],
+
+					},
+					page_limit: 100,
+				},
 			},
 			{
 				name        : 'tribe_ids',
@@ -42,7 +57,13 @@ const controls = [
 				label       : 'Tribes',
 				placeholder : 'Tribes',
 				multiple    : true,
-				params      : {
+				onChange    : (_, e) => {
+					setSelectedValue((pv) => ({
+						...pv,
+						tribe_ids: e,
+					}));
+				},
+				params: {
 					filters: {
 						status               : 'active',
 						partner_entity_types : ['cogoport'],
@@ -59,7 +80,13 @@ const controls = [
 				label       : 'Squads',
 				placeholder : 'Squads',
 				multiple    : true,
-				params      : {
+				onChange    : (_, e) => {
+					setSelectedValue((pv) => ({
+						...pv,
+						squad_ids: e,
+					}));
+				},
+				params: {
 					filters: {
 						status               : 'active',
 						partner_entity_types : ['cogoport'],
@@ -76,7 +103,13 @@ const controls = [
 				label       : 'Chapters',
 				placeholder : 'Chapters',
 				multiple    : true,
-				params      : {
+				onChange    : (_, e) => {
+					setSelectedValue((pv) => ({
+						...pv,
+						chapter_ids: e,
+					}));
+				},
+				params: {
 					filters: {
 						status               : 'active',
 						partner_entity_types : ['cogoport'],
@@ -93,7 +126,13 @@ const controls = [
 				label       : 'Sub chapter',
 				placeholder : 'Sub chapter',
 				multiple    : true,
-				params      : {
+				onChange    : (_, e) => {
+					setSelectedValue((pv) => ({
+						...pv,
+						sub_chapter_ids: e,
+					}));
+				},
+				params: {
 					filters: {
 						status               : 'active',
 						partner_entity_types : ['cogoport'],
@@ -105,131 +144,6 @@ const controls = [
 
 		],
 	},
-
-	// {
-	// 	group       : 'end_controls',
-	// 	subControls : [
-	// 		{
-	// 			subGroups   : 'target_values',
-	// 			subControls : [
-	// 				{
-	// 					name    : 'is_target_entered_manually',
-	// 					type    : 'radioGroup',
-	// 					label   : 'Is target entered manually',
-	// 					options : [
-	// 						{
-	// 							value : 'yes',
-	// 							label : 'Yes',
-	// 						},
-	// 						{
-	// 							value : 'no',
-	// 							label : 'No',
-	// 						},
-	// 					],
-	// 				},
-
-	// 				{
-	// 					name    : 'is_target_achieved_manually',
-	// 					type    : 'radioGroup',
-	// 					label   : 'Is achieved entered manually',
-	// 					options : [
-	// 						{
-	// 							value : 'yes',
-	// 							label : 'Yes',
-	// 						},
-	// 						{
-	// 							value : 'no',
-	// 							label : 'No',
-	// 						},
-	// 					],
-	// 				},
-	// 			],
-	// 		}, {
-	// 			subGroups   : 'remarks',
-	// 			subControls : [
-	// 				{
-	// 					label : 'Anything else?',
-	// 					name  : 'description',
-	// 					type  : 'textarea',
-	// 					rows  : 4,
-	// 				},
-
-	// 				{
-	// 					name        : 'target_value',
-	// 					type        : 'number',
-	// 					label       : 'Enter a Target Value for the KRA',
-	// 					placeholder : '0',
-	// 					rules       : { required: 'Score is required' },
-	// 				},
-	// 			],
-	// 		},
-	// 		{
-	// 			subGroups   : 'ratings',
-	// 			subControls : [
-	// 				{
-	// 					name        : 'rating_1',
-	// 					type        : 'number',
-	// 					label       : 'Rating 1 for: ',
-	// 					placeholder : '0',
-	// 					rules       : { required: 'Rating 1 is required' },
-	// 				},
-
-	// 				{
-	// 					name        : 'rating_2',
-	// 					type        : 'number',
-	// 					label       : 'Rating 2 for: ',
-	// 					placeholder : '0',
-	// 					rules       : { required: 'Rating 2 is required' },
-	// 				},
-
-	// 				{
-	// 					name        : 'rating_3',
-	// 					type        : 'number',
-	// 					label       : 'Rating 3 for: ',
-	// 					placeholder : '0',
-	// 					rules       : { required: 'Rating 3 is required' },
-	// 				},
-
-	// 				{
-	// 					name        : 'rating_4',
-	// 					type        : 'number',
-	// 					label       : 'Rating 4 for: ',
-	// 					placeholder : '0',
-	// 					rules       : { required: 'Rating 4 is required' },
-	// 				},
-
-	// 				{
-	// 					name        : 'rating_5',
-	// 					type        : 'number',
-	// 					label       : 'Rating 5 for: ',
-	// 					placeholder : '0',
-	// 					rules       : { required: 'Rating 5 is required' },
-	// 				},
-	// 			],
-	// 		},
-	// 		{
-	// 			subGroups   : 'ratings',
-	// 			subControls : [{
-	// 				name    : 'is_rating_schema_in_percentage',
-	// 				type    : 'radioGroup',
-	// 				label   : 'Is rating schema in %',
-	// 				options : [
-	// 					{
-	// 						value : 'yes',
-	// 						label : 'Yes',
-	// 					},
-	// 					{
-	// 						value : 'no',
-	// 						label : 'No',
-	// 					},
-	// 				],
-	// 			},
-	// 			],
-	// 		},
-
-	// 	],
-	// },
-
 	{
 		group       : 'end_controls',
 		subControls : [
@@ -330,6 +244,6 @@ const controls = [
 		],
 	},
 
-];
+]);
 
-export default controls;
+export default getControls;

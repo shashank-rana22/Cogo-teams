@@ -1,5 +1,5 @@
 import getElementController from '../../../../configs/getElementController';
-import controls from '../controls';
+import getControls from '../controls';
 
 import styles from './styles.module.css';
 
@@ -9,6 +9,7 @@ const removeTypeField = (element) => {
 };
 
 function RenderFields({ control, errors }) {
+	const controls = getControls({});
 	return (
 		<div className={styles.form}>
 			{(controls || []).map((formControl) => {

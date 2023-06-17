@@ -1,11 +1,11 @@
 import { isEmpty, startCase } from '@cogoport/utils';
 
 import getElementController from '../../../../configs/getElementController';
-import controls from '../controls';
+import getControls from '../controls';
 
 import styles from './styles.module.css';
 
-function RenderSelectedFields({ selectedValues }) {
+function RenderSelectedFields({ selectedValues, name }) {
 	if (isEmpty(selectedValues)) {
 		return (
 			<div>
@@ -14,28 +14,27 @@ function RenderSelectedFields({ selectedValues }) {
 		);
 	}
 
-	return (selectedValues || []).map((value) => (
-		<div key={value} className={styles.value_container}>
-			{startCase(value)}
-		</div>
-	));
+	return (selectedValues || []).map((value) => {
+		const { squad_name, tribe_name, chapter_name, sub_chapter_name, role_name } = value || {};
+
+		const KEYS_MAPPING = {
+			role_ids        : role_name,
+			squad_ids       : squad_name,
+			tribe_ids       : tribe_name,
+			chapter_ids     : chapter_name,
+			sub_chapter_ids : sub_chapter_name,
+		};
+
+		return (
+			<div key={value} className={styles.value_container}>
+				{startCase([KEYS_MAPPING?.[name]])}
+			</div>
+		);
+	});
 }
 
-function RenderFields({ control, errors, watch }) {
-	const watchRole = watch('role_ids');
-	const watchTribes = watch('tribe_ids');
-	const watchSquad = watch('squad_ids');
-	const watchChapter = watch('chapter_ids');
-	const watchSubChapter = watch('sub_chapter_ids');
-
-	const SELECTED_VALUES_MAPPING = {
-		role_ids        : watchRole,
-		tribe_ids       : watchTribes,
-		squad_ids       : watchSquad,
-		chapter_ids     : watchChapter,
-		sub_chapter_ids : watchSubChapter,
-	};
-
+function RenderFields({ control, errors, setSelectedValue, showSelectedValue }) {
+	const controls = getControls({ setSelectedValue });
 	return (
 		<div className={styles.form}>
 
@@ -74,9 +73,9 @@ function RenderFields({ control, errors, watch }) {
 
 							<div
 								className={styles.show_selected_values}
-								style={{ opacity: isEmpty(SELECTED_VALUES_MAPPING[name]) ? '0.5' : '1' }}
+								style={{ opacity: isEmpty(showSelectedValue[name]) ? '0.5' : '1' }}
 							>
-								<RenderSelectedFields selectedValues={SELECTED_VALUES_MAPPING[name]} />
+								<RenderSelectedFields selectedValues={showSelectedValue[name]} name={name} />
 							</div>
 
 						</div>
@@ -89,7 +88,7 @@ function RenderFields({ control, errors, watch }) {
 	);
 }
 
-function DropDownComponent({ control, errors, watch }) {
+function DropDownComponent({ control, errors, watch, setSelectedValue, showSelectedValue }) {
 	return (
 		<div>
 			<div style={{ paddingTop: 8, width: '85%' }}>
@@ -99,7 +98,13 @@ function DropDownComponent({ control, errors, watch }) {
 			</div>
 
 			<div className={styles.render_form}>
-				<RenderFields control={control} errors={errors} watch={watch} />
+				<RenderFields
+					control={control}
+					errors={errors}
+					watch={watch}
+					setSelectedValue={setSelectedValue}
+					showSelectedValue={showSelectedValue}
+				/>
 			</div>
 
 		</div>

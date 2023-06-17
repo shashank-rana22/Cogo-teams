@@ -46,6 +46,7 @@ import {
 	asyncListSubChapters,
 	asyncListTribes,
 	asyncListChapter,
+	asyncListRoles,
 } from '../../../utils/getAsyncFields';
 
 /**
@@ -110,6 +111,7 @@ const keyAsyncFieldsParamsMapping = {
 	list_sub_chapters                    : asyncListSubChapters,
 	list_tribes                          : asyncListTribes,
 	list_chapters                        : asyncListChapter,
+	list_roles                           : asyncListRoles,
 };
 
 function AsyncSelect(props) {
