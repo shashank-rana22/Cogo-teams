@@ -6,6 +6,11 @@ import Item from '../../../Layout/Item';
 
 import styles from './styles.module.css';
 
+const DEFAULT_SPAN = 12;
+const PERCENT_FACTOR = 100;
+const FLEX_OFFSET = 1;
+const INDEX_UPTO_REMOVE_ITEM = 1;
+
 function Child({
 	control,
 	controls = [],
@@ -28,7 +33,7 @@ function Child({
 				{controls?.map((controlItem, i) => {
 					const { render, span } = controlItem || {};
 
-					const flex = ((span || 12) / 12) * 100 - 1;
+					const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR - FLEX_OFFSET;
 
 					if (controlItem?.type === 'static') {
 						return (
@@ -57,7 +62,7 @@ function Child({
 						<IcMDelete
 							width={20}
 							height={20}
-							onClick={!disableServiceEdit ? () => remove(index, 1) : null}
+							onClick={!disableServiceEdit ? () => remove(index, INDEX_UPTO_REMOVE_ITEM) : null}
 							className={
 						cl`${disableServiceEdit ? styles.disableServiceEdit : styles.delete_button_container}`
 }

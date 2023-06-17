@@ -1,6 +1,7 @@
 import { Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMCalendar } from '@cogoport/icons-react';
-import { format } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import OptionsModal from './OptionsModal';
@@ -11,7 +12,13 @@ function DepartureDateSelect({ value, onChange, showPopover, datePair, ...rest }
 
 	const getValue = () => {
 		let valueString = '';
-		const formattedValues = (value || []).map((item) => format((item), 'dd MMM yy '));
+
+		const formattedValues = (value || []).map((item) => formatDate({
+			date       : item,
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+			formatType : 'date',
+		}));
+
 		valueString += formattedValues.concat();
 
 		return valueString;
