@@ -5,6 +5,7 @@ import React, { useState, useEffect } from 'react';
 import useManageExceptionList from '../../../../hooks/useManageExceptionList';
 import ExcludeList from '../../../commonComponents/ExcludeList';
 import { ManageExceptionInterface } from '../../Interfaces';
+import styles from '../styles.module.css';
 
 function ManageExceptionsModal({
 	showCycleExceptions,
@@ -45,7 +46,7 @@ function ManageExceptionsModal({
 			<Modal.Header title="Manage Exceptions" />
 			<Modal.Body>
 
-				<div style={{ display: 'flex', justifyContent: 'space-between', margin: '0 20px' }}>
+				<div className={styles.button}>
 					<Button
 						size="md"
 						themeType="secondary"
@@ -61,7 +62,7 @@ function ManageExceptionsModal({
 							size="sm"
 							value={searchValue}
 							onChange={(e: any) => setSearchValue(e)}
-							placeholder="Search By Cycle Name"
+							placeholder="Search By Customer Name"
 							suffix={(
 								<div style={{ margin: '4px', display: 'flex' }}>
 									<IcMSearchlight height={15} width={15} />

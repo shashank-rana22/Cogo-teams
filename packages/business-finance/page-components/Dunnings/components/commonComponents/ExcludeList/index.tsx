@@ -39,7 +39,7 @@ function ExcludeList({ data, uncheckedRows, setUncheckedRows, loading, setFilter
 					totalItems={totalRecords}
 					pageSize={10}
 					onPageChange={(pageValue: number) => {
-						setFilters((p) => ({ ...p, pageIndex: pageValue }));
+						setFilters((prev) => ({ ...prev, pageIndex: pageValue }));
 					}}
 				/>
 			</div>

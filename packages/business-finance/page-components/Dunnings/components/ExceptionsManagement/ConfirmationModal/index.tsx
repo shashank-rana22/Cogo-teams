@@ -7,7 +7,7 @@ interface Props {
 	masterListId?: string;
 	deleteMasterLoading?: boolean;
 	setShowConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
-	deleteMasterException?: any;
+	deleteMasterException?: Function;
 }
 function ConfirmationModal({
 	showConfirmationModal,

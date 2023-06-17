@@ -28,7 +28,7 @@
 	}
 }
 
-.container {
+.empty_state_container {
 	padding: 100px 0;
 	margin-bottom: 16px;
 	text-align: center;
@@ -36,9 +36,6 @@
 }
 
 .img_height {
-	height: 200px;
-}
-
-.image_height {
-	height: 300px;
+	height: 40px;
+	min-height: 40vh;
 }

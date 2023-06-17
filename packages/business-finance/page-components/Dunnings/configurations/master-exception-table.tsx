@@ -17,7 +17,7 @@ interface MasterExceptionColumnInterface {
 	sort?: Sort;
 	setSort?: React.Dispatch<React.SetStateAction<object>>;
 	deleteMasterLoading?: boolean;
-	deleteMasterException?: any;
+	deleteMasterException?: Function;
 	exceptionFilter?: object;
 	setExceptionFilter?: React.Dispatch<React.SetStateAction<object>>;
 	setShowConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;

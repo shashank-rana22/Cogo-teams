@@ -8498,7 +8498,6 @@ const partner = {
 			access_type : 'private',
 		},
 	],
-
 	translate: [
 		{
 			api         : 'get_translation_translate_list',

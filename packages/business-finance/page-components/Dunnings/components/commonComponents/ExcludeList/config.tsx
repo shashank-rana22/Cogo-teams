@@ -21,7 +21,6 @@ export const config = (
 
 			/>
 		),
-		// span: 1,
 	},
 	{
 		Header   : 'Customer Name',
@@ -43,7 +42,6 @@ export const config = (
 				</Tooltip>
 			</div>
 		),
-		// span: 3,
 	},
 	{
 		Header   : 'Total Outstanding',
@@ -61,7 +59,6 @@ export const config = (
 				})}
 			</div>
 		),
-		// span: 3,
 	},
 	{
 		Header   : 'On Account',
@@ -79,7 +76,6 @@ export const config = (
 				})}
 			</div>
 		),
-		// span: 3,
 	},
 ];
 
