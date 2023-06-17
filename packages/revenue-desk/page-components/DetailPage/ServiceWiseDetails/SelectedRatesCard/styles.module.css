@@ -7,8 +7,7 @@
 .upper_section{
     display: flex;
     align-items: center;
-    width:780px;
-    justify-content: space-between;
+    gap: 60px;
 }
 
 .heading{
@@ -18,15 +17,18 @@
 }
 .text_container{
     display: flex;
-    justify-content: space-between;
-    width: 500px;
     align-items: center;
+    gap:30px;
+    flex-grow: 1;
 }
 
 .text{
     font-weight: 500;
     font-size: 14px;
     color: #828282;
+    display: flex;
+    align-items: center;
+
 }
 
 .key{
@@ -36,4 +38,11 @@
 }
 .card_container{
     border: 1px solid #88CAD1 !important;
+}
+
+.modalFooter{
+    display: flex;
+    justify-content: end;
+    margin-right: 10px;
+    gap:10px;
 }
