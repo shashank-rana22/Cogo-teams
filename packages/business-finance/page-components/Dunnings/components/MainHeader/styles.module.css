@@ -1,58 +1,57 @@
-
-.container{
-    margin-bottom: 16px;
-    display: flex;
-    justify-content: space-between;
+.container {
+	display: flex;
+	justify-content: space-between;
+	margin-bottom: 16px;
 }
 
-.card{
-    border: 1px solid #DFDFDF;
-    border-radius: 12px;
-    height: 92px;
-    width: 32%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: white;
-    box-shadow:2px 2px 4px 1px rgba(0, 0, 0, 0.2);
-    cursor: pointer;
+.card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32%;
+	height: 92px;
+	cursor: pointer;
+	background: white;
+	border: 1px solid #dfdfdf;
+	border-radius: 12px;
+	box-shadow: 2px 2px 4px 1px rgb(0 0 0 / 20%);
 }
 
-.card:hover{
-    background: var(--color-primary-error-red-5);
+.card:hover {
+	background: var(--color-primary-error-red-5);
 }
 
-.active_card{
-    background: linear-gradient(357deg, rgb(205 75 75) 0%, rgba(243,113,102,1) 35%, rgb(255 169 169) 100%);
-    border: 1px solid  var(--color-primary-error-red-3);
-    border-radius: 12px;
-    height: 92px;
-    width: 32%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    box-shadow:4px 4px 8px 2px rgb(151 38 38 / 20%);
+.active_card {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	width: 32%;
+	height: 92px;
+	color: white;
+	background: linear-gradient(357deg, rgb(205 75 75) 0%, rgb(243 113 102 / 100%) 35%, rgb(255 169 169) 100%);
+	border: 1px solid  var(--color-primary-error-red-3);
+	border-radius: 12px;
+	box-shadow: 4px 4px 8px 2px rgb(151 38 38 / 20%);
 }
 
-.campaign_card{
-    display: flex; 
-    justify-content: space-evenly; 
-    width: 100%;
+.campaign_card {
+	display: flex;
+	justify-content: space-evenly;
+	width: 100%;
 }
 
-.vertical_border{
-    height: 52px; 
-    border-right: 2px solid;
+.vertical_border {
+	height: 52px;
+	border-right: 2px solid;
 }
 
-.campaign_card_data{
-    fontSize: 14px; 
-    font-weight: 600; 
-    text-align: left;
+.campaign_card_data {
+	font-size: 14px;
+	font-weight: 600;
+	text-align: left;
 }
 
-.collection_rate{
-    margin-top: 12px; 
-    display: flex;
+.collection_rate {
+	display: flex;
+	margin-top: 12px;
 }

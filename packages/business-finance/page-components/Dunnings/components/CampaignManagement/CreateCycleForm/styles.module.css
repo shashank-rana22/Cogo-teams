@@ -1,11 +1,11 @@
-.modal_body_wrapper{
-	:global{
+.modal_body_wrapper {
+	:global {
 		.ui_modal_body_container {
-					max-height: 500px;
-			  }
+			max-height: 500px;
+		}
 	}
-}	
-	
+}
+
 
 .title {
 	font-weight: 600;
@@ -20,5 +20,3 @@
 	display: flex;
 	align-items: center;
 }
-
-

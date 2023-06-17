@@ -1,7 +1,7 @@
 .frequency {
 	display: flex;
-	justify-content: space-between;
 	align-items: center;
+	justify-content: space-between;
 	width: 80%;
 }
 
@@ -15,6 +15,6 @@
 	margin-right: 8px;
 }
 
-.empty_space{
+.empty_space {
 	height: 98px;
 }

@@ -1,11 +1,11 @@
-.header{
-    display: flex;
-    justify-content: center;
-    margin: 40px;
+.header {
+	display: flex;
+	justify-content: center;
+	margin: 40px;
 }
 
-.buttons{
-    width:100%;
-    display: flex;
-    justify-content: center;
+.buttons {
+	display: flex;
+	justify-content: center;
+	width: 100%;
 }
