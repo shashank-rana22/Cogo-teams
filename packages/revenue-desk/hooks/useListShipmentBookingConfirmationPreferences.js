@@ -21,7 +21,7 @@ const useListShipmentBookingConfirmationPreferences = ({ singleServiceData, ship
 	useEffect(() => {
 		getList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, [singleServiceData]);
+	}, [JSON.stringify(singleServiceData)]);
 	return {
 		data: data?.list,
 		loading,

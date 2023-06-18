@@ -1,8 +1,8 @@
 const getUpdateInstructionParams = ({ formValues, instruction_id }) => {
-	const params = {
+	const PARAMS = {
 		sop_update_data: [{ ...formValues, id: instruction_id }],
 	};
 
-	return params;
+	return PARAMS;
 };
 export default getUpdateInstructionParams;

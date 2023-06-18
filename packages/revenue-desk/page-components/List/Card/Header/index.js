@@ -45,6 +45,11 @@ function Header({ data }) {
 								: startCase(data.source || '')}
 						</div>
 					</Pill>
+					<Pill size="md" color="#F7FAEF">
+						<div style={{ color: '#849E4C' }}>
+							{startCase(data.state || '')}
+						</div>
+					</Pill>
 					{(data?.tags || []).map((i) => (
 						<Pill key={i}>{startCase(i)}</Pill>
 					))}

@@ -9,6 +9,7 @@ import controls from './controls';
 import styles from './styles.module.css';
 
 const DEFAULT_INDEX = 0;
+const CONTROL_TYPE_FILE_UPLOAD = 'fileUpload';
 
 const BANK_DETAILS_MAPPING = [
 	'ifsc_code',
@@ -59,7 +60,7 @@ function BankDetails({ getEmployeeDetails, data: info }) {
 
 							<div className={styles.control}>
 								<Element
-									{...(type === 'fileUpload'
+									{...(type === CONTROL_TYPE_FILE_UPLOAD
 										? removeTypeField(controlItem) : { ...controlItem })}
 									control={control}
 									key={controlName}

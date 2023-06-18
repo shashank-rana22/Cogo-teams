@@ -40,6 +40,14 @@ function ShipmentCard({ itemData, priceData }) {
 				<div className={styles.second_section}>
 					<Pill size="md" color="#F2F3FA">
 						<div style={{ color: '#7278AD' }}>
+							{startCase(itemData?.state)
+							|| startCase(itemData?.state)}
+
+						</div>
+
+					</Pill>
+					<Pill size="md" color="#F2F3FA">
+						<div style={{ color: '#7278AD' }}>
 							{startCase(itemData?.trade_type)
 							|| startCase(incoTermMapping[itemData?.inco_term])}
 
@@ -89,9 +97,7 @@ function ShipmentCard({ itemData, priceData }) {
 						</span>
 					</div>
 				</div>
-				<div>
-					<EditSellQuotation data={itemData} />
-				</div>
+
 			</div>
 
 		</div>

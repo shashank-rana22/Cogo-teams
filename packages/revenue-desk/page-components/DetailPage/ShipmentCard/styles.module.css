@@ -1,62 +1,62 @@
-.container{
-    background-color: #fff;
-    margin: 16px;
-    border-radius: 8px;
+.container {
+	margin: 16px;
+	background-color: #fff;
+	border-radius: 8px;
 }
 
-.upper_section{
-    display: flex;
-    justify-content: space-between;
-    border-bottom: 1px dashed #BDBDBD;;
-    padding: 10px 20px;
-    align-items: center;
+.upper_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	padding: 10px 20px;
+	border-bottom: 1px dashed #bdbdbd;
 }
 
-.lower_section{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
+.lower_section {
+	display: flex;
+	align-items: center;
+	justify-content: space-evenly;
 }
 
-.first_section{
-    border-right: 1px dashed #BDBDBD;
-    padding: 10px 20px;
-    width:40vw;
+.first_section {
+	width: 40vw;
+	padding: 10px 20px;
+	border-right: 1px dashed #bdbdbd;
 }
 
-.second_section{
-    border-right: 1px dashed #BDBDBD;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    padding: 20px 40px;
+.second_section {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	padding: 20px 40px;
+	border-right: 1px dashed #bdbdbd;
 }
 
-.last_section{
-    display: flex;
-    flex-direction: column;
-    justify-content: space-around;
-    align-items: center;
-    font-weight: 500;
-    font-size: 16px;
-    color: #4F4F4F;
+.last_section {
+	display: flex;
+	flex-direction: column;
+	align-items: center;
+	justify-content: space-around;
+	font-size: 16px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
-.text{
-    font-weight: 500;
-    font-size: 14px;
-    color: #828282;
+.text {
+	font-size: 14px;
+	font-weight: 500;
+	color: #828282;
 }
 
-.kamdiscount_text{
-    font-weight: 500;
-    font-size: 14px;
-    color: #4F4F4F;
+.kamdiscount_text {
+	font-size: 14px;
+	font-weight: 500;
+	color: #4f4f4f;
 }
 
-.sell_price_text{
-    font-weight: 500;
-    font-size: 18px;
-    color: #4F4F4F;
-    display: flex;
+.sell_price_text {
+	display: flex;
+	font-size: 18px;
+	font-weight: 500;
+	color: #4f4f4f;
 }

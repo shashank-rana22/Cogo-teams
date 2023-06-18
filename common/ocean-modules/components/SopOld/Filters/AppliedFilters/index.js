@@ -21,15 +21,15 @@ function ShowCurrentFilters({
 	};
 
 	const handleRemoveFilter = (filter) => {
-		const newFilters = [];
+		const NEW_FILTERS = [];
 		filters.forEach((element) => {
 			if (element !== filter) {
-				newFilters.push(element);
+				NEW_FILTERS.push(element);
 			}
 		});
 
-		if (newFilters.length) {
-			setFilters([...newFilters]);
+		if (NEW_FILTERS.length) {
+			setFilters([...NEW_FILTERS]);
 		} else {
 			setFilters([]);
 		}

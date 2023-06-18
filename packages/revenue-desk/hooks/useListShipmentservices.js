@@ -11,7 +11,10 @@ const useListShipmentServices = ({ shipmentId } = {}) => {
 		try {
 			await trigger({
 				params: {
-					filters                       : { shipment_id: shipmentId },
+					filters: {
+						shipment_id : shipmentId,
+						status      : ['active', 'pending', 'inactive'],
+					},
 					tasks_messages_count_required : false,
 					pagination_data_required      : false,
 					service_stakeholder_required  : true,
