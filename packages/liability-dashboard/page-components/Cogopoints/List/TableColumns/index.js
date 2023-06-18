@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const EARNED_VALUE = 0;
 
-function TableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab = '' }) {
+function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab = '' }) {
 	const columns = [
 		{
 			Header   : 'Name',
@@ -136,4 +136,4 @@ function TableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 	return filterColumns.filter((item) => item.conditions.includes(activeStatsCard));
 }
 
-export default TableColumns;
+export default tableColumns;

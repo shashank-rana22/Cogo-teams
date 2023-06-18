@@ -22,7 +22,10 @@ function Header({
 				asyncKey="organizations"
 				valueKey="id"
 				initialCall={false}
-				onChange={(val) => { setSelectOrganization(val); setPagination(DEFAULT_PAGE_NUMBER); }}
+				onChange={(val) => {
+					setSelectOrganization(val);
+					setPagination(DEFAULT_PAGE_NUMBER);
+				}}
 				value={selectOrganization}
 				placeholder="Select organization"
 				size="md"

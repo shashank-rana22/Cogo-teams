@@ -5,7 +5,7 @@ import { formatValue } from '../../../../utils/formatValue';
 
 import styles from './styles.module.css';
 
-const FIRST_FIELD_VALUE = 0;
+const DEFAULT_INDEX = 0;
 
 function LineChart({ formattedData = [], transactionType = '', currencyCode = '' }) {
 	const data = [
@@ -17,7 +17,7 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 	];
 
 	const renderSliceTooltip = ({ slice = {} }) => {
-		const { data: singleData = {} } = slice?.points?.[FIRST_FIELD_VALUE] || {};
+		const { data: singleData = {} } = slice?.points?.[DEFAULT_INDEX] || {};
 
 		return (
 			<div className={styles.tooltip_div}>

@@ -22,7 +22,7 @@ function StatsDiv({
 	return (
 		<div className={styles.container}>
 			{STATS_CARDS.map(({ label, name, access }) => {
-				const showStats = name !== 'liability_point_value' && name !== 'total_burnt_point_value';
+				const showStats = !['liability_point_value', 'total_burnt_point_value'].includes(name);
 				if (access.includes(activeHeaderTab)) {
 					return (
 						<div
