@@ -2,8 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { useEffect, useState } from 'react';
 
 const useListConsolidatedShipments = (serialIds:Array<string>) => {
-	console.log(serialIds, 'si')
-	const [pageFilters, setPageFilters] = useState({ page: 1 })
+	const [pageFilters, setPageFilters] = useState({ page: 1 });
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : 'list_shipments',
@@ -34,7 +33,7 @@ const useListConsolidatedShipments = (serialIds:Array<string>) => {
 		data,
 		loading,
 		pageFilters,
-		setPageFilters
+		setPageFilters,
 	};
 };
 

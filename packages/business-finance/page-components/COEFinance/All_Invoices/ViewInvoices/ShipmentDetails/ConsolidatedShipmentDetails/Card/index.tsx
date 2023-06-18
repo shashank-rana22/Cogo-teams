@@ -1,22 +1,26 @@
 import { Tooltip } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
-import styles from './styles.module.css'
-import PortDetails from '../../Details/PortDetails/index';
+
 import CargoDetailPills from '../../cargo-details/index';
+import PortDetails from '../../Details/PortDetails/index';
+
+import styles from './styles.module.css';
 
 export interface ShipmentDataProps {
 	id: string,
 	serial_id: string,
 }
 
-function ShipmentIdView({shipmentData}) {
+function ShipmentIdView({ shipmentData }) {
 	const router = useRouter();
 
 	return (
 		<div className={styles.container}>
 			<div className={styles.sub_div}>
 				<div className={styles.serial_id}>
-					Shipment ID# {shipmentData?.serial_id}
+					Shipment ID#
+					{' '}
+					{shipmentData?.serial_id}
 				</div>
 				<Tooltip
 					interactive
@@ -43,7 +47,8 @@ function ShipmentIdView({shipmentData}) {
 			<div
 				className={styles.flex_div}
 				onClick={() => {
-					const newUrl = `${window.location.origin}/${router?.query?.partner_id}/shipments/${shipmentData?.id}`;
+					const baseUrl = window.location.origin;
+					const newUrl = `${baseUrl}/${router?.query?.partner_id}/shipments/${shipmentData?.id}`;
 					window.location.href = newUrl;
 				}}
 				role="presentation"
