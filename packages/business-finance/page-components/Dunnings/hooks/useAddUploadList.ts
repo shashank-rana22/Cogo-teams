@@ -37,11 +37,10 @@ const useAddUploadList = ({
 
 	const PROFILE_ID = user?.id;
 	const UN_CHECKED_DATA = uncheckedRows.length > 0;
-
 	const getUploadList = useCallback((data, fileValue) => {
 		(async () => {
 			try {
-				await trigger({
+				const res = await trigger({
 					data: {
 						excludedRegistrationNos: !isEmpty(data.excludedRegistrationNos)
 							? data.excludedRegistrationNos : uncheckedRows,
@@ -52,6 +51,11 @@ const useAddUploadList = ({
 						cycleId       : SUB_TABS_VALUES ? undefined : cycleListId || undefined,
 					},
 				});
+				console.log(res, 'res');
+				if (res?.data.length > 0) {
+					Toast.success(`${res?.data.length} 
+					customers succesfully added in master exceptions or this cycle exception`);
+				}
 				onClose();
 				setShowCycleExceptions(false);
 			} catch (error) {

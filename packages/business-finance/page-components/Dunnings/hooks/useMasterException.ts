@@ -126,6 +126,10 @@ const useMasterException = ({ exceptionFilter, subTabsValue, setShowConfirmation
 		}
 	}, [getMasterList, getCycleWiseList, subTabsValue]);
 
+	useEffect(() => {
+		setSearchValue('');
+	}, [subTabsValue]);
+
 	return {
 		data,
 		masterExceptionLoading,
