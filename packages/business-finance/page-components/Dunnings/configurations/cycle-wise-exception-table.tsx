@@ -39,8 +39,7 @@ const cycleWiseExceptionTable = ({
 							interactive
 						>
 							<div className={styles.customer_name}>
-								{(row?.name as string).substring(0, 12)}
-								...
+								{row?.name}
 							</div>
 						</Tooltip>
 					</div>

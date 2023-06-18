@@ -2,6 +2,7 @@ import { Toast } from '@cogoport/components';
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
+import { startCase } from '@cogoport/utils';
 import { useCallback, useEffect, useState } from 'react';
 
 interface ExceptionFiltersInterface {
@@ -111,9 +112,9 @@ const useMasterException = ({ exceptionFilter, subTabsValue, setShowConfirmation
 				});
 				getMasterList();
 				setShowConfirmationModal(false);
-				Toast.success('Deleted Successfully !!');
+				Toast.success(`${startCase(type.toLowerCase())}d Successfully !!`);
 			} catch (error) {
-				Toast.error(error?.message || 'Delete Failed');
+				Toast.error(error?.message || `${startCase(type.toLowerCase())} Failed`);
 			}
 		})();
 	}, [deleteMasterApi, getMasterList, PROFILE_ID, setShowConfirmationModal]);

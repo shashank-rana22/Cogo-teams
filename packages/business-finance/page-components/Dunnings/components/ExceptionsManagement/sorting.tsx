@@ -9,21 +9,28 @@ function GetSortingData({
 	sortStyleAsc, type,
 }) {
 	return (
-		<div
-			role="presentation"
-			className={styles.icon_div}
-			onClick={() => {
-				setOrderBy((prev) => ({
-					sortType : prev?.sortType === 'ASC' ? 'DESC' : 'ASC',
-					sortBy   : type,
-				}));
-				setExceptionFilter({ ...exceptionFilter, page: 1 });
-			}}
-		>
+		<div className={styles.icon_div}>
+			<IcMArrowRotateUp
+				style={{ color: sortStyleAsc }}
+				onClick={() => {
+					setOrderBy({
+						sortType : 'ASC',
+						sortBy   : type,
+					});
+					setExceptionFilter({ ...exceptionFilter, page: 1 });
+				}}
+			/>
 
-			<IcMArrowRotateUp style={{ color: sortStyleAsc }} />
-
-			<IcMArrowRotateDown style={{ color: sortStyleDesc }} />
+			<IcMArrowRotateDown
+				style={{ color: sortStyleDesc }}
+				onClick={() => {
+					setOrderBy({
+						sortType : 'DESC',
+						sortBy   : type,
+					});
+					setExceptionFilter({ ...exceptionFilter, page: 1 });
+				}}
+			/>
 		</div>
 	);
 } export default GetSortingData;

@@ -37,6 +37,7 @@ const useAddUploadList = ({
 
 	const PROFILE_ID = user?.id;
 	const UN_CHECKED_DATA = uncheckedRows.length > 0;
+	const exceptionType = SUB_TABS_VALUES ? 'in master exceptions' : 'in this cycle exception';
 	const getUploadList = useCallback((data, fileValue) => {
 		(async () => {
 			try {
@@ -51,10 +52,8 @@ const useAddUploadList = ({
 						cycleId       : SUB_TABS_VALUES ? undefined : cycleListId || undefined,
 					},
 				});
-				console.log(res, 'res');
 				if (res?.data.length > 0) {
-					Toast.success(`${res?.data.length} 
-					customers succesfully added in master exceptions or this cycle exception`);
+					Toast.success(`${res?.data.length} customers succesfully added ${exceptionType}`);
 				}
 				onClose();
 				setShowCycleExceptions(false);
@@ -62,7 +61,7 @@ const useAddUploadList = ({
 				Toast.error(error?.message);
 			}
 		})();
-	}, [trigger, PROFILE_ID, onClose, setShowCycleExceptions, SUB_TABS_VALUES,
+	}, [trigger, PROFILE_ID, onClose, setShowCycleExceptions, SUB_TABS_VALUES, exceptionType,
 		uncheckedRows, UN_CHECKED_DATA, cycleListId]);
 
 	return {
