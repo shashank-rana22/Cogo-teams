@@ -1,8 +1,8 @@
-import { Chips, Datepicker, Select, TabPanel, Tabs, Timepicker } from '@cogoport/components';
+import { Chips, Datepicker, Select, TabPanel, Tabs } from '@cogoport/components';
 import { useEffect } from 'react';
 
 import Filter from '../../../../../commons/Filters';
-import { MONTH_DAYS, WEEK_OPTIONS } from '../../constants';
+import { HOURS, MINUTES, MONTH_DAYS, WEEK_OPTIONS } from '../../constants';
 
 import { controls } from './controls';
 import styles from './styles.module.css';
@@ -17,6 +17,9 @@ interface FormData {
 	isAllCreditControllers?:boolean,
 	creditController?:string[],
 	oneTimeDate?:Date,
+	scheduledHour?:string,
+	scheduledMinute?:string,
+	scheduleRule?:any,
 }
 
 interface Props {
@@ -28,8 +31,17 @@ interface Props {
 function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	const {
 		triggerType, frequency, weekDay,
-		monthDay, timezone, time, isAllCreditControllers, creditController, oneTimeDate,
+		monthDay, timezone, scheduledHour, scheduledMinute,
+		isAllCreditControllers, creditController, oneTimeDate, scheduleRule,
 	} = formData || {};
+
+	const {
+		scheduleTime,
+		dunningExecutionFrequency,
+		week,
+		scheduleTimeZone,
+		dayOfMonth,
+	} = scheduleRule || {};
 
 	const handleTabChange = (val?:string) => {
 		if (val === 'DAILY') {
@@ -62,6 +74,28 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		}
 	}, [creditController, isAllCreditControllers, setFormData]);
 
+	useEffect(() => {
+		// pre-filling all the details
+		if (isEditMode) {
+			const stringDate = oneTimeDate;
+			const formattedOneTimeDate = new Date(stringDate);
+			const timeArray = (scheduleTime)?.split(':');
+
+			setFormData((prev:object) => ({
+				...prev,
+				frequency       : dunningExecutionFrequency,
+				weekDay         : week,
+				timezone        : scheduleTimeZone,
+				scheduledHour   : timeArray?.[0],
+				scheduledMinute : timeArray?.[1],
+				monthDay        : dayOfMonth
+					? String(dayOfMonth) : undefined,
+				oneTimeDate: stringDate ? formattedOneTimeDate : undefined,
+			}));
+		}
+	}, [dayOfMonth, dunningExecutionFrequency, scheduleTime, scheduleTimeZone,
+		week, isEditMode, setFormData, oneTimeDate]);
+
 	return (
 		<div>
 			<Filter
@@ -88,7 +122,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 										<Chips
 											size="md"
 											items={WEEK_OPTIONS}
-											selectedItems={weekDay || []}
+											selectedItems={weekDay}
 											onItemChange={(val?:string) => setFormData({
 												...formData,
 												weekDay: val,
@@ -119,35 +153,59 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 								onChange={(date) => setFormData({ ...formData, oneTimeDate: date })}
 								value={oneTimeDate}
 							/>
+
 						</div>
 					)}
 
 					<div>
-						<h4>Select Time Slot</h4>
-						<div style={{ display: 'flex' }}>
-							<Select
-								value={timezone}
-								onChange={(e) => setFormData({ ...formData, timezone: e })}
-								placeholder="Timezone"
-								options={[
-									{
-										label: 'IST', value: 'IST',
-									},
-									{
-										label: 'GMT', value: 'GMT',
-									},
-									{
+						<h4>Select Time Slot (24 hour format)</h4>
+						<div style={{ display: 'flex', alignItems: 'center' }}>
+							<div>
+								<h5>Timezone</h5>
+								<Select
+									value={timezone}
+									onChange={(e) => setFormData({ ...formData, timezone: e })}
+									placeholder="Timezone"
+									options={[
+										{
+											label: 'IST', value: 'IST',
+										},
+										{
+											label: 'GMT', value: 'GMT',
+										},
+										{
 		                                label: 'VNM', value: 'VNM',
-									},
-								]}
-								className={styles.timezone}
-							/>
-							<Timepicker
-								name="date"
-								onChange={(e) => setFormData({ ...formData, time: e })}
-								value={time}
-								use12hourformat
-							/>
+										},
+									]}
+									className={styles.timezone}
+								/>
+							</div>
+
+							<div>
+								<h5>Hours</h5>
+								<div style={{ display: 'flex' }}>
+									<Select
+										value={scheduledHour}
+										onChange={(e) => setFormData({ ...formData, scheduledHour: e })}
+										placeholder="Hour"
+										options={HOURS}
+										className={styles.timezone}
+									/>
+									<h2>:</h2>
+								</div>
+							</div>
+							<div>
+								<h5>Minutes</h5>
+								<div style={{ display: 'flex' }}>
+									<Select
+										value={scheduledMinute}
+										onChange={(e) => setFormData({ ...formData, scheduledMinute: e })}
+										placeholder="Hour"
+										options={MINUTES}
+										className={styles.timezone}
+									/>
+								</div>
+							</div>
 						</div>
 					</div>
 				</div>

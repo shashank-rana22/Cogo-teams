@@ -21,8 +21,8 @@ function useListDunningCycle({ globalFilters, setGlobalFilters }) {
 
 	useEffect(() => {
 		debounceQuery(search);
-		setGlobalFilters({ ...globalFilters, page: 1 });
-	}, [search, debounceQuery]);
+		setGlobalFilters((prev) => ({ ...prev, page: 1 }));
+	}, [search, debounceQuery, setGlobalFilters]);
 
 	const getDunningList = async () => {
 		try {
@@ -42,7 +42,8 @@ function useListDunningCycle({ globalFilters, setGlobalFilters }) {
 
 	useEffect(() => {
 		getDunningList();
-	}, [query, page, service, cycleStatus, dunningCycleType]);
+	}, [query, page, service, cycleStatus,
+		 dunningCycleType]);
 
 	return {
 		data,

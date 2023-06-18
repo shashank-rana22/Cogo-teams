@@ -2,7 +2,7 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function useUpdateStatus() {
+function useUpdateStatus({ getDunningList }) {
 	const {
 		profile,
 	} = useSelector((state:any) => state);
@@ -24,13 +24,13 @@ function useUpdateStatus() {
 			 await trigger({
 				data: {
 					id,
-					updatedBy: profile?.user?.id,
-					isDunningCycleActive: status,
+					updatedBy            : profile?.user?.id,
+					isDunningCycleActive : status,
 				},
 			 });
+			 getDunningList();
 		} catch (e) {
 			Toast.error(e?.response?.data?.message || 'Something went wrong');
-
 		}
 	};
 

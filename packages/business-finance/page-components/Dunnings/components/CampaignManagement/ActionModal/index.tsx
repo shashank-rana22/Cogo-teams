@@ -3,23 +3,27 @@ import { useEffect, useState } from 'react';
 
 import FormLayout from '../CreateCycleForm/FormLayout';
 import useDeleteDunningCycle from '../hooks/useDeleteDunningCycle';
+import useUpdateCycle from '../hooks/useUpdateCycle';
 
 import styles from './styles.module.css';
 
 function ActionModal({ actionModal, setActionModal, getDunningList }) {
 	const [formData, setFormData] = useState({});
 
+	const { updateCycle, loading } = useUpdateCycle({ getDunningList });
+
 	const { rowData, action, visible } = actionModal || {};
-	const { deleteCycle, loading } = useDeleteDunningCycle({ id: rowData?.id, getDunningList, setActionModal });
+	const {
+		deleteCycle,
+		loading:deleteLoading,
+	} = useDeleteDunningCycle({ id: rowData?.id, getDunningList, setActionModal });
+
 	const onClose = () => {
 		setActionModal({});
 	};
 
 	useEffect(() => {
-		setFormData({
-			...rowData,
-			triggerTypeData: rowData?.triggerType,
-		});
+		setFormData({ ...rowData });
 	}, [rowData]);
 
 	return (
@@ -40,7 +44,7 @@ function ActionModal({ actionModal, setActionModal, getDunningList }) {
 							<Button
 								style={{ marginLeft: '12px' }}
 								onClick={deleteCycle}
-								disabled={loading}
+								disabled={deleteLoading}
 							>
 								Delete
 							</Button>
@@ -66,6 +70,8 @@ function ActionModal({ actionModal, setActionModal, getDunningList }) {
 					<div className={styles.button_update}>
 						<Button
 							style={{ marginLeft: '12px' }}
+							onClick={() => updateCycle({ id: rowData?.id, formData })}
+							loading={loading}
 						>
 							Update
 						</Button>

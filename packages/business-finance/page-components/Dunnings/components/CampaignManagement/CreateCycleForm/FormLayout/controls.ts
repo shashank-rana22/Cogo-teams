@@ -155,17 +155,12 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			],
 		},
 		{
-			label : 'Trigger Type',
-			name  : 'triggerType',
-			type  : 'radioGroup',
-			value : !isEditMode ? (formData?.triggerType || 'ONE_TIME')
-				: formData?.triggerTypeData,
-			onChange: (value:string) => {
-				if (isEditMode) {
-					setFormData({ ...formData, triggerTypeData: value });
-				} else {
-					setFormData({ ...formData, triggerType: value });
-				}
+			label    : 'Trigger Type',
+			name     : 'triggerType',
+			type     : 'radioGroup',
+			value    : formData?.triggerType || 'ONE_TIME',
+			onChange : (value:string) => {
+				setFormData({ ...formData, triggerType: value });
 			},
 			span    : 12,
 			options : [

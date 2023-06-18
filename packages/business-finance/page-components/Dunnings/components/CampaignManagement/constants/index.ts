@@ -9,12 +9,11 @@ export const SERVICE_OPTIONS = [
 ];
 
 export const CYCLE_OPTIONS = [
-	{
-		label: 'Active', value: 'active',
-	},
-	{
-		label: 'Inactive', value: 'inactive',
-	},
+	{ label: 'Scheduled', value: 'SCHEDULED' },
+	{ label: 'Cancelled', value: 'CANCELLED' },
+	{ label: 'Completed', value: 'COMPLETED' },
+	{ label: 'In Progress', value: 'IN_PROGRESS' },
+	{ label: 'Failed', value: 'FAILED' },
 ];
 
 export const CYCLE_TYPE = [
@@ -33,6 +32,24 @@ export const CYCLE_TYPE = [
 export const MONTH_DAYS = Array(28).fill(null).map((item, index) => (
 	{ label: String(index + 1), value: String(index + 1) }
 ));
+
+export const HOURS = Array(24).fill(null).map((item, index) => {
+	if (index >= 0 && index <= 9) {
+		return { label: `0${String(index)}`, value: `0${String(index)}` };
+	}
+	return (
+		{ label: String(index), value: String(index) }
+	);
+});
+
+export const MINUTES = Array(60).fill(null).map((item, index) => {
+	if (index >= 0 && index <= 9) {
+		return { label: `0${String(index)}`, value: `0${String(index)}` };
+	}
+	return (
+		{ label: String(index), value: String(index) }
+	);
+});
 
 export const WEEK_OPTIONS = [
 	{

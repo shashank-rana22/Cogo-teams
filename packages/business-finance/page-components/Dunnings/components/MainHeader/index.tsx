@@ -37,20 +37,17 @@ function MainHeader({ activeTab, setActiveTab }:Props) {
 					<div style={{ display: 'flex' }}>
 						<span>Ongoing Campaigns:&nbsp;</span>
 						<span>
-							{/* <Placeholder height="16px" width="120px" /> */}
-							XXXXX
+							-----
 						</span>
 					</div>
 					<div className={styles.collection_rate}>
 						<span>Collection Rate:&nbsp;</span>
 						<span>
-							{/* <Placeholder height="16px" width="120px" /> */}
-							XXXXXX
+							------
 						</span>
 					</div>
 				</div>
-
-			</div>,
+             </div>,
 		},
 		{
 			id      : 'exceptions-management',

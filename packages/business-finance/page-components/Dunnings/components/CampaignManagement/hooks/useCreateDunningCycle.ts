@@ -1,6 +1,4 @@
 import { Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
@@ -24,18 +22,13 @@ const useCreateDunningCycle = ({
 		serviceType,
 		triggerType,
 		frequency,
-		time,
+		scheduledHour,
+		scheduledMinute,
 		timezone,
 		weekDay,
 		monthDay,
 		oneTimeDate,
 	} = formData || {};
-
-	const formattedTime = formatDate({
-		date       : time,
-		timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
-		formatType : 'time',
-	});
 
 	const [
 		{ data, loading },
@@ -55,7 +48,7 @@ const useCreateDunningCycle = ({
 				data: {
 					name                         : cycleName,
 					cycle_type                   : cycleType,
-					triggerType,
+					triggerType                  : triggerType || 'ONE_TIME',
 					scheduleType                 : triggerType === 'PERIODIC' ? frequency : 'ONE_TIME',
 					severityLevel,
 					templateId                   : templateData?.id,
@@ -72,12 +65,12 @@ const useCreateDunningCycle = ({
 						serviceTypes           : serviceType?.length > 0 ? serviceType : undefined,
 					},
 					scheduleRule: {
-						scheduleTime              : formattedTime || '00:00',
+						scheduleTime              : `${scheduledHour}:${scheduledMinute}`,
 						scheduleTimeZone          : timezone,
 						dunningExecutionFrequency : triggerType === 'PERIODIC' ? frequency : 'ONE_TIME',
 						week                      : weekDay || undefined,
 						dayOfMonth                : monthDay || undefined,
-						oneTimeDate               : triggerType === 'PERIODIC' ? oneTimeDate : undefined,
+						oneTimeDate               : triggerType !== 'PERIODIC' ? oneTimeDate : undefined,
 					},
 				},
 			});
@@ -92,6 +85,7 @@ const useCreateDunningCycle = ({
 	return {
 		createDunningCycle,
 		loading,
+		data,
 	};
 };
 

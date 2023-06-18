@@ -12497,6 +12497,10 @@ const partner = {
 			api         : 'payments_dunning_customer_outstanding_and_on_account',
 			access_type : 'private',
 		},
+		{
+			api         : 'put_payments_dunning',
+			access_type : 'private',
+		},
 	],
 };
 

@@ -35,13 +35,14 @@ function useDeleteDunningCycle({ id, getDunningList, setActionModal }) {
 				id      : null,
 			 }));
 		} catch (err) {
-			console.log(err?.response?.data?.message || 'Something went wrong !');
+			Toast.error(err?.response?.data?.message || 'Something went wrong !');
 		}
 	};
 
 	return {
 		deleteCycle,
 		loading,
+		data,
 	};
 }
 

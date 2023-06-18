@@ -53,10 +53,14 @@ function CampaignManagement() {
 							   })}
 			</div>
 		),
-		renderActions :	(rowData) => <RenderActions setActionModal={setActionModal} 
-		rowData={rowData} 
-		/>,
-		viewMore      : ({ id }) => (
+		renderActions:	(rowData) => (
+			<RenderActions
+				setActionModal={setActionModal}
+				rowData={rowData}
+				getDunningList={getDunningList}
+			/>
+		),
+		viewMore: ({ id }) => (
 			<RenderViewMore
 				id={id}
 				dropdown={dropdown}

@@ -1,14 +1,6 @@
-import { CYCLE_OPTIONS, CYCLE_TYPE, SERVICE_OPTIONS } from '../constants';
+import { CYCLE_OPTIONS, CYCLE_TYPE } from '../constants';
 
 const filterControls = [
-	{
-		name        : 'service',
-		placeholder : 'Service',
-		type        : 'select',
-		span        : 3,
-		options     : SERVICE_OPTIONS,
-		isClearable : true,
-	},
 	{
 		name        : 'cycleStatus',
 		placeholder : 'Cycle Status',
