@@ -8,6 +8,7 @@ const getLocationShipmentDetails = (data, summary, type) => {
 		lcl_freight             : 'port',
 		air_freight             : 'airport',
 		domestic_air_freight    : 'airport',
+		rail_domestic_freight		: 'location',
 		origin_ftl_freight      : 'pickup',
 		destination_ftl_freight : 'drop',
 		origin_ltl_freight      : 'pickup',

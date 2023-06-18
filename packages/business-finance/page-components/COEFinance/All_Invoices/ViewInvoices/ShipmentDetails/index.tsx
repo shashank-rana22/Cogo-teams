@@ -1,4 +1,4 @@
-import { Loader, Placeholder, Pill, Popover } from '@cogoport/components';
+import { Loader, Placeholder, Pill, Accordion } from '@cogoport/components';
 import {
 	IcMArrowRotateDown,
 	IcMArrowRotateUp,
@@ -23,6 +23,7 @@ import ShipmentDetailsCard from './ShipmentDetailsCard/index';
 import styles from './styles.module.css';
 import TimeLineItemCheck from './TimelineItemCheck/index';
 import VarianceView from './VarianceView/index';
+import ConsolidatedShipmentDetail from './ConsolidatedShipmentDetails/index';
 
 interface BuyerDetailInterface {
 	entityCode?: string;
@@ -296,6 +297,17 @@ function ShipmentDetails({
 				</>
 			)}
 			<div>
+				{jobType === 'CONSOLIDATED' && (
+					<div className={styles.consolidated_shipment_details}>
+						<Accordion
+							type="text"
+							title="Shipment Details"
+						>
+							<div className={styles.line} />
+							<ConsolidatedShipmentDetail consolidatedSids={consolidatedShipmentIds}/>
+						</Accordion>
+					</div>
+				)}
 				{collectionPartyId ? (
 					<div className={styles.variance}>
 						<div>
@@ -318,35 +330,6 @@ function ShipmentDetails({
 						)}
 					</div>
 				) : null}
-				{jobType === 'CONSOLIDATED'
-				&& (
-					<div className={styles.show_consolidated}>
-						<Popover
-							placement="bottom"
-							caret
-							visible={showConsolidatedSID}
-							render={getConsolidatedSID()}
-							{...rest}
-						>
-							<div
-								className={styles.consolidated_sid}
-								onClick={() => {
-									handleConsolidatedSID();
-								}}
-								role="presentation"
-							>
-								<div className={styles.consolidated_text}>
-									Consolidated SID
-								</div>
-
-								<div className={styles.consolidated_icon}>
-									{showConsolidatedSID ? <IcMArrowRotateUp height={20} width={20} />
-										: <IcMArrowRotateDown height={20} width={20} />}
-								</div>
-							</div>
-						</Popover>
-					</div>
-				)}
 				<POC itemData={data} />
 			</div>
 
