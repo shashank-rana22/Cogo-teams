@@ -23,13 +23,12 @@ interface Props {
 	formData?:FormData,
 	setFormData?:(p:object)=>void,
 	isEditMode?:boolean,
-	cycleData?:object,
 }
 
-function FormLayout({ formData, setFormData, isEditMode=false }:Props) {
-	
+function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	const {
-		triggerType, frequency, weekDay, monthDay, timezone, time, isAllCreditControllers, creditController, oneTimeDate,
+		triggerType, frequency, weekDay,
+		monthDay, timezone, time, isAllCreditControllers, creditController, oneTimeDate,
 	} = formData || {};
 
 	const handleTabChange = (val?:string) => {
@@ -59,20 +58,20 @@ function FormLayout({ formData, setFormData, isEditMode=false }:Props) {
 
 	useEffect(() => {
 		if (isAllCreditControllers && creditController) {
-			setFormData({ ...formData, creditController: null });
+			setFormData((prev) => ({ ...prev, creditController: null }));
 		}
-	}, [isAllCreditControllers]);
+	}, [creditController, isAllCreditControllers, setFormData]);
 
 	return (
 		<div>
 			<Filter
-				controls={controls({ formData, setFormData,isEditMode })}
+				controls={controls({ formData, setFormData, isEditMode })}
 				filters={formData}
 				setFilters={setFormData}
 			/>
 			<div>
 				<div className={styles.frequency}>
-					{triggerType === 'periodic'  && (
+					{triggerType === 'PERIODIC' ? (
 						<div>
 							<h3>Frequency</h3>
 							<Tabs
@@ -110,8 +109,7 @@ function FormLayout({ formData, setFormData, isEditMode=false }:Props) {
 								</TabPanel>
 							</Tabs>
 						</div>
-					)}
-					{triggerType !== 'periodic'  && (
+					) : (
 						<div>
 							<h4>Select Date</h4>
 							<Datepicker
@@ -123,6 +121,7 @@ function FormLayout({ formData, setFormData, isEditMode=false }:Props) {
 							/>
 						</div>
 					)}
+
 					<div>
 						<h4>Select Time Slot</h4>
 						<div style={{ display: 'flex' }}>
@@ -138,7 +137,7 @@ function FormLayout({ formData, setFormData, isEditMode=false }:Props) {
 										label: 'GMT', value: 'GMT',
 									},
 									{
-			                             label: 'VNM', value: 'VNM',
+		                                label: 'VNM', value: 'VNM',
 									},
 								]}
 								className={styles.timezone}

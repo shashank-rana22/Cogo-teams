@@ -37,11 +37,6 @@ const useCreateDunningCycle = ({
 		formatType : 'time',
 	});
 
-	const TRIGGER_TYPE_MAPPING = {
-		oneTime  : 'ONE_TIME',
-		periodic : 'PERIODIC',
-	};
-
 	const [
 		{ data, loading },
 		trigger,
@@ -56,12 +51,12 @@ const useCreateDunningCycle = ({
 
 	const createDunningCycle = async () => {
 		try {
-			 await trigger({
+			await trigger({
 				data: {
 					name                         : cycleName,
 					cycle_type                   : cycleType,
-					triggerType                  : TRIGGER_TYPE_MAPPING[triggerType],
-					scheduleType                 : triggerType === 'periodic' ? frequency : 'ONE_TIME',
+					triggerType,
+					scheduleType                 : triggerType === 'PERIODIC' ? frequency : 'ONE_TIME',
 					severityLevel,
 					templateId                   : templateData?.id,
 					category                     : 'CYCLE',
@@ -79,13 +74,13 @@ const useCreateDunningCycle = ({
 					scheduleRule: {
 						scheduleTime              : formattedTime || '00:00',
 						scheduleTimeZone          : timezone,
-						dunningExecutionFrequency : triggerType === 'periodic' ? frequency : 'ONE_TIME',
+						dunningExecutionFrequency : triggerType === 'PERIODIC' ? frequency : 'ONE_TIME',
 						week                      : weekDay || undefined,
 						dayOfMonth                : monthDay || undefined,
-						oneTimeDate               : triggerType === 'periodic' ? oneTimeDate : undefined,
+						oneTimeDate               : triggerType === 'PERIODIC' ? oneTimeDate : undefined,
 					},
 				},
-			 });
+			});
 			Toast.success('Dunning Cycle Successfully Created');
 			getDunningList();
 			setShowCreateForm(false);

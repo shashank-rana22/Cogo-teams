@@ -1,13 +1,13 @@
 import { Button, Modal } from '@cogoport/components';
+import { useEffect, useState } from 'react';
 
+import FormLayout from '../CreateCycleForm/FormLayout';
 import useDeleteDunningCycle from '../hooks/useDeleteDunningCycle';
 
 import styles from './styles.module.css';
-import FormLayout from '../CreateCycleForm/FormLayout';
-import { useEffect, useState } from 'react';
 
 function ActionModal({ actionModal, setActionModal, getDunningList }) {
-    const [formData,setFormData] = useState({});
+	const [formData, setFormData] = useState({});
 
 	const { rowData, action, visible } = actionModal || {};
 	const { deleteCycle, loading } = useDeleteDunningCycle({ id: rowData?.id, getDunningList, setActionModal });
@@ -15,23 +15,23 @@ function ActionModal({ actionModal, setActionModal, getDunningList }) {
 		setActionModal({});
 	};
 
-	useEffect(()=>{
-      setFormData({...rowData,
-	triggerTypeData:rowData?.triggerType,
-	});
-	},[rowData])
-
+	useEffect(() => {
+		setFormData({
+			...rowData,
+			triggerTypeData: rowData?.triggerType,
+		});
+	}, [rowData]);
 
 	return (
 		<Modal size="xl" show={visible} onClose={onClose} placement="center" className={styles.modal_section}>
-			{action === 'edit' && <Modal.Header title="Edit Cycle"/>}
+			{action === 'edit' && <Modal.Header title="Edit Cycle" />}
 			<Modal.Body>
 				{action === 'delete' && (
 					<>
 						<div className={styles.header}>
 							<h3>
 								Are you sure you want to delete
-{rowData?.name}
+								{rowData?.name}
 								?
 							</h3>
 						</div>
@@ -52,27 +52,27 @@ function ActionModal({ actionModal, setActionModal, getDunningList }) {
 				action === 'edit' && (
 					<div>
 						<FormLayout
-						formData={{...formData}}
-						setFormData={setFormData}
-						isEditMode={true}
+							formData={{ ...formData }}
+							setFormData={setFormData}
+							isEditMode
 						/>
-						
+
 					</div>
 				)
 			}
 			</Modal.Body>
-			{action === 'edit' && <Modal.Footer>
-			<div className={styles.button_update}>
-							<Button
-								style={{ marginLeft: '12px' }}
-								// onClick={()=>{}}
-								// disabled={loading}
-							>
-								Update
-							</Button>
-							<Button themeType="secondary" onClick={onClose}>Cancel</Button>
-						</div>
-				</Modal.Footer>}
+			{action === 'edit' && (
+				<Modal.Footer>
+					<div className={styles.button_update}>
+						<Button
+							style={{ marginLeft: '12px' }}
+						>
+							Update
+						</Button>
+						<Button themeType="secondary" onClick={onClose}>Cancel</Button>
+					</div>
+				</Modal.Footer>
+			)}
 
 		</Modal>
 	);
