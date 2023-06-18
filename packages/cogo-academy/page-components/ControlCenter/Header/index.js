@@ -4,7 +4,9 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function Header() {
+function Header({
+	isConfigurationAllowed = false,
+}) {
 	const router = useRouter();
 
 	const onClickConfiguration = () => {
@@ -18,16 +20,21 @@ function Header() {
 		<div className={styles.container}>
 			<div className={styles.header}>Control Center</div>
 
-			<div className={styles.button_container}>
-				<Button
-					type="button"
-					style={{ marginLeft: 8 }}
-					themeType="secondary"
-					onClick={onClickConfiguration}
-				>
-					Configuration
-				</Button>
-			</div>
+			{
+	isConfigurationAllowed && (
+		<div className={styles.button_container}>
+			<Button
+				type="button"
+				style={{ marginLeft: 8 }}
+				themeType="secondary"
+				onClick={onClickConfiguration}
+			>
+				Configuration
+			</Button>
+		</div>
+	)
+}
+
 		</div>
 	);
 }

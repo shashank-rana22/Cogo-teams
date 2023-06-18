@@ -8,6 +8,9 @@ import useUpdateEmployeeDetails from '../../../../hooks/useUpdateEmployeeDetails
 import controls from './controls';
 import styles from './styles.module.css';
 
+const FORM_TYPE_EDUCATIONAL_QUALIFICATION = 'educational_qualification';
+const CONTROL_TYPE_FIELD_ARRAY = 'fieldArray';
+
 function EducationalQualification({ getEmployeeDetails, data }) {
 	const { handleSubmit, control, setValue } = useForm();
 
@@ -18,11 +21,11 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 	const { loading, updateEmployeeDetails } = useUpdateEmployeeDetails({ id, getEmployeeDetails });
 
 	const onSubmit = (values) => {
-		updateEmployeeDetails({ data: values, formType: 'educational_qualification' });
+		updateEmployeeDetails({ data: values, formType: FORM_TYPE_EDUCATIONAL_QUALIFICATION });
 	};
 
 	useEffect(() => {
-		setValue('education_qualifications', employee_education_details.map((item) => ({
+		setValue(FORM_TYPE_EDUCATIONAL_QUALIFICATION, employee_education_details?.map((item) => ({
 			...item,
 			started_at : new Date(item?.started_at),
 			ended_at   : new Date(item?.ended_at),
@@ -40,12 +43,12 @@ function EducationalQualification({ getEmployeeDetails, data }) {
 			<div className={styles.container}>
 				{controls?.map((controlItem) => {
 					const { type, name: controlName } = controlItem || {};
-					if (type === 'fieldArray') {
+					if (type === CONTROL_TYPE_FIELD_ARRAY) {
 						return (
 							<FieldArray
 								{...controlItem}
 								Array
-								name="education_qualifications"
+								name={FORM_TYPE_EDUCATIONAL_QUALIFICATION}
 								control={control}
 								controls={controlItem?.controls}
 								key={controlName}
