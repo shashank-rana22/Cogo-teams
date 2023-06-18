@@ -117,7 +117,8 @@ function SingleService({
 					price={priceData?.[singleServiceData?.id]}
 					shipmentData={shipmentData}
 				/>
-			) : (
+			) : null}
+			{['in_progress', 'confirmed_by_importer_exporter'].includes(shipmentData?.state) ? (
 				<>
 					{(supplierPayload?.[singleServiceData?.id] || []).length
 						? (
@@ -155,7 +156,7 @@ function SingleService({
 						/>
 					))}
 				</>
-			)}
+			) : null}
 		</div>
 
 	);
