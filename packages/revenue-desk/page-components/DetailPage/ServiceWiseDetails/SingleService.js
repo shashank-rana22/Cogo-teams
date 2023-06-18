@@ -110,7 +110,11 @@ function SingleService({
 				)}
 			</div>
 
-			<SingleServiceCard serviceData={singleServiceData} price={priceData?.[singleServiceData?.id]} />
+			<SingleServiceCard
+				serviceData={singleServiceData}
+				price={priceData?.[singleServiceData?.id]}
+				shipmentData={shipmentData}
+			/>
 			{singleServiceData?.is_preference_set ? (
 				<PreferenceSetServiceData
 					singleServiceData={singleServiceData}
@@ -118,7 +122,8 @@ function SingleService({
 					shipmentData={shipmentData}
 				/>
 			) : null}
-			{['in_progress', 'confirmed_by_importer_exporter'].includes(shipmentData?.state) ? (
+			{['in_progress', 'confirmed_by_importer_exporter'].includes(shipmentData?.state)
+			&& !singleServiceData?.is_preference_set ? (
 				<>
 					{(supplierPayload?.[singleServiceData?.id] || []).length
 						? (
@@ -156,7 +161,7 @@ function SingleService({
 						/>
 					))}
 				</>
-			) : null}
+				) : null}
 		</div>
 
 	);
