@@ -87,16 +87,15 @@ function ExceptionsManagement() {
 				))}
 			</div>
 
-			{(showConfirmationModal)
-				&& (
-					<ConfirmationModal
-						showConfirmationModal={showConfirmationModal}
-						setShowConfirmationModal={setShowConfirmationModal}
-						deleteMasterException={deleteMasterException}
-						deleteMasterLoading={deleteMasterLoading}
-						masterListId={masterListId}
-					/>
-				)}
+			{showConfirmationModal ? (
+				<ConfirmationModal
+					showConfirmationModal={showConfirmationModal}
+					setShowConfirmationModal={setShowConfirmationModal}
+					deleteMasterException={deleteMasterException}
+					deleteMasterLoading={deleteMasterLoading}
+					masterListId={masterListId}
+				/>
+			) : null}
 
 			<ExceptionList
 				data={SUB_TABS_VALUE ? list || [] : cycleList || []}

@@ -2,6 +2,8 @@ import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
+import toastApiError from '../commons/utils/toastApiError';
+
 interface Props {
 	manageExceptionFilter?: { pageIndex?: number };
 	cycleListId?: string;
@@ -34,7 +36,7 @@ const useManageExceptionList = ({ manageExceptionFilter, cycleListId }:Props) =>
 					},
 				});
 			} catch (error) {
-				console.log(error);
+				toastApiError(error);
 			}
 		})();
 	}, [trigger, cycleListId, query, pageIndex]);

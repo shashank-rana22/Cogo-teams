@@ -1,6 +1,6 @@
 import React from 'react';
 
-export interface TableListProps {
+export interface ExceptionListProps {
 	id?: string;
 	className?: string;
 	columns?: object[];

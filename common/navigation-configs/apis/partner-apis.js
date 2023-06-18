@@ -12464,6 +12464,26 @@ const partner = {
 			api         : 'list_organization_trade_party_details',
 			access_type : 'private',
 		},
+		{
+			api         : 'get_payments_dunning_create_exceptions',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_cycle_exception',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_master_exceptions',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_list_dunning',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_payments_dunning_delete_master_exception',
+			access_type : 'private',
+		},
 	],
 };
 

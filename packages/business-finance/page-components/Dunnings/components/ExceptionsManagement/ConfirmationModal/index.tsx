@@ -23,7 +23,6 @@ function ConfirmationModal({
 			onClose={() => setShowConfirmationModal(false)}
 			scroll={false}
 		>
-			<Modal.Header />
 			<Modal.Body>
 				<div className={styles.sure_approve}>
 					Are you sure want to Delete?

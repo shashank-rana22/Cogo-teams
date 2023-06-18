@@ -1,6 +1,6 @@
 import { Pagination } from '@cogoport/components';
 
-import StyledTable from '../../../../AccountReceivables/commons/styledTable';
+import StyledTable from '../../../AccountReceivables/commons/styledTable';
 
 import { config } from './config';
 import styles from './styles.module.css';

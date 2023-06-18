@@ -45,8 +45,8 @@ function AddCustomerModal({
 							draggable
 							accept=".csv,.xlsx"
 						/>
-						<div style={{ display: 'flex', justifyContent: 'flex-end', alignItems: 'center' }}>
-							<p style={{ marginRight: '4px', marginBottom: '2px' }}>Sample</p>
+						<div className={styles.download_container}>
+							<p className={styles.sample_text}>Sample</p>
 							<IcMDownload
 								width={16}
 								height={16}

@@ -1,9 +1,10 @@
 import { Modal, Button, Input } from '@cogoport/components';
 import { IcMSearchlight } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect } from 'react';
 
+import ExcludeList from '../../../../commons/ExcludeList';
 import useManageExceptionList from '../../../../hooks/useManageExceptionList';
-import ExcludeList from '../../../commonComponents/ExcludeList';
 import { ManageExceptionInterface } from '../../Interfaces';
 import styles from '../styles.module.css';
 
@@ -30,7 +31,7 @@ function ManageExceptionsModal({
 	const onSubmit = (data) => {
 		getUploadList(data);
 	};
-	const showAddCustomerModal = uncheckedRows.length > 0;
+	const showAddCustomerModal = !isEmpty(uncheckedRows);
 
 	useEffect(() => {
 		getManageExceptionList();
@@ -61,10 +62,10 @@ function ManageExceptionsModal({
 							name="q"
 							size="sm"
 							value={searchValue}
-							onChange={(e: any) => setSearchValue(e)}
+							onChange={(e: string) => setSearchValue(e)}
 							placeholder="Search By Customer Name"
 							suffix={(
-								<div style={{ margin: '4px', display: 'flex' }}>
+								<div className={styles.search_icon}>
 									<IcMSearchlight height={15} width={15} />
 								</div>
 							)}
@@ -81,7 +82,7 @@ function ManageExceptionsModal({
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				{ uncheckedRows?.length > 0 ? (
+				{ !isEmpty(uncheckedRows) ? (
 					<div style={{ margin: '6px 20px' }}>
 						{uncheckedRows?.length}
 						{' '}

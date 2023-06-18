@@ -18,6 +18,16 @@
 	margin-bottom: 12px;
 }
 
+.sample_text {
+	margin: 0 4px 2px 0;
+}
+
+.download_container {
+	display: flex;
+	align-items: center;
+	justify-content: flex-end;
+}
+
 .heading {
 	margin-top: 20px;
 	font-size: var(--font-size-md);

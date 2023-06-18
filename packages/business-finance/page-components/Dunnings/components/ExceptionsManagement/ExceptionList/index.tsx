@@ -1,10 +1,10 @@
 import { Table } from '@cogoport/components';
 import React from 'react';
 
+import EmptyState from '../../../commons/EmptyState';
 import Filters from '../Filters';
-import { TableListProps } from '../Interfaces';
+import { ExceptionListProps } from '../Interfaces';
 
-import EmptyState from './EmptyState';
 import styles from './styles.module.css';
 
 function ExceptionList({
@@ -21,7 +21,7 @@ function ExceptionList({
 	setSearchValue,
 	cycleListId,
 	...rest
-}:TableListProps) {
+}:ExceptionListProps) {
 	const { loading } = rest || {};
 
 	return (

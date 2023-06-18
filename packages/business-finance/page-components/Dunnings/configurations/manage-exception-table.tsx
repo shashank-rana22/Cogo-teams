@@ -1,4 +1,5 @@
 import { Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
@@ -32,7 +33,7 @@ const manageExceptionColumn = () => [
 			<div className={styles.text}>
 				{formatAmount({
 					amount   : row?.totalOutstanding,
-					currency : 'INR',
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',
@@ -49,7 +50,7 @@ const manageExceptionColumn = () => [
 			<div className={styles.text}>
 				{formatAmount({
 					amount   : row?.totalOnAccount,
-					currency : 'INR',
+					currency : GLOBAL_CONSTANTS.currency_code.INR,
 					options  : {
 						style                 : 'currency',
 						currencyDisplay       : 'code',
