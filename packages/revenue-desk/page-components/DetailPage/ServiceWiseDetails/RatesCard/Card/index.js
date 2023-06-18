@@ -1,15 +1,16 @@
 import { Pill, ProgressBar } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMDrag } from '@cogoport/icons-react';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
+import LoadingCard from './LoadingCard';
 import PriorityNumber from './PriorityNumber';
 import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
 
 function Card({
 	data, setPrefrences, prefrences, rate_key, serviceData, setSellRates,
-	sellRates, prefrence_key, fromkey, priority_key,
+	sellRates, prefrence_key, fromkey, priority_no,
 }) {
 	const handlePrefrence = (rate) => {
 		const foundItem = (prefrences?.[serviceData?.id] || []).find((obj) => obj?.rate_id === rate?.id);
@@ -58,20 +59,32 @@ function Card({
 	const showData = (val) => val || '';
 	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
 	const updated_at = data?.rowData?.updated_at;
+
+	const handleLeftSectionPriority = (ratekey) => {
+		if (ratekey === 'selected_rate') {
+			return `${priority_no}.`;
+		} if (ratekey === 'preferences_rate') {
+			return `${data?.rowData?.priority}.`;
+		} if (ratekey === 'not_preferences_rate') {
+			return <IcMOverflowDot />;
+		}
+		return (
+			<PriorityNumber
+				data={prefrences?.[serviceData?.id]}
+				id={data?.id}
+				showPriority
+			/>
+		);
+	};
 	return (
 		<div
-			className={rate_key ? styles.selected_rate_card_container : styles.container}
+			className={((rate_key === 'selected_rate') || (rate_key === 'preferences_rate'))
+				? styles.selected_rate_card_container : styles.container}
 			role="presentation"
 			onClick={() => (!rate_key ? handlePrefrence(data) : null)}
 		>
 			<div className={styles.left_section_container}>
-				{rate_key ? (priority_key ? `${data?.rowData?.priority}.` : <IcMDrag />) : (
-					<PriorityNumber
-						data={prefrences?.[serviceData?.id]}
-						id={data?.id}
-						showPriority
-					/>
-				)}
+				{handleLeftSectionPriority(rate_key)}
 			</div>
 			<div className={styles.line} />
 			<div className={styles.right_section_container}>
@@ -163,49 +176,49 @@ function Card({
 						</div>
 						<div>
 							{
-								data?.rowData?.origin_locals_price
-									? (
-										<div style={{ display: 'flex' }}>
-											Origin Local Price :
-											&nbsp;
-											<div className={styles.price_value}>
-												{formatAmount({
-													amount   : data?.rowData?.origin_locals_price,
-													currency : data?.rowData?.origin_locals_price_currency,
-													options  : {
-														style                 : 'currency',
-														currencyDisplay       : 'code',
-														maximumFractionDigits : 2,
-													},
-												})}
-											</div>
+							data?.rowData?.origin_locals_price
+								? (
+									<div style={{ display: 'flex' }}>
+										Origin Local Price :
+										&nbsp;
+										<div className={styles.price_value}>
+											{formatAmount({
+												amount   : data?.rowData?.origin_locals_price,
+												currency : data?.rowData?.origin_locals_price_currency,
+												options  : {
+													style                 : 'currency',
+													currencyDisplay       : 'code',
+													maximumFractionDigits : 2,
+												},
+											})}
 										</div>
-									)
-									: null
-							}
+									</div>
+								)
+								: null
+						}
 							{
-								data?.rowData?.origin_locals_price
-									? (
-										<div style={{ display: 'flex' }}>
-											Destination Local Price :
-											&nbsp;
-											<div className={styles.price_value}>
-												{formatAmount({
-													amount   : data?.rowData?.destination_locals_price,
-													currency : data?.rowData?.destination_locals_price_currency,
-													options  : {
-														style                 : 'currency',
-														currencyDisplay       : 'code',
-														maximumFractionDigits : 2,
-													},
-												})}
-
-											</div>
+							data?.rowData?.origin_locals_price
+								? (
+									<div style={{ display: 'flex' }}>
+										Destination Local Price :
+										&nbsp;
+										<div className={styles.price_value}>
+											{formatAmount({
+												amount   : data?.rowData?.destination_locals_price,
+												currency : data?.rowData?.destination_locals_price_currency,
+												options  : {
+													style                 : 'currency',
+													currencyDisplay       : 'code',
+													maximumFractionDigits : 2,
+												},
+											})}
 
 										</div>
-									)
-									: null
-							}
+
+									</div>
+								)
+								: null
+						}
 						</div>
 					</div>
 					<div className={styles.total_price_section}>
@@ -220,7 +233,11 @@ function Card({
 						</div>
 					</div>
 					{isShowSellRate && (
-						<div role="presentation" className={styles.edit_price_section} onClick={handleCardClick}>
+						<div
+							role="presentation"
+							className={styles.edit_price_section}
+							onClick={handleCardClick}
+						>
 							<div className={styles.edit_price_heading}>Sell Rate / Contr.</div>
 							<ShowSellRates
 								data={data}
@@ -233,6 +250,7 @@ function Card({
 
 			</div>
 		</div>
+
 	);
 }
 

@@ -1,7 +1,7 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect } from 'react';
 
-const useListRevenueDeskShowedRates = ({ singleServiceData,shipmentData } = {}) => {
+const useListRevenueDeskShowedRates = ({ singleServiceData, shipmentData } = {}) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'GET',
 		url    : '/list_revenue_desk_showed_rates',
@@ -11,7 +11,7 @@ const useListRevenueDeskShowedRates = ({ singleServiceData,shipmentData } = {}) 
 		try {
 			await trigger({
 				params: {
-					filters                       : { service_id: singleServiceData?.id,shipment_id:shipmentData?.id },
+					filters: { service_id: singleServiceData?.id, shipment_id: shipmentData?.id },
 				},
 			});
 		} catch (err) {
@@ -21,9 +21,9 @@ const useListRevenueDeskShowedRates = ({ singleServiceData,shipmentData } = {}) 
 	useEffect(() => {
 		getList();
 	// eslint-disable-next-line react-hooks/exhaustive-deps
-	}, []);
+	}, [singleServiceData]);
 	return {
-		data:data?.list,
+		data: data?.list,
 		loading,
 	};
 };

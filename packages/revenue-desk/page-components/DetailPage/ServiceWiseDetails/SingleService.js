@@ -60,7 +60,6 @@ function SingleService({
 	(groupedServicesData || []).forEach((data) => {
 		options.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data });
 	});
-
 	useEffect(() => {
 		setSingleServiceData(groupedServicesData[0]);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -152,6 +151,7 @@ function SingleService({
 							setSellRates={setSellRates}
 							sellRates={sellRates}
 							prefrence_key={item?.prefrence_key}
+							loading={ratesLoading}
 						/>
 					))}
 				</>

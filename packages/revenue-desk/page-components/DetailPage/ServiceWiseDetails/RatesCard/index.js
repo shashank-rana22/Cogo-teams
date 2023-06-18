@@ -4,11 +4,12 @@ import { useState } from 'react';
 import EmptyState from '../../../../EmptyState';
 
 import Card from './Card';
+import LoadingCard from './Card/LoadingCard';
 import styles from './styles.module.css';
 
 function RatesCard({
 	ratesData = [], setPrefrences, prefrences, type, serviceData, setSellRates,
-	sellRates,
+	sellRates, loading,
 }) {
 	const [showFullList, setShowFullList] = useState(false);
 	const initialCardCount = 2;
@@ -23,19 +24,23 @@ function RatesCard({
 				{type}
 			</div>
 			<div>
-				{!ratesData?.length && <EmptyState isSmall heading={`No ${type}`} /> }
-				{(renderedCards || [])?.map((item) => (
-					<Card
-						data={item}
-						key={item}
-						prefrences={prefrences}
-						setPrefrences={setPrefrences}
-						serviceData={serviceData}
-						setSellRates={setSellRates}
-						sellRates={sellRates}
-						prefrence_key={type}
-					/>
-				))}
+				{!loading && !ratesData?.length && <EmptyState isSmall heading={`No ${type}`} /> }
+				{loading ? <LoadingCard /> : (
+					<div>
+						{(renderedCards || [])?.map((item) => (
+							<Card
+								data={item}
+								key={item}
+								prefrences={prefrences}
+								setPrefrences={setPrefrences}
+								serviceData={serviceData}
+								setSellRates={setSellRates}
+								sellRates={sellRates}
+								prefrence_key={type}
+							/>
+						))}
+					</div>
+				)}
 			</div>
 			<div style={{ display: 'flex', justifyContent: 'end' }}>
 				{!showFullList && expandable && ratesData?.length > initialCardCount && (

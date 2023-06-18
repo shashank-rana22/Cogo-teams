@@ -1,4 +1,5 @@
 import { Button, Modal } from '@cogoport/components';
+import { useState } from 'react';
 
 import useSendBookingPrefrenceEmail from '../../../../hooks/useSendBookingPrefrenceEmail';
 import Card from '../RatesCard/Card';
@@ -9,19 +10,25 @@ function SelectedRatesCard({
 	prefrences, price, serviceData, setSellRates,
 	sellRates, emailModal, setEmailModal, singleServiceSellRateDetails, shipmentData,
 }) {
+	const [showFullList, setShowFullList] = useState(false);
+	const initialCardCount = 4;
 	const { emailTrigger } = useSendBookingPrefrenceEmail(
 		singleServiceSellRateDetails,
 		shipmentData?.id,
 		shipmentData?.shipment_type,
 	);
-
+	const toggleList = () => {
+		setShowFullList(!showFullList);
+	};
+	const renderedCards = showFullList ? prefrences : prefrences?.slice(0, initialCardCount);
+	const expandable = prefrences?.length > initialCardCount;
 	return (
 		<div className={styles.container}>
 			<div className={styles.upper_section}>
 				<div className={styles.heading}>
 					Selected Rates
 				</div>
-				<div className={styles.text_container}>
+				{/* <div className={styles.text_container}>
 					<div className={styles.text}>
 						Consolidated Buy Price  :
 						<span className={styles.key}> USD 910</span>
@@ -30,7 +37,7 @@ function SelectedRatesCard({
 						Consolidated Profitability :
 						<span className={styles.key}> 1.1 %</span>
 					</div>
-				</div>
+				</div> */}
 				<div className={styles.mailButton}>
 					{shipmentData?.shipment_type === 'fcl_freight' ? (
 						<Button onClick={() => { setEmailModal(true); }} size="sm" theme="primary">
@@ -40,19 +47,29 @@ function SelectedRatesCard({
 				</div>
 			</div>
 			<div className={styles.lower_section}>
-				{prefrences?.map((singleItem) => (
+				{renderedCards?.map((singleItem) => (
 					<div key={singleItem}>
 						<Card
 							data={singleItem?.data}
-							rate_key
+							rate_key="selected_rate"
 							fromkey={singleItem?.key}
 							price={price}
 							serviceData={serviceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}
+							priority_no={singleItem?.priority}
 						/>
 					</div>
 				))}
+				<div style={{ display: 'flex', justifyContent: 'end' }}>
+					{!showFullList && expandable && prefrences?.length > initialCardCount && (
+						<Button size="md" themeType="link" onClick={toggleList}>See More</Button>
+					)}
+
+					{showFullList && (
+						<Button size="md" themeType="link" onClick={toggleList}>See Less</Button>
+					)}
+				</div>
 			</div>
 
 			<Modal size="md" show={emailModal} onClose={() => { setEmailModal(false); }} placement="top">

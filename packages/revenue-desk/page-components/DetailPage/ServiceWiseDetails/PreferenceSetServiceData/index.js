@@ -3,11 +3,11 @@ import getFormatedPreferenceSetData from '../../../../helper/getFormatedPreferen
 import useListRevenueDeskShowedRates from '../../../../hooks/useListRevenueDeskShowedRates';
 import useListShipmentBookingConfirmationPreferences from
 	'../../../../hooks/useListShipmentBookingConfirmationPreferences';
-import Card from '../RatesCard/Card';
 
+import RatesCards from './RateCards';
 import styles from './styles.module.css';
 
-function PreferenceSetServiceData({ singleServiceData, price, shipmentData }) {
+function PreferenceSetServiceData({ singleServiceData, shipmentData }) {
 	const { data:allPreferenceCardsData, loading } = useListShipmentBookingConfirmationPreferences({
 		singleServiceData,
 		shipmentData,
@@ -20,14 +20,24 @@ function PreferenceSetServiceData({ singleServiceData, price, shipmentData }) {
 	const formaredAvailableRatesData = getFormatedNotPreferenceData({ ratesDataNotPrefered, singleServiceData });
 	return (
 		<div className={styles.container}>
-			<div className={styles.heading}>Preference Set</div>
-			{(formatedData?.rows || [])?.map((item) => (
-				<Card data={item} rate_key serviceData={singleServiceData} price={price} priority_key key={item?.id} />
-			))}
-			<div className={styles.heading}>Available Rates At that Time of Setting Preference</div>
-			{(formaredAvailableRatesData?.rows || [])?.map((item) => (
-				<Card data={item} rate_key serviceData={singleServiceData} price={price} key={item?.id} />
-			))}
+			<div>
+				<div className={styles.heading}>Preference Set</div>
+				<RatesCards
+					data={formatedData}
+					singleServiceData={singleServiceData}
+					rate_key="preferences_rate"
+					loading={loading}
+				/>
+			</div>
+			<div>
+				<div className={styles.heading}>Available Rates At that Time of Setting Preference</div>
+				<RatesCards
+					data={formaredAvailableRatesData}
+					singleServiceData={singleServiceData}
+					rate_key="not_preferences_rate"
+					loading={show_rates_loading}
+				/>
+			</div>
 		</div>
 	);
 }

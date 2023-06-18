@@ -5,7 +5,9 @@ import styles from './styles.module.css';
 function SingleSelectedCard({ data, index, shipmentType }) {
 	const showData = (val) => val || '';
 	return (
-		<div className={styles.container}>
+		<div className={Number(data?.rowData?.profit_percentage) > 0
+			? styles.positive_profit_container : styles.negative_profit_container}
+		>
 			<div className={styles.left_section_container}>
 				{index + 1}
 				.
