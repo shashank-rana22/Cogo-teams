@@ -1,7 +1,8 @@
 import getFormatedNotPreferenceData from '../../../../helper/getFormatedNotPreferenceData';
 import getFormatedPreferenceSetData from '../../../../helper/getFormatedPreferenceSetData';
 import useListRevenueDeskShowedRates from '../../../../hooks/useListRevenueDeskShowedRates';
-import useListShipmentBookingConfirmationPreferences from '../../../../hooks/useListShipmentBookingConfirmationPreferences';
+import useListShipmentBookingConfirmationPreferences from
+	'../../../../hooks/useListShipmentBookingConfirmationPreferences';
 import Card from '../RatesCard/Card';
 
 import styles from './styles.module.css';

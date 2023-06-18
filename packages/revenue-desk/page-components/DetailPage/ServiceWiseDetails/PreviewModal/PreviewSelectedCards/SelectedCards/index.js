@@ -1,6 +1,6 @@
 import SingleSelectedCard from './SingleSelectedCard';
 
-function SelectedCards({ prefrences, price, shipmentType }) {
+function SelectedCards({ prefrences, shipmentType }) {
 	return (
 		<div>
 			{prefrences?.map((Singleitem, index) => (
@@ -8,7 +8,6 @@ function SelectedCards({ prefrences, price, shipmentType }) {
 					<SingleSelectedCard
 						data={Singleitem?.data}
 						index={index}
-						price={price}
 						shipmentType={shipmentType}
 					/>
 				</div>

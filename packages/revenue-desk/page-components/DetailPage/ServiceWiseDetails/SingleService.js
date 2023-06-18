@@ -101,7 +101,7 @@ function SingleService({
 		<div>
 
 			<div style={{ margin: '16px 0' }}>
-				{options.length > 2 && (
+				{options.length > 1 && (
 					<Select
 						options={options}
 						value={singleServiceData}
