@@ -20,7 +20,7 @@ function KebabContent({
 						<div style={{ width: '100%' }}>
 							<ClickableDiv
 								className={styles.text}
-								onClick={() => handleSetter('edit_invoice')}
+								onClick={() => handleSetter('isEditInvoice')}
 							>
 								Edit Invoices
 							</ClickableDiv>
@@ -31,7 +31,7 @@ function KebabContent({
 					<div>
 						<ClickableDiv
 							className={styles.text}
-							onClick={() => handleSetter('change_currency')}
+							onClick={() => handleSetter('changeCurrency')}
 						>
 							Change Currency
 						</ClickableDiv>
@@ -40,7 +40,7 @@ function KebabContent({
 
 					<ClickableDiv
 						className={styles.text}
-						onClick={() => handleSetter('add_remark')}
+						onClick={() => handleSetter('addRemark')}
 					>
 						Add Remarks
 					</ClickableDiv>
@@ -50,7 +50,7 @@ function KebabContent({
 							<div className={styles.line} />
 							<ClickableDiv
 								className={styles.text}
-								onClick={() => handleSetter('payment_mode')}
+								onClick={() => handleSetter('paymentMode')}
 							>
 								Change Payment Mode
 							</ClickableDiv>
@@ -70,7 +70,7 @@ function KebabContent({
 					</ClickableDiv>
 					<div className={styles.line} />
 					<ClickableDiv
-						onClick={() => handleSetter('rate_sheet')}
+						onClick={() => handleSetter('rateSheet')}
 						className={styles.text}
 					>
 						Exchange Rate Sheet
@@ -80,7 +80,7 @@ function KebabContent({
 						<div className={styles.line} />
 						<ClickableDiv
 							className={styles.text}
-							onClick={() => handleSetter('add_customer_invoice')}
+							onClick={() => handleSetter('addCustomerInvoice')}
 						>
 							{isEmpty(invoice?.customer_ftl_invoice) ? 'Add' : 'Download'}
 								&nbsp;
@@ -90,7 +90,7 @@ function KebabContent({
 						{CUSTOMER_INVOICE_STATUSES.includes(invoice?.status) ? (
 							<ClickableDiv
 								className={styles.text}
-								onClick={() => handleSetter('update_customer_invoice')}
+								onClick={() => handleSetter('updateCustomerInvoice')}
 							>
 								Update Customer Invoice
 							</ClickableDiv>
@@ -103,7 +103,7 @@ function KebabContent({
 					<div className={styles.line} />
 					<ClickableDiv
 						className={styles.text}
-						onClick={() => handleSetter('fill_portal_data')}
+						onClick={() => handleSetter('fillPortalData')}
 					>
 						Fill Shipment Data For Customer Portal
 					</ClickableDiv>
