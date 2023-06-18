@@ -1,0 +1,9 @@
+.modal_container{
+    /* background-color: aqua; */
+    :global{
+        .ui_modal_header_container{
+            padding: 0 16px !important;
+            font-size: 10px;
+        }
+    }
+}

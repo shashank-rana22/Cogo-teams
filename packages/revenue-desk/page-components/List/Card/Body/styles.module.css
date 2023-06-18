@@ -4,9 +4,8 @@
 }
 
 .left_section{
-    width:56%;
+    width:50%;
     border-right: 1px dashed #BDBDBD;
-
 }
 
 .heading{
@@ -19,14 +18,15 @@
     font-weight: 500;
     font-size: 12px;
     color: #333333;
-    margin-left: 12px;
+}
+.text1{
+    margin-right: 12px;
 }
 
 .port_pair_container{
     display: flex;
     align-items: center;
     justify-content: space-between;
-    /* padding:0 36px 16px 0; */
 }
 
 .origin_code,.destination_code{
@@ -41,8 +41,8 @@
 
 .port_name{
     font-weight: 600;
-font-size: 16px;
-color:#4F4F4F
+    font-size: 16px;
+    color:#4F4F4F
 }
 
 .country_name{

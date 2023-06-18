@@ -3,6 +3,7 @@ import { Sop, SopOld } from '@cogoport/ocean-modules';
 import { useState } from 'react';
 
 import POCDetails from './POCDetails';
+import styles from './styles.module.css';
 
 function PocSopModal({ itemData }) {
 	const [activePocTab, setActivePocTab] = useState('poc');
@@ -10,7 +11,14 @@ function PocSopModal({ itemData }) {
 	return (
 		<div>
 			<Button size="md" themeType="secondary" onClick={() => setShowPocSop(true)}>POC & SOP</Button>
-			<Modal size="xl" show={showPocSop === true} onClose={() => setShowPocSop(false)} placement="center">
+			<Modal
+				size="xl"
+				show={showPocSop === true}
+				onClose={() => setShowPocSop(false)}
+				placement="center"
+				className={styles.modal_container}
+			>
+				<Modal.Header title="POC & SOP" />
 				<Modal.Body>
 					<Tabs
 						activeTab={activePocTab}
