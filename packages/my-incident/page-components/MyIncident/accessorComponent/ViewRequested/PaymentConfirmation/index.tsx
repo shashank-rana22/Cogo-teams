@@ -6,11 +6,9 @@ import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
-function PaymentConfirmation({ itemData, setRemarks, remarks, onSave, showModal, setShowModal, loadingOnSave,
-}) {
-	
-	const { status, userNotes,data } = itemData || {};
-	const {paymentConfirmationRequest,organization} = data || {};
+function PaymentConfirmation({ itemData, setRemarks, remarks, onSave, showModal, setShowModal, loadingOnSave }) {
+	const { status, userNotes, data } = itemData || {};
+	const { paymentConfirmationRequest, organization } = data || {};
 
 	const [inputValues, setInputValues] = useState({
 		remarks: null,
@@ -61,9 +59,9 @@ function PaymentConfirmation({ itemData, setRemarks, remarks, onSave, showModal,
 	return (
 		<div>
 			<div>
-			{status === 'REJECTED'
-				? <Button size="sm" themeType="tertiary" onClick={() => { setShowModal(true); }}>View</Button>
-				: <Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>}
+				{status === 'REJECTED'
+					? <Button size="sm" themeType="tertiary" onClick={() => { setShowModal(true); }}>View</Button>
+					: <Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>}
 			</div>
 			{showModal && (
 				<Modal
@@ -105,19 +103,19 @@ function PaymentConfirmation({ itemData, setRemarks, remarks, onSave, showModal,
 						</div>
 
 					</Modal.Body>
-						<Modal.Footer>
-							<div className={styles.button}>
-								<Button
-									themeType="secondary"
-									size="md"
-									style={{ marginRight: '8px' }}
-									disabled={!(remarks.length > 0) || loadingOnSave}
-									onClick={() => { onSave();	}}
-								>
-									Save
-								</Button>
-							</div>
-						</Modal.Footer>
+					<Modal.Footer>
+						<div className={styles.button}>
+							<Button
+								themeType="secondary"
+								size="md"
+								style={{ marginRight: '8px' }}
+								disabled={!(remarks.length > 0) || loadingOnSave}
+								onClick={() => { onSave();	}}
+							>
+								Save
+							</Button>
+						</div>
+					</Modal.Footer>
 				</Modal>
 			)}
 		</div>

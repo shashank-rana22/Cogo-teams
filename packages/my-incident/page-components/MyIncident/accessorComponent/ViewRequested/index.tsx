@@ -8,10 +8,10 @@ import AdvanceSecurityDepositRefundModal from './AdvanceSecurityDepositRefundMod
 import BankDatailsModal from './BankDetailsModal';
 import IcJvApproval from './IcJvApproval';
 import JournalVoucher from './JournalVoucher';
+import PaymentConfirmation from './PaymentConfirmation';
 import RequestCN from './RequestCN';
 import SettlementModal from './SettlementModal';
 import TdsDeviationModal from './TdsDeviationModal';
-import PaymentConfirmation from './PaymentConfirmation';
 
 function ViewRequested({ itemData, name, refetch }) {
 	const [remarks, setRemarks] = useState('');
@@ -111,18 +111,18 @@ function ViewRequested({ itemData, name, refetch }) {
 					loadingOnSave={loadingOnSave}
 				/>
 			);
-			case 'PAYMENT_CONFIRMATION_APPROVAL':
-				return(
-					<PaymentConfirmation 
-						itemData={itemData} 
-						setRemarks={setRemarks}
-						remarks={remarks} 
-						onSave={onSave}
-						showModal={showModal}
-						setShowModal={setShowModal}
-						loadingOnSave={loadingOnSave}
-					/>
-				)
+		case 'PAYMENT_CONFIRMATION_APPROVAL':
+			return (
+				<PaymentConfirmation
+					itemData={itemData}
+					setRemarks={setRemarks}
+					remarks={remarks}
+					onSave={onSave}
+					showModal={showModal}
+					setShowModal={setShowModal}
+					loadingOnSave={loadingOnSave}
+				/>
+			);
 		case 'ADVANCE_SECURITY_DEPOSIT':
 			return (
 				<AdvanceSecurityDepositModal
