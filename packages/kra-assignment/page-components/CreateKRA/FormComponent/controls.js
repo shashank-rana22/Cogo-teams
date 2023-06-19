@@ -177,11 +177,12 @@ const getControls = ({ setSelectedValue }) => ([
 					},
 				],
 			},
+
 			{
 				label : 'Anything else?',
 				name  : 'description',
 				type  : 'textarea',
-				rows  : 4,
+				rows  : 3,
 			},
 			{
 				name        : 'target_value',
@@ -189,6 +190,21 @@ const getControls = ({ setSelectedValue }) => ([
 				label       : 'Enter a Target Value for the KRA',
 				placeholder : '0',
 				rules       : { required: 'Score is required' },
+			},
+			{
+				name    : 'is_rating_schema_in_percentage',
+				type    : 'radioGroup',
+				label   : 'Is rating schema in %',
+				options : [
+					{
+						value : 'yes',
+						label : 'Yes',
+					},
+					{
+						value : 'no',
+						label : 'No',
+					},
+				],
 			},
 			{
 				name        : 'rating_1',
@@ -224,21 +240,6 @@ const getControls = ({ setSelectedValue }) => ([
 				label       : 'Rating 5 for: ',
 				placeholder : '0',
 				rules       : { required: 'Rating 5 is required' },
-			},
-			{
-				name    : 'is_rating_schema_in_percentage',
-				type    : 'radioGroup',
-				label   : 'Is rating schema in %',
-				options : [
-					{
-						value : 'yes',
-						label : 'Yes',
-					},
-					{
-						value : 'no',
-						label : 'No',
-					},
-				],
 			},
 
 		],
