@@ -15,20 +15,25 @@
 .section{
     display: flex;
     flex-direction: row;
-    justify-content: center;
+    justify-content: space-between;
 }
 .section_left{
     width: 70%;
-    padding: 10px;
+    padding: 6px 10px;
+    margin-top: 14px;
+    background-color: white;
+    border-radius: 6px;
+    box-shadow: 0 0 4px rgba(44,62,80,.3);
 }
 
 .section_right{
-    width: 30%;
+    width: 29%;
     background-color: white;
     margin-top: 14px;
     padding: 8px;
     height: fit-content;
     border-radius: 6px;
+    box-shadow: 0 0 4px rgba(44,62,80,.3);
 }
 
 .table_display{
