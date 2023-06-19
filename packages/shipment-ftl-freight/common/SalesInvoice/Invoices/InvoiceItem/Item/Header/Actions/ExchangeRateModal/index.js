@@ -8,8 +8,7 @@ import fields from './fields';
 import styles from './styles.module.css';
 
 function ExchangeRateModal({
-	show = false,
-	setShow = () => {},
+	setShowModal = () => {},
 	invoice = {},
 }) {
 	const { loading, data } = useGetAllExchangeRates({
@@ -35,8 +34,8 @@ function ExchangeRateModal({
 
 	return (
 		<Modal
-			show={show}
-			onClose={() => setShow(false)}
+			show
+			onClose={() => setShowModal(false)}
 			loading={loading}
 			showCloseIcon={false}
 			closeOnOuterClick={false}
@@ -54,7 +53,7 @@ function ExchangeRateModal({
 				<CardList fields={fields} data={list} loading={loading} />
 			</Modal.Body>
 			<Modal.Footer>
-				<Button themeType="secondary" onClick={() => setShow(false)}>Close</Button>
+				<Button themeType="secondary" onClick={() => setShowModal(false)}>Close</Button>
 			</Modal.Footer>
 		</Modal>
 	);
