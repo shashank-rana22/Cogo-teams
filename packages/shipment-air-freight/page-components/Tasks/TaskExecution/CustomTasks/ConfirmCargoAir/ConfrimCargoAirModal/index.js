@@ -32,7 +32,7 @@ function ConfirmCargoAirModal({
 	} = useForm({ controls });
 
 	const agent = watch('contact_with_agent');
-	const noOfStops1 = watch('no_of_stops1');
+	const noOfStops1 = Number(watch('no_of_stops1'));
 
 	if (noOfStops1 > ZERO_STOPPAGE) {
 		controls.flight_number = {};
@@ -41,12 +41,6 @@ function ConfirmCargoAirModal({
 			...controls.flight_number,
 		};
 	}
-
-	useEffect(() => {
-		if (noOfStops1 > ZERO_STOPPAGE) {
-			clearErrors('flight_number');
-		}
-	}, [noOfStops1]);
 
 	const STOP_CONTROLS = [];
 	const MIDDLE_CONTROLS = [];
@@ -70,9 +64,15 @@ function ConfirmCargoAirModal({
 	};
 
 	useEffect(() => {
+		if (noOfStops1 > ZERO_STOPPAGE) {
+			clearErrors('flight_number');
+		}
+	}, [noOfStops1]);
+
+	useEffect(() => {
 		let newStopsValue = [];
 		if (task.task === 'update_flight_details') {
-			if (!noOfStops1) {
+			if (noOfStops1 === ZERO_STOPPAGE) {
 				newStopsValue = [];
 			} else if (noOfStops1) {
 				for (let i = 0; i <= noOfStops1; i += FOR_LOOP_INCREMENT_VALUE) {

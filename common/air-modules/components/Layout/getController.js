@@ -12,6 +12,7 @@ import {
 	ToggleController,
 	InputGroupController,
 	CreatableSelectController,
+	RadioGroupController,
 } from '@cogoport/forms';
 
 const getElementController = (type) => {
@@ -60,6 +61,9 @@ const getElementController = (type) => {
 
 		case 'creatable-select':
 			return CreatableSelectController;
+
+		case 'radio':
+			return RadioGroupController;
 
 		default:
 			return null;
