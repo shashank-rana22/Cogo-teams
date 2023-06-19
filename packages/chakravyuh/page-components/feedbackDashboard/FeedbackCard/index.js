@@ -5,13 +5,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const DECIMAL_POSITION = 2;
+const ROUND_OFF = 2;
 
 const INFO_KEYS = ['container_type', 'container_size', 'commodity'];
 
 const checkNumber = (val) => {
 	if (Number.isNaN(Number(val))) { return 'Not Available'; }
-	return Number(val).toFixed(DECIMAL_POSITION);
+	return Number(val).toFixed(ROUND_OFF);
 };
 
 function FeedbackCard({ data = {} }) {
@@ -79,7 +79,7 @@ function FeedbackCard({ data = {} }) {
 			<div className={styles.sub_container}>
 				<div>
 					<p className={styles.label}>Disliked rate</p>
-					{Number(old_price).toFixed(DECIMAL_POSITION)}
+					{Number(old_price).toFixed(ROUND_OFF)}
 				</div>
 				<div>
 					<p className={styles.label}>Disliked by</p>

@@ -9,7 +9,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const type = ['seaport'];
+const TYPE = ['seaport'];
 
 const sourceTypes = [
 	{
@@ -31,12 +31,12 @@ const getCommodityOptions = (container_type) => {
 
 function Filters({ filters, setFilters }) {
 	const originLocationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type } },
+		params   : { filters: { type:TYPE } },
 		includes : { default_params_required: true },
 		labelKey : 'display_name',
 	}));
 	const originDestinationOptions = useGetAsyncOptions(merge(asyncFieldsLocations(), {
-		params   : { filters: { type } },
+		params   : { filters: { type:TYPE } },
 		labelKey : 'display_name',
 	}));
 
