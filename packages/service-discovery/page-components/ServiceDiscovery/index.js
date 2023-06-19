@@ -1,6 +1,6 @@
 import React from 'react';
 
-import SpotSearch from './Spot-Search';
+import SpotSearch from './SpotSearch';
 import styles from './styles.module.css';
 
 function ServiceDiscovery() {
