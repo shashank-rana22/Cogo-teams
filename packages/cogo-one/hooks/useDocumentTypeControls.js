@@ -68,6 +68,9 @@ const useDocumentTypeControls = ({
 			controlType : 'select',
 			placeholder : 'Select Pending Tasks',
 			value       : '',
+			rules       : {
+				required: '*This is required',
+			},
 			renderLabel : (item) => `${startCase(item?.document_type)}`,
 			...(watchListShipment !== '' ? listShipmentsPendingTasks : []),
 			options     : filteredOptions,
