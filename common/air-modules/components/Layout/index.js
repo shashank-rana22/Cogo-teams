@@ -11,7 +11,14 @@ const TOTAL_SPAN = 12;
 const ZERO_SPAN = 0;
 
 function Layout({
-	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
+	control = {},
+	fields = [],
+	showElements = {},
+	errors, customValues = {},
+	formValues = {},
+	shipment_id = '',
+	showAddButtons = true,
+	showDeleteButton = true,
 }) {
 	const TOTAL_FIELDS = [];
 	let ROW_WISE_FIELDS = [];
@@ -86,6 +93,8 @@ function Layout({
 										shipment_id={shipment_id}
 										error={errors?.[field?.name]}
 										{...field}
+										showDeleteButton={showDeleteButton}
+										showAddButtons={showAddButtons}
 									/>
 								</div>
 							);

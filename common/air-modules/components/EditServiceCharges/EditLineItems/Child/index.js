@@ -1,3 +1,4 @@
+import { IcMDelete } from '@cogoport/icons-react';
 import { useMemo } from 'react';
 
 import Item from '../../../Layout/Item';
@@ -7,6 +8,7 @@ import styles from './styles.module.css';
 const TOTAL_SPAN = 12;
 const FLEX_HUNDRED = 100;
 const FLEX_ONE = 1;
+const FIRST_INDEX = 1;
 
 function Child({
 	control,
@@ -14,7 +16,9 @@ function Child({
 	index,
 	name = '',
 	field = {},
+	remove = () => {},
 	customValues = {},
+	showDeleteButton = true,
 	error = {},
 }) {
 	const keys = useMemo(
@@ -50,6 +54,11 @@ function Child({
 						/>
 					);
 				})}
+				{showDeleteButton ? (
+					<div className={styles.delete_button_container}>
+						<IcMDelete width={20} height={20} onClick={() => remove(index, FIRST_INDEX)} />
+					</div>
+				) : null}
 
 			</div>
 		</div>

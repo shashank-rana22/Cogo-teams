@@ -58,6 +58,8 @@ function EditQuotations({
 				errors={errors}
 				customValues={CUSTOM_VALUES}
 				shipment_id={shipment_id}
+				showAddButtons={false}
+				showDeleteButton={false}
 			/>
 
 			<div className={styles.button_container}>
