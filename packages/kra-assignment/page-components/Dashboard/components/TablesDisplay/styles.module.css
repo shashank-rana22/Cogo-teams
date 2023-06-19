@@ -1,2 +1,9 @@
-.container{
+.accordian {
+  max-height: 300px;
+  overflow-y: scroll;
+}
+
+.container {
+  max-height: 400px;
+  overflow-y: scroll;
 }

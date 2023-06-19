@@ -287,6 +287,11 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
+		{
+			api          : 'get_kras_assigned',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

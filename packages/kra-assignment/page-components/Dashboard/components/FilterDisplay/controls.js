@@ -2,7 +2,7 @@ const controls = [
 	{
 		name        : 'employee_id',
 		label       : 'Employee',
-		placeholder : 'Select Employee',
+		placeholder : 'Select',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_employees',
 		valueKey    : 'id',
@@ -18,7 +18,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_roles',
 		label       : 'Roles',
-		placeholder : 'Roles',
+		placeholder : 'Select',
 		multiple    : true,
 		// onChange    : (_, e) => {
 		// 	setSelectedValue((pv) => ({
@@ -40,7 +40,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_tribes',
 		label       : 'Tribes',
-		placeholder : 'Tribes',
+		placeholder : 'Select',
 		multiple    : true,
 		params      : {
 			filters: {
@@ -57,7 +57,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_squads',
 		label       : 'Squads',
-		placeholder : 'Squads',
+		placeholder : 'Select',
 		multiple    : true,
 		params      : {
 			filters: {
@@ -74,7 +74,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_chapters',
 		label       : 'Chapters',
-		placeholder : 'Chapters',
+		placeholder : 'Select',
 		multiple    : true,
 		params      : {
 			filters: {
@@ -91,7 +91,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_sub_chapters',
 		label       : 'Sub chapter',
-		placeholder : 'Sub chapter',
+		placeholder : 'Select',
 		multiple    : true,
 		params      : {
 			filters: {

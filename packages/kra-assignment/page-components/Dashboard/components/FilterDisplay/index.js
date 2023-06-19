@@ -47,11 +47,6 @@ function FiltersDisplay({ setFilters }) {
 			<div className={styles.filter_container}>
 				{controls.map((item) => {
 					const { label, type, name } = item || {};
-
-					// if (name === 'current_status' && activeTab === 'question_set') {
-					// 	return null;
-					// }
-
 					const Element = getElementController(type);
 
 					return (
