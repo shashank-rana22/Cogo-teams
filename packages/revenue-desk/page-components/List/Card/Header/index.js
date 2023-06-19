@@ -65,7 +65,8 @@ function Header({ data }) {
 					) : null}
 				</div>
 			</div>
-			<div style={{ color: 'red', display: 'flex', alignItems: 'center' }}>
+
+			<div style={{ color: 'red', display: 'flex', alignItems: 'center', width: '20%' }}>
 				<IcMTimer fill="red" width="15" height="15" />
 				<div style={{ marginLeft: '3px' }}>
 					{format(data?.confirmed_by_importer_exporter_at, 'hh')}
@@ -75,7 +76,6 @@ function Header({ data }) {
 					{format(data?.confirmed_by_importer_exporter_at, 'mm')}
 					{' '}
 					mins
-
 					left
 				</div>
 			</div>

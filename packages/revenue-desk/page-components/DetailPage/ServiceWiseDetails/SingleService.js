@@ -62,7 +62,7 @@ function SingleService({
 	});
 	useEffect(() => {
 		setSingleServiceData(groupedServicesData[0]);
-	// eslint-disable-next-line react-hooks/exhaustive-deps
+		// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, [JSON.stringify(groupedServicesData)]);
 
 	const currentFormatedrates = getFormatedRates('current', ratesData?.flashed_rates, singleServiceData);

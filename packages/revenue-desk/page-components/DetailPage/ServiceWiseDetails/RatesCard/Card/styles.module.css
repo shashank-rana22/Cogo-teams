@@ -187,5 +187,10 @@
 	font-weight: 400;
 	color: #828282;
 	margin-left: 10px;
-	align-items: center;
+}
+.source{
+	font-size:12px;
+	font-weight: 600;
+	color: #454545;
+	margin-left: 10px;
 }
