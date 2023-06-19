@@ -25,3 +25,8 @@
 .search_div {
 	width: 24%;
 }
+
+.toggle_Div {
+	display: flex;
+	align-items: center;
+}
