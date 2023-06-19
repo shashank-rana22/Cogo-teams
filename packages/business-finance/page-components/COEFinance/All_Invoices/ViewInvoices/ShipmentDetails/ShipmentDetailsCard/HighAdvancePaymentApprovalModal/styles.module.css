@@ -64,3 +64,20 @@
         margin-inline: 5px
     }
 }
+
+.button_wrap {
+    display: flex;
+	justify-content: flex-end;
+}
+	
+.location {
+	width: 25%;
+	margin: 6px 0;
+}
+
+.form_item_container {
+    width: 25%;
+	/* margin: 6px 0; */
+    margin-top : 6px;
+    margin-left : 10px;
+}

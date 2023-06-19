@@ -36,6 +36,7 @@ interface SellerDetailInterface {
 	organizationName?: string;
 	registrationNumber?: string;
 	taxNumber?: string;
+	organizationId?: string,
 }
 
 interface SellerBankDetailInterface {

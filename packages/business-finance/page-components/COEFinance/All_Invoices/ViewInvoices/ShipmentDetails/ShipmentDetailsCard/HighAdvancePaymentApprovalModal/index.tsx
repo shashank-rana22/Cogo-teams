@@ -1,4 +1,5 @@
 import { Button, ButtonIcon, Modal } from '@cogoport/components';
+import { UploadController, InputController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
@@ -6,12 +7,12 @@ import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
 import { useGetAdvancedPaymentHistory } from '../../../../../hook/useGetAdvancedPaymentHistory';
-import useShipmentDocument from '../../../../../hook/useShipmentDocument';
 
 import styles from './styles.module.css';
 
 function HighAmountRequestModal({ invoiceData, modalData }) {
 	const {
+
 		invoiceNumber,
 		serialNumber,
 		invoiceUploadDate,
@@ -19,17 +20,26 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 		totalInvoiceValue,
 		advancedAmountValue,
 		sellerOrganizationId,
-		outstandingDocument,
+		advancedPaymentObj,
 	} = invoiceData || {};
+
+	const advancePaymentProof = (advancedPaymentObj?.[0] || [])?.document_url;
 
 	const { show, hide } = modalData;
 
 	const { loading, data } = useGetAdvancedPaymentHistory({ sellerOrganizationId });
-	const { data: documentData, loading:documentLoading } = useShipmentDocument(serialNumber);
+
+	// console.log(advancePaymentProof, 'advancePaymentProof');
+
+	// const { data: documentData, loading:documentLoading } = useShipmentDocument(serialNumber);
 
 	const paymentHistory = data;
 
-	console.log({ documentData });
+	// console.log({ documentData });
+
+	const { control, formState:{ errors = {} }, handleSubmit } = useForm();
+
+	console.log(errors, handleSubmit);
 
 	return (
 		<Modal
@@ -138,15 +148,72 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 					</>
 				) : null}
 
-				<div className={styles.user_input_row}>
-					Outstanding Proforma Approval
-					<ButtonIcon
-						size="sm"
-						icon={<IcMDownload />}
-						disabled={documentLoading}
-						onClick={() => window.open(outstandingDocument)}
-						themeType="primary"
-					/>
+				{advancePaymentProof
+				&& (
+					<div>
+						<div className={styles.user_input_row}>
+							Advance Payment Proof
+							<ButtonIcon
+								size="sm"
+								icon={<IcMDownload />}
+							// disabled={documentLoading}
+								onClick={() => window.open(advancePaymentProof)}
+								themeType="primary"
+							/>
+						</div>
+
+						<div className={styles.form_item_container}>
+							<label>Remark</label>
+							<InputController
+								size="sm"
+								control={control}
+								name="email"
+								rules={{ required: { value: true, message: 'Remark is Required' } }}
+							/>
+							{/* {Error('email')} */}
+						</div>
+					</div>
+
+				)}
+
+				{!advancePaymentProof && (
+					<form>
+						<div style={{ display: 'flex' }}>
+							<div className={styles.location}>
+								<label>Upload Document</label>
+								<UploadController
+									size="sm"
+									control={control}
+									name="upload"
+									rules={{ required: { value: true, message: 'Upload Supporting document' } }}
+								/>
+								{/* {Error('origin_location_id')} */}
+							</div>
+
+							<div className={styles.form_item_container}>
+								<label>Remark</label>
+								<InputController
+									size="sm"
+									control={control}
+									name="email"
+									rules={{ required: { value: true, message: 'Remark is Required' } }}
+								/>
+								{/* {Error('email')} */}
+							</div>
+						</div>
+					</form>
+				)}
+
+				<div className={styles.button_wrap}>
+					<Button
+						className="secondary md"
+						style={{ marginRight: '10px' }}
+					>
+						Reject
+					</Button>
+					<Button className="primary md">
+						Aprrove
+					</Button>
 				</div>
 
 			</Modal.Body>

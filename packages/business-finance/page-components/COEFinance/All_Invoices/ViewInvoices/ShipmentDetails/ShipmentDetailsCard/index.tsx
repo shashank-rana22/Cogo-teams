@@ -7,7 +7,7 @@ import {
 	Textarea,
 	Checkbox,
 } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+// import { getFormattedPrice } from '@cogoport/forms';
 import { IcCFtick, IcMCrossInCircle, IcMInfo } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -15,7 +15,9 @@ import React, { useState } from 'react';
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
-import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
+// import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
+import useListShipment from '../../../../hook/useListShipment';
+import useShipmentDocument from '../../../../hook/useShipmentDocument';
 import isDisabled from '../../../../utils/isDisabled';
 
 import HighAmountRequestModal from './HighAdvancePaymentApprovalModal';
@@ -86,7 +88,7 @@ function ShipmentDetailsCard({
 		outstandingDocument = '',
 		paymentType = '',
 		isIncidental = '',
-		advancedAmountCurrency = '',
+		// advancedAmountCurrency = '',
 		serialId = '',
 		advancedAmount = '0',
 	} = billAdditionalObject || {};
@@ -126,6 +128,15 @@ function ShipmentDetailsCard({
 		}
 	}
 
+	const { data: shipmentData } = useListShipment(serialId);
+	const dataList = shipmentData?.list[0] || {};
+
+	const shipmentId = dataList?.id || '';
+
+	const { data : shipmentDocData } = useShipmentDocument(shipmentId);
+
+	const advancedPaymentObj = shipmentDocData?.list.filter((item) => item?.document_type === 'high_advance_payment_proof');
+
 	const handleClickUndo = (id: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
 		setShowValue(undoApprovedData);
@@ -148,9 +159,9 @@ function ShipmentDetailsCard({
 		}));
 	};
 
-	// const viewDocument = (document) => {
-	// 	window.open(document);
-	// };
+	const viewDocument = (document) => {
+		window.open(document);
+	};
 	const onClose = () => {
 		if (Object.keys(showRejected).includes('1')) {
 			setRemarksVal({ ...remarksVal, collectionPartyRemark: null });
@@ -182,7 +193,7 @@ function ShipmentDetailsCard({
 					invoice             : billDocumentUrl,
 					totalInvoiceValue   : grandTotal,
 					advancedAmountValue : advancedAmount,
-					outstandingDocument,
+					advancedPaymentObj,
 					sellerOrganizationId,
 				}}
 				modalData={{ show: showHighAdvanceModal, hide: () => setShowHighAdvancedModal(false) }}
@@ -736,41 +747,14 @@ function ShipmentDetailsCard({
 												{' '}
 												<span>{placeOfSupply}</span>
 											</div>
-											{shipmentType === 'ftl_freight' && outstandingDocument
-											&& (
-												<div className={styles.document}>
-													Advance amount -
-													{((+advancedAmount / +grandTotal) * 100).toFixed(2)}
-													%
-													{' '}
-													(
-													{advancedAmount}
-													/
-													{grandTotal}
-													)
 
-													{!!outstandingDocument && (
-														<Button
-															className={styles.button}
-															onClick={() => {
-																// viewDocument(outstandingDocument);
-																setShowHighAdvancedModal(true);
-															}}
-														>
-															View
-
-														</Button>
-													)}
-
-												</div>
-											)}
 											{shipmentType === 'ftl_freight'
-											&& billType === 'CREDIT_NOTE' && reasonForCN
+											&& billType === 'BILL' && 		isIncidental
 											&& (
 												<div className={styles.margin_bottom}>
-													Reason For CN -
+													Is Incidental-
 													{' '}
-													<span>{startCase(reasonForCN)}</span>
+													<span>{startCase(isIncidental)}</span>
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
@@ -783,33 +767,54 @@ function ShipmentDetailsCard({
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
-											&& billType === 'BILL'
-												&& !!advancedAmount
-											&& (
-												<div className={styles.advanced_amount}>
-													Advanced Amount -
-													{' '}
-													<div className={styles.text_decoration}>
+				                                    	&& (
+					                         <div className={styles.document}>
+						Advance amount -
+						{((+advancedAmount / +grandTotal) * 100).toFixed(2)}
+						%
+						{' '}
+						(
+						{advancedAmount}
+						/
+						{grandTotal}
+						)
 
-														<div className={styles.values}>
-															{showOverflowingNumber(getFormattedPrice(
-																advancedAmount,
-																advancedAmountCurrency,
-															) || 0, 10)}
-														</div>
+						<Button
+							className={styles.button}
+							onClick={() => {
+								setShowHighAdvancedModal(true);
+							}}
+						>
+							View
 
-													</div>
+						</Button>
 
-												</div>
-											)}
-
+                              </div>
+				                                    	)}
 											{shipmentType === 'ftl_freight'
-											&& billType === 'BILL' && 		isIncidental
+											&& outstandingDocument
 											&& (
 												<div className={styles.margin_bottom}>
-													Is Incidental-
+													Outstanding Proforma Approval-
 													{' '}
-													<span>{startCase(isIncidental)}</span>
+													<Button
+														className={styles.button}
+														onClick={() => {
+															viewDocument(outstandingDocument);
+														}}
+													>
+														View
+
+													</Button>
+												</div>
+											)}
+											{shipmentType === 'ftl_freight'
+											&& billType === 'CREDIT_NOTE' && reasonForCN
+											&& (
+												<div className={styles.margin_bottom}>
+													Reason For CN -
+													{' '}
+													<span>{startCase(reasonForCN)}</span>
 												</div>
 											)}
 
