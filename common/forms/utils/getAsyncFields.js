@@ -515,6 +515,77 @@ function asyncOrganizationBranches() {
 	};
 }
 
+function asyncListFAQTopics() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_topics',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListFAQTags() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_faq_tags',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListCourseCategories() {
+	return {
+		labelKey    : 'display_name',
+		valueKey    : 'id',
+		endpoint    : 'list_course_categories',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListTests() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_tests',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'active',
+			},
+		},
+	};
+}
+
+function asyncListPromotions() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_promotions',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'published',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
 export {
 	asyncFieldsLocations,
 	asyncFieldsLocations2,
@@ -553,9 +624,14 @@ export {
 	asyncListOrgTradeParties,
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
+	asyncListPromotions,
 	asyncPlanPricingList,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
 	asyncFortigoLocations,
 	asyncOrganizationBranches,
+	asyncListFAQTopics,
+	asyncListFAQTags,
+	asyncListCourseCategories,
+	asyncListTests,
 };

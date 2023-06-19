@@ -16,11 +16,11 @@ function TicketsSectionPart({ label, status, searchParams, refreshList, setRefre
 
 	const refreshTickets = () => {
 		setRefreshList((prev) => {
-			const newState = {};
+			const NEW_STATE = {};
 			Object.keys(prev).forEach((key) => {
-				newState[key] = true;
+				NEW_STATE[key] = true;
 			});
-			return newState;
+			return NEW_STATE;
 		});
 	};
 

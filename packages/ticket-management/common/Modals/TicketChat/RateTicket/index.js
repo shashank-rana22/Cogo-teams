@@ -1,5 +1,6 @@
 import { Button, RatingComponent } from '@cogoport/components';
 import { IcCStar } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateTicketFeedback from '../../../../hooks/useUpdateTicketFeedback';
@@ -24,7 +25,7 @@ function RateTicket({
 
 	return (
 		<div className={styles.container} key={ticketRating}>
-			{ticketRating === 0 ? (
+			{isEmpty(ticketRating) ? (
 				<>
 					<div className={styles.rating_text}>
 						Was your issue resolved?
@@ -35,7 +36,7 @@ function RateTicket({
 							totalStars={5}
 							value={rating}
 							onChange={setRating}
-							disabled={updateLoading || ticketRating > 0}
+							disabled={updateLoading || isEmpty(ticketRating)}
 						/>
 					</div>
 					<div className={styles.button_container}>

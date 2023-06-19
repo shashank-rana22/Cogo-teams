@@ -1,11 +1,11 @@
 /* eslint-disable max-len */
 import { Button, Placeholder, Pagination } from '@cogoport/components';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMArrowDown, IcMArrowUp } from '@cogoport/icons-react';
 import React, { useEffect, useState } from 'react';
 
 import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 import { formatDate } from '../../../commons/utils/formatDate';
-import getFormattedPrice from '../../../commons/utils/getFormattedPrice';
 import useListExpense from '../hooks/useListExpense';
 import useSendEmail from '../hooks/useSendEmail';
 
@@ -113,7 +113,7 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 										const subCategoryFormatted = (subCategory || '').replaceAll('_', ' ');
 
 										return (
-											<div className={styles.data_div}>
+											<div className={styles.data_div} key={bill as any}>
 												<div className={styles.section}>
 													<div>Invoice No.</div>
 													<div className={`${styles.element} ${styles.link}`}>
@@ -134,15 +134,45 @@ function ShowMore({ id, recurringState, showExpenseModal }:Props) {
 												</div>
 												<div className={styles.section}>
 													<div>Payable</div>
-													<div className={styles.element}>{getFormattedPrice(grandTotal - payableTds, billCurrency)}</div>
+													<div className={styles.element}>
+														{formatAmount({
+															amount   :	(grandTotal - payableTds) as any,
+															currency : billCurrency,
+															options  : {
+																style           : 'currency',
+																currencyDisplay : 'code',
+															},
+														})}
+
+													</div>
 												</div>
 												<div className={styles.section}>
 													<div>TDS</div>
-													<div className={styles.element}>{getFormattedPrice(payableTds, billCurrency)}</div>
+													<div className={styles.element}>
+														{formatAmount({
+															amount   :	payableTds,
+															currency : billCurrency,
+															options  : {
+																style           : 'currency',
+																currencyDisplay : 'code',
+															},
+														})}
+
+													</div>
 												</div>
 												<div className={styles.section}>
 													<div>Paid</div>
-													<div className={styles.element}>{getFormattedPrice(paidAmount, billCurrency) }</div>
+													<div className={styles.element}>
+														{formatAmount({
+															amount   :	paidAmount as any,
+															currency : billCurrency,
+															options  : {
+																style           : 'currency',
+																currencyDisplay : 'code',
+															},
+														}) }
+
+													</div>
 												</div>
 												<div className={styles.section}>
 													<div>Due Date</div>

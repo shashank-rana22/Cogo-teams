@@ -3,10 +3,12 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const LOADER_FILL = 4;
+
 function TicketLoader() {
 	return (
 		<div className={styles.tickets_container}>
-			{[...Array(4).keys()].map((key) => (
+			{[...Array(LOADER_FILL).keys()].map((key) => (
 				<div key={key} className={styles.container}>
 					<div className={styles.sub_container}>
 						<div className={styles.header}>

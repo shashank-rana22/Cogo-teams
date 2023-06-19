@@ -1,4 +1,5 @@
 import { Textarea } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import {
 	IcMSend,
 	IcMAttach,
@@ -9,10 +10,11 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import React, { useEffect, useRef } from 'react';
 
-import { MATCH_IMAGE_EXTENSION } from '../../../../constants';
 import CustomFileUploader from '../../../CustomFileUploader';
 
 import styles from './styles.module.css';
+
+const URL_ARRAY_LAST_ELEMENT = 1;
 
 function FooterChat({
 	setMessage = () => {},
@@ -42,7 +44,7 @@ function FooterChat({
 
 	if (file) {
 		const urlArray = decodeURI(file)?.split('/');
-		fileName = urlArray[(urlArray?.length || 0) - 1] || '';
+		fileName = urlArray[(urlArray?.length || GLOBAL_CONSTANTS.zeroth_index) - URL_ARRAY_LAST_ELEMENT] || '';
 	}
 
 	useEffect(() => {
@@ -58,7 +60,7 @@ function FooterChat({
 					) : (
 						<div className={styles.file_details}>
 							<div className={styles.file_icon_holder}>
-								{fileName.match(MATCH_IMAGE_EXTENSION) ? (
+								{fileName.match(GLOBAL_CONSTANTS.regex_patterns.image_extension) ? (
 									<IcMImage className={styles.image_preview} />
 								) : (
 									<IcMPdf className={styles.pdf_icon} />

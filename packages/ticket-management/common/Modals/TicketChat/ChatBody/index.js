@@ -1,4 +1,5 @@
 import { Placeholder, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useSelector } from '@cogoport/store';
 import React from 'react';
 
@@ -7,6 +8,12 @@ import EmptyTicket from '../../../EmptyTicket';
 import InitialMessage from './initialMessage';
 import styles from './styles.module.css';
 import TicketComment from './TicketComment';
+
+const RENDER_EMPTY_ELEMENT = 9;
+const SKELETON_SECOND_ELEMENT = 2;
+const TICKETS_ARRAY_LENGTH = 10;
+const WINDOW_VIEW_ASPECT = 0;
+const INCREMENT_PAGE_COUNT = 1;
 
 function ChatBody({
 	listData = {},
@@ -25,9 +32,9 @@ function ChatBody({
 	const { Name: reviewerName = '' } = user || {};
 
 	const handleScroll = (e) => {
-		const bottom = e.target.scrollTop === 0;
+		const bottom = e.target.scrollTop === WINDOW_VIEW_ASPECT;
 		if (!last && bottom && !chatLoading) {
-			getTicketActivity((page || 0) + 1);
+			getTicketActivity((page || GLOBAL_CONSTANTS.zeroth_index) + INCREMENT_PAGE_COUNT);
 		}
 	};
 
@@ -44,16 +51,17 @@ function ChatBody({
 	return (
 		<div className={styles.container} ref={messageRef} onScroll={handleScroll}>
 			{chatLoading
-				&& [...Array(9).keys()].map((key, idx) => (
+				&& [...Array(RENDER_EMPTY_ELEMENT).keys()].map((key, idx) => (
 					<div
 						key={key}
-						className={cl`${idx % 2 !== 0 ? styles.right_align : ''}`}
+						className={cl`${idx % SKELETON_SECOND_ELEMENT
+							!== GLOBAL_CONSTANTS.zeroth_index ? styles.right_align : ''}`}
 					>
 						<Placeholder className={styles.loading_skeleton} />
 					</div>
 				))}
 
-			{(last || (items || []).length < 10) && !detailsLoading && (
+			{(last || (items || []).length < TICKETS_ARRAY_LENGTH) && !detailsLoading && (
 				<InitialMessage ticketData={ticketData} userId={userId} />
 			)}
 

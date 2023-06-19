@@ -2,9 +2,11 @@ import { Button, Popover } from '@cogoport/components';
 import { IcMCall, IcMEdit, IcMEmail } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import STAKEHOLDER_MAPPING from '../../../../../../contants/STAKEHOLDER_MAPPING';
+import STAKEHOLDER_MAPPING from '../../../../../../constants/STAKEHOLDER_MAPPING';
 
 import styles from './styles.module.css';
+
+const ICONS_DIMENSIONS = 15;
 
 function Stakeholders({ data = [], setAddPoc = () => {}, rolesPermission = {} }) {
 	const editInternalPoc = rolesPermission?.edit_internal_poc || [];
@@ -48,19 +50,19 @@ function Stakeholders({ data = [], setAddPoc = () => {}, rolesPermission = {} })
 									})}
 									size="sm"
 								>
-									<IcMEdit height={15} width={15} />
+									<IcMEdit height={ICONS_DIMENSIONS} width={ICONS_DIMENSIONS} />
 								</Button>
 							) : null}
 
 							<div>
 								<Popover render={<div>{email}</div>} trigger="mouseenter" placement="bottom">
-									<IcMEmail height={15} width={15} />
+									<IcMEmail height={ICONS_DIMENSIONS} width={ICONS_DIMENSIONS} />
 								</Popover>
 							</div>
 
 							<div>
 								<Popover render={<div>{contact_number}</div>} trigger="mouseenter" placement="bottom">
-									<IcMCall height={15} width={15} />
+									<IcMCall height={ICONS_DIMENSIONS} width={ICONS_DIMENSIONS} />
 								</Popover>
 							</div>
 						</div>

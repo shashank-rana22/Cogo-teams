@@ -1,4 +1,5 @@
 import { Toast } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 
 const formatPayload = ({
 	values = {},
@@ -37,7 +38,7 @@ const formatPayload = ({
 		pincode = '',
 	} = billing_address || {};
 
-	if (poc_details.length === 0) {
+	if (isEmpty(poc_details)) {
 		Toast.info('Please create at-least one POC before proceeding ');
 		return null;
 	}
