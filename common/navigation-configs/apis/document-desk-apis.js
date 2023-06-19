@@ -549,7 +549,7 @@ const apis = [
 		service_name : 'shipment',
 	},
 	{
-		api          : 'get_timeline',
+		api          : 'get_container_timeline',
 		access_type  : 'private',
 		service_name : 'bookings',
 	},
