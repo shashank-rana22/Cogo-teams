@@ -108,7 +108,7 @@ function OTPVerification({
 							<Button
 								size="md"
 								themeType="secondary"
-								onClick={() => setShowOTPModal(false)}
+								onClick={() => setShow(false)}
 							>
 								Cancel
 							</Button>
