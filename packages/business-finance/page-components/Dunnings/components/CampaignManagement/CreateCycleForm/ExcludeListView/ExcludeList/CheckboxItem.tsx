@@ -1,10 +1,16 @@
 import { Checkbox } from '@cogoport/components';
 
+interface Props {
+	uncheckedRows?:string[],
+	setUncheckedRows?:Function,
+	row?:{ tradePartyDetailId?:string },
+}
+
 function CheckboxItem({
 	uncheckedRows,
 	setUncheckedRows,
 	row,
-}) {
+}:Props) {
 	const { tradePartyDetailId } = row || {};
 	const handleChange = () => {
 		if ((uncheckedRows || []).includes(tradePartyDetailId)) {

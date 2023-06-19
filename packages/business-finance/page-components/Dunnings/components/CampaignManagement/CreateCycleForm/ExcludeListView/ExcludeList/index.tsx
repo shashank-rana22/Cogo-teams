@@ -5,7 +5,17 @@ import StyledTable from '../../../../../../AccountReceivables/commons/styledTabl
 import { config } from './config';
 import styles from './styles.module.css';
 
-function ExcludeList({ list, page, setPage, totalRecords, uncheckedRows, setUncheckedRows, loading }) {
+interface Props {
+	list?:object[],
+	page?:number,
+	setPage?:Function,
+	totalRecords?:number,
+	uncheckedRows?:string[],
+	setUncheckedRows?:Function,
+	loading?:boolean,
+}
+
+function ExcludeList({ list, page, setPage, totalRecords, uncheckedRows, setUncheckedRows, loading }:Props) {
 	return (
 		<>
 			<StyledTable

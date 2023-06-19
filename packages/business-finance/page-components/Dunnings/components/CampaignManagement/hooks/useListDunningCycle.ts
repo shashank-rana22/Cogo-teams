@@ -2,8 +2,19 @@ import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect } from 'react';
 
-function useListDunningCycle({ globalFilters, setGlobalFilters }) {
-	const { search, page, service, cycleStatus, dunningCycleType } = globalFilters || {};
+interface GlobalFilters {
+	search?:string,
+	page?:number,
+	cycleStatus?:string,
+	dunningCycleType?:string,
+}
+interface Props {
+	globalFilters?:GlobalFilters,
+	setGlobalFilters?:Function,
+}
+
+function useListDunningCycle({ globalFilters, setGlobalFilters }:Props) {
+	const { search, page, cycleStatus, dunningCycleType } = globalFilters || {};
 
 	const [
 		{ data, loading },
@@ -31,18 +42,17 @@ function useListDunningCycle({ globalFilters, setGlobalFilters }) {
 					query            : query || undefined,
 					cycleStatus      : cycleStatus || undefined,
 					dunningCycleType : dunningCycleType || undefined,
-					service          : service || undefined,
 					pageIndex        : page,
 				},
 			});
 		} catch (err) {
 			console.log('err-', err);
 		}
-	}), [cycleStatus, dunningCycleType, page, query, service, trigger]);
+	}), [cycleStatus, dunningCycleType, page, query, trigger]);
 
 	useEffect(() => {
 		getDunningList();
-	}, [query, page, service, cycleStatus,
+	}, [query, page, cycleStatus,
 		dunningCycleType, getDunningList]);
 
 	return {
