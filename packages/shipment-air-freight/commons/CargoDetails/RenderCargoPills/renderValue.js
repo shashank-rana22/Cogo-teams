@@ -15,7 +15,7 @@ const SINGLE_PACKAGE = 1;
 export const renderValue = (label, detail = {}) => {
 	const {
 		packages = [], chargeable_weight, volume, weight, commodity, airline = {}, packages_count, trade_type,
-		payment_term, inco_term, price_type, service_type, source, bl_category, cargo_readiness_date,
+		payment_term, inco_term, price_type, service_type, source, cargo_readiness_date,
 		master_airway_bill_number, house_airway_bill_number, commodity_details, commodity_type, commodity_sub_type,
 	} = detail;
 
@@ -115,8 +115,6 @@ export const renderValue = (label, detail = {}) => {
 			return source === 'direct'
 				? 'Sell Without Buy'
 				: startCase(source || '');
-		case 'bl_category':
-			return upperCase(bl_category);
 		case 'cargo_readiness_date':
 			return format(cargo_readiness_date, 'dd MMM yyyy');
 		case 'is_minimum_price_shipment':

@@ -11,7 +11,6 @@ const LABELS = [
 	'weight',
 	'source',
 	'price_type',
-	'bl_category',
 	'cargo_readiness_date',
 	'is_minimum_price_shipment',
 	'master_airway_bill_number',
