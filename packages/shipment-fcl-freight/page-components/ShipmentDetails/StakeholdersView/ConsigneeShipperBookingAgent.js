@@ -21,6 +21,7 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const UNAUTHORIZED_STATUS_CODE = 403;
 
 function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee_shipper_booking_agent' }) {
 	const router = useRouter();
@@ -63,7 +64,7 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 		);
 	}
 
-	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
+	if (!shipment_data && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -83,7 +84,7 @@ function ConsigneeShipperBookingAgent({ get = {}, activeStakeholder = 'consignee
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+	if (getShipmentStatusCode === UNAUTHORIZED_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>

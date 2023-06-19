@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, Loader, Button , Toggle} from '@cogoport/components';
+import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
 import { Tracking } from '@cogoport/ocean-modules';
@@ -22,10 +22,11 @@ import useGetTimeLine from '../../../hooks/useGetTimeline';
 import styles from './styles.module.css';
 
 const SERVICE_ADDITIONAL_METHODS = ['stakeholder', 'service_objects', 'booking_requirement'];
+const UNAUTHORIZED_STATUS_CODE = 403;
 
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
-	const [activeTab, setActiveTab] = useState('timeline_and_tasks'); 
+	const [activeTab, setActiveTab] = useState('timeline_and_tasks');
 
 	const { shipment_data, isGettingShipment, getShipmentStatusCode } = get || {};
 
@@ -34,7 +35,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 		window.location.replace(newHref);
 		window.sessionStorage.setItem('prev_nav', newHref);
 	}, [router?.query?.partner_id, shipment_data?.id]);
- 
+
 	const { servicesGet = {} } = useGetServices({
 		shipment_data,
 		additional_methods: SERVICE_ADDITIONAL_METHODS,
@@ -63,7 +64,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
+	if (!shipment_data && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -83,7 +84,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+	if (getShipmentStatusCode === UNAUTHORIZED_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>
