@@ -3,8 +3,9 @@ import { Button, Input } from '@cogoport/components';
 import styles from './styles.module.css';
 import useAssignKRAs from './useAssignKRAs';
 
-const INITIAL_TOTAL_AMOUNT = 0;
-const MAX_VALUE_OF_TOTAL_AMOUNT = 1;
+const INITIAL_TOTAL_AMOUNT = 0.00;
+const MAX_VALUE_OF_TOTAL_AMOUNT = 1.00;
+const ROUND_OFF_DIGIT = 100;
 
 const getTotalAmount = (inputValue) => (inputValue || []).reduce((total, element) => {
 	const { weightage } = element;
@@ -15,7 +16,7 @@ const getTotalAmount = (inputValue) => (inputValue || []).reduce((total, element
 		return total + parsedValue;
 	}
 
-	return total;
+	return Math.round(total * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT;
 }, INITIAL_TOTAL_AMOUNT);
 
 function KRAWeightCalculationTable({ setInputValue, inputValue, selectArray }) {
@@ -23,7 +24,7 @@ function KRAWeightCalculationTable({ setInputValue, inputValue, selectArray }) {
 
 	const { onClickSubmitKRAs, loading } = useAssignKRAs({ inputValue, selectArray });
 
-	const totalAmount = getTotalAmount(inputValue);
+	const totalAmount = Math.round(getTotalAmount(inputValue) * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT;
 
 	return (
 		<div className={styles.container}>
@@ -48,7 +49,8 @@ function KRAWeightCalculationTable({ setInputValue, inputValue, selectArray }) {
 					{(inputValue || []).map((element, index) => (
 						<div className={styles.value} key={element?.kra_assigned}>
 							<Input
-								value={inputValue[index]?.weightage}
+								value={Math.round((inputValue[index]?.weightage || 1)
+                                    * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
 								size="sm"
 								placeholder="0"
 								onChange={(event) => {
