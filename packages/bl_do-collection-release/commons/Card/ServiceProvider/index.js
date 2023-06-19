@@ -1,4 +1,5 @@
 import { cl, Tooltip } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import renderTooltip from '../../renderTooltip';
 
@@ -7,17 +8,16 @@ import ExtraDetails from './ExtraDetails';
 import SPPopver from './SPPopover';
 import styles from './styles.module.css';
 
-const MAX_LENGTH = 32;
-const DEFAULT_INDEX = 0;
+const SHOW_TOOLTIP_MAX_LENGTH = 32;
 const FIRST_INDEX = 1;
 export default function ServiceProvider({ item = {}, stateProps = {} }) {
 	const isFclLocal = stateProps.shipment_type === 'fcl_local';
 	const docs = stateProps.activeTab === 'bl' ? item.bill_of_ladings : item.delivery_orders;
-	const docsLength = docs?.length || DEFAULT_INDEX;
-	const remainLength = docsLength > FIRST_INDEX ? docsLength - FIRST_INDEX : DEFAULT_INDEX;
+	const docsLength = docs?.length || GLOBAL_CONSTANTS.zeroth_index;
+	const remainLength = docsLength > FIRST_INDEX ? docsLength - FIRST_INDEX : GLOBAL_CONSTANTS.zeroth_index;
 	const doc_number = stateProps.activeTab === 'bl'
-		? docs?.[DEFAULT_INDEX]?.bl_number
-		: docs?.[DEFAULT_INDEX]?.do_number;
+		? docs?.[GLOBAL_CONSTANTS.zeroth_index]?.bl_number
+		: docs?.[GLOBAL_CONSTANTS.zeroth_index]?.do_number;
 
 	return (
 		<div className={styles.container}>
@@ -28,7 +28,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 					</div>
 					<div className={styles.details}>
 						{renderTooltip(isFclLocal ? item?.local_service?.service_provider?.business_name
-							: item?.freight_service?.service_provider?.business_name, MAX_LENGTH)}
+							: item?.freight_service?.service_provider?.business_name, SHOW_TOOLTIP_MAX_LENGTH)}
 
 					</div>
 				</div>
@@ -57,7 +57,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 						Customer
 					</div>
 					<div className={styles.details}>
-						{renderTooltip(item.customer?.business_name, MAX_LENGTH)}
+						{renderTooltip(item.customer?.business_name, SHOW_TOOLTIP_MAX_LENGTH)}
 					</div>
 				</div>
 				<div className={styles.right}>
@@ -67,7 +67,7 @@ export default function ServiceProvider({ item = {}, stateProps = {} }) {
 							{' '}
 							Details
 						</div>
-						{docsLength > DEFAULT_INDEX ? (
+						{docsLength > GLOBAL_CONSTANTS.zeroth_index ? (
 							<div className={cl`${styles.details} ${styles.service_provider_details}`}>
 								{remainLength
 									? (

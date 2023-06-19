@@ -15,7 +15,7 @@ export default function EmptyState({
 			<img
 				src={src}
 				alt="empty_page"
-				height="50%"
+				height="5%"
 				width="50%"
 			/>
 		</div>

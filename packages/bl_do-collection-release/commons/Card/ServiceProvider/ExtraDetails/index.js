@@ -1,10 +1,10 @@
 import { cl, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDownload, IcMCopy } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
 import styles from './styles.module.css';
 
-const FIRST_INDEX = 0;
 const COLLECTION_MODE = {
 	physical_collection : 'Physical Visit',
 	print               : 'Print',
@@ -95,7 +95,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 			let status = '';
 			bill_of_ladings?.forEach((itemData) => {
 				const { delivery_movement_details = [] } = itemData || {};
-				const { tracking_id = '' } = delivery_movement_details?.[FIRST_INDEX] || {};
+				const { tracking_id = '' } = delivery_movement_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 				if (
 					(itemData?.status || []).includes('delivered')
 				|| item?.trade_type === 'import'
@@ -148,7 +148,7 @@ export default function ExtraDetails({ stateProps = {}, item = {} }) {
 		case 'surrendered': {
 			bill_of_ladings?.forEach((itemData) => {
 				const { delivery_movement_details = [] } = itemData || {};
-				const { tracking_id = '' } = delivery_movement_details?.[FIRST_INDEX] || {};
+				const { tracking_id = '' } = delivery_movement_details?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 				const isSurrendered = (itemData?.status || []).includes('surrendered');
 
 				renderElem = (

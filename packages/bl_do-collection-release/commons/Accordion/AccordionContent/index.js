@@ -1,4 +1,5 @@
 import { Button, Tabs, TabPanel, Table, Loader } from '@cogoport/components';
+import { isEmpty } from '@cogoport/utils';
 import { useState, useRef } from 'react';
 
 import taskConfigs from '../../../configs/taskConfigs.json';
@@ -12,7 +13,6 @@ import AccordianTimeline from './AccordianTimeline';
 import styles from './styles.module.css';
 import CustomTasks from './Tasks';
 
-const TASK_DEFAULT_LENGTH = 0;
 const CURRENT_STEP_NEXT_INDEX = 1;
 export default function AccordionContent({
 	stateProps = {},
@@ -97,7 +97,7 @@ export default function AccordionContent({
 			);
 		}
 
-		if (tasks?.length === TASK_DEFAULT_LENGTH) {
+		if (isEmpty(tasks)) {
 			return (
 				<div>
 					<EmptyState

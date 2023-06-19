@@ -11,7 +11,7 @@ function FCL({ stateProps = {}, setStateProps = () => {} }) {
 	if (loading) {
 		return (
 			<div className={styles.loader}>
-				{Array(LOADER_ARRAY_SIZE).fill().map((item) => (
+				{[...Array(LOADER_ARRAY_SIZE).keys()].map((item) => (
 					<div key={item}>
 						<LoadingState />
 					</div>

@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const FIRST_ARRAY_SIZE = 3;
+const LOADING_ARRAY_SIZE = 3;
 function LoadingState() {
 	return (
 		<div className={styles.main_container}>
@@ -77,7 +77,7 @@ function LoadingState() {
 					<div className={styles.loader_style}>
 						<Placeholder height={8} width={140} />
 					</div>
-					{Array(FIRST_ARRAY_SIZE).fill().map((item) => (
+					{[...Array(LOADING_ARRAY_SIZE).keys()].map((item) => (
 						<div className={styles.second_column} key={item}>
 							<Placeholder height={8} width={140} />
 						</div>

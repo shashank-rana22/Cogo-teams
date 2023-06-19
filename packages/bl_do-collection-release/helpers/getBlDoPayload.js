@@ -21,8 +21,6 @@ export default function getBlDoPayload({ stateProps = {} }) {
 		filters: shipmentTypeFilters, ...shipmentTypePayload
 	} = payload[stateProps.shipment_type][stateProps.trade_type];
 
-	const { ...bldoPayload } = payload[stateProps.activeTab] || {};
-
 	const filters = {
 		...commonFilters,
 		...shipmentTypeFilters,
@@ -35,7 +33,6 @@ export default function getBlDoPayload({ stateProps = {} }) {
 	const Formatedpayload = {
 		...commonRestPayload,
 		...shipmentTypePayload,
-		...bldoPayload,
 		sort_by    : 'serial_id',
 		sort_type  : 'desc',
 		page_limit : 10,
