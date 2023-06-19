@@ -95,6 +95,7 @@ const useOutwardFileList = ({ entity, gstIn, month, year }) => {
 		data,
 		listData,
 		listLoading,
+		refetch,
 		setPage,
 		page,
 	};

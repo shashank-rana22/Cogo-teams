@@ -28,12 +28,8 @@ const MAPPING_ENABLE_STATUS = {
 
 const GET_ZERO = 0;
 const CALC_PER = 100;
-const Column = (refresh) => {
+const Column = (refresh, deleteId) => {
 	const { push } = useRouter();
-
-	const handleGetId = (id) => {
-		refresh(id);
-	};
 
 	const contentData = (row) => {
 		const { fileStatus, status, fileUrl, id } = row || {};
@@ -53,7 +49,15 @@ const Column = (refresh) => {
 
 				</div>
 
-				{status === 'DISABLE' ? <div className={styles.card_data}>Delete</div>
+				{status === 'DISABLE' ? (
+					<div
+						className={styles.card_data}
+						onClick={() => { deleteId(id); }}
+						role="presentation"
+					>
+						Delete
+					</div>
+				)
 					: fileStatus === 'READY' && <div className={styles.card_data}>Upload</div> }
 
 				<div
@@ -62,11 +66,11 @@ const Column = (refresh) => {
 					role="presentation"
 				>
 					Download
-
 				</div>
 			</div>
 		);
 	};
+
 	return [
 		{
 			Header   : <div>File Name</div>,
@@ -183,10 +187,10 @@ const Column = (refresh) => {
 		{
 			id       : 'refresh',
 			accessor : (row) => {
-				const { status, id } = row || {};
+				const { status, id, fileStatus } = row || {};
 				return (
-					status === 'ENABLE' &&	(
-						<div className={styles.refresh_icon} onClick={() => { handleGetId(id); }} role="presentation">
+					fileStatus === 'READY' && status === 'ENABLE' &&	(
+						<div className={styles.refresh_icon} onClick={() => { refresh(id); }} role="presentation">
 							<IcMRefresh height="20px" width="20px" />
 						</div>
 					)

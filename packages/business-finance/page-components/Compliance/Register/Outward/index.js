@@ -1,6 +1,7 @@
 import { Pagination } from '@cogoport/components';
 
 import StyledTable from '../../../commons/StyledTable/index.tsx';
+import useDeleteData from '../../hooks/useDeleteData';
 import useOutwardFileList from '../../hooks/useOutwardFileList';
 import useRefreshData from '../../hooks/useRefreshData';
 
@@ -13,7 +14,7 @@ const PAGE = 1;
 const TOTAL_RECORDS = 0;
 const PAGE_SIZE = 10;
 function Outward({	filters, setFilters }) {
-	const { exportTrigger, loading, listData, listLoading, page, setPage } = useOutwardFileList({
+	const { exportTrigger, loading, listData, listLoading, page, setPage, refetch } = useOutwardFileList({
 		entity : filters?.entity,
 		gstIn  : filters?.gstIn,
 		month  : filters?.month,
@@ -22,6 +23,7 @@ function Outward({	filters, setFilters }) {
 
 	const { refresh, refreshLoading } = useRefreshData();
 
+	const { deleteId, deleteIdLoading } = useDeleteData({ refetch });
 	const { list, totalRecord } = listData || {};
 
 	return (
@@ -36,9 +38,9 @@ function Outward({	filters, setFilters }) {
 			<div>
 				<StyledTable
 					data={list}
-					columns={Column(refresh)}
+					columns={Column(refresh, deleteId)}
 					imageFind={EMPTY_STATE}
-					loading={listLoading || refreshLoading}
+					loading={listLoading || refreshLoading || deleteIdLoading}
 				/>
 			</div>
 

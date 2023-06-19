@@ -47,7 +47,7 @@
 	font-size: var(--font-size-md);
 	font-weight: 600;
 	cursor: pointer;
-	background: #fff;
+	background: var(--color-secondary-5);
 	border-radius: 4px;
 	box-shadow: 0 0 8px rgb(44 62 80 / 20%);
 
