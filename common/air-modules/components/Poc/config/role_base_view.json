@@ -35,7 +35,7 @@
         "add_internal_poc":true,
         "add_external_import_poc":true,
         "add_external_export_poc":true,
-        "edit_internal_poc":["service_ops1"],
+        "edit_internal_poc":["service_ops1","service_ops2","service_ops3","ground_ops","supply_agent","booking_agent"],
         "can_add_service_provider_poc":true
     },
     "admin":{
