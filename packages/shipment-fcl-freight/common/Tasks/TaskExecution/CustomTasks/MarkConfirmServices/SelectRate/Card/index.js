@@ -1,5 +1,5 @@
 import { Button } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { startCase } from '@cogoport/utils';
 
@@ -55,9 +55,9 @@ function Card({
 					<div className={styles.priority_text}>
 						(
 						{priority}
-						{' '}
+						&nbsp;
 						Priority)
-						{' '}
+						&nbsp;
 					</div>
 
 					<div className={styles.priority_text}>
@@ -68,7 +68,7 @@ function Card({
 
 			<div className={styles.body}>
 				{(dataArr || []).map((dataObj) => (
-					<div className={styles.space_between}>
+					<div key={dataObj?.service_provider?.business_name} className={styles.space_between}>
 						<div>
 							<div className={styles.heading}>Supplier Name</div>
 

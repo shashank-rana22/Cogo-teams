@@ -47,6 +47,8 @@ function Customers({
 	mailProps = {},
 	firestore,
 	viewType = '',
+	flashMessagesLoading,
+	hasVoiceCallAccess,
 }) {
 	const { emailAddress, buttonType, setButtonType } = mailProps;
 	const [isChecked, setIsChecked] = useState(false);
@@ -55,6 +57,7 @@ function Customers({
 		messagesList = [],
 		unReadChatsCount = 0,
 		sortedPinnedChatList = [],
+		flashMessagesList = [],
 	} = chatsData || {};
 
 	const {
@@ -103,6 +106,8 @@ function Customers({
 		sortedPinnedChatList,
 		firestore,
 		viewType,
+		flashMessagesList,
+		flashMessagesLoading,
 	};
 
 	const voiceProps = {
@@ -164,8 +169,8 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel name="message" title="Chats" badge={unReadChatsCount !== 0 && unReadChatsCount} />
-					<TabPanel name="voice" title="Voice" />
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount || null} />
+					{hasVoiceCallAccess && <TabPanel name="voice" title="Voice" />}
 					<TabPanel name="mail" title="Mail" />
 				</Tabs>
 			</div>

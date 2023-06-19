@@ -1,4 +1,4 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals.json';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
@@ -19,7 +19,30 @@ const handleRedirectToDashboard = ({ router, user, test_id, is_evaluated, status
 	);
 };
 
-const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemptModal, status }) => [
+const showResult = (is_evaluated, activeAttempt, status, retest) => {
+	if (!is_evaluated) {
+		return false;
+	}
+	if (activeAttempt === 'attempt1') {
+		if (retest) return true;
+		if (status === 'published') return true;
+		return false;
+	}
+	if (activeAttempt === 'retest' && status === 'published') {
+		return true;
+	}
+	return false;
+};
+
+const getAppearedColumns = ({
+	sortFilter,
+	setSortFilter,
+	router,
+	setShowReAttemptModal,
+	status,
+	activeAttempt,
+	retest,
+}) => [
 
 	{
 		Header: (
@@ -36,8 +59,8 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		id       : 'passed_failed',
 		accessor : ({ result_status = '', is_evaluated = false }) => (
 			<section className={`${styles.section} ${styles[result_status]}`}>
-				{(!is_evaluated || status !== 'published')
-					? <IsEvaluated is_evaluated={is_evaluated} /> : (startCase(result_status) || '-')}
+				{showResult(is_evaluated, activeAttempt, status, retest)
+					? (startCase(result_status) || '-') : <IsEvaluated is_evaluated={is_evaluated} />}
 			</section>
 		),
 	},
@@ -57,8 +80,9 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		id       : 'score_achieved',
 		accessor : ({ final_score = '', test = {}, is_evaluated = false }) => (
 			<section className={styles.section}>
-				{(!is_evaluated || status !== 'published') ? <IsEvaluated is_evaluated={is_evaluated} />
-					: `${toFixed(final_score, 2)}/${toFixed(test.total_marks, 2)}`}
+				{showResult(is_evaluated, activeAttempt, status, retest)
+					? `${toFixed(final_score, 2)}/${toFixed(test.total_marks, 2)}`
+					: <IsEvaluated is_evaluated={is_evaluated} />}
 			</section>
 		),
 	},
@@ -77,8 +101,8 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		id       : 'percentile',
 		accessor : ({ percentile = '', is_evaluated = false }) => (
 			<div className={styles.section}>
-				{(!is_evaluated || status !== 'published')
-					? <IsEvaluated is_evaluated={is_evaluated} /> : (toFixed(percentile || 0, 2) || '-')}
+				{showResult(is_evaluated, activeAttempt, status, retest)
+					? (toFixed(percentile || 0, 2) || '-') : <IsEvaluated is_evaluated={is_evaluated} />}
 			</div>
 		),
 	},
@@ -136,7 +160,9 @@ const getAppearedColumns = ({ sortFilter, setSortFilter, router, setShowReAttemp
 		accessor : ({ user = {}, test_id = '', is_evaluated = false }) => (
 			<div
 				role="presentation"
-				onClick={() => handleRedirectToDashboard({ router, user, test_id, is_evaluated, status })}
+				onClick={
+					() => handleRedirectToDashboard({ router, user, test_id, is_evaluated, status, activeAttempt })
+}
 				className={styles.see_more}
 			>
 				See More
@@ -238,11 +264,13 @@ const getTableColumns = ({
 	setUserId = () => {},
 	router,
 	status,
+	activeAttempt,
+	retest,
 }) => {
 	const getcolumnsFun = TABLE_MAPPING?.[activeTab] || getAppearedColumns;
 
 	const getcolumnsArg = {
-		appeared     : { sortFilter, setSortFilter, router, setShowReAttemptModal, status },
+		appeared     : { sortFilter, setSortFilter, router, setShowReAttemptModal, status, activeAttempt, retest },
 		not_appeared : { setShowModal, setUserId },
 		ongoing      : { setShowReAttemptModal },
 	};

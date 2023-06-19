@@ -220,6 +220,15 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'saas_traceability',
 		},
+		{
+			api         : 'get_saas_hs_code_six_digit_list',
+			access_type : 'private',
+		},
+		{
+			api          : 'get_multiple_sea_routes',
+			access_type  : 'public',
+			service_name : 'location',
+		},
 	],
 	app_saas_air_tracking: [
 		{
@@ -316,6 +325,10 @@ const saas = {
 			api          : 'list_saas_store_quota',
 			access_type  : 'private',
 			service_name : 'saas_traceability',
+		},
+		{
+			api         : 'get_saas_hs_code_six_digit_list',
+			access_type : 'private',
 		},
 	],
 	app_saas_map_tracking: [
@@ -1472,6 +1485,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'update_subscription_payment_status',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
 	],
 	app_saas_insurance: [
 		{
@@ -2341,6 +2359,17 @@ const saas = {
 			module       : 'cogo-store',
 			feature      : 'cogo-store',
 			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	app_saas_import_export_controls: [

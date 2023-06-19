@@ -1,12 +1,28 @@
 /* eslint-disable no-console */
 import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
+import { startCase } from '@cogoport/utils';
+
+const getPayload = {
+	name(values) {
+		return {
+			name: values.name,
+		};
+	},
+	language(values) {
+		return {
+			preferred_languages: values.preferred_languages,
+		};
+	},
+};
 
 const useEditPersonalDetails = ({
 	refetch = () => {},
 	setShowModal = () => {},
 	partner_user_id,
+	editNameModal,
 	setEditNameModal,
+
 }) => {
 	const [{ loading = false }, trigger] = useRequest({
 		url    : 'update_partner_user',
@@ -14,17 +30,13 @@ const useEditPersonalDetails = ({
 	}, { manual: false });
 
 	const onCreate = async (values = {}) => {
-		const { name } = values || {};
-
+		const payload = getPayload[editNameModal.from](values);
 		try {
-			const payload = {
-				id: partner_user_id,
-				name,
-
-			};
-
 			await trigger({
-				data: payload,
+				data: {
+					id: partner_user_id,
+					...payload,
+				},
 			});
 
 			refetch();
@@ -32,8 +44,8 @@ const useEditPersonalDetails = ({
 			window.location.reload();
 
 			setShowModal(false);
-			setEditNameModal(false);
-			Toast.success('Name updated successfully!');
+			setEditNameModal((prev) => ({ ...prev, from: 'language', state: false }));
+			Toast.success(`${startCase(editNameModal.from)} updated successfully!`);
 		} catch (e) {
 			console.log(e);
 		}

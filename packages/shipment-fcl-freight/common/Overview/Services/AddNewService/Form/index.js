@@ -1,12 +1,11 @@
 import { Modal } from '@cogoport/components';
 import { AsyncSelectController, RadioGroupController } from '@cogoport/forms';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { isEmpty, startCase } from '@cogoport/utils';
+import { Layout, useShipmentBack } from '@cogoport/ocean-modules';
+import { startCase, isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useServiceUpsellControls from '../../../../../hooks/useFormatServiceUpsellControls';
-import useShipmentBack from '../../../../../hooks/useShipmentBack';
-import Layout from '../../../../Layout';
 import Footer from '../Footer';
 
 import styles from './styles.module.css';
@@ -52,7 +51,7 @@ function Form({
 		organization_id,
 	});
 
-	const { errors, formValues } = formProps;
+	const { errors, formValues, control } = formProps;
 
 	const formOrganizationId = formValues?.organization_id;
 
@@ -75,6 +74,7 @@ function Form({
 		<Modal
 			show
 			onClose={closeModal}
+			size="lg"
 			showCloseIcon={!haveToUpsell}
 			closeOnOuterClick={false}
 			className={styles.custom_modal}
@@ -92,8 +92,8 @@ function Form({
 						</div>
 					) : null}
 
-					{startCase(upsellableService?.trade_type)}
-					{' '}
+					{startCase(upsellableService.trade_type)}
+					&nbsp;
 					{startCase(service)}
 				</div>
 			)}
@@ -105,10 +105,13 @@ function Form({
 						<div> Are you sure you want to upsell this service?</div>
 					)
 					: null }
-
 				{ controls?.length !== 0 && step === 1
 					? (
-						<Layout controls={controls} formProps={formProps} />
+						<Layout
+							control={control}
+							errors={errors}
+							fields={controls}
+						/>
 					)
 					: null }
 

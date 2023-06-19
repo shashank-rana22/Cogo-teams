@@ -1,0 +1,60 @@
+.container {
+	display: flex;
+	align-items: center;
+	width: 100%;
+}
+
+.user_name {
+	width: 60%;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+}
+
+.no_data {
+	font-size: var(--font-size-xl);
+	font-weight: 500;
+}
+
+.body {
+	:global {
+		.ui_radio_container,
+		.ui_radio_label {
+			width: 100%;
+		}
+
+		.ui_modal_body_container {
+			height: 300px;
+		}
+
+		.ui_radiogroup_container {
+			flex-direction: column;
+		}
+	}
+}
+
+.otp_modal {
+	:global {
+		.ui_modal_body_container {
+			display: flex;
+			align-items: center;
+			justify-content: center;
+			height: 140px;
+		}
+
+		.ui_input_control {
+			text-align: center;
+		}
+	}
+}
+
+.loader_div {
+	margin: 16px;
+}
+
+.loader_wrapper {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	height: 50px;
+}

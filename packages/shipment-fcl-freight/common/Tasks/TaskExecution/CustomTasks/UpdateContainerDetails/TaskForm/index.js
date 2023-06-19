@@ -1,8 +1,8 @@
 import { Button, Checkbox, Input } from '@cogoport/components';
+import { Layout } from '@cogoport/ocean-modules';
 import React, { useState } from 'react';
 
 import useContainerDetails from '../../../../../../hooks/useContainerDetails';
-import Layout from '../../../helpers/Layout';
 import TaskContainer from '../../common/TaskContainer';
 
 import styles from './styles.module.css';
@@ -71,7 +71,7 @@ function TaskForm({
 
 				<div className={styles.info}>
 					Other valid date formats:
-					{' '}
+					&nbsp;
 					{validDateFormats}
 				</div>
 			</div>

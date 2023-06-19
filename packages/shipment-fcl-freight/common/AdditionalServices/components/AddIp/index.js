@@ -9,16 +9,13 @@ function AddIp({
 	setShowIp = () => {},
 	updateInvoicingParty = () => {},
 }) {
-	const organizationDetails = {
-		id         : shipmentData?.importer_exporter?.id || undefined,
-		country_id : shipmentData?.importer_exporter?.country_id || undefined,
-	};
+	const { importer_exporter: { id, country_id, is_tax_applicable } = {} } = shipmentData;
 
-	if (shipmentData?.importer_exporter?.is_tax_applicable === null) {
-		organizationDetails.is_tax_applicable = true;
-	} else {
-		organizationDetails.is_tax_applicable =	shipmentData?.importer_exporter?.is_tax_applicable;
-	}
+	const organizationDetails = {
+		id                : id || undefined,
+		country_id        : country_id || undefined,
+		is_tax_applicable : is_tax_applicable ?? true,
+	};
 
 	return (
 		<Modal

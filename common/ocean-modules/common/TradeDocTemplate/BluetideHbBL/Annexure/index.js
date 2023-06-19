@@ -1,13 +1,26 @@
 import { Button } from '@cogoport/components';
 import { TextAreaController, useFieldArray } from '@cogoport/forms';
 import { IcMCross } from '@cogoport/icons-react';
-import React from 'react';
 
 import Watermark from '../../commons/Watermark';
 
 import styles from './style.module.css';
 
-function Annexure({ control, mode = 'read', initialValues = {} }) {
+const KEYS = ['container_number',
+	'marks_and_number',
+	'package_description',
+	'gross_weight',
+	'measurement'];
+
+const NOT_SHOW_REMOVE_INDEX = 0;
+const MODE_READ = 'read';
+
+function Annexure({
+	control,
+	mode = MODE_READ,
+	initialValues = {},
+	watermark = null,
+}) {
 	const { fields, append, remove } = useFieldArray({
 		control,
 		name: 'containers',
@@ -15,7 +28,8 @@ function Annexure({ control, mode = 'read', initialValues = {} }) {
 
 	return (
 		<main className={styles.main}>
-			<Watermark text="draft" />
+			{watermark
+				? <Watermark text="draft" /> : null}
 			<section className={styles.section}>
 				<div className={styles.header}>
 					ANNEXURE SHEET
@@ -27,7 +41,7 @@ function Annexure({ control, mode = 'read', initialValues = {} }) {
 					</div>
 					<div className={styles.vessel_voyage}>
 						<span>Vessel</span>
-						{mode === 'read' ? <span>{initialValues?.annexure_vessel || ''}</span>
+						{mode === MODE_READ ? <span>{initialValues?.annexure_vessel || ''}</span>
 							: (
 								<TextAreaController
 									name="annexure_vessel"
@@ -39,7 +53,7 @@ function Annexure({ control, mode = 'read', initialValues = {} }) {
 					</div>
 					<div className={styles.vessel_voyage}>
 						<span>Voyege</span>
-						{mode === 'read' ? <span>{initialValues?.annexure_vessel_number || ''}</span>
+						{mode === MODE_READ ? <span>{initialValues?.annexure_vessel_number || ''}</span>
 							: (
 								<TextAreaController
 									name="annexure_vessel_number"
@@ -64,8 +78,8 @@ function Annexure({ control, mode = 'read', initialValues = {} }) {
 							</tr>
 						</thead>
 						<tbody>
-							{mode === 'read'
-								? (initialValues?.containers || []).slice(1).map((container) => (
+							{mode === MODE_READ
+								? (initialValues?.containers || []).map((container) => (
 									<tr key={container?.container_number}>
 										<td className={styles.table_data_read}>{container?.container_number}</td>
 										<td className={styles.table_data_read}>{container?.marks_and_number}</td>
@@ -77,44 +91,17 @@ function Annexure({ control, mode = 'read', initialValues = {} }) {
 
 								: fields.map((field, index) => (
 									<tr key={field.id} style={{ position: 'relative' }}>
-										<td className={styles.table_data}>
-											<TextAreaController
-												name={`containers.${index}.container_number`}
-												control={control}
-												rows={8}
-											/>
-										</td>
-										<td className={styles.table_data}>
-											<TextAreaController
-												name={`containers.${index}.marks_and_number`}
-												control={control}
-												rows={8}
-											/>
+										{KEYS.map((key) => (
+											<td key={key} className={styles.table_data}>
+												<TextAreaController
+													name={`containers.${index}.${key}`}
+													control={control}
+													rows={8}
+												/>
+											</td>
+										))}
 
-										</td>
-										<td className={styles.table_data}>
-											<TextAreaController
-												name={`containers.${index}.package_description`}
-												control={control}
-												rows={8}
-											/>
-										</td>
-										<td className={styles.table_data}>
-											<TextAreaController
-												name={`containers.${index}.gross_weight`}
-												control={control}
-												rows={8}
-											/>
-										</td>
-										<td className={styles.table_data}>
-											<TextAreaController
-												name={`containers.${index}.measurement`}
-												control={control}
-												rows={8}
-											/>
-										</td>
-
-										{index !== 0
+										{index !== NOT_SHOW_REMOVE_INDEX
 											? (
 												<IcMCross
 													type="button"
@@ -127,7 +114,7 @@ function Annexure({ control, mode = 'read', initialValues = {} }) {
 
 						</tbody>
 					</table>
-					{mode !== 'read'
+					{mode !== MODE_READ
 						? (
 							<div className={styles.button_wrapper}>
 								<Button
