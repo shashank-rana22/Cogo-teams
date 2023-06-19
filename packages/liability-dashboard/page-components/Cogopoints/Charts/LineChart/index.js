@@ -1,4 +1,5 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 import { TRANSACTION_TYPE } from '../../../../constants';
@@ -6,33 +7,31 @@ import { formatValue } from '../../../../utils/formatValue';
 
 import styles from './styles.module.css';
 
-const DEFAULT_INDEX = 0;
+const renderSliceTooltip = ({ item = {}, currencyCode = '', activeStatsCard = '' }) => {
+	const { data: singleData = {} } = item?.slice?.points?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+	return (
+		<div className={styles.tooltip}>
+			<div className={styles.title}>
+				{`${startCase(TRANSACTION_TYPE[activeStatsCard])}ed Month : `}
+				<div className={styles.amount}>{singleData?.x}</div>
+			</div>
+			<div className={styles.title}>
+				{`${startCase(TRANSACTION_TYPE[activeStatsCard])}ed Amount (${currencyCode}) : `}
+				<div className={styles.amount}>{singleData?.y}</div>
+			</div>
+		</div>
+	);
+};
 
 function LineChart({ formattedData = [], currencyCode = '', activeStatsCard = '' }) {
 	const data = [
 		{
 			id    : 'amount',
-			color : 'hsl(155, 70%, 50%)',
+			color : '#6492bf',
 			data  : formattedData.slice().reverse(),
 		},
 	];
-
-	const renderSliceTooltip = ({ slice = {} }) => {
-		const { data: singleData = {} } = slice?.points?.[DEFAULT_INDEX] || {};
-
-		return (
-			<div className={styles.tooltip_div}>
-				<div className={styles.title}>
-					{`${startCase(TRANSACTION_TYPE[activeStatsCard])}ed Month : `}
-					<div className={styles.amount}>{singleData?.x}</div>
-				</div>
-				<div className={styles.title}>
-					{`${startCase(TRANSACTION_TYPE[activeStatsCard])}ed Amount (${currencyCode}) : `}
-					<div className={styles.amount}>{singleData?.y}</div>
-				</div>
-			</div>
-		);
-	};
 
 	return (
 		<ResponsiveLine
@@ -74,7 +73,7 @@ function LineChart({ formattedData = [], currencyCode = '', activeStatsCard = ''
 			pointLabelYOffset={-12}
 			useMesh
 			enableSlices="x"
-			sliceTooltip={(item) => renderSliceTooltip(item)}
+			sliceTooltip={(item) => renderSliceTooltip({ item, currencyCode, activeStatsCard })}
 
 		/>
 

@@ -135,3 +135,8 @@ export const COGOSTORE_STATS_OPTIONS = ['total_burnt_point_value',
 	'cogostore_burnt_point_value'];
 
 export const COGOSTORE_TAB_OPTIOINS = ['overall', 'importer_exporter', 'channel_partner', 'affiliate'];
+
+export const ACTIVE_CARD_MAPPING = ({ liabilityData, burntData }) => ({
+	liability_point_value   : liabilityData,
+	total_burnt_point_value : burntData,
+});
