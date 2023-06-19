@@ -18,6 +18,8 @@ function History() {
 
 	const { loading, filters, setFilters, apiData, refetch } = useHistorySettlemet();
 
+	const { list = [] } = apiData || {};
+
 	const onPageChange = (val:number) => {
 		setFilters({ ...filters, page: val });
 	};
@@ -25,10 +27,10 @@ function History() {
 	const onChangeTableHeaderCheckbox = (event) => {
 		event.stopPropagation();
 
-		const listIds = (apiData?.list || []).map(({ id }) => id);
+		const listIds = (list || []).map(({ id }) => id);
 
 		if (event.target.checked) {
-			const filterData = (apiData?.list || [])
+			const filterData = (list || [])
 				?.filter((item) => item?.notPostedSettlementIds?.length > 0
 				&& !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND));
 
@@ -86,11 +88,11 @@ function History() {
 		);
 	};
 
-	const isAllChecked = isEmpty((apiData?.list || [])?.filter((item) => item?.notPostedSettlementIds?.length > 0
+	const isAllChecked = isEmpty((list || [])?.filter((item) => item?.notPostedSettlementIds?.length > 0
 	&& !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND)
 	&& !Object.keys(checkedRows).includes(item?.id)));
 
-	const showHeaderCheckbox = !isEmpty((apiData?.list || [])?.filter(
+	const showHeaderCheckbox = !isEmpty((list || [])?.filter(
 		(item) => item?.notPostedSettlementIds?.length > 0
 		&& !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND),
 	));
@@ -122,8 +124,8 @@ function History() {
 				refetch={refetch}
 
 			/>
-			{!apiData?.list && !loading && <SelectState />}
-			{!loading && apiData?.list?.length <= 0 && <EmptyStateDocs />}
+			{!list && !loading && <SelectState />}
+			{!loading && list?.length <= 0 && <EmptyStateDocs />}
 		</div>
 	);
 }
