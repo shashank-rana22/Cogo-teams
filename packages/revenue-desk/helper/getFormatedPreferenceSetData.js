@@ -17,6 +17,7 @@ const getFormatedPreferenceSetData = ({ allPreferenceCardsData }) => {
 		rowData.sell_price_currency = element?.sell_rate_preferences?.currency;
 		rowData.profit_percentage = element?.buy_rate_preferences?.profit_percentage || 0;
 		rowData.source = element?.source || undefined;
+		rowData.selected_priority = element?.selected_priority;
 		rowData.api = 'booking_preference';
 		row.rowData = rowData;
 		rows.push(row);

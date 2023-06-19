@@ -2,14 +2,14 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import styles from './styles.module.css';
 
-function SingleSelectedCard({ data, index, shipmentType }) {
+function SingleSelectedCard({ data, shipmentType, priority }) {
 	const showData = (val) => val || '';
 	return (
 		<div className={Number(data?.rowData?.profit_percentage) > 0
 			? styles.positive_profit_container : styles.negative_profit_container}
 		>
 			<div className={styles.left_section_container}>
-				{index + 1}
+				{priority}
 				.
 			</div>
 			<div className={styles.right_section_container}>
@@ -24,19 +24,19 @@ function SingleSelectedCard({ data, index, shipmentType }) {
 								: showData(data?.rowData?.shipping_line)}
 						</div>
 					</div>
-					<div className={styles.upper_right_section}>
+					{/* <div className={styles.upper_right_section}>
 						<div className={styles.tag}>
 							KAM Selected Rate
 						</div>
-					</div>
+					</div> */}
 				</div>
 				<div className={styles.lower_section}>
-					<div className={styles.lower_left_section}>
+					{/* <div className={styles.lower_left_section}>
 						KAM Discount Applied :
 						<div className={styles.price}>
 							USD 10
 						</div>
-					</div>
+					</div> */}
 					<div className={styles.lower_right_section}>
 						<div className={styles.label}>
 							Profitability : &nbsp;
