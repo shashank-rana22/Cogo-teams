@@ -10,6 +10,17 @@ import ExistingPOC from './ExistingPOC';
 import getCreateOrgPocParams from './helpers/getCreateOrgPocParams';
 import styles from './styles.module.css';
 
+const RADIO_OPTIONS = [
+	{
+		value : 'existing',
+		label : 'Existing POC',
+	},
+	{
+		value : 'create_new',
+		label : 'Create New POC',
+	},
+];
+
 function AddTradePartyPoc({
 	addPoc = {},
 	setAddPoc = () => {},
@@ -41,17 +52,6 @@ function AddTradePartyPoc({
 		organization_id : service_provider_id,
 		refetch         : createRefetch,
 	});
-
-	const radioOptions = [
-		{
-			value : 'existing',
-			label : 'Existing POC',
-		},
-		{
-			value : 'create_new',
-			label : 'Create New POC',
-		},
-	];
 
 	const title = (
 		<header className={styles.modal_header}>
@@ -85,7 +85,7 @@ function AddTradePartyPoc({
 
 			<Modal.Body style={{ maxHeight: '500px' }}>
 				<div>
-					<RadioGroup options={radioOptions} value={typeOfPOC} onChange={setTypeOfPOC} />
+					<RadioGroup options={RADIO_OPTIONS} value={typeOfPOC} onChange={setTypeOfPOC} />
 				</div>
 
 				<div>

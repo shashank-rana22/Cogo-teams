@@ -1,7 +1,6 @@
 .container {
 	position: relative;
 	display: flex;
-	flex-direction: row;
 	background-color: #f6f5fe;
 
 	:global {

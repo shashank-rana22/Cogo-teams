@@ -1,17 +1,17 @@
 const getInternalPocData = (data = []) => {
-	const format_data = { shipment: [] };
+	const formatData = { shipment: [] };
 
 	data.forEach((item) => {
 		if (item?.service_type) {
-			if (!Object.keys(format_data)?.includes(item.service_type)) {
-				format_data[item.service_type] = [item];
-			} else { format_data[item.service_type].push(item); }
+			if (!Object.keys(formatData)?.includes(item.service_type)) {
+				formatData[item.service_type] = [item];
+			} else { formatData[item.service_type].push(item); }
 		} else {
-			format_data.shipment.push(item);
+			formatData.shipment.push(item);
 		}
 	});
 
-	return format_data;
+	return formatData;
 };
 
 export default getInternalPocData;
