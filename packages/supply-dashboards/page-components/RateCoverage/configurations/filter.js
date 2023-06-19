@@ -76,11 +76,6 @@ const containerTypeOptions = [
 	{ label: 'Open Top', value: 'open_top' },
 	{ label: 'Tank', value: 'tank' },
 ];
-// const locationTypeMapping = {
-// 	fcl_freight: ['country', 'seaport'],
-// };
-
-const containerSizeOptions = [];
 
 const Controls = () => {
 	const countryOptions1 = useGetAsyncOptions(merge(asyncFieldsLocations(), {
@@ -120,7 +115,7 @@ const Controls = () => {
 		{
 			heading : 'Container Size',
 			name    : 'container_size',
-			options : containerSizeOptions,
+			options : [],
 		},
 
 	];
