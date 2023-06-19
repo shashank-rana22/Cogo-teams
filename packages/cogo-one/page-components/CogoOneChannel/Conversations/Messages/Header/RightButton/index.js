@@ -47,7 +47,7 @@ function RightButton({
 			<Button
 				themeType="secondary"
 				size="md"
-				className={styles.popover_button}
+				className={styles.styled_button}
 				disabled
 			>
 				Assign

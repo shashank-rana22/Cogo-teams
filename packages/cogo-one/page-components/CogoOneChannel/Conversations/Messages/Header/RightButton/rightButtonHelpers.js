@@ -122,6 +122,7 @@ export function getAccessableButtonOptions({
 		} else {
 			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'assign_to_me'];
 		}
+		return ACCESSABLE_BUTTON_OPTIONS;
 	}
 
 	if (viewType === 'shipment_view') {
