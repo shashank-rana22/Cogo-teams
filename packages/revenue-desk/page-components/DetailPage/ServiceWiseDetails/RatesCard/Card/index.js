@@ -3,7 +3,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
-import LoadingCard from './LoadingCard';
 import PriorityNumber from './PriorityNumber';
 import ShowSellRates from './ShowSellRates';
 import styles from './styles.module.css';
@@ -108,12 +107,15 @@ function Card({
 							) : null}
 						</div>
 					</div>
-					{rate_key ? (
-						<div>
-							<Pill size="md" color="#F2F3FA">{startCase(fromkey || data?.rowData?.source)}</Pill>
-						</div>
-					) : null}
-
+					<div style={{ display: 'flex' }}>
+						{rate_key ? (<div><Pill size="md" color="#F2F3FA">{startCase(fromkey || data?.rowData?.source)}</Pill></div>
+						) : null}
+						{((data?.rowData?.selected_priority) && (data?.rowData?.selected_priority === data?.rowData?.priority)) ? (
+							<div>
+								<Pill size="md" color="#F9F9F9"><div style={{ color: '#7278AD' }}>So1 Selected Rate</div></Pill>
+							</div>
+						) : null}
+					</div>
 				</div>
 				<div className={styles.lower_section}>
 					<div className={styles.first_section}>
