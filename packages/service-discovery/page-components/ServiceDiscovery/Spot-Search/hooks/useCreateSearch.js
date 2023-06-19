@@ -28,10 +28,14 @@ const useCreateSearch = () => {
 			const res = await trigger({ data: payload });
 
 			Toast.success(res?.data?.id);
+
+			return res?.data?.id;
 		} catch (err) {
 			if (err.response?.data) {
 				Toast.error(getApiErrorString(err.response?.data));
 			}
+
+			return err;
 		}
 	};
 

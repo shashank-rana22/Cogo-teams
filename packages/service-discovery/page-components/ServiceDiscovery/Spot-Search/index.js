@@ -12,13 +12,13 @@ import styles from './styles.module.css';
 
 function SpotSearch() {
 	const [organization, setOrganization] = useState({});
-	const [selectedMode, setSelectedMode] = useState({});
+	const [selectedMode, setSelectedMode] = useState({ mode_label: 'FCL', mode_value: 'fcl_freight' });
 	const [selectedService, setSelectedService] = useState('');
 	const [location, setLocation] = useState({});
 
 	const { control, formState:{ errors }, handleSubmit, watch, setValue } = useForm();
 
-	const { createSearch, data, loading } = useCreateSearch();
+	const { createSearch, loading } = useCreateSearch();
 
 	return (
 		<div className={styles.container}>

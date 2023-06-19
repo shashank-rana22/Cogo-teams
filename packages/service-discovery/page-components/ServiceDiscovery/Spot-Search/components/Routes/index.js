@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React from 'react';
 
@@ -18,26 +19,34 @@ function Routes({
 	createSearch,
 	createSearchLoading,
 }) {
+	const router = useRouter();
+
 	const buttonDisabled = !location?.origin || !location?.destination;
 
 	const service_type = mode.mode_value;
 
 	const formValues = watch();
 
-	const onClickSearch = () => {
+	const onClickSearch = async () => {
 		if (!isEmpty(errors)) {
-			return null;
+			return;
 		}
+
 		const default_payload = getDefaultPayload({
 			serviceType : service_type,
 			origin      : location.origin,
 			destination : location.destination,
 		});
 
-		createSearch({
+		const spot_search_id = await createSearch({
 			action : 'default',
 			values : { default_payload, service_type, ...organization, ...formValues },
 		});
+
+		router.push(
+			'/book/[spot_search_id]/[importer_exporter_id]',
+			`/book/${spot_search_id}/${organization.organization_id}`,
+		);
 	};
 
 	return (

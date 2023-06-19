@@ -175,9 +175,11 @@ const getDefaultPayload = ({
 	destination = '',
 	sub_type = '',
 }) => {
+	const extraPayloadKey = serviceType === 'ftl_freight' ? 'truck' : sub_type;
+
 	const payloadObject = {
 		...getCommonPayload(serviceType, origin, destination),
-		...getExtraPayload(serviceType, sub_type),
+		...getExtraPayload(serviceType, extraPayloadKey),
 	};
 
 	const payloadKey = [serviceType, 'services_attributes'].join('_');
