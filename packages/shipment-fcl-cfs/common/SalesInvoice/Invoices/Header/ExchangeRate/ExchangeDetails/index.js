@@ -19,13 +19,7 @@ function ExchangeDetails({
 		<div className={styles.flex_col}>
 			{currencyConversions?.map((key) => (
 				<div className={styles.text} key={key}>
-					{`${key}`}
-					{' '}
-					1 =
-					{' '}
-					{`${Number(availableCurrencyConversions[key])?.toFixed(TWO_VALUE)}`}
-					{' '}
-					{`${invoiceCurrency}`}
+					{`${key} 1 = ${Number(availableCurrencyConversions[key])?.toFixed(TWO_VALUE)} ${invoiceCurrency}`}
 				</div>
 			))}
 		</div>

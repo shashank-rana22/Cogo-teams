@@ -7,8 +7,6 @@ import FieldArrayItem from '../FieldArrayItem';
 
 import { getCurrencyControls } from './getCurrencyControls';
 
-const EMPTY_VALUE = 0;
-
 function CurrencyExchangeForm({
 	invoiceCurrency = '',
 	differentCurrenciesHash = {},
@@ -43,7 +41,7 @@ function CurrencyExchangeForm({
 				);
 			}
 		});
-		if (Object.keys(EXCHANGE_CURRENCY_HASH).length === EMPTY_VALUE) {
+		if (isEmpty(Object.keys(EXCHANGE_CURRENCY_HASH))) {
 			Toast.error('Please fill atleast one field !');
 		}
 		handleFormSubmit(EXCHANGE_CURRENCY_HASH);
