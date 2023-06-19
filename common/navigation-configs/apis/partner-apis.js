@@ -9924,7 +9924,7 @@ const partner = {
 			service_name : 'campaign',
 		},
 		{
-			api			 : 'create_campaign_email_configuration',
+			api        	 : 'create_campaign_email_configuration',
 			access_type	 : 'private',
 			service_name : 'campaign',
 		},
