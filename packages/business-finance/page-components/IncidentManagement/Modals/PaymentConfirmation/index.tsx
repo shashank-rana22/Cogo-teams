@@ -31,7 +31,10 @@ interface Props {
 	organization?:Org,
 	isEditable?:boolean,
 	remark?:string,
-	row:any,
+	row:RowTypes,
+}
+interface RowTypes {
+	status:string,
 }
 
 function PaymentConfirmation({
