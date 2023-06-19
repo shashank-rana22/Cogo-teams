@@ -9,8 +9,7 @@ const PAYMENT_MAPPING = {
 };
 
 function ChangePaymentMode({
-	show = false,
-	setShow = () => {},
+	setShowModal = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
@@ -24,7 +23,7 @@ function ChangePaymentMode({
 	const payload = { id: invoice?.id, payment_mode: paymentMode };
 
 	const refetchAfterCall = () => {
-		setShow(false);
+		setShowModal(false);
 		refetch();
 	};
 
@@ -32,8 +31,8 @@ function ChangePaymentMode({
 
 	return (
 		<Modal
-			show={show}
-			onClose={() => setShow(false)}
+			show
+			onClose={() => setShowModal(false)}
 			showCloseIcon={false}
 			closeOnOuterClick={false}
 		>
