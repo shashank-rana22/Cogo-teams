@@ -14,7 +14,7 @@ import styles from './styles.module.css';
 function ListData({
 	userId = '', userMobile = '', leadUserId = '',
 	list = [], orgId = '', setShowModal = () => {}, setSingleItem = () => {},
-	isGstUploaded, isPanUploaded, formattedMessageData,
+	isGstUploaded, isPanUploaded, formattedMessageData = {},
 }) {
 	const handleOpenFile = (val) => {
 		window.open(val, '_blank');
@@ -46,6 +46,7 @@ function ListData({
 				<div className={styles.list_container}>
 					{ (list || []).map((item) => {
 						const {
+							id = '',
 							created_at = '',
 							document_type = '',
 							document_url = '',
@@ -120,6 +121,7 @@ function ListData({
 								{openModal === document_url && orgId && (
 									<DocumentTypeSID
 										key={document_url}
+										id={id}
 										orgId={orgId}
 										formattedMessageData={formattedMessageData}
 										openModal={openModal}

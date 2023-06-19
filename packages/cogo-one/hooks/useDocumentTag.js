@@ -7,7 +7,7 @@ const useDocumentTag = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const postDocumentTag = async ({ payload, setOpenModal = () => {} }) => {
+	const postDocumentTag = async ({ payload = {}, setOpenModal = () => {} }) => {
 		try {
 			await trigger({
 				data: payload,

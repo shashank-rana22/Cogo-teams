@@ -13,8 +13,9 @@ const CONTROLLER_MAPPING = {
 };
 
 function DocumentTypeSID({
-	orgId,
-	formattedMessageData,
+	orgId = '',
+	id = '',
+	formattedMessageData = {},
 	openModal = '',
 	setOpenModal = () => {},
 }) {
@@ -37,6 +38,7 @@ function DocumentTypeSID({
 
 	const createDocumentTag = () => {
 		const payload = {
+			document_id   : id,
 			document_type : watchListShipmentPendingTasks,
 			shipment_id   : watchListShipment,
 			document_link : openModal,
