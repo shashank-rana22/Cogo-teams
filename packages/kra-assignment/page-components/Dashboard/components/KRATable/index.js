@@ -1,34 +1,31 @@
-import { Button, Select } from '@cogoport/components';
-
-import styles from './styles.module.css';
+import KRAWeightCalculationTable from './KRAWeightCalculationTable';
+import SelectKRAs from './SelectKRAs';
 import useKRAList from './useKRAList';
 
-function KRATable() {
-	const { selectedValue, setSelectedValue, KRAOptions } = useKRAList();
+function KRATable({ selectArray }) {
+	const {
+		selectedValue,
+		setSelectedValue,
+		KRAOptions,
+		inputValue,
+		setInputValue,
+		onClickAddKRAs,
+	} = useKRAList();
+
 	return (
-		<div className={styles.container}>
-			<div>
-				Select KRA
-				<div className={styles.select_container}>
-					<Select
-						size="sm"
-						placeholder="Container no"
-						value={selectedValue}
-						onChange={(e) => setSelectedValue(e)}
-						options={KRAOptions || []}
-					/>
-				</div>
-			</div>
+		<div>
+			<SelectKRAs
+				selectedValue={selectedValue}
+				setSelectedValue={setSelectedValue}
+				KRAOptions={KRAOptions}
+				onClickAddKRAs={onClickAddKRAs}
+			/>
 
-			<div className={styles.button_wrapper}>
-				<Button
-					themeType="primary"
-					size="sm"
-				>
-					Add KRAs
-				</Button>
-			</div>
-
+			<KRAWeightCalculationTable
+				inputValue={inputValue}
+				setInputValue={setInputValue}
+				selectArray={selectArray}
+			/>
 		</div>
 	);
 }

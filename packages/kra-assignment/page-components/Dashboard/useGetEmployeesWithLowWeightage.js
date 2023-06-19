@@ -3,22 +3,19 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
-function useGetUnassignedEmployee() {
+function useGetEmployeesWithLowWeightage() {
 	const [filters, setFilters] = useState();
 
 	const [{ data, loading }, trigger] = useRequest({
-		url    : '/get_unassigned_employees',
+		url    : '/get_employees_with_low_weightage',
 		method : 'GET',
 	}, { manual: true });
 
-	const getUnassignedEmployee = useCallback(async () => {
-		// console.log(filters);
-		const { employee_ids = [], ...rest } = filters || [];
+	const getEmployeesWithLowWeightage = useCallback(async () => {
 		try {
 			await trigger({
 				params: {
-					employee_ids,
-					...rest,
+					filters,
 				},
 			});
 		} catch (error) {
@@ -29,8 +26,8 @@ function useGetUnassignedEmployee() {
 	}, [trigger, filters]);
 
 	useEffect(() => {
-		getUnassignedEmployee();
-	}, [getUnassignedEmployee]);
+		getEmployeesWithLowWeightage();
+	}, [getEmployeesWithLowWeightage]);
 
 	return {
 		data,
@@ -40,4 +37,4 @@ function useGetUnassignedEmployee() {
 	};
 }
 
-export default useGetUnassignedEmployee;
+export default useGetEmployeesWithLowWeightage;

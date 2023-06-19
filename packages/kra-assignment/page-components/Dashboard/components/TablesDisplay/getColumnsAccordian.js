@@ -5,7 +5,7 @@ import EqualArray from '../../../config/EqualArray';
 
 // import styles from './styles.module.css';
 
-const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem }) => [
+const getColumnsAccordian = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem }) => [
 	{
 		id     : 'select_options',
 		Header : (
@@ -36,7 +36,7 @@ const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem }) =
 		),
 	},
 	{
-		Header   : 'EMPLOYEE',
+		Header   : 'EMPLOYEE NAME',
 		accessor : (item) => (
 			<div>
 				{startCase(item?.name) || '-'}
@@ -44,45 +44,13 @@ const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem }) =
 		),
 	},
 	{
-		Header   : 'ROLE',
+		Header   : 'WEIGHTAGE',
 		accessor : (item) => (
 			<div>
-				{startCase(item?.role) || '-'}
-			</div>
-		),
-	},
-	{
-		Header   : 'TRIBE',
-		accessor : (item) => (
-			<div>
-				{startCase(item?.tribe?.tribe_name) || '-'}
-			</div>
-		),
-	},
-	{
-		Header   : 'SQUAD',
-		accessor : (item) => (
-			<div>
-				{startCase(item?.squad?.squad_name) || '-'}
-			</div>
-		),
-	},
-	{
-		Header   : 'CHAPTER',
-		accessor : (item) => (
-			<div>
-				{startCase(item?.chapter?.chapter_name) || '-'}
-			</div>
-		),
-	},
-	{
-		Header   : 'SUB CHAPTER',
-		accessor : (item) => (
-			<div>
-				{startCase(item?.sub_chapter?.sub_chapter_name) || '-'}
+				{item?.weightage || '-'}
 			</div>
 		),
 	},
 ];
 
-export default getColumns;
+export default getColumnsAccordian;

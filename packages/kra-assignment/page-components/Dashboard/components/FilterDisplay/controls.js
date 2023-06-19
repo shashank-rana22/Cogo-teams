@@ -1,11 +1,12 @@
 const controls = [
 	{
-		name        : 'employee_id',
+		name        : 'employee_ids',
 		label       : 'Employee',
-		placeholder : 'Select Employee',
+		placeholder : 'Select',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_employees',
 		valueKey    : 'id',
+		multiple    : true,
 		params      : {
 			filters: {
 				status               : 'active',
@@ -18,8 +19,7 @@ const controls = [
 		type        : 'asyncSelect',
 		asyncKey    : 'list_roles',
 		label       : 'Roles',
-		placeholder : 'Roles',
-		multiple    : true,
+		placeholder : 'Select',
 		// onChange    : (_, e) => {
 		// 	setSelectedValue((pv) => ({
 		// 		...pv,
@@ -36,12 +36,11 @@ const controls = [
 		},
 	},
 	{
-		name        : 'tribe_ids',
+		name        : 'tribe_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_tribes',
 		label       : 'Tribes',
-		placeholder : 'Tribes',
-		multiple    : true,
+		placeholder : 'Select',
 		params      : {
 			filters: {
 				status               : 'active',
@@ -53,12 +52,11 @@ const controls = [
 	},
 
 	{
-		name        : 'squad_ids',
+		name        : 'squad_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_squads',
 		label       : 'Squads',
-		placeholder : 'Squads',
-		multiple    : true,
+		placeholder : 'Select',
 		params      : {
 			filters: {
 				status               : 'active',
@@ -70,12 +68,11 @@ const controls = [
 	},
 
 	{
-		name        : 'chapter_ids',
+		name        : 'chapter_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_chapters',
 		label       : 'Chapters',
-		placeholder : 'Chapters',
-		multiple    : true,
+		placeholder : 'Select',
 		params      : {
 			filters: {
 				status               : 'active',
@@ -87,12 +84,11 @@ const controls = [
 	},
 
 	{
-		name        : 'sub_chapter_ids',
+		name        : 'sub_chapter_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_sub_chapters',
 		label       : 'Sub chapter',
-		placeholder : 'Sub chapter',
-		multiple    : true,
+		placeholder : 'Select',
 		params      : {
 			filters: {
 				status               : 'active',

@@ -3,23 +3,49 @@ import { useState } from 'react';
 
 const useKRAList = () => {
 	const [selectedValue, setSelectedValue] = useState();
+	const [inputValue, setInputValue] = useState([]);
 
-	const [{ data, loading }, trigger] = useHarbourRequest(
+	const [{ data, loading }] = useHarbourRequest(
 		{
 			method : 'get',
 			url    : '/list_kra',
 		},
-		{ manual: true },
+		{ manual: false },
 	);
 
-	const KRAOptions = [
-		{
-			value : 'kra_1',
-			label : 'KRA 1',
-		},
-	];
+	const { list } = data || {};
 
-	return { selectedValue, setSelectedValue, KRAOptions };
+	const KRAOptions = (list || []).map((element) => (
+		{
+			value : element?.id,
+			label : element?.kra_name,
+		}
+	));
+
+	const onClickAddKRAs = () => {
+		(selectedValue || []).map((value) => (
+			setInputValue((pv) => ([
+				...pv,
+				{
+					kra_assigned : value,
+					name         : (list || []).find((element) => (element?.id === value)).kra_name,
+					weightage    : 1 / ((selectedValue || []).length),
+				},
+
+			]))
+		));
+		setSelectedValue();
+	};
+
+	return {
+		selectedValue,
+		setSelectedValue,
+		KRAOptions,
+		inputValue,
+		setInputValue,
+		onClickAddKRAs,
+		loading,
+	};
 };
 
 export default useKRAList;
