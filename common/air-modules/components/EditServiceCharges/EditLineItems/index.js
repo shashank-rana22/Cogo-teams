@@ -6,15 +6,13 @@ import Child from './Child';
 import Header from './Header';
 import styles from './styles.module.css';
 
-function EditLineItems(props) {
-	const {
-		control,
-		showAddButtons = true, showDeleteButton = true, controls = [],
-		name = '',
-		customValues = {},
-		error = {},
-	} = props;
-
+function EditLineItems({
+	control,
+	showAddButtons = true, showDeleteButton = true, controls = [],
+	name = '',
+	customValues = {},
+	error = {},
+}) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
 
 	const CHILD_EMPTY_VALUES = {};
