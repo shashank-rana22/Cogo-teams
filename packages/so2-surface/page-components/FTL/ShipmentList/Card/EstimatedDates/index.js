@@ -4,10 +4,17 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const FIRST_ELEMENT_DATA = 0;
+
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
 
 function EstimatedDates({ data = {} }) {
-	const { estimated_arrival = '', estimated_departure = '', pickup_date = '', delivery_date = '' } = data.ftl_freight_services[0] || {};
+	const {
+		estimated_arrival = '',
+		estimated_departure = '',
+		pickup_date = '',
+		delivery_date = '',
+	} =	 data.ftl_freight_services[FIRST_ELEMENT_DATA] || {};
 	return (
 		<div>
 			<div className={`${styles.container} core_ui_port_conatiner`}>
