@@ -6,10 +6,10 @@ import { useContext } from 'react';
 
 import styles from './styles.module.css';
 
-const docStatusMapping = {
+const DOC_STATUS_MAPPING = {
 	hold: 'On Hold',
 };
-const colorMapping = {
+const STATUS_COLOR_MAPPING = {
 	eligible  : 'green',
 	requested : 'yellow',
 };
@@ -21,7 +21,7 @@ export default function DocumentHoldDetails() {
 		return null;
 	}
 
-	const status = docStatusMapping[document_delay_status] || startCase(document_delay_status);
+	const status = DOC_STATUS_MAPPING[document_delay_status] || startCase(document_delay_status);
 
 	const remarksAccessKey = shipment_data?.trade_type === 'export' ? 'bl_remarks' : 'remarks';
 
@@ -33,7 +33,7 @@ export default function DocumentHoldDetails() {
 	);
 
 	return (
-		<div className={cl`${styles.container} ${styles[colorMapping[document_delay_status]]}`}>
+		<div className={cl`${styles.container} ${styles[STATUS_COLOR_MAPPING[document_delay_status]]}`}>
 			<IcMError className={styles.error_icon} />
 
 			<div>

@@ -2,17 +2,16 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { differenceInDays } from '@cogoport/utils';
 
-const DAY_DIFFERENCE_MIN = 31;
-
+const THRESHOLD_DAYS = 31;
 const INDEX_VALUE = 0;
 
-const checkDateDifference = ({ date2, date1 }) => {
+const checkDateDifference = (date2, date1) => {
 	let dateTypeFormat = '';
-	const timeDifference = differenceInDays(date2, date1);
+	const differenceInDay = differenceInDays(date2, date1);
 
-	if (timeDifference >= DAY_DIFFERENCE_MIN) {
+	if (differenceInDay >= THRESHOLD_DAYS) {
 		dateTypeFormat = GLOBAL_CONSTANTS.formats.date['MMM yyyy'];
-	} else if (timeDifference < DAY_DIFFERENCE_MIN) {
+	} else if (differenceInDay < THRESHOLD_DAYS) {
 		dateTypeFormat = GLOBAL_CONSTANTS.formats.date['dd MMM'];
 	}
 	return dateTypeFormat;

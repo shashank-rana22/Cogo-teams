@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import Header from './Header';
 import styles from './styles.module.css';
-import TableColumns from './TableColumns';
+import tableColumns from './TableColumns';
 
 const PAGE_COUNT = 0;
 const PAGE_LIMIT = 10;
@@ -45,7 +45,7 @@ function List({
 
 				<Table
 					className={styles.table_container}
-					columns={TableColumns({ currencyCode, activeStatsCard, activeHeaderTab })}
+					columns={tableColumns({ currencyCode, activeStatsCard, activeHeaderTab })}
 					data={list || []}
 					loading={loading}
 					loadingRowsCount={LOADING_COUNT}

@@ -1,5 +1,5 @@
 .user_name {
-	max-width: 80%;
+	max-width: 210px;
 	overflow: hidden;
 	font-weight: 600;
 	text-overflow: ellipsis;

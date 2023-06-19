@@ -1,8 +1,9 @@
 const liabilityChartData = (creditData = {}) => {
 	const {
 		one_time_credit_point_value = 0,
-		referral_credit_point_value = 0, saas_subscription_credit_point_value
-		= 0, shipment_credit_point_value = 0,
+		referral_credit_point_value = 0,
+		saas_subscription_credit_point_value = 0,
+		shipment_credit_point_value = 0,
 	} = creditData;
 
 	const liabilityData = [

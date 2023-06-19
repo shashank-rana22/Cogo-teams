@@ -7,7 +7,7 @@ import styles from './styles.module.css';
 
 const EARNED_VALUE = 0;
 
-function TableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab = '' }) {
+function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab = '' }) {
 	const columns = [
 		{
 			Header   : 'Name',
@@ -17,7 +17,7 @@ function TableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					placement="bottom"
 				>
 					<div className={styles.user_name}>
-						{startCase(item?.user_name)}
+						{startCase(getByKey(item, 'user_name'))}
 					</div>
 
 				</Tooltip>
@@ -37,7 +37,7 @@ function TableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					placement="bottom"
 				>
 					<div className={styles.user_name}>
-						{startCase(item?.organization_name) || '--'}
+						{startCase(getByKey(item, 'organization_name')) || '--'}
 					</div>
 				</Tooltip>
 			),
@@ -136,4 +136,4 @@ function TableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 	return filterColumns.filter((item) => item.conditions.includes(activeStatsCard));
 }
 
-export default TableColumns;
+export default tableColumns;

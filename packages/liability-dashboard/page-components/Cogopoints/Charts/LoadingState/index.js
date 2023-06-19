@@ -7,7 +7,6 @@ import styles from './styles.module.css';
 function ChartLoadingState() {
 	return (
 		<div className={styles.container}>
-
 			<div className={styles.line_chart}>
 				<Placeholder height="100%" width="100%">
 					<Image
@@ -18,7 +17,6 @@ function ChartLoadingState() {
 					/>
 				</Placeholder>
 			</div>
-
 			<div className={styles.pie_chart}>
 				<Placeholder height="100%" width="100%">
 					<Image
@@ -29,7 +27,6 @@ function ChartLoadingState() {
 					/>
 				</Placeholder>
 			</div>
-
 		</div>
 	);
 }

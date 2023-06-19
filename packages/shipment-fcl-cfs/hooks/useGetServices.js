@@ -2,7 +2,7 @@ import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
 
-const activeStakeholderMapping = {
+const STAKEHOLDER_KEY_MAPPING = {
 	consignee_shipper_booking_agent : 'consignee_shipper_id',
 	booking_agent                   : 'importer_exporter_id',
 };
@@ -27,10 +27,10 @@ function useGetServices({ shipment_data = {}, additional_methods = [], activeSta
 					},
 				});
 
-				if (activeStakeholder in activeStakeholderMapping) {
+				if (activeStakeholder in STAKEHOLDER_KEY_MAPPING) {
 					const servicesToShow = (res?.data?.summary || [])
 						.filter((service) => service?.importer_exporter?.id
-							=== shipment_data?.[activeStakeholderMapping[activeStakeholder]]);
+							=== shipment_data?.[STAKEHOLDER_KEY_MAPPING[activeStakeholder]]);
 
 					setServicesData(servicesToShow);
 				} else {

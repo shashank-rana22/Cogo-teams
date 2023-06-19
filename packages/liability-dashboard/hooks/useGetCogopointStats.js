@@ -1,5 +1,15 @@
 import { useRequest } from '@cogoport/request';
+import { addDays } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
+
+const ADD_DAY = 1;
+
+const getParams = ({ currencyCode, activeHeaderTab, startDate, endDate }) => ({
+	currency          : currencyCode,
+	organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
+	start_date        : addDays(startDate, ADD_DAY),
+	end_date          : endDate,
+});
 
 const useGetCogopointStats = ({ activeHeaderTab = '', selectedDate = {}, currencyCode = '' }) => {
 	const [{ data, loading }, trigger] = useRequest({
@@ -11,12 +21,7 @@ const useGetCogopointStats = ({ activeHeaderTab = '', selectedDate = {}, currenc
 
 	const getCogopointStats = useCallback(() => {
 		trigger({
-			params: {
-				currency          : currencyCode,
-				organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
-				start_date        : startDate || undefined,
-				end_date          : endDate || undefined,
-			},
+			params: getParams({ currencyCode, activeHeaderTab, startDate, endDate }),
 		});
 	}, [trigger, activeHeaderTab, startDate, endDate, currencyCode]);
 
