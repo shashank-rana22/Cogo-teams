@@ -1,6 +1,5 @@
 .container {
 	width: 100%;
-	padding-top: 6px;
 
 	:global {
 		table {
@@ -9,7 +8,6 @@
 
 		background-color: transparent;
 		border-radius: 10px;
-
 		.ui_table_head_cell {
 			padding: 10px;
 			background-color: #deebed;
@@ -44,9 +42,9 @@
 		}
 
 		.ui_table_container{
-			max-height: 400px;
-			overflow-y: scroll;
+			margin-bottom: 0px;
 		}
+
 	}
 
 	@media (max-width: 1010px) {
