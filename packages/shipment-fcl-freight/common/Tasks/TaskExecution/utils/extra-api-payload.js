@@ -12,7 +12,7 @@ const NOT_INCLUDE_FIELD_IN_FTL = [
 const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
 
 const extraApiPayload = (values, end_point, task) => {
-	if (end_point === 'create_document') {
+	if (end_point === 'fcl_freight/create_document') {
 		let documentArr = values?.documents;
 
 		if (!documentArr) documentArr = [values];
