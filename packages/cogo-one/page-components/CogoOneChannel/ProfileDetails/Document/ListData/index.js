@@ -20,7 +20,7 @@ function ListData({
 		window.open(val, '_blank');
 	};
 
-	const [openModal, setOpenModal] = useState(false);
+	const [openModal, setOpenModal] = useState('');
 
 	const checkStatus = (status, state) => {
 		let finalStatus = '';
@@ -56,15 +56,6 @@ function ListData({
 
 						return (
 							<>
-								{openModal && orgId && (
-									<DocumentTypeSID
-										orgId={orgId}
-										formattedMessageData={formattedMessageData}
-										openModal={openModal}
-										setOpenModal={setOpenModal}
-										document_url={document_url}
-									/>
-								)}
 								<div className={styles.activity_date}>
 									<div className={styles.dot} />
 									<div className={styles.durations}>
@@ -117,15 +108,24 @@ function ListData({
 
 										{orgId && (
 											<Button
+												key={document_url}
 												className={styles.tag_button}
-												onClick={() => setOpenModal(true)}
+												onClick={() => setOpenModal(document_url)}
 											>
 												Tag
 											</Button>
 										)}
-
 									</div>
 								</div>
+								{openModal === document_url && orgId && (
+									<DocumentTypeSID
+										key={document_url}
+										orgId={orgId}
+										formattedMessageData={formattedMessageData}
+										openModal={openModal}
+										setOpenModal={setOpenModal}
+									/>
+								)}
 							</>
 						);
 					})}

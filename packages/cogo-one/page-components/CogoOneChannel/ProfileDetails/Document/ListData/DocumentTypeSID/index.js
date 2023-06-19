@@ -1,5 +1,6 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button } from '@cogoport/components';
 import { SelectController, useForm } from '@cogoport/forms';
+import { IcMCross } from '@cogoport/icons-react';
 import React from 'react';
 
 import useDocumentTag from '../../../../../../hooks/useDocumentTag';
@@ -14,9 +15,8 @@ const CONTROLLER_MAPPING = {
 function DocumentTypeSID({
 	orgId,
 	formattedMessageData,
-	openModal = false,
+	openModal = '',
 	setOpenModal = () => {},
-	document_url = '',
 }) {
 	const {
 		postDocumentTag,
@@ -39,25 +39,19 @@ function DocumentTypeSID({
 		const payload = {
 			document_type : watchListShipmentPendingTasks,
 			shipment_id   : watchListShipment,
-			document_link : document_url,
+			document_link : openModal,
 		};
 		postDocumentTag({ payload, setOpenModal });
 	};
 
 	return (
-		<Modal
-			size="md"
-			show={openModal}
-			className={styles.modal_styled}
-			onClose={() => setOpenModal(false)}
-			placement="center"
-		>
-			<Modal.Header title="Document Tag" />
-			<Modal.Body>
-				<div
-					className={styles.header}
-					key={watchListShipment}
-				>
+		openModal && (
+			<div className={styles.main_container}>
+				<div className={styles.title}>
+					<div>Document Tag</div>
+					<IcMCross className={styles.cross} onClick={() => setOpenModal('')} />
+				</div>
+				<div key={watchListShipment}>
 					{controls.map((eachControl = {}) => {
 						const { label = '', controlType = '', name = '' } = eachControl || {};
 						const Element = CONTROLLER_MAPPING[controlType] || null;
@@ -73,15 +67,13 @@ function DocumentTypeSID({
 						));
 					})}
 				</div>
-			</Modal.Body>
-			<Modal.Footer>
 				<div className={styles.button_styles}>
-					<Button size="md" themeType="primary" onClick={handleSubmit(createDocumentTag)}>
+					<Button size="sm" themeType="primary" onClick={handleSubmit(createDocumentTag)}>
 						OK
 					</Button>
 				</div>
-			</Modal.Footer>
-		</Modal>
+			</div>
+		)
 	);
 }
 

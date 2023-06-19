@@ -39,12 +39,11 @@ const useDocumentTypeControls = ({
 				status          : ['pending', 'rejected', 'deleted'],
 			},
 		},
-		initialCall: false,
 	});
 
 	const options = listShipmentsPendingTasks?.options;
 
-	const filteredOptions = options.filter((itm) => itm?.document_type);
+	const filteredOptions = watchListShipment ? options.filter((itm) => itm?.document_type) : [];
 
 	return [
 		{
@@ -72,7 +71,7 @@ const useDocumentTypeControls = ({
 				required: '*This is required',
 			},
 			renderLabel : (item) => `${startCase(item?.document_type)}`,
-			...(watchListShipment !== '' ? listShipmentsPendingTasks : []),
+			...(watchListShipment ? listShipmentsPendingTasks : []),
 			options     : filteredOptions,
 		},
 	];

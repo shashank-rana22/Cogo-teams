@@ -1,9 +1,30 @@
-.modal_styled {
+.main_container {
+    margin: 10px;
+
     :global {
-        .ui_modal_body_container {
-            height: 350px !important;
+        .ui_select_display_container {
+            height: 35px !important;
+        }
+
+        .ui_select_options_container {
+            border: solid 1px #f9f9f9;
         }
     }
+}
+
+.title {
+    display: flex;
+    font-size: 10px;
+    font-weight: 500;
+    margin: 5px 13px;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.cross {
+    cursor: pointer;
+    width: 10px;
+    height: 10px;
 }
 
 .error_text {
@@ -13,4 +34,14 @@
 
 .styled_element {
     margin-bottom: 10px;
+    margin-left: 13px;
+}
+
+.label {
+    font-size: 14px;
+}
+
+.button_styles {
+    display: flex;
+    justify-content: flex-end;
 }
