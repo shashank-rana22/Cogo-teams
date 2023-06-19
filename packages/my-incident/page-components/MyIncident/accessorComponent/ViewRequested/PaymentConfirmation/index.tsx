@@ -59,9 +59,13 @@ function PaymentConfirmation({ itemData, setRemarks, remarks, onSave, showModal,
 	return (
 		<div>
 			<div>
-				{status === 'REJECTED'
-					? <Button size="sm" themeType="tertiary" onClick={() => { setShowModal(true); }}>View</Button>
-					: <Button size="md" themeType="secondary" onClick={() => { setShowModal(true); }}>View</Button>}
+				<Button
+					size={status === 'REJECTED' ? 'sm' : 'md'}
+					themeType={status === 'REJECTED' ? 'tertiary' : 'secondary'}
+					onClick={() => { setShowModal(true); }}
+				>
+					View
+				</Button>
 			</div>
 			{showModal && (
 				<Modal
