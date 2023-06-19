@@ -12,7 +12,7 @@ const apis = [
 		service_name : 'bookings',
 	},
 	{
-		api          : 'get_risk_prone_shipment_stats',
+		api          : 'get_shipment_risk_prone_stats',
 		access_type  : 'private',
 		feature      : 'risk_management',
 		service_name : 'bookings',

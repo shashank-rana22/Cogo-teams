@@ -85,7 +85,7 @@ function ShipmentId({
 			<div>
 				{handleShipmentView()}
 			</div>
-			{!isEmpty(list) && (
+			{!isEmpty(list) ? (
 				<div className={styles.pagination}>
 					<Pagination
 						type="number"
@@ -95,7 +95,7 @@ function ShipmentId({
 						onPageChange={(val) => setFilters({ ...filters, pageIndex: val })}
 					/>
 				</div>
-			)}
+			) : null}
 		</div>
 	);
 }

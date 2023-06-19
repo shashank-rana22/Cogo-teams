@@ -92,7 +92,7 @@ function CardItem({ itemData }) {
 
 					</div>
 				</div>
-				{criticality && (
+				{criticality ? (
 					<div className={styles.ribbons}>
 						<div
 							className={styles.ribbon}
@@ -102,7 +102,7 @@ function CardItem({ itemData }) {
 
 						</div>
 					</div>
-				)}
+				) : null}
 			</div>
 		</div>
 	);
