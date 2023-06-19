@@ -1,19 +1,19 @@
-/* eslint-disable jsx-a11y/no-static-element-interactions */
 import { Tabs, TabPanel } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useState } from 'react';
 
 import JournalVoucher from './page-components/JournalVoucher';
+import OnAccountCollection from './page-components/OnAccountCollection';
+import TdsSettlement from './page-components/TdsSettlement';
 import styles from './styles.module.css';
 
 function Settlement() {
-	const { query } = useRouter();
+	const { query, push } = useRouter();
 
 	const [activeTab, setActiveTab] = useState(query?.active_tab);
-	const { push } = useRouter();
 
-	const handleChange = (tab: any) => {
-		if (tab === 'JournalVoucher') {
+	const handleChange = (tab: string) => {
+		if (['JournalVoucher', 'tds-settlement', 'onAccountCollection'].includes(tab)) {
 			setActiveTab(tab);
 			push(
 				'/business-finance/settlement/[active_tab]',
@@ -37,13 +37,14 @@ function Settlement() {
 					-
 				</TabPanel>
 				<TabPanel name="tds-settlement" title="TDS Settlement">
-					-
+					<TdsSettlement />
 				</TabPanel>
 				<TabPanel name="history" title="History">
 					-
 				</TabPanel>
+
 				<TabPanel name="onAccountCollection" title="On Account Collection">
-					-
+					<OnAccountCollection />
 				</TabPanel>
 				<TabPanel name="JournalVoucher" title="Journal Voucher">
 					<JournalVoucher />

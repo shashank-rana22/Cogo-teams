@@ -8,6 +8,7 @@ import bl_do_collection_release from './bl_do-collection-release-apis';
 import bn_salvage from './bn-salvage-apis';
 import booking_desk from './booking-desk-apis';
 import chakravyuh from './chakravyuh-apis';
+import chro from './chro';
 import coe_finance from './coe-finance-apis';
 import cogoLens from './cogo-lens';
 import common_apis from './common-apis';
@@ -20,6 +21,7 @@ import enquiry_supply from './enquiry-supply-apis';
 import enrichment from './enrichment-apis';
 import faq from './faq-apis';
 import feedback from './feedback-apis';
+import hrms from './hrms-apis';
 import ingestion from './ingestion-apis';
 import cargo_insurance from './insurance-apis';
 import kam_desk from './kam-desk-apis';
@@ -37,9 +39,11 @@ import pms from './port-management';
 import rms from './rate-management-apis';
 import revenue_desk_apis from './revenue-desk-apis';
 import rfq from './rfq-apis';
+import rfq_dashboard from './rfq-dashboard-apis';
 import saas from './saas';
 import saas_subscription from './saas-subscription';
 import saas_tools from './saas-tools';
+import sales_invoice from './sales-invoice-apis';
 import search from './search-apis';
 import shipment from './shipment-apis';
 import shipment_cancellation_policies from './shipment-cancellation-poilicies';
@@ -119,6 +123,7 @@ const apis = {
 	...allocation,
 	manage_rfq,
 	app_manage_rfq,
+	rfq_dashboard,
 	bl_do_collection_release,
 	kam_desk,
 	document_desk,
@@ -138,7 +143,10 @@ const apis = {
 	ingestion,
 	booking_desk,
 	poc,
+	...hrms,
 	...athena_dashboard,
+	chro,
+	sales_invoice,
 	...saas_subscription,
 	...chakravyuh,
 };

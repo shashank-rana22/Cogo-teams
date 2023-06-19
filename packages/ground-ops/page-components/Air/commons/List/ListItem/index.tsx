@@ -17,6 +17,10 @@ export interface Props {
 	Child?: ReactFragment;
 	setViewDoc?: Function;
 	setItem?: Function;
+	listAPI?: Function;
+	edit?: boolean | string;
+	setEdit?: Function;
+	setGenerate?:Function;
 }
 
 function CardItem({
@@ -29,6 +33,10 @@ function CardItem({
 	Child = () => {},
 	setViewDoc = () => {},
 	setItem = () => {},
+	listAPI = () => {},
+	edit = false,
+	setEdit = () => {},
+	setGenerate = () => {},
 }:Props) {
 	const expirationTime = new Date(singleitem.scheduleDeparture).getTime();
 	const showTime = useCallback(() => {
@@ -44,9 +52,9 @@ function CardItem({
 			const distanceToDate = expirationTime - currentTime;
 			type TypeDate = string | number | Date | null | React.FC ;
 			const days:TypeDate | number = Math.floor(distanceToDate / (1000 * 60 * 60 * 24)) || '0';
-			const h = Math.abs(Math.floor((distanceToDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))) || '00';
-			const m = Math.abs(Math.floor((distanceToDate % (1000 * 60 * 60)) / (1000 * 60))) || '00';
-			const s = Math.abs(Math.floor((distanceToDate % (1000 * 60)) / 1000)) || '00';
+			const h = Math.abs(Math.floor((distanceToDate % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60))) || 0;
+			const m = Math.abs(Math.floor((distanceToDate % (1000 * 60 * 60)) / (1000 * 60))) || 0;
+			const s = Math.abs(Math.floor((distanceToDate % (1000 * 60)) / 1000)) || 0;
 
 			let hours:TypeDate = '';
 			if (h > 0 && h < 10) {
@@ -129,6 +137,7 @@ function CardItem({
 									'--span': (field.span || 1),
 									...itemStyle,
 								} as React.CSSProperties}
+								key={field.key}
 							>
 								{isMobile && (
 									<div className={styles.tablelabel}>{field.label}</div>
@@ -161,6 +170,10 @@ function CardItem({
 					data={singleitem}
 					setViewDoc={setViewDoc}
 					setItem={setItem}
+					listAPI={listAPI}
+					edit={edit}
+					setEdit={setEdit}
+					setGenerate={setGenerate}
 				/>
 			)}
 		</div>

@@ -454,5 +454,11 @@ const apis = [
 		access_type  : 'private',
 		service_name : 'spot_search',
 	},
+	{
+		api         : 'get_saas_hs_code_list',
+		access_type : 'private',
+		module      : 'hs-code',
+		feature     : 'controlled checkout',
+	},
 ];
 export default apis;

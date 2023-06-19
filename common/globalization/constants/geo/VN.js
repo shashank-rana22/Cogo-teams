@@ -29,10 +29,11 @@ export default {
 		},
 	},
 	regex: {
-		PAN           : '',
-		GST           : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
-		MOBILE_NUMBER : /^[+][0-9]{1,3}[0-9]{10}$/,
-		EMAIL         : /^\w+([.-]?\w+)*@\w+([.-]?\w+)*(\.\w{2,})+$/,
+		PAN              : '',
+		GST              : /^[0-9]{1}[0-9]{9}$|^[0-3]{1}[0-9]{9}-?[0-9]{3}$/,
+		MOBILE_NUMBER    : /^[+][0-9]{1,3}[0-9]{10}$/,
+		EMAIL            : /^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/,
+		CONTAINER_NUMBER : /^[A-Z]{3}U[0-9]{6,7}$/,
 		// password_pattern:
 		// 	/^(?=.*[a-z])(?=.*[A-Z])(?=.*\d)(?=.*[!@#$%^&*])[A-Za-z\d!@#$%^&*]{8,}$/gm,
 	},
@@ -78,6 +79,7 @@ export default {
 		corporate_owner_id         : '89184155-1f77-4265-826a-e997d140002f',
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
+		finops_manager             : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716', // Prod_KAM IE
@@ -200,7 +202,15 @@ export default {
 		cogo_one_shipment_agent_ids: [
 			'1b1c5648-ddf4-4472-b177-c11a53a505aa', // CogoVerse Shipment Specialist
 		],
-		so1_so2_role_id: '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		so1_so2_role_id     : '0285645b-0d06-42a2-9968-67d544626300', // SO1 and SO2 VN
+		fortigo_network_ids : [
+			'4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+			'45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+		],
+		fortigo_agencies_mapping: {
+			fortigo_transport_agency  : '45ed3980-21bf-4e14-a9b1-abc1a2ce3067',
+			fortigo_network_logistics : '4160f6e2-05bd-4aac-ab40-bee3b05b045d',
+		},
 	},
 	options: {
 		registration_types: [
@@ -357,6 +367,12 @@ export default {
 				value : 'open_side',
 			},
 		],
+		entities: [
+			{
+				label: '501 Cogoport Vietnam', value: '501',
+			},
+		],
+		migration_status: [],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -370,6 +386,13 @@ export default {
 					'rates_sheets',
 					'rate_density',
 				],
+			},
+		},
+		account_receivables: {
+			defaulters: {
+				migration_status: {
+					show_filter: false,
+				},
 			},
 		},
 	},
@@ -392,6 +415,10 @@ export default {
 		navigations: {
 			onboard_vendor: {
 				validate_registration: false,
+			},
+			cogo_one: {
+				has_voice_call_access : false,
+				default_country_code  : 'IN',
 			},
 		},
 	},
