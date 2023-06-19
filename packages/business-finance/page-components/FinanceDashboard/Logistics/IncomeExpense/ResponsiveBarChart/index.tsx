@@ -95,6 +95,7 @@ function ResponsiveBarChart({ barData }) {
 			]}
 			legends={[
 				{
+					dataFrom      : 'keys',
 					anchor        : 'top-right',
 					direction     : 'row',
 					justify       : false,
