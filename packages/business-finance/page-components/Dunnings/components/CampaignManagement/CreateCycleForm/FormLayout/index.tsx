@@ -1,4 +1,5 @@
 import { Chips, Datepicker, Select, TabPanel, Tabs } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect } from 'react';
 
 import Filter from '../../../../../commons/Filters';
@@ -20,6 +21,12 @@ interface FormData {
 	scheduledHour?:string,
 	scheduledMinute?:string,
 	scheduleRule?:any,
+	cogoEntityId?:string,
+	filters?:{
+		dueOutstandingCurrency?:string,
+		creditControllerIds?:string[],
+		serviceTypes?:string[],
+	}
 }
 
 interface Props {
@@ -33,6 +40,8 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		triggerType, frequency, weekDay,
 		monthDay, timezone, scheduledHour, scheduledMinute,
 		isAllCreditControllers, creditController, oneTimeDate, scheduleRule,
+		cogoEntityId,
+		filters,
 	} = formData || {};
 
 	const {
@@ -41,6 +50,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		week,
 		scheduleTimeZone,
 		dayOfMonth,
+		oneTimeDate:oneTimeDateSchedule,
 	} = scheduleRule || {};
 
 	const handleTabChange = (val?:string) => {
@@ -75,9 +85,9 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	}, [creditController, isAllCreditControllers, setFormData]);
 
 	useEffect(() => {
-		// pre-filling all the details
+		// pre-filling all the details in case of updating
 		if (isEditMode) {
-			const stringDate = oneTimeDate;
+			const stringDate = oneTimeDate || oneTimeDateSchedule;
 			const formattedOneTimeDate = new Date(stringDate);
 			const timeArray = (scheduleTime)?.split(':');
 
@@ -90,11 +100,35 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 				scheduledMinute : timeArray?.[1],
 				monthDay        : dayOfMonth
 					? String(dayOfMonth) : undefined,
-				oneTimeDate: stringDate ? formattedOneTimeDate : undefined,
+				oneTimeDate            : stringDate ? formattedOneTimeDate : undefined,
+				dueOutstandingCurrency : filters?.dueOutstandingCurrency || undefined,
+			    isAllCreditControllers : !(filters?.creditControllerIds?.length > 0),
+				creditController       : filters?.creditControllerIds || undefined,
+				serviceType            : filters?.serviceTypes || undefined,
 			}));
 		}
 	}, [dayOfMonth, dunningExecutionFrequency, scheduleTime, scheduleTimeZone,
-		week, isEditMode, setFormData, oneTimeDate]);
+		week, isEditMode, setFormData, oneTimeDate,
+		filters?.dueOutstandingCurrency,
+		filters?.creditControllerIds,
+		filters?.serviceTypes,
+		oneTimeDateSchedule,
+	]);
+
+	useEffect(() => {
+		// setting currency value based on selected entity
+		if (cogoEntityId && !isEditMode) {
+			const currencyEntityData = Object.values(
+				GLOBAL_CONSTANTS.cogoport_entities,
+			)?.filter((obj) => obj?.id === cogoEntityId);
+
+			const currencyValue = currencyEntityData?.[0]?.currency;
+			setFormData((prev:object) => ({
+				...prev,
+				dueOutstandingCurrency: currencyValue,
+			}));
+		}
+	}, [cogoEntityId, setFormData, isEditMode]);
 
 	return (
 		<div>
@@ -174,7 +208,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 											label: 'GMT', value: 'GMT',
 										},
 										{
-		                                label: 'VNM', value: 'VNM',
+		                                  label: 'VNM', value: 'VNM',
 										},
 									]}
 									className={styles.timezone}

@@ -2,7 +2,12 @@ import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 
-function useUpdateCycle({ getDunningList }) {
+interface Props {
+	getDunningList?:Function,
+	setActionModal?:Function,
+}
+
+function useUpdateCycle({ getDunningList, setActionModal }:Props) {
 	const {
 		profile,
 	} = useSelector((state:any) => state);
@@ -31,6 +36,7 @@ function useUpdateCycle({ getDunningList }) {
 				data: {
 					id,
 					updatedBy    : profile?.user?.id,
+					triggerType  : triggerType || 'ONE_TIME',
 					scheduleRule : {
 						scheduleTime              : `${scheduledHour}:${scheduledMinute}`,
 						scheduleTimeZone          : timezone,
@@ -42,6 +48,7 @@ function useUpdateCycle({ getDunningList }) {
 				},
 			});
 			Toast.success('Cycle Updated Successfully');
+			setActionModal({});
 			getDunningList();
 		} catch (err) {
 			Toast.error(err?.response?.data?.message || 'Something went wrong');

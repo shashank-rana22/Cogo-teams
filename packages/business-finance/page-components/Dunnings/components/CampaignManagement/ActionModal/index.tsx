@@ -10,7 +10,7 @@ import styles from './styles.module.css';
 function ActionModal({ actionModal, setActionModal, getDunningList }) {
 	const [formData, setFormData] = useState({});
 
-	const { updateCycle, loading } = useUpdateCycle({ getDunningList });
+	const { updateCycle, loading } = useUpdateCycle({ getDunningList, setActionModal });
 
 	const { rowData, action, visible } = actionModal || {};
 	const {

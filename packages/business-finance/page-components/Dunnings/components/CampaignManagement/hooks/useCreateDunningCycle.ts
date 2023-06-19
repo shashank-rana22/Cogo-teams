@@ -16,7 +16,6 @@ const useCreateDunningCycle = ({
 		severityLevel,
 		templateData,
 		ageingBucket,
-		cogoEntityDetails,
 		creditController,
 		totalDueOutstanding,
 		serviceType,
@@ -28,6 +27,8 @@ const useCreateDunningCycle = ({
 		weekDay,
 		monthDay,
 		oneTimeDate,
+		cogoEntityId,
+		dueOutstandingCurrency,
 	} = formData || {};
 
 	const [
@@ -58,10 +59,10 @@ const useCreateDunningCycle = ({
 					exceptionTradePartyDetailIds : uncheckedRows,
 					filters                      : {
 						ageingBucket,
-						cogoEntityId           : JSON.parse(cogoEntityDetails || '{}')?.id || undefined,
+						cogoEntityId           : cogoEntityId || undefined,
 						creditControllerIds    : creditController || undefined,
 						totalDueOutstanding,
-						dueOutstandingCurrency : JSON.parse(cogoEntityDetails || '{}')?.currency || undefined,
+						dueOutstandingCurrency : dueOutstandingCurrency || undefined,
 						serviceTypes           : serviceType?.length > 0 ? serviceType : undefined,
 					},
 					scheduleRule: {

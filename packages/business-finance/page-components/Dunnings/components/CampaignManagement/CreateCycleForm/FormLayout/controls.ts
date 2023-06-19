@@ -8,10 +8,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 	const entityOptions = Object.keys(entityData).map((entity) => ({
 		label : `${entity} (${entityData[entity].currency})`,
 		name  : entity,
-		value : JSON.stringify({
-			id       : entityData[entity].id,
-	        currency : entityData[entity].currency,
-		}),
+		value : entityData[entity].id,
 	}));
 
 	const currencyData = GLOBAL_CONSTANTS.currency_code;
@@ -53,13 +50,13 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			],
 		},
 		{
-			label       : 'Cogo Entity',
-			name        : 'cogoEntityDetails',
-			placeholder : isEditMode ? 'Entity' : 'Select cogo entity',
-			type        : 'select',
-			options     : entityOptions,
-			disabled    : isEditMode,
-			span        : 12,
+			label    : 'Cogo Entity',
+			name     : 'cogoEntityId',
+			value    : !isEditMode ? formData?.cogoEntityId : formData?.filters?.cogoEntityId,
+			type     : 'radioGroup',
+			options  : entityOptions,
+			disabled : isEditMode,
+			span     : 12,
 		},
 		{
 			name          : 'isAllCreditControllers',
@@ -137,9 +134,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					type        : 'select',
 					span        : 1,
 					options     : currencyOptions,
-					value       : !isEditMode ? JSON.parse(formData?.cogoEntityDetails || '{}')?.currency
-						: formData?.filters?.dueOutstandingCurrency,
-					disabled: true,
+					disabled    : true,
 				},
 				{
 					name        : 'totalDueOutstanding',
