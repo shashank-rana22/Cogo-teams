@@ -5,8 +5,7 @@ import { useSelector } from '@cogoport/store';
 import CogoPoints from './Cogopoints';
 
 function LiabilityDashboard() {
-	const router = useRouter();
-	const { asPath } = router;
+	const { asPath } = useRouter();
 
 	const partnerId = useSelector((state) => state?.profile?.partner?.id);
 

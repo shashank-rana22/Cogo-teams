@@ -5,8 +5,8 @@ import { differenceInDays } from '@cogoport/utils';
 const THRESHOLD_DAY = 31;
 const INDEX_VALUE = 0;
 
-const checkDateDifference = (date2, date1) => {
-	const differenceInDay = differenceInDays(date2, date1);
+const checkDateDifference = ({ endDate, startDate }) => {
+	const differenceInDay = differenceInDays(endDate, startDate);
 
 	const dateFormat = differenceInDay >= THRESHOLD_DAY ? 'MMM yyyy' : 'dd MMM';
 

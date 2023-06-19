@@ -2,7 +2,7 @@ import { useRequest } from '@cogoport/request';
 import { addDays } from '@cogoport/utils';
 import { useEffect, useCallback, useState } from 'react';
 
-import { ADD_ONE_DAY, EVENT_MAPPING } from '../constants';
+import { ADD_ONE_DAY, EVENT_MAPPING, TRANSACTION_TYPE } from '../constants';
 
 const PAGE_NUMBER = 1;
 
@@ -10,7 +10,6 @@ const getParams = ({
 	pagination,
 	currencyCode,
 	selectOrganization,
-	transactionType,
 	activeHeaderTab,
 	startDate,
 	activeStatsCard,
@@ -21,7 +20,7 @@ const getParams = ({
 	currency                            : currencyCode,
 	filters                             : {
 		organization_id   : selectOrganization || undefined,
-		transaction_type  : transactionType,
+		transaction_type  : TRANSACTION_TYPE[activeStatsCard],
 		organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
 		from_date         : addDays(startDate, ADD_ONE_DAY),
 		to_date           : endDate,

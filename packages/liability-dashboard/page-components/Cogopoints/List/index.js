@@ -5,7 +5,7 @@ import { isEmpty } from '@cogoport/utils';
 
 import Header from './Header';
 import styles from './styles.module.css';
-import tableColumns from './TableColumns';
+import getTableColumns from './TableColumns';
 
 const PAGE_COUNT = 0;
 const PAGE_LIMIT = 10;
@@ -15,8 +15,8 @@ function List({
 	list = [],
 	loading = false,
 	page,
-	page_limit,
-	total_count,
+	pageLimit,
+	totalCount,
 	setPagination = () => {},
 	currencyCode = '',
 	activeStatsCard = '',
@@ -45,7 +45,7 @@ function List({
 
 				<Table
 					className={styles.table_container}
-					columns={tableColumns({ currencyCode, activeStatsCard, activeHeaderTab })}
+					columns={getTableColumns({ currencyCode, activeStatsCard, activeHeaderTab })}
 					data={list || []}
 					loading={loading}
 					loadingRowsCount={LOADING_COUNT}
@@ -55,8 +55,8 @@ function List({
 				type="table"
 				className={styles.pagination_container}
 				currentPage={page || PAGE_COUNT}
-				totalItems={total_count || PAGE_COUNT}
-				pageSize={page_limit || PAGE_LIMIT}
+				totalItems={totalCount || PAGE_COUNT}
+				pageSize={pageLimit || PAGE_LIMIT}
 				onPageChange={setPagination}
 			/>
 		</div>

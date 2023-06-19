@@ -1,13 +1,32 @@
 import { Pill, Tooltip } from '@cogoport/components';
 import { getByKey, startCase } from '@cogoport/utils';
 
-import { USER_TYPE_COLOR_MAPPING, USER_TYPE_MAPPING } from '../../../../constants';
+import {
+	NAME_STATS_OPTIONS,
+	NAME_TAB_OPTIONS,
+	ORGANISATION_TAB_OPTION,
+	ORGANISATION_STATS_OPTION,
+	USER_TYPE_COLOR_MAPPING,
+	USER_TYPE_STATS_OPTIONS,
+	USER_TYPE_TAB_OPTIONS,
+	USER_TYPE_MAPPING,
+	COGOSTORE_TAB_OPTIOINS,
+	COGOSTORE_STATS_OPTIONS,
+	ONE_TIME_STATS_OPTIONS,
+	REFERRAL_TAB_OPTIONS,
+	REFERRAL_STATS_OPTIONS,
+	COMMON_TAB_OPTIONS,
+	SHIPMENT_STATS_OPTIONS,
+	SUBSCRIPTION_STAT_OPTIONS,
+	TOTAL_STATS_OPTIONS,
+	TOTAL_TAB_OPTIONS,
+} from '../../../../constants';
 
 import styles from './styles.module.css';
 
 const EARNED_VALUE = 0;
 
-function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab = '' }) {
+function getTableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab = '' }) {
 	const columns = [
 		{
 			Header   : 'Name',
@@ -22,12 +41,8 @@ function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 
 				</Tooltip>
 			),
-			conditions: ['liability_point_value',
-				'total_burnt_point_value',
-				'shipment_burnt_point_value',
-				'saas_subscription_burnt_point_value',
-				'cogostore_burnt_point_value'],
-			headerOptions: ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
+			statsOptions : NAME_STATS_OPTIONS,
+			tabOptions   : NAME_TAB_OPTIONS,
 		},
 		{
 			Header   : 'Organisation Name',
@@ -41,26 +56,18 @@ function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					</div>
 				</Tooltip>
 			),
-			conditions: ['liability_point_value',
-				'total_burnt_point_value',
-				'shipment_burnt_point_value',
-				'saas_subscription_burnt_point_value',
-				'cogostore_burnt_point_value'],
-			headerOptions: ['overall', 'importer_exporter', 'channel_partner'],
+			statsOptions : ORGANISATION_STATS_OPTION,
+			tabOptions   : ORGANISATION_TAB_OPTION,
 		},
 		{
 			Header   : 'User Type',
 			accessor : (item = {}) => (
-				<Pill size="md" color={USER_TYPE_COLOR_MAPPING[item?.organization_type]} className={styles.user_type}>
-					{startCase(USER_TYPE_MAPPING[item?.organization_type])}
+				<Pill size="md" color={USER_TYPE_MAPPING[item?.organization_type]?.color} className={styles.user_type}>
+					{startCase(USER_TYPE_MAPPING[item?.organization_type]?.name)}
 				</Pill>
 			),
-			conditions: ['liability_point_value',
-				'total_burnt_point_value',
-				'shipment_burnt_point_value',
-				'saas_subscription_burnt_point_value', 'cogostore_burnt_point_value',
-			],
-			headerOptions: ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
+			statsOptions : USER_TYPE_STATS_OPTIONS,
+			tabOptions   : USER_TYPE_TAB_OPTIONS,
 		},
 		{
 			Header   : `Total (${currencyCode})`,
@@ -69,12 +76,8 @@ function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					{item?.total_value || EARNED_VALUE}
 				</div>
 			),
-			conditions: ['liability_point_value',
-				'total_burnt_point_value',
-				'shipment_burnt_point_value',
-				'saas_subscription_burnt_point_value', 'cogostore_burnt_point_value',
-			],
-			headerOptions: ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
+			statsOptions : TOTAL_STATS_OPTIONS,
+			tabOptions   : TOTAL_TAB_OPTIONS,
 		},
 		{
 			Header   : `Shipment (${currencyCode})`,
@@ -83,10 +86,8 @@ function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					{item?.shipment_point_value || EARNED_VALUE}
 				</div>
 			),
-			conditions: ['liability_point_value',
-				'total_burnt_point_value',
-				'shipment_burnt_point_value'],
-			headerOptions: ['overall', 'importer_exporter', 'channel_partner'],
+			statsOptions : SHIPMENT_STATS_OPTIONS,
+			tabOptions   : COMMON_TAB_OPTIONS,
 		},
 		{
 			Header   : `Subscription (${currencyCode})`,
@@ -95,10 +96,8 @@ function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					{item?.saas_subscription_point_value || EARNED_VALUE}
 				</div>
 			),
-			conditions: ['liability_point_value',
-				'total_burnt_point_value',
-				'saas_subscription_burnt_point_value'],
-			headerOptions: ['overall', 'importer_exporter', 'channel_partner'],
+			statsOptions : SUBSCRIPTION_STAT_OPTIONS,
+			tabOptions   : COMMON_TAB_OPTIONS,
 		},
 		{
 			Header   : `Referral (${currencyCode})`,
@@ -107,8 +106,8 @@ function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					{item?.referral_point_value || EARNED_VALUE}
 				</div>
 			),
-			conditions    : ['liability_point_value'],
-			headerOptions : ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
+			statsOptions : REFERRAL_STATS_OPTIONS,
+			tabOptions   : REFERRAL_TAB_OPTIONS,
 		},
 		{
 			Header   : `One Time (${currencyCode})`,
@@ -117,8 +116,8 @@ function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					{(item?.one_time_point_value || EARNED_VALUE) + (item?.milestone_point_value || EARNED_VALUE)}
 				</div>
 			),
-			conditions    : ['liability_point_value'],
-			headerOptions : ['overall', 'importer_exporter', 'channel_partner'],
+			statsOptions : ONE_TIME_STATS_OPTIONS,
+			tabOptions   : COMMON_TAB_OPTIONS,
 		},
 		{
 			Header   : `Cogostore (${currencyCode})`,
@@ -127,14 +126,13 @@ function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 					{item?.cogostore_point_value || EARNED_VALUE}
 				</div>
 			),
-			conditions: ['total_burnt_point_value',
-				'cogostore_burnt_point_value'],
-			headerOptions: ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
+			statsOptions : COGOSTORE_STATS_OPTIONS,
+			tabOptions   : COGOSTORE_TAB_OPTIOINS,
 		},
 	];
 
-	return columns.filter((item) => item.headerOptions.includes(activeHeaderTab)
-	&& item.conditions.includes(activeStatsCard));
+	return columns.filter((item) => item.tabOptions.includes(activeHeaderTab)
+	&& item.statsOptions.includes(activeStatsCard));
 }
 
-export default tableColumns;
+export default getTableColumns;

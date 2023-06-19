@@ -7,7 +7,11 @@ import styles from './styles.module.css';
 
 const STATS_COUNT = 0;
 
-function StatsDiv({
+const handleChange = ({ name, setActiveStatsCard }) => {
+	setActiveStatsCard(name);
+};
+
+function Stats({
 	setActiveStatsCard = () => {},
 	activeStatsCard = '',
 	activeHeaderTab = '',
@@ -15,13 +19,10 @@ function StatsDiv({
 	loading = false,
 	currencyCode = '',
 }) {
-	const handleChange = (val) => {
-		setActiveStatsCard(val);
-	};
-
 	return (
 		<div className={styles.container}>
-			{STATS_CARDS.map(({ label, name, access }) => {
+			{STATS_CARDS.map((item) => {
+				const { label, name, access } = item || {};
 				const showStats = !['liability_point_value', 'total_burnt_point_value'].includes(name);
 
 				if (!access.includes(activeHeaderTab)) {
@@ -34,7 +35,7 @@ function StatsDiv({
 							${activeStatsCard === name ? styles.active_stats_div : ''}`}
 						key={name}
 						role="presentation"
-						onClick={() => handleChange(name)}
+						onClick={() => handleChange({ name, setActiveStatsCard })}
 					>
 						<div className={styles.titles}>{label}</div>
 						<div className={styles.sub_div}>
@@ -56,4 +57,4 @@ function StatsDiv({
 	);
 }
 
-export default StatsDiv;
+export default Stats;

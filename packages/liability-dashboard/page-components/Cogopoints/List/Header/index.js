@@ -4,6 +4,15 @@ import styles from './styles.module.css';
 
 const DEFAULT_PAGE_NUMBER = 1;
 
+const USER_TYPE_MAPPING = {
+	liability_point_value               : 'Earner',
+	total_burnt_point_value             : 'Users',
+	shipment_burnt_point_value          : 'Users',
+	saas_subscription_burnt_point_value : 'Users',
+	cogostore_burnt_point_value         : 'Users',
+
+};
+
 function Header({
 	setSelectOrganization = () => {},
 	selectOrganization = '',
@@ -14,7 +23,7 @@ function Header({
 		<div className={styles.header_div}>
 			<div className={styles.title}>
 				Cogopoint
-				{activeStatsCard === 'liability_point_value' ? 'Earner' : 'Users'}
+				<span>{USER_TYPE_MAPPING[activeStatsCard]}</span>
 			</div>
 			<AsyncSelect
 				name="id"

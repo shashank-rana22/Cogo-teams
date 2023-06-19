@@ -12,7 +12,7 @@ import ChartLoadingState from './Charts/LoadingState';
 import PieChart from './Charts/PieChart';
 import HeaderTab from './HeaderTab';
 import List from './List';
-import StatsDiv from './StatsDiv';
+import Stats from './Stats';
 import styles from './styles.module.css';
 
 const START_MONTH = 0;
@@ -28,7 +28,6 @@ function CogoPoints() {
 
 	const geo = getGeoConstants();
 	const currencyCode = geo.country.currency.code;
-	const transactionType = activeStatsCard === 'liability_point_value' ? 'credit' : 'debit';
 
 	const { statsData = {}, loading = false } = useGetCogopointStats({ activeHeaderTab, selectedDate, currencyCode });
 
@@ -40,7 +39,7 @@ function CogoPoints() {
 		setPagination = () => {},
 		setSelectOrganization = () => {},
 		selectOrganization = '',
-	} = useListCogopointTopHistory({ transactionType, selectedDate, activeStatsCard, activeHeaderTab, currencyCode });
+	} = useListCogopointTopHistory({ selectedDate, activeStatsCard, activeHeaderTab, currencyCode });
 
 	const { credit_cogopoint_date_data = {}, list = [], page, page_limit, total_count } = topHistoryData;
 
@@ -64,7 +63,7 @@ function CogoPoints() {
 			/>
 			{activeHeaderTab && (
 				<>
-					<StatsDiv
+					<Stats
 						activeStatsCard={activeStatsCard}
 						setActiveStatsCard={setActiveStatsCard}
 						activeHeaderTab={activeHeaderTab}
@@ -87,8 +86,8 @@ function CogoPoints() {
 
 								<LineChart
 									formattedData={formattedData}
-									transactionType={transactionType}
 									currencyCode={currencyCode}
+									activeStatsCard={activeStatsCard}
 								/>
 							</div>
 
@@ -113,8 +112,8 @@ function CogoPoints() {
 						list={list}
 						loading={topHistoryLoading}
 						page={page}
-						page_limit={page_limit}
-						total_count={total_count}
+						pageLimit={page_limit}
+						totalCount={total_count}
 						setPagination={setPagination}
 						currencyCode={currencyCode}
 						activeStatsCard={activeStatsCard}

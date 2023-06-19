@@ -1,13 +1,14 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
 import { startCase } from '@cogoport/utils';
 
+import { TRANSACTION_TYPE } from '../../../../constants';
 import { formatValue } from '../../../../utils/formatValue';
 
 import styles from './styles.module.css';
 
 const DEFAULT_INDEX = 0;
 
-function LineChart({ formattedData = [], transactionType = '', currencyCode = '' }) {
+function LineChart({ formattedData = [], currencyCode = '', activeStatsCard = '' }) {
 	const data = [
 		{
 			id    : 'amount',
@@ -22,11 +23,11 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 		return (
 			<div className={styles.tooltip_div}>
 				<div className={styles.title}>
-					{`${startCase(transactionType)}ed Month : `}
+					{`${startCase(TRANSACTION_TYPE[activeStatsCard])}ed Month : `}
 					<div className={styles.amount}>{singleData?.x}</div>
 				</div>
 				<div className={styles.title}>
-					{`${startCase(transactionType)}ed Amount (${currencyCode}) : `}
+					{`${startCase(TRANSACTION_TYPE[activeStatsCard])}ed Amount (${currencyCode}) : `}
 					<div className={styles.amount}>{singleData?.y}</div>
 				</div>
 			</div>
@@ -59,7 +60,7 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 				tickSize       : 5,
 				tickPadding    : 5,
 				tickRotation   : 0,
-				legend         : `${startCase(transactionType)}ed Amount (${currencyCode})`,
+				legend         : `${startCase(TRANSACTION_TYPE[activeStatsCard])}ed Amount (${currencyCode})`,
 				legendOffset   : -55,
 				legendPosition : 'middle',
 				format         : (v) => formatValue(v),
