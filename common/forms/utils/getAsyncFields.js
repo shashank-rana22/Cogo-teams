@@ -571,6 +571,21 @@ function asyncListTests() {
 	};
 }
 
+function asyncListPromotions() {
+	return {
+		labelKey    : 'name',
+		valueKey    : 'id',
+		endpoint    : 'list_promotions',
+		initialCall : true,
+		params      : {
+			filters: {
+				status: 'published',
+			},
+			page_limit: 100,
+		},
+	};
+}
+
 function asyncListShipmentPendingTasks() {
 	return {
 		labelKey    : 'document_type',
@@ -645,6 +660,7 @@ export {
 	asyncListOrgTradeParties,
 	asyncFieldsPartnerUsersIds,
 	asyncListServetelAgents,
+	asyncListPromotions,
 	asyncPlanPricingList,
 	asyncQuotaList,
 	asyncAllocationRequestRejectionType,
