@@ -1,11 +1,17 @@
+import { AsyncSelect } from '@cogoport/forms';
+
 import SegmentedControl from '../../../../../commons/SegmentedControl';
 
 import Details from './Details';
 import styles from './styles.module.css';
 
+interface FormData {
+	severityLevel?:string,
+	templateData?:{ name?:string, subject?:string, body?:string[] },
+}
 interface Props {
 	setFormData?:Function,
-	formData?:{ severityLevel?:string }
+	formData?:FormData,
 }
 
 function MailTemplate({ formData, setFormData }:Props) {
@@ -38,6 +44,32 @@ function MailTemplate({ formData, setFormData }:Props) {
 
 				</div>
 			</div>
+			<div
+				style={{ margin: '20px 0px' }}
+			>
+				<h4>Select Template</h4>
+				<AsyncSelect
+					name="template"
+					asyncKey="list_dunning_templates"
+					valueKey="name"
+					initialCall
+					value={formData?.templateData?.name}
+					onChange={(id, object) => {
+						setFormData((prev) => ({
+							...prev,
+							templateData: {
+								name    : object?.name,
+								subject : object?.subject,
+								body    : object?.body,
+								id      : object?.id,
+							},
+						}));
+					}}
+					placeholder="Select Template"
+					size="sm"
+					style={{ width: '40%' }}
+				/>
+			</div>
 
 			<div className={styles.heading}>Email recipients</div>
 			<div className={styles.section}>
@@ -62,13 +94,16 @@ function MailTemplate({ formData, setFormData }:Props) {
 
 			<div className={styles.heading_subject}>Email subject</div>
 			<div className={styles.subject}>
-				<Details text="Prefilled Subject here" />
+				<Details
+					text={formData?.templateData?.subject || 'Select template to prefill subject'}
+				/>
 			</div>
 
 			<div className={styles.heading_body}>Email body</div>
 			<div className={styles.subject}>
 				<Details
 					isBody
+					bodyData={formData?.templateData?.body?.[0]}
 				/>
 			</div>
 

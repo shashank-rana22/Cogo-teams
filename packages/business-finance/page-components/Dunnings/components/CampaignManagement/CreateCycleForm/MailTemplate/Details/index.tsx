@@ -3,11 +3,13 @@ import styles from './styles.module.css';
 interface Props {
 	text?:string,
 	isBody?:boolean,
+	bodyData?:string,
 }
 
 function Details({
 	text = '',
 	isBody = false,
+	bodyData = '',
 }:Props) {
 	if (!isBody) {
 		return <div className={styles.section}>{text}</div>;
@@ -15,7 +17,16 @@ function Details({
 
 	return (
 		<div className={styles.section}>
-			<h5>Pre-rendered HTML</h5>
+			{bodyData?.length > 0 ?	(
+				<div>
+					{bodyData}
+				</div>
+			)
+				: (
+					<div className={styles.placeholder_body}>
+						<h3>Select templates</h3>
+					</div>
+				)}
 		</div>
 	);
 }

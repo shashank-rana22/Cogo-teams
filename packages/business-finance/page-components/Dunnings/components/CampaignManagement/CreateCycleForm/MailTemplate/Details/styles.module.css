@@ -13,3 +13,9 @@
 .text {
 	height: 100px !important;
 }
+
+.placeholder_body{
+	display: flex;
+	justify-content: center; 
+	margin: 40px;
+}

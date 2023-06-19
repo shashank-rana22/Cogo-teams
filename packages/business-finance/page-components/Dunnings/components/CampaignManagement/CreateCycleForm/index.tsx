@@ -56,7 +56,13 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, formData, setFormD
 
 	return (
 		<div>
-			<Modal size="xl" show={showCreateForm} onClose={onClose} placement="center">
+			<Modal
+				size="xl"
+				show={showCreateForm}
+				onClose={onClose}
+				placement="center"
+				className={styles.modal_body_wrapper}
+			>
 				<Modal.Header title={renderTitle()} />
 
 				<Modal.Body>

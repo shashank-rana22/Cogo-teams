@@ -63,7 +63,9 @@ function FormLayout({ formData, setFormData }:Props) {
 								themeType="primary"
 								onChange={(e?:string) => handleTabChange(e)}
 							>
-								<TabPanel name="daily" title="Daily" />
+								<TabPanel name="daily" title="Daily">
+									<div className={styles.empty_space} />
+								</TabPanel>
 
 								<TabPanel name="weekly" title="Weekly">
 									<div style={{ marginTop: '12px' }}>
