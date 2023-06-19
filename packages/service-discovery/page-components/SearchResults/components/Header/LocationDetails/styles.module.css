@@ -1,0 +1,23 @@
+.container{
+    display: flex;
+    align-items: center;
+}
+.location{
+    display: flex;
+    flex-direction: column;
+}
+.icon{
+    margin: 0 40px;
+}
+.location_country_text{
+    font-weight: 500;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: #D6B300;
+}
+.location_port_text{
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #000000;
+}

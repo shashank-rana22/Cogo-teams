@@ -1,0 +1,32 @@
+.container{
+    background: #FFFAFA;
+    /* border-bottom: 1px solid #EBEBF0; */
+    height: 100%;
+    max-width: max-content;
+    padding: 16px 24px;
+    display: flex;
+    align-items: center;
+    justify_content: space-between;
+}
+.name_container{
+    width: 90%;
+    margin-right: 20px;
+}
+.org_name{
+    font-weight: 400;
+    font-size: 14px;
+    text-transform: capitalize;
+    color: #000000;
+    opacity: 0.6;
+    margin-bottom: 6px;
+}
+.user_name{
+    font-family: 'Poppins';
+    font-weight: 600;
+    font-size: 16px;
+    text-transform: capitalize;
+    color: #000000;
+}
+.icon{
+    cursor: pointer;
+}
