@@ -1,5 +1,3 @@
-import React from 'react';
-
 import CargoDetails from '../../../../CargoDetails';
 
 import Field from './Field';

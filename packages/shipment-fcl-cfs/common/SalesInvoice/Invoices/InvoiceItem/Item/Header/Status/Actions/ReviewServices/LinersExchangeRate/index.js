@@ -1,7 +1,6 @@
 import { cl, Button, Modal } from '@cogoport/components';
 import { IcMError } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
 
 import styles from '../styles.module.css';
 

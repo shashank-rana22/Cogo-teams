@@ -6,7 +6,6 @@ import {
 	IcMArrowRotateDown,
 } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React from 'react';
 
 import SelectService from './SelectService';
 import styles from './styles.module.css';

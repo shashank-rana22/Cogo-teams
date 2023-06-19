@@ -1,12 +1,12 @@
 import { Button, Modal, Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 
 import FieldArrayItem from '../FieldArrayItem';
 
 import { getCurrencyControls } from './getCurrencyControls';
 
-const ZERO_INDEX = 0;
 const EMPTY_VALUE = 0;
 
 function CurrencyExchangeForm({
@@ -35,11 +35,11 @@ function CurrencyExchangeForm({
 		const currencyData = value;
 
 		Object.keys(value || {}).forEach((val) => {
-			const key = `
-			${currencyData[val]?.[ZERO_INDEX]?.from_currency}_${currencyData?.[val]?.[ZERO_INDEX]?.to_currency}`;
-			if (currencyData?.[val]?.[ZERO_INDEX]?.exchange_rate) {
+			const key = `${currencyData[val]?.[GLOBAL_CONSTANTS.zeroth_index]?.from_currency}_
+			${currencyData?.[val]?.[GLOBAL_CONSTANTS.zeroth_index]?.to_currency}`;
+			if (currencyData?.[val]?.[GLOBAL_CONSTANTS.zeroth_index]?.exchange_rate) {
 				EXCHANGE_CURRENCY_HASH[key] = Number(
-					currencyData?.[val]?.[ZERO_INDEX]?.exchange_rate,
+					currencyData?.[val]?.[GLOBAL_CONSTANTS.zeroth_index]?.exchange_rate,
 				);
 			}
 		});

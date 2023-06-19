@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import CurrencyExchangeForm from './ExchangeRateForm/CurrencyExchangeForm';
@@ -7,7 +8,7 @@ import useHelper from './useHelper';
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 
-const ZERO_INDEX = 0;
+const EMPTY_VALUE = 0;
 
 function ExchangeRate({
 	shipment_id,
@@ -17,7 +18,7 @@ function ExchangeRate({
 }) {
 	const [open, setOpen] = useState(false);
 
-	const invoiceCurrency = invoiceData?.invoicing_parties?.[ZERO_INDEX]?.invoice_currency;
+	const invoiceCurrency = invoiceData?.invoicing_parties?.[GLOBAL_CONSTANTS.zeroth_index]?.invoice_currency;
 
 	const refetchAfterApiCall = () => {
 		refetch();
@@ -31,7 +32,7 @@ function ExchangeRate({
 		loading,
 	} = useHelper({ invoiceCurrency, refetch: refetchAfterApiCall, shipment_id });
 
-	if (Object.keys(differentCurrenciesHash || {}).length === ZERO_INDEX) {
+	if (Object.keys(differentCurrenciesHash || {}).length === EMPTY_VALUE) {
 		return null;
 	}
 

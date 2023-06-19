@@ -1,5 +1,4 @@
 import { cl, Loader } from '@cogoport/components';
-import React from 'react';
 
 import Header from './CardHeader';
 import CardItem from './Carditem';

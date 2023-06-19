@@ -2,7 +2,7 @@ import { Popover, Tooltip, cl } from '@cogoport/components';
 import { IcMOverflowDot, IcMInfo } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import CONSTANTS from '../../../../../../../../../../configurations/constant.json';
 import styles from '../../styles.module.css';

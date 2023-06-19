@@ -28,7 +28,7 @@ const commonControls = (service) => [
 		label          : 'Currency',
 		type           : 'select',
 		showOptional   : false,
-		className      : 'size-sm',
+		size           : 'sm',
 		optionsListKey : 'exchange-rate-currencies',
 		placeholder    : 'Select Currency',
 		disabled       : true,

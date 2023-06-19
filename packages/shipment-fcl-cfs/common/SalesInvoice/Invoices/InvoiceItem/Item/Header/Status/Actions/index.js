@@ -1,8 +1,9 @@
 import { Button, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCError } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import CONSTANTS from '../../../../../../../../configurations/constant.json';
 
@@ -22,7 +23,6 @@ const SendInvoiceEmail = dynamic(() => import('./SendInvoiceEmail'), { ssr: fals
 
 const INVOICE_STATUS = ['reviewed', 'approved', 'revoked'];
 
-const ZERO_INDEX = 0;
 const SERIAL_THRESHOLD = 8;
 
 function Actions({
@@ -54,7 +54,7 @@ function Actions({
 	}
 
 	const invoice_serial_id = invoice?.serial_id?.toString() || '';
-	const firstChar = invoice_serial_id[ZERO_INDEX];
+	const firstChar = invoice_serial_id[GLOBAL_CONSTANTS.zeroth_index];
 
 	const isInvoiceBefore20Aug2022 = firstChar !== '1' || invoice_serial_id.length < SERIAL_THRESHOLD;
 

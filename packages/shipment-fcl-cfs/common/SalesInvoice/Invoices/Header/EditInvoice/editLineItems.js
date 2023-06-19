@@ -153,21 +153,20 @@ const useEditLineItems = ({
 				PAYLOAD.push(service);
 			});
 
-			const res = await trigger({
+			await trigger({
 				data: {
 					quotations             : PAYLOAD,
 					shipment_id            : shipment_data?.id,
 					invoice_combination_id : invoice?.id || undefined,
 				},
 			});
-			if (!res.hasError) {
-				Toast.success('Line Items updated successfully!');
-				if (refetch) {
-					refetch();
-				}
-				if (onClose) {
-					onClose();
-				}
+
+			Toast.success('Line Items updated successfully!');
+			if (refetch) {
+				refetch();
+			}
+			if (onClose) {
+				onClose();
 			}
 		} catch (err) {
 			Toast.error(err?.data?.invoices);

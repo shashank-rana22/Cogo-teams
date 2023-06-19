@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { Layout } from '@cogoport/ocean-modules';
 import { useSelector } from '@cogoport/store';
@@ -11,7 +12,6 @@ import styles from './styles.module.css';
 
 const geo = getGeoConstants();
 
-const ZERO_INDEX = 0;
 const MAX_BOUNDARY_VALUE = 130000;
 
 function EditInvoice({
@@ -46,7 +46,8 @@ function EditInvoice({
 		info: <Info />,
 	});
 
-	const disabledProps = controls?.[ZERO_INDEX]?.service_name === 'fcl_cfs_service' && !isAdminSuperAdmin
+	const disabledProps = controls?.[GLOBAL_CONSTANTS.zeroth_index]?.service_name === 'fcl_cfs_service'
+	&& !isAdminSuperAdmin
 	&& shipment_data?.serial_id > MAX_BOUNDARY_VALUE;
 
 	const formValues = watch();
@@ -65,7 +66,7 @@ function EditInvoice({
 		<Modal
 			size="xl"
 			onClose={onClose}
-			show={show}
+			show
 			closeOnOuterClick={false}
 		>
 			<Modal.Header title="Edit Invoice" />

@@ -1,5 +1,3 @@
-import React from 'react';
-
 import Header from './Header';
 import InvoiceServiceWise from './InvoiceServiceWise';
 import styles from './styles.module.css';

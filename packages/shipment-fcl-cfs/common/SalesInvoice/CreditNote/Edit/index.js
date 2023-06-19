@@ -4,7 +4,7 @@ import { useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import useUpdateShipmentCreditNote from '../../../../hooks/useUpdateShipmentCreditNote';
 import creditNoteControls from '../../helpers/creditNoteControls';
@@ -14,8 +14,6 @@ import formatCreditNoteData from '../helpers/format-credit-note-data';
 
 import Form from './Form';
 import styles from './styles.module.css';
-
-const EMPTY_LINE_ITEMS = 0;
 
 function Edit({
 	setOpen = () => { },
@@ -69,7 +67,7 @@ function Edit({
 			isEdit  : true,
 		});
 
-		if (submit_data?.line_items?.length === EMPTY_LINE_ITEMS) {
+		if (isEmpty(submit_data?.line_items)) {
 			Toast.error('Line Items is required');
 			return;
 		}

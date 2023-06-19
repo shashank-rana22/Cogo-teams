@@ -1,5 +1,5 @@
 import { Modal, Input, Button } from '@cogoport/components';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useGetAllExchangeRates from '../../../../../../../../../hooks/useGetAllExchangeRates';
 import CardList from '../../../../../../../commons/CardList';

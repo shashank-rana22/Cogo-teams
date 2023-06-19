@@ -1,4 +1,5 @@
 import { Loader, Button, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import {
 	IcMArrowRotateDown,
@@ -6,7 +7,7 @@ import {
 	IcMEdit,
 } from '@cogoport/icons-react';
 import { isEmpty, startCase } from '@cogoport/utils';
-import React, { useState, useRef } from 'react';
+import { useState, useRef } from 'react';
 
 import Edit from '../Edit';
 import ReviewCN from '../Review';
@@ -22,8 +23,6 @@ const CN_STATUS_MAPPING = {
 	finance_rejected : 'finance_rejected',
 };
 
-const ZERO_INDEX = 0;
-
 function Item({
 	item = {},
 	cnRefetch = () => {},
@@ -38,16 +37,16 @@ function Item({
 	const itemStatus = item?.status;
 
 	const prevData = {
-		remarks       : item?.remarks?.[ZERO_INDEX] || '',
+		remarks       : item?.remarks?.[GLOBAL_CONSTANTS.zeroth_index] || '',
 		document_urls : item?.document_urls || [],
 	};
 
 	const bfInvoice = invoicesList.filter((ele) => ele?.proformaNumber === item?.cn_number);
 
 	const handleDownload = () => {
-		const cnLink = bfInvoice[ZERO_INDEX]?.invoicePdfUrl
-			? bfInvoice[ZERO_INDEX]?.invoicePdfUrl
-			: bfInvoice[ZERO_INDEX]?.proformaPdfUrl;
+		const cnLink = bfInvoice[GLOBAL_CONSTANTS.zeroth_index]?.invoicePdfUrl
+			? bfInvoice[GLOBAL_CONSTANTS.zeroth_index]?.invoicePdfUrl
+			: bfInvoice[GLOBAL_CONSTANTS.zeroth_index]?.proformaPdfUrl;
 
 		window.open(cnLink);
 	};

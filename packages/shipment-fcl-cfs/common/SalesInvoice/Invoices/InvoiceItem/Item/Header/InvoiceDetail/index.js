@@ -1,8 +1,9 @@
 import { Button, cl, Tooltip } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase, isEmpty } from '@cogoport/utils';
-import React, { useContext } from 'react';
+import { useContext } from 'react';
 
 import CONSTANTS from '../../../../../../../configurations/constant.json';
 import styles from '../styles.module.css';
@@ -31,7 +32,7 @@ function InvoiceDetail({
 
 	const bfInvoice = invoicesList?.filter(
 		(item) => item?.proformaNumber === live_invoice_number,
-	)?.[ZERO_INDEX];
+	)?.[GLOBAL_CONSTANTS.zeroth_index];
 
 	const handleDownload = (invoiceLink) => {
 		window.open(invoiceLink);
@@ -44,7 +45,7 @@ function InvoiceDetail({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[ZERO_INDEX]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';

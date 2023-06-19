@@ -9,7 +9,7 @@ import CancelAdditionalService from '../../CancelAdditionalService';
 
 import styles from './styles.module.css';
 
-const serviceCancelAllowedBy = [
+const SERVICE_CANCEL_ALLOWED_BY = [
 	'requested_by_importer_exporter',
 	'amendment_requested_by_importer_exporter',
 ];
@@ -26,7 +26,7 @@ function Item({
 	const [showCancel, setShowCancel] = useState(false);
 	const [showEdit, setShowEdit] = useState(false);
 
-	const showCancelInfo = serviceCancelAllowedBy.includes(item?.state)
+	const showCancelInfo = SERVICE_CANCEL_ALLOWED_BY.includes(item?.state)
 	|| (item?.state === 'quoted_by_service_provider');
 
 	const showEditBtn = status?.status === 'approved';
