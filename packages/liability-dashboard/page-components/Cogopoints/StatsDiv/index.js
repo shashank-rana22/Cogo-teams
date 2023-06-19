@@ -27,6 +27,7 @@ function StatsDiv({
 				if (!access.includes(activeHeaderTab)) {
 					return null;
 				}
+
 				return (
 					<div
 						className={cl`${styles.stats_div}

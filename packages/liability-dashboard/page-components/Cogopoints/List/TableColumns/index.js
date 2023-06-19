@@ -132,6 +132,7 @@ function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 			headerOptions: ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
 		},
 	];
+
 	return columns.filter((item) => item.headerOptions.includes(activeHeaderTab)
 	&& item.conditions.includes(activeStatsCard));
 }

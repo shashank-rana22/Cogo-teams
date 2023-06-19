@@ -4,10 +4,6 @@
 	width: 100%;
 	height: 40vh;
 	margin-top: 10px;
-
-	@media (max-width: 768px) {
-		flex-direction: column;
-	}
 }
 
 .line_chart {
@@ -20,10 +16,6 @@
 	background: #fff;
 	border-radius: 6px;
 	transition: 0.5s ease-in-out;
-
-	@media (max-width: 768px) {
-		width: 100%;
-	}
 }
 
 .no_pie_chart {
@@ -39,10 +31,6 @@
 	padding: 10px 20px;
 	background: #fff;
 	border-radius: 6px;
-
-	@media (max-width: 768px) {
-		width: 100%;
-	}
 }
 
 .title {

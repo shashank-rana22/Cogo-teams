@@ -2,10 +2,9 @@ import { useRequest } from '@cogoport/request';
 import { addDays } from '@cogoport/utils';
 import { useEffect, useCallback, useState } from 'react';
 
-import { EVENT_MAPPING } from '../constants';
+import { ADD_ONE_DAY, EVENT_MAPPING } from '../constants';
 
 const PAGE_NUMBER = 1;
-const ADD_DAY = 1;
 
 const getParams = ({
 	pagination,
@@ -24,7 +23,7 @@ const getParams = ({
 		organization_id   : selectOrganization || undefined,
 		transaction_type  : transactionType,
 		organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
-		from_date         : addDays(startDate, ADD_DAY),
+		from_date         : addDays(startDate, ADD_ONE_DAY),
 		to_date           : endDate,
 		event             : EVENT_MAPPING[activeStatsCard] || undefined,
 	},
@@ -37,6 +36,8 @@ const useListCogopointTopHistory = ({
 	activeHeaderTab = '',
 	currencyCode = '',
 }) => {
+	const { startDate, endDate } = selectedDate || {};
+
 	const [pagination, setPagination] = useState(PAGE_NUMBER);
 	const [selectOrganization, setSelectOrganization] = useState('');
 
@@ -44,8 +45,6 @@ const useListCogopointTopHistory = ({
 		url    : '/list_cogopoint_top_history',
 		method : 'get',
 	}, { manual: true });
-
-	const { startDate, endDate } = selectedDate || {};
 
 	const listCogopointTopHistory = useCallback(() => {
 		try {
@@ -62,7 +61,7 @@ const useListCogopointTopHistory = ({
 				}),
 			});
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [trigger,
 		pagination,
@@ -72,7 +71,7 @@ const useListCogopointTopHistory = ({
 
 	useEffect(() => {
 		listCogopointTopHistory();
-	}, [listCogopointTopHistory, activeStatsCard]);
+	}, [listCogopointTopHistory]);
 
 	return {
 		topHistoryData    : data,

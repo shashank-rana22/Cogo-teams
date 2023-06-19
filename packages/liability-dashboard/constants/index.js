@@ -69,3 +69,5 @@ export const USER_TYPE_MAPPING = {
 	importer_exporter : 'IE',
 	affiliate         : 'Affiliate',
 };
+
+export const ADD_ONE_DAY = 1;

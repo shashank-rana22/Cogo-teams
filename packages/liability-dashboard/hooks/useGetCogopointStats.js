@@ -2,27 +2,31 @@ import { useRequest } from '@cogoport/request';
 import { addDays } from '@cogoport/utils';
 import { useEffect, useCallback } from 'react';
 
-const ADD_DAY = 1;
+import { ADD_ONE_DAY } from '../constants';
 
 const getParams = ({ currencyCode, activeHeaderTab, startDate, endDate }) => ({
 	currency          : currencyCode,
 	organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
-	start_date        : addDays(startDate, ADD_DAY),
+	start_date        : addDays(startDate, ADD_ONE_DAY),
 	end_date          : endDate,
 });
 
 const useGetCogopointStats = ({ activeHeaderTab = '', selectedDate = {}, currencyCode = '' }) => {
+	const { startDate, endDate } = selectedDate || {};
+
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_cogopoint_liability_stats',
 		method : 'get',
 	}, { manual: true });
 
-	const { startDate, endDate } = selectedDate || {};
-
 	const getCogopointStats = useCallback(() => {
-		trigger({
-			params: getParams({ currencyCode, activeHeaderTab, startDate, endDate }),
-		});
+		try {
+			trigger({
+				params: getParams({ currencyCode, activeHeaderTab, startDate, endDate }),
+			});
+		} catch (error) {
+			console.error(error);
+		}
 	}, [trigger, activeHeaderTab, startDate, endDate, currencyCode]);
 
 	useEffect(() => {
