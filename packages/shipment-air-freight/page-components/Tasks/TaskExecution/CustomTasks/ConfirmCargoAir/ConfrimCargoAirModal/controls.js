@@ -83,12 +83,11 @@ const controls = (primary_service, services) => [
 		rules       : { required: 'Flight Number is Required' },
 	},
 	{
-		label       : 'Contact With Agent',
-		name        : 'contact_with_agent',
-		type        : 'radio',
-		placeholder : '',
-		theme       : 'admin',
-		options     : [
+		label   : 'Contact With Agent',
+		name    : 'contact_with_agent',
+		type    : 'radio',
+		theme   : 'admin',
+		options : [
 			{
 				label : 'Yes',
 				value : 'true',
