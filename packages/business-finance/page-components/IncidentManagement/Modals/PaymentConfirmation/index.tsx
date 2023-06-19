@@ -41,16 +41,16 @@ function PaymentConfirmation({
 	paymentConfirmationRequest, organization,
 	id, refetch = () => {}, isEditable = true, remark, row,
 }:Props) {
-	const [showModal, setShowModal] = useState(false);
-	const [inputValues, setInputValues] = useState({
-		remarks: null,
-	});
-
 	const {
 		currency = '', utr, paymentAmount = '',
 		documentUrls, requestSubType,
 	} = paymentConfirmationRequest || {};
 	const { businessName:organizationName, tradePartyType = '', tradePartyName = '' } = organization || {};
+
+	const [showModal, setShowModal] = useState(false);
+	const [inputValues, setInputValues] = useState({
+		remarks: null,
+	});
 
 	const { onAction, loading } = usePaymentConfirm({
 		refetch,

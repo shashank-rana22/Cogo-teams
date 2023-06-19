@@ -114,7 +114,7 @@ function PaymentConfirmation({ itemData, setRemarks, remarks, onSave, showModal,
 								size="md"
 								style={{ marginRight: '8px' }}
 								disabled={!(remarks.length > 0) || loadingOnSave}
-								onClick={() => { onSave();	}}
+								onClick={onSave}
 							>
 								Save
 							</Button>

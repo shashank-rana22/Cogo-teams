@@ -34,6 +34,12 @@ const usePaymentConfirm = ({
 		{ manual: true },
 	);
 
+	const toastFunction = () => {
+		Toast.success('Request Updated Sucessfully');
+		setShowModal(false);
+		refetch();
+	};
+
 	const onAction = async ({ inputValues, status }:Props) => {
 		const { remarks = '' } = inputValues || {};
 		try {
@@ -48,9 +54,7 @@ const usePaymentConfirm = ({
 				data: { message },
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
-				Toast.success('Request Updated Sucessfully');
-				setShowModal(false);
-				refetch();
+				toastFunction();
 			} else {
 				Toast.error(message);
 			}
