@@ -1561,7 +1561,7 @@ const apis = [
 	{
 		api          : 'create_document',
 		access_type  : 'private',
-		service_name : 'shipment',
+		service_name : 'bookings',
 	},
 	{
 		api          : 'list_platform_config_constants',
