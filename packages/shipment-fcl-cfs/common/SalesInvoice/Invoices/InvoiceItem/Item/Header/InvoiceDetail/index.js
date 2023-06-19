@@ -5,7 +5,6 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { startCase, isEmpty } from '@cogoport/utils';
 import { useContext } from 'react';
 
-import CONSTANTS from '../../../../../../../configurations/constant.json';
 import styles from '../styles.module.css';
 
 const API_SUCCESS_MESSAGE = {
@@ -38,7 +37,7 @@ function InvoiceDetail({
 		window.open(invoiceLink);
 	};
 
-	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= CONSTANTS.invoice_check_id
+	const showIrnTriggerForOldShipments = shipment_data?.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
 	&& invoice?.status === 'reviewed'
 		&& !isEmpty(invoice?.data);
 

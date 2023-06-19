@@ -102,7 +102,7 @@ function Item({
 					>
 						<div>
 							<IcMOverflowDot
-								style={{ width: '10px', height: '10px', cursor: 'pointer' }}
+								className={styles.dot_style}
 								onClick={() => setShow(!show)}
 							/>
 						</div>

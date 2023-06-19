@@ -13,13 +13,11 @@ const useCreateOrganizationTradeParty = ({
 
 	const apiTrigger = async (payload) => {
 		try {
-			const res = await trigger({ data: payload });
+			await trigger({ data: payload });
 
-			if (!res.hasError) {
-				Toast.success(successMessage);
+			Toast.success(successMessage);
 
-				refetch();
-			}
+			refetch();
 		} catch (err) {
 			toastApiError(err);
 		}

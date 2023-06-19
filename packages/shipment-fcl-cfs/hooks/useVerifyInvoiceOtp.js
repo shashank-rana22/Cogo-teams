@@ -1,5 +1,5 @@
 import { Toast } from '@cogoport/components';
-import { getApiError } from '@cogoport/forms';
+import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 
 const useVerifyInvoiceOtp = ({
@@ -19,7 +19,7 @@ const useVerifyInvoiceOtp = ({
 			Toast.success(successMessage);
 			refetch();
 		} catch (err) {
-			Toast.error(getApiError(err?.response?.data));
+			toastApiError(err);
 		}
 	};
 

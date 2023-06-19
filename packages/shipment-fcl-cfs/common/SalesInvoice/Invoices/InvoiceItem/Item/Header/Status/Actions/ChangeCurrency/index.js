@@ -14,10 +14,10 @@ function ChangeCurrency({
 	invoice = {},
 	refetch = () => {},
 }) {
+	const [value, setValue] = useState('');
 	const onClose = () => {
 		setIsChangeCurrency(false);
 	};
-	const [value, setValue] = useState('');
 
 	const geo = getGeoConstants();
 

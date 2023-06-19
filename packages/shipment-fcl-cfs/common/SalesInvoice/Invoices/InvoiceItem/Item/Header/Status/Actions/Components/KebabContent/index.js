@@ -1,10 +1,10 @@
 import { Popover, Tooltip, cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMOverflowDot, IcMInfo } from '@cogoport/icons-react';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import CONSTANTS from '../../../../../../../../../../configurations/constant.json';
 import styles from '../../styles.module.css';
 
 const MINIMUM_DOCUMENT_LENGTH = 0;
@@ -21,7 +21,8 @@ function KebabContent({
 	setIsEditInvoice = () => {},
 }) {
 	const [show, setShow] = useState(false);
-	const showForOldShipments = shipment_data.serial_id <= CONSTANTS.invoice_check_id && invoice.status === 'pending';
+	const showForOldShipments = shipment_data.serial_id <= GLOBAL_CONSTANTS.others.old_shipment_serial_id
+	&& invoice.status === 'pending';
 
 	const user_data = useSelector((({ profile }) => profile?.user));
 

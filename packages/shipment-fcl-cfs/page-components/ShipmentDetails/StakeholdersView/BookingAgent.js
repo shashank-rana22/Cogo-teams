@@ -24,7 +24,7 @@ import styles from './styles.module.css';
 
 const services_additional_methods = ['stakeholder', 'service_objects', 'booking_requirement'];
 
-const SHIPMENT_STATUS_CODE = 403;
+const FORBIDDEN_STATUS_CODE = 403;
 
 function BookingAgent({ get = {}, activeStakeholder = '' }) {
 	const router = useRouter();
@@ -59,7 +59,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (!shipment_data && ![SHIPMENT_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
+	if (!shipment_data && ![FORBIDDEN_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -79,7 +79,7 @@ function BookingAgent({ get = {}, activeStakeholder = '' }) {
 		);
 	}
 
-	if (getShipmentStatusCode === SHIPMENT_STATUS_CODE && getShipmentStatusCode !== undefined) {
+	if (getShipmentStatusCode === FORBIDDEN_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>
