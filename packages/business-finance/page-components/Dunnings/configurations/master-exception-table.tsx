@@ -57,7 +57,7 @@ const masterExceptionColumn = ({
 							interactive
 						>
 							<div className={styles.customer_name}>
-								{row?.name}
+								{row?.name || ''}
 							</div>
 						</Tooltip>
 					</div>
@@ -68,7 +68,7 @@ const masterExceptionColumn = ({
 				id       : 'registrationNumber',
 				accessor : (row) => (
 					<div className={styles.text}>
-						{row?.registrationNumber}
+						{row?.registrationNumber || '-'}
 					</div>
 				),
 			},
@@ -77,7 +77,7 @@ const masterExceptionColumn = ({
 				id       : 'orgSegment',
 				accessor : (row) => (
 					<div className={styles.text}>
-						{row?.orgSegment}
+						{row?.orgSegment || '-'}
 					</div>
 				),
 			},
@@ -98,7 +98,7 @@ const masterExceptionColumn = ({
 				id       : 'creditDays',
 				accessor : (row) => (
 					<div className={styles.text}>
-						{row?.creditDays}
+						{row?.creditDays || 0}
 					</div>
 				),
 			},
@@ -120,7 +120,7 @@ const masterExceptionColumn = ({
 				accessor : (row) => (
 					<div className={styles.text}>
 						{formatAmount({
-							amount   : row?.creditAmount,
+							amount   : row?.creditAmount || 0,
 							currency : 'INR',
 							options  : {
 								style                 : 'currency',
@@ -149,7 +149,7 @@ const masterExceptionColumn = ({
 				accessor : (row) => (
 					<div className={styles.text}>
 						{formatAmount({
-							amount   : row?.totalDueAmount,
+							amount   : row?.totalDueAmount || 0,
 							currency : 'INR',
 							options  : {
 								style                 : 'currency',

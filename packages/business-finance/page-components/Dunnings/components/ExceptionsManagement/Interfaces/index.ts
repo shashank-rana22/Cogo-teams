@@ -19,6 +19,7 @@ export interface ExceptionListProps {
 	setSearchValue?: React.Dispatch<React.SetStateAction<string>>;
 	showCycleExceptions?: boolean;
 	setShowCycleExceptions?: React.Dispatch<React.SetStateAction<boolean>>;
+	getMasterList?: Function;
 }
 
 export interface FilterProps {
@@ -30,6 +31,7 @@ export interface FilterProps {
 	showCycleExceptions?: boolean;
 	setShowCycleExceptions?: React.Dispatch<React.SetStateAction<boolean>>;
 	cycleListId?: string;
+	getMasterList?: Function;
 }
 
 export interface AddCustomerInterface {

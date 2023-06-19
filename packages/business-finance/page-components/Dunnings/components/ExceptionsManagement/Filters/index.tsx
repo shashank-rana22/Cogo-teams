@@ -21,6 +21,7 @@ function Filters({
 	setShowCycleExceptions,
 	setSearchValue,
 	cycleListId,
+	getMasterList,
 }:FilterProps) {
 	const [show, setShow] = useState(false);
 	const [uncheckedRows, setUncheckedRows] = useState([]);
@@ -40,6 +41,7 @@ function Filters({
 		setShowCycleExceptions,
 		cycleListId,
 		uncheckedRows,
+		getMasterList,
 	});
 
 	return (

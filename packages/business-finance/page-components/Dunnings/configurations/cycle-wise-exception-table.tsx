@@ -39,7 +39,7 @@ const cycleWiseExceptionTable = ({
 							interactive
 						>
 							<div className={styles.customer_name}>
-								{row?.name}
+								{row?.name || '-'}
 							</div>
 						</Tooltip>
 					</div>
@@ -50,7 +50,7 @@ const cycleWiseExceptionTable = ({
 				id       : 'cycleType',
 				accessor : (row) => (
 					<div className={styles.text}>
-						{row?.cycleType }
+						{row?.cycleType || '-' }
 					</div>
 
 				),

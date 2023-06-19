@@ -37,6 +37,7 @@ function ExceptionsManagement() {
 		sort,
 		setSort,
 		cycleWiseLoading,
+		getMasterList,
 	} = useMasterException({ exceptionFilter, subTabsValue, setShowConfirmationModal });
 
 	const [masterListId, setMasterListId] = useState();
@@ -108,6 +109,7 @@ function ExceptionsManagement() {
 				showCycleExceptions={showCycleExceptions}
 				setShowCycleExceptions={setShowCycleExceptions}
 				cycleListId={cycleListId}
+				getMasterList={getMasterList}
 				{...rest}
 			/>
 

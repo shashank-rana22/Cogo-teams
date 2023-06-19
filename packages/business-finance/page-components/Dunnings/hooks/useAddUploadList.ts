@@ -10,6 +10,7 @@ interface AddUploadInterface {
 	setShowCycleExceptions?: React.Dispatch<React.SetStateAction<boolean>>;
 	cycleListId?: string;
 	uncheckedRows?: Array<string>;
+	getMasterList?: Function;
 }
 
 interface Profile {
@@ -22,6 +23,7 @@ const useAddUploadList = ({
 	setShowCycleExceptions,
 	cycleListId,
 	uncheckedRows = [],
+	getMasterList,
 }:AddUploadInterface) => {
 	const profile: Profile = useSelector((state) => state);
 	const { profile: { user } } = profile || {};
@@ -56,13 +58,16 @@ const useAddUploadList = ({
 					Toast.success(`${res?.data.length} customers succesfully added ${exceptionType}`);
 				}
 				onClose();
+				if (SUB_TABS_VALUES) {
+					getMasterList();
+				}
 				setShowCycleExceptions(false);
 			} catch (error) {
 				Toast.error(error?.message);
 			}
 		})();
 	}, [trigger, PROFILE_ID, onClose, setShowCycleExceptions, SUB_TABS_VALUES, exceptionType,
-		uncheckedRows, UN_CHECKED_DATA, cycleListId]);
+		uncheckedRows, UN_CHECKED_DATA, getMasterList, cycleListId]);
 
 	return {
 
