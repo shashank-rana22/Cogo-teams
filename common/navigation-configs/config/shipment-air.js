@@ -1,5 +1,5 @@
 const shipmentAir = {
-	'/[partner_id]/booking/air': {
+	'/[partner_id]/booking-desk/air': {
 		navigation: 'coe-shipment_air',
 	},
 };
