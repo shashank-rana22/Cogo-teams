@@ -27,7 +27,7 @@ const useHistorySettlemet = () => {
 		{ manual: true },
 	);
 
-	const { query, date, accountType, orgId = '', page = 1, sortBy, sortType } = filters;
+	const { query = '', date, accountType, orgId = '', page = 1, sortBy, sortType } = filters;
 
 	useEffect(() => {
 		debounceQuery(query);
@@ -53,7 +53,7 @@ const useHistorySettlemet = () => {
 								dateFormat : GLOBAL_CONSTANTS.formats.date['dd/MM/yyyy'],
 								formatType : 'date',
 							}) : undefined,
-					query     : search !== '' ? search : undefined,
+					query     : search || undefined,
 					page,
 					pageLimit : 10,
 					sortBy    : sortBy || undefined,
@@ -68,10 +68,8 @@ const useHistorySettlemet = () => {
 	}, [accountType, date?.endDate, date?.startDate, orgId, page, search, sortBy, sortType, trigger]);
 
 	useEffect(() => {
-		if (Object.keys(filters).length > 1) {
-			refetch();
-		}
-	}, [orgId, accountType, date, search, page, sortBy, sortType, filters, refetch]);
+		refetch();
+	}, [refetch]);
 
 	return {
 		filters,
