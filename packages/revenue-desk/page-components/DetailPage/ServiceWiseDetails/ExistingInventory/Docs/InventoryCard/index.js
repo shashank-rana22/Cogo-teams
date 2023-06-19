@@ -6,7 +6,7 @@ import getRows from './getRows';
 import styles from './styles.module.css';
 
 const columns = [
-	'Shopping Line',
+	'Shipping Line',
 	'Total Containers',
 	'Total Buy Rate',
 	'BN Expiry Date',
@@ -100,7 +100,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 			role="presentation"
 			onClick={() => handlePreference(element?.id, key)}
 		>
-			<div className={styles.td}>
+			<div className={styles.td_priority}>
 				<PriorityNumber data={preferences?.[serviceId]} id={element?.id} showPriority={false} />
 			</div>
 
@@ -135,7 +135,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 					<div className={styles.description}>{type[0]}</div>
 					<div className={styles.table}>
 						<div className={styles.tr}>
-							<div className={styles.select_heading}>{'   '}</div>
+							<div className={styles.select_heading}>{' '}</div>
 							{columns.map((label) => (
 								<div className={styles.th} key={label}>{label}</div>
 							))}
