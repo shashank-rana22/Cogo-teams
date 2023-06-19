@@ -49,7 +49,9 @@ function ConfirmationModal(
 				</Button>
 				<Button
 					themeType="primary"
-					onClick={() => bulkPostToSageAction(notSettledIds)}
+					onClick={() => {
+						bulkPostToSageAction(notSettledIds); setConfirmation(!confirmation);
+					}}
 					className={styles.post}
 					loading={loading}
 				>
