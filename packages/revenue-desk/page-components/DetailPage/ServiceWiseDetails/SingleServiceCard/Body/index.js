@@ -18,7 +18,7 @@ function Body({ data, price, shipmentData }) {
 			<div className={styles.text1}>
 				{data?.service_type === 'fcl_freight_service'
 				&& ['in_progress', 'confirmed_by_importer_exporter'].includes(shipmentData?.state)
-				&& !data?.is_prefernece_set && <EditSellQuotation data={shipmentData} />}
+				&& !data?.is_preference_set && <EditSellQuotation data={shipmentData} />}
 				Sell Price
 				<div className={styles.text2}>
 					{price || 0}
