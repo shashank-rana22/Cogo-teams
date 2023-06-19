@@ -5,7 +5,15 @@ import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 const useHistorySettlemet = () => {
-	const [filters, setFilters] = useState({});
+	const [filters, setFilters] = useState({
+		query       : '',
+		date        : {},
+		accountType : '',
+		orgId       : '',
+		page        : 1,
+		sortBy      : '',
+		sortType    : '',
+	});
 	const [apiData, setApiData] = useState({});
 
 	const { query: search = '', debounceQuery } = useDebounceQuery();
