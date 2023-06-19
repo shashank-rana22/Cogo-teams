@@ -14,11 +14,11 @@ const UNIT_MAPPING = {
 
 export const formatValue = (val) => {
 	let newVal = val;
-	let cnt = INITIAL_VALUE;
+	let count = INITIAL_VALUE;
 
 	while (newVal > CHECK_VALUE) {
 		newVal /= INITIAL_DIVIDED_VALUE;
-		cnt += CHECK_IN_THOUSAND;
+		count += CHECK_IN_THOUSAND;
 	}
 
 	let num = Number(newVal).toFixed(CHECK_IN_MILLION);
@@ -27,11 +27,11 @@ export const formatValue = (val) => {
 		num = Math.floor(num);
 	}
 
-	if (cnt in UNIT_MAPPING) {
-		return `${num}${UNIT_MAPPING[cnt]}`;
+	if (count in UNIT_MAPPING) {
+		return `${num}${UNIT_MAPPING[count]}`;
 	}
 
-	if (cnt > CHECK_IN_BILLION) {
+	if (count > CHECK_IN_BILLION) {
 		return `${num}T`;
 	}
 

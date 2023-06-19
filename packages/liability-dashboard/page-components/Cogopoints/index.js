@@ -2,7 +2,7 @@ import { cl } from '@cogoport/components';
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import { useState, useEffect } from 'react';
 
-import { PIE_CHART_CHECK } from '../../constants';
+import { PIE_CHART_CHECK, LINE_CHART_TITLE_MAPPING } from '../../constants';
 import useGetCogopointStats from '../../hooks/useGetCogopointStats';
 import useListCogopointTopHistory from '../../hooks/useListCogopointTopHistory';
 import getFormattedLineChartData from '../../utils/getFormattedLineChartData';
@@ -79,8 +79,7 @@ function CogoPoints() {
 			                ${(!checkPieChart || checkPieChartDataInMainTab) && styles.no_pie_chart}`}
 							>
 								<div className={styles.title}>
-									{activeStatsCard === 'liability_point_value'
-										? 'Liability Creation Trend' : 'Cogopoint burnt trend'}
+									{LINE_CHART_TITLE_MAPPING[activeStatsCard] }
 
 								</div>
 

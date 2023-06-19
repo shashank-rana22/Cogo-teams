@@ -140,3 +140,11 @@ export const ACTIVE_CARD_MAPPING = ({ liabilityData, burntData }) => ({
 	liability_point_value   : liabilityData,
 	total_burnt_point_value : burntData,
 });
+
+export const LINE_CHART_TITLE_MAPPING = {
+	liability_point_value               : 'Liability Creation Trend',
+	total_burnt_point_value             : 'Cogopoint burnt trend',
+	shipment_burnt_point_value          : 'Cogopoint burnt trend',
+	saas_subscription_burnt_point_value : 'Cogopoint burnt trend',
+	cogostore_burnt_point_value         : 'Cogopoint burnt trend',
+};
