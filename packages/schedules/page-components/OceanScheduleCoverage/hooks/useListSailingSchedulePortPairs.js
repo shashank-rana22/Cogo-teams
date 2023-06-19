@@ -4,7 +4,7 @@ import { useSelector, getState } from "@cogoport/store";
 
 const useListSailingSchedulePortPairs = ({ filters, currentPage }) => {
     const { scope } = useSelector(({ general }) => ({ scope: general.scope }));
-    const [{ data }, trigger] = useRequest(
+    const [{ data, loading }, trigger] = useRequest(
         {
             method: "get",
             url: `/list_sailing_schedule_port_pairs`,
@@ -36,6 +36,7 @@ const useListSailingSchedulePortPairs = ({ filters, currentPage }) => {
         data: data?.list,
         getListSailingSchedulePortPairData,
         totalCount: data?.total_count,
+        loading,
     };
 };
 

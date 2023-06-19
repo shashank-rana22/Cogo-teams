@@ -11,7 +11,7 @@ const ViewScheduleModal = ({ show, setShow, columnsForPattern }) => {
     const modelTitle = (
         <div className={styles.heading}>
             Ocean Port Pair Schedule
-            <div className={styles.button}>
+            {/* <div className={styles.button}>
                 <Button
                     type="update"
                     size="md"
@@ -29,7 +29,7 @@ const ViewScheduleModal = ({ show, setShow, columnsForPattern }) => {
                 >
                     Bulk Upload
                 </Button>
-            </div>
+            </div> */}
         </div>
     );
 
