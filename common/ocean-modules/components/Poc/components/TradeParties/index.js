@@ -1,4 +1,4 @@
-import TRADE_PARTY_MAPPING from '../../../../contants/TRADE_PARTY_MAPPING';
+import TRADE_PARTY_MAPPING from '../../../../constants/TRADE_PARTY_MAPPING';
 
 import styles from './styles.module.css';
 

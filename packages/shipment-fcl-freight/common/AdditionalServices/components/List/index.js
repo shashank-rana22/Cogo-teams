@@ -1,34 +1,36 @@
 import { Button, Modal, cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useContext } from 'react';
 
 import useListAdditionalServices from '../../../../hooks/useListAdditionalServices';
 import useUpdateShipmentAdditionalService from '../../../../hooks/useUpdateShipmentAdditionalService';
-import AddIp from '../AddIp';
-import AddRate from '../AddRate';
 import Loader from '../Loader';
 
-import AddService from './AddService';
 import Info from './Info';
 import ItemAdded from './ItemAdded';
 import actions from './ItemAdded/actions';
 import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
+const AddIp = dynamic(() => import('../AddIp'), { ssr: false });
+const AddRate = dynamic(() => import('../AddRate'), { ssr: false });
+const AddService = dynamic(() => import('./AddService'), { ssr: false });
+
+const DEFAULT_PAGE_LIMIT = 8;
+const SHOW_MORE_PAGE_LIMIT = 16;
+
 function List({ isSeller = false }) {
-	const { servicesList, refetchServices, shipment_data, activeStakeholder } = useContext(
+	const { servicesList, refetchServices = () => {}, shipment_data, activeStakeholder } = useContext(
 		ShipmentDetailContext,
 	);
 
 	const [item, setItem] = useState({});
 	const [showModal, setShowModal] = useState(false);
-	const [pageLimit, setPageLimit] = useState(8);
+	const [pageLimit, setPageLimit] = useState(DEFAULT_PAGE_LIMIT);
 
-	const { list: additionalServiceList, refetch, loading, totalCount } = useListAdditionalServices({
-		shipment_data,
-		pageLimit,
-	});
+	const { list: additionalServiceList, refetch = () => {}, loading, totalCount } = useListAdditionalServices();
 
 	const handleRefetch = () => {
 		refetchServices();
@@ -48,7 +50,6 @@ function List({ isSeller = false }) {
 
 	return (
 		<div className={styles.container}>
-
 			{loading ? <Loader /> : null}
 
 			{!isEmpty(additionalServiceList) && !loading ? (
@@ -58,6 +59,7 @@ function List({ isSeller = false }) {
 
 						return (
 							<ItemAdded
+								key={serviceListItem}
 								item={serviceListItem}
 								status={status}
 								showIp={showModal === 'ip'}
@@ -78,15 +80,15 @@ function List({ isSeller = false }) {
 				</div>
 			) : null}
 
-			{totalCount > 8
+			{totalCount > DEFAULT_PAGE_LIMIT
 				? (
 					<div className={styles.show_more}>
-						{pageLimit > 8
+						{pageLimit > DEFAULT_PAGE_LIMIT
 							? 	(
 								<Button
 									size="md"
 									themeType="link"
-									onClick={() => setPageLimit(8)}
+									onClick={() => setPageLimit(DEFAULT_PAGE_LIMIT)}
 								>
 									Show Less
 								</Button>
@@ -94,7 +96,7 @@ function List({ isSeller = false }) {
 								<Button
 									size="md"
 									themeType="link"
-									onClick={() => setPageLimit(16)}
+									onClick={() => setPageLimit(SHOW_MORE_PAGE_LIMIT)}
 								>
 									Show More
 								</Button>
@@ -112,6 +114,7 @@ function List({ isSeller = false }) {
 					<Info />
 				</div>
 			) : null}
+
 			<div className={styles.not_added}>
 				<Button
 					onClick={() => setShowModal('charge_code')}
@@ -123,7 +126,7 @@ function List({ isSeller = false }) {
 			</div>
 
 			{showModal === 'add_sell_price'
-				&& (
+				? (
 					<Modal
 						size="lg"
 						show
@@ -132,6 +135,7 @@ function List({ isSeller = false }) {
 						showCloseIcon={!updateResponse.loading}
 					>
 						<Modal.Header title="Add Sell Price" />
+
 						<Modal.Body>
 							<AddRate
 								item={item?.serviceListItem}
@@ -142,19 +146,21 @@ function List({ isSeller = false }) {
 							/>
 						</Modal.Body>
 					</Modal>
-				)}
+				)
+				: null}
 
 			{showModal === 'ip'
-				&& (
+				? (
 					<AddIp
 						shipmentData={shipment_data}
 						setShowIp={setShowModal}
 						updateInvoicingParty={(ip) => updateResponse.handleInvoicingParty(ip)}
 					/>
-				)}
+				)
+				: null}
 
 			{showModal === 'charge_code'
-				&& (
+				? (
 					<AddService
 						shipmentId={shipment_data?.id}
 						services={servicesList}
@@ -163,8 +169,8 @@ function List({ isSeller = false }) {
 						setItem={setItem}
 						setShowChargeCodes={setShowModal}
 					/>
-				)}
-
+				)
+				: null}
 		</div>
 	);
 }

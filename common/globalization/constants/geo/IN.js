@@ -15,7 +15,7 @@ export default {
 		amount: {
 			scope: {
 				admin: {
-					locale: 'en-US',
+					locale: 'en-IN',
 				},
 			},
 			options: {},
@@ -120,6 +120,7 @@ export default {
 		],
 		coe_finance_head          : '7000ed27-f649-4e00-9c20-8c20c9eccf78',
 		prod_settlement_executive : 'b11f5c3e-4608-4f1d-b2dd-a59b92da1e2a',
+		finops_manager            : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		service_ops2_role_id      : [
 			'017856dc-b424-4145-9181-5680732cb33b',
 			'12dd0f6f-7256-403f-bfd1-913bc466c775', // LCL So2
@@ -404,6 +405,32 @@ export default {
 				value : 'open_side',
 			},
 		],
+		entities: [
+			{
+				label : '101 COGO FREIGHT PVT LTD',
+				value : '101',
+			},
+			{
+				label : '201 Cogoport Netherlands',
+				value : '201',
+			},
+			{
+				label : '301 COGOPORT PRIVATE LIMITED',
+				value : '301',
+			},
+			{
+				label : '401 Cogo Universe Pte. Ltd',
+				value : '401',
+			},
+			{
+				label : '501 Cogoport Vietnam',
+				value : '501',
+			},
+		],
+		migration_status: [
+			{ label: 'True', value: true },
+			{ label: 'False', value: false },
+		],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -417,6 +444,13 @@ export default {
 					'rfq_enquiries',
 					'rates_sheets',
 				],
+			},
+		},
+		account_receivables: {
+			defaulters: {
+				migration_status: {
+					show_filter: true,
+				},
 			},
 		},
 	},
@@ -439,6 +473,10 @@ export default {
 		navigations: {
 			onboard_vendor: {
 				validate_registration: true,
+			},
+			cogo_one: {
+				has_voice_call_access : true,
+				default_country_code  : 'IN',
 			},
 		},
 	},

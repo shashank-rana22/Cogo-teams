@@ -79,6 +79,7 @@ export default {
 		corporate_owner_id         : '89184155-1f77-4265-826a-e997d140002f',
 		corporate_owner_finance_id : '5063d25a-7312-4eb6-93fd-41020ba62e17',
 		operation_manager          : 'ed3e6418-6013-4710-83cf-5b0b117aa8a1',
+		finops_manager             : 'bdd39a3c-6f01-4228-905f-7d61acc66860',
 		kam_ids                    : [
 			'9ead41d4-ced8-45c2-b370-4399cbfcf478', // Prod_KAM Location Sales
 			'0bc8c199-09ed-4a85-b3a3-a855f05a2716', // Prod_KAM IE
@@ -366,6 +367,12 @@ export default {
 				value : 'open_side',
 			},
 		],
+		entities: [
+			{
+				label: '501 Cogoport Vietnam', value: '501',
+			},
+		],
+		migration_status: [],
 	},
 	navigations: {
 		supply_dashboard: {
@@ -378,6 +385,13 @@ export default {
 					'rfq_enquiries',
 					'rates_sheets',
 				],
+			},
+		},
+		account_receivables: {
+			defaulters: {
+				migration_status: {
+					show_filter: false,
+				},
 			},
 		},
 	},
@@ -400,6 +414,10 @@ export default {
 		navigations: {
 			onboard_vendor: {
 				validate_registration: false,
+			},
+			cogo_one: {
+				has_voice_call_access : false,
+				default_country_code  : 'IN',
 			},
 		},
 	},

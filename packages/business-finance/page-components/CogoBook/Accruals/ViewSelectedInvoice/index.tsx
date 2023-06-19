@@ -1,5 +1,5 @@
 import { Modal, Input, Tooltip, Button, Breadcrumb } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMSearchlight, IcMArrowBack } from '@cogoport/icons-react';
 import { Link, useRouter } from '@cogoport/next';
 import { startCase, format } from '@cogoport/utils';
@@ -7,7 +7,7 @@ import { useState } from 'react';
 
 import StyledTable from '../../common/StyledTable';
 import useViewSelect from '../../hooks/useViewSelect';
-import { bookedColumn, column, monthData } from '../constant';
+import { bookedColumn, column, MONTH_DATA } from '../constant';
 import Footer from '../ShipmentView/Footer';
 
 import styles from './styles.module.css';
@@ -73,17 +73,38 @@ function ViewSelectedInvoice() {
 				<div>
 					Purchase :
 					{' '}
-					{getFormattedPrice(buyQuotation, buyQuotationCurrency) || '-'}
+					{formatAmount({
+						amount   : buyQuotation,
+						currency : buyQuotationCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-'}
 				</div>
 				<div>
 					Sales :
 					{' '}
-					{getFormattedPrice(sellQuotation, sellQuotationCurrency) || '-' }
+					{formatAmount({
+						amount   :	sellQuotation,
+						currency : sellQuotationCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
 				</div>
 				<div>
 					Margin :
 					{' '}
-					{getFormattedPrice(quotationProfit, incomeCurrency) || '-' }
+					{formatAmount({
+						amount   :	quotationProfit,
+						currency : incomeCurrency,
+						options  : {
+							style           : 'currency',
+							currencyDisplay : 'code',
+						},
+					}) || '-' }
 					{' '}
 					(
 					{Number(quotationMargin || 0.00)?.toFixed(2) || '0'}
@@ -144,7 +165,7 @@ function ViewSelectedInvoice() {
 
 						<div className={styles.card_div} style={{ width: '140px' }}>
 							Month -
-							{monthData[month]}
+							{MONTH_DATA[month]}
 						</div>
 
 						{startDate &&	(

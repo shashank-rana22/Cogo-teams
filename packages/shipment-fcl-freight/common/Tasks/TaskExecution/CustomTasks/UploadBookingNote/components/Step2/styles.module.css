@@ -44,11 +44,11 @@
 }
 
 .heading {
-	font-size: 14px;
+	font-size: var(--font-size-lg);
 	font-weight: 700;
 }
 
 .sub_heading {
-	font-size: 12px;
+	font-size: var(--font-size-md);
 	font-weight: 600;
 }

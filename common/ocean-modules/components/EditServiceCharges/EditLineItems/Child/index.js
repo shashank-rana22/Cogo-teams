@@ -1,9 +1,15 @@
+import { cl } from '@cogoport/components';
 import { IcMDelete } from '@cogoport/icons-react';
 import { useMemo } from 'react';
 
 import Item from '../../../Layout/Item';
 
 import styles from './styles.module.css';
+
+const DEFAULT_SPAN = 12;
+const PERCENT_FACTOR = 100;
+const FLEX_OFFSET = 1;
+const INDEX_UPTO_REMOVE_ITEM = 1;
 
 function Child({
 	control,
@@ -15,6 +21,7 @@ function Child({
 	customValues = {},
 	showDeleteButton = true,
 	error = {},
+	disableServiceEdit = false,
 }) {
 	const keys = useMemo(
 		() => Array(controls.length).fill(null).map(() => Math.random()),
@@ -26,7 +33,7 @@ function Child({
 				{controls?.map((controlItem, i) => {
 					const { render, span } = controlItem || {};
 
-					const flex = ((span || 12) / 12) * 100 - 1;
+					const flex = ((span || DEFAULT_SPAN) / DEFAULT_SPAN) * PERCENT_FACTOR - FLEX_OFFSET;
 
 					if (controlItem?.type === 'static') {
 						return (
@@ -43,6 +50,7 @@ function Child({
 							name={`${name}.${index}.${controlItem?.name}`}
 							value={field?.[controlItem?.name]}
 							control={control}
+							source="edit_line_items"
 							label={controlItem?.label}
 							error={error?.[controlItem.name]}
 						/>
@@ -51,9 +59,14 @@ function Child({
 
 				{showDeleteButton
 					? (
-						<div className={styles.delete_button_container}>
-							<IcMDelete width={20} height={20} onClick={() => remove(index, 1)} />
-						</div>
+						<IcMDelete
+							width={20}
+							height={20}
+							onClick={!disableServiceEdit ? () => remove(index, INDEX_UPTO_REMOVE_ITEM) : null}
+							className={
+						cl`${disableServiceEdit ? styles.disableServiceEdit : styles.delete_button_container}`
+}
+						/>
 					) : null}
 			</div>
 		</div>

@@ -7,10 +7,13 @@ import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
+const DEFAULT_SPAN = 12;
+const REPLACE_SPAN_BY = 0;
 function Layout({
-	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
+	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {},
+	shipment_id = '', disabledProps = false,
 }) {
-	const totalFields = [];
+	const TOTAL_FIELDS = [];
 
 	let rowWiseFields = [];
 	let span = 0;
@@ -18,18 +21,18 @@ function Layout({
 	(fields || []).forEach((field) => {
 		const { [field?.name]: showItem = true } = showElements;
 		if (showItem) {
-			span += field?.span || 12;
-			if (span === 12) {
-				span = 0;
+			span += field?.span || DEFAULT_SPAN;
+			if (span === DEFAULT_SPAN) {
+				span = REPLACE_SPAN_BY;
 
 				rowWiseFields.push(field);
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 
 				rowWiseFields = [];
-			} else if (span > 12) {
-				span = 0;
+			} else if (span > DEFAULT_SPAN) {
+				span = REPLACE_SPAN_BY;
 
-				totalFields.push(rowWiseFields);
+				TOTAL_FIELDS.push(rowWiseFields);
 				rowWiseFields = [];
 
 				rowWiseFields.push(field);
@@ -40,20 +43,20 @@ function Layout({
 	});
 
 	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+		TOTAL_FIELDS.push(rowWiseFields);
 	}
 
 	const keysForFields = useMemo(
-		() => Array(totalFields.length).fill(null).map(() => Math.random()),
-		[totalFields.length],
+		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
+		[TOTAL_FIELDS.length],
 	);
 
 	return (
 		<main className={styles.layout}>
-			{totalFields.map((rowFields, i) => (
+			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={cl`${styles.row} form_layout_row`} key={keysForFields[i]}>
 					{rowFields.map((field) => {
-						const { type, heading = '' } = field || {};
+						const { type, heading = '', name = '' } = field || {};
 
 						if (type === 'fieldArray') {
 							return (
@@ -66,7 +69,7 @@ function Layout({
 
 									<FieldArray
 										{...field}
-										error={errors?.[field?.name]}
+										error={errors?.[name]}
 										control={control}
 										showElements={showElements}
 										formValues={formValues}
@@ -83,6 +86,7 @@ function Layout({
 										control={control}
 										customValues={customValues?.[field?.name]}
 										shipment_id={shipment_id}
+										disabledProps={disabledProps}
 										{...field}
 									/>
 								</section>
@@ -93,7 +97,7 @@ function Layout({
 							<Item
 								key={field.name}
 								control={control}
-								error={errors?.[field?.name]}
+								error={errors?.[name]}
 								formValues={formValues}
 								{...field}
 							/>

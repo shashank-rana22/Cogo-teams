@@ -143,6 +143,7 @@ function RPASearch({
 
 				{(data?.body || []).map((item) => (
 					<MailData
+						key={item?.id}
 						item={item}
 						onClick={handleChange}
 						values={selectedMail}
