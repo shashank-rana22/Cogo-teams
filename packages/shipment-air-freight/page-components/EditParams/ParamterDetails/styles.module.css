@@ -16,7 +16,6 @@
 	:global {
 		.ui_input_container {
 			max-height: 32px;
-			border: 1px solid #333;
 
 			.ui_input_control {
 				font-size: 12px;

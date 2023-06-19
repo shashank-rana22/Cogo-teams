@@ -16,7 +16,7 @@ export const getAddressRespectivePincodeAndPoc = ({ data, address = '' }) => {
 
 const getBillingAddressFromRegNum = ({ data }) => {
 	const FORMATTED_DATA = [];
-	data?.map((item) => {
+	(data || []).map((item) => {
 		const billingArray = item?.billing_addresses?.map((address) => ({
 			...address,
 			business_name: item?.business_name,

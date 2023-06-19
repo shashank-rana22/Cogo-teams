@@ -40,7 +40,7 @@ function ChildBlocks(
 		const newBlocks = blocks;
 		if (isOld) {
 			const data = newBlocks.find((obj) => obj.id === id);
-			if (data.mainData.status === 'active') {
+			if (data?.mainData?.status === 'active') {
 				data.mainData.status = 'inactive';
 			} else {
 				data.mainData.status = 'active';

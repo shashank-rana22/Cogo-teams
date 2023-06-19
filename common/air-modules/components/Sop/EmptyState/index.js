@@ -1,5 +1,7 @@
 import styles from './styles.module.css';
 
+const SOP_EMPTY_STATE_URL = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man';
+
 function EmptyState({
 	height = 125,
 	width = 225,
@@ -10,7 +12,7 @@ function EmptyState({
 	return (
 		<div className={`${styles.container} ${styles[flexDirection]}`}>
 			<img
-				src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/folder-image-with-man"
+				src={SOP_EMPTY_STATE_URL}
 				width={width}
 				height={height}
 				alt="Empty-state"
