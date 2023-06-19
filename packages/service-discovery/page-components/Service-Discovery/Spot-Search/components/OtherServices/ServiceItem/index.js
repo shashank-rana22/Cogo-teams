@@ -28,7 +28,6 @@ function ServiceItem({ data = {}, selectedService, setSelectedService, setSelect
 				)}
 
 				<Icon className={`${styles.icon} ${selectedService !== value && styles.icon_hover}`} />
-
 			</div>
 			<div
 				className={styles.label}
