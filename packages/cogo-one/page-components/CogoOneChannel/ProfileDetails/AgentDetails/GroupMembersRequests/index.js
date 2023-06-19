@@ -1,4 +1,5 @@
 import { Avatar } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCFtick, IcCFcrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -17,16 +18,15 @@ function GroupMembersRequests({
 		<div>
 			{!isEmpty(members) && <div className={styles.conversation_title}>Group Requests</div>}
 			{members.map((user = {}) => (
-				<div className={styles.content} key={user}>
+				<div className={styles.content} key={user?.id}>
 					<Avatar
-						src="https://www.w3schools.com/howto/img_avatar.png"
+						src={GLOBAL_CONSTANTS.image_url.user_avatar}
 						alt="img"
 						disabled={false}
 						className={styles.user_div}
 					/>
 
 					<div className={styles.details}>
-
 						<div className={styles.name}>
 							{user.name}
 						</div>

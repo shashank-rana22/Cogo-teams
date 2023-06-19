@@ -41,6 +41,16 @@ const getVoiceCallStatement = ({ type = '', present = '', previous = '', startAt
 		case 'outgoing':
 		case 'incoming':
 			return getVoiceCallStatus({ type, status: voiceCallStatus, present, previous });
+		case 'request_to_join_group':
+			return `${previous} requested to join this group`;
+		case 'added_to_group':
+			return `${present} added ${previous} to this group`;
+		case 'leaving_the_group':
+			return `${present} removed ${previous} from  this group`;
+		case 'rejected_from_group':
+			return `${present} rejected ${previous}'s request to join this group`;
+		case 'request_dissmissed':
+			return `${present} rejected ${previous}'s request to tranfer chat`;
 		default:
 			return null;
 	}

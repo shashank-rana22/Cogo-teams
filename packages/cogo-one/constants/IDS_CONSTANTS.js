@@ -9,7 +9,7 @@ const getViewTypeMapping = () => {
 
 	const ROLE_IDS_CHECK = {
 		shipment_view : geo.uuid.cogo_one_shipment_agent_ids,
-		kam_role_ids  : geo.uuid.cogo_one_kam_agent_ids,
+		kam_view      : geo.uuid.cogo_one_kam_agent_ids,
 		admin_view    : geo.uuid.cogo_one_admin_ids,
 	};
 

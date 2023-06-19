@@ -1,4 +1,5 @@
 import { Avatar } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcCFcrossInCircle } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
@@ -15,7 +16,7 @@ function GroupMembers({
 			{members.map((user) => (
 				<div className={styles.content} key={user?.id}>
 					<Avatar
-						src="https://www.w3schools.com/howto/img_avatar.png"
+						src={GLOBAL_CONSTANTS.image_url.user_avatar}
 						alt="img"
 						disabled={false}
 						className={styles.user_div}
@@ -24,10 +25,10 @@ function GroupMembers({
 					<div className={styles.details}>
 
 						<div className={styles.name}>
-							{user.name}
+							{user?.name}
 						</div>
 						<div className={styles.email}>
-							{user.email}
+							{user?.email}
 						</div>
 					</div>
 					{hasAccessToEditGroup
@@ -35,7 +36,7 @@ function GroupMembers({
 							<div className={styles.mark_status}>
 								<IcCFcrossInCircle
 									className={styles.icon}
-									onClick={() => deleteGroupMember(user.user_id)}
+									onClick={() => deleteGroupMember(user?.user_id)}
 								/>
 							</div>
 						)}

@@ -55,6 +55,8 @@ function AgentDetails({
 		sender,
 		channel_type = '',
 		user_type, id = '',
+		session_type = '',
+		account_type,
 	} = formattedMessageData || {};
 
 	const { partner_users } = useGetPartnerUsers({ activeMessageCard });
@@ -66,8 +68,9 @@ function AgentDetails({
 		addGroupMember,
 	} = useGroupChat({ activeMessageCard, firestore });
 
-	const hasAccessToEditGroup = activeMessageCard.group_members?.includes(agentId)
-	|| activeMessageCard.support_agent_id === agentId || viewType === 'admin_view';
+	const hasAccessToEditGroup = (session_type === 'admin' && account_type === 'service_provider')
+	&& (activeMessageCard.group_members?.includes(agentId)
+	|| activeMessageCard.support_agent_id === agentId || viewType === 'admin_view');
 
 	const {
 		user_data = {},
