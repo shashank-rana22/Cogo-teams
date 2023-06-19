@@ -277,7 +277,16 @@ const hrms = {
 			access_type  : 'private',
 			service_name : 'hrms',
 		},
-
+		{
+			api          : 'get_employees_with_low_weightage',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
+		{
+			api          : 'assign_kra',
+			access_type  : 'private',
+			service_name : 'hrms',
+		},
 	],
 };
 

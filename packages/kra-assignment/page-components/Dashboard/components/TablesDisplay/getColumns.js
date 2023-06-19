@@ -1,14 +1,37 @@
+import { Checkbox } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
-import styles from './styles.module.css';
+import EqualArray from '../../../config/EqualArray';
 
-const getColumns = () => [
+// import styles from './styles.module.css';
+
+const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem }) => [
 	{
-		Header   : 'SELECT',
-		accessor : (item) => (
+		id     : 'select_options',
+		Header : (
+			<div role="presentation">
+				<Checkbox
+					checked={EqualArray(selectArray, ARRAY_OF_IDS)}
+					onChange={() => {
+						if (EqualArray(selectArray, ARRAY_OF_IDS)) {
+							setSelectArray([]);
+						} else {
+							setSelectArray([...ARRAY_OF_IDS]);
+						}
+					}}
+				/>
+			</div>
+		),
+		accessor: (item) => (
 			<div>
-				{/* {startCase(item?.tribe_name) || '-'} */}
-				SELECT
+				<Checkbox
+					checked={selectArray.includes(item.id)}
+					onChange={() => {
+						if (!selectArray.includes(item.id)) { setSelectArray([...selectArray, item.id]); } else {
+							removeItem(item.id);
+						}
+					}}
+				/>
 			</div>
 		),
 	},
