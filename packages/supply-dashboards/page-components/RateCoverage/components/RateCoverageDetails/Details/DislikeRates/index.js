@@ -39,7 +39,7 @@ function DislikeRates({ setIndex, value, filter }) {
 		commodity       : startCase(item.commodity),
 		containerType   : startCase(item.container_type),
 		containerSize   : item.container_size,
-		noOfRates       : 3,
+		noOfRates       : '-',
 	}));
 
 	if (loading) {
