@@ -1,10 +1,9 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMPortArrow } from '@cogoport/icons-react';
 import { format } from '@cogoport/utils';
 import React from 'react';
 
 import styles from './styles.module.css';
-
-const FIRST_ELEMENT_DATA = 0;
 
 const getDisplayDate = (date, dateFormat = 'dd MMM yyyy') => (date ? format(date, dateFormat, null, true) : null);
 
@@ -14,10 +13,10 @@ function EstimatedDates({ data = {} }) {
 		estimated_departure = '',
 		pickup_date = '',
 		delivery_date = '',
-	} =	 data.ftl_freight_services[FIRST_ELEMENT_DATA] || {};
+	} =	 data.ftl_freight_services[GLOBAL_CONSTANTS.zeroth_index] || {};
 	return (
 		<div>
-			<div className={`${styles.container} core_ui_port_conatiner`}>
+			<div className={styles.container}>
 
 				<div className={styles.date_detail}>
 					<div className={styles.heading}>
@@ -33,7 +32,7 @@ function EstimatedDates({ data = {} }) {
 				</div>
 
 				<div className={styles.icon_wrapper}>
-					<IcMPortArrow className="core_ui_icon" />
+					<IcMPortArrow />
 				</div>
 				<div className={styles.heading}>
 					ETA:
@@ -51,7 +50,7 @@ function EstimatedDates({ data = {} }) {
 
 				) : 'TBD'}
 			</div>
-			<div className={`${styles.container} core_ui_port_conatiner`}>
+			<div className={styles.container}>
 
 				<div className={styles.date_detail}>
 					<div className={styles.heading}>
@@ -65,7 +64,7 @@ function EstimatedDates({ data = {} }) {
 				</div>
 
 				<div className={styles.icon_wrapper}>
-					<IcMPortArrow className="core_ui_icon" />
+					<IcMPortArrow />
 				</div>
 				<div className={styles.heading}>
 					ATA:
