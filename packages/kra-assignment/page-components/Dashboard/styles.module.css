@@ -27,6 +27,8 @@
     background-color: white;
     margin-top: 14px;
     padding: 8px;
+    height: fit-content;
+    border-radius: 6px;
 }
 
 .table_display{

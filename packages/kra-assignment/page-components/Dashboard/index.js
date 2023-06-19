@@ -8,6 +8,7 @@ import KRATable from './components/KRATable';
 import TableDisplay from './components/TablesDisplay';
 import styles from './styles.module.css';
 import useGetEmployeesWithLowWeightage from './useGetEmployeesWithLowWeightage';
+import useGetkrasAssigned from './useGetKrasAssigned';
 import useGetUnassignedEmployee from './useGetUnassignedEmployees';
 
 const REDIRECT_URL = '/kra-assignment/create';
@@ -26,6 +27,13 @@ function Dashboard() {
 		loading:LoadingLowWeightageEmployee,
 	} = useGetEmployeesWithLowWeightage();
 	const { list:LowWeightageEmployeeList = [] } = LowWeightageEmployeeData;
+
+	const {
+		data: KrasAssignedData,
+		loading:LoadingKrasAssigned,
+	} = useGetkrasAssigned();
+
+	// console.log('KrasAssignedData', KrasAssignedData);
 
 	const onClickConfiguration = () => {
 		router.push(REDIRECT_URL, REDIRECT_URL);
@@ -62,6 +70,7 @@ function Dashboard() {
 					</div>
 
 					<div className={styles.table_display}>
+						<h4>All Unassigned KRA Employee List : </h4>
 						<TableDisplay
 							data={UnassignedList}
 							loading={loading}
@@ -72,6 +81,7 @@ function Dashboard() {
 					</div>
 
 					<div className={styles.table_display}>
+						<h4>All Low Weightage KRA Employee List : </h4>
 						<TableDisplay
 							data={LowWeightageEmployeeList}
 							loading={LoadingLowWeightageEmployee}
@@ -82,8 +92,10 @@ function Dashboard() {
 					</div>
 
 					<div>
-						<AccordianDisplay data={UnassignedData} loading={loading} />
-						{/* mapping */}
+						<h4>All KRA List : </h4>
+						{KrasAssignedData?.list?.map((item) => (
+							<AccordianDisplay data={item} loading={LoadingKrasAssigned} key={item?.id} />
+						)) }
 					</div>
 				</div>
 
