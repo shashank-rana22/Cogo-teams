@@ -3,6 +3,7 @@ import { IcMArrowBack } from "@cogoport/icons-react";
 import useGetSailingSchedulePortPairCoverage from "../hooks/useGetSailingSchedulePortPairCoverage";
 import styles from "../styles.module.css";
 import ViewScheduleModal from "../ViewScheduleModal";
+import LoadingState from "../LoadingState";
 
 function OSCPortToPort({
     originPort,
@@ -13,10 +14,11 @@ function OSCPortToPort({
     show,
     setShow,
 }) {
-    const { data, coverageTotalCount } = useGetSailingSchedulePortPairCoverage({
-        originPort,
-        destinationPort,
-    });
+    const { data, loading, coverageTotalCount } =
+        useGetSailingSchedulePortPairCoverage({
+            originPort,
+            destinationPort,
+        });
     return (
         <>
             <ViewScheduleModal
@@ -30,12 +32,17 @@ function OSCPortToPort({
             >
                 <IcMArrowBack />
             </Button>
-            {columnsForPortToPort && data && (
-                <Table
-                    columns={columnsForPortToPort}
-                    data={data}
-                    className={styles.table}
-                />
+            {!loading ? (
+                columnsForPortToPort &&
+                data && (
+                    <Table
+                        columns={columnsForPortToPort}
+                        data={data}
+                        className={styles.table}
+                    />
+                )
+            ) : (
+                <LoadingState />
             )}
         </>
     );
