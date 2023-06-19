@@ -21,7 +21,7 @@ const getParams = ({
 	page                                : pagination,
 	currency                            : currencyCode,
 	filters                             : {
-		organization_id   : selectOrganization,
+		organization_id   : selectOrganization || undefined,
 		transaction_type  : transactionType,
 		organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
 		from_date         : addDays(startDate, ADD_DAY),
@@ -48,18 +48,22 @@ const useListCogopointTopHistory = ({
 	const { startDate, endDate } = selectedDate || {};
 
 	const listCogopointTopHistory = useCallback(() => {
-		trigger({
-			params: getParams({
-				pagination,
-				currencyCode,
-				selectOrganization,
-				transactionType,
-				activeHeaderTab,
-				startDate,
-				activeStatsCard,
-				endDate,
-			}),
-		});
+		try {
+			trigger({
+				params: getParams({
+					pagination,
+					currencyCode,
+					selectOrganization,
+					transactionType,
+					activeHeaderTab,
+					startDate,
+					activeStatsCard,
+					endDate,
+				}),
+			});
+		} catch (error) {
+			console.log(error);
+		}
 	}, [trigger,
 		pagination,
 		currencyCode,

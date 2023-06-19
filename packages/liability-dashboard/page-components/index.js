@@ -4,15 +4,15 @@ import { useSelector } from '@cogoport/store';
 
 import CogoPoints from './Cogopoints';
 
-function Index() {
+function LiabilityDashboard() {
 	const router = useRouter();
 	const { asPath } = router;
+
+	const partnerId = useSelector((state) => state?.profile?.partner?.id);
 
 	const pathCheck = asPath.includes('/liability-dashboard/cogopoint');
 
 	const activeTab = pathCheck && 'cogopoint';
-
-	const partnerId = useSelector((s) => s?.profile?.partner?.id);
 
 	const handleTabChange = (tab) => {
 		if (tab === 'promotion') {
@@ -36,4 +36,4 @@ function Index() {
 	);
 }
 
-export default Index;
+export default LiabilityDashboard;

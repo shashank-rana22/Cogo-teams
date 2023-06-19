@@ -30,10 +30,10 @@ export const formatValue = (val) => {
 };
 
 export const statsPercentageValue = ({ data, name }) => {
-	const showStats = name !== 'liability_point_value' && name !== 'total_burnt_point_value';
+	const showStats = !['liability_point_value', 'total_burnt_point_value'].includes(name);
 	const { total_burnt_point_value = '' } = data || {};
 	let percentageValue = INITIAL_VALUE;
-	if (total_burnt_point_value !== INITIAL_VALUE && showStats && data[name] !== undefined) {
+	if (total_burnt_point_value !== INITIAL_VALUE && showStats && !!data[name]) {
 		percentageValue = ((data[name] / total_burnt_point_value) * MAXIMUM_PERCENTAGE_VALUE).toFixed(CHECK_IN_MILLION);
 	}
 
