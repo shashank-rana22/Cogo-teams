@@ -2,7 +2,6 @@ import { Button } from '@cogoport/components';
 import { InputController, UploadController, useForm } from '@cogoport/forms';
 
 import useCreateShipmentDocument from '../../../../../../hooks/useCreateShipmentDocument';
-import useUpdateShipmentPendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 import styles from './styles.module.css';
 
@@ -27,8 +26,6 @@ function UploadCargoArrivalDocument({
 		refetch: cargoDocRefetch,
 	});
 
-	const { apiTrigger: pendingTaskTrigger, loading: pendingTaskLoading } = useUpdateShipmentPendingTask({});
-
 	const onSubmit = async (values) => {
 		const data = {
 			shipment_id        : pendingTask?.shipment_id,
@@ -36,7 +33,7 @@ function UploadCargoArrivalDocument({
 			document_type      : 'container_arrival_notice',
 			service_id         : pendingTask?.service_id,
 			service_type       : pendingTask?.service_type,
-			task_id       		   : pendingTask?.id,
+			pending_task_id	   : pendingTask?.id,
 			documents          : [
 				{
 					file_name    : values?.cargo_arrival_notice?.fileName,
@@ -47,14 +44,7 @@ function UploadCargoArrivalDocument({
 				},
 			],
 		};
-		const res = await apiTrigger(data);
-		if (!res.hasError) {
-			const payload = {
-				id     : pendingTask?.id,
-				status : 'comppleted',
-			};
-			await pendingTaskTrigger(payload);
-		}
+		await apiTrigger(data);
 	};
 
 	return (
