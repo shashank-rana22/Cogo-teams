@@ -1,4 +1,4 @@
-import { Button, Pill } from '@cogoport/components';
+import { Button, Pagination, Pill } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
@@ -6,7 +6,6 @@ import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import { INVOICE_STATUS, INVOICE_STATUS_MAPPING } from '../../../../../../Constants';
-import useHistorySingleDataList from '../../../../../../hooks/useHistorySingleDataList';
 import usePostSettlementToSage from '../../../../../../hooks/usePostSettlementToSage';
 import Loader from '../../../../../Loader';
 
@@ -27,11 +26,37 @@ interface ListItem {
 	accMode: string;
 	notPostedSettlementIds : Array<number>;
 	ledCurrency: string;
+}
 
+interface List {
+	id: string;
+	documentValue: string;
+	sid?: string;
+	documentAmount?: number;
+	currency?: string;
+	settledAmount?: number;
+	tds?: number;
+	nostroAmount?: number;
+	currentBalance?: number;
+	transactionDate?: string;
+	status?: string;
+	settlementStatus?: string;
+	accMode?: string;
+
+}
+
+interface SettlementData {
+	list: List[];
+	pageNo: number;
+	totalRecords: number;
 }
 
 interface Props {
 	item: ListItem;
+	refetch: ()=>void;
+	data: SettlementData;
+	loading: boolean;
+	onPageChange: (val:number) =>void;
 }
 
 const DEFAULT_VALUE = {
@@ -51,16 +76,12 @@ const DEFAULT_VALUE = {
 
 };
 
-function Details({ item = DEFAULT_VALUE }: Props) {
-	const { documentNo = '', accountType = '', notPostedSettlementIds = [], ledCurrency = '' } = item || {};
-	const {
-		data,
-		loading,
-	} = useHistorySingleDataList(documentNo, accountType);
+function Details({ data, refetch, item = DEFAULT_VALUE, loading, onPageChange }: Props) {
+	const { notPostedSettlementIds = [], ledCurrency = '' } = item || {};
 
-	const { loading: bulkPostToSageLoading, bulkPostToSageAction } = usePostSettlementToSage();
+	const { loading: bulkPostToSageLoading, bulkPostToSageAction } = usePostSettlementToSage(refetch);
 
-	const { list = [] } = data || {};
+	const { list = [], pageNo = 0, totalRecords = 0 } = data || {};
 
 	const listTotal = list?.length;
 
@@ -124,7 +145,7 @@ function Details({ item = DEFAULT_VALUE }: Props) {
 						<div className={styles.nostro}>
 
 							{ getFormattedPrice(
-								singleitem?.nostro,
+								singleitem?.nostroAmount,
 								singleitem?.currency,
 							) || '-'}
 						</div>
@@ -165,6 +186,14 @@ function Details({ item = DEFAULT_VALUE }: Props) {
 					</div>
 				))}
 			</div>
+			<Pagination
+				className={styles.pagination}
+				type="number"
+				currentPage={pageNo}
+				totalItems={totalRecords}
+				pageSize={5}
+				onPageChange={onPageChange}
+			/>
 
 		</div>
 	);

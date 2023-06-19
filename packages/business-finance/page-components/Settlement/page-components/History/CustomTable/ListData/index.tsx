@@ -21,10 +21,11 @@ interface ListItem {
 interface Props {
 	list: ListItem[];
 	getTableBodyCheckbox: (item: object) => React.JSX.Element;
+	refetch: ()=> void;
 
 }
 
-function ListData({ list = [], getTableBodyCheckbox }:Props) {
+function ListData({ list = [], getTableBodyCheckbox, refetch }:Props) {
 	return (
 		<div className={styles.list}>
 			{(list || []).map((item) => (
@@ -32,6 +33,7 @@ function ListData({ list = [], getTableBodyCheckbox }:Props) {
 					key={item?.id}
 					item={item}
 					getTableBodyCheckbox={getTableBodyCheckbox}
+					refetch={refetch}
 				/>
 			))}
 		</div>

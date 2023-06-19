@@ -42,12 +42,13 @@ interface Props {
 	onChangeTableHeaderCheckbox: (event: object) => void;
 	checkedRows: Object;
 	getTableBodyCheckbox: (item: object) => React.JSX.Element;
+	refetch: ()=>void;
 }
 
 function CustomTable({
 	data = {}, onPageChange, loading, setFilters, filters,
 	getTableBodyCheckbox, isAllChecked, onChangeTableHeaderCheckbox,
-	showHeaderCheckbox, checkedRows,
+	showHeaderCheckbox, checkedRows, refetch,
 }:Props) {
 	const { list = [], pageNo = 1, totalRecords = 0 } = (data as DataInterface || {});
 
@@ -61,7 +62,13 @@ function CustomTable({
 				showHeaderCheckbox={showHeaderCheckbox}
 				loading={loading}
 			/>
-			{loading ? <Loader /> : <ListData list={list} getTableBodyCheckbox={getTableBodyCheckbox} /> }
+			{loading ? <Loader /> : (
+				<ListData
+					list={list}
+					getTableBodyCheckbox={getTableBodyCheckbox}
+					refetch={refetch}
+				/>
+			) }
 			{!isEmpty(list)
 				? (
 					<>
@@ -73,7 +80,7 @@ function CustomTable({
 							pageSize={10}
 							onPageChange={onPageChange}
 						/>
-						<FooterCard checkedRows={checkedRows} />
+						<FooterCard checkedRows={checkedRows} refetch={refetch} />
 					</>
 
 				) : null}

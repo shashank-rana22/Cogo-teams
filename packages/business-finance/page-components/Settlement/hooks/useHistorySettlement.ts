@@ -2,7 +2,7 @@ import { useDebounceQuery } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
 const useHistorySettlemet = () => {
 	const [filters, setFilters] = useState({});
@@ -25,7 +25,7 @@ const useHistorySettlemet = () => {
 		debounceQuery(query);
 	}, [debounceQuery, query]);
 
-	const refetch = async () => {
+	const refetch = useCallback(async () => {
 		try {
 			const res = await trigger({
 				params: {
@@ -57,13 +57,13 @@ const useHistorySettlemet = () => {
 			setApiData({});
 			console.log(error);
 		}
-	};
+	}, [accountType, date?.endDate, date?.startDate, orgId, page, search, sortBy, sortType, trigger]);
 
 	useEffect(() => {
 		if (Object.keys(filters).length > 1) {
 			refetch();
 		}
-	}, [orgId, accountType, date, search, page, sortBy, sortType]);
+	}, [orgId, accountType, date, search, page, sortBy, sortType, filters, refetch]);
 
 	return {
 		filters,
@@ -72,6 +72,7 @@ const useHistorySettlemet = () => {
 		loading,
 		setApiData,
 		apiData,
+		refetch,
 	};
 };
 

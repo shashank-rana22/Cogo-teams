@@ -1,12 +1,16 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect, useState } from 'react';
+import { useCallback, useEffect, useState } from 'react';
 
-const useHistorySingleDataList = (documentNo, accountType) => {
+const useHistorySingleDataList = () => {
 	const [globalFilters, setGlobalFilters] = useState({
 		page      : 1,
 		pageLimit : 5,
 	});
+
+	const onPageChange = (val:number) => {
+		setGlobalFilters({ ...globalFilters, page: val });
+	};
 
 	const [{ data, loading }, trigger] = useRequestBf(
 		{
@@ -16,13 +20,15 @@ const useHistorySingleDataList = (documentNo, accountType) => {
 		},
 		{ manual: true, autoCancel: false },
 	);
-	const getHistoryChild = async () => {
+	const getHistoryChild = async (values) => {
+		const { documentNo, accountType } = values || {};
 		try {
 			await trigger({
 				params: {
-					documentNo,
-					settlementType: accountType,
-					...globalFilters,
+					documentNo     : documentNo || undefined,
+					settlementType : accountType || undefined,
+					page           : globalFilters.page,
+					pageLimit      : globalFilters.pageLimit,
 				},
 			});
 		} catch (error) {
@@ -30,16 +36,13 @@ const useHistorySingleDataList = (documentNo, accountType) => {
 		}
 	};
 
-	useEffect(() => {
-		getHistoryChild();
-	}, [documentNo]);
-
 	return {
 		data,
 		globalFilters,
 		setGlobalFilters,
 		getHistoryChild,
 		loading,
+		onPageChange,
 	};
 };
 

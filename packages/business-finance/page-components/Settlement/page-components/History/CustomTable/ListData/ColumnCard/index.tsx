@@ -4,6 +4,8 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import useHistorySingleDataList from '../../../../../hooks/useHistorySingleDataList';
+
 import Details from './Details/index';
 import styles from './styles.module.css';
 
@@ -26,13 +28,26 @@ interface ListItem {
 interface Props {
 	item: ListItem;
 	getTableBodyCheckbox: (item: object) => React.JSX.Element;
+	refetch: ()=>void
 
 }
 
-function ColumnCard({ item, getTableBodyCheckbox }: Props) {
+function ColumnCard({ item, getTableBodyCheckbox, refetch }: Props) {
 	const [showDetails, setShowDetails] = useState(false);
 
 	const Icon = showDetails ? IcMArrowRotateUp : IcMArrowRotateDown;
+
+	const {
+		data,
+		loading,
+		onPageChange,
+		getHistoryChild,
+	} = useHistorySingleDataList();
+
+	const handleClickIcon = () => {
+		if (!showDetails) { getHistoryChild(item); }
+		setShowDetails(!showDetails);
+	};
 
 	return (
 		<div className={styles.column}>
@@ -78,7 +93,7 @@ function ColumnCard({ item, getTableBodyCheckbox }: Props) {
 				<div className={styles.accord}>
 					<Icon
 						className={styles.icon}
-						onClick={() => { setShowDetails(!showDetails); }}
+						onClick={() => { handleClickIcon(); }}
 					/>
 				</div>
 				<div className={styles.ribbon_render}>
@@ -91,7 +106,15 @@ function ColumnCard({ item, getTableBodyCheckbox }: Props) {
 				</div>
 
 			</div>
-			{showDetails ? <Details item={item} /> : null}
+			{showDetails ? (
+				<Details
+					item={item}
+					data={data}
+					loading={loading}
+					refetch={refetch}
+					onPageChange={onPageChange}
+				/>
+			) : null}
 		</div>
 	);
 }

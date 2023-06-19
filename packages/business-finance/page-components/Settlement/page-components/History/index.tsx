@@ -1,4 +1,5 @@
 import { Checkbox, Input } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSearchlight } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
@@ -15,7 +16,7 @@ import styles from './styles.module.css';
 function History() {
 	const [checkedRows, setCheckedRows] = useState({});
 
-	const { loading, filters, setFilters, apiData } = useHistorySettlemet();
+	const { loading, filters, setFilters, apiData, refetch } = useHistorySettlemet();
 
 	const onPageChange = (val:number) => {
 		setFilters({ ...filters, page: val });
@@ -28,7 +29,8 @@ function History() {
 
 		if (event.target.checked) {
 			const filterData = (apiData?.list || [])
-				?.filter((item) => item?.notPostedSettlementIds?.length > 0);
+				?.filter((item) => item?.notPostedSettlementIds?.length > 0
+				&& !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND));
 
 			const NEW_CHECKED = {};
 			filterData.forEach((item) => { NEW_CHECKED[item?.id] = item.notPostedSettlementIds; });
@@ -71,7 +73,7 @@ function History() {
 			item?.id,
 		);
 
-		return item?.notPostedSettlementIds?.length ? (
+		return item?.notPostedSettlementIds?.length && !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND) ? (
 			<Checkbox
 				checked={isChecked}
 				disabled={loading}
@@ -85,10 +87,12 @@ function History() {
 	};
 
 	const isAllChecked = isEmpty((apiData?.list || [])?.filter((item) => item?.notPostedSettlementIds?.length > 0
+	&& !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND)
 	&& !Object.keys(checkedRows).includes(item?.id)));
 
 	const showHeaderCheckbox = !isEmpty((apiData?.list || [])?.filter(
-		(item) => item?.notPostedSettlementIds?.length > 0,
+		(item) => item?.notPostedSettlementIds?.length > 0
+		&& !(item?.ledCurrency === GLOBAL_CONSTANTS.currency_code.VND),
 	));
 
 	return (
@@ -115,6 +119,7 @@ function History() {
 				getTableBodyCheckbox={getTableBodyCheckbox}
 				onChangeTableHeaderCheckbox={onChangeTableHeaderCheckbox}
 				checkedRows={checkedRows}
+				refetch={refetch}
 
 			/>
 			{!apiData?.list && !loading && <SelectState />}
