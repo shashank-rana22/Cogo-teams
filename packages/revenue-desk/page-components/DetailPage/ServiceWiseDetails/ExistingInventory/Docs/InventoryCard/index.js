@@ -1,12 +1,11 @@
 import { useState } from 'react';
 
-import PriorityNumber from '../../../RatesCard/Card/PriorityNumber';
-
 import getRows from './getRows';
+import PriorityNumber from './PriorityNumber';
 import styles from './styles.module.css';
 
 const columns = [
-	'Shopping Line',
+	'Shipping Line',
 	'Total Containers',
 	'Total Buy Rate',
 	'BN Expiry Date',
@@ -54,7 +53,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 
 	const handlePreference = (row_id, istype) => {
 		const allIds = getAllIds(row_id, istype);
-		if ((preferences?.[serviceId] || [])?.length) {
+		if ((preferences?.[serviceId] || []).length) {
 			const foundItem = (preferences?.[serviceId] || []).find((obj) => obj?.id === row_id);
 			if (foundItem) {
 				const oldItems = preferences?.[serviceId];
@@ -79,7 +78,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 				setPreferences({ ...preferences, [serviceId]: [...newList] });
 			}
 		} else {
-			const newList = preferences?.[serviceId];
+			const newList = preferences?.[serviceId] || [];
 			newList.push({
 				id    : row_id,
 				type  : istype,
@@ -98,7 +97,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 			role="presentation"
 			onClick={() => handlePreference(element?.id, key)}
 		>
-			<div className={styles.td}>
+			<div className={styles.td_priority}>
 				<PriorityNumber data={preferences?.[serviceId]} id={element?.id} showPriority={false} />
 			</div>
 
@@ -118,7 +117,11 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 			onClick={() => handlePreference(element?.id, key)}
 		>
 			<div className={styles.select_container}>
-				<PriorityNumber data={preferences?.[serviceId]} id={element?.id} showPriority={false} />
+				<PriorityNumber
+					data={preferences?.[serviceId]}
+					id={element?.id}
+					showPriority={false}
+				/>
 			</div>
 
 			{element?.childrens?.[0].map((childval) => (
@@ -133,7 +136,7 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 					<div className={styles.description}>{type[0]}</div>
 					<div className={styles.table}>
 						<div className={styles.tr}>
-							<div className={styles.select_heading}>{'   '}</div>
+							<div className={styles.select_heading}>{' '}</div>
 							{columns.map((label) => (
 								<div className={styles.th} key={label}>{label}</div>
 							))}

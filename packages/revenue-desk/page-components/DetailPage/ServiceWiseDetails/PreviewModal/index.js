@@ -12,7 +12,7 @@ function PreviewModal({
 
 	Object.entries(groupedShowServicesData).forEach(([serviceType, serviceData]) => {
 		newFilteredGroupedShowServicesData[serviceType] = serviceData.filter(
-			(service) => supplierPayload.hasOwnProperty(service?.id) && (supplierPayload[service?.id] || []).length,
+			(service) => supplierPayload?.[(service?.id)] && (supplierPayload[service?.id] || []).length,
 		);
 	});
 	const previewTabsKey = Object.keys(newFilteredGroupedShowServicesData).filter(

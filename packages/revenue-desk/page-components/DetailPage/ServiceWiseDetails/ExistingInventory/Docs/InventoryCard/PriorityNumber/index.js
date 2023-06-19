@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
-function PriorityNumber({ data, id, showPriority }) {
-	const searchObject = (data || []).find((obj) => obj?.rate_id === id);
+function PriorityNumber({ data, id }) {
+	const searchObject = (data || []).find((obj) => obj?.id === id);
 
 	let priority;
 	if (searchObject) {
@@ -15,7 +15,7 @@ function PriorityNumber({ data, id, showPriority }) {
 			className={styles.container}
 			style={{ background: show ? '#4F4F4F' : null }}
 		>
-			{show && showPriority ? <div className={styles.text}>{priority + 1}</div> : <div className={styles.text} />}
+			{show ? <div className={styles.text} /> : null}
 		</div>
 	);
 }
