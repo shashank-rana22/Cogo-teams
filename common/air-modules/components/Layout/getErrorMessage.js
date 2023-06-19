@@ -1,41 +1,47 @@
+const MIN_RULE = 0;
+
 const getErrorMessage = (props) => {
 	const { error = {}, rules = {}, label = '' } = props;
 
-	if (error?.message) return error.message;
+	const { required, min, max, minLength, maxLength } = rules;
 
-	const errorMessage = [];
+	const { type, message } = error;
+
+	if (message) return message;
+
+	const ERROR_MESSAGE = [];
 
 	if (error) {
-		if (rules?.required && error?.type === 'required') {
-			errorMessage.push(error?.message || `${label} is Required`);
+		if ((required || required?.value) && type === 'required') {
+			ERROR_MESSAGE.push(message || `${label} is Required`);
 		}
-		if ((rules?.min || rules?.min === 0) && error?.type === 'min') {
-			errorMessage.push(
-				`${label} cannot be less than ${rules.min}`,
+		if ((min || min === MIN_RULE) && type === 'min') {
+			ERROR_MESSAGE.push(
+				`${label} cannot be less than ${min}`,
 			);
 		}
-		if (rules?.max && error?.type === 'max') {
-			errorMessage.push(
-				`${label} cannot be greater than ${rules.max}`,
+		if (max && type === 'max') {
+			ERROR_MESSAGE.push(
+				`${label} cannot be greater than ${max}`,
 			);
 		}
-		if (rules?.minLength && error?.type === 'minLength') {
-			errorMessage.push(
-				`${label} should be ${rules.minLength} character(s) long`,
+		if (minLength && type === 'minLength') {
+			ERROR_MESSAGE.push(
+				`${label} should be ${minLength} character(s) long`,
 			);
 		}
-		if (rules?.maxLength && error?.type === 'maxLength') {
-			errorMessage.push(
-				`${label} should be less than ${rules.maxLength}`,
+		if (maxLength && type === 'maxLength') {
+			ERROR_MESSAGE.push(
+				`${label} should be less than ${maxLength}`,
 			);
 		}
 	}
 
-	if (errorMessage.length) {
-		return errorMessage.join(' ,');
+	if (ERROR_MESSAGE.length) {
+		return ERROR_MESSAGE.join(' ,');
 	}
 
-	return error?.message;
+	return message;
 };
 
 export default getErrorMessage;

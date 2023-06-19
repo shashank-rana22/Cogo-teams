@@ -7,49 +7,52 @@ import FieldArray from './ChildFormat';
 import Item from './Item';
 import styles from './styles.module.css';
 
+const TOTAL_SPAN = 12;
+const ZERO_SPAN = 0;
+
 function Layout({
 	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
 }) {
-	const totalFields = [];
-	let rowWiseFields = [];
+	const TOTAL_FIELDS = [];
+	let ROW_WISE_FIELDS = [];
 	let span = 0;
 
 	(fields || []).forEach((field) => {
 		const { [field?.name]: showItem = true } = showElements;
 		if (showItem) {
-			span += field?.span || 12;
-			if (span === 12) {
-				span = 0;
+			span += field?.span || TOTAL_SPAN;
+			if (span === TOTAL_SPAN) {
+				span = ZERO_SPAN;
 
-				rowWiseFields.push(field);
-				totalFields.push(rowWiseFields);
+				ROW_WISE_FIELDS.push(field);
+				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 
-				rowWiseFields = [];
-			} else if (span > 12) {
-				span = 0;
+				ROW_WISE_FIELDS = [];
+			} else if (span > TOTAL_SPAN) {
+				span = ZERO_SPAN;
 
-				totalFields.push(rowWiseFields);
-				rowWiseFields = [];
+				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
+				ROW_WISE_FIELDS = [];
 
-				rowWiseFields.push(field);
+				ROW_WISE_FIELDS.push(field);
 			} else {
-				rowWiseFields.push(field);
+				ROW_WISE_FIELDS.push(field);
 			}
 		}
 	});
 
-	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+	if (ROW_WISE_FIELDS.length) {
+		TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 	}
 
 	const keysForFields = useMemo(
-		() => Array(totalFields.length).fill(null).map(() => Math.random()),
-		[totalFields.length],
+		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
+		[TOTAL_FIELDS.length],
 	);
 
 	return (
 		<div className={styles.layout}>
-			{totalFields.map((rowFields, i) => (
+			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={cl`${styles.row} form_layout_row`} key={keysForFields[i]}>
 					{rowFields.map((field) => {
 						const { type, heading = '' } = field || {};

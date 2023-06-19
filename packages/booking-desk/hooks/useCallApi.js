@@ -1,10 +1,12 @@
 import { useEffect, useRef } from 'react';
 
+import NUMERICAL_VALUES from '../config/NUMERICAL_VALUES.json';
+
 export default function useCallApi({
 	listShipments = () => {},
 	filters = {},
+	tabState = '',
 	authParams = '',
-	activeTab = '',
 	selected_agent_id = '',
 }) {
 	const [, scope, view_type] = (authParams || '').split(':');
@@ -16,7 +18,7 @@ export default function useCallApi({
 			clearTimeout(debounceQuery.current.timerId);
 
 			debounceQuery.current.q = filters.q;
-			debounceQuery.current.timerId = setTimeout(listShipments, 600);
+			debounceQuery.current.timerId = setTimeout(listShipments, NUMERICAL_VALUES.API_DEBOUNCE_TIME);
 		} else {
 			listShipments();
 		}
@@ -25,16 +27,16 @@ export default function useCallApi({
 			'booking_desk_stored_values',
 			JSON.stringify({
 				filters,
-				activeTab,
+				tabState,
 				scopeFilters: { scope, view_type, selected_agent_id },
 			}),
 		);
 	}, [
 		listShipments,
-		activeTab,
-		scope,
+		tabState,
 		view_type,
 		filters,
+		scope,
 		authParams,
 		selected_agent_id,
 	]);

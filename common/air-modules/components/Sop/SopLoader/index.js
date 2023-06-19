@@ -3,7 +3,11 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-const arr = [1, 2, 3];
+const FIRST_INDEX = 1;
+const SECOND_INDEX = 2;
+const LAST_INDEX = 3;
+
+const ARR = [FIRST_INDEX, SECOND_INDEX, LAST_INDEX];
 
 function SopLoader() {
 	return (
@@ -20,8 +24,8 @@ function SopLoader() {
 					<Placeholder height="20px" width="75px" />
 				</div>
 
-				{(arr || []).map((i) => (
-					<div className={i === 3 ? styles.last : ''} key={i}>
+				{(ARR || []).map((i) => (
+					<div className={i === LAST_INDEX ? styles.last : ''} key={i}>
 						<Placeholder height="20px" width="155px" />
 						<Placeholder style={{ marginTop: '10px' }} />
 					</div>

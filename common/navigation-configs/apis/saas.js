@@ -1485,6 +1485,11 @@ const saas = {
 			access_type  : 'private',
 			service_name : 'organization',
 		},
+		{
+			api          : 'update_subscription_payment_status',
+			access_type  : 'private',
+			service_name : 'saas_subscriptions_v2',
+		},
 	],
 	app_saas_insurance: [
 		{
@@ -2354,6 +2359,17 @@ const saas = {
 			module       : 'cogo-store',
 			feature      : 'cogo-store',
 			service_name : 'cogopoint',
+		},
+		{
+			api          : 'list_organization_addresses',
+			access_type  : 'private',
+			service_name : 'organization',
+
+		},
+		{
+			api          : 'create_organization_address',
+			access_type  : 'private',
+			service_name : 'organization',
 		},
 	],
 	app_saas_import_export_controls: [

@@ -12,7 +12,7 @@ import { useImperativeHandle, forwardRef, useEffect, useState, useCallback } fro
 import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
-import formValuePatterns from '../../../../../../utils/formValuePatterns';
+import FORM_VALUE_PATTERNS from '../../../../../../utils/formValuePatterns';
 import getBillingAddressFromRegNum, { getAddressRespectivePincodeAndPoc } from
 	'../../helpers/getBillingAddressFromRegNum';
 
@@ -126,7 +126,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							rules={{
 								required : ['collection_party', 'paying_party'].includes(tradePartyType),
 								pattern  : {
-									value   : formValuePatterns.PAN_NUMBER,
+									value   : FORM_VALUE_PATTERNS.PAN_NUMBER,
 									message : 'Pan Number is invalid',
 								},
 							}}
@@ -134,7 +134,6 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						{Error('registration_number')}
 					</div>
 				</div>
-
 				<div className={styles.form_item_container}>
 					<label className={styles.form_label}>Address</label>
 					<CreatableSelectController
@@ -144,11 +143,9 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						placeholder="Enter Address"
 						options={addressOptions}
 						rules={{ required: 'Address is required' }}
-
 					/>
 					{Error('address')}
 				</div>
-
 				<div className={styles.form_item_container}>
 					<label className={styles.form_label}>Company Name</label>
 					<InputController
@@ -160,9 +157,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 					/>
 					{Error('business_name')}
 				</div>
-
 				<div className={styles.row}>
-
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>Pincode / Zip Code</label>
 						<InputController
@@ -173,7 +168,6 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						/>
 						{Error('pincode')}
 					</div>
-
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>POC Name</label>
 						<CreatableSelectController
@@ -185,7 +179,6 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						/>
 					</div>
 				</div>
-
 				<div className={styles.row}>
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>Workscopes</label>
@@ -195,10 +188,8 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							name="work_scopes"
 							placeholder="Choose workscope Type"
 							options={workScopeOptions}
-
 						/>
 					</div>
-
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>Email Address</label>
 						<InputController
@@ -207,7 +198,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 							size="sm"
 							rules={{
 								pattern: {
-									value   : formValuePatterns.EMAIL,
+									value   : FORM_VALUE_PATTERNS.EMAIL,
 									message : 'Enter valid email',
 								},
 							}}
@@ -215,9 +206,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						/>
 						{Error('email')}
 					</div>
-
 				</div>
-
 				<div className={styles.row}>
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>Mobile Number</label>
@@ -228,19 +217,15 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						/>
 						{Error('mobile_number')}
 					</div>
-
 					<div className={styles.form_item_container}>
 						<label className={styles.form_label}>Alternate Mobile Number (optional)</label>
 						<MobileNumberController size="sm" control={control} name="alternate_mobile_number" />
 					</div>
-
 				</div>
-
 				<div className={styles.checkbox}>
 					<CheckboxController name="not_reg_under_gst" control={control} />
 					<label className={styles.form_label}>Not registered under GST</label>
 				</div>
-
 				<div className={styles.row}>
 					<div>
 						<label className={styles.form_label}>GST Number</label>
@@ -254,7 +239,7 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 									message : 'GST Number is required',
 								},
 								pattern: {
-									value   : formValuePatterns.GST_NUMBER,
+									value   : FORM_VALUE_PATTERNS.GST_NUMBER,
 									message : 'GST Number is invalid',
 								},
 							}}
@@ -279,7 +264,6 @@ function CreateNewCompanyForm({ tradePartyType }, ref) {
 						{Error('tax_number_document_url')}
 					</div>
 				</div>
-
 			</form>
 		</div>
 	);

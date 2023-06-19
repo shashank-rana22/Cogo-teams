@@ -34,6 +34,8 @@ function ShipmentHeader() {
 		stakeholderConfig,
 	});
 
+	const { shipment_header } = stakeholderConfig || {};
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.customer}>
@@ -54,21 +56,28 @@ function ShipmentHeader() {
 					</div>
 				</Tooltip>
 
-				{po_number ? (
-					<div className={styles.po_number}>
-						PO Number:&nbsp;
-						{po_number}
-					</div>
-				) : (
-					<div
-						className={styles.button}
-						role="button"
-						tabIndex={0}
-						onClick={() => setShowModal('add_po_number')}
-					>
-						Add PO Number
-					</div>
-				)}
+				{ shipment_header?.add_po_number
+					? (
+						<div>
+							{po_number
+								? (
+									<div className={styles.po_number}>
+										PO Number:&nbsp;
+										{po_number}
+									</div>
+								) : (
+									<div
+										className={styles.button}
+										role="button"
+										tabIndex={0}
+										onClick={() => setShowModal('add_po_number')}
+									>
+										Add PO Number
+									</div>
+								) }
+						</div>
+					) : null }
+
 			</div>
 
 			<div className={styles.port_details}>

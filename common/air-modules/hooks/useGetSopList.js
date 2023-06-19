@@ -75,29 +75,29 @@ const useGetSopList = ({
 	const defaultFilter = {
 		organization_id: importer_exporter_id,
 	};
-	const customfilter = {};
+	const CUSTOM_FILTER = {};
 	const isDomestic = conditions.destination.data === conditions.origin.data;
 	Defaultconditions.forEach((condition) => {
 		defaultFilter[condition.key] = condition.value || null;
-		customfilter[condition.key] = condition.value || null;
+		CUSTOM_FILTER[condition.key] = condition.value || null;
 	});
 
 	if (isDomestic) {
 		defaultFilter.country_id_or_nil = conditions.country.data;
-		customfilter.country_id_or_nil = conditions.country.data;
+		CUSTOM_FILTER.country_id_or_nil = conditions.country.data;
 	}
 
 	if (filters) {
 		filters.forEach((element) => {
 			if (conditions[element]?.data) {
 				const key = conditions[element]?.key;
-				customfilter[key] = conditions[element]?.data;
+				CUSTOM_FILTER[key] = conditions[element]?.data;
 			}
 		});
 	}
-	customfilter.organization_id = importer_exporter_id;
+	CUSTOM_FILTER.organization_id = importer_exporter_id;
 
-	const finalFilters = filters.length ? customfilter : defaultFilter;
+	const finalFilters = filters.length ? CUSTOM_FILTER : defaultFilter;
 
 	const [{ loading }, trigger] = useRequest({
 		url    : 'list_shipment_operating_procedures',

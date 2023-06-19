@@ -1,18 +1,15 @@
 import { IcCFtick } from '@cogoport/icons-react';
-import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
+const COGO_ASSURED_IMAGE_URL = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-verifiedmark.svg';
+
 function Assured({ shipmentData = {} }) {
-	const keys = useMemo(
-		() => Array(shipmentData?.cogo_assured_value_props.length).fill(null).map(() => Math.random()),
-		[shipmentData?.cogo_assured_value_props?.length],
-	);
 	return (
 		<div className={styles.container}>
 			<div className={styles.header}>
 				<img
-					src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/ic-verifiedmark.svg"
+					src={COGO_ASSURED_IMAGE_URL}
 					alt="verifiedmark"
 					width="20"
 					height="20"
@@ -21,8 +18,8 @@ function Assured({ shipmentData = {} }) {
 			</div>
 
 			<div className={styles.assured_details}>
-				{shipmentData?.cogo_assured_value_props?.map((element, index) => (
-					<div style={{ marginBottom: '14px' }} key={keys[index]}>
+				{(shipmentData?.cogo_assured_value_props || []).map((element) => (
+					<div style={{ marginBottom: '14px' }} key={element}>
 						<div className={styles.heading}>
 							<div className={styles.icon_wrapper}>
 								<IcCFtick />

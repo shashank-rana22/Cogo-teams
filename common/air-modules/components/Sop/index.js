@@ -9,6 +9,8 @@ import Header from './Header';
 import SopLoader from './SopLoader';
 import styles from './styles.module.css';
 
+const EMPTY_LIST_LENGTH = 0;
+
 function Sop({ shipment_data = {}, primary_service = {} }) {
 	const [filters, setFilters] = useState([]);
 	const [reload, setReload] = useState(false);
@@ -50,14 +52,11 @@ function Sop({ shipment_data = {}, primary_service = {} }) {
 
 	if (loading || trade_partners_loading) {
 		content = (
-			<>
-				{/* <SkeletonV1 style={{ marginBottom: '12px' }} /> */}
-				<SopLoader />
-			</>
+			<SopLoader />
 		);
 	}
 
-	if (!loading && !trade_partners_loading && sops.length === 0) {
+	if (!loading && !trade_partners_loading && sops.length === EMPTY_LIST_LENGTH) {
 		content = (
 			<div className={styles.empty_state}>
 				<EmptyState

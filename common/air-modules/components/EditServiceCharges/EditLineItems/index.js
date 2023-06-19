@@ -14,9 +14,9 @@ function EditLineItems({
 }) {
 	const { fields = [], append, remove } = useFieldArray({ control, name });
 
-	const childEmptyValues = {};
+	const CHILD_EMPTY_VALUES = {};
 	controls.forEach((controlItem) => {
-		childEmptyValues[controlItem.name] = controlItem.value || '';
+		CHILD_EMPTY_VALUES[controlItem.name] = controlItem.value || '';
 	});
 
 	return (
@@ -46,7 +46,7 @@ function EditLineItems({
 					<Button
 						size="sm"
 						themeType="accent"
-						onClick={() => append(childEmptyValues)}
+						onClick={() => append(CHILD_EMPTY_VALUES)}
 						className={styles.button_div}
 					>
 						+ Add Line Items

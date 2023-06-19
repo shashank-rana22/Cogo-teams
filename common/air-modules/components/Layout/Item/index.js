@@ -7,6 +7,10 @@ import getErrorMessage from '../getErrorMessage';
 import getAsyncFields from './getAsyncKeys';
 import styles from './styles.module.css';
 
+const TOTAL_SPAN = 12;
+const FLEX_ONE = 1;
+const FLEX_HUNDRED = 100;
+
 function Item(props) {
 	const {
 		type = '',
@@ -51,7 +55,7 @@ function Item(props) {
 
 	const Element = getElementController(newProps.type);
 
-	const flex = ((span || 12) / 12) * 100 - 1;
+	const flex = ((span || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
 
 	if (formValues?.booking_reference_proof?.fileName === '') {
 		const element = document.querySelector('.ui_upload_filesuccess_container');

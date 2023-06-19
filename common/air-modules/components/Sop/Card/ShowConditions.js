@@ -7,6 +7,8 @@ const CONDITIONS_KEYS = [
 	'country_id',
 ];
 
+const CHECK_LENGTH = 1;
+
 function ShowConditions({
 	sopData,
 	trade_partners_details,
@@ -34,23 +36,23 @@ function ShowConditions({
 	};
 
 	const keys = Object.keys(sopData);
-	const conditions = [];
+	const CONDITIONS = [];
 
 	keys.forEach((key) => {
 		if (CONDITIONS_KEYS.includes(key)) {
 			if (sopData[key]) {
-				conditions.push(values[key]);
+				CONDITIONS.push(values[key]);
 			}
 		}
 	});
 
 	return (
 		<>
-			{conditions.map((label, index) => (
+			{CONDITIONS.map((label, index) => (
 				<span style={{ fontSize: '12px' }} key={label}>
 					{`${label}`}
 					{' '}
-					{index !== conditions.length - 1 ? ', ' : ''}
+					{index !== CONDITIONS.length - CHECK_LENGTH ? ', ' : ''}
 				</span>
 			))}
 		</>

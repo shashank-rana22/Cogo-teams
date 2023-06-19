@@ -2,8 +2,12 @@ import { Button } from '@cogoport/components';
 import { useFieldArray } from '@cogoport/forms';
 import React, { useEffect } from 'react';
 
+import CONSTANTS from '../../../constants/CONSTANTS';
+
 import Child from './child';
 import styles from './styles.module.css';
+
+const { EMPTY_LIST_LENGTH } = CONSTANTS;
 
 function FieldArray({
 	name,
@@ -22,11 +26,11 @@ function FieldArray({
 		name,
 	});
 
-	const childEmptyValues = { };
+	const CHILD_EMPTY_VALUES = { };
 
 	useEffect(() => {
-		if (fields.length === 0) {
-			append(childEmptyValues);
+		if (fields.length === EMPTY_LIST_LENGTH) {
+			append(CHILD_EMPTY_VALUES);
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);
@@ -53,7 +57,7 @@ function FieldArray({
 						style={{ margin: '4px' }}
 						size="sm"
 						themeType="secondary"
-						onClick={() => append(childEmptyValues)}
+						onClick={() => append(CHILD_EMPTY_VALUES)}
 					>
 						+
 						{' '}

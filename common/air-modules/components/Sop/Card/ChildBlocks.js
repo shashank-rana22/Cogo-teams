@@ -14,6 +14,8 @@ import Layout from '../../Layout';
 
 import styles from './styles.module.css';
 
+const ONE_LESS_THAN_LENGTH = 1;
+
 function ChildBlocks(
 	{ id, mainData, blocks, setBlocks, updatePermission },
 	ref,
@@ -38,7 +40,7 @@ function ChildBlocks(
 		const newBlocks = blocks;
 		if (isOld) {
 			const data = newBlocks.find((obj) => obj.id === id);
-			if (data.mainData.status === 'active') {
+			if (data?.mainData?.status === 'active') {
 				data.mainData.status = 'inactive';
 			} else {
 				data.mainData.status = 'active';
@@ -76,7 +78,7 @@ function ChildBlocks(
 		if (typeof url === 'string') {
 			const values = (url || '').split('/');
 			if (values?.length) {
-				const lastVal = values[values.length - 1];
+				const lastVal = values[values.length - ONE_LESS_THAN_LENGTH];
 				const words = lastVal.split('%');
 				words.forEach((word) => {
 					filename += word;
@@ -101,18 +103,18 @@ function ChildBlocks(
 	const { handleSubmit, control, errors } = useForm(fileControl);
 
 	const getFileValue = async () => {
-		const fileValue = {};
-		fileValue.id = id;
+		const FILE_VALUE = {};
+		FILE_VALUE.id = id;
 		await handleSubmit(
 			(val) => {
-				fileValue.file = val;
+				FILE_VALUE.file = val;
 			},
 			(err) => {
 				Toast.error(err);
 			},
 		)();
 
-		return { fileValue };
+		return { fileValue: FILE_VALUE };
 	};
 
 	useImperativeHandle(ref, () => ({ getFileValue }));

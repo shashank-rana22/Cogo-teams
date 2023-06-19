@@ -2,6 +2,10 @@ import { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
+const TOTAL_SPAN = 12;
+const FLEX_HUNDRED = 100;
+const FLEX_ONE = 1;
+
 function Header({ controls = [] }) {
 	const keys = useMemo(
 		() => Array(controls.length).fill(null).map(() => Math.random()),
@@ -12,7 +16,7 @@ function Header({ controls = [] }) {
 			{controls?.map((ctrl, i) => {
 				const { span } = ctrl;
 
-				const flex = ((span || 12) / 12) * 100 - 1;
+				const flex = ((span || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
 
 				return (
 					<div className={styles.label} style={{ width: `${flex}%` }} key={keys[i]}>

@@ -1,9 +1,12 @@
 import React from 'react';
 
+import CONSTANTS from '../../../constants/CONSTANTS';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
+
+const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
 
 function Item({
 	type,
@@ -27,7 +30,7 @@ function Item({
 
 	const Element = getElementController(type);
 
-	const flex = ((span || 12) / 12) * 100 - 1;
+	const flex = ((span || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
 
 	return (
 		<div className={styles.element} style={{ width: `${flex}%` }}>

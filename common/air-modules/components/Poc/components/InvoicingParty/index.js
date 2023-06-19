@@ -8,6 +8,8 @@ import Card from '../Card';
 import Detail from './Detail';
 import styles from './styles.module.css';
 
+const LENGTH_CHECK = 1;
+
 function InvoicingParty({ tradePartnersData = {} }) {
 	const [show, setShow] = useState({});
 	const { invoicing_parties_details = [] } = tradePartnersData;
@@ -22,7 +24,11 @@ function InvoicingParty({ tradePartnersData = {} }) {
 		const format_services = services.map((t) => startCase(t)).join(', ');
 
 		return	(
-			<Card title={`Invoicing Party ${invoicePartyLength <= 1 ? '' : index + 1}`} key={keys[index]}>
+			<Card
+				title={`Invoicing Party ${invoicePartyLength <= LENGTH_CHECK ? ''
+					: index + LENGTH_CHECK}`}
+				key={keys[index]}
+			>
 				<div className={styles.header}>
 					<div className={styles.party_name}>{business_name}</div>
 					<div>

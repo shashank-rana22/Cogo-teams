@@ -7,6 +7,8 @@ import Card from '../Card';
 import Detail from './Detail';
 import styles from './styles.module.css';
 
+const LENGTH_CHECK = 1;
+
 function ServiceProvider({
 	tradePartnersData = {},
 	setAddPoc = () => {},
@@ -23,7 +25,7 @@ function ServiceProvider({
 	return (
 		Object.keys(serviceProviders).map((sp_key, index) => (
 			<Card
-				title={`Service Provider ${serviceProvidersLength <= 1 ? '' : index + 1}`}
+				title={`Service Provider ${serviceProvidersLength <= LENGTH_CHECK ? '' : index + LENGTH_CHECK}`}
 				key={serviceProviders[sp_key]?.id}
 			>
 				<div className={styles.header}>

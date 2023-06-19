@@ -8,6 +8,13 @@ import getAsyncFields from '../Item/getAsyncKeys';
 
 import styles from './styles.module.css';
 
+const TOTAL_SPAN = 12;
+const ZERO_SPAN = 0;
+const INDEX_ONE = 1;
+const FLEX_HUNDRED = 100;
+const INCREMENT_BY_ONE = 1;
+const ZEROTH_SPAN = 0;
+
 function Child({
 	controls = [],
 	control = {},
@@ -21,39 +28,39 @@ function Child({
 	error = {},
 	formValues = {},
 }) {
-	let rowWiseFields = [];
-	const totalFields = [];
+	let ROW_WISE_FIELDS = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	controls.forEach((fields) => {
-		span += fields.span || 12;
-		if (span === 12) {
-			rowWiseFields.push(fields);
-			totalFields.push(rowWiseFields);
-			rowWiseFields = [];
-			span = 0;
-		} else if (span < 12) {
-			rowWiseFields.push(fields);
+		span += fields.span || TOTAL_SPAN;
+		if (span === TOTAL_SPAN) {
+			ROW_WISE_FIELDS.push(fields);
+			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
+			ROW_WISE_FIELDS = [];
+			span = ZERO_SPAN;
+		} else if (span < TOTAL_SPAN) {
+			ROW_WISE_FIELDS.push(fields);
 		} else {
-			totalFields.push(rowWiseFields);
-			rowWiseFields = [];
-			rowWiseFields.push(fields);
+			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
+			ROW_WISE_FIELDS = [];
+			ROW_WISE_FIELDS.push(fields);
 			span = fields.span;
 		}
 	});
-	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+	if (ROW_WISE_FIELDS.length) {
+		TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 	}
 
 	const keysForFields = useMemo(
-		() => Array(totalFields.length).fill(null).map(() => Math.random()),
-		[totalFields.length],
+		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
+		[TOTAL_FIELDS.length],
 	);
 
-	if (formValues?.documents?.[0]?.url?.fileName === ''
-	|| formValues?.documents_commercial_invoice?.[0]?.url?.fileName === ''
-	|| formValues?.documents_packing_list?.[0]?.url?.fileName === '') {
+	if (formValues?.documents?.[ZEROTH_SPAN]?.url?.fileName === ''
+	|| formValues?.documents_commercial_invoice?.[ZEROTH_SPAN]?.url?.fileName === ''
+	|| formValues?.documents_packing_list?.[ZEROTH_SPAN]?.url?.fileName === '') {
 		const elements = document.querySelectorAll('.ui_upload_filesuccess_container');
-		for (let i = 0; i < elements.length; i += 1) {
+		for (let i = 0; i < elements.length; i += INCREMENT_BY_ONE) {
 			elements[i].style.display = 'none';
 		}
 	}
@@ -91,9 +98,9 @@ function Child({
 			<h3 className={styles.heading}>
 				{startCase(name || 'document')}
 				&nbsp;
-				{index + 1}
+				{index + INCREMENT_BY_ONE}
 			</h3>
-			{totalFields.map((rowFields, i) => (
+			{TOTAL_FIELDS.map((rowFields, i) => (
 				<div className={styles.row} key={keysForFields[i]}>
 					{rowFields.map((controlItem) => {
 						const newControl = getNewControls(controlItem);
@@ -110,13 +117,13 @@ function Child({
 
 						const show = 'show' in controlItem ? controlItem.show : true;
 
-						const extraProps = {};
+						const EXTRA_PROPS = {};
 						if (controlItem.customProps?.options) {
-							extraProps.options = controlItem.customProps.options[index];
+							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
 
 						const disable = index < noDeleteButtonTill && controlItem.name === 'code';
-						const flex = ((controlItem?.span || 12) / 12) * 100;
+						const flex = ((controlItem?.span || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED;
 						if ((!Element || !show) && (!newControl.showOnlyLabel)) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
@@ -128,7 +135,7 @@ function Child({
 									? 								 (
 										<Element
 											{...newControl}
-											{...extraProps}
+											{...EXTRA_PROPS}
 											style={{ minWidth: '0px' }}
 											key={`${name}.${index}.${controlItem.name}`}
 											name={`${name}.${index}.${controlItem.name}`}
@@ -163,7 +170,7 @@ function Child({
 				<div className={styles.delete_icon}>
 					<IcMDelete
 						className={styles.icon}
-						onClick={() => remove(index, 1)}
+						onClick={() => remove(index, INDEX_ONE)}
 					/>
 				</div>
 			) : null}

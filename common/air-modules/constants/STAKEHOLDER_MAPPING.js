@@ -5,15 +5,11 @@ const STAKEHOLDER_MAPPING = {
 	service_ops2              : 'Document Desk',
 	service_ops3              : 'Service Ops 3',
 	sales_agent               : 'Sales Agent',
-	entity_manager            : 'Entity Manager',
-	portfolio_manager         : 'Portfolio Manager',
-	lastmile_ops              : 'Last Mile Ops',
-	credit_controller         : 'Credit Controller',
-	release_desk              : 'Release Desk',
-	collection_desk           : 'Collection Desk',
 	costbooking_ops           : 'Cost Booking Ops',
 	origin_booking_agent      : 'OKAM',
 	destination_booking_agent : 'DKAM',
+	credit_controller         : 'Credit Controller',
+	ground_ops                : 'Ground Ops',
 };
 
 export const STAKEHOLDER_CAN_BE_ADDED = {
@@ -23,12 +19,11 @@ export const STAKEHOLDER_CAN_BE_ADDED = {
 	service_ops2              : 'Document Desk',
 	service_ops3              : 'Service Ops 3',
 	sales_agent               : 'Sales Agent',
-	entity_manager            : 'Entity Manager',
-	portfolio_manager         : 'Portfolio Manager',
-	lastmile_ops              : 'Last Mile Ops',
 	costbooking_ops           : 'Cost Booking Ops',
 	origin_booking_agent      : 'OKAM',
 	destination_booking_agent : 'DKAM',
+	credit_controller         : 'Credit Controller',
+	ground_ops                : 'Ground Ops',
 };
 
 export const SERVICE_LEVEL_STATKEHOLDERS = [

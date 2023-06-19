@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateDown, IcMArrowRotateUp } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState } from 'react';
@@ -18,7 +19,7 @@ function External({ tradePartnersData = {}, setAddPoc = () => {}, rolesPermissio
 		import : externalData.import || [],
 		export : externalData.export || [],
 	};
-	const { organization_branch_name = '' } = poc_data[0] || {};
+	const { organization_branch_name = '' } = poc_data[GLOBAL_CONSTANTS.zeroth_index] || {};
 
 	const addPermission = {
 		import : !!rolesPermission?.add_external_import_poc,

@@ -12,9 +12,8 @@ import {
 	ToggleController,
 	InputGroupController,
 	CreatableSelectController,
+	RadioGroupController,
 } from '@cogoport/forms';
-
-import DepartureDateSelectController from './DepartureDateSelect/index';
 
 const getElementController = (type) => {
 	switch (type) {
@@ -41,9 +40,6 @@ const getElementController = (type) => {
 		case 'datepicker':
 			return DatepickerController;
 
-		case 'departure_date':
-			return DepartureDateSelectController;
-
 		case 'textArea':
 		case 'textarea':
 			return TextAreaController;
@@ -65,6 +61,9 @@ const getElementController = (type) => {
 
 		case 'creatable-select':
 			return CreatableSelectController;
+
+		case 'radio':
+			return RadioGroupController;
 
 		default:
 			return null;

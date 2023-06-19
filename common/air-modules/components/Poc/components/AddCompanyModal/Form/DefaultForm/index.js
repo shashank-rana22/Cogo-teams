@@ -10,6 +10,8 @@ import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDef
 
 import styles from './styles.module.css';
 
+const PINCODE_SPLIT_INDEX = 1;
+
 function DefaultForm({
 	companyType = '',
 	tradePartyType = '',
@@ -94,7 +96,11 @@ function DefaultForm({
 							{!isEmpty(formValues?.address) && (
 								<div className={styles.form_item_container}>
 									<div>Pincode</div>
-									<Input disabled value={formValues.address?.split('::')?.[1]} size="sm" />
+									<Input
+										disabled
+										value={formValues.address?.split('::')?.[PINCODE_SPLIT_INDEX]}
+										size="sm"
+									/>
 								</div>
 							)}
 						</>

@@ -1,10 +1,15 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import React from 'react';
 
+import CONSTANTS from '../../../constants/CONSTANTS';
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
 
 import styles from './styles.module.css';
+
+const NO_OF_ELEMENTS_TO_BE_REMOVED = 1;
+
+const { TOTAL_SPAN, FLEX_ONE, FLEX_HUNDRED } = CONSTANTS;
 
 function Child({
 	controls,
@@ -18,34 +23,29 @@ function Child({
 	field,
 	error,
 }) {
-	let rowWiseFields = [];
-	const totalFields = [];
+	let ROW_WISE_FIELDS = [];
+	const TOTAL_FIELDS = [];
 	let span = 0;
 	controls.forEach((fields) => {
-		span += fields.span || 12;
-		if (span === 12) {
-			rowWiseFields.push(fields);
-			totalFields.push(rowWiseFields);
-			rowWiseFields = [];
-			span = 0;
-		} else if (span < 12) {
-			rowWiseFields.push(fields);
-		} else {
-			totalFields.push(rowWiseFields);
-			rowWiseFields = [];
-			rowWiseFields.push(fields);
+		if ((span + fields.span) > TOTAL_SPAN) {
+			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
+			ROW_WISE_FIELDS = [];
+			ROW_WISE_FIELDS.push(fields);
 			span = fields.span;
+		} else {
+			ROW_WISE_FIELDS.push(fields);
+			span += fields.span;
 		}
 	});
-	if (rowWiseFields.length) {
-		totalFields.push(rowWiseFields);
+	if (ROW_WISE_FIELDS.length) {
+		TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 	}
 
-	const totalFieldsObject = { ...totalFields };
+	const totalFieldsObject = { ...TOTAL_FIELDS };
 
 	return (
-		<div className={styles.fieldarray} key={field.id}>
-			{Object.keys(totalFieldsObject).map((key) => (
+		<div className={styles.fieldarray} key={field?.id}>
+			{Object.entries(totalFieldsObject).map((key) => (
 				<div className={styles.row} key={key}>
 					{totalFieldsObject[key].map((controlItem) => {
 						const Element = getElementController(controlItem.type);
@@ -55,11 +55,11 @@ function Child({
 							rules : controlItem?.rules,
 							label : controlItem?.label,
 						});
-						const extraProps = {};
+						const EXTRA_PROPS = {};
 						if (controlItem.customProps?.options) {
-							extraProps.options = controlItem.customProps.options[index];
+							EXTRA_PROPS.options = controlItem.customProps.options[index];
 						}
-						const flex = ((controlItem?.span || 12) / 12) * 100 - 1;
+						const flex = ((controlItem?.span || TOTAL_SPAN) / TOTAL_SPAN) * FLEX_HUNDRED - FLEX_ONE;
 						if (!Element) return null;
 						return (
 							<div className={styles.element} style={{ width: `${flex}%` }} key={controlItem.name}>
@@ -68,7 +68,7 @@ function Child({
 								</h4>
 								<Element
 									{...controlItem}
-									{...extraProps}
+									{...EXTRA_PROPS}
 									style={{ minWidth: '0px' }}
 									key={`${name}.${index}.${controlItem.name}`}
 									name={`${name}.${index}.${controlItem.name}`}
@@ -88,7 +88,7 @@ function Child({
 						{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 							<IcMDelete
 								className={`form-fieldArray-${name}-remove ${styles.delete_icon}`}
-								onClick={() => remove(index, 1)}
+								onClick={() => remove(index, NO_OF_ELEMENTS_TO_BE_REMOVED)}
 							/>
 						) : null}
 					</div>

@@ -29,18 +29,18 @@ function SopCard({
 	if (![true, false].includes(updatePermission)) {
 		updatePermission = true;
 	}
-	const initialBlocks = [];
+	const INITIAL_BLOCKS = [];
 
 	(instructions || []).forEach((obj, index) => {
 		const instructionObject = {
 			id       : `${index}_${uuid()}`,
 			mainData : JSON.parse(JSON.stringify(obj)),
 		};
-		initialBlocks.push(instructionObject);
+		INITIAL_BLOCKS.push(instructionObject);
 	});
 
-	const [blocks, setBlocks] = useState([...initialBlocks]);
-	const originalData = initialBlocks;
+	const [blocks, setBlocks] = useState([...INITIAL_BLOCKS]);
+	const originalData = INITIAL_BLOCKS;
 
 	const handleAddBlocks = () => {
 		const newBlock = { id: `${blocks.length}_${uuid()}`, mainData: {} };
