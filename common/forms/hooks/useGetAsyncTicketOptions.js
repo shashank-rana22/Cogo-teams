@@ -1,9 +1,13 @@
 import { useTicketsRequest } from '@cogoport/request';
+import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useMemo } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
 
 const INITIALIZE_PARAMS = {};
+const OPTIONS_ARRAY = [];
+const DEFAULT_INDEX = 0;
+
 function useGetAsyncTicketOptions({
 	endpoint = '',
 	initialCall = false,
@@ -14,7 +18,7 @@ function useGetAsyncTicketOptions({
 	qFilterKey = 'q',
 }) {
 	const { query, debounceQuery } = useDebounceQuery();
-	const [storeoptions, setstoreoptions] = useState([]);
+	const [storeOptions, setStoreOptions] = useState([]);
 
 	const [{ data, loading }] = useTicketsRequest({
 		url    : endpoint,
@@ -34,7 +38,7 @@ function useGetAsyncTicketOptions({
 	}, { manual: true });
 
 	useEffect(() => {
-		setstoreoptions((p) => [...p, ...options]);
+		setStoreOptions((p) => [...p, ...options]);
 	}, [options, optionValues]);
 
 	const onSearch = (inputValue) => {
@@ -43,39 +47,38 @@ function useGetAsyncTicketOptions({
 
 	const onHydrateValue = async (value) => {
 		if (Array.isArray(value)) {
-			let unorderedHydratedValue = [];
-			const toBeFetched = [];
+			let unOrderedHydratedValue = [];
 			value.forEach((v) => {
-				const singleHydratedValue = storeoptions.find((o) => o?.[valueKey] === v);
+				const singleHydratedValue = storeOptions.find((o) => o?.[valueKey] === v);
 				if (singleHydratedValue) {
-					unorderedHydratedValue.push(singleHydratedValue);
+					unOrderedHydratedValue.push(singleHydratedValue);
 				} else {
-					toBeFetched.push(v);
+					OPTIONS_ARRAY.push(v);
 				}
 			});
 			let res;
-			if (toBeFetched.length) {
+			if (OPTIONS_ARRAY.length) {
 				res = await triggerSingle({
-					params: { ...params, [valueKey]: toBeFetched },
+					params: { ...params, [valueKey]: OPTIONS_ARRAY },
 				});
-				storeoptions.push(...res?.data?.items || []);
+				storeOptions.push(...res?.data?.items || []);
 			}
-			unorderedHydratedValue = unorderedHydratedValue.concat(res?.data?.items || []);
+			unOrderedHydratedValue = unOrderedHydratedValue.concat(res?.data?.items || []);
 
-			const hydratedValue = value.map((v) => unorderedHydratedValue.find((uv) => uv?.[valueKey] === v));
+			const hydratedValue = value.map((v) => unOrderedHydratedValue.find((uv) => uv?.[valueKey] === v));
 
 			return hydratedValue;
 		}
 
 		const checkOptionsExist = options.filter((item) => item[valueKey] === value);
 
-		if (checkOptionsExist.length > 0) return checkOptionsExist[0];
+		if (!isEmpty(checkOptionsExist)) return checkOptionsExist[DEFAULT_INDEX];
 
 		try {
 			const res = await triggerSingle({
 				params: { ...params, [valueKey]: value },
 			});
-			return res?.data?.items?.[0] || null;
+			return res?.data?.items?.[DEFAULT_INDEX] || null;
 		} catch (err) {
 			return {};
 		}

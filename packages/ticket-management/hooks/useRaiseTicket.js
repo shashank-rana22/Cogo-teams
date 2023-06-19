@@ -3,6 +3,21 @@ import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
+const ADDITIONAL_DATA = {};
+
+const getPayload = ({ id, priority, finalUrl, selectedServices, issue_type, additional_information }) => ({
+	UserID      : id,
+	Source      : 'admin',
+	Category    : '',
+	Subcategory : '',
+	Priority    : priority,
+	Usertype    : 'ticket_user',
+	Data        : { Attachment: [finalUrl] || [], ...selectedServices },
+	Type        : issue_type,
+	Description : additional_information,
+	...ADDITIONAL_DATA,
+});
+
 const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 	const { profile } = useSelector((state) => state);
 
@@ -23,31 +38,25 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 			...rest
 		} = val || {};
 
-		const additionalData = {};
-
 		const selectedServices = Object.fromEntries(
 			Object.entries(rest).filter(([key]) => additionalInfo.includes(key)),
 		);
 
 		if (!isEmpty(organization_id)) {
-			additionalData.OrganizationID = organization_id;
-			additionalData.UserID = user_id;
+			ADDITIONAL_DATA.OrganizationID = organization_id;
+			ADDITIONAL_DATA.UserID = user_id;
 		}
 
 		try {
 			await trigger({
-				data: {
-					UserID      : profile?.id,
-					Source      : 'admin',
-					Category    : '',
-					Subcategory : '',
-					Priority    : priority,
-					Usertype    : 'ticket_user',
-					Data        : { Attachment: [finalUrl] || [], ...selectedServices },
-					Type        : issue_type,
-					Description : additional_information,
-					...additionalData,
-				},
+				data: getPayload({
+					id: profile?.id,
+					priority,
+					finalUrl,
+					selectedServices,
+					issue_type,
+					additional_information,
+				}),
 			});
 			Toast.success('Successfully Created');
 			setShowRaiseTicket(false);

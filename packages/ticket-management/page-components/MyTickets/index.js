@@ -11,11 +11,12 @@ import styles from './styles.module.css';
 
 function MyTickets() {
 	const [additionalInfo, setAdditionalInfo] = useState();
-
 	const [showRaiseTicket, setShowRaiseTicket] = useState(false);
-	const { raiseTickets, loading } = useRaiseTicket({ setShowRaiseTicket, additionalInfo });
 
 	const { control, handleSubmit, watch, formState: { errors }, reset } = useForm();
+
+	const { raiseTickets, loading } = useRaiseTicket({ setShowRaiseTicket, additionalInfo });
+
 	const watchOrgId = watch('organization_id');
 
 	const handleClose = () => {
