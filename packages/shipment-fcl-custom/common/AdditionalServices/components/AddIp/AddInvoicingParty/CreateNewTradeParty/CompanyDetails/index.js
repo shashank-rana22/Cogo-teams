@@ -43,9 +43,8 @@ function CompanyDetails({
 				>
 					Cancel
 				</Button>
-				<Button
-					onClick={handleSubmit(onSubmitOfCompanyDetails)}
-				>
+
+				<Button onClick={handleSubmit(onSubmitOfCompanyDetails)}>
 					Proceed
 				</Button>
 			</div>
