@@ -3,19 +3,19 @@ import styles from './styles.module.css';
 function PriorityNumber({ data, id, showPriority }) {
 	const searchObject = (data || []).find((obj) => obj?.rate_id === id);
 
-	let priority = null;
+	let priority;
 	if (searchObject) {
 		priority = (data || []).indexOf(searchObject);
 	}
 
-	const show = priority !== null && priority !== -1;
+	const show = priority >= 0;
 
 	return (
 		<div
 			className={styles.container}
 			style={{ background: show ? '#4F4F4F' : null }}
 		>
-			{show && showPriority ? <div className={styles.text}>{priority + 1}</div> : null}
+			{show && showPriority ? <div className={styles.text}>{priority + 1}</div> : <div className={styles.text} />}
 		</div>
 	);
 }

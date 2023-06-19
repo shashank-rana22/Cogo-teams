@@ -28,6 +28,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_channel_partner_approval',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1021,6 +1026,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_organization_account_conversion_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
 			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -1876,6 +1886,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_channel_partner_approval',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'onboard_channel_partner_user',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -2658,6 +2673,31 @@ const partner = {
 			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_organization_approval_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_channel_partner_approval',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'update_organization_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_partner_approval_details',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_partner_approvals',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api          : 'update_organization_document',
@@ -10117,6 +10157,11 @@ const partner = {
 		},
 		{
 			api          : 'update_agent_budget_allocation',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'update_agent_budget_allocation_status',
 			access_type  : 'private',
 			service_name : 'promotion',
 		},

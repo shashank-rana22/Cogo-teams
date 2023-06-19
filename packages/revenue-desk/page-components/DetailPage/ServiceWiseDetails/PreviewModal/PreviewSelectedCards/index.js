@@ -1,10 +1,9 @@
 import { Select } from '@cogoport/components';
 import { useState, useEffect } from 'react';
 
-
+import CargoDetailPills from '../../../../List/Card/Body/CargoDetails/CargoDetailPills';
 
 import SelectedCards from './SelectedCards';
-import CargoDetailPills from '../../../../List/Card/Body/CargoDetails/CargoDetailPills';
 
 const labels = [
 	'container_size',
@@ -29,7 +28,7 @@ const labels = [
 	'truck_types',
 ];
 
-function PreviewSelectedCards({ supplierPayload, groupedServicesData, price, shipmentType }) {
+function PreviewSelectedCards({ supplierPayload, groupedServicesData, shipmentType }) {
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
 	const options = [];
 	(groupedServicesData || []).forEach((data) => {
@@ -43,17 +42,18 @@ function PreviewSelectedCards({ supplierPayload, groupedServicesData, price, shi
 	return (
 		<div>
 			<div style={{ marginTop: '16px' }}>
-				<Select
-					options={options}
-					value={singleServiceData}
-					onChange={(e) => { setSingleServiceData(e); }}
-				/>
+				{options.length > 1 && (
+					<Select
+						options={options}
+						value={singleServiceData}
+						onChange={(e) => { setSingleServiceData(e); }}
+					/>
+				)}
 			</div>
 			{(supplierPayload?.[singleServiceData?.id] || []).length
 				? (
 					<SelectedCards
 						prefrences={supplierPayload?.[singleServiceData?.id]}
-						price={price}
 						shipmentType={shipmentType}
 					/>
 				) : null}

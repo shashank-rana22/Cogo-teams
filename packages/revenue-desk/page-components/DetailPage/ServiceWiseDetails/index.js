@@ -40,6 +40,10 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 		});
 		return pref;
 	};
+	const isSupplierPayloadEmpty = Object.keys(supplierPayload).length === 0;
+	const isAllServiceIdsEmpty = Object.values(supplierPayload).every((array) => array.length === 0);
+
+	const isDisabled = isSupplierPayloadEmpty || isAllServiceIdsEmpty;
 
 	return (
 		<div className={styles.container}>
@@ -57,7 +61,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 							size="md"
 							themeType="primary"
 							onClick={() => setModalStep(1)}
-							disabled={loading}
+							disabled={isDisabled}
 						>
 							Save preference
 						</Button>
@@ -107,11 +111,10 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 					<PreviewModal
 						modalStep={modalStep}
 						setModalStep={setModalStep}
-						tabKeys={tabKeys}
 						groupedShowServicesData={groupedShowServicesData}
 						supplierPayload={supplierPayload}
-						priceData={priceData}
 						shipmentData={shipmentData}
+						updateTrigger={updateTrigger}
 					/>
 				) : null}
 			{modalStep === 2

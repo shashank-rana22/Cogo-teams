@@ -4,6 +4,10 @@ import React, { useMemo } from 'react';
 
 import styles from './styles.module.css';
 
+const ADDRESS_IMG_SRC = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/address-icon.svg';
+
+const DISABLED_VERIFICATION_STATUS = ['rejected', 'pending'];
+
 function InvoicingPartyItem({
 	organization = {},
 	item = {},
@@ -35,19 +39,18 @@ function InvoicingPartyItem({
 					<div className={styles.address_align}>
 						<div className={styles.icon_wrapper}>
 							<img
-								src="https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/address-icon.svg"
+								src={ADDRESS_IMG_SRC}
 								alt="address icon"
 								width="20"
 								height="20"
 							/>
 						</div>
+
 						<div className={styles.address_text}>{address}</div>
 					</div>
 
 					<div className={styles.gst_number}>
-						TAX/GST Number :
-						&nbsp;
-						{tax_number || 'Not Applicable'}
+						{`TAX/GST Number : ${tax_number || 'Not Applicable'}`}
 					</div>
 				</div>
 			),
@@ -85,7 +88,7 @@ function InvoicingPartyItem({
 							placement="top"
 							caret={false}
 						>
-							{verification_status === 'pending' && (
+							{verification_status === 'pending' ? (
 								<div>
 									<IcMInfo
 										className="image"
@@ -94,7 +97,7 @@ function InvoicingPartyItem({
 										width={16}
 									/>
 								</div>
-							)}
+							) : null}
 						</Tooltip>
 					</div>
 				)}
@@ -105,7 +108,7 @@ function InvoicingPartyItem({
 				options={options}
 				value={value}
 				onChange={handleChange}
-				disabled={['rejected', 'pending'].includes(verification_status)}
+				disabled={DISABLED_VERIFICATION_STATUS.includes(verification_status)}
 				optionsDisabled={optionsDisabled}
 				multiple
 			/>

@@ -6,7 +6,6 @@ import { format, startCase } from '@cogoport/utils';
 import incoTermMapping from '../../../helper/incoTermMapping';
 import PortDetails from '../../List/Card/Body/PortDetails';
 
-import EditSellQuotation from './EditSellQuotation';
 import styles from './styles.module.css';
 
 function ShipmentCard({ itemData, priceData }) {
@@ -38,6 +37,14 @@ function ShipmentCard({ itemData, priceData }) {
 					<PortDetails data={itemData} />
 				</div>
 				<div className={styles.second_section}>
+					<Pill size="md" color="#F2F3FA">
+						<div style={{ color: '#7278AD' }}>
+							{startCase(itemData?.state)
+							|| startCase(itemData?.state)}
+
+						</div>
+
+					</Pill>
 					<Pill size="md" color="#F2F3FA">
 						<div style={{ color: '#7278AD' }}>
 							{startCase(itemData?.trade_type)
@@ -89,9 +96,7 @@ function ShipmentCard({ itemData, priceData }) {
 						</span>
 					</div>
 				</div>
-				<div>
-					<EditSellQuotation data={itemData} />
-				</div>
+
 			</div>
 
 		</div>

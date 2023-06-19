@@ -1,6 +1,6 @@
 import { Pill, ProgressBar } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import { IcMDrag } from '@cogoport/icons-react';
+import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
 
 import PriorityNumber from './PriorityNumber';
@@ -9,7 +9,7 @@ import styles from './styles.module.css';
 
 function Card({
 	data, setPrefrences, prefrences, rate_key, serviceData, setSellRates,
-	sellRates, price, prefrence_key, fromkey, priority_key,
+	sellRates, prefrence_key, fromkey, priority_no,
 }) {
 	const handlePrefrence = (rate) => {
 		const foundItem = (prefrences?.[serviceData?.id] || []).find((obj) => obj?.rate_id === rate?.id);
@@ -57,31 +57,33 @@ function Card({
 	};
 	const showData = (val) => val || '';
 	const isShowSellRate = serviceData?.service_type === 'fcl_freight_service';
-	let profitability = 0;
 	const updated_at = data?.rowData?.updated_at;
 
-	if (data?.rowData?.total_buy_price !== 0) {
-		profitability = (Number(parseFloat(price?.replace(/[^0-9.-]+/g, ''))) - Number(data?.rowData?.total_buy_price))
-		/ Number(data?.rowData?.total_buy_price);
-	}
-	let buyPricePerContainer = 0;
-	if (serviceData?.containers_count !== 0) {
-		buyPricePerContainer = Number(data?.rowData?.total_buy_price) / Number(serviceData?.containers_count);
-	}
+	const handleLeftSectionPriority = (ratekey) => {
+		if (ratekey === 'selected_rate') {
+			return `${priority_no}.`;
+		} if (ratekey === 'preferences_rate') {
+			return `${data?.rowData?.priority}.`;
+		} if (ratekey === 'not_preferences_rate') {
+			return <IcMOverflowDot />;
+		}
+		return (
+			<PriorityNumber
+				data={prefrences?.[serviceData?.id]}
+				id={data?.id}
+				showPriority
+			/>
+		);
+	};
 	return (
 		<div
-			className={rate_key ? styles.selected_rate_card_container : styles.container}
+			className={((rate_key === 'selected_rate') || (rate_key === 'preferences_rate'))
+				? styles.selected_rate_card_container : styles.container}
 			role="presentation"
 			onClick={() => (!rate_key ? handlePrefrence(data) : null)}
 		>
 			<div className={styles.left_section_container}>
-				{rate_key ? (priority_key ? `${data?.rowData?.priority}.` : <IcMDrag />) : (
-					<PriorityNumber
-						data={prefrences?.[serviceData?.id]}
-						id={data?.id}
-						showPriority
-					/>
-				)}
+				{handleLeftSectionPriority(rate_key)}
 			</div>
 			<div className={styles.line} />
 			<div className={styles.right_section_container}>
@@ -105,12 +107,15 @@ function Card({
 							) : null}
 						</div>
 					</div>
-					{rate_key ? (
-						<div>
-							<Pill size="md" color="#F2F3FA">{startCase(fromkey || data?.rowData?.source)}</Pill>
-						</div>
-					) : null}
-
+					<div style={{ display: 'flex' }}>
+						{rate_key ? (<div><Pill size="md" color="#F2F3FA">{startCase(fromkey || data?.rowData?.source)}</Pill></div>
+						) : null}
+						{((data?.rowData?.selected_priority) && (data?.rowData?.selected_priority === data?.rowData?.priority)) ? (
+							<div>
+								<Pill size="md" color="#F9F9F9"><div style={{ color: '#7278AD' }}>So1 Selected Rate</div></Pill>
+							</div>
+						) : null}
+					</div>
 				</div>
 				<div className={styles.lower_section}>
 					<div className={styles.first_section}>
@@ -173,62 +178,68 @@ function Card({
 						</div>
 						<div>
 							{
-								data?.rowData?.origin_locals_price
-									? (
-										<div style={{ display: 'flex' }}>
-											Origin Local Price :
-											&nbsp;
-											<div className={styles.price_value}>
-												{formatAmount({
-													amount   : data?.rowData?.origin_locals_price,
-													currency : data?.rowData?.origin_locals_price_currency,
-													options  : {
-														style                 : 'currency',
-														currencyDisplay       : 'code',
-														maximumFractionDigits : 2,
-													},
-												})}
-											</div>
+							data?.rowData?.origin_locals_price
+								? (
+									<div style={{ display: 'flex' }}>
+										Origin Local Price :
+										&nbsp;
+										<div className={styles.price_value}>
+											{formatAmount({
+												amount   : data?.rowData?.origin_locals_price,
+												currency : data?.rowData?.origin_locals_price_currency,
+												options  : {
+													style                 : 'currency',
+													currencyDisplay       : 'code',
+													maximumFractionDigits : 2,
+												},
+											})}
 										</div>
-									)
-									: null
-							}
+									</div>
+								)
+								: null
+						}
 							{
-								data?.rowData?.origin_locals_price
-									? (
-										<div style={{ display: 'flex' }}>
-											Destination Local Price :
-											&nbsp;
-											<div className={styles.price_value}>
-												{formatAmount({
-													amount   : data?.rowData?.destination_locals_price,
-													currency : data?.rowData?.destination_locals_price_currency,
-													options  : {
-														style                 : 'currency',
-														currencyDisplay       : 'code',
-														maximumFractionDigits : 2,
-													},
-												})}
-
-											</div>
+							data?.rowData?.origin_locals_price
+								? (
+									<div style={{ display: 'flex' }}>
+										Destination Local Price :
+										&nbsp;
+										<div className={styles.price_value}>
+											{formatAmount({
+												amount   : data?.rowData?.destination_locals_price,
+												currency : data?.rowData?.destination_locals_price_currency,
+												options  : {
+													style                 : 'currency',
+													currencyDisplay       : 'code',
+													maximumFractionDigits : 2,
+												},
+											})}
 
 										</div>
-									)
-									: null
-							}
+
+									</div>
+								)
+								: null
+						}
 						</div>
 					</div>
 					<div className={styles.total_price_section}>
 						<div style={{ display: 'flex' }}>
 							Profitability : &nbsp;
-							<div className={Number(profitability) > 0 ? styles.positive_profit : styles.negative_profit}>
-								{(Number(profitability) * 100).toFixed(2)}
+							<div className={Number(data?.rowData?.profit_percentage) > 0
+								? styles.positive_profit : styles.negative_profit}
+							>
+								{Number(data?.rowData?.profit_percentage).toFixed(2)}
 								%
 							</div>
 						</div>
 					</div>
 					{isShowSellRate && (
-						<div role="presentation" className={styles.edit_price_section} onClick={handleCardClick}>
+						<div
+							role="presentation"
+							className={styles.edit_price_section}
+							onClick={handleCardClick}
+						>
 							<div className={styles.edit_price_heading}>Sell Rate / Contr.</div>
 							<ShowSellRates
 								data={data}
@@ -241,6 +252,7 @@ function Card({
 
 			</div>
 		</div>
+
 	);
 }
 

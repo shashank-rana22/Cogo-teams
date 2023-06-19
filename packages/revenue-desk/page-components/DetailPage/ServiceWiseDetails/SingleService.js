@@ -60,7 +60,6 @@ function SingleService({
 	(groupedServicesData || []).forEach((data) => {
 		options.push({ label: <CargoDetailPills detail={data} labels={labels} />, value: data });
 	});
-
 	useEffect(() => {
 		setSingleServiceData(groupedServicesData[0]);
 	// eslint-disable-next-line react-hooks/exhaustive-deps
@@ -101,7 +100,7 @@ function SingleService({
 		<div>
 
 			<div style={{ margin: '16px 0' }}>
-				{options.length > 2 && (
+				{options.length > 1 && (
 					<Select
 						options={options}
 						value={singleServiceData}
@@ -110,14 +109,20 @@ function SingleService({
 				)}
 			</div>
 
-			<SingleServiceCard serviceData={singleServiceData} price={priceData?.[singleServiceData?.id]} />
+			<SingleServiceCard
+				serviceData={singleServiceData}
+				price={priceData?.[singleServiceData?.id]}
+				shipmentData={shipmentData}
+			/>
 			{singleServiceData?.is_preference_set ? (
 				<PreferenceSetServiceData
 					singleServiceData={singleServiceData}
 					price={priceData?.[singleServiceData?.id]}
 					shipmentData={shipmentData}
 				/>
-			) : (
+			) : null}
+			{['in_progress', 'confirmed_by_importer_exporter'].includes(shipmentData?.state)
+			&& !singleServiceData?.is_preference_set ? (
 				<>
 					{(supplierPayload?.[singleServiceData?.id] || []).length
 						? (
@@ -151,12 +156,12 @@ function SingleService({
 							serviceData={singleServiceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}
-							price={priceData?.[singleServiceData?.id]}
 							prefrence_key={item?.prefrence_key}
+							loading={ratesLoading}
 						/>
 					))}
 				</>
-			)}
+				) : null}
 		</div>
 
 	);

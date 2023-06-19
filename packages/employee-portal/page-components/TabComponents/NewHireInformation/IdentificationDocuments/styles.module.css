@@ -4,6 +4,10 @@
 	justify-content: space-around;
 	width: 100%;
 	border-radius: 6px;
+
+	@media (max-width: 768px) {
+		flex-direction: column;
+	}
 }
 
 .sup {
@@ -18,7 +22,8 @@
 }
 
 .control {
-	width: 90%;
+	width: 100%;
+	padding: 0 10px;
 
 	:global(.ui_input_control) {
 		text-transform: uppercase;
@@ -26,6 +31,7 @@
 }
 
 .label {
+	padding: 0 10px;
 	margin-bottom: 10px;
 	font-size: 16px;
 	font-weight: 600;

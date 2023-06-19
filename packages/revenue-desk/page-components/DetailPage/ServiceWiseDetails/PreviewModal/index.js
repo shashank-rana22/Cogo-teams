@@ -5,17 +5,40 @@ import { useState } from 'react';
 import PreviewSelectedCards from './PreviewSelectedCards';
 
 function PreviewModal({
-	modalStep, setModalStep, tabKeys,
-	groupedShowServicesData, supplierPayload, priceData, shipmentData,
+	modalStep, setModalStep,
+	groupedShowServicesData, supplierPayload, shipmentData, updateTrigger,
 }) {
+	// const [hasNegativeProfitability, setNegativeProfitability] = useState(false);
+
 	const newFilteredGroupedShowServicesData = {};
+
 	Object.entries(groupedShowServicesData).forEach(([serviceType, serviceData]) => {
 		newFilteredGroupedShowServicesData[serviceType] = serviceData.filter(
-			(service) => supplierPayload.hasOwnProperty(service.id),
+			(service) => supplierPayload?.[(service?.id)] && (supplierPayload[service?.id] || []).length,
 		);
 	});
+	const previewTabsKey = Object.keys(newFilteredGroupedShowServicesData).filter(
+		(serviceType) => newFilteredGroupedShowServicesData[serviceType].length > 0,
+	);
+	const [previewActiveTab, setPreviewActiveTab] = useState(previewTabsKey[0]);
 
-	const [previewActiveTab, setPreviewActiveTab] = useState(tabKeys[0]);
+	let hasNegativeProfitability = false;
+	Object.values(supplierPayload).forEach((rates) => {
+		rates.forEach((rate) => {
+			if (rate?.data?.rowData?.profit_percentage < 0) {
+				hasNegativeProfitability = true;
+			}
+		});
+	});
+
+	const handleSumbit = () => {
+		if (hasNegativeProfitability) {
+			setModalStep(2);
+		} else {
+			updateTrigger();
+		}
+	};
+
 	return (
 		<>
 			{' '}
@@ -27,7 +50,7 @@ function PreviewModal({
 						themeType="secondary"
 						onChange={setPreviewActiveTab}
 					>
-						{tabKeys.map((singleTab) => (
+						{previewTabsKey.map((singleTab) => (
 							<TabPanel
 								name={singleTab}
 								title={startCase(singleTab.replace('_service', ''))}
@@ -36,7 +59,6 @@ function PreviewModal({
 								<PreviewSelectedCards
 									groupedServicesData={newFilteredGroupedShowServicesData[previewActiveTab]}
 									supplierPayload={supplierPayload}
-									price={priceData[startCase(singleTab)]}
 									shipmentType={shipmentData?.shipment_type}
 								/>
 							</TabPanel>
@@ -44,7 +66,12 @@ function PreviewModal({
 					</Tabs>
 				</Modal.Body>
 				<Modal.Footer>
-					<Button themeType="accent" onClick={() => setModalStep(2)}>Save Preference</Button>
+					<Button
+						themeType="accent"
+						onClick={() => handleSumbit()}
+					>
+						Save Preference
+					</Button>
 				</Modal.Footer>
 			</Modal>
 

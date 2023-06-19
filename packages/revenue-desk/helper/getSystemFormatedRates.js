@@ -20,6 +20,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			/ (Number(completed_shipments) + Number(cancelled_shipments)) : 0;
 		rowData.total_buy_price = element?.total_price || 0;
 		rowData.total_buy_currency = element?.total_price_currency;
+		rowData.profit_percentage = element?.profit_percentage;
 		rowData.currency = element?.total_price_currency;
 		rowData.validity_end = element?.validity_end;
 		rowData.origin_locals_price = element?.origin_locals?.total_price;
@@ -30,7 +31,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 			? element?.origin_main_port_id
 			: null;
 		rowData.updated_at = element?.updated_at;
-		rowData.destination_main_port_id =			element?.destination_main_port_id
+		rowData.destination_main_port_id = element?.destination_main_port_id
 			&& element?.destination_main_port_id !== 'None'
 			? element?.destination_main_port_id
 			: null;
