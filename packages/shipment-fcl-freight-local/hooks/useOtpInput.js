@@ -3,12 +3,12 @@ import { useState, useEffect, useImperativeHandle, useRef, useCallback } from 'r
 import useKey from './useKey';
 import useOtpInputEvents from './useOtpInputEvents';
 
-const INITIAL_STATE = 1;
+const INCREMENT_BY_ONE = 1;
 const HASH = {};
 
 const getInitialOtpValues = (otpLength) => {
-	for (let i = 0; i < otpLength; i += INITIAL_STATE) {
-		HASH[`otp-${i + INITIAL_STATE}`] = '';
+	for (let i = 0; i < otpLength; i += INCREMENT_BY_ONE) {
+		HASH[`otp-${i + INCREMENT_BY_ONE}`] = '';
 	}
 
 	return HASH;
@@ -33,8 +33,8 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 		let isAllOtpInputValuePresent = true;
 		let value = '';
 
-		for (let i = 0; i < otpLength; i += INITIAL_STATE) {
-			if (!values[`otp-${i + INITIAL_STATE}`]) {
+		for (let i = 0; i < otpLength; i += INCREMENT_BY_ONE) {
+			if (!values[`otp-${i + INCREMENT_BY_ONE}`]) {
 				isAllOtpInputValuePresent = false;
 				break;
 			}

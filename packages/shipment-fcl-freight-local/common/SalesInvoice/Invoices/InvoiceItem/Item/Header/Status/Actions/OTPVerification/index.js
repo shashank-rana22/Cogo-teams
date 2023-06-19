@@ -1,4 +1,5 @@
 import { Modal, Button, RadioGroup, Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -11,7 +12,6 @@ import styles from './styles.module.css';
 
 const OTP_LENGTH = 4;
 const INITIAL_STATE = 0;
-const INITIAL_INDEX = 1;
 
 function OTPVerification({
 	showOtpModal = false,
@@ -66,7 +66,8 @@ function OTPVerification({
 			await sendOtpForInvoiceApproval(payload);
 		}
 	};
-	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[INITIAL_INDEX]} registered mobile number`;
+	const title = `Enter OTP sent to 
+	${selectedUser?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]} registered mobile number`;
 
 	let userListInfo = null;
 	if (loading) {
