@@ -10,22 +10,22 @@ const liabilityChartData = (creditData = {}) => {
 		{
 			id    : 'Shipment Credited',
 			value : shipment_credit_point_value,
-			color : 'hsl(155, 70%, 50%)',
+			color : '#7f9a4c',
 		},
 		{
 			id    : 'Saas Subscription Credited',
 			value : saas_subscription_credit_point_value,
-			color : 'hsl(291, 70%, 50%)',
+			color : '#9a4c7f',
 		},
 		{
 			id    : 'Referral Credited',
 			value : referral_credit_point_value,
-			color : 'hsl(276, 70%, 50%)',
+			color : '#7f4c9a',
 		},
 		{
 			id    : 'One Time Credited',
 			value : one_time_credit_point_value,
-			color : 'hsl(354, 70%, 50%)',
+			color : '#9a7f4c',
 		},
 	];
 

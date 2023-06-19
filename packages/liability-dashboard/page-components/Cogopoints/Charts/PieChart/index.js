@@ -4,11 +4,10 @@ import { Image } from '@cogoport/next';
 
 import burntChartData from '../../../../configuration/burnt-chart-data';
 import liabilityChartData from '../../../../configuration/liability-chart-data';
+import { ACTIVE_CARD_MAPPING } from '../../../../constants';
 import { formatValue } from '../../../../utils/formatValue';
 
 import styles from './styles.module.css';
-
-const CHECK_ALL_FIELD_VALUE = 0;
 
 function PieChart({
 	creditData = {},
@@ -18,10 +17,11 @@ function PieChart({
 	const liabilityData = liabilityChartData(creditData);
 
 	const burntData = burntChartData(debitData);
+	const activeCard = ACTIVE_CARD_MAPPING({ liabilityData, burntData });
 
-	const checkActiveData = activeStatsCard === 'liability_point_value' ? liabilityData : burntData;
+	const checkActiveData = activeCard[activeStatsCard];
 
-	const emptyValue = (checkActiveData || []).every((item) => item.value === CHECK_ALL_FIELD_VALUE);
+	const emptyValue = (checkActiveData || []).every((item) => !item.value);
 
 	if (emptyValue) {
 		return (

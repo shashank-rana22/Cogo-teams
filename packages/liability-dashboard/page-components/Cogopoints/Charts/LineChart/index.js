@@ -1,11 +1,27 @@
 import { ResponsiveLine } from '@cogoport/charts/line';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 
 import { formatValue } from '../../../../utils/formatValue';
 
 import styles from './styles.module.css';
 
-const DEFAULT_INDEX = 0;
+const renderSliceTooltip = ({ slice = {}, transactionType = '', currencyCode = '' }) => {
+	const { data: singleData = {} } = slice?.points?.[GLOBAL_CONSTANTS.zeroth_index] || {};
+
+	return (
+		<div className={styles.tooltip}>
+			<div className={styles.title}>
+				{`${startCase(transactionType)}ed Month : `}
+				<div className={styles.amount}>{singleData?.x}</div>
+			</div>
+			<div className={styles.title}>
+				{`${startCase(transactionType)}ed Amount (${currencyCode}) : `}
+				<div className={styles.amount}>{singleData?.y}</div>
+			</div>
+		</div>
+	);
+};
 
 function LineChart({ formattedData = [], transactionType = '', currencyCode = '' }) {
 	const data = [
@@ -15,23 +31,6 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 			data  : formattedData.slice().reverse(),
 		},
 	];
-
-	const renderSliceTooltip = ({ slice = {} }) => {
-		const { data: singleData = {} } = slice?.points?.[DEFAULT_INDEX] || {};
-
-		return (
-			<div className={styles.tooltip_div}>
-				<div className={styles.title}>
-					{`${startCase(transactionType)}ed Month : `}
-					<div className={styles.amount}>{singleData?.x}</div>
-				</div>
-				<div className={styles.title}>
-					{`${startCase(transactionType)}ed Amount (${currencyCode}) : `}
-					<div className={styles.amount}>{singleData?.y}</div>
-				</div>
-			</div>
-		);
-	};
 
 	return (
 		<ResponsiveLine
@@ -73,7 +72,7 @@ function LineChart({ formattedData = [], transactionType = '', currencyCode = ''
 			pointLabelYOffset={-12}
 			useMesh
 			enableSlices="x"
-			sliceTooltip={(item) => renderSliceTooltip(item)}
+			sliceTooltip={(item) => renderSliceTooltip(item, transactionType, currencyCode)}
 
 		/>
 

@@ -9,17 +9,17 @@ const burntChartData = (debitData = {}) => {
 		{
 			id    : 'Cogostore Burnt',
 			value : cogostore_burnt_point_value,
-			color : 'hsl(231, 70%, 50%)',
+			color : '#2d8dbf',
 		},
 		{
 			id    : 'Shipment Burnt',
 			value : shipment_burnt_point_value,
-			color : 'hsl(155, 70%, 50%)',
+			color : '#4c9a7f',
 		},
 		{
 			id    : 'Saas Subscription Burnt',
 			value : saas_subscription_burnt_point_value,
-			color : 'hsl(291, 70%, 50%)',
+			color : '#7f4c9a',
 		},
 	];
 
