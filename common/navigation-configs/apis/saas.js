@@ -2481,6 +2481,13 @@ const saas = {
 			feature     : 'product-catalogue',
 		},
 	],
+	app_saas_air_ocean_tracking: [
+		{
+			api          : 'update_external_reference_number',
+			access_type  : 'private',
+			service_name : 'saas_traceability',
+		},
+	],
 
 };
 export default saas;

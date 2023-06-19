@@ -210,7 +210,8 @@ const navigationMappingSeller = {
 				type          : 'link',
 				icon          : 'nav-ocean-schedules',
 				main_apis     : [],
-				possible_apis : [...app_apis.saas_tracking, ...app_apis.saas_air_tracking],
+				possible_apis : [...app_apis.saas_tracking,
+					...app_apis.saas_air_tracking, ...app_apis.saas_air_ocean_tracking],
 			},
 			{
 				key       : 'saas_tools-freight_rate_trend',
