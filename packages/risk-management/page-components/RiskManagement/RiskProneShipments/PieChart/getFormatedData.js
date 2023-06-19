@@ -10,7 +10,8 @@ const getFormatedData = (stats) => {
 	const { late_release_total = '' } = late_release_stats || {};
 	const {
 		container_gated_in_at_vessel_departure = '', container_picked_up_but_not_gated_in = '', cargo_value_fraud = '',
-		container_vessel_arrived_but_not_gated_out = '', container_not_picked_up = '', container_gated_out_but_not_returned = '',
+		container_vessel_arrived_but_not_gated_out = '',
+		container_not_picked_up = '', container_gated_out_but_not_returned = '',
 	} = container_stats || {};
 	const CONTAINER_MOVEMENT_MAPPING = [
 		{
