@@ -12,7 +12,7 @@ const useUpdateRatesPreferences = ({
 }) => {
 	const apitoCall = '/create_shipment_booking_confirmation_preference';
 
-	const [{ loading }, trigger] = useRequest({ method: 'POST', url: apitoCall }, { manual: true });
+	const [{ loading }, trigger] = useRequest({ method: 'POST', url: apitoCall }, { manual: true, autoCancel: false });
 
 	const updateTrigger = async () => {
 		const allPromises = [];
@@ -71,7 +71,7 @@ const useUpdateRatesPreferences = ({
 				booking_confirmation_docs : bookingConformationDocs,
 				service_id                : service_id || undefined,
 				service_type              : service_type || undefined,
-				remarks                   : othertext !== null ? othertext : reason,
+				remarks                   : !othertext ? othertext : reason,
 				available_rates_for_rd    : rateOptions?.[service_id],
 				sell_rate_preferences:
 					service_type && service_type === 'fcl_freight_service' && sellRateDetails?.[service_id]

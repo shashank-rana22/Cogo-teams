@@ -8,8 +8,6 @@ function PreviewModal({
 	modalStep, setModalStep,
 	groupedShowServicesData, supplierPayload, shipmentData, updateTrigger,
 }) {
-	// const [hasNegativeProfitability, setNegativeProfitability] = useState(false);
-
 	const newFilteredGroupedShowServicesData = {};
 
 	Object.entries(groupedShowServicesData).forEach(([serviceType, serviceData]) => {

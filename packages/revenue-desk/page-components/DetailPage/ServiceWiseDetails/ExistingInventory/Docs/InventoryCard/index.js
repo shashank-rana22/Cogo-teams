@@ -29,7 +29,6 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 		}).rows,
 	};
 	const [showAll, setShowAll] = useState(false);
-
 	const currentData = rowKeyMapping[key];
 	const inceremt = 4;
 	const min = currentData?.length > inceremt ? inceremt : currentData?.length;
@@ -39,7 +38,6 @@ function InventoryCard({ type, data: details, preferences, setPreferences, expan
 
 	const renderSingle = key === 'single_booking_notes';
 	const showData = (val) => val || '';
-
 	const getAllIds = (id, istype) => {
 		let ids = [];
 		if (istype === 'other') {

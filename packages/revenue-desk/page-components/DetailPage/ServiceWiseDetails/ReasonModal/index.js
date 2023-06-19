@@ -63,7 +63,6 @@ function ReasonModal({ modalStep, setModalStep, updateTrigger, reason, setReason
 							value={othertext}
 							onChange={(val) => setOthertext(val)}
 						/>
-
 					</div>
 				)}
 			</Modal.Body>
