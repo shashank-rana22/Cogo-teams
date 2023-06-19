@@ -116,8 +116,9 @@
 	align-items: flex-start;
 	justify-content: space-between;
 }
+
 .dot_style {
 	width: 10px;
 	height: 10px;
-	cursor: 'pointer';
+	cursor: "pointer";
 }
