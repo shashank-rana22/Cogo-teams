@@ -4,6 +4,7 @@ import { useRequest, request } from '@cogoport/request';
 import { useContext, useState } from 'react';
 
 import useUpdateShipmentCogoid from '../../../../../../hooks/useUpdateShipmentCogoid';
+import useUpdatePendingTask from '../../../../../../hooks/useUpdateShipmentPendingTask';
 
 const useDraftBLHelper = ({
 	pendingTask = {},
@@ -21,6 +22,8 @@ const useDraftBLHelper = ({
 		url    : 'fcl_freight/create_document',
 		method : 'POST',
 	}, { manual: true });
+
+	const { apiTrigger : updatePendingTaskTrigger, loading : updatePendingTaskLoading } = useUpdatePendingTask({});
 
 	const createHBL = async ({ hblData }) => {
 		setCreateTradeDocLoading(true);
@@ -84,7 +87,15 @@ const useDraftBLHelper = ({
 				})),
 			};
 
-			await trigger({ data: body });
+			const res = 	await trigger({ data: body });
+
+			if (!res?.hasError) {
+				const val = {
+					id     : pendingTask?.id,
+					status : 'completed',
+				};
+				await updatePendingTaskTrigger(val);
+			}
 
 			try {
 				const rpaMappings = {
@@ -104,7 +115,7 @@ const useDraftBLHelper = ({
 	return {
 		createHBL,
 		submitMBL,
-		loading,
+		loading: loading || updatePendingTaskLoading,
 		createTradeDocLoading,
 	};
 };
