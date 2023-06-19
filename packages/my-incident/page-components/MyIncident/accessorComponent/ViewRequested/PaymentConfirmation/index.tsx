@@ -2,17 +2,12 @@ import { Textarea, Modal, Button } from '@cogoport/components';
 import { getFormattedPrice } from '@cogoport/forms';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import { useEffect, useState } from 'react';
 
 import styles from './styles.module.css';
 
 function PaymentConfirmation({ itemData, setRemarks, remarks, onSave, showModal, setShowModal, loadingOnSave }) {
 	const { status, userNotes, data } = itemData || {};
 	const { paymentConfirmationRequest, organization } = data || {};
-
-	const [inputValues, setInputValues] = useState({
-		remarks: null,
-	});
 
 	const {
 		currency = '', utr, paymentAmount = '',
@@ -47,14 +42,6 @@ function PaymentConfirmation({ itemData, setRemarks, remarks, onSave, showModal,
 				</div>),
 		},
 	];
-
-	useEffect(() => {
-		if (!showModal) {
-			setInputValues({
-				remarks: null,
-			});
-		}
-	}, [showModal]);
 
 	return (
 		<div>
