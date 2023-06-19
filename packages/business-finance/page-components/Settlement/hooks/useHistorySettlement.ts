@@ -4,8 +4,22 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
+interface DateObj {
+	startDate?: string;
+	endDate?: string;
+}
+interface FiltersParams {
+	query: string;
+	date: DateObj;
+	accountType: string;
+	orgId: string;
+	page: number;
+	sortBy: string;
+	sortType: string;
+}
+
 const useHistorySettlemet = () => {
-	const [filters, setFilters] = useState({
+	const [filters, setFilters] = useState<FiltersParams>({
 		query       : '',
 		date        : {},
 		accountType : '',
