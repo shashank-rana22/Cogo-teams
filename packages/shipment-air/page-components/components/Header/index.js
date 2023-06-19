@@ -72,7 +72,7 @@ function Header({
 						size="sm"
 						prefix={<IcMAppSearch />}
 						placeholder="Search via Customer/SID/Booking No"
-						style={{ marginRight: '8px', width: 300 }}
+						style={{ marginRight: '8px', width: 350 }}
 						onChange={(e) => handleSearchValue(e)}
 					/>
 					<div className={styles.icon_wrapper}>

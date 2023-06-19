@@ -1130,7 +1130,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'coe-shipment_air',
-				title         : 'Bookings Air',
+				title         : 'Air Booking Desk',
 				href          : '/v2/booking/air',
 				as            : '/v2/booking/air',
 				type          : 'link',
