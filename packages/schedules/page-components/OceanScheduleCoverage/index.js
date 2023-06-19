@@ -44,7 +44,6 @@ function OceanScheduleCoverage() {
                             />
                         )
                     ) : (
-                        // <>testing.....................................</>
                         <LoadingState />
                     )}
                     <div className={styles.pagination}>
