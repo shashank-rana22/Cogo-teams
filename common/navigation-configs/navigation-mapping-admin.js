@@ -1535,7 +1535,6 @@ const navigationMappingAdmin = {
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.utm_parameters,
-				icon          : 'ic-utm',
 			},
 		],
 		module_type: 'dashboards',
