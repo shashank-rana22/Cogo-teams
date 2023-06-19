@@ -13,12 +13,32 @@ import CustomTable from './CustomTable';
 import SelectState from './SelectState';
 import styles from './styles.module.css';
 
+interface ListItem {
+	id: string;
+	documentValue: string;
+	documentAmount: number;
+	settledAmount: number;
+	balanceAmount: number;
+	transactionDate: string;
+	lastEditedDate: string;
+	currency: string;
+	documentNo: string;
+	accountType: string;
+	accMode: string;
+	notPostedSettlementIds : Array<number>;
+	ledCurrency: string;
+}
+
+interface DataInterface {
+	list: ListItem[],
+}
+
 function History() {
 	const [checkedRows, setCheckedRows] = useState({});
 
 	const { loading, filters, setFilters, apiData, refetch } = useHistorySettlemet();
 
-	const { list = [] } = apiData || {};
+	const { list = [] } = (apiData as DataInterface) || {};
 
 	const onPageChange = (val:number) => {
 		setFilters({ ...filters, page: val });
