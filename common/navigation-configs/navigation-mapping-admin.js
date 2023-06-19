@@ -845,7 +845,7 @@ const navigationMappingAdmin = {
 				key           : 'business_finance-cogo_book',
 				title         : 'Cogo Books',
 				href          : '/business-finance/cogo-book/[active_tab]/[view]',
-				as            : '/business-finance/cogo-book/accruals/shipment_view',
+				as            : '/business-finance/cogo-book/accruals/dashboard',
 				type          : 'link',
 				main_apis     : [],
 				possible_apis : apis.cogo_book,
@@ -1140,6 +1140,14 @@ const navigationMappingAdmin = {
 				statsKey      : 'shipments',
 				main_apis     : ['list_shipments'],
 				possible_apis : [...apis.shipment, ...apis.search, ...apis.feedback, ...apis.sales_invoice],
+			},
+			{
+				key       : 'coe-shipment_air',
+				title     : 'Bookings Air',
+				href      : '/v2/booking/air',
+				as        : '/v2/booking/air',
+				type      : 'link',
+				main_apis : ['list_shipments'],
 			},
 			{
 				key           : 'coe-bn_salvage',
@@ -2366,12 +2374,20 @@ const navigationMappingAdmin = {
 		main_apis   : [],
 		options     : [
 			{
-				key           : 'referral-dashboard',
+				key           : 'referral-referral_dashboard',
 				title         : 'Dashboard',
 				href          : '/v2/referral/dashboard',
 				as            : '/v2/referral/dashboard',
 				type          : 'link',
 				possible_apis : apis.referral_dashboard,
+			},
+			{
+				key           : 'referral-referral_configuration',
+				title         : 'Configuration',
+				href          : '/v2/referral/configuration',
+				as            : '/v2/referral/configuration',
+				type          : 'link',
+				possible_apis : apis.referral_config,
 			},
 			{
 				key           : 'referral-simulation',

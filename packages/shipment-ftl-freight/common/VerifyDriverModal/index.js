@@ -1,5 +1,6 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useMemo, useState, useEffect, useContext, useCallback } from 'react';
 
 import useCreateCustomerInvoice from '../../hooks/useCreateCustomerInvoice';
@@ -10,12 +11,12 @@ import AddOrganizationPoc from './AddPoc';
 import useCreateOrganizationPoc from './AddPoc/hooks/useCreateOrganizationPoc';
 import styles from './styles.module.css';
 
-const SkeletonGroup = [1, 2, 3].map((item) => (
+const SkeletonGroup = ['A', 'B', 'C'].map((item) => (
 	<div key={item} height="100px" width="100%" />
 ));
 
 function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
-	const organizationId = driverList[0]?.service_provider_id;
+	const organizationId = driverList[GLOBAL_CONSTANTS.zeroth_index]?.service_provider_id;
 	const [showInternal, setShowInternalInternal] = useState(false);
 	const [showInternalUploadDoc, setShowInternalInternalUploadDoc] = useState(false);
 	const [uploadProof, setUploadProof] = useState(null);
@@ -120,7 +121,7 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 			<div key={driverType}>
 				<span className={styles.driver_type}>
 					{driverType}
-					{' '}
+					&nbsp;
 					drivers
 				</span>
 				<ul>
@@ -129,7 +130,7 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 							<div>
 								<span>
 									Driver Name:
-									{' '}
+									&nbsp;
 									{driver.driver_name || driver.name}
 								</span>
 								<div className={styles.actionRow}>
@@ -139,7 +140,7 @@ function VerifyDriverModal({ driverList = [], setShow = () => {} }) {
 									>
 										Edit Info
 									</Button>
-									{' '}
+									&nbsp;
 									<Button
 										onClick={() => {
 											setUploadProof(null);

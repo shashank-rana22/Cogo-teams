@@ -30,6 +30,10 @@
 				height: 32px !important;
 			}
 		}
+
+		.ui_select_container {
+			width: 150px;
+		}
 	}
 }
 
@@ -82,4 +86,22 @@
 	color: var(--color-accent-orange-2);
 	text-decoration: underline;
 	cursor: pointer;
+}
+
+.buttons {
+	display: flex;
+	justify-content: center;
+	padding-bottom: 40px;
+}
+
+.heading {
+	display: flex;
+	justify-content: center;
+	padding: 26px;
+	font-size: var(--font-size-xl);
+	font-weight: 600;
+}
+
+.post {
+	margin-left: 16px;
 }

@@ -1,6 +1,6 @@
 import { isEmpty, startCase } from '@cogoport/utils';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
 
 import styles from './styles.module.css';
 
@@ -29,6 +29,7 @@ function Card({ data = {} }) {
 		<div className={styles.container}>
 			{Object.keys(mapping).map((key) => (
 				<LabelValue
+					key={key}
 					label={key}
 					value={mapping[key]}
 				/>

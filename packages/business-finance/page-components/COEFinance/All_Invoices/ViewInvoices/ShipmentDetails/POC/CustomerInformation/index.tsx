@@ -1,6 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import React from 'react';
-
-import getFormattedPrice from '../../../../../../commons/utils/getFormattedPrice';
 
 import styles from './styles.module.css';
 
@@ -43,14 +43,28 @@ function CustomerInformation({
 						<div className={styles.sub_container}>
 							Total Outstanding -
 							<span style={{ fontWeight: 600 }}>
-								{getFormattedPrice(customerOutstandingAmount, 'INR')}
+								{formatAmount({
+									amount   :	customerOutstandingAmount as any,
+									currency :	GLOBAL_CONSTANTS.currency_code.INR,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 							</span>
 						</div>
 
 						<div className={styles.sub_container}>
 							On Account Payments -
 							<span style={{ fontWeight: 600 }}>
-								{getFormattedPrice(customerOutstandingAmountOnSid, 'INR')}
+								{formatAmount({
+									amount   :	customerOutstandingAmountOnSid as any,
+									currency : GLOBAL_CONSTANTS.currency_code.INR,
+									options  : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
 							</span>
 						</div>
 					</div>
