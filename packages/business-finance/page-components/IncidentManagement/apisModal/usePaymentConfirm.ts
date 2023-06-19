@@ -34,8 +34,8 @@ const usePaymentConfirm = ({
 		{ manual: true },
 	);
 
-	const useOnAction = async ({ inputValues, status }:Props) => {
-		const { remarks } = inputValues || {};
+	const onAction = async ({ inputValues, status }:Props) => {
+		const { remarks = '' } = inputValues || {};
 		try {
 			const apiResponse = await trigger({
 				data: {
@@ -60,7 +60,7 @@ const usePaymentConfirm = ({
 	};
 
 	return {
-		useOnAction,
+		onAction,
 		loading,
 	};
 };

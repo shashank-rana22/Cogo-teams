@@ -1,5 +1,5 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState } from 'react';
@@ -11,30 +11,30 @@ import ViewButton from '../../common/ViewButton';
 import styles from './styles.module.css';
 
 interface PaymentConfirmationInterface {
-	requestSubType?: string,
-	currency?: string,
-	utr?: string,
-	paymentAmount?: number,
-	documentUrls?: string[],
+	requestSubType?: string;
+	currency?: string;
+	utr?: string;
+	paymentAmount?: string;
+	documentUrls?: string[];
 }
 
 interface Org {
-	businessName?:string,
-	tradePartyType?:string,
-	tradePartyName?:string,
+	businessName?:string;
+	tradePartyType?:string;
+	tradePartyName?:string;
 }
 
 interface Props {
-	paymentConfirmationRequest?: PaymentConfirmationInterface,
-	id?: string,
-	refetch?:()=>void,
-	organization?:Org,
-	isEditable?:boolean,
-	remark?:string,
-	row:RowTypes,
+	paymentConfirmationRequest?: PaymentConfirmationInterface;
+	id?: string;
+	refetch?:()=>void;
+	organization?:Org;
+	isEditable?:boolean;
+	remark?:string;
+	row:RowTypes;
 }
 interface RowTypes {
-	status:string,
+	status:string;
 }
 
 function PaymentConfirmation({
@@ -52,7 +52,7 @@ function PaymentConfirmation({
 	} = paymentConfirmationRequest || {};
 	const { businessName:organizationName, tradePartyType = '', tradePartyName = '' } = organization || {};
 
-	const { useOnAction:OnAction, loading } = usePaymentConfirm({
+	const { onAction, loading } = usePaymentConfirm({
 		refetch,
 		setShowModal,
 		id,
@@ -62,7 +62,20 @@ function PaymentConfirmation({
 		{ title: 'Organization Name', value: <div>{organizationName || ''}</div> },
 		{ title: 'Trade Party Type', value: <div>{tradePartyType?.replaceAll('_', ' ') || ''}</div> },
 		{ title: 'Business Name', value: <div>{tradePartyName || ''}</div> },
-		{ title: 'Payment Amount', value: <div>{getFormattedPrice(paymentAmount, currency)}</div> },
+		{
+			title: 'Payment Amount',
+			value:
+	<div>
+		{formatAmount({
+			amount  : paymentAmount,
+			currency,
+			options : {
+				currencyDisplay : 'code',
+				style           : 'currency',
+			},
+		})}
+	</div>,
+		},
 		{ title: 'UTR', value: <div>{utr || ''}</div> },
 		{ title: 'Request Sub Type', value: <div>{startCase(requestSubType) || ''}</div> },
 		{
@@ -153,7 +166,7 @@ function PaymentConfirmation({
 									style={{ marginRight: '8px' }}
 									disabled={isDisabled}
 									onClick={() => {
-										OnAction({ inputValues, status: 'REJECTED' });
+										onAction({ inputValues, status: 'REJECTED' });
 									}}
 								>
 									Reject
@@ -163,7 +176,7 @@ function PaymentConfirmation({
 									style={{ marginRight: '8px' }}
 									disabled={isDisabled}
 									onClick={() => {
-										OnAction({ inputValues, status: 'APPROVED' });
+										onAction({ inputValues, status: 'APPROVED' });
 									}}
 								>
 									Approve

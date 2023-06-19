@@ -1,5 +1,5 @@
 import { Textarea, Modal, Button } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMEyeopen } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
@@ -19,7 +19,20 @@ function PaymentConfirmation({ itemData, setRemarks, remarks, onSave, showModal,
 		{ title: 'Organization Name', value: <div>{organizationName || ''}</div> },
 		{ title: 'Trade Party Type', value: <div>{tradePartyType?.replaceAll('_', ' ') || ''}</div> },
 		{ title: 'Business Name', value: <div>{tradePartyName || ''}</div> },
-		{ title: 'Payment Amount', value: <div>{getFormattedPrice(paymentAmount, currency)}</div> },
+		{
+			title: 'Payment Amount',
+			value:
+	<div>
+		{formatAmount({
+			amount  : paymentAmount,
+			currency,
+			options : {
+				currencyDisplay : 'code',
+				style           : 'currency',
+			},
+		})}
+	</div>,
+		},
 		{ title: 'UTR', value: <div>{utr || ''}</div> },
 		{ title: 'Request Sub Type', value: <div>{startCase(requestSubType) || ''}</div> },
 		{

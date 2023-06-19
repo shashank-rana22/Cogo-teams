@@ -11,8 +11,9 @@ function DeleteModal({ itemData, refetch }) {
 	const [showDeleteModal, setShowDeleteModal] = useState(false);
 	const [remarks, setRemarks] = useState(null);
 	const { onDeleteAccept, loadingOndelete } = useDeleteAccept({ id, userIncidentStatus, remarks, refetch });
-	const disabledButtonCondition = userIncidentStatus === 'CLOSED' || userIncidentStatus === 'RAISED_AGAIN'
-	|| userIncidentStatus === 'DELETED' || type === 'PAYMENT_CONFIRMATION_APPROVAL';
+	const validStatuses = ['CLOSED', 'RAISED_AGAIN', 'DELETED'];
+	const disabledButtonCondition = validStatuses.includes(userIncidentStatus)
+	|| type === 'PAYMENT_CONFIRMATION_APPROVAL';
 	return (
 		<div>
 			<div className={styles.button_style}>
