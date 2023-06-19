@@ -41,6 +41,7 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData } = {}) => {
 						operation_type          : singleServiceData?.operation_type || undefined,
 						stacking_type           : singleServiceData?.packages?.[0]?.handling_type || undefined,
 						shipment_type           : singleServiceData?.packages?.[0]?.packing_type || undefined,
+						cargo_handling_type     : singleServiceData?.cargo_handling_type || undefined,
 
 					},
 				},
