@@ -1,12 +1,11 @@
 import { Button, RatingComponent } from '@cogoport/components';
 import { IcCStar } from '@cogoport/icons-react';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import useUpdateTicketFeedback from '../../../../hooks/useUpdateTicketFeedback';
 
 import styles from './styles.module.css';
-
-const MIN_LENGTH_CHECK = 0;
 
 function RateTicket({
 	id = '',
@@ -26,7 +25,7 @@ function RateTicket({
 
 	return (
 		<div className={styles.container} key={ticketRating}>
-			{ticketRating === MIN_LENGTH_CHECK ? (
+			{isEmpty(ticketRating) ? (
 				<>
 					<div className={styles.rating_text}>
 						Was your issue resolved?
@@ -37,7 +36,7 @@ function RateTicket({
 							totalStars={5}
 							value={rating}
 							onChange={setRating}
-							disabled={updateLoading || ticketRating > MIN_LENGTH_CHECK}
+							disabled={updateLoading || isEmpty(ticketRating)}
 						/>
 					</div>
 					<div className={styles.button_container}>

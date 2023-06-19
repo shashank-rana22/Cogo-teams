@@ -1,6 +1,6 @@
 import { IcMDocument, IcMImage } from '@cogoport/icons-react';
 
-const FILE_LENGTH_CHECK = 1;
+const FILE_LENGTH = 1;
 
 const fileIconMapping = {
 	document: <IcMDocument height={22} width={22} />,
@@ -15,7 +15,7 @@ function getFileAttributes({ fileName = '', finalUrl }) {
 	let fileType = '';
 
 	let fileIcon = null;
-	if (splitFileName.length > FILE_LENGTH_CHECK) {
+	if (splitFileName.length > FILE_LENGTH) {
 		fileExtension = splitFileName.pop();
 		uploadedFileName = splitFileName.join('');
 	} else {

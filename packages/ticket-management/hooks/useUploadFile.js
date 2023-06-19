@@ -1,6 +1,5 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { publicRequest, request } from '@cogoport/request';
-
-const FIRST_ELEMENT = 0;
 
 const uploadFile = (index) => async (value, onUploadProgress) => {
 	const { data } = await request({
@@ -24,7 +23,7 @@ const uploadFile = (index) => async (value, onUploadProgress) => {
 		onUploadProgress: onUploadProgress(index),
 	});
 
-	const finalUrl = url.split('?')[FIRST_ELEMENT];
+	const finalUrl = url.split('?')[GLOBAL_CONSTANTS.zeroth_index];
 
 	return finalUrl;
 };

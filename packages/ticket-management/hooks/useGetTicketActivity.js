@@ -1,7 +1,6 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useTicketsRequest } from '@cogoport/request';
 import { useEffect, useCallback, useState } from 'react';
-
-const FIRST_ELEMENT = 0;
 
 const useGetTicketActivity = ({ ticketId }) => {
 	const [{ loading }, trigger] = useTicketsRequest({
@@ -51,7 +50,7 @@ const useGetTicketActivity = ({ ticketId }) => {
 				page        : 0,
 				total_pages : 0,
 			});
-			getTicketActivity(FIRST_ELEMENT);
+			getTicketActivity(GLOBAL_CONSTANTS.zeroth_index);
 		}
 	}, [ticketId, getTicketActivity]);
 

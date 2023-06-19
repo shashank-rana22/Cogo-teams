@@ -1,4 +1,5 @@
 import { Upload, Toast } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMDocument, IcMUpload } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useEffect, forwardRef, useImperativeHandle } from 'react';
@@ -7,9 +8,7 @@ import uploadFile from '../../hooks/useUploadFile';
 
 import styles from './styles.module.css';
 
-const MIN_LENGTH_CHECK = 0;
-const FIRST_ELEMENT = 0;
-const LAST_ELEMENT = -1;
+const FILE_URL_LAST_ELEMENT = -1;
 const TOTAL_PERCENT = 100;
 
 function CustomFileUploader(props, ref) {
@@ -28,22 +27,22 @@ function CustomFileUploader(props, ref) {
 	const [urlStore, setUrlStore] = useState([]);
 	const [progress, setProgress] = useState({});
 
-	const isDefaultValues = defaultValues?.length > MIN_LENGTH_CHECK;
+	const isDefaultValues = isEmpty(defaultValues?.length);
 
 	useEffect(() => {
 		setLoading(true);
 		if (typeof (defaultValues) === 'string' && !multiple && defaultValues !== undefined) {
-			setFileName([{ name: defaultValues.split('/').slice(LAST_ELEMENT).join('') }]);
+			setFileName([{ name: defaultValues.split('/').slice(FILE_URL_LAST_ELEMENT).join('') }]);
 			setUrlStore([{
-				fileName : defaultValues.split('/').slice(LAST_ELEMENT).join(''),
+				fileName : defaultValues.split('/').slice(FILE_URL_LAST_ELEMENT).join(''),
 				finalUrl : defaultValues,
 			}]);
 		}
 		if (multiple && typeof (defaultValues) !== 'string' && defaultValues !== undefined) {
-			const names = defaultValues.map((url) => ({ name: url.split('/').slice(LAST_ELEMENT).join('') }));
+			const names = defaultValues.map((url) => ({ name: url.split('/').slice(FILE_URL_LAST_ELEMENT).join('') }));
 			const urls = defaultValues.map((url) => ({
 				fileName: url.split('/')
-					.slice(LAST_ELEMENT).join(''),
+					.slice(FILE_URL_LAST_ELEMENT).join(''),
 				finalUrl: url,
 			}));
 
@@ -57,7 +56,7 @@ function CustomFileUploader(props, ref) {
 		if (multiple) {
 			onChange(urlStore);
 		} else {
-			onChange(urlStore[FIRST_ELEMENT]);
+			onChange(urlStore[GLOBAL_CONSTANTS.zeroth_index]);
 		}
 	}, [urlStore, multiple, onChange]);
 
@@ -81,7 +80,7 @@ function CustomFileUploader(props, ref) {
 		try {
 			setLoading(true);
 
-			if (values.length > MIN_LENGTH_CHECK) {
+			if (!isEmpty(values.length)) {
 				setProgress({});
 
 				const promises = values.map((value, index) => uploadFile(index)(value, onUploadProgress));

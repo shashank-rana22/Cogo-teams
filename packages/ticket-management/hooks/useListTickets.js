@@ -9,8 +9,9 @@ import {
 
 import { TICKET_SECTION_MAPPING } from '../constants';
 
-const DEFAULT_PAGE_COUNT = 1;
-const FIRST_ELEMENT = 1;
+const DEFAULT_PAGE = 1;
+const PAGE_DECREMENT = 1;
+const PAGE_INCREMENT = 1;
 const MIN_TICKET_COUNT = 1;
 const WINDOW_VIEW = 20;
 
@@ -21,7 +22,7 @@ const useListTickets = ({
 	refreshList,
 	setRefreshList,
 }) => {
-	const [pagination, setPagination] = useState(DEFAULT_PAGE_COUNT);
+	const [pagination, setPagination] = useState(DEFAULT_PAGE);
 	const [tickets, setTickets] = useState({ list: [], total: 0 });
 
 	const { debounceQuery, query: searchQuery = '' } = useDebounceQuery();
@@ -38,7 +39,7 @@ const useListTickets = ({
 		const payload = {
 			PerformedByID : profile?.user?.id,
 			size          : 10,
-			page          : pageIndex - FIRST_ELEMENT,
+			page          : pageIndex - PAGE_DECREMENT,
 			AgentID       : searchParams.agent || undefined,
 			QFilter       : searchQuery || undefined,
 			Type          : searchParams.category,
@@ -59,7 +60,7 @@ const useListTickets = ({
 					total: response.data.total,
 				}));
 			}
-			setPagination(pageIndex + FIRST_ELEMENT);
+			setPagination(pageIndex + PAGE_INCREMENT);
 		} catch (error) {
 			console.log('error:', error);
 		}
@@ -79,7 +80,7 @@ const useListTickets = ({
 
 	const handleScroll = ({ clientHeight, scrollTop, scrollHeight }) => {
 		const reachBottom = scrollHeight - (clientHeight + scrollTop) <= WINDOW_VIEW;
-		const hasMoreData = pagination <= (data?.total_pages || DEFAULT_PAGE_COUNT);
+		const hasMoreData = pagination <= (data?.total_pages || DEFAULT_PAGE);
 		if (reachBottom && hasMoreData && !loading) {
 			fetchTickets(pagination);
 		}

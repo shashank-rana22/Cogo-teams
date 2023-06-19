@@ -14,8 +14,7 @@ import CustomFileUploader from '../../../CustomFileUploader';
 
 import styles from './styles.module.css';
 
-const FIRST_ELEMENT = 0;
-const LAST_ELEMENT = 0;
+const URL_ARRAY_LAST_ELEMENT = 1;
 
 function FooterChat({
 	setMessage = () => {},
@@ -45,7 +44,7 @@ function FooterChat({
 
 	if (file) {
 		const urlArray = decodeURI(file)?.split('/');
-		fileName = urlArray[(urlArray?.length || FIRST_ELEMENT) - LAST_ELEMENT] || '';
+		fileName = urlArray[(urlArray?.length || GLOBAL_CONSTANTS.zeroth_index) - URL_ARRAY_LAST_ELEMENT] || '';
 	}
 
 	useEffect(() => {

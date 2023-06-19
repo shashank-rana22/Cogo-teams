@@ -5,8 +5,7 @@ import { STATUS_LABEL_MAPPING, ACTION_KEYS, STATUS_MAPPING } from '../../../cons
 
 import styles from './styles.module.css';
 
-const FIRST_ELEMENT = 0;
-const LAST_ELEMENT = 100;
+const DESCRIPTION_LAST_ELEMENT = 100;
 
 function TicketStructureBody({
 	data,
@@ -57,7 +56,7 @@ function TicketStructureBody({
 					</div>
 				</div>
 				<div className={styles.category_ticket_activity}>
-					{type || description.substring(FIRST_ELEMENT, LAST_ELEMENT)}
+					{type || description.substring(GLOBAL_CONSTANTS.zeroth_index, DESCRIPTION_LAST_ELEMENT)}
 				</div>
 			</div>
 			<div className={styles.subcontainer_two}>
@@ -82,7 +81,8 @@ function TicketStructureBody({
 				</div>
 				<div className={styles.ticket_reason_box}>
 					<div className={styles.description}>
-						{(ticketActivity?.Description || description).substring(FIRST_ELEMENT, LAST_ELEMENT)}
+						{(ticketActivity?.Description
+							|| description).substring(GLOBAL_CONSTANTS.zeroth_index, DESCRIPTION_LAST_ELEMENT)}
 					</div>
 					{activityCount ? (
 						<div className={styles.activity_count}>

@@ -1,4 +1,5 @@
 import { Modal } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState, useRef, useEffect } from 'react';
 
@@ -12,8 +13,7 @@ import ModalHeader from './ModalHeader';
 import styles from './styles.module.css';
 import TicketSummary from './TicketSummary';
 
-const WINDOW_TOP = 5;
-const FIRST_ELEMENT = 0;
+const WINDOW_VIEW_ASPECT = 5;
 const TIMEOUT_COUNT = 300;
 
 const chatBodyHeight = (rating, ticketExists, status, file, uploading) => {
@@ -41,7 +41,7 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 				const { scrollHeight, clientHeight } = messageRef.current;
 				const maxScrollTop = scrollHeight - clientHeight;
 				messageRef.current.scrollTo({
-					top      : maxScrollTop + WINDOW_TOP,
+					top      : maxScrollTop + WINDOW_VIEW_ASPECT,
 					behavior : 'smooth',
 				});
 			}
@@ -77,7 +77,7 @@ function TicketChat({ modalData = {}, setModalData = () => {} }) {
 			total_pages : 0,
 		});
 		getTicketDetails();
-		getTicketActivity(FIRST_ELEMENT);
+		getTicketActivity(GLOBAL_CONSTANTS.zeroth_index);
 	};
 
 	const isEmptyChat = isEmpty(listData?.items || {});
