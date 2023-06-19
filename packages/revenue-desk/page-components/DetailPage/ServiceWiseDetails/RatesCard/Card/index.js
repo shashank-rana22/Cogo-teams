@@ -99,10 +99,12 @@ function Card({
 							{updated_at ? (
 								<div className={styles.updated_at}>
 									Last updated :
-									{' '}
 									{format(updated_at, 'dd MMM yy')}
 								</div>
 							) : null}
+						</div>
+						<div className={styles.source}>
+							{startCase(data?.rowData?.source || '')}
 						</div>
 					</div>
 					<div style={{ display: 'flex' }}>
@@ -119,7 +121,6 @@ function Card({
 					<div className={styles.first_section}>
 						<div className={styles.text1}>
 							Active Bookings :
-							{' '}
 							{data?.rowData?.active_booking}
 						</div>
 						<div className={styles.text2}>

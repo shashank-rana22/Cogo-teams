@@ -9,6 +9,7 @@
     display: flex;
     justify-content: space-between;
     gap:24px;
+    width: 100%;
     align-items: center;
 }
 
@@ -24,17 +25,13 @@
     color: #4F4F4F;
     display: flex;
     align-items: center;
+    width: 21%;
 
 }
 
 .pills_container{
     display: flex;
     align-items: center;
-}
-
-.time_container{
-    color: 'red';
-    display: 'flex' !important;
-    font-weight: '600';
-    align-items: 'center'
+    flex-wrap: wrap;
+    width: 50%;
 }
