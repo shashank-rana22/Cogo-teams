@@ -1,10 +1,22 @@
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { getByKey } from '@cogoport/utils';
 import React from 'react';
 
-import getFormattedAmount from '../../Settlement/commons/Utils/getFormattedAmount';
-import { FunctionObjects, FieldType, GenericObject } from '../Interfaces/index';
+import { FunctionObjects, FieldType, GenericObject } from '../Interfaces';
 
 import FieldPair from './RenderFunctions/FiledPair';
+
+const getFormattedAmount = ({ amount, currency }) => (
+	formatAmount({
+		amount,
+		currency,
+		options: {
+			style                 : 'currency',
+			currencyDisplay       : 'code',
+			maximumFractionDigits : 4,
+		},
+	})
+);
 
 const commonFunctions = (functions :{ functions?:FunctionObjects }) => {
 	const newFunctions:any = {

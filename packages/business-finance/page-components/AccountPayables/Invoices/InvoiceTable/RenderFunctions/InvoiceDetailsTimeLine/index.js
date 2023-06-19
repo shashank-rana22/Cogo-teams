@@ -1,5 +1,4 @@
 import { Placeholder } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
 import geoConstants from '@cogoport/globalization/constants/geo';
 import {
 	IcMArrowRotateLeft,
@@ -9,6 +8,8 @@ import {
 } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
+import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice';
+import { DETAILS, INVOICE_DATA_MAPPING } from '../../../Constants';
 import useInvoiceDetails from '../../../hooks/useGetInvoiceTimeline';
 
 import CustomerInformation from './CustomerInformation';
@@ -75,7 +76,7 @@ function InvoiceDetailsTimeLine({ item }) {
 		{ label: 'Total Receivable', key: 'totalReceivable' },
 	];
 
-	const { invoiceNumber, jobNumber, billNumber, sid, objectNumber } =	item || {};
+	const { invoiceNumber = '', jobNumber = '', billNumber = '', sid = '', objectNumber = '' } = item || {};
 
 	return (
 		<>
@@ -157,11 +158,7 @@ function InvoiceDetailsTimeLine({ item }) {
 									</div>
 								)}
 								{invoiceDetailsLoading ? (
-									<>
-										<Placeholder className={styles.placeholder_container} />
-										<Placeholder className={styles.placeholder_container} />
-										<Placeholder className={styles.placeholder_container} />
-									</>
+									[...Array(3).keys()].map((key) => (<Placeholder key={key} className={styles.placeholder_container} />))
 								) : (
 									(INVOICE_DATA_MAPPING || [{}]).map((items) => {
 										const { id, label } = items;
