@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import { Layout } from '@cogoport/surface-modules';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { useMemo, useEffect, useState } from 'react';
 
 import useCreateShipmentFortigoTripDetail from '../../../../../../../../hooks/useCreateShipmentFortigoTripDetail';
@@ -13,8 +14,7 @@ import getFieldLikeControls from './utils/getFieldLikeControls';
 import { getFormatPrefillValues } from './utils/getFormatPrefillValues';
 
 function FillCustomerPortalData({
-	show = false,
-	closeModal = () => {},
+	setShowModal = () => {},
 	shipmentData = {},
 	invoice = {},
 }) {
@@ -62,7 +62,7 @@ function FillCustomerPortalData({
 
 	return (
 		<Modal
-			show={show}
+			show
 			closeOnOuterClick={false}
 			showCloseIcon={false}
 			size="xl"
@@ -76,8 +76,10 @@ function FillCustomerPortalData({
 				/>
 			</Modal.Body>
 			<Modal.Footer>
-				<Button onClick={closeModal} themeType="secondary" disabled={loading}>Cancel</Button>
-				<Button onClick={handleSubmit(onSubmit)} disabled={loading}>Submit</Button>
+				<FooterButtonWrapper>
+					<Button onClick={() => setShowModal(false)} themeType="secondary" disabled={loading}>Cancel</Button>
+					<Button onClick={handleSubmit(onSubmit)} disabled={loading}>Submit</Button>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);
