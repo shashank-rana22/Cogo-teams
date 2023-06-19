@@ -19,7 +19,7 @@ const chakravyuh = {
 			service_name : 'fcl_freight_rate',
 		},
 		{
-			api          : 'list_fcl_freight_rate_deviation',
+			api          : 'list_fcl_freight_rate_deviations',
 			access_type  : 'private',
 			feature      : 'feedbacks',
 			service_name : 'fcl_freight_rate',

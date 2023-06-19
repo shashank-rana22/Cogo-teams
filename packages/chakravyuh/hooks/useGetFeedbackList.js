@@ -17,7 +17,7 @@ const useGetFeedbackList = ({ filters, setFilters }) => {
 	});
 
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'list_fcl_freight_rate_deviation',
+		url    : 'list_fcl_freight_rate_deviations',
 		method : 'GET',
 		params : {
 			filters: FINAL_FILTERS,
