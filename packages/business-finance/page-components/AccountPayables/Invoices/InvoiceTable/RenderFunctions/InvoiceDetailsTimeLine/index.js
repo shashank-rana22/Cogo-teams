@@ -8,7 +8,7 @@ import {
 } from '@cogoport/icons-react';
 import React, { useState } from 'react';
 
-import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice';
+import getFormattedPrice from '../../../../../commons/utils/getFormattedPrice.ts';
 import { DETAILS, INVOICE_DATA_MAPPING } from '../../../Constants';
 import useInvoiceDetails from '../../../hooks/useGetInvoiceTimeline';
 
@@ -17,6 +17,8 @@ import InvoiceTimeLine from './InvoiceTimeLine';
 import Profitability from './Profitability';
 import styles from './styles.module.css';
 import SupplierInformation from './SupplierInformation';
+
+const THREE = 3;
 
 const geo = geoConstants();
 function InvoiceDetailsTimeLine({ item }) {
@@ -61,20 +63,6 @@ function InvoiceDetailsTimeLine({ item }) {
 		}));
 		if (key === '4') getTimeLineDetailsApi();
 	};
-
-	const INVOICE_DATA_MAPPING = [
-		{ id: '1', label: 'Profitability' },
-		{ id: '2', label: 'Supplier Information' },
-		{ id: '3', label: 'Customer Information' },
-		{ id: '4', label: 'Invoice Timeline' },
-	];
-
-	const DETAILS = [
-		{ label: 'Overall Expense', key: 'overallExpense' },
-		{ label: 'Total Payables', key: 'totalPayables' },
-		{ label: 'Overall Income', key: 'overallIncome' },
-		{ label: 'Total Receivable', key: 'totalReceivable' },
-	];
 
 	const { invoiceNumber = '', jobNumber = '', billNumber = '', sid = '', objectNumber = '' } = item || {};
 
@@ -158,7 +146,12 @@ function InvoiceDetailsTimeLine({ item }) {
 									</div>
 								)}
 								{invoiceDetailsLoading ? (
-									[...Array(3).keys()].map((key) => (<Placeholder key={key} className={styles.placeholder_container} />))
+									[...Array(THREE).keys()].map((key) => (
+										<Placeholder
+											key={key}
+											className={styles.placeholder_container}
+										/>
+									))
 								) : (
 									(INVOICE_DATA_MAPPING || [{}]).map((items) => {
 										const { id, label } = items;
