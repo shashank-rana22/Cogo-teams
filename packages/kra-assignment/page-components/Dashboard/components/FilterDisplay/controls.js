@@ -1,11 +1,12 @@
 const controls = [
 	{
-		name        : 'employee_id',
+		name        : 'employee_ids',
 		label       : 'Employee',
 		placeholder : 'Select',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_employees',
 		valueKey    : 'id',
+		multiple    : true,
 		params      : {
 			filters: {
 				status               : 'active',
@@ -19,7 +20,6 @@ const controls = [
 		asyncKey    : 'list_roles',
 		label       : 'Roles',
 		placeholder : 'Select',
-		multiple    : true,
 		// onChange    : (_, e) => {
 		// 	setSelectedValue((pv) => ({
 		// 		...pv,
@@ -36,12 +36,11 @@ const controls = [
 		},
 	},
 	{
-		name        : 'tribe_ids',
+		name        : 'tribe_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_tribes',
 		label       : 'Tribes',
 		placeholder : 'Select',
-		multiple    : true,
 		params      : {
 			filters: {
 				status               : 'active',
@@ -53,12 +52,11 @@ const controls = [
 	},
 
 	{
-		name        : 'squad_ids',
+		name        : 'squad_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_squads',
 		label       : 'Squads',
 		placeholder : 'Select',
-		multiple    : true,
 		params      : {
 			filters: {
 				status               : 'active',
@@ -70,12 +68,11 @@ const controls = [
 	},
 
 	{
-		name        : 'chapter_ids',
+		name        : 'chapter_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_chapters',
 		label       : 'Chapters',
 		placeholder : 'Select',
-		multiple    : true,
 		params      : {
 			filters: {
 				status               : 'active',
@@ -87,12 +84,11 @@ const controls = [
 	},
 
 	{
-		name        : 'sub_chapter_ids',
+		name        : 'sub_chapter_id',
 		type        : 'asyncSelect',
 		asyncKey    : 'list_sub_chapters',
 		label       : 'Sub chapter',
 		placeholder : 'Select',
-		multiple    : true,
 		params      : {
 			filters: {
 				status               : 'active',
