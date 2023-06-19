@@ -1,6 +1,6 @@
 import { useDebounceQuery } from '@cogoport/forms';
 import { useRequestBf } from '@cogoport/request';
-import { useEffect } from 'react';
+import { useCallback, useEffect } from 'react';
 
 function useListDunningCycle({ globalFilters, setGlobalFilters }) {
 	const { search, page, service, cycleStatus, dunningCycleType } = globalFilters || {};
@@ -24,26 +24,26 @@ function useListDunningCycle({ globalFilters, setGlobalFilters }) {
 		setGlobalFilters((prev) => ({ ...prev, page: 1 }));
 	}, [search, debounceQuery, setGlobalFilters]);
 
-	const getDunningList = async () => {
+	const getDunningList = useCallback((async () => {
 		try {
-			 await trigger({
+			await trigger({
 				params: {
-				 		query            : query || undefined,
+					query            : query || undefined,
 					cycleStatus      : cycleStatus || undefined,
 					dunningCycleType : dunningCycleType || undefined,
 					service          : service || undefined,
 					pageIndex        : page,
 				},
-			 });
+			});
 		} catch (err) {
 			console.log('err-', err);
 		}
-	};
+	}), [cycleStatus, dunningCycleType, page, query, service, trigger]);
 
 	useEffect(() => {
 		getDunningList();
 	}, [query, page, service, cycleStatus,
-		 dunningCycleType]);
+		dunningCycleType, getDunningList]);
 
 	return {
 		data,
