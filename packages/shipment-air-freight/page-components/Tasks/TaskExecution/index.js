@@ -1,3 +1,5 @@
+import useListShipmentServices from '../../../hooks/useListShipmentServices';
+
 import AdditionsServicesTasks from './AdditionalServicesTasks';
 import ExecuteTask from './ExecuteTask';
 import ReviewDoc from './ReviewDoc';
@@ -10,11 +12,16 @@ function TaskExecution({
 	selectedMail = [],
 	setSelectedMail = () => {},
 	shipment_data = {},
-	servicesList = [],
 	primary_service = {},
 	getShipmentTimeline = () => {},
 	getShipment = () => {},
 }) {
+	const services = useListShipmentServices({
+		defaultFilters: {
+			shipment_id: shipment_data?.id,
+		},
+	});
+
 	if (task?.task_type === 'amend_document') {
 		return (
 			<UploadAmendDoc
@@ -56,7 +63,7 @@ function TaskExecution({
 					taskListRefetch={taskListRefetch}
 					selectedMail={selectedMail}
 					setSelectedMail={setSelectedMail}
-					services={servicesList}
+					services={services?.servicesList}
 					shipment_data={shipment_data}
 					primary_service={primary_service}
 					getShipmentTimeline={getShipmentTimeline}

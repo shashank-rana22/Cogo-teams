@@ -146,7 +146,6 @@ function TaskView() {
 								selectedMail={selectedMail}
 								setSelectedMail={setSelectedMail}
 								shipment_data={shipment_data}
-								servicesList={servicesList}
 								primary_service={primary_service}
 								getShipment={getShipment}
 								getShipmentTimeline={getShipmentTimeline}

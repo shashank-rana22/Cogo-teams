@@ -13,7 +13,7 @@ function Info() {
 					<div className={styles.content_div}>
 						You can enter customized line item name/code according to
 						customer&apos;s need.
-						{' '}
+						&nbsp;
 					</div>
 				)}
 				animation="scale"

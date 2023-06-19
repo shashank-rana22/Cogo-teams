@@ -27,8 +27,8 @@ function EditRate({
 	const [errors, setError] = useState({});
 
 	const [airInput, setAirInput] = useState({
-		airline_name          : '',
-		service_provider_name : '',
+		airline_id          : '',
+		service_provider_id : '',
 	});
 
 	const [localAirInput, setLocalAirInput] = useState({
@@ -55,7 +55,7 @@ function EditRate({
 
 	const otherControls = getOtherControls(task?.service_type, trade_type);
 
-	const formattedRateVal = formattedRate?.primary_service;
+	const formattedRateVal = formattedRate?.[formattedRate?.primary_service?.id];
 
 	const requiredRawControls = getControls({
 		service_type: task?.service_type,
@@ -64,17 +64,17 @@ function EditRate({
 	});
 
 	const handleAirChange = (obj, item) => {
-		let { airline_name, service_provider_name } = airInput;
+		let { airline_id, service_provider_id } = airInput;
 		if (item?.operator_type) {
-			airline_name = item?.business_name;
+			airline_id = obj;
 		}
 		if (item?.trade_name) {
-			service_provider_name = item?.business_name;
+			service_provider_id = obj;
 		}
 		setAirInput((prev) => ({
 			...prev,
-			airline_name,
-			service_provider_name,
+			airline_id,
+			service_provider_id,
 		}));
 	};
 
@@ -151,45 +151,46 @@ function EditRate({
 		trade_type,
 		selectedCard,
 	});
+
 	useEffect(() => {
-		let airlineName;
-		let localAirlineName;
-		let serviceProviderName;
-		let localServiceProviderName;
+		let airlineId;
+		let localAirlineId;
+		let serviceProviderId;
+		let localServiceProviderId;
 		if (!isEmpty(formattedRateVal)) {
-			airlineName = formattedRateVal?.airline?.business_name;
-			serviceProviderName = formattedRateVal?.service_provider?.business_name;
-			localAirlineName = formattedRateVal?.airline?.business_name;
-			localServiceProviderName = formattedRateVal?.service_provider?.business_name;
+			airlineId = formattedRateVal?.airline_id;
+			serviceProviderId = formattedRateVal?.service_provider_id;
+			localAirlineId = formattedRateVal?.airline_id;
+			localServiceProviderId = formattedRateVal?.service_provider_id;
 		} else if (!isEmpty(servicesList)) {
 			(servicesList || []).forEach((service) => {
 				if (service?.service_type === 'air_freight_service') {
-					airlineName = service?.airline?.business_name;
-					serviceProviderName = service?.service_provider?.business_name;
+					airlineId = service?.airline?.id;
+					serviceProviderId = service?.service_provider?.id;
 				}
 
 				if (service?.service_type === 'subsidiary_service') {
-					serviceProviderName = service?.service_provider?.business_name;
+					serviceProviderId = service?.service_provider?.id;
 				}
 
 				if (service?.service_type === 'air_freight_local_service') {
-					localAirlineName = service?.airline?.business_name;
-					localServiceProviderName = service?.service_provider?.business_name;
+					localAirlineId = service?.airline?.id;
+					localServiceProviderId = service?.service_provider?.id;
 				}
 			});
 		} else {
-			airlineName = mainAirFreight?.airline?.business_name;
-			serviceProviderName = mainAirFreight?.service_provider?.business_name;
-			localAirlineName = mainLocalAirFreight?.airline?.business_name;
-			localServiceProviderName = mainLocalAirFreight?.service_provider?.business_name;
+			airlineId = mainAirFreight?.airline_id;
+			serviceProviderId = mainAirFreight?.service_provider_id;
+			localAirlineId = mainLocalAirFreight?.airline_id;
+			localServiceProviderId = mainLocalAirFreight?.service_provider_id;
 		}
 		setAirInput({
-			airline_name          : airlineName,
-			service_provider_name : serviceProviderName,
+			airline_id          : airlineId,
+			service_provider_id : serviceProviderId,
 		});
 		setLocalAirInput({
-			airline_name          : localAirlineName,
-			service_provider_name : localServiceProviderName,
+			airline_id          : localAirlineId,
+			service_provider_id : localServiceProviderId,
 		});
 	// eslint-disable-next-line react-hooks/exhaustive-deps
 	}, []);

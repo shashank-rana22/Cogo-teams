@@ -65,7 +65,7 @@ function useStepExecution({
 			task.task === 'update_airway_bill_number'
 			&& formValues.booking_ref_status === 'placed'
 			&& mainAirFreight?.service_provider_id === geo.uuid.freight_force_org_id
-			&& !getApisData?.list_awb_inventories?.[GLOBAL_CONSTANTS.zeroth_index]?.awb_number
+			&& getApisData?.get_awb_inventory_data?.data?.[GLOBAL_CONSTANTS.zeroth_index]?.awb_number
 			&& !getApisData?.list_platform_config_constants?.[GLOBAL_CONSTANTS.zeroth_index]
 				?.platform_config_constant_mappings[GLOBAL_CONSTANTS.zeroth_index]?.value[shipment_data?.airline_id]
 		) {
