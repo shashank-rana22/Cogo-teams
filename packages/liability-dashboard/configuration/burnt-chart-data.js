@@ -23,7 +23,7 @@ const burntChartData = (debitData = {}) => {
 		},
 	];
 
-	return { burntData };
+	return burntData;
 };
 
 export default burntChartData;

@@ -15,9 +15,9 @@ function PieChart({
 	debitData = {},
 	activeStatsCard = '',
 }) {
-	const { liabilityData } = liabilityChartData(creditData);
+	const liabilityData = liabilityChartData(creditData);
 
-	const { burntData } = burntChartData(debitData);
+	const burntData = burntChartData(debitData);
 
 	const checkActiveData = activeStatsCard === 'liability_point_value' ? liabilityData : burntData;
 

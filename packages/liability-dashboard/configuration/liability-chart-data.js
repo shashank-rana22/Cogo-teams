@@ -28,7 +28,7 @@ const liabilityChartData = (creditData = {}) => {
 		},
 	];
 
-	return { liabilityData };
+	return liabilityData;
 };
 
 export default liabilityChartData;
