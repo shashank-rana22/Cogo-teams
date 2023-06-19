@@ -24,7 +24,7 @@ interface FormData {
 	cogoEntityId?:string,
 	filters?:{
 		dueOutstandingCurrency?:string,
-		creditControllerIds?:string[],
+		organizationStakeholderIds?:string[],
 		serviceTypes?:string[],
 	}
 }
@@ -39,7 +39,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	const {
 		triggerType, frequency, weekDay,
 		monthDay, timezone, scheduledHour, scheduledMinute,
-		isAllCreditControllers, creditController, oneTimeDate, scheduleRule,
+		isAllCreditControllers, oneTimeDate, scheduleRule,
 		cogoEntityId,
 		filters,
 	} = formData || {};
@@ -79,10 +79,10 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 	};
 
 	useEffect(() => {
-		if (isAllCreditControllers && creditController) {
+		if (isAllCreditControllers) {
 			setFormData((prev) => ({ ...prev, creditController: null }));
 		}
-	}, [creditController, isAllCreditControllers, setFormData]);
+	}, [isAllCreditControllers, setFormData]);
 
 	useEffect(() => {
 		// pre-filling all the details in case of updating
@@ -102,15 +102,15 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 					? String(dayOfMonth) : undefined,
 				oneTimeDate            : stringDate ? formattedOneTimeDate : undefined,
 				dueOutstandingCurrency : filters?.dueOutstandingCurrency || undefined,
-			    isAllCreditControllers : !(filters?.creditControllerIds?.length > 0),
-				creditController       : filters?.creditControllerIds || undefined,
+			    isAllCreditControllers : !(filters?.organizationStakeholderIds?.length > 0),
+				creditController       : filters?.organizationStakeholderIds || undefined,
 				serviceType            : filters?.serviceTypes || undefined,
 			}));
 		}
 	}, [dayOfMonth, dunningExecutionFrequency, scheduleTime, scheduleTimeZone,
 		week, isEditMode, setFormData, oneTimeDate,
 		filters?.dueOutstandingCurrency,
-		filters?.creditControllerIds,
+		filters?.organizationStakeholderIds,
 		filters?.serviceTypes,
 		oneTimeDateSchedule,
 	]);

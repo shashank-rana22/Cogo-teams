@@ -26,7 +26,7 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			span    : 6,
 			groupBy : [
 				{
-					label       : 'Enter Cycle Name',
+					label       : 'Enter Cycle Name (5 letters minimum)',
 					name        : 'cycleName',
 					type        : 'input',
 					prefix      : null,

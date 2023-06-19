@@ -12,6 +12,7 @@ import { listConfig } from './listConfig';
 import RenderActions from './RenderActions';
 import RenderViewMore from './RenderViewMore';
 import ShowMore from './ShowMore';
+import styles from './styles.module.css';
 
 function CampaignManagement() {
 	const [globalFilters, setGlobalFilters] = useState({
@@ -28,6 +29,14 @@ function CampaignManagement() {
 	const { data, loading, getDunningList } = useListDunningCycle({ globalFilters, setGlobalFilters });
 
 	const showDropDown = (e) => <ShowMore dropdown={dropdown} rowId={e?.id} />;
+
+	const STATUS_COLOR_MAPPING = {
+		SCHEDULED   : '#CFEAED',
+		CANCELLED   : '#F7CDCD',
+		COMPLETED   : '#DDEBC0',
+		IN_PROGRESS : '#FEF199',
+		FAILED      : '#F7CDCD',
+	};
 
 	const functions = () => ({
 		renderFrequency: ({ scheduleRule }) => (
@@ -67,6 +76,15 @@ function CampaignManagement() {
 				setDropdown={setDropdown}
 			/>
 		),
+		renderStatus: ({ status }) => (
+			<div
+				className={styles.status}
+				style={{ background: STATUS_COLOR_MAPPING[status] }}
+			>
+				{status}
+
+			</div>
+		),
 	});
 
 	return (
@@ -79,7 +97,7 @@ function CampaignManagement() {
 				/>
 			</div>
 
-			<div style={{ background: 'white' }}>
+			<div className={styles.custom_list}>
 				<CustomList
 					config={listConfig()}
 					itemData={data}

@@ -7,7 +7,17 @@ import useUpdateCycle from '../hooks/useUpdateCycle';
 
 import styles from './styles.module.css';
 
-function ActionModal({ actionModal, setActionModal, getDunningList }) {
+interface Props {
+	actionModal?: {
+		rowData?:{ id?:string, name?:string },
+		action?:string,
+		visible?:boolean,
+	},
+	setActionModal?:Function,
+	getDunningList?:Function,
+}
+
+function ActionModal({ actionModal, setActionModal, getDunningList }:Props) {
 	const [formData, setFormData] = useState({});
 
 	const { updateCycle, loading } = useUpdateCycle({ getDunningList, setActionModal });

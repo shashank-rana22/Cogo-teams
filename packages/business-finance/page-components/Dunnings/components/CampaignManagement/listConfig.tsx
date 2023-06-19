@@ -28,41 +28,47 @@ export const listConfig = () => ({
 		{
 			label : 'Name',
 			key   : 'name',
-			span  : 1.6,
+			span  : 1.5,
 		},
 		{
 			label : 'Type',
 			key   : 'dunningCycleType',
-			span  : 1.6,
+			span  : 1.5,
 		},
 		{
 			label : 'Frequency',
 			key   : 'Frequency',
 			func  : 'renderFrequency',
-			span  : 1.6,
+			span  : 1.5,
 		},
 		{
 			label : 'Created On',
 			key   : 'CreatedOn',
 			func  : 'renderCreatedOn',
-			span  : 1.6,
+			span  : 1.5,
 		},
 
 		{
 			label : 'Last Edited On',
 			key   : 'LastEditedOn',
 			func  : 'renderUpdatedAt',
-			span  : 1.6,
+			span  : 1.5,
+		},
+		{
+			label : 'Status',
+			key   : 'status',
+			func  : 'renderStatus',
+			span  : 1.5,
 		},
 		{
 			label : 'Actions',
 			func  : 'renderActions',
-			span  : 1.6,
+			span  : 1.5,
 		},
 		{
 			key  : '',
 			func : 'viewMore',
-			span : 1.6,
+			span : 1.5,
 		},
 	],
 });

@@ -1,4 +1,4 @@
-import { Button, Modal } from '@cogoport/components';
+import { Button, Modal, Toast } from '@cogoport/components';
 import React, { useState } from 'react';
 
 import useCreateDunningCycle from '../hooks/useCreateDunningCycle';
@@ -42,6 +42,13 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 		setShowCreateForm(false);
 	};
 
+	const {
+		cycleName,
+		cycleType, cogoEntityId,
+		serviceType, ageingBucket,
+		totalDueOutstanding,
+	} = formData || {};
+
 	const renderTitle = () => (
 		<div className={styles.title}>
 			Create New Cycle -
@@ -72,6 +79,15 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 	};
 
 	const handleClick = () => {
+		if (step === 1) {
+			// putting validations
+			const requiredFields = [cycleName, cycleType,
+				cogoEntityId, serviceType, ageingBucket, totalDueOutstanding];
+			if (requiredFields.some((field) => !field || (Array.isArray(field) && field.length === 0))) {
+				Toast.error('Please fill all the details to proceed');
+				return;
+			}
+		}
 		setStep(step + STEP_CHANGE);
 	};
 
@@ -91,7 +107,9 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 			>
 				<Modal.Header title={renderTitle()} />
 
-				<Modal.Body>
+				<Modal.Body
+					style={{ height: '500px' }}
+				>
 					{STEPS_MAPPING[step]}
 				</Modal.Body>
 

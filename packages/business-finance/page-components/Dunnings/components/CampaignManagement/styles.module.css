@@ -1,0 +1,13 @@
+.custom_list{
+  background: white;
+}
+
+.status{
+  padding: 0px 8px;
+  border-radius: 8px;
+  font-size: 10px;
+  color: black;
+  height: 20px;
+  display: flex;
+  align-items: center;
+}

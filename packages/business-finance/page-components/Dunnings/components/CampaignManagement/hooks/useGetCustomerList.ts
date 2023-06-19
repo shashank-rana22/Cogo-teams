@@ -31,14 +31,14 @@ const useGetCustomerList = ({ formData, search, page, setPage }) => {
 		try {
 			 await trigger({
 				params: {
-					query                  : search || undefined,
-					cogoEntityId           : JSON.parse(cogoEntityDetails || '{}')?.id,
-					serviceTypes           : serviceType,
-					creditControllerIds    : creditController,
+					query                      : search || undefined,
+					cogoEntityId               : JSON.parse(cogoEntityDetails || '{}')?.id,
+					serviceTypes               : serviceType,
+					organizationStakeholderIds : creditController,
 					ageingBucket,
 					totalDueOutstanding,
-					dueOutstandingCurrency : JSON.parse(cogoEntityDetails || '{}')?.currency,
-					pageIndex              : page,
+					dueOutstandingCurrency     : JSON.parse(cogoEntityDetails || '{}')?.currency,
+					pageIndex                  : page,
 				},
 			 });
 		} catch (err) {
