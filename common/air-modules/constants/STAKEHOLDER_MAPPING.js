@@ -8,6 +8,8 @@ const STAKEHOLDER_MAPPING = {
 	costbooking_ops           : 'Cost Booking Ops',
 	origin_booking_agent      : 'OKAM',
 	destination_booking_agent : 'DKAM',
+	credit_controller         : 'Credit Controller',
+	ground_ops                : 'Ground Ops',
 };
 
 export const STAKEHOLDER_CAN_BE_ADDED = {
@@ -20,6 +22,8 @@ export const STAKEHOLDER_CAN_BE_ADDED = {
 	costbooking_ops           : 'Cost Booking Ops',
 	origin_booking_agent      : 'OKAM',
 	destination_booking_agent : 'DKAM',
+	credit_controller         : 'Credit Controller',
+	ground_ops                : 'Ground Ops',
 };
 
 export const SERVICE_LEVEL_STATKEHOLDERS = [
