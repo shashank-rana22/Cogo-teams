@@ -9,9 +9,7 @@ import SignedUpColumns from '../SignedUpColumns';
 
 import styles from './styles.module.css';
 
-const LEVEL_DEFAULT_VALUE = 0;
-
-function TableColumns({
+function tableColumns({
 	listType = '',
 	setShowOptions = () => {},
 	setShowActivityModal = () => {},
@@ -43,15 +41,6 @@ function TableColumns({
 				</div>
 			),
 			conditions: ['users'],
-		},
-		{
-			Header   : 'LEVELS',
-			accessor : (item = {}) => (
-				<div className={styles.user_name}>
-					{item?.level || LEVEL_DEFAULT_VALUE}
-				</div>
-			),
-			conditions: ['network'],
 		},
 		{
 			Header   : 'USERS',
@@ -124,4 +113,4 @@ function TableColumns({
 	return columns.filter((itm) => itm?.conditions.includes(listType));
 }
 
-export default TableColumns;
+export default tableColumns;

@@ -1,6 +1,15 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
+const getParam = ({ startDate, endDate, activityType, rewardType, type }) => ({
+	start_date    : startDate || undefined,
+	end_date      : endDate || undefined,
+	business_type : activityType !== 'total' ? activityType : undefined,
+	reward_type   : rewardType !== 'total' ? rewardType : undefined,
+	required_data : type,
+
+});
+
 const useGetReferralBusinessAnalytics = ({ selectedDate = {}, businessFilterType = {}, type }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
@@ -12,17 +21,10 @@ const useGetReferralBusinessAnalytics = ({ selectedDate = {}, businessFilterType
 	const userAnalyticStats = useCallback(() => {
 		try {
 			trigger({
-				params: {
-					start_date    : startDate || undefined,
-					end_date      : endDate || undefined,
-					business_type : activityType !== 'total' ? activityType : undefined,
-					reward_type   : rewardType !== 'total' ? rewardType : undefined,
-					required_data : type,
-
-				},
+				params: getParam({ startDate, endDate, activityType, rewardType, type }),
 			});
 		} catch (error) {
-			console.log('error', error);
+			console.log(error);
 		}
 	}, [trigger, startDate, endDate, activityType, rewardType, type]);
 

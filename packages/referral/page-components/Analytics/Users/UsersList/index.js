@@ -1,6 +1,6 @@
 import { Table } from '@cogoport/components';
 
-import TableColumns from '../List/TableColumn';
+import tableColumns from '../List/TableColumn';
 
 import styles from './styles.module.css';
 
@@ -14,7 +14,7 @@ function UserList({
 		<div className={styles.container}>
 			<div className={styles.title}>Top 10 Users</div>
 			<Table
-				columns={TableColumns({ listType: 'users', setShowOptions, setShowActivityModal })}
+				columns={tableColumns({ listType: 'users', setShowOptions, setShowActivityModal })}
 				data={data}
 				loadingRowsCount={10}
 				loading={loading}
