@@ -1,6 +1,6 @@
 import { ButtonIcon, Pagination, Table, Placeholder } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { format, pascalCase } from '@cogoport/utils';
+import { format, isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
@@ -23,18 +23,13 @@ function ExpiringRates({ setIndex, value, filter }) {
 	const { page_limit = 0 } = data;
 
 	const listData = list.map((item) => ({
-		originPort      : !(service === 'air_freight') ? item?.origin_port?.name : item?.origin_airport?.name,
-		destinationPort : !(service === 'air_freight') ? item?.destination_port?.name : item?.destination_airport?.name,
-		commodity       : pascalCase(item.commodity),
-		containerType   : item.container_type,
-		stops           : !(service === 'air_freight') ? item?.validities[0]?.number_of_stops || 0 : 0,
-		validity        : `${format(!(service === 'air_freight')
-			? item.validities[0]?.validity_start
-			: item.validity_start, 'dd MMMM')
-		} -
-			${format(!(service === 'air_freight')
-			? item.validities[0].validity_end
-			: item.validity_end, 'dd MMMM')}`,
+		originPort      : item?.origin_port?.name || item?.origin_airport?.name,
+		destinationPort : item?.destination_port?.name || item?.destination_airport?.name,
+		commodity       : startCase(item.commodity),
+		containerType   : startCase(item.container_type),
+		stops           : item?.validities[0]?.number_of_stops || 0,
+		validity        : `${format(item.validities[0]?.validity_start || item.validity_start, 'dd MMMM')} -
+							${format(item.validities[0].validity_end || item.validity_end, 'dd MMMM')}`,
 		serviceProvider: item?.service_provider?.short_name,
 	}));
 
@@ -57,9 +52,9 @@ function ExpiringRates({ setIndex, value, filter }) {
 		],
 	};
 
-	const onPageChange = (pageNumber) => {
-		setCurrentPage(pageNumber);
-	};
+	if (loading) {
+		return <Placeholder className={styles.loader} />;
+	}
 
 	return (
 		<>
@@ -77,7 +72,7 @@ function ExpiringRates({ setIndex, value, filter }) {
 								style={{ backgroundColor: 'inherit' }}
 							/>
 						</div>
-						<div style={{ color: '#F37166', fontWeight: '700' }}>{!isNaN(value)?value:0}</div>
+						<div style={{ color: '#F37166', fontWeight: '700' }}>{!isNaN(value) ? value : 0}</div>
 						<div>
 							rates are expiring today
 						</div>
@@ -90,9 +85,7 @@ function ExpiringRates({ setIndex, value, filter }) {
 					setExtendExpiryShow={setExtendExpiryShow}
 					setSendEmailShow={setSendEmailShow}
 				/>
-				{loading && <Placeholder className={styles.loader} />}
-				{!loading
-				&& (listData.length ? (
+				{!isEmpty(listData) ? (
 					<div className={styles.table}>
 						<Table columns={column[service] || column.lcl_freight} data={listData || []} />
 						<div className={styles.pagination}>
@@ -101,12 +94,11 @@ function ExpiringRates({ setIndex, value, filter }) {
 								currentPage={currentPage}
 								totalItems={total_count}
 								pageSize={page_limit}
-								onPageChange={onPageChange}
+								onPageChange={(pageNumber) => { setCurrentPage(pageNumber); }}
 							/>
-
 						</div>
 					</div>
-				) : <EmptyState />)}
+				) : <EmptyState />}
 			</div>
 		</>
 

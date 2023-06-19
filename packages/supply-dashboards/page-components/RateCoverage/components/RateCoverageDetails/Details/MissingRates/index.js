@@ -1,6 +1,6 @@
 import { Placeholder, ButtonIcon, Pagination, Table } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { pascalCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
@@ -22,14 +22,10 @@ function MissingRates({ setIndex, value, filter }) {
 		destinationPort : (filter.service === 'air_freight')
 			? item?.destination_airport?.name
 			: item?.destination_port?.name,
-		commodity     : pascalCase(item.commodity),
-		containerType : item.container_type,
+		commodity     : startCase(item.commodity),
+		containerType : startCase(item.container_type),
 		containerSize : item.container_size,
 	}));
-
-	const onPageChange = (pageNumber) => {
-		setCurrentPage(pageNumber);
-	};
 
 	const column = {
 		lcl_freight: [
@@ -41,9 +37,8 @@ function MissingRates({ setIndex, value, filter }) {
 				accessor : () => (
 					<button
 						className={styles.add_rate}
-						onClick={
-						() => setShow(true)
-				}>
+						onClick={() => setShow(true)}
+					>
 						Add Rate
 
 					</button>
@@ -54,24 +49,26 @@ function MissingRates({ setIndex, value, filter }) {
 			{ Header: 'ORIGIN PORT', accessor: 'originPort', id: 'origin_port' },
 			{ Header: 'DESTINATION PORT', accessor: 'destinationPort', id: 'destination_port' },
 			{ Header: 'COMMODITY', accessor: 'commodity', id: 'commodity' },
+			{ Header: 'CONTAINER TYPE', accessor: 'containerType', id: 'container_type' },
+			{ Header: 'CONTAINER SIZE', accessor: 'containerSize', id: 'container_size' },
 			{
 				Header   : ' ',
 				accessor : () => (
 					<button
 						className={styles.add_rate}
-						onClick={
-						() => setShow(true)
-				}>
+						onClick={() => setShow(true)}
+					>
 						Add Rate
-
 					</button>
 				),
 			},
-			{ Header: 'CONTAINER TYPE', accessor: 'containerType', id: 'container_type' },
-			{ Header: 'CONTAINER SIZE', accessor: 'containerSize', id: 'container_size' },
 		],
 
 	};
+
+	if (loading) {
+		return <Placeholder className={styles.loader} />;
+	}
 
 	return (
 		<>
@@ -88,7 +85,7 @@ function MissingRates({ setIndex, value, filter }) {
 								style={{ backgroundColor: 'inherit' }}
 							/>
 						</div>
-						<div style={{ color: '#828282', fontWeight: '700' }}>{!isNaN(value)?value:0}</div>
+						<div style={{ color: '#828282', fontWeight: '700' }}>{!isNaN(value) ? value : 0}</div>
 						<div>
 							rates are missing today
 						</div>
@@ -98,9 +95,7 @@ function MissingRates({ setIndex, value, filter }) {
 					</div>
 				</div>
 
-				{loading && <Placeholder className={styles.loader} />}
-				{!loading
-				&& (list.length > 0 ? (
+				{!isEmpty(list) ? (
 					<div className={styles.table}>
 						<Table columns={column[filter.service] || column.lcl_freight} data={listData || []} />
 						<div className={styles.pagination}>
@@ -109,12 +104,12 @@ function MissingRates({ setIndex, value, filter }) {
 								currentPage={currentPage}
 								totalItems={total_count}
 								pageSize={page_limit}
-								onPageChange={onPageChange}
+								onPageChange={(pageNumber) => { setCurrentPage(pageNumber); }}
 							/>
 						</div>
 
 					</div>
-				) : <EmptyState />)}
+				) : <EmptyState />}
 
 			</div>
 		</>

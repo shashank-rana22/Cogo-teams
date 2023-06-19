@@ -1,6 +1,6 @@
 import { Placeholder, ButtonIcon, Pagination, Table } from '@cogoport/components';
 import { IcMArrowBack } from '@cogoport/icons-react';
-import { pascalCase } from '@cogoport/utils';
+import { isEmpty, startCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../../../common/EmptyState';
@@ -34,19 +34,17 @@ function DislikeRates({ setIndex, value, filter }) {
 	const { total_count = 0 } = data;
 
 	const listData = list.map((item) => ({
-		originPort      : filter.service === 'air_freight' ? item.origin_airport?.name : item.origin_port?.name,
-		destinationPort : filter.service === 'air_freight'
-			? item.destination_airport?.name
-			: item.destination_port?.name,
-		commodity     : pascalCase(item.commodity),
-		containerType : item.container_type,
-		containerSize : item.container_size,
-		noOfRates     : 3,
+		originPort      : item.origin_airport?.name || item.origin_port?.name,
+		destinationPort : item.destination_airport?.name || item.destination_port?.name,
+		commodity       : startCase(item.commodity),
+		containerType   : startCase(item.container_type),
+		containerSize   : item.container_size,
+		noOfRates       : 3,
 	}));
 
-	const onPageChange = (pageNumber) => {
-		setCurrentPage(pageNumber);
-	};
+	if (loading) {
+		return <Placeholder className={styles.loader} />;
+	}
 
 	return (
 		<>
@@ -63,7 +61,7 @@ function DislikeRates({ setIndex, value, filter }) {
 								style={{ backgroundColor: 'inherit' }}
 							/>
 						</div>
-						<div style={{ color: '#7278AD', fontWeight: '700' }}>{!isNaN(value)?value:0}</div>
+						<div style={{ color: '#7278AD', fontWeight: '700' }}>{!isNaN(value) ? value : 0}</div>
 						<div>
 							Dislike rate density as per today
 						</div>
@@ -72,22 +70,20 @@ function DislikeRates({ setIndex, value, filter }) {
 						Download Dislike Rate Density Results
 					</div>
 				</div>
-				{loading && <Placeholder className={styles.loader} />}
-				{!loading && (
-					list.length > 0 ? (
-						<div className={styles.table}>
-							<Table columns={column[filter.service] || column.lcl_freight} data={listData} />
-							<div className={styles.pagination}>
-								<Pagination
-									type="table"
-									currentPage={currentPage}
-									totalItems={total_count}
-									pageSize={page_limit}
-									onPageChange={onPageChange}
-								/>
-							</div>
+				{!isEmpty(list) ? (
+					<div className={styles.table}>
+						<Table columns={column[filter.service] || column.lcl_freight} data={listData} />
+						<div className={styles.pagination}>
+							<Pagination
+								type="table"
+								currentPage={currentPage}
+								totalItems={total_count}
+								pageSize={page_limit}
+								onPageChange={(pageNumber) => { setCurrentPage(pageNumber); }}
+							/>
 						</div>
-					) : <EmptyState />)}
+					</div>
+				) : <EmptyState />}
 			</div>
 
 		</>

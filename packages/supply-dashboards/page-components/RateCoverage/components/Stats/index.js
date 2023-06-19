@@ -6,7 +6,6 @@ function Stats({ data }) {
 		<div className={styles.parent}>
 			<div className={styles.left}>
 				<div className={styles.heading}>Rate Coverage</div>
-
 				<div>
 					<div className={styles.blue_color_stat_number}>
 						{data?.marketplace_rates_count}

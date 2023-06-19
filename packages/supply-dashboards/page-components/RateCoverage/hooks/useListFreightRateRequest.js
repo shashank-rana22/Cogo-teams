@@ -7,10 +7,6 @@ const api = {
 	air_freight : 'list_air_freight_rate_requests',
 };
 
-const keyFilter = (filter) => Object.fromEntries(
-	Object.entries(filter).filter(([, value]) => value !== ''),
-);
-
 const useListFreightRateRequest = ({ filter, currentPage }) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : api[filter.service],
@@ -18,7 +14,9 @@ const useListFreightRateRequest = ({ filter, currentPage }) => {
 	}, { manual: true });
 
 	const listFreightRateRequest = useCallback(async () => {
-		const updateFilter = keyFilter(filter);
+		const finalFilter = Object.fromEntries(
+			Object.entries(filter).filter(([, value]) => value !== ''),
+		);
 		try {
 			await trigger({
 				params: {
@@ -26,13 +24,13 @@ const useListFreightRateRequest = ({ filter, currentPage }) => {
 						validity_start_greater_than : '2023-01-25T00:00:00+05:30',
 						validity_end_less_than      : '2023-04-24T12:51:22+05:30',
 						status                      : 'active',
-						...updateFilter,
+						...finalFilter,
 					},
 					page: currentPage,
 				},
 			});
-		} catch (e) {
-			// console.log(e);
+		} catch (err) {
+			console.log(err);
 		}
 	}, [currentPage, filter, trigger]);
 

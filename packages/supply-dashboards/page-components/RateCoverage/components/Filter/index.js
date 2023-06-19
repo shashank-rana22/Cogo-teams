@@ -6,9 +6,6 @@ import Controls from '../../configurations/filter';
 import styles from './styles.module.css';
 
 function Filter({ getStats, filter = {}, setFilter = () => {}, defaultFilterData = {} }) {
-	const handelfunc = (val, control) => {
-		setFilter({ ...filter, [control.name]: val });
-	};
 	useEffect(() => {
 		getStats(filter);
 	}, [filter, getStats]);
@@ -31,7 +28,7 @@ function Filter({ getStats, filter = {}, setFilter = () => {}, defaultFilterData
 							placeholder="Type here..."
 							value={filter[control.name]}
 							onChange={(val) => {
-								handelfunc(val, control);
+								setFilter({ ...filter, [control.name]: val });
 							}}
 							{...control}
 							isClearable

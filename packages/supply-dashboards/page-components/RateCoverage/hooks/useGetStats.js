@@ -8,10 +8,6 @@ const apiName = {
 	air_freight : 'get_air_freight_rate_dashboard_stats',
 };
 
-const keyFormatter = (filter) => Object.fromEntries(
-	Object.entries(filter).filter(([, value]) => value !== ''),
-);
-
 const useGetStats = (service) => {
 	const [{ loading, data }, trigger] = useRequest({
 		url    : apiName[service],
@@ -19,13 +15,15 @@ const useGetStats = (service) => {
 	}, { manual: true });
 
 	const getStats = useCallback(async (filter = {}) => {
-		const updateFilter = keyFormatter(filter);
+		const finalFilter = Object.fromEntries(
+			Object.entries(filter).filter(([, value]) => value !== ''),
+		);
 		try {
 			await trigger({
-				params: { filters: { ...updateFilter } },
+				params: { filters: { ...finalFilter } },
 			});
-		} catch (e) {
-			// console.log(e)
+		} catch (err) {
+			console.log(err);
 		}
 	}, [trigger]);
 
