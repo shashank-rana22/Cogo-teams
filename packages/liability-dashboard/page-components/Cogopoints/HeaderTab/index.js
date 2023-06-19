@@ -18,9 +18,12 @@ function HeaderTab({
 				fullWidth
 				onChange={(tab) => setActiveHeaderTab(tab)}
 			>
-				{HEADER_TAB_OPTIONS.map(({ name, title }) => (
-					<TabPanel name={name} title={title} key={name} />
-				))}
+				{HEADER_TAB_OPTIONS.map((item) => {
+					const { name, title } = item || {};
+					return (
+						<TabPanel name={name} title={title} key={name} />
+					);
+				})}
 			</Tabs>
 			<DateRangepicker
 				name="date"

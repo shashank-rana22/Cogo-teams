@@ -5,7 +5,7 @@ const burntChartData = (debitData = {}) => {
 		shipment_burnt_point_value = 0,
 	} = debitData;
 
-	const burntData = [
+	return [
 		{
 			id    : 'Cogostore Burnt',
 			value : cogostore_burnt_point_value,
@@ -22,8 +22,6 @@ const burntChartData = (debitData = {}) => {
 			color : '#7f4c9a',
 		},
 	];
-
-	return burntData;
 };
 
 export default burntChartData;

@@ -6,7 +6,7 @@ const liabilityChartData = (creditData = {}) => {
 		shipment_credit_point_value = 0,
 	} = creditData;
 
-	const liabilityData = [
+	return [
 		{
 			id    : 'Shipment Credited',
 			value : shipment_credit_point_value,
@@ -28,8 +28,6 @@ const liabilityChartData = (creditData = {}) => {
 			color : '#9a7f4c',
 		},
 	];
-
-	return liabilityData;
 };
 
 export default liabilityChartData;

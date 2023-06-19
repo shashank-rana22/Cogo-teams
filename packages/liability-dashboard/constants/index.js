@@ -70,6 +70,8 @@ export const USER_TYPE_MAPPING = {
 	affiliate         : 'Affiliate',
 };
 
+export const ADD_ONE_DAY = 1;
+
 export const ACTIVE_CARD_MAPPING = ({ liabilityData, burntData }) => ({
 	liability_point_value   : liabilityData,
 	total_burnt_point_value : burntData,

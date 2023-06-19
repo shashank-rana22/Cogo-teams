@@ -2,19 +2,15 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { differenceInDays } from '@cogoport/utils';
 
-const THRESHOLD_DAYS = 31;
+const THRESHOLD_DAY = 31;
 const INDEX_VALUE = 0;
 
-const checkDateDifference = ({ date2, date1 }) => {
-	let dateTypeFormat = '';
+const checkDateDifference = (date2, date1) => {
 	const differenceInDay = differenceInDays(date2, date1);
 
-	if (differenceInDay >= THRESHOLD_DAYS) {
-		dateTypeFormat = GLOBAL_CONSTANTS.formats.date['MMM yyyy'];
-	} else if (differenceInDay < THRESHOLD_DAYS) {
-		dateTypeFormat = GLOBAL_CONSTANTS.formats.date['dd MMM'];
-	}
-	return dateTypeFormat;
+	const dateFormat = differenceInDay >= THRESHOLD_DAY ? 'MMM yyyy' : 'dd MMM';
+
+	return GLOBAL_CONSTANTS.formats.date[dateFormat];
 };
 
 const getFormattedLineChartData = ({ data = {}, selectedDate = {} }) => {

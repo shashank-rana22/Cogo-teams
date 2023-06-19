@@ -12,11 +12,10 @@ function Header({
 }) {
 	return (
 		<div className={styles.header_div}>
-			{activeStatsCard === 'liability_point_value' ? (
-				<div className={styles.title}>Cogopoint Earners</div>
-			) : (
-				<div className={styles.title}>Cogopoint Users</div>
-			)}
+			<div className={styles.title}>
+				Cogopoint
+				{activeStatsCard === 'liability_point_value' ? 'Earner' : 'Users'}
+			</div>
 			<AsyncSelect
 				name="id"
 				asyncKey="organizations"

@@ -132,8 +132,9 @@ function tableColumns({ currencyCode = '', activeStatsCard = '', activeHeaderTab
 			headerOptions: ['overall', 'importer_exporter', 'channel_partner', 'affiliate'],
 		},
 	];
-	const filterColumns = columns.filter((item) => item.headerOptions.includes(activeHeaderTab));
-	return filterColumns.filter((item) => item.conditions.includes(activeStatsCard));
+
+	return columns.filter((item) => item.headerOptions.includes(activeHeaderTab)
+	&& item.conditions.includes(activeStatsCard));
 }
 
 export default tableColumns;
