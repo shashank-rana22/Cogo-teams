@@ -17,18 +17,16 @@ function Card({
 			const oldItems = prefrences?.[serviceData?.id];
 			const newRows = oldItems.filter((val) => val?.rate_id !== rate?.id);
 
-			if (newRows.length) {
+			if (newRows?.length) {
 				setPrefrences({ ...prefrences, [serviceData?.id]: [...newRows] });
 			} else {
 				setPrefrences({ ...prefrences, [serviceData?.id]: [] });
 			}
 		} else {
 			const newList = prefrences?.[serviceData?.id] || [];
-			const priority = newList.length ? Number(newList[newList.length - 1]?.priority) + 1 : 1;
 			newList.push({
 				rate_id : rate?.id,
 				id      : rate?.rowData?.service_provider?.id,
-				priority,
 				key     : prefrence_key,
 				data    : rate,
 			});

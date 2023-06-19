@@ -11,7 +11,7 @@ import ReasonModal from './ReasonModal';
 import SingleService from './SingleService';
 import styles from './styles.module.css';
 
-function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }) {
+function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData, setShowDetailPage }) {
 	const tabKeys = Object?.keys(groupedShowServicesData || {});
 	const [supplierPayload, setSupplierPayload] = useState({});
 	const [rateOptions, setRateOptions] = useState({});
@@ -31,6 +31,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData }
 		othertext,
 		sellRateDetails,
 		rateOptions,
+		setShowDetailPage,
 	});
 	const check = (items) => {
 		const ZERO = 0;

@@ -15,7 +15,6 @@ function SelectedRatesCard({
 	const { emailTrigger } = useSendBookingPrefrenceEmail(
 		singleServiceSellRateDetails,
 		shipmentData?.id,
-		shipmentData?.shipment_type,
 	);
 	const toggleList = () => {
 		setShowFullList(!showFullList);
@@ -47,8 +46,8 @@ function SelectedRatesCard({
 				</div>
 			</div>
 			<div className={styles.lower_section}>
-				{renderedCards?.map((singleItem) => (
-					<div key={singleItem}>
+				{renderedCards?.map((singleItem, index) => (
+					<div key={singleItem?.rate_id}>
 						<Card
 							data={singleItem?.data}
 							rate_key="selected_rate"
@@ -57,7 +56,7 @@ function SelectedRatesCard({
 							serviceData={serviceData}
 							setSellRates={setSellRates}
 							sellRates={sellRates}
-							priority_no={singleItem?.priority}
+							priority_no={index + 1}
 						/>
 					</div>
 				))}
@@ -75,7 +74,7 @@ function SelectedRatesCard({
 			<Modal size="md" show={emailModal} onClose={() => { setEmailModal(false); }} placement="top">
 				<Modal.Header title="Send Confirmation Email" />
 				<Modal.Body>
-					Send Confirmation Email
+					Are You Sure ?
 				</Modal.Body>
 				<Modal.Footer>
 					<div className={styles.modalFooter}>

@@ -14,10 +14,6 @@ function Footer({ data }) {
 			&& format(data?.schedule_departure || data.selected_schedule_departure, 'dd MMM yyyy'),
 		},
 		{
-			key   : 'Supply Agent',
-			value : data?.supply_agent?.name || '',
-		},
-		{
 			key   : 'SO1',
 			value : startCase(data?.service_ops1?.name) || '',
 		},

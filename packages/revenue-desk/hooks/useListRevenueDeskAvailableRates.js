@@ -4,7 +4,7 @@ import { useEffect } from 'react';
 
 import incoTermMapping from '../helper/incoTermMapping';
 
-const useListRevenueDeskAvailableRates = ({ singleServiceData } = {}) => {
+const useListRevenueDeskAvailableRates = ({ singleServiceData, shipmentData } = {}) => {
 	const { user_profile } = useSelector(({ profile }) => ({
 		user_profile: profile,
 	}));
@@ -51,7 +51,8 @@ const useListRevenueDeskAvailableRates = ({ singleServiceData } = {}) => {
 		}
 	};
 	useEffect(() => {
-		if (singleServiceData && !singleServiceData?.is_preference_set) {
+		if (singleServiceData && !singleServiceData?.is_preference_set
+			&& !['completed', 'cancelled'].includes(shipmentData?.state)) {
 			ListRevenueAvailableRates();
 		}
 	// eslint-disable-next-line react-hooks/exhaustive-deps

@@ -6,9 +6,16 @@ import styles from './styles.module.css';
 
 function Body({ data }) {
 	let total_revert_count = 0;
-	(data?.[`${data?.shipment_type}_services`] || [])?.forEach((element) => {
-		total_revert_count += Number(element?.revert_count);
-	});
+	if (data?.shipment_type === 'fcl_freight') {
+		(data?.freight_services || [])?.forEach((element) => {
+			total_revert_count += Number(element?.revert_count);
+		});
+	} else {
+		(data?.[`${data?.shipment_type}_services`] || [])?.forEach((element) => {
+			total_revert_count += Number(element?.revert_count);
+		});
+	}
+
 	return (
 		<div className={styles.container}>
 			<div className={styles.left_section}>

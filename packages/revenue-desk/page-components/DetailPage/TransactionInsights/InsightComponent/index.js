@@ -52,9 +52,6 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 			<div className={styles.single_box}>
 				<div style={{ display: 'flex' }}>
 					{getOrdinalNumber(service_shipment_count)}
-					<div style={{ marginLeft: '5px' }}>
-						Transaction
-					</div>
 				</div>
 			</div>
 			<div className={styles.single_box}>
@@ -62,9 +59,6 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 					? (
 						<div style={{ display: 'flex' }}>
 							{getOrdinalNumber(service_trade_type_shipment_count)}
-							<div style={{ marginLeft: '5px' }}>
-								Transaction
-							</div>
 						</div>
 					) : null}
 			</div>
@@ -72,9 +66,6 @@ function InsightComponent({ insightData = {}, data = {}, type = '' }) {
 
 				<div style={{ display: 'flex' }}>
 					{getOrdinalNumber(service_port_pair_shipment_count)}
-					<div style={{ marginLeft: '5px' }}>
-						Transaction
-					</div>
 				</div>
 
 			</div>

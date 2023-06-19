@@ -9,6 +9,7 @@ const useUpdateRatesPreferences = ({
 	othertext,
 	sellRateDetails = {},
 	rateOptions,
+	setShowDetailPage,
 }) => {
 	const apitoCall = '/create_shipment_booking_confirmation_preference';
 
@@ -25,9 +26,9 @@ const useUpdateRatesPreferences = ({
 			const mergeableBookingdocs = [];
 
 			const service_providers = [];
-			(supplierPayload?.[service_id] || []).forEach((provider) => {
+			(supplierPayload?.[service_id] || []).forEach((provider, index) => {
 				service_providers.push({
-					priority                    : provider?.priority,
+					priority                    : index + 1,
 					rate_id                     : provider?.rate_id,
 					id                          : provider?.id,
 					booking_confirmation_status : data?.service_type === 'air_freight_service' ? 'pending' : undefined,
@@ -71,7 +72,7 @@ const useUpdateRatesPreferences = ({
 				booking_confirmation_docs : bookingConformationDocs,
 				service_id                : service_id || undefined,
 				service_type              : service_type || undefined,
-				remarks                   : !othertext ? othertext : reason,
+				remarks                   : othertext || reason,
 				available_rates_for_rd    : rateOptions?.[service_id],
 				sell_rate_preferences:
 					service_type && service_type === 'fcl_freight_service' && sellRateDetails?.[service_id]
@@ -99,6 +100,7 @@ const useUpdateRatesPreferences = ({
 			Toast.error("Preferences didn't save, Please Try Again");
 		} else {
 			Toast.success('Preferences Updated');
+			setShowDetailPage(null);
 		}
 	};
 

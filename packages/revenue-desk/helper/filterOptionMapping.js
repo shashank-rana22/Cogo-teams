@@ -57,8 +57,8 @@ export const shipmentSourceOptions = [
 ];
 
 export const sortByOptions = [
-	{ label: 'Created at : Desc.', value: 'created_at_desc' },
-	{ label: 'Created at : Asc.', value: 'created_at_asc' },
-	{ label: 'Schedule Departure : Asc.', value: 'schedule_departure_asc' },
-	{ label: 'Schedule Departure : Desc.', value: 'schedule_departure_desc' },
+	{ label: 'Created on : Latest', value: 'created_at_desc' },
+	{ label: 'Created on : Earliest', value: 'created_at_asc' },
+	{ label: 'Schedule Departure : Latest', value: 'schedule_departure_desc' },
+	{ label: 'Schedule Departure : Earliest', value: 'schedule_departure_asc' },
 ];

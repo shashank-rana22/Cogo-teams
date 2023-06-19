@@ -23,7 +23,6 @@ function CanelationModal({ showCancelModal, setshowCancelModal, shipmentData }) 
 				<div>
 					Please select a reason for cancelling the shipment
 				</div>
-
 				<DefaultOptions
 					cancellationReason={cancellationReason}
 					setCancellationReason={setCancellationReason}

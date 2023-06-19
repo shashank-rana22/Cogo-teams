@@ -214,6 +214,7 @@ function DetailPage({ setShowDetailPage, showDetailPage: itemData }) {
 							groupedShowServicesData={groupedShowServicesData}
 							serviceData={servicesData?.list}
 							priceData={priceData}
+							setShowDetailPage={setShowDetailPage}
 						/>
 					)}
 			</div>

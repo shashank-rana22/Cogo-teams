@@ -11,7 +11,7 @@ function Filters({ filters, setFilters }) {
 		shipmentStatusArray, tradeTypeArray, rdStatusArray,
 		shipmentSourceArray, departureDateArray, createdDateArray, cargoDateArray,
 	} = getFiltersTagsArray(filters);
-	
+
 	return (
 		<div className={styles.filter}>
 			<div className={styles.tag_outer_container}>
@@ -19,7 +19,7 @@ function Filters({ filters, setFilters }) {
 					<Tags
 						items={shipmentStatusArray}
 						onItemsChange={() => {
-							setFilters({ ...filters, state: '' });
+							setFilters({ ...filters, state: '', rd_state: '' });
 						}}
 						size="md"
 					/>
@@ -92,8 +92,9 @@ function Filters({ filters, setFilters }) {
 						onChange={(val) => {
 							setFilters({
 								...filters,
-								state : val,
-								page  : 1,
+								state    : val,
+								rd_state : ['completed', 'cancelled'].includes(val) ? undefined : 'active',
+								page     : 1,
 							});
 						}}
 						value={filters?.state}
@@ -101,27 +102,30 @@ function Filters({ filters, setFilters }) {
 					/>
 				</div>
 			</div>
-			<div className={styles.sub_section}>
-				<div className={styles.sub_heading}>
-					RD Status
-				</div>
-				<div>
-					<RadioGroup
-						options={rdStatusOptions}
-						onChange={(val) => {
-							setFilters({
-								...filters,
-								rd_state : val,
-								state : val === 'active' ? 'active' : filters?.state,
-								page     : 1,
-							});
-						}}
-						value={filters?.rd_state}
-						className={styles.radiogrp}
-					/>
-				</div>
-			</div>
-			{(filters?.service !== 'ftl_freight' && filters?.service !== 'ltl_freight')
+			{!['completed', 'cancelled'].includes(filters?.state)
+				? (
+					<div className={styles.sub_section}>
+						<div className={styles.sub_heading}>
+							RD Status
+						</div>
+						<div>
+							<RadioGroup
+								options={rdStatusOptions}
+								onChange={(val) => {
+									setFilters({
+										...filters,
+										rd_state : val,
+										state    : 'active',
+										page     : 1,
+									});
+								}}
+								value={filters?.rd_state}
+								className={styles.radiogrp}
+							/>
+						</div>
+					</div>
+				) : null}
+			{!['ftl_freight', 'ltl_freight'].includes(filters?.service)
 				? (
 					<div className={styles.sub_section}>
 						<div className={styles.sub_heading}>

@@ -31,3 +31,10 @@
     display: flex;
     align-items: center;
 }
+
+.time_container{
+    color: 'red';
+    display: 'flex' !important;
+    font-weight: '600';
+    align-items: 'center'
+}

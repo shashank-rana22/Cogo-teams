@@ -54,7 +54,10 @@ function SingleService({
 }) {
 	const [sellRates, setSellRates] = useState({});
 	const [singleServiceData, setSingleServiceData] = useState(groupedServicesData[0]);
-	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({ singleServiceData });
+	const { data: ratesData, loading: ratesLoading } = useListRevenueDeskAvailableRates({
+		singleServiceData,
+		shipmentData,
+	});
 
 	const options = [];
 	(groupedServicesData || []).forEach((data) => {
@@ -124,7 +127,7 @@ function SingleService({
 			{['in_progress', 'confirmed_by_importer_exporter'].includes(shipmentData?.state)
 			&& !singleServiceData?.is_preference_set ? (
 				<>
-					{(supplierPayload?.[singleServiceData?.id] || []).length
+					{(supplierPayload?.[singleServiceData?.id] || [])?.length
 						? (
 							<SelectedRatesCard
 								prefrences={supplierPayload?.[singleServiceData?.id]}
@@ -136,7 +139,6 @@ function SingleService({
 								setEmailModal={setEmailModal}
 								singleServiceSellRateDetails={singleServiceSellRateDetails}
 								shipmentData={shipmentData}
-
 							/>
 						) : null}
 					<ExistingInventory
@@ -146,7 +148,7 @@ function SingleService({
 						setPrefrences={setInventory}
 						serviceId={singleServiceData?.id}
 					/>
-					{rateCardObj.map((item) => (
+					{(rateCardObj || [])?.map((item) => (
 						<RatesCard
 							type={item?.type}
 							ratesData={item?.data}

@@ -15,8 +15,8 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.price_type = element?.data?.price_type;
 			rowData.container_count = container_count;
 			rowData.service_provider = element?.service_provider?.business_name;
-			rowData.buy_price = Number(element?.reverted_total_buy_price) / Number(container_count);
-			rowData.total_buy_price = element?.reverted_total_buy_price || 0;
+			rowData.buy_price = Number(element?.reverted_buy_price) / Number(container_count);
+			rowData.total_buy_price = element?.reverted_buy_price || 0;
 			rowData.total_buy_currency = element?.currency;
 			rowData.profit_percentage = element?.profit_percentage || 0;
 			rowData.currency = element?.currency;

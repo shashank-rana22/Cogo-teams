@@ -10,7 +10,7 @@ function PocSopModal({ itemData }) {
 	const [showPocSop, setShowPocSop] = useState(false);
 	return (
 		<div>
-			<Button size="md" themeType="secondary" onClick={() => setShowPocSop(true)}>POC & SOP</Button>
+			<Button size="xl" themeType="secondary" onClick={() => setShowPocSop(true)}>POC & SOP</Button>
 			<Modal
 				size="xl"
 				show={showPocSop === true}

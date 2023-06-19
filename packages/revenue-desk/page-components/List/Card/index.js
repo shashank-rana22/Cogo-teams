@@ -8,19 +8,19 @@ import styles from './styles.module.css';
 
 function Card({ item, loading, setShowDetailPage }) {
 	const handleOnClick = () => {
-		setShowDetailPage(item);
+		if (loading) {
+			return null;
+		}
+		return setShowDetailPage(item);
 	};
 	return (
 		<div
 			role="presentation"
 			className={styles.container}
-			onClick={
-			() => { handleOnClick(); }
-}
+			onClick={handleOnClick}
 		>
 			<div>
 				{loading ? <LoadingHeader /> : <Header data={item} />}
-
 			</div>
 			<div>
 				{loading ? <LoadingBody /> : <Body data={item} />}

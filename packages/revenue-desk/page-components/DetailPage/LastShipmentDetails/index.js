@@ -15,7 +15,7 @@ function LastShipmentDetails({ itemData }) {
 	const { data, loading } = useGetCustomerLastShipmentDetails({ itemData });
 	return (
 		<div>
-			{(loading || data) ? (
+			{(loading || (Object.keys(data || {})?.length)) ? (
 				<div className={styles.container}>
 					<div className={styles.header_section}>
 						<div className={styles.header_left_section}>

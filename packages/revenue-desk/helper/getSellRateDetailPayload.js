@@ -7,7 +7,7 @@ const getSellRateDetailPayload = ({
 	sellRates,
 }) => {
 	const singleServiceSellRateDetails = (service_providers || []).map(
-		({ rate_id = '', priority = 0 }) => {
+		({ rate_id = '' }, index) => {
 			const currentRate = (currentFormatedrates?.rows || []).find(
 				(rate) => rate.id === rate_id,
 			);
@@ -18,7 +18,7 @@ const getSellRateDetailPayload = ({
 			const sellPrice = Number(rate?.rowData?.buy_price) * SELL_RATE_INCREASE_BY;
 			return {
 				basic_freight_rate : (Number(sellRates?.[rate_id]) || Number(sellPrice)),
-				priority,
+				priority           : index + 1,
 				currency           : rate?.rowData?.currency,
 				shipping_line_name : rate?.rowData?.shipping_line,
 			};
