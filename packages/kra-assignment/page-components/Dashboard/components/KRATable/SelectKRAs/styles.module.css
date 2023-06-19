@@ -1,4 +1,4 @@
-/* .select_container{
+.select_container{
     padding-top: 12px;
 }
 
@@ -15,5 +15,4 @@
 .button_wrapper{
     display: flex;
     justify-content: flex-end;
-} */
-
+}

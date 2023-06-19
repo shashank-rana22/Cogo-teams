@@ -88,7 +88,7 @@ function Dashboard() {
 				</div>
 
 				<div className={styles.section_right}>
-					<KRATable />
+					<KRATable selectArray={selectArrayUnassignedEmployee} />
 				</div>
 			</div>
 		</div>
