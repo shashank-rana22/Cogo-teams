@@ -1,6 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useRequestBf } from '@cogoport/request';
-import { useCallback, useEffect, useState } from 'react';
+import { useState } from 'react';
 
 const useHistorySingleDataList = () => {
 	const [globalFilters, setGlobalFilters] = useState({
