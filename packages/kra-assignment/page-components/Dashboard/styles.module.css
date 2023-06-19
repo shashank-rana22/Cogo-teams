@@ -19,10 +19,11 @@
 }
 .section_left{
     width: 70%;
-    padding: 6px;
+    padding: 6px 10px;
     margin-top: 14px;
     background-color: white;
     border-radius: 6px;
+    box-shadow: 0 0 4px rgba(44,62,80,.3);
 }
 
 .section_right{
@@ -32,6 +33,7 @@
     padding: 8px;
     height: fit-content;
     border-radius: 6px;
+    box-shadow: 0 0 4px rgba(44,62,80,.3);
 }
 
 .table_display{

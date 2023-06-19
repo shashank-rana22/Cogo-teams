@@ -3,7 +3,7 @@
 }
 
 .container{
-    border: 1px solid red;
+    border: 1px solid var(--color-tertiary-beige-3);
     border-radius: 6px;
     padding: 10px;
     height:200px;
