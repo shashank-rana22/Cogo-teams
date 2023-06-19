@@ -1,4 +1,4 @@
-import { Pill, Popover, Tooltip } from '@cogoport/components';
+import { Pill, Popover } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMOverflowDot, IcMRefresh } from '@cogoport/icons-react';
@@ -28,6 +28,7 @@ const MAPPING_ENABLE_STATUS = {
 
 const GET_ZERO = 0;
 const CALC_PER = 100;
+const GET_FIXED_AMOUNT = 2;
 const Column = (refresh, deleteId) => {
 	const { push } = useRouter();
 
@@ -162,23 +163,42 @@ const Column = (refresh, deleteId) => {
 			Header   : <div>IRN Summary</div>,
 			id       : 'irn',
 			accessor : (row) => {
-				const { failureCount, successCount } = row || {};
+				const { failureCount, successCount, status } = row || {};
 				const total = failureCount + successCount;
 				const successPer = total !== GET_ZERO ? (successCount / total) * CALC_PER : null;
 				const failurePer = total !== GET_ZERO ? (failureCount / total) * CALC_PER : null;
 
-				console.log({ failureCount, successCount, total, successPer, failurePer }, 'successCount');
-
 				return (
 					total !== GET_ZERO ? (
 						<div className={styles.main_summary}>
-							<Tooltip content={`${successPer}%`}>
-								<div className={styles.success} style={{ width: `${successPer}%` }} />
-							</Tooltip>
+							<div
+								className={styles.success}
+								style={{
+									width      : `${successPer?.toFixed(GET_FIXED_AMOUNT)}%`,
+									background : `${status === 'DISABLE' ? '#E0E0E0' : '#abcd62'}`,
+								}}
+							>
+								{ status !== 'DISABLE' && (
+									<span className={styles.tooltip_text}>
+										{`${successPer?.toFixed(GET_FIXED_AMOUNT)}%`}
+									</span>
+								)}
+							</div>
 
-							<Tooltip content={`${failurePer}%`}>
-								<div className={styles.failure} style={{ width: `${failurePer}%` }} />
-							</Tooltip>
+							<div
+								className={styles.failure}
+								style={{
+									width           : `${failurePer?.toFixed(GET_FIXED_AMOUNT)}%`,
+									backgroundColor : `${status === 'DISABLE' ? '#e0e0e0' : '#ee3425'}`,
+								}}
+							>
+								{	status !== 'DISABLE' && (
+									<span className={styles.tooltip_text}>
+										{ `${failurePer?.toFixed(GET_FIXED_AMOUNT)}%`}
+
+									</span>
+								)}
+							</div>
 						</div>
 					) : 'N/A'
 				);

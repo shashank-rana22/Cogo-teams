@@ -8410,6 +8410,12 @@ const partner = {
 			feature     : 'compliance',
 			access_type : 'private',
 		},
+		{
+			api         : 'delete_sales_outward',
+			module      : 'compliance',
+			feature     : 'compliance',
+			access_type : 'private',
+		},
 	],
 	incident_controller: [
 		{
