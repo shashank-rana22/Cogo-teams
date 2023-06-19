@@ -6,7 +6,7 @@ import React, { useState } from 'react';
 
 import useHistorySingleDataList from '../../../../../hooks/useHistorySingleDataList';
 
-import Details from './Details/index';
+import Details from './Details';
 import styles from './styles.module.css';
 
 interface ListItem {

@@ -9,7 +9,7 @@ import Filter from '../../../commons/Filters';
 import { historyFilters } from '../../configurations/history-filters';
 import useHistorySettlemet from '../../hooks/useHistorySettlement';
 
-import CustomTable from './customTable';
+import CustomTable from './CustomTable';
 import SelectState from './SelectState';
 import styles from './styles.module.css';
 

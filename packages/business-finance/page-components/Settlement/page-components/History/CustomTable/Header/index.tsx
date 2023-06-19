@@ -43,7 +43,8 @@ function Header({
 						height={10}
 						width={10}
 						style={{ cursor: 'pointer' }}
-						color={filters?.sortType === 'Asc' ? '#F68B21' : '#B9B9B9'}
+						color={filters?.sortType === 'Asc'
+							? '--color-accent-orange-2' : '--color-secondary-greyscale-4'}
 						onClick={() => {
 							setFilters((prev) => ({
 								...prev,
@@ -56,7 +57,8 @@ function Header({
 					<IcMArrowRotateDown
 						height={10}
 						width={10}
-						color={filters?.sortType === 'Desc' ? '#F68B21' : '#B9B9B9'}
+						color={filters?.sortType === 'Desc'
+							? '--color-accent-orange-2' : '--color-secondary-greyscale-4'}
 						style={{ cursor: 'pointer' }}
 						onClick={() => {
 							setFilters((prev) => ({
@@ -76,7 +78,8 @@ function Header({
 						height={10}
 						width={10}
 						style={{ cursor: 'pointer' }}
-						color={filters?.sortType === 'Asc' ? '#F68B21' : '#B9B9B9'}
+						color={filters?.sortType === 'Asc'
+							? '--color-accent-orange-2' : '--color-secondary-greyscale-4'}
 						onClick={() => {
 							setFilters((prev) => ({
 								...prev,
@@ -89,7 +92,8 @@ function Header({
 					<IcMArrowRotateDown
 						height={10}
 						width={10}
-						color={filters?.sortType === 'Desc' ? '#F68B21' : '#B9B9B9'}
+						color={filters?.sortType === 'Desc'
+							? '--color-accent-orange-2' : '--color-secondary-greyscale-4'}
 						style={{ cursor: 'pointer' }}
 						onClick={() => {
 							setFilters((prev) => ({

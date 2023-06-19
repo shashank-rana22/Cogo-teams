@@ -1,7 +1,7 @@
 .container {
 	display: flex;
 	padding: 60px 30px 36px;
-	background: #fff;
+	background: var(--color-secondary-5);
 	border-radius: 10px;
 }
 
@@ -29,7 +29,7 @@
 	width: 30%;
 	height: 5px;
 	margin-top: 3%;
-	background: #ee3425;
+	background: var(--color-primary-error-red-2);
 	border-radius: 4px;
 }
 
