@@ -1,7 +1,10 @@
 import { ResponsiveLine } from '@cogoport/charts/line/index';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import { getAmountInLakh } from '../../getAmountInLakh';
 
+const CURRENCY = GLOBAL_CONSTANTS.currency_code.INR;
 function ResponsiveLineChart({ lineData }) {
 	const lineChartData = [
 		{
@@ -46,7 +49,16 @@ function ResponsiveLineChart({ lineData }) {
 					<div style={{ display: 'flex' }}>
 						<div>Contribution Margin :</div>
 						<div style={{ marginLeft: '10px', display: 'flex' }}>
-							<div>{(point.data.y).toFixed(2)}</div>
+							{formatAmount({
+								amount   : point.data.y as any,
+								currency : CURRENCY,
+								options  : {
+									currencyDisplay       : 'code',
+									compactDisplay        : 'short',
+									maximumFractionDigits : 2,
+									style                 : 'currency',
+								},
+							})}
 							<div style={{ color: '#29CC6A' }}>
 								(
 								{(point.data.z).toFixed(2)}
@@ -76,7 +88,6 @@ function ResponsiveLineChart({ lineData }) {
 			pointBorderWidth={2}
 			pointBorderColor="#6FA5AB"
 			useMesh
-
 		/>
 	);
 }
