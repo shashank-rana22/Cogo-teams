@@ -35,7 +35,16 @@ function AgentDetails({
 	hasVoiceCallAccess = false,
 	firestore,
 	userId: agentId,
+	viewType,
 }) {
+	const [showAddNumber, setShowAddNumber] = useState(false);
+	const [profileValue, setProfilevalue] = useState({
+		name         : '',
+		country_code : '+91',
+		number       : '',
+	});
+	const [showError, setShowError] = useState(false);
+
 	const {
 		user_id,
 		lead_user_id,
@@ -47,23 +56,19 @@ function AgentDetails({
 		channel_type = '',
 		user_type, id = '',
 	} = formattedMessageData || {};
+
 	const { partner_users } = useGetPartnerUsers({ activeMessageCard });
+
 	const {
 		deleteGroupMember,
 		approveGroupRequest,
 		deleteGroupRequest,
 		addGroupMember,
 	} = useGroupChat({ activeMessageCard, firestore });
-	const hasAccessToEditGroup = activeMessageCard.group_members?.includes(agentId)
-	|| activeMessageCard.support_agent_id === agentId;
 
-	const [showAddNumber, setShowAddNumber] = useState(false);
-	const [profileValue, setProfilevalue] = useState({
-		name         : '',
-		country_code : '+91',
-		number       : '',
-	});
-	const [showError, setShowError] = useState(false);
+	const hasAccessToEditGroup = activeMessageCard.group_members?.includes(agentId)
+	|| activeMessageCard.support_agent_id === agentId || viewType === 'admin_view';
+
 	const {
 		user_data = {},
 		user_number = '',

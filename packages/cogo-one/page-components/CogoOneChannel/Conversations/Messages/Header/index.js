@@ -50,6 +50,7 @@ function Header({
 				assignLoading,
 				assignChat,
 				support_agent_id,
+				accountType: formattedData?.account_type,
 			},
 		});
 	};

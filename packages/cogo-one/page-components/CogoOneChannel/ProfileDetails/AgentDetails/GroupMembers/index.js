@@ -13,7 +13,7 @@ function GroupMembers({
 		<div>
 			{!isEmpty(members) && <div className={styles.conversation_title}>Group Members</div>}
 			{members.map((user) => (
-				<div className={styles.content} key={user}>
+				<div className={styles.content} key={user?.id}>
 					<Avatar
 						src="https://www.w3schools.com/howto/img_avatar.png"
 						alt="img"

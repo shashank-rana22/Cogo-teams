@@ -40,7 +40,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 	};
 
 	const { role_functions = [] } = profile.auth_role_data;
-	const { assignChat = () => {}, support_agent_id = null } = data || {};
+	const { assignChat = () => {}, support_agent_id = null, accountType = '' } = data || {};
 	const { allow_user } = controls;
 	const watchCondtion = watch('assign_condition') || null;
 
@@ -55,6 +55,7 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 		errors,
 		watchCondtion,
 		assignType,
+		accountType,
 	});
 
 	return (
