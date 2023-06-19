@@ -15,6 +15,7 @@ function Filter({ serviceActiveTab = 'air_freight', setFilters = () => {}, setFi
 	const handleReset = () => {
 		reset();
 		setFilters({});
+		setFilterPopover(false);
 	};
 
 	const handleApplyFilters = () => {

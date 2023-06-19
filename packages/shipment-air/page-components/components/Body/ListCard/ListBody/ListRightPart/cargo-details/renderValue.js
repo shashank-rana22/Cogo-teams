@@ -51,6 +51,11 @@ const renderValue = (props = '', item = {}) => {
 		</div>
 	);
 
+	const handleMAWBNumberClick=(e)=>{
+		e.stopPropagation();
+		copyToClipboard(master_airway_bill_number || '', 'MAWB Number')
+	}
+
 	switch (props) {
 		case 'airline':
 			return `Airline:${airline?.business_name}`;
@@ -84,7 +89,7 @@ const renderValue = (props = '', item = {}) => {
 					</span>
 					<div
 						aria-hidden="true"
-						onClick={() => copyToClipboard(master_airway_bill_number || '', 'MAWB Number')}
+						onClick={(e) => handleMAWBNumberClick(e)}
 					>
 						<IcMCopy />
 					</div>
