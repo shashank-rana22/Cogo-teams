@@ -2305,7 +2305,7 @@ const navigationMappingAdmin = {
 			},
 			{
 				key           : 'saas_tools-vessel_tracking',
-				title: 'Live Vessel Tracking',
+				title		  : 'Live Vessel Tracking',
 				href          : '/v2/saas-tools/live-vessel-tracking',
 				as            : '/v2/saas-tools/live-vessel-tracking',
 				possible_apis : apis.saas_live_vessel_tracking,

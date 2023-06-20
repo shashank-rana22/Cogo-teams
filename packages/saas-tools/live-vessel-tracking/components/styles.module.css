@@ -14,10 +14,12 @@
 	font-size: 33px;
 	font-weight: 600;
 	text-align: center;
+	background-color: #fff;
 }
 
 .map_container {
 	position: relative;
+	border: 1px solid #daf9ff;
 
 	.loader {
 		position: absolute;

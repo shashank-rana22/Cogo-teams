@@ -19,11 +19,11 @@ const apis = {
 	],
 	saas_live_vessel_tracking: [
 		{
-			api: 'get_ais_vessel_tracking_data',
-			access_type: 'private',
-			module: 'live-vessel-tracking',
-			feature: 'live-vessel-tracking',
+			api         : 'get_ais_vessel_tracking_data',
+			access_type : 'private',
+			module      : 'live-vessel-tracking',
+			feature     : 'live-vessel-tracking',
 		},
-	]
+	],
 };
 export default apis;

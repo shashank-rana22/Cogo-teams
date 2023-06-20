@@ -1,3 +1,4 @@
+import { isEmpty } from '@cogoport/utils';
 import dynamic from 'next/dynamic';
 
 import useGetVessel from '../hooks/useGetVessel';
@@ -14,7 +15,7 @@ function LiveVesselTracking() {
 			<div className={styles.title}>Live Vessel Tracking</div>
 			<div className={styles.map_container}>
 				<Maps vesselInfo={data} setCurrentBound={setCurrentBound} />
-				{!loading && data.length === 0 && (
+				{!loading && isEmpty(data) && (
 					<div className={styles.loader}>
 						<div className={styles.loading_text}>No Data Avaliable</div>
 					</div>

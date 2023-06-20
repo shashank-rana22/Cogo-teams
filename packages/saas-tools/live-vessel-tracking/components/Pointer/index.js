@@ -1,27 +1,24 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
-import { Image } from '@cogoport/next';
-
 import { L, Marker, FeatureGroup, Tooltip } from '@cogoport/maps';
+import { Image } from '@cogoport/next';
 import ReactDOMServer from 'react-dom/server';
+
+import {
+	ICON_ANCHOR_X, ICON_ANCHOR_Y, ICON_SIZE, TOOLTIP_MAPPING,
+	TOOLTIP_OFFSET_X, TOOLTIP_OFFSET_Y,
+} from '../../constant/pointer';
 
 import styles from './styles.module.css';
 
 const geo = getGeoConstants();
+
 const ICON_MAPPING = {
 	yellow : GLOBAL_CONSTANTS.image_url.yellow_vessel,
 	red    : GLOBAL_CONSTANTS.image_url.red_vessel,
 	black  : GLOBAL_CONSTANTS.image_url.black_vessel,
 };
-
-const TOOLTIP_MAPPING = {
-	vessel_name   : 'Name',
-	latitude      : 'Latitude',
-	longitude     : 'Longitude',
-	lastUpdatedAt : 'Last Update',
-};
-
 
 function Pointer(props) {
 	const {
@@ -39,15 +36,15 @@ function Pointer(props) {
 				width={8}
 				height={16}
 				style={{
-					transform : `rotate(${direction}deg)`,
+					transform: `rotate(${direction}deg)`,
 					// height    : '16px',
 					// width     : '8px',
 				}}
 				alt="ship"
 			/>,
 		),
-		iconSize   : [24, 24],
-		iconAnchor : [10, 12],
+		iconSize   : [ICON_SIZE, ICON_SIZE],
+		iconAnchor : [ICON_ANCHOR_X, ICON_ANCHOR_Y],
 		className  : 'divIcon',
 	});
 
@@ -62,12 +59,11 @@ function Pointer(props) {
 		}
 		return props?.[key];
 	};
-	
-	
+
 	return (
 		<FeatureGroup key={lat}>
 			<Marker position={[lat, lng]} icon={icon}>
-				<Tooltip offset={[0, -10]}>
+				<Tooltip offset={[TOOLTIP_OFFSET_X, TOOLTIP_OFFSET_Y]}>
 					<div className={styles.container}>
 						{Object.keys(TOOLTIP_MAPPING).map((info) => (
 							<div key={info}>

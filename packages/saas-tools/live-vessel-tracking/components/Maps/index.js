@@ -11,6 +11,7 @@ import {
 import { ZOOM, MIN_ZOOM, MAX_ZOOM } from '../../constant/zoom';
 import Pointer from '../Pointer';
 
+const REMAINDER = 0;
 const LAYER = [
 	{
 		name        : 'Cogo Maps',
@@ -20,8 +21,8 @@ const LAYER = [
 ];
 
 const getIcon = (index) => {
-	if (index % YELLOW_VESSEL_INDEX === 0) return 'yellow';
-	if (index % RED_VESSEL_INDEX === 0) return 'red';
+	if (index % YELLOW_VESSEL_INDEX === REMAINDER) return 'yellow';
+	if (index % RED_VESSEL_INDEX === REMAINDER) return 'red';
 	return 'black';
 };
 
@@ -64,7 +65,7 @@ function Maps({ vesselInfo = [], setCurrentBound }) {
 			setMap={setMap}
 			maxZoom={MAX_ZOOM}
 		>
-			{(vesselInfo || []).map((info, index) => (
+			{((vesselInfo) || []).map((info, index) => (
 				<Pointer key={info?.mmsi} map={map} arrow={getIcon(index)} {...info} />
 			))}
 		</CogoMaps>

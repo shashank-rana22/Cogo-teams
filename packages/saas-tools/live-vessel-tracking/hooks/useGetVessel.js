@@ -1,3 +1,4 @@
+import { useRequestBf } from '@cogoport/request';
 import { useCallback, useEffect, useState } from 'react';
 
 import {
@@ -6,8 +7,6 @@ import {
 	DEFAULT_SOUTHWEST_LAT,
 	DEFAULT_SOUTHWEST_LNG,
 } from '../constant/defaultLatLng';
-
-import { useRequestBf } from '@/packages/request';
 
 const MAX_VESSEL_INBOUND = 1000;
 
@@ -32,7 +31,7 @@ const useGetVessel = () => {
 
 	const [{ loading, data }, trigger] = useRequestBf({
 		method  : 'get',
-		url     : 'http://10.10.12.237:8099/ais/vessel/tracking-data',
+		url     : '/ais/vessel/tracking-data',
 		authKey : 'get_ais_vessel_tracking_data',
 	}, { manual: true });
 
