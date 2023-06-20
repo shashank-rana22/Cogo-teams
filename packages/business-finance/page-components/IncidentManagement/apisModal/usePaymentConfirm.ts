@@ -34,7 +34,7 @@ const usePaymentConfirm = ({
 		{ manual: true },
 	);
 
-	const toastFunction = () => {
+	const successToast = () => {
 		Toast.success('Request Updated Sucessfully');
 		setShowModal(false);
 		refetch();
@@ -54,7 +54,7 @@ const usePaymentConfirm = ({
 				data: { message },
 			} = apiResponse;
 			if (message === 'Updated Successfully') {
-				toastFunction();
+				successToast();
 			} else {
 				Toast.error(message);
 			}
