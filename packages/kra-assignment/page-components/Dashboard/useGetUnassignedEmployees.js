@@ -5,6 +5,7 @@ import { useCallback, useEffect, useState } from 'react';
 
 function useGetUnassignedEmployee() {
 	const [filters, setFilters] = useState();
+	const [showKRACalculationTable, setShowKRACalculationTable] = useState(false);
 
 	const [{ data, loading }, trigger] = useRequest({
 		url    : '/get_unassigned_employees',
@@ -37,6 +38,8 @@ function useGetUnassignedEmployee() {
 		filters,
 		setFilters,
 		getUnassignedEmployee,
+		showKRACalculationTable,
+		setShowKRACalculationTable,
 	};
 }
 
