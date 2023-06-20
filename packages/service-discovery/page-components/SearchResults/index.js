@@ -1,3 +1,4 @@
+import { Loader } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
 import React, { useEffect } from 'react';
 
@@ -20,6 +21,7 @@ function SearchResults() {
 		return (
 			<div className={styles.loading}>
 				<span className={styles.loading_text}>Looking for Rates</span>
+				<Loader themeType="primary" className={styles.loader} background="#000" />
 			</div>
 		);
 	}

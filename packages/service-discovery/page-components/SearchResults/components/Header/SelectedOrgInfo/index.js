@@ -3,7 +3,7 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
-function SelectedOrgInfo({ org_name, user_name }) {
+function SelectedOrgInfo({ org_name, user_name, setShow = () => {}, show }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.name_container}>
@@ -12,7 +12,12 @@ function SelectedOrgInfo({ org_name, user_name }) {
 			</div>
 
 			<div className={styles.icon}>
-				<IcMArrowDown height={15} width={15} />
+				<IcMArrowDown
+					height={15}
+					width={15}
+					onClick={() => setShow((prev) => !prev)}
+					style={{ rotate: show ? '180deg' : '0deg' }}
+				/>
 			</div>
 		</div>
 	);

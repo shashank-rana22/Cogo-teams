@@ -1,12 +1,12 @@
 .container{
     background: #FFFAFA;
-    /* border-bottom: 1px solid #EBEBF0; */
     height: 100%;
     max-width: max-content;
     padding: 16px 24px;
     display: flex;
     align-items: center;
     justify_content: space-between;
+    margin-right: 24px;
 }
 .name_container{
     width: 90%;
