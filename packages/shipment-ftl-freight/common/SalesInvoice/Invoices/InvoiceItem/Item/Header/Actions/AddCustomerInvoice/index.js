@@ -1,4 +1,5 @@
 import { Modal, Button, Toggle } from '@cogoport/components';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { useState, useRef } from 'react';
 
 import useCreateShipmentDocument from '../../../../../../../../hooks/useCreateShipmentDocument';
@@ -13,14 +14,12 @@ import { getPayload } from './utils/getPayload';
 const INVOICE_STATUS_REVIEWED = ['reviewed', 'approved'];
 
 function AddCustomerInvoice({
-	closeModal = () => {},
-	setShow = () => {},
-	show = false,
 	handleRefetch = () => {},
 	invoice = {},
 	shipmentData = {},
+	setShowModal = () => {},
 }) {
-	const [showModal, setShowModal] = useState(false);
+	const [showInvoiceModal, setShowInvoiceModal] = useState(false);
 	const [toggle, setToggle] = useState(false);
 
 	const formRef = useRef(null);
@@ -37,17 +36,15 @@ function AddCustomerInvoice({
 
 	const callback = () => {
 		handleRefetch();
-		closeModal();
+		setShowModal(false);
 	};
 
 	const handleCloseModal = () => {
-		setShow(true);
 		setShowModal(false);
 	};
 
 	const handleGenerate = () => {
-		setShowModal(true);
-		setShow(false);
+		setShowInvoiceModal(true);
 	};
 
 	const { docLoading: loading, apiTrigger } = useCreateShipmentDocument({ refetch: callback });
@@ -63,71 +60,69 @@ function AddCustomerInvoice({
 
 	return (
 		<section>
-			{show ? (
-				<Modal
-					show
-					showCloseIcon={false}
-					closeOnOuterClick={false}
-				>
-					<Modal.Header title="Add Customer Invoice" />
-					<Modal.Body>
-						{isAllowedToggle ? (
-							<Toggle
-								offLabel={invoice?.customer_ftl_invoice
-									? 'Download'
-									: 'Upload'}
-								onLabel="Generate"
-								checked={toggle}
-								onChange={() => setToggle(!toggle)}
-							/>
-						) : null}
-
-						{toggle ? (
-							<div className={styles.button_wrapper}>
-								<Button onClick={handleGenerate}>
-									Generate
-								</Button>
-							</div>
-						)
-							: (
-								<>
-									<UploadProof ref={formRef} />
-									{invoice?.customer_ftl_invoice ? (
-										<Download
-											invoiceNumber={invoice?.live_invoice_number}
-											invoiceUrl={invoice?.customer_ftl_invoice}
-										/>
-									) : null}
-								</>
-							)}
-					</Modal.Body>
-					<Modal.Footer className={styles.button_wrapper}>
-						<Button onClick={() => setShow(false)} themeType="secondary"> Cancel</Button>
-						<Button onClick={customHandleSubmit} disabled={loading}>Submit</Button>
-					</Modal.Footer>
-				</Modal>
-			) : null}
-
-			{showModal ? (
-				<Modal
-					size="fullscreen"
-					onClose={handleCloseModal}
-					show={showModal}
-					className={styles.custom_modal}
-				>
-					<Modal.Header title="Invoice" />
-					<Modal.Body>
-						<Invoices
-							shipmentData={shipmentData}
-							invoice={invoice}
-							handleRefetch={handleRefetch}
-							handleCloseModal={handleCloseModal}
-							handleClose={closeModal}
-							tradePartnerData={tradePartnerData?.list}
+			<Modal
+				show
+				showCloseIcon={false}
+				closeOnOuterClick={false}
+			>
+				<Modal.Header title="Add Customer Invoice" />
+				<Modal.Body>
+					{isAllowedToggle ? (
+						<Toggle
+							offLabel={invoice?.customer_ftl_invoice
+								? 'Download'
+								: 'Upload'}
+							onLabel="Generate"
+							checked={toggle}
+							onChange={() => setToggle(!toggle)}
 						/>
-					</Modal.Body>
-				</Modal>
-			) : null}
+					) : null}
+
+					{toggle ? (
+						<div className={styles.button_wrapper}>
+							<Button onClick={handleGenerate}>
+								Generate
+							</Button>
+						</div>
+					)
+						: (
+							<>
+								<UploadProof ref={formRef} />
+								{invoice?.customer_ftl_invoice ? (
+									<Download
+										invoiceNumber={invoice?.live_invoice_number}
+										invoiceUrl={invoice?.customer_ftl_invoice}
+									/>
+								) : null}
+							</>
+						)}
+				</Modal.Body>
+				<Modal.Footer>
+					<FooterButtonWrapper>
+						<Button onClick={handleCloseModal} themeType="secondary"> Cancel</Button>
+						<Button onClick={customHandleSubmit} disabled={loading}>Submit</Button>
+					</FooterButtonWrapper>
+				</Modal.Footer>
+			</Modal>
+
+			<Modal
+				show={showInvoiceModal}
+				size="fullscreen"
+				onClose={handleCloseModal}
+				className={styles.custom_modal}
+			>
+				<Modal.Header title="Invoice" />
+				<Modal.Body>
+					<Invoices
+						shipmentData={shipmentData}
+						invoice={invoice}
+						handleRefetch={handleRefetch}
+						handleCloseModal={handleCloseModal}
+						handleClose={() => setShowInvoiceModal(false)}
+						tradePartnerData={tradePartnerData?.list}
+					/>
+				</Modal.Body>
+			</Modal>
 		</section>
 	);
 }

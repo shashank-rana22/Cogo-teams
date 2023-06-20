@@ -16,20 +16,21 @@ const useGetTradePartnersDetails = ({ shipment_id = '' }) => {
 	}, { manual: true });
 
 	const getSupplierandShipper = (list) => {
-		const trade_partners_details = {};
+		const TRADE_PARTNER_DETAILS = {};
+
 		(list || []).forEach((row) => {
 			if (
 				row?.trade_party_type === 'shipper'
 				|| row?.trade_party_type === 'consignee'
 			) {
-				trade_partners_details[row?.trade_party_type] = {
+				TRADE_PARTNER_DETAILS[row?.trade_party_type] = {
 					trade_party_type : row?.trade_party_type,
 					trade_party_id   : row?.trade_party_id,
 					name             : row?.trade_partner_details?.business_name,
 				};
 			}
 		});
-		return trade_partners_details;
+		return TRADE_PARTNER_DETAILS;
 	};
 
 	const apiTrigger = useCallback(async () => {

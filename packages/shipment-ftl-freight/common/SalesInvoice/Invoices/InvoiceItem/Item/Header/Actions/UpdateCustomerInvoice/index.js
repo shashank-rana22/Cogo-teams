@@ -1,5 +1,5 @@
 import { Modal, Button } from '@cogoport/components';
-import { isEmpty } from '@cogoport/utils';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { useMemo, useRef } from 'react';
 
 import useCreateShipmentFortigoTripDetail from '../../../../../../../../hooks/useCreateShipmentFortigoTripDetail';
@@ -9,13 +9,11 @@ import { formControls } from '../commons/controls/formControls';
 import { getFormatValue } from '../commons/utils/getFormatValue';
 
 import Form from './Form';
-import styles from './styles..module.css';
 import { useFillFormData } from './utils/useFillFormData';
 
 function UpdateCustomerInvoice(props) {
 	const {
-		show = false,
-		closeModal = () => {},
+		setShowModal = () => {},
 		shipmentData = {},
 		invoice = {},
 		refetch = () => {},
@@ -35,7 +33,8 @@ function UpdateCustomerInvoice(props) {
 
 	const finalControls = useMemo(() => Object.values(formControls).flat(), []);
 
-	const shipperTradePartyPanNumber = tradePartnerData?.list?.[0]?.trade_partner_details?.registration_number;
+	const [firstElement = {}] = tradePartnerData?.list || [];
+	const { trade_partner_details: { registration_number: shipperTradePartyPanNumber } = {} } = firstElement;
 
 	const { data: customData } = useGetShipmentFortigoTripDetail({
 		defaultParams: {
@@ -52,7 +51,7 @@ function UpdateCustomerInvoice(props) {
 
 	const callback = () => {
 		refetch();
-		closeModal();
+		setShowModal(false);
 	};
 
 	const { apiTrigger } = useCreateShipmentFortigoTripDetail({ refetch: callback });
@@ -75,27 +74,26 @@ function UpdateCustomerInvoice(props) {
 	return (
 		<Modal
 			size="xl"
-			show={show}
+			show
 			closeOnOuterClick={false}
 			showCloseIcon={false}
 		>
 			<Modal.Header title="Update Customer Invoice" />
 			<Modal.Body>
-				{!isEmpty(defaultValues?.rate)
-					? <Form defaultValues={defaultValues} finalControls={finalControls} ref={formRef} /> : null}
+				<Form defaultValues={defaultValues} finalControls={finalControls} ref={formRef} />
 			</Modal.Body>
 			<Modal.Footer>
-				<div className={styles.button_wrapper}>
+				<FooterButtonWrapper>
 					<Button
 						themeType="secondary"
-						onClick={() => closeModal()}
+						onClick={() => setShowModal(false)}
 					>
 						Cancel
 					</Button>
 					<Button onClick={handleFormSubmit}>
 						Submit
 					</Button>
-				</div>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);
