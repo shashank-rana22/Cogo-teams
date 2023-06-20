@@ -3,17 +3,17 @@ import CardItem from './Carditem/index';
 import styles from './styles.module.css';
 
 function List({
-	fields = [],
+	fields,
 	data = [],
-	showCode = false,
+	key,
 }) {
 	return (
 		<main className={styles.main}>
-			<Header fields={fields} showCode={showCode} />
+			<Header fields={fields} />
 
 			{(data || []).map((item) => (
 				<CardItem
-					key={item}
+					key={item[key]}
 					item={item}
 					fields={fields}
 				/>

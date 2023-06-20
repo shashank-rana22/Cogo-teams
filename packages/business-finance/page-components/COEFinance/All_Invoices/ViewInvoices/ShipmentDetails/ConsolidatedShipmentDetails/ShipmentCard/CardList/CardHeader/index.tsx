@@ -1,16 +1,11 @@
 import Field from './Field/index';
 import styles from './styles.module.css';
 
-function CardHeader({ fields = [], showCode = false }) {
+function CardHeader({ fields }) {
 	return (
 		<div className={styles.container}>
 			<div className={styles.row}>
-				{fields?.map((field) => {
-					if (field.show === false) {
-						return null;
-					}
-					return <Field key={field.label} field={field} showCode={showCode} />;
-				})}
+				{fields?.map((field) => <Field key={field.key} field={field} />)}
 			</div>
 		</div>
 	);

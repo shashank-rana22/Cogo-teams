@@ -22,6 +22,7 @@ function Document({ shipmentId }) {
 				<CardList
 					fields={tableColumn()}
 					data={documentData}
+					key="id"
 				/>
 			)
 	);
