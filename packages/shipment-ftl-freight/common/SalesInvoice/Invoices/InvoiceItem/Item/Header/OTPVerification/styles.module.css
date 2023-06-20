@@ -52,12 +52,6 @@
 	margin: 16px;
 }
 
-.modal_footer {
-	> button:not(:last-of-type) {
-		margin-right: 16px;
-	}
-}
-
 .loader_wrapper {
 	display: flex;
 	align-items: center;

@@ -9,6 +9,8 @@ import useVerifyInvoiceOtp from '../../../../../../../../../hooks/useVerifyInvoi
 import OtpInput from './OtpInput';
 import styles from './styles.module.css';
 
+const USER_MOBILE_NUMBER_INDEX = 1;
+const USER_ID_INDEX = 0;
 const OTP_LENGTH = 4;
 
 function OTPVerification({
@@ -59,12 +61,12 @@ function OTPVerification({
 		if (!isEmpty(selectedUser)) {
 			const payload = {
 				invoice_id : invoice?.id,
-				user_id    : selectedUser?.split('_')?.[0],
+				user_id    : selectedUser?.split('_')?.[USER_ID_INDEX],
 			};
 			await sendOtpForInvoiceApproval(payload);
 		}
 	};
-	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[1]} registered mobile number`;
+	const title = `Enter OTP sent to ${selectedUser?.split('_')?.[USER_MOBILE_NUMBER_INDEX]} registered mobile number`;
 
 	let userListInfo = null;
 	if (loading) {
@@ -73,7 +75,7 @@ function OTPVerification({
 				<Loader />
 			</div>
 		);
-	} else if (userList?.length === 0 && !loading) {
+	} else if (isEmpty(userList) && !loading) {
 		userListInfo = <div className={styles.no_data}>No verified user exists!</div>;
 	} else {
 		(
@@ -113,7 +115,7 @@ function OTPVerification({
 						<Button
 							size="md"
 							onClick={handleClick}
-							disabled={userList?.length === 0 || isEmpty(selectedUser)}
+							disabled={isEmpty(userList) || isEmpty(selectedUser)}
 						>
 							Send
 						</Button>
