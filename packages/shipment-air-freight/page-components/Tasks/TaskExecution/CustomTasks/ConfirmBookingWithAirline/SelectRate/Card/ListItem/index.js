@@ -58,6 +58,32 @@ function ListItem({
 					<div className={styles.heading}>Commodity</div>
 					<div className={styles.sub_heading}>{data?.service?.commodity || '-'}</div>
 				</div>
+				{data?.service?.commodity_description && (
+					<div>
+						<div className={styles.heading}>Commodity Description</div>
+						<Tooltip
+							content={data?.service?.commodity_description}
+							placement="top"
+						>
+							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+								{data?.service?.commodity_description}
+							</div>
+						</Tooltip>
+					</div>
+				)}
+				{data?.service?.hs_code &&	(
+					<div>
+						<div className={styles.heading}>HS Code</div>
+						<Tooltip
+							content={data?.service?.hs_code}
+							placement="top"
+						>
+							<div className={`${styles.sub_heading} ${styles.secondary_heading}`}>
+								{data?.service?.hs_code}
+							</div>
+						</Tooltip>
+					</div>
+				)}
 				<div>
 					<div className={styles.heading}>Price Type</div>
 					<div className={styles.sub_heading}>{startCase(data?.service?.price_type) || '-'}</div>
