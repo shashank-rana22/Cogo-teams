@@ -21,11 +21,15 @@ interface FormData {
 	scheduledHour?:string,
 	scheduledMinute?:string,
 	scheduleRule?:any,
-	cogoEntityId?:string,
+	name?:string,
+	dunningCycleType?:string,
 	filters?:{
 		dueOutstandingCurrency?:string,
 		organizationStakeholderIds?:string[],
 		serviceTypes?:string[],
+		cogoEntityId?:string,
+		ageingBucket?:string,
+		totalDueOutstanding?:number | string,
 	}
 }
 
@@ -40,9 +44,19 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		triggerType, frequency, weekDay,
 		monthDay, timezone, scheduledHour, scheduledMinute,
 		isAllCreditControllers, oneTimeDate, scheduleRule,
-		cogoEntityId,
 		filters,
+		name,
+		dunningCycleType,
 	} = formData || {};
+
+	const {
+		organizationStakeholderIds,
+		serviceTypes,
+		cogoEntityId,
+		ageingBucket,
+		totalDueOutstanding,
+		dueOutstandingCurrency,
+	} = filters || {};
 
 	const {
 		scheduleTime,
@@ -101,18 +115,28 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 				monthDay        : dayOfMonth
 					? String(dayOfMonth) : undefined,
 				oneTimeDate            : stringDate ? formattedOneTimeDate : undefined,
-				dueOutstandingCurrency : filters?.dueOutstandingCurrency || undefined,
-			    isAllCreditControllers : !(filters?.organizationStakeholderIds?.length > 0),
-				creditController       : filters?.organizationStakeholderIds || undefined,
-				serviceType            : filters?.serviceTypes || undefined,
+				dueOutstandingCurrency : dueOutstandingCurrency || undefined,
+			    isAllCreditControllers : !(organizationStakeholderIds?.length > 0),
+				creditController       : organizationStakeholderIds || undefined,
+				serviceType            : serviceTypes || undefined,
+				cycleName              : name || undefined,
+				cycleType              : dunningCycleType || undefined,
+				cogoEntityId,
+				ageingBucket,
+				totalDueOutstanding,
 			}));
 		}
 	}, [dayOfMonth, dunningExecutionFrequency, scheduleTime, scheduleTimeZone,
 		week, isEditMode, setFormData, oneTimeDate,
-		filters?.dueOutstandingCurrency,
-		filters?.organizationStakeholderIds,
-		filters?.serviceTypes,
+		dueOutstandingCurrency,
+		organizationStakeholderIds,
+		serviceTypes,
 		oneTimeDateSchedule,
+		ageingBucket,
+		cogoEntityId,
+		dunningCycleType,
+		name,
+		totalDueOutstanding,
 	]);
 
 	useEffect(() => {

@@ -31,7 +31,6 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					type        : 'input',
 					prefix      : null,
 					placeholder : 'Insert Cycle Name',
-					value       : formData?.cycleName || formData?.name,
 					disabled    : isEditMode,
 					span        : 12,
 				},
@@ -41,7 +40,6 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 			label   : 'Cycle Type',
 			name    : 'cycleType',
 			type    : 'radioGroup',
-			value   : !isEditMode ? formData?.cycleType : formData?.dunningCycleType,
 			span    : 12,
 			options : [
 				{ name: 'SOA', value: 'SOA', label: 'SOA' },
@@ -52,7 +50,6 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 		{
 			label    : 'Cogo Entity',
 			name     : 'cogoEntityId',
-			value    : !isEditMode ? formData?.cogoEntityId : formData?.filters?.cogoEntityId,
 			type     : 'radioGroup',
 			options  : entityOptions,
 			disabled : isEditMode,
@@ -108,7 +105,6 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					label    : 'Ageing Bucket',
 					name     : 'ageingBucket',
 					type     : 'select',
-					value    : !isEditMode ? formData?.ageingBucket : formData?.filters?.ageingBucket,
 					disabled : isEditMode,
 					span     : 2,
 					options  : [
@@ -137,11 +133,9 @@ export const controls = ({ formData, setFormData, isEditMode = false }) => {
 					disabled    : true,
 				},
 				{
-					name        : 'totalDueOutstanding',
-					placeholder : 'Insert Amount',
-					type        : 'input',
-					value       : !isEditMode ? formData?.totalDueOutstanding
-						: formData?.filters?.totalDueOutstanding,
+					name               : 'totalDueOutstanding',
+					placeholder        : 'Insert Amount',
+					type               : 'input',
 					onlyNumbersAllowed : true,
 					prefix             : null,
 					disabled           : isEditMode,

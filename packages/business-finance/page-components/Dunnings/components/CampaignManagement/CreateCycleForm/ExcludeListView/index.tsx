@@ -35,7 +35,7 @@ function ExcludeListView({ uncheckedRows, setUncheckedRows, formData }:Props) {
 						placeholder="Search By Customer Name"
 						suffix={<IcMSearchlight />}
 						value={search}
-						onChange={(e:any) => setSearch(e)}
+						onChange={(e:string) => setSearch(e)}
 						className={styles.search}
 					/>
 				</div>
