@@ -11,7 +11,7 @@ import { useState } from 'react';
 
 import styles from '../../styles.module.css';
 
-const INITIAL_STATE = 0;
+const IS_EMPTY = 0;
 
 function KebabContent({
 	invoice = {},
@@ -26,15 +26,22 @@ function KebabContent({
 }) {
 	const user_data = useSelector(({ profile }) => profile || {});
 	const [show, setShow] = useState(false);
-	const showForOldShipments =	shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
-	&& invoice.status === 'pending';
 
-	const disableActionCondition = ['reviewed', 'approved'].includes(invoice.status)
+	const {
+		status, remarks,
+		exchange_rate_document, proforma_email_count = 0,
+		sales_email_count = 0, sales_utr,
+	} = invoice || {};
+
+	const showForOldShipments =	shipment_data?.serial_id <= GLOBAL_CONSTANTS.invoice_check_id
+	&& status === 'pending';
+
+	const disableActionCondition = ['reviewed', 'approved'].includes(status)
 	|| isEmpty(invoiceData.invoice_trigger_date);
 
 	let disableAction = showForOldShipments ? isIRNGenerated : disableActionCondition;
 
-	if (invoice.status === 'amendment_requested') {
+	if (status === 'amendment_requested') {
 		disableAction = false;
 	}
 
@@ -46,11 +53,11 @@ function KebabContent({
 	const remark_container = (
 		<div className={styles.remark_container}>
 			<div className={styles.title}>Invoice Remarks</div>
-			<div className={styles.value}>{invoice.remarks}</div>
+			<div className={styles.value}>{remarks}</div>
 		</div>
 	);
 
-	const commonActions = invoice.status !== 'approved' && !disableAction;
+	const commonActions = status !== 'approved' && !disableAction;
 
 	const editInvoicesVisiblity = shipment_data?.is_cogo_assured !== true
 	|| user_data?.user?.id === GLOBAL_CONSTANTS.uuid.ajeet_singh_user_id;
@@ -104,7 +111,7 @@ function KebabContent({
 					</div>
 				</>
 			) : null}
-			{(invoice.exchange_rate_document || []).map((url) => (
+			{(exchange_rate_document || []).map((url) => (
 				<div key={url}>
 					{commonActions ? <div className={styles.line} /> : null}
 					<div
@@ -135,24 +142,24 @@ function KebabContent({
 							<div className={styles.flex_row}>
 								Proforma email sent :
 								&nbsp;
-								{invoice.proforma_email_count || INITIAL_STATE}
+								{proforma_email_count}
 							</div>
 
 							<div className={cl`${styles.flex_row} ${styles.margin}`}>
 								Live email sent:
 								&nbsp;
-								{invoice.sales_email_count || INITIAL_STATE}
+								{sales_email_count}
 							</div>
 							<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 								<div className={cl`${styles.flex_row} ${styles.margin}`}>
 									UTR Number:
 									&nbsp;
-									{invoice?.sales_utr?.utr_number || ''}
+									{sales_utr?.utr_number || ''}
 								</div>
 								<div className={cl`${styles.flex_row} ${styles.margin}`}>
 									Status:
 									&nbsp;
-									{invoice?.sales_utr?.status || ''}
+									{sales_utr?.status || ''}
 								</div>
 							</div>
 						</div>
@@ -163,7 +170,7 @@ function KebabContent({
 					</div>
 				</Tooltip>
 			</div>
-			{!disableAction || invoice.exchange_rate_document?.length > INITIAL_STATE ? (
+			{!disableAction || exchange_rate_document?.length > IS_EMPTY ? (
 				<Popover
 					interactive
 					placement="bottom"
@@ -185,7 +192,7 @@ function KebabContent({
 				<div className={styles.empty_div} />
 			)}
 
-			{!isEmpty(invoice.remarks) ? (
+			{!isEmpty(remarks) ? (
 				<Tooltip
 					placement="bottom"
 					theme="light-border"

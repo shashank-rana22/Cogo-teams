@@ -1,5 +1,6 @@
 import { Textarea, Popover, Toast } from '@cogoport/components';
 import FileUploader from '@cogoport/forms/page-components/Business/FileUploader';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMSend, IcMAttach, IcMDocument } from '@cogoport/icons-react';
 import React, { useRef, useState } from 'react';
 
@@ -12,7 +13,6 @@ import MessageContainer from './MessageContainer';
 import SendTo from './SendTo';
 import styles from './styles.module.css';
 
-const IS_STAKEHOLDER = 0;
 const INITIAL_STATE_ROWS = 1;
 const TOTAL_STAKEHOLDERS_LENGTH = 2;
 const TOTAL_ROWS = 5;
@@ -50,7 +50,7 @@ function Details({
 	const { msgContent } = useFireBase({ id });
 
 	const isStakeholder = shipmentChatStakeholders.includes(
-		channelData?.stakeholder_types?.[IS_STAKEHOLDER],
+		channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index],
 	);
 
 	const formValues = {
@@ -65,7 +65,8 @@ function Details({
 	// formatting Data for hooks
 	const stakeholder = stakeHolderView.split(' ');
 	const stakeholderArray = (stakeholder || []).map((item) => item.replace('@', ''));
-	const conditionArr = stakeholderArray.length && stakeholderArray[IS_STAKEHOLDER] !== '' ? [...stakeholderArray] : [];
+	const conditionArr = stakeholderArray.length && stakeholderArray[GLOBAL_CONSTANTS.zeroth_index]
+	!== '' ? [...stakeholderArray] : [];
 	const filteredArr = (conditionArr || []).map((item) => {
 		if (item === '') {
 			return null;
@@ -81,19 +82,19 @@ function Details({
 	};
 
 	let visible_to_stakeholders = isStakeholder
-		? [...filteredArr, channelData?.stakeholder_types?.[IS_STAKEHOLDER]]
+		? [...filteredArr, channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index]]
 		: [...filteredArr];
 
 	visible_to_stakeholders = visible_to_stakeholders?.filter((item) => shipmentChatStakeholders.includes(item));
 
 	const GroupChannel = filteredArr.length
 		? {
-			created_by_stakeholder : channelData?.stakeholder_types?.[IS_STAKEHOLDER],
+			created_by_stakeholder : channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index],
 			source_id              : sourceId,
 			visible_to_stakeholders,
 		}
 		: {
-			created_by_stakeholder : channelData?.stakeholder_types?.[IS_STAKEHOLDER],
+			created_by_stakeholder : channelData?.stakeholder_types?.[GLOBAL_CONSTANTS.zeroth_index],
 			source_id              : sourceId,
 			visible_to_user_ids    : subscribedUsers,
 		};

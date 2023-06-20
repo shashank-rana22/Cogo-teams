@@ -1,10 +1,10 @@
 import { cl, Button, Modal } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMError } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 
 import styles from '../styles.module.css';
 
-const INITIAL_STATE = 0;
 const COUNT = 1;
 
 function LinersExchangeRateConfirm({
@@ -34,7 +34,7 @@ function LinersExchangeRateConfirm({
 
 					{Object.keys(invoice?.exchange_rates)?.map((item) => (
 						<div key={item} className={cl`${styles.flex} ${styles.row}`}>
-							<div className={styles.title}>{item?.split('_')?.[INITIAL_STATE]}</div>
+							<div className={styles.title}>{item?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index]}</div>
 							<div className={styles.line} />
 
 							<div className={styles.title}>{item?.split('_')?.[COUNT]}</div>

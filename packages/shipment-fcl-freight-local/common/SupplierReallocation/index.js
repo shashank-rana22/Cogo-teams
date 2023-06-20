@@ -1,6 +1,7 @@
 import { Button, Modal } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { InputController, SelectController, AsyncSelectController, useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useContext } from 'react';
 
 import useUpdateShipmentService from '../../hooks/useUpdateShipmentService';
@@ -9,7 +10,6 @@ import getControls from './getControls';
 import styles from './styles.module.css';
 
 const controlsMapping = { asyncSelect: AsyncSelectController, select: SelectController, number: InputController };
-const INITIAL_STATE = 0;
 
 function FormElement(props) {
 	const { name, type, label, errors } = props || {};
@@ -37,7 +37,7 @@ function SupplierReallocation({
 
 	const { documents, shipment_type, trade_type = '', payment_term = '' } = shipment_data || {};
 
-	const serviceObj = serviceData?.[INITIAL_STATE] || {};
+	const serviceObj = serviceData?.[GLOBAL_CONSTANTS.zeroth_index] || {};
 	const { service_type } = serviceObj || {};
 
 	const { defaultValues, controls, showAllControls } = getControls({

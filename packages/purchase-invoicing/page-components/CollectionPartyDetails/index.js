@@ -25,7 +25,7 @@ const SERVICE_WRAPPER_START_INDEX = 0;
 const DEFAULT_COLECTION_PARTY_COUNT = 0;
 const DEFAULT_STEP = 1;
 const DEFAULT_NET_TOTAL = 0;
-const MAX_LEN = 25;
+const MAX_LEN_FOR_TOOLTIP = 25;
 
 const STATE = ['init', 'awaiting_service_provider_confirmation', 'completed'];
 
@@ -154,7 +154,7 @@ function CollectionPartyDetails({ collectionParty = {}, refetch = () => {}, serv
 							collectionParty.invoice_total,
 							collectionParty.invoice_currency,
 						)}
-						maxlength={MAX_LEN}
+						maxlength={MAX_LEN_FOR_TOOLTIP}
 					/>
 					<span className={styles.paddingleft}>
 						{`- (${collectionParty?.collection_parties?.length || DEFAULT_COLECTION_PARTY_COUNT})`}

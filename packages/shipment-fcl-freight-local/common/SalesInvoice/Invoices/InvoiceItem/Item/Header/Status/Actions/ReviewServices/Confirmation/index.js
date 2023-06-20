@@ -8,7 +8,7 @@ function Confirmation({ value = false, setValue = () => {} }) {
 			role="button"
 			tabIndex={0}
 			className={styles.container}
-			onClick={() => setValue(!value)}
+			onClick={() => setValue((pev) => !pev)}
 		>
 			<Checkbox checked={value} />
 

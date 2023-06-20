@@ -1,4 +1,5 @@
 import { cl } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 import { useState, useRef } from 'react';
@@ -10,8 +11,6 @@ import InvoicingPartyDetail from './InvoicingPartyDetail';
 import RequestCN from './RequestCN';
 import Status from './Status';
 import styles from './styles.module.css';
-
-const INITIAL_STATE = 0;
 
 function Header({
 	children = null,
@@ -38,7 +37,7 @@ function Header({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === invoice?.live_invoice_number
 			|| item?.proformaNumber === invoice?.live_invoice_number,
-	)?.[INITIAL_STATE]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
