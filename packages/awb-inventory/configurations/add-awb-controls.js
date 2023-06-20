@@ -1,4 +1,8 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
 import checkValidation from '../utils/checkValidation';
+
+const geo = getGeoConstants();
 
 const ALLOWED_TOTAL_AWB_ALLOTED = 200;
 
@@ -133,6 +137,20 @@ const awbControls = ({
 		params      : {
 			branches_data_required : true,
 			filters                : { status: 'active', account_type: 'importer_exporter' },
+		},
+	},
+	{
+		name        : 'booking_agent_id',
+		type        : 'async-select',
+		asyncKey    : 'partner_users',
+		label       : 'Booking Agent (KAM)',
+		placeholder : 'Booking Agent',
+		valueKey    : 'user_id',
+		span        : 6,
+		params      : {
+			filters: {
+				role_ids: geo?.uuid.kam_ids,
+			},
 		},
 	},
 ];

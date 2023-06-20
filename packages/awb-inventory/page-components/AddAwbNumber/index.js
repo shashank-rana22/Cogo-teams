@@ -52,6 +52,7 @@ function AddAwbNumber({
 	const showElements = {
 		importer_exporter_id    : getShowElements(),
 		destination_location_id : getShowElements(),
+		booking_agent_id        : getShowElements(),
 	};
 	useEffect(() => {
 		if (airlineId) {

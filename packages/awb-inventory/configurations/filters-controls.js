@@ -1,3 +1,7 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
+const geo = getGeoConstants();
+
 const controls = [
 	{
 		name        : 'airline_id',
@@ -58,6 +62,36 @@ const controls = [
 		valueKey    : 'user_id',
 		multiple    : true,
 		span        : 6,
+	},
+	{
+		name        : 'booking_agent_id',
+		type        : 'async-select',
+		asyncKey    : 'partner_users',
+		label       : 'Booking Agent (KAM)',
+		placeholder : 'Booking Agent',
+		valueKey    : 'user_id',
+		multiple    : true,
+		span        : 6,
+		params      : {
+			filters: {
+				role_ids: geo?.uuid.kam_ids,
+			},
+		},
+		isClearable: true,
+	},
+	{
+		name        : 'importer_exporter_id',
+		type        : 'async-select',
+		asyncKey    : 'organizations',
+		label       : 'Shipper Name',
+		placeholder : 'Shipper Name',
+		multiple    : true,
+		span        : 6,
+		params      : {
+			branches_data_required : true,
+			filters                : { status: 'active', account_type: 'importer_exporter' },
+		},
+		isClearable: true,
 	},
 ];
 export default controls;

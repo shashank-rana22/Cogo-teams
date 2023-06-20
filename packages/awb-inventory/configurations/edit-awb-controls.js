@@ -1,4 +1,8 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
+
 import checkValidation from '../utils/checkValidation';
+
+const geo = getGeoConstants();
 
 const awbControls = ({
 	item,
@@ -45,6 +49,7 @@ const awbControls = ({
 				type: ['airport', 'country'],
 			},
 		},
+		isClearable: true,
 	},
 	{
 		name        : 'importer_exporter_id',
@@ -80,6 +85,20 @@ const awbControls = ({
 		span                  : 6,
 		rules                 : {
 			required: true,
+		},
+	},
+	{
+		name        : 'booking_agent_id',
+		type        : 'async-select',
+		asyncKey    : 'partner_users',
+		label       : 'Booking Agent (KAM)',
+		placeholder : 'Booking Agent',
+		valueKey    : 'user_id',
+		span        : 6,
+		params      : {
+			filters: {
+				role_ids: geo?.uuid.kam_ids,
+			},
 		},
 	},
 	{
