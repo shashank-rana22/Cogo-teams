@@ -66,7 +66,7 @@ function Outstanding({ entityCode }) {
 
 			{outstandingLoading ? (
 				<div>
-					{[...Array(7).keys()].map((key) => (
+					{Array(7).fill(1).map((key) => (
 						<OrgLoader key={key} />
 					))}
 				</div>
