@@ -61,6 +61,8 @@ function Dashboard() {
 
 	const CHECK_IF_ONE_EMPLOYEE_SELECTED = selectArrayUnassignedEmployee.length === DISPLAY_ADD_KRA_BUTTON;
 
+	console.log('selectAccordian', selectAccordian);
+
 	return (
 		<div>
 			<div className={styles.header}>
@@ -87,7 +89,7 @@ function Dashboard() {
 						<Button
 							size="md"
 							onClick={() => setShowKRACalculationTable(true)}
-							disabled={isEmpty(selectArrayUnassignedEmployee)}
+							// disabled={isEmpty(selectArrayUnassignedEmployee)}
 						>
 							Proceed to Allocate KRAs
 						</Button>
@@ -159,6 +161,7 @@ function Dashboard() {
 							getkrasAssigned={getkrasAssigned}
 							getUnassignedEmployee={getUnassignedEmployee}
 							getEmployeesWithLowWeightage={getEmployeesWithLowWeightage}
+							selectAccordian={selectAccordian}
 						/>
 					</div>
 				)}

@@ -10,6 +10,7 @@ function KRATable({ selectArray, filters, getEmployeesWithLowWeightage, getkrasA
 		inputValue,
 		setInputValue,
 		onClickAddKRAs,
+		selectAccordian,
 	} = useKRAList({ filters });
 
 	return (
@@ -28,6 +29,7 @@ function KRATable({ selectArray, filters, getEmployeesWithLowWeightage, getkrasA
 				getkrasAssigned={getkrasAssigned}
 				getUnassignedEmployee={getUnassignedEmployee}
 				getEmployeesWithLowWeightage={getEmployeesWithLowWeightage}
+				selectAccordian={selectAccordian}
 			/>
 		</div>
 	);
