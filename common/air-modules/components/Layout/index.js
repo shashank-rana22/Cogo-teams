@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import EditServiceCharges from '../EditServiceCharges';
 
@@ -45,16 +45,11 @@ function Layout({
 		TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 	}
 
-	const keysForFields = useMemo(
-		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
-		[TOTAL_FIELDS.length],
-	);
-
 	return (
 		<div className={styles.layout}>
-			{TOTAL_FIELDS.map((rowFields, i) => (
-				<div className={cl`${styles.row} form_layout_row`} key={keysForFields[i]}>
-					{rowFields.map((field) => {
+			{Object.keys(TOTAL_FIELDS).map((rowFields) => (
+				<div className={cl`${styles.row} form_layout_row`} key={rowFields}>
+					{TOTAL_FIELDS[rowFields].map((field) => {
 						const { type, heading = '' } = field || {};
 
 						if (type === 'fieldArray') {

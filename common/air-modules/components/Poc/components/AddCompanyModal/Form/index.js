@@ -5,7 +5,7 @@ import DefaultForm from './DefaultForm';
 import SameAsBookingPartyForm from './SameAsBookingPartyForm';
 import SelfAndTradePartyForm from './SelfAndTradePartyForm';
 
-const MAPPING = {
+const FORM_MAPPING = {
 	create_new_company    : CreateNewCompanyForm,
 	same_as_booking_party : SameAsBookingPartyForm,
 	self                  : SelfAndTradePartyForm,
@@ -15,8 +15,8 @@ const MAPPING = {
 function Form({ companyType = 'trade_partner', ...rest }, ref) {
 	let SelectedForm = null;
 
-	if (Object.keys(MAPPING).includes(companyType)) {
-		SelectedForm = MAPPING[companyType];
+	if (Object.keys(FORM_MAPPING).includes(companyType)) {
+		SelectedForm = FORM_MAPPING[companyType];
 	} else {
 		SelectedForm = DefaultForm;
 	}
