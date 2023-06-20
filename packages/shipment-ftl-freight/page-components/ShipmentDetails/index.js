@@ -1,6 +1,7 @@
 import { Tabs, TabPanel, Loader, Button, Toggle } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMRefresh } from '@cogoport/icons-react';
+import PurchaseInvoicing from '@cogoport/purchase-invoicing';
 import { ShipmentChat } from '@cogoport/shipment-chat';
 import { ShipmentMails } from '@cogoport/shipment-mails';
 import { Tracking } from '@cogoport/surface-modules';
@@ -23,11 +24,13 @@ import getStakeholderConfig from '../../stakeholderConfig';
 
 import styles from './styles.module.css';
 
+const ACTIVE_STAKEHOLDER = 'superadmin';
+const FORBIDDEN_STATUS_CODE = 403;
+
 function ShipmentDetails() {
-	const activeStakeholder = 'superadmin';
 	const router = useRouter();
 
-	const stakeholderConfig = getStakeholderConfig({ stakeholder: activeStakeholder });
+	const stakeholderConfig = getStakeholderConfig({ stakeholder: ACTIVE_STAKEHOLDER });
 	const { get } = useGetShipment();
 
 	const [activeTab, setActiveTab] = useState('overview');
@@ -46,9 +49,9 @@ function ShipmentDetails() {
 		...get,
 		...getTimeline,
 		...servicesGet,
-		activeStakeholder,
+		ACTIVE_STAKEHOLDER,
 		stakeholderConfig,
-	}), [get, servicesGet, getTimeline, activeStakeholder, stakeholderConfig]);
+	}), [get, servicesGet, getTimeline, stakeholderConfig]);
 
 	useEffect(() => {
 		router.prefetch(router.asPath);
@@ -63,7 +66,7 @@ function ShipmentDetails() {
 		);
 	}
 
-	if (!shipment_data && ![403, undefined].includes(getShipmentStatusCode)) {
+	if (!shipment_data && ![FORBIDDEN_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.section}>
@@ -83,7 +86,7 @@ function ShipmentDetails() {
 		);
 	}
 
-	if (getShipmentStatusCode === 403 && getShipmentStatusCode !== undefined) {
+	if (getShipmentStatusCode === FORBIDDEN_STATUS_CODE && getShipmentStatusCode !== undefined) {
 		return (
 			<div className={styles.shipment_not_found}>
 				<div className={styles.page}>
@@ -138,6 +141,10 @@ function ShipmentDetails() {
 
 						<TabPanel name="invoice_and_quotation" title="Sales Invoice">
 							<SalesInvoice />
+						</TabPanel>
+
+						<TabPanel name="purchase_live_invoice" title="Purchase Live Invoice">
+							<PurchaseInvoicing shipmentData={shipment_data} servicesData={servicesGet?.servicesList} />
 						</TabPanel>
 
 						<TabPanel name="documents" title="Documents">
