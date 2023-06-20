@@ -11,20 +11,22 @@ const getParam = ({ startDate, endDate, activityType, rewardType, type }) => ({
 });
 
 const useGetReferralBusinessAnalytics = ({ selectedDate = {}, businessFilterType = {}, type }) => {
+	const { endDate, startDate } = selectedDate || {};
+
+	const { activityType = '', rewardType = '' } = businessFilterType;
+
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : 'get_referral_business_analytics',
 	}, { manual: true });
 
-	const { endDate, startDate } = selectedDate || {};
-	const { activityType = '', rewardType = '' } = businessFilterType;
 	const userAnalyticStats = useCallback(() => {
 		try {
 			trigger({
 				params: getParam({ startDate, endDate, activityType, rewardType, type }),
 			});
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [trigger, startDate, endDate, activityType, rewardType, type]);
 

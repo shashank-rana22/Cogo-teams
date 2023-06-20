@@ -8,19 +8,20 @@ const getParam = ({ startDate, endDate, filterType }) => ({
 });
 
 const useGetReferralUserAnalytics = ({ filterType = '', selectedDate = {} }) => {
+	const { endDate, startDate } = selectedDate || {};
+
 	const [{ loading, data }, trigger] = useRequest({
 		method : 'get',
 		url    : 'get_referral_user_analytics',
 	}, { manual: true });
 
-	const { endDate, startDate } = selectedDate || {};
 	const userAnalyticStats = useCallback(() => {
 		try {
 			trigger({
 				params: getParam({ startDate, endDate, filterType }),
 			});
 		} catch (error) {
-			console.log(error);
+			console.error(error);
 		}
 	}, [trigger, startDate, endDate, filterType]);
 
