@@ -2303,6 +2303,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/saas-tools/standard-milestones',
 				possible_apis : apis.saas_tools_standard_milestones,
 			},
+			{
+				key           : 'saas_tools-vessel_tracking',
+				title         : 'Live Vessel Tracking',
+				href          : '/v2/saas-tools/live-vessel-tracking',
+				as            : '/v2/saas-tools/live-vessel-tracking',
+				possible_apis : apis.saas_live_vessel_tracking,
+			},
 		],
 	},
 	new_employee_dashboard: {

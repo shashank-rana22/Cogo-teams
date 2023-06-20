@@ -2502,6 +2502,14 @@ const saas = {
 			feature     : 'product-catalogue',
 		},
 	],
+	app_saas_live_vessel_tracking: [
+		{
+			api         : 'get_saas_vessel_tracking',
+			access_type : 'private',
+			module      : 'live-vessel-tracking',
+			feature     : 'live-vessel-tracking',
+		},
+	],
 
 };
 export default saas;
