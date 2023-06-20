@@ -1,18 +1,13 @@
 import { Tooltip } from '@cogoport/components';
-import { ShipmentDetailContext } from '@cogoport/context';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import { useContext, useRef } from 'react';
+import { useRef } from 'react';
 
 import styles from '../styles.module.css';
-
-const INITIAL_STATE = 0;
 
 function InvoicingPartyDetail({
 	invoice = {},
 	invoicesList = [],
 }) {
-	const { shipment_data } = useContext(ShipmentDetailContext);
-
 	const invoicePartyDetailsRef = useRef(null);
 
 	const {
@@ -23,7 +18,7 @@ function InvoicingPartyDetail({
 	let invoiceStatus = invoicesList?.filter(
 		(item) => item?.invoiceNumber === live_invoice_number
 			|| item?.proformaNumber === live_invoice_number,
-	)?.[INITIAL_STATE]?.status;
+	)?.[GLOBAL_CONSTANTS.zeroth_index]?.status;
 
 	if (invoiceStatus === 'POSTED') {
 		invoiceStatus = 'IRN GENERATED';
@@ -35,26 +30,24 @@ function InvoicingPartyDetail({
 				{billing_address?.name || billing_address?.business_name}
 			</div>
 
-			{!GLOBAL_CONSTANTS.restricted_country_id_invoicing.includes(shipment_data?.entity_id) ? (
-				<div className={styles.gst}>
-					<div className={styles.label}>GST Number :</div>
-					<Tooltip
-						theme="light"
-						placement="bottom"
-						content={(
-							<div className={styles.tooltip_div}>
-								{billing_address?.address}
-							</div>
-						)}
-					>
-						<div
-							className={styles.gst_number}
-						>
-							{billing_address?.tax_number}
+			<div className={styles.gst}>
+				<div className={styles.label}>TAX Number :</div>
+				<Tooltip
+					theme="light"
+					placement="bottom"
+					content={(
+						<div className={styles.tooltip_div}>
+							{billing_address?.address}
 						</div>
-					</Tooltip>
-				</div>
-			) : null}
+					)}
+				>
+					<div
+						className={styles.gst_number}
+					>
+						{billing_address?.tax_number}
+					</div>
+				</Tooltip>
+			</div>
 		</div>
 	);
 }
