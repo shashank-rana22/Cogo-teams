@@ -1,22 +1,11 @@
 import { Pill } from '@cogoport/components';
 import { startCase } from '@cogoport/utils';
 
+import { MAPPING_IRN_STATUS, MAPPING_IRN_STATUS_COLOR } from '../../utils';
+
 import styles from './styles.module.css';
 
-const MAPPING_IRN_STATUS_COLOR = {
-	IRN_GENERATED : 'green',
-	POSTED        : 'green',
-	FAILED        : 'green',
-	IRN_FAILED    : '#f37166',
-};
-const MAPPING_IRN_STATUS = {
-	IRN_GENERATED : 'SUCCESS',
-	POSTED        : 'SUCCESS',
-	FAILED        : 'SUCCESS',
-	IRN_FAILED    : 'FAIL',
-};
-
-const FIXED_AMOUNT = 2;
+const GET_FIXED_AMOUNT = 2;
 
 function openPDF(event) {
 	event.preventDefault();
@@ -24,77 +13,62 @@ function openPDF(event) {
 	window.open(pdfLink, '_blank');
 }
 
-const ViewColumn = [
+const viewColumn = [
 	{
 		Header   : <div>Invoice No</div>,
 		id       : 'invoiceNo',
-		accessor : (row) => {
-			const { invoiceNumber, invoicePdfUrl } = row || {};
-			return (
-				<div className={invoicePdfUrl ? styles.invoice_number : styles.invoice_number_val}>
-					{invoicePdfUrl ? (
-						<a href={invoicePdfUrl} onClick={(event) => { openPDF(event); }}>
-							{invoiceNumber}
-						</a>
-					) : invoiceNumber }
-				</div>
-			);
-		},
+		accessor : ({ invoiceNumber, invoicePdfUrl }) => (
+			<div className={invoicePdfUrl ? styles.invoice_number : styles.invoice_number_val}>
+				{invoicePdfUrl ? (
+					<a href={invoicePdfUrl} onClick={(event) => { openPDF(event); }}>
+						{invoiceNumber}
+					</a>
+				) : invoiceNumber }
+			</div>
+		),
 	},
 	{
 		Header   : <div>Trade party’s GST</div>,
 		id       : 'tradePartyGst',
-		accessor : (row) => {
-			const { tradePartyGst } = row || {};
-			return (
-				<div className={styles.trade_party}>
-					{tradePartyGst}
-				</div>
-			);
-		},
+		accessor : ({ tradePartyGst }) => (
+			<div className={styles.trade_party}>
+				{tradePartyGst}
+			</div>
+		),
 	},
 	{
 		Header   : <div>Type</div>,
 		id       : 'type',
-		accessor : (row) => {
-			const { invoiceType } = row || {};
-			return (
-				<div>
-					{startCase(invoiceType)}
-				</div>
-			);
-		},
+		accessor : ({ invoiceType }) => (
+			<div>
+				{startCase(invoiceType)}
+			</div>
+		),
 	},
 	{
 		Header   : <div>Taxable Value</div>,
 		id       : 'taxableValue',
-		accessor : (row) => {
-			const { taxableValue, invoiceCurrency } = row || {};
-			return (
-				<div>
-					{invoiceCurrency}
-					{' '}
+		accessor : ({ taxableValue, invoiceCurrency }) => (
+			<div>
+				{invoiceCurrency}
+				{' '}
 
-					{taxableValue?.toFixed(FIXED_AMOUNT)}
-				</div>
-			);
-		},
+				{taxableValue?.toFixed(GET_FIXED_AMOUNT)}
+			</div>
+		),
 	},
 	{
 		Header   : <div>Line Count</div>,
 		id       : 'lineCount',
-		accessor : (row) => {
-			const { lineCount } = row || {};
-			return (
-				lineCount &&	(
-					<div>
-						{lineCount}
-						{' '}
-						Line Items
-					</div>
-				)
-			);
-		},
+		accessor : ({ lineCount }) => (
+			lineCount &&	(
+				<div>
+					{lineCount}
+					{' '}
+					Line Items
+				</div>
+			)
+		),
 
 	},
 	{
@@ -108,62 +82,53 @@ const ViewColumn = [
 		</div>
 	</div>,
 		id       : 'combineValue',
-		accessor : (row) => {
-			const { sgstAmount, igstAmount, cgstAmount, invoiceCurrency } = row || {};
-			return	(
-				<div>
-					<div className={styles.value_data}>
-						<div>
-							{invoiceCurrency}
-							{' '}
-							{igstAmount?.toFixed(FIXED_AMOUNT)}
-						</div>
-						<div>
-							{invoiceCurrency}
-							{' '}
-							{cgstAmount?.toFixed(FIXED_AMOUNT)}
-						</div>
-						<div>
-							{invoiceCurrency}
-							{' '}
-							{sgstAmount?.toFixed(FIXED_AMOUNT)}
-						</div>
+		accessor : ({ sgstAmount, igstAmount, cgstAmount, invoiceCurrency }) => (
+			<div>
+				<div className={styles.value_data}>
+					<div>
+						{invoiceCurrency}
+						{' '}
+						{igstAmount?.toFixed(GET_FIXED_AMOUNT)}
+					</div>
+					<div>
+						{invoiceCurrency}
+						{' '}
+						{cgstAmount?.toFixed(GET_FIXED_AMOUNT)}
+					</div>
+					<div>
+						{invoiceCurrency}
+						{' '}
+						{sgstAmount?.toFixed(GET_FIXED_AMOUNT)}
 					</div>
 				</div>
-			);
-		},
+			</div>
+		),
 	},
 	{
 		Header   : <div className={styles.invoice_value}>Invoice Value</div>,
 		id       : 'invoiceValue',
-		accessor : (row) => {
-			const { invoiceValue, invoiceCurrency } = row || {};
-			return (
-				<div className={styles.invoice_value}>
-					{invoiceCurrency}
-					{' '}
-					{invoiceValue?.toFixed(FIXED_AMOUNT)}
-				</div>
-			);
-		},
+		accessor : ({ invoiceValue, invoiceCurrency }) => (
+			<div className={styles.invoice_value}>
+				{invoiceCurrency}
+				{' '}
+				{invoiceValue?.toFixed(GET_FIXED_AMOUNT)}
+			</div>
+		),
 	},
 	{
 		Header   : <div>IRN Status</div>,
 		id       : 'irnStatus',
-		accessor : (row) => {
-			const { irnStatus } = row || {};
-			return (
-				irnStatus && (
-					<div>
-						<Pill size="md" color={MAPPING_IRN_STATUS_COLOR[irnStatus]}>
-							{MAPPING_IRN_STATUS[irnStatus] || 'N/A'}
-						</Pill>
-					</div>
-				)
-			);
-		},
+		accessor : ({ irnStatus }) => (
+			irnStatus && (
+				<div>
+					<Pill size="md" color={MAPPING_IRN_STATUS_COLOR[irnStatus]}>
+						{MAPPING_IRN_STATUS[irnStatus] || 'N/A'}
+					</Pill>
+				</div>
+			)
+		),
 	},
 
 ];
 
-export default ViewColumn;
+export default viewColumn;

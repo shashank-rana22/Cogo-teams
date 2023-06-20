@@ -12,10 +12,11 @@ const ENTITY_MAPPING = {
 		id                : '6fd98605-9d5d-479d-9fac-cf905d292b88',
 		icon              : IcCCountryIndia,
 		currency          : 'INR',
-		feature_supported : [],
+		feature_supported : ['compliance'],
 		labels            : {
 			irn_label: 'IRN',
 		},
+		GSTIN: ['27AAGCC4470P1Z5', 'MUMC22090F', 'MUMC26454B'],
 	},
 	201: {
 		country_code      : 'NL',
@@ -27,6 +28,7 @@ const ENTITY_MAPPING = {
 		labels            : {
 			irn_label: 'IRN',
 		},
+		GSTIN: [],
 	},
 	301: {
 		country_code      : 'IN',
@@ -34,10 +36,11 @@ const ENTITY_MAPPING = {
 		id                : 'ee09645b-5f34-4d2e-8ec7-6ac83a7946e1',
 		icon              : IcCCountryIndia,
 		currency          : 'INR',
-		feature_supported : ['cogo_books'],
+		feature_supported : ['cogo_books', 'compliance'],
 		labels            : {
 			irn_label: 'IRN',
 		},
+		GSTIN: ['06AAICC8838P1ZV', '07AAACF2136K1ZT', '27AAACF2136K1ZR', '27AAICC8838P1ZR', 'MUMC26454B'],
 	},
 	401: {
 		country_code      : 'SG',
@@ -49,6 +52,7 @@ const ENTITY_MAPPING = {
 		labels            : {
 			irn_label: 'IRN',
 		},
+		GSTIN: [],
 	},
 	501: {
 		country_code      : 'VN',
@@ -60,6 +64,7 @@ const ENTITY_MAPPING = {
 		labels            : {
 			irn_label: 'E-INVOICE',
 		},
+		GSTIN: [],
 	},
 };
 

@@ -18,15 +18,15 @@ function Dashboard() {
 	const getInvoiceData = [
 		{
 			label : 'Total Invoices Uploaded',
-			value : totalUploaded,
+			value : totalUploaded || '-',
 			icon  : <IcMFileUploader height="25px" width="25px" />,
 		},
 		{
 			label : 'Total Errored Out Uploaded',
-			value : erroredOutTotal,
+			value : erroredOutTotal || '-',
 			icon  : <IcMInvoiceTriggers height="25px" width="25px" />,
 		},
-		{ label: 'Full Match', value: fullMatchTotal, icon: <IcMActivePlans height="25px" width="25px" /> },
+		{ label: 'Full Match', value: fullMatchTotal || '-', icon: <IcMActivePlans height="25px" width="25px" /> },
 	];
 
 	return (

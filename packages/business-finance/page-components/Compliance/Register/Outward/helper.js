@@ -1,3 +1,4 @@
+import ENTITY_MAPPING from '@cogoport/globalization/constants/entityMapping';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const getMonth = GLOBAL_CONSTANTS.months;
@@ -8,22 +9,13 @@ export const optionsMonth = (getMonth || [{}]).map((item, index) => {
 	return options;
 });
 
-const entity = Object.keys(GLOBAL_CONSTANTS.cogoport_entities);
-const filteredArray = entity.filter((item) => item !== '201' && item !== '401' && item !== '501');
-export const optionEntity = filteredArray.map((item) => ({ value: item, label: item }));
+const keysWithCompliance = Object.keys(ENTITY_MAPPING).filter(
+	(key) => ENTITY_MAPPING[key].feature_supported.includes('compliance'),
+);
+export const optionEntity = keysWithCompliance.map((item) => ({ value: item, label: item }));
 
-const entity101GSTIN = ['27AAGCC4470P1Z5', 'MUMC22090F', 'MUMC26454B'];
-const entity301GSTIN = ['06AAICC8838P1ZV', '07AAACF2136K1ZT', '27AAACF2136K1ZR', '27AAICC8838P1ZR', 'MUMC26454B'];
-
-export const optionsGSTIN = (entityVal) => {
-	if (entityVal === '101') {
-		return entity101GSTIN.map((item) => ({ value: item, label: item }));
-	}
-	if (entityVal === '301') {
-		return entity301GSTIN.map((item) => ({ value: item, label: item }));
-	}
-	return [];
-};
+export const optionsGSTIN = (entityVal) => (ENTITY_MAPPING[entityVal]
+	? ENTITY_MAPPING[entityVal]?.GSTIN.map((item) => ({ value: item, label: item })) : []);
 
 export 	const getSupplierData = (supplierName, suppGstIn, entityCode) => [
 	{ heading: 'Supplier Name :', value: supplierName || '--' },
@@ -41,20 +33,20 @@ const newArray = [currentYear, currentYear - YEAR_MINS, currentYear - YEAR_MINS_
 export const optionsYear = (newArray || [{}]).map((item) => (
 	{ value: item.toString(), label: item.toString() }));
 
-const GET_ZERO = 0;
-const GET_ONE = 1;
-const GET_TWO = 2;
+const GET_ZERO_FOR_YEAR = 0;
+const GET_ONE_FOR_YEAR = 1;
+const GET_TWO_FOR_YEAR = 2;
 function generateLastThreeFinancialYears() {
 	const FINANCIAL_YEARS = [];
 
-	const yearRange = [GET_ZERO, GET_ONE, GET_TWO];
+	const yearRange = [GET_ZERO_FOR_YEAR, GET_ONE_FOR_YEAR, GET_TWO_FOR_YEAR];
 	yearRange.forEach((i) => {
 		const startYear = currentYear - i;
-		const endYear = startYear + GET_ONE;
+		const endYear = startYear + GET_ONE_FOR_YEAR;
 
 		const financialYear = {
 			value : startYear,
-			label : `${startYear}-${endYear.toString().substr(-GET_TWO)}`,
+			label : `${startYear}-${endYear.toString().substr(-GET_TWO_FOR_YEAR)}`,
 		};
 
 		FINANCIAL_YEARS.push(financialYear);

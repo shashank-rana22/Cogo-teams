@@ -10,7 +10,7 @@ import { getSupplierData } from '../helper';
 
 import filterControls from './filterControls';
 import styles from './styles.module.css';
-import ViewColumn from './ViewColumn';
+import viewColumn from './ViewColumn';
 
 const EMPTY_STATE = 'https://cdn.cogoport.io/cms-prod/cogo_admin/vault/original/list_emptystate.png';
 const PAGE = 1;
@@ -20,7 +20,7 @@ const PAGE_SIZE = 10;
 function View() {
 	const [filters, setFilters] = useState({});
 	const { push, query } = useRouter();
-	const GoBack = () => {
+	const goBack = () => {
 		push(
 			'/business-finance/compliance/[active_tab]/[sub_active_tab]',
 			'/business-finance/compliance/register/outward',
@@ -40,7 +40,7 @@ function View() {
 
 	return (
 		<div>
-			<div className={styles.back_button} onClick={GoBack} role="presentation">
+			<div className={styles.back_button} onClick={goBack} role="presentation">
 				<IcMArrowBack height="20px" width="20px" />
 				<div className={styles.go_back}>GO BACK</div>
 			</div>
@@ -80,7 +80,7 @@ function View() {
 			</div>
 
 			<div className={styles.table_body}>
-				<StyledTable data={list} columns={ViewColumn} loading={loading} imageFind={EMPTY_STATE} />
+				<StyledTable data={list} columns={viewColumn} loading={loading} imageFind={EMPTY_STATE} />
 			</div>
 
 			<div className={styles.pagination_container}>
