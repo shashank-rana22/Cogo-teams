@@ -9211,6 +9211,11 @@ const partner = {
 			service_name : 'platform_config',
 		},
 		{
+			api          : 'list_communication_channel_managements',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
+		{
 			api          : 'create_campaign_segment',
 			access_type  : 'private',
 			service_name : 'campaign',
@@ -9948,6 +9953,41 @@ const partner = {
 		},
 	],
 	communication_control: [
+		{
+			api          : 'list_auth_roles',
+			access_type  : 'private',
+			service_name : 'auth',
+		},
+		{
+			api          : 'update_campaign_email_configuration',
+			access_type  : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api        	 : 'create_campaign_email_configuration',
+			access_type	 : 'private',
+			service_name : 'campaign',
+		},
+		{
+			api          : 'list_communication_channel_view',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
+		{
+			api          : 'update_communication_credential',
+			access_type  : 'private',
+			service_name : 'communication',
+		},
+		{
+			api          : 'list_communication_channel_managements',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
+		{
+			api          : 'update_communication_channel_management',
+			access_type  : 'private',
+			service_name : 'communication_control',
+		},
 		{
 			api          : 'list_organization_users',
 			access_type  : 'private',
@@ -12472,6 +12512,38 @@ const partner = {
 	referral_simulation: [
 		{
 			api          : 'get_referral_simulation',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
+	referral_analytics: [
+		{
+			api          : 'list_referral_mappings',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'list_referral_transactions',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_user_analytics',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_admin_stats',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_business_analytics',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_top_ten_referral',
 			access_type  : 'private',
 			service_name : 'referral',
 		},

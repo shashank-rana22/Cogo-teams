@@ -9,7 +9,7 @@ function Profile({ loading, name, userEmail }) {
 	return (
 		<div className={styles.content}>
 			<Avatar
-				src={GLOBAL_CONSTANTS.image_url.user_avatar}
+				src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
 				alt="img"
 				disabled={false}
 				className={styles.user_div}

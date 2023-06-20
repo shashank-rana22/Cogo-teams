@@ -21,7 +21,7 @@ function GroupMembers({
 			{(filteredMembers || []).map((user) => (
 				<div className={styles.content} key={user?.id}>
 					<Avatar
-						src={GLOBAL_CONSTANTS.image_url.user_avatar}
+						src={GLOBAL_CONSTANTS.image_url.image_url.user_avatar}
 						alt="img"
 						disabled={false}
 						className={styles.user_div}
