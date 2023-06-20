@@ -29,7 +29,7 @@ function LineChart({ formattedData = [], currencyCode = '', activeStatsCard = ''
 		{
 			id    : 'amount',
 			color : '#6492bf',
-			data  : formattedData.slice().reverse(),
+			data  : [...formattedData].reverse(),
 		},
 	];
 
