@@ -1,5 +1,3 @@
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-
 const filterCommonControls = [
 	{
 		label    : 'Tags',
