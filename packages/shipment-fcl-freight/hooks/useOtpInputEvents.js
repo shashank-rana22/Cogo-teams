@@ -2,10 +2,6 @@ import { Toast } from '@cogoport/components';
 import { useRef, useEffect, useCallback } from 'react';
 
 const EVENTS = ['keydown', 'paste'];
-const NEW_STATE_VALUES = {};
-const FIRST_INDEX = 0;
-const VARIABLE_STATE = 1;
-
 const INCREMENT_IN_OPT_LOOP = 1;
 
 const CONTENT_SUBSTRING_INDEX = 0;

@@ -8,9 +8,6 @@ import POST_REVIEWED_INVOICES from '../common/SalesInvoice/helpers/post-reviewed
 
 import IsAllServicesTaken from './IsAllServicesTaken';
 
-const FINAL_PARTIES = [];
-const PARTY_SERVICES = [];
-
 const useUpdateInvoiceCombination = ({
 	refetch = () => {},
 	successMessage = 'Invoice Preference edited!',

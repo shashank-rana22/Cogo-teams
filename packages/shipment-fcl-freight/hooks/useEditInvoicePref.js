@@ -18,10 +18,6 @@ const UNIQ_IGST_VAL_LENGTH = 1;
 const PARTY_SERVICES_LENGTH_GREATER_THAN = 1;
 
 const geo = getGeoConstants();
-const ALL_SERVICE_LINE_ITEMS = [];
-const INITIAL_SERVICE_INVOICE_ID = {};
-const INITIAL_STATE = 0;
-const TOTAL_LENGTH = 1;
 
 const useEditInvoicePref = ({
 	shipment_data = {},
