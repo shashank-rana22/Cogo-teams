@@ -18,6 +18,28 @@ interface FiltersParams {
 	sortType: string;
 }
 
+interface ListItem {
+	id: string;
+	documentValue: string;
+	documentAmount: number;
+	settledAmount: number;
+	balanceAmount: number;
+	transactionDate: string;
+	lastEditedDate: string;
+	currency: string;
+	documentNo: string;
+	accountType: string;
+	accMode: string;
+	notPostedSettlementIds : Array<number>;
+	ledCurrency: string;
+}
+
+interface DataInterface {
+	list: ListItem[],
+	pageNo: number,
+	totalRecords: number,
+}
+
 const useHistorySettlemet = () => {
 	const [filters, setFilters] = useState<FiltersParams>({
 		query       : '',
@@ -28,7 +50,7 @@ const useHistorySettlemet = () => {
 		sortBy      : '',
 		sortType    : '',
 	});
-	const [apiData, setApiData] = useState({});
+	const [apiData, setApiData] = useState<DataInterface>({});
 
 	const { query: search = '', debounceQuery } = useDebounceQuery();
 
