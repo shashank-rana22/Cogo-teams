@@ -4,7 +4,7 @@ import {
 	IcMAirport,
 	IcMFhaulage,
 	IcMFftl,
-	IcCFhaulage
+	IcCFhaulage,
 } from '@cogoport/icons-react';
 import React from 'react';
 
