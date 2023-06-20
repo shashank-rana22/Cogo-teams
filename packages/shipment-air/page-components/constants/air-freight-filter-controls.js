@@ -12,6 +12,7 @@ const airFreightControls = [
 			},
 		},
 		isClearable: true,
+		className   : 'primary md',
 	},
 	{
 		name           : 'destination_airport_id',
@@ -26,6 +27,7 @@ const airFreightControls = [
 			},
 		},
 		isClearable: true,
+		className   : 'primary md',
 	},
 	{
 		name        : 'trade_type',
