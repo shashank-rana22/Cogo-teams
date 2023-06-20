@@ -13,6 +13,40 @@ import styles from './styles.module.css';
 import useUpdateServiceProvider from './updateServiceProviderFunc';
 
 const EXPORT_INCOTERMS = ['ddp', 'dap', 'dat', 'cpt', 'cip', 'cif', 'cfr'];
+const CONSTANT_ZERO = 0;
+const CONSTANT_TWO = 2;
+
+function CustomLayout({ localControls, controlForLocal, errors, task }) {
+	return (
+		<Layout
+			fields={localControls}
+			control={controlForLocal}
+			errors={errors}
+			shipment_id={task.shipment_id}
+		/>
+	);
+}
+
+function LocalsLayout(props) {
+	const { shipment_data, localControls } = props;
+	const validation = shipment_data?.all_services?.filter((service) => (
+		service.service_type === 'air_freight_local_service'
+	));
+	const CONTROLS_MAPPING = {
+		export : localControls.slice(CONSTANT_ZERO, CONSTANT_TWO),
+		import : localControls.slice(CONSTANT_TWO),
+	};
+
+	return validation.reverse().map((service) => (
+		<div className={styles.service_provider} key={service.id}>
+			<CustomLayout
+				{...props}
+				validation={validation}
+				localControls={CONTROLS_MAPPING[service.trade_type]}
+			/>
+		</div>
+	));
+}
 
 function EditRate({
 	task = {},
@@ -108,8 +142,6 @@ function EditRate({
 
 	const localControls = localRawControls.map((ctrl) => ({
 		...ctrl,
-		value: formattedRate?.[formattedRate?.primary_service?.id]?.[ctrl.name]
-				|| ctrl.value,
 		onChange: handleAirLocalChange,
 	}));
 
@@ -206,14 +238,14 @@ function EditRate({
 					shipment_id={task.shipment_id}
 				/>
 			</div>
-			<div className={styles.service_provider}>
-				<Layout
-					fields={localControls}
-					control={controlForLocal}
-					errors={errors}
-					shipment_id={task.shipment_id}
-				/>
-			</div>
+			<LocalsLayout
+				localControls={localControls}
+				controlForLocal={controlForLocal}
+				errors={errors}
+				task={task}
+				customLabel="Destination"
+				shipment_data={shipment_data}
+			/>
 			<div className={styles.service_provider}>
 				<Layout
 					fields={otherControls}
