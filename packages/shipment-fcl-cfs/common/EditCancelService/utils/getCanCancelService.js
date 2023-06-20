@@ -2,8 +2,7 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 const SERVICE_CANCELLATION_STATES = ['init', 'awaiting_service_provider_confirmation', 'confirmed_by_service_provider'];
 
-const SHOW_CANCELLATION_STAKEHOLDERS = ['superadmin', 'booking_desk',
-	'document_desk', 'costbooking_ops', 'booking_desk_manager'];
+const SHOW_CANCELLATION_STAKEHOLDERS = ['superadmin', 'booking_agent'];
 
 const EXCLUDED_SERVICE_STATES = ['completed', 'cancelled'];
 
