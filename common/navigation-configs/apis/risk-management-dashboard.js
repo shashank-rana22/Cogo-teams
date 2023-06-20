@@ -15,7 +15,7 @@ const apis = [
 		api          : 'get_shipment_risk_prone_stats',
 		access_type  : 'private',
 		feature      : 'risk_management',
-		service_name : 'bookings',
+		service_name : 'shipment',
 	},
 	{
 		api          : 'update_shipment_risk_assessment',

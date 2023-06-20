@@ -4,7 +4,7 @@ import { useEffect, useCallback } from 'react';
 
 const useGetRiskProneStats = () => {
 	const [{ loading, data }, trigger] = useRequest({
-		url    : 'fcl_freight/get_shipment_risk_prone_stats',
+		url    : 'get_shipment_risk_prone_stats',
 		method : 'get',
 	}, { manual: true, autoCancel: false });
 

@@ -8,7 +8,7 @@ import renderTooltip from '../../../../common/renderTooltip';
 import styles from './styles.module.css';
 
 const SHOW_TOOLTIP_MAX_LENGTH = 16;
-const COMMODITY_VALUE_LENGTH = 40;
+const COMMODITY_VALUE_LENGTH = 36;
 const RISK_CATEGORIES = {
 	1 : 'LOW',
 	2 : 'MODERATE',

@@ -21,6 +21,7 @@ const useGetResolve = ({ itemData, remarks, getDashboardData, getDahboardStatsDa
 			});
 			getDashboardData();
 			getDahboardStatsData();
+			Toast.success('Resolved Successfully');
 		} catch (e) {
 			Toast.error(e?.response?.data?.id[DATA_FIRST_INDEX]);
 		}
