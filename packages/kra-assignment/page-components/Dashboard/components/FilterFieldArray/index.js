@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import { IcMArrowNext } from '@cogoport/icons-react';
 import React from 'react';
 
 import getControls from './controls';
@@ -16,22 +17,6 @@ function FiltersDisplay({ setFilters }) {
 
 	return (
 		<form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-			<div className={styles.button_container}>
-				<Button
-					type="button"
-					themeType="secondary"
-					style={{ marginRight: '8px' }}
-					onClick={onClickReset}
-					size="sm"
-				>
-					Reset
-				</Button>
-
-				<Button size="sm" themeType="primary" type="submit">
-					SUBMIT
-				</Button>
-			</div>
-
 			<section className={styles.form_container}>
 				<FieldArray
 					name="single_item"
@@ -44,6 +29,27 @@ function FiltersDisplay({ setFilters }) {
 					disabled={false}
 				/>
 			</section>
+
+			<div className={styles.button_container}>
+				{/* <Button
+					type="button"
+					themeType="secondary"
+					style={{ marginRight: '8px' }}
+					onClick={onClickReset}
+					size="sm"
+				>
+					Reset
+				</Button> */}
+
+				<Button
+					size="sm"
+					themeType="secondary"
+					type="submit"
+				>
+					Proceed to Allocate KRAs &nbsp;
+					<IcMArrowNext />
+				</Button>
+			</div>
 		</form>
 	);
 }

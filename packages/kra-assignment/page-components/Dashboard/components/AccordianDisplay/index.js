@@ -7,19 +7,21 @@ import TableDisplay from '../TablesDisplay';
 
 import styles from './styles.module.css';
 
-const TABLE_USED_FOR = 'AccordianData';
+// const TABLE_USED_FOR = 'AccordianData';
 const EMPTY_TEXT = 'No Data to Show';
+const INDEX_VALUE = 1;
 
 function AccordianDisplay({
 	data = [],
+	index,
 	loading,
 	selectAccordian,
 	setSelectAccordian,
 	setSelectArrayAccordian,
 	selectArrayAccordian,
 }) {
-	const { kra_name, employee_list } = data;
-	const ARRAY_OF_EMPLOYEE_IDS = employee_list?.map((obj) => obj.id);
+	const { employee_details, kra_details } = data;
+	const ARRAY_OF_EMPLOYEE_IDS = employee_details?.map((obj) => obj.id);
 
 	if (isEmpty(data) && !loading) {
 		return (
@@ -30,7 +32,7 @@ function AccordianDisplay({
 	}
 
 	const Clicked = () => {
-		if (selectAccordian) { setSelectAccordian(); } else { setSelectAccordian(data.kra_details); }
+		if (selectAccordian) { setSelectAccordian(); } else { setSelectAccordian(kra_details); }
 		setSelectArrayAccordian();
 	};
 
@@ -41,14 +43,14 @@ function AccordianDisplay({
 			role="button"
 			tabIndex={0}
 		>
-			<Accordion title={kra_name}>
+			<Accordion title={`Group ${index + INDEX_VALUE}`}>
 				<TableDisplay
-					data={data?.employee_list}
+					data={employee_details}
 					loading={loading}
 					ARRAY_OF_IDS={ARRAY_OF_EMPLOYEE_IDS}
 					selectArray={selectArrayAccordian}
 					setSelectArray={setSelectArrayAccordian}
-					type={TABLE_USED_FOR}
+					// type={TABLE_USED_FOR}
 				/>
 			</Accordion>
 		</div>

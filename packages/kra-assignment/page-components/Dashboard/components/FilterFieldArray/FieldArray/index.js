@@ -43,7 +43,7 @@ function FieldArray({
 
 			{showButtons && !disabled ? (
 				<Button
-					themeType="secondary"
+					themeType="primary"
 					onClick={() => append(CHILD_EMPTY_VALUES)}
 					size="sm"
 					style={{ margin: '10px 0' }}
