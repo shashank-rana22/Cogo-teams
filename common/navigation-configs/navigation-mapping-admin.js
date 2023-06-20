@@ -312,18 +312,23 @@ const navigationMappingAdmin = {
 		module_type : 'dashboards',
 	},
 	schedules: {
-		key           : 'schedules',
-		title         : 'Schedules',
-		href          : '/schedules',
-		as            : '/schedules',
-		type          : 'link',
-		icon          : IcMDashboard,
-		possible_apis : [
-			...apis.schedules
-		],
-		main_apis     : [],
-		module_type   : 'dashboards',
-	},
+        key: "schedules",
+        title: "Schedules",
+        href: "/schedules",
+        as: "/schedules",
+        type: "link",
+        icon: IcMDashboard,
+        possible_apis: [...apis.schedules],
+        options: [
+            {
+                title: "Ocean Schedule Coverage",
+                href: "/schedules/ocean-schedule-coverage",
+                as: "/schedules/ocean-schedule-coverage",
+            },
+        ],
+        main_apis: [],
+        module_type: "dashboards",
+    },
 	okam_dashboard: {
 		key           : 'okam_dashboard',
 		title         : 'KAM Dashboard',
