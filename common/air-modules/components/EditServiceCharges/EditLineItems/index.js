@@ -21,11 +21,10 @@ function EditLineItems({
 	});
 
 	return (
-		<div className={styles.container}>
+		<div>
 			{!isEmpty(fields) && (
-				<>
+				<div className={styles.container}>
 					<Header controls={controls} />
-
 					<div className={styles.child_container}>
 						{fields?.map((field, index) => (
 							<Child
@@ -43,19 +42,20 @@ function EditLineItems({
 							/>
 						))}
 					</div>
-				</>
+
+					{showAddButtons
+						? (
+							<Button
+								size="sm"
+								themeType="accent"
+								onClick={() => append(CHILD_EMPTY_VALUES)}
+								className={styles.button_div}
+							>
+								+ Add Line Items
+							</Button>
+						) : null}
+				</div>
 			)}
-			{showAddButtons
-				? (
-					<Button
-						size="sm"
-						themeType="accent"
-						onClick={() => append(CHILD_EMPTY_VALUES)}
-						className={styles.button_div}
-					>
-						+ Add Line Items
-					</Button>
-				) : null}
 		</div>
 	);
 }

@@ -139,12 +139,12 @@ const useEditQuotations = ({
 				})),
 			};
 
-			QUOTATIONS.push(newQuote);
+			if (SERVICE?.service_type !== 'air_freight_local_service') { QUOTATIONS.push(newQuote); }
 		});
 
 		const checkSum = checkLineItemsSum(QUOTATIONS);
 
-		if (!checkSum.check && !(shipment_data?.shipment_type === 'air_freight_local')) {
+		if (!checkSum.check) {
 			Toast.error(checkSum.message.join(','));
 		} else {
 			try {
