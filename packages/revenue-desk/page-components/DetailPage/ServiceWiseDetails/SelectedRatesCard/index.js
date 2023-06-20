@@ -38,7 +38,7 @@ function SelectedRatesCard({
 					</div>
 				</div> */}
 				<div className={styles.mailButton}>
-					{shipmentData?.shipment_type === 'fcl_freight' ? (
+					{serviceData?.service_type === 'fcl_freight_service' ? (
 						<Button onClick={() => { setEmailModal(true); }} size="sm" theme="primary">
 							Send Mail
 						</Button>
