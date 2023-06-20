@@ -53,13 +53,12 @@ function Child({
 						/>
 					);
 				})}
+				{showDeleteButton ? (
+					<div className={styles.delete_button_container}>
+						<IcMDelete width={20} height={20} onClick={() => remove(index, FIRST_INDEX)} />
+					</div>
+				) : null}
 
-				{showDeleteButton
-					? (
-						<div className={styles.delete_button_container}>
-							<IcMDelete width={20} height={20} onClick={() => remove(index, FIRST_INDEX)} />
-						</div>
-					) : null}
 			</div>
 		</div>
 	);
