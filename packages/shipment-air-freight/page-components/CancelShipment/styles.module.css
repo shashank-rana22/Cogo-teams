@@ -13,13 +13,10 @@
 
 		.ui_input_container {
 			width: 48%;
-		}
-
-		.ui_select_container {
 			min-width: 180px;
 		}
 
-		.ui_input_container {
+		.ui_select_container {
 			min-width: 180px;
 		}
 	}
