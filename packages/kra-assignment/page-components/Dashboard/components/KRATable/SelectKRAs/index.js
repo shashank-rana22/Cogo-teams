@@ -14,7 +14,7 @@ function SelectKRAs({ selectedValue, setSelectedValue, KRAOptions, onClickAddKRA
 				<div className={styles.select_container}>
 					<MultiSelect
 						size="sm"
-						placeholder="Container no"
+						placeholder="Select KRAs"
 						value={selectedValue}
 						onChange={(e) => setSelectedValue(e)}
 						options={KRAOptions || []}

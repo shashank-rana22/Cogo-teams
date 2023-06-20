@@ -17,6 +17,7 @@ function FormComponent() {
 		watch,
 		showSelectedValue,
 		setSelectedValue,
+		loading,
 	} = useCreateKRA();
 
 	const controls = getControls({ setSelectedValue });
@@ -86,7 +87,7 @@ function FormComponent() {
 			</div>
 
 			<div style={{ display: 'flex', justifyContent: 'flex-end' }}>
-				<Button onClick={handleSubmit(onClickSubmitButton)}>Submit</Button>
+				<Button onClick={handleSubmit(onClickSubmitButton)} loading={loading}>Submit</Button>
 			</div>
 
 		</div>

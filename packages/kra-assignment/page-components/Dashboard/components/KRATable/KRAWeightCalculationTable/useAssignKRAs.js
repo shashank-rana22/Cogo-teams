@@ -7,6 +7,7 @@ const useAssignKRAs = ({
 	getEmployeesWithLowWeightage,
 	getkrasAssigned,
 	getUnassignedEmployee,
+	setInputValue,
 }) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/assign_kra',
@@ -28,7 +29,13 @@ const useAssignKRAs = ({
 			}
 		}
 	};
-	return { onClickSubmitKRAs, loading };
+
+	const onClickDeleteIcon = (id) => {
+		const updatedKRAs = inputValue.filter((item) => item.kra_assigned !== id);
+		setInputValue(updatedKRAs);
+	};
+
+	return { onClickSubmitKRAs, loading, onClickDeleteIcon };
 };
 
 export default useAssignKRAs;

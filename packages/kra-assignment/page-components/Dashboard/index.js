@@ -83,6 +83,7 @@ function Dashboard() {
 						<Button
 							size="md"
 							onClick={() => setShowKRACalculationTable(true)}
+							disabled={isEmpty(selectArrayUnassignedEmployee)}
 						>
 							Proceed to Allocate KRAs
 						</Button>

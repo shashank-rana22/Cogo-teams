@@ -1,4 +1,5 @@
 import { Button, Input } from '@cogoport/components';
+import { IcMDelete } from '@cogoport/icons-react';
 
 import styles from './styles.module.css';
 import useAssignKRAs from './useAssignKRAs';
@@ -27,13 +28,38 @@ function KRAWeightCalculationTable({
 }) {
 	const updatedValue = [...inputValue];
 
-	const { onClickSubmitKRAs, loading } = useAssignKRAs({
+	const { onClickSubmitKRAs, loading, onClickDeleteIcon } = useAssignKRAs({
 		inputValue,
 		selectArray,
 		getEmployeesWithLowWeightage,
 		getkrasAssigned,
 		getUnassignedEmployee,
+		setInputValue,
 	});
+
+	const renderFields = () => (inputValue || []).map((element, index) => (
+		<div className={styles.value} key={element?.kra_assigned}>
+			<Input
+				value={Math.round((inputValue[index]?.weightage || 1)
+					* ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
+				size="sm"
+				placeholder="0"
+				onChange={(event) => {
+					updatedValue[index] = { ...updatedValue[index], weightage: event };
+					setInputValue(updatedValue);
+				}}
+			/>
+
+			<div
+				role="presentation"
+				className={styles.delete_icon}
+				onClick={() => onClickDeleteIcon(element?.kra_assigned)}
+			>
+				<IcMDelete width={18} height={18} />
+
+			</div>
+		</div>
+	));
 
 	const totalAmount = Math.round(getTotalAmount(inputValue) * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT;
 
@@ -57,20 +83,7 @@ function KRAWeightCalculationTable({
 						Weight
 					</div>
 
-					{(inputValue || []).map((element, index) => (
-						<div className={styles.value} key={element?.kra_assigned}>
-							<Input
-								value={Math.round((inputValue[index]?.weightage || 1)
-                                    * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT}
-								size="sm"
-								placeholder="0"
-								onChange={(event) => {
-									updatedValue[index] = { ...updatedValue[index], weightage: event };
-									setInputValue(updatedValue);
-								}}
-							/>
-						</div>
-					))}
+					{renderFields()}
 				</div>
 			</div>
 
