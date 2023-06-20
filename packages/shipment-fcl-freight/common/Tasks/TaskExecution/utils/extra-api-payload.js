@@ -11,7 +11,7 @@ const NOT_INCLUDE_FIELD_IN_FTL = [
 
 const NUMBER_KEYS = ['bls_count', 'volume', 'weight', 'packages_count'];
 
-const extraApiPayload = (values, end_point, task) => {
+const extraApiPayload = (values, end_point, task, getApisData) => {
 	if (end_point === 'fcl_freight/create_document' || end_point === 'create_shipment_document') {
 		let documentArr = values?.documents;
 
@@ -77,6 +77,24 @@ const extraApiPayload = (values, end_point, task) => {
 				data,
 			};
 		});
+
+		return payload;
+	}
+
+	if (
+
+		end_point === 'update_shipment_bl_details'
+
+        && ['update_mbl_collection_status', 'update_hbl_collection_status'].includes(task?.task)
+
+	) {
+		const payload = {
+
+			ids: getApisData?.list_shipment_bl_details?.map((i) => i?.id),
+
+			data: { bl_detail: values?.bl_detail },
+
+		};
 
 		return payload;
 	}
