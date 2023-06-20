@@ -1947,6 +1947,7 @@ importers:
     specifiers:
       '@cogoport/components': ^1.0.322
       '@cogoport/forms': workspace:0.1.0
+      '@cogoport/globalization': workspace:*
       '@cogoport/icons-react': ^1.0.51
       '@cogoport/next': workspace:0.1.0
       '@cogoport/request': workspace:0.1.0
@@ -1961,6 +1962,7 @@ importers:
     dependencies:
       '@cogoport/components': 1.0.427_bsu6urv6jm3npkveoaymjbpkh4
       '@cogoport/forms': link:../../common/forms
+      '@cogoport/globalization': link:../../common/globalization
       '@cogoport/icons-react': 1.0.79_react@18.2.0
       '@cogoport/next': link:../../common/next
       '@cogoport/request': link:../../common/request
