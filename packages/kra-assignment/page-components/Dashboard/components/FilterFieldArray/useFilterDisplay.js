@@ -6,9 +6,10 @@ const CHECK_LENGTH = 0;
 const useFilterDisplay = ({ setFilters }) => {
 	const [showFilter, setShowFilter] = useState(false);
 
-	const { control, handleSubmit, reset, watch } = useForm();
+	const { control, handleSubmit, reset, watch, formState: { errors } } = useForm();
 
 	const onSubmit = (values) => {
+		console.log(values);
 		let filterApplied = false;
 
 		Object.keys(values).forEach((key) => {
@@ -32,13 +33,14 @@ const useFilterDisplay = ({ setFilters }) => {
 	};
 
 	return {
+		watch,
 		showFilter,
 		setShowFilter,
 		control,
 		handleSubmit,
 		onSubmit,
 		onClickReset,
-		watch,
+		errors,
 	};
 };
 

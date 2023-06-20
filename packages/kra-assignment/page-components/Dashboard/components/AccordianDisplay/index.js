@@ -1,6 +1,6 @@
 import { Accordion } from '@cogoport/components';
 import { isEmpty } from '@cogoport/utils';
-import React, { useState } from 'react';
+import React from 'react';
 
 import EmptyState from '../../../common/EmptyState';
 import TableDisplay from '../TablesDisplay';
@@ -10,10 +10,16 @@ import styles from './styles.module.css';
 const TABLE_USED_FOR = 'AccordianData';
 const EMPTY_TEXT = 'No Data to Show';
 
-function AccordianDisplay({ data = [], loading }) {
+function AccordianDisplay({
+	data = [],
+	loading,
+	selectAccordian,
+	setSelectAccordian,
+	setSelectArrayAccordian,
+	selectArrayAccordian,
+}) {
 	const { kra_name, employee_list } = data;
 	const ARRAY_OF_EMPLOYEE_IDS = employee_list?.map((obj) => obj.id);
-	const [selectArrayAccordian, setSelectArrayAccordian] = useState([]);
 
 	// console.log('selectArrayAccordian', data);
 	if (isEmpty(data) && !loading) {
@@ -23,9 +29,18 @@ function AccordianDisplay({ data = [], loading }) {
 			</div>
 		);
 	}
+	const Clicked = () => {
+		if (selectAccordian) { setSelectAccordian(); } else { setSelectAccordian(data.kra_details); }
+		setSelectArrayAccordian();
+	};
 
 	return (
-		<div className={styles.container}>
+		<div
+			className={styles.container}
+			onClick={() => Clicked()}
+			role="button"
+			tabIndex={0}
+		>
 			<Accordion title={kra_name}>
 				<TableDisplay
 					data={data?.employee_list}

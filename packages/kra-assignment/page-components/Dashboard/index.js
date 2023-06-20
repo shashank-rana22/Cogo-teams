@@ -1,9 +1,11 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AccordianDisplay from './components/AccordianDisplay';
 import FiltersDisplay from './components/FilterDisplay';
+import FilterFieldArray from './components/FilterFieldArray';
 import KRATable from './components/KRATable';
 import TableDisplay from './components/TablesDisplay';
 import styles from './styles.module.css';
@@ -12,6 +14,7 @@ import useGetkrasAssigned from './useGetKrasAssigned';
 import useGetUnassignedEmployee from './useGetUnassignedEmployees';
 
 const REDIRECT_URL = '/kra-assignment/create';
+const DISPLAY_ADD_KRA_BUTTON = 1;
 
 function Dashboard() {
 	const router = useRouter();
@@ -25,15 +28,18 @@ function Dashboard() {
 	const {
 		data:LowWeightageEmployeeData = [],
 		loading:LoadingLowWeightageEmployee,
-	} = useGetEmployeesWithLowWeightage();
+	} = useGetEmployeesWithLowWeightage({ filters });
 	const { list:LowWeightageEmployeeList = [] } = LowWeightageEmployeeData;
 
 	const {
 		data: KrasAssignedData,
 		loading:LoadingKrasAssigned,
-	} = useGetkrasAssigned();
+	} = useGetkrasAssigned({ filters });
 
-	// console.log('KrasAssignedData', KrasAssignedData);
+	// console.log('KrasAssignedData', filters);
+	const [filtersFields, setFiltersFields] = useState();
+	const [selectAccordian, setSelectAccordian] = useState();
+	const [selectArrayAccordian, setSelectArrayAccordian] = useState([]);
 
 	const onClickConfiguration = () => {
 		router.push(REDIRECT_URL, REDIRECT_URL);
@@ -45,7 +51,8 @@ function Dashboard() {
 	const ARRAY_OF_LOW_WEIGHTAGE_IDS = LowWeightageEmployeeList?.map((obj) => obj.id);
 	const [selectArrayLowWeightEmployee, setSelectArrayLowWeightEmployee] = useState([]);
 
-	// console.log('data', selectArrayLowWeightEmployee);
+	// console.log('selectAccordian', selectAccordian);
+	// console.log('selectArrayAccordian', selectArrayAccordian);
 
 	return (
 		<div>
@@ -70,6 +77,9 @@ function Dashboard() {
 					</div>
 
 					<div className={styles.table_display}>
+						{selectArrayUnassignedEmployee.length === DISPLAY_ADD_KRA_BUTTON
+							? <FilterFieldArray setFilters={setFiltersFields} />
+							: null}
 						<h4>All Unassigned KRA Employee List : </h4>
 						<TableDisplay
 							data={UnassignedList}
@@ -93,10 +103,21 @@ function Dashboard() {
 
 					<div>
 						<h4>All KRA List : </h4>
-						{KrasAssignedData?.list?.map((item) => (
-							<AccordianDisplay data={item} loading={LoadingKrasAssigned} key={item?.id} />
-						)) }
+						{ !isEmpty(filters)
+							? KrasAssignedData?.list?.map((item) => (
+								<AccordianDisplay
+									key={item?.id}
+									data={item}
+									loading={LoadingKrasAssigned}
+									selectAccordian={selectAccordian}
+									setSelectAccordian={setSelectAccordian}
+									selectArrayAccordian={selectArrayAccordian}
+									setSelectArrayAccordian={setSelectArrayAccordian}
+								/>
+							))
+							: <div>Select/Apply Filters to Display List of KRAs</div> }
 					</div>
+
 				</div>
 
 				<div className={styles.section_right}>
