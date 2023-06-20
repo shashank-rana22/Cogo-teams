@@ -1,4 +1,4 @@
-import { Pill, ProgressBar } from '@cogoport/components';
+import { Pill } from '@cogoport/components';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcMOverflowDot } from '@cogoport/icons-react';
 import { startCase, format } from '@cogoport/utils';
@@ -139,11 +139,8 @@ function Card({
 							<div className={styles.text}>
 								Allocation Ratio
 							</div>
-							<div className={styles.progress_bar_container}>
-								<ProgressBar
-									progress={Number(data?.rowData?.allocation_ratio) * 100 || Number(0.2) * 100}
-									uploadText=" "
-								/>
+							<div style={{ display: 'flex', justifyContent: 'center' }}>
+								{data?.rowData?.allocation_ratio || '--'}
 							</div>
 						</div>
 						<div>

@@ -24,7 +24,7 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.via_route = element?.destination_main_port?.name;
 			rowData.allocation_ratio = undefined;
 			rowData.fulfillment_ratio = 0;
-			// rowData.fulfillment_ratio = element?.fulfillment_ratio_20 || 0;
+			rowData.fulfillment_ratio_2 = element?.fulfillment_ratio_20;
 			rowData.fulfillment_ratio_7 = element?.fulfillment_ratio_70;
 			rowData.fulfillment_ratio_15 = element?.fulfillment_ratio_150;
 			rowData.remarks = element?.remarks;

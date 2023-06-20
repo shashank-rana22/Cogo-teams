@@ -17,9 +17,9 @@ function DefaultOptions({
 		<>
 			<Radio
 				label="Feasible rates not available"
-				value="feasible_rates_not_available"
-				onChange={() => handleOnChange('feasible_rates_not_available')}
-				checked={cancellationReason === 'feasible_rates_not_available'}
+				value="profitability_issue"
+				onChange={() => handleOnChange('profitability_issue')}
+				checked={cancellationReason === 'profitability_issue'}
 			/>
 			<Radio
 				label="Incorrect requirements provided"
@@ -33,13 +33,13 @@ function DefaultOptions({
 				onChange={() => handleOnChange('preferred_requirements_cannot_be_fulfilled')}
 				checked={cancellationReason === 'preferred_requirements_cannot_be_fulfilled'}
 			/>
-				<Radio
+			<Radio
 				label="Space/inventory not available"
-				value="space_inventory_not_available"
-				onChange={() => handleOnChange('space_inventory_not_available')}
-				checked={cancellationReason === 'space_inventory_not_available'}
+				value="space_unavailable"
+				onChange={() => handleOnChange('space_unavailable')}
+				checked={cancellationReason === 'space_unavailable'}
 			/>
-				<Radio
+			<Radio
 				label="Preferred line not available"
 				value="preferred_line_not_available"
 				onChange={() => handleOnChange('preferred_line_not_available')}

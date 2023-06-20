@@ -117,6 +117,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData, 
 						supplierPayload={supplierPayload}
 						shipmentData={shipmentData}
 						updateTrigger={updateTrigger}
+						priceData={priceData}
 					/>
 				) : null}
 			{modalStep === 2

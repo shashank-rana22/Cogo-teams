@@ -22,7 +22,7 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.allocation_ratio = undefined;
 		rowData.buy_price = Number(element?.total_price) / Number(container_count);
 		rowData.fulfillment_ratio = 0;
-		rowData.fulfillment_ratio_2 = element?.fulfillment_ratio_20 || 0;
+		rowData.fulfillment_ratio_2 = element?.fulfillment_ratio_20;
 		rowData.fulfillment_ratio_7 = element?.fulfillment_ratio_70;
 		rowData.fulfillment_ratio_15 = element?.fulfillment_ratio_150;
 		rowData.total_buy_price = element?.total_price || 0;

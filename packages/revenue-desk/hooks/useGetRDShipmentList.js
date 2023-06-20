@@ -47,7 +47,6 @@ const useGetRDShipmentList = () => {
 			// console.log(err);
 		}
 	};
-
 	const requiredFilterChange = {
 		origin_location_id              : filters?.origin_location_id || undefined,
 		destination_location_id         : filters?.destination_location_id || undefined,

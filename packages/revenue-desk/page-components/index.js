@@ -35,7 +35,13 @@ function RevenueDesk() {
 									placeholder="Select Service"
 									size="sm"
 									value={filters?.service}
-									onChange={(val) => setFilters({ service: val, sort_by: 'created_at_desc' })}
+									onChange={(val) => setFilters({
+										service  : val,
+										sort_by  : 'created_at_desc',
+										page     : 1,
+										state    : 'active',
+										rd_state : 'active',
+									})}
 									options={serviceOptions}
 								/>
 							</div>

@@ -6,7 +6,9 @@ const getAvailableRatesDetails = ({
 		{
 			rate_id                              : rate?.id,
 			allocation_ratio                     : rate?.rowData?.allocation_ratio,
-			fulfillment_ratio                    : rate?.rowData?.fulfillment_ratio,
+			fulfillment_ratio_2                  : rate?.rowData?.fulfillment_ratio_2,
+			fulfillment_ratio_7                  : rate?.rowData?.fulfillment_ratio_7,
+			fulfillment_ratio_15                 : rate?.rowData?.fulfillment_ratio_15,
 			active_bookings                      : rate?.rowData?.active_booking,
 			buy_price                            : rate?.rowData?.total_buy_price,
 			buy_price_currency                   : rate?.rowData?.total_buy_currency,
@@ -21,7 +23,9 @@ const getAvailableRatesDetails = ({
 		{
 			rate_id                              : rate?.id,
 			allocation_ratio                     : rate?.rowData?.allocation_ratio,
-			fulfillment_ratio                    : rate?.rowData?.fulfillment_ratio,
+			fulfillment_ratio_2                  : rate?.rowData?.fulfillment_ratio_2,
+			fulfillment_ratio_7                  : rate?.rowData?.fulfillment_ratio_7,
+			fulfillment_ratio_15                 : rate?.rowData?.fulfillment_ratio_15,
 			active_bookings                      : rate?.rowData?.active_booking,
 			buy_price                            : rate?.rowData?.total_buy_price,
 			buy_price_currency                   : rate?.rowData?.total_buy_currency,

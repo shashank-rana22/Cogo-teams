@@ -80,6 +80,7 @@
 	padding:10px 16px;
 	align-items: center;
 	justify-content: center;
+	gap:10px;
 }
 
 .price_text_section {
