@@ -1,9 +1,12 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { routeConfig } from '@cogoport/navigation-configs';
 
 import getNavData from './get-nav-data';
+import getNavigationFromUrl from './getNavigationFromUrl';
 
 const getAuthParam = (permissions_navigations, pathname) => {
-	let navigation = routeConfig?.[pathname]?.navigation || '';
+	const navigation_from_url = getNavigationFromUrl();
+	let navigation = navigation_from_url || routeConfig?.[pathname]?.navigation || '';
 
 	const permissionNavigationKeys = Object.keys(permissions_navigations || {});
 
@@ -28,7 +31,7 @@ const getAuthParam = (permissions_navigations, pathname) => {
 		(apiData || []).forEach((scope) => {
 			if (scope?.is_default && scope.type !== 'none') {
 				defaultScope = scope?.type;
-				defaultView = scope?.through_criteria?.[0] || null;
+				defaultView = scope?.through_criteria?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 			}
 		});
 	});
