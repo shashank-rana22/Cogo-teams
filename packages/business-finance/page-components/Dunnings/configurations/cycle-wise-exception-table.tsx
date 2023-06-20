@@ -1,6 +1,7 @@
 import { Button, Tooltip } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import React from 'react';
 
 import GetSortingData from '../components/ExceptionsManagement/sorting';
@@ -58,12 +59,59 @@ const cycleWiseExceptionTable = ({
 			{
 				Header   : 'Frequency',
 				id       : 'frequency',
-				accessor : (row) => (
-					<div className={styles.text}>
-						{row?.frequencyType || '-'}
-					</div>
+				accessor : (row) => {
+					const {
+						dunningExecutionFrequency = '', oneTimeDate = '',
+						scheduleTime = '', dayOfMonth = '',
+						week = '',
+					} = row?.scheduleRule || {};
+					return (
+						<div className={styles.text}>
+							<span style={{ marginRight: '6px' }}>
+								{startCase(dunningExecutionFrequency.toLowerCase())}
+							</span>
+							(
+							{oneTimeDate
+								? (
+									<>
+										<span className={styles.frequency_value}>
+											{formatDate({
+												date       : oneTimeDate,
+												dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM, yyyy'],
+												formatType : 'date',
+											})}
+										</span>
+										<span className={styles.border} />
 
-				),
+									</>
+								)
+								: ''}
+							{dayOfMonth
+								? (
+									<>
+										<span className={styles.frequency_value}>
+											{dayOfMonth}
+										</span>
+										<span className={styles.border} />
+									</>
+								)
+								: ''}
+							{week ? (
+								<>
+									<span className={styles.frequency_value}>
+										{week.slice(0, 3)}
+									</span>
+									<span className={styles.border} />
+								</>
+							) : ''}
+
+							<span style={{ marginLeft: '4px' }}>
+								{scheduleTime}
+							</span>
+							)
+						</div>
+					);
+				},
 			},
 			{
 				Header: (

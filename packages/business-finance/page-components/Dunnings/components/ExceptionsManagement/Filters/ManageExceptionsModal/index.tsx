@@ -26,7 +26,7 @@ function ManageExceptionsModal({
 		searchValue,
 		setSearchValue,
 		getManageExceptionList,
-	} = useManageExceptionList({ manageExceptionFilter, cycleListId });
+	} = useManageExceptionList({ manageExceptionFilter, cycleListId, setManageExceptionFilter });
 
 	const onSubmit = (data) => {
 		getUploadList(data);

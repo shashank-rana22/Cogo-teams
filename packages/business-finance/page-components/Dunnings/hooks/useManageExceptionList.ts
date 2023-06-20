@@ -7,8 +7,9 @@ import toastApiError from '../commons/utils/toastApiError';
 interface Props {
 	manageExceptionFilter?: { pageIndex?: number };
 	cycleListId?: string;
+	setManageExceptionFilter?: React.Dispatch<React.SetStateAction<object>>;
 }
-const useManageExceptionList = ({ manageExceptionFilter, cycleListId }:Props) => {
+const useManageExceptionList = ({ manageExceptionFilter, cycleListId, setManageExceptionFilter }:Props) => {
 	const [searchValue, setSearchValue] = useState('');
 	const { pageIndex = 1 } = manageExceptionFilter || {};
 	const [{ data:manageExceptionData, loading:manageExceptionLoading }, trigger] = useRequestBf(
@@ -23,7 +24,8 @@ const useManageExceptionList = ({ manageExceptionFilter, cycleListId }:Props) =>
 
 	useEffect(() => {
 		debounceQuery(searchValue);
-	}, [searchValue, debounceQuery]);
+		setManageExceptionFilter({ pageIndex: 1 });
+	}, [searchValue, debounceQuery, setManageExceptionFilter]);
 
 	const getManageExceptionList = useCallback(() => {
 		(async () => {

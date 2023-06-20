@@ -15,13 +15,14 @@ interface Props {
 	exceptionFilter?: ExceptionFiltersInterface;
 	subTabsValue?: string;
 	setShowConfirmationModal?: React.Dispatch<React.SetStateAction<boolean>>;
+	setExceptionFilter?: React.Dispatch<React.SetStateAction<object>>;
 }
 
 interface Profile {
 	profile?: { user: { id: string } }
 }
 
-const useMasterException = ({ exceptionFilter, subTabsValue, setShowConfirmationModal }:Props) => {
+const useMasterException = ({ exceptionFilter, subTabsValue, setShowConfirmationModal, setExceptionFilter }:Props) => {
 	const [searchValue, setSearchValue] = useState('');
 	const { category = '', creditDays = 0, cycleStatus = '', pageIndex } = exceptionFilter || {};
 	const profile: Profile = useSelector((state) => state);
@@ -61,7 +62,8 @@ const useMasterException = ({ exceptionFilter, subTabsValue, setShowConfirmation
 
 	useEffect(() => {
 		debounceQuery(searchValue);
-	}, [searchValue, debounceQuery]);
+		setExceptionFilter({ pageIndex: 1 });
+	}, [searchValue, setExceptionFilter, debounceQuery]);
 
 	const getMasterList = useCallback(() => {
 		(async () => {
