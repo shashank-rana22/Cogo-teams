@@ -16,7 +16,10 @@ const ACCEPTED = 'accepted';
 const REJECTED = 'rejected';
 const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
 
-function HighAmountRequestModal({ invoiceData, modalData, shipmentData = {}, refetchShipmentDocument = () => {} }) {
+function HighAmountRequestModal({
+	invoiceData, modalData,
+	shipmentData = { list: [] }, refetchShipmentDocument = () => {},
+}) {
 	const {
 
 		invoiceNumber,
