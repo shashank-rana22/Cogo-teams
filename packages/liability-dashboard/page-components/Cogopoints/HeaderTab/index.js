@@ -1,4 +1,4 @@
-import { Tabs, TabPanel, DateRangepicker } from '@cogoport/components';
+import { Tabs, TabPanel, SingleDateRange } from '@cogoport/components';
 
 import { HEADER_TAB_OPTIONS } from '../../../constants';
 
@@ -25,13 +25,16 @@ function HeaderTab({
 					);
 				})}
 			</Tabs>
-			<DateRangepicker
-				name="date"
-				onChange={setSelectedDate}
-				value={selectedDate}
-				className={styles.date_picker}
-				isPreviousDaysAllowed
-			/>
+			<div className={styles.date_container}>
+				<SingleDateRange
+					placeholder="Enter Date"
+					dateFormat="MM/dd/yyyy"
+					name="date"
+					onChange={setSelectedDate}
+					value={selectedDate}
+					isPreviousDaysAllowed
+				/>
+			</div>
 		</div>
 	);
 }

@@ -8,7 +8,7 @@ const getParams = ({ currencyCode, activeHeaderTab, startDate, endDate }) => ({
 	currency          : currencyCode,
 	organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
 	start_date        : addDays(startDate, ADD_ONE_DAY),
-	end_date          : endDate,
+	end_date          : endDate || undefined,
 });
 
 const useGetCogopointStats = ({ activeHeaderTab = '', selectedDate = {}, currencyCode = '' }) => {
@@ -27,7 +27,7 @@ const useGetCogopointStats = ({ activeHeaderTab = '', selectedDate = {}, currenc
 		} catch (error) {
 			console.error(error);
 		}
-	}, [trigger, activeHeaderTab, startDate, endDate, currencyCode]);
+	}, [trigger, currencyCode, activeHeaderTab, startDate, endDate]);
 
 	useEffect(() => {
 		getCogopointStats();

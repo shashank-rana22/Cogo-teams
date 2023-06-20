@@ -23,7 +23,7 @@ const getParams = ({
 		transaction_type  : TRANSACTION_TYPE[activeStatsCard],
 		organization_type : activeHeaderTab === 'overall' ? undefined : activeHeaderTab,
 		from_date         : addDays(startDate, ADD_ONE_DAY),
-		to_date           : endDate,
+		to_date           : endDate || undefined,
 		event             : EVENT_MAPPING[activeStatsCard] || undefined,
 	},
 });
