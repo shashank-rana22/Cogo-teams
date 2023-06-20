@@ -63,23 +63,25 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 			{ASSIGN_TYPE_OPTIONS.map((eachAssignOption) => {
 				const { label = '', value = '', agent_types = [] } = eachAssignOption;
 				const isChecked = value === assignType;
-				if (agent_types.find((roleType) => role_functions.includes(roleType))) {
-					return (
-						<div key={value}>
-							<div className={styles.controller_div}>
-								<Radio
-									name={value}
-									label={label}
-									key={value}
-									onChange={() => setAssignType(value)}
-									checked={isChecked}
-								/>
-							</div>
-							{isChecked && assignTypeComp}
-						</div>
-					);
+
+				if (!(agent_types.find((roleType) => role_functions.includes(roleType)))) {
+					return null;
 				}
-				return null;
+
+				return (
+					<div key={value}>
+						<div className={styles.controller_div}>
+							<Radio
+								name={value}
+								label={label}
+								key={value}
+								onChange={() => setAssignType(value)}
+								checked={isChecked}
+							/>
+						</div>
+						{isChecked && assignTypeComp}
+					</div>
+				);
 			})}
 
 			{(support_agent_id) && (

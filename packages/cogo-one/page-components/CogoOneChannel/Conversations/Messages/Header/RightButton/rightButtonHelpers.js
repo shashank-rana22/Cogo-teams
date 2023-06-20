@@ -90,9 +90,10 @@ export const ACCESSABLE_BUTTON_FUNC_MAPPING = {
 	admin_view: ({
 		showBotMessages,
 		isServiceProvider,
+		isPartOfGroup,
 	}) => {
 		const accesableButtonOptions = ['auto_assign', 'assign_modal', 'assign_to_me'];
-		if (!showBotMessages && isServiceProvider) {
+		if (!showBotMessages && isServiceProvider && !isPartOfGroup) {
 			accesableButtonOptions.push('add_me_to_group');
 		}
 		return accesableButtonOptions;
@@ -120,9 +121,10 @@ export const ACCESSABLE_BUTTON_FUNC_MAPPING = {
 		userId,
 		isGroupFormed,
 		isServiceProvider,
+		isPartOfGroup,
 	}) => {
 		let ACCESSABLE_BUTTON_OPTIONS = [];
-		if (supportAgentId === userId) {
+		if (supportAgentId === userId || isPartOfGroup) {
 			ACCESSABLE_BUTTON_OPTIONS = ['assign_modal'];
 		}
 
@@ -130,7 +132,7 @@ export const ACCESSABLE_BUTTON_FUNC_MAPPING = {
 			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'request_for_assign'];
 		}
 
-		if (!showBotMessages && supportAgentId !== userId && isServiceProvider) {
+		if (!showBotMessages && supportAgentId !== userId && isServiceProvider && !isPartOfGroup) {
 			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'add_me_to_group'];
 		}
 

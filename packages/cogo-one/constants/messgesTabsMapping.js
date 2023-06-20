@@ -3,4 +3,5 @@ const TABS_MAPPING = [
 	{ name: 'groups', title: 'Groups' },
 	{ name: 'contacts', title: 'Contacts' },
 ];
+
 export default TABS_MAPPING;

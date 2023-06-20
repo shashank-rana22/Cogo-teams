@@ -73,4 +73,5 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 		dissmissTransferRequest,
 	};
 };
+
 export default useTransferChat;

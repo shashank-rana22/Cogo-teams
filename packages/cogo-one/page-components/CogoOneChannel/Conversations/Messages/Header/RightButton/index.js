@@ -20,6 +20,7 @@ function RightButton({
 	isGroupFormed,
 	showBotMessages,
 	accountType,
+	isPartOfGroup,
 }) {
 	const [popoverProps, setPopoverProps] = useState({ isOpen: false, clickedButton: '' });
 
@@ -40,6 +41,7 @@ function RightButton({
 		userId,
 		isGroupFormed,
 		isServiceProvider: accountType === 'service_provider',
+		isPartOfGroup,
 	}) || [];
 
 	const loading = assignLoading || requestAssignLoading;

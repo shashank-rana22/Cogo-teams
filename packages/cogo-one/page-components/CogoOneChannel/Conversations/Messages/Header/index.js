@@ -96,6 +96,8 @@ function Header({
 
 	const showApprovePanel = (hasRequests && hasAccessToApprove);
 
+	const isPartOfGroup = group_members?.includes(userId);
+
 	return (
 		<div className={styles.outer_container}>
 			<div className={styles.container}>
@@ -147,6 +149,7 @@ function Header({
 							supportAgentId={support_agent_id}
 							isGroupFormed={isGroupFormed}
 							accountType={account_type}
+							isPartOfGroup={isPartOfGroup}
 						/>
 						{isomniChannelAdmin && channel_type === 'whatsapp' && (
 							<div
