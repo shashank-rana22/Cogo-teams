@@ -9,6 +9,12 @@ import getActiveCardDetails from '../../../utils/getActiveCardDetails';
 import RightSideNav from './RightSideNav';
 import styles from './styles.module.css';
 
+const DEFAULT_OPEN_NAV_MAPPING = {
+	shipment_view : 'user_activity',
+	supply_view   : 'flash_shipment_bookings',
+	default       : 'profile',
+};
+
 function ProfileDetails({
 	activeMessageCard,
 	activeTab,
@@ -27,7 +33,9 @@ function ProfileDetails({
 }) {
 	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
 
-	const [activeSelect, setActiveSelect] = useState(viewType === 'shipment_view' ? 'user_activity' : 'profile');
+	const [activeSelect, setActiveSelect] = useState(
+		DEFAULT_OPEN_NAV_MAPPING[viewType] || DEFAULT_OPEN_NAV_MAPPING.default,
+	);
 	const [showMore, setShowMore] = useState(false);
 	const ActiveComp = COMPONENT_MAPPING[activeSelect] || null;
 	const formattedMessageData = getActiveCardDetails(activeMessageCard) || {};
