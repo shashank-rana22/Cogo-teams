@@ -4,7 +4,7 @@ import RenderCargoPills from '../RenderCargoPills';
 
 import styles from './styles.module.css';
 
-const IS_EMPTY = 1;
+const LIMIT_FOR_MAIN_SERVICE_LENGTH = 1;
 const IDX_LIMIT_FOR_MAIN_SERVICES = 0;
 
 function MultiServiceDetailsPopover({
@@ -12,7 +12,7 @@ function MultiServiceDetailsPopover({
 	mainServices,
 
 }) {
-	if (mainServices?.length <= IS_EMPTY) {
+	if (mainServices?.length <= LIMIT_FOR_MAIN_SERVICE_LENGTH) {
 		return null;
 	}
 
