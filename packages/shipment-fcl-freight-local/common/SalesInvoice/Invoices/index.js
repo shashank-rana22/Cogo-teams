@@ -13,7 +13,7 @@ import Header from './Header';
 import InvoiceItem from './InvoiceItem';
 import styles from './styles.module.css';
 
-const INITIAL_STATE = 0;
+const INITIAL_STATE_OF_COUNT = 0;
 const TOTAL_COUNT = 1;
 
 function Invoices({
@@ -32,7 +32,7 @@ function Invoices({
 		(item) => item?.status,
 	);
 
-	let count = INITIAL_STATE;
+	let count = INITIAL_STATE_OF_COUNT;
 	invoiceStatuses.forEach((item) => {
 		if (POST_REVIEWED_INVOICES.includes(item)) {
 			count += TOTAL_COUNT;
