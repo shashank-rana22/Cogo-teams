@@ -18,7 +18,7 @@ function UserAvatar({ type = '', imageSource = '' }) {
 			)}
 
 			<Avatar
-				src={imageSource || GLOBAL_CONSTANTS.image_url.user_avatar}
+				src={imageSource || GLOBAL_CONSTANTS.image_url.user_avatar_image}
 				alt="img"
 				disabled={false}
 				size="45px"
