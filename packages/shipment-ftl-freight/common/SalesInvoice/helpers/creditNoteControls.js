@@ -1,4 +1,4 @@
-import FTL_UNITS from '@cogoport/surface-modules/contants/FTL_UNITS';
+import FTL_UNITS from '@cogoport/surface-modules/constants/FTL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/convertObjectMappingToArray';
 
 import { handleServiceType } from '../CreditNote/helpers/handleServiceType';

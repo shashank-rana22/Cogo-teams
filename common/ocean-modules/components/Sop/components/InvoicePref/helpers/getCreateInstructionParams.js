@@ -1,6 +1,10 @@
+const NOT_FOUND_INDEX = -1;
+
 const getCreateInstructionParams = ({ formValues, data }) => {
-	const params = { instruction: 'invoice_preference' };
+	const PARAMS = { instruction: 'invoice_preference' };
+
 	const sop_instructions = formValues?.invoice_pref || [];
+
 	let canAdd = true;
 
 	(sop_instructions || []).forEach((item) => {
@@ -10,14 +14,15 @@ const getCreateInstructionParams = ({ formValues, data }) => {
 				=== item?.invoice_preference_service,
 			);
 
-			if (find !== -1) { canAdd = false; }
+			if (find !== NOT_FOUND_INDEX) { canAdd = false; }
 		}
 	});
 
 	if (canAdd) {
-		params.sop_instructions = formValues?.invoice_pref || [];
-		return params;
+		PARAMS.sop_instructions = formValues?.invoice_pref || [];
+		return PARAMS;
 	}
+
 	return {};
 };
 export default getCreateInstructionParams;

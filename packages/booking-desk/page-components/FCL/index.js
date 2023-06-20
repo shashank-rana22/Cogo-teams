@@ -1,81 +1,73 @@
+import { dynamic } from '@cogoport/next';
 import ScopeSelect from '@cogoport/scope-select';
-import { isEmpty } from '@cogoport/utils';
+import { useContext } from 'react';
 
-import Filters from '../../commons/Filters';
-import RenderAppliedFilters from '../../commons/Filters/RenderAppliedFilters';
-import List from '../../commons/List';
-import Loader from '../../commons/Loader';
-import Stepper from '../../commons/Stepper';
+import Search from '../../commons/Search';
+import SegmentedTabs from '../../commons/SegmentedTabs';
+import StepperTabs from '../../commons/StepperTabs';
 import Tabs from '../../commons/Tabs';
-import CONFIGS from '../../config/CONTROLS_CONFIG.json';
-import allTabs from '../../config/TABS_CONFIG.json';
-import applyShipmentChangeFilter from '../../helpers/applyShipmentChangeFilter';
-import useListBookingDeskShipments from '../../hooks/useListBookingDeskShipments';
+import TABS_CONFIG from '../../config/TABS_CONFIG';
+import BookingDeskContext from '../../context/BookingDeskContext';
+import handleSegmentedTabChange from '../../helpers/handleSegmentedTabChange';
+import handleStepperTabChange from '../../helpers/handleStepperTabChange';
 
-import Card from './Card';
 import styles from './styles.module.css';
 
-const { fcl_freight: tabs } = allTabs;
+const RESOLVE_DESK = {
+	export : dynamic(() => import('./Export-Import'), { ssr: false }),
+	import : dynamic(() => import('./Export-Import'), { ssr: false }),
+	local  : dynamic(() => import('./FCL-Local'), { ssr: false }),
+	cfs    : dynamic(() => import('./FCL-CFS'), { ssr: false }),
+	custom : dynamic(() => import('./FCL-Custom'), { ssr: false }),
+};
 
-export default function FCLDesk({ stateProps = {} }) {
-	const { loading, data } = useListBookingDeskShipments({
-		stateProps,
-		prefix: 'fcl_freight',
-	});
+const STEPPER_TAB_OPTIONS = Object.entries(TABS_CONFIG).map(([key, obj]) => ({
+	label : obj.title,
+	value : key,
+}));
 
-	const {
-		filters,
-		setFilters,
-	} = stateProps || {};
+const SEGMENTED_TAB_OPTIONS = Object.entries(TABS_CONFIG.fcl_freight.segmented_tabs).map(([key, obj]) => ({
+	title : obj.title,
+	name  : key,
+}));
 
-	const couldBeCardsCritical = !!tabs.find(
-		(tab) => tab.name === stateProps.activeTab,
-	)?.isCriticalVisible;
+export default function FclDesk() {
+	const contextValues = useContext(BookingDeskContext);
+	const { tabState: { stepperTab, segmentedTab }, scopeFilters } = contextValues || {};
 
-	const appliedFilters = Object.entries(filters).filter(
-		([key, val]) => !isEmpty(val) && !['page', 'q'].includes(key) && val !== false,
-	);
+	const { tabs } = TABS_CONFIG.fcl_freight.segmented_tabs[segmentedTab];
+
+	const ResolvedList = RESOLVE_DESK[segmentedTab];
 
 	return (
 		<>
-			<div className={styles.header}>
+			<div className={styles.flex_row}>
 				<div className={styles.stepper_container}>
-					<Stepper
-						options={CONFIGS.shipment_types}
-						value={filters?.shipment_type}
-						onChange={(v) => {
-							applyShipmentChangeFilter({ shipment_type: v, stateProps });
-						}}
+					<StepperTabs
+						options={STEPPER_TAB_OPTIONS}
+						value={stepperTab}
+						onChange={(v) => handleStepperTabChange({ ...contextValues, newStepperTab: v })}
 					/>
 				</div>
 
-				<div className={styles.top_header_container}>
-					<Filters stateProps={stateProps} />
+				<ScopeSelect size="md" defaultValues={scopeFilters} />
+			</div>
 
-					<ScopeSelect size="md" defaultValues={stateProps.scopeFilters} />
+			<div className={styles.flex_row}>
+				<SegmentedTabs
+					options={SEGMENTED_TAB_OPTIONS}
+					value={segmentedTab}
+					onChange={(v) => handleSegmentedTabChange({ ...contextValues, newSegmentedTab: v })}
+				/>
+
+				<div>
+					<Search />
 				</div>
 			</div>
 
-			<div className={styles.render_filter_container}>
-				<RenderAppliedFilters appliedFilters={appliedFilters} setFilters={setFilters} />
-			</div>
+			<Tabs tabs={tabs} />
 
-			<Tabs tabs={tabs} stateProps={stateProps} />
-
-			<div
-				className={`${styles.list_container} ${loading ? styles.loading : ''}`}
-			>
-				{loading ? (
-					<Loader />
-				) : (
-					<List
-						data={data}
-						stateProps={stateProps}
-						Card={Card}
-						couldBeCardsCritical={couldBeCardsCritical}
-					/>
-				)}
-			</div>
+			{ResolvedList ? <ResolvedList tabs={tabs} /> : null}
 		</>
 	);
 }

@@ -1,6 +1,8 @@
 const getUpdateInstructionParams = ({ formValues = {}, data = [] }) => {
 	const { invoice_pref = [] } = formValues;
-	const formatData = [];
+
+	const FORMAT_DATA = [];
+
 	let canUpdate = true;
 
 	(invoice_pref || []).forEach((eachService) => {
@@ -13,15 +15,17 @@ const getUpdateInstructionParams = ({ formValues = {}, data = [] }) => {
 			if (!findService?.id) {
 				canUpdate = false;
 			} else {
-				formatData.push({ ...eachService, id: findService?.id });
+				FORMAT_DATA.push({ ...eachService, id: findService?.id });
 			}
 		}
 	});
 
 	if (canUpdate) {
-		const params = { sop_update_data: formatData };
+		const params = { sop_update_data: FORMAT_DATA };
+
 		return params;
 	}
+
 	return {};
 };
 export default getUpdateInstructionParams;

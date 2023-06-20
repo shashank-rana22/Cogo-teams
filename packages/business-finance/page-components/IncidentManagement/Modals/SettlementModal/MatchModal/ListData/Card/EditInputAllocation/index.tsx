@@ -1,5 +1,6 @@
 import { Button, Tooltip, Input } from '@cogoport/components';
-import { getFormattedPrice } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import { IcCError, IcMTick, IcMUndo } from '@cogoport/icons-react';
 import { useEffect, useState } from 'react';
 
@@ -14,7 +15,7 @@ function EditInputAllocation({
 	types,
 }) {
 	const {
-		currency = 'INR',
+		currency = GLOBAL_CONSTANTS.currency_code.INR,
 		settledAmount = 0,
 		allocationAmountValue = 0,
 		balanceAmount = 0,
@@ -33,7 +34,14 @@ function EditInputAllocation({
 
 	let errorMessege = '';
 
-	const formatted = (field, curr) => getFormattedPrice(field, curr) || '';
+	const formatted = (field, curr) => formatAmount({
+		amount   :	field,
+		currency : curr,
+		options  : {
+			style           : 'currency',
+			currencyDisplay : 'code',
+		},
+	}) || '';
 
 	const changedBalanceAfterAllocation = () => {
 		const totalAmount =			types === 'history' ? balanceAmount + settledAmount : +balanceAmount;
@@ -140,9 +148,30 @@ function EditInputAllocation({
 							)}
 							placement="top"
 						>
-							<div className={styles.wrapper}>{getFormattedPrice(changedValue, currency)}</div>
+							<div className={styles.wrapper}>
+								{formatAmount({
+									amount  :	changedValue,
+									currency,
+									options : {
+										style           : 'currency',
+										currencyDisplay : 'code',
+									},
+								})}
+
+							</div>
 						</Tooltip>
-					) : <div>{getFormattedPrice(changedValue, currency)}</div>}
+					) : (
+						<div>
+							{formatAmount({
+								amount  :	changedValue,
+								currency,
+								options : {
+									style           : 'currency',
+									currencyDisplay : 'code',
+								},
+							})}
+						</div>
+					)}
 				</div>
 			)}
 		</div>
