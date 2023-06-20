@@ -1,4 +1,5 @@
 import { Modal, Button, RadioGroup, Loader } from '@cogoport/components';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -96,28 +97,30 @@ function OTPVerification({
 					show={show}
 					onClose={() => setShow(false)}
 				>
-					<Modal.Header title="Select user to send OTP" />
+					<Modal.Header title="Select User To Send OTP" />
 
 					<Modal.Body className={styles.body}>
 						{userListInfo}
 					</Modal.Body>
 
-					<Modal.Footer className={styles.modal_footer}>
-						<Button
-							size="md"
-							themeType="secondary"
-							onClick={() => setShow(false)}
-						>
-							Cancel
-						</Button>
+					<Modal.Footer>
+						<FooterButtonWrapper>
+							<Button
+								size="md"
+								themeType="secondary"
+								onClick={() => setShow(false)}
+							>
+								Cancel
+							</Button>
 
-						<Button
-							size="md"
-							onClick={handleClick}
-							disabled={isEmpty(userList) || isEmpty(selectedUser)}
-						>
-							Send
-						</Button>
+							<Button
+								size="md"
+								onClick={handleClick}
+								disabled={isEmpty(userList) || isEmpty(selectedUser)}
+							>
+								Send
+							</Button>
+						</FooterButtonWrapper>
 					</Modal.Footer>
 				</Modal>
 			) : null}

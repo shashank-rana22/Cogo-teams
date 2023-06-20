@@ -2303,6 +2303,13 @@ const navigationMappingAdmin = {
 				as            : '/v2/saas-tools/standard-milestones',
 				possible_apis : apis.saas_tools_standard_milestones,
 			},
+			{
+				key           : 'saas_tools-vessel_tracking',
+				title         : 'Live Vessel Tracking',
+				href          : '/v2/saas-tools/live-vessel-tracking',
+				as            : '/v2/saas-tools/live-vessel-tracking',
+				possible_apis : apis.saas_live_vessel_tracking,
+			},
 		],
 	},
 	new_employee_dashboard: {
@@ -2374,12 +2381,20 @@ const navigationMappingAdmin = {
 		main_apis   : [],
 		options     : [
 			{
-				key           : 'referral-dashboard',
+				key           : 'referral-referral_dashboard',
 				title         : 'Dashboard',
 				href          : '/v2/referral/dashboard',
 				as            : '/v2/referral/dashboard',
 				type          : 'link',
 				possible_apis : apis.referral_dashboard,
+			},
+			{
+				key           : 'referral-referral_configuration',
+				title         : 'Configuration',
+				href          : '/v2/referral/configuration',
+				as            : '/v2/referral/configuration',
+				type          : 'link',
+				possible_apis : apis.referral_config,
 			},
 			{
 				key           : 'referral-simulation',
