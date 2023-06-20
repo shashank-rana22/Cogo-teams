@@ -36,7 +36,7 @@ function Maps({ vesselInfo = [], setCurrentBound }) {
 	useEffect(() => {
 		if (map) {
 			map.setMaxBounds(bounds);
-			map?.attributionControl?.setPrefix(MAP_ATTRIBUTE);
+			map.attributionControl?.setPrefix(MAP_ATTRIBUTE);
 		}
 	}, [map]);
 
