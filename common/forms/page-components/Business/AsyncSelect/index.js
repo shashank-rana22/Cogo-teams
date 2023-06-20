@@ -140,16 +140,18 @@ function AsyncSelect(props) {
 	}
 
 	if (typeof getSelectedOption === 'function' && !isEmpty(rest.value)) {
+		const SLICE_FROM = -1;
+		const SELECTIVE_INDEX = 0;
 		let selectedValue;
 		if (multiple) {
-			selectedValue = rest.value.slice(-1);
+			selectedValue = rest.value.slice(SLICE_FROM);
 		} else {
 			selectedValue = rest.value;
 		}
 
 		const selectedOption = getAsyncOptionsProps.options.filter((option) => option.id === selectedValue);
 
-		getSelectedOption(selectedOption[0]);
+		getSelectedOption(selectedOption[SELECTIVE_INDEX]);
 	}
 
 	const Element = multiple ? MultiSelect : Select;

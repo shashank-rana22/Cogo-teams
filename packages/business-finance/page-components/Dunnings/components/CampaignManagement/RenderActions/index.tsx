@@ -30,10 +30,10 @@ function RenderActions({ setActionModal, rowData, getDunningList }:Props) {
 				className={styles.btn}
 				aria-label="edit"
 				onClick={() => setActionModal({
-			 	visible : true,
-			 	action  : 'edit',
-			 	rowData,
-			 })}
+					visible : true,
+					action  : 'edit',
+					rowData,
+				})}
 			>
 				<IcMEdit
 					height={15}
@@ -45,10 +45,10 @@ function RenderActions({ setActionModal, rowData, getDunningList }:Props) {
 				className={styles.btn}
 				aria-label="delete"
 				onClick={() => setActionModal({
-			 	visible : true,
-			 	action  : 'delete',
-			 	rowData,
-			 })}
+					visible : true,
+					action  : 'delete',
+					rowData,
+				})}
 			>
 				<IcMDelete
 					height={15}

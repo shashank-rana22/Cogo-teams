@@ -26,6 +26,7 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 		timezone        : 'IST',
 		scheduledHour   : '00',
 		scheduledMinute : '00',
+		ageingBucket    : 'ALL',
 	});
 
 	const [step, setStep] = useState(DEFAULT_STEP);
@@ -45,7 +46,6 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 	const {
 		cycleName,
 		cycleType, cogoEntityId,
-		serviceType, ageingBucket,
 		totalDueOutstanding,
 	} = formData || {};
 
@@ -82,7 +82,7 @@ function CreateCycleForm({ showCreateForm, setShowCreateForm, getDunningList }:P
 		if (step === 1) {
 			// putting validations
 			const requiredFields = [cycleName, cycleType,
-				cogoEntityId, serviceType, ageingBucket, totalDueOutstanding];
+				cogoEntityId, totalDueOutstanding];
 			if (requiredFields.some((field) => !field || (Array.isArray(field) && field.length === 0))) {
 				Toast.error('Please fill all the details to proceed');
 				return;

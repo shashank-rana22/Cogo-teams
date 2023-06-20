@@ -29,6 +29,7 @@ export const listConfig = () => ({
 			label : 'Name',
 			key   : 'name',
 			span  : 1.5,
+			func  : 'renderName',
 		},
 		{
 			label : 'Type',

@@ -118,7 +118,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 					? String(dayOfMonth) : undefined,
 				oneTimeDate            : stringDate ? formattedOneTimeDate : undefined,
 				dueOutstandingCurrency : dueOutstandingCurrency || undefined,
-			    isAllCreditControllers : !(organizationStakeholderIds?.length > 0),
+				isAllCreditControllers : !(organizationStakeholderIds?.length > 0),
 				creditController       : organizationStakeholderIds || undefined,
 				serviceType            : serviceTypes || undefined,
 				cycleName              : name || undefined,
@@ -146,7 +146,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		if (cogoEntityId && !isEditMode) {
 			const currencyEntityData = Object.values(
 				GLOBAL_CONSTANTS.cogoport_entities,
-			)?.filter((obj) => obj?.id === cogoEntityId);
+			)?.filter((obj:{ id?:string }) => obj?.id === cogoEntityId);
 
 			const currencyValue = currencyEntityData?.[0]?.currency;
 			setFormData((prev:object) => ({
@@ -178,8 +178,9 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 								</TabPanel>
 
 								<TabPanel name="WEEKLY" title="Weekly">
-									<div style={{ marginTop: '12px' }}>
+									<div>
 										<Chips
+											className={styles.chips_container}
 											size="md"
 											items={WEEK_OPTIONS}
 											selectedItems={weekDay}
@@ -188,6 +189,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 												weekDay: val,
 											})}
 										/>
+
 									</div>
 								</TabPanel>
 
@@ -234,7 +236,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 											label: 'GMT', value: 'GMT',
 										},
 										{
-		                                  label: 'VNM', value: 'VNM',
+											label: 'VNM', value: 'VNM',
 										},
 									]}
 									className={styles.timezone}

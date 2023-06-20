@@ -1,3 +1,4 @@
+/* eslint-disable react/jsx-closing-tag-location */
 import { useRouter } from '@cogoport/next';
 
 import styles from './styles.module.css';
@@ -47,7 +48,7 @@ function MainHeader({ activeTab, setActiveTab }:Props) {
 						</span>
 					</div>
 				</div>
-             </div>,
+			</div>,
 		},
 		{
 			id      : 'exceptions-management',

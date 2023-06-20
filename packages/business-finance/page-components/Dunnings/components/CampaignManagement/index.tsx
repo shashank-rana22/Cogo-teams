@@ -3,6 +3,7 @@ import formatDate from '@cogoport/globalization/utils/formatDate';
 import React, { useState } from 'react';
 
 import CustomList from '../../../commons/CustomList';
+import showOverflowingNumber from '../../../commons/showOverflowingNumber';
 
 import ActionModal from './ActionModal';
 import CreateCycleForm from './CreateCycleForm';
@@ -39,27 +40,30 @@ function CampaignManagement() {
 	};
 
 	const functions = () => ({
+		renderName: ({ name }) => (
+			<div>{showOverflowingNumber(name, 20)}</div>
+		),
 		renderFrequency: ({ scheduleRule }) => (
 			<div>{(scheduleRule?.dunningExecutionFrequency || '').replaceAll('_', ' ')}</div>
 		),
 		renderCreatedOn: ({ createdAt }) => (
 			<div>
 				{formatDate({
-                           	date       : createdAt,
-                           	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-                           	timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
-                           	formatType : 'dateTime',
+					date       : createdAt,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+					formatType : 'dateTime',
 				})}
 			</div>
 		),
 		renderUpdatedAt: ({ updatedAt }) => (
 			<div>
 				{formatDate({
-							   	date       : updatedAt,
-							   	dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
-							   	timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
-							   	formatType : 'dateTime',
-							   })}
+					date       : updatedAt,
+					dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+					timeFormat : GLOBAL_CONSTANTS.formats.time['HH:mm'],
+					formatType : 'dateTime',
+				})}
 			</div>
 		),
 		renderActions:	(rowData) => (

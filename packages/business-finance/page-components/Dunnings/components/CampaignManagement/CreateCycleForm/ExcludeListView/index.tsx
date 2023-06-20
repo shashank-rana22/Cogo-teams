@@ -14,7 +14,7 @@ interface Props {
 }
 
 function ExcludeListView({ uncheckedRows, setUncheckedRows, formData }:Props) {
-	const [search, setSearch] = useState();
+	const [search, setSearch] = useState('');
 	const [page, setPage] = useState(1);
 	const { customerList, loading } = useGetCustomerList({ formData, search, page, setPage });
 
