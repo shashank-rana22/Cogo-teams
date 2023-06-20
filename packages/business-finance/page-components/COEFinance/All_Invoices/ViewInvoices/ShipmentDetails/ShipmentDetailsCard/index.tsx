@@ -15,7 +15,6 @@ import React, { useState } from 'react';
 // eslint-disable-next-line import/no-cycle
 import { DataInterface } from '..';
 import { RemarksValInterface } from '../../../../../commons/Interfaces/index';
-// import showOverflowingNumber from '../../../../../commons/showOverflowingNumber';
 import useListShipment from '../../../../hook/useListShipment';
 import useShipmentDocument from '../../../../hook/useShipmentDocument';
 import isDisabled from '../../../../utils/isDisabled';

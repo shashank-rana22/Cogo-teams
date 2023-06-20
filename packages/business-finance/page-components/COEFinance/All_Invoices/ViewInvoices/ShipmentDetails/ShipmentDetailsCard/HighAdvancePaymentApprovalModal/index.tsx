@@ -125,10 +125,14 @@ function HighAmountRequestModal({ invoiceData, modalData, shipmentData = {}, ref
 					</div>
 					<div className={styles.current_payment_cols}>
 						<span className={styles.heading}>
-							{invoiceUploadDate}
+							Invoice Upload Date
 						</span>
 						<span className={styles.value}>
-							cogo / 4577
+							{formatDate({
+								date       : invoiceUploadDate,
+								dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+								formatType : 'date',
+							}) || '___'}
 						</span>
 					</div>
 					<div className={styles.current_payment_cols}>
