@@ -61,7 +61,7 @@ function OTPVerification({
 		if (!isEmpty(selectedUser)) {
 			const payload = {
 				invoice_id : invoice?.id,
-				user_id    : selectedUser?.split('_')?.[IS_EMPTY],
+				user_id    : selectedUser?.split('_')?.[GLOBAL_CONSTANTS.zeroth_index],
 			};
 			await sendOtpForInvoiceApproval(payload);
 		}
