@@ -1,6 +1,5 @@
+import { renderValue } from '@cogoport/air-modules/components/RenderPills/renderValue';
 import { Tooltip } from '@cogoport/components';
-
-import { renderValue } from '../../../../../../commons/CargoDetails/RenderCargoPills/renderValue';
 
 import styles from './styles.module.css';
 

@@ -3,7 +3,6 @@ import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { IcMCopy } from '@cogoport/icons-react';
 import { startCase, upperCase, format, isEmpty } from '@cogoport/utils';
 
-import CONSTANTS from '../../../constants/CONSTANTS';
 import copyToClipboard from '../../utils/copyToClipboard';
 
 import styles from './styles.module.css';
@@ -11,6 +10,7 @@ import styles from './styles.module.css';
 const PACKAGES_MIN_LENGTH = 1;
 const REQUIRED_DECIMAL_DIGIT = 2;
 const SINGLE_PACKAGE = 1;
+const AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO = 166.67;
 
 export const renderValue = (label, detail = {}) => {
 	const {
@@ -25,7 +25,7 @@ export const renderValue = (label, detail = {}) => {
 	|| {};
 
 	const chargableWeight = Number(chargeable_weight)
-					|| Math.max(volume * CONSTANTS.AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO, weight);
+					|| Math.max(volume * AIR_STANDARD_VOLUMETRIC_WEIGHT_CONVERSION_RATIO, weight);
 
 	const dimension = valueForInput.length
 		? `${valueForInput.length}cm X ${valueForInput.width}cm X ${valueForInput.height}cm,`
@@ -138,6 +138,10 @@ export const renderValue = (label, detail = {}) => {
 			);
 		case 'house_airway_bill_number':
 			return `HAWB Number: ${house_airway_bill_number || ''}`;
+		case 'schedule_departure':
+			return format(detail?.schedule_departure || detail?.selected_schedule_departure, 'dd MMM yyyy');
+		case 'schedule_arrival':
+			return format(detail?.schedule_arrival || detail?.selected_schedule_arrival, 'dd MMM yyyy');
 		default:
 			return detail[label] || null;
 	}
