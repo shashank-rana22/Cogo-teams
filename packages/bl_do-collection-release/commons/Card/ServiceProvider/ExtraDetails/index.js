@@ -31,7 +31,7 @@ const handleCopy = async (val) => {
 };
 
 export default function ExtraDetails({ stateProps = {}, item = {} }) {
-	const { bill_of_ladings = [] } = item || {};
+	const { bill_of_ladings = [] } = item;
 	let renderElem = '';
 
 	switch (stateProps.inner_tab) {
