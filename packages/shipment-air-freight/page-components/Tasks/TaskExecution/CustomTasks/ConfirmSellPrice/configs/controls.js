@@ -1,4 +1,4 @@
-const controls = (new_sell_price, is_revert_awaited) => [
+const controls = (new_sell_price, is_revert_awaited, isVinodTalapaProfile) => [
 	{
 		name      : 'chargeable_weight',
 		type      : 'number',
@@ -23,8 +23,9 @@ const controls = (new_sell_price, is_revert_awaited) => [
 		label     : 'Sell Price',
 		span      : 6,
 		className : 'primary md',
-		disabled  : is_revert_awaited,
-		rules     : {
+		disabled  : is_revert_awaited
+		&& !isVinodTalapaProfile,
+		rules: {
 			required : true,
 			validate : (value) => (Number(value) < new_sell_price
 				? `Cannot be less than ${new_sell_price}`

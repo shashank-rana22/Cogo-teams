@@ -2,6 +2,8 @@
 import Layout from '@cogoport/air-modules/components/Layout';
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import { useSelector } from '@cogoport/store';
 import { useEffect } from 'react';
 
 import controls from './configs/controls';
@@ -11,7 +13,10 @@ import useUpdateShipmentPendingTask from './hooks/useUpdateShipmentPendingTask';
 import styles from './styles.module.css';
 
 function ConfirmSellPrice({ shipmentData, task, refetch, onCancel }) {
+	const { profile } = useSelector((state) => state);
 	const { getNewSellData, data } = useGetNewSellData(shipmentData);
+
+	const isVinodTalapaProfile = profile?.id === GLOBAL_CONSTANTS.uuid.vinod_talapa_user_id;
 
 	const {
 		new_sell_price = '',
@@ -26,12 +31,12 @@ function ConfirmSellPrice({ shipmentData, task, refetch, onCancel }) {
 		onCancel,
 	});
 
-	const { updateShipmentSellQuotation, loading } =		useUpdateRevenueDeskShipmentSellQuotation({
+	const { updateShipmentSellQuotation, loading } = useUpdateRevenueDeskShipmentSellQuotation({
 		sellData: data?.new_sell_data,
 		updateShipmentPendingTask,
 	});
 
-	const finalControls = controls(new_sell_price, is_revert_awaited);
+	const finalControls = controls(new_sell_price, is_revert_awaited, isVinodTalapaProfile);
 	const {
 		control,
 		formState: { errors },
@@ -62,7 +67,9 @@ function ConfirmSellPrice({ shipmentData, task, refetch, onCancel }) {
 					size="md"
 					themeType="primary"
 					onClick={handleSubmit(handleOnClick)}
-					disabled={is_revert_awaited || loading}
+					disabled={
+						(is_revert_awaited && !isVinodTalapaProfile) || loading
+					}
 				>
 					Approve
 				</Button>
