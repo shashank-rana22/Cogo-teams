@@ -139,7 +139,7 @@ const useEditQuotations = ({
 				})),
 			};
 
-			if (SERVICE?.service_type !== 'air_freight_local_service') { QUOTATIONS.push(newQuote); }
+			QUOTATIONS.push(newQuote);
 		});
 
 		const checkSum = checkLineItemsSum(QUOTATIONS);
