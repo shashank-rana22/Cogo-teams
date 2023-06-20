@@ -1,9 +1,8 @@
 import { Placeholder, cl } from '@cogoport/components';
-import React from 'react';
 
 import styles from './styles.module.css';
 
-const customStyle = { height: '14px' };
+const CUSTOM_STYLE = { height: '14px' };
 
 function Loader() {
 	return (
@@ -15,13 +14,13 @@ function Loader() {
 				<Placeholder className="circle" width="45px" height="45px" />
 
 				<div className={styles.ports}>
-					<Placeholder style={{ ...customStyle, margin: '0 0 10px 0' }} />
-					<Placeholder style={customStyle} />
+					<Placeholder style={{ ...CUSTOM_STYLE, margin: '0 0 10px 0' }} />
+					<Placeholder style={CUSTOM_STYLE} />
 				</div>
 
 				<div className={cl` ${styles.ports} ${styles.destination}`}>
-					<Placeholder style={{ ...customStyle, margin: '0 0 10px 0' }} />
-					<Placeholder style={customStyle} />
+					<Placeholder style={{ ...CUSTOM_STYLE, margin: '0 0 10px 0' }} />
+					<Placeholder style={CUSTOM_STYLE} />
 				</div>
 
 				<Placeholder style={{ marginRight: '16px' }} />

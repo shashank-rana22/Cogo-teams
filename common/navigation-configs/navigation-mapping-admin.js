@@ -1574,7 +1574,7 @@ const navigationMappingAdmin = {
 				href          : '/cogo-assured/fcl_freight_local',
 				as            : '/cogo-assured/fcl_freight_local',
 				type          : 'link',
-				possible_apis : apis.cogo_assured,
+				possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
 
 				main_apis: [],
 			},
