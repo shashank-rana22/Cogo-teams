@@ -4,14 +4,14 @@ import { useState, useEffect, useImperativeHandle, useRef, useCallback } from 'r
 import useOtpInputEvents from './useOtpInputEvents';
 
 const FIRST_INDEX = 1;
+const INCREMENT_BY_ONE = 1;
 
 const getInitialOtpValues = (otpLength) => {
 	const HASH = {};
 
-	for (let i = 0; i < otpLength; i += FIRST_INDEX) {
-		HASH[`otp-${i + FIRST_INDEX}`] = '';
-	}
-
+	[...Array(otpLength)].forEach((e, index) => {
+		HASH[`otp-${index + INCREMENT_BY_ONE}`] = '';
+	});
 	return HASH;
 };
 

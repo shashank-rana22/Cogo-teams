@@ -3,8 +3,8 @@ import { useRef, useEffect, useCallback } from 'react';
 
 const EVENTS = ['keydown', 'paste'];
 
-const ZERO_INDEX = 0;
-const FIRST_INDEX = 1;
+const STARTING_SUBSTRING_INDEX_FOR_CONTENT = 0;
+const INCREMENTER_BY_ONE = 1;
 
 const useOtpInputEvents = ({
 	otpLength = 0,
@@ -26,7 +26,7 @@ const useOtpInputEvents = ({
 
 			const currentOtpElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
-			const nextOtpInputElementToFocus = otpInputElementsRef.current[currentOtpElementIndex - FIRST_INDEX];
+			const nextOtpInputElementToFocus = otpInputElementsRef.current[currentOtpElementIndex - INCREMENTER_BY_ONE];
 			nextOtpInputElementToFocus?.focus();
 
 			return;
@@ -61,16 +61,16 @@ const useOtpInputEvents = ({
 				content = window.clipboardData.getData('Text');
 			}
 
-			content = content.replace(/[^0-9]/g, '').substring(ZERO_INDEX, otpLength);
+			content = content.replace(/[^0-9]/g, '').substring(STARTING_SUBSTRING_INDEX_FOR_CONTENT, otpLength);
 
 			const currentOtpElementIndex = otpInputElementsRef.current.indexOf(event.target);
 
 			setOtp((previousState) => {
 				const NEW_STATE_VALUES = {};
 
-				for (let i = 0; i < otpLength; i += FIRST_INDEX) {
+				for (let i = 0; i < otpLength; i += INCREMENTER_BY_ONE) {
 					if (i >= currentOtpElementIndex) {
-						NEW_STATE_VALUES[`otp-${i + FIRST_INDEX}`] = content[i - currentOtpElementIndex] || '';
+						NEW_STATE_VALUES[`otp-${i + INCREMENTER_BY_ONE}`] = content[i - currentOtpElementIndex] || '';
 					}
 				}
 

@@ -5,7 +5,7 @@ import IP_STATE_CONDITONS from '../../../constants/IP_STATE_CONDITIONS';
 
 import styles from './styles.module.css';
 
-const FIRST_INDEX = 1;
+const FIRST_INDEX_FOR_BUTTON_CONTAINER = 1;
 
 const actions = ({
 	status = {},
@@ -53,7 +53,7 @@ const actions = ({
 		<Button
 			themeType="secondary"
 			className={styles.action_button}
-			onClick={actionButton[FIRST_INDEX].onClick}
+			onClick={actionButton[FIRST_INDEX_FOR_BUTTON_CONTAINER].onClick}
 			size="sm"
 		>
 			{actionButton[GLOBAL_CONSTANTS.zeroth_index]}

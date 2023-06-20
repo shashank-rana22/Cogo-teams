@@ -1,4 +1,5 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
@@ -8,8 +9,8 @@ import useUpdateInvoiceCombination from './useUpdateInvoiceCombination';
 
 const geo = getGeoConstants();
 
-const ZERO_INDEX = 0;
-const FIRST_INDEX = 1;
+const CURRENT_INVOICE_INDEX_CHECK = 0;
+const SELECT_PARTY_CHECK = 1;
 
 const useEditInvoicePref = ({
 	shipment_data = {},
@@ -86,7 +87,7 @@ const useEditInvoicePref = ({
 			(party) => party.id === inv.id,
 		);
 
-		if (currentInvoiceIndex >= ZERO_INDEX) {
+		if (currentInvoiceIndex >= CURRENT_INVOICE_INDEX_CHECK) {
 			const NEW_SELECTED_PARTIES = [];
 			selectedParties.forEach((party) => {
 				const updateParty = { ...party };
@@ -103,7 +104,7 @@ const useEditInvoicePref = ({
 					);
 
 					const currentService = invoicing_parties?.services?.find(
-						(serv) => serv?.id === service?.split(':')?.[ZERO_INDEX],
+						(serv) => serv?.id === service?.split(':')?.[GLOBAL_CONSTANTS.zeroth_index],
 					);
 
 					let serviceType = currentService?.service_type;
@@ -128,7 +129,7 @@ const useEditInvoicePref = ({
 			NEW_SELECTED_PARTIES[currentInvoiceIndex].invoice_currency = new_ic;
 
 			let finalNewSelectParties = [...NEW_SELECTED_PARTIES];
-			if (finalNewSelectParties?.length > FIRST_INDEX) {
+			if (finalNewSelectParties?.length > SELECT_PARTY_CHECK) {
 				finalNewSelectParties = (NEW_SELECTED_PARTIES || []).filter(
 					(party) => !isEmpty(party?.services),
 				);
