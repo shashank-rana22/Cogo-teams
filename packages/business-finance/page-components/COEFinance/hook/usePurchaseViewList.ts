@@ -18,9 +18,14 @@ interface Props {
 	jobNumber?:string
 }
 
+interface Profile {
+	profile?: { partner: { id: string } };
+}
+
 const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject, jobNumber }: Props) => {
-	const { profile = {} } : any = useSelector((state) => state);
-	const entityCode = getEntityCode(profile.partner.id);
+	const profile: Profile = useSelector((state) => state);
+
+	const entityCode = getEntityCode(profile?.profile?.partner?.id);
 
 	const getStatus = () => {
 		if (subActiveTabReject === 'finance_rejected') {
