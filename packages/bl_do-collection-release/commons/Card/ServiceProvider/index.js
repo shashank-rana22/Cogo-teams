@@ -9,12 +9,12 @@ import SPPopver from './SPPopover';
 import styles from './styles.module.css';
 
 const SHOW_TOOLTIP_MAX_LENGTH = 32;
-const FIRST_INDEX = 1;
+const DOCS_LENGTH = 1;
 export default function ServiceProvider({ item = {}, stateProps = {} }) {
 	const isFclLocal = stateProps.shipment_type === 'fcl_local';
 	const docs = stateProps.activeTab === 'bl' ? item.bill_of_ladings : item.delivery_orders;
 	const docsLength = docs?.length || GLOBAL_CONSTANTS.zeroth_index;
-	const remainLength = docsLength > FIRST_INDEX ? docsLength - FIRST_INDEX : GLOBAL_CONSTANTS.zeroth_index;
+	const remainLength = docsLength > DOCS_LENGTH ? docsLength - DOCS_LENGTH : GLOBAL_CONSTANTS.zeroth_index;
 	const doc_number = stateProps.activeTab === 'bl'
 		? docs?.[GLOBAL_CONSTANTS.zeroth_index]?.bl_number
 		: docs?.[GLOBAL_CONSTANTS.zeroth_index]?.do_number;
