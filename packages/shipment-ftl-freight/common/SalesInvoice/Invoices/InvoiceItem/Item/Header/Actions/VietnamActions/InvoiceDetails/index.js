@@ -10,8 +10,6 @@ import ClickableDiv from '../../../../../../../../ClickableDiv';
 
 import styles from './styles.module.css';
 
-const IS_EMPTY = 0;
-
 function InvoiceDetails({
 	invoice = {},
 	disableAction = false,
@@ -130,7 +128,7 @@ function InvoiceDetails({
 				</Tooltip>
 			</div>
 
-			{!disableAction || exchange_rate_document?.length > IS_EMPTY ? (
+			{!disableAction || !isEmpty(exchange_rate_document) ? (
 				<Popover
 					interactive
 					placement="bottom"
