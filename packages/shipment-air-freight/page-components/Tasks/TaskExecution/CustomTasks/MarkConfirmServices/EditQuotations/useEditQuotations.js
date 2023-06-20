@@ -1,10 +1,12 @@
 import toastApiError from '@cogoport/air-modules/utils/toastApiError';
+import { Toast } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import useGetServicesQuotation from '../../../../../../hooks/useGetServicesQuotation';
 import useUpdateBuyQuotations from '../../../../../../hooks/useUpdateBuyQuotations';
 import useUpdateTask from '../../../../../../hooks/useUpdateTask';
+import checkLineItemsSum from '../helper/checkLineItemSum';
 import getStep3Controls from '../helper/getEditQuotationControls';
 
 const TRADE_MAPPING = {
@@ -140,14 +142,20 @@ const useEditQuotations = ({
 			QUOTATIONS.push(newQuote);
 		});
 
-		try {
-			const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
+		const checkSum = checkLineItemsSum(QUOTATIONS);
 
-			if (res?.status === OK_RESPONSE_STATUS) {
-				await updateTask({ id: task?.id });
+		if (!checkSum.check && !(shipment_data?.shipment_type === 'air_freight_local')) {
+			Toast.error(checkSum.message.join(','));
+		} else {
+			try {
+				const res = await updateBuyQuotationTrigger({ quotations: QUOTATIONS });
+
+				if (res?.status === OK_RESPONSE_STATUS) {
+					await updateTask({ id: task?.id });
+				}
+			} catch (err) {
+				toastApiError(err);
 			}
-		} catch (err) {
-			toastApiError(err);
 		}
 	};
 
