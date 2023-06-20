@@ -1,7 +1,7 @@
 import { Table } from '@cogoport/components';
 import React from 'react';
 
-import EmptyState from '../../../commons/EmptyState';
+import EmptyState from '../../../../commons/StyledTable/EmptyState';
 import Filters from '../Filters';
 import { ExceptionListProps } from '../Interfaces';
 
@@ -46,7 +46,7 @@ function ExceptionList({
 				{...rest}
 			/>
 			{!loading && (
-				data?.length === 0 && <EmptyState />
+				data?.length === 0 && <EmptyState imageFind="FinanceDashboard" />
 			)}
 
 		</div>
