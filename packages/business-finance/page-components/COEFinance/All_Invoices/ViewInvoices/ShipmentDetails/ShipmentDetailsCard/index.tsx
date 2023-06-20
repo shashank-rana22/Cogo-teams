@@ -131,7 +131,7 @@ function ShipmentDetailsCard({
 	}
 
 	const { data: shipmentData } = useListShipment(serialId);
-	const dataList = shipmentData?.list[0] || {};
+	const [dataList = {}] = shipmentData?.list || [];
 
 	const shipmentId = dataList?.id || '';
 
