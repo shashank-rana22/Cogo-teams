@@ -47,6 +47,10 @@ function Dashboard() {
 		setSelectArrayAccordian,
 	} = useGetkrasAssigned({ filters });
 
+	// console.log('selectAccordian', selectAccordian);
+	// console.log('selectArrayAccordian', selectArrayAccordian);
+	// console.log('KrasAssignedData', KrasAssignedData);
+
 	const [filtersFields, setFiltersFields] = useState();
 
 	const onClickConfiguration = () => {
@@ -60,6 +64,7 @@ function Dashboard() {
 	const [selectArrayLowWeightEmployee, setSelectArrayLowWeightEmployee] = useState([]);
 
 	const CHECK_IF_ONE_EMPLOYEE_SELECTED = selectArrayUnassignedEmployee.length === DISPLAY_ADD_KRA_BUTTON;
+	const CHECK_SINGLE_EMPLOYEE_SELECTED = isEmpty(filters) && CHECK_IF_ONE_EMPLOYEE_SELECTED;
 
 	return (
 		<div>
@@ -101,12 +106,11 @@ function Dashboard() {
 
 					<FiltersDisplay
 						setFilters={setFilters}
-						check={CHECK_IF_ONE_EMPLOYEE_SELECTED}
-						filters={filters}
+						check={CHECK_SINGLE_EMPLOYEE_SELECTED}
 					/>
 
 					<div className={styles.table_display}>
-						{CHECK_IF_ONE_EMPLOYEE_SELECTED && !isEmpty(filters)
+						{CHECK_SINGLE_EMPLOYEE_SELECTED
 							? <FilterFieldArray setFilters={setFiltersFields} />
 							: null}
 						<h4>All Unassigned KRA Employee List : </h4>
@@ -135,7 +139,7 @@ function Dashboard() {
 						{ !isEmpty(filters)
 							? KrasAssignedData?.list?.map((item, index) => (
 								<AccordianDisplay
-									key={item?.id}
+									key={`${index}`}
 									data={item}
 									index={index}
 									loading={LoadingKrasAssigned}

@@ -1,4 +1,4 @@
-const getControls = ({ WATCH_VALUES = {} }) => {
+const getControls = ({ WATCH_VALUES = {}, check }) => {
 	const controls = [
 		{
 			name        : 'employee_ids',
@@ -7,6 +7,7 @@ const getControls = ({ WATCH_VALUES = {} }) => {
 			type        : 'asyncSelect',
 			asyncKey    : 'list_employees',
 			valueKey    : 'id',
+			disabled    : check,
 			multiple    : true,
 			isClearable : true,
 			params      : {
@@ -22,6 +23,7 @@ const getControls = ({ WATCH_VALUES = {} }) => {
 			asyncKey    : 'list_roles',
 			label       : 'Roles',
 			placeholder : 'Select',
+			disabled    : check,
 			isClearable : true,
 			params      : {
 				filters: {
@@ -39,6 +41,7 @@ const getControls = ({ WATCH_VALUES = {} }) => {
 			label       : 'Tribes',
 			placeholder : 'Select',
 			isClearable : true,
+			disabled    : check,
 			params      : {
 				filters: {
 					status               : 'active',
@@ -55,7 +58,7 @@ const getControls = ({ WATCH_VALUES = {} }) => {
 			asyncKey    : 'list_squads',
 			label       : 'Squads',
 			placeholder : 'Select',
-			disabled    : !WATCH_VALUES.tribe_id,
+			disabled    : !WATCH_VALUES.tribe_id || check,
 			isClearable : true,
 			params      : {
 				filters: {
@@ -71,7 +74,7 @@ const getControls = ({ WATCH_VALUES = {} }) => {
 		// 	type        : 'asyncSelect',
 		// 	asyncKey    : 'list_chapters',
 		// 	label       : 'Chapters',
-		// disabled    : !WATCH_VALUES.squad_id,
+		// disabled    : !WATCH_VALUES.squad_id || check,
 		// 	placeholder : 'Select',
 		// isClearable : true,
 		// 	params      : {
@@ -90,7 +93,7 @@ const getControls = ({ WATCH_VALUES = {} }) => {
 		// 	type        : 'asyncSelect',
 		// 	asyncKey    : 'list_sub_chapters',
 		// 	label       : 'Sub chapter',
-		// disabled    : !WATCH_VALUES.chapter_id,
+		// disabled    : !WATCH_VALUES.chapter_id || check,
 		// 	placeholder : 'Select',
 		// isClearable : true,
 		// 	params      : {

@@ -8,7 +8,7 @@ import getControls from './getControls';
 import styles from './styles.module.css';
 import useFilterDisplay from './useFilterDisplay';
 
-function FilterFieldArray({ setFilters, filters, check }) {
+function FilterFieldArray({ setFilters, check }) {
 	const {
 		showFilter,
 		control,
@@ -20,7 +20,7 @@ function FilterFieldArray({ setFilters, filters, check }) {
 
 	const WATCH_VALUES = watch();
 
-	const controls = getControls({ WATCH_VALUES });
+	const controls = getControls({ WATCH_VALUES, check });
 
 	return (
 		<form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
