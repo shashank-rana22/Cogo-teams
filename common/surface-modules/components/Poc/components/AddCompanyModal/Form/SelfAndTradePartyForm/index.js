@@ -7,9 +7,10 @@ import {
 	SelectController,
 	useForm,
 } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useEffect, useImperativeHandle, forwardRef } from 'react';
 
-import POC_WORKSCOPE_MAPPING from '../../../../../../contants/POC_WORKSCOPE_MAPPING';
+import POC_WORKSCOPE_MAPPING from '../../../../../../constants/POC_WORKSCOPE_MAPPING';
 import useListOrganizationTradeParties from '../../../../../../hooks/useListOrganizationTradeParties';
 import { convertObjectMappingToArray } from '../../../../../../utils/convertObjectMappingToArray';
 import formValuePatterns from '../../../../../../utils/formValuePatterns';
@@ -19,6 +20,7 @@ import getTradePartiesDefaultParams from '../../../../helpers/getTradePartiesDef
 
 import styles from './styles.module.css';
 
+const PINCODE_FROM_ADDRESS_SPLIT_INDEX = 1;
 function SelfAndTradePartyForm({
 	companyType = '',
 	tradePartyType = '',
@@ -44,7 +46,7 @@ function SelfAndTradePartyForm({
 
 	const { trade_party_id, address } = watch() || {};
 
-	const firstTradeParty = list?.[0]?.id;
+	const firstTradeParty = list?.[GLOBAL_CONSTANTS.zeroth_index]?.id;
 
 	useEffect(() => {
 		if (companyType === 'self') {
@@ -61,7 +63,7 @@ function SelfAndTradePartyForm({
 	}, [trade_party_id, list, setValue, resetField]);
 
 	useEffect(() => {
-		setValue('pincode', address?.split('::')?.[1]);
+		setValue('pincode', address?.split('::')?.[PINCODE_FROM_ADDRESS_SPLIT_INDEX]);
 	}, [address, setValue]);
 
 	const company_options = getCompanyNameOptions(list);
