@@ -177,8 +177,7 @@ function Details({ data, refetch, item = DEFAULT_VALUE, loading, onPageChange }:
 						</div>
 						<div className={styles.ribbon_render}>
 							<div
-								className={styles.ribbon}
-								style={{ background: singleitem?.accMode === 'AP' ? '#ee3425' : '#f68b21' }}
+								className={singleitem?.accMode === 'AP' ? styles.ribbon_red : styles.ribbon_orange}
 							>
 								{singleitem?.accMode}
 							</div>

@@ -1,4 +1,4 @@
-export const historyFilters = (filters) => [
+export const historyFilters = () => [
 	{
 
 		name        : 'orgId',
@@ -21,9 +21,7 @@ export const historyFilters = (filters) => [
 			{ label: 'Credit Note', value: 'PCN' },
 			{ label: 'Invoice', value: 'SINV' },
 		],
-		placeholder : 'All',
-		value       : filters?.accountType || 'All',
-
+		placeholder: 'All',
 	},
 	{
 		name                  : 'date',

@@ -22,7 +22,7 @@ const useHistorySettlemet = () => {
 	const [filters, setFilters] = useState<FiltersParams>({
 		query       : '',
 		date        : {},
-		accountType : '',
+		accountType : 'All',
 		orgId       : '',
 		page        : 1,
 		sortBy      : '',
@@ -77,7 +77,6 @@ const useHistorySettlemet = () => {
 			setApiData(res.data);
 		} catch (error) {
 			setApiData({});
-			console.log(error);
 		}
 	}, [accountType, date?.endDate, date?.startDate, orgId, page, search, sortBy, sortType, trigger]);
 

@@ -18,7 +18,7 @@ const useHistorySingleDataList = () => {
 			authKey : 'get_payments_settlement',
 			method  : 'get',
 		},
-		{ manual: true, autoCancel: false },
+		{ manual: true },
 	);
 	const getHistoryChild = async (values) => {
 		const { documentNo, accountType } = values || {};

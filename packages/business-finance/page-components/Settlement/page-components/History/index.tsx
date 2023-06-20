@@ -127,7 +127,7 @@ function History() {
 	return (
 		<div>
 			<div className={styles.filter_container}>
-				<Filter controls={historyFilters(filters)} setFilters={setFilters} filters={filters} pageKey="page" />
+				<Filter controls={historyFilters()} setFilters={setFilters} filters={filters} pageKey="page" />
 				<div className={styles.toggle_Div}>
 					<Toggle
 						name="toggle"

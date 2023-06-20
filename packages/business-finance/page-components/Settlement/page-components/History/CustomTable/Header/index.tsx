@@ -1,7 +1,7 @@
 import { Checkbox } from '@cogoport/components';
-import { IcMArrowRotateUp, IcMArrowRotateDown } from '@cogoport/icons-react';
 import React from 'react';
 
+import Sort from './Sort';
 import styles from './styles.module.css';
 
 interface Props {
@@ -38,73 +38,12 @@ function Header({
 
 			<div className={styles.trandate}>
 				TRANSACTION DATE
-				<div className={styles.sorticons}>
-					<IcMArrowRotateUp
-						height={10}
-						width={10}
-						style={{ cursor: 'pointer' }}
-						color={filters?.sortType === 'Asc'
-							? '--color-accent-orange-2' : '--color-secondary-greyscale-4'}
-						onClick={() => {
-							setFilters((prev) => ({
-								...prev,
-								sortBy   : 'transactionDate',
-								sortType : 'Asc',
-								page     : 1,
-							}));
-						}}
-					/>
-					<IcMArrowRotateDown
-						height={10}
-						width={10}
-						color={filters?.sortType === 'Desc'
-							? '--color-accent-orange-2' : '--color-secondary-greyscale-4'}
-						style={{ cursor: 'pointer' }}
-						onClick={() => {
-							setFilters((prev) => ({
-								...prev,
-								sortBy   : 'transactionDate',
-								sortType : 'Desc',
-								page     : 1,
-							}));
-						}}
-					/>
-				</div>
+				<Sort sortBy="transactionDate" filters={filters} setFilters={setFilters} />
 			</div>
 			<div className={styles.last_edit_date}>
 				LAST EDITED ON
-				<div className={styles.sorticons}>
-					<IcMArrowRotateUp
-						height={10}
-						width={10}
-						style={{ cursor: 'pointer' }}
-						color={filters?.sortType === 'Asc'
-							? '--color-accent-orange-2' : '--color-secondary-greyscale-4'}
-						onClick={() => {
-							setFilters((prev) => ({
-								...prev,
-								sortBy   : 'lastEditedDate',
-								sortType : 'Asc',
-								page     : 1,
-							}));
-						}}
-					/>
-					<IcMArrowRotateDown
-						height={10}
-						width={10}
-						color={filters?.sortType === 'Desc'
-							? '--color-accent-orange-2' : '--color-secondary-greyscale-4'}
-						style={{ cursor: 'pointer' }}
-						onClick={() => {
-							setFilters((prev) => ({
-								...prev,
-								sortBy   : 'lastEditedDate',
-								sortType : 'Desc',
-								page     : 1,
-							}));
-						}}
-					/>
-				</div>
+				<Sort sortBy="lastEditedDate" filters={filters} setFilters={setFilters} />
+
 			</div>
 			<div className={styles.accord} />
 		</div>

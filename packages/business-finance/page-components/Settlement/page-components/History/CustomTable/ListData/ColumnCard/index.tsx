@@ -98,8 +98,8 @@ function ColumnCard({ item, getTableBodyCheckbox, refetch }: Props) {
 				</div>
 				<div className={styles.ribbon_render}>
 					<div
-						className={styles.ribbon}
-						style={{ background: item?.accMode === 'AP' ? '#ee3425' : '#f68b21' }}
+						className={item?.accMode === 'AP' ? styles.ribbon_red : styles.ribbon_orange}
+
 					>
 						{item?.accMode}
 					</div>
