@@ -22,9 +22,9 @@ function RaiseTickets({ control, errors, watchOrgId, additionalInfo, setAddition
 				const elementItem = { ...controlItem };
 				const Element = getFieldController(elementItem.controllerType);
 
-				if (!Element) return null;
+				if (!Element) { return null; }
 
-				if (elementItem.name === 'user_id' && isEmpty(watchOrgId)) return null;
+				if (elementItem.name === 'user_id' && isEmpty(watchOrgId)) { return null; }
 
 				return (
 					<div

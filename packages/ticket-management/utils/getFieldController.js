@@ -5,7 +5,7 @@ import {
 	SelectController,
 } from '@cogoport/forms';
 
-const controlTypeControllerMapping = {
+const CONTROLLER_MAPPING = {
 	select             : SelectController,
 	textarea           : TextAreaController,
 	'creatable-select' : CreatableMultiSelectController,
@@ -14,4 +14,4 @@ const controlTypeControllerMapping = {
 
 };
 
-export const getFieldController = (type = 'text') => controlTypeControllerMapping[type] || null;
+export const getFieldController = (type = 'text') => CONTROLLER_MAPPING[type] || null;

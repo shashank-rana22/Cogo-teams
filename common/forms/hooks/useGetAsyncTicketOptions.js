@@ -17,8 +17,8 @@ function useGetAsyncTicketOptions({
 	authkey = '',
 	qFilterKey = 'q',
 }) {
-	const { query, debounceQuery } = useDebounceQuery();
 	const [storeOptions, setStoreOptions] = useState([]);
+	const { query, debounceQuery } = useDebounceQuery();
 
 	const [{ data, loading }] = useTicketsRequest({
 		url    : endpoint,
@@ -27,19 +27,15 @@ function useGetAsyncTicketOptions({
 		params : { ...params, [qFilterKey]: query },
 	}, { manual: !(initialCall || query) });
 
-	const options = useMemo(() => data?.items || [], [data?.items]);
-
-	const optionValues = useMemo(() => options.map((item) => item[valueKey]), [options, valueKey]);
-
 	const [{ loading: loadingSingle }, triggerSingle] = useTicketsRequest({
 		url    : endpoint,
 		method : 'GET',
 		authkey,
 	}, { manual: true });
 
-	useEffect(() => {
-		setStoreOptions((p) => [...p, ...options]);
-	}, [options, optionValues]);
+	const options = useMemo(() => data?.items || [], [data?.items]);
+
+	const optionValues = useMemo(() => options.map((item) => item[valueKey]), [options, valueKey]);
 
 	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);
@@ -83,6 +79,10 @@ function useGetAsyncTicketOptions({
 			return {};
 		}
 	};
+
+	useEffect(() => {
+		setStoreOptions((p) => [...p, ...options]);
+	}, [options, optionValues]);
 
 	return {
 		loading: loading || loadingSingle,

@@ -31,8 +31,6 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 			name           : 'additional_information',
 			controllerType : 'textarea',
 			placeholder    : 'Enter Comments',
-			theme          : 'admin',
-			className      : 'primary md',
 		},
 		{
 			...(organizationOptions || {}),
@@ -41,10 +39,7 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 			controllerType : 'select',
 			placeholder    : 'Select Organization',
 			isClearable    : true,
-			theme          : 'admin',
-			className      : 'primary md',
 			rules          : { required: true },
-			defaultOptions : true,
 			showOptional   : true,
 		},
 		{
@@ -55,8 +50,6 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 			placeholder    : 'Select User',
 			isClearable    : true,
 			rules          : { required: true },
-			theme          : 'admin',
-			className      : 'primary md',
 			showOptional   : true,
 
 		},
@@ -86,8 +79,6 @@ const useRaiseTicketcontrols = ({ watchOrgId, setAdditionalInfo }) => {
 			label          : 'Upload Supporting Document',
 			name           : 'file_url',
 			controllerType : 'uploader',
-			theme          : 'admin',
-			className      : 'primary md',
 			showOptional   : false,
 		},
 	];
