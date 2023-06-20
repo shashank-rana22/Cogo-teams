@@ -1,4 +1,5 @@
 import { Button, Textarea, Modal } from '@cogoport/components';
+import FooterButtonWrapper from '@cogoport/surface-modules/common/FooterButtonWrapper';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -7,8 +8,7 @@ import useUpdateInvoiceRemarks from '../../../../../../../hooks/useUpdateInvoice
 import styles from './styles.module.css';
 
 function AddRemarks({
-	showAddRemarks = false,
-	setShowAddRemarks = () => {},
+	setShowModal = () => {},
 	invoice = {},
 	refetch = () => {},
 }) {
@@ -16,7 +16,7 @@ function AddRemarks({
 
 	const onClose = () => {
 		setRemarkValue(invoice?.remarks);
-		setShowAddRemarks(false);
+		setShowModal(false);
 	};
 
 	const refetchAfterCall = () => {
@@ -29,7 +29,7 @@ function AddRemarks({
 	});
 
 	return (
-		<Modal onClose={onClose} show={showAddRemarks} width={600}>
+		<Modal onClose={onClose} show width={600} closeOnOuterClick={false}>
 			<Modal.Header title="Invoice Remarks" />
 
 			<Modal.Body>
@@ -43,25 +43,27 @@ function AddRemarks({
 				/>
 			</Modal.Body>
 
-			<Modal.Footer className={styles.button_div}>
-				<Button
-					themeType="secondary"
-					onClick={onClose}
-					className={styles.button_div}
-				>
-					Cancel
-				</Button>
+			<Modal.Footer>
+				<FooterButtonWrapper>
+					<Button
+						themeType="secondary"
+						onClick={onClose}
+						className={styles.button_div}
+					>
+						Cancel
+					</Button>
 
-				<Button
-					size="md"
-					onClick={() => onSubmitRemarks({
-						id      : invoice?.id,
-						remarks : remarkValue,
-					})}
-					disabled={loading || isEmpty(remarkValue)}
-				>
-					Submit
-				</Button>
+					<Button
+						size="md"
+						onClick={() => onSubmitRemarks({
+							id      : invoice?.id,
+							remarks : remarkValue,
+						})}
+						disabled={loading || isEmpty(remarkValue)}
+					>
+						Submit
+					</Button>
+				</FooterButtonWrapper>
 			</Modal.Footer>
 		</Modal>
 	);

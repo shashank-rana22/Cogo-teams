@@ -1,17 +1,17 @@
 import mapKeyValues from './generic-formatted';
 
-const defaultKeyMappings = {
+const KEY_MAPPINGS = {
 	formatted_body_data: 'formatted_body_data',
 };
 
 const formatContainerDetails = ({ mailData = [] }) => {
-	const formattedData = [];
+	const FORMATTED_DATA = [];
 
 	mailData.forEach((bill_of_lading) => {
 		const rpaData = bill_of_lading || {};
 
 		const formatted_cd = mapKeyValues({
-			keyMappings: defaultKeyMappings,
+			keyMappings: KEY_MAPPINGS,
 			rpaData,
 		});
 
@@ -21,14 +21,14 @@ const formatContainerDetails = ({ mailData = [] }) => {
 		};
 
 		newFormatted?.container_number?.forEach((item) => {
-			formattedData.push({
+			FORMATTED_DATA.push({
 				bl_number        : newFormatted?.bl_number,
 				container_number : item.replaceAll(' ', ''),
 			});
 		});
 	});
 
-	return formattedData;
+	return FORMATTED_DATA;
 };
 
 export default formatContainerDetails;
