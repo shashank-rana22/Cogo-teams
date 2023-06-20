@@ -18,9 +18,6 @@ const API_SUCCESS_MESSAGE = {
 	approved : 'Invoice approved!,',
 };
 
-const INITIAL_STATE_OF_INVOICE_STATUS = 0;
-const LIMIT = 2;
-
 function InvoiceDetail({
 	invoice = {},
 	invoicesList = [],

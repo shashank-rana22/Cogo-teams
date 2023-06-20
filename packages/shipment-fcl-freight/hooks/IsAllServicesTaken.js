@@ -1,5 +1,3 @@
-const NOT_TAKEN = [];
-
 const IsAllServicesTaken = (
 	servicesList,
 	selectedParties,

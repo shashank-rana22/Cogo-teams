@@ -122,7 +122,8 @@ const useEditLineItems = ({
 					...value,
 					tax      : selectedCodes[value.code]?.tax_percent || 'NA',
 					sac_code : selectedCodes[value.code]?.sac || 'NA',
-					total    : (value?.price_discounted || INITIAL_STATE_OF_FIELD_VALUE) * (value?.quantity || INITIAL_STATE_OF_FIELD_VALUE),
+					total    : (value?.price_discounted
+						|| INITIAL_STATE_OF_FIELD_VALUE) * (value?.quantity || INITIAL_STATE_OF_FIELD_VALUE),
 				}));
 			}
 		});

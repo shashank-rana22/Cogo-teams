@@ -1,4 +1,4 @@
-import FCL_LOCAL_UNITS from '@cogoport/ocean-modules/contants/FCL_UNITS';
+import FCL_LOCAL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 
 import { handleServiceType } from '../CreditNote/helpers/handleServiceType';

@@ -39,7 +39,7 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 				break;
 			}
 
-			value += values[`otp-${i + INITIAL_STATE}`];
+			value += values[`otp-${i + INCREMENT_BY_ONE}`];
 		}
 
 		onChange(isAllOtpInputValuePresent ? value : '');
@@ -47,7 +47,7 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 
 	useEffect(() => {
 		otpInputElementsRef.current.forEach((element) => {
-			element.setAttribute('maxlength', INITIAL_STATE);
+			element.setAttribute('maxlength', INCREMENT_BY_ONE);
 			element.setAttribute('inputmode', 'numeric');
 		});
 	}, [values]);
@@ -55,14 +55,14 @@ const useOtpInput = ({ otpLength = 4, onChange = () => {}, ref = null }) => {
 	const handleChange = (index) => (event) => {
 		setValues((previousState) => ({
 			...previousState,
-			[`otp-${index + INITIAL_STATE}`]: event,
+			[`otp-${index + INCREMENT_BY_ONE}`]: event,
 		}));
 
 		if (isBackSpacePressed) {
 			return;
 		}
 
-		const nextOtpInputElement = otpInputElementsRef.current[index + INITIAL_STATE];
+		const nextOtpInputElement = otpInputElementsRef.current[index + INCREMENT_BY_ONE];
 		nextOtpInputElement?.focus();
 	};
 
