@@ -1,0 +1,12 @@
+.table {
+	background-color: rgb(255 244 244);
+}
+
+.th {
+	text-align: center;
+}
+
+.pagination {
+	display: flex;
+	justify-content: right;
+}
