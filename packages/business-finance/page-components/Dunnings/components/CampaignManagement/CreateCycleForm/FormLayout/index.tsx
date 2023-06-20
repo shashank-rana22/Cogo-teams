@@ -23,6 +23,7 @@ interface FormData {
 	scheduleRule?:any,
 	name?:string,
 	dunningCycleType?:string,
+	cogoEntityId?:string
 	filters?:{
 		dueOutstandingCurrency?:string,
 		organizationStakeholderIds?:string[],
@@ -47,12 +48,13 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		filters,
 		name,
 		dunningCycleType,
+		cogoEntityId,
 	} = formData || {};
 
 	const {
 		organizationStakeholderIds,
 		serviceTypes,
-		cogoEntityId,
+		cogoEntityId:cogoEntityIdFromData,
 		ageingBucket,
 		totalDueOutstanding,
 		dueOutstandingCurrency,
@@ -121,7 +123,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 				serviceType            : serviceTypes || undefined,
 				cycleName              : name || undefined,
 				cycleType              : dunningCycleType || undefined,
-				cogoEntityId,
+				cogoEntityId           : cogoEntityIdFromData || undefined,
 				ageingBucket,
 				totalDueOutstanding,
 			}));
@@ -133,7 +135,7 @@ function FormLayout({ formData, setFormData, isEditMode = false }:Props) {
 		serviceTypes,
 		oneTimeDateSchedule,
 		ageingBucket,
-		cogoEntityId,
+		cogoEntityIdFromData,
 		dunningCycleType,
 		name,
 		totalDueOutstanding,
