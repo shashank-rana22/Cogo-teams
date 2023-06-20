@@ -20,7 +20,7 @@ function RouteDetails({ item = {} }) {
 		destinationMainDisplay,
 	} = formatRouteData({ item, serviceType: service_type });
 
-	const { icon:Icon, label = '' } = SERVICE_TYPE_MAPPING[service_type];
+	const { icon: Icon, label = '' } = SERVICE_TYPE_MAPPING[service_type];
 
 	return (
 		<div className={styles.rate_card}>
