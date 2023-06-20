@@ -17,7 +17,7 @@ function CategoryType(props) {
 	const serviceProviderOptions = useGetAsyncOptions(
 		merge(asyncFieldsPartnerUsers(), {
 			params: {
-				filters: { account_type: 'service_provider', kyc_status: 'verified' },
+				filters: { kyc_status: 'verified' },
 			},
 		}),
 	);
