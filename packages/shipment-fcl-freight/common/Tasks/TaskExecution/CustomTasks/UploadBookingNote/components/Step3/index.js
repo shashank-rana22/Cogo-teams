@@ -7,6 +7,7 @@ import styles from './styles.module.css';
 
 const SECOND_STEP = 2;
 const CUSTOM_VALUES = {};
+const DEAULT_SEVICE_LINE_ITEM_CURRENCY = GLOBAL_CONSTANTS.currency_code.INR;
 
 function Step3({ data, setStep, shipment_id }) {
 	const { finalControls, DEFAULT_VALUES, onSubmit = () => {} } = data || {};
@@ -25,7 +26,7 @@ function Step3({ data, setStep, shipment_id }) {
 					return {
 						...value,
 						total    : price * quantity,
-						currency : GLOBAL_CONSTANTS.currency_code.INR,
+						currency : DEAULT_SEVICE_LINE_ITEM_CURRENCY,
 					};
 				});
 			}
