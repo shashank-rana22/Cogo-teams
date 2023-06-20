@@ -1,5 +1,6 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
 
 import styles from './styles.module.css';
@@ -24,7 +25,7 @@ function Step3({ data, setStep, shipment_id }) {
 					return {
 						...value,
 						total    : price * quantity,
-						currency : 'INR',
+						currency : GLOBAL_CONSTANTS.currency_code.INR,
 					};
 				});
 			}
