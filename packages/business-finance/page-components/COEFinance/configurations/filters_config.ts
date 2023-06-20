@@ -71,7 +71,7 @@ export const FILTERS : ControlProps[] = [
 				type      : 'tags',
 				multiple  : true,
 				className : 'primary md',
-				style	  : { display:'flex', flexWrap:'wrap'},
+				style  	  : { display: 'flex', flexWrap: 'wrap' },
 				span      : 12,
 				options   : [
 					{ label: 'Purchase', value: 'PURCHASE' },
