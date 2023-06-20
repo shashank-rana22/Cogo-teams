@@ -1,12 +1,12 @@
 import FilterTicketsSection from '../../common/FilterTicketsSection';
-import Header from '../../common/Header';
 
 import StatsSection from './StatsSection';
 
 function MyTickets() {
 	return (
 		<div>
-			<Header />
+
+			<h2>My Tickets</h2>
 			<StatsSection />
 			<FilterTicketsSection />
 		</div>

@@ -607,5 +607,10 @@ const rms = [
 		access_type  : 'private',
 		service_name : 'partner',
 	},
+	{
+		api          : 'create_air_customs_rate_bulk_operation',
+		access_type  : 'private',
+		service_name : 'air_customs_rate',
+	},
 ];
 export default rms;
