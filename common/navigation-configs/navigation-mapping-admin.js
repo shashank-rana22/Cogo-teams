@@ -1574,7 +1574,7 @@ const navigationMappingAdmin = {
 				href          : '/cogo-assured/fcl_freight_local',
 				as            : '/cogo-assured/fcl_freight_local',
 				type          : 'link',
-				possible_apis : apis.cogo_assured,
+				possible_apis : [...apis.cogo_assured, ...apis.sales_invoice],
 
 				main_apis: [],
 			},
@@ -2302,6 +2302,13 @@ const navigationMappingAdmin = {
 				href          : '/v2/saas-tools/standard-milestones',
 				as            : '/v2/saas-tools/standard-milestones',
 				possible_apis : apis.saas_tools_standard_milestones,
+			},
+			{
+				key           : 'saas_tools-vessel_tracking',
+				title         : 'Live Vessel Tracking',
+				href          : '/v2/saas-tools/live-vessel-tracking',
+				as            : '/v2/saas-tools/live-vessel-tracking',
+				possible_apis : apis.saas_live_vessel_tracking,
 			},
 		],
 	},

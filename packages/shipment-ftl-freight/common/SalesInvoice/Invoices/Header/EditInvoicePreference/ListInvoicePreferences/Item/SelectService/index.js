@@ -1,7 +1,5 @@
 import { Button, Tooltip, CheckboxGroup, Toast } from '@cogoport/components';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-import getCountryDetails from '@cogoport/globalization/utils/getCountryDetails';
 import { startCase } from '@cogoport/utils';
 import React, { useState, useEffect, useMemo } from 'react';
 
@@ -9,6 +7,9 @@ import POST_REVIEWED_INVOICES from '../../../../../../helpers/post-reviewed-sale
 import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';
+
+const OPTIONS = [];
+const INITIAL_STATE = 0;
 
 function SelectService({
 	invoice = {},
@@ -22,11 +23,7 @@ function SelectService({
 	const [value, onChange] = useState(selected);
 	const [invoiceCurrency, setInvoiceCurrency] = useState(invoice_currency);
 
-	let options = [];
-
 	allTakenServices?.forEach((service) => {
-		const countryCode = getCountryDetails({ country_id: invoice?.billing_address?.organization_country_id });
-
 		if (!POST_REVIEWED_INVOICES.includes(service?.status)) {
 			const trade_type = service?.trade_type;
 
@@ -35,7 +32,7 @@ function SelectService({
 			const isBas = (service?.line_items || []).some((lineItem) => lineItem?.code === 'BAS');
 
 			const invoiceAmount = formatAmount({
-				amount   : service?.service_total_discounted || 0,
+				amount   : service?.service_total_discounted || INITIAL_STATE,
 				currency : service?.service_total_currency,
 				options  : {
 					style           : 'currency',
@@ -91,23 +88,13 @@ function SelectService({
 						</div>
 					</Tooltip>
 				),
-				isTaxable : service?.tax_total > 0,
+				isTaxable : service?.tax_total > INITIAL_STATE,
 				value     : id_with_igst,
 				...service,
 			};
 
-			options.push(servicesToPush);
+			OPTIONS.push(servicesToPush);
 		}
-
-		options = options?.filter(
-			(opt) => !(
-				opt?.service_type === 'cargo_insurance_service'
-					&& !GLOBAL_CONSTANTS.service_supported_countries.feature_supported_service
-						.cargo_insurance.countries.includes(
-							countryCode,
-						)
-			),
-		);
 	});
 
 	const handleChange = (newValue) => {
@@ -139,7 +126,7 @@ function SelectService({
 			/>
 
 			<CheckboxGroup
-				options={options}
+				options={OPTIONS}
 				onChange={handleChange}
 				value={value}
 			/>
