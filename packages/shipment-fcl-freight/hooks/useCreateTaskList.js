@@ -1,3 +1,4 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useEffect, useState, useMemo } from 'react';
 
@@ -5,7 +6,10 @@ import useGetPendingTasks from './useGetPendingTask';
 import useGetProcess from './useGetProcess';
 import useGetListDocuments from './useListDocuments';
 
-const docTasks = ['upload_document', 'approve_document', 'amend_document'];
+const DOC_TYPE_SLICE_INDEX = -1;
+const TASK_CONFIG_FLAT_DEPTH = 2;
+
+const DOC_TASKS = ['upload_document', 'approve_document', 'amend_document'];
 
 const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 	const [filters, setFilters] = useState({ uploaded_by_org_id: '', service_type: '' });
@@ -47,14 +51,15 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 		shipment_type,
 	});
 
-	const getDocType = useMemo(() => (task) => task?.split('upload_')?.slice(-1)?.[0], []);
+	const getDocType = useMemo(() => (task) => task?.split('upload_')
+		?.slice(DOC_TYPE_SLICE_INDEX)?.[GLOBAL_CONSTANTS.zeroth_index], []);
 
 	const taskConfigsForAllShipmentTasks = useMemo(() => (taskConfigs || [])
 		.map(({ states }) => states?.map(({ configs }) => configs?.filter(
-			(task) => docTasks.includes(task?.task_type)
+			(task) => DOC_TASKS.includes(task?.task_type)
 				&& task?.trade_type === primary_service?.trade_type,
 		)))
-		.flat(2), [taskConfigs, primary_service?.trade_type]);
+		.flat(TASK_CONFIG_FLAT_DEPTH), [taskConfigs, primary_service?.trade_type]);
 
 	const listOfAllShipmentDocTypes = useMemo(
 		() => taskConfigsForAllShipmentTasks?.map((t) => getDocType(t?.task)),
@@ -70,14 +75,14 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 	), [pendingTasks]);
 
 	useEffect(() => {
-		const pushInDocTypesArr = [];
+		const PUST_IN_DOC_TYPES_ARR = [];
 		if ((taskConfigs || [])?.length) {
 			let extraDocumentUploaded = (uploadedShipmentDocuments?.list || []).filter((doc) => {
 				if (
 					!listOfAllShipmentDocTypes?.includes(doc?.document_type)
-					&& !pushInDocTypesArr.includes(doc?.document_type)
+					&& !PUST_IN_DOC_TYPES_ARR.includes(doc?.document_type)
 				) {
-					pushInDocTypesArr.push(doc?.document_type);
+					PUST_IN_DOC_TYPES_ARR.push(doc?.document_type);
 					return true;
 				}
 				return false;
@@ -91,29 +96,29 @@ const useCreateTaskList = ({ primary_service = {}, shipment_data = {} }) => {
 				trade_type : primary_service?.trade_type,
 			}));
 
-			const restList = [];
-			const pendingList = [];
-			const uploadedList = [];
+			const REST_LIST = [];
+			const PENDING_LIST = [];
+			const UPLOADED_LIST = [];
 
 			(taskConfigsForAllShipmentTasks || []).forEach((child) => {
 				const doc_type = getDocType(child?.task);
-				pushInDocTypesArr.push(doc_type);
+				PUST_IN_DOC_TYPES_ARR.push(doc_type);
 
 				if (listOfUploadedDocumentTypes.includes(doc_type)) {
-					uploadedList.push(child);
+					UPLOADED_LIST.push(child);
 				} else if (listOfPendingTaskDocumentTypes.includes(doc_type)) {
-					pendingList.push({
+					PENDING_LIST.push({
 						...child,
 						pendingItem: pendingTasks.find((itm) => itm.document_type === doc_type),
 					});
 				} else {
-					restList.push(child);
+					REST_LIST.push(child);
 				}
 			});
 
-			setTaskList([...extraDocumentUploaded, ...uploadedList, ...pendingList, ...restList]);
+			setTaskList([...extraDocumentUploaded, ...UPLOADED_LIST, ...PENDING_LIST, ...REST_LIST]);
 
-			setDocTypes([...pushInDocTypesArr]);
+			setDocTypes([...PUST_IN_DOC_TYPES_ARR]);
 		}
 	}, [
 		listOfAllShipmentDocTypes,

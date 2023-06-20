@@ -32,30 +32,6 @@
 	cursor: pointer;
 }
 
-.dialog_box {
-	display: flex;
-	flex-direction: column;
-	align-items: center;
-	min-width: 64px;
-
-	@media (max-width: 768px) {
-		display: none;
-	}
-}
-
-.text {
-	width: 130px;
-	font-size: var(--font-size-sm);
-	line-height: 16px;
-	color: var(--color-secondary-greyscale-3);
-	text-align: center;
-	cursor: pointer;
-
-	&:hover {
-		color: #5936f0;
-	}
-}
-
 .statuses {
 	display: flex;
 	flex-direction: column;
@@ -66,11 +42,6 @@
 		color: #393f70;
 		background-color: #e6fbe9;
 	}
-}
-
-.line {
-	width: 100%;
-	border-top: 1px solid var(--color-secondary-greyscale-5);
 }
 
 .remark_container {
@@ -166,4 +137,8 @@
 .icon_div {
 	margin: 4px 0 0 10px;
 	cursor: pointer;
+}
+
+.full_width {
+	width: 100%;
 }

@@ -102,7 +102,7 @@ function GenerateMAWB({
 
 	const category = item.blCategory;
 	const mawbId = item.documentId;
-	const pendingTaskId = item.id;
+	const pendingTaskId = item?.id || item?.taskId || undefined;
 
 	const [activeCategory, setActiveCategory] = useState('mawb');
 
@@ -189,7 +189,7 @@ function GenerateMAWB({
 		setValue('iataCode', iataCodeMapping[taskItem?.originAirportId] || '');
 		setValue('city', taskItem?.city || 'NEW DELHI');
 		setValue('place', taskItem?.place || 'NEW DELHI');
-		setValue('class', taskItem?.class || taskItem?.isMinimumPriceShipment ? 'm' : 'q');
+		setValue('class', taskItem?.class || (taskItem?.isMinimumPriceShipment ? 'm' : 'q'));
 		setValue('currency', 'INR');
 		setValue('ratePerKg', edit ? taskItem.ratePerKg : taskItem?.tariffRate);
 		setValue('commodity', taskItem.commodity
@@ -312,7 +312,7 @@ function GenerateMAWB({
 			setValue('iataCode', edit ? taskItem.iataCode : iataCodeMapping[taskItem?.originAirportId] || '');
 			setValue('city', taskItem?.city || 'NEW DELHI');
 			setValue('place', taskItem?.place || 'NEW DELHI');
-			setValue('class', taskItem?.class || taskItem?.isMinimumPriceShipment ? 'm' : 'q');
+			setValue('class', taskItem?.class || (taskItem?.isMinimumPriceShipment ? 'm' : 'q'));
 			setValue('currency', 'INR');
 			setValue('ratePerKg', edit ? taskItem.ratePerKg : taskItem?.tariffRate);
 			setValue('commodity', edit ? `${taskItem.commodity || ''}`

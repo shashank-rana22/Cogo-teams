@@ -1,4 +1,4 @@
-const controls = {
+export default {
 	query_type: {
 		size        : 'sm',
 		name        : 'query_type',
@@ -33,4 +33,3 @@ const controls = {
 
 	},
 };
-export default controls;
