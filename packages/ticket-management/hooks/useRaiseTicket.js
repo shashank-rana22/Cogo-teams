@@ -3,9 +3,10 @@ import { useTicketsRequest } from '@cogoport/request';
 import { useSelector } from '@cogoport/store';
 import { isEmpty } from '@cogoport/utils';
 
-const ADDITIONAL_DATA = {};
-
-const getPayload = ({ id, priority, finalUrl, selectedServices, issue_type, additional_information }) => ({
+const getPayload = ({
+	id, priority, finalUrl, selectedServices, issue_type, additional_information,
+	ADDITIONAL_DATA,
+}) => ({
 	UserID      : id,
 	Source      : 'admin',
 	Category    : '',
@@ -38,6 +39,8 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 			...rest
 		} = val || {};
 
+		const ADDITIONAL_DATA = {};
+
 		const selectedServices = Object.fromEntries(
 			Object.entries(rest).filter(([key]) => additionalInfo.includes(key)),
 		);
@@ -56,6 +59,7 @@ const useRaiseTicket = ({ setShowRaiseTicket, additionalInfo }) => {
 					selectedServices,
 					issue_type,
 					additional_information,
+					ADDITIONAL_DATA,
 				}),
 			});
 			Toast.success('Successfully Created');

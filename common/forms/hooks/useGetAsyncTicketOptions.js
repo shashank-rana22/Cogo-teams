@@ -1,19 +1,16 @@
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useTicketsRequest } from '@cogoport/request';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useMemo } from 'react';
 
 import useDebounceQuery from './useDebounceQuery';
 
-const INITIALIZE_PARAMS = {};
-const OPTIONS_ARRAY = [];
-const DEFAULT_INDEX = 0;
-
 function useGetAsyncTicketOptions({
 	endpoint = '',
 	initialCall = false,
 	valueKey = '',
 	labelKey = '',
-	params = INITIALIZE_PARAMS,
+	params = {},
 	authkey = '',
 	qFilterKey = 'q',
 }) {
@@ -44,6 +41,8 @@ function useGetAsyncTicketOptions({
 	const onHydrateValue = async (value) => {
 		if (Array.isArray(value)) {
 			let unOrderedHydratedValue = [];
+			const OPTIONS_ARRAY = [];
+
 			value.forEach((v) => {
 				const singleHydratedValue = storeOptions.find((o) => o?.[valueKey] === v);
 				if (singleHydratedValue) {
@@ -68,13 +67,13 @@ function useGetAsyncTicketOptions({
 
 		const checkOptionsExist = options.filter((item) => item[valueKey] === value);
 
-		if (!isEmpty(checkOptionsExist)) return checkOptionsExist[DEFAULT_INDEX];
+		if (!isEmpty(checkOptionsExist)) return checkOptionsExist[GLOBAL_CONSTANTS.zeroth_index];
 
 		try {
 			const res = await triggerSingle({
 				params: { ...params, [valueKey]: value },
 			});
-			return res?.data?.items?.[DEFAULT_INDEX] || null;
+			return res?.data?.items?.[GLOBAL_CONSTANTS.zeroth_index] || null;
 		} catch (err) {
 			return {};
 		}

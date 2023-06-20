@@ -1,21 +1,19 @@
 import { useDebounceQuery } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useTicketsRequest } from '@cogoport/request';
-import { isEmpty } from '@cogoport/utils';
 import { useEffect, useState, useMemo } from 'react';
 
+const INITIALIZE_PARAMS = {};
 function useGetAsyncTicketOptions({
 	endpoint = '',
 	initialCall = false,
 	valueKey = '',
 	labelKey = '',
-	params = {},
+	params = INITIALIZE_PARAMS,
 	authkey = '',
 	qFilterKey = 'q',
 }) {
-	const [storeoptions, setstoreoptions] = useState([]);
-
 	const { query, debounceQuery } = useDebounceQuery();
+	const [storeoptions, setstoreoptions] = useState([]);
 
 	const [{ data, loading }] = useTicketsRequest({
 		url    : endpoint,
@@ -24,15 +22,19 @@ function useGetAsyncTicketOptions({
 		params : { ...params, [qFilterKey]: query },
 	}, { manual: !(initialCall || query) });
 
+	const options = useMemo(() => data?.items || [], [data?.items]);
+
+	const optionValues = useMemo(() => options.map((item) => item[valueKey]), [options, valueKey]);
+
 	const [{ loading: loadingSingle }, triggerSingle] = useTicketsRequest({
 		url    : endpoint,
 		method : 'GET',
 		authkey,
 	}, { manual: true });
 
-	const options = useMemo(() => data?.items || [], [data?.items]);
-
-	const optionValues = useMemo(() => options.map((item) => item[valueKey]), [options, valueKey]);
+	useEffect(() => {
+		setstoreoptions((p) => [...p, ...options]);
+	}, [options, optionValues]);
 
 	const onSearch = (inputValue) => {
 		debounceQuery(inputValue);
@@ -41,19 +43,19 @@ function useGetAsyncTicketOptions({
 	const onHydrateValue = async (value) => {
 		if (Array.isArray(value)) {
 			let unorderedHydratedValue = [];
-			const FETCHED_DATA = [];
+			const toBeFetched = [];
 			value.forEach((v) => {
 				const singleHydratedValue = storeoptions.find((o) => o?.[valueKey] === v);
 				if (singleHydratedValue) {
 					unorderedHydratedValue.push(singleHydratedValue);
 				} else {
-					FETCHED_DATA.push(v);
+					toBeFetched.push(v);
 				}
 			});
 			let res;
-			if (FETCHED_DATA.length) {
+			if (toBeFetched.length) {
 				res = await triggerSingle({
-					params: { ...params, [valueKey]: FETCHED_DATA },
+					params: { ...params, [valueKey]: toBeFetched },
 				});
 				storeoptions.push(...res?.data?.items || []);
 			}
@@ -66,21 +68,17 @@ function useGetAsyncTicketOptions({
 
 		const checkOptionsExist = options.filter((item) => item[valueKey] === value);
 
-		if (!isEmpty(checkOptionsExist)) { return checkOptionsExist[GLOBAL_CONSTANTS.zeroth_index]; }
+		if (checkOptionsExist.length > 0) return checkOptionsExist[0];
 
 		try {
 			const res = await triggerSingle({
 				params: { ...params, [valueKey]: value },
 			});
-			return res?.data?.items?.[GLOBAL_CONSTANTS.zeroth_index] || null;
+			return res?.data?.items?.[0] || null;
 		} catch (err) {
 			return {};
 		}
 	};
-
-	useEffect(() => {
-		setstoreoptions((p) => [...p, ...options]);
-	}, [options, optionValues]);
 
 	return {
 		loading: loading || loadingSingle,
