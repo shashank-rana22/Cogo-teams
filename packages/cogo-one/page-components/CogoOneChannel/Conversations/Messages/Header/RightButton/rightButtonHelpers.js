@@ -87,7 +87,10 @@ export function getOptionsMapping({
 }
 
 export const ACCESSABLE_BUTTON_FUNC_MAPPING = {
-	admin_view: ({ showBotMessages, isServiceProvider }) => {
+	admin_view: ({
+		showBotMessages,
+		isServiceProvider,
+	}) => {
 		const accesableButtonOptions = ['auto_assign', 'assign_modal', 'assign_to_me'];
 		if (!showBotMessages && isServiceProvider) {
 			accesableButtonOptions.push('add_me_to_group');
