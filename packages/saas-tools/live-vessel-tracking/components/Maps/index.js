@@ -31,7 +31,7 @@ const corner2 = L.latLng(DEFAULT_NORTHEAST_LAT, DEFAULT_NORTHEAST_LNG);
 const bounds = L.latLngBounds(corner1, corner2);
 
 function Maps({ vesselInfo = [], setCurrentBound }) {
-	const [map, setMap] = useState();
+	const [map, setMap] = useState(null);
 
 	useEffect(() => {
 		if (map) {

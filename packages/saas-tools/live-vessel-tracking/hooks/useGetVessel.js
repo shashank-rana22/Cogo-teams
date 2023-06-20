@@ -31,7 +31,7 @@ const useGetVessel = () => {
 
 	const [{ loading, data }, trigger] = useRequestBf({
 		method  : 'get',
-		url     : 'https://a25c768d-1db8-4ffa-879d-fac36179e2a0.mock.pstmn.io/ais/vessel/tracking-data',
+		url     : '/ais/vessel/tracking-data',
 		authKey : 'get_ais_vessel_tracking_data',
 	}, { manual: true });
 

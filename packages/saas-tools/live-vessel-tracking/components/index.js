@@ -1,5 +1,5 @@
+import { dynamic } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import dynamic from 'next/dynamic';
 
 import useGetVessel from '../hooks/useGetVessel';
 
