@@ -34,6 +34,7 @@ function useGetEmployeesWithLowWeightage() {
 		loading,
 		filters,
 		setFilters,
+		getEmployeesWithLowWeightage,
 	};
 }
 

@@ -27,13 +27,15 @@
 }
 
 .section_right{
-    width: 29%;
+    width: 27%;
     background-color: white;
     margin-top: 14px;
     padding: 8px;
     height: fit-content;
     border-radius: 6px;
     box-shadow: 0 0 4px rgba(44,62,80,.3);
+    position: fixed;
+    right: 15px;
 }
 
 .table_display{

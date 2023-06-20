@@ -15,25 +15,29 @@ const REDIRECT_URL = '/kra-assignment/create';
 
 function Dashboard() {
 	const router = useRouter();
+	const [showKRACalculationTable, setShowKRACalculationTable] = useState(false);
 
 	const {
 		data:UnassignedData = [],
 		loading, filters, setFilters,
+		getUnassignedEmployee,
 	} = useGetUnassignedEmployee();
+
 	const { list:UnassignedList = [] } = UnassignedData;
 
 	const {
 		data:LowWeightageEmployeeData = [],
 		loading:LoadingLowWeightageEmployee,
+		getEmployeesWithLowWeightage,
 	} = useGetEmployeesWithLowWeightage();
+
 	const { list:LowWeightageEmployeeList = [] } = LowWeightageEmployeeData;
 
 	const {
 		data: KrasAssignedData,
 		loading:LoadingKrasAssigned,
+		getkrasAssigned,
 	} = useGetkrasAssigned();
-
-	// console.log('KrasAssignedData', KrasAssignedData);
 
 	const onClickConfiguration = () => {
 		router.push(REDIRECT_URL, REDIRECT_URL);
@@ -44,8 +48,6 @@ function Dashboard() {
 
 	const ARRAY_OF_LOW_WEIGHTAGE_IDS = LowWeightageEmployeeList?.map((obj) => obj.id);
 	const [selectArrayLowWeightEmployee, setSelectArrayLowWeightEmployee] = useState([]);
-
-	// console.log('data', selectArrayLowWeightEmployee);
 
 	return (
 		<div>
@@ -60,14 +62,31 @@ function Dashboard() {
 				<div>
 					Please, select the KRAs from the KRA drop-down and click on Add KRA.
 				</div>
-				<Button themeType="secondary">Back to Employee Filters</Button>
+
+				{
+					showKRACalculationTable ? (
+						<Button
+							themeType="secondary"
+							onClick={() => setShowKRACalculationTable(false)}
+						>
+							Back to Employee Filters
+						</Button>
+					) : (
+						<Button
+							size="md"
+							onClick={() => setShowKRACalculationTable(true)}
+						>
+							Proceed to Allocate KRAs
+						</Button>
+					)
+				}
+
 			</div>
 
 			<div className={styles.section}>
 				<div className={styles.section_left}>
-					<div>
-						<FiltersDisplay setFilters={setFilters} />
-					</div>
+
+					<FiltersDisplay setFilters={setFilters} />
 
 					<div className={styles.table_display}>
 						<h4>All Unassigned KRA Employee List : </h4>
@@ -99,9 +118,19 @@ function Dashboard() {
 					</div>
 				</div>
 
-				<div className={styles.section_right}>
-					<KRATable selectArray={selectArrayUnassignedEmployee} />
-				</div>
+				{showKRACalculationTable
+				&& (
+					<div className={styles.section_right}>
+						<KRATable
+							selectArray={selectArrayUnassignedEmployee}
+							filters={filters}
+							getkrasAssigned={getkrasAssigned}
+							getUnassignedEmployee={getUnassignedEmployee}
+							getEmployeesWithLowWeightage={getEmployeesWithLowWeightage}
+						/>
+					</div>
+				)}
+
 			</div>
 		</div>
 	);

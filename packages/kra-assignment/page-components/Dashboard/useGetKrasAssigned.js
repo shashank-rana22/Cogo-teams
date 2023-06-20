@@ -39,6 +39,7 @@ function useGetkrasAssigned() {
 		loading,
 		filters,
 		setFilters,
+		getkrasAssigned,
 	};
 }
 

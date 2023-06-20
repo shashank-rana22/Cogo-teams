@@ -7,7 +7,10 @@ function SelectKRAs({ selectedValue, setSelectedValue, KRAOptions, onClickAddKRA
 	return (
 		<div className={styles.container}>
 			<div>
-				Select KRA
+				<div style={{ fontWeight: 700 }}>
+					Select KRA
+				</div>
+
 				<div className={styles.select_container}>
 					<MultiSelect
 						size="sm"

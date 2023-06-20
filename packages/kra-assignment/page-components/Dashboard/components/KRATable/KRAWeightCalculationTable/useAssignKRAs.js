@@ -2,7 +2,12 @@ import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useHarbourRequest } from '@cogoport/request';
 
-const useAssignKRAs = ({ inputValue, selectArray }) => {
+const useAssignKRAs = ({
+	inputValue, selectArray,
+	getEmployeesWithLowWeightage,
+	getkrasAssigned,
+	getUnassignedEmployee,
+}) => {
 	const [{ loading }, trigger] = useHarbourRequest({
 		url    : '/assign_kra',
 		method : 'post',
@@ -13,8 +18,14 @@ const useAssignKRAs = ({ inputValue, selectArray }) => {
 			await trigger({
 				data: { kras_assigned: inputValue, employee_ids: selectArray },
 			});
+
+			getEmployeesWithLowWeightage();
+			getkrasAssigned();
+			getUnassignedEmployee();
 		} catch (error) {
-			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
+			if (error.response?.data) {
+				Toast.error(getApiErrorString(error.response?.data));
+			}
 		}
 	};
 	return { onClickSubmitKRAs, loading };

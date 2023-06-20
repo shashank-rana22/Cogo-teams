@@ -2,7 +2,7 @@ import KRAWeightCalculationTable from './KRAWeightCalculationTable';
 import SelectKRAs from './SelectKRAs';
 import useKRAList from './useKRAList';
 
-function KRATable({ selectArray }) {
+function KRATable({ selectArray, filters, getEmployeesWithLowWeightage, getkrasAssigned, getUnassignedEmployee }) {
 	const {
 		selectedValue,
 		setSelectedValue,
@@ -10,7 +10,7 @@ function KRATable({ selectArray }) {
 		inputValue,
 		setInputValue,
 		onClickAddKRAs,
-	} = useKRAList();
+	} = useKRAList({ filters });
 
 	return (
 		<div>
@@ -25,6 +25,9 @@ function KRATable({ selectArray }) {
 				inputValue={inputValue}
 				setInputValue={setInputValue}
 				selectArray={selectArray}
+				getkrasAssigned={getkrasAssigned}
+				getUnassignedEmployee={getUnassignedEmployee}
+				getEmployeesWithLowWeightage={getEmployeesWithLowWeightage}
 			/>
 		</div>
 	);

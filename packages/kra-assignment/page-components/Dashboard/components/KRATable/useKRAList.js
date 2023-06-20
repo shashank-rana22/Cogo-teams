@@ -1,7 +1,9 @@
 import { useHarbourRequest } from '@cogoport/request';
 import { useState } from 'react';
 
-const useKRAList = () => {
+const TOTAL_WEIGHTAGE = 1;
+
+const useKRAList = ({ filters = {} }) => {
 	const [selectedValue, setSelectedValue] = useState();
 	const [inputValue, setInputValue] = useState([]);
 
@@ -9,6 +11,9 @@ const useKRAList = () => {
 		{
 			method : 'get',
 			url    : '/list_kra',
+			params : {
+				filters,
+			},
 		},
 		{ manual: false },
 	);
@@ -29,7 +34,7 @@ const useKRAList = () => {
 				{
 					kra_assigned : value,
 					name         : (list || []).find((element) => (element?.id === value)).kra_name,
-					weightage    : 1 / ((selectedValue || []).length),
+					weightage    : TOTAL_WEIGHTAGE / ((selectedValue || []).length),
 				},
 
 			]))

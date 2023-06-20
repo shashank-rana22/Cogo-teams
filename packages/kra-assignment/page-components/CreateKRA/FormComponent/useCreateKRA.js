@@ -1,6 +1,7 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
+import { useRouter } from '@cogoport/next';
 import { useHarbourRequest } from '@cogoport/request';
 import { useState } from 'react';
 
@@ -28,7 +29,10 @@ const getPayload = (values) => {
 };
 
 const useCreateKRA = () => {
+	const router = useRouter();
+
 	const [showSelectedValue, setSelectedValue] = useState({});
+
 	const { control, handleSubmit, formState: { errors }, watch } = useForm();
 
 	const [{ loading }, trigger] = useHarbourRequest(
@@ -46,6 +50,9 @@ const useCreateKRA = () => {
 			await trigger({
 				data: payload,
 			});
+
+			Toast.success('KRA created successfully');
+			router.back();
 		} catch (error) {
 			if (error.response?.data) { Toast.error(getApiErrorString(error.response?.data)); }
 		}

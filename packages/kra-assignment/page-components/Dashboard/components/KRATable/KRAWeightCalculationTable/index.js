@@ -19,10 +19,21 @@ const getTotalAmount = (inputValue) => (inputValue || []).reduce((total, element
 	return Math.round(total * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT;
 }, INITIAL_TOTAL_AMOUNT);
 
-function KRAWeightCalculationTable({ setInputValue, inputValue, selectArray }) {
+function KRAWeightCalculationTable({
+	setInputValue,
+	inputValue, selectArray,
+	getEmployeesWithLowWeightage,
+	getkrasAssigned, getUnassignedEmployee,
+}) {
 	const updatedValue = [...inputValue];
 
-	const { onClickSubmitKRAs, loading } = useAssignKRAs({ inputValue, selectArray });
+	const { onClickSubmitKRAs, loading } = useAssignKRAs({
+		inputValue,
+		selectArray,
+		getEmployeesWithLowWeightage,
+		getkrasAssigned,
+		getUnassignedEmployee,
+	});
 
 	const totalAmount = Math.round(getTotalAmount(inputValue) * ROUND_OFF_DIGIT) / ROUND_OFF_DIGIT;
 
