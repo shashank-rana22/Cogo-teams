@@ -4,6 +4,7 @@ import { isEmpty, snakeCase } from '@cogoport/utils';
 import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
+import { getHasAccessToEditGroup } from '../../../../helpers/agentDetailsHelpers';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
 import useGetUser from '../../../../hooks/useGetUser';
 import useGroupChat from '../../../../hooks/useGroupChat';
@@ -68,9 +69,13 @@ function AgentDetails({
 		addGroupMember,
 	} = useGroupChat({ activeMessageCard, firestore });
 
-	const hasAccessToEditGroup = (session_type === 'admin' && account_type === 'service_provider')
-	&& (activeMessageCard.group_members?.includes(agentId)
-	|| activeMessageCard.support_agent_id === agentId || viewType === 'admin_view');
+	const hasAccessToEditGroup = getHasAccessToEditGroup({
+		sessionType : session_type,
+		accountType : account_type,
+		activeMessageCard,
+		agentId,
+		viewType,
+	});
 
 	const {
 		user_data = {},

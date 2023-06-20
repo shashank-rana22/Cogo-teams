@@ -6,14 +6,19 @@ import { PLACEHOLDER_MAPPING } from '../../../../../../constants';
 
 import styles from './styles.module.css';
 
-export const getAssignTypeComp = ({
+export function GetAssignTypeComp({
 	control,
 	listAgentsOptions, errors, watchCondtion, assignType, accountType = '',
-}) => {
+}) {
 	const {
 		assign_user,
-		assign_condition, condition_value, assign_role, assign_entity, assign_service_type,
+		assign_condition,
+		condition_value,
+		assign_role,
+		assign_entity,
+		assign_service_type,
 	} = controls;
+
 	const ASSIGN_TYPE_MAPPING = {
 		assign_user: (
 			<div className={styles.styled_controller}>
@@ -77,7 +82,7 @@ export const getAssignTypeComp = ({
 			</>),
 	};
 	return ASSIGN_TYPE_MAPPING[assignType] || null;
-};
+}
 
 export const ASSIGN_TYPE_PAYLOAD_MAPPING = {
 	assign_user: (val) => ({

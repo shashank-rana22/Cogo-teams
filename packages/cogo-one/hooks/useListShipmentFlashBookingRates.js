@@ -41,13 +41,13 @@ const useListShipmentFlashBookingRates = ({
 		method : 'get',
 	}, { manual: true });
 
-	const shipmentFlashBookingRates = useCallback(async ({ page }) => {
+	const shipmentFlashBookingRates = useCallback(({ page }) => {
 		if (!hasFlashBookings) {
 			return;
 		}
 
 		try {
-			await trigger({
+			trigger({
 				params: getParams({ activeTab, orgId, page }),
 			});
 		} catch (error) {

@@ -6,7 +6,7 @@ const useCreateCogooneTimeline = () => {
 		method : 'post',
 	}, { manual: true, autoCancel: false });
 
-	const createCogooneTimeline = async ({ payload }) => {
+	const createCogooneTimeline = ({ payload }) => {
 		try {
 			trigger({ data: payload });
 		} catch (e) {

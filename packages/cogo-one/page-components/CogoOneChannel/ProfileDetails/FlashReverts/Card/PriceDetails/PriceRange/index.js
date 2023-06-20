@@ -1,7 +1,6 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatAmount from '@cogoport/globalization/utils/formatAmount';
-
-import { UNITS_MAPPING } from '../../../../../../../constants/flashRatesMapping';
 
 const geo = getGeoConstants();
 
@@ -32,7 +31,7 @@ function PriceRange({ item }) {
 				},
 			})}
 			&nbsp;
-			{UNITS_MAPPING[item?.service_type] || ''}
+			{GLOBAL_CONSTANTS.services_unit_mapping[item?.service_type] || ''}
 		</span>
 	);
 }

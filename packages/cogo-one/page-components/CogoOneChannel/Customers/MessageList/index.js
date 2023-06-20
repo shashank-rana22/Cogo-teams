@@ -8,6 +8,7 @@ import {
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
+import TABS_MAPPING from '../../../../constants/messgesTabsMapping';
 import useBulkAssignChat from '../../../../hooks/useBulkAssignChat';
 import FilterComponents from '../FilterComponents';
 import LoadingState from '../LoadingState';
@@ -117,9 +118,13 @@ function MessageList(messageProps) {
 						themeType="secondary"
 						onChange={setActiveTab}
 					>
-						<TabPanel name="all" title="All" />
-						<TabPanel name="groups" title="Groups" />
-						<TabPanel name="contacts" title="Contacts" />
+						{TABS_MAPPING.map((eachTab) => (
+							<TabPanel
+								key={eachTab.name}
+								name={eachTab.name}
+								title={eachTab.title}
+							/>
+						))}
 					</Tabs>
 				</div>
 			)}

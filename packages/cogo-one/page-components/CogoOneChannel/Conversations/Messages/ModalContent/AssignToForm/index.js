@@ -11,7 +11,7 @@ import { useState } from 'react';
 
 import controls, { ASSIGN_TYPE_OPTIONS } from '../../../../../../configurations/assign-form-controls';
 
-import { getAssignTypeComp, ASSIGN_TYPE_PAYLOAD_MAPPING } from './getAssignTypeHelpers';
+import { GetAssignTypeComp, ASSIGN_TYPE_PAYLOAD_MAPPING } from './getAssignTypeHelpers';
 import styles from './styles.module.css';
 
 const DEFAULT_ASSIGN_TYPE = 'assign_user';
@@ -46,10 +46,10 @@ function AssignToForm({ data = {}, assignLoading = false }) {
 
 	const createSubmit = (val) => {
 		const getPayload = ASSIGN_TYPE_PAYLOAD_MAPPING[assignType];
-		return assignChat({ payload: getPayload(val) || {} });
+		return assignChat({ payload: getPayload?.(val) || {} });
 	};
 
-	const assignTypeComp = getAssignTypeComp({
+	const assignTypeComp = GetAssignTypeComp({
 		control,
 		listAgentsOptions,
 		errors,

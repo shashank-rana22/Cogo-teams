@@ -12,18 +12,6 @@ import Card from './Card';
 import RevertModal from './RevertModal';
 import styles from './styles.module.css';
 
-const loader = (
-	<div className={styles.loader_div}>
-		<Image src={GLOBAL_CONSTANTS.image_url.saas_subscription_loading} height={50} width={50} />
-	</div>
-);
-
-const emptyState = (
-	<div className={styles.loader_div}>
-		<Image src={GLOBAL_CONSTANTS.image_url.empty_state} height={100} width={150} />
-	</div>
-);
-
 function FlashReverts({
 	orgId = '',
 	activeVoiceCard,
@@ -73,14 +61,22 @@ function FlashReverts({
 				))}
 			</div>
 			<div className={styles.list}>
-				{loading ? loader : (
+				{loading ? (
+					<div className={styles.loader_div}>
+						<Image src={GLOBAL_CONSTANTS.image_url.saas_subscription_loading} height={50} width={50} />
+					</div>
+				) : (
 					<Card
 						list={list}
 						activeTab={activeTab}
 						setModalState={setModalState}
 					/>
 				)}
-				{!loading && isEmpty(list) && emptyState}
+				{(!loading && isEmpty(list)) ? (
+					<div className={styles.loader_div}>
+						<Image src={GLOBAL_CONSTANTS.image_url.empty_state} height={100} width={150} />
+					</div>
+				) : null}
 			</div>
 			{!loading && (
 				<Pagination

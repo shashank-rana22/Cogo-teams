@@ -1,16 +1,18 @@
 import useGetAsyncOptions from '@cogoport/forms/hooks/useGetAsyncOptions';
 import { asyncFieldsListAgents } from '@cogoport/forms/utils/getAsyncFields';
 
+const HIDE_CONTROLS_MAPPING = {
+	admin_view    : ['observer'],
+	kam_view      : ['assigned_to', 'assigned_agent'],
+	shipment_view : ['assigned_to', 'assigned_agent', 'observer'],
+	supply_view   : ['observer', 'chat_tags'],
+};
+
 const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMessages = false, viewType = '' }) => {
 	const listAgentsOptions = useGetAsyncOptions(
 		asyncFieldsListAgents(),
 	);
-	const HIDE_CONTROLS_MAPPING = {
-		admin_view    : ['observer'],
-		kam_view      : ['assigned_to', 'assigned_agent'],
-		shipment_view : ['assigned_to', 'assigned_agent', 'observer'],
-		supply_view   : ['observer', 'chat_tags'],
-	};
+
 	const extraStatusOptions = (showBotMessages && isomniChannelAdmin) ? 	[{
 		label : 'Seen By User',
 		value : 'seen_by_user',

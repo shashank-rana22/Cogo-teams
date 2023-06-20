@@ -33,23 +33,23 @@ export function formatRouteData({ item }) {
 	);
 
 	const {
-		port_code:destinationCode,
-		name:destinationName,
-		display_name:destinationDisplayName,
+		port_code: destinationCode,
+		name: destinationName,
+		display_name: destinationDisplayName,
 	} = destinationLocationData;
 
 	const { origin_main_port, destination_main_port } = item;
 
 	const {
-		port_code:originMainPortCode = '',
-		name:originMainPortName = '',
-		display_name:originMainPortDisplayName,
+		port_code: originMainPortCode = '',
+		name: originMainPortName = '',
+		display_name: originMainPortDisplayName,
 	} = origin_main_port || {};
 
 	const {
-		port_code:destinationMainPortCode = '',
-		name:destinationMainPortName = '',
-		display_name:destinationMainPortDisplayName,
+		port_code: destinationMainPortCode = '',
+		name: destinationMainPortName = '',
+		display_name: destinationMainPortDisplayName,
 	} = destination_main_port || {};
 
 	return {

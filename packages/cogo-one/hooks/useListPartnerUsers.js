@@ -18,9 +18,9 @@ const useListPartnerUsers = ({ activeMessageCard = {} }) => {
 		url    : '/list_partner_users',
 	}, { manual: true });
 
-	const fetchPartnerUsers = useCallback(async () => {
+	const fetchPartnerUsers = useCallback(() => {
 		try {
-			await trigger({
+			trigger({
 				params: getParams({ activeMessageCard }),
 			});
 		} catch (err) {

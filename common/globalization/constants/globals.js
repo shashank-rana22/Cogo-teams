@@ -292,7 +292,19 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 	],
-
+	services_unit_mapping: {
+		fcl_freight_service     : '/Cont',
+		fcl_customs_service     : '/Cont',
+		fcl_cfs_service         : '/Cont',
+		air_freight_service     : '/Kg',
+		air_customs_service     : '/Kg',
+		lcl_freight_service     : '/CBM',
+		lcl_customs_service     : '/CBM',
+		haulage_freight_service : '/Cont',
+		trailer_freigth_service : '/Truck',
+		ltl_freight_service     : '/Truck',
+		ftl_freight_service     : '/Truck',
+	},
 };
 
 export default GLOBAL_CONSTANTS;

@@ -32,7 +32,7 @@ function RouteDetails({ item = {} }) {
 					</div>
 				)}
 				<div className={styles.icon_flex}>
-					{Icon && Icon}
+					{Icon || null}
 					&nbsp;
 					{label}
 				</div>

@@ -15,7 +15,8 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 		requested_group_members = [],
 		group_members = [],
 		support_agent_id,
-		channel_type, id,
+		channel_type,
+		id,
 	} = activeMessageCard || {};
 
 	const { user:{ id:logginInAgentId } } = profile || {};
@@ -68,7 +69,8 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 	};
 
 	return {
-		requestToJoinGroup, dissmissTransferRequest,
+		requestToJoinGroup,
+		dissmissTransferRequest,
 	};
 };
 export default useTransferChat;
