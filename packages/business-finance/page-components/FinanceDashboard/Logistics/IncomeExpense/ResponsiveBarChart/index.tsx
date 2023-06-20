@@ -6,6 +6,8 @@ import React from 'react';
 import { getAmountInLakhCrK } from '../../getAmountInLakhCrK';
 import { getAmountLineChartInLakh } from '../../getAmountLineChartInLakh';
 
+import styles from './styles.module.css';
+
 const CURRENCY = GLOBAL_CONSTANTS.currency_code.INR;
 function ResponsiveBarChart({ barData }) {
 	return (
@@ -43,22 +45,14 @@ function ResponsiveBarChart({ barData }) {
 				from: 'color', modifiers: [['darker',	1]],
 			}}
 			tooltip={({ label, value }) => (
-				<div style={{
-					padding      : '9px 12px',
-					background   : '#FFFFFF',
-					border       : '1px solid #ACDADF',
-					borderRadius : '6px',
-					fontWeight   : '600',
-					fontSize     : '12px',
-				}}
-				>
+				<div className={styles.tooltip}>
 					{label?.split('-')[0]}
 					{' '}
 					:
 					{' '}
 					<tspan color="#000">
 						{formatAmount({
-							amount   : value as any,
+							amount   : (value || '')?.toString(),
 							currency : CURRENCY,
 							options  : {
 								currencyDisplay       : 'code',

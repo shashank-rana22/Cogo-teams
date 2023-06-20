@@ -51,7 +51,7 @@ function ResponsiveLineChart({ lineData }) {
 						<div>Contribution Margin :</div>
 						<div className={styles.amount_style}>
 							{formatAmount({
-								amount   : point.data.y as any,
+								amount   : (point.data.y || '')?.toString(),
 								currency : CURRENCY,
 								options  : {
 									currencyDisplay       : 'code',
