@@ -1,0 +1,41 @@
+.upper {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
+
+.upper_left,
+.upper_right {
+	display: flex;
+	gap: 28px;
+	align-items: center;
+}
+
+.vessel_title {
+	font-size: 18px;
+	font-weight: 600;
+	color: #221f20;
+}
+
+.shipping_line {
+	display: flex;
+	align-items: center;
+	font-size: 14px;
+	font-weight: 400;
+	color: #221f20;
+}
+
+.updated_status {
+	padding: 6px;
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+	background-color: #f2f3fa;
+	border-radius: 6px;
+}
+
+.updated_on {
+	font-size: 12px;
+	font-weight: 400;
+	color: #4f4f4f;
+}
