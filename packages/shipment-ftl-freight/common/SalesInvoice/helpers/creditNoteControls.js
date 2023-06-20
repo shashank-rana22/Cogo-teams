@@ -3,11 +3,8 @@ import { convertObjectMappingToArray } from '@cogoport/surface-modules/utils/con
 
 import { handleServiceType } from '../CreditNote/helpers/handleServiceType';
 
-const DEFAULT_PRICE = 0;
-const DEFAULT_QUANTITY = 0;
-const DEFAULT_EXCHANGE_RATE = 1;
-const DEFAULT_TAX_PERCENT = 0;
-const DEFAULT_TOTAL = 0;
+const FALLBACK_VALUE_ZERO = 0;
+const FALLBACK_VALUE_ONE = 0;
 
 const commonControls = (handleChange, charge) => [
 	{
@@ -32,7 +29,6 @@ const commonControls = (handleChange, charge) => [
 		label          : 'Currency',
 		type           : 'select',
 		showOptional   : false,
-		className      : 'size-sm',
 		optionsListKey : 'exchange-rate-currencies',
 		placeholder    : 'Select Currency',
 		disabled       : true,
@@ -58,7 +54,7 @@ const commonControls = (handleChange, charge) => [
 		type   : 'static',
 		name   : 'total',
 		span   : 2,
-		render : (item) => <div style={{ marginTop: '5px' }}>{item?.total}</div>,
+		render : (item) => <div style={{ marginLeft: '24px' }}>{item?.total}</div>,
 	},
 ];
 
@@ -106,8 +102,7 @@ const rawControls = (charge, isEdit) => ({
 						value : 'true',
 					},
 				],
-				themeType : 'primary lg',
-				span      : 1,
+				span: 1,
 			},
 			...commonControls(charge, isEdit),
 		]
@@ -144,16 +139,15 @@ const creditNoteControls = ({
 			code             : item?.code,
 			sac_code         : item?.hsn_code || 'NA',
 			currency         : item?.currency,
-			price_discounted : item?.price_discounted || DEFAULT_PRICE,
-			quantity         : item?.quantity || DEFAULT_QUANTITY,
-			exchange_rate    : item?.exchange_rate || DEFAULT_EXCHANGE_RATE,
-			tax_percent      : item?.tax_percent || DEFAULT_TAX_PERCENT,
+			price_discounted : item?.price_discounted || FALLBACK_VALUE_ZERO,
+			quantity         : item?.quantity || FALLBACK_VALUE_ZERO,
+			exchange_rate    : item?.exchange_rate || FALLBACK_VALUE_ONE,
+			tax_percent      : item?.tax_percent || FALLBACK_VALUE_ZERO,
 			unit             : item?.unit,
-			total            : item?.tax_total_price_discounted || DEFAULT_TOTAL,
+			total            : item?.tax_total_price_discounted || FALLBACK_VALUE_ZERO,
 			name             : item?.name,
 		})),
 	}));
-
 	control.push(...controls);
 	return control;
 };
