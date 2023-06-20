@@ -2,7 +2,7 @@ import { Modal } from '@cogoport/components';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { startCase } from '@cogoport/utils';
-import React, { useState } from 'react';
+import { useState } from 'react';
 
 import useListServiceChargeCodes from '../../../../../hooks/useListServiceChargeCodes';
 import AddRate from '../../AddRate';
