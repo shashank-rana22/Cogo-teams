@@ -72,7 +72,7 @@ function UserNetworkModal({
 
 					<div className={styles.user_profile}>
 						<Avatar
-							src={GLOBAL_CONSTANTS.image_url.image_url.user_avatar}
+							src={GLOBAL_CONSTANTS.image_url.user_avatar}
 							alt="user-avatar"
 							disabled={false}
 							size="50px"
