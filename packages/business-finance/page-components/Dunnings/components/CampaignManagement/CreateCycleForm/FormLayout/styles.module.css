@@ -19,11 +19,11 @@
 	height: 98px;
 }
 
-.chips_container{
-	margin-top    : 12px;
-    display      : flex;
-	flex-wrap     : wrap;
-	height       : 54px;
-	align-content : space-between;
+.chips_container {
+	display: flex;
+	flex-wrap: wrap;
+	align-content: space-between;
 	width: 80%;
+	height: 54px;
+	margin-top: 12px;
 }
