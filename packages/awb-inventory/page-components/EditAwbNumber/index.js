@@ -7,13 +7,13 @@ import awbControls from '../../configurations/edit-awb-controls';
 
 import styles from './styles.module.css';
 
-const AWB_ZERO_INDEX = 0;
-const AWB_THIRD_INDEX = 3;
-const AWB_FOURTH_INDEX = 4;
-const AWB_EIGHTH_INDEX = 8;
-const CHECK_LENGTH_FOUR = 4;
-const CHECK_LENGTH_FIVE = 5;
-const CHECK_LENGTH_NINE = 9;
+const AIRLINE_PREFIX_START = 0;
+const AIRLINE_PREFIX_END = 3;
+const SERIAL_NUMBER_START = 4;
+const AWB_DIGIT_CHECK = 8;
+const CHECK_FOUR_AWB_LENGTH = 4;
+const CHECK_FIVE_AWB_LENGTH = 5;
+const CHECK_NINE_AWB_LENGTH = 9;
 
 function EditAwbNumber({
 	setShowEdit = () => {},
@@ -44,17 +44,23 @@ function EditAwbNumber({
 	useEffect(() => {
 		if (awbNumber) {
 			let number = awbNumber;
-			if (awbNumber.length === CHECK_LENGTH_FOUR) {
-				number = `${awbNumber.slice(AWB_ZERO_INDEX, AWB_THIRD_INDEX)}-${awbNumber.slice(AWB_THIRD_INDEX)}`;
+			if (awbNumber.length === CHECK_FOUR_AWB_LENGTH) {
+				number = `${awbNumber.slice(
+					AIRLINE_PREFIX_START,
+					AIRLINE_PREFIX_END,
+				)}-${awbNumber.slice(AIRLINE_PREFIX_END)}`;
 			}
-			if (awbNumber.length === CHECK_LENGTH_FIVE && awbNumber[AWB_FOURTH_INDEX] === '-') {
-				number = `${awbNumber.slice(AWB_ZERO_INDEX, AWB_THIRD_INDEX)}`;
+			if (awbNumber.length === CHECK_FIVE_AWB_LENGTH && awbNumber[SERIAL_NUMBER_START] === '-') {
+				number = `${awbNumber.slice(AIRLINE_PREFIX_START, AIRLINE_PREFIX_END)}`;
 			}
-			if (awbNumber.length === CHECK_LENGTH_NINE && awbNumber[AWB_EIGHTH_INDEX] !== '-') {
-				number = `${awbNumber.slice(AWB_ZERO_INDEX, AWB_EIGHTH_INDEX)}-${awbNumber.slice(AWB_EIGHTH_INDEX)}`;
+			if (awbNumber.length === CHECK_NINE_AWB_LENGTH && awbNumber[AWB_DIGIT_CHECK] !== '-') {
+				number = `${awbNumber.slice(
+					AIRLINE_PREFIX_START,
+					AWB_DIGIT_CHECK,
+				)}-${awbNumber.slice(AWB_DIGIT_CHECK)}`;
 			}
-			if (awbNumber.length === CHECK_LENGTH_NINE && awbNumber[AWB_EIGHTH_INDEX] === '-') {
-				number = `${awbNumber.slice(AWB_ZERO_INDEX, AWB_EIGHTH_INDEX)}`;
+			if (awbNumber.length === CHECK_NINE_AWB_LENGTH && awbNumber[AWB_DIGIT_CHECK] === '-') {
+				number = `${awbNumber.slice(AIRLINE_PREFIX_START, AWB_DIGIT_CHECK)}`;
 			}
 			setValue('awb_number', number);
 		}

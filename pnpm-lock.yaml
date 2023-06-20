@@ -53,7 +53,7 @@ importers:
       '@cogoport/athena-dashboard': workspace:0.1.0
       '@cogoport/authentication': workspace:0.1.0
       '@cogoport/authority-desk': workspace:0.1.0
-      '@cogoport/awb-inventory': workspace:0.1.0
+      '@cogoport/awb-inventory': workspace:1.0.0
       '@cogoport/bl_do-collection-release': workspace:0.1.0
       '@cogoport/bn-salvage': workspace:0.1.0
       '@cogoport/booking-desk': workspace:0.1.0
