@@ -31,7 +31,7 @@ function ShipmentIdView({ consolidatedSids }: ConsolidatedSidsInterace) {
 	const handleShipmentView = () => {
 		if (loading) {
 			return (
-				<div className={styles.loader}>
+				<div>
 					{CARD_ARRAY.map((val) => <LoadingState key={val} />)}
 				</div>
 			);
