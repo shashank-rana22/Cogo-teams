@@ -2,7 +2,7 @@ import { Button, Popover } from '@cogoport/components';
 import { IcMCall, IcMEdit, IcMEmail } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
 
-import STAKEHOLDER_MAPPING from '../../../../../../contants/STAKEHOLDER_MAPPING';
+import STAKEHOLDER_MAPPING from '../../../../../../constants/STAKEHOLDER_MAPPING';
 
 import styles from './styles.module.css';
 
