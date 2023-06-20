@@ -5,7 +5,7 @@ import useUpdateCancelShipment from '../../../../hooks/useUpdateCancelShipment';
 
 import DefaultOptions from './DefaultOptions';
 
-function CanelationModal({ showCancelModal, setshowCancelModal, shipmentData }) {
+function CanelationModal({ showCancelModal, setshowCancelModal, shipmentData, setShowDetailPage }) {
 	const [cancellationReason, setCancellationReason] = useState(null);
 	const [cancellationSubReason, setCancellationSubReason] = useState(null);
 
@@ -14,6 +14,7 @@ function CanelationModal({ showCancelModal, setshowCancelModal, shipmentData }) 
 		cancellationReason,
 		cancellationSubReason,
 		setshowCancelModal,
+		setShowDetailPage,
 	});
 
 	return (

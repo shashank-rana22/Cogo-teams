@@ -105,6 +105,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData, 
 					shipmentData={shipmentData}
 					showCancelModal={showCancelModal}
 					setshowCancelModal={setshowCancelModal}
+					setShowDetailPage={setShowDetailPage}
 				/>
 			) : null}
 

@@ -2,8 +2,8 @@ import { Toast } from '@cogoport/components';
 import { useRequest } from '@cogoport/request';
 
 const useUpdateCancelShipment = ({
-	cancellationReason,
-	cancellationSubReason, shipmentData, setShowCancelModal,
+	cancellationReason, setShowDetailPage,
+	cancellationSubReason, shipmentData, setshowCancelModal,
 }) => {
 	const [{ loading }, triggger] = useRequest({
 		url    : '/update_shipment',
@@ -21,9 +21,12 @@ const useUpdateCancelShipment = ({
 				},
 			});
 			Toast.success('Shipment closed successfully');
-			setShowCancelModal(false);
+			setshowCancelModal(false);
+			setShowDetailPage(null);
 		} catch (err) {
 			// console.log(err);
+			Toast.error('Something went wrong');
+			setshowCancelModal(false);
 		}
 	};
 	return { cancelShipment, loading };
