@@ -10,7 +10,7 @@ const useRequestAssignChat = () => {
 		method : 'post',
 	}, { manual: true });
 
-	const requestForAssignChat = async (payload = {}) => {
+	const requestForAssignChat = async ({ payload = {} }) => {
 		try {
 			await trigger({
 				data: {
