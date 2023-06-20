@@ -135,7 +135,8 @@ function ShipmentDetailsCard({
 
 	const { data : shipmentDocData } = useShipmentDocument(shipmentId);
 
-	const advancedPaymentObj = shipmentDocData?.list.filter((item) => item?.document_type === 'high_advance_payment_proof');
+	const advancedPaymentObj = shipmentDocData?.list
+		?.filter((item) => item?.document_type === 'high_advance_payment_proof');
 
 	const handleClickUndo = (id: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
@@ -185,19 +186,22 @@ function ShipmentDetailsCard({
 
 	return (
 		<div>
-			<HighAmountRequestModal
-				invoiceData={{
-					invoiceNumber       : billNumber,
-					serialNumber        : serialId,
-					invoiceUploadDate   : billDate,
-					invoice             : billDocumentUrl,
-					totalInvoiceValue   : grandTotal,
-					advancedAmountValue : advancedAmount,
-					advancedPaymentObj,
-					sellerOrganizationId,
-				}}
-				modalData={{ show: showHighAdvanceModal, hide: () => setShowHighAdvancedModal(false) }}
-			/>
+			{!!showHighAdvanceModal && (
+				<HighAmountRequestModal
+					invoiceData={{
+						invoiceNumber       : billNumber,
+						serialNumber        : serialId,
+						invoiceUploadDate   : billDate,
+						invoice             : billDocumentUrl,
+						totalInvoiceValue   : grandTotal,
+						advancedAmountValue : advancedAmount,
+						advancedPaymentObj,
+						sellerOrganizationId,
+					}}
+					modalData={{ show: showHighAdvanceModal, hide: () => setShowHighAdvancedModal(false) }}
+				/>
+			)}
+
 			{showLineItem ? (
 				<LineItemCard
 					lineItems={lineItems}
@@ -766,31 +770,30 @@ function ShipmentDetailsCard({
 													<span>{startCase(paymentType)}</span>
 												</div>
 											)}
-											{shipmentType === 'ftl_freight'
-				                                    	&& (
-					                         <div className={styles.document}>
-						Advance amount -
-						{((+advancedAmount / +grandTotal) * 100).toFixed(2)}
-						%
-						{' '}
-						(
-						{advancedAmount}
-						/
-						{grandTotal}
-						)
+											{shipmentType === 'ftl_freight' && (
+												<div className={styles.document}>
+													Advance amount -
+													{((+advancedAmount / +grandTotal) * 100).toFixed(2)}
+													%
+													{' '}
+													(
+													{advancedAmount}
+													/
+													{grandTotal}
+													)
 
-						<Button
-							className={styles.button}
-							onClick={() => {
-								setShowHighAdvancedModal(true);
-							}}
-						>
-							View
+													<Button
+														className={styles.button}
+														onClick={() => {
+															setShowHighAdvancedModal(true);
+														}}
+													>
+														View
 
-						</Button>
+													</Button>
 
-                              </div>
-				                                    	)}
+												</div>
+											)}
 											{shipmentType === 'ftl_freight'
 											&& outstandingDocument
 											&& (

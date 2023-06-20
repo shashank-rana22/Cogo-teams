@@ -1,14 +1,19 @@
-import { Button, ButtonIcon, Modal } from '@cogoport/components';
-import { UploadController, InputController, useForm } from '@cogoport/forms';
+import { Toast, Button, ButtonIcon, Modal, Input } from '@cogoport/components';
+import { UploadController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
+import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
-import React from 'react';
+import React, { useState } from 'react';
 
 import { useGetAdvancedPaymentHistory } from '../../../../../hook/useGetAdvancedPaymentHistory';
+import useUpdateShipmentDocuments from '../../../../../hook/useUpdateShipmentDocument';
 
 import styles from './styles.module.css';
+
+const ACCEPTED = 'accepted';
+const REJECTED = 'rejected';
 
 function HighAmountRequestModal({ invoiceData, modalData }) {
 	const {
@@ -23,23 +28,44 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 		advancedPaymentObj,
 	} = invoiceData || {};
 
-	const advancePaymentProof = (advancedPaymentObj?.[0] || [])?.document_url;
+	const [firstItem] = (advancedPaymentObj || []);
+	const { document_url: advancePaymentProof } = firstItem || {};
 
 	const { show, hide } = modalData;
 
+	const [remark, setRemark] = useState('');
+
+	const { query } = useRouter();
+
 	const { loading, data } = useGetAdvancedPaymentHistory({ sellerOrganizationId });
 
-	// console.log(advancePaymentProof, 'advancePaymentProof');
-
-	// const { data: documentData, loading:documentLoading } = useShipmentDocument(serialNumber);
+	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments({});
 
 	const paymentHistory = data;
 
-	// console.log({ documentData });
+	const { control, handleSubmit } = useForm();
 
-	const { control, formState:{ errors = {} }, handleSubmit } = useForm();
+	const handleApprove = (val) => {
+		const documentProofLink = advancePaymentProof || val?.upload?.finalUrl;
+		if (!documentProofLink) {
+			Toast.error('Document proof is required');
+			return;
+		}
+		if (!remark) {
+			Toast.error('Remark is required');
+			return;
+		}
 
-	console.log(errors, handleSubmit);
+		updateDocument({ id: firstItem?.id, remark: [ACCEPTED, remark], performed_by_org_id: query?.orgId });
+	};
+
+	const handleReject = () => {
+		if (!remark) {
+			Toast.error('Remark is required');
+			return;
+		}
+		updateDocument({ id: firstItem?.id, remark: [REJECTED, remark], performed_by_org_id: query?.orgId });
+	};
 
 	return (
 		<Modal
@@ -156,7 +182,6 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 							<ButtonIcon
 								size="sm"
 								icon={<IcMDownload />}
-							// disabled={documentLoading}
 								onClick={() => window.open(advancePaymentProof)}
 								themeType="primary"
 							/>
@@ -164,13 +189,12 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 
 						<div className={styles.form_item_container}>
 							<label>Remark</label>
-							<InputController
-								size="sm"
-								control={control}
-								name="email"
-								rules={{ required: { value: true, message: 'Remark is Required' } }}
+							<Input
+								value={remark}
+								onChange={(e) => {
+									setRemark(e);
+								}}
 							/>
-							{/* {Error('email')} */}
 						</div>
 					</div>
 
@@ -187,18 +211,16 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 									name="upload"
 									rules={{ required: { value: true, message: 'Upload Supporting document' } }}
 								/>
-								{/* {Error('origin_location_id')} */}
 							</div>
 
 							<div className={styles.form_item_container}>
 								<label>Remark</label>
-								<InputController
-									size="sm"
-									control={control}
-									name="email"
-									rules={{ required: { value: true, message: 'Remark is Required' } }}
+								<Input
+									value={remark}
+									onChange={(e) => {
+										setRemark(e);
+									}}
 								/>
-								{/* {Error('email')} */}
 							</div>
 						</div>
 					</form>
@@ -208,10 +230,16 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 					<Button
 						className="secondary md"
 						style={{ marginRight: '10px' }}
+						disabled={taskUpdateLoading}
+						onClick={handleReject}
 					>
 						Reject
 					</Button>
-					<Button className="primary md">
+					<Button
+						className="primary md"
+						disabled={taskUpdateLoading}
+						onClick={handleSubmit(handleApprove)}
+					>
 						Aprrove
 					</Button>
 				</div>
