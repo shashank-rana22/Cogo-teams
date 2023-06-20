@@ -3,8 +3,8 @@ import { useState } from 'react';
 
 import styles from './styles.module.css';
 
-const ONE_VALUE = 1;
-const TWO_VALUE = 2;
+const FOR_MORE_THAN_ONE_CURRENCY = 1;
+const DECIMAL_UPTO_SECOND_PLACE = 2;
 
 function ExchangeDetails({
 	children = null,
@@ -19,7 +19,8 @@ function ExchangeDetails({
 		<div className={styles.flex_col}>
 			{currencyConversions?.map((key) => (
 				<div className={styles.text} key={key}>
-					{`${key} 1 = ${Number(availableCurrencyConversions[key])?.toFixed(TWO_VALUE)} ${invoiceCurrency}`}
+					{`${key} 1 = ${Number(availableCurrencyConversions[key])?.toFixed(DECIMAL_UPTO_SECOND_PLACE)} 
+					${invoiceCurrency}`}
 				</div>
 			))}
 		</div>
@@ -27,7 +28,7 @@ function ExchangeDetails({
 
 	return (
 		<div>
-			{currencyConversions?.length > ONE_VALUE ? (
+			{currencyConversions?.length > FOR_MORE_THAN_ONE_CURRENCY ? (
 				<Popover
 					theme="light"
 					show={show}

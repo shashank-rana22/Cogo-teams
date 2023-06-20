@@ -43,7 +43,7 @@ function PartialCN({
 
 	useEffect(() => {
 		const servicesID = invoice?.services?.map((service) => (service?.service_id)) || [];
-		setServicesIDs(servicesID);
+		setServicesIDs(...servicesID);
 	}, [invoice?.services]);
 
 	return (

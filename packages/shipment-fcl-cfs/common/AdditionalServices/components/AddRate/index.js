@@ -1,4 +1,5 @@
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { startCase } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -21,8 +22,6 @@ const showRemarksStatus = [
 	'cancelled',
 	'disputed',
 ];
-
-const ZERO_INDEX = 0;
 
 function AddRate({
 	item,
@@ -136,7 +135,7 @@ function AddRate({
 				<p style={{ marginTop: '8px' }}>
 					<strong> Comment:</strong>
 					&nbsp;
-					{item?.remarks[ZERO_INDEX]}
+					{item?.remarks[GLOBAL_CONSTANTS.zeroth_index]}
 				</p>
 			) : null}
 

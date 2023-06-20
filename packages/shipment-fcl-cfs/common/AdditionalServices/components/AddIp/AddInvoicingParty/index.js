@@ -1,4 +1,5 @@
 import { RadioGroup } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useState } from 'react';
 
 import InvoicingParties from './InvoicingParties';
@@ -14,8 +15,6 @@ const COMPONENTS_MAPPING = {
 	},
 };
 
-const DEFAULT = 0;
-
 const RADIO_GROUP_OPTIONS = Object.entries(COMPONENTS_MAPPING).map(
 	([key, value]) => ({ label: value.label, value: key }),
 );
@@ -26,7 +25,7 @@ function AddInvoicingParty({
 	updateInvoicingParty = () => {},
 	isIE = false,
 }) {
-	const [activeComponentKey, setActiveComponentKey] = useState(() => RADIO_GROUP_OPTIONS[DEFAULT].value);
+	const [activeKey, setActiveKey] = useState(() => RADIO_GROUP_OPTIONS[GLOBAL_CONSTANTS.zeroth_index].value);
 
 	const componentProps = {
 		invoice_to_self: {
@@ -44,19 +43,19 @@ function AddInvoicingParty({
 		},
 	};
 
-	const ActiveComponent = COMPONENTS_MAPPING[activeComponentKey].component;
-	const activeComponentProps = componentProps[activeComponentKey];
+	const ActiveComponent = COMPONENTS_MAPPING[activeKey].component;
+	const activeComponentProps = componentProps[activeKey];
 
 	return (
 		<div>
 			<RadioGroup
 				options={RADIO_GROUP_OPTIONS}
-				value={activeComponentKey}
-				onChange={setActiveComponentKey}
+				value={activeKey}
+				onChange={setActiveKey}
 				style={{ justifyContent: 'space-around' }}
 			/>
 
-			<ActiveComponent key={activeComponentKey} {...activeComponentProps} />
+			<ActiveComponent key={activeKey} {...activeComponentProps} />
 		</div>
 	);
 }

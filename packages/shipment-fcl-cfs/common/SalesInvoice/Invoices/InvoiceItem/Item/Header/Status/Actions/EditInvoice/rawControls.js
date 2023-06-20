@@ -4,7 +4,7 @@ import { startCase, isEmpty } from '@cogoport/utils';
 
 const MAX_SERIAL_ID = 130000;
 const PRICE_LOWER_LIMIT = 0;
-const MIN_TEXT_LENGTH = 3;
+const TEXT_LENGTH_FOR_CODE = 3;
 
 const handleDisableCondion = (isAdminSuperAdmin, shipment_data) => {
 	const disable =	 !isAdminSuperAdmin	&& shipment_data?.serial_id > MAX_SERIAL_ID;
@@ -70,7 +70,7 @@ const rawControls = (
 			),
 			placeholder : 'Enter alias name/code',
 			rules       : {
-				validate: (v) => v?.length >= MIN_TEXT_LENGTH || isEmpty(v) || 'Characters should be >= 3',
+				validate: (v) => v?.length >= TEXT_LENGTH_FOR_CODE || isEmpty(v) || 'Characters should be >= 3',
 			},
 			disabled : handleDisableCondion(isAdminSuperAdmin, shipment_data),
 			span     : 2,

@@ -13,10 +13,10 @@ function ReviewServices({
 	invoice = {},
 	refetch = () => {},
 }) {
+	const [value, setValue] = useState(false);
 	const changeApplicableState = invoice?.exchange_rate_state === 'liners_exchange_rate'
 		&& invoice?.is_liners_exchange_rate_state;
 
-	const [value, setValue] = useState(false);
 	const [showExchangeRateConfirmation, setShowExchangeRateConfirmation] = useState(changeApplicableState);
 
 	const refetchAfterCall = () => {

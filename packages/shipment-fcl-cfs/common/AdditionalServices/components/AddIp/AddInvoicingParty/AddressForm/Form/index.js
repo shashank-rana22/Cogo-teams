@@ -15,7 +15,7 @@ function Form({
 	control,
 	useFieldArray,
 	register = () => {},
-	errors,
+	errors = {},
 	showComponent,
 }) {
 	const formControls = controls({ showComponent });

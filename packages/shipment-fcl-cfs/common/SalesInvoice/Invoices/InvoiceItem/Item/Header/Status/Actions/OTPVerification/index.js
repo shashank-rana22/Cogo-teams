@@ -10,7 +10,6 @@ import OtpInput from './OtpInput';
 import styles from './styles.module.css';
 
 const OTP_LENGTH = 4;
-const ZERO_VALUE = 0;
 const FIRST_ELEMENT = 0;
 const SECOND_ELEMENT = 1;
 
@@ -76,7 +75,7 @@ function OTPVerification({
 				<Loader />
 			</div>
 		);
-	} else if (userList?.length === ZERO_VALUE && !loading) {
+	} else if (isEmpty(userList) && !loading) {
 		userListInfo = <div className={styles.no_data}>No verified user exists!</div>;
 	} else {
 		(
@@ -116,7 +115,7 @@ function OTPVerification({
 						<Button
 							size="md"
 							onClick={handleClick}
-							disabled={userList?.length === ZERO_VALUE || isEmpty(selectedUser)}
+							disabled={isEmpty(userList) || isEmpty(selectedUser)}
 						>
 							Send
 						</Button>

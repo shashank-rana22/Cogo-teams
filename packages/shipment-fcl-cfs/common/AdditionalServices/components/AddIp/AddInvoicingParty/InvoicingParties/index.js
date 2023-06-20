@@ -1,4 +1,5 @@
 import { Button, Loader } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { isEmpty } from '@cogoport/utils';
 import { useState, useEffect, useMemo } from 'react';
@@ -15,9 +16,6 @@ const TRADE_PARTY_TYPE = {
 	label : 'PAYING PARTY',
 	value : 'paying_party',
 };
-
-const EMPTY_VALUE = 0;
-const ZERO_INDEX = 0;
 
 function InvoicingParties({
 	organization = {},
@@ -54,7 +52,7 @@ function InvoicingParties({
 	const address_to_use = is_tax_applicable ? 'billing_addresses' : 'other_addresses';
 
 	useEffect(() => {
-		if (loading || invoicingPartiesList.length === EMPTY_VALUE) {
+		if (loading || isEmpty(invoicingPartiesList)) {
 			return;
 		}
 
@@ -115,7 +113,7 @@ function InvoicingParties({
 				organization_id,
 				organization_country_id : invoicingParty.country_id,
 				tax_number,
-				tax_mechanism           : tax_mechanism?.[ZERO_INDEX]?.mechanism_type,
+				tax_mechanism           : tax_mechanism?.[GLOBAL_CONSTANTS.zeroth_index]?.mechanism_type,
 				address,
 				pincode,
 				is_sez                  : !!is_sez,

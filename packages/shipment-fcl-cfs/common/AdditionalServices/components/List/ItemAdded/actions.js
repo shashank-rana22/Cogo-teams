@@ -1,11 +1,11 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 
 import IP_STATE_CONDITONS from '../../../constants/IP_STATE_CONDITIONS';
 
 import styles from './styles.module.css';
 
-const ZERO_INDEX = 0;
-const SECOND_INDEX = 1;
+const FIRST_INDEX = 1;
 
 const actions = ({
 	status = {},
@@ -53,10 +53,10 @@ const actions = ({
 		<Button
 			themeType="secondary"
 			className={styles.action_button}
-			onClick={actionButton[SECOND_INDEX].onClick}
+			onClick={actionButton[FIRST_INDEX].onClick}
 			size="sm"
 		>
-			{actionButton[ZERO_INDEX]}
+			{actionButton[GLOBAL_CONSTANTS.zeroth_index]}
 		</Button>
 	) : false;
 };

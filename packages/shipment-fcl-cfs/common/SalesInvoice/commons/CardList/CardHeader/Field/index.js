@@ -1,7 +1,7 @@
 import styles from './styles.module.css';
 
 const SPAN_COUNT = 12;
-const MULTIPLIER = 100;
+const PERCENTAGE_FACTOR = 100;
 
 function Field({ field = {}, showCode = false }) {
 	const renderHeaderText = () => {
@@ -11,7 +11,7 @@ function Field({ field = {}, showCode = false }) {
 		return field.label;
 	};
 	const { span } = field;
-	const widthVal = (span / SPAN_COUNT) * MULTIPLIER;
+	const widthVal = (span / SPAN_COUNT) * PERCENTAGE_FACTOR;
 	return (
 		<div
 			style={{ width: `${widthVal}%` }}

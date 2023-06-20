@@ -11,6 +11,7 @@ function ExchangeRateModal({
 	setExchangeRate = () => {},
 	invoice = {},
 }) {
+	const [searchValue, setSearchValue] = useState('');
 	const { loading, data } = useGetAllExchangeRates({
 		defaultParams: {
 			base_currency   : invoice?.invoice_currency,
@@ -18,7 +19,6 @@ function ExchangeRateModal({
 		},
 	});
 
-	const [q, setQ] = useState('');
 	const { source_currencies = {} } = data || {};
 
 	const currencyArray = Object.keys(source_currencies).map((item) => ({
@@ -28,8 +28,8 @@ function ExchangeRateModal({
 
 	let list = currencyArray;
 
-	if (q) {
-		list = currencyArray.filter((item) => item?.currency.includes(q.toUpperCase()));
+	if (searchValue) {
+		list = currencyArray.filter((item) => item?.currency.includes(searchValue.toUpperCase()));
 	}
 
 	const onClose = () => {
@@ -50,8 +50,8 @@ function ExchangeRateModal({
 				<Input
 					name="q"
 					placeholder="Search Currency Code"
-					value={q}
-					onChange={(e) => setQ(e)}
+					value={searchValue}
+					onChange={(e) => setSearchValue(e)}
 					size="sm"
 				/>
 				<CardList fields={fields} data={list} loading={loading} />

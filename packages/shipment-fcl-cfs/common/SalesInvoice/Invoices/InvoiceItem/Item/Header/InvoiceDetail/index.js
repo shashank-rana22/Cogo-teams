@@ -13,7 +13,7 @@ const API_SUCCESS_MESSAGE = {
 };
 
 const INITIAL_INDEX = 0;
-const NEGATIVE_SECOND_INDEX = -2;
+const SECOND_LAST_INDEX = -2;
 const SECOND_INDEX = 2;
 
 function InvoiceDetail({
@@ -124,7 +124,7 @@ function InvoiceDetail({
 				{invoice?.payment_mode === 'credit' ? (
 					<div>
 						<div className={styles.info_container}>
-							{startCase(creditSource?.slice(INITIAL_INDEX, NEGATIVE_SECOND_INDEX))}
+							{startCase(creditSource?.slice(INITIAL_INDEX, SECOND_LAST_INDEX))}
 						</div>
 
 						<div className={styles.payment_method}>

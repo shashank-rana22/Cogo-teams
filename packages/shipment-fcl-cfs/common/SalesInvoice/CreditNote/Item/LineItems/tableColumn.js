@@ -2,7 +2,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 
 import getServiceNameforTableColumn from '../../../helpers/getServiceNameforTableColumn';
 
-const ZERO_VALUE = 0;
+const FALLBACK_VALUE = 0;
 
 export const tableColumn = ({ serviceItem = {} }) => {
 	const serviceName = getServiceNameforTableColumn(serviceItem?.service_type, serviceItem?.trade_type);
@@ -21,7 +21,7 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : 'Rate',
 			render : (item) => formatAmount({
-				amount   : item?.price_discounted || ZERO_VALUE,
+				amount   : item?.price_discounted || FALLBACK_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -32,13 +32,13 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		},
 		{
 			label  : 'Quantity',
-			render : (item) => item?.quantity || ZERO_VALUE,
+			render : (item) => item?.quantity || FALLBACK_VALUE,
 			span   : 1.2,
 		},
 		{
 			label  : 'Discount',
 			render : (item) => formatAmount({
-				amount   : item?.discount_price || ZERO_VALUE,
+				amount   : item?.discount_price || FALLBACK_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -51,7 +51,7 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : 'Exc. Rate',
 			render : (item) => formatAmount({
-				amount   : item?.exchange_rate || ZERO_VALUE,
+				amount   : item?.exchange_rate || FALLBACK_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'decimal',
@@ -63,21 +63,21 @@ export const tableColumn = ({ serviceItem = {} }) => {
 		{
 			label  : 'Tax Amt.',
 			render : (item) => `${formatAmount({
-				amount   : item?.tax_price_discounted || ZERO_VALUE,
+				amount   : item?.tax_price_discounted || FALLBACK_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'currency',
 					currencyDisplay       : 'code',
 					maximumFractionDigits : 2,
 				},
-			})} (${item?.tax_percent || ZERO_VALUE}%)`,
+			})} (${item?.tax_percent || FALLBACK_VALUE}%)`,
 
 			span: 1.5,
 		},
 		{
 			label  : 'Amt. with Tax',
 			render : (item) => formatAmount({
-				amount   : item?.tax_total_price_discounted || ZERO_VALUE,
+				amount   : item?.tax_total_price_discounted || FALLBACK_VALUE,
 				currency : item?.currency,
 				options  : {
 					style                 : 'currency',

@@ -3,8 +3,8 @@ import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/conve
 
 import { handleServiceType } from './handleServiceType';
 
-const ZERO_VALUE = 0;
-const ONE_VALUE = 1;
+const FALLBACK_ZERO_VALUE = 0;
+const FALLBACK_ONE_VALUE = 1;
 
 const commonControls = (service) => [
 	{
@@ -108,12 +108,12 @@ const creditNoteControls = ({
 			code             : item?.code,
 			sac_code         : item?.hsn_code || 'NA',
 			currency         : item?.currency,
-			price_discounted : item?.price_discounted || ZERO_VALUE,
-			quantity         : item?.quantity || ZERO_VALUE,
-			exchange_rate    : item?.exchange_rate || ONE_VALUE,
-			tax_percent      : item?.tax_percent || ZERO_VALUE,
+			price_discounted : item?.price_discounted || FALLBACK_ZERO_VALUE,
+			quantity         : item?.quantity || FALLBACK_ZERO_VALUE,
+			exchange_rate    : item?.exchange_rate || FALLBACK_ONE_VALUE,
+			tax_percent      : item?.tax_percent || FALLBACK_ZERO_VALUE,
 			unit             : item?.unit,
-			total            : item?.tax_total_price_discounted || ZERO_VALUE,
+			total            : item?.tax_total_price_discounted || FALLBACK_ZERO_VALUE,
 			name             : item?.name,
 		})),
 	}));

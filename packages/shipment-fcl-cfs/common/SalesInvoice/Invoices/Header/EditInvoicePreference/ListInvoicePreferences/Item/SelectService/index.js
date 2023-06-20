@@ -10,7 +10,7 @@ import ChangeCurrency from '../../ChangeCurrency';
 
 import styles from './styles.module.css';
 
-const ZERO_VALUE = 0;
+const FALLBACK_VALUE = 0;
 const TAX_THRESHOLD = 0;
 
 function SelectService({
@@ -36,7 +36,7 @@ function SelectService({
 			const tradeType = trade_type === 'export' ? 'Origin' : 'Destination';
 
 			const invoiceAmount = formatAmount({
-				amount   : service?.service_total_discounted || ZERO_VALUE,
+				amount   : service?.service_total_discounted || FALLBACK_VALUE,
 				currency : service?.service_total_currency,
 				options  : {
 					style           : 'currency',

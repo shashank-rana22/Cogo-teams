@@ -5,7 +5,7 @@ import getValue from '../../../../../utils/getValue';
 import styles from './styles.module.css';
 
 const SPAN_COUNT = 12;
-const MULTIPLIER = 100;
+const PERCENTAGE_FACTOR = 100;
 
 function Item({
 	item,
@@ -19,7 +19,7 @@ function Item({
 					return null;
 				}
 				const { span, render = () => {}, label } = singleItem;
-				const widthVal = (span / SPAN_COUNT) * MULTIPLIER;
+				const widthVal = (span / SPAN_COUNT) * PERCENTAGE_FACTOR;
 				return (
 					<div
 						style={{ width: `${widthVal}%` }}

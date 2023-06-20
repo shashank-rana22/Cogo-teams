@@ -1,13 +1,12 @@
 import { Toast } from '@cogoport/components';
 import { useForm, useFieldArray } from '@cogoport/forms';
+import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
 import useCreateOrganizationAddress from '../../../../../../hooks/useCreateOrganizationAddress';
 import AddressForm from '../AddressForm';
 
 import styles from './styles.module.css';
-
-const EMPTY_POC_DETAILS = 0;
 
 function CreateNewBillingAddress({
 	setShowComponent = () => {},
@@ -49,7 +48,7 @@ function CreateNewBillingAddress({
 	});
 
 	const onSubmit = (values) => {
-		if (values?.poc_details?.length === EMPTY_POC_DETAILS) {
+		if (isEmpty(values?.poc_details)) {
 			Toast.info('Please create at-least one POC before proceeding ');
 			return;
 		}

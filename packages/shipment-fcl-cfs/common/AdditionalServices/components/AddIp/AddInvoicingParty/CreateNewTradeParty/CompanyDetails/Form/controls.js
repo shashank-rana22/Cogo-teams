@@ -1,13 +1,17 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
-import formValuePatterns from '@cogoport/ocean-modules/utils/formValuePatterns';
+import { getCountrySpecificData } from '@cogoport/globalization/utils/CountrySpecificDetail';
 
 const geo = getGeoConstants();
-const { IN: INDIA_COUNTRY_ID } = GLOBAL_CONSTANTS.country_entity_ids;
 
 const controls = ({ watch }) => {
 	const watchCountryId = watch('country_id');
-	const isCountryIndia = watchCountryId === INDIA_COUNTRY_ID;
+
+	const panPatternValue = getCountrySpecificData({
+		country_id    : watchCountryId,
+		accessorType  : 'pan_number',
+		accessor      : 'pattern',
+		isDefaultData : false,
+	});
 
 	const formControl = [
 		{
@@ -29,7 +33,7 @@ const controls = ({ watch }) => {
 			rules       : {
 				required : 'PAN Number is required',
 				pattern  : {
-					value   : isCountryIndia && formValuePatterns.PAN_NUMBER,
+					value   : panPatternValue,
 					message : 'PAN is invalid',
 				},
 			},

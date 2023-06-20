@@ -1,4 +1,5 @@
 import { Button } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import EmptyState from '@cogoport/ocean-modules/common/EmptyState';
 import { useEffect, useMemo } from 'react';
 
@@ -7,8 +8,6 @@ import CardList from '../../../../../CardList';
 
 import styles from './styles.module.css';
 import fields from './viewPriceFields';
-
-const ZERO_INDEX = 0;
 
 function ViewPrice({ showPrice, setShowPrice }) {
 	const { apiData = [], loading } = useGetSubsidiaryServiceRateCards({
@@ -24,9 +23,9 @@ function ViewPrice({ showPrice, setShowPrice }) {
 					line_items.push({
 						validity_start : validity?.validity_start,
 						validity_end   : validity?.validity_end,
-						buy_price      : validity?.line_items[ZERO_INDEX]?.price,
-						currency       : validity?.line_items[ZERO_INDEX]?.currency,
-						unit           : validity?.line_items[ZERO_INDEX]?.unit,
+						buy_price      : validity?.line_items[GLOBAL_CONSTANTS.zeroth_index]?.price,
+						currency       : validity?.line_items[GLOBAL_CONSTANTS.zeroth_index]?.currency,
+						unit           : validity?.line_items[GLOBAL_CONSTANTS.zeroth_index]?.unit,
 					});
 				});
 			});

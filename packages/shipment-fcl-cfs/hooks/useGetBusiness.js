@@ -1,6 +1,9 @@
+import getGeoConstants from '@cogoport/globalization/constants/geo';
 import toastApiError from '@cogoport/ocean-modules/utils/toastApiError';
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
+
+const geo = getGeoConstants();
 
 const useGetBusiness = ({ gstNumber = '' }) => {
 	const [{ data }, trigger] = useRequest({
@@ -15,7 +18,7 @@ const useGetBusiness = ({ gstNumber = '' }) => {
 					params: {
 						identity_number : gstNumber,
 						identity_type   : 'tax',
-						country_code    : 'IN',
+						country_code    : geo.country.code,
 						provider_name   : 'cogoscore',
 					},
 				});

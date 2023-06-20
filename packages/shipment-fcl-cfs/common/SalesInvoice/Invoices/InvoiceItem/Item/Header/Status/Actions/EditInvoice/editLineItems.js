@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
 
@@ -10,8 +11,8 @@ const TRADE_MAPPING = {
 	export : 'Origin',
 };
 
-const ZERO_VALUE = 0;
-const ONE_VALUE = 1;
+const FALLBACK_ZERO = 0;
+const FALLBACK_ONE = 1;
 
 const useEditLineItems = ({
 	invoice = {},
@@ -45,7 +46,7 @@ const useEditLineItems = ({
 				DEFAULT_VALUES[control.name] = control.value.map((value) => {
 					const FIELD_VALUE = {};
 					control.controls.forEach((subControl) => {
-						FIELD_VALUE[subControl.name] = value[subControl.name] || ZERO_VALUE;
+						FIELD_VALUE[subControl.name] = value[subControl.name] || FALLBACK_ZERO;
 					});
 
 					return FIELD_VALUE;
@@ -80,11 +81,11 @@ const useEditLineItems = ({
 			sac_code         : item?.hsn_code || 'NA',
 			currency         : item?.currency,
 			price_discounted : item?.price_discounted || '0',
-			quantity         : item?.quantity || ZERO_VALUE,
-			exchange_rate    : item?.exchange_rate || ONE_VALUE,
-			tax_percent      : item?.tax_percent || ZERO_VALUE,
+			quantity         : item?.quantity || FALLBACK_ZERO,
+			exchange_rate    : item?.exchange_rate || FALLBACK_ONE,
+			tax_percent      : item?.tax_percent || FALLBACK_ZERO,
 			unit             : item?.unit,
-			total            : item?.tax_total_price_discounted || ZERO_VALUE,
+			total            : item?.tax_total_price_discounted || FALLBACK_ZERO,
 			name             : item?.name,
 			id               : item?.product_code,
 		})),
@@ -105,7 +106,7 @@ const useEditLineItems = ({
 					...value,
 					tax      : selectedCodes[value.code]?.tax_percent || 'NA',
 					sac_code : selectedCodes[value.code]?.sac || 'NA',
-					total    : (value?.price_discounted || ZERO_VALUE) * (value?.quantity || ZERO_VALUE),
+					total    : (value?.price_discounted || FALLBACK_ZERO) * (value?.quantity || FALLBACK_ZERO),
 				}));
 			}
 		});
@@ -115,7 +116,7 @@ const useEditLineItems = ({
 
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
 	const LABELS = {};
-	Object.keys(controls?.[ZERO_VALUE]).forEach((key) => {
+	Object.keys(controls?.[GLOBAL_CONSTANTS.zeroth_index]).forEach((key) => {
 		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
 			label      : LABELS[key],

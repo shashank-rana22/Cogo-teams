@@ -3,7 +3,7 @@ import formatAmount from '@cogoport/globalization/utils/formatAmount';
 import Item from './Item';
 import styles from './styles.module.css';
 
-const ZERO_VALUE = 0;
+const FALLBACK_VALUE = 0;
 
 function InvoiceItem({
 	item = {},
@@ -18,7 +18,7 @@ function InvoiceItem({
 	refetchCN = () => {},
 }) {
 	const outStanding = formatAmount({
-		amount   : org_outstanding?.total_outstanding_amount || ZERO_VALUE,
+		amount   : org_outstanding?.total_outstanding_amount || FALLBACK_VALUE,
 		currency : org_outstanding?.currency,
 		options  : {
 			style                 : 'currency',

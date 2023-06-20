@@ -23,7 +23,7 @@ const ChangePaymentMode = dynamic(() => import('../ChangePaymentMode'), { ssr: f
 const SendInvoiceEmail = dynamic(() => import('../SendInvoiceEmail'), { ssr: false });
 
 const FIRST_CHARACTER_INDEX = 0;
-const ZERO_VALUE = 0;
+const FALLBACK_VALUE = 0;
 const MAX_INVOICE_SERIAL_ID = 8;
 
 function Actions({
@@ -142,13 +142,13 @@ function Actions({
 									<div className={styles.flex_row}>
 										Proforma email sent :
 										&nbsp;
-										{invoice.proforma_email_count || ZERO_VALUE}
+										{invoice.proforma_email_count || FALLBACK_VALUE}
 									</div>
 
 									<div className={cl`${styles.flex_row} ${styles.margin}`}>
 										Live email sent:
 										&nbsp;
-										{invoice.sales_email_count || ZERO_VALUE}
+										{invoice.sales_email_count || FALLBACK_VALUE}
 									</div>
 									<div className={cl`${styles.flex_row} ${styles.utr_details}`}>
 										<div className={cl`${styles.flex_row} ${styles.margin}`}>

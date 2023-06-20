@@ -1,4 +1,5 @@
 import { Button, Checkbox } from '@cogoport/components';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { isEmpty } from '@cogoport/utils';
 import { useEffect } from 'react';
 
@@ -7,8 +8,6 @@ import AsyncGstListController from '../CreateNewBillingAddress/AsyncGstListContr
 
 import Form from './Form';
 import styles from './styles.module.css';
-
-const FIRST_INDEX = 0;
 
 function AddressForm({
 	control,
@@ -40,8 +39,8 @@ function AddressForm({
 
 	useEffect(() => {
 		setValue('name', trade_name || business_name || '');
-		setValue('pincode', (!isEmpty(addresses) && (addresses[FIRST_INDEX] || {}).pincode) || '');
-		setValue('address', (!isEmpty(addresses) && (addresses[FIRST_INDEX] || {}).address) || '');
+		setValue('pincode', (!isEmpty(addresses) && (addresses[GLOBAL_CONSTANTS.zeroth_index] || {}).pincode) || '');
+		setValue('address', (!isEmpty(addresses) && (addresses[GLOBAL_CONSTANTS.zeroth_index] || {}).address) || '');
 	}, [setValue, addresses, business_name, trade_name]);
 
 	const handleCancel = () => {
