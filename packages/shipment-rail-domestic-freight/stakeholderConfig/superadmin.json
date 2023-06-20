@@ -1,0 +1,48 @@
+{
+    "features":["shipment_info", "shipment_header", "timeline", "poc", "sop", "chat", "cancel_details", "overview", "tasks", "documents", "emails","tracking","purchase"],  
+    "shipment_info":{},
+    "timeline": {
+        "can_edit": true
+    },
+    "default_tab":"documents",
+    "overview":{
+        "tab_title":"Overview"
+    },
+    "tasks":{
+        "tab_title":"Timeline and Tasks",
+        "show_booking_req":true,
+        "checked_show_my_tasks":false,
+        "is_task_assigned":false,
+        "can_reassign_task":true
+    },
+    "purchase":{
+        "tab_title":"Purchase Invoice"
+    },
+    "documents":{
+        "tab_title":"Documents",
+        "default_wallet":"trade_documents"
+    },
+    "emails":{
+        "tab_title":"Emails"
+    },
+    "cancel_shipment": {
+        "can_cancel": true,
+        "list_reasons": {
+            "stakeholder_type": ["superadmin"]
+        }
+    },
+    "edit_supplier": true,
+    "cancel_service": true,
+    "edit_params": {
+        "can_edit": true
+    },
+    "additional_services": {
+        "action_buttons": {
+            "reallocate": false,
+            "review_comments": false
+        }
+    },
+    "tracking":{
+        "tab_title":"Tracking"
+    }
+}

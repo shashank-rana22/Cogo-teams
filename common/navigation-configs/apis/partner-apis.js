@@ -28,6 +28,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'create_channel_partner_approval',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
 			api          : 'check_organization_access_request_eligibility',
 			access_type  : 'private',
 			service_name : 'organization',
@@ -570,6 +575,11 @@ const partner = {
 			service_name : 'organization',
 		},
 		{
+			api          : 'get_supported_exchange_rate_sources',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
+		},
+		{
 			api          : 'create_channel_partner_persona',
 			access_type  : 'private',
 			service_name : 'partner',
@@ -1012,6 +1022,11 @@ const partner = {
 		},
 		{
 			api          : 'get_bank_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'create_organization_account_conversion_approval',
 			access_type  : 'private',
 			service_name : 'organization',
 		},
@@ -1837,6 +1852,21 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'allocation',
 		},
+		{
+			api          : 'bulk_update_controlled_checkout_service',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
+			api          : 'update_checkout_approval',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
+			api          : 'send_checkout_for_approval',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
 	],
 	supply_crm: [
 		{
@@ -1854,6 +1884,11 @@ const partner = {
 			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'create_channel_partner_approval',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api          : 'onboard_channel_partner_user',
@@ -2638,6 +2673,31 @@ const partner = {
 			api          : 'get_organization_swift_code_details',
 			access_type  : 'private',
 			service_name : 'organization',
+		},
+		{
+			api          : 'get_organization_approval_details',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'update_channel_partner_approval',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'update_organization_approval',
+			access_type  : 'private',
+			service_name : 'organization',
+		},
+		{
+			api          : 'get_partner_approval_details',
+			access_type  : 'private',
+			service_name : 'partner',
+		},
+		{
+			api          : 'list_partner_approvals',
+			access_type  : 'private',
+			service_name : 'partner',
 		},
 		{
 			api          : 'update_organization_document',
@@ -4382,6 +4442,12 @@ const partner = {
 			feature      : 'disliked_rates',
 		},
 		{
+			api          : 'delete_trailer_freight_rate_feedback',
+			access_type  : 'private',
+			service_name : 'haulage_freight_rate',
+			feature      : 'disliked_rates',
+		},
+		{
 			api          : 'list_ltl_freight_rate_feedbacks',
 			access_type  : 'private',
 			service_name : 'ltl_freight_rate',
@@ -5364,6 +5430,11 @@ const partner = {
 			api          : 'list_partner_user_allocations',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'get_supported_exchange_rate_sources',
+			access_type  : 'private',
+			service_name : 'exchange_rate',
 		},
 		{
 			api          : 'get_allocation_requests',
@@ -6556,6 +6627,11 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'sage',
 		},
+		{
+			api          : 'create_outbound_voice_call',
+			access_type  : 'private',
+			service_name : 'voice_call',
+		},
 	],
 	unified_dashboard: [
 		{
@@ -7157,6 +7233,18 @@ const partner = {
 		},
 		{
 			api         : 'get_pnl_statement_salary',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_job_closure_details',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_shipment_statistics',
+			access_type : 'private',
+		},
+		{
+			api         : 'get_pnl_dashboard_monthly_trends',
 			access_type : 'private',
 		},
 		{
@@ -8342,7 +8430,12 @@ const partner = {
 			module      : 'outstanding',
 			feature     : 'outstanding',
 		},
-
+		{
+			api         : 'post_sales_invoice_bulk_irn_generate',
+			access_type : 'private',
+			module      : 'invoices',
+			feature     : 'invoices',
+		},
 	],
 	incident_controller: [
 		{
@@ -8530,6 +8623,8 @@ const partner = {
 			api          : 'list_organization_trade_party_details',
 			access_type  : 'private',
 			service_name : 'organization',
+			module       : 'tds-settlement',
+			feature      : 'tds-settlement',
 		},
 		{
 			api          : 'list_organization_users',
@@ -8622,7 +8717,7 @@ const partner = {
 			feature     : 'history',
 		},
 		{
-			api         : 'post_payments_settlement_matching_on_sage',
+			api         : 'post_payments_settlement_bulk_matching_on_sage',
 			access_type : 'private',
 			module      : 'history',
 			feature     : 'history',
@@ -8701,6 +8796,12 @@ const partner = {
 		},
 		{
 			api         : 'put_payments_accounts',
+			access_type : 'private',
+			module      : 'onAccount',
+			feature     : 'onAccount',
+		},
+		{
+			api         : 'post_payments_accounts_bulk_post_to_sage',
 			access_type : 'private',
 			module      : 'onAccount',
 			feature     : 'onAccount',
@@ -10061,6 +10162,11 @@ const partner = {
 			service_name : 'promotion',
 		},
 		{
+			api          : 'update_agent_budget_allocation_status',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
 			api          : 'update_promotion_rule',
 			access_type  : 'private',
 			service_name : 'promotion',
@@ -10114,6 +10220,16 @@ const partner = {
 			api          : 'list_partner_users',
 			access_type  : 'private',
 			service_name : 'partner',
+		},
+		{
+			api          : 'get_reportees_budget_allocation_details',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'transfer_promotion_budget',
+			access_type  : 'private',
+			service_name : 'promotion',
 		},
 	],
 	cogo_assured: [
@@ -11695,6 +11811,10 @@ const partner = {
 			access_type : 'private',
 		},
 		{
+			api         : 'get_air_coe_pending_tasks_amend_list',
+			access_type : 'private',
+		},
+		{
 			api          : 'list_locations',
 			access_type  : 'private',
 			service_name : 'location',
@@ -12303,6 +12423,30 @@ const partner = {
 			service_name : 'referral',
 		},
 	],
+	referral_config: [
+		{
+			api          : 'list_promotions',
+			access_type  : 'private',
+			service_name : 'promotion',
+		},
+		{
+			api          : 'create_referral_configuration',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+		{
+			api          : 'get_referral_configuration',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
+	referral_simulation: [
+		{
+			api          : 'get_referral_simulation',
+			access_type  : 'private',
+			service_name : 'referral',
+		},
+	],
 	air_repository: [
 		{
 			api          : 'list_shipment_service_ops_repository',
@@ -12319,6 +12463,19 @@ const partner = {
 			access_type  : 'private',
 			service_name : 'shipment',
 		},
+	],
+	controlled_booking: [
+		{
+			api          : 'list_checkouts',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+		{
+			api          : 'update_checkout_approval',
+			access_type  : 'private',
+			service_name : 'checkout',
+		},
+
 	],
 };
 

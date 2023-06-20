@@ -12,7 +12,8 @@
         "tab_title":"Timeline and Tasks",
         "show_booking_req":true,
         "checked_show_my_tasks":false,
-        "is_task_assigned":false
+        "is_task_assigned":false,
+        "can_reassign_task":true
     },
     "documents":{
         "tab_title":"Documents",
@@ -24,13 +25,13 @@
     "cancel_shipment": {
         "can_cancel": true,
         "list_reasons": {
-            "stakeholder_type": ["superadmin"]
+            "stakeholder_type": ["admin"]
         }
     },
-    "edit_supplier": true,
-    "cancel_service": true,
+    "edit_supplier": false,
+    "cancel_service": false,
     "edit_params": {
-        "can_edit": true
+        "can_edit": false
     },
     "additional_services": {
         "action_buttons": {
