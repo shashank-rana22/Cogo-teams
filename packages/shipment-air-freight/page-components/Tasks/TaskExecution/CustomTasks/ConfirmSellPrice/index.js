@@ -25,6 +25,8 @@ function ConfirmSellPrice({ shipmentData, task, refetch, onCancel }) {
 		is_revert_awaited = true,
 	} = data?.new_sell_data || {};
 
+	const isDisabled = is_revert_awaited && !isVinodTalapaProfile;
+
 	const { updateShipmentPendingTask } = useUpdateShipmentPendingTask({
 		task,
 		refetch,
@@ -36,7 +38,7 @@ function ConfirmSellPrice({ shipmentData, task, refetch, onCancel }) {
 		updateShipmentPendingTask,
 	});
 
-	const finalControls = controls(new_sell_price, is_revert_awaited, isVinodTalapaProfile);
+	const finalControls = controls(new_sell_price, isDisabled);
 	const {
 		control,
 		formState: { errors },
@@ -68,7 +70,7 @@ function ConfirmSellPrice({ shipmentData, task, refetch, onCancel }) {
 					themeType="primary"
 					onClick={handleSubmit(handleOnClick)}
 					disabled={
-						(is_revert_awaited && !isVinodTalapaProfile) || loading
+						isDisabled || loading
 					}
 				>
 					Approve
