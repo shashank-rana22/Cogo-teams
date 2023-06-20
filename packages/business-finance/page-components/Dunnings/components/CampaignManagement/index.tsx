@@ -81,7 +81,7 @@ function CampaignManagement() {
 				className={styles.status}
 				style={{ background: STATUS_COLOR_MAPPING[status] }}
 			>
-				{status}
+				{(status || '').replaceAll('_', ' ')}
 
 			</div>
 		),

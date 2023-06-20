@@ -37,13 +37,13 @@ function MainHeader({ activeTab, setActiveTab }:Props) {
 					<div style={{ display: 'flex' }}>
 						<span>Ongoing Campaigns:&nbsp;</span>
 						<span>
-							-----
+							-
 						</span>
 					</div>
 					<div className={styles.collection_rate}>
 						<span>Collection Rate:&nbsp;</span>
 						<span>
-							------
+							-
 						</span>
 					</div>
 				</div>

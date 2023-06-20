@@ -24,3 +24,14 @@
 .heading {
 	font-weight: 600;
 }
+
+.empty_container{
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	height: 100%;
+}
+
+.no_data_text{
+	color: #A9A0A0;
+}

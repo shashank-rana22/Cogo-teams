@@ -44,7 +44,7 @@ function ActionModal({ actionModal, setActionModal, getDunningList }:Props) {
 					<>
 						<div className={styles.header}>
 							<h3>
-								Are you sure you want to delete
+								Are you sure you want to delete &nbsp;
 								{rowData?.name}
 								?
 							</h3>
