@@ -16,7 +16,7 @@ import getStaus from './ItemAdded/get_status';
 import styles from './styles.module.css';
 
 const LESS_PAGE_LIMIT = 8;
-const MORE_PAGE_LIMIT = 8;
+const MORE_PAGE_LIMIT = 100;
 
 function List({ isSeller = false }) {
 	const { servicesList, refetchServices, shipment_data, stakeholderConfig } = useContext(

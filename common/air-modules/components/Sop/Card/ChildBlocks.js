@@ -110,7 +110,7 @@ function ChildBlocks(
 				FILE_VALUE.file = val;
 			},
 			(err) => {
-				Toast.error(err);
+				Toast.error(err || 'Something went wrong!');
 			},
 		)();
 

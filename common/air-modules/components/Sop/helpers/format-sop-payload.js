@@ -52,13 +52,9 @@ const getSopPayload = (
 		if (element?.file?.length) {
 			instruction.url_links = element?.file;
 
-			if (
-				['ftl_freight', 'ltl_freight'].includes(shipment_data?.shipment_type)
-			) {
-				instruction.url_links = element?.file?.map(
-					(singleFile) => singleFile?.finalUrl,
-				);
-			}
+			instruction.url_links = element?.file?.map(
+				(singleFile) => singleFile?.finalUrl,
+			);
 		}
 
 		if (addable) {

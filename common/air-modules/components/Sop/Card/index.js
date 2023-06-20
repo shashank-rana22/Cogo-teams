@@ -88,7 +88,7 @@ function SopCard({
 				Toast.info('Nothing To Update..');
 			}
 		} catch (err) {
-			Toast.error('Something went wrong');
+			Toast.error(err || 'Something went wrong');
 		}
 	};
 

@@ -18,7 +18,7 @@ function EditServiceCharges(props) {
 
 	const chargeCodes = (data?.list || []).map((item) => item.code);
 
-	const miscCharges = value
+	const miscCharges = (value || [])
 		.filter((charge) => !chargeCodes.includes(charge.code))
 		.map((charge) => ({
 			...charge,

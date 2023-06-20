@@ -21,7 +21,7 @@ const checkLineItemsSum = (values) => {
 			sumCheck = true;
 			MESSAGE.push('Sum of line items should be > 0');
 		}
-		check = check && line_item_sum;
+		check = check && (line_item_sum || value?.service_type === 'air_freight_local_service');
 	});
 	return { check, message: MESSAGE };
 };

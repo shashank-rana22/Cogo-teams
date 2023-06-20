@@ -98,7 +98,7 @@ const useAddSopData = ({
 				Toast.info('Instruction or Attachment, atleast one is required!');
 			}
 		} catch (error) {
-			Toast.error('Something went wrong');
+			Toast.error(error || 'Something went wrong');
 		}
 	};
 

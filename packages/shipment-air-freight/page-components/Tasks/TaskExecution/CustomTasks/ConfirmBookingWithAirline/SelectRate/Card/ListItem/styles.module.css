@@ -13,6 +13,14 @@
 	color: #333;
 }
 
+.secondary_heading {
+	max-width: 100px;
+	overflow: hidden;
+	text-overflow: ellipsis;
+	white-space: nowrap;
+	cursor: pointer;
+}
+
 .item_body {
 	display: flex;
 	align-items: center;

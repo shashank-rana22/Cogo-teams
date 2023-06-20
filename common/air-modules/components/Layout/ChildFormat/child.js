@@ -1,6 +1,6 @@
 import { IcMDelete } from '@cogoport/icons-react';
 import { startCase } from '@cogoport/utils';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import getElementController from '../getController';
 import getErrorMessage from '../getErrorMessage';
@@ -9,8 +9,7 @@ import getAsyncFields from '../Item/getAsyncKeys';
 import styles from './styles.module.css';
 
 const TOTAL_SPAN = 12;
-const ZERO_SPAN = 0;
-const INDEX_ONE = 1;
+const NO_OF_ELEMENTS_TO_BE_REMOVED = 1;
 const FLEX_HUNDRED = 100;
 const INCREMENT_BY_ONE = 1;
 const ZEROTH_SPAN = 0;
@@ -32,29 +31,19 @@ function Child({
 	const TOTAL_FIELDS = [];
 	let span = 0;
 	controls.forEach((fields) => {
-		span += fields.span || TOTAL_SPAN;
-		if (span === TOTAL_SPAN) {
-			ROW_WISE_FIELDS.push(fields);
-			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
-			ROW_WISE_FIELDS = [];
-			span = ZERO_SPAN;
-		} else if (span < TOTAL_SPAN) {
-			ROW_WISE_FIELDS.push(fields);
-		} else {
+		if ((span + fields.span) > TOTAL_SPAN) {
 			TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 			ROW_WISE_FIELDS = [];
 			ROW_WISE_FIELDS.push(fields);
 			span = fields.span;
+		} else {
+			ROW_WISE_FIELDS.push(fields);
+			span += fields.span;
 		}
 	});
 	if (ROW_WISE_FIELDS.length) {
 		TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 	}
-
-	const keysForFields = useMemo(
-		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
-		[TOTAL_FIELDS.length],
-	);
 
 	if (formValues?.documents?.[ZEROTH_SPAN]?.url?.fileName === ''
 	|| formValues?.documents_commercial_invoice?.[ZEROTH_SPAN]?.url?.fileName === ''
@@ -100,9 +89,9 @@ function Child({
 				&nbsp;
 				{index + INCREMENT_BY_ONE}
 			</h3>
-			{TOTAL_FIELDS.map((rowFields, i) => (
-				<div className={styles.row} key={keysForFields[i]}>
-					{rowFields.map((controlItem) => {
+			{Object.keys(TOTAL_FIELDS).map((rowFields) => (
+				<div className={styles.row} key={rowFields}>
+					{TOTAL_FIELDS[rowFields].map((controlItem) => {
 						const newControl = getNewControls(controlItem);
 
 						if (!newControl.type && !newControl.showOnlyLabel) return null;
@@ -170,7 +159,7 @@ function Child({
 				<div className={styles.delete_icon}>
 					<IcMDelete
 						className={styles.icon}
-						onClick={() => remove(index, INDEX_ONE)}
+						onClick={() => remove(index, NO_OF_ELEMENTS_TO_BE_REMOVED)}
 					/>
 				</div>
 			) : null}

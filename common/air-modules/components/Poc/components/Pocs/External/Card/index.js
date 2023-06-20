@@ -6,11 +6,11 @@ import styles from './styles.module.css';
 
 function Card({ data = {} }) {
 	const mapping = {
-		Process      : (data.processes || []).map((i) => startCase(i)).join(','),
-		Name         : data.name || '',
-		'Contact No' : `${data.mobile_country_code || ''} ${data.mobile_number}`,
-		Email        : data.email,
-		Workscope    : (data.work_scopes || []).map((i) => POC_WORKSCOPE_MAPPING[i]).join(', '),
+		Process      : (data?.processes || []).map((i) => startCase(i)).join(','),
+		Name         : data?.name || '',
+		'Contact No' : `${data?.mobile_country_code || ''} ${data?.mobile_number}`,
+		Email        : data?.email,
+		Workscope    : (data?.work_scopes || []).map((i) => POC_WORKSCOPE_MAPPING[i]).join(', '),
 	};
 
 	function LabelValue({ label, value }) {
