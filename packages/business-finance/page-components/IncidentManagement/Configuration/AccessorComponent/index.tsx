@@ -11,7 +11,7 @@ import SezApproval from '../../Modals/SezApproval';
 import TDSModal from '../../Modals/TDSModal';
 
 function AccessorComponent({ row, getIncidentData }) {
-	const { data } = row || {};
+	const { type = '', id = '', data = '', remark = '', status = '' } = row || {};
 	const {
 		tdsRequest,
 		bankRequest,
@@ -26,99 +26,43 @@ function AccessorComponent({ row, getIncidentData }) {
 		advanceSecurityDepositRefund,
 	} = data || {};
 
-	const { type, id } = row || {};
-
-	const componentsMap = {
-		TDS_APPROVAL: (
-			<TDSModal
-				tdsData={tdsRequest}
-				id={id}
-				refetch={getIncidentData}
-				row={row}
-			/>
-		),
-		SETTLEMENT_APPROVAL: (
-			<SettlementModal
-				settlementData={settlementRequest}
-				id={id}
-				row={row}
-				refetch={getIncidentData}
-			/>
-		),
-		BANK_DETAIL_APPROVAL: (
-			<BankDetails
-				bankData={bankRequest}
-				bankId={id}
-				organization={organization}
-				refetch={getIncidentData}
-				row={row}
-			/>
-		),
-		PAYMENT_CONFIRMATION_APPROVAL: (
-			<PaymentConfirmation
-				paymentConfirmationRequest={paymentConfirmationRequest}
-				organization={organization}
-				id={id}
-				refetch={getIncidentData}
-				row={row}
-			/>
-		),
-		ISSUE_CREDIT_NOTE: (
-			<RequestCN row={row} refetch={getIncidentData} id={id} />
-		),
-		CONSOLIDATED_CREDIT_NOTE: (
-			<RequestCN row={row} refetch={getIncidentData} id={id} />
-		),
-		JOURNAL_VOUCHER_APPROVAL: (
-			<JvModal
-				journalVoucherRequest={journalVoucherRequest}
-				id={id}
-				refetch={getIncidentData}
-				row={row}
-			/>
-		),
-		INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL: (
-			<ICJVModal
-				interCompanyJournalVoucherRequest={interCompanyJournalVoucherRequest}
-				row={row}
-				refetch={getIncidentData}
-				id={id}
-			/>
-		),
-		CONCOR_PDA_APPROVAL: (
-			<ConcorModal
-				concorData={concorPdaApprovalRequest}
-				id={id}
-				refetch={getIncidentData}
-			/>
-		),
-		SEZ_APPROVAL: (
-			<SezApproval
-				sezRequest={sezRequest}
-				organization={organization}
-				id={id}
-				refetch={getIncidentData}
-			/>
-		),
-		ADVANCE_SECURITY_DEPOSIT: (
-			<AdvanceSecurityDeposit
-				advanceSecurityDeposit={advanceSecurityDeposit}
-				id={id}
-				row={row}
-				refetch={getIncidentData}
-			/>
-		),
-		ADVANCE_SECURITY_DEPOSIT_REFUND: (
-			<AdvanceSecurityDepositRefund
-				advanceSecurityDepositRefund={advanceSecurityDepositRefund}
-				id={id}
-				row={row}
-				refetch={getIncidentData}
-			/>
-		),
+	const typeComponentMapping = {
+		BANK_DETAIL_APPROVAL                   : BankDetails,
+		TDS_APPROVAL                           : TDSModal,
+		ISSUE_CREDIT_NOTE                      : RequestCN,
+		JOURNAL_VOUCHER_APPROVAL               : JvModal,
+		SETTLEMENT_APPROVAL                    : SettlementModal,
+		INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : ICJVModal,
+		PAYMENT_CONFIRMATION_APPROVAL          : PaymentConfirmation,
+		ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDeposit,
+		ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefund,
+		SEZ_APPROVAL                           : SezApproval,
+		CONCOR_PDA_APPROVAL                    : ConcorModal,
 	};
 
-	return <div>{componentsMap[type]}</div>;
+	const Component = typeComponentMapping[type];
+
+	return Component ? (
+		<Component
+			tdsData={tdsRequest}
+			bankData={bankRequest}
+			settlementData={settlementRequest}
+			concorData={concorPdaApprovalRequest}
+			journalVoucherRequest={journalVoucherRequest}
+			interCompanyJournalVoucherRequest={interCompanyJournalVoucherRequest}
+			sezRequest={sezRequest}
+			paymentConfirmationRequest={paymentConfirmationRequest}
+			advanceSecurityDeposit={advanceSecurityDeposit}
+			advanceSecurityDepositRefund={advanceSecurityDepositRefund}
+			id={id}
+			organization={organization}
+			refetch={getIncidentData}
+			row={row}
+			isEditable={status === 'REQUESTED'}
+			status={status}
+			remark={remark}
+		/>
+	) : null;
 }
 
 export default AccessorComponent;

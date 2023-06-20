@@ -26,121 +26,36 @@ function ViewRequested({ itemData, name, refetch }) {
 		refetch,
 		setShowModal,
 	});
+	const typeComponentMapping = {
+		BANK_DETAIL_APPROVAL                   : BankDatailsModal,
+		TDS_APPROVAL                           : TdsDeviationModal,
+		ISSUE_CREDIT_NOTE                      : RequestCN,
+		JOURNAL_VOUCHER_APPROVAL               : JournalVoucher,
+		SETTLEMENT_APPROVAL                    : SettlementModal,
+		INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL : IcJvApproval,
+		PAYMENT_CONFIRMATION_APPROVAL          : PaymentConfirmation,
+		ADVANCE_SECURITY_DEPOSIT               : AdvanceSecurityDepositModal,
+		ADVANCE_SECURITY_DEPOSIT_REFUND        : AdvanceSecurityDepositRefundModal,
+	};
 
-	switch (type) {
-		case 'BANK_DETAIL_APPROVAL':
-			return (
-				<BankDatailsModal
-					itemData={itemData}
-					setRemarks={setRemarks}
-					remarks={remarks}
-					onSave={onSave}
-					onRaiseAgain={onRaiseAgain}
-					setSelectedFile={setSelectedFile}
-					selectedFile={selectedFile}
-					name={name}
-					showModal={showModal}
-					setShowModal={setShowModal}
-					loadingOnSave={loadingOnSave}
-					loadingOnRaise={loadingOnRaise}
-				/>
-			);
+	const Component = typeComponentMapping[type];
 
-		case 'TDS_APPROVAL':
-			return (
-				<TdsDeviationModal
-					itemData={itemData}
-					setRemarks={setRemarks}
-					onSave={onSave}
-					remarks={remarks}
-					onRaiseAgain={onRaiseAgain}
-					setSelectedFile={setSelectedFile}
-					selectedFile={selectedFile}
-					name={name}
-					showModal={showModal}
-					setShowModal={setShowModal}
-					loadingOnSave={loadingOnSave}
-					loadingOnRaise={loadingOnRaise}
-				/>
-			);
-		case 'ISSUE_CREDIT_NOTE':
-			return (
-				<RequestCN
-					itemData={itemData}
-					setRemarks={setRemarks}
-					remarks={remarks}
-					onSave={onSave}
-					showModal={showModal}
-					setShowModal={setShowModal}
-					loadingOnSave={loadingOnSave}
-				/>
-			);
-		case 'JOURNAL_VOUCHER_APPROVAL':
-			return (
-				<JournalVoucher
-					itemData={itemData}
-					setRemarks={setRemarks}
-					onSave={onSave}
-					remarks={remarks}
-					showModal={showModal}
-					setShowModal={setShowModal}
-					loadingOnSave={loadingOnSave}
-				/>
-			);
-		case 'SETTLEMENT_APPROVAL':
-			return (
-				<SettlementModal
-					itemData={itemData}
-					setRemarks={setRemarks}
-					onSave={onSave}
-					remarks={remarks}
-					showModal={showModal}
-					setShowModal={setShowModal}
-					loadingOnSave={loadingOnSave}
-				/>
-			);
-		case 'INTER_COMPANY_JOURNAL_VOUCHER_APPROVAL':
-			return (
-				<IcJvApproval
-					itemData={itemData}
-					setRemarks={setRemarks}
-					remarks={remarks}
-					onSave={onSave}
-					showModal={showModal}
-					setShowModal={setShowModal}
-					loadingOnSave={loadingOnSave}
-				/>
-			);
-		case 'PAYMENT_CONFIRMATION_APPROVAL':
-			return (
-				<PaymentConfirmation
-					itemData={itemData}
-					setRemarks={setRemarks}
-					remarks={remarks}
-					onSave={onSave}
-					showModal={showModal}
-					setShowModal={setShowModal}
-					loadingOnSave={loadingOnSave}
-				/>
-			);
-		case 'ADVANCE_SECURITY_DEPOSIT':
-			return (
-				<AdvanceSecurityDepositModal
-					itemData={itemData}
-					showModal={showModal}
-					setShowModal={setShowModal}
-				/>
-			);
-		case 'ADVANCE_SECURITY_DEPOSIT_REFUND': return (
-			<AdvanceSecurityDepositRefundModal
-				itemData={itemData}
-				showModal={showModal}
-				setShowModal={setShowModal}
-			/>
-		);
-		default:
-			return null;
-	}
+	return Component ? (
+		<Component
+			itemData={itemData}
+			setRemarks={setRemarks}
+			onSave={onSave}
+			remarks={remarks}
+			onRaiseAgain={onRaiseAgain}
+			setSelectedFile={setSelectedFile}
+			selectedFile={selectedFile}
+			name={name}
+			showModal={showModal}
+			setShowModal={setShowModal}
+			loadingOnSave={loadingOnSave}
+			loadingOnRaise={loadingOnRaise}
+		/>
+	) : null;
 }
 
 export default ViewRequested;
