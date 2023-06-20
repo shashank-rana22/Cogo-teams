@@ -68,6 +68,7 @@ function Header({
 		group_members = [],
 		organization_id = '',
 		user_id,
+		account_type = '',
 	} = formattedData || {};
 
 	const handleEsclateClick = () => {
@@ -145,6 +146,7 @@ function Header({
 							viewType={viewType}
 							supportAgentId={support_agent_id}
 							isGroupFormed={isGroupFormed}
+							accountType={account_type}
 						/>
 						{isomniChannelAdmin && channel_type === 'whatsapp' && (
 							<div
@@ -167,16 +169,18 @@ function Header({
 				<div className={styles.flex_space_between}>
 					<HeaderName formattedData={formattedData} />
 					<div className={styles.button_flex}>
-						<Button
-							themeType="secondary"
-							size="sm"
-							disabled={!hasPermissionToEdit || canMessageOnBotSession}
-							onClick={handleEsclateClick}
-							loading={supplierLoading}
-							className={styles.escalate_button}
-						>
-							escalate
-						</Button>
+						{account_type === 'service_provider' && (
+							<Button
+								themeType="secondary"
+								size="sm"
+								disabled={!hasPermissionToEdit || canMessageOnBotSession}
+								onClick={handleEsclateClick}
+								loading={supplierLoading}
+								className={styles.escalate_button}
+							>
+								escalate
+							</Button>
+						)}
 						<Button
 							themeType="primary"
 							size="sm"

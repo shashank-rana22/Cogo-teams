@@ -1,6 +1,7 @@
-import { asyncFieldsOperators, asyncFieldsOrganizationUsers, useGetAsyncOptions } from '@cogoport/forms';
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { addDays } from '@cogoport/utils';
+
+import useGetRevertFormAsyncOptions from '../helpers/useGetRevertFormAsyncOptions';
 
 const MIN_DAYS_FOR_VALIDITY = 3;
 const NEGATIVE_VALUE = 0;
@@ -21,38 +22,11 @@ const SERVICE_CONTROLS_MAPPING = {
 const useGetRevertFormControls = ({ data }) => {
 	const { service_type, service_provider_id } = data || {};
 
-	const organizationUsers = useGetAsyncOptions({
-		...asyncFieldsOrganizationUsers(),
-		initialCall : true,
-		params      : {
-			filters: {
-				status          : 'active',
-				organization_id : service_provider_id,
-
-			},
-		},
-	});
-
-	const shippingLines = useGetAsyncOptions({
-		...asyncFieldsOperators(),
-		params: {
-			filters     : { operator_type: 'shipping_line', status: 'active' },
-			page_limit  : 100,
-			sort_by     : 'short_name',
-			sort_type   : 'asc',
-			initialCall : true,
-		},
-	});
-
-	const airLines = useGetAsyncOptions({
-		...asyncFieldsOperators(),
-		params: {
-			filters    : { operator_type: 'airline', status: 'active' },
-			page_limit : 100,
-			sort_by    : 'short_name',
-			sort_type  : 'asc',
-		},
-	});
+	const {
+		airLines,
+		shippingLines,
+		organizationUsers,
+	} = useGetRevertFormAsyncOptions({ serviceProviderId: service_provider_id });
 
 	const controls = [
 		{

@@ -9,11 +9,12 @@ const useEscalateToSupplyRm = () => {
 		method : 'post',
 	}, { manual: true, autoCancel: false });
 
-	const escalateToSupplyRm = useCallback(({ payload }) => {
+	const escalateToSupplyRm = useCallback(async ({ payload }) => {
 		try {
-			trigger({
+			await trigger({
 				data: payload,
 			});
+			Toast.success('Escalted Successfully');
 		} catch (err) {
 			Toast.error(getApiErrorString(err?.response?.data));
 		}

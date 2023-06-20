@@ -19,7 +19,7 @@ const useTransferChat = ({ firestore, activeMessageCard }) => {
 		id,
 	} = activeMessageCard || {};
 
-	const { user:{ id:logginInAgentId } } = profile || {};
+	const { user: { id: logginInAgentId } } = profile || {};
 
 	const roomRef = doc(
 		firestore,

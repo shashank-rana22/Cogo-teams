@@ -86,51 +86,64 @@ export function getOptionsMapping({
 	};
 }
 
-export function getAccessableButtonOptions({
-	viewType, showBotMessages,
-	supportAgentId,
-	userId,
-	isGroupFormed,
-}) {
-	let ACCESSABLE_BUTTON_OPTIONS = [];
-
-	if (viewType === 'admin_view') {
-		ACCESSABLE_BUTTON_OPTIONS = ['auto_assign', 'assign_modal', 'assign_to_me'];
-		if (!showBotMessages) {
-			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'add_me_to_group'];
+export const ACCESSABLE_BUTTON_FUNC_MAPPING = {
+	admin_view: ({ showBotMessages, isServiceProvider }) => {
+		const accesableButtonOptions = ['auto_assign', 'assign_modal', 'assign_to_me'];
+		if (!showBotMessages && isServiceProvider) {
+			accesableButtonOptions.push('add_me_to_group');
 		}
-		return ACCESSABLE_BUTTON_OPTIONS;
-	}
+		return accesableButtonOptions;
+	},
 
-	if (viewType === 'kam_view') {
+	kam_view: ({
+		supportAgentId,
+		userId,
+		showBotMessages,
+	}) => {
 		if (supportAgentId === userId) {
 			return ['assign_modal'];
 		}
-		return ['request_to_assign'];
-	}
 
-	if (viewType === 'supply_view') {
+		if (showBotMessages) {
+			return ['request_to_assign'];
+		}
+
+		return [];
+	},
+
+	supply_view: ({
+		showBotMessages,
+		supportAgentId,
+		userId,
+		isGroupFormed,
+		isServiceProvider,
+	}) => {
+		let ACCESSABLE_BUTTON_OPTIONS = [];
 		if (supportAgentId === userId) {
 			ACCESSABLE_BUTTON_OPTIONS = ['assign_modal'];
 		}
+
 		if (!isGroupFormed) {
 			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'request_for_assign'];
 		}
-		if (!showBotMessages && supportAgentId !== userId) {
+
+		if (!showBotMessages && supportAgentId !== userId && isServiceProvider) {
 			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'add_me_to_group'];
 		}
+
 		if (showBotMessages) {
 			ACCESSABLE_BUTTON_OPTIONS = [...ACCESSABLE_BUTTON_OPTIONS, 'assign_to_me'];
 		}
 
 		return ACCESSABLE_BUTTON_OPTIONS;
-	}
-
-	if (viewType === 'shipment_view') {
+	},
+	shipment_view: ({
+		supportAgentId,
+		userId,
+	}) => {
 		if (supportAgentId === userId) {
 			return ['assign_modal'];
 		}
-	}
-
-	return [];
-}
+		return [];
+	},
+};

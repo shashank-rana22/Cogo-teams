@@ -3,7 +3,7 @@ import { IcMListView } from '@cogoport/icons-react';
 import { isEmpty } from '@cogoport/utils';
 import { useState } from 'react';
 
-import { CommonButton, getOptionsMapping, getAccessableButtonOptions } from './rightButtonHelpers';
+import { CommonButton, getOptionsMapping, ACCESSABLE_BUTTON_FUNC_MAPPING } from './rightButtonHelpers';
 import styles from './styles.module.css';
 
 function RightButton({
@@ -19,6 +19,7 @@ function RightButton({
 	supportAgentId,
 	isGroupFormed,
 	showBotMessages,
+	accountType,
 }) {
 	const [popoverProps, setPopoverProps] = useState({ isOpen: false, clickedButton: '' });
 
@@ -32,13 +33,14 @@ function RightButton({
 		setPopoverProps,
 	});
 
-	const accessableButtons = getAccessableButtonOptions({
+	const accessableButtons = ACCESSABLE_BUTTON_FUNC_MAPPING[viewType]?.({
 		viewType,
 		showBotMessages,
 		supportAgentId,
 		userId,
 		isGroupFormed,
-	});
+		isServiceProvider: accountType === 'service_provider',
+	}) || [];
 
 	const loading = assignLoading || requestAssignLoading;
 

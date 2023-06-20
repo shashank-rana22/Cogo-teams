@@ -24,7 +24,7 @@ function GroupMembersRequests({
 			{filteredMembers.map((user = {}) => (
 				<div className={styles.content} key={user?.user_id}>
 					<Avatar
-						src={GLOBAL_CONSTANTS.image_url.user_avatar}
+						src={GLOBAL_CONSTANTS.image_url.user_avatar_image}
 						alt="img"
 						disabled={false}
 						className={styles.user_div}

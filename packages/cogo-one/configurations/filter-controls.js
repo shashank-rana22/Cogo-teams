@@ -159,8 +159,7 @@ const useGetControls = ({ isomniChannelAdmin = false, tagOptions = [], showBotMe
 		},
 	];
 
-	const newControls = controls.filter((item) => !(HIDE_CONTROLS_MAPPING[viewType] || HIDE_CONTROLS_MAPPING.kam_view)
-		?.includes(item?.name));
+	const newControls = controls.filter((item) => !(HIDE_CONTROLS_MAPPING[viewType])?.includes(item?.name));
 	return newControls;
 };
 
