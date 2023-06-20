@@ -13,7 +13,7 @@ function RevertModal({ modalState, setModalState, userId, shipmentFlashBookingRa
 	const {
 		control,
 		handleSubmit,
-		formState:{ errors = {} },
+		formState: { errors = {} },
 	} = useForm();
 
 	const {

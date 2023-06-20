@@ -1,8 +1,6 @@
 import getCurrencyOptions from '@cogoport/globalization/utils/getCurrencyOptions';
 import { addDays } from '@cogoport/utils';
 
-import useGetRevertFormAsyncOptions from '../helpers/useGetRevertFormAsyncOptions';
-
 const MIN_DAYS_FOR_VALIDITY = 3;
 const NEGATIVE_VALUE = 0;
 
@@ -22,38 +20,55 @@ const SERVICE_CONTROLS_MAPPING = {
 const useGetRevertFormControls = ({ data }) => {
 	const { service_type, service_provider_id } = data || {};
 
-	const {
-		airLines,
-		shippingLines,
-		organizationUsers,
-	} = useGetRevertFormAsyncOptions({ serviceProviderId: service_provider_id });
-
 	const controls = [
 		{
 			label       : 'Rate Provided by user',
 			name        : 'sourced_by_id',
 			placeholder : 'Search via name',
-			controlType : 'select',
+			controlType : 'asyncSelect',
 			isClearable : true,
 			valueKey    : 'user_id',
 			rules       : { required: 'This is required' },
-			...organizationUsers,
+			asyncKey    : 'organization_users',
+			initialCall : true,
+			params      : {
+				filters: {
+					status          : 'active',
+					organization_id : service_provider_id,
+
+				},
+			},
 		},
 		{
 			name        : 'shipping_line_id',
 			label       : 'Shipping line',
-			controlType : 'select',
+			controlType : 'asyncSelect',
 			placeholder : 'Search Shipping Line',
 			rules       : { required: 'Shipping Line is required' },
-			...shippingLines,
+			asyncKey    : 'list_operators',
+			params      : {
+				filters    : { operator_type: 'shipping_line', status: 'active' },
+				page_limit : 100,
+				sort_by    : 'short_name',
+				sort_type  : 'asc',
+			},
+			initialCall: true,
 		},
 		{
 			name        : 'airline_id',
 			type        : 'select',
 			label       : 'Airline',
+			controlType : 'asyncSelect',
 			placeholder : 'Select Airline',
 			rules       : { required: 'Airline is required' },
-			...airLines,
+			asyncKey    : 'list_operators',
+			params      : {
+				filters    : { operator_type: 'airline', status: 'active' },
+				page_limit : 100,
+				sort_by    : 'short_name',
+				sort_type  : 'asc',
+			},
+			initialCall: true,
 		},
 		{
 			name        : 'chargeable_weight',
