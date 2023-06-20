@@ -1,9 +1,11 @@
 import { Button } from '@cogoport/components';
 import { useRouter } from '@cogoport/next';
+import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
 import AccordianDisplay from './components/AccordianDisplay';
 import FiltersDisplay from './components/FilterDisplay';
+import FilterFieldArray from './components/FilterFieldArray';
 import KRATable from './components/KRATable';
 import TableDisplay from './components/TablesDisplay';
 import styles from './styles.module.css';
@@ -12,15 +14,17 @@ import useGetkrasAssigned from './useGetKrasAssigned';
 import useGetUnassignedEmployee from './useGetUnassignedEmployees';
 
 const REDIRECT_URL = '/kra-assignment/create';
+const DISPLAY_ADD_KRA_BUTTON = 1;
 
 function Dashboard() {
 	const router = useRouter();
-	const [showKRACalculationTable, setShowKRACalculationTable] = useState(false);
 
 	const {
 		data:UnassignedData = [],
 		loading, filters, setFilters,
 		getUnassignedEmployee,
+		showKRACalculationTable,
+		setShowKRACalculationTable,
 	} = useGetUnassignedEmployee();
 
 	const { list:UnassignedList = [] } = UnassignedData;
@@ -29,7 +33,7 @@ function Dashboard() {
 		data:LowWeightageEmployeeData = [],
 		loading:LoadingLowWeightageEmployee,
 		getEmployeesWithLowWeightage,
-	} = useGetEmployeesWithLowWeightage();
+	} = useGetEmployeesWithLowWeightage({ filters });
 
 	const { list:LowWeightageEmployeeList = [] } = LowWeightageEmployeeData;
 
@@ -37,7 +41,11 @@ function Dashboard() {
 		data: KrasAssignedData,
 		loading:LoadingKrasAssigned,
 		getkrasAssigned,
-	} = useGetkrasAssigned();
+	} = useGetkrasAssigned({ filters });
+
+	const [filtersFields, setFiltersFields] = useState();
+	const [selectAccordian, setSelectAccordian] = useState();
+	const [selectArrayAccordian, setSelectArrayAccordian] = useState([]);
 
 	const onClickConfiguration = () => {
 		router.push(REDIRECT_URL, REDIRECT_URL);
@@ -89,6 +97,9 @@ function Dashboard() {
 					<FiltersDisplay setFilters={setFilters} />
 
 					<div className={styles.table_display}>
+						{selectArrayUnassignedEmployee.length === DISPLAY_ADD_KRA_BUTTON
+							? <FilterFieldArray setFilters={setFiltersFields} />
+							: null}
 						<h4>All Unassigned KRA Employee List : </h4>
 						<TableDisplay
 							data={UnassignedList}
@@ -112,10 +123,21 @@ function Dashboard() {
 
 					<div>
 						<h4>All KRA List : </h4>
-						{KrasAssignedData?.list?.map((item) => (
-							<AccordianDisplay data={item} loading={LoadingKrasAssigned} key={item?.id} />
-						)) }
+						{ !isEmpty(filters)
+							? KrasAssignedData?.list?.map((item) => (
+								<AccordianDisplay
+									key={item?.id}
+									data={item}
+									loading={LoadingKrasAssigned}
+									selectAccordian={selectAccordian}
+									setSelectAccordian={setSelectAccordian}
+									selectArrayAccordian={selectArrayAccordian}
+									setSelectArrayAccordian={setSelectArrayAccordian}
+								/>
+							))
+							: <div>Select/Apply Filters to Display List of KRAs</div> }
 					</div>
+
 				</div>
 
 				{showKRACalculationTable

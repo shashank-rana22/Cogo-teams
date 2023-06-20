@@ -12,12 +12,12 @@
 
     :global{
         .ui_select_container{
-            width: 140px;
+            width: 200px;
             margin-right: 10px;
         }
 
         .ui_multiselect_container{
-            width: 140px;
+            width: 200px;
             margin-right: 10px;
         }
     }

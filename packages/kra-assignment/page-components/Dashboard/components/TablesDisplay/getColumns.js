@@ -5,13 +5,13 @@ import EqualArray from '../../../config/EqualArray';
 
 // import styles from './styles.module.css';
 
-const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem }) => [
+const getColumns = ({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loading }) => [
 	{
 		id     : 'select_options',
 		Header : (
 			<div role="presentation">
 				<Checkbox
-					checked={EqualArray(selectArray, ARRAY_OF_IDS)}
+					checked={loading ? null : EqualArray(selectArray, ARRAY_OF_IDS)}
 					onChange={() => {
 						if (EqualArray(selectArray, ARRAY_OF_IDS)) {
 							setSelectArray([]);

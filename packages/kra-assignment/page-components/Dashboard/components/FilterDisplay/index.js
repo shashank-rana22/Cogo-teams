@@ -3,18 +3,24 @@ import React from 'react';
 
 import getElementController from '../../../../configs/getElementController';
 
-import controls from './controls';
+// import controls from './controls';
+import getControls from './getControls';
 import styles from './styles.module.css';
 import useFilterDisplay from './useFilterDisplay';
 
-function FiltersDisplay({ setFilters }) {
+function FilterFieldArray({ setFilters }) {
 	const {
 		showFilter,
 		control,
 		handleSubmit,
 		onSubmit,
 		onClickReset,
+		watch,
 	} = useFilterDisplay({ setFilters });
+
+	const WATCH_VALUES = watch();
+
+	const controls = getControls({ WATCH_VALUES });
 
 	return (
 		<form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
@@ -45,7 +51,7 @@ function FiltersDisplay({ setFilters }) {
 			</div>
 
 			<div className={styles.filter_container}>
-				{controls.map((item) => {
+				{controls?.map((item) => {
 					const { label, type, name } = item || {};
 					const Element = getElementController(type);
 
@@ -65,4 +71,4 @@ function FiltersDisplay({ setFilters }) {
 	);
 }
 
-export default FiltersDisplay;
+export default FilterFieldArray;

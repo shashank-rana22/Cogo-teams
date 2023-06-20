@@ -17,8 +17,8 @@ function TableDisplay({ data = {}, loading, ARRAY_OF_IDS = [], selectArray = [],
 		setSelectArray(updatedItems);
 	};
 	const columns = type === TABLE_USED_FOR
-		? getColumnsAccordian({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem })
-		: getColumns({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem });
+		? getColumnsAccordian({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loading })
+		: getColumns({ selectArray, setSelectArray, ARRAY_OF_IDS, removeItem, loading });
 
 	return (
 		<div className={type === TABLE_USED_FOR ? styles.accordian : styles.container}>

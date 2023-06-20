@@ -1,11 +1,9 @@
 import { Toast } from '@cogoport/components';
 import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
-import { useCallback, useEffect, useState } from 'react';
+import { useCallback, useEffect } from 'react';
 
-function useGetkrasAssigned() {
-	const [filters, setFilters] = useState();
-
+function useGetkrasAssigned({ filters }) {
 	const [{ data, loading }, trigger] = useRequest(
 		{
 			url    : '/get_kras_assigned',
@@ -15,10 +13,12 @@ function useGetkrasAssigned() {
 	);
 
 	const getkrasAssigned = useCallback(async () => {
+		const { employee_ids = [], ...rest } = filters || [];
 		try {
 			await trigger({
 				params: {
-					filters,
+					employee_ids,
+					...rest,
 				},
 			});
 		} catch (error) {
@@ -37,8 +37,6 @@ function useGetkrasAssigned() {
 	return {
 		data,
 		loading,
-		filters,
-		setFilters,
 		getkrasAssigned,
 	};
 }
