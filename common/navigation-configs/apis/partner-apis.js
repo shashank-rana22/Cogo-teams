@@ -925,12 +925,12 @@ const partner = {
 			service_name : 'partner',
 		},
 		{
-			api          : 'transfer_accounts',
+			api          : 'transfer_partner_user_accounts',
 			access_type  : 'private',
 			service_name : 'partner',
 		},
 		{
-			api          : 'transfer_shipments',
+			api          : 'transfer_partner_user_shipments',
 			access_type  : 'private',
 			service_name : 'partner',
 		},
