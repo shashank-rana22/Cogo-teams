@@ -22,7 +22,7 @@ function FieldArray({
 		name,
 	});
 
-	const childEmptyValues = { unit: fields?.[0]?.unit };
+	const childEmptyValues = {};
 
 	useEffect(() => {
 		if (fields.length === 0) {
