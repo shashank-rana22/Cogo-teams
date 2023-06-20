@@ -234,6 +234,12 @@ const business_finance = {
 			feature      : 'coe_finance',
 			service_name : 'shipment',
 		},
+		{
+			api          : 'create_shipment_document',
+			access_type  : 'private',
+			feature      : 'coe_finance',
+			service_name : 'shipment',
+		},
 	],
 
 };

@@ -11,11 +11,12 @@ function useUpdateShipmentDocuments({
 		method : 'POST',
 	}, { manual: true });
 
-	const updateDocument = async (val) => {
+	const updateDocument = async (val, callback = () => {}) => {
 		try {
 			await trigger({ data: val });
 			Toast.success(successMessage);
 			refetch();
+			callback();
 		} catch (err) {
 			Toast.error(getApiStringError({ messages: err?.message }));
 		}

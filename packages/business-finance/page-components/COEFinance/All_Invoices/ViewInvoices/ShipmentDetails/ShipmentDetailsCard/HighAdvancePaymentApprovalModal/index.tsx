@@ -3,10 +3,10 @@ import { UploadController, useForm } from '@cogoport/forms';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
 import { IcMDownload } from '@cogoport/icons-react';
-import { useRouter } from '@cogoport/next';
 import { isEmpty } from '@cogoport/utils';
 import React, { useState } from 'react';
 
+import useCreateShipmentDocument from '../../../../../hook/useCreateShipmentDocument';
 import { useGetAdvancedPaymentHistory } from '../../../../../hook/useGetAdvancedPaymentHistory';
 import useUpdateShipmentDocuments from '../../../../../hook/useUpdateShipmentDocument';
 
@@ -14,8 +14,9 @@ import styles from './styles.module.css';
 
 const ACCEPTED = 'accepted';
 const REJECTED = 'rejected';
+const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
 
-function HighAmountRequestModal({ invoiceData, modalData }) {
+function HighAmountRequestModal({ invoiceData, modalData, shipmentData = {}, refetchShipmentDocument = () => {} }) {
 	const {
 
 		invoiceNumber,
@@ -28,20 +29,20 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 		advancedPaymentObj,
 	} = invoiceData || {};
 
-	const [firstItem] = (advancedPaymentObj || []);
-	const { document_url: advancePaymentProof } = firstItem || {};
+	const [currShipmentData = {}] = shipmentData?.list || [];
+	const { document_url: advancePaymentProof } = advancedPaymentObj || {};
 
 	const { show, hide } = modalData;
 
 	const [remark, setRemark] = useState('');
 
-	const { query } = useRouter();
-
 	const { loading, data } = useGetAdvancedPaymentHistory({ sellerOrganizationId });
 
 	const { taskUpdateLoading, updateDocument } = useUpdateShipmentDocuments({});
 
-	const paymentHistory = data;
+	const { docLoading, apiTrigger } = useCreateShipmentDocument({});
+
+	const paymentHistory = data?.filter((item) => item?.billNumber !== invoiceNumber);
 
 	const { control, handleSubmit } = useForm();
 
@@ -56,7 +57,32 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 			return;
 		}
 
-		updateDocument({ id: firstItem?.id, remark: [ACCEPTED, remark], performed_by_org_id: query?.orgId });
+		if (!advancePaymentProof) {
+			const { id, importer_exporter: importerExporter = {} } = currShipmentData || {};
+			const payload = {
+				shipment_id        : id,
+				uploaded_by_org_id : importerExporter?.id,
+				document_type      : HIGH_ADVANCE_PAYMENT_PROOF,
+				documents          : [{
+					data: {
+						invoice_number : invoiceNumber,
+						url            : val?.upload?.finalUrl,
+					},
+					remarks      : [ACCEPTED, remark],
+					file_name    : val?.upload?.fileName,
+					document_url : val?.upload?.finalUrl,
+				}],
+			};
+
+			apiTrigger(payload, () => { hide(); refetchShipmentDocument(); });
+			return;
+		}
+
+		updateDocument({
+			id                  : advancedPaymentObj?.id,
+			remarks             : [ACCEPTED, remark],
+			performed_by_org_id : currShipmentData?.importer_exporter?.id,
+		}, () => { refetchShipmentDocument(); hide(); });
 	};
 
 	const handleReject = () => {
@@ -64,7 +90,11 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 			Toast.error('Remark is required');
 			return;
 		}
-		updateDocument({ id: firstItem?.id, remark: [REJECTED, remark], performed_by_org_id: query?.orgId });
+		updateDocument({
+			id                  : advancedPaymentObj?.id,
+			remarks             : [REJECTED, remark],
+			performed_by_org_id : currShipmentData?.importer_exporter?.id,
+		}, () => { refetchShipmentDocument(); hide(); });
 	};
 
 	return (
@@ -132,7 +162,7 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 					</div>
 				</div>
 
-				{!loading && !isEmpty(data) ? (
+				{!loading && !isEmpty(paymentHistory) ? (
 					<>
 						<div className={styles.payment_history_heading}>
 							Supplier Advance Payment History
@@ -176,7 +206,7 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 
 				{advancePaymentProof
 				&& (
-					<div>
+					<div style={{ display: 'flex', alignItems: 'center' }}>
 						<div className={styles.user_input_row}>
 							Advance Payment Proof
 							<ButtonIcon
@@ -188,7 +218,7 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 						</div>
 
 						<div className={styles.form_item_container}>
-							<label>Remark</label>
+							<label>Remark*</label>
 							<Input
 								value={remark}
 								onChange={(e) => {
@@ -204,7 +234,7 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 					<form>
 						<div style={{ display: 'flex' }}>
 							<div className={styles.location}>
-								<label>Upload Document</label>
+								<label>Upload Document*</label>
 								<UploadController
 									size="sm"
 									control={control}
@@ -214,7 +244,7 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 							</div>
 
 							<div className={styles.form_item_container}>
-								<label>Remark</label>
+								<label>Remark*</label>
 								<Input
 									value={remark}
 									onChange={(e) => {
@@ -227,18 +257,20 @@ function HighAmountRequestModal({ invoiceData, modalData }) {
 				)}
 
 				<div className={styles.button_wrap}>
-					<Button
-						className="secondary md"
-						style={{ marginRight: '10px' }}
-						disabled={taskUpdateLoading}
-						onClick={handleReject}
-					>
-						Reject
-					</Button>
+					{advancePaymentProof ? (
+						<Button
+							className="secondary md"
+							style={{ marginRight: '10px' }}
+							disabled={taskUpdateLoading || docLoading}
+							onClick={handleReject}
+						>
+							Reject
+						</Button>
+					) : null}
 					<Button
 						className="primary md"
-						disabled={taskUpdateLoading}
-						onClick={handleSubmit(handleApprove)}
+						disabled={taskUpdateLoading || docLoading}
+						onClick={advancePaymentProof ? handleApprove : handleSubmit(handleApprove)}
 					>
 						Aprrove
 					</Button>

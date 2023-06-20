@@ -6,9 +6,9 @@ import {
 	Modal,
 	Textarea,
 	Checkbox,
+	ButtonIcon,
 } from '@cogoport/components';
-// import { getFormattedPrice } from '@cogoport/forms';
-import { IcCFtick, IcMCrossInCircle, IcMInfo } from '@cogoport/icons-react';
+import { IcCFtick, IcMCrossInCircle, IcMInfo, IcMDownload } from '@cogoport/icons-react';
 import { format, startCase } from '@cogoport/utils';
 import React, { useState } from 'react';
 
@@ -34,6 +34,8 @@ interface ShipmentDetailsCardInterface {
 	setLineItem: React.Dispatch<React.SetStateAction<boolean>>;
 	invoiceStatus: string;
 }
+
+const HIGH_ADVANCE_PAYMENT_PROOF = 'high_advance_payment_proof';
 
 function ShipmentDetailsCard({
 	data,
@@ -88,9 +90,10 @@ function ShipmentDetailsCard({
 		outstandingDocument = '',
 		paymentType = '',
 		isIncidental = '',
-		// advancedAmountCurrency = '',
 		serialId = '',
 		advancedAmount = '0',
+		advancedAmountCurrency = '',
+
 	} = billAdditionalObject || {};
 
 	const [DetailsCard, setDetailsCard] = useState([
@@ -133,10 +136,10 @@ function ShipmentDetailsCard({
 
 	const shipmentId = dataList?.id || '';
 
-	const { data : shipmentDocData } = useShipmentDocument(shipmentId);
+	const { data : shipmentDocData, refetchShipmentDocument } = useShipmentDocument(shipmentId);
 
-	const advancedPaymentObj = shipmentDocData?.list
-		?.filter((item) => item?.document_type === 'high_advance_payment_proof');
+	const [advancedPaymentObj = {}] = (shipmentDocData?.list
+		?.filter((item) => item?.document_type === HIGH_ADVANCE_PAYMENT_PROOF) || []);
 
 	const handleClickUndo = (id: number) => {
 		const undoApprovedData = showValue.filter((item: any) => item !== id);
@@ -188,6 +191,7 @@ function ShipmentDetailsCard({
 		<div>
 			{!!showHighAdvanceModal && (
 				<HighAmountRequestModal
+					shipmentData={shipmentData}
 					invoiceData={{
 						invoiceNumber       : billNumber,
 						serialNumber        : serialId,
@@ -199,6 +203,7 @@ function ShipmentDetailsCard({
 						sellerOrganizationId,
 					}}
 					modalData={{ show: showHighAdvanceModal, hide: () => setShowHighAdvancedModal(false) }}
+					refetchShipmentDocument={refetchShipmentDocument}
 				/>
 			)}
 
@@ -756,7 +761,7 @@ function ShipmentDetailsCard({
 											&& billType === 'BILL' && 		isIncidental
 											&& (
 												<div className={styles.margin_bottom}>
-													Is Incidental-
+													Is Incidental -
 													{' '}
 													<span>{startCase(isIncidental)}</span>
 												</div>
@@ -765,7 +770,7 @@ function ShipmentDetailsCard({
 											&& billType === 'BILL' && 	paymentType
 											&& (
 												<div className={styles.margin_bottom}>
-													Payment Type-
+													Payment Type -
 													{' '}
 													<span>{startCase(paymentType)}</span>
 												</div>
@@ -773,8 +778,11 @@ function ShipmentDetailsCard({
 											{shipmentType === 'ftl_freight' && (
 												<div className={styles.document}>
 													Advance amount -
+													{' '}
 													{((+advancedAmount / +grandTotal) * 100).toFixed(2)}
 													%
+													{' '}
+													{advancedAmountCurrency}
 													{' '}
 													(
 													{advancedAmount}
@@ -782,15 +790,26 @@ function ShipmentDetailsCard({
 													{grandTotal}
 													)
 
-													<Button
-														className={styles.button}
-														onClick={() => {
-															setShowHighAdvancedModal(true);
-														}}
-													>
-														View
+													{!advancedPaymentObj?.remarks?.includes('accepted') ? (
+														<Button
+															className={styles.button}
+															onClick={() => {
+																setShowHighAdvancedModal(true);
+															}}
+														>
+															View
 
-													</Button>
+														</Button>
+													) : (
+														<ButtonIcon
+															size="sm"
+															icon={<IcMDownload />}
+															onClick={() => {
+																viewDocument(advancedPaymentObj?.document_url);
+															}}
+															themeType="primary"
+														/>
+													)}
 
 												</div>
 											)}
@@ -800,15 +819,14 @@ function ShipmentDetailsCard({
 												<div className={styles.margin_bottom}>
 													Outstanding Proforma Approval-
 													{' '}
-													<Button
-														className={styles.button}
+													<ButtonIcon
+														size="sm"
+														icon={<IcMDownload />}
 														onClick={() => {
 															viewDocument(outstandingDocument);
 														}}
-													>
-														View
-
-													</Button>
+														themeType="primary"
+													/>
 												</div>
 											)}
 											{shipmentType === 'ftl_freight'
