@@ -18,6 +18,7 @@ const controls = (primary_service, services) => [
 		name     : 'airline',
 		type     : 'async-select',
 		asyncKey : 'list_operators',
+		size     : 'md',
 		params   : {
 			filters: { operator_type: 'airline', status: 'active' },
 		},
@@ -35,16 +36,17 @@ const controls = (primary_service, services) => [
 		name         : 'no_of_stops1',
 		type         : 'select',
 		span         : 4,
-		value        : 0,
+		size         : 'md',
 		showOptional : false,
 		options      : [
-			{ label: 0, value: 0 },
+			{ label: '0', value: '0' },
 			{ label: 1, value: 1 },
 			{ label: 2, value: 2 },
 			{ label: 3, value: 3 },
 			{ label: 4, value: 4 },
 			{ label: 5, value: 5 },
 		],
+		value: '0',
 	},
 	{
 		label : 'Final Flight Departure Date',
@@ -80,6 +82,7 @@ const controls = (primary_service, services) => [
 		placeholder : 'Input Flight Number',
 		type        : 'text',
 		span        : 4,
+		size        : 'md',
 		rules       : { required: 'Flight Number is Required' },
 	},
 	{

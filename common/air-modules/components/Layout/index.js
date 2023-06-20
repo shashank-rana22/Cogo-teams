@@ -1,5 +1,5 @@
 import { cl } from '@cogoport/components';
-import React, { useMemo } from 'react';
+import React from 'react';
 
 import EditServiceCharges from '../EditServiceCharges';
 
@@ -8,7 +8,6 @@ import Item from './Item';
 import styles from './styles.module.css';
 
 const TOTAL_SPAN = 12;
-const ZERO_SPAN = 0;
 
 function Layout({
 	control = {}, fields = [], showElements = {}, errors, customValues = {}, formValues = {}, shipment_id = '',
@@ -20,23 +19,14 @@ function Layout({
 	(fields || []).forEach((field) => {
 		const { [field?.name]: showItem = true } = showElements;
 		if (showItem) {
-			span += field?.span || TOTAL_SPAN;
-			if (span === TOTAL_SPAN) {
-				span = ZERO_SPAN;
-
-				ROW_WISE_FIELDS.push(field);
-				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
-
-				ROW_WISE_FIELDS = [];
-			} else if (span > TOTAL_SPAN) {
-				span = ZERO_SPAN;
-
+			if ((span + field.span) > TOTAL_SPAN) {
 				TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 				ROW_WISE_FIELDS = [];
-
 				ROW_WISE_FIELDS.push(field);
+				span = field.span;
 			} else {
 				ROW_WISE_FIELDS.push(field);
+				span += field.span;
 			}
 		}
 	});
@@ -45,16 +35,11 @@ function Layout({
 		TOTAL_FIELDS.push(ROW_WISE_FIELDS);
 	}
 
-	const keysForFields = useMemo(
-		() => Array(TOTAL_FIELDS.length).fill(null).map(() => Math.random()),
-		[TOTAL_FIELDS.length],
-	);
-
 	return (
 		<div className={styles.layout}>
-			{TOTAL_FIELDS.map((rowFields, i) => (
-				<div className={cl`${styles.row} form_layout_row`} key={keysForFields[i]}>
-					{rowFields.map((field) => {
+			{Object.keys(TOTAL_FIELDS).map((rowFields) => (
+				<div className={cl`${styles.row} form_layout_row`} key={rowFields}>
+					{TOTAL_FIELDS[rowFields].map((field) => {
 						const { type, heading = '' } = field || {};
 
 						if (type === 'fieldArray') {

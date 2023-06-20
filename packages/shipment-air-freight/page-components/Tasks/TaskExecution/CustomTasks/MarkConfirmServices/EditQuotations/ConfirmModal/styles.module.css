@@ -43,8 +43,8 @@
 
 .description {
 	display: flex;
-	justify-content: space-between;
-	width: 40%;
+	justify-content: flex-start;
+	width: 70%;
 	font-size: 12px;
 }
 
@@ -64,11 +64,24 @@
 
 .controller {
 	margin-top: 8px;
-	margin-left: 42px;
+
+	:global {
+	.ui_select_display_container{
+		border: none;
+	}
+	.ui_select_disableicon{
+		display: none;
+	}
+	.ui_select_toggle_button{
+		padding: 4px 0px; 
+	}
+}
 }
 
 .label {
-	margin-top: 8px;
+	margin: auto 0;
+    width: 40%;
+	font-size:16px;
 	font-weight: 500;
 }
 

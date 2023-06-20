@@ -1,7 +1,9 @@
-import { Tabs, TabPanel, Toggle } from '@cogoport/components';
+import { Tabs, TabPanel, Toggle, Button } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
+import { IcMArrowBack } from '@cogoport/icons-react';
 import { dynamic } from '@cogoport/next';
 import { ShipmentChat } from '@cogoport/shipment-chat';
+import { isEmpty } from '@cogoport/utils';
 import { useRouter } from 'next/router';
 import { useContext, useState, useCallback } from 'react';
 
@@ -15,13 +17,17 @@ import styles from './styles.module.css';
 const TAB_MAPPING = {
 	overview : dynamic(() => import('../Overview'), { ssr: false }),
 	tasks    : dynamic(() => import('../Tasks'), { ssr: false }),
-	// documents : dynamic(() => import('../Documents'), { ssr: false }),
 	purchase : dynamic(() => import('@cogoport/purchase-invoicing/page-components'), { ssr: false }),
 	emails   : dynamic(() => import('@cogoport/shipment-mails/page-components'), { ssr: false }),
 };
 
+const UNAUTHORIZED_STATUS_CODE = 403;
+
 function DefaultView() {
-	const { shipment_data = {}, stakeholderConfig = {}, servicesList = [] } = useContext(ShipmentDetailContext) || {};
+	const {
+		shipment_data = {}, stakeholderConfig = {},
+		servicesList = [], getShipmentStatusCode,
+	} = useContext(ShipmentDetailContext) || {};
 
 	const { features = [], default_tab = 'tasks' } = stakeholderConfig || {};
 	const [activeTab, setActiveTab] = useState(default_tab);
@@ -59,6 +65,26 @@ function DefaultView() {
 			servicesData : servicesList,
 		},
 	};
+
+	if (isEmpty(shipment_data) && ![UNAUTHORIZED_STATUS_CODE, undefined].includes(getShipmentStatusCode)) {
+		return (
+			<div className={styles.shipment_not_found}>
+				<h2 className={styles.error_heading}>Something Went Wrong!</h2>
+
+				<div className={styles.error_subheading}>We are looking into it.</div>
+
+				<Button
+					onClick={() => router.push(`${window.location.origin}
+					/${router?.query?.partner_id}/shipment-management`)}
+					className={styles.refresh}
+				>
+					<IcMArrowBack />
+					&nbsp;
+					Back to Bookings
+				</Button>
+			</div>
+		);
+	}
 
 	return (
 		<div>
