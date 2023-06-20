@@ -7,10 +7,9 @@ const INCREMENT_BY_ONE = 1;
 const HASH = {};
 
 const getInitialOtpValues = (otpLength) => {
-	for (let i = 0; i < otpLength; i += INCREMENT_BY_ONE) {
-		HASH[`otp-${i + INCREMENT_BY_ONE}`] = '';
-	}
-
+	[...Array(otpLength)].forEach((e, index) => {
+		HASH[`otp-${index + INCREMENT_BY_ONE}`] = '';
+	});
 	return HASH;
 };
 
