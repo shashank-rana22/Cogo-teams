@@ -21,7 +21,6 @@ function AccordianDisplay({
 	const { kra_name, employee_list } = data;
 	const ARRAY_OF_EMPLOYEE_IDS = employee_list?.map((obj) => obj.id);
 
-	// console.log('selectArrayAccordian', data);
 	if (isEmpty(data) && !loading) {
 		return (
 			<div style={{ paddingTop: 6, paddingLeft: 6 }}>
@@ -29,6 +28,7 @@ function AccordianDisplay({
 			</div>
 		);
 	}
+
 	const Clicked = () => {
 		if (selectAccordian) { setSelectAccordian(); } else { setSelectAccordian(data.kra_details); }
 		setSelectArrayAccordian();

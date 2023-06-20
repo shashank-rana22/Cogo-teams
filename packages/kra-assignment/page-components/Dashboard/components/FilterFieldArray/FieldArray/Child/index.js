@@ -1,12 +1,14 @@
 import { IcMDelete } from '@cogoport/icons-react';
 
+import getControls from '../../controls';
 import { getFieldController } from '../getFieldController';
 
 import styles from './styles.module.css';
 
+const REMOVE_CHILD_INDEX = 1;
+
 function Child(props) {
 	const {
-		controls,
 		control,
 		index,
 		name,
@@ -15,9 +17,12 @@ function Child(props) {
 		noDeleteButtonTill = 0,
 		disabled = false,
 		error = {},
+		watch = () => {},
 	} = props;
 
-	console.log('index', index);
+	const WATCH_VALUES = watch();
+	const controlItems = getControls(WATCH_VALUES?.single_item[index]);
+	const { controls } = controlItems;
 
 	return (
 		<div className={styles.content}>
@@ -48,7 +53,7 @@ function Child(props) {
 			{showDeleteButton && index >= noDeleteButtonTill && !disabled ? (
 				<IcMDelete
 					className={`form-fieldArray-${name}-remove`}
-					onClick={() => remove(index, 1)}
+					onClick={() => remove(index, REMOVE_CHILD_INDEX)}
 					style={{
 						height    : '20px',
 						width     : '20px',

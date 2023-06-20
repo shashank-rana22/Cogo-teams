@@ -1,4 +1,4 @@
-const getControls = ({ WATCH_VALUES = '' }) => {
+const getControls = (WATCH_VALUES = '') => {
 	const controlItems = {
 		name     : 'single_item',
 		type     : 'fieldArray',

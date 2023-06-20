@@ -41,11 +41,13 @@ function Dashboard() {
 		data: KrasAssignedData,
 		loading:LoadingKrasAssigned,
 		getkrasAssigned,
+		selectAccordian,
+		setSelectAccordian,
+		selectArrayAccordian,
+		setSelectArrayAccordian,
 	} = useGetkrasAssigned({ filters });
 
 	const [filtersFields, setFiltersFields] = useState();
-	const [selectAccordian, setSelectAccordian] = useState();
-	const [selectArrayAccordian, setSelectArrayAccordian] = useState([]);
 
 	const onClickConfiguration = () => {
 		router.push(REDIRECT_URL, REDIRECT_URL);

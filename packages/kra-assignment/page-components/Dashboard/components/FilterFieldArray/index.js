@@ -14,12 +14,8 @@ function FiltersDisplay({ setFilters }) {
 	const controlItems = getControls(WATCH_VALUES);
 	const { controls } = controlItems;
 
-	console.log(WATCH_VALUES);
-
 	return (
 		<form className={styles.container} onSubmit={handleSubmit(onSubmit)}>
-			<hr className={styles.dash} />
-
 			<div className={styles.button_container}>
 				<Button
 					type="button"
@@ -43,14 +39,11 @@ function FiltersDisplay({ setFilters }) {
 					watch={watch}
 					error={errors}
 					controls={controls}
-          // showElements
 					buttonText="Add More KRA"
 					showButtons
 					disabled={false}
 				/>
 			</section>
-
-			<hr className={styles.dash} />
 		</form>
 	);
 }

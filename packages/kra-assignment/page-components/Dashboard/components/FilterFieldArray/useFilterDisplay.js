@@ -9,7 +9,6 @@ const useFilterDisplay = ({ setFilters }) => {
 	const { control, handleSubmit, reset, watch, formState: { errors } } = useForm();
 
 	const onSubmit = (values) => {
-		console.log(values);
 		let filterApplied = false;
 
 		Object.keys(values).forEach((key) => {
