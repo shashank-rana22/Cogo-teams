@@ -50,7 +50,7 @@ const useHistorySettlemet = () => {
 		sortBy      : '',
 		sortType    : '',
 	});
-	const [apiData, setApiData] = useState<DataInterface>({});
+	const [apiData, setApiData] = useState<DataInterface>();
 
 	const { query: search = '', debounceQuery } = useDebounceQuery();
 
