@@ -111,7 +111,7 @@ function RenderForeignObjectNode({
 						/>
 						{' '}
 						<div className={styles.cogopoints_count}>
-							{userCogopoints || GLOBAL_CONSTANTS.cogopoint_default_value}
+							{userCogopoints || GLOBAL_CONSTANTS.others.cogopoint_default_value}
 						</div>
 					</div>
 				</div>

@@ -108,8 +108,8 @@ function TransactionalList({ list }) {
 function ComponentMapping({ transactionsLoading, emptyCheck, list }) {
 	if (transactionsLoading) {
 		return (
-			[...Array(TRANSACTION_LOADING_COUNT)].map((itm) => (
-				<LoadingState key={itm} />
+			[...Array(TRANSACTION_LOADING_COUNT).keys()].map((key) => (
+				<LoadingState key={key} />
 			))
 		);
 	}

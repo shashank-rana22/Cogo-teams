@@ -52,9 +52,12 @@ function BusinessRewards({ businessFilterType = {}, setBusinessFilterType = () =
 					themeType="secondary-vertical"
 					onChange={(val) => setBusinessFilterType((prev) => ({ ...prev, rewardType: val }))}
 				>
-					{BUSINESS_REWARDS_OPTIONS.map(({ label, name }) => (
-						<TabPanel name={name} title={label} badge={formatCount[name]} key={name} />
-					))}
+					{BUSINESS_REWARDS_OPTIONS.map((item) => {
+						const { label, name } = item || {};
+						return (
+							<TabPanel name={name} title={label} badge={formatCount[name]} key={name} />
+						);
+					})}
 
 				</Tabs>
 				{businessFilterType.rewardType && (

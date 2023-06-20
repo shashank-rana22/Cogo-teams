@@ -230,7 +230,9 @@ const GLOBAL_CONSTANTS = {
 	languages                    : LANGUAGE_OPTIONS,
 	currency_conversion_constant : 0.04,
 	others                       : {
-		old_shipment_serial_id: 120347,
+		old_shipment_serial_id  : 120347,
+		cogopoint_default_value : 0,
+
 	},
 	shipment_types: [
 		{ value: 'fcl_freight', label: 'FCL' },
@@ -245,7 +247,6 @@ const GLOBAL_CONSTANTS = {
 		{ value: 'air_customs', label: 'AIR Customs' },
 		{ value: 'fcl_freight_local', label: 'FCL Freight Local' },
 	],
-	cogopoint_default_value: 0,
 };
 
 export default GLOBAL_CONSTANTS;
