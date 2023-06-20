@@ -8,7 +8,7 @@ import getControls from './getControls';
 import styles from './styles.module.css';
 import useFilterDisplay from './useFilterDisplay';
 
-function FilterFieldArray({ setFilters }) {
+function FilterFieldArray({ setFilters, filters, check }) {
 	const {
 		showFilter,
 		control,

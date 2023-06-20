@@ -17,8 +17,10 @@ function useGetUnassignedEmployee() {
 		try {
 			await trigger({
 				params: {
-					employee_ids,
-					...rest,
+					filters: {
+						employee_ids,
+						...rest,
+					},
 				},
 			});
 		} catch (error) {
