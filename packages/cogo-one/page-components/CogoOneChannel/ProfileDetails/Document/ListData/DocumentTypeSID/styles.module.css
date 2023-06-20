@@ -1,47 +1,47 @@
 .main_container {
-    margin: 10px;
+	margin: 10px;
 
-    :global {
-        .ui_select_display_container {
-            height: 35px !important;
-        }
+	:global {
+		.ui_select_display_container {
+			height: 35px !important;
+		}
 
-        .ui_select_options_container {
-            border: solid 1px #f9f9f9;
-        }
-    }
+		.ui_select_options_container {
+			border: solid 1px #f9f9f9;
+		}
+	}
 }
 
 .title {
-    display: flex;
-    font-size: 10px;
-    font-weight: 500;
-    margin: 5px 13px;
-    justify-content: space-between;
-    align-items: center;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	margin: 5px 13px;
+	font-size: 10px;
+	font-weight: 500;
 }
 
 .cross {
-    cursor: pointer;
-    width: 10px;
-    height: 10px;
+	width: 10px;
+	height: 10px;
+	cursor: pointer;
 }
 
 .error_text {
-    color: #ee3000;
-    font-size: 12px;
+	font-size: 12px;
+	color: #ee3000;
 }
 
 .styled_element {
-    margin-bottom: 10px;
-    margin-left: 13px;
+	margin-bottom: 10px;
+	margin-left: 13px;
 }
 
 .label {
-    font-size: 14px;
+	font-size: 14px;
 }
 
 .button_styles {
-    display: flex;
-    justify-content: flex-end;
+	display: flex;
+	justify-content: flex-end;
 }

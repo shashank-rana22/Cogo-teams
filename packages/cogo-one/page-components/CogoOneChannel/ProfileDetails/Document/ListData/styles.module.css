@@ -49,15 +49,15 @@
 	:global {
 		.ui_button_container {
 			height: 20px;
-			font-size: 10px;
 			padding: 0;
-			background: #FDEBE9;
-			color: #BF291E
+			font-size: 10px;
+			color: #bf291e;
+			background-color: #fdebe9;
 		}
 
 		.ui_button_container:hover {
-			background: #FDEBE9;
-			color: #BF291E
+			color: #bf291e;
+			background-color: #fdebe9;
 		}
 	}
 }
