@@ -32,6 +32,7 @@ function Rates({ groupedShowServicesData, serviceData, shipmentData, priceData, 
 		sellRateDetails,
 		rateOptions,
 		setShowDetailPage,
+		shipmentData,
 	});
 	const check = (items) => {
 		const ZERO = 0;

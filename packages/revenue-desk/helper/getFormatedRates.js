@@ -3,7 +3,6 @@ const getFormatedRates = (type, data, singleServiceData) => {
 	const container_count = singleServiceData?.containers_count || 1;
 	if (type === 'present' || type === 'current') {
 		(data || []).forEach((element) => {
-			const { completed_shipments = 0, cancelled_shipments = 0 } = element;
 			const row = {};
 			const rowData = {};
 			row.id = element?.id;
@@ -24,9 +23,10 @@ const getFormatedRates = (type, data, singleServiceData) => {
 			rowData.service_provider = element?.service_provider;
 			rowData.via_route = element?.destination_main_port?.name;
 			rowData.allocation_ratio = undefined;
-			rowData.fulfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
-				? Number(completed_shipments)
-			/ (Number(completed_shipments) + Number(cancelled_shipments)) : 0;
+			rowData.fulfillment_ratio = 0;
+			// rowData.fulfillment_ratio = element?.fulfillment_ratio_20 || 0;
+			rowData.fulfillment_ratio_7 = element?.fulfillment_ratio_70;
+			rowData.fulfillment_ratio_15 = element?.fulfillment_ratio_150;
 			rowData.remarks = element?.remarks;
 			rowData.shipment_id = element?.shipment_id;
 			rowData.preferred_shipping_line_id = element?.shipping_line_id;

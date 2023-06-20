@@ -150,8 +150,21 @@ function Card({
 							<div className={styles.text}>
 								Fulfillment Ratio
 							</div>
-							<div className={styles.progress_bar_container}>
-								<ProgressBar progress={Number(data?.rowData?.fulfillment_ratio) * 100} uploadText=" " />
+							<div className={styles.text}>
+								2 Days :
+								{' '}
+								{(data?.rowData?.fulfillment_ratio_2 === 0 || data?.rowData?.fulfillment_ratio_2 > 0) ? data?.rowData?.fulfillment_ratio_2 : '--'}
+							</div>
+							<div className={styles.text}>
+								7 Days:
+								{' '}
+								{(data?.rowData?.fulfillment_ratio_7 === 0 || data?.rowData?.fulfillment_ratio_7 > 0) ? data?.rowData?.fulfillment_ratio_7 : '--' }
+							</div>
+							<div className={styles.text}>
+								15 Days:
+								{' '}
+								{(data?.rowData?.fulfillment_ratio_15 === 0 || data?.rowData?.fulfillment_ratio_15 > 0) ? data?.rowData?.fulfillment_ratio_15 : '--' }
+								{console.log(data, 'data')}
 							</div>
 						</div>
 					</div>

@@ -9,7 +9,6 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		return '';
 	};
 	(data || []).forEach((element) => {
-		const { completed_shipments = 0, cancelled_shipments = 0 } = element;
 		const row = {};
 		const rowData = {};
 		row.id = element?.id;
@@ -22,9 +21,10 @@ const getSystemFormatedRates = (data, singleServiceData) => {
 		rowData.active_booking = element?.ongoing_shipment;
 		rowData.allocation_ratio = undefined;
 		rowData.buy_price = Number(element?.total_price) / Number(container_count);
-		rowData.fulfillment_ratio = Number(completed_shipments) + Number(cancelled_shipments) !== 0
-			? Number(completed_shipments)
-			/ (Number(completed_shipments) + Number(cancelled_shipments)) : 0;
+		rowData.fulfillment_ratio = 0;
+		rowData.fulfillment_ratio_2 = element?.fulfillment_ratio_20 || 0;
+		rowData.fulfillment_ratio_7 = element?.fulfillment_ratio_70;
+		rowData.fulfillment_ratio_15 = element?.fulfillment_ratio_150;
 		rowData.total_buy_price = element?.total_price || 0;
 		rowData.total_buy_currency = element?.total_price_currency;
 		rowData.profit_percentage = element?.profit_percentage;
