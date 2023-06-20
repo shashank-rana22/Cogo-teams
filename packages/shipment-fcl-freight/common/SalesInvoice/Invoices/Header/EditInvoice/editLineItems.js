@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
 
@@ -9,13 +10,7 @@ const TRADE_MAPPING = {
 	import : 'Destination',
 	export : 'Origin',
 };
-const INITIAL_VALUE = 0;
-const LABELS = {};
-const CHARGECODES = {};
-const CUSTOM_VALUES = {};
-const FIELD_VALUE = {};
-const DEFAULT_VALUES = {};
-const PAYLOAD = [];
+const INITIAL_STATE_OF_FIELD_VALUE = 0;
 
 const useEditLineItems = ({
 	invoice = {},
@@ -42,11 +37,13 @@ const useEditLineItems = ({
 	};
 
 	const generateDefaultValues = ({ values }) => {
+		const DEFAULT_VALUES = {};
 		values.forEach((control) => {
 			if (control.type === 'edit_service_charges') {
 				DEFAULT_VALUES[control.name] = control.value.map((value) => {
+					const FIELD_VALUE = {};
 					control.controls.forEach((subControl) => {
-						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_VALUE;
+						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_STATE_OF_FIELD_VALUE;
 					});
 
 					return FIELD_VALUE;
@@ -118,20 +115,26 @@ const useEditLineItems = ({
 		const allFormValues = { ...formValues };
 		(Object.keys(formValues) || []).forEach((key) => {
 			if (key && formValues?.[key]) {
-				allFormValues[key] = (allFormValues[key] || []).map((value) => ({
-					...value,
-					tax      : selectedCodes[value.code]?.tax_percent || 'NA',
-					sac_code : selectedCodes[value.code]?.sac || 'NA',
-					total    : (value?.price_discounted || INITIAL_VALUE) * (value?.quantity || INITIAL_VALUE),
-				}));
+				allFormValues[key] = (allFormValues[key] || []).map((value) => {
+					const { price_discounted = 0, quantity = 0, code, ...rest } = value || {};
+					return {
+						...rest,
+						tax      : selectedCodes[code]?.tax_percent || 'NA',
+						sac_code : selectedCodes[code]?.sac || 'NA',
+						total    : price_discounted * quantity,
+					};
+				});
 			}
 		});
 
 		return allFormValues;
 	};
 
+	const CUSTOM_VALUES = {};
+	const LABELS = {};
+
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	Object.keys(controls?.[INITIAL_VALUE]).forEach((key) => {
+	Object.keys(controls?.[GLOBAL_CONSTANTS.zeroth_index]).forEach((key) => {
 		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
 			label      : LABELS[key],
@@ -141,10 +144,12 @@ const useEditLineItems = ({
 
 	const onCreate = async (values) => {
 		try {
+			const PAYLOAD = [];
 			Object.keys(values).forEach((key) => {
 				const currentService = services.find(
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
 				);
+				const CHARGECODES = {};
 				(allChargeCodes[currentService?.service_type] || []).forEach(
 					(chgCode) => {
 						CHARGECODES[chgCode.code] = chgCode;

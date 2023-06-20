@@ -1,5 +1,6 @@
 import { Toast } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { useRequest } from '@cogoport/request';
 import { useState, useCallback } from 'react';
 
@@ -9,13 +10,7 @@ const TRADE_MAPPING = {
 	import : 'Destination',
 	export : 'Origin',
 };
-const INITIAL_STATE = 0;
-const LABELS = {};
-const CHARGECODES = {};
-const CUSTOM_VALUES = {};
-const FIELD_VALUE = {};
-const DEFAULT_VALUES = {};
-const PAYLOAD = [];
+const INITIAL_STATE_OF_FIELD_VALUE = 0;
 
 const useEditLineItems = ({
 	invoice = {},
@@ -41,18 +36,18 @@ const useEditLineItems = ({
 	};
 
 	const generateDefaultValues = ({ values }) => {
+		const DEFAULT_VALUES = {};
 		values.forEach((control) => {
 			if (control.type === 'edit_service_charges') {
 				DEFAULT_VALUES[control.name] = control.value.map((value) => {
+					const FIELD_VALUE = {};
 					control.controls.forEach((subControl) => {
-						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_STATE;
+						FIELD_VALUE[subControl.name] = value[subControl.name] || INITIAL_STATE_OF_FIELD_VALUE;
 					});
-
 					return FIELD_VALUE;
 				});
 			}
 		});
-
 		return DEFAULT_VALUES;
 	};
 
@@ -107,7 +102,6 @@ const useEditLineItems = ({
 	}));
 
 	const defaultValues = generateDefaultValues({ values: controls });
-
 	const { handleSubmit, control, setValue, watch, formState: { errors = {} } } = useForm({ defaultValues });
 
 	const formValues = watch();
@@ -131,8 +125,11 @@ const useEditLineItems = ({
 		return allFormValues;
 	};
 
+	const CUSTOM_VALUES = {};
+	const LABELS = {};
+
 	const newFormValues = prepareFormValues(selectedCodes, formValues);
-	Object.keys(controls?.[INITIAL_STATE]).forEach((key) => {
+	Object.keys(controls?.[GLOBAL_CONSTANTS.zeroth_index]).forEach((key) => {
 		CUSTOM_VALUES[key] = {
 			formValues : newFormValues[key],
 			label      : LABELS[key],
@@ -142,10 +139,12 @@ const useEditLineItems = ({
 
 	const onCreate = async (values) => {
 		try {
+			const PAYLOAD = [];
 			Object.keys(values).forEach((key) => {
 				const currentService = services.find(
 					(serviceItem, index) => `${serviceItem.service_id}:${index}` === key,
 				);
+				const CHARGECODES = {};
 				(allChargeCodes[currentService?.service_type] || []).forEach(
 					(chgCode) => {
 						CHARGECODES[chgCode.code] = chgCode;

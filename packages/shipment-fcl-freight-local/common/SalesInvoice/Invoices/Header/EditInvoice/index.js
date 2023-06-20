@@ -42,7 +42,7 @@ function EditInvoice({
 				}
 			});
 		}
-	}, [newFormValues, watch, setValue, formValues]);
+	}, [newFormValues, setValue, formValues]);
 
 	return (
 		<Modal
