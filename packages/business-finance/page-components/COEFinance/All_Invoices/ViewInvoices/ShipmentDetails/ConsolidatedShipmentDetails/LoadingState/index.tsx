@@ -7,32 +7,14 @@ function LoadingState() {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.container}>
-				<div className={styles.flex_row}>
-					<div className={styles.percent}>
-						<Placeholder />
-						<Placeholder />
+				{[1, 2, 3, 4].map((e) => (
+					<div key={e} className={styles.flex_row}>
+						<div className={styles.percent}>
+							<Placeholder />
+							<Placeholder />
+						</div>
 					</div>
-				</div>
-
-				<div className={styles.flex_row}>
-					<div className={styles.percent}>
-						<Placeholder />
-						<Placeholder />
-					</div>
-				</div>
-				<div className={styles.flex_row}>
-					<div className={styles.percent}>
-						<Placeholder />
-						<Placeholder />
-					</div>
-				</div>
-
-				<div className={styles.flex_row}>
-					<div className={styles.percent}>
-						<Placeholder />
-						<Placeholder />
-					</div>
-				</div>
+				))}
 				<div className={styles.button}>
 					<Placeholder />
 				</div>

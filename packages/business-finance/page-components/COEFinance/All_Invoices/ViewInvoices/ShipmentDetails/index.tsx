@@ -12,6 +12,7 @@ import useGetVariance from '../../../hook/useGetVariance';
 import useGetWallet from '../../../hook/useGetWallet';
 import useListShipment from '../../../hook/useListShipment';
 
+import ConsolidatedShipmentDetail from './ConsolidatedShipmentDetails/index';
 import Details from './Details/index';
 import Documents from './Documents/index';
 // eslint-disable-next-line import/no-cycle
@@ -23,7 +24,6 @@ import ShipmentDetailsCard from './ShipmentDetailsCard/index';
 import styles from './styles.module.css';
 import TimeLineItemCheck from './TimelineItemCheck/index';
 import VarianceView from './VarianceView/index';
-import ConsolidatedShipmentDetail from './ConsolidatedShipmentDetails/index';
 
 interface BuyerDetailInterface {
 	entityCode?: string;
@@ -115,7 +115,6 @@ function ShipmentDetails({
 	const [showDocuments, setShowDocuments] = useState(false);
 	const [showVariance, setShowVariance] = useState(false);
 	const [itemCheck, setItemCheck] = useState(false);
-	const [showConsolidatedSID, setShowConsolidatedSID] = useState(false);
 	const collectionPartyId = data?.billAdditionalObject?.collectionPartyId;
 	const { job, consolidatedShipmentIds = [] } = data || {};
 	const { jobNumber } = job || {};
@@ -145,37 +144,7 @@ function ShipmentDetails({
 		}
 		return <div>NO DATA FOUND</div>;
 	};
-	const rest = { onClickOutside: () => { setShowConsolidatedSID(false); } };
 
-	const getConsolidatedSID = () => {
-		if (isEmpty(consolidatedShipmentIds)) {
-			return (
-				<div>
-					Not Available
-				</div>
-			);
-		}
-		return (
-			<div>
-				{consolidatedShipmentIds.map((item:string) => (
-					<div key={item} className={styles.sid_div}>
-						<div>
-							SID
-						</div>
-						<div>
-							-
-						</div>
-						<div>
-							{item}
-						</div>
-					</div>
-				))}
-			</div>
-		);
-	};
-	const handleConsolidatedSID = () => {
-		setShowConsolidatedSID(!showConsolidatedSID);
-	};
 	const jobTypeValue = jobType?.toLowerCase();
 	return (
 		<div className={styles.container}>
@@ -304,7 +273,7 @@ function ShipmentDetails({
 							title="Shipment Details"
 						>
 							<div className={styles.line} />
-							<ConsolidatedShipmentDetail consolidatedSids={consolidatedShipmentIds}/>
+							<ConsolidatedShipmentDetail consolidatedSids={consolidatedShipmentIds} />
 						</Accordion>
 					</div>
 				)}

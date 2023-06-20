@@ -3,8 +3,8 @@ import { isEmpty } from '@cogoport/utils';
 
 import useListConsolidatedShipments from '../../../../hook/useListConsolidatedShipments';
 
-import Card from './Card/index';
 import LoadingState from './LoadingState/index';
+import ShipmentCard from './ShipmentCard/index';
 import styles from './styles.module.css';
 
 export interface ConsolidatedSidsInterace {
@@ -15,6 +15,8 @@ export interface ItemDataProps {
 	id: string,
 	serial_id: string,
 }
+
+const CARD_ARRAY = [1, 2, 3, 4];
 
 function ShipmentIdView({ consolidatedSids }: ConsolidatedSidsInterace) {
 	const {
@@ -30,7 +32,7 @@ function ShipmentIdView({ consolidatedSids }: ConsolidatedSidsInterace) {
 		if (loading) {
 			return (
 				<div className={styles.loader}>
-					{[1, 2, 3, 4].map((val) => <LoadingState key={val} />)}
+					{CARD_ARRAY.map((val) => <LoadingState key={val} />)}
 				</div>
 			);
 		}
@@ -40,7 +42,7 @@ function ShipmentIdView({ consolidatedSids }: ConsolidatedSidsInterace) {
 			);
 		}
 		return list?.map((item) => (
-			<Card key={item?.serial_id} shipmentData={item} />
+			<ShipmentCard key={item?.serial_id} shipmentData={item} />
 		));
 	};
 
