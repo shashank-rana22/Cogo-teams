@@ -13,8 +13,8 @@ const getEditQuotationControls = ({ service_charge, shipment_data, handleChange 
 		name             : id,
 		service_name     : service_type,
 		shipment_id      : shipment_data?.id,
-		showAddButtons   : service_type !== 'subsidiary_service',
-		showDeleteButton : service_type !== 'subsidiary_service',
+		showAddButtons   : false,
+		showDeleteButton : false,
 		cargoDetails     : service_detail?.[GLOBAL_CONSTANTS.zeroth_index],
 		value            : [{
 			code     : '',
