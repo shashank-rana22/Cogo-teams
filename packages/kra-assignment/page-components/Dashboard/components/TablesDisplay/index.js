@@ -9,7 +9,14 @@ import styles from './styles.module.css';
 const TABLE_EMPTY_TEXT = 'No data to show';
 const TABLE_USED_FOR = 'AccordianData';
 
-function TableDisplay({ data = {}, loading, ARRAY_OF_IDS = [], selectArray = [], setSelectArray, type = '' }) {
+function TableDisplay({
+	data = {},
+	loading,
+	ARRAY_OF_IDS = [],
+	selectArray = [],
+	setSelectArray,
+	type = '',
+}) {
 	// console.log(':::::', type);
 
 	const removeItem = (valueToRemove) => {

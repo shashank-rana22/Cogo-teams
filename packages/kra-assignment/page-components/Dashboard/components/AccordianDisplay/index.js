@@ -32,8 +32,8 @@ function AccordianDisplay({
 	}
 
 	const Clicked = () => {
-		if (selectAccordian) { setSelectAccordian(); } else { setSelectAccordian(kra_details); }
 		setSelectArrayAccordian();
+		setSelectAccordian(kra_details);
 	};
 
 	return (
@@ -43,14 +43,13 @@ function AccordianDisplay({
 			role="button"
 			tabIndex={0}
 		>
-			<Accordion title={`Group ${index + INDEX_VALUE}`}>
+			<Accordion title={`Group ${index + INDEX_VALUE}`} key={index}>
 				<TableDisplay
 					data={employee_details}
 					loading={loading}
 					ARRAY_OF_IDS={ARRAY_OF_EMPLOYEE_IDS}
 					selectArray={selectArrayAccordian}
 					setSelectArray={setSelectArrayAccordian}
-					// type={TABLE_USED_FOR}
 				/>
 			</Accordion>
 		</div>
