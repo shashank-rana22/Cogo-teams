@@ -2,7 +2,9 @@
 /* eslint-disable max-len */
 /* eslint-disable no-nested-ternary */
 import useDebounceQuery from '@cogoport/forms/hooks/useDebounceQuery';
+import getEntityCode from '@cogoport/globalization/utils/getEntityCode';
 import { useRequestBf } from '@cogoport/request';
+import { useSelector } from '@cogoport/store';
 import { format } from '@cogoport/utils';
 import { useState, useEffect } from 'react';
 
@@ -16,7 +18,15 @@ interface Props {
 	jobNumber?:string
 }
 
+interface Profile {
+	profile?: { partner: { id: string } };
+}
+
 const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject, jobNumber }: Props) => {
+	const profile: Profile = useSelector((state) => state);
+
+	const entityCode = getEntityCode(profile?.profile?.partner?.id);
+
 	const getStatus = () => {
 		if (subActiveTabReject === 'finance_rejected') {
 			return 'FINANCE_REJECTED';
@@ -117,6 +127,7 @@ const useGetPurchaseViewList = ({ filters, setFilters, sort, subActiveTabReject,
 				isUrgent : tab === 'Urgency_tag' ? true : undefined,
 				...sort,
 				pageSize : 10,
+				entityCode,
 			},
 			authKey: 'get_purchase_bills_list',
 		},

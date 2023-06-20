@@ -1,6 +1,6 @@
 import { InputController, MultiselectController } from '@cogoport/forms';
 
-import getControls from '../../controls';
+import getControls from '../controls';
 
 import styles from './styles.module.css';
 
