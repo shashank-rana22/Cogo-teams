@@ -1,13 +1,11 @@
 import { Button } from '@cogoport/components';
 import { useForm } from '@cogoport/forms';
-import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import { Layout } from '@cogoport/ocean-modules';
 
 import styles from './styles.module.css';
 
 const SECOND_STEP = 2;
 const CUSTOM_VALUES = {};
-const DEAULT_SEVICE_LINE_ITEM_CURRENCY = GLOBAL_CONSTANTS.currency_code.INR;
 
 function Step3({ data, setStep, shipment_id }) {
 	const { finalControls, DEFAULT_VALUES, onSubmit = () => {} } = data || {};
@@ -25,8 +23,7 @@ function Step3({ data, setStep, shipment_id }) {
 					const { price = 0, quantity = 0 } = value;
 					return {
 						...value,
-						total    : price * quantity,
-						currency : DEAULT_SEVICE_LINE_ITEM_CURRENCY,
+						total: price * quantity,
 					};
 				});
 			}
