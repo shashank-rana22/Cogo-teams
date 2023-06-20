@@ -1,4 +1,4 @@
-import FCL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
+import FCL_LOCAL_UNITS from '@cogoport/ocean-modules/constants/FCL_UNITS';
 import { convertObjectMappingToArray } from '@cogoport/ocean-modules/utils/convertObjectMappingToArray';
 import { startCase, isEmpty } from '@cogoport/utils';
 
@@ -68,7 +68,7 @@ const rawControls = (
 			label   : 'Unit',
 			type    : 'select',
 			name    : 'unit',
-			options : convertObjectMappingToArray(FCL_UNITS),
+			options : convertObjectMappingToArray(FCL_LOCAL_UNITS),
 			span    : 2,
 		},
 		{

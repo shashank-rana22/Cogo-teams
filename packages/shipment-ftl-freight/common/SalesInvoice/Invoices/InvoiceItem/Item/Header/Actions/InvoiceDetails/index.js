@@ -10,8 +10,6 @@ import { useContext } from 'react';
 import ClickableDiv from '../../../../../../../ClickableDiv';
 import styles from '../styles.module.css';
 
-const IS_EMPTY = 0;
-
 function InvoiceDetails({
 	invoice = {},
 	isAuthorized = false,
@@ -149,7 +147,7 @@ function InvoiceDetails({
 
 	return (
 		<div className={cl`${styles.actions_wrap} ${styles.actions_wrap_icons}`}>
-			{(!disableAction || invoice.exchange_rate_document?.length > IS_EMPTY)
+			{(!disableAction || !isEmpty(invoice.exchange_rate_document))
 					&& invoice.status !== 'revoked' ? (
 						<Popover
 							interactive

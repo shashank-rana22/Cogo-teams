@@ -88,7 +88,7 @@ function SelectService({
 						</div>
 					</Tooltip>
 				),
-				isTaxable : service?.tax_total > DEFAULT_VALUE_OF_TAX_TOTAL,
+				isTaxable : !!service?.tax_total,
 				value     : id,
 				...service,
 			};
