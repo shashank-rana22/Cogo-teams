@@ -17,9 +17,7 @@
 	white-space: nowrap;
 }
 
-.fcl,
-.fcl_local,
-.fcl_cfs {
+.red {
 	svg path {
 		fill: var(--color-primary-error-red-2);
 	}
@@ -29,7 +27,7 @@
 	}
 }
 
-.lcl {
+.red_faded {
 	svg path {
 		fill: var(--color-primary-error-red-3);
 	}

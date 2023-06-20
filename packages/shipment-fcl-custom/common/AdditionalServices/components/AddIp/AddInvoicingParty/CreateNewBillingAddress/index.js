@@ -7,6 +7,7 @@ import AddressForm from '../AddressForm';
 
 import styles from './styles.module.css';
 
+const EMPTY_POC_DETAILS_LENGTH = 0;
 function CreateNewBillingAddress({
 	setShowComponent = () => {},
 	organizationDetails = {},
@@ -47,7 +48,7 @@ function CreateNewBillingAddress({
 	});
 
 	const onSubmit = (values) => {
-		if (values?.poc_details?.length === 0) {
+		if (values?.poc_details?.length === EMPTY_POC_DETAILS_LENGTH) {
 			Toast.info('Please create at-least one POC before proceeding ');
 			return;
 		}

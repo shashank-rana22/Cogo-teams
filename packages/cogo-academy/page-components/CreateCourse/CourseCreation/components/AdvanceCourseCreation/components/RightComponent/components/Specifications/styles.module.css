@@ -1,0 +1,43 @@
+.container {
+	margin: 32px 40px;
+
+	:global {
+		.ui_multiselect_container {
+			width: 60%;
+		}
+	}
+}
+
+.input_group {
+	width: 100%;
+	margin-top: 6px;
+}
+
+.form_group {
+	margin-bottom: 32px;
+}
+
+.error_message {
+	font-size: 10px;
+	font-weight: 400;
+	color: #cb6464;
+}
+
+.superscipt {
+	color: #ee3425;
+}
+
+.label_container {
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+	width: 60%;
+	margin-bottom: 6px;
+}
+
+.create_tag_label {
+	margin-left: 8px;
+	color: blue;
+	text-decoration: underline;
+	cursor: pointer;
+}

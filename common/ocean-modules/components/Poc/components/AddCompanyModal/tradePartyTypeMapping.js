@@ -1,5 +1,5 @@
 const tradePartyTypeMapping = (trade_party_type = '') => {
-	const mapping = {
+	const MAPPING = {
 		shipper: [
 			{
 				value : 'same_as_booking_party',
@@ -58,7 +58,7 @@ const tradePartyTypeMapping = (trade_party_type = '') => {
 		],
 	};
 
-	return mapping[trade_party_type] || mapping.default;
+	return MAPPING[trade_party_type] || MAPPING.default;
 };
 
 export default tradePartyTypeMapping;
