@@ -1,3 +1,4 @@
+import { cl } from '@cogoport/components';
 import { ShipmentDetailContext } from '@cogoport/context';
 import { IcMEdit } from '@cogoport/icons-react';
 import { useState, useContext, useEffect } from 'react';
@@ -8,7 +9,7 @@ import Loader from './Loader';
 import styles from './styles.module.css';
 import TimelineItem from './TimelineItem';
 
-const TIMELINE_NEXT_INDEX = 1;
+const OFFSET_TO_CHECK_LAST_INDEX = 1;
 
 function Timeline() {
 	const {
@@ -35,10 +36,8 @@ function Timeline() {
 
 	if (isGettingShipment || loading) {
 		return (
-			<div className={styles.container}>
-				<div className={styles.list_container}>
-					<Loader />
-				</div>
+			<div className={cl`${styles.container} ${styles.list_container}`}>
+				<Loader />
 			</div>
 		);
 	}
@@ -52,7 +51,7 @@ function Timeline() {
 						<TimelineItem
 							item={timelineItem}
 							consecutivelyCompleted={consecutivelyCompleted}
-							isLast={totalItems === index + TIMELINE_NEXT_INDEX}
+							isLast={totalItems === index + OFFSET_TO_CHECK_LAST_INDEX}
 							key={timelineItem.milestone}
 						/>
 					);
