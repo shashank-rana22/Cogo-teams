@@ -1,4 +1,4 @@
-import startCase from '@cogoport/utils/src/utilities/startCase';
+import { startCase } from '@cogoport/utils';
 
 export const tableColumn = () => [
 	{

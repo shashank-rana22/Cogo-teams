@@ -1,8 +1,8 @@
 import { Button } from '@cogoport/components';
-import startCase from '@cogoport/utils/src/utilities/startCase';
+import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
+import formatDate from '@cogoport/globalization/utils/formatDate';
+import { startCase } from '@cogoport/utils';
 import { saveAs } from 'file-saver';
-
-import { formatDate } from '../../../../../../../commons/utils/formatDate';
 
 export const tableColumn = () => [
 	{
@@ -20,8 +20,13 @@ export const tableColumn = () => [
 	{
 		key    : 'uploaded_on',
 		label  : 'Uploaded On',
-		render : (item) => formatDate(item?.uploaded_at, 'dd:MM:yyyy hh:mm', {}, true),
-		span   : 2.5,
+		render : (item) => formatDate({
+			date       : item?.uploaded_at,
+			formatType : 'dateTime',
+			dateFormat : GLOBAL_CONSTANTS.formats.date['dd MMM yyyy'],
+			timeFormat : GLOBAL_CONSTANTS.formats.time['hh:mm'],
+		}),
+		span: 2.5,
 	},
 	{
 		key    : 'state',
