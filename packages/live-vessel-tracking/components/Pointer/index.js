@@ -1,6 +1,7 @@
 import getGeoConstants from '@cogoport/globalization/constants/geo';
 import GLOBAL_CONSTANTS from '@cogoport/globalization/constants/globals';
 import formatDate from '@cogoport/globalization/utils/formatDate';
+import { Image } from '@cogoport/next';
 
 import { L, Marker, FeatureGroup, Tooltip } from '@cogoport/maps';
 import ReactDOMServer from 'react-dom/server';
@@ -10,7 +11,6 @@ import styles from './styles.module.css';
 const geo = getGeoConstants();
 const ICON_MAPPING = {
 	yellow : GLOBAL_CONSTANTS.image_url.yellow_vessel,
-	green  : GLOBAL_CONSTANTS.image_url.green_vessel,
 	red    : GLOBAL_CONSTANTS.image_url.red_vessel,
 	black  : GLOBAL_CONSTANTS.image_url.black_vessel,
 };
@@ -22,6 +22,7 @@ const TOOLTIP_MAPPING = {
 	lastUpdatedAt : 'Last Update',
 };
 
+
 function Pointer(props) {
 	const {
 		latitude: lat = '',
@@ -30,14 +31,17 @@ function Pointer(props) {
 		cog: direction,
 		arrow = 'black',
 	} = props;
+
 	const icon = new L.DivIcon({
 		html: ReactDOMServer.renderToString(
-			<img
+			<Image
 				src={ICON_MAPPING[arrow]}
+				width={8}
+				height={16}
 				style={{
 					transform : `rotate(${direction}deg)`,
-					height    : '16px',
-					width     : '8px',
+					// height    : '16px',
+					// width     : '8px',
 				}}
 				alt="ship"
 			/>,
@@ -58,6 +62,8 @@ function Pointer(props) {
 		}
 		return props?.[key];
 	};
+	
+	
 	return (
 		<FeatureGroup key={lat}>
 			<Marker position={[lat, lng]} icon={icon}>
