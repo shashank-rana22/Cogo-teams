@@ -41,30 +41,26 @@ function ShipmentIdView({ consolidatedSids }: ConsolidatedSidsInterace) {
 				<div className={styles.data_not_found}>Data Not Found</div>
 			);
 		}
-		return list?.map((item) => (
-			<ShipmentCard key={item?.serial_id} shipmentData={item} />
-		));
+		return (
+			<div className={styles.pagination}>
+				{ list?.map((item) => <ShipmentCard key={item?.serial_id} shipmentData={item} />)}
+				<Pagination
+					currentPage={page}
+					onPageChange={(val: number) => setPageFilters({
+						...pageFilters,
+						page: val,
+					})}
+					totalItems={totalCount}
+					pageSize={pageLimit}
+					type="table"
+				/>
+			</div>
+		);
 	};
 
 	return isEmpty(consolidatedSids)
 		? <div className={styles.data_not_found}>Data Not Found</div>
-		: (
-			<div>
-				{handleShipmentView()}
-				<div className={styles.pagination}>
-					<Pagination
-						currentPage={page}
-						onPageChange={(val: number) => setPageFilters({
-							...pageFilters,
-							page: val,
-						})}
-						totalItems={totalCount}
-						pageSize={pageLimit}
-						type="table"
-					/>
-				</div>
-			</div>
-		);
+		: handleShipmentView();
 }
 
 export default ShipmentIdView;

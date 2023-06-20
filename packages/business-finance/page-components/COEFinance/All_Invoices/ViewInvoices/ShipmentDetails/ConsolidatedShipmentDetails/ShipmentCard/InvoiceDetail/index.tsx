@@ -22,7 +22,6 @@ function InvoiceDetail({ shipmentId }) {
 				<CardList
 					fields={tableColumn()}
 					data={invoiceData}
-					loading={loading}
 				/>
 			)
 	);

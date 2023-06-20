@@ -2,10 +2,12 @@ import { Placeholder } from '@cogoport/components';
 
 import styles from './styles.module.css';
 
+const PLACEHOLDER = [1, 2, 3, 4, 5];
+
 function Loader() {
 	return (
 		<div className={styles.container}>
-			{[1, 2, 3, 4, 5].map((key) => <Placeholder className={styles.custom_styles} key={key} />)}
+			{ PLACEHOLDER.map((key) => <Placeholder className={styles.custom_styles} key={key} />) }
 		</div>
 	);
 }

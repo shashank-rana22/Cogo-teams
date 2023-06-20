@@ -1,11 +1,8 @@
-import { Placeholder } from '@cogoport/components';
-
 import styles from './styles.module.css';
 
 function Item({
 	item,
 	fields,
-	loading = false,
 }) {
 	return (
 		<div className={styles.row}>
@@ -13,7 +10,7 @@ function Item({
 				if (singleItem?.show === false) {
 					return null;
 				}
-				const { span, render = () => {}, label } = singleItem;
+				const { span, render = () => {}, label } = singleItem || {};
 				const widthVal = (span / 12) * 100;
 				return (
 					<div
@@ -21,10 +18,7 @@ function Item({
 						key={label}
 						className={styles.column}
 					>
-						{loading ? <Placeholder width="100%" height="20px" /> : null}
-
-						{render && !loading ? render(item) : null}
-
+						{render(item)}
 					</div>
 				);
 			})}

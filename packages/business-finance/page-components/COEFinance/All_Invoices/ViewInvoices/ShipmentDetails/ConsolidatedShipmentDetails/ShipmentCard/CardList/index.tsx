@@ -5,7 +5,6 @@ import styles from './styles.module.css';
 function List({
 	fields = [],
 	data = [],
-	loading = false,
 	showCode = false,
 }) {
 	return (
@@ -16,7 +15,6 @@ function List({
 				<CardItem
 					key={item}
 					item={item}
-					loading={loading}
 					fields={fields}
 				/>
 			))}

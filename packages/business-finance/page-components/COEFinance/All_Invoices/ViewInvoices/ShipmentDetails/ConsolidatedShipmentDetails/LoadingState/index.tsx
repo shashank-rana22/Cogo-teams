@@ -3,11 +3,13 @@ import React from 'react';
 
 import styles from './styles.module.css';
 
+const PLACEHOLDERS = [1, 2, 3, 4];
+
 function LoadingState() {
 	return (
 		<div className={styles.main_container}>
 			<div className={styles.container}>
-				{[1, 2, 3, 4].map((e) => (
+				{PLACEHOLDERS.map((e) => (
 					<div key={e} className={styles.flex_row}>
 						<div className={styles.percent}>
 							<Placeholder />

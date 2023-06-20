@@ -27,15 +27,9 @@
 	display: flex;
 	flex: 0.8;
 	flex-direction: column;
-	gap: 3px;
 	justify-content: center;
 	width: 100%;
 	height: 56px;
-	padding-left: 24px;
-	font-size: 12px;
-	font-weight: 500;
-	color: #67c676;
-	white-space: nowrap;
 }
 
 .button {

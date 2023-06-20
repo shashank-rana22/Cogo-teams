@@ -22,7 +22,6 @@ function Document({ shipmentId }) {
 				<CardList
 					fields={tableColumn()}
 					data={documentData}
-					loading={loading}
 				/>
 			)
 	);
