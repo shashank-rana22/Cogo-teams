@@ -24,7 +24,6 @@ function AddGroupMember({ addGroupMember = () => {} }) {
 					name="agent_id"
 					asyncKey="partner_users"
 					value={agentId}
-					endpoint="list_partner_users"
 					valueKey="user_id"
 					onChange={setAgentId}
 					params={{

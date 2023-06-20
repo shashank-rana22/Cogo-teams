@@ -10,6 +10,7 @@ function CargoDetails({ item }) {
 	const { service_type, service } = item || {};
 
 	const details = formatServiceDetails(service);
+
 	return (
 		<div className={styles.container}>
 			{SERVICES_WITH_DETAILS.includes(service_type) && (

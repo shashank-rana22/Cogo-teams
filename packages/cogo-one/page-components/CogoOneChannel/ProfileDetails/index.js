@@ -25,7 +25,7 @@ function ProfileDetails({
 	firestore,
 	userId = '',
 }) {
-	const customerId = activeTab === 'message' ? activeMessageCard?.id : activeVoiceCard?.id;
+	const customerId = (activeTab === 'message' ? activeMessageCard : activeVoiceCard)?.id;
 
 	const [activeSelect, setActiveSelect] = useState(viewType === 'shipment_view' ? 'user_activity' : 'profile');
 	const [showMore, setShowMore] = useState(false);

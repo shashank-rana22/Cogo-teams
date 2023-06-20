@@ -5,9 +5,9 @@ import { useState } from 'react';
 
 import EmptyState from '../../../../common/EmptyState';
 import useCreateLeadProfile from '../../../../hooks/useCreateLeadProfile';
-import useGetPartnerUsers from '../../../../hooks/useGetPartnerUsers';
 import useGetUser from '../../../../hooks/useGetUser';
 import useGroupChat from '../../../../hooks/useGroupChat';
+import useListPartnerUsers from '../../../../hooks/useListPartnerUsers';
 
 import AddGroupMember from './AddGroupMember';
 import ConversationContainer from './ConversationContainer';
@@ -59,7 +59,7 @@ function AgentDetails({
 		account_type,
 	} = formattedMessageData || {};
 
-	const { partner_users } = useGetPartnerUsers({ activeMessageCard });
+	const { partnerUsers } = useListPartnerUsers({ activeMessageCard });
 
 	const {
 		deleteGroupMember,
@@ -77,6 +77,7 @@ function AgentDetails({
 		user_number = '',
 		organization_id: voiceOrgId = '',
 	} = activeVoiceCard || {};
+
 	const DATA_MAPPING = {
 		voice: {
 			userId        : user_data?.id,
@@ -97,8 +98,11 @@ function AgentDetails({
 	};
 
 	const { userId, name, userEmail, mobile_number, orgId, leadUserId } = DATA_MAPPING[activeTab];
+
 	const { leadUserProfile, loading: leadLoading } = useCreateLeadProfile({ updateLeaduser, setShowError, sender });
+
 	const { userData, loading } = useGetUser({ userId, lead_user_id: leadUserId, customerId });
+
 	const { mobile_verified, whatsapp_verified } = userData || {};
 
 	const VERIFICATION_STATUS = [
@@ -124,15 +128,18 @@ function AgentDetails({
 			setShowError(true);
 		}
 	};
+
 	const handleClick = () => {
 		const OMNICHANNEL_URL = window?.location?.href?.split('?')?.[LINK_BEFORE_QUERY_PARAMS];
 		navigator.clipboard.writeText(`${OMNICHANNEL_URL}?assigned_chat=${id}&channel_type=${channel_type}`);
 		Toast.success('Copied!!!');
 	};
+
 	const handleSummary = () => {
 		setShowMore(true);
 		setActiveSelect('user_activity');
 	};
+
 	if (!userId && !leadUserId && !mobile_no) {
 		return (
 			<>
@@ -152,6 +159,7 @@ function AgentDetails({
 			</>
 		);
 	}
+
 	return (
 		<>
 			<div className={styles.top_div}>
@@ -217,14 +225,14 @@ function AgentDetails({
 			<GroupMembersRequests
 				deleteGroupRequest={deleteGroupRequest}
 				approveGroupRequest={approveGroupRequest}
-				group_members={activeMessageCard.requested_group_members}
-				partner_users={partner_users}
+				groupMembers={activeMessageCard.requested_group_members}
+				partnerUsers={partnerUsers}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 			<GroupMembers
 				deleteGroupMember={deleteGroupMember}
-				group_members={activeMessageCard.group_members}
-				partner_users={partner_users}
+				groupMembers={activeMessageCard?.group_members}
+				partnerUsers={partnerUsers}
 				hasAccessToEditGroup={hasAccessToEditGroup}
 			/>
 			{(mobile_no || user_number) && (
@@ -242,6 +250,7 @@ function AgentDetails({
 					/>
 				</>
 			)}
+
 			<ExecutiveSummary
 				handleSummary={handleSummary}
 				mobile_no={mobile_no}

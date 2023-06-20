@@ -24,7 +24,6 @@ function useGroupChat({
 		await updateDoc(roomRef, {
 			requested_group_members: requested_group_members?.filter((x) => x !== userId),
 		});
-
 		Toast.success('Request rejected.');
 
 		createCogooneTimeline({
@@ -38,7 +37,7 @@ function useGroupChat({
 	};
 
 	const approveGroupRequest = async (userId) => {
-		if (group_members.length > MAX_GROUP_MEMBERS_ALLOWED) {
+		if (group_members?.length > MAX_GROUP_MEMBERS_ALLOWED) {
 			Toast.warn('Request cannot be approved.');
 			return;
 		}
@@ -47,7 +46,6 @@ function useGroupChat({
 			requested_group_members : requested_group_members?.filter((x) => x !== userId),
 			group_members           : [...new Set([...(group_members || []), userId])],
 		});
-
 		Toast.success('Request approved.');
 
 		createCogooneTimeline({
@@ -64,7 +62,6 @@ function useGroupChat({
 		await updateDoc(roomRef, {
 			group_members: group_members?.filter((x) => x !== userId),
 		});
-
 		Toast.success('Group Member removed.');
 
 		createCogooneTimeline({
@@ -86,7 +83,6 @@ function useGroupChat({
 		await updateDoc(roomRef, {
 			group_members: [...new Set([...(group_members || []), userId])],
 		});
-
 		Toast.success('Group member added.');
 
 		createCogooneTimeline({

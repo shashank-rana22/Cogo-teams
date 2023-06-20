@@ -1,40 +1,38 @@
 import { useRequest } from '@cogoport/request';
 import { useEffect, useCallback } from 'react';
 
-const useGetPartnerUsers = ({ activeMessageCard = {} }) => {
+const useListPartnerUsers = ({ activeMessageCard = {} }) => {
 	const [{ data, loading }, trigger] = useRequest({
 		method : 'get',
 		url    : '/list_partner_users',
 	}, { manual: true });
 
-	const fetch = useCallback(async () => {
+	const fetchPartnerUsers = useCallback(async () => {
 		try {
-			const group_members = activeMessageCard.group_members || [];
-			const requested_group_members = activeMessageCard.requested_group_members || [];
+			const { group_members, requested_group_members } = activeMessageCard || {};
 
 			await trigger({
 				params: {
 					filters: {
-						user_id: [...group_members, ...requested_group_members, ''],
+						user_id: [...(group_members || []), ...(requested_group_members || [])],
 					},
 					rm_mappings_data_required : false,
 					partner_data_required     : false,
 				},
 			});
 		} catch (err) {
-			// console.log(err);
+			console.error(err);
 		}
 	}, [activeMessageCard, trigger]);
 
 	useEffect(() => {
-		fetch();
-	}, [fetch, activeMessageCard]);
+		fetchPartnerUsers();
+	}, [fetchPartnerUsers, activeMessageCard]);
 
 	return {
-		fetch,
-		partner_users: data?.list || [],
+		partnerUsers: data?.list || [],
 		loading,
 	};
 };
 
-export default useGetPartnerUsers;
+export default useListPartnerUsers;

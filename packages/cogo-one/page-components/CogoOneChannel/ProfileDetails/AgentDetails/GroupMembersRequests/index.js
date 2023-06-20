@@ -8,24 +8,27 @@ import styles from './styles.module.css';
 function GroupMembersRequests({
 	deleteGroupRequest = () => {},
 	approveGroupRequest = () => {},
-	group_members = [],
-	partner_users = [],
+	groupMembers = [],
+	partnerUsers = [],
 	hasAccessToEditGroup = false,
 }) {
-	const members = partner_users.filter((x) => group_members.includes(x.user_id));
+	const filteredMembers = partnerUsers?.filter((eachMember) => groupMembers.includes(eachMember?.user_id));
+
+	if (isEmpty(filteredMembers)) {
+		return null;
+	}
 
 	return (
 		<div>
-			{!isEmpty(members) && <div className={styles.conversation_title}>Group Requests</div>}
-			{members.map((user = {}) => (
-				<div className={styles.content} key={user?.id}>
+			<div className={styles.conversation_title}>Group Requests</div>
+			{filteredMembers.map((user = {}) => (
+				<div className={styles.content} key={user?.user_id}>
 					<Avatar
 						src={GLOBAL_CONSTANTS.image_url.user_avatar}
 						alt="img"
 						disabled={false}
 						className={styles.user_div}
 					/>
-
 					<div className={styles.details}>
 						<div className={styles.name}>
 							{user.name}
@@ -37,10 +40,10 @@ function GroupMembersRequests({
 					{hasAccessToEditGroup
 					&& (
 						<div className={styles.mark_status}>
-							<IcCFtick className={styles.icon} onClick={() => approveGroupRequest(user.user_id)} />
+							<IcCFtick className={styles.icon} onClick={() => approveGroupRequest(user?.user_id)} />
 							<IcCFcrossInCircle
 								className={styles.icon}
-								onClick={() => deleteGroupRequest(user.user_id)}
+								onClick={() => deleteGroupRequest(user?.user_id)}
 							/>
 						</div>
 					)}

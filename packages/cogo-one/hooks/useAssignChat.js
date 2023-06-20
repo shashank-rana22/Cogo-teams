@@ -34,11 +34,8 @@ function useAssignChat({
 			});
 
 			if (!canMessageOnBotSession) {
-				Toast.success('Successfully Assigned');
-			}
-
-			if (!canMessageOnBotSession) {
 				closeModal();
+				Toast.success('Successfully Assigned');
 			}
 		} catch (error) {
 			Toast.error(getApiErrorString(error?.response?.data));

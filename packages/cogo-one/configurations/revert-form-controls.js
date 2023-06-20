@@ -8,8 +8,8 @@ const NEGATIVE_VALUE = 0;
 const SERVICE_CONTROLS_MAPPING = {
 	fcl_freight_service: ['sourced_by_id', 'shipping_line_id', 'validity_end', 'remarks', 'currency', 'price',
 		'supplier_contract_no'],
-	air_freight_service     : ['sourced_by_id', 'validity_end', 'remarks', 'currency', 'price', 'supplier_contract_no'],
-	lcl_freight_service     : [],
+	lcl_freight_service     : ['sourced_by_id', 'validity_end', 'remarks', 'currency', 'price', 'supplier_contract_no'],
+	air_freight_service     : [],
 	ltl_freight_service     : [],
 	ftl_freight_service     : [],
 	haulage_freight_service : [],
@@ -173,17 +173,6 @@ const useGetRevertFormControls = ({ data }) => {
 			minDate     : addDays(new Date(), MIN_DAYS_FOR_VALIDITY),
 			placeholder : 'Select a date',
 
-		},
-		{
-			name        : 'rate_procurement_proof',
-			label       : 'Upload Proof of Rate Procured',
-			controlType : 'upload',
-			drag        : true,
-			maxSize     : '10485760',
-			uploadType  : 'aws',
-			height      : '88',
-			accept      : '.png,.pdf,.jpg,.jpeg',
-			rules       : { required: true },
 		},
 		{
 			name        : 'remarks',

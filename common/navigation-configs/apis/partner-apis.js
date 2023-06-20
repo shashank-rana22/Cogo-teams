@@ -12225,7 +12225,7 @@ const partner = {
 			service_name : 'communication',
 		},
 		{
-			api          : 'rate_supplier_manager_notification',
+			api          : 'escalate_supplier_to_rm',
 			access_type  : 'private',
 			service_name : 'communication',
 		},

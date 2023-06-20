@@ -173,20 +173,13 @@ function Customers({
 					themeType="secondary"
 					onChange={setActiveTab}
 				>
-					<TabPanel
-						name="message"
-						title="Chats"
-						badge={unReadChatsCount || null}
-					/>
+					<TabPanel name="message" title="Chats" badge={unReadChatsCount || null} />
 					{hasVoiceCallAccess && <TabPanel name="voice" title="Voice" />}
 					<TabPanel name="mail" title="Mail" />
 				</Tabs>
 			</div>
 			{Component && (
-				<Component
-					key={activeTab}
-					{...(componentProps[activeTab] || {})}
-				/>
+				<Component key={activeTab} {...(componentProps[activeTab] || {})} />
 			)}
 
 			{openModal && (

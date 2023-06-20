@@ -3,13 +3,13 @@ import getApiErrorString from '@cogoport/forms/utils/getApiError';
 import { useRequest } from '@cogoport/request';
 import { useCallback } from 'react';
 
-const useRateSupplierManagerNotification = () => {
+const useEscalateToSupplyRm = () => {
 	const [{ loading }, trigger] = useRequest({
-		url    : '/rate_supplier_manager_notification',
+		url    : '/escalate_supplier_to_rm',
 		method : 'post',
 	}, { manual: true, autoCancel: false });
 
-	const rateSupplierManagerNotification = useCallback(async ({ payload }) => {
+	const escalateToSupplyRm = useCallback(async ({ payload }) => {
 		try {
 			await trigger({
 				data: payload,
@@ -20,8 +20,8 @@ const useRateSupplierManagerNotification = () => {
 	}, [trigger]);
 
 	return {
-		rateSupplierManagerNotification,
+		escalateToSupplyRm,
 		supplierLoading: loading,
 	};
 };
-export default useRateSupplierManagerNotification;
+export default useEscalateToSupplyRm;

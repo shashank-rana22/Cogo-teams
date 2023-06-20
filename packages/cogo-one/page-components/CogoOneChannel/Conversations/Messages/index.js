@@ -5,9 +5,9 @@ import { useState } from 'react';
 import { FIRESTORE_PATH } from '../../../../configurations/firebase-config';
 import MODAL_COMPONENT_MAPPING from '../../../../constants/MODAL_COMPONENT_MAPPING';
 import useAssignChat from '../../../../hooks/useAssignChat';
+import useEscalateToSupplyRm from '../../../../hooks/useEscalateToSupplyRm';
 import useGetMessages from '../../../../hooks/useGetMessages';
 import useListAssignedChatTags from '../../../../hooks/useListAssignedChatTags';
-import useRateSupplierManagerNotification from '../../../../hooks/useRateSupplierManagerNotification';
 import useRequestAssignChat from '../../../../hooks/useRequestAssignChat';
 import useSendChat from '../../../../hooks/useSendChat';
 import useSendCommunicationTemplate from '../../../../hooks/useSendCommunicationTemplate';
@@ -37,7 +37,7 @@ function Messages({
 
 	const { tagOptions = [] } = useListAssignedChatTags();
 
-	const { rateSupplierManagerNotification, supplierLoading } = useRateSupplierManagerNotification();
+	const { escalateToSupplyRm, supplierLoading } = useEscalateToSupplyRm();
 
 	const formattedData = getActiveCardDetails(activeMessageCard) || {};
 
@@ -175,7 +175,7 @@ function Messages({
 					canMessageOnBotSession={canMessageOnBotSession}
 					viewType={viewType}
 					firestore={firestore}
-					rateSupplierManagerNotification={rateSupplierManagerNotification}
+					escalateToSupplyRm={escalateToSupplyRm}
 					supplierLoading={supplierLoading}
 				/>
 				<div className={styles.message_container} key={id}>

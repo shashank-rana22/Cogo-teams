@@ -89,10 +89,7 @@ export function mountPinnedSnapShot({
 
 	setListData((p) => ({ ...p, pinnedMessagesData: {} }));
 
-	if (activeSubTab !== 'all') {
-		return;
-	}
-	if (viewType === 'shipment_view') {
+	if (activeSubTab !== 'all' || viewType === 'shipment_view') {
 		return;
 	}
 

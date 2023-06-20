@@ -39,7 +39,7 @@ function Header({
 	canMessageOnBotSession = false,
 	viewType = '',
 	firestore,
-	rateSupplierManagerNotification,
+	escalateToSupplyRm,
 	supplierLoading,
 }) {
 	const [isVisible, setIsVisible] = useState(false);
@@ -71,7 +71,7 @@ function Header({
 	} = formattedData || {};
 
 	const handleEsclateClick = () => {
-		rateSupplierManagerNotification({
+		escalateToSupplyRm({
 			payload: {
 				organization_id,
 				organization_user_id: user_id,
